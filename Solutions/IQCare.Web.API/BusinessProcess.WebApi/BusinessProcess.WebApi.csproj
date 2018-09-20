@@ -66,6 +66,7 @@
   <ItemGroup>
     <Compile Include="BApiInBox.cs" />
     <Compile Include="BApiInteropSystems.cs" />
+    <Compile Include="BIQConfig.cs" />
     <Compile Include="BFamilyInfoManager.cs" />
     <Compile Include="BHivTestTrackerManager.cs" />
     <Compile Include="BImmunizationTrackerManager.cs" />

@@ -355,6 +355,7 @@
     var patType = "<%=patType.ToString().ToLower() %>";
     var gender = "<%=Session["Gender"]%>";
     var age = "<%=Session["Age"]%>";
+
     //Date processing
     var today = new Date();
     var tomorrow = new Date();
@@ -419,8 +420,8 @@
 					
 		            //tp = treatmentProgram;
 		            if (gender === "Female" && age >= 9 && tp === "PMTCT") {
-
-		            } else if (tp === "PMTCT" && (gender != "Female" || age > 9)) {
+ 
+		            } else if (tp === "PMTCT" && gender !== "Female" && age < 9) {
 		                 toastr.error("PMTCT is for female patients only who are older than 9 years", "Error");
 		                 $("#<%=ddlTreatmentProgram.ClientID%>").val("");
 		             }

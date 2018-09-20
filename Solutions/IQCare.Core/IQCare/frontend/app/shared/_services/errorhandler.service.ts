@@ -1,5 +1,6 @@
+
+import {throwError as observableThrowError, Observable} from 'rxjs';
 import { Injectable } from '@angular/core';
-import {Observable} from 'rxjs/Observable';
 
 @Injectable()
 export class ErrorHandlerService {
@@ -17,7 +18,7 @@ export class ErrorHandlerService {
             for (let i = 0; i < error.error.errors.length; i++) {
                 message += error.error.errors[i].message;
             }
-            return Observable.throw(message);
+            return observableThrowError(message);
         };
     }
 

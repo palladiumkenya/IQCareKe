@@ -126,8 +126,12 @@
     <Compile Include="Enrollment\BPersonIdentifier.cs" />
     <Compile Include="Enrollment\BServiceAreaIdentifiers.cs" />
     <Compile Include="Interoperability\BDrugPrescriptionManager.cs" />
+    <Compile Include="Interoperability\BILMessageStatsManager.cs" />
+    <Compile Include="Interoperability\BIlMessengerManager.cs" />
+    <Compile Include="Interoperability\BIlStatisticsManager.cs" />
     <Compile Include="Interoperability\BInteropPlacerType.cs" />
     <Compile Include="Interoperability\BInteropPlacerValues.cs" />
+    <Compile Include="Interoperability\BlLMessageViewerManager.cs" />
     <Compile Include="Interoperability\BPatientAppointmentMessage.cs" />
     <Compile Include="Interoperability\BPatientMessage.cs" />
     <Compile Include="Interoperability\BPatientVitalsMessage.cs" />
@@ -139,6 +143,7 @@
     <Compile Include="Lookup\BPatientTreatmentSupporterLookupManager.cs" />
     <Compile Include="Lookup\BPatientTreatmentTrackerManager.cs" />
     <Compile Include="Lookup\BPersonContactLookUpManager.cs" />
+    <Compile Include="Lookup\BPersonExtendedLookupManager.cs" />
     <Compile Include="Lookup\BPersonGreenCardLookupManager.cs" />
     <Compile Include="Lookup\BTestingSummaryStatisticsManager.cs" />
     <Compile Include="PatientMaritalStatusManager.cs" />

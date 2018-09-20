@@ -414,7 +414,7 @@
 							   </div>
 							   
 							   <div class="col-md-3">
-									<div class="col-md-12"><label class="required control-label pull-left">Nearest Health Centre</label></div>
+									<div class="col-md-12"><label class="required control-label pull-left">Nearest Health Facility</label></div>
 									<div class="col-md-12">
 										 <asp:TextBox runat="server" ID="NearestHealthCentre" ClientIDMode="Static" CssClass="form-control input-sm" placeholder="nearest health centre" data-parsley-required="true" data-parsley-length="[2,30]" ></asp:TextBox>
 									</div>
@@ -1248,7 +1248,15 @@
                             $("#personLName").val(personDetails.LastName);
 		                    $('input[name=PatientTypeId][value=' + personDetails.patientType + ']').attr('checked', true);
                             $("#Gender").val(personDetails.Sex);
-                            $('#MyDateOfBirth').datepicker('setDate', moment( personDetails.DoB).format('DD-MMM-YYYY'));
+                           
+
+                            if (moment('1900-06-15').isSame(personDetails.DoB)) {
+                                $("#DateOfEnrollment").val("");
+                            } else {
+                                $('#MyDateOfBirth').datepicker('setDate', moment(personDetails.DoB).format('DD-MMM-YYYY'));
+                                $("#personAge").val(personDetails.Age);
+                            }
+
 		                    var RBID = '<%=PatientTypeId.ClientID %>';
 		                    var RB1 = document.getElementById(RBID);
 		                    var radio = RB1.getElementsByTagName("input");
@@ -1260,7 +1268,7 @@
 		                        }
                             }
                             $("#MaritalStatusId").val(personDetails.MaritalStatus);
-                            $("#personAge").val(personDetails.Age);
+                            
                             $("#<%=dobPrecision.ClientID%>").val(personDetails.DateOfBirthPrecision);
 
 		                    var RBID = '<%=PopulationType.ClientID %>';
@@ -1292,7 +1300,7 @@
 						dataType: "json",
 						success: function (response) {
                             var patientDetails = JSON.parse(response.d);
-						    alert(response.d);
+						    //alert(response.d);
 							console.log(patientDetails);
 							/*Patient Type*/
 							//console.log(patientDetails.PatientType);
@@ -1316,7 +1324,7 @@
 							//$("#Gender").prop('disabled', true);
 							
 							/*Social Status*/
-							$('#MyDateOfBirth').datepicker('setDate', patientDetails.PersonDoB);
+							$('#MyDateOfBirth').datepicker('setDate',patientDetails.PersonDoB);
 							$("#<%=dobPrecision.ClientID%>").val(patientDetails.DateOfBirthPrecision);
 							$("#ChildOrphan").val(patientDetails.ChildOrphan);
 							$("#Inschool").val(patientDetails.Inschool);
@@ -1691,8 +1699,9 @@
 					//console.log("here");
 					//console.log(_fp);
 					//return false;
+				    var isEnrolled = 'notEnrolledClients';
 					if (Object.keys(_fp).length > 0) {
-						if (_fp["IsPatient"] == 1) {
+						if (_fp["IsPatient"] === 1) {
 							$.when(setPatientIdSession(_fp["PatientId"])).then(function () {
 								setTimeout(function () {
 									window.location.href = '<%=ResolveClientUrl("~/CCC/Patient/PatientHome.aspx")%>';
@@ -1701,10 +1710,26 @@
 						} else {
 							var personId = _fp["PersonId"];
 							getPatientTypeId("PatientType", "New");
+						    $.ajax({
+						        type: "POST",
+						        url: "patientRegistration.aspx/RedirectToRegistrationEdit", //Pagename/Functionname
+						        contentType: "application/json;charset=utf-8",
+						        data: "{'personId':'" + personId + "','isEnrolled':'"+ isEnrolled +"'}",//data
+						        dataType: "json",
+						        success: function (data) {
+						            if (data.d === "success") {
+						                setTimeout(function () { window.location.href = "./patientRegistration.aspx" }, 500);
+						            }
+						        },
+						        error: function (result) {
 
-							$.ajax({
+						            alert("error");
+						        }
+						    });
+
+							<%--$.ajax({
 								type: "POST",
-								url: "../WebService/PersonService.asmx/SetSession",
+								url: "../WebService/PatientRegistration.asmx/RedirectToRegistrationEdit",
 								contentType: "application/json; charset=utf-8",
 								data: "{'personId': '" + personId + "'}",
 								dataType: "json",
@@ -1714,7 +1739,7 @@
 								error: function (response) {
 									generate('error', response.d);
 								}
-							});
+							});--%>
 						}
 					} else {
 						toastr.error("Please Select one person from the list", "Patient Duplicates");

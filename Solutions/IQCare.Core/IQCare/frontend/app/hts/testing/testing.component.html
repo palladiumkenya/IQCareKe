@@ -62,10 +62,6 @@
                                     </div>
                                     <div id="tab-2" class="tab-pane">
                                         <div class="panel-body">
-                                            <!--<button type="button" class="btn" data-toggle="modal" data-target="#myModal2" *ngIf="testButton2" (click)="openDialog('Confirmatory Test')">
-                                                ADD CONFIRMATORY
-                                            </button>-->
-
                                             <button mat-raised-button color="primary" *ngIf="testButton2" type="button" (click)="openDialog('Confirmatory Test')">
                                                 <i class="fa fa-plus"></i>
                                                 ADD CONFIRMATORY
@@ -126,7 +122,7 @@
 
                                         <mat-form-field>
                                             <mat-select placeholder="Final Result Given?" name="finalResultGiven" id="finalResultGiven" formControlName="finalResultGiven"
-                                                (change)="onFinalResultsGivenChange()" required>
+                                                (selectionChange)="onFinalResultsGivenChange()" required>
                                                 <mat-option value=""></mat-option>
                                                 <mat-option *ngFor="let option of yesNoOptions" [value]="option.itemId">{{option.itemName}}</mat-option>
                                             </mat-select>
@@ -134,7 +130,7 @@
 
 
                                         <mat-form-field>
-                                            <mat-select placeholder="Accepted to partner listing" name="acceptedPartnerListing" id="acceptedPartnerListing" (change)="onAcceptedPartnerListingChange()"
+                                            <mat-select placeholder="Accepted to partner listing" name="acceptedPartnerListing" id="acceptedPartnerListing" (selectionChange)="onAcceptedPartnerListingChange()"
                                                 formControlName="acceptedPartnerListing" required>
                                                 <mat-option value=""></mat-option>
                                                 <mat-option *ngFor="let option of yesNoNA" [value]="option.itemId">{{option.itemName}}</mat-option>
@@ -177,9 +173,9 @@
                                         </mat-form-field>
 
                                         <mat-form-field>
-                                            <textarea matInput placeholder="Remarks" id="remarks" name="remarks" rows="5" formControlName="finalResultsRemarks" required></textarea>
+                                            <input matInput placeholder="Remarks" id="finalResultsRemarks" name="finalResultsRemarks" rows="5" formControlName="finalResultsRemarks"
+                                            />
                                         </mat-form-field>
-                                        <mat-error *ngIf="!formTesting.controls['finalResultsRemarks'].valid">Please add remarks</mat-error>
                                     </div>
                                 </div>
 

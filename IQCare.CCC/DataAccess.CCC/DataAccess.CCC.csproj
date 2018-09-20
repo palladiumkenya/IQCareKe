@@ -103,6 +103,10 @@
     <Compile Include="Interface\enrollment\IPatientReEnrollmentRepository.cs" />
     <Compile Include="Interface\enrollment\IPersonIdentifierRepository.cs" />
     <Compile Include="Interface\enrollment\IServiceAreaIdentifiersRepository.cs" />
+    <Compile Include="Interface\IL\iILMessageStatsRepository.cs" />
+    <Compile Include="Interface\IL\iILMessageViewerRepository.cs" />
+    <Compile Include="Interface\IL\IIlMessengerRepository.cs" />
+    <Compile Include="Interface\IL\IIlStatisticsRepository.cs" />
     <Compile Include="Interface\Interoperability\IDrugPrescriptionMessageRepository.cs" />
     <Compile Include="Interface\Interoperability\IInteropPlacerTypesRepository.cs" />
     <Compile Include="Interface\Interoperability\IInteropPlacerValuesRepository.cs" />
@@ -122,6 +126,7 @@
     <Compile Include="Interface\Lookup\IPatientTreatmentTrackerLookupRepository.cs" />
     <Compile Include="Interface\Lookup\IPatientServiceEnrollmentLookupRepository.cs" />
     <Compile Include="Interface\Lookup\IPatientTreatmentSupporterLookupRepository.cs" />
+    <Compile Include="Interface\Lookup\IPersonExtendedLookupRepository.cs" />
     <Compile Include="Interface\Lookup\IPersonGreenCardLookupRepository.cs" />
     <Compile Include="Interface\Lookup\ITestingSummaryStatisticsRepository.cs" />
     <Compile Include="Interface\Patient\IBluecardAppointmentRepository.cs" />
@@ -194,6 +199,10 @@
     <Compile Include="Repository\Enrollment\PatientReEnrollmentRepository.cs" />
     <Compile Include="Repository\Enrollment\PersonIdentifierRepository.cs" />
     <Compile Include="Repository\Enrollment\ServiceAreaIdentifiersRepository.cs" />
+    <Compile Include="Repository\IL\ILMessageStatsRepository.cs" />
+    <Compile Include="Repository\IL\ILMessageViewerRepository.cs" />
+    <Compile Include="Repository\IL\IlMessengerRepository.cs" />
+    <Compile Include="Repository\IL\IlStatisticsRepository.cs" />
     <Compile Include="Repository\Interoperability\DrugPrescriptionMessageRepository.cs" />
     <Compile Include="Repository\Interoperability\InteropPlacerTypeRepository.cs" />
     <Compile Include="Repository\Interoperability\InteropPlacerValuesRepository.cs" />
@@ -217,6 +226,7 @@
     <Compile Include="Repository\Lookup\PatientTreatmentSupporterLookupRepository.cs" />
     <Compile Include="Repository\Lookup\PatientTreatmentTrackerLookupRepository.cs" />
     <Compile Include="Repository\Lookup\PersonContactLookUpRepository.cs" />
+    <Compile Include="Repository\Lookup\PersonExtendedLookupRepository.cs" />
     <Compile Include="Repository\Lookup\PersonGreenCardLookupRepository.cs" />
     <Compile Include="Repository\Lookup\PersonLookUpRepository.cs" />
     <Compile Include="Repository\Lookup\TestingSummaryStatisticsRepository.cs" />

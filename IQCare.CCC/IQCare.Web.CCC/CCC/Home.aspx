@@ -286,6 +286,38 @@
               <div class="col-md-12" id="stabilitySummaryStatictics" runat="server"></div>
          </div>
     </div> <!-- .col-md-12-->
+    <div class="col-md-12 form-group">
+
+        <div class="col-md-4 col-xs-12" style="padding-top:2%">
+            <div class="col-md-12 label label-primary">
+                <label class="label label-primary fa fa-exchange fa-2x pull-left"> Interoperability Layer Statistics</label>
+            </div>
+            <div class="col-md-12">
+                <div class="col-md-10"><label class="control-label pull-left">Total Outgoing Messages :</label></div>
+                <div class="col-md-2 pull-right">
+                    <asp:Label runat="server" ClientIDMode="Static" ID="lblOutgoing" CssClass="control-label text-success pull-right"><span class="badge">0</span></asp:Label>
+                </div>
+            </div>
+            <div class="col-md-12"><hr></div>
+            <div class="col-md-12">
+                <div class="col-md-10"><label class="control-label pull-left">Total Incoming Messages :</label></div>
+                <div class="col-md-2 pull-right">
+                    <asp:Label runat="server" ClientIDMode="Static" ID="lblIncoming" CssClass="control-label text-success pull-right"><span class="badge">0</span></asp:Label>
+                </div>
+            </div>
+            <div class="col-md-12"><hr></div>
+        </div>
+
+        <div class="col-md-4 col-xs-12" style="padding-top:2%">
+            <div class="col-md-12 label label-primary">
+                <label class="label label-primary fa fa-exclamation-circle fa-2x pull-left">Interoperability Layer Stats</label>
+            </div>
+            <div class="col-md-12" style="padding-bottom:2%"></div>
+            <div class="col-md-12" id="interoperabilityLayerMessageStats" runat="server"></div>
+        </div>
+
+        <div class="col-md-4"></div>
+    </div>
     
     <%--<div id="callout-labels-inline-block" class="col-md-12  bs-callout bs-callout-primary" style="padding-bottom: 1%">
         <div class="col-md-12 form-group">
@@ -485,7 +517,7 @@
                     },
 
                     error: function (msg) {
-                        alert(msg.responseText);
+                        console.log(msg.responseText);
                     }
                 });
             }

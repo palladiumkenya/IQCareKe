@@ -18,6 +18,13 @@ namespace IQCare.CCC.UILogic
             return patientDetails;
         }
 
+        public PatientLookup GetPatientDetailSummaryBrief(int patientId,int personId)
+        {
+            var patientDetails = _patientLookupmanager.GetPatientDetailsLookupBrief(patientId,personId);
+            // call invoke application decryption
+            return patientDetails;
+        }
+
         public int GetPatientSexId(int patientId)
         {
             try
@@ -129,6 +136,16 @@ namespace IQCare.CCC.UILogic
                         {
                             string cccAfterRemoveLeading = numbers[1].TrimStart('0');
                             patient = _patientLookupmanager.GetPatientByCccNumber(cccAfterRemoveLeading);
+                            if (patient == null)
+                            {
+                                string cccConcatParts = numbers[0] + numbers[1];
+                                patient = _patientLookupmanager.GetPatientByCccNumber(cccConcatParts);
+
+                                if (patient == null)
+                                {
+                                    patient = _patientLookupmanager.GetPatientByNormalizedCccNumber(cccConcatParts);
+                                }
+                            }
                         }
                     }
                     else
@@ -141,6 +158,11 @@ namespace IQCare.CCC.UILogic
                             if (patient == null)
                             {
                                 patient = _patientLookupmanager.GetPatientByCccNumber(ccc.TrimStart('0'));
+                                if (patient == null)
+                                {
+                                    string withDash = cccNumber.Substring(0, 5) + "-" + cccNumber.Substring(5, 5);
+                                    patient = _patientLookupmanager.GetPatientByCccNumber(withDash);
+                                }
                             }
                         }
                         else
@@ -160,6 +182,11 @@ namespace IQCare.CCC.UILogic
         public List<PatientRelationshipDTO> GetPatientRelationshipView(int patientId)
         {
             return _patientLookupmanager.GetPatientRelationshipView(patientId);
+        }
+
+        public PersonExtLookup GetPersonExtLookups(int personId)
+        {
+            return _patientLookupmanager.GetPersonExtLookups(personId);
         }
     }
 }

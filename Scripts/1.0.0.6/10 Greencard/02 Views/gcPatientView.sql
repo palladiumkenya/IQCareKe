@@ -28,7 +28,7 @@ SELECT DISTINCT pt.Id
 					FROM identifiers z
 					WHERE z.Code = 'CCCNumber'
 					)
-			), (ISNULL(pt.FacilityId+'-00000',(SELECT top 1 PosID FROM mst_Facility WHERE DeleteFlag=0) +'-00000'))) AS EnrollmentNumber
+			), (ISNULL(convert(varchar(10),pt.FacilityId)+'-00000',(SELECT top 1 PosID FROM mst_Facility WHERE DeleteFlag=0) +'-00000'))) AS EnrollmentNumber
 	,pt.PatientIndex
 	,CAST(DECRYPTBYKEY(pn.FirstName) AS VARCHAR(50)) AS FirstName
 	,CAST(DECRYPTBYKEY(pn.MidName) AS VARCHAR(50)) AS MiddleName
@@ -77,7 +77,7 @@ SELECT DISTINCT pt.Id
 			WHERE (PatientId = pt.Id)
 				AND (
 					ScreeningTypeId IN (
-						SELECT Id
+						SELECT top 1 Id
 						FROM dbo.LookupMaster AS LookupMaster_1
 						WHERE (Name = 'NutritionStatus')
 						)
@@ -143,7 +143,7 @@ WHERE  (dbo.Identifiers.Name = 'CCC Registration Number') AND
 	,ISNULL(NULL,CAST(DECRYPTBYKEY('99999999') as varchar(50))) AS NationalId
 	,ISNULL(NULL,(SELECT top 1 FacilityID FROM mst_Facility WHERE DeleteFlag=0)) FacilityId
 	,(SELECT top 1 Id FROM LookupItem WHERE Name='New') PatientType
-	,(ISNULL(NULL,(SELECT transferIn FROM PatientEnrollment WHERE PatientId IN(SELECT Id FROM patient WHERE personId=pn.id)))) TransferIn
+	,(ISNULL(NULL,(SELECT top 1 transferIn FROM PatientEnrollment WHERE PatientId IN(SELECT Id FROM patient WHERE personId=pn.id)))) TransferIn
 	,(CAST(DECRYPTBYKEY((SELECT top 1 MobileNumber FROM PersonContact WHERE PersonId=pn.Id)) AS VARCHAR(20))) AS MobileNumber
 	,0 TBStatus
 	,0 NutritionStatus

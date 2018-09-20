@@ -8,6 +8,7 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Globalization;
+using System.Linq;
 using System.Web;
 using System.Web.UI.WebControls;
 
@@ -28,6 +29,8 @@ namespace IQCare.Web.CCC.UC
         public int PatientMasterVisitId;
         public int age;
         public string Weight = "0";
+        public Boolean IsEditAppointment = false;
+        public int IsEditAppointmentId = 0;
 
         protected int UserId
         {
@@ -49,6 +52,18 @@ namespace IQCare.Web.CCC.UC
             get { return Session["DateOfEnrollment"].ToString(); }
         }
 
+        protected DateTime NextAppointmentDate { get; set; }
+
+        protected ILookupManager lookupManager = (ILookupManager)ObjectFactory.CreateInstance("BusinessProcess.CCC.BLookupManager, BusinessProcess.CCC");
+
+        protected int GbvScreeningCategoryId
+        {
+            get
+            {
+                var gbvAssessmentId = Convert.ToInt32(lookupManager.GetLookupItemId("GBVAssessment"));
+                return gbvAssessmentId;
+            }
+        }
 
         //private readonly ILookupManager _lookupManager = (ILookupManager)ObjectFactory.CreateInstance("BusinessProcess.CCC.BLookupManager, BusinessProcess.CCC");
         private readonly IPatientLookupmanager _patientLookupmanager = (IPatientLookupmanager)ObjectFactory.CreateInstance("BusinessProcess.CCC.BPatientLookupManager, BusinessProcess.CCC");
@@ -180,6 +195,7 @@ namespace IQCare.Web.CCC.UC
         {
             Entities.CCC.Encounter.PatientEncounter.PresentingComplaintsEntity pce = new Entities.CCC.Encounter.PatientEncounter.PresentingComplaintsEntity();
             pce = PEL.loadPatientEncounter(Session["ExistingRecordPatientMasterVisitID"].ToString() == "0" ? Session["PatientMasterVisitID"].ToString() : Session["ExistingRecordPatientMasterVisitID"].ToString(), Session["PatientPK"].ToString());
+            PatientAppointmentManager patientAppointmentManager = new PatientAppointmentManager();
 
             PatientEncounterLogic patientEncounter = new PatientEncounterLogic();
 
@@ -271,6 +287,11 @@ namespace IQCare.Web.CCC.UC
 
             arvAdherance.SelectedValue = pce.ARVAdherence;
             ctxAdherance.SelectedValue = pce.CTXAdherence;
+            if (pce.StabilityCategorization != null)
+            {((PatientCategorizationStatus) Convert.ToInt16(pce.StabilityCategorization)).ToString();
+                var stabilityAsessment = ((PatientCategorizationStatus)Convert.ToInt16(pce.StabilityCategorization)).ToString();
+                stabilityStatus.SelectedValue = stabilityStatus.Items.FindByText(stabilityAsessment).Value;
+            }
             WHOStage.SelectedValue = pce.WhoStage;
 
             if (theDT.Rows.Count > 0 && isOnEdit)
@@ -292,6 +313,8 @@ namespace IQCare.Web.CCC.UC
             }
 
             AppointmentDate.Text = pce.nextAppointmentDate;
+
+            NextAppointmentDate = Convert.ToDateTime(pce.nextAppointmentDate);
             //if (pce.nextAppointmentDate != "")
             //{
             //    if (pce.nextAppointmentDate != null)
@@ -300,9 +323,25 @@ namespace IQCare.Web.CCC.UC
             ServiceArea.SelectedValue = pce.appointmentServiceArea;
             Reason.SelectedValue = pce.appointmentReason;
             DifferentiatedCare.SelectedValue = pce.nextAppointmentType;
-            description.Text = pce.appointmentDesc;
+            description.Text = pce.appointmentDesc; 
+           IsEditAppointment= (pce.nextAppointmentType != null);
+            // IsEditAppointmentId=(pce.)
             //status.SelectedValue = pce.appontmentStatus;
+            if (IsEditAppointment)
+            {
+                if (!string.IsNullOrWhiteSpace(pce.nextAppointmentType))
+                {
+                    var app = patientAppointmentManager.GetByPatientId((int)Session["PatientPK"])
+                        .Where(x => x.AppointmentDate == Convert.ToDateTime(pce.nextAppointmentDate)).ToList();
+                    if (app != null)
+                    {
+                        IsEditAppointmentId = app[0].Id;
+                    }
 
+                }
+            }
+
+            //AppointmentDate.Text = pce.nextAppointmentDate.ToString();
             //ipt pop ups
             Page.ClientScript.RegisterStartupScript(this.GetType(), "tbInfectedYesNo", "tbInfectedChange();", true);
             Page.ClientScript.RegisterStartupScript(this.GetType(), "IcfChange", "IcfChange();", true);

@@ -21,5 +21,16 @@ namespace BusinessProcess.CCC.Lookup
                 return list;
             }
         }
+
+        public PersonGreenCardLookup AddPersonToBlueCardLookup(PersonGreenCardLookup personGreenCardLookup)
+        {
+            using (UnitOfWork unitOfWork = new UnitOfWork(new GreencardContext()))
+            {
+                unitOfWork.PersonGreenCardLookupRepository.Add(personGreenCardLookup);
+                unitOfWork.Complete();
+                unitOfWork.Dispose();
+                return personGreenCardLookup;
+            }
+        }
     }
 }

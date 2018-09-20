@@ -4,6 +4,7 @@ using DataAccess.CCC.Repository;
 using Entities.CCC.Encounter;
 using Interface.CCC;
 using System.Collections.Generic;
+using Entities.CCC.Baseline;
 
 namespace BusinessProcess.CCC
 {

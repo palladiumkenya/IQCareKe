@@ -139,6 +139,7 @@
     <Compile Include="Interoperability\Enrollment\ProcessPatient.cs" />
     <Compile Include="Interoperability\Appointment\ProcessPatientAppointmentMessage.cs" />
     <Compile Include="Interoperability\Enrollment\ProcessRegistration.cs" />
+    <Compile Include="Interoperability\IlStatisticsManager.cs" />
     <Compile Include="Interoperability\InteropPlacerTypeManager.cs" />
     <Compile Include="Interoperability\InteropPlacerValuesManager.cs" />
     <Compile Include="Interoperability\InteropUser.cs" />
@@ -171,6 +172,7 @@
     <Compile Include="PatientWhoStageManager.cs" />
     <Compile Include="PersonContactLookUpManager.cs" />
     <Compile Include="PersonContactManager.cs" />
+    <Compile Include="PersonExtendedLookupManager.cs" />
     <Compile Include="PersonGreenCardLookupManager.cs" />
     <Compile Include="PersonLocationManager.cs" />
     <Compile Include="PersonLookUpManager.cs" />

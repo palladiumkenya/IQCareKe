@@ -64,12 +64,15 @@
         </div>
     </div>
     <div class="col-md-12 col-xs-12 col-sm-12">
-        <div class="col-md-6">&nbsp;</div>
+        <div class="col-md-3">&nbsp;</div>
         <div class="col-md-3">
             <asp:LinkButton runat="server" ID="btnLoadTriage" CssClass="btn btn-info fa fa-plus-circle btn-lg" ClientIDMode="Static" OnClientClick="return false;"> Add Patient Vitals</asp:LinkButton>
         </div>
         <div class="col-md-3" id="divBtnVitals">
             <asp:LinkButton runat="server" ID="btnFemalVitals" CssClass="btn btn-success  fa fa-refresh btn-lg " ClientIDMode="Static" OnClientClick="return false;"> Female Patient Followup </asp:LinkButton>
+        </div>
+        <div class="col-md-3" id="divBtnGBVAssessment">
+            <asp:LinkButton runat="server" ID="btnGBVAssessment" CssClass="btn btn-success  fa fa-list btn-lg " ClientIDMode="Static" OnClientClick="return false;"> GBV Assessment </asp:LinkButton>
         </div>
     </div>
 </div>

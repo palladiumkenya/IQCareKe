@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Store, select } from '@ngrx/store';
-import { Observable } from 'rxjs/Observable';
+import { Observable } from 'rxjs';
 import * as Consent from '../reducers/app.states';
 
 @Component({
@@ -51,5 +51,9 @@ export class LeftnavComponent implements OnInit {
 
     ngOnInit() {
         this.personId = JSON.parse(localStorage.getItem('personId'));
+    }
+
+    goToLiveHapi() {
+        // window.open(window.location.hostname + ':4747/dashboard');
     }
 }

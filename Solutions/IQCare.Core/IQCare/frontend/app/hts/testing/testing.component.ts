@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, NgZone, OnInit } from '@angular/core';
+import { Component, NgZone, OnInit } from '@angular/core';
 import { MatDialog, MatDialogConfig } from '@angular/material';
 import { TestDialogComponent } from '../testdialog/testdialog.component';
 import { EncounterService } from '../_services/encounter.service';
@@ -17,7 +17,7 @@ import { ClientService } from '../../shared/_services/client.service';
     templateUrl: './testing.component.html',
     styleUrls: ['./testing.component.css']
 })
-export class TestingComponent implements OnInit, AfterViewInit {
+export class TestingComponent implements OnInit {
     testButton1: boolean = true;
     testButton2: boolean = false;
     isDisabled: boolean = false;
@@ -56,9 +56,6 @@ export class TestingComponent implements OnInit, AfterViewInit {
         });
     }
 
-    ngAfterViewInit() {
-    }
-
     ngOnInit() {
         this.finalTestingResults = new FinalTestingResults();
         this.testing = new Testing();
@@ -77,7 +74,7 @@ export class TestingComponent implements OnInit, AfterViewInit {
             coupleDiscordant: new FormControl(this.finalTestingResults.coupleDiscordant, [Validators.required]),
             acceptedPartnerListing: new FormControl(this.finalTestingResults.acceptedPartnerListing, [Validators.required]),
             reasonsDeclinePartnerListing: new FormControl(this.finalTestingResults.reasonsDeclinePartnerListing, [Validators.required]),
-            finalResultsRemarks: new FormControl(this.finalTestingResults.finalResultsRemarks, [Validators.required]),
+            finalResultsRemarks: new FormControl(this.finalTestingResults.finalResultsRemarks)
         });
 
         this.encounterService.getCustomOptions().subscribe(data => {
@@ -269,6 +266,10 @@ export class TestingComponent implements OnInit, AfterViewInit {
     }
 
     onSubmit() {
+        if (!this.formTesting.controls.finalResultsRemarks.value || this.formTesting.controls.finalResultsRemarks.value == ' ') {
+            this.formTesting.controls.finalResultsRemarks.setValue('n/a');
+        }
+
         console.log(this.formTesting);
         if (this.formTesting.valid) {
             this.finalTestingResults = { ...this.finalTestingResults, ...this.formTesting.value };

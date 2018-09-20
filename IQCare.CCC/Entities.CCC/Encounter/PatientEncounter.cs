@@ -103,9 +103,7 @@ namespace Entities.CCC.Encounter
             public string appointmentReason { get; set; }
             public string appointmentDesc { get; set; }
             public string appontmentStatus { get; set; }
-
-            
-
+            public string StabilityCategorization { get; set; }
         }
 
         [Serializable]

@@ -1,15 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data;
-using System.Web.UI;
-using System.Web.UI.HtmlControls;
 using IQCare.CCC.UILogic;
 using System.Web.UI.WebControls;
 using Application.Presentation;
-using Entities.CCC.Enrollment;
 using Entities.CCC.Lookup;
 using Interface.CCC.Lookup;
-using IQCare.CCC.UILogic.Enrollment;
 
 namespace IQCare.Web.CCC.Enrollment
 {
@@ -33,7 +28,7 @@ namespace IQCare.Web.CCC.Enrollment
             var patientLookManager = new PatientLookupManager();
             int person = int.Parse(Session["PersonId"].ToString());
             PatientLookup patient = patientLookManager.GetPatientByPersonId(person);
-            if (patient !=null)
+            if (patient !=null && patient.ptn_pk.HasValue && patient.ptn_pk.Value>0)
             {
                 PatientExists = patient.Id;
             }

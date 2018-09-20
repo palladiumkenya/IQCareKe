@@ -31,6 +31,45 @@ namespace IQCare.Common.BusinessProcess.CommandHandlers.Enrollment
                     request.ClientEnrollment.PatientId, request.ClientEnrollment.ServiceAreaId,
                     request.ClientEnrollment.CreatedBy, request.ClientEnrollment.DateOfEnrollment);
 
+                GetPatientDetails patientDetails = new GetPatientDetails(_unitOfWork);
+
+
+                var patientLookup = await patientDetails.GetPatientByPatientId(request.ClientEnrollment.PatientId);
+
+                if (patientLookup.Count > 0 && patientLookup[0].ptn_pk == null)
+                {
+                    var dobPrecision = "EXACT";
+                    var dob = DateTime.Now;
+                    if(patientLookup[0].DobPrecision.HasValue)
+                        dobPrecision = patientLookup[0].DobPrecision.Value ? "ESTIMATED" : "EXACT";
+
+                    if (patientLookup[0].DateOfBirth.HasValue)
+                        dob = patientLookup[0].DateOfBirth.Value;
+
+
+                    var response = await registerPersonService.InsertIntoBlueCard(
+                        patientLookup[0].FirstName,
+                        patientLookup[0].LastName,
+                        patientLookup[0].MidName,
+                        request.ClientEnrollment.DateOfEnrollment,
+                        patientLookup[0].MaritalStatusName,
+                        patientLookup[0].PhysicalAddress,
+                        patientLookup[0].MobileNumber,
+                        patientLookup[0].Gender,
+                        dobPrecision,
+                        dob,
+                        request.ClientEnrollment.CreatedBy,
+                        request.ClientEnrollment.PosId
+                        );
+
+                    if (response.Count > 0)
+                    {
+                        await registerPersonService.UpdatePatient(request.ClientEnrollment.PatientId,
+                            request.ClientEnrollment.DateOfEnrollment, request.ClientEnrollment.PosId);
+                    }
+                }
+
+
                 return Result<EnrollClientResponse>.Valid(new EnrollClientResponse()
                 {
                     IdentifierId = patientIdentifier.Id,
@@ -42,6 +81,7 @@ namespace IQCare.Common.BusinessProcess.CommandHandlers.Enrollment
                 Log.Error(e.Message);
                 return Result<EnrollClientResponse>.Invalid(e.Message);
             }
+
             //using (var trans = _unitOfWork.Context.Database.BeginTransaction())
             //{
             //    try

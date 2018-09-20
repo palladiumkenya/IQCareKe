@@ -1316,4 +1316,20 @@ GO
 -- SET /ACTIVATE QID/TID/TD
    UPDATE mst_Frequency SET DeleteFlag=0 WHERE [NAME] IN('TD','TID','QID') AND DeleteFlag=1;
    UPDATE mst_Frequency SET multiplier=3 WHERE [Name] IN('TD') AND multiplier=0;
+
+-- Missing lookup Items
+ IF NOT EXISTS(SELECT id FROM LookupMaster WHERE Name='Genito-urinary')
+ BEGIN
+	INSERT INTO LookupMaster (Name,DisplayName,DeleteFlag) VALUES('Genito-urinary','Genito-urinary',0)
+    INSERT INTO LookupMasterItem (LookupMasterId,LookupItemId,DisplayName,OrdRank) VALUES((SELECT top 1 Id FROM LookupMaster WHERE Name='Genito-urinary'),(SELECT Id FROM LookupItem WHERE Name='Bleeding'),'Bleeding ',1);
+	INSERT INTO LookupMasterItem (LookupMasterId,LookupItemId,DisplayName,OrdRank) VALUES((SELECT top 1 Id FROM LookupMaster WHERE Name='Genito-urinary'),(SELECT Id FROM LookupItem WHERE Name='Discharge'),'Discharge ',2);
+	INSERT INTO LookupMasterItem (LookupMasterId,LookupItemId,DisplayName,OrdRank) VALUES((SELECT top 1 Id FROM LookupMaster WHERE Name='Genito-urinary'),(SELECT Id FROM LookupItem WHERE Name='ulceration'),'ulceration ',3);
+	INSERT INTO LookupMasterItem (LookupMasterId,LookupItemId,DisplayName,OrdRank) VALUES((SELECT top 1 Id FROM LookupMaster WHERE Name='Genito-urinary'),(SELECT Id FROM LookupItem WHERE Name='urethral discharge'),'urethral discharge ',4);
+	INSERT INTO LookupMasterItem (LookupMasterId,LookupItemId,DisplayName,OrdRank) VALUES((SELECT top 1 Id FROM LookupMaster WHERE Name='Genito-urinary'),(SELECT Id FROM LookupItem WHERE Name='vaginal discharge'),'vaginal discharge ',5);
+ END
+
+ IF NOT EXISTS(SELECT * FROM LookupMasterItem WHERE LookupItemId=(SELECT top 1 Id FROM LookupMaster WHERE Name='HistoryARTUse') AND LookupItemId=(SELECT Id FROM LookupItem WHERE Name='ART') )
+ BEGIN
+	 INSERT INTO LookupMasterItem (LookupMasterId,LookupItemId,DisplayName,OrdRank) VALUES((SELECT top 1 Id FROM LookupMaster WHERE Name='HistoryARTUse'),(SELECT Id FROM LookupItem WHERE Name='ART'),'ART',4);
+ END
 Go

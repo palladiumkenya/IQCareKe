@@ -49,4 +49,10 @@ BEGIN
 END
 GO
 
+If Exists(Select * from sys.columns where Name = N'PlacerValue' AND Object_ID = Object_ID(N'Interop_PlacerValues'))
+BEGIN
+	Alter table Interop_PlacerValues Alter Column PlacerValue varchar(max)
+END
+GO
+
 

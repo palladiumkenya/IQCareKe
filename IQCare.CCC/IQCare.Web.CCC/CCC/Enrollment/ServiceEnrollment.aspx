@@ -240,7 +240,6 @@
                 }
 
             });
-
             
             var personDOB = '<%=Session["PersonDob"]%>';
             var nationalId = '<%=Session["NationalId"]%>';
@@ -324,24 +323,24 @@
                     nationalId = 99999999;
                 }
 
-                var fields = getDynamicFields();
+                var fields = getServiceAreaIdentifiers();
                 var prefix = null;
                 var mflCode = code;
                 var fieldName = null;
                 var identifiers = {};
                 $.each(fields, function (index, value) {
                     fieldName = $("#" + value.Code).val();
-                    if (value.Prefix != null) {
+                    if (value.Prefix != null && value.Prefix != "mfl_code") {
                         prefix = $("#" + value.Prefix).val();
                         fieldName = prefix + "-" + fieldName;
                     }
                     identifiers[value.ID] = fieldName;
                 });
 
-                if (patType == "Transit" && (code == prefix)) {
+                /*if (patType == "Transit" && (code == prefix)) {
                     toastr.error("You selected the home facility for a transit patient", "Patient Enrollment");
                     return false;
-                }
+                }*/
 
                 var reconfirmatoryTest = $("#ReconfirmatoryTest").val();
                 var resultReConfirmatoryTest = $("#ResultReConfirmatoryTest").val();
@@ -388,24 +387,25 @@
                     nationalId = 99999999;
                 }
 
-                var fields = getDynamicFields();
+                var fields = getServiceAreaIdentifiers();
                 var prefix = null;
                 var mflCode = code;
                 var fieldName = null;
                 var identifiers = {};
                 $.each(fields, function (index, value) {
                     fieldName = $("#" + value.Code).val();
-                    if (value.Prefix != null) {
+
+                    if (value.Prefix != null && value.Prefix != "mfl_code") {
                         prefix = $("#" + value.Prefix).val();
                         fieldName = prefix + "-" + fieldName;
                     }
                     identifiers[value.ID] = fieldName;
                 });
 
-                if (patType == "Transit" && (code == prefix)) {
+                /*if (patType == "Transit" && (code == prefix)) {
                     toastr.error("You selected the home facility for a transit patient", "Patient Enrollment");
                     return false;
-                }
+                }*/
 
                 var reconfirmatoryTest = $("#ReconfirmatoryTest").val();
                 var resultReConfirmatoryTest = $("#ResultReConfirmatoryTest").val();
@@ -503,7 +503,7 @@
             $.when(createDynamicElements()).then(function () {
                 setTimeout(function () {
                     if (patType == "New") {
-                        $('#mfl_code').append($('<option></option>'));
+                        /*$('#mfl_code').append($('<option></option>'));
 
                         $('#mfl_code').append($('<option>',
                             {
@@ -513,21 +513,32 @@
 
                         $("#mfl_code").val(code).trigger("change");
                         $("#mfl_code").prop('disabled', true);
-
+                        */
                         getPatientEnrollmentDetails();
                     } else {
-                        $.when(getFacilitiesList()).then(function() {
+                        //$.when(getFacilitiesList()).then(function() {
                             getPatientEnrollmentDetails();
-                        });
+                        //});
                     }
+
+                    //Remove empty ReGex validation constraints from relevant textboxes
+                    $('input[type=text]').each(function () {
+                        if ($(this).attr("data-parsley-pattern") == "") {
+                            $(this).removeAttr("data-parsley-pattern");
+                        }
+                        if ($(this).attr("data-parsley-pattern-message") == "") {
+                            $(this).removeAttr("data-parsley-pattern-message");
+                        }
+                    });
+
                 },1000);
             });
 
-            function getDynamicFields() {
+            function getServiceAreaIdentifiers() {
                 var result = "";
                 $.ajax({
                     type: "POST",
-                    url: "../WebService/EnrollmentService.asmx/GetDynamicFields",
+                    url: "../WebService/EnrollmentService.asmx/GetServiceAreaIdentifiers",
                     contentType: "application/json; charset=utf-8",
                     dataType: "json",
                     async: false,
@@ -549,7 +560,7 @@
             function createDynamicElements() {
                 $.ajax({
                     type: "POST",
-                    url: "../WebService/EnrollmentService.asmx/GetDynamicFields",
+                    url: "../WebService/EnrollmentService.asmx/GetServiceAreaIdentifiers",
                     contentType: "application/json; charset=utf-8",
                     dataType: "json",
                     success: function (response) {
@@ -569,13 +580,13 @@
                             table += "<select disabled id=" + messageResponse[i].ID + " class='form-control'><option value=" + messageResponse[i].ID + ">" + messageResponse[i].IdentifierName + "</option></select>";
                             table += "</td>";
 
-                            if (messageResponse[i].Prefix != null) {
+                            if (messageResponse[i].Prefix != null && messageResponse[i].Prefix != "mfl_code") {
                                 table += "<td>";
                                 table += "<label align='center'>" + messageResponse[i].Prefix + " :</label>";
                                 table += "</td>";
 
 
-                                if (messageResponse[i].Required == true) {
+                                if (messageResponse[i].Required == true && messageResponse[i].Prefix != "mfl_code") {
                                     table += "<td>";
                                     if (messageResponse[i].Prefix == "mfl_code") {
                                         table += "<select id=" + messageResponse[i].Prefix + " class='form-control' data-parsley-required='true' data-parsley-min='1'></select>";
@@ -586,7 +597,7 @@
                                 } else {
                                     table += "<td>";
                                     if (messageResponse[i].Prefix == "mfl_code") {
-                                        table += "<select id=" + messageResponse[i].Prefix + " class='form-control' data-parsley-min='1'></select>";
+                                        //table += "<select id=" + messageResponse[i].Prefix + " class='form-control' data-parsley-min='1'></select>";
                                     } else {
                                         table += "<input type='text' id=" + messageResponse[i].Prefix + " class='form-control' data-parsley-type='digits' />  ";
                                     }                                   
@@ -599,19 +610,13 @@
                             table += "<label align='center'>" + messageResponse[i].Label + " :</label>";
                             table += "</td>";
 
-                            if (messageResponse[i].DataType == "Numeric") {
-                                table += "<td>";
-                                if (messageResponse[i].Required == true) {
-                                    table += "<input type='text' id=" + messageResponse[i].Code + " class='form-control' data-parsley-type='digits' data-parsley-required='true' data-parsley-length='[5, 5]' />";
-                                } else {
-                                    table += "<input type='text' id=" + messageResponse[i].Code + " class='form-control' data-parsley-type='digits' data-parsley-length='[5, 5]' />";
-                                }
-                                
-                                table += "</td>";
-                            } else if (messageResponse[i].DataType == "") {
-                                
-                            }
-
+                            table += "<td>";
+                            if (messageResponse[i].Required == true) {
+                                table += "<input type='text' id=" + messageResponse[i].Code + " class='form-control' data-parsley-trigger='keyup' data-parsley-pattern-message='" + messageResponse[i].FailedValidationMessage + "' data-parsley-pattern='" + messageResponse[i].ValidatorRegex + "' data-parsley-minlength='" + messageResponse[i].MinLength + "' data-parsley-maxlength='" + messageResponse[i].MaxLength + "'  data-parsley-required='true' />";
+                            } else {
+                                table += "<input type='text' id=" + messageResponse[i].Code + " class='form-control' data-parsley-trigger='keyup' data-parsley-pattern-message='" + messageResponse[i].FailedValidationMessage + "' data-parsley-pattern='" + messageResponse[i].ValidatorRegex + "' data-parsley-minlength='" + messageResponse[i].MinLength + "' data-parsley-maxlength='" + messageResponse[i].MaxLength + "' />";
+                            }                                
+                            table += "</td>";
 
                             table += "</tr>";
                             table += "<tr><td>&nbsp;</td></tr>";
@@ -713,14 +718,18 @@
                         }
                             
                         if (messageResponse.EnrollmentDate != null) {
-                            $("#DateOfEnrollment").val(messageResponse.EnrollmentDate);
+                            //alert(messageResponse.EnrollmentDate);
+                            if (moment('1900-06-15').isSame(messageResponse.EnrollmentDate)) {
+                                $("#DateOfEnrollment").val("");
+                            } else { $("#DateOfEnrollment").val(messageResponse.EnrollmentDate);}
+                           
                         }
 
                         if (messageResponse.EntryPointIdUnknown == false) {
                             $("#entryPoint").val(messageResponse.EntryPointId);
                         }
 
-                        var fields = getDynamicFields();
+                        var fields = getServiceAreaIdentifiers();
                         $.each(fields, function (index, value) {
                             $.each(messageResponse.IndentifiersList, function (key, val) {
                                 if (val.Code == value.Code) {
@@ -764,11 +773,11 @@
             var patientExists = '<%=PatientExists%>';
 
             //console.log(patientExists);
-            if (patientType != "New" || patientExists > 0) {
+            if (patientType != "New" || patientExists>0) {
                 $("#ReconfirmatoryTest").prop("disabled", true);
                 $("#ReConfirmatory").hide();
             } else {
-                if (reconfirmTest == "No") {
+                if (reconfirmTest === "No") {
                     $("#ResultReConfirmatoryTest").prop("disabled", true);
                     $("#TypeOfReConfirmatoryTest").prop("disabled", true);
                     $("#ReConfirmatoryTestDate").prop("disabled", true);
@@ -781,14 +790,14 @@
                     $("#btnEnroll").addClass("noneevents");
                     $("#btnRese").prop("disabled", false);
                     $("#btnRese").addClass("noneevents");
-                } else if (reconfirmTest == "Yes") {
+                } else if (reconfirmTest === "Yes") {
                     $("#ResultReConfirmatoryTest").prop("disabled", false);
                     $("#TypeOfReConfirmatoryTest").prop("disabled", false);
                     $("#ReConfirmatoryTestDate").prop("disabled", false);
                     $("#DateOfEnrollment").prop("disabled", false);
                     $("#entryPoint").prop("disabled", false);
                     $("#CCCNumber").prop("disabled", false);
-                    if (patientType != "New") {
+                    if (patientType !== "New") {
                         $("#mfl_code").prop("disabled", false);
                     }
                 } else {
@@ -808,11 +817,11 @@
             var result = $("#ResultReConfirmatoryTest :selected").text();
             var patientType = '<%=patType%>';
 
-            if (result == "Positive") {
+            if (result === "Positive") {
                 $("#DateOfEnrollment").prop("disabled", false);
                 $("#entryPoint").prop("disabled", false);
                 $("#CCCNumber").prop("disabled", false);
-                if (patientType != "New") {
+                if (patientType !== "New") {
                     $("#mfl_code").prop("disabled", false);
                 }
 
@@ -820,7 +829,7 @@
                 $("#btnEnroll").removeClass("noneevents");
                 $("#btnRese").prop("disabled", false);
                 $("#btnRese").removeClass("noneevents");
-            } else if (result == "Negative") {
+            } else if (result === "Negative") {
                 $("#DateOfEnrollment").prop("disabled", true);
                 $("#entryPoint").prop("disabled", true);
                 $("#CCCNumber").prop("disabled", true);
@@ -861,6 +870,7 @@
                     toastr.error(response.d, "Person Profile Error");
                 }
             });
+
         }
 
     </script>

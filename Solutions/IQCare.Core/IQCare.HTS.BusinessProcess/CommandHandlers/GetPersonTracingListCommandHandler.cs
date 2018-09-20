@@ -15,11 +15,9 @@ namespace IQCare.HTS.BusinessProcess.CommandHandlers
 {
     public class GetPersonTracingListCommandHandler : IRequestHandler<GetPersonTracingListCommand, Result<List<PersonTracingView>>>
     {
-        private readonly IHTSUnitOfWork _unitOfWork;
         private readonly ICommonUnitOfWork _commonUnitOfWork;
         public GetPersonTracingListCommandHandler(IHTSUnitOfWork unitOfWork, ICommonUnitOfWork commonUnitOfWork)
         {
-            _unitOfWork = unitOfWork ?? throw new ArgumentNullException(nameof(unitOfWork));
             _commonUnitOfWork = commonUnitOfWork ?? throw new ArgumentNullException(nameof(commonUnitOfWork));
         }
 

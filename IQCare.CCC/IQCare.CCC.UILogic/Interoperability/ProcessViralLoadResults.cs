@@ -7,6 +7,7 @@ using System.Web.Script.Serialization;
 using Entities.CCC.Encounter;
 using IQCare.CCC.UILogic.Visit;
 using Entities.CCC.Lookup;
+using System.Text.RegularExpressions;
 
 namespace IQCare.CCC.UILogic.Interoperability
 {
@@ -35,14 +36,40 @@ namespace IQCare.CCC.UILogic.Interoperability
                     if (thisFacility == null)
                     {
                         Msg = $"The facility {receivingFacilityMFLCode} does not exist";
-
-                        return Msg;
+                        throw new Exception(Msg);
                     }
                     if (patient == null)
                     {
                         Msg = $"Patient {patientCcc} does not exist ";
+                        throw new Exception(Msg);
+                    }
+                    if (results.Count(r=> string.IsNullOrWhiteSpace(r.VlResult.Trim()))> 0)
+                    {
+                        Msg = $"Viral load message has no results indicated ";
+                        throw new Exception(Msg);
+                    }
+                    int invalidResult = 0;
+                    foreach (var result in results)
+                    {
+                        if (result.VlResult.Contains("LDL"))
+                        {
 
-                        return Msg;
+                        }
+                        else if(Regex.Split(result.VlResult, @"[^0-9\.]+").Length > 0)
+                        {
+
+                        }
+                        else
+                        {
+                            invalidResult++;
+
+                        }
+                    }
+                        
+                    if (invalidResult > 0)
+                    {
+                        Msg = $"Viral load message has invalid results indicated ";
+                        throw new Exception(Msg);
                     }
                     if (patient != null && thisFacility != null)
                     {
@@ -77,21 +104,20 @@ namespace IQCare.CCC.UILogic.Interoperability
                             var jss = new JavaScriptSerializer();
                             string patientLabOrder = jss.Serialize(listOfTestsOrdered);
                             //include userid and facility ID
-                           int orderId= labOrderManager.savePatientLabOrder(patient.Id, (int)patient.ptn_pk, interopUserId, thisFacility.FacilityID, 203, patientMasterVisitId, sampleCollectionDate.ToString(), "IL lab order", patientLabOrder,"completed");
+                           int orderId= labOrderManager.savePatientLabOrder(patient.Id, (int)patient.ptn_pk, interopUserId, thisFacility.FacilityID, 203, patientMasterVisitId, sampleCollectionDate.ToString(), "IL lab order", patientLabOrder,"Complete");
                             
                             labOrder = labOrderManager.GetLabOrdersById( orderId);
                             labDetails = labOrderManager.GetLabTestsOrderedById(labOrder.Id);
                         }
                         else
                         {
-                        labDetails = labOrderManager.GetLabTestsOrderedById(labOrder.Id);
+                            labDetails = labOrderManager.GetLabTestsOrderedById(labOrder.Id);
                         }
 
                         if (labOrder != null)
                         {
                             bool isUndetectable = false;
                             string resultText = "";
-                            decimal decimalValue = Decimal.Zero;
                             decimal? resultValue = null;
                             foreach (var result in results)
                             {
@@ -103,12 +129,20 @@ namespace IQCare.CCC.UILogic.Interoperability
                                 else
                                 {
                                     var resultString = result.VlResult.Replace("copies/ml", "");
-                                    bool isSuccess = decimal.TryParse(resultString, out decimalValue);
-                                    if (isSuccess) resultValue = decimalValue;
+                                    string[] numbers =  Regex.Split(resultString, @"[^0-9\.]+");
+                                    //bool isSuccess = decimal.TryParse(resultString, out decimalValue);
+                                    //if (isSuccess) resultValue = decimalValue;
+                                    for (int i = 0; i < numbers.Length; i++)
+                                    {
+                                        if(Regex.IsMatch(numbers[i], @"^\d+$"))
+                                        {
+                                            resultValue = Convert.ToDecimal(numbers[i]);
+                                            break;
+                                        }
+                                    }
+
                                 }
                                 
-                                
-                                //var labOrd = labOrder.FirstOrDefault();
                                 if (labOrder != null)
                                 {
 
@@ -128,9 +162,12 @@ namespace IQCare.CCC.UILogic.Interoperability
                                         HasResult = true
                                     };
                                     labOrderManager.AddPatientLabResults(labResults);
+                                    labOrder.OrderStatus = "Complete";
+                                    labOrderManager.savePatientLabOrder(labOrder);
+
                                 }
                             }
-                        Msg = "Sucess";
+                        Msg = "Success";
                         }
                         
                     }
@@ -143,13 +180,14 @@ namespace IQCare.CCC.UILogic.Interoperability
                 catch (Exception e)
                 {
                     Msg = "error " + e.Message;
+                    throw e;
                 }
             }
             else
             {
                 Msg = "Message does not contain results";
+                throw new Exception(Msg);
             }
-            
             return Msg;
         }
 

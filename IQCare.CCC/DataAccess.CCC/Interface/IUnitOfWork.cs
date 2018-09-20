@@ -11,6 +11,7 @@ using DataAccess.CCC.Interface.Triage;
 using DataAccess.CCC.Interface.Encounter;
 using DataAccess.CCC.Repository.person;
 using DataAccess.CCC.Interface.assessment;
+using DataAccess.CCC.Interface.IL;
 using DataAccess.CCC.Interface.Interoperability;
 using DataAccess.CCC.Interface.Pharmacy;
 
@@ -34,6 +35,9 @@ namespace DataAccess.CCC.Interface
         IPatientTreatmentTrackerLookupRepository PatientTreatmentTrackerLookupRepository { get; } 
         IFacilityListRepository FacilityListRepository { get; }
         //ILookupPatientRegimenMap LookupPatientRegimenMapRepository { get; }
+        IIlStatisticsRepository IlStatisticsRepository { get; }
+        IIlMessengerRepository IlMessengerRepository { get; }
+        IPersonExtendedLookupRepository PersonExtendedLookupRepository { get; }
 
         /* person and patient */
         IPersonRepository PersonRepository { get; }

@@ -25,9 +25,11 @@ using DataAccess.CCC.Interface.Triage;
 using DataAccess.CCC.Repository.Triage;
 using DataAccess.CCC.Repository.Screening;
 using DataAccess.CCC.Interface.assessment;
+using DataAccess.CCC.Interface.IL;
 using DataAccess.CCC.Interface.Interoperability;
 using DataAccess.CCC.Interface.Pharmacy;
 using DataAccess.CCC.Repository.assessment;
+using DataAccess.CCC.Repository.IL;
 using DataAccess.CCC.Repository.Interoperability;
 using DataAccess.CCC.Repository.Pharmacy;
 
@@ -77,6 +79,11 @@ namespace DataAccess.CCC.Repository
         private ITestingSummaryStatisticsRepository _testingSummaryStatisticsRepository;
         private IPatientStabilitySummaryRepository _patientStabilitySummaryRepository;
         private IPregnancyOutcomeLookupRepository _pregnancyOutcomeLookupRepository;
+        private IIlStatisticsRepository _ilStatisticsRepository;
+        private iILMessageStatsRepository _ilMessageStatsRepository;
+        private iILMessageViewerRepository _ilMessageViewerRepository;
+        private IIlMessengerRepository _ilMessengerRepository;
+        private IPersonExtendedLookupRepository _personExtendedLookupRepository;
 
         /* visit */
         private IPatientMasterVisitRepository _patientMasterVisitRepository;
@@ -344,6 +351,22 @@ namespace DataAccess.CCC.Repository
                 return _lookupFacilityStatisticsRepository ??
                        (_lookupFacilityStatisticsRepository =
                            new LookupFacilityStatisticsRepository((LookupContext) _context));
+            }
+        }
+
+        public IIlMessengerRepository IlMessengerRepository
+        {
+            get
+            {
+                return _ilMessengerRepository ??
+                       (_ilMessengerRepository = new IlMessengerRepository((LookupContext) _context));
+            }
+        }
+
+        public IPersonExtendedLookupRepository PersonExtendedLookupRepository
+        {
+            get {
+                return _personExtendedLookupRepository ??(_personExtendedLookupRepository=new PersonExtendedLookupRepository((LookupContext)_context));
             }
         }
 
@@ -707,6 +730,32 @@ namespace DataAccess.CCC.Repository
             {
                 return _facilityListRepository ?? (_facilityListRepository =
                            new FacilityListRepository((LookupContext) _context));
+            }
+        }
+
+        public IIlStatisticsRepository IlStatisticsRepository
+        {
+            get {
+                return _ilStatisticsRepository??(_ilStatisticsRepository= new IlStatisticsRepository((LookupContext)_context));
+
+            }
+        }
+
+        public iILMessageStatsRepository IIlMessageStatsRepository
+        {
+            get
+            {
+                return _ilMessageStatsRepository ??
+                       (_ilMessageStatsRepository = new ILMessageStatsRepository((LookupContext) _context));
+            }
+        }
+
+        public iILMessageViewerRepository IIlMessageViewerRepository
+        {
+            get
+            {
+                return _ilMessageViewerRepository ??
+                       (_ilMessageViewerRepository = new ILMessageViewerRepository((LookupContext) _context));
             }
         }
 

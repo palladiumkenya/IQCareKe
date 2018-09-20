@@ -41,6 +41,7 @@ import { PnsTracingListComponent } from './pns/pns-tracing-list/pns-tracing-list
 import { PnsTracingComponent } from './pns/pnstracing/pnstracing.component';
 import { PsmartComponent } from './psmart/psmart.component';
 import { PsmartService } from './_services/psmart.service';
+import { TracingComponent } from './tracing/tracing.component';
 
 
 @NgModule({
@@ -69,7 +70,8 @@ import { PsmartService } from './_services/psmart.service';
         FamilyComponent,
         ViewEncounterComponent,
         PnsTracingListComponent,
-        PsmartComponent
+        PsmartComponent,
+        TracingComponent
     ],
     exports: [
     ],
@@ -88,7 +90,8 @@ import { PsmartService } from './_services/psmart.service';
         PsmartService
     ],
     entryComponents: [
-        TestDialogComponent
+        TestDialogComponent,
+        TracingComponent
     ]
 })
 export class HtsModule { }

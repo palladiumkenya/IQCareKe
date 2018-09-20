@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { environment } from '../../../environments/environment';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable } from 'rxjs/Observable';
+import { Observable } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
 import { FamilyScreening } from '../_models/familyScreening';
 import { ErrorHandlerService } from '../../shared/_services/errorhandler.service';

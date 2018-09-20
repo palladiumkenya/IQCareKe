@@ -213,9 +213,10 @@ namespace IQCare.CCC.UILogic.Interoperability.Enrollment
                 }
                 else
                 {
+                    var assigningFacility = cccNumber.Substring(0, 5);
                     int patientEnrollmentId = patientEnrollmentManager.addPatientEnrollment(patientId, enrollmentDate.ToString(), userId);
                     int patientEntryPointId = patientEntryPointManager.addPatientEntryPoint(patientId, entryPointId,userId);
-                    int patientIdentifierId = patientIdentifierManager.addPatientIdentifier(patientId, patientEnrollmentId, 1, cccNumber, facilityId, false);
+                    int patientIdentifierId = patientIdentifierManager.addPatientIdentifier(patientId, patientEnrollmentId, 1, cccNumber, facilityId, assigningFacility, false);
 
                     if (deathDate.HasValue)
                     {
@@ -403,7 +404,8 @@ namespace IQCare.CCC.UILogic.Interoperability.Enrollment
 
                 if (patientMasterVisitId > 0)
                 {
-                    int patientIdentifierId = patientIdentifierManager.addPatientIdentifier(patientId, patientEnrollmentId, 1, cccNumber, facilityId);
+                    var assigningFacility = cccNumber.Substring(0, 5);
+                    int patientIdentifierId = patientIdentifierManager.addPatientIdentifier(patientId, patientEnrollmentId, 1, cccNumber, facilityId, assigningFacility, false);
 
                     if (greencardptnpk.Count == 0)
                     {

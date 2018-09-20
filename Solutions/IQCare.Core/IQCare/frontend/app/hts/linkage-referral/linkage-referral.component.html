@@ -12,141 +12,91 @@
                 <div class="panel panel-default">
                     <div class="panel-heading">REFERRAL & TRACING</div>
                     <div class="panel-body">
-                        <div class="wizard" data-initialize="wizard" id="linkageWizard">
-                            <div class="steps-container">
-                                <ul class="steps">
-                                    <li data-step="1" data-name="referral" class="active">
-                                        <span class="badge">1</span>REFERRAL
-                                        <span class="chevron"></span>
-                                    </li>
-                                    <li data-step="2" data-name="tracingLinkage">
-                                        <span class="badge">2</span>TRACING
-                                        <span class="chevron"></span>
-                                    </li>
-                                </ul>
+                        <form [formGroup]="form">
+                            <div class="row">
+                                <div class="col-lg-3 col-md-3 col-sm-3">
+                                    <mat-form-field>
+                                        <input type="text" placeholder="Referred To" matInput [formControl]="myControl" [matAutocomplete]="auto">
+                                        <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
+                                            <mat-option *ngFor="let facility of filteredOptions" [value]="facility">
+                                                {{ facility.name }}
+                                            </mat-option>
+                                        </mat-autocomplete>
+                                    </mat-form-field>
+                                </div>
+
+                                <div class="col-lg-3 col-md-3 col-sm-3">
+                                    <mat-form-field>
+                                        <input matInput placeholder="Other Facility" formControlName="otherFacility">
+                                    </mat-form-field>
+                                </div>
+
+                                <div class="col-lg-3 col-md-3 col-sm-3">
+                                    <mat-form-field>
+                                        <input matInput [matDatepicker]="myDatepicker" placeholder="Date To Be Enrolled" (click)="myDatepicker.open()" name="dateToBeEnrolled"
+                                            formControlName="dateToBeEnrolled" required>
+                                        <mat-datepicker-toggle matSuffix [for]="myDatepicker"></mat-datepicker-toggle>
+                                        <mat-datepicker #myDatepicker></mat-datepicker>
+                                    </mat-form-field>
+                                </div>
                             </div>
-                            <div class="actions">
-                                <button type="button" class="btn btn-default btn-prev">
-                                    <span class="glyphicon glyphicon-arrow-left"></span>Prev</button>
-                                <button type="button" class="btn btn-primary btn-next" data-last="Complete">Next
-                                    <span class="glyphicon glyphicon-arrow-right"></span>
-                                </button>
+
+                            <div class="row">
+                                <div class="col-md-12 col-sm-12 col-lg-12">
+                                    &nbsp;
+                                </div>
                             </div>
-                            <form id="form" action="#" class="wizard-big">
-                                <div class="step-content">
-                                    <div class="step-pane active sample-pane alert" data-step="1" id="datastep1" data-parsley-validate="true" data-show-errors="true">
-                                        <fieldset>
-                                            <div class="row">
-                                                <div class="col-lg-3 col-md-3 col-sm-3">
-                                                    <div class="form-group">
 
-                                                        <mat-form-field>
-                                                            <input type="text" placeholder="Referred To" matInput [formControl]="myControl" [matAutocomplete]="auto" [(ngModel)]="referral.referredToFacility" data-parsley-required="true" required>
-                                                            <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
-                                                                <mat-option *ngFor="let facility of filteredOptions" [value]="facility">
-                                                                    {{ facility.name }}
-                                                                </mat-option>
-                                                            </mat-autocomplete>
-                                                        </mat-form-field>
-                                                    </div>
-
-                                                    <div class="form-group">
-                                                        <label>Date To Be Enrolled *</label>
-                                                        <div>
-                                                            <mat-form-field>
-                                                                <input matInput [matDatepicker]="myDatepicker" (click)="myDatepicker.open()" name="dateToBeEnrolled" [(ngModel)]="referral.dateToBeEnrolled" data-parsley-required="true" required>
-                                                                <mat-datepicker-toggle matSuffix [for]="myDatepicker"></mat-datepicker-toggle>
-                                                                <mat-datepicker #myDatepicker></mat-datepicker>
-                                                            </mat-form-field>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </fieldset>
-                                    </div>
-                                    <div class="step-pane sample-pane alert" data-step="2" id="datastep2" data-parsley-validate="true" data-show-errors="true">
-                                        <fieldset>
-                                            <div class="row">
-                                                <div class="tabs-container">
-                                                    <ul class="nav nav-tabs">
-                                                        <li class="active"><a data-toggle="tab" href="#tracingTab">TRACING</a></li>
-                                                    </ul>
-                                                    <div class="tab-content">
-                                                        <div id="tracingTab" class="tab-pane active">
-                                                            <div class="panel-body">
-                                                                <button type="button" class="btn" data-toggle="modal" data-target="#tracingModal">
-                                                                    ADD TRACE
-                                                                </button>
-                                                                <div class="modal inmodal" id="tracingModal" tabindex="-1" role="dialog" aria-hidden="true">
-                                                                    <div class="modal-dialog">
-                                                                        <div class="modal-content animated fadeInLeft">
-                                                                            <div class="modal-header">
-                                                                                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-                                                                                <h4 class="modal-title">Tracing Detail</h4>
-                                                                            </div>
-                                                                            <div class="modal-body">
-                                                                                <div class="form-group">
-                                                                                    <label>Tracing Date *</label>
-                                                                                    <input id="tracingDate" name="tracingDate" type="date" class="form-control required" [(ngModel)]="tracing.tracingDate" #tracingDate="ngModel">
-
-                                                                                </div>
-
-                                                                                <div class="form-group">
-                                                                                    <label>Mode *</label>
-                                                                                    <select id="mode" name="mode" class="form-control required" [(ngModel)]="tracing.mode" #mode="ngModel">
-                                                                                        <option></option>
-                                                                                        <option *ngFor="let mode of tracingModeOptions" [ngValue]="mode">{{mode.itemName}}</option>
-                                                                                    </select>
-                                                                                </div>
-
-                                                                                <div class="form-group">
-                                                                                    <label>Outcome *</label>
-                                                                                    <select id="outcome" name="outcome" class="form-control" [(ngModel)]="tracing.outcome" #outcome="ngModel">
-                                                                                        <option></option>
-                                                                                        <option *ngFor="let outcome of tracingOutcomeOptions" [ngValue]="outcome">{{outcome.itemName}}</option>
-                                                                                    </select>
-                                                                                </div>
-                                                                            </div>
-                                                                            <div class="modal-footer">
-                                                                                <button type="button" class="btn btn-white" data-dismiss="modal">Close</button>
-                                                                                <button type="button" class="btn btn-primary" (click)="onAddingTracing()">Save changes</button>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-
-                                                                <table class="table table-striped">
-                                                                    <thead>
-                                                                    <tr>
-                                                                        <th scope="col">#</th>
-                                                                        <th scope="col">Tracing Date</th>
-                                                                        <th scope="col">Mode</th>
-                                                                        <th scope="col">Outcome</th>
-                                                                    </tr>
-                                                                    </thead>
-                                                                    <tbody>
-                                                                    <tr *ngFor="let trace of tracingArray; let index = index;">
-                                                                        <td>{{ index }}</td>
-                                                                        <td>{{ trace.tracingDate }}</td>
-                                                                        <td>{{ trace.mode.displayName }}</td>
-                                                                        <td>{{ trace.outcome.displayName }}</td>
-                                                                    </tr>
-                                                                    </tbody>
-                                                                </table>
-
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </fieldset>
+                            <div class="row">
+                                <div class="col-lg-4 col-md-4 col-sm-4">
+                                    <div class="button-row">
+                                        <a mat-raised-button color="accent" (click)="newTrace()">
+                                            <i class="fa fa-plus"></i>
+                                            <span>Add Trace</span>
+                                        </a>
                                     </div>
                                 </div>
-                            </form>
-                        </div>
+
+                                <br/>
+                                <br/>
+
+                                <table class="table table-striped">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">#</th>
+                                            <th scope="col">Tracing Date</th>
+                                            <th scope="col">Mode</th>
+                                            <th scope="col">Outcome</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr *ngFor="let trace of tracingMergeArray; let index = index;">
+                                            <td>{{ index }}</td>
+                                            <td>{{ trace.tracingDate | date: 'dd-MMM-yyyy' }}</td>
+                                            <td>{{ trace.mode }}</td>
+                                            <td>{{ trace.outcome }}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-12 col-sm-12 col-lg-12">
+                                    &nbsp;
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-lg-4 col-md-4 col-sm-4">
+                                    <button mat-raised-button color="primary" (click)="onSubmitForm()">
+                                        <strong>Save Changes</strong>
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
                     </div>
                 </div>
             </div>
         </div>
-      </div>
+    </div>
 </div>

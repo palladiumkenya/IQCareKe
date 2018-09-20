@@ -5,6 +5,8 @@
 <%@ Register Src="~/CCC/UC/ucIptOutcome.ascx" TagPrefix="uc" TagName="IptOutcome" %>
 <%@ Register Src="~/CCC/UC/ucPharmacyPrescription.ascx" TagPrefix="uc" TagName="ucPharmacyPrescription" %>
 <%@ Register Src="~/CCC/UC/ucPatientLabs.ascx" TagPrefix="uc" TagName="ucPatientLabs" %>
+<%@ Register Src="~/CCC/UC/ucGenderBasedViolenceAssessment.ascx" TagPrefix="uc" TagName="ucGenderBasedViolenceAssessment" %>
+
 
 
 <div class="col-md-12" style="padding-top: 20px">
@@ -1373,6 +1375,24 @@
 							</div>
 						</div>
 					</div>
+
+					<div class="col-md-12">
+						<div class="col-md-2">
+							<button type="button" id="btnGbvAsessment" name="btnGbvAsessment" class="btn btn-info btn-sm pull-left" data-toggle="modal" data-target="#gbvAssessmentModal">GBV Assessment</button>
+						</div>
+
+						<div class="col-md-5">
+							<div class="col-md-12 form-group">
+								<div class="col-md-6">
+									<label class="control-label pull-left">GBV Assessment done?</label>
+								</div>
+								<div class="col-md-6">
+                                    <label class="control-label pull-left" id="lblGbvAssessmentDone">Yes/No</label>
+								</div>
+							</div>
+						</div>
+					</div>
+
 					<div class="col-md-12">
 						<hr />
 					</div>
@@ -1868,7 +1888,20 @@
 							</div>
 						</div>
 
-						<div class="col-md-12">
+                        <div id="gbvAssessmentModal" class="modal fade" role="dialog" data-parsley-validate="true" data-show-errors="true" style="width: 100%">
+                            <div class="modal-dialog" style="width: 100%">
+                                <!-- Modal content-->
+                                <div class="modal-content" style="width: 100%">
+                                    <div class="modal-body" style="width: 100%">
+                                        <div class="row">
+                                            <uc:ucGenderBasedViolenceAssessment runat="server" ID="ucGenderBasedViolenceAssessment" />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-12">
 							<hr />
 						</div>
 
@@ -2124,10 +2157,16 @@
 	var DateOfEnrollment = "<%=DateOfEnrollment%>";
 	var isNoneChecked = false;
 
+    var isEditAppointment = "<%=IsEditAppointment%>";
+    var isEditAppointmentId="<%=IsEditAppointmentId%>";
 	var PatientId = "<%=PtnId%>";
 	var PatientMasterVisitId = "<%=PmVisitId%>";
 	var adverseEventName = "";
-	var adverseEventId = 0;
+    var adverseEventId = 0;
+    var NextAppointmentDate = "<%=NextAppointmentDate%>";
+	//alert(NextAppointmentDate);
+
+	//alert(DateOfEnrollment);
 
 	document.getElementById('txtPresentingComplaintsID').style.display = 'none';
 	document.getElementById('txtAllergyId').style.display = 'none';
@@ -2551,7 +2590,9 @@
 			allowInputToggle: true,
 			useCurrent: false,
 			minDate: minDate
-		});
+        });
+
+	    $("#<%=AppointmentDate.ClientID%>").val(moment(NextAppointmentDate).format('DD-MMM-YYYY'));
 
 		$("#AppointmentDate").change(function () {
 			var futureDate = moment().add(7, 'months').format('DD-MMM-YYYY');
@@ -2574,6 +2615,32 @@
 			}
 			appointmentCount();
 		});--%>
+
+	    /* limit future dates viralload baseline date*/
+	    $("#DateOfVisit").on('changed.fu.datepicker dateClicked.fu.datepicker',function(event, date) {
+            var dlDate = $('#DateOfVisit').datepicker('getDate');
+	        //alert(dlDate);
+
+            //var beforeEnrollment = moment(dlDate).isBefore(DateOfEnrollment);
+            //if (beforeEnrollment) {
+            //    toastr.error("VISIT Date CANNOT be before ENROLLMENT Date");
+            //    //        $("#TreatmeantInitiationBaselineViralloadDate").val('');
+            //           return false;
+            //}
+	        //var futureDate = moment(dlDate).isAfter(today);
+	        //    if (futureDate) {
+	        //        toastr.error("Future dates NOT allowed on Baseline ViralLoad Entries");
+	        //        $("#TreatmeantInitiationBaselineViralloadDate").val('');
+	        //        return false;
+	        //    }
+	        //    var dhid = $("#DHID").datepicker('getDate');
+	        //    if (moment(dlDate).isBefore(dhid)) {
+	        //        $("#TreatmeantInitiationBaselineViralloadDate").val('');
+	        //        toastr.error("Baseline Viral Load date CANNOT be ealier than HIV Diagnosis Date");
+	        //        return false;
+	        //    }
+	    });
+
 
 		$('#PersonAppointmentDateD').datetimepicker().on('dp.change',function(e) {
 			var futureDate = moment().add(7, 'months').format('DD-MMM-YYYY');
@@ -3884,13 +3951,25 @@
 				cache: false,
 				success: function (response) {
 					if (response.d != null) {
-						toastr.error("Appointment already exists");
-						return false;
-					}
-					addPatientAppointment();
+                        if (isEditAppointment == 'True') {
+
+                        } else {
+					        toastr.error("Appointment already exists");
+						    return false;
+                        }
+
+                    }
+                    if (isEditAppointment == 'True') {
+                        EditPatientAppointment();
+                    } else {
+                        addPatientAppointment();
+                    }
+					
 				},
 				error: function (msg) {
-					alert(msg.responseText);
+				    toastr.error(""+msg+"");
+				    return false;
+				   // alert(msg.responseText);
 				}
 			});
 	}
@@ -3920,6 +3999,33 @@
 				toastr.error(response.d, "Appointment not saved");
 			}
 		});
+    }
+
+	function EditPatientAppointment() {
+	    var serviceArea = $("#<%=ServiceArea.ClientID%>").val();
+	    var reason = $("#<%=Reason.ClientID%>").val();
+	    var description = $("#<%=description.ClientID%>").val();
+	    var status = $("#<%=status.ClientID%>").val();
+	    var differentiatedCareId = $("#<%=DifferentiatedCare.ClientID%>").val();
+	    /*if (status === '') { status = null }*/
+	    var appointmentDate = $("#<%=AppointmentDate.ClientID%>").val();
+	    var patientId = <%=PatientId%>;
+	    var userId = <%=UserId%>;
+	    var patientMasterVisitId = <%=PatientMasterVisitId%>;
+	    $.ajax({
+	        type: "POST",
+	        url: "../WebService/PatientService.asmx/UpdatePatientAppointment",
+	        data: "{'patientId': '" + patientId + "','patientMasterVisitId': '" + patientMasterVisitId + "','appointmentDate': '" + appointmentDate + "','description': '" + description + "','reasonId': '" + reason + "','serviceAreaId': '" + serviceArea + "','statusId': '" + status + "','differentiatedCareId': '" + differentiatedCareId + "','userId': '" + userId + "','appointmentId':"+isEditAppointmentId+"}",
+	        contentType: "application/json; charset=utf-8",
+	        dataType: "json",
+	        success: function (response) {
+	            toastr.success(response.d, "Appointment Edited successfully");
+	            resetAppointmentFields();
+	        },
+	        error: function (response) {
+	            toastr.error(response.d, "Appointment not Edited");
+	        }
+	    });
 	}
 
 	function appointmentCount() {
@@ -4404,7 +4510,38 @@
 				$("#hfExaminationReviewSystems").val(obj);
 			}
 		});
-	}
+    }
+
+    function GetGBVScreeningStatus() {
+        var patientId ="<%=PatientId%>";
+        var visitDate = moment("<%=visitdateval%>");
+        var screeningCategoryId = "<%=GbvScreeningCategoryId%>";
+
+        if (visitDate.isValid()) {
+            visitDate = visitDate.format('YYYY-MM-DD');
+
+            $.ajax({
+                type: "POST",
+                url: "../WebService/PatientService.asmx/getPatientScreening",
+                data: "{'patientId':'" + patientId + "', 'visitDate': '" + visitDate + "', 'screeningcategoryId': '" + screeningCategoryId + "'}",
+                dataType: "json",
+                contentType: "application/json; charset=utf-8",
+
+                success: function (response) {
+                    var itemList = JSON.parse(response.d);
+
+                    $("#lblGbvAssessmentDone").text(itemList.length > 0 ? 'Yes' : 'No');
+
+                }
+            });
+        } else {
+
+            $("#lblGbvAssessmentDone").text('No');
+
+        }
+    }
+
+    GetGBVScreeningStatus();
 
 </script>
 

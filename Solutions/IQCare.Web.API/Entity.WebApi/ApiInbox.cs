@@ -15,6 +15,7 @@ namespace Entity.WebApi
         public bool Processed { get; set; }
         public DateTime ? DateProcessed { get; set; }
         public string LogMessage { get; set; }
-
+        public string MessageType { get; set; }
+        public bool? IsSuccess { get; set; }
     }
 }

@@ -25,6 +25,7 @@ namespace IQCare.Web.CCC.UC
             string categorization = "Not done";
 
             int patientId = Convert.ToInt32(HttpContext.Current.Session["PatientPK"]);
+            int personId = Convert.ToInt32(HttpContext.Current.Session["personId"]);
             
             //if (Request.QueryString["patient"] != null)
             //{
@@ -37,7 +38,8 @@ namespace IQCare.Web.CCC.UC
             //IPatientLookupmanager patientLookupmanager = (IPatientLookupmanager)ObjectFactory.CreateInstance("BusinessProcess.CCC.BPatientLookupManager, BusinessProcess.CCC");
 
            // List<PatientLookup> patientLookups = patientLookupmanager.GetPatientDetailsLookup(patientId);
-            PatientLookup thisPatient = pMgr.GetPatientDetailSummary(patientId);
+
+            PatientLookup thisPatient = pMgr.GetPatientDetailSummaryBrief(patientId,personId);
             pMgr = null;
             if (null != thisPatient)
             {
@@ -82,7 +84,11 @@ namespace IQCare.Web.CCC.UC
                 //    Session["Gender"] = _lookupManager.GetLookupNameFromId(x.Sex).ToLower();
                 //}
                 //todo patientManagershould have the lookups resolved
-                lblPatientType.Text = LookupLogic.GetLookupNameById(thisPatient.PatientType).ToUpper();
+                var patType = LookupLogic.GetLookupNameById(thisPatient.PatientType);
+                if (patType != null)
+                {
+                    lblPatientType.Text = patType.ToUpper();
+                }
                 // _lookupManager.GetLookupNameFromId(thisPatient.PatientType).ToUpper();
 
                 //lblDOB.Text = thisPatient.DateOfBirth.ToString("dd-MMM-yyyy");
@@ -110,7 +116,7 @@ namespace IQCare.Web.CCC.UC
                 // lblCCCReg.Text = x.EnrollmentNumber;
                 lblCCCRegNo.Text = thisPatient.EnrollmentNumber;
                 lblEnrollmentDate.Text = "" + thisPatient.EnrollmentDate.ToString("dd-MMM-yyyy");
-                Session["DateOfEnrollment"] = thisPatient.EnrollmentDate.ToString("dd-MM-yyyy");
+                Session["DateOfEnrollment"] = thisPatient.EnrollmentDate.ToString("dd-MMM-yyyy");
 
                 //SET TB STATUS
                 if (thisPatient.TBStatus<1)

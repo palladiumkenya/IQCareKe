@@ -54,26 +54,28 @@ export class EnrollmentComponent implements OnInit {
         this.enrollment.PersonId = this.personId;
         this.enrollment.CreatedBy = this.createdBy;
         this.enrollment.DateOfEnrollment = this.enrollment.RegistrationDate;
+        this.enrollment.PosId = localStorage.getItem('appPosID');
 
-        this.registrationService.addPatient(this.personId, this.createdBy).subscribe((res) => {
-            console.log(res);
-            this.enrollment.PatientId = res['patientId'];
-            localStorage.setItem('patientId', res['patientId']);
-            localStorage.removeItem('isHtsEnrolled');
+        this.registrationService.addPatient(this.personId, this.createdBy,
+            this.enrollment.DateOfEnrollment, this.enrollment.PosId).subscribe((res) => {
+                this.enrollment.PatientId = res['patientId'];
+                this.enrollment.PosId = localStorage.getItem('appPosID');
+                localStorage.setItem('patientId', res['patientId']);
+                localStorage.removeItem('isHtsEnrolled');
 
-            this.enrollmentService.enrollClient(this.enrollment).subscribe(data => {
-                this.store.dispatch(new Consent.IsEnrolled(true));
-                this.appStateService.addAppState(AppEnum.ENROLLED, this.enrollment.PersonId,
-                    this.enrollment.PatientId, null, null).subscribe();
-            }, err => {
-                this.snotifyService.error('Error Registering to HTS ' + err,
-                    'HTS Service Registration', this.notificationService.getConfig());
-            }, () => {
-                this.snotifyService.success('Successfully Registered to HTS',
-                    'HTS Service Registration', this.notificationService.getConfig());
-                this.zone.run(() => { this.router.navigate(['/registration/home'], { relativeTo: this.route }); });
+                this.enrollmentService.enrollClient(this.enrollment).subscribe(data => {
+                    this.store.dispatch(new Consent.IsEnrolled(true));
+                    this.appStateService.addAppState(AppEnum.ENROLLED, this.enrollment.PersonId,
+                        this.enrollment.PatientId, null, null).subscribe();
+                }, err => {
+                    this.snotifyService.error('Error Registering to HTS ' + err,
+                        'HTS Service Registration', this.notificationService.getConfig());
+                }, () => {
+                    this.snotifyService.success('Successfully Registered to HTS',
+                        'HTS Service Registration', this.notificationService.getConfig());
+                    this.zone.run(() => { this.router.navigate(['/registration/home'], { relativeTo: this.route }); });
+                });
             });
-        });
 
         /*this.enrollmentService.enrollClient(this.enrollment).subscribe(data => {
             this.store.dispatch(new Consent.IsEnrolled(true));

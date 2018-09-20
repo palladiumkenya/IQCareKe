@@ -4,10 +4,10 @@
 <%@ Register TagPrefix="uc" TagName="FemalVitals" Src="~/CCC/UC/ucFemaleVitals.ascx" %>
 <%@ Register TagPrefix="uc" TagName="PatientTriageSummary" Src="~/CCC/UC/ucPatientTriageSummary.ascx" %>
 <%@ Register Src="~/CCC/UC/ucExtruder.ascx" TagPrefix="uc" TagName="ucExtruder" %>
+<%@ Register Src="~/CCC/UC/ucGenderBasedViolenceAssessment.ascx" TagPrefix="uc" TagName="GenderBasedViolenceAssessment" %>
 
 
 <asp:Content ID="Content1" ContentPlaceHolderID="IQCareContentPlaceHolder" runat="server">
-    
     <div class="col-md-12 col-xs-12 col-sm-12">
          <uc:PatientDetails ID="PatientSummary" runat="server" />
          <uc:PatientTriageSummary ID="ptnVitalSummary" runat="server" />
@@ -22,6 +22,10 @@
         <uc:FemalVitals ID="ptnFemaleVitals" runat="server" />
     </div>
 
+    <div class="col-md-12 col-xs-12" id="genderBasedViolenceAssessment">
+         <uc:genderbasedviolenceassessment runat="server" ID="ptnGenderBasedViolenceAssessment" />
+    </div>
+
     <uc:ucExtruder runat="server" ID="ucExtruder" />
 
     <script type="text/javascript">
@@ -29,7 +33,8 @@
 
         var gender = "<%=Gender%>";
         var patientAge = "<%=PatientAge%>";
-  
+
+        
 
         if (gender === 'Male') {
             $("#divBtnVitals").hide("fast");
@@ -41,22 +46,29 @@
 
         $("#femaleVitals").hide("fast");
         $("#PatientVitals").hide("fast");
+        $("#genderBasedViolenceAssessment").hide("fast");
 
         
          $("#btnFemalVitals").click(function () {
 
              $("#PatientVitals").hide("fast", function () { $("#femaleVitals").show("fast"); $("#FemaleVisitDate").focus(); /*$(window).scrollTop($('#femaleVitals').offset().top)*/ });
              $("#panelVitals").hide("fast");
-             //;
+             $("#genderBasedViolenceAssessment").hide("fast");
          });
 
          $("#btnLoadTriage").click(function () {
              $("#femaleVitals").hide("fast", function () { $("#PatientVitals").show("fast"); $("#VisitDatedatepicker").focus(); /*$(window).scrollTop($('#PatientVitals').offset().top)*/ });
              $("#panelVitals").hide("fast");
+             $("#genderBasedViolenceAssessment").hide("fast");
              //$("#PatientVitals").attr("tabindex",-1).focus();
          });
 
+        $("#btnGBVAssessment").click(function () {
+            $("#PatientVitals").hide("fast", function () { $("#genderBasedViolenceAssessment").show("fast"); /*$("#GbvVisitDate").focus();*/ });
+            $("#femaleVitals").hide("fast");
+            $("#panelVitals").hide("fast");
 
+        });
         
     });
     </script>

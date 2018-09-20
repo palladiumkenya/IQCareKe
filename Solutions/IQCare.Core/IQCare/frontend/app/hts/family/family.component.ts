@@ -1,7 +1,7 @@
 import {Component, NgZone, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {DataSource} from '@angular/cdk/collections';
-import {Observable} from 'rxjs/Observable';
+import {Observable} from 'rxjs';
 import {FamilyService} from '../_services/family.service';
 
 @Component({
