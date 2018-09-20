@@ -55,9 +55,9 @@
             window.open('frmPharmacy_DrugHistory.aspx', '_blank', 'height=500,width=1100,scrollbars=yes');
         }
 
-        function openAddAllergyPage() {
+        function openAllergyPage() {
             var PatientID = '<%= Session["PatientID"] %>';
-            window.open('../ClinicalForms/frmAllergy.aspx?name=Add&PatientId=' + PatientID + '&opento=popup', '_blank', 'height=500,width=1100,scrollbars=yes');
+            window.open('frmAllergy.aspx?name=Add&PatientId=' + PatientID + '&opento=popup', '_blank', 'height=500,width=1100,scrollbars=yes');
         }
 
         function ClearTextBox(txtDrug) {
@@ -75,7 +75,15 @@
             if (name == "0" && visible != 'hidden') {
 
                 alert("Please Select Regimen line");
+                document.getElementById("<%= ddlregimenLine.ClientID%>").style.visibility = "visible";
+                document.getElementById("<%= lblregimenLine.ClientID%>").style.visibility = "visible";
+               document.getElementById("<%=hdnregimenLine.ClientID %>").value = "visible";
+                //Regimen Code
+                document.getElementById("<%= ddlRegimenCode.ClientID%>").style.visibility = "visible";
+                document.getElementById("<%= lblregimenCode.ClientID%>").style.visibility = "visible";
+                document.getElementById("<%=hdnregimenCode.ClientID %>").value = "visible";
                 return false;
+                
             }
             return true;
         }
@@ -254,8 +262,8 @@
                                 <label class="fa fa-history" style="margin-left: -2%; vertical-align: sub; color: #fff;
                                     margin-right: 2%;">
                                 </label>
-                                <asp:Button ID="btnAddAllergy" runat="server" CssClass="btn btn-primary" Text="Add Allergy"
-                                    OnClientClick="openAddAllergyPage()" Height="30px" Width="9%" Style="text-align: left;" />
+                                <asp:Button ID="btnAddAllergy" runat="server" CssClass="btn btn-primary" Text="Allergy History"
+                                    OnClientClick="openAllergyPage()" Height="30px" Width="9%" Style="text-align: left;" />
                                 <label class="glyphicon glyphicon-plus" style="margin-left: -2%; vertical-align: sub;
                                     color: #fff; margin-right: 2%;">
                                 </label>
@@ -970,12 +978,13 @@
                                         <div id="div1" class="GridView whitebg">
                                             <asp:GridView ID="gvPendingorders" runat="server" AutoGenerateColumns="False" AllowSorting="true"
                                                 Width="100%" BorderColor="white" PageIndex="1" BorderWidth="1" GridLines="None"
-                                                CssClass="table table-bordered table-hover" CellPadding="0" CellSpacing="0" DataKeyNames="ptn_pharmacy_pk"
+                                                CssClass="table table-bordered table-hover" CellPadding="0" CellSpacing="0" DataKeyNames="ptn_pharmacy_pk,visitID"
                                                 OnSelectedIndexChanged="gvPendingorders_SelectedIndexChanged" OnRowDataBound="gvPendingorders_RowDataBound">
                                                 <HeaderStyle HorizontalAlign="Left"></HeaderStyle>
                                                 <Columns>
                                                     <asp:BoundField HeaderText="Transaction Date" DataField="TransactionDate" />
                                                     <asp:BoundField HeaderText="Status" DataField="Status" />
+                                                  
                                                 </Columns>
                                             </asp:GridView>
                                         </div>

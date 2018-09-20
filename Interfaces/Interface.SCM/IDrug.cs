@@ -49,6 +49,9 @@ namespace Interface.SCM
         DataSet GetPharmacyExistingRecordDetails(int orderId);
         void SavePharmacyReturn(int patientId, int locationId, int storeId, DateTime returnDate, int userId, int pharmacyId, DataTable theDT);
         DataSet GetPharmacyDetailsByDespenced(int orderId);
+
+        DataSet GetAllergyData(int PatientID);
+        DataSet GetPharmacyDrugHistory_Web(int PatientID);
         DataSet GetDrugTypeID(int itemId);
         DataSet SaveArtData(int patientId, DateTime dispensedDate);
         DataSet CheckDispencedDate(int patientId, int locationId, DateTime dispDate, int orderId);

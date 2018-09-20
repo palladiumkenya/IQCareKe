@@ -289,6 +289,7 @@ namespace IQCare.Web.PMSCM
         private void LoadPendingPharmacyOrders()
         {
             IDrug thePharmacyManager = (IDrug)ObjectFactory.CreateInstance("BusinessProcess.SCM.BDrug, BusinessProcess.SCM");
+           
             DataTable theDT = thePharmacyManager.GetPharmacyExistingRecord(Convert.ToInt32(Session["PatientID"]), Convert.ToInt32(Session["StoreID"] == null ? "0" : Session["StoreID"].ToString()));
             gvPendingorders.DataSource = theDT;
             gvPendingorders.DataBind();
@@ -296,8 +297,12 @@ namespace IQCare.Web.PMSCM
 
         protected void Page_PreRender(object sender, EventArgs e)
         {
-            //  this.SetStyle();
-        }
+
+           string showregimen = "true";
+       
+    ScriptManager.RegisterStartupScript(this, this.GetType(), "regimendd", "showRegimenDDown('" + showregimen + "');", true);
+    //  this.SetStyle();
+    }
 
         private void PopulateGrid(DataRow SelectedDrug)
         {
@@ -973,6 +978,11 @@ namespace IQCare.Web.PMSCM
                 theBuilder.DataElements["MessageText"] = "Please Select Regimen line";
                 IQCareMsgBox.Show("#C1", theBuilder, this);
                 Label lblError = new Label();
+
+
+               string showregimen = "true";
+            
+          ScriptManager.RegisterStartupScript(this, this.GetType(), "regimendd", "showRegimenDDown('" + showregimen + "');", true);
                 //lblError.Text = (Master.FindControl("lblError") as Label).Text;
 
                 return false;
@@ -983,6 +993,11 @@ namespace IQCare.Web.PMSCM
                 theBuilder.DataElements["MessageText"] = "Please Select Regimen Code";
                 IQCareMsgBox.Show("#C1", theBuilder, this);
                 Label lblError = new Label();
+
+
+                string showregimen = "true";
+
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "regimendd", "showRegimenDDown('" + showregimen + "');", true);
                 //lblError.Text = (Master.FindControl("lblError") as Label).Text;
 
                 return false;
@@ -1246,13 +1261,14 @@ namespace IQCare.Web.PMSCM
 
                 if (txtQtyDispensed.Text.Length > 0)
                 {
-                    if (txtQtyDispensed.Text != null && Convert.ToDecimal(txtQtyDispensed.Text) > 0 && Convert.ToDecimal(txtQtyDispensed.Text) > Convert.ToDecimal(hBatchQty.Value))
+                    if (txtQtyDispensed.Text != null && Convert.ToDecimal(txtQtyDispensed.Text = string.IsNullOrEmpty(txtQtyDispensed.Text) ? "0" : txtQtyDispensed.Text) > 0 && Convert.ToDecimal(txtQtyDispensed.Text = string.IsNullOrEmpty(txtQtyDispensed.Text) ? "0" : txtQtyDispensed.Text) > Convert.ToDecimal(hBatchQty.Value))
                     {
                         Messege1 += Messege1 + lblDrugName.Text + "</br>";
                         error1 = true;
                     }
                 }
-                else if (txtQtyPrescribed.Text != null && Convert.ToDecimal(txtQtyPrescribed.Text) > 0 && Convert.ToDecimal(txtQtyPrescribed.Text) > Convert.ToDecimal(hBatchQty.Value))
+               
+                else if (txtQtyPrescribed.Text != null && Convert.ToDecimal(txtQtyPrescribed.Text = string.IsNullOrEmpty(txtQtyPrescribed.Text) ? "0" : txtQtyPrescribed.Text) > 0 && Convert.ToDecimal(txtQtyPrescribed.Text = string.IsNullOrEmpty(txtQtyPrescribed.Text) ? "0" : txtQtyPrescribed.Text) > Convert.ToDecimal(hBatchQty.Value))
                 {
                     Messege1 += Messege1 + lblDrugName.Text + "</br>";
                     error1 = true;
@@ -1646,6 +1662,7 @@ namespace IQCare.Web.PMSCM
 
         protected void gvPendingorders_SelectedIndexChanged(object sender, EventArgs e)
         {
+          
             Session["PatientVisitID"] = Convert.ToInt32(gvPendingorders.DataKeys[gvPendingorders.SelectedIndex].Values["visitID"]);
             int VisitID = Convert.ToInt32(Session["PatientVisitID"]);
             LoadPendingPharmacyOrderDetails(VisitID);
@@ -1664,7 +1681,7 @@ namespace IQCare.Web.PMSCM
             if (visitID > 0)
             {
                 btnPriorPrescription.Visible = false;
-                ddlPrescribedBy.Enabled = (ddlPrescribedBy.SelectedValue == "Select") ? true : false;
+               ddlPrescribedBy.Enabled = (ddlPrescribedBy.SelectedValue == "Select") ? true : false;
                 //txtprescriptionDate.Enabled = (ddlPrescribedBy.Enabled == true) ? true : false;
                 txtprescriptionDate.Disabled = (ddlPrescribedBy.Enabled == false) ? false : true;
                 //if (!ddlPrescribedBy.Enabled) { dtpSpan.Style.Add("display", "none"); }
@@ -1724,7 +1741,13 @@ namespace IQCare.Web.PMSCM
                     ddlTreatmentProg.SelectedValue = theDS.Tables[0].Rows[0]["TreatmentProgram"].ToString();
                     ddlregimenLine.SelectedValue = theDS.Tables[0].Rows[0]["RegimenLine"].ToString();
 
-                    ddlPtnClassification.SelectedValue = theDS.Tables[0].Rows[0]["PatientClassification"].ToString();
+                    if (theDS.Tables[0].Rows[0]["PatientClassification"] != null)
+                    {
+                        if (!(String.IsNullOrEmpty(theDS.Tables[0].Rows[0]["PatientClassification"].ToString())))
+                        {
+                            ddlPtnClassification.SelectedValue = theDS.Tables[0].Rows[0]["PatientClassification"].ToString();
+                        }
+                    }
                     hidDifferenciatedCare.Value = Convert.ToInt32(theDS.Tables[0].Rows[0]["IsEnrolDifferenciatedCare"]).ToString();
 
                     // Add by Gaurav, Dated 19 May 2016, Purpose: Get treatment plan from pharmacy table
@@ -1811,6 +1834,7 @@ namespace IQCare.Web.PMSCM
                         {
                             showregimen = "true";
                         }
+                       
                     }
                     ScriptManager.RegisterStartupScript(this, this.GetType(), "regimendd", "showRegimenDDown('" + showregimen + "');", true);
                 }
