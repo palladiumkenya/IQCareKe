@@ -12,6 +12,7 @@ using IQCare.HTS.BusinessProcess.Services;
 using IQCare.HTS.Infrastructure;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
+using Newtonsoft.Json;
 using Serilog;
 
 namespace IQCare.HTS.BusinessProcess.CommandHandlers
@@ -32,34 +33,35 @@ namespace IQCare.HTS.BusinessProcess.CommandHandlers
             using (_htsUnitOfWork)
             using (_unitOfWork)
             {
-                try
+                string afyaMobileId = string.Empty;
+                string indexClientAfyaMobileId = string.Empty;
+
+                RegisterPersonService registerPersonService = new RegisterPersonService(_unitOfWork);
+                EncounterTestingService encounterTestingService = new EncounterTestingService(_unitOfWork, _htsUnitOfWork);
+
+                var facilityId = request.MESSAGE_HEADER.SENDING_FACILITY;
+                for (int i = 0; i < request.PARTNERS.Count; i++)
                 {
-                    string afyaMobileId = string.Empty;
-                    string indexClientAfyaMobileId = string.Empty;
 
-                    RegisterPersonService registerPersonService = new RegisterPersonService(_unitOfWork);
-                    EncounterTestingService encounterTestingService = new EncounterTestingService(_unitOfWork, _htsUnitOfWork);
-
-                    var facilityId = request.MESSAGE_HEADER.SENDING_FACILITY;
-                    for (int i = 0; i < request.PARTNERS.Count; i++)
+                    for (int j = 0; j < request.PARTNERS[i].PATIENT_IDENTIFICATION.INTERNAL_PATIENT_ID.Count; j++)
                     {
-
-                        for (int j = 0; j < request.PARTNERS[i].PATIENT_IDENTIFICATION.INTERNAL_PATIENT_ID.Count; j++)
+                        if (request.PARTNERS[i].PATIENT_IDENTIFICATION.INTERNAL_PATIENT_ID[j].IDENTIFIER_TYPE ==
+                            "AFYA_MOBILE_ID")
                         {
-                            if (request.PARTNERS[i].PATIENT_IDENTIFICATION.INTERNAL_PATIENT_ID[j].IDENTIFIER_TYPE ==
-                                "AFYA_MOBILE_ID")
-                            {
-                                afyaMobileId = request.PARTNERS[i].PATIENT_IDENTIFICATION.INTERNAL_PATIENT_ID[j].ID;
-                            }
-
-                            if (request.PARTNERS[i].PATIENT_IDENTIFICATION.INTERNAL_PATIENT_ID[j].IDENTIFIER_TYPE ==
-                                "INDEX_CLIENT_AFYAMOBILE_ID")
-                            {
-                                indexClientAfyaMobileId =
-                                    request.PARTNERS[i].PATIENT_IDENTIFICATION.INTERNAL_PATIENT_ID[j].ID;
-                            }
+                            afyaMobileId = request.PARTNERS[i].PATIENT_IDENTIFICATION.INTERNAL_PATIENT_ID[j].ID;
                         }
 
+                        if (request.PARTNERS[i].PATIENT_IDENTIFICATION.INTERNAL_PATIENT_ID[j].IDENTIFIER_TYPE ==
+                            "INDEX_CLIENT_AFYAMOBILE_ID")
+                        {
+                            indexClientAfyaMobileId =
+                                request.PARTNERS[i].PATIENT_IDENTIFICATION.INTERNAL_PATIENT_ID[j].ID;
+                        }
+                    }
+
+                    var afyaMobileMessage = await registerPersonService.AddAfyaMobileInbox(DateTime.Now, indexClientAfyaMobileId, JsonConvert.SerializeObject(request), false);
+                    try
+                    {
                         string firstName = request.PARTNERS[i].PATIENT_IDENTIFICATION.PATIENT_NAME.FIRST_NAME;
                         string middleName = request.PARTNERS[i].PATIENT_IDENTIFICATION.PATIENT_NAME.MIDDLE_NAME;
                         string lastName = request.PARTNERS[i].PATIENT_IDENTIFICATION.PATIENT_NAME.LAST_NAME;
@@ -81,10 +83,10 @@ namespace IQCare.HTS.BusinessProcess.CommandHandlers
                             var partnetPersonIdentifiers = await registerPersonService.getPersonIdentifiers(afyaMobileId, 10);
                             if (partnetPersonIdentifiers.Count > 0)
                             {
-                                await registerPersonService.UpdatePerson(partnetPersonIdentifiers[0].PersonId,firstName, middleName, lastName, sex, dateOfBirth);
+                                await registerPersonService.UpdatePerson(partnetPersonIdentifiers[0].PersonId, firstName, middleName, lastName, sex, dateOfBirth);
                                 //update maritalstatus id
                                 await registerPersonService.UpdateMaritalStatus(partnetPersonIdentifiers[0].PersonId, maritalStatusId);
-                                if(!string.IsNullOrWhiteSpace(mobileNumber))
+                                if (!string.IsNullOrWhiteSpace(mobileNumber))
                                     await registerPersonService.UpdatePersonContact(partnetPersonIdentifiers[0].PersonId, null, mobileNumber);
                                 if (!string.IsNullOrWhiteSpace(landmark))
                                     await registerPersonService.UpdatePersonLocation(partnetPersonIdentifiers[0].PersonId, landmark);
@@ -102,8 +104,8 @@ namespace IQCare.HTS.BusinessProcess.CommandHandlers
                                 }
 
                                 /***
-                                 *Encounter
-                                 */
+                                    *Encounter
+                                    */
 
                                 if (request.PARTNERS[i].ENCOUNTER != null)
                                 {
@@ -250,6 +252,9 @@ namespace IQCare.HTS.BusinessProcess.CommandHandlers
                                             tracingDate, mode, outcome, providerId, null, consent, tracingBookingDate, null);
                                     }
                                 }
+
+                                // update message as processed
+                                await registerPersonService.UpdateAfyaMobileInbox(afyaMobileMessage.Id, indexClientAfyaMobileId, true, DateTime.Now, "success");
                             }
                             else
                             {
@@ -272,14 +277,14 @@ namespace IQCare.HTS.BusinessProcess.CommandHandlers
                                         await registerPersonService.addPersonLocation(person.Id, 0, 0, 0, " ", landmark,
                                             providerId);
                                 }
-                                
+
                                 //Add PersonRelationship
                                 var personRelationship = await registerPersonService.addPersonRelationship(person.Id, indexClient.Id, relationshipType, providerId);
 
 
                                 /***
-                                 *Encounter
-                                 */
+                                    *Encounter
+                                    */
 
                                 if (request.PARTNERS[i].ENCOUNTER != null)
                                 {
@@ -428,15 +433,23 @@ namespace IQCare.HTS.BusinessProcess.CommandHandlers
                                 }
                             }
                         }
+
+                        // update message as processed
+                        await registerPersonService.UpdateAfyaMobileInbox(afyaMobileMessage.Id, indexClientAfyaMobileId, true, DateTime.Now, "success");
+                        return Result<string>.Valid(afyaMobileId);
                     }
-                    return Result<string>.Valid(afyaMobileId);
+                    catch (Exception e)
+                    {
+                        Log.Error(e.Message);
+                        Log.Error(e.InnerException.ToString());
+                        // update message as processed
+                        await registerPersonService.UpdateAfyaMobileInbox(afyaMobileMessage.Id, indexClientAfyaMobileId, false, DateTime.Now, e.Message + " " + e.InnerException.ToString());
+                        return Result<string>.Invalid(e.Message);
+                    }
+                        
                 }
-                catch (Exception e)
-                {
-                    Log.Error(e.Message);
-                    Log.Error(e.InnerException.ToString());
-                    return Result<string>.Invalid(e.Message);
-                }
+
+                return Result<string>.Valid(afyaMobileId);
             }
         }
     }
