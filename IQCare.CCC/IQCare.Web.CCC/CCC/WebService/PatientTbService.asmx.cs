@@ -2,6 +2,7 @@
 using IQCare.CCC.UILogic.Tb;
 using System;
 using System.Linq;
+using System.Web.Script.Serialization;
 using System.Web.Services;
 
 namespace IQCare.Web.CCC.WebService
@@ -219,6 +220,36 @@ namespace IQCare.Web.CCC.WebService
                 {
                     Msg = "Patient IPT Outcome saved successfully!";
                 }
+            }
+            catch (Exception e)
+            {
+                Msg = e.Message;
+            }
+            return Msg;
+        }
+
+        [WebMethod(EnableSession = true)]
+        public string GetPatientIptOutcome(int patientId)
+        {
+            try
+            {
+                var iptOutcome = new PatientIptOutcomeManager();
+                var x = iptOutcome.GetByPatientId(patientId).FirstOrDefault();
+                if (x != null)
+                {
+                    PatientIptOutcome patientIptOutcome = new PatientIptOutcome()
+                    {
+                        PatientId = x.PatientId,
+                        PatientMasterVisitId = x.PatientMasterVisitId,
+                        IptEvent = x.IptEvent,
+                        ReasonForDiscontinuation = x.ReasonForDiscontinuation,
+                        Id = x.Id
+                    };
+                    JavaScriptSerializer parser = new JavaScriptSerializer();
+
+                    Msg = parser.Serialize(patientIptOutcome);
+                }
+
             }
             catch (Exception e)
             {

@@ -3083,7 +3083,14 @@
 					}
 
 					/* add constraints based on age*/
-					if ($('#datastep1').parsley().validate()) {
+                    if ($('#datastep1').parsley().validate()) {
+
+                        if ($('#EverBeenOnIpt').val() == 'True' && $("#onIpt").val() == 'False' && $('#iptEvent').val() == '0') {
+                            toastr.error('Please provide IPT Outcome');
+                            evt.preventDefault();
+                            return false;
+                        }
+
                         if (($("#tbInfected").val() === 'True') && ($("#onIpt").val() === 'False') && ($("#EverBeenOnIpt").val() === 'True'))
 	                    {
 
@@ -4108,8 +4115,15 @@
 		} else {
 			$("#onIpt").prop("disabled", true);
 			$("#btnAddIptWorkUp").prop("disabled", true);
-			$("#btnAddIptOutcome").prop("disabled", true);
-			$("#IptForm").hide();
+            $("#btnAddIptOutcome").prop("disabled", true);
+
+            // if client has ever been on IPT and is currently not on IPT and IPT Outcome has never been entered, then prompt for outcome
+            if ($("#onIpt").val() == 'False') {
+                $("#IptForm").show();
+                $("#btnAddIptOutcome").prop("disabled", false);
+                $("#btnAddIpt").prop("disabled", true);
+            }
+
 		}
 
 	}
