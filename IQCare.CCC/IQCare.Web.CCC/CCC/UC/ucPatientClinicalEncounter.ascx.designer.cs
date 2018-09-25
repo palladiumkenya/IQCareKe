@@ -526,6 +526,15 @@ namespace IQCare.Web.CCC.UC {
         protected global::System.Web.UI.HtmlControls.HtmlInputText txtSexualHistoryVisitDate;
         
         /// <summary>
+        /// ddlSexualOrientation control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ddlSexualOrientation;
+        
+        /// <summary>
         /// txtPartners control.
         /// </summary>
         /// <remarks>
@@ -551,15 +560,6 @@ namespace IQCare.Web.CCC.UC {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList ddlPartnerGender;
-        
-        /// <summary>
-        /// ddlSexualOrientation control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlSexualOrientation;
         
         /// <summary>
         /// ddlVaccine control.

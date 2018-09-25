@@ -176,7 +176,7 @@
             var newdate = new Date();
             var today = moment(newdate).add(2, 'hours');
             var patType = '<%=patType%>';
-            var appLocation = '<%=AppLocation%>';
+            var appLocation = "<%=AppLocation%>";
             //console.log(today);
 
             $('#PersonDOBdatepicker').datetimepicker({
