@@ -1378,9 +1378,31 @@
                                         </label>
                                     </div>
                                    </div>
-           
-                                    
-                                     <div class="col-md-4 sexhistory" >
+                                     <div class="col-md-4 sexhistory">
+											<div class="col-md-12">
+												<label class="control-label pull-left">Sexual Orientation</label>
+											</div>
+											<div class="col-md-12">
+													<asp:DropDownList ID="ddlSexualOrientation" runat="server" CssClass="form-control input-sm" ClientIDMode="Static"></asp:DropDownList>
+											</div>
+									 </div>
+                                       <div class=" col-md-12 sexhistory" >
+                                         <div class="col-md-12">
+                                          <label class="control-label pull-left">High Risk Behaviour</label>
+									     </div>
+										<div class="col-md-12">
+                                               
+                                                <select class="form-control select2" multiple="multiple"  data-placeholder="Select" id="ddlHighRiskBehaviour" style="width: 100%;">
+                                                </select>
+
+                                        
+
+                                              
+										</div>
+                                     </div>
+
+                                      
+                                  <div class="col-md-4 sexhistory" >
 											<div class="col-md-12">
 												<label class="control-label pull-left">
                                                   # Partners in the past 6 Months </label>
@@ -1406,32 +1428,15 @@
 											<div class="col-md-12">
 												<asp:DropDownList ID="ddlPartnerGender" runat="server" CssClass="form-control input-sm" ClientIDMode="Static"></asp:DropDownList>
 											</div>
-									</div>
-
-                                     <div class="col-md-4 sexhistory">
-											<div class="col-md-12">
-												<label class="control-label pull-left">Sexual Orientation</label>
-											</div>
-											<div class="col-md-12">
-												<asp:DropDownList ID="ddlSexualOrientation" runat="server" CssClass="form-control input-sm" ClientIDMode="Static"></asp:DropDownList>
-											</div>
-									 </div>
-                                     <div class=" col-md-12 sexhistory" >
-                                         <div class="col-md-12">
-                                          <label class="control-label pull-left">High Risk Behaviour</label>
-									     </div>
-										<div class="col-md-12">
-                                                <div class="col-md-9">
-                                                <select class="form-control select2" multiple="multiple"  data-placeholder="Select" id="ddlHighRiskBehaviour" style="width: 100%;">
-                                                </select>
-
-                                                </div>
-
-                                                 <div class="col-md-3">
+                                   </div>
+                                  <div class="col-md-12 sexhistory">
+                                      
+                                      <br />
+                                  </div>
+								 
+                                       <div class="col-md-12 sexhistory center-block">
 												<button type="button" class="btn btn-info btn-lg fa fa-plus-circle" id="btnAddSexualHist" onclick="addSexualHistory()">Add</button>
-											</div>
 										</div>
-                                     </div>
                                  
                                      
                                      <div class="mt-2 col-md-12 form-group sexhistory" style="margin-top:20px;">
@@ -1828,12 +1833,17 @@
                                         </div>
                                          </div>
                                         </div>
+
+                                          <div class="col-md-12">
+                                            <br />
+                                        </div>
                                       
 										<div class="col-md-4">
 											<label class="control-label  pull-left text-primary">*WHO Stage</label>
 										</div>
+                                      
 										<div class="col-md-4">
-											<asp:DropDownList ID="WHOStage" CssClass="form-control input-sm" runat="server" ClientIDMode="Static" data-parsley-required="true" data-parsley-min="1"></asp:DropDownList>
+											<asp:DropDownList ID="WHOStage" CssClass="form-control input-sm" runat="server" ClientIDMode="Static" data-parsley-required="true" data-parsley-min="1"  Enabled="false"></asp:DropDownList>
 										</div>
 									</div>
 								</div>

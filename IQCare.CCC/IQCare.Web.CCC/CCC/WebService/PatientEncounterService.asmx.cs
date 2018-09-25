@@ -449,37 +449,44 @@ namespace IQCare.Web.CCC.WebService
             int userId = Convert.ToInt32(Session["AppUserId"]);
             int patientMasterVisitId = Convert.ToInt32(Session["ExistingRecordPatientMasterVisitID"].ToString() == "0" ? Session["PatientMasterVisitID"].ToString() : Session["ExistingRecordPatientMasterVisitID"].ToString());
             int partnerid;
-            
-            if (SexActive.ToLower() == "yes")
+
+
+            if (SexActive != "undefined")
             {
-                ItemDisplayName = "yes";
-            }
-            else if(SexActive.ToLower() == "no")
-            {
-                ItemDisplayName = "no";
+                if (SexActive.ToLower() == "yes")
+                {
+                    ItemDisplayName = "yes";
+                }
+                else if (SexActive.ToLower() == "no")
+                {
+                    ItemDisplayName = "no";
+                }
             }
 
             
                 List<LookupItemView> lv=LookupLogic.GetLookItemByGroup("SexualScreening");
                 LookupItemView itemview = new LookupItemView();
-                 itemview= lv.Find(x => x.DisplayName.ToLower() == ItemDisplayName.ToLower());
+            if (!String.IsNullOrEmpty(ItemDisplayName))
+            {
+                itemview = lv.Find(x => x.DisplayName.ToLower() == ItemDisplayName.ToLower());
                 var MasterId = itemview.MasterId;
                 var ItemId = itemview.ItemId;
+
                 PatientScreeningManager pmscreen = new PatientScreeningManager();
-               PatientScreening psc= pmscreen.GetCurrentPatientScreening(patientId, patientMasterVisitId);
+                PatientScreening psc = pmscreen.GetCurrentPatientScreening(patientId, patientMasterVisitId);
                 if (psc != null)
                 {
                     psc.ScreeningValueId = ItemId;
-                psc.ScreeningDate = DateTime.Now;
+                    psc.ScreeningDate = DateTime.Now;
                     psc.VisitDate = DateTime.Now;
-                psc.ScreeningCategoryId = MasterId;
-                psc.ScreeningTypeId = MasterId;
-                    
-                   var  updatescreen= pmscreen.UpdateCurrentPatientScreening(psc);
-               if(updatescreen > 0)
-                {
-                    Msg += "The sexually active is updated successfully";
-                }
+                    psc.ScreeningCategoryId = MasterId;
+                    psc.ScreeningTypeId = MasterId;
+
+                    var updatescreen = pmscreen.UpdateCurrentPatientScreening(psc);
+                    if (updatescreen > 0)
+                    {
+                        Msg += "The sexually active is updated successfully";
+                    }
                 }
                 else
                 {
@@ -491,19 +498,19 @@ namespace IQCare.Web.CCC.WebService
                     pscadd.ScreeningTypeId = MasterId;
                     pscadd.ScreeningValueId = ItemId;
                     pscadd.ScreeningDone = true;
-                pscadd.ScreeningDate = DateTime.Now;
-                pscadd.VisitDate = DateTime.Now;
-                    int  result=  pmscreen.AddPatientScreening(pscadd.PatientId, pscadd.PatientMasterVisitId,
+                    pscadd.ScreeningDate = DateTime.Now;
+                    pscadd.VisitDate = DateTime.Now;
+                    int result = pmscreen.AddPatientScreening(pscadd.PatientId, pscadd.PatientMasterVisitId,
                     Convert.ToDateTime(pscadd.VisitDate), Convert.ToInt32(pscadd.ScreeningTypeId)
-                    , pscadd.ScreeningDone,Convert.ToDateTime(pscadd.ScreeningDate), 
+                    , pscadd.ScreeningDone, Convert.ToDateTime(pscadd.ScreeningDate),
                     Convert.ToInt32(pscadd.ScreeningCategoryId)
                     , pscadd.ScreeningValueId, pscadd.Comment, userId);
-                  if(result> 0)
-                {
-                    Msg += "The sexually active is added successfully";
+                    if (result > 0)
+                    {
+                        Msg += "The sexually active is added successfully";
+                    }
                 }
-                }
-
+            }
 
 
            

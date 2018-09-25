@@ -23,11 +23,12 @@ namespace IQCare.CCC.UILogic.Baseline
             (IPatientLinkageManager) ObjectFactory.CreateInstance("BusinessProcess.CCC.Baseline.BPatientLinkageManager, BusinessProcess.CCC");
 
         PersonLookUpManager personLookUp = new PersonLookUpManager();
+        int outcome;
 
         public int AddPatientFamilyTestingsExisting(PatientFamilyTesting p, int userId,int RelationshipPersonId)
         {
             int personId = RelationshipPersonId;
-            int hivTestingId;
+          
           PersonRelationship personrrel=  _personRelationshipManager.GetSpecificRelationship(personId, p.PatientId);
             if (personrrel != null)
             {
@@ -53,8 +54,13 @@ namespace IQCare.CCC.UILogic.Baseline
                     RelationshipTypeId = p.RelationshipId,
                     CreatedBy = userId
                 };
-                _personRelationshipManager.AddPersonRelationship(relationship);
+                outcome= _personRelationshipManager.AddPersonRelationship(relationship);
             }
+            string value = p.CccReferaalNumber.ToString();
+
+            if (String.IsNullOrEmpty(value) == true)
+            {
+
                 DateTime? testingDate = p.HivTestingResultsDate;
                 if (testingDate == DateTime.MinValue)
                     testingDate = null;
@@ -69,7 +75,7 @@ namespace IQCare.CCC.UILogic.Baseline
                     ReferredToCare = p.CccReferal,
                     CreatedBy = userId
                 };
-               hivTestingId = _hivTestingManager.AddPatientHivTesting(familyTesting);
+                outcome= _hivTestingManager.AddPatientHivTesting(familyTesting);
 
                 if (p.CccReferal == true)
                 {
@@ -85,10 +91,10 @@ namespace IQCare.CCC.UILogic.Baseline
                     linkageManager.AddPatientLinkage(patientLinkage);
                 }
 
-
+            }
               
          
-            return hivTestingId;
+            return outcome;
 
 
         }

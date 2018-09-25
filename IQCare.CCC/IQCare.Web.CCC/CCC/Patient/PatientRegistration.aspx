@@ -36,10 +36,10 @@
 							  <span class="chevron"></span>
 						  </li>
 
-<%--						  <li data-step="4" data-target="#step4" data-name="socialstatus">
+					  <li data-step="4" data-target="#step4" data-name="socialstatus">
 							  <span class="badge">4</span>Patient Population
 							  <span class="chevron"></span>
-						  </li>--%>
+						  </li>
 					 </ul>
 				 </div><%-- .steps-container--%>
 					  
@@ -527,7 +527,7 @@
 
 					  </div><%-- .step-pane-3--%>
 
-				 <!-- <div class="step-pane sample-pane" id="datastep4" data-parsley-validate="true" data-step="4">
+				 <div class="step-pane sample-pane" id="datastep4" data-parsley-validate="true" data-step="4">
 						  
 						   <div class="col-md-12">
 							   <small class="pull-left text-primary"> 4. Patient population categorization</small>
@@ -562,7 +562,7 @@
 						   </div>
 										  
 					  </div><%-- .step-content-4--%>
-                     -->
+               
 				 </div><%-- .step-content--%>
 				
 				<button type="button" class="btn btn-default btn-prev" id="btnWizardPrev"><span class="glyphicon glyphicon-arrow-left"></span>Prev</button>
@@ -791,27 +791,22 @@
                                 if ($("#datastep3").parsley().validate()) {
                                     $.when(addPatientContact()).then(function () {
                                         $.when(addPersonTreatmentSupporter()).then(function () {
-                                            setTimeout(function () {
-                                                window.location
-                                                    .href =
-                                                    '<%=ResolveClientUrl( "~/CCC/Enrollment/ServiceEnrollment.aspx")%>';
-                                            },
-                                                2000);
+                                            
                                         });
                                     });
                                 } else {
                                     stepError = $('.parsley-error').length === 0;
                                     totalError += stepError;
-                                    if (totalError > 0) {
+                                  /*  if (totalError > 0) {
                                         $('.bs-callout-danger').toggleClass('hidden', f);
-                                    }
+                                    }*/
                                     evt.preventDefault();
                                 }
-                                var ok3 = $('.parsley-error').length === 0;
-                        $('.bs-callout-info').toggleClass('hidden', !ok3);
+                               // var ok3 = $('.parsley-error').length === 0;
+                        //$('.bs-callout-info').toggleClass('hidden', !ok3);
                             }
                         }
-						<%--else if (data.step === 4) {
+						else if (data.step === 4) {
 							if (data.direction === 'previous') {
 								return;
 							} else {
@@ -852,7 +847,7 @@
 														'<%=ResolveClientUrl( "~/CCC/Enrollment/ServiceEnrollment.aspx")%>';
 												},
 												2000);
-									});*/
+									});
 
                     } 
                         
@@ -870,7 +865,7 @@
                     }
 						
                         
-                   }--%> 
+                   }
 					})
 					.on("changed.fu.wizard",
 						function() {
@@ -1159,7 +1154,7 @@
 					}
 				}
 
-				<%--function addPersonPopulation() {
+				function addPersonPopulation() {
 					var isPatientSet = '<%=Session["PatientEditId"]%>';
 
 					//var populationType = $("input[name='Population']:checked").val();
@@ -1244,7 +1239,7 @@
 							getPopulationTypes();
 						}
 
-					});--%>
+					});
 
 				/*$.urlParam = function(name){
 					//name = name.toLowerCase();
@@ -1411,10 +1406,10 @@
 							$("#tsGender").val(patientDetails.tsGender);
 							$("#ctl00_IQCareContentPlaceHolder_TSContacts").val(patientDetails.ISContacts);
 							/*Key Population*/
-							//$('input[name="Population"]').value = patientDetails.population;
-							//console.log(patientDetails.population);
+							$('input[name="Population"]').value = patientDetails.population;
+							console.log(patientDetails.population);
 
-							/*if (patientDetails.population == "General Population") {
+							if (patientDetails.population == "General Population") {
 								var d = document.getElementById("GenPopulation");
 								d.className += " checked";
 							} else if(patientDetails.population == "Key Population") {
@@ -1422,7 +1417,7 @@
 								d.className += " checked";
 							}
 							$('input:radio[name="Population"]').filter('[value="' + patientDetails.population +'"]').attr('checked', true);
-							*/
+							
 
 							var RBID = '<%=PopulationType.ClientID %>';
 							var RB1 = document.getElementById(RBID);

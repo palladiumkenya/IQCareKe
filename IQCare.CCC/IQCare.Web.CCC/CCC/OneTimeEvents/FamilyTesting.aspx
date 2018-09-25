@@ -109,6 +109,15 @@
                                 <asp:HiddenField ID="dobPrecision" runat="server" ClientIDMode="Static" />
                             </div>
                         </div>
+                         <div class="col-md-12 form-group">
+                            <div class="col-md-6">
+                                <label class="control-label pull-left">Age(Months)</label>
+                            </div>
+                            <div class="col-md-6">
+                                <asp:TextBox ID="personMonth" runat="server" ClientIDMode="Static" CssClass="form-control input-sm" placeholder="0" required="true" min="0"></asp:TextBox>
+                               
+                            </div>
+                        </div>
                     </div>
                 </div>
 
@@ -156,7 +165,8 @@
                 --%>
                 
                 <div id="hivTestingInfo">
-                    <div class="col-md-12">
+                    <div id="hivoutcome">                 
+                        <div class="col-md-12">
                         <div class="col-md-12">
                             <h3>HIV Testing information</h3><hr />
 
@@ -252,6 +262,9 @@
                     </div>
 
                     </div>
+                    </div>
+
+
 
                     <div class="col-md-12">
                         <hr />
@@ -618,7 +631,8 @@
                                             <label class="control-label pull-left">CCC Number</label>
                                         </div>
                                         <div class="col-md-12" id="cccnumMod">
-                                            <input id="cccNumberMod" class="form-control input-sm" type="text" runat="server" data-parsley-trigger="keyup" data-parsley-pattern-message="Please enter a valid CCC Number. Format ((XXXXX-XXXXX))" data-parsley-pattern="/^[0-9]{5}-[0-9]{5}$/" />
+                                            <input id="cccNumberMod" class="form-control input-sm" type="text" runat="server" data-parsley-trigger="keyup" 
+                                                />
                                         </div>
                                     </div>
                                 </div>
@@ -930,6 +944,12 @@
                                     $("#BaselineHIVStatusDate").attr('disabled', 'disabled');
                                 }
 
+                              if (!(CCCNumber == null || CCCNumber == "undefined" || CCCNumber == "" || CCCNumber == "0")) 
+                                    {
+                                        $("#hivoutcome").hide();
+                                         
+                                    }
+
                                 if (!(CCCNumber == null || CCCNumber == "undefined" || CCCNumber == "" || CCCNumber == "0") && ReferredToCare == null) {
                                     ReferredToCare = true;
 
@@ -1044,6 +1064,8 @@
 
                     var today = new Date();
                     var birthDate = new Date(dob);
+                   // var totalMonths =  parseInt(moment(today).diff(moment(birthDate), 'months'));
+                  
                     var age = today.getFullYear() - birthDate.getFullYear();
                     var cccNumberFound = null;
                     var count = 0;
@@ -1241,15 +1263,14 @@
                 //console.log($(this).closest('tr').find("td").eq(9).html());
             });
 
-           
+            
           
             $('input:radio[name=optRegistered]').change(function () {
                 if (this.value == 'No') {
                     $('#FamilyTestingForm').parsley().destroy();
-                        $("#ViewFamilyTestingDetails").hide();
-                        $("#FamilyTestingDetails").show();
-                        $("#SearchPeopleFamily").hide();
-                        $("#ReturnGrid").hide();
+                             resetElements();
+                             resetNoOptions();
+                    
                     }
                 else if (this.value == 'Yes') {
                     $('#FamilyTestingForm').parsley().destroy();
@@ -1262,7 +1283,7 @@
          
             $("#FamilyAdd").click(function () {
                 $("#ViewFamilyTestingDetails").hide();
-                $("#FamilyTestingDetails").show();
+                $("#FamilyTestingDetails").hide();
                 $("#SearchPeopleFamily").hide();
                 $("#RegisteredtoClinic").show();
                 resetElements();
@@ -1372,7 +1393,7 @@
                 Dobchanged(date);
                 var age = getAge(date);
                 $("#personAge").val(age);
-
+               
                 $("#dobPrecision").val("true");
             });
 
@@ -1774,6 +1795,18 @@
             }
         }--%>
 
+
+        function resetNoOptions() {
+
+            $("#ViewFamilyTestingDetails").hide();
+            $("#FamilyTestingDetails").show();
+            $("#SearchPeopleFamily").hide();
+            $("#ReturnGrid").hide();
+            $("#hivTestingInfo").show();
+            $("#hivoutcome").show();
+         
+
+        }
         function CccEnabledMod() {
             var testingStatusMod = $("#testingStatusMod :selected").text();
 
@@ -1894,7 +1927,9 @@
                 age--;
             }
 
+             $("#personMonth").val(m);
             return age;
+              
         }
 
         function relationShipChanged() {

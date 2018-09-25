@@ -268,7 +268,7 @@ namespace IQCare.Web.UILogic
             //    ClickAction = RedirectAction.ModuleAction,
             //    ServiceAreaName = "CCC"
             //});
-            Facility.Modules.Where(m => m.PublishFlag == true).OrderBy(o => o.Clinical).ThenBy(n => n.Name).ToList().ForEach(
+            Facility.Modules.Where(m => m.PublishFlag == true).OrderBy(n => n.Name).ToList().ForEach(
             s =>
             {
                 if (this.HasModuleRight(s.Id, s.Clinical))

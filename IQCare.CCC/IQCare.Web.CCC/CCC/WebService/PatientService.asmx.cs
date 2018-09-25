@@ -38,7 +38,7 @@ namespace IQCare.Web.CCC.WebService
         public string dob { get; set; }
         public string dobPrecision { get; set; }
         public int relationshipId { get; set; }
-        public int baselineHivStatusId { get; set; }
+        public string baselineHivStatusId { get; set; }
         public string baselineHivStatusDate { get; set; }
         public string hivTestingresultId { get; set; }
         public string hivTestingresultDate { get; set; }
@@ -61,6 +61,7 @@ namespace IQCare.Web.CCC.WebService
         private int Result { get; set; }
         string appointmentid;
 
+        int? baselinehivid;
 
         [WebMethod(EnableSession = true)]
         public string AddpatientVitals(int patientId, int bpSystolic, int bpDiastolic, decimal heartRate, decimal height,
@@ -212,7 +213,7 @@ namespace IQCare.Web.CCC.WebService
         [WebMethod(EnableSession = true)]
         public string AddPatientFamilyTesting(string familyMembers)
         {
-            string relationshipPersonId; int patientId; int patientMasterVisitId; string firstName; string middleName; string lastName; int sex; string dob; int relationshipId; int baselineHivStatusId; string baselineHivStatusDate;
+            string relationshipPersonId; int patientId; int patientMasterVisitId; string firstName; string middleName; string lastName; int sex; string dob; int relationshipId; string baselineHivStatusId; string baselineHivStatusDate;
             /*string hivTestingresultId;*/ string hivTestingresultDate; bool cccreferal; string cccReferalNumber;  int userId;
             DateTime? linkageDate;
             bool dobPrecision;
@@ -242,7 +243,18 @@ namespace IQCare.Web.CCC.WebService
                     dobPrecision = Convert.ToBoolean(familyMembrs[i].dobPrecision);
                 }
                 relationshipId = familyMembrs[i].relationshipId;
+
+              
+
                 baselineHivStatusId = familyMembrs[i].baselineHivStatusId;
+
+                if (!(String.IsNullOrEmpty(baselineHivStatusId)))
+                    {
+                    baselinehivid = Convert.ToInt32(baselineHivStatusId);
+
+                    }
+         
+
                 baselineHivStatusDate = familyMembrs[i].baselineHivStatusDate;
                 cccreferal = familyMembrs[i].cccreferal;
                 cccReferalNumber = familyMembrs[i].cccReferalNumber;
@@ -260,7 +272,7 @@ namespace IQCare.Web.CCC.WebService
                     DateOfBirth = DateTime.Parse(dob),
                     DobPrecision = dobPrecision,
                     RelationshipId = relationshipId,
-                    BaseLineHivStatusId = baselineHivStatusId,
+                BaseLineHivStatusId = baselinehivid,
                     //BaselineHivStatusDate = baselineHivStatusDate,
                     //HivTestingResultsDate = hivTestingresultDate,
                     HivTestingResultsId = hivresultId,
