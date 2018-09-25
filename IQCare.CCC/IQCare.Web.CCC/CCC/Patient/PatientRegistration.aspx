@@ -1159,7 +1159,7 @@
 					}
 				}
 
-				<%--function addPersonPopulation() {
+			    function addPersonPopulation() {
 					var isPatientSet = '<%=Session["PatientEditId"]%>';
 
 					//var populationType = $("input[name='Population']:checked").val();
@@ -1244,7 +1244,7 @@
 							getPopulationTypes();
 						}
 
-					});--%>
+					});
 
 				/*$.urlParam = function(name){
 					//name = name.toLowerCase();

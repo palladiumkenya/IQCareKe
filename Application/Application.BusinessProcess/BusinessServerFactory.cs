@@ -8,8 +8,8 @@ namespace Application.BusinessProcess
     {
         public Object CreateInstance(string type)
         {
-            object remserver = Activator.CreateInstance(Type.GetType(type));
-            //return (IRemServer)Convert.ChangeType(remserver,typeof(IRemServer));
+            //object remserver = Activator.CreateInstance(Type.GetType(type));
+            return (IRemServer)Convert.ChangeType(remserver,typeof(IRemServer));
             return remserver; 
         }
     }
