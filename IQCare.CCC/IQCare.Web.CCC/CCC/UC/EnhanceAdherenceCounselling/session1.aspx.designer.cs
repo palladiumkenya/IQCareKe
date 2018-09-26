@@ -13,6 +13,15 @@ namespace IQCare.Web.CCC.UC.EnhanceAdherenceCounselling {
     public partial class session1 {
         
         /// <summary>
+        /// PHPreviousCount control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.PlaceHolder PHPreviousCount;
+        
+        /// <summary>
         /// PHPillCount control.
         /// </summary>
         /// <remarks>
@@ -155,5 +164,14 @@ namespace IQCare.Web.CCC.UC.EnhanceAdherenceCounselling {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.PlaceHolder PHFollowupDate;
+        
+        /// <summary>
+        /// AppointmentHId control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField AppointmentHId;
     }
 }

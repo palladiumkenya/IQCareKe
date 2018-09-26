@@ -66,6 +66,20 @@ namespace IQCare.Web.CCC.WebService
             }
             return rows;
         }
+        [WebMethod(EnableSession = true)]
+        [ScriptMethod(UseHttpGet = false, ResponseFormat = ResponseFormat.Json)]
+        public int checkTannersStaging()
+        {
+            int tannersrecords = 0;
+            var tanersLogic = new TannersStagingManager();
+            List<PatientTannersStaging> list = new List<PatientTannersStaging>();
+            list = tanersLogic.getTannersStaging(Convert.ToInt32(Session["PatientPK"]));
+            foreach (var items in list)
+            {
+                tannersrecords = tannersrecords + 1;
+            }
+            return tannersrecords;
+        }
         [WebMethod]
         public string DeleteTanners(int tannersId)
         {

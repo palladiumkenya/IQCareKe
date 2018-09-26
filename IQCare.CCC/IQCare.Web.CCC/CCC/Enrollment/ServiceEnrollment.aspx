@@ -603,7 +603,8 @@
                             if (messageResponse[i].DataType == "Numeric") {
                                 table += "<td>";
                                 if (messageResponse[i].Required == true) {
-                                    table += "<input type='text' id=" + messageResponse[i].Code + " class='form-control' data-parsley-type='digits' data-parsley-trigger='keyup' data-parsley-pattern-message='Please enter a valid 10 digit number' data-parsley-pattern='/^((?!(0))[0-9]{10})$/' data-parsley-required='true' data-parsley-length='[10, 10]' />";
+                                    table += "<input type='text' id=" + messageResponse[i].Code + " class='form-control' data-parsley-type='digits' data-parsley-pattern='/^((?!(0))[0-9]{10})$/' data-parsley-required='true'/>";
+                                    //table += "<input type='text' id=" + messageResponse[i].Code + " class='form-control' data-parsley-type='digits' data-parsley-trigger='keyup' data-parsley-pattern-message='Please enter a valid 10 digit number' data-parsley-pattern='/^((?!(0))[0-9]{10})$/' data-parsley-required='true' data-parsley-length='[10, 10]' />";
                                 } else {
                                     table += "<input type='text' id=" + messageResponse[i].Code + " class='form-control'/>";
                                 }

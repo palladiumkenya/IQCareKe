@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="session1.aspx.cs" Inherits="IQCare.Web.CCC.UC.EnhanceAdherenceCounselling.session1" %>
+﻿<%@ Page Language="C#" AutoEventWireup="True" CodeBehind="session1.aspx.cs" Inherits="IQCare.Web.CCC.UC.EnhanceAdherenceCounselling.session1" %>
 <%@ OutputCache duration="86400" varybyparam="none" %>
 <style>
     .mmrbList{float: right;}
@@ -13,9 +13,15 @@
 <div id="session1container">
     <div class="col-md-12 form-group">
 	    <div class="col-md-12">
-		    <%--<div class="panel panel-info">--%>
+		    <div class="panel panel-info">
 			    <div class="panel-body">
-				    <div class="col-md-12 form-group" id="pilladherencepane">
+				    <div class="col-md-12 form-group">
+					    <label class="control-label pull-left"><span class="text-primary">Pill Adherence</span></label>
+				    </div>
+                    <div class="col-md-12 form-group" id="pillcount">
+                        <asp:PlaceHolder ID="PHPreviousCount" runat="server"></asp:PlaceHolder>
+                    </div>
+                    <div class="col-md-12 form-group" id="pilladherencepane">
                         <div class="col-md-6">
                             <asp:PlaceHolder ID="PHPillCount" runat="server"></asp:PlaceHolder>
                         </div>
@@ -23,8 +29,8 @@
                             <asp:PlaceHolder ID="PHDateFilled" runat="server"></asp:PlaceHolder>
                         </div>
 				    </div>
-			    </div>
-		    <%--</div>--%>
+                </div>
+		    </div>
 	    </div>
     </div>
     <div class="col-md-12 form-group">
@@ -145,7 +151,7 @@
 						        <%--<asp:TextBox runat="server" ClientIDMode="Static" CssClass="form-control input-sm" ID="txtFollowupDate" data-parsley-required="true" onblur="DateFormat(this,this.value,event,false,'3')" onkeyup="DateFormat(this,this.value,event,false,'3')"></asp:TextBox>--%>
 					        </div>
 				        </div>
-                        <asp:HiddenField ID="AppointmentId" runat="server" />
+                        <asp:HiddenField ID="AppointmentHId" runat="server" />
 				    </div>
 			    </div>
 		    </div>
@@ -408,7 +414,7 @@
                 //store appointment id
                 if (response.d != null) {
                     $.each(JSON.parse(response.d), function (index, value) {
-                        $("#<%=AppointmentId.ClientID%>").val(this.Id);
+                        $("#<%=AppointmentHId.ClientID%>").val(this.Id);
                     });
                     
                 }
@@ -559,7 +565,7 @@
         });
     }
     function addUpdateSession1Appointment() {
-        var appointmentid = $("#<%=AppointmentId.ClientID%>").val();
+        var appointmentid = $("#<%=AppointmentHId.ClientID%>").val();
         var futureDate = moment().add(7, 'months').format('DD-MMM-YYYY');
         var appDate = $("#<%=appointmentDateTb.ClientID%>").val();
         if (moment('' + appDate + '').isAfter(futureDate)) {
@@ -613,7 +619,7 @@
         var patientId = <%=PatientId%>;
         var patientMasterVisitId = GetURLParameter('visitId');
         var userId = <%=userId%>;
-        var appointmentid = $("#<%=AppointmentId.ClientID%>").val();
+        var appointmentid = $("#<%=AppointmentHId.ClientID%>").val();
         $.ajax({
             type: "POST",
             url: "../WebService/PatientService.asmx/UpdatePatientAppointment",

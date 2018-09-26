@@ -10,8 +10,11 @@
 <div id="session1container">
     <div class="col-md-12 form-group">
 	    <div class="col-md-12">
-		    <%--<div class="panel panel-info">--%>
+		    <div class="panel panel-info">
 			    <div class="panel-body">
+				    <div class="col-md-12 form-group">
+					    <label class="control-label pull-left"><span class="text-primary">Pill Adherence 2</span></label>
+				    </div>
 				    <div class="col-md-12 form-group" id="pilladherencepane">
                         <div class="col-md-6">
                             <asp:PlaceHolder ID="PHPillCount" runat="server"></asp:PlaceHolder>
@@ -21,7 +24,7 @@
                         </div>
 				    </div>
 			    </div>
-		    <%--</div>--%>
+		    </div>
 	    </div>
     </div>
     <div class="col-md-12 form-group">

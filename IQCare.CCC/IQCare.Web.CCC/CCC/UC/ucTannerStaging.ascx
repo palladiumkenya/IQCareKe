@@ -107,27 +107,7 @@
                 url: "../WebService/TannersStagingService.asmx/LoadTannersStaging",
                 dataSrc: 'd',
                 contentType: "application/json; charset=utf-8",
-                dataType: "json",
-                success: function (response) {
-                    if (age < 9) {
-                        $("#tannersstagingcontainer").hide();
-                    }
-                    else if (age > 19) {
-                        if (response.d != "") {
-                            $("#tannersstagingrecord").hide();
-                            $("#tannersstagingform").hide();
-                        }
-                        else {
-                            $("#tannersstagingcontainer").hide();
-                        }
-                    }
-                    else {
-                        showHideTannersPanel();
-                    }
-                },
-                error: function (response) {
-                    $("#tannersstagingcontainer").hide();
-                }
+                dataType: "json"
             },
             destroy: true,
             paging: false,
@@ -253,8 +233,39 @@
     $(document).ready(function () {
         var patientAge = <%=age%>;
         var screeningDone = <%=tannersScreeningValue%>;
-        
+        checkIfTannersRecordsExist();
     });
+
+    function checkIfTannersRecordsExist() {
+        var patientAge = <%=age%>;
+        $.ajax({
+            type: "POST",
+            url: "../WebService/TannersStagingService.asmx/checkTannersStaging",
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: function (response) {
+                var recordcount = JSON.stringify(response.d);
+                if (age < 9) {
+                    $("#tannersstagingcontainer").hide();
+                }
+                else if (age > 19) {
+                    if (recordcount > 0) {
+                        $("#tannersstagingrecord").hide();
+                        $("#tannersstagingform").hide();
+                    }
+                    else {
+                        $("#tannersstagingcontainer").hide();
+                    }
+                }
+                else{
+                    showHideTannersPanel();
+                }
+            },
+            error: function (response) {
+                toastr.error(response.d, "Error saving tanner staging");
+            }
+        });
+    }
 
     $("input[name='<%=rbList.UniqueID%>']").change(function () {
         showHideTannersPanel();

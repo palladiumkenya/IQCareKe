@@ -40,8 +40,8 @@ namespace IQCare.CCC.UILogic
         public List<PatientLookup> GetPatientSearchListPayload(string patientId,string isEnrolled, string firstName = null, string middleName = null, string lastName =null)
         {
             var patientDetails = _patientLookupmanager.GetPatientSearchPayload(patientId,isEnrolled, firstName, middleName, lastName);
-
-            return patientDetails;
+            var patienttable = patientDetails;
+            return patienttable;
         }
 
         public List<PatientLookup> GetPatientSearchListPayload(string isEnrolled)
