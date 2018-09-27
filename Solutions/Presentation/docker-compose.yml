@@ -1,8 +1,0 @@
-version: '3'
-
-services:
-  iqcare.web:
-    image: iqcare.web
-    build:
-      context: .\..\..\Presentation\IQCare.Web
-      dockerfile: Dockerfile

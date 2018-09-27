@@ -28,11 +28,17 @@
     <ProjectReference Include="..\IQCare.Common.Infrastructure\IQCare.Common.Infrastructure.csproj" />
     <ProjectReference Include="..\IQCare.HTS.BusinessProcess\IQCare.HTS.BusinessProcess.csproj" />
     <ProjectReference Include="..\IQCare.HTS.Infrastructure\IQCare.HTS.Infrastructure.csproj" />
-    <ProjectReference Include="..\IQCare.Records.BusinessProcess\IQCare.Records.BusinessProcess.csproj" />
   </ItemGroup>
 
   <ItemGroup>
     <Content Include="**\*.ts" Exclude="$(GlobalExclude)" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Remove="Controllers\Records\**" />
+    <Content Remove="Controllers\Records\**" />
+    <EmbeddedResource Remove="Controllers\Records\**" />
+    <None Remove="Controllers\Records\**" />
   </ItemGroup>
 
   <ItemGroup>
