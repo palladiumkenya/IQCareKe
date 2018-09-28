@@ -368,7 +368,7 @@ namespace IQCare.Web.UILogic
                         );
                     }
                     this.HasBilling = facility.Modules.Exists(m => m.Name.ToUpper() == "BILLING");
-                    this.HasPMSCM = facility.Modules.Exists(m => m.Name.ToUpper() == "PM/SCM");4r                       //&& (facility.PaperLess == true);
+                    this.HasPMSCM = facility.Modules.Exists(m => m.Name.ToUpper() == "PM/SCM");                       //&& (facility.PaperLess == true);
                     this.HasWardAdmission = facility.Modules.Exists(m => m.Name.ToUpper() == "WARD ADMISSION");
                     this.HasLabModule = facility.Modules.Exists(m => m.Name.ToUpper() == "LABORATORY") && (facility.PaperLess == true);
                     DataTable dtUser = ds.Tables[0];

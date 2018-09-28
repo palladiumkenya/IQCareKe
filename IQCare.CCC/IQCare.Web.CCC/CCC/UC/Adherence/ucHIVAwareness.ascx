@@ -33,7 +33,6 @@
                 var patientId = <%=PatientId%>;
                 var patientMasterVisitId = <%=PatientMasterVisitId%>;
                 var userId = <%=userId%>;
-                alert(screeningType);
                 $.ajax({
                     type: "POST",
                     url: "../WebService/PatientScreeningService.asmx/AddUpdateScreeningData",
@@ -41,11 +40,9 @@
                     contentType: "application/json; charset=utf-8",
                     dataType: "json",
                     success: function (response) {
-                        toastr.success(JSON.stringify(response.d));
                         error = 0;
                     },
                     error: function (response) {
-                        toastr.error(JSON.stringify(response));
                         error = 1;
                     }
                 });
