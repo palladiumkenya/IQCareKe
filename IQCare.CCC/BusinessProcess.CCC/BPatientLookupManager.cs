@@ -245,7 +245,7 @@ namespace BusinessProcess.CCC
                     if (!string.IsNullOrEmpty(patientId.Trim()))
                     {
                         Expression<Func<PatientLookup, bool>> expressionPatientId =
-                            c => c.EnrollmentNumber.ToString().Contains(patientId.Trim().ToString());
+                            c => c.EnrollmentNumber.ToString().Contains(patientId.Trim().ToString()) || c.PatientClinicId.ToString().Contains(patientId.Trim().ToString());
 
                         expresionFinal = PredicateBuilder.And(expresionFinal, expressionPatientId);
                     }

@@ -5,15 +5,15 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace Entities.CCC.Lookup
 {
     [Serializable]
-    [Table("gcPatientView")]
-    public class PatientLookup
+    [Table("gcPatientViewSearch")]
+    public class PatientLookupSearch
     {
         [Key]
         public int Id { get; set; }
         public int PersonId { get; set; }
         public int? ptn_pk { get; set; }
-        public string  EnrollmentNumber { get; set; }
         public string PatientClinicId { get; set; }
+        public string CCCNumber { get; set; }
         public string PatientIndex { get; set; }
         public string FirstName { get; set; }
         public string MiddleName { get; set; }
@@ -39,30 +39,30 @@ namespace Entities.CCC.Lookup
         public int NormalizeNumber()
         {
             int intNormalNumber;
-            if (int.TryParse(this.EnrollmentNumber, out intNormalNumber))
+            if (int.TryParse(this.CCCNumber, out intNormalNumber))
             {
                 return intNormalNumber;
             }
 
             var result = String.Empty;
-            if (this.EnrollmentNumber.Length == 11 && this.EnrollmentNumber.Contains("-"))
+            if (this.CCCNumber.Length == 11 && this.CCCNumber.Contains("-"))
             {
-                result = this.EnrollmentNumber.Replace("-","");
+                result = this.CCCNumber.Replace("-", "");
             }
             else
             {
-                if (this.EnrollmentNumber.Contains("/"))
+                if (this.CCCNumber.Contains("/"))
                 {
-                    result = this.EnrollmentNumber.Split('/')[0];
+                    result = this.CCCNumber.Split('/')[0];
                 }
-                else if (this.EnrollmentNumber.Contains("-"))
+                else if (this.CCCNumber.Contains("-"))
                 {
-                    result = this.EnrollmentNumber.Split('-')[0];
+                    result = this.CCCNumber.Split('-')[0];
                 }
                 else
                 {
                     int intout;
-                    if (int.TryParse(this.EnrollmentNumber, out intout))
+                    if (int.TryParse(this.CCCNumber, out intout))
                     {
                         return intout;
                     }
@@ -73,11 +73,11 @@ namespace Entities.CCC.Lookup
     }
     [Serializable]
     [Table("PersonExtView")]
-    public class PersonExtLookup
+    public class PersonExtLookupSearch
     {
-       
-       
-       [Key]
+
+
+        [Key]
         public int PersonId { get; set; }
         public int? ptn_pk { get; set; }
         public string EnrollmentNumber { get; set; }

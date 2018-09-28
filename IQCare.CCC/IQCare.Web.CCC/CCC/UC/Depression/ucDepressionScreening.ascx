@@ -188,7 +188,7 @@
                 selectionTotal = selectionTotal + 1;
             }
         });
-        if (selectionTotal == 2) {
+        if (selectionTotal => 1) {
             $("#phq9panel").show();
         }
         else {
@@ -213,7 +213,7 @@
                 selectionTotal = selectionTotal + 1;
             }
         });
-        if (selectionTotal == 2) {
+        if (selectionTotal => 1) {
             $("#phq9panel").show();
         }
         else {
