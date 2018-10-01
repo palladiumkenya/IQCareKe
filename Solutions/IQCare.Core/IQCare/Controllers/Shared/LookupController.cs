@@ -4,7 +4,6 @@ using System.Linq;
 using System.Threading.Tasks;
 using IQCare.Common.BusinessProcess.Commands.Lookup;
 using IQCare.Common.BusinessProcess.Interfaces;
-using IQCareRecords.Common.BusinessProcess.Command;
 using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -63,16 +62,16 @@ namespace IQCare.Controllers.Common
             return BadRequest(results);
         }
 
-        [HttpGet("getIdentifyerTypes")]
-        public async Task<IActionResult> GetIdentifierType()
-        {
-            var results = await _mediator.Send(new GetPersonIdentificationCommand { CodeName = "PersonIdentification" }, HttpContext.RequestAborted);
+        //[HttpGet("getIdentifyerTypes")]
+        //public async Task<IActionResult> GetIdentifierType()
+        //{
+        //    var results = await _mediator.Send(new GetPersonIdentificationCommand { CodeName = "PersonIdentification" }, HttpContext.RequestAborted);
 
-            if (results.IsValid)
-                return Ok(results.Value);
-            return BadRequest(results);
+        //    if (results.IsValid)
+        //        return Ok(results.Value);
+        //    return BadRequest(results);
 
-        }
+        //}
 
         [HttpGet("getocc")]
         public async Task<IActionResult>  GetOccupations()
