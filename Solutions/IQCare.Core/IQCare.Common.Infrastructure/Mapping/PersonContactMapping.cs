@@ -6,7 +6,7 @@ namespace IQCare.Common.Infrastructure.Mapping
 {
     public class PersonContactMapping : IEntityTypeConfiguration<PersonContact>
     {
-        public void Configure(EntityTypeBuilder<PersonContact> builder)
+        void IEntityTypeConfiguration<PersonContact>.Configure(EntityTypeBuilder<PersonContact> builder)
         {
             builder.ToTable("PersonContact")
                 .HasKey(c => c.Id);

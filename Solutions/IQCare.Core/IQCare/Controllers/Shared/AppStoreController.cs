@@ -29,7 +29,7 @@ namespace IQCare.Controllers.Shared
             return BadRequest(results);
         }
 
-        [HttpPost("getState")]
+        [HttpGet("getState")]
         public async Task<IActionResult> Post([FromBody]GetAppStoreCommand getAppStoreCommand)
         {
             var results = await _mediator.Send(getAppStoreCommand, Request.HttpContext.RequestAborted);

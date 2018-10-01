@@ -546,6 +546,23 @@ namespace IQCare.Web.MasterPage
                     RemoveMenuItemByValue(patientLevelMenu.Items, "mnuPatientTransfer");
                 }
 
+                //if (Authentication.HasFeatureRight(ApplicationAccess.Dashboard, theDT) == false)
+                //{
+                //    RemoveMenuItemByValue(PharmacyDispensingMenu.Items, "Dashboard");
+                //}
+                //if (Authentication.HasFeatureRight(ApplicationAccess.Dispense, theDT) == false)
+                //{
+                //    RemoveMenuItemByValue(PharmacyDispensingMenu.Items, "Dispense");
+                //}
+                //if (Authentication.HasFeatureRight(ApplicationAccess.StockSummaryWeb, theDT) == false)
+                //{
+                //    RemoveMenuItemByValue(PharmacyDispensingMenu.Items, "StockSummaryWeb");
+                //}
+                //if (Authentication.HasFeatureRight(ApplicationAccess.StockManagement, theDT) == false)
+                //{
+                //    RemoveMenuItemByValue(PharmacyDispensingMenu.Items, "StockManagement");
+                //}
+
 
             }
         }

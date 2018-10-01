@@ -175,6 +175,7 @@
                                                 OnClick="btnView_Click" Text=" Find" Style="margin-right: 5px" />
                                         </div>
                                         <div class="col-md-3" style="display: <% =  showAdd %>">
+
                                             <asp:Button CssClass="btn btn-primary col-md-12" ID="btnAdd" runat="server" OnClick="btnAdd_Click"
                                                 Text="Add Patient" Style="margin-right: 5px" />
                                         </div>

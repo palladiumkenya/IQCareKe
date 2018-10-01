@@ -15,7 +15,7 @@ namespace IQCare.Web.CCC.Enrollment
         public int PatientExists { get; set; }
         public string AppLocation
         {
-            get { return Session["AppLocation"].ToString(); }
+            get { return Session["AppLocation"].ToString().Replace("'", "\'"); }
         }
         protected void Page_Load(object sender, EventArgs e)
         {

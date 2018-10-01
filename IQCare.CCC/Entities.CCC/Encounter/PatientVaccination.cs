@@ -18,5 +18,6 @@ namespace Entities.CCC.Encounter
         public virtual PatientMasterVisit PatientMasterVisit { get; set; }
         public int Vaccine { get; set; }
         public string VaccineStage { get; set; }
+        public DateTime VaccineDate { get; set; }
     }
 }

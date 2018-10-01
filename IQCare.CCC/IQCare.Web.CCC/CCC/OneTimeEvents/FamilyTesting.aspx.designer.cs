@@ -22,6 +22,15 @@ namespace IQCare.Web.CCC.OneTimeEvents {
         protected global::IQCare.Web.CCC.UC.ucPatientBrief PatientSummary;
         
         /// <summary>
+        /// FindFamily control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::IQCare.Web.CCC.UC.ucFamilyFinder FindFamily;
+        
+        /// <summary>
         /// FirstName control.
         /// </summary>
         /// <remarks>
@@ -92,6 +101,15 @@ namespace IQCare.Web.CCC.OneTimeEvents {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.HiddenField dobPrecision;
+        
+        /// <summary>
+        /// personMonth control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox personMonth;
         
         /// <summary>
         /// BaselineHIVStatus control.

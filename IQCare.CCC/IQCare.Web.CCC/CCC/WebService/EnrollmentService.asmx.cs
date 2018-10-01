@@ -315,8 +315,12 @@ namespace IQCare.Web.CCC.WebService
                                     assigningFacility = facilityId.ToString();
                                 }
 
-                                patientIdentifierId = patientIdentifierManager.addPatientIdentifier(patientId,
-                                patientEnrollmentId, Convert.ToInt32(item.Key), item.Value, facilityId, assigningFacility);
+                                if(item.Value != "")
+                                {
+                                    patientIdentifierId = patientIdentifierManager.addPatientIdentifier(patientId,
+                                    patientEnrollmentId, Convert.ToInt32(item.Key), item.Value, facilityId, assigningFacility);
+                                }
+                                
                                 
                                 var identifierManager = new IdentifierManager();
                                 var identifierList = identifierManager.GetIdentifiersById(Convert.ToInt32(item.Key));
@@ -503,7 +507,8 @@ namespace IQCare.Web.CCC.WebService
                                     var entityIdentifierAuditData = AuditDataUtility.Serializer(identifiersByPatientId);
                                     entityIdentifier.IdentifierValue = item.Value;
                                     entityIdentifier.AuditData = entityIdentifierAuditData;
-                                    patientIdentifierManager.UpdatePatientIdentifier(entityIdentifier, facilityId);
+
+                                        patientIdentifierManager.UpdatePatientIdentifier(entityIdentifier, facilityId);
                                 }
                             }
                             else

@@ -11,5 +11,7 @@ namespace IQCare.Common.Infrastructure
         Task SaveAsync();
         DbContext Context { get; }
         IRepository<T> Repository<T>() where T : class;
+
+        Task<int> SaveChangesAsync();
     }
 }

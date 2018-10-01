@@ -7,6 +7,9 @@ using Application.Presentation;
 using Entities.CCC.Lookup;
 using Interface.CCC.Lookup;
 using IQCare.Web.Laboratory;
+using System.Web.Services;
+using System.Web.UI;
+using System.Web.UI.WebControls;
 
 namespace IQCare.Web.CCC.Encounter
 {
@@ -28,7 +31,6 @@ namespace IQCare.Web.CCC.Encounter
             UserId = Convert.ToInt32(HttpContext.Current.Session["AppUserId"]);           
 
         }
-
     }
 
 }

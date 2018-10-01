@@ -1,0 +1,85 @@
+﻿.grid 
+{ 
+	width:100%; 
+	font-family:Tahoma;
+	
+}
+.grid H2 
+{ 
+	margin:0; padding:0; 
+	color:#ffffff;
+	height:20px;
+	line-height:20px;
+	font-size:14px;
+}
+.grid .mid
+{
+	padding:3px 0px 0px 0px;
+}
+.grid .datatable
+{
+	width:100%;
+	color:#666;
+}        
+.grid .datatable TH
+{
+    font-size:11px;
+    font-weight:bold;
+    letter-spacing:0px;
+    padding:1px 2px;
+    color:#333333;
+    background: url(sprite.png) repeat-x 0px 0px;
+    border-color: #989898 #cbcbcb #989898 #989898;
+    border-width: 1px 1px 1px medium;
+    height:25px;
+    white-space: -moz-pre-wrap !important;  /* Mozilla, since 1999 */
+    white-space: -pre-wrap;      /* Opera 4-6 */
+    white-space: -o-pre-wrap;    /* Opera 7 */
+    white-space: pre-wrap;       /* css-3 */    
+    white-space: -webkit-pre-wrap; /* Newer versions of Chrome/Safari*/    
+    white-space: nowrap;
+   
+}
+.grid .datatable TH A
+{ 
+	text-decoration:none;
+	padding-right:5px; 
+	color:#0066cc;
+	
+}
+.grid .datatable TH.sortasc A { background:url(../img/asc.gif) right center no-repeat; }
+.grid .datatable TH.sortdesc A { background:url(../img/desc.gif) right center no-repeat; }
+.grid .datatable .row TD
+{
+    font-size:11px;
+    text-align:left;
+    padding:0px 5px 0 3px;
+    border-bottom:solid 1px #bbd9ee;
+    border-right:solid 1px #bbd9ee;
+    letter-spacing:0px;
+    height:20px;
+    cursor:pointer;
+    vertical-align: middle;
+}      
+.grid .datatable .row:hover
+{
+	background-color:#fffacd;
+	color:#000;
+}
+.grid .datatable .row TD.first { padding-left:10px; }
+.grid .datatable TH.first { padding-left:10px; }
+.grid .datatable .row:hover .first
+{
+    background-repeat:no-repeat;   
+	background-image:url(../img/bullet.gif);
+}  
+/* Data Pager Styles */
+.grid TR.pager-row TD
+{
+    border-top:solid 2px #bbd9ee;
+}
+
+#grd_custom TH
+{
+    text-align:left;
+}

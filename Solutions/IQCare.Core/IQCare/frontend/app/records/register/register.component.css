@@ -1,0 +1,214 @@
+.example-container {
+    display: flex;
+    flex-direction: column;
+}
+
+    .example-container > * {
+        width: 100%;
+    }
+
+.mat-form-field {
+    display: block;
+}
+
+.mat-card {
+    background-color: #dff9fb;
+}
+.mat-input-placeholder{
+    font-size:5em;
+}
+
+
+
+
+/* New Examples w*/
+
+md-card {
+    margin: 8px auto;
+    width: 50%;
+    background: #fff;
+}
+
+.md-title {
+    font-size: 29px;
+    font-weight: 500;
+    letter-spacing: .005em;
+    text-align: center;
+    background: rgb(255, 255, 255);
+    padding: 10px;
+    border-radius: 3px;
+    box-shadow: 1px 1px 1px 1px hsl(207, 68%, 26%);
+    color: #2196F3;
+}
+
+.inputdemoErrors .inputErrorsApp {
+    min-height: 48px;
+}
+
+.inputdemoErrors mat-input-container > p {
+    font-size: 0.8em;
+    text-align: left;
+    width: 100%;
+}
+
+
+
+mat-input-container {
+    margin: 0px !important;
+    vertical-align: middle;
+}
+
+.center_align {
+    text-align: center;
+    margin: 0 auto;
+}
+
+mat-input-container.md-default-theme label, mat-input-container label, mat-input-container.md-default-theme .md-placeholder, mat-input-container .md-placeholder {
+  
+    color: #2196F3 !important;
+}
+
+mat-input-container:after {
+    content: '';
+    display: table;
+    clear: both;
+    opacity: 0 !important;
+}
+
+.clearflex {
+    display: block;
+    padding: 16px;
+}
+
+.pull-left {
+    float: left;
+    width: 45%;
+    margin: 10px;
+    text-align: center !important;
+    margin: auto;
+}
+
+.pull-right {
+    float: right;
+    width: 45%;
+    margin: 10px;
+    text-align: center !important;
+    margin: auto;
+}
+
+.example-container {
+    display: flex;
+    flex-direction: column;
+}
+.example-container > * {
+        width: 100%;
+    }
+
+.mat-form-field {
+    display: block;
+ 
+}
+.highlight {
+    color: white;
+    background: #777;
+}
+table.speaker-list {
+    table-layout: fixed;
+}
+
+.mat-card {
+    background-color: #dff9fb;
+}
+.mat-input-placeholder{
+    font-size:5em;
+}
+.top-buffer {
+    margin-top: 20px;
+}
+.anyClass {
+    height: 150px;
+    overflow-x: scroll;
+}
+
+.table td ,th{
+    text-align: center;
+}
+
+
+
+
+/* New Examples w*/
+
+/*md-card {
+    margin: 8px auto;
+    width: 50%;
+    background: #fff;
+}
+
+.md-title {
+    font-size: 29px;
+    font-weight: 500;
+    letter-spacing: .005em;
+    text-align: center;
+    background: rgb(255, 255, 255);
+    padding: 10px;
+    border-radius: 3px;
+    box-shadow: 1px 1px 1px 1px hsl(207, 68%, 26%);
+    color: #2196F3;
+}
+
+.inputdemoErrors .inputErrorsApp {
+    min-height: 48px;
+}
+
+.inputdemoErrors mat-form-field  > p {
+    font-size: 0.8em;
+    text-align: left;
+    mat-form-field width: 100%;
+}*/
+
+
+
+/*mat-form-field  {
+    margin: 0px !important;
+    vertical-align: middle;
+}
+
+.center_align {
+    text-align: center;
+    margin: 0 auto;
+}
+
+mat-form-field .md-default-theme label, mat-form-field  label, mat-form-field .md-default-theme .md-placeholder, mat-form-field  .md-placeholder {
+  
+    color: #2196F3 !important;
+}
+
+mat-form-field :after {
+    content: '';
+    display: table;
+    clear: both;
+    opacity: 0 !important;
+}
+
+.clearflex {
+    display: block;
+    padding: 16px;
+}
+
+.pull-left {
+    float: left;
+    width: 45%;
+    margin: 10px;
+    text-align: center !important;
+    margin: auto;
+}
+
+.pull-right {
+    float: right;
+    width: 45%;
+    margin: 10px;
+    text-align: center !important;
+    margin: auto;
+}*/
+

@@ -1,11 +1,39 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/CCC/Greencard.Master" AutoEventWireup="true" CodeBehind="FamilyTesting.aspx.cs" Inherits="IQCare.Web.CCC.OneTimeEvents.FamilyTesting" %>
 
 <%@ Register TagPrefix="uc" TagName="PatientDetails" Src="~/CCC/UC/ucPatientBrief.ascx" %>
+<%@ Register TagPrefix="ucFamily" TagName="FamilyFinder" Src="~/CCC/UC/ucFamilyFinder.ascx" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="IQCareContentPlaceHolder" runat="server">
     <div class="container-fluid">
 
 
         <uc:PatientDetails ID="PatientSummary" runat="server" />
+        <div class="col-md-12 bs-callout bs-callout-info" id="RegisteredtoClinic">
+            <div class="form-group  form-inline">
+                <div class="col-sm-3">
+                    <label for="input-type" class="custom-control-label">Registered at this Clinic?</label>
+                </div>
+                  <div class="col-sm-6">
+                        <label class="pull-left" style="padding-right: 10px">
+                                <input type="radio" class="custom-control-input" name="optRegistered" value="No" id="radiono" >No
+                         </label>
+                    
+                          <label class="pull-left" style="padding-right: 10px">
+                                <input type="radio" class="custom-control-input" name="optRegistered"  value="Yes" id="radioyes">Yes
+                           </label>
+                        
+                    </div>
+                </div>
+           
+        </div>
+         
+        <ucFamily:FamilyFinder ID="FindFamily" runat="server" />
+        
+         <div class="col-md-12 col-xs-12 col-sm-12 bs-callout bs-callout-info" id="ReturnGrid">
+            <div class="col-md-6 pull-right">
+                 <button id="btnReturnGrid" class="btn btn-warning btn-lg btn-sm pull-right fa fa-arrow-circle-o-left"  onclick="return false"> Back to Search</button>
+             </div>
+         </div>
+          
         <%--<asp:LinkButton runat="server" ID="btn_open_modal" ClientIDMode="Static" OnClientClick="return false" CssClass=" btn btn-info btn-lg">View Patient Family Members</asp:LinkButton>--%>
 
         <div class="col-md-12 bs-callout bs-callout-info" id="FamilyTestingDetails">
@@ -81,6 +109,15 @@
                                 <asp:HiddenField ID="dobPrecision" runat="server" ClientIDMode="Static" />
                             </div>
                         </div>
+                         <div class="col-md-12 form-group">
+                            <div class="col-md-6">
+                                <label class="control-label pull-left">Age(Months)</label>
+                            </div>
+                            <div class="col-md-6">
+                                <asp:TextBox ID="personMonth" runat="server" ClientIDMode="Static" CssClass="form-control input-sm" placeholder="0" required="true" min="0"></asp:TextBox>
+                               
+                            </div>
+                        </div>
                     </div>
                 </div>
 
@@ -128,7 +165,8 @@
                 --%>
                 
                 <div id="hivTestingInfo">
-                    <div class="col-md-12">
+                    <div id="hivoutcome">                 
+                        <div class="col-md-12">
                         <div class="col-md-12">
                             <h3>HIV Testing information</h3><hr />
 
@@ -224,6 +262,9 @@
                     </div>
 
                     </div>
+                    </div>
+
+
 
                     <div class="col-md-12">
                         <hr />
@@ -279,7 +320,7 @@
                         <asp:LinkButton runat="server" ID="btnReset" CssClass=" btn btn-warning fa fa-refresh btn-lg" ClientIDMode="Static" OnClientClick="return false;"> Reset Family Form</asp:LinkButton>
                     </div>
                     <div class="col-md-4">
-                        <asp:LinkButton runat="server" ID="btnClose" CssClass=" btn btn-danger fa fa-times btn-lg" ClientIDMode="Static" OnClientClick="return false;"> Close Family Form</asp:LinkButton>
+                        <asp:LinkButton runat="server" ID="btnClose" CssClass=" btn btn-danger fa fa-times btn-lg" ClientIDMode="Static" > Close Family Form</asp:LinkButton>
                     </div>
                 </div>
             </div>
@@ -336,7 +377,7 @@
                                             <label class="control-label pull-left">First Name</label>
                                         </div>
                                         <div class="col-md-6">
-                                            <input id="fName" class="form-control input-sm" type="text" runat="server" placeholder="First Name" required="true" />
+                                            <input id="fName" name="fname" class="form-control input-sm" type="text" runat="server" ClientIDMode="Static" placeholder="First Name" required="true" />
                                         </div>
                                     </div>
                                     <div class="col-md-12 form-group">
@@ -344,7 +385,7 @@
                                             <label class="control-label pull-left">Middle Name</label>
                                         </div>
                                         <div class="col-md-6">
-                                            <input id="mName" class="form-control input-sm" type="text" runat="server" placeholder="Middle Name" />
+                                            <input id="mName" name="mName" class="form-control input-sm" type="text" runat="server" placeholder="Middle Name" />
                                         </div>
                                     </div>
                                     <div class="col-md-12 form-group">
@@ -590,7 +631,8 @@
                                             <label class="control-label pull-left">CCC Number</label>
                                         </div>
                                         <div class="col-md-12" id="cccnumMod">
-                                            <input id="cccNumberMod" class="form-control input-sm" type="text" runat="server" data-parsley-trigger="keyup" data-parsley-pattern-message="Please enter a valid CCC Number. Format ((XXXXX-XXXXX))" data-parsley-pattern="/^[0-9]{5}-[0-9]{5}$/" />
+                                            <input id="cccNumberMod" class="form-control input-sm" type="text" runat="server" data-parsley-trigger="keyup" 
+                                                />
                                         </div>
                                     </div>
                                 </div>
@@ -614,18 +656,34 @@
     <script type="text/javascript">
         var tablefamily = null;
         var cccArrayList = new Array();
-
+        var RelationshipPersonId = 0;
+        var RelationshipRelationshipType = 0;
+        var CCCNumber = "";
+        var HivTestingResult = "";
+        var Relationshiptype = "";
+        var BaselineResult = "";
+        var HivTestingDate = "";
+        var ReferredToCare = "";
+        var LinkageDate = "";
+        var EnrollmentNumber = "";
+        var FirstName = "";
+        var MiddleName = "";
+        var DOB = "";
+        var LastName = "";
+        var gender = "";
+        var BaselineDate = "";
+        var DobPrecision = "";
         $(document).ready(function () {
-            window.patientAge= <%=PatientAge%>;
+            window.patientAge = <%=PatientAge%>;
             var date = moment("<%=PatientDateOfBirth%>").format('DD-MMM-YYYY');
-            window.patientDateOfBirth= date;
+            window.patientDateOfBirth = date;
             var familyMembers = [];
             $("#<%=CccReferal.ClientID%>").val("False");
             var gender = '<%=Gender%>';
 
             var todayDate = new Date();
             var todayDatePicker = moment(todayDate).add(2, 'hours');
-            
+
             //console.log(gender);
 
             //$('#BaselineHIVStatusD').datepicker({
@@ -672,7 +730,7 @@
                 allowInputToggle: true,
                 useCurrent: false,
                 maxDate: todayDatePicker
-            });     
+            });
 
             $('#CCCReferaldatepicker').datetimepicker({
                 format: 'DD-MMM-YYYY',
@@ -689,7 +747,7 @@
 
             $('#TestingDateMod').datepicker({
                 allowPastDates: true,
-                date:0,
+                date: 0,
                 momentConfig: { culture: 'en', format: 'DD-MMM-YYYY' }
             });
 
@@ -718,8 +776,11 @@
                 $("#dobPrecision").val("false");
             });
 
+            $("#SearchPeopleFamily").hide()
             $("#FamilyTestingDetails").hide();
             $("#familyMembersTable").hide();
+            $("#RegisteredtoClinic").hide();
+            $("#ReturnGrid").hide();
             //$("#hivTestingInfo").hide();
             //$("#isRegisteredInClinic").hide();
 
@@ -727,7 +788,14 @@
 
             loadFamilyTesting();
 
-            $("#RegisteredInClinic").change(function() {
+            $("#btnReturnGrid").click(function () {
+                $("#SearchPeopleFamily").show()
+                
+                $("#FamilyTestingDetails").hide();
+                $("#ReturnGrid").hide();
+
+            });
+            $("#RegisteredInClinic").change(function () {
                 var registeredInClinic = $("#RegisteredInClinic").find(":selected").text();
 
                 if (registeredInClinic == "Yes") {
@@ -743,11 +811,205 @@
                 }
             });
 
+            //row selection
+            $('#tblFindPatient').on('click', 'tbody tr', function () {
+                // window.location.href = $(this).attr('href');
+                var patientId = $(this).find('td').eq(0).text();
+
+                var personId = $(this).find('td').eq(9).text();
+
+
+                // alert("personId:" + patientId + " " + "Patient Status :" + patientStatus);
+                GetPatientBaselineandResult(personId, patientId);
+                
+
+
+            });
+
+            function GetDictionaryValue(array, key) {
+
+                var keyValue = key;
+                var result;
+                jQuery.each(array, function () {
+                    if (this.Key == keyValue) {
+                        result = this.Value;
+                        return false;
+                    }
+                });
+                return result;
+            }
+       
+            function GetPatientBaselineandResult(personId, patientId) {
+               
+
+               jQuery.ajax({
+                        type: "POST",
+                        url: "../WebService/PatientService.asmx/GetPatientBaselineandHivTesting",
+                        data: "{'personId':'" + personId + "','patientId':'" + patientId + "'}",
+                        contentType: "application/json; charset=utf-8",
+                        dataType: "json",
+                        success: function (response) {
+
+                            console.log(response);
+                            console.log(response);
+                            console.log(response.d);
+                            var json = jQuery.parseJSON(response.d);
+
+                            if (json == "self") {
+                                toastr.error("Cannot select yourself as family member");
+
+                            }
+                            else {
+                                $("#ViewFamilyTestingDetails").hide();
+                                $("#FamilyTestingDetails").show();
+                                $("#SearchPeopleFamily").hide();
+                                $("#ReturnGrid").show();
+                             
+
+                                resetElements();
+                                //$("#FamilyTestingDetails").parsley.reset();
+                                //$('.parsley-required').hide();
+
+                                RelationshipPersonId = "";
+                                RelationshipRelationshipType = "";
+                                RelationshipPersonId = GetDictionaryValue(json, "PersonId");
+                              
+                                CCCNumber = GetDictionaryValue(json, "CCCNumber");
+                                 HivTestingResult = GetDictionaryValue(json, "HivTestingResult");
+                                 Relationshiptype = GetDictionaryValue(json, "Relationshiptype");
+                                 BaselineResult = GetDictionaryValue(json, "BaselineResult");
+                                 HivTestingDate = GetDictionaryValue(json, "HivTestingDate");
+                                 ReferredToCare = GetDictionaryValue(json, "ReferredToCare");
+                                 LinkageDate = GetDictionaryValue(json, "LinkageDate");
+
+                                 EnrollmentNumber = GetDictionaryValue(json, "EnrollmentNumber");
+                                 FirstName = GetDictionaryValue(json, "FirstName");
+                                 MiddleName = GetDictionaryValue(json, "MiddleName");
+                                 DOB = GetDictionaryValue(json, "DOB");
+                                 LastName = GetDictionaryValue(json, "LastName");
+                                 gender = GetDictionaryValue(json, "gender");
+                                 BaselineDate = GetDictionaryValue(json, "BaselineDate");
+                                 DobPrecision = GetDictionaryValue(json, "DobPrecision");
+                                if (!(FirstName == null || FirstName == "undefined" || FirstName == "")) {
+                                    $("#<%=FirstName.ClientID%>").val(FirstName);
+                                }
+                                if (!(MiddleName == null || MiddleName == 'undefined' || MiddleName == "")) {
+                                    $("#<%=MiddleName.ClientID%>").val(MiddleName);
+
+                                }
+
+
+                                if (!(gender == null || gender == 'undefined' || gender == "" ||gender=="Unkwown")) {
+                                    $("#<%=Sex.ClientID%>").val(gender);
+
+                                }
+
+                                if (!(DOB == null || DOB == 'undefined' || DOB == "")) {
+                                    $("#<%=Dob.ClientID%>").val(moment(DOB).format('DD-MMM-YYYY'));
+
+                                    var age = getAge(moment(DOB).format('DD-MMM-YYYY'));
+                                    $("#personAge").val(age);
+
+                                }
+
+                                if (!(LastName == null || LastName == 'undefined' || LastName == "")) {
+                                    $("#<%=LastName.ClientID%>").val(LastName);
+                                }
+
+
+
+                                if (!(DobPrecision == null || DobPrecision == 'undefined' || DobPrecision == "")) {
+                                    $("#<%=dobPrecision.ClientID%>").val(DobPrecision);
+                                }
+                                if (!(Relationshiptype == null || Relationshiptype == 'undefined' || Relationshiptype == "")) {
+
+                                    $("#<%=Relationship.ClientID%>").val(Relationshiptype);
+
+                                }
+
+                                if (!(BaselineResult == null || BaselineResult == "undefined" || BaselineResult == "")) {
+
+                                    $("#<%=BaselineHIVStatus.ClientID%>").val(BaselineResult);
+
+
+                                }
+                                if (!(BaselineDate == null || BaselineDate == 'undefined' || BaselineDate == "")) {
+                                    if (BaselineDate !== 'null') {
+                                        $("#<%=BaselineHIVStatusDate.ClientID%>").val(moment(BaselineDate).format('DD-MMM-YYYY'));
+
+                                    } else {
+                                        $("#<%=BaselineHIVStatusDate.ClientID%>").val("");
+                                    }
+
+                                    $("#BaselineHIVStatusDate").attr('disabled', 'disabled');
+                                }
+
+                              if (!(CCCNumber == null || CCCNumber == "undefined" || CCCNumber == "" || CCCNumber == "0")) 
+                                    {
+                                        $("#hivoutcome").hide();
+                                         
+                                    }
+
+                                if (!(CCCNumber == null || CCCNumber == "undefined" || CCCNumber == "" || CCCNumber == "0") && ReferredToCare == null) {
+                                    ReferredToCare = true;
+
+                                }
+
+                                if (!(HivTestingResult == null || HivTestingResult == 'undefined' || HivTestingResult == "")) {
+                                    $("#<%=hivtestingresult.ClientID%>").val(HivTestingResult);
+                                    CccEnabled();
+
+                                }
+
+                                if (!(HivTestingDate == null || HivTestingDate == 'undefined' || HivTestingDate == "")) {
+                                    $("#<%=HIVTestingDate.ClientID%>").val(moment(HivTestingDate).format('DD-MMM-YYYY'));
+                                } else {
+                                    $("#<%=HIVTestingDate.ClientID%>").val("");
+                                }
+                                $("#HIVTestingDate").prop("disabled", true);
+
+                                if (!(ReferredToCare == null || ReferredToCare == "undefined" || ReferredToCare == "")) {
+                                    if (ReferredToCare == "True" || ReferredToCare == true) {
+                                        $("#<%=CccReferal.ClientID%>").val("True");
+
+                                        CccEnabled();
+                                    }
+                                    else if (ReferredToCare == "False" || ReferredToCare == false) {
+                                        $("#<%=CccReferal.ClientID%>").val("False");
+
+                                        CccEnabled();
+                                    }
+
+
+
+                                }
+
+                                if (!(LinkageDate == null || LinkageDate == "undefined" || LinkageDate == "")) {
+                                    $("#<%=CCCReferalDate.ClientID%>").val(moment(LinkageDate).format('DD-MMM-YYYY'));
+                                } else {
+                                    $("#<%=CCCReferalDate.ClientID%>").val("");
+                                }
+                                $("#CCCReferalDate").prop("disabled", true);
+
+                                if (!(CCCNumber == null || CCCNumber == "undefined" || CCCNumber == "" || CCCNumber == "0")) {
+                                    $("#<%=cccNumber.ClientID%>").val(CCCNumber);
+                                }
+
+
+                            }
+                        },
+                        error: function (response) {
+                            toastr.error(response.d, "Failed to retrieve family's member baseline and Result");
+                        }
+               });
+            }
+        
+
             $("#btnSearch").click(function () {
                 $('#FamilyTestingForm').parsley().destroy();
                 $('#FamilyTestingForm').parsley({
                     excluded:
-                        "input[type=button], input[type=submit], input[type=reset], input[type=hidden], [disabled], :hidden"
+                    "input[type=button], input[type=submit], input[type=reset], input[type=hidden], [disabled], :hidden"
                 });
 
                 var firstName = null;
@@ -771,7 +1033,7 @@
                 $('#FamilyTestingForm').parsley().destroy();
                 $('#FamilyTestingForm').parsley({
                     excluded:
-                        "input[type=button], input[type=submit], input[type=reset], input[type=hidden], [disabled], :hidden"
+                    "input[type=button], input[type=submit], input[type=reset], input[type=hidden], [disabled], :hidden"
                 });
 
                 if ($('#FamilyTestingForm').parsley().validate()) {
@@ -804,14 +1066,20 @@
                         var birthDate = new Date(dob);
                         var age = today.getFullYear() - birthDate.getFullYear();
                     }
+
+                    var today = new Date();
+                    var birthDate = new Date(dob);
+                   // var totalMonths =  parseInt(moment(today).diff(moment(birthDate), 'months'));
+                  
+                    var age = today.getFullYear() - birthDate.getFullYear();
                     var cccNumberFound = null;
                     var count = 0;
-
+                    console.log(cccArrayList);
                     if (typeof cccReferalNumber !== "undefined" && cccReferalNumber != null && cccReferalNumber != "") {
                         cccNumberFound = $.inArray("" + cccReferalNumber + "", cccArrayList);
 
 
-                        if (cccNumberFound > -1){
+                        if (cccNumberFound > -1) {
                             toastr.error("Error", cccReferalNumber + " CCC Number already exists in the List");
                             return false;
                         }
@@ -868,6 +1136,23 @@
                             return false;
                         }
                          if ((moment('' + dob + '').isAfter(adult)) && (($("#Relationship :selected").text() === "Spouse")||($("#Relationship :selected").text() === "Partner")))  {
+                    if (moment('' + baselineHivStatusDate + '').isBefore(dob)) {
+                        toastr.error("Baseline HIV status date cannot be before the date of birth.");
+                        return false;
+                    }
+                    if (moment('' + hivTestingresultDate + '').isBefore(baselineHivStatusDate)) {
+                        toastr.error("Baseline HIV testing date cannot be after HIV testing result date.");
+                        return false;
+                    }
+                    if (moment('' + hivTestingresultDate + '').isBefore(dob)) {
+                        toastr.error("HIV testing result date cannot be before the date of birth.");
+                        return false;
+                    }
+                    if (moment('' + baselineHivStatusDate + '').isAfter(hivTestingresultDate)) {
+                        toastr.error("Baseline HIV status date cannot be greater than HIV testing result date.");
+                        return false;
+                    }
+                    if ((moment('' + dob + '').isAfter(adult)) && (($("#Relationship :selected").text() === "Spouse") || ($("#Relationship :selected").text() === "Partner"))) {
                         toastr.error("A child cannot have a spouse or partner.");
                         return false;
                     }
@@ -878,10 +1163,11 @@
                     }
                    
                     var fam = familyMembers.filter(function(el) {
+                    var fam = familyMembers.filter(function (el) {
                         return (el.firstName === firstName) &&
                             (el.middleName === middleName) &&
-                            (el.lastName ===lastName) &&
-                            (el.dob ===dob) &&
+                            (el.lastName === lastName) &&
+                            (el.dob === dob) &&
                             (el.relationshipId === relationshipId);
                     });
 
@@ -891,7 +1177,7 @@
                     if (baselineHivStatusDate != "") {
                         baselineHivStatusDate = moment(baselineHivStatusDate, 'DD-MMM-YYYY').format("DD-MMM-YYYY");
                     }
-                    
+
                     if (fam.length > 0) {
                         toastr.error("Family member already added!");
                         return false;
@@ -921,8 +1207,13 @@
                             count +
                             "</td><td align='right'><button type='button' class='btnDelete btn btn-danger fa fa-minus-circle btn-fill' > Remove</button></td></tr>";
                         $("#tblFamilyTesting>tbody:first").append('' + table + '');
-                       
+
+                        
+
+                      
+
                         var testing = {
+                            relationshipPersonId: RelationshipPersonId,
                             firstName: firstName,
                             middleName: middleName,
                             lastName: lastName,
@@ -946,46 +1237,82 @@
                 } else {
                     return false;
                 }
+
+            });
+            $("#btnClose").click(function () {
                 
+                window.location.href = '<%=ResolveClientUrl("~/CCC/patient/patientHome.aspx") %>';
+
+            });
+            $("#btnReset").click(function () {
+                resetElements();
             });
 
+        
             $("#btnSave").click(function () {
                 if (familyMembers.length < 1) {
                     toastr.error("error", "Please insert at least One(1) family member");
                     return false;
                 }
-                //for (var i = 0, len = familyMembers.length; i < len; i++) {
-                //    addFamilyTesting(familyMembers[i]);
-                //}
-
-                addFamilyTesting(familyMembers);
-            });
-
-            $("#btnClose").click(function () {
-                window.location.href = '<%=ResolveClientUrl("~/CCC/patient/patientHome.aspx") %>';
+                
+                    addFamilyTesting(familyMembers);
                 
             });
 
+           
+            
             $("#tblFamilyTesting").on('click', '.btnDelete', function () {
                 var indexcount = $(this).closest('tr').find("td").eq(9).html();
+                var cccreferalnumber;
                 for (var member in familyMembers) {
                     if (familyMembers[member]["indexCount"] == indexcount) {
+                        cccreferalnumber = familyMembers[member]["cccReferalNumber"];
                         familyMembers.splice(member, 1);
+                        
+                        
                     }
+
                 }
+
+                for (var i = 0; i < cccArrayList.length; i++)
+                    if (cccArrayList[i] == cccreferalnumber) {
+                        cccArrayList.splice(i, 1);
+                    }
+
 
                 console.log(familyMembers);
                 $(this).closest('tr').remove();
+               
+               
+           
+                
+               
                 //console.log($(this).closest('tr').find("td").eq(9).html());
             });
 
-            $("#btnReset").click(function () {
-                resetElements();
-            });
-
+            
+          
+            $('input:radio[name=optRegistered]').change(function () {
+                if (this.value == 'No') {
+                    $('#FamilyTestingForm').parsley().destroy();
+                             resetElements();
+                             resetNoOptions();
+                    
+                    }
+                else if (this.value == 'Yes') {
+                    $('#FamilyTestingForm').parsley().destroy();
+                        $("#SearchPeopleFamily").show()
+                        $("#FamilyTestingDetails").hide();
+                        $("#ReturnGrid").hide();
+                    }
+                });
+           
+         
             $("#FamilyAdd").click(function () {
                 $("#ViewFamilyTestingDetails").hide();
-                $("#FamilyTestingDetails").show();
+                $("#FamilyTestingDetails").hide();
+                $("#SearchPeopleFamily").hide();
+                $("#RegisteredtoClinic").show();
                 resetElements();
             });
 
@@ -1093,7 +1420,7 @@
                 Dobchanged(date);
                 var age = getAge(date);
                 $("#personAge").val(age);
-
+               
                 $("#dobPrecision").val("true");
             });
 
@@ -1402,10 +1729,20 @@
                 $("#<%=CccReferal.ClientID%>").prop('disabled', true);
                 $("#<%=BaselineHIVStatusDate.ClientID%>").prop('disabled', true);
                 $("#BaselineHIVStatusD").addClass('noneevents');
-
-                $("#hivtestingresult").val("");
+                if (!(HivTestingResult == null || HivTestingResult == 'undefined' || HivTestingResult == "")) {
+                    $("#hivtestingresult").val(HivTestingResult);
+                }
+                else {
+                    $("#hivtestingresult").val("");
+                }
                 $("#hivtestingresult").prop('disabled', false);
-                $("#HIVTestingDate").val("");
+
+                if (!(HivTestingDate == null || HivTestingDate == 'undefined' || HivTestingDate == "")) {
+                    $("#HIVTestingDate").val(moment(HivTestingDate).format('DD-MMM-YYYY'))
+                }
+                else {
+                        $("#HIVTestingDate").val("");
+                }
                 $("#HIVTestingDate").prop('disabled', false);        
                 $("#TestingDate").removeClass('noneevents');
 
@@ -1413,9 +1750,19 @@
                 $("#CCCReferaldatepicker").addClass('noneevents');
 
             } else if (baselinehivstatus === "Tested Positive") {
-                $("#hivtestingresult").val("");
+                if (!(HivTestingResult == null || HivTestingResult == 'undefined' || HivTestingResult == "")) {
+                    $("#hivtestingresult").val(HivTestingResult);
+                }
+                else {
+                    $("#hivtestingresult").val("");
+                }
                 $("#hivtestingresult").prop('disabled', true);
-                $("#HIVTestingDate").val("");
+                if (!(HivTestingDate == null || HivTestingDate == 'undefined' || HivTestingDate == "")) {
+                    $("#HIVTestingDate").val(moment(HivTestingDate).format('DD-MMM-YYYY'))
+                }
+                else {
+                    $("#HIVTestingDate").val("");
+                }
                 $("#HIVTestingDate").prop('disabled', true);
                 $("#TestingDate").addClass('noneevents');
 
@@ -1430,9 +1777,19 @@
                 $("#<%=CccReferal.ClientID%>").prop('disabled', false);
 
             } else if (baselinehivstatus === "Tested Negative") {
-                $("#hivtestingresult").val("");
+                if (!(HivTestingResult == null || HivTestingResult == 'undefined' || HivTestingResult == "")) {
+                    $("#hivtestingresult").val(HivTestingResult);
+                }
+                else {
+                    $("#hivtestingresult").val("");
+                }
                 $("#hivtestingresult").prop('disabled', false);
-                $("#HIVTestingDate").val("");
+                if (!(HivTestingDate == null || HivTestingDate == 'undefined' || HivTestingDate == "")) {
+                    $("#HIVTestingDate").val(moment(HivTestingDate).format('DD-MMM-YYYY'))
+                }
+                else {
+                    $("#HIVTestingDate").val("");
+                }
                 $("#HIVTestingDate").prop('disabled', false);
                 $("#TestingDate").removeClass('noneevents');
 
@@ -1465,6 +1822,18 @@
             }
         }--%>
 
+
+        function resetNoOptions() {
+
+            $("#ViewFamilyTestingDetails").hide();
+            $("#FamilyTestingDetails").show();
+            $("#SearchPeopleFamily").hide();
+            $("#ReturnGrid").hide();
+            $("#hivTestingInfo").show();
+            $("#hivoutcome").show();
+         
+
+        }
         function CccEnabledMod() {
             var testingStatusMod = $("#testingStatusMod :selected").text();
 
@@ -1585,7 +1954,9 @@
                 age--;
             }
 
+             $("#personMonth").val(m);
             return age;
+              
         }
 
         function relationShipChanged() {

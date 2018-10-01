@@ -13,13 +13,14 @@ namespace Entities.CCC.Encounter
         public int PatientId { get; set; }
         [ForeignKey("PatientId")]
         public virtual PatientEntity Patient { get; set; }
-        public int FacilityId { get; set; }
+        public int? FacilityId { get; set; }
         public int PatientMasterVisitId { get; set; }
         [ForeignKey("PatientMasterVisitId")]
         public virtual PatientMasterVisit PatientMasterVisit { get; set; }
         public int ServiceAreaId { get; set; }
+        public int? NotesCategoryId { get; set; }
         public string ClinicalNotes { get; set; }
         public bool ModifyFlag { get; set; }
-        public DateTime VersionStamp { get; set; }
+        //public DateTime VersionStamp { get; set; }
     }
 }

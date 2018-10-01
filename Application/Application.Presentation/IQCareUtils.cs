@@ -10,6 +10,7 @@ using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Windows.Forms;
+using Interface.Laboratory;
 
 namespace Application.Presentation
 {
@@ -550,6 +551,17 @@ namespace Application.Presentation
             }
             //put a breakpoint here and check datatable
             return dataTable;
+        }
+
+        public int DeleteForm(string FormName, int visitPk, int patientID, int userid)
+        {
+            int theResultRow;
+
+            ILabFunctions LabResultManager = (ILabFunctions)ObjectFactory.CreateInstance("BusinessProcess.Laboratory.BLabFunctions, BusinessProcess.Laboratory");
+            theResultRow = (int)LabResultManager.DeleteLabForms(FormName, visitPk, patientID, userid);
+
+            return theResultRow;
+
         }
         public string OpenExcelFile(string theFilePath)
         {

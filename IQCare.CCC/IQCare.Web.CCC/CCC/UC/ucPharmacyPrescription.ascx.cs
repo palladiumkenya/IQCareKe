@@ -65,7 +65,7 @@ namespace IQCare.Web.CCC.UC
                     lookUp.populateDDL(regimenLine, "RegimenClassificationPaeds");
                 }
                 
-                lookUp.getPharmacyDrugFrequency(ddlFreq);
+                //lookUp.getPharmacyDrugFrequency(ddlFreq);
 
                 PatientEncounterLogic pel = new PatientEncounterLogic();
                 pel.getPharmacyTreatmentProgram(ddlTreatmentProgram);
