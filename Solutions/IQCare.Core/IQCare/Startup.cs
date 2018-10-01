@@ -11,7 +11,6 @@ using Microsoft.Extensions.DependencyInjection;
 using System.IO;
 using System.Reflection;
 using IQCare.Helpers;
-using IQCareRecords.Common.BusinessProcess;
 using Microsoft.AspNetCore.Http;
 using System.Web;
 using Microsoft.AspNetCore.Hosting.Internal;
