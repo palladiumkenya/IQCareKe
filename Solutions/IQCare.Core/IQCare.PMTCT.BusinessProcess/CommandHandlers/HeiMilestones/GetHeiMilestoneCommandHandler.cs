@@ -7,6 +7,7 @@ using IQCare.PMTCT.BusinessProcess.Commands.HeiMilestones;
 using IQCare.PMTCT.Core.Models.HEI;
 using IQCare.PMTCT.Infrastructure;
 using MediatR;
+using Microsoft.EntityFrameworkCore;
 using Serilog;
 
 namespace IQCare.PMTCT.BusinessProcess.CommandHandlers.HeiMilestones
@@ -26,8 +27,8 @@ namespace IQCare.PMTCT.BusinessProcess.CommandHandlers.HeiMilestones
             {
                 try
                 {
-                    PatientMilestone patientMilestone = _unitOfWork.Repository<PatientMilestone>()
-                        .Get(x => x.PatientId == request.PatientId && !x.DeleteFlag).FirstOrDefault();
+                    PatientMilestone patientMilestone = await _unitOfWork.Repository<PatientMilestone>()
+                        .Get(x => x.PatientId == request.PatientId && !x.DeleteFlag).FirstOrDefaultAsync();
                     return Result<PatientMilestone>.Valid(patientMilestone);
                 }
                 catch (Exception e)
