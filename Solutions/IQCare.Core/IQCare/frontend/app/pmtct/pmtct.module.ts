@@ -84,7 +84,7 @@ import { HeiOutcomeOptionsResolver } from './_services/hei-outcome-options.resol
         MaternalhistoryComponent,
         HeiHivtestingComponent,
         InfantFeedingComponent,
-        TbAssessmentComponent
+        TbAssessmentComponent,
         InfantFeedingComponent,
         HeiOutcomeComponent
     ],

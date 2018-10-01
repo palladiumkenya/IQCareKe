@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { LookupItemView } from '../../shared/_models/LookupItemView';
 import { FormGroup, FormArray } from '@angular/forms';
-import {LongDateFormatKey} from 'moment';
+import { LongDateFormatKey } from 'moment';
 
 @Component({
     selector: 'app-hei',
@@ -79,8 +79,7 @@ export class HeiComponent implements OnInit {
                 immunizationPeriodOptions,
                 immunizationGivenOptions,
                 milestoneAssessedOptions,
-                milestoneStatusOptions
-                infantFeedingOptions,
+                milestoneStatusOptions,
                 heiOutcomeOptions
             } = res;
             console.log('test options');
@@ -118,13 +117,13 @@ export class HeiComponent implements OnInit {
         });
 
         this.immunizationHistoryOptions.push({
-            'immunizationPeriod' : this.immunizationPeriodOptions,
+            'immunizationPeriod': this.immunizationPeriodOptions,
             'immunizationGiven': this.immunizationGivenOptions
 
         });
 
         this.milestoneOptions.push({
-            'assessed' : this.milestoneAssessedOptions,
+            'assessed': this.milestoneAssessedOptions,
             'status': this.milestoneStatusOptions,
             'yesnoOption': this.yesnoOptions
         });

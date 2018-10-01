@@ -18,10 +18,10 @@ import { HeiMotherRegimenResolver } from './_services/heimotherregimen.resolver'
 import { YesNoResolver } from './_services/yesno.resolver';
 import { MotherDrugsAtInfantEnrollmentResolver } from './_services/motherdrugsatinfantenrollment.resolver';
 import { InfantFeedingOptionsResolver } from './_services/infant-feeding-options.resolver.service';
-import {ImmunizationPeriodOptionsResolverService} from './_services/immunization-period-options-resolver.service';
-import {ImmunizationGivenOptionsResolverService} from './_services/immunization-given-options-resolver.service';
-import {MilestonesAssessedOptionsResolverService} from './_services/milestones-assessed-options-resolver.service';
-import {MilestonesStatusOptionsResolverService} from './_services/milestones-status-options-resolver.service';
+import { ImmunizationPeriodOptionsResolverService } from './_services/immunization-period-options-resolver.service';
+import { ImmunizationGivenOptionsResolverService } from './_services/immunization-given-options-resolver.service';
+import { MilestonesAssessedOptionsResolverService } from './_services/milestones-assessed-options-resolver.service';
+import { MilestonesStatusOptionsResolverService } from './_services/milestones-status-options-resolver.service';
 import { HeiOutcomeOptionsResolver } from './_services/hei-outcome-options.resolver.service';
 
 
@@ -74,8 +74,7 @@ const routes: Routes = [
             immunizationPeriodOptions: ImmunizationPeriodOptionsResolverService,
             immunizationGivenOptions: ImmunizationGivenOptionsResolverService,
             milestoneAssessedOptions: MilestonesAssessedOptionsResolverService,
-            milestoneStatusOptions: MilestonesStatusOptionsResolverService
-            infantFeedingOptions: InfantFeedingOptionsResolver,
+            milestoneStatusOptions: MilestonesStatusOptionsResolverService,
             heiOutcomeOptions: HeiOutcomeOptionsResolver
         }
     }
