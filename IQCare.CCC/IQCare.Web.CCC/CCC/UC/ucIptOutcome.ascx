@@ -24,6 +24,8 @@
 <script type="text/javascript">
     $(document).ready(function () {
         $("#<%=discontinuation.ClientID%>").prop('disabled', true);
+
+        getIptOutcome();
     });
 
     function IptOutcomeEvent() {
@@ -32,6 +34,33 @@
         } else {
             $("#<%=discontinuation.ClientID%>").prop('disabled', true);
         }
+    }
+
+
+    function getIptOutcome() {
+        
+        var iptEvent = $("#iptEvent").val();
+        var reasonForDiscontinuation = $("#discontinuation").val();
+        var patientId = <%=PatientId%>;
+        var patientMasterVisitId = <%=PatientMasterVisitId%>;
+        $.ajax({
+            type: "POST",
+            url: "../WebService/PatientTbService.asmx/GetPatientIptOutcome",
+            data: "{'patientId': '" + patientId + "'}",
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: function (response) {
+                if (response.d !== null) {
+                    var ipt = JSON.parse(response.d);
+                    $('#iptEvent').val(ipt.IptEvent);
+                    $("#<%=discontinuation.ClientID%>").val(ipt.ReasonForDiscontinuation)
+                }
+            },
+            error: function (response) {
+                toastr.error(response.d, "Unable to fetch IPT Outcome");
+            }
+        });
+
     }
 
 </script>

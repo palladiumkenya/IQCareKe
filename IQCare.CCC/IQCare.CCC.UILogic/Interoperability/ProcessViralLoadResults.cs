@@ -104,14 +104,14 @@ namespace IQCare.CCC.UILogic.Interoperability
                             var jss = new JavaScriptSerializer();
                             string patientLabOrder = jss.Serialize(listOfTestsOrdered);
                             //include userid and facility ID
-                           int orderId= labOrderManager.savePatientLabOrder(patient.Id, (int)patient.ptn_pk, interopUserId, thisFacility.FacilityID, 203, patientMasterVisitId, sampleCollectionDate.ToString(), "IL lab order", patientLabOrder,"completed");
+                           int orderId= labOrderManager.savePatientLabOrder(patient.Id, (int)patient.ptn_pk, interopUserId, thisFacility.FacilityID, 203, patientMasterVisitId, sampleCollectionDate.ToString(), "IL lab order", patientLabOrder,"Complete");
                             
                             labOrder = labOrderManager.GetLabOrdersById( orderId);
                             labDetails = labOrderManager.GetLabTestsOrderedById(labOrder.Id);
                         }
                         else
                         {
-                        labDetails = labOrderManager.GetLabTestsOrderedById(labOrder.Id);
+                            labDetails = labOrderManager.GetLabTestsOrderedById(labOrder.Id);
                         }
 
                         if (labOrder != null)
@@ -143,8 +143,6 @@ namespace IQCare.CCC.UILogic.Interoperability
 
                                 }
                                 
-                                
-                                //var labOrd = labOrder.FirstOrDefault();
                                 if (labOrder != null)
                                 {
 
@@ -164,9 +162,12 @@ namespace IQCare.CCC.UILogic.Interoperability
                                         HasResult = true
                                     };
                                     labOrderManager.AddPatientLabResults(labResults);
+                                    labOrder.OrderStatus = "Complete";
+                                    labOrderManager.savePatientLabOrder(labOrder);
+
                                 }
                             }
-                        Msg = "Sucess";
+                        Msg = "Success";
                         }
                         
                     }

@@ -33,6 +33,8 @@ namespace IQCare.HTS.BusinessProcess.CommandHandlers
                     {
                         referral[0].ToFacility = request.ReferredTo;
                         referral[0].ExpectedDate = request.DateToBeEnrolled;
+                        referral[0].OtherFacility = request.OtherFacility;
+
                         _hTSUnitOfWork.Repository<Referral>().Update(referral[0]);
                         await _hTSUnitOfWork.SaveAsync();
 
@@ -71,7 +73,8 @@ namespace IQCare.HTS.BusinessProcess.CommandHandlers
                         CreatedBy = request.UserId,
                         ExpectedDate = request.DateToBeEnrolled,
                         CreateDate = DateTime.Now,
-                        DeleteFlag = false
+                        DeleteFlag = false,
+                        OtherFacility = request.OtherFacility
                     };
 
                     await _hTSUnitOfWork.Repository<Referral>().AddAsync(referral);

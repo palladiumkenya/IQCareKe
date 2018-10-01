@@ -216,7 +216,7 @@ namespace IQCare.Web.CCC.WebService
             string relationshipPersonId; int patientId; int patientMasterVisitId; string firstName; string middleName; string lastName; int sex; string dob; int relationshipId; string baselineHivStatusId; string baselineHivStatusDate;
             /*string hivTestingresultId;*/ string hivTestingresultDate; bool cccreferal; string cccReferalNumber;  int userId;
             DateTime? linkageDate;
-            bool dobPrecision;
+            bool? dobPrecision = null;
 
             //FamilyMembers[] familyMembrs = JsonConvert.DeserializeObject<FamilyMembers[]>(familyMembers);
             FamilyMembers[] familyMembrs = new JavaScriptSerializer().Deserialize<FamilyMembers[]>(familyMembers);
@@ -234,6 +234,15 @@ namespace IQCare.Web.CCC.WebService
                 int hivresultId = familyMembrs[i].hivTestingresultId == "" ? 0 : Convert.ToInt32(familyMembrs[i].hivTestingresultId);
                 sex = familyMembrs[i].sex;
                 dob = familyMembrs[i].dob;
+                DateTime? dateOfBirth = null;
+                if (dob != "")
+                {
+                    dateOfBirth = DateTime.Parse(dob);
+                }
+                if (familyMembrs[i].dobPrecision != "")
+                {
+                    dobPrecision = Convert.ToBoolean(familyMembrs[i].dobPrecision);
+                }
                 if (familyMembrs[i].dobPrecision == "" || familyMembrs[i].dobPrecision == null)
                 {
                     dobPrecision = false;
@@ -269,7 +278,7 @@ namespace IQCare.Web.CCC.WebService
                     MiddleName = middleName,
                     LastName = lastName,
                     Sex = sex,
-                    DateOfBirth = DateTime.Parse(dob),
+                    DateOfBirth = dateOfBirth,
                     DobPrecision = dobPrecision,
                     RelationshipId = relationshipId,
                 BaseLineHivStatusId = baselinehivid,
@@ -1275,8 +1284,8 @@ namespace IQCare.Web.CCC.WebService
         public string MiddleName { get; set; }
         public string LastName { get; set; }
         public string Relationship { get; set; }
-        public DateTime DateOfBirth { get; set; }
-        public bool DobPrecision { get; set; }
+        public DateTime? DateOfBirth { get; set; }
+        public bool? DobPrecision { get; set; }
         public string Sex { get; set; }
         public string BaseLineHivStatus { get; set; }
         public DateTime ? BaseLineHivStatusDate { get; set; }

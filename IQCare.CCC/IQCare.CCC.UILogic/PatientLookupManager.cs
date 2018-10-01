@@ -140,6 +140,11 @@ namespace IQCare.CCC.UILogic
                             {
                                 string cccConcatParts = numbers[0] + numbers[1];
                                 patient = _patientLookupmanager.GetPatientByCccNumber(cccConcatParts);
+
+                                if (patient == null)
+                                {
+                                    patient = _patientLookupmanager.GetPatientByNormalizedCccNumber(cccConcatParts);
+                                }
                             }
                         }
                     }

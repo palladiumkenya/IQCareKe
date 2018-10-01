@@ -12,6 +12,8 @@ using IQCare.HTS.BusinessProcess.Services;
 using IQCare.HTS.Infrastructure;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
+using Newtonsoft.Json;
+using Serilog;
 
 namespace IQCare.HTS.BusinessProcess.CommandHandlers
 {
@@ -31,36 +33,35 @@ namespace IQCare.HTS.BusinessProcess.CommandHandlers
             using (_htsUnitOfWork)
             using (_unitOfWork)
             {
-                try
+                string afyaMobileId = string.Empty;
+                string indexClientAfyaMobileId = string.Empty;
+
+                RegisterPersonService registerPersonService = new RegisterPersonService(_unitOfWork);
+                EncounterTestingService encounterTestingService = new EncounterTestingService(_unitOfWork, _htsUnitOfWork);
+
+                var facilityId = request.MESSAGE_HEADER.SENDING_FACILITY;
+
+                for (int i = 0; i < request.FAMILY.Count; i++)
                 {
-                    string afyaMobileId = string.Empty;
-                    string indexClientAfyaMobileId = string.Empty;
-
-                    RegisterPersonService registerPersonService = new RegisterPersonService(_unitOfWork);
-                    EncounterTestingService encounterTestingService = new EncounterTestingService(_unitOfWork, _htsUnitOfWork);
-
-                    var facilityId = request.MESSAGE_HEADER.SENDING_FACILITY;
-
-                    for (int i = 0; i < request.FAMILY.Count; i++)
+                    for (int j = 0; j < request.FAMILY[i].PATIENT_IDENTIFICATION.INTERNAL_PATIENT_ID.Count; j++)
                     {
-                        
-
-                        for (int j = 0; j < request.FAMILY[i].PATIENT_IDENTIFICATION.INTERNAL_PATIENT_ID.Count; j++)
+                        if (request.FAMILY[i].PATIENT_IDENTIFICATION.INTERNAL_PATIENT_ID[j].IDENTIFIER_TYPE ==
+                            "AFYA_MOBILE_ID")
                         {
-                            if (request.FAMILY[i].PATIENT_IDENTIFICATION.INTERNAL_PATIENT_ID[j].IDENTIFIER_TYPE ==
-                                "AFYA_MOBILE_ID")
-                            {
-                                afyaMobileId = request.FAMILY[i].PATIENT_IDENTIFICATION.INTERNAL_PATIENT_ID[j].ID;
-                            }
-
-                            if (request.FAMILY[i].PATIENT_IDENTIFICATION.INTERNAL_PATIENT_ID[j].IDENTIFIER_TYPE ==
-                                "INDEX_CLIENT_AFYAMOBILE_ID")
-                            {
-                                indexClientAfyaMobileId =
-                                    request.FAMILY[i].PATIENT_IDENTIFICATION.INTERNAL_PATIENT_ID[j].ID;
-                            }
+                            afyaMobileId = request.FAMILY[i].PATIENT_IDENTIFICATION.INTERNAL_PATIENT_ID[j].ID;
                         }
 
+                        if (request.FAMILY[i].PATIENT_IDENTIFICATION.INTERNAL_PATIENT_ID[j].IDENTIFIER_TYPE ==
+                            "INDEX_CLIENT_AFYAMOBILE_ID")
+                        {
+                            indexClientAfyaMobileId =
+                                request.FAMILY[i].PATIENT_IDENTIFICATION.INTERNAL_PATIENT_ID[j].ID;
+                        }
+                    }
+
+                    var afyaMobileMessage = await registerPersonService.AddAfyaMobileInbox(DateTime.Now, indexClientAfyaMobileId, JsonConvert.SerializeObject(request), false);
+                    try
+                    {
                         string firstName = request.FAMILY[i].PATIENT_IDENTIFICATION.PATIENT_NAME.FIRST_NAME;
                         string middleName = request.FAMILY[i].PATIENT_IDENTIFICATION.PATIENT_NAME.MIDDLE_NAME;
                         string lastName = request.FAMILY[i].PATIENT_IDENTIFICATION.PATIENT_NAME.LAST_NAME;
@@ -102,8 +103,8 @@ namespace IQCare.HTS.BusinessProcess.CommandHandlers
                                 }
 
                                 /***
-                                 *Encounter
-                                 */
+                                    *Encounter
+                                    */
                                 if (request.FAMILY[i].ENCOUNTER != null)
                                 {
                                     if (request.FAMILY[i].ENCOUNTER.FAMILY_SCREENING != null)
@@ -198,8 +199,8 @@ namespace IQCare.HTS.BusinessProcess.CommandHandlers
 
 
                                 /***
-                                 *Encounter
-                                 */
+                                    *Encounter
+                                    */
                                 if (request.FAMILY[i].ENCOUNTER != null)
                                 {
                                     if (request.FAMILY[i].ENCOUNTER.FAMILY_SCREENING != null)
@@ -262,7 +263,7 @@ namespace IQCare.HTS.BusinessProcess.CommandHandlers
                                         if (!string.IsNullOrWhiteSpace(request.FAMILY[i].ENCOUNTER.TRACING[j].REMINDER_DATE))
                                             reminderDate = DateTime.ParseExact(request.FAMILY[i].ENCOUNTER.TRACING[j].REMINDER_DATE, "yyyyMMdd", null);
                                         DateTime? tracingBookingDate = null;
-                                        if(!string.IsNullOrWhiteSpace(request.FAMILY[i].ENCOUNTER.TRACING[j].BOOKING_DATE))
+                                        if (!string.IsNullOrWhiteSpace(request.FAMILY[i].ENCOUNTER.TRACING[j].BOOKING_DATE))
                                             tracingBookingDate = DateTime.ParseExact(request.FAMILY[i].ENCOUNTER.TRACING[j].BOOKING_DATE, "yyyyMMdd", null);
                                         int consent = request.FAMILY[i].ENCOUNTER.TRACING[j].CONSENT;
 
@@ -272,13 +273,23 @@ namespace IQCare.HTS.BusinessProcess.CommandHandlers
                                 }
                             }
                         }
+
+                        // update message as processed
+                        await registerPersonService.UpdateAfyaMobileInbox(afyaMobileMessage.Id, indexClientAfyaMobileId, true, DateTime.Now, "success");
+                        return Result<string>.Valid(afyaMobileId);
                     }
-                    return Result<string>.Valid(afyaMobileId);
+                    catch (Exception e)
+                    {
+                        Log.Error(e.Message);
+                        Log.Error(e.InnerException.ToString());
+                        // update message as processed
+                        await registerPersonService.UpdateAfyaMobileInbox(afyaMobileMessage.Id, indexClientAfyaMobileId, false, DateTime.Now, e.Message + " " + e.InnerException.ToString());
+                        return Result<string>.Invalid(e.Message);
+                    }
                 }
-                catch (Exception e)
-                {
-                    return Result<string>.Invalid(e.Message);
-                }
+
+                return Result<string>.Valid(afyaMobileId);
+
             }
         }
     }
