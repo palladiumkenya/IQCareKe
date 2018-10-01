@@ -12,9 +12,9 @@ namespace IQCare.PMTCT.Core.Models.HEI
         public int DeleteFlag { get; set; }
         public int CreatedBy { get; set; }
         public DateTime CreateDate { get; set; }
-        public DateTime VaccineDate { get; set; }
+        public DateTime? VaccineDate { get; set; }
         public int Active { get; set; }
-        public int AppointmentId { get; set; }
-        public int Period { get; set; }
+        public int? AppointmentId { get; set; }
+        public int? Period { get; set; }
     }
 }

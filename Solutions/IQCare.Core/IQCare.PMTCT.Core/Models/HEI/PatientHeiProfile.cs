@@ -4,7 +4,7 @@ using System.Text;
 
 namespace IQCare.PMTCT.Core.Models.HEI
 {
-    public class HeiProfile
+    public class PatientHeiProfile
     {
         public int Id { get; set; }
         public int PatientMasterVisitId { get; set; }

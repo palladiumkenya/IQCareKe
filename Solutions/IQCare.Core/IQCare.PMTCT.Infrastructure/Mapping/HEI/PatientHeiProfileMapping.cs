@@ -4,9 +4,9 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace IQCare.PMTCT.Infrastructure.Mapping.HEI
 {
-    public class HeiProfileMapping : IEntityTypeConfiguration<HeiProfile>
+    public class PatientHeiProfileMapping : IEntityTypeConfiguration<PatientHeiProfile>
     {
-        void IEntityTypeConfiguration<HeiProfile>.Configure(EntityTypeBuilder<HeiProfile> builder)
+        void IEntityTypeConfiguration<PatientHeiProfile>.Configure(EntityTypeBuilder<PatientHeiProfile> builder)
         {
             builder.ToTable("HEIProfile")
                 .HasKey(c => c.Id);
