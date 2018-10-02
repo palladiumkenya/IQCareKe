@@ -3684,26 +3684,26 @@
 					nextStep = currentStep += 1;
 				else
 					previousStep = nextStep -= 1;
-				if (data.step === 1) {
-					if (data.direction === 'previous') {
-						return;
-					}
-					$("#peripheralNeoropathy").prop('required', false);
-					$("#rash").prop('required', false);
-					$("#hepatotoxicity").prop('required', false);
+                if (data.step === 1) {
+                    if (data.direction === 'previous') {
+                        return;
+                    }
+                    $("#peripheralNeoropathy").prop('required', false);
+                    $("#rash").prop('required', false);
+                    $("#hepatotoxicity").prop('required', false);
                     $("#adheranceMeasurement").prop('required', false);
                     $("#antiTb").prop('required', true);
 
-					//if (($("#cough").val() === 'True') || ($("#fever").val() === 'True') || ($("#weightLoss").val() === 'True') || ($("#nightSweats").val() === 'True')) {
-					//	//$("#sputum").prop('required', true);
-					//	//$("#geneXpert").prop('required', true);
-					//	//$("#chest").prop('required', true);
-					//	$("#antiTb").prop('required', true);
-					//	//$("#contactsInvitation").prop('required', true);
-					//	//$("#iptEvaluation").prop('required', true);
-					//}
+                    //if (($("#cough").val() === 'True') || ($("#fever").val() === 'True') || ($("#weightLoss").val() === 'True') || ($("#nightSweats").val() === 'True')) {
+                    //	//$("#sputum").prop('required', true);
+                    //	//$("#geneXpert").prop('required', true);
+                    //	//$("#chest").prop('required', true);
+                    //	$("#antiTb").prop('required', true);
+                    //	//$("#contactsInvitation").prop('required', true);
+                    //	//$("#iptEvaluation").prop('required', true);
+                    //}
 
-					/* add constraints based on age*/
+                    /* add constraints based on age*/
                     if ($('#datastep1').parsley().validate()) {
 
                         if ($('#EverBeenOnIpt').val() == 'True' && $("#onIpt").val() == 'False' && $('#iptEvent').val() == '0') {
@@ -3712,128 +3712,131 @@
                             return false;
                         }
 
-                        if (($("#tbInfected").val() === 'True') && ($("#onIpt").val() === 'False') && ($("#EverBeenOnIpt").val() === 'True'))
-	                    {
-					if ($('#datastep1').parsley().validate()) {
-      //                  if (($("#tbInfected").val() === 'True') && ($("#onIpt").val() === 'False') && ($("#EverBeenOnIpt").val() === 'True'))
-	     //               {
+                        if (($("#tbInfected").val() === 'True') && ($("#onIpt").val() === 'False') && ($("#EverBeenOnIpt").val() === 'True')) {
+                            if ($('#datastep1').parsley().validate()) {
+                                //                  if (($("#tbInfected").val() === 'True') && ($("#onIpt").val() === 'False') && ($("#EverBeenOnIpt").val() === 'True'))
+                                //               {
 
-      //                  }else
-	     //                   {
-      //                          addPatientIcf();
-	     //                   }
-
-					    
-						//if (($("#cough").val() === 'True') || ($("#fever").val() === 'True') || ($("#weightLoss").val() === 'True') || ($("#nightSweats").val() === 'True')) {
-						//	addPatientIcfAction();
-      //                  }
-                        addPatientIcf();
-                        addPatientIcfAction();
-                        saveNutritionAssessment();
-						savePatientEncounterPresentingComplaint();
-					} else {
-						stepError = $('.parsley-error').length === 0;
-						totalError += stepError;
-						evt.preventDefault();
-					}
-				}
-				
-                else if (data.step === 2) {
-                    if (data.direction === 'previous') {
-                        return;
-                    } else {
-                        savePatientEncounterChronicIllness();
-                        saveSexualHistory();
-                    }
-                    //if ($("#datastep2").parsley().validate()) {
-
-                    //} else {
-                    //    stepError = $('.parsley-error').length === 0;
-                    //    totalError += stepError;
-                    //    evt.preventDefault();
-                    //}
-                }
-                else if (data.step === 3) {
-                    if (data.direction === 'previous') {
+                                //                  }else
+                                //                   {
+                                //                          addPatientIcf();
+                                //                   }
 
 
-
-
-                        return;
-                    } else {
-                        $('#datastep3').parsley().destroy();
-                        $("#<%=ddlExaminationType.ClientID%>").attr('disabled', 'disabled');
-                        $('#datastep3').parsley({
-                            excluded:
-                            "input[type=button], input[type=submit], input[type=reset], input[type=hidden], [disabled], :hidden"
-                        });
-
-                        if ($('input[name="ctl00$IQCareContentPlaceHolder$ucPatientClinicalEncounter$systemsOkay"]:checked').length > 0) {
-                            $('.errorBlock').hide();
-                        } else {
-                            $('.errorBlock').show();
-                            return false;
-                        }
-
-                        if ($('#datastep3').parsley().validate()) {
-                            $("#<%=ddlExaminationType.ClientID%>").prop('disabled', false);
-                            $.when(savePatientPhysicalExams(evt)).then(
-                                function () {
-                                    setTimeout(function () {
-                                        saveWhoStage();
-                                        savePatientOIS();
-
-                                    }, 5000);
-
-                                });
-                        } else {
-                            stepError = $('.parsley-error').length === 0;
-                            totalError += stepError;
-                            evt.preventDefault();
-                        }
-                    }
-                    //if ($("#datastep3").parsley().validate()) {
-
-                    //} else {
-                    //    stepError = $('.parsley-error').length === 0;
-                    //    totalError += stepError;
-                    //    evt.preventDefault();
-                    //}
-                }
-                else if (data.step === 4) {
-                    if (data.direction === 'previous') {
-                        GetPatientOIS();
-                        return;
-                    } else {
-                        //savePatientPatientManagement();
-                        if ($('#AppointmentForm').parsley().validate()) {
-                            var futureDate = moment().add(7, 'months').format('DD-MMM-YYYY');
-                            var appDate = $("#<%=AppointmentDate.ClientID%>").val();
-                            if (moment('' + appDate + '').isAfter(futureDate)) {
-                                toastr.error("Appointment date cannot be set to over 7 months");
-                                return false;
+                                //if (($("#cough").val() === 'True') || ($("#fever").val() === 'True') || ($("#weightLoss").val() === 'True') || ($("#nightSweats").val() === 'True')) {
+                                //	addPatientIcfAction();
+                                //                  }
+                                addPatientIcf();
+                                addPatientIcfAction();
+                                saveNutritionAssessment();
+                                savePatientEncounterPresentingComplaint();
+                            } else {
+                                stepError = $('.parsley-error').length === 0;
+                                totalError += stepError;
+                                evt.preventDefault();
                             }
-                            //save patient management
-                            $.when(savePatientPatientManagement()).then(function () {
-                                setTimeout(function () {
-                                    window.location
-                                        .href =
-                                        '<%=ResolveClientUrl( "~/CCC/Patient/PatientHome.aspx")%>';
-                                },
-                                    2000);
+                        }
+                    }
+                }
+                    else if (data.step === 2) {
+                        if (data.direction === 'previous') {
+                            return;
+                        } else {
+                            savePatientEncounterChronicIllness();
+                            saveSexualHistory();
+                        }
+                        //if ($("#datastep2").parsley().validate()) {
+
+                        //} else {
+                        //    stepError = $('.parsley-error').length === 0;
+                        //    totalError += stepError;
+                        //    evt.preventDefault();
+                        //}
+                    }
+                    else if (data.step === 3) {
+                        if (data.direction === 'previous') {
+
+
+
+
+                            return;
+                        } else {
+                            $('#datastep3').parsley().destroy();
+                            $("#<%=ddlExaminationType.ClientID%>").attr('disabled', 'disabled');
+                            $('#datastep3').parsley({
+                                excluded:
+                                "input[type=button], input[type=submit], input[type=reset], input[type=hidden], [disabled], :hidden"
                             });
 
-                            //save appointment
-                            checkExistingAppointment();
+                            if ($('input[name="ctl00$IQCareContentPlaceHolder$ucPatientClinicalEncounter$systemsOkay"]:checked').length > 0) {
+                                $('.errorBlock').hide();
+                            } else {
+                                $('.errorBlock').show();
+                                return false;
+                            }
+
+                            if ($('#datastep3').parsley().validate()) {
+                                $("#<%=ddlExaminationType.ClientID%>").prop('disabled', false);
+                                $.when(savePatientPhysicalExams(evt)).then(
+                                    function () {
+                                        setTimeout(function () {
+                                            saveWhoStage();
+                                            savePatientOIS();
+
+                                        }, 5000);
+
+                                    });
+                            } else {
+                                stepError = $('.parsley-error').length === 0;
+                                totalError += stepError;
+                                evt.preventDefault();
+                            }
+                        }
+                        //if ($("#datastep3").parsley().validate()) {
+
+                        //} else {
+                        //    stepError = $('.parsley-error').length === 0;
+                        //    totalError += stepError;
+                        //    evt.preventDefault();
+                        //}
+                    }
+                    else if (data.step === 4) {
+                        if (data.direction === 'previous') {
+                            GetPatientOIS();
+                            return;
                         } else {
-                            stepError = $('.parsley-error').length === 0;
-                            totalError += stepError;
-                            evt.preventDefault();
+                            //savePatientPatientManagement();
+                            if ($('#AppointmentForm').parsley().validate()) {
+                                var futureDate = moment().add(7, 'months').format('DD-MMM-YYYY');
+                                var appDate = $("#<%=AppointmentDate.ClientID%>").val();
+                                if (moment('' + appDate + '').isAfter(futureDate)) {
+                                    toastr.error("Appointment date cannot be set to over 7 months");
+                                    return false;
+                                }
+                                //save patient management
+                                $.when(savePatientPatientManagement()).then(function () {
+                                    setTimeout(function () {
+                                        window.location
+                                            .href =
+                                            '<%=ResolveClientUrl( "~/CCC/Patient/PatientHome.aspx")%>';
+                                    },
+                                        2000);
+                                });
+
+                                //save appointment
+                                checkExistingAppointment();
+                            } else {
+                                stepError = $('.parsley-error').length === 0;
+                                totalError += stepError;
+                                evt.preventDefault();
+                            }
                         }
                     }
 
-                }
-            })
+                
+                        
+                    
+               })
             .on("changed.fu.wizard",
             function () {
 
