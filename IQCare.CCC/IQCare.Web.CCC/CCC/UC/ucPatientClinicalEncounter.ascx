@@ -3684,26 +3684,26 @@
 					nextStep = currentStep += 1;
 				else
 					previousStep = nextStep -= 1;
-				if (data.step === 1) {
-					if (data.direction === 'previous') {
-						return;
-					}
-					$("#peripheralNeoropathy").prop('required', false);
-					$("#rash").prop('required', false);
-					$("#hepatotoxicity").prop('required', false);
+                if (data.step === 1) {
+                    if (data.direction === 'previous') {
+                        return;
+                    }
+                    $("#peripheralNeoropathy").prop('required', false);
+                    $("#rash").prop('required', false);
+                    $("#hepatotoxicity").prop('required', false);
                     $("#adheranceMeasurement").prop('required', false);
                     $("#antiTb").prop('required', true);
 
-					//if (($("#cough").val() === 'True') || ($("#fever").val() === 'True') || ($("#weightLoss").val() === 'True') || ($("#nightSweats").val() === 'True')) {
-					//	//$("#sputum").prop('required', true);
-					//	//$("#geneXpert").prop('required', true);
-					//	//$("#chest").prop('required', true);
-					//	$("#antiTb").prop('required', true);
-					//	//$("#contactsInvitation").prop('required', true);
-					//	//$("#iptEvaluation").prop('required', true);
-					//}
+                    //if (($("#cough").val() === 'True') || ($("#fever").val() === 'True') || ($("#weightLoss").val() === 'True') || ($("#nightSweats").val() === 'True')) {
+                    //	//$("#sputum").prop('required', true);
+                    //	//$("#geneXpert").prop('required', true);
+                    //	//$("#chest").prop('required', true);
+                    //	$("#antiTb").prop('required', true);
+                    //	//$("#contactsInvitation").prop('required', true);
+                    //	//$("#iptEvaluation").prop('required', true);
+                    //}
 
-					/* add constraints based on age*/
+                    /* add constraints based on age*/
                     if ($('#datastep1').parsley().validate()) {
 
                         if ($('#EverBeenOnIpt').val() == 'True' && $("#onIpt").val() == 'False' && $('#iptEvent').val() == '0') {
@@ -3712,32 +3712,32 @@
                             return false;
                         }
 
-                        if (($("#tbInfected").val() === 'True') && ($("#onIpt").val() === 'False') && ($("#EverBeenOnIpt").val() === 'True'))
-	                    {
-					if ($('#datastep1').parsley().validate()) {
-      //                  if (($("#tbInfected").val() === 'True') && ($("#onIpt").val() === 'False') && ($("#EverBeenOnIpt").val() === 'True'))
-	     //               {
+                        if (($("#tbInfected").val() === 'True') && ($("#onIpt").val() === 'False') && ($("#EverBeenOnIpt").val() === 'True')) {
+                            if ($('#datastep1').parsley().validate()) {
+                                //                  if (($("#tbInfected").val() === 'True') && ($("#onIpt").val() === 'False') && ($("#EverBeenOnIpt").val() === 'True'))
+                                //               {
 
-      //                  }else
-	     //                   {
-      //                          addPatientIcf();
-	     //                   }
+                                //                  }else
+                                //                   {
+                                //                          addPatientIcf();
+                                //                   }
 
-					    
-						//if (($("#cough").val() === 'True') || ($("#fever").val() === 'True') || ($("#weightLoss").val() === 'True') || ($("#nightSweats").val() === 'True')) {
-						//	addPatientIcfAction();
-      //                  }
-                        addPatientIcf();
-                        addPatientIcfAction();
-                        saveNutritionAssessment();
-						savePatientEncounterPresentingComplaint();
-					} else {
-						stepError = $('.parsley-error').length === 0;
-						totalError += stepError;
-						evt.preventDefault();
-					}
-				}
-				
+
+                                //if (($("#cough").val() === 'True') || ($("#fever").val() === 'True') || ($("#weightLoss").val() === 'True') || ($("#nightSweats").val() === 'True')) {
+                                //	addPatientIcfAction();
+                                //                  }
+                                addPatientIcf();
+                                addPatientIcfAction();
+                                saveNutritionAssessment();
+                                savePatientEncounterPresentingComplaint();
+                            } else {
+                                stepError = $('.parsley-error').length === 0;
+                                totalError += stepError;
+                                evt.preventDefault();
+                            }
+                        }
+                    }
+                }
                 else if (data.step === 2) {
                     if (data.direction === 'previous') {
                         return;
