@@ -33,6 +33,7 @@ import { ContactCategoryResolver } from './_services/contactcategory.resolver';
 import { PersoncontactsComponent } from './person/personcontacts/personcontacts.component';
 import { PersonIdentifiersResolver } from './_services/personidentifiers.resolver';
 import { InlineSearchComponent } from './inline-search/inline-search.component';
+import { YesNoResolver } from '../pmtct/_services/yesno.resolver';
 
 @NgModule({
     imports: [
@@ -66,7 +67,8 @@ import { InlineSearchComponent } from './inline-search/inline-search.component';
         RelationshipResolver,
         ConsentSmsResolver,
         ContactCategoryResolver,
-        PersonIdentifiersResolver
+        PersonIdentifiersResolver,
+        YesNoResolver
     ],
     entryComponents: [
         PersoncontactsComponent,

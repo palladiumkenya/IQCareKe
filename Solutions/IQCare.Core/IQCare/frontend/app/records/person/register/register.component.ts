@@ -52,6 +52,7 @@ export class RegisterComponent implements OnInit {
     consentSms: LookupItemView[];
     contactCategory: LookupItemView[];
     personIdentifiers: any[];
+    yesnoOptions: LookupItemView[];
 
     dataSource: any[];
     newContacts: any[];
@@ -119,7 +120,7 @@ export class RegisterComponent implements OnInit {
             // console.log(res);
             const { countiesArray, genderArray, maritalStatusArray, educationLevelArray,
                 occupationArray, relationshipArray, consentSmsArray, contactCategoryArray,
-                personIdentifiersArray } = res;
+                personIdentifiersArray, yesnoArray } = res;
             this.counties = countiesArray;
             this.gender = genderArray;
             this.maritalStatus = maritalStatusArray;
@@ -129,6 +130,7 @@ export class RegisterComponent implements OnInit {
             this.consentSms = consentSmsArray;
             this.contactCategory = contactCategoryArray;
             this.personIdentifiers = personIdentifiersArray['identifers'];
+            this.yesnoOptions = yesnoArray['lookupItems'];
             // console.log(personIdentifiersArray['identifers']);
         });
 
@@ -296,25 +298,6 @@ export class RegisterComponent implements OnInit {
         });
     }
 
-    /*onRegisteredInClinic() {
-        const isEmergencyContactRegisteredInClinic = this.formArray.value[2]['EmergencyContactInClinic'];
-        if (!isEmergencyContactRegisteredInClinic || isEmergencyContactRegisteredInClinic == 1) {
-            this.registerEmergencyContact = false;
-            // console.log(this.formGroup.controls['formArray']['controls'][2]['EmergencyContactFirstName'].disable({ onlySelf: true }));
-            // this.formTesting.controls.acceptedPartnerListing.disable({ onlySelf: true });
-            this.formGroup.controls['formArray']['controls'][2]['controls'].EmergencyContactFirstName.disable({ onlySelf: true });
-            this.formGroup.controls['formArray']['controls'][2]['controls'].EmergencyContactLastName.disable({ onlySelf: true });
-            this.formGroup.controls['formArray']['controls'][2]['controls'].EmergencyContactSex.disable({ onlySelf: true });
-            this.formGroup.controls['formArray']['controls'][2]['controls'].EmergencyContactRelationship.disable({ onlySelf: true });
-        } else if (isEmergencyContactRegisteredInClinic == 2) {
-            this.registerEmergencyContact = true;
-            this.formGroup.controls['formArray']['controls'][2]['controls'].EmergencyContactFirstName.enable({ onlySelf: false });
-            this.formGroup.controls['formArray']['controls'][2]['controls'].EmergencyContactLastName.enable({ onlySelf: false });
-            this.formGroup.controls['formArray']['controls'][2]['controls'].EmergencyContactSex.enable({ onlySelf: false });
-            this.formGroup.controls['formArray']['controls'][2]['controls'].EmergencyContactRelationship.enable({ onlySelf: false });
-        }
-    }*/
-
     onSubmitForm(tabIndex: number) {
         console.log(this.formArray.value);
         console.log(this.formGroup.valid);
@@ -415,7 +398,8 @@ export class RegisterComponent implements OnInit {
             gender: this.gender,
             relationship: this.relationship,
             consentSms: this.consentSms,
-            contactCategory: this.contactCategory
+            contactCategory: this.contactCategory,
+            yesno: this.yesnoOptions
         };
 
         const dialogRef = this.dialog.open(PersoncontactsComponent, dialogConfig);
@@ -451,7 +435,8 @@ export class RegisterComponent implements OnInit {
                     'relationship': data.kinContactRelationship,
                     'phoneno': data.kinMobileNumber,
                     'consent': data.kinConsentToSMS,
-                    'consentDecline': data.consentDeclineReason
+                    'consentDecline': data.consentDeclineReason,
+                    'personRegistered': data.registeredPersonId
                 });
             }
         );
