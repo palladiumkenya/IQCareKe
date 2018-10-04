@@ -355,6 +355,7 @@ namespace IQCare.Common.BusinessProcess.Services
             }
         }
 
+      
         public async Task<List<PersonLocation>> GetPersonLocation(int personId)
         {
             try
@@ -369,7 +370,8 @@ namespace IQCare.Common.BusinessProcess.Services
             }
         }
 
-        public async Task<PersonLocation> UpdatePersonLocation(int personId, string landmark)
+        
+        public async Task<PersonLocation> UpdatePersonLocation(int personId, string landmark,string ward,string county,string subcounty)
         {
             try
             {
@@ -378,13 +380,32 @@ namespace IQCare.Common.BusinessProcess.Services
 
                 if (location != null)
                 {
-                    location.LandMark = landmark;
+
+                    if (!string.IsNullOrEmpty(landmark))
+                    {
+                        location.LandMark = landmark;
+                    }
+                    if(!string.IsNullOrEmpty(ward))
+                    {
+                        location.Ward = Convert.ToInt32(ward);
+                    }
+                    if(!string.IsNullOrEmpty(county))
+                    {
+                        location.County = Convert.ToInt32(county);
+                    }
+                    if (!string.IsNullOrEmpty(subcounty))
+                    {
+                        location.SubCounty = Convert.ToInt32(subcounty);
+                    }
                     _unitOfWork.Repository<PersonLocation>().Update(location);
                     await _unitOfWork.SaveAsync();
                 }
                 else
                 {
-                    location = await addPersonLocation(personId, 0, 0, 0, "", landmark, 1);
+                    int Ward = string.IsNullOrWhiteSpace(ward) ? 0 : Convert.ToInt32(ward);
+                    int County = string.IsNullOrWhiteSpace(county) ? 0 : Convert.ToInt32(county);
+                    int SubCounty = string.IsNullOrWhiteSpace(subcounty) ? 0 : Convert.ToInt32(subcounty);
+                    location = await addPersonLocation(personId,County, SubCounty, Ward, "", landmark, 1);
                 }
                 return location;
             }
@@ -857,7 +878,7 @@ namespace IQCare.Common.BusinessProcess.Services
                 StringBuilder sql = new StringBuilder();
                 sql.Append("exec pr_OpenDecryptedSession;");
                 sql.Append($"SELECT [Id] , CAST(DECRYPTBYKEY(FirstName) AS VARCHAR(50)) [FirstName] ,CAST(DECRYPTBYKEY(MidName) AS VARCHAR(50)) MidName" +
-                           $",CAST(DECRYPTBYKEY(LastName) AS VARCHAR(50)) [LastName] ,[Sex] ,[Active] ,[DeleteFlag] ,[CreateDate] " +
+                           $",CAST(DECRYPTBYKEY(LastName) AS VARCHAR(50)) [LastName],CAST(DECRYPTBYKEY(NickName) AS VARCHAR(50)) [NickName] ,[Sex] ,[Active] ,[DeleteFlag] ,[CreateDate] " +
                            $",[CreatedBy] ,[AuditData] ,[DateOfBirth] ,[DobPrecision] FROM [dbo].[Person] WHERE Id = '{personId}';");
                 sql.Append("exec [dbo].[pr_CloseDecryptedSession];");
 
@@ -871,7 +892,7 @@ namespace IQCare.Common.BusinessProcess.Services
             }
         }
 
-        public async Task<Person> UpdatePerson(int personId, string firstName, string middleName, string lastName, int sex, DateTime dateOfBirth)
+        public async Task<Person> UpdatePerson(int personId, string firstName, string middleName, string lastName, int sex, DateTime dateOfBirth,string NickName="")
         {
             try
             {
@@ -879,11 +900,12 @@ namespace IQCare.Common.BusinessProcess.Services
                 firstName = string.IsNullOrWhiteSpace(firstName) ? "" : firstName.Replace("'", "''");
                 middleName = string.IsNullOrWhiteSpace(middleName) ? "" : middleName.Replace("'", "''");
                 lastName = string.IsNullOrWhiteSpace(lastName) ? "" : lastName.Replace("'", "''");
-
+                NickName= string.IsNullOrWhiteSpace(NickName) ? "" : NickName.Replace("'", "''");
                 sql.Append("exec pr_OpenDecryptedSession;");
                 sql.Append($"UPDATE Person SET FirstName = ENCRYPTBYKEY(KEY_GUID('Key_CTC'), '{firstName}'), " +
                            $"MidName = ENCRYPTBYKEY(KEY_GUID('Key_CTC'), '{middleName}'), " +
                            $"LastName = ENCRYPTBYKEY(KEY_GUID('Key_CTC'), '{lastName}'), " +
+                           $"NickName=ENCRYPTBYKEY(KEY_GUID('Key_CTC'),{NickName}'), " +
                            $"Sex = {sex}, DateOfBirth = '{dateOfBirth.ToString("yyyy-MM-dd")}', " +
                            $"DobPrecision = 1 WHERE Id = {personId}; ");
                 sql.Append($"SELECT [Id] , CAST(DECRYPTBYKEY(FirstName) AS VARCHAR(50)) [FirstName] ,CAST(DECRYPTBYKEY(MidName) AS VARCHAR(50)) MidName" +
@@ -900,19 +922,20 @@ namespace IQCare.Common.BusinessProcess.Services
             }
         }
 
-        public async Task<Person> RegisterPerson(string firstName, string middleName, string lastName, int sex, DateTime dateOfBirth, int createdBy)
+        public async Task<Person> RegisterPerson(string firstName, string middleName, string lastName, int sex, DateTime dateOfBirth, int createdBy,string nickName="")
         {
             try
             {
                 firstName = string.IsNullOrWhiteSpace(firstName) ? "" : firstName.Replace("'", "''");
                 middleName = string.IsNullOrWhiteSpace(middleName) ? "" : middleName.Replace("'", "''");
                 lastName = string.IsNullOrWhiteSpace(lastName) ? "" : lastName.Replace("'", "''");
+               nickName = string.IsNullOrWhiteSpace(nickName) ? "" : nickName.Replace("'", "''");
 
                 var sql =
                     "exec pr_OpenDecryptedSession;" +
-                    "Insert Into Person(FirstName, MidName,LastName,Sex,DateOfBirth,DobPrecision,Active,DeleteFlag,CreateDate,CreatedBy)" +
+                    "Insert Into Person(FirstName, MidName,LastName,NickName,Sex,DateOfBirth,DobPrecision,Active,DeleteFlag,CreateDate,CreatedBy)" +
                     $"Values(ENCRYPTBYKEY(KEY_GUID('Key_CTC'), '{firstName}'), ENCRYPTBYKEY(KEY_GUID('Key_CTC'), '{middleName}')," +
-                    $"ENCRYPTBYKEY(KEY_GUID('Key_CTC'), '{lastName}'), {sex}, '{dateOfBirth.ToString("yyyy-MM-dd")}', 1," +
+                    $"ENCRYPTBYKEY(KEY_GUID('Key_CTC'), '{lastName}'),ENCRYPTBYKEY(KEY_GUID('Key_CTC'), '{nickName}') , {sex}, '{dateOfBirth.ToString("yyyy-MM-dd")}', 1," +
                     $"1,0,GETDATE(), '{createdBy}');" +
                     "SELECT [Id] , CAST(DECRYPTBYKEY(FirstName) AS VARCHAR(50)) [FirstName] ,CAST(DECRYPTBYKEY(MidName) AS VARCHAR(50)) MidName" +
                     ",CAST(DECRYPTBYKEY(LastName) AS VARCHAR(50)) [LastName] ,[Sex] ,[Active] ,[DeleteFlag] ,[CreateDate] " +
