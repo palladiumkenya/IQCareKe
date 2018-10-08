@@ -14,6 +14,7 @@ namespace IQCareRecords.Common.BusinessProcess.Command
     public class EmergencyContact
     {
         public int PersonId { get; set; }
+        public int RegisteredPersonId { get; set; }
         public string Firstname { get; set; }
         public string Middlename { get; set; }
         public string Lastname { get; set; }

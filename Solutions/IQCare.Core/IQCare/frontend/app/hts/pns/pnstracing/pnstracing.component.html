@@ -4,10 +4,10 @@
     </div>
     <div class="ibox-content">
         <div class="row">
-            <div class="col-md-2 col-lg-2 col-sm-2">
+            <!--<div class="col-md-2 col-lg-2 col-sm-2">
                 <app-leftnav></app-leftnav>
-            </div>
-            <div class="col-md-10 col-lg-10 col-sm-10 animated fadeIn">
+            </div>-->
+            <div class="col-md-12 col-lg-12 col-sm-12 animated fadeIn">
                 <div class="panel panel-default">
                     <div class="panel-heading">PNS TRACING</div>
                     <div class="panel-body">
@@ -22,7 +22,8 @@
                                             <div class="form-group">
                                                 <div>
                                                     <mat-form-field>
-                                                        <input matInput [matDatepicker]="myDatepicker" placeholder="Tracing Date" tabindex="1" [max]="maxDate" (click)="myDatepicker.open()"
+                                                        <input matInput [matDatepicker]="myDatepicker" placeholder="Tracing Date"
+                                                            tabindex="1" [max]="maxDate" (click)="myDatepicker.open()"
                                                             id="pnsTracingDate" name="pnsTracingDate" formControlName="TracingDate"
                                                             required>
                                                         <mat-datepicker-toggle matSuffix [for]="myDatepicker"></mat-datepicker-toggle>
@@ -34,10 +35,12 @@
                                             <div class="form-group">
                                                 <div>
                                                     <mat-form-field>
-                                                        <mat-select name="tracingOutcome" id="tracingOutcome" placeholder="Tracing Outcome" formControlName="TracingOutcome" (selectionChange)="onTracingOutcomeChange()"
-                                                            required>
+                                                        <mat-select name="tracingOutcome" id="tracingOutcome"
+                                                            placeholder="Tracing Outcome" formControlName="TracingOutcome"
+                                                            (selectionChange)="onTracingOutcomeChange()" required>
                                                             <mat-option></mat-option>
-                                                            <mat-option *ngFor="let option of pnsTracingOutcome" [value]="option.itemId">{{option.itemName}}</mat-option>
+                                                            <mat-option *ngFor="let option of pnsTracingOutcome"
+                                                                [value]="option.itemId">{{option.itemName}}</mat-option>
                                                         </mat-select>
                                                     </mat-form-field>
                                                 </div>
@@ -46,8 +49,10 @@
                                             <div class="form-group">
                                                 <div>
                                                     <mat-form-field>
-                                                        <input matInput [matDatepicker]="pnsBookingDatepicker" placeholder="Date Booked for Testing" [min]="minDate" (click)="pnsBookingDatepicker.open()"
-                                                            id="pnsBookingDate" name="pnsBookingDate" formControlName="DateBookedTesting">
+                                                        <input matInput [matDatepicker]="pnsBookingDatepicker"
+                                                            placeholder="Date Booked for Testing" [min]="minDate"
+                                                            (click)="pnsBookingDatepicker.open()" id="pnsBookingDate"
+                                                            name="pnsBookingDate" formControlName="DateBookedTesting">
                                                         <mat-datepicker-toggle matSuffix [for]="pnsBookingDatepicker"></mat-datepicker-toggle>
                                                         <mat-datepicker #pnsBookingDatepicker></mat-datepicker>
                                                     </mat-form-field>
@@ -60,9 +65,11 @@
                                             <div class="form-group">
                                                 <div>
                                                     <mat-form-field>
-                                                        <mat-select name="tracingMode" id="tracingMode" placeholder="Tracing Mode" formControlName="TracingMode">
+                                                        <mat-select name="tracingMode" id="tracingMode" placeholder="Tracing Mode"
+                                                            formControlName="TracingMode">
                                                             <mat-option></mat-option>
-                                                            <mat-option *ngFor="let option of tracingModeOptions" [value]="option.itemId">{{option.itemName}}</mat-option>
+                                                            <mat-option *ngFor="let option of tracingModeOptions"
+                                                                [value]="option.itemId">{{option.itemName}}</mat-option>
                                                         </mat-select>
                                                     </mat-form-field>
                                                 </div>
@@ -71,7 +78,9 @@
                                             <div class="form-group">
                                                 <div>
                                                     <mat-form-field>
-                                                        <mat-select name="consent" id="consent" tabindex="2" placeholder="Consent for Testing" formControlName="Consent" (selectionChange)="onConsentChange()">
+                                                        <mat-select name="consent" id="consent" tabindex="2"
+                                                            placeholder="Consent for Testing" formControlName="Consent"
+                                                            (selectionChange)="onConsentChange()">
                                                             <mat-option></mat-option>
                                                             <mat-option *ngFor="let option of yesNoOptions" [value]="option.itemId">{{option.itemName}}</mat-option>
                                                         </mat-select>

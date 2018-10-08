@@ -118,7 +118,8 @@ export class PersonRegistrationService {
         );
     }
 
-    public registerPersonEmergencyContact(personId: number, userId: number, contactKin: any[]): Observable<any> {
+    public registerPersonEmergencyContact(personId: number, userId: number,
+        contactKin: any[]): Observable<any> {
         if (contactKin.length == 0) {
             return of([]);
         }
@@ -127,6 +128,7 @@ export class PersonRegistrationService {
         for (let i = 0; i < contactKin.length; i++) {
             contacts.push({
                 'PersonId': personId,
+                'RegisteredPersonId': contactKin[i]['personRegistered'],
                 'firstname': contactKin[i]['firstName'],
                 'middlename': contactKin[i]['middleName'],
                 'lastname': contactKin[i]['lastName'],

@@ -35,7 +35,7 @@ export class ServicesListComponent implements OnInit {
     getPersonEnrolledServices(personId: number) {
         this.personhomeservice.getPersonEnrolledServices(personId).subscribe((res) => {
             this.enrolledServices = res['personEnrollmentList'];
-            if (this.enrolledServices) {
+            if (this.enrolledServices && this.enrolledServices.length > 0) {
                 this.patientId = this.enrolledServices[0]['patientId'];
             }
             this.patientIdentifiers = res['patientIdentifiers'];

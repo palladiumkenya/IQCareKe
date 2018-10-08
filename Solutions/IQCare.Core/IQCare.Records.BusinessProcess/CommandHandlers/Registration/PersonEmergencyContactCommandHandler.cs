@@ -35,17 +35,27 @@ namespace IQCareRecords.Common.BusinessProcess.CommandHandlers.Registration
                         clientFacility = await _unitOfWork.Repository<Facility>().Get(x => x.DeleteFlag == 0).FirstOrDefaultAsync();
                     }
 
-                    //add new person 
-                    var contactPerson = await registerPersonService.RegisterPerson(request.Emergencycontact[i].Firstname, request.Emergencycontact[i].Middlename,
-                        request.Emergencycontact[i].Lastname, request.Emergencycontact[i].Gender, request.Emergencycontact[i].CreatedBy, clientFacility.FacilityID, null, DateTime.Now);
+                    int emergencyPersonId = 0;
+                    if (request.Emergencycontact[i].RegisteredPersonId > 0)
+                    {
+                        emergencyPersonId = request.Emergencycontact[i].RegisteredPersonId;
+                    }
+                    else
+                    {
+                        //add new person 
+                        var contactPerson = await registerPersonService.RegisterPerson(request.Emergencycontact[i].Firstname, request.Emergencycontact[i].Middlename,
+                            request.Emergencycontact[i].Lastname, request.Emergencycontact[i].Gender, request.Emergencycontact[i].CreatedBy, clientFacility.FacilityID, null, DateTime.Now);
+                        emergencyPersonId = contactPerson.Id;
+                    }
+                    
 
                     //make the person an emergency contact
-                    await personContactsService.Add(request.Emergencycontact[i].PersonId, contactPerson.Id,
+                    await personContactsService.Add(request.Emergencycontact[i].PersonId, emergencyPersonId,
                         request.Emergencycontact[i].CreatedBy, request.Emergencycontact[i].ContactCategory,
                         request.Emergencycontact[i].RelationshipType);
 
                     //add the person mobile contact
-                    await registerPersonService.addPersonContact(contactPerson.Id, "", request.Emergencycontact[i].MobileContact,
+                    await registerPersonService.addPersonContact(emergencyPersonId, "", request.Emergencycontact[i].MobileContact,
                         "", "", request.Emergencycontact[i].CreatedBy);
 
                     //add person consent to sms

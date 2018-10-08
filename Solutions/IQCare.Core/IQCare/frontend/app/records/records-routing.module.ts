@@ -12,6 +12,7 @@ import { RelationshipResolver } from './_services/relationship.resolver';
 import { ConsentSmsResolver } from './_services/consentsms.resolver';
 import { ContactCategoryResolver } from './_services/contactcategory.resolver';
 import { PersonIdentifiersResolver } from './_services/personidentifiers.resolver';
+import { YesNoResolver } from '../pmtct/_services/yesno.resolver';
 
 const routes: Routes = [
     {
@@ -34,7 +35,8 @@ const routes: Routes = [
                     relationshipArray: RelationshipResolver,
                     consentSmsArray: ConsentSmsResolver,
                     contactCategoryArray: ContactCategoryResolver,
-                    personIdentifiersArray: PersonIdentifiersResolver
+                    personIdentifiersArray: PersonIdentifiersResolver,
+                    yesnoArray: YesNoResolver
                 }
             },
             {
@@ -53,7 +55,8 @@ const routes: Routes = [
                     relationshipArray: RelationshipResolver,
                     consentSmsArray: ConsentSmsResolver,
                     contactCategoryArray: ContactCategoryResolver,
-                    personIdentifiersArray: PersonIdentifiersResolver
+                    personIdentifiersArray: PersonIdentifiersResolver,
+                    yesnoArray: YesNoResolver
                 }
             }
         ]
