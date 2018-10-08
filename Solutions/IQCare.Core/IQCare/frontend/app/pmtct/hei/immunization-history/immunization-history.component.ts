@@ -14,7 +14,6 @@ import {MatTableDataSource} from '@angular/material';
 export class ImmunizationHistoryComponent implements OnInit {
 
     public ImmunizationHistoryFormGroup: FormGroup;
-    public lookupItems$: Subscription;
     public immunizationperiods: any[] = [];
     public vaccines: any[] = [];
     public yesnoOptions: any[] = [];

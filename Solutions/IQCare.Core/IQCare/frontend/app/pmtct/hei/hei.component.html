@@ -12,7 +12,7 @@
                             <div class="col-lg-12 col-sm-6 col-xs-12">
                                 <mat-horizontal-stepper [linear]="isLinear" #stepper>
         
-                                    <mat-step [completed]="false" [stepControl]="visitDetailsFormGroup">
+                                    <mat-step [completed]="true" [stepControl]="visitDetailsFormGroup">
                                         <ng-template matStepLabel>
                                             <span matTooltip="Visit Details">Visit Details</span>
                                         </ng-template>
@@ -23,7 +23,7 @@
                                         </div>
                                     </mat-step>
 
-                                    <mat-step [completed]="false" [stepControl]="deliveryMatFormGroup">
+                                    <mat-step [completed]="true" [stepControl]="deliveryMatFormGroup">
                                         <ng-template matStepLabel>
                                             <span matTooltip="Delivery & Maternal History">Delivery & Mat History</span>
                                         </ng-template>
@@ -71,13 +71,13 @@
                                     </mat-step>
 
 
-                                    <mat-step [completed]="true" [stepControl]="formGroup5">
+                                 <!--   <mat-step [completed]="true" [stepControl]="formGroup5">
                                         <ng-template matStepLabel>
                                             <span matTooltip="HIV Testing">HIV Testing</span>
                                         </ng-template>
 
-                                        <!-- add HEI HIV testing 
-                                        <app-hei-hivtesting></app-hei-hivtesting>-->
+
+                                        <app-hei-hivtesting></app-hei-hivtesting>
 
                                         <div>
                                             <button mat-raised-button color="primary" matStepperPrevious type="button">Previous</button>
@@ -87,13 +87,22 @@
                                     </mat-step>
 
 
-                                    <mat-step [completed]="true" [stepControl]="formGroup6">
+                                    <mat-step [completed]="true" [stepControl]="maternalViralLoadFormGroup">
                                         <ng-template matStepLabel>
                                             <span matTooltip="Maternal Viral Load">Maternal Viral Load</span>
                                         </ng-template>
+
+                                        <app-maternalhistory></app-maternalhistory>
+                                    </mat-step>-->
+
+                                    <mat-step [completed]="true" [stepControl]="tbAssessmentFormGroup">
+                                        <ng-template matStepLabel>
+                                            <span matTooltip="TB Assessment">TB Assessment</span>
+                                        </ng-template>
+                                        <app-tb-assessment (notify)="onTbAssessment($event)" [tbAssessmentOptions]="tbAssessmentOptions"></app-tb-assessment>
                                     </mat-step>
 
-                                    <mat-step [completed]="true" [stepControl]="formGroupInfantFeeding">
+                                    <mat-step [completed]="true" [stepControl]="infantFeedingFormGroup">
                                         <ng-template matStepLabel>
                                             <span matTooltip="Infant Feeding">Infant Feeding</span>
                                         </ng-template>
@@ -108,7 +117,7 @@
                                         </div>
                                     </mat-step>
 
-                                    <mat-step [completed]="false" [stepControl]="">
+                                  <!--  <mat-step [completed]="false" [stepControl]="">
                                         <ng-template matStepLabel>
                                             <span matTooltip="Infant Feeding">Infant Feeding</span>
                                         </ng-template>
@@ -121,9 +130,9 @@
                                                 Complete Ecounter
                                             </button>
                                         </div>
-                                    </mat-step>
+                                    </mat-step> -->
 
-                                    <mat-step [completed]="false" [stepControl]="formGroupNextappointment">
+                                    <mat-step [completed]="false" [stepControl]="nextAppointmentFormGroup">
                                             <ng-template matStepLabel>
                                                     <span matTooltip="Next Appointment">Next Appointment</span>
                                             </ng-template>
