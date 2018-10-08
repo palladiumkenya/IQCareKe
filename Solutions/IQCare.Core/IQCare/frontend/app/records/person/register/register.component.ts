@@ -84,6 +84,7 @@ export class RegisterComponent implements OnInit {
                     FirstName: new FormControl(this.person.firstName, [Validators.required]),
                     MiddleName: new FormControl(this.person.middleName),
                     LastName: new FormControl(this.person.lastName, [Validators.required]),
+                    NickName:new FormControl(this.person.nickName),
                     Sex: new FormControl(this.person.sex, [Validators.required]),
                     RegistrationDate: new FormControl(this.person.registrationDate, [Validators.required]),
                     DateOfBirth: new FormControl(this.person.dateOfBirth, [Validators.required]),
@@ -148,7 +149,7 @@ export class RegisterComponent implements OnInit {
                 console.log(result);
                 const {
                     alternativeNumber, county, countyId, dateOfBirth, dobPrecision, educationLevel, educationLevelId,
-                    emailAddress, firstName, gender, lastName, maritalStatus, maritalStatusId, middleName,
+                    emailAddress, firstName, gender, lastName, maritalStatus, maritalStatusId, middleName,nickName,
                     mobileNumber, nearestHealthCentre, occupation, occupationId, registrationDate, sex,
                     subCounty, subCountyId, village, ward, wardId } = result[0];
 
@@ -164,6 +165,7 @@ export class RegisterComponent implements OnInit {
                 this.formGroup.controls['formArray']['controls'][0]['controls'].FirstName.setValue(firstName);
                 this.formGroup.controls['formArray']['controls'][0]['controls'].MiddleName.setValue(middleName);
                 this.formGroup.controls['formArray']['controls'][0]['controls'].LastName.setValue(lastName);
+                this.formGroup.controls['formArray']['controls'][0]['controls'].NickName.setValue(nickName);
                 this.formGroup.controls['formArray']['controls'][0]['controls'].Sex.setValue(sex);
                 this.formGroup.controls['formArray']['controls'][0]['controls'].RegistrationDate.setValue(registrationDate);
                 this.formGroup.controls['formArray']['controls'][0]['controls'].DateOfBirth.setValue(dateOfBirth);
