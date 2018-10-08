@@ -65,6 +65,7 @@ namespace IQCare.HTS.BusinessProcess.CommandHandlers
                         string firstName = request.CLIENTS[i].PATIENT_IDENTIFICATION.PATIENT_NAME.FIRST_NAME;
                         string middleName = string.IsNullOrWhiteSpace(request.CLIENTS[i].PATIENT_IDENTIFICATION.PATIENT_NAME.MIDDLE_NAME) ? "" : request.CLIENTS[i].PATIENT_IDENTIFICATION.PATIENT_NAME.MIDDLE_NAME;
                         string lastName = request.CLIENTS[i].PATIENT_IDENTIFICATION.PATIENT_NAME.LAST_NAME;
+                        string nickName = string.IsNullOrWhiteSpace(request.CLIENTS[i].PATIENT_IDENTIFICATION.PATIENT_NAME.NICK_NAME) ? "" : request.CLIENTS[i].PATIENT_IDENTIFICATION.PATIENT_NAME.NICK_NAME;
                         int sex = request.CLIENTS[i].PATIENT_IDENTIFICATION.SEX;
                         DateTime dateOfBirth = DateTime.ParseExact(request.CLIENTS[i].PATIENT_IDENTIFICATION.DATE_OF_BIRTH, "yyyyMMdd", null);
                         string dobPrecision = request.CLIENTS[i].PATIENT_IDENTIFICATION.DATE_OF_BIRTH_PRECISION;
@@ -72,6 +73,15 @@ namespace IQCare.HTS.BusinessProcess.CommandHandlers
                         int maritalStatusId = request.CLIENTS[i].PATIENT_IDENTIFICATION.MARITAL_STATUS;
                         string landmark = request.CLIENTS[i].PATIENT_IDENTIFICATION.PATIENT_ADDRESS.PHYSICAL_ADDRESS
                             .LANDMARK;
+                        string ward = request.CLIENTS[i].PATIENT_IDENTIFICATION.PATIENT_ADDRESS.PHYSICAL_ADDRESS
+                            .WARD;
+                        string subcounty = request.CLIENTS[i].PATIENT_IDENTIFICATION.PATIENT_ADDRESS.PHYSICAL_ADDRESS
+                            .SUB_COUNTY;
+                        string county = request.CLIENTS[i].PATIENT_IDENTIFICATION.PATIENT_ADDRESS.PHYSICAL_ADDRESS
+                            .COUNTY;
+                        string occupaton = request.CLIENTS[i].PATIENT_IDENTIFICATION.OCCUPATION;
+                        string educationlevel = request.CLIENTS[i].PATIENT_IDENTIFICATION.EDUCATIONLEVEL;
+                        string educationoutcome = request.CLIENTS[i].PATIENT_IDENTIFICATION.EDUCATIONOUTCOME;
                         string physicalAddress = request.CLIENTS[i].PATIENT_IDENTIFICATION.PATIENT_ADDRESS.POSTAL_ADDRESS;
                         string mobileNumber = request.CLIENTS[i].PATIENT_IDENTIFICATION.PHONE_NUMBER;
                         string enrollmentNo = string.Empty;
@@ -125,12 +135,12 @@ namespace IQCare.HTS.BusinessProcess.CommandHandlers
                             if (registeredPerson != null)
                             {
                                 var updatedPerson = await registerPersonService.UpdatePerson(identifiers[0].PersonId,
-                                    firstName, middleName, lastName, sex, dateOfBirth);
+                                    firstName, middleName, lastName, sex, dateOfBirth,nickName);
                             }
                             else
                             {
                                 var person = await registerPersonService.RegisterPerson(firstName, middleName, lastName,
-                                    sex, dateOfBirth, userId);
+                                    sex, dateOfBirth, userId,nickName);
                             }
 
                             var patient = await registerPersonService.GetPatientByPersonId(identifiers[0].PersonId);
@@ -157,9 +167,9 @@ namespace IQCare.HTS.BusinessProcess.CommandHandlers
 
                             var updatedPersonPopulations = await registerPersonService.UpdatePersonPopulation(identifiers[0].PersonId,
                                 request.CLIENTS[i].PATIENT_IDENTIFICATION.KEY_POP, userId);
-                            if (!string.IsNullOrWhiteSpace(landmark))
+                            if (!string.IsNullOrWhiteSpace(landmark) || !string.IsNullOrWhiteSpace(county) ||!string.IsNullOrWhiteSpace(subcounty)||!string.IsNullOrWhiteSpace(ward))
                             {
-                                var updatedLocation = await registerPersonService.UpdatePersonLocation(identifiers[0].PersonId, landmark);
+                                var updatedLocation = await registerPersonService.UpdatePersonLocation(identifiers[0].PersonId, landmark,ward,county,subcounty);
                             }
 
                             if (!string.IsNullOrWhiteSpace(mobileNumber) || !string.IsNullOrWhiteSpace(physicalAddress))
@@ -168,6 +178,11 @@ namespace IQCare.HTS.BusinessProcess.CommandHandlers
                                 var personContact =
                                     await registerPersonService.UpdatePersonContact(identifiers[0].PersonId,
                                         physicalAddress, mobileNumber);
+                            }
+
+                            if(!string.IsNullOrWhiteSpace(educationlevel))
+                            {
+                              
                             }
 
                             /**
