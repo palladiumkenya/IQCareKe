@@ -78,6 +78,7 @@ export class RegisterComponent implements OnInit {
         this.nextOfKin = new NextOfKin();
         this.dataSource = [];
         this.newContacts = [];
+        this.person.PosId = JSON.parse(localStorage.getItem('appPosID'));
 
         this.formGroup = this._formBuilder.group({
             formArray: this._formBuilder.array([
@@ -438,8 +439,11 @@ export class RegisterComponent implements OnInit {
                     'phoneno': data.kinMobileNumber,
                     'consent': data.kinConsentToSMS,
                     'consentDecline': data.consentDeclineReason,
-                    'personRegistered': data.registeredPersonId
+                    'personRegistered': data.registeredPersonId,
+                    'posid': this.person.PosId
                 });
+
+                console.log(this.newContacts);
             }
         );
     }
