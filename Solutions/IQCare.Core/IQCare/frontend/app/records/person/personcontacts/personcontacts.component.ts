@@ -113,6 +113,7 @@ export class PersoncontactsComponent implements OnInit {
                 const sexOption = this.gender.filter(obj => obj.itemId == data[0]['sex']);
                 this.form.controls.sex.setValue(sexOption[0]);
                 this.form.controls.registeredPersonId.setValue(data[0]['id']);
+                this.contactRegisteredInClinic = false;
             }
         );
     }
