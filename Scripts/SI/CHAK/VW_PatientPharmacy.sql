@@ -1,4 +1,9 @@
-ALTER VIEW [dbo].[VW_PatientPharmacy]
+IF  EXISTS (SELECT * FROM sys.views WHERE object_id = OBJECT_ID(N'[dbo].[VW_PatientPharmacy]'))
+DROP VIEW [dbo].[VW_PatientPharmacy]
+GO
+
+
+CREATE VIEW [dbo].[VW_PatientPharmacy]
 AS
 SELECT        dbo.ord_PatientPharmacyOrder.Ptn_pk, dbo.ord_PatientPharmacyOrder.VisitID, dbo.ord_PatientPharmacyOrder.LocationID, 
                          dbo.ord_PatientPharmacyOrder.OrderedBy, dbo.ord_PatientPharmacyOrder.OrderedByDate, dbo.ord_PatientPharmacyOrder.DispensedBy, 

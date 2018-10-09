@@ -1,4 +1,14 @@
 /****** Object:  View [dbo].[Mst_Drug]    Script Date: 8/14/2018 4:43:10 PM ******/
+
+IF  EXISTS (SELECT * FROM sys.views WHERE object_id = OBJECT_ID(N'[dbo].[Mst_Drug]'))
+DROP VIEW [dbo].[Mst_Drug]
+GO
+
+
+
+
+
+
 SET ANSI_NULLS ON
 GO
 
@@ -10,7 +20,7 @@ GO
  Return DrugList from mst_itemmaster
  ItemTypeID 300	 = Drugs
 */
-ALTER VIEW [dbo].[Mst_Drug]
+CREATE VIEW [dbo].[Mst_Drug]
 AS
 SELECT        D.Item_PK AS Drug_pk, D.ItemCode AS DrugID, D.ItemTypeID, D.ItemName AS DrugName, D.DeleteFlag, D.CreatedBy AS UserID, D.CreateDate, D.UpdateDate, 
                          D.DispensingMargin, D.DispensingUnitPrice, D.FDACode, D.Manufacturer, D.MaxStock, D.MinStock, D.PurchaseUnitPrice, D.QtyPerPurchaseUnit, 

@@ -371,7 +371,7 @@ namespace IQCare.Common.BusinessProcess.Services
         }
 
         
-        public async Task<PersonLocation> UpdatePersonLocation(int personId, string landmark,string ward,string county,string subcounty)
+        public async Task<PersonLocation> UpdatePersonLocation(int personId, string landmark,string ward="",string county="",string subcounty="")
         {
             try
             {

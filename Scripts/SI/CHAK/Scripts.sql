@@ -1,13 +1,21 @@
 update mst_feature set featuretypeid = (select top 1 id from mst_decode where name = 'Module Actions') where featurename='Drug Dispense'
 
+
+
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[dtl_PatientLockedRecordsForDispensing]') AND type in (N'U'))
+BEGIN
 CREATE TABLE [dbo].[dtl_PatientLockedRecordsForDispensing](
 	[ptn_pk] [int] NULL,
 	[ptn_pharmacy_pk] [int] NULL,
 	[UserName] [varchar](200) NULL,
 	[StartDate] [datetime] NULL
 ) ON [PRIMARY]
-GO
 
+END
+
+
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[dtl_PatientPharmacyOrderpartialDispense]') AND type in (N'U'))
+BEGIN
 CREATE TABLE [dbo].[dtl_PatientPharmacyOrderpartialDispense](
 	[ptn_pharmacy_pk] [int] NULL,
 	[drug_pk] [int] NULL,
@@ -21,8 +29,10 @@ CREATE TABLE [dbo].[dtl_PatientPharmacyOrderpartialDispense](
 	[deleteflag] [bit] NULL
 ) ON [PRIMARY]
 
-GO
+END
 
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[dtl_TBScreening]') AND type in (N'U'))
+BEGIN
 CREATE TABLE [dbo].[dtl_TBScreening](
 	[ID] [int] IDENTITY(1,1) NOT NULL,
 	[Ptn_Pk] [int] NULL,
@@ -94,8 +104,13 @@ CREATE TABLE [dbo].[dtl_TBScreening](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 
-GO
 
+END
+
+
+
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[DTL_Adult_Initial_Evaluation_Form]') AND type in (N'U'))
+BEGIN
 CREATE TABLE [dbo].[DTL_Adult_Initial_Evaluation_Form](
 	[ID] [int] IDENTITY(1,1) NOT NULL,
 	[Ptn_pk] [int] NOT NULL,
@@ -344,7 +359,13 @@ ALTER TABLE [dbo].[DTL_Adult_Initial_Evaluation_Form] ADD [PreviousAdmissionDiag
 	[ID] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 
-GO
+
+END
+
+
+
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[dtl_Multiselect_line]') AND type in (N'U'))
+BEGIN
 
 CREATE TABLE [dbo].[dtl_Multiselect_line](
 	[Ptn_pk] [int] NOT NULL,
@@ -369,25 +390,66 @@ CREATE TABLE [dbo].[dtl_Multiselect_line](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, FILLFACTOR = 80) ON [PRIMARY]
 ) ON [PRIMARY]
 
-GO
+END
 
 
+IF NOT EXISTS(select top 1 PatientClassification from mst_ItemMaster)
+BEGIN
 ALTER TABLE Ord_Visit
-ADD PatientClassification int,
-IsEnrolDifferenciatedCare bit,
-ARTRefillModel int;
+ADD PatientClassification int
+END
+IF NOT EXISTS(select top 1 IsEnrolDifferenciatedCare from mst_ItemMaster)
+BEGIN
+ALTER TABLE Ord_Visit
+ADD IsEnrolDifferenciatedCare bit
+END
 
-ALTER TABLE Mst_ItemMaster
-ADD QtyUnitDisp int,
---syrup int,
-MorDose int,
-MidDose int,
-EvenDose int,
-NightDose int;
+IF NOT EXISTS(select top 1 ARTRefillModel from mst_ItemMaster)
+BEGIN
+ALTER TABLE Ord_Visit ADD
+ARTRefillModel int
+END
 
+
+
+IF NOT EXISTS(select top 1 QtyUnitDisp from mst_ItemMaster)
+BEGIN
+ALTER  table mst_ItemMaster ADD  QtyUnitDisp int null
+END
+
+IF NOT EXISTS(select top 1 MorDose from mst_ItemMaster)
+BEGIN
+ALTER  table mst_ItemMaster ADD  MorDose int null
+END
+
+IF NOT EXISTS(select top 1 MidDose from mst_ItemMaster)
+BEGIN
+ALTER  table mst_ItemMaster ADD  MidDose int null
+END
+
+IF NOT EXISTS(select top 1 EvenDose from mst_ItemMaster)
+BEGIN
+ALTER  table mst_ItemMaster ADD  EvenDose int null
+END
+
+IF NOT EXISTS(select top 1 NightDose from mst_ItemMaster)
+BEGIN
+ALTER  table mst_ItemMaster ADD  NightDose int null
+END
+
+
+
+
+
+IF NOT EXISTS(select top 1 TreatmentPlan from Ord_PatientPharmacyOrder)
+BEGIN
 ALTER TABLE Ord_PatientPharmacyOrder
-ADD TreatmentPlan int,
-NotDispensedNote varchar(8000);
+ADD TreatmentPlan int
+END 
+IF NOT EXISTS(select top 1 NotDispensedNote from Ord_PatientPharmacyOrder)
+BEGIN
+ALTER TABLE  Ord_PatientPharmacyOrder ADD NotDispensedNote varchar(8000)
+END
 
 ALTER TABLE Dtl_PatientPharmacyOrder
 ADD MorningDose decimal(10,2),

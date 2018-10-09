@@ -1,19 +1,23 @@
 
+/*
+ Created By Joseph Njung'e
+ Return DrugList from mst_itemmaster
+ ItemTypeID 300	 = Drugs
+*/
 
-/****** Object:  View [dbo].[Mst_Drug]    Script Date: 9/12/2018 1:50:18 PM ******/
+
+
+
+IF  EXISTS (SELECT * FROM sys.views WHERE object_id = OBJECT_ID(N'[dbo].[Mst_Drug]'))
+DROP VIEW [dbo].[Mst_Drug]
+GO
 SET ANSI_NULLS ON
 GO
 
 SET QUOTED_IDENTIFIER ON
 GO
 
-
-/*
- Created By Joseph Njung'e
- Return DrugList from mst_itemmaster
- ItemTypeID 300	 = Drugs
-*/
-ALTER VIEW [dbo].[Mst_Drug]
+CREATE VIEW [dbo].[Mst_Drug]
 AS
 Select	D.Item_PK Drug_pk,
 		D.ItemCode DrugID,

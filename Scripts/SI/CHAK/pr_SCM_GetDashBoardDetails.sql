@@ -1,4 +1,11 @@
 /****** Object:  StoredProcedure [dbo].[pr_SCM_GetDashBoardDetails]    Script Date: 8/13/2018 1:26:37 PM ******/
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[pr_SCM_GetDashBoardDetails]') AND type in (N'P', N'PC'))
+DROP PROCEDURE [dbo].[pr_SCM_GetDashBoardDetails]
+GO
+
+
+
+
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON

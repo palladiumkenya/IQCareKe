@@ -1,11 +1,20 @@
+
 /****** Object:  View [dbo].[VW_Drug]    Script Date: 8/15/2018 12:39:34 PM ******/
+
+
+IF  EXISTS (SELECT * FROM sys.views WHERE object_id = OBJECT_ID(N'[dbo].[VW_Drug]'))
+DROP VIEW [dbo].[VW_Drug]
+GO
+
+
 SET ANSI_NULLS ON
 GO
 
 SET QUOTED_IDENTIFIER ON
 GO
 
-ALTER VIEW [dbo].[VW_Drug]
+
+CREATE VIEW [dbo].[VW_Drug]
 AS
 SELECT        dbo.Mst_Drug.Drug_pk, dbo.Mst_Drug.DrugName, dbo.fn_GetDrugTypeId_futures(dbo.Mst_Drug.Drug_pk) AS DrugTypeId, 
                          dbo.fn_GetDrugTypeName_futures(dbo.Mst_Drug.Drug_pk) AS DrugTypeName, dbo.fn_GetFixedDoseDrugAbbrevation(dbo.Mst_Drug.Drug_pk) 

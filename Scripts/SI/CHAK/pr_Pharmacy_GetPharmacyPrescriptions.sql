@@ -1,3 +1,6 @@
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[pr_Pharmacy_GetPharmacyPrescriptions]') AND type in (N'P', N'PC'))
+DROP PROCEDURE [dbo].[pr_Pharmacy_GetPharmacyPrescriptions]
+GO
 
 
 /****** Object:  StoredProcedure [dbo].[pr_Pharmacy_GetPharmacyPrescriptions]    Script Date: 9/17/2018 11:24:19 AM ******/
@@ -8,7 +11,7 @@ SET QUOTED_IDENTIFIER ON
 GO
 
 --exec pr_Pharmacy_GetPharmacyPrescriptions 1018, '''ttwbvXWpqb5WOLfLrBgisw=='''
-ALTER PROCEDURE [dbo].[pr_Pharmacy_GetPharmacyPrescriptions] @LocationID INT = NULL
+CREATE PROCEDURE [dbo].[pr_Pharmacy_GetPharmacyPrescriptions] @LocationID INT = NULL
 	,@DBKey VARCHAR(50)
 AS
 BEGIN
