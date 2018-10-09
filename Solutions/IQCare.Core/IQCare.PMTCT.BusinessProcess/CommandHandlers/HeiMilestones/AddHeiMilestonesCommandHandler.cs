@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 using IQCare.Library;
@@ -10,7 +11,7 @@ using Serilog;
 
 namespace IQCare.PMTCT.BusinessProcess.CommandHandlers.HeiMilestones
 {
-    public class AddHeiMilestonesCommandHandler: IRequestHandler<AddMilestoneCommand,Result<PatientMilestone>>
+    public class AddHeiMilestonesCommandHandler: IRequestHandler<AddMilestoneCommand,Result<AddMilestoneResponse>>
    {
        private readonly IPmtctUnitOfWork _unitOfWork;
 
@@ -19,20 +20,42 @@ namespace IQCare.PMTCT.BusinessProcess.CommandHandlers.HeiMilestones
            _unitOfWork = unitOfWork;
        }
 
-        public async Task<Result<PatientMilestone>> Handle(AddMilestoneCommand request, CancellationToken cancellationToken)
+        public async Task<Result<AddMilestoneResponse>> Handle(AddMilestoneCommand request, CancellationToken cancellationToken)
         {
             using (_unitOfWork)
             {
                 try
                 {
-                    await _unitOfWork.Repository<PatientMilestone>().AddAsync(request.PatientMilestone);
+                    List<HEIMilestone> heiMilestones= new List<HEIMilestone>();
+
+                    foreach (var milestone in request.PatientMilestone)
+                    {
+                       HEIMilestone milestoneItem = new HEIMilestone()
+                        {
+                            PatientId = milestone.PatientId,
+                            PatientMasterVisitId = milestone.PatientMasterVisitId,
+                            TypeAssessed = milestone.TypeAssessed,
+                            Achieved = milestone.Achieved,
+                            Status = milestone.Status,
+                            Comment = milestone.Comment,
+                            CreatedBy = milestone.CreatedBy,
+                            CreateDate = milestone.CreateDate,
+                            DeleteFlag = milestone.DeleteFlag
+                        };
+                        heiMilestones.Add(milestoneItem);
+                    }
+
+                    await _unitOfWork.Repository<HEIMilestone>().AddRangeAsync(heiMilestones);
                     await _unitOfWork.SaveAsync();
-                    return Result<PatientMilestone>.Valid(request.PatientMilestone);
+                    return Result<AddMilestoneResponse>.Valid(new AddMilestoneResponse()
+                    {
+                        Message = "Milestone Added Successfully"
+                    });
                 }
                 catch (Exception e)
                 {
                     Log.Error(e.Message + " " + e.InnerException);
-                    return Result<PatientMilestone>.Invalid(e.Message);
+                    return Result<AddMilestoneResponse>.Invalid(e.Message);
                 }
             }
         }

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using IQCare.Library;
@@ -26,6 +27,7 @@ namespace IQCare.PMTCT.BusinessProcess.CommandHandlers.HeiProfile
             {
                 try
                 {
+
                     await _unitOfWork.Repository<PatientHeiProfile>().AddAsync(request.PatientHeiProfile);
                     await _unitOfWork.SaveAsync();
                     var ret = request.PatientHeiProfile;

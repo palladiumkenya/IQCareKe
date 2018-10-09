@@ -7,8 +7,13 @@ using MediatR;
 
 namespace IQCare.PMTCT.BusinessProcess.Commands.HeiImmunizationHistory
 {
-    public class AddImmunizationHistoryCommand :IRequest<Result<Vaccination>>
+    public class AddImmunizationHistoryCommand :IRequest<Result<VaccinationResponse>>
     {
-        public Vaccination Vaccination;
+        public List<Vaccination> Vaccinations;
+    }
+
+    public class VaccinationResponse
+    {
+        public string Message { get; set; }
     }
 }

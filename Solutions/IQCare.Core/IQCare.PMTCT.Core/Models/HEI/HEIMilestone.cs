@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace IQCare.PMTCT.Core.Models.HEI
 {
-    public class PatientMilestone
+    public class HEIMilestone
     {
         [Key]
         public int Id { get; set; }

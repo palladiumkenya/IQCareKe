@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 using IQCare.Library;
@@ -11,7 +12,7 @@ using Serilog;
 
 namespace IQCare.PMTCT.BusinessProcess.CommandHandlers.HeiImmunizationHistory
 {
-    public class GetHeiImmunizationHistoryCommandHandler: IRequestHandler<GetImmunizationHistoryCommand,Result<Vaccination>>
+    public class GetHeiImmunizationHistoryCommandHandler: IRequestHandler<GetImmunizationHistoryCommand,Result<List<Vaccination>>>
     {
         private readonly IPmtctUnitOfWork _unitOfWork;
 
@@ -20,20 +21,21 @@ namespace IQCare.PMTCT.BusinessProcess.CommandHandlers.HeiImmunizationHistory
             _unitOfWork = unitOfWork;
         }
 
-        public async Task<Result<Vaccination>> Handle(GetImmunizationHistoryCommand request, CancellationToken cancellationToken)
+        public async Task<Result<List<Vaccination>>> Handle(GetImmunizationHistoryCommand request, CancellationToken cancellationToken)
         {
             using (_unitOfWork)
             {
                 try
                 {
-                  var vaccine=  await _unitOfWork.Repository<Vaccination>().Get(x => x.PatientId == request.PatientId && x.DeleteFlag==0)
-                        .FirstOrDefaultAsync(cancellationToken: cancellationToken);
-                    return Result<Vaccination>.Valid(vaccine);
+                    List<Vaccination> vaccine = await _unitOfWork.Repository<Vaccination>()
+                        .Get(x => x.PatientId == request.PatientId && x.DeleteFlag == 0)
+                        .ToListAsync(cancellationToken: cancellationToken);
+                    return Result<List<Vaccination>>.Valid(vaccine);
                 }
                 catch (Exception e)
                 {
                     Log.Error(e.Message + " " + e.InnerException);
-                    return Result<Vaccination>.Invalid(e.Message);
+                    return Result<List<Vaccination>>.Invalid(e.Message);
                 }
             }
         }

@@ -11,7 +11,7 @@ using Serilog;
 
 namespace IQCare.PMTCT.BusinessProcess.CommandHandlers.HeiImmunizationHistory
 {
-    public class EditImmunizationHistoryCommandHandler: IRequestHandler<EditImmunizationHistoryCommand,Result<Vaccination>>
+    public class EditImmunizationHistoryCommandHandler: IRequestHandler<EditImmunizationHistoryCommand,Result<EditImmunizationResponse>>
     {
         private readonly IPmtctUnitOfWork _unitOfWork;
 
@@ -20,7 +20,7 @@ namespace IQCare.PMTCT.BusinessProcess.CommandHandlers.HeiImmunizationHistory
             _unitOfWork = unitOfWork;
         }
 
-        public async Task<Result<Vaccination>> Handle(EditImmunizationHistoryCommand request, CancellationToken cancellationToken)
+        public async Task<Result<EditImmunizationResponse>> Handle(EditImmunizationHistoryCommand request, CancellationToken cancellationToken)
         {
             using (_unitOfWork)
             {
@@ -39,12 +39,15 @@ namespace IQCare.PMTCT.BusinessProcess.CommandHandlers.HeiImmunizationHistory
 
                      _unitOfWork.Repository<Vaccination>().Update(vacc);
                     await _unitOfWork.SaveAsync();
-                    return Result<Vaccination>.Valid(vacc);
+                    return Result<EditImmunizationResponse>.Valid(new EditImmunizationResponse()
+                    {
+                        Message = "Immunization Update successfully"
+                    });
                 }
                 catch (Exception e)
                 {
                     Log.Error(e.Message + " " + e.InnerException);
-                    return Result<Vaccination>.Invalid(e.Message);
+                    return Result<EditImmunizationResponse>.Invalid(e.Message);
                 }
             }
         }

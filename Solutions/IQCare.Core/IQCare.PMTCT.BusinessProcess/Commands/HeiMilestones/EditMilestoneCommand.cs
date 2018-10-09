@@ -1,11 +1,17 @@
-﻿using IQCare.Library;
+﻿using System.Collections.Generic;
+using IQCare.Library;
 using IQCare.PMTCT.Core.Models.HEI;
 using MediatR;
 
 namespace IQCare.PMTCT.BusinessProcess.Commands.HeiMilestones
 {
-    public class EditMilestoneCommand: IRequest<Result<PatientMilestone>>
+    public class EditMilestoneCommand: IRequest<Result<EditMilestoneResponse>>
    {
-       public PatientMilestone PatientMilestone;
+       public HEIMilestone  PatientMilestone;
    }
+
+    public class EditMilestoneResponse
+    {
+        public string Message { get; set; }
+    }
 }
