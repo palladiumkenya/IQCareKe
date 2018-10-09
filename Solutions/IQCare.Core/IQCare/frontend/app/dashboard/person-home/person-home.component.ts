@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { Component, OnInit, NgZone } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { PersonHomeService } from '../services/person-home.service';
 import { NotificationService } from '../../shared/_services/notification.service';
@@ -23,7 +23,9 @@ export class PersonHomeComponent implements OnInit {
     constructor(private route: ActivatedRoute,
         private personService: PersonHomeService,
         private snotifyService: SnotifyService,
-        private notificationService: NotificationService) {
+        private notificationService: NotificationService,
+        private router: Router,
+        public zone: NgZone) {
         this.person = new PersonView();
     }
 
@@ -45,18 +47,21 @@ export class PersonHomeComponent implements OnInit {
     public getPatientDetilsById(personId: number) {
         this.personView$ = this.personService.getPatientByPersonId(personId).subscribe(
             p => {
-                // console.log(p);
+                console.log(p);
                 this.person = p;
-                // console.log('person');
-                // console.log(this.person);
             },
             (err) => {
-                // console.log(err);
                 this.snotifyService.error('Error editing encounter ' + err, 'person detail service',
                     this.notificationService.getConfig());
             },
             () => {
                 // console.log(this.personView$);
             });
+    }
+
+    onEdit() {
+        this.zone.run(() => {
+            this.router.navigate(['/record/person/update/' + this.personId], { relativeTo: this.route });
+        });
     }
 }

@@ -10,9 +10,12 @@
                     <div class="stats-title">
                         <span class="">{{person.patientType}} Patient</span>
                     </div>
-                    <!--<div class="header-information">
-
-                    </div>-->
+                    <div class="header-information">
+                        <a mat-raised-button (click)="onEdit()">
+                            <mat-icon><i className="material-icons">mode_edit</i></mat-icon>
+                            Update
+                        </a>
+                    </div>
                 </div>
                 <div class="col-lg-7 col-sm-7 col-xs-12 profile-stats">
                     <div class="row">
@@ -31,13 +34,17 @@
                     </div>
                     <div class="row">
                         <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 inlinestats-col">
-                            <i class="glyphicon glyphicon-map-marker"></i> village/landamark/county
+                            <i class="glyphicon glyphicon-map-marker"></i>
+                            <strong>County:</strong> {{ person.county }} <br />
+                            <strong>SubCounty:</strong> {{ person.subCounty }} <br />
+                            <strong>Ward:</strong> {{ person.ward }} <br />
+                            <strong>Landmark:</strong> {{ person.landMark }}
                         </div>
                         <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 inlinestats-col">
                             Emergency Contact: <strong>$250</strong>
                         </div>
                         <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 inlinestats-col">
-                            Cell: <strong>24</strong>
+                            Cell: <strong>{{ person.mobileNumber }}</strong>
                         </div>
                     </div>
                 </div>

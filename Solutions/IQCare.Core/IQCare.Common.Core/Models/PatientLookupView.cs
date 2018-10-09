@@ -43,6 +43,9 @@ namespace IQCare.Common.Core.Models
         public int? MaritalStatusId { get; set; }
         public string MaritalStatusName { get; set; }
         public string LandMark { get; set; }
+        public string County { get; set; }
+        public string SubCounty { get; set; }
+        public string Ward { get; set; }
 
         public string Age;
 

@@ -1,4 +1,7 @@
-/****** Object:  View [dbo].[Api_PatientsView]    Script Date: 8/24/2018 4:09:21 PM ******/
+IF  EXISTS (SELECT * FROM sys.views WHERE object_id = OBJECT_ID(N'[dbo].[Api_PatientsView]'))
+DROP VIEW [dbo].[Api_PatientsView]
+GO
+/****** Object:  View [dbo].[Api_PatientsView]    Script Date: 10/9/2018 9:56:08 AM ******/
 SET ANSI_NULLS ON
 GO
 
@@ -6,9 +9,7 @@ SET QUOTED_IDENTIFIER ON
 GO
 
 
-
-
-ALTER VIEW [dbo].[Api_PatientsView]
+CREATE VIEW [dbo].[Api_PatientsView]
 AS
 SELECT ISNULL(ROW_NUMBER() OVER(ORDER BY PersonId ASC), -1) AS RowID, *
 FROM (
@@ -35,7 +36,10 @@ SELECT
 	   CAST(DECRYPTBYKEY(PC.MobileNumber) AS VARCHAR(50)) AS MobileNumber,
 	   PMS.MaritalStatusId,
 	   MaritalStatusName = (SELECT TOP 1 ItemName FROM LookupItemView WHERE ItemId = PMS.MaritalStatusId AND MasterName = 'MaritalStatus'),
-	   PL.LandMark 
+	   PL.LandMark,
+	   County = (select CountyName from County where WardId = PL.Ward),
+	   SubCounty = (select Subcountyname from County where WardId = PL.Ward),
+	   Ward = (select WardName from County where WardId = PL.Ward)
 	   
 FROM [dbo].[Person] P
 INNER JOIN dbo.Patient AS PT ON P.Id = PT.PersonId
@@ -72,7 +76,11 @@ SELECT
 	CAST(DECRYPTBYKEY(PC.MobileNumber) AS VARCHAR(50)) AS MobileNumber,
 	PMS.MaritalStatusId,
 	MaritalStatusName = (SELECT TOP 1 ItemName FROM LookupItemView WHERE ItemId = PMS.MaritalStatusId AND MasterName = 'MaritalStatus'),
-	PL.LandMark 
+	PL.LandMark,
+	County = (select CountyName from County where WardId = PL.Ward),
+	SubCounty = (select Subcountyname from County where WardId = PL.Ward),
+	Ward = (select WardName from County where WardId = PL.Ward)
+	 
 FROM Person PR
 LEFT JOIN Patient PT ON PR.Id = PT.PersonId
 LEFT JOIN [dbo].[PatientMaritalStatus] PMS ON PMS.PersonId = PR.Id
