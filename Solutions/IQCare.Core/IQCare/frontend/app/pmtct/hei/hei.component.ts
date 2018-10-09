@@ -4,6 +4,10 @@ import { ActivatedRoute } from '@angular/router';
 import { LookupItemView } from '../../shared/_models/LookupItemView';
 import { FormGroup, FormArray } from '@angular/forms';
 import { LongDateFormatKey } from 'moment';
+import {GeneXpertResolverService} from '../_services/gene-xpert-resolver.service';
+import {TbScreeningOutcomeResolverService} from '../_services/tb-screening-outcome-resolver.service';
+import {SputumSmearResolverService} from '../_services/sputum-smear-resolver.service';
+import {ChestXrayResolverService} from '../_services/chest-xray-resolver.service';
 
 @Component({
     selector: 'app-hei',
@@ -28,6 +32,7 @@ export class HeiComponent implements OnInit {
     primarycaregiverOptions: any[] = [];
     immunizationHistoryOptions: any[] = [];
     milestoneOptions: any[] = [];
+    tbAssessmentOptions: any[] = [];
 
     deliveryModeOptions: LookupItemView[] = [];
     arvprophylaxisOptions: LookupItemView[] = [];
@@ -40,18 +45,32 @@ export class HeiComponent implements OnInit {
     milestoneStatusOptions: LookupItemView[] = [];
     heiOutcomeOptions: LookupItemView[] = [];
 
+    sputumSmearOptions: LookupItemView[] = [];
+    geneXpertOptions: LookupItemView[] = [];
+    chestXrayOptions: LookupItemView[] = [];
+    tbScreeningOptions: LookupItemView[] = [];
+
     isLinear: boolean = true;
     deliveryMatFormGroup: FormArray;
     visitDetailsFormGroup: FormArray;
+    tbAssessmentFormGroup: FormArray;
+    milestonesFormGroup: FormArray;
+    immunizationHistoryFormGroup: FormArray;
+    maternalViralLoadFormGroup: FormArray;
+    infantFeedingFormGroup: FormArray;
 
-    infantFeedingFormGroup: FormGroup;
-    heiOutcomeFormGroup: FormGroup;
-    // nextAppointmentFormGroup: FormGroup;
+     heiOutcomeFormGroup: FormArray;
+     nextAppointmentFormGroup: FormGroup;
 
     constructor(private route: ActivatedRoute,
         private heiService: HeiService) {
         this.deliveryMatFormGroup = new FormArray([]);
         this.visitDetailsFormGroup = new FormArray([]);
+        this.tbAssessmentFormGroup = new FormArray( []);
+        this.immunizationHistoryFormGroup = new FormArray( []);
+        this.milestonesFormGroup = new FormArray( []);
+        this.infantFeedingFormGroup = new FormArray( []);
+        this.heiOutcomeFormGroup = new FormArray( []);
     }
 
     ngOnInit() {
@@ -83,7 +102,11 @@ export class HeiComponent implements OnInit {
                 immunizationGivenOptions,
                 milestoneAssessedOptions,
                 milestoneStatusOptions,
-                heiOutcomeOptions
+                heiOutcomeOptions,
+                sputumSmearOptions,
+                geneXpertOptions,
+                chestXrayOptions,
+                tbScreeningOutComeOptions,
             } = res;
             console.log('test options');
             console.log(res);
@@ -102,6 +125,11 @@ export class HeiComponent implements OnInit {
             this.milestoneAssessedOptions = milestoneAssessedOptions['lookupItems'];
             this.milestoneStatusOptions = milestoneStatusOptions['lookupItems'];
             this.heiOutcomeOptions = heiOutcomeOptions['lookupItems'];
+            this.sputumSmearOptions = sputumSmearOptions['lookupItems'];
+            this.geneXpertOptions = geneXpertOptions['lookupItems'];
+            this.chestXrayOptions = chestXrayOptions['lookupItems'];
+            this.tbScreeningOptions = tbScreeningOutComeOptions['lookupItems'];
+            
         });
 
         this.deliveryOptions.push({
@@ -131,6 +159,14 @@ export class HeiComponent implements OnInit {
             'yesnoOption': this.yesnoOptions
         });
 
+        this.tbAssessmentOptions.push({
+            'yesnoOption': this.yesnoOptions,
+            'sputumSmear': this.sputumSmearOptions,
+            'genexpert': this.geneXpertOptions,
+            'chestXray': this.chestXrayOptions,
+            'tbScreeningOutcome': this.tbScreeningOptions
+        });
+
         this.hivtestingOptions.push({
 
         });
@@ -149,15 +185,23 @@ export class HeiComponent implements OnInit {
         this.visitDetailsFormGroup.push(formGroup);
     }
     onInfantFeedingNotify(formGroup: FormGroup): void {
-        this.infantFeedingFormGroup = formGroup;
+        this.infantFeedingFormGroup.push(formGroup);
     }
 
     onMilestonesNotify(formGroup: FormGroup): void {
-        // this.milestonesFormGroup.push(formGroup);
+         this.milestonesFormGroup.push(formGroup);
     }
 
     onImmunizationHistory(formGroup: FormGroup): void {
-        // this.immunizationHistoryFormGroup.push(formGroup);
+         this.immunizationHistoryFormGroup.push(formGroup);
+    }
+
+    onTbAssessment(formGroup: FormGroup) {
+        this.tbAssessmentFormGroup.push(formGroup);
+    }
+
+    onHeiOutcomeNotify(formGroup: FormGroup) {
+       this.heiOutcomeFormGroup.push(formGroup);
     }
 
     onCompleteEncounter() {

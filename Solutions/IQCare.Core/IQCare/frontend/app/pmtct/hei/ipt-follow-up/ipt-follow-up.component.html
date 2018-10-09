@@ -1,0 +1,109 @@
+<h2 mat-dialog-title>{{title}}</h2>
+
+<mat-divider></mat-divider>
+<br>
+
+<form [formGroup]="IPTFollowupFormGroup">
+
+    <mat-dialog-content>
+
+        <mat-form-field class="col-lg-12 col-xs-12">
+            <input matInput [matDatepicker]="picker" formControlName="IPTDueDate" required
+                   placeholder="IPT Due Date">
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+
+        <mat-form-field class="col-lg-12 col-xs-12">
+            <input matInput [matDatepicker]="picker" formControlName="IPTDateCollected" required
+                   placeholder="IPT Date Collected">
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+
+        <mat-form-field class="col-md-12">
+            <input matInput
+                   placeholder="Weight (Kgs)"
+                   formControlName="weight" required>
+        </mat-form-field>
+
+
+        <mat-form-field class="col-md-6">
+            <mat-label>Hepatoxicity</mat-label>
+            <mat-select formControlName="hepatoxicity" required minlength="1">
+                <mat-option [value]="0">select</mat-option>
+                <mat-option *ngFor="let yesnoOption of yesnoOptions" [value]="yesnoOption.itemId">
+                    {{yesnoOption.itemName}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+
+        <mat-form-field class="col-md-6">
+            <input matInput
+                   placeholder="Action Taken"
+                   formControlName="hepatoxicityActionTaken" required>
+        </mat-form-field>
+
+
+        <mat-form-field class="col-md-6">
+            <mat-label>Peripheral Neoropathy</mat-label>
+            <mat-select formControlName="peripheralNeoropathy" required minlength="1">
+                <mat-option [value]="0">select</mat-option>
+                <mat-option *ngFor="let yesnoOption of yesnoOptions" [value]="yesnoOption.itemId">
+                    {{yesnoOption.itemName}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+
+        <mat-form-field class="col-md-6">
+            <input matInput
+                   placeholder="Action Taken"
+                   formControlName="peripheralNeoropathyActionTaken" required>
+        </mat-form-field>
+
+        <mat-form-field class="col-md-6">
+            <mat-label>Rash ?</mat-label>
+            <mat-select formControlName="rash" required minlength="1">
+                <mat-option [value]="0">select</mat-option>
+                <mat-option *ngFor="let yesnoOption of yesnoOptions" [value]="yesnoOption.itemId">
+                    {{yesnoOption.itemName}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+
+        <mat-form-field class="col-md-6">
+            <input matInput
+                   placeholder="Action Taken"
+                   formControlName="rashActionTaken" required>
+        </mat-form-field>
+
+        <mat-form-field class="col-md-6">
+            <mat-label>Adherence Measurement</mat-label>
+            <mat-select formControlName="adherenceMeasurement" required minlength="1">
+                <mat-option [value]="0">select</mat-option>
+                <mat-option *ngFor="let yesnoOption of yesnoOptions" [value]="yesnoOption.itemId">
+                    {{yesnoOption.itemName}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+
+        <mat-form-field class="col-md-6">
+            <input matInput
+                   placeholder="Action Taken"
+                   formControlName="adherenceMeasurementActionTaken" required>
+        </mat-form-field>
+
+
+    </mat-dialog-content>
+    <mat-divider></mat-divider>
+    <mat-dialog-actions>
+        <button mat-raised-button class="mat-raised-button mat-primary"><span class="fa fa-plus-circle"> Save </span>
+        </button>
+        <button mat-raised-button="" [mat-dialog-close]="true" class="mat-raised-button mat-accent"><span
+                class="fa fa-times">Close</span></button>
+    </mat-dialog-actions>
+</form>
+
+
+
+

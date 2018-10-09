@@ -23,6 +23,10 @@ import { ImmunizationGivenOptionsResolverService } from './_services/immunizatio
 import { MilestonesAssessedOptionsResolverService } from './_services/milestones-assessed-options-resolver.service';
 import { MilestonesStatusOptionsResolverService } from './_services/milestones-status-options-resolver.service';
 import { HeiOutcomeOptionsResolver } from './_services/hei-outcome-options.resolver.service';
+import {SputumSmearResolverService} from './_services/sputum-smear-resolver.service';
+import {GeneXpertResolverService} from './_services/gene-xpert-resolver.service';
+import {ChestXrayResolverService} from './_services/chest-xray-resolver.service';
+import {TbScreeningOutcomeResolverService} from './_services/tb-screening-outcome-resolver.service';
 
 
 const routes: Routes = [
@@ -75,7 +79,11 @@ const routes: Routes = [
             immunizationGivenOptions: ImmunizationGivenOptionsResolverService,
             milestoneAssessedOptions: MilestonesAssessedOptionsResolverService,
             milestoneStatusOptions: MilestonesStatusOptionsResolverService,
-            heiOutcomeOptions: HeiOutcomeOptionsResolver
+            heiOutcomeOptions: HeiOutcomeOptionsResolver,
+            sputumSmearOptions: SputumSmearResolverService,
+            geneXpertOptions: GeneXpertResolverService,
+            chestXrayOptions: ChestXrayResolverService,
+            tbScreeningOutComeOptions: TbScreeningOutcomeResolverService
         }
     }
 ];

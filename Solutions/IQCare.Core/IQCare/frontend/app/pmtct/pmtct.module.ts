@@ -48,6 +48,9 @@ import { InlineSearchComponent } from '../records/inline-search/inline-search.co
 import { RecordsModule } from '../records/records.module';
 import { HeiOutcomeComponent } from './hei/hei-outcome/hei-outcome.component';
 import { HeiOutcomeOptionsResolver } from './_services/hei-outcome-options.resolver.service';
+import { IptClientWorkupComponent } from './hei/ipt-client-workup/ipt-client-workup.component';
+import { IptFollowUpComponent } from './hei/ipt-follow-up/ipt-follow-up.component';
+import { IptOutcomeComponent } from './hei/ipt-outcome/ipt-outcome.component';
 
 
 @NgModule({
@@ -86,7 +89,10 @@ import { HeiOutcomeOptionsResolver } from './_services/hei-outcome-options.resol
         InfantFeedingComponent,
         TbAssessmentComponent,
         InfantFeedingComponent,
-        HeiOutcomeComponent
+        HeiOutcomeComponent,
+        IptClientWorkupComponent,
+        IptFollowUpComponent,
+        IptOutcomeComponent
     ],
     providers: [
         PlaceOfDeliveryResolver,
@@ -101,7 +107,14 @@ import { HeiOutcomeOptionsResolver } from './_services/hei-outcome-options.resol
         HeiService
     ],
     entryComponents: [
-
+        IptClientWorkupComponent,
+        IptFollowUpComponent,
+        IptOutcomeComponent
+    ],
+    exports: [
+        IptClientWorkupComponent,
+        IptFollowUpComponent,
+        IptOutcomeComponent
     ]
 })
 export class PmtctModule { }
