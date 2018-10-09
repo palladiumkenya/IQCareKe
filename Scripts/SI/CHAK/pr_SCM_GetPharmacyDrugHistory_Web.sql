@@ -1,4 +1,7 @@
 
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[pr_SCM_GetPharmacyDrugHistory_Web]') AND type in (N'P', N'PC'))
+DROP PROCEDURE [dbo].[pr_SCM_GetPharmacyDrugHistory_Web]
+GO
 
 /****** Object:  StoredProcedure [dbo].[pr_SCM_GetPharmacyDrugHistory_Web]    Script Date: 9/19/2018 7:52:03 AM ******/
 SET ANSI_NULLS ON

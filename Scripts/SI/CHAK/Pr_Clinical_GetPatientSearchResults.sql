@@ -1,6 +1,12 @@
 
 
 /****** Object:  StoredProcedure [dbo].[Pr_Clinical_GetPatientSearchresults]    Script Date: 9/17/2018 12:48:31 PM ******/
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[Pr_Clinical_GetPatientSearchresults]') AND type in (N'P', N'PC'))
+DROP PROCEDURE [dbo].[Pr_Clinical_GetPatientSearchresults]
+GO
+
+
+
 SET ANSI_NULLS ON
 GO
 
@@ -16,7 +22,7 @@ GO
 -- Create date: <08-08-2014,>
 -- Description:	<Modified Find Patient>
 -- =============================================
-ALTER PROCEDURE [dbo].[Pr_Clinical_GetPatientSearchresults]
+CREATE PROCEDURE [dbo].[Pr_Clinical_GetPatientSearchresults]
 	-- Add the parameters for the stored procedure here
 	@Sex int = Null, 
 	@Firstname varchar(50) = Null, 
