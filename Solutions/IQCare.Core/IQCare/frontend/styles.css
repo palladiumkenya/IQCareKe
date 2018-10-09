@@ -11,3 +11,15 @@
     color: #202021 !important;
     font-weight: bold !important;
 }
+
+.footer {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    padding: 2rem;
+    width: 100%;
+    display: block;
+    border-top: 1px solid #e7eaec;
+    background-color: lightgray;
+}

@@ -15,6 +15,7 @@ export class HeiComponent implements OnInit {
     personId: number;
     serviceAreaId: number;
     patientMasterVisitId: number;
+    userId: number;
 
     deliveryOptions: any[] = [];
     maternalhistoryOptions: any[] = [];
@@ -63,6 +64,8 @@ export class HeiComponent implements OnInit {
                 this.serviceAreaId = serviceAreaId;
             }
         );
+
+        this.userId = JSON.parse(localStorage.getItem('appUserId'));
 
         this.route.data.subscribe((res) => {
             const {
@@ -160,11 +163,26 @@ export class HeiComponent implements OnInit {
     onCompleteEncounter() {
         console.log(this.deliveryMatFormGroup.value);
         console.log(this.visitDetailsFormGroup.value);
+        this.patientMasterVisitId = 2;
 
-        this.heiService.saveHieDelivery(this.patientId, this.patientMasterVisitId, this.deliveryMatFormGroup.value[0])
+        const motherRegistered = this.yesnoOptions.filter(
+            obj => obj.itemId == this.deliveryMatFormGroup.value[1]['motherregisteredinclinic']
+        );
+
+        let isMotherRegistered: boolean = false;
+        if (motherRegistered.length > 0) {
+            if (motherRegistered[0]['itemName'] == 'Yes') {
+                isMotherRegistered = true;
+            } else if (motherRegistered[0]['itemName'] == 'No') {
+                isMotherRegistered = false;
+            }
+        }
+
+        this.heiService.saveHieDelivery(this.patientId, this.patientMasterVisitId, this.userId,
+            isMotherRegistered, this.deliveryMatFormGroup.value[0], this.deliveryMatFormGroup.value[1])
             .subscribe(
                 (result) => {
-
+                    console.log(result);
                 }
             );
     }

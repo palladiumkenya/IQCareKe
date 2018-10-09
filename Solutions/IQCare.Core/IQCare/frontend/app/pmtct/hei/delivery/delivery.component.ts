@@ -29,7 +29,8 @@ export class DeliveryComponent implements OnInit {
             placeofdelivery: new FormControl('', [Validators.required]),
             modeofdelivery: new FormControl('', [Validators.required]),
             birthweight: new FormControl('', [Validators.required]),
-            arvprophylaxisreceived: new FormControl('', [Validators.required])
+            arvprophylaxisreceived: new FormControl('', [Validators.required]),
+            arvprophylaxisother: new FormControl('', [Validators.required])
         });
 
         const { placeofdeliveryOptions, deliveryModeOptions, arvprophylaxisOptions } = this.deliveryOptions[0];
@@ -39,5 +40,14 @@ export class DeliveryComponent implements OnInit {
 
 
         this.notify.emit(this.DeliveryForm);
+    }
+
+    onArvProphylaxisReceivedChange(event) {
+        if (event.isUserInput && event.source.selected && event.source.viewValue == 'Other') {
+            this.DeliveryForm.controls['arvprophylaxisother'].enable({ onlySelf: false });
+        } else if (event.source.selected) {
+            this.DeliveryForm.controls.arvprophylaxisother.setValue('');
+            this.DeliveryForm.controls['arvprophylaxisother'].disable();
+        }
     }
 }

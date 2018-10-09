@@ -36,6 +36,7 @@ export class MaternalhistoryComponent implements OnInit {
             stateofmother: new FormControl('', [Validators.required]),
             primarycaregiver: new FormControl('', [Validators.required]),
             nameofmother: new FormControl('', [Validators.required]),
+            motherpersonid: new FormControl('0'),
             cccno: new FormControl('', [Validators.required]),
             pmtctheimotherreceivedrugs: new FormControl('', [Validators.required]),
             pmtctheimotherregimen: new FormControl('', [Validators.required]),
@@ -114,8 +115,14 @@ export class MaternalhistoryComponent implements OnInit {
                     return;
                 }
 
-                const mothernames = data[0]['firstName'] + ' ' + data[0]['middleName'] + ' ' + data[0]['lastName'];
+                const firstName = data[0]['firstName'] ? data[0]['firstName'] : '';
+                const middleName = data[0]['middleName'] ? data[0]['middleName'] : '';
+                const lastName = data[0]['lastName'] ? data[0]['lastName'] : '';
+
+                const mothernames = firstName + ' ' + middleName + ' ' + lastName;
+                this.isMotherRegistered = false;
                 this.MaternalHistoryForm.controls.nameofmother.setValue(mothernames);
+                this.MaternalHistoryForm.controls.motherpersonid.setValue(data[0]['id']);
             }
         );
     }

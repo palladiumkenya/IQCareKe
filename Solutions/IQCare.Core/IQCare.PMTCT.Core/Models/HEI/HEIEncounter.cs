@@ -13,15 +13,14 @@ namespace IQCare.PMTCT.Core.Models.HEI
         public float BirthWeight { get; set; }
         public int ArvProphylaxisId { get; set; }
         public string ArvProphylaxisOther { get; set; }
-        public int MotherRegisteredId { get; set; }
-        public int MotherPersonId { get; set; }
+        public bool MotherRegisteredId { get; set; }
+        public int? MotherPersonId { get; set; }
         public int MotherStatusId { get; set; }
         public int PrimaryCareGiverID { get; set; }
         public string MotherName { get; set; }
         public string MotherCCCNumber { get; set; }
         public int MotherPMTCTDrugsId { get; set; }
-
-        public int MotherPMTCTRegimenId { get; set; }
+        public int? MotherPMTCTRegimenId { get; set; }
 
         public string MotherPMTCTRegimenOther { get; set; }
 

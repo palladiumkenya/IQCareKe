@@ -34,7 +34,22 @@ namespace IQCare.PMTCT.BusinessProcess.CommandHandlers.HeiDeliveryMaternalHistor
                         PlaceOfDeliveryId = request.PlaceOfDelivery,
                         ModeOfDeliveryId = request.ModeOfDelivery,
                         BirthWeight = request.BirthWeight,
-                        ArvProphylaxisId = request.ProphylaxisReceived
+                        ArvProphylaxisId = request.ProphylaxisReceived,
+                        ArvProphylaxisOther = request.ProphylaxisReceivedOther,
+                        MotherRegisteredId = request.MotherIsRegistered,
+                        MotherPersonId = request.MotherPersonId,
+                        MotherStatusId = request.MotherStatusId,
+                        PrimaryCareGiverID = request.PrimaryCareGiverID,
+                        MotherName = request.MotherName,
+                        MotherCCCNumber = request.MotherCCCNumber,
+                        MotherPMTCTDrugsId = request.MotherPMTCTDrugsId,
+                        MotherPMTCTRegimenId = request.MotherPMTCTRegimenId,
+                        MotherPMTCTRegimenOther = request.MotherPMTCTRegimenOther,
+                        MotherArtInfantEnrolId = request.MotherArtInfantEnrolId,
+                        MotherArtInfantEnrolRegimenId = request.MotherArtInfantEnrolRegimenId,
+                        DeleteFlag = false,
+                        CreateDate = DateTime.Now,
+                        CreatedBy = request.CreatedBy,
                     };
 
                     HEIEncounter heiEncounterResult = await heiEncounterService.AddHeiEncounter(heiEncounter);
@@ -42,7 +57,6 @@ namespace IQCare.PMTCT.BusinessProcess.CommandHandlers.HeiDeliveryMaternalHistor
                     return Result<AddHeiDeliveryCommandResponse>.Valid(new AddHeiDeliveryCommandResponse()
                     {
                         HeiEncounterId = heiEncounterResult.Id
-
                     });
                 }
                 catch (Exception e)

@@ -17,14 +17,30 @@ export class HeiService {
 
     constructor(private http: HttpClient, private errorHandler: ErrorHandlerService) { }
 
-    public saveHieDelivery(patientId: number, patientMasterVisitId: number, heidelivery: any): Observable<any> {
+    public saveHieDelivery(patientId: number, patientMasterVisitId: number, userId: number,
+        isMotherRegistered: boolean, heidelivery: any, maternalHistory: any): Observable<any> {
         const Indata = {
             'PatientId': patientId,
             'PatientMasterVisitId': patientMasterVisitId,
-            'PlaceOfDelivery': '',
-            'ModeOfDelivery': '',
-            'BirthWeight': '',
-            'ProphylaxisReceived': ''
+            'PlaceOfDelivery': heidelivery['placeofdelivery'],
+            'ModeOfDelivery': heidelivery['modeofdelivery'],
+            'BirthWeight': heidelivery['birthweight'],
+            'ProphylaxisReceived': heidelivery['arvprophylaxisreceived'],
+            'ProphylaxisReceivedOther': heidelivery['arvprophylaxisother'],
+
+            'MotherIsRegistered': isMotherRegistered,
+            'MotherPersonId': maternalHistory['motherpersonid'],
+            'MotherStatusId': maternalHistory['stateofmother'],
+            'PrimaryCareGiverID': maternalHistory['primarycaregiver'],
+            'MotherName': maternalHistory['nameofmother'],
+            'MotherCCCNumber': maternalHistory['cccno'],
+            'MotherPMTCTDrugsId': maternalHistory['pmtctheimotherreceivedrugs'],
+            'MotherPMTCTRegimenId': maternalHistory['pmtctheimotherregimen'],
+            'MotherPMTCTRegimenOther': maternalHistory['otherspecify'],
+            'MotherArtInfantEnrolId': maternalHistory['motheronartatinfantenrollment'],
+            'MotherArtInfantEnrolRegimenId': maternalHistory['pmtctheimotherdrugsatinfantenrollment'],
+
+            'CreatedBy': userId
         };
 
         return this.http.post<any>(this.API_URL + '/api/DeliveryMaternalHistory', JSON.stringify(Indata), httpOptions).pipe(

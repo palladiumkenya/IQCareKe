@@ -96,4 +96,8 @@ export class InlineSearchComponent implements OnInit, AfterViewInit {
             this.dialogRef.close(this.selection.selected);
         }
     }
+
+    close() {
+        this.dialogRef.close();
+    }
 }
