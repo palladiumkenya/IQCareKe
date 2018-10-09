@@ -173,7 +173,9 @@ export class RegisterComponent implements OnInit {
                 this.formGroup.controls['formArray']['controls'][0]['controls'].MaritalStatus.setValue(maritalStatusId);
                 this.formGroup.controls['formArray']['controls'][0]['controls'].EducationLevel.setValue(educationLevelId);
                 this.formGroup.controls['formArray']['controls'][0]['controls'].Occupation.setValue(occupationId);
-                this.getAge(new Date(dateOfBirth));
+                if (dateOfBirth) {
+                    this.getAge(new Date(dateOfBirth));
+                }
 
                 // second tab wizard
                 this.formGroup.controls['formArray']['controls'][1]['controls'].County.setValue(countyId);
@@ -227,10 +229,10 @@ export class RegisterComponent implements OnInit {
     }
 
     onDate(event: MatDatepickerInputEvent<Date>) {
-        this.getAge(event.value);
+        this.getAge(event.value, true);
     }
 
-    getAge(dob: Date): any {
+    getAge(dob: Date, setDobPrecision: boolean = false): any {
         const today = new Date();
 
         let age = today.getFullYear() - dob.getFullYear();
@@ -245,7 +247,7 @@ export class RegisterComponent implements OnInit {
 
         this.formArray['controls'][0]['controls']['AgeYears'].setValue(age);
         this.formArray['controls'][0]['controls']['AgeMonths'].setValue(ageMonths);
-        if (!this.id) {
+        if (setDobPrecision) {
             this.formArray['controls'][0]['controls']['DobPrecision'].setValue(1);
         }
     }
