@@ -1,5 +1,5 @@
-export class PersonView{
-    age: string ;
+export class PersonView {
+    age: string;
     ageNumber: number;
     isHtsEnrolled: string;
     rowID: number;
@@ -7,7 +7,7 @@ export class PersonView{
     patientId: number;
     ptn_pk: number;
     firstName: string;
-    midName: string= "";
+    midName: string = '';
     lastName: string;
     sex: number;
     gender: string;
@@ -25,4 +25,7 @@ export class PersonView{
     maritalStatusId: number;
     maritalStatusName: string;
     landMark: string;
+    county: string;
+    subCounty: string;
+    ward: string;
 }

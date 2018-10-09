@@ -126,6 +126,7 @@ export class PersonRegistrationService {
 
         const contacts = [];
         for (let i = 0; i < contactKin.length; i++) {
+            console.log(contactKin);
             contacts.push({
                 'PersonId': personId,
                 'RegisteredPersonId': contactKin[i]['personRegistered'],
@@ -138,7 +139,8 @@ export class PersonRegistrationService {
                 'RelationshipType': contactKin[i]['relationship']['itemId'],
                 'contactcategory': contactKin[i]['contactcategory']['itemId'],
                 'consent': contactKin[i]['consent']['itemId'],
-                'consentDecline': contactKin[i]['consentDecline']
+                'consentDecline': contactKin[i]['consentDecline'],
+                'PosId': contactKin[i]['posid']
             });
         }
 
