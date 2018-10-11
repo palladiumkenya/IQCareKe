@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -12,7 +13,7 @@ using Serilog;
 
 namespace IQCare.PMTCT.BusinessProcess.CommandHandlers.HeiMilestones
 {
-    public  class GetHeiMilestoneCommandHandler: IRequestHandler<GetPatientMilestoneCommand,Result<PatientMilestone>>
+    public  class GetHeiMilestoneCommandHandler: IRequestHandler<GetPatientMilestoneCommand,Result<List<HEIMilestone>>>
   {
       private readonly IPmtctUnitOfWork _unitOfWork;
 
@@ -21,20 +22,20 @@ namespace IQCare.PMTCT.BusinessProcess.CommandHandlers.HeiMilestones
           _unitOfWork = unitOfWork;
       }
 
-        public async Task<Result<PatientMilestone>> Handle(GetPatientMilestoneCommand request, CancellationToken cancellationToken)
+        public async Task<Result<List<HEIMilestone>>> Handle(GetPatientMilestoneCommand request, CancellationToken cancellationToken)
         {
             using (_unitOfWork)
             {
                 try
                 {
-                    PatientMilestone patientMilestone = await _unitOfWork.Repository<PatientMilestone>()
-                        .Get(x => x.PatientId == request.PatientId && !x.DeleteFlag).FirstOrDefaultAsync();
-                    return Result<PatientMilestone>.Valid(patientMilestone);
+                   List<HEIMilestone>  patientMilestone = await _unitOfWork.Repository<HEIMilestone>()
+                        .Get(x => x.PatientId == request.PatientId && !x.DeleteFlag).ToListAsync();
+                    return Result<List<HEIMilestone>>.Valid(patientMilestone);
                 }
                 catch (Exception e)
                 {
                     Log.Error(e.Message + " " + e.InnerException);
-                    return Result<PatientMilestone>.Invalid(e.Message);
+                    return Result<List<HEIMilestone>>.Invalid(e.Message);
                 }
             }
         }
