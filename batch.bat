@@ -1,6 +1,6 @@
 @echo off
 setlocal EnableDelayedExpansion
-
+rem this is a build scripts
 FOR /F %%I IN ("%0") DO SET BATDIR=%%~dpI
 CD /D %BATDIR%
 echo %BATDIR%
