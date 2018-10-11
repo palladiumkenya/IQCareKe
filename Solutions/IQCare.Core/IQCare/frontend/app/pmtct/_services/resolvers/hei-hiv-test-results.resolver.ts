@@ -1,10 +1,11 @@
-import { LookupItemView } from './../../shared/_models/LookupItemView';
+import { LookupItemView } from './../../../shared/_models/LookupItemView';
 import { Observable } from 'rxjs';
 import { Resolve, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
-import { LookupItemService } from '../../shared/_services/lookup-item.service';
+import { LookupItemService } from '../../../shared/_services/lookup-item.service';
 import { Injectable } from '@angular/core';
+
 @Injectable()
-export class ARVProphylaxisResolver implements Resolve<Observable<LookupItemView[]>> {
+export class HeiHivTestResultsResolver implements Resolve<Observable<LookupItemView[]>> {
     /**
      *
      */
@@ -16,6 +17,6 @@ export class ARVProphylaxisResolver implements Resolve<Observable<LookupItemView
         route: ActivatedRouteSnapshot,
         state: RouterStateSnapshot
     ): Observable<LookupItemView[]> {
-        return this._lookupItemService.getByGroupName('ARVProphylaxis');
+        return this._lookupItemService.getByGroupName('HeiHivTestResults');
     }
 }

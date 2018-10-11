@@ -23,10 +23,12 @@ import { ImmunizationGivenOptionsResolverService } from './_services/immunizatio
 import { MilestonesAssessedOptionsResolverService } from './_services/milestones-assessed-options-resolver.service';
 import { MilestonesStatusOptionsResolverService } from './_services/milestones-status-options-resolver.service';
 import { HeiOutcomeOptionsResolver } from './_services/hei-outcome-options.resolver.service';
-import {SputumSmearResolverService} from './_services/sputum-smear-resolver.service';
-import {GeneXpertResolverService} from './_services/gene-xpert-resolver.service';
-import {ChestXrayResolverService} from './_services/chest-xray-resolver.service';
-import {TbScreeningOutcomeResolverService} from './_services/tb-screening-outcome-resolver.service';
+import { SputumSmearResolverService } from './_services/sputum-smear-resolver.service';
+import { GeneXpertResolverService } from './_services/gene-xpert-resolver.service';
+import { ChestXrayResolverService } from './_services/chest-xray-resolver.service';
+import { TbScreeningOutcomeResolverService } from './_services/tb-screening-outcome-resolver.service';
+import { HeiHivTestTypesResolver } from './_services/resolvers/hei-hiv-testtypes.resolver';
+import { HeiHivTestResultsResolver } from './_services/resolvers/hei-hiv-test-results.resolver';
 
 
 const routes: Routes = [
@@ -83,7 +85,9 @@ const routes: Routes = [
             sputumSmearOptions: SputumSmearResolverService,
             geneXpertOptions: GeneXpertResolverService,
             chestXrayOptions: ChestXrayResolverService,
-            tbScreeningOutComeOptions: TbScreeningOutcomeResolverService
+            tbScreeningOutComeOptions: TbScreeningOutcomeResolverService,
+            heiHivTestingOptions: HeiHivTestTypesResolver,
+            heiHivTestingResultsOptions: HeiHivTestResultsResolver
         }
     }
 ];
