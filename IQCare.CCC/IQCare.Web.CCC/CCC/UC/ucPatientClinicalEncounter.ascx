@@ -3712,8 +3712,8 @@
                             return false;
                         }
 
-                        if (($("#tbInfected").val() === 'True') && ($("#onIpt").val() === 'False') && ($("#EverBeenOnIpt").val() === 'True')) {
-                            if ($('#datastep1').parsley().validate()) {
+                       // if (($("#tbInfected").val() === 'True') && ($("#onIpt").val() === 'False') && ($("#EverBeenOnIpt").val() === 'True')) {
+                           // if ($('#datastep1').parsley().validate()) {
                                 //                  if (($("#tbInfected").val() === 'True') && ($("#onIpt").val() === 'False') && ($("#EverBeenOnIpt").val() === 'True'))
                                 //               {
 
@@ -3736,8 +3736,8 @@
                                 evt.preventDefault();
                             }
                         }
-                    }
-                }
+                    
+                
                 else if (data.step === 2) {
                     if (data.direction === 'previous') {
                         return;

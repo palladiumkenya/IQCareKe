@@ -114,7 +114,7 @@
                                 <label class="control-label pull-left">Age(Months)</label>
                             </div>
                             <div class="col-md-6">
-                                <asp:TextBox ID="personMonth" runat="server" ClientIDMode="Static" CssClass="form-control input-sm" placeholder="0" required="true" min="0"></asp:TextBox>
+                                <asp:TextBox ID="personMonth" runat="server" ClientIDMode="Static" CssClass="form-control input-sm" placeholder="0"  min="0"></asp:TextBox>
                                
                             </div>
                         </div>
@@ -256,7 +256,8 @@
                                 <label class="control-label pull-left">CCC Number</label>
                             </div>
                             <div class="col-md-12" id="cccnum">
-                                <asp:TextBox   id="cccNumber" name="cccNumber" class="form-control input-sm" type="text" data-parsley-trigger="keyup" data-parsley-pattern-message="<%=PatientIdentifier.FailedValidationMessage %>" data-parsley-pattern="<%=PatientIdentifier.ValidatorRegex %>" runat="server"/>
+                               <!-- data-parsley-pattern-message="# PatientIdentifier.FailedValidationMessage.ToString() %>" data-parsley-pattern="<# PatientIdentifier.ValidatorRegex %>"-->
+                               <asp:TextBox   id="cccNumber" name="cccNumber" class="form-control input-sm" type="text" data-parsley-trigger="keyup" data-parsley-pattern-message="<%# PatientIdentifier.FailedValidationMessage %>" data-parsley-pattern="<%# PatientIdentifier.ValidatorRegex %>" runat="server"/>
                             </div>
                         </div>
                     </div>
@@ -673,6 +674,7 @@
         var gender = "";
         var BaselineDate = "";
         var DobPrecision = "";
+       
         var maxLength = <%=maxLength %>;
         var minLength = <%=minLength%>;
         $(document).ready(function () {
@@ -1710,31 +1712,48 @@
 
         function CccEnabled() {
             var testingResult = $("#hivtestingresult :selected").text();
-
+       
+    
             if ((testingResult === "Tested Negative")) {
-                $("#cccNumber").prop('disabled', true);
+               // $("#cccNumber").prop('disabled', true);
+                $("#<%=cccNumber.ClientID%>").prop('disabled', true);
                 $("#<%=CccReferal.ClientID%>").val();
                 $("#<%=CccReferal.ClientID%>").prop('disabled', true);
                 $("#CCCReferalDate").prop('disabled', true);
                 $("#HIVTestingDate").prop('disabled', false);
-            } else if (testingResult === "Never Tested") {
-                $("#cccNumber").prop('disabled', true);
+            }
+           else  if ((testingResult === "Unknown")) {
+               // $("#cccNumber").prop('disabled', true);
+                $("#<%=cccNumber.ClientID%>").prop('disabled', true);
+                $("#<%=CccReferal.ClientID%>").val();
+                $("#<%=CccReferal.ClientID%>").prop('disabled', true);
+                $("#CCCReferalDate").prop('disabled', true);
+                $("#HIVTestingDate").prop('disabled', true);
+            }
+
+          else if (testingResult === "Never Tested") {
+              //$("#cccNumber").prop('disabled', true);
+                $("#<%=cccNumber.ClientID%>").prop('disabled', true);
                 $("#<%=CccReferal.ClientID%>").val();
                 $("#<%=CccReferal.ClientID%>").prop('disabled', true);
                 $("#CCCReferalDate").prop('disabled', true);
                 $("#HIVTestingDate").prop('disabled', true);
             } else {
-                $("#cccNumber").prop('disabled',true);
+               // $("#cccNumber").prop('disabled', false);
+                $("#<%=cccNumber.ClientID%>").prop('disabled', false);
                 $("#<%=CccReferal.ClientID%>").prop('disabled', false);
                 $("#CCCReferalDate").prop('disabled', true);
+           
             }
 
             if ($("#CccReferal").val() === 'False') {
-                $("#cccNumber").prop('disabled', true);
+               // $("#cccNumber").prop('disabled', true);
+                $("#<%=cccNumber.ClientID%>").prop('disabled', true);
                 $("#CCCReferalDate").prop('disabled', true);
             } else if ($("#CccReferal").val() === 'True')
             {
-                 $("#cccNumber").prop('disabled',false);
+                $("#<%=cccNumber.ClientID%>").prop('disabled', false);
+              //  $("#cccNumber").prop('disabled', false);
                 $("#<%=CccReferal.ClientID%>").prop('disabled', false);
                 $("#CCCReferalDate").prop('disabled', false);
 
@@ -1860,6 +1879,10 @@
         function CccEnabledMod() {
             var testingStatusMod = $("#testingStatusMod :selected").text();
 
+            
+                              
+
+                    
             if ((testingStatusMod === "Tested Negative") || (testingStatusMod === "Never Tested")) {
                 $("#<%=cccNumberMod.ClientID%>").prop('disabled',true);
                 $("#<%=cccReferalMod.ClientID%>").val("False");
