@@ -3,9 +3,9 @@ using IQCare.Library;
 using IQCare.PMTCT.Core.Models.HEI;
 using MediatR;
 
-namespace IQCare.PMTCT.BusinessProcess.Commands.HeiIptOutcome
+namespace IQCare.PMTCT.BusinessProcess.Commands.HeiIpt
 {
-    public class GetHeiPatientIptOutcome: IRequest<Result<List<PatientIptOutcome>>>
+    public class GetHeiPatientIptCommand: IRequest<Result<List<PatientIpt>>>
     {
         public int PatientId { get; set; }
     }

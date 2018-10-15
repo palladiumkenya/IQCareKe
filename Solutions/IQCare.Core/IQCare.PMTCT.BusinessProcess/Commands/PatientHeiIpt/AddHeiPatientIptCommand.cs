@@ -4,8 +4,8 @@ using MediatR;
 
 namespace IQCare.PMTCT.BusinessProcess.Commands.HeiIpt
 {
-    public class DeleteHeiPatientIptCommand: IRequest<Result<HeiPatientIpt>>
+    public class AddHeiPatientIptCommand: IRequest<Result<PatientIpt>>
     {
-        public int PatientId { get; set; }
+        public PatientIpt PatientIpt  { get; set; }
     }
 }

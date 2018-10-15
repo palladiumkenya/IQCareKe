@@ -7,6 +7,7 @@ namespace IQCare.PMTCT.Core.Models.HEI
     public class HEiPatientIcfAction
     {
         public int Id { get; set; }
+        public int PatientId { get; set; }
         public int PatientMasterVisitId { get; set; }
         public int SputumSmear { get; set; }
         public int ChestXray { get; set; }
