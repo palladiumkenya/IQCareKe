@@ -4,36 +4,52 @@ namespace IQCare.Lab.Core.Models
 {
     public class LabOrderTest
     {
-        public int Id { get; set; }
+        public LabOrderTest()
+        {
 
-        public int LabOrderId { get; set; }
+        }
 
-        public int LabTestId { get; set; }
+        public LabOrderTest(int labOrderId, int labTestId, string testNotes,int createdBy, bool isParent)
+        {
+            LabOrderId = labOrderId;
+            LabTestId = labTestId;
+            TestNotes = testNotes;
+            CreatedBy = createdBy;
+            CreateDate = DateTime.Now;
+            DeleteFlag = false;
+            IsParent = isParent;
+            ResultStatus = "Received";
+        }
+        public int Id { get; private set; }
 
-        public string TestNotes { get; set; }
+        public int LabOrderId { get; private set; }
 
-        public bool IsParent { get; set; }
+        public int LabTestId { get; private set; }
 
-        public int ParentTestId { get; set; }
+        public string TestNotes { get; private set; }
 
-        public bool DeleteFlag { get; set; }
+        public bool IsParent { get; private set; }
 
-        public string ResultNotes { get; set; }
+        public int ParentTestId { get; private set; }
 
-        public int ResultBy { get; set; }
+        public bool DeleteFlag { get; private set; }
 
-        public DateTime? ResultDate { get; set; }
+        public string ResultNotes { get; private set; }
 
-        public string ResultStatus { get; set; }
+        public int ResultBy { get; private set; }
 
-        public int UserId { get; set; }
+        public DateTime? ResultDate { get; private set; }
 
-        public DateTime? StatusDate { get; set; }
+        public string ResultStatus { get; private set; }
 
-        public string AuditDate { get; set; }
+        public int UserId { get; private set; }
 
-        public DateTime CreateDate { get; set; }
+        public DateTime? StatusDate { get; private set; }
 
-        public int CreatedBy { get; set; }
+        public string AuditDate { get; private set; }
+
+        public DateTime CreateDate { get; private set; }
+
+        public int CreatedBy { get; private set; }
     }
 }

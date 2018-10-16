@@ -20,7 +20,7 @@ namespace IQCare.Controllers.PMTCT.HEI
 
         public PatientIptOutcomeController(IMediator mediator)
         {
-            _mediator = mediator;
+            _mediator = mediator ?? throw new ArgumentNullException(nameof(mediator)); 
         }
 
         // GET: api/<controller>

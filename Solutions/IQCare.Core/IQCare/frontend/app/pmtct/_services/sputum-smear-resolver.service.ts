@@ -13,6 +13,6 @@ export class SputumSmearResolverService {
   }
 
     public resolve(): Observable<LookupItemView[]> {
-        return this._lookupItemService.getByGroupName('sputumSmear');
+        return this._lookupItemService.getByGroupName('SputumSmear');
     }
 }

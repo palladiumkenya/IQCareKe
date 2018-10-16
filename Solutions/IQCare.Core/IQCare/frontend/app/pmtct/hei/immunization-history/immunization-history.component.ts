@@ -25,6 +25,7 @@ export class ImmunizationHistoryComponent implements OnInit {
 
     @Input('immunizationHistoryOptions') immunizationHistoryOptions: any;
     @Output() notify: EventEmitter<FormGroup> = new EventEmitter<FormGroup>();
+    @Output() vaccineArray: EventEmitter<ImmunizationHistory[]> = new EventEmitter<ImmunizationHistory[]>();
 
     constructor(private _formBuilder: FormBuilder,
         private _lookupItemService: LookupItemService,
@@ -49,6 +50,7 @@ export class ImmunizationHistoryComponent implements OnInit {
         this.yesnoOptions = yesnoOption;
 
         this.notify.emit(this.ImmunizationHistoryFormGroup);
+        this.vaccineArray.emit(this.immunization_history);
     }
 
    public AddImmunization() {
