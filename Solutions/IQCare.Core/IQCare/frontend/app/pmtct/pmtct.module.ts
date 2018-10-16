@@ -51,6 +51,9 @@ import { HeiOutcomeOptionsResolver } from './_services/hei-outcome-options.resol
 import { IptClientWorkupComponent } from './hei/ipt-client-workup/ipt-client-workup.component';
 import { IptFollowUpComponent } from './hei/ipt-follow-up/ipt-follow-up.component';
 import { IptOutcomeComponent } from './hei/ipt-outcome/ipt-outcome.component';
+import { HeiHivTestTypesResolver } from './_services/resolvers/hei-hiv-testtypes.resolver';
+import { HeiHivTestResultsResolver } from './_services/resolvers/hei-hiv-test-results.resolver';
+import { HivtestingmodalComponent } from './hei/hei-hivtesting/hivtestingmodal/hivtestingmodal.component';
 
 
 @NgModule({
@@ -88,11 +91,11 @@ import { IptOutcomeComponent } from './hei/ipt-outcome/ipt-outcome.component';
         HeiHivtestingComponent,
         InfantFeedingComponent,
         TbAssessmentComponent,
-        InfantFeedingComponent,
         HeiOutcomeComponent,
         IptClientWorkupComponent,
         IptFollowUpComponent,
-        IptOutcomeComponent
+        IptOutcomeComponent,
+        HivtestingmodalComponent
     ],
     providers: [
         PlaceOfDeliveryResolver,
@@ -104,12 +107,15 @@ import { IptOutcomeComponent } from './hei/ipt-outcome/ipt-outcome.component';
         YesNoResolver,
         MotherDrugsAtInfantEnrollmentResolver,
         PrimaryCareGiverResolver,
-        HeiService
+        HeiService,
+        HeiHivTestTypesResolver,
+        HeiHivTestResultsResolver
     ],
     entryComponents: [
         IptClientWorkupComponent,
         IptFollowUpComponent,
-        IptOutcomeComponent
+        IptOutcomeComponent,
+        HivtestingmodalComponent
     ],
     exports: [
         IptClientWorkupComponent,
