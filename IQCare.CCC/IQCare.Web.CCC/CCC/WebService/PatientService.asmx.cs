@@ -214,7 +214,8 @@ namespace IQCare.Web.CCC.WebService
         public string AddPatientFamilyTesting(string familyMembers)
         {
             string relationshipPersonId; int patientId; int patientMasterVisitId; string firstName; string middleName; string lastName; int sex; string dob; int relationshipId; string baselineHivStatusId; string baselineHivStatusDate;
-            /*string hivTestingresultId;*/ string hivTestingresultDate; bool cccreferal; string cccReferalNumber;  int userId;
+            /*string hivTestingresultId;*/
+            string hivTestingresultDate; bool cccreferal; string cccReferalNumber; int userId;
             DateTime? linkageDate;
             bool? dobPrecision = null;
 
@@ -222,7 +223,7 @@ namespace IQCare.Web.CCC.WebService
             FamilyMembers[] familyMembrs = new JavaScriptSerializer().Deserialize<FamilyMembers[]>(familyMembers);
 
             int count = familyMembrs.Length;
-            for(int i=0; i < count; i++)
+            for (int i = 0; i < count; i++)
             {
                 patientId = int.Parse(HttpContext.Current.Session["PatientPK"].ToString());
                 patientMasterVisitId = int.Parse(Session["PatientMasterVisitId"].ToString());
@@ -253,16 +254,16 @@ namespace IQCare.Web.CCC.WebService
                 }
                 relationshipId = familyMembrs[i].relationshipId;
 
-              
+
 
                 baselineHivStatusId = familyMembrs[i].baselineHivStatusId;
 
                 if (!(String.IsNullOrEmpty(baselineHivStatusId)))
-                    {
+                {
                     baselinehivid = Convert.ToInt32(baselineHivStatusId);
 
-                    }
-         
+                }
+
 
                 baselineHivStatusDate = familyMembrs[i].baselineHivStatusDate;
                 cccreferal = familyMembrs[i].cccreferal;
@@ -281,7 +282,7 @@ namespace IQCare.Web.CCC.WebService
                     DateOfBirth = dateOfBirth,
                     DobPrecision = dobPrecision,
                     RelationshipId = relationshipId,
-                BaseLineHivStatusId = baselinehivid,
+                    BaseLineHivStatusId = baselinehivid,
                     //BaselineHivStatusDate = baselineHivStatusDate,
                     //HivTestingResultsDate = hivTestingresultDate,
                     HivTestingResultsId = hivresultId,
@@ -306,9 +307,19 @@ namespace IQCare.Web.CCC.WebService
                                     x.RelationshipId == relationshipId);
                     if (!fam.Any())
                     {
-                        if (relationshipPersonId != null || Convert.ToInt32(relationshipPersonId) > 0)
+
+                        if (relationshipPersonId != null)
                         {
-                            Result = testing.AddPatientFamilyTestingsExisting(patientFamilyTesting, userId, Convert.ToInt32(relationshipPersonId));
+                            int relationshipPerson = Convert.ToInt32(relationshipPersonId.ToString());
+                            if (Convert.ToInt32(relationshipPerson) > 0)
+                            {
+                                Result = testing.AddPatientFamilyTestingsExisting(patientFamilyTesting, userId, Convert.ToInt32(relationshipPerson));
+                            }
+
+                            else
+                            {
+                                Result = testing.AddPatientFamilyTestings(patientFamilyTesting, userId);
+                            }
                         }
                         else
                         {
@@ -318,7 +329,10 @@ namespace IQCare.Web.CCC.WebService
                         {
                             Msg = "Patient family testing Added Successfully!";
                         }
+
                     }
+                        
+                    
                     else
                     {
                         Msg = firstName + " " + middleName + " " + lastName + " Not saved. Family member already exists!";

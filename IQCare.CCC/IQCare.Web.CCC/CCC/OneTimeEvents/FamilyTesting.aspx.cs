@@ -35,10 +35,10 @@ namespace IQCare.Web.CCC.OneTimeEvents
             get
             {
                 IdentifierManager IdMan = new IdentifierManager();
-               
-                var identifier= IdMan.GetIdentifierByCode("CCCNumber");
-                minLength = (identifier.MinLength > 0) ? (Int32) identifier.MinLength : (Int32) 0;
-                maxLength = (identifier.MaxLength > 0) ? (Int32) identifier.MaxLength : (Int32) 0;
+
+                var identifier = IdMan.GetIdentifierByCode("CCCNumber");
+                minLength = (identifier.MinLength > 0) ? (Int32)identifier.MinLength : (Int32)0;
+                maxLength = (identifier.MaxLength > 0) ? (Int32)identifier.MaxLength : (Int32)0;
                 return identifier;
             }
         }
