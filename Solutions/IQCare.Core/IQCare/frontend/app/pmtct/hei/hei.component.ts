@@ -196,6 +196,8 @@ export class HeiComponent implements OnInit {
          this.immunizationHistoryFormGroup.push(formGroup);
     }
 
+    
+
     onTbAssessment(formGroup: FormGroup) {
         this.tbAssessmentFormGroup.push(formGroup);
     }
@@ -221,6 +223,14 @@ export class HeiComponent implements OnInit {
                 isMotherRegistered = false;
             }
         }
+
+        this.heiService.saveHeiVisitDetails(this.patientId, this.patientMasterVisitId, this.visitDetailsFormGroup.value[0], this.userId)
+            .subscribe(
+                (result) => {
+                    console.log(result);
+
+                }
+            );
 
         this.heiService.saveHieDelivery(this.patientId, this.patientMasterVisitId, this.userId,
             isMotherRegistered, this.deliveryMatFormGroup.value[0], this.deliveryMatFormGroup.value[1])

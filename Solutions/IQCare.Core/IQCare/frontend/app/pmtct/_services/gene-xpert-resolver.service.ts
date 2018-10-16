@@ -13,6 +13,6 @@ export class GeneXpertResolverService {
   }
 
     public resolve(): Observable<LookupItemView[]> {
-        return this._lookupItemService.getByGroupName('geneXpert');
+        return this._lookupItemService.getByGroupName('GeneXpert');
     }
 }
