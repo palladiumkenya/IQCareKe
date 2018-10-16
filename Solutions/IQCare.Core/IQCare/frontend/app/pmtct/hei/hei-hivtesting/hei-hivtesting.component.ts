@@ -1,5 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
+import { MatTableDataSource, MatDialogConfig, MatDialog } from '@angular/material';
+import { SnotifyService } from 'ng-snotify';
+import { NotificationService } from '../../../shared/_services/notification.service';
+import { HivtestingmodalComponent } from './hivtestingmodal/hivtestingmodal.component';
 
 @Component({
     selector: 'app-hei-hivtesting',
@@ -7,17 +11,92 @@ import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms'
     styleUrls: ['./hei-hivtesting.component.css']
 })
 export class HeiHivtestingComponent implements OnInit {
-    HivTestingForm: FormGroup;
+    hivTestType: any[] = [];
+    testResults: any[] = [];
+    maxDate: Date;
 
-    constructor(private _formBuilder: FormBuilder) { }
+    public hiv_testing_table_data: HivTestingTableData[] = [];
+    displayedColumns = ['testtype', 'dateofsamplecollection', 'result', 'dateresultscollected', 'action'];
+    dataSource = new MatTableDataSource(this.hiv_testing_table_data);
+
+    @Input('heiHivTestingOptions') heiHivTestingOptions: any;
+    @Output() notify: EventEmitter<any> = new EventEmitter<any>();
+
+    constructor(private _formBuilder: FormBuilder,
+        private snotifyService: SnotifyService,
+        private notificationService: NotificationService,
+        private dialog: MatDialog) {
+        this.maxDate = new Date();
+    }
 
     ngOnInit() {
-        this.HivTestingForm = this._formBuilder.group({
-            testtype: new FormControl('', [Validators.required]),
-            dateofsamplecollection: new FormControl('', [Validators.required]),
-            result: new FormControl('', [Validators.required]),
-            dateresultscollected: new FormControl('', [Validators.required]),
-            comments: new FormControl(''),
-        });
+        const { hivTestType, testResults } = this.heiHivTestingOptions[0];
+        this.hivTestType = hivTestType.sort(function (a, b) { return a.itemId - b.itemId; });
+        this.testResults = testResults;
+
+
+        this.notify.emit(this.hiv_testing_table_data);
     }
+
+    AddHivTests() {
+        const dialogConfig = new MatDialogConfig();
+
+        dialogConfig.disableClose = true;
+        dialogConfig.autoFocus = true;
+        dialogConfig.height = '70%';
+        dialogConfig.width = '80%';
+
+        dialogConfig.data = {
+            hivTestType: this.hivTestType,
+            testResults: this.testResults
+        };
+
+        const dialogRef = this.dialog.open(HivtestingmodalComponent, dialogConfig);
+
+        dialogRef.afterClosed().subscribe(
+            data => {
+                if (!data) {
+                    return;
+                }
+
+                this.hiv_testing_table_data.push({
+                    testtype: data.testtype,
+                    dateofsamplecollection: data.dateofsamplecollection,
+                    result: data.result,
+                    dateresultscollected: data.dateresultscollected,
+                    comments: data.comments
+                });
+
+                this.dataSource = new MatTableDataSource(this.hiv_testing_table_data);
+            }
+        );
+        /*console.log(this.HivTestingForm.value);
+        if (this.HivTestingForm.valid) {
+            this.hiv_testing_table_data.push({
+                testtype: this.HivTestingForm.value.testtype,
+                dateofsamplecollection: this.HivTestingForm.value.dateofsamplecollection,
+                result: this.HivTestingForm.value.result,
+                dateresultscollected: this.HivTestingForm.value.dateresultscollected,
+                comments: this.HivTestingForm.value.comments
+            });
+
+            this.dataSource = new MatTableDataSource(this.hiv_testing_table_data);
+        } else {
+            this.snotifyService.error('Please select a test to add', 'HIV Testing', this.notificationService.getConfig());
+        }*/
+    }
+
+    public onRowClicked(row) {
+        const index = this.hiv_testing_table_data.indexOf(row.milestone);
+        this.hiv_testing_table_data.splice(index, 1);
+        this.dataSource = new MatTableDataSource(this.hiv_testing_table_data);
+    }
+}
+
+export interface HivTestingTableData {
+    testtype?: string;
+    dateofsamplecollection?: Date;
+    result?: string;
+    dateresultscollected?: Date;
+    comments?: string;
 }

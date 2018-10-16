@@ -23,7 +23,7 @@
                                         </div>
                                     </mat-step>
 
-                                    <mat-step [completed]="true" [stepControl]="deliveryMatFormGroup">
+                                    <mat-step [completed]="false" [stepControl]="deliveryMatFormGroup">
                                         <ng-template matStepLabel>
                                             <span matTooltip="Delivery & Maternal History">Delivery & Mat History</span>
                                         </ng-template>
@@ -44,7 +44,7 @@
                                         </div>
                                     </mat-step>
 
-                                    <mat-step [completed]="true" [stepControl]="immunizationHistoryFormGroup">
+                                    <mat-step [completed]="false" [stepControl]="immunizationHistoryFormGroup">
                                         <ng-template matStepLabel>
                                             <span matTooltip="Immunization History">Immunization</span>
                                         </ng-template>
@@ -59,7 +59,7 @@
                                     </mat-step>
 
 
-                                    <mat-step [completed]="true" [stepControl]="milestonesFormGroup">
+                                    <mat-step [completed]="false" [stepControl]="milestonesFormGroup">
                                         <ng-template matStepLabel>
                                             <span matTooltip="Milestones">Milestones</span>
                                         </ng-template>
@@ -72,13 +72,14 @@
                                     </mat-step>
 
 
-                                 <!--   <mat-step [completed]="true" [stepControl]="formGroup5">
+                                    <mat-step [completed]="false" [stepControl]="hivTestingFormGroup">
                                         <ng-template matStepLabel>
                                             <span matTooltip="HIV Testing">HIV Testing</span>
                                         </ng-template>
 
-
-                                        <app-hei-hivtesting></app-hei-hivtesting>
+                                        <app-hei-hivtesting (notify)="onHivTestingNotify($event)"
+                                            [heiHivTestingOptions]="hivtestingOptions">
+                                        </app-hei-hivtesting>
 
                                         <div>
                                             <button mat-raised-button color="primary" matStepperPrevious type="button">Previous</button>
@@ -87,8 +88,7 @@
                                         </div>
                                     </mat-step>
 
-
-                                    <mat-step [completed]="true" [stepControl]="maternalViralLoadFormGroup">
+                                    <!-- <mat-step [completed]="true" [stepControl]="maternalViralLoadFormGroup">
                                         <ng-template matStepLabel>
                                             <span matTooltip="Maternal Viral Load">Maternal Viral Load</span>
                                         </ng-template>
@@ -118,7 +118,7 @@
                                         </div>
                                     </mat-step>
 
-                                  <!--  <mat-step [completed]="false" [stepControl]="">
+                                    <!--  <mat-step [completed]="false" [stepControl]="">
                                         <ng-template matStepLabel>
                                             <span matTooltip="Infant Feeding">Infant Feeding</span>
                                         </ng-template>
@@ -134,18 +134,17 @@
                                     </mat-step> -->
 
                                     <mat-step [completed]="false" [stepControl]="nextAppointmentFormGroup">
-                                            <ng-template matStepLabel>
-                                                    <span matTooltip="Next Appointment">Next Appointment</span>
-                                            </ng-template>
-                                            <app-hei-outcome (notify)="onHeiOutcomeNotify($event)"
-                                                    [heiOutcomeOptions]="heiOutcomeOptions">
-                                            </app-hei-outcome>
-                                            <app-next-appointment (notify)="onNextAppointmentNotify($event)"></app-next-appointment>
-                                            <div>
-                                                <button mat-raised-button color="primary" matStepperPrevious type="button">Previous</button>
-                                                &nbsp;&nbsp;
-                                                <button mat-raised-button color="accent" matStepperNext type="button">Next</button>
-                                            </div>    
+                                        <ng-template matStepLabel>
+                                            <span matTooltip="Next Appointment">Next Appointment</span>
+                                        </ng-template>
+                                        <app-hei-outcome (notify)="onHeiOutcomeNotify($event)" [heiOutcomeOptions]="heiOutcomeOptions">
+                                        </app-hei-outcome>
+                                        <app-next-appointment (notify)="onNextAppointmentNotify($event)"></app-next-appointment>
+                                        <div>
+                                            <button mat-raised-button color="primary" matStepperPrevious type="button">Previous</button>
+                                            &nbsp;&nbsp;
+                                            <button mat-raised-button color="accent" matStepperNext type="button">Next</button>
+                                        </div>
                                     </mat-step>
 
                                 </mat-horizontal-stepper>
