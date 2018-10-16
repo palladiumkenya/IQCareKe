@@ -5,6 +5,7 @@ import { ErrorHandlerService } from '../../shared/_services/errorhandler.service
 import { environment } from '../../../environments/environment';
 import { tap, catchError } from 'rxjs/operators';
 
+
 const httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
 };
@@ -16,6 +17,31 @@ export class HeiService {
     private API_URL = environment.API_URL;
 
     constructor(private http: HttpClient, private errorHandler: ErrorHandlerService) { }
+
+    public getHeiVisitDetails(patientId: number) {
+        return this.http.get<any[]>(this.API_URL + '/api/HeiVisitDetails/' + patientId).pipe(
+            tap(getHeiVisitDetails => this.errorHandler.log('get HEI visit data')),
+            catchError(this.errorHandler.handleError<any[]>('getHeiVisitDetails'))
+        );
+    }
+
+    public saveHeiVisitDetails(patientId: number, patientMasterVisitId: number, visitData: any,
+                            userId: number): Observable<any> {
+        const visitDetailsData = {
+            'Id': 0,
+            'PatientMasterVisitId': patientMasterVisitId,
+            'PatientId': patientId,
+            'VisitDate': visitData['visitDate'],
+            'VisitType': visitData['visitType'],
+            'CreatedDate': new Date(),
+            'CreatedBy': userId,
+            'DeleteFlag': 0
+        };
+        return this.http.post<any>(this.API_URL + '/api/HeiVisitDetails', JSON.stringify(visitDetailsData), httpOptions).pipe(
+            tap(saveHeiVisitDetails => this.errorHandler.log(`successfully added hei visit details`)),
+            catchError(this.errorHandler.handleError<any>('Error saving hei delivery'))
+        );
+    }
 
     public saveHieDelivery(patientId: number, patientMasterVisitId: number, userId: number,
         isMotherRegistered: boolean, heidelivery: any, maternalHistory: any): Observable<any> {
@@ -48,4 +74,6 @@ export class HeiService {
             catchError(this.errorHandler.handleError<any>('Error saving hei delivery'))
         );
     }
+
+
 }
