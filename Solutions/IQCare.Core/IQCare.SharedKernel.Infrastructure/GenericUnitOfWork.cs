@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Data;
 using System.Text;
 using System.Threading.Tasks;
 using IQCare.SharedKernel.Interfaces;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Storage;
 
 namespace IQCare.SharedKernel.Infrastructure
 {
@@ -47,5 +49,9 @@ namespace IQCare.SharedKernel.Infrastructure
 
         public abstract IRepository<T> Repository<T>() where T : class;
 
+        public IDbContextTransaction BeginTransaction(IsolationLevel isolationLevel)
+        {
+            return Context.Database.BeginTransaction(isolationLevel);
+        }
     }
 }
