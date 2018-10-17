@@ -888,7 +888,7 @@ namespace IQCare.Common.BusinessProcess.Services
                 sql.Append("exec pr_OpenDecryptedSession;");
                 sql.Append($"SELECT [Id] , CAST(DECRYPTBYKEY(FirstName) AS VARCHAR(50)) [FirstName] ,CAST(DECRYPTBYKEY(MidName) AS VARCHAR(50)) MidName" +
                            $",CAST(DECRYPTBYKEY(LastName) AS VARCHAR(50)) [LastName],CAST(DECRYPTBYKEY(NickName) AS VARCHAR(50)) [NickName] ,[Sex] ,[Active] ,[DeleteFlag] ,[CreateDate] " +
-                           $",[CreatedBy] ,[AuditData] ,[DateOfBirth] ,[DobPrecision] FROM [dbo].[Person] WHERE Id = '{personId}';");
+                           $",[CreatedBy] ,[AuditData] ,[DateOfBirth] ,[DobPrecision],FacilityId FROM [dbo].[Person] WHERE Id = '{personId}';");
                 sql.Append("exec [dbo].[pr_CloseDecryptedSession];");
 
                 var person = await _unitOfWork.Repository<Person>().FromSql(sql.ToString());
@@ -909,17 +909,29 @@ namespace IQCare.Common.BusinessProcess.Services
                 firstName = string.IsNullOrWhiteSpace(firstName) ? "" : firstName.Replace("'", "''");
                 middleName = string.IsNullOrWhiteSpace(middleName) ? "" : middleName.Replace("'", "''");
                 lastName = string.IsNullOrWhiteSpace(lastName) ? "" : lastName.Replace("'", "''");
-                NickName= string.IsNullOrWhiteSpace(NickName) ? "" : NickName.Replace("'", "''");
+                var registeredPerson = await this.GetPerson(personId);
+                if(registeredPerson !=null)
+                {
+                    if(!string.IsNullOrEmpty(registeredPerson.NickName))
+                    {
+                        NickName = registeredPerson.NickName;
+                    }
+                    else
+                    {
+                        NickName = "";
+                    }
+                }
+                NickName = string.IsNullOrWhiteSpace(NickName) ? "" : NickName.Replace("'", "''");
                 sql.Append("exec pr_OpenDecryptedSession;");
                 sql.Append($"UPDATE Person SET FirstName = ENCRYPTBYKEY(KEY_GUID('Key_CTC'), '{firstName}'), " +
                            $"MidName = ENCRYPTBYKEY(KEY_GUID('Key_CTC'), '{middleName}'), " +
                            $"LastName = ENCRYPTBYKEY(KEY_GUID('Key_CTC'), '{lastName}'), " +
-                           $"NickName=ENCRYPTBYKEY(KEY_GUID('Key_CTC'),{NickName}'), " +
+                           $"NickName=ENCRYPTBYKEY(KEY_GUID('Key_CTC'),'{NickName}'), " +
                            $"Sex = {sex}, DateOfBirth = '{dateOfBirth.ToString("yyyy-MM-dd")}', " +
                            $"DobPrecision = 1 WHERE Id = {personId}; ");
                 sql.Append($"SELECT [Id] , CAST(DECRYPTBYKEY(FirstName) AS VARCHAR(50)) [FirstName] ,CAST(DECRYPTBYKEY(MidName) AS VARCHAR(50)) MidName" +
                            $",CAST(DECRYPTBYKEY(LastName) AS VARCHAR(50)) [LastName],CAST(DECRYPTBYKEY(NickName) AS VARCHAR(50)) [NickName]  ,[Sex] ,[Active] ,[DeleteFlag] ,[CreateDate] " +
-                           $",[CreatedBy] ,[AuditData] ,[DateOfBirth] ,[DobPrecision] FROM Person WHERE Id = '{personId}';");
+                           $",[CreatedBy] ,[AuditData] ,[DateOfBirth] ,[DobPrecision],FacilityId FROM Person WHERE Id = '{personId}';");
                 sql.Append("exec [dbo].[pr_CloseDecryptedSession];");
 
                 var personInsert = await _unitOfWork.Repository<Person>().FromSql(sql.ToString());
@@ -947,8 +959,8 @@ namespace IQCare.Common.BusinessProcess.Services
                     $"ENCRYPTBYKEY(KEY_GUID('Key_CTC'), '{lastName}'),ENCRYPTBYKEY(KEY_GUID('Key_CTC'), '{nickName}') , {sex}, '{dateOfBirth.ToString("yyyy-MM-dd")}', 1," +
                     $"1,0,GETDATE(), '{createdBy}');" +
                     "SELECT [Id] , CAST(DECRYPTBYKEY(FirstName) AS VARCHAR(50)) [FirstName] ,CAST(DECRYPTBYKEY(MidName) AS VARCHAR(50)) MidName" +
-                    ",CAST(DECRYPTBYKEY(LastName) AS VARCHAR(50)) [LastName] ,CAST(DECRYPTBYKEY(NickName) AS VARCHAR(50)) [NickName] ,[Sex] ,[Active] ,[DeleteFlag] ,[CreateDate],FacilityId " +
-                    ",[CreatedBy] ,[AuditData] ,[DateOfBirth] ,[DobPrecision] FROM [dbo].[Person] WHERE Id = SCOPE_IDENTITY();" +
+                    ",CAST(DECRYPTBYKEY(LastName) AS VARCHAR(50)) [LastName] ,CAST(DECRYPTBYKEY(NickName) AS VARCHAR(50)) [NickName] ,[Sex] ,[Active] ,[DeleteFlag] ,[CreateDate] " +
+                    ",[CreatedBy] ,[AuditData] ,[DateOfBirth] ,[DobPrecision],FacilityId FROM [dbo].[Person] WHERE Id = SCOPE_IDENTITY();" +
                     "exec [dbo].[pr_CloseDecryptedSession];";
 
                 var personInsert = await _unitOfWork.Repository<Person>().FromSql(sql);
