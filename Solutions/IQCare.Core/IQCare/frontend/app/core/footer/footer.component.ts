@@ -7,9 +7,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FooterComponent implements OnInit {
 
-  constructor() { }
+ 
+  versionName: string;
+  releaseDate: string;
+  year: number;
+
+  constructor() {
+      this.year = new Date().getFullYear();
+  }
 
   ngOnInit() {
+      this.versionName = localStorage.getItem('appVersionName');
+      this.releaseDate = localStorage.getItem('appReleaseDate');
   }
 
 }

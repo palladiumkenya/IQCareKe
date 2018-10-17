@@ -7,11 +7,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class NavHeaderComponent implements OnInit {
     appUserName: string;
-
+    appdashboard:string=window.location.hostname;;
     constructor() { }
 
     ngOnInit() {
         this.appUserName = localStorage.getItem('appUserName');
+        this.appdashboard= window.location.hostname;
     }
 
 }

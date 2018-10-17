@@ -11,6 +11,7 @@ namespace IQCare.Web.Home
     public partial class Default : System.Web.UI.Page
     {
         CurrentSession ThisSession;
+       
         protected void Page_Load(object sender, EventArgs e)
         {
             ThisSession = CurrentSession.Current;
