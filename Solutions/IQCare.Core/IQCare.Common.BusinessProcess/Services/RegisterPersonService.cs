@@ -370,14 +370,13 @@ namespace IQCare.Common.BusinessProcess.Services
             }
         }
 
-        
-        public async Task<PersonLocation> UpdatePersonLocation(int personId, string landmark,string ward="",string county="",string subcounty="")
+
+        public async Task<PersonLocation> UpdatePersonLocation(int personId, string landmark, string ward = "", string county = "", string subcounty = "", int userid = 1)
         {
             try
             {
                 var location = await _unitOfWork.Repository<PersonLocation>().Get(x => x.PersonId == personId)
                     .FirstOrDefaultAsync();
-
                 if (location != null)
                 {
 
@@ -385,11 +384,11 @@ namespace IQCare.Common.BusinessProcess.Services
                     {
                         location.LandMark = landmark;
                     }
-                    if(!string.IsNullOrEmpty(ward))
+                    if (!string.IsNullOrEmpty(ward))
                     {
                         location.Ward = Convert.ToInt32(ward);
                     }
-                    if(!string.IsNullOrEmpty(county))
+                    if (!string.IsNullOrEmpty(county))
                     {
                         location.County = Convert.ToInt32(county);
                     }
@@ -405,7 +404,17 @@ namespace IQCare.Common.BusinessProcess.Services
                     int Ward = string.IsNullOrWhiteSpace(ward) ? 0 : Convert.ToInt32(ward);
                     int County = string.IsNullOrWhiteSpace(county) ? 0 : Convert.ToInt32(county);
                     int SubCounty = string.IsNullOrWhiteSpace(subcounty) ? 0 : Convert.ToInt32(subcounty);
-                    location = await addPersonLocation(personId,County, SubCounty, Ward, "", landmark, 1);
+                    int user;
+                    if (userid > 0)
+                    {
+                        user = userid;
+                    }
+                    else
+                    {
+                        user = 1;
+                    }
+                    location = await addPersonLocation(personId, County, SubCounty, Ward, "", landmark, user);
+
                 }
                 return location;
             }
@@ -909,7 +918,7 @@ namespace IQCare.Common.BusinessProcess.Services
                            $"Sex = {sex}, DateOfBirth = '{dateOfBirth.ToString("yyyy-MM-dd")}', " +
                            $"DobPrecision = 1 WHERE Id = {personId}; ");
                 sql.Append($"SELECT [Id] , CAST(DECRYPTBYKEY(FirstName) AS VARCHAR(50)) [FirstName] ,CAST(DECRYPTBYKEY(MidName) AS VARCHAR(50)) MidName" +
-                           $",CAST(DECRYPTBYKEY(LastName) AS VARCHAR(50)) [LastName] ,[Sex] ,[Active] ,[DeleteFlag] ,[CreateDate] " +
+                           $",CAST(DECRYPTBYKEY(LastName) AS VARCHAR(50)) [LastName],CAST(DECRYPTBYKEY(NickName) AS VARCHAR(50)) [NickName]  ,[Sex] ,[Active] ,[DeleteFlag] ,[CreateDate] " +
                            $",[CreatedBy] ,[AuditData] ,[DateOfBirth] ,[DobPrecision] FROM Person WHERE Id = '{personId}';");
                 sql.Append("exec [dbo].[pr_CloseDecryptedSession];");
 
@@ -938,7 +947,7 @@ namespace IQCare.Common.BusinessProcess.Services
                     $"ENCRYPTBYKEY(KEY_GUID('Key_CTC'), '{lastName}'),ENCRYPTBYKEY(KEY_GUID('Key_CTC'), '{nickName}') , {sex}, '{dateOfBirth.ToString("yyyy-MM-dd")}', 1," +
                     $"1,0,GETDATE(), '{createdBy}');" +
                     "SELECT [Id] , CAST(DECRYPTBYKEY(FirstName) AS VARCHAR(50)) [FirstName] ,CAST(DECRYPTBYKEY(MidName) AS VARCHAR(50)) MidName" +
-                    ",CAST(DECRYPTBYKEY(LastName) AS VARCHAR(50)) [LastName] ,[Sex] ,[Active] ,[DeleteFlag] ,[CreateDate] " +
+                    ",CAST(DECRYPTBYKEY(LastName) AS VARCHAR(50)) [LastName] ,CAST(DECRYPTBYKEY(NickName) AS VARCHAR(50)) [NickName] ,[Sex] ,[Active] ,[DeleteFlag] ,[CreateDate],FacilityId " +
                     ",[CreatedBy] ,[AuditData] ,[DateOfBirth] ,[DobPrecision] FROM [dbo].[Person] WHERE Id = SCOPE_IDENTITY();" +
                     "exec [dbo].[pr_CloseDecryptedSession];";
 
