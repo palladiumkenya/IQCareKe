@@ -2,6 +2,10 @@
 
 namespace IQCare.Lab.Core.Models
 {
+    public enum ResultStatusEnum
+    {
+        Received
+    }
     public class LabOrderTest
     {
         public LabOrderTest()
@@ -18,7 +22,6 @@ namespace IQCare.Lab.Core.Models
             CreateDate = DateTime.Now;
             DeleteFlag = false;
             IsParent = isParent;
-            ResultStatus = "Received";
         }
         public int Id { get; private set; }
 
@@ -51,5 +54,16 @@ namespace IQCare.Lab.Core.Models
         public DateTime CreateDate { get; private set; }
 
         public int CreatedBy { get; private set; }
+
+        public void ReceiveResult(int receivedBy,DateTime resultDate)
+        {
+            ResultBy = receivedBy;
+            ResultDate = resultDate;
+        }
+
+        public void MarkAsReceived()
+        {
+            ResultStatus = "Received";
+        }
     }
 }

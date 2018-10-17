@@ -43,10 +43,14 @@ namespace IQCare.Lab.BusinessProcess.CommandHandlers
                     foreach (var labOrderTest in labOrderTests)
                     {
                         var labName = request.LabTests.FirstOrDefault(x => x.Id == labOrderTest.LabTestId)?.LabTestName;
+                        var parameterCount = _labUnitOfWork.Repository<LabTest>().Get(x => x.Id == labOrderTest.LabTestId)
+                            .SingleOrDefault()?.ParameterCount;
+                        if(parameterCount == 1)  // PatientLabTracker is created only for LabTests with only one parameter count
+                        {
+                            var patientLabTacker = new PatientLabTracker(request.PatientId, labName, request.PatientMasterVisitId, labOrderTest.LabTestId, labOrder.Id, request.FacilityId, request.OrderDate, request.UserId);
 
-                        var patientLabTacker = new PatientLabTracker(request.PatientId, labName, request.PatientMasterVisitId, labOrderTest.LabTestId, labOrder.Id, request.FacilityId, request.OrderDate, request.UserId);
-                       
-                        patientLabTrackers.Add(patientLabTacker);
+                            patientLabTrackers.Add(patientLabTacker);
+                        }                       
                     }
 
                     await _labUnitOfWork.Repository<PatientLabTracker>().AddRangeAsync(patientLabTrackers);
