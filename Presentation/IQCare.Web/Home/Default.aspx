@@ -41,8 +41,9 @@
             var appLocation = '<%= Session["AppLocation"] %>';
             var appPosID = '<%= Session["AppPosID"] %>';
 
-            var appVersionName = '<%= GblIQCare.VersionName %>';
-            var appReleaseDate = '<%= GblIQCare.ReleaseDate %>';
+           
+            var appVersionName = '<%= Session["IQCareAppVersionName"] %>';
+            var appReleaseDate = '<%= Session["IQCareAppReleaseDate"] %>';
 
             localStorage.setItem('appUserId', appUserId);
             localStorage.setItem('appUserName', appUserName);
