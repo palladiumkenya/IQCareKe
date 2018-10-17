@@ -38,9 +38,12 @@ namespace IQCare.Lab.WebApi.Controllers
         }
 
         [HttpPost]
-        public async Task<object> CompleteLabOrder()
+        public async Task<object> CompleteLabOrder([FromBody] CompleteLabOrderCommand completeLabOrder)
         {
-            return new { };
+            var labOrderResponse = await _mediator.Send(completeLabOrder).ConfigureAwait(false);
+            if (labOrderResponse.IsValid)
+                return Ok(labOrderResponse.Value);
+            return BadRequest(labOrderResponse);
         }
     }
 }
