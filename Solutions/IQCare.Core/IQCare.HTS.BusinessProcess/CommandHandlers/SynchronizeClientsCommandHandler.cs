@@ -186,11 +186,7 @@ namespace IQCare.HTS.BusinessProcess.CommandHandlers
                                         physicalAddress, mobileNumber);
                             }
 
-                            if(!string.IsNullOrWhiteSpace(educationlevel))
-                            {
-                              
-                            }
-
+                          
                             /**
                              * Encounter
                              * 

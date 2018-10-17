@@ -909,16 +909,19 @@ namespace IQCare.Common.BusinessProcess.Services
                 firstName = string.IsNullOrWhiteSpace(firstName) ? "" : firstName.Replace("'", "''");
                 middleName = string.IsNullOrWhiteSpace(middleName) ? "" : middleName.Replace("'", "''");
                 lastName = string.IsNullOrWhiteSpace(lastName) ? "" : lastName.Replace("'", "''");
-                var registeredPerson = await this.GetPerson(personId);
-                if(registeredPerson !=null)
+                if (string.IsNullOrEmpty(NickName))
                 {
-                    if(!string.IsNullOrEmpty(registeredPerson.NickName))
+                    var registeredPerson = await this.GetPerson(personId);
+                    if (registeredPerson != null)
                     {
-                        NickName = registeredPerson.NickName;
-                    }
-                    else
-                    {
-                        NickName = "";
+                        if (!string.IsNullOrEmpty(registeredPerson.NickName))
+                        {
+                            NickName = registeredPerson.NickName;
+                        }
+                        else
+                        {
+                            NickName = "";
+                        }
                     }
                 }
                 NickName = string.IsNullOrWhiteSpace(NickName) ? "" : NickName.Replace("'", "''");
