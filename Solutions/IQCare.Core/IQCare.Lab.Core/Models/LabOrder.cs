@@ -2,8 +2,15 @@
 
 namespace IQCare.Lab.Core.Models
 {
+    public enum LabOrderStatus
+    {
+        Pending,
+        Complete
+    }
+
     public class LabOrder
     {
+
         public LabOrder()
         {
 
@@ -66,5 +73,10 @@ namespace IQCare.Lab.Core.Models
         public int PatientMasterVisitId { get; private set; }
 
         public string AuditData { get; private set; }
+
+        public  void CompleteOrder()
+        {
+            OrderStatus = LabOrderStatus.Complete.ToString();
+        }
     }
 }

@@ -9,6 +9,7 @@ namespace IQCare.Lab.BusinessProcess.Commands
     public class CompleteLabOrderCommand : IRequest<Result<CompleteLabOrderResponse>>
     {
         public int LabOrderId { get; set; }
+        public int LabOrderTestId { get; set; }
         public int LabTestId { get; set; }
         public int UserId { get; set; }
         public List<AddLabTestResultCommand> LabTestResults { get; set; }
