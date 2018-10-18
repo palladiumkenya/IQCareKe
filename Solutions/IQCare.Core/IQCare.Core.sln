@@ -51,13 +51,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IQCare.Common.Services", "I
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Lab", "Lab", "{C4546E06-0E2E-4FCC-9272-03508FE6B3A2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IQCare.Lab.Core", "IQCare.Lab.Core\IQCare.Lab.Core.csproj", "{4397A351-8794-4BE5-AE07-1ECDECF093B7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IQCare.Lab.Core", "IQCare.Lab.Core\IQCare.Lab.Core.csproj", "{4397A351-8794-4BE5-AE07-1ECDECF093B7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IQCare.Lab.BusinessProcess", "IQCare.Lab.BusinessProcess\IQCare.Lab.BusinessProcess.csproj", "{39DFA361-7E5A-46FD-9C5C-E71950869B97}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IQCare.Lab.BusinessProcess", "IQCare.Lab.BusinessProcess\IQCare.Lab.BusinessProcess.csproj", "{39DFA361-7E5A-46FD-9C5C-E71950869B97}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IQCare.Lab.Infrastructure", "IQCare.Lab.Infrastructure\IQCare.Lab.Infrastructure.csproj", "{509FAA56-0A6E-45BA-98CF-0AB031D0FB8C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IQCare.Lab.Infrastructure", "IQCare.Lab.Infrastructure\IQCare.Lab.Infrastructure.csproj", "{509FAA56-0A6E-45BA-98CF-0AB031D0FB8C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IQCare.Lab.WebApi", "IQCare.Lab.WebApi\IQCare.Lab.WebApi.csproj", "{2C482B55-A315-487A-9F81-5CACD4A7F502}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IQCare.Lab.WebApi", "IQCare.Lab.WebApi\IQCare.Lab.WebApi.csproj", "{2C482B55-A315-487A-9F81-5CACD4A7F502}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

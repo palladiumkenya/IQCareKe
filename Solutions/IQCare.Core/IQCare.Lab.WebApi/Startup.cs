@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
 using IQCare.Lab.BusinessProcess.Commands;
+using IQCare.Lab.BusinessProcess.MapperProfiles;
 using IQCare.Lab.Infrastructure;
 using IQCare.SharedKernel.Infrastructure.Helpers;
 using MediatR;
@@ -35,6 +37,8 @@ namespace IQCare.Lab.WebApi
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
             services.AddLabDbContext(IQCareConnectionString);
             services.AddMediatR(typeof(AddLabOrderCommand).Assembly);
+            services.AddAutoMapper(typeof(LabOrderMapperProfile).Assembly);
+
             services.AddCors();
         }
 
