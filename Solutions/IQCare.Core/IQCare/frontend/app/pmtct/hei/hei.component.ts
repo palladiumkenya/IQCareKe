@@ -8,6 +8,12 @@ import { GeneXpertResolverService } from '../_services/gene-xpert-resolver.servi
 import { TbScreeningOutcomeResolverService } from '../_services/tb-screening-outcome-resolver.service';
 import { SputumSmearResolverService } from '../_services/sputum-smear-resolver.service';
 import { ChestXrayResolverService } from '../_services/chest-xray-resolver.service';
+import {ImmunizationHistoryTableData} from '../_models/hei/ImmunizationHistoryTableData';
+import {Vaccination} from '../_models/hei/Vaccination';
+import {forEach} from '@angular/router/src/utils/collection';
+import {ImmunizationHistory} from '../_models/hei/ImmunizationHistory';
+import {MilestoneData} from '../_models/hei/MilestoneData';
+import {Milestone} from '../_models/hei/Milestone';
 
 @Component({
     selector: 'app-hei',
@@ -21,6 +27,10 @@ export class HeiComponent implements OnInit {
     patientMasterVisitId: number;
     userId: number;
 
+    immunizationHistoryTableData: any[] = [];
+    milestoneHistoryData: any[] = [];
+    vaccination: Vaccination[] = [];
+    milestone: Milestone[] = [];
     deliveryOptions: any[] = [];
     maternalhistoryOptions: any[] = [];
     hivtestingOptions: any[] = [];
@@ -199,12 +209,17 @@ export class HeiComponent implements OnInit {
     onMilestonesNotify(formGroup: FormGroup): void {
         this.milestonesFormGroup.push(formGroup);
     }
+    onMilsetoneTableData(milestoneData: MilestoneData[]): void {
+     this.milestoneHistoryData.push(milestoneData);
+    }
 
     onImmunizationHistory(formGroup: FormGroup): void {
         this.immunizationHistoryFormGroup.push(formGroup);
     }
 
-    
+    onImmunizationHistoryData(formData: ImmunizationHistoryTableData[] ): void {
+        this.immunizationHistoryTableData.push(formData);
+    }
 
     onTbAssessment(formGroup: FormGroup) {
         this.tbAssessmentFormGroup.push(formGroup);
@@ -223,7 +238,39 @@ export class HeiComponent implements OnInit {
         console.log(this.visitDetailsFormGroup.value);
         console.log(this.hivTestingFormGroup);
 
-        this.patientMasterVisitId = 2;
+        for (let i = 0; i < this.immunizationHistoryTableData.length; i++) {
+            this.vaccination.push({
+                Id: 0,
+                PatientId: this.patientId,
+                PatientMasterVisitId: this.patientMasterVisitId,
+                Period: this.immunizationHistoryTableData[i].immunizationPeriodId,
+                Vaccine: this.immunizationHistoryTableData[i].immunizationGivenId,
+                VaccineStage: this.immunizationHistoryTableData[i].immunizationPeriodId,
+                DeleteFlag: 0,
+                CreatedBy: this.userId,
+                CreateDate: new Date(),
+                VaccineDate: new Date(this.immunizationHistoryTableData[i].dateImmunized),
+                Active: 0,
+                NextSchedule: new Date(this.immunizationHistoryTableData[i].nextScheduled)
+            });
+        }
+
+        for (let i = 0; i < this.milestoneHistoryData.length; i++) {
+            this.milestone.push({
+               Id: 0,
+                PatientId: this.patientId,
+                PatientMasterVisitId: this.patientMasterVisitId,
+                TypeAssessed: this.milestoneHistoryData[i].milestoneId,
+                Achieved : this.milestoneHistoryData[i].achievedId,
+                Status: this.milestoneHistoryData[i].statusId,
+                Comment: this.milestoneHistoryData[i].comment,
+                CreateDate: new Date(),
+                CreatedBy: this.userId,
+                DeleteFlag: 0
+            });
+        }
+
+        // this.patientMasterVisitId = 2;
 
         const motherRegistered = this.yesnoOptions.filter(
             obj => obj.itemId == this.deliveryMatFormGroup.value[1]['motherregisteredinclinic']
@@ -248,6 +295,20 @@ export class HeiComponent implements OnInit {
 
         this.heiService.saveHieDelivery(this.patientId, this.patientMasterVisitId, this.userId,
             isMotherRegistered, this.deliveryMatFormGroup.value[0], this.deliveryMatFormGroup.value[1])
+            .subscribe(
+                (result) => {
+                    console.log(result);
+                }
+            );
+
+        this.heiService.saveImmunizationHistory(this.vaccination)
+            .subscribe(
+                (result) => {
+                    console.log(result);
+                }
+            );
+
+        this.heiService.saveMilestoneHistory(this.milestone)
             .subscribe(
                 (result) => {
                     console.log(result);

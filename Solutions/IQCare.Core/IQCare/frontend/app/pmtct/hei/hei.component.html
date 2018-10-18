@@ -49,7 +49,7 @@
                                             <span matTooltip="Immunization History">Immunization</span>
                                         </ng-template>
                                         <app-immunization-history [immunizationHistoryOptions]="immunizationHistoryOptions"
-                                            (notify)="onImmunizationHistory($event)" (vaccineArray)=""></app-immunization-history>
+                                            (notify)="onImmunizationHistory($event)" (vaccineArray)="onImmunizationHistoryData($event)"></app-immunization-history>
 
                                         <div>
                                             <button mat-raised-button color="primary" matStepperPrevious type="button">Previous</button>
@@ -63,7 +63,7 @@
                                         <ng-template matStepLabel>
                                             <span matTooltip="Milestones">Milestones</span>
                                         </ng-template>
-                                        <app-milestones (notify)="onMilestonesNotify($event)" [milestoneOptions]="milestoneOptions"></app-milestones>
+                                        <app-milestones (notify)="onMilestonesNotify($event)" (milestonData)="onMilsetoneTableData($event)" [milestoneOptions]="milestoneOptions"></app-milestones>
                                         <div>
                                             <button mat-raised-button color="primary" matStepperPrevious type="button">Previous</button>
                                             &nbsp;&nbsp;

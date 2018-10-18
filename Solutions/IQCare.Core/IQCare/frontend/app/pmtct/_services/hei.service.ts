@@ -4,6 +4,8 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { ErrorHandlerService } from '../../shared/_services/errorhandler.service';
 import { environment } from '../../../environments/environment';
 import { tap, catchError } from 'rxjs/operators';
+import {Vaccination} from '../_models/hei/Vaccination';
+import {Milestone} from '../_models/hei/Milestone';
 
 
 const httpOptions = {
@@ -40,6 +42,21 @@ export class HeiService {
         return this.http.post<any>(this.API_URL + '/api/HeiVisitDetails', JSON.stringify(visitDetailsData), httpOptions).pipe(
             tap(saveHeiVisitDetails => this.errorHandler.log(`successfully added hei visit details`)),
             catchError(this.errorHandler.handleError<any>('Error saving hei delivery'))
+        );
+    }
+
+    public saveImmunizationHistory(vaccination: Vaccination[]): Observable<Vaccination[]> {
+
+        return this.http.post<any>(this.API_URL + '/api/ImmunizationHistory', JSON.stringify(vaccination), httpOptions).pipe(
+            tap(saveImmunizationHistory => this.errorHandler.log(`successfully added hei Immunization History`)),
+            catchError(this.errorHandler.handleError<any>('Error saving hei Immunization History'))
+        );
+    }
+
+    public saveMilestoneHistory(milestone: Milestone[]): Observable<Milestone[]> {
+        return this.http.post<any>(this.API_URL + '/api/HeiMilestone', JSON.stringify(milestone), httpOptions).pipe(
+            tap(saveMilestoneHistory => this.errorHandler.log(`successfully added hei Milestone History`)),
+            catchError(this.errorHandler.handleError<any>('Error saving hei milestone History'))
         );
     }
 
