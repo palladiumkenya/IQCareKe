@@ -96,14 +96,14 @@
                                         <app-maternalhistory></app-maternalhistory>
                                     </mat-step>-->
 
-                                    <mat-step [completed]="true" [stepControl]="tbAssessmentFormGroup">
+                                    <mat-step [completed]="false" [stepControl]="tbAssessmentFormGroup">
                                         <ng-template matStepLabel>
                                             <span matTooltip="TB Assessment">TB Assessment</span>
                                         </ng-template>
                                         <app-tb-assessment (notify)="onTbAssessment($event)" [tbAssessmentOptions]="tbAssessmentOptions"></app-tb-assessment>
                                     </mat-step>
 
-                                    <mat-step [completed]="true" [stepControl]="infantFeedingFormGroup">
+                                    <mat-step [completed]="false" [stepControl]="infantFeedingFormGroup">
                                         <ng-template matStepLabel>
                                             <span matTooltip="Infant Feeding">Infant Feeding</span>
                                         </ng-template>

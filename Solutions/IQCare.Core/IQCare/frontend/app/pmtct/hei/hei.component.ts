@@ -1,25 +1,21 @@
-import { HeiService } from './../_services/hei.service';
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { LookupItemView } from '../../shared/_models/LookupItemView';
-import { FormGroup, FormArray } from '@angular/forms';
-import { LongDateFormatKey } from 'moment';
-import { GeneXpertResolverService } from '../_services/gene-xpert-resolver.service';
-import { TbScreeningOutcomeResolverService } from '../_services/tb-screening-outcome-resolver.service';
-import { SputumSmearResolverService } from '../_services/sputum-smear-resolver.service';
-import { ChestXrayResolverService } from '../_services/chest-xray-resolver.service';
+import {HeiService} from './../_services/hei.service';
+import {Component, OnInit} from '@angular/core';
+import {ActivatedRoute} from '@angular/router';
+import {LookupItemView} from '../../shared/_models/LookupItemView';
+import {FormGroup, FormArray} from '@angular/forms';
 import {ImmunizationHistoryTableData} from '../_models/hei/ImmunizationHistoryTableData';
 import {Vaccination} from '../_models/hei/Vaccination';
-import {forEach} from '@angular/router/src/utils/collection';
-import {ImmunizationHistory} from '../_models/hei/ImmunizationHistory';
 import {MilestoneData} from '../_models/hei/MilestoneData';
 import {Milestone} from '../_models/hei/Milestone';
+import {PatientIcf} from '../_models/hei/PatientIcf';
+import {PatientIcfAction} from '../_models/hei/PatientIcfAction';
 
 @Component({
     selector: 'app-hei',
     templateUrl: './hei.component.html',
     styleUrls: ['./hei.component.css']
 })
+
 export class HeiComponent implements OnInit {
     patientId: number;
     personId: number;
@@ -62,7 +58,7 @@ export class HeiComponent implements OnInit {
     chestXrayOptions: LookupItemView[] = [];
     tbScreeningOptions: LookupItemView[] = [];
 
-    isLinear: boolean = true;
+    isLinear: boolean = false;
     deliveryMatFormGroup: FormArray;
     visitDetailsFormGroup: FormArray;
     tbAssessmentFormGroup: FormArray;
@@ -76,7 +72,7 @@ export class HeiComponent implements OnInit {
     hivTestingFormGroup: any[];
 
     constructor(private route: ActivatedRoute,
-        private heiService: HeiService) {
+                private heiService: HeiService) {
         this.deliveryMatFormGroup = new FormArray([]);
         this.visitDetailsFormGroup = new FormArray([]);
         this.tbAssessmentFormGroup = new FormArray([]);
@@ -91,7 +87,7 @@ export class HeiComponent implements OnInit {
         this.route.params.subscribe(
             (params) => {
                 console.log(params);
-                const { patientId, personId, serviceAreaId } = params;
+                const {patientId, personId, serviceAreaId} = params;
                 this.patientId = patientId;
                 this.personId = personId;
                 this.serviceAreaId = serviceAreaId;
@@ -202,6 +198,7 @@ export class HeiComponent implements OnInit {
     onVisitDetailsNotify(formGroup: FormGroup): void {
         this.visitDetailsFormGroup.push(formGroup);
     }
+
     onInfantFeedingNotify(formGroup: FormGroup): void {
         this.infantFeedingFormGroup.push(formGroup);
     }
@@ -209,15 +206,16 @@ export class HeiComponent implements OnInit {
     onMilestonesNotify(formGroup: FormGroup): void {
         this.milestonesFormGroup.push(formGroup);
     }
+
     onMilsetoneTableData(milestoneData: MilestoneData[]): void {
-     this.milestoneHistoryData.push(milestoneData);
+        this.milestoneHistoryData.push(milestoneData);
     }
 
     onImmunizationHistory(formGroup: FormGroup): void {
         this.immunizationHistoryFormGroup.push(formGroup);
     }
 
-    onImmunizationHistoryData(formData: ImmunizationHistoryTableData[] ): void {
+    onImmunizationHistoryData(formData: ImmunizationHistoryTableData[]): void {
         this.immunizationHistoryTableData.push(formData);
     }
 
@@ -257,11 +255,11 @@ export class HeiComponent implements OnInit {
 
         for (let i = 0; i < this.milestoneHistoryData.length; i++) {
             this.milestone.push({
-               Id: 0,
+                Id: 0,
                 PatientId: this.patientId,
                 PatientMasterVisitId: this.patientMasterVisitId,
                 TypeAssessed: this.milestoneHistoryData[i].milestoneId,
-                Achieved : this.milestoneHistoryData[i].achievedId,
+                Achieved: this.milestoneHistoryData[i].achievedId,
                 Status: this.milestoneHistoryData[i].statusId,
                 Comment: this.milestoneHistoryData[i].comment,
                 CreateDate: new Date(),
@@ -269,6 +267,34 @@ export class HeiComponent implements OnInit {
                 DeleteFlag: 0
             });
         }
+
+        const patientIcf = {
+            Id: 0,
+            PatientId: this.patientId,
+            PatientMasterVisitId: this.patientMasterVisitId,
+            CreateDate: new Date(),
+            CreatedBy: this.userId,
+            OnAntiTbDrugs: this.tbAssessmentFormGroup.value[0]['currentlyOnAntiTb'],
+            Cough: this.tbAssessmentFormGroup.value[0]['coughAnyDuration'],
+            Fever: this.tbAssessmentFormGroup.value[0]['fever'],
+            WeightLoss: this.tbAssessmentFormGroup.value[0]['weightLoss'],
+            ContactWithTb: this.tbAssessmentFormGroup.value[0]['contactTB'],
+
+        } as PatientIcf;
+
+        const patientIcfAction = {
+            Id: 0,
+            PatientId: this.patientId,
+            PatientMasterVisitId: this.patientMasterVisitId,
+            CreateDate: new Date(),
+            CreatedBy: this.userId,
+            SputumSmear: this.tbAssessmentFormGroup.value[0]['sputumSmear'],
+            ChestXray: this.tbAssessmentFormGroup.value[0]['chestXray'],
+            GeneXpert: this.tbAssessmentFormGroup.value[0]['geneXpert'],
+            StartAntiTb: this.tbAssessmentFormGroup.value[0]['startAntiTb'],
+            EvaluatedForIpt: this.tbAssessmentFormGroup.value[0]['EvaluatedForAAntitb'],
+            InvitationOfContacts: this.tbAssessmentFormGroup.value[0]['invitationContacts'],
+        } as PatientIcfAction;
 
         // this.patientMasterVisitId = 2;
 
@@ -312,6 +338,14 @@ export class HeiComponent implements OnInit {
             .subscribe(
                 (result) => {
                     console.log(result);
+                }
+            );
+
+
+        this.heiService.saveTbAssessment(patientIcf, patientIcfAction)
+            .subscribe(
+                (results) => {
+                    console.log(results);
                 }
             );
     }

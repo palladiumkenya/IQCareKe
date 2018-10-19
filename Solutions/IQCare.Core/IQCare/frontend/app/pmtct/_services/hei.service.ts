@@ -1,4 +1,4 @@
-import { Observable } from 'rxjs/index';
+import {forkJoin, Observable} from 'rxjs/index';
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { ErrorHandlerService } from '../../shared/_services/errorhandler.service';
@@ -6,6 +6,8 @@ import { environment } from '../../../environments/environment';
 import { tap, catchError } from 'rxjs/operators';
 import {Vaccination} from '../_models/hei/Vaccination';
 import {Milestone} from '../_models/hei/Milestone';
+import {PatientIcf} from '../_models/hei/PatientIcf';
+import {PatientIcfAction} from '../_models/hei/PatientIcfAction';
 
 
 const httpOptions = {
@@ -92,5 +94,20 @@ export class HeiService {
         );
     }
 
+    public saveTbAssessment(patientIcf: PatientIcf, patientIcfAction: PatientIcfAction): Observable<any> {
+
+       const Icf = this.http.post<any>(this.API_URL + '/api/tbAssessment/AddPatientIcf', JSON.stringify(patientIcf), httpOptions).pipe(
+            tap(saveTbAssessmentIcf => this.errorHandler.log(`successfully added hei patient icf`)),
+            catchError(this.errorHandler.handleError<any>('Error saving hei patient icf Action'))
+        );
+
+        const IcfAction = this.http.post<any>(this.API_URL + '/api/tbAssessment/AddPatientIcfAction', JSON.stringify(patientIcfAction),
+            httpOptions)
+            .pipe(
+                tap(saveTbAssessmentIcfAction => this.errorHandler.log(`successfully added hei patient icf Action`)),
+                catchError(this.errorHandler.handleError<any>('Error saving hei patient icf'))
+            );
+        return forkJoin([Icf, IcfAction]);
+    }
 
 }

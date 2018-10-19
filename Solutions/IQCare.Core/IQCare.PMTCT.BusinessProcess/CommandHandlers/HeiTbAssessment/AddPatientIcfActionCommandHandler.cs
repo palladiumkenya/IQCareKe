@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using IQCare.Library;
@@ -25,8 +26,27 @@ namespace IQCare.PMTCT.BusinessProcess.CommandHandlers.HeiTbAssessment
             {
                 try
                 {
-                    await _unitOfWork.Repository<HEiPatientIcfAction>().AddAsync(request.HEiPatientIcfAction);
-                    await _unitOfWork.SaveAsync();
+                    HEiPatientIcfAction heiPatientIcfAction = _unitOfWork.Repository<HEiPatientIcfAction>()
+                        .Get(x => x.PatientId == request.HEiPatientIcfAction.PatientId &&
+                                  x.PatientMasterVisitId == request.HEiPatientIcfAction.PatientMasterVisitId &&
+                                  !x.DeleteFlag).FirstOrDefault();
+                    if (heiPatientIcfAction == null)
+                    {
+                        await _unitOfWork.Repository<HEiPatientIcfAction>().AddAsync(request.HEiPatientIcfAction);
+                        await _unitOfWork.SaveAsync();
+                    }
+                    else
+                    {
+                        heiPatientIcfAction.ChestXray = request.HEiPatientIcfAction.ChestXray;
+                        heiPatientIcfAction.EvaluatedForIpt = request.HEiPatientIcfAction.EvaluatedForIpt;
+                        heiPatientIcfAction.GeneXpert = request.HEiPatientIcfAction.GeneXpert;
+                        heiPatientIcfAction.SputumSmear = request.HEiPatientIcfAction.SputumSmear;
+                        heiPatientIcfAction.StartAntiTb = request.HEiPatientIcfAction.StartAntiTb;
+
+                        _unitOfWork.Repository<HEiPatientIcfAction>().Update(heiPatientIcfAction);
+                        await _unitOfWork.SaveAsync();
+                    }
+
                     return Result<HEiPatientIcfAction>.Valid(request.HEiPatientIcfAction);
                 }
                 catch (Exception e)
