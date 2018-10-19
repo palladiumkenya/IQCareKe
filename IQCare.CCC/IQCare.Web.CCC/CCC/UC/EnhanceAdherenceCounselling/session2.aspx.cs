@@ -192,7 +192,7 @@ namespace IQCare.Web.CCC.UC.EnhanceAdherenceCounselling
                     typePlaceHolder.Controls.Add(new LiteralControl("</div>"));
                     typePlaceHolder.Controls.Add(new LiteralControl("<div class='col-md-4 text-right'>"));
                     rbList = new RadioButtonList();
-                    rbList.ID = "session1rb" + value.ItemId.ToString();
+                    rbList.ID = "session2rb" + value.ItemId.ToString();
                     rbList.RepeatColumns = 2;
                     rbList.ClientIDMode = System.Web.UI.ClientIDMode.Static;
                     rbList.CssClass = "mmrbList";
@@ -225,7 +225,7 @@ namespace IQCare.Web.CCC.UC.EnhanceAdherenceCounselling
                     notesTb.TextMode = TextBoxMode.MultiLine;
                     notesTb.CssClass = "form-control input-sm";
                     notesTb.ClientIDMode = System.Web.UI.ClientIDMode.Static;
-                    notesTb.ID = "session1tb" + value.ItemId.ToString();
+                    notesTb.ID = "session2tb" + value.ItemId.ToString();
                     notesTb.Rows = 3;
                     typePlaceHolder.Controls.Add(notesTb);
                     typePlaceHolder.Controls.Add(new LiteralControl("</div>"));

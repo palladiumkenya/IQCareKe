@@ -181,26 +181,35 @@ namespace IQCare.Web.CCC.WebService
         public string AddPatientAppointment(int patientId, int patientMasterVisitId, DateTime appointmentDate, string description, int reasonId, int serviceAreaId, int statusId, int differentiatedCareId, int userId)
         {
             
-            PatientAppointment patientAppointment = new PatientAppointment()
-            {
-                PatientId = patientId,
-                PatientMasterVisitId = patientMasterVisitId,
-                AppointmentDate = appointmentDate,
-                Description = description,
-                DifferentiatedCareId = differentiatedCareId,
-                ReasonId = reasonId,
-                ServiceAreaId = serviceAreaId,
-                StatusId = statusId,
-                CreatedBy = userId,
-                CreateDate = DateTime.Now
-            };
+           
             try
             {
-                var appointment = new PatientAppointmentManager();
-                Result = appointment.AddPatientAppointments(patientAppointment);
-                if (Result > 0)
+                if (appointmentDate != DateTime.MinValue)
                 {
-                    Msg = "Patient appointment Added Successfully!";
+                    PatientAppointment patientAppointment = new PatientAppointment()
+                    {
+                        PatientId = patientId,
+                        PatientMasterVisitId = patientMasterVisitId,
+                        AppointmentDate = appointmentDate,
+                        Description = description,
+                        DifferentiatedCareId = differentiatedCareId,
+                        ReasonId = reasonId,
+                        ServiceAreaId = serviceAreaId,
+                        StatusId = statusId,
+                        CreatedBy = userId,
+                        CreateDate = DateTime.Now
+                    };
+
+                    var appointment = new PatientAppointmentManager();
+                    Result = appointment.AddPatientAppointments(patientAppointment);
+                    if (Result > 0)
+                    {
+                        Msg = "Patient appointment Added Successfully!";
+                    }
+                }
+                else
+                {
+                    Msg = "Patient appointment not Saved Successfully";
                 }
             }
             catch (Exception e)
@@ -944,7 +953,8 @@ namespace IQCare.Web.CCC.WebService
         [WebMethod(EnableSession = true)]
         public string getAppointmentId(int PatientMasterVisitId, DateTime date)
         {
-            var appointmentManager = new PatientAppointmentManager();
+           var appointmentManager = new PatientAppointmentManager();
+           string PatientId = Session["PatientPk"].ToString();
             PatientAppointment[] pAppointment = appointmentManager.GetAppointmentId(Convert.ToInt32(Session["PatientPK"]),PatientMasterVisitId, date).ToArray();
             //PatientClinicalNotes[] patientNotesData = PCN.getPatientClinicalNotesByVisitId(PatientId, PatientMasterVisitId).ToArray();
             string jsonNotesObject = "[]";
