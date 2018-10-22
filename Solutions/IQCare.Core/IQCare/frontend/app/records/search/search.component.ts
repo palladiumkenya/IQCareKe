@@ -61,7 +61,7 @@ export class SearchComponent implements OnInit, AfterViewInit {
             },
             (error) => {
                 console.error(error);
-                this.snotifyService.error('Error searching ' + error, 'SEARCH', this.notificationService.getConfig());
+                this.snotifyService.error('Error searching person ' + error, 'SEARCH', this.notificationService.getConfig());
             }
         );
     }

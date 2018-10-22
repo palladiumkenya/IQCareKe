@@ -1,3 +1,4 @@
+import { PncComponent } from './pnc/pnc.component';
 import { PrimaryCareGiverResolver } from './_services/primarycaregiver.resolver';
 import { HeiComponent } from './hei/hei.component';
 import { PreventiveServicesComponent } from './preventive-services/preventive-services.component';
@@ -89,6 +90,11 @@ const routes: Routes = [
             heiHivTestingOptions: HeiHivTestTypesResolver,
             heiHivTestingResultsOptions: HeiHivTestResultsResolver
         }
+    },
+    {
+        path: 'pnc/:patientId/:personId/:serviceAreaId',
+        component: PncComponent,
+        pathMatch: 'full'
     }
 ];
 
