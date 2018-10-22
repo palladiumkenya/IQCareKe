@@ -54,7 +54,16 @@ import { IptOutcomeComponent } from './hei/ipt-outcome/ipt-outcome.component';
 import { HeiHivTestTypesResolver } from './_services/resolvers/hei-hiv-testtypes.resolver';
 import { HeiHivTestResultsResolver } from './_services/resolvers/hei-hiv-test-results.resolver';
 import { HivtestingmodalComponent } from './hei/hei-hivtesting/hivtestingmodal/hivtestingmodal.component';
-
+import { PncComponent } from './pnc/pnc.component';
+import { PncMaternalhistoryComponent } from './pnc/pnc-maternalhistory/pnc-maternalhistory.component';
+import { PncPostnatalexamComponent } from './pnc/pnc-postnatalexam/pnc-postnatalexam.component';
+import { PncBabyexaminationComponent } from './pnc/pnc-babyexamination/pnc-babyexamination.component';
+import { PncDrugadministrationComponent } from './pnc/pnc-drugadministration/pnc-drugadministration.component';
+import { PncPartnertestingComponent } from './pnc/pnc-partnertesting/pnc-partnertesting.component';
+import { PncPatienteducationComponent } from './pnc/pnc-patienteducation/pnc-patienteducation.component';
+import { PncCervicalcancerscreeningComponent } from './pnc/pnc-cervicalcancerscreening/pnc-cervicalcancerscreening.component';
+import { PncContraceptivehistoryComponent } from './pnc/pnc-contraceptivehistory/pnc-contraceptivehistory.component';
+import { PncHivtestingComponent } from './pnc/pnc-hivtesting/pnc-hivtesting.component';
 
 @NgModule({
     imports: [
@@ -95,7 +104,17 @@ import { HivtestingmodalComponent } from './hei/hei-hivtesting/hivtestingmodal/h
         IptClientWorkupComponent,
         IptFollowUpComponent,
         IptOutcomeComponent,
-        HivtestingmodalComponent
+        HivtestingmodalComponent,
+        PncComponent,
+        PncMaternalhistoryComponent,
+        PncPostnatalexamComponent,
+        PncBabyexaminationComponent,
+        PncDrugadministrationComponent,
+        PncPartnertestingComponent,
+        PncPatienteducationComponent,
+        PncCervicalcancerscreeningComponent,
+        PncContraceptivehistoryComponent,
+        PncHivtestingComponent
     ],
     providers: [
         PlaceOfDeliveryResolver,
@@ -115,7 +134,8 @@ import { HivtestingmodalComponent } from './hei/hei-hivtesting/hivtestingmodal/h
         IptClientWorkupComponent,
         IptFollowUpComponent,
         IptOutcomeComponent,
-        HivtestingmodalComponent
+        HivtestingmodalComponent,
+        HivStatusComponent
     ],
     exports: [
         IptClientWorkupComponent,

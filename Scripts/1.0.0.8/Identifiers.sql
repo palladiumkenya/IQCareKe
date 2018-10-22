@@ -1,5 +1,5 @@
-IF EXISTS(SELECT TOP 1 Id FROM Identifiers WHERE Id = 6)
+IF NOT EXISTS(SELECT TOP 1 Id FROM Identifiers WHERE Name = N'PNC Number')
 BEGIN
-	UPDATE Identifiers SET DisplayName = 'Clinic ID', Name = 'Clinic Number', Code = 'ClinicId' WHERE Id = 6;
+	INSERT INTO [dbo].[Identifiers] ([Name], [Code], [DisplayName], [DataType], [PrefixType], [SuffixType], [DeleteFlag], [CreatedBy], [CreateDate] ,[AuditData], IdentifierType) 
+	VALUES (N'PNC Number', N'PNCNumber', N'PNC Number', N'Numeric', NULL, NULL, 0, 1, GETDATE(), NULL, 1);
 END;
-Go

@@ -75,6 +75,12 @@ export class ServicesListComponent implements OnInit {
                         this.router.navigate(['/registration/home/'], { relativeTo: this.route });
                     });
                     break;
+                case 'PNC':
+                    this.zone.run(() => {
+                        this.router.navigate(['/pmtct/pnc/' + this.patientId + '/' + this.personId + '/' + serviceId],
+                            { relativeTo: this.route });
+                    });
+                    break;
             }
         }
     }
