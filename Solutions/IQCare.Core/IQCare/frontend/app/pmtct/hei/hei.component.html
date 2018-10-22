@@ -100,7 +100,7 @@
                                         <ng-template matStepLabel>
                                             <span matTooltip="TB Assessment">TB Assessment</span>
                                         </ng-template>
-                                        <app-tb-assessment (notify)="onTbAssessment($event)" [tbAssessmentOptions]="tbAssessmentOptions"></app-tb-assessment>
+                                        <app-tb-assessment (notify)="onTbAssessment($event)" [tbAssessmentOptions]="tbAssessmentOptions" [defaultParameters]="defaultParameters" ></app-tb-assessment>
                                     </mat-step>
 
                                     <mat-step [completed]="false" [stepControl]="infantFeedingFormGroup">

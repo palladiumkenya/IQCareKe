@@ -9,6 +9,7 @@ import {MilestoneData} from '../_models/hei/MilestoneData';
 import {Milestone} from '../_models/hei/Milestone';
 import {PatientIcf} from '../_models/hei/PatientIcf';
 import {PatientIcfAction} from '../_models/hei/PatientIcfAction';
+import {DefaultParameters} from '../_models/hei/DefaultParameters';
 
 @Component({
     selector: 'app-hei',
@@ -23,6 +24,8 @@ export class HeiComponent implements OnInit {
     patientMasterVisitId: number;
     userId: number;
 
+    defaultParameters: DefaultParameters;
+
     immunizationHistoryTableData: any[] = [];
     milestoneHistoryData: any[] = [];
     vaccination: Vaccination[] = [];
@@ -30,6 +33,7 @@ export class HeiComponent implements OnInit {
     deliveryOptions: any[] = [];
     maternalhistoryOptions: any[] = [];
     hivtestingOptions: any[] = [];
+    heiMedicatonOptions: any[] = [];
 
     motherreceivedrugsOptions: any[] = [];
     heimotherregimenOptions: any[] = [];
@@ -57,6 +61,9 @@ export class HeiComponent implements OnInit {
     geneXpertOptions: LookupItemView[] = [];
     chestXrayOptions: LookupItemView[] = [];
     tbScreeningOptions: LookupItemView[] = [];
+    iptOutcomeOptions: LookupItemView[] = [];
+    medicationOptions: LookupItemView[] = [];
+    medicationPlanOptions: LookupItemView[] = [];
 
     isLinear: boolean = false;
     deliveryMatFormGroup: FormArray;
@@ -96,6 +103,12 @@ export class HeiComponent implements OnInit {
 
         this.userId = JSON.parse(localStorage.getItem('appUserId'));
 
+        this.defaultParameters = {
+            patientId: this.patientId,
+            personId: this.personId,
+            userId: this.userId,
+            patientMasterVisitId: this.patientMasterVisitId } as DefaultParameters;
+
         this.route.data.subscribe((res) => {
             const {
                 placeofdeliveryOptions,
@@ -118,7 +131,8 @@ export class HeiComponent implements OnInit {
                 chestXrayOptions,
                 tbScreeningOutComeOptions,
                 heiHivTestingOptions,
-                heiHivTestingResultsOptions
+                heiHivTestingResultsOptions,
+                iptOutcomeOptions,
             } = res;
             console.log('test options');
             console.log(res);
@@ -143,6 +157,7 @@ export class HeiComponent implements OnInit {
             this.tbScreeningOptions = tbScreeningOutComeOptions['lookupItems'];
             this.heiHivTestingOptions = heiHivTestingOptions['lookupItems'];
             this.heiHivTestingResultsOptions = heiHivTestingResultsOptions['lookupItems'];
+            this.iptOutcomeOptions = iptOutcomeOptions['lookupItems'];
         });
 
         this.deliveryOptions.push({
@@ -177,7 +192,8 @@ export class HeiComponent implements OnInit {
             'sputumSmear': this.sputumSmearOptions,
             'genexpert': this.geneXpertOptions,
             'chestXray': this.chestXrayOptions,
-            'tbScreeningOutcome': this.tbScreeningOptions
+            'tbScreeningOutcome': this.tbScreeningOptions,
+            'iptOutcomes': this.iptOutcomeOptions,
         });
 
         this.hivtestingOptions.push({

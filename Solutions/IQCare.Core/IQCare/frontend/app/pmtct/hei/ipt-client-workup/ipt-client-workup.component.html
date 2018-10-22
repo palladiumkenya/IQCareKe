@@ -64,6 +64,16 @@
                    formControlName="liverFunctionTest">
         </mat-form-field>
 
+        <mat-form-field class="col-md-12">
+            <mat-label>Start IPT</mat-label>
+            <mat-select formControlName="startIpt" required minlength="1">
+                <mat-option [value]="0">select</mat-option>
+                <mat-option *ngFor="let yesnoOption of yesnoOptions" [value]="yesnoOption.itemId">
+                    {{yesnoOption.itemName}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+
 
         <mat-form-field class="col-lg-12 col-xs-12">
             <input matInput [matDatepicker]="picker" formControlName="dateIPTStarted" required
@@ -75,7 +85,7 @@
     </mat-dialog-content>
     <mat-divider></mat-divider>
     <mat-dialog-actions>
-        <button mat-raised-button class="mat-raised-button mat-primary"><span class="fa fa-plus-circle"> Save </span>
+        <button mat-raised-button class="mat-raised-button mat-primary"><span class="fa fa-plus-circle" (click)="onSave()"> Save </span>
         </button>
         <button mat-raised-button="" [mat-dialog-close]="true" class="mat-raised-button mat-accent"><span
                 class="fa fa-times">Close</span></button>
