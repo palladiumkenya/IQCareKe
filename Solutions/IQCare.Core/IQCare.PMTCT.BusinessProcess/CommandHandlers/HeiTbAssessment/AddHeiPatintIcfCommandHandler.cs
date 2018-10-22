@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using IQCare.Library;
@@ -25,9 +26,26 @@ namespace IQCare.PMTCT.BusinessProcess.CommandHandlers.HeiTbAssessment
             {
                 try
                 {
-                    await _unitOfWork.Repository<HeiPatientIcf>().AddAsync(request.HeiPatientIcf);
-                    await _unitOfWork.SaveAsync();
-                    var response = request.HeiPatientIcf;
+                    HeiPatientIcf heiPatient = _unitOfWork.Repository<HeiPatientIcf>().Get(x =>
+                            x.PatientId == request.HeiPatientIcf.PatientId &&
+                            x.PatientMasterVisitId == request.HeiPatientIcf.PatientMasterVisitId && !x.DeleteFlag)
+                        .FirstOrDefault();
+                    if (heiPatient == null)
+                    {
+                        await _unitOfWork.Repository<HeiPatientIcf>().AddAsync(request.HeiPatientIcf);
+                        await _unitOfWork.SaveAsync();
+                    }
+                    else
+                    {
+                        heiPatient.ContactWithTb = request.HeiPatientIcf.ContactWithTb;
+                        heiPatient.Cough = request.HeiPatientIcf.Cough;
+                        heiPatient.EverBeenOnIpt = request.HeiPatientIcf.EverBeenOnIpt;
+                        heiPatient.Fever = request.HeiPatientIcf.Fever;
+                        heiPatient.OnAntiTbDrugs = request.HeiPatientIcf.OnAntiTbDrugs;
+                        heiPatient.ContactWithTb = request.HeiPatientIcf.ContactWithTb;
+                         _unitOfWork.Repository<HeiPatientIcf>().Update(heiPatient);
+                        await _unitOfWork.SaveAsync();
+                    }                   
                     return Result<HeiPatientIcf>.Valid(request.HeiPatientIcf);
                 }
                 catch (Exception e)

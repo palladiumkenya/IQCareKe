@@ -4,6 +4,8 @@ import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {SnotifyService} from 'ng-snotify';
 import {LookupItemService} from '../../../shared/_services/lookup-item.service';
 import {MatTableDataSource} from '@angular/material';
+import {MilestoneTableData} from '../../_models/hei/MilestoneTableData';
+import {MilestoneData} from '../../_models/hei/MilestoneData';
 
 @Component({
   selector: 'app-milestones',
@@ -13,13 +15,17 @@ import {MatTableDataSource} from '@angular/material';
 export class MilestonesComponent implements OnInit {
 
     milestonesFormGroup: FormGroup;
+    milestone_data: MilestoneData[] = [];
+
     @Input('milestoneOptions') milestoneOptions: any;
     @Output() notify: EventEmitter<FormGroup> = new EventEmitter<FormGroup>();
+    @Output() milestonData: EventEmitter<MilestoneData[]> = new EventEmitter<MilestoneData[]>();
+
     milestoneassessments: any[] = [];
     milestonestatuses: any[] = [];
     yesnoOptions: any[] = [];
     milestone_table_data: MilestoneTableData[] = [];
-    milestone_data: MilestoneData[] = [];
+
 
     displayedColumns = ['Milestone', 'Date Assessed', 'Achieved', 'status', 'Comment', 'action'];
     dataSource = new MatTableDataSource(this.milestone_table_data);
@@ -63,6 +69,13 @@ export class MilestonesComponent implements OnInit {
             status: this.milestonesFormGroup.controls['status'].value.itemName,
             comment: this.milestonesFormGroup.controls['comment'].value
           });
+          this.milestone_data.push({
+              milestoneId: this.milestonesFormGroup.controls['milestoneAssessed'].value.itemId,
+          dateAssessed: new Date(this.milestonesFormGroup.controls['dateAssessed'].value),
+          achievedId: this.milestonesFormGroup.controls['achieved'].value.itemId ,
+          statusId: this.milestonesFormGroup.controls['status'].value.itemName,
+          comment:  this.milestonesFormGroup.controls['comment'].value
+          });
 
           console.log(this.milestone_table_data);
           this.dataSource = new MatTableDataSource(this.milestone_table_data);
@@ -76,6 +89,7 @@ export class MilestonesComponent implements OnInit {
     }
 }
 
+/*
 export interface MilestoneTableData {
   milestone?: string;
   dateAssessed?: Date;
@@ -91,4 +105,4 @@ export interface MilestoneData {
     statusId?: number;
     comment?: string;
 }
-
+*/

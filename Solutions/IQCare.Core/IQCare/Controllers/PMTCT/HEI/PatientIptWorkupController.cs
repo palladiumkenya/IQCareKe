@@ -11,7 +11,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace IQCare.Controllers.PMTCT.HEI
 {
     [Produces("application/json")]
-    [Route("api/[controller]")]
+    [Route("api/IptWorkup")]
     public class PatientIptWorkupController : Controller
     {
         private readonly IMediator _mediator;

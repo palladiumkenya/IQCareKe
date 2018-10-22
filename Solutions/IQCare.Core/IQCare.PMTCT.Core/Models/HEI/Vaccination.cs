@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace IQCare.PMTCT.Core.Models.HEI
 {
@@ -16,5 +17,7 @@ namespace IQCare.PMTCT.Core.Models.HEI
         public int Active { get; set; }
         public int? AppointmentId { get; set; }
         public int? Period { get; set; }
+        [NotMapped]
+        public DateTime? NextSchedule { get; set; }
     }
 }

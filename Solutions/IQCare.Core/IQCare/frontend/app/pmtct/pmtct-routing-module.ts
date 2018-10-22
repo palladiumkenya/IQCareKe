@@ -29,6 +29,9 @@ import { ChestXrayResolverService } from './_services/chest-xray-resolver.servic
 import { TbScreeningOutcomeResolverService } from './_services/tb-screening-outcome-resolver.service';
 import { HeiHivTestTypesResolver } from './_services/resolvers/hei-hiv-testtypes.resolver';
 import { HeiHivTestResultsResolver } from './_services/resolvers/hei-hiv-test-results.resolver';
+import {IptoutcomeResolverService} from './_services/resolvers/iptoutcome-resolver.service';
+import {MedicationResolverService} from './_services/resolvers/medication-resolver.service';
+import {MedicationPlanResolverService} from './_services/resolvers/medication-plan-resolver.service';
 
 
 const routes: Routes = [
@@ -87,7 +90,10 @@ const routes: Routes = [
             chestXrayOptions: ChestXrayResolverService,
             tbScreeningOutComeOptions: TbScreeningOutcomeResolverService,
             heiHivTestingOptions: HeiHivTestTypesResolver,
-            heiHivTestingResultsOptions: HeiHivTestResultsResolver
+            heiHivTestingResultsOptions: HeiHivTestResultsResolver,
+            iptOutcomeOptions: IptoutcomeResolverService,
+            medicationOptions: MedicationResolverService,
+            medicatinPlanOptions: MedicationPlanResolverService
         }
     }
 ];

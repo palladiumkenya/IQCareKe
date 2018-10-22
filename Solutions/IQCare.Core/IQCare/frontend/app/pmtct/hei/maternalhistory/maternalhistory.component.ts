@@ -20,6 +20,7 @@ export class MaternalhistoryComponent implements OnInit {
     motherdrugsatinfantenrollmentOptions: any[] = [];
     primarycaregiverOptions: any[] = [];
 
+
     isMotherRegistered: boolean = false;
 
     @Input('maternalhistoryOptions') maternalhistoryOptions: any;
