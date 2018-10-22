@@ -59,6 +59,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IQCare.Lab.Infrastructure",
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IQCare.Lab.WebApi", "IQCare.Lab.WebApi\IQCare.Lab.WebApi.csproj", "{2C482B55-A315-487A-9F81-5CACD4A7F502}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Maternity", "Maternity", "{B8703570-D82C-41A4-B9D9-1A720198EB3F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IQCare.Maternity.Core", "IQCare.Maternity.Core\IQCare.Maternity.Core.csproj", "{A68C46E7-DDE6-40E6-988B-96B8D2EF3600}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -149,6 +153,10 @@ Global
 		{2C482B55-A315-487A-9F81-5CACD4A7F502}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2C482B55-A315-487A-9F81-5CACD4A7F502}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2C482B55-A315-487A-9F81-5CACD4A7F502}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A68C46E7-DDE6-40E6-988B-96B8D2EF3600}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A68C46E7-DDE6-40E6-988B-96B8D2EF3600}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A68C46E7-DDE6-40E6-988B-96B8D2EF3600}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A68C46E7-DDE6-40E6-988B-96B8D2EF3600}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -175,6 +183,7 @@ Global
 		{39DFA361-7E5A-46FD-9C5C-E71950869B97} = {C4546E06-0E2E-4FCC-9272-03508FE6B3A2}
 		{509FAA56-0A6E-45BA-98CF-0AB031D0FB8C} = {C4546E06-0E2E-4FCC-9272-03508FE6B3A2}
 		{2C482B55-A315-487A-9F81-5CACD4A7F502} = {C4546E06-0E2E-4FCC-9272-03508FE6B3A2}
+		{A68C46E7-DDE6-40E6-988B-96B8D2EF3600} = {B8703570-D82C-41A4-B9D9-1A720198EB3F}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {6748284C-28D2-4D64-B4DE-832CF3A54CC2}
