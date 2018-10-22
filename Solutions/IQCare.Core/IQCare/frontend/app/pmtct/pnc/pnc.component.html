@@ -1,0 +1,138 @@
+<div class="row">
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        <div class="row">
+            <div class="col-lg-12 col-sm-6 col-xs-12">
+                <div class="widget">
+                    <div class="widget-header bordered-bottom bordered-sky">
+                        <span class="widget-caption"> PMTCT | PNC WORKFLOW </span>
+                    </div>
+                    <div class="widget-body">
+                        <div class="row">
+                            <div class="col-lg-12 col-sm-6 col-xs-12">
+                                <mat-horizontal-stepper [linear]="isLinear" #stepper>
+                                    <mat-step [completed]="false" [stepControl]="visitDetailsFormGroup">
+                                        <ng-template matStepLabel>
+                                            <span matTooltip="Visit Details">Visit Details</span>
+                                        </ng-template>
+
+                                        <div>
+                                            <button mat-raised-button color="accent" matStepperNext type="button">Next</button>
+                                        </div>
+                                    </mat-step>
+
+                                    <mat-step [completed]="false" [stepControl]="matHistory_PostNatalExam_FormGroup">
+                                        <ng-template matStepLabel>
+                                            <span matTooltip="Maternal Hististory & Postnatal Exam & Baby Examimation">
+                                                Mat Hist
+                                            </span>
+                                        </ng-template>
+
+                                        <!-- add Maternity History Component to Stepper -->
+                                        <app-pnc-maternalhistory (notify)="onMaternalHistoryNotify($event)">
+                                        </app-pnc-maternalhistory>
+
+                                        <!-- add PostNatal Examination Component to Stepper -->
+                                        <app-pnc-postnatalexam (notify)="onPostNatalExamNotify($event)">
+                                        </app-pnc-postnatalexam>
+
+                                        <!-- add Baby Examination Component to Stepper -->
+                                        <app-pnc-babyexamination (notify)="onBabyExaminationNotify($event)">
+                                        </app-pnc-babyexamination>
+
+                                        <div class="row">
+                                            <button mat-raised-button color="primary" matStepperPrevious type="button">Previous</button>
+                                            &nbsp;&nbsp;
+                                            <button mat-raised-button color="accent" matStepperNext type="button">Next</button>
+                                        </div>
+                                    </mat-step>
+
+                                    <mat-step [completed]="false" [stepControl]="visitDetailsFormGroup">
+                                        <ng-template matStepLabel>
+                                            <span matTooltip="Hiv Status">Hiv Status</span>
+                                        </ng-template>
+
+                                        <!-- add Hiv Status Component to Stepper -->
+                                        <app-pnc-hivtesting (notify)="onHivStatusNotify()">
+                                        </app-pnc-hivtesting>
+
+                                        <div class="row">
+                                            <button mat-raised-button color="primary" matStepperPrevious type="button">Previous</button>
+                                            &nbsp;&nbsp;
+                                            <button mat-raised-button color="accent" matStepperNext type="button">Next</button>
+                                        </div>
+                                    </mat-step>
+
+                                    <mat-step [completed]="false" [stepControl]="drugAdministration_PartnerTesting_FormGroup">
+                                        <ng-template matStepLabel>
+                                            <span matTooltip="Drug Administration && Partner Testing && Patient Education">
+                                                Drug Administration
+                                            </span>
+                                        </ng-template>
+
+                                        <!-- add Drug Administration Component to Stepper -->
+                                        <app-pnc-drugadministration (notify)="onDrugAdministrationNotify($event)">
+                                        </app-pnc-drugadministration>
+
+                                        <br />
+
+                                        <!-- add Partner Testing Component to Stepper -->
+                                        <app-pnc-partnertesting (notify)="onPartnerTestingNotify($event)">
+                                        </app-pnc-partnertesting>
+
+                                        <br />
+
+                                        <!-- add Patient Education Component to Stepper -->
+                                        <app-pnc-patienteducation (notify)="onPatientEducationNotify($event)">
+                                        </app-pnc-patienteducation>
+
+                                        <div class="row">
+                                            <button mat-raised-button color="primary" matStepperPrevious type="button">Previous</button>
+                                            &nbsp;&nbsp;
+                                            <button mat-raised-button color="accent" matStepperNext type="button">Next</button>
+                                        </div>
+                                    </mat-step>
+
+                                    <mat-step [completed]="false" [stepControl]="visitDetailsFormGroup">
+                                        <ng-template matStepLabel>
+                                            <span matTooltip="Cervical Cancer Screening && Contraceptive History and Exercise">
+                                                Cervical Cancer Screening
+                                            </span>
+                                        </ng-template>
+
+                                        <!-- add Cervical Cancer Screening Component to Stepper -->
+                                        <app-pnc-cervicalcancerscreening (notify)="onCervicalCancerScreeningNotify()">
+                                        </app-pnc-cervicalcancerscreening>
+
+                                        <!-- add Contraceptive History and Exercise Component to Stepper -->
+                                        <app-pnc-contraceptivehistory (notify)="onContraceptiveHistoryNotify()">
+                                        </app-pnc-contraceptivehistory>
+
+                                        <div class="row">
+                                            <button mat-raised-button color="primary" matStepperPrevious type="button">Previous</button>
+                                            &nbsp;&nbsp;
+                                            <button mat-raised-button color="accent" matStepperNext type="button">Next</button>
+                                        </div>
+                                    </mat-step>
+
+                                    <mat-step [completed]="false" [stepControl]="visitDetailsFormGroup">
+                                        <ng-template matStepLabel>
+                                            <span matTooltip="Diagnosis && Referrals && Appointment">
+                                                Diagnosis && Appointment
+                                            </span>
+                                        </ng-template>
+
+                                        <div>
+                                            <button mat-raised-button color="primary" matStepperPrevious type="button">Previous</button>
+                                            &nbsp;&nbsp;
+                                            <button mat-raised-button color="accent" matStepperNext type="button">Next</button>
+                                        </div>
+                                    </mat-step>
+                                </mat-horizontal-stepper>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

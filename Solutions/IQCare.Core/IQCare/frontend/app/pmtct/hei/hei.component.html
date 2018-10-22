@@ -49,7 +49,7 @@
                                             <span matTooltip="Immunization History">Immunization</span>
                                         </ng-template>
                                         <app-immunization-history [immunizationHistoryOptions]="immunizationHistoryOptions"
-                                            (notify)="onImmunizationHistory($event)" (vaccineArray)=""></app-immunization-history>
+                                            (notify)="onImmunizationHistory($event)" (vaccineArray)="onImmunizationHistoryData($event)"></app-immunization-history>
 
                                         <div>
                                             <button mat-raised-button color="primary" matStepperPrevious type="button">Previous</button>
@@ -63,7 +63,7 @@
                                         <ng-template matStepLabel>
                                             <span matTooltip="Milestones">Milestones</span>
                                         </ng-template>
-                                        <app-milestones (notify)="onMilestonesNotify($event)" [milestoneOptions]="milestoneOptions"></app-milestones>
+                                        <app-milestones (notify)="onMilestonesNotify($event)" (milestonData)="onMilsetoneTableData($event)" [milestoneOptions]="milestoneOptions"></app-milestones>
                                         <div>
                                             <button mat-raised-button color="primary" matStepperPrevious type="button">Previous</button>
                                             &nbsp;&nbsp;
@@ -96,14 +96,14 @@
                                         <app-maternalhistory></app-maternalhistory>
                                     </mat-step>-->
 
-                                    <mat-step [completed]="true" [stepControl]="tbAssessmentFormGroup">
+                                    <mat-step [completed]="false" [stepControl]="tbAssessmentFormGroup">
                                         <ng-template matStepLabel>
                                             <span matTooltip="TB Assessment">TB Assessment</span>
                                         </ng-template>
-                                        <app-tb-assessment (notify)="onTbAssessment($event)" [tbAssessmentOptions]="tbAssessmentOptions"></app-tb-assessment>
+                                        <app-tb-assessment (notify)="onTbAssessment($event)" [tbAssessmentOptions]="tbAssessmentOptions" [defaultParameters]="defaultParameters" ></app-tb-assessment>
                                     </mat-step>
 
-                                    <mat-step [completed]="true" [stepControl]="infantFeedingFormGroup">
+                                    <mat-step [completed]="false" [stepControl]="infantFeedingFormGroup">
                                         <ng-template matStepLabel>
                                             <span matTooltip="Infant Feeding">Infant Feeding</span>
                                         </ng-template>

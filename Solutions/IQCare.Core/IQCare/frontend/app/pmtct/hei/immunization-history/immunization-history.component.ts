@@ -5,6 +5,8 @@ import { Subscription } from 'rxjs/index';
 import { LookupItemService } from '../../../shared/_services/lookup-item.service';
 import { NotificationService } from '../../../shared/_services/notification.service';
 import {MatTableDataSource} from '@angular/material';
+import {ImmunizationHistory} from '../../_models/hei/ImmunizationHistory';
+import {ImmunizationHistoryTableData} from '../../_models/hei/ImmunizationHistoryTableData';
 
 @Component({
     selector: 'app-immunization-history',
@@ -87,6 +89,7 @@ export class ImmunizationHistoryComponent implements OnInit {
     }
 }
 
+/*
 export interface ImmunizationHistoryTableData {
     immunizationPeriod?: string;
     given?: string;
@@ -94,9 +97,10 @@ export interface ImmunizationHistoryTableData {
     nextSchedule?: Date;
 }
 
+
 export interface ImmunizationHistory {
     immunizationPeriodId?: number;
     immunizationGivenId?: number;
     dateImmunized?: Date;
     nextScheduled?: Date;
-}
+}*/

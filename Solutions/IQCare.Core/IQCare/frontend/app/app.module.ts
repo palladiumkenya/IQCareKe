@@ -10,7 +10,6 @@ import { CoreModule } from './core/core.module';
 import { AppLoadService } from './shared/_services/appload.service';
 import { AppStateService } from './shared/_services/appstate.service';
 import { ErrorHandlerService } from './shared/_services/errorhandler.service';
-import {IptClientWorkupComponent} from './pmtct/hei/ipt-client-workup/ipt-client-workup.component';
 
 
 export function init_app(appStateService: AppStateService) {
