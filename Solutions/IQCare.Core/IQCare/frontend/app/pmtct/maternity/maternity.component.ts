@@ -10,7 +10,7 @@ import {ActivatedRoute} from '@angular/router';
 export class MaternityComponent implements OnInit {
     isLinear: boolean = false;
     visitDetailsFormGroup: FormArray;
-    motherProfileFormGroup: FormArray;
+    motherProfileForm: FormGroup;
     formType: string;
     diagnosisFormGroup: FormArray;
     deliveryFormGroup: FormArray;
@@ -18,10 +18,10 @@ export class MaternityComponent implements OnInit {
     maternityTestsFormGroup: FormArray;
     maternalDrugAdministrationForGroup: FormArray;
     hivStatusFromGroup: FormGroup;
-    partnerTestingFormGroup: FormArray;
-    patientEducationFormGroup: FormGroup;
-    DischargeFormGroup: FormGroup;
-    referralFormGroup: FormGroup;
+    PartnerTestingForm: FormArray;
+    patientEducationForm: FormArray;
+    dischargeFormGroup: FormArray;
+    referralForm: FormGroup;
     nextAppointmentFormGroup: FormGroup;
 
     constructor(private route: ActivatedRoute) {
@@ -38,7 +38,7 @@ export class MaternityComponent implements OnInit {
     }
 
     OnMotherProfileNotify(formGroup: FormGroup): void {
-        this.motherProfileFormGroup.push(formGroup);
+        this.motherProfileForm = formGroup;
     }
 
     onPatientDiagnosis(formGroup: FormGroup): void {
@@ -61,7 +61,20 @@ export class MaternityComponent implements OnInit {
     }
 
     onPartnerTestingNotify(formGroup: FormGroup): void {
-        this.partnerTestingFormGroup.push(formGroup);
+        this.PartnerTestingForm.push(formGroup);
+    }
+    onPatientDischarge(formGroup: FormGroup): void {
+        this.dischargeFormGroup.push(formGroup);
+    }
+    onPatientEducationNotify(formGroup: FormGroup): void {
+        this.patientEducationForm.push(formGroup);
+    }
+
+    onPatientreferralNotify(formGroup: FormGroup): void {
+        this.referralForm = formGroup;
+    }
+    onPatientNextAppointent(formGroup: FormGroup): void {
+        this.nextAppointmentFormGroup = formGroup;
     }
 
 }

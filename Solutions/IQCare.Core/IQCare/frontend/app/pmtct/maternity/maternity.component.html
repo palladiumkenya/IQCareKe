@@ -61,18 +61,55 @@
                                         </div>
                                     </mat-step>
 
-                                    <mat-step [completed]="false" [stepControl]="maternityTestsFormGroup">
+                                    <mat-step [completed]="false" [stepControl]="maternalDrugAdministrationForGroup">
                                         <ng-template matStepLabel>
                                             <span matTooltip="Maternal Drug Administration">Maternal Drug Administration</span>
                                         </ng-template>
                                         <app-maternal-drug-administration (notify)="onMaternalDrugAdministration($event)"></app-maternal-drug-administration>
                                         <div >
-                                            <app-partner-testing (notify)="onPartnerTestingNotify($event)"></app-partner-testing>
+                                            <app-pnc-partnertesting (notify)="onPartnerTestingNotify($event)"></app-pnc-partnertesting>
+                                        </div>
+
+                                        <div>
+                                            <app-pnc-patienteducation (notify)="onPatientEducationNotify($event)"></app-pnc-patienteducation>
                                         </div>
                                         <div>
                                             <button mat-raised-button color="primary" matStepperPrevious type="button">Previous</button>
                                             &nbsp;&nbsp;
                                             <button mat-raised-button color="accent" matStepperNext type="button">Next</button>
+                                        </div>
+                                    </mat-step>
+
+                                    <mat-step [completed]="false" [stepControl]="dischargeFormGroup">
+                                        <ng-template matStepLabel>
+                                            <span matTooltip="Maternal Drug Administration">Baby Discharge</span>
+                                        </ng-template>
+                                        <app-discharge (notify)="onPatientDischarge($event)"></app-discharge>
+
+                                        <div >
+                                            <app-maternity-referral (notify)="onPatientreferralNotify($event)"></app-maternity-referral>
+                                        </div>
+
+                                        <div>
+                                            <button mat-raised-button color="primary" matStepperPrevious type="button">Previous</button>
+                                            &nbsp;&nbsp;
+                                            <button mat-raised-button color="accent" matStepperNext type="button">Next</button>
+                                        </div>
+                                    </mat-step>
+
+
+                                    <mat-step [completed]="false" [stepControl]="nextAppointmentFormGroup">
+                                        <ng-template matStepLabel>
+                                            <span matTooltip="Next Appointment">Next Appointment</span>
+                                        </ng-template>
+                                        <app-maternity-next-appointment (notify)="onPatientNextAppointent($event)"></app-maternity-next-appointment>
+
+
+
+                                        <div>
+                                            <button mat-raised-button color="primary" matStepperPrevious type="button">Previous</button>
+                                            &nbsp;&nbsp;
+                                            <button mat-raised-button color="accent" matStepperNext type="button">Complete Encounter</button>
                                         </div>
                                     </mat-step>
 
