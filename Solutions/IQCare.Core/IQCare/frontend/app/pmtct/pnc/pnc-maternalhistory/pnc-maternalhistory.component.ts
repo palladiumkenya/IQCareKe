@@ -1,5 +1,5 @@
 import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 
 @Component({
     selector: 'app-pnc-maternalhistory',
@@ -7,7 +7,10 @@ import { Component, OnInit, Output, EventEmitter } from '@angular/core';
     styleUrls: ['./pnc-maternalhistory.component.css']
 })
 export class PncMaternalhistoryComponent implements OnInit {
+    deliveryModeOptions: any[] = [];
+
     MaternalHistoryForm: FormGroup;
+    @Input('matHistoryOptions') matHistoryOptions: any;
     @Output() notify: EventEmitter<FormGroup> = new EventEmitter<FormGroup>();
 
     maxDate: Date;
@@ -22,6 +25,8 @@ export class PncMaternalhistoryComponent implements OnInit {
             modeofdelivery: new FormControl('', [Validators.required])
         });
 
+        const { deliveryModeOptions } = this.matHistoryOptions[0];
+        this.deliveryModeOptions = deliveryModeOptions;
 
         this.notify.emit(this.MaternalHistoryForm);
     }
