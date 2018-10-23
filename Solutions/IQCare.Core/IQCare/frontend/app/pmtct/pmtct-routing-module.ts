@@ -33,6 +33,7 @@ import { HeiHivTestResultsResolver } from './_services/resolvers/hei-hiv-test-re
 import {IptoutcomeResolverService} from './_services/resolvers/iptoutcome-resolver.service';
 import {MedicationResolverService} from './_services/resolvers/medication-resolver.service';
 import {MedicationPlanResolverService} from './_services/resolvers/medication-plan-resolver.service';
+import {MaternityComponent} from './maternity/maternity.component';
 
 
 const routes: Routes = [
@@ -100,6 +101,11 @@ const routes: Routes = [
     {
         path: 'pnc/:patientId/:personId/:serviceAreaId',
         component: PncComponent,
+        pathMatch: 'full'
+    },
+    {
+        path: 'maternity/:patientId/:personId/:serviceAreaId',
+        component: MaternityComponent,
         pathMatch: 'full'
     }
 ];

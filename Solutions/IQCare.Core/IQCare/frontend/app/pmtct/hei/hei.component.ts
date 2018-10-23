@@ -23,6 +23,7 @@ export class HeiComponent implements OnInit {
     serviceAreaId: number;
     patientMasterVisitId: number;
     userId: number;
+    formType: string;
 
     defaultParameters: DefaultParameters;
 
@@ -88,6 +89,7 @@ export class HeiComponent implements OnInit {
         this.infantFeedingFormGroup = new FormArray([]);
         this.heiOutcomeFormGroup = new FormArray([]);
         this.hivTestingFormGroup = [];
+        this.formType = 'hei';
     }
 
     ngOnInit() {
@@ -99,6 +101,7 @@ export class HeiComponent implements OnInit {
                 this.personId = personId;
                 this.serviceAreaId = serviceAreaId;
             }
+
         );
 
         this.userId = JSON.parse(localStorage.getItem('appUserId'));

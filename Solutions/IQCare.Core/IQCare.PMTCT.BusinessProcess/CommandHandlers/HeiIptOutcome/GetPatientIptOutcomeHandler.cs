@@ -7,6 +7,7 @@ using IQCare.PMTCT.BusinessProcess.Commands.HeiIptOutcome;
 using IQCare.PMTCT.Core.Models.HEI;
 using IQCare.PMTCT.Infrastructure;
 using MediatR;
+using Microsoft.EntityFrameworkCore;
 using Serilog;
 
 namespace IQCare.PMTCT.BusinessProcess.CommandHandlers.HeiIptOutcome
@@ -26,8 +27,8 @@ namespace IQCare.PMTCT.BusinessProcess.CommandHandlers.HeiIptOutcome
             {
                 try
                 {
-                    PatientIptOutcome patientIptOutcome = _unitOfWork.Repository<PatientIptOutcome>()
-                        .Get(x => x.PatientId == request.PatientIptOutcome.PatientId && !x.DeleteFlag).FirstOrDefault();
+                    PatientIptOutcome patientIptOutcome = await _unitOfWork.Repository<PatientIptOutcome>()
+                        .Get(x => x.PatientId == request.PatientIptOutcome.PatientId && !x.DeleteFlag).FirstOrDefaultAsync();
                     return Result<PatientIptOutcome>.Valid(patientIptOutcome);
                 }
                 catch (Exception e)
