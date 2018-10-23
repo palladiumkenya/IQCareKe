@@ -22,6 +22,9 @@
                     <mat-label>Mode of Delivery</mat-label>
                     <mat-select formControlName="modeofdelivery" required>
                         <mat-option [value]=""></mat-option>
+                        <mat-option *ngFor="let deliveryModeOption of deliveryModeOptions" [value]="deliveryModeOption.itemId">
+                            {{deliveryModeOption.itemName}}
+                        </mat-option>
                     </mat-select>
                 </mat-form-field>
             </div>

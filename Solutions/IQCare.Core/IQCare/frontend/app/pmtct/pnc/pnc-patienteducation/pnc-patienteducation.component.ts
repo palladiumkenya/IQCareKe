@@ -1,4 +1,4 @@
-import { Component, OnInit, EventEmitter, Output } from '@angular/core';
+import { Component, OnInit, EventEmitter, Output, Input } from '@angular/core';
 import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
 
 @Component({
@@ -8,6 +8,9 @@ import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms'
 })
 export class PncPatienteducationComponent implements OnInit {
     PatientEducationForm: FormGroup;
+    yesnoOptions: any[] = [];
+
+    @Input('patientEducationOptions') patientEducationOptions: any;
     @Output() notify: EventEmitter<FormGroup> = new EventEmitter<FormGroup>();
 
     constructor(private _formBuilder: FormBuilder) { }
@@ -16,6 +19,9 @@ export class PncPatienteducationComponent implements OnInit {
         this.PatientEducationForm = this._formBuilder.group({
             counselledInfantFeeding: new FormControl('', [Validators.required])
         });
+
+        const { yesnoOptions } = this.patientEducationOptions[0];
+        this.yesnoOptions = yesnoOptions;
 
         this.notify.emit(this.PatientEducationForm);
     }
