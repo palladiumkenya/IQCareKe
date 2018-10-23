@@ -67,7 +67,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IQCare.Maternity.Infrastruc
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DBMigration", "DBMigration", "{47AF0369-E7DB-4513-976B-41E9D23CFC89}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IQCare.Core.DbMigration", "IQCare.Core.DbMigration\IQCare.Core.DbMigration.csproj", "{62E02B9D-5478-49B3-8A2E-9EE365F7CFF6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IQCare.Core.DbMigration", "IQCare.Core.DbMigration\IQCare.Core.DbMigration.csproj", "{62E02B9D-5478-49B3-8A2E-9EE365F7CFF6}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IQCare.Maternity.WebApi", "IQCareMaternityWebApi\IQCare.Maternity.WebApi.csproj", "{F5F63419-9BE7-4C94-836B-8AB126BD0D2F}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IQCare.Maternity.BusinessProcess", "IQCare.Maternity.BusinessProcess\IQCare.Maternity.BusinessProcess.csproj", "{EE5D3728-FEB1-44AD-8E7D-7D5A6DE94059}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -171,6 +175,14 @@ Global
 		{62E02B9D-5478-49B3-8A2E-9EE365F7CFF6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{62E02B9D-5478-49B3-8A2E-9EE365F7CFF6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{62E02B9D-5478-49B3-8A2E-9EE365F7CFF6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F5F63419-9BE7-4C94-836B-8AB126BD0D2F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F5F63419-9BE7-4C94-836B-8AB126BD0D2F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F5F63419-9BE7-4C94-836B-8AB126BD0D2F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F5F63419-9BE7-4C94-836B-8AB126BD0D2F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EE5D3728-FEB1-44AD-8E7D-7D5A6DE94059}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EE5D3728-FEB1-44AD-8E7D-7D5A6DE94059}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EE5D3728-FEB1-44AD-8E7D-7D5A6DE94059}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EE5D3728-FEB1-44AD-8E7D-7D5A6DE94059}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -200,6 +212,8 @@ Global
 		{A68C46E7-DDE6-40E6-988B-96B8D2EF3600} = {B8703570-D82C-41A4-B9D9-1A720198EB3F}
 		{771F1CBA-A67A-45D8-AF17-A9E853E3DDAA} = {B8703570-D82C-41A4-B9D9-1A720198EB3F}
 		{62E02B9D-5478-49B3-8A2E-9EE365F7CFF6} = {47AF0369-E7DB-4513-976B-41E9D23CFC89}
+		{F5F63419-9BE7-4C94-836B-8AB126BD0D2F} = {B8703570-D82C-41A4-B9D9-1A720198EB3F}
+		{EE5D3728-FEB1-44AD-8E7D-7D5A6DE94059} = {B8703570-D82C-41A4-B9D9-1A720198EB3F}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {6748284C-28D2-4D64-B4DE-832CF3A54CC2}

@@ -10,7 +10,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace IQCare.Controllers.PMTCT.HEI
 {
-    [Route("api/[controller]")]
+    [Produces("application/json")]
     [Route("api/ImmunizationHistory")]
 
     public class ImmunizationHistoryController : Controller

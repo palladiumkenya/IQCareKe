@@ -12,7 +12,7 @@ using Microsoft.AspNetCore.Rewrite.Internal.UrlActions;
 
 namespace IQCare.Controllers.PMTCT.HEI
 {
-    [Route("api/[controller]")]
+    [Produces("application/json")]
     [Route("api/HeiMilestone")]
     public class HeiMilestoneController : Controller
     {

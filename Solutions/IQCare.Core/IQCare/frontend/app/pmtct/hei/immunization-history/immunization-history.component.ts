@@ -5,6 +5,8 @@ import { Subscription } from 'rxjs/index';
 import { LookupItemService } from '../../../shared/_services/lookup-item.service';
 import { NotificationService } from '../../../shared/_services/notification.service';
 import {MatTableDataSource} from '@angular/material';
+import {ImmunizationHistory} from '../../_models/hei/ImmunizationHistory';
+import {ImmunizationHistoryTableData} from '../../_models/hei/ImmunizationHistoryTableData';
 
 @Component({
     selector: 'app-immunization-history',
@@ -25,6 +27,7 @@ export class ImmunizationHistoryComponent implements OnInit {
 
     @Input('immunizationHistoryOptions') immunizationHistoryOptions: any;
     @Output() notify: EventEmitter<FormGroup> = new EventEmitter<FormGroup>();
+    @Output() vaccineArray: EventEmitter<ImmunizationHistory[]> = new EventEmitter<ImmunizationHistory[]>();
 
     constructor(private _formBuilder: FormBuilder,
         private _lookupItemService: LookupItemService,
@@ -49,6 +52,7 @@ export class ImmunizationHistoryComponent implements OnInit {
         this.yesnoOptions = yesnoOption;
 
         this.notify.emit(this.ImmunizationHistoryFormGroup);
+        this.vaccineArray.emit(this.immunization_history);
     }
 
    public AddImmunization() {
@@ -85,6 +89,7 @@ export class ImmunizationHistoryComponent implements OnInit {
     }
 }
 
+/*
 export interface ImmunizationHistoryTableData {
     immunizationPeriod?: string;
     given?: string;
@@ -92,9 +97,10 @@ export interface ImmunizationHistoryTableData {
     nextSchedule?: Date;
 }
 
+
 export interface ImmunizationHistory {
     immunizationPeriodId?: number;
     immunizationGivenId?: number;
     dateImmunized?: Date;
     nextScheduled?: Date;
-}
+}*/

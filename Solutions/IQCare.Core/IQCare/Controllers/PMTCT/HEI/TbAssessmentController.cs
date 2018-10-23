@@ -18,7 +18,7 @@ namespace IQCare.Controllers.PMTCT.HEI
 
         public TbAssessmentController(IMediator mediator)
         {
-            _mediator = mediator;
+            _mediator = mediator ?? throw new ArgumentNullException(nameof(mediator)); 
         }
         // GET: api/<controller>
         [HttpGet]
@@ -49,8 +49,8 @@ namespace IQCare.Controllers.PMTCT.HEI
 
 
         // POST api/<controller>
-        [HttpPost]
-        public async Task<IActionResult> AddPatientIcf([FromBody] AddPatientIcfCommand addPatientIcfCommand)
+        [HttpPost("AddPatientIcf")]
+        public async Task<IActionResult> Post([FromBody] AddPatientIcfCommand addPatientIcfCommand)
         {
             var response = await _mediator.Send(addPatientIcfCommand, Request.HttpContext.RequestAborted);
             if (response.IsValid)
@@ -59,8 +59,8 @@ namespace IQCare.Controllers.PMTCT.HEI
         }
 
         // POST api/<controller>
-        [HttpPost]
-        public async Task<IActionResult> AddPatientIcfAction([FromBody] AddPatientIcfActionCommand addPatientIcfActionCommand)
+        [HttpPost("AddPatientIcfAction")]
+        public async Task<IActionResult> Post([FromBody] AddPatientIcfActionCommand addPatientIcfActionCommand)
         {
             var response = await _mediator.Send(addPatientIcfActionCommand, Request.HttpContext.RequestAborted);
             if (response.IsValid)
