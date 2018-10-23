@@ -19,6 +19,7 @@ namespace IQCare.Maternity.Infrastructure.EntityMapping
 
             builder.ToTable(nameof(DeliveredBabyBirthInformation))
            .Property(x => x.Comment).HasColumnName("BirthComments");
+
         }
     }
 }

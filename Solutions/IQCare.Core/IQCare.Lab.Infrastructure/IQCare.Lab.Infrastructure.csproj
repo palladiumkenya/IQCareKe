@@ -13,6 +13,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\IQCare.Lab.Core\IQCare.Lab.Core.csproj" />
+    <ProjectReference Include="..\IQCare.Maternity.Core\IQCare.Maternity.Core.csproj" />
     <ProjectReference Include="..\IQCare.SharedKernel.Infrastructure\IQCare.SharedKernel.Infrastructure.csproj" />
   </ItemGroup>
 

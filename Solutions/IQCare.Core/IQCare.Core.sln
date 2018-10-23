@@ -63,7 +63,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Maternity", "Maternity", "{
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IQCare.Maternity.Core", "IQCare.Maternity.Core\IQCare.Maternity.Core.csproj", "{A68C46E7-DDE6-40E6-988B-96B8D2EF3600}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IQCare.Maternity.Infrastructure", "IQCare.Maternity.Infrastructure\IQCare.Maternity.Infrastructure.csproj", "{771F1CBA-A67A-45D8-AF17-A9E853E3DDAA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IQCare.Maternity.Infrastructure", "IQCare.Maternity.Infrastructure\IQCare.Maternity.Infrastructure.csproj", "{771F1CBA-A67A-45D8-AF17-A9E853E3DDAA}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DBMigration", "DBMigration", "{47AF0369-E7DB-4513-976B-41E9D23CFC89}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IQCare.Core.DbMigration", "IQCare.Core.DbMigration\IQCare.Core.DbMigration.csproj", "{62E02B9D-5478-49B3-8A2E-9EE365F7CFF6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -163,6 +167,10 @@ Global
 		{771F1CBA-A67A-45D8-AF17-A9E853E3DDAA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{771F1CBA-A67A-45D8-AF17-A9E853E3DDAA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{771F1CBA-A67A-45D8-AF17-A9E853E3DDAA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{62E02B9D-5478-49B3-8A2E-9EE365F7CFF6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{62E02B9D-5478-49B3-8A2E-9EE365F7CFF6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{62E02B9D-5478-49B3-8A2E-9EE365F7CFF6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{62E02B9D-5478-49B3-8A2E-9EE365F7CFF6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -191,6 +199,7 @@ Global
 		{2C482B55-A315-487A-9F81-5CACD4A7F502} = {C4546E06-0E2E-4FCC-9272-03508FE6B3A2}
 		{A68C46E7-DDE6-40E6-988B-96B8D2EF3600} = {B8703570-D82C-41A4-B9D9-1A720198EB3F}
 		{771F1CBA-A67A-45D8-AF17-A9E853E3DDAA} = {B8703570-D82C-41A4-B9D9-1A720198EB3F}
+		{62E02B9D-5478-49B3-8A2E-9EE365F7CFF6} = {47AF0369-E7DB-4513-976B-41E9D23CFC89}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {6748284C-28D2-4D64-B4DE-832CF3A54CC2}
