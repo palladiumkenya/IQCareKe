@@ -80,6 +80,9 @@ import { BabyComponent } from './maternity/baby/baby.component';
 import { MaternityTestsComponent } from './maternity/maternity-tests/maternity-tests.component';
 import { MaternalDrugAdministrationComponent } from './maternity/maternal-drug-administration/maternal-drug-administration.component';
 import { HivFinalResultsResolver } from './_services/resolvers/hiv-final-results.resolver';
+import { DischargeComponent } from './maternity/discharge/discharge.component';
+import { MaternityReferralComponent } from './maternity/maternity-referral/maternity-referral.component';
+import { MaternityNextAppointmentComponent } from './maternity/maternity-next-appointment/maternity-next-appointment.component';
 
 @NgModule({
     imports: [
@@ -137,7 +140,10 @@ import { HivFinalResultsResolver } from './_services/resolvers/hiv-final-results
         DeliveryComponent,
         BabyComponent,
         MaternityTestsComponent,
-        MaternalDrugAdministrationComponent
+        MaternalDrugAdministrationComponent,
+        DischargeComponent,
+        MaternityReferralComponent,
+        MaternityNextAppointmentComponent
 
     ],
     providers: [
