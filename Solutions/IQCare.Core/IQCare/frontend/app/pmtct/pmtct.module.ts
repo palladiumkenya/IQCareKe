@@ -1,3 +1,13 @@
+import { InfantPncDrugResolver } from './_services/resolvers/infant-pnc-drug.resolver';
+import { YesNoNaResolver } from './_services/resolvers/yes-no-na.resolver';
+import { BabyConditionResolver } from './_services/resolvers/baby-condition.resolver';
+import { FistulaScreeningResolver } from './_services/resolvers/fistula-screening.resolver';
+import { CSectionSiteResolver } from './_services/resolvers/c-section-site.resolver';
+import { EpisiotomyResolver } from './_services/resolvers/episiotomy.resolver';
+import { PostPartumHaemorrhage } from './_services/resolvers/post-partum-haemorrhage.resolver';
+import { LochiaResolver } from './_services/resolvers/lochia.resolver';
+import { UterusResolver } from './_services/resolvers/uterus.resolver';
+import { BreastResolver } from './_services/resolvers/breast.resolver';
 import { HeiService } from './_services/hei.service';
 import { PrimaryCareGiverResolver } from './_services/primarycaregiver.resolver';
 import { MotherStateResolver } from './_services/motherstate.resolver';
@@ -64,6 +74,7 @@ import { PncPatienteducationComponent } from './pnc/pnc-patienteducation/pnc-pat
 import { PncCervicalcancerscreeningComponent } from './pnc/pnc-cervicalcancerscreening/pnc-cervicalcancerscreening.component';
 import { PncContraceptivehistoryComponent } from './pnc/pnc-contraceptivehistory/pnc-contraceptivehistory.component';
 import { PncHivtestingComponent } from './pnc/pnc-hivtesting/pnc-hivtesting.component';
+import { HivFinalResultsResolver } from './_services/resolvers/hiv-final-results.resolver';
 
 @NgModule({
     imports: [
@@ -128,7 +139,18 @@ import { PncHivtestingComponent } from './pnc/pnc-hivtesting/pnc-hivtesting.comp
         PrimaryCareGiverResolver,
         HeiService,
         HeiHivTestTypesResolver,
-        HeiHivTestResultsResolver
+        HeiHivTestResultsResolver,
+        HivFinalResultsResolver,
+        BreastResolver,
+        UterusResolver,
+        LochiaResolver,
+        PostPartumHaemorrhage,
+        EpisiotomyResolver,
+        CSectionSiteResolver,
+        FistulaScreeningResolver,
+        BabyConditionResolver,
+        YesNoNaResolver,
+        InfantPncDrugResolver
     ],
     entryComponents: [
         IptClientWorkupComponent,

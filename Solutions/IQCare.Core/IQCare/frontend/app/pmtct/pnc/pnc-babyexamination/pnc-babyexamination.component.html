@@ -12,6 +12,9 @@
                     <mat-label>Baby's Condition</mat-label>
                     <mat-select formControlName="babycondition" required>
                         <mat-option [value]=""></mat-option>
+                        <mat-option *ngFor="let babyConditionOption of babyConditionOptions" [value]="babyConditionOption.itemId">
+                            {{babyConditionOption.itemName}}
+                        </mat-option>
                     </mat-select>
                 </mat-form-field>
             </div>
@@ -21,6 +24,9 @@
                     <mat-label>Breast Feeding</mat-label>
                     <mat-select formControlName="breastfeeding" required>
                         <mat-option [value]=""></mat-option>
+                        <mat-option *ngFor="let yesnoOption of yesnoOptions" [value]="yesnoOption.itemId">
+                            {{yesnoOption.itemName}}
+                        </mat-option>
                     </mat-select>
                 </mat-form-field>
             </div>

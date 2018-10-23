@@ -10,7 +10,7 @@
                         <div class="row">
                             <div class="col-lg-12 col-sm-6 col-xs-12">
                                 <mat-horizontal-stepper [linear]="isLinear" #stepper>
-                                    <mat-step [completed]="false" [stepControl]="visitDetailsFormGroup">
+                                    <mat-step [completed]="true" [stepControl]="visitDetailsFormGroup">
                                         <ng-template matStepLabel>
                                             <span matTooltip="Visit Details">Visit Details</span>
                                         </ng-template>
@@ -28,15 +28,18 @@
                                         </ng-template>
 
                                         <!-- add Maternity History Component to Stepper -->
-                                        <app-pnc-maternalhistory (notify)="onMaternalHistoryNotify($event)">
+                                        <app-pnc-maternalhistory (notify)="onMaternalHistoryNotify($event)"
+                                            [matHistoryOptions]="matHistoryOptions">
                                         </app-pnc-maternalhistory>
 
                                         <!-- add PostNatal Examination Component to Stepper -->
-                                        <app-pnc-postnatalexam (notify)="onPostNatalExamNotify($event)">
+                                        <app-pnc-postnatalexam (notify)="onPostNatalExamNotify($event)"
+                                            [postNatalExamOptions]="postNatalExamOptions">
                                         </app-pnc-postnatalexam>
 
                                         <!-- add Baby Examination Component to Stepper -->
-                                        <app-pnc-babyexamination (notify)="onBabyExaminationNotify($event)">
+                                        <app-pnc-babyexamination (notify)="onBabyExaminationNotify($event)"
+                                            [babyExaminationOptions]="babyExaminationOptions">
                                         </app-pnc-babyexamination>
 
                                         <div class="row">
@@ -46,13 +49,13 @@
                                         </div>
                                     </mat-step>
 
-                                    <mat-step [completed]="false" [stepControl]="visitDetailsFormGroup">
+                                    <mat-step [completed]="false" [stepControl]="hivStatusFormGroup">
                                         <ng-template matStepLabel>
                                             <span matTooltip="Hiv Status">Hiv Status</span>
                                         </ng-template>
 
                                         <!-- add Hiv Status Component to Stepper -->
-                                        <app-pnc-hivtesting (notify)="onHivStatusNotify()">
+                                        <app-pnc-hivtesting (notify)="onHivStatusNotify($event)" [pncHivOptions]="pncHivOptions">
                                         </app-pnc-hivtesting>
 
                                         <div class="row">
@@ -70,19 +73,22 @@
                                         </ng-template>
 
                                         <!-- add Drug Administration Component to Stepper -->
-                                        <app-pnc-drugadministration (notify)="onDrugAdministrationNotify($event)">
+                                        <app-pnc-drugadministration (notify)="onDrugAdministrationNotify($event)"
+                                            [drugAdministrationOptions]="drugAdministrationOptions">
                                         </app-pnc-drugadministration>
 
                                         <br />
 
                                         <!-- add Partner Testing Component to Stepper -->
-                                        <app-pnc-partnertesting (notify)="onPartnerTestingNotify($event)">
+                                        <app-pnc-partnertesting (notify)="onPartnerTestingNotify($event)"
+                                            [partnerTestingOptions]="partnerTestingOptions">
                                         </app-pnc-partnertesting>
 
                                         <br />
 
                                         <!-- add Patient Education Component to Stepper -->
-                                        <app-pnc-patienteducation (notify)="onPatientEducationNotify($event)">
+                                        <app-pnc-patienteducation (notify)="onPatientEducationNotify($event)"
+                                            [patientEducationOptions]="patientEducationOptions">
                                         </app-pnc-patienteducation>
 
                                         <div class="row">

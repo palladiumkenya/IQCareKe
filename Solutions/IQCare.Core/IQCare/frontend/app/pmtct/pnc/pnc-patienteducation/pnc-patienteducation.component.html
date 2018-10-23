@@ -12,6 +12,9 @@
                     <mat-label>Counselled on infant feeding</mat-label>
                     <mat-select formControlName="counselledInfantFeeding" required>
                         <mat-option [value]=""></mat-option>
+                        <mat-option *ngFor="let yesnoOption of yesnoOptions" [value]="yesnoOption.itemId">
+                            {{yesnoOption.itemName}}
+                        </mat-option>
                     </mat-select>
                 </mat-form-field>
             </div>
