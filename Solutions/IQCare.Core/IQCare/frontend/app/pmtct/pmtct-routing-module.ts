@@ -44,6 +44,10 @@ import { MedicationResolverService } from './_services/resolvers/medication-reso
 import { MedicationPlanResolverService } from './_services/resolvers/medication-plan-resolver.service';
 import { HivFinalResultsResolver } from './_services/resolvers/hiv-final-results.resolver';
 import { UterusResolver } from './_services/resolvers/uterus.resolver';
+import {IptoutcomeResolverService} from './_services/resolvers/iptoutcome-resolver.service';
+import {MedicationResolverService} from './_services/resolvers/medication-resolver.service';
+import {MedicationPlanResolverService} from './_services/resolvers/medication-plan-resolver.service';
+import {MaternityComponent} from './maternity/maternity.component';
 
 
 const routes: Routes = [
@@ -127,6 +131,12 @@ const routes: Routes = [
             yesNoNaOptions: YesNoNaResolver,
             infantPncDrugOptions: InfantPncDrugResolver
         }
+        pathMatch: 'full'
+    },
+    {
+        path: 'maternity/:patientId/:personId/:serviceAreaId',
+        component: MaternityComponent,
+        pathMatch: 'full'
     }
 ];
 

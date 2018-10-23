@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output, Input } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { SnotifyService } from 'ng-snotify';
 import { Subscription } from 'rxjs/index';
@@ -15,6 +15,7 @@ export class HeiVisitDetailsComponent implements OnInit {
     public HeiVisitDetailsFormGroup: FormGroup;
     public lookupItems$: Subscription;
     public visitTypes: any[] = [];
+    @Input('formtype') formtype: string;
     @Output() notify: EventEmitter<FormGroup> = new EventEmitter<FormGroup>();
 
     constructor(private _formBuilder: FormBuilder,
@@ -29,6 +30,17 @@ export class HeiVisitDetailsComponent implements OnInit {
             visitDate: new FormControl('', [Validators.required]),
             cohort: new FormControl('')
         });
+
+        switch (this.formtype) {
+            case 'hei':
+                break;
+            case 'maternity':
+                console.log('maternity');
+                this.HeiVisitDetailsFormGroup.get('visitType') .disable({ onlySelf: true });
+                this.HeiVisitDetailsFormGroup.get('cohort').disable({ onlySelf: true });
+                break;
+            default:
+        }
 
         this.getLookupItems('ANCVisitType', this.visitTypes);
 
