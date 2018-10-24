@@ -69,7 +69,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DBMigration", "DBMigration"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IQCare.Core.DbMigration", "IQCare.Core.DbMigration\IQCare.Core.DbMigration.csproj", "{62E02B9D-5478-49B3-8A2E-9EE365F7CFF6}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IQCare.Maternity.WebApi", "IQCareMaternityWebApi\IQCare.Maternity.WebApi.csproj", "{F5F63419-9BE7-4C94-836B-8AB126BD0D2F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IQCare.Maternity.WebApi", "IQCare.Maternity.WebApi\IQCare.Maternity.WebApi.csproj", "{F5F63419-9BE7-4C94-836B-8AB126BD0D2F}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IQCare.Maternity.BusinessProcess", "IQCare.Maternity.BusinessProcess\IQCare.Maternity.BusinessProcess.csproj", "{EE5D3728-FEB1-44AD-8E7D-7D5A6DE94059}"
 EndProject

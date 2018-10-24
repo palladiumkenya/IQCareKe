@@ -13,6 +13,24 @@ namespace IQCare.Maternity.Core.Domain.Maternity
 
         }
 
+        public DeliveredBabyBirthInformation(int patientDeliveryInformationId, int masterVisitId, decimal ? birthWeight, 
+            int ? sex, int ? deliveryOutcome, bool resuscitationDone, bool teoGiven, bool breastFestWithinHr, string birthNotificationNumber,
+            string comment, int createdBy)
+        {
+            PatientDeliveryInformationId = patientDeliveryInformationId;
+            PatientMasterVisitId = masterVisitId;
+            BirthWeight = birthWeight;
+            Sex = sex;
+            DeliveryOutcome = deliveryOutcome;
+            ResuscitationDone = resuscitationDone;
+            TeoGiven = teoGiven;
+            BreastFedWithinHour = breastFestWithinHr;
+            BirthNotificationNumber = birthNotificationNumber;
+            Comment = comment;
+            CreatedBy = createdBy;
+            CreateDate = DateTime.Now;
+        }
+
         public int Id { get; private set; }
         public int PatientDeliveryInformationId { get; private set; }
         public int PatientMasterVisitId { get; private set; }

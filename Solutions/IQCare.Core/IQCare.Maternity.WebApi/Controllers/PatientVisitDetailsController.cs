@@ -6,7 +6,6 @@ using IQCare.Maternity.BusinessProcess.Commands.PNCCommands;
 using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-//using IQCare.Maternity.Core;
 
 
 namespace IQCareMaternityWebApi.Controllers

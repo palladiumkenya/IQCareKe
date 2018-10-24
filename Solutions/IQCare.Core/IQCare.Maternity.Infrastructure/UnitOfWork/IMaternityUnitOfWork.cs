@@ -5,7 +5,7 @@ using System.Text;
 
 namespace IQCare.Maternity.Infrastructure.UnitOfWork
 {
-    public interface IMaternityUnitOfWork 
+    public interface IMaternityUnitOfWork : IUnitOfWork
     {
 
     }

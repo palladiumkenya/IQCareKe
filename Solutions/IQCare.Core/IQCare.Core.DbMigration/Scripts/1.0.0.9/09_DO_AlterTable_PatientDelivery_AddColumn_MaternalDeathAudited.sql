@@ -1,0 +1,1 @@
+﻿ALTER TABLE PatientDelivery ADD MaternalDeathAudited BIT NULL ;

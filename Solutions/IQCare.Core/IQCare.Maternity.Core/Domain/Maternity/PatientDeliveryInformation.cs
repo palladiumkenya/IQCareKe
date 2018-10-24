@@ -36,7 +36,8 @@ namespace IQCare.Maternity.Core.Domain.Maternity
         public DateTime TimeOfDelivery { get; private set; }
         public int? ModeOfDelivery { get; private set; }
         public int? PlacentaComplete { get; private set; }
-        public int? BloodLoss { get; private set; }
+        public int? BloodLossCapacity { get; private set; }
+        public int ? BloodLossClassificationId { get; set; }
         public int? MotherCondition { get; private set; }
         public bool DeliveryComplicationsExperienced { get; private set; }
         public string DeliveryComplicationNotes { get; private set; }

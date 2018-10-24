@@ -20,6 +20,17 @@ namespace IQCare.Maternity.Infrastructure.EntityMapping
             builder.ToTable(nameof(DeliveredBabyBirthInformation))
            .Property(x => x.Comment).HasColumnName("BirthComments");
 
+            builder.ToTable(nameof(DeliveredBabyBirthInformation))
+                .Property(x => x.Id).HasColumnName("BirthId");
+
+        }
+    }
+
+    public class DeliveredBabyBirthInfoViewMapping : IEntityTypeConfiguration<DeliveredBabyBirthInfoView>
+    {
+        public void Configure(EntityTypeBuilder<DeliveredBabyBirthInfoView> builder)
+        {
+            builder.ToTable(nameof(DeliveredBabyBirthInfoView));
         }
     }
 }

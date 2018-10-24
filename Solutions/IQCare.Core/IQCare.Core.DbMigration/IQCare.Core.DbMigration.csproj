@@ -11,6 +11,13 @@
     <None Remove="Scripts\1.0.0.9\03_DO_AlterTable_DeliveredBabyBirthInfo_AlterColmn_DeliveryComplications.sql" />
     <None Remove="Scripts\1.0.0.9\04_DO_AlterTable_DeliveredBabyBirthInfo_DropApagarColumns.sql" />
     <None Remove="Scripts\1.0.0.9\05_DO_Insert_ApgrarScoreDetails_Into_LookUpTables.sql" />
+    <None Remove="Scripts\1.0.0.9\06_DO_CreateView_DeliveredBabyBirthInfoView.sql" />
+    <None Remove="Scripts\1.0.0.9\07_DO_AlterTable_DeliveredBabyApgarScore_AddColumn_Score.sql" />
+    <None Remove="Scripts\1.0.0.9\08_DO_AlterTable_PatientDelivery_RenameColumn_BloodLoss.sql" />
+    <None Remove="Scripts\1.0.0.9\09_DO_AlterTable_PatientDelivery_AddColumn_MaternalDeathAudited.sql" />
+    <None Remove="Scripts\1.0.0.9\10_DO_AlterTable_PatientDelivery_AddColumn_MaternalDeathAuditDate.sql" />
+    <None Remove="Scripts\1.0.0.9\11_DO_AlterTable_PatientDelivery_AddColumn_BloodLossType.sql" />
+    <None Remove="Scripts\1.0.0.9\12_DO_AlterTable_PatientDelivery_AddFK_BloodLossType.sql" />
   </ItemGroup>
 
   <ItemGroup>
@@ -19,6 +26,13 @@
     <EmbeddedResource Include="Scripts\1.0.0.9\03_DO_AlterTable_DeliveredBabyBirthInfo_AlterColmn_DeliveryComplications.sql" />
     <EmbeddedResource Include="Scripts\1.0.0.9\04_DO_AlterTable_DeliveredBabyBirthInfo_DropApagarColumns.sql" />
     <EmbeddedResource Include="Scripts\1.0.0.9\05_DO_Insert_ApgrarScoreDetails_Into_LookUpTables.sql" />
+    <EmbeddedResource Include="Scripts\1.0.0.9\06_DO_CreateView_DeliveredBabyBirthInfoView.sql" />
+    <EmbeddedResource Include="Scripts\1.0.0.9\07_DO_AlterTable_DeliveredBabyApgarScore_AddColumn_Score.sql" />
+    <EmbeddedResource Include="Scripts\1.0.0.9\08_DO_AlterTable_PatientDelivery_RenameColumn_BloodLoss.sql" />
+    <EmbeddedResource Include="Scripts\1.0.0.9\09_DO_AlterTable_PatientDelivery_AddColumn_MaternalDeathAudited.sql" />
+    <EmbeddedResource Include="Scripts\1.0.0.9\10_DO_AlterTable_PatientDelivery_AddColumn_MaternalDeathAuditDate.sql" />
+    <EmbeddedResource Include="Scripts\1.0.0.9\11_DO_AlterTable_PatientDelivery_AddColumn_BloodLossType.sql" />
+    <EmbeddedResource Include="Scripts\1.0.0.9\12_DO_AlterTable_PatientDelivery_AddFK_BloodLossType.sql" />
   </ItemGroup>
 
   <ItemGroup>
