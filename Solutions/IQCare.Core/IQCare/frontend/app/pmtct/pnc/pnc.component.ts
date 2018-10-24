@@ -1,7 +1,9 @@
 import { LookupItemView } from './../../shared/_models/LookupItemView';
-import { ActivatedRoute } from '@angular/router';
-import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Component, OnInit, NgZone } from '@angular/core';
 import { FormGroup, FormArray } from '@angular/forms';
+import { NotificationService } from '../../shared/_services/notification.service';
+import { SnotifyService } from 'ng-snotify';
 
 @Component({
     selector: 'app-pnc',
@@ -10,6 +12,7 @@ import { FormGroup, FormArray } from '@angular/forms';
 })
 export class PncComponent implements OnInit {
     isLinear: boolean = true;
+    formType: string;
 
     yesnoOptions: LookupItemView[] = [];
     hivFinalResultsOptions: LookupItemView[] = [];
@@ -41,14 +44,26 @@ export class PncComponent implements OnInit {
     contraceptiveHistoryExercise: any[] = [];
 
 
+    visitDetailsFormGroup: FormArray;
     matHistory_PostNatalExam_FormGroup: FormArray;
     drugAdministration_PartnerTesting_FormGroup: FormArray;
     hivStatusFormGroup: FormArray;
+    cervicalCancerScreeningFormGroup: FormArray;
+    diagnosisReferralAppointmentFormGroup: FormArray;
 
-    constructor(private route: ActivatedRoute) {
+    constructor(private route: ActivatedRoute,
+        private snotifyService: SnotifyService,
+        private notificationService: NotificationService,
+        public zone: NgZone,
+        private router: Router) {
+        this.visitDetailsFormGroup = new FormArray([]);
         this.matHistory_PostNatalExam_FormGroup = new FormArray([]);
         this.drugAdministration_PartnerTesting_FormGroup = new FormArray([]);
         this.hivStatusFormGroup = new FormArray([]);
+        this.cervicalCancerScreeningFormGroup = new FormArray([]);
+        this.diagnosisReferralAppointmentFormGroup = new FormArray([]);
+
+        this.formType = 'pnc';
     }
 
     ngOnInit() {
@@ -144,6 +159,10 @@ export class PncComponent implements OnInit {
         });
     }
 
+    onVisitDetailsNotify(formGroup: FormGroup): void {
+        this.visitDetailsFormGroup.push(formGroup);
+    }
+
     onMaternalHistoryNotify(formGroup: FormGroup): void {
         this.matHistory_PostNatalExam_FormGroup.push(formGroup);
     }
@@ -169,14 +188,34 @@ export class PncComponent implements OnInit {
     }
 
     onCervicalCancerScreeningNotify(formGroup: FormGroup): void {
-
+        this.cervicalCancerScreeningFormGroup.push(formGroup);
     }
 
     onContraceptiveHistoryNotify(formGroup: FormGroup): void {
-
+        this.cervicalCancerScreeningFormGroup.push(formGroup);
     }
 
     onHivStatusNotify(formGroup: FormGroup): void {
         this.hivStatusFormGroup.push(formGroup);
+    }
+
+    onDiagnosisNotify(formGroup: FormGroup): void {
+        this.diagnosisReferralAppointmentFormGroup.push(formGroup);
+    }
+
+    onReferralNotify(formGroup: FormGroup): void {
+        this.diagnosisReferralAppointmentFormGroup.push(formGroup);
+    }
+
+    onNextAppointmentNotify(formGroup: FormGroup): void {
+        this.diagnosisReferralAppointmentFormGroup.push(formGroup);
+    }
+
+    onSubmitForm() {
+        this.snotifyService.success('Success', 'PNC Encounter', this.notificationService.getConfig());
+
+        /*this.zone.run(() => {
+            this.router.navigate(['/dashboard/personhome/'], { relativeTo: this.route });
+        });*/
     }
 }
