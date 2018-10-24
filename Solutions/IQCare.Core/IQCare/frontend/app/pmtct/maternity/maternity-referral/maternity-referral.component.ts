@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {NotificationService} from '../../../shared/_services/notification.service';
 import {SnotifyService} from 'ng-snotify';
@@ -11,6 +11,11 @@ import {SnotifyService} from 'ng-snotify';
 export class MaternityReferralComponent implements OnInit {
 
     referralFormGroup: FormGroup;
+    @Input() dischargeOptions: any[] = [];
+    @Output() notify: EventEmitter<FormGroup> = new EventEmitter<FormGroup>();
+    public deliveryStateOptions: any[] = [];
+    public referralOptions: any[] = [];
+    public yesnoOptions: any[] = [];
 
     constructor(private formBuilder: FormBuilder,
                 private notificationService: NotificationService,
@@ -23,6 +28,14 @@ export class MaternityReferralComponent implements OnInit {
             referredTo: new FormControl('', [Validators.required])
 
         });
+        const {
+            deliveryStates,
+            referrals,
+            yesNos
+        } = this.dischargeOptions[0];
+        this.yesnoOptions = yesNos;
+        this.deliveryStateOptions = deliveryStates;
+        this.referralOptions = referrals;
     }
 
 }

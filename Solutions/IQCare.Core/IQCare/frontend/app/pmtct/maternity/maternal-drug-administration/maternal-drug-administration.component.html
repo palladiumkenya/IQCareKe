@@ -14,9 +14,9 @@
                 <mat-label>Vitamin A supplementation</mat-label>
                 <mat-select formControlName="vitaminASupplement" required minlength="1">
                     <mat-option [value]="0">select</mat-option>
-                    <!--<mat-option *ngFor="let yesnoOption of yesnoOptions" [value]="yesnoOption.itemId" (onSelectionChange)="onAntiTbDrugsChange($event)">
+                    <mat-option *ngFor="let yesnoOption of yesnonaOptions" [value]="yesnoOption.itemId" >
                         {{yesnoOption.itemName}}
-                    </mat-option>-->
+                    </mat-option>
                 </mat-select>
             </mat-form-field>
         </div>
@@ -26,9 +26,9 @@
                 <mat-label>Started HAART in ANC</mat-label>
                 <mat-select formControlName="HaartANC" required minlength="1">
                     <mat-option [value]="0">select</mat-option>
-                    <!--<mat-option *ngFor="let yesnoOption of yesnoOptions" [value]="yesnoOption.itemId" (onSelectionChange)="onAntiTbDrugsChange($event)">
+                    <mat-option *ngFor="let yesnoOption of yesnoOptions" [value]="yesnoOption.itemId">
                         {{yesnoOption.itemName}}
-                    </mat-option>-->
+                    </mat-option>
                 </mat-select>
             </mat-form-field>
         </div>
@@ -38,9 +38,9 @@
                 <mat-label>ARVs started in Maternity</mat-label>
                 <mat-select formControlName="ARVStartedMaternity" required minlength="1">
                     <mat-option [value]="0">select</mat-option>
-                    <!--<mat-option *ngFor="let yesnoOption of yesnoOptions" [value]="yesnoOption.itemId" (onSelectionChange)="onAntiTbDrugsChange($event)">
+                    <mat-option *ngFor="let yesnoOption of yesnonaOptions" [value]="yesnoOption.itemId">
                         {{yesnoOption.itemName}}
-                    </mat-option>-->
+                    </mat-option>
                 </mat-select>
             </mat-form-field>
         </div>
@@ -50,9 +50,9 @@
                 <mat-label>Cotrimoxazole</mat-label>
                 <mat-select formControlName="cotrimoxazole" required minlength="1">
                     <mat-option [value]="0">select</mat-option>
-                    <!--<mat-option *ngFor="let yesnoOption of yesnoOptions" [value]="yesnoOption.itemId" (onSelectionChange)="onAntiTbDrugsChange($event)">
+                    <mat-option *ngFor="let yesnoOption of yesnonaOptions" [value]="yesnoOption.itemId">
                         {{yesnoOption.itemName}}
-                    </mat-option>-->
+                    </mat-option>
                 </mat-select>
             </mat-form-field>
         </div>
@@ -62,9 +62,9 @@
                 <mat-label>Provided with Infant ARV prophylaxis</mat-label>
                 <mat-select formControlName="infantARVProphylaxis" required minlength="1">
                     <mat-option [value]="0">select</mat-option>
-                    <!--<mat-option *ngFor="let yesnoOption of yesnoOptions" [value]="yesnoOption.itemId" (onSelectionChange)="onAntiTbDrugsChange($event)">
+                    <mat-option *ngFor="let yesnoOption of yesnonaOptions" [value]="yesnoOption.itemId" >
                         {{yesnoOption.itemName}}
-                    </mat-option>-->
+                    </mat-option>
                 </mat-select>
             </mat-form-field>
         </div>

@@ -9,8 +9,9 @@ import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms'
 export class PncPartnertestingComponent implements OnInit {
     PartnerTestingForm: FormGroup;
     yesNoNaOptions: any[] = [];
+    finalResultOptions: any[] = [];
 
-    @Input('partnerTestingOptions') partnerTestingOptions: any;
+    @Input('partnerTestingOptions') partnerTestingOptions: any[] = [];
     @Output() notify: EventEmitter<FormGroup> = new EventEmitter<FormGroup>();
 
     constructor(private _formBuilder: FormBuilder) { }
@@ -21,8 +22,9 @@ export class PncPartnertestingComponent implements OnInit {
             finalPartnerHivResult: new FormControl('', [Validators.required])
         });
 
-        const { yesNoNaOptions } = this.partnerTestingOptions[0];
+        const { yesNoNaOptions, finalResults } = this.partnerTestingOptions[0];
         this.yesNoNaOptions = yesNoNaOptions;
+        this.finalResultOptions = finalResults;
 
         this.notify.emit(this.PartnerTestingForm);
     }
