@@ -1,3 +1,8 @@
+import { CervicalCancerScreeningResultsResolver } from './_services/resolvers/cervical-cancer-screening-results.resolver';
+import { FamilyPlanningMethodResolver } from './_services/resolvers/family-planning-method.resolver';
+import { CervicalCancerScreeningMethodResolver } from './_services/resolvers/cervical-cancer-screening-method.resolver';
+import { FinalPartnerHivResultResolver } from './_services/resolvers/final-partner-hivresult.resolver';
+import { InfantDrugsStartContinueResolver } from './_services/resolvers/infant-drugs-start-continue.resolver';
 import { InfantPncDrugResolver } from './_services/resolvers/infant-pnc-drug.resolver';
 import { YesNoNaResolver } from './_services/resolvers/yes-no-na.resolver';
 import { BabyConditionResolver } from './_services/resolvers/baby-condition.resolver';
@@ -184,6 +189,12 @@ import {HivTestResultResolver} from './_services/resolvers/hiv-test-result.resol
         PmtctTestTypeResolver,
         TestKitNameResolver,
         HivTestResultResolver,
+        InfantPncDrugResolver,
+        InfantDrugsStartContinueResolver,
+        FinalPartnerHivResultResolver,
+        CervicalCancerScreeningMethodResolver,
+        FamilyPlanningMethodResolver,
+        CervicalCancerScreeningResultsResolver
     ],
     entryComponents: [
         IptClientWorkupComponent,

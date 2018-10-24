@@ -28,16 +28,26 @@ export class HeiVisitDetailsComponent implements OnInit {
         this.HeiVisitDetailsFormGroup = this._formBuilder.group({
             visitType: new FormControl('', [Validators.required]),
             visitDate: new FormControl('', [Validators.required]),
-            cohort: new FormControl('')
+            cohort: new FormControl(''),
+            visitNumber: new FormControl('', [Validators.required]),
+            dayPostPartum: new FormControl('', [Validators.required])
         });
+
+        this.HeiVisitDetailsFormGroup.get('visitNumber').disable({ onlySelf: true });
+        this.HeiVisitDetailsFormGroup.get('dayPostPartum').disable({ onlySelf: true });
 
         switch (this.formtype) {
             case 'hei':
                 break;
             case 'maternity':
                 console.log('maternity');
-                this.HeiVisitDetailsFormGroup.get('visitType') .disable({ onlySelf: true });
+                this.HeiVisitDetailsFormGroup.get('visitType').disable({ onlySelf: true });
                 this.HeiVisitDetailsFormGroup.get('cohort').disable({ onlySelf: true });
+                break;
+            case 'pnc':
+                this.HeiVisitDetailsFormGroup.get('cohort').disable({ onlySelf: true });
+                this.HeiVisitDetailsFormGroup.get('visitNumber').enable({ onlySelf: true });
+                this.HeiVisitDetailsFormGroup.get('dayPostPartum').enable({ onlySelf: true });
                 break;
             default:
         }

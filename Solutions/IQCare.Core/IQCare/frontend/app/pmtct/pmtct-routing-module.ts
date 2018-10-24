@@ -1,3 +1,7 @@
+import { CervicalCancerScreeningResultsResolver } from './_services/resolvers/cervical-cancer-screening-results.resolver';
+import { FamilyPlanningMethodResolver } from './_services/resolvers/family-planning-method.resolver';
+import { CervicalCancerScreeningMethodResolver } from './_services/resolvers/cervical-cancer-screening-method.resolver';
+import { FinalPartnerHivResultResolver } from './_services/resolvers/final-partner-hivresult.resolver';
 import { InfantPncDrugResolver } from './_services/resolvers/infant-pnc-drug.resolver';
 import { YesNoNaResolver } from './_services/resolvers/yes-no-na.resolver';
 import { BabyConditionResolver } from './_services/resolvers/baby-condition.resolver';
@@ -41,6 +45,8 @@ import { HeiHivTestTypesResolver } from './_services/resolvers/hei-hiv-testtypes
 import { HeiHivTestResultsResolver } from './_services/resolvers/hei-hiv-test-results.resolver';
 import { HivFinalResultsResolver } from './_services/resolvers/hiv-final-results.resolver';
 import { UterusResolver } from './_services/resolvers/uterus.resolver';
+import { MaternityComponent } from './maternity/maternity.component';
+import { InfantDrugsStartContinueResolver } from './_services/resolvers/infant-drugs-start-continue.resolver';
 import {IptoutcomeResolverService} from './_services/resolvers/iptoutcome-resolver.service';
 import {MedicationResolverService} from './_services/resolvers/medication-resolver.service';
 import {MedicationPlanResolverService} from './_services/resolvers/medication-plan-resolver.service';
@@ -133,6 +139,12 @@ const routes: Routes = [
             babyConditionOptions: BabyConditionResolver,
             yesNoNaOptions: YesNoNaResolver,
             infantPncDrugOptions: InfantPncDrugResolver,
+            infantPncDrugOptions: InfantPncDrugResolver,
+            infantDrugsStartContinueOptions: InfantDrugsStartContinueResolver,
+            finalPartnerHivResultOptions: FinalPartnerHivResultResolver,
+            cervicalCancerScreeningMethodOptions: CervicalCancerScreeningMethodResolver,
+            familyPlanningMethodOptions: FamilyPlanningMethodResolver,
+            cervicalCancerScreeningResultsOptions: CervicalCancerScreeningResultsResolver
         }
     },
     {
