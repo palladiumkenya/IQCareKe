@@ -1,3 +1,7 @@
+import { CervicalCancerScreeningResultsResolver } from './_services/resolvers/cervical-cancer-screening-results.resolver';
+import { FamilyPlanningMethodResolver } from './_services/resolvers/family-planning-method.resolver';
+import { CervicalCancerScreeningMethodResolver } from './_services/resolvers/cervical-cancer-screening-method.resolver';
+import { FinalPartnerHivResultResolver } from './_services/resolvers/final-partner-hivresult.resolver';
 import { InfantPncDrugResolver } from './_services/resolvers/infant-pnc-drug.resolver';
 import { YesNoNaResolver } from './_services/resolvers/yes-no-na.resolver';
 import { BabyConditionResolver } from './_services/resolvers/baby-condition.resolver';
@@ -48,6 +52,7 @@ import {IptoutcomeResolverService} from './_services/resolvers/iptoutcome-resolv
 import {MedicationResolverService} from './_services/resolvers/medication-resolver.service';
 import {MedicationPlanResolverService} from './_services/resolvers/medication-plan-resolver.service';
 import {MaternityComponent} from './maternity/maternity.component';
+import { InfantDrugsStartContinueResolver } from './_services/resolvers/infant-drugs-start-continue.resolver';
 
 
 const routes: Routes = [
@@ -129,7 +134,12 @@ const routes: Routes = [
             fistulaScreeningOptions: FistulaScreeningResolver,
             babyConditionOptions: BabyConditionResolver,
             yesNoNaOptions: YesNoNaResolver,
-            infantPncDrugOptions: InfantPncDrugResolver
+            infantPncDrugOptions: InfantPncDrugResolver,
+            infantDrugsStartContinueOptions: InfantDrugsStartContinueResolver,
+            finalPartnerHivResultOptions: FinalPartnerHivResultResolver,
+            cervicalCancerScreeningMethodOptions: CervicalCancerScreeningMethodResolver,
+            familyPlanningMethodOptions: FamilyPlanningMethodResolver,
+            cervicalCancerScreeningResultsOptions: CervicalCancerScreeningResultsResolver
         }
         pathMatch: 'full'
     },

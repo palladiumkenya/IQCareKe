@@ -12,6 +12,10 @@
                     <mat-label>Cervical Cancer Screened during this visit</mat-label>
                     <mat-select formControlName="cervicalcancerscreening" required>
                         <mat-option [value]=""></mat-option>
+                        <mat-option *ngFor="let yesnoOption of yesnoOptions" [value]="yesnoOption.itemId"
+                            (onSelectionChange)="onCervicalCancerScreeningChange($event)">
+                            {{yesnoOption.itemName}}
+                        </mat-option>
                     </mat-select>
                 </mat-form-field>
             </div>
@@ -21,6 +25,10 @@
                     <mat-label>Method</mat-label>
                     <mat-select formControlName="method" required>
                         <mat-option [value]=""></mat-option>
+                        <mat-option *ngFor="let cervicalCancerScreeningMethodOption of cervicalCancerScreeningMethodOptions"
+                            [value]="cervicalCancerScreeningMethodOption.itemId" (onSelectionChange)="onCervicalCancerScreeningChange($event)">
+                            {{cervicalCancerScreeningMethodOption.itemName}}
+                        </mat-option>
                     </mat-select>
                 </mat-form-field>
             </div>
@@ -31,6 +39,10 @@
                     <mat-label>Results</mat-label>
                     <mat-select formControlName="results" required>
                         <mat-option [value]=""></mat-option>
+                        <mat-option *ngFor="let cervicalCancerScreeningResultsOption of cervicalCancerScreeningResultsOptions"
+                            [value]="cervicalCancerScreeningResultsOption.itemId">
+                            {{cervicalCancerScreeningResultsOption.itemName}}
+                        </mat-option>
                     </mat-select>
                 </mat-form-field>
             </div>

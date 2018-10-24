@@ -1,3 +1,4 @@
+import { LookupItemView } from './../../../shared/_models/LookupItemView';
 import { Component, OnInit, EventEmitter, Output, Input } from '@angular/core';
 import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
 
@@ -8,8 +9,8 @@ import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms'
 })
 export class PncBabyexaminationComponent implements OnInit {
     BabyExaminationForm: FormGroup;
-    yesnoOptions: any[] = [];
-    babyConditionOptions: any[] = [];
+    yesnoOptions: LookupItemView[] = [];
+    babyConditionOptions: LookupItemView[] = [];
 
     @Input('babyExaminationOptions') babyExaminationOptions: any;
     @Output() notify: EventEmitter<FormGroup> = new EventEmitter<FormGroup>();

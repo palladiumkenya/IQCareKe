@@ -56,6 +56,10 @@
                     <mat-label>Start/Continue</mat-label>
                     <mat-select formControlName="infant_start" required>
                         <mat-option [value]=""></mat-option>
+                        <mat-option *ngFor="let infantDrugsStartContinueOption of infantDrugsStartContinueOptions"
+                            [value]="infantDrugsStartContinueOption.itemId">
+                            {{infantDrugsStartContinueOption.displayName}}
+                        </mat-option>
                     </mat-select>
                 </mat-form-field>
             </div>
