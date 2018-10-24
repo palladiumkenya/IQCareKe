@@ -23,8 +23,7 @@ namespace IQCare.Common.BusinessProcess.CommandHandlers.Lookup
             try
             {
                 var results = await _unitOfWork.Repository<LookupItemView>().Get(x => x.MasterName == request.GroupName)
-                    .ToListAsync();
-
+                    .OrderBy(y => y.OrdRank).ToListAsync();
 
                 _unitOfWork.Dispose();
 

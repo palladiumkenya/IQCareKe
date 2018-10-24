@@ -106,11 +106,13 @@
                                         </ng-template>
 
                                         <!-- add Cervical Cancer Screening Component to Stepper -->
-                                        <app-pnc-cervicalcancerscreening (notify)="onCervicalCancerScreeningNotify()">
+                                        <app-pnc-cervicalcancerscreening (notify)="onCervicalCancerScreeningNotify()"
+                                            [cervicalCancerScreeningOptions]="cervicalCancerScreeningOptions">
                                         </app-pnc-cervicalcancerscreening>
 
                                         <!-- add Contraceptive History and Exercise Component to Stepper -->
-                                        <app-pnc-contraceptivehistory (notify)="onContraceptiveHistoryNotify()">
+                                        <app-pnc-contraceptivehistory (notify)="onContraceptiveHistoryNotify()"
+                                            [contraceptiveHistoryExercise]="contraceptiveHistoryExercise">
                                         </app-pnc-contraceptivehistory>
 
                                         <div class="row">

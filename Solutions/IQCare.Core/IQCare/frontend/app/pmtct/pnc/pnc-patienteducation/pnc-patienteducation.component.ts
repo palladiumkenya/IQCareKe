@@ -1,5 +1,6 @@
 import { Component, OnInit, EventEmitter, Output, Input } from '@angular/core';
 import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
+import { LookupItemView } from '../../../shared/_models/LookupItemView';
 
 @Component({
     selector: 'app-pnc-patienteducation',
@@ -8,7 +9,7 @@ import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms'
 })
 export class PncPatienteducationComponent implements OnInit {
     PatientEducationForm: FormGroup;
-    yesnoOptions: any[] = [];
+    yesnoOptions: LookupItemView[] = [];
 
     @Input('patientEducationOptions') patientEducationOptions: any;
     @Output() notify: EventEmitter<FormGroup> = new EventEmitter<FormGroup>();

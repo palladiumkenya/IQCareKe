@@ -1,3 +1,4 @@
+import { LookupItemView } from './../../shared/_models/LookupItemView';
 import { ActivatedRoute } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormArray } from '@angular/forms';
@@ -10,19 +11,24 @@ import { FormGroup, FormArray } from '@angular/forms';
 export class PncComponent implements OnInit {
     isLinear: boolean = true;
 
-    yesnoOptions: any[] = [];
-    hivFinalResultsOptions: any[] = [];
-    deliveryModeOptions: any[] = [];
-    breastOptions: any[] = [];
-    uterusOptions: any[] = [];
-    lochiaOptions: any[] = [];
-    postpartumhaemorrhageOptions: any[] = [];
-    episiotomyOptions: any[] = [];
-    cSectionSiteOptions: any[] = [];
-    fistulaScreeningOptions: any[] = [];
-    babyConditionOptions: any[] = [];
-    yesNoNaOptions: any[] = [];
-    infantPncDrugOptions: any[] = [];
+    yesnoOptions: LookupItemView[] = [];
+    hivFinalResultsOptions: LookupItemView[] = [];
+    deliveryModeOptions: LookupItemView[] = [];
+    breastOptions: LookupItemView[] = [];
+    uterusOptions: LookupItemView[] = [];
+    lochiaOptions: LookupItemView[] = [];
+    postpartumhaemorrhageOptions: LookupItemView[] = [];
+    episiotomyOptions: LookupItemView[] = [];
+    cSectionSiteOptions: LookupItemView[] = [];
+    fistulaScreeningOptions: LookupItemView[] = [];
+    babyConditionOptions: LookupItemView[] = [];
+    yesNoNaOptions: LookupItemView[] = [];
+    infantPncDrugOptions: LookupItemView[] = [];
+    infantDrugsStartContinueOptions: LookupItemView[] = [];
+    finalPartnerHivResultOptions: LookupItemView[] = [];
+    cervicalCancerScreeningMethodOptions: LookupItemView[] = [];
+    familyPlanningMethodOptions: LookupItemView[] = [];
+    cervicalCancerScreeningResultsOptions: LookupItemView[] = [];
 
     pncHivOptions: any[] = [];
     matHistoryOptions: any[] = [];
@@ -31,6 +37,8 @@ export class PncComponent implements OnInit {
     patientEducationOptions: any[] = [];
     drugAdministrationOptions: any[] = [];
     partnerTestingOptions: any[] = [];
+    cervicalCancerScreeningOptions: any[] = [];
+    contraceptiveHistoryExercise: any[] = [];
 
 
     matHistory_PostNatalExam_FormGroup: FormArray;
@@ -58,7 +66,12 @@ export class PncComponent implements OnInit {
                 fistulaScreeningOptions,
                 babyConditionOptions,
                 yesNoNaOptions,
-                infantPncDrugOptions } = res;
+                infantPncDrugOptions,
+                infantDrugsStartContinueOptions,
+                finalPartnerHivResultOptions,
+                cervicalCancerScreeningMethodOptions,
+                familyPlanningMethodOptions,
+                cervicalCancerScreeningResultsOptions } = res;
             this.yesnoOptions = yesnoOptions['lookupItems'];
             this.hivFinalResultsOptions = hivFinalResultsOptions['lookupItems'];
             this.deliveryModeOptions = deliveryModeOptions['lookupItems'];
@@ -72,6 +85,11 @@ export class PncComponent implements OnInit {
             this.babyConditionOptions = babyConditionOptions['lookupItems'];
             this.yesNoNaOptions = yesNoNaOptions['lookupItems'];
             this.infantPncDrugOptions = infantPncDrugOptions['lookupItems'];
+            this.infantDrugsStartContinueOptions = infantDrugsStartContinueOptions['lookupItems'];
+            this.finalPartnerHivResultOptions = finalPartnerHivResultOptions['lookupItems'];
+            this.cervicalCancerScreeningMethodOptions = cervicalCancerScreeningMethodOptions['lookupItems'];
+            this.familyPlanningMethodOptions = familyPlanningMethodOptions['lookupItems'];
+            this.cervicalCancerScreeningResultsOptions = cervicalCancerScreeningResultsOptions['lookupItems'];
         });
 
         this.pncHivOptions.push({
@@ -105,11 +123,24 @@ export class PncComponent implements OnInit {
         this.drugAdministrationOptions.push({
             'yesNoNaOptions': this.yesNoNaOptions,
             'yesnoOptions': this.yesnoOptions,
-            'infantPncDrugOptions': this.infantPncDrugOptions
+            'infantPncDrugOptions': this.infantPncDrugOptions,
+            'infantDrugsStartContinueOptions': this.infantDrugsStartContinueOptions
         });
 
         this.partnerTestingOptions.push({
             'yesNoNaOptions': this.yesNoNaOptions,
+            'finalPartnerHivResultOptions': this.finalPartnerHivResultOptions
+        });
+
+        this.cervicalCancerScreeningOptions.push({
+            'yesnoOptions': this.yesnoOptions,
+            'cervicalCancerScreeningMethodOptions': this.cervicalCancerScreeningMethodOptions,
+            'cervicalCancerScreeningResultsOptions': this.cervicalCancerScreeningResultsOptions
+        });
+
+        this.contraceptiveHistoryExercise.push({
+            'yesnoOptions': this.yesnoOptions,
+            'familyPlanningMethodOptions': this.familyPlanningMethodOptions
         });
     }
 

@@ -1,3 +1,4 @@
+import { LookupItemView } from './../../../shared/_models/LookupItemView';
 import { HivStatusComponent } from './../../hiv-status/hiv-status.component';
 import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 import { MatTableDataSource, MatDialogConfig, MatDialog } from '@angular/material';
@@ -10,8 +11,8 @@ import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms'
 })
 export class PncHivtestingComponent implements OnInit {
     HivTestingForm: FormGroup;
-    yesnoOptions: any[] = [];
-    hivFinalResultsOptions: any[] = [];
+    yesnoOptions: LookupItemView[] = [];
+    hivFinalResultsOptions: LookupItemView[] = [];
 
     @Input('pncHivOptions') pncHivOptions: any;
     @Output() notify: EventEmitter<FormGroup> = new EventEmitter<FormGroup>();
@@ -89,6 +90,10 @@ export class PncHivtestingComponent implements OnInit {
             this.isHivTestingDone = false;
             this.HivTestingForm.controls['testType'].disable({ onlySelf: true });
             this.HivTestingForm.controls['finalTestResult'].disable({ onlySelf: true });
+
+            // set default value to null
+            this.HivTestingForm.controls['testType'].setValue('');
+            this.HivTestingForm.controls['finalTestResult'].setValue('');
         }
     }
 }
