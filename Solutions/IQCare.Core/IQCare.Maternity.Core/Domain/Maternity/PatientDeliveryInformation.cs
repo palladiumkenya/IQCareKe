@@ -10,7 +10,7 @@ namespace IQCare.Maternity.Core.Domain.Maternity
         {
 
         }
-        public PatientDeliveryInformation(int patientMasterVisitId, int profileId, int labourDuration, DateTime deliveryDate, DateTime deliveryTime, int? deliveryMode, int? placentaComplete, int? bloodLoss, int? motherCondition, bool complicationsExperienced, string complicationNotes, string deliveryConductedBy, int createdBy)
+        public PatientDeliveryInformation(int patientMasterVisitId, int profileId, int labourDuration, DateTime deliveryDate, DateTime deliveryTime, int? deliveryMode, int? placentaComplete, int? bloodLossCapacity, int? bloodLossClassification, int? motherCondition, bool complicationsExperienced, string complicationNotes, string deliveryConductedBy, int createdBy, int ? maternalDeathAudited, DateTime? maternalDeathAuditDate)
         {
             PatientMasterVisitId = patientMasterVisitId;
             ProfileId = profileId;
@@ -19,15 +19,18 @@ namespace IQCare.Maternity.Core.Domain.Maternity
             TimeOfDelivery = deliveryTime;
             ModeOfDelivery = deliveryMode;
             PlacentaComplete = placentaComplete;
-            BloodLoss = bloodLoss;
+            BloodLossCapacity = bloodLossCapacity;
             MotherCondition = motherCondition;
             DeliveryComplicationsExperienced = complicationsExperienced;
             DeliveryComplicationNotes = complicationNotes;
             DeliveryConductedBy = deliveryConductedBy;
+            BloodLossClassification = bloodLossClassification;
+            MaternalDeathAuditDate = maternalDeathAuditDate;
+            MaternalDeathAudited = maternalDeathAudited;
             CreatedBy = createdBy;
             CreateDate = DateTime.Now;
-
         }
+
         public int Id { get; private set; }
         public int PatientMasterVisitId { get; private set; }
         public int ProfileId { get; private set; }
@@ -37,11 +40,13 @@ namespace IQCare.Maternity.Core.Domain.Maternity
         public int? ModeOfDelivery { get; private set; }
         public int? PlacentaComplete { get; private set; }
         public int? BloodLossCapacity { get; private set; }
-        public int ? BloodLossClassificationId { get; set; }
+        public int? BloodLossClassification { get; set; }
         public int? MotherCondition { get; private set; }
         public bool DeliveryComplicationsExperienced { get; private set; }
         public string DeliveryComplicationNotes { get; private set; }
         public string DeliveryConductedBy { get; private set; }
+        public int ? MaternalDeathAudited { get; private set; }
+        public DateTime? MaternalDeathAuditDate { get; private set; }
         public int CreatedBy { get; private set; }
         public DateTime CreateDate { get; private set; }
         public string AuditData { get; private set; }

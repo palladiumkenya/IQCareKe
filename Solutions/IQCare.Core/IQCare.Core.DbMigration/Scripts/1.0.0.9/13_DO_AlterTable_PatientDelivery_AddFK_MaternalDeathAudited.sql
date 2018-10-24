@@ -1,0 +1,2 @@
+﻿ALTER TABLE PatientDelivery ADD CONSTRAINT FK_PatientDelivery_LookUpItem_MaternityDeathAudited
+ FOREIGN KEY(MaternityDeathAudited) REFERENCES LookUpItem(Id)

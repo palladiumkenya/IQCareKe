@@ -1,1 +1,1 @@
-﻿ALTER TABLE PatientDelivery ADD BloodLossType INT NULL
+﻿ALTER TABLE PatientDelivery ADD BloodLossClassification INT NULL

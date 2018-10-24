@@ -1,1 +1,1 @@
-﻿ALTER TABLE PatientDelivery ADD MaternalDeathAudited BIT NULL ;
+﻿ALTER TABLE PatientDelivery ADD MaternalDeathAudited INT NULL ;
