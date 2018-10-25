@@ -27,7 +27,7 @@ namespace IQCare.Lab.Core.Models
             UserId = userId;
             ClinicalOrderNotes = clincalOrderNotes;
             OrderStatus = orderStatus;
-            PatientMasterVisitId = patientId;
+            PatientMasterVisitId = patientMasterId;
         }
 
         public int Id { get; private set; }
