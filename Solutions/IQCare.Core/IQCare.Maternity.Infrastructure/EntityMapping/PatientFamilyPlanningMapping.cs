@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using IQCare.Maternity.Core.Domain.PNC;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using System;
 using System.Collections.Generic;
@@ -6,11 +7,11 @@ using System.Text;
 
 namespace IQCare.Maternity.Infrastructure.EntityMapping
 {
-    public class PatientFamilyPlanningMapping : IEntityTypeConfiguration<PatientFamilyPlanningMapping>
+    public class PatientFamilyPlanningMapping : IEntityTypeConfiguration<PatientFamilyPlanning>
     {
-        public void Configure(EntityTypeBuilder<PatientFamilyPlanningMapping> builder)
+        public void Configure(EntityTypeBuilder<PatientFamilyPlanning> builder)
         {
-            builder.ToTable(nameof(PatientFamilyPlanningMapping));
+            builder.ToTable(nameof(PatientFamilyPlanningMapping)).HasKey(x => x.Id);
         }
     }
 }

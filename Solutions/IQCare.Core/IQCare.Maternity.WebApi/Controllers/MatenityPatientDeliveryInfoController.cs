@@ -12,14 +12,14 @@ namespace IQCare.Maternity.WebApi.Controllers
 {
     [Produces("application/json")]
     [Route("api/[controller]/[action]")]
-    public class MatenityPatientDeliveryInfoController : Controller
+    public class MaternityPatientDeliveryInfoController : Controller
     {
         IMediator _mediator;
-        public MatenityPatientDeliveryInfoController(IMediator mediator)
+        public MaternityPatientDeliveryInfoController(IMediator mediator)
         {
             _mediator = mediator;
         }
-
+        
         [HttpPost]
         public async Task<object> AddDeliveredBabyBirthInfo([FromBody] AddDeliveredBabyBirthInformationCommand command)
         {

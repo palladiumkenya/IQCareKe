@@ -11,7 +11,7 @@ namespace IQCare.Maternity.Infrastructure.EntityMapping
     {
         public void Configure(EntityTypeBuilder<MaternalPatientDischargeInformation> builder)
         {
-            builder.ToTable("PatientOutcome");
+            builder.ToTable("PatientOutcome").HasKey(x=>x.Id);
         }
     }
 }

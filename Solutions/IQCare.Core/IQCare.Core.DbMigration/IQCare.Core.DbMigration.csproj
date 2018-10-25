@@ -21,6 +21,17 @@
     <None Remove="Scripts\1.0.0.9\13_DO_AlterTable_PatientDelivery_AddFK_MaternalDeathAudited.sql" />
     <None Remove="Scripts\1.0.0.9\14_DO_AlterTable_PatientDelivery_AlterCol_DeliveryComplications.sql" />
     <None Remove="Scripts\1.0.0.9\15_DO_CreateView_PatientDeliveryInformationView.sql" />
+    <None Remove="Scripts\1.0.0.9\16_DO_AlterTablePatientOutCome_Add_Column_Id.sql" />
+    <None Remove="Scripts\1.0.0.9\17_DO_AlterTable_PatientOutcome_AddPrimaryKey.sql" />
+    <None Remove="Scripts\1.0.0.9\18_DO_AlterTable_DeliveredBabyApgarScore_DropFK.sql" />
+    <None Remove="Scripts\1.0.0.9\19_DO_AlterTableBabyBirthInformation_Drop_PK_BirthId.sql" />
+    <None Remove="Scripts\1.0.0.9\20_DO_AlterTable_DeliveredBabyBirthInfo_RenameColumn_BirthId.sql" />
+    <None Remove="Scripts\1.0.0.9\21_DO_AlterTable_DeliveredBabyBirthInfo_AddPK.sql" />
+    <None Remove="Scripts\1.0.0.9\22_DO_AlterTable_ApgarScore_AddFK_DeliveredBabyInfoId.sql" />
+    <None Remove="Scripts\1.0.0.9\23_DO_AlterView_DeliveredBabyInfoView.sql" />
+    <None Remove="Scripts\1.0.0.9\24_DO_AlterTable_DeliveredBabyBirthInfomation_New_IdentityPK.sql" />
+    <None Remove="Scripts\1.0.0.9\25_DO_AlterTable_DeliveredBabyBirthInfo_Change_Cols_to_Bool.sql" />
+    <None Remove="Scripts\1.0.0.9\26_DO_CreateView_Delivered_BabyApgarScoreView.sql" />
   </ItemGroup>
 
   <ItemGroup>
@@ -39,6 +50,17 @@
     <EmbeddedResource Include="Scripts\1.0.0.9\13_DO_AlterTable_PatientDelivery_AddFK_MaternalDeathAudited.sql" />
     <EmbeddedResource Include="Scripts\1.0.0.9\14_DO_AlterTable_PatientDelivery_AlterCol_DeliveryComplications.sql" />
     <EmbeddedResource Include="Scripts\1.0.0.9\15_DO_CreateView_PatientDeliveryInformationView.sql" />
+    <EmbeddedResource Include="Scripts\1.0.0.9\16_DO_AlterTablePatientOutCome_Add_Column_Id.sql" />
+    <EmbeddedResource Include="Scripts\1.0.0.9\17_DO_AlterTable_PatientOutcome_AddPrimaryKey.sql" />
+    <EmbeddedResource Include="Scripts\1.0.0.9\19_DO_AlterTableBabyBirthInformation_Drop_PK_BirthId.sql" />
+    <EmbeddedResource Include="Scripts\1.0.0.9\18_DO_AlterTable_DeliveredBabyApgarScore_DropFK.sql" />
+    <EmbeddedResource Include="Scripts\1.0.0.9\20_DO_AlterTable_DeliveredBabyBirthInfo_RenameColumn_BirthId.sql" />
+    <EmbeddedResource Include="Scripts\1.0.0.9\21_DO_AlterTable_DeliveredBabyBirthInfo_AddPK.sql" />
+    <EmbeddedResource Include="Scripts\1.0.0.9\22_DO_AlterTable_ApgarScore_AddFK_DeliveredBabyInfoId.sql" />
+    <EmbeddedResource Include="Scripts\1.0.0.9\23_DO_AlterView_DeliveredBabyInfoView.sql" />
+    <EmbeddedResource Include="Scripts\1.0.0.9\24_DO_AlterTable_DeliveredBabyBirthInfomation_New_IdentityPK.sql" />
+    <EmbeddedResource Include="Scripts\1.0.0.9\25_DO_AlterTable_DeliveredBabyBirthInfo_Change_Cols_to_Bool.sql" />
+    <EmbeddedResource Include="Scripts\1.0.0.9\26_DO_CreateView_Delivered_BabyApgarScoreView.sql" />
   </ItemGroup>
 
   <ItemGroup>

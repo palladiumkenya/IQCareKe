@@ -16,7 +16,7 @@ namespace IQCare.Maternity.Core.Domain.Maternity
         public int ProfileId { get; set; }
         public int DurationOfLabour { get; set; }
         public DateTime DateOfDelivery { get; set; }
-        public DateTime TimeOfDelivery { get; set; }
+        public TimeSpan TimeOfDelivery { get; set; }
         public string ModeOfDelivery { get; set; }
         public string PlacentaComplete { get; set; }
         public int? BloodLossCapacity { get; set; }
@@ -25,7 +25,7 @@ namespace IQCare.Maternity.Core.Domain.Maternity
         public string DeliveryComplicationsExperienced { get; set; }
         public string DeliveryComplicationNotes { get; set; }
         public string DeliveryConductedBy { get; set; }
-        public int? MaternalDeathAudited { get; set; }
+        public string MaternalDeathAudited { get; set; }
         public DateTime? MaternalDeathAuditDate { get; set; }
         public int CreatedBy { get; set; }
         public DateTime CreateDate { get; set; }

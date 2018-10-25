@@ -7,11 +7,11 @@ using System.Text;
 
 namespace IQCare.Maternity.Infrastructure.EntityMapping
 {
-    public class ApgarScoreMapping : IEntityTypeConfiguration<DeliveredBabyApgarScore>
+    public class DeliveredBabyApgarScoreViewMapping : IEntityTypeConfiguration<DeliveredBabyApgarScoreView>
     {
-        public void Configure(EntityTypeBuilder<DeliveredBabyApgarScore> builder)
+        public void Configure(EntityTypeBuilder<DeliveredBabyApgarScoreView> builder)
         {
-            builder.ToTable("DeliveredBabyApgarScore").HasKey(x=>x.Id);
+            builder.ToTable(nameof(DeliveredBabyApgarScoreView)).HasKey(x=>x.Id);
         }
     }
 }

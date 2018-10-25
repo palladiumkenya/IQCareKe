@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
 
 namespace IQCare.Maternity.Core.Domain.Maternity
@@ -31,6 +32,7 @@ namespace IQCare.Maternity.Core.Domain.Maternity
             CreateDate = DateTime.Now;
         }
 
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; private set; }
         public int PatientDeliveryInformationId { get; private set; }
         public int PatientMasterVisitId { get; private set; }

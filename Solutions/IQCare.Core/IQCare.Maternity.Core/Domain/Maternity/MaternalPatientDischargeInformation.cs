@@ -16,6 +16,7 @@ namespace IQCare.Maternity.Core.Domain.Maternity
             OutcomeStatus = outcomeStatus;
             OutcomeDescription = outcomeDescription;
         }
+        public int Id { get; set; }
         public int OutcomeId { get; private set; }
         public int? PatientEncounterId { get; private set; }
         public int? PatientMasterVisitId { get; private set; }

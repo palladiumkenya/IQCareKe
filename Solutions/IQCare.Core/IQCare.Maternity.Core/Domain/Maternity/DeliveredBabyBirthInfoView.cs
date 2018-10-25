@@ -24,8 +24,7 @@ namespace IQCare.Maternity.Core.Domain.Maternity
         public string BirthNotificationNumber { get; set; }
         public string Comment { get; set; }
         public int CreatedBy { get; set; }
-        public DateTime CreateDate { get; set; }
-        public string AuditData { get; set; }
+        public DateTime DateCreated { get; set; }
         public bool DeleteFlag { get; set; }
     }
 }

@@ -11,18 +11,14 @@ namespace IQCare.Maternity.Infrastructure.EntityMapping
     {
         public void Configure(EntityTypeBuilder<DeliveredBabyBirthInformation> builder)
         {
-            builder.ToTable(nameof(DeliveredBabyBirthInformation))
-                .Property(x => x.BreastFedWithinHour).HasColumnName("BreastFedWithinHr");
+            string tableName = nameof(DeliveredBabyBirthInformation);
 
-            builder.ToTable(nameof(DeliveredBabyBirthInformation))
-           .Property(x => x.PatientDeliveryInformationId).HasColumnName("DeliveryId");
+            builder.ToTable(tableName).Property(x => x.BreastFedWithinHour).HasColumnName("BreastFedWithinHr");
 
-            builder.ToTable(nameof(DeliveredBabyBirthInformation))
-           .Property(x => x.Comment).HasColumnName("BirthComments");
+            builder.ToTable(tableName).Property(x => x.PatientDeliveryInformationId).HasColumnName("DeliveryId");
 
-            builder.ToTable(nameof(DeliveredBabyBirthInformation))
-                .Property(x => x.Id).HasColumnName("BirthId");
-
+            builder.ToTable(tableName).Property(x => x.Comment).HasColumnName("BirthComments");
+            builder.ToTable(tableName).HasKey(x => x.Id);
         }
     }
 

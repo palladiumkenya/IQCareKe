@@ -1,11 +1,12 @@
-﻿using MediatR;
+﻿using IQCare.Library;
+using MediatR;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace IQCare.Maternity.BusinessProcess.Queries.Maternity
 {
-    public class GetDeliveredBabyBirthInfoQuery : IRequest<List<DeliveredBabyBirthInfoViewModel>>
+    public class GetDeliveredBabyBirthInfoQuery : IRequest<Result<List<DeliveredBabyBirthInfoViewModel>>>
     {
         public int PatientDeliveryInformationId { get; set; }
 
@@ -26,7 +27,9 @@ namespace IQCare.Maternity.BusinessProcess.Queries.Maternity
         public string BirthNotificationNumber { get;  set; }
         public string Comment { get;  set; }
         public int CreatedBy { get;  set; }
-        public DateTime CreateDate { get;  set; }
+        public DateTime DateCreated { get;  set; }
         public bool DeleteFlag { get;  set; }
+        public string ApgarScores { get; set; }
+
     }
 }

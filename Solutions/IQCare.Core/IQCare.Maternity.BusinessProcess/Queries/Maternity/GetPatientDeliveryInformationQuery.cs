@@ -1,11 +1,12 @@
-﻿using MediatR;
+﻿using IQCare.Library;
+using MediatR;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace IQCare.Maternity.BusinessProcess.Queries.Maternity
 {
-    public class GetPatientDeliveryInformationQuery : IRequest<List<PatientDeliveryInfomationViewModel>>
+    public class GetPatientDeliveryInformationQuery : IRequest<Result<List<PatientDeliveryInfomationViewModel>>>
     {
         public int ProfileId { get; set; }
 
@@ -18,7 +19,7 @@ namespace IQCare.Maternity.BusinessProcess.Queries.Maternity
         public int ProfileId { get;  set; }
         public int DurationOfLabour { get;  set; }
         public DateTime DateOfDelivery { get;  set; }
-        public DateTime TimeOfDelivery { get;  set; }
+        public TimeSpan TimeOfDelivery { get;  set; }
         public string ModeOfDelivery { get;  set; }
         public string PlacentaComplete { get;  set; }
         public int? BloodLossCapacity { get;  set; }
@@ -27,7 +28,8 @@ namespace IQCare.Maternity.BusinessProcess.Queries.Maternity
         public string DeliveryComplicationsExperienced { get;  set; }
         public string DeliveryComplicationNotes { get;  set; }
         public string DeliveryConductedBy { get;  set; }
-        public int? MaternalDeathAudited { get;  set; }
+        public string MaternalDeathAudited { get;  set; }
         public DateTime? MaternalDeathAuditDate { get;  set; }
+        public string ApgarScores { get; set; }
     }
 }
