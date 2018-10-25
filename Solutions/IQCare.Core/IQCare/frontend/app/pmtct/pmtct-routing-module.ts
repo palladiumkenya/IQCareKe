@@ -43,13 +43,20 @@ import { ChestXrayResolverService } from './_services/chest-xray-resolver.servic
 import { TbScreeningOutcomeResolverService } from './_services/tb-screening-outcome-resolver.service';
 import { HeiHivTestTypesResolver } from './_services/resolvers/hei-hiv-testtypes.resolver';
 import { HeiHivTestResultsResolver } from './_services/resolvers/hei-hiv-test-results.resolver';
-import { IptoutcomeResolverService } from './_services/resolvers/iptoutcome-resolver.service';
-import { MedicationResolverService } from './_services/resolvers/medication-resolver.service';
-import { MedicationPlanResolverService } from './_services/resolvers/medication-plan-resolver.service';
 import { HivFinalResultsResolver } from './_services/resolvers/hiv-final-results.resolver';
 import { UterusResolver } from './_services/resolvers/uterus.resolver';
 import { MaternityComponent } from './maternity/maternity.component';
 import { InfantDrugsStartContinueResolver } from './_services/resolvers/infant-drugs-start-continue.resolver';
+import {IptoutcomeResolverService} from './_services/resolvers/iptoutcome-resolver.service';
+import {MedicationResolverService} from './_services/resolvers/medication-resolver.service';
+import {MedicationPlanResolverService} from './_services/resolvers/medication-plan-resolver.service';
+import {MaternityComponent} from './maternity/maternity.component';
+import {GenderResolver} from './_services/resolvers/gender.resolver';
+import {ReferralResolver} from './_services/resolvers/referral.resolver';
+import {PmtctTestTypeResolver} from './_services/resolvers/pmtctTestType.resolver';
+import {TestKitNameResolver} from './_services/resolvers/test-kit-name.resolver';
+import {HivTestResultResolver} from './_services/resolvers/hiv-test-result.resolver';
+import {BloodLossResolver} from './_services/resolvers/blood-loss.resolver';
 
 
 const routes: Routes = [
@@ -132,6 +139,7 @@ const routes: Routes = [
             babyConditionOptions: BabyConditionResolver,
             yesNoNaOptions: YesNoNaResolver,
             infantPncDrugOptions: InfantPncDrugResolver,
+            infantPncDrugOptions: InfantPncDrugResolver,
             infantDrugsStartContinueOptions: InfantDrugsStartContinueResolver,
             finalPartnerHivResultOptions: FinalPartnerHivResultResolver,
             cervicalCancerScreeningMethodOptions: CervicalCancerScreeningMethodResolver,
@@ -142,6 +150,20 @@ const routes: Routes = [
     {
         path: 'maternity/:patientId/:personId/:serviceAreaId',
         component: MaternityComponent,
+        resolve: {
+            deliveryModeOptions: DeliveryModeResolver,
+            bloodLossOptions: BloodLossResolver,
+            motherStateOptions: MotherStateResolver,
+            yesNoOptions: YesNoResolver,
+            genderOptions: GenderResolver,
+            deliveryOutcomeOptions: DeliveryModeResolver,
+            yesNoNaOptions: YesNoNaResolver,
+            referralOptions: ReferralResolver,
+            hivFinalResultOptions: HivFinalResultsResolver,
+            hivTestOptions: PmtctTestTypeResolver,
+            kitNameOptions: TestKitNameResolver,
+            hivTestResultOptions: HivTestResultResolver
+        },
         pathMatch: 'full'
     }
 ];

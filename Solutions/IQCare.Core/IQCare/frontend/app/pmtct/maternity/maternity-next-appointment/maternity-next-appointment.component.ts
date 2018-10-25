@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {NotificationService} from '../../../shared/_services/notification.service';
 import {SnotifyService} from 'ng-snotify';
@@ -11,6 +11,8 @@ import {SnotifyService} from 'ng-snotify';
 export class MaternityNextAppointmentComponent implements OnInit {
 
     nextAppointmentFormGroup: FormGroup;
+    @Input() dischargeOptions: any[] = [];
+    @Output() notify: EventEmitter<FormGroup> = new EventEmitter<FormGroup>();
 
     constructor(private formBuilder: FormBuilder,
                 private notificationService: NotificationService,

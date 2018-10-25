@@ -34,8 +34,6 @@ export class HeiComponent implements OnInit {
     deliveryOptions: any[] = [];
     maternalhistoryOptions: any[] = [];
     hivtestingOptions: any[] = [];
-    heiMedicatonOptions: any[] = [];
-
     motherreceivedrugsOptions: any[] = [];
     heimotherregimenOptions: any[] = [];
     yesnoOptions: any[] = [];
@@ -57,14 +55,11 @@ export class HeiComponent implements OnInit {
     heiOutcomeOptions: LookupItemView[] = [];
     heiHivTestingOptions: LookupItemView[] = [];
     heiHivTestingResultsOptions: LookupItemView[] = [];
-
     sputumSmearOptions: LookupItemView[] = [];
     geneXpertOptions: LookupItemView[] = [];
     chestXrayOptions: LookupItemView[] = [];
     tbScreeningOptions: LookupItemView[] = [];
     iptOutcomeOptions: LookupItemView[] = [];
-    medicationOptions: LookupItemView[] = [];
-    medicationPlanOptions: LookupItemView[] = [];
 
     isLinear: boolean = false;
     deliveryMatFormGroup: FormArray;
@@ -72,7 +67,6 @@ export class HeiComponent implements OnInit {
     tbAssessmentFormGroup: FormArray;
     milestonesFormGroup: FormArray;
     immunizationHistoryFormGroup: FormArray;
-    maternalViralLoadFormGroup: FormArray;
     infantFeedingFormGroup: FormArray;
 
     heiOutcomeFormGroup: FormArray;

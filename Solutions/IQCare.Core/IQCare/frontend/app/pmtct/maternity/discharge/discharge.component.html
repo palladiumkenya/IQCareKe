@@ -22,9 +22,9 @@
                 <mat-label>Status of the baby discharge</mat-label>
                 <mat-select formControlName="babyStatus" required minlength="1">
                     <mat-option [value]="0">select</mat-option>
-                    <!--<mat-option *ngFor="let yesnoOption of yesnoOptions" [value]="yesnoOption.itemId" (onSelectionChange)="onAntiTbDrugsChange($event)">
-                        {{yesnoOption.itemName}}
-                    </mat-option>-->
+                    <mat-option *ngFor="let deliveryStateOption of deliveryStateOptions" [value]="deliveryStateOption.itemId">
+                        {{deliveryStateOption.itemName}}
+                    </mat-option>
                 </mat-select>
             </mat-form-field>
         </div>

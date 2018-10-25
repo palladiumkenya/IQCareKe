@@ -11,10 +11,10 @@ import { SnotifyService } from 'ng-snotify';
 })
 
 export class HeiOutcomeComponent implements OnInit {
-  @Input() heiOutcomeOptions: any[] = [];
+
 
   HeiOutcomeFormGroup: FormGroup;
-
+    @Input() heiOutcomeOptions: any[] = [];
   @Output() notify: EventEmitter<FormGroup> = new EventEmitter<FormGroup>();
 
   constructor(private _formBuilder: FormBuilder,

@@ -11,7 +11,7 @@ export class PncPatienteducationComponent implements OnInit {
     PatientEducationForm: FormGroup;
     yesnoOptions: LookupItemView[] = [];
 
-    @Input('patientEducationOptions') patientEducationOptions: any;
+    @Input('patientEducationOptions') patientEducationOptions: any[] = [];
     @Output() notify: EventEmitter<FormGroup> = new EventEmitter<FormGroup>();
 
     constructor(private _formBuilder: FormBuilder) { }

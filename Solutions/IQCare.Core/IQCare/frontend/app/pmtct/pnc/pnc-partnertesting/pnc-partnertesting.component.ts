@@ -12,7 +12,7 @@ export class PncPartnertestingComponent implements OnInit {
     yesNoNaOptions: LookupItemView[] = [];
     finalPartnerHivResultOptions: LookupItemView[] = [];
 
-    @Input('partnerTestingOptions') partnerTestingOptions: any;
+    @Input('partnerTestingOptions') partnerTestingOptions: any[] = [];
     @Output() notify: EventEmitter<FormGroup> = new EventEmitter<FormGroup>();
 
     constructor(private _formBuilder: FormBuilder) { }
