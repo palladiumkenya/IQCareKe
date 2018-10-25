@@ -1,4 +1,5 @@
-﻿using IQCare.Library;
+﻿using AutoMapper;
+using IQCare.Library;
 using IQCare.Maternity.BusinessProcess.Commands.Maternity;
 using IQCare.Maternity.Core.Domain.Maternity;
 using IQCare.Maternity.Infrastructure.UnitOfWork;
@@ -17,18 +18,19 @@ namespace IQCare.Maternity.BusinessProcess.CommandHandlers
         IRequestHandler<AddDeliveredBabyBirthInformationCommand, Result<DeliveredBabyBirthInfoResult>>
     {
         IMaternityUnitOfWork _maternityUnitOfWork;
+        IMapper _mapper;
         ILogger logger = Log.ForContext<AddDeliveredBabyBirthInfomationCommandHandler>();
-        public AddDeliveredBabyBirthInfomationCommandHandler(IMaternityUnitOfWork maternityUnitOfWork)
+        public AddDeliveredBabyBirthInfomationCommandHandler(IMaternityUnitOfWork maternityUnitOfWork, IMapper mapper)
         {
             _maternityUnitOfWork = maternityUnitOfWork;
+            _mapper = mapper;
         }
 
         public async Task<Result<DeliveredBabyBirthInfoResult>> Handle(AddDeliveredBabyBirthInformationCommand request, CancellationToken cancellationToken)
         {
             try
             {
-                var deliveredBayBirthInformation = new DeliveredBabyBirthInformation(request.PatientDeliveryInformationId, request.PatientMasterVisitId, request.BirthWeight, request.Sex, request.DeliveryOutcome, request.ResuscitationDone, request.TeoGiven, request.BreastFedWithinHour, request.BirthNotificationNumber, request.Comment, request.CreatedBy);
-
+                var deliveredBayBirthInformation = _mapper.Map<DeliveredBabyBirthInformation>(request);
                 await _maternityUnitOfWork.Repository<DeliveredBabyBirthInformation>().AddAsync(deliveredBayBirthInformation);
 
                 if (request.ApgarScores != null)

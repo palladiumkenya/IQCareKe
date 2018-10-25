@@ -19,6 +19,8 @@
     <None Remove="Scripts\1.0.0.9\11_DO_AlterTable_PatientDelivery_AddColumn_BloodLossType.sql" />
     <None Remove="Scripts\1.0.0.9\12_DO_AlterTable_PatientDelivery_AddFK_BloodLossType.sql" />
     <None Remove="Scripts\1.0.0.9\13_DO_AlterTable_PatientDelivery_AddFK_MaternalDeathAudited.sql" />
+    <None Remove="Scripts\1.0.0.9\14_DO_AlterTable_PatientDelivery_AlterCol_DeliveryComplications.sql" />
+    <None Remove="Scripts\1.0.0.9\15_DO_CreateView_PatientDeliveryInformationView.sql" />
   </ItemGroup>
 
   <ItemGroup>
@@ -35,6 +37,8 @@
     <EmbeddedResource Include="Scripts\1.0.0.9\11_DO_AlterTable_PatientDelivery_AddColumn_BloodLossType.sql" />
     <EmbeddedResource Include="Scripts\1.0.0.9\12_DO_AlterTable_PatientDelivery_AddFK_BloodLossType.sql" />
     <EmbeddedResource Include="Scripts\1.0.0.9\13_DO_AlterTable_PatientDelivery_AddFK_MaternalDeathAudited.sql" />
+    <EmbeddedResource Include="Scripts\1.0.0.9\14_DO_AlterTable_PatientDelivery_AlterCol_DeliveryComplications.sql" />
+    <EmbeddedResource Include="Scripts\1.0.0.9\15_DO_CreateView_PatientDeliveryInformationView.sql" />
   </ItemGroup>
 
   <ItemGroup>
