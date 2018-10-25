@@ -1,4 +1,0 @@
-IF (EXISTS (SELECT *  FROM INFORMATION_SCHEMA.TABLES  WHERE TABLE_NAME = 'PMTCTBaby'))
-BEGIN
-  EXEC sp_rename 'PMTCTBaby', 'DeliveredBabyBirthInformation';
-END
