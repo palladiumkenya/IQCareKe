@@ -40,7 +40,10 @@ namespace IQCare.Maternity.WebApi.Controllers
         {
             var deliveredBabyInfo = await _mediator.Send(new GetDeliveredBabyBirthInfoQuery { PatientDeliveryInformationId = Id }, HttpContext.RequestAborted);
 
-            return Ok(deliveredBabyInfo);
+            if (deliveredBabyInfo.IsValid)
+                return Ok(deliveredBabyInfo);
+
+            return BadRequest(deliveredBabyInfo);
         }
 
         [HttpPost]
@@ -60,7 +63,11 @@ namespace IQCare.Maternity.WebApi.Controllers
         public async Task<object> GetPatientDeliveryInfoByProfileId(int Id)
         {
             var patientDeliveryInfo = await _mediator.Send(new GetPatientDeliveryInformationQuery { ProfileId = Id }, HttpContext.RequestAborted);
-            return Ok(patientDeliveryInfo);
+
+            if (patientDeliveryInfo.IsValid)
+                return Ok(patientDeliveryInfo);
+
+            return BadRequest(patientDeliveryInfo);
         }
     }
 }
