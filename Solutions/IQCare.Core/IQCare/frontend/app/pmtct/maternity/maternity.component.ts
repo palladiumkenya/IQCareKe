@@ -148,7 +148,7 @@ export class MaternityComponent implements OnInit {
 
         this.partnerTestingOptions.push({
             'yesNoNaOptions': this.yesNoNaOptions,
-            'finalResults': this.hivFinalResultOptions
+            'finalPartnerHivResultOptions': this.hivFinalResultOptions
         });
 
         this.maternityTestOptions.push({

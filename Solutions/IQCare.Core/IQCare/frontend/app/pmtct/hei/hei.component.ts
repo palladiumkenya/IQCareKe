@@ -246,6 +246,10 @@ export class HeiComponent implements OnInit {
         this.hivTestingFormGroup.push(hivTests);
     }
 
+    onNextAppointmentNotify(formGroup: FormGroup) {
+        this.nextAppointmentFormGroup = formGroup;
+    }
+
     onCompleteEncounter() {
         console.log(this.deliveryMatFormGroup.value);
         console.log(this.visitDetailsFormGroup.value);

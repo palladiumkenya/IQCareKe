@@ -30,11 +30,9 @@ export class MaternityTestsComponent implements OnInit {
             HIVStatusLastANC: new FormControl('', [Validators.required])
         });
         const {
-            yesNoOptions
+            yesNos
         } = this.maternityTestOptions[0];
-        this.yesnoOptions = yesNoOptions;
-        console.log('maternity');
-        console.log(this.yesnoOptions);
+        this.yesnoOptions = yesNos;
     }
     public onRowClicked(row) {
         console.log('row clicked:', row);
