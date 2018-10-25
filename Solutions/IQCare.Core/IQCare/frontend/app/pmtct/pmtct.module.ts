@@ -1,3 +1,18 @@
+import { CervicalCancerScreeningResultsResolver } from './_services/resolvers/cervical-cancer-screening-results.resolver';
+import { FamilyPlanningMethodResolver } from './_services/resolvers/family-planning-method.resolver';
+import { CervicalCancerScreeningMethodResolver } from './_services/resolvers/cervical-cancer-screening-method.resolver';
+import { FinalPartnerHivResultResolver } from './_services/resolvers/final-partner-hivresult.resolver';
+import { InfantDrugsStartContinueResolver } from './_services/resolvers/infant-drugs-start-continue.resolver';
+import { InfantPncDrugResolver } from './_services/resolvers/infant-pnc-drug.resolver';
+import { YesNoNaResolver } from './_services/resolvers/yes-no-na.resolver';
+import { BabyConditionResolver } from './_services/resolvers/baby-condition.resolver';
+import { FistulaScreeningResolver } from './_services/resolvers/fistula-screening.resolver';
+import { CSectionSiteResolver } from './_services/resolvers/c-section-site.resolver';
+import { EpisiotomyResolver } from './_services/resolvers/episiotomy.resolver';
+import { PostPartumHaemorrhage } from './_services/resolvers/post-partum-haemorrhage.resolver';
+import { LochiaResolver } from './_services/resolvers/lochia.resolver';
+import { UterusResolver } from './_services/resolvers/uterus.resolver';
+import { BreastResolver } from './_services/resolvers/breast.resolver';
 import { HeiService } from './_services/hei.service';
 import { PrimaryCareGiverResolver } from './_services/primarycaregiver.resolver';
 import { MotherStateResolver } from './_services/motherstate.resolver';
@@ -35,7 +50,6 @@ import { HeiComponent } from './hei/hei.component';
 import { HeiVisitDetailsComponent } from './hei/hei-visit-details/hei-visit-details.component';
 import { ImmunizationHistoryComponent } from './hei/immunization-history/immunization-history.component';
 import { MilestonesComponent } from './hei/milestones/milestones.component';
-import { DeliveryComponent } from './hei/delivery/delivery.component';
 import { MaternalhistoryComponent } from './hei/maternalhistory/maternalhistory.component';
 import { MotherReceiveDrugsResolver } from './_services/motherreceivedrugs.resolver';
 import { HeiMotherRegimenResolver } from './_services/heimotherregimen.resolver';
@@ -44,10 +58,8 @@ import { MotherDrugsAtInfantEnrollmentResolver } from './_services/motherdrugsat
 import { HeiHivtestingComponent } from './hei/hei-hivtesting/hei-hivtesting.component';
 import { InfantFeedingComponent } from './hei/infant-feeding/infant-feeding.component';
 import { TbAssessmentComponent } from './hei/tb-assessment/tb-assessment.component';
-import { InlineSearchComponent } from '../records/inline-search/inline-search.component';
 import { RecordsModule } from '../records/records.module';
 import { HeiOutcomeComponent } from './hei/hei-outcome/hei-outcome.component';
-import { HeiOutcomeOptionsResolver } from './_services/hei-outcome-options.resolver.service';
 import { IptClientWorkupComponent } from './hei/ipt-client-workup/ipt-client-workup.component';
 import { IptFollowUpComponent } from './hei/ipt-follow-up/ipt-follow-up.component';
 import { IptOutcomeComponent } from './hei/ipt-outcome/ipt-outcome.component';
@@ -64,6 +76,18 @@ import { PncPatienteducationComponent } from './pnc/pnc-patienteducation/pnc-pat
 import { PncCervicalcancerscreeningComponent } from './pnc/pnc-cervicalcancerscreening/pnc-cervicalcancerscreening.component';
 import { PncContraceptivehistoryComponent } from './pnc/pnc-contraceptivehistory/pnc-contraceptivehistory.component';
 import { PncHivtestingComponent } from './pnc/pnc-hivtesting/pnc-hivtesting.component';
+import {MaternityComponent} from './maternity/maternity.component';
+import { MotherProfileComponent } from './maternity/mother-profile/mother-profile.component';
+import { DiagnosisComponent } from './maternity/diagnosis/diagnosis.component';
+import { DeliveryMaternityComponent } from './maternity/delivery-maternity/delivery-maternity.component';
+import {DeliveryComponent} from './hei/delivery/delivery.component';
+import { BabyComponent } from './maternity/baby/baby.component';
+import { MaternityTestsComponent } from './maternity/maternity-tests/maternity-tests.component';
+import { MaternalDrugAdministrationComponent } from './maternity/maternal-drug-administration/maternal-drug-administration.component';
+import { HivFinalResultsResolver } from './_services/resolvers/hiv-final-results.resolver';
+import { DischargeComponent } from './maternity/discharge/discharge.component';
+import { MaternityReferralComponent } from './maternity/maternity-referral/maternity-referral.component';
+import { MaternityNextAppointmentComponent } from './maternity/maternity-next-appointment/maternity-next-appointment.component';
 
 @NgModule({
     imports: [
@@ -95,7 +119,6 @@ import { PncHivtestingComponent } from './pnc/pnc-hivtesting/pnc-hivtesting.comp
         HeiVisitDetailsComponent,
         ImmunizationHistoryComponent,
         MilestonesComponent,
-        DeliveryComponent,
         MaternalhistoryComponent,
         HeiHivtestingComponent,
         InfantFeedingComponent,
@@ -114,7 +137,19 @@ import { PncHivtestingComponent } from './pnc/pnc-hivtesting/pnc-hivtesting.comp
         PncPatienteducationComponent,
         PncCervicalcancerscreeningComponent,
         PncContraceptivehistoryComponent,
-        PncHivtestingComponent
+        PncHivtestingComponent,
+        MaternityComponent,
+        MotherProfileComponent,
+        DiagnosisComponent,
+        DeliveryMaternityComponent,
+        DeliveryComponent,
+        BabyComponent,
+        MaternityTestsComponent,
+        MaternalDrugAdministrationComponent,
+        DischargeComponent,
+        MaternityReferralComponent,
+        MaternityNextAppointmentComponent
+
     ],
     providers: [
         PlaceOfDeliveryResolver,
@@ -128,7 +163,23 @@ import { PncHivtestingComponent } from './pnc/pnc-hivtesting/pnc-hivtesting.comp
         PrimaryCareGiverResolver,
         HeiService,
         HeiHivTestTypesResolver,
-        HeiHivTestResultsResolver
+        HeiHivTestResultsResolver,
+        HivFinalResultsResolver,
+        BreastResolver,
+        UterusResolver,
+        LochiaResolver,
+        PostPartumHaemorrhage,
+        EpisiotomyResolver,
+        CSectionSiteResolver,
+        FistulaScreeningResolver,
+        BabyConditionResolver,
+        YesNoNaResolver,
+        InfantPncDrugResolver,
+        InfantDrugsStartContinueResolver,
+        FinalPartnerHivResultResolver,
+        CervicalCancerScreeningMethodResolver,
+        FamilyPlanningMethodResolver,
+        CervicalCancerScreeningResultsResolver
     ],
     entryComponents: [
         IptClientWorkupComponent,

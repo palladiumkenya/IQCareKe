@@ -1,0 +1,81 @@
+<form class="form-group" novalidate [formGroup]="maternityTestsFormGroup">
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="form-title">
+                <span class="mat-accent">Maternity Tests </span>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-12 col-xs-12">
+            <div class="example-container mat-elevation-z0">
+
+                <mat-table #table [dataSource]="dataSource">
+
+                    <!-- Position Column -->
+                    <ng-container matColumnDef="testName">
+                        <mat-header-cell *matHeaderCellDef><strong>Test Name</strong>  </mat-header-cell>
+                        <mat-cell *matCellDef="let maternityTestData"> {{maternityTestData.testName}} </mat-cell>
+                    </ng-container>
+
+                    <!-- Name Column -->
+                    <ng-container matColumnDef="date">
+                        <mat-header-cell *matHeaderCellDef> Test Date</mat-header-cell>
+                        <mat-cell *matCellDef="let maternityTestData"> {{maternityTestData.date }} </mat-cell>
+                    </ng-container>
+
+                    <!-- Name Column -->
+                    <ng-container matColumnDef="results">
+                        <mat-header-cell *matHeaderCellDef> Test Date</mat-header-cell>
+                        <mat-cell *matCellDef="let maternityTestData"> {{maternityTestData.results }} </mat-cell>
+                    </ng-container>
+
+                    <!-- actions -->
+                    <ng-container matColumnDef="action">
+                        <mat-header-cell *matHeaderCellDef><strong class="fa fa-cog"> Action</strong></mat-header-cell>
+                        <mat-cell *matCellDef="let row">
+                            <button mat-raised-button class="mat-accent"><span class="fa fa-trash-o"> Delete</span> </button>
+                        </mat-cell>
+                    </ng-container>
+
+
+                    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                    <mat-row *matRowDef="let row; columns: displayedColumns"
+                             (click)="onRowClicked(row)" >
+                    </mat-row>
+                </mat-table>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-3 col-xs-12">
+            <mat-form-field class="col-md-12">
+                <mat-label >Treated for Syphilis</mat-label>
+                <mat-select formControlName="treatedSyphilis" required minlength="1">
+                    <mat-option [value]="0">select</mat-option>
+                    <!--<mat-option *ngFor="let yesnoOption of yesnoOptions" [value]="yesnoOption.itemId" (onSelectionChange)="onAntiTbDrugsChange($event)">
+                        {{yesnoOption.itemName}}
+                    </mat-option>-->
+                </mat-select>
+            </mat-form-field>
+        </div>
+
+        <div class="col-lg-3 col-xs-12">
+            <mat-form-field class="col-md-12">
+                <mat-label >Hiv Status at last ANC</mat-label>
+                <mat-select formControlName="HIVStatusLastANC" required minlength="1">
+                    <mat-option [value]="0">select</mat-option>
+                    <!--<mat-option *ngFor="let yesnoOption of yesnoOptions" [value]="yesnoOption.itemId" (onSelectionChange)="onAntiTbDrugsChange($event)">
+                        {{yesnoOption.itemName}}
+                    </mat-option>-->
+                </mat-select>
+            </mat-form-field>
+        </div>
+
+        <div class="col-lg-3 col-xs-12"></div>
+        <div class="col-lg-3 col-xs-12"></div>
+
+    </div>
+</form>

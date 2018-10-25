@@ -12,6 +12,9 @@
                     <mat-label>Partner HIV Testing</mat-label>
                     <mat-select formControlName="partnerHivTestDone" required>
                         <mat-option [value]=""></mat-option>
+                        <mat-option *ngFor="let yesNoNaOption of yesNoNaOptions" [value]="yesNoNaOption.itemId">
+                            {{yesNoNaOption.itemName}}
+                        </mat-option>
                     </mat-select>
                 </mat-form-field>
             </div>
@@ -21,6 +24,9 @@
                     <mat-label>Final HIV Result for Partner</mat-label>
                     <mat-select formControlName="finalPartnerHivResult" required>
                         <mat-option [value]=""></mat-option>
+                        <mat-option *ngFor="let finalPartnerHivResultOption of finalPartnerHivResultOptions" [value]="finalPartnerHivResultOption.itemId">
+                            {{finalPartnerHivResultOption.itemName}}
+                        </mat-option>
                     </mat-select>
                 </mat-form-field>
             </div>

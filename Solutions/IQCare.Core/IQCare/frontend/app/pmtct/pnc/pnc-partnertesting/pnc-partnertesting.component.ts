@@ -1,5 +1,6 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
+import { LookupItemView } from '../../../shared/_models/LookupItemView';
 
 @Component({
     selector: 'app-pnc-partnertesting',
@@ -8,6 +9,10 @@ import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms'
 })
 export class PncPartnertestingComponent implements OnInit {
     PartnerTestingForm: FormGroup;
+    yesNoNaOptions: LookupItemView[] = [];
+    finalPartnerHivResultOptions: LookupItemView[] = [];
+
+    @Input('partnerTestingOptions') partnerTestingOptions: any;
     @Output() notify: EventEmitter<FormGroup> = new EventEmitter<FormGroup>();
 
     constructor(private _formBuilder: FormBuilder) { }
@@ -17,6 +22,10 @@ export class PncPartnertestingComponent implements OnInit {
             partnerHivTestDone: new FormControl('', [Validators.required]),
             finalPartnerHivResult: new FormControl('', [Validators.required])
         });
+
+        const { yesNoNaOptions, finalPartnerHivResultOptions } = this.partnerTestingOptions[0];
+        this.yesNoNaOptions = yesNoNaOptions;
+        this.finalPartnerHivResultOptions = finalPartnerHivResultOptions;
 
         this.notify.emit(this.PartnerTestingForm);
     }

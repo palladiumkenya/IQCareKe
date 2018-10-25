@@ -1,3 +1,16 @@
+import { CervicalCancerScreeningResultsResolver } from './_services/resolvers/cervical-cancer-screening-results.resolver';
+import { FamilyPlanningMethodResolver } from './_services/resolvers/family-planning-method.resolver';
+import { CervicalCancerScreeningMethodResolver } from './_services/resolvers/cervical-cancer-screening-method.resolver';
+import { FinalPartnerHivResultResolver } from './_services/resolvers/final-partner-hivresult.resolver';
+import { InfantPncDrugResolver } from './_services/resolvers/infant-pnc-drug.resolver';
+import { YesNoNaResolver } from './_services/resolvers/yes-no-na.resolver';
+import { BabyConditionResolver } from './_services/resolvers/baby-condition.resolver';
+import { FistulaScreeningResolver } from './_services/resolvers/fistula-screening.resolver';
+import { CSectionSiteResolver } from './_services/resolvers/c-section-site.resolver';
+import { EpisiotomyResolver } from './_services/resolvers/episiotomy.resolver';
+import { PostPartumHaemorrhage } from './_services/resolvers/post-partum-haemorrhage.resolver';
+import { LochiaResolver } from './_services/resolvers/lochia.resolver';
+import { BreastResolver } from './_services/resolvers/breast.resolver';
 import { PncComponent } from './pnc/pnc.component';
 import { PrimaryCareGiverResolver } from './_services/primarycaregiver.resolver';
 import { HeiComponent } from './hei/hei.component';
@@ -30,9 +43,13 @@ import { ChestXrayResolverService } from './_services/chest-xray-resolver.servic
 import { TbScreeningOutcomeResolverService } from './_services/tb-screening-outcome-resolver.service';
 import { HeiHivTestTypesResolver } from './_services/resolvers/hei-hiv-testtypes.resolver';
 import { HeiHivTestResultsResolver } from './_services/resolvers/hei-hiv-test-results.resolver';
-import {IptoutcomeResolverService} from './_services/resolvers/iptoutcome-resolver.service';
-import {MedicationResolverService} from './_services/resolvers/medication-resolver.service';
-import {MedicationPlanResolverService} from './_services/resolvers/medication-plan-resolver.service';
+import { IptoutcomeResolverService } from './_services/resolvers/iptoutcome-resolver.service';
+import { MedicationResolverService } from './_services/resolvers/medication-resolver.service';
+import { MedicationPlanResolverService } from './_services/resolvers/medication-plan-resolver.service';
+import { HivFinalResultsResolver } from './_services/resolvers/hiv-final-results.resolver';
+import { UterusResolver } from './_services/resolvers/uterus.resolver';
+import { MaternityComponent } from './maternity/maternity.component';
+import { InfantDrugsStartContinueResolver } from './_services/resolvers/infant-drugs-start-continue.resolver';
 
 
 const routes: Routes = [
@@ -100,6 +117,31 @@ const routes: Routes = [
     {
         path: 'pnc/:patientId/:personId/:serviceAreaId',
         component: PncComponent,
+        pathMatch: 'full',
+        resolve: {
+            yesnoOptions: YesNoResolver,
+            hivFinalResultsOptions: HivFinalResultsResolver,
+            deliveryModeOptions: DeliveryModeResolver,
+            breastOptions: BreastResolver,
+            uterusOptions: UterusResolver,
+            lochiaOptions: LochiaResolver,
+            postpartumhaemorrhageOptions: PostPartumHaemorrhage,
+            episiotomyOptions: EpisiotomyResolver,
+            cSectionSiteOptions: CSectionSiteResolver,
+            fistulaScreeningOptions: FistulaScreeningResolver,
+            babyConditionOptions: BabyConditionResolver,
+            yesNoNaOptions: YesNoNaResolver,
+            infantPncDrugOptions: InfantPncDrugResolver,
+            infantDrugsStartContinueOptions: InfantDrugsStartContinueResolver,
+            finalPartnerHivResultOptions: FinalPartnerHivResultResolver,
+            cervicalCancerScreeningMethodOptions: CervicalCancerScreeningMethodResolver,
+            familyPlanningMethodOptions: FamilyPlanningMethodResolver,
+            cervicalCancerScreeningResultsOptions: CervicalCancerScreeningResultsResolver
+        }
+    },
+    {
+        path: 'maternity/:patientId/:personId/:serviceAreaId',
+        component: MaternityComponent,
         pathMatch: 'full'
     }
 ];
