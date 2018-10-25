@@ -1,16 +1,17 @@
-import {forkJoin, Observable} from 'rxjs/index';
+import { forkJoin, Observable } from 'rxjs/index';
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { ErrorHandlerService } from '../../shared/_services/errorhandler.service';
 import { environment } from '../../../environments/environment';
 import { tap, catchError } from 'rxjs/operators';
-import {Vaccination} from '../_models/hei/Vaccination';
-import {Milestone} from '../_models/hei/Milestone';
-import {PatientIcf} from '../_models/hei/PatientIcf';
-import {PatientIcfAction} from '../_models/hei/PatientIcfAction';
-import {PatientIptWorkup} from '../_models/hei/PatientIptWorkup';
-import {PatientIptOutcome} from '../_models/hei/PatientIptOutcome';
-import {PatientIpt} from '../_models/hei/PatientIpt';
+import { Vaccination } from '../_models/hei/Vaccination';
+import { Milestone } from '../_models/hei/Milestone';
+import { PatientIcf } from '../_models/hei/PatientIcf';
+import { PatientIcfAction } from '../_models/hei/PatientIcfAction';
+import { PatientIptWorkup } from '../_models/hei/PatientIptWorkup';
+import { PatientIptOutcome } from '../_models/hei/PatientIptOutcome';
+import { PatientIpt } from '../_models/hei/PatientIpt';
+import { LabOrder, LabOrderResponse } from '../_models/hei/LabOrder';
 
 
 const httpOptions = {
@@ -22,6 +23,7 @@ const httpOptions = {
 })
 export class HeiService {
     private API_URL = environment.API_URL;
+    private API_LAB_URL = environment.API_LAB_URL;
 
     constructor(private http: HttpClient, private errorHandler: ErrorHandlerService) { }
 
@@ -33,7 +35,7 @@ export class HeiService {
     }
 
     public saveHeiVisitDetails(patientId: number, patientMasterVisitId: number, visitData: any,
-                            userId: number): Observable<any> {
+        userId: number): Observable<any> {
         const visitDetailsData = {
             'Id': 0,
             'PatientMasterVisitId': patientMasterVisitId,
@@ -99,7 +101,7 @@ export class HeiService {
 
     public saveTbAssessment(patientIcf: PatientIcf, patientIcfAction: PatientIcfAction): Observable<any> {
 
-       const Icf = this.http.post<any>(this.API_URL + '/api/tbAssessment/AddPatientIcf', JSON.stringify(patientIcf), httpOptions).pipe(
+        const Icf = this.http.post<any>(this.API_URL + '/api/tbAssessment/AddPatientIcf', JSON.stringify(patientIcf), httpOptions).pipe(
             tap(saveTbAssessmentIcf => this.errorHandler.log(`successfully added hei patient icf`)),
             catchError(this.errorHandler.handleError<any>('Error saving hei patient icf Action'))
         );
@@ -134,5 +136,10 @@ export class HeiService {
         );
     }
 
-
+    public saveHeiLabOrder(labOrder: LabOrder): Observable<LabOrderResponse> {
+        return this.http.post<any>(this.API_LAB_URL + '/api/LabOrder/AddLabOrder', JSON.stringify(labOrder), httpOptions).pipe(
+            tap(saveHeiLabOrder => this.errorHandler.log(`successfully added laborder`)),
+            catchError(this.errorHandler.handleError<any>('Error saving laborder'))
+        );
+    }
 }
