@@ -11,17 +11,24 @@ import { NotificationService } from '../../../shared/_services/notification.serv
     styleUrls: ['./hei-visit-details.component.css']
 })
 export class HeiVisitDetailsComponent implements OnInit {
+    isVisitNumberShown: boolean = false;
+    isdayPostPartumShown: boolean = false;
+    isCohortShown: boolean = true;
+    maxDate: Date;
 
     public HeiVisitDetailsFormGroup: FormGroup;
     public lookupItems$: Subscription;
     public visitTypes: any[] = [];
+
     @Input('formtype') formtype: string;
     @Output() notify: EventEmitter<FormGroup> = new EventEmitter<FormGroup>();
 
     constructor(private _formBuilder: FormBuilder,
         private _lookupItemService: LookupItemService,
         private snotifyService: SnotifyService,
-        private notificationService: NotificationService) { }
+        private notificationService: NotificationService) {
+        this.maxDate = new Date();
+    }
 
     ngOnInit() {
 
@@ -38,21 +45,24 @@ export class HeiVisitDetailsComponent implements OnInit {
 
         switch (this.formtype) {
             case 'hei':
+                this.getLookupItems('ANCVisitType', this.visitTypes);
                 break;
             case 'maternity':
-                console.log('maternity');
+                this.getLookupItems('ANCVisitType', this.visitTypes);
                 this.HeiVisitDetailsFormGroup.get('visitType').disable({ onlySelf: true });
                 this.HeiVisitDetailsFormGroup.get('cohort').disable({ onlySelf: true });
                 break;
             case 'pnc':
+                this.getLookupItems('PNCVisitType', this.visitTypes);
                 this.HeiVisitDetailsFormGroup.get('cohort').disable({ onlySelf: true });
                 this.HeiVisitDetailsFormGroup.get('visitNumber').enable({ onlySelf: true });
                 this.HeiVisitDetailsFormGroup.get('dayPostPartum').enable({ onlySelf: true });
+                this.isVisitNumberShown = true;
+                this.isdayPostPartumShown = true;
+                this.isCohortShown = false;
                 break;
             default:
         }
-
-        this.getLookupItems('ANCVisitType', this.visitTypes);
 
         this.notify.emit(this.HeiVisitDetailsFormGroup);
     }
