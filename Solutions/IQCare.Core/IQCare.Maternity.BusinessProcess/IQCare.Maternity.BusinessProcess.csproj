@@ -5,6 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Folder Include="Commands\PNC\" />
     <Folder Include="Queries\PNC\" />
     <Folder Include="Services\" />
   </ItemGroup>
