@@ -50,7 +50,6 @@ import { InfantDrugsStartContinueResolver } from './_services/resolvers/infant-d
 import {IptoutcomeResolverService} from './_services/resolvers/iptoutcome-resolver.service';
 import {MedicationResolverService} from './_services/resolvers/medication-resolver.service';
 import {MedicationPlanResolverService} from './_services/resolvers/medication-plan-resolver.service';
-import {MaternityComponent} from './maternity/maternity.component';
 import {GenderResolver} from './_services/resolvers/gender.resolver';
 import {ReferralResolver} from './_services/resolvers/referral.resolver';
 import {PmtctTestTypeResolver} from './_services/resolvers/pmtctTestType.resolver';
@@ -138,7 +137,6 @@ const routes: Routes = [
             fistulaScreeningOptions: FistulaScreeningResolver,
             babyConditionOptions: BabyConditionResolver,
             yesNoNaOptions: YesNoNaResolver,
-            infantPncDrugOptions: InfantPncDrugResolver,
             infantPncDrugOptions: InfantPncDrugResolver,
             infantDrugsStartContinueOptions: InfantDrugsStartContinueResolver,
             finalPartnerHivResultOptions: FinalPartnerHivResultResolver,
