@@ -1,105 +1,85 @@
-<form class="form-group" novalidate [formGroup]="HIVStatusFormGroup">
+<form class="form-group" [formGroup]="HIVStatusFormGroup">
     <div class="row">
         <div class="col-md-12">
             <div class="form-title">
                 <span class="mat-accent"> HIV status </span>
             </div>
         </div>
-        <div class="row">
-            <div class="col-md-12">
-                <div class="col-md-4">
-                    <mat-form-field class="col-md-12">
-                        <mat-select formControlName="testingDone" placeholder="HIV testing done during this visit">
-                            <mat-option [value]="1" id="initial">Initial Test</mat-option>
-                            <mat-option [value]="2" id="repeat">Repeat Test</mat-option>
-                        </mat-select>
-                    </mat-form-field>
-                </div>
-                <div class="col-md-12"></div>
-            </div>
-            <div class="col-md-12">
-
-                <div class="col-lg-4 col-md-4 col-xs-12 col-sm-6">
-                    <mat-form-field class="col-md-12">
-                        <mat-select placeholder="Select Result" name="hivTest" id="hivTest" formControlName="hivTest" required>
-                            <mat-option *ngFor="let testOption of tests" [value]="testOption">{{testOption.itemName}}</mat-option>
-                        </mat-select>
-                    </mat-form-field>
-                </div>
-
-                <div class="col-lg-4 col-md-4 col-xs-12 col-sm-6">
-                    <mat-form-field class="col-md-12">
-                        <mat-select placeholder="Select Kit used" name="kitName" id="kitName" formControlName="kitName" required>
-                            <mat-option *ngFor="let kitOption of kits" [value]="kitOption.itemId">{{kitOption.itemName}}</mat-option>
-                        </mat-select>
-                    </mat-form-field>
-                </div>
-                <div class="col-lg-4 col-md-4 col-xs-12 col-sm-6">
-                    <mat-form-field class="col-md-12">
-                        <input class="col-md-12" formControlName="lotNumber" matInput placeholder="Lot No" value="" required>
-                    </mat-form-field>
-                </div>
-            </div>
-            <div class="col-md-12">
-                <div class="col-lg-4 col-md-4 col-xs-12 col-sm-6">
-                    <mat-form-field class="col-md-12">
-                        <input formControlName="expiryDate" id="expiryDate" matInput [matDatepicker]="expiryDate" formControlname="expiryDate" placeholder="Expiry Date"
-                            required>
-                        <mat-datepicker-toggle matSuffix [for]="expiryDate"></mat-datepicker-toggle>
-                        <mat-datepicker #expiryDate></mat-datepicker>
-                    </mat-form-field>
-                </div>
-
-
-                <div class="col-lg-4 col-md-4 col-xs-12 col-sm-6">
-                    <mat-form-field class="col-md-12">
-                        <mat-select placeholder="Test Result" name="testResult" id="testResult" formControlName="testResult" required>
-                            <mat-option *ngFor="let testResultsOption of testResults" [value]="testResultsOption.itemId">{{testResultsOption.itemName}}</mat-option>
-                        </mat-select>
-                    </mat-form-field>
-                </div>
-
-                <div class="col-lg-4 col-md-4 col-xs-12 col-sm-6">
-                    <mat-form-field class="col-md-12">
-                        <mat-select placeholder="Final Result" name="finalResult" id="finalResult" formControlName="finalResult" required>
-                            <mat-option value=""></mat-option>
-                            <mat-option *ngFor="let finalResultsOption of finalResults" [value]="finalResultsOption.itemId">{{finalResultsOption.itemName}}</mat-option>
-                        </mat-select>
-                    </mat-form-field>
-                </div>
-            </div>
-
-            <div class="col-md-12">
-                <div class="col-lg-4 col-md-4 col-xs-12 col-sm-6">
-                    <mat-form-field class="col-md-12">
-                        <input formControlName="nextAppointmentDate" id="nextAppointmentDate" matInput [matDatepicker]="nextAppointmentDate" formControlname="nextAppointmentDate"
-                            placeholder="Next HIV Test" required>
-                        <mat-datepicker-toggle matSuffix [for]="nextAppointmentDate"></mat-datepicker-toggle>
-                        <mat-datepicker #nextAppointmentDate></mat-datepicker>
-                    </mat-form-field>
-                </div>
-                <div class="col-lg-4 col-md-4 col-xs-12 col-sm-6"></div>
-                <div class="col-lg-4 col-md-4 col-xs-12 col-sm-6"></div>
-            </div>
-
-            <div class="col-md-12">
+        <mat-dialog-content>
+            <div class="row">
                 <div class="col-md-12">
 
+                    <div class="col-lg-4 col-md-4 col-xs-12 col-sm-6">
+                        <mat-form-field class="col-md-12">
+                            <mat-select placeholder="Test" name="hivTest" id="hivTest" formControlName="hivTest"
+                                required>
+                                <mat-option *ngFor="let testOption of tests" [value]="testOption">
+                                    {{testOption.itemName}}
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+
+                    <div class="col-lg-4 col-md-4 col-xs-12 col-sm-6">
+                        <mat-form-field class="col-md-12">
+                            <mat-select placeholder="Select Kit used" name="kitName" id="kitName" formControlName="kitName"
+                                required>
+                                <mat-option *ngFor="let kitOption of kits" [value]="kitOption">
+                                    {{kitOption.itemName}}
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+                    <div class="col-lg-4 col-md-4 col-xs-12 col-sm-6">
+                        <mat-form-field class="col-md-12">
+                            <input class="col-md-12" formControlName="lotNumber" matInput placeholder="Lot No" required>
+                        </mat-form-field>
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <div class="col-lg-4 col-md-4 col-xs-12 col-sm-6">
+                        <mat-form-field class="col-md-12">
+                            <input formControlName="expiryDate" id="expiryDate" matInput [matDatepicker]="expiryDate"
+                                formControlname="expiryDate" placeholder="Expiry Date" required>
+                            <mat-datepicker-toggle matSuffix [for]="expiryDate"></mat-datepicker-toggle>
+                            <mat-datepicker #expiryDate></mat-datepicker>
+                        </mat-form-field>
+                    </div>
+
+
+                    <div class="col-lg-4 col-md-4 col-xs-12 col-sm-6">
+                        <mat-form-field class="col-md-12">
+                            <mat-select placeholder="Test Result" name="testResult" id="testResult" formControlName="testResult"
+                                required>
+                                <mat-option *ngFor="let testResultsOption of testResults" [value]="testResultsOption">
+                                    {{testResultsOption.itemName}}
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+
+                    <div class="col-lg-4 col-md-4 col-xs-12 col-sm-6">
+                        <mat-form-field class="col-md-12">
+                            <input formControlName="nextAppointmentDate" id="nextAppointmentDate" matInput
+                                [matDatepicker]="nextAppointmentDate" formControlname="nextAppointmentDate" placeholder="Next HIV Test"
+                                required>
+                            <mat-datepicker-toggle matSuffix [for]="nextAppointmentDate"></mat-datepicker-toggle>
+                            <mat-datepicker #nextAppointmentDate></mat-datepicker>
+                        </mat-form-field>
+                    </div>
                 </div>
 
+                <div class="col-md-12">
+                    <div class="col-md-12">
+                        &nbsp;
+                    </div>
+                </div>
             </div>
+        </mat-dialog-content>
 
-        </div>
-
+        <mat-dialog-actions>
+            <button class="mat-raised-button" (click)="close()">Close</button>
+            <button class="mat-raised-button mat-primary" (click)="save()">Save</button>
+        </mat-dialog-actions>
     </div>
-
 </form>
-<div class="row">
-    <div class="col-md-12">
-        <div>
-            <button mat-raised-button class="mat-primary" mat-button matStepperNext style="margin-right:5px" [disabled]="!HIVStatusFormGroup.valid"
-                (click)="moveNextStep()">Next</button>
-            <button mat-raised-button class="mat-accent" matStepperPrevious>Previous</button>
-        </div>
-    </div>
-</div>

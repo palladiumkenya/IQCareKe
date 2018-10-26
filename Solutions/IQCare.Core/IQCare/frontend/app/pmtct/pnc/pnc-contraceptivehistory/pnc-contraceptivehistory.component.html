@@ -1,0 +1,52 @@
+<form class="form-group" [formGroup]="ContraceptiveHistoryForm">
+    <div class="row">
+        <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12">
+            <div class="form-title">
+                <span class="mat-accent"> Contraceptive History and Exercise </span>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-3 col-sm-3 col-xs-12">
+                <mat-form-field class="col-lg-12 col-sm-12 col-xs-12">
+                    <mat-label>On Family Planning?</mat-label>
+                    <mat-select formControlName="onFamilyPlanning" required>
+                        <mat-option [value]=""></mat-option>
+                        <mat-option *ngFor="let yesnoOption of yesnoOptions" [value]="yesnoOption.itemId"
+                            (onSelectionChange)="onFamilyPlanningChange($event)">
+                            {{yesnoOption.itemName}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+
+
+            <div class="col-lg-3 col-sm-3 col-xs-12">
+                <mat-form-field class="col-lg-12 col-sm-12 col-xs-12">
+                    <mat-label>Family Planning Method</mat-label>
+                    <mat-select formControlName="familyPlanningMethod" required>
+                        <mat-option [value]=""></mat-option>
+                        <mat-option *ngFor="let familyPlanningMethodOption of familyPlanningMethodOptions" [value]="familyPlanningMethodOption.itemId">
+                            {{
+                            familyPlanningMethodOption.displayName + ' (' + familyPlanningMethodOption.itemName + ')'
+                            }}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+
+
+            <div class="col-lg-3 col-sm-3 col-xs-12">
+                <mat-form-field class="col-lg-12 col-sm-12 col-xs-12">
+                    <mat-label>PNC Exercises Given</mat-label>
+                    <mat-select formControlName="pncExercisesGiven" required>
+                        <mat-option [value]=""></mat-option>
+                        <mat-option *ngFor="let yesnoOption of yesnoOptions" [value]="yesnoOption.itemId">
+                            {{yesnoOption.itemName}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+        </div>
+    </div>
+</form>

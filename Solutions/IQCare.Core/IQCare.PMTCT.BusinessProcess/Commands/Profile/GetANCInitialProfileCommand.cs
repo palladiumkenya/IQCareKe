@@ -7,9 +7,9 @@ using System.Text;
 
 namespace IQCare.PMTCT.BusinessProcess.Commands.Profile
 {
-  public  class GetANCInitialProfileCommand :IRequest<Result<PatientProfile>>
+  public  class GetPatientInitialProfileCommand :IRequest<Result<PatientProfile>>
     {
         public int PatientId { get; set; }
-        public int PregnancyId { get; set; }
+        public int ? PregnancyId { get; set; }
     }
 }

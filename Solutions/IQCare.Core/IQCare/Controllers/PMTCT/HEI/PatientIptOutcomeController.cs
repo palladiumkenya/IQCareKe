@@ -13,14 +13,14 @@ using Microsoft.AspNetCore.Mvc;
 namespace IQCare.Controllers.PMTCT.HEI
 {
     [Produces("application/json")]
-    [Route("api/[controller]")]
+    [Route("api/IptOutcome")]
     public class PatientIptOutcomeController : Controller
     {
         private readonly IMediator _mediator;
 
         public PatientIptOutcomeController(IMediator mediator)
         {
-            _mediator = mediator;
+            _mediator = mediator ?? throw new ArgumentNullException(nameof(mediator)); 
         }
 
         // GET: api/<controller>

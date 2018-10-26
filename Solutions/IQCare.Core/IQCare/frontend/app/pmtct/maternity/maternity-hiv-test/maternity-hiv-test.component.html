@@ -1,0 +1,70 @@
+<form class="form-group" novalidate [formGroup]="hivTestFormGroup">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="form-title">
+                <span class="primary">Patient Next Appointment </span>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+
+
+            <div class="col-lg-2  col-xs-12 col-sm-6">
+                <mat-form-field class="col-md-12">
+                    <mat-select placeholder="Test" name="hivTest" id="hivTest" formControlName="hivTest"
+                                required>
+
+                    </mat-select>
+                </mat-form-field>
+            </div>
+
+            <div class="col-lg-2 col-xs-12 col-sm-6">
+                <mat-form-field class="col-md-12">
+                    <mat-select placeholder="Select Kit used" name="kitName" id="kitName" formControlName="kitName"
+                                required>
+
+                    </mat-select>
+                </mat-form-field>
+            </div>
+
+            <div class="col-lg-2 col-md-4 col-xs-12 col-sm-6">
+                <mat-form-field class="col-md-12">
+                    <input class="col-md-12" formControlName="lotNumber" matInput placeholder="Lot No" required>
+                </mat-form-field>
+            </div>
+
+            <div class="col-lg-2 col-xs-12 col-sm-6">
+                <mat-form-field class="col-md-12">
+                    <input formControlName="expiryDate" id="expiryDate" matInput [matDatepicker]="expiryDate"
+                           formControlname="expiryDate" placeholder="Expiry Date" required>
+                    <mat-datepicker-toggle matSuffix [for]="expiryDate"></mat-datepicker-toggle>
+                    <mat-datepicker #expiryDate></mat-datepicker>
+                </mat-form-field>
+            </div>
+
+            <div class="col-lg-2 col-md-4 col-xs-12 col-sm-6">
+                <mat-form-field class="col-md-12">
+                    <mat-select placeholder="Test Result" name="testResult" id="testResult" formControlName="testResult"
+                                required>
+
+                    </mat-select>
+                </mat-form-field>
+            </div>
+
+           <div class="col-lg-2 col-md-4 col-xs-12 col-sm-6">
+            <mat-form-field class="col-md-12">
+                <mat-select placeholder="Final Result" name="testResult" id="finalResult" formControlName="testResult"
+                            required>
+
+                </mat-select>
+            </mat-form-field>
+        </div>
+        <div class="row">
+            <div class="col-lg-10 col-md-4 col-xs-12 col-sm-6"></div>
+            <div class="col-lg-2 col-md-4 col-xs-12 col-sm-6">
+
+            </div>
+        </div>
+
+    </div>
+</form>

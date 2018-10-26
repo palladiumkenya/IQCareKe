@@ -35,6 +35,8 @@ namespace IQCare.PMTCT.BusinessProcess.CommandHandlers.HeiIptOutcome
                     {
                         patientIptOutcome.IptEvent = request.PatientIptOutcome.IptEvent;
                         patientIptOutcome.ReasonForDiscontinuation = request.PatientIptOutcome.ReasonForDiscontinuation;
+                        _unitOfWork.Repository<PatientIptOutcome>().Update(patientIptOutcome);
+                        await _unitOfWork.SaveAsync();
                     }
 
                     return Result<PatientIptOutcome>.Valid(patientIptOutcome);

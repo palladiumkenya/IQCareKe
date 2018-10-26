@@ -284,12 +284,16 @@ namespace BusinessProcess.CCC
                                 break;
                             default:
                                 Expression<Func<PatientLookup, bool>> expressionPatientStatusEnrolled =
+<<<<<<< HEAD
                                     c => c.PatientStatus.ToLower().Contains("active") ||
                                          c.PatientStatus.ToLower().Contains("death") ||
                                          c.PatientStatus.ToLower().Contains("losttofollowup") ||
                                          c.PatientStatus.ToLower().Contains("transfer out") ||
                                          c.PatientStatus.ToLower().Contains("confirmed hiv negative") ||
                                          c.PatientStatus.ToLower().Contains("hiv negative");
+=======
+                                    c => c.PatientStatus.ToLower().Contains("not enrolled") == false;
+>>>>>>> 760d2103461fa3d32e0b158382aed92226e537a0
                                 expresionFinal = PredicateBuilder.And(expresionFinal, expressionPatientStatusEnrolled);
                                 break;
                         }
@@ -424,6 +428,16 @@ namespace BusinessProcess.CCC
             using (LookupContext context = new LookupContext())
             {
                 return context.PersonExtLookup.Where(x => x.PersonId == personId).First();
+            }
+        }
+
+        public PatientLookup GetPatientByNormalizedCccNumber(string normalizedCccNumber)
+        {
+            using (UnitOfWork unitOfWork = new UnitOfWork(new LookupContext()))
+            {
+                PatientLookup patientLookup = unitOfWork.PatientLookupRepository.FindBy(x => x.EnrollmentNumberNormalized.Equals(normalizedCccNumber)).FirstOrDefault();
+                unitOfWork.Dispose();
+                return patientLookup;
             }
         }
     }
