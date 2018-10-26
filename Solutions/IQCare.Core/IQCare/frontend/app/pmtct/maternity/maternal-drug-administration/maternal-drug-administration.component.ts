@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {NotificationService} from '../../../shared/_services/notification.service';
 import {SnotifyService} from 'ng-snotify';
@@ -11,6 +11,12 @@ import {SnotifyService} from 'ng-snotify';
 export class MaternalDrugAdministrationComponent implements OnInit {
 
     maternalDrugAdministrationFormGroup: FormGroup;
+    @Input() drugAdministrationOptions: any[] = [];
+    @Output() notify: EventEmitter<FormGroup> = new EventEmitter<FormGroup>();
+    public yesnoOptions: any[] = [];
+    public finaResultOptions: any[] = [];
+    public yesnonaOptions: any[] = [];
+
 
     constructor(private formBuilder: FormBuilder,
                 private notificationService: NotificationService,
@@ -25,6 +31,15 @@ export class MaternalDrugAdministrationComponent implements OnInit {
             cotrimoxazole: new FormControl('', [Validators.required]),
             infantARVProphylaxis: new FormControl('', [Validators.required])
         });
+
+        const {
+            yesNo,
+            finalResult,
+            yesNoNa
+        } = this.drugAdministrationOptions[0];
+        this.yesnoOptions = yesNo;
+        this.yesnonaOptions = yesNoNa;
+        this.finaResultOptions = finalResult;
     }
 
 }

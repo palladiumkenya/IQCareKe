@@ -12,7 +12,7 @@ export class PncPartnertestingComponent implements OnInit {
     yesNoNaOptions: LookupItemView[] = [];
     finalPartnerHivResultOptions: LookupItemView[] = [];
 
-    @Input('partnerTestingOptions') partnerTestingOptions: any;
+    @Input('partnerTestingOptions') partnerTestingOptions: any[] = [];
     @Output() notify: EventEmitter<FormGroup> = new EventEmitter<FormGroup>();
 
     constructor(private _formBuilder: FormBuilder) { }
@@ -26,6 +26,9 @@ export class PncPartnertestingComponent implements OnInit {
         const { yesNoNaOptions, finalPartnerHivResultOptions } = this.partnerTestingOptions[0];
         this.yesNoNaOptions = yesNoNaOptions;
         this.finalPartnerHivResultOptions = finalPartnerHivResultOptions;
+        console.log('partner testing');
+        console.log(this.yesNoNaOptions );
+
 
         this.notify.emit(this.PartnerTestingForm);
     }

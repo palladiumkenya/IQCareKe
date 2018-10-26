@@ -361,3 +361,31 @@ If Not Exists(Select 1 From LookupMasterItem where LookupMasterId=(SELECT TOP 1 
 If Not Exists(Select 1 From LookupMasterItem where LookupMasterId=(SELECT TOP 1 Id FROM LookupMaster WHERE Name='MedicationPlan') and LookupItemId=(SELECT TOP 1 Id FROM LookupItem WHERE Name='Start Treatment')) Begin Insert Into LookupMasterItem(LookupMasterId ,LookupItemId,DisplayName, OrdRank)VALUES((SELECT TOP 1 Id FROM LookupMaster WHERE Name='MedicationPlan'),(SELECT TOP 1 Id FROM LookupItem WHERE Name='Start Treatment'),'Start Treatment',1) end;
 If Not Exists(Select 1 From LookupMasterItem where LookupMasterId=(SELECT TOP 1 Id FROM LookupMaster WHERE Name='MedicationPlan') and LookupItemId=(SELECT TOP 1 Id FROM LookupItem WHERE Name='Continue current treatment')) Begin Insert Into LookupMasterItem(LookupMasterId ,LookupItemId,DisplayName, OrdRank)VALUES((SELECT TOP 1 Id FROM LookupMaster WHERE Name='MedicationPlan'),(SELECT TOP 1 Id FROM LookupItem WHERE Name='Continue current treatment'),'Continue current treatment',2) end;
 
+
+-- BreastExam
+If Not Exists(Select 1 From LookupMaster where Name='BreastExam') Begin INSERT INTO LookupMaster (Name, DisplayName, DeleteFlag) VALUES ('BreastExam','BreastExam',0); End
+
+-- Maternity
+-- LookupMaster
+If Not Exists(Select 1 From LookupMaster where Name='BloodLoss') Begin INSERT INTO LookupMaster (Name, DisplayName, DeleteFlag) VALUES ('BloodLoss','BloodLoss',0); End
+If Not Exists(Select 1 From LookupMaster where Name='deliveryOutcome') Begin INSERT INTO LookupMaster (Name, DisplayName, DeleteFlag) VALUES ('deliveryOutcome','deliveryOutcome',0); End
+-- LookUpItem
+If Not Exists(Select 1 From LookupItem where Name='Light') Begin INSERT INTO LookupItem (Name, DisplayName, DeleteFlag) VALUES ('Light','Light',0); End
+If Not Exists(Select 1 From LookupItem where Name='Medium') Begin INSERT INTO LookupItem (Name, DisplayName, DeleteFlag) VALUES ('Medium','Medium',0); End
+If Not Exists(Select 1 From LookupItem where Name='Heavy') Begin INSERT INTO LookupItem (Name, DisplayName, DeleteFlag) VALUES ('Heavy','Heavy',0); End
+If Not Exists(Select 1 From LookupItem where Name='None') Begin INSERT INTO LookupItem (Name, DisplayName, DeleteFlag) VALUES ('None','None',0); End
+
+If Not Exists(Select 1 From LookupItem where Name='Liver Birth') Begin INSERT INTO LookupItem (Name, DisplayName, DeleteFlag) VALUES ('Liver Birth','Liver Birth',0); End
+If Not Exists(Select 1 From LookupItem where Name='Fresh Still Birth') Begin INSERT INTO LookupItem (Name, DisplayName, DeleteFlag) VALUES ('Fresh Still Birth','Fresh Still Birth',0); End
+If Not Exists(Select 1 From LookupItem where Name='Macerated Still Birth') Begin INSERT INTO LookupItem (Name, DisplayName, DeleteFlag) VALUES ('Macerated Still Birth','Macerated Still Birth',0); End
+
+
+-- LookupMasterItem
+If Not Exists(Select 1 From LookupMasterItem where LookupMasterId=(SELECT TOP 1 Id FROM LookupMaster WHERE Name='BloodLoss') and LookupItemId=(SELECT TOP 1 Id FROM LookupItem WHERE Name='Light')) Begin Insert Into LookupMasterItem(LookupMasterId ,LookupItemId,DisplayName, OrdRank)VALUES((SELECT TOP 1 Id FROM LookupMaster WHERE Name='BloodLoss'),(SELECT TOP 1 Id FROM LookupItem WHERE Name='Light'),'Light',1) end;
+If Not Exists(Select 1 From LookupMasterItem where LookupMasterId=(SELECT TOP 1 Id FROM LookupMaster WHERE Name='BloodLoss') and LookupItemId=(SELECT TOP 1 Id FROM LookupItem WHERE Name='Medium')) Begin Insert Into LookupMasterItem(LookupMasterId ,LookupItemId,DisplayName, OrdRank)VALUES((SELECT TOP 1 Id FROM LookupMaster WHERE Name='BloodLoss'),(SELECT TOP 1 Id FROM LookupItem WHERE Name='Medium'),'Medium',2) end;
+If Not Exists(Select 1 From LookupMasterItem where LookupMasterId=(SELECT TOP 1 Id FROM LookupMaster WHERE Name='BloodLoss') and LookupItemId=(SELECT TOP 1 Id FROM LookupItem WHERE Name='Heavy')) Begin Insert Into LookupMasterItem(LookupMasterId ,LookupItemId,DisplayName, OrdRank)VALUES((SELECT TOP 1 Id FROM LookupMaster WHERE Name='BloodLoss'),(SELECT TOP 1 Id FROM LookupItem WHERE Name='Heavy'),'Heavy',3) end;
+If Not Exists(Select 1 From LookupMasterItem where LookupMasterId=(SELECT TOP 1 Id FROM LookupMaster WHERE Name='BloodLoss') and LookupItemId=(SELECT TOP 1 Id FROM LookupItem WHERE Name='None')) Begin Insert Into LookupMasterItem(LookupMasterId ,LookupItemId,DisplayName, OrdRank)VALUES((SELECT TOP 1 Id FROM LookupMaster WHERE Name='BloodLoss'),(SELECT TOP 1 Id FROM LookupItem WHERE Name='None'),'None',4) end;
+
+
+
+

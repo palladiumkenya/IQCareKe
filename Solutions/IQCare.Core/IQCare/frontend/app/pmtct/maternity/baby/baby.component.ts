@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {FormArray, FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {NotificationService} from '../../../shared/_services/notification.service';
 import {SnotifyService} from 'ng-snotify';
@@ -16,6 +16,12 @@ export class BabyComponent implements OnInit {
     displayedColumns = ['sex', 'birthWeight', 'outcome', 'apgarScore', 'resuscitation', 'deformity', 'teo', 'breastFeeding', 'comment',
         'action'];
     dataSource = new MatTableDataSource(this.babyData);
+    @Input() babySectionOptions: any[] = [];
+    @Output() notify: EventEmitter<FormGroup> = new EventEmitter<FormGroup>();
+
+    public genderOptions: any[] = [];
+    deliveryOutcomeOptions: any[] = [];
+    yesnoOptions: any[] = [];
 
     constructor(private formBuilder: FormBuilder,
                 private notificationService: NotificationService,
@@ -39,6 +45,15 @@ export class BabyComponent implements OnInit {
             comment: new FormControl('', [Validators.required])
 
         });
+
+        const {
+            gender,
+            deliveryOutcomes,
+            yesNos
+        } = this.babySectionOptions[0];
+        this.genderOptions = gender;
+        this.deliveryOutcomeOptions = deliveryOutcomes;
+        this.yesnoOptions = yesNos;
     }
 
     public AddBaby() {

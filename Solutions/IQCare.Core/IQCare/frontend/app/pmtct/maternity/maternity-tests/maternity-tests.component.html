@@ -55,9 +55,9 @@
                 <mat-label >Treated for Syphilis</mat-label>
                 <mat-select formControlName="treatedSyphilis" required minlength="1">
                     <mat-option [value]="0">select</mat-option>
-                    <!--<mat-option *ngFor="let yesnoOption of yesnoOptions" [value]="yesnoOption.itemId" (onSelectionChange)="onAntiTbDrugsChange($event)">
+                    <mat-option *ngFor="let yesnoOption of yesnoOptions" [value]="yesnoOption.itemId" >
                         {{yesnoOption.itemName}}
-                    </mat-option>-->
+                    </mat-option>
                 </mat-select>
             </mat-form-field>
         </div>
@@ -67,9 +67,9 @@
                 <mat-label >Hiv Status at last ANC</mat-label>
                 <mat-select formControlName="HIVStatusLastANC" required minlength="1">
                     <mat-option [value]="0">select</mat-option>
-                    <!--<mat-option *ngFor="let yesnoOption of yesnoOptions" [value]="yesnoOption.itemId" (onSelectionChange)="onAntiTbDrugsChange($event)">
+                    <mat-option *ngFor="let yesnoOption of yesnoOptions" [value]="yesnoOption.itemId" >
                         {{yesnoOption.itemName}}
-                    </mat-option>-->
+                    </mat-option>
                 </mat-select>
             </mat-form-field>
         </div>

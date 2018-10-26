@@ -88,6 +88,13 @@ import { HivFinalResultsResolver } from './_services/resolvers/hiv-final-results
 import { DischargeComponent } from './maternity/discharge/discharge.component';
 import { MaternityReferralComponent } from './maternity/maternity-referral/maternity-referral.component';
 import { MaternityNextAppointmentComponent } from './maternity/maternity-next-appointment/maternity-next-appointment.component';
+import { MaternityHivTestComponent } from './maternity/maternity-hiv-test/maternity-hiv-test.component';
+import {BloodLossResolver} from './_services/resolvers/blood-loss.resolver';
+import {GenderResolver} from './_services/resolvers/gender.resolver';
+import {ReferralResolver} from './_services/resolvers/referral.resolver';
+import {PmtctTestTypeResolver} from './_services/resolvers/pmtctTestType.resolver';
+import {TestKitNameResolver} from './_services/resolvers/test-kit-name.resolver';
+import {HivTestResultResolver} from './_services/resolvers/hiv-test-result.resolver';
 
 @NgModule({
     imports: [
@@ -148,7 +155,8 @@ import { MaternityNextAppointmentComponent } from './maternity/maternity-next-ap
         MaternalDrugAdministrationComponent,
         DischargeComponent,
         MaternityReferralComponent,
-        MaternityNextAppointmentComponent
+        MaternityNextAppointmentComponent,
+        MaternityHivTestComponent
 
     ],
     providers: [
@@ -174,6 +182,13 @@ import { MaternityNextAppointmentComponent } from './maternity/maternity-next-ap
         FistulaScreeningResolver,
         BabyConditionResolver,
         YesNoNaResolver,
+        InfantPncDrugResolver,
+        BloodLossResolver,
+        GenderResolver,
+        ReferralResolver,
+        PmtctTestTypeResolver,
+        TestKitNameResolver,
+        HivTestResultResolver,
         InfantPncDrugResolver,
         InfantDrugsStartContinueResolver,
         FinalPartnerHivResultResolver,

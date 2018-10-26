@@ -17,7 +17,7 @@
         <div class="col-md-3 col-xs-12 col-sm-12">
             <mat-form-field class="col-md-12 col-sm-6 col-xs-12">
                 <input matInput [matDatepicker]="picker2" formControlName="deliveryDate"
-                       placeholder="Date of Delivery" required="">
+                       placeholder="Date of Delivery" required (dateChange)="onDeliveryDateChange()">
                 <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
                 <mat-datepicker #picker2></mat-datepicker>
             </mat-form-field>
@@ -46,10 +46,10 @@
             <mat-form-field class="col-md-12">
                 <mat-label >Mode of Delivery</mat-label>
                 <mat-select formControlName="deliveryMode" required minlength="1">
-                    <mat-option [value]="0">select</mat-option>
-                    <!--<mat-option *ngFor="let yesnoOption of yesnoOptions" [value]="yesnoOption.itemId" (onSelectionChange)="onAntiTbDrugsChange($event)">
-                        {{yesnoOption.itemName}}
-                    </mat-option>-->
+                    <mat-option [value]="">select</mat-option>
+                    <mat-option *ngFor="let deliveryModeOption of deliveryModeOptions" [value]="deliveryModeOption.itemId" >
+                        {{deliveryModeOption.itemName}}
+                    </mat-option>
                 </mat-select>
             </mat-form-field>
         </div>
@@ -58,10 +58,10 @@
             <mat-form-field class="col-md-12">
                 <mat-label >blood Loss</mat-label>
                 <mat-select formControlName="bloodLoss" required minlength="1">
-                    <mat-option [value]="0">select</mat-option>
-                    <!--<mat-option *ngFor="let yesnoOption of yesnoOptions" [value]="yesnoOption.itemId" (onSelectionChange)="onAntiTbDrugsChange($event)">
-                        {{yesnoOption.itemName}}
-                    </mat-option>-->
+                    <mat-option [value]="">select</mat-option>
+                    <mat-option *ngFor="let bloodlossOption of bloodlossOptions" [value]="bloodlossOption.itemId" (onSelectionChange)="onBloodLossChange($event)">
+                        {{bloodlossOption.itemName}}
+                    </mat-option>
                 </mat-select>
             </mat-form-field>
         </div>
@@ -77,9 +77,9 @@
                 <mat-label >Condition of Mother after Delivery</mat-label>
                 <mat-select formControlName="deliveryCondition" required minlength="1">
                     <mat-option [value]="0">select</mat-option>
-                    <!--<mat-option *ngFor="let yesnoOption of yesnoOptions" [value]="yesnoOption.itemId" (onSelectionChange)="onAntiTbDrugsChange($event)">
-                        {{yesnoOption.itemName}}
-                    </mat-option>-->
+                    <mat-option *ngFor="let motherStateOption of motherStateOptions" [value]="motherStateOption.itemId" (onSelectionChange)="onChangeDeliveryConditions($event)" >
+                        {{motherStateOption.itemName}}
+                    </mat-option>
                 </mat-select>
             </mat-form-field>
         </div>
@@ -91,9 +91,9 @@
                 <mat-label >Placenta Complete</mat-label>
                 <mat-select formControlName="placentaComplete" required minlength="1">
                     <mat-option [value]="0">select</mat-option>
-                    <!--<mat-option *ngFor="let yesnoOption of yesnoOptions" [value]="yesnoOption.itemId" (onSelectionChange)="onAntiTbDrugsChange($event)">
+                    <mat-option *ngFor="let yesnoOption of yesnoOptions" [value]="yesnoOption.itemId">
                         {{yesnoOption.itemName}}
-                    </mat-option>-->
+                    </mat-option>
                 </mat-select>
             </mat-form-field>
         </div>
@@ -102,9 +102,9 @@
                 <mat-label >Maternal Deaths Audited</mat-label>
                 <mat-select formControlName="maternalDeathsAudited" required minlength="1">
                     <mat-option [value]="0">select</mat-option>
-                    <!--<mat-option *ngFor="let yesnoOption of yesnoOptions" [value]="yesnoOption.itemId" (onSelectionChange)="onAntiTbDrugsChange($event)">
+                    <mat-option *ngFor="let yesnoOption of yesnoOptions" [value]="yesnoOption.itemId">
                         {{yesnoOption.itemName}}
-                    </mat-option>-->
+                    </mat-option>
                 </mat-select>
             </mat-form-field>
         </div>
@@ -113,7 +113,7 @@
         <div class="col-md-3 col-xs-12 col-sm-12">
             <mat-form-field class="col-md-12 col-sm-6 col-xs-12">
                 <input matInput [matDatepicker]="picker" formControlName="auditDate"
-                       placeholder="Date of Delivery" required="">
+                       placeholder="Audit Date" required="">
                 <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                 <mat-datepicker #picker></mat-datepicker>
             </mat-form-field>
@@ -127,9 +127,9 @@
                 <mat-label >Delivery Complications Experienced</mat-label>
                 <mat-select formControlName="deliveryComplications" required minlength="1">
                     <mat-option [value]="0">select</mat-option>
-                    <!--<mat-option *ngFor="let yesnoOption of yesnoOptions" [value]="yesnoOption.itemId" (onSelectionChange)="onAntiTbDrugsChange($event)">
+                    <mat-option *ngFor="let yesnoOption of yesnoOptions" [value]="yesnoOption.itemId" (onSelectionChange)="onDeliveryComplicationsChange($event)">
                         {{yesnoOption.itemName}}
-                    </mat-option>-->
+                    </mat-option>
                 </mat-select>
             </mat-form-field>
         </div>
