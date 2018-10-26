@@ -32,6 +32,9 @@
     <None Remove="Scripts\1.0.0.9\24_DO_AlterTable_DeliveredBabyBirthInfomation_New_IdentityPK.sql" />
     <None Remove="Scripts\1.0.0.9\25_DO_AlterTable_DeliveredBabyBirthInfo_Change_Cols_to_Bool.sql" />
     <None Remove="Scripts\1.0.0.9\26_DO_CreateView_Delivered_BabyApgarScoreView.sql" />
+    <None Remove="Scripts\1.0.0.9\06_BO_AlterTable_PatientProfile_AddColumnPostPartum.sql" />
+    <None Remove="Scripts\1.0.0.9\07_BO_AlterTable_PatientProfile_SetPregnancyIdToNullable.sql" />
+    <None Remove="Scripts\1.0.0.9\27_DO_AlterTable_PatientProfile_AlterCol_AgeMenarch_Null.sql" />
   </ItemGroup>
 
   <ItemGroup>
@@ -61,6 +64,9 @@
     <EmbeddedResource Include="Scripts\1.0.0.9\24_DO_AlterTable_DeliveredBabyBirthInfomation_New_IdentityPK.sql" />
     <EmbeddedResource Include="Scripts\1.0.0.9\25_DO_AlterTable_DeliveredBabyBirthInfo_Change_Cols_to_Bool.sql" />
     <EmbeddedResource Include="Scripts\1.0.0.9\26_DO_CreateView_Delivered_BabyApgarScoreView.sql" />
+    <EmbeddedResource Include="Scripts\1.0.0.9\06_BO_AlterTable_PatientProfile_AddColumnPostPartum.sql" />
+    <EmbeddedResource Include="Scripts\1.0.0.9\07_BO_AlterTable_PatientProfile_SetPregnancyIdToNullable.sql" />
+    <EmbeddedResource Include="Scripts\1.0.0.9\27_DO_AlterTable_PatientProfile_AlterCol_AgeMenarch_Null.sql" />
   </ItemGroup>
 
   <ItemGroup>

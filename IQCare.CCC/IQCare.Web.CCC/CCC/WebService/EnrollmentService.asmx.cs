@@ -23,7 +23,7 @@ using Convert = System.Convert;
 
 namespace IQCare.Web.CCC.WebService
 {
-    public class FormDetails
+    public class ServiceAreaIdentifierMapping
     {
         public int ID { get; set; }
         public string Label { get; set; }
@@ -33,6 +33,11 @@ namespace IQCare.Web.CCC.WebService
         public string SuffixType { get; set; }
         public string Code { get; set; }
         public string IdentifierName { get; set; }
+        public string IdentifierValueSeparator { get; set; }
+        public string ValidatorRegex { get; set; }
+        public string FailedValidationMessage { get; set; }
+        public int MinLength { get; set; }
+        public int MaxLength { get; set; }
     }
     public class CareEndingDetails
     {
@@ -812,7 +817,7 @@ namespace IQCare.Web.CCC.WebService
 
                     var entryPoints  = entryPointManager.GetPatientEntryPoints(patientList.Id);
                     var identifiers = identifierManager.GetAllPatientEntityIdentifiers(patientList.Id);
-                    var dynamicFields = EnrollmentService.ServiceDynamicFields(1);
+                    var dynamicFields = EnrollmentService.ServiceAreaIdentifiers(1);
                     if (entryPoints.Count>0)
                     {
                         string Name = LookupLogic.GetLookupNameById(entryPoints[0].EntryPointId);
@@ -939,14 +944,14 @@ namespace IQCare.Web.CCC.WebService
         }
 
         [WebMethod(EnableSession = true)]
-        public string GetDynamicFields()
+        public string GetServiceAreaIdentifiers()
         {
-            return new JavaScriptSerializer().Serialize(EnrollmentService.ServiceDynamicFields(1));
+            return new JavaScriptSerializer().Serialize(EnrollmentService.ServiceAreaIdentifiers(1));
         }
 
-        public static List<FormDetails> ServiceDynamicFields(int serviceId)
+        public static List<ServiceAreaIdentifierMapping> ServiceAreaIdentifiers(int serviceId)
         {
-            List<FormDetails> formDetails = new List<FormDetails>();
+            List<ServiceAreaIdentifierMapping> serviceAreaIdentifierMappingList = new List<ServiceAreaIdentifierMapping>();
             try
             {
                 var serviceareIdentifiersManager = new ServiceAreaIdentifiersManager();
@@ -963,7 +968,7 @@ namespace IQCare.Web.CCC.WebService
                         {
                             for (int j = 0; j < resultIdentifiers.Count; j++)
                             {
-                                var details = new FormDetails();
+                                var details = new ServiceAreaIdentifierMapping();
 
                                 details.ID = resultIdentifiers[j].Id;
                                 details.DataType = resultIdentifiers[j].DataType;
@@ -972,14 +977,19 @@ namespace IQCare.Web.CCC.WebService
                                 details.Required = identifiers[i].RequiredFlag;
                                 details.Code = resultIdentifiers[j].Code;
                                 details.IdentifierName = resultIdentifiers[j].Name;
+                                details.IdentifierValueSeparator = resultIdentifiers[j].IdentifierValueSeparator;
+                                details.ValidatorRegex = resultIdentifiers[j].ValidatorRegex;
+                                details.FailedValidationMessage = resultIdentifiers[j].FailedValidationMessage;
+                                details.MinLength = resultIdentifiers[j].MinLength;
+                                details.MaxLength = resultIdentifiers[j].MaxLength;
 
-                                formDetails.Add(details);
+                                serviceAreaIdentifierMappingList.Add(details);
                             }
                         }
                     }
                 }
 
-                return formDetails;
+                return serviceAreaIdentifierMappingList;
             }
             catch (Exception e)
             {
