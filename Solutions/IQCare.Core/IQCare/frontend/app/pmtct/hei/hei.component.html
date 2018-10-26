@@ -63,7 +63,8 @@
                                         <ng-template matStepLabel>
                                             <span matTooltip="Milestones">Milestones</span>
                                         </ng-template>
-                                        <app-milestones (notify)="onMilestonesNotify($event)" (milestonData)="onMilsetoneTableData($event)" [milestoneOptions]="milestoneOptions"></app-milestones>
+                                        <app-milestones (notify)="onMilestonesNotify($event)" (milestonData)="onMilsetoneTableData($event)"
+                                            [milestoneOptions]="milestoneOptions"></app-milestones>
                                         <div>
                                             <button mat-raised-button color="primary" matStepperPrevious type="button">Previous</button>
                                             &nbsp;&nbsp;
@@ -88,19 +89,12 @@
                                         </div>
                                     </mat-step>
 
-                                    <!-- <mat-step [completed]="true" [stepControl]="maternalViralLoadFormGroup">
-                                        <ng-template matStepLabel>
-                                            <span matTooltip="Maternal Viral Load">Maternal Viral Load</span>
-                                        </ng-template>
-
-                                        <app-maternalhistory></app-maternalhistory>
-                                    </mat-step>-->
-
                                     <mat-step [completed]="false" [stepControl]="tbAssessmentFormGroup">
                                         <ng-template matStepLabel>
                                             <span matTooltip="TB Assessment">TB Assessment</span>
                                         </ng-template>
-                                        <app-tb-assessment (notify)="onTbAssessment($event)" [tbAssessmentOptions]="tbAssessmentOptions" [defaultParameters]="defaultParameters" ></app-tb-assessment>
+                                        <app-tb-assessment (notify)="onTbAssessment($event)" [tbAssessmentOptions]="tbAssessmentOptions"
+                                            [defaultParameters]="defaultParameters"></app-tb-assessment>
                                     </mat-step>
 
                                     <mat-step [completed]="false" [stepControl]="infantFeedingFormGroup">
@@ -143,7 +137,9 @@
                                         <div>
                                             <button mat-raised-button color="primary" matStepperPrevious type="button">Previous</button>
                                             &nbsp;&nbsp;
-                                            <button mat-raised-button color="accent" matStepperNext type="button">Next</button>
+                                            <button mat-raised-button color="accent" type="button" (click)="onCompleteEncounter()">
+                                                Complete Encounter
+                                            </button>
                                         </div>
                                     </mat-step>
 
