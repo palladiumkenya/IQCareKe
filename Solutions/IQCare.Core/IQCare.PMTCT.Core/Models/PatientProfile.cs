@@ -9,7 +9,7 @@ namespace IQCare.PMTCT.Core.Models
         public int Id { get; set; }
         public int PatientId { get; set; }
         public int PatientMasterVisitId { get; set; }
-        public decimal AgeMenarche { get; set; }
+        public decimal ? AgeMenarche { get; set; }
         public int ? PregnancyId { get; set; }
         public int VisitNumber { get; set; }
         public int VisitType { get; set; }
