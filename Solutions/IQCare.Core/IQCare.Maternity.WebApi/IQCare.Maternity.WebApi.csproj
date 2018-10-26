@@ -9,7 +9,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="MediatR" Version="4.0.1" />
+    <PackageReference Include="MediatR" Version="4.1.0" />
     <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.9" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.0.3" />
   </ItemGroup>
@@ -22,6 +22,7 @@
     <ProjectReference Include="..\IQCare.Maternity.BusinessProcess\IQCare.Maternity.BusinessProcess.csproj" />
     <ProjectReference Include="..\IQCare.Maternity.Core\IQCare.Maternity.Core.csproj" />
     <ProjectReference Include="..\IQCare.Maternity.Infrastructure\IQCare.Maternity.Infrastructure.csproj" />
+    <ProjectReference Include="..\IQCare.PMTCT.BusinessProcess\IQCare.PMTCT.BusinessProcess.csproj" />
   </ItemGroup>
 
 </Project>

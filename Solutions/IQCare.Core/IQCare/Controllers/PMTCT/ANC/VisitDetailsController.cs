@@ -66,5 +66,15 @@ namespace IQCare.Controllers.PMTCT.ANC
                 return Ok(results.Value);
             return BadRequest(results);
         }
+
+        [HttpGet("GetPatientProfileInfo/{patientId}")]
+        public async Task<IActionResult> GetPatientProfileInfo(int patientId)
+        {
+            var results = await _mediator.Send(new GetMaternetyAndPncProfileCommand() { PatientId = patientId }, HttpContext.RequestAborted);
+            if (results.IsValid)
+                return Ok(results.Value);
+            return BadRequest(results);
+        }
+
     }
 }

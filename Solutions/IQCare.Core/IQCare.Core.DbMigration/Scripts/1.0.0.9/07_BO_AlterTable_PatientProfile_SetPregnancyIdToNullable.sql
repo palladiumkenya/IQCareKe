@@ -1,0 +1,1 @@
+﻿ALTER TABLE PatientProfile ALTER COLUMN PregnancyId INT NULL

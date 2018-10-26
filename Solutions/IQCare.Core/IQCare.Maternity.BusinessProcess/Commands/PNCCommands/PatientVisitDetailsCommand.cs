@@ -6,7 +6,7 @@ using MediatR;
 
 namespace IQCare.Maternity.BusinessProcess.Commands.PNCCommands
 {
-    public class PatientVisitDetailsCommand : IRequest<Result<VisitDetailsCommandResult>>
+    public class AddPatientFirstVisitDetailsCommand : IRequest<Result<VisitDetailsCommandResult>>
     {
       
         public int Id { get; set; }

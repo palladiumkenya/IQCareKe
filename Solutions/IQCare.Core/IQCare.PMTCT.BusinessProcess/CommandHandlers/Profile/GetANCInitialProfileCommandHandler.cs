@@ -27,7 +27,9 @@ namespace IQCare.PMTCT.BusinessProcess.CommandHandlers.Profile
             {
                 try
                 {
-                    PatientProfile result =await  _unitOfWork.Repository<PatientProfile>().Get(x => x.PatientId == request.PatientId & x.PregnancyId==request.PregnancyId & !x.DeleteFlag).OrderBy(x=>x.Id).FirstOrDefaultAsync();
+                    PatientProfile result =await  _unitOfWork.Repository<PatientProfile>()
+                        .Get(x => x.PatientId == request.PatientId & x.PregnancyId==request.PregnancyId & !x.DeleteFlag)
+                        .OrderBy(x=>x.Id).FirstOrDefaultAsync();
                     if(result==null)
                     {
                         result = new PatientProfile();
