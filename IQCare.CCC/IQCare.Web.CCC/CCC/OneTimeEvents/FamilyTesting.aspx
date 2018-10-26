@@ -218,7 +218,7 @@
                                 <label class="control-label pull-left">CCC Number</label>
                             </div>
                             <div class="col-md-12" id="cccnum">
-                                <input id="cccNumber" class="form-control input-sm" type="text" runat="server" data-parsley-trigger="keyup" data-parsley-pattern-message="Please enter a valid CCC Number. Format ((XXXXX-XXXXX))" data-parsley-pattern="/^[0-9]{5}-[0-9]{5}$/" />
+                                <input id="cccNumber" class="form-control input-sm" type="text" data-parsley-trigger="keyup" data-parsley-pattern-message="<%=PatientIdentifier.FailedValidationMessage %>" data-parsley-pattern="<%=PatientIdentifier.ValidatorRegex %>" data-parsley-minlength="<%=PatientIdentifier.MinLength %>" data-parsley-maxlength="<%=PatientIdentifier.MaxLength %>" />
                             </div>
                         </div>
                     </div>
@@ -795,7 +795,7 @@
                     hivTestingresult = hivTestingresult == "select" ? "" : hivTestingresult;
                     var hivTestingresultDate = $("#<%=HIVTestingDate.ClientID%>").val();
                     var cccreferal = $("#<%=CccReferal.ClientID%>").val();
-                    var cccReferalNumber = $("#<%=cccNumber.ClientID%>").val();
+                    var cccReferalNumber = $("#cccNumber").val();
                     var previousDate = moment().subtract(1, 'days').format('DD-MMM-YYYY');
                     var adult = moment().subtract(10, 'years').format('DD-MMM-YYYY');
                     var cccReferalDate = $("#CCCReferalDate").val();
@@ -1362,29 +1362,29 @@
             var testingResult = $("#hivtestingresult :selected").text();
 
             if ((testingResult === "Tested Negative")) {
-                $("#<%=cccNumber.ClientID%>").prop('disabled', true);
+                $("#cccNumber").prop('disabled', true);
                 $("#<%=CccReferal.ClientID%>").val();
                 $("#<%=CccReferal.ClientID%>").prop('disabled', true);
                 $("#CCCReferalDate").prop('disabled', true);
                 $("#HIVTestingDate").prop('disabled', false);
             } else if (testingResult === "Never Tested") {
-                $("#<%=cccNumber.ClientID%>").prop('disabled', true);
+                $("#cccNumber").prop('disabled', true);
                 $("#<%=CccReferal.ClientID%>").val();
                 $("#<%=CccReferal.ClientID%>").prop('disabled', true);
                 $("#CCCReferalDate").prop('disabled', true);
                 $("#HIVTestingDate").prop('disabled', true);
             } else {
-                $("#<%=cccNumber.ClientID%>").prop('disabled',true);
+                $("#cccNumber").prop('disabled',true);
                 $("#<%=CccReferal.ClientID%>").prop('disabled', false);
                 $("#CCCReferalDate").prop('disabled', true);
             }
 
             if ($("#CccReferal").val() === 'False') {
-                $("#<%=cccNumber.ClientID%>").prop('disabled', true);
+                $("#cccNumber").prop('disabled', true);
                 $("#CCCReferalDate").prop('disabled', true);
             } else if ($("#CccReferal").val() === 'True')
             {
-                 $("#<%=cccNumber.ClientID%>").prop('disabled',false);
+                 $("#cccNumber").prop('disabled',false);
                 $("#<%=CccReferal.ClientID%>").prop('disabled', false);
                 $("#CCCReferalDate").prop('disabled', false);
 
@@ -1398,7 +1398,7 @@
             var baselinehivstatus = $("#BaselineHIVStatus :selected").text();
 
             if (baselinehivstatus === "Never Tested" || baselinehivstatus === "Unknown") {
-                $("#<%=cccNumber.ClientID%>").prop('disabled', true);
+                $("#cccNumber").prop('disabled', true);
                 $("#<%=CccReferal.ClientID%>").prop('disabled', true);
                 $("#<%=BaselineHIVStatusDate.ClientID%>").prop('disabled', true);
                 $("#BaselineHIVStatusD").addClass('noneevents');
@@ -1426,7 +1426,7 @@
                 $("#<%=BaselineHIVStatusDate.ClientID%>").prop('disabled', false);
                 $("#BaselineHIVStatusD").removeClass('noneevents');
 
-                $("#<%=cccNumber.ClientID%>").prop('disabled', false);
+                $("#cccNumber").prop('disabled', false);
                 $("#<%=CccReferal.ClientID%>").prop('disabled', false);
 
             } else if (baselinehivstatus === "Tested Negative") {
@@ -1436,7 +1436,7 @@
                 $("#HIVTestingDate").prop('disabled', false);
                 $("#TestingDate").removeClass('noneevents');
 
-                $("#<%=cccNumber.ClientID%>").prop('disabled', true);
+                $("#cccNumber").prop('disabled', true);
                 $("#<%=CccReferal.ClientID%>").prop('disabled', true);
 
                 $("#CCCReferalDate").prop('disabled', true);
@@ -1444,7 +1444,7 @@
 
                 $("#<%=BaselineHIVStatusDate.ClientID%>").prop('disabled', false);
             } else {
-                $("#<%=cccNumber.ClientID%>").prop('disabled', false);
+                $("#cccNumber").prop('disabled', false);
                 $("#<%=CccReferal.ClientID%>").prop('disabled',false);
                 $("#BaselineHIVStatusD").removeClass('noneevents');
                 $("#<%=BaselineHIVStatusDate.ClientID%>").prop('disabled', false);
@@ -1738,6 +1738,19 @@
             return Math.max.apply(null, vals);
         }
 
+         //Remove empty ReGex validation constraints from relevant textboxes
+        function removeEmptyValidationConstraints() {
+            $('input[type=text]').each(function () {
+                if ($(this).attr("data-parsley-pattern") == "") {
+                    $(this).removeAttr("data-parsley-pattern");
+                }
+                if ($(this).attr("data-parsley-pattern-message") == "") {
+                    $(this).removeAttr("data-parsley-pattern-message");
+                }
+            });
+        }
+
+        removeEmptyValidationConstraints();
     </script>
 
 </asp:Content>

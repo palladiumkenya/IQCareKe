@@ -52,17 +52,36 @@ namespace IQCare.CCC.UILogic
         /// <param name="patientLabOrder">The patient lab order.</param>
         /// <param name="orderStatus">The order status.</param>
         /// <returns>order Id</returns>
+        public int savePatientLabOrder(LabOrderEntity labOrder)
+        {
+            return savePatientLabOrder(labOrder, null);
+        }
+
+        public int savePatientLabOrder(LabOrderEntity labOrder, string patientLabOrders)
+        {
+            return savePatientLabOrder(labOrder.Id, labOrder.PatientId, labOrder.Ptn_pk, labOrder.UserId, labOrder.LocationId, labOrder.ModuleId, labOrder.PatientMasterVisitId, labOrder.OrderDate.ToString(), labOrder.ClinicalOrderNotes, patientLabOrders, labOrder.OrderStatus);
+        }
+
         public int savePatientLabOrder(int patientID, int patient_Pk, int userId, int facilityID, int moduleId, int patientMasterVisitId, string labOrderDate, string orderNotes, string patientLabOrder, string orderStatus)
         {
+            return savePatientLabOrder(0, patientID, patient_Pk, userId, facilityID, moduleId, patientMasterVisitId, labOrderDate, orderNotes, patientLabOrder, orderStatus);
+        }
+
+        public int savePatientLabOrder(int orderId, int patientID, int patient_Pk, int userId, int facilityID, int moduleId, int patientMasterVisitId, string labOrderDate, string orderNotes, string patientLabOrder, string orderStatus)
+        {
             int visitId = 0;
-            int orderId = 0;
             int testId = 0;
             //int _paramId = 0;
             DateTime orderDate = Convert.ToDateTime(labOrderDate);
             // DateTime orderDate = DateTime.Now;
             //DateTime orderDate = DateTime.Parse(labOrderDate);
             var jss = new JavaScriptSerializer();
-            IList<ListLabOrder> data = jss.Deserialize<IList<ListLabOrder>>(patientLabOrder);
+            IList<ListLabOrder> data = new List<ListLabOrder>();
+
+            if (patientLabOrder != null)
+            {
+                data = jss.Deserialize<IList<ListLabOrder>>(patientLabOrder);
+            }
 
             if (patientID > 0)
             {
@@ -76,6 +95,7 @@ namespace IQCare.CCC.UILogic
                     ModuleId = moduleId,
                     VisitType = 6
                 };
+
                 visitId = _visitManager.AddPatientVisit(visit);
 
                 LabOrderEntity labOrder = new LabOrderEntity()
@@ -92,8 +112,14 @@ namespace IQCare.CCC.UILogic
                     OrderDate = orderDate,
                     UserId = userId
                 };
-                orderId = _mgr.AddPatientLabOrder(labOrder);
-               // DateTime? nullDate = null;
+                if (orderId > 0)
+                {
+                    labOrder.Id = orderId;
+                    _mgr.EditPatientLabOrder(labOrder);
+                } else {
+                    orderId = _mgr.AddPatientLabOrder(labOrder);
+                }
+                // DateTime? nullDate = null;
                 foreach (ListLabOrder t in data)
                 {
                     LabDetailsEntity labDetails = new LabDetailsEntity()
@@ -123,13 +149,13 @@ namespace IQCare.CCC.UILogic
                         LabTestId = t.LabNameId,  //parameter
                         LabOrderTestId = testId,  //uniquely identifies a particular test
                         FacilityId = facilityID,
-                         ResultDate = t.ResultDate
+                        ResultDate = t.ResultDate
                     };
 
-                    Result=  _mgr.AddPatientLabTracker(labTracker);
+                    Result = _mgr.AddPatientLabTracker(labTracker);
                     if (Result > 0)
                     {
-                      Id=  _patientEncounterManager.AddpatientEncounter(patientID, patientMasterVisitId, _patientEncounterManager.GetPatientEncounterId("EncounterType", "lab-encounter".ToLower()),205,userId);
+                        Id = _patientEncounterManager.AddpatientEncounter(patientID, patientMasterVisitId, _patientEncounterManager.GetPatientEncounterId("EncounterType", "lab-encounter".ToLower()), 205, userId);
                     }
                     //add to dtlresults
 
@@ -159,7 +185,7 @@ namespace IQCare.CCC.UILogic
             }
             return orderId;
         }
-         
+
         public List<PatientLabTracker> GetVlPendingCount(int facilityId)
         {
             var pendingLabs = _lookupTest.GetVlPendingCount(facilityId);
@@ -178,6 +204,7 @@ namespace IQCare.CCC.UILogic
             var facilityVLsuppressed = _lookupTest.GetFacilityVLSuppressed(facilityId);
             return facilityVLsuppressed;
         }
+
         public List<LookupFacilityViralLoad> GetFacilityVLUnSuppressed(int facilityId)
         {
             var facilityVLunsuppressed = _lookupTest.GetFacilityVLUnSuppressed(facilityId);
@@ -189,6 +216,7 @@ namespace IQCare.CCC.UILogic
             var labOrders = _mgr.GetPatientLabOrdersByDate(patientId, visitDate);
             return labOrders;
         }
+
         public LabOrderEntity GetLabOrdersById(int labOrderId)
         {
             var labOrders = _mgr.GetLabOrderById(labOrderId);
