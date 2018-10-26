@@ -311,6 +311,7 @@ export class HeiComponent implements OnInit {
             InvitationOfContacts: this.tbAssessmentFormGroup.value[0]['invitationContacts'],
         } as PatientIcfAction;
 
+
         const laborder: LabOrder = {
             Ptn_Pk: 1,
             PatientId: this.patientId,
@@ -327,6 +328,15 @@ export class HeiComponent implements OnInit {
             PatientMasterVisitId: this.patientMasterVisitId,
             LabTests: []
         };
+
+        for (let i = 0; i < this.hivTestingFormGroup.length; i++) {
+            laborder.LabTests.push({
+                Id: 1,
+                Notes: '',
+                LabTestName: ''
+            });
+        }
+
 
         const motherRegistered = this.yesnoOptions.filter(
             obj => obj.itemId == this.deliveryMatFormGroup.value[1]['motherregisteredinclinic']
