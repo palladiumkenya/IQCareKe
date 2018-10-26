@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace IQCare.Common.BusinessProcess.CommandHandlers.Refferal
 {
-    public class AddRefferalCommandHandler : IRequestHandler<AddRefferalCommand, Result<AddRefferalCommandResponse>>
+    public class AddRefferalCommandHandler : IRequestHandler<AddPatientReferralCommand, Result<AddPatientReferralResponse>>
     {
         private readonly ICommonUnitOfWork _unitOfWork;
 
@@ -18,35 +18,26 @@ namespace IQCare.Common.BusinessProcess.CommandHandlers.Refferal
             _unitOfWork = unitOfWork;
         }
 
-        public async Task<Result<AddRefferalCommandResponse>> Handle(AddRefferalCommand request, CancellationToken cancellationToken)
+        public async Task<Result<AddPatientReferralResponse>> Handle(AddPatientReferralCommand request, CancellationToken cancellationToken)
         {
             using (_unitOfWork)
             {
                 try
                 {
-                    PatientRefferal patientRefferal = new PatientRefferal()
-                    {
-                        PatientId = request.patientRefferal.PatientId,
-                        PatientMasterVisitId = request.patientRefferal.PatientMasterVisitId,
-                        ReferralDate = request.patientRefferal.ReferralDate,
-                        ReferralReason = request.patientRefferal.ReferralReason,
-                        ReferredBy = request.patientRefferal.ReferredBy,
-                        ReferredFrom = request.patientRefferal.ReferredFrom,
-                        ReferredTo = request.patientRefferal.ReferredTo,
-                        DeleteFlag = 0,
-                    };
-                  await  _unitOfWork.Repository<PatientRefferal>().AddAsync(patientRefferal);
+                    PatientRefferal patientRefferal = new PatientRefferal(request.PatientId, request.PatientMasterVisitId, request.ReferredFrom, request.ReferredTo, request.ReferralReason, request.ReferralDate, request.ReferredBy, request.CreatedBy, request.DeleteFlag);
+                   
+                    await _unitOfWork.Repository<PatientRefferal>().AddAsync(patientRefferal);
                     await _unitOfWork.SaveAsync();
-                    return Result<AddRefferalCommandResponse>.Valid(new AddRefferalCommandResponse()
+
+                    return Result<AddPatientReferralResponse>.Valid(new AddPatientReferralResponse()
                     {
-                        Id = 1
+                        PatientReferralId = patientRefferal.Id
                     });
                 }
                 catch (Exception e)
                 {
-
                     Log.Error(e.Message);
-                    return Result<AddRefferalCommandResponse>.Invalid(e.Message);
+                    return Result<AddPatientReferralResponse>.Invalid(e.Message);
                 }
             }
         }
