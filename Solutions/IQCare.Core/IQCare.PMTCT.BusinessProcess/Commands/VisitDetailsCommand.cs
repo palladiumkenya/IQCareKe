@@ -19,6 +19,8 @@ namespace IQCare.PMTCT.BusinessProcess.Commands
         public int ParityTwo { get; set; }
         public int Gravidae { get; set; }
         public int UserId { get; set; }
+        public string EncounterType { get; set; }
+        public int ? DaysPostPartum { get; set; }
     }
 
     public class VisitDetailsCommandResult
