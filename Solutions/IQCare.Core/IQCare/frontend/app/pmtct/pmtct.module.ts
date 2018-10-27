@@ -24,12 +24,12 @@ import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ProfileComponent } from './profile/profile.component';
-import { PatientEducationExaminationComponent } from './patient-education-examination/patient-education-examination.component';
-import { AntenatalProfileComponent } from './antenatal-profile/antenatal-profile.component';
-import { HivStatusComponent } from './hiv-status/hiv-status.component';
-import { ClientMonitoringComponent } from './client-monitoring/client-monitoring.component';
-import { HaartProphylaxisComponent } from './haart-prophylaxis/haart-prophylaxis.component';
-import { VisitDetailsComponent } from './visit-details/visit-details.component';
+import { PatientEducationExaminationComponent } from './anc/patient-education-examination/patient-education-examination.component';
+import { AntenatalProfileComponent } from './anc/antenatal-profile/antenatal-profile.component';
+import { HivStatusComponent } from './anc/hiv-status/hiv-status.component';
+import { ClientMonitoringComponent } from './anc/client-monitoring/client-monitoring.component';
+import { HaartProphylaxisComponent } from './anc/haart-prophylaxis/haart-prophylaxis.component';
+import { VisitDetailsComponent } from './anc/visit-details/visit-details.component';
 import { PmtctRoutingModule } from './pmtct-routing-module';
 import {
     MatAutocompleteModule,
@@ -41,10 +41,10 @@ import {
     MatSortModule, MatStepperModule, MatTableModule, MatTabsModule, MatToolbarModule, MatTooltipModule,
 } from '@angular/material';
 import { AncComponent } from './anc/anc.component';
-import { PreventiveServicesComponent } from './preventive-services/preventive-services.component';
-import { PartnerTestingComponent } from './partner-testing/partner-testing.component';
-import { ReferralsComponent } from './referrals/referrals.component';
-import { NextAppointmentComponent } from './next-appointment/next-appointment.component';
+import { PreventiveServicesComponent } from './anc/preventive-services/preventive-services.component';
+import { PartnerTestingComponent } from './anc/partner-testing/partner-testing.component';
+import { ReferralsComponent } from './anc/referrals/referrals.component';
+import { NextAppointmentComponent } from './anc/next-appointment/next-appointment.component';
 import { SharedModule } from '../shared/shared.module';
 import { HeiComponent } from './hei/hei.component';
 import { HeiVisitDetailsComponent } from './hei/hei-visit-details/hei-visit-details.component';
@@ -97,6 +97,7 @@ import { TestKitNameResolver } from './_services/resolvers/test-kit-name.resolve
 import { HivTestResultResolver } from './_services/resolvers/hiv-test-result.resolver';
 import { PncEncountersComponent } from './pnc/pnc-encounters/pnc-encounters.component';
 import { CheckinComponent } from './checkin/checkin.component';
+import {TbScreeningResolver} from './_services/resolvers/tb-screening.resolver';
 
 @NgModule({
     imports: [
@@ -197,7 +198,8 @@ import { CheckinComponent } from './checkin/checkin.component';
         FinalPartnerHivResultResolver,
         CervicalCancerScreeningMethodResolver,
         FamilyPlanningMethodResolver,
-        CervicalCancerScreeningResultsResolver
+        CervicalCancerScreeningResultsResolver,
+        TbScreeningResolver
     ],
     entryComponents: [
         IptClientWorkupComponent,

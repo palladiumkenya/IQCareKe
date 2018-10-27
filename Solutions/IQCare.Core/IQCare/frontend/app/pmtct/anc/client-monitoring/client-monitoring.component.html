@@ -12,8 +12,8 @@
                   <mat-form-field class="col-md-12">
                       <mat-select formControlName="WhoStage"   placeholder="WHO Stage" minlength="1" required>
                           <mat-option value="0">Select</mat-option>
-                          <mat-option  *ngFor="let WHOStagOption of WHOStagOptions" [value]="WHOStagOption.itemId" >
-                              {{WHOStagOption.itemName}}
+                          <mat-option  *ngFor="let whoStagOption of whoStagOptions" [value]="whoStagOption.itemId" >
+                              {{whoStagOption.itemName}}
                           </mat-option>
                       </mat-select>
                   </mat-form-field>
@@ -22,8 +22,8 @@
                   <mat-form-field class="col-md-12">
                       <mat-select formControlName="viralLoadSampleTaken"  placeholder="Viral Load Sample taken?" minlength="1" required>
                           <mat-option value="0">Select</mat-option>
-                          <mat-option  *ngFor="let item of YesNoNa" [value]="item.itemId " >
-                              {{item.itemName}}
+                          <mat-option  *ngFor="let YesNoNaOption of YesNoNaOptions" [value]="YesNoNaOption.itemId " >
+                              {{YesNoNaOption.itemName}}
                           </mat-option>
                       </mat-select>
                   </mat-form-field>
@@ -32,8 +32,8 @@
                   <mat-form-field class="col-md-12">
                       <mat-select formControlName="screenedForTB"  placeholder="*Screened for TB" minlength="1" required>
                           <mat-option value="0">Select</mat-option>
-                          <mat-option  *ngFor="let TBOption of TBOptions" [value]="TBOption.itemId" >
-                              {{TBOption.itemName}}
+                          <mat-option  *ngFor="let TBScreeningOption of TBScreeningOptions" [value]="TBScreeningOption.itemId" >
+                              {{TBScreeningOption.itemName}}
                           </mat-option>
                       </mat-select>
                   </mat-form-field>
@@ -45,8 +45,8 @@
                   <mat-form-field class="col-md-12">
                       <mat-select formControlName="cacxScreeningDone"  placeholder="Cervical Cancer Screened during this visit" required minlength="0">
                           <mat-option value="0">Select</mat-option>
-                          <mat-option  *ngFor="let yesno of YesNos" [value]="yesno.itemId" >
-                              {{yesno.itemName}}
+                          <mat-option  *ngFor="let YesNoOption of YesNoOptions" [value]="YesNoOption.itemId" >
+                              {{YesNoOption.itemName}}
                           </mat-option>
                       </mat-select>
                   </mat-form-field>
@@ -55,8 +55,8 @@
                   <mat-form-field class="col-md-12">
                       <mat-select formControlName="cacxMethod"  placeholder="Select Method" required minlength="0">
                           <mat-option value="0">Select</mat-option>
-                          <mat-option   *ngFor="let CaCxMethod of CaCxMethods" [value]="CaCxMethod.itemId" >
-                              {{CaCxMethod.itemName}}
+                          <mat-option   *ngFor="let cacxMethodOption of cacxMethodOptions" [value]="cacxMethodOption.itemId" >
+                              {{cacxMethodOption.itemName}}
                           </mat-option>
                       </mat-select>
                   </mat-form-field>
@@ -65,8 +65,8 @@
                   <mat-form-field class="col-md-12">
                       <mat-select formControlName="cacxResult"  placeholder="Select Result" required minlength="0">
                           <mat-option value="0">Select</mat-option>
-                          <mat-option  *ngFor="let CacxResult of CacxResults" [value]="CacxResult.itemId" >
-                              {{CacxResult.itemName}}
+                          <mat-option  *ngFor="let cacxResultOption of cacxResultOptions" [value]="cacxResultOption.itemId" >
+                              {{cacxResultOption.itemName}}
                           </mat-option>
                       </mat-select>
                   </mat-form-field>
