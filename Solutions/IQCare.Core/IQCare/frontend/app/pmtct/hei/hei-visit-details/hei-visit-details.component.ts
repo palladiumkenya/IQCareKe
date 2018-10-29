@@ -21,6 +21,8 @@ export class HeiVisitDetailsComponent implements OnInit {
     public visitTypes: any[] = [];
 
     @Input('formtype') formtype: string;
+    @Input('visitDate') visitDate: string;
+    @Input('visitType') visitType: string;
     @Output() notify: EventEmitter<FormGroup> = new EventEmitter<FormGroup>();
 
     constructor(private _formBuilder: FormBuilder,
@@ -40,6 +42,8 @@ export class HeiVisitDetailsComponent implements OnInit {
             dayPostPartum: new FormControl('', [Validators.required])
         });
 
+        this.HeiVisitDetailsFormGroup.get('visitDate').setValue(this.visitDate);
+        this.HeiVisitDetailsFormGroup.get('visitType').setValue(this.visitType['itemId']);
         this.HeiVisitDetailsFormGroup.get('visitNumber').disable({ onlySelf: true });
         this.HeiVisitDetailsFormGroup.get('dayPostPartum').disable({ onlySelf: true });
 

@@ -1,3 +1,4 @@
+import { PncService } from './_services/pnc.service';
 import { CervicalCancerScreeningResultsResolver } from './_services/resolvers/cervical-cancer-screening-results.resolver';
 import { FamilyPlanningMethodResolver } from './_services/resolvers/family-planning-method.resolver';
 import { CervicalCancerScreeningMethodResolver } from './_services/resolvers/cervical-cancer-screening-method.resolver';
@@ -197,7 +198,8 @@ import { CheckinComponent } from './checkin/checkin.component';
         FinalPartnerHivResultResolver,
         CervicalCancerScreeningMethodResolver,
         FamilyPlanningMethodResolver,
-        CervicalCancerScreeningResultsResolver
+        CervicalCancerScreeningResultsResolver,
+        PncService
     ],
     entryComponents: [
         IptClientWorkupComponent,
