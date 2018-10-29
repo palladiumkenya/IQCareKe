@@ -1,0 +1,1 @@
+﻿ALTER TABLE PatientProfile ALTER COLUMN AgeMenarche DECIMAL(4,1) NULL

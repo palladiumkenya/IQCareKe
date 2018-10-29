@@ -1,10 +1,13 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {LookupItemService} from '../../shared/_services/lookup-item.service';
+
 import {SnotifyService} from 'ng-snotify';
-import {NotificationService} from '../../shared/_services/notification.service';
+
 import {Subscription} from 'rxjs/index';
-import {ReferralsEmitter} from '../emitters/ReferralsEmitter';
+import {ReferralsEmitter} from '../../emitters/ReferralsEmitter';
+import {LookupItemService} from '../../../shared/_services/lookup-item.service';
+import {NotificationService} from '../../../shared/_services/notification.service';
+
 
 @Component({
   selector: 'app-referrals',
@@ -14,10 +17,11 @@ import {ReferralsEmitter} from '../emitters/ReferralsEmitter';
 export class ReferralsComponent implements OnInit {
   public ReferralFormGroup: FormGroup;
   public LookupItems$: Subscription;
-  public referrals: any[] = [];
-  public yesnos: any[] = [];
+  public referralOptions: any[] = [];
+  public yesnoOptions: any[] = [];
     @Output() nextStep = new EventEmitter <ReferralsEmitter> ();
     @Input() referral: ReferralsEmitter;
+    @Input() referralFormOptions: any[] = [];
     public referralData: ReferralsEmitter;
 
   constructor(private _formBuilder: FormBuilder, private _lookupItemService: LookupItemService,
@@ -33,10 +37,17 @@ export class ReferralsComponent implements OnInit {
           serviceRemarks: ['', Validators.required]
       });
 
-      this.getLookupOptions('pmtctReferrals', this.referrals);
-      this.getLookupOptions('YesNo', this.yesnos);
-  }
+      const {
+          referralOptions,
+          yesNoOptions
+      } = this.referralFormOptions[0];
+      this.referralOptions = referralOptions;
+      this.yesnoOptions = yesNoOptions;
 
+    //  this.getLookupOptions('pmtctReferrals', this.referrals);
+     // this.getLookupOptions('YesNo', this.yesnos);
+  }
+/*
     public  getLookupOptions(groupName: string, masterName: any[]) {
         this.LookupItems$ = this._lookupItemService.getByGroupName(groupName)
             .subscribe(
@@ -54,7 +65,7 @@ export class ReferralsComponent implements OnInit {
                 () => {
                     console.log(this.LookupItems$);
                 });
-    }
+    }*/
 
     public moveNextStep() {
         console.log(this.ReferralFormGroup.value);

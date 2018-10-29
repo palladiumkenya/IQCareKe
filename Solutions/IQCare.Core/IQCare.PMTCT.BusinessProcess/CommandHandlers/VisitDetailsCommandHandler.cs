@@ -48,9 +48,7 @@ namespace IQCare.PMTCT.BusinessProcess.CommandHandlers
                     PatientEncounterService patientEncounterService = new PatientEncounterService(_commonUnitOfWork);
                     PregnancyServices patientPregnancyServices =new PregnancyServices(_unitOfWork);
 
-
                     var patientMasterVisit = await patientMasterVisitService.Add(request.PatientId, 1,DateTime.Today, 0,request.VisitDate, request.VisitDate, 0,0,request.VisitType,0);
-
 
                     PatientPregnancy patientPregnancy = new PatientPregnancy()
                     {
@@ -66,8 +64,8 @@ namespace IQCare.PMTCT.BusinessProcess.CommandHandlers
                         CreateDate = DateTime.Now                                          
                     };
 
-                    
-                    int encounterTypeId = await lookupLogic.GetLookupIdbyName("anc-encounter");                   
+                    var encounterTypeId = await lookupLogic.GetLookupIdbyName(request.EncounterType);
+
                     var encounter = await patientEncounterService.Add(request.PatientId, encounterTypeId, patientMasterVisit.Id, DateTime.Now, DateTime.Now, request.ServiceAreaId,request.UserId);
 
                     if (VisitNumber <= 1)
@@ -91,17 +89,17 @@ namespace IQCare.PMTCT.BusinessProcess.CommandHandlers
                     }
 
 
-                        PatientProfile patientProfile = new PatientProfile()
-                        {
-                            PatientId = request.PatientId,
-                            PatientMasterVisitId = patientMasterVisit.Id,
-                            AgeMenarche = request.AgeAtMenarche,
-                            PregnancyId = this.PregnancyId,
-                            VisitNumber = this.VisitNumber,
-                            VisitType = request.VisitType,
-                            CreatedBy = (request.UserId<1)?1:request.UserId,
-                            CreateDate = DateTime.Now
-                        };
+                    PatientProfile patientProfile = new PatientProfile()
+                    {
+                        PatientId = request.PatientId,
+                        PatientMasterVisitId = patientMasterVisit.Id,
+                        AgeMenarche = request.AgeAtMenarche,
+                        PregnancyId = this.PregnancyId,
+                        VisitNumber = this.VisitNumber,
+                        VisitType = request.VisitType,
+                        CreatedBy = (request.UserId < 1) ? 1 : request.UserId,
+                        CreateDate = DateTime.Now,
+                    };
 
                           var profile = visitDetailsService.AddPatientProfile(patientProfile);
                         profileId = profile.Id;

@@ -290,6 +290,7 @@ namespace BusinessProcess.CCC
                                          c.PatientStatus.ToLower().Contains("transfer out") ||
                                          c.PatientStatus.ToLower().Contains("confirmed hiv negative") ||
                                          c.PatientStatus.ToLower().Contains("hiv negative");
+                                    c => c.PatientStatus.ToLower().Contains("not enrolled") == false;
                                 expresionFinal = PredicateBuilder.And(expresionFinal, expressionPatientStatusEnrolled);
                                 break;
                         }
@@ -424,6 +425,16 @@ namespace BusinessProcess.CCC
             using (LookupContext context = new LookupContext())
             {
                 return context.PersonExtLookup.Where(x => x.PersonId == personId).First();
+            }
+        }
+
+        public PatientLookup GetPatientByNormalizedCccNumber(string normalizedCccNumber)
+        {
+            using (UnitOfWork unitOfWork = new UnitOfWork(new LookupContext()))
+            {
+                PatientLookup patientLookup = unitOfWork.PatientLookupRepository.FindBy(x => x.EnrollmentNumberNormalized.Equals(normalizedCccNumber)).FirstOrDefault();
+                unitOfWork.Dispose();
+                return patientLookup;
             }
         }
     }

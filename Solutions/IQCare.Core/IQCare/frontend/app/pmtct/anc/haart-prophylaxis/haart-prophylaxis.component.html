@@ -14,8 +14,8 @@
                 <mat-select formControlName="onArvBeforeANCVisit" placeholder="On ARV before 1st ANC Visit" required
                             minlength="0">
                     <mat-option value="0"> Select</mat-option>
-                    <mat-option *ngFor="let yesnona of yesnonas" [value]="yesnona.itemId">
-                        {{yesnona.itemName}}
+                    <mat-option *ngFor="let yesnonaOption of yesnonaOptions" [value]="yesnonaOption.itemId">
+                        {{yesnonaOption.itemName}}
                     </mat-option>
                 </mat-select>
             </mat-form-field>
@@ -24,8 +24,8 @@
             <mat-form-field class="col-md-12">
                 <mat-select formControlName="startedHaartANC" placeholder="Started HAART in ANC" required minlength="0">
                     <mat-option value="0"> Select</mat-option>
-                    <mat-option *ngFor="let yesnona of yesnonas" [value]="yesnona.itemId">
-                        {{yesnona.itemName}}
+                    <mat-option *ngFor="let yesnonaOption of yesnonaOptions" [value]="yesnonaOption.itemId">
+                        {{yesnonaOption.itemName}}
                     </mat-option>
                 </mat-select>
             </mat-form-field>
@@ -35,8 +35,8 @@
                 <mat-select formControlName="cotrimoxazole" placeholder="Cotrimoxazole give during this visit ?"
                             required minlength="0">
                     <mat-option value="0"> Select</mat-option>
-                    <mat-option *ngFor="let yesnona of yesnonas" [value]="yesnona.itemId">
-                        {{yesnona.itemName}}
+                    <mat-option *ngFor="let yesnonaOption of yesnonaOptions" [value]="yesnonaOption.itemId">
+                        {{yesnonaOption.itemName}}
                     </mat-option>
                 </mat-select>
             </mat-form-field>
@@ -46,8 +46,8 @@
         <div class="col-md-4 col-xs-12 col-sm-6">
             <mat-form-field class="col-md-12">
                 <mat-select formControlName="aztFortheBaby" placeholder="AZT for the baby dispensed">
-                    <mat-option *ngFor="let yesnona of yesnonas" [value]="yesnona.itemId">
-                        {{yesnona.itemName}}
+                    <mat-option *ngFor="let yesnonaOption of yesnonaOptions" [value]="yesnonaOption.itemId">
+                        {{yesnonaOption.itemName}}
                     </mat-option>
                 </mat-select>
             </mat-form-field>
@@ -56,8 +56,8 @@
             <mat-form-field class="col-md-12">
                 <mat-select formControlName="nvpForBaby" placeholder="NVP for the baby dispensed " required
                             minlength="0">
-                    <mat-option *ngFor="let yesnona of yesnonas" [value]="yesnona.itemId">
-                        {{yesnona.itemName}}
+                    <mat-option *ngFor="let yesnonaOption of yesnonaOptions" [value]="yesnonaOption.itemId">
+                        {{yesnonaOption.itemName}}
                     </mat-option>
                 </mat-select>
             </mat-form-field>
@@ -78,8 +78,8 @@
                 <mat-form-field class="col-md-12">
                     <mat-select formControlName="otherIllness" placeholder="Do the patient have other illnesses?">
                         <mat-option value="0"> Select</mat-option>
-                        <mat-option *ngFor="let yesnona of yesnonas" [value]="yesnona.itemId">
-                            {{yesnona.itemName}}
+                        <mat-option *ngFor="let yesnonaOption of yesnonaOptions" [value]="yesnonaOption.itemId">
+                            {{yesnonaOption.itemName}}
                         </mat-option>
                     </mat-select>
                 </mat-form-field>
@@ -92,8 +92,8 @@
                 <mat-form-field class="col-md-12">
                     <mat-select formControlName="illness" placeholder="Select Illness" required minlength="0">
                         <mat-option value="0"> Select</mat-option>
-                        <mat-option *ngFor="let chronic of chronics" [value]="chronic">
-                            {{chronic.itemName}}
+                        <mat-option *ngFor="let chronicIllnessOption of chronicIllnessOptions" [value]="chronicIllnessOption">
+                            {{chronicIllnessOption.itemName}}
                         </mat-option>
                     </mat-select>
                 </mat-form-field>
@@ -121,41 +121,43 @@
         </div>
 
     </div>
-
     <div class="row">
+        <div class="col-md-12">
+            <div class="example-container mat-elevation-z1">
 
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th scope="col" width="5%"># Count</th>
+                        <th scope="col">Illness</th>
+                        <th scope="col">On Set Date</th>
+                        <th scope="col">Current Treatment</th>
+                        <th scope="col">Dose</th>
+                        <th scope="col">Action</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr *ngFor="let item_data of chronicIllness; let index = index">
+                        <td>{{index+1}}</td>
+                        <td>{{item_data.chronicIllness}}</td>
+                        <td>{{item_data.onSetDate | date: 'dd-MMM-yyyy'}}</td>
+                        <td>{{item_data.currentTreatment}}</td>
+                        <td>{{item_data.dose}}</td>
+                        <td>
+                            <i style="cursor: pointer;" class="danger material-icons">
+                                delete
+                            </i>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
 
-        <div class="example-container mat-elevation-z8">
-
-            <table class="table table-striped">
-                <thead>
-                <tr>
-                    <th scope="col" width="5%"># Count</th>
-                    <th scope="col">Illness</th>
-                    <th scope="col">On Set Date</th>
-                    <th scope="col">Current Treatment</th>
-                    <th scope="col">Dose</th>
-                    <th scope="col">Action</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr *ngFor="let item_data of chronicIllness; let index = index">
-                    <td>{{index+1}}</td>
-                    <td>{{item_data.chronicIllness}}</td>
-                    <td>{{item_data.onSetDate | date: 'dd-MMM-yyyy'}}</td>
-                    <td>{{item_data.currentTreatment}}</td>
-                    <td>{{item_data.dose}}</td>
-                    <td>
-                        <i style="cursor: pointer;" class="danger material-icons">
-                            delete
-                        </i>
-                    </td>
-                </tr>
-                </tbody>
-            </table>
-
+            </div>
         </div>
     </div>
+
+
+
 
 
 </form>

@@ -1,11 +1,11 @@
 import { Component, EventEmitter, Input, OnInit, Output, Inject } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 import { Subscription } from 'rxjs/index';
-import { NotificationService } from '../../shared/_services/notification.service';
-import { LookupItemService } from '../../shared/_services/lookup-item.service';
+import { NotificationService } from '../../../shared/_services/notification.service';
+import { LookupItemService } from '../../../shared/_services/lookup-item.service';
 import { SnotifyService } from 'ng-snotify';
-import { HIVTestingEmitter } from '../emitters/HIVTestingEmitter';
-import { VisitDetailsService } from '../_services/visit-details.service';
+import { HIVTestingEmitter } from '../../emitters/HIVTestingEmitter';
+import { VisitDetailsService } from '../../_services/visit-details.service';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 export interface Topic {
     value: number;

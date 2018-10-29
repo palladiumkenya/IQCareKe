@@ -22,24 +22,11 @@ namespace IQCare.Controllers.PMTCT.ANC
             _mediator = mediator ?? throw new ArgumentNullException(nameof(mediator));
         }
 
+        //used to capture both maternity and ANC visit details
         [HttpPost]
         public async Task<IActionResult> Post([FromBody] VisitDetailsCommand visitDetailsCommand )
         {
-            var response = await _mediator.Send(new VisitDetailsCommand
-            {
-                PatientId = visitDetailsCommand.PatientId,
-                ServiceAreaId = visitDetailsCommand.ServiceAreaId,
-                VisitDate = visitDetailsCommand.VisitDate,
-                VisitType = visitDetailsCommand.VisitType,
-                VisitNumber= visitDetailsCommand.VisitNumber,
-                Lmp=visitDetailsCommand.Lmp ,
-                Edd= visitDetailsCommand.Edd,
-                Gestation=visitDetailsCommand.Gestation,
-                AgeAtMenarche= visitDetailsCommand.AgeAtMenarche ,
-                ParityOne=visitDetailsCommand.ParityOne,
-                ParityTwo=visitDetailsCommand.ParityTwo,
-                Gravidae= visitDetailsCommand.Gravidae ,
-            }, Request.HttpContext.RequestAborted);
+            var response = await _mediator.Send(visitDetailsCommand, Request.HttpContext.RequestAborted);
 
             if (response.IsValid)
             {
@@ -52,7 +39,7 @@ namespace IQCare.Controllers.PMTCT.ANC
         [HttpGet("GetAncProfile/{patientId}/{pregnancyId}")]
         public async Task<IActionResult>GetANcProfile(int patientId,int pregnancyId)
         {
-            var results = await _mediator.Send(new GetANCInitialProfileCommand() { PatientId = patientId,PregnancyId = pregnancyId}, HttpContext.RequestAborted);
+            var results = await _mediator.Send(new GetPatientInitialProfileCommand() { PatientId = patientId,PregnancyId = pregnancyId}, HttpContext.RequestAborted);
             if (results.IsValid)
                 return Ok(results.Value);
             return BadRequest(results);
@@ -66,5 +53,29 @@ namespace IQCare.Controllers.PMTCT.ANC
                 return Ok(results.Value);
             return BadRequest(results);
         }
+        
+        // Used to capture PNC visit details
+        
+        [HttpPost]
+        public async Task<IActionResult> AddPNCVisitDetails([FromBody] AddPNCVisitCommand command)
+        {
+            var response = await _mediator.Send(command, Request.HttpContext.RequestAborted);
+
+            if (response.IsValid)
+                return Ok(response.Value);
+
+            return BadRequest(response);
+        }
+
+        //Used to get patient profile on PNC 
+        [HttpGet("GetInitialProfileDetailsByPatientId/{Id}")]
+        public async Task<IActionResult> GetInitialProfileDetailsByPatientId(int Id)
+        {
+            var results = await _mediator.Send(new GetPatientInitialProfileCommand() { PatientId = Id }, HttpContext.RequestAborted);
+            if (results.IsValid)
+                return Ok(results.Value);
+            return BadRequest(results);
+        }
+
     }
 }
