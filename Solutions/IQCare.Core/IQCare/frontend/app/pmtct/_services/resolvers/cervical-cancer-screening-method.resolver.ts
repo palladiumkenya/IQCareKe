@@ -16,6 +16,6 @@ export class CervicalCancerScreeningMethodResolver implements Resolve<Observable
         route: ActivatedRouteSnapshot,
         state: RouterStateSnapshot
     ): Observable<LookupItemView[]> {
-        return this._lookupItemService.getByGroupName('CacxMethod');
+        return this._lookupItemService.getByGroupName('Cervical_Cancer_Screening');
     }
 }

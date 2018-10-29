@@ -30,21 +30,21 @@ namespace IQCare.PMTCT.BusinessProcess.CommandHandlers
 
             try
             {
-                PatientMasterVisitService patientMasterVisitService = new PatientMasterVisitService(_commonUnitOfWork);
-                PatientEncounterService patientEncounterService = new PatientEncounterService(_commonUnitOfWork);
-                LookupLogic lookupLogic = new LookupLogic(_commonUnitOfWork);
+                //PatientMasterVisitService patientMasterVisitService = new PatientMasterVisitService(_commonUnitOfWork);
+                //PatientEncounterService patientEncounterService = new PatientEncounterService(_commonUnitOfWork);
+                //LookupLogic lookupLogic = new LookupLogic(_commonUnitOfWork);
                 VisitDetailsService visitDetailsService = new VisitDetailsService(_unitOfWork);
 
-                var patientMasterVisit = await patientMasterVisitService.Add(request.PatientId, 1, DateTime.Today, 0, request.VisitDate, request.VisitDate, 0, 0, request.VisitType, 0);
+                //var patientMasterVisit = await patientMasterVisitService.Add(request.PatientId, 1, DateTime.Today, 0, request.VisitDate, request.VisitDate, 0, 0, request.VisitType, 0);
 
-                var encounterTypeId = await lookupLogic.GetLookupIdbyName(request.EncounterType);
+                //var encounterTypeId = await lookupLogic.GetLookupIdbyName(request.EncounterType);
 
-                var encounter = await patientEncounterService.Add(request.PatientId, encounterTypeId, patientMasterVisit.Id, DateTime.Now, DateTime.Now, request.ServiceAreaId, request.UserId);
+                //var encounter = await patientEncounterService.Add(request.PatientId, encounterTypeId, patientMasterVisit.Id, DateTime.Now, DateTime.Now, request.ServiceAreaId, request.UserId);
 
                 PatientProfile patientProfile = new PatientProfile()
                 {
                     PatientId = request.PatientId,
-                    PatientMasterVisitId = patientMasterVisit.Id,
+                    PatientMasterVisitId = request.PatientMasterVisitId,
                     VisitType = request.VisitType,
                     CreatedBy = (request.UserId < 1) ? 1 : request.UserId,
                     CreateDate = DateTime.Now,

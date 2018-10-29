@@ -64,7 +64,7 @@ namespace IQCare.Controllers.PMTCT.ANC
         
         // Used to capture PNC visit details
         
-        [HttpPost]
+        [HttpPost("AddPNCVisitDetails")]
         public async Task<IActionResult> AddPNCVisitDetails([FromBody] AddPNCVisitCommand command)
         {
             var response = await _mediator.Send(command, Request.HttpContext.RequestAborted);
