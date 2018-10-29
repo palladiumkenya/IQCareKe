@@ -1,0 +1,78 @@
+<div class="row">
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        <div class="row">
+            <div class="col-lg-12 col-sm-6 col-xs-12">
+                <div class="widget">
+                    <div class="widget-header bordered-bottom bordered-sky">
+                        <span class="widget-caption"> PMTCT | PNC ENCOUNTERS </span>
+                    </div>
+                    <div class="widget-body">
+                        <div class="row">
+                            <div class="col-lg-12 col-sm-6 col-xs-12">
+                                <div class="example-container mat-elevation-z8">
+                                    <mat-table #table [dataSource]="dataSource">
+
+                                        <!-- Visit Date Column -->
+                                        <ng-container matColumnDef="visitdate">
+                                            <mat-header-cell *matHeaderCellDef> Visit Date
+                                            </mat-header-cell>
+                                            <mat-cell *matCellDef="let element"> {{element.visitdate}} </mat-cell>
+                                        </ng-container>
+
+                                        <!-- Visit Type Column -->
+                                        <ng-container matColumnDef="visittype">
+                                            <mat-header-cell *matHeaderCellDef> Visit Type </mat-header-cell>
+                                            <mat-cell *matCellDef="let element"> {{element.visittype}} </mat-cell>
+                                        </ng-container>
+
+                                        <!-- Date Of Delivery Column -->
+                                        <ng-container matColumnDef="dateofdelivery">
+                                            <mat-header-cell *matHeaderCellDef> Date Of Delivery </mat-header-cell>
+                                            <mat-cell *matCellDef="let element"> {{element.dateofdelivery}} </mat-cell>
+                                        </ng-container>
+
+                                        <!-- Mode Of Delivery Column -->
+                                        <ng-container matColumnDef="modeofdelivery">
+                                            <mat-header-cell *matHeaderCellDef> Mode Of Delivery </mat-header-cell>
+                                            <mat-cell *matCellDef="let element"> {{element.modeofdelivery}} </mat-cell>
+                                        </ng-container>
+
+                                        <ng-container matColumnDef="edit">
+                                            <mat-header-cell *matHeaderCellDef></mat-header-cell>
+                                            <mat-cell style="cursor: pointer;" *matCellDef="let element">
+                                                <mat-icon (click)="onEdit(element)"><i className="material-icons">mode_edit</i></mat-icon>
+                                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                <mat-icon (click)="onView(element)"><i className="material-icons">remove_red_eye</i></mat-icon>
+                                            </mat-cell>
+                                        </ng-container>
+
+                                        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                                        <mat-row *matRowDef="let row; columns: displayedColumns">
+                                        </mat-row>
+                                    </mat-table>
+
+                                    <mat-paginator [length]="
+                                                    10"
+                                        [pageSize]="10" [pageSizeOptions]="[3, 5, 10, 20]" [showFirstLastButtons]="true">
+                                    </mat-paginator>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div>
+                                &nbsp;
+                            </div>
+                            <div class="button-row pull-right">
+                                <button mat-raised-button color="accent" (click)="pncCheckIn()">
+                                    <i class="fa fa-plus"></i>
+                                    <span>CheckIn New Encounter</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
