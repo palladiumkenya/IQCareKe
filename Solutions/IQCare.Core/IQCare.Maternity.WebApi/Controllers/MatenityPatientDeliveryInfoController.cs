@@ -69,5 +69,19 @@ namespace IQCare.Maternity.WebApi.Controllers
 
             return BadRequest(patientDeliveryInfo);
         }
+
+        public async Task<object> DischargePatient([FromBody] DischargePatientCommand command)
+        {
+            if (!ModelState.IsValid)
+                return BadRequest(command);
+
+            var response = await _mediator.Send(command, HttpContext.RequestAborted);
+
+            if (response.IsValid)
+                return Ok(response.Value);
+
+            return BadRequest(response);
+
+        }
     }
 }
