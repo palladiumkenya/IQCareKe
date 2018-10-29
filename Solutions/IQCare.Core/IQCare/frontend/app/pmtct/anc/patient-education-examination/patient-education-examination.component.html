@@ -15,8 +15,8 @@
             <mat-form-field >
                 <mat-select placeholder="Breast Exam Done ?" formControlName="breastExamDone" required>
                     <mat-option [value]="0">Select</mat-option>
-                    <mat-option *ngFor="let yesno of yesnos" [value]="yesno.itemId">
-                        {{yesno.itemName}}
+                    <mat-option *ngFor="let yesNoOption of yesNoOptions" [value]="yesNoOption.itemId">
+                        {{yesNoOption.itemName}}
                     </mat-option>
                 </mat-select>
             </mat-form-field>
@@ -30,8 +30,8 @@
             <mat-form-field >
                 <mat-select placeholder="Patient Counselled On ?" formControlName="counselledOn" required>
                     <mat-option [value]="0">Select</mat-option>
-                    <mat-option *ngFor="let topic of topics" [value]="topic">
-                        {{topic.itemName}}
+                    <mat-option *ngFor="let counsellingOption of counsellingOptions" [value]="counsellingOption">
+                        {{counsellingOption.itemName}}
                     </mat-option>
                 </mat-select>
             </mat-form-field>
@@ -94,8 +94,8 @@
             <mat-form-field >
                 <mat-select placeholder="Treated for Syphilis ?" formControlName="treatedSyphilis" required>
                     <mat-option [value]="0">Select</mat-option>
-                    <mat-option *ngFor="let yesno of yesnos" [value]="yesno.itemId">
-                        {{yesno.itemName}}
+                    <mat-option *ngFor="let yesNoOption of yesNoOptions" [value]="yesNoOption.itemId">
+                        {{yesNoOption.itemName}}
                     </mat-option>
                 </mat-select>
             </mat-form-field>
@@ -104,9 +104,9 @@
 
             <mat-form-field class="col-md-12">
                 <mat-select formControlName="testResult" placeholder="*Before  first ANC  visit  " required>
-                    <mat-option placeholder="Test" *ngFor="let testResult of testResults"
-                                [value]="testResult.itemId">
-                        {{testResult.itemName}}
+                    <mat-option placeholder="Test" *ngFor="let hivStatusOption of hivStatusOptions"
+                                [value]="hivStatusOption.itemId">
+                        {{hivStatusOption.itemName}}
                     </mat-option>
                 </mat-select>
             </mat-form-field>

@@ -1,11 +1,11 @@
-import { LookupItemView } from './../../../shared/_models/LookupItemView';
 import { Observable } from 'rxjs/index';
-import { Resolve, RouterStateSnapshot, ActivatedRouteSnapshot } from '@angular/router';
+import { Resolve, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
 import { Injectable } from '@angular/core';
-import { LookupItemService } from '../../../shared/_services/lookup-item.service';
+import {LookupItemView} from '../../../shared/_models/LookupItemView';
+import {LookupItemService} from '../../../shared/_services/lookup-item.service';
 
 @Injectable()
-export class CervicalCancerScreeningResultsResolver implements Resolve<Observable<LookupItemView[]>> {
+export class YesNoResolver implements Resolve<Observable<LookupItemView[]>> {
     /**
      *
      */

@@ -1,16 +1,15 @@
-import { VisitDetails } from './../_models/visitDetails';
+import { VisitDetails } from '../../_models/visitDetails';
 import { Component, EventEmitter, Input, OnInit, Output, OnChanges, SimpleChanges } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import {Subscription} from 'rxjs';
-import {LookupItemService} from '../../shared/_services/lookup-item.service';
-import {NotificationService} from '../../shared/_services/notification.service';
+import {LookupItemService} from '../../../shared/_services/lookup-item.service';
+import {NotificationService} from '../../../shared/_services/notification.service';
 import { SnotifyService } from 'ng-snotify';
 import * as moment from 'moment';
-import {PatientProfile} from '../_models/patientProfile';
-import {VisitDetailsService} from '../_services/visit-details.service';
-import {PatientPregnancy} from '../_models/PatientPregnancy';
+import {PatientProfile} from '../../_models/patientProfile';
+import {VisitDetailsService} from '../../_services/visit-details.service';
 import {ActivatedRoute} from '@angular/router';
-import {PregnancyViewModel} from '../_models/viewModel/PregnancyViewModel';
+import {PregnancyViewModel} from '../../_models/viewModel/PregnancyViewModel';
 
 @Component({
   selector: 'app-visit-details',
@@ -35,10 +34,12 @@ export class VisitDetailsComponent implements OnInit, OnChanges {
     public patientMasterVisitId: number;
     public UserId: number;
     public pregnancyId: number;
+    public visitTypeOptions: any[] = [];
 
     public ancVisitTypes: any[] = [];
     @Output() nextStep = new EventEmitter<VisitDetails>(); 
     @Input() visitProtocol: VisitDetails;
+    @Input() visitDetailsOptions: any[] = [];
     @Output() notify: EventEmitter<FormGroup> = new EventEmitter<FormGroup>();
     
     constructor(private route: ActivatedRoute, private fb: FormBuilder, private _lookupItemService: LookupItemService,
@@ -65,6 +66,12 @@ export class VisitDetailsComponent implements OnInit, OnChanges {
         parityTwo: ['', Validators.required],
         gravidae: ['', Validators.required]
     });
+
+      const {
+          visitTypeOptions
+      } = this.visitDetailsOptions[0];
+      this.visitTypeOptions = visitTypeOptions;
+
       this.route.params.subscribe(params => {
           this.personId = params['personId'];
       });

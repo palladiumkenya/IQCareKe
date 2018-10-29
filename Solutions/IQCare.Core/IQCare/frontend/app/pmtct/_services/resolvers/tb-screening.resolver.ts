@@ -1,11 +1,12 @@
-import { LookupItemView } from './../../../shared/_models/LookupItemView';
+
 import { Observable } from 'rxjs/index';
 import { Resolve, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
 import { Injectable } from '@angular/core';
-import { LookupItemService } from '../../../shared/_services/lookup-item.service';
+import {LookupItemView} from '../../../shared/_models/LookupItemView';
+import {LookupItemService} from '../../../shared/_services/lookup-item.service';
 
 @Injectable()
-export class FinalPartnerHivResultResolver implements Resolve<Observable<LookupItemView[]>> {
+export class TbScreeningResolver implements Resolve<Observable<LookupItemView[]>> {
     /**
      *
      */
@@ -17,6 +18,6 @@ export class FinalPartnerHivResultResolver implements Resolve<Observable<LookupI
         route: ActivatedRouteSnapshot,
         state: RouterStateSnapshot
     ): Observable<LookupItemView[]> {
-        return this._lookupItemService.getByGroupName('HIVFinalResultsPMTCT');
+        return this._lookupItemService.getByGroupName('TBScreeningPMTCT');
     }
 }

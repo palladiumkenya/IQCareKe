@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {SnotifyService} from 'ng-snotify';
-import {LookupItemService} from '../../shared/_services/lookup-item.service';
-import {NotificationService} from '../../shared/_services/notification.service';
+import {LookupItemService} from '../../../shared/_services/lookup-item.service';
+import {NotificationService} from '../../../shared/_services/notification.service';
 import {Subscription} from 'rxjs/index';
 export interface Options {
   value: string;
