@@ -1,9 +1,12 @@
+import { PncVisitDetailsCommand } from './../_models/PncVisitDetailsCommand';
+import { PncService } from './../_services/pnc.service';
 import { LookupItemView } from './../../shared/_models/LookupItemView';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Component, OnInit, NgZone } from '@angular/core';
 import { FormGroup, FormArray } from '@angular/forms';
 import { NotificationService } from '../../shared/_services/notification.service';
 import { SnotifyService } from 'ng-snotify';
+import { forkJoin } from 'rxjs';
 
 @Component({
     selector: 'app-pnc',
@@ -64,7 +67,8 @@ export class PncComponent implements OnInit {
         private snotifyService: SnotifyService,
         private notificationService: NotificationService,
         public zone: NgZone,
-        private router: Router) {
+        private router: Router,
+        private pncService: PncService) {
         this.visitDetailsFormGroup = new FormArray([]);
         this.matHistory_PostNatalExam_FormGroup = new FormArray([]);
         this.drugAdministration_PartnerTesting_FormGroup = new FormArray([]);
@@ -235,7 +239,33 @@ export class PncComponent implements OnInit {
     }
 
     onSubmitForm() {
-        this.snotifyService.success('Success', 'PNC Encounter', this.notificationService.getConfig());
+        // this.snotifyService.success('Success', 'PNC Encounter', this.notificationService.getConfig());
+        const pncVisitDetailsCommand: PncVisitDetailsCommand = {
+            PatientId: this.patientId,
+            ServiceAreaId: this.serviceAreaId,
+            VisitDate: this.visitDetailsFormGroup.value[0]['visitDate'],
+            VisitNumber: this.visitDetailsFormGroup.value[0]['visitNumber'],
+            VisitType: this.visitDetailsFormGroup.value[0]['visitType'],
+            UserId: this.userId,
+            DaysPostPartum: this.visitDetailsFormGroup.value[0]['dayPostPartum'],
+            PatientMasterVisitId: this.patientMasterVisitId
+        };
+
+        const pncVisitDetails = this.pncService.savePncVisitDetails(pncVisitDetailsCommand);
+        const pncPostNatalExam = this.pncService.savePncPostNatalExam();
+
+        forkJoin([pncVisitDetails, pncPostNatalExam])
+            .subscribe(
+                (result) => {
+                    console.log(`success ` + result);
+                },
+                (error) => {
+                    console.log(`error ` + error);
+                },
+                () => {
+                    console.log(`complete`);
+                }
+            );
 
         /*this.zone.run(() => {
             this.router.navigate(['/dashboard/personhome/'], { relativeTo: this.route });
