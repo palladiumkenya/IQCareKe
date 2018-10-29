@@ -1,3 +1,15 @@
+-- PMTCT LOOKUPS
+
+IF NOT EXISTS(SELECT * FROM LookupItem WHERE Name='pnc-encounter')
+BEGIN
+	INSERT INTO LookupItem (Name,DisplayName,DeleteFlag) VALUES('pnc-encounter','pnc-encounter',0);
+END
+
+IF NOT EXISTS(SELECT * FROM LookupItemView WHERE ItemName='pnc-encounter' AND MasterName='EncounterType')
+BEGIN
+	INSERT INTO LookupMasterItem(LookupMasterId,LookupItemId,DisplayName,OrdRank) VALUES((SELECT top 1 Id FROM LookupMaster WHERE Name='EncounterType'),(SELECT top 1 Id FROM LookupItem WHERE Name='pnc-encounter'),'pnc-encounter',10)
+END
+
 ------------PNCBreast
 -- master
 If Not Exists(Select 1 From LookupMaster where Name='Breast') Begin INSERT INTO LookupMaster (Name, DisplayName, DeleteFlag) VALUES ('Breast','Breast',0); End

@@ -11,6 +11,15 @@ import { SnotifyService } from 'ng-snotify';
     styleUrls: ['./pnc.component.css']
 })
 export class PncComponent implements OnInit {
+    patientId: number;
+    personId: number;
+    serviceAreaId: number;
+    userId: number;
+    patientMasterVisitId: number;
+    patientEncounterId: number;
+    visitDate: Date;
+    visitType: number;
+
     isLinear: boolean = true;
     formType: string;
 
@@ -67,6 +76,20 @@ export class PncComponent implements OnInit {
     }
 
     ngOnInit() {
+        this.route.params.subscribe(
+            params => {
+                this.patientId = params.patientId;
+                this.personId = params.personId;
+                this.serviceAreaId = params.serviceAreaId;
+            }
+        );
+
+        this.userId = JSON.parse(localStorage.getItem('appUserId'));
+        this.patientMasterVisitId = JSON.parse(localStorage.getItem('patientMasterVisitId'));
+        this.patientEncounterId = JSON.parse(localStorage.getItem('patientEncounterId'));
+        this.visitDate = new Date(localStorage.getItem('visitDate'));
+        this.visitType = JSON.parse(localStorage.getItem('visitType'));
+
         this.route.data.subscribe((res) => {
             const {
                 yesnoOptions,
