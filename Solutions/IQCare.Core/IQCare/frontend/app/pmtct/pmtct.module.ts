@@ -76,11 +76,11 @@ import { PncPatienteducationComponent } from './pnc/pnc-patienteducation/pnc-pat
 import { PncCervicalcancerscreeningComponent } from './pnc/pnc-cervicalcancerscreening/pnc-cervicalcancerscreening.component';
 import { PncContraceptivehistoryComponent } from './pnc/pnc-contraceptivehistory/pnc-contraceptivehistory.component';
 import { PncHivtestingComponent } from './pnc/pnc-hivtesting/pnc-hivtesting.component';
-import {MaternityComponent} from './maternity/maternity.component';
+import { MaternityComponent } from './maternity/maternity.component';
 import { MotherProfileComponent } from './maternity/mother-profile/mother-profile.component';
 import { DiagnosisComponent } from './maternity/diagnosis/diagnosis.component';
 import { DeliveryMaternityComponent } from './maternity/delivery-maternity/delivery-maternity.component';
-import {DeliveryComponent} from './hei/delivery/delivery.component';
+import { DeliveryComponent } from './hei/delivery/delivery.component';
 import { BabyComponent } from './maternity/baby/baby.component';
 import { MaternityTestsComponent } from './maternity/maternity-tests/maternity-tests.component';
 import { MaternalDrugAdministrationComponent } from './maternity/maternal-drug-administration/maternal-drug-administration.component';
@@ -89,12 +89,14 @@ import { DischargeComponent } from './maternity/discharge/discharge.component';
 import { MaternityReferralComponent } from './maternity/maternity-referral/maternity-referral.component';
 import { MaternityNextAppointmentComponent } from './maternity/maternity-next-appointment/maternity-next-appointment.component';
 import { MaternityHivTestComponent } from './maternity/maternity-hiv-test/maternity-hiv-test.component';
-import {BloodLossResolver} from './_services/resolvers/blood-loss.resolver';
-import {GenderResolver} from './_services/resolvers/gender.resolver';
-import {ReferralResolver} from './_services/resolvers/referral.resolver';
-import {PmtctTestTypeResolver} from './_services/resolvers/pmtctTestType.resolver';
-import {TestKitNameResolver} from './_services/resolvers/test-kit-name.resolver';
-import {HivTestResultResolver} from './_services/resolvers/hiv-test-result.resolver';
+import { BloodLossResolver } from './_services/resolvers/blood-loss.resolver';
+import { GenderResolver } from './_services/resolvers/gender.resolver';
+import { ReferralResolver } from './_services/resolvers/referral.resolver';
+import { PmtctTestTypeResolver } from './_services/resolvers/pmtctTestType.resolver';
+import { TestKitNameResolver } from './_services/resolvers/test-kit-name.resolver';
+import { HivTestResultResolver } from './_services/resolvers/hiv-test-result.resolver';
+import { PncEncountersComponent } from './pnc/pnc-encounters/pnc-encounters.component';
+import { CheckinComponent } from './checkin/checkin.component';
 
 @NgModule({
     imports: [
@@ -156,8 +158,9 @@ import {HivTestResultResolver} from './_services/resolvers/hiv-test-result.resol
         DischargeComponent,
         MaternityReferralComponent,
         MaternityNextAppointmentComponent,
-        MaternityHivTestComponent
-
+        MaternityHivTestComponent,
+        PncEncountersComponent,
+        CheckinComponent
     ],
     providers: [
         PlaceOfDeliveryResolver,
@@ -201,7 +204,8 @@ import {HivTestResultResolver} from './_services/resolvers/hiv-test-result.resol
         IptFollowUpComponent,
         IptOutcomeComponent,
         HivtestingmodalComponent,
-        HivStatusComponent
+        HivStatusComponent,
+        CheckinComponent
     ],
     exports: [
         IptClientWorkupComponent,

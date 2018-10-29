@@ -47,15 +47,16 @@ import { HivFinalResultsResolver } from './_services/resolvers/hiv-final-results
 import { UterusResolver } from './_services/resolvers/uterus.resolver';
 import { MaternityComponent } from './maternity/maternity.component';
 import { InfantDrugsStartContinueResolver } from './_services/resolvers/infant-drugs-start-continue.resolver';
-import {IptoutcomeResolverService} from './_services/resolvers/iptoutcome-resolver.service';
-import {MedicationResolverService} from './_services/resolvers/medication-resolver.service';
-import {MedicationPlanResolverService} from './_services/resolvers/medication-plan-resolver.service';
-import {GenderResolver} from './_services/resolvers/gender.resolver';
-import {ReferralResolver} from './_services/resolvers/referral.resolver';
-import {PmtctTestTypeResolver} from './_services/resolvers/pmtctTestType.resolver';
-import {TestKitNameResolver} from './_services/resolvers/test-kit-name.resolver';
-import {HivTestResultResolver} from './_services/resolvers/hiv-test-result.resolver';
-import {BloodLossResolver} from './_services/resolvers/blood-loss.resolver';
+import { IptoutcomeResolverService } from './_services/resolvers/iptoutcome-resolver.service';
+import { MedicationResolverService } from './_services/resolvers/medication-resolver.service';
+import { MedicationPlanResolverService } from './_services/resolvers/medication-plan-resolver.service';
+import { GenderResolver } from './_services/resolvers/gender.resolver';
+import { ReferralResolver } from './_services/resolvers/referral.resolver';
+import { PmtctTestTypeResolver } from './_services/resolvers/pmtctTestType.resolver';
+import { TestKitNameResolver } from './_services/resolvers/test-kit-name.resolver';
+import { HivTestResultResolver } from './_services/resolvers/hiv-test-result.resolver';
+import { BloodLossResolver } from './_services/resolvers/blood-loss.resolver';
+import { PncEncountersComponent } from './pnc/pnc-encounters/pnc-encounters.component';
 
 
 const routes: Routes = [
@@ -119,6 +120,11 @@ const routes: Routes = [
             medicationOptions: MedicationResolverService,
             medicatinPlanOptions: MedicationPlanResolverService
         }
+    },
+    {
+        path: 'pnc/encounters/:patientId/:personId/:serviceAreaId',
+        component: PncEncountersComponent,
+        pathMatch: 'full'
     },
     {
         path: 'pnc/:patientId/:personId/:serviceAreaId',

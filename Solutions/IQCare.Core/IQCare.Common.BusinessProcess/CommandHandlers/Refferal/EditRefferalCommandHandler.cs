@@ -26,15 +26,13 @@ namespace IQCare.Common.BusinessProcess.CommandHandlers.Refferal
                 {
                     PatientRefferal patientRefferal = await _unitOfWork.Repository<PatientRefferal>().FindAsync(x => x.PatientId == request.PatientRefferal.PatientId && x.PatientMasterVisitId == request.PatientRefferal.PatientMasterVisitId);
 
-                    patientRefferal.ReferralDate = request.PatientRefferal.ReferralDate;
-                    patientRefferal.ReferralReason = request.PatientRefferal.ReferralReason;
-                    patientRefferal.ReferredBy = request.PatientRefferal.ReferredBy;
-                    patientRefferal.ReferredFrom = request.PatientRefferal.ReferredFrom;
-                    patientRefferal.ReferredTo = request.PatientRefferal.ReferredTo;
-                    patientRefferal.DeleteFlag = 0;
+                    var patientReferralEditInfo = request.PatientRefferal;
+
+                    patientRefferal.UpdateReferralInfo(patientReferralEditInfo.ReferralDate, patientReferralEditInfo.ReferralReason, patientReferralEditInfo.ReferredBy, patientReferralEditInfo.ReferredFrom, patientReferralEditInfo.ReferredTo);
 
                     _unitOfWork.Repository<PatientRefferal>().Update(patientRefferal);
                     var result = await _unitOfWork.SaveChangesAsync();
+
                     return Result<EditRefferalCommandResponse>.Valid(new EditRefferalCommandResponse()
                     {
                         Id=result

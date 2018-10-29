@@ -1,0 +1,1 @@
+﻿ALTER TABLE PatientAppointment ALTER COLUMN DifferentiatedCareId INT NULL
