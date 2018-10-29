@@ -4,6 +4,7 @@ import { SnotifyService } from 'ng-snotify';
 import { Subscription } from 'rxjs/index';
 import { LookupItemService } from '../../../shared/_services/lookup-item.service';
 import { NotificationService } from '../../../shared/_services/notification.service';
+import {MaternityService} from '../../_services/maternity.service';
 
 @Component({
     selector: 'app-hei-visit-details',
@@ -15,6 +16,7 @@ export class HeiVisitDetailsComponent implements OnInit {
     isdayPostPartumShown: boolean = false;
     isCohortShown: boolean = true;
     maxDate: Date;
+    visitDetails: any;
 
     public HeiVisitDetailsFormGroup: FormGroup;
     public lookupItems$: Subscription;
@@ -28,7 +30,8 @@ export class HeiVisitDetailsComponent implements OnInit {
     constructor(private _formBuilder: FormBuilder,
         private _lookupItemService: LookupItemService,
         private snotifyService: SnotifyService,
-        private notificationService: NotificationService) {
+        private notificationService: NotificationService,
+        private maternityService: MaternityService) {
         this.maxDate = new Date();
     }
 
@@ -68,7 +71,32 @@ export class HeiVisitDetailsComponent implements OnInit {
             default:
         }
 
+        this.getCurrentVisitDetails(5);
+
+
         this.notify.emit(this.HeiVisitDetailsFormGroup);
+    }
+
+    public getCurrentVisitDetails(patientId: number): void {
+        this.visitDetails = this.maternityService.getCurrentVisitDetails(patientId)
+            .subscribe(
+                p => {
+                    const visit = p;
+                    console.log(visit);
+                    if (visit.visitNumber > 1) {
+                        const Item = this.visitTypes.filter(x => x.itemName === 'Follow Up ANC visit');
+                        this.HeiVisitDetailsFormGroup.get('visitType').patchValue(Item[0].itemId);
+                    } else {
+                        const Item = this.visitTypes.filter(x => x.itemName === 'Initial ANC Visit');
+                        this.HeiVisitDetailsFormGroup.get('visitType').patchValue(Item[0].itemId);
+                    }
+                },
+                (err) => {
+
+                },
+                () => {
+
+                });
     }
 
     public getLookupItems(groupName: string, _options: any[]) {
