@@ -149,6 +149,11 @@ const routes: Routes = [
         pathMatch: 'full'
     },
     {
+        path: 'maternity/encounters/:patientId/:personId/:serviceAreaId',
+        component: MaternityComponent,
+        pathMatch: 'full'
+    },
+    {
         path: 'pnc/:patientId/:personId/:serviceAreaId',
         component: PncComponent,
         pathMatch: 'full',
