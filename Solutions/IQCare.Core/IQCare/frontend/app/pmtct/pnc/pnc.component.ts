@@ -1,3 +1,6 @@
+import { HivTestsCommand } from './../_models/HivTestsCommand';
+import { LookupItemService } from './../../shared/_services/lookup-item.service';
+import { HivStatusCommand } from './../_models/HivStatusCommand';
 import { PncVisitDetailsCommand } from './../_models/PncVisitDetailsCommand';
 import { PncService } from './../_services/pnc.service';
 import { LookupItemView } from './../../shared/_models/LookupItemView';
@@ -54,7 +57,9 @@ export class PncComponent implements OnInit {
     partnerTestingOptions: any[] = [];
     cervicalCancerScreeningOptions: any[] = [];
     contraceptiveHistoryExercise: any[] = [];
-
+    hiv_status_table_data: any[] = [];
+    hivTestEntryPoint: number;
+    htsEncounterId: number;
 
     visitDetailsFormGroup: FormArray;
     matHistory_PostNatalExam_FormGroup: FormArray;
@@ -63,12 +68,14 @@ export class PncComponent implements OnInit {
     cervicalCancerScreeningFormGroup: FormArray;
     diagnosisReferralAppointmentFormGroup: FormArray;
 
+
     constructor(private route: ActivatedRoute,
         private snotifyService: SnotifyService,
         private notificationService: NotificationService,
         public zone: NgZone,
         private router: Router,
-        private pncService: PncService) {
+        private pncService: PncService,
+        private lookupitemservice: LookupItemService) {
         this.visitDetailsFormGroup = new FormArray([]);
         this.matHistory_PostNatalExam_FormGroup = new FormArray([]);
         this.drugAdministration_PartnerTesting_FormGroup = new FormArray([]);
@@ -93,6 +100,12 @@ export class PncComponent implements OnInit {
         this.patientEncounterId = JSON.parse(localStorage.getItem('patientEncounterId'));
         this.visitDate = new Date(localStorage.getItem('visitDate'));
         this.visitType = JSON.parse(localStorage.getItem('visitType'));
+
+        this.lookupitemservice.getByGroupNameAndItemName('HTSEntryPoints', 'PMTCT').subscribe(
+            (res) => {
+                this.hivTestEntryPoint = res['itemId'];
+            }
+        );
 
         this.route.data.subscribe((res) => {
             const {
@@ -222,8 +235,9 @@ export class PncComponent implements OnInit {
         this.cervicalCancerScreeningFormGroup.push(formGroup);
     }
 
-    onHivStatusNotify(formGroup: FormGroup): void {
-        this.hivStatusFormGroup.push(formGroup);
+    onHivStatusNotify(formGroup: Object): void {
+        this.hivStatusFormGroup.push(formGroup['form']);
+        this.hiv_status_table_data.push(formGroup['table_data']);
     }
 
     onDiagnosisNotify(formGroup: FormGroup): void {
@@ -240,6 +254,10 @@ export class PncComponent implements OnInit {
 
     onSubmitForm() {
         // this.snotifyService.success('Success', 'PNC Encounter', this.notificationService.getConfig());
+        const yesOption = this.yesnoOptions.filter(obj => obj.itemName == 'Yes');
+        const noOption = this.yesnoOptions.filter(obj => obj.itemName == 'No');
+        const naOption = this.yesNoNaOptions.filter(obj => obj.itemName == 'N/A');
+
         const pncVisitDetailsCommand: PncVisitDetailsCommand = {
             PatientId: this.patientId,
             ServiceAreaId: this.serviceAreaId,
@@ -251,13 +269,80 @@ export class PncComponent implements OnInit {
             PatientMasterVisitId: this.patientMasterVisitId
         };
 
+        const hivStatusCommand: HivStatusCommand = {
+            PersonId: this.personId,
+            ProviderId: this.userId,
+            PatientEncounterID: this.patientEncounterId,
+            PatientMasterVisitId: this.patientMasterVisitId,
+            PatientId: this.patientId,
+            EverTested: null,
+            MonthsSinceLastTest: null,
+            MonthSinceSelfTest: null,
+            TestedAs: null,
+            TestingStrategy: null,
+            EncounterRemarks: '',
+            TestEntryPoint: this.hivTestEntryPoint,
+            Consent: this.hiv_status_table_data.length > 0 ? yesOption[0].itemId : noOption[0].itemId,
+            EverSelfTested: null,
+            GeoLocation: null,
+            HasDisability: null,
+            Disabilities: [],
+            TbScreening: null,
+            ServiceAreaId: this.serviceAreaId,
+            EncounterTypeId: 1,
+            EncounterDate: this.visitDetailsFormGroup.value[0]['visitDate'],
+            EncounterType: this.hivStatusFormGroup.value[0]['testType']
+        };
+
+        const hivTestsCommand: HivTestsCommand = {
+            HtsEncounterId: 0,
+            ProviderId: this.userId,
+            PatientId: this.patientId,
+            PatientMasterVisitId: this.patientMasterVisitId,
+            ServiceAreaId: this.serviceAreaId,
+            Testing: [],
+            FinalTestingResult: {
+                FinalResultHiv1: this.hivStatusFormGroup.value[0]['finalTestResult'],
+                FinalResultHiv2: null,
+                FinalResult: this.hivStatusFormGroup.value[0]['finalTestResult'],
+                FinalResultGiven: yesOption[0].itemId,
+                CoupleDiscordant: naOption[0].itemId,
+                FinalResultsRemarks: 'n/a',
+                AcceptedPartnerListing: yesOption[0].itemId,
+                ReasonsDeclinePartnerListing: null
+            }
+        };
+
+        for (let i = 0; i < this.hiv_status_table_data.length; i++) {
+            for (let j = 0; j < this.hiv_status_table_data[i].length; j++) {
+                hivTestsCommand.Testing.push({
+                    KitId: this.hiv_status_table_data[i][j]['kitname']['itemId'],
+                    KitLotNumber: this.hiv_status_table_data[i][j]['lotnumber'],
+                    ExpiryDate: this.hiv_status_table_data[i][j]['expirydate'],
+                    Outcome: this.hiv_status_table_data[i][j]['testresult']['itemId'],
+                    TestRound: this.hiv_status_table_data[i][j]['testtype']['itemName'] == 'HIV Test-1' ? 1 : 2,
+                });
+            }
+        }
+
         const pncVisitDetails = this.pncService.savePncVisitDetails(pncVisitDetailsCommand);
         const pncPostNatalExam = this.pncService.savePncPostNatalExam();
+        const pncHivStatus = this.pncService.savePncHivStatus(hivStatusCommand, this.hiv_status_table_data);
 
-        forkJoin([pncVisitDetails, pncPostNatalExam])
+        forkJoin([pncHivStatus, pncVisitDetails, pncPostNatalExam])
             .subscribe(
                 (result) => {
-                    console.log(`success ` + result);
+                    console.log(`success `);
+                    console.log(result);
+                    // {"htsEncounterId":4,"patientMasterVisitId":21410}
+                    this.htsEncounterId = result[0]['htsEncounterId'];
+
+                    hivTestsCommand.HtsEncounterId = this.htsEncounterId;
+                    const pncHivTests = this.pncService.savePncHivTests(hivTestsCommand).subscribe(
+                        (res) => {
+                            console.log(`result`, res);
+                        }
+                    );
                 },
                 (error) => {
                     console.log(`error ` + error);

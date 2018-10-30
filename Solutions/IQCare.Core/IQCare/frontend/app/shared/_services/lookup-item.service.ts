@@ -34,6 +34,13 @@ export class LookupItemService {
         );
     }
 
+    public getByGroupNameAndItemName(groupName: string, itemName: string): Observable<LookupItemView[]> {
+        return this.http.get<LookupItemView[]>(this.API_URL + '/api/Lookup/optionsByGroupandItemName/' + groupName + '/' + itemName).pipe(
+            tap(getByGroupNameAndItemName => this.errorHandler.log('get ' + groupName + 'options by Name ' + itemName)),
+            catchError(this.errorHandler.handleError<LookupItemView[]>('getByGroupNameAndItemName', []))
+        );
+    }
+
     public getFacilityList(): Observable<Facility[]> {
         return this.http.get<Facility[]>(this.API_URL + '/api/Facility/').pipe(
             tap(getFacility => this.errorHandler.log('get facility list')),
