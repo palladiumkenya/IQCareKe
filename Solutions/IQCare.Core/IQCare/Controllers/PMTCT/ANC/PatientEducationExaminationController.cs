@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using IQCare.PMTCT.BusinessProcess.Commands;
+using IQCare.PMTCT.BusinessProcess.Commands.Education;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
@@ -11,7 +12,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace IQCare.Controllers.PMTCT.ANC
 {
     [Produces("application/json")]
-    [Route("api/PatientEducationExamination")]
+    [Route("api/[controller]/[action]")]
     public class PatientEducationExaminationController : Controller
     {
         private readonly IMediator _mediator;
@@ -21,34 +22,13 @@ namespace IQCare.Controllers.PMTCT.ANC
             _mediator = mediator;
         }
 
-        // GET: api/<controller>
-        [HttpGet]
-        public IEnumerable<string> Get()
-        {
-            return new string[] { "value1", "value2" };
-        }
-
-        // GET api/<controller>/5
-        [HttpGet("{id}")]
-        public string Get(int id)
-        {
-            return "value";
-        }
+    
 
         // POST api/<controller>
         [HttpPost]
         public async Task<IActionResult> Post([FromBody] PatientEducationExaminationCommand serviceCommand)
         {
-            var response = await _mediator.Send(new PatientEducationExaminationCommand
-            {
-               // PatientId = serviceCommand.PatientId,
-                PatientId = 5,
-                //PatientMasterVisitId= serviceCommand.PatientMasterVisitId,
-                PatientMasterVisitId = 21,
-                BreastExamDone= serviceCommand.BreastExamDone,
-                TreatedSyphilis= serviceCommand.TreatedSyphilis,
-                CounsellingTopics= serviceCommand.CounsellingTopics,
-            }, Request.HttpContext.RequestAborted);
+            var response = await _mediator.Send(serviceCommand, Request.HttpContext.RequestAborted);
 
             if (response.IsValid)
             {
@@ -57,16 +37,20 @@ namespace IQCare.Controllers.PMTCT.ANC
             return BadRequest(response);
         }
 
-        // PUT api/<controller>/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody]string value)
+      
+       [HttpPost]
+       public  async Task<object> AddPatientCounsellingInfo([FromBody] AddPatientEducationCommand command)
         {
+            if (!ModelState.IsValid)
+                return BadRequest(command);
+            var response = await _mediator.Send(command, HttpContext.RequestAborted);
+
+            if (response.IsValid)
+                return Ok(response.Value);
+
+            return BadRequest(response);
         }
 
-        // DELETE api/<controller>/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
-        {
-        }
+      
     }
 }
