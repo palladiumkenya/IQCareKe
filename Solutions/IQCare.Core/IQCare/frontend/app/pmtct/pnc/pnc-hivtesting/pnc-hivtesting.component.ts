@@ -1,5 +1,5 @@
 import { LookupItemView } from './../../../shared/_models/LookupItemView';
-import { HivStatusComponent } from './../../hiv-status/hiv-status.component';
+import { HivStatusComponent } from '../../anc/hiv-status/hiv-status.component';
 import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 import { MatTableDataSource, MatDialogConfig, MatDialog } from '@angular/material';
 import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';

@@ -36,13 +36,14 @@
         <div class="row">
             <div class="col-lg-4 col-sm-4 col-xs-12" *ngIf="isVisitNumberShown">
                 <mat-form-field class="col-lg-12 col-xs-12">
-                    <input matInput placeholder="Visit Number" formControlName="visitNumber">
+                    <input matInput id="visitNumber" name="visitNumber" placeholder="Visit Number" formControlName="visitNumber">
                 </mat-form-field>
             </div>
 
             <div class="col-lg-4 col-sm-4 col-xs-12" *ngIf="isdayPostPartumShown">
                 <mat-form-field class="col-lg-12 col-xs-12">
-                    <input matInput placeholder="Days Postpartum" formControlName="dayPostPartum">
+                    <input matInput id="dayPostPartum" name="dayPostPartum" placeholder="Days Postpartum"
+                        formControlName="dayPostPartum">
                 </mat-form-field>
             </div>
         </div>

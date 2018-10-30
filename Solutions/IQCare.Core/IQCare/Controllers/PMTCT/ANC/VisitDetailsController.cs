@@ -33,13 +33,21 @@ namespace IQCare.Controllers.PMTCT.ANC
                 return Ok(response.Value);
             }
             return BadRequest(response);
-
         }
 
         [HttpGet("GetAncProfile/{patientId}/{pregnancyId}")]
         public async Task<IActionResult>GetANcProfile(int patientId,int pregnancyId)
         {
             var results = await _mediator.Send(new GetPatientInitialProfileCommand() { PatientId = patientId,PregnancyId = pregnancyId}, HttpContext.RequestAborted);
+            if (results.IsValid)
+                return Ok(results.Value);
+            return BadRequest(results);
+        }
+
+        [HttpGet("GetCurrentVisit/{patientId}")]
+        public async Task<IActionResult> GetPatientCurrentVisit(int patientId)
+        {
+            var results = await _mediator.Send(new GetCurrentVisitDetailsCommand() { PatientId = patientId}, HttpContext.RequestAborted);
             if (results.IsValid)
                 return Ok(results.Value);
             return BadRequest(results);
@@ -56,7 +64,7 @@ namespace IQCare.Controllers.PMTCT.ANC
         
         // Used to capture PNC visit details
         
-        [HttpPost]
+        [HttpPost("AddPNCVisitDetails")]
         public async Task<IActionResult> AddPNCVisitDetails([FromBody] AddPNCVisitCommand command)
         {
             var response = await _mediator.Send(command, Request.HttpContext.RequestAborted);

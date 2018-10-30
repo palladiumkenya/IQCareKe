@@ -76,13 +76,16 @@ export class ServicesListComponent implements OnInit {
                     });
                     break;
                 case 'PNC':
-                    /*this.zone.run(() => {
-                        this.router.navigate(['/pmtct/pnc/' + this.patientId + '/' + this.personId + '/' + serviceId],
-                            { relativeTo: this.route });
-                    });*/
                     this.zone.run(() => {
                         this.router.navigate(
                             ['/pmtct/pnc/encounters/' + this.patientId + '/' + this.personId + '/' + serviceId],
+                            { relativeTo: this.route });
+                    });
+                    break;
+                case 'Maternity':
+                    this.zone.run(() => {
+                        this.router.navigate(
+                            ['/pmtct/maternity/encounters/' + this.patientId + '/' + this.personId + '/' + serviceId],
                             { relativeTo: this.route });
                     });
                     break;

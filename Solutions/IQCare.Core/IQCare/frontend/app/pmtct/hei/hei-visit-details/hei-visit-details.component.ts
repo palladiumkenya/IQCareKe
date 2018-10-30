@@ -4,6 +4,7 @@ import { SnotifyService } from 'ng-snotify';
 import { Subscription } from 'rxjs/index';
 import { LookupItemService } from '../../../shared/_services/lookup-item.service';
 import { NotificationService } from '../../../shared/_services/notification.service';
+import {MaternityService} from '../../_services/maternity.service';
 
 @Component({
     selector: 'app-hei-visit-details',
@@ -15,18 +16,22 @@ export class HeiVisitDetailsComponent implements OnInit {
     isdayPostPartumShown: boolean = false;
     isCohortShown: boolean = true;
     maxDate: Date;
+    visitDetails: any;
 
     public HeiVisitDetailsFormGroup: FormGroup;
     public lookupItems$: Subscription;
     public visitTypes: any[] = [];
 
     @Input('formtype') formtype: string;
+    @Input('visitDate') visitDate: string;
+    @Input('visitType') visitType: string;
     @Output() notify: EventEmitter<FormGroup> = new EventEmitter<FormGroup>();
 
     constructor(private _formBuilder: FormBuilder,
         private _lookupItemService: LookupItemService,
         private snotifyService: SnotifyService,
-        private notificationService: NotificationService) {
+        private notificationService: NotificationService,
+        private maternityService: MaternityService) {
         this.maxDate = new Date();
     }
 
@@ -40,6 +45,8 @@ export class HeiVisitDetailsComponent implements OnInit {
             dayPostPartum: new FormControl('', [Validators.required])
         });
 
+        this.HeiVisitDetailsFormGroup.get('visitDate').setValue(this.visitDate);
+        this.HeiVisitDetailsFormGroup.get('visitType').setValue(this.visitType['itemId']);
         this.HeiVisitDetailsFormGroup.get('visitNumber').disable({ onlySelf: true });
         this.HeiVisitDetailsFormGroup.get('dayPostPartum').disable({ onlySelf: true });
 
@@ -64,7 +71,32 @@ export class HeiVisitDetailsComponent implements OnInit {
             default:
         }
 
+        this.getCurrentVisitDetails(5);
+
+
         this.notify.emit(this.HeiVisitDetailsFormGroup);
+    }
+
+    public getCurrentVisitDetails(patientId: number): void {
+        this.visitDetails = this.maternityService.getCurrentVisitDetails(patientId)
+            .subscribe(
+                p => {
+                    const visit = p;
+                    console.log(visit);
+                    if (visit.visitNumber > 1) {
+                        const Item = this.visitTypes.filter(x => x.itemName === 'Follow Up ANC visit');
+                        this.HeiVisitDetailsFormGroup.get('visitType').patchValue(Item[0].itemId);
+                    } else {
+                        const Item = this.visitTypes.filter(x => x.itemName === 'Initial ANC Visit');
+                        this.HeiVisitDetailsFormGroup.get('visitType').patchValue(Item[0].itemId);
+                    }
+                },
+                (err) => {
+
+                },
+                () => {
+
+                });
     }
 
     public getLookupItems(groupName: string, _options: any[]) {
@@ -72,6 +104,7 @@ export class HeiVisitDetailsComponent implements OnInit {
             .subscribe(
                 p => {
                     const options = p['lookupItems'];
+                    this.visitTypes = p['lookupItems'];
                     console.log(options);
                     for (let i = 0; i < options.length; i++) {
                         _options.push({ 'itemId': options[i]['itemId'], 'itemName': options[i]['itemName'] });

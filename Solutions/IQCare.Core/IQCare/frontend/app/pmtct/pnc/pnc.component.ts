@@ -1,9 +1,12 @@
+import { PncVisitDetailsCommand } from './../_models/PncVisitDetailsCommand';
+import { PncService } from './../_services/pnc.service';
 import { LookupItemView } from './../../shared/_models/LookupItemView';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Component, OnInit, NgZone } from '@angular/core';
 import { FormGroup, FormArray } from '@angular/forms';
 import { NotificationService } from '../../shared/_services/notification.service';
 import { SnotifyService } from 'ng-snotify';
+import { forkJoin } from 'rxjs';
 
 @Component({
     selector: 'app-pnc',
@@ -11,6 +14,15 @@ import { SnotifyService } from 'ng-snotify';
     styleUrls: ['./pnc.component.css']
 })
 export class PncComponent implements OnInit {
+    patientId: number;
+    personId: number;
+    serviceAreaId: number;
+    userId: number;
+    patientMasterVisitId: number;
+    patientEncounterId: number;
+    visitDate: Date;
+    visitType: number;
+
     isLinear: boolean = true;
     formType: string;
 
@@ -55,7 +67,8 @@ export class PncComponent implements OnInit {
         private snotifyService: SnotifyService,
         private notificationService: NotificationService,
         public zone: NgZone,
-        private router: Router) {
+        private router: Router,
+        private pncService: PncService) {
         this.visitDetailsFormGroup = new FormArray([]);
         this.matHistory_PostNatalExam_FormGroup = new FormArray([]);
         this.drugAdministration_PartnerTesting_FormGroup = new FormArray([]);
@@ -67,6 +80,20 @@ export class PncComponent implements OnInit {
     }
 
     ngOnInit() {
+        this.route.params.subscribe(
+            params => {
+                this.patientId = params.patientId;
+                this.personId = params.personId;
+                this.serviceAreaId = params.serviceAreaId;
+            }
+        );
+
+        this.userId = JSON.parse(localStorage.getItem('appUserId'));
+        this.patientMasterVisitId = JSON.parse(localStorage.getItem('patientMasterVisitId'));
+        this.patientEncounterId = JSON.parse(localStorage.getItem('patientEncounterId'));
+        this.visitDate = new Date(localStorage.getItem('visitDate'));
+        this.visitType = JSON.parse(localStorage.getItem('visitType'));
+
         this.route.data.subscribe((res) => {
             const {
                 yesnoOptions,
@@ -212,7 +239,33 @@ export class PncComponent implements OnInit {
     }
 
     onSubmitForm() {
-        this.snotifyService.success('Success', 'PNC Encounter', this.notificationService.getConfig());
+        // this.snotifyService.success('Success', 'PNC Encounter', this.notificationService.getConfig());
+        const pncVisitDetailsCommand: PncVisitDetailsCommand = {
+            PatientId: this.patientId,
+            ServiceAreaId: this.serviceAreaId,
+            VisitDate: this.visitDetailsFormGroup.value[0]['visitDate'],
+            VisitNumber: this.visitDetailsFormGroup.value[0]['visitNumber'],
+            VisitType: this.visitDetailsFormGroup.value[0]['visitType'],
+            UserId: this.userId,
+            DaysPostPartum: this.visitDetailsFormGroup.value[0]['dayPostPartum'],
+            PatientMasterVisitId: this.patientMasterVisitId
+        };
+
+        const pncVisitDetails = this.pncService.savePncVisitDetails(pncVisitDetailsCommand);
+        const pncPostNatalExam = this.pncService.savePncPostNatalExam();
+
+        forkJoin([pncVisitDetails, pncPostNatalExam])
+            .subscribe(
+                (result) => {
+                    console.log(`success ` + result);
+                },
+                (error) => {
+                    console.log(`error ` + error);
+                },
+                () => {
+                    console.log(`complete`);
+                }
+            );
 
         /*this.zone.run(() => {
             this.router.navigate(['/dashboard/personhome/'], { relativeTo: this.route });

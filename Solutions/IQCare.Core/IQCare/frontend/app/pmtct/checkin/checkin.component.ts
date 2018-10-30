@@ -65,13 +65,11 @@ export class CheckinComponent implements OnInit {
             .subscribe(
                 p => {
                     const options = p['lookupItems'];
-                    console.log(options);
                     for (let i = 0; i < options.length; i++) {
                         _options.push({ 'itemId': options[i]['itemId'], 'itemName': options[i]['itemName'] });
                     }
                 },
                 (err) => {
-                    console.log(err);
                     this.snotifyService.error('Error editing encounter ' + err, 'Encounter', this.notificationService.getConfig());
                 },
                 () => {
