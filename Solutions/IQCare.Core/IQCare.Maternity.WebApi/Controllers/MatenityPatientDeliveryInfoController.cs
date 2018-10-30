@@ -19,7 +19,7 @@ namespace IQCare.Maternity.WebApi.Controllers
         {
             _mediator = mediator;
         }
-        
+
         [HttpPost]
         public async Task<object> AddDeliveredBabyBirthInfo([FromBody] AddDeliveredBabyBirthInformationCommand command)
         {
@@ -68,6 +68,31 @@ namespace IQCare.Maternity.WebApi.Controllers
                 return Ok(patientDeliveryInfo);
 
             return BadRequest(patientDeliveryInfo);
+        }
+
+        [HttpPost]
+        public async Task<object> DischargePatient([FromBody] DischargePatientCommand command)
+        {
+            if (!ModelState.IsValid)
+                return BadRequest(command);
+
+            var response = await _mediator.Send(command, HttpContext.RequestAborted);
+
+            if (response.IsValid)
+                return Ok(response.Value);
+
+            return BadRequest(response);
+
+        }
+
+        [HttpGet("{Id}")]
+        public async Task<object> GetPatientDischargeInfoByMasterVisitId(int Id)
+        {
+            var response = await _mediator.Send(new GetPatientDischargeInfoQuery { PatientMasterVisitId = Id }, HttpContext.RequestAborted);
+            if (response.IsValid)
+                return Ok(response.Value);
+            return BadRequest(response);
+
         }
     }
 }
