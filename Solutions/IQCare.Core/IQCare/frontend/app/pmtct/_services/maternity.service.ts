@@ -34,7 +34,7 @@ export class MaternityService {
     }
 
     public saveDiagnosis(diagnosis: any): Observable<any> {
-        return this.http.post(this.API_URL + '/api/VisitDetails', JSON.stringify(diagnosis), httpOptions).pipe(
+        return this.http.post(this.API_URL + '/api/PatientDiagnosis', JSON.stringify(diagnosis), httpOptions).pipe(
             tap(saveVisitDetals => this.errorHandler.log(`successfully added maternity diagnosis`)),
             catchError(this.errorHandler.handleError<any>('Error saving maternity diagnosis'))
         );
