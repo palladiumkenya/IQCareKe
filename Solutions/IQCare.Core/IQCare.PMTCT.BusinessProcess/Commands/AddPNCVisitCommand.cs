@@ -14,8 +14,8 @@ namespace IQCare.PMTCT.BusinessProcess.Commands
         public int VisitNumber { get; set; }
         public int VisitType { get; set; }
         public int UserId { get; set; }
-        public string EncounterType { get; set; }
         public int? DaysPostPartum { get; set; }
+        public int PatientMasterVisitId { get; set; }
     }
 
     public class AddPNCVisitResponse

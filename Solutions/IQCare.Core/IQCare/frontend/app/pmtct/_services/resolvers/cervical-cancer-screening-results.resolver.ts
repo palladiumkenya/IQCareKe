@@ -17,6 +17,6 @@ export class CervicalCancerScreeningResultsResolver implements Resolve<Observabl
         route: ActivatedRouteSnapshot,
         state: RouterStateSnapshot
     ): Observable<LookupItemView[]> {
-        return this._lookupItemService.getByGroupName('CacxResult');
+        return this._lookupItemService.getByGroupName('Cervical_Cancer_Screening_Results');
     }
 }
