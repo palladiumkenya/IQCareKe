@@ -8,14 +8,14 @@ namespace IQCare.Maternity.BusinessProcess.Queries.Maternity
 {
     public class GetPatientDischargeInfoQuery : IRequest<Result<List<PatientDischargeInfoViewModel>>>
     {
-        public int MasterVisitId { get; set; }
+        public int PatientMasterVisitId { get; set; }
+
 
     }
 
     public class PatientDischargeInfoViewModel
     {
         public int Id { get; set; }
-        public int? PatientEncounterId { get; set; }
         public int? PatientMasterVisitId { get; set; }
         public string OutcomeStatus { get; set; }
         public DateTime? DateDischarged { get; set; }

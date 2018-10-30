@@ -25,7 +25,7 @@ namespace IQCare.Maternity.BusinessProcess.CommandHandlers
         {
             try
             {
-                var patientDischarge = new MaternalPatientDischargeInformation(request.PatientEncounterId, request.PatientMasterVisitId, request.OutcomeStatus, request.OutcomeDescription, request.CreatedBy, request.DateDischarged);
+                var patientDischarge = new MaternalPatientDischargeInformation(request.PatientMasterVisitId, request.OutcomeStatus, request.OutcomeDescription, request.CreatedBy, request.DateDischarged);
 
                 await _maternityUnitOfWork.Repository<MaternalPatientDischargeInformation>().AddAsync(patientDischarge);
                 await _maternityUnitOfWork.SaveAsync();

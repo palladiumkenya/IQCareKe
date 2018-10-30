@@ -7,10 +7,9 @@ namespace IQCare.Maternity.Core.Domain.Maternity
     public class MaternalPatientDischargeInformation
     {
 
-        public MaternalPatientDischargeInformation(int? patientEncounterId, int? patientMasterVisitId, int? outcomeStatus,
+        public MaternalPatientDischargeInformation(int? patientMasterVisitId, int? outcomeStatus,
             string outcomeDescription, int createdBy, DateTime ? dateDischarged)
         {
-            PatientEncounterId = patientEncounterId;
             PatientMasterVisitId = patientMasterVisitId;
             OutcomeStatus = outcomeStatus;
             OutcomeDescription = outcomeDescription;
@@ -19,7 +18,6 @@ namespace IQCare.Maternity.Core.Domain.Maternity
             DateDischarged = dateDischarged;
         }
         public int Id { get; private set; }
-        public int? PatientEncounterId { get; private set; }
         public int? PatientMasterVisitId { get; private set; }
         public int? OutcomeStatus { get; private set; }
         public DateTime ? DateDischarged { get; private set; }

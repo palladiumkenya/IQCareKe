@@ -8,7 +8,6 @@ namespace IQCare.Maternity.BusinessProcess.Commands.Maternity
 {
     public class DischargePatientCommand : IRequest<Result<DischargePatientResponse>>
     {
-        public int? PatientEncounterId { get;  set; }
         public int? PatientMasterVisitId { get;  set; }
         public int? OutcomeStatus { get;  set; }
         public string OutcomeDescription { get;  set; }
