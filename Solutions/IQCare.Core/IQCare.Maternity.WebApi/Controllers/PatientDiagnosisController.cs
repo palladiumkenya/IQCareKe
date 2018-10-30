@@ -21,7 +21,6 @@ namespace IQCare.Maternity.WebApi.Controllers
         }
 
 
-
         [HttpPost]
         public async Task<object> AddDiagnosis([FromBody] AddPatientDiagnosisCommand command)
         {

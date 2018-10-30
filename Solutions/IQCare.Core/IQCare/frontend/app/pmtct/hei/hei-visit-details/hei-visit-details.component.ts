@@ -104,6 +104,7 @@ export class HeiVisitDetailsComponent implements OnInit {
             .subscribe(
                 p => {
                     const options = p['lookupItems'];
+                    this.visitTypes = p['lookupItems'];
                     console.log(options);
                     for (let i = 0; i < options.length; i++) {
                         _options.push({ 'itemId': options[i]['itemId'], 'itemName': options[i]['itemName'] });
