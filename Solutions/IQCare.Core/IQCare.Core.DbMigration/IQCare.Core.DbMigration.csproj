@@ -38,7 +38,6 @@
     <None Remove="Scripts\1.0.0.9\28_DO_AlterTable_PatientAppointment_AllowNull_DifferentiatedCareId.sql" />
     <None Remove="Scripts\1.0.0.9\29_DO_AlterTable_PatientOutcome_AddAuditColumns.sql" />
     <None Remove="Scripts\1.0.0.9\29_SO_AlterTable_PatientOutcome.sql" />
-    <None Remove="Scripts\1.0.0.9\30_DO_AlterTable_PatientOutcome_Add_IdentityColumn.sql" />
     <None Remove="Scripts\1.0.0.9\31_AlterTable_PatientOutcome_RenameCol_DateOfOutcome.sql" />
     <None Remove="Scripts\1.0.0.9\31_DO_CreateView_PatientDischargeInfoView.sql" />
   </ItemGroup>
@@ -76,7 +75,6 @@
     <EmbeddedResource Include="Scripts\1.0.0.9\28_DO_AlterTable_PatientAppointment_AllowNull_DifferentiatedCareId.sql" />
     <EmbeddedResource Include="Scripts\1.0.0.9\29_DO_AlterTable_PatientOutcome_AddAuditColumns.sql" />
     <EmbeddedResource Include="Scripts\1.0.0.9\29_SO_AlterTable_PatientOutcome.sql" />
-    <EmbeddedResource Include="Scripts\1.0.0.9\30_DO_AlterTable_PatientOutcome_Add_IdentityColumn.sql" />
     <EmbeddedResource Include="Scripts\1.0.0.9\31_AlterTable_PatientOutcome_RenameCol_DateOfOutcome.sql" />
     <EmbeddedResource Include="Scripts\1.0.0.9\31_DO_CreateView_PatientDischargeInfoView.sql" />
   </ItemGroup>
