@@ -24,6 +24,7 @@ import { PatientProfile } from '../_models/patientProfile';
 import { PregnancyViewModel } from '../_models/viewModel/PregnancyViewModel';
 import { HIVTestingEmitter } from '../emitters/HIVTestingEmitter';
 import { FormGroup} from '@angular/forms';
+import {LookupItemView} from '../../shared/_models/LookupItemView';
 
 @Component({
     selector: 'app-anc',
@@ -32,9 +33,8 @@ import { FormGroup} from '@angular/forms';
 })
 export class AncComponent implements OnInit, OnDestroy {
 
-    isLinear: boolean = true;
+    isLinear: boolean = false;
     visitDetails: VisitDetails;
-    topics: PreventiveService[];
     patientDrug: PatientDrugAdministration[] = [];
     public preventiveServiceData: PreventiveService[] = [];
 
@@ -45,6 +45,39 @@ export class AncComponent implements OnInit, OnDestroy {
     public patientEncounterId: number;
     public userId: number;
     public visitDate: Date;
+    locationId: number;
+
+  /*  visitTypeOptions: any[] = [];
+    patientEducationOptions: any[] = [];
+    yesNoOptions: any[] = [];
+    hivStatusOptions: any[] = [];
+    whoStageOptions: any[] = [];
+    yesNoNaOptions: any[] = [];
+    chronicIllnessOptions: any[] = [];
+    preventiveServiceOptions: any[] = [];
+    referralOptions: any[] = [];*/
+
+    visitDetailsOptions: any[] = [];
+    patientEducationFormOptions: any[] = [];
+    clientMonitoringOptions: any[] = [];
+    haartProphylaxisOptions: any[] = [];
+    serviceFormOptions: any[] = [];
+    referralFormOptions: any[] = [];
+
+    antenatalCareOptions: any[] = [];
+    yesNoOptions: LookupItemView[] = [];
+    yesNoNaOptions: LookupItemView[] = [];
+    referralOptions: LookupItemView[] = [];
+    visitTypeOptions: LookupItemView[] = [];
+    patientEducationOptions: LookupItemView[] = [];
+    hivStatusOptions: LookupItemView[] = [];
+    whoStageOptions: LookupItemView[] = [];
+    chronicIllnessOptions: LookupItemView[] = [];
+    preventiveServiceOptions: LookupItemView[] = [];
+    tbScreeningOptions: LookupItemView[] = [];
+    cacxMethodOptions: LookupItemView[] = [];
+    cacxResultOptions: LookupItemView[] = [];
+    hivFinalResultOptions: LookupItemView[] = [];
 
     public saveVisitDetails$;
     public savePatientEducation$: Subscription;
@@ -76,20 +109,112 @@ export class AncComponent implements OnInit, OnDestroy {
     }
 
     ngOnInit() {
-        this.route.params.subscribe(params => {
-            this.personId = params['personId'];
+
+        this.route.params.subscribe(
+            (params) => {
+                console.log(params);
+                const { patientId, personId, serviceAreaId } = params;
+                this.patientId = patientId;
+                this.personId = personId;
+                this.serviceAreaId = serviceAreaId;
+            }
+        );
+        this.userId = JSON.parse(localStorage.getItem('appUserId'));
+        this.locationId = JSON.parse(localStorage.getItem('appLocationId'));
+
+        this.route.data.subscribe((res) => {
+            const {
+                yesNoOptions,
+                yesNoNaOptions,
+                referralOptions,
+                visitTypeOptions,
+                patientEducationOptions,
+                hivStatusOptions,
+                whoStageOptions,
+                chronicIllnessOptions,
+                preventiveServiceOptions,
+                tbScreeningOptions,
+                cacxMethodOptions,
+                cacxResultOptions,
+                hivFinaResultOptions,
+            } = res;
+            this.yesNoNaOptions = yesNoNaOptions['lookupItems'];
+            this.yesNoOptions = yesNoOptions['lookupItems'];
+            this.referralOptions = referralOptions['lookupItems'];
+            this.visitTypeOptions = visitTypeOptions['lookupItems'];
+            this.patientEducationOptions = patientEducationOptions['lookupItems'];
+            this.hivStatusOptions = hivStatusOptions['lookupItems'];
+            this.whoStageOptions = whoStageOptions['lookupItems'];
+            this.chronicIllnessOptions = chronicIllnessOptions['lookupItems'];
+            this.preventiveServiceOptions = preventiveServiceOptions['lookupItems'];
+            this.tbScreeningOptions = tbScreeningOptions['lookupItems'];
+            this.cacxMethodOptions = cacxMethodOptions['lookupItems'];
+            this.cacxResultOptions = cacxResultOptions['lookupItems'];
+            this.hivFinalResultOptions = hivFinaResultOptions['lookupItems'];
         });
 
-        this.route.params.subscribe(params => {
-            this.serviceAreaId = params['serviceAreaId'];
+        this.antenatalCareOptions.push({
+            'visitTypeOptions' : this.visitTypeOptions,
+            'patientEducationOptions': this.patientEducationOptions,
+            'yesnoOptions': this.yesNoOptions,
+            'yesNoNaOptions': this.yesNoNaOptions,
+            'hivStatusOptions': this.hivStatusOptions,
+            'whoStageOptions': this.whoStageOptions,
+            'chronicIllnessOptions': this.chronicIllnessOptions,
+            'preventiveServiceOptions': this.preventiveServiceOptions,
+            'referralOptions': this.referralOptions
         });
 
-        this.route.params.subscribe(params => {
-            this.patientId = params['patientId'];
+        this.visitDetailsOptions.push({
+            'visitTypeOptions' : this.visitTypeOptions
         });
-        /*this.route.params.subscribe(params => {
-            this.patientMasterVisitId = params['patientMasterVisitId'];
-        });*/
+
+        this.patientEducationFormOptions.push({
+            'yesnoOptions': this.yesNoOptions,
+            'patientEducationOptions': this.patientEducationOptions,
+            'hivStatusOptions': this.hivStatusOptions
+        });
+
+        this.clientMonitoringOptions.push({
+            'whoStageOptions': this.whoStageOptions,
+            'yesnoOptions': this.yesNoOptions,
+            'yesNoNaOptions': this.yesNoNaOptions,
+            'tbScreeningOptions': this.tbScreeningOptions,
+            'cacxMethodOptions': this.cacxMethodOptions,
+            'cacxResultOptions': this.cacxResultOptions
+        });
+
+        this.haartProphylaxisOptions.push({
+            'yesnoOptions': this.yesNoOptions,
+            'yesNoNaOptions': this.yesNoNaOptions,
+            'chronicIllnessOptions': this.chronicIllnessOptions
+        });
+
+        this.serviceFormOptions.push({
+            'yesNoNaOptions': this.yesNoNaOptions,
+            'yesNoOptions': this.yesNoOptions,
+            'chronicIllnessOptions': this.chronicIllnessOptions,
+            'hivFinalResultOptions': this.hivFinalResultOptions
+        });
+
+        this.referralFormOptions.push({
+           'referralOptions': this.referralOptions,
+            'yesNoOptions': this.yesNoOptions
+        });
+
+        /* this.route.params.subscribe(params => {
+             this.personId = params['personId'];
+         });
+
+         this.route.params.subscribe(params => {
+             this.serviceAreaId = params['serviceAreaId'];
+         });
+
+         this.route.params.subscribe(params => {
+             this.patientId = params['patientId'];
+         })         /*this.route.params.subscribe(params => {
+             this.patientMasterVisitId = params['patientMasterVisitId'];
+         });*/
     }
 
 
@@ -120,7 +245,7 @@ export class AncComponent implements OnInit, OnDestroy {
     public onSavePatientEducation(data: PatientEducationEmitter): void {
 
         console.log('testing counselling');
-        console.log(data);
+      //  console.log(data);
 
         const patientEducation = {
             BreastExamDone: data.breastExamDone,

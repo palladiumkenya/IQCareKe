@@ -1,0 +1,1 @@
+﻿ALTER TABLE DeliveredBabyBirthInformation ADD CONSTRAINT PK_DeliveredBabyBirthInformation_Id PRIMARY KEY(Id);

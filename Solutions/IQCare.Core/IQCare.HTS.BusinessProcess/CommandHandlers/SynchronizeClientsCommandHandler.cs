@@ -582,7 +582,7 @@ namespace IQCare.HTS.BusinessProcess.CommandHandlers
                             }
 
                             // update message as processed
-                            await registerPersonService.UpdateAfyaMobileInbox(afyaMobileMessage.Id, afyaMobileId, true, DateTime.Now);
+                            await registerPersonService.UpdateAfyaMobileInbox(afyaMobileMessage.Id, afyaMobileId, true, DateTime.Now, "success");
                         }
                         else
                         {
@@ -839,7 +839,7 @@ namespace IQCare.HTS.BusinessProcess.CommandHandlers
                                 }
 
                                 //update message has been processed
-                                await registerPersonService.UpdateAfyaMobileInbox(afyaMobileMessage.Id, afyaMobileId, true, DateTime.Now);
+                                await registerPersonService.UpdateAfyaMobileInbox(afyaMobileMessage.Id, afyaMobileId, true, DateTime.Now, "success");
                             }
                         }
                     }
@@ -853,7 +853,7 @@ namespace IQCare.HTS.BusinessProcess.CommandHandlers
                     Log.Error(e.Message);
                     Log.Error(e.InnerException.ToString());
                     // update message as processed
-                    await registerPersonService.UpdateAfyaMobileInbox(afyaMobileMessage.Id, afyaMobileId, false, DateTime.Now, e.Message);
+                    await registerPersonService.UpdateAfyaMobileInbox(afyaMobileMessage.Id, afyaMobileId, false, DateTime.Now, e.Message + " " + e.InnerException.ToString());
                     return Result<string>.Invalid(e.Message);
                 }
             }

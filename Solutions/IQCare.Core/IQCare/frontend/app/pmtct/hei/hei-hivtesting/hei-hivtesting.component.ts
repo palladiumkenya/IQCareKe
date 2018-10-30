@@ -70,20 +70,6 @@ export class HeiHivtestingComponent implements OnInit {
                 this.dataSource = new MatTableDataSource(this.hiv_testing_table_data);
             }
         );
-        /*console.log(this.HivTestingForm.value);
-        if (this.HivTestingForm.valid) {
-            this.hiv_testing_table_data.push({
-                testtype: this.HivTestingForm.value.testtype,
-                dateofsamplecollection: this.HivTestingForm.value.dateofsamplecollection,
-                result: this.HivTestingForm.value.result,
-                dateresultscollected: this.HivTestingForm.value.dateresultscollected,
-                comments: this.HivTestingForm.value.comments
-            });
-
-            this.dataSource = new MatTableDataSource(this.hiv_testing_table_data);
-        } else {
-            this.snotifyService.error('Please select a test to add', 'HIV Testing', this.notificationService.getConfig());
-        }*/
     }
 
     public onRowClicked(row) {

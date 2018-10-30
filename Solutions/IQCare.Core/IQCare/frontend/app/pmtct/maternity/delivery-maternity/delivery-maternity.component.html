@@ -1,0 +1,160 @@
+<form class="form-group" novalidate [formGroup]="deliveryFormGroup">
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="form-title">
+                <span class="mat-accent">Mother Delivery </span>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-3 col-xs-12 col-sm-12">
+            <mat-form-field class="col-md-12">
+                <input matInput placeholder="No. of ANC Visits" formControlName="ancVisits" required>
+            </mat-form-field>
+        </div>
+
+        <div class="col-md-3 col-xs-12 col-sm-12">
+            <mat-form-field class="col-md-12 col-sm-6 col-xs-12">
+                <input matInput [matDatepicker]="picker2" formControlName="deliveryDate"
+                       placeholder="Date of Delivery" required (dateChange)="onDeliveryDateChange()">
+                <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+                <mat-datepicker #picker2></mat-datepicker>
+            </mat-form-field>
+        </div>
+
+        <div class="col-md-2 col-xs-12 col-sm-12">
+            <mat-form-field class="col-md-12">
+                <input matInput placeholder="Gestation at birth" formControlName="gestationAtBirth" required>
+            </mat-form-field>
+        </div>
+
+        <div class="col-md-2 col-xs-12 col-sm-12">
+            <mat-form-field class="col-md-12">
+                <input matInput placeholder="Time of Delivery" formControlName="deliveryTime" required>
+            </mat-form-field>
+        </div>
+
+        <div class="col-md-2 col-xs-12 col-sm-12">
+            <mat-form-field class="col-md-12">
+                <input matInput placeholder="Duration of Labour" formControlName="labourDuration" required>
+            </mat-form-field>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-3 col-xs-12">
+            <mat-form-field class="col-md-12">
+                <mat-label >Mode of Delivery</mat-label>
+                <mat-select formControlName="deliveryMode" required minlength="1">
+                    <mat-option [value]="">select</mat-option>
+                    <mat-option *ngFor="let deliveryModeOption of deliveryModeOptions" [value]="deliveryModeOption.itemId" >
+                        {{deliveryModeOption.itemName}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+
+        <div class="col-lg-3 col-xs-12">
+            <mat-form-field class="col-md-12">
+                <mat-label >blood Loss</mat-label>
+                <mat-select formControlName="bloodLoss" required minlength="1">
+                    <mat-option [value]="">select</mat-option>
+                    <mat-option *ngFor="let bloodlossOption of bloodlossOptions" [value]="bloodlossOption.itemId" (onSelectionChange)="onBloodLossChange($event)">
+                        {{bloodlossOption.itemName}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+
+        <div class="col-md-3 col-xs-12 col-sm-12">
+            <mat-form-field class="col-md-12">
+                <input matInput placeholder="Blood Loss(mls)" formControlName="bloodLossCount" required>
+            </mat-form-field>
+        </div>
+
+        <div class="col-lg-3 col-xs-12">
+            <mat-form-field class="col-md-12">
+                <mat-label >Condition of Mother after Delivery</mat-label>
+                <mat-select formControlName="deliveryCondition" required minlength="1">
+                    <mat-option [value]="0">select</mat-option>
+                    <mat-option *ngFor="let motherStateOption of motherStateOptions" [value]="motherStateOption.itemId" (onSelectionChange)="onChangeDeliveryConditions($event)" >
+                        {{motherStateOption.itemName}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-3 col-xs-12">
+            <mat-form-field class="col-md-12">
+                <mat-label >Placenta Complete</mat-label>
+                <mat-select formControlName="placentaComplete" required minlength="1">
+                    <mat-option [value]="0">select</mat-option>
+                    <mat-option *ngFor="let yesnoOption of yesnoOptions" [value]="yesnoOption.itemId">
+                        {{yesnoOption.itemName}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+        <div class="col-lg-3 col-xs-12">
+            <mat-form-field class="col-md-12">
+                <mat-label >Maternal Deaths Audited</mat-label>
+                <mat-select formControlName="maternalDeathsAudited" required minlength="1">
+                    <mat-option [value]="0">select</mat-option>
+                    <mat-option *ngFor="let yesnoOption of yesnoOptions" [value]="yesnoOption.itemId">
+                        {{yesnoOption.itemName}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+
+        <div class="col-lg-3 col-xs-12"> </div>
+        <div class="col-md-3 col-xs-12 col-sm-12">
+            <mat-form-field class="col-md-12 col-sm-6 col-xs-12">
+                <input matInput [matDatepicker]="picker" formControlName="auditDate"
+                       placeholder="Audit Date" required="">
+                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+            </mat-form-field>
+        </div>
+
+    </div>
+
+    <div class="row">
+        <div class="col-lg-3 col-xs-12">
+            <mat-form-field class="col-md-12">
+                <mat-label >Delivery Complications Experienced</mat-label>
+                <mat-select formControlName="deliveryComplications" required minlength="1">
+                    <mat-option [value]="0">select</mat-option>
+                    <mat-option *ngFor="let yesnoOption of yesnoOptions" [value]="yesnoOption.itemId" (onSelectionChange)="onDeliveryComplicationsChange($event)">
+                        {{yesnoOption.itemName}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+        <div class="col-lg-3 col-xs-12"> </div>
+        <div class="col-lg-3 col-xs-12"> </div>
+        <div class="col-lg-3 col-xs-12"> </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12 col-xs-12 col-sm-12">
+            <mat-form-field class="col-lg-12">
+                <textarea matInput placeholder="if yes" formControlName="deliveryComplicationNotes"></textarea>
+            </mat-form-field>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-3 col-xs-12">
+            <mat-form-field class="col-md-12">
+                <input matInput placeholder="Delivery conducted by (enter name)" formControlName="deliveryConductedBy" required>
+            </mat-form-field>
+        </div>
+        <div class="col-lg-3 col-xs-12"> </div>
+        <div class="col-lg-3 col-xs-12"> </div>
+        <div class="col-lg-3 col-xs-12"> </div>
+    </div>
+
+</form>

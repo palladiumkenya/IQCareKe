@@ -1,0 +1,97 @@
+import {Injectable} from '@angular/core';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {environment} from '../../../environments/environment';
+import {ErrorHandlerService} from '../../shared/_services/errorhandler.service';
+import {catchError, tap} from 'rxjs/operators';
+import {Observable} from 'rxjs/index';
+
+const httpOptions = {
+    headers: new HttpHeaders({'Content-Type': 'application/json'})
+};
+
+
+@Injectable({
+    providedIn: 'root'
+})
+export class MaternityService {
+    private API_URL = environment.API_URL;
+
+    constructor(private http: HttpClient, private errorHandler: ErrorHandlerService) {
+    }
+
+    public getCurrentVisitDetails(patientId: number) {
+        return this.http.get<any>(this.API_URL + '/api/VisitDetails/GetCurrentVisit/' + patientId).pipe(
+            tap(getCurrentVisitDetails => this.errorHandler.log('get current visit data')),
+            catchError(this.errorHandler.handleError<any[]>('getCurrentVisitDetails'))
+        );
+    }
+
+    public saveVisitDetails(visitDetails: any): Observable<any>  {
+        return this.http.post(this.API_URL + '/api/VisitDetails', JSON.stringify(visitDetails), httpOptions).pipe(
+            tap(saveVisitDetals => this.errorHandler.log(`successfully added maternity visits`)),
+            catchError(this.errorHandler.handleError<any>('Error saving maternity visit'))
+        );
+    }
+
+    public saveDiagnosis(diagnosis: any): Observable<any> {
+        return this.http.post(this.API_URL + '/api/PatientDiagnosis', JSON.stringify(diagnosis), httpOptions).pipe(
+            tap(saveVisitDetals => this.errorHandler.log(`successfully added maternity diagnosis`)),
+            catchError(this.errorHandler.handleError<any>('Error saving maternity diagnosis'))
+        );
+    }
+
+    public savePatientDelivery(delivery: any): Observable<any> {
+        return this.http.post(this.API_URL + '/api/MaternityPatientDeliveryInfo', JSON.stringify(delivery), httpOptions).pipe(
+            tap(savePatientDelivery => this.errorHandler.log(`successfully added maternity delivery info`)),
+            catchError(this.errorHandler.handleError<any>('Error saving maternity Delivery info'))
+        );
+    }
+
+    public saveBabySection(babysection: any): Observable<any> {
+        return this.http.post(this.API_URL + '/api/MaternityPatientDeliveryInfo', JSON.stringify(babysection), httpOptions).pipe(
+            tap(saveBabySection => this.errorHandler.log(`successfully added maternity baby section`)),
+            catchError(this.errorHandler.handleError<any>('Error saving maternity baby section'))
+        );
+    }
+
+    public saveMaternalDrugAdministration(drug: any): Observable<any> {
+        return this.http.post(this.API_URL + '/api/MaternityPatientDeliveryInfo', JSON.stringify(drug), httpOptions).pipe(
+            tap(saveMaternalDrugAdministration => this.errorHandler.log(`successfully added maternal drug administration`)),
+            catchError(this.errorHandler.handleError<any>('Error saving maternal drug administration'))
+        );
+    }
+
+
+    public savePartnerTesting(partner: any): Observable<any> {
+        return this.http.post(this.API_URL + '/api/MaternityPatientDeliveryInfo', JSON.stringify(partner), httpOptions).pipe(
+            tap(saveMaternalDrugAdministration => this.errorHandler.log(`successfully added Partner testing details`)),
+            catchError(this.errorHandler.handleError<any>('Error saving Partner testing details'))
+        );
+    }
+
+    public saveDischarge(discharge: any): Observable<any> {
+        return this.http.post(this.API_URL + '/api/MaternityPatientDeliveryInfo', JSON.stringify(discharge), httpOptions).pipe(
+            tap(saveDischarge => this.errorHandler.log(`successfully added discharge details`)),
+            catchError(this.errorHandler.handleError<any>('Error saving Partner discharge details'))
+        );
+    }
+
+    public saveReferrals(referral: any): Observable<any> {
+        return this.http.post(this.API_URL + '/api/PatientReferralAndAppointment/postReferral', JSON.stringify(referral), httpOptions).pipe(
+            tap(saveReferrals => this.errorHandler.log(`successfully added Referral details`)),
+            catchError(this.errorHandler.handleError<any>('Error saving Referral details'))
+        );
+    }
+
+    public saveNextAppointment(appointment: any): Observable<any> {
+        return this.http.post(this.API_URL + '/api/PatientReferralAndAppointment/postNextAppointment', JSON.stringify(appointment),
+            httpOptions).pipe(
+            tap(saveReferrals => this.errorHandler.log(`successfully added Referral details`)),
+            catchError(this.errorHandler.handleError<any>('Error saving Referral details'))
+        );
+    }
+
+
+
+
+}

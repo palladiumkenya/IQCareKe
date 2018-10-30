@@ -1,0 +1,1 @@
+﻿ALTER TABLE PatientOutcome ADD Id INT NOT NULL;

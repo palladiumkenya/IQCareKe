@@ -240,7 +240,6 @@
                 }
 
             });
-
             
             var personDOB = '<%=Session["PersonDob"]%>';
             var nationalId = '<%=Session["NationalId"]%>';
@@ -324,7 +323,7 @@
                     nationalId = 99999999;
                 }
 
-                var fields = getDynamicFields();
+                var fields = getServiceAreaIdentifiers();
                 var prefix = null;
                 var mflCode = code;
                 var fieldName = null;
@@ -388,7 +387,7 @@
                     nationalId = 99999999;
                 }
 
-                var fields = getDynamicFields();
+                var fields = getServiceAreaIdentifiers();
                 var prefix = null;
                 var mflCode = code;
                 var fieldName = null;
@@ -521,14 +520,25 @@
                             getPatientEnrollmentDetails();
                         //});
                     }
+
+                    //Remove empty ReGex validation constraints from relevant textboxes
+                    $('input[type=text]').each(function () {
+                        if ($(this).attr("data-parsley-pattern") == "") {
+                            $(this).removeAttr("data-parsley-pattern");
+                        }
+                        if ($(this).attr("data-parsley-pattern-message") == "") {
+                            $(this).removeAttr("data-parsley-pattern-message");
+                        }
+                    });
+
                 },1000);
             });
 
-            function getDynamicFields() {
+            function getServiceAreaIdentifiers() {
                 var result = "";
                 $.ajax({
                     type: "POST",
-                    url: "../WebService/EnrollmentService.asmx/GetDynamicFields",
+                    url: "../WebService/EnrollmentService.asmx/GetServiceAreaIdentifiers",
                     contentType: "application/json; charset=utf-8",
                     dataType: "json",
                     async: false,
@@ -550,7 +560,7 @@
             function createDynamicElements() {
                 $.ajax({
                     type: "POST",
-                    url: "../WebService/EnrollmentService.asmx/GetDynamicFields",
+                    url: "../WebService/EnrollmentService.asmx/GetServiceAreaIdentifiers",
                     contentType: "application/json; charset=utf-8",
                     dataType: "json",
                     success: function (response) {
@@ -600,19 +610,13 @@
                             table += "<label align='center'>" + messageResponse[i].Label + " :</label>";
                             table += "</td>";
 
-                            if (messageResponse[i].DataType == "Numeric") {
-                                table += "<td>";
-                                if (messageResponse[i].Required == true) {
-                                    table += "<input type='text' id=" + messageResponse[i].Code + " class='form-control' data-parsley-type='digits' data-parsley-trigger='keyup' data-parsley-pattern-message='Please enter a valid 10 digit number' data-parsley-pattern='/^((?!(0))[0-9]{10})$/' data-parsley-required='true' data-parsley-length='[10, 10]' />";
-                                } else {
-                                    table += "<input type='text' id=" + messageResponse[i].Code + " class='form-control' data-parsley-type='digits' data-parsley-trigger='keyup' data-parsley-pattern-message='Please enter a valid 10 digit number' data-parsley-pattern='/^((?!(0))[0-9]{10})$/'  data-parsley-length='[10, 10]' />";
-                                }
-                                
-                                table += "</td>";
-                            } else if (messageResponse[i].DataType == "") {
-                                
-                            }
-
+                            table += "<td>";
+                            if (messageResponse[i].Required == true) {
+                                table += "<input type='text' id=" + messageResponse[i].Code + " class='form-control' data-parsley-trigger='keyup' data-parsley-pattern-message='" + messageResponse[i].FailedValidationMessage + "' data-parsley-pattern='" + messageResponse[i].ValidatorRegex + "' data-parsley-minlength='" + messageResponse[i].MinLength + "' data-parsley-maxlength='" + messageResponse[i].MaxLength + "'  data-parsley-required='true' />";
+                            } else {
+                                table += "<input type='text' id=" + messageResponse[i].Code + " class='form-control' data-parsley-trigger='keyup' data-parsley-pattern-message='" + messageResponse[i].FailedValidationMessage + "' data-parsley-pattern='" + messageResponse[i].ValidatorRegex + "' data-parsley-minlength='" + messageResponse[i].MinLength + "' data-parsley-maxlength='" + messageResponse[i].MaxLength + "' />";
+                            }                                
+                            table += "</td>";
 
                             table += "</tr>";
                             table += "<tr><td>&nbsp;</td></tr>";
@@ -725,7 +729,7 @@
                             $("#entryPoint").val(messageResponse.EntryPointId);
                         }
 
-                        var fields = getDynamicFields();
+                        var fields = getServiceAreaIdentifiers();
                         $.each(fields, function (index, value) {
                             $.each(messageResponse.IndentifiersList, function (key, val) {
                                 if (val.Code == value.Code) {
@@ -866,6 +870,7 @@
                     toastr.error(response.d, "Person Profile Error");
                 }
             });
+
         }
 
     </script>

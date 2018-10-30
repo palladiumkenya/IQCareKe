@@ -42,6 +42,9 @@ export class PersonHomeComponent implements OnInit {
 
             this.services = servicesArray;
         });
+
+        localStorage.removeItem('patientEncounterId');
+        localStorage.removeItem('patientMasterVisitId');
     }
 
     public getPatientDetilsById(personId: number) {

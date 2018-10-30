@@ -24,8 +24,4 @@
     </Reference>
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="CommandHandlers\Appointment\" />
-  </ItemGroup>
-
 </Project>

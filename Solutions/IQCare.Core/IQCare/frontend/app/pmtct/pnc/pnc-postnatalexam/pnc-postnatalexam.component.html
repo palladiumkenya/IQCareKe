@@ -1,0 +1,97 @@
+<form class="form-group" [formGroup]="PostNatalForm">
+    <div class="row">
+        <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12">
+            <div class="form-title">
+                <span class="mat-accent"> Post Natal Exam </span>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-3 col-sm-3 col-xs-12">
+                <mat-form-field class="col-lg-12 col-sm-12 col-xs-12">
+                    <mat-label>Breast</mat-label>
+                    <mat-select formControlName="breast" required>
+                        <mat-option [value]=""></mat-option>
+                        <mat-option *ngFor="let breastOption of breastOptions" [value]="breastOption.itemId">
+                            {{breastOption.itemName}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+
+            <div class="col-lg-3 col-sm-3 col-xs-12">
+                <mat-form-field class="col-lg-12 col-sm-12 col-xs-12">
+                    <mat-label>Uterus</mat-label>
+                    <mat-select formControlName="uterus" required>
+                        <mat-option [value]=""></mat-option>
+                        <mat-option *ngFor="let uterusOption of uterusOptions" [value]="uterusOption.itemId">
+                            {{uterusOption.itemName}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+
+            <div class="col-lg-3 col-sm-3 col-xs-12">
+                <mat-form-field class="col-lg-12 col-sm-12 col-xs-12">
+                    <mat-label>Lochia</mat-label>
+                    <mat-select formControlName="lochia" required>
+                        <mat-option [value]=""></mat-option>
+                        <mat-option *ngFor="let lochiaOption of lochiaOptions" [value]="lochiaOption.itemId">
+                            {{lochiaOption.itemName}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+
+            <div class="col-lg-3 col-sm-3 col-xs-12">
+                <mat-form-field class="col-lg-12 col-sm-12 col-xs-12">
+                    <mat-label>Postpartum Haemorrhage</mat-label>
+                    <mat-select formControlName="postpartumhaemorrhage" required>
+                        <mat-option [value]=""></mat-option>
+                        <mat-option *ngFor="let postpartumhaemorrhageOption of postpartumhaemorrhageOptions" [value]="postpartumhaemorrhageOption.itemId">
+                            {{postpartumhaemorrhageOption.itemName}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-3 col-sm-3 col-xs-12">
+                <mat-form-field class="col-lg-12 col-sm-12 col-xs-12">
+                    <mat-label>Episiotomy</mat-label>
+                    <mat-select formControlName="episiotomy" required>
+                        <mat-option [value]=""></mat-option>
+                        <mat-option *ngFor="let episiotomyOption of episiotomyOptions" [value]="episiotomyOption.itemId">
+                            {{episiotomyOption.itemName}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+
+            <div class="col-lg-3 col-sm-3 col-xs-12">
+                <mat-form-field class="col-lg-12 col-sm-12 col-xs-12">
+                    <mat-label>C-Section Site</mat-label>
+                    <mat-select formControlName="c_section" required>
+                        <mat-option [value]=""></mat-option>
+                        <mat-option *ngFor="let cSectionSiteOption of cSectionSiteOptions" [value]="cSectionSiteOption.itemId">
+                            {{cSectionSiteOption.itemName}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+
+            <div class="col-lg-3 col-sm-3 col-xs-12">
+                <mat-form-field class="col-lg-12 col-sm-12 col-xs-12">
+                    <mat-label>Fistula Screening</mat-label>
+                    <mat-select formControlName="fistula_screening" required>
+                        <mat-option [value]=""></mat-option>
+                        <mat-option *ngFor="let fistulaScreeningOption of fistulaScreeningOptions" [value]="fistulaScreeningOption.itemId">
+                            {{fistulaScreeningOption.itemName}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+        </div>
+    </div>
+</form>

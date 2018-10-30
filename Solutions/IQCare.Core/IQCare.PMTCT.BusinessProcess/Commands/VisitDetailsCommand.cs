@@ -14,11 +14,13 @@ namespace IQCare.PMTCT.BusinessProcess.Commands
         public DateTime Lmp { get; set; }
         public DateTime Edd { get; set; }
         public int Gestation { get; set; }
-        public int AgeAtMenarche { get; set; }
+        public int ? AgeAtMenarche { get; set; }
         public int ParityOne { get; set; }
         public int ParityTwo { get; set; }
         public int Gravidae { get; set; }
         public int UserId { get; set; }
+        public string EncounterType { get; set; }
+        public int ? DaysPostPartum { get; set; }
     }
 
     public class VisitDetailsCommandResult
