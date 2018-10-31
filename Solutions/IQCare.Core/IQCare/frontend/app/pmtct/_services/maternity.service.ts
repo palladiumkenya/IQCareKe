@@ -4,6 +4,7 @@ import {environment} from '../../../environments/environment';
 import {ErrorHandlerService} from '../../shared/_services/errorhandler.service';
 import {catchError, tap} from 'rxjs/operators';
 import {Observable} from 'rxjs/index';
+import {PatientMasterVisitEncounter} from '../_models/PatientMasterVisitEncounter';
 
 const httpOptions = {
     headers: new HttpHeaders({'Content-Type': 'application/json'})
@@ -19,10 +20,32 @@ export class MaternityService {
     constructor(private http: HttpClient, private errorHandler: ErrorHandlerService) {
     }
 
+    public saveMaternityMasterVisit(patientMasterVisitEncounter: PatientMasterVisitEncounter): Observable<any> {
+        return this.http.post<PatientMasterVisitEncounter>(this.API_URL + '/api/PatientMasterVisit',
+            JSON.stringify(patientMasterVisitEncounter), httpOptions).pipe(
+            tap(saveMaternityMasterVisit => this.errorHandler.log(`successfully added maternity patientmastervisit`)),
+            catchError(this.errorHandler.handleError<any>('Error saving maternity patientmastervisit'))
+        );
+    }
+
     public getCurrentVisitDetails(patientId: number) {
         return this.http.get<any>(this.API_URL + '/api/VisitDetails/GetCurrentVisit/' + patientId).pipe(
             tap(getCurrentVisitDetails => this.errorHandler.log('get current visit data')),
             catchError(this.errorHandler.handleError<any[]>('getCurrentVisitDetails'))
+        );
+    }
+
+    public  getPregnancyDetails(patientId: number) {
+        return this.http.get<any>(this.API_URL + '/api/VisitDetails/GetPregnancyProfile/' + patientId).pipe(
+            tap(getPregnancyDetails => this.errorHandler.log('get current pregnancy details')),
+            catchError(this.errorHandler.handleError<any[]>('getPregnancyDetails'))
+        );
+    }
+
+    public getMaternityEncounter(patientId: number) {
+        return this.http.get<any>(this.API_URL + '/api/MaternityEncounter/' + patientId).pipe(
+            tap(getMaternityEncounter => this.errorHandler.log('get current maternity details')),
+            catchError(this.errorHandler.handleError<any[]>('GetMaternityEncounter'))
         );
     }
 
@@ -41,14 +64,16 @@ export class MaternityService {
     }
 
     public savePatientDelivery(delivery: any): Observable<any> {
-        return this.http.post(this.API_URL + '/api/MaternityPatientDeliveryInfo', JSON.stringify(delivery), httpOptions).pipe(
+        return this.http.post(this.API_URL + '/api/MaternityPatientDeliveryInfo/AddPatientDeliveryInfo', JSON.stringify(delivery),
+            httpOptions).pipe(
             tap(savePatientDelivery => this.errorHandler.log(`successfully added maternity delivery info`)),
             catchError(this.errorHandler.handleError<any>('Error saving maternity Delivery info'))
         );
     }
 
     public saveBabySection(babysection: any): Observable<any> {
-        return this.http.post(this.API_URL + '/api/MaternityPatientDeliveryInfo', JSON.stringify(babysection), httpOptions).pipe(
+        return this.http.post(this.API_URL + '/api/MaternityPatientDeliveryInfo/AddDeliveredBabyBirthInfo', JSON.stringify(babysection),
+            httpOptions).pipe(
             tap(saveBabySection => this.errorHandler.log(`successfully added maternity baby section`)),
             catchError(this.errorHandler.handleError<any>('Error saving maternity baby section'))
         );
