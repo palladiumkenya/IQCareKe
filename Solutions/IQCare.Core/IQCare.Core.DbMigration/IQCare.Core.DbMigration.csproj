@@ -40,6 +40,7 @@
     <None Remove="Scripts\1.0.0.9\29_DO_AlterTable_PatientOutcome_AddAuditColumns.sql" />
     <None Remove="Scripts\1.0.0.9\29_SO_AlterTable_PatientOutcome.sql" />
     <None Remove="Scripts\1.0.0.9\31_AlterTable_PatientOutcome_RenameCol_DateOfOutcome.sql" />
+    <None Remove="Scripts\1.0.0.9\31_BO_PatientFamilyPlanningLookUpViewItems.sql" />
     <None Remove="Scripts\1.0.0.9\31_DO_CreateView_PatientDischargeInfoView.sql" />
   </ItemGroup>
 
@@ -78,6 +79,7 @@
     <EmbeddedResource Include="Scripts\1.0.0.9\29_DO_AlterTable_PatientOutcome_AddAuditColumns.sql" />
     <EmbeddedResource Include="Scripts\1.0.0.9\29_SO_AlterTable_PatientOutcome.sql" />
     <EmbeddedResource Include="Scripts\1.0.0.9\31_AlterTable_PatientOutcome_RenameCol_DateOfOutcome.sql" />
+    <EmbeddedResource Include="Scripts\1.0.0.9\31_BO_PatientFamilyPlanningLookUpViewItems.sql" />
     <EmbeddedResource Include="Scripts\1.0.0.9\31_DO_CreateView_PatientDischargeInfoView.sql" />
   </ItemGroup>
 
