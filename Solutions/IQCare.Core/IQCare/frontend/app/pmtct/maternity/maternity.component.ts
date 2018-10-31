@@ -1,18 +1,18 @@
-import {Component, OnInit} from '@angular/core';
-import {FormArray, FormGroup} from '@angular/forms';
-import {ActivatedRoute} from '@angular/router';
-import {DefaultParameters} from '../_models/hei/DefaultParameters';
-import {BloodLossResolver} from '../_services/resolvers/blood-loss.resolver';
-import {HivTestResultResolver} from '../_services/resolvers/hiv-test-result.resolver';
-import {YesNoNaResolver} from '../_services/resolvers/yes-no-na.resolver';
-import {MotherStateResolver} from '../_services/motherstate.resolver';
-import {GenderResolver} from '../_services/resolvers/gender.resolver';
-import {HivFinalResultsResolver} from '../_services/resolvers/hiv-final-results.resolver';
-import {DeliveryModeResolver} from '../_services/deliverymode.resolver';
-import {TestKitNameResolver} from '../_services/resolvers/test-kit-name.resolver';
-import {PmtctTestTypeResolver} from '../_services/resolvers/pmtctTestType.resolver';
-import {ReferralResolver} from '../_services/resolvers/referral.resolver';
-import {LookupItemView} from '../../shared/_models/LookupItemView';
+import { Component, OnInit } from '@angular/core';
+import { FormArray, FormGroup } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
+import { DefaultParameters } from '../_models/hei/DefaultParameters';
+import { BloodLossResolver } from '../_services/resolvers/blood-loss.resolver';
+import { HivTestResultResolver } from '../_services/resolvers/hiv-test-result.resolver';
+import { YesNoNaResolver } from '../_services/resolvers/yes-no-na.resolver';
+import { MotherStateResolver } from '../_services/motherstate.resolver';
+import { GenderResolver } from '../_services/resolvers/gender.resolver';
+import { HivFinalResultsResolver } from '../_services/resolvers/hiv-final-results.resolver';
+import { DeliveryModeResolver } from '../_services/deliverymode.resolver';
+import { TestKitNameResolver } from '../_services/resolvers/test-kit-name.resolver';
+import { PmtctTestTypeResolver } from '../_services/resolvers/pmtctTestType.resolver';
+import { ReferralResolver } from '../_services/resolvers/referral.resolver';
+import { LookupItemView } from '../../shared/_models/LookupItemView';
 
 @Component({
     selector: 'app-maternity',
@@ -80,7 +80,7 @@ export class MaternityComponent implements OnInit {
         this.route.params.subscribe(
             (params) => {
                 console.log(params);
-                const {patientId, personId, serviceAreaId} = params;
+                const { patientId, personId, serviceAreaId } = params;
                 this.patientId = patientId;
                 this.personId = personId;
                 this.serviceAreaId = serviceAreaId;
@@ -144,15 +144,15 @@ export class MaternityComponent implements OnInit {
         });
 
         this.drugAdministrationOptions.push({
-            'yesNo' : this.yesNoOptions,
-            'finalResult' : this.hivFinalResultOptions,
+            'yesNo': this.yesNoOptions,
+            'finalResult': this.hivFinalResultOptions,
             'yesNoNa': this.yesNoNaOptions
         });
 
         this.dischargeOptions.push({
-           'deliveryStates': this.motherStateOptions,
-           'referrals': this.referralOptions,
-           'yesNos': this.yesNoOptions
+            'deliveryStates': this.motherStateOptions,
+            'referrals': this.referralOptions,
+            'yesNos': this.yesNoOptions
         });
 
         this.partnerTestingOptions.push({

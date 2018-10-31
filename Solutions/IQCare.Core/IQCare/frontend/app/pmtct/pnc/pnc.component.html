@@ -135,7 +135,7 @@
 
                                         <app-diagnosis (notify)="onDiagnosisNotify($event)"></app-diagnosis>
 
-                                        <app-maternity-referral (notify)="onReferralNotify($event)"></app-maternity-referral>
+                                        <app-maternity-referral (notify)="onReferralNotify($event)" [dischargeOptions]="referralOptions"></app-maternity-referral>
 
                                         <app-maternity-next-appointment (notify)="onNextAppointmentNotify($event)">
                                         </app-maternity-next-appointment>
