@@ -4,7 +4,7 @@ import { SnotifyService } from 'ng-snotify';
 import { Subscription } from 'rxjs/index';
 import { LookupItemService } from '../../../shared/_services/lookup-item.service';
 import { NotificationService } from '../../../shared/_services/notification.service';
-import {MaternityService} from '../../_services/maternity.service';
+import { MaternityService } from '../../_services/maternity.service';
 
 @Component({
     selector: 'app-hei-visit-details',
@@ -82,7 +82,6 @@ export class HeiVisitDetailsComponent implements OnInit {
             .subscribe(
                 p => {
                     const visit = p;
-                    console.log(visit);
                     if (visit.visitNumber > 1) {
                         const Item = this.visitTypes.filter(x => x.itemName === 'Follow Up ANC visit');
                         this.HeiVisitDetailsFormGroup.get('visitType').patchValue(Item[0].itemId);
@@ -105,7 +104,6 @@ export class HeiVisitDetailsComponent implements OnInit {
                 p => {
                     const options = p['lookupItems'];
                     this.visitTypes = p['lookupItems'];
-                    console.log(options);
                     for (let i = 0; i < options.length; i++) {
                         _options.push({ 'itemId': options[i]['itemId'], 'itemName': options[i]['itemName'] });
                     }
@@ -115,7 +113,7 @@ export class HeiVisitDetailsComponent implements OnInit {
                     this.snotifyService.error('Error editing encounter ' + err, 'Encounter', this.notificationService.getConfig());
                 },
                 () => {
-                    console.log(this.lookupItems$);
+                    // console.log(this.lookupItems$);
                 });
     }
 

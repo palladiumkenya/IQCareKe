@@ -32,15 +32,17 @@
                     </div>
                     <div class="col-lg-4 col-md-4 col-xs-12 col-sm-6">
                         <mat-form-field class="col-md-12">
-                            <input class="col-md-12" formControlName="lotNumber" matInput placeholder="Lot No" required>
+                            <input class="col-md-12" id="lotNumber" name="lotNumber" formControlName="lotNumber"
+                                matInput placeholder="Lot No" required>
                         </mat-form-field>
                     </div>
                 </div>
                 <div class="col-md-12">
                     <div class="col-lg-4 col-md-4 col-xs-12 col-sm-6">
                         <mat-form-field class="col-md-12">
-                            <input formControlName="expiryDate" id="expiryDate" matInput [matDatepicker]="expiryDate"
-                                formControlname="expiryDate" placeholder="Expiry Date" required>
+                            <input formControlName="expiryDate" id="expiryDate" name="expiryDate" matInput
+                                [matDatepicker]="expiryDate" formControlname="expiryDate" placeholder="Expiry Date"
+                                required>
                             <mat-datepicker-toggle matSuffix [for]="expiryDate"></mat-datepicker-toggle>
                             <mat-datepicker #expiryDate></mat-datepicker>
                         </mat-form-field>
@@ -60,9 +62,9 @@
 
                     <div class="col-lg-4 col-md-4 col-xs-12 col-sm-6">
                         <mat-form-field class="col-md-12">
-                            <input formControlName="nextAppointmentDate" id="nextAppointmentDate" matInput
-                                [matDatepicker]="nextAppointmentDate" formControlname="nextAppointmentDate" placeholder="Next HIV Test"
-                                required>
+                            <input formControlName="nextAppointmentDate" id="nextAppointmentDate" name="nextAppointmentDate"
+                                matInput [matDatepicker]="nextAppointmentDate" formControlname="nextAppointmentDate"
+                                placeholder="Next HIV Test" required>
                             <mat-datepicker-toggle matSuffix [for]="nextAppointmentDate"></mat-datepicker-toggle>
                             <mat-datepicker #nextAppointmentDate></mat-datepicker>
                         </mat-form-field>

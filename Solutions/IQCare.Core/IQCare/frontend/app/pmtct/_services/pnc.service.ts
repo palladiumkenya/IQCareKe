@@ -1,11 +1,15 @@
+import { HivTestsCommand } from './../_models/HivTestsCommand';
 import { PatientMasterVisitEncounter } from './../_models/PatientMasterVisitEncounter';
 import { Injectable } from '@angular/core';
 import { HttpHeaders, HttpClient } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
 import { ErrorHandlerService } from '../../shared/_services/errorhandler.service';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { tap, catchError } from 'rxjs/operators';
 import { PncVisitDetailsCommand } from '../_models/PncVisitDetailsCommand';
+import { HivStatusCommand } from '../_models/HivStatusCommand';
+import { PatientDiagnosisCommand } from '../_models/PatientDiagnosisCommand';
+import { PatientReferralCommand } from '../_models/PatientReferralCommand';
 
 const httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -17,6 +21,7 @@ const httpOptions = {
 export class PncService {
     private API_URL = environment.API_URL;
     private API_LAB_URL = environment.API_LAB_URL;
+    private API_MATERNITY_URL = environment.API_MATERNITY_URL;
 
     constructor(private http: HttpClient, private errorHandler: ErrorHandlerService) { }
 
@@ -51,10 +56,25 @@ export class PncService {
         );
     }
 
-    public savePncHivStatus(): Observable<any> {
-        return this.http.post<any>(this.API_URL + '', JSON.stringify(''), httpOptions).pipe(
+    public savePncHivStatus(hivStatusCommand: HivStatusCommand, anyTests: any[]): Observable<any> {
+        if (anyTests.length == 0) {
+            return of([]);
+        }
+
+        const Indata = {
+            'Encounter': hivStatusCommand
+        };
+
+        return this.http.post<any>(this.API_URL + '/api/HtsEncounter', JSON.stringify(Indata), httpOptions).pipe(
             tap(savePncBabyExamination => this.errorHandler.log(`successfully saved pnc hiv status`)),
             catchError(this.errorHandler.handleError<any>('Error saving pnc hiv status'))
+        );
+    }
+
+    public savePncHivTests(hivTestsCommand: HivTestsCommand): Observable<any> {
+        return this.http.post<any>(this.API_URL + '/api/HtsEncounter/addTestResults', JSON.stringify(hivTestsCommand), httpOptions).pipe(
+            tap(savePncHivTests => this.errorHandler.log(`successfully saved pnc hiv tests`)),
+            catchError(this.errorHandler.handleError<any>('Error saving pnc hiv tests'))
         );
     }
 
@@ -70,5 +90,21 @@ export class PncService {
             tap(savePartnerTesting => this.errorHandler.log(`successfully saved pnc partner testing`)),
             catchError(this.errorHandler.handleError<any>('Error saving pnc partner testing'))
         );
+    }
+
+    public saveDiagnosis(pncPatientDiagnosis: PatientDiagnosisCommand): Observable<any> {
+        return this.http.post<any>(this.API_MATERNITY_URL + '/api/PatientDiagnosis/AddDiagnosis',
+            JSON.stringify(pncPatientDiagnosis), httpOptions).pipe(
+                tap(saveDiagnosis => this.errorHandler.log(`successfully saved pnc diagnosis`)),
+                catchError(this.errorHandler.handleError<any>('Error saving pnc diagnosis'))
+            );
+    }
+
+    public savePncReferral(pncReferralCommand: PatientReferralCommand): Observable<any> {
+        return this.http.post<any>(this.API_URL + '/api/PatientReferralAndAppointment/postReferral',
+            JSON.stringify(pncReferralCommand), httpOptions).pipe(
+                tap(savePncReferral => this.errorHandler.log(`successfully saved pnc referral`)),
+                catchError(this.errorHandler.handleError<any>('Error saving pnc referral'))
+            );
     }
 }

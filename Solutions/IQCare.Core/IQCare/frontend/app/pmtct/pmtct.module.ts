@@ -1,3 +1,4 @@
+///<reference path="maternity/maternity.component.ts"/>
 import { PncService } from './_services/pnc.service';
 import { CervicalCancerScreeningResultsResolver } from './_services/resolvers/cervical-cancer-screening-results.resolver';
 import { FamilyPlanningMethodResolver } from './_services/resolvers/family-planning-method.resolver';
@@ -32,6 +33,7 @@ import { ClientMonitoringComponent } from './anc/client-monitoring/client-monito
 import { HaartProphylaxisComponent } from './anc/haart-prophylaxis/haart-prophylaxis.component';
 import { VisitDetailsComponent } from './anc/visit-details/visit-details.component';
 import { PmtctRoutingModule } from './pmtct-routing-module';
+import { MaternityEncounterComponent } from './maternity/maternity-encounter/maternity-encounter.component';
 import {
     MatAutocompleteModule,
     MatButtonModule, MatButtonToggleModule, MatCardModule, MatCheckboxModule, MatChipsModule,
@@ -99,6 +101,8 @@ import { HivTestResultResolver } from './_services/resolvers/hiv-test-result.res
 import { PncEncountersComponent } from './pnc/pnc-encounters/pnc-encounters.component';
 import { CheckinComponent } from './checkin/checkin.component';
 import {TbScreeningResolver} from './_services/resolvers/tb-screening.resolver';
+import { AncHivtestingComponent } from './anc/anc-hivtesting/anc-hivtesting.component';
+import { ANCHivStatusInitialVisitResolver } from './_services/resolvers/anc-hiv-status-initial-visit.resolver';
 
 @NgModule({
     imports: [
@@ -162,7 +166,9 @@ import {TbScreeningResolver} from './_services/resolvers/tb-screening.resolver';
         MaternityNextAppointmentComponent,
         MaternityHivTestComponent,
         PncEncountersComponent,
-        CheckinComponent
+        CheckinComponent,
+        MaternityEncounterComponent,
+        AncHivtestingComponent
     ],
     providers: [
         PlaceOfDeliveryResolver,
@@ -201,7 +207,8 @@ import {TbScreeningResolver} from './_services/resolvers/tb-screening.resolver';
         FamilyPlanningMethodResolver,
         CervicalCancerScreeningResultsResolver,
         PncService,
-        TbScreeningResolver
+        TbScreeningResolver,
+        ANCHivStatusInitialVisitResolver
     ],
     entryComponents: [
         IptClientWorkupComponent,

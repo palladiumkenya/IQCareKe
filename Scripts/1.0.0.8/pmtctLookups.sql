@@ -156,3 +156,16 @@ IF NOT EXISTS(SELECT * FROM LookupItem WHERE Name='ANC Follow-up')
 BEGIN
 	INSERT INTO LookupItem (Name,DisplayName,DeleteFlag) VALUES('ANC Follow-up','ANC Follow-up',0);
 END
+
+
+
+------------ANCHivStatusInitialVisit
+-- master
+If Not Exists(Select 1 From LookupMaster where Name='ANCHivStatusInitialVisit') Begin INSERT INTO LookupMaster (Name, DisplayName, DeleteFlag) VALUES ('ANCHivStatusInitialVisit','ANCHivStatusInitialVisit',0); End
+
+-- LookupMasterItem
+If Not Exists(Select 1 From LookupMasterItem where LookupMasterId=(SELECT TOP 1 Id FROM LookupMaster WHERE Name='ANCHivStatusInitialVisit') and LookupItemId=(SELECT TOP 1 Id FROM LookupItem WHERE Name='Known Positive')) Begin Insert Into LookupMasterItem(LookupMasterId ,LookupItemId,DisplayName, OrdRank)VALUES((SELECT TOP 1 Id FROM LookupMaster WHERE Name='ANCHivStatusInitialVisit'),(SELECT TOP 1 Id FROM LookupItem WHERE Name='Known Positive'),'Known Positive',1); end
+If Not Exists(Select 1 From LookupMasterItem where LookupMasterId=(SELECT TOP 1 Id FROM LookupMaster WHERE Name='ANCHivStatusInitialVisit') and LookupItemId=(SELECT TOP 1 Id FROM LookupItem WHERE Name='Negative')) Begin Insert Into LookupMasterItem(LookupMasterId ,LookupItemId,DisplayName, OrdRank)VALUES((SELECT TOP 1 Id FROM LookupMaster WHERE Name='ANCHivStatusInitialVisit'),(SELECT TOP 1 Id FROM LookupItem WHERE Name='Negative'),'Negative',2); end 
+If Not Exists(Select 1 From LookupMasterItem where LookupMasterId=(SELECT TOP 1 Id FROM LookupMaster WHERE Name='ANCHivStatusInitialVisit') and LookupItemId=(SELECT TOP 1 Id FROM LookupItem WHERE Name='Unknown')) Begin Insert Into LookupMasterItem(LookupMasterId ,LookupItemId,DisplayName, OrdRank)VALUES((SELECT TOP 1 Id FROM LookupMaster WHERE Name='ANCHivStatusInitialVisit'),(SELECT TOP 1 Id FROM LookupItem WHERE Name='Unknown'),'Unknown',3); end 
+If Not Exists(Select 1 From LookupMasterItem where LookupMasterId=(SELECT TOP 1 Id FROM LookupMaster WHERE Name='ANCHivStatusInitialVisit') and LookupItemId=(SELECT TOP 1 Id FROM LookupItem WHERE Name='Mastitis')) Begin Insert Into LookupMasterItem(LookupMasterId ,LookupItemId,DisplayName, OrdRank)VALUES((SELECT TOP 1 Id FROM LookupMaster WHERE Name='ANCHivStatusInitialVisit'),(SELECT TOP 1 Id FROM LookupItem WHERE Name='Mastitis'),'Mastitis',4); end 
+

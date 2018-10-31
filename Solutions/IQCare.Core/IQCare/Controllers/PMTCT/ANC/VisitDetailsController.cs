@@ -22,6 +22,18 @@ namespace IQCare.Controllers.PMTCT.ANC
             _mediator = mediator ?? throw new ArgumentNullException(nameof(mediator));
         }
 
+         [HttpPost("visitDetails")]
+        public async Task<IActionResult> Post([FromBody] PatientVisitProfileCommand visitDetailsCommand)
+        {
+            var response = await _mediator.Send(visitDetailsCommand, Request.HttpContext.RequestAborted);
+
+            if (response.IsValid)
+            {
+                return Ok(response.Value);
+            }
+            return BadRequest(response);
+        }
+
         //used to capture both maternity and ANC visit details
         [HttpPost]
         public async Task<IActionResult> Post([FromBody] VisitDetailsCommand visitDetailsCommand )

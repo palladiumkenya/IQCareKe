@@ -46,14 +46,12 @@ export class HivStatusComponent implements OnInit {
     ngOnInit() {
 
         this.HIVStatusFormGroup = this._formBuilder.group({
-            // testingDone: [Validators.required],
             hivTest: new FormControl('', [Validators.required]),
             kitName: new FormControl('', [Validators.required]),
             testResult: new FormControl('', [Validators.required]),
             lotNumber: new FormControl('', [Validators.required]),
             expiryDate: new FormControl('', [Validators.required]),
-            nextAppointmentDate: new FormControl('', [Validators.required]),
-            // finalResult: [Validators.required]
+            nextAppointmentDate: new FormControl('', [Validators.required])
         });
 
         this.getLookupOptions('PMTCTHIVTestVisit', this.testVisits);
@@ -74,6 +72,7 @@ export class HivStatusComponent implements OnInit {
                 this.ancTestEntryPoint = itemId;
             }
         );
+
         this.notify.emit(this.HIVStatusFormGroup);
     }
 
