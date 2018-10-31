@@ -25,8 +25,7 @@ namespace IQCare.Controllers.PMTCT.ANC
         {
             _mediator = mediator;
         }
-       
-        
+             
         
         [HttpPost("postNextAppointment")]
         public async Task<object> AddPatientNextAppointment([FromBody] AddPatientAppointmentCommand command)
@@ -55,8 +54,6 @@ namespace IQCare.Controllers.PMTCT.ANC
 
             return BadRequest(response);
         }
-
-
 
     }
 }

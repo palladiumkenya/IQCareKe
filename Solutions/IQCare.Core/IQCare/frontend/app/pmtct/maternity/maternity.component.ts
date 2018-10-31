@@ -41,6 +41,10 @@ export class MaternityComponent implements OnInit {
     serviceAreaId: number;
     patientMasterVisitId: number;
     userId: number;
+    patientEncounterId: number;
+    visitDate: Date;
+    visitType: number;
+
 
     deliveryModeOptions: LookupItemView[] = [];
     bloodLossOptions: LookupItemView[] = [];
@@ -84,6 +88,11 @@ export class MaternityComponent implements OnInit {
         );
 
         this.userId = JSON.parse(localStorage.getItem('appUserId'));
+        this.userId = JSON.parse(localStorage.getItem('appUserId'));
+        this.patientMasterVisitId = JSON.parse(localStorage.getItem('patientMasterVisitId'));
+        this.patientEncounterId = JSON.parse(localStorage.getItem('patientEncounterId'));
+        this.visitDate = new Date(localStorage.getItem('visitDate'));
+        this.visitType = JSON.parse(localStorage.getItem('visitType'));
 
         this.route.data.subscribe((res) => {
             const {

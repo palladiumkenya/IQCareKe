@@ -11,46 +11,58 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <mat-horizontal-stepper [linear]="isLinear" #stepper>
-                                    <mat-step  [completed]="false" [stepControl]="VisitDetailsMatFormGroup">
+                                    <mat-step [completed]="false" [stepControl]="VisitDetailsMatFormGroup">
 
                                         <ng-template matStepLabel><span matTooltip="ANC Visit Details">Visit Details</span>
                                         </ng-template>
-                                        <app-visit-details (visitDetails)="visitDetails" [visitDetailsOptions]="visitDetailsOptions" (notify)="onVisitDetailsNotify($event)" (nextStep)="onSaveVisitDetails($event)"></app-visit-details>
+                                        <app-visit-details (visitDetails)="visitDetails" [visitDetailsOptions]="visitDetailsOptions"
+                                            (notify)="onVisitDetailsNotify($event)" (nextStep)="onSaveVisitDetails($event)"></app-visit-details>
 
                                     </mat-step>
                                     <mat-step [completed]="false" [stepControl]="PatientEducationMatFormGroup">
                                         <ng-template matStepLabel> <span matTooltip="Patient Education & Mother Profile">Counselling</span>
                                         </ng-template>
-                                        <app-patient-education-examination [patientEducationFormOptions]="patientEducationFormOptions" (notify)="onPatientEducationNotify($event)" (nextStep)="onSavePatientEducation($event)"></app-patient-education-examination>
+                                        <app-patient-education-examination [patientEducationFormOptions]="patientEducationFormOptions"
+                                            (notify)="onPatientEducationNotify($event)" (nextStep)="onSavePatientEducation($event)"></app-patient-education-examination>
 
                                     </mat-step>
-                                   <!-- <mat-step [completed]="false" [stepControl]="HivStatusMatFormGroup">
-                                        <ng-template matStepLabel><span matTooltip="Patient HIV Status ">HIV Status </span></ng-template>
-                                        <app-hiv-status (notify)="onHivStatusNotify($event)" (nextStep)="onSaveHivStatus($event)"></app-hiv-status>
-                                    </mat-step> -->
+
+                                    <mat-step [completed]="false" [stepControl]="HivStatusMatFormGroup">
+                                        <ng-template matStepLabel>
+                                            <span matTooltip="Patient HIV Status ">
+                                                HIV Status
+                                            </span>
+                                        </ng-template>
+                                        <app-anc-hivtesting (notify)="onHivStatusNotify($event)" [hivTestingOptions]="hivTestingOptions"></app-anc-hivtesting>
+                                    </mat-step>
+
                                     <mat-step [completed]="false" [stepControl]="ClientMonitoringMatFormGroup">
                                         <ng-template matStepLabel><span matTooltip="Client Monitoring & CaCx Screening">Client
                                                 Monitoring
                                             </span> </ng-template>
-                                        <app-client-monitoring [clientMonitoringOptions]="clientMonitoringOptions" (notify)="onClientMonitoringNotify($event)" (nextStep)="onSaveClientMonitoring($event)"></app-client-monitoring>
+                                        <app-client-monitoring [clientMonitoringOptions]="clientMonitoringOptions"
+                                            (notify)="onClientMonitoringNotify($event)" (nextStep)="onSaveClientMonitoring($event)"></app-client-monitoring>
 
                                     </mat-step>
                                     <mat-step [completed]="false" [stepControl]="HaartProphylaxisMatFormGroup">
                                         <ng-template matStepLabel><span matTooltip="HAART Prophylaxis & Other Conditions">HAART
                                                 | Prophylaxis</span> </ng-template>
-                                        <app-haart-prophylaxis [haartProphylaxisOptions]="haartProphylaxisOptions" (notify)="onHaartProphylaxisNotify($event)" (nextStep)="onSaveHaartProphylaxis($event)"></app-haart-prophylaxis>
-                                    </mat-step >
+                                        <app-haart-prophylaxis [haartProphylaxisOptions]="haartProphylaxisOptions"
+                                            (notify)="onHaartProphylaxisNotify($event)" (nextStep)="onSaveHaartProphylaxis($event)"></app-haart-prophylaxis>
+                                    </mat-step>
                                     <mat-step [completed]="false" [stepControl]="PreventiveServiceMatFormGroup">
                                         <ng-template matStepLabel><span matTooltip="Preventive Services & Partner Testing">Preventive
                                                 Services
                                             </span> </ng-template>
-                                        <app-preventive-services [serviceFormOptions]="serviceFormOptions" (notify)="onPreventiveServiceNotify($event)" (nextStep)="onSavePreventiveService($event)"></app-preventive-services>
+                                        <app-preventive-services [serviceFormOptions]="serviceFormOptions" (notify)="onPreventiveServiceNotify($event)"
+                                            (nextStep)="onSavePreventiveService($event)"></app-preventive-services>
                                     </mat-step>
 
                                     <mat-step [completed]="false" [stepControl]="ReferralMatFormGroup">
                                         <ng-template matStepLabel><span matTooltip="Referrals & Next Appointment">Referrals</span>
                                         </ng-template>
-                                        <app-referrals [referralFormOptions]="referralFormOptions" (notify)="onReferralNotify($event)" (nextStep)="onSaveReferralAppointment($event)"></app-referrals>
+                                        <app-referrals [referralFormOptions]="referralFormOptions" (notify)="onReferralNotify($event)"
+                                            (nextStep)="onSaveReferralAppointment($event)"></app-referrals>
 
                                     </mat-step>
                                 </mat-horizontal-stepper>

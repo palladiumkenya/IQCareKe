@@ -1,11 +1,13 @@
+import { HivTestsCommand } from './../_models/HivTestsCommand';
 import { PatientMasterVisitEncounter } from './../_models/PatientMasterVisitEncounter';
 import { Injectable } from '@angular/core';
 import { HttpHeaders, HttpClient } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
 import { ErrorHandlerService } from '../../shared/_services/errorhandler.service';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { tap, catchError } from 'rxjs/operators';
 import { PncVisitDetailsCommand } from '../_models/PncVisitDetailsCommand';
+import { HivStatusCommand } from '../_models/HivStatusCommand';
 
 const httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -51,10 +53,25 @@ export class PncService {
         );
     }
 
-    public savePncHivStatus(): Observable<any> {
-        return this.http.post<any>(this.API_URL + '', JSON.stringify(''), httpOptions).pipe(
+    public savePncHivStatus(hivStatusCommand: HivStatusCommand, anyTests: any[]): Observable<any> {
+        if (anyTests.length == 0) {
+            return of([]);
+        }
+
+        const Indata = {
+            'Encounter': hivStatusCommand
+        };
+
+        return this.http.post<any>(this.API_URL + '/api/HtsEncounter', JSON.stringify(Indata), httpOptions).pipe(
             tap(savePncBabyExamination => this.errorHandler.log(`successfully saved pnc hiv status`)),
             catchError(this.errorHandler.handleError<any>('Error saving pnc hiv status'))
+        );
+    }
+
+    public savePncHivTests(hivTestsCommand: HivTestsCommand): Observable<any> {
+        return this.http.post<any>(this.API_URL + '/api/HtsEncounter/addTestResults', JSON.stringify(hivTestsCommand), httpOptions).pipe(
+            tap(savePncHivTests => this.errorHandler.log(`successfully saved pnc hiv tests`)),
+            catchError(this.errorHandler.handleError<any>('Error saving pnc hiv tests'))
         );
     }
 

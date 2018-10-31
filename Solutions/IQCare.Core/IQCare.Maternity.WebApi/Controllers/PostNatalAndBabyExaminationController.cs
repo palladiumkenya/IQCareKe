@@ -21,7 +21,7 @@ namespace IQCare.Maternity.WebApi.Controllers
 
 
         [HttpPost]
-        public async Task<object> AddPostNatalExamination([FromBody] AddPostNatalExaminationCommand command)
+        public async Task<object> AddPatientExamination([FromBody] AddPostNatalExaminationCommand command)
         {
             if (!ModelState.IsValid)
                 return BadRequest(command);

@@ -24,20 +24,13 @@ namespace IQCare.PMTCT.BusinessProcess.CommandHandlers.Education
             {
                 try
                 {
-                    PatientEducation patientEducation = new PatientEducation()
-                    {
-                        PatientId=request.patientEducation.PatientId,
-                        PatientMasterVisitId=request.patientEducation.PatientMasterVisitId,
-                        CounsellingTopicId=request.patientEducation.CounsellingTopicId,
-                        CounsellingDate=request.patientEducation.CounsellingDate,
-                        Description=request.patientEducation.Description,
-                    };
-
+                    PatientEducation patientEducation = new PatientEducation(request.PatientId, request.PatientMasterVisitId, request.CounsellingTopicId, request.CounsellingDate, request.IsCounsellingDone, request.CreatedBy);
+                    
                     await _unitOfWork.Repository<PatientEducation>().AddAsync(patientEducation);
                     await _unitOfWork.SaveAsync();
                     return Result<AddPatientEducationCommandResult>.Valid(new AddPatientEducationCommandResult()
                     {
-                        PatientCounsellingId = 1
+                        PatientCounsellingId = patientEducation.Id
                     });
                 }
                 catch (Exception e)

@@ -142,7 +142,6 @@ export class ServicesListComponent implements OnInit {
                     serviceIdentifiers[i]['identifierTypeId'] = selectedIdentifier[0]['code'];
                 }
             }
-
             this.enrolledService['identifiers'].push(serviceIdentifiers);
         }
         return this.enrolledService;
