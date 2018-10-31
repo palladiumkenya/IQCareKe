@@ -57,6 +57,14 @@ import { TestKitNameResolver } from './_services/resolvers/test-kit-name.resolve
 import { HivTestResultResolver } from './_services/resolvers/hiv-test-result.resolver';
 import { BloodLossResolver } from './_services/resolvers/blood-loss.resolver';
 import { PncEncountersComponent } from './pnc/pnc-encounters/pnc-encounters.component';
+import { VisitOptionsResolverService } from './_services/resolvers/visit-options-resolver.service';
+import { PatientEducationResolver } from './_services/resolvers/patient-education-resolver';
+import { HivStatusResolver } from './_services/resolvers/hiv-status.resolver';
+import { WhoStagesResolver } from './_services/resolvers/who-stages.resolver';
+import { ChronicIllnessResolver } from './_services/resolvers/chronic-illness.resolver';
+import { PreventiveServiceResolver } from './_services/resolvers/preventive-service.resolver';
+import { TbScreeningResolver } from './_services/resolvers/tb-screening.resolver';
+import { ANCHivStatusInitialVisitResolver } from './_services/resolvers/anc-hiv-status-initial-visit.resolver';
 import {VisitOptionsResolverService} from './_services/resolvers/visit-options-resolver.service';
 import {PatientEducationResolver} from './_services/resolvers/patient-education-resolver';
 import {HivStatusResolver} from './_services/resolvers/hiv-status.resolver';
@@ -90,7 +98,9 @@ const routes: Routes = [
             tbScreeningOptions: TbScreeningResolver,
             cacxMethodOptions: CervicalCancerScreeningMethodResolver,
             cacxResultOptions: CervicalCancerScreeningResultsResolver,
-            hivFinaResultOptions: FinalPartnerHivResultResolver
+            hivFinaResultOptions: FinalPartnerHivResultResolver,
+            ancHivStatusInitialVisitOptions: ANCHivStatusInitialVisitResolver,
+            hivFinalResultsOptions: HivFinalResultsResolver
         }
     },
     {

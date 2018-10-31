@@ -1,21 +1,19 @@
 import { LookupItemView } from './../../../shared/_models/LookupItemView';
-import { HivStatusComponent } from '../../anc/hiv-status/hiv-status.component';
-import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
-import { MatTableDataSource, MatDialogConfig, MatDialog } from '@angular/material';
-import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
+import { Component, OnInit, EventEmitter, Output, Input } from '@angular/core';
+import { MatDialog, MatDialogConfig, MatTableDataSource } from '@angular/material';
+import { HivStatusComponent } from '../hiv-status/hiv-status.component';
 
 @Component({
-    selector: 'app-pnc-hivtesting',
-    templateUrl: './pnc-hivtesting.component.html',
-    styleUrls: ['./pnc-hivtesting.component.css']
+    selector: 'app-anc-hivtesting',
+    templateUrl: './anc-hivtesting.component.html',
+    styleUrls: ['./anc-hivtesting.component.css']
 })
-export class PncHivtestingComponent implements OnInit {
-    HivTestingForm: FormGroup;
-    yesnoOptions: LookupItemView[] = [];
-    hivFinalResultsOptions: LookupItemView[] = [];
+export class AncHivtestingComponent implements OnInit {
+    ancHivStatusInitialVisitOptions: LookupItemView[];
+    yesnoOptions: LookupItemView[];
+    hivFinalResultsOptions: LookupItemView[];
 
-    @Input('pncHivOptions') pncHivOptions: any;
-    @Output() notify: EventEmitter<Object> = new EventEmitter<Object>();
     isHivTestingDone: boolean = false;
 
     public hiv_testing_table_data: HivTestingTableData[] = [];
@@ -23,11 +21,20 @@ export class PncHivtestingComponent implements OnInit {
         'expirydate', 'testresult', 'nexthivtest', 'testpoint', 'action'];
     dataSource = new MatTableDataSource(this.hiv_testing_table_data);
 
-    constructor(private dialog: MatDialog,
-        private _formBuilder: FormBuilder) { }
+    HivTestingForm: FormGroup;
+    @Input('hivTestingOptions') hivTestingOptions: any;
+    @Output() notify: EventEmitter<Object> = new EventEmitter<Object>();
+
+    constructor(
+        private dialog: MatDialog,
+        private _formBuilder: FormBuilder
+    ) {
+
+    }
 
     ngOnInit() {
         this.HivTestingForm = this._formBuilder.group({
+            hivStatusBeforeFirstVisit: new FormControl('', [Validators.required]),
             hivTestingDone: new FormControl('', [Validators.required]),
             testType: new FormControl('', [Validators.required]),
             finalTestResult: new FormControl('', [Validators.required])
@@ -36,7 +43,8 @@ export class PncHivtestingComponent implements OnInit {
         this.HivTestingForm.controls['testType'].disable({ onlySelf: true });
         this.HivTestingForm.controls['finalTestResult'].disable({ onlySelf: true });
 
-        const { yesnoOptions, hivFinalResultsOptions } = this.pncHivOptions[0];
+        const { ancHivStatusInitialVisitOptions, yesnoOptions, hivFinalResultsOptions } = this.hivTestingOptions[0];
+        this.ancHivStatusInitialVisitOptions = ancHivStatusInitialVisitOptions;
         this.yesnoOptions = yesnoOptions;
         this.hivFinalResultsOptions = hivFinalResultsOptions;
 
@@ -59,6 +67,8 @@ export class PncHivtestingComponent implements OnInit {
                     return;
                 }
 
+                console.log(data);
+
                 this.hiv_testing_table_data.push({
                     testdate: new Date(),
                     testtype: data.hivTest,
@@ -73,12 +83,6 @@ export class PncHivtestingComponent implements OnInit {
                 this.dataSource = new MatTableDataSource(this.hiv_testing_table_data);
             }
         );
-    }
-
-    public onRowClicked(row) {
-        const index = this.hiv_testing_table_data.indexOf(row.milestone);
-        this.hiv_testing_table_data.splice(index, 1);
-        this.dataSource = new MatTableDataSource(this.hiv_testing_table_data);
     }
 
     onHivTestDoneChange(event) {
@@ -97,7 +101,6 @@ export class PncHivtestingComponent implements OnInit {
         }
     }
 }
-
 
 export interface HivTestingTableData {
     testdate?: Date;

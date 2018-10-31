@@ -101,6 +101,8 @@ import { HivTestResultResolver } from './_services/resolvers/hiv-test-result.res
 import { PncEncountersComponent } from './pnc/pnc-encounters/pnc-encounters.component';
 import { CheckinComponent } from './checkin/checkin.component';
 import {TbScreeningResolver} from './_services/resolvers/tb-screening.resolver';
+import { AncHivtestingComponent } from './anc/anc-hivtesting/anc-hivtesting.component';
+import { ANCHivStatusInitialVisitResolver } from './_services/resolvers/anc-hiv-status-initial-visit.resolver';
 
 @NgModule({
     imports: [
@@ -167,6 +169,8 @@ import {TbScreeningResolver} from './_services/resolvers/tb-screening.resolver';
         CheckinComponent,
         MaternityEncounterComponent
 
+        CheckinComponent,
+        AncHivtestingComponent
     ],
     providers: [
         PlaceOfDeliveryResolver,
@@ -205,7 +209,8 @@ import {TbScreeningResolver} from './_services/resolvers/tb-screening.resolver';
         FamilyPlanningMethodResolver,
         CervicalCancerScreeningResultsResolver,
         PncService,
-        TbScreeningResolver
+        TbScreeningResolver,
+        ANCHivStatusInitialVisitResolver
     ],
     entryComponents: [
         IptClientWorkupComponent,

@@ -26,9 +26,6 @@ export class PncPartnertestingComponent implements OnInit {
         const { yesNoNaOptions, finalPartnerHivResultOptions } = this.partnerTestingOptions[0];
         this.yesNoNaOptions = yesNoNaOptions;
         this.finalPartnerHivResultOptions = finalPartnerHivResultOptions;
-        console.log('partner testing');
-        console.log(this.yesNoNaOptions );
-
 
         this.notify.emit(this.PartnerTestingForm);
     }
