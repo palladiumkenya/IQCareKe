@@ -1,3 +1,5 @@
+import { PatientReferralCommand } from './../_models/PatientReferralCommand';
+import { PatientDiagnosisCommand } from './../_models/PatientDiagnosisCommand';
 import { HivTestsCommand } from './../_models/HivTestsCommand';
 import { LookupItemService } from './../../shared/_services/lookup-item.service';
 import { HivStatusCommand } from './../_models/HivStatusCommand';
@@ -47,6 +49,7 @@ export class PncComponent implements OnInit {
     cervicalCancerScreeningMethodOptions: LookupItemView[] = [];
     familyPlanningMethodOptions: LookupItemView[] = [];
     cervicalCancerScreeningResultsOptions: LookupItemView[] = [];
+    referralFromOptions: LookupItemView[] = [];
 
     pncHivOptions: any[] = [];
     matHistoryOptions: any[] = [];
@@ -57,6 +60,8 @@ export class PncComponent implements OnInit {
     partnerTestingOptions: any[] = [];
     cervicalCancerScreeningOptions: any[] = [];
     contraceptiveHistoryExercise: any[] = [];
+    referralOptions: any[] = [];
+
     hiv_status_table_data: any[] = [];
     hivTestEntryPoint: number;
     htsEncounterId: number;
@@ -126,7 +131,8 @@ export class PncComponent implements OnInit {
                 finalPartnerHivResultOptions,
                 cervicalCancerScreeningMethodOptions,
                 familyPlanningMethodOptions,
-                cervicalCancerScreeningResultsOptions } = res;
+                cervicalCancerScreeningResultsOptions,
+                referralFromOptions } = res;
             this.yesnoOptions = yesnoOptions['lookupItems'];
             this.hivFinalResultsOptions = hivFinalResultsOptions['lookupItems'];
             this.deliveryModeOptions = deliveryModeOptions['lookupItems'];
@@ -145,6 +151,7 @@ export class PncComponent implements OnInit {
             this.cervicalCancerScreeningMethodOptions = cervicalCancerScreeningMethodOptions['lookupItems'];
             this.familyPlanningMethodOptions = familyPlanningMethodOptions['lookupItems'];
             this.cervicalCancerScreeningResultsOptions = cervicalCancerScreeningResultsOptions['lookupItems'];
+            this.referralFromOptions = referralFromOptions['lookupItems'];
         });
 
         this.pncHivOptions.push({
@@ -196,6 +203,10 @@ export class PncComponent implements OnInit {
         this.contraceptiveHistoryExercise.push({
             'yesnoOptions': this.yesnoOptions,
             'familyPlanningMethodOptions': this.familyPlanningMethodOptions
+        });
+
+        this.referralOptions.push({
+            referrals: this.referralFromOptions
         });
     }
 
@@ -325,11 +336,35 @@ export class PncComponent implements OnInit {
             }
         }
 
+        const pncPatientDiagnosis: PatientDiagnosisCommand = {
+            Id: 0,
+            PatientId: this.patientId,
+            PatientMasterVisitId: this.patientMasterVisitId,
+            Diagnosis: this.diagnosisReferralAppointmentFormGroup[0]['diagnosis'],
+            ManagementPlan: '',
+            CreatedBy: this.userId
+        };
+
+        const pncReferralCommand: PatientReferralCommand = {
+            Id: 0,
+            PatientId: this.patientId,
+            PatientMasterVisitId: this.patientMasterVisitId,
+            ReferredFrom: this.diagnosisReferralAppointmentFormGroup[1]['referredFrom'],
+            ReferredTo: this.diagnosisReferralAppointmentFormGroup[1]['referredTo'],
+            ReferralReason: null,
+            ReferralDate: null,
+            ReferredBy: this.userId,
+            DeleteFlag: 0,
+            CreatedBy: this.userId
+        };
+
         const pncVisitDetails = this.pncService.savePncVisitDetails(pncVisitDetailsCommand);
         const pncPostNatalExam = this.pncService.savePncPostNatalExam();
         const pncHivStatus = this.pncService.savePncHivStatus(hivStatusCommand, this.hiv_status_table_data);
+        const pncDiagnosis = this.pncService.saveDiagnosis(pncPatientDiagnosis);
+        const pncReferral = this.pncService.savePncReferral(pncReferralCommand);
 
-        forkJoin([pncHivStatus, pncVisitDetails, pncPostNatalExam])
+        forkJoin([pncHivStatus, pncDiagnosis, pncReferral])
             .subscribe(
                 (result) => {
                     console.log(`success `);

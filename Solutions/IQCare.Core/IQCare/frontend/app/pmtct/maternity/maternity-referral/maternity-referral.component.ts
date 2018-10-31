@@ -13,9 +13,9 @@ export class MaternityReferralComponent implements OnInit {
     referralFormGroup: FormGroup;
     @Input() dischargeOptions: any[] = [];
     @Output() notify: EventEmitter<FormGroup> = new EventEmitter<FormGroup>();
-    public deliveryStateOptions: any[] = [];
+    // public deliveryStateOptions: any[] = [];
     public referralOptions: any[] = [];
-    public yesnoOptions: any[] = [];
+    // public yesnoOptions: any[] = [];
 
     constructor(private formBuilder: FormBuilder,
         private notificationService: NotificationService,
@@ -29,16 +29,13 @@ export class MaternityReferralComponent implements OnInit {
 
         });
 
-        console.log(this.dischargeOptions);
-        
         const {
-            deliveryStates,
             referrals,
-            yesNos
         } = this.dischargeOptions[0];
-        this.yesnoOptions = yesNos;
-        this.deliveryStateOptions = deliveryStates;
         this.referralOptions = referrals;
+
+
+        this.notify.emit(this.referralFormGroup);
     }
 
 }
