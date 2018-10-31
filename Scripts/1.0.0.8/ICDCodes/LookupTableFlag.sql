@@ -14,5 +14,5 @@ END
 
 --select  * from PatientDiagnosis
 
-update PatientDiagnosis set LookupTableFlag='0'  
+update PatientDiagnosis set LookupTableFlag='1'  
 where LookupTableFlag is null
