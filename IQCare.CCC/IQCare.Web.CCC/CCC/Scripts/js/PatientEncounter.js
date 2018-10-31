@@ -315,6 +315,8 @@ var diagnosisList = new Array();
 var treatmentList = new Array();
 
 function AddDiagnosis() {
+
+    var diagnosisInput = document.getElementById('<%= Diagnosis.ClientID %>');
     var diagnosisID = $('#txtDiagnosisID').val();
     var diagnosis = $('#Diagnosis').val();
     var treatment = $('#DiagnosisTreatment').val();
@@ -322,7 +324,7 @@ function AddDiagnosis() {
     //Validate duplication
     var diagnosisFound = 0;
     var treatmentFound = 0;
-
+   
     if (diagnosis === "") {
         toastr.error("Error", "Please enter Diagnosis");
         return false;
@@ -337,11 +339,19 @@ function AddDiagnosis() {
 
     } else {
 
-
+        
         diagnosisList.push("" + diagnosisID + "");
+        if (diagnosisListStatus.length > 0) {
+            diagnosisListStatus.push({ id: diagnosisID, Disease: diagnosis, Treatment: treatment, deleteflag: false, deleted: true })
+        }
+       // diagnosisListStatus.push({ id: diagnosisID, deleteflag: false });
+   
         treatmentList.push("" + treatment + "");
+        DiseaseList.push("" + diagnosis + "");
 
+        deleteflag = false;
         arrDiagnosisUI = [];
+      
 
         arrDiagnosisUI.push([
             diagnosisID, diagnosis, treatment,

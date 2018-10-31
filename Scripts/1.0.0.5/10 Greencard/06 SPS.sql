@@ -629,7 +629,7 @@ IF @@rowcount = 1 BEGIN
 END   
 --CLOSE mstPatient_cursor;  
 --DEALLOCATE mstPatient_cursor;  
-END
+--END
 GO
 
 
