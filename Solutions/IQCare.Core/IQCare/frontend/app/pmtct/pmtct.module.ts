@@ -1,3 +1,4 @@
+///<reference path="maternity/maternity.component.ts"/>
 import { PncService } from './_services/pnc.service';
 import { CervicalCancerScreeningResultsResolver } from './_services/resolvers/cervical-cancer-screening-results.resolver';
 import { FamilyPlanningMethodResolver } from './_services/resolvers/family-planning-method.resolver';
@@ -32,6 +33,7 @@ import { ClientMonitoringComponent } from './anc/client-monitoring/client-monito
 import { HaartProphylaxisComponent } from './anc/haart-prophylaxis/haart-prophylaxis.component';
 import { VisitDetailsComponent } from './anc/visit-details/visit-details.component';
 import { PmtctRoutingModule } from './pmtct-routing-module';
+import { MaternityEncounterComponent } from './maternity/maternity-encounter/maternity-encounter.component';
 import {
     MatAutocompleteModule,
     MatButtonModule, MatButtonToggleModule, MatCardModule, MatCheckboxModule, MatChipsModule,
@@ -162,7 +164,9 @@ import {TbScreeningResolver} from './_services/resolvers/tb-screening.resolver';
         MaternityNextAppointmentComponent,
         MaternityHivTestComponent,
         PncEncountersComponent,
-        CheckinComponent
+        CheckinComponent,
+        MaternityEncounterComponent
+
     ],
     providers: [
         PlaceOfDeliveryResolver,

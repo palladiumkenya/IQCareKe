@@ -4,6 +4,9 @@ import {NotificationService} from '../../../shared/_services/notification.servic
 import {SnotifyService} from 'ng-snotify';
 import {LookupItemService} from '../../../shared/_services/lookup-item.service';
 import * as moment from 'moment';
+import {MaternityService} from '../../_services/maternity.service';
+import { Input } from '@angular/core';
+import {Subscription} from 'rxjs/index';
 
 @Component({
     selector: 'app-mother-profile',
@@ -14,11 +17,15 @@ export class MotherProfileComponent implements OnInit {
 
     motherProfileFormGroup: FormGroup;
     dateLMP: Date;
+    motherProfile: Subscription;
+    visitDetails: Subscription;
+    @Input('patientId') patientId: number;
 
     constructor(private _formBuilder: FormBuilder,
                 private _lookupItemService: LookupItemService,
                 private snotifyService: SnotifyService,
-                private notificationService: NotificationService) {
+                private notificationService: NotificationService,
+                private _matServices: MaternityService) {
     }
 
     ngOnInit() {
@@ -32,6 +39,10 @@ export class MotherProfileComponent implements OnInit {
             parityTwo:  new FormControl('', [Validators.required]),
             gravidae:  new FormControl('', [Validators.required]),
         });
+
+        this.getPregnancyDetails(this.patientId);
+        this.getCurrentVisitDetails(this.patientId);
+
     }
 
     public onLMPDateChange() {
@@ -54,6 +65,46 @@ export class MotherProfileComponent implements OnInit {
         const gravidae: number = parseInt(parityOne.toString(), 10 ) + parseInt(String(parityTwo), 10);
         this.motherProfileFormGroup.controls['gravidae'].setValue(gravidae + parseInt('1', 10));
         this.motherProfileFormGroup.controls['gravidae'].disable({ onlySelf: true });
-
     }
+
+    public  getPregnancyDetails(patientId: number) {
+        this.motherProfile = this._matServices.getPregnancyDetails(patientId)
+            .subscribe(
+                p => {
+                    this.motherProfileFormGroup.controls['gestation'].setValue(p.gestation);
+                    this.motherProfileFormGroup.controls['dateLMP'].setValue(p.lmp);
+                    this.motherProfileFormGroup.controls['dateEDD'].setValue(p.edd);
+                    this.motherProfileFormGroup.controls['parityOne'].setValue(p.parity);
+                    this.motherProfileFormGroup.controls['parityTwo'].setValue(p.parity2);
+                    this.motherProfileFormGroup.controls['gravidae'].setValue(p.gravidae);
+                    console.log('pregnancy deatls');
+                    console.log(p);
+                },
+                (err) => {
+                    console.log(err);
+                    this.snotifyService.error('Error fetching previous pregnacy Profile' + err,
+                        'Encounter', this.notificationService.getConfig());
+                },
+                () => {
+
+                    console.log(this.motherProfile);
+                });
+    }
+
+    public getCurrentVisitDetails(patientId: number): void {
+        this.visitDetails = this._matServices.getCurrentVisitDetails(patientId)
+            .subscribe(
+                p => {
+                    console.log('agetmenarche' + p.ageMenarche)
+                    this.motherProfileFormGroup.controls['ageAtMenarche'].setValue(p.ageMenarche);
+                },
+                (err) => {
+                    this.snotifyService.error('Error fetching visit details' + err,
+                        'Encounter', this.notificationService.getConfig());
+                },
+                () => {
+
+                });
+    }
+
 }

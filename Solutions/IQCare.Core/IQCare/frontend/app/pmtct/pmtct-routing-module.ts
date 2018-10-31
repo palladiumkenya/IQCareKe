@@ -64,6 +64,7 @@ import {WhoStagesResolver} from './_services/resolvers/who-stages.resolver';
 import {ChronicIllnessResolver} from './_services/resolvers/chronic-illness.resolver';
 import {PreventiveServiceResolver} from './_services/resolvers/preventive-service.resolver';
 import {TbScreeningResolver} from './_services/resolvers/tb-screening.resolver';
+import {MaternityEncounterComponent} from './maternity/maternity-encounter/maternity-encounter.component';
 
 
 const routes: Routes = [
@@ -150,7 +151,7 @@ const routes: Routes = [
     },
     {
         path: 'maternity/encounters/:patientId/:personId/:serviceAreaId',
-        component: MaternityComponent,
+        component: MaternityEncounterComponent,
         pathMatch: 'full'
     },
     {
