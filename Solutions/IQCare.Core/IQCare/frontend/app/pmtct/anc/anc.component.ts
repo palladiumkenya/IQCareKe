@@ -23,8 +23,8 @@ import { PatientPreventiveService } from '../_models/PatientPreventiveService';
 import { PatientProfile } from '../_models/patientProfile';
 import { PregnancyViewModel } from '../_models/viewModel/PregnancyViewModel';
 import { HIVTestingEmitter } from '../emitters/HIVTestingEmitter';
-import { FormGroup} from '@angular/forms';
-import {LookupItemView} from '../../shared/_models/LookupItemView';
+import { FormGroup } from '@angular/forms';
+import { LookupItemView } from '../../shared/_models/LookupItemView';
 
 @Component({
     selector: 'app-anc',
@@ -33,7 +33,7 @@ import {LookupItemView} from '../../shared/_models/LookupItemView';
 })
 export class AncComponent implements OnInit, OnDestroy {
 
-    isLinear: boolean = false;
+    isLinear: boolean = true;
     visitDetails: VisitDetails;
     patientDrug: PatientDrugAdministration[] = [];
     public preventiveServiceData: PreventiveService[] = [];
@@ -47,15 +47,15 @@ export class AncComponent implements OnInit, OnDestroy {
     public visitDate: Date;
     locationId: number;
 
-  /*  visitTypeOptions: any[] = [];
-    patientEducationOptions: any[] = [];
-    yesNoOptions: any[] = [];
-    hivStatusOptions: any[] = [];
-    whoStageOptions: any[] = [];
-    yesNoNaOptions: any[] = [];
-    chronicIllnessOptions: any[] = [];
-    preventiveServiceOptions: any[] = [];
-    referralOptions: any[] = [];*/
+    /*  visitTypeOptions: any[] = [];
+      patientEducationOptions: any[] = [];
+      yesNoOptions: any[] = [];
+      hivStatusOptions: any[] = [];
+      whoStageOptions: any[] = [];
+      yesNoNaOptions: any[] = [];
+      chronicIllnessOptions: any[] = [];
+      preventiveServiceOptions: any[] = [];
+      referralOptions: any[] = [];*/
 
     visitDetailsOptions: any[] = [];
     patientEducationFormOptions: any[] = [];
@@ -63,8 +63,10 @@ export class AncComponent implements OnInit, OnDestroy {
     haartProphylaxisOptions: any[] = [];
     serviceFormOptions: any[] = [];
     referralFormOptions: any[] = [];
-
     antenatalCareOptions: any[] = [];
+    hivTestingOptions: any[] = [];
+    hiv_status_table_data: any[] = [];
+
     yesNoOptions: LookupItemView[] = [];
     yesNoNaOptions: LookupItemView[] = [];
     referralOptions: LookupItemView[] = [];
@@ -78,6 +80,8 @@ export class AncComponent implements OnInit, OnDestroy {
     cacxMethodOptions: LookupItemView[] = [];
     cacxResultOptions: LookupItemView[] = [];
     hivFinalResultOptions: LookupItemView[] = [];
+    ancHivStatusInitialVisitOptions: LookupItemView[] = [];
+    hivFinalResultsOptions: LookupItemView[] = [];
 
     public saveVisitDetails$;
     public savePatientEducation$: Subscription;
@@ -137,6 +141,8 @@ export class AncComponent implements OnInit, OnDestroy {
                 cacxMethodOptions,
                 cacxResultOptions,
                 hivFinaResultOptions,
+                ancHivStatusInitialVisitOptions,
+                hivFinalResultsOptions
             } = res;
             this.yesNoNaOptions = yesNoNaOptions['lookupItems'];
             this.yesNoOptions = yesNoOptions['lookupItems'];
@@ -151,10 +157,18 @@ export class AncComponent implements OnInit, OnDestroy {
             this.cacxMethodOptions = cacxMethodOptions['lookupItems'];
             this.cacxResultOptions = cacxResultOptions['lookupItems'];
             this.hivFinalResultOptions = hivFinaResultOptions['lookupItems'];
+            this.ancHivStatusInitialVisitOptions = ancHivStatusInitialVisitOptions['lookupItems'];
+            this.hivFinalResultsOptions = hivFinalResultsOptions['lookupItems'];
+        });
+
+        this.hivTestingOptions.push({
+            'ancHivStatusInitialVisitOptions': this.ancHivStatusInitialVisitOptions,
+            'yesnoOptions': this.yesNoOptions,
+            'hivFinalResultsOptions': this.hivFinalResultsOptions
         });
 
         this.antenatalCareOptions.push({
-            'visitTypeOptions' : this.visitTypeOptions,
+            'visitTypeOptions': this.visitTypeOptions,
             'patientEducationOptions': this.patientEducationOptions,
             'yesnoOptions': this.yesNoOptions,
             'yesNoNaOptions': this.yesNoNaOptions,
@@ -166,7 +180,7 @@ export class AncComponent implements OnInit, OnDestroy {
         });
 
         this.visitDetailsOptions.push({
-            'visitTypeOptions' : this.visitTypeOptions
+            'visitTypeOptions': this.visitTypeOptions
         });
 
         this.patientEducationFormOptions.push({
@@ -198,7 +212,7 @@ export class AncComponent implements OnInit, OnDestroy {
         });
 
         this.referralFormOptions.push({
-           'referralOptions': this.referralOptions,
+            'referralOptions': this.referralOptions,
             'yesNoOptions': this.yesNoOptions
         });
 
@@ -220,7 +234,7 @@ export class AncComponent implements OnInit, OnDestroy {
 
     public onSaveVisitDetails(data: VisitDetails): void {
         this.visitDate = data.VisitDate;
-       // console.log(this.VisitDetailsMatFormGroup.value);
+        // console.log(this.VisitDetailsMatFormGroup.value);
 
         this.saveVisitDetails$ = this.visitDetailsService.savePatientDetails(data)
             .subscribe(
@@ -245,7 +259,7 @@ export class AncComponent implements OnInit, OnDestroy {
     public onSavePatientEducation(data: PatientEducationEmitter): void {
 
         console.log('testing counselling');
-      //  console.log(data);
+        //  console.log(data);
 
         const patientEducation = {
             BreastExamDone: data.breastExamDone,
@@ -312,19 +326,19 @@ export class AncComponent implements OnInit, OnDestroy {
         this.patientDrug.push(
             {
                 PatientId: parseInt(this.patientId.toString(), 10),
-                PatientMasterVisitId: parseInt(this.patientMasterVisitId.toString() , 10),
+                PatientMasterVisitId: parseInt(this.patientMasterVisitId.toString(), 10),
                 DrugAdministered: data.nvpForBaby,
                 Value: data.nvpForBaby, DeleteFlag: 0, Description: '', Id: 0, CreatedBy: this.userId
             },
             {
                 PatientId: parseInt(this.patientId.toString(), 10),
-                PatientMasterVisitId: parseInt(this.patientMasterVisitId.toString() , 10),
+                PatientMasterVisitId: parseInt(this.patientMasterVisitId.toString(), 10),
                 DrugAdministered: data.aztFortheBaby,
                 Value: data.aztFortheBaby, DeleteFlag: 0, Description: '', Id: 0, CreatedBy: this.userId
             },
             {
                 PatientId: parseInt(this.patientId.toString(), 10),
-                PatientMasterVisitId: parseInt(this.patientMasterVisitId.toString() , 10),
+                PatientMasterVisitId: parseInt(this.patientMasterVisitId.toString(), 10),
                 Value: data.onArvBeforeANCVisit, DeleteFlag: 0, Description: '', Id: 0, CreatedBy: this.userId
             }
         );
@@ -360,7 +374,7 @@ export class AncComponent implements OnInit, OnDestroy {
                 {
                     Id: 0,
                     PatientId: parseInt(this.patientId.toString(), 10),
-                    PatientMasterVisitId: parseInt(this.patientMasterVisitId.toString() , 10),
+                    PatientMasterVisitId: parseInt(this.patientMasterVisitId.toString(), 10),
                     PreventiveServiceId: data.preventiveService[i]['preventiveServiceId'],
                     PreventiveServiceDate: data.preventiveService[i]['dateGiven'],
                     Description: data.preventiveService[i]['comments'],
@@ -398,7 +412,7 @@ export class AncComponent implements OnInit, OnDestroy {
     public onSaveReferralAppointment(data: ReferralsEmitter) {
         const patientRef = {
             PatientId: parseInt(this.patientId.toString(), 10),
-            PatientMasterVisitId: parseInt(this.patientMasterVisitId.toString() , 10),
+            PatientMasterVisitId: parseInt(this.patientMasterVisitId.toString(), 10),
             ReferredFrom: data.referredFrom,
             ReferredTo: data.referredTo,
             ReferralReason: 'n/a',
@@ -410,7 +424,7 @@ export class AncComponent implements OnInit, OnDestroy {
 
         const appointment = {
             PatientId: parseInt(this.patientId.toString(), 10),
-            PatientMasterVisitId: parseInt(this.patientMasterVisitId.toString() , 10),
+            PatientMasterVisitId: parseInt(this.patientMasterVisitId.toString(), 10),
             AppointmentDate: new Date(data.nextAppointmentDate),
             ReasonId: 0,
             Description: data.serviceRemarks.toString(),
@@ -543,12 +557,16 @@ export class AncComponent implements OnInit, OnDestroy {
     onPatientEducationNotify(formGroup: FormGroup): void {
         this.PatientEducationMatFormGroup = formGroup;
     }
-    onHivStatusNotify(formGroup: FormGroup): void {
-        this.HivStatusMatFormGroup = formGroup;
+
+    onHivStatusNotify(formGroup: Object): void {
+        this.HivStatusMatFormGroup = formGroup['form'];
+        this.hiv_status_table_data.push(formGroup['table_data']);
     }
+
     onClientMonitoringNotify(formGroup: FormGroup): void {
         this.ClientMonitoringMatFormGroup = formGroup;
     }
+
     onHaartProphylaxisNotify(formGroup: FormGroup): void {
         this.HaartProphylaxisMatFormGroup = formGroup;
     }
