@@ -316,10 +316,20 @@ var treatmentList = new Array();
 
 function AddDiagnosis() {
 
-    var diagnosisInput = document.getElementById('<%= Diagnosis.ClientID %>');
-    var diagnosisID = $('#txtDiagnosisID').val();
-    var diagnosis = $('#Diagnosis').val();
+    var value = $("#Diagnosis").val();
+    if  (value=== "") {
+        toastr.error("Error", "Please Enter Diagnosis");
+        return false;
+    }
+    var result = value.split("~");
+    
+    var diagnosisID = result[0] + "~" + result[1]
+    var diagnosis = result[2];
     var treatment = $('#DiagnosisTreatment').val();
+    if (treatment === "") {
+        toastr.error("Error,Please enter Treatment");
+        return false;
+    }
 
     //Validate duplication
     var diagnosisFound = 0;
@@ -360,8 +370,8 @@ function AddDiagnosis() {
 
         DrawDataTable("dtlDiagnosis", arrDiagnosisUI);
 
-        $('#txtDiagnosisID').val("");
-        $('#Diagnosis').val("");
+       // $('#txtDiagnosisID').val("");
+        $('#Diagnosis').select2("val", "0");
         $('#DiagnosisTreatment').val("");
         
     }

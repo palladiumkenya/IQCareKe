@@ -1994,6 +1994,7 @@
 									<!--<asp:TextBox ID="txtDiagnosisID" Enabled="false" runat="server" ClientIDMode="Static"    ></asp:TextBox>
 									<input type="text" id="Diagnosis" class="form-control input-sm"  placeholder="Type Diagnosis......" runat="server" clientidmode="Static" />-->
                                     <select class="form-control select2" data-placeholder="Select" id="Diagnosis" style="width: 100%;">
+                                        <option value="0"></option>
                                     </select>
 
 								</div>
@@ -2705,6 +2706,8 @@
     var OIdata = [];
     var diagnosisListStatus = new Array();
     var diagnosisListStatus = [];
+    var DiagnosisList = new Array();
+    var DiagnosisList = [];
     var DiseaseList = new Array();
     var DiseaseList = [];
     var PatientOIData = [];
@@ -2797,9 +2800,18 @@
                 $("#divAdverseEventOther").hide("fast");
             }
         });
+        
+
 
         $("#ddlHighRiskBehaviour").select2();
 
+ 
+
+        $("#Diagnosis").select2();
+       
+
+
+        
         //Show the AdverseEventModal Windows
         function loadAdverseEventOutcome() {
             $("#AdverseEventOutcomeModel").modal('show');
@@ -5570,13 +5582,14 @@
 
     function loadDiagnosis() {
 
-        $("#Diagnosis").select2({
+       <%-- $("#Diagnosis").select2({
             placeholder: {
                 id: '0',
                 text: 'select an option'
             },
             minimumInputLength: 3,
             allowClear: true,
+            data:DiagnosisList
             ajax: {
                 type: "POST",
                 url: "../WebService/PatientEncounterService.asmx/loadDiagnosis",
@@ -5601,8 +5614,8 @@
                     dataObj = new Array();
                     for (var i = 0; i < DiagnosisList.length:i++)
         {
-            if (diagnosisList[i].value == params.term) {
-                dataObj.push({ label=diagnosisList[i].label, value=diagnosisList[i].value });
+            if (DiagnosisList[i].value == params.term) {
+                dataObj.push({ label=DiagnosisList[i].label, value=DiagnosisList[i].value });
             }
         }
         params.page = params.page || 1;
@@ -5616,7 +5629,7 @@
    
 
      
-		<%--var diagnosisInput = document.getElementById('<%= Diagnosis.ClientID %>');
+		var diagnosisInput = document.getElementById('<%= Diagnosis.ClientID %>');
         var awesomplete = new Awesomplete(diagnosisInput, {
             minChars: 1,
         
@@ -5655,25 +5668,47 @@
         
      --%>
 
-	//$.ajax({
-	//		type: "POST",
-	//		url: "../WebService/PatientEncounterService.asmx/loadDiagnosis",
-	//		dataType: "json",
-	//		contentType: "application/json; charset=utf-8",
+	$.ajax({
+			type: "POST",
+			url: "../WebService/PatientEncounterService.asmx/loadDiagnosis",
+			dataType: "json",
+			contentType: "application/json; charset=utf-8",
 
-	//		success: function (data) {
-	//			var serverData = data.d;
-	//			var DiagnosisList = [];
+			success: function (data) {
+				var serverData = data.d;
+				//var DiagnosisList = [];
 
-	//			for (var i = 0; i < serverData.length; i++) {
-	//				//drugList.push(serverData[i][1]);
-	//				DiagnosisList.push({ label: serverData[i][1], value: serverData[i][0] });
-	//			}
-	//			awesomplete.list = DiagnosisList;
-	//		}
-	//	});
+				for (var i = 0; i < serverData.length; i++) {
+					//drugList.push(serverData[i][1]);
+					DiagnosisList.push({ id: serverData[i][0], text: serverData[i][1] });
+                }
 
-	}
+                LoadDiagnosisList(DiagnosisList);
+              
+				//awesomplete.list = DiagnosisList;
+			}
+		});
+
+    }
+    function LoadDiagnosisList(Array) {
+
+        console.log(DiagnosisList);
+        $("#Diagnosis").select2({
+            placeholder: {
+                id: '0',
+                text: 'select an option'
+
+            },
+            allowClear: true,
+            minimumInputLength: 2,
+            
+            data: DiagnosisList
+
+        });
+
+        $("#Diagnosis").select2("val", "0");
+        $("#Diagnosis").trigger('change.select2');
+    }
    // $("#Diagnosis").select2("val", "0");
     //$("#Diagnosis").trigger('change.select2');
 	function loadSystemReviews() {
@@ -6020,6 +6055,7 @@
         $("#ddlPartnerGender").val("");
         $("#ddlSexualOrientation").val(0);
         $("#ddlHighRiskBehaviour").select2("val", "0");
+        
     }
         
    
