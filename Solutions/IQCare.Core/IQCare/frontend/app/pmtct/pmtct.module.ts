@@ -167,9 +167,7 @@ import { ANCHivStatusInitialVisitResolver } from './_services/resolvers/anc-hiv-
         MaternityHivTestComponent,
         PncEncountersComponent,
         CheckinComponent,
-        MaternityEncounterComponent
-
-        CheckinComponent,
+        MaternityEncounterComponent,
         AncHivtestingComponent
     ],
     providers: [
