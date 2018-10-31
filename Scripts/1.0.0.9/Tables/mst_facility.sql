@@ -1,0 +1,1 @@
+ALTER TABLE mst_facility ADD Billing VARCHAR(200), Wards VARCHAR(200);
