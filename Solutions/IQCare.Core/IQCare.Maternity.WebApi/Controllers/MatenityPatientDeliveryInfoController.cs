@@ -20,6 +20,7 @@ namespace IQCare.Maternity.WebApi.Controllers
             _mediator = mediator;
         }
 
+        //Adds single delivered baby birth info
         [HttpPost]
         public async Task<object> AddDeliveredBabyBirthInfo([FromBody] AddDeliveredBabyBirthInformationCommand command)
         {
@@ -32,8 +33,24 @@ namespace IQCare.Maternity.WebApi.Controllers
                 return Ok(response.Value);
 
             return BadRequest(response);
-
         }
+
+        //Adds collection of delivered baby bith info
+        [HttpPost]
+        public async Task<object> AddDeliveredBabyBirthInfoCollection([FromBody] AddDeliveredBabyBirthInfoCollectionCommand command)
+        {
+            if (!ModelState.IsValid)
+                return BadRequest(command);
+
+            var response = await _mediator.Send(command, HttpContext.RequestAborted).ConfigureAwait(false);
+
+            if (response.IsValid)
+                return Ok(response.Value);
+
+            return BadRequest(response);
+        }
+
+        
 
         [HttpGet("{Id}")]
         public async Task<object> GetDeliveredBabyBirthInfoByPatientDeliveryId(int Id)

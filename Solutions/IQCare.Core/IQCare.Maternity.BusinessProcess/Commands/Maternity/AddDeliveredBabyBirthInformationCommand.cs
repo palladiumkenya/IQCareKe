@@ -23,6 +23,12 @@ namespace IQCare.Maternity.BusinessProcess.Commands.Maternity
         public List<ApgrarScore> ApgarScores { get; set; }
     }
 
+    public class AddDeliveredBabyBirthInfoCollectionCommand : IRequest<Result<DeliveredBabyBirthInfoResult>>
+    {
+        public List<AddDeliveredBabyBirthInformationCommand> DeliveredBabyBirthInfoCollection { get; set; }
+    }
+
+   
     public class ApgrarScore
     {
         public int ApgarScoreId { get; set; }
