@@ -195,10 +195,11 @@ const routes: Routes = [
             deliveryOutcomeOptions: DeliveryModeResolver,
             yesNoNaOptions: YesNoNaResolver,
             referralOptions: ReferralResolver,
-            hivFinalResultOptions: HivFinalResultsResolver,
+            hivFinalResultOptions: FinalPartnerHivResultResolver,
             hivTestOptions: PmtctTestTypeResolver,
             kitNameOptions: TestKitNameResolver,
-            hivTestResultOptions: HivTestResultResolver
+            hivTestResultOptions: HivTestResultResolver,
+            finalPartnerHivResultOptions: FinalPartnerHivResultResolver,
         },
         pathMatch: 'full'
     }

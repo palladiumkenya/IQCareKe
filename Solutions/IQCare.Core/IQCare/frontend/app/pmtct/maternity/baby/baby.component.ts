@@ -13,6 +13,7 @@ export class BabyComponent implements OnInit {
 
     babyFormGroup: FormGroup;
     babyData: any[] = [];
+    babyDataTable: any[] = [];
     displayedColumns = ['sex', 'birthWeight', 'outcome', 'apgarScore', 'resuscitation', 'deformity', 'teo', 'breastFeeding', 'comment',
         'action'];
     dataSource = new MatTableDataSource(this.babyData);
@@ -54,28 +55,56 @@ export class BabyComponent implements OnInit {
         this.genderOptions = gender;
         this.deliveryOutcomeOptions = deliveryOutcomes;
         this.yesnoOptions = yesNos;
+
+        this.notify.emit(this.babyFormGroup);
     }
 
     public AddBaby() {
 
-        this.babyData.push({
-            sex: this.babyFormGroup.get('babySex').value.itemName,
-            birthWight: this.babyFormGroup.controls['birthWeight'].value,
-            outcome: this.babyFormGroup.get('outcome').value.itemName,
-            apgarScore: this.babyFormGroup.get('agparScore1min').value + ',' + this.babyFormGroup.get('agparScore5min').value + ',' +
-            this.babyFormGroup.get('agparScore10min').value,
-            resuscitate: this.babyFormGroup.controls['resuscitationDone'].value.itemName,
-            deformity:  this.babyFormGroup.controls['deformity'].value.itemName,
-            teo:  this.babyFormGroup.controls['teo'].value.itemName,
-            breastFeeding:  this.babyFormGroup.controls['breastFeeding'].value.itemName,
-        });
+        if (this.babyFormGroup.get('babySex').value.itemId == '' && this.babyFormGroup.get('birthWeight').value == '') {
+
+        } else {
+            this.babyData.push({
+                sex: this.babyFormGroup.get('babySex').value.itemId,
+                birthWeight: this.babyFormGroup.get('birthWeight').value,
+                outcome: this.babyFormGroup.get('outcome').value.itemId,
+                apgarScore: this.babyFormGroup.get('agparScore1min').value + ' in 1,' +
+                '' + this.babyFormGroup.get('agparScore5min').value + ' in 5,' +
+                this.babyFormGroup.get('agparScore10min').value + 'in 10',
+                resuscitate: this.babyFormGroup.get('resuscitationDone').value.itemId,
+                deformity:  this.babyFormGroup.get('deformity').value.itemId,
+                teo:  this.babyFormGroup.get('teoGiven').value.itemId,
+                breastFeeding:  this.babyFormGroup.get('breastFed').value.itemId,
+                comment: this.babyFormGroup.get('comment').value
+            });
+
+            this.babyDataTable.push({
+                sex: this.babyFormGroup.get('babySex').value.itemName,
+                birthWeight: this.babyFormGroup.get('birthWeight').value,
+                outcome: this.babyFormGroup.get('outcome').value.itemName,
+                apgarScore: this.babyFormGroup.get('agparScore1min').value + ' in 1,' +
+                '' + this.babyFormGroup.get('agparScore5min').value + ' in 5,' +
+                this.babyFormGroup.get('agparScore10min').value + 'in 10',
+                resuscitate: this.babyFormGroup.get('resuscitationDone').value.itemName,
+                deformity:  this.babyFormGroup.get('deformity').value.itemName,
+                teo:  this.babyFormGroup.get('teoGiven').value.itemName,
+                breastFeeding:  this.babyFormGroup.get('breastFed').value.itemName,
+                comment: this.babyFormGroup.get('comment').value
+            });
+
+            console.log(this.babyDataTable);
+            this.dataSource = new MatTableDataSource(this.babyDataTable);
+        }
+
     }
 
     public onRowClicked(row) {
         console.log('row clicked:', row);
-        const index = this.babyData.indexOf(row.milestone);
-        this.babyData.splice(index, 1);
-        this.dataSource = new MatTableDataSource(this.babyData);
+        const index = this.babyDataTable.indexOf(row.milestone);
+        const index_ = this.babyData.indexOf(row.milestone);
+        this.babyDataTable.splice(index, 1);
+        this.babyDataTable.splice(index_, 1);
+        this.dataSource = new MatTableDataSource(this.babyDataTable);
     }
 
 

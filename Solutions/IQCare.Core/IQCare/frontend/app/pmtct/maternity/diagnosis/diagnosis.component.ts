@@ -11,7 +11,7 @@ import { LookupItemService } from '../../../shared/_services/lookup-item.service
 })
 export class DiagnosisComponent implements OnInit {
 
-    diagnosisFormGroup: FormGroup;
+    PatientdiagnosisFormGroup: FormGroup;
     @Input() diagnosisOptions: any[] = [];
     @Output() notify: EventEmitter<FormGroup> = new EventEmitter<FormGroup>();
 
@@ -22,11 +22,11 @@ export class DiagnosisComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.diagnosisFormGroup = this._formBuilder.group({
+        this.PatientdiagnosisFormGroup = this._formBuilder.group({
             diagnosis: new FormControl('', [Validators.required])
         });
 
-        this.notify.emit(this.diagnosisFormGroup);
+        this.notify.emit(this.PatientdiagnosisFormGroup);
     }
 
 }

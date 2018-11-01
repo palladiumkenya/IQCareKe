@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {NotificationService} from '../../../shared/_services/notification.service';
 import {SnotifyService} from 'ng-snotify';
@@ -20,6 +20,7 @@ export class MotherProfileComponent implements OnInit {
     motherProfile: Subscription;
     visitDetails: Subscription;
     @Input('patientId') patientId: number;
+    @Output() notify: EventEmitter<FormGroup> = new EventEmitter<FormGroup>();
 
     constructor(private _formBuilder: FormBuilder,
                 private _lookupItemService: LookupItemService,
@@ -43,6 +44,7 @@ export class MotherProfileComponent implements OnInit {
         this.getPregnancyDetails(this.patientId);
         this.getCurrentVisitDetails(this.patientId);
 
+        this.notify.emit(this.motherProfileFormGroup);
     }
 
     public onLMPDateChange() {
@@ -77,7 +79,7 @@ export class MotherProfileComponent implements OnInit {
                     this.motherProfileFormGroup.controls['parityOne'].setValue(p.parity);
                     this.motherProfileFormGroup.controls['parityTwo'].setValue(p.parity2);
                     this.motherProfileFormGroup.controls['gravidae'].setValue(p.gravidae);
-                    console.log('pregnancy deatls');
+                    console.log('pregnancy details');
                     console.log(p);
                 },
                 (err) => {
