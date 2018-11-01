@@ -42,10 +42,12 @@
     <None Remove="Scripts\1.0.0.9\31_AlterTable_PatientOutcome_RenameCol_DateOfOutcome.sql" />
     <None Remove="Scripts\1.0.0.9\31_BO_PatientFamilyPlanningLookUpViewItems.sql" />
     <None Remove="Scripts\1.0.0.9\31_DO_CreateView_PatientDischargeInfoView.sql" />
-    <None Remove="Scripts\1.0.0.9\32_DO_Insert_MaternalDrugAdmin_LookUp_Items.sql" />
-    <None Remove="Scripts\1.0.0.9\33_DO_AlterTable_PatientDrugAdministration_AlterCol_CreatedDate.sql" />
-    <None Remove="Scripts\1.0.0.9\34_DO_CreateView_PatientDrugAdministrationView.sql" />
-    <None Remove="Scripts\1.0.0.9\35_AlterTable_PatientReferral_Rename_And_Change_Col_DataTypes.sql" />
+    <None Remove="Scripts\1.0.0.9\32_BO_PatientFamilyPlanningMethodView.sql" />
+    <None Remove="Scripts\1.0.0.9\33_BO_AlterPtientInfoSetPostPartumtoDaysPostPartum.sql" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Scripts\1.0.0.9\33_BO_AlterPtientInfoSetPostPartumtoDaysPostPartum.sql" />
   </ItemGroup>
 
   <ItemGroup>
@@ -85,10 +87,7 @@
     <EmbeddedResource Include="Scripts\1.0.0.9\31_AlterTable_PatientOutcome_RenameCol_DateOfOutcome.sql" />
     <EmbeddedResource Include="Scripts\1.0.0.9\31_BO_PatientFamilyPlanningLookUpViewItems.sql" />
     <EmbeddedResource Include="Scripts\1.0.0.9\31_DO_CreateView_PatientDischargeInfoView.sql" />
-    <EmbeddedResource Include="Scripts\1.0.0.9\32_DO_Insert_MaternalDrugAdmin_LookUp_Items.sql" />
-    <EmbeddedResource Include="Scripts\1.0.0.9\33_DO_AlterTable_PatientDrugAdministration_AlterCol_CreatedDate.sql" />
-    <EmbeddedResource Include="Scripts\1.0.0.9\34_DO_CreateView_PatientDrugAdministrationView.sql" />
-    <EmbeddedResource Include="Scripts\1.0.0.9\35_AlterTable_PatientReferral_Rename_And_Change_Col_DataTypes.sql" />
+    <EmbeddedResource Include="Scripts\1.0.0.9\32_BO_PatientFamilyPlanningMethodView.sql" />
   </ItemGroup>
 
   <ItemGroup>

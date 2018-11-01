@@ -6,17 +6,16 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using IQCare.Maternity.BusinessProcess.Commands.PNC;
 using MediatR;
-
-
+using IQCare.Maternity.BusinessProcess.Queries.PNC;
 
 namespace IQCare.Maternity.WebApi.Controllers
 {
     [Produces("application/json")]
     [Route("api/AddFamilyPlanningMetods")]
-    public class AddFamilyPlanningMetodsController : Controller
+    public class AddFamilyPlanningMethodsController : Controller
     {
         IMediator _mediator;
-        public AddFamilyPlanningMetodsController(IMediator mediator)
+        public AddFamilyPlanningMethodsController(IMediator mediator)
         {
             _mediator = mediator;
         }
@@ -33,6 +32,14 @@ namespace IQCare.Maternity.WebApi.Controllers
                 return Ok(result.Value);
 
             return BadRequest(result);
+        }
+        [HttpGet("{Id}")]
+        public async Task<object> GetFamilyPlanningInfo(int Id)
+        {
+            var diagnosisInfo = await _mediator.Send(new GetPatientFamilyPlanningMethodQuery { PatientId = Id }, HttpContext.RequestAborted);
+            if (diagnosisInfo.IsValid)
+                return Ok(diagnosisInfo.Value);
+            return BadRequest(diagnosisInfo);
         }
     }
 }

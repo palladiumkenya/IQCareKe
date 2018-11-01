@@ -66,6 +66,8 @@ import { ChronicIllnessResolver } from './_services/resolvers/chronic-illness.re
 import { PreventiveServiceResolver } from './_services/resolvers/preventive-service.resolver';
 import { TbScreeningResolver } from './_services/resolvers/tb-screening.resolver';
 import { MaternityEncounterComponent } from './maternity/maternity-encounter/maternity-encounter.component';
+import { MotherExaminationResolver } from './_services/resolvers/motherexamination.resolver';
+import { BabyExaminationResolver } from './_services/resolvers/baby-examination.resolver';
 
 
 const routes: Routes = [
@@ -180,7 +182,9 @@ const routes: Routes = [
             cervicalCancerScreeningMethodOptions: CervicalCancerScreeningMethodResolver,
             familyPlanningMethodOptions: FamilyPlanningMethodResolver,
             cervicalCancerScreeningResultsOptions: CervicalCancerScreeningResultsResolver,
-            referralFromOptions: ReferralResolver
+            referralFromOptions: ReferralResolver,
+            motherExaminationOptions: MotherExaminationResolver,
+            babyExaminationControls: BabyExaminationResolver
         }
     },
     {
