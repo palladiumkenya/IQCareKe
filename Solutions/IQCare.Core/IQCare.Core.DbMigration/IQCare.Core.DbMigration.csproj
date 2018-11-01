@@ -42,6 +42,12 @@
     <None Remove="Scripts\1.0.0.9\31_AlterTable_PatientOutcome_RenameCol_DateOfOutcome.sql" />
     <None Remove="Scripts\1.0.0.9\31_BO_PatientFamilyPlanningLookUpViewItems.sql" />
     <None Remove="Scripts\1.0.0.9\31_DO_CreateView_PatientDischargeInfoView.sql" />
+    <None Remove="Scripts\1.0.0.9\32_BO_PatientFamilyPlanningMethodView.sql" />
+    <None Remove="Scripts\1.0.0.9\33_BO_AlterPtientInfoSetPostPartumtoDaysPostPartum.sql" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Scripts\1.0.0.9\33_BO_AlterPtientInfoSetPostPartumtoDaysPostPartum.sql" />
   </ItemGroup>
 
   <ItemGroup>
@@ -81,6 +87,7 @@
     <EmbeddedResource Include="Scripts\1.0.0.9\31_AlterTable_PatientOutcome_RenameCol_DateOfOutcome.sql" />
     <EmbeddedResource Include="Scripts\1.0.0.9\31_BO_PatientFamilyPlanningLookUpViewItems.sql" />
     <EmbeddedResource Include="Scripts\1.0.0.9\31_DO_CreateView_PatientDischargeInfoView.sql" />
+    <EmbeddedResource Include="Scripts\1.0.0.9\32_BO_PatientFamilyPlanningMethodView.sql" />
   </ItemGroup>
 
   <ItemGroup>
