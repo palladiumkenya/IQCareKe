@@ -11,7 +11,7 @@ namespace IQCare.Common.Infrastructure.Mapping
     {
         void IEntityTypeConfiguration<PatientRefferal>.Configure(EntityTypeBuilder<PatientRefferal> builder)
         {
-            builder.ToTable("PatientReferral")
+            builder.ToTable("PmtctReferral")
                 .HasKey(c => c.Id);
         }
     }
