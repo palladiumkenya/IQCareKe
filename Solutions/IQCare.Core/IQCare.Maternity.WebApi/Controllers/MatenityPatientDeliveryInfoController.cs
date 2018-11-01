@@ -82,7 +82,6 @@ namespace IQCare.Maternity.WebApi.Controllers
                 return Ok(response.Value);
 
             return BadRequest(response);
-
         }
 
         [HttpGet("{Id}")]
