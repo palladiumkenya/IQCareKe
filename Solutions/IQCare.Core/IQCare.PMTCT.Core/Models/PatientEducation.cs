@@ -32,7 +32,6 @@ namespace IQCare.PMTCT.Core.Models
         public string Description { get; set; }
         public int CreatedBy { get; set; }
         public DateTime CreateDate { get; set; }
-
         public virtual PatientMasterVisit PatientMasterVisit { get; set; }
         public virtual Patient Patient { get; set; }
     

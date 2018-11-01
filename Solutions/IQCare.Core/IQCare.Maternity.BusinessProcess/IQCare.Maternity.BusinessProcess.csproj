@@ -5,8 +5,14 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Services\**" />
+    <EmbeddedResource Remove="Services\**" />
+    <None Remove="Services\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Commands\PNC\" />
     <Folder Include="Queries\PNC\" />
-    <Folder Include="Services\" />
   </ItemGroup>
 
   <ItemGroup>
