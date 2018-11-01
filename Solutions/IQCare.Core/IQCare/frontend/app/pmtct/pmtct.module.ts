@@ -103,6 +103,8 @@ import { CheckinComponent } from './checkin/checkin.component';
 import {TbScreeningResolver} from './_services/resolvers/tb-screening.resolver';
 import { AncHivtestingComponent } from './anc/anc-hivtesting/anc-hivtesting.component';
 import { ANCHivStatusInitialVisitResolver } from './_services/resolvers/anc-hiv-status-initial-visit.resolver';
+import { MotherExaminationResolver } from './_services/resolvers/motherexamination.resolver';
+import { BabyExaminationResolver } from './_services/resolvers/baby-examination.resolver';
 
 @NgModule({
     imports: [
@@ -208,7 +210,9 @@ import { ANCHivStatusInitialVisitResolver } from './_services/resolvers/anc-hiv-
         CervicalCancerScreeningResultsResolver,
         PncService,
         TbScreeningResolver,
-        ANCHivStatusInitialVisitResolver
+        ANCHivStatusInitialVisitResolver,
+        MotherExaminationResolver,
+        BabyExaminationResolver
     ],
     entryComponents: [
         IptClientWorkupComponent,

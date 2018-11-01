@@ -17,7 +17,6 @@ import { PatientDrugAdministration } from '../_models/PatientDrugAdministration'
 import { ReferralsEmitter } from '../emitters/ReferralsEmitter';
 import { PatientReferral } from '../_models/PatientReferral';
 import { ReferralAppointmentCommand } from '../_models/ReferralAppointmentCommand';
-import { PatientAppointmet } from '../_models/PatientAppointmet';
 import { PreventiveServiceEmitter } from '../emitters/PreventiveServiceEmitter';
 import { PatientPreventiveService } from '../_models/PatientPreventiveService';
 import { PatientProfile } from '../_models/patientProfile';
@@ -25,6 +24,7 @@ import { PregnancyViewModel } from '../_models/viewModel/PregnancyViewModel';
 import { HIVTestingEmitter } from '../emitters/HIVTestingEmitter';
 import { FormGroup } from '@angular/forms';
 import { LookupItemView } from '../../shared/_models/LookupItemView';
+import { PatientAppointment } from '../_models/PatientAppointmet';
 
 @Component({
     selector: 'app-anc',
@@ -426,13 +426,13 @@ export class AncComponent implements OnInit, OnDestroy {
             PatientId: parseInt(this.patientId.toString(), 10),
             PatientMasterVisitId: parseInt(this.patientMasterVisitId.toString(), 10),
             AppointmentDate: new Date(data.nextAppointmentDate),
-            ReasonId: 0,
             Description: data.serviceRemarks.toString(),
-            StatusId: 0,
+            CreatedBy: this.userId,
+            ServiceAreaId: this.serviceAreaId,
+            StatusDate: null,
             DifferentiatedCareId: 0,
-            DeleteFlag: 0,
-            CreatedBy: this.userId
-        } as PatientAppointmet;
+            AppointmentReason: 'Follow Up'
+        } as PatientAppointment;
 
         const referral = {
             PatientReferral: patientRef,
