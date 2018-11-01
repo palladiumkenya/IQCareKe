@@ -58,14 +58,16 @@ import { HivTestResultResolver } from './_services/resolvers/hiv-test-result.res
 import { BloodLossResolver } from './_services/resolvers/blood-loss.resolver';
 import { PncEncountersComponent } from './pnc/pnc-encounters/pnc-encounters.component';
 import { ANCHivStatusInitialVisitResolver } from './_services/resolvers/anc-hiv-status-initial-visit.resolver';
-import {VisitOptionsResolverService} from './_services/resolvers/visit-options-resolver.service';
-import {PatientEducationResolver} from './_services/resolvers/patient-education-resolver';
-import {HivStatusResolver} from './_services/resolvers/hiv-status.resolver';
-import {WhoStagesResolver} from './_services/resolvers/who-stages.resolver';
-import {ChronicIllnessResolver} from './_services/resolvers/chronic-illness.resolver';
-import {PreventiveServiceResolver} from './_services/resolvers/preventive-service.resolver';
-import {TbScreeningResolver} from './_services/resolvers/tb-screening.resolver';
-import {MaternityEncounterComponent} from './maternity/maternity-encounter/maternity-encounter.component';
+import { VisitOptionsResolverService } from './_services/resolvers/visit-options-resolver.service';
+import { PatientEducationResolver } from './_services/resolvers/patient-education-resolver';
+import { HivStatusResolver } from './_services/resolvers/hiv-status.resolver';
+import { WhoStagesResolver } from './_services/resolvers/who-stages.resolver';
+import { ChronicIllnessResolver } from './_services/resolvers/chronic-illness.resolver';
+import { PreventiveServiceResolver } from './_services/resolvers/preventive-service.resolver';
+import { TbScreeningResolver } from './_services/resolvers/tb-screening.resolver';
+import { MaternityEncounterComponent } from './maternity/maternity-encounter/maternity-encounter.component';
+import { MotherExaminationResolver } from './_services/resolvers/motherexamination.resolver';
+import { BabyExaminationResolver } from './_services/resolvers/baby-examination.resolver';
 
 
 const routes: Routes = [
@@ -179,7 +181,10 @@ const routes: Routes = [
             finalPartnerHivResultOptions: FinalPartnerHivResultResolver,
             cervicalCancerScreeningMethodOptions: CervicalCancerScreeningMethodResolver,
             familyPlanningMethodOptions: FamilyPlanningMethodResolver,
-            cervicalCancerScreeningResultsOptions: CervicalCancerScreeningResultsResolver
+            cervicalCancerScreeningResultsOptions: CervicalCancerScreeningResultsResolver,
+            referralFromOptions: ReferralResolver,
+            motherExaminationOptions: MotherExaminationResolver,
+            babyExaminationControls: BabyExaminationResolver
         }
     },
     {

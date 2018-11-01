@@ -10,8 +10,8 @@ namespace IQCare.Common.Core.Models
         {
 
         }
-        public PatientRefferal(int patientId, int masterVisitId, int referredFrom, string referredTo, 
-            string referralReason, DateTime referralDate, string referredBy, int createdBy, int deleteFlag)
+        public PatientRefferal(int patientId, int masterVisitId, int referredFrom, int ? referredTo, 
+            string referralReason, DateTime ? referralDate, int ? referredBy, int createdBy, int deleteFlag)
         {
             PatientId = patientId;
             PatientMasterVisitId = masterVisitId;
@@ -27,15 +27,15 @@ namespace IQCare.Common.Core.Models
         public int PatientId { get; private set; }
         public int PatientMasterVisitId { get; private set; }
         public int ReferredFrom { get; private set; }
-        public string ReferredTo { get; private set; }
+        public int ? ReferredTo { get; private set; }
         public string ReferralReason { get; private set; }
-        public DateTime ReferralDate { get; private set; }
-        public string ReferredBy { get; private set; }
+        public DateTime ? ReferralDate { get; private set; }
+        public int ? ReferredBy { get; private set; }
         public int DeleteFlag { get; private set; }
         public DateTime CreateDate { get; private set; }
         public int CreateBy { get; private set; }
 
-        public void UpdateReferralInfo(DateTime referralDate, string referralReason, string referredBy, int referredFrom, string referredTo)
+        public void UpdateReferralInfo(DateTime ? referralDate, string referralReason, int ? referredBy, int referredFrom, int ? referredTo)
         {
             ReferralDate = referralDate;
             ReferralReason = referralReason;

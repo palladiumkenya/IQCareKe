@@ -52,7 +52,7 @@ namespace IQCare.PMTCT.BusinessProcess.CommandHandlers
                     VisitNumber = request.VisitNumber
                 };
 
-                var profile = visitDetailsService.AddPatientProfile(patientProfile);
+                var profile = await visitDetailsService.AddPatientProfile(patientProfile);
 
                 return Result<AddPNCVisitResponse>.Valid(new AddPNCVisitResponse { ProfileId = profile.Id });
             }

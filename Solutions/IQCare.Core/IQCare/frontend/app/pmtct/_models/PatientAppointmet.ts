@@ -1,14 +1,11 @@
-export interface PatientAppointmet {
-    Id?: number;
-    PatientId?: number;
-    PatientMasterVisitId?: number;
-    ServiceAreaId?: number;
-    AppointmentDate?: Date;
-    ReasonId?: number;
-    Description?: string;
-    StatusId?: number;
+export interface PatientAppointment {
+    PatientMasterVisitId: number;
+    ServiceAreaId: number;
+    PatientId: number;
+    AppointmentDate: Date;
+    Description: string;
     StatusDate?: Date;
     DifferentiatedCareId?: number;
-    DeleteFlag?: number;
-    CreatedBy?: number;
+    AppointmentReason: string;
+    CreatedBy: number;
 }

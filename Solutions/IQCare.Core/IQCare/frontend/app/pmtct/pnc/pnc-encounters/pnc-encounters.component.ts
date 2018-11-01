@@ -25,7 +25,7 @@ export class PncEncountersComponent implements OnInit {
 
     @ViewChild(MatPaginator) paginator: MatPaginator;
     @ViewChild(MatSort) sort: MatSort;
-    displayedColumns = ['visitdate', 'visittype', 'dateofdelivery', 'modeofdelivery', 'edit'];
+    displayedColumns = ['visitdate', 'visittype', 'edit'];
     dataSource = new MatTableDataSource();
 
     constructor(private dialog: MatDialog,

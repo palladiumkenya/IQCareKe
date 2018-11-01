@@ -29,7 +29,7 @@ export class PncPostnatalexamComponent implements OnInit {
             lochia: new FormControl('', [Validators.required]),
             postpartumhaemorrhage: new FormControl('', [Validators.required]),
             episiotomy: new FormControl('', [Validators.required]),
-            c_section: new FormControl('', [Validators.required]),
+            c_sectionsite: new FormControl('', [Validators.required]),
             fistula_screening: new FormControl('', [Validators.required])
         });
 

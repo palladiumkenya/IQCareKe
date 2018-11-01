@@ -1,3 +1,5 @@
+import { PatientReferralCommand } from './../_models/PatientReferralCommand';
+import { PatientDiagnosisCommand } from './../_models/PatientDiagnosisCommand';
 import { HivTestsCommand } from './../_models/HivTestsCommand';
 import { LookupItemService } from './../../shared/_services/lookup-item.service';
 import { HivStatusCommand } from './../_models/HivStatusCommand';
@@ -10,6 +12,8 @@ import { FormGroup, FormArray } from '@angular/forms';
 import { NotificationService } from '../../shared/_services/notification.service';
 import { SnotifyService } from 'ng-snotify';
 import { forkJoin } from 'rxjs';
+import { PatientAppointment } from '../_models/PatientAppointmet';
+import { PostNatalExamCommand } from '../_models/PostNatalExamCommand';
 
 @Component({
     selector: 'app-pnc',
@@ -47,6 +51,9 @@ export class PncComponent implements OnInit {
     cervicalCancerScreeningMethodOptions: LookupItemView[] = [];
     familyPlanningMethodOptions: LookupItemView[] = [];
     cervicalCancerScreeningResultsOptions: LookupItemView[] = [];
+    referralFromOptions: LookupItemView[] = [];
+    motherExaminationOptions: LookupItemView[] = [];
+    babyExaminationControls: LookupItemView[] = [];
 
     pncHivOptions: any[] = [];
     matHistoryOptions: any[] = [];
@@ -57,6 +64,8 @@ export class PncComponent implements OnInit {
     partnerTestingOptions: any[] = [];
     cervicalCancerScreeningOptions: any[] = [];
     contraceptiveHistoryExercise: any[] = [];
+    referralOptions: any[] = [];
+
     hiv_status_table_data: any[] = [];
     hivTestEntryPoint: number;
     htsEncounterId: number;
@@ -126,7 +135,10 @@ export class PncComponent implements OnInit {
                 finalPartnerHivResultOptions,
                 cervicalCancerScreeningMethodOptions,
                 familyPlanningMethodOptions,
-                cervicalCancerScreeningResultsOptions } = res;
+                cervicalCancerScreeningResultsOptions,
+                referralFromOptions,
+                motherExaminationOptions,
+                babyExaminationControls } = res;
             this.yesnoOptions = yesnoOptions['lookupItems'];
             this.hivFinalResultsOptions = hivFinalResultsOptions['lookupItems'];
             this.deliveryModeOptions = deliveryModeOptions['lookupItems'];
@@ -145,6 +157,9 @@ export class PncComponent implements OnInit {
             this.cervicalCancerScreeningMethodOptions = cervicalCancerScreeningMethodOptions['lookupItems'];
             this.familyPlanningMethodOptions = familyPlanningMethodOptions['lookupItems'];
             this.cervicalCancerScreeningResultsOptions = cervicalCancerScreeningResultsOptions['lookupItems'];
+            this.referralFromOptions = referralFromOptions['lookupItems'];
+            this.motherExaminationOptions = motherExaminationOptions['lookupItems'];
+            this.babyExaminationControls = babyExaminationControls['lookupItems'];
         });
 
         this.pncHivOptions.push({
@@ -196,6 +211,10 @@ export class PncComponent implements OnInit {
         this.contraceptiveHistoryExercise.push({
             'yesnoOptions': this.yesnoOptions,
             'familyPlanningMethodOptions': this.familyPlanningMethodOptions
+        });
+
+        this.referralOptions.push({
+            referrals: this.referralFromOptions
         });
     }
 
@@ -253,10 +272,18 @@ export class PncComponent implements OnInit {
     }
 
     onSubmitForm() {
-        // this.snotifyService.success('Success', 'PNC Encounter', this.notificationService.getConfig());
+        if (!this.diagnosisReferralAppointmentFormGroup.valid) {
+            this.snotifyService.error('Complete the highlighted fields before submitting', 'PNC Encounter',
+                this.notificationService.getConfig());
+            return;
+        }
+
+        // console.log(this.matHistory_PostNatalExam_FormGroup.value[1]);
+
         const yesOption = this.yesnoOptions.filter(obj => obj.itemName == 'Yes');
         const noOption = this.yesnoOptions.filter(obj => obj.itemName == 'No');
         const naOption = this.yesNoNaOptions.filter(obj => obj.itemName == 'N/A');
+        // const motherExaminationTypeId = this.motherExaminationOptions.filter(obj => obj.masterName == 'MotherExamination');
 
         const pncVisitDetailsCommand: PncVisitDetailsCommand = {
             PatientId: this.patientId,
@@ -325,16 +352,88 @@ export class PncComponent implements OnInit {
             }
         }
 
-        const pncVisitDetails = this.pncService.savePncVisitDetails(pncVisitDetailsCommand);
-        const pncPostNatalExam = this.pncService.savePncPostNatalExam();
-        const pncHivStatus = this.pncService.savePncHivStatus(hivStatusCommand, this.hiv_status_table_data);
+        const pncPatientDiagnosis: PatientDiagnosisCommand = {
+            Id: 0,
+            PatientId: this.patientId,
+            PatientMasterVisitId: this.patientMasterVisitId,
+            Diagnosis: this.diagnosisReferralAppointmentFormGroup.value[0]['diagnosis'],
+            ManagementPlan: '',
+            CreatedBy: this.userId
+        };
 
-        forkJoin([pncHivStatus, pncVisitDetails, pncPostNatalExam])
+        const pncReferralCommand: PatientReferralCommand = {
+            Id: 0,
+            PatientId: this.patientId,
+            PatientMasterVisitId: this.patientMasterVisitId,
+            ReferredFrom: this.diagnosisReferralAppointmentFormGroup.value[1]['referredFrom'],
+            ReferredTo: this.diagnosisReferralAppointmentFormGroup.value[1]['referredTo'],
+            ReferralReason: 'Referral',
+            ReferralDate: new Date(),
+            ReferredBy: this.userId,
+            DeleteFlag: 0,
+            CreatedBy: this.userId
+        };
+
+        const pncNextAppointmentCommand: PatientAppointment = {
+            PatientId: this.patientId,
+            PatientMasterVisitId: this.patientMasterVisitId,
+            ServiceAreaId: this.serviceAreaId,
+            AppointmentDate: this.diagnosisReferralAppointmentFormGroup.value[2]['nextAppointmentDate'],
+            Description: this.diagnosisReferralAppointmentFormGroup.value[2]['remarks'],
+            StatusDate: null,
+            DifferentiatedCareId: 0,
+            CreatedBy: this.userId,
+            AppointmentReason: 'Follow Up'
+        };
+
+        const pncPostNatalExamCommand: PostNatalExamCommand = {
+            Id: 0,
+            PatientId: this.patientId,
+            PatientMasterVisitId: this.patientMasterVisitId,
+            ExaminationTypeId: this.motherExaminationOptions[0]['masterId'],
+            CreateBy: this.userId,
+            DeleteFlag: false,
+            PostNatalExamResults: []
+        };
+
+        for (let i = 0; i < this.motherExaminationOptions.length; i++) {
+            pncPostNatalExamCommand.PostNatalExamResults.push({
+                ExamId: this.motherExaminationOptions[i].itemId,
+                FindingId: this.matHistory_PostNatalExam_FormGroup.value[1][this.motherExaminationOptions[i].itemName.toLowerCase()],
+                FindingsNotes: ''
+            });
+        }
+
+        const pncBabyExaminationCommand: PostNatalExamCommand = {
+            Id: 0,
+            PatientId: this.patientId,
+            PatientMasterVisitId: this.patientMasterVisitId,
+            ExaminationTypeId: this.babyExaminationControls[0]['masterId'],
+            CreateBy: this.userId,
+            DeleteFlag: false,
+            PostNatalExamResults: []
+        };
+
+        for (let i = 0; i < this.babyExaminationControls.length; i++) {
+            pncBabyExaminationCommand.PostNatalExamResults.push({
+                ExamId: this.babyExaminationControls[i].itemId,
+                FindingId: this.matHistory_PostNatalExam_FormGroup.value[2][this.babyExaminationControls[i].itemName.toLowerCase()],
+                FindingsNotes: ''
+            });
+        }
+
+        const pncVisitDetails = this.pncService.savePncVisitDetails(pncVisitDetailsCommand);
+        const pncPostNatalExam = this.pncService.savePncPostNatalExam(pncPostNatalExamCommand);
+        const pncBabyExam = this.pncService.savePncPostNatalExam(pncBabyExaminationCommand);
+        const pncHivStatus = this.pncService.savePncHivStatus(hivStatusCommand, this.hiv_status_table_data);
+        const pncDiagnosis = this.pncService.saveDiagnosis(pncPatientDiagnosis);
+        const pncReferral = this.pncService.savePncReferral(pncReferralCommand);
+        const pncNextAppointment = this.pncService.savePncNextAppointment(pncNextAppointmentCommand);
+
+        forkJoin([pncHivStatus, pncDiagnosis, pncReferral, pncNextAppointment, pncVisitDetails, pncPostNatalExam, pncBabyExam])
             .subscribe(
                 (result) => {
-                    console.log(`success `);
                     console.log(result);
-                    // {"htsEncounterId":4,"patientMasterVisitId":21410}
                     this.htsEncounterId = result[0]['htsEncounterId'];
 
                     hivTestsCommand.HtsEncounterId = this.htsEncounterId;
@@ -343,6 +442,8 @@ export class PncComponent implements OnInit {
                             console.log(`result`, res);
                         }
                     );
+
+                    this.snotifyService.success('Successfully saved PNC encounter ', 'PNC', this.notificationService.getConfig());
                 },
                 (error) => {
                     console.log(`error ` + error);
