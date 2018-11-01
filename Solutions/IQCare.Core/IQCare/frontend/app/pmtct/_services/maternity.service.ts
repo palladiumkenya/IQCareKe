@@ -87,7 +87,7 @@ export class MaternityService {
     }
 
     public saveMaternalDrugAdministration(drug: any): Observable<any> {
-        return this.http.post(this.API_URL + '/api/MaternityPatientDeliveryInfo', JSON.stringify(drug), httpOptions).pipe(
+        return this.http.post(this.API_URL + '/api/PatientDiagnosis/AddDrugAdministrationInfo', JSON.stringify(drug), httpOptions).pipe(
             tap(saveMaternalDrugAdministration => this.errorHandler.log(`successfully added maternal drug administration`)),
             catchError(this.errorHandler.handleError<any>('Error saving maternal drug administration'))
         );
@@ -96,13 +96,21 @@ export class MaternityService {
 
     public savePartnerTesting(partner: any): Observable<any> {
         return this.http.post(this.API_URL + '/api/MaternityPatientDeliveryInfo', JSON.stringify(partner), httpOptions).pipe(
-            tap(saveMaternalDrugAdministration => this.errorHandler.log(`successfully added Partner testing details`)),
+            tap(savePartnerTesting => this.errorHandler.log(`successfully added Partner testing details`)),
+            catchError(this.errorHandler.handleError<any>('Error saving Partner testing details'))
+        );
+    }
+
+    public savePatientEducation(patientEducation: any): Observable<any> {
+        return this.http.post(this.API_URL + '/api/PatientEducationExamination', JSON.stringify(patientEducation), httpOptions).pipe(
+            tap(savePatientEducation => this.errorHandler.log(`successfully added Partner testing details`)),
             catchError(this.errorHandler.handleError<any>('Error saving Partner testing details'))
         );
     }
 
     public saveDischarge(discharge: any): Observable<any> {
-        return this.http.post(this.API_URL + '/api/MaternityPatientDeliveryInfo', JSON.stringify(discharge), httpOptions).pipe(
+        return this.http.post(this.API_URL + '/api/MaternityPatientDeliveryInfo/DischargePatient',
+            JSON.stringify(discharge), httpOptions).pipe(
             tap(saveDischarge => this.errorHandler.log(`successfully added discharge details`)),
             catchError(this.errorHandler.handleError<any>('Error saving Partner discharge details'))
         );
@@ -122,8 +130,5 @@ export class MaternityService {
             catchError(this.errorHandler.handleError<any>('Error saving Referral details'))
         );
     }
-
-
-
 
 }
