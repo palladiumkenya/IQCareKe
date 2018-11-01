@@ -40,7 +40,7 @@ namespace IQCare.Maternity.BusinessProcess.CommandHandlers
             }
             catch (Exception ex)
             {
-                logger.Error(ex, $"An error occured while adding patient diagnosis for patientId {request.PatientId}");
+                logger.Error(ex, $"An error occured while adding patient family planning details {request.PatientId}");
                 return Result<AddFamilyPlaaningResultsResponse>.Invalid(ex.Message);
             }
         }

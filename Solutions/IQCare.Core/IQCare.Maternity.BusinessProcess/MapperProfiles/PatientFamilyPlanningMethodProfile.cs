@@ -7,11 +7,11 @@ using IQCare.Maternity.Core.Domain.PNC;
 
 namespace IQCare.Maternity.BusinessProcess.MapperProfiles
 {
-    public class FamilyPlanningMethodProfile : Profile
+    class PatientFamilyPlanningMethodProfile : Profile
     {
-        public FamilyPlanningMethodProfile()
+        public PatientFamilyPlanningMethodProfile()
         {
-            CreateMap<AddPatientFamilyPlanningCommand, PatientFamilyPlanning>();
+            CreateMap<AddPatientFamilyPlanningMethodCommand, PatientFamilyPlanningMethod>();
 
         }
     }
