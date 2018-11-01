@@ -9,7 +9,7 @@ namespace IQCare.PMTCT.BusinessProcess.Commands.Pregnancy
 {
    public class AddPregnancyCommand : IRequest<Result<AddPregnancyCommandResult>>
     {
-        public PatientPregnancy pregnancy;
+        public PatientPregnancy Pregnancy;
     }
 
     public class AddPregnancyCommandResult

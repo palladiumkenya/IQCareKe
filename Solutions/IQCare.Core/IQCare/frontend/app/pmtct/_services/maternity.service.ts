@@ -56,6 +56,13 @@ export class MaternityService {
         );
     }
 
+    public savePregnancyProfile(motherProfile: any): Observable<any>  {
+        return this.http.post(this.API_URL + '/api/VisitDetails/postPregnancy', JSON.stringify(motherProfile), httpOptions).pipe(
+            tap(savePregnancyProfile => this.errorHandler.log(`successfully added pregnancy profile`)),
+            catchError(this.errorHandler.handleError<any>('Error pregnancy profile'))
+        );
+    }
+
     public saveDiagnosis(diagnosis: any): Observable<any> {
         return this.http.post(this.API_URL + '/api/PatientDiagnosis', JSON.stringify(diagnosis), httpOptions).pipe(
             tap(saveVisitDetals => this.errorHandler.log(`successfully added maternity diagnosis`)),
