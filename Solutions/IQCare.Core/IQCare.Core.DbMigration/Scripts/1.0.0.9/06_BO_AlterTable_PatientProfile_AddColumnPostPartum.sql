@@ -1,4 +1,4 @@
 ﻿
-ALTER TABLE PatientProfile ADD DaysPostPartum INT NULL;
+ALTER TABLE PatientProfile ADD PostPartum INT NULL;
 
 

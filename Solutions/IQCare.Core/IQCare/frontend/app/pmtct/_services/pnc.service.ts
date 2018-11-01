@@ -8,6 +8,8 @@ import { Observable, of } from 'rxjs';
 import { tap, catchError } from 'rxjs/operators';
 import { PncVisitDetailsCommand } from '../_models/PncVisitDetailsCommand';
 import { HivStatusCommand } from '../_models/HivStatusCommand';
+import { PatientDiagnosisCommand } from '../_models/PatientDiagnosisCommand';
+import { PatientReferralCommand } from '../_models/PatientReferralCommand';
 
 const httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -19,6 +21,7 @@ const httpOptions = {
 export class PncService {
     private API_URL = environment.API_URL;
     private API_LAB_URL = environment.API_LAB_URL;
+    private API_MATERNITY_URL = environment.API_MATERNITY_URL;
 
     constructor(private http: HttpClient, private errorHandler: ErrorHandlerService) { }
 
@@ -87,5 +90,21 @@ export class PncService {
             tap(savePartnerTesting => this.errorHandler.log(`successfully saved pnc partner testing`)),
             catchError(this.errorHandler.handleError<any>('Error saving pnc partner testing'))
         );
+    }
+
+    public saveDiagnosis(pncPatientDiagnosis: PatientDiagnosisCommand): Observable<any> {
+        return this.http.post<any>(this.API_MATERNITY_URL + '/api/PatientDiagnosis/AddDiagnosis',
+            JSON.stringify(pncPatientDiagnosis), httpOptions).pipe(
+                tap(saveDiagnosis => this.errorHandler.log(`successfully saved pnc diagnosis`)),
+                catchError(this.errorHandler.handleError<any>('Error saving pnc diagnosis'))
+            );
+    }
+
+    public savePncReferral(pncReferralCommand: PatientReferralCommand): Observable<any> {
+        return this.http.post<any>(this.API_URL + '/api/PatientReferralAndAppointment/postReferral',
+            JSON.stringify(pncReferralCommand), httpOptions).pipe(
+                tap(savePncReferral => this.errorHandler.log(`successfully saved pnc referral`)),
+                catchError(this.errorHandler.handleError<any>('Error saving pnc referral'))
+            );
     }
 }

@@ -92,7 +92,7 @@ export class MaternityComponent implements OnInit {
         this.route.params.subscribe(
             (params) => {
                 console.log(params);
-                const {patientId, personId, serviceAreaId} = params;
+                const { patientId, personId, serviceAreaId } = params;
                 this.patientId = patientId;
                 this.personId = personId;
                 this.serviceAreaId = serviceAreaId;

@@ -7,11 +7,11 @@ using System.Text;
 
 namespace IQCare.Maternity.Infrastructure.EntityMapping
 {
-    public class PatientFamilyPlanningMapping : IEntityTypeConfiguration<PatientFamilyPlanning>
+    public class PatientExaminationMapping : IEntityTypeConfiguration<PhysicalExamination>
     {
-        public void Configure(EntityTypeBuilder<PatientFamilyPlanning> builder)
+        public void Configure(EntityTypeBuilder<PhysicalExamination> builder)
         {
-            builder.ToTable(nameof(PatientFamilyPlanning)).HasKey(x => x.Id);
+            builder.ToTable(nameof(PhysicalExamination)).HasKey(x => x.Id);
         }
     }
 }

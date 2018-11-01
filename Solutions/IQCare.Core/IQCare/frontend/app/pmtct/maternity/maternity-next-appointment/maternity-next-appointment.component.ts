@@ -1,7 +1,7 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
-import {NotificationService} from '../../../shared/_services/notification.service';
-import {SnotifyService} from 'ng-snotify';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { NotificationService } from '../../../shared/_services/notification.service';
+import { SnotifyService } from 'ng-snotify';
 
 @Component({
     selector: 'app-maternity-next-appointment',
@@ -15,8 +15,8 @@ export class MaternityNextAppointmentComponent implements OnInit {
     @Output() notify: EventEmitter<FormGroup> = new EventEmitter<FormGroup>();
 
     constructor(private formBuilder: FormBuilder,
-                private notificationService: NotificationService,
-                private snotifyService: SnotifyService) {
+        private notificationService: NotificationService,
+        private snotifyService: SnotifyService) {
     }
 
     ngOnInit() {
@@ -24,6 +24,8 @@ export class MaternityNextAppointmentComponent implements OnInit {
             nextAppointmentDate: new FormControl('', [Validators.required]),
             remarks: new FormControl('', [Validators.required])
         });
+
+        this.notify.emit(this.nextAppointmentFormGroup);
     }
 
 }
