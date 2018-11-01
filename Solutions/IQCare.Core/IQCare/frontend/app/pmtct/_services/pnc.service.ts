@@ -10,6 +10,8 @@ import { PncVisitDetailsCommand } from '../_models/PncVisitDetailsCommand';
 import { HivStatusCommand } from '../_models/HivStatusCommand';
 import { PatientDiagnosisCommand } from '../_models/PatientDiagnosisCommand';
 import { PatientReferralCommand } from '../_models/PatientReferralCommand';
+import { PatientAppointment } from '../_models/PatientAppointmet';
+import { PostNatalExamCommand } from '../_models/PostNatalExamCommand';
 
 const httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -41,16 +43,16 @@ export class PncService {
             );
     }
 
-    public savePncPostNatalExam(): Observable<any> {
-        return this.http.post<any>(this.API_URL + '/',
-            JSON.stringify(''), httpOptions).pipe(
+    public savePncPostNatalExam(pncPostNatalExamCommand: PostNatalExamCommand): Observable<any> {
+        return this.http.post<any>(this.API_MATERNITY_URL + '/api/PostNatalAndBabyExamination',
+            JSON.stringify(pncPostNatalExamCommand), httpOptions).pipe(
                 tap(savePncPostNatalExam => this.errorHandler.log(`successfully saved pnc postnatal exam`)),
                 catchError(this.errorHandler.handleError<any>('Error saving pnc postnatal exam'))
             );
     }
 
     public savePncBabyExamination(): Observable<any> {
-        return this.http.post<any>(this.API_URL + '', JSON.stringify(''), httpOptions).pipe(
+        return this.http.post<any>(this.API_MATERNITY_URL + '/api/PostNatalAndBabyExamination', JSON.stringify(''), httpOptions).pipe(
             tap(savePncBabyExamination => this.errorHandler.log(`successfully saved pnc baby examination`)),
             catchError(this.errorHandler.handleError<any>('Error saving pnc baby examination'))
         );
@@ -101,10 +103,18 @@ export class PncService {
     }
 
     public savePncReferral(pncReferralCommand: PatientReferralCommand): Observable<any> {
-        return this.http.post<any>(this.API_URL + '/api/PatientReferralAndAppointment/postReferral',
+        return this.http.post<any>(this.API_URL + '/api/PatientReferralAndAppointment/AddPatientReferralInfo/postReferral',
             JSON.stringify(pncReferralCommand), httpOptions).pipe(
                 tap(savePncReferral => this.errorHandler.log(`successfully saved pnc referral`)),
                 catchError(this.errorHandler.handleError<any>('Error saving pnc referral'))
+            );
+    }
+
+    public savePncNextAppointment(pncNextAppointmentCommand: PatientAppointment): Observable<any> {
+        return this.http.post<any>(this.API_URL + '/api/PatientReferralAndAppointment/AddPatientNextAppointment/postNextAppointment',
+            JSON.stringify(pncNextAppointmentCommand), httpOptions).pipe(
+                tap(savePncNextAppointment => this.errorHandler.log(`successfully saved pnc next appointment`)),
+                catchError(this.errorHandler.handleError<any>('Error saving pnc next appointment'))
             );
     }
 }
