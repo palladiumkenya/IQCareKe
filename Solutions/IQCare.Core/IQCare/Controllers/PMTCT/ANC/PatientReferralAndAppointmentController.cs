@@ -26,8 +26,7 @@ namespace IQCare.Controllers.PMTCT.ANC
             _mediator = mediator;
         }
              
-        
-        [HttpPost("postNextAppointment")]
+        [HttpPost]
         public async Task<object> AddPatientNextAppointment([FromBody] AddPatientAppointmentCommand command)
         {
             if (!ModelState.IsValid)
@@ -41,7 +40,8 @@ namespace IQCare.Controllers.PMTCT.ANC
             return BadRequest(response);
         }
 
-        [HttpPost("postReferral")]
+
+        [HttpPost]
         public async Task<object> AddPatientReferralInfo([FromBody] AddPatientReferralCommand command)
         {
             if (!ModelState.IsValid)
