@@ -22,6 +22,7 @@ import {ApgarScoreCommand} from './commands/apgar-score-command';
 import {LookupItemService} from '../../shared/_services/lookup-item.service';
 import {Subscription} from 'rxjs/index';
 import {SnotifyService} from 'ng-snotify';
+import {NotificationService} from '../../shared/_services/notification.service';
 
 @Component({
     selector: 'app-maternity',
@@ -40,6 +41,7 @@ export class MaternityComponent implements OnInit {
     formType: string;
     apgarSCore: ApgarScoreCommand[] = [];
     lookupItems$: Subscription;
+    _options: any[] = [];
 
     patientId: number;
     personId: number;
@@ -75,7 +77,8 @@ export class MaternityComponent implements OnInit {
     constructor(private route: ActivatedRoute,
                 private matService: MaternityService,
                 private _lookupItemService: LookupItemService ,
-                private snotifyService: SnotifyService) {
+                private snotifyService: SnotifyService,
+                private notificationService: NotificationService) {
         this.visitDetailsFormGroup = new FormArray([]);
         this.maternalDrugAdministrationForGroup = new FormArray([]);
         this.dischargeFormGroup = new FormArray([]);
@@ -85,6 +88,7 @@ export class MaternityComponent implements OnInit {
     }
 
     ngOnInit() {
+        this.getLookupItems('ApgarScore');
         this.route.params.subscribe(
             (params) => {
                 console.log(params);
@@ -93,7 +97,7 @@ export class MaternityComponent implements OnInit {
                 this.personId = personId;
                 this.serviceAreaId = serviceAreaId;
             }
-        );
+    );
 
         this.userId = JSON.parse(localStorage.getItem('appUserId'));
         this.userId = JSON.parse(localStorage.getItem('appUserId'));
@@ -232,7 +236,7 @@ export class MaternityComponent implements OnInit {
                 p => {
                     const options = p['lookupItems'];
                     for (let i = 0; i < options.length; i++) {
-                        _options.push({ 'itemId': options[i]['itemId'], 'itemName': options[i]['itemName'] });
+                        this._options.push({ 'itemId': options[i]['itemId'], 'itemName': options[i]['itemName'] });
                     }
                 },
                 (err) => {
@@ -292,6 +296,16 @@ export class MaternityComponent implements OnInit {
             CreatedBy: this.userId
         };
 
+        const apgarscoreOne = this._options.filter(x => x.itemName == 'Apgar Score 1 min');
+        const apgarscoreTwo = this._options.filter(x => x.itemName == 'Apgar Score 5 min');
+        const apgarscoreThree = this._options.filter(x => x.itemName == 'Apgar Score 10 min');
+
+        this.apgarSCore.push(
+           {ApgarSCoreId: apgarscoreOne[0].itemId , ApgarScoreType: '', SCore: this.babyFormGroup[0].get('agparScore1min').value},
+            {ApgarSCoreId: apgarscoreTwo[0].itemId, ApgarScoreType: '', SCore: this.babyFormGroup[0].get('agparScore5min').value},
+            {ApgarSCoreId: apgarscoreThree[0].itemId, ApgarScoreType: '', SCore: this.babyFormGroup[0].get('agparScore10min').value}
+        );
+
         const babyconditionCommand: BabyConditionCommand = {
             PatientDeliveryInformationId: 0,
             PatientMasterVisitId: this.patientMasterVisitId,
@@ -312,6 +326,7 @@ export class MaternityComponent implements OnInit {
         const matMotherProfile = this.matService.savePregnancyProfile(pregnancyCommand);
         const matVisitDetails = this.matService.saveVisitDetails(visitDetailsCommand);
         const matDelivery = this.matService.savePatientDelivery(maternityDeliveryCommand);
+        const matBabyCondition = this.matService.saveBabySection(babyconditionCommand);
 
     }
 }
