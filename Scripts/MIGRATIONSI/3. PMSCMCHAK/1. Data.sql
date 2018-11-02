@@ -804,9 +804,8 @@ BEGIN
 insert into [lnk_GroupFeatures] values(1,255,5,getdate(),null)
 END
 
-Update mst_regimen set deleteflag = 1
 
-Update mst_regimen set deleteflag = 1
+Update mst_regimen set deleteflag = 0
 
 IF NOT EXISTS (select * from dbo.mst_Regimen where Purpose=222 and RegimenLineID='1'and RegimenCode=N'AF4B' and RegimenName=N'ABC + 3TC + EFV')
 BEGIN
