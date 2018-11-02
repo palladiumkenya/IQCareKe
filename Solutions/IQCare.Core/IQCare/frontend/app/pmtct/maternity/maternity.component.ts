@@ -423,17 +423,18 @@ export class MaternityComponent implements OnInit {
         forkJoin([matVisitDetails,
             matMotherProfile,
             matDiagnosis,
-            matDrugAdministartion,
-            matEducation,
-            matDischarge,
-            matReferral,
-            matNextAppointment])
+           // matDrugAdministartion,
+          //  matEducation,
+          //  matDischarge,
+          //  matReferral,
+           // matNextAppointment
+        ])
             .subscribe(
                 (result) => {
                     console.log(`success `);
                     console.log(result);
 
-                    this.pregnancyId = result[1]['PregnancyId'];
+                   /* this.pregnancyId = result[1]['PregnancyId'];
                     maternityDeliveryCommand.ProfileId = this.pregnancyId;
                     
                     const matDelivery = this.matService.savePatientDelivery(maternityDeliveryCommand).subscribe(
@@ -443,7 +444,7 @@ export class MaternityComponent implements OnInit {
                             const matBabyCondition = this.matService.saveBabySection(babyconditionCommand);
                             console.log(`result`, res);
                         }
-                    );
+                    );*/
                 },
                 (error) => {
                     console.log(`error ` + error);
