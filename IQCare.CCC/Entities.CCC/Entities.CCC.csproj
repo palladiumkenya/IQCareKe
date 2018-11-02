@@ -116,6 +116,7 @@
     <Compile Include="IL\IlStatistics.cs" />
     <Compile Include="Encounter\PatientOI.cs" />
     <Compile Include="Interoperability\PatientVitalsMessage.cs" />
+    <Compile Include="Lookup\ICDCodes.cs" />
     <Compile Include="Lookup\PatientLookupSearch.cs" />
     <Compile Include="PatientRelationshipDTO.cs" />
     <Compile Include="Neonatal\ImmunizationHistory.cs" />

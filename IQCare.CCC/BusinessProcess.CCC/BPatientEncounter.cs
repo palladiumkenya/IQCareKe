@@ -319,10 +319,22 @@ namespace BusinessProcess.CCC
                         ClsUtility.Init_Hashtable();
                         ClsUtility.AddParameters("@masterVisitID", SqlDbType.Int, PatientMasterVisitID);
                         ClsUtility.AddParameters("@PatientID", SqlDbType.Int, PatientID);
-                        ClsUtility.AddParameters("@diagnosis", SqlDbType.VarChar, diag.diagnosis);
+                        string[] diaglist = diag.diagnosis.Split('~');
+                        if (diaglist[1].ToString() == "mstICD")
+                            ClsUtility.AddParameters("@LookupTableFlag", SqlDbType.Bit,"0");
+                        else if(diaglist[1].ToString()== "lookupitem")
+                            ClsUtility.AddParameters("@LookupTableFlag", SqlDbType.Bit, "1");
+                        ClsUtility.AddParameters("@diagnosis", SqlDbType.VarChar, diaglist[0]);
                         ClsUtility.AddParameters("@treatment", SqlDbType.VarChar, diag.treatment);
                         ClsUtility.AddParameters("@userID", SqlDbType.VarChar, userID);
-
+                        if (diag.deleteflag == true)
+                        {
+                            ClsUtility.AddParameters("@DeleteFlag", SqlDbType.Bit, "1");
+                        }
+                        else if(diag.deleteflag==false)
+                        {
+                            ClsUtility.AddParameters("@DeleteFlag", SqlDbType.Bit, "0");
+                        }
                         int d = (int)advEvents.ReturnObject(ClsUtility.theParams, "sp_savePatientEncounterDiagnosis", ClsUtility.ObjectEnum.ExecuteNonQuery);
                     }
 
