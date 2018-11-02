@@ -149,6 +149,7 @@
     <Compile Include="Interoperability\BPatientVitalsMessage.cs" />
     <Compile Include="Interoperability\BViralLoadMessage.cs" />
     <Compile Include="Lookup\BFacilityListManager.cs" />
+    <Compile Include="Lookup\BLookupICDCodesManager.cs" />
     <Compile Include="Lookup\BPatientBaselineLookupManager.cs" />
     <Compile Include="Lookup\BPatientServiceEnrollmentLookupManager.cs" />
     <Compile Include="Lookup\BPatientStabilitySummaryManager.cs" />

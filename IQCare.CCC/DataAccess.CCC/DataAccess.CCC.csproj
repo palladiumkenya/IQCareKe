@@ -132,6 +132,7 @@
     <Compile Include="Interface\Lookup\IFacilityListRepository.cs" />
     <Compile Include="Interface\Lookup\ILookupFacilityStatisticsRepository.cs" />
     <Compile Include="Interface\Lookup\ILookupFacilityViralLoad.cs" />
+    <Compile Include="Interface\Lookup\ILookupICDCodesRepository.cs" />
     <Compile Include="Interface\Lookup\ILookupParameter.cs" />
     <Compile Include="Interface\Lookup\ILookupPatientAdherenceRepository.cs" />
     <Compile Include="Interface\Lookup\ILookupPatientRegimenMap.cs" />
@@ -248,6 +249,7 @@
     <Compile Include="Repository\Lookup\LookupFacilityRepository.cs" />
     <Compile Include="Repository\Lookup\LookupFacilityStatisticsRepository.cs" />
     <Compile Include="Repository\Lookup\LookupFacilityViralLoadRepository.cs" />
+    <Compile Include="Repository\Lookup\LookupICDCodesRepository.cs" />
     <Compile Include="Repository\Lookup\LookupLabsRepository.cs" />
     <Compile Include="Repository\Lookup\LookupParameterRepository.cs" />
     <Compile Include="Repository\Lookup\LookupPatientRegimenMapRepository.cs" />

@@ -28,6 +28,7 @@ namespace DataAccess.CCC.Interface
         /* LookupContext */
         ILookupItemRepository LookupItemRepository { get; }
         ILookupRepository LookupRepository { get; }
+        ILookupICDCodesRepository LookupICDCodesRepository { get; }
         ILookupMasterRepository LookupMasterRepository { get; }
         IPatientLookupRepository PatientLookupRepository { get; }
         ILookupPreviousLabs LookupPreviousLabsRepository { get; }
@@ -42,6 +43,7 @@ namespace DataAccess.CCC.Interface
         IPersonExtendedLookupRepository PersonExtendedLookupRepository { get; }
 
         /* person and patient */
+       
         IPersonRepository PersonRepository { get; }
         IPersonLocationRepository PersonLocationRepository { get; }
         IPersonContactRepository PersonContactRepository { get; }

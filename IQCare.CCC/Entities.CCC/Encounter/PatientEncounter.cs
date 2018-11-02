@@ -67,8 +67,11 @@ namespace Entities.CCC.Encounter
         [Serializable]
         public class Diagnosis
         {
+
             public string diagnosis { get; set; }
             public string treatment { get; set; }
+
+            public Boolean deleteflag { get; set; }
         }
 
         [Serializable]
