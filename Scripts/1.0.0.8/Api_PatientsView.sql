@@ -1,7 +1,12 @@
+
+
+
+/****** Object:  View [dbo].[Api_PatientsView]    Script Date: 8/24/2018 4:09:21 PM ******/
+
+
 IF  EXISTS (SELECT * FROM sys.views WHERE object_id = OBJECT_ID(N'[dbo].[Api_PatientsView]'))
 DROP VIEW [dbo].[Api_PatientsView]
 GO
-/****** Object:  View [dbo].[Api_PatientsView]    Script Date: 10/9/2018 9:56:08 AM ******/
 SET ANSI_NULLS ON
 GO
 

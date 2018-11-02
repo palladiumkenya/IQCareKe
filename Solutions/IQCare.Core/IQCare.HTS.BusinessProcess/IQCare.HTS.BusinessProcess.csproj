@@ -7,6 +7,7 @@
   <ItemGroup>
     <ProjectReference Include="..\IQCare.Common.BusinessProcess\IQCare.Common.BusinessProcess.csproj" />
     <ProjectReference Include="..\IQCare.Common.Infrastructure\IQCare.Common.Infrastructure.csproj" />
+    <ProjectReference Include="..\IQCare.Common.Services\IQCare.Common.Services.csproj" />
     <ProjectReference Include="..\IQCare.HTS.Core\IQCare.HTS.Core.csproj" />
     <ProjectReference Include="..\IQCare.HTS.Infrastructure\IQCare.HTS.Infrastructure.csproj" />
   </ItemGroup>
