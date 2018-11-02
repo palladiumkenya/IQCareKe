@@ -6,6 +6,21 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Scripts\1.0.0.8\HEI\HEIEncounter.sql" />
+    <None Remove="Scripts\1.0.0.8\HEI\HEIFeeding.sql" />
+    <None Remove="Scripts\1.0.0.8\HEI\HEIProfile.sql" />
+    <None Remove="Scripts\1.0.0.8\HEI\PatientMilestone.sql" />
+    <None Remove="Scripts\1.0.0.8\HEI\Vaccination.sql" />
+    <None Remove="Scripts\1.0.0.8\PMTCT\01_Insert_PNC_LookUp_Data.sql" />
+    <None Remove="Scripts\1.0.0.8\PMTCT\02_Create_Table_PatientCounselling.sql" />
+    <None Remove="Scripts\1.0.0.8\PMTCT\03_CreateTable_PatientDelivery.sql" />
+    <None Remove="Scripts\1.0.0.8\PMTCT\04_CreateTable_PatientDrugAdministration.sql" />
+    <None Remove="Scripts\1.0.0.8\PMTCT\05_CreateTable_PatientLabSample.sql" />
+    <None Remove="Scripts\1.0.0.8\PMTCT\06_CreateTable_PatientOutcome.sql" />
+    <None Remove="Scripts\1.0.0.8\PMTCT\07_CreateTable_PatientPatnerTesting.sql" />
+    <None Remove="Scripts\1.0.0.8\PMTCT\08_CreateTable_PatientPreventiveServices.sql" />
+    <None Remove="Scripts\1.0.0.8\PMTCT\09_CreateTable_PatientProfile.sql" />
+    <None Remove="Scripts\1.0.0.8\PMTCT\10_CreateTable_PmtctBaby.sql" />
     <None Remove="Scripts\1.0.0.9\01_DO_Rename_Table_PMTCTBaby.sql" />
     <None Remove="Scripts\1.0.0.9\02_DO_CreateTable_DeliveredBabyApgarScore.sql" />
     <None Remove="Scripts\1.0.0.9\03_DO_AlterTable_DeliveredBabyBirthInfo_AlterColmn_DeliveryComplications.sql" />
@@ -45,6 +60,24 @@
     <None Remove="Scripts\1.0.0.9\32_BO_PatientFamilyPlanningMethodView.sql" />
     <None Remove="Scripts\1.0.0.9\33_BO_AlterPtientInfoSetPostPartumtoDaysPostPartum.sql" />
     <None Remove="Scripts\1.0.0.9\36_DO_AlterTable_PatientDelivery_ChangeCol_DurationOfLabour.sql" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Scripts\1.0.0.8\HEI\HEIEncounter.sql" />
+    <EmbeddedResource Include="Scripts\1.0.0.8\HEI\HEIFeeding.sql" />
+    <EmbeddedResource Include="Scripts\1.0.0.8\HEI\HEIProfile.sql" />
+    <EmbeddedResource Include="Scripts\1.0.0.8\HEI\PatientMilestone.sql" />
+    <EmbeddedResource Include="Scripts\1.0.0.8\HEI\Vaccination.sql" />
+    <EmbeddedResource Include="Scripts\1.0.0.8\PMTCT\01_Insert_PNC_LookUp_Data.sql" />
+    <EmbeddedResource Include="Scripts\1.0.0.8\PMTCT\02_Create_Table_PatientCounselling.sql" />
+    <EmbeddedResource Include="Scripts\1.0.0.8\PMTCT\03_CreateTable_PatientDelivery.sql" />
+    <EmbeddedResource Include="Scripts\1.0.0.8\PMTCT\04_CreateTable_PatientDrugAdministration.sql" />
+    <EmbeddedResource Include="Scripts\1.0.0.8\PMTCT\05_CreateTable_PatientLabSample.sql" />
+    <EmbeddedResource Include="Scripts\1.0.0.8\PMTCT\06_CreateTable_PatientOutcome.sql" />
+    <EmbeddedResource Include="Scripts\1.0.0.8\PMTCT\07_CreateTable_PatientPatnerTesting.sql" />
+    <EmbeddedResource Include="Scripts\1.0.0.8\PMTCT\08_CreateTable_PatientPreventiveServices.sql" />
+    <EmbeddedResource Include="Scripts\1.0.0.8\PMTCT\09_CreateTable_PatientProfile.sql" />
+    <EmbeddedResource Include="Scripts\1.0.0.8\PMTCT\10_CreateTable_PmtctBaby.sql" />
   </ItemGroup>
 
   <ItemGroup>
