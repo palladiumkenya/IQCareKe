@@ -36,6 +36,8 @@ export class DischargeComponent implements OnInit {
         this.yesnoOptions = yesNos;
         this.deliveryStateOptions = deliveryStates;
         this.referralOptions = referrals;
+
+        this.notify.emit(this.dischargeFormGroup);
     }
 
 }

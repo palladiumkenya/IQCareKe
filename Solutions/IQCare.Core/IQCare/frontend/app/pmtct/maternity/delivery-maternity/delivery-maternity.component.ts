@@ -77,6 +77,8 @@ export class DeliveryMaternityComponent implements OnInit {
 
         this.getCurrentVisitDetails(this.patientId);
         this.getPregnancyDetails(this.patientId);
+
+        this.notify.emit(this.deliveryFormGroup);
     }
 
     public onDeliveryDateChange() {

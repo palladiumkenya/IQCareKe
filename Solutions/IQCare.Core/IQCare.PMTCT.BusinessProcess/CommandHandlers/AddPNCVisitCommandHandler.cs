@@ -48,11 +48,11 @@ namespace IQCare.PMTCT.BusinessProcess.CommandHandlers
                     VisitType = request.VisitType,
                     CreatedBy = (request.UserId < 1) ? 1 : request.UserId,
                     CreateDate = DateTime.Now,
-                    PostPartum = request.DaysPostPartum,
+                    DaysPostPartum = request.DaysPostPartum,
                     VisitNumber = request.VisitNumber
                 };
 
-                var profile = visitDetailsService.AddPatientProfile(patientProfile);
+                var profile = await visitDetailsService.AddPatientProfile(patientProfile);
 
                 return Result<AddPNCVisitResponse>.Valid(new AddPNCVisitResponse { ProfileId = profile.Id });
             }

@@ -72,7 +72,7 @@ export class HeiComponent implements OnInit {
     infantFeedingFormGroup: FormArray;
 
     heiOutcomeFormGroup: FormArray;
-    nextAppointmentFormGroup: FormGroup;
+    nextAppointmentFormGroup: FormArray;
     hivTestingFormGroup: any[];
 
     constructor(private route: ActivatedRoute,
@@ -239,7 +239,7 @@ export class HeiComponent implements OnInit {
     }
 
     onHeiOutcomeNotify(formGroup: FormGroup) {
-        this.heiOutcomeFormGroup.push(formGroup);
+        this.nextAppointmentFormGroup.push(formGroup);
     }
 
     onHivTestingNotify(hivTests: any) {
@@ -247,7 +247,7 @@ export class HeiComponent implements OnInit {
     }
 
     onNextAppointmentNotify(formGroup: FormGroup) {
-        this.nextAppointmentFormGroup = formGroup;
+        this.nextAppointmentFormGroup.push(formGroup);
     }
 
     onCompleteEncounter() {

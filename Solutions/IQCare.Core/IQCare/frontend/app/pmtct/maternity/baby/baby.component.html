@@ -14,7 +14,7 @@
                 <mat-label >Baby Sex</mat-label>
                 <mat-select formControlName="babySex" required minlength="1">
                     <mat-option [value]="0">select</mat-option>
-                    <mat-option *ngFor="let genderOption of genderOptions" [value]="genderOption.itemId">
+                    <mat-option *ngFor="let genderOption of genderOptions" [value]="genderOption">
                         {{genderOption.itemName}}
                     </mat-option>
                 </mat-select>
@@ -30,7 +30,7 @@
                 <mat-label >Outcome</mat-label>
                 <mat-select formControlName="outcome" required minlength="1">
                     <mat-option [value]="0">select</mat-option>
-                    <mat-option *ngFor="let deliveryOutcomeOption of deliveryOutcomeOptions" [value]="deliveryOutcomeOption.itemId">
+                    <mat-option *ngFor="let deliveryOutcomeOption of deliveryOutcomeOptions" [value]="deliveryOutcomeOption">
                         {{deliveryOutcomeOption.itemName}}
                     </mat-option>
                 </mat-select>
@@ -44,7 +44,7 @@
                     <mat-label >Resuscitation done</mat-label>
                     <mat-select formControlName="resuscitationDone" required minlength="1">
                         <mat-option [value]="0">select</mat-option>
-                        <mat-option *ngFor="let yesnoOption of yesnoOptions" [value]="yesnoOption.itemId">
+                        <mat-option *ngFor="let yesnoOption of yesnoOptions" [value]="yesnoOption">
                             {{yesnoOption.itemName}}
                         </mat-option>
                     </mat-select>
@@ -55,7 +55,7 @@
                     <mat-label >Birth with deformity</mat-label>
                     <mat-select formControlName="deformity" required minlength="1">
                         <mat-option [value]="0">select</mat-option>
-                        <mat-option *ngFor="let yesnoOption of yesnoOptions" [value]="yesnoOption.itemId" >
+                        <mat-option *ngFor="let yesnoOption of yesnoOptions" [value]="yesnoOption" >
                             {{yesnoOption.itemName}}
                         </mat-option>
                     </mat-select>
@@ -66,7 +66,7 @@
                     <mat-label >TEO given</mat-label>
                     <mat-select formControlName="teoGiven" required minlength="1">
                         <mat-option [value]="0">select</mat-option>
-                        <mat-option *ngFor="let yesnoOption of yesnoOptions" [value]="yesnoOption.itemId">
+                        <mat-option *ngFor="let yesnoOption of yesnoOptions" [value]="yesnoOption">
                             {{yesnoOption.itemName}}
                         </mat-option>
                     </mat-select>
@@ -77,7 +77,7 @@
                     <mat-label >Breast Fed < 1 hour</mat-label>
                     <mat-select formControlName="breastFed" required minlength="1">
                         <mat-option [value]="0">select</mat-option>
-                        <mat-option *ngFor="let yesnoOption of yesnoOptions" [value]="yesnoOption.itemId" (onSelectionChange)="onAntiTbDrugsChange($event)">
+                        <mat-option *ngFor="let yesnoOption of yesnoOptions" [value]="yesnoOption" >
                             {{yesnoOption.itemName}}
                         </mat-option>
                     </mat-select>
@@ -112,12 +112,13 @@
     </div>
      <div class="row">
          <div class="col-lg-8 col-xs-12">
-             <mat-form-field class="col-md-12">
+             <mat-form-field class="col-lg-12">
                  <input matInput placeholder="Comments" formControlName="comment" required>
              </mat-form-field>
          </div>
 
      </div>
+
     <div class="row">
         <div class="col-lg-4 col-xs-12"></div>
         <div class="col-lg-4 col-xs-12">
@@ -137,55 +138,55 @@
                     <!-- Position Column -->
                     <ng-container matColumnDef="sex">
                         <mat-header-cell *matHeaderCellDef><strong>Sex</strong>  </mat-header-cell>
-                        <mat-cell *matCellDef="let babyData"> {{babyData.sex}} </mat-cell>
+                        <mat-cell *matCellDef="let babyDataTable"> {{babyDataTable.sex}} </mat-cell>
                     </ng-container>
 
                     <!-- Name Column -->
                     <ng-container matColumnDef="birthWeight">
-                        <mat-header-cell *matHeaderCellDef> Birth Weight </mat-header-cell>
-                        <mat-cell *matCellDef="let babyData"> {{babyData.birthWeight }} </mat-cell>
+                        <mat-header-cell *matHeaderCellDef> Birth Weight (gms) </mat-header-cell>
+                        <mat-cell *matCellDef="let babyDataTable"> {{babyDataTable.birthWeight }} </mat-cell>
                     </ng-container>
 
                     <!-- Weight Column -->
                     <ng-container matColumnDef="outcome">
                         <mat-header-cell *matHeaderCellDef> <strong>Outcome</strong>  </mat-header-cell>
-                        <mat-cell *matCellDef="let babyData"> {{babyData.outcome}} </mat-cell>
+                        <mat-cell *matCellDef="let babyDataTable"> {{babyDataTable.outcome}} </mat-cell>
                     </ng-container>
 
                     <!-- Symbol Column -->
                     <ng-container matColumnDef="apgarScore">
                         <mat-header-cell *matHeaderCellDef><strong>Apgar Score</strong>  </mat-header-cell>
-                        <mat-cell *matCellDef="let babyData"> {{babyData.apgarScore}} </mat-cell>
+                        <mat-cell *matCellDef="let babyDataTable"> {{babyDataTable.apgarScore}} </mat-cell>
                     </ng-container>
 
                     <!-- Symbol Column -->
                     <ng-container matColumnDef="resuscitation">
                         <mat-header-cell *matHeaderCellDef><strong>Resuscitate</strong>  </mat-header-cell>
-                        <mat-cell *matCellDef="let babyData"> {{babyData.resuscitation}} </mat-cell>
+                        <mat-cell *matCellDef="let babyDataTable"> {{babyDataTable.resuscitate}} </mat-cell>
                     </ng-container>
 
                     <!-- Symbol Column -->
                     <ng-container matColumnDef="deformity">
                         <mat-header-cell *matHeaderCellDef><strong>Deformity</strong>  </mat-header-cell>
-                        <mat-cell *matCellDef="let babyData"> {{babyData.deformity}} </mat-cell>
+                        <mat-cell *matCellDef="let babyDataTable"> {{babyDataTable.deformity}} </mat-cell>
                     </ng-container>
 
                     <!-- Symbol Column -->
                     <ng-container matColumnDef="teo">
                         <mat-header-cell *matHeaderCellDef><strong>TEO</strong>  </mat-header-cell>
-                        <mat-cell *matCellDef="let babyData"> {{babyData.teo}} </mat-cell>
+                        <mat-cell *matCellDef="let babyDataTable"> {{babyDataTable.teo}} </mat-cell>
                     </ng-container>
 
                     <!-- Symbol Column -->
                     <ng-container matColumnDef="breastFeeding">
                         <mat-header-cell *matHeaderCellDef><strong>Breast Feeding</strong>  </mat-header-cell>
-                        <mat-cell *matCellDef="let babyData"> {{babyData.breastFeeding}} </mat-cell>
+                        <mat-cell *matCellDef="let babyDataTable"> {{babyDataTable.breastFeeding}} </mat-cell>
                     </ng-container>
 
                     <!-- Symbol Column -->
                     <ng-container matColumnDef="comment">
                         <mat-header-cell *matHeaderCellDef><strong>Comment</strong>  </mat-header-cell>
-                        <mat-cell *matCellDef="let babyData"> {{babyData.comment}} </mat-cell>
+                        <mat-cell *matCellDef="let babyDataTable"> {{babyDataTable.comment}} </mat-cell>
                     </ng-container>
 
 
