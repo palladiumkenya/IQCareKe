@@ -69,6 +69,13 @@ namespace IQCare.HTS.BusinessProcess.CommandHandlers
                         string lastName = request.FAMILY[i].PATIENT_IDENTIFICATION.PATIENT_NAME.LAST_NAME;
                         string nickName = request.FAMILY[i].PATIENT_IDENTIFICATION.PATIENT_NAME.NICK_NAME;
                         int sex = request.FAMILY[i].PATIENT_IDENTIFICATION.SEX;
+                        string nickName = (request.FAMILY[i].PATIENT_IDENTIFICATION.PATIENT_NAME.NICK_NAME == null) ? "" : request.FAMILY[i].PATIENT_IDENTIFICATION.PATIENT_NAME.NICK_NAME.ToString();
+                        string ward = (request.FAMILY[i].PATIENT_IDENTIFICATION.PATIENT_ADDRESS.PHYSICAL_ADDRESS.WARD == null) ? "" : request.FAMILY[i].PATIENT_IDENTIFICATION.PATIENT_ADDRESS.PHYSICAL_ADDRESS.WARD.ToString();
+                        string county = (request.FAMILY[i].PATIENT_IDENTIFICATION.PATIENT_ADDRESS.PHYSICAL_ADDRESS.COUNTY == null) ? "" : request.FAMILY[i].PATIENT_IDENTIFICATION.PATIENT_ADDRESS.PHYSICAL_ADDRESS.COUNTY.ToString();
+                        string subcounty = (request.FAMILY[i].PATIENT_IDENTIFICATION.PATIENT_ADDRESS.PHYSICAL_ADDRESS.SUB_COUNTY == null) ? "" : request.FAMILY[i].PATIENT_IDENTIFICATION.PATIENT_ADDRESS.PHYSICAL_ADDRESS.SUB_COUNTY.ToString();
+                        string educationlevel = (request.FAMILY[i].PATIENT_IDENTIFICATION.EDUCATIONLEVEL == null) ? "" : request.FAMILY[i].PATIENT_IDENTIFICATION.EDUCATIONLEVEL.ToString();
+                        string educationoutcome = (request.FAMILY[i].PATIENT_IDENTIFICATION.EDUCATIONOUTCOME == null) ? "" : request.FAMILY[i].PATIENT_IDENTIFICATION.EDUCATIONOUTCOME.ToString();
+                        string occupation = (request.FAMILY[i].PATIENT_IDENTIFICATION.OCCUPATION == null) ? "" : request.FAMILY[i].PATIENT_IDENTIFICATION.OCCUPATION.ToString();
                         DateTime dateOfBirth = DateTime.ParseExact(request.FAMILY[i].PATIENT_IDENTIFICATION.DATE_OF_BIRTH, "yyyyMMdd", null);
                         int providerId = request.FAMILY[i].PATIENT_IDENTIFICATION.USER_ID;
                         int maritalStatusId = request.FAMILY[i].PATIENT_IDENTIFICATION.MARITAL_STATUS;

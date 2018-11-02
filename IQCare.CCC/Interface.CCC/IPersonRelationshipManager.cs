@@ -13,5 +13,7 @@ namespace Interface.CCC
         int DeletePersonRelationship(int id);
         List<PersonRelationship> GetAllPersonRelationship(int patientId);
         bool PersonLinkedToPatient(int personId, int patientId);
+
+        PersonRelationship GetSpecificRelationship(int personId, int patientId);
     }
 }

@@ -1215,14 +1215,30 @@ namespace IQCare.Web.Pharmacy
                 //Original ord date when the form was first loaded
                 if (Convert.ToInt32(Session["PatientVisitId"]) != 0)
                 {
-                    ViewState["OrigOrdDate"] = theExistDS.Tables[0].Rows[0]["OrderedByDate"];
-                    if (theExistDS.Tables[0].Rows[0]["DispensedByDate"].ToString() != "")
+                    if (theExistDS.Tables[0] != null)
                     {
-                        Session["OrigDispensbyDate"] = theExistDS.Tables[0].Rows[0]["DispensedByDate"].ToString();
+                        if (theExistDS.Tables[0].Rows.Count > 0)
+                        {
+                            ViewState["OrigOrdDate"] = theExistDS.Tables[0].Rows[0]["OrderedByDate"];
+                            if (theExistDS.Tables[0].Rows[0]["DispensedByDate"].ToString() != "")
+                            {
+                                Session["OrigDispensbyDate"] = theExistDS.Tables[0].Rows[0]["DispensedByDate"].ToString();
+                            }
+
+                            else
+                            {
+                                Session["OrigDispensbyDate"] = null;
+                            }
+                        }
+                        else
+                        {
+                            Session["OrigDispensbyDate"] = null;
+                        }
                     }
                     else
                     {
                         Session["OrigDispensbyDate"] = null;
+                        
                     }
                 }
                 else

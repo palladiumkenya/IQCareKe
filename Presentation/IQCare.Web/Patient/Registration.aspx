@@ -179,6 +179,10 @@
             }
         }
     </script>
+    <style>
+        .radioyesno input[type="radio"] {clip: unset !important;height: auto;width: auto;}
+        input[type="radio"]{clip: unset;height: auto;width: auto;}
+    </style>
     <div class="row">
         <span class="text-capitalize pull-left glyphicon-text-size= fa-2x" id="tHeading"
             runat="server"><i class="fa fa-cubes fa-2x" aria-hidden="true"></i><span class="text-info">Patient Registration</span></span>

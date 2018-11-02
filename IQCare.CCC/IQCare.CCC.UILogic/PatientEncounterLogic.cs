@@ -10,6 +10,8 @@ using System.Web;
 using System.Web.Script.Serialization;
 using System.Web.UI.WebControls;
 using static Entities.CCC.Encounter.PatientEncounter;
+using Interface.CCC.Screening;
+using Entities.CCC.Screening;
 
 namespace IQCare.CCC.UILogic
 {
@@ -69,6 +71,14 @@ namespace IQCare.CCC.UILogic
             var vacc = parser.Deserialize<List<Vaccines>>(Vaccines);
             var allergy = parser.Deserialize<List<Allergies>>(Allergies);
             int val = patientEncounter.saveChronicIllness(masterVisitID, patientID, userID, chrIllness, vacc, allergy);
+        }
+
+        public int saveNeonatalMilestone(int masterVisitID,int patientID,int userID, string mlAssessed, string mlOnsetDate, string mlAchieved, string mlStatus, string mlComment)
+        {
+            IPatientEncounter patientEncounter = (IPatientEncounter)ObjectFactory.CreateInstance("BusinessProcess.CCC.BPatientEncounter, BusinessProcess.CCC");
+            JavaScriptSerializer parser = new JavaScriptSerializer();
+            int Val = patientEncounter.saveNeonatalMilestone(masterVisitID, patientID, userID, mlAssessed, mlOnsetDate, mlAchieved,mlStatus,mlComment);
+            return Val;
         }
 
         public void savePatientEncounterPhysicalExam(string masterVisitID, string patientID, string userID, string physicalExam, string generalExam)
@@ -478,6 +488,16 @@ namespace IQCare.CCC.UILogic
                             theFrmRoot.NavigateUrl = "PatientEncounter.aspx?visitId=" + theDR["visitID"].ToString();
                             theFrmRoot.ImageUrl = "~/images/15px-Yes_check.svg.png";
                         }
+                        if (theDR["VisitName"].ToString() == "Adherence Barriers")
+                        {
+                            theFrmRoot.NavigateUrl = "../Adherence/AdherenceBarriers.aspx?visitId=" + theDR["visitID"].ToString();
+                            theFrmRoot.ImageUrl = "~/images/15px-Yes_check.svg.png";
+                        }
+                        if (theDR["VisitName"].ToString() == "Enhance Adherence Counselling")
+                        {
+                            theFrmRoot.NavigateUrl = "PatientEncounter.aspx?visitId=" + theDR["visitID"].ToString()+ "#EnhanceAdherence";
+                            theFrmRoot.ImageUrl = "~/images/15px-Yes_check.svg.png";
+                        }
                         if (theDR["VisitName"].ToString() == "Triage")
                         {
                             theFrmRoot.NavigateUrl = "VitalSigns.aspx?visitId=" + theDR["visitID"].ToString();
@@ -615,6 +635,97 @@ namespace IQCare.CCC.UILogic
             //Excel.ExcelUtlity obj = new Excel.ExcelUtlity();
             //obj.WriteDataTableToExcel(theDT, "Sheet1", "C:\\Reports\\" + (category.Replace("(","")).Replace(")","") + "_" + (DateTime.Now.ToString("dd/MM/yyyy").Replace("/","_")).Replace(":","_") + ".xlsx", "Details");
             //obj.openExcel("C:\\Reports\\" + (category.Replace("(", "")).Replace(")", "") + "_" + (DateTime.Now.ToString("dd/MM/yyyy").Replace("/","_")).Replace(":","_") + ".xlsx");
+        }
+
+
+        public DataTable loadPatientVitalSigns(string PatientMasterVisitID, string PatientID)
+        {
+            IPatientEncounter patientEncounter = (IPatientEncounter)ObjectFactory.CreateInstance("BusinessProcess.CCC.BPatientEncounter, BusinessProcess.CCC");
+            return patientEncounter.getPatientPreviousTriage(PatientMasterVisitID, PatientID);
+        }
+
+        public DataTable loadPatientMilestones(string PatientID)
+        {
+            IPatientEncounter patientEncounter = (IPatientEncounter)ObjectFactory.CreateInstance("BusinessProcess.CCC.BPatientEncounter, BusinessProcess.CCC");
+            return patientEncounter.getPatientMilestones(PatientID);
+        }
+
+        public DataTable loadImmunizationHistory(string PatientMasterVisitID, string PatientID)
+        {
+            IPatientEncounter patientEncounter = (IPatientEncounter)ObjectFactory.CreateInstance("BusinessProcess.CCC.BPatientEncounter, BusinessProcess.CCC");
+            return patientEncounter.getImmunizationHistory(PatientMasterVisitID, PatientID);
+        }
+
+        public DataTable loadTannersStaging(string PatientMasterVisitID, string PatientID)
+        {
+            IPatientEncounter patientEncounter = (IPatientEncounter)ObjectFactory.CreateInstance("BusinessProcess.CCC.BPatientEncounter, BusinessProcess.CCC");
+            return patientEncounter.getTannersStaging(PatientMasterVisitID, PatientID);
+        }
+
+        public int updateScreeningYesNo(int patientId, int patientMasterVisitId, int screeningType, int screeningCategory, int screeningValue, int userId)
+        {
+            IPatientScreeningManager _patientScreening = (IPatientScreeningManager)ObjectFactory.CreateInstance("BusinessProcess.CCC.Screening.BPatientScreeningManager, BusinessProcess.CCC");
+            try
+            {
+                //(screening>0) ? update:add
+                int screeningResult = _patientScreening.checkScreeningByScreeningCategoryId(patientId, screeningType, screeningCategory);
+                if (screeningResult > 0)
+                {
+                    var PS = new PatientScreening()
+                    {
+                        PatientId = patientId,
+                        PatientMasterVisitId = patientMasterVisitId,
+                        VisitDate = DateTime.Today,
+                        ScreeningTypeId = screeningType,
+                        ScreeningDone = true,
+                        ScreeningDate = DateTime.Today,
+                        ScreeningCategoryId = screeningCategory,
+                        ScreeningValueId = screeningValue,
+                        Comment = null,
+                        CreatedBy = userId,
+                        Id = screeningResult
+                    };
+                    return _patientScreening.updatePatientScreeningById(PS);
+                }
+                else
+                {
+                    var PS = new PatientScreening()
+                    {
+                        PatientId = patientId,
+                        PatientMasterVisitId = patientMasterVisitId,
+                        VisitDate = DateTime.Today,
+                        ScreeningTypeId = screeningType,
+                        ScreeningDone = true,
+                        ScreeningDate = DateTime.Today,
+                        ScreeningCategoryId = screeningCategory,
+                        ScreeningValueId = screeningValue,
+                        Comment = null,
+                        CreatedBy = userId
+                    };
+                    return _patientScreening.AddPatientScreening(PS);
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+        public int savePatientEncounter(int patientID, int patientMasterVisitID, string EncounterType, int ServiceAreaId, int userId)
+        {
+            int val = 0;
+            IPatientEncounter patientEncounter = (IPatientEncounter)ObjectFactory.CreateInstance("BusinessProcess.CCC.BPatientEncounter, BusinessProcess.CCC");
+            PatientEncounterManager patientEncounterManager = new PatientEncounterManager();
+            encounterTypeId = patientEncounterManager.GetPatientEncounterId("EncounterType", EncounterType.ToLower());
+            var foundEncounter = patientEncounterManager.GetEncounterIfExists(Convert.ToInt32(patientID), Convert.ToInt32(patientMasterVisitID), Convert.ToInt32(encounterTypeId));
+            if (foundEncounter != null)
+            {
+                result = foundEncounter.Id;
+            }
+            else
+            {
+                result = patientEncounterManager.AddpatientEncounter(Convert.ToInt32(patientID),Convert.ToInt32(patientMasterVisitID), encounterTypeId, 203,userId);
+            }
+            return (result > 0) ? val : 0;
         }
     }
 }

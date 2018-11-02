@@ -6,6 +6,33 @@
         return String.Format(@"<i class='{0}'></i>", iconfont);
     }
 </script>
+<style type="text/css">
+    
+    .PharmacyDispensing
+    {
+        font-size: 12px;
+        font-weight: bold;
+        padding: 10px;
+        color: #777;
+        font-family: sans-serif;
+        -webkit-text-size-adjust: 100%;
+        -ms-text-size-adjust: 100%;
+    }
+    
+    .PharmacyDispensinghover
+    {
+        color: red;
+        background-color: #E1E3E9;
+        text-decoration: none;
+        width: 100%;
+    }
+    
+    .PharmacyDispensing a
+    {
+        color: #777;
+    }
+
+</style>
 <!-- .start menu building here -->
 <%-- <div class="row bg-primary">--%>
 <div class="navbar navbar-default">
@@ -74,6 +101,7 @@
                         Value="Facility Statistics" NavigateUrl="~/Statistics/Facility.aspx"></asp:MenuItem>
                 </Items>
             </asp:Menu>
+            
         </div>
         <!-- .nav-collapse collapse -->
     </div>
@@ -94,4 +122,32 @@
     <div class="col-md-8">
     </div>
 </div>
+
+<div class="container-fluid">
+<div class="row">
+    <div class="col-md-4">
+    <asp:Menu ID="PharmacyDispensingMenu" runat="server" Orientation="Horizontal" 
+                ForeColor="Gray" Width="50%" RenderingMode="Table" StaticEnableDefaultPopOutImage="False"
+                Font-Bold="True" Visible="False" DynamicMenuStyle-CssClass="dropdown-menu" BackColor="#F8F8F8">
+                <StaticMenuItemStyle Height="40px" />
+                <DynamicMenuItemStyle CssClass="PharmacyDispensing" Height="25px" HorizontalPadding="5px" />
+                
+                <Items>
+                    <asp:MenuItem Text="Dashboard" Value="Dashboard" NavigateUrl="~/PMSCM/frmPharmacy_Dashboard.aspx">
+                    </asp:MenuItem>
+                    <asp:MenuItem Text="Dispense Drugs" Value="Dispense" NavigateUrl="~/PMSCM/frmPharmacyDispense_FindPatient.aspx">
+                    </asp:MenuItem>
+                    <%--<asp:MenuItem Text="Stock Summary" Value="StockSummaryWeb" NavigateUrl="~/PharmacyDispense/frmPharmacy_StockSummary.aspx">
+                    </asp:MenuItem>
+                    <asp:MenuItem Text="Stock Management" Value="StockManagement" NavigateUrl="~/PharmacyDispense/frmPharmacy_StockManagement.aspx">
+                    </asp:MenuItem>
+                    <asp:MenuItem NavigateUrl="~/PharmacyDispense/frmPharmacy_ReferenceMaterials.aspx"
+                        Text="Reference Materials" Value="Reference Materials"></asp:MenuItem>
+                    <asp:MenuItem NavigateUrl="javascript:PopupCenterL2('International Quality Care Patient Management and Monitoring System','1000','650');"
+                        Text="ADR Reporting" Value="ADR Reporting"></asp:MenuItem>--%>
+                </Items>
+            </asp:Menu>
+        </div>
+</div>
 <!-- .row -->
+    </div>

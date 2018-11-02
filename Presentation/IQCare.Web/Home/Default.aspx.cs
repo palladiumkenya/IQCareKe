@@ -5,12 +5,13 @@ using System.Web.UI.WebControls;
 using IQCare.Web.UILogic;
 using System.Data;
 using System.Web;
-
+using Application.Presentation;
 namespace IQCare.Web.Home
 {
     public partial class Default : System.Web.UI.Page
     {
         CurrentSession ThisSession;
+        
         protected void Page_Load(object sender, EventArgs e)
         {
             ThisSession = CurrentSession.Current;
@@ -29,7 +30,10 @@ namespace IQCare.Web.Home
         /// </summary>
         private void Init_page()
         {
+            
             Session["PatientId"] = 0;
+            Session["IQCareAppVersionName"] = GblIQCare.VersionName;
+            Session["IQCareAppReleaseDate"] = GblIQCare.ReleaseDate;
             base.Session["TechIdentifier"] = null;
             //createserviceButtons();
             AddServiceButtons();
@@ -110,12 +114,17 @@ namespace IQCare.Web.Home
                 }
                 else if (landScape.ClickAction == RedirectAction.ModuleAction)
                 {
-                    string folderName = landScape.ServiceAreaName.Replace(" ", string.Empty);
+                    string folderName = landScape.ServiceAreaName.Replace(" ", string.Empty).Replace("/", string.Empty);
                     if (System.IO.File.Exists(Server.MapPath(string.Format("~/{0}/Home.aspx", folderName))))
                     {
                         Guid g = Guid.NewGuid();
                         row["ResourceUrl"] = string.Format("../{1}/Home.aspx?key={0}", g.ToString(), folderName);
 
+                    }
+                    else if(System.IO.File.Exists(Server.MapPath(string.Format("~/{0}/frmPharmacy_Dashboard.aspx", folderName))))
+                    {
+                        Guid g = Guid.NewGuid();
+                        row["ResourceUrl"] = string.Format("../{1}/frmPharmacy_Dashboard.aspx?key={0}", g.ToString(), folderName);
                     }
                     else { row["ResourceUrl"] = ""; }
                 }

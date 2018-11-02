@@ -35,3 +35,20 @@ from LookupMasterItem as lmi
 
   END
 
+  
+  
+  if exists(select * from LookupItem where Name='SecondarySchool')
+BEGIN
+update LookupItem set Name='Secondary'  where DisplayName='Secondary School'
+
+
+
+  END
+
+    if exists(select * from LookupItem where Name='PrimarySchool')
+BEGIN
+update LookupItem set Name='Primary'  where DisplayName='Primary School'
+
+
+
+  END

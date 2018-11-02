@@ -43,7 +43,7 @@ namespace IQCare.HTS.BusinessProcess.CommandHandlers
                 PersonOccupationService pocc = new PersonOccupationService(_unitOfWork);
                 EducationLevelService educationLevelService = new EducationLevelService(_unitOfWork);
                 EncounterTestingService encounterTestingService = new EncounterTestingService(_unitOfWork, _htsUnitOfWork);
-
+                PersonDemographicsService personDemographicsService = new PersonDemographicsService(_unitOfWork);
                 for (int i = 0; i < request.CLIENTS.Count; i++)
                 {
                     for (int j = 0; j < request.CLIENTS[i].PATIENT_IDENTIFICATION.INTERNAL_PATIENT_ID.Count; j++)
@@ -68,15 +68,7 @@ namespace IQCare.HTS.BusinessProcess.CommandHandlers
                         string firstName = request.CLIENTS[i].PATIENT_IDENTIFICATION.PATIENT_NAME.FIRST_NAME;
                         string middleName = string.IsNullOrWhiteSpace(request.CLIENTS[i].PATIENT_IDENTIFICATION.PATIENT_NAME.MIDDLE_NAME) ? "" : request.CLIENTS[i].PATIENT_IDENTIFICATION.PATIENT_NAME.MIDDLE_NAME;
                         string lastName = request.CLIENTS[i].PATIENT_IDENTIFICATION.PATIENT_NAME.LAST_NAME;
-
-
-                        string nickName = (request.CLIENTS[i].PATIENT_IDENTIFICATION.PATIENT_NAME.NICK_NAME==null) ? "" : request.CLIENTS[i].PATIENT_IDENTIFICATION.PATIENT_NAME.NICK_NAME.ToString();
-                        string ward = (request.CLIENTS[i].PATIENT_IDENTIFICATION.PATIENT_ADDRESS.PHYSICAL_ADDRESS.WARD==null) ? "" : request.CLIENTS[i].PATIENT_IDENTIFICATION.PATIENT_ADDRESS.PHYSICAL_ADDRESS.WARD.ToString();
-                        string county = (request.CLIENTS[i].PATIENT_IDENTIFICATION.PATIENT_ADDRESS.PHYSICAL_ADDRESS.COUNTY==null)? "": request.CLIENTS[i].PATIENT_IDENTIFICATION.PATIENT_ADDRESS.PHYSICAL_ADDRESS.COUNTY.ToString();
-                        string subcounty = (request.CLIENTS[i].PATIENT_IDENTIFICATION.PATIENT_ADDRESS.PHYSICAL_ADDRESS.SUB_COUNTY==null)? "": request.CLIENTS[i].PATIENT_IDENTIFICATION.PATIENT_ADDRESS.PHYSICAL_ADDRESS.SUB_COUNTY.ToString();
-                        string educationlevel = (request.CLIENTS[i].PATIENT_IDENTIFICATION.EDUCATIONLEVEL==null)?"": request.CLIENTS[i].PATIENT_IDENTIFICATION.EDUCATIONLEVEL.ToString();
-                        string educationoutcome = (request.CLIENTS[i].PATIENT_IDENTIFICATION.EDUCATIONOUTCOME==null) ? "" : request.CLIENTS[i].PATIENT_IDENTIFICATION.EDUCATIONOUTCOME.ToString();
-                        string occupation = (request.CLIENTS[i].PATIENT_IDENTIFICATION.OCCUPATION==null) ? "": request.CLIENTS[i].PATIENT_IDENTIFICATION.OCCUPATION.ToString();
+                        string nickName = (request.CLIENTS[i].PATIENT_IDENTIFICATION.PATIENT_NAME.NICK_NAME == null) ? "" : request.CLIENTS[i].PATIENT_IDENTIFICATION.PATIENT_NAME.NICK_NAME.ToString();
                         int sex = request.CLIENTS[i].PATIENT_IDENTIFICATION.SEX;
                         DateTime dateOfBirth = DateTime.ParseExact(request.CLIENTS[i].PATIENT_IDENTIFICATION.DATE_OF_BIRTH, "yyyyMMdd", null);
                         string dobPrecision = request.CLIENTS[i].PATIENT_IDENTIFICATION.DATE_OF_BIRTH_PRECISION;
@@ -84,6 +76,13 @@ namespace IQCare.HTS.BusinessProcess.CommandHandlers
                         int maritalStatusId = request.CLIENTS[i].PATIENT_IDENTIFICATION.MARITAL_STATUS;
                         string landmark = request.CLIENTS[i].PATIENT_IDENTIFICATION.PATIENT_ADDRESS.PHYSICAL_ADDRESS
                             .LANDMARK;
+                       
+                        string ward = (request.CLIENTS[i].PATIENT_IDENTIFICATION.PATIENT_ADDRESS.PHYSICAL_ADDRESS.WARD == null) ? "" : request.CLIENTS[i].PATIENT_IDENTIFICATION.PATIENT_ADDRESS.PHYSICAL_ADDRESS.WARD.ToString();
+                        string county = (request.CLIENTS[i].PATIENT_IDENTIFICATION.PATIENT_ADDRESS.PHYSICAL_ADDRESS.COUNTY == null) ? "" : request.CLIENTS[i].PATIENT_IDENTIFICATION.PATIENT_ADDRESS.PHYSICAL_ADDRESS.COUNTY.ToString();
+                        string subcounty = (request.CLIENTS[i].PATIENT_IDENTIFICATION.PATIENT_ADDRESS.PHYSICAL_ADDRESS.SUB_COUNTY == null) ? "" : request.CLIENTS[i].PATIENT_IDENTIFICATION.PATIENT_ADDRESS.PHYSICAL_ADDRESS.SUB_COUNTY.ToString();
+                        string educationlevel = (request.CLIENTS[i].PATIENT_IDENTIFICATION.EDUCATIONLEVEL == null) ? "" : request.CLIENTS[i].PATIENT_IDENTIFICATION.EDUCATIONLEVEL.ToString();
+                        string educationoutcome = (request.CLIENTS[i].PATIENT_IDENTIFICATION.EDUCATIONOUTCOME == null) ? "" : request.CLIENTS[i].PATIENT_IDENTIFICATION.EDUCATIONOUTCOME.ToString();
+                        string occupation = (request.CLIENTS[i].PATIENT_IDENTIFICATION.OCCUPATION == null) ? "" : request.CLIENTS[i].PATIENT_IDENTIFICATION.OCCUPATION.ToString();
                         string physicalAddress = request.CLIENTS[i].PATIENT_IDENTIFICATION.PATIENT_ADDRESS.POSTAL_ADDRESS;
                         string mobileNumber = request.CLIENTS[i].PATIENT_IDENTIFICATION.PHONE_NUMBER;
                         string enrollmentNo = string.Empty;
@@ -199,6 +198,7 @@ namespace IQCare.HTS.BusinessProcess.CommandHandlers
                                         physicalAddress, mobileNumber);
                             }
 
+                          
                             /**
                              * Encounter
                              * 
@@ -391,7 +391,7 @@ namespace IQCare.HTS.BusinessProcess.CommandHandlers
                                             {
                                                 DateTime dateToBeEnrolled = DateTime.ParseExact(request.CLIENTS[i].ENCOUNTER.REFERRAL.DATE_TO_BE_ENROLLED, "yyyyMMdd", null);
                                                 string facilityReferred = request.CLIENTS[i].ENCOUNTER.REFERRAL.REFERRED_TO;
-
+                                                int MFLCode = 0;
                                                 var referralReason = await _unitOfWork.Repository<LookupItemView>()
                                                     .Get(x => x.MasterName == "ReferralReason" &&
                                                               x.ItemName == "CCCEnrollment").ToListAsync();
@@ -411,9 +411,19 @@ namespace IQCare.HTS.BusinessProcess.CommandHandlers
                                                     }
                                                     else
                                                     {
+                                                        if (searchFacility.Count > 0)
+                                                        {
+                                                            MFLCode = Convert.ToInt32(searchFacility[0].MFLCode);
+
+
+                                                        }
+                                                        else
+                                                        {
+                                                            MFLCode = 0;
+                                                        }
                                                         await encounterTestingService.AddReferral(identifiers[0].PersonId,
                                                             facility[0].FacilityID, 2,
-                                                            Convert.ToInt32(searchFacility[0].MFLCode),
+                                                            MFLCode,
                                                             referralReason[0].ItemId, userId, dateToBeEnrolled, "");
                                                     }
                                                 }
@@ -560,7 +570,7 @@ namespace IQCare.HTS.BusinessProcess.CommandHandlers
                                 {
                                     DateTime dateToBeEnrolled = DateTime.ParseExact(request.CLIENTS[i].ENCOUNTER.REFERRAL.DATE_TO_BE_ENROLLED, "yyyyMMdd", null);
                                     string facilityReferred = request.CLIENTS[i].ENCOUNTER.REFERRAL.REFERRED_TO;
-
+                                    int MFLCode = 0;
                                     var referralReason = await _unitOfWork.Repository<LookupItemView>()
                                         .Get(x => x.MasterName == "ReferralReason" &&
                                                   x.ItemName == "CCCEnrollment").ToListAsync();
@@ -579,8 +589,18 @@ namespace IQCare.HTS.BusinessProcess.CommandHandlers
                                         }
                                         else
                                         {
+                                            if (searchFacility.Count > 0)
+                                            {
+                                                MFLCode = Convert.ToInt32(searchFacility[0].MFLCode);
+
+
+                                            }
+                                            else
+                                            {
+                                                MFLCode = 0;
+                                            }
                                             await encounterTestingService.AddReferral(identifiers[0].PersonId,
-                                                facility[0].FacilityID, 2, Convert.ToInt32(searchFacility[0].MFLCode),
+                                                facility[0].FacilityID, 2, MFLCode,
                                                 referralReason[0].ItemId, userId, dateToBeEnrolled, "");
                                         }
                                     }
@@ -597,8 +617,18 @@ namespace IQCare.HTS.BusinessProcess.CommandHandlers
                                         }
                                         else
                                         {
+                                            if (searchFacility.Count > 0)
+                                            {
+                                                MFLCode = Convert.ToInt32(searchFacility[0].MFLCode);
+
+
+                                            }
+                                            else
+                                            {
+                                                MFLCode = 0;
+                                            }
                                             await encounterTestingService.AddReferral(identifiers[0].PersonId,
-                                                facility[0].FacilityID, 2, Convert.ToInt32(searchFacility[0].MFLCode),
+                                                facility[0].FacilityID, 2, MFLCode,
                                                 referralReason[0].ItemId, userId, dateToBeEnrolled, facilityReferred);
                                         }
                                     }
@@ -830,7 +860,7 @@ namespace IQCare.HTS.BusinessProcess.CommandHandlers
                                     {
                                         DateTime dateToBeEnrolled = DateTime.ParseExact(request.CLIENTS[i].ENCOUNTER.REFERRAL.DATE_TO_BE_ENROLLED, "yyyyMMdd", null);
                                         string facilityReferred = request.CLIENTS[i].ENCOUNTER.REFERRAL.REFERRED_TO;
-
+                                        int MFLCode = 0;
                                         var referralReason = await _unitOfWork.Repository<LookupItemView>()
                                             .Get(x => x.MasterName == "ReferralReason" &&
                                                       x.ItemName == "CCCEnrollment").ToListAsync();
@@ -849,9 +879,19 @@ namespace IQCare.HTS.BusinessProcess.CommandHandlers
                                             }
                                             else
                                             {
+                                                if (searchFacility.Count > 0)
+                                                {
+                                                    MFLCode = Convert.ToInt32(searchFacility[0].MFLCode);
+
+
+                                                }
+                                                else
+                                                {
+                                                    MFLCode = 0;
+                                                }
                                                 await encounterTestingService.AddReferral(identifiers[0].PersonId,
                                                     facility[0].FacilityID, 2,
-                                                    Convert.ToInt32(searchFacility[0].MFLCode),
+                                                    MFLCode,
                                                     referralReason[0].ItemId, userId, dateToBeEnrolled, "");
                                             }
                                         }

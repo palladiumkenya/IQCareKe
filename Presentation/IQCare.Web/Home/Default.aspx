@@ -44,15 +44,17 @@
             var appVersionName = '<%= GblIQCare.VersionName %>';
             var appReleaseDate = '<%= GblIQCare.ReleaseDate %>';
 
+           
+            var appVersionName = '<%= Session["IQCareAppVersionName"] %>';
+            var appReleaseDate = '<%= Session["IQCareAppReleaseDate"] %>';
+
             localStorage.setItem('appUserId', appUserId);
             localStorage.setItem('appUserName', appUserName);
             localStorage.setItem('appLocationId', appLocationId);
             localStorage.setItem('appLocation', appLocation);
             localStorage.setItem('appPosID', appPosID);
-
-            localStorage.setItem('appVersionName', appVersionName);
+              localStorage.setItem('appVersionName', appVersionName);
             localStorage.setItem('appReleaseDate', appReleaseDate);
-
             console.log(localStorage);
         });
     </script>

@@ -63,8 +63,6 @@ namespace IQCare.Common.BusinessProcess.Commands.Setup
         public string LAST_NAME { get; set; }
 
         public string NICK_NAME { get; set; }
-
-
     }
 
     public class INTERNAL_PATIENT_ID

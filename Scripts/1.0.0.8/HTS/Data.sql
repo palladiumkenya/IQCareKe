@@ -90,16 +90,6 @@ go
 
 
 
-if not exists(select * from LookupMaster where  Name like 'HTSOccupation')
-BEGIN
-insert into LookupMaster(Name,DisplayName,DeleteFlag)
-values('HTSOccupation','HTSOccupation','0')
-END
-go
-
-
-
-
 
 if not exists(select * from LookupItem  where  Name like 'Transportation')
 BEGIN
@@ -299,6 +289,81 @@ where lm.Name='HTSOccupation' and lit.Name='Unemployed'
 END
 END
 
+if not exists(select * from LookupMaster where  Name like 'HTSOccupation')
+BEGIN
+insert into LookupMaster(Name,DisplayName,DeleteFlag)
+values('HTSOccupation','HTSOccupation','0')
+END
+go
+
+if not exists(select * from LookupItem  where  Name like 'Waiter')
+BEGIN
+insert into LookupItem(Name,DisplayName,DeleteFlag)
+values('Waiter','Waiter','0')
+END
+go
+if  exists(select * from LookupItem where Name like 'Waiter')
+BEGIN
+if not Exists (select * from LookupMasterItem  lmi inner join LookupMaster lm on lm.Id=lmi.LookupMasterId
+inner join LookupItem lit on lit.Id=lmi.LookupItemId where 
+lit.Name='Waiter' and lm.Name='HTSOccupation')
+BEGIN
+
+
+insert into LookupMasterItem 
+select lm.Id,lit.Id,lit.DisplayName,'9' as OrdRank from LookupMaster lm,LookupItem lit
+where lm.Name='HTSOccupation' and lit.Name='Waiter'
+END
+END
+
+
+
+
+if not exists(select * from LookupItem  where  Name like 'Fisherfolk')
+BEGIN
+insert into LookupItem(Name,DisplayName,DeleteFlag)
+values('Fisherfolk','Fisher folk','0')
+END
+go
+if  exists(select * from LookupItem where Name like 'Fisherfolk')
+BEGIN
+if not Exists (select * from LookupMasterItem  lmi inner join LookupMaster lm on lm.Id=lmi.LookupMasterId
+inner join LookupItem lit on lit.Id=lmi.LookupItemId where 
+lit.Name='Fisherfolk' and lm.Name='HTSOccupation')
+BEGIN
+
+
+insert into LookupMasterItem 
+select lm.Id,lit.Id,lit.DisplayName,'10' as OrdRank from LookupMaster lm,LookupItem lit
+where lm.Name='HTSOccupation' and lit.Name='Fisherfolk'
+END
+END
+
+
+
+
+if not exists(select * from LookupItem  where  Name like 'Farmer')
+BEGIN
+insert into LookupItem(Name,DisplayName,DeleteFlag)
+values('Farmer','Farmer','0')
+END
+go
+if  exists(select * from LookupItem where Name like 'Farmer')
+BEGIN
+if not Exists (select * from LookupMasterItem  lmi inner join LookupMaster lm on lm.Id=lmi.LookupMasterId
+inner join LookupItem lit on lit.Id=lmi.LookupItemId where 
+lit.Name='Farmer' and lm.Name='HTSOccupation')
+BEGIN
+
+
+insert into LookupMasterItem 
+select lm.Id,lit.Id,lit.DisplayName,'11' as OrdRank from LookupMaster lm,LookupItem lit
+where lm.Name='HTSOccupation' and lit.Name='Farmer'
+END
+END
+
+
+
 
 
 
@@ -320,7 +385,7 @@ BEGIN
 
 
 insert into LookupMasterItem 
-select lm.Id,lit.Id,lit.DisplayName,9 as OrdRank from LookupMaster lm,LookupItem lit
+select lm.Id,lit.Id,lit.DisplayName,12 as OrdRank from LookupMaster lm,LookupItem lit
 where lm.Name='HTSOccupation' and lit.Name='Other'
 END
 END
