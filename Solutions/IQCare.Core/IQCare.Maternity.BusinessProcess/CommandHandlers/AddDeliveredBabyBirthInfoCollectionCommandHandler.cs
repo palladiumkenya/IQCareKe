@@ -35,7 +35,7 @@ namespace IQCare.Maternity.BusinessProcess.CommandHandlers
 
                 foreach (var deliveredBabyBirthInfo in request.DeliveredBabyBirthInfoCollection)
                 {
-                    var deliveredBabyBirthInformation = _mapper.Map<DeliveredBabyBirthInformation>(request);
+                    var deliveredBabyBirthInformation = _mapper.Map<DeliveredBabyBirthInformation>(deliveredBabyBirthInfo);
                     await _maternityUnitOfWork.Repository<DeliveredBabyBirthInformation>().AddAsync(deliveredBabyBirthInformation);
 
                     if (deliveredBabyBirthInfo.ApgarScores != null)
