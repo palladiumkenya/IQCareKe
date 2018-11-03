@@ -10,7 +10,7 @@ namespace IQCare.Maternity.BusinessProcess.Commands.Maternity
     {
         public int PatientMasterVisitId { get;  set; }
         public int ProfileId { get;  set; }
-        public int DurationOfLabour { get;  set; }
+        public string DurationOfLabour { get;  set; }
         public DateTime DateOfDelivery { get;  set; }
         public DateTime TimeOfDelivery { get;  set; }
         public int? ModeOfDelivery { get;  set; }
