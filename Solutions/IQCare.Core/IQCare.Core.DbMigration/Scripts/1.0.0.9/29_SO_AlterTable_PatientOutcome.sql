@@ -3,6 +3,7 @@ IF EXISTS(SELECT 1 FROM sys.columns
           AND Object_ID = Object_ID(N'dbo.PatientOutcome'))
 BEGIN
     -- Column Exists
+	ALTER TABLE dbo.PatientOutCome DROP CONSTRAINT IF EXISTS [FK_PatientOutcome_PatientEncounter]
 	ALTER TABLE dbo.PatientOutcome DROP COLUMN PatientEncounterId;
 END
 
@@ -19,7 +20,7 @@ BEGIN TRANSACTION
 ALTER TABLE PatientOutcome ADD Id_new INT IDENTITY(1, 1) NOT NULL 
 GO
 
-ALTER TABLE PatientOutcome DROP CONSTRAINT  [PK_PatientOutCome_Id]
+ALTER TABLE PatientOutcome DROP CONSTRAINT IF EXISTS  [PK_PatientOutCome_Id]
 ALTER TABLE PatientOutcome DROP COLUMN Id
 GO
 
