@@ -19,6 +19,7 @@ import {ReferralCommand} from './commands/referral-command';
 import {NextAppointmentCommand} from './commands/next-appointment-command';
 import {DischargeCommand} from './commands/discharge-command';
 import {DiagnosisCommand} from './commands/diagnosis-command';
+import {MotherProfileCommand} from './commands/mother-profile-command';
 
 @Component({
     selector: 'app-maternity',
@@ -36,7 +37,7 @@ export class MaternityComponent implements OnInit {
     dischargeFormGroup: FormArray;
     formType: string;
     apgarSCore: ApgarScoreCommand[] = [];
-    administerDrugs: AdministerDrugInfo[] = [];
+    AdministredDrugs: AdministerDrugInfo[] = [];
     lookupItems$: Subscription;
     apgarOptions: any[] = [];
     drugAdminOptions: any[] = [];
@@ -255,15 +256,15 @@ export class MaternityComponent implements OnInit {
         const visitDetailsCommand: MaternityVisitDetailsCommand = {
             patientId: this.patientId,
             patientMasterVisitId: this.patientMasterVisitId,
-            ageAtMenarche: null,
-            pregnancyId: null,
-            visitNumber: null,
-            visitType: null,
-            treatedForSyphilis: null,
+            ageAtMenarche: 0,
+            pregnancyId: 0,
+            visitNumber: 0,
+            visitType: 0,
+            treatedForSyphilis: 0,
             deleteFlag: false,
             createDate: new Date(),
             createdBy: this.userId,
-            postpartum: null
+            postpartum: 'na'
         };
 
       console.log(this.visitDetailsFormGroup)  ;
@@ -271,6 +272,8 @@ export class MaternityComponent implements OnInit {
             Id: 0,
             PatientId: this.patientId,
             PatientMasterVisitId: this.patientMasterVisitId,
+            Outcome: 0,
+            DateOfOutcome: null,
             Lmp: this.visitDetailsFormGroup.value[1]['dateLMP'],
             Edd: new Date(this.visitDetailsFormGroup.value[1]['dateEDD']),
             Gestation: this.visitDetailsFormGroup.value[1]['gestation'],
@@ -293,13 +296,13 @@ export class MaternityComponent implements OnInit {
 
         const maternityDeliveryCommand: MaternityDeliveryCommand = {
             PatinetMasterVisitId: this.patientMasterVisitId,
-            ProfileId: 0,
-            DurationOfLabour: this.diagnosisFormGroup.value[1]['labourDuration'],
+            ProfileId: 7,
+            DurationOfLabour: parseInt(this.diagnosisFormGroup.value[1]['labourDuration'], 10),
             DateOfDelivery: this.diagnosisFormGroup.value[1]['deliveryDate'],
             TimeOfDelivery: this.diagnosisFormGroup.value[1]['deliveryTime'],
             ModeOfDelivery: this.diagnosisFormGroup.value[1]['deliveryMode'],
             PlacentaComplete: this.diagnosisFormGroup.value[1]['placentaComplete'],
-            BloodLossCapacity: this.diagnosisFormGroup.value[1]['bloodLossCount'],
+            BloodLossCapacity: parseInt(this.diagnosisFormGroup.value[1]['bloodLossCount'], 10),
             BloodLossClassification: this.diagnosisFormGroup.value[1]['bloodLoss'],
             MotherCondition: this.diagnosisFormGroup.value[1]['deliveryCondition'],
             MaternalDeathAudited: this.diagnosisFormGroup.value[1]['maternalDeathsAudited'],
@@ -345,24 +348,25 @@ export class MaternityComponent implements OnInit {
         const infantArv = this.drugAdminOptions.filter(x => x.itemName == 'Infant Provided With ARV prophylaxis');
         const cotrimoxazole = this.drugAdminOptions.filter(x => x.itemName == 'Cotrimoxazole');
 
-        this.administerDrugs.push(
+        this.AdministredDrugs.push(
             {Id: vitaminA[0].itemId, Value: this.maternalDrugAdministrationForGroup.value[0]['vitaminASupplement'],
-                Description: 'na'},
-            {Id: haartAnc[0].itemId, Value: this.maternalDrugAdministrationForGroup.value[0]['Started HAART in ANC'],
-                Description:  'na'},
+                Description: 'Vitamin A Supplementation'},
+            {Id: haartAnc[0].itemId, Value: this.maternalDrugAdministrationForGroup.value[0]['HaartANC'],
+                Description:  'Started HAART in ANC'},
             {Id: cotrimoxazole[0].itemId, Value: this.maternalDrugAdministrationForGroup.value[0]['cotrimoxazole'],
-                Description:  'na'},
+                Description:  'ARVs Started in Maternity'},
             {Id: maternityArv[0].itemId, Value: this.maternalDrugAdministrationForGroup.value[0]['ARVStartedMaternity'],
-                Description:  'na'},
+                Description:  'Infant Provided With ARV prophylaxis'},
             {Id: infantArv[0].itemId, Value: this.maternalDrugAdministrationForGroup.value[0]['ARVStartedMaternity'],
-                Description:  'na'}
+                Description:  'Cotrimoxazole'}
         );
+
         const drugAdministrationCommand: DrugAdministrationCommand = {
             Id: 0,
             PatientId: this.patientId,
             PatientMasterVisitId: this.patientMasterVisitId,
             CreatedBy: this.userId,
-            AdministerDrugs: this.administerDrugs
+            AdministredDrugs: this.AdministredDrugs
         };
 
         const infantFeeding = this.counsellingOptions.filter(x => x.itemName == 'Infant Feeding');
@@ -411,7 +415,11 @@ export class MaternityComponent implements OnInit {
 
         };
 
-        const matMotherProfile = this.matService.savePregnancyProfile(pregnancyCommand);
+        const motherProfileCommand: MotherProfileCommand = {
+            PatientPregnancy: pregnancyCommand
+        };
+
+       // const matMotherProfile = this.matService.savePregnancyProfile(pregnancyCommand);
         const matVisitDetails = this.matService.saveVisitDetails(visitDetailsCommand);
         const matDiagnosis = this.matService.saveDiagnosis(diagnosisCommand);
         const matDrugAdministartion = this.matService.saveMaternalDrugAdministration(drugAdministrationCommand);
@@ -419,11 +427,13 @@ export class MaternityComponent implements OnInit {
         const matDischarge = this.matService.saveDischarge(dischargeCommand);
         const matReferral = this.matService.saveReferrals(referralCommand);
         const matNextAppointment = this.matService.saveNextAppointment(nextAppointmentCommand);
+        const matDelivery = this.matService.savePatientDelivery(maternityDeliveryCommand)
 
-        forkJoin([matVisitDetails,
-            matMotherProfile,
-            matDiagnosis,
-           // matDrugAdministartion,
+        forkJoin([ // matVisitDetails,
+           // matMotherProfile,
+           // matDiagnosis,
+          //  matDrugAdministartion,
+            matDelivery
           //  matEducation,
           //  matDischarge,
           //  matReferral,

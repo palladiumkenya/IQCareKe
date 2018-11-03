@@ -51,7 +51,7 @@ export class MaternityService {
     }
 
     public saveVisitDetails(visitDetails: any): Observable<any>  {
-        return this.http.post(this.API_URL + '/api/VisitDetails', JSON.stringify(visitDetails), httpOptions).pipe(
+        return this.http.post(this.API_URL + '/api/VisitDetails/AddPNCVisitDetails', JSON.stringify(visitDetails), httpOptions).pipe(
             tap(saveVisitDetals => this.errorHandler.log(`successfully added maternity visits`)),
             catchError(this.errorHandler.handleError<any>('Error saving maternity visit'))
         );
@@ -89,7 +89,8 @@ export class MaternityService {
     }
 
     public saveMaternalDrugAdministration(drug: any): Observable<any> {
-        return this.http.post(this.API_MATERNITY_URL + '/api/PatientDiagnosis/drugAdministration', JSON.stringify(drug), httpOptions).pipe(
+        return this.http.post(this.API_MATERNITY_URL + '/api/PatientDiagnosis/AddDrugAdministrationInfo',
+            JSON.stringify(drug), httpOptions).pipe(
             tap(saveMaternalDrugAdministration => this.errorHandler.log(`successfully added maternal drug administration`)),
             catchError(this.errorHandler.handleError<any>('Error saving maternal drug administration'))
         );

@@ -5,5 +5,5 @@ export interface DrugAdministrationCommand {
     PatientId?: number;
     PatientMasterVisitId?: number;
     CreatedBy?: number;
-    AdministerDrugs: AdministerDrugInfo[];
+    AdministredDrugs: AdministerDrugInfo[];
 }

@@ -16,6 +16,7 @@ namespace IQCare.PMTCT.BusinessProcess.Commands
         public int UserId { get; set; }
         public int? DaysPostPartum { get; set; }
         public int PatientMasterVisitId { get; set; }
+        public decimal? AgeMenarche { get; set; }
     }
 
     public class AddPNCVisitResponse
