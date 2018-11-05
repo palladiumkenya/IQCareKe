@@ -291,7 +291,7 @@ namespace BusinessProcess.CCC
                                          c.PatientStatus.ToLower().Contains("transfer out") ||
                                          c.PatientStatus.ToLower().Contains("confirmed hiv negative") ||
                                          c.PatientStatus.ToLower().Contains("hiv negative");
-                                    c => c.PatientStatus.ToLower().Contains("not enrolled") == false;
+                                    //c => c.PatientStatus.ToLower().Contains("not enrolled") == false;
                                 expresionFinal = PredicateBuilder.And(expresionFinal, expressionPatientStatusEnrolled);
                                 break;
                         }
