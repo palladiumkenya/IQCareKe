@@ -40,6 +40,8 @@ export class MaternalDrugAdministrationComponent implements OnInit {
         this.yesnoOptions = yesNo;
         this.yesnonaOptions = yesNoNa;
         this.finaResultOptions = finalResult;
+
+        this.notify.emit(this.maternalDrugAdministrationFormGroup);
     }
 
 }

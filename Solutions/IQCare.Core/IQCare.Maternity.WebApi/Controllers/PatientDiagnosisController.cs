@@ -11,7 +11,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace IQCare.Maternity.WebApi.Controllers
 {
     [Produces("application/json")]
-    [Route("api/[controller]/[action]")]
+    [Route("api/[Controller]/[Action]")]
     public class PatientDiagnosisController : Controller
     {
         IMediator _mediator;

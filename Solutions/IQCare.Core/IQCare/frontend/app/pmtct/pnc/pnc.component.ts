@@ -1,3 +1,4 @@
+import { FamilyPlanningCommand } from './../_models/FamilyPlanningCommand';
 import { PatientReferralCommand } from './../_models/PatientReferralCommand';
 import { PatientDiagnosisCommand } from './../_models/PatientDiagnosisCommand';
 import { HivTestsCommand } from './../_models/HivTestsCommand';
@@ -14,6 +15,8 @@ import { SnotifyService } from 'ng-snotify';
 import { forkJoin } from 'rxjs';
 import { PatientAppointment } from '../_models/PatientAppointmet';
 import { PostNatalExamCommand } from '../_models/PostNatalExamCommand';
+import { FamilyPlanningMethodCommand } from '../_models/FamilyPlanningMethodCommand';
+import { DrugAdministrationCommand } from '../maternity/commands/drug-administration-command';
 
 @Component({
     selector: 'app-pnc',
@@ -278,8 +281,6 @@ export class PncComponent implements OnInit {
             return;
         }
 
-        // console.log(this.matHistory_PostNatalExam_FormGroup.value[1]);
-
         const yesOption = this.yesnoOptions.filter(obj => obj.itemName == 'Yes');
         const noOption = this.yesnoOptions.filter(obj => obj.itemName == 'No');
         const naOption = this.yesNoNaOptions.filter(obj => obj.itemName == 'N/A');
@@ -422,6 +423,47 @@ export class PncComponent implements OnInit {
             });
         }
 
+        const familyPlanningCommand: FamilyPlanningCommand = {
+            Id: 0,
+            PatientId: this.patientId,
+            PatientMasterVisitId: this.patientMasterVisitId,
+            FamilyPlanningStatusId: this.cervicalCancerScreeningFormGroup.value[1]['onFamilyPlanning'],
+            ReasonNotOnFPId: 0,
+            DeleteFlag: false,
+            CreatedBy: this.userId,
+            CreateDate: new Date(),
+            VisitDate: new Date(),
+            AuditData: ''
+        };
+
+        const familyPlanningMethodCommand: FamilyPlanningMethodCommand = {
+            Id: 0,
+            PatientId: this.patientId,
+            PatientFPId: 0,
+            FPMethodId: this.cervicalCancerScreeningFormGroup.value[1]['familyPlanningMethod'],
+            Active: true,
+            DeleteFlag: false,
+            CreatedBy: this.userId,
+            CreateDate: new Date(),
+            AuditData: ''
+        };
+
+        /*const drugAdministrationCommand: DrugAdministrationCommand = {
+            Id: 0,
+            PatientId: this.patientId,
+            PatientMasterVisitId: this.patientMasterVisitId,
+            CreatedBy: this.userId,
+            AdministredDrugs: []
+        };
+
+        for (let i = 0; i < 7; i++) {
+            drugAdministrationCommand.AdministredDrugs.push({
+                Id?: 1,
+                Value?: '',
+                Description?: ''
+            });
+        }*/
+
         const pncVisitDetails = this.pncService.savePncVisitDetails(pncVisitDetailsCommand);
         const pncPostNatalExam = this.pncService.savePncPostNatalExam(pncPostNatalExamCommand);
         const pncBabyExam = this.pncService.savePncPostNatalExam(pncBabyExaminationCommand);
@@ -429,8 +471,14 @@ export class PncComponent implements OnInit {
         const pncDiagnosis = this.pncService.saveDiagnosis(pncPatientDiagnosis);
         const pncReferral = this.pncService.savePncReferral(pncReferralCommand);
         const pncNextAppointment = this.pncService.savePncNextAppointment(pncNextAppointmentCommand);
+        const pncFamilyPlanning = this.pncService.savePncFamilyPlanning(familyPlanningCommand);
+        const pncDrugAdministration = this.pncService.savePncDrugAdministration();
+        const pncPartnerTesting = this.pncService.savePartnerTesting();
 
-        forkJoin([pncHivStatus, pncDiagnosis, pncReferral, pncNextAppointment, pncVisitDetails, pncPostNatalExam, pncBabyExam])
+        forkJoin([
+            pncHivStatus, pncDiagnosis, pncReferral,
+            pncNextAppointment, pncVisitDetails,
+            pncPostNatalExam, pncBabyExam, pncFamilyPlanning])
             .subscribe(
                 (result) => {
                     console.log(result);
@@ -440,6 +488,14 @@ export class PncComponent implements OnInit {
                     const pncHivTests = this.pncService.savePncHivTests(hivTestsCommand).subscribe(
                         (res) => {
                             console.log(`result`, res);
+                        }
+                    );
+
+                    familyPlanningMethodCommand.PatientFPId = result[7]['PatientId'];
+                    const pncFamilyPlanningMethod = this.pncService.savePncFamilyPlanningMethod(familyPlanningMethodCommand).subscribe(
+                        (res) => {
+                            console.log(`family planning method`);
+                            console.log(res);
                         }
                     );
 

@@ -25,7 +25,7 @@
                                         <ng-template matStepLabel>
                                             <span matTooltip="Diagnosis">Diagnosis</span>
                                         </ng-template>
-                                        <app-diagnosis [diagnosisOptions]="diagnosisOptions" (notify)="onPatientDiagnosis($event)"></app-diagnosis>
+                                        <app-diagnosis [diagnosisOptions]="diagnosisOptions" (notify)="onPatientDiagnosisNotify($event)"></app-diagnosis>
                                         <div>
                                             <app-delivery-maternity [patientId]="patientId" [diagnosisOptions]="diagnosisOptions"  (notify)="onPatientDeliveryNotify($event)" ></app-delivery-maternity>
                                         </div>
@@ -40,7 +40,7 @@
                                         <ng-template matStepLabel>
                                             <span matTooltip="Baby Section">Baby Section</span>
                                         </ng-template>
-                                        <app-baby [babySectionOptions]="babySectionOptions" (notify)="onBabyNotify($event)"></app-baby>
+                                        <app-baby [babySectionOptions]="babySectionOptions" (notifyData)="onBabyNotfiyData($event)" (notify)="onBabyNotify($event)"></app-baby>
 
                                         <div>
                                             <button mat-raised-button color="primary" matStepperPrevious type="button">Previous</button>
