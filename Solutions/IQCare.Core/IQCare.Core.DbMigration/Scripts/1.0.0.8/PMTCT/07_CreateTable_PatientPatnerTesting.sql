@@ -13,7 +13,6 @@ CREATE TABLE [dbo].[PatientPartnerTesting](
 
  CONSTRAINT [PK_PatientPartnerTesting] PRIMARY KEY CLUSTERED ([Id] ASC),
  CONSTRAINT [FK_PatientPartnerTesting_Patient] FOREIGN KEY([PatientId]) REFERENCES [dbo].[Patient] ([Id]),
- CONSTRAINT [FK_PatientPartnerTesting_PatientEncounter] FOREIGN KEY([PatientEncounterId]) REFERENCES [dbo].[PatientEncounter] ([Id]),
  CONSTRAINT [FK_PatientPartnerTesting_PatientMasterVisit] FOREIGN KEY([PatientMasterVisitId]) REFERENCES [dbo].[PatientMasterVisit] ([Id])
 )
 END 
