@@ -19,6 +19,7 @@ export class BabyComponent implements OnInit {
     dataSource = new MatTableDataSource(this.babyData);
     @Input() babySectionOptions: any[] = [];
     @Output() notify: EventEmitter<FormGroup> = new EventEmitter<FormGroup>();
+    @Output() notifyData: EventEmitter<any[]> = new EventEmitter<any[]>();
 
     public genderOptions: any[] = [];
     deliveryOutcomeOptions: any[] = [];
@@ -44,7 +45,6 @@ export class BabyComponent implements OnInit {
             agparScore10min: new FormControl('', [Validators.required]),
             notificationNumber: new FormControl('', [Validators.required]),
             comment: new FormControl('', [Validators.required])
-
         });
 
         const {
@@ -57,6 +57,7 @@ export class BabyComponent implements OnInit {
         this.yesnoOptions = yesNos;
 
         this.notify.emit(this.babyFormGroup);
+        this.notifyData.emit(this.babyData);
     }
 
     public AddBaby() {
@@ -68,15 +69,18 @@ export class BabyComponent implements OnInit {
                 sex: this.babyFormGroup.get('babySex').value.itemId,
                 birthWeight: this.babyFormGroup.get('birthWeight').value,
                 outcome: this.babyFormGroup.get('outcome').value.itemId,
-                apgarScore: this.babyFormGroup.get('agparScore1min').value + ' in 1,' +
-                '' + this.babyFormGroup.get('agparScore5min').value + ' in 5,' +
-                this.babyFormGroup.get('agparScore10min').value + 'in 10',
-                resuscitate: this.babyFormGroup.get('resuscitationDone').value.itemId,
-                deformity:  this.babyFormGroup.get('deformity').value.itemId,
-                teo:  this.babyFormGroup.get('teoGiven').value.itemId,
-                breastFeeding:  this.babyFormGroup.get('breastFed').value.itemId,
-                comment: this.babyFormGroup.get('comment').value
+                apgarScoreOne: this.babyFormGroup.get('agparScore1min').value,
+                apgarScoreFive: this.babyFormGroup.get('agparScore5min').value,
+                apgarScoreTen: this.babyFormGroup.get('agparScore10min').value,
+                resuscitate: (this.babyFormGroup.get('resuscitationDone').value.itemName == 'Yes') ? true : false,
+                deformity:  (this.babyFormGroup.get('deformity').value.itemName == 'Yes') ? true : false,
+                teo:  (this.babyFormGroup.get('teoGiven').value.itemName == 'Yes') ? true : false,
+                breastFeeding:  (this.babyFormGroup.get('breastFed').value.itemName == 'Yes') ? true : false ,
+                comment: this.babyFormGroup.get('comment').value,
+                notificationNo: this.babyFormGroup.get('notificationNumber').value
             });
+
+            console.log(this.babyData);
 
             this.babyDataTable.push({
                 sex: this.babyFormGroup.get('babySex').value.itemName,

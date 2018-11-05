@@ -4,7 +4,7 @@ CREATE TABLE [dbo].[PatientDelivery](
 	[DeliveryID] [int] IDENTITY(1,1) NOT NULL,
 	[PatientMasterVisitID] [int] NOT NULL,
 	[ProfileID] [int] NOT NULL,
-	[DurationOfLabour] [int] NULL,
+	[DurationOfLabour] [varchar](50) NULL,
 	[DateOfDelivery] [datetime] NULL,
 	[TimeOfDelivery] [time](7) NULL,
 	[ModeOfDelivery] [int] NULL,
