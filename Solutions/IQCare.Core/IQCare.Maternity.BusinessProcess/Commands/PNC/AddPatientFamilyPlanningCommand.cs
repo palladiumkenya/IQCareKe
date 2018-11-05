@@ -26,7 +26,6 @@ namespace IQCare.Maternity.BusinessProcess.Commands.PNC
 
     public class GetPatientFamilyPlanningQuery : IRequest<Result<List<PatientFamilyPlanningViewModel>>>
     {
-        public int Id { get; set; }
         public int PatientId { get; set; }
     }
     public class PatientFamilyPlanningViewModel

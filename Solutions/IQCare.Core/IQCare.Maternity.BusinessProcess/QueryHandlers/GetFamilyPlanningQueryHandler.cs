@@ -41,5 +41,5 @@ namespace IQCare.Maternity.BusinessProcess.QueryHandlers
         }
 
     }
-}
+  }
 }
