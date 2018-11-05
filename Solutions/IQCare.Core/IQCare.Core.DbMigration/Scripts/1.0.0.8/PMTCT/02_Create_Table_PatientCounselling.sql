@@ -1,8 +1,8 @@
 ﻿IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[PatientCounselling]') AND type in (N'U')) 
 BEGIN
 CREATE TABLE [dbo].[PatientCounselling](
-	[ConsellingId] [int] NOT NULL,
-	[PatientEncounterId] [int] NOT NULL,
+    [Id] [int] IDENTITY(1,1) NOT NULL,
+	[PatientId] [int] NOT NULL,
 	[PatientMasterVisitId] [int] NOT NULL,
 	[CounsellingTopicId] [int] NULL,
 	[CounsellingDate] [datetime] NULL,
@@ -11,8 +11,8 @@ CREATE TABLE [dbo].[PatientCounselling](
 	[CreatedBy] [int] NOT NULL,
 	[CreateDate] [datetime] NOT NULL,
 	[AuditData] [varchar](max) NULL,
-	CONSTRAINT [FK_PatientCounselling_PatientEncounter] FOREIGN KEY([PatientEncounterId]) REFERENCES [dbo].[PatientEncounter] ([Id]),
-    CONSTRAINT [FK_PatientCounselling_PatientMasterVisit] FOREIGN KEY([PatientMasterVisitId]) REFERENCES [dbo].[PatientMasterVisit] ([Id])
-) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+    CONSTRAINT [FK_PatientCounselling_PatientMasterVisit] FOREIGN KEY([PatientMasterVisitId]) REFERENCES [dbo].[PatientMasterVisit] ([Id]),
+	CONSTRAINT [PK_PatientCounselling] PRIMARY KEY CLUSTERED ([Id] ASC)
+) 
 
 END
