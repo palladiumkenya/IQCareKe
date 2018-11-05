@@ -14,7 +14,7 @@ using IQCare.Maternity.Core.Domain.PNC;
 
 namespace IQCare.Maternity.BusinessProcess.QueryHandlers
 {
-    class GetPatientFamilyPlanningMethodQueryHandler : IRequestHandler<GetPatientFamilyPlanningMethodQuery, Result<List<PatientFamilyPlanningMethodViewModel>>>
+    public class GetPatientFamilyPlanningMethodQueryHandler : IRequestHandler<GetPatientFamilyPlanningMethodQuery, Result<List<PatientFamilyPlanningMethodViewModel>>>
     {
         IMaternityUnitOfWork _maternityUnitOfWork;
         IMapper _mapper;

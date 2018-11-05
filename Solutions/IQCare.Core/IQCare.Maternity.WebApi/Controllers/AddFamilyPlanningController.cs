@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using IQCare.Maternity.BusinessProcess.Commands.PNC;
+using IQCare.Maternity.BusinessProcess.Queries.PNC;
 using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -32,13 +33,13 @@ namespace IQCare.Maternity.WebApi.Controllers
 
             return BadRequest(result);
         }
-        //[HttpGet("{Id}")]
-        //public async Task<object> GetFamilyPlanningInfo(int Id)
-        //{
-        //    var diagnosisInfo = await _mediator.Send(new test { PatientId = Id }, HttpContext.RequestAborted);
-        //    if (diagnosisInfo.IsValid)
-        //        return Ok(diagnosisInfo.Value);
-        //    return BadRequest(diagnosisInfo);
-        //}
+        [HttpGet("{Id}")]
+        public async Task<object> Get(int Id)
+        {
+            var diagnosisInfo = await _mediator.Send(new GetPatientFamilyPlanningQuery { PatientId = Id }, HttpContext.RequestAborted);
+            if (diagnosisInfo.IsValid)
+                return Ok(diagnosisInfo.Value);
+            return BadRequest(diagnosisInfo);
+        }
     }
 }
