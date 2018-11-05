@@ -310,8 +310,8 @@ If Not Exists(Select 1 From LookupItem where Name='Positive TI') Begin INSERT IN
 If Not Exists(Select 1 From LookupItem where Name='Suggestive') Begin INSERT INTO LookupItem (Name, DisplayName, DeleteFlag) VALUES ('Suggestive','Suggestive',0); End
 If Not Exists(Select 1 From LookupItem where Name='Normal') Begin INSERT INTO LookupItem (Name, DisplayName, DeleteFlag) VALUES ('Normal','Normal',0); End
 If Not Exists(Select 1 From LookupItem where Name='Invalid') Begin INSERT INTO LookupItem (Name, DisplayName, DeleteFlag) VALUES ('Invalid','Invalid',0); End
-If Not Exists(Select 1 From LookupItem where Name='No Tb - Negative TB Screen') Begin INSERT INTO LookupItem (Name, DisplayName, DeleteFlag) VALUES ('No TB','No Tb - Negative TB Screen',0); End
-If Not Exists(Select 1 From LookupItem where Name='INH - Client was screened negative & started INH') Begin INSERT INTO LookupItem (Name, DisplayName, DeleteFlag) VALUES ('INH','INH - Client was screened negative & started INH',0); End
+If Not Exists(Select 1 From LookupItem where Name='No TB') Begin INSERT INTO LookupItem (Name, DisplayName, DeleteFlag) VALUES ('No TB','No Tb - Negative TB Screen',0); End
+If Not Exists(Select 1 From LookupItem where Name='INH') Begin INSERT INTO LookupItem (Name, DisplayName, DeleteFlag) VALUES ('INH','INH - Client was screened negative & started INH',0); End
 If Not Exists(Select 1 From LookupItem where Name='Zidovudine(AZT)') Begin INSERT INTO LookupItem (Name, DisplayName, DeleteFlag) VALUES ('Zidovudine(AZT)','Zidovudine(AZT)',0); End
 If Not Exists(Select 1 From LookupItem where Name='Nevirapine(NVP)') Begin INSERT INTO LookupItem (Name, DisplayName, DeleteFlag) VALUES ('Nevirapine(NVP)','Nevirapine(NVP)',0); End
 If Not Exists(Select 1 From LookupItem where Name='Cotrimoxazole') Begin INSERT INTO LookupItem (Name, DisplayName, DeleteFlag) VALUES ('Cotrimoxazole','Cotrimoxazole',0); End
@@ -375,7 +375,7 @@ If Not Exists(Select 1 From LookupItem where Name='Medium') Begin INSERT INTO Lo
 If Not Exists(Select 1 From LookupItem where Name='Heavy') Begin INSERT INTO LookupItem (Name, DisplayName, DeleteFlag) VALUES ('Heavy','Heavy',0); End
 If Not Exists(Select 1 From LookupItem where Name='None') Begin INSERT INTO LookupItem (Name, DisplayName, DeleteFlag) VALUES ('None','None',0); End
 
-If Not Exists(Select 1 From LookupItem where Name='Liver Birth') Begin INSERT INTO LookupItem (Name, DisplayName, DeleteFlag) VALUES ('Liver Birth','Liver Birth',0); End
+If Not Exists(Select 1 From LookupItem where Name='Live Birth') Begin INSERT INTO LookupItem (Name, DisplayName, DeleteFlag) VALUES ('Live Birth','Live Birth',0); End
 If Not Exists(Select 1 From LookupItem where Name='Fresh Still Birth') Begin INSERT INTO LookupItem (Name, DisplayName, DeleteFlag) VALUES ('Fresh Still Birth','Fresh Still Birth',0); End
 If Not Exists(Select 1 From LookupItem where Name='Macerated Still Birth') Begin INSERT INTO LookupItem (Name, DisplayName, DeleteFlag) VALUES ('Macerated Still Birth','Macerated Still Birth',0); End
 
