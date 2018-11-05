@@ -20,6 +20,5 @@ namespace IQCare.Common.Core.Models
         public DateTime CreateDate { get; set; }
         public string AuditData { get; set; }
 
-        public int EducationOutcome { get; set; }
     }
 }

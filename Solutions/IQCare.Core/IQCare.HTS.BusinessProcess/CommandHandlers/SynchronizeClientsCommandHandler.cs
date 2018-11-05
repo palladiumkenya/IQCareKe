@@ -43,7 +43,7 @@ namespace IQCare.HTS.BusinessProcess.CommandHandlers
                 PersonOccupationService pocc = new PersonOccupationService(_unitOfWork);
                 EducationLevelService educationLevelService = new EducationLevelService(_unitOfWork);
                 EncounterTestingService encounterTestingService = new EncounterTestingService(_unitOfWork, _htsUnitOfWork);
-                PersonDemographicsService personDemographicsService = new PersonDemographicsService(_unitOfWork);
+               // PersonDemographicsService personDemographicsService = new PersonDemographicsService(_unitOfWork);
                 for (int i = 0; i < request.CLIENTS.Count; i++)
                 {
                     for (int j = 0; j < request.CLIENTS[i].PATIENT_IDENTIFICATION.INTERNAL_PATIENT_ID.Count; j++)
@@ -141,7 +141,7 @@ namespace IQCare.HTS.BusinessProcess.CommandHandlers
                             if (registeredPerson != null)
                             {
                                 var updatedPerson = await registerPersonService.UpdatePerson(identifiers[0].PersonId,
-                                    firstName, middleName, lastName, sex, dateOfBirth, clientFacility.FacilityID,nickname:nickName);
+                                    firstName, middleName, lastName, sex, dateOfBirth, clientFacility.FacilityID,NickName:nickName);
                             }
                             else
                             {

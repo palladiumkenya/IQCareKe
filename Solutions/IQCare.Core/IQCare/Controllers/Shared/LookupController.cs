@@ -77,16 +77,16 @@ namespace IQCare.Controllers.Common
             return BadRequest(results);
         }
 
-        //[HttpGet("getIdentifyerTypes")]
-        //public async Task<IActionResult> GetIdentifierType()
-        //{
-        //    var results = await _mediator.Send(new GetPersonIdentificationCommand { CodeName = "PersonIdentification" }, HttpContext.RequestAborted);
+        [HttpGet("getIdentifyerTypes")]
+        public async Task<IActionResult> GetIdentifierType()
+        {
+            var results = await _mediator.Send(new GetPersonIdentificationCommand { CodeName = "PersonIdentification" }, HttpContext.RequestAborted);
 
-        //    if (results.IsValid)
-        //        return Ok(results.Value);
-        //    return BadRequest(results);
+            if (results.IsValid)
+                return Ok(results.Value);
+            return BadRequest(results);
 
-        //}
+        }
 
         [HttpGet("getocc")]
         public async Task<IActionResult>  GetOccupations()

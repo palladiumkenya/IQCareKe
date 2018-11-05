@@ -67,7 +67,7 @@ namespace IQCare.HTS.BusinessProcess.CommandHandlers
                         string firstName = request.FAMILY[i].PATIENT_IDENTIFICATION.PATIENT_NAME.FIRST_NAME;
                         string middleName = request.FAMILY[i].PATIENT_IDENTIFICATION.PATIENT_NAME.MIDDLE_NAME;
                         string lastName = request.FAMILY[i].PATIENT_IDENTIFICATION.PATIENT_NAME.LAST_NAME;
-                        string nickName = request.FAMILY[i].PATIENT_IDENTIFICATION.PATIENT_NAME.NICK_NAME;
+                       
                         int sex = request.FAMILY[i].PATIENT_IDENTIFICATION.SEX;
                         string nickName = (request.FAMILY[i].PATIENT_IDENTIFICATION.PATIENT_NAME.NICK_NAME == null) ? "" : request.FAMILY[i].PATIENT_IDENTIFICATION.PATIENT_NAME.NICK_NAME.ToString();
                         string ward = (request.FAMILY[i].PATIENT_IDENTIFICATION.PATIENT_ADDRESS.PHYSICAL_ADDRESS.WARD == null) ? "" : request.FAMILY[i].PATIENT_IDENTIFICATION.PATIENT_ADDRESS.PHYSICAL_ADDRESS.WARD.ToString();
@@ -82,12 +82,7 @@ namespace IQCare.HTS.BusinessProcess.CommandHandlers
                         string mobileNumber = request.FAMILY[i].PATIENT_IDENTIFICATION.PHONE_NUMBER;
                         string landmark = request.FAMILY[i].PATIENT_IDENTIFICATION.PATIENT_ADDRESS.PHYSICAL_ADDRESS
                             .LANDMARK;
-                        string ward = request.FAMILY[i].PATIENT_IDENTIFICATION.PATIENT_ADDRESS.PHYSICAL_ADDRESS.WARD;
-                        string county = request.FAMILY[i].PATIENT_IDENTIFICATION.PATIENT_ADDRESS.PHYSICAL_ADDRESS.COUNTY;
-                        string subcounty = request.FAMILY[i].PATIENT_IDENTIFICATION.PATIENT_ADDRESS.PHYSICAL_ADDRESS.SUB_COUNTY;
-                        string educationlevel = request.FAMILY[i].PATIENT_IDENTIFICATION.EDUCATIONLEVEL;
-                        string educationoutcome = request.FAMILY[i].PATIENT_IDENTIFICATION.EDUCATIONOUTCOME;
-                        string occupation = request.FAMILY[i].PATIENT_IDENTIFICATION.OCCUPATION;
+                        
                         int relationshipType = request.FAMILY[i].PATIENT_IDENTIFICATION.RELATIONSHIP_TYPE;
                         int Userid = request.FAMILY[i].PATIENT_IDENTIFICATION.USER_ID;
 
@@ -105,7 +100,7 @@ namespace IQCare.HTS.BusinessProcess.CommandHandlers
                             var partnetPersonIdentifiers = await registerPersonService.getPersonIdentifiers(afyaMobileId, 10);
                             if (partnetPersonIdentifiers.Count > 0)
                             {
-                                await registerPersonService.UpdatePerson(partnetPersonIdentifiers[0].PersonId, firstName, middleName, lastName, sex, dateOfBirth, clientFacility.FacilityID,nickname:nickName);
+                                await registerPersonService.UpdatePerson(partnetPersonIdentifiers[0].PersonId, firstName, middleName, lastName, sex, dateOfBirth, clientFacility.FacilityID,NickName:nickName);
                                 //update maritalstatus id
                                 await registerPersonService.UpdateMaritalStatus(partnetPersonIdentifiers[0].PersonId, maritalStatusId);
                                 if (!string.IsNullOrWhiteSpace(mobileNumber))

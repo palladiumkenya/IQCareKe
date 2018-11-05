@@ -1311,7 +1311,7 @@ namespace IQCare.Common.BusinessProcess.Services
             }
         }
 
-        public async Task<Person> UpdatePerson(int personId, string firstName, string middleName, string lastName, int sex, DateTime dateOfBirth,string NickName="")
+        public async Task<Person> UpdatePerson(int personId, string firstName, string middleName, string lastName, int sex, DateTime dateOfBirth, int facilityId, DateTime? registrationDate = null, bool dobPrecision = true,string NickName="")
         {
             try
             {
@@ -1357,7 +1357,7 @@ namespace IQCare.Common.BusinessProcess.Services
             }
         }
 
-        public async Task<Person> RegisterPerson(string firstName, string middleName, string lastName, int sex, DateTime dateOfBirth, int createdBy,string nickName="")
+        public async Task<Person> RegisterPerson(string firstName, string middleName, string lastName, int sex, int createdBy, int facilityId, DateTime? dateOfBirth, DateTime? registrationDate = null, string nickName="")
         {
             try
             {
