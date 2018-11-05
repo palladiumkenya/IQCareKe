@@ -5,6 +5,7 @@ using IQCare.Library;
 using IQCare.PMTCT.BusinessProcess.Commands.Pregnancy;
 using IQCare.PMTCT.Core.Models;
 using IQCare.PMTCT.Infrastructure;
+using IQCare.PMTCT.Services;
 using MediatR;
 using Serilog;
 
@@ -21,15 +22,34 @@ namespace IQCare.PMTCT.BusinessProcess.CommandHandlers.pregnancy
 
         public async Task<Result<AddPregnancyCommandResult>> Handle(AddPregnancyCommand request, CancellationToken cancellationToken)
         {
-            using (_unitOfWork)
-            {
+           
+
                 try
                 {
-                   await _unitOfWork.Repository<PatientPregnancy>().AddAsync(request.Pregnancy);
-                    await _unitOfWork.SaveAsync();
+                    VisitDetailsService visitDetailsService = new VisitDetailsService(_unitOfWork);
+
+                PatientPregnancy pregnancy = new PatientPregnancy()
+                    {
+                        PatientId = request.PatientId,
+                        PatientMasterVisitId = request.PatientMasterVisitId,
+                        CreateDate = request.CreateDate,
+                        CreatedBy = request.CreatedBy,
+                        Outcome = request.Outcome,
+                        DateOfOutcome = request.DateOfOutcome,
+                        DeleteFlag = request.DeleteFlag,
+                        Lmp = request.Lmp,
+                        Edd = request.Edd,
+                        Gestation = request.Gestation,
+                        Gravidae = request.Gravidae,
+                        Parity = request.Parity,
+                        Parity2 = request.Parity2,
+                    };
+
+                    var _preganancy = await visitDetailsService.AddPatientPregnancy(pregnancy);
+
                     return Result<AddPregnancyCommandResult>.Valid(new AddPregnancyCommandResult()
                     {
-                        PatientId = request.Pregnancy.PatientId,PregnancyId = request.Pregnancy.Id
+                        PatientId = _preganancy.PatientId,PregnancyId = _preganancy.Id
                             
                     });
                 }
@@ -38,7 +58,6 @@ namespace IQCare.PMTCT.BusinessProcess.CommandHandlers.pregnancy
                     Log.Error(e.Message + " " + e.InnerException);
                     return Result<AddPregnancyCommandResult>.Invalid(e.Message);
                 }
-            }
         }
     }
 }

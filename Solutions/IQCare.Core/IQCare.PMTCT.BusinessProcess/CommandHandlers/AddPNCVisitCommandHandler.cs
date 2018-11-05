@@ -49,7 +49,9 @@ namespace IQCare.PMTCT.BusinessProcess.CommandHandlers
                     CreatedBy = (request.UserId < 1) ? 1 : request.UserId,
                     CreateDate = DateTime.Now,
                     DaysPostPartum = request.DaysPostPartum,
-                    VisitNumber = request.VisitNumber
+                    VisitNumber = request.VisitNumber,
+                    AgeMenarche = request.AgeMenarche
+                    
                 };
 
                 var profile = await visitDetailsService.AddPatientProfile(patientProfile);

@@ -17,6 +17,11 @@ namespace IQCare.Maternity.BusinessProcess.Commands.Maternity
 
     public class AdministredDrugInfo
     {
+        public AdministredDrugInfo()
+        {
+            
+        }
+
         public int Id { get; set; }
         public int Value { get; set; }
         public string Description { get; set; }

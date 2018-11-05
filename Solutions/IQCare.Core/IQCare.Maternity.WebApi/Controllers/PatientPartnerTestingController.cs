@@ -10,18 +10,18 @@ using Microsoft.AspNetCore.Mvc;
 namespace IQCare.Maternity.WebApi.Controllers
 {
     [Produces("application/json")]
-    [Route("api/AddFamilyPlanning")]
-    public class AddFamilyPlanningController : Controller
+    [Route("api/PatientPartnerTesting")]
+    public class PatientPartnerTestingController : Controller
     {
         IMediator _mediator;
-        public AddFamilyPlanningController(IMediator mediator)
+        public PatientPartnerTestingController(IMediator mediator)
         {
             _mediator = mediator;
         }
 
 
         [HttpPost]
-        public async Task<object> AddFamilyPlanning([FromBody] AddPatientFamilyPlanningCommand command)
+        public async Task<object> PatientPartnerTesting([FromBody] PatientPartnerTestingCommand command)
         {
             if (!ModelState.IsValid)
                 return BadRequest(command);
@@ -32,13 +32,5 @@ namespace IQCare.Maternity.WebApi.Controllers
 
             return BadRequest(result);
         }
-        //[HttpGet("{Id}")]
-        //public async Task<object> GetFamilyPlanningInfo(int Id)
-        //{
-        //    var diagnosisInfo = await _mediator.Send(new test { PatientId = Id }, HttpContext.RequestAborted);
-        //    if (diagnosisInfo.IsValid)
-        //        return Ok(diagnosisInfo.Value);
-        //    return BadRequest(diagnosisInfo);
-        //}
     }
 }
