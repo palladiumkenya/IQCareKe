@@ -17,6 +17,7 @@ import { PatientAppointment } from '../_models/PatientAppointmet';
 import { PostNatalExamCommand } from '../_models/PostNatalExamCommand';
 import { FamilyPlanningMethodCommand } from '../_models/FamilyPlanningMethodCommand';
 import { DrugAdministrationCommand } from '../maternity/commands/drug-administration-command';
+import { PartnerTestingCommand } from '../_models/PartnerTestingCommand';
 
 @Component({
     selector: 'app-pnc',
@@ -464,6 +465,19 @@ export class PncComponent implements OnInit {
             });
         }*/
 
+        console.log(this.drugAdministration_PartnerTesting_FormGroup.value);
+
+        const partnerTestingCommand: PartnerTestingCommand = {
+            PatientId: this.patientId,
+            PatientMasterVisitId: this.patientMasterVisitId,
+            PartnerTested: this.drugAdministration_PartnerTesting_FormGroup.value[1]['partnerHivTestDone'],
+            PartnerHIVResult: this.drugAdministration_PartnerTesting_FormGroup.value[1]['finalPartnerHivResult'],
+            CreateDate: new Date(),
+            CreatedBy: this.userId,
+            DeleteFlag: false,
+            AuditData: ''
+        };
+
         const pncVisitDetails = this.pncService.savePncVisitDetails(pncVisitDetailsCommand);
         const pncPostNatalExam = this.pncService.savePncPostNatalExam(pncPostNatalExamCommand);
         const pncBabyExam = this.pncService.savePncPostNatalExam(pncBabyExaminationCommand);
@@ -473,12 +487,13 @@ export class PncComponent implements OnInit {
         const pncNextAppointment = this.pncService.savePncNextAppointment(pncNextAppointmentCommand);
         const pncFamilyPlanning = this.pncService.savePncFamilyPlanning(familyPlanningCommand);
         const pncDrugAdministration = this.pncService.savePncDrugAdministration();
-        const pncPartnerTesting = this.pncService.savePartnerTesting();
+        const pncPartnerTesting = this.pncService.savePartnerTesting(partnerTestingCommand);
 
         forkJoin([
             pncHivStatus, pncDiagnosis, pncReferral,
             pncNextAppointment, pncVisitDetails,
-            pncPostNatalExam, pncBabyExam, pncFamilyPlanning])
+            pncPostNatalExam, pncBabyExam, pncFamilyPlanning,
+            pncPartnerTesting])
             .subscribe(
                 (result) => {
                     console.log(result);
