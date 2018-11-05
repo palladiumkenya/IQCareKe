@@ -6859,7 +6859,11 @@
             }
 
         }
-    function GetGBVScreeningStatus() {
+
+
+
+
+function GetGBVScreeningStatus() {
         var patientId ="<%=PatientId%>";
         var visitDate = moment("<%=visitdateval%>");
         var screeningCategoryId = "<%=GbvScreeningCategoryId%>";
