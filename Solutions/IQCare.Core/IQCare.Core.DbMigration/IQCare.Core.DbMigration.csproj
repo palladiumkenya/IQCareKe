@@ -9,6 +9,7 @@
     <None Remove="Scripts\1.0.0.8\HEI\HEIEncounter.sql" />
     <None Remove="Scripts\1.0.0.8\HEI\HEIFeeding.sql" />
     <None Remove="Scripts\1.0.0.8\HEI\HEIProfile.sql" />
+    <None Remove="Scripts\1.0.0.8\HEI\Lookups.sql" />
     <None Remove="Scripts\1.0.0.8\HEI\PatientMilestone.sql" />
     <None Remove="Scripts\1.0.0.8\HEI\Vaccination.sql" />
     <None Remove="Scripts\1.0.0.8\PMTCT\01_Insert_PNC_LookUp_Data.sql" />
@@ -66,6 +67,7 @@
     <EmbeddedResource Include="Scripts\1.0.0.8\HEI\HEIEncounter.sql" />
     <EmbeddedResource Include="Scripts\1.0.0.8\HEI\HEIFeeding.sql" />
     <EmbeddedResource Include="Scripts\1.0.0.8\HEI\HEIProfile.sql" />
+    <EmbeddedResource Include="Scripts\1.0.0.8\HEI\Lookups.sql" />
     <EmbeddedResource Include="Scripts\1.0.0.8\HEI\PatientMilestone.sql" />
     <EmbeddedResource Include="Scripts\1.0.0.8\HEI\Vaccination.sql" />
     <EmbeddedResource Include="Scripts\1.0.0.8\PMTCT\01_Insert_PNC_LookUp_Data.sql" />
