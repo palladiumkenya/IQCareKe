@@ -20,6 +20,7 @@ import {NextAppointmentCommand} from './commands/next-appointment-command';
 import {DischargeCommand} from './commands/discharge-command';
 import {DiagnosisCommand} from './commands/diagnosis-command';
 import {MotherProfileCommand} from './commands/mother-profile-command';
+import {TestCondition} from './commands/testCondition';
 
 @Component({
     selector: 'app-maternity',
@@ -42,6 +43,8 @@ export class MaternityComponent implements OnInit {
     apgarOptions: any[] = [];
     drugAdminOptions: any[] = [];
     counsellingOptions: any[] = [];
+    babyNotifyData: any[] = [];
+    DeliveredBabyBirthInfoCollection: BabyConditionCommand[] = [];
 
     patientId: number;
     personId: number;
@@ -76,9 +79,11 @@ export class MaternityComponent implements OnInit {
     partnerTestingOptions: any[] = [];
     patientEducationOptions: any[] = [];
 
+    testCondition: TestCondition[] = [];
+
     constructor(private route: ActivatedRoute,
                 private matService: MaternityService,
-                private _lookupItemService: LookupItemService ,
+                private _lookupItemService: LookupItemService,
                 private snotifyService: SnotifyService,
                 private notificationService: NotificationService) {
         this.visitDetailsFormGroup = new FormArray([]);
@@ -97,12 +102,12 @@ export class MaternityComponent implements OnInit {
         this.route.params.subscribe(
             (params) => {
                 console.log(params);
-                const { patientId, personId, serviceAreaId } = params;
+                const {patientId, personId, serviceAreaId} = params;
                 this.patientId = parseInt(patientId, 10);
                 this.personId = personId;
                 this.serviceAreaId = serviceAreaId;
             }
-    );
+        );
 
         this.userId = JSON.parse(localStorage.getItem('appUserId'));
         this.userId = JSON.parse(localStorage.getItem('appUserId'));
@@ -205,6 +210,10 @@ export class MaternityComponent implements OnInit {
         this.babyFormGroup.push(formGroup);
     }
 
+    onBabyNotfiyData(babyNotifyData: any[]): void {
+        this.babyNotifyData.push(babyNotifyData);
+    }
+
     onMaternityTests(formGroup: FormGroup): void {
         this.maternityTestsFormGroup.push(formGroup);
     }
@@ -235,13 +244,13 @@ export class MaternityComponent implements OnInit {
         this.dischargeFormGroup.push(formGroup);
     }
 
-    public getLookupItems(groupName: string, objOptions: any[]= []) {
+    public getLookupItems(groupName: string, objOptions: any[] = []) {
         this.lookupItems$ = this._lookupItemService.getByGroupName(groupName)
             .subscribe(
                 p => {
                     const options = p['lookupItems'];
                     for (let i = 0; i < options.length; i++) {
-                        objOptions.push({ 'itemId': options[i]['itemId'], 'itemName': options[i]['itemName'] });
+                        objOptions.push({'itemId': options[i]['itemId'], 'itemName': options[i]['itemName']});
                     }
                 },
                 (err) => {
@@ -253,6 +262,7 @@ export class MaternityComponent implements OnInit {
     }
 
     onSubmit() {
+
         const visitDetailsCommand: MaternityVisitDetailsCommand = {
             patientId: this.patientId,
             patientMasterVisitId: this.patientMasterVisitId,
@@ -267,7 +277,7 @@ export class MaternityComponent implements OnInit {
             postpartum: 'na'
         };
 
-      console.log(this.visitDetailsFormGroup)  ;
+        console.log(this.visitDetailsFormGroup);
         const pregnancyCommand: PregnancyCommand = {
             Id: 0,
             PatientId: this.patientId,
@@ -295,9 +305,9 @@ export class MaternityComponent implements OnInit {
         };
 
         const maternityDeliveryCommand: MaternityDeliveryCommand = {
-            PatinetMasterVisitId: this.patientMasterVisitId,
-            ProfileId: 7,
-            DurationOfLabour: parseInt(this.diagnosisFormGroup.value[1]['labourDuration'], 10),
+            PatientMasterVisitId: this.patientMasterVisitId,
+            ProfileId: 0,
+            DurationOfLabour: this.diagnosisFormGroup.value[1]['labourDuration'],
             DateOfDelivery: this.diagnosisFormGroup.value[1]['deliveryDate'],
             TimeOfDelivery: this.diagnosisFormGroup.value[1]['deliveryTime'],
             ModeOfDelivery: this.diagnosisFormGroup.value[1]['deliveryMode'],
@@ -318,29 +328,78 @@ export class MaternityComponent implements OnInit {
         const apgarscoreThree = this.apgarOptions.filter(x => x.itemName == 'Apgar Score 10 min');
 
         this.apgarSCore.push(
-           {ApgarSCoreId: apgarscoreOne[0].itemId , ApgarScoreType: 'Apgar Score 1 min',
-               SCore: this.babyFormGroup.value[0]['agparScore1min']},
-            {ApgarSCoreId: apgarscoreTwo[0].itemId, ApgarScoreType: 'Apgar Score 5 min',
-                SCore: this.babyFormGroup.value[0]['agparScore5min']},
-            {ApgarSCoreId: apgarscoreThree[0].itemId, ApgarScoreType: 'Apgar Score 10 min',
-                SCore: this.babyFormGroup.value[0]['agparScore10min']}
+            {
+                ApgarSCoreId: apgarscoreOne[0].itemId, ApgarScoreType: 'Apgar Score 1 min',
+                SCore: this.babyFormGroup.value[0]['agparScore1min']
+            },
+            {
+                ApgarSCoreId: apgarscoreTwo[0].itemId, ApgarScoreType: 'Apgar Score 5 min',
+                SCore: this.babyFormGroup.value[0]['agparScore5min']
+            },
+            {
+                ApgarSCoreId: apgarscoreThree[0].itemId, ApgarScoreType: 'Apgar Score 10 min',
+                SCore: this.babyFormGroup.value[0]['agparScore10min']
+            }
         );
 
-        const babyconditionCommand: BabyConditionCommand = {
-            PatientDeliveryInformationId: 0,
-            PatientMasterVisitId: this.patientMasterVisitId,
-            BirthWeight: this.babyFormGroup.value[0]['birthWeight'],
-            Sex: this.babyFormGroup.value[0]['babySex'],
-            DeliveryOutcome: this.babyFormGroup.value[0]['outcome'],
-            ResuscitationDone: this.babyFormGroup.value[0]['resuscitationDone'],
-            BirthDeformity: this.babyFormGroup.value[0]['deformity'],
-            TeoGiven: this.babyFormGroup.value[0]['teoGiven'],
-            BreastFedWithinHour: this.babyFormGroup.value[0]['breastFed'],
-            BirthNotificationNumber: this.babyFormGroup.value[0]['notificationNumber'],
-            Comment: this.babyFormGroup.value[0]['comment'],
-            CreatedBy: this.userId,
-            ApgrarScore: this.apgarSCore
-        };
+        console.log('baby data');
+        console.log(this.babyNotifyData);
+
+        for (let i = 0; i < this.babyNotifyData.length; i++) {
+            for (let j = 0; j < this.babyNotifyData.length; j++) {
+
+                this.DeliveredBabyBirthInfoCollection.push({
+                       PatientDeliveryInformationId: 0,
+                       PatientMasterVisitId: this.patientMasterVisitId,
+                       BirthWeight: parseFloat(this.babyNotifyData[i][j]['birthWeight']),
+                       Sex: this.babyNotifyData[i][j]['sex'],
+                       DeliveryOutcome: this.babyNotifyData[i][j]['outcome'],
+                       ResuscitationDone: this.babyNotifyData[i][j]['resuscitate'],
+                       BirthDeformity: this.babyNotifyData[i][j]['deformity'],
+                       TeoGiven: this.babyNotifyData[i][j]['teo'],
+                       BreastFedWithinHour: this.babyNotifyData[i][j]['breastFeeding'],
+                       BirthNotificationNumber: this.babyNotifyData[i][j]['notificationNo'],
+                       Comment: this.babyNotifyData[i][j]['comment'],
+                       CreatedBy: this.userId,
+                       ApgarScores: [
+                           {
+                               ApgarSCoreId: apgarscoreOne[0].itemId, SCore: this.babyNotifyData[i][j]['apgarScoreOne'],
+                               ApgarScoreType: 'Apgar Score 1 min'
+                           },
+                           {
+                               ApgarSCoreId: apgarscoreTwo[0].itemId, SCore: this.babyNotifyData[i][j]['apgarScoreFive'],
+                               ApgarScoreType: 'Apgar Score 5 min'
+                           },
+                           {
+                               ApgarSCoreId: apgarscoreThree[0].itemId, SCore: this.babyNotifyData[i][j]['apgarScoreTen'],
+                               ApgarScoreType: 'Apgar Score 10 min'
+                           }
+                       ]
+                });
+                this.testCondition.push({
+                    DeliveredBabyBirthInfoCollection: this.DeliveredBabyBirthInfoCollection
+                });
+            }
+
+
+        }
+
+
+        /*  const babyconditionCommand: BabyConditionCommand = {
+              PatientDeliveryInformationId: 0,
+              PatientMasterVisitId: this.patientMasterVisitId,
+              BirthWeight: this.babyFormGroup.value[0]['birthWeight'],
+              Sex: this.babyFormGroup.value[0]['babySex'],
+              DeliveryOutcome: this.babyFormGroup.value[0]['outcome'],
+              ResuscitationDone: this.babyFormGroup.value[0]['resuscitationDone'],
+              BirthDeformity: this.babyFormGroup.value[0]['deformity'],
+              TeoGiven: this.babyFormGroup.value[0]['teoGiven'],
+              BreastFedWithinHour: this.babyFormGroup.value[0]['breastFed'],
+              BirthNotificationNumber: this.babyFormGroup.value[0]['notificationNumber'],
+              Comment: this.babyFormGroup.value[0]['comment'],
+              CreatedBy: this.userId,
+              ApgrarScore: this.apgarSCore
+          };*/
 
         const vitaminA = this.drugAdminOptions.filter(x => x.itemName == 'Vitamin A Supplementation');
         const haartAnc = this.drugAdminOptions.filter(x => x.itemName == 'Started HAART in ANC');
@@ -349,16 +408,26 @@ export class MaternityComponent implements OnInit {
         const cotrimoxazole = this.drugAdminOptions.filter(x => x.itemName == 'Cotrimoxazole');
 
         this.AdministredDrugs.push(
-            {Id: vitaminA[0].itemId, Value: this.maternalDrugAdministrationForGroup.value[0]['vitaminASupplement'],
-                Description: 'Vitamin A Supplementation'},
-            {Id: haartAnc[0].itemId, Value: this.maternalDrugAdministrationForGroup.value[0]['HaartANC'],
-                Description:  'Started HAART in ANC'},
-            {Id: cotrimoxazole[0].itemId, Value: this.maternalDrugAdministrationForGroup.value[0]['cotrimoxazole'],
-                Description:  'ARVs Started in Maternity'},
-            {Id: maternityArv[0].itemId, Value: this.maternalDrugAdministrationForGroup.value[0]['ARVStartedMaternity'],
-                Description:  'Infant Provided With ARV prophylaxis'},
-            {Id: infantArv[0].itemId, Value: this.maternalDrugAdministrationForGroup.value[0]['ARVStartedMaternity'],
-                Description:  'Cotrimoxazole'}
+            {
+                Id: vitaminA[0].itemId, Value: this.maternalDrugAdministrationForGroup.value[0]['vitaminASupplement'],
+                Description: 'Vitamin A Supplementation'
+            },
+            {
+                Id: haartAnc[0].itemId, Value: this.maternalDrugAdministrationForGroup.value[0]['HaartANC'],
+                Description: 'Started HAART in ANC'
+            },
+            {
+                Id: cotrimoxazole[0].itemId, Value: this.maternalDrugAdministrationForGroup.value[0]['cotrimoxazole'],
+                Description: 'ARVs Started in Maternity'
+            },
+            {
+                Id: maternityArv[0].itemId, Value: this.maternalDrugAdministrationForGroup.value[0]['ARVStartedMaternity'],
+                Description: 'Infant Provided With ARV prophylaxis'
+            },
+            {
+                Id: infantArv[0].itemId, Value: this.maternalDrugAdministrationForGroup.value[0]['ARVStartedMaternity'],
+                Description: 'Cotrimoxazole'
+            }
         );
 
         const drugAdministrationCommand: DrugAdministrationCommand = {
@@ -390,7 +459,7 @@ export class MaternityComponent implements OnInit {
         };
 
         const referralCommand: ReferralCommand = {
-            Id: 0 ,
+            Id: 0,
             PatientId: this.patientId,
             PatientMasterVisitId: this.patientMasterVisitId,
             ReferredFrom: this.diagnosisFormGroup.value[1]['referredFrom'],
@@ -419,7 +488,8 @@ export class MaternityComponent implements OnInit {
             PatientPregnancy: pregnancyCommand
         };
 
-       // const matMotherProfile = this.matService.savePregnancyProfile(pregnancyCommand);
+        console.log(this.testCondition);
+        // const matMotherProfile = this.matService.savePregnancyProfile(pregnancyCommand);
         const matVisitDetails = this.matService.saveVisitDetails(visitDetailsCommand);
         const matDiagnosis = this.matService.saveDiagnosis(diagnosisCommand);
         const matDrugAdministartion = this.matService.saveMaternalDrugAdministration(drugAdministrationCommand);
@@ -427,34 +497,38 @@ export class MaternityComponent implements OnInit {
         const matDischarge = this.matService.saveDischarge(dischargeCommand);
         const matReferral = this.matService.saveReferrals(referralCommand);
         const matNextAppointment = this.matService.saveNextAppointment(nextAppointmentCommand);
-        const matDelivery = this.matService.savePatientDelivery(maternityDeliveryCommand)
+        const matDelivery = this.matService.savePatientDelivery(maternityDeliveryCommand);
+        const matBabyCondition = this.matService.saveBabySection(this.testCondition);
+
+
 
         forkJoin([ // matVisitDetails,
-           // matMotherProfile,
-           // matDiagnosis,
-          //  matDrugAdministartion,
-            matDelivery
-          //  matEducation,
-          //  matDischarge,
-          //  matReferral,
-           // matNextAppointment
+            // matMotherProfile,
+            // matDiagnosis,
+            //  matDrugAdministartion,
+            //  matDelivery
+            //  matEducation,
+            //  matDischarge,
+            //  matReferral,
+            // matNextAppointment
+            matBabyCondition
         ])
             .subscribe(
                 (result) => {
                     console.log(`success `);
                     console.log(result);
 
-                   /* this.pregnancyId = result[1]['PregnancyId'];
-                    maternityDeliveryCommand.ProfileId = this.pregnancyId;
-                    
-                    const matDelivery = this.matService.savePatientDelivery(maternityDeliveryCommand).subscribe(
-                        (res) => {
-                            this.deliveryId = res['PatientDeliveryInformationId'];
-                            babyconditionCommand.PatientDeliveryInformationId = this.deliveryId;
-                            const matBabyCondition = this.matService.saveBabySection(babyconditionCommand);
-                            console.log(`result`, res);
-                        }
-                    );*/
+                    /* this.pregnancyId = result[1]['PregnancyId'];
+                     maternityDeliveryCommand.ProfileId = this.pregnancyId;
+
+                     const matDelivery = this.matService.savePatientDelivery(maternityDeliveryCommand).subscribe(
+                         (res) => {
+                             this.deliveryId = res['PatientDeliveryInformationId'];
+                             babyconditionCommand.PatientDeliveryInformationId = this.deliveryId;
+                             const matBabyCondition = this.matService.saveBabySection(babyconditionCommand);
+                             console.log(`result`, res);
+                         }
+                     );*/
                 },
                 (error) => {
                     console.log(`error ` + error);

@@ -80,7 +80,7 @@ export class MaternityService {
     }
 
     public saveBabySection(babysection: any): Observable<any> {
-        return this.http.post(this.API_MATERNITY_URL + '/api/MaternityPatientDeliveryInfo/AddDeliveredBabyBirthInfo',
+        return this.http.post(this.API_MATERNITY_URL + '/api/MaternityPatientDeliveryInfo/AddDeliveredBabyBirthInfoCollection',
             JSON.stringify(babysection),
             httpOptions).pipe(
             tap(saveBabySection => this.errorHandler.log(`successfully added maternity baby section`)),
