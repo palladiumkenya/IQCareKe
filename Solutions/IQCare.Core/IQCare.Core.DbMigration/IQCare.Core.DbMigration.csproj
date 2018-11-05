@@ -61,6 +61,7 @@
     <None Remove="Scripts\1.0.0.9\32_BO_PatientFamilyPlanningMethodView.sql" />
     <None Remove="Scripts\1.0.0.9\33_BO_AlterPtientInfoSetPostPartumtoDaysPostPartum.sql" />
     <None Remove="Scripts\1.0.0.9\36_DO_AlterTable_PatientDelivery_ChangeCol_DurationOfLabour.sql" />
+    <None Remove="Scripts\1.0.0.9\37_BO_AddPhsicalExaminationView.sql" />
   </ItemGroup>
 
   <ItemGroup>
@@ -125,6 +126,7 @@
     <EmbeddedResource Include="Scripts\1.0.0.9\31_DO_CreateView_PatientDischargeInfoView.sql" />
     <EmbeddedResource Include="Scripts\1.0.0.9\32_BO_PatientFamilyPlanningMethodView.sql" />
     <EmbeddedResource Include="Scripts\1.0.0.9\36_DO_AlterTable_PatientDelivery_ChangeCol_DurationOfLabour.sql" />
+    <EmbeddedResource Include="Scripts\1.0.0.9\37_BO_AddPhsicalExaminationView.sql" />
   </ItemGroup>
 
   <ItemGroup>

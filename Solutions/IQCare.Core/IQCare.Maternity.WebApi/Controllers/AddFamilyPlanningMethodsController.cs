@@ -36,10 +36,10 @@ namespace IQCare.Maternity.WebApi.Controllers
         [HttpGet("{Id}")]
         public async Task<object> GetFamilyPlanningInfo(int Id)
         {
-            var diagnosisInfo = await _mediator.Send(new GetPatientFamilyPlanningMethodQuery { PatientId = Id }, HttpContext.RequestAborted);
-            if (diagnosisInfo.IsValid)
-                return Ok(diagnosisInfo.Value);
-            return BadRequest(diagnosisInfo);
+            var getPatientFamilyPlanningMethods = await _mediator.Send(new GetPatientFamilyPlanningMethodQuery { PatientId = Id }, HttpContext.RequestAborted);
+            if (getPatientFamilyPlanningMethods.IsValid)
+                return Ok(getPatientFamilyPlanningMethods.Value);
+            return BadRequest(getPatientFamilyPlanningMethods);
         }
     }
 }
