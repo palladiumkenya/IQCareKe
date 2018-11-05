@@ -22,6 +22,7 @@
     <None Remove="Scripts\1.0.0.8\PMTCT\08_CreateTable_PatientPreventiveServices.sql" />
     <None Remove="Scripts\1.0.0.8\PMTCT\09_CreateTable_PatientProfile.sql" />
     <None Remove="Scripts\1.0.0.8\PMTCT\10_CreateTable_PmtctBaby.sql" />
+    <None Remove="Scripts\1.0.0.8\PMTCT\11_AlterTable_Pregnancy_AddCol.sql" />
     <None Remove="Scripts\1.0.0.9\01_DO_Rename_Table_PMTCTBaby.sql" />
     <None Remove="Scripts\1.0.0.9\02_DO_CreateTable_DeliveredBabyApgarScore.sql" />
     <None Remove="Scripts\1.0.0.9\03_DO_AlterTable_DeliveredBabyBirthInfo_AlterColmn_DeliveryComplications.sql" />
@@ -60,6 +61,7 @@
     <None Remove="Scripts\1.0.0.9\31_DO_CreateView_PatientDischargeInfoView.sql" />
     <None Remove="Scripts\1.0.0.9\32_BO_PatientFamilyPlanningMethodView.sql" />
     <None Remove="Scripts\1.0.0.9\33_BO_AlterPtientInfoSetPostPartumtoDaysPostPartum.sql" />
+    <None Remove="Scripts\1.0.0.9\35_AlterTable_PatientReferral_Rename_And_Change_Col_DataTypes.sql" />
     <None Remove="Scripts\1.0.0.9\36_DO_AlterTable_PatientDelivery_ChangeCol_DurationOfLabour.sql" />
   </ItemGroup>
 
@@ -80,6 +82,7 @@
     <EmbeddedResource Include="Scripts\1.0.0.8\PMTCT\08_CreateTable_PatientPreventiveServices.sql" />
     <EmbeddedResource Include="Scripts\1.0.0.8\PMTCT\09_CreateTable_PatientProfile.sql" />
     <EmbeddedResource Include="Scripts\1.0.0.8\PMTCT\10_CreateTable_PmtctBaby.sql" />
+    <EmbeddedResource Include="Scripts\1.0.0.8\PMTCT\11_AlterTable_Pregnancy_AddCol.sql" />
   </ItemGroup>
 
   <ItemGroup>
@@ -124,6 +127,7 @@
     <EmbeddedResource Include="Scripts\1.0.0.9\31_BO_PatientFamilyPlanningLookUpViewItems.sql" />
     <EmbeddedResource Include="Scripts\1.0.0.9\31_DO_CreateView_PatientDischargeInfoView.sql" />
     <EmbeddedResource Include="Scripts\1.0.0.9\32_BO_PatientFamilyPlanningMethodView.sql" />
+    <EmbeddedResource Include="Scripts\1.0.0.9\35_AlterTable_PatientReferral_Rename_And_Change_Col_DataTypes.sql" />
     <EmbeddedResource Include="Scripts\1.0.0.9\36_DO_AlterTable_PatientDelivery_ChangeCol_DurationOfLabour.sql" />
   </ItemGroup>
 
