@@ -77,9 +77,16 @@ export class PncService {
     }
 
     public savePncDrugAdministration(): Observable<any> {
-        return this.http.post<any>(this.API_URL + '', JSON.stringify(''), httpOptions).pipe(
+        return this.http.post<any>(this.API_URL + '/api/PatientDiagnosis/AddDrugAdministrationInfo', JSON.stringify(''), httpOptions).pipe(
             tap(savePncDrugAdministration => this.errorHandler.log(`successfully saved pnc drug administration`)),
             catchError(this.errorHandler.handleError<any>('Error saving pnc drug administration'))
+        );
+    }
+
+    public savePncScreening(): Observable<any> {
+        return this.http.post<any>(this.API_URL + '', JSON.stringify(''), httpOptions).pipe(
+            tap(savePncScreening => this.errorHandler.log(`successfully saved pnc screening`)),
+            catchError(this.errorHandler.handleError<any>(`Error saving pnc screening`))
         );
     }
 
@@ -116,7 +123,7 @@ export class PncService {
     }
 
     public savePncFamilyPlanning(familyPlanningCommand: FamilyPlanningCommand): Observable<any> {
-        return this.http.post<any>(this.API_MATERNITY_URL + '/api/AddFamilyPlanning', JSON.stringify(familyPlanningCommand),
+        return this.http.post<any>(this.API_MATERNITY_URL + '/api/FamilyPlanning', JSON.stringify(familyPlanningCommand),
             httpOptions).pipe(
                 tap(savePncFamilyPlanning => this.errorHandler.log(`successfully saved pnc family planning`)),
                 catchError(this.errorHandler.handleError<any>('Error saving pnc family planning'))

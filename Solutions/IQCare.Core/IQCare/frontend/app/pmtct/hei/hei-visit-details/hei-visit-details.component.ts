@@ -82,11 +82,12 @@ export class HeiVisitDetailsComponent implements OnInit {
             .subscribe(
                 p => {
                     const visit = p;
-                    if (visit.visitNumber > 1) {
-                        const Item = this.visitTypes.filter(x => x.itemName === 'Follow Up ANC visit');
+                    if (visit && visit.visitNumber > 1) {
+                        const Item = this.visitTypes.filter(x => x.itemName.includes('Follow Up'));
                         this.HeiVisitDetailsFormGroup.get('visitType').patchValue(Item[0].itemId);
                     } else {
-                        const Item = this.visitTypes.filter(x => x.itemName === 'Initial ANC Visit');
+                        const Item = this.visitTypes.filter(x => x.itemName.includes('Initial'));
+                        // console.log(Item);
                         this.HeiVisitDetailsFormGroup.get('visitType').patchValue(Item[0].itemId);
                     }
                 },
