@@ -10,6 +10,7 @@ using IQCare.PMTCT.Infrastructure;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Query.Expressions;
+using Serilog;
 
 namespace IQCare.PMTCT.BusinessProcess.CommandHandlers.Profile
 {
@@ -53,8 +54,8 @@ namespace IQCare.PMTCT.BusinessProcess.CommandHandlers.Profile
                 }
                 catch (Exception e)
                 {
-                    Console.WriteLine(e);
-                    throw;
+                    Log.Error(e.Message + " " + e.InnerException);
+                    return  Result<PatientProfile>.Invalid(e.Message + " " + e.InnerException);
                 }
             }
            

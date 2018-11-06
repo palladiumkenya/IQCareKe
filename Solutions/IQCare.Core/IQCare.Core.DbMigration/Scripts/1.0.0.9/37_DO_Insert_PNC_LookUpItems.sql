@@ -1,4 +1,4 @@
--- PMTCT LOOKUPS
+﻿-- PMTCT LOOKUPS
 
 IF NOT EXISTS(SELECT * FROM LookupItem WHERE Name='pnc-encounter')
 BEGIN
@@ -245,20 +245,3 @@ If Not Exists(Select 1 From LookupItem where Name='Follow Up PNC Visit') Begin I
 -- LookupMasterItem
 If Not Exists(Select 1 From LookupMasterItem where LookupMasterId=(SELECT TOP 1 Id FROM LookupMaster WHERE Name='PNCVisitType') and LookupItemId=(SELECT TOP 1 Id FROM LookupItem WHERE Name='Initial PNC Visit')) Begin Insert Into LookupMasterItem(LookupMasterId ,LookupItemId,DisplayName, OrdRank)VALUES((SELECT TOP 1 Id FROM LookupMaster WHERE Name='PNCVisitType'),(SELECT TOP 1 Id FROM LookupItem WHERE Name='Initial PNC Visit'),'Initial PNC Visit',1); end
 If Not Exists(Select 1 From LookupMasterItem where LookupMasterId=(SELECT TOP 1 Id FROM LookupMaster WHERE Name='PNCVisitType') and LookupItemId=(SELECT TOP 1 Id FROM LookupItem WHERE Name='Follow Up PNC Visit')) Begin Insert Into LookupMasterItem(LookupMasterId ,LookupItemId,DisplayName, OrdRank)VALUES((SELECT TOP 1 Id FROM LookupMaster WHERE Name='PNCVisitType'),(SELECT TOP 1 Id FROM LookupItem WHERE Name='Follow Up PNC Visit'),'Follow Up PNC Visit',2); end 
-
-
-------------PncDrugAdministration
--- master
-If Not Exists(Select 1 From LookupMaster where Name='PncDrugAdministration') Begin INSERT INTO LookupMaster (Name, DisplayName, DeleteFlag) VALUES ('PncDrugAdministration','PncDrugAdministration',0); End
-
--- lookupitem
-If Not Exists(Select 1 From LookupItem where Name='Started HAART in PNC') Begin INSERT INTO LookupItem (Name, DisplayName, DeleteFlag) VALUES ('Started HAART in PNC','Started HAART in PNC',0); End
-If Not Exists(Select 1 From LookupItem where Name='Haematinics given') Begin INSERT INTO LookupItem (Name, DisplayName, DeleteFlag) VALUES ('Haematinics given','Haematinics given',0); End
-If Not Exists(Select 1 From LookupItem where Name='Infant_Drug') Begin INSERT INTO LookupItem (Name, DisplayName, DeleteFlag) VALUES ('Infant_Drug','Infant_Drug',0); End
-If Not Exists(Select 1 From LookupItem where Name='Infant_Start_Continue') Begin INSERT INTO LookupItem (Name, DisplayName, DeleteFlag) VALUES ('Infant_Start_Continue','Infant_Start_Continue',0); End
-
--- LookupMasterItem
-If Not Exists(Select 1 From LookupMasterItem where LookupMasterId=(SELECT TOP 1 Id FROM LookupMaster WHERE Name='PncDrugAdministration') and LookupItemId=(SELECT TOP 1 Id FROM LookupItem WHERE Name='Started HAART in PNC')) Begin Insert Into LookupMasterItem(LookupMasterId ,LookupItemId,DisplayName, OrdRank)VALUES((SELECT TOP 1 Id FROM LookupMaster WHERE Name='PncDrugAdministration'),(SELECT TOP 1 Id FROM LookupItem WHERE Name='Started HAART in PNC'),'Started HAART in PNC',1); end
-If Not Exists(Select 1 From LookupMasterItem where LookupMasterId=(SELECT TOP 1 Id FROM LookupMaster WHERE Name='PncDrugAdministration') and LookupItemId=(SELECT TOP 1 Id FROM LookupItem WHERE Name='Haematinics given')) Begin Insert Into LookupMasterItem(LookupMasterId ,LookupItemId,DisplayName, OrdRank)VALUES((SELECT TOP 1 Id FROM LookupMaster WHERE Name='PncDrugAdministration'),(SELECT TOP 1 Id FROM LookupItem WHERE Name='Haematinics given'),'Haematinics given',2); end 
-If Not Exists(Select 1 From LookupMasterItem where LookupMasterId=(SELECT TOP 1 Id FROM LookupMaster WHERE Name='PncDrugAdministration') and LookupItemId=(SELECT TOP 1 Id FROM LookupItem WHERE Name='Infant_Drug')) Begin Insert Into LookupMasterItem(LookupMasterId ,LookupItemId,DisplayName, OrdRank)VALUES((SELECT TOP 1 Id FROM LookupMaster WHERE Name='PncDrugAdministration'),(SELECT TOP 1 Id FROM LookupItem WHERE Name='Infant_Drug'),'Infant_Drug',3); end 
-If Not Exists(Select 1 From LookupMasterItem where LookupMasterId=(SELECT TOP 1 Id FROM LookupMaster WHERE Name='PncDrugAdministration') and LookupItemId=(SELECT TOP 1 Id FROM LookupItem WHERE Name='Infant_Start_Continue')) Begin Insert Into LookupMasterItem(LookupMasterId ,LookupItemId,DisplayName, OrdRank)VALUES((SELECT TOP 1 Id FROM LookupMaster WHERE Name='PncDrugAdministration'),(SELECT TOP 1 Id FROM LookupItem WHERE Name='Infant_Start_Continue'),'Infant_Start_Continue',4); end 
