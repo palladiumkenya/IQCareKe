@@ -21,7 +21,7 @@ const httpOptions = {
 })
 export class MaternityService {
     private API_URL = environment.API_URL;
-    private API_MATERNITY_URL = environment.API_MATERNITY_URL;
+    private API_PMTCT_URL = environment.API_PMTCT_URL;
 
     constructor(private http: HttpClient, private errorHandler: ErrorHandlerService) {
     }
@@ -49,7 +49,7 @@ export class MaternityService {
     }
 
     public getMaternityEncounter(patientId: number) {
-        return this.http.get<any>(this.API_MATERNITY_URL + '/api/MaternityEncounter/' + patientId).pipe(
+        return this.http.get<any>(this.API_PMTCT_URL + '/api/MaternityEncounter/' + patientId).pipe(
             tap(getMaternityEncounter => this.errorHandler.log('get current maternity details')),
             catchError(this.errorHandler.handleError<any[]>('GetMaternityEncounter'))
         );
@@ -70,14 +70,14 @@ export class MaternityService {
     }
 
     public saveDiagnosis(diagnosis: any): Observable<any> {
-        return this.http.post(this.API_MATERNITY_URL + '/api/PatientDiagnosis/AddDiagnosis', JSON.stringify(diagnosis), httpOptions).pipe(
+        return this.http.post(this.API_PMTCT_URL + '/api/PatientDiagnosis/AddDiagnosis', JSON.stringify(diagnosis), httpOptions).pipe(
             tap(saveVisitDetals => this.errorHandler.log(`successfully added maternity diagnosis`)),
             catchError(this.errorHandler.handleError<any>('Error saving maternity diagnosis'))
         );
     }
 
     public savePatientDelivery(delivery: any): Observable<any> {
-        return this.http.post(this.API_MATERNITY_URL + '/api/MaternityPatientDeliveryInfo/AddPatientDeliveryInfo', JSON.stringify(delivery),
+        return this.http.post(this.API_PMTCT_URL + '/api/MaternityPatientDeliveryInfo/AddPatientDeliveryInfo', JSON.stringify(delivery),
             httpOptions).pipe(
                 tap(savePatientDelivery => this.errorHandler.log(`successfully added maternity delivery info`)),
                 catchError(this.errorHandler.handleError<any>('Error saving maternity Delivery info'))
@@ -85,7 +85,7 @@ export class MaternityService {
     }
 
     public saveBabySection(babysection: any): Observable<any> {
-        return this.http.post(this.API_MATERNITY_URL + '/api/MaternityPatientDeliveryInfo/AddDeliveredBabyBirthInfoCollection',
+        return this.http.post(this.API_PMTCT_URL + '/api/MaternityPatientDeliveryInfo/AddDeliveredBabyBirthInfoCollection',
             JSON.stringify(babysection),
             httpOptions).pipe(
                 tap(saveBabySection => this.errorHandler.log(`successfully added maternity baby section`)),
@@ -94,18 +94,18 @@ export class MaternityService {
     }
 
     public saveMaternalDrugAdministration(drug: any): Observable<any> {
-        return this.http.post(this.API_MATERNITY_URL + '/api/PatientDiagnosis/AddDrugAdministrationInfo',
+        return this.http.post(this.API_PMTCT_URL + '/api/PatientDiagnosis/AddDrugAdministrationInfo',
             JSON.stringify(drug), httpOptions).pipe(
                 tap(saveMaternalDrugAdministration => this.errorHandler.log(`successfully added maternal drug administration`)),
                 catchError(this.errorHandler.handleError<any>('Error saving maternal drug administration'))
             );
     }
 
-    public savePartnerTesting(partnerTestingCommand: PartnerTestingCommand): Observable<any> {
-        return this.http.post<any>(this.API_MATERNITY_URL + '/api/PatientPartnerTesting',
-            JSON.stringify(partnerTestingCommand), httpOptions).pipe(
-            tap(savePartnerTesting => this.errorHandler.log(`successfully saved pnc partner testing`)),
-            catchError(this.errorHandler.handleError<any>('Error saving pnc partner testing'))
+
+    public savePartnerTesting(partner: any): Observable<any> {
+        return this.http.post(this.API_PMTCT_URL + '/api/MaternityPatientDeliveryInfo', JSON.stringify(partner), httpOptions).pipe(
+            tap(savePartnerTesting => this.errorHandler.log(`successfully added Partner testing details`)),
+            catchError(this.errorHandler.handleError<any>('Error saving Partner testing details'))
         );
     }
 
@@ -119,7 +119,7 @@ export class MaternityService {
     }
 
     public saveDischarge(discharge: any): Observable<any> {
-        return this.http.post(this.API_MATERNITY_URL + '/api/MaternityPatientDeliveryInfo/DischargePatient',
+        return this.http.post(this.API_PMTCT_URL + '/api/MaternityPatientDeliveryInfo/DischargePatient',
             JSON.stringify(discharge), httpOptions).pipe(
                 tap(saveDischarge => this.errorHandler.log(`successfully added discharge details`)),
                 catchError(this.errorHandler.handleError<any>('Error saving Partner discharge details'))
@@ -166,7 +166,7 @@ export class MaternityService {
     }
 
     public getPatientDeliveryInfoByProfileId(profileId: number): Observable<PatientDeliveryInformationViewModel[]> {
-        return this.http.get<PatientDeliveryInformationViewModel[]>(this.API_MATERNITY_URL
+        return this.http.get<PatientDeliveryInformationViewModel[]>(this.API_PMTCT_URL
             + '/api/MaternityPatientDeliveryInfo/GetPatientDeliveryInfoByProfileId/' + profileId)
             .pipe(
                 tap(getPatientDeliveryInfoByProfileId => this.errorHandler.log(`successfully fetched patient delivery info by profile Id`)),
