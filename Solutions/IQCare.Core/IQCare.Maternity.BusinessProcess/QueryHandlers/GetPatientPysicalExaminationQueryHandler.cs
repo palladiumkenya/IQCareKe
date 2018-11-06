@@ -30,10 +30,9 @@ namespace IQCare.Maternity.BusinessProcess.QueryHandlers
             try
             {
                 var patientExamination = _maternityUnitOfWork.Repository<PhysicalExaminationView>().Get(x => x.PatientId == request.PatientId);
-                var familyPlanningViewModel = _mapper.Map<List<GetPatientPhysicalExaminationViewModel>>(patientExamination);
-
-
-                return Task.FromResult(Result<List<GetPatientPhysicalExaminationViewModel>>.Valid(familyPlanningViewModel));
+                var physicalExamination = _mapper.Map<List<GetPatientPhysicalExaminationViewModel>>(patientExamination);
+                
+                return Task.FromResult(Result<List<GetPatientPhysicalExaminationViewModel>>.Valid(physicalExamination));
             }
             catch (Exception ex)
             {
