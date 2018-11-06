@@ -13,9 +13,7 @@ export class MaternityReferralComponent implements OnInit {
     referralFormGroup: FormGroup;
     @Input() dischargeOptions: any[] = [];
     @Output() notify: EventEmitter<FormGroup> = new EventEmitter<FormGroup>();
-    // public deliveryStateOptions: any[] = [];
     public referralOptions: any[] = [];
-    // public yesnoOptions: any[] = [];
 
     constructor(private formBuilder: FormBuilder,
         private notificationService: NotificationService,
