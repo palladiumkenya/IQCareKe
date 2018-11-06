@@ -34,9 +34,9 @@ namespace IQCare.Maternity.WebApi.Controllers
             return BadRequest(result);
         }
         [HttpGet]
-        public async Task<object> Get(int Id)
+        public async Task<object> Get(int PatientId, int PatientMasterVisitId)
         {
-            var physicalExamination = await _mediator.Send(new PatientScreeningDetailsQuery { PatientId = Id }, HttpContext.RequestAborted);
+            var physicalExamination = await _mediator.Send(new PatientScreeningDetailsQuery { PatientId = PatientId, PatientMasterVisitId = PatientMasterVisitId }, HttpContext.RequestAborted);
             if (physicalExamination.IsValid)
                 return Ok(physicalExamination.Value);
             return BadRequest(physicalExamination);
