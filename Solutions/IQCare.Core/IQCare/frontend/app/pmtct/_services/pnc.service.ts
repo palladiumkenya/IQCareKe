@@ -14,6 +14,7 @@ import { PatientReferralCommand } from '../_models/PatientReferralCommand';
 import { PatientAppointment } from '../_models/PatientAppointmet';
 import { PostNatalExamCommand } from '../_models/PostNatalExamCommand';
 import { FamilyPlanningMethodCommand } from '../_models/FamilyPlanningMethodCommand';
+import { PartnerTestingCommand } from '../_models/PartnerTestingCommand';
 
 const httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -82,11 +83,12 @@ export class PncService {
         );
     }
 
-    public savePartnerTesting(): Observable<any> {
-        return this.http.post<any>(this.API_URL + '', JSON.stringify(''), httpOptions).pipe(
-            tap(savePartnerTesting => this.errorHandler.log(`successfully saved pnc partner testing`)),
-            catchError(this.errorHandler.handleError<any>('Error saving pnc partner testing'))
-        );
+    public savePartnerTesting(partnerTestingCommand: PartnerTestingCommand): Observable<any> {
+        return this.http.post<any>(this.API_MATERNITY_URL + '/api/PatientPartnerTesting',
+            JSON.stringify(partnerTestingCommand), httpOptions).pipe(
+                tap(savePartnerTesting => this.errorHandler.log(`successfully saved pnc partner testing`)),
+                catchError(this.errorHandler.handleError<any>('Error saving pnc partner testing'))
+            );
     }
 
     public saveDiagnosis(pncPatientDiagnosis: PatientDiagnosisCommand): Observable<any> {
@@ -98,7 +100,7 @@ export class PncService {
     }
 
     public savePncReferral(pncReferralCommand: PatientReferralCommand): Observable<any> {
-        return this.http.post<any>(this.API_URL + '/api/PatientReferralAndAppointment/AddPatientReferralInfo/postReferral',
+        return this.http.post<any>(this.API_URL + '/api/PatientReferralAndAppointment/AddPatientReferralInfo',
             JSON.stringify(pncReferralCommand), httpOptions).pipe(
                 tap(savePncReferral => this.errorHandler.log(`successfully saved pnc referral`)),
                 catchError(this.errorHandler.handleError<any>('Error saving pnc referral'))
@@ -106,7 +108,7 @@ export class PncService {
     }
 
     public savePncNextAppointment(pncNextAppointmentCommand: PatientAppointment): Observable<any> {
-        return this.http.post<any>(this.API_URL + '/api/PatientReferralAndAppointment/AddPatientNextAppointment/postNextAppointment',
+        return this.http.post<any>(this.API_URL + '/api/PatientReferralAndAppointment/AddPatientNextAppointment',
             JSON.stringify(pncNextAppointmentCommand), httpOptions).pipe(
                 tap(savePncNextAppointment => this.errorHandler.log(`successfully saved pnc next appointment`)),
                 catchError(this.errorHandler.handleError<any>('Error saving pnc next appointment'))
@@ -114,14 +116,15 @@ export class PncService {
     }
 
     public savePncFamilyPlanning(familyPlanningCommand: FamilyPlanningCommand): Observable<any> {
-        return this.http.post<any>(this.API_URL + '/api/AddFamilyPlanning', JSON.stringify(familyPlanningCommand), httpOptions).pipe(
-            tap(savePncFamilyPlanning => this.errorHandler.log(`successfully saved pnc family planning`)),
-            catchError(this.errorHandler.handleError<any>('Error saving pnc family planning'))
-        );
+        return this.http.post<any>(this.API_MATERNITY_URL + '/api/AddFamilyPlanning', JSON.stringify(familyPlanningCommand),
+            httpOptions).pipe(
+                tap(savePncFamilyPlanning => this.errorHandler.log(`successfully saved pnc family planning`)),
+                catchError(this.errorHandler.handleError<any>('Error saving pnc family planning'))
+            );
     }
 
     public savePncFamilyPlanningMethod(familyPlanningMethodCommand: FamilyPlanningMethodCommand): Observable<any> {
-        return this.http.post<any>(this.API_URL + '/api/AddFamilyPlanningMetods', JSON.stringify(familyPlanningMethodCommand),
+        return this.http.post<any>(this.API_MATERNITY_URL + '/api/AddFamilyPlanningMetods', JSON.stringify(familyPlanningMethodCommand),
             httpOptions).pipe(
                 tap(savePncFamilyPlanningMethod => this.errorHandler.log(`successfully saved pnc family planning method`)),
                 catchError(this.errorHandler.handleError<any>('Error saving pnc family planning method'))
