@@ -53,16 +53,20 @@
     <None Remove="Scripts\1.0.0.9\07_BO_AlterTable_PatientProfile_SetPregnancyIdToNullable.sql" />
     <None Remove="Scripts\1.0.0.9\27_DO_AlterTable_PatientProfile_AlterCol_AgeMenarch_Null.sql" />
     <None Remove="Scripts\1.0.0.9\28_DO_AlterTable_PatientAppointment_AllowNull_DifferentiatedCareId.sql" />
-    <None Remove="Scripts\1.0.0.9\30_BO_PosNatalExaminationItemLookUp.sql" />
     <None Remove="Scripts\1.0.0.9\29_DO_AlterTable_PatientOutcome_AddAuditColumns.sql" />
     <None Remove="Scripts\1.0.0.9\29_SO_AlterTable_PatientOutcome.sql" />
+    <None Remove="Scripts\1.0.0.9\30_SO_MaternityEncounterView.sql" />
     <None Remove="Scripts\1.0.0.9\31_AlterTable_PatientOutcome_RenameCol_DateOfOutcome.sql" />
     <None Remove="Scripts\1.0.0.9\31_BO_PatientFamilyPlanningLookUpViewItems.sql" />
     <None Remove="Scripts\1.0.0.9\31_DO_CreateView_PatientDischargeInfoView.sql" />
     <None Remove="Scripts\1.0.0.9\32_BO_PatientFamilyPlanningMethodView.sql" />
+    <None Remove="Scripts\1.0.0.9\32_DO_Insert_MaternalDrugAdmin_LookUp_Items.sql" />
     <None Remove="Scripts\1.0.0.9\33_BO_AlterPtientInfoSetPostPartumtoDaysPostPartum.sql" />
+    <None Remove="Scripts\1.0.0.9\33_DO_AlterTable_PatientDrugAdministration_AlterCol_CreatedDate.sql" />
+    <None Remove="Scripts\1.0.0.9\34_DO_CreateView_PatientDrugAdministrationView.sql" />
     <None Remove="Scripts\1.0.0.9\35_AlterTable_PatientReferral_Rename_And_Change_Col_DataTypes.sql" />
     <None Remove="Scripts\1.0.0.9\36_DO_AlterTable_PatientDelivery_ChangeCol_DurationOfLabour.sql" />
+    <None Remove="Scripts\1.0.0.9\37_DO_Insert_PNC_LookUpItems.sql" />
   </ItemGroup>
 
   <ItemGroup>
@@ -83,6 +87,8 @@
     <EmbeddedResource Include="Scripts\1.0.0.8\PMTCT\09_CreateTable_PatientProfile.sql" />
     <EmbeddedResource Include="Scripts\1.0.0.8\PMTCT\10_CreateTable_PmtctBaby.sql" />
     <EmbeddedResource Include="Scripts\1.0.0.8\PMTCT\11_AlterTable_Pregnancy_AddCol.sql" />
+    <EmbeddedResource Include="Scripts\1.0.0.9\30_SO_MaternityEncounterView.sql" />
+    <EmbeddedResource Include="Scripts\1.0.0.9\32_DO_Insert_MaternalDrugAdmin_LookUp_Items.sql" />
   </ItemGroup>
 
   <ItemGroup>
@@ -120,15 +126,17 @@
     <EmbeddedResource Include="Scripts\1.0.0.9\07_BO_AlterTable_PatientProfile_SetPregnancyIdToNullable.sql" />
     <EmbeddedResource Include="Scripts\1.0.0.9\27_DO_AlterTable_PatientProfile_AlterCol_AgeMenarch_Null.sql" />
     <EmbeddedResource Include="Scripts\1.0.0.9\28_DO_AlterTable_PatientAppointment_AllowNull_DifferentiatedCareId.sql" />
-    <EmbeddedResource Include="Scripts\1.0.0.9\30_BO_PosNatalExaminationItemLookUp.sql" />
     <EmbeddedResource Include="Scripts\1.0.0.9\29_DO_AlterTable_PatientOutcome_AddAuditColumns.sql" />
     <EmbeddedResource Include="Scripts\1.0.0.9\29_SO_AlterTable_PatientOutcome.sql" />
     <EmbeddedResource Include="Scripts\1.0.0.9\31_AlterTable_PatientOutcome_RenameCol_DateOfOutcome.sql" />
     <EmbeddedResource Include="Scripts\1.0.0.9\31_BO_PatientFamilyPlanningLookUpViewItems.sql" />
     <EmbeddedResource Include="Scripts\1.0.0.9\31_DO_CreateView_PatientDischargeInfoView.sql" />
     <EmbeddedResource Include="Scripts\1.0.0.9\32_BO_PatientFamilyPlanningMethodView.sql" />
+    <EmbeddedResource Include="Scripts\1.0.0.9\33_DO_AlterTable_PatientDrugAdministration_AlterCol_CreatedDate.sql" />
+    <EmbeddedResource Include="Scripts\1.0.0.9\34_DO_CreateView_PatientDrugAdministrationView.sql" />
     <EmbeddedResource Include="Scripts\1.0.0.9\35_AlterTable_PatientReferral_Rename_And_Change_Col_DataTypes.sql" />
     <EmbeddedResource Include="Scripts\1.0.0.9\36_DO_AlterTable_PatientDelivery_ChangeCol_DurationOfLabour.sql" />
+    <EmbeddedResource Include="Scripts\1.0.0.9\37_DO_Insert_PNC_LookUpItems.sql" />
   </ItemGroup>
 
   <ItemGroup>
