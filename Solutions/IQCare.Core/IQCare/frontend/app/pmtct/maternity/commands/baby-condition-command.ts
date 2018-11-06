@@ -1,5 +1,4 @@
 import {ApgarScoreCommand} from './apgar-score-command';
-import {TestCondition} from './testCondition';
 
 export interface BabyConditionCommand {
 PatientDeliveryInformationId?: number;
