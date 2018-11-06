@@ -2,5 +2,5 @@ export const environment = {
     production: true,
     API_URL: 'http://' + window.location.hostname + ':' + window.location.port + '/IQCareAPI',
     API_LAB_URL: 'http://' + window.location.hostname + ':' + window.location.port + '/IQCareLab',
-    API_MATERNITY_URL: 'http://' + window.location.hostname + ':' + window.location.port + '/IQCareMaternity'
+    API_PMTCT_URL: 'http://' + window.location.hostname + ':' + window.location.port + '/IQCarePMTCT'
 };
