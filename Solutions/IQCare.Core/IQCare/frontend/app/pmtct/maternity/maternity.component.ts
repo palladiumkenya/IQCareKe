@@ -20,7 +20,7 @@ import {NextAppointmentCommand} from './commands/next-appointment-command';
 import {DischargeCommand} from './commands/discharge-command';
 import {DiagnosisCommand} from './commands/diagnosis-command';
 import {MotherProfileCommand} from './commands/mother-profile-command';
-import {TestCondition} from './commands/testCondition';
+
 
 @Component({
     selector: 'app-maternity',
@@ -44,7 +44,7 @@ export class MaternityComponent implements OnInit {
     drugAdminOptions: any[] = [];
     counsellingOptions: any[] = [];
     babyNotifyData: any[] = [];
-    DeliveredBabyBirthInfoCollection: BabyConditionCommand[] = [];
+    DeliveredBabyBirthInfoCollection: any[] = [];
 
     patientId: number;
     personId: number;
@@ -79,7 +79,7 @@ export class MaternityComponent implements OnInit {
     partnerTestingOptions: any[] = [];
     patientEducationOptions: any[] = [];
 
-    testCondition: TestCondition[] = [];
+    birthInformationCollection: any[] = [];
 
     constructor(private route: ActivatedRoute,
                 private matService: MaternityService,
@@ -263,6 +263,7 @@ export class MaternityComponent implements OnInit {
 
     onSubmit() {
 
+
         const visitDetailsCommand: MaternityVisitDetailsCommand = {
             patientId: this.patientId,
             patientMasterVisitId: this.patientMasterVisitId,
@@ -306,7 +307,7 @@ export class MaternityComponent implements OnInit {
 
         const maternityDeliveryCommand: MaternityDeliveryCommand = {
             PatientMasterVisitId: this.patientMasterVisitId,
-            ProfileId: 0,
+            ProfileId: 3,
             DurationOfLabour: this.diagnosisFormGroup.value[1]['labourDuration'],
             DateOfDelivery: this.diagnosisFormGroup.value[1]['deliveryDate'],
             TimeOfDelivery: this.diagnosisFormGroup.value[1]['deliveryTime'],
@@ -342,47 +343,82 @@ export class MaternityComponent implements OnInit {
             }
         );
 
-        console.log('baby data');
+        console.log('baby data' + this.babyNotifyData.length[0]);
         console.log(this.babyNotifyData);
 
-        for (let i = 0; i < this.babyNotifyData.length; i++) {
-            for (let j = 0; j < this.babyNotifyData.length; j++) {
+        for (let i = 0; i < this.babyNotifyData.length; i++) { for (let j = 0; j < this.babyNotifyData.length; j++) {
+            this.DeliveredBabyBirthInfoCollection.push({
 
-                this.DeliveredBabyBirthInfoCollection.push({
-                       PatientDeliveryInformationId: 0,
-                       PatientMasterVisitId: this.patientMasterVisitId,
-                       BirthWeight: parseFloat(this.babyNotifyData[i][j]['birthWeight']),
-                       Sex: this.babyNotifyData[i][j]['sex'],
-                       DeliveryOutcome: this.babyNotifyData[i][j]['outcome'],
-                       ResuscitationDone: this.babyNotifyData[i][j]['resuscitate'],
-                       BirthDeformity: this.babyNotifyData[i][j]['deformity'],
-                       TeoGiven: this.babyNotifyData[i][j]['teo'],
-                       BreastFedWithinHour: this.babyNotifyData[i][j]['breastFeeding'],
-                       BirthNotificationNumber: this.babyNotifyData[i][j]['notificationNo'],
-                       Comment: this.babyNotifyData[i][j]['comment'],
-                       CreatedBy: this.userId,
-                       ApgarScores: [
-                           {
-                               ApgarSCoreId: apgarscoreOne[0].itemId, SCore: this.babyNotifyData[i][j]['apgarScoreOne'],
-                               ApgarScoreType: 'Apgar Score 1 min'
-                           },
-                           {
-                               ApgarSCoreId: apgarscoreTwo[0].itemId, SCore: this.babyNotifyData[i][j]['apgarScoreFive'],
-                               ApgarScoreType: 'Apgar Score 5 min'
-                           },
-                           {
-                               ApgarSCoreId: apgarscoreThree[0].itemId, SCore: this.babyNotifyData[i][j]['apgarScoreTen'],
-                               ApgarScoreType: 'Apgar Score 10 min'
-                           }
-                       ]
-                });
-                this.testCondition.push({
-                    DeliveredBabyBirthInfoCollection: this.DeliveredBabyBirthInfoCollection
-                });
-            }
+                    PatientDeliveryInformationId: 5,
+                    PatientMasterVisitId: this.patientMasterVisitId,
+                    BirthWeight: parseFloat(this.babyNotifyData[i][j]['birthWeight']),
+                    Sex: this.babyNotifyData[i][j]['sex'],
+                    DeliveryOutcome: this.babyNotifyData[i][j]['outcome'],
+                    ResuscitationDone: this.babyNotifyData[i][j]['resuscitate'],
+                    BirthDeformity: this.babyNotifyData[i][j]['deformity'],
+                    TeoGiven: this.babyNotifyData[i][j]['teo'],
+                    BreastFedWithinHour: this.babyNotifyData[i][j]['breastFeeding'],
+                    BirthNotificationNumber: this.babyNotifyData[i][j]['notificationNo'],
+                    Comment: this.babyNotifyData[i][j]['comment'],
+                    CreatedBy: this.userId,
+                    ApgarScores: [
+                        {
+                            ApgarSCoreId: apgarscoreOne[0].itemId, SCore: this.babyNotifyData[i][j]['apgarScoreOne'],
+                            ApgarScoreType: 'Apgar Score 1 min'
+                        },
+                        {
+                            ApgarSCoreId: apgarscoreTwo[0].itemId, SCore: this.babyNotifyData[i][j]['apgarScoreFive'],
+                            ApgarScoreType: 'Apgar Score 5 min'
+                        },
+                        {
+                            ApgarSCoreId: apgarscoreThree[0].itemId, SCore: this.babyNotifyData[i][j]['apgarScoreTen'],
+                            ApgarScoreType: 'Apgar Score 10 min'
+                        }
+                    ]
+            });
+        }}
+
+       // this.birthInformationCollection.push('DeliveredBabyBirthInfoCollection': this.DeliveredBabyBirthInfoCollection);
+
+       const col = {
+           DeliveredBabyBirthInfoCollection: this.DeliveredBabyBirthInfoCollection
+       };
+
+        console.log('arrays');
+            console.log(col);
+            /*  this.DeliveredBabyBirthInfoCollection.push(
+                            'DeliveredBabyBirthInfoCollection': [
+                                {
+                                    PatientDeliveryInformationId: 0,
+                                    PatientMasterVisitId: this.patientMasterVisitId,
+                                    BirthWeight: parseFloat(this.babyNotifyData[i][j]['birthWeight']),
+                                    Sex: this.babyNotifyData[i][j]['sex'],
+                                    DeliveryOutcome: this.babyNotifyData[i][j]['outcome'],
+                                    ResuscitationDone: this.babyNotifyData[i][j]['resuscitate'],
+                                    BirthDeformity: this.babyNotifyData[i][j]['deformity'],
+                                    TeoGiven: this.babyNotifyData[i][j]['teo'],
+                                    BreastFedWithinHour: this.babyNotifyData[i][j]['breastFeeding'],
+                                    BirthNotificationNumber: this.babyNotifyData[i][j]['notificationNo'],
+                                    Comment: this.babyNotifyData[i][j]['comment'],
+                                    CreatedBy: this.userId,
+                                    ApgarScores: [
+                                        {
+                                            ApgarSCoreId: apgarscoreOne[0].itemId, SCore: this.babyNotifyData[i][j]['apgarScoreOne'],
+                                            ApgarScoreType: 'Apgar Score 1 min'
+                                        },
+                                        {
+                                            ApgarSCoreId: apgarscoreTwo[0].itemId, SCore: this.babyNotifyData[i][j]['apgarScoreFive'],
+                                            ApgarScoreType: 'Apgar Score 5 min'
+                                        },
+                                        {
+                                            ApgarSCoreId: apgarscoreThree[0].itemId, SCore: this.babyNotifyData[i][j]['apgarScoreTen'],
+                                            ApgarScoreType: 'Apgar Score 10 min'
+                                        }
+                                    ]
+                                }]
+                    );*/
 
 
-        }
 
 
         /*  const babyconditionCommand: BabyConditionCommand = {
@@ -488,7 +524,6 @@ export class MaternityComponent implements OnInit {
             PatientPregnancy: pregnancyCommand
         };
 
-        console.log(this.testCondition);
         // const matMotherProfile = this.matService.savePregnancyProfile(pregnancyCommand);
         const matVisitDetails = this.matService.saveVisitDetails(visitDetailsCommand);
         const matDiagnosis = this.matService.saveDiagnosis(diagnosisCommand);
@@ -498,7 +533,7 @@ export class MaternityComponent implements OnInit {
         const matReferral = this.matService.saveReferrals(referralCommand);
         const matNextAppointment = this.matService.saveNextAppointment(nextAppointmentCommand);
         const matDelivery = this.matService.savePatientDelivery(maternityDeliveryCommand);
-        const matBabyCondition = this.matService.saveBabySection(this.testCondition);
+        const matBabyCondition = this.matService.saveBabySection(col);
 
 
 
