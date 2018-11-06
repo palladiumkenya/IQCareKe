@@ -32,5 +32,14 @@ namespace IQCare.Maternity.WebApi.Controllers
 
             return BadRequest(result);
         }
+
+        [HttpGet]
+        public async Task<object> Get(int Id)
+        {
+            var patientPartnerTesting = await _mediator.Send(new GetPatientPartnerTestingQuery { PatientId = Id }, HttpContext.RequestAborted);
+            if (patientPartnerTesting.IsValid)
+                return Ok(patientPartnerTesting.Value);
+            return BadRequest(patientPartnerTesting);
+        }
     }
 }

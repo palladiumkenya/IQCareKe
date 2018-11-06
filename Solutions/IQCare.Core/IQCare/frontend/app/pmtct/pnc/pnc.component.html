@@ -33,7 +33,7 @@
 
                                         <!-- add Maternity History Component to Stepper -->
                                         <app-pnc-maternalhistory (notify)="onMaternalHistoryNotify($event)"
-                                            [matHistoryOptions]="matHistoryOptions">
+                                            [matHistoryOptions]="matHistoryOptions" [patientId]="patientId">
                                         </app-pnc-maternalhistory>
 
                                         <!-- add PostNatal Examination Component to Stepper -->

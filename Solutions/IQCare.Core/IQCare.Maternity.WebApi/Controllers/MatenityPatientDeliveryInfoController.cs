@@ -82,7 +82,7 @@ namespace IQCare.Maternity.WebApi.Controllers
             var patientDeliveryInfo = await _mediator.Send(new GetPatientDeliveryInformationQuery { ProfileId = Id }, HttpContext.RequestAborted);
 
             if (patientDeliveryInfo.IsValid)
-                return Ok(patientDeliveryInfo);
+                return Ok(patientDeliveryInfo.Value);
 
             return BadRequest(patientDeliveryInfo);
         }
