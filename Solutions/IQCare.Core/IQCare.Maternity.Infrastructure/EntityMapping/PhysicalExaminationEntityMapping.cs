@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace IQCare.Maternity.Infrastructure.EntityMapping
 {
-    class PhysicalExaminationEntityMapping : IEntityTypeConfiguration<PhysicalExaminationView>
+    public class PhysicalExaminationEntityMapping : IEntityTypeConfiguration<PhysicalExaminationView>
     {
         public void Configure(EntityTypeBuilder<PhysicalExaminationView> builder)
         {
