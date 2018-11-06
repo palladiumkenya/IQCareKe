@@ -17,7 +17,7 @@ namespace IQCare.Maternity.BusinessProcess.QueryHandlers
     {
         IMaternityUnitOfWork _maternityUnitOfWork;
         IMapper _mapper;
-        ILogger logger = Log.ForContext<GetPatientDiagnosisInfoQueryHandler>();
+        ILogger logger = Log.ForContext<GetPatientPartnerTestingQueryHandler>();
 
     public GetPatientPartnerTestingQueryHandler(IMaternityUnitOfWork maternityUnitOfWork, IMapper mapper)
     {
@@ -28,8 +28,8 @@ namespace IQCare.Maternity.BusinessProcess.QueryHandlers
     {
         try
         {
-            var patientFamilyPlanning = _maternityUnitOfWork.Repository<PatientPartnerTesting>().Get(x => x.PatientId == request.PatientId);
-            var familyPlanningViewModel = _mapper.Map<List<PatientPartnerTestinViewModel>>(patientFamilyPlanning);
+            var patientPartnerTesting = _maternityUnitOfWork.Repository<PatientPartnerTesting>().Get(x => x.PatientId == request.PatientId);
+            var familyPlanningViewModel = _mapper.Map<List<PatientPartnerTestinViewModel>>(patientPartnerTesting);
 
 
             return Task.FromResult(Result<List<PatientPartnerTestinViewModel>>.Valid(familyPlanningViewModel));

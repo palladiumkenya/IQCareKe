@@ -11,11 +11,11 @@ using Microsoft.AspNetCore.Mvc;
 namespace IQCare.Maternity.WebApi.Controllers
 {
     [Produces("application/json")]
-    [Route("api/AddFamilyPlanning")]
-    public class AddFamilyPlanningController : Controller
+    [Route("api/FamilyPlanning")]
+    public class FamilyPlanningController : Controller
     {
         IMediator _mediator;
-        public AddFamilyPlanningController(IMediator mediator)
+        public FamilyPlanningController(IMediator mediator)
         {
             _mediator = mediator;
         }
@@ -36,10 +36,10 @@ namespace IQCare.Maternity.WebApi.Controllers
         [HttpGet("{Id}")]
         public async Task<object> Get(int Id)
         {
-            var diagnosisInfo = await _mediator.Send(new GetPatientFamilyPlanningQuery { PatientId = Id }, HttpContext.RequestAborted);
-            if (diagnosisInfo.IsValid)
-                return Ok(diagnosisInfo.Value);
-            return BadRequest(diagnosisInfo);
+            var getPatientFamilyPlanning = await _mediator.Send(new GetPatientFamilyPlanningQuery { PatientId = Id }, HttpContext.RequestAborted);
+            if (getPatientFamilyPlanning.IsValid)
+                return Ok(getPatientFamilyPlanning.Value);
+            return BadRequest(getPatientFamilyPlanning);
         }
     }
 }
