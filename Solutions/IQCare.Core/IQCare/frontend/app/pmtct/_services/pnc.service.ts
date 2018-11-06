@@ -15,6 +15,7 @@ import { PatientAppointment } from '../_models/PatientAppointmet';
 import { PostNatalExamCommand } from '../_models/PostNatalExamCommand';
 import { FamilyPlanningMethodCommand } from '../_models/FamilyPlanningMethodCommand';
 import { PartnerTestingCommand } from '../_models/PartnerTestingCommand';
+import { DrugAdministrationCommand } from '../maternity/commands/drug-administration-command';
 
 const httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -26,7 +27,7 @@ const httpOptions = {
 export class PncService {
     private API_URL = environment.API_URL;
     private API_LAB_URL = environment.API_LAB_URL;
-    private API_MATERNITY_URL = environment.API_MATERNITY_URL;
+    private API_PMTCT_URL = environment.API_PMTCT_URL;
 
     constructor(private http: HttpClient, private errorHandler: ErrorHandlerService) { }
 
@@ -47,7 +48,7 @@ export class PncService {
     }
 
     public savePncPostNatalExam(pncPostNatalExamCommand: PostNatalExamCommand): Observable<any> {
-        return this.http.post<any>(this.API_MATERNITY_URL + '/api/PostNatalAndBabyExamination',
+        return this.http.post<any>(this.API_PMTCT_URL + '/api/PostNatalAndBabyExamination',
             JSON.stringify(pncPostNatalExamCommand), httpOptions).pipe(
                 tap(savePncPostNatalExam => this.errorHandler.log(`successfully saved pnc postnatal exam`)),
                 catchError(this.errorHandler.handleError<any>('Error saving pnc postnatal exam'))
@@ -76,11 +77,12 @@ export class PncService {
         );
     }
 
-    public savePncDrugAdministration(): Observable<any> {
-        return this.http.post<any>(this.API_URL + '/api/PatientDiagnosis/AddDrugAdministrationInfo', JSON.stringify(''), httpOptions).pipe(
-            tap(savePncDrugAdministration => this.errorHandler.log(`successfully saved pnc drug administration`)),
-            catchError(this.errorHandler.handleError<any>('Error saving pnc drug administration'))
-        );
+    public savePncDrugAdministration(drugAdministrationCommand: DrugAdministrationCommand): Observable<any> {
+        return this.http.post<any>(this.API_PMTCT_URL + '/api/PatientDiagnosis/AddDrugAdministrationInfo',
+            JSON.stringify(drugAdministrationCommand), httpOptions).pipe(
+                tap(savePncDrugAdministration => this.errorHandler.log(`successfully saved pnc drug administration`)),
+                catchError(this.errorHandler.handleError<any>('Error saving pnc drug administration'))
+            );
     }
 
     public savePncScreening(): Observable<any> {
@@ -91,7 +93,7 @@ export class PncService {
     }
 
     public savePartnerTesting(partnerTestingCommand: PartnerTestingCommand): Observable<any> {
-        return this.http.post<any>(this.API_MATERNITY_URL + '/api/PatientPartnerTesting',
+        return this.http.post<any>(this.API_PMTCT_URL + '/api/PatientPartnerTesting',
             JSON.stringify(partnerTestingCommand), httpOptions).pipe(
                 tap(savePartnerTesting => this.errorHandler.log(`successfully saved pnc partner testing`)),
                 catchError(this.errorHandler.handleError<any>('Error saving pnc partner testing'))
@@ -99,7 +101,7 @@ export class PncService {
     }
 
     public saveDiagnosis(pncPatientDiagnosis: PatientDiagnosisCommand): Observable<any> {
-        return this.http.post<any>(this.API_MATERNITY_URL + '/api/PatientDiagnosis/AddDiagnosis',
+        return this.http.post<any>(this.API_PMTCT_URL + '/api/PatientDiagnosis/AddDiagnosis',
             JSON.stringify(pncPatientDiagnosis), httpOptions).pipe(
                 tap(saveDiagnosis => this.errorHandler.log(`successfully saved pnc diagnosis`)),
                 catchError(this.errorHandler.handleError<any>('Error saving pnc diagnosis'))
@@ -123,7 +125,7 @@ export class PncService {
     }
 
     public savePncFamilyPlanning(familyPlanningCommand: FamilyPlanningCommand): Observable<any> {
-        return this.http.post<any>(this.API_MATERNITY_URL + '/api/FamilyPlanning', JSON.stringify(familyPlanningCommand),
+        return this.http.post<any>(this.API_PMTCT_URL + '/api/FamilyPlanning', JSON.stringify(familyPlanningCommand),
             httpOptions).pipe(
                 tap(savePncFamilyPlanning => this.errorHandler.log(`successfully saved pnc family planning`)),
                 catchError(this.errorHandler.handleError<any>('Error saving pnc family planning'))
@@ -131,7 +133,7 @@ export class PncService {
     }
 
     public savePncFamilyPlanningMethod(familyPlanningMethodCommand: FamilyPlanningMethodCommand): Observable<any> {
-        return this.http.post<any>(this.API_MATERNITY_URL + '/api/AddFamilyPlanningMetods', JSON.stringify(familyPlanningMethodCommand),
+        return this.http.post<any>(this.API_PMTCT_URL + '/api/AddFamilyPlanningMetods', JSON.stringify(familyPlanningMethodCommand),
             httpOptions).pipe(
                 tap(savePncFamilyPlanningMethod => this.errorHandler.log(`successfully saved pnc family planning method`)),
                 catchError(this.errorHandler.handleError<any>('Error saving pnc family planning method'))
