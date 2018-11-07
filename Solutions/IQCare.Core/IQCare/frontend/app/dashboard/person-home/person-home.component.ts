@@ -5,6 +5,8 @@ import { PersonHomeService } from '../services/person-home.service';
 import { NotificationService } from '../../shared/_services/notification.service';
 import { SnotifyService } from 'ng-snotify';
 import { PersonView } from '../../records/_models/personView';
+import { MatTableDataSource } from '@angular/material';
+
 
 @Component({
     selector: 'app-person-home',
@@ -19,7 +21,9 @@ export class PersonHomeComponent implements OnInit {
     public person: PersonView;
     public personView$: Subscription;
     services: any[];
-
+    chronic_illness_data : any[] = [];
+    dataSource = new MatTableDataSource(this.chronic_illness_data);
+    chronic_illness_displaycolumns = ['illness','onsetdate','treatment','dose'];
     constructor(private route: ActivatedRoute,
         private personService: PersonHomeService,
         private snotifyService: SnotifyService,
@@ -42,7 +46,6 @@ export class PersonHomeComponent implements OnInit {
 
             this.services = servicesArray;
         });
-
         localStorage.removeItem('patientEncounterId');
         localStorage.removeItem('patientMasterVisitId');
     }
@@ -61,6 +64,7 @@ export class PersonHomeComponent implements OnInit {
                 // console.log(this.personView$);
             });
     }
+
 
     onEdit() {
         this.zone.run(() => {

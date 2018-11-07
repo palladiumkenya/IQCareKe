@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
@@ -67,6 +67,7 @@
     <None Remove="Scripts\1.0.0.9\35_AlterTable_PatientReferral_Rename_And_Change_Col_DataTypes.sql" />
     <None Remove="Scripts\1.0.0.9\36_DO_AlterTable_PatientDelivery_ChangeCol_DurationOfLabour.sql" />
     <None Remove="Scripts\1.0.0.9\37_DO_Insert_PNC_LookUpItems.sql" />
+    <None Remove="Scripts\1.0.0.9\38_DO_CreateView_PatientChronicIllness.sql" />
   </ItemGroup>
 
   <ItemGroup>
@@ -137,6 +138,7 @@
     <EmbeddedResource Include="Scripts\1.0.0.9\35_AlterTable_PatientReferral_Rename_And_Change_Col_DataTypes.sql" />
     <EmbeddedResource Include="Scripts\1.0.0.9\36_DO_AlterTable_PatientDelivery_ChangeCol_DurationOfLabour.sql" />
     <EmbeddedResource Include="Scripts\1.0.0.9\37_DO_Insert_PNC_LookUpItems.sql" />
+    <EmbeddedResource Include="Scripts\1.0.0.9\38_DO_CreateView_PatientChronicIllness.sql" />
   </ItemGroup>
 
   <ItemGroup>
