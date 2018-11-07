@@ -68,6 +68,8 @@
     <None Remove="Scripts\1.0.0.9\36_DO_AlterTable_PatientDelivery_ChangeCol_DurationOfLabour.sql" />
     <None Remove="Scripts\1.0.0.9\37_DO_Insert_PNC_LookUpItems.sql" />
     <None Remove="Scripts\1.0.0.9\38_DO_CreateView_PatientChronicIllness.sql" />
+    <None Remove="Scripts\1.0.0.9\39_DO_AlterView_PatientRelationshipView.sql" />
+    <None Remove="Scripts\1.0.0.9\40_DO_CreateSproc_GetPatientRelationships.sql" />
   </ItemGroup>
 
   <ItemGroup>
@@ -139,6 +141,8 @@
     <EmbeddedResource Include="Scripts\1.0.0.9\36_DO_AlterTable_PatientDelivery_ChangeCol_DurationOfLabour.sql" />
     <EmbeddedResource Include="Scripts\1.0.0.9\37_DO_Insert_PNC_LookUpItems.sql" />
     <EmbeddedResource Include="Scripts\1.0.0.9\38_DO_CreateView_PatientChronicIllness.sql" />
+    <EmbeddedResource Include="Scripts\1.0.0.9\39_DO_AlterView_PatientRelationshipView.sql" />
+    <EmbeddedResource Include="Scripts\1.0.0.9\40_DO_CreateSproc_GetPatientRelationships.sql" />
   </ItemGroup>
 
   <ItemGroup>

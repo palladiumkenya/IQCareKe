@@ -413,5 +413,6 @@ export class HeiComponent implements OnInit {
             this.router.navigate(['/dashboard/personhome/'], { relativeTo: this.route });
         });*/
     }
-    }
+
 }
+
