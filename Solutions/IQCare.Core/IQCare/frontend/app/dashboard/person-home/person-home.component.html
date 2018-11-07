@@ -3,7 +3,7 @@
         <div class="profile-container">
             <div class="profile-header row">
                 <div class="col-lg-2 col-sm-2 col-xs-12 text-center">
-                    <img src="assets/img/avatars/divyia.jpg" alt="" class="header-avatar" />
+                    <img src="assets/img/avatars/default.png" alt="" class="header-avatar" />
                 </div>
                 <div class="col-lg-3 col-sm-3 col-xs-12 profile-info">
                     <div class="header-fullname"><strong>{{person.lastName}},{{person.midName}} {{person.firstName}}</strong></div>
@@ -11,9 +11,9 @@
                         <span class="">{{person.patientType}} Patient</span>
                     </div>
                     <div class="header-information">
-                        <a mat-raised-button (click)="onEdit()">
+                        <a  (click)="onEdit()">
                             <mat-icon><i className="material-icons">mode_edit</i></mat-icon>
-                            Update
+
                         </a>
                     </div>
                 </div>
@@ -34,11 +34,11 @@
                     </div>
                     <div class="row">
                         <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 inlinestats-col">
-                            <i class="glyphicon glyphicon-map-marker"></i>
+                           <!-- <i class="glyphicon glyphicon-map-marker"></i>
                             <strong>County:</strong> {{ person.county }} <br />
                             <strong>SubCounty:</strong> {{ person.subCounty }} <br />
                             <strong>Ward:</strong> {{ person.ward }} <br />
-                            <strong>Landmark:</strong> {{ person.landMark }}
+                            <strong>Landmark:</strong> {{ person.landMark }} -->
                         </div>
                         <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 inlinestats-col">
                             Emergency Contact: <strong>$250</strong>
@@ -55,12 +55,12 @@
                         <ul class="nav nav-tabs tabs-flat  nav-justified" id="myTab11">
                             <li class="active">
                                 <a data-toggle="tab" href="#overview">
-                                    Overview
+                                    Home
                                 </a>
                             </li>
                             <li class="tab-red">
                                 <a data-toggle="tab" href="#timeline">
-                                    Events
+                                     History
                                 </a>
                             </li>
                             <li class="tab-palegreen">
@@ -214,6 +214,8 @@
                                                 <span class="timeline-title">
                                                     Chronic Conditions
                                                 </span>
+
+
                                             </div>
                                             <div class="timeline-body">
                                                     <app-chronich-illness>                                                  
@@ -399,27 +401,22 @@
                                             <div class="profile-badge orange"><i class="fa fa-phone orange"></i><span>Contacts</span></div>
                                             <div class="contact-info">
                                                 <p>
-                                                    Phone : +1 1 2345 6789 <br> Cell : +1 9 876 5432
+                                                    Phone : {{person.mobileNumber}} <br> alternate Cell : {{person.mobileNumber}}
                                                 </p>
                                                 <p>
-                                                    Email : kim@gmail.com
-                                                    <br> Skype : kim.ryder
+                                                    Email : <strong>na</strong>
                                                 </p>
-                                                <p>
-                                                    Facebook : facebook.com/Kim.Ryder
-                                                    <br> Twitter : @KimRyder
-                                                </p>
+
                                             </div>
                                             <div class="profile-badge azure">
                                                 <i class="fa fa-map-marker azure"></i><span>Location</span>
                                             </div>
                                             <div class="contact-info">
                                                 <p>
-                                                    Address<br> Department 98<br> 44-46 Morningside Road<br> Toronto,
-                                                    Canada
-                                                </p>
-                                                <p>
-                                                    Office<br> 44-46 Morningside Road<br> Toronto, Canada
+                                                    County :  <strong>{{person.county  }}</strong> <br>
+                                                    SubCounty :  <strong>{{person.subCounty }}</strong><br>
+                                                    Ward : <strong>{{ person.ward }}</strong><br>
+                                                    Landmark : <strong>{{ person.landMark  }}</strong>
                                                 </p>
                                             </div>
                                         </div>

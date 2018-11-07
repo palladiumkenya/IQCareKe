@@ -1,12 +1,11 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, NgZone} from '@angular/core';
 import {FormArray, FormGroup} from '@angular/forms';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Router } from '@angular/router';
 import {LookupItemView} from '../../shared/_models/LookupItemView';
 import {MaternityVisitDetailsCommand} from './commands/maternity-visit-details-command';
 import {MaternityService} from '../_services/maternity.service';
 import {PregnancyCommand} from './commands/pregnancy-command';
 import {MaternityDeliveryCommand} from './commands/maternity-delivery-command';
-import {BabyConditionCommand} from './commands/baby-condition-command';
 import {ApgarScoreCommand} from './commands/apgar-score-command';
 import {LookupItemService} from '../../shared/_services/lookup-item.service';
 import {forkJoin, Subscription} from 'rxjs/index';
@@ -94,7 +93,9 @@ export class MaternityComponent implements OnInit {
                 private matService: MaternityService,
                 private _lookupItemService: LookupItemService,
                 private snotifyService: SnotifyService,
-                private notificationService: NotificationService) {
+                private notificationService: NotificationService,
+                public zone: NgZone,
+                private router: Router) {
         this.visitDetailsFormGroup = new FormArray([]);
         this.diagnosisFormGroup = new FormArray([]);
         this.maternalDrugAdministrationForGroup = new FormArray([]);
@@ -371,8 +372,9 @@ export class MaternityComponent implements OnInit {
         console.log('baby data' + this.babyNotifyData.length[0]);
         console.log(this.babyNotifyData);
 
-        for (let i = 0; i < this.babyNotifyData.length; i++) { for (let j = 0; j < this.babyNotifyData.length; j++) {
-            this.DeliveredBabyBirthInfoCollection.push({
+        for (let i = 0; i < this.babyNotifyData.length; i++) {
+            for (let j = 0; j < this.babyNotifyData.length; j++) {
+                this.DeliveredBabyBirthInfoCollection.push({
 
                     PatientDeliveryInformationId: 0,
                     PatientMasterVisitId: this.patientMasterVisitId,
@@ -400,13 +402,14 @@ export class MaternityComponent implements OnInit {
                             ApgarScoreType: 'Apgar Score 10 min'
                         }
                     ]
-            });
-        }}
+                });
+            }
+        }
 
 
-       const babyConditionInfo = {
-           DeliveredBabyBirthInfoCollection: this.DeliveredBabyBirthInfoCollection
-       };
+        const babyConditionInfo = {
+            DeliveredBabyBirthInfoCollection: this.DeliveredBabyBirthInfoCollection
+        };
 
         const vitaminA = this.drugAdminOptions.filter(x => x.itemName == 'Vitamin A Supplementation');
         const haartAnc = this.drugAdminOptions.filter(x => x.itemName == 'Started HAART in ANC');
@@ -584,7 +587,7 @@ export class MaternityComponent implements OnInit {
             PatientPregnancy: pregnancyCommand
         };
 
-         const matMotherProfile = this.matService.savePregnancyProfile(pregnancyCommand);
+        const matMotherProfile = this.matService.savePregnancyProfile(pregnancyCommand);
         const matVisitDetails = this.matService.saveVisitDetails(visitDetailsCommand);
         const matDiagnosis = this.matService.saveDiagnosis(diagnosisCommand);
         const matDrugAdministartion = this.matService.saveMaternalDrugAdministration(drugAdministrationCommand);
@@ -596,17 +599,15 @@ export class MaternityComponent implements OnInit {
         const matHivStatus = this.matService.savePncHivStatus(hivStatusCommand, this.hiv_status_table_data);
 
 
-
-
-        forkJoin([  matVisitDetails,
-             matMotherProfile,
-             matDiagnosis,
-             matHivStatus,
-             matDrugAdministartion,
-             matEducation,
-             matPartnerTesting,
-             matDischarge,
-             matReferral,
+        forkJoin([matVisitDetails,
+            matMotherProfile,
+            matDiagnosis,
+            matHivStatus,
+            matDrugAdministartion,
+            matEducation,
+            matPartnerTesting,
+            matDischarge,
+            matReferral,
             matNextAppointment
         ])
             .subscribe(
@@ -614,18 +615,18 @@ export class MaternityComponent implements OnInit {
                     console.log(`success `);
                     console.log(result);
 
-                     this.pregnancyId = result[1]['PregnancyId'];
-                     maternityDeliveryCommand.ProfileId = this.pregnancyId;
+                    this.pregnancyId = result[1]['PregnancyId'];
+                    maternityDeliveryCommand.ProfileId = this.pregnancyId;
 
-                     const matDelivery = this.matService.savePatientDelivery(maternityDeliveryCommand).subscribe(
-                         (res) => {
-                             this.deliveryId = res['PatientDeliveryInformationId'];
-                             for (let i = 0; i < babyConditionInfo.DeliveredBabyBirthInfoCollection.length; i++) {
-                                 babyConditionInfo.DeliveredBabyBirthInfoCollection[i].PatientDeliveryInformationId = this.deliveryId;
-                             }
-                             console.log(`result`, res);
-                         }
-                     );
+                    const matDelivery = this.matService.savePatientDelivery(maternityDeliveryCommand).subscribe(
+                        (res) => {
+                            this.deliveryId = res['PatientDeliveryInformationId'];
+                            for (let i = 0; i < babyConditionInfo.DeliveredBabyBirthInfoCollection.length; i++) {
+                                babyConditionInfo.DeliveredBabyBirthInfoCollection[i].PatientDeliveryInformationId = this.deliveryId;
+                            }
+                            console.log(`result`, res);
+                        }
+                    );
                     const matBabyCondition = this.matService.saveBabySection(babyConditionInfo).subscribe(
                         (res) => {
                             console.log(`Baby Delivery Information`);
@@ -640,6 +641,9 @@ export class MaternityComponent implements OnInit {
                 },
                 () => {
                     console.log(`complete`);
+                    this.zone.run(() => {
+                        this.router.navigate(['/dashboard/personhome/'], {relativeTo: this.route});
+                    });
                 }
             );
     }

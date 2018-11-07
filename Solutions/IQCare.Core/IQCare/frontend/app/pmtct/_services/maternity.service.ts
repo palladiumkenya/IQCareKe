@@ -7,8 +7,6 @@ import {Observable, of} from 'rxjs/index';
 import { PatientMasterVisitEncounter } from '../_models/PatientMasterVisitEncounter';
 import { PatientProfileViewModel } from '../_models/viewModel/PatientProfileViewModel';
 import { PatientDeliveryInformationViewModel } from '../_models/viewModel/PatientDeliveryInformationViewModel';
-import {PartnerTestingCommand} from '../_models/PartnerTestingCommand';
-import {ReferralCommand} from '../maternity/commands/referral-command';
 import {HivStatusCommand} from '../_models/HivStatusCommand';
 
 const httpOptions = {
