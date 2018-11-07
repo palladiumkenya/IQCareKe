@@ -17,6 +17,8 @@ using System.Web;
 using Microsoft.AspNetCore.Hosting.Internal;
 
 using Microsoft.Extensions.PlatformAbstractions;
+using AutoMapper;
+using IQCare.PMTCT.BusinessProcess.MapperProfiles;
 
 namespace IQCare
 {
@@ -58,6 +60,7 @@ namespace IQCare
             }
            
             services.AddMediatR(assemblies);
+            services.AddAutoMapper(typeof(PatientChronicIllnessProfile).Assembly);
             services.AddMvc()
                 .AddMvcOptions(o => o.OutputFormatters.Add(new XmlDataContractSerializerOutputFormatter()))
                 .AddJsonOptions(o =>
