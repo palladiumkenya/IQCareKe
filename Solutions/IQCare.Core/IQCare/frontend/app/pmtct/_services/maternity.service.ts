@@ -3,10 +3,13 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
 import { ErrorHandlerService } from '../../shared/_services/errorhandler.service';
 import { catchError, tap } from 'rxjs/operators';
-import { Observable } from 'rxjs/index';
+import {Observable, of} from 'rxjs/index';
 import { PatientMasterVisitEncounter } from '../_models/PatientMasterVisitEncounter';
 import { PatientProfileViewModel } from '../_models/viewModel/PatientProfileViewModel';
 import { PatientDeliveryInformationViewModel } from '../_models/viewModel/PatientDeliveryInformationViewModel';
+import {PartnerTestingCommand} from '../_models/PartnerTestingCommand';
+import {ReferralCommand} from '../maternity/commands/referral-command';
+import {HivStatusCommand} from '../_models/HivStatusCommand';
 
 const httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -106,6 +109,7 @@ export class MaternityService {
         );
     }
 
+
     public savePatientEducation(patientEducation: any): Observable<any> {
         return this.http.post(this.API_URL + '/api/PatientEducationExamination/AddPatientCounsellingInfo',
             JSON.stringify(patientEducation), httpOptions).pipe(
@@ -123,14 +127,30 @@ export class MaternityService {
     }
 
     public saveReferrals(referral: any): Observable<any> {
-        return this.http.post(this.API_URL + '/api/PatientReferralAndAppointment/postReferral', JSON.stringify(referral), httpOptions).pipe(
+        return this.http.post(this.API_URL + '/api/PatientReferralAndAppointment/AddPatientReferralInfo',
+            JSON.stringify(referral), httpOptions).pipe(
             tap(saveReferrals => this.errorHandler.log(`successfully added Referral details`)),
             catchError(this.errorHandler.handleError<any>('Error saving Referral details'))
         );
     }
 
+    public savePncHivStatus(hivStatusCommand: HivStatusCommand, anyTests: any[]): Observable<any> {
+        if (anyTests.length == 0) {
+            return of([]);
+        }
+
+        const Indata = {
+            'Encounter': hivStatusCommand
+        };
+
+        return this.http.post<any>(this.API_URL + '/api/HtsEncounter', JSON.stringify(Indata), httpOptions).pipe(
+            tap(savePncBabyExamination => this.errorHandler.log(`successfully saved pnc hiv status`)),
+            catchError(this.errorHandler.handleError<any>('Error saving pnc hiv status'))
+        );
+    }
+
     public saveNextAppointment(appointment: any): Observable<any> {
-        return this.http.post(this.API_URL + '/api/PatientReferralAndAppointment/postNextAppointment', JSON.stringify(appointment),
+        return this.http.post(this.API_URL + '/api/PatientReferralAndAppointment/AddPatientNextAppointment', JSON.stringify(appointment),
             httpOptions).pipe(
                 tap(saveReferrals => this.errorHandler.log(`successfully added Referral details`)),
                 catchError(this.errorHandler.handleError<any>('Error saving Referral details'))
