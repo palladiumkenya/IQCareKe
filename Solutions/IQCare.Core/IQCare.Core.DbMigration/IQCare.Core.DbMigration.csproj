@@ -88,7 +88,7 @@
     <EmbeddedResource Include="Scripts\1.0.0.8\PMTCT\09_CreateTable_PatientProfile.sql" />
     <EmbeddedResource Include="Scripts\1.0.0.8\PMTCT\10_CreateTable_PmtctBaby.sql" />
     <EmbeddedResource Include="Scripts\1.0.0.8\PMTCT\11_AlterTable_Pregnancy_AddCol.sql" />
-    <EmbeddedResource Include="Scripts\1.0.0.9\30_SO_MaternityEncounterView.sql" />
+    <EmbeddedResource Include="Scripts\1.0.0.9\39_SO_vw_PatientEncounters.sql" />
     <EmbeddedResource Include="Scripts\1.0.0.9\32_DO_Insert_MaternalDrugAdmin_LookUp_Items.sql" />
   </ItemGroup>
 

@@ -54,7 +54,7 @@ export class ServicesListComponent implements OnInit {
         const selectedService = this.services.filter(obj => obj.id == serviceId);
         if (selectedService && selectedService.length > 0) {
             switch (selectedService[0]['code']) {
-                case 'ANC':
+               /* case 'ANC':
                     this.zone.run(() => {
                         // :patientId/:personId/:serviceAreaId
                         this.router.navigate(['/pmtct/anc/' + this.patientId + '/' + this.personId + '/' + serviceId],
@@ -66,7 +66,7 @@ export class ServicesListComponent implements OnInit {
                         this.router.navigate(['/pmtct/hei/' + this.patientId + '/' + this.personId + '/' + serviceId],
                             { relativeTo: this.route });
                     });
-                    break;
+                    break;*/
                 case 'HTS':
                     this.zone.run(() => {
                         localStorage.setItem('personId', this.personId.toString());
@@ -75,7 +75,7 @@ export class ServicesListComponent implements OnInit {
                         this.router.navigate(['/registration/home/'], { relativeTo: this.route });
                     });
                     break;
-                case 'PNC':
+              /*  case 'PNC':
                     this.zone.run(() => {
                         this.router.navigate(
                             ['/pmtct/pnc/encounters/' + this.patientId + '/' + this.personId + '/' + serviceId],
@@ -87,6 +87,15 @@ export class ServicesListComponent implements OnInit {
                         this.router.navigate(
                             ['/pmtct/maternity/encounters/' + this.patientId + '/' + this.personId + '/' + serviceId],
                             { relativeTo: this.route });
+                    });
+                    break;*/
+                default:
+
+                    this.zone.run(() => {
+                        this.router.navigate(
+                            ['/pmtct/patient-encounter/' + this.patientId + '/' + this.personId  + '/' + serviceId + '/'
+                            + selectedService[0]['code']],
+                                { relativeTo: this.route });
                     });
                     break;
             }

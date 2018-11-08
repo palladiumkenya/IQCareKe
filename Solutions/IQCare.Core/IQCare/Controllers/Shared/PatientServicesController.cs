@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using IQCare.Common.BusinessProcess.Commands.Encounter;
 using IQCare.Common.BusinessProcess.Commands.PersonCommand;
+using IQCare.HTS.BusinessProcess.Commands;
 using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -52,6 +54,18 @@ namespace IQCare.Controllers.Shared
         public async Task<IActionResult> GetLocationByPersonId(int personId)
         {
             var results = await _mediator.Send(new GetPersonLocationViewCommand { personId = personId },
+                HttpContext.RequestAborted);
+
+            if (results.IsValid)
+                return Ok(results.Value);
+
+            return BadRequest(results);
+        }
+
+        [HttpGet("GetEncounters/{PatientId}/{encounterTypeId}")]
+        public async Task<IActionResult> GetEncounters(int PatientId,int encounterTypeId)
+        {
+            var results = await _mediator.Send(new GetPatientEncounterCommand { PatientId = PatientId, EncounterTypeId = encounterTypeId},
                 HttpContext.RequestAborted);
 
             if (results.IsValid)

@@ -31,7 +31,7 @@ import {HivTestsCommand} from '../_models/HivTestsCommand';
     styleUrls: ['./maternity.component.css']
 })
 export class MaternityComponent implements OnInit {
-    isLinear: boolean = false;
+    isLinear: boolean = true;
 
     visitDetailsFormGroup: FormArray;
     diagnosisFormGroup: FormArray;
@@ -241,6 +241,7 @@ export class MaternityComponent implements OnInit {
 
     onHivStatusNotify(formGroup: Object): void {
         this.maternityTestsFormGroup.push(formGroup['form']);
+        console.log(this.maternityTestsFormGroup);
         this.hiv_status_table_data.push(formGroup['table_data']);
     }
 
@@ -289,7 +290,7 @@ export class MaternityComponent implements OnInit {
 
     onSubmit() {
 
-
+console.log(this.maternityTestsFormGroup);
         const visitDetailsCommand: MaternityVisitDetailsCommand = {
             patientId: this.patientId,
             patientMasterVisitId: this.patientMasterVisitId,

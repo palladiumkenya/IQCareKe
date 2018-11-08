@@ -4,6 +4,7 @@ import { PersonHomeComponent } from './person-home/person-home.component';
 import { NgModule, Component } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { PortalComponent } from './portal/portal.component';
+import {PatientEncounterComponent} from '../shared/patient-encounter/patient-encounter.component';
 
 const routes: Routes = [
     {
@@ -22,6 +23,7 @@ const routes: Routes = [
         path: 'enrollment/:id/:serviceId',
         component: EnrollmentServicesComponent
     }
+
 ];
 
 @NgModule({

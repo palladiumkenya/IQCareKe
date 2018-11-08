@@ -392,8 +392,7 @@ export class HeiComponent implements OnInit {
 
 
         forkJoin([
-            heiVisitDetails
-        ])
+            heiVisitDetails  ])
             .subscribe(
                 (result) => {
                     console.log(result);
@@ -409,9 +408,8 @@ export class HeiComponent implements OnInit {
                 }
             );
 
-        /*this.zone.run(() => {
+        this.zone.run(() => {
             this.router.navigate(['/dashboard/personhome/'], { relativeTo: this.route });
-        });*/
-    }
+        });
     }
 }
