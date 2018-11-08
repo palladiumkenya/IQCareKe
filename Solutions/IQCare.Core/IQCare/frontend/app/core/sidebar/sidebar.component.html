@@ -2,36 +2,96 @@
 <div class="page-sidebar">
     <!-- Page Sidebar Header-->
     <div class="sidebar-header-wrapper">
-        <input type="text" class="searchinput" />
-        <i class="searchicon fa fa-search"></i>
-        <div class="searchhelper">Search Reports, Charts, Emails or Notifications</div>
+        <!--<input type="text" class="searchinput" />-->
+        <a href="/record">
+            <i class="searchicon fa fa-search"></i>
+            <div class="searchhelper">Search Persons</div>
+        </a>
     </div>
     <!-- /Page Sidebar Header -->
     <!-- Sidebar Menu -->
     <ul class="nav sidebar-menu">
+
         <!--Dashboard-->
-        <li class="active">
-            <a href="index.html">
+        <li>
+            <a href="/IQCare">
                 <i class="menu-icon glyphicon glyphicon-home"></i>
-                <span class="menu-text"> Dashboard </span>
+                <span class="menu-text"> Facility Home </span>
             </a>
         </li>
-        <!--Databoxes-->
+
+        <!-- Search Person -->
         <li>
-            <a href="databoxes.html">
-                <i class="menu-icon glyphicon glyphicon-tasks"></i>
-                <span class="menu-text"> Data Boxes </span>
+            <a routerLink="/record">
+                <i class="menu-icon glyphicon glyphicon-search"></i>
+                <span class="menu-text"> Find Person </span>
             </a>
         </li>
+
+        <li>
+            <a routerLink="/record/person">
+                <i class="menu-icon glyphicon glyphicon-user"></i>
+                <span class="menu-text"> New Person </span>
+            </a>
+        </li>
+
+        <ng-container *ngIf="selectedService == 'hts'">
+            <li>
+                <a routerLink="/registration/home">
+                    <i class="menu-icon fa fa-user-md"></i>
+                    <span class="menu-text">HTS Encounters</span>
+                </a>
+            </li>
+
+            <li *ngIf="isPositive">
+                <a routerLink="/hts/referral">
+                    <i class="menu-icon fa fa-plus-square"></i>
+                    <span class="menu-text">REFERRAL</span>
+                </a>
+            </li>
+
+            <li *ngIf="isReferred">
+                <a routerLink="/hts/linkage">
+                    <i class="menu-icon fa fa-hospital-o"></i>
+                    <span class="menu-text">LINKAGE</span>
+                </a>
+            </li>
+
+            <li *ngIf="isPositive && hasConsentedPartnerListing">
+                <a routerLink="/hts/pns">
+                    <i class="menu-icon material-icons">people</i>
+                    <span class="menu-text">PNS</span>
+                </a>
+            </li>
+
+            <li>
+                <a routerLink="/hts/family">
+                    <i class="menu-icon fa fa-users"></i>
+                    <span class="menu-text">FAMILY</span>
+                </a>
+            </li>
+
+            <li>
+                <a routerLink="/hts/psmart">
+                    <i class="menu-icon glyphicon glyphicon-credit-card"></i>
+                    <span class="menu-text">P-SMART</span>
+                </a>
+            </li>
+        </ng-container>
+
+
+
+
+
         <!--Widgets-->
-        <li>
+        <!--<li>
             <a href="widgets.html">
                 <i class="menu-icon fa fa-th"></i>
                 <span class="menu-text"> Widgets </span>
             </a>
-        </li>
+        </li>-->
         <!--UI Elements-->
-        <li>
+        <!--<li>
             <a href="#" class="menu-dropdown">
                 <i class="menu-icon fa fa-desktop"></i>
                 <span class="menu-text"> Elements </span>
@@ -110,9 +170,9 @@
                     </a>
                 </li>
             </ul>
-        </li>
+        </li>-->
         <!--Tables-->
-        <li>
+        <!--<li>
             <a href="#" class="menu-dropdown">
                 <i class="menu-icon fa fa-table"></i>
                 <span class="menu-text"> Tables </span>
@@ -132,9 +192,9 @@
                     </a>
                 </li>
             </ul>
-        </li>
+        </li>-->
         <!--Forms-->
-        <li>
+        <!--<li>
             <a href="#" class="menu-dropdown">
                 <i class="menu-icon fa fa-pencil-square-o"></i>
                 <span class="menu-text"> Forms </span>
@@ -181,9 +241,9 @@
                     </a>
                 </li>
             </ul>
-        </li>
+        </li>-->
         <!--Charts-->
-        <li>
+        <!--<li>
             <a href="#" class="menu-dropdown">
                 <i class="menu-icon fa fa-bar-chart-o"></i>
                 <span class="menu-text"> Charts </span>
@@ -219,16 +279,16 @@
                     </a>
                 </li>
             </ul>
-        </li>
+        </li>-->
         <!--Profile-->
-        <li>
+        <!--<li>
             <a href="profile.html">
                 <i class="menu-icon fa fa-picture-o"></i>
                 <span class="menu-text">Profile</span>
             </a>
-        </li>
+        </li>-->
         <!--Mail-->
-        <li>
+        <!--<li>
             <a href="#" class="menu-dropdown">
                 <i class="menu-icon fa fa-envelope-o"></i>
                 <span class="menu-text"> Mail </span>
@@ -254,18 +314,18 @@
                     </a>
                 </li>
             </ul>
-        </li>
+        </li>-->
         <!--Calendar-->
-        <li>
+        <!--<li>
             <a href="calendar.html">
                 <i class="menu-icon fa fa-calendar"></i>
                 <span class="menu-text">
                     Calendar
                 </span>
             </a>
-        </li>
+        </li>-->
         <!--Pages-->
-        <li>
+        <!--<li>
             <a href="#" class="menu-dropdown">
                 <i class="menu-icon glyphicon glyphicon-paperclip"></i>
                 <span class="menu-text"> Pages </span>
@@ -311,9 +371,9 @@
                     </a>
                 </li>
             </ul>
-        </li>
+        </li>-->
         <!--More Pages-->
-        <li>
+        <!--<li>
             <a href="#" class="menu-dropdown">
                 <i class="menu-icon glyphicon glyphicon-link"></i>
 
@@ -393,9 +453,9 @@
                 </li>
 
             </ul>
-        </li>
+        </li>-->
         <!--Right to Left-->
-        <li>
+        <!--<li>
             <a href="#" class="menu-dropdown">
                 <i class="menu-icon fa fa-align-right"></i>
                 <span class="menu-text"> Right to Left </span>
@@ -425,15 +485,15 @@
                 </li>
 
             </ul>
-        </li>
-        <li>
+        </li>-->
+        <!--<li>
             <a href="versions.html">
                 <i class="menu-icon glyphicon glyphicon-fire themesecondary"></i>
                 <span class="menu-text">
                     BeyondAdmin Versions
                 </span>
             </a>
-        </li>
+        </li>-->
     </ul>
     <!-- /Sidebar Menu -->
 </div>

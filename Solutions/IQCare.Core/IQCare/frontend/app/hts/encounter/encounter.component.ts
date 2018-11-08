@@ -55,7 +55,7 @@ export class EncounterComponent implements OnInit {
         this.encounter.ServiceAreaId = 2;
 
         this.encounter.ProviderId = JSON.parse(localStorage.getItem('appUserId'));
-        this.encounter.PatientEncounterID = 1;
+        this.encounter.PatientEncounterID = 0;
         this.encounter.MonthSinceSelfTest = null;
         this.encounter.GeoLocation = null;
 
