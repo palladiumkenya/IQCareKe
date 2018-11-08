@@ -1,7 +1,7 @@
 import { LabOrder } from './../_models/hei/LabOrder';
 import { HeiService } from './../_services/hei.service';
-import {Component, NgZone, OnInit} from '@angular/core';
-import {ActivatedRoute, Router} from '@angular/router';
+import { Component, NgZone, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { LookupItemView } from '../../shared/_models/LookupItemView';
 import { FormGroup, FormArray } from '@angular/forms';
 import { ImmunizationHistoryTableData } from '../_models/hei/ImmunizationHistoryTableData';
@@ -11,9 +11,9 @@ import { Milestone } from '../_models/hei/Milestone';
 import { PatientIcf } from '../_models/hei/PatientIcf';
 import { PatientIcfAction } from '../_models/hei/PatientIcfAction';
 import { DefaultParameters } from '../_models/hei/DefaultParameters';
-import {forkJoin} from 'rxjs/index';
-import {SnotifyService} from 'ng-snotify';
-import {NotificationService} from '../../shared/_services/notification.service';
+import { forkJoin } from 'rxjs/index';
+import { SnotifyService } from 'ng-snotify';
+import { NotificationService } from '../../shared/_services/notification.service';
 
 @Component({
     selector: 'app-hei',
@@ -83,7 +83,7 @@ export class HeiComponent implements OnInit {
         private zone: NgZone,
         private router: Router,
         private snotifyService: SnotifyService,
-        private notificationService: NotificationService)  {
+        private notificationService: NotificationService) {
         this.deliveryMatFormGroup = new FormArray([]);
         this.visitDetailsFormGroup = new FormArray([]);
         this.tbAssessmentFormGroup = new FormArray([]);
@@ -413,5 +413,5 @@ export class HeiComponent implements OnInit {
             this.router.navigate(['/dashboard/personhome/'], { relativeTo: this.route });
         });*/
     }
-    }
 }
+
