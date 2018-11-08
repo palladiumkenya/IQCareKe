@@ -23,6 +23,7 @@ namespace IQCare.Common.Core.Models
         public string Relationship { get; set; }
         public string RelativeSex { get; set; }
         public int RelativePersonId { get; set; }
-
+        public int ? RelativePatientId { get; set; }
+        
     }
 }

@@ -1,6 +1,7 @@
 ﻿using IQCare.Common.Core.Models;
 using IQCare.Common.Infrastructure;
 using MediatR;
+using Serilog;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,6 +24,8 @@ namespace IQCare.Common.BusinessProcess.Commands.Relationship
         public string Relationship { get; set; }
         public string RelativeSex { get; set; }
         public int RelativePersonId { get; set; }
+        public int? RelativePatientId { get; set; }
+
     }
 
 
@@ -37,9 +40,7 @@ namespace IQCare.Common.BusinessProcess.Commands.Relationship
         {
             try
             {
-               
-                var patientRelationships = await _commonUnitOfWork.Repository<PatientRelationshipView>()
-                    .FromSql(BuildPatientRelationshipsQuery(request.PatientId));
+                var patientRelationships = await _commonUnitOfWork.Repository<PatientRelationshipView>().FromSql("GetPatientRelationships @PatientId = {0}", request.PatientId);
 
                 var relationshipsViewModel = patientRelationships.Select(x => new PatientRelationshipViewModel
                 {
@@ -47,26 +48,17 @@ namespace IQCare.Common.BusinessProcess.Commands.Relationship
                     Relationship = x.Relationship,
                     RelativeName = $"{x.RelativeFirstName} {x.RelativeLastName}",
                     RelativePersonId = x.RelativePersonId,
-                    RelativeSex = x.RelativeSex
+                    RelativeSex = x.RelativeSex,
+                    RelativePatientId = x.RelativePatientId
                 }).ToList();
 
                 return Result<List<PatientRelationshipViewModel>>.Valid(relationshipsViewModel);
             }
             catch (Exception ex)
             {
-
-                throw;
+                Log.Error(ex,$"An error occured while getting patient relationships for Id {request.PatientId}");
+                return Result<List<PatientRelationshipViewModel>>.Invalid(ex.Message);
             }
-        }
-
-
-        private string BuildPatientRelationshipsQuery(int patientId)
-        {
-            StringBuilder query = new StringBuilder();
-            query.Append("exec pr_OpenDecryptedSession;");
-            query.Append($"SELECT * FROM PatientRelationshipView WHERE PatientId = {patientId};");
-            query.Append("exec [dbo].[pr_CloseDecryptedSession];");
-            return query.ToString();
         }
     }
 }

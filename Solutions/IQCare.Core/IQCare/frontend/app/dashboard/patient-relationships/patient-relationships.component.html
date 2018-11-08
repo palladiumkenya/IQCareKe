@@ -15,6 +15,18 @@
         <td mat-cell *matCellDef="let patient_relationships"> {{patient_relationships.sex}} </td>
       </ng-container>
 
+      <ng-container matColumnDef="relativepatientid">
+        <th mat-header-cell *matHeaderCellDef>Action</th>
+        <td mat-cell *matCellDef="let patient_relationships">
+          <a *ngIf="patient_relationships.relativepatientid != null; else hide" (click)="redirectToHomePage(patient_relationships)">
+              Patient Home
+          </a>
+          <ng-template #hide>
+            N/A
+          </ng-template>
+        </td>
+    </ng-container>
+
       <tr mat-header-row *matHeaderRowDef="patient_relationships_columns"></tr>
       <tr mat-row *matRowDef="let row; columns: patient_relationships_columns;"></tr>
     </table>
