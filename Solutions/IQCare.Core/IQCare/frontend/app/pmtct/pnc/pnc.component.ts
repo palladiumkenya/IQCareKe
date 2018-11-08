@@ -20,6 +20,7 @@ import { DrugAdministrationCommand } from '../maternity/commands/drug-administra
 import { PartnerTestingCommand } from '../_models/PartnerTestingCommand';
 import { MaternityCounsellingCommand } from '../maternity/commands/maternity-counselling-command';
 import { MaternityService } from '../_services/maternity.service';
+import { PatientScreeningCommand } from '../_models/PatientScreeningCommand';
 
 @Component({
     selector: 'app-pnc',
@@ -517,6 +518,36 @@ export class PncComponent implements OnInit {
             CreatedBy: this.userId
         };
 
+        const isCacxDone = this.yesnoOptions.filter(obj =>
+            obj.itemId == this.cervicalCancerScreeningFormGroup.value[0]['cervicalcancerscreening']);
+
+        let screeningTypeId;
+        if (this.cervicalCancerScreeningFormGroup.value[0]['method']) {
+            const screeningMethod = this.cervicalCancerScreeningMethodOptions.filter(obj =>
+                obj.itemId == this.cervicalCancerScreeningFormGroup.value[0]['method']);
+            screeningTypeId = screeningMethod[0]['masterId'];
+        } else {
+            screeningTypeId = 0;
+        }
+
+        const patientScreeningCommand: PatientScreeningCommand = {
+            Id: 0,
+            PatientId: this.patientId,
+            PatientMasterVisitId: this.patientMasterVisitId,
+            ScreeningTypeId: screeningTypeId,
+            ScreeningDone: isCacxDone[0].itemName == 'Yes' ? true : false,
+            ScreeningDate: new Date(),
+            ScreeningCategoryId: this.cervicalCancerScreeningFormGroup.value[0]['method'],
+            ScreeningValueId: this.cervicalCancerScreeningFormGroup.value[0]['results'],
+            Comment: '',
+            Active: true,
+            DeleteFlag: false,
+            CreatedBy: this.userId,
+            CreateDate: new Date(),
+            AuditData: '',
+            VisitDate: this.visitDetailsFormGroup.value[0]['visitDate']
+        };
+
         const pncVisitDetails = this.pncService.savePncVisitDetails(pncVisitDetailsCommand);
         const pncPostNatalExam = this.pncService.savePncPostNatalExam(pncPostNatalExamCommand);
         const pncBabyExam = this.pncService.savePncPostNatalExam(pncBabyExaminationCommand);
@@ -528,12 +559,14 @@ export class PncComponent implements OnInit {
         const pncDrugAdministration = this.pncService.savePncDrugAdministration(drugAdministrationCommand);
         const pncPartnerTesting = this.pncService.savePartnerTesting(partnerTestingCommand);
         const pncPatientEducation = this.maternityService.savePatientEducation(patiendEducationCommand);
+        const pncPatientScreening = this.maternityService.saveScreening(patientScreeningCommand);
 
         forkJoin([
             pncHivStatus, pncDiagnosis, pncReferral,
             pncNextAppointment, pncVisitDetails,
             pncPostNatalExam, pncBabyExam, pncFamilyPlanning,
-            pncPartnerTesting, pncPatientEducation, pncDrugAdministration])
+            pncPartnerTesting, pncPatientEducation, pncDrugAdministration,
+            pncPatientScreening])
             .subscribe(
                 (result) => {
                     console.log(result);
