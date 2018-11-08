@@ -34,19 +34,8 @@ export class HeiService {
         );
     }
 
-    public saveHeiVisitDetails(patientId: number, patientMasterVisitId: number, visitData: any,
-        userId: number): Observable<any> {
-        const visitDetailsData = {
-            'Id': 0,
-            'PatientMasterVisitId': patientMasterVisitId,
-            'PatientId': patientId,
-            'VisitDate': visitData['visitDate'],
-            'VisitType': visitData['visitType'],
-            'CreatedDate': new Date(),
-            'CreatedBy': userId,
-            'DeleteFlag': 0
-        };
-        return this.http.post<any>(this.API_URL + '/api/HeiVisitDetails', JSON.stringify(visitDetailsData), httpOptions).pipe(
+    public saveHeiVisitDetails(visitDetails: any): Observable<any> {
+        return this.http.post<any>(this.API_URL + '/api/HeiVisitDetails', JSON.stringify(visitDetails), httpOptions).pipe(
             tap(saveHeiVisitDetails => this.errorHandler.log(`successfully added hei visit details`)),
             catchError(this.errorHandler.handleError<any>('Error saving hei delivery'))
         );

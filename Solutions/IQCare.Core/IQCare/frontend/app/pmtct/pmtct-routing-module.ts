@@ -204,6 +204,7 @@ const routes: Routes = [
             kitNameOptions: TestKitNameResolver,
             hivTestResultOptions: HivTestResultResolver,
             finalPartnerHivResultOptions: FinalPartnerHivResultResolver,
+            hivFinalResultsOptions: HivFinalResultsResolver,
         },
         pathMatch: 'full'
     }
