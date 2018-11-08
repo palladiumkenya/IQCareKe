@@ -58,6 +58,7 @@ export class RegisterComponent implements OnInit {
     newContacts: any[];
     id: number;
 
+    
     constructor(private _formBuilder: FormBuilder,
         private snotifyService: SnotifyService,
         private notificationService: NotificationService,
