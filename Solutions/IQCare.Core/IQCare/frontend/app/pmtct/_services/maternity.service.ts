@@ -3,10 +3,11 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
 import { ErrorHandlerService } from '../../shared/_services/errorhandler.service';
 import { catchError, tap } from 'rxjs/operators';
-import { Observable } from 'rxjs/index';
+import { Observable, of } from 'rxjs/index';
 import { PatientMasterVisitEncounter } from '../_models/PatientMasterVisitEncounter';
 import { PatientProfileViewModel } from '../_models/viewModel/PatientProfileViewModel';
 import { PatientDeliveryInformationViewModel } from '../_models/viewModel/PatientDeliveryInformationViewModel';
+import { PatientScreeningCommand } from '../_models/PatientScreeningCommand';
 
 const httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -151,6 +152,18 @@ export class MaternityService {
             .pipe(
                 tap(getPatientDeliveryInfoByProfileId => this.errorHandler.log(`successfully fetched patient delivery info by profile Id`)),
                 catchError(this.errorHandler.handleError<any>('Error Fetching patient delivery info by profile Id'))
+            );
+    }
+
+    public saveScreening(patientScreeningCommand: PatientScreeningCommand): Observable<any> {
+        if (patientScreeningCommand.ScreeningTypeId == 0) {
+            return of([]);
+        }
+
+        return this.http.post<any>(this.API_PMTCT_URL + '/api/PatientScreening/', JSON.stringify(patientScreeningCommand), httpOptions)
+            .pipe(
+                tap(saveScreening => this.errorHandler.log(`successfully added patient screening`)),
+                catchError(this.errorHandler.handleError<any>('Error saving patient screening'))
             );
     }
 }
