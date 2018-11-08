@@ -2,6 +2,8 @@ import { Component, OnInit, Input, NgZone } from '@angular/core';
 import { PersonHomeService } from '../services/person-home.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { PatientView } from '../_model/PatientView';
+import { Store } from '@ngrx/store';
+import * as Service from '../../shared/reducers/app.states';
 
 @Component({
     selector: 'app-services-list',
@@ -25,7 +27,8 @@ export class ServicesListComponent implements OnInit {
     constructor(private personhomeservice: PersonHomeService,
         public zone: NgZone,
         private router: Router,
-        private route: ActivatedRoute) {
+        private route: ActivatedRoute,
+        private store: Store<AppState>) {
     }
 
     ngOnInit() {
@@ -55,6 +58,7 @@ export class ServicesListComponent implements OnInit {
         if (selectedService && selectedService.length > 0) {
             switch (selectedService[0]['code']) {
                 case 'ANC':
+                    localStorage.setItem('selectedService', 'anc');
                     this.zone.run(() => {
                         // :patientId/:personId/:serviceAreaId
                         this.router.navigate(['/pmtct/anc/' + this.patientId + '/' + this.personId + '/' + serviceId],
@@ -62,12 +66,14 @@ export class ServicesListComponent implements OnInit {
                     });
                     break;
                 case 'HEI':
+                    localStorage.setItem('selectedService', 'hei');
                     this.zone.run(() => {
                         this.router.navigate(['/pmtct/hei/' + this.patientId + '/' + this.personId + '/' + serviceId],
                             { relativeTo: this.route });
                     });
                     break;
                 case 'HTS':
+                    localStorage.setItem('selectedService', 'hts');
                     this.zone.run(() => {
                         localStorage.setItem('personId', this.personId.toString());
                         localStorage.setItem('patientId', this.patientId.toString());
@@ -76,6 +82,7 @@ export class ServicesListComponent implements OnInit {
                     });
                     break;
                 case 'PNC':
+                    localStorage.setItem('selectedService', 'pnc');
                     this.zone.run(() => {
                         this.router.navigate(
                             ['/pmtct/pnc/encounters/' + this.patientId + '/' + this.personId + '/' + serviceId],
@@ -83,6 +90,7 @@ export class ServicesListComponent implements OnInit {
                     });
                     break;
                 case 'Maternity':
+                    localStorage.setItem('selectedService', 'maternity');
                     this.zone.run(() => {
                         this.router.navigate(
                             ['/pmtct/maternity/encounters/' + this.patientId + '/' + this.personId + '/' + serviceId],

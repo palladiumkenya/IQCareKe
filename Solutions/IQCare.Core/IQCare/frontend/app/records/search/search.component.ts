@@ -6,6 +6,8 @@ import { Router, ActivatedRoute } from '../../../../node_modules/@angular/router
 import { SnotifyService } from 'ng-snotify';
 import { NotificationService } from '../../shared/_services/notification.service';
 import { animate, state, style, transition, trigger } from '@angular/animations';
+import { Store } from '@ngrx/store';
+import * as AppState from '../../shared/reducers/app.states';
 
 @Component({
     selector: 'app-search',
@@ -33,8 +35,11 @@ export class SearchComponent implements OnInit, AfterViewInit {
         private route: ActivatedRoute,
         public zone: NgZone,
         private snotifyService: SnotifyService,
-        private notificationService: NotificationService) {
+        private notificationService: NotificationService,
+        private store: Store<AppState>) {
+        store.dispatch(new AppState.ClearState());
         this.clientSearch = new Search();
+        localStorage.removeItem('selectedService');
     }
 
     ngAfterViewInit(): void {
