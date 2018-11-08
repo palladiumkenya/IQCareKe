@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using IQCare.Common.BusinessProcess.Commands.PersonCommand;
+using IQCare.Common.BusinessProcess.Commands.Relationship;
 using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -83,6 +84,15 @@ namespace IQCare.Controllers.Shared
             if (results.IsValid)
                 return Ok(results.Value);
             return BadRequest(results);
+        }
+
+        [HttpGet("GetRelationshipsByPatientId/{patientId}")]
+        public async Task<object> GetRelationshipsByPatientId(int patientId)
+        {
+            var response = await _mediator.Send(new GetPatientRelationships { PatientId = patientId }, HttpContext.RequestAborted);
+            if (response.IsValid)
+                return Ok(response.Value);
+            return BadRequest(response);
         }
 
 

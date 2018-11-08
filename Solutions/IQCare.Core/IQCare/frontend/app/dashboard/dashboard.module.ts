@@ -25,6 +25,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { SharedModule } from '../shared/shared.module';
 import { EnrollmentService } from '../registration/_services/enrollment.service';
 import { ChronichIllnessComponent } from './chronich-illness/chronich-illness.component';
+import { PatientRelationshipsComponent } from './patient-relationships/patient-relationships.component';
 
 @NgModule({
     imports: [
@@ -55,7 +56,8 @@ import { ChronichIllnessComponent } from './chronich-illness/chronich-illness.co
         PersonHomeComponent,
         ServicesListComponent,
         EnrollmentServicesComponent,
-        ChronichIllnessComponent
+        ChronichIllnessComponent,
+        PatientRelationshipsComponent
     ],
     providers: [
         NotificationService,

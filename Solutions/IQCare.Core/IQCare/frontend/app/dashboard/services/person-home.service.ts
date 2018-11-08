@@ -66,5 +66,11 @@ export class PersonHomeService {
             catchError(this.errorHandler.handleError<any>('getChronicIllnessesByPatientId'))
         );
     }
+    public getRelationshipsByPatientId(patientId:number) : Observable<any> {
+        return this.http.get<any>(this.API_URL + '/api/PatientServices/GetRelationshipsByPatientId/' + patientId).pipe(
+            tap(getRelationshipsByPatientId => this.errorHandler.log(`get patient relationships`)),
+            catchError(this.errorHandler.handleError<any>('getRelationshipsByPatientId'))
+        );
+    }
 
 }

@@ -1,7 +1,7 @@
 ﻿using IQCare.Common.BusinessProcess.Commands;
 using IQCare.Common.BusinessProcess.Commands.ClientLookup;
 using IQCare.Common.BusinessProcess.Commands.Enrollment;
-using IQCare.Common.BusinessProcess.Commands.Partners;
+using IQCare.Common.BusinessProcess.Commands.Relationship;
 using IQCare.Common.BusinessProcess.Commands.PersonCommand;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;

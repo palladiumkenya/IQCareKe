@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using IQCare.Common.BusinessProcess.Commands.Partners;
+using IQCare.Common.BusinessProcess.Commands.Relationship;
 using IQCare.Common.Core.Models;
 using IQCare.Common.Infrastructure;
 using MediatR;
