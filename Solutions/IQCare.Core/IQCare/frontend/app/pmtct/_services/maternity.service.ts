@@ -3,12 +3,12 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
 import { ErrorHandlerService } from '../../shared/_services/errorhandler.service';
 import { catchError, tap } from 'rxjs/operators';
-import {Observable, of} from 'rxjs/index';
+import { Observable, of } from 'rxjs/index';
 import { PatientMasterVisitEncounter } from '../_models/PatientMasterVisitEncounter';
 import { PatientProfileViewModel } from '../_models/viewModel/PatientProfileViewModel';
 import { PatientDeliveryInformationViewModel } from '../_models/viewModel/PatientDeliveryInformationViewModel';
 import { PatientScreeningCommand } from '../_models/PatientScreeningCommand';
-import {HivStatusCommand} from '../_models/HivStatusCommand';
+import { HivStatusCommand } from '../_models/HivStatusCommand';
 
 const httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -128,9 +128,9 @@ export class MaternityService {
     public saveReferrals(referral: any): Observable<any> {
         return this.http.post(this.API_URL + '/api/PatientReferralAndAppointment/AddPatientReferralInfo',
             JSON.stringify(referral), httpOptions).pipe(
-            tap(saveReferrals => this.errorHandler.log(`successfully added Referral details`)),
-            catchError(this.errorHandler.handleError<any>('Error saving Referral details'))
-        );
+                tap(saveReferrals => this.errorHandler.log(`successfully added Referral details`)),
+                catchError(this.errorHandler.handleError<any>('Error saving Referral details'))
+            );
     }
 
     public savePncHivStatus(hivStatusCommand: HivStatusCommand, anyTests: any[]): Observable<any> {
@@ -184,5 +184,4 @@ export class MaternityService {
                 catchError(this.errorHandler.handleError<any>('Error saving patient screening'))
             );
     }
-}
 }
