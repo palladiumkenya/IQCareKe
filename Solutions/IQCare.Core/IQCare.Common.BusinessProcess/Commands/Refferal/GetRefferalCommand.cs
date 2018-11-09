@@ -1,6 +1,7 @@
 ﻿using IQCare.Common.Core.Models;
 using MediatR;
 using System.Collections.Generic;
+using IQCare.Library;
 
 namespace IQCare.Common.BusinessProcess.Commands.Refferal
 {
