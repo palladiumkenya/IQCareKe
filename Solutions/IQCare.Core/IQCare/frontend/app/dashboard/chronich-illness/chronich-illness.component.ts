@@ -1,4 +1,4 @@
-import { Component, OnInit,ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import {MatPaginator, MatTableDataSource } from '@angular/material';
 import { PersonHomeService } from '../services/person-home.service';
 import { ActivatedRoute } from '@angular/router';
@@ -11,28 +11,28 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class ChronichIllnessComponent implements OnInit {
   personId = 0;
-  chronic_illness_data : any[] = [];
+  chronic_illness_data: any[] = [];
   dataSource = new MatTableDataSource(this.chronic_illness_data);
-  chronic_illness_displaycolumns = ['illness','onsetdate','treatment','dose'];
+  chronic_illness_displaycolumns = ['illness', 'onsetdate', 'treatment', 'dose'];
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
-  constructor(private personService: PersonHomeService,private route: ActivatedRoute) {
+  constructor(private personService: PersonHomeService, private route: ActivatedRoute) {
 
    }
 
   ngOnInit() {
      this.route.params.subscribe(params => {
      this.personId = params['id'];
-     this.personService.getPatientByPersonId(this.personId).subscribe(patient=>{
+     this.personService.getPatientByPersonId(this.personId).subscribe(patient => {
        this.getChronicIllnessesByPatientId(patient.patientId);
     });
     });
   }
 
-  public getChronicIllnessesByPatientId(patientId:number){
+  public getChronicIllnessesByPatientId(patientId: number) {
     this.personService.getChronicIllnessesByPatientId(patientId).subscribe(
-        data=> {
-          if (data.length==0) {
+        data => {
+          if (data.length == 0) {
             return;
         }
             data.forEach(illness => {
@@ -46,10 +46,10 @@ export class ChronichIllnessComponent implements OnInit {
      
          this.dataSource = new MatTableDataSource(this.chronic_illness_data);
          this.dataSource.paginator = this.paginator;
-        },(err)=>{
-           console.log(err)
+        }, (err) => {
+           console.log(err);
         }
-    )
+    );
 }
 
 }

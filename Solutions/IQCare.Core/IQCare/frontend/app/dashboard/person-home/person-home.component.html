@@ -3,10 +3,11 @@
         <div class="profile-container">
             <div class="profile-header row">
                 <div class="col-lg-2 col-sm-2 col-xs-12 text-center">
-                    <img src="assets/img/avatars/default.png" alt="" class="header-avatar" />
+                    <img src="assets/img/avatars/default.png" alt="" class="header-avatar"/>
                 </div>
                 <div class="col-lg-3 col-sm-3 col-xs-12 profile-info">
-                    <div class="header-fullname"><strong>{{person.lastName}},{{person.midName}} {{person.firstName}}</strong></div>
+                    <div class="header-fullname"><strong>{{person.lastName}},{{person.midName}}
+                        {{person.firstName}}</strong></div>
                     <div class="stats-title">
                         <span class="">{{person.patientType}} Patient</span>
                     </div>
@@ -36,10 +37,10 @@
                     <div class="row">
                         <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 inlinestats-col">
                             <!-- <i class="glyphicon glyphicon-map-marker"></i>
-                            <strong>County:</strong> {{ person.county }} <br />
-                            <strong>SubCounty:</strong> {{ person.subCounty }} <br />
-                            <strong>Ward:</strong> {{ person.ward }} <br />
-                            <strong>Landmark:</strong> {{ person.landMark }} -->
+                             <strong>County:</strong> {{ person.county }} <br />
+                             <strong>SubCounty:</strong> {{ person.subCounty }} <br />
+                             <strong>Ward:</strong> {{ person.ward }} <br />
+                             <strong>Landmark:</strong> {{ person.landMark }} -->
                         </div>
                         <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 inlinestats-col">
                             Emergency Contact: <strong>$250</strong>
@@ -125,7 +126,8 @@
                                             <div class="col-lg-4 col-sm-6 col-xs-12">
                                                 <div class="databox databox-graded">
                                                     <div class="databox-left no-padding">
-                                                        <img src="assets/img/avatars/Javi-Jimenez.jpg" style="width:65px; height:65px;">
+                                                        <img src="assets/img/avatars/Javi-Jimenez.jpg"
+                                                             style="width:65px; height:65px;">
                                                     </div>
                                                     <div class="databox-right padding-top-20 bg-whitesmoke">
                                                         <div class="databox-stat orange radius-bordered">
@@ -139,7 +141,8 @@
                                             <div class="col-lg-4 col-sm-6 col-xs-12">
                                                 <div class="databox databox-graded">
                                                     <div class="databox-left no-padding">
-                                                        <img src="assets/img/avatars/adam-jansen.jpg" style="width:65px; height:65px;">
+                                                        <img src="assets/img/avatars/adam-jansen.jpg"
+                                                             style="width:65px; height:65px;">
                                                     </div>
                                                     <div class="databox-right padding-top-20 bg-whitesmoke">
                                                         <div class="databox-stat palegreen radius-bordered">
@@ -153,7 +156,8 @@
                                             <div class="col-lg-4 col-sm-6 col-xs-12">
                                                 <div class="databox databox-graded">
                                                     <div class="databox-left no-padding">
-                                                        <img src="assets/img/avatars/Nicolai-Larson.jpg" style="width:65px; height:65px;">
+                                                        <img src="assets/img/avatars/Nicolai-Larson.jpg"
+                                                             style="width:65px; height:65px;">
                                                     </div>
                                                     <div class="databox-right padding-top-20 bg-whitesmoke">
                                                         <div class="databox-stat palegreen radius-bordered">
@@ -172,10 +176,11 @@
                                                 <div class="databox">
                                                     <div class="databox-left bg-white">
                                                         <div class="databox-sparkline">
-                                                            <span data-sparkline="bar" data-height="40px" data-width="100%"
-                                                                data-barcolor="#57b5e3" data-negbarcolor="#a0d468"
-                                                                data-zerocolor="#d73d32" data-barwidth="5px"
-                                                                data-barspacing="1px">
+                                                            <span data-sparkline="bar" data-height="40px"
+                                                                  data-width="100%"
+                                                                  data-barcolor="#57b5e3" data-negbarcolor="#a0d468"
+                                                                  data-zerocolor="#d73d32" data-barwidth="5px"
+                                                                  data-barspacing="1px">
                                                                 5,6,7,2,0,-4,-2,4
                                                             </span>
                                                         </div>
@@ -192,16 +197,49 @@
                                             </div>
 
                                         </div>
-                                        <h6 class="row-title before-yellow">Enrollment Summary</h6>
-                                        <div class="row">
-                                            <app-services-list [personId]="personId" [services]="services" [person]="person"></app-services-list>
-                                        </div>
+
                                     </div>
                                 </div>
                             </div>
                             <div id="timeline" class="tab-pane">
                                 <ul class="timeline animated fadeInDown">
                                     <li>
+
+                                        <div class="timeline-badge blue">
+                                            <i class="fa fa-tag"></i>
+                                        </div>
+                                        <div class="timeline-panel">
+                                            <div class="timeline-header bordered-bottom bordered-blue">
+                                                 <span class="timeline-title">
+                                                      Chronic Conditions
+                                                 </span>
+                                            </div>
+                                            <div class="timeline-body">
+                                                <app-chronich-illness>
+                                                </app-chronich-illness>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li class="timeline-inverted">
+
+                                        <div class="timeline-badge darkorange">
+                                            <i class="fa fa-map-marker font-120"></i>
+                                        </div>
+                                        <div class="timeline-panel bordered-right-3 bordered-orange">
+                                            <div class="timeline-header bordered-bottom bordered-blue">
+                                                 <span class="timeline-title">
+                                                        Patient Relationships
+                                                  </span>
+
+                                            </div>
+                                            <div class="timeline-body">
+                                                <app-patient-relationships>
+
+                                                </app-patient-relationships>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <!--  <li>
                                         <div class="timeline-panel">
                                             <div class="timeline-header bordered-bottom bordered-blue">
                                                 <span class="timeline-title">
@@ -220,15 +258,17 @@
                                                 <span class="timeline-title">
                                                     Patient Relationships
                                                 </span>
+                                                <div class="timeline-body">
+                                                    <app-patient-relationships>
 
+                                                    </app-patient-relationships>
+                                                </div>
                                             </div>
-                                            <div class="timeline-body">
-                                                <app-patient-relationships>
 
-                                                </app-patient-relationships>
-                                            </div>
                                         </div>
-                                    </li>
+                                    </li> -->
+
+
                                     <li class="timeline-inverted">
                                         <div class="timeline-datetime">
                                             <span class="timeline-time">
@@ -243,15 +283,7 @@
                                                 <span class="timeline-title">
                                                     Allergies
                                                 </span>
-                                                <p class="timeline-datetime">
-                                                    <small class="text-muted">
-                                                        <i class="glyphicon glyphicon-time">
-                                                        </i>
-                                                        <span class="timeline-date">Today</span>
-                                                        -
-                                                        <span class="timeline-time">3:10</span>
-                                                    </small>
-                                                </p>
+
                                             </div>
                                             <div class="timeline-body">
                                                 <p>Outdoor visit at California State Route 85 with John Boltana &amp;
@@ -259,7 +291,7 @@
                                                     Piterson regarding to setup a new show room.</p>
                                                 <p>
                                                     <i class="orange fa fa-exclamation"></i> New task added for <span><a
-                                                            href="#" class="info">James Dean</a></span>
+                                                        href="#" class="info">James Dean</a></span>
                                                 </p>
                                             </div>
                                         </div>
@@ -307,7 +339,7 @@
                                             </span><span class="timeline-date">Yesterday</span>
                                         </div>
                                         <div class="timeline-badge sky">
-                                            <img src="assets/img/avatars/Sergey-Azovskiy.jpg" class="badge-picture" />
+                                            <img src="assets/img/avatars/Sergey-Azovskiy.jpg" class="badge-picture"/>
                                         </div>
                                         <div class="timeline-panel">
                                             <div class="timeline-header bordered-bottom bordered-blue">
@@ -384,8 +416,10 @@
                                             </div>
                                             <div class="timeline-body">
                                                 <a href="#">John Travolta</a> shared an image on <a href="#">Dribble</a>
-                                                <div class="tl-wide text-center" style="padding: 5px; margin-top:10px; margin-bottom: 10px;">
-                                                    <img src="assets/img/temp1.png" alt="" style="max-height: 158px;max-width: 100%;">
+                                                <div class="tl-wide text-center"
+                                                     style="padding: 5px; margin-top:10px; margin-bottom: 10px;">
+                                                    <img src="assets/img/temp1.png" alt=""
+                                                         style="max-height: 158px;max-width: 100%;">
                                                 </div>
                                                 <i class="text-muted text-sm">Lorem ipsum dolor sit amet, consectetur
                                                     adipisicing
@@ -404,7 +438,8 @@
                                     <div class="col-md-6">
                                         <div class="profile-contacts">
 
-                                            <div class="profile-badge orange"><i class="fa fa-phone orange"></i><span>Contacts</span></div>
+                                            <div class="profile-badge orange"><i class="fa fa-phone orange"></i><span>Contacts</span>
+                                            </div>
                                             <div class="contact-info">
                                                 <p>
                                                     Phone : {{person.mobileNumber}} <br> alternate Cell :
@@ -434,9 +469,15 @@
                                 </div>
                             </div>
                             <div id="settings" class="tab-pane">
+
                                 <div class="form-title">
                                     Clinical Services
+                                    <div class="row">
+                                        <app-services-list [personId]="personId" [services]="services"
+                                                           [person]="person"></app-services-list>
+                                    </div>
                                 </div>
+
                             </div>
                         </div>
                     </div>
