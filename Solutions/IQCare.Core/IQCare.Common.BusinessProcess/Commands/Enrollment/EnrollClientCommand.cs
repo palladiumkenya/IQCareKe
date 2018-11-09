@@ -5,7 +5,7 @@ using MediatR;
 
 namespace IQCare.Common.BusinessProcess.Commands.Enrollment
 {
-    public class EnrollClientCommand : IRequest<Core.Models.Result<EnrollClientResponse>>
+    public class EnrollClientCommand : IRequest<Result<EnrollClientResponse>>
     {
         public ClientEnrollment ClientEnrollment { get; set; }
     }

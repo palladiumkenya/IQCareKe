@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using IQCare.Common.Core.Models;
+using IQCare.Library;
 using MediatR;
 namespace IQCareRecords.Common.BusinessProcess.Command
 {

@@ -7,6 +7,7 @@ using IQCare.Common.Core.Models;
 using IQCare.Common.Infrastructure;
 using System.Threading;
 using System.Threading.Tasks;
+using IQCare.Library;
 
 namespace IQCare.Records.BusinessProcess.CommandHandlers.Lookup
 {

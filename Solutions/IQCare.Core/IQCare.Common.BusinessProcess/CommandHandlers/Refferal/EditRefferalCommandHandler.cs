@@ -6,6 +6,7 @@ using Serilog;
 using System;
 using System.Threading;
 using System.Threading.Tasks;
+using IQCare.Library;
 
 namespace IQCare.Common.BusinessProcess.CommandHandlers.Refferal
 {

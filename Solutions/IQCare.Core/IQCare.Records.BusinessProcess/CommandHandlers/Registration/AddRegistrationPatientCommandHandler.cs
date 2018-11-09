@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using IQCare.Common.BusinessProcess.Services;
 using IQCare.Common.Core.Models;
 using IQCare.Common.Infrastructure;
+using IQCare.Library;
 using IQCare.Records.BusinessProcess.Command;
 using MediatR;
 

@@ -7,6 +7,7 @@ using IQCare.Common.Infrastructure;
 using IQCareRecords.Common.BusinessProcess.Command;
 using System.Threading;
 using System.Threading.Tasks;
+using IQCare.Library;
 using MediatR;
 namespace IQCareRecords.Common.BusinessProcess.CommandHandlers.Lookup
 {

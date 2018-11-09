@@ -1,6 +1,7 @@
-﻿using System.Collections.Generic;
-using IQCare.Common.Core.Models;
+﻿using IQCare.Common.Core.Models;
+using IQCare.Library;
 using MediatR;
+using System.Collections.Generic;
 
 namespace IQCare.Common.BusinessProcess.Commands.ClientLookup
 {
