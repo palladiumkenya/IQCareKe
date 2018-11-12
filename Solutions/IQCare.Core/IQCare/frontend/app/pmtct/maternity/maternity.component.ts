@@ -120,7 +120,6 @@ export class MaternityComponent implements OnInit {
         );
 
         this.userId = JSON.parse(localStorage.getItem('appUserId'));
-        this.userId = JSON.parse(localStorage.getItem('appUserId'));
         this.patientMasterVisitId = JSON.parse(localStorage.getItem('patientMasterVisitId'));
         this.patientEncounterId = JSON.parse(localStorage.getItem('patientEncounterId'));
         this.visitDate = new Date(localStorage.getItem('visitDate'));
@@ -211,6 +210,10 @@ export class MaternityComponent implements OnInit {
         });
     }
 
+    log() {
+        console.log(this.visitDetailsFormGroup);
+    }
+
     onVisitDetailsNotify(formGroup: FormGroup): void {
         this.visitDetailsFormGroup.push(formGroup);
     }
@@ -290,7 +293,7 @@ export class MaternityComponent implements OnInit {
 
     onSubmit() {
 
-console.log(this.maternityTestsFormGroup);
+        console.log(this.maternityTestsFormGroup);
         const visitDetailsCommand: MaternityVisitDetailsCommand = {
             patientId: this.patientId,
             patientMasterVisitId: this.patientMasterVisitId,
@@ -549,7 +552,7 @@ console.log(this.maternityTestsFormGroup);
             ServiceAreaId: this.serviceAreaId,
             EncounterTypeId: 1,
             EncounterDate: this.visitDetailsFormGroup.value[0]['visitDate'],
-            EncounterType: this.maternityTestsFormGroup.value[1]['testType']
+            EncounterType: this.maternityTestsFormGroup.value[0]['testType']
         };
 
 
@@ -561,9 +564,9 @@ console.log(this.maternityTestsFormGroup);
             ServiceAreaId: this.serviceAreaId,
             Testing: [],
             FinalTestingResult: {
-                FinalResultHiv1: this.maternityTestsFormGroup.value[1]['finalTestResult'],
+                FinalResultHiv1: this.maternityTestsFormGroup.value[0]['finalTestResult'],
                 FinalResultHiv2: null,
-                FinalResult: this.maternityTestsFormGroup.value[1]['finalTestResult'],
+                FinalResult: this.maternityTestsFormGroup.value[0]['finalTestResult'],
                 FinalResultGiven: yesOption[0].itemId,
                 CoupleDiscordant: naOption[0].itemId,
                 FinalResultsRemarks: 'n/a',
@@ -643,7 +646,7 @@ console.log(this.maternityTestsFormGroup);
                 () => {
                     console.log(`complete`);
                     this.zone.run(() => {
-                        this.router.navigate(['/dashboard/personhome/'], {relativeTo: this.route});
+                        this.router.navigate(['/dashboard/personhome/' + this.personId], {relativeTo: this.route});
                     });
                 }
             );

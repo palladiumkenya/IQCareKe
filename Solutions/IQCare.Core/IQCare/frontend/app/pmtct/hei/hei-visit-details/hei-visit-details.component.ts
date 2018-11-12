@@ -68,6 +68,12 @@ export class HeiVisitDetailsComponent implements OnInit {
                 this.isdayPostPartumShown = true;
                 this.isCohortShown = false;
                 break;
+            case 'anc':
+                this.getLookupItems('ANCVisitType', this.visitTypes);
+                this.isVisitNumberShown = true;
+                this.HeiVisitDetailsFormGroup.get('visitNumber').enable({ onlySelf: true });
+                this.isCohortShown = false;
+                break;
             default:
         }
 
@@ -85,7 +91,12 @@ export class HeiVisitDetailsComponent implements OnInit {
                     if (visit && visit.visitNumber > 1) {
                         const Item = this.visitTypes.filter(x => x.itemName.includes('Follow Up'));
                         this.HeiVisitDetailsFormGroup.get('visitType').patchValue(Item[0].itemId);
+                        console.log('visitNumber' + visit.visitNumber );
+                        if (this.formtype == 'anc') {
+                            this.HeiVisitDetailsFormGroup.get('visitNumber').patchValue(visit.visitNumber );
+                        }
                     } else {
+                        this.HeiVisitDetailsFormGroup.get('visitNumber').patchValue(1);
                         const Item = this.visitTypes.filter(x => x.itemName.includes('Initial'));
                         // console.log(Item);
                         this.HeiVisitDetailsFormGroup.get('visitType').patchValue(Item[0].itemId);

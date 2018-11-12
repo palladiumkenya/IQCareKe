@@ -18,7 +18,7 @@
                                                                [visitDate]="visitDate" [visitType]="visitType"></app-hei-visit-details>
                                         <app-mother-profile [patientId]="patientId" (notify)="OnMotherProfileNotify($event)"></app-mother-profile>
                                         <div>
-                                            <button mat-raised-button color="accent" matStepperNext type="button">Next</button>
+                                            <button mat-raised-button color="accent" matStepperNext type="button" (click)="log()">Next</button>
                                         </div>
                                     </mat-step>
                                     <mat-step [completed]="false" [stepControl]="diagnosisFormGroup">

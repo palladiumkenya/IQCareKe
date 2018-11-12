@@ -102,7 +102,8 @@ export class MaternityService {
 
 
     public savePartnerTesting(partner: any): Observable<any> {
-        return this.http.post(this.API_PMTCT_URL + '/api/MaternityPatientDeliveryInfo', JSON.stringify(partner), httpOptions).pipe(
+        return this.http.post(this.API_PMTCT_URL + '/api/PatientPartnerTesting/PatientPartnerTesting',
+            JSON.stringify(partner), httpOptions).pipe(
             tap(savePartnerTesting => this.errorHandler.log(`successfully added Partner testing details`)),
             catchError(this.errorHandler.handleError<any>('Error saving Partner testing details'))
         );
