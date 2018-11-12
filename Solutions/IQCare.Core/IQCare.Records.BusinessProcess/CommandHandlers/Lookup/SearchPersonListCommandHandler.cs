@@ -34,18 +34,18 @@ namespace IQCare.Records.BusinessProcess.CommandHandlers.Lookup
                 sql.Append("Select  top 100.* from PersonListView where (DeleteFlag=0 or DeleteFlag is null) ");
 
                 if (!string.IsNullOrWhiteSpace(request.firstName))
-                    sql.Append($" AND FirstName like \'%{request.firstName}%\'");
+                    sql.Append($" AND FirstName like \'%{request.firstName.Trim()}%\'");
 
                 if (!string.IsNullOrWhiteSpace(request.middleName))
-                    sql.Append($" AND MiddleName like \'%{request.middleName}%\'");
+                    sql.Append($" AND MiddleName like \'%{request.middleName.Trim()}%\'");
 
                 if (!string.IsNullOrWhiteSpace(request.lastName))
-                    sql.Append($" AND LastName like \'%{request.lastName}%\'");
+                    sql.Append($" AND LastName like \'%{request.lastName.Trim()}%\'");
 
                 if (!string.IsNullOrWhiteSpace(request.identificationNumber))
-                    sql.Append($" AND IdentifierValue like \'%{request.identificationNumber}%\'");
+                    sql.Append($" AND IdentifierValue like \'%{request.identificationNumber.Trim()}%\'");
                 if (!string.IsNullOrWhiteSpace(request.MobileNumber))
-                    sql.Append($" AND MobileNumber like \'%{request.MobileNumber}%\'");
+                    sql.Append($" AND MobileNumber like \'%{request.MobileNumber.Trim()}%\'");
 
                 sql.Append(";exec [dbo].[pr_CloseDecryptedSession];");
                 var result = await _unitOfWork.Repository<PersonListView>().FromSql(sql.ToString());

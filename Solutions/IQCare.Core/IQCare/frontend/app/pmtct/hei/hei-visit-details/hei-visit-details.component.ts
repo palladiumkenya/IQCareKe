@@ -90,16 +90,21 @@ export class HeiVisitDetailsComponent implements OnInit {
                     console.log(p);
                     if (visit && visit.visitNumber > 1) {
                         const Item = this.visitTypes.filter(x => x.itemName.includes('Follow Up'));
-                        this.HeiVisitDetailsFormGroup.get('visitType').patchValue(Item[0].itemId);
-                        console.log('visitNumber' + visit.visitNumber );
+                        if (Item.length > 0) {
+                            this.HeiVisitDetailsFormGroup.get('visitType').patchValue(Item[0].itemId);
+                            console.log('visitNumber' + visit.visitNumber);
+                        }
+
                         if (this.formtype == 'anc') {
-                            this.HeiVisitDetailsFormGroup.get('visitNumber').patchValue(visit.visitNumber );
+                            this.HeiVisitDetailsFormGroup.get('visitNumber').patchValue(visit.visitNumber);
                         }
                     } else {
                         this.HeiVisitDetailsFormGroup.get('visitNumber').patchValue(1);
                         const Item = this.visitTypes.filter(x => x.itemName.includes('Initial'));
                         // console.log(Item);
-                        this.HeiVisitDetailsFormGroup.get('visitType').patchValue(Item[0].itemId);
+                        if (Item.length > 0) {
+                            this.HeiVisitDetailsFormGroup.get('visitType').patchValue(Item[0].itemId);
+                        }
                     }
                 },
                 (err) => {
