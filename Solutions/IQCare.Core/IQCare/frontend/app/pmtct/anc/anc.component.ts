@@ -612,7 +612,7 @@ export class AncComponent implements OnInit, OnDestroy {
             Description: this.ReferralMatFormGroup.value[0]['serviceRemarks'],
             CreatedBy: this.userId,
             ServiceAreaId: this.serviceAreaId,
-            StatusDate: null,
+            StatusDate: new Date(),
             DifferentiatedCareId: 0,
             AppointmentReason: 'Follow Up'
         } as PatientAppointment;
