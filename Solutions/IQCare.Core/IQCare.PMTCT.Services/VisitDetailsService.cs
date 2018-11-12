@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using Serilog;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using IQCare.PMTCT.Infrastructure;
 
@@ -161,6 +162,21 @@ namespace IQCare.PMTCT.Services
             {
                 var profile = await _unitOfWork.Repository<PatientProfile>().Get(x => x.PatientId == PatientId && !x.DeleteFlag).ToListAsync();
                 return profile;
+            }
+            catch (Exception e)
+            {
+                Log.Error(e.Message);
+                throw e;
+            }
+        }
+
+        public int GetNumberOfVisit(int patientId, int? pregnancyId)
+        {
+            try
+            {
+                int visitNumber =  _unitOfWork.Repository<PatientProfile>()
+                    .Get(x => x.PatientId == patientId && x.PregnancyId == pregnancyId).Count();
+                return (visitNumber>0)?visitNumber:0;
             }
             catch (Exception e)
             {

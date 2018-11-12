@@ -29,6 +29,9 @@ export class HeiComponent implements OnInit {
     userId: number;
     formType: string;
     locationId: number;
+    patientEncounterId: number;
+    visitDate: Date;
+    visitType: number;
 
     defaultParameters: DefaultParameters;
 
@@ -91,6 +94,7 @@ export class HeiComponent implements OnInit {
         this.milestonesFormGroup = new FormArray([]);
         this.infantFeedingFormGroup = new FormArray([]);
         this.heiOutcomeFormGroup = new FormArray([]);
+        this.nextAppointmentFormGroup = new FormArray([]);
         this.hivTestingFormGroup = [];
         this.formType = 'hei';
     }
@@ -104,11 +108,14 @@ export class HeiComponent implements OnInit {
                 this.personId = personId;
                 this.serviceAreaId = serviceAreaId;
             }
-
         );
 
         this.userId = JSON.parse(localStorage.getItem('appUserId'));
         this.locationId = JSON.parse(localStorage.getItem('appLocationId'));
+        this.patientMasterVisitId = JSON.parse(localStorage.getItem('patientMasterVisitId'));
+        this.patientEncounterId = JSON.parse(localStorage.getItem('patientEncounterId'));
+        this.visitDate = new Date(localStorage.getItem('visitDate'));
+        this.visitType = JSON.parse(localStorage.getItem('visitType'));
 
         this.defaultParameters = {
             patientId: this.patientId,
@@ -409,7 +416,7 @@ export class HeiComponent implements OnInit {
             );
 
         this.zone.run(() => {
-            this.router.navigate(['/dashboard/personhome/'], { relativeTo: this.route });
+            this.router.navigate(['/dashboard/personhome/' + this.personId], { relativeTo: this.route });
         });
     }
 }

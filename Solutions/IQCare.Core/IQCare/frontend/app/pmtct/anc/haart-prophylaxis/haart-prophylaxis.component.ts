@@ -1,5 +1,5 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {LookupItemService} from '../../../shared/_services/lookup-item.service';
 import {SnotifyService} from 'ng-snotify';
 import {NotificationService} from '../../../shared/_services/notification.service';
@@ -31,7 +31,7 @@ export class HaartProphylaxisComponent implements OnInit {
     @Output() nextStep = new EventEmitter<HAARTProphylaxisEmitter>();
     @Input() HaartProphylaxis: ClientMonitoringEmitter;
     @Input() haartProphylaxisOptions: any[] = [];
-    @Output() notify: EventEmitter<FormGroup> = new EventEmitter<FormGroup>();
+    @Output() notify: EventEmitter<object> = new EventEmitter<object>();
     public HaartProphylaxisData: HAARTProphylaxisEmitter;
     public chronicIllness: ChronicIllnessEmitter[] = [];
     public patientchronicIllnessData: PatientChronicIllness[] = [];
@@ -65,16 +65,16 @@ export class HaartProphylaxisComponent implements OnInit {
 
 
         this.HaartProphylaxisFormGroup = this._formBuilder.group({
-            onArvBeforeANCVisit: ['', Validators.required],
-            startedHaartANC: ['', Validators.required],
-            cotrimoxazole: ['', Validators.required],
-            aztFortheBaby: ['', Validators.required],
-            nvpForBaby: ['', Validators.required],
-            illness: ['', Validators.required],
-            otherIllness: ['', Validators.required],
-            onSetDate: ['', Validators.required],
-            currentTreatment: ['', Validators.required],
-            dose: ['', Validators.required]
+            onArvBeforeANCVisit: new FormControl(['', Validators.required]),
+            startedHaartANC: new FormControl(['', Validators.required]),
+            cotrimoxazole: new FormControl(['', Validators.required]),
+            aztFortheBaby: new FormControl(['', Validators.required]),
+            nvpForBaby: new FormControl(['', Validators.required]),
+            illness: new FormControl(['', Validators.required]),
+            otherIllness: new FormControl(['', Validators.required]),
+            onSetDate: new FormControl(['', Validators.required]),
+            currentTreatment: new FormControl(['treatment', Validators.required]),
+            dose: new FormControl(['dose', Validators.required])
         });
 
         const {
@@ -89,6 +89,7 @@ export class HaartProphylaxisComponent implements OnInit {
         /* this.getLookupItems('YesNoNa', this.yesnonas);
          this.getLookupItems('ChronicIllness', this.chronics);
          this.getLookupItems('YesNo', this.YesNos); */
+        this.notify.emit({'form': this.HaartProphylaxisFormGroup, 'illness_data': this.chronicIllness });
     }
 
     public getLookupItems(groupName: string, _options: any[]) {
@@ -164,7 +165,7 @@ export class HaartProphylaxisComponent implements OnInit {
     }
 
     public removeRow(idx) {
-        this.patientchronicIllnessData.splice(idx, 1);
+        this.chronicIllness.splice(idx, 1);
     }
 
 }

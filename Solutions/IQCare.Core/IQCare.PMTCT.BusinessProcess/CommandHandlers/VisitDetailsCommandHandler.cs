@@ -39,21 +39,31 @@ namespace IQCare.PMTCT.BusinessProcess.CommandHandlers
 
                 try
                 {
-                    VisitNumber = request.VisitNumber;
+                   
 
                     
-                    PatientMasterVisitService patientMasterVisitService = new PatientMasterVisitService(_commonUnitOfWork);
                     LookupLogic lookupLogic = new LookupLogic(_commonUnitOfWork);
                     VisitDetailsService visitDetailsService = new VisitDetailsService(_unitOfWork);
-                    PatientEncounterService patientEncounterService = new PatientEncounterService(_commonUnitOfWork);
                     PregnancyServices patientPregnancyServices =new PregnancyServices(_unitOfWork);
 
-                    var patientMasterVisit = await patientMasterVisitService.Add(request.PatientId, 1,DateTime.Today, 0,request.VisitDate, request.VisitDate, 0,0,request.VisitType,0);
+                    PatientPregnancy pregnancyData = patientPregnancyServices.GetActivePregnancy(request.PatientId);
+                    this.PregnancyId = pregnancyData.Id;
 
-                    PatientPregnancy patientPregnancy = new PatientPregnancy()
+                    if (pregnancyData.Id > 0)
                     {
+                        VisitNumber = visitDetailsService.GetNumberOfVisit(request.PatientId, pregnancyData.Id);
+
+                        // check if the details have changed
+                        if (pregnancyData.Lmp != request.Lmp || pregnancyData.Parity != request.ParityOne || pregnancyData.Parity2!=request.ParityTwo)
+                        {
+                            // TODO: insert into a tracking table
+                        }
+                    }
+                    else
+                    {                      
+                        PatientPregnancy patientPregnancy = new PatientPregnancy(){
                         PatientId = request.PatientId,
-                        PatientMasterVisitId = patientMasterVisit.Id,
+                        PatientMasterVisitId = request.PatientMasterVisitId,
                         Lmp = request.Lmp,
                         Edd = request.Edd,
                         Parity = request.ParityOne,
@@ -62,57 +72,31 @@ namespace IQCare.PMTCT.BusinessProcess.CommandHandlers
                         Gravidae = request.Gravidae,
                         CreatedBy = request.UserId,
                         CreateDate = DateTime.Now                                          
-                    };
-
-                    var encounterTypeId = await lookupLogic.GetLookupIdbyName(request.EncounterType);
-
-                    var encounter = await patientEncounterService.Add(request.PatientId, encounterTypeId, patientMasterVisit.Id, DateTime.Now, DateTime.Now, request.ServiceAreaId,request.UserId);
-
-                    if (VisitNumber <= 1)
-                    {
-                         this.Pregnancy = await visitDetailsService.AddPatientPregnancy(patientPregnancy);
-                         this.PregnancyId = 0;
+                       };
+                        this.Pregnancy = await visitDetailsService.AddPatientPregnancy(patientPregnancy);
+                        this.PregnancyId = this.Pregnancy.Id;
                     }
-                    else
-                    {
-                        PatientPregnancy pregnancyData =  patientPregnancyServices.GetActivePregnancy(request.PatientId);
-                        this.PregnancyId = pregnancyData.Id;
-                    }
-                   
-                    var visits = await visitDetailsService.GetPatientProfile(request.PatientId);
-
-
-                    if (this.VisitNumber <=1)
-                    {
-
-                        this.VisitNumber += 1;
-                    }
-
+                       
 
                     PatientProfile patientProfile = new PatientProfile()
                     {
                         PatientId = request.PatientId,
-                        PatientMasterVisitId = patientMasterVisit.Id,
+                        PatientMasterVisitId = request.PatientMasterVisitId,
                         AgeMenarche = request.AgeAtMenarche,
                         PregnancyId = this.PregnancyId,
-                        VisitNumber = this.VisitNumber,
+                        VisitNumber = (this.VisitNumber+1),
                         VisitType = request.VisitType,
                         CreatedBy = (request.UserId < 1) ? 1 : request.UserId,
                         CreateDate = DateTime.Now,
                     };
-
-                          var profile = visitDetailsService.AddPatientProfile(patientProfile);
-                        profileId = profile.Id;
-                    
-
+                    var profile = visitDetailsService.AddPatientProfile(patientProfile);
+                    profileId = profile.Id;
 
 
                     return Library.Result<VisitDetailsCommandResult>.Valid(new VisitDetailsCommandResult()
                     {
-                        PatientMasterVisitId =  patientMasterVisit.Id,
                         PregancyId = (this.VisitNumber>=1)?this.PregnancyId:this.Pregnancy.Id,
-                        ProfileId=profileId,
-                        PatientEncounterId=encounter.Id
+                        ProfileId=profileId
                     });
                 }
 
