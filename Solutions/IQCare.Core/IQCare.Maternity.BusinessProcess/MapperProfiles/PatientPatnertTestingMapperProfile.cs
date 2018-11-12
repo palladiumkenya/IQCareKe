@@ -11,8 +11,8 @@ namespace IQCare.Maternity.BusinessProcess.MapperProfiles
     {
         public PatientPatnertTestingMapperProfile()
         {
-            CreateMap<PatientPartnerTestingCommand, PatientPartnerTesting>();
-
+            CreateMap<PatientPartnerTestingCommand, PatientPartnerTesting>()
+                .ForMember(src => src.CreateDate, dest => dest.MapFrom(x => DateTime.Now)).ReverseMap();
         }
     }
 }

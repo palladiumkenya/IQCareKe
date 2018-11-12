@@ -34,9 +34,10 @@ export class PatientRelationshipsComponent implements OnInit {
   }
 
   public getRelationshipsByPatientId(patientId:number){
+    if(patientId == null)
+    return;
     this.personService.getRelationshipsByPatientId(patientId).subscribe(
       data=>{
-        console.log(data)
           if(data.length == 0)
             return;
            this.patient_relationships  = [];

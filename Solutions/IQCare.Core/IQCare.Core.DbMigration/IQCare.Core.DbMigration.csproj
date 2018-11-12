@@ -70,6 +70,7 @@
     <None Remove="Scripts\1.0.0.9\38_DO_CreateView_PatientChronicIllness.sql" />
     <None Remove="Scripts\1.0.0.9\40_DO_CreateSproc_GetPatientRelationships.sql" />
     <None Remove="Scripts\1.0.0.9\41_pr_iqcare_version_2.sql" />
+    <None Remove="Scripts\1.0.0.9\42_DO_AlterTable_Pregancy_AlterColumns.sql" />
   </ItemGroup>
 
   <ItemGroup>
@@ -143,6 +144,7 @@
     <EmbeddedResource Include="Scripts\1.0.0.9\38_DO_CreateView_PatientChronicIllness.sql" />
     <EmbeddedResource Include="Scripts\1.0.0.9\40_DO_CreateSproc_GetPatientRelationships.sql" />
     <EmbeddedResource Include="Scripts\1.0.0.9\41_pr_iqcare_version_2.sql" />
+    <EmbeddedResource Include="Scripts\1.0.0.9\42_DO_AlterTable_Pregancy_AlterColumns.sql" />
   </ItemGroup>
 
   <ItemGroup>
