@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data;
-using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -486,6 +484,7 @@ namespace IQCare.Common.BusinessProcess.Services
         }
 
         public async Task<PersonRelationship> UpdatePersonRelationship(PersonRelationship personRelationship)
+        public async Task<PersonRelationship> addPersonRelationship(int personId, int patientId, int relationshipTypeId, int userId)
         {
             try
             {
@@ -500,31 +499,6 @@ namespace IQCare.Common.BusinessProcess.Services
                 throw e;
             }
         }
-
-        //public async Task<PersonRelationship> addPersonRelationship(int personId, int patientId, int relationshipTypeId, int userId)
-        //{
-        //    try
-        //    {
-        //        PersonRelationship personRelationship = new PersonRelationship()
-        //        {
-        //            PersonId = personId,
-        //            PatientId = patientId,
-        //            RelationshipTypeId = relationshipTypeId,
-        //            DeleteFlag = false,
-        //            CreatedBy = userId,
-        //            CreateDate = DateTime.Now
-        //        };
-
-        //        await _unitOfWork.Repository<PersonRelationship>().AddAsync(personRelationship);
-        //        await _unitOfWork.SaveAsync();
-
-        //        return personRelationship;
-        //    }
-        //    catch (Exception e)
-        //    {
-        //        throw e;
-        //    }
-        //}
 
         public async Task<List<PersonContact>> GetPersonContact(int personId)
         {
@@ -687,6 +661,7 @@ namespace IQCare.Common.BusinessProcess.Services
             }
         }
 
+      
         public async Task<List<PersonLocation>> GetPersonLocation(int personId)
         {
             try
@@ -701,22 +676,51 @@ namespace IQCare.Common.BusinessProcess.Services
             }
         }
 
-        public async Task<PersonLocation> UpdatePersonLocation(int personId, string landmark)
+
+        public async Task<PersonLocation> UpdatePersonLocation(int personId, string landmark, string ward = "", string county = "", string subcounty = "", int userid = 1)
         {
             try
             {
                 var location = await _unitOfWork.Repository<PersonLocation>().Get(x => x.PersonId == personId)
                     .FirstOrDefaultAsync();
-
                 if (location != null)
                 {
-                    location.LandMark = landmark;
+
+                    if (!string.IsNullOrEmpty(landmark))
+                    {
+                        location.LandMark = landmark;
+                    }
+                    if (!string.IsNullOrEmpty(ward))
+                    {
+                        location.Ward = Convert.ToInt32(ward);
+                    }
+                    if (!string.IsNullOrEmpty(county))
+                    {
+                        location.County = Convert.ToInt32(county);
+                    }
+                    if (!string.IsNullOrEmpty(subcounty))
+                    {
+                        location.SubCounty = Convert.ToInt32(subcounty);
+                    }
                     _unitOfWork.Repository<PersonLocation>().Update(location);
                     await _unitOfWork.SaveAsync();
                 }
                 else
                 {
-                    location = await addPersonLocation(personId, 0, 0, 0, "", landmark, 1);
+                    int Ward = string.IsNullOrWhiteSpace(ward) ? 0 : Convert.ToInt32(ward);
+                    int County = string.IsNullOrWhiteSpace(county) ? 0 : Convert.ToInt32(county);
+                    int SubCounty = string.IsNullOrWhiteSpace(subcounty) ? 0 : Convert.ToInt32(subcounty);
+                    int user;
+                    if (userid > 0)
+                    {
+                        user = userid;
+                    }
+                    else
+                    {
+                        user = 1;
+                    }
+                    location = await addPersonLocation(personId, County, SubCounty, Ward, "", landmark, user);
+
                 }
                 return location;
             }
@@ -1283,7 +1287,7 @@ namespace IQCare.Common.BusinessProcess.Services
             }
         }
 
-        public async Task<Person> UpdatePerson(int personId, string firstName, string middleName, string lastName, int sex, DateTime dateOfBirth, int facilityId, DateTime? registrationDate = null, bool dobPrecision = true)
+        public async Task<Person> UpdatePerson(int personId, string firstName, string middleName, string lastName, int sex, DateTime dateOfBirth,string NickName="")
         {
             try
             {
@@ -1291,17 +1295,33 @@ namespace IQCare.Common.BusinessProcess.Services
                 firstName = string.IsNullOrWhiteSpace(firstName) ? "" : firstName.Replace("'", "''");
                 middleName = string.IsNullOrWhiteSpace(middleName) ? "" : middleName.Replace("'", "''");
                 lastName = string.IsNullOrWhiteSpace(lastName) ? "" : lastName.Replace("'", "''");
-
+                if (string.IsNullOrEmpty(NickName))
+                {
+                    var registeredPerson = await this.GetPerson(personId);
+                    if (registeredPerson != null)
+                    {
+                        if (!string.IsNullOrEmpty(registeredPerson.NickName))
+                        {
+                            NickName = registeredPerson.NickName;
+                        }
+                        else
+                        {
+                            NickName = "";
+                        }
+                    }
+                }
+                NickName = string.IsNullOrWhiteSpace(NickName) ? "" : NickName.Replace("'", "''");
                 sql.Append("exec pr_OpenDecryptedSession;");
                 sql.Append($"UPDATE Person SET FirstName = ENCRYPTBYKEY(KEY_GUID('Key_CTC'), '{firstName}'), " +
                            $"MidName = ENCRYPTBYKEY(KEY_GUID('Key_CTC'), '{middleName}'), " +
                            $"LastName = ENCRYPTBYKEY(KEY_GUID('Key_CTC'), '{lastName}'), " +
+                           $"NickName=ENCRYPTBYKEY(KEY_GUID('Key_CTC'),'{NickName}'), " +
                            $"Sex = {sex}, DateOfBirth = '{dateOfBirth.ToString("yyyy-MM-dd")}', " +
                            $"RegistrationDate = '{registrationDate}', FacilityId = '{facilityId}', " +
                            $"[DobPrecision] = '{dobPrecision}' WHERE Id = {personId}; ");
                 sql.Append($"SELECT [Id] , CAST(DECRYPTBYKEY(FirstName) AS VARCHAR(50)) [FirstName] ,CAST(DECRYPTBYKEY(MidName) AS VARCHAR(50)) MidName" +
-                           $",CAST(DECRYPTBYKEY(LastName) AS VARCHAR(50)) [LastName] ,[Sex] ,[Active] ,[DeleteFlag] ,[CreateDate] " +
-                           $",[CreatedBy] ,[AuditData] ,[DateOfBirth] ,[DobPrecision], RegistrationDate, FacilityId FROM Person WHERE Id = '{personId}';");
+                           $",CAST(DECRYPTBYKEY(LastName) AS VARCHAR(50)) [LastName],CAST(DECRYPTBYKEY(NickName) AS VARCHAR(50)) [NickName]  ,[Sex] ,[Active] ,[DeleteFlag] ,[CreateDate] " +
+                           $",[CreatedBy] ,[AuditData] ,[DateOfBirth] ,[DobPrecision],FacilityId FROM Person WHERE Id = '{personId}';");
                 sql.Append("exec [dbo].[pr_CloseDecryptedSession];");
 
                 var personInsert = await _unitOfWork.Repository<Person>().FromSql(sql.ToString());
@@ -1313,24 +1333,24 @@ namespace IQCare.Common.BusinessProcess.Services
             }
         }
 
-        public async Task<Person> RegisterPerson(string firstName, string middleName, string lastName, int sex, int createdBy, int facilityId, DateTime? dateOfBirth, DateTime? registrationDate = null)
+        public async Task<Person> RegisterPerson(string firstName, string middleName, string lastName, int sex, DateTime dateOfBirth, int createdBy,string nickName="")
         {
             try
             {
                 firstName = string.IsNullOrWhiteSpace(firstName) ? "" : firstName.Replace("'", "''");
                 middleName = string.IsNullOrWhiteSpace(middleName) ? "" : middleName.Replace("'", "''");
                 lastName = string.IsNullOrWhiteSpace(lastName) ? "" : lastName.Replace("'", "''");
-                string dob = dateOfBirth.HasValue ? dateOfBirth.Value.ToString("yyyy-MM-dd") : null;
+               nickName = string.IsNullOrWhiteSpace(nickName) ? "" : nickName.Replace("'", "''");
 
                 var sql =
                     "exec pr_OpenDecryptedSession;" +
-                    "Insert Into Person(FirstName, MidName, LastName, Sex, DateOfBirth, DobPrecision, Active, DeleteFlag, CreateDate, CreatedBy, RegistrationDate, FacilityId)" +
+                    "Insert Into Person(FirstName, MidName,LastName,NickName,Sex,DateOfBirth,DobPrecision,Active,DeleteFlag,CreateDate,CreatedBy)" +
                     $"Values(ENCRYPTBYKEY(KEY_GUID('Key_CTC'), '{firstName}'), ENCRYPTBYKEY(KEY_GUID('Key_CTC'), '{middleName}')," +
-                    $"ENCRYPTBYKEY(KEY_GUID('Key_CTC'), '{lastName}'), {sex}, '{dob}', 1," +
-                    $"1,0,GETDATE(), '{createdBy}', '{registrationDate}', '{facilityId}');" +
+                    $"ENCRYPTBYKEY(KEY_GUID('Key_CTC'), '{lastName}'),ENCRYPTBYKEY(KEY_GUID('Key_CTC'), '{nickName}') , {sex}, '{dateOfBirth.ToString("yyyy-MM-dd")}', 1," +
+                    $"1,0,GETDATE(), '{createdBy}');" +
                     "SELECT [Id] , CAST(DECRYPTBYKEY(FirstName) AS VARCHAR(50)) [FirstName] ,CAST(DECRYPTBYKEY(MidName) AS VARCHAR(50)) MidName" +
-                    ",CAST(DECRYPTBYKEY(LastName) AS VARCHAR(50)) [LastName] ,[Sex] ,[Active] ,[DeleteFlag] ,[CreateDate] " +
-                    ",[CreatedBy] ,[AuditData] ,[DateOfBirth] ,[DobPrecision], RegistrationDate, FacilityId FROM [dbo].[Person] WHERE Id = SCOPE_IDENTITY();" +
+                    ",CAST(DECRYPTBYKEY(LastName) AS VARCHAR(50)) [LastName] ,CAST(DECRYPTBYKEY(NickName) AS VARCHAR(50)) [NickName] ,[Sex] ,[Active] ,[DeleteFlag] ,[CreateDate] " +
+                    ",[CreatedBy] ,[AuditData] ,[DateOfBirth] ,[DobPrecision],FacilityId FROM [dbo].[Person] WHERE Id = SCOPE_IDENTITY();" +
                     "exec [dbo].[pr_CloseDecryptedSession];";
 
                 var personInsert = await _unitOfWork.Repository<Person>().FromSql(sql);

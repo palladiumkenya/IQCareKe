@@ -22,15 +22,6 @@ namespace IQCare.Web.CCC.UC {
         protected global::System.Web.UI.WebControls.TextBox PersonDoB;
         
         /// <summary>
-        /// weights control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox weights;
-        
-        /// <summary>
         /// Heights control.
         /// </summary>
         /// <remarks>
@@ -38,6 +29,15 @@ namespace IQCare.Web.CCC.UC {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox Heights;
+        
+        /// <summary>
+        /// weights control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox weights;
         
         /// <summary>
         /// bmivalue control.
@@ -49,13 +49,22 @@ namespace IQCare.Web.CCC.UC {
         protected global::System.Web.UI.WebControls.TextBox bmivalue;
         
         /// <summary>
-        /// txtBMIz control.
+        /// circumference control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtBMIz;
+        protected global::System.Web.UI.WebControls.TextBox circumference;
+        
+        /// <summary>
+        /// muacs control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox muacs;
         
         /// <summary>
         /// txtWAz control.
@@ -76,31 +85,22 @@ namespace IQCare.Web.CCC.UC {
         protected global::System.Web.UI.WebControls.TextBox txtWHz;
         
         /// <summary>
-        /// muacs control.
+        /// AgefoZ control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox muacs;
+        protected global::System.Web.UI.WebControls.TextBox AgefoZ;
         
         /// <summary>
-        /// circumference control.
+        /// txtBMIz control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox circumference;
-        
-        /// <summary>
-        /// Temperature control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox Temperature;
+        protected global::System.Web.UI.WebControls.TextBox txtBMIz;
         
         /// <summary>
         /// systolic control.
@@ -119,6 +119,15 @@ namespace IQCare.Web.CCC.UC {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox distolic;
+        
+        /// <summary>
+        /// Temperature control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox Temperature;
         
         /// <summary>
         /// HeartRate control.
@@ -146,6 +155,15 @@ namespace IQCare.Web.CCC.UC {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox bosaturation;
+        
+        /// <summary>
+        /// NursesComments control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox NursesComments;
         
         /// <summary>
         /// btnSaveTriage control.

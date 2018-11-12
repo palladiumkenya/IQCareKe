@@ -13,6 +13,7 @@ namespace Interface.CCC
         int UpdatePatientAppointments(PatientAppointment p);
         List<PatientAppointment> GetByPatientId(int patientId);
         List<PatientAppointment> GetByDate(DateTime date);
+        List<PatientAppointment> GetAppointmentId(int PatientId, int PatientMasterVisitId, DateTime date);
         List<PatientAppointment> GetByDateRange(DateTime startDate, DateTime endDate);
 
         /// <summary>

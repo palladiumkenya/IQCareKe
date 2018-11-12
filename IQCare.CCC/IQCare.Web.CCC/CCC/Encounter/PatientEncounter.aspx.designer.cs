@@ -58,6 +58,24 @@ namespace IQCare.Web.CCC.Encounter {
         protected global::System.Web.UI.HtmlControls.HtmlTable tblVL;
         
         /// <summary>
+        /// ucAdherenceBarriersHome control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::IQCare.Web.CCC.UC.Adherence.ucAdherenceBarriersHome ucAdherenceBarriersHome;
+        
+        /// <summary>
+        /// ucEnhanceAdherenceHome control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::IQCare.Web.CCC.UC.EnhanceAdherenceCounselling.ucEnhanceAdherenceHome ucEnhanceAdherenceHome;
+        
+        /// <summary>
         /// ucExtruder control.
         /// </summary>
         /// <remarks>

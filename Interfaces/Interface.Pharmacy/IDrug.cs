@@ -38,5 +38,6 @@ namespace Interface.Pharmacy
         //John Macharia - End
 
         DataTable FindDrugByName(string SearchText, bool CheckQuantity = false, int? ExcludeDrugType = null);
+        DataSet GetPharmacyPrescriptions(int LocationID);
     }
 }

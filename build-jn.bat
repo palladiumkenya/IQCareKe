@@ -15,7 +15,7 @@ FOR /F %%I IN ("%0") DO SET BATDIR=%%~dpI
 CD /D %BATDIR%
 @echo %BATDIR%
 
-Set config=debug 
+Set config=debug
 set log=builder.log
 set msbuildpath=C:\Program Files (x86)\Microsoft Visual Studio\2017\Enterprise\MSBuild\15.0\Bin\MSBuild.exe
 @Echo Cleaning references folder

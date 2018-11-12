@@ -16,6 +16,9 @@ using Entities.CCC.Lookup;
 using Entities.CCC.Assessment;
 using Entities.CCC.Interoperability;
 using Entities.CCC.pharmacy;
+using Entities.CCC.Neonatal;
+using Entities.CCC.Tanners;
+using Entities.CCC.Adherence;
 
 namespace DataAccess.CCC.Context
 {
@@ -60,6 +63,7 @@ namespace DataAccess.CCC.Context
         public DbSet<PatientPreganancy> PatientPregnancy { get; set; }
         public DbSet<PatientPregnancyIndicator> PatientPregnancyIndicator { get; set; }
         public DbSet<PatientAdverseEventOutcome> PatientAdverseEventOutcome { get; set; }
+
 
         //Visit
         public DbSet<PatientMasterVisit> PatientMasterVisit { get; set; }
@@ -108,6 +112,11 @@ namespace DataAccess.CCC.Context
 
         public DbSet<PatientOI> PatientOIs { get; set; }
 
+        public DbSet<PatientHighRisk> PatientHighRisks { get; set; }
+
+        public DbSet<PatientSexualHistory> PatientSexualHistories { get; set; }
+
+        public DbSet<PatientPartner> PatientPartners { get; set; }
         //Appointment and Labs
         public DbSet<PatientAppointment> PatientAppointments { get; set; }
         public DbSet<AppointmentSummary> AppointmentSummary { get; set; }
@@ -140,5 +149,23 @@ namespace DataAccess.CCC.Context
         public DbSet<PatientPharmacyDispense> PatientPharmacyDispenses { get; set; }
         public DbSet<PharmacyOrder> PharmacyOrders { get; set; }
         public DbSet<Drug> DrugLists { get; set; }
+
+        //Neonatal
+        public DbSet<PatientNeonatal> PatientNeonatals { get; set; }
+        public DbSet<PatientMilestone> PatientMilestone { get; set; }
+        public DbSet<PatientImmunizationHistory> PatientImmunizationHxt { get; set; }
+        public DbSet<TannersStaging> tannersStg { get; set; }
+        public DbSet<PatientTannersStaging> patientTannersStg { get; set; }
+        public DbSet<PatientNeonatalHistory> PatientNeonatalHistory { get; set; }
+
+        //Social History
+        public DbSet<PatientSocialHistory> patientSocialHtx { get; set; }
+        //Adherence
+        public DbSet<HIVStatus> HIVst { get; set; }
+        public DbSet<UnderstandingHIV> UHIV { get; set; }
+        public DbSet<DailyRoutine> DR { get; set; }
+        public DbSet<PsychosocialCircumstances> PC { get; set; }
+        public DbSet<AdherenceScreening> screening { get; set; }
+        public DbSet<Referrals> referrals { get; set; }
     }
 }
