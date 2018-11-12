@@ -1,7 +1,7 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {Subscription} from 'rxjs/index';
 import {SnotifyService} from 'ng-snotify';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {ClientMonitoringEmitter} from '../../emitters/ClientMonitoringEmitter';
 import {LookupItemService} from '../../../shared/_services/lookup-item.service';
 import {NotificationService} from '../../../shared/_services/notification.service';
@@ -39,13 +39,13 @@ export class ClientMonitoringComponent implements OnInit {
 
     ngOnInit() {
         this.clientMonitoringFormGroup = this.fb.group({
-            WhoStage: ['', Validators.required],
-            viralLoadSampleTaken: ['', Validators.required],
-            screenedForTB: ['', Validators.required],
-            cacxScreeningDone: ['', Validators.required],
-            cacxMethod: ['', Validators.required],
-            cacxResult: ['', Validators.required],
-            cacxComments: ['', Validators.required]
+            WhoStage: new FormControl(['', Validators.required]),
+            viralLoadSampleTaken: new FormControl(['', Validators.required]),
+            screenedForTB: new FormControl(['', Validators.required]),
+            cacxScreeningDone: new FormControl(['', Validators.required]),
+            cacxMethod: new FormControl(['', Validators.required]),
+            cacxResult: new FormControl(['', Validators.required]),
+            cacxComments: new FormControl(['', Validators.required])
 
         });
 
@@ -71,6 +71,7 @@ export class ClientMonitoringComponent implements OnInit {
         this.getLookupItems('CacxMethod', this.CaCxMethods);
         this.getLookupItems('CacxResult', this.CacxResults);
         this.getLookupItems('YesNo', this.YesNos);*/
+      this.notify.emit(this.clientMonitoringFormGroup);
 
     }
 

@@ -70,7 +70,6 @@ export class PatientEncounterComponent implements OnInit {
             section: '' + this.serviceName.toLowerCase() + ''
 
         };
-        console.log('maternity name' + this.serviceName);
         const dialogRef = this.dialog.open(CheckinComponent, dialogConfig);
 
         dialogRef.afterClosed().subscribe(

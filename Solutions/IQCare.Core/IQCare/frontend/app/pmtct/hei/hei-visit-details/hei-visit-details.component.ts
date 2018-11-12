@@ -25,7 +25,7 @@ export class HeiVisitDetailsComponent implements OnInit {
     @Input('formtype') formtype: string;
     @Input('visitDate') visitDate: string;
     @Input('visitType') visitType: string;
-
+    @Input('patientId') patientId: number;
     @Output() notify: EventEmitter<FormGroup> = new EventEmitter<FormGroup>();
 
     constructor(private _formBuilder: FormBuilder,
@@ -53,7 +53,7 @@ export class HeiVisitDetailsComponent implements OnInit {
 
         switch (this.formtype) {
             case 'hei':
-                this.getLookupItems('ANCVisitType', this.visitTypes);
+                this.getLookupItems('HEIVisitType', this.visitTypes);
                 break;
             case 'maternity':
                 this.getLookupItems('ANCVisitType', this.visitTypes);
@@ -67,6 +67,12 @@ export class HeiVisitDetailsComponent implements OnInit {
                 this.HeiVisitDetailsFormGroup.get('dayPostPartum').enable({ onlySelf: true });
                 this.isVisitNumberShown = true;
                 this.isdayPostPartumShown = true;
+                this.isCohortShown = false;
+                break;
+            case 'anc':
+                this.getLookupItems('ANCVisitType', this.visitTypes);
+                this.isVisitNumberShown = true;
+                this.HeiVisitDetailsFormGroup.get('visitNumber').enable({ onlySelf: true });
                 this.isCohortShown = false;
                 break;
             default:
@@ -85,7 +91,12 @@ export class HeiVisitDetailsComponent implements OnInit {
                     if (visit && visit.visitNumber > 1) {
                         const Item = this.visitTypes.filter(x => x.itemName.includes('Follow Up'));
                         this.HeiVisitDetailsFormGroup.get('visitType').patchValue(Item[0].itemId);
+                        console.log('visitNumber' + visit.visitNumber );
+                        if (this.formtype == 'anc') {
+                            this.HeiVisitDetailsFormGroup.get('visitNumber').patchValue(visit.visitNumber );
+                        }
                     } else {
+                        this.HeiVisitDetailsFormGroup.get('visitNumber').patchValue(1);
                         const Item = this.visitTypes.filter(x => x.itemName.includes('Initial'));
                         // console.log(Item);
                         this.HeiVisitDetailsFormGroup.get('visitType').patchValue(Item[0].itemId);
