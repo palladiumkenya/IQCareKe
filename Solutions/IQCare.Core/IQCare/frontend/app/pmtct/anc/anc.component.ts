@@ -1,28 +1,28 @@
-import {Component, OnInit, OnDestroy, NgZone} from '@angular/core';
-import {NotificationService} from './../../shared/_services/notification.service';
-import {SnotifyService} from 'ng-snotify';
-import {ActivatedRoute, Router} from '@angular/router';
-import {VisitDetails} from './../_models/visitDetails';
-import {VisitDetailsService} from '../_services/visit-details.service';
-import {PatientEducationCommand} from '../_models/PatientEducationCommand';
-import {PreventiveService} from '../_models/PreventiveService';
-import {forkJoin, Subscription} from 'rxjs/index';
-import {ClientMonitoringCommand} from '../_models/ClientMonitoringCommand';
-import {AncService} from '../_services/anc.service';
-import {HaartProphylaxisCommand} from '../_models/HaartProphylaxisCommand';
-import {PatientDrugAdministration} from '../_models/PatientDrugAdministration';
-import {PatientReferral} from '../_models/PatientReferral';
-import {PatientPreventiveService} from '../_models/PatientPreventiveService';
-import {PatientProfile} from '../_models/patientProfile';
-import {PregnancyViewModel} from '../_models/viewModel/PregnancyViewModel';
-import {FormArray, FormGroup} from '@angular/forms';
-import {LookupItemView} from '../../shared/_models/LookupItemView';
-import {PatientAppointment} from '../_models/PatientAppointmet';
-import {PatientEducation} from '../_models/PatientEducation';
-import {PatientChronicIllness} from '../_models/PatientChronicIllness';
-import {LookupItemService} from '../../shared/_services/lookup-item.service';
-import {HivStatusCommand} from '../_models/HivStatusCommand';
-import {HivTestsCommand} from '../_models/HivTestsCommand';
+import { Component, OnInit, OnDestroy, NgZone } from '@angular/core';
+import { NotificationService } from './../../shared/_services/notification.service';
+import { SnotifyService } from 'ng-snotify';
+import { ActivatedRoute, Router } from '@angular/router';
+import { VisitDetails } from './../_models/visitDetails';
+import { VisitDetailsService } from '../_services/visit-details.service';
+import { PatientEducationCommand } from '../_models/PatientEducationCommand';
+import { PreventiveService } from '../_models/PreventiveService';
+import { forkJoin, Subscription } from 'rxjs/index';
+import { ClientMonitoringCommand } from '../_models/ClientMonitoringCommand';
+import { AncService } from '../_services/anc.service';
+import { HaartProphylaxisCommand } from '../_models/HaartProphylaxisCommand';
+import { PatientDrugAdministration } from '../_models/PatientDrugAdministration';
+import { PatientReferral } from '../_models/PatientReferral';
+import { PatientPreventiveService } from '../_models/PatientPreventiveService';
+import { PatientProfile } from '../_models/patientProfile';
+import { PregnancyViewModel } from '../_models/viewModel/PregnancyViewModel';
+import { FormArray, FormGroup } from '@angular/forms';
+import { LookupItemView } from '../../shared/_models/LookupItemView';
+import { PatientAppointment } from '../_models/PatientAppointmet';
+import { PatientEducation } from '../_models/PatientEducation';
+import { PatientChronicIllness } from '../_models/PatientChronicIllness';
+import { LookupItemService } from '../../shared/_services/lookup-item.service';
+import { HivStatusCommand } from '../_models/HivStatusCommand';
+import { HivTestsCommand } from '../_models/HivTestsCommand';
 
 @Component({
     selector: 'app-anc',
@@ -103,12 +103,12 @@ export class AncComponent implements OnInit, OnDestroy {
 
 
     constructor(private route: ActivatedRoute, private visitDetailsService: VisitDetailsService,
-                private snotifyService: SnotifyService,
-                private lookupItemService: LookupItemService,
-                public zone: NgZone,
-                private router: Router,
-                private notificationService: NotificationService,
-                private ancService: AncService) {
+        private snotifyService: SnotifyService,
+        private lookupItemService: LookupItemService,
+        public zone: NgZone,
+        private router: Router,
+        private notificationService: NotificationService,
+        private ancService: AncService) {
         this.userId = JSON.parse(localStorage.getItem('appUserId'));
         this.visitDetailsFormGroup = new FormArray([]);
         this.PatientEducationMatFormGroup = new FormArray([]);
@@ -125,7 +125,7 @@ export class AncComponent implements OnInit, OnDestroy {
         this.route.params.subscribe(
             (params) => {
                 console.log(params);
-                const {patientId, personId, serviceAreaId} = params;
+                const { patientId, personId, serviceAreaId } = params;
                 this.patientId = parseInt(patientId, 10);
                 this.personId = personId;
                 this.serviceAreaId = serviceAreaId;
@@ -235,6 +235,11 @@ export class AncComponent implements OnInit, OnDestroy {
 
     }
 
+    onNextClick() {
+        console.log(this.visitDetailsFormGroup.value);
+        return;
+    }
+
     onVisitDetailsNotify(formGroup: FormGroup): void {
         this.visitDetailsFormGroup.push(formGroup);
     }
@@ -286,90 +291,90 @@ export class AncComponent implements OnInit, OnDestroy {
                 }
             );
     }
-/*
-    public onSaveHivStatus(data: HIVTestingEmitter) {
-        const htsAncEncounter = {
-            'PersonId': this.personId,
-            'ProviderId': this.userId,
-            'PatientEncounterID': this.patientEncounterId,
-            'PatientMasterVisitId': this.patientMasterVisitId,
-            'PatientId': this.patientId,
-            'EverTested': '',
-            'MonthsSinceLastTest': '',
-            'MonthSinceSelfTest': '',
-            'TestedAs': '',
-            'TestingStrategy': '',
-            'EncounterRemarks': '',
-            'TestEntryPoint': data.ancTestEntryPoint,
-            'Consent': data.consentOption,
-            'EverSelfTested': '',
-            'GeoLocation': '',
-            'HasDisability': '',
-            'Disabilities': [],
-            'TbScreening': '',
-            'ServiceAreaId': this.serviceAreaId,
-            'EncounterTypeId': '1',
-            'EncounterDate': this.visitDate,
-            'EncounterType': data.testingDone
-        };
-
-        this.ancService.saveHivStatus(htsAncEncounter).subscribe(
-            (result) => {
-                const {htsEncounterId} = result;
-                const hivKitResults = [];
-                let testRound;
-                if (data.hivTest['itemName'] == 'HIV Test-1') {
-                    testRound = 1;
-                } else if (data.hivTest['itemName'] == 'HIV Test-2') {
-                    testRound = 2;
-                }
-
-                hivKitResults.push({
-                    'KitId': data.kitName,
-                    'KitLotNumber': data.lotNumber,
-                    'ExpiryDate': data.expiryDate,
-                    'Outcome': data.testResult,
-                    'TestRound': testRound
-                });
-
-                const finalResultsBody = {
-                    'FinalResultHiv1': data.testResult,
-                    'FinalResultHiv2': '',
-                    'FinalResult': data.finalResult,
-                    'FinalResultGiven': data.consentOption,
-                    'AcceptedPartnerListing': data.consentOption,
-                    'FinalResultsRemarks': ''
-                };
-
-                this.ancService.saveHivResults(
-                    this.serviceAreaId,
-                    this.patientMasterVisitId,
-                    this.patientId,
-                    this.userId,
-                    htsEncounterId,
-                    hivKitResults,
-                    finalResultsBody).subscribe(
-                    (res) => {
-                        console.log(`final` + res);
+    /*
+        public onSaveHivStatus(data: HIVTestingEmitter) {
+            const htsAncEncounter = {
+                'PersonId': this.personId,
+                'ProviderId': this.userId,
+                'PatientEncounterID': this.patientEncounterId,
+                'PatientMasterVisitId': this.patientMasterVisitId,
+                'PatientId': this.patientId,
+                'EverTested': '',
+                'MonthsSinceLastTest': '',
+                'MonthSinceSelfTest': '',
+                'TestedAs': '',
+                'TestingStrategy': '',
+                'EncounterRemarks': '',
+                'TestEntryPoint': data.ancTestEntryPoint,
+                'Consent': data.consentOption,
+                'EverSelfTested': '',
+                'GeoLocation': '',
+                'HasDisability': '',
+                'Disabilities': [],
+                'TbScreening': '',
+                'ServiceAreaId': this.serviceAreaId,
+                'EncounterTypeId': '1',
+                'EncounterDate': this.visitDate,
+                'EncounterType': data.testingDone
+            };
+    
+            this.ancService.saveHivStatus(htsAncEncounter).subscribe(
+                (result) => {
+                    const {htsEncounterId} = result;
+                    const hivKitResults = [];
+                    let testRound;
+                    if (data.hivTest['itemName'] == 'HIV Test-1') {
+                        testRound = 1;
+                    } else if (data.hivTest['itemName'] == 'HIV Test-2') {
+                        testRound = 2;
                     }
-                );
-            },
-            (error) => {
-
-            },
-            () => {
-
-            }
-        );
-    }
-*/
+    
+                    hivKitResults.push({
+                        'KitId': data.kitName,
+                        'KitLotNumber': data.lotNumber,
+                        'ExpiryDate': data.expiryDate,
+                        'Outcome': data.testResult,
+                        'TestRound': testRound
+                    });
+    
+                    const finalResultsBody = {
+                        'FinalResultHiv1': data.testResult,
+                        'FinalResultHiv2': '',
+                        'FinalResult': data.finalResult,
+                        'FinalResultGiven': data.consentOption,
+                        'AcceptedPartnerListing': data.consentOption,
+                        'FinalResultsRemarks': ''
+                    };
+    
+                    this.ancService.saveHivResults(
+                        this.serviceAreaId,
+                        this.patientMasterVisitId,
+                        this.patientId,
+                        this.userId,
+                        htsEncounterId,
+                        hivKitResults,
+                        finalResultsBody).subscribe(
+                        (res) => {
+                            console.log(`final` + res);
+                        }
+                    );
+                },
+                (error) => {
+    
+                },
+                () => {
+    
+                }
+            );
+        }
+    */
     public getLookupItems(groupName: string, objOptions: any[] = []) {
         this.lookupItems$ = this.lookupItemService.getByGroupName(groupName)
             .subscribe(
                 p => {
                     const options = p['lookupItems'];
                     for (let i = 0; i < options.length; i++) {
-                        objOptions.push({'itemId': options[i]['itemId'], 'itemName': options[i]['itemName']});
+                        objOptions.push({ 'itemId': options[i]['itemId'], 'itemName': options[i]['itemName'] });
                     }
                 },
                 (err) => {
@@ -647,9 +652,9 @@ export class AncComponent implements OnInit, OnDestroy {
                 }
             );
 
-        this.zone.run(() => {
+        /*this.zone.run(() => {
             this.router.navigate(['/dashboard/personhome/' + this.personId], {relativeTo: this.route});
-        });
+        });*/
     }
 
     ngOnDestroy(): void {
@@ -664,8 +669,8 @@ export class AncComponent implements OnInit, OnDestroy {
 
     log() {
         console.log(this.PreventiveServiceMatFormGroup);
-       // console.log(this.chronicIllnessData);
-       // console.log(this.chronicIllnessData.length);
+        // console.log(this.chronicIllnessData);
+        // console.log(this.chronicIllnessData.length);
         /* for (let i = 0; i < this.counselling_data.length; i++) {
 
             console.log(this.counselling_data[i]['counsellingTopic']) ;
