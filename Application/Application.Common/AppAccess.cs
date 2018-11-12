@@ -162,6 +162,15 @@ namespace Application.Common
 
         #endregion
 
+        #region "PharmacyDispense"
+
+        public static int Dashboard = 254;
+        public static int Dispense = 255;
+        public static int StockSummaryWeb = 256;
+        public static int StockManagement = 257;
+
+        #endregion
+
         #region "CustomizeList"
         public class CustomizeMasterList
         {
@@ -200,6 +209,8 @@ namespace Application.Common
             public static int CTC_PatientReferredTo = 82;
             public static int CTC_Regimen = 70;
             #endregion
+
+            
 
         }
         #endregion

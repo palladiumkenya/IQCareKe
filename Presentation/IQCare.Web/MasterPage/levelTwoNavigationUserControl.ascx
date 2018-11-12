@@ -37,7 +37,7 @@
                         <!-- .col-md-2-->
                     </div>
                     <!-- .row -->
-                    <hr />
+                    <%--<hr />--%>
                     <div class="row">
                         <asp:Panel ID="thePnlIdent" runat="server">
                         </asp:Panel>
@@ -195,6 +195,7 @@
                         Value="mnuWaitingList"></asp:MenuItem>
               </Items>
             </asp:Menu>
+            
         </div>
         <!-- .nav-collapse collapse -->
     </div>

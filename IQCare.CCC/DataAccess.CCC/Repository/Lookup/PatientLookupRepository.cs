@@ -46,5 +46,4 @@ namespace DataAccess.CCC.Repository.Lookup
         }
     }
 
-
-}
+    }

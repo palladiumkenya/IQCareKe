@@ -78,7 +78,7 @@
         var gbvCancelBtn = $("#<%=btnCancelGbvAssessment.ClientID%>");
         var gbvResetBtn = $("#<%=btnResetGbvAssessment.ClientID%>");
         var responseOptions = $('#gbvAssessment input:radio')
-
+    
         gbvVisitDate.datetimepicker({
             format: 'DD-MMM-YYYY',
             allowInputToggle: true,
@@ -155,6 +155,14 @@
                 dataType: "json",
                 success: function (response) {
                     toastr.success(response.d);
+
+                    if ($("#gbvAssessment input:radio").is(":checked") == true) {
+                        $("#lblGbvAssessmentDone").text('Yes');
+                    }
+                    else {
+                        $("#lblGbvAssessmentDone").text('No');
+                    }
+                    $('#gbvAssessmentModal').modal('hide');
                 },
                 error: function (xhr, errorType, exception) {
                     var jsonError = jQuery.parseJSON(xhr.responseText);
@@ -203,7 +211,7 @@
                     var patientId ="<%=PatientId%>";
                     var visitDate = moment(gbvVisitDate.val());
                     var screeningCategoryId = "<%=ScreeningCategoryId%>";
-
+                  
                     if (visitDate.isValid()) {
                         visitDate = moment(gbvVisitDate.val()).format('YYYY-MM-DD');
                         getPatientScreening(patientId, visitDate, screeningCategoryId);
@@ -223,6 +231,8 @@
             if (gbvVisitDate.is(':visible')) {
                 gbvVisitDate.val('');
             }
+
+            
         }
 
         gbvResetBtn.click(function () {
@@ -230,6 +240,8 @@
         });
 
         gbvCancelBtn.click(function () {
+           
+          
             window.location.href = '<%=ResolveClientUrl("~/CCC/patient/patientHome.aspx") %>';
         });
 

@@ -111,15 +111,25 @@ namespace IQCare.Web.CCC.WebService
         }
 
         [WebMethod(EnableSession = true)]
-        public string ManagePatientBaselineAssessment(int id, int patientId, int patientMasterVisitId, bool pregnant, bool hbvInfected
+        public string ManagePatientBaselineAssessment(int id, int patientId, int patientMasterVisitId, bool pregnant, int hbvInfected
            , bool tbInfected, int whoStage, bool breastfeeding, decimal cd4Count, decimal muac,
             decimal weight, decimal height, int userId)
         {
             try
             {
                 var patientBaseline = new PatientBaselineAssessmentManager();
+                bool hbvInfectedvalue = false;
+                if(LookupLogic.GetLookupNameById(hbvInfected) == "Yes")
+                {
+                    hbvInfectedvalue = true;
+                }
+                else
+                {
+                    hbvInfectedvalue = false;
+                }
 
-                _result = patientBaseline.ManagePatientBaselineAssessment(id, patientId, patientMasterVisitId, hbvInfected,
+
+                _result = patientBaseline.ManagePatientBaselineAssessment(id, patientId, patientMasterVisitId, hbvInfectedvalue,
                     pregnant,
                     tbInfected, whoStage, breastfeeding, cd4Count, muac, weight, height, userId);
 
