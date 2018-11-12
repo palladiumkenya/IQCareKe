@@ -36,6 +36,12 @@ namespace DataAccess.CCC.Repository.Patient
             List<PatientAppointment> patientAppointment = patientAppointmentRepository.FindBy(p => DbFunctions.TruncateTime(p.AppointmentDate) == DbFunctions.TruncateTime(date)).ToList();
             return patientAppointment;
         }
+        public List<PatientAppointment> GetAppointmentId(int PatientId, int PatientMasterVisitId, DateTime date)
+        {
+            IPatientAppointmentRepository patientAppointmentRepository = new PatientAppointmentRepository();
+            List<PatientAppointment> patientAppointment = patientAppointmentRepository.FindBy(p => DbFunctions.TruncateTime(p.AppointmentDate) == DbFunctions.TruncateTime(date) & p.PatientId == PatientId & p.PatientMasterVisitId == PatientMasterVisitId).ToList();
+            return patientAppointment;
+        }
         public List<AppointmentSummary> GetAppointmentSummaryByDate(DateTime date)
         {
          //   IPatientAppointmentRepository patientAppointmentRepository = new PatientAppointmentRepository();

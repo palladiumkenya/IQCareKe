@@ -39,7 +39,7 @@ namespace IQCare.HTS.BusinessProcess.CommandHandlers
 
                 RegisterPersonService registerPersonService = new RegisterPersonService(_unitOfWork);
                 EncounterTestingService encounterTestingService = new EncounterTestingService(_unitOfWork, _htsUnitOfWork);
-
+                PersonDemographicsService personDemographicsService = new PersonDemographicsService(_unitOfWork);
                 var facilityId = request.MESSAGE_HEADER.SENDING_FACILITY;
 
                 for (int i = 0; i < request.FAMILY.Count; i++)
@@ -67,6 +67,13 @@ namespace IQCare.HTS.BusinessProcess.CommandHandlers
                         string middleName = request.FAMILY[i].PATIENT_IDENTIFICATION.PATIENT_NAME.MIDDLE_NAME;
                         string lastName = request.FAMILY[i].PATIENT_IDENTIFICATION.PATIENT_NAME.LAST_NAME;
                         int sex = request.FAMILY[i].PATIENT_IDENTIFICATION.SEX;
+                        string nickName = (request.FAMILY[i].PATIENT_IDENTIFICATION.PATIENT_NAME.NICK_NAME == null) ? "" : request.FAMILY[i].PATIENT_IDENTIFICATION.PATIENT_NAME.NICK_NAME.ToString();
+                        string ward = (request.FAMILY[i].PATIENT_IDENTIFICATION.PATIENT_ADDRESS.PHYSICAL_ADDRESS.WARD == null) ? "" : request.FAMILY[i].PATIENT_IDENTIFICATION.PATIENT_ADDRESS.PHYSICAL_ADDRESS.WARD.ToString();
+                        string county = (request.FAMILY[i].PATIENT_IDENTIFICATION.PATIENT_ADDRESS.PHYSICAL_ADDRESS.COUNTY == null) ? "" : request.FAMILY[i].PATIENT_IDENTIFICATION.PATIENT_ADDRESS.PHYSICAL_ADDRESS.COUNTY.ToString();
+                        string subcounty = (request.FAMILY[i].PATIENT_IDENTIFICATION.PATIENT_ADDRESS.PHYSICAL_ADDRESS.SUB_COUNTY == null) ? "" : request.FAMILY[i].PATIENT_IDENTIFICATION.PATIENT_ADDRESS.PHYSICAL_ADDRESS.SUB_COUNTY.ToString();
+                        string educationlevel = (request.FAMILY[i].PATIENT_IDENTIFICATION.EDUCATIONLEVEL == null) ? "" : request.FAMILY[i].PATIENT_IDENTIFICATION.EDUCATIONLEVEL.ToString();
+                        string educationoutcome = (request.FAMILY[i].PATIENT_IDENTIFICATION.EDUCATIONOUTCOME == null) ? "" : request.FAMILY[i].PATIENT_IDENTIFICATION.EDUCATIONOUTCOME.ToString();
+                        string occupation = (request.FAMILY[i].PATIENT_IDENTIFICATION.OCCUPATION == null) ? "" : request.FAMILY[i].PATIENT_IDENTIFICATION.OCCUPATION.ToString();
                         DateTime dateOfBirth = DateTime.ParseExact(request.FAMILY[i].PATIENT_IDENTIFICATION.DATE_OF_BIRTH, "yyyyMMdd", null);
                         int providerId = request.FAMILY[i].PATIENT_IDENTIFICATION.USER_ID;
                         int maritalStatusId = request.FAMILY[i].PATIENT_IDENTIFICATION.MARITAL_STATUS;
@@ -94,8 +101,20 @@ namespace IQCare.HTS.BusinessProcess.CommandHandlers
                                 await registerPersonService.UpdateMaritalStatus(partnetPersonIdentifiers[0].PersonId, maritalStatusId);
                                 if (!string.IsNullOrWhiteSpace(mobileNumber))
                                     await registerPersonService.UpdatePersonContact(partnetPersonIdentifiers[0].PersonId, null, mobileNumber);
-                                if (!string.IsNullOrWhiteSpace(landmark))
-                                    await registerPersonService.UpdatePersonLocation(partnetPersonIdentifiers[0].PersonId, landmark);
+                              //  if (!string.IsNullOrWhiteSpace(landmark))
+                              //      await registerPersonService.UpdatePersonLocation(partnetPersonIdentifiers[0].PersonId, landmark);
+                                if (!string.IsNullOrWhiteSpace(landmark) || (!string.IsNullOrWhiteSpace(county)) || (!string.IsNullOrWhiteSpace(subcounty)) || (!string.IsNullOrWhiteSpace(ward)))
+                                {
+                                    var updatedLocation = await registerPersonService.UpdatePersonLocation(partnetPersonIdentifiers[0].PersonId, landmark, ward, county, subcounty, providerId);
+                                }
+                                if (!string.IsNullOrWhiteSpace(educationlevel) || Convert.ToInt32(educationlevel.ToString()) > 0)
+                                {
+                                    var personeducation = await personDemographicsService.UpdatePersonEducation(partnetPersonIdentifiers[0].PersonId, educationlevel, educationoutcome, providerId);
+                                }
+                                if (!string.IsNullOrWhiteSpace(occupation) || Convert.ToInt32(occupation.ToString()) > 0)
+                                {
+                                    var personoccupation = await personDemographicsService.Update(partnetPersonIdentifiers[0].PersonId, occupation,providerId);
+                                }
 
                                 var getPersonRelationship = await registerPersonService.GetPersonRelationshipByPatientIdPersonId(indexClient.Id, partnetPersonIdentifiers[0].PersonId);
                                 if (getPersonRelationship != null)
@@ -197,9 +216,22 @@ namespace IQCare.HTS.BusinessProcess.CommandHandlers
                                     var partnerContacts = await registerPersonService.addPersonContact(person.Id, null, mobileNumber, null, null, providerId);
                                 }
                                 //add family location
-                                if (!string.IsNullOrWhiteSpace(landmark))
+                                //if (!string.IsNullOrWhiteSpace(landmark))
+                                //{
+                                //    var partnerLocation = await registerPersonService.addPersonLocation(person.Id, 0, 0, 0, "", landmark, providerId);
+                                //}
+
+                                if (!string.IsNullOrWhiteSpace(landmark) || (!string.IsNullOrWhiteSpace(county)) || (!string.IsNullOrWhiteSpace(subcounty)) || (!string.IsNullOrWhiteSpace(ward)))
                                 {
-                                    var partnerLocation = await registerPersonService.addPersonLocation(person.Id, 0, 0, 0, "", landmark, providerId);
+                                    var personLocation = await registerPersonService.UpdatePersonLocation(person.Id, landmark, ward, county, subcounty, providerId);
+                                }
+                                if (!string.IsNullOrWhiteSpace(educationlevel) || Convert.ToInt32(educationlevel.ToString()) > 0)
+                                {
+                                    var personeducation = await personDemographicsService.UpdatePersonEducation(person.Id, educationlevel, educationoutcome, providerId);
+                                }
+                                if (!string.IsNullOrWhiteSpace(occupation) || Convert.ToInt32(occupation.ToString()) > 0)
+                                {
+                                    var personoccupation = await personDemographicsService.Update(person.Id, occupation,providerId);
                                 }
                                 //Add PersonRelationship
                                 var personRelationship = await registerPersonService.addPersonRelationship(person.Id, indexClient.Id, relationshipType, providerId);

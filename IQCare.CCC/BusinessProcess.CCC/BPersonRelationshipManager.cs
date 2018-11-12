@@ -81,6 +81,28 @@ namespace BusinessProcess.CCC
             }
         }
 
+        public PersonRelationship GetSpecificRelationship(int personId,int patientId)
+        {
+            using (UnitOfWork unitOfWork = new UnitOfWork(new PersonContext()))
+            {
+                try
+                {
+                    PersonRelationship pm = unitOfWork.PersonRelationshipRepository
+                        .FindBy(x => x.PersonId == personId && x.PatientId == patientId).FirstOrDefault();
+                    return pm;
+                }
+                catch(Exception e)
+                {
+                    Console.WriteLine(e);
+                    throw;
+                }
+                finally
+                {
+                    unitOfWork.Dispose();
+                }
+            }
+
+        }
         public bool PersonLinkedToPatient(int personId, int patientId)
         {
             using (UnitOfWork unitOfWork = new UnitOfWork(new PersonContext()))

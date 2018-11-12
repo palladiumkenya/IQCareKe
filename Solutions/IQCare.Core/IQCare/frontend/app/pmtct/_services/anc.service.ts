@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { ErrorHandlerService } from '../../shared/_services/errorhandler.service';
 import { environment } from '../../../environments/environment';
-import {Observable, of} from 'rxjs/index';
+import { Observable, of } from 'rxjs/index';
 import { catchError, tap } from 'rxjs/operators';
 import { PatientEducationCommand } from '../_models/PatientEducationCommand';
 import { ClientMonitoringCommand } from '../_models/ClientMonitoringCommand';
@@ -11,8 +11,8 @@ import { ReferralAppointmentCommandService } from './referral-appointment-comman
 import { PatientPreventiveService } from '../_models/PatientPreventiveService';
 import { PatientProfile } from '../_models/patientProfile';
 import { Profile } from 'selenium-webdriver/firefox';
-import {PncVisitDetailsCommand} from '../_models/PncVisitDetailsCommand';
-import {HivStatusCommand} from '../_models/HivStatusCommand';
+import { PncVisitDetailsCommand } from '../_models/PncVisitDetailsCommand';
+import { HivStatusCommand } from '../_models/HivStatusCommand';
 
 const httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -40,7 +40,7 @@ export class AncService {
         private errorHandler: ErrorHandlerService) { }
 
     public saveANCVisitDetails(ancVisitDetailsCommand: PncVisitDetailsCommand): Observable<any> {
-        return this.http.post(this.API_URL + '/api/VisitDetails', JSON.stringify(ancVisitDetailsCommand), httpOptions).pipe(
+        return this.http.post(this.API_URL + '/api/VisitDetails/AddANCVisit', JSON.stringify(ancVisitDetailsCommand), httpOptions).pipe(
             tap(saveANCVisitDetails => this.errorHandler.log(`successfully saved ANC visit details`)),
             catchError(this.errorHandler.handleError<any>('Error saving ANC visit details'))
         );
@@ -89,17 +89,17 @@ export class AncService {
         );
     }
 
-   /* public saveHivStatus(htsAncEncounter: any): Observable<any> {
-        const Indata = {
-            'Encounter': htsAncEncounter
-        };
-
-        return this.http.post<any>(this.API_URL + '/api/HtsEncounter',
-            JSON.stringify(Indata), httpOptions).pipe(
-                tap(saveHivStatus => this.errorHandler.log('SaveHivStatus command')),
-                catchError(this.errorHandler.handleError<any>('PreventiveServiceController'))
-            );
-    }*/
+    /* public saveHivStatus(htsAncEncounter: any): Observable<any> {
+         const Indata = {
+             'Encounter': htsAncEncounter
+         };
+ 
+         return this.http.post<any>(this.API_URL + '/api/HtsEncounter',
+             JSON.stringify(Indata), httpOptions).pipe(
+                 tap(saveHivStatus => this.errorHandler.log('SaveHivStatus command')),
+                 catchError(this.errorHandler.handleError<any>('PreventiveServiceController'))
+             );
+     }*/
 
     public saveAncHivStatus(hivStatusCommand: HivStatusCommand, anyTests: any[]): Observable<any> {
         if (anyTests.length == 0) {

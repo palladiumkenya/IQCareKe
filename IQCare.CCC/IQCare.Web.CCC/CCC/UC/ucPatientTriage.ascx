@@ -1,5 +1,13 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="ucPatientTriage.ascx.cs" Inherits="IQCare.Web.CCC.UC.ucPatientTriage" %>
-
+<style>
+    .section-wrap{padding: 0px !important;}
+    .bpinput, .bpsep{display: inline-block;vertical-align: top;}
+    .bpinput{width: 45%;}
+    .bpinputlabel, .bpinputgroup{display: inline-block;width: 45%;vertical-align: top;height: 30px;}
+    .bpinputgroup{margin-left: -5px;}
+    .distolicinput, .sytolicinput{border-radius: 3px !important;}
+    .sytolicinput{border-bottom-left-radius: 0px !important;border-top-left-radius: 0px !important;}
+</style>
 <div class="col-md-12">
 
     <div class="col-md-12" id="vitalsform" data-parsley-validate="true" data-show-errors="true">
@@ -23,125 +31,136 @@
 
         <div class="col-md-12 col-xs-12 col-sm-12 form-group" id="anthropometricMeasurement" data-parsley-validate="true" data-show-errors="true">
             
-            <div class="col-md-12 form-group">
+            <div class="col-md-12 form-group section-wrap">
                 <label class="control-label text-primary pull-left text-muted">Anthropometric Measurement</label> <label id="lblweightAlert"></label>
             </div>
 
-            <div class="col-md-12 col-xs-12 col-sm-12 form-group">
-               
-                <div class="col-md-4 col-xs-12 col-sm-12">
+            <div class="col-md-12 col-xs-12 col-sm-12 form-group section-wrap">
+                <!--- height --->
+                <div class="col-md-3 col-xs-12 col-sm-12">
+                    <div class="input-group">
+                        <span class="input-group-addon"><small class="text-danger">*</small> Height(cm) </span>
+                        <asp:TextBox runat="server" ID="Heights" ClientIDMode="Static" CssClass="form-control input-sm" placeholder="cms.." required="true" data-parsley-required="true" Type="Number" Min="10" Max="250" data-parsley-range="[10, 250]" data-parsley-range-message="Height is out of reasonable range"></asp:TextBox>
+                    </div>
+                    <label id="heightAddon"></label>
+                </div>
+                <!--- weight --->
+                <div class="col-md-3 col-xs-12 col-sm-12">
                         <div class="input-group">
-                            <span class="input-group-addon" id="weightAddon"><small class="text-danger">*</small> Weight(kgs) <label id="weightAddons"></label></span>
+                            <span class="input-group-addon" id="weightAddon"><small class="text-danger">*</small> Weight(kgs) </span>
                             <asp:TextBox runat="server" ID="weights" ClientIDMode="Static" CssClass="form-control input-sm" placeholder="kgs.." required="true" data-parsley-required="true" Type="Number" Min="0" data-parsley-range="[0, 400]"></asp:TextBox>
                         </div>
+                        <label id="weightAddons"></label>
                  </div>
-
-                <div class="col-md-4 col-xs-12 col-sm-12">
-                        <div class="input-group">
-                            <span class="input-group-addon"><small class="text-danger">*</small> Height(cm)<label id="heightAddon"></label> </span>
-                            <asp:TextBox runat="server" ID="Heights" ClientIDMode="Static" CssClass="form-control input-sm" placeholder="cms.." required="true" data-parsley-required="true" Type="Number" Min="10" Max="250" data-parsley-range="[10, 250]" data-parsley-range-message="Height is out of reasonable range"></asp:TextBox>
-                        </div>
-                    </div>
-
-                <div id="divBMI" class="col-md-4 col-xs-12 col-sm-12">
+                <!--- BMI --->
+                <div id="divBMI" class="col-md-3 col-xs-12 col-sm-12">
                         <%--<asp:Label runat="server"  ID ="bmi" Value = "" CssClass="control-label text-warning pull-left"></asp:Label>--%>
                         <div class="input-group">
                             <span class="input-group-addon">BMI (kg/m2) <label id="bmiAddon"></label></span>
                             <asp:TextBox runat="server" ID="bmivalue" Enabled="False" ClientIDMode="Static" CssClass="form-control input-sm" placeholder="bmi"></asp:TextBox>
                         </div>
                  </div>
-                
-                
-  
-            </div> 
-
-            <div id="peadsZScores" class="col-md-12 col-xs-12 col-sm-12 form-group">
-                <div class="col-md-4 col-xs-12 col-sm-12">
-                        <div class="input-group">
-                            <span class="input-group-addon"><small class="text-danger">*</small> BMIz<label id="dmiAddon"></label></span>
-                            <asp:TextBox runat="server" ID="txtBMIz" Enabled="False" ClientIDMode="Static" CssClass="form-control input-sm"></asp:TextBox>
-                        </div>
-                 </div>
-
-                <div class="col-md-4 col-xs-12 col-sm-12">
-                        <div class="input-group">
-                            <span class="input-group-addon"><small class="text-danger">*</small> Weight for Age</span>
-                            <asp:TextBox runat="server" ID="txtWAz" Enabled="False" ClientIDMode="Static" CssClass="form-control input-sm"></asp:TextBox>
-                        </div>
-                 </div>
-
-                <div class="col-md-4 col-xs-12 col-sm-12">
-                        <div class="input-group">
-                            <span class="input-group-addon"><small class="text-danger">*</small> Weight for Height</span>
-                            <asp:TextBox runat="server" ID="txtWHz" Enabled="False" ClientIDMode="Static" CssClass="form-control input-sm"></asp:TextBox>
-                        </div>
-                 </div>
-            </div>
-            
-            <div class="col-md-12 col-xs-12 col-sm-12 form-group">
-                <div class="col-md-4 col-xs-12 col-sm-12">
-                        <div class="input-group">
-                            <span class="input-group-addon"><small class="text-danger"></small>MUAC (cm)</span> 
-                             <asp:TextBox runat="server" ID="muacs" ClientIDMode="Static" CssClass="form-control input-sm" placeholder="cms.." Type="Number" Min="1" Max="40" data-parsley-range="[1, 40]" data-parsley-range-message="MUAC is out of reasonable range"></asp:TextBox>
-                        </div>
-                    </div>
-
-                 <div class="col-md-4 col-xs-3 col-sm-3">
+                <!--- Head circumrefence --->
+                <div class="col-md-3 col-xs-12 col-sm-12">
                          <div class="input-group">
                               <span class="input-group-addon"><small class="text-danger"></small>Head Circumference</span> 
                              <asp:TextBox runat="server" ID="circumference" ClientIDMode="Static" CssClass="form-control input-sm" placeholder="cms.." Type="Number" Min="0"></asp:TextBox>
                          </div>
                      <p class="help-block pull-left"><strong>Normal 46.3528–52.44764 cm </strong></p>
-                    </div>
-                 <div class="col-md-4 col-xs-12 col-sm-12">
+                 </div>
+                <!--- MUAC --->
+                <div class="col-md-3 col-xs-12 col-sm-12">
                     <div class="input-group">
-                        <span class="input-group-addon">Temperature (°C) <label id="tempAddon"></label></span>
-                        <asp:TextBox runat="server" ID="Temperature" ClientIDMode="Static" CssClass="form-control input-sm" placeholder=".." Type="Number" Min="25" Max="43" data-parsley-range="[25, 43]" data-parsley-range-message="Temperature is out of reasonable range"></asp:TextBox>
+                        <span class="input-group-addon"><small class="text-danger"></small>MUAC (cm)</span> 
+                            <asp:TextBox runat="server" ID="muacs" ClientIDMode="Static" CssClass="form-control input-sm" placeholder="cms.." Type="Number" Min="1" Max="40" data-parsley-range="[1, 40]" data-parsley-range-message="MUAC is out of reasonable range"></asp:TextBox>
                     </div>
-                    <p class="help-block pull-left"><strong>Normal 36.5–37.5 °C </strong></p>
-                </div>   
-                 
+                </div>
+            </div> 
 
+            <div id="peadsZScores" class="col-md-12 col-xs-12 col-sm-12 form-group section-wrap">
+                <div class="col-md-3 col-xs-12 col-sm-12">
+                        <div class="input-group">
+                            <span class="input-group-addon"><small class="text-danger">*</small> Weight for Age</span>
+                            <asp:TextBox runat="server" ID="txtWAz" Enabled="False" ClientIDMode="Static" CssClass="form-control input-sm"></asp:TextBox>
+                        </div>
+                 </div>
+                <div class="col-md-3 col-xs-12 col-sm-12">
+                        <div class="input-group">
+                            <span class="input-group-addon"><small class="text-danger">*</small> Weight for Height</span>
+                            <asp:TextBox runat="server" ID="txtWHz" Enabled="False" ClientIDMode="Static" CssClass="form-control input-sm"></asp:TextBox>
+                        </div>
+                 </div>
+                <div class="col-md-3 col-xs-12 col-sm-12">
+                    <div class="input-group">
+                        <span class="input-group-addon"><small class="text-danger"></small>Age for ZScore</span> 
+                            <asp:TextBox runat="server" ID="AgefoZ" ClientIDMode="Static" CssClass="form-control input-sm" placeholder="" Type="Number" Min="1" Max="40" data-parsley-range="[1, 40]" data-parsley-range-message="Age foe ZScore is out of range"></asp:TextBox>
+                    </div>
+                </div>
+                <div class="col-md-3 col-xs-12 col-sm-12">
+                        <div class="input-group">
+                            <span class="input-group-addon"><small class="text-danger">*</small> BMIz<label id="dmiAddon"></label></span>
+                            <asp:TextBox runat="server" ID="txtBMIz" Enabled="False" ClientIDMode="Static" CssClass="form-control input-sm"></asp:TextBox>
+                        </div>
+                 </div>
+                
+            </div>
+            
+            <div class="col-md-12 col-xs-12 col-sm-12 form-group section-wrap">
             </div> <!-- .col-md-12 col-xs-12 col-sm-12 -->
+            <div class="col-md-12 col-xs-12 col-sm-12 form-group">
+                
+            </div>
         </div> <!-- .col-md-4 col-xs-4 col-sm-4-->
          
                 
-        <div class="col-md-12 col-xs-12 col-sm-12 form-group">
+        <div class="col-md-12 col-xs-12 col-sm-12 form-group section-wrap">
 
-            <div class="col-md-6 col-xs-12 col-sm-12">
-                 <div class="col-md-12  form-group"><label class="control-label text-primary pull-left text-muted">Blood Pressure</label></div>
-                
-                  <div class="col-md-12 col-xs-12 col-sm-12">
-                    <div class="input-group">
-                         <span class="input-group-addon">Systolic <label id="systolicAddon"></label></span>
-                         <asp:TextBox runat="server" ID="systolic" ClientIDMode="Static" CssClass="form-control input-sm" placeholder="systolic.." data-parsley-trigger="keyup" data-parsley-type="number" data-parsley-range="[20, 250]" data-parsley-range-message="Systolic reading is out of reasonable range"></asp:TextBox>
-                         <span class="input-group-addon">mm[Hg]</span>
-                    </div>
-                    <label class="help-block pull-left"><strong>Normal Range: (70-190)</strong></label>
-                 </div>
+            <div class="col-md-12 col-xs-12 col-sm-12 section-wrap">
+                 <div class="col-md-12  form-group"><label class="control-label text-primary pull-left text-muted">Vital Signs</label></div>
+                    <div class="col-md-4 col-xs-12 col-sm-12">
+                        <span class="input-group-addon bpinputlabel">Bp (mm/Hg) <label id="systolicAddon"></label></span>
+                        <div class="input-group bpinputgroup">  
+                             <div class="bpinput">
+                                 <asp:TextBox runat="server" ID="systolic" ClientIDMode="Static" CssClass="form-control input-sm sytolicinput" placeholder="systolic.." data-parsley-trigger="keyup" data-parsley-type="number" data-parsley-range="[20, 250]" data-parsley-range-message="Systolic reading is out of reasonable range"></asp:TextBox>
+                                 <label class="help-block pull-left"><strong>mm</strong></label>
+                             </div>
+                            <div class="bpsep">/</div> 
+                            <div class="bpinput">
+                                <asp:TextBox runat="server" ID="distolic" ClientIDMode="Static" CssClass="form-control input-sm distolicinput" placeholder="diastolic.." data-parsley-trigger="keyup" data-parsley-type="number" data-parsley-range="[20, 150]" data-parsley-range-message="Diastolic reading is out of reasonable range"></asp:TextBox>
+                                <label class="help-block pull-left"><strong>Hg</strong></label>
+                            </div>
+                        </div>
+                        <%--<label class="help-block pull-left"><strong>mm/Hg</strong></label>--%>
+                     </div>
+                    <div class="col-md-4 col-xs-12 col-sm-12">
+                        <div class="input-group">
+                            <span class="input-group-addon">Temperature (°C) <label id="tempAddon"></label></span>
+                            <asp:TextBox runat="server" ID="Temperature" ClientIDMode="Static" CssClass="form-control input-sm" placeholder=".." Type="Number" Min="25" Max="43" data-parsley-range="[25, 43]" data-parsley-range-message="Temperature is out of reasonable range"></asp:TextBox>
+                        </div>
+                        <p class="help-block pull-left"><strong>Normal 36.5–37.5 °C </strong></p>
+                    </div>   
+                    <div class="col-md-4 colxs-12 col-sm-12 form-group">
+                          <div class="input-group">
+                               <span class="input-group-addon">Pulse Rate</span>                      
+                               <asp:TextBox runat="server" ID="HeartRate" ClientIDMode="Static" CssClass="form-control input-sm" placeholder=".." data-parsley-trigger="keyup" data-parsley-type="number" Min="0" Max="200" data-parsley-range="[0, 200]" ></asp:TextBox>
+                               <span class="input-group-addon">/Min</span>
+                          </div>
+                         <p class="help-block pull-left"><strong>60-100 beats /min-Adults</strong></p>
+                     </div>
 
-                  <div class="col-md-12 col-xs-12 col-sm-12 form-group" style=" padding-bottom: 0%">
+                  <%--<div class="col-md-12 col-xs-12 col-sm-12 form-group" style=" padding-bottom: 0%">
                      <div class="input-group">
                          <span class="input-group-addon">Diastolic <label id="distolicAddon"></label></span>
-                         <asp:TextBox runat="server" ID="distolic" ClientIDMode="Static" CssClass="form-control input-sm" placeholder="diastolic.." data-parsley-trigger="keyup" data-parsley-type="number" data-parsley-range="[20, 150]" data-parsley-range-message="Diastolic reading is out of reasonable range"></asp:TextBox>
+                         
                          <span class="input-group-addon">mm[Hg]</span>
                      </div>
                       <p class="help-block pull-left"><strong>Normal Range: (40-100)</strong></p>
-                  </div>
+                  </div>--%>
                 
             </div> 
             
-            <div class="col-md-6 col-xs-12 col-sm-12">
-                 <div class="col-md-12 form-group"><label class="control-label text-primary pull-left text-muted">Pulse Rate/Respiratory/Oxygen Saturation</label></div>
-                 <div class="col-md-12 colxs-12 col-sm-12 form-group">
-                      <div class="input-group">
-                           <span class="input-group-addon">Pulse Rate</span>                      
-                           <asp:TextBox runat="server" ID="HeartRate" ClientIDMode="Static" CssClass="form-control input-sm" placeholder=".." data-parsley-trigger="keyup" data-parsley-type="number" Min="0" Max="200" data-parsley-range="[0, 200]" ></asp:TextBox>
-                           <span class="input-group-addon">/Min</span>
-                      </div>
-                     <p class="help-block pull-left"><strong>60-100 beats /min-Adults</strong></p>
-                 </div>
-                 <div class="col-md-12 col-xs-12 col-cm-12 form-group">
+            <div class="col-md-12 col-xs-12 col-sm-12">
+                 <div class="col-md-4 col-xs-12 col-cm-12 form-group">
                     <div class="input-group">
                         <span class="input-group-addon">Respiration Rate</span>  
                         <asp:TextBox runat="server" ID="RespiratoryRate" ClientIDMode="Static" CssClass="form-control input-sm" placeholder=".." data-parsley-trigger="keyup" data-parsley-type="number" Min="0" Max="100" data-parsley-range="[0, 1700]"></asp:TextBox>
@@ -149,7 +168,7 @@
                     </div>
                     <p class="help-block pull-left"><strong>12-20 breaths /min-Adults</strong></p>
                 </div>
-                 <div class="col-md-12 col-xs-12 col-sm-12">
+                 <div class="col-md-4 col-xs-12 col-sm-12">
                      <div class="input-group">
                           <span class="input-group-addon">Blood Oxygen Saturation</span> 
                           <asp:TextBox runat="server" ID="bosaturation" ClientIDMode="Static" CssClass="form-control input-sm" placeholder="%.." data-parsley-trigger="keyup" data-parsley-type="number" Min="0" Max="100"></asp:TextBox>
@@ -160,7 +179,19 @@
             </div><!-- .col-md-6 col-xs-12 col-sm-12-->
               
         </div>
-        
+    </div>
+    <div class="col-md-12 col-xs-12 col-sm-12 form-group section-wrap">
+        <div class="col-md-12 col-xs-12 col-sm-12 form-group section-wrap">
+            <div class="col-md-12 col-xs-12 col-sm-12">
+                <div class="col-md-12  form-group"><label class="control-label text-primary pull-left text-muted">Nurses Comments</label></div>
+                <div class="col-md-12 col-xs-12 col-sm-12">
+                     <div class="input-group" style="width: 100%;">
+                         <asp:TextBox id="NursesComments" ClientIDMode="Static" TextMode="multiline" CssClass="form-control input-sm" Rows="6" runat="server" style="width: calc(100%);"/>
+                     </div>
+                 </div>
+            </div>
+        </div>
+
         <div class="col-md-12">
         <div class="col-md-7"></div>
         <div class="col-md-5">
@@ -174,8 +205,35 @@
                 <asp:LinkButton runat="server" ID="btnCancels" CssClass="btn btn-danger fa fa-times btn-lg" ClientIDMode="Static" OnClientClick="return false;"> Close Triage </asp:LinkButton>
             </div>
         </div>
+
+                
     </div>
-       
+        <div class="col-md-12 form-group" style="margin-top: 30px;">
+            <div class="col-md-12 col-xs-12 col-sm-12">
+	            <div id="presentingComplaintsTable" class="panel panel-primary">
+		            <div class="panel-heading">Previous Vital Signs</div>
+		            <div style="min-height: 10px; max-height: 550px; overflow-y: auto; overflow-x: hidden;">
+			            <table id="dtlPreviousTriage" class="table table-bordered table-striped" style="width: 100%">
+				            <thead>
+					            <tr>
+						            <th><span class="text-primary">Date</span></th>
+						            <th><span class="text-primary">Height</span></th>
+						            <th><span class="text-primary">Weight</span></th>
+						            <th><span class="text-primary">MUAC</span></th>
+                                    <th><span class="text-primary">Systolic Bp</span></th>
+						            <th><span class="text-primary">Diastolic Bp</span></th>
+						            <th><span class="text-primary">Temp</span></th>
+						            <th><span class="text-primary">Pulse Rate</span></th>
+                                    <th><span class="text-primary">Respiration Rate</span></th>
+						            <th><span class="text-primary">SPOC (%)</span></th>
+					            </tr>
+				            </thead>
+				            <tbody></tbody>
+			            </table>
+		            </div>
+	            </div>
+                </div>
+	    </div>
     </div> <%-- .col-md-11--%>
 
 
@@ -214,7 +272,8 @@
 
         var visitDate;
         $("#muacs").prop("disabled", true);
-            $('#circumference').prop("disabled", true);
+        $("#AgefoZ").prop("disabled", true);
+        //$('#circumference').prop("disabled", true);
 
 
         if(age > 15)
@@ -496,10 +555,13 @@
         if (heartRate === '') { heartRate = 0 }
         var boSaturation = $("#<%=bosaturation.ClientID%>").val();//todo Mwasi: check sp02
         if (boSaturation === '') { boSaturation = 0 }
+        var ageforZ = $("#<%=AgefoZ.ClientID%>").val();//todo Mwasi: check sp02
+        if (ageforZ === '') { ageforZ = 0 }
+        var nursesComments = $("#<%=NursesComments.ClientID%>").val();
         $.ajax({
             type: "POST",
             url: "../WebService/PatientService.asmx/AddpatientVitals",
-            data: "{'patientId': '" + patientId + "','bpSystolic': '" + systolic + "','bpDiastolic': '" + diastolic + "','heartRate': '" + heartRate + "','height': '" + height + "','muac': '" + muacs + "','patientMasterVisitId': '" + patientMasterVisitId + "','respiratoryRate': '" + respiratoryRate + "','spo2': '" + boSaturation + "','tempreture': '" + tempreture + "','weight': '" + weight + "','bmi': '"+ bmi +"','headCircumference': '"+ headCircumference + "','bmiz':'"+bmiz+"','weightForAge':'"+weightForAge+"','weightForHeight':'"+weightForHeight+"','visitDate':'"+dateOfVisit+"'}", //todo Mwasi: add patient id and patientvistId
+            data: "{'patientId': '" + patientId + "','bpSystolic': '" + systolic + "','bpDiastolic': '" + diastolic + "','heartRate': '" + heartRate + "','height': '" + height + "','muac': '" + muacs + "','patientMasterVisitId': '" + patientMasterVisitId + "','respiratoryRate': '" + respiratoryRate + "','spo2': '" + boSaturation + "','tempreture': '" + tempreture + "','weight': '" + weight + "','bmi': '" + bmi + "','headCircumference': '" + headCircumference + "','bmiz':'" + bmiz + "','weightForAge':'" + weightForAge + "','weightForHeight':'" + weightForHeight + "','nursesComments':'" + nursesComments + "','ageforZ':'" + ageforZ + "','visitDate':'" + dateOfVisit + "'}", //todo Mwasi: add patient id and patientvistId
             contentType: "application/json; charset=utf-8",
             dataType: "json",
             success: function (response) {
@@ -550,4 +612,25 @@
             }
         });
     }
+
+    var previousTriage = $('#dtlPreviousTriage').DataTable({
+        ajax: {
+            type: "POST",
+            url: "../WebService/PatientEncounterService.asmx/LoadVitalSigns",
+            dataSrc: 'd',
+            contentType: "application/json; charset=utf-8",
+            dataType: "json"
+        },
+        paging: false,
+        searching: false,
+        info: false,
+        ordering: false,
+        columnDefs: [
+            {
+                "targets": [0],
+                "visible": false,
+                "searchable": false
+            }
+        ]
+    });
 </script>

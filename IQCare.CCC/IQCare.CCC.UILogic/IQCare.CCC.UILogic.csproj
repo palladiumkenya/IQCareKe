@@ -105,8 +105,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Adherence\AdherenceLogic.cs" />
     <Compile Include="assessment\PatientPsychosocialCriteriaManager.cs" />
     <Compile Include="assessment\PatientSupportSystemCriteriaManager.cs" />
+    <Compile Include="Baseline\PatientHivTestingManager.cs" />
     <Compile Include="Baseline\INHProphylaxisManager.cs" />
     <Compile Include="Baseline\PatientBaselineAssessmentManager.cs" />
     <Compile Include="Baseline\PatientArvHistoryManager.cs" />
@@ -117,6 +119,10 @@
     <Compile Include="Baseline\PatientTransferInmanager.cs" />
     <Compile Include="Baseline\PatientTreatmentInitiationManager.cs" />
     <Compile Include="Baseline\PatientVaccinationManager.cs" />
+    <Compile Include="Encounter\ImmunizationLogic.cs" />
+    <Compile Include="Encounter\NeonatalHistoryLogic.cs" />
+    <Compile Include="Encounter\PatientClinicalNotesLogic.cs" />
+    <Compile Include="Encounter\SocialHistoryLogic.cs" />
     <Compile Include="Enrollment\HivReConfirmatoryTestManager.cs" />
     <Compile Include="Enrollment\IdentifierManager.cs" />
     <Compile Include="Enrollment\PatientArtDistributionManager.cs" />
@@ -129,6 +135,7 @@
     <Compile Include="ExcelUtlity.cs" />
     <Compile Include="FacilityListManager.cs" />
     <Compile Include="Helpers\PatientEntityHelper.cs" />
+    <Compile Include="HIVEducation\HIVEducationLogic.cs" />
     <Compile Include="Interoperability\Appointment\AppointmentMessage.cs" />
     <Compile Include="Interoperability\CommonMessageSegments\PatientIdentificationSegment.cs" />
     <Compile Include="Interoperability\DrugPrescriptionMessage.cs" />
@@ -150,8 +157,10 @@
     <Compile Include="Interoperability\ProcessViralLoadResults.cs" />
     <Compile Include="Interoperability\DTOValidator\PatientRegistrationValidation.cs" />
     <Compile Include="Interoperability\ViralLoadMessageManager.cs" />
+    <Compile Include="LookupICDCodesListManager.cs" />
     <Compile Include="LookupLogic.cs" />
     <Compile Include="MstPatientLogic.cs" />
+    <Compile Include="NeontalEncounterManager.cs" />
     <Compile Include="PatientAdherenceAssessmentManager.cs" />
     <Compile Include="PatientAppointmentManager.cs" />
     <Compile Include="PatientBaselineLookupManager.cs" />
@@ -160,11 +169,15 @@
     <Compile Include="PatientConsentManager.cs" />
     <Compile Include="PatientEncounterLogic.cs" />
     <Compile Include="PatientDisclosureManager.cs" />
+    <Compile Include="PatientHighRiskManager.cs" />
     <Compile Include="PatientLookupManager.cs" />
     <Compile Include="PatientManager.cs" />
+    <Compile Include="PatientNeonatalManager.cs" />
     <Compile Include="PatientOIManager.cs" />
+    <Compile Include="PatientPartnersManager.cs" />
     <Compile Include="PatientPopulationManager.cs" />
     <Compile Include="PatientServiceEnrollmentLookupManager.cs" />
+    <Compile Include="PatientSexualHistoryManager.cs" />
     <Compile Include="PatientStabilitySummaryManager.cs" />
     <Compile Include="PatientTreatmentSupporterLookupManager.cs" />
     <Compile Include="PatientTreatmentSupporterManager.cs" />
@@ -184,6 +197,8 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="PatientLabOrderManager.cs" />
     <Compile Include="Screening\PatientScreeningManager.cs" />
+    <Compile Include="TannersStagingManager.cs" />
+    <Compile Include="Tb\PatientTBRxManager.cs" />
     <Compile Include="TestingSummaryStatisticsManager.cs" />
     <Compile Include="Triage\PatientAdverseEventOutcomeManager.cs" />
     <Compile Include="Triage\PatientFamilyPlanningManager.cs" />

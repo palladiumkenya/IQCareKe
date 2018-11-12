@@ -182,11 +182,24 @@ namespace IQCare.Web.CCC
         {
             Response.Redirect("~/CCC/Encounter/PatientEncounter.aspx");
         }
+        protected void Clinical_Summary_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("~/CCC/ClinicalSummary/ClinicalSummary.aspx");
+        }
+        protected void Follow_Up_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("~/CCC/FollowupEducation/frmFollowUpEducation.aspx");
+        }
 
         protected void EncounterHistory_Click(object sender, EventArgs e)
         {
             //Session["PatientMasterVisitID"] = "0";
             Response.Redirect("~/CCC/Encounter/EncounterHistory.aspx");
+        }
+
+        protected void AdherenceBarriers_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("~/CCC/Adherence/AdherenceBarriers.aspx");
         }
 
         protected void menuPharmacyPrescription_Click(object sender, EventArgs e)

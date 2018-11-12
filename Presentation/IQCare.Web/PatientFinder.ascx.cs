@@ -367,12 +367,12 @@ namespace IQCare.Web
         {
             get
             {
-                if (!this.CanAddPatient || !CurrentSession.Current.HasFunctionRight("PATIENT_REGISTRATION",FunctionAccess.Add))
-                {
-                    return "none";
-                }
+                //if (!this.CanAddPatient || !CurrentSession.Current.HasFunctionRight("PATIENT_REGISTRATION",FunctionAccess.Add))
+                //{
+                //    return "none";
+                //}
 
-                return "";
+                return "Visible";
             }
         }
         #endregion

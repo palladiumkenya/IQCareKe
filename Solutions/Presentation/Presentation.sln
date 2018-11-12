@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.25420.1
+# Visual Studio 15
+VisualStudioVersion = 15.0.27130.2036
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IQCare.Web", "..\..\Presentation\IQCare.Web\IQCare.Web.csproj", "{D8CB5960-1D8C-49F6-93C3-8067F6A9BAA8}"
 	ProjectSection(ProjectDependencies) = postProject
@@ -43,5 +43,8 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {CDB6F53C-2E80-4B7E-BAA9-96EFBB2CCC21}
 	EndGlobalSection
 EndGlobal

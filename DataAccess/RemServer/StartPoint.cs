@@ -16,6 +16,7 @@ namespace RemServer
         [STAThread]
  
         static void Main(string[] args)
+
         {
             System.Diagnostics.Process theProc = Process.GetCurrentProcess();
             string s = theProc.MainModule.FileName;

@@ -8,7 +8,7 @@ using System.Text;
 namespace Entities.CCC.Encounter
 {
     [Serializable]
-    [Table("ComplaintsHistory")]
+    [Table("ComplaintsHistory")]               
     public class ComplaintsHistory:BaseObject
     {
         [Column]

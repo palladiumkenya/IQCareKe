@@ -843,19 +843,28 @@
 
 							<div class="col-md-2 col-xs-12">
 								<div class="col-md-12 col-xs-12 col-sm-12">
-									<label class="control-label pull-left">CD4 Count </label>
+									<label class="control-label pull-left" id="cd4countlabel">CD4 Count </label>
 								</div>
 								<div class="col-md-12">
 									<asp:TextBox runat="server" CssClass="form-control input-sm" ID="bCd4Count" placeholder="cd4 count" ClientIDMode="Static" data-parsley-pattern="^[1-9]\d*(\.\d+)?$" ></asp:TextBox>
 								</div>
 							</div>
 
-							<div class="col-md-2 col-xs-12">
+                            <div class="col-md-2 col-xs-12">
+								<div class="col-md-12 col-xs-12 col-sm-12">
+									<label class="control-label pull-left">HBV Infected </label>
+								</div>
+								<div class="col-md-12">
+									<asp:RadioButtonList id="BVCoInfection" runat="server" RepeatDirection="Horizontal">
+                                    </asp:RadioButtonList>
+								</div>
+							</div>
+							<%--<div class="col-md-2 col-xs-12">
 								<label class="checkbox-custom checkbox-inline highlight" data-initialize="checkbox" id="lblBVCoInfection">
 									<input class="sr-only" type="checkbox" id="BVCoInfection" value="true">
 									<span class="checkbox-label">HBV Infected</span>
 								</label>
-							</div>
+							</div>--%>
 
 <%--                            <div class="col-md-2 col-xs-12">
 								<label class="checkbox-custom checkbox-inline highlight" data-initialize="checkbox" id="lblPregnancy">
@@ -1192,7 +1201,8 @@
 			var purposeList = new Array();
 			var userId = <%=UserId%>; /* get the current userId*/
 			var patientId = <%=PatientId%>;
-			var patientMasterVisitId = <%=PatientMasterVisitId%>;
+            var patientMasterVisitId = <%=PatientMasterVisitId%>;
+            var age = <%=age%>;
 
 		    var purposeCount = 1;
 			var transferIn = 0;
@@ -1287,7 +1297,14 @@
 		            var who = $(this).find(":selected").val();
 		            $("#<%=bwhoStage.ClientID%>").val(who);
 
-		        });
+                });
+
+            if (age <= 5) {
+                $("#cd4countlabel").text("CD4 Percentage");
+            }
+            else {
+                $("#cd4countlabel").text("CD4 Count");
+            }
 			function calcBmi() {
 				var weight = document.getElementById('BaselineWeight').value;
 				var height = document.getElementById('BaselineHeight').value / 100;
@@ -1877,11 +1894,12 @@
 									$("#<%=BaselineWeight.ClientID%>").val(obj.Weight);
 									$("#<%=BaselineHeight.ClientID%>").val(obj.Height);
 									$("#<%=BaselineBMI.ClientID%>").val(obj.BMI);
-
 									if (obj.HBVInfected) {
-										$("#lblBVCoInfection").checkbox('check');
+										var value = 104;
+                                        $(".BVCoInfectioninput input[value=" + value + "]").attr('checked', 'checked');
 									} else {
-										$("#lblBVCoInfection").checkbox('uncheck');
+										var value = 105;
+                                        $(".BVCoInfectioninput input[value=" + value + "]").attr('checked', 'checked');
 									}
 									//if (obj.Pregnant) {$("#lblPregnancy").checkbox('check');}else{$("#lblPregnancy").checkbox('uncheck');}
 									//if (obj.TBinfected) {$("#lblTbInfected").checkbox('check');}else{ $("#lblTbInfected").checkbox('uncheck');}
@@ -2348,7 +2366,8 @@
 				var weight= $("#<%=BaselineWeight.ClientID%>").val(); 
 				var height= $("#<%=BaselineHeight.ClientID%>").val();
 				whostage = $("#<%=bwhoStage.ClientID%>").find(":selected").val();
-				cD4Count = $("#<%=bCd4Count.ClientID%>").val();
+                cD4Count = $("#<%=bCd4Count.ClientID%>").val();
+                var hbvvalue = $(".BVCoInfectioninput input:checked").val();
 				if (!cD4Count) {
 					cD4Count = 0;
 				}
@@ -2366,7 +2385,7 @@
 				$.ajax({
 					type: "POST",
 					url: "../WebService/PatientBaselineService.asmx/ManagePatientBaselineAssessment",
-					data:  "{'id':'"+id+"','patientId':'"+patientId+"','patientMasterVisitId':'"+patientMasterVisitId+"','pregnant':'"+pregnancy+"','hbvInfected':'"+bVCoInfection+"','tbInfected':'"+tbInfection+"','whoStage':'"+whostage+"','breastfeeding':'"+breastfeeding+"','cd4Count':'"+cD4Count+"','muac':'"+muac+"','weight':"+weight+",'height':"+height+",'userId':'"+userId+"'}",
+					data:  "{'id':'"+id+"','patientId':'"+patientId+"','patientMasterVisitId':'"+patientMasterVisitId+"','pregnant':'"+pregnancy+"','hbvInfected':'"+hbvvalue+"','tbInfected':'"+tbInfection+"','whoStage':'"+whostage+"','breastfeeding':'"+breastfeeding+"','cd4Count':'"+cD4Count+"','muac':'"+muac+"','weight':"+weight+",'height':"+height+",'userId':'"+userId+"'}",
 					contentType: "application/json; charset=utf-8",
 					dataType: "json",
 					success: function (response) {
