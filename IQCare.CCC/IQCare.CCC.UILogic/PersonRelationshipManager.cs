@@ -11,7 +11,7 @@ namespace IQCare.CCC.UILogic
 {
     public class PersonRelationshipManager
     {
-        readonly IPersonRelationshipManager _mgr = (IPersonRelationshipManager)ObjectFactory.CreateInstance("BusinessProcess.CCC.BPersonRelationshipManager, BusinessProcess.CCC");
+       IPersonRelationshipManager _mgr = (IPersonRelationshipManager)ObjectFactory.CreateInstance("BusinessProcess.CCC.BPersonRelationshipManager, BusinessProcess.CCC");
         private int _result;
 
         public int AddPersonRelationship(int personId, int relatedTo, int relationshipType)
@@ -46,6 +46,11 @@ namespace IQCare.CCC.UILogic
         {
             var myList = _mgr.GetAllPersonRelationship(patientid);
             return myList;
+        }
+
+        public PersonRelationship GetSpecificRelationship(int patientid,int personId)
+        {
+            return _mgr.GetSpecificRelationship(personId, patientid);
         }
         
         public bool PersonLinkedToPatient(int personId, int patientId)

@@ -182,7 +182,7 @@ namespace IQCare.Controllers.Records
         {
             var response = await _mediator.Send(new GetPersonDetailsCommand
             {
-                PersonId=personId
+                PersonId = personId
             });
             if (response.IsValid)
                 return Ok(response.Value);

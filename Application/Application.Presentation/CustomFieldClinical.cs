@@ -1,14 +1,13 @@
 using System;
 using System.Data;
 using System.Collections;
-
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Web.UI.HtmlControls;  
-   
 using System.Collections.Generic;
 using System.Text;
 using System.Web;
+using Interface.Service;
 
 
 
@@ -862,6 +861,66 @@ namespace Application.Presentation
 
         }
 
+        public static void BindUserDropDown(DropDownList theDropDown, out Dictionary<int, string> uList)
+        {
+            Dictionary<int, string> userList = GetUserList();
+            uList = GetUserList();
+            if (userList.Count > 0)
+            {
+                theDropDown.DataSource = userList;
+                theDropDown.DataTextField = "Value";
+                theDropDown.DataValueField = "Key";
+                theDropDown.DataBind();
+            }
+            theDropDown.Items.Insert(0, new ListItem("Select", "0")); //Add this line by Rahmat on 20-Mar-2017 for by default show select in drop down
+        }
+        public static void BindUserDropDown(Telerik.Web.UI.RadComboBox theDropDown, out Dictionary<int, string> uList)
+        {
+            Dictionary<int, string> userList = GetUserList();
+            uList = GetUserList();
+            if (userList.Count > 0)
+            {
+                theDropDown.DataSource = userList;
+                theDropDown.DataTextField = "Value";
+                theDropDown.DataValueField = "Key";
+                theDropDown.DataBind();
+            }
+        }
+
+        private static Dictionary<int, string> GetUserList()
+        {
+            Dictionary<int, string> userList = new Dictionary<int, string>();
+            ICommonData commonData = (ICommonData)ObjectFactory.CreateInstance("BusinessProcess.Service.BCommonData,BusinessProcess.Service");
+            DataTable dtUsers = commonData.getUserList();
+            //DataSet WriteXMLDS = new DataSet();
+
+            try
+            {
+                //DataSet dataSet = new DataSet();
+                //string xmlFilesPath = string.Empty;
+
+                //if (!string.IsNullOrEmpty(ConfigurationManager.AppSettings["XMLFilesPath"].ToString()))
+                //{
+                //xmlFilesPath = ConfigurationManager.AppSettings["XMLFilesPath"].ToString();
+                //}
+                //if (!string.IsNullOrEmpty(xmlFilesPath))
+                //{
+                //  userList.Add(0, "Select");
+                //                    string allMaster = xmlFilesPath + "AllMasters.con";
+                //                  dataSet.ReadXml(allMaster);
+                foreach (DataRow row in dtUsers.Rows)
+                {
+                    string val = row["UserName"].ToString() + " - " + row["Designation"].ToString();
+                    userList.Add(Convert.ToInt32(row["UserID"].ToString()), val);
+                }
+                //}
+            }
+            catch (Exception ex)
+            {
+                userList = new Dictionary<int, string>();
+            }
+            return userList;
+        }
 
         #region "To be Deleted"
         public void CreateCustomControls(Panel panelCustomList, string pnlName, ref StringBuilder sbParameter, DataRow theRow, ref string tableName, string frmPrefix, Int32 rowindex)

@@ -14,6 +14,7 @@ namespace Interface.CCC
         int saveChronicIllness(string masterVisitID, string patientID, string userID, List<ChronicIlness> chronicIllness, List<Vaccines> Vaccines, List<Allergies> allergies);
         int savePhysicalEaxminations(string masterVisitID, string patientID, string userID, List<PhysicalExamination> physicalExam, List<string> generalExam);
         int savePatientManagement(string PatientMasterVisitID, string PatientID, string userID, string workplan, string ARVAdherence, string CTXAdherence, List<string> phdp, List<Diagnosis> diagnosis);
+        int saveNeonatalMilestone(int PatientMasterVisitID, int PatientID, int userID, string mlAssessed, string mlOnsetDate, string mlAchieved, string mlStstus, string mlComment);
         PresentingComplaintsEntity getPatientEncounter(string PatientMasterVisitID, string PatientID);
         DataTable getPatientEncounterHistory(string PatientID);
         DataTable getPatientEncounterAdverseEvents(string PatientMasterVisitID, string PatientID);
@@ -28,6 +29,11 @@ namespace Interface.CCC
         DataSet getPatientDSDParameters(string PatientID);
         DataTable isVisitScheduled(string PatientID);
         DataTable patientCategorizationAtEnrollment(string PatientID);
+        DataTable getPatientPreviousTriage(string PatientMasterVisitID, string PatientID);
+        DataTable getPatientMilestones(string PatientID);
+        DataTable getImmunizationHistory(string PatientMasterVisitID, string PatientID);
+        DataTable getTannersStaging(string PatientMasterVisitID, string PatientID);
+        //DataTable saveImmunizationHistory(int PatientMasterVisitID, int PatientID, int UserId, int ImmunizationPeriod, int ImmunizationGiven, int ImmunizationDate);
         DataTable GenerateExcelDifferentiatedCare(string category);
 
 

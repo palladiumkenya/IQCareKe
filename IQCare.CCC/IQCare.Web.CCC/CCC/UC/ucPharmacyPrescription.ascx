@@ -66,11 +66,16 @@
                                         
                                         <div class="col-md-12">
                                             <div class="col-md-2 pull-left"><label class="control-label pull-left">Batch</label></div>
-                                            <div class="col-md-1 pull-left"><label class="control-label pull-left">Dose</label></div>
-                                            <div class="col-md-2 pull-left"><label class="control-label pull-left">Frequency</label></div>
+                                            <%--<div class="col-md-1 pull-left"><label class="control-label pull-left">Dose</label></div>
+                                            <div class="col-md-2 pull-left"><label class="control-label pull-left">Frequency</label></div>--%>
+                                            <div class="col-md-1 pull-left"><label class="control-label pull-left">Morning</label></div>
+                                            <div class="col-md-1 pull-left"><label class="control-label pull-left">Midday</label></div>
+                                            <div class="col-md-1 pull-left"><label class="control-label pull-left">Evening</label></div>
+                                            <div class="col-md-1 pull-left"><label class="control-label pull-left">Night</label></div>
+
                                             <div class="col-md-1 pull-left"><label class="control-label pull-left">Duration</label></div>
                                             <div class="col-md-2 pull-left"><label class="control-label pull-left">Qty Prescribed</label></div>
-                                            <div class="col-md-2 pull-left"><label class="control-label pull-left">Qty Dispensed</label></div>
+                                            <div class="col-md-1 pull-left"><label class="control-label pull-left">Qty Dispensed</label></div>
                                             <div class="col-md-1 pull-left"><label class="control-label pull-left">Prophylaxis</label></div>
                                             <div class="col-md-1 pull-left"><label class="control-label pull-left"></label></div>
                                         </div>  
@@ -78,13 +83,18 @@
                                             <div class="col-md-2">
                                                 <asp:DropDownList ID="ddlBatch" runat="server" CssClass="form-control input-sm" ClientIDMode="Static"></asp:DropDownList>
                                             </div>
-                                            <div class="col-md-1"><input type="text" class="form-control input-sm" runat="server" id="txtDose" ClientIDMode="Static" onkeyup="CalculateQtyPrescribed();" /> </div>
+                                            <%--<div class="col-md-1"><input type="text" class="form-control input-sm" runat="server" id="txtDose" ClientIDMode="Static" onkeyup="CalculateQtyPrescribed();" /> </div>
                                             <div class="col-md-2">
                                                 <asp:DropDownList ID="ddlFreq" runat="server" CssClass="form-control input-sm" ClientIDMode="Static" onchange="CalculateQtyPrescribed();"></asp:DropDownList>
-                                            </div>
+                                            </div>--%>
+                                            <div class="col-md-1"><input type="text" class="form-control input-sm" runat="server" id="txtMorning" ClientIDMode="Static" onkeyup="CalculateQtyPrescribed();" /> </div>
+                                            <div class="col-md-1"><input type="text" class="form-control input-sm" runat="server" id="txtMidday" ClientIDMode="Static" onkeyup="CalculateQtyPrescribed();" /> </div>
+                                            <div class="col-md-1"><input type="text" class="form-control input-sm" runat="server" id="txtEvening" ClientIDMode="Static" onkeyup="CalculateQtyPrescribed();" /> </div>
+                                            <div class="col-md-1"><input type="text" class="form-control input-sm" runat="server" id="txtNight" ClientIDMode="Static" onkeyup="CalculateQtyPrescribed();" /> </div>
+
                                             <div class="col-md-1"><input type="text" class="form-control input-sm" runat="server" id="txtDuration" ClientIDMode="Static" onkeyup="CalculateQtyPrescribed();" /> </div>
                                             <div class="col-md-2"><input type="text" class="form-control input-sm" runat="server" id="txtQuantityPres" ClientIDMode="Static" /> </div>
-                                            <div class="col-md-2"><input type="text" class="form-control input-sm" runat="server" id="txtQuantityDisp" ClientIDMode="Static" onblur="ChkQtyDispensed();" /> </div>
+                                            <div class="col-md-1"><input type="text" class="form-control input-sm" runat="server" id="txtQuantityDisp" ClientIDMode="Static" onblur="ChkQtyDispensed();" /> </div>
                                             <div class="col-md-1"><input type="checkbox" runat="server" id="chkProphylaxis" ClientIDMode="Static" /> </div>
                                             <div class="col-md-1 pull-left">
                                                 <button type="button" Class="btn btn-info btn-lg fa fa-plus-circle" id="btnAddDrugs" onclick="AddDrugPrescription();">Add</button>
@@ -97,12 +107,17 @@
                                                         <tr>
                                                             <th><span class="text-primary">DrugId</span></th>
                                                             <th><span class="text-primary">BatchId</span></th>
-                                                            <th><span class="text-primary">FreqId</span></th>
+                                                            <%--<th><span class="text-primary">FreqId</span></th>--%>
                                                             <th><span class="text-primary">DrugAbbr</span></th>
                                                             <th><span class="text-primary">Drug</span></th>
                                                             <th><span class="text-primary">Batch</span></th>
-                                                            <th><span class="text-primary">Dose</span></th>
-                                                            <th><span class="text-primary">Frequency</span></th>
+                                                            <%--<th><span class="text-primary">Dose</span></th>
+                                                            <th><span class="text-primary">Frequency</span></th>--%>
+                                                            <th><span class="text-primary">Morning</span></th>
+                                                            <th><span class="text-primary">Midday</span></th>
+                                                            <th><span class="text-primary">Evening</span></th>
+                                                            <th><span class="text-primary">Night</span></th>
+
                                                             <th><span class="text-primary">Duration</span></th>
                                                             <th><span class="text-primary">Qty Prescribed</span></th>
                                                             <th><span class="text-primary">Qty Dispensed</span></th>
@@ -507,9 +522,60 @@
 
     });
 
+    //$(function () {
+    //    var regExp = /[a-z]/i;
+    //    $('#txtDose').on('keydown keyup', function (e) {
+    //        var value = String.fromCharCode(e.which) || e.key;
+
+    //        // No letters
+    //        if (regExp.test(value)) {
+    //            e.preventDefault();
+    //            return false;
+    //        }
+    //    });
+    //});
     $(function () {
         var regExp = /[a-z]/i;
-        $('#txtDose').on('keydown keyup', function (e) {
+        $('#txtMorning').on('keydown keyup', function (e) {
+            var value = String.fromCharCode(e.which) || e.key;
+
+            // No letters
+            if (regExp.test(value)) {
+                e.preventDefault();
+                return false;
+            }
+        });
+    });
+
+    $(function () {
+        var regExp = /[a-z]/i;
+        $('#txtMidday').on('keydown keyup', function (e) {
+            var value = String.fromCharCode(e.which) || e.key;
+
+            // No letters
+            if (regExp.test(value)) {
+                e.preventDefault();
+                return false;
+            }
+        });
+    });
+
+    $(function () {
+        var regExp = /[a-z]/i;
+        $('#txtEvening').on('keydown keyup', function (e) {
+            var value = String.fromCharCode(e.which) || e.key;
+
+            // No letters
+            if (regExp.test(value)) {
+                e.preventDefault();
+                return false;
+            }
+        });
+    });
+
+    $(function () {
+        var regExp = /[a-z]/i;
+        $('#txtNight').on('keydown keyup', function (e) {
             var value = String.fromCharCode(e.which) || e.key;
 
             // No letters
@@ -586,12 +652,13 @@
                     "targets": [2],
                     "visible": false,
                     "searchable": false
-                },
-                {
-                    "targets": [3],
-                    "visible": false,
-                    "searchable": false
                 }
+                //,
+                //{
+                //    "targets": [3],
+                //    "visible": false,
+                //    "searchable": false
+                //}
                     ]
             });
 
@@ -665,8 +732,12 @@
         $("#txtDateDispensed").val("");
 
         $("#ddlBatch").val("0");
-        $("#txtDose").val("");
-        $("#ddlFreq").val("0");
+        //$("#txtDose").val("");
+        //$("#ddlFreq").val("0");
+        $("#txtMorning").val("0");
+        $("#txtMidday").val("0");
+        $("#txtEvening").val("0");
+        $("#txtNight").val("0");
         $("#txtDuration").val("");
         $("#txtQuantityDisp").val("");
         $("#txtQuantityPres").val("");
@@ -884,18 +955,23 @@
                     drugPrescriptionArray[i] = {
                         "DrugId": DrugPrescriptionTable.row(i).data()[0],
                         "BatchId": DrugPrescriptionTable.row(i).data()[1],
-                        "FreqId": DrugPrescriptionTable.row(i).data()[2],
-                        "DrugAbbr": DrugPrescriptionTable.row(i).data()[3],
-                        "Dose": DrugPrescriptionTable.row(i).data()[6],
-                        "Duration": DrugPrescriptionTable.row(i).data()[8],
-                        "qtyPres": DrugPrescriptionTable.row(i).data()[9],
-                        "qtyDisp": DrugPrescriptionTable.row(i).data()[10],
-                        "prophylaxis": DrugPrescriptionTable.row(i).data()[11]
+                        //"FreqId": DrugPrescriptionTable.row(i).data()[2],
+                        "DrugAbbr": DrugPrescriptionTable.row(i).data()[2],
+                        //"Dose": DrugPrescriptionTable.row(i).data()[6],
+                        "Morning": DrugPrescriptionTable.row(i).data()[5],
+                        "Midday": DrugPrescriptionTable.row(i).data()[6],
+                        "Evening": DrugPrescriptionTable.row(i).data()[7],
+                        "Night": DrugPrescriptionTable.row(i).data()[8],
+
+                        "Duration": DrugPrescriptionTable.row(i).data()[9],
+                        "qtyPres": DrugPrescriptionTable.row(i).data()[10],
+                        "qtyDisp": DrugPrescriptionTable.row(i).data()[11],
+                        "prophylaxis": DrugPrescriptionTable.row(i).data()[12]
                     }
 
-                    if (!allAbbr.toUpperCase().includes(DrugPrescriptionTable.row(i).data()[3].toUpperCase())) {
-                        if (DrugPrescriptionTable.row(i).data()[3] != "")
-                            allAbbr += DrugPrescriptionTable.row(i).data()[3] + "/";
+                    if (!allAbbr.toUpperCase().includes(DrugPrescriptionTable.row(i).data()[2].toUpperCase())) {
+                        if (DrugPrescriptionTable.row(i).data()[2] != "")
+                            allAbbr += DrugPrescriptionTable.row(i).data()[2] + "/";
                     }
                 }
             }
@@ -999,10 +1075,20 @@
     }
 
         function CalculateQtyPrescribed() {
-            var dose = $("#<%=txtDose.ClientID%>").val();
-            var frequencyID = $("#<%=ddlFreq.ClientID%>").find(":selected").val();
+            <%--var dose = $("#<%=txtDose.ClientID%>").val();
+            var frequencyID = $("#<%=ddlFreq.ClientID%>").find(":selected").val();--%>
+
+            var morning = $("#<%=txtMorning.ClientID%>").val();
+            var midday = $("#<%=txtMidday.ClientID%>").val();
+            var evening = $("#<%=txtEvening.ClientID%>").val();
+            var night = $("#<%=txtNight.ClientID%>").val();
+
             var duration = $("#<%=txtDuration.ClientID%>").val();
-            var multiplier = 0;
+
+            result = ((parseInt(morning) || 0) + (parseInt(midday) || 0) + (parseInt(evening) || 0) + (parseInt(night) || 0)) * duration;
+            $("#<%=txtQuantityPres.ClientID%>").val(result);
+
+            <%--var multiplier = 0;
             if(dose == "")
                 dose = "0";
             if(duration == "")
@@ -1024,7 +1110,7 @@
                 error: function (data) {
                     //toastr.error(data.d, "Failed to get Multiplier");
                 }
-            });
+            });--%>
 
 
         }
@@ -1100,12 +1186,13 @@
                     "targets": [2],
                     "visible": false,
                     "searchable": false
-                },
-                {
-                    "targets": [3],
-                    "visible": false,
-                    "searchable": false
                 }
+                //    ,
+                //{
+                //    "targets": [3],
+                //    "visible": false,
+                //    "searchable": false
+                //}
                 ]
             });
         }

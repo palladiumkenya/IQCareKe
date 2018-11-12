@@ -40,7 +40,7 @@
               <xs:element name="PrevMostRecentViral" type="xs:decimal" minOccurs="0" />
               <xs:element name="PrevMostRecentViralLoadDate" type="xs:dateTime" minOccurs="0" />
               <xs:element name="PrevSingleDoseNVP" type="xs:int" minOccurs="0" />
-              <xs:element name="PrevSingleDoseNVPDate1" type="xs:string" minOccurs="0" />
+              <xs:element name="PrevSingleDoseNVPDate1" type="xs:dateTime" minOccurs="0" />
               <xs:element name="PrevSingleDoseNVPDate2" type="xs:dateTime" minOccurs="0" />
               <xs:element name="RegimenType" type="xs:string" minOccurs="0" />
               <xs:element name="PrevARVRegimen1Name" type="xs:string" minOccurs="0" />
@@ -85,7 +85,6 @@
             <xs:sequence>
               <xs:element name="LabDate" type="xs:dateTime" minOccurs="0" />
               <xs:element name="CD4" type="xs:string" minOccurs="0" />
-              <xs:element name="ViralLoad" type="xs:string" minOccurs="0" />
               <xs:element name="OtherLabResult" type="xs:string" minOccurs="0" />
               <xs:element name="ptn_pk" type="xs:int" minOccurs="0" />
             </xs:sequence>

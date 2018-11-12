@@ -213,6 +213,26 @@ namespace IQCare.CCC.UILogic
             }
         }
 
+        public void populateRBL(RadioButtonList rbl, string groupName)
+        {
+            ILookupManager mgr = (ILookupManager)ObjectFactory.CreateInstance("BusinessProcess.CCC.BLookupManager, BusinessProcess.CCC");
+            List<LookupItemView> vw = mgr.GetLookItemByGroup(groupName);
+            if (vw != null && vw.Count > 0)
+            {
+                foreach (var item in vw)
+                {
+                    rbl.Items.Add(new ListItem(item.ItemDisplayName, item.ItemId.ToString()));
+                }
+            }
+        }
+
+        public List<LookupItemView> getQuestions(string Question)
+        {
+            ILookupManager mgr = (ILookupManager)ObjectFactory.CreateInstance("BusinessProcess.CCC.BLookupManager, BusinessProcess.CCC");
+            List<LookupItemView> questionsList = mgr.GetLookItemByGroup(Question);
+            return questionsList;
+        }
+
         public void getPharmacyDrugFrequency(DropDownList ddl)
         {
             IPatientPharmacy patientEncounter = (IPatientPharmacy)ObjectFactory.CreateInstance("BusinessProcess.CCC.BPatientPharmacy, BusinessProcess.CCC");
@@ -277,9 +297,6 @@ namespace IQCare.CCC.UILogic
             }
             return jsonObject;
         }
-
-
-
         public static int GetLookUpMasterId(string masterName)
         {
             int masterId;
@@ -288,7 +305,6 @@ namespace IQCare.CCC.UILogic
 
             return masterId;
         }
-
         public static string GetLookupItemId(string lookupItemName)
         {
             
@@ -476,6 +492,19 @@ namespace IQCare.CCC.UILogic
                 return lookupManager.GetCountyDetailsByWardName(wardName);
             }
             catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+        }
+
+        public static List<LookupItemView> GetLookItemByGroup(string groupname)
+        {
+            try
+            {
+                ILookupManager lookupManager = (ILookupManager)ObjectFactory.CreateInstance("BusinessProcess.CCC.BLookupManager,BusinessProcess.CCC");
+                return lookupManager.GetLookItemByGroup(groupname);
+            }
+            catch(Exception e)
             {
                 throw new Exception(e.Message);
             }

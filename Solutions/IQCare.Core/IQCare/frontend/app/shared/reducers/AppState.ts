@@ -7,4 +7,5 @@ interface AppState {
     isPnsScreened: boolean;
     isPnsTracingDone: boolean;
     clearState: any;
+    service: string;
 }

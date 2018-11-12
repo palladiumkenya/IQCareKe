@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Text;
 using MediatR;
 using IQCare.Common.Core.Models;
+using IQCare.Library;
+
 namespace IQCareRecords.Common.BusinessProcess.Command
 {
    public class PersonEducationLevelCommand:IRequest<Result<AddPersonEducationalLevelResponse>>

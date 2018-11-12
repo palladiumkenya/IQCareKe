@@ -8,6 +8,7 @@ using IQCare.Common.BusinessProcess.Services;
 using IQCare.Common.Core.Models;
 using IQCare.Common.Infrastructure;
 using IQCare.Common.Services;
+using IQCare.Library;
 using IQCareRecords.Common.BusinessProcess.Command;
 using MediatR;
 namespace IQCareRecords.Common.BusinessProcess.CommandHandlers

@@ -128,16 +128,27 @@ namespace IQCare.Controllers.Common
             return BadRequest(results);
         }
 
-        [HttpGet("getContactType")]
-        public async Task<IActionResult> GetContactType()
+        
+
+        [HttpGet("getRegOccConsentEducationOptions")]
+        public async Task<IActionResult> GetRegOccConsentEducationOptions()
         {
-            string[] options = new string[] {"PersonContactType"};
+            string[] options = new string[] { "Occupation", "EducationalLevel", "ConsentOptions", "MaritalStatus" };
             var results = await _mediator.Send(new GetRegistrationOptionsCommand { RegistrationOptions = options }, HttpContext.RequestAborted);
             if (results.IsValid)
                 return Ok(results.Value);
             return BadRequest(results);
-
         }
+        [HttpGet("getContactType")]
+        public async Task<IActionResult> GetContactType()
+        {
+            string[] options = new string[] { "PersonContactType" };
+            var results = await _mediator.Send(new GetRegistrationOptionsCommand { RegistrationOptions = options }, HttpContext.RequestAborted);
+            if (results.IsValid)
+                return Ok(results.Value);
+            return BadRequest(results);
+        }
+        //}
         [HttpGet("getRelOptions")]
         public async Task<IActionResult> GetRelationshipOptions()
         {
@@ -224,24 +235,44 @@ namespace IQCare.Controllers.Common
         }
 
 
-        [HttpGet("getConsentType")]
-        public async Task<IActionResult> GetConsentOptions()
-        {
-            var results = await _mediator.Send(new GetConsentTypeCommand() { ItemName = "ConsentToSendSMS" }, HttpContext.RequestAborted);
-            if (results.IsValid)
-                return Ok(results.Value);
-            return BadRequest(results);
-        }
+        //[HttpGet("getConsentType")]
+        //public async Task<IActionResult> GetConsentOptions()
+        //{
+        //    var results = await _mediator.Send(new GetConsentTypeCommand() { ItemName = "ConsentToSendSMS" }, HttpContext.RequestAborted);
+        //    if (results.IsValid)
+        //        return Ok(results.Value);
+        //    return BadRequest(results);
+        //}
 
-        [HttpGet("getCountylist")]
-        public async Task<IActionResult> GetCountyList(string countyid,string subcountyid)
-        {
-            var results = await _mediator.Send(new GetCountiesCommand() { CountyId = countyid, SubcountyId = subcountyid }, HttpContext.RequestAborted);
-            if (results.IsValid)
-                return Ok(results.Value);
-            return BadRequest(results);
+        //[HttpGet("getCountylist")]
+        //public async Task<IActionResult> GetCountyList(string countyid,string subcountyid)
+        //{
+        //    var results = await _mediator.Send(new GetCountiesCommand() { CountyId = countyid, SubcountyId = subcountyid }, HttpContext.RequestAborted);
+        //    if (results.IsValid)
+        //        return Ok(results.Value);
+        //    return BadRequest(results);
 
-        }
+        //}
+
+
+        //[HttpGet("getSubCountylist")]
+        //public async Task<IActionResult> GetSubCountyList(string countyid, string subcountyid)
+        //{
+        //    var results = await _mediator.Send(new GetSubCountiesCommand() { CountyId = countyid, SubcountyId = subcountyid }, HttpContext.RequestAborted);
+        //    if (results.IsValid)
+        //        return Ok(results.Value);
+        //    return BadRequest(results);
+
+        //}
+
+
+        //[HttpGet("getWardlist")]
+        //public async Task<IActionResult> GetWardList(string countyid, string subcountyid)
+        //{
+        //    var results = await _mediator.Send(new GetWardCommand() { CountyId = countyid, SubcountyId = subcountyid }, HttpContext.RequestAborted);
+        //    if (results.IsValid)
+        //        return Ok(results.Value);
+        //    return BadRequest(results);
 
         [HttpGet("GetServiceAreaIdentifiers/{serviceAreaId}")]
         public async Task<IActionResult> Get(int serviceAreaId)

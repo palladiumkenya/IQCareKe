@@ -19,6 +19,7 @@ namespace IQCare.Web.CCC.Patient
         }
 
         public int PersonId { get; set; }
+        public int age;
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -34,6 +35,7 @@ namespace IQCare.Web.CCC.Patient
 
             if (!IsPostBack)
             {
+                age = Convert.ToInt32(HttpContext.Current.Session["Age"]);
                 ILookupManager mgr =
                     (ILookupManager)
                     ObjectFactory.CreateInstance("BusinessProcess.CCC.BLookupManager, BusinessProcess.CCC");
@@ -119,6 +121,7 @@ namespace IQCare.Web.CCC.Patient
                 }
 
                 Session["PersonId"] = 0;
+
             }
         }
 

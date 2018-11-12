@@ -20,6 +20,7 @@ export class ReferralsComponent implements OnInit {
   public referralOptions: any[] = [];
   public yesnoOptions: any[] = [];
     @Output() nextStep = new EventEmitter <ReferralsEmitter> ();
+    @Output() notify: EventEmitter<FormGroup> = new EventEmitter<FormGroup>();
     @Input() referral: ReferralsEmitter;
     @Input() referralFormOptions: any[] = [];
     public referralData: ReferralsEmitter;
@@ -43,6 +44,8 @@ export class ReferralsComponent implements OnInit {
       } = this.referralFormOptions[0];
       this.referralOptions = referralOptions;
       this.yesnoOptions = yesNoOptions;
+
+      this.notify.emit(this.ReferralFormGroup);
 
     //  this.getLookupOptions('pmtctReferrals', this.referrals);
      // this.getLookupOptions('YesNo', this.yesnos);

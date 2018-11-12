@@ -281,6 +281,142 @@ go
 /*
 if not exists(select * from ServiceArea where Name like '%Registration%')
 BEGIN
+insert into LookupItem(Name,DisplayName,DeleteFlag)
+values('Aunty','Aunty','0')
+END
+go
+if  exists(select * from LookupItem where Name like 'Aunty%')
+BEGIN
+if not Exists (select * from LookupMasterItem  lmi inner join LookupMaster lm on lm.Id=lmi.LookupMasterId
+inner join LookupItem lit on lit.Id=lmi.LookupItemId where lit.Name='Aunty' and lm.Name='Relationship')
+BEGIN
+insert into LookupMasterItem 
+select lm.Id,lit.Id,lit.DisplayName,(select (max(OrdRank)+ 1) from LookupItemView m where m.MasterName like '%Relationship%') as OrdRank  from LookupMaster lm,LookupItem lit
+where lm.Name='Relationship' and lit.Name='Aunty'
+END
+END
+
+
+go
+
+
+
+
+		
+
+
+if not exists(select * from LookupItem where Name like 'Partner%')
+BEGIN
+insert into LookupItem(Name,DisplayName,DeleteFlag)
+values('Partner','Partner','0')
+END
+go
+if  exists(select * from LookupItem where Name like 'Partner%')
+BEGIN
+if not Exists (select * from LookupMasterItem  lmi inner join LookupMaster lm on lm.Id=lmi.LookupMasterId
+inner join LookupItem lit on lit.Id=lmi.LookupItemId where lit.Name='Partner' and lm.Name='Relationship')
+BEGIN
+insert into LookupMasterItem 
+select lm.Id,lit.Id,lit.DisplayName,(select (max(OrdRank)+ 1) from LookupItemView m where m.MasterName like '%Relationship%') as OrdRank  from LookupMaster lm,LookupItem lit
+where lm.Name='Relationship' and lit.Name='Partner'
+END
+END
+
+
+go
+
+
+
+
+if not exists(select * from LookupItem where Name like 'Husband%')
+BEGIN
+insert into LookupItem(Name,DisplayName,DeleteFlag)
+values('Husband','Husband','0')
+END
+go
+if  exists(select * from LookupItem where Name like 'Husband%')
+BEGIN
+if not Exists (select * from LookupMasterItem  lmi inner join LookupMaster lm on lm.Id=lmi.LookupMasterId
+inner join LookupItem lit on lit.Id=lmi.LookupItemId where lit.Name='Husband' and lm.Name='Relationship')
+BEGIN
+insert into LookupMasterItem 
+select lm.Id,lit.Id,lit.DisplayName,(select (max(OrdRank)+ 1) from LookupItemView m where m.MasterName like '%Relationship%') as OrdRank  from LookupMaster lm,LookupItem lit
+where lm.Name='Relationship' and lit.Name='Husband'
+END
+END
+
+
+go
+
+
+
+
+
+
+if not exists(select * from LookupItem where Name like 'GrandParent%')
+BEGIN
+insert into LookupItem(Name,DisplayName,DeleteFlag)
+values('GrandParent','GrandParent','0')
+END
+go
+if  exists(select * from LookupItem where Name like 'GrandParent%')
+BEGIN
+if not Exists (select * from LookupMasterItem  lmi inner join LookupMaster lm on lm.Id=lmi.LookupMasterId
+inner join LookupItem lit on lit.Id=lmi.LookupItemId where lit.Name='GrandParent' and lm.Name='Relationship')
+BEGIN
+insert into LookupMasterItem 
+select lm.Id,lit.Id,lit.DisplayName,(select (max(OrdRank)+ 1) from LookupItemView m where m.MasterName like '%Relationship%') as OrdRank  from LookupMaster lm,LookupItem lit
+where lm.Name='Relationship' and lit.Name='GrandParent'
+END
+END
+
+
+go
+
+if not exists(select * from LookupItem where Name like 'Niece%')
+BEGIN
+insert into LookupItem(Name,DisplayName,DeleteFlag)
+values('Niece','Niece','0')
+END
+go
+if  exists(select * from LookupItem where Name like 'Niece%')
+BEGIN
+if not Exists (select * from LookupMasterItem  lmi inner join LookupMaster lm on lm.Id=lmi.LookupMasterId
+inner join LookupItem lit on lit.Id=lmi.LookupItemId where lit.Name='Niece' and lm.Name='Relationship')
+BEGIN
+insert into LookupMasterItem 
+select lm.Id,lit.Id,lit.DisplayName,(select (max(OrdRank)+ 1) from LookupItemView m where m.MasterName like '%Relationship%') as OrdRank  from LookupMaster lm,LookupItem lit
+where lm.Name='Relationship' and lit.Name='Niece'
+END
+END
+
+
+go
+
+
+if not exists(select * from LookupItem where Name like 'Nephew%')
+BEGIN
+insert into LookupItem(Name,DisplayName,DeleteFlag)
+values('Nephew','Nephew','0')
+END
+go
+if  exists(select * from LookupItem where Name like 'Nephew%')
+BEGIN
+if not Exists (select * from LookupMasterItem  lmi inner join LookupMaster lm on lm.Id=lmi.LookupMasterId
+inner join LookupItem lit on lit.Id=lmi.LookupItemId where lit.Name='Nephew' and lm.Name='Relationship')
+BEGIN
+insert into LookupMasterItem 
+select lm.Id,lit.Id,lit.DisplayName,(select (max(OrdRank)+ 1) from LookupItemView m where m.MasterName like '%Relationship%') as OrdRank  from LookupMaster lm,LookupItem lit
+where lm.Name='Relationship' and lit.Name='Nephew'
+END
+END
+
+
+go
+
+
+if not exists(select * from ServiceArea where Name like '%Registration%')
+BEGIN
 insert into ServiceArea(Name,Code,DisplayName,CreatedBy,CreateDate,DeleteFlag)
 values('Registration','REG','Registration',1,GetDate(),0)
 

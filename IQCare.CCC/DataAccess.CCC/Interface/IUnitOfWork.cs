@@ -14,6 +14,8 @@ using DataAccess.CCC.Interface.assessment;
 using DataAccess.CCC.Interface.IL;
 using DataAccess.CCC.Interface.Interoperability;
 using DataAccess.CCC.Interface.Pharmacy;
+//using DataAccess.CCC.Interface.HIVEducation;
+//using DataAccess.CCC.Interface.Neonatal;
 
 namespace DataAccess.CCC.Interface
 {
@@ -26,6 +28,7 @@ namespace DataAccess.CCC.Interface
         /* LookupContext */
         ILookupItemRepository LookupItemRepository { get; }
         ILookupRepository LookupRepository { get; }
+        ILookupICDCodesRepository LookupICDCodesRepository { get; }
         ILookupMasterRepository LookupMasterRepository { get; }
         IPatientLookupRepository PatientLookupRepository { get; }
         ILookupPreviousLabs LookupPreviousLabsRepository { get; }
@@ -40,6 +43,7 @@ namespace DataAccess.CCC.Interface
         IPersonExtendedLookupRepository PersonExtendedLookupRepository { get; }
 
         /* person and patient */
+       
         IPersonRepository PersonRepository { get; }
         IPersonLocationRepository PersonLocationRepository { get; }
         IPersonContactRepository PersonContactRepository { get; }
@@ -113,6 +117,14 @@ namespace DataAccess.CCC.Interface
         IPatientPharmacyDispenseRepository PatientPharmacyDispenseRepository { get; }
         IPharmacyOrderRepository PharmacyOrderRepository { get; }
         IDrugRepository DrugRepository { get; }
+
+        //Neonatal
+        IPatientNeonatalRepository PatientNeonatalRepository { get; }
+        IImmunizationHistoryRepository ImmunizationHistoryRepository { get; }
+        ITannersStagingRepository TannersStagingRepository { get; }
+
+        //HIV Followup Education
+       // IHIVEducationRepository PatientHIVFollowupEducation { get; }
 
     }
 }
