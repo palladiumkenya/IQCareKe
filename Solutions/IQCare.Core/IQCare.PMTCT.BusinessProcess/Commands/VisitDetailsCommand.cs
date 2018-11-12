@@ -14,7 +14,7 @@ namespace IQCare.PMTCT.BusinessProcess.Commands
         public int VisitType { get; set; }
         public DateTime Lmp { get; set; }
         public DateTime Edd { get; set; }
-        public int Gestation { get; set; }
+        public Decimal Gestation { get; set; }
         public Decimal ? AgeAtMenarche { get; set; }
         public int ParityOne { get; set; }
         public int ParityTwo { get; set; }

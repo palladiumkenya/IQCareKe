@@ -49,7 +49,7 @@ export class PreventiveServicesComponent implements OnInit {
             insecticideTreatedNet: ['', Validators.required],
             insecticideTreatedNetGivenDate: ['', Validators.required],
             antenatalExercise: ['', Validators.required],
-            insecticideGivenDate: ['', Validators.required],
+         //   insecticideGivenDate: ['', Validators.required],
             PartnerTestingVisit: ['', Validators.required],
             finalHIVResult: ['', Validators.required]
         });
