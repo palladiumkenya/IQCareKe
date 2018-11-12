@@ -4,6 +4,8 @@ import {NotificationService} from '../../../shared/_services/notification.servic
 import {SnotifyService} from 'ng-snotify';
 import {LookupItemService} from '../../../shared/_services/lookup-item.service';
 import * as moment from 'moment';
+import {MaternityService} from '../../_services/maternity.service';
+import {Subscription} from 'rxjs/index';
 
 @Component({
     selector: 'app-delivery-maternity',
@@ -14,6 +16,7 @@ export class DeliveryMaternityComponent implements OnInit {
 
     deliveryFormGroup: FormGroup;
     @Input() diagnosisOptions: any[] = [];
+    @Input('patientId') patientId: number;
     @Output() notify: EventEmitter<FormGroup> = new EventEmitter<FormGroup>();
 
     public deliveryModeOptions: any[] = [];
@@ -21,10 +24,14 @@ export class DeliveryMaternityComponent implements OnInit {
     public motherStateOptions: any[] = [];
     public yesnoOptions: any[] = [];
     public deliveryDate: Date;
+    public visitDetails: Subscription;
+    public motherProfile: Subscription;
+    public dateLMP: Date;
 
     constructor(private formBuilder: FormBuilder, private _lookupItemService: LookupItemService,
                 private snotifyService: SnotifyService,
-                private notificationService: NotificationService) {
+                private notificationService: NotificationService,
+                private _matService: MaternityService ) {
 
     }
 
@@ -67,6 +74,11 @@ export class DeliveryMaternityComponent implements OnInit {
         this.bloodlossOptions = bloodLoss;
         this.motherStateOptions = motherStates;
         this.yesnoOptions = yesNos;
+
+        this.getCurrentVisitDetails(this.patientId);
+        this.getPregnancyDetails(this.patientId);
+
+        this.notify.emit(this.deliveryFormGroup);
     }
 
     public onDeliveryDateChange() {
@@ -74,7 +86,7 @@ export class DeliveryMaternityComponent implements OnInit {
 
 
         const now = moment(new Date());
-        const gestation = moment.duration(now.diff( this.deliveryDate)).asWeeks().toFixed(1);
+        const gestation = moment(this.deliveryDate).diff(this.dateLMP, 'weeks').toFixed(1);
         this.deliveryFormGroup.controls['gestationAtBirth'].setValue(gestation + ' weeks');
 
         this.deliveryFormGroup.controls['gestationAtBirth'].disable({ onlySelf: true });
@@ -106,5 +118,38 @@ export class DeliveryMaternityComponent implements OnInit {
         }
     }
 
+    public  getPregnancyDetails(patientId: number) {
+        this.motherProfile = this._matService.getPregnancyDetails(patientId)
+            .subscribe(
+                p => {
+;
+                    this.dateLMP = p.lmp;
+                    console.log('lmp date' + this.dateLMP);
+                },
+                (err) => {
+                    console.log(err);
+                    this.snotifyService.error('Error fetching previous pregnacy Profile' + err,
+                        'Encounter', this.notificationService.getConfig());
+                },
+                () => {
 
+                    console.log(this.motherProfile);
+                });
+    }
+
+    public getCurrentVisitDetails(patientId: number): void {
+        this.visitDetails = this._matService.getCurrentVisitDetails(patientId)
+            .subscribe(
+                p => {
+                    this.deliveryFormGroup.controls['ancVisits'].setValue(p.visitNumber);
+                    this.deliveryFormGroup.get('ancVisits').disable({ onlySelf: true });
+                },
+                (err) => {
+                    this.snotifyService.error('Error fetching visit details' + err,
+                        'Encounter', this.notificationService.getConfig());
+                },
+                () => {
+
+                });
+    }
 }

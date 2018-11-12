@@ -23,7 +23,6 @@ import { FamilyScreeningComponent } from './family-screening/family-screening.co
 import { NoneEventsDirective } from './_directives/none-events.directive';
 import { LinkageComponent } from './linkage/linkage.component';
 import { SharedModule } from '../shared/shared.module';
-import { PnsPartnersComponent } from './pns/pns-partners/pns-partners.component';
 import { PnsService } from './_services/pns.service';
 import { DataService } from '../shared/_services/data.service';
 import { TestingComponent } from './testing/testing.component';
@@ -42,6 +41,7 @@ import { PnsTracingComponent } from './pns/pnstracing/pnstracing.component';
 import { PsmartComponent } from './psmart/psmart.component';
 import { PsmartService } from './_services/psmart.service';
 import { TracingComponent } from './tracing/tracing.component';
+import { PnsPartnersComponent } from './pns/pns-partners/pns-partners.component';
 
 
 @NgModule({

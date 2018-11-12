@@ -1,3 +1,50 @@
+-- PMTCT LOOKUPS
+
+IF NOT EXISTS(SELECT * FROM LookupItem WHERE Name='pnc-encounter')
+BEGIN
+	INSERT INTO LookupItem (Name,DisplayName,DeleteFlag) VALUES('pnc-encounter','pnc-encounter',0);
+END
+
+IF NOT EXISTS(SELECT * FROM LookupItemView WHERE ItemName='pnc-encounter' AND MasterName='EncounterType')
+BEGIN
+	INSERT INTO LookupMasterItem(LookupMasterId,LookupItemId,DisplayName,OrdRank) VALUES((SELECT top 1 Id FROM LookupMaster WHERE Name='EncounterType'),(SELECT top 1 Id FROM LookupItem WHERE Name='pnc-encounter'),'pnc-encounter',10)
+END
+
+------------MotherExamination
+-- master
+If Not Exists(Select 1 From LookupMaster where Name='MotherExamination') Begin INSERT INTO LookupMaster (Name, DisplayName, DeleteFlag) VALUES ('MotherExamination','MotherExamination',0); End
+
+-- lookupitem
+If Not Exists(Select 1 From LookupItem where Name='Breast') Begin INSERT INTO LookupItem (Name, DisplayName, DeleteFlag) VALUES ('Breast','Breast',0); End
+If Not Exists(Select 1 From LookupItem where Name='Uterus') Begin INSERT INTO LookupItem (Name, DisplayName, DeleteFlag) VALUES ('Uterus','Uterus',0); End
+If Not Exists(Select 1 From LookupItem where Name='Lochia') Begin INSERT INTO LookupItem (Name, DisplayName, DeleteFlag) VALUES ('Lochia','Lochia',0); End
+If Not Exists(Select 1 From LookupItem where Name='PostPartumHaemorrhage') Begin INSERT INTO LookupItem (Name, DisplayName, DeleteFlag) VALUES ('PostPartumHaemorrhage','PostPartumHaemorrhage',0); End
+If Not Exists(Select 1 From LookupItem where Name='Episiotomy') Begin INSERT INTO LookupItem (Name, DisplayName, DeleteFlag) VALUES ('Episiotomy','Episiotomy',0); End
+If Not Exists(Select 1 From LookupItem where Name='C_SectionSite') Begin INSERT INTO LookupItem (Name, DisplayName, DeleteFlag) VALUES ('C_SectionSite','C_SectionSite',0); End
+If Not Exists(Select 1 From LookupItem where Name='Fistula_Screening') Begin INSERT INTO LookupItem (Name, DisplayName, DeleteFlag) VALUES ('Fistula_Screening','Fistula_Screening',0); End
+
+-- LookupMasterItem
+If Not Exists(Select 1 From LookupMasterItem where LookupMasterId=(SELECT TOP 1 Id FROM LookupMaster WHERE Name='MotherExamination') and LookupItemId=(SELECT TOP 1 Id FROM LookupItem WHERE Name='Breast')) Begin Insert Into LookupMasterItem(LookupMasterId ,LookupItemId,DisplayName, OrdRank)VALUES((SELECT TOP 1 Id FROM LookupMaster WHERE Name='MotherExamination'),(SELECT TOP 1 Id FROM LookupItem WHERE Name='Breast'),'Breast',1); end
+If Not Exists(Select 1 From LookupMasterItem where LookupMasterId=(SELECT TOP 1 Id FROM LookupMaster WHERE Name='MotherExamination') and LookupItemId=(SELECT TOP 1 Id FROM LookupItem WHERE Name='Uterus')) Begin Insert Into LookupMasterItem(LookupMasterId ,LookupItemId,DisplayName, OrdRank)VALUES((SELECT TOP 1 Id FROM LookupMaster WHERE Name='MotherExamination'),(SELECT TOP 1 Id FROM LookupItem WHERE Name='Uterus'),'Uterus',2); end 
+If Not Exists(Select 1 From LookupMasterItem where LookupMasterId=(SELECT TOP 1 Id FROM LookupMaster WHERE Name='MotherExamination') and LookupItemId=(SELECT TOP 1 Id FROM LookupItem WHERE Name='Lochia')) Begin Insert Into LookupMasterItem(LookupMasterId ,LookupItemId,DisplayName, OrdRank)VALUES((SELECT TOP 1 Id FROM LookupMaster WHERE Name='MotherExamination'),(SELECT TOP 1 Id FROM LookupItem WHERE Name='Lochia'),'Lochia',3); end 
+If Not Exists(Select 1 From LookupMasterItem where LookupMasterId=(SELECT TOP 1 Id FROM LookupMaster WHERE Name='MotherExamination') and LookupItemId=(SELECT TOP 1 Id FROM LookupItem WHERE Name='PostPartumHaemorrhage')) Begin Insert Into LookupMasterItem(LookupMasterId ,LookupItemId,DisplayName, OrdRank)VALUES((SELECT TOP 1 Id FROM LookupMaster WHERE Name='MotherExamination'),(SELECT TOP 1 Id FROM LookupItem WHERE Name='PostPartumHaemorrhage'),'PostPartumHaemorrhage',4); end 
+If Not Exists(Select 1 From LookupMasterItem where LookupMasterId=(SELECT TOP 1 Id FROM LookupMaster WHERE Name='MotherExamination') and LookupItemId=(SELECT TOP 1 Id FROM LookupItem WHERE Name='Episiotomy')) Begin Insert Into LookupMasterItem(LookupMasterId ,LookupItemId,DisplayName, OrdRank)VALUES((SELECT TOP 1 Id FROM LookupMaster WHERE Name='MotherExamination'),(SELECT TOP 1 Id FROM LookupItem WHERE Name='Episiotomy'),'Episiotomy',5); end 
+If Not Exists(Select 1 From LookupMasterItem where LookupMasterId=(SELECT TOP 1 Id FROM LookupMaster WHERE Name='MotherExamination') and LookupItemId=(SELECT TOP 1 Id FROM LookupItem WHERE Name='C_SectionSite')) Begin Insert Into LookupMasterItem(LookupMasterId ,LookupItemId,DisplayName, OrdRank)VALUES((SELECT TOP 1 Id FROM LookupMaster WHERE Name='MotherExamination'),(SELECT TOP 1 Id FROM LookupItem WHERE Name='C_SectionSite'),'C_SectionSite',6); end 
+If Not Exists(Select 1 From LookupMasterItem where LookupMasterId=(SELECT TOP 1 Id FROM LookupMaster WHERE Name='MotherExamination') and LookupItemId=(SELECT TOP 1 Id FROM LookupItem WHERE Name='Fistula_Screening')) Begin Insert Into LookupMasterItem(LookupMasterId ,LookupItemId,DisplayName, OrdRank)VALUES((SELECT TOP 1 Id FROM LookupMaster WHERE Name='MotherExamination'),(SELECT TOP 1 Id FROM LookupItem WHERE Name='Fistula_Screening'),'Fistula_Screening',7); end 
+
+
+------------BabyExamination
+-- master
+If Not Exists(Select 1 From LookupMaster where Name='BabyExamination') Begin INSERT INTO LookupMaster (Name, DisplayName, DeleteFlag) VALUES ('BabyExamination','BabyExamination',0); End
+
+-- lookupitem
+If Not Exists(Select 1 From LookupItem where Name='babycondition') Begin INSERT INTO LookupItem (Name, DisplayName, DeleteFlag) VALUES ('babycondition','babycondition',0); End
+If Not Exists(Select 1 From LookupItem where Name='breastfeeding') Begin INSERT INTO LookupItem (Name, DisplayName, DeleteFlag) VALUES ('breastfeeding','breastfeeding',0); End
+
+-- LookupMasterItem
+If Not Exists(Select 1 From LookupMasterItem where LookupMasterId=(SELECT TOP 1 Id FROM LookupMaster WHERE Name='BabyExamination') and LookupItemId=(SELECT TOP 1 Id FROM LookupItem WHERE Name='babycondition')) Begin Insert Into LookupMasterItem(LookupMasterId ,LookupItemId,DisplayName, OrdRank)VALUES((SELECT TOP 1 Id FROM LookupMaster WHERE Name='BabyExamination'),(SELECT TOP 1 Id FROM LookupItem WHERE Name='babycondition'),'babycondition',1); end
+If Not Exists(Select 1 From LookupMasterItem where LookupMasterId=(SELECT TOP 1 Id FROM LookupMaster WHERE Name='BabyExamination') and LookupItemId=(SELECT TOP 1 Id FROM LookupItem WHERE Name='breastfeeding')) Begin Insert Into LookupMasterItem(LookupMasterId ,LookupItemId,DisplayName, OrdRank)VALUES((SELECT TOP 1 Id FROM LookupMaster WHERE Name='BabyExamination'),(SELECT TOP 1 Id FROM LookupItem WHERE Name='breastfeeding'),'breastfeeding',2); end 
+
 ------------PNCBreast
 -- master
 If Not Exists(Select 1 From LookupMaster where Name='Breast') Begin INSERT INTO LookupMaster (Name, DisplayName, DeleteFlag) VALUES ('Breast','Breast',0); End
@@ -159,7 +206,7 @@ If Not Exists(Select 1 From LookupMasterItem where LookupMasterId=(SELECT TOP 1 
 
 ------------PNC Cervical Cancer Screening	
 -- master
-If Not Exists(Select 1 From LookupMaster where Name='Cervical_Cancer_Screening') Begin INSERT INTO LookupMaster (Name, DisplayName, DeleteFlag) VALUES ('Cervical_Cancer_Screening','Cervical_Cancer_Screening',0); End
+If Not Exists(Select 1 From LookupMaster where Name='CacxMethod') Begin INSERT INTO LookupMaster (Name, DisplayName, DeleteFlag) VALUES ('CacxMethod','CacxMethod',0); End
 
 -- lookupitem
 If Not Exists(Select 1 From LookupItem where Name='Pap Smear') Begin INSERT INTO LookupItem (Name, DisplayName, DeleteFlag) VALUES ('Pap Smear','Pap Smear',0); End
@@ -167,14 +214,14 @@ If Not Exists(Select 1 From LookupItem where Name='VIA') Begin INSERT INTO Looku
 If Not Exists(Select 1 From LookupItem where Name='VILI') Begin INSERT INTO LookupItem (Name, DisplayName, DeleteFlag) VALUES ('VILI','VILI',0); End
 
 -- LookupMasterItem
-If Not Exists(Select 1 From LookupMasterItem where LookupMasterId=(SELECT TOP 1 Id FROM LookupMaster WHERE Name='Cervical_Cancer_Screening') and LookupItemId=(SELECT TOP 1 Id FROM LookupItem WHERE Name='Pap Smear')) Begin Insert Into LookupMasterItem(LookupMasterId ,LookupItemId,DisplayName, OrdRank)VALUES((SELECT TOP 1 Id FROM LookupMaster WHERE Name='Cervical_Cancer_Screening'),(SELECT TOP 1 Id FROM LookupItem WHERE Name='Pap Smear'),'Pap Smear',1); end
-If Not Exists(Select 1 From LookupMasterItem where LookupMasterId=(SELECT TOP 1 Id FROM LookupMaster WHERE Name='Cervical_Cancer_Screening') and LookupItemId=(SELECT TOP 1 Id FROM LookupItem WHERE Name='VIA')) Begin Insert Into LookupMasterItem(LookupMasterId ,LookupItemId,DisplayName, OrdRank)VALUES((SELECT TOP 1 Id FROM LookupMaster WHERE Name='Cervical_Cancer_Screening'),(SELECT TOP 1 Id FROM LookupItem WHERE Name='VIA'),'VIA',2); end 
-If Not Exists(Select 1 From LookupMasterItem where LookupMasterId=(SELECT TOP 1 Id FROM LookupMaster WHERE Name='Cervical_Cancer_Screening') and LookupItemId=(SELECT TOP 1 Id FROM LookupItem WHERE Name='VILI')) Begin Insert Into LookupMasterItem(LookupMasterId ,LookupItemId,DisplayName, OrdRank)VALUES((SELECT TOP 1 Id FROM LookupMaster WHERE Name='Cervical_Cancer_Screening'),(SELECT TOP 1 Id FROM LookupItem WHERE Name='VILI'),'VILI',3); end 
+If Not Exists(Select 1 From LookupMasterItem where LookupMasterId=(SELECT TOP 1 Id FROM LookupMaster WHERE Name='CacxMethod') and LookupItemId=(SELECT TOP 1 Id FROM LookupItem WHERE Name='Pap Smear')) Begin Insert Into LookupMasterItem(LookupMasterId ,LookupItemId,DisplayName, OrdRank)VALUES((SELECT TOP 1 Id FROM LookupMaster WHERE Name='CacxMethod'),(SELECT TOP 1 Id FROM LookupItem WHERE Name='Pap Smear'),'Pap Smear',1); end
+If Not Exists(Select 1 From LookupMasterItem where LookupMasterId=(SELECT TOP 1 Id FROM LookupMaster WHERE Name='CacxMethod') and LookupItemId=(SELECT TOP 1 Id FROM LookupItem WHERE Name='VIA')) Begin Insert Into LookupMasterItem(LookupMasterId ,LookupItemId,DisplayName, OrdRank)VALUES((SELECT TOP 1 Id FROM LookupMaster WHERE Name='CacxMethod'),(SELECT TOP 1 Id FROM LookupItem WHERE Name='VIA'),'VIA',2); end 
+If Not Exists(Select 1 From LookupMasterItem where LookupMasterId=(SELECT TOP 1 Id FROM LookupMaster WHERE Name='CacxMethod') and LookupItemId=(SELECT TOP 1 Id FROM LookupItem WHERE Name='VILI')) Begin Insert Into LookupMasterItem(LookupMasterId ,LookupItemId,DisplayName, OrdRank)VALUES((SELECT TOP 1 Id FROM LookupMaster WHERE Name='CacxMethod'),(SELECT TOP 1 Id FROM LookupItem WHERE Name='VILI'),'VILI',3); end 
 
 
 ------------PNC Cervical Cancer Screening Results
 -- master
-If Not Exists(Select 1 From LookupMaster where Name='Cervical_Cancer_Screening_Results') Begin INSERT INTO LookupMaster (Name, DisplayName, DeleteFlag) VALUES ('Cervical_Cancer_Screening_Results','Cervical_Cancer_Screening_Results',0); End
+If Not Exists(Select 1 From LookupMaster where Name='CacxResult') Begin INSERT INTO LookupMaster (Name, DisplayName, DeleteFlag) VALUES ('CacxResult','CacxResult',0); End
 
 -- lookupitem
 If Not Exists(Select 1 From LookupItem where Name='Normal') Begin INSERT INTO LookupItem (Name, DisplayName, DeleteFlag) VALUES ('Normal','Normal',0); End
@@ -182,10 +229,10 @@ If Not Exists(Select 1 From LookupItem where Name='Suspected') Begin INSERT INTO
 If Not Exists(Select 1 From LookupItem where Name='Confirmed') Begin INSERT INTO LookupItem (Name, DisplayName, DeleteFlag) VALUES ('Confirmed','Confirmed',0); End
 
 -- LookupMasterItem
-If Not Exists(Select 1 From LookupMasterItem where LookupMasterId=(SELECT TOP 1 Id FROM LookupMaster WHERE Name='Cervical_Cancer_Screening_Results') and LookupItemId=(SELECT TOP 1 Id FROM LookupItem WHERE Name='Normal')) Begin Insert Into LookupMasterItem(LookupMasterId ,LookupItemId,DisplayName, OrdRank)VALUES((SELECT TOP 1 Id FROM LookupMaster WHERE Name='Cervical_Cancer_Screening_Results'),(SELECT TOP 1 Id FROM LookupItem WHERE Name='Normal'),'Normal',1); end
-If Not Exists(Select 1 From LookupMasterItem where LookupMasterId=(SELECT TOP 1 Id FROM LookupMaster WHERE Name='Cervical_Cancer_Screening_Results') and LookupItemId=(SELECT TOP 1 Id FROM LookupItem WHERE Name='Suspected')) Begin Insert Into LookupMasterItem(LookupMasterId ,LookupItemId,DisplayName, OrdRank)VALUES((SELECT TOP 1 Id FROM LookupMaster WHERE Name='Cervical_Cancer_Screening_Results'),(SELECT TOP 1 Id FROM LookupItem WHERE Name='Suspected'),'Suspected',2); end 
-If Not Exists(Select 1 From LookupMasterItem where LookupMasterId=(SELECT TOP 1 Id FROM LookupMaster WHERE Name='Cervical_Cancer_Screening_Results') and LookupItemId=(SELECT TOP 1 Id FROM LookupItem WHERE Name='Confirmed')) Begin Insert Into LookupMasterItem(LookupMasterId ,LookupItemId,DisplayName, OrdRank)VALUES((SELECT TOP 1 Id FROM LookupMaster WHERE Name='Cervical_Cancer_Screening_Results'),(SELECT TOP 1 Id FROM LookupItem WHERE Name='Confirmed'),'Confirmed',3); end 
-If Not Exists(Select 1 From LookupMasterItem where LookupMasterId=(SELECT TOP 1 Id FROM LookupMaster WHERE Name='Cervical_Cancer_Screening_Results') and LookupItemId=(SELECT TOP 1 Id FROM LookupItem WHERE Name='N/A')) Begin Insert Into LookupMasterItem(LookupMasterId ,LookupItemId,DisplayName, OrdRank)VALUES((SELECT TOP 1 Id FROM LookupMaster WHERE Name='Cervical_Cancer_Screening_Results'),(SELECT TOP 1 Id FROM LookupItem WHERE Name='N/A'),'N/A',4); end 
+If Not Exists(Select 1 From LookupMasterItem where LookupMasterId=(SELECT TOP 1 Id FROM LookupMaster WHERE Name='CacxResult') and LookupItemId=(SELECT TOP 1 Id FROM LookupItem WHERE Name='Normal')) Begin Insert Into LookupMasterItem(LookupMasterId ,LookupItemId,DisplayName, OrdRank)VALUES((SELECT TOP 1 Id FROM LookupMaster WHERE Name='CacxResult'),(SELECT TOP 1 Id FROM LookupItem WHERE Name='Normal'),'Normal',1); end
+If Not Exists(Select 1 From LookupMasterItem where LookupMasterId=(SELECT TOP 1 Id FROM LookupMaster WHERE Name='CacxResult') and LookupItemId=(SELECT TOP 1 Id FROM LookupItem WHERE Name='Suspected')) Begin Insert Into LookupMasterItem(LookupMasterId ,LookupItemId,DisplayName, OrdRank)VALUES((SELECT TOP 1 Id FROM LookupMaster WHERE Name='CacxResult'),(SELECT TOP 1 Id FROM LookupItem WHERE Name='Suspected'),'Suspected',2); end 
+If Not Exists(Select 1 From LookupMasterItem where LookupMasterId=(SELECT TOP 1 Id FROM LookupMaster WHERE Name='CacxResult') and LookupItemId=(SELECT TOP 1 Id FROM LookupItem WHERE Name='Confirmed')) Begin Insert Into LookupMasterItem(LookupMasterId ,LookupItemId,DisplayName, OrdRank)VALUES((SELECT TOP 1 Id FROM LookupMaster WHERE Name='CacxResult'),(SELECT TOP 1 Id FROM LookupItem WHERE Name='Confirmed'),'Confirmed',3); end 
+If Not Exists(Select 1 From LookupMasterItem where LookupMasterId=(SELECT TOP 1 Id FROM LookupMaster WHERE Name='CacxResult') and LookupItemId=(SELECT TOP 1 Id FROM LookupItem WHERE Name='N/A')) Begin Insert Into LookupMasterItem(LookupMasterId ,LookupItemId,DisplayName, OrdRank)VALUES((SELECT TOP 1 Id FROM LookupMaster WHERE Name='CacxResult'),(SELECT TOP 1 Id FROM LookupItem WHERE Name='N/A'),'N/A',4); end 
 
 
 ------------PNC Visit Type
@@ -198,3 +245,20 @@ If Not Exists(Select 1 From LookupItem where Name='Follow Up PNC Visit') Begin I
 -- LookupMasterItem
 If Not Exists(Select 1 From LookupMasterItem where LookupMasterId=(SELECT TOP 1 Id FROM LookupMaster WHERE Name='PNCVisitType') and LookupItemId=(SELECT TOP 1 Id FROM LookupItem WHERE Name='Initial PNC Visit')) Begin Insert Into LookupMasterItem(LookupMasterId ,LookupItemId,DisplayName, OrdRank)VALUES((SELECT TOP 1 Id FROM LookupMaster WHERE Name='PNCVisitType'),(SELECT TOP 1 Id FROM LookupItem WHERE Name='Initial PNC Visit'),'Initial PNC Visit',1); end
 If Not Exists(Select 1 From LookupMasterItem where LookupMasterId=(SELECT TOP 1 Id FROM LookupMaster WHERE Name='PNCVisitType') and LookupItemId=(SELECT TOP 1 Id FROM LookupItem WHERE Name='Follow Up PNC Visit')) Begin Insert Into LookupMasterItem(LookupMasterId ,LookupItemId,DisplayName, OrdRank)VALUES((SELECT TOP 1 Id FROM LookupMaster WHERE Name='PNCVisitType'),(SELECT TOP 1 Id FROM LookupItem WHERE Name='Follow Up PNC Visit'),'Follow Up PNC Visit',2); end 
+
+
+------------PncDrugAdministration
+-- master
+If Not Exists(Select 1 From LookupMaster where Name='PncDrugAdministration') Begin INSERT INTO LookupMaster (Name, DisplayName, DeleteFlag) VALUES ('PncDrugAdministration','PncDrugAdministration',0); End
+
+-- lookupitem
+If Not Exists(Select 1 From LookupItem where Name='Started HAART in PNC') Begin INSERT INTO LookupItem (Name, DisplayName, DeleteFlag) VALUES ('Started HAART in PNC','Started HAART in PNC',0); End
+If Not Exists(Select 1 From LookupItem where Name='Haematinics given') Begin INSERT INTO LookupItem (Name, DisplayName, DeleteFlag) VALUES ('Haematinics given','Haematinics given',0); End
+If Not Exists(Select 1 From LookupItem where Name='Infant_Drug') Begin INSERT INTO LookupItem (Name, DisplayName, DeleteFlag) VALUES ('Infant_Drug','Infant_Drug',0); End
+If Not Exists(Select 1 From LookupItem where Name='Infant_Start_Continue') Begin INSERT INTO LookupItem (Name, DisplayName, DeleteFlag) VALUES ('Infant_Start_Continue','Infant_Start_Continue',0); End
+
+-- LookupMasterItem
+If Not Exists(Select 1 From LookupMasterItem where LookupMasterId=(SELECT TOP 1 Id FROM LookupMaster WHERE Name='PncDrugAdministration') and LookupItemId=(SELECT TOP 1 Id FROM LookupItem WHERE Name='Started HAART in PNC')) Begin Insert Into LookupMasterItem(LookupMasterId ,LookupItemId,DisplayName, OrdRank)VALUES((SELECT TOP 1 Id FROM LookupMaster WHERE Name='PncDrugAdministration'),(SELECT TOP 1 Id FROM LookupItem WHERE Name='Started HAART in PNC'),'Started HAART in PNC',1); end
+If Not Exists(Select 1 From LookupMasterItem where LookupMasterId=(SELECT TOP 1 Id FROM LookupMaster WHERE Name='PncDrugAdministration') and LookupItemId=(SELECT TOP 1 Id FROM LookupItem WHERE Name='Haematinics given')) Begin Insert Into LookupMasterItem(LookupMasterId ,LookupItemId,DisplayName, OrdRank)VALUES((SELECT TOP 1 Id FROM LookupMaster WHERE Name='PncDrugAdministration'),(SELECT TOP 1 Id FROM LookupItem WHERE Name='Haematinics given'),'Haematinics given',2); end 
+If Not Exists(Select 1 From LookupMasterItem where LookupMasterId=(SELECT TOP 1 Id FROM LookupMaster WHERE Name='PncDrugAdministration') and LookupItemId=(SELECT TOP 1 Id FROM LookupItem WHERE Name='Infant_Drug')) Begin Insert Into LookupMasterItem(LookupMasterId ,LookupItemId,DisplayName, OrdRank)VALUES((SELECT TOP 1 Id FROM LookupMaster WHERE Name='PncDrugAdministration'),(SELECT TOP 1 Id FROM LookupItem WHERE Name='Infant_Drug'),'Infant_Drug',3); end 
+If Not Exists(Select 1 From LookupMasterItem where LookupMasterId=(SELECT TOP 1 Id FROM LookupMaster WHERE Name='PncDrugAdministration') and LookupItemId=(SELECT TOP 1 Id FROM LookupItem WHERE Name='Infant_Start_Continue')) Begin Insert Into LookupMasterItem(LookupMasterId ,LookupItemId,DisplayName, OrdRank)VALUES((SELECT TOP 1 Id FROM LookupMaster WHERE Name='PncDrugAdministration'),(SELECT TOP 1 Id FROM LookupItem WHERE Name='Infant_Start_Continue'),'Infant_Start_Continue',4); end 

@@ -15,7 +15,9 @@
                                             <span matTooltip="Visit Details">Visit Details</span>
                                         </ng-template>
 
-                                        <app-hei-visit-details (notify)="onVisitDetailsNotify($event)" [formtype]="formType"></app-hei-visit-details>
+                                        <app-hei-visit-details (notify)="onVisitDetailsNotify($event)" [formtype]="formType"
+                                            [visitDate]="visitDate" [visitType]="visitType">
+                                        </app-hei-visit-details>
 
                                         <div class="row">
                                             <button mat-raised-button color="accent" matStepperNext type="button">Next</button>
@@ -31,7 +33,7 @@
 
                                         <!-- add Maternity History Component to Stepper -->
                                         <app-pnc-maternalhistory (notify)="onMaternalHistoryNotify($event)"
-                                            [matHistoryOptions]="matHistoryOptions">
+                                            [matHistoryOptions]="matHistoryOptions" [patientId]="patientId">
                                         </app-pnc-maternalhistory>
 
                                         <!-- add PostNatal Examination Component to Stepper -->
@@ -133,7 +135,7 @@
 
                                         <app-diagnosis (notify)="onDiagnosisNotify($event)"></app-diagnosis>
 
-                                        <app-maternity-referral (notify)="onReferralNotify($event)"></app-maternity-referral>
+                                        <app-maternity-referral (notify)="onReferralNotify($event)" [dischargeOptions]="referralOptions"></app-maternity-referral>
 
                                         <app-maternity-next-appointment (notify)="onNextAppointmentNotify($event)">
                                         </app-maternity-next-appointment>

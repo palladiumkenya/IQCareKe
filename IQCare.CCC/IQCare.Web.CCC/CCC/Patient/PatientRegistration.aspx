@@ -36,10 +36,10 @@
 							  <span class="chevron"></span>
 						  </li>
 
-<%--						  <li data-step="4" data-target="#step4" data-name="socialstatus">
+					  <li data-step="4" data-target="#step4" data-name="socialstatus">
 							  <span class="badge">4</span>Patient Population
 							  <span class="chevron"></span>
-						  </li>--%>
+						  </li>
 					 </ul>
 				 </div><%-- .steps-container--%>
 					  
@@ -221,7 +221,7 @@
 										<div class="col-md-12"><label for="personAge" class="control-label pull-left">Age(years)</label></div>
 										<div class="col-md-12">
 											<asp:TextBox runat="server" ID="personAge" CssClass="form-control input-sm" ClientIDMode="Static" placeholder="0" required="true" min="0"></asp:TextBox>
-											<asp:HiddenField ID="dobPrecision" runat="server" ClientIDMode="Static" />
+											<asp:HiddenField ID="dobPrecision" runat="server" ClientIDMode="Static" value="true"/>
 										</div>
 									</div>
 									
@@ -293,7 +293,7 @@
 						</div>
 
 							<div class="col-md-12 form-group">
-								<div class="col-md-3">
+								<div class="col-md-3" id="idnumbersection">
 									<div class="col-md-12"><label for="NationalId" class="control-label pull-left">ID Number</label></div>
 									<div class="col-md-12">
 										<asp:TextBox type="text" runat="server" id="NationalId" class="form-control input-sm" placeholder="national id no.." ClientIDMode="Static" data-parsley-length="[7,8]"  />
@@ -527,7 +527,7 @@
 
 					  </div><%-- .step-pane-3--%>
 
-				 <!-- <div class="step-pane sample-pane" id="datastep4" data-parsley-validate="true" data-step="4">
+				 <div class="step-pane sample-pane" id="datastep4" data-parsley-validate="true" data-step="4">
 						  
 						   <div class="col-md-12">
 							   <small class="pull-left text-primary"> 4. Patient population categorization</small>
@@ -562,7 +562,7 @@
 						   </div>
 										  
 					  </div><%-- .step-content-4--%>
-                     -->
+               
 				 </div><%-- .step-content--%>
 				
 				<button type="button" class="btn btn-default btn-prev" id="btnWizardPrev"><span class="glyphicon glyphicon-arrow-left"></span>Prev</button>
@@ -600,7 +600,20 @@
 				$("#<%=GurdianMName.ClientID%>").attr('disabled', 'disbaled');
 				$("#<%=GurdianLName.ClientID%>").attr('disabled', 'disbaled');
 				$("#<%=GuardianGender.ClientID%>").attr('disabled', 'disbaled');
-				$("#<%=MaritalStatusId.ClientID%>").attr('disabled', 'disabled');
+                $("#<%=MaritalStatusId.ClientID%>").attr('disabled', 'disabled');
+
+                var patientage = <%=age%>;
+                hideunhideID(patientage);
+
+                function hideunhideID(patientage) {
+                    if (patientage >= 18) {
+                        $('#idnumbersection').show();
+                    }
+                    else {
+                        $('#idnumbersection').hide();
+                    }
+                }
+                if (patientage )
 
 				$('#MyDateOfBirth').datepicker({
 						date:null,
@@ -613,7 +626,7 @@
 					var x = $('#MyDateOfBirth').datepicker('getDate');
 					var age = getAge(x);
 					console.log(age);
-
+                    hideunhideID(age);
 					if (age < 0) {
 						$("#PersonDoB").val("");
 						toastr.error("Patient Date of Birth should not be in the future", "Person Age");
@@ -778,27 +791,22 @@
                                 if ($("#datastep3").parsley().validate()) {
                                     $.when(addPatientContact()).then(function () {
                                         $.when(addPersonTreatmentSupporter()).then(function () {
-                                            setTimeout(function () {
-                                                window.location
-                                                    .href =
-                                                    '<%=ResolveClientUrl( "~/CCC/Enrollment/ServiceEnrollment.aspx")%>';
-                                            },
-                                                2000);
+                                            
                                         });
                                     });
                                 } else {
                                     stepError = $('.parsley-error').length === 0;
                                     totalError += stepError;
-                                    if (totalError > 0) {
+                                  /*  if (totalError > 0) {
                                         $('.bs-callout-danger').toggleClass('hidden', f);
-                                    }
+                                    }*/
                                     evt.preventDefault();
                                 }
-                                var ok3 = $('.parsley-error').length === 0;
-                        $('.bs-callout-info').toggleClass('hidden', !ok3);
+                               // var ok3 = $('.parsley-error').length === 0;
+                        //$('.bs-callout-info').toggleClass('hidden', !ok3);
                             }
                         }
-						<%--else if (data.step === 4) {
+						else if (data.step === 4) {
 							if (data.direction === 'previous') {
 								return;
 							} else {
@@ -839,7 +847,7 @@
 														'<%=ResolveClientUrl( "~/CCC/Enrollment/ServiceEnrollment.aspx")%>';
 												},
 												2000);
-									});*/
+									});
 
                     } 
                         
@@ -857,7 +865,7 @@
                     }
 						
                         
-                   }--%> 
+                   }
 					})
 					.on("changed.fu.wizard",
 						function() {
@@ -877,7 +885,8 @@
 					var today = new Date();
 					var birthDate = new Date(dateString);
 					var age = today.getFullYear() - birthDate.getFullYear();
-					var m = today.getMonth() - birthDate.getMonth();
+                    var m = today.getMonth() - birthDate.getMonth();
+                    hideunhideID(patientage);
 					if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) 
 					{
 						age--;
@@ -1145,7 +1154,7 @@
 					}
 				}
 
-				<%--function addPersonPopulation() {
+				function addPersonPopulation() {
 					var isPatientSet = '<%=Session["PatientEditId"]%>';
 
 					//var populationType = $("input[name='Population']:checked").val();
@@ -1230,7 +1239,7 @@
 							getPopulationTypes();
 						}
 
-					});--%>
+					});
 
 				/*$.urlParam = function(name){
 					//name = name.toLowerCase();
@@ -1397,10 +1406,10 @@
 							$("#tsGender").val(patientDetails.tsGender);
 							$("#ctl00_IQCareContentPlaceHolder_TSContacts").val(patientDetails.ISContacts);
 							/*Key Population*/
-							//$('input[name="Population"]').value = patientDetails.population;
-							//console.log(patientDetails.population);
+							$('input[name="Population"]').value = patientDetails.population;
+							console.log(patientDetails.population);
 
-							/*if (patientDetails.population == "General Population") {
+							if (patientDetails.population == "General Population") {
 								var d = document.getElementById("GenPopulation");
 								d.className += " checked";
 							} else if(patientDetails.population == "Key Population") {
@@ -1408,7 +1417,7 @@
 								d.className += " checked";
 							}
 							$('input:radio[name="Population"]').filter('[value="' + patientDetails.population +'"]').attr('checked', true);
-							*/
+							
 
 							var RBID = '<%=PopulationType.ClientID %>';
 							var RB1 = document.getElementById(RBID);
@@ -1617,7 +1626,8 @@
 						$("#<%=GurdianLName.ClientID%>").prop('disabled', true);
 						$("#<%=GuardianGender.ClientID%>").prop('disabled',true);
 						$("#<%=MaritalStatusId.ClientID%>").prop('disabled', false);
-						$("#<%=ISGuardian.ClientID%>").prop('disabled', true);
+                        $("#<%=ISGuardian.ClientID%>").prop('disabled', true);
+                        $("#idnumbersection").show();
 
 						if (patientType == "Transit") {
 							$("#<%=MaritalStatusId.ClientID%>").prop('disabled', true);
@@ -1644,8 +1654,8 @@
 						
 						$("#<%=ISGuardian.ClientID%>").prop('disabled', false);
 
-						$('#PopulationType_1').prop('disabled', true);
-
+                        $('#PopulationType_1').prop('disabled', true);
+                        $("#idnumbersection").hide();
 						$("#<%=KeyPopulationCategoryId.ClientID%>").find('option').remove().end();
 						$("#<%=KeyPopulationCategoryId.ClientID%>").append('<option value="0">N/A</option>');
 						$("#<%=KeyPopulationCategoryId.ClientID%>").prop('disabled', true);
@@ -1802,6 +1812,8 @@
 				}
 
 		});
+
+
 	</script>
 </asp:Content>
 

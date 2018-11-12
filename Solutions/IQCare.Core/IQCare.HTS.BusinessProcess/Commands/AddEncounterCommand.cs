@@ -3,6 +3,7 @@ using MediatR;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using IQCare.Library;
 
 namespace IQCare.HTS.BusinessProcess.Commands
 {

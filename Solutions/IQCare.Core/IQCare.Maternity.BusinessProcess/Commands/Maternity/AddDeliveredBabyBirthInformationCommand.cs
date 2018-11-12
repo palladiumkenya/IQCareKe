@@ -8,6 +8,7 @@ namespace IQCare.Maternity.BusinessProcess.Commands.Maternity
 {
     public class AddDeliveredBabyBirthInformationCommand : IRequest<Result<DeliveredBabyBirthInfoResult>>
     {
+
         public int PatientDeliveryInformationId { get; set; }
         public int PatientMasterVisitId { get; set; }
         public decimal? BirthWeight { get; set; }
@@ -23,6 +24,12 @@ namespace IQCare.Maternity.BusinessProcess.Commands.Maternity
         public List<ApgrarScore> ApgarScores { get; set; }
     }
 
+    public class AddDeliveredBabyBirthInfoCollectionCommand : IRequest<Result<DeliveredBabyBirthInfoResult>>
+    {
+        public List<AddDeliveredBabyBirthInformationCommand> DeliveredBabyBirthInfoCollection { get; set; }
+    }
+
+   
     public class ApgrarScore
     {
         public int ApgarScoreId { get; set; }

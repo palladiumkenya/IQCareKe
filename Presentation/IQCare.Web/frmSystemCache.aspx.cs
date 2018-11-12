@@ -68,7 +68,9 @@ public partial class frmSystemCache : System.Web.UI.Page
         if (theMainDS.Tables.Contains("Users"))
         {
             WriteXMLDS.Tables.Add(theMainDS.Tables["Users"].Copy());
-        } try
+        }
+        WriteXMLDS.Tables.Add(theMainDS.Tables["Mst_Store"].Copy());
+        try
         {
             WriteXMLDS.WriteXml(Server.MapPath(".\\XMLFiles\\").ToString() + "AllMasters.con", XmlWriteMode.WriteSchema);
         }

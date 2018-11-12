@@ -14,8 +14,8 @@ namespace IQCare.Maternity.Core.Domain.PNC
         public PatientFamilyPlanningMethod(int patientId, int patientFamilyPlanningId, int familyPlanningMethodId,int createdBy)
         {
             PatientId = patientId;
-            PatientFamilyPlanningId = patientFamilyPlanningId;
-            FamilyPlanningMethodId = familyPlanningMethodId;
+            PatientFPId = patientFamilyPlanningId;
+            FPMethodId = familyPlanningMethodId;
             Active = true;
             CreatedBy = createdBy;
             CreateDate = DateTime.Now;
@@ -23,8 +23,8 @@ namespace IQCare.Maternity.Core.Domain.PNC
 
         public int Id { get; set; }
         public int PatientId { get; set; }
-        public int PatientFamilyPlanningId { get; set; }
-        public int FamilyPlanningMethodId { get; set; }
+        public int PatientFPId { get; set; }
+        public int FPMethodId { get; set; }
         public bool Active { get; set; }
         public bool DeleteFlag { get; set; }
         public int CreatedBy { get; set; }

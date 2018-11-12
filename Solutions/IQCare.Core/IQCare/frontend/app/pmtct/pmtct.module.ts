@@ -1,3 +1,5 @@
+///<reference path="maternity/maternity.component.ts"/>
+import { PncService } from './_services/pnc.service';
 import { CervicalCancerScreeningResultsResolver } from './_services/resolvers/cervical-cancer-screening-results.resolver';
 import { FamilyPlanningMethodResolver } from './_services/resolvers/family-planning-method.resolver';
 import { CervicalCancerScreeningMethodResolver } from './_services/resolvers/cervical-cancer-screening-method.resolver';
@@ -24,13 +26,14 @@ import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ProfileComponent } from './profile/profile.component';
-import { PatientEducationExaminationComponent } from './patient-education-examination/patient-education-examination.component';
-import { AntenatalProfileComponent } from './antenatal-profile/antenatal-profile.component';
-import { HivStatusComponent } from './hiv-status/hiv-status.component';
-import { ClientMonitoringComponent } from './client-monitoring/client-monitoring.component';
-import { HaartProphylaxisComponent } from './haart-prophylaxis/haart-prophylaxis.component';
-import { VisitDetailsComponent } from './visit-details/visit-details.component';
+import { PatientEducationExaminationComponent } from './anc/patient-education-examination/patient-education-examination.component';
+import { AntenatalProfileComponent } from './anc/antenatal-profile/antenatal-profile.component';
+import { HivStatusComponent } from './anc/hiv-status/hiv-status.component';
+import { ClientMonitoringComponent } from './anc/client-monitoring/client-monitoring.component';
+import { HaartProphylaxisComponent } from './anc/haart-prophylaxis/haart-prophylaxis.component';
+import { VisitDetailsComponent } from './anc/visit-details/visit-details.component';
 import { PmtctRoutingModule } from './pmtct-routing-module';
+import { MaternityEncounterComponent } from './maternity/maternity-encounter/maternity-encounter.component';
 import {
     MatAutocompleteModule,
     MatButtonModule, MatButtonToggleModule, MatCardModule, MatCheckboxModule, MatChipsModule,
@@ -41,10 +44,10 @@ import {
     MatSortModule, MatStepperModule, MatTableModule, MatTabsModule, MatToolbarModule, MatTooltipModule,
 } from '@angular/material';
 import { AncComponent } from './anc/anc.component';
-import { PreventiveServicesComponent } from './preventive-services/preventive-services.component';
-import { PartnerTestingComponent } from './partner-testing/partner-testing.component';
-import { ReferralsComponent } from './referrals/referrals.component';
-import { NextAppointmentComponent } from './next-appointment/next-appointment.component';
+import { PreventiveServicesComponent } from './anc/preventive-services/preventive-services.component';
+import { PartnerTestingComponent } from './anc/partner-testing/partner-testing.component';
+import { ReferralsComponent } from './anc/referrals/referrals.component';
+import { NextAppointmentComponent } from './anc/next-appointment/next-appointment.component';
 import { SharedModule } from '../shared/shared.module';
 import { HeiComponent } from './hei/hei.component';
 import { HeiVisitDetailsComponent } from './hei/hei-visit-details/hei-visit-details.component';
@@ -97,6 +100,11 @@ import { TestKitNameResolver } from './_services/resolvers/test-kit-name.resolve
 import { HivTestResultResolver } from './_services/resolvers/hiv-test-result.resolver';
 import { PncEncountersComponent } from './pnc/pnc-encounters/pnc-encounters.component';
 import { CheckinComponent } from './checkin/checkin.component';
+import {TbScreeningResolver} from './_services/resolvers/tb-screening.resolver';
+import { AncHivtestingComponent } from './anc/anc-hivtesting/anc-hivtesting.component';
+import { ANCHivStatusInitialVisitResolver } from './_services/resolvers/anc-hiv-status-initial-visit.resolver';
+import { MotherExaminationResolver } from './_services/resolvers/motherexamination.resolver';
+import { BabyExaminationResolver } from './_services/resolvers/baby-examination.resolver';
 
 @NgModule({
     imports: [
@@ -160,7 +168,9 @@ import { CheckinComponent } from './checkin/checkin.component';
         MaternityNextAppointmentComponent,
         MaternityHivTestComponent,
         PncEncountersComponent,
-        CheckinComponent
+        CheckinComponent,
+        MaternityEncounterComponent,
+        AncHivtestingComponent
     ],
     providers: [
         PlaceOfDeliveryResolver,
@@ -197,7 +207,12 @@ import { CheckinComponent } from './checkin/checkin.component';
         FinalPartnerHivResultResolver,
         CervicalCancerScreeningMethodResolver,
         FamilyPlanningMethodResolver,
-        CervicalCancerScreeningResultsResolver
+        CervicalCancerScreeningResultsResolver,
+        PncService,
+        TbScreeningResolver,
+        ANCHivStatusInitialVisitResolver,
+        MotherExaminationResolver,
+        BabyExaminationResolver
     ],
     entryComponents: [
         IptClientWorkupComponent,

@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using IQCareRecords.Common.BusinessProcess.Command;
  using MediatR;
-using IQCare.Common.BusinessProcess.Commands.Partners;
+using IQCare.Common.BusinessProcess.Commands.Relationship;
 using IQCare.Records.BusinessProcess.Command;
 using IQCare.Records.BusinessProcess.Command.Lookup;
 using IQCare.Records.BusinessProcess.Command.Registration;
@@ -182,7 +182,7 @@ namespace IQCare.Controllers.Records
         {
             var response = await _mediator.Send(new GetPersonDetailsCommand
             {
-                PersonId=personId
+                PersonId = personId
             });
             if (response.IsValid)
                 return Ok(response.Value);

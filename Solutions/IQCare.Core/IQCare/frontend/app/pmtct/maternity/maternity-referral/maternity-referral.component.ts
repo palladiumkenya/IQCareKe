@@ -1,7 +1,7 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
-import {NotificationService} from '../../../shared/_services/notification.service';
-import {SnotifyService} from 'ng-snotify';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { NotificationService } from '../../../shared/_services/notification.service';
+import { SnotifyService } from 'ng-snotify';
 
 @Component({
     selector: 'app-maternity-referral',
@@ -13,13 +13,11 @@ export class MaternityReferralComponent implements OnInit {
     referralFormGroup: FormGroup;
     @Input() dischargeOptions: any[] = [];
     @Output() notify: EventEmitter<FormGroup> = new EventEmitter<FormGroup>();
-    public deliveryStateOptions: any[] = [];
     public referralOptions: any[] = [];
-    public yesnoOptions: any[] = [];
 
     constructor(private formBuilder: FormBuilder,
-                private notificationService: NotificationService,
-                private snotifyService: SnotifyService) {
+        private notificationService: NotificationService,
+        private snotifyService: SnotifyService) {
     }
 
     ngOnInit() {
@@ -28,14 +26,14 @@ export class MaternityReferralComponent implements OnInit {
             referredTo: new FormControl('', [Validators.required])
 
         });
+
         const {
-            deliveryStates,
             referrals,
-            yesNos
         } = this.dischargeOptions[0];
-        this.yesnoOptions = yesNos;
-        this.deliveryStateOptions = deliveryStates;
         this.referralOptions = referrals;
+
+
+        this.notify.emit(this.referralFormGroup);
     }
 
 }

@@ -54,19 +54,19 @@ export class ServicesListComponent implements OnInit {
         const selectedService = this.services.filter(obj => obj.id == serviceId);
         if (selectedService && selectedService.length > 0) {
             switch (selectedService[0]['code']) {
-                case 'ANC':
-                    this.zone.run(() => {
-                        // :patientId/:personId/:serviceAreaId
-                        this.router.navigate(['/pmtct/anc/' + this.patientId + '/' + this.personId + '/' + serviceId],
-                            { relativeTo: this.route });
-                    });
-                    break;
-                case 'HEI':
-                    this.zone.run(() => {
-                        this.router.navigate(['/pmtct/hei/' + this.patientId + '/' + this.personId + '/' + serviceId],
-                            { relativeTo: this.route });
-                    });
-                    break;
+                /* case 'ANC':
+                     this.zone.run(() => {
+                         // :patientId/:personId/:serviceAreaId
+                         this.router.navigate(['/pmtct/anc/' + this.patientId + '/' + this.personId + '/' + serviceId],
+                             { relativeTo: this.route });
+                     });
+                     break;
+                 case 'HEI':
+                     this.zone.run(() => {
+                         this.router.navigate(['/pmtct/hei/' + this.patientId + '/' + this.personId + '/' + serviceId],
+                             { relativeTo: this.route });
+                     });
+                     break;*/
                 case 'HTS':
                     this.zone.run(() => {
                         localStorage.setItem('personId', this.personId.toString());
@@ -75,14 +75,26 @@ export class ServicesListComponent implements OnInit {
                         this.router.navigate(['/registration/home/'], { relativeTo: this.route });
                     });
                     break;
-                case 'PNC':
-                    /*this.zone.run(() => {
-                        this.router.navigate(['/pmtct/pnc/' + this.patientId + '/' + this.personId + '/' + serviceId],
-                            { relativeTo: this.route });
-                    });*/
+                /*  case 'PNC':
+                      this.zone.run(() => {
+                          this.router.navigate(
+                              ['/pmtct/pnc/encounters/' + this.patientId + '/' + this.personId + '/' + serviceId],
+                              { relativeTo: this.route });
+                      });
+                      break;
+                  case 'Maternity':
+                      this.zone.run(() => {
+                          this.router.navigate(
+                              ['/pmtct/maternity/encounters/' + this.patientId + '/' + this.personId + '/' + serviceId],
+                              { relativeTo: this.route });
+                      });
+                      break;*/
+                default:
+
                     this.zone.run(() => {
                         this.router.navigate(
-                            ['/pmtct/pnc/encounters/' + this.patientId + '/' + this.personId + '/' + serviceId],
+                            ['/pmtct/patient-encounter/' + this.patientId + '/' + this.personId + '/' + serviceId + '/'
+                                + selectedService[0]['code']],
                             { relativeTo: this.route });
                     });
                     break;
@@ -116,8 +128,22 @@ export class ServicesListComponent implements OnInit {
                         isEligible = false;
                     }
                     break;
+                case 'PNC':
+                    if (this.person.gender == 'Female') {
+                        isEligible = true;
+                    } else {
+                        isEligible = false;
+                    }
+                    break;
+                case 'Maternity':
+                    if (this.person.gender == 'Female') {
+                        isEligible = true;
+                    } else {
+                        isEligible = false;
+                    }
+                    break;
                 case 'HEI':
-                    if (this.person.ageNumber <= 3) {
+                    if (this.person.ageNumber <= 2) {
                         isEligible = true;
                     } else {
                         isEligible = false;
@@ -139,7 +165,6 @@ export class ServicesListComponent implements OnInit {
                     serviceIdentifiers[i]['identifierTypeId'] = selectedIdentifier[0]['code'];
                 }
             }
-
             this.enrolledService['identifiers'].push(serviceIdentifiers);
         }
         return this.enrolledService;

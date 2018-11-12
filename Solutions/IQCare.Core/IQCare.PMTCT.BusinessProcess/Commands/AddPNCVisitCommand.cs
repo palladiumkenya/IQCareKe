@@ -3,6 +3,7 @@ using MediatR;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using IQCare.Library;
 
 namespace IQCare.PMTCT.BusinessProcess.Commands
 {
@@ -14,8 +15,9 @@ namespace IQCare.PMTCT.BusinessProcess.Commands
         public int VisitNumber { get; set; }
         public int VisitType { get; set; }
         public int UserId { get; set; }
-        public string EncounterType { get; set; }
         public int? DaysPostPartum { get; set; }
+        public int PatientMasterVisitId { get; set; }
+        public decimal? AgeMenarche { get; set; }
     }
 
     public class AddPNCVisitResponse

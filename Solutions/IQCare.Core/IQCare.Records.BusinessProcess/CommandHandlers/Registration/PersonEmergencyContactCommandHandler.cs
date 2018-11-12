@@ -9,6 +9,7 @@ using IQCare.Common.Core.Models;
 using IQCare.Common.Infrastructure;
 using IQCare.Common.BusinessProcess.Services;
 using IQCare.Common.Services;
+using IQCare.Library;
 using Microsoft.EntityFrameworkCore;
 
 namespace IQCareRecords.Common.BusinessProcess.CommandHandlers.Registration

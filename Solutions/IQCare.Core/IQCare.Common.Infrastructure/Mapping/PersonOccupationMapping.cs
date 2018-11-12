@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace IQCare.Common.Infrastructure.Mapping
 {
-    public class PersonOccupationMapping : IEntityTypeConfiguration<PersonOccupation>
+   public class PersonOccupationMapping : IEntityTypeConfiguration<PersonOccupation>
     {
         void IEntityTypeConfiguration<PersonOccupation>.Configure(EntityTypeBuilder<PersonOccupation> builder)
         {

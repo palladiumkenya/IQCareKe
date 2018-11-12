@@ -22,8 +22,21 @@ namespace IQCare.Controllers.PMTCT.ANC
             _mediator = mediator ?? throw new ArgumentNullException(nameof(mediator));
         }
 
+         [HttpPost("visitDetails")]
+        public async Task<IActionResult> Post([FromBody] PatientVisitProfileCommand visitDetailsCommand)
+        {
+            var response = await _mediator.Send(visitDetailsCommand, Request.HttpContext.RequestAborted);
+
+            if (response.IsValid)
+            {
+                return Ok(response.Value);
+            }
+            return BadRequest(response);
+        }
+
+
         //used to capture both maternity and ANC visit details
-        [HttpPost]
+        [HttpPost("AddANCVisit")]
         public async Task<IActionResult> Post([FromBody] VisitDetailsCommand visitDetailsCommand )
         {
             var response = await _mediator.Send(visitDetailsCommand, Request.HttpContext.RequestAborted);
@@ -33,13 +46,21 @@ namespace IQCare.Controllers.PMTCT.ANC
                 return Ok(response.Value);
             }
             return BadRequest(response);
-
         }
 
         [HttpGet("GetAncProfile/{patientId}/{pregnancyId}")]
         public async Task<IActionResult>GetANcProfile(int patientId,int pregnancyId)
         {
             var results = await _mediator.Send(new GetPatientInitialProfileCommand() { PatientId = patientId,PregnancyId = pregnancyId}, HttpContext.RequestAborted);
+            if (results.IsValid)
+                return Ok(results.Value);
+            return BadRequest(results);
+        }
+
+        [HttpGet("GetCurrentVisit/{patientId}")]
+        public async Task<IActionResult> GetPatientCurrentVisit(int patientId)
+        {
+            var results = await _mediator.Send(new GetCurrentVisitDetailsCommand() { PatientId = patientId}, HttpContext.RequestAborted);
             if (results.IsValid)
                 return Ok(results.Value);
             return BadRequest(results);
@@ -53,10 +74,20 @@ namespace IQCare.Controllers.PMTCT.ANC
                 return Ok(results.Value);
             return BadRequest(results);
         }
-        
+
+        [HttpPost("postPregnancy")]
+        public async Task<IActionResult> post([FromBody] AddPregnancyCommand command)
+        {
+            var response = await _mediator.Send(command, Request.HttpContext.RequestAborted);
+            if (response.IsValid)
+                return Ok(response.Value);
+            return BadRequest(response);
+        }
+
+
         // Used to capture PNC visit details
         
-        [HttpPost]
+        [HttpPost("AddPNCVisitDetails")]
         public async Task<IActionResult> AddPNCVisitDetails([FromBody] AddPNCVisitCommand command)
         {
             var response = await _mediator.Send(command, Request.HttpContext.RequestAborted);

@@ -2,10 +2,11 @@
 using System.Collections.Generic;
 using System.Text;
 using IQCare.Common.Core.Models;
+using IQCare.Library;
 using MediatR;
 namespace IQCareRecords.Common.BusinessProcess.Command
 {
-   public class PersonRegistrationCommand:IRequest<Result<PersonRegistrationResponse>>
+    public class PersonRegistrationCommand:IRequest<Result<PersonRegistrationResponse>>
     {
         public Client Person;
     }

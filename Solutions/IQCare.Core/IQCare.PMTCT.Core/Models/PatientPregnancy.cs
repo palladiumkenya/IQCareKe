@@ -22,5 +22,6 @@ namespace IQCare.PMTCT.Core.Models
         public PatientMasterVisit PatientMasterVisit { get; set; }
         public int CreatedBy { get; set; }
         public DateTime CreateDate { get; set; }
+        public bool DeleteFlag { get; set; }
     }
 }

@@ -1,5 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\..\Solutions\Presentation\packages\MSBuild.Microsoft.VisualStudio.Web.targets.14.0.0.3\build\MSBuild.Microsoft.VisualStudio.Web.targets.props" Condition="Exists('..\..\Solutions\Presentation\packages\MSBuild.Microsoft.VisualStudio.Web.targets.14.0.0.3\build\MSBuild.Microsoft.VisualStudio.Web.targets.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
@@ -30,6 +31,9 @@
     <IISExpressWindowsAuthentication />
     <IISExpressUseClassicPipelineMode />
     <UseGlobalApplicationHostFile />
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+    <DockerComposeProjectPath>..\..\Solutions\Presentation\docker-compose.dcproj</DockerComposeProjectPath>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -50,6 +54,10 @@
     <WarningLevel>4</WarningLevel>
     <PlatformTarget>AnyCPU</PlatformTarget>
     <Prefer32Bit>false</Prefer32Bit>
+    <FilesToIncludeForPublish>OnlyFilesToRunTheApp</FilesToIncludeForPublish>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject />
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Ajax">
@@ -116,6 +124,9 @@
     <Reference Include="Entities.Queue">
       <HintPath>..\..\References\Entities.Queue.dll</HintPath>
     </Reference>
+    <Reference Include="Entity.WebApi">
+      <HintPath>..\..\References\Entity.WebApi.dll</HintPath>
+    </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\Library\EntityFramework.dll</HintPath>
@@ -162,6 +173,9 @@
     </Reference>
     <Reference Include="IQCare.CustomConfig, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\References\IQCare.CustomConfig.dll</HintPath>
+    </Reference>
+    <Reference Include="IQCare.Events">
+      <HintPath>..\..\References\IQCare.Events.dll</HintPath>
     </Reference>
     <Reference Include="IQCare.IQControl, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\References\IQCare.IQControl.dll</HintPath>
@@ -240,9 +254,17 @@
     <Reference Include="System.Configuration" />
     <Reference Include="System.Web.Services" />
     <Reference Include="System.Xml.Linq" />
+    <Reference Include="Telerik.Web.Design, Version=2013.3.1114.40, Culture=neutral, PublicKeyToken=121fae78165ba3d4, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\References\Telerik.Web.Design.dll</HintPath>
+    </Reference>
     <Reference Include="Telerik.Web.UI, Version=2014.1.225.40, Culture=neutral, PublicKeyToken=121fae78165ba3d4, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\Library\Telerik.Web.UI.dll</HintPath>
+      <HintPath>..\..\References\Telerik.Web.UI.dll</HintPath>
+    </Reference>
+    <Reference Include="Telerik.Web.UI.Skins, Version=2014.1.225.40, Culture=neutral, PublicKeyToken=121fae78165ba3d4, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\References\Telerik.Web.UI.Skins.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -303,10 +325,14 @@
     <Content Include="AdminForms\frmAdmin_VillageChairperson.aspx" />
     <Content Include="AdminForms\frmConfig_Customfields.aspx" />
     <Content Include="ClinicalForms\FindPatient.aspx" />
+    <Content Include="Content\bootstrap\bootbox.js" />
     <Content Include="Content\css\awesomplete.css" />
     <Content Include="Content\css\bootstrap-callout.css" />
     <Content Include="Content\css\datepicker.css" />
+    <Content Include="Content\css\grid.css" />
     <Content Include="Content\css\iqcare.ke-font.css" />
+    <Content Include="Content\css\round.css" />
+    <Content Include="Content\css\sprite.png" />
     <Content Include="Content\datatables\css\datatables.css" />
     <Content Include="Content\datatables\css\dataTables.jqueryui.css" />
     <Content Include="Content\datatables\css\jquery.dataTables.css" />
@@ -343,6 +369,7 @@
     <Content Include="Content\toast\js\toastr.js" />
     <Content Include="favicon.ico" />
     <Content Include="frmFacilityHome.aspx" />
+    <Content Include="frmFindAddCustom.aspx" />
     <Content Include="Home\Default.aspx" />
     <Content Include="hts\Home.aspx" />
     <Content Include="Images\iq_logo_small.gif" />
@@ -355,10 +382,17 @@
     <Content Include="Patient\FindAdd.aspx" />
     <Content Include="Patient\Registration.aspx" />
     <Content Include="Pharmacy\Requests\EditPharmacyPrescription.aspx" />
+    <Content Include="PMSCM\frmAllergy.aspx" />
+    <Content Include="PMSCM\frmPharmacyDispense_FindPatient.aspx" />
+    <Content Include="PMSCM\frmPharmacyDispense_PatientOrder.aspx" />
+    <Content Include="PMSCM\frmPharmacy_Dashboard.aspx" />
+    <Content Include="PMSCM\frmPharmacy_DrugHistory.aspx" />
+    <Content Include="PMSCM\PharmacyDashboard.aspx" />
     <Content Include="Statistics\Facility.aspx" />
     <Content Include="Statistics\HEI.aspx" />
     <Content Include="Statistics\HivCare.aspx" />
     <Content Include="Statistics\PMTCT.aspx" />
+    <Content Include="UC\UserControl_Loading.ascx" />
     <Content Include="WardAdmission\Home.aspx" />
     <Content Include="WardAdmission\NewAdmission.aspx" />
     <Content Include="clientaccesspolicy.xml" />
@@ -2181,6 +2215,13 @@
     <Compile Include="frmFacilityHome.aspx.designer.cs">
       <DependentUpon>frmFacilityHome.aspx</DependentUpon>
     </Compile>
+    <Compile Include="frmFindAddCustom.aspx.cs">
+      <DependentUpon>frmFindAddCustom.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="frmFindAddCustom.aspx.designer.cs">
+      <DependentUpon>frmFindAddCustom.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -2348,6 +2389,48 @@
       <DependentUpon>EditPharmacyPrescription.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
+    <Compile Include="PMSCM\frmAllergy.aspx.cs">
+      <DependentUpon>frmAllergy.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="PMSCM\frmAllergy.aspx.designer.cs">
+      <DependentUpon>frmAllergy.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="PMSCM\frmPharmacyDispense_FindPatient.aspx.cs">
+      <DependentUpon>frmPharmacyDispense_FindPatient.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="PMSCM\frmPharmacyDispense_FindPatient.aspx.designer.cs">
+      <DependentUpon>frmPharmacyDispense_FindPatient.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="PMSCM\frmPharmacyDispense_PatientOrder.aspx.cs">
+      <DependentUpon>frmPharmacyDispense_PatientOrder.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="PMSCM\frmPharmacyDispense_PatientOrder.aspx.designer.cs">
+      <DependentUpon>frmPharmacyDispense_PatientOrder.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="PMSCM\frmPharmacy_Dashboard.aspx.cs">
+      <DependentUpon>frmPharmacy_Dashboard.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="PMSCM\frmPharmacy_Dashboard.aspx.designer.cs">
+      <DependentUpon>frmPharmacy_Dashboard.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="PMSCM\frmPharmacy_DrugHistory.aspx.cs">
+      <DependentUpon>frmPharmacy_DrugHistory.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="PMSCM\frmPharmacy_DrugHistory.aspx.designer.cs">
+      <DependentUpon>frmPharmacy_DrugHistory.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="PMSCM\PharmacyDashboard.aspx.cs">
+      <DependentUpon>PharmacyDashboard.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="PMSCM\PharmacyDashboard.aspx.designer.cs">
+      <DependentUpon>PharmacyDashboard.aspx</DependentUpon>
+    </Compile>
     <Compile Include="ProgressControl.ascx.designer.cs">
       <DependentUpon>ProgressControl.ascx</DependentUpon>
     </Compile>
@@ -2474,6 +2557,13 @@
     </Compile>
     <Compile Include="Statistics\PMTCT.aspx.designer.cs">
       <DependentUpon>PMTCT.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="UC\UserControl_Loading.ascx.cs">
+      <DependentUpon>UserControl_Loading.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UC\UserControl_Loading.ascx.designer.cs">
+      <DependentUpon>UserControl_Loading.ascx</DependentUpon>
     </Compile>
     <Compile Include="WardAdmission\AdmitPatient.ascx.designer.cs">
       <DependentUpon>AdmitPatient.ascx</DependentUpon>
@@ -3135,8 +3225,10 @@
   <ItemGroup>
     <Service Include="{C0C07587-41A7-46C8-8FBD-3F9C8EBE2DDC}" />
   </ItemGroup>
+  <Target Name="GatherAllFilesToPublish">
+  </Target>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
-  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="true" />
   <ProjectExtensions>
     <VisualStudio>
       <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
@@ -3151,6 +3243,9 @@
           <CustomServerUrl>
           </CustomServerUrl>
           <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+          <servers defaultServer="SelfHostServer">
+            <server name="SelfHostServer" exePath="" cmdArgs="" url="http://localhost:1155/" workingDir="" />
+          </servers>
         </WebProjectProperties>
       </FlavorProperties>
     </VisualStudio>
@@ -3167,5 +3262,11 @@
     <Copy SourceFiles="@(DocFileItem)" DestinationFiles="@(FinalDocFile->'$(RefDir)%(FileName)%(Extension)')" SkipUnchangedFiles="true" Condition="'$(_DocumentationFileProduced)'=='true'" />
     <Copy SourceFiles="@(IntermediateSatelliteAssembliesWithTargetPath)" DestinationFiles="@(IntermediateSatelliteAssembliesWithTargetPath->'$(RefDir)%(Culture)\$(TargetName).resources.dll')" SkipUnchangedFiles="true" />
     <Copy SourceFiles="@(Content)" DestinationFiles="@(Content-> '$(RedDir)%(RelativeDir)%(FileName)%(Extension)')" />
+  </Target>
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\..\Solutions\Presentation\packages\MSBuild.Microsoft.VisualStudio.Web.targets.14.0.0.3\build\MSBuild.Microsoft.VisualStudio.Web.targets.props')" Text="$([System.String]::Format('$(ErrorText)', '..\..\Solutions\Presentation\packages\MSBuild.Microsoft.VisualStudio.Web.targets.14.0.0.3\build\MSBuild.Microsoft.VisualStudio.Web.targets.props'))" />
   </Target>
 </Project>

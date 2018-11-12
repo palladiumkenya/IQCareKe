@@ -1,8 +1,8 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
-import {NotificationService} from '../../../shared/_services/notification.service';
-import {SnotifyService} from 'ng-snotify';
-import {LookupItemService} from '../../../shared/_services/lookup-item.service';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { NotificationService } from '../../../shared/_services/notification.service';
+import { SnotifyService } from 'ng-snotify';
+import { LookupItemService } from '../../../shared/_services/lookup-item.service';
 
 @Component({
     selector: 'app-diagnosis',
@@ -11,20 +11,22 @@ import {LookupItemService} from '../../../shared/_services/lookup-item.service';
 })
 export class DiagnosisComponent implements OnInit {
 
-    diagnosisFormGroup: FormGroup;
+    PatientdiagnosisFormGroup: FormGroup;
     @Input() diagnosisOptions: any[] = [];
     @Output() notify: EventEmitter<FormGroup> = new EventEmitter<FormGroup>();
 
     constructor(private _formBuilder: FormBuilder,
-                private _lookupItemService: LookupItemService,
-                private snotifyService: SnotifyService,
-                private notificationService: NotificationService) {
+        private _lookupItemService: LookupItemService,
+        private snotifyService: SnotifyService,
+        private notificationService: NotificationService) {
     }
 
     ngOnInit() {
-        this.diagnosisFormGroup = this._formBuilder.group({
+        this.PatientdiagnosisFormGroup = this._formBuilder.group({
             diagnosis: new FormControl('', [Validators.required])
         });
+
+        this.notify.emit(this.PatientdiagnosisFormGroup);
     }
 
 }

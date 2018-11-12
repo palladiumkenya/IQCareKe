@@ -17,6 +17,6 @@ export class FinalPartnerHivResultResolver implements Resolve<Observable<LookupI
         route: ActivatedRouteSnapshot,
         state: RouterStateSnapshot
     ): Observable<LookupItemView[]> {
-        return this._lookupItemService.getByGroupName('FinalPartnerHivResult');
+        return this._lookupItemService.getByGroupName('HIVFinalResultsPMTCT');
     }
 }

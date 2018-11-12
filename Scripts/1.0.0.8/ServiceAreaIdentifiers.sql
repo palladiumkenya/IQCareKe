@@ -25,6 +25,12 @@ Go
 
 IF NOT EXISTS(SELECT TOP 1 Id FROM ServiceAreaIdentifiers WHERE ServiceAreaId = 4)
 BEGIN
-	INSERT INTO [dbo].[ServiceAreaIdentifiers] ([ServiceAreaId] ,[IdentifierId] ,[RequiredFlag]) VALUES (4, (SELECT TOP 1 Id FROM Identifiers WHERE Name = 'PNCNumber'), 1);
+	INSERT INTO [dbo].[ServiceAreaIdentifiers] ([ServiceAreaId] ,[IdentifierId] ,[RequiredFlag]) VALUES (4, (SELECT TOP 1 Id FROM Identifiers WHERE Code = 'PNCNumber'), 1);
+END;
+
+IF NOT EXISTS(SELECT TOP 1 Id FROM ServiceAreaIdentifiers WHERE ServiceAreaId = 5)
+BEGIN
+	INSERT INTO [dbo].[ServiceAreaIdentifiers] ([ServiceAreaId] ,[IdentifierId] ,[RequiredFlag]) VALUES (5, (SELECT TOP 1 Id FROM Identifiers WHERE Code = 'MaternityNumber'), 1);
 END;
 Go
+

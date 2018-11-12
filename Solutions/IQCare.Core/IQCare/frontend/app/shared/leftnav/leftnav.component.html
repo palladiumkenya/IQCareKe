@@ -1,4 +1,4 @@
-<nav class="navbar navbar-default sidebar" role="navigation" style="background-color: #dddddd;">
+<!--<nav class="navbar navbar-default sidebar" role="navigation" style="background-color: #dddddd;">
     <div class="container-fluid">
         <div class="navbar-header">
             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-sidebar-navbar-collapse-1">
@@ -22,51 +22,51 @@
                     <a routerLink="/registration/register" routerLinkActive="active">New Client
                         <span style="font-size: 16px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-tags"></span>
                     </a>
-                </li>
+                </li>-->
 
-                <li *ngIf="isEnrolled">
-                    <a routerLink="/registration/home" routerLinkActive="active">Client Home
-                        <span style="font-size:16px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-tags"></span>
-                    </a>
-                </li>
+<li *ngIf="isEnrolled">
+    <a routerLink="/registration/home" routerLinkActive="active">Client Home
+        <span style="font-size:16px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-tags"></span>
+    </a>
+</li>
 
-                <li *ngIf="isPositive">
-                    <a routerLink="/hts/referral" routerLinkActive="active">REFERRAL
-                        <span style="font-size:16px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-tags"></span>
-                    </a>
-                </li>
+<li *ngIf="isPositive">
+    <a routerLink="/hts/referral" routerLinkActive="active">REFERRAL
+        <span style="font-size:16px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-tags"></span>
+    </a>
+</li>
 
-                <li *ngIf="isReferred">
-                    <a routerLink="/hts/linkage" routerLinkActive="active">LINKAGE
-                        <span style="font-size:16px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-tags"></span>
-                    </a>
-                </li>
+<li *ngIf="isReferred">
+    <a routerLink="/hts/linkage" routerLinkActive="active">LINKAGE
+        <span style="font-size:16px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-tags"></span>
+    </a>
+</li>
 
-                <li *ngIf="isPositive && hasConsentedPartnerListing">
-                    <a routerLink="/hts/pns" routerLinkActive="active">
-                        PNS
-                        <span style="font-size:16px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-tags"></span>
-                    </a>
-                </li>
+<li *ngIf="isPositive && hasConsentedPartnerListing">
+    <a routerLink="/hts/pns" routerLinkActive="active">
+        PNS
+        <span style="font-size:16px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-tags"></span>
+    </a>
+</li>
 
-                <li *ngIf="isEnrolled">
-                    <a routerLink="/hts/family" routerLinkActive="active">
-                        FAMILY
-                        <span style="font-size:16px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-tags"></span>
-                    </a>
-                </li>
+<li *ngIf="isEnrolled">
+    <a routerLink="/hts/family" routerLinkActive="active">
+        FAMILY
+        <span style="font-size:16px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-tags"></span>
+    </a>
+</li>
 
-                <li *ngIf="personId">
-                    <a routerLink="/hts/psmart" routerLinkActive="active">
-                        P-SMART
-                        <span style="font-size:16px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-tags"></span>
-                    </a>
-                </li>
+<li *ngIf="personId">
+    <a routerLink="/hts/psmart" routerLinkActive="active">
+        P-SMART
+        <span style="font-size:16px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-tags"></span>
+    </a>
+</li>
 
-                <!--<li>
+<!--<li>
                     <a target="_blank" (click)="goToLiveHapi()">LiveHapi</a>
                 </li>-->
-            </ul>
+<!--</ul>
         </div>
     </div>
-</nav>
+</nav>-->
