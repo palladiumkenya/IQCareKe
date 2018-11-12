@@ -1252,18 +1252,41 @@ namespace IQCare.Web.CCC.WebService
         [ScriptMethod(UseHttpGet = false, ResponseFormat = ResponseFormat.Json)]
         public ArrayList loadDiagnosis()
         {
+            LookupICDCodesListManager liclm = new LookupICDCodesListManager();
             var result = LookupLogic.GetLookUpItemViewByMasterName("ICD10");
-
+            var list = liclm.GetICDCodeList();
             JavaScriptSerializer parser = new JavaScriptSerializer();
             var diagnosis = parser.Deserialize<List<Entities.CCC.Encounter.PatientEncounter.KeyValue>>(result);
 
             ArrayList rows = new ArrayList();
 
+            list.ToList().ForEach(x => rows.Add(new string[]
+            {
+                x.Id +"~"+"mstICD" +"~"+  x.Name,
+                x.Name
+
+            }));
+        
+
+            //var data=list.Select(x => new string[]
+            //     {
+            //    x.Id +"~"+ x.Name,
+            //    x.Code+ "" + x.Name
+            //     }));
+            int number = rows.Count;
             for (int i = 0; i < diagnosis.Count; i++)
             {
-                string[] j = new string[2] { diagnosis[i].ItemId + "~" + diagnosis[i].DisplayName, diagnosis[i].DisplayName };
+                string[] j = new string[2] { diagnosis[i].ItemId + "~" +"lookupitem" + "~" + diagnosis[i].DisplayName, diagnosis[i].DisplayName };
                 rows.Add(j);
             }
+      
+            
+            
+            //for (int i=0;i<list.Count;i++)
+            //{
+            //    string[] licd = new string[2] { list[i].Id + "~" + list[i].Name,list[i].Code+ "" + list[i].Name};
+            //    rows.Add(licd);
+            //}
             return rows;
         }
 

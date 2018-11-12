@@ -126,6 +126,7 @@ namespace IQCare.Web.PMSCM
             {
                 DataSet XMLDS = new DataSet();
                 DataView theDV;
+                DataTable theStoreDT = new DataTable();
                 XMLDS.ReadXml(MapPath("..\\XMLFiles\\AllMasters.con"));
 
                 if (XMLDS == null)
@@ -144,11 +145,23 @@ namespace IQCare.Web.PMSCM
                 else
                 {
 
-                      theDV =new DataView( XMLDS.Tables["Mst_Store"]);
+                      DataTable dt= XMLDS.Tables["Mst_Store"];
+                    
+                    if (dt==null||dt.Rows.Count <=0)
+                    {
+                        IMasterList thePharmacyManager1 = (IMasterList)ObjectFactory.CreateInstance("BusinessProcess.SCM.BMasterList, BusinessProcess.SCM");
+                        
+                        XMLDS = thePharmacyManager1.GetStoreDetail();
+                        theDV = new DataView(XMLDS.Tables[0]);
+                        theDV.RowFilter = "(DeleteFlag =0 or DeleteFlag is null)";
+                        ///              theDV.Sort = "Name ASC";
+                        ///            
+                       theStoreDT = theDV.Table;
+
+                    }
                 }
-                theDV.RowFilter = "(DeleteFlag =0 or DeleteFlag is null)";
-                theDV.Sort = "Name ASC";
-                DataTable theStoreDT = theDV.ToTable();
+               
+              
                 theBindManager.BindCombo(ddlStore, theStoreDT, "Name", "Id");
             }
             catch (Exception err)
