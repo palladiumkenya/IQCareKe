@@ -9,6 +9,7 @@ CREATE VIEW [dbo].[patientEncounterView]
 AS
 SELECT 
 p.Id,
+e.Id PatientEncounterId,
 e.PatientMasterVisitId,
 e.EncounterTypeId,
 e.EncounterStartTime,
