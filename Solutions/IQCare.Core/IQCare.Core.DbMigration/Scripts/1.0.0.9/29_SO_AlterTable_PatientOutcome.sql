@@ -17,12 +17,11 @@ IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'FK_PatientOu
 BEGIN
 ALTER TABLE PatientOutcome DROP CONSTRAINT  [PK_PatientOutCome_Id]
 ALTER TABLE PatientOutcome DROP COLUMN Id
-END
-
 ALTER TABLE PatientOutcome ADD Id_new INT IDENTITY(1, 1) NOT NULL 
 EXEC sp_rename 'PatientOutcome.Id_new', 'Id', 'Column'
-
 ALTER TABLE PatientOutcome ADD CONSTRAINT FK_PatientOutcome_Id PRIMARY KEY(Id);
+END
+
 
 COMMIT TRANSACTION
 END
