@@ -25,6 +25,7 @@ export class HeiVisitDetailsComponent implements OnInit {
     @Input('formtype') formtype: string;
     @Input('visitDate') visitDate: string;
     @Input('visitType') visitType: string;
+    @Input('patientId') patientId: number;
     @Output() notify: EventEmitter<FormGroup> = new EventEmitter<FormGroup>();
 
     constructor(private _formBuilder: FormBuilder,
@@ -52,7 +53,7 @@ export class HeiVisitDetailsComponent implements OnInit {
 
         switch (this.formtype) {
             case 'hei':
-                this.getLookupItems('ANCVisitType', this.visitTypes);
+                this.getLookupItems('HEIVisitType', this.visitTypes);
                 break;
             case 'maternity':
                 this.getLookupItems('ANCVisitType', this.visitTypes);
@@ -77,7 +78,7 @@ export class HeiVisitDetailsComponent implements OnInit {
             default:
         }
 
-        this.getCurrentVisitDetails(5);
+        this.getCurrentVisitDetails(this.patientId);
 
 
         this.notify.emit(this.HeiVisitDetailsFormGroup);

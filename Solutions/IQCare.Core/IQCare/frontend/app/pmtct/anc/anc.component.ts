@@ -15,7 +15,6 @@ import {PatientReferral} from '../_models/PatientReferral';
 import {PatientPreventiveService} from '../_models/PatientPreventiveService';
 import {PatientProfile} from '../_models/patientProfile';
 import {PregnancyViewModel} from '../_models/viewModel/PregnancyViewModel';
-import {HIVTestingEmitter} from '../emitters/HIVTestingEmitter';
 import {FormArray, FormGroup} from '@angular/forms';
 import {LookupItemView} from '../../shared/_models/LookupItemView';
 import {PatientAppointment} from '../_models/PatientAppointmet';
