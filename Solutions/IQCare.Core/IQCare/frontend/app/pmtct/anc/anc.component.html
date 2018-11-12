@@ -25,7 +25,7 @@
                                             <app-mother-profile [patientId]="patientId" (notify)="OnMotherProfileNotify($event)"></app-mother-profile>
                                         </div>
                                         <div>
-                                            <button mat-raised-button color="accent" matStepperNext type="button">Next</button>
+                                            <button mat-raised-button color="accent" matStepperNext type="button" (click)="onNextClick()">Next</button>
                                         </div>
                                     </mat-step>
 

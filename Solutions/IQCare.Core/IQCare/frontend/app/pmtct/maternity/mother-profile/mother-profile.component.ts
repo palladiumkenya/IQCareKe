@@ -49,15 +49,16 @@ export class MotherProfileComponent implements OnInit {
 
     public onLMPDateChange() {
         this.dateLMP = this.motherProfileFormGroup.controls['dateLMP'].value;
+        const lmpDate = new Date(moment(this.motherProfileFormGroup.controls['dateLMP'].value).add(280, 'days').format(''));
+        this.motherProfileFormGroup.controls['dateEDD'].setValue(lmpDate);
 
-        this.motherProfileFormGroup.controls['dateEDD'].setValue(moment(this.motherProfileFormGroup.controls['dateLMP'].value,
-            'DD-MM-YYYY').add(280, 'days').format(''));
+        console.log(this.motherProfileFormGroup.controls['dateEDD'].value);
 
         const now = moment(new Date());
         const gestation = moment.duration(now.diff(this.dateLMP)).asWeeks().toFixed(1);
         this.motherProfileFormGroup.controls['gestation'].setValue(gestation);
 
-        this.motherProfileFormGroup.controls['dateEDD'].disable({ onlySelf: true });
+        // this.motherProfileFormGroup.controls['dateEDD'].disable({ onlySelf: false });
         console.log(moment(this.motherProfileFormGroup.controls['dateLMP'].value, 'DD-MM-YYYY').add(280, 'days'));
     }
 
