@@ -57,4 +57,10 @@ export class PersonHomeService {
             catchError(this.errorHandler.handleError<any[]>('getPatientType'))
         );
     }
+    public getPatientAllergies(): Observable<any> {
+        return this.http.get<any>(this.API_URL + '/api/PatientAllergy/').pipe(
+            tap(getPersonIdentifiers => this.errorHandler.log('get person identifiers options')),
+            catchError(this.errorHandler.handleError<any[]>('getPersonIdentifiers'))
+        );
+    }
 }

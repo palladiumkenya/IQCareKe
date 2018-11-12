@@ -243,15 +243,21 @@
                                                 <span class="timeline-title">
                                                     Allergies
                                                 </span>
-                                                <p class="timeline-datetime">
-                                                    <small class="text-muted">
-                                                        <i class="glyphicon glyphicon-time">
-                                                        </i>
-                                                        <span class="timeline-date">Today</span>
-                                                        -
-                                                        <span class="timeline-time">3:10</span>
-                                                    </small>
-                                                </p>
+                                                <div *ngIf="personAllergies">
+                                                    <p class="timeline-datetime"  *ngFor="let allergy of personAllergies">
+                                                        <small class="text-muted">
+                                                            <i class="glyphicon glyphicon-time">
+                                                            </i>
+                                                            <span class="timeline-date">Test.... </span>
+                                                            -
+                                                            <span class="timeline-time">Test</span>
+                                                        </small>
+                                                    </p>
+                                                </div>
+                                                <div *ngIf="!personAllergies">
+                                                    <p>No Allergies..</p>
+                                                </div>
+
                                             </div>
                                             <div class="timeline-body">
                                                 <p>Outdoor visit at California State Route 85 with John Boltana &amp;
