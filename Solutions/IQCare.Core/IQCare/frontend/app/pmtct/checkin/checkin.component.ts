@@ -29,7 +29,7 @@ export class CheckinComponent implements OnInit {
         this.section = data.section;
         switch (this.section) {
             case 'hei':
-                this.getLookupItems('ANCVisitType', this.visitTypes);
+                this.getLookupItems('HEIVisitType', this.visitTypes);
                 break;
             case 'maternity':
                 this.getLookupItems('ANCVisitType', this.visitTypes);

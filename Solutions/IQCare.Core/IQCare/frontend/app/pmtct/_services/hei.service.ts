@@ -131,4 +131,18 @@ export class HeiService {
             catchError(this.errorHandler.handleError<any>('Error saving laborder'))
         );
     }
+
+    public getPatientById(patientId: number): Observable<any> {
+        return this.http.get<any>(this.API_URL + '/api/Register/GetPatientById/' + patientId).pipe(
+            tap(getPatientById => this.errorHandler.log(`successfully fetched patient`)),
+            catchError(this.errorHandler.handleError<any>('Getting patient'))
+        );
+    }
+
+    public saveOrdVisit(): Observable<any> {
+        return this.http.post<any>(this.API_URL + '/', JSON.stringify(''), httpOptions).pipe(
+            tap(saveOrdVisit => this.errorHandler.log(`successfully added ordVisit`)),
+            catchError(this.errorHandler.handleError<any>('Error saving ordVisit'))
+        );
+    }
 }
