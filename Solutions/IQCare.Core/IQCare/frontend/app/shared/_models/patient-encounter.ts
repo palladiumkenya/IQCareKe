@@ -1,6 +1,7 @@
 export interface PatientEncounter {
     Id?: number;
     PatientMasterVisitId?: number;
+    PatientEncounterId?: number;
     EncounterTypeId?: number;
     EncounterStartTime?: Date;
     EncounterEndTime?: Date;
@@ -10,5 +11,4 @@ export interface PatientEncounter {
     Encounter?: string;
     UserName?: string;
     DeleteFlag?: boolean;
-
 }

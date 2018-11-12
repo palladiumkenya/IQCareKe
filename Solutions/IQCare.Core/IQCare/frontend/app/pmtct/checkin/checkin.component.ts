@@ -37,6 +37,9 @@ export class CheckinComponent implements OnInit {
             case 'pnc':
                 this.getLookupItems('PNCVisitType', this.visitTypes);
                 break;
+            case 'anc':
+                this.getLookupItems('ANCVisitType', this.visitTypes);
+                break;
             default:
         }
     }

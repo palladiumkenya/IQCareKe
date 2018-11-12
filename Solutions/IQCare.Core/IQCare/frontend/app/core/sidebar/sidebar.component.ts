@@ -18,7 +18,6 @@ export class SidebarComponent implements OnInit {
         this.selectedService = localStorage.getItem('selectedService');
 
         store.pipe(select('app')).subscribe(res => {
-            console.log(res);
             if (res['consent']) {
                 this.consent = res['consent'];
             }

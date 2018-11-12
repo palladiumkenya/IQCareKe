@@ -25,6 +25,7 @@ export class HeiVisitDetailsComponent implements OnInit {
     @Input('formtype') formtype: string;
     @Input('visitDate') visitDate: string;
     @Input('visitType') visitType: string;
+
     @Output() notify: EventEmitter<FormGroup> = new EventEmitter<FormGroup>();
 
     constructor(private _formBuilder: FormBuilder,
@@ -71,9 +72,7 @@ export class HeiVisitDetailsComponent implements OnInit {
             default:
         }
 
-        this.getCurrentVisitDetails(5);
-
-
+        this.getCurrentVisitDetails(this.patientId);
         this.notify.emit(this.HeiVisitDetailsFormGroup);
     }
 
@@ -82,6 +81,7 @@ export class HeiVisitDetailsComponent implements OnInit {
             .subscribe(
                 p => {
                     const visit = p;
+                    console.log(p);
                     if (visit && visit.visitNumber > 1) {
                         const Item = this.visitTypes.filter(x => x.itemName.includes('Follow Up'));
                         this.HeiVisitDetailsFormGroup.get('visitType').patchValue(Item[0].itemId);

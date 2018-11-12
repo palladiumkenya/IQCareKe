@@ -1,14 +1,14 @@
-import {Component, NgZone, OnInit, ViewChild} from '@angular/core';
-import {MatDialog, MatDialogConfig, MatPaginator, MatSort, MatTableDataSource} from '@angular/material';
-import {Subscription} from 'rxjs/index';
-import {ActivatedRoute, Router} from '@angular/router';
-import {CheckinComponent} from '../../pmtct/checkin/checkin.component';
-import {PatientMasterVisitEncounter} from '../../pmtct/_models/PatientMasterVisitEncounter';
-import {SnotifyService} from 'ng-snotify';
-import {NotificationService} from '../_services/notification.service';
-import {LookupItemService} from '../_services/lookup-item.service';
-import {PatientEncounter} from '../_models/patient-encounter';
-import {EncounterService} from '../_services/encounter.service';
+import { Component, NgZone, OnInit, ViewChild } from '@angular/core';
+import { MatDialog, MatDialogConfig, MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
+import { Subscription } from 'rxjs/index';
+import { ActivatedRoute, Router } from '@angular/router';
+import { CheckinComponent } from '../../pmtct/checkin/checkin.component';
+import { PatientMasterVisitEncounter } from '../../pmtct/_models/PatientMasterVisitEncounter';
+import { SnotifyService } from 'ng-snotify';
+import { NotificationService } from '../_services/notification.service';
+import { LookupItemService } from '../_services/lookup-item.service';
+import { PatientEncounter } from '../_models/patient-encounter';
+import { EncounterService } from '../_services/encounter.service';
 
 
 @Component({
@@ -37,13 +37,13 @@ export class PatientEncounterComponent implements OnInit {
     dataSource = new MatTableDataSource(this.encounterDataTable);
 
     constructor(private dialog: MatDialog,
-                private route: ActivatedRoute,
-                public zone: NgZone,
-                private router: Router,
-                private snotifyService: SnotifyService,
-                private notificationService: NotificationService,
-                private lookupItemService: LookupItemService,
-                private encounterService: EncounterService) {
+        private route: ActivatedRoute,
+        public zone: NgZone,
+        private router: Router,
+        private snotifyService: SnotifyService,
+        private notificationService: NotificationService,
+        private lookupItemService: LookupItemService,
+        private encounterService: EncounterService) {
 
     }
 
@@ -59,7 +59,7 @@ export class PatientEncounterComponent implements OnInit {
 
         const encounterName = this.serviceName.toLowerCase() + '-encounter';
         this.getLookupItems('EncounterType', this.encounterTypes, '' + encounterName + '');
-        }
+    }
 
     matCheckIn() {
         const dialogConfig = new MatDialogConfig();
@@ -80,7 +80,7 @@ export class PatientEncounterComponent implements OnInit {
                 }
 
                 const maternityEncounter = this.encounterTypes.filter(obj => obj.itemName ==
-                    '' + this.serviceName.toLowerCase()  + '-encounter');
+                    '' + this.serviceName.toLowerCase() + '-encounter');
                 this.encounterTypeId = maternityEncounter[0].itemId;
 
                 const patientMasterVisitEncounter: PatientMasterVisitEncounter = {
@@ -120,21 +120,24 @@ export class PatientEncounterComponent implements OnInit {
         this.patientEncounterTypes = this.lookupItemService.getPatientEncounters(patientId, encounterTypeId)
             .subscribe(
                 p => {
-                        console.log('patient encounters');
-                        console.log(p);
-                        if (p.length == 0) { return ; }
+                    // console.log('patient encounters');
+                    console.log(p);
+                    if (p.length == 0) { return; }
 
-                        for (let i = 0; i < p.length; i++) {
-                            this.encounterDataTable.push({
-                                Id: p[i].id,
-                                PatientId: p[i].patientId,
-                                VisitNumber: p[i].visitNumber,
-                                EncounterStartTime: p[i].encounterStartTime,
-                                EncounterEndTime: p[i].encounterEndTime,
-                                Encounter: p[i].encounter
-                            });
-                        }
-                        console.log(this.encounterDataTable);
+                    for (let i = 0; i < p.length; i++) {
+                        this.encounterDataTable.push({
+                            Id: p[i].id,
+                            PatientId: p[i].patientId,
+                            VisitNumber: p[i].visitNumber,
+                            EncounterStartTime: p[i].encounterStartTime,
+                            EncounterEndTime: p[i].encounterEndTime,
+                            Encounter: p[i].encounter,
+                            PatientMasterVisitId: p[i].patientMasterVisitId,
+                            EncounterTypeId: p[i].encounterTypeId,
+                            PatientEncounterId: p[i].patientEncounterId,
+                        });
+                    }
+                    // console.log(this.encounterDataTable);
                     this.dataSource = new MatTableDataSource(this.encounterDataTable);
                     this.dataSource.paginator = this.paginator;
                 },
@@ -155,20 +158,36 @@ export class PatientEncounterComponent implements OnInit {
                         _options.push({ 'itemId': options[i]['itemId'], 'itemName': options[i]['itemName'] });
 
                         if (options[i]['itemName'] == '' + encounterName + '') {
-                            this.encounterTypeId =  options[i]['itemId'];
+                            this.encounterTypeId = options[i]['itemId'];
                         }
                     }
-                    console.log(this.encounterTypeId);
+                    // console.log(this.encounterTypeId);
                     this.getPatientEncounters(this.patientId, this.encounterTypeId);
                 },
                 (err) => {
                     this.snotifyService.error('Error editing encounter ' + err, 'Encounter', this.notificationService.getConfig());
                 },
                 () => {
-                    console.log(this.lookupItems$);
+                    // console.log(this.lookupItems$);
                 });
     }
 
-   public onEdit(patient: number, patientMasterVisitId: number) {}
-   public onView(patient: number, patientMasterVisitId: number) {}
+    public onEdit(selectedElement: object, serviceArea: number) {
+        /*localStorage.setItem('onEdit', '1');
+        localStorage.setItem('patientMasterVisitId', selectedElement['PatientMasterVisitId']);
+        localStorage.setItem('encounterTypeId', selectedElement['EncounterTypeId']);*/
+        console.log(selectedElement);
+
+        this.zone.run(() => {
+            this.router.navigate(['/pmtct/' + this.serviceName.toLowerCase() + '/update'
+                + '/' + this.patientId
+                + '/' + this.personId
+                + '/' + this.serviceAreaId
+                + '/' + selectedElement['PatientMasterVisitId']
+                + '/' + selectedElement['PatientEncounterId']],
+                { relativeTo: this.route });
+        });
+    }
+
+    public onView(patient: number, patientMasterVisitId: number) { }
 }
