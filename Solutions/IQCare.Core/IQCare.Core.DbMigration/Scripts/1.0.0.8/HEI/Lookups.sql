@@ -386,6 +386,25 @@ If Not Exists(Select 1 From LookupMasterItem where LookupMasterId=(SELECT TOP 1 
 If Not Exists(Select 1 From LookupMasterItem where LookupMasterId=(SELECT TOP 1 Id FROM LookupMaster WHERE Name='BloodLoss') and LookupItemId=(SELECT TOP 1 Id FROM LookupItem WHERE Name='Heavy')) Begin Insert Into LookupMasterItem(LookupMasterId ,LookupItemId,DisplayName, OrdRank)VALUES((SELECT TOP 1 Id FROM LookupMaster WHERE Name='BloodLoss'),(SELECT TOP 1 Id FROM LookupItem WHERE Name='Heavy'),'Heavy',3) end;
 If Not Exists(Select 1 From LookupMasterItem where LookupMasterId=(SELECT TOP 1 Id FROM LookupMaster WHERE Name='BloodLoss') and LookupItemId=(SELECT TOP 1 Id FROM LookupItem WHERE Name='None')) Begin Insert Into LookupMasterItem(LookupMasterId ,LookupItemId,DisplayName, OrdRank)VALUES((SELECT TOP 1 Id FROM LookupMaster WHERE Name='BloodLoss'),(SELECT TOP 1 Id FROM LookupItem WHERE Name='None'),'None',4) end;
 
+-- DrugAdministrationANC
+If Not Exists(Select 1 From LookupMaster where Name='DrugAdministrationANC') Begin INSERT INTO LookupMaster (Name, DisplayName, DeleteFlag) VALUES ('DrugAdministrationANC','DrugAdministrationANC',0); End
+
+-- LOOKUPITEM
+If Not Exists(Select 1 From LookupItem where Name='On ARV before 1st ANC Visit') Begin INSERT INTO LookupItem (Name, DisplayName, DeleteFlag) VALUES ('On ARV before 1st ANC Visit','On ARV before 1st ANC Visit',0); End
+If Not Exists(Select 1 From LookupItem where Name='Started HAART in ANC') Begin INSERT INTO LookupItem (Name, DisplayName, DeleteFlag) VALUES ('Started HAART in ANC','Started HAART in ANC',0); End
+If Not Exists(Select 1 From LookupItem where Name='Cotrimoxazole') Begin INSERT INTO LookupItem (Name, DisplayName, DeleteFlag) VALUES ('Cotrimoxazole','Cotrimoxazole',0); End
+If Not Exists(Select 1 From LookupItem where Name='AZT for the baby dispensed') Begin INSERT INTO LookupItem (Name, DisplayName, DeleteFlag) VALUES ('AZT for the baby dispensed','AZT for the baby dispensed',0); End
+If Not Exists(Select 1 From LookupItem where Name='NVP for baby dispensed') Begin INSERT INTO LookupItem (Name, DisplayName, DeleteFlag) VALUES ('NVP for baby dispensed','NVP for baby dispensed',0); End
+
+--LOOKUPMASTERITEM
+If Not Exists(Select 1 From LookupMasterItem where LookupMasterId=(SELECT TOP 1 Id FROM LookupMaster WHERE Name='DrugAdministrationANC') and LookupItemId=(SELECT TOP 1 Id FROM LookupItem WHERE Name='On ARV before 1st ANC Visit')) Begin Insert Into LookupMasterItem(LookupMasterId ,LookupItemId,DisplayName, OrdRank)VALUES((SELECT TOP 1 Id FROM LookupMaster WHERE Name='DrugAdministrationANC'),(SELECT TOP 1 Id FROM LookupItem WHERE Name='On ARV before 1st ANC Visit'),'On ARV before 1st ANC Visit',1) end;
+If Not Exists(Select 1 From LookupMasterItem where LookupMasterId=(SELECT TOP 1 Id FROM LookupMaster WHERE Name='DrugAdministrationANC') and LookupItemId=(SELECT TOP 1 Id FROM LookupItem WHERE Name='Started HAART in ANC')) Begin Insert Into LookupMasterItem(LookupMasterId ,LookupItemId,DisplayName, OrdRank)VALUES((SELECT TOP 1 Id FROM LookupMaster WHERE Name='DrugAdministrationANC'),(SELECT TOP 1 Id FROM LookupItem WHERE Name='Started HAART in ANC'),'Started HAART in ANC',2) end;
+If Not Exists(Select 1 From LookupMasterItem where LookupMasterId=(SELECT TOP 1 Id FROM LookupMaster WHERE Name='DrugAdministrationANC') and LookupItemId=(SELECT TOP 1 Id FROM LookupItem WHERE Name='Cotrimoxazole')) Begin Insert Into LookupMasterItem(LookupMasterId ,LookupItemId,DisplayName, OrdRank)VALUES((SELECT TOP 1 Id FROM LookupMaster WHERE Name='DrugAdministrationANC'),(SELECT TOP 1 Id FROM LookupItem WHERE Name='Cotrimoxazole'),'Cotrimoxazole',3) end;
+If Not Exists(Select 1 From LookupMasterItem where LookupMasterId=(SELECT TOP 1 Id FROM LookupMaster WHERE Name='DrugAdministrationANC') and LookupItemId=(SELECT TOP 1 Id FROM LookupItem WHERE Name='AZT for the baby dispensed')) Begin Insert Into LookupMasterItem(LookupMasterId ,LookupItemId,DisplayName, OrdRank)VALUES((SELECT TOP 1 Id FROM LookupMaster WHERE Name='DrugAdministrationANC'),(SELECT TOP 1 Id FROM LookupItem WHERE Name='AZT for the baby dispensed'),'AZT for the baby dispensed',4) end;
+If Not Exists(Select 1 From LookupMasterItem where LookupMasterId=(SELECT TOP 1 Id FROM LookupMaster WHERE Name='DrugAdministrationANC') and LookupItemId=(SELECT TOP 1 Id FROM LookupItem WHERE Name='NVP for baby dispensed')) Begin Insert Into LookupMasterItem(LookupMasterId ,LookupItemId,DisplayName, OrdRank)VALUES((SELECT TOP 1 Id FROM LookupMaster WHERE Name='DrugAdministrationANC'),(SELECT TOP 1 Id FROM LookupItem WHERE Name='NVP for baby dispensed'),'NVP for baby dispensed',5) end;
+
+
+
 
 
 
