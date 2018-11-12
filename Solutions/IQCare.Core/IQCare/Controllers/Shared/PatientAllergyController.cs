@@ -19,8 +19,8 @@ namespace IQCare.Controllers.Shared
         {
             _mediator = mediator ?? throw new ArgumentNullException(nameof(mediator));
         }
-        [HttpGet]
-        public async Task<IActionResult> Post([FromBody] AddAllergiesCommand addAllergyCommand)
+        [HttpPost("AddAllergy")]
+        public async Task<IActionResult> AddAllergy([FromBody] AddAllergiesCommand addAllergyCommand)
         {
             var response = await _mediator.Send(addAllergyCommand, Request.HttpContext.RequestAborted);
 
@@ -30,6 +30,14 @@ namespace IQCare.Controllers.Shared
             }
             return BadRequest(response);
         }
-        
+        [HttpGet("GetPatientAllergy")]
+        public async Task<IActionResult> GetPatientAllergy(int PatientId)
+        {
+            var results = await _mediator.Send(new GetPatientAllergies() { PatientId = PatientId }, HttpContext.RequestAborted);
+            if (results.IsValid)
+                return Ok(results.Value);
+            return BadRequest(results);
+        }
+
     }
 }

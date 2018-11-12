@@ -14,6 +14,7 @@ namespace IQCare.Common.Infrastructure.MapperProfiles
         public PatientAllergiesMapperProfile()
         {
             CreateMap<PatientAllergy, AddAllergiesCommand>().ReverseMap();
+            CreateMap<PatientAllergy, PatientAllergiesViewModel>().ReverseMap();
         }
     }
 }

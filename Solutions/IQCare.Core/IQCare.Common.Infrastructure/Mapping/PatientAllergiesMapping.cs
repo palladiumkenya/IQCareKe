@@ -7,11 +7,11 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace IQCare.Common.Infrastructure.Mapping
 {
-    class PatientAllergiesMapping : IEntityTypeConfiguration<PatientAllergy>
+    public class PatientAllergiesMapping : IEntityTypeConfiguration<PatientAllergy>
     {
         public void Configure(EntityTypeBuilder<PatientAllergy> builder)
         {
-            builder.ToTable(nameof(PatientAllergy)).HasKey(x => x.Id);
+            builder.ToTable("PatientAllergies").HasKey(x => x.Id);
         }
     }
 }
