@@ -663,9 +663,9 @@ export class AncComponent implements OnInit, OnDestroy {
     }
 
     log() {
-        console.log(this.HaartProphylaxisMatFormGroup);
-        console.log(this.chronicIllnessData);
-        console.log(this.chronicIllnessData.length);
+        console.log(this.PreventiveServiceMatFormGroup);
+       // console.log(this.chronicIllnessData);
+       // console.log(this.chronicIllnessData.length);
         /* for (let i = 0; i < this.counselling_data.length; i++) {
 
             console.log(this.counselling_data[i]['counsellingTopic']) ;
