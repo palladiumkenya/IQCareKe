@@ -7,6 +7,7 @@ namespace IQCare.Common.Core.Models
     {
         [Key]
         public int Id { get; set; }
+        public int PatientEncounterId { get; set; }
         public int PatientMasterVisitId { get; set; }
         public int EncounterTypeId { get;set;}
         public DateTime EncounterStartTime { get; set; }
