@@ -7,6 +7,8 @@ using MediatR;
 using IQCare.Records.BusinessProcess.Command;
 using System.Threading.Tasks;
 using System.Threading;
+using IQCare.Library;
+
 namespace IQCare.Records.BusinessProcess.CommandHandlers.Lookup
 {
     public class SearchPersonContactListCommandHandler : IRequestHandler<SearchPersonContactListCommand, Result<SearchResponse>>

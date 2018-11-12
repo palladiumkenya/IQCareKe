@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using IQCare.Common.BusinessProcess.Commands.Encounter;
 using IQCare.Common.Core.Models;
 using IQCare.Common.Infrastructure;
+using IQCare.Library;
 using MediatR;
 
 namespace IQCare.Common.BusinessProcess.CommandHandlers.Encounter

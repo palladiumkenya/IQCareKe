@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using IQCare.Library;
 using MediatR;
 
 namespace IQCare.Records.BusinessProcess.Command.Lookup

@@ -3,6 +3,7 @@ using MediatR;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using IQCare.Library;
 
 namespace IQCareRecords.Common.BusinessProcess.Command
 {

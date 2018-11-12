@@ -6,6 +6,7 @@ using IQCare.Common.Core.Models;
 using IQCare.HTS.BusinessProcess.Commands;
 using IQCare.HTS.Core.Model;
 using IQCare.HTS.Infrastructure;
+using IQCare.Library;
 using MediatR;
 
 namespace IQCare.HTS.BusinessProcess.CommandHandlers

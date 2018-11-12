@@ -7,6 +7,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Serilog;
 using System;
+using IQCare.Library;
 using Microsoft.EntityFrameworkCore;
 
 namespace IQCare.Common.BusinessProcess.CommandHandlers.Refferal

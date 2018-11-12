@@ -12,9 +12,10 @@
                         <span class="">{{person.patientType}} Patient</span>
                     </div>
                     <div class="header-information">
-                        <a (click)="onEdit()">
-                            <mat-icon><i className="material-icons">mode_edit</i></mat-icon>
-
+                        <a (click)="onEdit()" style="cursor: pointer;">
+                            <mat-icon>
+                                <i className="material-icons">mode_edit</i>
+                            </mat-icon>
                         </a>
                     </div>
                 </div>
@@ -248,8 +249,8 @@
 
                                             </div>
                                             <div class="timeline-body">
-                                                    <app-chronich-illness>                                                  
-                                                    </app-chronich-illness>
+                                                <app-chronich-illness>
+                                                </app-chronich-illness>
                                             </div>
                                         </div>
                                         <div class="timeline-panel">

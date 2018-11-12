@@ -1,12 +1,9 @@
-﻿using IQCare.Common.Core.Models;
+﻿using IQCare.Library;
 using MediatR;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace IQCareRecords.Common.BusinessProcess.Command
 {
-   public class PersonIdentifierCommand:IRequest<Result<AddPersonIdentifierResponse>>
+    public class PersonIdentifierCommand:IRequest<Result<AddPersonIdentifierResponse>>
     {
         public int PersonId { get; set; }
 
