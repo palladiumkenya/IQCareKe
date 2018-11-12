@@ -1,12 +1,12 @@
-import {Component, EventEmitter, OnInit, Output} from '@angular/core';
-import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
-import {NotificationService} from '../../../shared/_services/notification.service';
-import {SnotifyService} from 'ng-snotify';
-import {LookupItemService} from '../../../shared/_services/lookup-item.service';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { NotificationService } from '../../../shared/_services/notification.service';
+import { SnotifyService } from 'ng-snotify';
+import { LookupItemService } from '../../../shared/_services/lookup-item.service';
 import * as moment from 'moment';
-import {MaternityService} from '../../_services/maternity.service';
+import { MaternityService } from '../../_services/maternity.service';
 import { Input } from '@angular/core';
-import {Subscription} from 'rxjs/index';
+import { Subscription } from 'rxjs/index';
 
 @Component({
     selector: 'app-mother-profile',
@@ -23,22 +23,22 @@ export class MotherProfileComponent implements OnInit {
     @Output() notify: EventEmitter<FormGroup> = new EventEmitter<FormGroup>();
 
     constructor(private _formBuilder: FormBuilder,
-                private _lookupItemService: LookupItemService,
-                private snotifyService: SnotifyService,
-                private notificationService: NotificationService,
-                private _matServices: MaternityService) {
+        private _lookupItemService: LookupItemService,
+        private snotifyService: SnotifyService,
+        private notificationService: NotificationService,
+        private _matServices: MaternityService) {
     }
 
     ngOnInit() {
         this.motherProfileFormGroup = this._formBuilder.group({
             dateLMP: new FormControl('', [Validators.required]),
             dateEDD: new FormControl('', [Validators.required]),
-           // ancVisitNumber: new FormControl('', [Validators.required]),
+            // ancVisitNumber: new FormControl('', [Validators.required]),
             gestation: new FormControl('', [Validators.required]),
             ageAtMenarche: new FormControl('', [Validators.required]),
             parityOne: new FormControl('', [Validators.required]),
-            parityTwo:  new FormControl('', [Validators.required]),
-            gravidae:  new FormControl('', [Validators.required]),
+            parityTwo: new FormControl('', [Validators.required]),
+            gravidae: new FormControl('', [Validators.required]),
         });
 
         this.getPregnancyDetails(this.patientId);
@@ -54,7 +54,7 @@ export class MotherProfileComponent implements OnInit {
             'DD-MM-YYYY').add(280, 'days').format(''));
 
         const now = moment(new Date());
-        const gestation = moment.duration(now.diff( this.dateLMP)).asWeeks().toFixed(1);
+        const gestation = moment.duration(now.diff(this.dateLMP)).asWeeks().toFixed(1);
         this.motherProfileFormGroup.controls['gestation'].setValue(gestation);
 
         this.motherProfileFormGroup.controls['dateEDD'].disable({ onlySelf: true });
@@ -64,12 +64,12 @@ export class MotherProfileComponent implements OnInit {
     public onParityTwoChange() {
         const parityOne: number = this.motherProfileFormGroup.controls['parityOne'].value;
         const parityTwo: number = this.motherProfileFormGroup.controls['parityTwo'].value;
-        const gravidae: number = parseInt(parityOne.toString(), 10 ) + parseInt(String(parityTwo), 10);
+        const gravidae: number = parseInt(parityOne.toString(), 10) + parseInt(String(parityTwo), 10);
         this.motherProfileFormGroup.controls['gravidae'].setValue(gravidae + parseInt('1', 10));
         this.motherProfileFormGroup.controls['gravidae'].disable({ onlySelf: true });
     }
 
-    public  getPregnancyDetails(patientId: number) {
+    public getPregnancyDetails(patientId: number) {
         this.motherProfile = this._matServices.getPregnancyDetails(patientId)
             .subscribe(
                 p => {
@@ -97,8 +97,10 @@ export class MotherProfileComponent implements OnInit {
         this.visitDetails = this._matServices.getCurrentVisitDetails(patientId)
             .subscribe(
                 p => {
-                    console.log('agetmenarche' + p.ageMenarche)
-                    this.motherProfileFormGroup.controls['ageAtMenarche'].setValue(p.ageMenarche);
+                    if (p) {
+                        console.log('agetmenarche' + p.ageMenarche);
+                        this.motherProfileFormGroup.controls['ageAtMenarche'].setValue(p.ageMenarche);
+                    }
                 },
                 (err) => {
                     this.snotifyService.error('Error fetching visit details' + err,
