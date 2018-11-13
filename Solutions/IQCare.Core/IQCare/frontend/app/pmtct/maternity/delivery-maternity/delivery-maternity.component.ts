@@ -85,10 +85,14 @@ export class DeliveryMaternityComponent implements OnInit {
     public onDeliveryDateChange() {
         this.deliveryDate = this.deliveryFormGroup.controls['deliveryDate'].value;
 
+       // const now = moment(new Date());
+        const now =  moment(this.deliveryDate) ;
+        const gestation = moment.duration(now.diff(this.dateLMP)).asWeeks().toFixed(1);
+        this.deliveryFormGroup.controls['gestationAtBirth'].setValue(gestation);
 
-        const now = moment(new Date());
-        const gestation = moment(this.deliveryDate).diff(this.dateLMP, 'weeks').toFixed(1);
-        this.deliveryFormGroup.controls['gestationAtBirth'].setValue(gestation + ' weeks');
+
+      //  const gestation = moment(this.deliveryDate).diff(this.dateLMP, 'weeks').toFixed(1);
+      //  this.deliveryFormGroup.controls['gestationAtBirth'].setValue(gestation + ' weeks');
 
         this.deliveryFormGroup.controls['gestationAtBirth'].disable({ onlySelf: true });
     }
@@ -123,9 +127,11 @@ export class DeliveryMaternityComponent implements OnInit {
         this.motherProfile = this._matService.getPregnancyDetails(patientId)
             .subscribe(
                 p => {
+                    if (p) {
+                        this.dateLMP = p.lmp;
+                        console.log('lmp date' + this.dateLMP);
+                    }
 
-                    this.dateLMP = p.lmp;
-                    console.log('lmp date' + this.dateLMP);
                 },
                 (err) => {
                     console.log(err);
