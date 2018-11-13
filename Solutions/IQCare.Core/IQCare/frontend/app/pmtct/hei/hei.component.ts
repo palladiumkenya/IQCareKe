@@ -304,7 +304,7 @@ export class HeiComponent implements OnInit {
                     Id: 0,
                     PatientId: this.patientId,
                     PatientMasterVisitId: this.patientMasterVisitId,
-                    Period: this.immunization_table_data[i][j]['immunizationPeriodId'],
+                    PeriodId: this.immunization_table_data[i][j]['immunizationPeriodId'],
                     Vaccine: this.immunization_table_data[i][j]['immunizationGivenId'],
                     VaccineStage: this.immunization_table_data[i][j]['immunizationPeriodId'],
                     DeleteFlag: 0,
@@ -326,19 +326,22 @@ export class HeiComponent implements OnInit {
         console.log('vaccine');
         console.log(this.vaccination);
 
-        for (let i = 0; i < this.milestoneHistoryData.length; i++) {
-            this.milestone.push({
-                Id: 0,
-                PatientId: this.patientId,
-                PatientMasterVisitId: this.patientMasterVisitId,
-                TypeAssessed: this.milestoneHistoryData[i].milestoneId,
-                Achieved: this.milestoneHistoryData[i].achievedId,
-                Status: this.milestoneHistoryData[i].statusId,
-                Comment: this.milestoneHistoryData[i].comment,
-                CreateDate: new Date(),
-                CreatedBy: this.userId,
-                DeleteFlag: 0
-            });
+        for (let i = 0; i < this.milestone_table_data.length; i++) {
+            for (const j = 0; j < this.milestone_table_data.length; i++) {
+                this.milestone.push({
+                    Id: 0,
+                    PatientId: this.patientId,
+                    PatientMasterVisitId: this.patientMasterVisitId,
+                    TypeAssessed: this.milestoneHistoryData[i].milestoneId,
+                    Achieved: this.milestoneHistoryData[i].achievedId,
+                    Status: this.milestoneHistoryData[i].statusId,
+                    Comment: this.milestoneHistoryData[i].comment,
+                    CreateDate: new Date(),
+                    CreatedBy: this.userId,
+                    DeleteFlag: 0
+                });
+            }
+
         }
 
         const patientIcf = {
@@ -474,7 +477,8 @@ export class HeiComponent implements OnInit {
         forkJoin([
           //  heiOrdVisit,
             heiVisitDetails,
-            heiImmunization
+            heiImmunization,
+            heiMilestone
         ])
             .subscribe(
                 (result) => {

@@ -8,7 +8,7 @@ namespace IQCare.PMTCT.Infrastructure.Mapping.HEI
     {
         void IEntityTypeConfiguration<HEIMilestone>.Configure(EntityTypeBuilder<HEIMilestone> builder)
         {
-            builder.ToTable("HeiMilestone")
+            builder.ToTable("PatientMilestone")
                 .HasKey(c => c.Id);
         }
     }
