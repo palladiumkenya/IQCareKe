@@ -72,6 +72,9 @@ export class HeiComponent implements OnInit {
     chestXrayOptions: LookupItemView[] = [];
     tbScreeningOptions: LookupItemView[] = [];
     iptOutcomeOptions: LookupItemView[] = [];
+    pcrLabTest: any;
+    viralLoadLabTest: any;
+    antibodyLabTest: any;
 
     isLinear: boolean = false;
     deliveryMatFormGroup: FormArray;
@@ -229,6 +232,21 @@ export class HeiComponent implements OnInit {
             }
         );
 
+        this.heiService.getHeiLabTests().subscribe(
+            (result) => {
+                const labTestsList = result['labTestsList'];
+                for (let i = 0; i < labTestsList.length; i++) {
+                    const key = labTestsList[i]['key'];
+                    if (labTestsList[i]['key'] == 'PCR') {
+                        this.pcrLabTest = labTestsList[i]['value'];
+                    } else if (labTestsList[i]['key'] == 'Viral Load') {
+                        this.viralLoadLabTest = labTestsList[i]['value'];
+                    } else if (labTestsList[i]['key'] == 'HIV Rapid Test') {
+                        this.antibodyLabTest = labTestsList[i]['value'];
+                    }
+                }
+            }
+        );
     }
 
     onDeliveryNotify(formGroup: FormGroup): void {
@@ -252,17 +270,9 @@ export class HeiComponent implements OnInit {
         this.milestone_table_data.push(formGroup['data']);
     }
 
-    onMilsetoneTableData(milestoneData: MilestoneData[]): void {
-        this.milestoneHistoryData.push(milestoneData);
-    }
-
     onImmunizationHistory(formGroup: Object): void {
         this.immunizationHistoryFormGroup.push(formGroup['form']);
         this.immunization_table_data.push(formGroup['data']);
-    }
-
-    onImmunizationHistoryData(formData: ImmunizationHistoryTableData[]): void {
-        this.immunizationHistoryTableData.push(formData);
     }
 
     onTbAssessment(formGroup: FormGroup) {
@@ -282,10 +292,6 @@ export class HeiComponent implements OnInit {
     }
 
     onCompleteEncounter() {
-        console.log(this.deliveryMatFormGroup.value);
-        console.log(this.visitDetailsFormGroup.value);
-        console.log(this.hivTestingFormGroup);
-
         for (let i = 0; i < this.immunizationHistoryTableData.length; i++) {
             this.vaccination.push({
                 Id: 0,
@@ -372,13 +378,38 @@ export class HeiComponent implements OnInit {
         };
 
         for (let i = 0; i < this.hivTestingFormGroup.length; i++) {
+            let labTestId;
+            let latTestNotes;
+            let labTestName;
+            for (let j = 0; j < this.hivTestingFormGroup[i].length; j++) {
+                console.log(this.hivTestingFormGroup[i][j]);
+                console.log(this.pcrLabTest);
+                if (
+                    this.hivTestingFormGroup[i][j]['testtype']['itemName'] == '1st DNA PCR'
+                    || this.hivTestingFormGroup[i][j]['testtype']['itemName'] == '2nd DNA PCR'
+                    || this.hivTestingFormGroup[i][j]['testtype']['itemName'] == '3rd DNA PCR'
+                    || this.hivTestingFormGroup[i][j]['testtype']['itemName'] == 'Repeat confirmatory PCR (for +ve)'
+                    || this.hivTestingFormGroup[i][j]['testtype']['itemName'] == 'Confirmatory PCR (for  +ve)'
+                ) {
+                    labTestId = this.pcrLabTest[0]['id'];
+                    latTestNotes = this.hivTestingFormGroup[i][j]['comments'];
+                    labTestName = this.pcrLabTest[0]['name'];
+                } else if (this.hivTestingFormGroup[i][j]['testtype']['itemName'] == 'Baseline Viral Load (for +ve)') {
+                    labTestId = this.viralLoadLabTest[0]['id'];
+                    latTestNotes = this.hivTestingFormGroup[i][j]['comments'];
+                    labTestName = this.viralLoadLabTest[0]['name'];
+                } else if (this.hivTestingFormGroup[i][j]['testtype']['itemName'] == 'Final Antibody') {
+                    labTestId = this.antibodyLabTest[0]['id'];
+                    latTestNotes = this.hivTestingFormGroup[i][j]['comments'];
+                    labTestName = this.antibodyLabTest[0]['name'];
+                }
+            }
             laborder.LabTests.push({
-                Id: 1,
-                Notes: '',
-                LabTestName: ''
+                Id: labTestId,
+                Notes: latTestNotes,
+                LabTestName: labTestName
             });
         }
-
 
         const motherRegistered = this.yesnoOptions.filter(
             obj => obj.itemId == this.deliveryMatFormGroup.value[1]['motherregisteredinclinic']
