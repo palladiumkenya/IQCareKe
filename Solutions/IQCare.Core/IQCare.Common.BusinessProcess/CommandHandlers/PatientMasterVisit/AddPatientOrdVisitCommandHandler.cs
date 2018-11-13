@@ -33,7 +33,9 @@ namespace IQCare.Common.BusinessProcess.CommandHandlers.PatientMasterVisit
                         VisitType = 12,
                         DataQuality = 1,
                         DeleteFlag = false,
-                        UserID = request.UserID
+                        UserID = request.UserID,
+                        CreateDate = DateTime.Now,
+
                     };
 
                     await _unitOfWork.Repository<OrdVisit>().AddAsync(ordVisit);
