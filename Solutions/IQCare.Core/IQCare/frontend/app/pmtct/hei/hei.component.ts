@@ -52,6 +52,8 @@ export class HeiComponent implements OnInit {
     immunizationHistoryOptions: any[] = [];
     milestoneOptions: any[] = [];
     tbAssessmentOptions: any[] = [];
+    milestone_table_data: any[] = [];
+    immunization_table_data: any[] = [];
 
     deliveryModeOptions: LookupItemView[] = [];
     arvprophylaxisOptions: LookupItemView[] = [];
@@ -245,16 +247,18 @@ export class HeiComponent implements OnInit {
         this.infantFeedingFormGroup.push(formGroup);
     }
 
-    onMilestonesNotify(formGroup: FormGroup): void {
-        this.milestonesFormGroup.push(formGroup);
+    onMilestonesNotify(formGroup: object): void {
+        this.milestonesFormGroup.push(formGroup['form']); // = formGroup['form'];
+        this.milestone_table_data.push(formGroup['data']);
     }
 
     onMilsetoneTableData(milestoneData: MilestoneData[]): void {
         this.milestoneHistoryData.push(milestoneData);
     }
 
-    onImmunizationHistory(formGroup: FormGroup): void {
-        this.immunizationHistoryFormGroup.push(formGroup);
+    onImmunizationHistory(formGroup: Object): void {
+        this.immunizationHistoryFormGroup.push(formGroup['form']);
+        this.immunization_table_data.push(formGroup['data']);
     }
 
     onImmunizationHistoryData(formData: ImmunizationHistoryTableData[]): void {
