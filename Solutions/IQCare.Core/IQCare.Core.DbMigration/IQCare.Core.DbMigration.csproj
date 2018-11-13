@@ -75,6 +75,14 @@
     <None Remove="Scripts\1.0.0.9\41_pr_iqcare_version_2.sql" />
     <None Remove="Scripts\1.0.0.9\42_DO_AlterTable_Pregancy_AlterColumns.sql" />
     <None Remove="Scripts\1.0.0.9\43_DO_AlterTable_PreventiveServices_AddColumn_NextSchedule.sql" />
+    <None Remove="Scripts\1.0.0.9\44_DO_CreateView_ANC_Register.sql" />
+    <None Remove="Scripts\1.0.0.9\45_DO_CreateView_HeiRegister.sql" />
+    <None Remove="Scripts\1.0.0.9\46_DO_CreateView_MaternityRegister.sql" />
+    <None Remove="Scripts\1.0.0.9\47_DO_CreateView_PNC_Register.sql" />
+    <None Remove="Scripts\1.0.0.9\48_DO_AlterView_HTS_LAB_Register.sql" />
+    <None Remove="Scripts\1.0.0.9\49_DO_AlterView_vw_FamilyTestingRegister.sql" />
+    <None Remove="Scripts\1.0.0.9\50_DO_AlterView_vw_HIVTesting_Services_Referral_Linkage_Register.sql" />
+    <None Remove="Scripts\1.0.0.9\51_DO_AlterView_vw_PartnerNotificationRegister.sql" />
   </ItemGroup>
 
   <ItemGroup>
@@ -153,6 +161,14 @@
     <EmbeddedResource Include="Scripts\1.0.0.9\41_pr_iqcare_version_2.sql" />
     <EmbeddedResource Include="Scripts\1.0.0.9\42_DO_AlterTable_Pregancy_AlterColumns.sql" />
     <EmbeddedResource Include="Scripts\1.0.0.9\43_DO_AlterTable_PreventiveServices_AddColumn_NextSchedule.sql" />
+    <EmbeddedResource Include="Scripts\1.0.0.9\44_DO_CreateView_ANC_Register.sql" />
+    <EmbeddedResource Include="Scripts\1.0.0.9\45_DO_CreateView_HeiRegister.sql" />
+    <EmbeddedResource Include="Scripts\1.0.0.9\46_DO_CreateView_MaternityRegister.sql" />
+    <EmbeddedResource Include="Scripts\1.0.0.9\47_DO_CreateView_PNC_Register.sql" />
+    <EmbeddedResource Include="Scripts\1.0.0.9\48_DO_AlterView_HTS_LAB_Register.sql" />
+    <EmbeddedResource Include="Scripts\1.0.0.9\49_DO_AlterView_vw_FamilyTestingRegister.sql" />
+    <EmbeddedResource Include="Scripts\1.0.0.9\50_DO_AlterView_vw_HIVTesting_Services_Referral_Linkage_Register.sql" />
+    <EmbeddedResource Include="Scripts\1.0.0.9\51_DO_AlterView_vw_PartnerNotificationRegister.sql" />
   </ItemGroup>
 
   <ItemGroup>
