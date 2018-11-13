@@ -9,6 +9,7 @@
     <None Remove="Scripts\1.0.0.8\HEI\HEIEncounter.sql" />
     <None Remove="Scripts\1.0.0.8\HEI\HEIFeeding.sql" />
     <None Remove="Scripts\1.0.0.8\HEI\HEIProfile.sql" />
+    <None Remove="Scripts\1.0.0.8\HEI\Insert_Drug_Administration_LookUpItems.sql" />
     <None Remove="Scripts\1.0.0.8\HEI\Lookups.sql" />
     <None Remove="Scripts\1.0.0.8\HEI\PatientMilestone.sql" />
     <None Remove="Scripts\1.0.0.8\HEI\Vaccination.sql" />
@@ -71,12 +72,14 @@
     <None Remove="Scripts\1.0.0.9\40_DO_CreateSproc_GetPatientRelationships.sql" />
     <None Remove="Scripts\1.0.0.9\41_pr_iqcare_version_2.sql" />
     <None Remove="Scripts\1.0.0.9\42_DO_AlterTable_Pregancy_AlterColumns.sql" />
+    <None Remove="Scripts\1.0.0.9\43_DO_AlterTable_PreventiveServices_AddColumn_NextSchedule.sql" />
   </ItemGroup>
 
   <ItemGroup>
     <EmbeddedResource Include="Scripts\1.0.0.8\HEI\HEIEncounter.sql" />
     <EmbeddedResource Include="Scripts\1.0.0.8\HEI\HEIFeeding.sql" />
     <EmbeddedResource Include="Scripts\1.0.0.8\HEI\HEIProfile.sql" />
+    <EmbeddedResource Include="Scripts\1.0.0.8\HEI\Insert_Drug_Administration_LookUpItems.sql" />
     <EmbeddedResource Include="Scripts\1.0.0.8\HEI\Lookups.sql" />
     <EmbeddedResource Include="Scripts\1.0.0.8\HEI\PatientMilestone.sql" />
     <EmbeddedResource Include="Scripts\1.0.0.8\HEI\Vaccination.sql" />
@@ -145,6 +148,7 @@
     <EmbeddedResource Include="Scripts\1.0.0.9\40_DO_CreateSproc_GetPatientRelationships.sql" />
     <EmbeddedResource Include="Scripts\1.0.0.9\41_pr_iqcare_version_2.sql" />
     <EmbeddedResource Include="Scripts\1.0.0.9\42_DO_AlterTable_Pregancy_AlterColumns.sql" />
+    <EmbeddedResource Include="Scripts\1.0.0.9\43_DO_AlterTable_PreventiveServices_AddColumn_NextSchedule.sql" />
   </ItemGroup>
 
   <ItemGroup>
