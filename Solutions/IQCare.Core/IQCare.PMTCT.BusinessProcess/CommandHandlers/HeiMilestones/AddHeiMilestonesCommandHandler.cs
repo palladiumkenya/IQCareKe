@@ -34,9 +34,9 @@ namespace IQCare.PMTCT.BusinessProcess.CommandHandlers.HeiMilestones
                         {
                             PatientId = milestone.PatientId,
                             PatientMasterVisitId = milestone.PatientMasterVisitId,
-                            TypeAssessed = milestone.TypeAssessed,
-                            Achieved = milestone.Achieved,
-                            Status = milestone.Status,
+                            TypeAssessedId = milestone.TypeAssessedId,
+                            AchievedId = milestone.AchievedId,
+                            StatusId = milestone.StatusId,
                             Comment = milestone.Comment,
                             CreatedBy = milestone.CreatedBy,
                             CreateDate = milestone.CreateDate,
