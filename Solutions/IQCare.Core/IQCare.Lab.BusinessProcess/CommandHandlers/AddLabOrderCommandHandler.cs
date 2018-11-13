@@ -34,9 +34,11 @@ namespace IQCare.Lab.BusinessProcess.CommandHandlers
                 {
                     var labOrder = _mapper.Map<LabOrder>(request);
                     await _labUnitOfWork.Repository<LabOrder>().AddAsync(labOrder);
+                    await _labUnitOfWork.SaveAsync();
 
                     var labOrderTests = request.LabTests.Select(x => new LabOrderTest(labOrder.Id, x.Id, x.Notes, request.UserId, false)).ToList();
                     await _labUnitOfWork.Repository<LabOrderTest>().AddRangeAsync(labOrderTests);
+                    await _labUnitOfWork.SaveAsync();
 
                     List<PatientLabTracker> patientLabTrackers = new List<PatientLabTracker>();
 
@@ -47,7 +49,7 @@ namespace IQCare.Lab.BusinessProcess.CommandHandlers
                             .SingleOrDefault()?.ParameterCount;
                         if(parameterCount == 1)  // PatientLabTracker is created only for LabTests with only one parameter count
                         {
-                            var patientLabTacker = new PatientLabTracker(request.PatientId, labName, request.PatientMasterVisitId, labOrderTest.LabTestId, labOrder.Id, request.FacilityId, request.OrderDate, request.UserId);
+                            var patientLabTacker = new PatientLabTracker(request.PatientId, labName, request.PatientMasterVisitId, labOrderTest.LabTestId, labOrder.Id, request.FacilityId, request.OrderDate, request.UserId, null);
 
                             patientLabTrackers.Add(patientLabTacker);
                         }                       
