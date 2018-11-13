@@ -522,8 +522,8 @@ export class HeiComponent implements OnInit {
                                         if (this.viralLoadLabTestParameters.length > 0) {
                                             completeLabOrderCommand.LabTestResults.push({
                                                 ParameterId: this.viralLoadLabTestParameters[0]['id'],
-                                                ResultValue: null,
-                                                ResultText: this.hivTestingFormGroup[i][j]['resultText'],
+                                                ResultValue: this.hivTestingFormGroup[i][j]['resultText'],
+                                                ResultText: null,
                                                 ResultOptionId: null,
                                                 ResultOption: null,
                                                 ResultUnit: null,
