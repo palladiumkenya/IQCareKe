@@ -31,7 +31,7 @@ namespace IQCare.Controllers.Shared
         }
 
         [HttpPost("addOrdVisit")]
-        public async Task<IActionResult> Post([FromBody] AddPatientOrdVisitCommand addPatientOrdVisitCommand)
+        public async Task<IActionResult> AddOrdVisit([FromBody] AddPatientOrdVisitCommand addPatientOrdVisitCommand)
         {
             var response = await _mediator.Send(addPatientOrdVisitCommand, Request.HttpContext.RequestAborted);
             if (response.IsValid)

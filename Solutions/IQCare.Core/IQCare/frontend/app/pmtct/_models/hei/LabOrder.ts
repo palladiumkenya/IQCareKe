@@ -21,7 +21,3 @@ export interface LabTestInfo {
     Notes: string;
     LabTestName: string;
 }
-
-export interface LabOrderResponse {
-    labOrderId: number;
-}
