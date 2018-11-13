@@ -628,14 +628,14 @@ export class AncComponent implements OnInit, OnDestroy {
 
 
         forkJoin([
-            ancVisitDetails,
+            ancVisitDetails  ,
             ancEducation,
             ancHivStatus,
             ancClientMonitoring,
             ancHaart,
             ancPreventiveService,
             ancReferral,
-            ancAppointment
+           ancAppointment
 
         ])
             .subscribe(

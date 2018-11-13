@@ -1,4 +1,4 @@
-import { forkJoin, Observable } from 'rxjs/index';
+import { forkJoin, Observable, of } from 'rxjs/index';
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { ErrorHandlerService } from '../../shared/_services/errorhandler.service';
@@ -11,7 +11,8 @@ import { PatientIcfAction } from '../_models/hei/PatientIcfAction';
 import { PatientIptWorkup } from '../_models/hei/PatientIptWorkup';
 import { PatientIptOutcome } from '../_models/hei/PatientIptOutcome';
 import { PatientIpt } from '../_models/hei/PatientIpt';
-import { LabOrder, LabOrderResponse } from '../_models/hei/LabOrder';
+import { LabOrder } from '../_models/hei/LabOrder';
+import { OrdVisitCommand } from '../_models/hei/OrdVisitCommand';
 
 
 const httpOptions = {
@@ -125,10 +126,32 @@ export class HeiService {
         );
     }
 
-    public saveHeiLabOrder(labOrder: LabOrder): Observable<LabOrderResponse> {
+    public saveHeiLabOrder(labOrder: LabOrder): Observable<any> {
+        if (labOrder.LabTests.length == 0) {
+            return of([]);
+        }
+
         return this.http.post<any>(this.API_LAB_URL + '/api/LabOrder/AddLabOrder', JSON.stringify(labOrder), httpOptions).pipe(
             tap(saveHeiLabOrder => this.errorHandler.log(`successfully added laborder`)),
             catchError(this.errorHandler.handleError<any>('Error saving laborder'))
+        );
+    }
+
+    public getPatientById(patientId: number): Observable<any> {
+        return this.http.get<any>(this.API_URL + '/api/Register/GetPatientById/' + patientId).pipe(
+            tap(getPatientById => this.errorHandler.log(`successfully fetched patient`)),
+            catchError(this.errorHandler.handleError<any>('Getting patient'))
+        );
+    }
+
+    public saveOrdVisit(ordVisitCommand: OrdVisitCommand, laborder: LabOrder): Observable<any> {
+        if (laborder.LabTests.length == 0) {
+            return of([]);
+        }
+
+        return this.http.post<any>(this.API_URL + '/api/PatientMasterVisit/addOrdVisit', JSON.stringify(ordVisitCommand), httpOptions).pipe(
+            tap(saveOrdVisit => this.errorHandler.log(`successfully added ordVisit`)),
+            catchError(this.errorHandler.handleError<any>('Error saving ordVisit'))
         );
     }
 }

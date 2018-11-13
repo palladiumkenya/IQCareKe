@@ -18,5 +18,6 @@ namespace IQCare.PMTCT.Core.Models
         public int DifferentiatedCareId { get; set; }
         public int DeleteFlag { get; set; }
         public int CreatedBy { get; set; }
+        
     }
 }

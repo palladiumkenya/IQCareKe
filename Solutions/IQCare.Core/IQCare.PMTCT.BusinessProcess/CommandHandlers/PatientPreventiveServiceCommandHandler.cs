@@ -60,7 +60,9 @@ namespace IQCare.PMTCT.BusinessProcess.CommandHandlers
                         PreventiveServiceId = request.InsecticideTreatedNet,
                         PreventiveServiceDate = request.InsecticideGivenDate,
                         Description = "Insecticide treated nets given",
-                        CreatedBy = request.CreatedBy
+                        CreatedBy = request.CreatedBy,
+                        DeleteFlag = false
+                        
                     };
 
                     PreventiveService exercise = new PreventiveService()
@@ -70,7 +72,8 @@ namespace IQCare.PMTCT.BusinessProcess.CommandHandlers
                         PreventiveServiceId = request.AntenatalExercise,
                         PreventiveServiceDate = DateTime.Now,
                         Description = "Antenatal exercise",
-                        CreatedBy = request.CreatedBy
+                        CreatedBy = request.CreatedBy,
+                        DeleteFlag = false
                     };
 
                     preventiveServices.Add(insecticideNet);
@@ -97,6 +100,7 @@ namespace IQCare.PMTCT.BusinessProcess.CommandHandlers
                                 StatusId = Int32.Parse(appointmentStatusId.ToString()),
                                 DifferentiatedCareId = 0,
                                 CreatedBy = request.CreatedBy
+                               
 
                             };
 

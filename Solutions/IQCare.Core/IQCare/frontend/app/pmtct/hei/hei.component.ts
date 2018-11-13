@@ -1,3 +1,4 @@
+import { OrdVisitCommand } from './../_models/hei/OrdVisitCommand';
 import { LabOrder } from './../_models/hei/LabOrder';
 import { HeiService } from './../_services/hei.service';
 import { Component, NgZone, OnInit } from '@angular/core';
@@ -24,6 +25,7 @@ import { NotificationService } from '../../shared/_services/notification.service
 export class HeiComponent implements OnInit {
     patientId: number;
     personId: number;
+    ptn_pk: number;
     serviceAreaId: number;
     patientMasterVisitId: number;
     userId: number;
@@ -90,11 +92,14 @@ export class HeiComponent implements OnInit {
         this.deliveryMatFormGroup = new FormArray([]);
         this.visitDetailsFormGroup = new FormArray([]);
         this.tbAssessmentFormGroup = new FormArray([]);
+
         this.immunizationHistoryFormGroup = new FormArray([]);
         this.milestonesFormGroup = new FormArray([]);
         this.infantFeedingFormGroup = new FormArray([]);
+
         this.heiOutcomeFormGroup = new FormArray([]);
         this.nextAppointmentFormGroup = new FormArray([]);
+
         this.hivTestingFormGroup = [];
         this.formType = 'hei';
     }
@@ -214,6 +219,14 @@ export class HeiComponent implements OnInit {
             'testResults': this.heiHivTestingResultsOptions
         });
 
+        this.heiService.getPatientById(this.patientId).subscribe(
+            (result) => {
+                console.log(result);
+                const { ptn_pk } = result;
+                this.ptn_pk = ptn_pk;
+            }
+        );
+
     }
 
     onDeliveryNotify(formGroup: FormGroup): void {
@@ -329,9 +342,16 @@ export class HeiComponent implements OnInit {
             InvitationOfContacts: this.tbAssessmentFormGroup.value[0]['invitationContacts'],
         } as PatientIcfAction;
 
+        const ordVisitCommand: OrdVisitCommand = {
+            Ptn_Pk: this.ptn_pk,
+            LocationID: this.locationId,
+            VisitDate: this.visitDate,
+            UserID: this.userId
+        };
+
 
         const laborder: LabOrder = {
-            Ptn_Pk: 1,
+            Ptn_Pk: this.ptn_pk,
             PatientId: this.patientId,
             LocationId: this.locationId,
             FacilityId: this.locationId,
@@ -369,7 +389,7 @@ export class HeiComponent implements OnInit {
             }
         }
 
-        const visitDetailsData = {
+        /*const visitDetailsData = {
             'Id': 0,
             'PatientMasterVisitId': this.patientMasterVisitId,
             'PatientId': this.patientId,
@@ -386,20 +406,19 @@ export class HeiComponent implements OnInit {
                     console.log(result);
 
                 }
-            );
+            );*/
 
-        const heiVisitDetails = this.heiService.saveHeiVisitDetails(visitDetailsData);
+        // const heiVisitDetails = this.heiService.saveHeiVisitDetails(visitDetailsData);
         const heiDelivery = this.heiService.saveHieDelivery(this.patientId, this.patientMasterVisitId, this.userId,
             isMotherRegistered, this.deliveryMatFormGroup.value[0], this.deliveryMatFormGroup.value[1]);
         const heiImmunization = this.heiService.saveImmunizationHistory(this.vaccination);
         const heiMilestone = this.heiService.saveMilestoneHistory(this.milestone);
         const heitbAssessment = this.heiService.saveTbAssessment(patientIcf, patientIcfAction);
         const heiLab = this.heiService.saveHeiLabOrder(laborder);
+        const heiOrdVisit = this.heiService.saveOrdVisit(ordVisitCommand, laborder);
 
 
-
-        forkJoin([
-            heiVisitDetails  ])
+        forkJoin([heiOrdVisit])
             .subscribe(
                 (result) => {
                     console.log(result);
@@ -415,8 +434,8 @@ export class HeiComponent implements OnInit {
                 }
             );
 
-        this.zone.run(() => {
+        /*this.zone.run(() => {
             this.router.navigate(['/dashboard/personhome/' + this.personId], { relativeTo: this.route });
-        });
+        });*/
     }
 }
