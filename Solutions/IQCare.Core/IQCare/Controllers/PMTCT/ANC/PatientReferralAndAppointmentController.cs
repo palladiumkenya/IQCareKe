@@ -55,5 +55,14 @@ namespace IQCare.Controllers.PMTCT.ANC
             return BadRequest(response);
         }
 
+        [HttpGet("{Id}")]
+        public async Task<object> GetPatientAppoitment(int Id)
+        {
+            var results = await _mediator.Send(new GetPatientAppointmentViewQuery() { PatientId = Id }, HttpContext.RequestAborted);
+            if (results.IsValid)
+                return Ok(results.Value);
+            return BadRequest(results);
+        }
+
     }
 }

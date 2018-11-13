@@ -78,4 +78,11 @@ export class PersonHomeService {
         );
     }
 
+    public GetPatientAppoitment(patientId : number): Observable<any> {
+        return this.http.get<any>(this.API_URL + '/api/PatientReferralAndAppointment/GetPatientAppoitment/' + patientId).pipe(
+            tap(getPatientAllergies => this.errorHandler.log('get patient Allergy')),
+            catchError(this.errorHandler.handleError<any[]>('getPatientAllergies'))
+        );
+    }
+
 }

@@ -27,6 +27,7 @@ import { EnrollmentService } from '../registration/_services/enrollment.service'
 import { ChronichIllnessComponent } from './chronich-illness/chronich-illness.component';
 import { PatientRelationshipsComponent } from './patient-relationships/patient-relationships.component';
 import { PatientAllergiesComponent } from './patient-allergies/patient-allergies.component';
+import { PatientAppointmentComponent } from './patient-appointment/patient-appointment.component';
 
 @NgModule({
     imports: [
@@ -59,7 +60,8 @@ import { PatientAllergiesComponent } from './patient-allergies/patient-allergies
         EnrollmentServicesComponent,
         ChronichIllnessComponent,
         PatientRelationshipsComponent,
-        PatientAllergiesComponent
+        PatientAllergiesComponent,
+        PatientAppointmentComponent
     ],
     providers: [
         NotificationService,
