@@ -16,7 +16,7 @@ namespace IQCare.PMTCT.Core.Models.HEI
         public DateTime? VaccineDate { get; set; }
         public int Active { get; set; }
         public int? AppointmentId { get; set; }
-        public int? Period { get; set; }
+        public int? PeriodId { get; set; }
         [NotMapped]
         public DateTime? NextSchedule { get; set; }
     }

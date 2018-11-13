@@ -6,8 +6,8 @@ CREATE TABLE [dbo].[PatientPartnerTesting](
 	[PatientMasterVisitId] [int] NOT NULL,
 	[PartnerTested] [int] NULL,
 	[PartnerHIVResult] [int] NULL,
-	[CreateDate] [datetime] NOT NULL,
-	[CreatedBy] [int] NOT NULL default getdate(),
+	[CreateDate] [datetime] NOT NULL  DEFAULT GETDATE(),
+	[CreatedBy] [int] NOT NULL,
 	[DeleteFlag] [bit] NULL,
 	[AuditData] [varchar](max) NULL,
 

@@ -94,11 +94,11 @@ export class HeiComponent implements OnInit {
     hivTestingFormGroup: any[];
 
     constructor(private route: ActivatedRoute,
-        private heiService: HeiService,
-        private zone: NgZone,
-        private router: Router,
-        private snotifyService: SnotifyService,
-        private notificationService: NotificationService) {
+                private heiService: HeiService,
+                private zone: NgZone,
+                private router: Router,
+                private snotifyService: SnotifyService,
+                private notificationService: NotificationService) {
         this.deliveryMatFormGroup = new FormArray([]);
         this.visitDetailsFormGroup = new FormArray([]);
         this.tbAssessmentFormGroup = new FormArray([]);
@@ -118,7 +118,7 @@ export class HeiComponent implements OnInit {
         this.route.params.subscribe(
             (params) => {
                 console.log(params);
-                const { patientId, personId, serviceAreaId } = params;
+                const {patientId, personId, serviceAreaId} = params;
                 this.patientId = patientId;
                 this.personId = personId;
                 this.serviceAreaId = serviceAreaId;
@@ -232,7 +232,7 @@ export class HeiComponent implements OnInit {
         this.heiService.getPatientById(this.patientId).subscribe(
             (result) => {
                 console.log(result);
-                const { ptn_pk } = result;
+                const {ptn_pk} = result;
                 this.ptn_pk = ptn_pk;
             }
         );
@@ -297,22 +297,39 @@ export class HeiComponent implements OnInit {
     }
 
     onCompleteEncounter() {
-        for (let i = 0; i < this.immunizationHistoryTableData.length; i++) {
-            this.vaccination.push({
-                Id: 0,
-                PatientId: this.patientId,
-                PatientMasterVisitId: this.patientMasterVisitId,
-                Period: this.immunizationHistoryTableData[i].immunizationPeriodId,
-                Vaccine: this.immunizationHistoryTableData[i].immunizationGivenId,
-                VaccineStage: this.immunizationHistoryTableData[i].immunizationPeriodId,
-                DeleteFlag: 0,
-                CreatedBy: this.userId,
-                CreateDate: new Date(),
-                VaccineDate: new Date(this.immunizationHistoryTableData[i].dateImmunized),
-                Active: 0,
-                NextSchedule: new Date(this.immunizationHistoryTableData[i].nextScheduled)
-            });
+        console.log('immunization data');
+        console.log(this.immunization_table_data);
+
+        console.log(this.visitDetailsFormGroup.value);
+        console.log(this.hivTestingFormGroup);
+
+        for (let i = 0; i < this.immunization_table_data.length; i++) {
+            for (let j = 0; j < this.immunization_table_data.length; j ++) {
+                this.vaccination.push({
+                    Id: 0,
+                    PatientId: this.patientId,
+                    PatientMasterVisitId: this.patientMasterVisitId,
+                    Period: this.immunization_table_data[i][j]['immunizationPeriodId'],
+                    Vaccine: this.immunization_table_data[i][j]['immunizationGivenId'],
+                    VaccineStage: this.immunization_table_data[i][j]['immunizationPeriodId'],
+                    DeleteFlag: 0,
+                    CreatedBy: this.userId,
+                    CreateDate: new Date(),
+                    VaccineDate: new Date(this.immunization_table_data[i][j]['dateImmunized']),
+                    Active: 0,
+                    AppointmentId: 0
+                  //  NextSchedule: new Date(this.immunization_table_data[i][j]['nextScheduled'])
+                });
+            }
         }
+
+        const vaccineCommand: any = {
+            'Vaccinations': this.vaccination
+        };
+
+
+        console.log('vaccine');
+        console.log(this.vaccination);
 
         for (let i = 0; i < this.milestoneHistoryData.length; i++) {
             this.milestone.push({
@@ -446,35 +463,41 @@ export class HeiComponent implements OnInit {
             }
         }
 
-        /*const visitDetailsData = {
-            'Id': 0,
-            'PatientMasterVisitId': this.patientMasterVisitId,
-            'PatientId': this.patientId,
-            'VisitDate': this.visitDetailsFormGroup.value[0]['visitDate'],
-            'VisitType': this.visitDetailsFormGroup[0]['visitType'],
-            'CreatedDate': new Date(),
-            'CreatedBy': this.userId,
-            'DeleteFlag': false
+        const visitDetailsData = {
+            PatientId: this.patientId,
+            PatientMasterVisitId: this.patientMasterVisitId,
+            ServiceAreaId: 3,
+            VisitDate: this.visitDetailsFormGroup.value[0]['visitDate'],
+            VisitNumber: 0,
+            VisitType: this.visitDetailsFormGroup.value[0]['visitType'],
+            UserId: this.userId,
+            DaysPostPartum: 0,
+            AgeMenarche: 0,
         };
 
-        this.heiService.saveHeiVisitDetails(visitDetailsData)
-            .subscribe(
-                (result) => {
-                    console.log(result);
 
-                }
-            );*/
+        /*  this.heiService.saveHeiVisitDetails(visitDetailsData)
+              .subscribe(
+                  (result) => {
+                      console.log(result);
 
-        // const heiVisitDetails = this.heiService.saveHeiVisitDetails(visitDetailsData);
+                  }
+              );*/
+
+        const heiVisitDetails = this.heiService.saveHeiVisitDetails(visitDetailsData);
         const heiDelivery = this.heiService.saveHieDelivery(this.patientId, this.patientMasterVisitId, this.userId,
             isMotherRegistered, this.deliveryMatFormGroup.value[0], this.deliveryMatFormGroup.value[1]);
-        const heiImmunization = this.heiService.saveImmunizationHistory(this.vaccination);
+        const heiImmunization = this.heiService.saveImmunizationHistory(vaccineCommand);
         const heiMilestone = this.heiService.saveMilestoneHistory(this.milestone);
         const heitbAssessment = this.heiService.saveTbAssessment(patientIcf, patientIcfAction);
         const heiOrdVisit = this.heiService.saveOrdVisit(ordVisitCommand, laborder);
 
 
-        forkJoin([heiOrdVisit])
+        forkJoin([
+          //  heiOrdVisit,
+            heiVisitDetails,
+            heiImmunization
+        ])
             .subscribe(
                 (result) => {
                     console.log(result);

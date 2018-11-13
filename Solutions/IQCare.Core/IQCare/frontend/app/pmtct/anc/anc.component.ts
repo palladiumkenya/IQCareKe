@@ -652,9 +652,9 @@ export class AncComponent implements OnInit, OnDestroy {
                 }
             );
 
-        /*this.zone.run(() => {
+        this.zone.run(() => {
             this.router.navigate(['/dashboard/personhome/' + this.personId], {relativeTo: this.route});
-        });*/
+        });
     }
 
     ngOnDestroy(): void {

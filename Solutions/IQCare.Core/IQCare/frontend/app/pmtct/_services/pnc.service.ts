@@ -93,7 +93,7 @@ export class PncService {
     }
 
     public savePartnerTesting(partnerTestingCommand: PartnerTestingCommand): Observable<any> {
-        return this.http.post<any>(this.API_PMTCT_URL + '/api/PatientPartnerTesting',
+        return this.http.post<any>(this.API_PMTCT_URL + '/api/PatientPartnerTesting/AddPartnerTesting',
             JSON.stringify(partnerTestingCommand), httpOptions).pipe(
                 tap(savePartnerTesting => this.errorHandler.log(`successfully saved pnc partner testing`)),
                 catchError(this.errorHandler.handleError<any>('Error saving pnc partner testing'))

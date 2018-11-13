@@ -643,6 +643,9 @@ export class MaternityComponent implements OnInit {
                                 () => {
                                     this.snotifyService.success('Successfully saved Maternity encounter ', 'Maternity',
                                         this.notificationService.getConfig());
+                                         this.zone.run(() => {
+                        this.router.navigate(['/dashboard/personhome/' + this.personId], {relativeTo: this.route});
+                    });
                             }
                             );
                         }
@@ -653,9 +656,9 @@ export class MaternityComponent implements OnInit {
                 },
                 () => {
                     console.log(`complete`);
-                    this.zone.run(() => {
-                        this.router.navigate(['/dashboard/personhome/' + this.personId], {relativeTo: this.route});
-                    });
+                    // this.zone.run(() => {
+                    //     this.router.navigate(['/dashboard/personhome/' + this.personId], {relativeTo: this.route});
+                    // });
                 }
             );
     }
