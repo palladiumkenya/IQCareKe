@@ -1500,13 +1500,14 @@ namespace IQCare.Common.BusinessProcess.Services
                 middleName = string.IsNullOrWhiteSpace(middleName) ? "" : middleName.Replace("'", "''");
                 lastName = string.IsNullOrWhiteSpace(lastName) ? "" : lastName.Replace("'", "''");
                 string dob = dateOfBirth.HasValue ? dateOfBirth.Value.ToString("yyyy-MM-dd") : null;
+                string regDate = registrationDate.HasValue ? registrationDate.Value.ToString("yyyy-MM-dd") : null;
 
                 var sql =
                     "exec pr_OpenDecryptedSession;" +
                     "Insert Into Person(FirstName, MidName, LastName, Sex, DateOfBirth, DobPrecision, Active, DeleteFlag, CreateDate, CreatedBy, RegistrationDate, FacilityId, NickName)" +
                     $"Values(ENCRYPTBYKEY(KEY_GUID('Key_CTC'), '{firstName}'), ENCRYPTBYKEY(KEY_GUID('Key_CTC'), '{middleName}')," +
                     $"ENCRYPTBYKEY(KEY_GUID('Key_CTC'), '{lastName}'), {sex}, '{dob}', 1," +
-                    $"1,0,GETDATE(), '{createdBy}', '{registrationDate}', '{facilityId}', ENCRYPTBYKEY(KEY_GUID('Key_CTC'), '{nickName}'));" +
+                    $"1,0,GETDATE(), '{createdBy}', '{regDate}', '{facilityId}', ENCRYPTBYKEY(KEY_GUID('Key_CTC'), '{nickName}'));" +
                     "SELECT [Id] , CAST(DECRYPTBYKEY(FirstName) AS VARCHAR(50)) [FirstName] ,CAST(DECRYPTBYKEY(MidName) AS VARCHAR(50)) MidName" +
                     ",CAST(DECRYPTBYKEY(LastName) AS VARCHAR(50)) [LastName] ,[Sex] ,[Active] ,[DeleteFlag] ,[CreateDate] " +
                     ",[CreatedBy] ,[AuditData] ,[DateOfBirth] ,[DobPrecision], RegistrationDate, FacilityId, CAST(DECRYPTBYKEY(NickName) AS VARCHAR(50)) NickName FROM [dbo].[Person] WHERE Id = SCOPE_IDENTITY();" +

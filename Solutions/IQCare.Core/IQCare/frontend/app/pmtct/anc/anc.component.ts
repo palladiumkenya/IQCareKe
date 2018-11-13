@@ -628,14 +628,14 @@ export class AncComponent implements OnInit, OnDestroy {
 
 
         forkJoin([
-            ancVisitDetails  ,
+            ancVisitDetails,
             ancEducation,
             ancHivStatus,
             ancClientMonitoring,
             ancHaart,
             ancPreventiveService,
             ancReferral,
-           ancAppointment
+            ancAppointment
 
         ])
             .subscribe(
@@ -643,6 +643,10 @@ export class AncComponent implements OnInit, OnDestroy {
                     console.log(result);
 
                     this.snotifyService.success('Successfully saved ANC encounter ', 'ANC', this.notificationService.getConfig());
+
+                    this.zone.run(() => {
+                        this.router.navigate(['/dashboard/personhome/' + this.personId], { relativeTo: this.route });
+                    });
                 },
                 (error) => {
                     console.log(`error ` + error);
@@ -651,10 +655,6 @@ export class AncComponent implements OnInit, OnDestroy {
                     console.log(`complete`);
                 }
             );
-
-        this.zone.run(() => {
-            this.router.navigate(['/dashboard/personhome/' + this.personId], {relativeTo: this.route});
-        });
     }
 
     ngOnDestroy(): void {
