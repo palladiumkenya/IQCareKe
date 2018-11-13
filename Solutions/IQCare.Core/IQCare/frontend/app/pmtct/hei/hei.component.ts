@@ -24,6 +24,7 @@ import { NotificationService } from '../../shared/_services/notification.service
 export class HeiComponent implements OnInit {
     patientId: number;
     personId: number;
+    ptn_pk: number;
     serviceAreaId: number;
     patientMasterVisitId: number;
     userId: number;
@@ -214,6 +215,14 @@ export class HeiComponent implements OnInit {
             'testResults': this.heiHivTestingResultsOptions
         });
 
+        this.heiService.getPatientById(this.patientId).subscribe(
+            (result) => {
+                console.log(result);
+                const { ptn_pk } = result;
+                this.ptn_pk = ptn_pk;
+            }
+        );
+
     }
 
     onDeliveryNotify(formGroup: FormGroup): void {
@@ -331,7 +340,7 @@ export class HeiComponent implements OnInit {
 
 
         const laborder: LabOrder = {
-            Ptn_Pk: 1,
+            Ptn_Pk: this.ptn_pk,
             PatientId: this.patientId,
             LocationId: this.locationId,
             FacilityId: this.locationId,
@@ -399,7 +408,7 @@ export class HeiComponent implements OnInit {
 
 
         forkJoin([
-            heiVisitDetails  ])
+            heiVisitDetails])
             .subscribe(
                 (result) => {
                     console.log(result);
