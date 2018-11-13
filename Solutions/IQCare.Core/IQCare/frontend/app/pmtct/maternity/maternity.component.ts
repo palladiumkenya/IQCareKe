@@ -1,28 +1,28 @@
-import {Component, OnInit, NgZone} from '@angular/core';
-import {FormArray, FormGroup} from '@angular/forms';
-import {ActivatedRoute, Router } from '@angular/router';
-import {LookupItemView} from '../../shared/_models/LookupItemView';
-import {MaternityVisitDetailsCommand} from './commands/maternity-visit-details-command';
-import {MaternityService} from '../_services/maternity.service';
-import {PregnancyCommand} from './commands/pregnancy-command';
-import {MaternityDeliveryCommand} from './commands/maternity-delivery-command';
-import {ApgarScoreCommand} from './commands/apgar-score-command';
-import {LookupItemService} from '../../shared/_services/lookup-item.service';
-import {forkJoin, Subscription} from 'rxjs/index';
-import {SnotifyService} from 'ng-snotify';
-import {NotificationService} from '../../shared/_services/notification.service';
-import {DrugAdministrationCommand} from './commands/drug-administration-command';
-import {AdministerDrugInfo} from './commands/administer-drug-info';
-import {MaternityCounsellingCommand} from './commands/maternity-counselling-command';
-import {ReferralCommand} from './commands/referral-command';
-import {NextAppointmentCommand} from './commands/next-appointment-command';
-import {DischargeCommand} from './commands/discharge-command';
-import {DiagnosisCommand} from './commands/diagnosis-command';
-import {MotherProfileCommand} from './commands/mother-profile-command';
-import {PartnerTestingCommand} from '../_models/PartnerTestingCommand';
-import {PatientReferralCommand} from '../_models/PatientReferralCommand';
-import {HivStatusCommand} from '../_models/HivStatusCommand';
-import {HivTestsCommand} from '../_models/HivTestsCommand';
+import { Component, OnInit, NgZone } from '@angular/core';
+import { FormArray, FormGroup } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
+import { LookupItemView } from '../../shared/_models/LookupItemView';
+import { MaternityVisitDetailsCommand } from './commands/maternity-visit-details-command';
+import { MaternityService } from '../_services/maternity.service';
+import { PregnancyCommand } from './commands/pregnancy-command';
+import { MaternityDeliveryCommand } from './commands/maternity-delivery-command';
+import { ApgarScoreCommand } from './commands/apgar-score-command';
+import { LookupItemService } from '../../shared/_services/lookup-item.service';
+import { forkJoin, Subscription } from 'rxjs/index';
+import { SnotifyService } from 'ng-snotify';
+import { NotificationService } from '../../shared/_services/notification.service';
+import { DrugAdministrationCommand } from './commands/drug-administration-command';
+import { AdministerDrugInfo } from './commands/administer-drug-info';
+import { MaternityCounsellingCommand } from './commands/maternity-counselling-command';
+import { ReferralCommand } from './commands/referral-command';
+import { NextAppointmentCommand } from './commands/next-appointment-command';
+import { DischargeCommand } from './commands/discharge-command';
+import { DiagnosisCommand } from './commands/diagnosis-command';
+import { MotherProfileCommand } from './commands/mother-profile-command';
+import { PartnerTestingCommand } from '../_models/PartnerTestingCommand';
+import { PatientReferralCommand } from '../_models/PatientReferralCommand';
+import { HivStatusCommand } from '../_models/HivStatusCommand';
+import { HivTestsCommand } from '../_models/HivTestsCommand';
 
 
 @Component({
@@ -90,12 +90,12 @@ export class MaternityComponent implements OnInit {
     patientEducationOptions: any[] = [];
 
     constructor(private route: ActivatedRoute,
-                private matService: MaternityService,
-                private _lookupItemService: LookupItemService,
-                private snotifyService: SnotifyService,
-                private notificationService: NotificationService,
-                public zone: NgZone,
-                private router: Router) {
+        private matService: MaternityService,
+        private _lookupItemService: LookupItemService,
+        private snotifyService: SnotifyService,
+        private notificationService: NotificationService,
+        public zone: NgZone,
+        private router: Router) {
         this.visitDetailsFormGroup = new FormArray([]);
         this.diagnosisFormGroup = new FormArray([]);
         this.maternalDrugAdministrationForGroup = new FormArray([]);
@@ -112,7 +112,7 @@ export class MaternityComponent implements OnInit {
         this.route.params.subscribe(
             (params) => {
                 console.log(params);
-                const {patientId, personId, serviceAreaId} = params;
+                const { patientId, personId, serviceAreaId } = params;
                 this.patientId = parseInt(patientId, 10);
                 this.personId = personId;
                 this.serviceAreaId = serviceAreaId;
@@ -280,7 +280,7 @@ export class MaternityComponent implements OnInit {
                 p => {
                     const options = p['lookupItems'];
                     for (let i = 0; i < options.length; i++) {
-                        objOptions.push({'itemId': options[i]['itemId'], 'itemName': options[i]['itemName']});
+                        objOptions.push({ 'itemId': options[i]['itemId'], 'itemName': options[i]['itemName'] });
                     }
                 },
                 (err) => {
@@ -643,10 +643,10 @@ export class MaternityComponent implements OnInit {
                                 () => {
                                     this.snotifyService.success('Successfully saved Maternity encounter ', 'Maternity',
                                         this.notificationService.getConfig());
-                                         this.zone.run(() => {
-                        this.router.navigate(['/dashboard/personhome/' + this.personId], {relativeTo: this.route});
-                    });
-                            }
+                                    this.zone.run(() => {
+                                        this.router.navigate(['/dashboard/personhome/' + this.personId], { relativeTo: this.route });
+                                    });
+                                }
                             );
                         }
                     );
