@@ -53,7 +53,7 @@ export class MilestonesComponent implements OnInit {
       this.yesnoOptions = yesnoOption;
 
 
-      this.notify.emit({'form': this.milestonesFormGroup, 'milestone_data': this.milestone_data});
+      this.notify.emit({'form': this.milestonesFormGroup, 'data': this.milestone_data});
   }
 
   public AddMilestone() {

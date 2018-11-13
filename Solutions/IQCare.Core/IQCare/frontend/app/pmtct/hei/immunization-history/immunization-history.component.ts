@@ -50,7 +50,7 @@ export class ImmunizationHistoryComponent implements OnInit {
         this.vaccines = immunizationGiven;
         this.yesnoOptions = yesnoOption;
 
-        this.notify.emit({'form': this.ImmunizationHistoryFormGroup , 'immunization_data': this.immunization_history});
+        this.notify.emit({'form': this.ImmunizationHistoryFormGroup , 'data': this.immunization_history});
         // this.vaccineArray.emit(this.immunization_history);
     }
 
