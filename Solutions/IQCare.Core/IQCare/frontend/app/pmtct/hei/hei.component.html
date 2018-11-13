@@ -106,6 +106,15 @@
                                             [infantFeedingOptions]="infantFeedingOptions">
                                         </app-infant-feeding>
                                         <div>
+                                            <app-hei-medication></app-hei-medication>
+                                        </div>
+
+                                        <div >
+                                            <app-hei-outcome [heiOutcomeOptions]="heiOutcomeOptions"></app-hei-outcome>
+                                        </div>
+
+                                        <app-next-appointment></app-next-appointment>
+                                        <div>
                                             <button mat-raised-button color="primary" matStepperPrevious type="button">Previous</button>
                                             &nbsp;&nbsp;
                                             <button mat-raised-button color="accent" matStepperNext type="button">Next</button>

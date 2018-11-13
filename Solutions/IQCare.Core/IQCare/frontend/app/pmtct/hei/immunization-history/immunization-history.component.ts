@@ -1,7 +1,6 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import { SnotifyService } from 'ng-snotify';
-import { Subscription } from 'rxjs/index';
 import { LookupItemService } from '../../../shared/_services/lookup-item.service';
 import { NotificationService } from '../../../shared/_services/notification.service';
 import {MatTableDataSource} from '@angular/material';
@@ -26,8 +25,8 @@ export class ImmunizationHistoryComponent implements OnInit {
     dataSource = new MatTableDataSource(this.immunization_history_table_data);
 
     @Input('immunizationHistoryOptions') immunizationHistoryOptions: any;
-    @Output() notify: EventEmitter<FormGroup> = new EventEmitter<FormGroup>();
-    @Output() vaccineArray: EventEmitter<ImmunizationHistory[]> = new EventEmitter<ImmunizationHistory[]>();
+    @Output() notify: EventEmitter<object> = new EventEmitter<object>();
+  //  @Output() vaccineArray: EventEmitter<ImmunizationHistory[]> = new EventEmitter<ImmunizationHistory[]>();
 
     constructor(private _formBuilder: FormBuilder,
         private _lookupItemService: LookupItemService,
@@ -51,8 +50,8 @@ export class ImmunizationHistoryComponent implements OnInit {
         this.vaccines = immunizationGiven;
         this.yesnoOptions = yesnoOption;
 
-        this.notify.emit(this.ImmunizationHistoryFormGroup);
-        this.vaccineArray.emit(this.immunization_history);
+        this.notify.emit({'form': this.ImmunizationHistoryFormGroup , 'immunization_data': this.immunization_history});
+        // this.vaccineArray.emit(this.immunization_history);
     }
 
    public AddImmunization() {
@@ -88,19 +87,3 @@ export class ImmunizationHistoryComponent implements OnInit {
         this.dataSource = new MatTableDataSource(this.immunization_history_table_data);
     }
 }
-
-/*
-export interface ImmunizationHistoryTableData {
-    immunizationPeriod?: string;
-    given?: string;
-    dateImmunized?: Date;
-    nextSchedule?: Date;
-}
-
-
-export interface ImmunizationHistory {
-    immunizationPeriodId?: number;
-    immunizationGivenId?: number;
-    dateImmunized?: Date;
-    nextScheduled?: Date;
-}*/

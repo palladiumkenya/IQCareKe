@@ -33,7 +33,7 @@ export class AncComponent implements OnInit, OnDestroy {
 
     formType: string;
     visitType: number;
-    isLinear: boolean = false;
+    isLinear: boolean = true;
     patientDrug: PatientDrugAdministration[] = [];
     public preventiveService: PreventiveService[] = [];
     public counselling_data_form: PatientEducation[] = [];

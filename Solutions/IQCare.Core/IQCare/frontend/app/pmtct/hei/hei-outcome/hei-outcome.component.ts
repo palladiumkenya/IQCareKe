@@ -15,7 +15,7 @@ export class HeiOutcomeComponent implements OnInit {
 
   HeiOutcomeFormGroup: FormGroup;
     @Input() heiOutcomeOptions: any[] = [];
-  @Output() notify: EventEmitter<FormGroup> = new EventEmitter<FormGroup>();
+    @Output() notify: EventEmitter<FormGroup> = new EventEmitter<FormGroup>();
 
   constructor(private _formBuilder: FormBuilder,
     private _lookupItemService: LookupItemService,

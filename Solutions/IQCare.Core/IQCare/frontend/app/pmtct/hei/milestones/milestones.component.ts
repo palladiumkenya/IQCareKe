@@ -18,8 +18,8 @@ export class MilestonesComponent implements OnInit {
     milestone_data: MilestoneData[] = [];
 
     @Input('milestoneOptions') milestoneOptions: any;
-    @Output() notify: EventEmitter<FormGroup> = new EventEmitter<FormGroup>();
-    @Output() milestonData: EventEmitter<MilestoneData[]> = new EventEmitter<MilestoneData[]>();
+    @Output() notify: EventEmitter<Object> = new EventEmitter<Object>();
+  //  @Output() milestonData: EventEmitter<MilestoneData[]> = new EventEmitter<MilestoneData[]>();
 
     milestoneassessments: any[] = [];
     milestonestatuses: any[] = [];
@@ -53,7 +53,7 @@ export class MilestonesComponent implements OnInit {
       this.yesnoOptions = yesnoOption;
 
 
-      this.notify.emit(this.milestonesFormGroup);
+      this.notify.emit({'form': this.milestonesFormGroup, 'milestone_data': this.milestone_data});
   }
 
   public AddMilestone() {
@@ -89,20 +89,4 @@ export class MilestonesComponent implements OnInit {
     }
 }
 
-/*
-export interface MilestoneTableData {
-  milestone?: string;
-  dateAssessed?: Date;
-  achieved?: string;
-  status?: string;
-  comment?: string;
-}
 
-export interface MilestoneData {
-    milestoneId?: number;
-    dateAssessed?: Date;
-    achievedId?: number;
-    statusId?: number;
-    comment?: string;
-}
-*/

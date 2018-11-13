@@ -631,16 +631,22 @@ export class MaternityComponent implements OnInit {
                                 babyConditionInfo.DeliveredBabyBirthInfoCollection[i].PatientDeliveryInformationId = this.deliveryId;
                             }
                             console.log(`result`, res);
+                            console.log(babyConditionInfo);
+                            const matBabyCondition = this.matService.saveBabySection(babyConditionInfo).subscribe(
+                                (re) => {
+                                    console.log(`Baby Delivery Information`);
+                                    console.log(res);
+                                },
+                                (er) => {
+                                    console.log(`error ` + er);
+                                },
+                                () => {
+                                    this.snotifyService.success('Successfully saved Maternity encounter ', 'Maternity',
+                                        this.notificationService.getConfig());
+                            }
+                            );
                         }
                     );
-                    const matBabyCondition = this.matService.saveBabySection(babyConditionInfo).subscribe(
-                        (res) => {
-                            console.log(`Baby Delivery Information`);
-                            console.log(res);
-                        }
-                    );
-                    this.snotifyService.success('Successfully saved Maternity encounter ', 'Maternity',
-                        this.notificationService.getConfig());
                 },
                 (error) => {
                     console.log(`error ` + error);
