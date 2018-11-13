@@ -92,7 +92,9 @@ namespace IQCare.PMTCT.BusinessProcess.CommandHandlers
                         ServiceAreaId = request.ServiceAreaId,
                         ClinicalNotes = request.ClinicalNotes,
                         CreateDate = DateTime.Now,
-                        CreatedBy = request.CreatedBy
+                        CreatedBy = request.CreatedBy,
+                        Active = false
+
                     
                     };
 

@@ -1,14 +1,14 @@
 ﻿IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[PatientPreventiveServices]') AND type in (N'U')) 
 BEGIN
 CREATE TABLE [dbo].[PatientPreventiveServices](
-	[Id] [int] NOT NULL,
+	[Id] [int] IDENTITY(1,1) NOT NULL,
 	[PatientId] [int] NOT NULL,
 	[PatientMasterVisitId] [int] NOT NULL,
-	[PreventiveService] [int] NULL,
+	[PreventiveServiceId] [int] NULL,
 	[PreventiveServiceDate] [datetime] NULL,
 	[Description] [varchar](max) NULL,
 	[DeleteFlag] [bit] NULL,
-	[CreatedBy] [int] NOT NULL,
+	[CreatedBy] [int] NOT NULL default getdate(),
 	[CreateDate] [datetime] NOT NULL,
 	[AuditData] [varchar](max) NULL,
  CONSTRAINT [PK_PatientPreventiveServices] PRIMARY KEY CLUSTERED ([Id] ASC ),

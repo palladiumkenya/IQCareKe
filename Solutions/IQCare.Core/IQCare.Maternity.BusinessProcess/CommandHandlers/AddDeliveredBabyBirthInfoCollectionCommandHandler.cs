@@ -33,8 +33,10 @@ namespace IQCare.Maternity.BusinessProcess.CommandHandlers
                 if (request.DeliveredBabyBirthInfoCollection == null)
                     return Result<DeliveredBabyBirthInfoResult>.Invalid("Delivered baby bith info not found");
 
+
                 foreach (var deliveredBabyBirthInfo in request.DeliveredBabyBirthInfoCollection)
                 {
+ 
                     var deliveredBabyBirthInformation = _mapper.Map<DeliveredBabyBirthInformation>(deliveredBabyBirthInfo);
                     await _maternityUnitOfWork.Repository<DeliveredBabyBirthInformation>().AddAsync(deliveredBabyBirthInformation);
 

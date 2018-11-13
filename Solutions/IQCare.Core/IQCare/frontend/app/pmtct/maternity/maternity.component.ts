@@ -624,7 +624,9 @@ export class MaternityComponent implements OnInit {
 
                     const matDelivery = this.matService.savePatientDelivery(maternityDeliveryCommand).subscribe(
                         (res) => {
-                            this.deliveryId = res['PatientDeliveryInformationId'];
+
+                            this.deliveryId = res['patientDeliveryId'];
+                            console.log('patient DeliveryID:' + this.deliveryId);
                             for (let i = 0; i < babyConditionInfo.DeliveredBabyBirthInfoCollection.length; i++) {
                                 babyConditionInfo.DeliveredBabyBirthInfoCollection[i].PatientDeliveryInformationId = this.deliveryId;
                             }

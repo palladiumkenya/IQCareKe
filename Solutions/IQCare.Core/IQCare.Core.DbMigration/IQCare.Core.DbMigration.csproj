@@ -9,9 +9,12 @@
     <None Remove="Scripts\1.0.0.8\HEI\HEIEncounter.sql" />
     <None Remove="Scripts\1.0.0.8\HEI\HEIFeeding.sql" />
     <None Remove="Scripts\1.0.0.8\HEI\HEIProfile.sql" />
+    <None Remove="Scripts\1.0.0.8\HEI\Insert_Drug_Administration_LookUpItems.sql" />
     <None Remove="Scripts\1.0.0.8\HEI\Lookups.sql" />
     <None Remove="Scripts\1.0.0.8\HEI\PatientMilestone.sql" />
     <None Remove="Scripts\1.0.0.8\HEI\Vaccination.sql" />
+    <None Remove="Scripts\1.0.0.8\MATERNITY\12_Insert_MaternityEncounter.sql" />
+    <None Remove="Scripts\1.0.0.8\MATERNITY\Insert_Drug_Administration_Lookup.sql" />
     <None Remove="Scripts\1.0.0.8\PMTCT\01_Insert_PNC_LookUp_Data.sql" />
     <None Remove="Scripts\1.0.0.8\PMTCT\02_Create_Table_PatientCounselling.sql" />
     <None Remove="Scripts\1.0.0.8\PMTCT\03_CreateTable_PatientDelivery.sql" />
@@ -71,15 +74,19 @@
     <None Remove="Scripts\1.0.0.9\40_DO_CreateSproc_GetPatientRelationships.sql" />
     <None Remove="Scripts\1.0.0.9\41_pr_iqcare_version_2.sql" />
     <None Remove="Scripts\1.0.0.9\42_DO_AlterTable_Pregancy_AlterColumns.sql" />
+    <None Remove="Scripts\1.0.0.9\43_DO_AlterTable_PreventiveServices_AddColumn_NextSchedule.sql" />
   </ItemGroup>
 
   <ItemGroup>
     <EmbeddedResource Include="Scripts\1.0.0.8\HEI\HEIEncounter.sql" />
     <EmbeddedResource Include="Scripts\1.0.0.8\HEI\HEIFeeding.sql" />
     <EmbeddedResource Include="Scripts\1.0.0.8\HEI\HEIProfile.sql" />
+    <EmbeddedResource Include="Scripts\1.0.0.8\HEI\Insert_Drug_Administration_LookUpItems.sql" />
     <EmbeddedResource Include="Scripts\1.0.0.8\HEI\Lookups.sql" />
     <EmbeddedResource Include="Scripts\1.0.0.8\HEI\PatientMilestone.sql" />
     <EmbeddedResource Include="Scripts\1.0.0.8\HEI\Vaccination.sql" />
+    <EmbeddedResource Include="Scripts\1.0.0.8\MATERNITY\12_Insert_MaternityEncounter.sql" />
+    <EmbeddedResource Include="Scripts\1.0.0.8\MATERNITY\Insert_Drug_Administration_Lookup.sql" />
     <EmbeddedResource Include="Scripts\1.0.0.8\PMTCT\01_Insert_PNC_LookUp_Data.sql" />
     <EmbeddedResource Include="Scripts\1.0.0.8\PMTCT\02_Create_Table_PatientCounselling.sql" />
     <EmbeddedResource Include="Scripts\1.0.0.8\PMTCT\03_CreateTable_PatientDelivery.sql" />
@@ -104,7 +111,7 @@
     <EmbeddedResource Include="Scripts\1.0.0.9\02_DO_CreateTable_DeliveredBabyApgarScore.sql" />
     <EmbeddedResource Include="Scripts\1.0.0.9\03_DO_AlterTable_DeliveredBabyBirthInfo_AlterColmn_DeliveryComplications.sql" />
     <EmbeddedResource Include="Scripts\1.0.0.9\04_DO_AlterTable_DeliveredBabyBirthInfo_DropApagarColumns.sql" />
-    <EmbeddedResource Include="Scripts\1.0.0.9\05_DO_Insert_ApgrarScoreDetails_Into_LookUpTables.sql" />
+    <EmbeddedResource Include="Scripts\1.0.0.8\MATERNITY\05_DO_Insert_ApgrarScoreDetails_Into_LookUpTables.sql" />
     <EmbeddedResource Include="Scripts\1.0.0.9\06_DO_CreateView_DeliveredBabyBirthInfoView.sql" />
     <EmbeddedResource Include="Scripts\1.0.0.9\07_DO_AlterTable_DeliveredBabyApgarScore_AddColumn_Score.sql" />
     <EmbeddedResource Include="Scripts\1.0.0.9\08_DO_AlterTable_PatientDelivery_RenameColumn_BloodLoss.sql" />
@@ -145,6 +152,7 @@
     <EmbeddedResource Include="Scripts\1.0.0.9\40_DO_CreateSproc_GetPatientRelationships.sql" />
     <EmbeddedResource Include="Scripts\1.0.0.9\41_pr_iqcare_version_2.sql" />
     <EmbeddedResource Include="Scripts\1.0.0.9\42_DO_AlterTable_Pregancy_AlterColumns.sql" />
+    <EmbeddedResource Include="Scripts\1.0.0.9\43_DO_AlterTable_PreventiveServices_AddColumn_NextSchedule.sql" />
   </ItemGroup>
 
   <ItemGroup>

@@ -10,7 +10,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace IQCare.Maternity.WebApi.Controllers
 {
     [Produces("application/json")]
-    [Route("api/PatientPartnerTesting")]
+    [Route("api/[Controller]/[Action]")]
     public class PatientPartnerTestingController : Controller
     {
         IMediator _mediator;
@@ -21,7 +21,7 @@ namespace IQCare.Maternity.WebApi.Controllers
 
 
         [HttpPost]
-        public async Task<object> PatientPartnerTesting([FromBody] PatientPartnerTestingCommand command)
+        public async Task<object> AddPartnerTesting([FromBody] PatientPartnerTestingCommand command)
         {
             if (!ModelState.IsValid)
                 return BadRequest(command);
