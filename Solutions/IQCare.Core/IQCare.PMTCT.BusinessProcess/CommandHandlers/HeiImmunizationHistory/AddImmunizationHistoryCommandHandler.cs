@@ -39,7 +39,7 @@ namespace IQCare.PMTCT.BusinessProcess.CommandHandlers.HeiImmunizationHistory
                             DeleteFlag = vaccine.DeleteFlag,
                             PatientId = vaccine.PatientId,
                             PatientMasterVisitId = vaccine.PatientMasterVisitId,
-                            Period = vaccine.Period,
+                            PeriodId = vaccine.PeriodId,
                             VaccineDate = vaccine.VaccineDate,
                             VaccineStage = vaccine.VaccineStage,
                             Vaccine = vaccine.Vaccine,                          
