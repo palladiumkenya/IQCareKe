@@ -91,11 +91,14 @@ export class HeiComponent implements OnInit {
         this.deliveryMatFormGroup = new FormArray([]);
         this.visitDetailsFormGroup = new FormArray([]);
         this.tbAssessmentFormGroup = new FormArray([]);
+
         this.immunizationHistoryFormGroup = new FormArray([]);
         this.milestonesFormGroup = new FormArray([]);
         this.infantFeedingFormGroup = new FormArray([]);
+
         this.heiOutcomeFormGroup = new FormArray([]);
         this.nextAppointmentFormGroup = new FormArray([]);
+
         this.hivTestingFormGroup = [];
         this.formType = 'hei';
     }
