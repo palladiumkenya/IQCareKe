@@ -13,6 +13,7 @@ import { PatientIptOutcome } from '../_models/hei/PatientIptOutcome';
 import { PatientIpt } from '../_models/hei/PatientIpt';
 import { LabOrder } from '../_models/hei/LabOrder';
 import { OrdVisitCommand } from '../_models/hei/OrdVisitCommand';
+import { CompleteLabOrderCommand } from '../_models/hei/CompleteLabOrderCommand';
 
 
 const httpOptions = {
@@ -137,11 +138,12 @@ export class HeiService {
         );
     }
 
-    public saveCompleteHeiLabOrder(): Observable<any> {
-        return this.http.post(this.API_LAB_URL + '/', JSON.stringify(''), httpOptions).pipe(
-            tap(saveCompleteHeiLabOrder => this.errorHandler.log(`successfully completed hei laborder`)),
-            catchError(this.errorHandler.handleError<any>('Error completing hei laborder'))
-        );
+    public saveCompleteHeiLabOrder(completeLabOrderCommand: CompleteLabOrderCommand): Observable<any> {
+        return this.http.post(this.API_LAB_URL + '/api/LabOrder/CompleteLabOrder', JSON.stringify(completeLabOrderCommand),
+            httpOptions).pipe(
+                tap(saveCompleteHeiLabOrder => this.errorHandler.log(`successfully completed hei laborder`)),
+                catchError(this.errorHandler.handleError<any>('Error completing hei laborder'))
+            );
     }
 
     public getPatientById(patientId: number): Observable<any> {
@@ -167,6 +169,13 @@ export class HeiService {
         return this.http.post<any[]>(this.API_LAB_URL + '/api/LabTests/GetLabTests', options, httpOptions).pipe(
             tap(getHeiLabTests => this.errorHandler.log(`successfully fetched hei labtests`)),
             catchError(this.errorHandler.handleError<any>('Error fetching labtests'))
+        );
+    }
+
+    public getLabTestPametersByLabTestId(labTestId: number): Observable<any[]> {
+        return this.http.get<any[]>(this.API_LAB_URL + '/api/LabTests/GetLabTestPametersByLabTestId/' + labTestId).pipe(
+            tap(getHeiLabTests => this.errorHandler.log(`successfully fetched labtest parameters`)),
+            catchError(this.errorHandler.handleError<any>('Error fetching labtest parameters'))
         );
     }
 }

@@ -38,7 +38,7 @@ namespace IQCare.Lab.Core.Models
         public int LabOrderId { get; set; }
         public int LabTestId { get; set; }
         public int FacilityId { get; set; }
-        public decimal ResultValues { get; set; }
+        public decimal? ResultValues { get; set; }
         public string ResultTexts { get; set; }
         public int LabOrderTestId { get; set; }
         public string ResultUnits { get; set; }
@@ -48,7 +48,7 @@ namespace IQCare.Lab.Core.Models
         public DateTime CreateDate { get; set; }
         public string AuditData { get; set; }
 
-        public void UpdateResults(decimal resultValues, DateTime resultDate,string resultText,string resultUnit)
+        public void UpdateResults(DateTime resultDate,string resultText,string resultUnit, decimal? resultValues)
         {
             ResultValues = resultValues;
             ResultDate = resultDate;

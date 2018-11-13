@@ -64,7 +64,8 @@ export class HeiHivtestingComponent implements OnInit {
                     dateofsamplecollection: data.dateofsamplecollection,
                     result: data.result,
                     dateresultscollected: data.dateresultscollected,
-                    comments: data.comments
+                    comments: data.comments,
+                    resultText: data.resultText
                 });
 
                 this.dataSource = new MatTableDataSource(this.hiv_testing_table_data);
@@ -85,4 +86,5 @@ export interface HivTestingTableData {
     result?: string;
     dateresultscollected?: Date;
     comments?: string;
+    resultText: string;
 }
