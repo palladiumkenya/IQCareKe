@@ -1,7 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.Diagnostics;
-using IQCare.Common.BusinessProcess.Interfaces;
-using IQCare.Common.BusinessProcess.Services;
 using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -11,13 +9,8 @@ using Microsoft.Extensions.DependencyInjection;
 using System.IO;
 using System.Reflection;
 using IQCare.Helpers;
-using IQCareRecords.Common.BusinessProcess;
-using Microsoft.AspNetCore.Http;
-using System.Web;
-using Microsoft.AspNetCore.Hosting.Internal;
-
-using Microsoft.Extensions.PlatformAbstractions;
 using AutoMapper;
+using IQCare.PMTCT.BusinessProcess.MapperProfiles;
 
 namespace IQCare
 {

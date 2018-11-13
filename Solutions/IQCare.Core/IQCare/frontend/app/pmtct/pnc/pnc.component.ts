@@ -20,6 +20,7 @@ import { DrugAdministrationCommand } from '../maternity/commands/drug-administra
 import { PartnerTestingCommand } from '../_models/PartnerTestingCommand';
 import { MaternityCounsellingCommand } from '../maternity/commands/maternity-counselling-command';
 import { MaternityService } from '../_services/maternity.service';
+import { PatientScreeningCommand } from '../_models/PatientScreeningCommand';
 
 @Component({
     selector: 'app-pnc',
@@ -38,6 +39,7 @@ export class PncComponent implements OnInit {
 
     isLinear: boolean = true;
     formType: string;
+    isEdit: boolean = false;
 
     yesnoOptions: LookupItemView[] = [];
     hivFinalResultsOptions: LookupItemView[] = [];
@@ -60,6 +62,7 @@ export class PncComponent implements OnInit {
     referralFromOptions: LookupItemView[] = [];
     motherExaminationOptions: LookupItemView[] = [];
     babyExaminationControls: LookupItemView[] = [];
+    drugAdministrationCategories: LookupItemView[] = [];
 
     pncHivOptions: any[] = [];
     matHistoryOptions: any[] = [];
@@ -109,12 +112,19 @@ export class PncComponent implements OnInit {
                 this.patientId = params.patientId;
                 this.personId = params.personId;
                 this.serviceAreaId = params.serviceAreaId;
+                this.patientMasterVisitId = params.patientMasterVisitId;
+                this.patientEncounterId = params.patientEncounterId;
+
+                if (!this.patientMasterVisitId) {
+                    this.patientMasterVisitId = JSON.parse(localStorage.getItem('patientMasterVisitId'));
+                    this.patientEncounterId = JSON.parse(localStorage.getItem('patientEncounterId'));
+                } else {
+                    this.isEdit = true;
+                }
             }
         );
 
         this.userId = JSON.parse(localStorage.getItem('appUserId'));
-        this.patientMasterVisitId = JSON.parse(localStorage.getItem('patientMasterVisitId'));
-        this.patientEncounterId = JSON.parse(localStorage.getItem('patientEncounterId'));
         this.visitDate = new Date(localStorage.getItem('visitDate'));
         this.visitType = JSON.parse(localStorage.getItem('visitType'));
 
@@ -127,6 +137,12 @@ export class PncComponent implements OnInit {
         this.lookupitemservice.getByGroupNameAndItemName('Counselled On', 'Infant Feeding').subscribe(
             (res) => {
                 this.infantFeedingTopicId = res['itemId'];
+            }
+        );
+
+        this.lookupitemservice.getByGroupName('PncDrugAdministration').subscribe(
+            (res) => {
+                this.drugAdministrationCategories = res['lookupItems'];
             }
         );
 
@@ -462,7 +478,7 @@ export class PncComponent implements OnInit {
             AuditData: ''
         };
 
-        /*const drugAdministrationCommand: DrugAdministrationCommand = {
+        const drugAdministrationCommand: DrugAdministrationCommand = {
             Id: 0,
             PatientId: this.patientId,
             PatientMasterVisitId: this.patientMasterVisitId,
@@ -470,13 +486,24 @@ export class PncComponent implements OnInit {
             AdministredDrugs: []
         };
 
-        for (let i = 0; i < 7; i++) {
+        for (let i = 0; i < this.drugAdministrationCategories.length; i++) {
+            let value;
+            if (this.drugAdministrationCategories[i].itemName == 'Started HAART in PNC') {
+                value = this.drugAdministration_PartnerTesting_FormGroup.value[0]['startedARTPncVisit'];
+            } else if (this.drugAdministrationCategories[i].itemName == 'Haematinics given') {
+                value = this.drugAdministration_PartnerTesting_FormGroup.value[0]['haematinics_given'];
+            } else if (this.drugAdministrationCategories[i].itemName == 'Infant_Drug') {
+                value = this.drugAdministration_PartnerTesting_FormGroup.value[0]['infant_drug'];
+            } else if (this.drugAdministrationCategories[i].itemName == 'Infant_Start_Continue') {
+                value = this.drugAdministration_PartnerTesting_FormGroup.value[0]['infant_start'];
+            }
+
             drugAdministrationCommand.AdministredDrugs.push({
-                Id?: 1,
-                Value?: '',
-                Description?: ''
+                Id: this.drugAdministrationCategories[i].itemId,
+                Value: value,
+                Description: this.drugAdministrationCategories[i].itemName
             });
-        }*/
+        }
 
         const partnerTestingCommand: PartnerTestingCommand = {
             PatientId: this.patientId,
@@ -499,6 +526,36 @@ export class PncComponent implements OnInit {
             CreatedBy: this.userId
         };
 
+        const isCacxDone = this.yesnoOptions.filter(obj =>
+            obj.itemId == this.cervicalCancerScreeningFormGroup.value[0]['cervicalcancerscreening']);
+
+        let screeningTypeId;
+        if (this.cervicalCancerScreeningFormGroup.value[0]['method']) {
+            const screeningMethod = this.cervicalCancerScreeningMethodOptions.filter(obj =>
+                obj.itemId == this.cervicalCancerScreeningFormGroup.value[0]['method']);
+            screeningTypeId = screeningMethod[0]['masterId'];
+        } else {
+            screeningTypeId = 0;
+        }
+
+        const patientScreeningCommand: PatientScreeningCommand = {
+            Id: 0,
+            PatientId: this.patientId,
+            PatientMasterVisitId: this.patientMasterVisitId,
+            ScreeningTypeId: screeningTypeId,
+            ScreeningDone: isCacxDone[0].itemName == 'Yes' ? true : false,
+            ScreeningDate: new Date(),
+            ScreeningCategoryId: this.cervicalCancerScreeningFormGroup.value[0]['method'],
+            ScreeningValueId: this.cervicalCancerScreeningFormGroup.value[0]['results'],
+            Comment: '',
+            Active: true,
+            DeleteFlag: false,
+            CreatedBy: this.userId,
+            CreateDate: new Date(),
+            AuditData: '',
+            VisitDate: this.visitDetailsFormGroup.value[0]['visitDate']
+        };
+
         const pncVisitDetails = this.pncService.savePncVisitDetails(pncVisitDetailsCommand);
         const pncPostNatalExam = this.pncService.savePncPostNatalExam(pncPostNatalExamCommand);
         const pncBabyExam = this.pncService.savePncPostNatalExam(pncBabyExaminationCommand);
@@ -507,15 +564,17 @@ export class PncComponent implements OnInit {
         const pncReferral = this.pncService.savePncReferral(pncReferralCommand);
         const pncNextAppointment = this.pncService.savePncNextAppointment(pncNextAppointmentCommand);
         const pncFamilyPlanning = this.pncService.savePncFamilyPlanning(familyPlanningCommand);
-        const pncDrugAdministration = this.pncService.savePncDrugAdministration();
+        const pncDrugAdministration = this.pncService.savePncDrugAdministration(drugAdministrationCommand);
         const pncPartnerTesting = this.pncService.savePartnerTesting(partnerTestingCommand);
         const pncPatientEducation = this.maternityService.savePatientEducation(patiendEducationCommand);
+        const pncPatientScreening = this.maternityService.saveScreening(patientScreeningCommand);
 
         forkJoin([
             pncHivStatus, pncDiagnosis, pncReferral,
             pncNextAppointment, pncVisitDetails,
             pncPostNatalExam, pncBabyExam, pncFamilyPlanning,
-            pncPartnerTesting, pncPatientEducation])
+            pncPartnerTesting, pncPatientEducation, pncDrugAdministration,
+            pncPatientScreening])
             .subscribe(
                 (result) => {
                     console.log(result);

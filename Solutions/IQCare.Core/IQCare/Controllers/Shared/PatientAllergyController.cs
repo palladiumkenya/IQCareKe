@@ -31,9 +31,9 @@ namespace IQCare.Controllers.Shared
             return BadRequest(response);
         }
         [HttpGet("GetPatientAllergy")]
-        public async Task<IActionResult> GetPatientAllergy(int PatientId)
+        public async Task<IActionResult> GetPatientAllergy(int patientId)
         {
-            var results = await _mediator.Send(new GetPatientAllergies() { PatientId = PatientId }, HttpContext.RequestAborted);
+            var results = await _mediator.Send(new GetPatientAllergies() { PatientId = patientId }, HttpContext.RequestAborted);
             if (results.IsValid)
                 return Ok(results.Value);
             return BadRequest(results);

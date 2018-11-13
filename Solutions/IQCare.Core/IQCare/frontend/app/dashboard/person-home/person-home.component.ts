@@ -6,6 +6,8 @@ import { PersonHomeService } from '../services/person-home.service';
 import { NotificationService } from '../../shared/_services/notification.service';
 import { SnotifyService } from 'ng-snotify';
 import { PersonView } from '../../records/_models/personView';
+import { MatTableDataSource } from '@angular/material';
+
 
 @Component({
     selector: 'app-person-home',
@@ -23,7 +25,9 @@ export class PersonHomeComponent implements OnInit {
     public personAllergies: any;
 
     services: any[];
-
+    chronic_illness_data : any[] = [];
+    dataSource = new MatTableDataSource(this.chronic_illness_data);
+    chronic_illness_displaycolumns = ['illness','onsetdate','treatment','dose'];
     constructor(private route: ActivatedRoute,
         private personService: PersonHomeService,
         private snotifyService: SnotifyService,
@@ -46,9 +50,9 @@ export class PersonHomeComponent implements OnInit {
 
             this.services = servicesArray;
         });
-
         localStorage.removeItem('patientEncounterId');
         localStorage.removeItem('patientMasterVisitId');
+        localStorage.removeItem('selectedService');
     }
 
     public getPatientDetilsById(personId: number) {
@@ -66,13 +70,14 @@ export class PersonHomeComponent implements OnInit {
             });
     }
 
+
     onEdit() {
         this.zone.run(() => {
             this.router.navigate(['/record/person/update/' + this.personId], { relativeTo: this.route });
         });
     }
-    getUserAllergies() {
-        this.personAllergies$ = this.personService.getPatientAllergies().subscribe(
+    getUserAllergies(patientId: number) {
+        this.personAllergies$ = this.personService.getPatientAllergies(patientId).subscribe(
             personAllergies => {
                 console.log(personAllergies);
                 this.personAllergies = personAllergies;

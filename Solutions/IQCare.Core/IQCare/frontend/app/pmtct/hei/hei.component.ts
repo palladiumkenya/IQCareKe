@@ -1,7 +1,7 @@
 import { LabOrder } from './../_models/hei/LabOrder';
 import { HeiService } from './../_services/hei.service';
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { Component, NgZone, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { LookupItemView } from '../../shared/_models/LookupItemView';
 import { FormGroup, FormArray } from '@angular/forms';
 import { ImmunizationHistoryTableData } from '../_models/hei/ImmunizationHistoryTableData';
@@ -11,6 +11,9 @@ import { Milestone } from '../_models/hei/Milestone';
 import { PatientIcf } from '../_models/hei/PatientIcf';
 import { PatientIcfAction } from '../_models/hei/PatientIcfAction';
 import { DefaultParameters } from '../_models/hei/DefaultParameters';
+import { forkJoin } from 'rxjs/index';
+import { SnotifyService } from 'ng-snotify';
+import { NotificationService } from '../../shared/_services/notification.service';
 
 @Component({
     selector: 'app-hei',
@@ -26,6 +29,9 @@ export class HeiComponent implements OnInit {
     userId: number;
     formType: string;
     locationId: number;
+    patientEncounterId: number;
+    visitDate: Date;
+    visitType: number;
 
     defaultParameters: DefaultParameters;
 
@@ -76,7 +82,11 @@ export class HeiComponent implements OnInit {
     hivTestingFormGroup: any[];
 
     constructor(private route: ActivatedRoute,
-        private heiService: HeiService) {
+        private heiService: HeiService,
+        private zone: NgZone,
+        private router: Router,
+        private snotifyService: SnotifyService,
+        private notificationService: NotificationService) {
         this.deliveryMatFormGroup = new FormArray([]);
         this.visitDetailsFormGroup = new FormArray([]);
         this.tbAssessmentFormGroup = new FormArray([]);
@@ -84,6 +94,7 @@ export class HeiComponent implements OnInit {
         this.milestonesFormGroup = new FormArray([]);
         this.infantFeedingFormGroup = new FormArray([]);
         this.heiOutcomeFormGroup = new FormArray([]);
+        this.nextAppointmentFormGroup = new FormArray([]);
         this.hivTestingFormGroup = [];
         this.formType = 'hei';
     }
@@ -97,11 +108,14 @@ export class HeiComponent implements OnInit {
                 this.personId = personId;
                 this.serviceAreaId = serviceAreaId;
             }
-
         );
 
         this.userId = JSON.parse(localStorage.getItem('appUserId'));
         this.locationId = JSON.parse(localStorage.getItem('appLocationId'));
+        this.patientMasterVisitId = JSON.parse(localStorage.getItem('patientMasterVisitId'));
+        this.patientEncounterId = JSON.parse(localStorage.getItem('patientEncounterId'));
+        this.visitDate = new Date(localStorage.getItem('visitDate'));
+        this.visitType = JSON.parse(localStorage.getItem('visitType'));
 
         this.defaultParameters = {
             patientId: this.patientId,
@@ -355,7 +369,18 @@ export class HeiComponent implements OnInit {
             }
         }
 
-        this.heiService.saveHeiVisitDetails(this.patientId, this.patientMasterVisitId, this.visitDetailsFormGroup.value[0], this.userId)
+        const visitDetailsData = {
+            'Id': 0,
+            'PatientMasterVisitId': this.patientMasterVisitId,
+            'PatientId': this.patientId,
+            'VisitDate': this.visitDetailsFormGroup.value[0]['visitDate'],
+            'VisitType': this.visitDetailsFormGroup[0]['visitType'],
+            'CreatedDate': new Date(),
+            'CreatedBy': this.userId,
+            'DeleteFlag': false
+        };
+
+        this.heiService.saveHeiVisitDetails(visitDetailsData)
             .subscribe(
                 (result) => {
                     console.log(result);
@@ -363,42 +388,35 @@ export class HeiComponent implements OnInit {
                 }
             );
 
-        this.heiService.saveHieDelivery(this.patientId, this.patientMasterVisitId, this.userId,
-            isMotherRegistered, this.deliveryMatFormGroup.value[0], this.deliveryMatFormGroup.value[1])
+        const heiVisitDetails = this.heiService.saveHeiVisitDetails(visitDetailsData);
+        const heiDelivery = this.heiService.saveHieDelivery(this.patientId, this.patientMasterVisitId, this.userId,
+            isMotherRegistered, this.deliveryMatFormGroup.value[0], this.deliveryMatFormGroup.value[1]);
+        const heiImmunization = this.heiService.saveImmunizationHistory(this.vaccination);
+        const heiMilestone = this.heiService.saveMilestoneHistory(this.milestone);
+        const heitbAssessment = this.heiService.saveTbAssessment(patientIcf, patientIcfAction);
+        const heiLab = this.heiService.saveHeiLabOrder(laborder);
+
+
+
+        forkJoin([
+            heiVisitDetails  ])
             .subscribe(
                 (result) => {
                     console.log(result);
+
+
+                    this.snotifyService.success('Successfully saved PNC encounter ', 'PNC', this.notificationService.getConfig());
+                },
+                (error) => {
+                    console.log(`error ` + error);
+                },
+                () => {
+                    console.log(`complete`);
                 }
             );
 
-        this.heiService.saveImmunizationHistory(this.vaccination)
-            .subscribe(
-                (result) => {
-                    console.log(result);
-                }
-            );
-
-        this.heiService.saveMilestoneHistory(this.milestone)
-            .subscribe(
-                (result) => {
-                    console.log(result);
-                }
-            );
-
-
-        this.heiService.saveTbAssessment(patientIcf, patientIcfAction)
-            .subscribe(
-                (results) => {
-                    console.log(results);
-                }
-            );
-
-
-        this.heiService.saveHeiLabOrder(laborder)
-            .subscribe(
-                (results) => {
-                    console.log(results);
-                }
-            );
+        this.zone.run(() => {
+            this.router.navigate(['/dashboard/personhome/' + this.personId], { relativeTo: this.route });
+        });
     }
 }

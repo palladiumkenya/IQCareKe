@@ -13,6 +13,7 @@ using DataAccess.Common;
 using DataAccess.Entity;
 using Entities.CCC;
 using DataAccess.CCC.Repository.Lookup;
+using DataAccess.Context;
 
 namespace BusinessProcess.CCC
 {
@@ -122,7 +123,7 @@ namespace BusinessProcess.CCC
                     Expression<Func<PatientLookup, bool>> expressionPatientStatusEnrolled =
                                     c => c.PatientStatus.ToLower().Contains("active") || 
                                     c.PatientStatus.ToLower().Contains("death") || 
-                                    c.PatientStatus.ToLower().Contains("losttofollowup") || 
+                                    c.PatientStatus.ToLower().Contains("LostToFollowUp") || 
                                     c.PatientStatus.ToLower().Contains("transfer out") || 
                                     c.PatientStatus.ToLower().Contains("confirmed hiv negative") ||
                                     c.PatientStatus.ToLower().Contains("hiv negative");
@@ -244,7 +245,7 @@ namespace BusinessProcess.CCC
                     if (!string.IsNullOrEmpty(patientId.Trim()))
                     {
                         Expression<Func<PatientLookup, bool>> expressionPatientId =
-                            c => c.EnrollmentNumber.ToString().Contains(patientId.Trim().ToString());
+                            c => c.EnrollmentNumber.ToString().Contains(patientId.Trim().ToString()) || c.PatientClinicId.ToString().Contains(patientId.Trim().ToString());
 
                         expresionFinal = PredicateBuilder.And(expresionFinal, expressionPatientId);
                     }
@@ -289,8 +290,8 @@ namespace BusinessProcess.CCC
                                          c.PatientStatus.ToLower().Contains("losttofollowup") ||
                                          c.PatientStatus.ToLower().Contains("transfer out") ||
                                          c.PatientStatus.ToLower().Contains("confirmed hiv negative") ||
-                                         c.PatientStatus.ToLower().Contains("hiv negative");
-                                    c => c.PatientStatus.ToLower().Contains("not enrolled") == false;
+                                         c.PatientStatus.ToLower().Contains("hiv negative") ||
+                                        c.PatientStatus.ToLower().Contains("not enrolled") == false;
                                 expresionFinal = PredicateBuilder.And(expresionFinal, expressionPatientStatusEnrolled);
                                 break;
                         }

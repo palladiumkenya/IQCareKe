@@ -215,7 +215,8 @@ namespace IQCare.Web.CCC.WebService
                     };
 
                     //output = JsonConvert.SerializeObject(json);
-                    output = new JavaScriptSerializer().Serialize(json);
+                    string tooutput = new JavaScriptSerializer().Serialize(json);
+                    output = tooutput;
                 }
             }
             catch (Exception e)
@@ -227,7 +228,8 @@ namespace IQCare.Web.CCC.WebService
             {
                 Dispose();
             }
-            return output;
+            string newoutput = output;
+            return newoutput;
         }
 
         

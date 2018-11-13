@@ -481,9 +481,16 @@ namespace IQCare.Web.Patient
                 pnlIdentFields.Controls.Add(new LiteralControl("<table width='100%'>"));
                 pnlIdentFields.Controls.Add(new LiteralControl("<tr>"));
                 pnlIdentFields.Controls.Add(new LiteralControl("<td style='width:40%' align='right'>"));
+                if (theLabelDV[0]["RequiredFlag"] != null)
+                {
 
-                pnlIdentFields.Controls.Add(new LiteralControl("<label align='center'>" + fieldlabel + " :</label>"));
+                    if (theLabelDV[0]["RequiredFlag"].ToString() == "1")
+                        pnlIdentFields.Controls.Add(new LiteralControl("<label align='center' class='required'>" + fieldlabel + " :</label>"));
+                    else
 
+                        pnlIdentFields.Controls.Add(new LiteralControl("<label align='center'>" + fieldlabel + " :</label>"));
+
+                }
                 pnlIdentFields.Controls.Add(new LiteralControl("</td>"));
                 pnlIdentFields.Controls.Add(new LiteralControl("<td style='width:60%'>"));
                 TextBox theSingleText = new TextBox();
@@ -506,8 +513,18 @@ namespace IQCare.Web.Patient
                 pnlIdentFields.Controls.Add(new LiteralControl("<tr>"));
                 pnlIdentFields.Controls.Add(new LiteralControl("<td style='width:40%' align='right'>"));
 
-                pnlIdentFields.Controls.Add(new LiteralControl("<label align='center'>" + fieldlabel + " :</label>"));
+                //pnlIdentFields.Controls.Add(new LiteralControl("<label align='center'>" + fieldlabel + " :</label>"));
 
+                if (theLabelDV[0]["RequiredFlag"] != null)
+                {
+
+                    if (theLabelDV[0]["RequiredFlag"].ToString() == "1")
+                        pnlIdentFields.Controls.Add(new LiteralControl("<label align='center' class='required'>" + fieldlabel + " :</label>"));
+                    else
+
+                        pnlIdentFields.Controls.Add(new LiteralControl("<label align='center'>" + fieldlabel + " :</label>"));
+
+                }
                 pnlIdentFields.Controls.Add(new LiteralControl("</td>"));
                 pnlIdentFields.Controls.Add(new LiteralControl("<td style='width:60%'>"));
                 TextBox theSingleDecimalText = new TextBox();
@@ -529,8 +546,18 @@ namespace IQCare.Web.Patient
                 pnlIdentFields.Controls.Add(new LiteralControl("<tr>"));
                 pnlIdentFields.Controls.Add(new LiteralControl("<td style='width:40%' align='right'>"));
 
-                pnlIdentFields.Controls.Add(new LiteralControl("<label align='center'>" + fieldlabel + " :</label>"));
+                //pnlIdentFields.Controls.Add(new LiteralControl("<label align='center'>" + fieldlabel + " :</label>"));
 
+                if (theLabelDV[0]["RequiredFlag"] != null)
+                {
+
+                    if (theLabelDV[0]["RequiredFlag"].ToString() == "1")
+                        pnlIdentFields.Controls.Add(new LiteralControl("<label align='center' class='required'>" + fieldlabel + " :</label>"));
+                    else
+
+                        pnlIdentFields.Controls.Add(new LiteralControl("<label align='center'>" + fieldlabel + " :</label>"));
+
+                }
                 pnlIdentFields.Controls.Add(new LiteralControl("</td>"));
                 pnlIdentFields.Controls.Add(new LiteralControl("<td style='width:60%'>"));
                 TextBox theNumberText = new TextBox();
@@ -552,8 +579,18 @@ namespace IQCare.Web.Patient
                 pnlIdentFields.Controls.Add(new LiteralControl("<tr>"));
                 pnlIdentFields.Controls.Add(new LiteralControl("<td style='width:40%' align='right'>"));
 
-                pnlIdentFields.Controls.Add(new LiteralControl("<label align='center'>" + fieldlabel + " :</label>"));
+                // pnlIdentFields.Controls.Add(new LiteralControl("<label align='center'>" + fieldlabel + " :</label>"));
 
+                if (theLabelDV[0]["RequiredFlag"] != null)
+                {
+
+                    if (theLabelDV[0]["RequiredFlag"].ToString() == "1")
+                        pnlIdentFields.Controls.Add(new LiteralControl("<label align='center' class='required'>" + fieldlabel + " :</label>"));
+                    else
+
+                        pnlIdentFields.Controls.Add(new LiteralControl("<label align='center'>" + fieldlabel + " :</label>"));
+
+                }
                 pnlIdentFields.Controls.Add(new LiteralControl("</td>"));
                 pnlIdentFields.Controls.Add(new LiteralControl("<td style='width:60%'>"));
                 TextBox theSingleText = new TextBox();

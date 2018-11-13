@@ -1,5 +1,5 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {Subscription} from 'rxjs';
 import {SnotifyService} from 'ng-snotify';
 import {PatientEducationEmitter} from '../../emitters/PatientEducationEmitter';
@@ -44,7 +44,7 @@ export class PatientEducationExaminationComponent implements OnInit {
 
     public counselling_data: CounsellingTopicsEmitters[] = [];
     @Output() nextStep = new EventEmitter<PatientEducationEmitter>();
-    @Output() notify: EventEmitter<FormGroup> = new EventEmitter<FormGroup>();
+    @Output() notify: EventEmitter<object> = new EventEmitter<object>();
     @Input() patientEducationData: PatientEducationCommand;
     @Input() patientEducationFormOptions: any[] = [];
 
@@ -58,11 +58,11 @@ export class PatientEducationExaminationComponent implements OnInit {
 
     ngOnInit() {
         this.PatientEducationFormGroup = this._formBuilder.group({
-            breastExamDone: ['', Validators.required],
-            counsellingDate: ['', Validators.required],
-            counselledOn: ['', Validators.required],
-            treatedSyphilis: ['', Validators.required],
-            testResult: ['', Validators.required]
+            breastExamDone: new FormControl(['', Validators.required]),
+            counsellingDate: new FormControl(['', Validators.required]),
+            counselledOn: new FormControl(['', Validators.required]),
+            treatedSyphilis: new FormControl(['', Validators.required]),
+            testResult: new FormControl(['', Validators.required])
         });
         this.userId = JSON.parse(localStorage.getItem('appUserId'));
         //  this.getLookupOptions('counselledOn', this.topics);
@@ -76,12 +76,11 @@ export class PatientEducationExaminationComponent implements OnInit {
         } = this.patientEducationFormOptions[0];
         this.yesNoOptions = yesnoOptions;
         this.counsellingOptions = patientEducationOptions;
-        this.hivStatusOptions = hivStatusOptions
+        this.hivStatusOptions = hivStatusOptions;
 
 
-        console.log(this.counselling_data + ' hu');
         this.nextStep.emit(this.patientEducationEmitterData);
-        this.notify.emit(this.PatientEducationFormGroup);
+        this.notify.emit({ 'form': this.PatientEducationFormGroup, 'counselling_data': this.counselling_data});
     }
 
     /*  public getLookupOptions(groupName: string, masterName: any[]) {
@@ -111,7 +110,7 @@ export class PatientEducationExaminationComponent implements OnInit {
             counsellingTopics: this.counselling_data
         };
             console.log('breastexamDone' + this.patientEducationEmitterData.breastExamDone + 'from form ' +
-                this.PatientEducationFormGroup.get('breastExamDone').value.itemId)
+                this.PatientEducationFormGroup.get('breastExamDone').value.itemId);
         console.log(this.patientEducationEmitterData);
         this.nextStep.emit(this.patientEducationEmitterData);
     }

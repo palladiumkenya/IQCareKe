@@ -13,8 +13,8 @@
             <mat-form-field class="col-md-12">
                 <mat-select formControlName="preventiveServices" placeholder="Preventive Service">
                     <mat-option value="0"> Select</mat-option>
-                    <mat-option *ngFor="let chronicIllnessOption of chronicIllnessOptions" [value]="chronicIllnessOption" required minlength="0">
-                        {{chronicIllnessOption.itemName}}
+                    <mat-option *ngFor="let preventiveServicesOption of preventiveServicesOptions" [value]="preventiveServicesOption" required minlength="0">
+                        {{preventiveServicesOption.itemName}}
                     </mat-option>
                 </mat-select>
             </mat-form-field>
@@ -150,7 +150,7 @@
         <div class="col-md-4"></div>
     </div>
 </form>
-<div class="row">
+<!--<div class="row">
     <div class="col-md-12">
         <div>
             <button mat-raised-button class="mat-accent" matStepperPrevious><span class="fa fa-arrow-circle-o-left"> Previous</span>
@@ -159,4 +159,4 @@
                     class="fa fa-arrow-circle-o-right" (click)="moveNextStep()"> Next</span></button>
         </div>
     </div>
-</div>
+</div>-->

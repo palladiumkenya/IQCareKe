@@ -3,6 +3,7 @@ using IQCare.Common.BusinessProcess.Commands.Allergies;
 using IQCare.Common.BusinessProcess.Commands.Appointment;
 using IQCare.Common.Core.Models;
 using IQCare.Common.Infrastructure;
+using IQCare.Library;
 using MediatR;
 using Serilog;
 using System;

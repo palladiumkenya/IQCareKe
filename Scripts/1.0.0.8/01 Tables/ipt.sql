@@ -1,0 +1,1 @@
+alter table [dbo].[PatientIptOutcome] alter column IptEvent int

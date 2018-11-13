@@ -3,15 +3,17 @@ using IQCare.Common.BusinessProcess.Commands.Allergies;
 using IQCare.Common.BusinessProcess.Commands.Appointment;
 using IQCare.Common.Core.Models;
 using IQCare.Common.Infrastructure;
+using IQCare.Library;
 using MediatR;
 using Serilog;
 using System;
 using System.Threading;
 using System.Threading.Tasks;
 
+
 namespace IQCare.Common.BusinessProcess.CommandHandlers.Allergies
 {
-    class AddAllergiesCommandHandler : IRequestHandler<AddAllergiesCommand, Result<AddPatientAllergiesResponse>>
+    public class AddAllergiesCommandHandler : IRequestHandler<AddAllergiesCommand, Result<AddPatientAllergiesResponse>>
     {
         ICommonUnitOfWork _commontUnitOfWork;
         IMapper _mapper;

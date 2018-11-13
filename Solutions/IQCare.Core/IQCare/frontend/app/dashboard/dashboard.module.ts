@@ -24,6 +24,9 @@ import { EnrollmentServicesComponent } from './enrollment/enrollment-services/en
 import { ReactiveFormsModule } from '@angular/forms';
 import { SharedModule } from '../shared/shared.module';
 import { EnrollmentService } from '../registration/_services/enrollment.service';
+import { ChronichIllnessComponent } from './chronich-illness/chronich-illness.component';
+import { PatientRelationshipsComponent } from './patient-relationships/patient-relationships.component';
+import { PatientAllergiesComponent } from './patient-allergies/patient-allergies.component';
 
 @NgModule({
     imports: [
@@ -53,7 +56,10 @@ import { EnrollmentService } from '../registration/_services/enrollment.service'
         PortalComponent,
         PersonHomeComponent,
         ServicesListComponent,
-        EnrollmentServicesComponent
+        EnrollmentServicesComponent,
+        ChronichIllnessComponent,
+        PatientRelationshipsComponent,
+        PatientAllergiesComponent
     ],
     providers: [
         NotificationService,

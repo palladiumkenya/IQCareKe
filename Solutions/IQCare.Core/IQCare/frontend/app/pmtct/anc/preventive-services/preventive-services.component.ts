@@ -22,7 +22,7 @@ export interface Options {
 export class PreventiveServicesComponent implements OnInit {
     public PreventiveServicesFormGroup: FormGroup;
     lookupItemView$: Subscription;
-    chronicIllnessOptions: any[] = [];
+    preventiveServicesOptions: any[] = [];
     public YesNoOptions: any[] = [];
     public YesNoNaOptions: any[] = [];
     public FinalResultOptions: any[] = [];
@@ -30,7 +30,7 @@ export class PreventiveServicesComponent implements OnInit {
     @Output() nextStep = new EventEmitter<PreventiveServiceEmitter>();
     @Input() preventiveServices: PreventiveServiceEmitter;
     @Input() serviceFormOptions: any[] = [];
-    @Output() notify: EventEmitter<FormGroup> = new EventEmitter<FormGroup>();
+    @Output() notify: EventEmitter<Object> = new EventEmitter<Object>();
     public preventiveServicesData: PreventiveServiceEmitter;
     public serviceData: PreventiveEmitter[] = [];
 
@@ -49,7 +49,7 @@ export class PreventiveServicesComponent implements OnInit {
             insecticideTreatedNet: ['', Validators.required],
             insecticideTreatedNetGivenDate: ['', Validators.required],
             antenatalExercise: ['', Validators.required],
-            insecticideGivenDate: ['', Validators.required],
+         //   insecticideGivenDate: ['', Validators.required],
             PartnerTestingVisit: ['', Validators.required],
             finalHIVResult: ['', Validators.required]
         });
@@ -57,15 +57,16 @@ export class PreventiveServicesComponent implements OnInit {
         const {
             yesNoNaOptions,
             yesNoOptions,
-            chronicIllnessOptions,
+            preventiveServicesOptions,
             hivFinalResultOptions
         } = this.serviceFormOptions[0];
         this.YesNoNaOptions = yesNoNaOptions;
         this.YesNoOptions = yesNoOptions;
         this.FinalResultOptions = hivFinalResultOptions;
-        this.chronicIllnessOptions = chronicIllnessOptions;
+        this.preventiveServicesOptions = preventiveServicesOptions;
 
         console.log('preventive service' + hivFinalResultOptions[0].itemName);
+        this.notify.emit({'form': this.PreventiveServicesFormGroup, 'preventive_service_data': this.serviceData});
 
         /*this.getLookupItems('PreventiveService', this.services);
          this.getLookupItems('YesNo', this.yesnos);

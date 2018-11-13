@@ -13,6 +13,7 @@ namespace Entities.CCC.Lookup
         public int PersonId { get; set; }
         public int? ptn_pk { get; set; }
         public string  EnrollmentNumber { get; set; }
+        public string PatientClinicId { get; set; }
         public string PatientIndex { get; set; }
         public string FirstName { get; set; }
         public string MiddleName { get; set; }

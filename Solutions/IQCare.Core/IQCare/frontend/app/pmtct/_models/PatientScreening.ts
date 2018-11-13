@@ -8,5 +8,4 @@ export interface PatientScreening {
     ScreeningCategoryId?: number;
     ScreeningValueId?: number;
     Comment?: string;
-
 }

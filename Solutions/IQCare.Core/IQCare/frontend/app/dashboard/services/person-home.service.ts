@@ -22,6 +22,7 @@ export class PersonHomeService {
         private errorHandler: ErrorHandlerService) { }
 
     public getPatientByPersonId(personId: Number): Observable<PersonView> {
+        console.log(personId);
         return this.http.get<PersonView>(this.API_URL + '' + this._url + '/' + personId).pipe(
             tap(getPatientByPersonId => this.errorHandler.log('get ' + personId + 'options by Name')),
             catchError(this.errorHandler.handleError<PersonView>('getPatientByPersonId'))
@@ -57,10 +58,24 @@ export class PersonHomeService {
             catchError(this.errorHandler.handleError<any[]>('getPatientType'))
         );
     }
-    public getPatientAllergies(): Observable<any> {
-        return this.http.get<any>(this.API_URL + '/api/PatientAllergy/').pipe(
-            tap(getPersonIdentifiers => this.errorHandler.log('get person identifiers options')),
-            catchError(this.errorHandler.handleError<any[]>('getPersonIdentifiers'))
+    public getPatientAllergies(patientId : number): Observable<any> {
+        return this.http.get<any>(this.API_URL + '/api/PatientAllergy/GetPatientAllergy?patientId=' + patientId).pipe(
+            tap(getPatientAllergies => this.errorHandler.log('get patient Allergy')),
+            catchError(this.errorHandler.handleError<any[]>('getPatientAllergies'))
         );
     }
+
+    public getChronicIllnessesByPatientId(patientId:number) : Observable<any> {
+        return this.http.get<any>(this.API_URL + '/api/PatientChronicIllness/GetByPatientId/' + patientId).pipe(
+            tap(getChronicIllnessesByPatientId => this.errorHandler.log(`get patient chronic illnesses`)),
+            catchError(this.errorHandler.handleError<any>('getChronicIllnessesByPatientId'))
+        );
+    }
+    public getRelationshipsByPatientId(patientId:number) : Observable<any> {
+        return this.http.get<any>(this.API_URL + '/api/PatientServices/GetRelationshipsByPatientId/' + patientId).pipe(
+            tap(getRelationshipsByPatientId => this.errorHandler.log(`get patient relationships`)),
+            catchError(this.errorHandler.handleError<any>('getRelationshipsByPatientId'))
+        );
+    }
+
 }
