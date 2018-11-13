@@ -137,6 +137,13 @@ export class HeiService {
         );
     }
 
+    public saveCompleteHeiLabOrder(): Observable<any> {
+        return this.http.post(this.API_LAB_URL + '/', JSON.stringify(''), httpOptions).pipe(
+            tap(saveCompleteHeiLabOrder => this.errorHandler.log(`successfully completed hei laborder`)),
+            catchError(this.errorHandler.handleError<any>('Error completing hei laborder'))
+        );
+    }
+
     public getPatientById(patientId: number): Observable<any> {
         return this.http.get<any>(this.API_URL + '/api/Register/GetPatientById/' + patientId).pipe(
             tap(getPatientById => this.errorHandler.log(`successfully fetched patient`)),
@@ -152,6 +159,14 @@ export class HeiService {
         return this.http.post<any>(this.API_URL + '/api/PatientMasterVisit/addOrdVisit', JSON.stringify(ordVisitCommand), httpOptions).pipe(
             tap(saveOrdVisit => this.errorHandler.log(`successfully added ordVisit`)),
             catchError(this.errorHandler.handleError<any>('Error saving ordVisit'))
+        );
+    }
+
+    public getHeiLabTests(): Observable<any[]> {
+        const options = JSON.stringify(['PCR', 'Viral Load', 'HIV Rapid Test']);
+        return this.http.post<any[]>(this.API_LAB_URL + '/api/LabTests/GetLabTests', options, httpOptions).pipe(
+            tap(getHeiLabTests => this.errorHandler.log(`successfully fetched hei labtests`)),
+            catchError(this.errorHandler.handleError<any>('Error fetching labtests'))
         );
     }
 }

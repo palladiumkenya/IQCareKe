@@ -49,7 +49,7 @@ namespace IQCare.Lab.Core.Models
 
         public DateTime? StatusDate { get; private set; }
 
-        public string AuditDate { get; private set; }
+        public string AuditData { get; private set; }
 
         public DateTime CreateDate { get; private set; }
 
