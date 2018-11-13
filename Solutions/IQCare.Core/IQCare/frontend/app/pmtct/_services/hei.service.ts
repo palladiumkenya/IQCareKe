@@ -137,6 +137,13 @@ export class HeiService {
         );
     }
 
+    public saveCompleteHeiLabOrder(): Observable<any> {
+        return this.http.post(this.API_LAB_URL + '/', JSON.stringify(''), httpOptions).pipe(
+            tap(saveCompleteHeiLabOrder => this.errorHandler.log(`successfully completed hei laborder`)),
+            catchError(this.errorHandler.handleError<any>('Error completing hei laborder'))
+        );
+    }
+
     public getPatientById(patientId: number): Observable<any> {
         return this.http.get<any>(this.API_URL + '/api/Register/GetPatientById/' + patientId).pipe(
             tap(getPatientById => this.errorHandler.log(`successfully fetched patient`)),

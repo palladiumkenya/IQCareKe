@@ -459,17 +459,24 @@ export class HeiComponent implements OnInit {
 
                     laborder.VisitId = result[0]['visit_Id'];
                     const heiLab = this.heiService.saveHeiLabOrder(laborder).subscribe(
-                        (res => {
+                        (res) => {
+                            const labOrderId = res['labOrderId'];
 
-                        })
+                            /*const completeHeiLabOrder = this.heiService.saveCompleteHeiLabOrder().subscribe(
+                                (completeRes) => {
+
+                                }
+                            );*/
+                        }
                     );
-                    this.snotifyService.success('Successfully saved PNC encounter ', 'PNC', this.notificationService.getConfig());
+
                 },
                 (error) => {
                     console.log(`error ` + error);
                 },
                 () => {
                     console.log(`complete`);
+                    this.snotifyService.success('Successfully saved HEI encounter ', 'HEI', this.notificationService.getConfig());
                 }
             );
 
