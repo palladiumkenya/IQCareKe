@@ -361,7 +361,7 @@ export class HeiComponent implements OnInit {
             OrderDate: new Date(),
             ClinicalOrderNotes: '',
             CreateDate: new Date(),
-            OrderStatus: 'string',
+            OrderStatus: 'Pending',
             UserId: this.userId,
             PatientMasterVisitId: this.patientMasterVisitId,
             LabTests: []
@@ -414,7 +414,6 @@ export class HeiComponent implements OnInit {
         const heiImmunization = this.heiService.saveImmunizationHistory(this.vaccination);
         const heiMilestone = this.heiService.saveMilestoneHistory(this.milestone);
         const heitbAssessment = this.heiService.saveTbAssessment(patientIcf, patientIcfAction);
-        const heiLab = this.heiService.saveHeiLabOrder(laborder);
         const heiOrdVisit = this.heiService.saveOrdVisit(ordVisitCommand, laborder);
 
 
@@ -423,7 +422,12 @@ export class HeiComponent implements OnInit {
                 (result) => {
                     console.log(result);
 
+                    laborder.VisitId = result[0]['visit_Id'];
+                    const heiLab = this.heiService.saveHeiLabOrder(laborder).subscribe(
+                        (res => {
 
+                        })
+                    );
                     this.snotifyService.success('Successfully saved PNC encounter ', 'PNC', this.notificationService.getConfig());
                 },
                 (error) => {
