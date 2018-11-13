@@ -13,6 +13,7 @@ namespace IQCare.Maternity.BusinessProcess.MapperProfiles
         {
             CreateMap<AddMaternalPatientDeliveryInfoCommand, PatientDeliveryInformation>()
                 .ForMember(dest => dest.CreateDate, src => src.MapFrom(x => DateTime.Now))
+                .ForMember(dest => dest.DeleteFlag, src => src.MapFrom(x => false))
                 .ReverseMap();
         }
     }

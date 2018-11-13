@@ -50,6 +50,7 @@ namespace IQCare.Maternity.Core.Domain.Maternity
         public int CreatedBy { get; private set; }
         public DateTime CreateDate { get; private set; }
         public string AuditData { get; private set; }
+        public bool DeleteFlag { get; set; }
 
     }
 }

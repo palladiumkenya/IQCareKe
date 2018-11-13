@@ -11,7 +11,7 @@ CREATE TABLE [dbo].[PatientProfile](
 	[TreatedForSyphilis] [int] NULL,
 	[DeleteFlag] [bit] NOT NULL DEFAULT(0),
 	[CreatedBy] [int] NOT NULL,
-	[CreateDate] [datetime] NOT NULL DEFAULT(GetDate()),
+	[CreateDate] [datetime] NOT NULL DEFAULT GETDATE(),   
 	[AuditData] [varchar](max) NULL,
 	[DaysPostPartum] [int] NULL,
  CONSTRAINT [PK_PatientProfile] PRIMARY KEY CLUSTERED (	[Id] ASC),
