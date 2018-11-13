@@ -23,7 +23,7 @@ namespace IQCare.Common.BusinessProcess.CommandHandlers.Encounter
             {
                 try
                 {
-                    PatientMasterVisit patientMasterVisit = new PatientMasterVisit()
+                    Core.Models.PatientMasterVisit patientMasterVisit = new Core.Models.PatientMasterVisit()
                     {
                         PatientId = request.PatientId,
                         ServiceId = request.ServiceAreaId,
@@ -36,7 +36,7 @@ namespace IQCare.Common.BusinessProcess.CommandHandlers.Encounter
                         VisitType = 0
                     };
 
-                    await _unitOfWork.Repository<PatientMasterVisit>().AddAsync(patientMasterVisit);
+                    await _unitOfWork.Repository<Core.Models.PatientMasterVisit>().AddAsync(patientMasterVisit);
                     await _unitOfWork.SaveAsync();
 
                     PatientEncounter patientEncounter = new PatientEncounter()

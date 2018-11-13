@@ -6,6 +6,7 @@ import {LookupItemService} from '../../../shared/_services/lookup-item.service';
 import * as moment from 'moment';
 import {MaternityService} from '../../_services/maternity.service';
 import {Subscription} from 'rxjs/index';
+import {isEmpty} from 'rxjs/internal/operators';
 
 @Component({
     selector: 'app-delivery-maternity',
@@ -84,10 +85,14 @@ export class DeliveryMaternityComponent implements OnInit {
     public onDeliveryDateChange() {
         this.deliveryDate = this.deliveryFormGroup.controls['deliveryDate'].value;
 
+       // const now = moment(new Date());
+        const now =  moment(this.deliveryDate) ;
+        const gestation = moment.duration(now.diff(this.dateLMP)).asWeeks().toFixed(1);
+        this.deliveryFormGroup.controls['gestationAtBirth'].setValue(gestation);
 
-        const now = moment(new Date());
-        const gestation = moment(this.deliveryDate).diff(this.dateLMP, 'weeks').toFixed(1);
-        this.deliveryFormGroup.controls['gestationAtBirth'].setValue(gestation + ' weeks');
+
+      //  const gestation = moment(this.deliveryDate).diff(this.dateLMP, 'weeks').toFixed(1);
+      //  this.deliveryFormGroup.controls['gestationAtBirth'].setValue(gestation + ' weeks');
 
         this.deliveryFormGroup.controls['gestationAtBirth'].disable({ onlySelf: true });
     }
@@ -122,9 +127,11 @@ export class DeliveryMaternityComponent implements OnInit {
         this.motherProfile = this._matService.getPregnancyDetails(patientId)
             .subscribe(
                 p => {
-;
-                    this.dateLMP = p.lmp;
-                    console.log('lmp date' + this.dateLMP);
+                    if (p) {
+                        this.dateLMP = p.lmp;
+                        console.log('lmp date' + this.dateLMP);
+                    }
+
                 },
                 (err) => {
                     console.log(err);
@@ -141,8 +148,11 @@ export class DeliveryMaternityComponent implements OnInit {
         this.visitDetails = this._matService.getCurrentVisitDetails(patientId)
             .subscribe(
                 p => {
-                    this.deliveryFormGroup.controls['ancVisits'].setValue(p.visitNumber);
-                    this.deliveryFormGroup.get('ancVisits').disable({ onlySelf: true });
+                    if (p) {
+                        this.deliveryFormGroup.controls['ancVisits'].setValue(p.visitNumber);
+                        this.deliveryFormGroup.get('ancVisits').disable({ onlySelf: true });
+                    }
+
                 },
                 (err) => {
                     this.snotifyService.error('Error fetching visit details' + err,
@@ -152,4 +162,5 @@ export class DeliveryMaternityComponent implements OnInit {
 
                 });
     }
+
 }
