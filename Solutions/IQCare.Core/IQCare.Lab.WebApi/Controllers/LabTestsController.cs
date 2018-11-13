@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using IQCare.Lab.BusinessProcess.CommandHandlers;
 using IQCare.Lab.BusinessProcess.Commands;
 using MediatR;
 using Microsoft.AspNetCore.Http;
@@ -27,6 +28,19 @@ namespace IQCare.Lab.WebApi.Controllers
             var response = await _mediator.Send(new GetLabTestsCommand()
             {
                 LabTests = labTests
+            }, Request.HttpContext.RequestAborted);
+
+            if (response.IsValid)
+                return Ok(response.Value);
+            return BadRequest(response);
+        }
+
+        [HttpGet("{labTestId}")]
+        public async Task<IActionResult> GetLabTestPametersByLabTestId(int labTestId)
+        {
+            var response = await _mediator.Send(new GetLabTestPametersByLabTestIdCommand()
+            {
+                LabTestId = labTestId
             }, Request.HttpContext.RequestAborted);
 
             if (response.IsValid)

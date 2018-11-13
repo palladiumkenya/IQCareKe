@@ -90,9 +90,18 @@ namespace IQCare.Lab.BusinessProcess.CommandHandlers
         {
             var unitId = _labUnitOfwork.Repository<LabTestParameterConfig>().Get(x => x.ParameterId == parameterId && x.DeleteFlag == false)
                            .SingleOrDefault()?.UnitId;
-            var parameterUnit = _labUnitOfwork.Repository<LabTestParameterUnit>().Get(x => x.UnitId == unitId).SingleOrDefault();
+            if (unitId != null)
+            {
+                var parameterUnit = _labUnitOfwork.Repository<LabTestParameterUnit>().Get(x => x.UnitId == unitId)
+                    .SingleOrDefault();
 
-            return new Tuple<int, string>((int)parameterUnit?.UnitId, parameterUnit?.UnitName);
+                return new Tuple<int, string>((int) parameterUnit?.UnitId, parameterUnit?.UnitName);
+            }
+            else
+            {
+                return new Tuple<int, string>(Int32.MinValue, null);
+            }
+            
         }
 
         private void UpdatePatientLabTestTracker(int parameterId, int labOrderId, int parameterCount, AddLabTestResultCommand labOrderTestResult)
@@ -105,7 +114,7 @@ namespace IQCare.Lab.BusinessProcess.CommandHandlers
             var patientLabTracker = _labUnitOfwork.Repository<PatientLabTracker>()
                .Get(x => x.LabOrderId == labOrderId).SingleOrDefault();
 
-            patientLabTracker.UpdateResults(labOrderTestResult.ResultValue, DateTime.Now, labOrderTestResult.ResultText, resultUnit.Item2);
+            patientLabTracker.UpdateResults(DateTime.Now, labOrderTestResult.ResultText, resultUnit.Item2, labOrderTestResult.ResultValue);
             _labUnitOfwork.Repository<PatientLabTracker>().Update(patientLabTracker);
         }
     }
