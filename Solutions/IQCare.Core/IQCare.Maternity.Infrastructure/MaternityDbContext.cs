@@ -1,7 +1,5 @@
 ﻿using IQCare.SharedKernel.Infrastructure;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
 using System.Reflection;
 
 namespace IQCare.Maternity.Infrastructure
@@ -15,6 +13,7 @@ namespace IQCare.Maternity.Infrastructure
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
+
             modelBuilder.ApplyEntityTypeConfigsFromAssembly(Assembly.GetAssembly(typeof(MaternityDbContext)));
         }
     }
