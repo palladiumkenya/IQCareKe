@@ -18,7 +18,7 @@ namespace IQCare.SharedKernel.Infrastructure
             {
                 var configurationTypes = TypesPerAssembly.GetOrAdd(assembly, GetConfigurationTypes(assembly));
 
-                var configurations = GetConfigurationTypes(assembly).Select(Activator.CreateInstance);
+                var configurations = configurationTypes.Select(Activator.CreateInstance);
 
                 foreach (dynamic configuration in configurations)
                     builder.ApplyConfiguration(configuration);
