@@ -9,19 +9,16 @@ namespace IQCare.SharedKernel.Infrastructure
 {
     public static class ModelBuilderConfigurationExtension
     {
-        private static readonly ConcurrentDictionary<Assembly, IEnumerable<Type>> typesPerAssembly =
-            new ConcurrentDictionary<Assembly, IEnumerable<Type>>();
+        private static readonly ConcurrentDictionary<Assembly, IEnumerable<Type>> TypesPerAssembly =
+                        new ConcurrentDictionary<Assembly, IEnumerable<Type>>();
 
         public static ModelBuilder ApplyEntityTypeConfigsFromAssembly(this ModelBuilder builder, Assembly assembly)
         {
             try
             {
-               var assembyAdded = typesPerAssembly.TryAdd(assembly, GetConfigurationTypes(assembly));
+                var configurationTypes = TypesPerAssembly.GetOrAdd(assembly, GetConfigurationTypes(assembly));
 
-                if (!assembyAdded)
-                    return builder;
-
-                var configurations = GetConfigurationTypes(assembly).Select(x => Activator.CreateInstance(x));
+                var configurations = GetConfigurationTypes(assembly).Select(Activator.CreateInstance);
 
                 foreach (dynamic configuration in configurations)
                     builder.ApplyConfiguration(configuration);
@@ -38,9 +35,8 @@ namespace IQCare.SharedKernel.Infrastructure
 
         private static IEnumerable<Type> GetConfigurationTypes(Assembly assembly)
         {
-            return assembly.GetExportedTypes().Where(x => (x.GetTypeInfo().IsClass == true) && (x.GetTypeInfo().IsAbstract == false)
-                                      && (x.GetInterfaces().Any(y => (y.GetTypeInfo().IsGenericType == true) 
-                                      && (y.GetGenericTypeDefinition() == typeof(IEntityTypeConfiguration<>)))));
+            return assembly.GetExportedTypes().Where(x => x.GetTypeInfo().IsClass && !x.GetTypeInfo().IsAbstract && x.GetInterfaces()
+            .Any(y => y.GetTypeInfo().IsGenericType && y.GetGenericTypeDefinition() == typeof(IEntityTypeConfiguration<>)));
         }
     }
 }
