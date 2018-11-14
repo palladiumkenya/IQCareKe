@@ -27,6 +27,8 @@ export class VisitDetailsComponent implements OnInit, OnChanges {
     patientProfile: PatientProfile;
     pregnancyProfile: PregnancyViewModel;
     visitDetails: VisitDetails;
+
+    public todayDate: Date;
     public visitNumber: number;
     public personId: number;
     public patientId: number;
@@ -35,6 +37,7 @@ export class VisitDetailsComponent implements OnInit, OnChanges {
     public UserId: number;
     public pregnancyId: number;
     public visitTypeOptions: any[] = [];
+
 
     public ancVisitTypes: any[] = [];
     @Output() nextStep = new EventEmitter<VisitDetails>(); 
@@ -255,6 +258,14 @@ export class VisitDetailsComponent implements OnInit, OnChanges {
         this.visitDetailsFormGroup.controls['gravidae'].setValue(gravidae + parseInt('1', 10));
         this.visitDetailsFormGroup.controls['gravidae'].disable({ onlySelf: true });
 
+    }
+
+    onChangeVisitDateChange() {
+        const  visitDate = this.visitDetailsFormGroup.controls['visitDate'].value;
+        this.todayDate = new Date();
+        if (moment(visitDate).isAfter(this.todayDate)) {
+            return ;
+        }
     }
 
 }

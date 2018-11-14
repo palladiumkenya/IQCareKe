@@ -377,7 +377,7 @@ export class MaternityComponent implements OnInit {
         console.log(this.babyNotifyData);
 
         for (let i = 0; i < this.babyNotifyData.length; i++) {
-            for (let j = 0; j < this.babyNotifyData.length; j++) {
+            for (let j = 0; j < this.babyNotifyData[i].length; j++) {
                 this.DeliveredBabyBirthInfoCollection.push({
 
                     PatientDeliveryInformationId: 0,
