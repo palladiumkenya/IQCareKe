@@ -3,7 +3,6 @@ using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using System.Text;
 using Microsoft.EntityFrameworkCore;
 
 namespace IQCare.SharedKernel.Infrastructure
@@ -23,6 +22,7 @@ namespace IQCare.SharedKernel.Infrastructure
                     return builder;
 
                 var configurations = GetConfigurationTypes(assembly).Select(x => Activator.CreateInstance(x));
+
                 foreach (dynamic configuration in configurations)
                     builder.ApplyConfiguration(configuration);
 
@@ -39,7 +39,8 @@ namespace IQCare.SharedKernel.Infrastructure
         private static IEnumerable<Type> GetConfigurationTypes(Assembly assembly)
         {
             return assembly.GetExportedTypes().Where(x => (x.GetTypeInfo().IsClass == true) && (x.GetTypeInfo().IsAbstract == false)
-                                      && (x.GetInterfaces().Any(y => (y.GetTypeInfo().IsGenericType == true) && (y.GetGenericTypeDefinition() == typeof(IEntityTypeConfiguration<>)))));
+                                      && (x.GetInterfaces().Any(y => (y.GetTypeInfo().IsGenericType == true) 
+                                      && (y.GetGenericTypeDefinition() == typeof(IEntityTypeConfiguration<>)))));
         }
     }
 }
