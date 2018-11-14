@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.Configuration;
+﻿using System.Text;
+using Microsoft.Extensions.Configuration;
 
 namespace IQCare.SharedKernel.Infrastructure.Helpers
 {
@@ -14,6 +15,11 @@ namespace IQCare.SharedKernel.Infrastructure.Helpers
                 .Replace("Integrated Security=false;", "").Replace("packet size=4128;Min Pool Size=3;Max Pool Size=200;", "");
 
             _connectionString = _connectionString.Replace(@"\\", @"\");
+            StringBuilder conn = new StringBuilder();
+            conn.Append(_connectionString);
+            conn.Append("MultipleActiveResultSets=True;");
+
+            _connectionString = conn.ToString();
 
             return _connectionString;
         }
