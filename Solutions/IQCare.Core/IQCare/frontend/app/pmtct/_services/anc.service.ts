@@ -10,7 +10,6 @@ import { HaartProphylaxisCommand } from '../_models/HaartProphylaxisCommand';
 import { ReferralAppointmentCommandService } from './referral-appointment-command.service';
 import { PatientPreventiveService } from '../_models/PatientPreventiveService';
 import { PatientProfile } from '../_models/patientProfile';
-import { Profile } from 'selenium-webdriver/firefox';
 import { PncVisitDetailsCommand } from '../_models/PncVisitDetailsCommand';
 import { HivStatusCommand } from '../_models/HivStatusCommand';
 
@@ -40,7 +39,8 @@ export class AncService {
         private errorHandler: ErrorHandlerService) { }
 
     public saveANCVisitDetails(ancVisitDetailsCommand: PncVisitDetailsCommand): Observable<any> {
-        return this.http.post(this.API_URL + '/api/VisitDetails/AddANCVisit', JSON.stringify(ancVisitDetailsCommand), httpOptions).pipe(
+        return this.http.post<any>(this.API_URL + '/api/VisitDetails/AddANCVisit', JSON.stringify(ancVisitDetailsCommand),
+            httpOptions).pipe(
             tap(saveANCVisitDetails => this.errorHandler.log(`successfully saved ANC visit details`)),
             catchError(this.errorHandler.handleError<any>('Error saving ANC visit details'))
         );
