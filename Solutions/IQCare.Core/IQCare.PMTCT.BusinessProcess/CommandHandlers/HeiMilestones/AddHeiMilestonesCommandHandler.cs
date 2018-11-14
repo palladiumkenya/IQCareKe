@@ -40,8 +40,9 @@ namespace IQCare.PMTCT.BusinessProcess.CommandHandlers.HeiMilestones
                             Comment = milestone.Comment,
                             CreatedBy = milestone.CreatedBy,
                             CreateDate = milestone.CreateDate,
-                            DeleteFlag = milestone.DeleteFlag
-                        };
+                            DeleteFlag = milestone.DeleteFlag,
+                            DateAssessed = milestone.DateAssessed
+                       };
                         heiMilestones.Add(milestoneItem);
                     }
 

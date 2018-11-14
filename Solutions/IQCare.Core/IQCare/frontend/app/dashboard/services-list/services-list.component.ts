@@ -122,21 +122,21 @@ export class ServicesListComponent implements OnInit {
         if (selectedService && selectedService.length > 0) {
             switch (selectedService[0]['code']) {
                 case 'ANC':
-                    if (this.person.gender == 'Female') {
+                    if (this.person.gender == 'Female' && (this.person.ageNumber >= 9 && this.person.ageNumber <= 49)) {
                         isEligible = true;
                     } else {
                         isEligible = false;
                     }
                     break;
                 case 'PNC':
-                    if (this.person.gender == 'Female') {
+                    if (this.person.gender == 'Female' && (this.person.ageNumber >= 9 && this.person.ageNumber <= 49)) {
                         isEligible = true;
                     } else {
                         isEligible = false;
                     }
                     break;
                 case 'Maternity':
-                    if (this.person.gender == 'Female') {
+                    if (this.person.gender == 'Female' && (this.person.ageNumber >= 9 && this.person.ageNumber <= 49)) {
                         isEligible = true;
                     } else {
                         isEligible = false;

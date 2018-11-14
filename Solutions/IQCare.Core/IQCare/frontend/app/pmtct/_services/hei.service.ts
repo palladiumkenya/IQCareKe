@@ -44,6 +44,9 @@ export class HeiService {
     }
 
     public saveImmunizationHistory(vaccination: Vaccination[]): Observable<Vaccination[]> {
+        if (vaccination.length == 0) {
+            return of([]);
+        }
 
         return this.http.post<any>(this.API_URL + '/api/ImmunizationHistory', JSON.stringify(vaccination), httpOptions).pipe(
             tap(saveImmunizationHistory => this.errorHandler.log(`successfully added hei Immunization History`)),
@@ -52,7 +55,15 @@ export class HeiService {
     }
 
     public saveMilestoneHistory(milestone: Milestone[]): Observable<Milestone[]> {
-        return this.http.post<any>(this.API_URL + '/api/HeiMilestone', JSON.stringify(milestone), httpOptions).pipe(
+        if (milestone.length == 0) {
+            return of([]);
+        }
+
+        const InData = {
+            'PatientMilestone': milestone
+        };
+
+        return this.http.post<any>(this.API_URL + '/api/HeiMilestone', JSON.stringify(InData), httpOptions).pipe(
             tap(saveMilestoneHistory => this.errorHandler.log(`successfully added hei Milestone History`)),
             catchError(this.errorHandler.handleError<any>('Error saving hei milestone History'))
         );
