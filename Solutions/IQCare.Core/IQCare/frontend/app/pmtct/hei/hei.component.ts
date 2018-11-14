@@ -81,7 +81,7 @@ export class HeiComponent implements OnInit {
     viralLoadLabTestParameters: any[];
     antibodyLabTestParameters: any[];
 
-    isLinear: boolean = false;
+    isLinear: boolean = true;
     deliveryMatFormGroup: FormArray;
     visitDetailsFormGroup: FormArray;
     tbAssessmentFormGroup: FormArray;
@@ -90,15 +90,15 @@ export class HeiComponent implements OnInit {
     infantFeedingFormGroup: FormArray;
 
     heiOutcomeFormGroup: FormArray;
-    nextAppointmentFormGroup: FormArray;
+    // nextAppointmentFormGroup: FormArray;
     hivTestingFormGroup: any[];
 
     constructor(private route: ActivatedRoute,
-                private heiService: HeiService,
-                private zone: NgZone,
-                private router: Router,
-                private snotifyService: SnotifyService,
-                private notificationService: NotificationService) {
+        private heiService: HeiService,
+        private zone: NgZone,
+        private router: Router,
+        private snotifyService: SnotifyService,
+        private notificationService: NotificationService) {
         this.deliveryMatFormGroup = new FormArray([]);
         this.visitDetailsFormGroup = new FormArray([]);
         this.tbAssessmentFormGroup = new FormArray([]);
@@ -108,7 +108,7 @@ export class HeiComponent implements OnInit {
         this.infantFeedingFormGroup = new FormArray([]);
 
         this.heiOutcomeFormGroup = new FormArray([]);
-        this.nextAppointmentFormGroup = new FormArray([]);
+        // this.nextAppointmentFormGroup = new FormArray([]);
 
         this.hivTestingFormGroup = [];
         this.formType = 'hei';
@@ -118,7 +118,7 @@ export class HeiComponent implements OnInit {
         this.route.params.subscribe(
             (params) => {
                 console.log(params);
-                const {patientId, personId, serviceAreaId} = params;
+                const { patientId, personId, serviceAreaId } = params;
                 this.patientId = patientId;
                 this.personId = personId;
                 this.serviceAreaId = serviceAreaId;
@@ -232,7 +232,7 @@ export class HeiComponent implements OnInit {
         this.heiService.getPatientById(this.patientId).subscribe(
             (result) => {
                 console.log(result);
-                const {ptn_pk} = result;
+                const { ptn_pk } = result;
                 this.ptn_pk = ptn_pk;
             }
         );
@@ -285,7 +285,7 @@ export class HeiComponent implements OnInit {
     }
 
     onHeiOutcomeNotify(formGroup: FormGroup) {
-        this.nextAppointmentFormGroup.push(formGroup);
+        this.infantFeedingFormGroup.push(formGroup);
     }
 
     onHivTestingNotify(hivTests: any) {
@@ -293,10 +293,17 @@ export class HeiComponent implements OnInit {
     }
 
     onNextAppointmentNotify(formGroup: FormGroup) {
-        this.nextAppointmentFormGroup.push(formGroup);
+        this.infantFeedingFormGroup.push(formGroup);
     }
 
     onCompleteEncounter() {
+        console.log(this.infantFeedingFormGroup);
+        if (!this.infantFeedingFormGroup.valid) {
+            this.snotifyService.error('Complete the highlighted fields before submitting', 'HEI Encounter',
+                this.notificationService.getConfig());
+            return;
+        }
+
         console.log('immunization data');
         console.log(this.immunization_table_data);
 
@@ -304,7 +311,7 @@ export class HeiComponent implements OnInit {
         console.log(this.hivTestingFormGroup);
 
         for (let i = 0; i < this.immunization_table_data.length; i++) {
-            for (let j = 0; j < this.immunization_table_data.length; j ++) {
+            for (let j = 0; j < this.immunization_table_data[i].length; j++) {
                 this.vaccination.push({
                     Id: 0,
                     PatientId: this.patientId,
@@ -318,7 +325,7 @@ export class HeiComponent implements OnInit {
                     VaccineDate: new Date(this.immunization_table_data[i][j]['dateImmunized']),
                     Active: 0,
                     AppointmentId: 0
-                  //  NextSchedule: new Date(this.immunization_table_data[i][j]['nextScheduled'])
+                    //  NextSchedule: new Date(this.immunization_table_data[i][j]['nextScheduled'])
                 });
             }
         }
@@ -332,7 +339,7 @@ export class HeiComponent implements OnInit {
         console.log(this.vaccination);
 
         for (let i = 0; i < this.milestone_table_data.length; i++) {
-            for (const j = 0; j < this.milestone_table_data.length; i++) {
+            for (const j = 0; j < this.milestone_table_data[i].length; i++) {
                 this.milestone.push({
                     Id: 0,
                     PatientId: this.patientId,
@@ -446,11 +453,13 @@ export class HeiComponent implements OnInit {
                     );
                 }
             }
-            laborder.LabTests.push({
-                Id: labTestId,
-                Notes: latTestNotes,
-                LabTestName: labTestName
-            });
+            if (labTestId) {
+                laborder.LabTests.push({
+                    Id: labTestId,
+                    Notes: latTestNotes,
+                    LabTestName: labTestName
+                });
+            }
         }
 
         const motherRegistered = this.yesnoOptions.filter(
@@ -497,10 +506,11 @@ export class HeiComponent implements OnInit {
 
 
         forkJoin([
-          //  heiOrdVisit,
+            heiOrdVisit,
             heiVisitDetails,
             heiImmunization,
-            heiMilestone
+            // heiMilestone,
+            heiDelivery
         ])
             .subscribe(
                 (result) => {
@@ -510,80 +520,83 @@ export class HeiComponent implements OnInit {
                     const heiLab = this.heiService.saveHeiLabOrder(laborder).subscribe(
                         (res) => {
                             console.log(res);
-                            const labOrderId = res['labOrderId'];
-                            const labOrderTestId = res['labOrderTests'][0]['id'];
-                            const labTestId = res['labOrderTests'][0]['labTestId'];
+                            if (res.length > 0) {
+                                const labOrderId = res['labOrderId'];
+                                const labOrderTestId = res['labOrderTests'][0]['id'];
+                                const labTestId = res['labOrderTests'][0]['labTestId'];
 
-                            const completeLabOrderCommand: CompleteLabOrderCommand = {
-                                LabOrderId: labOrderId,
-                                LabOrderTestId: labOrderTestId,
-                                LabTestId: labTestId,
-                                UserId: this.userId,
-                                LabTestResults: []
-                            };
+                                const completeLabOrderCommand: CompleteLabOrderCommand = {
+                                    LabOrderId: labOrderId,
+                                    LabOrderTestId: labOrderTestId,
+                                    LabTestId: labTestId,
+                                    UserId: this.userId,
+                                    LabTestResults: []
+                                };
 
-                            for (let i = 0; i < this.hivTestingFormGroup.length; i++) {
-                                for (let j = 0; j < this.hivTestingFormGroup[i].length; j++) {
-                                    if (
-                                        this.hivTestingFormGroup[i][j]['testtype']['itemName'] == '1st DNA PCR'
-                                        || this.hivTestingFormGroup[i][j]['testtype']['itemName'] == '2nd DNA PCR'
-                                        || this.hivTestingFormGroup[i][j]['testtype']['itemName'] == '3rd DNA PCR'
-                                        || this.hivTestingFormGroup[i][j]['testtype']['itemName'] == 'Repeat confirmatory PCR (for +ve)'
-                                        || this.hivTestingFormGroup[i][j]['testtype']['itemName'] == 'Confirmatory PCR (for  +ve)'
-                                    ) {
-                                        if (this.pcrLabTestParameters.length > 0) {
-                                            completeLabOrderCommand.LabTestResults.push({
-                                                ParameterId: this.pcrLabTestParameters[0]['id'],
-                                                ResultValue: null,
-                                                ResultText: this.hivTestingFormGroup[i][j]['result']['itemName'],
-                                                ResultOptionId: null,
-                                                ResultOption: null,
-                                                ResultUnit: null,
-                                                ResultUnitId: null,
-                                                ResultConfigId: this.pcrLabTestParameters[0]['unitId'],
-                                                Undetectable: false,
-                                                DetectionLimit: this.pcrLabTestParameters[0]['detectionLimit'],
-                                            });
-                                        }
-                                    } else if (this.hivTestingFormGroup[i][j]['testtype']['itemName'] == 'Baseline Viral Load (for +ve)') {
-                                        if (this.viralLoadLabTestParameters.length > 0) {
-                                            completeLabOrderCommand.LabTestResults.push({
-                                                ParameterId: this.viralLoadLabTestParameters[0]['id'],
-                                                ResultValue: this.hivTestingFormGroup[i][j]['resultText'],
-                                                ResultText: null,
-                                                ResultOptionId: null,
-                                                ResultOption: null,
-                                                ResultUnit: null,
-                                                ResultUnitId: this.viralLoadLabTestParameters[0]['unitId'],
-                                                ResultConfigId: null,
-                                                Undetectable: false,
-                                                DetectionLimit: this.viralLoadLabTestParameters[0]['detectionLimit'],
-                                            });
-                                        }
-                                    } else if (this.hivTestingFormGroup[i][j]['testtype']['itemName'] == 'Final Antibody') {
-                                        if (this.antibodyLabTestParameters.length > 0) {
-                                            completeLabOrderCommand.LabTestResults.push({
-                                                ParameterId: this.antibodyLabTestParameters[0]['id'],
-                                                ResultValue: this.hivTestingFormGroup[i][j]['result']['itemName'] == 'Positive' ? 1 : 2,
-                                                ResultText: null,
-                                                ResultOptionId: null,
-                                                ResultOption: null,
-                                                ResultUnit: null,
-                                                ResultUnitId: this.antibodyLabTestParameters[0]['unitId'],
-                                                ResultConfigId: null,
-                                                Undetectable: false,
-                                                DetectionLimit: this.antibodyLabTestParameters[0]['detectionLimit'],
-                                            });
+                                for (let i = 0; i < this.hivTestingFormGroup.length; i++) {
+                                    for (let j = 0; j < this.hivTestingFormGroup[i].length; j++) {
+                                        if (
+                                            this.hivTestingFormGroup[i][j]['testtype']['itemName'] == '1st DNA PCR'
+                                            || this.hivTestingFormGroup[i][j]['testtype']['itemName'] == '2nd DNA PCR'
+                                            || this.hivTestingFormGroup[i][j]['testtype']['itemName'] == '3rd DNA PCR'
+                                            || this.hivTestingFormGroup[i][j]['testtype']['itemName'] == 'Repeat confirmatory PCR (for +ve)'
+                                            || this.hivTestingFormGroup[i][j]['testtype']['itemName'] == 'Confirmatory PCR (for  +ve)'
+                                        ) {
+                                            if (this.pcrLabTestParameters.length > 0) {
+                                                completeLabOrderCommand.LabTestResults.push({
+                                                    ParameterId: this.pcrLabTestParameters[0]['id'],
+                                                    ResultValue: null,
+                                                    ResultText: this.hivTestingFormGroup[i][j]['result']['itemName'],
+                                                    ResultOptionId: null,
+                                                    ResultOption: null,
+                                                    ResultUnit: null,
+                                                    ResultUnitId: null,
+                                                    ResultConfigId: this.pcrLabTestParameters[0]['unitId'],
+                                                    Undetectable: false,
+                                                    DetectionLimit: this.pcrLabTestParameters[0]['detectionLimit'],
+                                                });
+                                            }
+                                        } else if (
+                                            this.hivTestingFormGroup[i][j]['testtype']['itemName'] == 'Baseline Viral Load (for +ve)') {
+                                            if (this.viralLoadLabTestParameters.length > 0) {
+                                                completeLabOrderCommand.LabTestResults.push({
+                                                    ParameterId: this.viralLoadLabTestParameters[0]['id'],
+                                                    ResultValue: this.hivTestingFormGroup[i][j]['resultText'],
+                                                    ResultText: null,
+                                                    ResultOptionId: null,
+                                                    ResultOption: null,
+                                                    ResultUnit: null,
+                                                    ResultUnitId: this.viralLoadLabTestParameters[0]['unitId'],
+                                                    ResultConfigId: null,
+                                                    Undetectable: false,
+                                                    DetectionLimit: this.viralLoadLabTestParameters[0]['detectionLimit'],
+                                                });
+                                            }
+                                        } else if (this.hivTestingFormGroup[i][j]['testtype']['itemName'] == 'Final Antibody') {
+                                            if (this.antibodyLabTestParameters.length > 0) {
+                                                completeLabOrderCommand.LabTestResults.push({
+                                                    ParameterId: this.antibodyLabTestParameters[0]['id'],
+                                                    ResultValue: this.hivTestingFormGroup[i][j]['result']['itemName'] == 'Positive' ? 1 : 2,
+                                                    ResultText: null,
+                                                    ResultOptionId: null,
+                                                    ResultOption: null,
+                                                    ResultUnit: null,
+                                                    ResultUnitId: this.antibodyLabTestParameters[0]['unitId'],
+                                                    ResultConfigId: null,
+                                                    Undetectable: false,
+                                                    DetectionLimit: this.antibodyLabTestParameters[0]['detectionLimit'],
+                                                });
+                                            }
                                         }
                                     }
                                 }
-                            }
 
-                            const completeHeiLabOrder = this.heiService.saveCompleteHeiLabOrder(completeLabOrderCommand).subscribe(
-                                (completeRes) => {
-                                    console.log(completeRes);
-                                }
-                            );
+                                const completeHeiLabOrder = this.heiService.saveCompleteHeiLabOrder(completeLabOrderCommand).subscribe(
+                                    (completeRes) => {
+                                        console.log(completeRes);
+                                    }
+                                );
+                            }
                         }
                     );
 
@@ -596,9 +609,5 @@ export class HeiComponent implements OnInit {
                     this.snotifyService.success('Successfully saved HEI encounter ', 'HEI', this.notificationService.getConfig());
                 }
             );
-
-        /*this.zone.run(() => {
-            this.router.navigate(['/dashboard/personhome/' + this.personId], { relativeTo: this.route });
-        });*/
     }
 }

@@ -128,6 +128,7 @@ export class HeiService {
     }
 
     public saveHeiLabOrder(labOrder: LabOrder): Observable<any> {
+        console.log(labOrder);
         if (labOrder.LabTests.length == 0) {
             return of([]);
         }
