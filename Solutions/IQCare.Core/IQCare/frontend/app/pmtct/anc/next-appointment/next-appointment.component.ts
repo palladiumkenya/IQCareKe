@@ -1,45 +1,58 @@
-import { Component, OnInit } from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import { Component, OnInit, EventEmitter, Output } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
-import {SnotifyService} from 'ng-snotify';
+import { SnotifyService } from 'ng-snotify';
 
-import {Subscription} from 'rxjs/index';
-import {NotificationService} from '../../../shared/_services/notification.service';
-import {LookupItemService} from '../../../shared/_services/lookup-item.service';
+import { Subscription } from 'rxjs/index';
+import { NotificationService } from '../../../shared/_services/notification.service';
+import { LookupItemService } from '../../../shared/_services/lookup-item.service';
 
 @Component({
-  selector: 'app-next-appointment',
-  templateUrl: './next-appointment.component.html',
-  styleUrls: ['./next-appointment.component.css']
+    selector: 'app-next-appointment',
+    templateUrl: './next-appointment.component.html',
+    styleUrls: ['./next-appointment.component.css']
 })
 export class NextAppointmentComponent implements OnInit {
 
-  public NextAppointmentFormGroup: FormGroup;
-  public LookupItems$: Subscription;
-  public yesnos: any[] = [];
+    public NextAppointmentFormGroup: FormGroup;
+    public LookupItems$: Subscription;
+    public yesnos: any[] = [];
+
+    @Output() notify: EventEmitter<FormGroup> = new EventEmitter<FormGroup>();
 
 
-  constructor(private _formBuilder: FormBuilder, private _lookupItemService: LookupItemService,
-              private  snotifyService: SnotifyService,
-              private notificationService: NotificationService) { }
+    constructor(private _formBuilder: FormBuilder, private _lookupItemService: LookupItemService,
+        private snotifyService: SnotifyService,
+        private notificationService: NotificationService) { }
 
-  ngOnInit() {
-      this.NextAppointmentFormGroup = this._formBuilder.group({
-          scheduledAppointment: ['', Validators.required],
-          nextAppointmentDate: ['', Validators.required],
-          serviceRemarks: ['', Validators.required],
-      });
+    ngOnInit() {
+        this.NextAppointmentFormGroup = this._formBuilder.group({
+            scheduledAppointment: ['', Validators.required],
+            nextAppointmentDate: ['', Validators.required],
+            serviceRemarks: ['', Validators.required],
+        });
 
-      this.getLookupOptions('YesNo', this.yesnos);
-  }
+        this.getLookupOptions('YesNo', this.yesnos);
 
-    public  getLookupOptions(groupName: string, masterName: any[]) {
+        this.notify.emit(this.NextAppointmentFormGroup);
+    }
+
+    onScheduleAppointmentChange(event) {
+        if (event.isUserInput && event.source.selected && event.source.viewValue == 'No') {
+            this.NextAppointmentFormGroup.controls['nextAppointmentDate'].disable({ onlySelf: true });
+            this.NextAppointmentFormGroup.controls.nextAppointmentDate.setValue('');
+        } else if (event.source.selected) {
+            this.NextAppointmentFormGroup.controls['nextAppointmentDate'].enable();
+        }
+    }
+
+    public getLookupOptions(groupName: string, masterName: any[]) {
         this.LookupItems$ = this._lookupItemService.getByGroupName(groupName)
             .subscribe(
                 p => {
-                    const lookupOptions =  p['lookupItems'];
+                    const lookupOptions = p['lookupItems'];
                     for (let i = 0; i < lookupOptions.length; i++) {
-                        masterName.push({'itemId': lookupOptions[i]['itemId'], 'itemName': lookupOptions[i]['itemName']});
+                        masterName.push({ 'itemId': lookupOptions[i]['itemId'], 'itemName': lookupOptions[i]['itemName'] });
                     }
                 },
                 (err) => {
