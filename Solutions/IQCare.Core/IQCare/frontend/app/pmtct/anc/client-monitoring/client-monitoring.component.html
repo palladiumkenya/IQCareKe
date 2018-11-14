@@ -1,4 +1,5 @@
-<form class="form-group" novalidate  [formGroup]="clientMonitoringFormGroup">
+<form class="form-group"  [formGroup]="clientMonitoringFormGroup">
+
     <div class="row">
         <div class="col-md-12">
             <div class="form-title">
@@ -7,7 +8,7 @@
         </div>
     </div>
 
-          <div class="row">
+    <div class="row">
 
               <div class="col-lg-4 col-sm-6 col-xs-12">
                   <mat-form-field class="col-md-12">
@@ -41,10 +42,10 @@
               </div>
           </div>
 
-          <div class="row">
+    <div class="row">
               <div class="col-lg-4 col-xs-12 col-sm-6">
                   <mat-form-field class="col-md-12">
-                      <mat-select formControlName="cacxScreeningDone"  placeholder="Cervical Cancer Screened during this visit" required minlength="0">
+                      <mat-select formControlName="cacxScreeningDone"  placeholder="Cervical Cancer Screened during this visit" required >
                           <mat-option value="0">Select</mat-option>
                           <mat-option  *ngFor="let YesNoOption of YesNoOptions" [value]="YesNoOption.itemId" >
                               {{YesNoOption.itemName}}
@@ -54,7 +55,7 @@
               </div>
               <div class="col-lg-4 col-xs-12 col-sm-6">
                   <mat-form-field class="col-md-12">
-                      <mat-select formControlName="cacxMethod"  placeholder="Select Method" required minlength="0">
+                      <mat-select formControlName="cacxMethod"  placeholder="Select Method" required >
                           <mat-option value="0">Select</mat-option>
                           <mat-option   *ngFor="let cacxMethodOption of cacxMethodOptions" [value]="cacxMethodOption.itemId" >
                               {{cacxMethodOption.itemName}}
@@ -64,7 +65,7 @@
               </div>
               <div class="col-lg-4 col-xs-12 col-sm-6">
                   <mat-form-field class="col-md-12">
-                      <mat-select formControlName="cacxResult"  placeholder="Select Result" required minlength="0">
+                      <mat-select formControlName="cacxResult"  placeholder="Select Result" required >
                           <mat-option value="0">Select</mat-option>
                           <mat-option  *ngFor="let cacxResultOption of cacxResultOptions" [value]="cacxResultOption.itemId" >
                               {{cacxResultOption.itemName}}
@@ -76,14 +77,14 @@
 
 
 
-        <div class="row">
+    <div class="row">
             <div class="col-md-12">
                 <mat-form-field class="col-md-12">
-                    <textarea matInput formControlName="cacxComments" placeholder="Cervical Cancer Comments"></textarea>
+                    <textarea type="text" matInput formControlName="cacxComments" placeholder="Cervical Cancer Comments"></textarea>
                 </mat-form-field>
             </div>
 
-        </div>
+    </div>
 
 </form>
 
