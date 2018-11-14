@@ -17,10 +17,12 @@ namespace IQCare.SharedKernel.Infrastructure
         {
             try
             {
-                IEnumerable<Type> configurationTypes = typesPerAssembly.GetOrAdd(assembly, GetConfigurationTypes(assembly));
+               var assembyAdded = typesPerAssembly.TryAdd(assembly, GetConfigurationTypes(assembly));
 
-                var configurations = configurationTypes.Select(x => Activator.CreateInstance(x));
+                if (!assembyAdded)
+                    return builder;
 
+                var configurations = GetConfigurationTypes(assembly).Select(x => Activator.CreateInstance(x));
                 foreach (dynamic configuration in configurations)
                     builder.ApplyConfiguration(configuration);
 
