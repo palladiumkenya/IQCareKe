@@ -1,47 +1,38 @@
-IF NOT EXISTS(SELECT TOP 1 Id FROM ServiceAreaIdentifiers WHERE ServiceAreaId = 2)
+IF NOT EXISTS(SELECT TOP 1 Id FROM ServiceAreaIdentifiers WHERE ServiceAreaId = (SELECT TOP 1 Id FROM ServiceArea WHERE Name = 'HTS Module'))
 BEGIN
-	SET IDENTITY_INSERT [dbo].[ServiceAreaIdentifiers] ON
-	INSERT INTO [dbo].[ServiceAreaIdentifiers] ([Id] ,[ServiceAreaId] ,[IdentifierId] ,[RequiredFlag]) VALUES (2, 2, 8, 1);
-	SET IDENTITY_INSERT [dbo].[ServiceAreaIdentifiers] OFF
+	INSERT INTO [dbo].[ServiceAreaIdentifiers] ([ServiceAreaId] ,[IdentifierId] ,[RequiredFlag]) 
+	VALUES ((SELECT TOP 1 Id FROM ServiceArea WHERE Name = 'HTS Module'), (SELECT TOP 1 Id FROM Identifiers WHERE Code = 'HTSNumber'), 1);
 END;
 Go
 
 
-IF NOT EXISTS(SELECT TOP 1 Id FROM ServiceAreaIdentifiers WHERE ServiceAreaId = 3)
+IF NOT EXISTS(SELECT TOP 1 Id FROM ServiceAreaIdentifiers WHERE ServiceAreaId = (SELECT TOP 1 Id FROM ServiceArea WHERE Name = 'ANC'))
 BEGIN
-	INSERT INTO [dbo].[ServiceAreaIdentifiers] ([ServiceAreaId] ,[IdentifierId] ,[RequiredFlag]) VALUES (3, 3, 1);
-	--INSERT INTO [dbo].[ServiceAreaIdentifiers] ([ServiceAreaId] ,[IdentifierId] ,[RequiredFlag]) VALUES (3, 6, 0);
+	INSERT INTO [dbo].[ServiceAreaIdentifiers] ([ServiceAreaId] ,[IdentifierId] ,[RequiredFlag]) 
+	VALUES ((SELECT TOP 1 Id FROM ServiceArea WHERE Name = 'ANC'), (SELECT TOP 1 Id FROM Identifiers WHERE Code = 'ANCNumber'), 1);
 END;
 Go
 
 
-IF NOT EXISTS(SELECT TOP 1 Id FROM ServiceAreaIdentifiers WHERE ServiceAreaId = 6)
+IF NOT EXISTS(SELECT TOP 1 Id FROM ServiceAreaIdentifiers WHERE ServiceAreaId = (SELECT TOP 1 Id FROM ServiceArea WHERE Name = 'HEI'))
 BEGIN
-	INSERT INTO [dbo].[ServiceAreaIdentifiers] ([ServiceAreaId] ,[IdentifierId] ,[RequiredFlag]) VALUES (6, 5, 1);
+	INSERT INTO [dbo].[ServiceAreaIdentifiers] ([ServiceAreaId] ,[IdentifierId] ,[RequiredFlag]) 
+	VALUES ((SELECT TOP 1 Id FROM ServiceArea WHERE Name = 'HEI'), (SELECT TOP 1 Id FROM Identifiers WHERE Code = 'HEIRegistration'), 1);
 END;
 Go
 
 
 
-IF NOT EXISTS(SELECT TOP 1 Id FROM ServiceAreaIdentifiers WHERE ServiceAreaId = (SELECT top 1 id FROM ServiceArea WHERE code='pnc'))
+IF NOT EXISTS(SELECT TOP 1 Id FROM ServiceAreaIdentifiers WHERE ServiceAreaId = (SELECT TOP 1 Id FROM ServiceArea WHERE Name = 'PNC'))
 BEGIN
-	INSERT INTO [dbo].[ServiceAreaIdentifiers] ([ServiceAreaId] ,[IdentifierId] ,[RequiredFlag]) VALUES (4, (SELECT TOP 1 Id FROM Identifiers WHERE Code = 'PNCNumber'), 1);
+	INSERT INTO [dbo].[ServiceAreaIdentifiers] ([ServiceAreaId] ,[IdentifierId] ,[RequiredFlag]) 
+	VALUES ((SELECT TOP 1 Id FROM ServiceArea WHERE Name = 'PNC'), (SELECT TOP 1 Id FROM Identifiers WHERE Code = 'PNCNumber'), 1);
 END;
 
-IF NOT EXISTS(SELECT TOP 1 Id FROM ServiceAreaIdentifiers WHERE ServiceAreaId = (SELECT top 1 id FROM ServiceArea WHERE code='maternity'))
+IF NOT EXISTS(SELECT TOP 1 Id FROM ServiceAreaIdentifiers WHERE ServiceAreaId = (SELECT TOP 1 Id FROM ServiceArea WHERE Name = 'Maternity'))
 BEGIN
-	INSERT INTO [dbo].[ServiceAreaIdentifiers] ([ServiceAreaId] ,[IdentifierId] ,[RequiredFlag]) VALUES (5, (SELECT TOP 1 Id FROM Identifiers WHERE Code = 'MaternityNumber'), 1);
+	INSERT INTO [dbo].[ServiceAreaIdentifiers] ([ServiceAreaId] ,[IdentifierId] ,[RequiredFlag]) 
+	VALUES ((SELECT TOP 1 Id FROM ServiceArea WHERE Name = 'Maternity'), (SELECT TOP 1 Id FROM Identifiers WHERE Code = 'MaternityNumber'), 1);
 END;
-
-IF NOT EXISTS(SELECT TOP 1 Id FROM ServiceAreaIdentifiers WHERE ServiceAreaId =(SELECT top 1 id FROM ServiceArea WHERE code='anc'))
-BEGIN
-	INSERT INTO [dbo].[ServiceAreaIdentifiers] ([ServiceAreaId] ,[IdentifierId] ,[RequiredFlag]) VALUES (5, (SELECT TOP 1 Id FROM Identifiers WHERE Code = 'ANCNumber'), 1);
-END;
-
-IF NOT EXISTS(SELECT TOP 1 Id FROM ServiceAreaIdentifiers WHERE ServiceAreaId =(SELECT top 1 id FROM ServiceArea WHERE code='hei'))
-BEGIN
-	INSERT INTO [dbo].[ServiceAreaIdentifiers] ([ServiceAreaId] ,[IdentifierId] ,[RequiredFlag]) VALUES (5, (SELECT TOP 1 Id FROM Identifiers WHERE Code = 'HEINumber'), 1);
-END;
-
 Go
 
