@@ -25,24 +25,28 @@ namespace IQCare.Maternity.BusinessProcess.CommandHandlers
         public async Task<Result<AddMaternalDrugAdministrationResponse>> Handle(AddMaternalDrugAdministrationCommand request,
             CancellationToken cancellationToken)
         {
-            try
+            using (_maternityUnitOfWork)
             {
-                if (request.AdministredDrugs == null)
-                return Result<AddMaternalDrugAdministrationResponse>.Invalid("Administered drugs details not found");
+                try
+                {
+                    if (request.AdministredDrugs == null)
+                        return Result<AddMaternalDrugAdministrationResponse>.Invalid("Administered drugs details not found");
 
-                var administredDrugs = request.AdministredDrugs.Select(x => new MaternalDrugAdministration(request.PatientId, request.PatientMasterVisitId, x.Id, x.Value, x.Description, request.CreatedBy)).ToList();
+                    var administredDrugs = request.AdministredDrugs.Select(x => new MaternalDrugAdministration(request.PatientId, request.PatientMasterVisitId, x.Id, x.Value, x.Description, request.CreatedBy)).ToList();
 
-                await _maternityUnitOfWork.Repository<MaternalDrugAdministration>().AddRangeAsync(administredDrugs);
-                await _maternityUnitOfWork.SaveAsync();
+                    await _maternityUnitOfWork.Repository<MaternalDrugAdministration>().AddRangeAsync(administredDrugs);
+                    await _maternityUnitOfWork.SaveAsync();
 
-                return Result<AddMaternalDrugAdministrationResponse>
-                    .Valid(new AddMaternalDrugAdministrationResponse { PatientMasterVisitId = request.PatientMasterVisitId });
+                    return Result<AddMaternalDrugAdministrationResponse>
+                        .Valid(new AddMaternalDrugAdministrationResponse { PatientMasterVisitId = request.PatientMasterVisitId });
+                }
+                catch (Exception ex)
+                {
+                    logger.Error(ex, $"An error occured while adding drug admininstration details for PatientId {request.PatientId}");
+                    return Result<AddMaternalDrugAdministrationResponse>.Invalid(ex.Message);
+                }
             }
-            catch (Exception ex)
-            {
-                logger.Error(ex, $"An error occured while adding drug admininstration details for PatientId {request.PatientId}");
-                return Result<AddMaternalDrugAdministrationResponse>.Invalid(ex.Message);
-            }
+            
 
         }
     }

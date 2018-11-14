@@ -65,16 +65,16 @@ export class HaartProphylaxisComponent implements OnInit {
 
 
         this.HaartProphylaxisFormGroup = this._formBuilder.group({
-            onArvBeforeANCVisit: new FormControl(['', Validators.required]),
-            startedHaartANC: new FormControl(['', Validators.required]),
-            cotrimoxazole: new FormControl(['', Validators.required]),
-            aztFortheBaby: new FormControl(['', Validators.required]),
-            nvpForBaby: new FormControl(['', Validators.required]),
-            illness: new FormControl(['', Validators.required]),
-            otherIllness: new FormControl(['', Validators.required]),
-            onSetDate: new FormControl(['', Validators.required]),
-            currentTreatment: new FormControl(['treatment', Validators.required]),
-            dose: new FormControl(['dose', Validators.required])
+            onArvBeforeANCVisit: ['', Validators.required],
+            startedHaartANC: ['', Validators.required],
+            cotrimoxazole: ['', Validators.required],
+            aztFortheBaby: ['', Validators.required],
+            nvpForBaby: ['', Validators.required],
+            illness: ['', Validators.required],
+            otherIllness: ['', Validators.required],
+            onSetDate: ['', Validators.required],
+            currentTreatment: ['treatment', Validators.required],
+            dose: ['dose', Validators.required]
         });
 
         const {

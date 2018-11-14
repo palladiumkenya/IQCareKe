@@ -2,7 +2,6 @@ import { Component, OnInit, OnDestroy, NgZone } from '@angular/core';
 import { NotificationService } from './../../shared/_services/notification.service';
 import { SnotifyService } from 'ng-snotify';
 import { ActivatedRoute, Router } from '@angular/router';
-import { VisitDetails } from './../_models/visitDetails';
 import { VisitDetailsService } from '../_services/visit-details.service';
 import { PatientEducationCommand } from '../_models/PatientEducationCommand';
 import { PreventiveService } from '../_models/PreventiveService';
@@ -33,7 +32,7 @@ export class AncComponent implements OnInit, OnDestroy {
 
     formType: string;
     visitType: number;
-    isLinear: boolean = true;
+    isLinear: boolean = true ;
     patientDrug: PatientDrugAdministration[] = [];
     public preventiveService: PreventiveService[] = [];
     public counselling_data_form: PatientEducation[] = [];

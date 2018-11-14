@@ -39,14 +39,13 @@ export class ClientMonitoringComponent implements OnInit {
 
     ngOnInit() {
         this.clientMonitoringFormGroup = this.fb.group({
-            WhoStage: new FormControl(['', Validators.required]),
-            viralLoadSampleTaken: new FormControl(['', Validators.required]),
-            screenedForTB: new FormControl(['', Validators.required]),
-            cacxScreeningDone: new FormControl(['', Validators.required]),
-            cacxMethod: new FormControl(['', Validators.required]),
-            cacxResult: new FormControl(['', Validators.required]),
-            cacxComments: new FormControl(['', Validators.required])
-
+            WhoStage: ['', Validators.required],
+            viralLoadSampleTaken: ['', Validators.required],
+            screenedForTB: ['', Validators.required],
+            cacxScreeningDone: ['', Validators.required],
+            cacxMethod: ['', Validators.required],
+            cacxResult: ['', Validators.required],
+            cacxComments: ['', Validators.required]
         });
 
         const {

@@ -58,11 +58,11 @@ export class PatientEducationExaminationComponent implements OnInit {
 
     ngOnInit() {
         this.PatientEducationFormGroup = this._formBuilder.group({
-            breastExamDone: new FormControl(['', Validators.required]),
-            counsellingDate: new FormControl(['', Validators.required]),
-            counselledOn: new FormControl(['', Validators.required]),
-            treatedSyphilis: new FormControl(['', Validators.required]),
-            testResult: new FormControl(['', Validators.required])
+            breastExamDone: ['', Validators.required],
+            counsellingDate: ['', Validators.required],
+            counselledOn: ['', Validators.required],
+            treatedSyphilis: ['', Validators.required]
+           // testResult: new FormControl(['', Validators.required])
         });
         this.userId = JSON.parse(localStorage.getItem('appUserId'));
         //  this.getLookupOptions('counselledOn', this.topics);
