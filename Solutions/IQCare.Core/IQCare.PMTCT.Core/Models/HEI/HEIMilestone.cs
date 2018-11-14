@@ -16,6 +16,6 @@ namespace IQCare.PMTCT.Core.Models.HEI
         public int CreatedBy { get; set; }
         public DateTime CreateDate { get; set; }
         public bool DeleteFlag { get; set; }
-        public DateTime  MilestoneDate { get; set; }
+        public DateTime DateAssessed { get; set; }
     }
 }

@@ -58,7 +58,8 @@ export class RegisterComponent implements OnInit {
     newContacts: any[];
     id: number;
 
-    
+    public phonePattern = /^(?:\+254|0|254)(\d{9})$/;
+
     constructor(private _formBuilder: FormBuilder,
         private snotifyService: SnotifyService,
         private notificationService: NotificationService,
@@ -257,12 +258,21 @@ export class RegisterComponent implements OnInit {
     estimateDob() {
         const ageYears = this.formGroup.value.formArray[0]['AgeYears'];
         const ageMonths = this.formGroup.value.formArray[0]['AgeMonths'];
+
         if (!ageYears) {
             this.snotifyService.error('Please enter (age years)', 'Registration', this.notificationService.getConfig());
+            return;
         }
 
         if (ageYears < 0) {
             this.snotifyService.error('Age in years should not be negative', 'Registration', this.notificationService.getConfig());
+            this.formArray['controls'][0]['controls']['AgeYears'].setValue('');
+            return;
+        }
+
+        if (ageYears > 120) {
+            this.snotifyService.error('Age in years should not be more than 120 years old',
+                'Registration', this.notificationService.getConfig());
             this.formArray['controls'][0]['controls']['AgeYears'].setValue('');
             return;
         }
