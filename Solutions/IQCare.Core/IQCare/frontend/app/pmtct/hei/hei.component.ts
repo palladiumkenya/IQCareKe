@@ -339,18 +339,20 @@ export class HeiComponent implements OnInit {
         console.log(this.vaccination);
 
         for (let i = 0; i < this.milestone_table_data.length; i++) {
-            for (const j = 0; j < this.milestone_table_data[i].length; i++) {
+            for (let j = 0; j < this.milestone_table_data[i].length; j++) {
+                console.log(this.milestone_table_data[i][j]);
                 this.milestone.push({
                     Id: 0,
                     PatientId: this.patientId,
                     PatientMasterVisitId: this.patientMasterVisitId,
-                    TypeAssessed: this.milestoneHistoryData[i].milestoneId,
-                    Achieved: this.milestoneHistoryData[i].achievedId,
-                    Status: this.milestoneHistoryData[i].statusId,
-                    Comment: this.milestoneHistoryData[i].comment,
+                    TypeAssessedId: this.milestone_table_data[i][j].milestoneId,
+                    AchievedId: this.milestone_table_data[i][j].achievedId,
+                    StatusId: this.milestone_table_data[i][j].statusId,
+                    Comment: this.milestone_table_data[i][j].comment,
                     CreateDate: new Date(),
                     CreatedBy: this.userId,
-                    DeleteFlag: 0
+                    DeleteFlag: 0,
+                    DateAssessed: this.milestone_table_data[i][j].dateAssessed
                 });
             }
 
@@ -487,15 +489,6 @@ export class HeiComponent implements OnInit {
             AgeMenarche: 0,
         };
 
-
-        /*  this.heiService.saveHeiVisitDetails(visitDetailsData)
-              .subscribe(
-                  (result) => {
-                      console.log(result);
-
-                  }
-              );*/
-
         const heiVisitDetails = this.heiService.saveHeiVisitDetails(visitDetailsData);
         const heiDelivery = this.heiService.saveHieDelivery(this.patientId, this.patientMasterVisitId, this.userId,
             isMotherRegistered, this.deliveryMatFormGroup.value[0], this.deliveryMatFormGroup.value[1]);
@@ -509,7 +502,7 @@ export class HeiComponent implements OnInit {
             heiOrdVisit,
             heiVisitDetails,
             heiImmunization,
-            // heiMilestone,
+            heiMilestone,
             heiDelivery
         ])
             .subscribe(
