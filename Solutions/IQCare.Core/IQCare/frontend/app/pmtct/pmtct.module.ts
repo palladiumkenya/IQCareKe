@@ -106,6 +106,7 @@ import { ANCHivStatusInitialVisitResolver } from './_services/resolvers/anc-hiv-
 import { MotherExaminationResolver } from './_services/resolvers/motherexamination.resolver';
 import { BabyExaminationResolver } from './_services/resolvers/baby-examination.resolver';
 import { HeiMedicationComponent } from './hei/hei-medication/hei-medication.component';
+import { AncClientMonitoringComponent } from './anc/anc-client-monitoring/anc-client-monitoring.component';
 
 @NgModule({
     imports: [
@@ -172,7 +173,8 @@ import { HeiMedicationComponent } from './hei/hei-medication/hei-medication.comp
         CheckinComponent,
         MaternityEncounterComponent,
         AncHivtestingComponent,
-        HeiMedicationComponent
+        HeiMedicationComponent,
+        AncClientMonitoringComponent
     ],
     providers: [
         PlaceOfDeliveryResolver,
@@ -214,7 +216,8 @@ import { HeiMedicationComponent } from './hei/hei-medication/hei-medication.comp
         TbScreeningResolver,
         ANCHivStatusInitialVisitResolver,
         MotherExaminationResolver,
-        BabyExaminationResolver
+        BabyExaminationResolver,
+        AncClientMonitoringComponent
     ],
     entryComponents: [
         IptClientWorkupComponent,

@@ -63,6 +63,7 @@
                                             </span> </ng-template>
                                         <app-client-monitoring [clientMonitoringOptions]="clientMonitoringOptions"
                                             (notify)="onClientMonitoringNotify($event)"></app-client-monitoring>
+
                                         <div>
                                             <button mat-raised-button color="primary" matStepperPrevious type="button">Previous</button>
                                             &nbsp;&nbsp;
@@ -104,7 +105,7 @@
                                         <div>
                                             <button mat-raised-button color="primary" matStepperPrevious type="button">Previous</button>
                                             &nbsp;&nbsp;
-                                            <button mat-raised-button color="accent" matStepperNext type="button" (click)="onSubmit()">Complete Encounter</button>
+                                            <button mat-raised-button color="accent" matStepperNext type="submit" (click)="onSubmit()">Complete Encounter</button>
                                         </div>
                                     </mat-step>
                                 </mat-horizontal-stepper>

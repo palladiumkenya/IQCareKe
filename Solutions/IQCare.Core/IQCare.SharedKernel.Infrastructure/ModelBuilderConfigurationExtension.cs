@@ -13,26 +13,35 @@ namespace IQCare.SharedKernel.Infrastructure
 
         public static ModelBuilder ApplyEntityTypeConfigsFromAssembly(this ModelBuilder builder, Assembly assembly)
         {
-            IEnumerable<Type> configurationTypes;
-            //var assembly = Assembly.GetAssembly(typeof(PmtctDbContext));
-
-            if (typesPerAssembly.TryGetValue(assembly, out configurationTypes) == false)
+            try
             {
-                typesPerAssembly[assembly] = configurationTypes = assembly
-                    .GetExportedTypes()
-                    .Where(x => (x.GetTypeInfo().IsClass == true)
-                                && (x.GetTypeInfo().IsAbstract == false)
-                                && (x.GetInterfaces().Any(y => (y.GetTypeInfo().IsGenericType == true)
-                                                               && (y.GetGenericTypeDefinition() == typeof(IEntityTypeConfiguration<>)))));
+                IEnumerable<Type> configurationTypes;
+                //var assembly = Assembly.GetAssembly(typeof(PmtctDbContext));
+
+                if (typesPerAssembly.TryGetValue(assembly, out configurationTypes) == false)
+                {
+                    typesPerAssembly[assembly] = configurationTypes = assembly
+                        .GetExportedTypes()
+                        .Where(x => (x.GetTypeInfo().IsClass == true)
+                                    && (x.GetTypeInfo().IsAbstract == false)
+                                    && (x.GetInterfaces().Any(y => (y.GetTypeInfo().IsGenericType == true)
+                                                                   && (y.GetGenericTypeDefinition() == typeof(IEntityTypeConfiguration<>)))));
+                }
+
+                var configurations = configurationTypes.Select(x => Activator.CreateInstance(x));
+
+                foreach (dynamic configuration in configurations)
+                {
+                    builder.ApplyConfiguration(configuration);
+                }
+                return builder;
             }
-
-            var configurations = configurationTypes.Select(x => Activator.CreateInstance(x));
-
-            foreach (dynamic configuration in configurations)
+            catch (Exception e)
             {
-                builder.ApplyConfiguration(configuration);
+                Console.WriteLine(e);
+                throw;
             }
-            return builder;
+            
         }
     }
 }
