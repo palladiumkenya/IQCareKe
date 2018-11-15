@@ -15,6 +15,7 @@ export class CheckinComponent implements OnInit {
     title: string;
     form: FormGroup;
     section: string;
+    maxDate: Date;
 
     public lookupItems$: Subscription;
     public visitTypes: any[] = [];
@@ -27,6 +28,8 @@ export class CheckinComponent implements OnInit {
         private notificationService: NotificationService) {
         this.title = 'Check In';
         this.section = data.section;
+        this.maxDate = new Date();
+
         switch (this.section) {
             case 'hei':
                 this.getLookupItems('HEIVisitType', this.visitTypes);

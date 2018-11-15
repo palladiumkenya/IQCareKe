@@ -41,8 +41,12 @@ export class NextAppointmentComponent implements OnInit {
         if (event.isUserInput && event.source.selected && event.source.viewValue == 'No') {
             this.NextAppointmentFormGroup.controls['nextAppointmentDate'].disable({ onlySelf: true });
             this.NextAppointmentFormGroup.controls.nextAppointmentDate.setValue('');
+
+            this.NextAppointmentFormGroup.controls['serviceRemarks'].disable({ onlySelf: true });
+            this.NextAppointmentFormGroup.controls.serviceRemarks.setValue('');
         } else if (event.source.selected) {
             this.NextAppointmentFormGroup.controls['nextAppointmentDate'].enable();
+            this.NextAppointmentFormGroup.controls['serviceRemarks'].enable();
         }
     }
 

@@ -14,6 +14,7 @@ import { PatientIpt } from '../_models/hei/PatientIpt';
 import { LabOrder } from '../_models/hei/LabOrder';
 import { OrdVisitCommand } from '../_models/hei/OrdVisitCommand';
 import { CompleteLabOrderCommand } from '../_models/hei/CompleteLabOrderCommand';
+import { PatientFeedingCommand } from '../_models/hei/PatientFeedingCommand';
 
 
 const httpOptions = {
@@ -188,6 +189,13 @@ export class HeiService {
         return this.http.get<any[]>(this.API_LAB_URL + '/api/LabTests/GetLabTestPametersByLabTestId/' + labTestId).pipe(
             tap(getHeiLabTests => this.errorHandler.log(`successfully fetched labtest parameters`)),
             catchError(this.errorHandler.handleError<any>('Error fetching labtest parameters'))
+        );
+    }
+
+    public saveHeiInfantFeeding(patientFeeding: PatientFeedingCommand): Observable<any> {
+        return this.http.post<any>(this.API_URL + '/api/Hei', JSON.stringify(patientFeeding), httpOptions).pipe(
+            tap(saveHeiInfantFeeding => this.errorHandler.log(`successfully saved infant feeding`)),
+            catchError(this.errorHandler.handleError<any>('Error saving infant feeding'))
         );
     }
 }
