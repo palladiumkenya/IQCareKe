@@ -271,7 +271,7 @@ export class HeiComponent implements OnInit {
     }
 
     onMilestonesNotify(formGroup: object): void {
-        this.milestonesFormGroup.push(formGroup['form']); // = formGroup['form'];
+        this.milestonesFormGroup.push(formGroup['form']);
         this.milestone_table_data.push(formGroup['data']);
     }
 
@@ -504,6 +504,7 @@ export class HeiComponent implements OnInit {
             heiImmunization,
             heiMilestone,
             heiDelivery
+           // heitbAssessment
         ])
             .subscribe(
                 (result) => {
