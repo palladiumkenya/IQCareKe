@@ -12,8 +12,7 @@
             <mat-form-field class="col-md-12">
                 <mat-select formControlName="period" placeholder="Period" required minlength="1">
                     <mat-option value="0"> Select</mat-option>
-                    <mat-option *ngFor="let immunizationperiod of immunizationperiods"
-                                [value]="immunizationperiod">
+                    <mat-option *ngFor="let immunizationperiod of immunizationperiods" [value]="immunizationperiod">
                         {{ immunizationperiod.itemName }}
                     </mat-option>
                 </mat-select>
@@ -31,22 +30,25 @@
         </div>
         <div class="col-md-3 col-xs-12">
             <mat-form-field class="col-md-12">
-                <input formControlName="dateImmunized" matInput [matDatepicker]="dateImmunized"
-                       placeholder="Date Immunized">
+                <input formControlName="dateImmunized" matInput (focus)="dateImmunized.open()" [matDatepicker]="dateImmunized"
+                    placeholder="Date Immunized">
                 <mat-datepicker-toggle matSuffix [for]="dateImmunized"></mat-datepicker-toggle>
                 <mat-datepicker #dateImmunized></mat-datepicker>
             </mat-form-field>
         </div>
         <div class="col-md-2 col-xs-12">
             <mat-form-field class="col-md-12">
-                <input formControlName="nextSchedule" matInput [matDatepicker]="nextSchedule"
-                       placeholder="Next Schedule">
+                <input formControlName="nextSchedule" matInput (focus)="nextSchedule.open()" [matDatepicker]="nextSchedule" placeholder="Next Schedule">
                 <mat-datepicker-toggle matSuffix [for]="nextSchedule"></mat-datepicker-toggle>
                 <mat-datepicker #nextSchedule></mat-datepicker>
             </mat-form-field>
         </div>
         <div class="col-md-1 col-xs-12">
-            <button mat-raised-button class="mat-primary"><span class="fa fa-plus-circle" (click)="AddImmunization()"> Add</span></button>
+            <button mat-raised-button class="mat-primary" (click)="AddImmunization()">
+                <span class="fa fa-plus-circle">
+                    Add
+                </span>
+            </button>
         </div>
     </div>
 
@@ -58,26 +60,30 @@
 
                     <!-- Position Column -->
                     <ng-container matColumnDef="period">
-                        <mat-header-cell *matHeaderCellDef><strong>Immunization Period</strong>  </mat-header-cell>
-                        <mat-cell *matCellDef="let ImmunizationHistoryTableData"> {{ImmunizationHistoryTableData.immunizationPeriod}} </mat-cell>
+                        <mat-header-cell *matHeaderCellDef><strong>Immunization Period</strong> </mat-header-cell>
+                        <mat-cell *matCellDef="let ImmunizationHistoryTableData">
+                            {{ImmunizationHistoryTableData.immunizationPeriod}} </mat-cell>
                     </ng-container>
 
                     <!-- Name Column -->
                     <ng-container matColumnDef="given">
                         <mat-header-cell *matHeaderCellDef> Immunization Given </mat-header-cell>
-                        <mat-cell *matCellDef="let ImmunizationHistoryTableData"> {{ImmunizationHistoryTableData.given }} </mat-cell>
+                        <mat-cell *matCellDef="let ImmunizationHistoryTableData"> {{ImmunizationHistoryTableData.given
+                            }} </mat-cell>
                     </ng-container>
 
                     <!-- Weight Column -->
                     <ng-container matColumnDef="dateImmunized">
-                        <mat-header-cell *matHeaderCellDef> <strong>Date Immunized</strong>  </mat-header-cell>
-                        <mat-cell *matCellDef="let ImmunizationHistoryTableData"> {{ImmunizationHistoryTableData.dateImmunized| date: 'dd-MMM-yyyy'}} </mat-cell>
+                        <mat-header-cell *matHeaderCellDef> <strong>Date Immunized</strong> </mat-header-cell>
+                        <mat-cell *matCellDef="let ImmunizationHistoryTableData">
+                            {{ImmunizationHistoryTableData.dateImmunized| date: 'dd-MMM-yyyy'}} </mat-cell>
                     </ng-container>
 
                     <!-- Symbol Column -->
                     <ng-container matColumnDef="nextSchedule">
-                        <mat-header-cell *matHeaderCellDef><strong>Next Schedule</strong>  </mat-header-cell>
-                        <mat-cell *matCellDef="let ImmunizationHistoryTableData"> {{ImmunizationHistoryTableData.nextSchedule| date: 'dd-MMM-yyyy'}} </mat-cell>
+                        <mat-header-cell *matHeaderCellDef><strong>Next Schedule</strong> </mat-header-cell>
+                        <mat-cell *matCellDef="let ImmunizationHistoryTableData">
+                            {{ImmunizationHistoryTableData.nextSchedule| date: 'dd-MMM-yyyy'}} </mat-cell>
                     </ng-container>
 
 
@@ -85,14 +91,14 @@
                     <ng-container matColumnDef="action">
                         <mat-header-cell *matHeaderCellDef><strong class="fa fa-cog"> Action</strong></mat-header-cell>
                         <mat-cell *matCellDef="let row">
-                            <button mat-raised-button class="mat-accent"><span class="fa fa-trash-o"> Delete</span> </button>
+                            <button mat-raised-button class="mat-accent"><span class="fa fa-trash-o"> Delete</span>
+                            </button>
                         </mat-cell>
                     </ng-container>
 
 
                     <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-                    <mat-row *matRowDef="let row; columns: displayedColumns"
-                             (click)="onRowClicked(row)" >
+                    <mat-row *matRowDef="let row; columns: displayedColumns" (click)="onRowClicked(row)">
                     </mat-row>
                 </mat-table>
             </div>

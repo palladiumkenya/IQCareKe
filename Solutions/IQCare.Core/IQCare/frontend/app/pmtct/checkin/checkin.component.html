@@ -14,7 +14,7 @@
         </mat-form-field>
 
         <mat-form-field>
-            <input [max]="maxDate" matInput placeholder="Visit Date" required [matDatepicker]="visitDatepicker" (click)="visitDatepicker.open()"
+            <input matInput placeholder="Visit Date" [max]="maxDate" required [matDatepicker]="visitDatepicker" (click)="visitDatepicker.open()"
                 id="visitDatepicker" name="visitDatepicker" formControlName="visitDate" required>
             <mat-datepicker-toggle matSuffix [for]="visitDatepicker"></mat-datepicker-toggle>
             <mat-datepicker #visitDatepicker></mat-datepicker>

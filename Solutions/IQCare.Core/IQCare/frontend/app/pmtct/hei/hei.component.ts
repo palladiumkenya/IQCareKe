@@ -16,6 +16,7 @@ import { forkJoin } from 'rxjs/index';
 import { SnotifyService } from 'ng-snotify';
 import { NotificationService } from '../../shared/_services/notification.service';
 import { CompleteLabOrderCommand } from '../_models/hei/CompleteLabOrderCommand';
+import { PatientFeedingCommand } from '../_models/hei/PatientFeedingCommand';
 
 @Component({
     selector: 'app-hei',
@@ -489,6 +490,13 @@ export class HeiComponent implements OnInit {
             AgeMenarche: 0,
         };
 
+        const patientFeedingCommand: PatientFeedingCommand = {
+            PatientMasterVisitId: this.patientMasterVisitId,
+            PatientId: this.patientId,
+            UserId: this.userId,
+            FeedingModeId: this.infantFeedingFormGroup.value[0]['infantFeedingOptions']
+        };
+
         const heiVisitDetails = this.heiService.saveHeiVisitDetails(visitDetailsData);
         const heiDelivery = this.heiService.saveHieDelivery(this.patientId, this.patientMasterVisitId, this.userId,
             isMotherRegistered, this.deliveryMatFormGroup.value[0], this.deliveryMatFormGroup.value[1]);
@@ -496,6 +504,7 @@ export class HeiComponent implements OnInit {
         const heiMilestone = this.heiService.saveMilestoneHistory(this.milestone);
         const heitbAssessment = this.heiService.saveTbAssessment(patientIcf, patientIcfAction);
         const heiOrdVisit = this.heiService.saveOrdVisit(ordVisitCommand, laborder);
+        const heiFeeding = this.heiService.saveHeiInfantFeeding(patientFeedingCommand);
 
 
         forkJoin([
@@ -503,8 +512,8 @@ export class HeiComponent implements OnInit {
             heiVisitDetails,
             heiImmunization,
             heiMilestone,
-            heiDelivery
-           // heitbAssessment
+            heiDelivery,
+            heiFeeding
         ])
             .subscribe(
                 (result) => {

@@ -55,7 +55,6 @@ export class ImmunizationHistoryComponent implements OnInit {
     }
 
    public AddImmunization() {
-
         console.log(this.ImmunizationHistoryFormGroup.value);
         const period = this.ImmunizationHistoryFormGroup.get('period').value.itemName;
         if (this.immunization_history_table_data.filter(x => x.immunizationPeriod === period).length > 0) {
