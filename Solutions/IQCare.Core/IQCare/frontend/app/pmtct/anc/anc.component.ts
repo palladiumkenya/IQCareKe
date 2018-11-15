@@ -32,7 +32,7 @@ export class AncComponent implements OnInit, OnDestroy {
 
     formType: string;
     visitType: number;
-    isLinear: boolean = false ;
+    isLinear: boolean = true ;
     patientDrug: PatientDrugAdministration[] = [];
     public preventiveService: PreventiveService[] = [];
     public counselling_data_form: PatientEducation[] = [];
@@ -290,83 +290,7 @@ export class AncComponent implements OnInit, OnDestroy {
                 }
             );
     }
-    /*
-        public onSaveHivStatus(data: HIVTestingEmitter) {
-            const htsAncEncounter = {
-                'PersonId': this.personId,
-                'ProviderId': this.userId,
-                'PatientEncounterID': this.patientEncounterId,
-                'PatientMasterVisitId': this.patientMasterVisitId,
-                'PatientId': this.patientId,
-                'EverTested': '',
-                'MonthsSinceLastTest': '',
-                'MonthSinceSelfTest': '',
-                'TestedAs': '',
-                'TestingStrategy': '',
-                'EncounterRemarks': '',
-                'TestEntryPoint': data.ancTestEntryPoint,
-                'Consent': data.consentOption,
-                'EverSelfTested': '',
-                'GeoLocation': '',
-                'HasDisability': '',
-                'Disabilities': [],
-                'TbScreening': '',
-                'ServiceAreaId': this.serviceAreaId,
-                'EncounterTypeId': '1',
-                'EncounterDate': this.visitDate,
-                'EncounterType': data.testingDone
-            };
-    
-            this.ancService.saveHivStatus(htsAncEncounter).subscribe(
-                (result) => {
-                    const {htsEncounterId} = result;
-                    const hivKitResults = [];
-                    let testRound;
-                    if (data.hivTest['itemName'] == 'HIV Test-1') {
-                        testRound = 1;
-                    } else if (data.hivTest['itemName'] == 'HIV Test-2') {
-                        testRound = 2;
-                    }
-    
-                    hivKitResults.push({
-                        'KitId': data.kitName,
-                        'KitLotNumber': data.lotNumber,
-                        'ExpiryDate': data.expiryDate,
-                        'Outcome': data.testResult,
-                        'TestRound': testRound
-                    });
-    
-                    const finalResultsBody = {
-                        'FinalResultHiv1': data.testResult,
-                        'FinalResultHiv2': '',
-                        'FinalResult': data.finalResult,
-                        'FinalResultGiven': data.consentOption,
-                        'AcceptedPartnerListing': data.consentOption,
-                        'FinalResultsRemarks': ''
-                    };
-    
-                    this.ancService.saveHivResults(
-                        this.serviceAreaId,
-                        this.patientMasterVisitId,
-                        this.patientId,
-                        this.userId,
-                        htsEncounterId,
-                        hivKitResults,
-                        finalResultsBody).subscribe(
-                        (res) => {
-                            console.log(`final` + res);
-                        }
-                    );
-                },
-                (error) => {
-    
-                },
-                () => {
-    
-                }
-            );
-        }
-    */
+
     public getLookupItems(groupName: string, objOptions: any[] = []) {
         this.lookupItems$ = this.lookupItemService.getByGroupName(groupName)
             .subscribe(
@@ -485,6 +409,7 @@ export class AncComponent implements OnInit, OnDestroy {
                 });
             }
         }
+        const screeningDone = this.ClientMonitoringMatFormGroup.value[0]['cacxScreeningDone'];
 
         const clientMonitoringCommand = {
             PatientId: this.patientId,
@@ -493,13 +418,13 @@ export class AncComponent implements OnInit, OnDestroy {
             WhoStage: this.ClientMonitoringMatFormGroup.value[0]['WhoStage'],
             ServiceAreaId: 3,
             ScreeningTypeId: 0,
-            ScreeningDone: this.ClientMonitoringMatFormGroup.value[0]['cacxScreeningDone'],
+            ScreeningDone: (yesOption[0].itemId == screeningDone) ? true : false,
             ScreeningDate: new Date(),
             ScreeningTB: this.ClientMonitoringMatFormGroup.value[0]['screenedForTB'],
-            CaCxMethod: this.ClientMonitoringMatFormGroup.value[0]['cacxMethod'],
-            CaCxResult: this.ClientMonitoringMatFormGroup.value[0]['cacxResult'],
-            Comments: this.ClientMonitoringMatFormGroup.value[0]['cacxComments'],
-            ClinicalNotes: this.ClientMonitoringMatFormGroup.value[0]['cacxComments'],
+            CaCxMethod: (yesOption[0].itemId == screeningDone) ? this.ClientMonitoringMatFormGroup.value[0]['cacxMethod'] : 0,
+            CaCxResult: (yesOption[0].itemId == screeningDone) ? this.ClientMonitoringMatFormGroup.value[0]['cacxResult'] : 0,
+            Comments: (yesOption[0].itemId == screeningDone) ? this.ClientMonitoringMatFormGroup.value[0]['cacxComments'] : '',
+            ClinicalNotes: (yesOption[0].itemId == screeningDone) ? this.ClientMonitoringMatFormGroup.value[0]['cacxComments'] : '',
             CreatedBy: (this.userId < 1) ? 1 : this.userId
         } as ClientMonitoringCommand;
 

@@ -64,6 +64,10 @@ export class ClientMonitoringComponent implements OnInit {
         this.YesNoOptions = yesnoOptions;
         console.log(this.cacxMethodOptions);
 
+        this.clientMonitoringFormGroup.controls['cacxMethod'].disable({ onlySelf: true });
+        this.clientMonitoringFormGroup.controls['cacxResult'].disable({ onlySelf: true });
+        this.clientMonitoringFormGroup.controls['cacxComments'].disable({ onlySelf: true });
+
       /*  this.getLookupItems('TBScreeningPMTCT', this.TBOptions);
         this.getLookupItems('WHOStage', this.WHOStagOptions);
         this.getLookupItems('YesNoNA', this.YesNoNa);
@@ -112,6 +116,19 @@ export class ClientMonitoringComponent implements OnInit {
         console.log(this.clientMonitoringData);
         this.nextStep.emit(this.clientMonitoringData);
         this.notify.emit(this.clientMonitoringFormGroup);
+    }
+
+    public oncacxScreeningChange(event) {
+        console.log(event);
+        if (event.isUserInput && event.source.selected && event.source.viewValue == 'Yes') {
+            this.clientMonitoringFormGroup.controls['cacxMethod'].enable({ onlySelf: true });
+            this.clientMonitoringFormGroup.controls['cacxResult'].enable({ onlySelf: true });
+            this.clientMonitoringFormGroup.controls['cacxComments'].enable({ onlySelf: true });
+        } else {
+            this.clientMonitoringFormGroup.controls['cacxMethod'].disable({ onlySelf: true });
+            this.clientMonitoringFormGroup.controls['cacxResult'].disable({ onlySelf: true });
+            this.clientMonitoringFormGroup.controls['cacxComments'].disable({ onlySelf: true });
+        }
     }
 
 }

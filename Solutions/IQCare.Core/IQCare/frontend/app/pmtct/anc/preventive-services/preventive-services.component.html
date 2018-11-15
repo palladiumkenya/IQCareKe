@@ -21,7 +21,7 @@
         </div>
         <div class="col-md-2 col-xs-12 col-sm-6">
             <mat-form-field class="col-md-12">
-                <input formControlName="dateGiven" id="dateGiven" matInput [matDatepicker]="dateGiven"
+                <input [max]="maxDate" formControlName="dateGiven" id="dateGiven" matInput [matDatepicker]="dateGiven"
                        placeholder="Date Given">
                 <mat-datepicker-toggle matSuffix [for]="dateGiven"></mat-datepicker-toggle>
                 <mat-datepicker #dateGiven></mat-datepicker>
@@ -101,7 +101,7 @@
         </div>
         <div class="col-lg-4 col-sm-6 col-xs-12">
             <mat-form-field class="col-md-12">
-                <input formControlName="insecticideTreatedNetGivenDate" matInput
+                <input [max]="maxDate" formControlName="insecticideTreatedNetGivenDate" matInput
                        [matDatepicker]="insecticideGivenDate" placeholder="Date Insecticide Treated Net Given">
                 <mat-datepicker-toggle matSuffix [for]="insecticideGivenDate"></mat-datepicker-toggle>
                 <mat-datepicker #insecticideGivenDate></mat-datepicker>
@@ -132,7 +132,7 @@
         <div class="col-md-4">
             <mat-form-field class="col-md-12">
                 <mat-select formControlName="PartnerTestingVisit" placeholder="Partner Tested during this visit">
-                    <mat-option *ngFor="let YesNoNaOption of YesNoNaOptions" [value]="YesNoNaOption.itemId">
+                    <mat-option *ngFor="let YesNoNaOption of YesNoNaOptions" [value]="YesNoNaOption.itemId" (onSelectionChange)="onPartnerTestingChnage($event)">
                         {{YesNoNaOption.itemName}}
                     </mat-option>
                 </mat-select>

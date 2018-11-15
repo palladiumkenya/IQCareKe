@@ -76,7 +76,7 @@
         <div class="row">
             <div class="col-lg-4 col-xs-12 col-sm-6">
                 <mat-form-field class="col-md-12">
-                    <mat-select formControlName="otherIllness" placeholder="Do the patient have other illnesses?">
+                    <mat-select formControlName="otherIllness" placeholder="Do the patient have other illnesses?" (selectionChange)="onChangeOtherIllness($event)">
                         <mat-option value="0"> Select</mat-option>
                         <mat-option *ngFor="let yesnonaOption of yesnonaOptions" [value]="yesnonaOption.itemId">
                             {{yesnonaOption.itemName}}
@@ -90,7 +90,7 @@
         <div class="row">
             <div class="col-md-4 col-xs-12 col-sm-6">
                 <mat-form-field class="col-md-12">
-                    <mat-select formControlName="illness" placeholder="Select Illness" required minlength="0" (selectionChange)="onChangeOtherIllness($event)">
+                    <mat-select formControlName="illness" placeholder="Select Illness" required minlength="0" >
                         <mat-option value="0"> Select</mat-option>
                         <mat-option *ngFor="let chronicIllnessOption of chronicIllnessOptions" [value]="chronicIllnessOption">
                             {{chronicIllnessOption.itemName}}
@@ -100,9 +100,9 @@
             </div>
             <div class="col-md-2 col-xs-12 col-sm-6">
                 <mat-form-field class="col-md-12">
-                    <input formControlName="onSetDate" matInput [matDatepicker]="onsetDate" placeholder="Onset Date">
+                    <input [max]="maxDate" [disabled]="isDisabled" formControlName="onSetDate" matInput [matDatepicker]="onsetDate" placeholder="Onset Date">
                     <mat-datepicker-toggle matSuffix [for]="onsetDate"></mat-datepicker-toggle>
-                    <mat-datepicker #onsetDate></mat-datepicker>
+                    <mat-datepicker  #onsetDate></mat-datepicker>
                 </mat-form-field>
             </div>
             <div class="col-md-2 col-xs-12 col-sm-6">

@@ -47,7 +47,7 @@
                   <mat-form-field class="col-md-12">
                       <mat-select formControlName="cacxScreeningDone"  placeholder="Cervical Cancer Screened during this visit" required >
                           <mat-option value="0">Select</mat-option>
-                          <mat-option  *ngFor="let YesNoOption of YesNoOptions" [value]="YesNoOption.itemId" >
+                          <mat-option  *ngFor="let YesNoOption of YesNoOptions" [value]="YesNoOption.itemId" (onSelectionChange)="oncacxScreeningChange($event)"  >
                               {{YesNoOption.itemName}}
                           </mat-option>
                       </mat-select>
