@@ -7,6 +7,7 @@ import {CounsellingTopicsEmitters} from '../../emitters/counsellingTopicsEmitter
 import {PatientEducationCommand} from '../../_models/PatientEducationCommand';
 import {LookupItemService} from '../../../shared/_services/lookup-item.service';
 import {NotificationService} from '../../../shared/_services/notification.service';
+import * as moment from 'moment';
 
 
 export interface PeriodicElement {
@@ -36,6 +37,7 @@ export class PatientEducationExaminationComponent implements OnInit {
     LookupItems$: Subscription;
     public testResults: any[] = [];
     public userId: number;
+    public maxDate: Date = moment().toDate();
 
     public patientEducationEmitterData: PatientEducationEmitter;
     public counsellingOptions: any[] = [];

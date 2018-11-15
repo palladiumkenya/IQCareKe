@@ -257,7 +257,6 @@ export class VisitDetailsComponent implements OnInit, OnChanges {
         const gravidae: number = parseInt(parityOne.toString(), 10 ) + parseInt(String(parityTwo), 10);
         this.visitDetailsFormGroup.controls['gravidae'].setValue(gravidae + parseInt('1', 10));
         this.visitDetailsFormGroup.controls['gravidae'].disable({ onlySelf: true });
-
     }
 
     onChangeVisitDateChange() {

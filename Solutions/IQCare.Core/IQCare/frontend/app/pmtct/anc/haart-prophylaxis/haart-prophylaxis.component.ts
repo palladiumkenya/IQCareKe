@@ -41,6 +41,7 @@ export class HaartProphylaxisComponent implements OnInit {
     public serviceAreaId: number;
     public patientId: number;
     public userId: number;
+    public isDisabled: boolean = true ;
 
     constructor(private route: ActivatedRoute, private _formBuilder: FormBuilder, private _lookupItemService: LookupItemService,
                 private  snotifyService: SnotifyService,
@@ -162,6 +163,31 @@ export class HaartProphylaxisComponent implements OnInit {
             });
         }
         console.log(this.chronicIllness);
+    }
+
+    public onChangeOtherIllness(event) {
+
+        if (event.isUserInput && event.source.selected && event.source.viewValue == 'Yes') {
+            alert();
+            this.HaartProphylaxisFormGroup.controls['illness'].disable({ onlySelf: true });
+            this.HaartProphylaxisFormGroup.controls['onsetDate'].disable({ onlySelf: true });
+            this.HaartProphylaxisFormGroup.controls['currentTreatment'].disable({ onlySelf: true });
+            this.HaartProphylaxisFormGroup.controls['Dose'].disable({ onlySelf: true });
+            this.HaartProphylaxisFormGroup.controls['illness'].disable({ onlySelf: true });
+            this.isDisabled = true;
+        }
+      /* const OtherIllness = this.HaartProphylaxisFormGroup.controls['otherIllness'].value.itemName;
+        if (OtherIllness == 'Yes') {
+
+            this.isDisabled = false;
+        } else {
+            this.HaartProphylaxisFormGroup.controls['illness'].disable({ onlySelf: true });
+            this.HaartProphylaxisFormGroup.controls['onsetDate'].disable({ onlySelf: true });
+            this.HaartProphylaxisFormGroup.controls['currentTreatment'].disable({ onlySelf: true });
+            this.HaartProphylaxisFormGroup.controls['Dose'].disable({ onlySelf: true });
+            this.HaartProphylaxisFormGroup.controls['illness'].disable({ onlySelf: true });
+            this.isDisabled = true;
+        } */
     }
 
     public removeRow(idx) {
