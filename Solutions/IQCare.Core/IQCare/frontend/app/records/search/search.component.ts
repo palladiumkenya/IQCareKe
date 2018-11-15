@@ -40,6 +40,7 @@ export class SearchComponent implements OnInit, AfterViewInit {
         store.dispatch(new AppState.ClearState());
         this.clientSearch = new Search();
         localStorage.removeItem('selectedService');
+        this.store.dispatch(new AppState.ClearState());
     }
 
     ngAfterViewInit(): void {
@@ -50,11 +51,11 @@ export class SearchComponent implements OnInit, AfterViewInit {
         this.dataSource.sort = this.sort;
     }
 
-    OnKeyUp(event) {
+    /*OnKeyUp(event) {
         if (event.target.value.length > 2) {
             this.doSearch();
         }
-    }
+    }*/
 
     doSearch() {
         this.searchService.searchClient(this.clientSearch).subscribe(
@@ -65,14 +66,14 @@ export class SearchComponent implements OnInit, AfterViewInit {
                 this.dataSource.data = rows;
             },
             (error) => {
-                console.error(error);
+                // console.error(error);
                 this.snotifyService.error('Error searching person ' + error, 'SEARCH', this.notificationService.getConfig());
             }
         );
     }
 
     getSelectedRow(row: any) {
-        console.log(row);
+        // console.log(row);
         const personId = row['id'];
         this.zone.run(() => { this.router.navigate(['/dashboard/personhome/' + personId], { relativeTo: this.route }); });
     }

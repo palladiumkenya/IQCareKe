@@ -6,7 +6,8 @@ import { NotificationService } from '../../shared/_services/notification.service
 import { SnotifyService } from 'ng-snotify';
 import { PersonView } from '../../records/_models/personView';
 import { MatTableDataSource } from '@angular/material';
-
+import * as Consent from '../../shared/reducers/app.states';
+import { Store } from '@ngrx/store';
 
 @Component({
     selector: 'app-person-home',
@@ -21,15 +22,16 @@ export class PersonHomeComponent implements OnInit {
     public person: PersonView;
     public personView$: Subscription;
     services: any[];
-    chronic_illness_data : any[] = [];
+    chronic_illness_data: any[] = [];
     dataSource = new MatTableDataSource(this.chronic_illness_data);
-    chronic_illness_displaycolumns = ['illness','onsetdate','treatment','dose'];
+    chronic_illness_displaycolumns = ['illness', 'onsetdate', 'treatment', 'dose'];
     constructor(private route: ActivatedRoute,
         private personService: PersonHomeService,
         private snotifyService: SnotifyService,
         private notificationService: NotificationService,
         private router: Router,
-        public zone: NgZone) {
+        public zone: NgZone,
+        private store: Store<AppState>) {
         this.person = new PersonView();
     }
 
@@ -49,6 +51,8 @@ export class PersonHomeComponent implements OnInit {
         localStorage.removeItem('patientEncounterId');
         localStorage.removeItem('patientMasterVisitId');
         localStorage.removeItem('selectedService');
+
+        this.store.dispatch(new Consent.ClearState());
     }
 
     public getPatientDetilsById(personId: number) {

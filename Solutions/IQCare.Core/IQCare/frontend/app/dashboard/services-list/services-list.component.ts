@@ -4,6 +4,8 @@ import { PersonHomeService } from '../services/person-home.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { PatientView } from '../_model/PatientView';
 import { SnotifyService } from 'ng-snotify';
+import { Store } from '@ngrx/store';
+import * as Consent from '../../shared/reducers/app.states';
 
 @Component({
     selector: 'app-services-list',
@@ -30,7 +32,8 @@ export class ServicesListComponent implements OnInit {
         private router: Router,
         private route: ActivatedRoute,
         private snotifyService: SnotifyService,
-        private notificationService: NotificationService) {
+        private notificationService: NotificationService,
+        private store: Store<AppState>) {
     }
 
     ngOnInit() {
@@ -63,8 +66,12 @@ export class ServicesListComponent implements OnInit {
     newEncounter(serviceId: number) {
         const selectedService = this.services.filter(obj => obj.id == serviceId);
         if (selectedService && selectedService.length > 0) {
-            switch (selectedService[0]['code']) {
+            const service = selectedService[0]['code'];
+            localStorage.setItem('selectedService', service.toLowerCase());
 
+            this.store.dispatch(new Consent.SelectedService(service.toLowerCase()));
+
+            switch (selectedService[0]['code']) {
                 case 'HTS':
                     this.zone.run(() => {
                         localStorage.setItem('personId', this.personId.toString());
@@ -78,7 +85,6 @@ export class ServicesListComponent implements OnInit {
                         this.notificationService.getConfig());
                     break;
                 default:
-
                     this.zone.run(() => {
                         this.router.navigate(
                             ['/pmtct/patient-encounter/' + this.patientId + '/' + this.personId + '/' + serviceId + '/'

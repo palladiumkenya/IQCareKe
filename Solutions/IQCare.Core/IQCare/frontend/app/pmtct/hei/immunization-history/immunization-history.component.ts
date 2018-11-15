@@ -1,11 +1,11 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { SnotifyService } from 'ng-snotify';
 import { LookupItemService } from '../../../shared/_services/lookup-item.service';
 import { NotificationService } from '../../../shared/_services/notification.service';
-import {MatTableDataSource} from '@angular/material';
-import {ImmunizationHistory} from '../../_models/hei/ImmunizationHistory';
-import {ImmunizationHistoryTableData} from '../../_models/hei/ImmunizationHistoryTableData';
+import { MatTableDataSource } from '@angular/material';
+import { ImmunizationHistory } from '../../_models/hei/ImmunizationHistory';
+import { ImmunizationHistoryTableData } from '../../_models/hei/ImmunizationHistoryTableData';
 
 @Component({
     selector: 'app-immunization-history',
@@ -20,18 +20,21 @@ export class ImmunizationHistoryComponent implements OnInit {
     public yesnoOptions: any[] = [];
     public immunization_history_table_data: ImmunizationHistoryTableData[] = [];
     public immunization_history: ImmunizationHistory[] = [];
+    public maxDate: Date;
 
     displayedColumns = ['period', 'given', 'dateImmunized', 'nextSchedule', 'action'];
     dataSource = new MatTableDataSource(this.immunization_history_table_data);
 
     @Input('immunizationHistoryOptions') immunizationHistoryOptions: any;
     @Output() notify: EventEmitter<object> = new EventEmitter<object>();
-  //  @Output() vaccineArray: EventEmitter<ImmunizationHistory[]> = new EventEmitter<ImmunizationHistory[]>();
+    //  @Output() vaccineArray: EventEmitter<ImmunizationHistory[]> = new EventEmitter<ImmunizationHistory[]>();
 
     constructor(private _formBuilder: FormBuilder,
         private _lookupItemService: LookupItemService,
         private snotifyService: SnotifyService,
-        private notificationService: NotificationService) { }
+        private notificationService: NotificationService) {
+        this.maxDate = new Date();
+    }
 
     ngOnInit() {
 
@@ -45,17 +48,22 @@ export class ImmunizationHistoryComponent implements OnInit {
             immunizationPeriod,
             immunizationGiven,
             yesnoOption
-                } = this.immunizationHistoryOptions[0];
+        } = this.immunizationHistoryOptions[0];
         this.immunizationperiods = immunizationPeriod;
         this.vaccines = immunizationGiven;
         this.yesnoOptions = yesnoOption;
 
-        this.notify.emit({'form': this.ImmunizationHistoryFormGroup , 'data': this.immunization_history});
+        this.notify.emit({ 'form': this.ImmunizationHistoryFormGroup, 'data': this.immunization_history });
         // this.vaccineArray.emit(this.immunization_history);
     }
 
-   public AddImmunization() {
+    public AddImmunization() {
         console.log(this.ImmunizationHistoryFormGroup.value);
+        if (this.ImmunizationHistoryFormGroup.invalid) {
+            this.snotifyService.warning('Please complete all fields before add', 'Immunization History',
+                this.notificationService.getConfig());
+            return;
+        }
         const period = this.ImmunizationHistoryFormGroup.get('period').value.itemName;
         if (this.immunization_history_table_data.filter(x => x.immunizationPeriod === period).length > 0) {
             this.snotifyService.warning('' + period + ' exists', 'Immunization History', this.notificationService.getConfig());
@@ -70,7 +78,7 @@ export class ImmunizationHistoryComponent implements OnInit {
             this.immunization_history.push({
                 immunizationPeriodId: this.ImmunizationHistoryFormGroup.get('period').value.itemId,
                 immunizationGivenId: this.ImmunizationHistoryFormGroup.controls['immunizationGiven'].value.itemId,
-                dateImmunized: new Date(this.ImmunizationHistoryFormGroup.controls['dateImmunized'].value) ,
+                dateImmunized: new Date(this.ImmunizationHistoryFormGroup.controls['dateImmunized'].value),
                 nextScheduled: new Date(this.ImmunizationHistoryFormGroup.controls['nextSchedule'].value)
             });
 
