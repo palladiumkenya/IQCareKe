@@ -15,35 +15,51 @@ export class SidebarComponent implements OnInit {
     isEnrolled: boolean;
 
     constructor(private store: Store<AppState>) {
-        this.selectedService = localStorage.getItem('selectedService');
+        store.pipe(select('app')).subscribe(res => {
+            if (res['service']) {
+                this.selectedService = res['service'];
+            } else {
+                this.selectedService = '';
+            }
+        });
 
         store.pipe(select('app')).subscribe(res => {
             if (res['consent']) {
                 this.consent = res['consent'];
+            } else {
+                this.consent = false;
             }
         });
 
         store.pipe(select('app')).subscribe(res => {
             if (res['isPositive']) {
                 this.isPositive = res['isPositive'];
+            } else {
+                this.isPositive = false;
             }
         });
 
         store.pipe(select('app')).subscribe(res => {
             if (res['consentPartnerListing']) {
                 this.hasConsentedPartnerListing = res['consentPartnerListing'];
+            } else {
+                this.hasConsentedPartnerListing = false;
             }
         });
 
         store.pipe(select('app')).subscribe(res => {
             if (res['isReferred']) {
                 this.isReferred = res['isReferred'];
+            } else {
+                this.isReferred = false;
             }
         });
 
         store.pipe(select('app')).subscribe(res => {
             if (res['isEnrolled']) {
                 this.isEnrolled = res['isEnrolled'];
+            } else {
+                this.isEnrolled = false;
             }
         });
     }

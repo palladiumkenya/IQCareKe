@@ -41,7 +41,7 @@ export class MilestonesComponent implements OnInit {
             dateAssessed: new FormControl('', [Validators.required]),
             achieved: new FormControl('', [Validators.required]),
             status: new FormControl('', [Validators.required]),
-            comment: new FormControl('', [Validators.required])
+            comment: new FormControl('')
         });
 
         const {

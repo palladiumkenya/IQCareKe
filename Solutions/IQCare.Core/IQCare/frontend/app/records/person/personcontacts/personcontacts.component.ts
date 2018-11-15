@@ -22,6 +22,8 @@ export class PersoncontactsComponent implements OnInit {
 
     contactRegisteredInClinic: boolean = false;
 
+    public phonePattern = /^(?:\+254|0|254)(\d{9})$/;
+
     constructor(private fb: FormBuilder,
         private dialogRef: MatDialogRef<PersoncontactsComponent>,
         @Inject(MAT_DIALOG_DATA) data,
@@ -51,6 +53,8 @@ export class PersoncontactsComponent implements OnInit {
             kinContactType: new FormControl(this.nextOfKin.kinContactType, [Validators.required]),
             registeredPersonId: new FormControl(0)
         });
+
+        console.log(this.form.controls);
 
         this.form.controls.consentDeclineReason.disable({ onlySelf: true });
     }
