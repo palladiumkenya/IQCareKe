@@ -25,6 +25,7 @@ import { HivStatusCommand } from '../_models/HivStatusCommand';
 import { HivTestsCommand } from '../_models/HivTestsCommand';
 
 
+
 @Component({
     selector: 'app-maternity',
     templateUrl: './maternity.component.html',
@@ -90,12 +91,12 @@ export class MaternityComponent implements OnInit {
     patientEducationOptions: any[] = [];
 
     constructor(private route: ActivatedRoute,
-        private matService: MaternityService,
-        private _lookupItemService: LookupItemService,
-        private snotifyService: SnotifyService,
-        private notificationService: NotificationService,
-        public zone: NgZone,
-        private router: Router) {
+                private matService: MaternityService,
+                private _lookupItemService: LookupItemService,
+                private snotifyService: SnotifyService,
+                private notificationService: NotificationService,
+                public zone: NgZone,
+                private router: Router) {
         this.visitDetailsFormGroup = new FormArray([]);
         this.diagnosisFormGroup = new FormArray([]);
         this.maternalDrugAdministrationForGroup = new FormArray([]);
@@ -112,7 +113,7 @@ export class MaternityComponent implements OnInit {
         this.route.params.subscribe(
             (params) => {
                 console.log(params);
-                const { patientId, personId, serviceAreaId } = params;
+                const {patientId, personId, serviceAreaId} = params;
                 this.patientId = parseInt(patientId, 10);
                 this.personId = personId;
                 this.serviceAreaId = serviceAreaId;
@@ -280,7 +281,7 @@ export class MaternityComponent implements OnInit {
                 p => {
                     const options = p['lookupItems'];
                     for (let i = 0; i < options.length; i++) {
-                        objOptions.push({ 'itemId': options[i]['itemId'], 'itemName': options[i]['itemName'] });
+                        objOptions.push({'itemId': options[i]['itemId'], 'itemName': options[i]['itemName']});
                     }
                 },
                 (err) => {
@@ -353,7 +354,7 @@ export class MaternityComponent implements OnInit {
             DeliveryConductedBy: this.diagnosisFormGroup.value[1]['deliveryConductedBy'],
             CreatedBy: this.userId
         };
-
+        
         const apgarscoreOne = this.apgarOptions.filter(x => x.itemName == 'Apgar Score 1 min');
         const apgarscoreTwo = this.apgarOptions.filter(x => x.itemName == 'Apgar Score 5 min');
         const apgarscoreThree = this.apgarOptions.filter(x => x.itemName == 'Apgar Score 10 min');
@@ -643,10 +644,10 @@ export class MaternityComponent implements OnInit {
                                 () => {
                                     this.snotifyService.success('Successfully saved Maternity encounter ', 'Maternity',
                                         this.notificationService.getConfig());
-                                    this.zone.run(() => {
-                                        this.router.navigate(['/dashboard/personhome/' + this.personId], { relativeTo: this.route });
-                                    });
-                                }
+                            this.zone.run(() => {
+                        this.router.navigate(['/dashboard/personhome/' + this.personId], {relativeTo: this.route});
+                    });
+                            }
                             );
                         }
                     );
