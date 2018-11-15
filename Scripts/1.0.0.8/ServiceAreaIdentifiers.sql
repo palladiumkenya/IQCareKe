@@ -32,7 +32,7 @@ END;
 IF NOT EXISTS(SELECT TOP 1 Id FROM ServiceAreaIdentifiers WHERE ServiceAreaId = (SELECT TOP 1 Id FROM ServiceArea WHERE Name = 'Maternity'))
 BEGIN
 	INSERT INTO [dbo].[ServiceAreaIdentifiers] ([ServiceAreaId] ,[IdentifierId] ,[RequiredFlag]) 
-	VALUES ((SELECT TOP 1 Id FROM ServiceArea WHERE Name = 'Maternity'), (SELECT TOP 1 Id FROM Identifiers WHERE Code = 'MaternityNumber'), 1);
+	VALUES ((SELECT TOP 1 Id FROM ServiceArea WHERE Name = 'Maternity'), (SELECT TOP 1 Id FROM Identifiers WHERE Code = 'MATERNITYNumber'), 1);
 END;
 Go
 

@@ -66,7 +66,17 @@
             <div class="col-lg-4 col-sm-4 col-xs-12">
                 <mat-form-field class="col-lg-12 col-sm-12 col-xs-12">
                     <mat-label>CCC No.</mat-label>
-                    <input matInput id="cccno" formControlName="cccno" name="cccno" autocomplete="off" required>
+                    <input matInput id="cccno" formControlName="cccno" name="cccno" autocomplete="off" [pattern]="cccPattern"
+                        required>
+                    <div *ngIf="MaternalHistoryForm.controls.cccno.errors && (MaternalHistoryForm.controls.cccno.dirty || MaternalHistoryForm.controls.cccno.touched)"
+                        class="alert alert-danger">
+                        <div [hidden]="!MaternalHistoryForm.controls.cccno.errors.required">
+                            CCC Number is required!
+                        </div>
+                        <div [hidden]="!MaternalHistoryForm.controls.cccno.errors.pattern">
+                            Invalid CCC format!
+                        </div>
+                    </div>
                 </mat-form-field>
             </div>
         </div>

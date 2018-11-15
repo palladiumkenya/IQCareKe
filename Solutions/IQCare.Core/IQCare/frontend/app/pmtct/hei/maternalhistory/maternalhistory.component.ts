@@ -26,6 +26,8 @@ export class MaternalhistoryComponent implements OnInit {
     @Input('maternalhistoryOptions') maternalhistoryOptions: any;
     @Output() notify: EventEmitter<FormGroup> = new EventEmitter<FormGroup>();
 
+    public cccPattern = /^((?!(0))[0-9]{10})$/;
+
     constructor(private _formBuilder: FormBuilder,
         private notificationService: NotificationService,
         private snotifyService: SnotifyService,
@@ -45,6 +47,8 @@ export class MaternalhistoryComponent implements OnInit {
             motheronartatinfantenrollment: new FormControl('', [Validators.required]),
             pmtctheimotherdrugsatinfantenrollment: new FormControl('', [Validators.required]),
         });
+
+        console.log(this.MaternalHistoryForm);
 
         const {
             motherstateOptions,
