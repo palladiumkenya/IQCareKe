@@ -9,6 +9,7 @@ import {HAARTProphylaxisEmitter} from '../../emitters/HAARTProphylaxisEmitter';
 import {ActivatedRoute} from '@angular/router';
 import {ChronicIllnessEmitter} from '../../emitters/ChronicIllnessEmitter';
 import {PatientChronicIllness} from '../../_models/PatientChronicIllness';
+import * as moment from 'moment';
 
 export interface Options {
     value: string;
@@ -41,6 +42,9 @@ export class HaartProphylaxisComponent implements OnInit {
     public serviceAreaId: number;
     public patientId: number;
     public userId: number;
+    public isDisabled: boolean = false ;
+
+    public maxDate: Date = moment().toDate();
 
     constructor(private route: ActivatedRoute, private _formBuilder: FormBuilder, private _lookupItemService: LookupItemService,
                 private  snotifyService: SnotifyService,
@@ -73,9 +77,15 @@ export class HaartProphylaxisComponent implements OnInit {
             illness: ['', Validators.required],
             otherIllness: ['', Validators.required],
             onSetDate: ['', Validators.required],
-            currentTreatment: ['treatment', Validators.required],
-            dose: ['dose', Validators.required]
+            currentTreatment: ['', Validators.required],
+            dose: ['', Validators.required]
         });
+
+       /* this.HaartProphylaxisFormGroup.controls['illness'].disable({ onlySelf: true });
+        this.HaartProphylaxisFormGroup.controls['currentTreatment'].disable({ onlySelf: true });
+        this.HaartProphylaxisFormGroup.controls['dose'].disable({ onlySelf: true });
+
+        this.isDisabled = true; */
 
         const {
             yesnoOptions,
@@ -162,6 +172,32 @@ export class HaartProphylaxisComponent implements OnInit {
             });
         }
         console.log(this.chronicIllness);
+    }
+
+    public onChangeOtherIllness(event) {
+
+        if (event.isUserInput && event.source.selected && event.source.viewValue == 'Yes') {
+            this.HaartProphylaxisFormGroup.controls['illness'].enable({ onlySelf: true });
+            this.HaartProphylaxisFormGroup.controls['onsetDate'].disable({ onlySelf: true });
+            this.HaartProphylaxisFormGroup.controls['currentTreatment'].disable({ onlySelf: true });
+            this.HaartProphylaxisFormGroup.controls['Dose'].disable({ onlySelf: true });
+            this.HaartProphylaxisFormGroup.controls['illness'].disable({ onlySelf: true });
+            this.isDisabled = true;
+        } else {
+
+        }
+      /* const OtherIllness = this.HaartProphylaxisFormGroup.controls['otherIllness'].value.itemName;
+        if (OtherIllness == 'Yes') {
+
+            this.isDisabled = false;
+        } else {
+            this.HaartProphylaxisFormGroup.controls['illness'].disable({ onlySelf: true });
+            this.HaartProphylaxisFormGroup.controls['onsetDate'].disable({ onlySelf: true });
+            this.HaartProphylaxisFormGroup.controls['currentTreatment'].disable({ onlySelf: true });
+            this.HaartProphylaxisFormGroup.controls['Dose'].disable({ onlySelf: true });
+            this.HaartProphylaxisFormGroup.controls['illness'].disable({ onlySelf: true });
+            this.isDisabled = true;
+        } */
     }
 
     public removeRow(idx) {

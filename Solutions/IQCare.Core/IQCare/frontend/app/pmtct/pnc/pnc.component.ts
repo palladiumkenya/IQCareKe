@@ -12,7 +12,7 @@ import { Component, OnInit, NgZone } from '@angular/core';
 import { FormGroup, FormArray } from '@angular/forms';
 import { NotificationService } from '../../shared/_services/notification.service';
 import { SnotifyService } from 'ng-snotify';
-import { forkJoin } from 'rxjs';
+import {forkJoin, of} from 'rxjs';
 import { PatientAppointment } from '../_models/PatientAppointmet';
 import { PostNatalExamCommand } from '../_models/PostNatalExamCommand';
 import { FamilyPlanningMethodCommand } from '../_models/FamilyPlanningMethodCommand';

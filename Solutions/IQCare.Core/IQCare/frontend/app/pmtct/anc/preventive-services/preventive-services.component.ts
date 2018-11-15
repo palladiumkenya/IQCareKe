@@ -8,6 +8,7 @@ import {PreventiveServiceEmitter} from '../../emitters/PreventiveServiceEmitter'
 import {PreventiveEmitter} from '../../emitters/PreventiveEmitter';
 import {LookupItemService} from '../../../shared/_services/lookup-item.service';
 import {NotificationService} from '../../../shared/_services/notification.service';
+import * as moment from 'moment';
 
 export interface Options {
     value: string;
@@ -26,6 +27,7 @@ export class PreventiveServicesComponent implements OnInit {
     public YesNoOptions: any[] = [];
     public YesNoNaOptions: any[] = [];
     public FinalResultOptions: any[] = [];
+    public maxDate: Date = moment().toDate();
 
     @Output() nextStep = new EventEmitter<PreventiveServiceEmitter>();
     @Input() preventiveServices: PreventiveServiceEmitter;
@@ -129,6 +131,15 @@ export class PreventiveServicesComponent implements OnInit {
             });
         }
         console.log(this.serviceData);
+    }
+
+    public onPartnerTestingChnage(event) {
+        if (event.isUserInput && event.source.selected && event.source.viewValue == 'Yes') {
+
+        } else {
+            const final = this.FinalResultOptions.filter(x => x.itemName == 'N/A');
+            this.PreventiveServicesFormGroup.get('finalHIVResult').setValue(final[0].itemId);
+        }
     }
 
     public removeRow(idx) {

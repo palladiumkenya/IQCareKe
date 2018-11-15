@@ -30,6 +30,7 @@ export class TbAssessmentComponent implements OnInit, OnChanges {
     public iptOUtcomeIsDisabled: boolean = true;
     public iptFollowupIsDisabled: boolean = true;
 
+
     @Input('tbAssessmentOptions') tbAssessmentOptions: any;
     @Input('defaultParameters') defaultParameters: DefaultParameters;
     @Output() notify: EventEmitter<FormGroup> = new EventEmitter<FormGroup>();

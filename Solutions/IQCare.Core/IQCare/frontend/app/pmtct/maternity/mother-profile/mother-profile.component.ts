@@ -21,6 +21,10 @@ export class MotherProfileComponent implements OnInit {
     visitDetails: Subscription;
     @Input('patientId') patientId: number;
     @Output() notify: EventEmitter<FormGroup> = new EventEmitter<FormGroup>();
+    public maxDate: Date = moment().toDate();
+    public minLmpDate: Date = moment().subtract( 1 , 'years').toDate();
+    public minAgeMenarche: number = 9;
+
 
     constructor(private _formBuilder: FormBuilder,
         private _lookupItemService: LookupItemService,
@@ -31,13 +35,13 @@ export class MotherProfileComponent implements OnInit {
 
     ngOnInit() {
         this.motherProfileFormGroup = this._formBuilder.group({
-            dateLMP: new FormControl('', [Validators.required]),
+            dateLMP: new FormControl('', [ Validators.required]),
             dateEDD: new FormControl('', [Validators.required]),
             // ancVisitNumber: new FormControl('', [Validators.required]),
             gestation: new FormControl('', [Validators.required]),
-            ageAtMenarche: new FormControl('', [Validators.required]),
-            parityOne: new FormControl('', [Validators.required]),
-            parityTwo: new FormControl('', [Validators.required]),
+            ageAtMenarche: new FormControl('', [ Validators.min(8), Validators.max(20) , Validators.required]),
+            parityOne: new FormControl('', [ Validators.min(0) , Validators.max(20), Validators.required]),
+            parityTwo: new FormControl('', [ Validators.min(0), Validators.max(20), Validators.required]),
             gravidae: new FormControl('', [Validators.required]),
         });
 

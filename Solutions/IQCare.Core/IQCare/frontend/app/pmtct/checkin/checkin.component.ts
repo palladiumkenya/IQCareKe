@@ -5,6 +5,7 @@ import { LookupItemService } from '../../shared/_services/lookup-item.service';
 import { Subscription } from 'rxjs';
 import { SnotifyService } from 'ng-snotify';
 import { NotificationService } from '../../shared/_services/notification.service';
+import * as moment from 'moment';
 
 @Component({
     selector: 'app-checkin',
@@ -19,6 +20,8 @@ export class CheckinComponent implements OnInit {
 
     public lookupItems$: Subscription;
     public visitTypes: any[] = [];
+   // minDate = new Date();
+    maxDate = moment().toDate();
 
     constructor(private fb: FormBuilder,
         private dialogRef: MatDialogRef<CheckinComponent>,
@@ -35,7 +38,7 @@ export class CheckinComponent implements OnInit {
                 this.getLookupItems('HEIVisitType', this.visitTypes);
                 break;
             case 'maternity':
-                this.getLookupItems('ANCVisitType', this.visitTypes);
+                this.getLookupItems('HEIVisitType', this.visitTypes);
                 break;
             case 'pnc':
                 this.getLookupItems('PNCVisitType', this.visitTypes);

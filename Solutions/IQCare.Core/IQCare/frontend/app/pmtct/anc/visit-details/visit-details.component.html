@@ -11,14 +11,15 @@
             <div class="col-md-4 col-xs-12">
                 <mat-form-field class="col-lg-12 col-xs-12">
                     <input matInput [matDatepicker]="picker" formControlName="visitDate" required
-                           placeholder="Choose Visit date">
+                           placeholder="Choose Visit date" onchange="onChangeVisitDateChange()">
                     <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                     <mat-datepicker #picker></mat-datepicker>
                 </mat-form-field>
             </div>
+
             <div class="col-md-4 col-xs-12">
                 <mat-form-field class="example-full-width col-lg-12 col-xs-12">
-                    <input  matInput formControlName="ancVisitNumber" placeholder="ANC Visit Number" value="0">
+                    <input  matInput formControlName="ancVisitNumber" placeholder="ANC Visit Number" value="0" type="number" min="1">
                 </mat-form-field>
             </div>
             <div class="col-md-4 col-xs-12">
@@ -43,19 +44,29 @@
         <div class="row">
             <div class="col-md-4 col-xs-12 col-sm-12">
                 <mat-form-field class="col-md-12 col-sm-6 col-xs-12">
-                    <input matInput [matDatepicker]="picker2" formControlName="dateLMP" (dateChange)="onLMPDateChange()"
+                    <input  matInput [matDatepicker]="dateLMP" formControlName="dateLMP" (dateChange)="onLMPDateChange()"
                            placeholder="LMP">
-                    <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
-                    <mat-datepicker #picker2></mat-datepicker>
+                    <mat-datepicker-toggle matSuffix [for]="dateLMP"></mat-datepicker-toggle>
+                    <mat-datepicker #dateLMP></mat-datepicker>
+                    <mat-error *ngIf="!form.controls['dateLMP'].valid">Please select LMP Date</mat-error>
                 </mat-form-field>
             </div>
 
             <div class="col-md-4 col-xs-12 col-sm-12">
-                <mat-form-field class="col-md-12">
-                    <input matInput [matDatepicker]="picker1" formControlName="dateEDD" placeholder="EDD" required>
+               <!-- <mat-form-field class="col-md-12">
+                    <input  [min]="minLmpDate" [max]="maxDate" matInput [matDatepicker]="picker1" formControlName="dateEDD" placeholder="EDD" required>
                     <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
                     <mat-datepicker #picker1></mat-datepicker>
+                </mat-form-field> -->
+
+                <mat-form-field>
+                    <input  matInput placeholder="Date Date" required [matDatepicker]="dateEDD" (click)="dateEDD.open()"
+                           id="dateEDD" name="dateEDD" formControlName="dateEDD" required>
+                    <mat-datepicker-toggle matSuffix [for]="dateEDD"></mat-datepicker-toggle>
+                    <mat-datepicker #dateEDD></mat-datepicker>
+                    <mat-error *ngIf="!form.controls['dateEDD'].valid">Please select LMP Date</mat-error>
                 </mat-form-field>
+
             </div>
 
             <div class="col-md-4 col-xs-12 col-sm-12">
