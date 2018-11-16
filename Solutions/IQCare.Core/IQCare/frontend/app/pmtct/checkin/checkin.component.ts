@@ -19,7 +19,7 @@ export class CheckinComponent implements OnInit {
 
     public lookupItems$: Subscription;
     public visitTypes: any[] = [];
-   // minDate = new Date();
+    // minDate = new Date();
     maxDate = moment().toDate();
 
     constructor(private fb: FormBuilder,
@@ -30,6 +30,7 @@ export class CheckinComponent implements OnInit {
         private notificationService: NotificationService) {
         this.title = 'Check In';
         this.section = data.section;
+
         switch (this.section) {
             case 'hei':
                 this.getLookupItems('HEIVisitType', this.visitTypes);

@@ -1,11 +1,12 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
-import {NotificationService} from '../../../shared/_services/notification.service';
-import {SnotifyService} from 'ng-snotify';
-import {LookupItemService} from '../../../shared/_services/lookup-item.service';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { NotificationService } from '../../../shared/_services/notification.service';
+import { SnotifyService } from 'ng-snotify';
+import { LookupItemService } from '../../../shared/_services/lookup-item.service';
 import * as moment from 'moment';
-import {MaternityService} from '../../_services/maternity.service';
-import {Subscription} from 'rxjs/index';
+import { MaternityService } from '../../_services/maternity.service';
+import { Subscription } from 'rxjs/index';
+import { isEmpty } from 'rxjs/internal/operators';
 
 @Component({
     selector: 'app-delivery-maternity',
@@ -27,12 +28,13 @@ export class DeliveryMaternityComponent implements OnInit {
     public visitDetails: Subscription;
     public motherProfile: Subscription;
     public dateLMP: Date;
+    public isMotherAlive: boolean = true;
     public maxDate: Date = moment().toDate();
 
     constructor(private formBuilder: FormBuilder, private _lookupItemService: LookupItemService,
-                private snotifyService: SnotifyService,
-                private notificationService: NotificationService,
-                private _matService: MaternityService ) {
+        private snotifyService: SnotifyService,
+        private notificationService: NotificationService,
+        private _matService: MaternityService) {
 
     }
 
@@ -85,14 +87,14 @@ export class DeliveryMaternityComponent implements OnInit {
     public onDeliveryDateChange() {
         this.deliveryDate = this.deliveryFormGroup.controls['deliveryDate'].value;
 
-       // const now = moment(new Date());
-        const now =  moment(this.deliveryDate) ;
+        // const now = moment(new Date());
+        const now = moment(this.deliveryDate);
         const gestation = moment.duration(now.diff(this.dateLMP)).asWeeks().toFixed(1);
         this.deliveryFormGroup.controls['gestationAtBirth'].setValue(gestation);
 
 
-      //  const gestation = moment(this.deliveryDate).diff(this.dateLMP, 'weeks').toFixed(1);
-      //  this.deliveryFormGroup.controls['gestationAtBirth'].setValue(gestation + ' weeks');
+        //  const gestation = moment(this.deliveryDate).diff(this.dateLMP, 'weeks').toFixed(1);
+        //  this.deliveryFormGroup.controls['gestationAtBirth'].setValue(gestation + ' weeks');
 
         this.deliveryFormGroup.controls['gestationAtBirth'].disable({ onlySelf: true });
     }
@@ -109,9 +111,11 @@ export class DeliveryMaternityComponent implements OnInit {
         if (event.isUserInput && event.source.selected && event.source.viewValue == 'Dead') {
             this.deliveryFormGroup.get('maternalDeathsAudited').enable({ onlySelf: true });
             this.deliveryFormGroup.get('auditDate').enable({ onlySelf: true });
-        } else {
+            this.isMotherAlive = false;
+        } else if (event.isUserInput && event.source.selected && event.source.viewValue == 'Alive') {
             this.deliveryFormGroup.get('maternalDeathsAudited').disable({ onlySelf: true });
             this.deliveryFormGroup.get('auditDate').disable({ onlySelf: true });
+            this.isMotherAlive = true;
         }
     }
 
@@ -123,7 +127,7 @@ export class DeliveryMaternityComponent implements OnInit {
         }
     }
 
-    public  getPregnancyDetails(patientId: number) {
+    public getPregnancyDetails(patientId: number) {
         this.motherProfile = this._matService.getPregnancyDetails(patientId)
             .subscribe(
                 p => {

@@ -20,9 +20,20 @@ namespace IQCare.Controllers.PMTCT.HEI
             _mediator = mediator ?? throw new ArgumentNullException(nameof(mediator));
         }
 
+        [HttpPost]
         public async Task<IActionResult> Post([FromBody] HEIDeliveryCommand heiDeliveryCommand)
         {
             var response = await _mediator.Send(heiDeliveryCommand, Request.HttpContext.RequestAborted);
+            if (response.IsValid)
+                return Ok(response.Value);
+            return BadRequest(response);
+        }
+
+        [HttpPost("UpdateOutComeAt24Months")]
+        public async Task<IActionResult> UpdateOutComeAt24Months([FromBody] UpdateHeiDeliveryAt24MonthsCommand updateHeiDeliveryAt24MonthsCommand)
+        {
+            var response = await _mediator.Send(updateHeiDeliveryAt24MonthsCommand, Request.HttpContext.RequestAborted);
+
             if (response.IsValid)
                 return Ok(response.Value);
             return BadRequest(response);

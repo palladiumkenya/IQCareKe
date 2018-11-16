@@ -379,9 +379,12 @@ export class RegisterComponent implements OnInit {
                                             { relativeTo: this.route });
                                     });
                                 } else if (tabIndex == 2) {
-                                    this.zone.run(() => {
-                                        this.router.navigate(['/record/person/'], { relativeTo: this.route });
-                                    });
+                                    this.person = new Person();
+                                    this.clientAddress = new ClientAddress();
+                                    this.clientContact = new ClientContact();
+                                    this.nextOfKin = new NextOfKin();
+
+                                    window.location.reload();
                                 }
                             }
                         );

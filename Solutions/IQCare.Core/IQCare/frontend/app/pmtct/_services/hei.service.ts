@@ -1,3 +1,4 @@
+import { HeiOutComeCommand } from './../_models/hei/HeiOutcomeCommand';
 import { forkJoin, Observable, of } from 'rxjs/index';
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
@@ -14,6 +15,7 @@ import { PatientIpt } from '../_models/hei/PatientIpt';
 import { LabOrder } from '../_models/hei/LabOrder';
 import { OrdVisitCommand } from '../_models/hei/OrdVisitCommand';
 import { CompleteLabOrderCommand } from '../_models/hei/CompleteLabOrderCommand';
+import { PatientFeedingCommand } from '../_models/hei/PatientFeedingCommand';
 
 
 const httpOptions = {
@@ -189,5 +191,20 @@ export class HeiService {
             tap(getHeiLabTests => this.errorHandler.log(`successfully fetched labtest parameters`)),
             catchError(this.errorHandler.handleError<any>('Error fetching labtest parameters'))
         );
+    }
+
+    public saveHeiInfantFeeding(patientFeeding: PatientFeedingCommand): Observable<any> {
+        return this.http.post<any>(this.API_URL + '/api/Hei', JSON.stringify(patientFeeding), httpOptions).pipe(
+            tap(saveHeiInfantFeeding => this.errorHandler.log(`successfully saved infant feeding`)),
+            catchError(this.errorHandler.handleError<any>('Error saving infant feeding'))
+        );
+    }
+
+    public saveHeiOutCome(heiOutComeCommand: HeiOutComeCommand): Observable<any> {
+        return this.http.post<any>(this.API_URL + '/api/DeliveryMaternalHistory/UpdateOutComeAt24Months',
+            JSON.stringify(heiOutComeCommand), httpOptions).pipe(
+                tap(saveHeiInfantFeeding => this.errorHandler.log(`successfully saved infant feeding`)),
+                catchError(this.errorHandler.handleError<any>('Error saving infant feeding'))
+            );
     }
 }

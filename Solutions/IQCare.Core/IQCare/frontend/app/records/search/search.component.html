@@ -14,8 +14,7 @@
                                         <label class="sr-only" for="identifierNumber">Identifier Number</label>
                                         <input type="text" autocomplete="off" class="form-control" id="identifierNumber"
                                             name="identifierNumber" placeholder="Identifier Number" tabindex="1"
-                                            [(ngModel)]="clientSearch.identifierValue" #identifierValue="ngModel"
-                                            (keyup)="OnKeyUp($event)">
+                                            [(ngModel)]="clientSearch.identifierValue" #identifierValue="ngModel">
                                     </div>
                                 </div>
 
@@ -24,7 +23,7 @@
                                         <label class="sr-only" for="firstName">First Name</label>
                                         <input type="text" autocomplete="off" class="form-control" id="firstName" name="firstName"
                                             placeholder="First Name" tabindex="2" [(ngModel)]="clientSearch.firstName"
-                                            #fullName="ngModel" (keyup)="OnKeyUp($event)">
+                                            #fullName="ngModel">
                                     </div>
                                 </div>
 
@@ -33,7 +32,7 @@
                                         <label class="sr-only" for="firstName">Middle Name</label>
                                         <input type="text" autocomplete="off" class="form-control" id="middleName" name="middleName"
                                             placeholder="Middle Name" tabindex="3" [(ngModel)]="clientSearch.middleName"
-                                            #fullName="ngModel" (keyup)="OnKeyUp($event)">
+                                            #fullName="ngModel">
                                     </div>
                                 </div>
 
@@ -42,7 +41,7 @@
                                         <label class="sr-only" for="fullName">Last Name</label>
                                         <input type="text" autocomplete="off" class="form-control" id="lastName" name="lastName"
                                             placeholder="Last Name" tabindex="4" [(ngModel)]="clientSearch.lastName"
-                                            #fullName="ngModel" (keyup)="OnKeyUp($event)">
+                                            #fullName="ngModel">
                                     </div>
                                 </div>
                             </div>
@@ -55,7 +54,15 @@
                                     <div class="form-group">
                                         <input type="text" autocomplete="off" class="form-control" id="mobileNumber"
                                             name="mobileNumber" placeholder="Mobile Number" tabindex="5" [(ngModel)]="clientSearch.mobileNumber"
-                                            #identifierValue="ngModel" (keyup)="OnKeyUp($event)">
+                                            #identifierValue="ngModel">
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-3 col-md-3 col-sm-3">
+                                    <div class="form-group">
+                                        <button class="btn btn-primary m-t-n-xs" (click)="doSearch()">
+                                            <strong>Search Person</strong>
+                                        </button>
                                     </div>
                                 </div>
                             </div>
@@ -112,7 +119,7 @@
                                 <mat-header-cell *matHeaderCellDef></mat-header-cell>
                                 <mat-cell *matCellDef="let element" (click)="getSelectedRow(element)">
                                     <a>
-                                        Patient Home
+                                        Person Home
                                     </a>
                                 </mat-cell>
                             </ng-container>

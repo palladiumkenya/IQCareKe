@@ -1,5 +1,5 @@
 import { Component, OnInit, EventEmitter, Output } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 
 import { SnotifyService } from 'ng-snotify';
 
@@ -27,9 +27,9 @@ export class NextAppointmentComponent implements OnInit {
 
     ngOnInit() {
         this.NextAppointmentFormGroup = this._formBuilder.group({
-            scheduledAppointment: ['', Validators.required],
-            nextAppointmentDate: ['', Validators.required],
-            serviceRemarks: ['', Validators.required],
+            scheduledAppointment: new FormControl('', [Validators.required]),
+            nextAppointmentDate: new FormControl('', [Validators.required]),
+            serviceRemarks: new FormControl(''),
         });
 
         this.getLookupOptions('YesNo', this.yesnos);
@@ -41,8 +41,12 @@ export class NextAppointmentComponent implements OnInit {
         if (event.isUserInput && event.source.selected && event.source.viewValue == 'No') {
             this.NextAppointmentFormGroup.controls['nextAppointmentDate'].disable({ onlySelf: true });
             this.NextAppointmentFormGroup.controls.nextAppointmentDate.setValue('');
+
+            this.NextAppointmentFormGroup.controls['serviceRemarks'].disable({ onlySelf: true });
+            this.NextAppointmentFormGroup.controls.serviceRemarks.setValue('');
         } else if (event.source.selected) {
             this.NextAppointmentFormGroup.controls['nextAppointmentDate'].enable();
+            this.NextAppointmentFormGroup.controls['serviceRemarks'].enable();
         }
     }
 
