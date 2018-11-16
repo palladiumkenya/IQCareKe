@@ -16,9 +16,9 @@ namespace IQCare.Maternity.BusinessProcess.QueryHandlers
 {
     public class GetPatientDrugAdministrationInfoQueryHandler : IRequestHandler<GetPatientDrugAdministrationInfoQuery, Result<List<PatientDrugAdministrationViewModel>>>
     {
-        ILogger logger = Log.ForContext<GetPatientDrugAdministrationInfoQueryHandler>();
-        IMaternityUnitOfWork _maternityUnitOfWork;
-        IMapper _mapper;
+        private readonly ILogger _logger = Log.ForContext<GetPatientDrugAdministrationInfoQueryHandler>();
+        private readonly  IMaternityUnitOfWork _maternityUnitOfWork;
+        private  readonly IMapper _mapper;
         public GetPatientDrugAdministrationInfoQueryHandler(IMaternityUnitOfWork maternityUnitOfWork, IMapper mapper)
         {
             _maternityUnitOfWork = maternityUnitOfWork;
@@ -39,7 +39,7 @@ namespace IQCare.Maternity.BusinessProcess.QueryHandlers
             }
             catch (Exception ex)
             {
-                logger.Error(ex, $"An error occured while getting patient drug administration for Id {request.PatientId}");
+                _logger.Error(ex, $"An error occured while getting patient drug administration for Id {request.PatientId}");
                 return Task.FromResult(Result<List<PatientDrugAdministrationViewModel>>.Invalid(ex.Message));
             }
         }

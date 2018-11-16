@@ -42,7 +42,7 @@ export class MaternityComponent implements OnInit {
     dischargeFormGroup: FormArray;
     formType: string;
     apgarSCore: ApgarScoreCommand[] = [];
-    AdministredDrugs: AdministerDrugInfo[] = [];
+    AdministeredDrugs: AdministerDrugInfo[] = [];
     lookupItems$: Subscription;
     apgarOptions: any[] = [];
     drugAdminOptions: any[] = [];
