@@ -42,33 +42,5 @@ namespace IQCare.Maternity.WebApi.Controllers
                 return Ok(diagnosisInfo.Value);
             return BadRequest(diagnosisInfo);
         }
-
-        [HttpPost]
-        public async Task<object> AddDrugAdministrationInfo([FromBody] AddMaternalDrugAdministrationCommand command)
-        {
-            if (!ModelState.IsValid)
-                return BadRequest(command);
-
-            var response = await _mediator.Send(command, HttpContext.RequestAborted);
-            if (response.IsValid)
-                return Ok(response.Value);
-
-            return BadRequest(response);
-       
-        }
-
-        [HttpGet("{Id}")]
-        public async Task<object> GetDrugAdministrationInfoByPatientId(int Id)
-        {
-            var response = await _mediator.Send(new GetPatientDrugAdministrationInfoQuery { PatientId = Id },HttpContext.RequestAborted);
-
-            if (response.IsValid)
-                return Ok(response.Value);
-
-            return BadRequest(response);
-        }
-
-
-
     }
 }
