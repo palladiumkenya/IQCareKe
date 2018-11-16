@@ -76,9 +76,9 @@
         <div class="row">
             <div class="col-lg-4 col-xs-12 col-sm-6">
                 <mat-form-field class="col-md-12">
-                    <mat-select formControlName="otherIllness" placeholder="Do the patient have other illnesses?" (selectionChange)="onChangeOtherIllness($event)">
+                    <mat-select formControlName="otherIllness" placeholder="Do the patient have other illnesses?" >
                         <mat-option value="0"> Select</mat-option>
-                        <mat-option *ngFor="let yesnonaOption of yesnonaOptions" [value]="yesnonaOption.itemId">
+                        <mat-option *ngFor="let yesnonaOption of yesnonaOptions" [value]="yesnonaOption.itemId" (onSelectionChange)="onChangeOtherIllness($event)" >
                             {{yesnonaOption.itemName}}
                         </mat-option>
                     </mat-select>
@@ -100,7 +100,7 @@
             </div>
             <div class="col-md-2 col-xs-12 col-sm-6">
                 <mat-form-field class="col-md-12">
-                    <input [max]="maxDate" [disabled]="isDisabled" formControlName="onSetDate" matInput [matDatepicker]="onsetDate" placeholder="Onset Date">
+                    <input [max]="maxDate"  [disabled]="isDisabled" formControlName="onSetDate" matInput [matDatepicker]="onsetDate" placeholder="Onset Date">
                     <mat-datepicker-toggle matSuffix [for]="onsetDate"></mat-datepicker-toggle>
                     <mat-datepicker  #onsetDate></mat-datepicker>
                 </mat-form-field>
@@ -116,7 +116,7 @@
                 </mat-form-field>
             </div>
             <div class="col-md-2 col-xs-12 col-sm-6">
-                <button [disabled]="isDisabled" mat-raised-button class="mat-primary" (click)="AddOtherIllness()"> Add Illness</button>
+                <button [disabled]="isDisabled"  mat-raised-button class="mat-primary" (click)="AddOtherIllness()"> Add Illness</button>
             </div>
         </div>
 

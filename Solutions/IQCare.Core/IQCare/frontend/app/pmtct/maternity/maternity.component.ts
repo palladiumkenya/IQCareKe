@@ -32,7 +32,7 @@ import { HivTestsCommand } from '../_models/HivTestsCommand';
     styleUrls: ['./maternity.component.css']
 })
 export class MaternityComponent implements OnInit {
-    isLinear: boolean = true;
+    isLinear: boolean = false;
 
     visitDetailsFormGroup: FormArray;
     diagnosisFormGroup: FormArray;

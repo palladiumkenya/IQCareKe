@@ -12,6 +12,7 @@ import { PatientPreventiveService } from '../_models/PatientPreventiveService';
 import { PatientProfile } from '../_models/patientProfile';
 import { PncVisitDetailsCommand } from '../_models/PncVisitDetailsCommand';
 import { HivStatusCommand } from '../_models/HivStatusCommand';
+import {PatientChronicIllness} from '../_models/PatientChronicIllness';
 
 const httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -30,7 +31,7 @@ export class AncService {
     private _url_ref = '/api/PatientReferralAndAppointment/AddPatientReferralInfo';
     private _url_app = '/api/PatientReferralAndAppointment/AddPatientNextAppointment';
     private _url_pre = '/api/ANCPreventivervice/';
-    private _url_visit = '/api/VisitDetails/';
+    private _url_pci = '/api/PatientChronicIllness/post';
 
     public profile: PatientProfile = {};
 
@@ -67,6 +68,14 @@ export class AncService {
             catchError(this.errorHandler.handleError<any>('HaartProphylaxisController'))
         );
     }
+
+    public savePatientChronicIllness(chronicIllnessCommand: PatientChronicIllness): Observable<HaartProphylaxisCommand> {
+        return this.http.post<any>(this.API_URL + '' + this._url_pci, JSON.stringify(chronicIllnessCommand), httpOptions).pipe(
+            tap(savePatientChronicIllness => this.errorHandler.log('Error posting Patient CHronic Illness Command')),
+            catchError(this.errorHandler.handleError<any>('PatientChronicIllnessController'))
+        );
+    }
+
 
     public saveReferral(referralCommand: ReferralAppointmentCommandService): Observable<ReferralAppointmentCommandService> {
         return this.http.post<any>(this.API_URL + '' + this._url_ref, JSON.stringify(referralCommand), httpOptions).pipe(

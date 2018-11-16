@@ -6,7 +6,6 @@ import {LookupItemService} from '../../../shared/_services/lookup-item.service';
 import * as moment from 'moment';
 import {MaternityService} from '../../_services/maternity.service';
 import {Subscription} from 'rxjs/index';
-import {isEmpty} from 'rxjs/internal/operators';
 
 @Component({
     selector: 'app-delivery-maternity',
@@ -28,6 +27,7 @@ export class DeliveryMaternityComponent implements OnInit {
     public visitDetails: Subscription;
     public motherProfile: Subscription;
     public dateLMP: Date;
+    public maxDate: Date = moment().toDate();
 
     constructor(private formBuilder: FormBuilder, private _lookupItemService: LookupItemService,
                 private snotifyService: SnotifyService,
@@ -148,11 +148,13 @@ export class DeliveryMaternityComponent implements OnInit {
         this.visitDetails = this._matService.getCurrentVisitDetails(patientId)
             .subscribe(
                 p => {
-                    if (p) {
-                        this.deliveryFormGroup.controls['ancVisits'].setValue(p.visitNumber);
+                    const visit = p;
+                    if (visit && visit.visitNumber > 1) {
+                        this.deliveryFormGroup.controls['ancVisits'].setValue(visit.visitNumber);
                         this.deliveryFormGroup.get('ancVisits').disable({ onlySelf: true });
+                    } else {
+                        this.deliveryFormGroup.controls['ancVisits'].setValue(1);
                     }
-
                 },
                 (err) => {
                     this.snotifyService.error('Error fetching visit details' + err,

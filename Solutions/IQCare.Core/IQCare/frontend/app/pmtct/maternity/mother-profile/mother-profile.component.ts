@@ -106,6 +106,7 @@ export class MotherProfileComponent implements OnInit {
                     if (p) {
                         console.log('agetmenarche' + p.ageMenarche);
                         this.motherProfileFormGroup.controls['ageAtMenarche'].setValue(p.ageMenarche);
+
                     }
                 },
                 (err) => {

@@ -42,7 +42,7 @@ export class HaartProphylaxisComponent implements OnInit {
     public serviceAreaId: number;
     public patientId: number;
     public userId: number;
-    public isDisabled: boolean = false ;
+    public isDisabled: boolean = true ;
 
     public maxDate: Date = moment().toDate();
 
@@ -81,11 +81,13 @@ export class HaartProphylaxisComponent implements OnInit {
             dose: ['', Validators.required]
         });
 
-       /* this.HaartProphylaxisFormGroup.controls['illness'].disable({ onlySelf: true });
+        this.HaartProphylaxisFormGroup.controls['illness'].disable({ onlySelf: true });
         this.HaartProphylaxisFormGroup.controls['currentTreatment'].disable({ onlySelf: true });
         this.HaartProphylaxisFormGroup.controls['dose'].disable({ onlySelf: true });
+        this.HaartProphylaxisFormGroup.controls['illness'].disable({ onlySelf: true });
+        this.HaartProphylaxisFormGroup.controls['onSetDate'].disabled;
+       // this.isDisabled = true;
 
-        this.isDisabled = true; */
 
         const {
             yesnoOptions,
@@ -175,14 +177,12 @@ export class HaartProphylaxisComponent implements OnInit {
     }
 
     public onChangeOtherIllness(event) {
-
         if (event.isUserInput && event.source.selected && event.source.viewValue == 'Yes') {
             this.HaartProphylaxisFormGroup.controls['illness'].enable({ onlySelf: true });
-            this.HaartProphylaxisFormGroup.controls['onsetDate'].disable({ onlySelf: true });
-            this.HaartProphylaxisFormGroup.controls['currentTreatment'].disable({ onlySelf: true });
-            this.HaartProphylaxisFormGroup.controls['Dose'].disable({ onlySelf: true });
-            this.HaartProphylaxisFormGroup.controls['illness'].disable({ onlySelf: true });
-            this.isDisabled = true;
+            this.HaartProphylaxisFormGroup.controls['currentTreatment'].enable({ onlySelf: true });
+            this.HaartProphylaxisFormGroup.controls['dose'].enable({ onlySelf: true });
+            this.HaartProphylaxisFormGroup.controls['illness'].enable({ onlySelf: true });
+            this.isDisabled = false;
         } else {
 
         }
