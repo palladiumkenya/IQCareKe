@@ -185,4 +185,11 @@ export class MaternityService {
                 catchError(this.errorHandler.handleError<any>('Error saving patient screening'))
             );
     }
+
+    public GetDeliveredBabyInfoByMasterVisitId(id:number) {
+        return this.http.get<any>(this.API_PMTCT_URL + '/api/MaternityPatientDeliveryInfo/GetDeliveredBabyInfoByMasterVisitId/' + id).pipe(
+            tap(GetDeliveredBabyInfoByMasterVisitId => this.errorHandler.log('get delivered baby info by master Id')),
+            catchError(this.errorHandler.handleError<any[]>('GetDeliveredBabyInfoByMasterVisitId'))
+        );
+    }
 }
