@@ -30,4 +30,12 @@ export class PncPartnertestingComponent implements OnInit {
         this.notify.emit(this.PartnerTestingForm);
     }
 
+    public onPartnerTestingChange(event) {
+        const optionNa = this.yesNoNaOptions.filter(x => x.itemName == 'N/A');
+        if (event.isUserInput && event.source.selected && event.source.viewValue == 'Yes') {
+            this.PartnerTestingForm.get('finalPartnerHivResult').setValue(optionNa[0].itemId);
+        }
+    }
+
+
 }

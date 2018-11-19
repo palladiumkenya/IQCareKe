@@ -119,7 +119,7 @@ export class ClientMonitoringComponent implements OnInit {
     }
 
     public oncacxScreeningChange(event) {
-        console.log(event);
+
         if (event.isUserInput && event.source.selected && event.source.viewValue == 'Yes') {
             this.clientMonitoringFormGroup.controls['cacxMethod'].enable({ onlySelf: true });
             this.clientMonitoringFormGroup.controls['cacxResult'].enable({ onlySelf: true });

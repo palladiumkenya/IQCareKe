@@ -54,7 +54,8 @@ export class MotherProfileComponent implements OnInit {
     public onLMPDateChange() {
         this.dateLMP = this.motherProfileFormGroup.controls['dateLMP'].value;
         const lmpDate = new Date(moment(this.motherProfileFormGroup.controls['dateLMP'].value).add(280, 'days').format(''));
-        this.motherProfileFormGroup.controls['dateEDD'].setValue(lmpDate);
+        const eddDate = new Date(moment(this.dateLMP).add(7, 'days').add(9, 'months').format(''))
+        this.motherProfileFormGroup.controls['dateEDD'].setValue(eddDate);
 
         console.log(this.motherProfileFormGroup.controls['dateEDD'].value);
 
@@ -105,6 +106,7 @@ export class MotherProfileComponent implements OnInit {
                     if (p) {
                         console.log('agetmenarche' + p.ageMenarche);
                         this.motherProfileFormGroup.controls['ageAtMenarche'].setValue(p.ageMenarche);
+
                     }
                 },
                 (err) => {

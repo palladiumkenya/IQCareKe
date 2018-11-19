@@ -12,6 +12,9 @@ import { PatientPreventiveService } from '../_models/PatientPreventiveService';
 import { PatientProfile } from '../_models/patientProfile';
 import { PncVisitDetailsCommand } from '../_models/PncVisitDetailsCommand';
 import { HivStatusCommand } from '../_models/HivStatusCommand';
+import {PatientChronicIllness} from '../_models/PatientChronicIllness';
+import {DrugAdministrationCommand} from '../maternity/commands/drug-administration-command';
+import {AdministerDrugInfo} from '../maternity/commands/administer-drug-info';
 
 const httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -23,6 +26,7 @@ const httpOptions = {
 
 export class AncService {
     private API_URL = environment.API_URL;
+    private API_PMTCT_URL = environment.API_PMTCT_URL;
     private _url = '/api/anc/';
     private _url_pedc = '/api/PatientEducationExamination/post';
     private _url_cm = '/api/ClientMonitoring/';
@@ -30,7 +34,7 @@ export class AncService {
     private _url_ref = '/api/PatientReferralAndAppointment/AddPatientReferralInfo';
     private _url_app = '/api/PatientReferralAndAppointment/AddPatientNextAppointment';
     private _url_pre = '/api/ANCPreventivervice/';
-    private _url_visit = '/api/VisitDetails/';
+    private _url_pci = '/api/PatientChronicIllness/post';
 
     public profile: PatientProfile = {};
 
@@ -67,6 +71,28 @@ export class AncService {
             catchError(this.errorHandler.handleError<any>('HaartProphylaxisController'))
         );
     }
+
+    public savePatientChronicIllness(chronicIllnessCommand: any): Observable<any> {
+        if (chronicIllnessCommand.length == 0) {
+            return of([]);
+        }
+        return this.http.post<any>(this.API_URL + '' + this._url_pci, JSON.stringify(chronicIllnessCommand), httpOptions).pipe(
+            tap(savePatientChronicIllness => this.errorHandler.log('Error posting Patient Chronic Illness Command')),
+            catchError(this.errorHandler.handleError<any>('PatientChronicIllnessController'))
+        );
+    }
+
+    public saveDrugAdministration(drug: any): Observable<any> {
+        if (drug.length == 0) {
+            return of([]);
+        }
+        return this.http.post<any>(this.API_PMTCT_URL + '/api/PatientDrugAdministration/Add',
+            JSON.stringify(drug), httpOptions).pipe(
+            tap(saveDrugAdministration => this.errorHandler.log('Error posting Patient Drug Administration Command')),
+            catchError(this.errorHandler.handleError<any>('DrugAdministration Controller'))
+        );
+    }
+
 
     public saveReferral(referralCommand: ReferralAppointmentCommandService): Observable<ReferralAppointmentCommandService> {
         return this.http.post<any>(this.API_URL + '' + this._url_ref, JSON.stringify(referralCommand), httpOptions).pipe(

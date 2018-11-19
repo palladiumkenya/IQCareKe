@@ -2,6 +2,7 @@ import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {NotificationService} from '../../../shared/_services/notification.service';
 import {SnotifyService} from 'ng-snotify';
+import * as moment from 'moment';
 
 @Component({
     selector: 'app-discharge',
@@ -16,6 +17,7 @@ export class DischargeComponent implements OnInit {
     public deliveryStateOptions: any[] = [];
     public referralOptions: any[] = [];
     public yesnoOptions: any[] = [];
+    public maxDate: Date = moment().toDate();
 
     constructor(private formBuilder: FormBuilder,
                 private notificationService: NotificationService,

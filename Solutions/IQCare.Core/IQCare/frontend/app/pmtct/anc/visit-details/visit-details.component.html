@@ -1,4 +1,4 @@
-<form class="form-group" novalidate [formGroup]="visitDetailsFormGroup">
+<form class="form-group"  [formGroup]="visitDetailsFormGroup">
 
     <div class="row">
         <div class="col-md-12">
@@ -48,7 +48,6 @@
                            placeholder="LMP">
                     <mat-datepicker-toggle matSuffix [for]="dateLMP"></mat-datepicker-toggle>
                     <mat-datepicker #dateLMP></mat-datepicker>
-                    <mat-error *ngIf="!form.controls['dateLMP'].valid">Please select LMP Date</mat-error>
                 </mat-form-field>
             </div>
 
@@ -64,7 +63,6 @@
                            id="dateEDD" name="dateEDD" formControlName="dateEDD" required>
                     <mat-datepicker-toggle matSuffix [for]="dateEDD"></mat-datepicker-toggle>
                     <mat-datepicker #dateEDD></mat-datepicker>
-                    <mat-error *ngIf="!form.controls['dateEDD'].valid">Please select LMP Date</mat-error>
                 </mat-form-field>
 
             </div>

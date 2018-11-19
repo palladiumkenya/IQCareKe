@@ -32,7 +32,7 @@ import { HivTestsCommand } from '../_models/HivTestsCommand';
     styleUrls: ['./maternity.component.css']
 })
 export class MaternityComponent implements OnInit {
-    isLinear: boolean = true;
+    isLinear: boolean = false;
 
     visitDetailsFormGroup: FormArray;
     diagnosisFormGroup: FormArray;
@@ -422,7 +422,7 @@ export class MaternityComponent implements OnInit {
         const infantArv = this.drugAdminOptions.filter(x => x.itemName == 'Infant Provided With ARV prophylaxis');
         const cotrimoxazole = this.drugAdminOptions.filter(x => x.itemName == 'Cotrimoxazole');
 
-        this.AdministredDrugs.push(
+        this.AdministeredDrugs.push(
             {
                 Id: vitaminA[0].itemId, Value: this.maternalDrugAdministrationForGroup.value[0]['vitaminASupplement'],
                 Description: 'Vitamin A Supplementation'
@@ -450,7 +450,7 @@ export class MaternityComponent implements OnInit {
             PatientId: this.patientId,
             PatientMasterVisitId: this.patientMasterVisitId,
             CreatedBy: this.userId,
-            AdministredDrugs: this.AdministredDrugs
+            AdministredDrugs: this.AdministeredDrugs
         };
 
 

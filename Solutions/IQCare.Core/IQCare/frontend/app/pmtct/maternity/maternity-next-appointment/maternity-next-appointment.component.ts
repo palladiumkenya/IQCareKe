@@ -2,6 +2,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { NotificationService } from '../../../shared/_services/notification.service';
 import { SnotifyService } from 'ng-snotify';
+import * as moment from 'moment';
 
 @Component({
     selector: 'app-maternity-next-appointment',
@@ -11,6 +12,7 @@ import { SnotifyService } from 'ng-snotify';
 export class MaternityNextAppointmentComponent implements OnInit {
 
     nextAppointmentFormGroup: FormGroup;
+    public maxtDate: Date = moment().toDate();
     @Input() dischargeOptions: any[] = [];
     @Output() notify: EventEmitter<FormGroup> = new EventEmitter<FormGroup>();
 
