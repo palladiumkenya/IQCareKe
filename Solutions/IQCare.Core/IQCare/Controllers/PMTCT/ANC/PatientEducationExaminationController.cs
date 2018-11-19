@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using IQCare.PMTCT.BusinessProcess.Commands;
 using IQCare.PMTCT.BusinessProcess.Commands.Education;
+using IQCare.PMTCT.Core.Models;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
@@ -22,7 +23,15 @@ namespace IQCare.Controllers.PMTCT.ANC
             _mediator = mediator;
         }
 
-    
+
+        [HttpGet("{patientId}/{patientMasterVisitId}")]
+        public async Task<IActionResult> GetPatientEducation(int patientId, int patientMasterVisitId)
+        {
+            var response= await _mediator.Send(new GetPatientEducationCommand { PatientMasterVisitId = patientMasterVisitId, PatientId = patientId }, HttpContext.RequestAborted);
+            if (response.IsValid)
+                return Ok(response.Value);
+            return BadRequest(response);
+        }
 
         // POST api/<controller>
         [HttpPost]
@@ -50,7 +59,6 @@ namespace IQCare.Controllers.PMTCT.ANC
 
             return BadRequest(response);
         }
-
       
     }
 }
