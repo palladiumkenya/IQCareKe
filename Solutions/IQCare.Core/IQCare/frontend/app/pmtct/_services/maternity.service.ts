@@ -93,7 +93,7 @@ export class MaternityService {
     }
 
     public saveMaternalDrugAdministration(drug: any): Observable<any> {
-        return this.http.post(this.API_PMTCT_URL + '/api/PatientDiagnosis/AddDrugAdministrationInfo',
+        return this.http.post(this.API_PMTCT_URL + '/api/PatientDrugAdministration/Add',
             JSON.stringify(drug), httpOptions).pipe(
                 tap(saveMaternalDrugAdministration => this.errorHandler.log(`successfully added maternal drug administration`)),
                 catchError(this.errorHandler.handleError<any>('Error saving maternal drug administration'))

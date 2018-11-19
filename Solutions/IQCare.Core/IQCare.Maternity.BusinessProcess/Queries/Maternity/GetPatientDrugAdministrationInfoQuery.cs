@@ -12,6 +12,11 @@ namespace IQCare.Maternity.BusinessProcess.Queries.Maternity
 
     }
 
+    public class GetPatientDrugAdministrationById : IRequest<Result<PatientDrugAdministrationViewModel>>
+    {
+        public int Id { get; set; }
+    }
+
     public class PatientDrugAdministrationViewModel
     {
         public int Id { get;  set; }
