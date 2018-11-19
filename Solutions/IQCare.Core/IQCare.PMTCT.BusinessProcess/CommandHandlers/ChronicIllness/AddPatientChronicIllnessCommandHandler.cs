@@ -55,7 +55,7 @@ namespace IQCare.PMTCT.BusinessProcess.CommandHandlers.ChronicIllness
                 catch (Exception e)
                 {
                     Log.Error(e.Message);
-                    return Result<PatientChronicIllness>.Invalid(e.Message);
+                    return Result<PatientChronicIllness>.Invalid(e.Message + e.InnerException);
                 }
                
             }
