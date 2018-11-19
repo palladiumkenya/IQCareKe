@@ -100,7 +100,7 @@
             </div>
             <div class="col-md-2 col-xs-12 col-sm-6">
                 <mat-form-field class="col-md-12">
-                    <input [max]="maxDate"  [disabled]="isDisabled" formControlName="onSetDate" matInput [matDatepicker]="onsetDate" placeholder="Onset Date">
+                    <input [max]="maxDate"  [disabled]="isDisabled" formControlName="onSetDate" matInput [matDatepicker]="onsetDate" placeholder="Onset Date" (focus)="onsetDate.open()">
                     <mat-datepicker-toggle matSuffix [for]="onsetDate"></mat-datepicker-toggle>
                     <mat-datepicker  #onsetDate></mat-datepicker>
                 </mat-form-field>

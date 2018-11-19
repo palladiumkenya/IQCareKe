@@ -85,6 +85,7 @@ export class HaartProphylaxisComponent implements OnInit {
         this.HaartProphylaxisFormGroup.controls['currentTreatment'].disable({ onlySelf: true });
         this.HaartProphylaxisFormGroup.controls['dose'].disable({ onlySelf: true });
         this.HaartProphylaxisFormGroup.controls['illness'].disable({ onlySelf: true });
+        this.HaartProphylaxisFormGroup.controls['onSetDate'].disable({ onlySelf: true });
 
        // this.isDisabled = true;
 
@@ -182,10 +183,17 @@ export class HaartProphylaxisComponent implements OnInit {
             this.HaartProphylaxisFormGroup.controls['currentTreatment'].enable({ onlySelf: true });
             this.HaartProphylaxisFormGroup.controls['dose'].enable({ onlySelf: true });
             this.HaartProphylaxisFormGroup.controls['illness'].enable({ onlySelf: true });
+            this.HaartProphylaxisFormGroup.controls['onSetDate'].enable({ onlySelf: true });
             this.isDisabled = false;
         } else {
-
+            this.HaartProphylaxisFormGroup.controls['illness'].disable({ onlySelf: true });
+            this.HaartProphylaxisFormGroup.controls['currentTreatment'].disable({ onlySelf: true });
+            this.HaartProphylaxisFormGroup.controls['dose'].disable({ onlySelf: true });
+            this.HaartProphylaxisFormGroup.controls['illness'].disable({ onlySelf: true });
+            this.HaartProphylaxisFormGroup.controls['onSetDate'].disable({ onlySelf: true });
+            this.isDisabled = true;
         }
+
       /* const OtherIllness = this.HaartProphylaxisFormGroup.controls['otherIllness'].value.itemName;
         if (OtherIllness == 'Yes') {
 
