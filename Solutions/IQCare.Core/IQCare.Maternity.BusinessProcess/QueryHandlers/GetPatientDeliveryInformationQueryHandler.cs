@@ -16,9 +16,9 @@ namespace IQCare.Maternity.BusinessProcess.QueryHandlers
 {
     public class GetPatientDeliveryInformationQueryHandler : IRequestHandler<GetPatientDeliveryInformationQuery, Result<List<PatientDeliveryInfomationViewModel>>>
     {
-        readonly IMaternityUnitOfWork _maternityUnitOfWork;
-        readonly IMapper _mapper;
-        ILogger logger = Log.ForContext<GetPatientDeliveryInformationQueryHandler>();
+        private readonly IMaternityUnitOfWork _maternityUnitOfWork;
+        private readonly IMapper _mapper;
+        private readonly ILogger _Logger = Log.ForContext<GetPatientDeliveryInformationQueryHandler>();
 
         public GetPatientDeliveryInformationQueryHandler(IMaternityUnitOfWork maternityUnitOfWork, IMapper mapper)
         {
@@ -39,7 +39,7 @@ namespace IQCare.Maternity.BusinessProcess.QueryHandlers
             }
             catch (Exception ex)
             {
-                logger.Error($"An error occured while fetching patient delivery information for ProfileId {request.ProfileId}", ex);
+                _Logger.Error($"An error occured while fetching patient delivery information for ProfileId {request.ProfileId}", ex);
                 return Task.FromResult(Result<List<PatientDeliveryInfomationViewModel>>.Invalid(ex.Message));
             }
         }

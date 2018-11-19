@@ -12,7 +12,7 @@ import { Component, OnInit, NgZone } from '@angular/core';
 import { FormGroup, FormArray } from '@angular/forms';
 import { NotificationService } from '../../shared/_services/notification.service';
 import { SnotifyService } from 'ng-snotify';
-import {forkJoin, of} from 'rxjs';
+import { forkJoin } from 'rxjs';
 import { PatientAppointment } from '../_models/PatientAppointmet';
 import { PostNatalExamCommand } from '../_models/PostNatalExamCommand';
 import { FamilyPlanningMethodCommand } from '../_models/FamilyPlanningMethodCommand';
@@ -483,7 +483,7 @@ export class PncComponent implements OnInit {
             PatientId: this.patientId,
             PatientMasterVisitId: this.patientMasterVisitId,
             CreatedBy: this.userId,
-            AdministredDrugs: []
+            AdministeredDrugs: []
         };
 
         for (let i = 0; i < this.drugAdministrationCategories.length; i++) {
@@ -498,7 +498,7 @@ export class PncComponent implements OnInit {
                 value = this.drugAdministration_PartnerTesting_FormGroup.value[0]['infant_start'];
             }
 
-            drugAdministrationCommand.AdministredDrugs.push({
+            drugAdministrationCommand.AdministeredDrugs.push({
                 Id: this.drugAdministrationCategories[i].itemId,
                 Value: value,
                 Description: this.drugAdministrationCategories[i].itemName
@@ -597,8 +597,11 @@ export class PncComponent implements OnInit {
 
                     this.snotifyService.success('Successfully saved PNC encounter ', 'PNC', this.notificationService.getConfig());
                     this.zone.run(() => {
-                        this.router.navigate(['/dashboard/personhome/'], { relativeTo: this.route });
-                    });
+                        this.zone.run(() => {
+                            this.router.navigate(['/dashboard/personhome/' + this.personId], {relativeTo: this.route});
+                        });
+        });
+                    
                 },
                 (error) => {
                     console.log(`error ` + error);

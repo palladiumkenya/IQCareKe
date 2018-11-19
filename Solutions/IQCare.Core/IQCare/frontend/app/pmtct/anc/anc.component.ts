@@ -22,7 +22,7 @@ import {PatientChronicIllness} from '../_models/PatientChronicIllness';
 import {LookupItemService} from '../../shared/_services/lookup-item.service';
 import {HivStatusCommand} from '../_models/HivStatusCommand';
 import {HivTestsCommand} from '../_models/HivTestsCommand';
-import {AdministerDrugInfo} from '../maternity/commands/administer-drug-info';
+import {AdministeredDrugInfo} from '../maternity/commands/administer-drug-info';
 import {DrugAdministrationCommand} from '../maternity/commands/drug-administration-command';
 
 @Component({
@@ -39,7 +39,7 @@ export class AncComponent implements OnInit, OnDestroy {
     public preventiveService: PreventiveService[] = [];
     public counselling_data_form: PatientEducation[] = [];
     public chronic_illness_data: PatientChronicIllness[] = [];
-    AdministredDrugs: AdministerDrugInfo[] = [];
+    AdministredDrugs: AdministeredDrugInfo[] = [];
     counselling_data: any[] = [];
     chronicIllnessData: any[] = [];
     lookupItems$: Subscription;

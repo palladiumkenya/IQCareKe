@@ -12,7 +12,7 @@ import { forkJoin, Subscription } from 'rxjs/index';
 import { SnotifyService } from 'ng-snotify';
 import { NotificationService } from '../../shared/_services/notification.service';
 import { DrugAdministrationCommand } from './commands/drug-administration-command';
-import { AdministerDrugInfo } from './commands/administer-drug-info';
+import { AdministeredDrugInfo } from './commands/administer-drug-info';
 import { MaternityCounsellingCommand } from './commands/maternity-counselling-command';
 import { ReferralCommand } from './commands/referral-command';
 import { NextAppointmentCommand } from './commands/next-appointment-command';
@@ -32,7 +32,7 @@ import { HivTestsCommand } from '../_models/HivTestsCommand';
     styleUrls: ['./maternity.component.css']
 })
 export class MaternityComponent implements OnInit {
-    isLinear: boolean = false;
+    isLinear: boolean = true;
 
     visitDetailsFormGroup: FormArray;
     diagnosisFormGroup: FormArray;
@@ -42,7 +42,7 @@ export class MaternityComponent implements OnInit {
     dischargeFormGroup: FormArray;
     formType: string;
     apgarSCore: ApgarScoreCommand[] = [];
-    AdministeredDrugs: AdministerDrugInfo[] = [];
+    AdministeredDrugs: AdministeredDrugInfo[] = [];
     lookupItems$: Subscription;
     apgarOptions: any[] = [];
     drugAdminOptions: any[] = [];
@@ -450,7 +450,7 @@ export class MaternityComponent implements OnInit {
             PatientId: this.patientId,
             PatientMasterVisitId: this.patientMasterVisitId,
             CreatedBy: this.userId,
-            AdministredDrugs: this.AdministeredDrugs
+            AdministeredDrugs: this.AdministeredDrugs
         };
 
 
@@ -620,7 +620,7 @@ export class MaternityComponent implements OnInit {
                     console.log(`success `);
                     console.log(result);
 
-                    this.pregnancyId = result[1]['PregnancyId'];
+                    this.pregnancyId = result[0]['profileId'];
                     maternityDeliveryCommand.ProfileId = this.pregnancyId;
 
                     const matDelivery = this.matService.savePatientDelivery(maternityDeliveryCommand).subscribe(
