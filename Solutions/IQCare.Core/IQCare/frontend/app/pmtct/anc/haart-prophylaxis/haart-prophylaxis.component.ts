@@ -85,7 +85,7 @@ export class HaartProphylaxisComponent implements OnInit {
         this.HaartProphylaxisFormGroup.controls['currentTreatment'].disable({ onlySelf: true });
         this.HaartProphylaxisFormGroup.controls['dose'].disable({ onlySelf: true });
         this.HaartProphylaxisFormGroup.controls['illness'].disable({ onlySelf: true });
-        this.HaartProphylaxisFormGroup.controls['onSetDate'].disabled;
+
        // this.isDisabled = true;
 
 
@@ -135,9 +135,9 @@ export class HaartProphylaxisComponent implements OnInit {
                     ChronicIllness: this.chronicIllness[i]['chronicIllnessId'],
                     Treatment: this.chronicIllness[i]['currentTreatment'],
                     Dose: parseInt(this.chronicIllness[i]['dose'].toString(), 10),
-                    DeleteFlag: 0,
+                    DeleteFlag: false,
                     OnsetDate: this.chronicIllness[i]['onSetDate'],
-                    Active: false,
+                    Active: 0,
                     CreateBy: this.userId
                 });
         }

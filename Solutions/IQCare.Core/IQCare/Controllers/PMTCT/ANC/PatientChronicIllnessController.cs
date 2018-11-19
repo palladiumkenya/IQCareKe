@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using IQCare.PMTCT.BusinessProcess.Commands.ChronicIllness;
 using IQCare.PMTCT.BusinessProcess.Queries;
+using IQCare.PMTCT.Core.Models;
 using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -55,6 +56,17 @@ namespace IQCare.Controllers.PMTCT.ANC
             if (response.IsValid)
                 return Ok(response.Value);
 
+            return BadRequest(response);
+        }
+
+        [HttpDelete("{Id}")]
+        public async Task<IActionResult> Delete(int Id)
+        {
+            if (Id <= 0)
+                return BadRequest(Id);
+            var response = await _mediator.Send(new DeletePatientChronicIllnessCommand {Id=Id}, HttpContext.RequestAborted);
+            if (response.IsValid)
+                return Ok(response.Value);
             return BadRequest(response);
         }
 
