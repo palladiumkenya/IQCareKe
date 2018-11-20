@@ -159,5 +159,13 @@ export class AncService {
             catchError(this.errorHandler.handleError<any>('PreventiveServiceController'))
         );
     }
+
+    public getPatientCounselingInfo(patientId: number, patientMasterVisitId: number) {
+        return this.http.get<any[]>(this.API_URL + '/api/PatientEducationExamination/GetPatientCounseling/' +
+            patientId + ' / ' + patientMasterVisitId).pipe(
+            tap(getPatientCounselingInfo => this.errorHandler.log('get ANC Counseling Data')),
+            catchError(this.errorHandler.handleError<any[]>('getPatientCounselingInfo'))
+        );
+    }
 }
 

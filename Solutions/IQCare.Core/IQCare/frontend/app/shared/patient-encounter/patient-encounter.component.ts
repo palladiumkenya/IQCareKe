@@ -176,7 +176,7 @@ export class PatientEncounterComponent implements OnInit {
         localStorage.setItem('patientMasterVisitId', selectedElement['PatientMasterVisitId']);
         localStorage.setItem('encounterTypeId', selectedElement['EncounterTypeId']);*/
         console.log(selectedElement);
-alert(this.serviceName);
+
         this.zone.run(() => {
             this.router.navigate(['/pmtct/' + this.serviceName.toLowerCase() + '/update'
                 + '/' + this.patientId

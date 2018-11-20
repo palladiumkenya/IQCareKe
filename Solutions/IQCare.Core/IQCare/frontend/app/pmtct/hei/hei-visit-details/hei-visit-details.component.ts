@@ -23,6 +23,7 @@ export class HeiVisitDetailsComponent implements OnInit {
     public visitTypes: any[] = [];
 
     @Input('formtype') formtype: string;
+   // @Input('isEdit') isEdit: boolean;
     @Input('visitDate') visitDate: string;
     @Input('visitType') visitType: string;
     @Input('patientId') patientId: number;
