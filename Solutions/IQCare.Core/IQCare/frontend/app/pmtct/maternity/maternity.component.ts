@@ -33,6 +33,8 @@ import { HivTestsCommand } from '../_models/HivTestsCommand';
 })
 export class MaternityComponent implements OnInit {
     isLinear: boolean = true;
+    public visitId: number;
+    public isEdit = false;
 
     visitDetailsFormGroup: FormArray;
     diagnosisFormGroup: FormArray;
@@ -53,6 +55,7 @@ export class MaternityComponent implements OnInit {
     hiv_status_table_data: any[] = [];
     hivTestEntryPoint: number;
     htsEncounterId: number;
+    
 
     patientId: number;
     personId: number;
@@ -113,15 +116,23 @@ export class MaternityComponent implements OnInit {
         this.route.params.subscribe(
             (params) => {
                 console.log(params);
-                const {patientId, personId, serviceAreaId} = params;
+                const {patientId, personId, serviceAreaId, patientMasterVisitId} = params;
                 this.patientId = parseInt(patientId, 10);
                 this.personId = personId;
+                this.patientMasterVisitId = patientMasterVisitId;
                 this.serviceAreaId = serviceAreaId;
+
+                if (!this.patientMasterVisitId) {
+                    this.patientMasterVisitId = JSON.parse(localStorage.getItem('patientMasterVisitId'));
+                    this.patientEncounterId = JSON.parse(localStorage.getItem('patientEncounterId'));
+                } else {
+                    this.visitId = this.patientMasterVisitId;
+                    this.isEdit = true;
+                }
             }
         );
 
         this.userId = JSON.parse(localStorage.getItem('appUserId'));
-        this.patientMasterVisitId = JSON.parse(localStorage.getItem('patientMasterVisitId'));
         this.patientEncounterId = JSON.parse(localStorage.getItem('patientEncounterId'));
         this.visitDate = new Date(localStorage.getItem('visitDate'));
         this.visitType = JSON.parse(localStorage.getItem('visitType'));

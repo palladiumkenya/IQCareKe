@@ -16,9 +16,9 @@ namespace IQCare.Maternity.BusinessProcess.QueryHandlers
 {
     public class GetPatientDiagnosisInfoQueryHandler : IRequestHandler<GetPatientDiagnosisInfo, Result<List<PatientDiagnosisViewModel>>>
     {
-        IMaternityUnitOfWork _maternityUnitOfWork;
-        IMapper _mapper;
-        ILogger logger = Log.ForContext<GetPatientDiagnosisInfoQueryHandler>();
+        private readonly IMaternityUnitOfWork _maternityUnitOfWork;
+        private readonly IMapper _mapper;
+       private readonly ILogger _logger = Log.ForContext<GetPatientDiagnosisInfoQueryHandler>();
 
         public GetPatientDiagnosisInfoQueryHandler(IMaternityUnitOfWork maternityUnitOfWork, IMapper mapper)
         {
@@ -29,16 +29,18 @@ namespace IQCare.Maternity.BusinessProcess.QueryHandlers
         {
             try
             {
-                var patientDiagnosis = _maternityUnitOfWork.Repository<PatientDiagnosis>().Get(x => x.PatientId == request.PatientId)
-                        .AsEnumerable();
-                var diagnosisViewModel = _mapper.Map<List<PatientDiagnosisViewModel>>(patientDiagnosis);
+                var patientDiagnosis = request.PatientId.HasValue
+                    ? _maternityUnitOfWork.Repository<PatientDiagnosis>().Get(x => x.PatientId == request.PatientId)
+                    : _maternityUnitOfWork.Repository<PatientDiagnosis>().Get(x => x.PatientMasterVisitId == request.PatientMasterVisitId);
+
+                var diagnosisViewModel = _mapper.Map<List<PatientDiagnosisViewModel>>(patientDiagnosis.AsEnumerable());
 
 
                 return Task.FromResult(Result<List<PatientDiagnosisViewModel>>.Valid(diagnosisViewModel));
             }
             catch (Exception ex)
             {
-                logger.Error(ex, $"An error occured while getting patient diagnosis info for patientId{ request.PatientId}");
+                _logger.Error(ex, $"An error occured while getting patient diagnosis info for patientId{ request.PatientId}");
                 return Task.FromResult(Result<List<PatientDiagnosisViewModel>>.Invalid(ex.Message));
             }
             

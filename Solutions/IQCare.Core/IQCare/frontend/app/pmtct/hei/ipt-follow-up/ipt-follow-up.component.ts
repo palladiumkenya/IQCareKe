@@ -8,6 +8,7 @@ import {SnotifyService} from 'ng-snotify';
 import {HeiService} from '../../_services/hei.service';
 import {PatientIptWorkup} from '../../_models/hei/PatientIptWorkup';
 import {PatientIpt} from '../../_models/hei/PatientIpt';
+import * as moment from 'moment';
 
 @Component({
     selector: 'app-ipt-follow-up',
@@ -24,6 +25,7 @@ export class IptFollowUpComponent implements OnInit {
     serviceAreaId: number;
     patientMasterVisitId: number;
     userId: number;
+    public maxDate: Date = moment().toDate();
     @Input('IPTFollowupOptions') IPTFollowupOptions: any;
     @Output() notify: EventEmitter<FormGroup> = new EventEmitter<FormGroup>();
 

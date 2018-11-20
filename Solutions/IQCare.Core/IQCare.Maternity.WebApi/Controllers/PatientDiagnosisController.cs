@@ -14,7 +14,7 @@ namespace IQCare.Maternity.WebApi.Controllers
     [Route("api/[Controller]/[Action]")]
     public class PatientDiagnosisController : Controller
     {
-        IMediator _mediator;
+       private readonly IMediator _mediator;
         public PatientDiagnosisController(IMediator mediator)
         {
             _mediator = mediator;
@@ -35,11 +35,25 @@ namespace IQCare.Maternity.WebApi.Controllers
         }
 
         [HttpGet("{Id}")]
-        public async Task<object> GetDiagnosisInfoByPatientId(int Id)
+        public async Task<object> GetDiagnosisInfoByPatientId(int id)
         {
-            var diagnosisInfo = await _mediator.Send(new GetPatientDiagnosisInfo { PatientId = Id }, HttpContext.RequestAborted);
+            var diagnosisInfo = await _mediator.Send(new GetPatientDiagnosisInfo { PatientId = id }, HttpContext.RequestAborted);
+
             if (diagnosisInfo.IsValid)
                 return Ok(diagnosisInfo.Value);
+
+            return BadRequest(diagnosisInfo);
+        }
+
+        [HttpGet("{Id}")]
+        public async Task<object> GetDiagnosisByMasterVisitId(int id)
+        {
+            var diagnosisInfo = await _mediator.Send(new GetPatientDiagnosisInfo {PatientMasterVisitId = id},
+                HttpContext.RequestAborted);
+
+            if (diagnosisInfo.IsValid)
+                return Ok(diagnosisInfo.Value.FirstOrDefault());
+
             return BadRequest(diagnosisInfo);
         }
     }

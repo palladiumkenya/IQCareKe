@@ -35,6 +35,7 @@ export class AncComponent implements OnInit, OnDestroy {
     formType: string;
     visitType: number;
     isLinear: boolean = false;
+    public isEdit = false;
     patientDrug: PatientDrugAdministration[] = [];
     public preventiveService: PreventiveService[] = [];
     public counselling_data_form: PatientEducation[] = [];
@@ -51,6 +52,7 @@ export class AncComponent implements OnInit, OnDestroy {
     public serviceAreaId: number;
     public patientMasterVisitId: number;
     public patientEncounterId: number;
+    public visitId: number;
     public userId: number;
     public visitDate: Date;
     locationId: number;
@@ -118,13 +120,22 @@ export class AncComponent implements OnInit, OnDestroy {
 
         this.route.params.subscribe(
             (params) => {
-                console.log(params);
-                const {patientId, personId, serviceAreaId} = params;
-                this.patientId = parseInt(patientId, 10);
-                this.personId = personId;
-                this.serviceAreaId = serviceAreaId;
+                this.patientId = params.patientId;
+                this.personId = params.personId;
+                this.serviceAreaId = params.serviceAreaId;
+                this.patientMasterVisitId = params.patientMasterVisitId;
+                this.patientEncounterId = params.patientEncounterId;
+
+                if (!this.patientMasterVisitId) {
+                    this.patientMasterVisitId = JSON.parse(localStorage.getItem('patientMasterVisitId'));
+                    this.patientEncounterId = JSON.parse(localStorage.getItem('patientEncounterId'));
+                } else {
+                    this.visitId = this.patientMasterVisitId;
+                    this.isEdit = true;
+                }
             }
         );
+
         this.userId = JSON.parse(localStorage.getItem('appUserId'));
         this.patientMasterVisitId = JSON.parse(localStorage.getItem('patientMasterVisitId'));
         this.locationId = JSON.parse(localStorage.getItem('appLocationId'));

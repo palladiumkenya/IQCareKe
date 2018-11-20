@@ -186,10 +186,32 @@ export class MaternityService {
             );
     }
 
-    public GetDeliveredBabyInfoByMasterVisitId(id:number) {
-        return this.http.get<any>(this.API_PMTCT_URL + '/api/MaternityPatientDeliveryInfo/GetDeliveredBabyInfoByMasterVisitId/' + id).pipe(
+    public GetDeliveredBabyInfo(masterVisitId:number) {
+        return this.http.get<any>(this.API_PMTCT_URL + '/api/MaternityPatientDeliveryInfo/GetDeliveredBabyInfoByMasterVisitId/' + masterVisitId).pipe(
             tap(GetDeliveredBabyInfoByMasterVisitId => this.errorHandler.log('get delivered baby info by master Id')),
             catchError(this.errorHandler.handleError<any[]>('GetDeliveredBabyInfoByMasterVisitId'))
+        );
+    }
+
+  
+    public GetPatientDeliveryInfo(masterVisitId:number) {
+        return this.http.get<any>(this.API_PMTCT_URL + '/api/MaternityPatientDeliveryInfo/GetDeliveryInfoByMasterVisitId/' + masterVisitId).pipe(
+            tap(GetPatientDeliveryInfoByMasterVisitId => this.errorHandler.log('get patient delivery info by master Id')),
+            catchError(this.errorHandler.handleError<any[]>('GetPatientDeliveryInfoByMasterVisitId'))
+        );
+    }
+
+    public GetPatientDischargeInfo(masterVisitId:number) {
+        return this.http.get<any>(this.API_PMTCT_URL + '/api/MaternityPatientDeliveryInfo/GetDischargeInfoByMasterVisitId/' + masterVisitId).pipe(
+            tap(GetPatientDischargeInfo => this.errorHandler.log('get patient discharge info by master Id')),
+            catchError(this.errorHandler.handleError<any[]>('GetPatientDischargeInfo'))
+        );
+    }
+
+    public GetPatientDiagnosisInfo(masterVisitId:number) {
+        return this.http.get<any>(this.API_PMTCT_URL + '/api/PatientDiagnosis/GetDiagnosisByMasterVisitId/' + masterVisitId).pipe(
+            tap(GetPatientDiagnosisInfo => this.errorHandler.log('get patient diagnosis info by master Id')),
+            catchError(this.errorHandler.handleError<any[]>('GetPatientDiagnosisInfo'))
         );
     }
 }
