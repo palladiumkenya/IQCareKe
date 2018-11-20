@@ -19,7 +19,7 @@
 
                                       <!--  <app-visit-details (visitDetails)="visitDetails" [visitDetailsOptions]="visitDetailsOptions"
                                             (notify)="onVisitDetailsNotify($event)" (nextStep)="onSaveVisitDetails($event)"></app-visit-details> -->
-                                        <app-hei-visit-details (notify)="onVisitDetailsNotify($event)" [formtype]="formType"
+                                        <app-hei-visit-details (notify)="onVisitDetailsNotify($event)"  [formtype]="formType"
                                                                [visitDate]="visitDate" [visitType]="visitType" ></app-hei-visit-details>
 
                                         <div class="">
@@ -34,7 +34,10 @@
                                         <ng-template matStepLabel> <span matTooltip="Patient Education & Mother Profile">Counselling</span>
                                         </ng-template>
                                         <app-patient-education-examination [patientEducationFormOptions]="patientEducationFormOptions"
-                                            (notify)="onPatientEducationNotify($event)"></app-patient-education-examination>
+                                            (notify)="onPatientEducationNotify($event)"
+                                                                           [isEdit]="isEdit"
+                                                                           [PatientId]="patientId"
+                                                                           [PatientMasterVisitId]="visitId"></app-patient-education-examination>
                                         <div>
                                             <button mat-raised-button color="primary" matStepperPrevious type="button">Previous</button>
                                             &nbsp;&nbsp;

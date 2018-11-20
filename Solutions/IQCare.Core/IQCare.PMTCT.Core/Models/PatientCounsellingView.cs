@@ -13,7 +13,6 @@ namespace IQCare.PMTCT.Core.Models
         public string CounsellingTopic { get; set; }
         public DateTime CounsellingDate { get; set; }
          public string Description { get; set; }
-         public Boolean DeleteFlag { get; set; }
         public DateTime CreateDate { get; set; }
         public int CreatedBy { get; set; }
     }

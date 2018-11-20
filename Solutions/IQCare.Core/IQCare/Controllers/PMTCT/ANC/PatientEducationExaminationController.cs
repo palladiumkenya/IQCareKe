@@ -33,6 +33,17 @@ namespace IQCare.Controllers.PMTCT.ANC
             return BadRequest(response);
         }
 
+        [HttpGet("{PatientId}/{PatientMasterVisitId}")]
+        public async Task<IActionResult> GetPatientCounseling(int patientId, int patientMasterVisitId)
+        {
+            var response =
+                await _mediator.Send(new GetPatientCounsellingViewCommand { PatientId = patientId, PatientMasterVisitId = patientMasterVisitId},
+                    HttpContext.RequestAborted);
+            if (response.IsValid)
+                return Ok(response.Value);
+            return BadRequest(response.Value);
+        }
+
         // POST api/<controller>
         [HttpPost]
         public async Task<IActionResult> Post([FromBody] PatientEducationExaminationCommand serviceCommand)

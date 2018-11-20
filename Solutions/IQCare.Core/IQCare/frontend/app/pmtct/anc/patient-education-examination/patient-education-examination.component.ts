@@ -8,6 +8,7 @@ import {PatientEducationCommand} from '../../_models/PatientEducationCommand';
 import {LookupItemService} from '../../../shared/_services/lookup-item.service';
 import {NotificationService} from '../../../shared/_services/notification.service';
 import * as moment from 'moment';
+import {AncService} from '../../_services/anc.service';
 
 
 export interface PeriodicElement {
@@ -33,11 +34,11 @@ export class PatientEducationExaminationComponent implements OnInit {
     PatientEducationFormGroup: FormGroup;
 
     public yesnos: any[] = [];
-    lookupItemView$: Subscription;
-    LookupItems$: Subscription;
     public testResults: any[] = [];
     public userId: number;
     public maxDate: Date = moment().toDate();
+
+    public patientCounseling$: Subscription;
 
     public patientEducationEmitterData: PatientEducationEmitter;
     public counsellingOptions: any[] = [];
@@ -45,17 +46,22 @@ export class PatientEducationExaminationComponent implements OnInit {
     public hivStatusOptions: any[] = [];
 
     public counselling_data: CounsellingTopicsEmitters[] = [];
+    public counseling_db_data: CounsellingTopicsEmitters[] = [];
     @Output() nextStep = new EventEmitter<PatientEducationEmitter>();
     @Output() notify: EventEmitter<object> = new EventEmitter<object>();
     @Input() patientEducationData: PatientEducationCommand;
     @Input() patientEducationFormOptions: any[] = [];
+    @Input('isEdit') isEdit: boolean;
+    @Input('PatientId') PatientId: number;
+    @Input('PatientMasterVisitId') PatientMasterVisitId: number;
 
     displayedColumns: string[] = ['topicId', 'topic', 'onSetDate'];
     dataSource = ELEMENT_DATA;
 
     constructor(private _formBuilder: FormBuilder, private _lookupItemService: LookupItemService,
                 private  snotifyService: SnotifyService,
-                private notificationService: NotificationService) {
+                private notificationService: NotificationService,
+                private ancService: AncService) {
     }
 
     ngOnInit() {
@@ -83,6 +89,11 @@ export class PatientEducationExaminationComponent implements OnInit {
 
         this.nextStep.emit(this.patientEducationEmitterData);
         this.notify.emit({ 'form': this.PatientEducationFormGroup, 'counselling_data': this.counselling_data});
+
+        if (this.isEdit) {
+
+            this.getPatientCounselingData(this.PatientId, this.PatientMasterVisitId);
+        }
     }
 
     /*  public getLookupOptions(groupName: string, masterName: any[]) {
@@ -137,5 +148,32 @@ export class PatientEducationExaminationComponent implements OnInit {
 
     public removeRow(idx) {
         this.counselling_data.splice(idx, 1);
+    }
+
+    public getPatientCounselingData(patientId: number, patientMasterVisitId: number): void {
+         this.patientCounseling$ = this.ancService.getPatientCounselingInfo(patientId, patientMasterVisitId)
+             .subscribe(
+                 p => {
+                     console.log('counseling data');
+                     console.log(p);
+                     if (p) {
+                         for (let i = 0; i < p.length; i++) {
+                             this.counselling_data.push({
+                                counselledOn: p[i]['counsellingTopicId'],
+                                 counsellingTopic: p[i]['counsellingTopic'],
+                                 counsellingTopicId: p['counsellingTopicId'],
+                                 description: p[i]['description'],
+                                 CounsellingDate: p[i]['counsellingDate']
+                             });
+                         }
+                     }
+                 },
+                 (err) => {
+
+                 },
+                 () => {
+
+                 }
+             );
     }
 }

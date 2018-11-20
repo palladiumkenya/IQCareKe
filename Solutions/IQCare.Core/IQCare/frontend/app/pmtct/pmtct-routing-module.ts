@@ -77,10 +77,10 @@ const routes: Routes = [
         pathMatch: 'full',
     },
     {
-       path: 'anc',
+        path: 'anc',
         children: [
             {
-                path: 'anc/:patientId/:personId/:serviceAreaId',
+                path: ':patientId/:personId/:serviceAreaId',
                 component: AncComponent,
                 pathMatch: 'full',
                 resolve: {
@@ -104,6 +104,7 @@ const routes: Routes = [
             {
                 path: 'update/:patientId/:personId/:serviceAreaId/:patientMasterVisitId/:patientEncounterId',
                 component: AncComponent,
+                pathMatch: 'full',
                 resolve: {
                     yesNoOptions: YesNoResolver,
                     yesNoNaOptions: YesNoNaResolver,
@@ -149,7 +150,7 @@ const routes: Routes = [
         path: 'hei',
         children: [
             {
-                path: 'hei/:patientId/:personId/:serviceAreaId',
+                path: ':patientId/:personId/:serviceAreaId',
                 component: HeiComponent,
                 pathMatch: 'full',
                 resolve: {
@@ -211,6 +212,7 @@ const routes: Routes = [
                 }
             }
         ]
+
     },
     {
         path: 'pnc/encounters/:patientId/:personId/:serviceAreaId',
@@ -285,8 +287,9 @@ const routes: Routes = [
         path: 'maternity',
         children: [
             {
-                path: 'maternity/:patientId/:personId/:serviceAreaId',
+                path: ':patientId/:personId/:serviceAreaId',
                 component: MaternityComponent,
+                pathMatch: 'full',
                 resolve: {
                     deliveryModeOptions: DeliveryModeResolver,
                     bloodLossOptions: BloodLossResolver,
@@ -307,6 +310,7 @@ const routes: Routes = [
             {
                 path: 'update/:patientId/:personId/:serviceAreaId/:patientMasterVisitId/:patientEncounterId',
                 component: MaternityComponent,
+                pathMatch: 'full',
                 resolve: {
                     deliveryModeOptions: DeliveryModeResolver,
                     bloodLossOptions: BloodLossResolver,
@@ -324,9 +328,8 @@ const routes: Routes = [
                     hivFinalResultsOptions: HivFinalResultsResolver,
                 }
             }
-        ],
+        ]
 
-        pathMatch: 'full'
     }
 ];
 

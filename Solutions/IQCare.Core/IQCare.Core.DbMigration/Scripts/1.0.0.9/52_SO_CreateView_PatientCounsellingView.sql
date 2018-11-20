@@ -9,10 +9,7 @@ SELECT
   (SELECT top 1 i.ItemName FROM LookupItemView i WHERE i.ItemId=c.CounsellingTopicId) CounsellingTopic,
   c.CounsellingDate,
   c.Description,
-  c.DeleteFlag,
-  c.CreateDate, 
-  c.CreatedBy,
-  c.AuditData
+  c.CreatedBy
 FROM           
 	 dbo.PatientCounselling c
 GO
