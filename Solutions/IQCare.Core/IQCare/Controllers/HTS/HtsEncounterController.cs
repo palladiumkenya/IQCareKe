@@ -55,6 +55,18 @@ namespace IQCare.Controllers.HTS
             return BadRequest(response);
         }
 
+        [HttpGet("")]
+        public async Task<IActionResult> Get()
+        {
+            var response = await _mediator.Send(new GetTestingCommand()
+            {
+                
+            }, Request.HttpContext.RequestAborted);
+            if (response.IsValid)
+                return Ok(response.Value);
+            return BadRequest(response);
+        }
+
         [HttpPost]
         public async Task<IActionResult> Post([FromBody] AddEncounterCommand addEncounterCommand)
         {

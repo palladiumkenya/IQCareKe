@@ -14,6 +14,9 @@ export class PncMaternalhistoryComponent implements OnInit {
     MaternalHistoryForm: FormGroup;
     @Input('matHistoryOptions') matHistoryOptions: any;
     @Input('patientId') patientId: number;
+    @Input('isEdit') isEdit: boolean;
+    @Input('patientMasterVisitId') patientMasterVisitId: number;
+
     @Output() notify: EventEmitter<FormGroup> = new EventEmitter<FormGroup>();
 
     maxDate: Date;
@@ -34,7 +37,7 @@ export class PncMaternalhistoryComponent implements OnInit {
 
         this.maternityService.getInitialProfileDetailsByPatientd(this.patientId).subscribe(
             (res) => {
-                if (res) {
+                if (res && res.id > 0) {
                     this.maternityService.getPatientDeliveryInfoByProfileId(res.id).subscribe(
                         (result) => {
                             if (result.length > 0) {
@@ -48,6 +51,13 @@ export class PncMaternalhistoryComponent implements OnInit {
         );
 
         this.notify.emit(this.MaternalHistoryForm);
+
+        if (this.isEdit) {
+            this.loadPncMaternalHistory();
+        }
     }
 
+    public loadPncMaternalHistory(): void {
+
+    }
 }

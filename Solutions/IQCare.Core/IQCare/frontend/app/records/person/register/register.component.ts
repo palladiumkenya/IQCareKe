@@ -283,6 +283,16 @@ export class RegisterComponent implements OnInit {
             return;
         }
 
+        if (ageMonths > 11) {
+            this.snotifyService.error('Age in months should not be more than 11', 'Registration', this.notificationService.getConfig());
+            this.formArray['controls'][0]['controls']['AgeMonths'].setValue('');
+            return;
+        }
+
+        if (!ageMonths) {
+            this.formArray['controls'][0]['controls']['AgeMonths'].setValue(0);
+        }
+
         const today = new Date();
         today.setDate(15);
         today.setMonth(5);
