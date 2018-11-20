@@ -3,12 +3,14 @@ using MediatR;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using IQCare.Maternity.Core.Domain.PNC;
 
 namespace IQCare.Maternity.BusinessProcess.Queries.PNC
 {
-    public class GetPhysicalExaminationQuery : IRequest<Result<List<GetPatientPhysicalExaminationViewModel>>>
+    public class GetPhysicalExaminationQuery : IRequest<Result<List<PhysicalExamination>>>
     {
         public int PatientId { get; set; }
+        public int PatientMasterVisitId { get; set; }
 }
     public class GetPatientPhysicalExaminationViewModel
     {

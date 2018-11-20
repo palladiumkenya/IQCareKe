@@ -14,7 +14,7 @@
                         required>
                         <mat-option [value]=""></mat-option>
                         <mat-option *ngFor="let ancHivStatusInitialVisitOption of ancHivStatusInitialVisitOptions"
-                            [value]="ancHivStatusInitialVisitOption.itemId">
+                            [value]="ancHivStatusInitialVisitOption.itemId" (onSelectionChange)="onHivStatusBeforeFirstVisitChange($event)">
                             {{ancHivStatusInitialVisitOption.itemName}}
                         </mat-option>
                     </mat-select>

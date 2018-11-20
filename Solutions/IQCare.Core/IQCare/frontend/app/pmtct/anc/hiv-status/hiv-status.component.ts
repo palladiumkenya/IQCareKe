@@ -34,6 +34,8 @@ export class HivStatusComponent implements OnInit {
     @Output() notify: EventEmitter<FormGroup> = new EventEmitter<FormGroup>();
     @Input() hivTestingData: HIVTestingEmitter;
 
+    minDate: Date;
+
     HIVStatusFormGroup: FormGroup;
     constructor(private _formBuilder: FormBuilder,
         private _lookupItemService: LookupItemService,
@@ -41,7 +43,9 @@ export class HivStatusComponent implements OnInit {
         private snotifyService: SnotifyService,
         private visitDetailsService: VisitDetailsService,
         private dialogRef: MatDialogRef<HivStatusComponent>,
-        @Inject(MAT_DIALOG_DATA) data) { }
+        @Inject(MAT_DIALOG_DATA) data) {
+        this.minDate = new Date();
+    }
 
     ngOnInit() {
 
