@@ -17,7 +17,7 @@ namespace IQCare.Maternity.BusinessProcess.Queries.Maternity
         public int Id { get;  set; }
         public int PatientMasterVisitId { get;  set; }
         public int ProfileId { get;  set; }
-        public int DurationOfLabour { get;  set; }
+        public string DurationOfLabour { get;  set; }
         public DateTime DateOfDelivery { get;  set; }
         public TimeSpan TimeOfDelivery { get;  set; }
         public string ModeOfDelivery { get;  set; }

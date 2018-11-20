@@ -14,7 +14,7 @@ import { PncVisitDetailsCommand } from '../_models/PncVisitDetailsCommand';
 import { HivStatusCommand } from '../_models/HivStatusCommand';
 import {PatientChronicIllness} from '../_models/PatientChronicIllness';
 import {DrugAdministrationCommand} from '../maternity/commands/drug-administration-command';
-import {AdministerDrugInfo} from '../maternity/commands/administer-drug-info';
+import {AdministeredDrugInfo} from '../maternity/commands/administer-drug-info';
 
 const httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })

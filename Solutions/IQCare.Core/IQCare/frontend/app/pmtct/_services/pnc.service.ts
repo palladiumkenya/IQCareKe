@@ -78,7 +78,7 @@ export class PncService {
     }
 
     public savePncDrugAdministration(drugAdministrationCommand: DrugAdministrationCommand): Observable<any> {
-        return this.http.post<any>(this.API_PMTCT_URL + '/api/PatientDiagnosis/AddDrugAdministrationInfo',
+        return this.http.post<any>(this.API_PMTCT_URL + '/api/PatientDrugAdministration/Add',
             JSON.stringify(drugAdministrationCommand), httpOptions).pipe(
                 tap(savePncDrugAdministration => this.errorHandler.log(`successfully saved pnc drug administration`)),
                 catchError(this.errorHandler.handleError<any>('Error saving pnc drug administration'))
