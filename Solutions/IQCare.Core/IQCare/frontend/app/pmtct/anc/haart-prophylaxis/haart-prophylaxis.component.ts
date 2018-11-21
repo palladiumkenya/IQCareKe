@@ -10,6 +10,7 @@ import {ActivatedRoute} from '@angular/router';
 import {ChronicIllnessEmitter} from '../../emitters/ChronicIllnessEmitter';
 import {PatientChronicIllness} from '../../_models/PatientChronicIllness';
 import * as moment from 'moment';
+import {AncService} from '../../_services/anc.service';
 
 export interface Options {
     value: string;
@@ -29,18 +30,22 @@ export class HaartProphylaxisComponent implements OnInit {
     public YesNoOptions: any[] = [];
 
     lookupItemView$: Subscription;
+    drugAdministration$: Subscription;
     @Output() nextStep = new EventEmitter<HAARTProphylaxisEmitter>();
     @Input() HaartProphylaxis: ClientMonitoringEmitter;
     @Input() haartProphylaxisOptions: any[] = [];
+    @Input('isEdit') isEdit: boolean;
+    @Input('patientId') patientId: number;
+    @Input('patientMasterVisitId') patientMasterVisitId: number;
     @Output() notify: EventEmitter<object> = new EventEmitter<object>();
     public HaartProphylaxisData: HAARTProphylaxisEmitter;
     public chronicIllness: ChronicIllnessEmitter[] = [];
     public patientchronicIllnessData: PatientChronicIllness[] = [];
 
     public personId: number;
-    public patientMasterVisitId: number;
+   // public patientMasterVisitId: number;
     public serviceAreaId: number;
-    public patientId: number;
+  //  public patientId: number;
     public userId: number;
     public isDisabled: boolean = true ;
 
@@ -48,7 +53,7 @@ export class HaartProphylaxisComponent implements OnInit {
 
     constructor(private route: ActivatedRoute, private _formBuilder: FormBuilder, private _lookupItemService: LookupItemService,
                 private  snotifyService: SnotifyService,
-                private notificationService: NotificationService) {
+                private notificationService: NotificationService, private ancService: AncService) {
     }
 
     ngOnInit() {
@@ -103,6 +108,10 @@ export class HaartProphylaxisComponent implements OnInit {
          this.getLookupItems('ChronicIllness', this.chronics);
          this.getLookupItems('YesNo', this.YesNos); */
         this.notify.emit({'form': this.HaartProphylaxisFormGroup, 'illness_data': this.chronicIllness });
+        if (this.isEdit) {
+            this.getPatientDrugAdministrationInfo(this.patientId);
+            this.getPatientChronicIllnessInfo(this.patientId);
+        }
     }
 
     public getLookupItems(groupName: string, _options: any[]) {
@@ -208,8 +217,82 @@ export class HaartProphylaxisComponent implements OnInit {
         } */
     }
 
+
+
     public removeRow(idx) {
         this.chronicIllness.splice(idx, 1);
     }
+
+    public getPatientDrugAdministrationInfo(patientId: number) {
+        this.drugAdministration$ = this.ancService.getPatientDrugAdministrationInfo(patientId)
+            .subscribe(
+                p => {
+                    console.log('drug');
+                    console.log(p);
+                    console.log(p['whoStage']);
+                    const drugAdministration = p;
+
+                    if (drugAdministration) {
+                        const firstAncVisit = drugAdministration.filter(x => x.strDrugAdministered == 'On ARV before 1st ANC Visit');
+                        const haartAnc = drugAdministration.filter(x => x.strDrugAdministered == 'Started HAART in ANC');
+                        const cotrim = drugAdministration.filter(x => x.strDrugAdministered == 'Cotrimoxazole');
+                        const aztBaby = drugAdministration.filter(x => x.strDrugAdministered == ' AZT for the baby dispensed');
+                        const nvpBaby = drugAdministration.filter(x => x.strDrugAdministered ==  'NVP for baby dispensed');
+
+                        if (firstAncVisit.length > 0) {
+                            this.HaartProphylaxisFormGroup.get('onArvBeforeANCVisit').setValue(firstAncVisit['value']);
+                        }
+                        if (haartAnc.length > 0) {
+                            this.HaartProphylaxisFormGroup.get('startedHaartANC').setValue(haartAnc['value']);
+                        }
+                        if (cotrim.length > 0) {
+                            this.HaartProphylaxisFormGroup.get('cotrimoxazole').setValue(cotrim['value']);
+                        }
+                        if (aztBaby.length > 0) {
+                            this.HaartProphylaxisFormGroup.get('aztFortheBaby').setValue(aztBaby['value']);
+                        }
+                        if (nvpBaby.length > 0) {
+                            this.HaartProphylaxisFormGroup.get('nvpForBaby').setValue(nvpBaby['value']);
+                        }
+                    }
+                },
+                (err) => {
+                    console.log(err);
+                    this.snotifyService.error('Error loading patient who stage ' + err, 'WHO', this.notificationService.getConfig());
+                },
+                () => {
+                    console.log(this.lookupItemView$);
+                });
+    }
+
+    public getPatientChronicIllnessInfo(patientId: number) {
+        this.drugAdministration$ = this.ancService.getPatientChronicIllnessInfo(patientId)
+            .subscribe(
+                p => {
+
+                    const chronic = p;
+                    if (chronic.length > 0){
+                        for (let i = 0; i < chronic.length; i ++) {
+                            this.chronicIllness.push({
+                                chronicIllness: chronic[i]['chronicIllness'],
+                                chronicIllnessId: chronic[i]['chronicIllnessId'],
+                                onSetDate: chronic[i]['onsetDate'],
+                                currentTreatment: chronic[i]['treatment'],
+                                dose: chronic[i]['dose']
+                            });
+                        }
+                    }
+
+
+                },
+                (err) => {
+                    console.log(err);
+                    this.snotifyService.error('Error loading patient Chronic Illness ' + err, 'WHO', this.notificationService.getConfig());
+                },
+                () => {
+                    console.log(this.lookupItemView$);
+                });
+    }
+
 
 }
