@@ -16,10 +16,10 @@ namespace IQCare.Maternity.BusinessProcess.QueryHandlers
 {
     public class GetDeliveredBabyBirthInfoQueryHandler : IRequestHandler<GetDeliveredBabyBirthInfoQuery, Result<List<DeliveredBabyBirthInfoViewModel>>>
     {
-        readonly IMaternityUnitOfWork _maternityUnitOfWork;
-        readonly IMapper _mapper;
-        ILogger logger = Log.ForContext<GetDeliveredBabyBirthInfoQueryHandler>();
-
+        private readonly IMaternityUnitOfWork _maternityUnitOfWork;
+        private readonly IMapper _mapper;
+        private readonly ILogger _Logger = Log.ForContext<GetDeliveredBabyBirthInfoQueryHandler>();
+        
         public GetDeliveredBabyBirthInfoQueryHandler(IMaternityUnitOfWork maternityUnitOfWork, IMapper mapper)
         {
             _maternityUnitOfWork = maternityUnitOfWork;
@@ -30,8 +30,11 @@ namespace IQCare.Maternity.BusinessProcess.QueryHandlers
         {
             try
             {
-                var deliveredBabyBirthInfo = _maternityUnitOfWork.Repository<DeliveredBabyBirthInfoView>()
-                        .Get(x => x.PatientDeliveryInformationId == request.PatientDeliveryInformationId && x.DeleteFlag == false).AsEnumerable();
+                var deliveredBabyBirthInfoQueryable = request.PatientMasterVisitId.HasValue
+                    ? _maternityUnitOfWork.Repository<DeliveredBabyBirthInfoView>().Get(x =>x.PatientMasterVisitId == request.PatientMasterVisitId.Value)
+                    : _maternityUnitOfWork.Repository<DeliveredBabyBirthInfoView>().Get(x => x.PatientDeliveryInformationId == request.PatientDeliveryInformationId);
+
+                var deliveredBabyBirthInfo = deliveredBabyBirthInfoQueryable.Where(x => x.DeleteFlag == false).AsEnumerable();
 
                 var birthInfoModel = _mapper.Map<List<DeliveredBabyBirthInfoViewModel>>(deliveredBabyBirthInfo);
 
@@ -43,20 +46,20 @@ namespace IQCare.Maternity.BusinessProcess.QueryHandlers
                 if (apgarScores.Any())
                 {
                     birthInfoModel.ForEach(birth =>
-                    {                    
+                    {
                         var formatedApgarScores = apgarScores.Where(x => x.DeliveredBabyBirthInformationId == birth.Id)
-                        .Select(x=>x.FormatApgarScore()).ToArray();
+                        .Select(x => x.FormatApgarScore()).ToArray();
 
                         birth.ApgarScores = string.Join(",", formatedApgarScores);
                     });
                 }
- 
+
                 return Task.FromResult(Result<List<DeliveredBabyBirthInfoViewModel>>.Valid(birthInfoModel));
             }
             catch (Exception ex)
             {
-                logger.Error(ex, $"An error occured while fetching baby birth details for Delivery Id {request.PatientDeliveryInformationId}");
-                return Task.FromResult( Result<List<DeliveredBabyBirthInfoViewModel>>.Invalid(ex.Message));
+                _Logger.Error(ex, $"An error occured while fetching baby birth details for Delivery Id {request.PatientDeliveryInformationId}");
+                return Task.FromResult(Result<List<DeliveredBabyBirthInfoViewModel>>.Invalid(ex.Message));
             }
         }
     }

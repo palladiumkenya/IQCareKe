@@ -208,12 +208,14 @@ export class PncComponent implements OnInit {
             'postpartumhaemorrhageOptions': this.postpartumhaemorrhageOptions,
             'episiotomyOptions': this.episiotomyOptions,
             'cSectionSiteOptions': this.cSectionSiteOptions,
-            'fistulaScreeningOptions': this.fistulaScreeningOptions
+            'fistulaScreeningOptions': this.fistulaScreeningOptions,
+            'motherExaminationOptions': this.motherExaminationOptions
         });
 
         this.babyExaminationOptions.push({
             'yesnoOptions': this.yesnoOptions,
-            'babyConditionOptions': this.babyConditionOptions
+            'babyConditionOptions': this.babyConditionOptions,
+            'babyExaminationControls': this.babyExaminationControls
         });
 
         this.patientEducationOptions.push({
@@ -598,10 +600,10 @@ export class PncComponent implements OnInit {
                     this.snotifyService.success('Successfully saved PNC encounter ', 'PNC', this.notificationService.getConfig());
                     this.zone.run(() => {
                         this.zone.run(() => {
-                            this.router.navigate(['/dashboard/personhome/' + this.personId], {relativeTo: this.route});
+                            this.router.navigate(['/dashboard/personhome/' + this.personId], { relativeTo: this.route });
                         });
-        });
-                    
+                    });
+
                 },
                 (error) => {
                     console.log(`error ` + error);

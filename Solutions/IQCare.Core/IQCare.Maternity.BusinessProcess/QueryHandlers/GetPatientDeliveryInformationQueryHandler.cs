@@ -30,10 +30,12 @@ namespace IQCare.Maternity.BusinessProcess.QueryHandlers
         {
             try
             {
-                var patientDeliveryInfoView = _maternityUnitOfWork.Repository<PatientDeliveryInformationView>()
-                        .Get(x => x.ProfileId == request.ProfileId).AsEnumerable();
+                var patientDeliveryInfoView = request.ProfileId.HasValue
+                    ? _maternityUnitOfWork.Repository<PatientDeliveryInformationView>().Get(x => x.ProfileId == request.ProfileId)
+                    : _maternityUnitOfWork.Repository<PatientDeliveryInformationView>().Get(x => x.PatientMasterVisitId == request.PatientMasterVisitId);
 
-                var patientDeliveryInfoModel = _mapper.Map<List<PatientDeliveryInfomationViewModel>>(patientDeliveryInfoView);
+
+                var patientDeliveryInfoModel = _mapper.Map<List<PatientDeliveryInfomationViewModel>>(patientDeliveryInfoView.AsEnumerable());
 
                 return Task.FromResult(Result<List<PatientDeliveryInfomationViewModel>>.Valid(patientDeliveryInfoModel));
             }

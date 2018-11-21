@@ -10,11 +10,12 @@ using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
 using System.Threading;
+using Microsoft.EntityFrameworkCore;
 
 
 namespace IQCare.Maternity.BusinessProcess.QueryHandlers
 {
-    public class GetPatientPysicalExaminationQueryHandler : IRequestHandler<GetPhysicalExaminationQuery, Result<List<GetPatientPhysicalExaminationViewModel>>>
+    public class GetPatientPysicalExaminationQueryHandler : IRequestHandler<GetPhysicalExaminationQuery, Result<List<PhysicalExamination>>>
     {
         IMaternityUnitOfWork _maternityUnitOfWork;
         IMapper _mapper;
@@ -25,19 +26,20 @@ namespace IQCare.Maternity.BusinessProcess.QueryHandlers
             _maternityUnitOfWork = maternityUnitOfWork;
             _mapper = mapper;
         }
-        public Task<Result<List<GetPatientPhysicalExaminationViewModel>>> Handle(GetPhysicalExaminationQuery request, CancellationToken cancellationToken)
+        public async Task<Result<List<PhysicalExamination>>> Handle(GetPhysicalExaminationQuery request, CancellationToken cancellationToken)
         {
             try
             {
-                var patientExamination = _maternityUnitOfWork.Repository<PhysicalExaminationView>().Get(x => x.PatientId == request.PatientId);
-                var physicalExamination = _mapper.Map<List<GetPatientPhysicalExaminationViewModel>>(patientExamination);
-                
-                return Task.FromResult(Result<List<GetPatientPhysicalExaminationViewModel>>.Valid(physicalExamination));
+                var physicalExaminations = await _maternityUnitOfWork.Repository<PhysicalExamination>().Get(x =>
+                    x.PatientId == request.PatientId && x.PatientMasterVisitId == request.PatientMasterVisitId &&
+                    x.DeleteFlag == false).ToListAsync();
+
+                return Result<List<PhysicalExamination>>.Valid(physicalExaminations);
             }
             catch (Exception ex)
             {
                 logger.Error(ex, $"An error occured while fetching patient physical exammination info{ request.PatientId}");
-                return Task.FromResult(Result<List<GetPatientPhysicalExaminationViewModel>>.Invalid(ex.Message));
+                return Result<List<PhysicalExamination>>.Invalid(ex.Message);
             }
 
         }

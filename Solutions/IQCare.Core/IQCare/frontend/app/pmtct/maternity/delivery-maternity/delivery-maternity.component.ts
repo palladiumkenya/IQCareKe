@@ -17,7 +17,9 @@ export class DeliveryMaternityComponent implements OnInit {
 
     deliveryFormGroup: FormGroup;
     @Input() diagnosisOptions: any[] = [];
-    @Input('patientId') patientId: number;
+    @Input('PatientId') PatientId: number;
+    @Input('isEdit') isEdit: boolean;
+    @Input('PatientMasterVisitId') PatientMasterVisitId: number;
     @Output() notify: EventEmitter<FormGroup> = new EventEmitter<FormGroup>();
 
     public deliveryModeOptions: any[] = [];
@@ -78,25 +80,26 @@ export class DeliveryMaternityComponent implements OnInit {
         this.motherStateOptions = motherStates;
         this.yesnoOptions = yesNos;
 
-        this.getCurrentVisitDetails(this.patientId);
-        this.getPregnancyDetails(this.patientId);
-
+        this.getCurrentVisitDetails(this.PatientId);
+        this.getPregnancyDetails(this.PatientId);
+         if(this.isEdit){
+             this.getPatientDeliveryInfo(this.PatientMasterVisitId);
+         }
         this.notify.emit(this.deliveryFormGroup);
     }
 
     public onDeliveryDateChange() {
         this.deliveryDate = this.deliveryFormGroup.controls['deliveryDate'].value;
 
-        // const now = moment(new Date());
-        const now = moment(this.deliveryDate);
-        const gestation = moment.duration(now.diff(this.dateLMP)).asWeeks().toFixed(1);
+        const gestation = this.calculateGestation(this.deliveryDate,this.dateLMP)
         this.deliveryFormGroup.controls['gestationAtBirth'].setValue(gestation);
-
-
-        //  const gestation = moment(this.deliveryDate).diff(this.dateLMP, 'weeks').toFixed(1);
-        //  this.deliveryFormGroup.controls['gestationAtBirth'].setValue(gestation + ' weeks');
-
         this.deliveryFormGroup.controls['gestationAtBirth'].disable({ onlySelf: true });
+    }
+
+    public calculateGestation(deliveryDate: Date, dateLmp : Date): string{
+        const now = moment(deliveryDate);
+        const gestation = moment.duration(now.diff(this.dateLMP)).asWeeks().toFixed(1);
+        return gestation;
     }
 
     onBloodLossChange(event) {
@@ -162,6 +165,38 @@ export class DeliveryMaternityComponent implements OnInit {
                 },
                 (err) => {
                     this.snotifyService.error('Error fetching visit details' + err,
+                        'Encounter', this.notificationService.getConfig());
+                },
+                () => {
+
+                });
+    }
+
+    public getPatientDeliveryInfo(masterVisitId: number): void {
+        this._matService.GetPatientDeliveryInfo(masterVisitId)
+            .subscribe(
+                del => {
+                    console.log(del)
+                    if(del==null)
+                      return;                        
+                    this.deliveryFormGroup.controls['gestationAtBirth'].setValue( this.calculateGestation(del.dateOfDelivery,this.dateLMP));
+                    this.deliveryFormGroup.controls['gestationAtBirth'].disable({ onlySelf: true });
+                    this.deliveryFormGroup.controls['deliveryDate'].setValue(del.dateOfDelivery);
+                    this.deliveryFormGroup.controls['deliveryTime'].setValue(del.timeOfDelivery);
+                    this.deliveryFormGroup.controls['labourDuration'].setValue(del.durationOfLabour);
+                    this.deliveryFormGroup.controls['deliveryMode'].setValue(del.modeOfDeliveryId);
+                    this.deliveryFormGroup.controls['bloodLoss'].setValue(del.bloodLossClassificationId);
+                    this.deliveryFormGroup.controls['bloodLossCount'].setValue(del.bloodLossCapacity);
+                    this.deliveryFormGroup.controls['deliveryCondition'].setValue(del.motherConditionId);
+                    this.deliveryFormGroup.controls['placentaComplete'].setValue(del.placentaCompleteId);
+                    this.deliveryFormGroup.controls['maternalDeathsAudited'].setValue(del.maternalDeathAuditedId);
+                    this.deliveryFormGroup.controls['auditDate'].setValue(del.maternalDeathAuditDate);
+                    this.deliveryFormGroup.controls['deliveryComplications'].setValue(del.deliveryComplicationsExperiencedId);
+                    this.deliveryFormGroup.controls['deliveryComplicationNotes'].setValue(del.deliveryComplicationNotes);
+                    this.deliveryFormGroup.controls['deliveryConductedBy'].setValue(del.deliveryConductedBy);
+                },
+                (err) => {
+                    this.snotifyService.error('Error fetching patient delivery info details' + err,
                         'Encounter', this.notificationService.getConfig());
                 },
                 () => {
