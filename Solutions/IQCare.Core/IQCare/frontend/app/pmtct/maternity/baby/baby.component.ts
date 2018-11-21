@@ -3,6 +3,7 @@ import {FormArray, FormBuilder, FormControl, FormGroup, Validators} from '@angul
 import {NotificationService} from '../../../shared/_services/notification.service';
 import {SnotifyService} from 'ng-snotify';
 import {MatTableDataSource} from '@angular/material';
+import { MaternityService } from '../../_services/maternity.service';
 
 @Component({
     selector: 'app-baby',
@@ -25,9 +26,14 @@ export class BabyComponent implements OnInit {
     deliveryOutcomeOptions: any[] = [];
     yesnoOptions: any[] = [];
 
+    @Input('PatientId') PatientId: number;
+    @Input('isEdit') isEdit: boolean;
+    @Input('PatientMasterVisitId') PatientMasterVisitId: number;
+    showEdit : boolean = false;
+
     constructor(private formBuilder: FormBuilder,
                 private notificationService: NotificationService,
-                private snotifyService: SnotifyService) {
+                private snotifyService: SnotifyService,private maternityService: MaternityService) {
     }
 
     ngOnInit() {
@@ -58,6 +64,8 @@ export class BabyComponent implements OnInit {
 
         this.notify.emit(this.babyFormGroup);
         this.notifyData.emit(this.babyData);
+        if(this.isEdit)
+        this.getDeliveredBabyInfo(this.PatientMasterVisitId)
     }
 
     public AddBaby() {
@@ -104,11 +112,92 @@ export class BabyComponent implements OnInit {
 
     public onRowClicked(row) {
         console.log('row clicked:', row);
-        const index = this.babyDataTable.indexOf(row.milestone);
-        const index_ = this.babyData.indexOf(row.milestone);
-        this.babyDataTable.splice(index, 1);
-        this.babyDataTable.splice(index_, 1);
-        this.dataSource = new MatTableDataSource(this.babyDataTable);
+        if(this.isEdit){
+           this.setBabyFormValues(row);
+        }
+        this.showEdit = true;
+        // const index = this.babyDataTable.indexOf(row.milestone);
+        // const index_ = this.babyData.indexOf(row.milestone);
+        // this.babyDataTable.splice(index, 1);
+        // this.babyDataTable.splice(index_, 1);
+        // this.dataSource = new MatTableDataSource(this.babyDataTable);
+    }
+
+    public getDeliveredBabyInfo(masterVisitId : number): void {
+        this.maternityService.GetDeliveredBabyInfo(masterVisitId)
+            .subscribe(
+                bInfo => {
+                    if(bInfo == null)
+                       return;
+                 bInfo.forEach(info => {
+                    this.babyDataTable.push({
+                        sex: info.sex,
+                        birthWeight:info.birthWeight,
+                        outcome: info.deliveryOutcome,
+                        apgarScore: info.apgarScores,
+                        resuscitate: info.resuscitationDone,
+                        deformity:  info.birthDeformity,
+                        teo:  info.teoGiven,
+                        breastFeeding:info.breastFedWithinHour,
+                        comment: info.comment,
+                        notificationNumber: info.birthNotificationNumber,
+                        id: info.id
+                    });
+                 });
+                 this.dataSource = new MatTableDataSource(this.babyDataTable);
+                },
+                (err) => {
+                    this.snotifyService.error('Error fetching baby details' + err,
+                        'Encounter', this.notificationService.getConfig());
+                },
+                () => {
+
+                });
+    }
+
+    public setBabyFormValues(babyInfo : any) : void{
+                    this.babyFormGroup.controls['babySex'].setValue(this.getLookUpItemId(this.genderOptions, babyInfo.sex));
+                    this.babyFormGroup.controls['birthWeight'].setValue(babyInfo.birthWeight);
+                    this.babyFormGroup.controls['outcome'].setValue(this.getLookUpItemId(this.deliveryOutcomeOptions,babyInfo.outcome));
+                    this.babyFormGroup.controls['resuscitationDone']
+                    .setValue(babyInfo.resuscitate? this.getLookUpItemId(this.yesnoOptions,"Yes"): this.getLookUpItemId(this.yesnoOptions,"No"));
+                    this.babyFormGroup.controls['deformity'].setValue(babyInfo.deformity ? this.getLookUpItemId(this.yesnoOptions,"Yes"): this.getLookUpItemId(this.yesnoOptions,"No"));
+                    this.babyFormGroup.controls['teoGiven'].setValue(babyInfo.teo ? this.getLookUpItemId(this.yesnoOptions,"Yes"): this.getLookUpItemId(this.yesnoOptions,"No"));
+                    this.babyFormGroup.controls['breastFed'].setValue(babyInfo.breastFeeding ? this.getLookUpItemId(this.yesnoOptions,"Yes"): this.getLookUpItemId(this.yesnoOptions,"No"));
+                    this.babyFormGroup.controls['comment'].setValue(babyInfo.comment);
+                    this.babyFormGroup.controls['agparScore1min'].setValue(this.getApgarScoreValue(babyInfo.apgarScore,"1min"));
+                    this.babyFormGroup.controls['agparScore5min'].setValue(this.getApgarScoreValue(babyInfo.apgarScore,"5min"));
+                    this.babyFormGroup.controls['agparScore10min'].setValue(this.getApgarScoreValue(babyInfo.apgarScore,"10min"));
+                    this.babyFormGroup.controls['notificationNumber'].setValue(babyInfo.notificationNumber);
+    }
+
+   
+    public getApgarScoreValue(apgarScore :string, scoreType: string) : any {
+        var scoreArr = apgarScore.split(",");
+        var score = "0";
+        switch (scoreType) {
+            case "1min":       
+               score = scoreArr[0].split("in")[0]       
+                break;
+            case "5min":    
+            score = scoreArr[1].split("in")[0]             
+                break;
+            case "10min":    
+            score = scoreArr[2].split("in")[0]                        
+                break;
+            default:
+                break;
+        }
+        return score;
+    }
+
+  
+    public getLookUpItemId(lookUpOptions : any [], lookupName : string): any {
+        for (let index = 0; index < lookUpOptions.length; index++) {
+            if(lookUpOptions[index].itemName == lookupName)
+              return lookUpOptions[index].itemId;  
+        }
+        return 0;
     }
 
 

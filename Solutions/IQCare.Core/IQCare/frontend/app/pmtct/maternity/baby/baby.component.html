@@ -14,7 +14,7 @@
                 <mat-label >Baby Sex</mat-label>
                 <mat-select formControlName="babySex" required minlength="1">
                     <mat-option [value]="0">select</mat-option>
-                    <mat-option *ngFor="let genderOption of genderOptions" [value]="genderOption">
+                    <mat-option *ngFor="let genderOption of genderOptions" [value]="genderOption.itemId">
                         {{genderOption.itemName}}
                     </mat-option>
                 </mat-select>
@@ -30,7 +30,7 @@
                 <mat-label >Outcome</mat-label>
                 <mat-select formControlName="outcome" required >
                     <mat-option [value]="0">select</mat-option>
-                    <mat-option *ngFor="let deliveryOutcomeOption of deliveryOutcomeOptions" [value]="deliveryOutcomeOption">
+                    <mat-option *ngFor="let deliveryOutcomeOption of deliveryOutcomeOptions" [value]="deliveryOutcomeOption.itemId">
                         {{deliveryOutcomeOption.itemName}}
                     </mat-option>
                 </mat-select>
@@ -44,7 +44,7 @@
                     <mat-label >Resuscitation done</mat-label>
                     <mat-select formControlName="resuscitationDone" required minlength="1">
                         <mat-option [value]="0">select</mat-option>
-                        <mat-option *ngFor="let yesnoOption of yesnoOptions" [value]="yesnoOption">
+                        <mat-option *ngFor="let yesnoOption of yesnoOptions" [value]="yesnoOption.itemId">
                             {{yesnoOption.itemName}}
                         </mat-option>
                     </mat-select>
@@ -55,7 +55,7 @@
                     <mat-label >Birth with deformity</mat-label>
                     <mat-select formControlName="deformity" required minlength="1">
                         <mat-option [value]="0">select</mat-option>
-                        <mat-option *ngFor="let yesnoOption of yesnoOptions" [value]="yesnoOption" >
+                        <mat-option *ngFor="let yesnoOption of yesnoOptions" [value]="yesnoOption.itemId" >
                             {{yesnoOption.itemName}}
                         </mat-option>
                     </mat-select>
@@ -66,7 +66,7 @@
                     <mat-label >TEO given</mat-label>
                     <mat-select formControlName="teoGiven" required minlength="1">
                         <mat-option [value]="0">select</mat-option>
-                        <mat-option *ngFor="let yesnoOption of yesnoOptions" [value]="yesnoOption">
+                        <mat-option *ngFor="let yesnoOption of yesnoOptions" [value]="yesnoOption.itemId">
                             {{yesnoOption.itemName}}
                         </mat-option>
                     </mat-select>
@@ -77,7 +77,7 @@
                     <mat-label >Breast Fed < 1 hour</mat-label>
                     <mat-select formControlName="breastFed" required minlength="1">
                         <mat-option [value]="0">select</mat-option>
-                        <mat-option *ngFor="let yesnoOption of yesnoOptions" [value]="yesnoOption" >
+                        <mat-option *ngFor="let yesnoOption of yesnoOptions" [value]="yesnoOption.itemId" >
                             {{yesnoOption.itemName}}
                         </mat-option>
                     </mat-select>
@@ -122,9 +122,9 @@
     <div class="row">
         <div class="col-lg-4 col-xs-12"></div>
         <div class="col-lg-4 col-xs-12">
-
-            <button mat-raised-button class="mat-primary"><span class="fa fa-plus-circle" (click)="AddBaby()"> Add Baby Details</span></button>
-
+            {{showEdit}}
+            <button *ngIf="!showEdit" mat-raised-button class="mat-primary"><span class="fa fa-plus-circle" (click)="AddBaby()"> Add Baby Details</span></button>
+            <button *ngIf="showEdit" mat-raised-button class="mat-primary"><span class="fa fa-plus-circle" (click)="UpdateBabyDetails()"> Update Details</span></button>
         </div>
         <div class="col-lg-4 col-xs-12"></div>
     </div>
@@ -136,7 +136,7 @@
                 <mat-table #table [dataSource]="dataSource">
 
                     <!-- Position Column -->
-                    <ng-container matColumnDef="sex">
+                <ng-container matColumnDef="sex">
                         <mat-header-cell *matHeaderCellDef><strong>Sex</strong>  </mat-header-cell>
                         <mat-cell *matCellDef="let babyDataTable"> {{babyDataTable.sex}} </mat-cell>
                     </ng-container>
@@ -194,7 +194,7 @@
                     <ng-container matColumnDef="action">
                         <mat-header-cell *matHeaderCellDef><strong class="fa fa-cog"> Action</strong></mat-header-cell>
                         <mat-cell *matCellDef="let row">
-                            <button mat-raised-button class="mat-accent"><span class="fa fa-trash-o"> Delete</span> </button>
+                            <button  mat-raised-button class="mat-accent"><span class="fa fa-trash-o"> Delete</span> </button>
                         </mat-cell>
                     </ng-container>
 
