@@ -223,36 +223,54 @@ export class HaartProphylaxisComponent implements OnInit {
         this.chronicIllness.splice(idx, 1);
     }
 
+    public onARVBeforeFirstANC(event) {
+       console.log('yesno options');
+        console.log(this.YesNoOptions);
+        const no = this.yesnonaOptions.filter(x => x.itemName = 'No');
+        // console.log(option);
+        if (event.isUserInput && event.source.selected && event.source.viewValue == 'Yes') {
+                this.HaartProphylaxisFormGroup.get('startedHaartANC').setValue(no[0]['itemId']);
+        } else {
+
+        }
+    }
+
     public getPatientDrugAdministrationInfo(patientId: number) {
         this.drugAdministration$ = this.ancService.getPatientDrugAdministrationInfo(patientId)
             .subscribe(
                 p => {
                     console.log('drug');
                     console.log(p);
-                    console.log(p['whoStage']);
                     const drugAdministration = p;
 
                     if (drugAdministration) {
                         const firstAncVisit = drugAdministration.filter(x => x.strDrugAdministered == 'On ARV before 1st ANC Visit');
                         const haartAnc = drugAdministration.filter(x => x.strDrugAdministered == 'Started HAART in ANC');
                         const cotrim = drugAdministration.filter(x => x.strDrugAdministered == 'Cotrimoxazole');
-                        const aztBaby = drugAdministration.filter(x => x.strDrugAdministered == ' AZT for the baby dispensed');
+                        const aztBaby = drugAdministration.filter(x => x.strDrugAdministered == 'AZT for the baby dispensed');
                         const nvpBaby = drugAdministration.filter(x => x.strDrugAdministered ==  'NVP for baby dispensed');
 
+                        console.log(firstAncVisit);
+                        console.log(haartAnc);
+                        console.log(cotrim);
+                        console.log(aztBaby);
+                        console.log(nvpBaby);
+                        console.log('end drugs admin');
+
                         if (firstAncVisit.length > 0) {
-                            this.HaartProphylaxisFormGroup.get('onArvBeforeANCVisit').setValue(firstAncVisit['value']);
+                            this.HaartProphylaxisFormGroup.get('onArvBeforeANCVisit').setValue(firstAncVisit[0]['value']);
                         }
                         if (haartAnc.length > 0) {
-                            this.HaartProphylaxisFormGroup.get('startedHaartANC').setValue(haartAnc['value']);
+                            this.HaartProphylaxisFormGroup.get('startedHaartANC').setValue(haartAnc[0]['value']);
                         }
                         if (cotrim.length > 0) {
-                            this.HaartProphylaxisFormGroup.get('cotrimoxazole').setValue(cotrim['value']);
+                            this.HaartProphylaxisFormGroup.get('cotrimoxazole').setValue(cotrim[0]['value']);
                         }
                         if (aztBaby.length > 0) {
-                            this.HaartProphylaxisFormGroup.get('aztFortheBaby').setValue(aztBaby['value']);
+                            this.HaartProphylaxisFormGroup.get('aztFortheBaby').setValue(aztBaby[0]['value']);
                         }
                         if (nvpBaby.length > 0) {
-                            this.HaartProphylaxisFormGroup.get('nvpForBaby').setValue(nvpBaby['value']);
+                            this.HaartProphylaxisFormGroup.get('nvpForBaby').setValue(nvpBaby[0]['value']);
                         }
                     }
                 },
@@ -271,7 +289,9 @@ export class HaartProphylaxisComponent implements OnInit {
                 p => {
 
                     const chronic = p;
-                    if (chronic.length > 0){
+                    console.log('chronic ');
+                    console.log(chronic);
+                    if (chronic.length > 0) {
                         for (let i = 0; i < chronic.length; i ++) {
                             this.chronicIllness.push({
                                 chronicIllness: chronic[i]['chronicIllness'],
@@ -282,7 +302,6 @@ export class HaartProphylaxisComponent implements OnInit {
                             });
                         }
                     }
-
 
                 },
                 (err) => {

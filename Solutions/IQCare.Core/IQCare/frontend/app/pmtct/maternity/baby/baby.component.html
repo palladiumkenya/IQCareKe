@@ -30,8 +30,7 @@
                 <mat-label >Outcome</mat-label>
                 <mat-select formControlName="outcome" required >
                     <mat-option [value]="0">select</mat-option>
-                    <mat-option *ngFor="let deliveryOutcomeOption of deliveryOutcomeOptions" [value]="deliveryOutcomeOption">
-                        {{deliveryOutcomeOption.itemName}}
+                    <mat-option *ngFor="let birthOutcome of birthOutcomes" [value]="birthOutcome">
                     </mat-option>
                 </mat-select>
             </mat-form-field>

@@ -208,5 +208,22 @@ export class AncService {
         );
     }
 
+    public getPatientPreventiveServiceInfo(patientId: number) {
+        return this.http.get<any[]>(this.API_URL + '/api/PatientService/GetByPatientId/' +
+            patientId ).pipe(
+            tap(getPatientPreventiveServiceInfo => this.errorHandler.log('get preventive service')),
+            catchError(this.errorHandler.handleError<any[]>('getPatientPreventiveServiceInfo'))
+        );
+    }
+
+    public getPatientPartnerTestingInfo(patientId: number) {
+        return this.http.get<any[]>(this.API_PMTCT_URL + '/api/PatientPartnerTesting/Get/' +
+            patientId).pipe(
+            tap(getPatientPartnerTestingInfo => this.errorHandler.log('get Partner Testing info Data')),
+            catchError(this.errorHandler.handleError<any[]>('getPatientPartnerTestingInfo'))
+        );
+    }
+
+
 }
 

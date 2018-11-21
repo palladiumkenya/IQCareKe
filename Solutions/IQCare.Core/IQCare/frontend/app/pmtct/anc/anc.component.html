@@ -96,7 +96,10 @@
                                         <ng-template matStepLabel><span matTooltip="Preventive Services & Partner Testing">Preventive
                                                 Services
                                             </span> </ng-template>
-                                        <app-preventive-services [serviceFormOptions]="serviceFormOptions" (notify)="onPreventiveServiceNotify($event)">
+                                        <app-preventive-services [serviceFormOptions]="serviceFormOptions" (notify)="onPreventiveServiceNotify($event)"
+                                                                 [isEdit]="isEdit"
+                                                                 [patientId]="patientId"
+                                                                 [patientMasterVisitId]="visitId">
 
                                         </app-preventive-services>
                                         <div>

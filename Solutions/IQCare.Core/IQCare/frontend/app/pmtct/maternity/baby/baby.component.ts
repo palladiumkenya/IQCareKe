@@ -23,6 +23,7 @@ export class BabyComponent implements OnInit {
 
     public genderOptions: any[] = [];
     deliveryOutcomeOptions: any[] = [];
+    public birthOutcomes: any[] = [];
     yesnoOptions: any[] = [];
 
     constructor(private formBuilder: FormBuilder,
@@ -50,14 +51,18 @@ export class BabyComponent implements OnInit {
         const {
             gender,
             deliveryOutcomes,
+            birthOutcomes,
             yesNos
         } = this.babySectionOptions[0];
         this.genderOptions = gender;
         this.deliveryOutcomeOptions = deliveryOutcomes;
+        this.birthOutcomes = birthOutcomes;
         this.yesnoOptions = yesNos;
 
         this.notify.emit(this.babyFormGroup);
         this.notifyData.emit(this.babyData);
+
+
     }
 
     public AddBaby() {
