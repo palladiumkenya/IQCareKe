@@ -105,6 +105,7 @@ export class HivStatusComponent implements OnInit {
             return;
         }
     }
+
     close() {
         this.dialogRef.close();
     }

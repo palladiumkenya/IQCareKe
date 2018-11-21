@@ -62,7 +62,9 @@
                                         </ng-template>
 
                                         <!-- add Hiv Status Component to Stepper -->
-                                        <app-pnc-hivtesting (notify)="onHivStatusNotify($event)" [pncHivOptions]="pncHivOptions">
+                                        <app-pnc-hivtesting (notify)="onHivStatusNotify($event)" [pncHivOptions]="pncHivOptions"
+                                            [patientId]="patientId" [isEdit]="isEdit" [patientMasterVisitId]="patientMasterVisitId"
+                                            [patientEncounterId]="patientEncounterId">
                                         </app-pnc-hivtesting>
 
                                         <div class="row">

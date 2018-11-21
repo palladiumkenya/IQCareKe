@@ -108,6 +108,13 @@
                                 </mat-cell>
                             </ng-container>
 
+                            <!-- Age Column -->
+                            <ng-container matColumnDef="ageNumber">
+                                <mat-header-cell *matHeaderCellDef> Age </mat-header-cell>
+                                <mat-cell *matCellDef="let element"> {{ element.ageNumber }}
+                                </mat-cell>
+                            </ng-container>
+
                             <!-- Gender Column -->
                             <ng-container matColumnDef="gender">
                                 <mat-header-cell *matHeaderCellDef> Gender </mat-header-cell>
