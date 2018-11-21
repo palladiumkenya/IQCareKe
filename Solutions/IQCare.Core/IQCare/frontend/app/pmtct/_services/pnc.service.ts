@@ -147,4 +147,12 @@ export class PncService {
             catchError(this.errorHandler.handleError<any>('Error fetching postnatal exam and baby examination history'))
         );
     }
+
+    public getHivTests(patientMasterVisitId: number, patientEncounterId: number): Observable<any> {
+        return this.http.get<any>(this.API_URL + '/api/HtsEncounter/getTestResults/' + patientMasterVisitId + '/' + patientEncounterId)
+            .pipe(
+                tap(getHivTests => this.errorHandler.log(`successfully fetched hiv tests`)),
+                catchError(this.errorHandler.handleError<any>('Error fetching hiv tests'))
+            );
+    }
 }

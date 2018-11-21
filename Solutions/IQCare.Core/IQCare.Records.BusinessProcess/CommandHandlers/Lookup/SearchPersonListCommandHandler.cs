@@ -49,6 +49,7 @@ namespace IQCare.Records.BusinessProcess.CommandHandlers.Lookup
 
                 sql.Append(";exec [dbo].[pr_CloseDecryptedSession];");
                 var result = await _unitOfWork.Repository<PersonListView>().FromSql(sql.ToString());
+                result.ForEach(item => item.CalculateYourAge());
                 _unitOfWork.Dispose();
 
                 return Result<SearchPersonListResponse>.Valid(new SearchPersonListResponse()

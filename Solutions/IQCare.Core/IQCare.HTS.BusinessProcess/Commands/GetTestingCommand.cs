@@ -1,4 +1,6 @@
-﻿using IQCare.Library;
+﻿using System.Collections.Generic;
+using IQCare.HTS.Core.Model;
+using IQCare.Library;
 using MediatR;
 
 namespace IQCare.HTS.BusinessProcess.Commands
@@ -11,5 +13,8 @@ namespace IQCare.HTS.BusinessProcess.Commands
 
     public class GetTestingResultsResponse
     {
+        public List<HtsEncounter> Encounter { get; set; }
+        public List<Core.Model.Testing> Testing { get; set; }
+        public List<HtsEncounterResult> EncounterResults { get; set; }
     }
 }

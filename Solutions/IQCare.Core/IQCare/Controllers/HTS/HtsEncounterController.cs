@@ -55,12 +55,13 @@ namespace IQCare.Controllers.HTS
             return BadRequest(response);
         }
 
-        [HttpGet("")]
-        public async Task<IActionResult> Get()
+        [HttpGet("getTestResults/{patientMasterVisitId}/{patientEncounterId}")]
+        public async Task<IActionResult> Get(int patientMasterVisitId, int patientEncounterId)
         {
             var response = await _mediator.Send(new GetTestingCommand()
             {
-                
+                PatientMasterVisitId = patientMasterVisitId,
+                PatientEncounterId = patientEncounterId
             }, Request.HttpContext.RequestAborted);
             if (response.IsValid)
                 return Ok(response.Value);

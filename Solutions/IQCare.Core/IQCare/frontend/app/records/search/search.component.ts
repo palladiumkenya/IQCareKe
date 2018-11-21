@@ -24,7 +24,7 @@ import * as AppState from '../../shared/reducers/app.states';
 export class SearchComponent implements OnInit, AfterViewInit {
     @ViewChild(MatPaginator) paginator: MatPaginator;
     @ViewChild(MatSort) sort: MatSort;
-    displayedColumns = ['id', 'firstName', 'middleName', 'lastName', 'dateOfBirth', 'gender', 'fullName'];
+    displayedColumns = ['id', 'firstName', 'middleName', 'lastName', 'dateOfBirth', 'ageNumber', 'gender', 'fullName'];
     dataSource = new MatTableDataSource();
     clientSearch: Search;
     expandedElement: any;
