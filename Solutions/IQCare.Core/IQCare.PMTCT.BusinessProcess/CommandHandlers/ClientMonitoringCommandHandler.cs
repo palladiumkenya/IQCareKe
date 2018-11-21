@@ -38,7 +38,7 @@ namespace IQCare.PMTCT.BusinessProcess.CommandHandlers
                 {
                     ClientMonitoringServices clientMonitoringService= new ClientMonitoringServices(_unitOfWork);
 
-                    PatientWHOStage patientWhoStage = new PatientWHOStage()
+                    PatientWhoStage patientWhoStage = new PatientWhoStage()
                     {
                         PatientId=request.PatientId,
                         PatientMasterVisitId=request.PatientMasterVisitId,

@@ -48,11 +48,11 @@ namespace IQCare.PMTCT.Services
             }
         }
 
-        public async Task<int>  AddPatientWhoStage(PatientWHOStage patientWHOStage)
+        public async Task<int>  AddPatientWhoStage(PatientWhoStage patientWHOStage)
         {
             try
             {
-                await  _unitOfWork.Repository<PatientWHOStage>().AddAsync(patientWHOStage);
+                await  _unitOfWork.Repository<PatientWhoStage>().AddAsync(patientWHOStage);
                 await _unitOfWork.SaveAsync();
                 return patientWHOStage.Id;
             }

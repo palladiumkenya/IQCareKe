@@ -167,5 +167,46 @@ export class AncService {
             catchError(this.errorHandler.handleError<any[]>('getPatientCounselingInfo'))
         );
     }
+
+    public getPatientPhysicalExaminationInfo(patientId: number, patientMasterVisitId: number) {
+        return this.http.get<any[]>(this.API_URL + '/api/PhysicalExamination/GetPhysicalExam/' +
+            patientId + ' / ' + patientMasterVisitId).pipe(
+            tap(getPatientPhysicalExminationInfo => this.errorHandler.log('get ANC Physical examination Data')),
+            catchError(this.errorHandler.handleError<any[]>('getPatientPhysicalExaminationInfo'))
+        );
+    }
+
+    public getPatientWhoStageInfo(patientId: number, patientMasterVisitId: number) {
+        return this.http.get<any[]>(this.API_URL + '/api/PatientWhoStage/GetWhoStage/' +
+            patientId + ' / ' + patientMasterVisitId).pipe(
+            tap(getPatientWhoStageInfo => this.errorHandler.log('get WHO Stage info Data')),
+            catchError(this.errorHandler.handleError<any[]>('getPatientWhoStageInfo'))
+        );
+    }
+
+    public getPatientScreeningInfo(patientId: number, patientMasterVisitId: number) {
+        return this.http.get<any[]>(this.API_URL + '/api/PatientScreening/GetPatientScreening/' +
+            patientId + ' / ' + patientMasterVisitId).pipe(
+            tap(getPatientScreeningInfo => this.errorHandler.log('get WHO Stage info Data')),
+            catchError(this.errorHandler.handleError<any[]>('getPatientScreeningInfo'))
+        );
+    }
+
+    public getPatientDrugAdministrationInfo(patientId: number) {
+        return this.http.get<any[]>(this.API_PMTCT_URL + '/api/PatientDrugAdministration/GetByPatientId/' +
+            patientId).pipe(
+            tap(getPatientDrugAdministrationInfo => this.errorHandler.log('get Drug Administration info Data')),
+            catchError(this.errorHandler.handleError<any[]>('getPatientDrugAdministrationInfo'))
+        );
+    }
+
+    public getPatientChronicIllnessInfo(patientId: number) {
+        return this.http.get<any[]>(this.API_URL + '/api/PatientChronicIllness/GetByPatientId/' +
+            patientId ).pipe(
+            tap(getPatientChronicIllnessInfo => this.errorHandler.log('get chronic info Data')),
+            catchError(this.errorHandler.handleError<any[]>('getPatientChronicIllnessInfo'))
+        );
+    }
+
 }
 

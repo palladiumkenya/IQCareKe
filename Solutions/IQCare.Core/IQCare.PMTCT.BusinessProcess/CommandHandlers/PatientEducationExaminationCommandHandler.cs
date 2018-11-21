@@ -39,7 +39,7 @@ namespace IQCare.PMTCT.BusinessProcess.CommandHandlers
                     var breastExamId =await  _commonUnitOfWork.Repository<LookupItem>().Get(x => x.Name == "Breast Exam").Select(x => x.Id).FirstOrDefaultAsync();
                     var examinationTypeId =await  _commonUnitOfWork.Repository<LookupItemView>().Get(x => x.MasterName == "GeneralExamination").Select(x => x.MasterId).FirstOrDefaultAsync();
 
-                    PhysicalExamination breastExam = new PhysicalExamination()
+                    Core.Models.PhysicalExamination breastExam = new Core.Models.PhysicalExamination()
                     {
                         PatientId = request.PatientId,
                         PatientMasterVisitId = request.PatientMasterVisitId,
@@ -52,7 +52,7 @@ namespace IQCare.PMTCT.BusinessProcess.CommandHandlers
                     int breastExamResult = await _service.AddPatientPhysicalExamination(breastExam);
 
                     var syphillisExamId = await _commonUnitOfWork.Repository<LookupItem>().Get(x => x.Name == "Treated Syphilis").Select(x => x.Id).FirstOrDefaultAsync();
-                    PhysicalExamination syphillisExam = new PhysicalExamination()
+                    Core.Models.PhysicalExamination syphillisExam = new Core.Models.PhysicalExamination()
                     {
                         PatientId = request.PatientId,
                         PatientMasterVisitId = request.PatientMasterVisitId,
