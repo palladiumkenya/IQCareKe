@@ -70,9 +70,9 @@ export class BabyComponent implements OnInit {
 
     public AddBaby() {
 
-        if (this.babyFormGroup.get('babySex').value.itemId == '' && this.babyFormGroup.get('birthWeight').value == '') {
+        if (this.babyFormGroup.invalid) 
+              return;
 
-        } else {
             this.babyData.push({
                 sex: this.babyFormGroup.get('babySex').value.itemId,
                 birthWeight: this.babyFormGroup.get('birthWeight').value,
@@ -106,7 +106,9 @@ export class BabyComponent implements OnInit {
 
             console.log(this.babyDataTable);
             this.dataSource = new MatTableDataSource(this.babyDataTable);
-        }
+            this.babyFormGroup.reset();
+            this.babyFormGroup.clearValidators();
+        
 
     }
 
@@ -135,10 +137,10 @@ export class BabyComponent implements OnInit {
                         birthWeight:info.birthWeight,
                         outcome: info.deliveryOutcome,
                         apgarScore: info.apgarScores,
-                        resuscitate: info.resuscitationDone,
-                        deformity:  info.birthDeformity,
-                        teo:  info.teoGiven,
-                        breastFeeding:info.breastFedWithinHour,
+                        resuscitate: info.resuscitationDone ? "Yes":"No",
+                        deformity:  info.birthDeformity ? "Yes":"No",
+                        teo:  info.teoGiven ? "Yes": "No",
+                        breastFeeding:info.breastFedWithinHour ? "Yes": "No",
                         comment: info.comment,
                         notificationNumber: info.birthNotificationNumber,
                         id: info.id
@@ -195,9 +197,18 @@ export class BabyComponent implements OnInit {
     public getLookUpItemId(lookUpOptions : any [], lookupName : string): any {
         for (let index = 0; index < lookUpOptions.length; index++) {
             if(lookUpOptions[index].itemName == lookupName)
-              return lookUpOptions[index].itemId;  
+              return lookUpOptions[index];  
         }
-        return 0;
+        return null;
+    }
+
+    /**
+     * name
+     */
+    public UpdateBabyDetails() {
+        this.showEdit = false;
+        this.babyFormGroup.reset();
+        this.babyFormGroup.clearValidators();
     }
 
 
