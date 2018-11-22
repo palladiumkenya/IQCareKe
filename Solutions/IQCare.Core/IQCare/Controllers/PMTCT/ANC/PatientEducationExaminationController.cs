@@ -37,7 +37,7 @@ namespace IQCare.Controllers.PMTCT.ANC
         public async Task<IActionResult> GetPatientCounseling(int patientId, int patientMasterVisitId)
         {
             var response =
-                await _mediator.Send(new GetPatientCounsellingViewCommand { PatientId = patientId, PatientMasterVisitId = patientMasterVisitId},
+                await _mediator.Send(new GetPatientCounselingViewCommand { PatientId = patientId, PatientMasterVisitId = patientMasterVisitId},
                     HttpContext.RequestAborted);
             if (response.IsValid)
                 return Ok(response.Value);

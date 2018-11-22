@@ -9,6 +9,7 @@ import {PreventiveEmitter} from '../../emitters/PreventiveEmitter';
 import {LookupItemService} from '../../../shared/_services/lookup-item.service';
 import {NotificationService} from '../../../shared/_services/notification.service';
 import * as moment from 'moment';
+import {AncService} from '../../_services/anc.service';
 
 export interface Options {
     value: string;
@@ -28,10 +29,15 @@ export class PreventiveServicesComponent implements OnInit {
     public YesNoNaOptions: any[] = [];
     public FinalResultOptions: any[] = [];
     public maxDate: Date = moment().toDate();
+    public preventiveService$: Subscription;
+    public partnerTesting$: Subscription;
 
     @Output() nextStep = new EventEmitter<PreventiveServiceEmitter>();
     @Input() preventiveServices: PreventiveServiceEmitter;
     @Input() serviceFormOptions: any[] = [];
+    @Input('isEdit') isEdit: boolean;
+    @Input('patientId') patientId: number;
+    @Input('patientMasterVisitId') patientMasterVisitId: number;
     @Output() notify: EventEmitter<Object> = new EventEmitter<Object>();
     public preventiveServicesData: PreventiveServiceEmitter;
     public serviceData: PreventiveEmitter[] = [];
@@ -39,7 +45,8 @@ export class PreventiveServicesComponent implements OnInit {
 
     constructor(private _formBuilder: FormBuilder, private _lookupItemService: LookupItemService,
                 private  snotifyService: SnotifyService,
-                private notificationService: NotificationService) {
+                private notificationService: NotificationService,
+                private ancService: AncService ) {
     }
 
     ngOnInit() {
@@ -70,6 +77,10 @@ export class PreventiveServicesComponent implements OnInit {
         console.log('preventive service' + hivFinalResultOptions[0].itemName);
         this.notify.emit({'form': this.PreventiveServicesFormGroup, 'preventive_service_data': this.serviceData});
 
+        if (this.isEdit) {
+            this.getPatientPreventiveServiceInfo(this.patientId, this.patientMasterVisitId);
+            this.getPatientPartnerTestingInfo(this.patientId, this.patientMasterVisitId);
+        }
         /*this.getLookupItems('PreventiveService', this.services);
          this.getLookupItems('YesNo', this.yesnos);
           this.getLookupItems('HIVFinalResultsPMTCT', this.FinalResults);
@@ -93,6 +104,7 @@ export class PreventiveServicesComponent implements OnInit {
                  () => {
                      console.log(this.lookupItemView$);
                  });
+
      }*/
 
     public moveNextStep() {
@@ -144,5 +156,77 @@ export class PreventiveServicesComponent implements OnInit {
 
     public removeRow(idx) {
         this.serviceData.splice(idx, 1);
+    }
+
+    public getPatientPreventiveServiceInfo(patientId: number, patientMasterVisitId: number) {
+        this.preventiveService$ = this.ancService.getPatientPreventiveServiceInfo(patientId)
+            .subscribe(
+                p => {
+
+                    const service = p;
+                    console.log('preventiveservice ');
+                    console.log(service);
+                    const myService = service.filter(x => x.patientMasterVisitId == patientMasterVisitId);
+
+                    console.log(myService);
+                    if (myService.length > 0) {
+                        for (let i = 0; i < myService.length; i ++) {
+                            this.serviceData.push({
+                                preventiveService: myService[i]['preventiveService'],
+                                preventiveServiceId: myService[i]['preventiveServiceId'],
+                                dateGiven: myService[i]['preventiveServiceDate'],
+                                comments: myService[i]['description'],
+                                nextSchedule: myService[i]['nextSchedule'],
+                            });
+                        }
+                    }
+                    const insecticide = myService.filter(x => x.description == 'Insecticide treated nets given');
+                    const exercise = myService.filter(x => x.description == 'Antenatal exercise');
+
+                    if (insecticide.length > 0) {
+                        this.PreventiveServicesFormGroup.get('insecticideTreatedNet').setValue(insecticide[0]['preventiveServiceId']);
+                        this.PreventiveServicesFormGroup.get('insecticideTreatedNetGivenDate').setValue(insecticide[0]
+                            ['preventiveServiceDate']);
+                    }
+
+                    if (exercise.length > 0) {
+                        this.PreventiveServicesFormGroup.get('antenatalExercise').setValue(exercise[0]['preventiveServiceId']);
+                    }
+                    console.log(insecticide);
+                    console.log(exercise);
+                },
+                (err) => {
+                    console.log(err);
+                    this.snotifyService.error('Error loading Preventive Services ' + err, 'WHO', this.notificationService.getConfig());
+                },
+                () => {
+                    console.log(this.lookupItemView$);
+                });
+    }
+
+    public getPatientPartnerTestingInfo(patientId: number, patientMasterVisitId: number) {
+        this.partnerTesting$ = this.ancService.getPatientPartnerTestingInfo(patientId)
+            .subscribe(
+                p => {
+
+                    const service = p;
+
+                    const partnerTesting = service.filter(x => x.patientMasterVisitId == patientMasterVisitId);
+                    console.log('partner testing');
+
+                    console.log(partnerTesting);
+
+                    if (partnerTesting.length > 0) {
+                        this.PreventiveServicesFormGroup.get('PartnerTestingVisit').setValue(partnerTesting[0]['partnerTested']);
+                        this.PreventiveServicesFormGroup.get('finalHIVResult').setValue(partnerTesting[0]['partnerHIVResult']);
+                    }
+                },
+                (err) => {
+                    console.log(err);
+                    this.snotifyService.error('Error loading Partner testing data ' + err, 'WHO', this.notificationService.getConfig());
+                },
+                () => {
+                    console.log(this.lookupItemView$);
+                });
     }
 }

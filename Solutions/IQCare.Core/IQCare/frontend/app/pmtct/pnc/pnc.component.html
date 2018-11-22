@@ -33,17 +33,20 @@
 
                                         <!-- add Maternity History Component to Stepper -->
                                         <app-pnc-maternalhistory (notify)="onMaternalHistoryNotify($event)"
-                                            [matHistoryOptions]="matHistoryOptions" [patientId]="patientId">
+                                            [matHistoryOptions]="matHistoryOptions" [patientId]="patientId" [isEdit]="isEdit"
+                                            [patientMasterVisitId]="patientMasterVisitId">
                                         </app-pnc-maternalhistory>
 
                                         <!-- add PostNatal Examination Component to Stepper -->
                                         <app-pnc-postnatalexam (notify)="onPostNatalExamNotify($event)"
-                                            [postNatalExamOptions]="postNatalExamOptions">
+                                            [postNatalExamOptions]="postNatalExamOptions" [patientId]="patientId"
+                                            [isEdit]="isEdit" [patientMasterVisitId]="patientMasterVisitId">
                                         </app-pnc-postnatalexam>
 
                                         <!-- add Baby Examination Component to Stepper -->
                                         <app-pnc-babyexamination (notify)="onBabyExaminationNotify($event)"
-                                            [babyExaminationOptions]="babyExaminationOptions">
+                                            [babyExaminationOptions]="babyExaminationOptions" [patientId]="patientId"
+                                            [isEdit]="isEdit" [patientMasterVisitId]="patientMasterVisitId">
                                         </app-pnc-babyexamination>
 
                                         <div class="row">
@@ -59,7 +62,9 @@
                                         </ng-template>
 
                                         <!-- add Hiv Status Component to Stepper -->
-                                        <app-pnc-hivtesting (notify)="onHivStatusNotify($event)" [pncHivOptions]="pncHivOptions">
+                                        <app-pnc-hivtesting (notify)="onHivStatusNotify($event)" [pncHivOptions]="pncHivOptions"
+                                            [patientId]="patientId" [isEdit]="isEdit" [patientMasterVisitId]="patientMasterVisitId"
+                                            [patientEncounterId]="patientEncounterId">
                                         </app-pnc-hivtesting>
 
                                         <div class="row">

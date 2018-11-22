@@ -39,6 +39,7 @@ export class PatientEducationExaminationComponent implements OnInit {
     public maxDate: Date = moment().toDate();
 
     public patientCounseling$: Subscription;
+    public physicalExam$: Subscription;
 
     public patientEducationEmitterData: PatientEducationEmitter;
     public counsellingOptions: any[] = [];
@@ -93,6 +94,7 @@ export class PatientEducationExaminationComponent implements OnInit {
         if (this.isEdit) {
 
             this.getPatientCounselingData(this.PatientId, this.PatientMasterVisitId);
+            this.getPatientExaminationData(this.PatientId, this.PatientMasterVisitId);
         }
     }
 
@@ -176,4 +178,35 @@ export class PatientEducationExaminationComponent implements OnInit {
                  }
              );
     }
+
+    public getPatientExaminationData(patientId: number, patientMasterVisitId: number): void {
+        this.physicalExam$ = this.ancService.getPatientPhysicalExaminationInfo(patientId, patientMasterVisitId)
+            .subscribe(
+                p => {
+                    console.log(p);
+                    const education = p;
+                    if (p) {
+                        const breastExam = education.filter(x => x.examinationType == 'GeneralExamination' && x.exam == 'Breast Exam');
+                        const syphilis = education.filter(x => x.examinationType == 'GeneralExamination' && x.exam == 'Treated Syphilis');
+
+                        if (breastExam.length > 0) {
+                            this.PatientEducationFormGroup.get('breastExamDone').setValue(breastExam[0]['findingId']);
+                        }
+
+                        if (syphilis.length > 0) {
+                            this.PatientEducationFormGroup.get('breastExamDone').setValue(syphilis[0]['findingId']);
+                        }
+                    }
+                },
+                (err) => {
+                    console.log(err);
+                },
+                () => {
+
+                }
+            );
+    }
+
+
+
 }

@@ -26,27 +26,28 @@
                                     <div class="col-lg-3 col-sm-3 col-xs-12">
                                         <mat-form-field>
                                             <input matInput placeholder="First Name" formControlName="FirstName" id="firstName"
-                                                name="firstName" tabindex="2" required>
+                                                name="firstName" tabindex="2" (change)="checkDuplicates()" required>
                                         </mat-form-field>
                                     </div>
 
                                     <div class="col-lg-3 col-sm-3 col-xs-12">
                                         <mat-form-field>
                                             <input matInput placeholder="Middle Name" formControlName="MiddleName" id="middleName"
-                                                name="middleName" tabindex="3">
+                                                name="middleName" (change)="checkDuplicates()" tabindex="3">
                                         </mat-form-field>
                                     </div>
 
                                     <div class="col-lg-3 col-sm-3 col-xs-12">
                                         <mat-form-field>
                                             <input matInput placeholder="Last Name" formControlName="LastName" id="lastName"
-                                                name="lastName" tabindex="4">
+                                                name="lastName" (change)="checkDuplicates()" tabindex="4">
                                         </mat-form-field>
                                     </div>
 
                                     <div class="col-lg-3 col-sm-3 col-xs-12">
                                         <mat-form-field>
-                                            <mat-select placeholder="Gender" formControlName="Sex" tabindex="5">
+                                            <mat-select placeholder="Gender" formControlName="Sex" tabindex="5"
+                                                (change)="checkDuplicates()">
                                                 <mat-option></mat-option>
                                                 <mat-option *ngFor="let option of gender" [value]="option.itemId">{{option.itemName}}</mat-option>
                                             </mat-select>
@@ -59,7 +60,8 @@
                                         <mat-form-field>
                                             <input placeholder="Date Of Birth" matInput [matDatepicker]="dateOfBirthDatepicker"
                                                 [max]="maxDate" (focus)="dateOfBirthDatepicker.open()" formControlName="DateOfBirth"
-                                                (dateInput)="onDate($event)" tabindex="6" required>
+                                                (dateInput)="onDate($event)" (dateChange)="checkDuplicates()" tabindex="6"
+                                                required>
                                             <mat-datepicker-toggle matSuffix [for]="dateOfBirthDatepicker"></mat-datepicker-toggle>
                                             <mat-datepicker #dateOfBirthDatepicker name="DateOfBirth" ngDefaultControl></mat-datepicker>
                                         </mat-form-field>
@@ -68,14 +70,16 @@
                                     <div class="col-lg-3 col-sm-3 col-xs-12">
                                         <mat-form-field>
                                             <input matInput placeholder="Age Years" formControlName="AgeYears" id="ageYears"
-                                                name="ageYears" (keyup)="estimateDob()" required>
+                                                name="ageYears" (keyup)="estimateDob()" (change)="checkDuplicates()"
+                                                required>
                                         </mat-form-field>
                                     </div>
 
                                     <div class="col-lg-3 col-sm-3 col-xs-12">
                                         <mat-form-field>
                                             <input matInput placeholder="Age Months" formControlName="AgeMonths" id="ageMonths"
-                                                name="ageMonths" (keyup)="estimateDob()" required>
+                                                name="ageMonths" (keyup)="estimateDob()" (change)="checkDuplicates()"
+                                                required>
                                         </mat-form-field>
                                     </div>
 

@@ -5,7 +5,7 @@ using MediatR;
 
 namespace IQCare.PMTCT.BusinessProcess.Commands.Education
 {
-    public class GetPatientCounsellingViewCommand: IRequest<Result<List<PatientCounsellingView>>>
+    public class GetPatientCounselingViewCommand: IRequest<Result<List<PatientCounsellingView>>>
     {
         public int PatientId { get; set; }
         public int PatientMasterVisitId { get; set; }

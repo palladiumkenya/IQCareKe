@@ -1,3 +1,4 @@
+import { CheckDuplicatesComponent } from './../check-duplicates/check-duplicates.component';
 import { forkJoin } from 'rxjs';
 import { LookupItemView } from './../../../shared/_models/LookupItemView';
 import { County } from '../../_models/county';
@@ -19,6 +20,8 @@ import { CountyService } from '../../_services/county.service';
 import { PersonRegistrationService } from '../../_services/person-registration.service';
 import { PersoncontactsComponent } from '../personcontacts/personcontacts.component';
 import { RecordsService } from '../../_services/records.service';
+import { SearchService } from '../../_services/search.service';
+import { Search } from '../../_models/search';
 
 @Component({
     selector: 'app-register',
@@ -54,6 +57,8 @@ export class RegisterComponent implements OnInit {
     personIdentifiers: any[];
     yesnoOptions: LookupItemView[];
 
+    clientSearch: Search;
+
     dataSource: any[];
     newContacts: any[];
     id: number;
@@ -69,8 +74,10 @@ export class RegisterComponent implements OnInit {
         private dialog: MatDialog,
         private recordsService: RecordsService,
         public zone: NgZone,
-        private router: Router) {
+        private router: Router,
+        private searchService: SearchService) {
         this.maxDate = new Date();
+        this.clientSearch = new Search();
     }
 
     ngOnInit() {
@@ -281,6 +288,16 @@ export class RegisterComponent implements OnInit {
             this.snotifyService.error('Age in months should not be negative', 'Registration', this.notificationService.getConfig());
             this.formArray['controls'][0]['controls']['AgeMonths'].setValue('');
             return;
+        }
+
+        if (ageMonths > 11) {
+            this.snotifyService.error('Age in months should not be more than 11', 'Registration', this.notificationService.getConfig());
+            this.formArray['controls'][0]['controls']['AgeMonths'].setValue('');
+            return;
+        }
+
+        if (!ageMonths) {
+            this.formArray['controls'][0]['controls']['AgeMonths'].setValue(0);
         }
 
         const today = new Date();
@@ -494,6 +511,57 @@ export class RegisterComponent implements OnInit {
         } else {
             this.formGroup.controls['formArray']['controls'][0]['controls']['IdentifierNumber'].disable({ onlySelf: true });
             this.formGroup.controls['formArray']['controls'][0]['controls']['IdentifierNumber'].setValue('');
+        }
+    }
+
+    public checkDuplicates() {
+        const firstName = this.formGroup.controls['formArray']['controls'][0]['controls']['FirstName'].value;
+        const middleName = this.formGroup.controls['formArray']['controls'][0]['controls']['MiddleName'].value;
+        const lastName = this.formGroup.controls['formArray']['controls'][0]['controls']['LastName'].value;
+        const gender = this.formGroup.controls['formArray']['controls'][0]['controls']['Sex'].value;
+        const dateOfBirth = this.formGroup.controls['formArray']['controls'][0]['controls']['DateOfBirth'].value;
+
+        this.clientSearch.firstName = firstName == null ? '' : firstName;
+        this.clientSearch.middleName = middleName == null ? '' : middleName;
+        this.clientSearch.lastName = lastName == null ? '' : lastName;
+        this.clientSearch.identifierValue = '';
+        this.clientSearch.mobileNumber = '';
+        this.clientSearch.dateOfBirth = dateOfBirth;
+        this.clientSearch.sex = gender;
+
+        if (firstName && lastName && gender && dateOfBirth) {
+            this.searchService.searchClient(this.clientSearch).subscribe(
+                (result) => {
+                    console.log(result['personSearch']);
+                    if (result && result['personSearch'] && result['personSearch'].length > 0) {
+                        const dialogConfig = new MatDialogConfig();
+
+                        dialogConfig.disableClose = true;
+                        dialogConfig.autoFocus = true;
+                        dialogConfig.height = '90%';
+                        dialogConfig.width = '80%';
+
+                        dialogConfig.data = {
+                            'persons': result['personSearch']
+                        };
+
+                        const dialogRef = this.dialog.open(CheckDuplicatesComponent, dialogConfig);
+
+                        dialogRef.afterClosed().subscribe(
+                            data => {
+                                if (!data) {
+                                    return;
+                                }
+
+                                console.log(data);
+                                this.zone.run(() => {
+                                    this.router.navigate(['/dashboard/personhome/' + data[0]['id']], { relativeTo: this.route });
+                                });
+                            }
+                        );
+                    }
+                }
+            );
         }
     }
 }

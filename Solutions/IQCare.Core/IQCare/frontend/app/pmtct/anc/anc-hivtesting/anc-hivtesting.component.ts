@@ -100,6 +100,17 @@ export class AncHivtestingComponent implements OnInit {
             this.HivTestingForm.controls['finalTestResult'].setValue('');
         }
     }
+
+    onHivStatusBeforeFirstVisitChange(event) {
+        console.log(event);
+        if (event.isUserInput && event.source.selected && event.source.viewValue == 'Known Positive') {
+            this.HivTestingForm.controls['hivTestingDone'].disable({ onlySelf: true });
+            this.HivTestingForm.controls['testType'].disable({ onlySelf: true });
+            this.HivTestingForm.controls['finalTestResult'].disable({ onlySelf: true });
+        } else if (event.isUserInput && event.source.selected) {
+            this.HivTestingForm.controls['hivTestingDone'].enable();
+        }
+    }
 }
 
 export interface HivTestingTableData {

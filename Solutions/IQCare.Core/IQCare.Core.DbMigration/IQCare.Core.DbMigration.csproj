@@ -14,6 +14,7 @@
     <None Remove="Scripts\1.0.0.8\HEI\PatientMilestone.sql" />
     <None Remove="Scripts\1.0.0.8\HEI\Vaccination.sql" />
     <None Remove="Scripts\1.0.0.8\MATERNITY\12_Insert_MaternityEncounter.sql" />
+    <None Remove="Scripts\1.0.0.8\MATERNITY\Insert_Baby_Birth_Outcome_Lookup - Copy.sql" />
     <None Remove="Scripts\1.0.0.8\MATERNITY\Insert_Drug_Administration_Lookup.sql" />
     <None Remove="Scripts\1.0.0.8\PMTCT\01_Insert_PNC_LookUp_Data.sql" />
     <None Remove="Scripts\1.0.0.8\PMTCT\02_Create_Table_PatientCounselling.sql" />
@@ -87,6 +88,9 @@
     <None Remove="Scripts\1.0.0.9\49_DO_AlterView_vw_FamilyTestingRegister.sql" />
     <None Remove="Scripts\1.0.0.9\50_DO_AlterView_vw_HIVTesting_Services_Referral_Linkage_Register.sql" />
     <None Remove="Scripts\1.0.0.9\51_DO_AlterView_vw_PartnerNotificationRegister.sql" />
+    <None Remove="Scripts\1.0.0.9\52_SO_CreateView_PatientCounsellingView.sql" />
+    <None Remove="Scripts\1.0.0.9\53_SO_CreateView_PatientExaminationView.sql" />
+    <None Remove="Scripts\1.0.0.9\54_SO_CreateView_pmtctPatientScreeningView.sql" />
     <None Remove="Scripts\2.0.0\01_SO_IQCare_Version.sql" />
     <None Remove="Scripts\2.0.0\02_DO_AlterView_PatientDeliveryInfo.sql" />
   </ItemGroup>
@@ -100,6 +104,7 @@
     <EmbeddedResource Include="Scripts\1.0.0.8\HEI\PatientMilestone.sql" />
     <EmbeddedResource Include="Scripts\1.0.0.8\HEI\Vaccination.sql" />
     <EmbeddedResource Include="Scripts\1.0.0.8\MATERNITY\12_Insert_MaternityEncounter.sql" />
+    <EmbeddedResource Include="Scripts\1.0.0.8\MATERNITY\Insert_Baby_Birth_Outcome_Lookup - Copy.sql" />
     <EmbeddedResource Include="Scripts\1.0.0.8\MATERNITY\Insert_Drug_Administration_Lookup.sql" />
     <EmbeddedResource Include="Scripts\1.0.0.8\PMTCT\01_Insert_PNC_LookUp_Data.sql" />
     <EmbeddedResource Include="Scripts\1.0.0.8\PMTCT\02_Create_Table_PatientCounselling.sql" />
@@ -179,6 +184,9 @@
     <EmbeddedResource Include="Scripts\1.0.0.9\49_DO_AlterView_vw_FamilyTestingRegister.sql" />
     <EmbeddedResource Include="Scripts\1.0.0.9\50_DO_AlterView_vw_HIVTesting_Services_Referral_Linkage_Register.sql" />
     <EmbeddedResource Include="Scripts\1.0.0.9\51_DO_AlterView_vw_PartnerNotificationRegister.sql" />
+    <EmbeddedResource Include="Scripts\1.0.0.9\52_SO_CreateView_PatientCounsellingView.sql" />
+    <EmbeddedResource Include="Scripts\1.0.0.9\53_SO_CreateView_PatientExaminationView.sql" />
+    <EmbeddedResource Include="Scripts\1.0.0.9\54_SO_CreateView_pmtctPatientScreeningView.sql" />
     <EmbeddedResource Include="Scripts\2.0.0\01_SO_IQCare_Version.sql" />
     <EmbeddedResource Include="Scripts\2.0.0\02_DO_AlterView_PatientDeliveryInfo.sql" />
   </ItemGroup>

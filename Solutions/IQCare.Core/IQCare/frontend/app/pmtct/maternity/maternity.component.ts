@@ -76,6 +76,7 @@ export class MaternityComponent implements OnInit {
     yesnoOptions: LookupItemView[] = [];
     genderOptions: LookupItemView[] = [];
     deliveryOutcomeOptions: LookupItemView[] = [];
+    birthoutcomeOptions: LookupItemView[] = [];
     yesNoNaOptions: LookupItemView[] = [];
     referralOptions: LookupItemView[] = [];
     hivFinalResultOptions: LookupItemView[] = [];
@@ -145,6 +146,7 @@ export class MaternityComponent implements OnInit {
                 yesNoOptions,
                 genderOptions,
                 deliveryOutcomeOptions,
+                birthOutcomeOptions,
                 yesNoNaOptions,
                 referralOptions,
                 hivFinalResultOptions,
@@ -163,6 +165,7 @@ export class MaternityComponent implements OnInit {
             this.yesnoOptions = yesNoOptions['lookupItems'];
             this.genderOptions = genderOptions['lookupItems'];
             this.deliveryOutcomeOptions = deliveryOutcomeOptions['lookupItems'];
+            this.birthoutcomeOptions = birthOutcomeOptions['lookupItems'];
             this.referralOptions = referralOptions['lookupItems'];
             this.hivFinalResultOptions = hivFinalResultOptions['lookupItems'];
             this.hivTestOptions = hivTestOptions['lookupItems'];
@@ -189,6 +192,7 @@ export class MaternityComponent implements OnInit {
         this.babySectionOptions.push({
             'gender': this.genderOptions,
             'deliveryOutcomes': this.deliveryOutcomeOptions,
+            'birthOutcomes': this.birthoutcomeOptions,
             'yesNos': this.yesNoOptions
         });
 

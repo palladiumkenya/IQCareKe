@@ -65,6 +65,7 @@ namespace IQCare.Controllers.PMTCT.ANC
         [HttpDelete("{id}")]
         public void Delete(int id)
         {
+
         }
     }
 }

@@ -14,7 +14,7 @@
                 <mat-select formControlName="onArvBeforeANCVisit" placeholder="On ARV before 1st ANC Visit" required
                             minlength="0">
                     <mat-option value="0"> Select</mat-option>
-                    <mat-option *ngFor="let yesnonaOption of yesnonaOptions" [value]="yesnonaOption.itemId">
+                    <mat-option *ngFor="let yesnonaOption of yesnonaOptions" [value]="yesnonaOption.itemId" >
                         {{yesnonaOption.itemName}}
                     </mat-option>
                 </mat-select>
@@ -24,7 +24,7 @@
             <mat-form-field class="col-md-12">
                 <mat-select formControlName="startedHaartANC" placeholder="Started HAART in ANC" required minlength="0">
                     <mat-option value="0"> Select</mat-option>
-                    <mat-option *ngFor="let yesnonaOption of yesnonaOptions" [value]="yesnonaOption.itemId">
+                    <mat-option *ngFor="let yesnonaOption of yesnonaOptions" [value]="yesnonaOption.itemId" >
                         {{yesnonaOption.itemName}}
                     </mat-option>
                 </mat-select>
@@ -78,7 +78,7 @@
                 <mat-form-field class="col-md-12">
                     <mat-select formControlName="otherIllness" placeholder="Do the patient have other illnesses?" >
                         <mat-option value="0"> Select</mat-option>
-                        <mat-option *ngFor="let yesnonaOption of yesnonaOptions" [value]="yesnonaOption.itemId" (onSelectionChange)="onChangeOtherIllness($event)" >
+                        <mat-option *ngFor="let yesnonaOption of yesnonaOptions" [value]="yesnonaOption.itemId" >
                             {{yesnonaOption.itemName}}
                         </mat-option>
                     </mat-select>

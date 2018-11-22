@@ -12,7 +12,7 @@ using Serilog;
 
 namespace IQCare.PMTCT.BusinessProcess.CommandHandlers.Education
 {
-    public class GetPatientCounsellingViewCommandHandler: IRequestHandler<GetPatientCounsellingViewCommand, Result<List<PatientCounsellingView>>>
+    public class GetPatientCounsellingViewCommandHandler: IRequestHandler<GetPatientCounselingViewCommand, Result<List<PatientCounsellingView>>>
     {
         private readonly IPmtctUnitOfWork _unitOfWork;
 
@@ -21,7 +21,7 @@ namespace IQCare.PMTCT.BusinessProcess.CommandHandlers.Education
             _unitOfWork = unitOfWork ?? throw new ArgumentException(nameof(unitOfWork));
         }
 
-        public async Task<Result<List<PatientCounsellingView>>> Handle(GetPatientCounsellingViewCommand request, CancellationToken cancellationToken)
+        public async Task<Result<List<PatientCounsellingView>>> Handle(GetPatientCounselingViewCommand request, CancellationToken cancellationToken)
         {
             using (_unitOfWork)
             {

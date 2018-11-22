@@ -25,7 +25,8 @@ export class SearchService {
         return this.http.get<any[]>(this.API_URL + '/records/api/Register/searchpersonlist'
             + '?IdentifierValue=' + clientSearch.identifierValue + '&FirstName=' + clientSearch.firstName +
             '&MiddleName=' + clientSearch.middleName + '&LastName=' + clientSearch.lastName +
-            '&MobileNumber=' + clientSearch.mobileNumber).pipe(
+            '&MobileNumber=' + clientSearch.mobileNumber + '&DateOfBirth=' + clientSearch.dateOfBirth +
+            '&Sex=' + clientSearch.sex).pipe(
                 tap((searchClient: any) => this.errorHandler.log(`search client`)),
                 catchError(this.errorHandler.handleError<any>('searchClient'))
             );
