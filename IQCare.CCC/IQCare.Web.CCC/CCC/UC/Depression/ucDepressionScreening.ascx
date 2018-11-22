@@ -1,10 +1,25 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="ucDepressionScreening.ascx.cs" Inherits="IQCare.Web.CCC.UC.Depression.ucDepressionScreening" %>
 <style>
-    .rbList{float: right;}
-    .rbList input{margin-left: 5px;}
+    .rbListDepression{float: right;}
+    .rbListDepression input{margin-left: 5px;}
     .depression-results{padding-top: 10px;padding-bottom: 10px;}
 </style>
 <div class="col-md-12 form-group">
+  
+    <div class="col-md-12" id="PatientVisitDate" data-parsley-validate="true" data-show-errors="true">
+            
+            <div class="col-md-12"><label class="required control-label pull-left">Visit Date</label></div>
+
+            <div class="col-md-4 form-group">
+                <div class='input-group date' id='VisitDatedatepicker'>
+                    <span class="input-group-addon">
+                        <span class="glyphicon glyphicon-calendar"></span>
+                    </span>
+                    <asp:TextBox runat="server" ClientIDMode="Static" CssClass="form-control input-sm" ID="PersonVisitDate" data-parsley-required="true" onblur="DateFormat(this,this.value,event,false,'3')" onkeyup="DateFormat(this,this.value,event,false,'3')"></asp:TextBox>        
+                </div>
+            </div>
+        </div>
+      
 	<div class="col-md-12" id="depressionscreening">
 		<div class="panel panel-info">
 			<div class="panel-body">
@@ -58,25 +73,210 @@
 				</div>
 			</div>
 		</div>
-	</div>
-</div>
-<script type="text/javascript">
-    var currentStep;
-    $("#scmyWizard").on("actionclicked.fu.wizard", function (evt, data) {
-        currentStep = data.step;
-        if (currentStep == 1) {
-            addUpdateDepressionScreeningData();
-        }
-    });
 
-    function addUpdateDepressionScreeningData()
-    {
-        var error = 0;
-        $(".rbList").each(function () {
+        <button type="button" id="submitdata" class="btn btn-primary btn-next" data-last="Complete"/>
+	</div>
+      
+</div>
+<script type="text/javascript"> 
+    var contain = "";
+    var Answers = new Array;
+    var VisitDate = "<%=VisitDate%>";
+
+    
+
+    $(document).ready(function () {
+        $('#VisitDatedatepicker').datetimepicker({
+        format: 'DD-MMM-YYYY',
+            date: VisitDate,
+           allowInputToggle: true,
+           useCurrent: false
+
+});
+     
+     $('#VisitDatedatepicker').datetimepicker({
+            format: 'DD-MMM-YYYY',
+           allowInputToggle: true,
+           useCurrent: false
+        });
+
+
+        $('#VisitDatedatepicker').on('dp.change', function (e) {
+
+              if( !e.oldDate || !e.date.isSame(e.oldDate, 'day')){
+                 $(this).data('DateTimePicker').hide();
+                 }
+
+            var vDate = moment($("#PersonVisitDate").val(), 'DD-MMM-YYYYY').toDate();
+            var validDateOfVisit = moment(vDate).isBefore(enrollmentDate);
+            var futuredate = moment(vDate).isAfter(new Date());
+            if (futuredate) {
+                $("#<%=PersonVisitDate.ClientID%>").val('');
+                toastr.error("Future dates not allowed!");
+               
+                return false;
+            }
+            if (validDateOfVisit) {
+                toastr.error("VISIT date CANNOT be before ENROLLMENT date");
+                $("#<%=PersonVisitDate.ClientID%>").val('');
+                return false;
+            }
+
+        });
+
+        $("#submitdata").click(function () {
+
+            if ($('#PatientVisitDate').parsley().validate()) {
+                var dob = $("#<%=PersonVisitDate.ClientID%>").val();
+                if (moment('' + dob + '').isAfter()) {
+                    toastr.error("Visit date cannot be a future date.");
+                    return false;
+                } 
+          $('#VisitDatedatepicker').data('DateTimePicker').hide();
+                    
+                    checkifFieldsHavevalue();
+                    var values = Answers.filter((x) => {return x.value.length > 0})
+                if (values != null) {
+                    if (values.length > 0) {
+                        addDepressionScreeningEncounter(dob);
+                    }
+                    else {
+                        toastr.info("No data Saved since Fields are empty");
+                        window.location.href = '<%=ResolveClientUrl("~/CCC/patient/patientHome.aspx") %>';
+                    }
+
+
+                }
+                else {
+                    return;
+                }
+                   //addUpdateDepressionScreeningData();
+                  //getDepressionScreeningData();                   
+                
+            } 
+       
+       
+        
+        });
+     var enrollmentDate = "<%=DateOfEnrollment%>";
+    //var currentStep;
+    //$("#scmyWizard").on("actionclicked.fu.wizard", function (evt, data) {
+    //    currentStep = data.step;
+    //    if (currentStep == 1) {
+    //        addUpdateDepressionScreeningData();
+    //        getDepressionScreeningData();
+    //    }
+    //});
+
+
+
+    });
+    function checkifFieldsHavevalue() {
+        
+        $(".rbListDepression").each(function () {
             var screeningValue = 0;
             var screeningType = <%=screenTypeId%>;
             var patientId = <%=PatientId%>;
             var patientMasterVisitId = <%=PatientMasterVisitId%>;
+            var userId = <%=userId%>;
+            var screeningCategory = $(this).attr('id');
+            var checkedValue = $('#' + screeningCategory + ' input[type=radio]:checked').val();
+            if (typeof checkedValue != 'undefined') {
+                screeningValue = checkedValue;
+            }
+            if (screeningValue > 0) {
+
+                Answers.push({ 'Id': screeningCategory, 'value': screeningValue });
+            }
+
+        });
+        $("#depressionscreening input[type=text]").each(function () {
+            var categoryId = ($(this).attr('id')).replace('notes', '');
+            var patientId = <%=PatientId%>;
+            var patientMasterVisitId = <%=PatientMasterVisitId%>;
+            var clinicalNotes = $(this).val();
+            var serviceAreaId = 203;
+            var userId = <%=userId%>;
+
+
+            Answers.push({ 'Id': categoryId, 'value': clinicalNotes});
+        });
+       
+
+       
+    }
+
+    function addDepressionScreeningEncounter (visitDate ) {
+        var patientId = <%=PatientId%>;
+     var dateOfVisit = $("#PersonVisitDate").val();
+        var ServiceAreaId = <%=serviceAreaId%>;
+        var EncounterType = "DepressionScreening";
+        var userId = <%=userId%>;
+        var patientMasterVisitId = <%=PatientMasterVisitId%>;
+            $.ajax({
+               
+                type: "POST",
+                url: "../WebService/PatientScreeningService.asmx/GetPatientMasterVisitId",
+                data: "{'PatientId': '" + patientId + "','ServiceAreaId':'"+ServiceAreaId+"','UserId':'"+userId+"','EncounterType':'"+EncounterType+"','visitDate': '" + dateOfVisit + "'}",
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+             success: function (response) {
+                
+                 var res = JSON.parse(response.d);
+                 if (res.Result > 0) {
+
+                     var result = res.Result;
+                    
+                     toastr.success(res.Msg);
+                   
+                    
+                     addUpdateDepressionScreeningData(result);
+                 }
+
+                },
+                error: function (response) {
+                    error = 1;
+                    toastr.error("Depression Screening not Saved");
+                    window.location.href = '<%=ResolveClientUrl("~/CCC/patient/patientHome.aspx") %>';
+
+
+                }
+        });
+    }
+
+    function getDepressionScreeningData() {
+       
+          var patientId = <%=PatientId%>;
+            var patientMasterVisitId = <%=PatientMasterVisitId%>;
+        var userId = <%=userId%>;
+
+        $.ajax({
+               
+                type: "POST",
+                url: "../WebService/PatientScreeningService.asmx/GetDepressionScreeningData",
+                data: "{'PatientId': '" + patientId + "','PatientMasterVisitId': '" + patientMasterVisitId + "'}",
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+             success: function (response) {
+                 debugger;
+                 var res = response.d;
+                    console.log(Json.Parse(response.d));
+              
+
+                },
+                error: function (response) {
+                    error = 1;
+                }
+            });
+    }
+    function addUpdateDepressionScreeningData(mastervisitid)
+    {
+        var error = 0;
+        $(".rbListDepression").each(function () {
+            var screeningValue = 0;
+            var screeningType = <%=screenTypeId%>;
+            var patientId = <%=PatientId%>;
+            var patientMasterVisitId =mastervisitid;
             var userId = <%=userId%>;
             var screeningCategory = $(this).attr('id');
             var checkedValue = $('#' + screeningCategory + ' input[type=radio]:checked').val();
@@ -101,7 +301,8 @@
         $("#depressionscreening input[type=text]").each(function () {
             var categoryId = ($(this).attr('id')).replace('notes', '');
             var patientId = <%=PatientId%>;
-            var patientMasterVisitId = <%=PatientMasterVisitId%>;
+            var patientMasterVisitId = mastervisitid;
+      
             var clinicalNotes = $(this).val();
             var serviceAreaId = 203;
             var userId = <%=userId%>;
@@ -121,6 +322,7 @@
         });
         if (error == 0) {
             toastr.success("Depression Screening Saved");
+           window.location.href = '<%=ResolveClientUrl("~/CCC/patient/patientHome.aspx") %>';
         }
     }
 

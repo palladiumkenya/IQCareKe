@@ -20136,34 +20136,7 @@
     <ListName>ENTConditions</ListName>
   </Mst_Decode>
   <Mst_Decode>
-    <ID>1659</ID>
-    <Name>Under 5</Name>
-    <CodeID>1184</CodeID>
-    <SRNo>1</SRNo>
-    <DeleteFlag>0</DeleteFlag>
-    <SystemId>0</SystemId>
-    <ListName>Payment Exemption</ListName>
-  </Mst_Decode>
-  <Mst_Decode>
-    <ID>1660</ID>
-    <Name>Maternity</Name>
-    <CodeID>1184</CodeID>
-    <SRNo>1</SRNo>
-    <DeleteFlag>0</DeleteFlag>
-    <SystemId>0</SystemId>
-    <ListName>Payment Exemption</ListName>
-  </Mst_Decode>
-  <Mst_Decode>
-    <ID>1661</ID>
-    <Name>Prisoner</Name>
-    <CodeID>1184</CodeID>
-    <SRNo>1</SRNo>
-    <DeleteFlag>0</DeleteFlag>
-    <SystemId>0</SystemId>
-    <ListName>Payment Exemption</ListName>
-  </Mst_Decode>
-  <Mst_Decode>
-    <ID>1662</ID>
+    <ID>1656</ID>
     <Name>Well</Name>
     <CodeID>1186</CodeID>
     <SRNo>1</SRNo>
@@ -23260,7 +23233,7 @@
     <ListName>ServiceRegisteredForAtPharmacy</ListName>
   </Mst_Decode>
   <Mst_Decode>
-    <ID>1663</ID>
+    <ID>1657</ID>
     <Name>Advance HIV Disease</Name>
     <CodeID>1186</CodeID>
     <SRNo>2</SRNo>
@@ -23358,7 +23331,7 @@
     <ListName>IPTAdherence</ListName>
   </Mst_Decode>
   <Mst_Decode>
-    <ID>1664</ID>
+    <ID>1658</ID>
     <Name>Stable</Name>
     <CodeID>1186</CodeID>
     <SRNo>3</SRNo>
@@ -25385,7 +25358,7 @@
     <ListName>IPTDiscontinued</ListName>
   </Mst_Decode>
   <Mst_Decode>
-    <ID>1665</ID>
+    <ID>1659</ID>
     <Name>Unstable</Name>
     <CodeID>1186</CodeID>
     <SRNo>4</SRNo>
@@ -30868,6 +30841,14 @@
     <SystemID>0</SystemID>
   </Mst_Feature>
   <Mst_Feature>
+    <FeatureId>239</FeatureId>
+    <FeatureName>Billing Reversal Approval</FeatureName>
+    <ReportFlag>0</ReportFlag>
+    <DeleteFlag>0</DeleteFlag>
+    <AdminFlag>1</AdminFlag>
+    <SystemID>0</SystemID>
+  </Mst_Feature>
+  <Mst_Feature>
     <FeatureId>240</FeatureId>
     <FeatureName>Billing Quick Panel</FeatureName>
     <ReportFlag>0</ReportFlag>
@@ -31262,14 +31243,6 @@
   <Mst_Feature>
     <FeatureId>305</FeatureId>
     <FeatureName>Configure Custom Lists</FeatureName>
-    <ReportFlag>0</ReportFlag>
-    <DeleteFlag>0</DeleteFlag>
-    <AdminFlag>1</AdminFlag>
-    <SystemID>0</SystemID>
-  </Mst_Feature>
-  <Mst_Feature>
-    <FeatureId>306</FeatureId>
-    <FeatureName>Billing Reversal Approval</FeatureName>
     <ReportFlag>0</ReportFlag>
     <DeleteFlag>0</DeleteFlag>
     <AdminFlag>1</AdminFlag>
@@ -125478,7 +125451,7 @@
   </Users>
   <Users>
     <UserId>13</UserId>
-    <SystemUserName>vogoti</SystemUserName>
+    <SystemUserName>hmuia</SystemUserName>
     <Name>Helen Muia</Name>
     <UserDeleteFlag>0</UserDeleteFlag>
     <EmployeeDeleteFlag>0</EmployeeDeleteFlag>
@@ -125643,7 +125616,7 @@
   <Users>
     <UserId>64</UserId>
     <SystemUserName>Kendi</SystemUserName>
-    <Name>Purity vogoti2</Name>
+    <Name>Purity Kendi</Name>
     <UserDeleteFlag>0</UserDeleteFlag>
     <EmployeeDeleteFlag>0</EmployeeDeleteFlag>
   </Users>
