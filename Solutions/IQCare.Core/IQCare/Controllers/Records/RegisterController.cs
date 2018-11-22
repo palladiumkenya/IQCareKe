@@ -122,6 +122,7 @@ namespace IQCare.Controllers.Records
             }
             return BadRequest(response);
         }
+
         [HttpGet("searchpersonlist")]
         public async Task<IActionResult> Get([FromQuery]SearchQuery searchQuery)
         {
@@ -158,6 +159,7 @@ namespace IQCare.Controllers.Records
                 return Ok(response.Value);
             return BadRequest(response);
         }
+
         [HttpGet("SearchContact")]
         public async Task<IActionResult> GetContacts(string identificationNumber, string firstName, string middleName, string lastName, string enrollmentNumber)
         {
