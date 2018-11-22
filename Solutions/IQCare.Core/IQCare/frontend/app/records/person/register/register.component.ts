@@ -526,6 +526,8 @@ export class RegisterComponent implements OnInit {
         this.clientSearch.lastName = lastName == null ? '' : lastName;
         this.clientSearch.identifierValue = '';
         this.clientSearch.mobileNumber = '';
+        this.clientSearch.dateOfBirth = dateOfBirth;
+        this.clientSearch.sex = gender;
 
         if (firstName && lastName && gender && dateOfBirth) {
             this.searchService.searchClient(this.clientSearch).subscribe(
@@ -540,10 +542,23 @@ export class RegisterComponent implements OnInit {
                         dialogConfig.width = '80%';
 
                         dialogConfig.data = {
-
+                            'persons': result['personSearch']
                         };
 
                         const dialogRef = this.dialog.open(CheckDuplicatesComponent, dialogConfig);
+
+                        dialogRef.afterClosed().subscribe(
+                            data => {
+                                if (!data) {
+                                    return;
+                                }
+
+                                console.log(data);
+                                this.zone.run(() => {
+                                    this.router.navigate(['/dashboard/personhome/' + data[0]['id']], { relativeTo: this.route });
+                                });
+                            }
+                        );
                     }
                 }
             );

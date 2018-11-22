@@ -44,8 +44,15 @@ namespace IQCare.Records.BusinessProcess.CommandHandlers.Lookup
 
                 if (!string.IsNullOrWhiteSpace(request.identificationNumber))
                     sql.Append($" AND IdentifierValue like \'%{request.identificationNumber.Trim()}%\'");
+
                 if (!string.IsNullOrWhiteSpace(request.MobileNumber))
                     sql.Append($" AND MobileNumber like \'%{request.MobileNumber.Trim()}%\'");
+
+                if (request.BirthDate.HasValue)
+                    sql.Append($" AND DateOfBirth = \'{request.BirthDate}\'");
+
+                if (request.Sex.HasValue)
+                    sql.Append($" AND Sex = \'{request.Sex}\'");
 
                 sql.Append(";exec [dbo].[pr_CloseDecryptedSession];");
                 var result = await _unitOfWork.Repository<PersonListView>().FromSql(sql.ToString());
