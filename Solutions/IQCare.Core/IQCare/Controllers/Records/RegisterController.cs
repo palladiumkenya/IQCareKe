@@ -132,7 +132,9 @@ namespace IQCare.Controllers.Records
                 firstName = searchQuery.FirstName,
                 middleName = searchQuery.MiddleName,
                 lastName = searchQuery.LastName,
-                MobileNumber = searchQuery.MobileNumber
+                MobileNumber = searchQuery.MobileNumber,
+                BirthDate = searchQuery.DateOfBirth,
+                Sex = searchQuery.Sex
             });
 
             if (response.IsValid)

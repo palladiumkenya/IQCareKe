@@ -5,4 +5,6 @@ export class Search {
     identifierValue: string = '';
     fullName: string = '';
     mobileNumber: string = '';
+    dateOfBirth?: Date;
+    sex?: number;
 }
