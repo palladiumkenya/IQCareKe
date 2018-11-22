@@ -24,7 +24,6 @@ export class BabyComponent implements OnInit {
 
     public genderOptions: any[] = [];
     deliveryOutcomeOptions: any[] = [];
-    public birthOutcomes: any[] = [];
     yesnoOptions: any[] = [];
 
     @Input('PatientId') PatientId: number;
@@ -57,23 +56,16 @@ export class BabyComponent implements OnInit {
         const {
             gender,
             deliveryOutcomes,
-            birthOutcomes,
             yesNos
         } = this.babySectionOptions[0];
         this.genderOptions = gender;
         this.deliveryOutcomeOptions = deliveryOutcomes;
-        this.birthOutcomes = birthOutcomes;
         this.yesnoOptions = yesNos;
 
         this.notify.emit(this.babyFormGroup);
         this.notifyData.emit(this.babyData);
-<<<<<<< HEAD
         if(this.isEdit)
         this.getDeliveredBabyInfo(this.PatientMasterVisitId)
-=======
-
-
->>>>>>> 53f40fdd8651e181dff2f3a7bccd186a2f22c169
     }
 
     public AddBaby() {
@@ -95,8 +87,6 @@ export class BabyComponent implements OnInit {
                 comment: this.babyFormGroup.get('comment').value,
                 notificationNo: this.babyFormGroup.get('notificationNumber').value
             });
-
-            console.log(this.babyData);
 
             this.babyDataTable.push({
                 sex: this.babyFormGroup.get('babySex').value.itemName,
@@ -210,9 +200,7 @@ export class BabyComponent implements OnInit {
         return null;
     }
 
-    /**
-     * name
-     */
+    
     public UpdateBabyDetails() {
         this.showEdit = false;
         this.babyFormGroup.reset();
