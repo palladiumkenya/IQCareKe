@@ -89,9 +89,9 @@ GO
 
 
 
-IF not exists(select * from LookupItem where Name = 'Disclosure')
+IF not exists(select * from LookupItem where Name = 'GBVScreening')
 	BEGIN
-		insert into LookupItem(Name,DisplayName,DeleteFlag)values('Disclosure','Gender Based Violence Screening','0')
+		insert into LookupItem(Name,DisplayName,DeleteFlag)values('GBVScreening','Gender Based Violence Screening','0')
 	END
 GO
 
@@ -100,7 +100,7 @@ IF  exists(select * from LookupItem where Name = 'GBVScreening')
 		if not Exists (select * from LookupMasterItem  lmi inner join LookupMaster lm on lm.Id=lmi.LookupMasterId inner join LookupItem lit on lit.Id=lmi.LookupItemId where 
 		lit.Name='GBVScreening' AND lm.Name = 'EncounterType')
 		BEGIN
-			insert into LookupMasterItem select lm.Id,lit.Id,lit.DisplayName,'13.00' as OrdRank from LookupMaster lm,LookupItem lit where lm.Name='EncounterType' and lit.Name='GBVScreening'
+			insert into LookupMasterItem select lm.Id,lit.Id,lit.DisplayName,'14.00' as OrdRank from LookupMaster lm,LookupItem lit where lm.Name='EncounterType' and lit.Name='GBVScreening'
 		END
 	END
 GO
