@@ -83,7 +83,8 @@
 
                                         <!-- add Drug Administration Component to Stepper -->
                                         <app-pnc-drugadministration (notify)="onDrugAdministrationNotify($event)"
-                                            [drugAdministrationOptions]="drugAdministrationOptions">
+                                            [drugAdministrationOptions]="drugAdministrationOptions" [patientId]="patientId"
+                                            [isEdit]="isEdit" [patientMasterVisitId]="patientMasterVisitId">
                                         </app-pnc-drugadministration>
 
                                         <br />
