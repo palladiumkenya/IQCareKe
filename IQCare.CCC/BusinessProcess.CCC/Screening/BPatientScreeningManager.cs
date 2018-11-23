@@ -159,7 +159,7 @@ namespace BusinessProcess.CCC.Screening
         {
             using (UnitOfWork unitOfWork = new UnitOfWork(new GreencardContext()))
             {
-                var screeningList = unitOfWork.PatientScreeningRepository.FindBy(x => x.PatientId == patientId & x.ScreeningValueId == statusId & !x.DeleteFlag).ToList();
+                var screeningList = unitOfWork.PatientScreeningRepository.FindBy(x => x.PatientId == patientId & x.ScreeningValueId == statusId & !x.DeleteFlag).OrderByDescending(x=>x.PatientMasterVisitId).ToList();
                 unitOfWork.Dispose();
                 return screeningList;
             }
