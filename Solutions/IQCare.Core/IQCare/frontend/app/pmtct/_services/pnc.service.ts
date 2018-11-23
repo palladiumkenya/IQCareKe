@@ -85,6 +85,16 @@ export class PncService {
             );
     }
 
+    public getPncDrugAdministration(patientId: number, patientMasterVisitId: number): Observable<any[]> {
+        return this.http.get<any[]>(this.API_PMTCT_URL + '/api/PatientDrugAdministration/GetByPatientIdAndPatientMasterVisitId/'
+            + patientId + '/' + patientMasterVisitId).pipe(
+                tap(getPncDrugAdministration =>
+                    this.errorHandler.log(`successfully fetched patient drug administration by patientid: `
+                        + patientId + ` and patientMasterVisitId: ` + patientMasterVisitId)),
+                catchError(this.errorHandler.handleError<any>('Error fetching patient drug administration values'))
+            );
+    }
+
     public savePncScreening(): Observable<any> {
         return this.http.post<any>(this.API_URL + '', JSON.stringify(''), httpOptions).pipe(
             tap(savePncScreening => this.errorHandler.log(`successfully saved pnc screening`)),

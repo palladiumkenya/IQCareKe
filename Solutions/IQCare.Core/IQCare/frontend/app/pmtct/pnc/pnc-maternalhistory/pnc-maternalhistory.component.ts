@@ -35,7 +35,7 @@ export class PncMaternalhistoryComponent implements OnInit {
         const { deliveryModeOptions } = this.matHistoryOptions[0];
         this.deliveryModeOptions = deliveryModeOptions;
 
-        this.maternityService.getInitialProfileDetailsByPatientd(this.patientId).subscribe(
+        /*this.maternityService.getInitialProfileDetailsByPatientd(this.patientId).subscribe(
             (res) => {
                 if (res && res.id > 0) {
                     this.maternityService.getPatientDeliveryInfoByProfileId(res.id).subscribe(
@@ -48,7 +48,7 @@ export class PncMaternalhistoryComponent implements OnInit {
                     );
                 }
             }
-        );
+        );*/
 
         this.notify.emit(this.MaternalHistoryForm);
 

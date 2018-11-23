@@ -60,8 +60,8 @@
                                         <mat-form-field>
                                             <input placeholder="Date Of Birth" matInput [matDatepicker]="dateOfBirthDatepicker"
                                                 [max]="maxDate" (focus)="dateOfBirthDatepicker.open()" formControlName="DateOfBirth"
-                                                (dateInput)="onDate($event)" (dateChange)="checkDuplicates()" tabindex="6"
-                                                required>
+                                                (dateInput)="onDate($event)" (dateChange)="checkDuplicates()"
+                                                (dateChange)="checkAgeForValidation()" tabindex="6" required>
                                             <mat-datepicker-toggle matSuffix [for]="dateOfBirthDatepicker"></mat-datepicker-toggle>
                                             <mat-datepicker #dateOfBirthDatepicker name="DateOfBirth" ngDefaultControl></mat-datepicker>
                                         </mat-form-field>
@@ -71,7 +71,7 @@
                                         <mat-form-field>
                                             <input matInput placeholder="Age Years" formControlName="AgeYears" id="ageYears"
                                                 name="ageYears" (keyup)="estimateDob()" (change)="checkDuplicates()"
-                                                required>
+                                                (change)="checkAgeForValidation()" required>
                                         </mat-form-field>
                                     </div>
 
