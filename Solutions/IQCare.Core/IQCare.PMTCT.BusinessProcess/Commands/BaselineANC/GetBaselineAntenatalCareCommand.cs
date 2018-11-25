@@ -1,11 +1,12 @@
-﻿using IQCare.Library;
+﻿using System.Collections.Generic;
+using IQCare.Library;
 using IQCare.PMTCT.Core.Models;
 using MediatR;
 
 namespace IQCare.PMTCT.BusinessProcess.Commands.BaselineANC
 {
-    public class GetBaselineAntenatalCareCommand: IRequest<Result<BaselineAntenatalCare>>
+    public class GetBaselineAntenatalCareCommand: IRequest<Result<List<BaselineAntenatalCare>>>
     {
-        private int PatientId { get; set; }
+        public int PatientId { get; set; }
     }
 }

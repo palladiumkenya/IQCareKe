@@ -4,7 +4,12 @@ using MediatR;
 
 namespace IQCare.PMTCT.BusinessProcess.Commands.BaselineANC
 {
-    public class DeleteBaselineAntenatalCareCommand: IRequest<Result<BaselineAntenatalCare>>
+    public class DeleteBaselineAntenatalCareCommand: IRequest<Result<DeleteBaselineAntenatalCareResponse>>
+    {
+        public int Id { get; set; }
+    }
+
+    public class DeleteBaselineAntenatalCareResponse
     {
         public int Id { get; set; }
     }
