@@ -200,6 +200,13 @@ export class MaternityService {
             );
     }
 
+    public getPatientScreening(patientId: number, patientMasterVisitId: number): Observable<any[]> {
+        return this.http.get<any[]>(this.API_PMTCT_URL + '/api/PatientScreening/' + patientId + '/' + patientMasterVisitId).pipe(
+            tap(getPatientScreening => this.errorHandler.log(`successfully fetched patient screening`)),
+            catchError(this.errorHandler.handleError<any>('Error fetching patient screening'))
+        );
+    }
+
     public GetDeliveredBabyInfo(masterVisitId: number) {
         return this.http.get<any>(this.API_PMTCT_URL + '/api/MaternityPatientDeliveryInfo/GetDeliveredBabyInfoByMasterVisitId/'
             + masterVisitId).pipe(

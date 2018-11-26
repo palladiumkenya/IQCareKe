@@ -1,7 +1,7 @@
 ﻿CREATE VIEW [dbo].[PatientScreeningDetailsView]
 AS
 
-SELECT ps.Id,ps.PatientId, ps.PatientMasterVisitId, ps.ScreeningCategoryId,ps.ScreeningDate,
+SELECT ps.Id,ps.PatientId, ps.PatientMasterVisitId, ps.ScreeningTypeId, ps.ScreeningCategoryId,ps.ScreeningDate,
 ps.ScreeningDone, ps.ScreeningValueId, ps.VisitDate, ps.Comment, ps.CreateDate, ps.CreatedBy, ps.DeleteFlag,
 lm.DisplayName AS screeningDisplayName, lm.Name as ScreeningTypeName
 
