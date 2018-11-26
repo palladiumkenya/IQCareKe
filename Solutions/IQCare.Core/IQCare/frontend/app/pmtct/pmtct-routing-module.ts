@@ -69,6 +69,7 @@ import { MaternityEncounterComponent } from './maternity/maternity-encounter/mat
 import { MotherExaminationResolver } from './_services/resolvers/motherexamination.resolver';
 import { BabyExaminationResolver } from './_services/resolvers/baby-examination.resolver';
 import {BirthOutcomeResolver} from './_services/resolvers/BirthOutcomeResolver';
+import { TriageComponent } from './triage/triage.component';
 
 
 const routes: Routes = [
@@ -223,6 +224,11 @@ const routes: Routes = [
     {
         path: 'maternity/encounters/:patientId/:personId/:serviceAreaId',
         component: MaternityEncounterComponent,
+        pathMatch: 'full'
+    },
+    {
+        path:'triage',
+        component: TriageComponent,
         pathMatch: 'full'
     },
     {

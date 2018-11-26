@@ -29,7 +29,7 @@ namespace IQCare.PMTCT.BusinessProcess.QueryHandlers
             try
             {
                 var patientVitals = _pmtctUnitOfWork.Repository<PatientVital>()
-                        .Get(x => x.PatientMasterVisitId == request.MasterVisitId).AsEnumerable();
+                        .Get(x => x.PatientMasterVisitId == request.MasterVisitId).OrderByDescending(x=>x.DateCreated).AsEnumerable();
 
                 var vitalsModel = _mapper.Map<List<PatientVitalViewModel>>(patientVitals);
 

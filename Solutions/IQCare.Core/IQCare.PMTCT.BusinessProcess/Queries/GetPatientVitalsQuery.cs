@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
 using IQCare.Library;
 using MediatR;
@@ -29,6 +30,8 @@ namespace IQCare.PMTCT.BusinessProcess.Queries
         public decimal? BmiZ { get; set; }
         public string WeightForAge { get; set; }
         public string WeightForHeight { get; set; }
+        public string HeightForAge { get; set; }
+        public decimal ? Muac { get; set; }
         public bool Active { get; set; }
         public DateTime? VisitDate { get; set; }
     }

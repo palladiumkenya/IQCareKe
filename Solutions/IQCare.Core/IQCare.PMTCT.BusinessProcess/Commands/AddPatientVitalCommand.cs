@@ -22,9 +22,11 @@ namespace IQCare.PMTCT.BusinessProcess.Commands
         public decimal? HeadCircumference { get; set; }
         public decimal? BmiZ { get; set; }
         public string WeightForAge { get; set; }
+        public decimal? Muac { get; set; }
         public string WeightForHeight { get; set; }
         public bool Active { get; set; }
         public DateTime? VisitDate { get; set; }
+        public string Comment { get; set; }
         public int CreatedBy { get; set; }
     }
 }
