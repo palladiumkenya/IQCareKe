@@ -108,6 +108,7 @@ import { BabyExaminationResolver } from './_services/resolvers/baby-examination.
 import { HeiMedicationComponent } from './hei/hei-medication/hei-medication.component';
 import { AncClientMonitoringComponent } from './anc/anc-client-monitoring/anc-client-monitoring.component';
 import {BirthOutcomeResolver} from './_services/resolvers/BirthOutcomeResolver';
+import { CounselledInfantFeedingResolver } from './_services/resolvers/counselled-infant-feeding.resolver';
 
 @NgModule({
     imports: [
@@ -220,6 +221,7 @@ import {BirthOutcomeResolver} from './_services/resolvers/BirthOutcomeResolver';
         BabyExaminationResolver,
         AncClientMonitoringComponent,
         BirthOutcomeResolver,
+        CounselledInfantFeedingResolver
     ],
     entryComponents: [
         IptClientWorkupComponent,

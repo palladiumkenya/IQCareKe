@@ -110,6 +110,13 @@ export class PncService {
             );
     }
 
+    public getPartnerTesting(patientId: number): Observable<any[]> {
+        return this.http.get<any[]>(this.API_PMTCT_URL + '/api/PatientPartnerTesting/Get/' + patientId).pipe(
+            tap(getPartnerTesting => this.errorHandler.log(`successfully fetched pnc partner testing`)),
+            catchError(this.errorHandler.handleError<any>('Error fetching pnc partner testing'))
+        );
+    }
+
     public saveDiagnosis(pncPatientDiagnosis: PatientDiagnosisCommand): Observable<any> {
         return this.http.post<any>(this.API_PMTCT_URL + '/api/PatientDiagnosis/AddDiagnosis',
             JSON.stringify(pncPatientDiagnosis), httpOptions).pipe(

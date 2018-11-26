@@ -91,14 +91,16 @@
 
                                         <!-- add Partner Testing Component to Stepper -->
                                         <app-pnc-partnertesting (notify)="onPartnerTestingNotify($event)"
-                                            [partnerTestingOptions]="partnerTestingOptions">
+                                            [partnerTestingOptions]="partnerTestingOptions" [patientId]="patientId"
+                                            [isEdit]="isEdit" [patientMasterVisitId]="patientMasterVisitId">
                                         </app-pnc-partnertesting>
 
                                         <br />
 
                                         <!-- add Patient Education Component to Stepper -->
                                         <app-pnc-patienteducation (notify)="onPatientEducationNotify($event)"
-                                            [patientEducationOptions]="patientEducationOptions">
+                                            [patientEducationOptions]="patientEducationOptions" [patientId]="patientId"
+                                            [isEdit]="isEdit" [patientMasterVisitId]="patientMasterVisitId">
                                         </app-pnc-patienteducation>
 
                                         <div class="row">

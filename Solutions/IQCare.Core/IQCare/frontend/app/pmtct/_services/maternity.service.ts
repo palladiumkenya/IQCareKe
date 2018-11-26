@@ -111,10 +111,24 @@ export class MaternityService {
 
 
     public savePatientEducation(patientEducation: any): Observable<any> {
+        if (!patientEducation.IsCounsellingDone) {
+            return of([]);
+        }
+
         return this.http.post(this.API_URL + '/api/PatientEducationExamination/AddPatientCounsellingInfo',
             JSON.stringify(patientEducation), httpOptions).pipe(
                 tap(savePatientEducation => this.errorHandler.log(`successfully added Partner testing details`)),
                 catchError(this.errorHandler.handleError<any>('Error saving Partner testing details'))
+            );
+    }
+
+    public getPatientEducation(patientId: number, patientMasterVisitId: number): Observable<any[]> {
+        return this.http.get<any[]>(this.API_URL + '/api/PatientEducationExamination/GetPatientEducation/'
+            + patientId + '/' + patientMasterVisitId).pipe(
+                tap(getPatientEducation =>
+                    this.errorHandler.log(`successfully fetched patient education by patientId: `
+                        + patientId + ` and patientmastervisitid: ` + patientMasterVisitId)),
+                catchError(this.errorHandler.handleError<any>('Error fetching patient education'))
             );
     }
 

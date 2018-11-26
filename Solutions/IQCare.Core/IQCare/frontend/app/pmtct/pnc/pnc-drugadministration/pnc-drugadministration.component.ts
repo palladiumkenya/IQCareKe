@@ -2,6 +2,8 @@ import { PncService } from './../../_services/pnc.service';
 import { Component, OnInit, EventEmitter, Output, Input, AfterViewInit } from '@angular/core';
 import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
 import { LookupItemView } from '../../../shared/_models/LookupItemView';
+import { NotificationService } from '../../../shared/_services/notification.service';
+import { SnotifyService } from 'ng-snotify';
 
 @Component({
     selector: 'app-pnc-drugadministration',
@@ -23,7 +25,9 @@ export class PncDrugadministrationComponent implements OnInit, AfterViewInit {
     @Output() notify: EventEmitter<FormGroup> = new EventEmitter<FormGroup>();
 
     constructor(private _formBuilder: FormBuilder,
-        private pncService: PncService) { }
+        private pncService: PncService,
+        private snotifyService: SnotifyService,
+        private notificationService: NotificationService) { }
 
     ngOnInit() {
         this.DrugAdministrationForm = this._formBuilder.group({
@@ -54,7 +58,6 @@ export class PncDrugadministrationComponent implements OnInit, AfterViewInit {
     loadDrugAdministrationInfo(): void {
         this.pncService.getPncDrugAdministration(this.patientId, this.patientMasterVisitId).subscribe(
             (result) => {
-                console.log(result);
                 for (let i = 0; i < result.length; i++) {
                     if (result[i]['strDrugAdministered'] == 'Started HAART in PNC') {
                         this.DrugAdministrationForm.get('startedARTPncVisit').setValue(result[i]['value']);
@@ -66,6 +69,10 @@ export class PncDrugadministrationComponent implements OnInit, AfterViewInit {
                         this.DrugAdministrationForm.get('infant_start').setValue(result[i]['value']);
                     }
                 }
+            },
+            (error) => {
+                this.snotifyService.error('Fetching Drug Administration ' + error, 'PNC Encounter',
+                    this.notificationService.getConfig());
             }
         );
     }
