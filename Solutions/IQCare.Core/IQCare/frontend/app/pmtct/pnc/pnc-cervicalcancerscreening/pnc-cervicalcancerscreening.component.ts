@@ -1,3 +1,6 @@
+import { SnotifyService } from 'ng-snotify';
+import { NotificationService } from './../../../shared/_services/notification.service';
+import { MaternityService } from './../../_services/maternity.service';
 import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
 import { LookupItemView } from '../../../shared/_models/LookupItemView';
@@ -14,9 +17,16 @@ export class PncCervicalcancerscreeningComponent implements OnInit {
     cervicalCancerScreeningResultsOptions: LookupItemView[] = [];
 
     @Input('cervicalCancerScreeningOptions') cervicalCancerScreeningOptions: any;
+    @Input('isEdit') isEdit: boolean;
+    @Input('patientId') patientId: number;
+    @Input('patientMasterVisitId') patientMasterVisitId: number;
+
     @Output() notify: EventEmitter<FormGroup> = new EventEmitter<FormGroup>();
 
-    constructor(private _formBuilder: FormBuilder) { }
+    constructor(private _formBuilder: FormBuilder,
+        private maternityService: MaternityService,
+        private snotifyService: SnotifyService,
+        private notificationService: NotificationService) { }
 
     ngOnInit() {
         this.CervicalCancerScreeningForm = this._formBuilder.group({
@@ -33,6 +43,40 @@ export class PncCervicalcancerscreeningComponent implements OnInit {
         this.cervicalCancerScreeningResultsOptions = cervicalCancerScreeningResultsOptions;
 
         this.notify.emit(this.CervicalCancerScreeningForm);
+
+        if (this.isEdit) {
+            this.loadCervicalCancerScreening();
+        }
+    }
+
+    loadCervicalCancerScreening(): void {
+        this.maternityService.getPatientScreening(this.patientId, this.patientMasterVisitId).subscribe(
+            (result) => {
+                console.log(this.cervicalCancerScreeningMethodOptions);
+                console.log(result);
+                const cacxMethod = this.cervicalCancerScreeningMethodOptions.filter(obj => obj.masterName == 'CacxMethod');
+
+                for (let i = 0; i < result.length; i++) {
+                    if (result[i].screeningTypeId == cacxMethod[0].masterId) {
+                        const yesOption = this.yesnoOptions.filter(obj => obj.itemName == 'Yes');
+                        const cacxMethodOption = this.cervicalCancerScreeningMethodOptions.filter(
+                            obj => obj.itemId == result[i].screeningCategoryId);
+                        const cacxResultOption = this.cervicalCancerScreeningResultsOptions.filter(
+                            obj => obj.itemId == result[i].screeningValueId);
+
+                        this.CervicalCancerScreeningForm.get('cervicalcancerscreening').setValue(yesOption[0].itemId);
+                        this.CervicalCancerScreeningForm.get('method').setValue(cacxMethodOption[0].itemId);
+                        this.CervicalCancerScreeningForm.get('results').setValue(cacxResultOption[0].itemId);
+
+                    }
+                }
+            },
+            (error) => {
+                this.snotifyService.error('Fetching patient screening ' + error, 'PNC Encounter',
+                    this.notificationService.getConfig());
+            },
+            () => { }
+        );
     }
 
     onCervicalCancerScreeningChange(event) {

@@ -11,6 +11,7 @@ namespace IQCare.Maternity.Core.Domain.PNC
         public int Id { get; set; }
         public int PatientId { get; set; }
         public int PatientMasterVisitId { get; set; }
+        public int? ScreeningTypeId { get; set; }
         public int? ScreeningCategoryId { get; set; }
         public DateTime? ScreeningDate { get; set; }
         public Boolean ScreeningDone { get; set; }

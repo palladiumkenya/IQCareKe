@@ -119,7 +119,8 @@
 
                                         <!-- add Cervical Cancer Screening Component to Stepper -->
                                         <app-pnc-cervicalcancerscreening (notify)="onCervicalCancerScreeningNotify($event)"
-                                            [cervicalCancerScreeningOptions]="cervicalCancerScreeningOptions">
+                                            [cervicalCancerScreeningOptions]="cervicalCancerScreeningOptions"
+                                            [patientId]="patientId" [isEdit]="isEdit" [patientMasterVisitId]="patientMasterVisitId">
                                         </app-pnc-cervicalcancerscreening>
 
                                         <!-- add Contraceptive History and Exercise Component to Stepper -->
