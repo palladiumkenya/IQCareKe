@@ -149,12 +149,26 @@ export class PncService {
             );
     }
 
+    public getFamilyPlanning(patientId: number): Observable<any[]> {
+        return this.http.get<any[]>(this.API_PMTCT_URL + '/api/FamilyPlanning/' + patientId).pipe(
+            tap(getFamilyPlanning => this.errorHandler.log(`successfully fetched family planning`)),
+            catchError(this.errorHandler.handleError<any>('Error fetching family planning'))
+        );
+    }
+
     public savePncFamilyPlanningMethod(familyPlanningMethodCommand: FamilyPlanningMethodCommand): Observable<any> {
         return this.http.post<any>(this.API_PMTCT_URL + '/api/AddFamilyPlanningMetods', JSON.stringify(familyPlanningMethodCommand),
             httpOptions).pipe(
                 tap(savePncFamilyPlanningMethod => this.errorHandler.log(`successfully saved pnc family planning method`)),
                 catchError(this.errorHandler.handleError<any>('Error saving pnc family planning method'))
             );
+    }
+
+    public getFamilyPlanningMethod(patientId: number): Observable<any[]> {
+        return this.http.get<any[]>(this.API_PMTCT_URL + '/api/AddFamilyPlanningMetods/' + patientId).pipe(
+            tap(getFamilyPlanningMethod => this.errorHandler.log(`successfully fetched family planning method`)),
+            catchError(this.errorHandler.handleError<any>('Error fetching family planning method'))
+        );
     }
 
     public getPncPostNatalExamBabyExaminationHistory(patientId: number, patientMasterVisitId: number): Observable<any> {

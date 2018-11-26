@@ -52,8 +52,6 @@ export class PncCervicalcancerscreeningComponent implements OnInit {
     loadCervicalCancerScreening(): void {
         this.maternityService.getPatientScreening(this.patientId, this.patientMasterVisitId).subscribe(
             (result) => {
-                console.log(this.cervicalCancerScreeningMethodOptions);
-                console.log(result);
                 const cacxMethod = this.cervicalCancerScreeningMethodOptions.filter(obj => obj.masterName == 'CacxMethod');
 
                 for (let i = 0; i < result.length; i++) {

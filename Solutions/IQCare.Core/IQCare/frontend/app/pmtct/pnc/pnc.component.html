@@ -125,7 +125,8 @@
 
                                         <!-- add Contraceptive History and Exercise Component to Stepper -->
                                         <app-pnc-contraceptivehistory (notify)="onContraceptiveHistoryNotify($event)"
-                                            [contraceptiveHistoryExercise]="contraceptiveHistoryExercise">
+                                            [contraceptiveHistoryExercise]="contraceptiveHistoryExercise" [patientId]="patientId"
+                                            [isEdit]="isEdit" [patientMasterVisitId]="patientMasterVisitId">
                                         </app-pnc-contraceptivehistory>
 
                                         <div class="row">
