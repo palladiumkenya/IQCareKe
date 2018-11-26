@@ -104,17 +104,31 @@ export class MaternityService {
     public savePartnerTesting(partner: any): Observable<any> {
         return this.http.post(this.API_PMTCT_URL + '/api/PatientPartnerTesting/AddPartnerTesting',
             JSON.stringify(partner), httpOptions).pipe(
-            tap(savePartnerTesting => this.errorHandler.log(`successfully added Partner testing details`)),
-            catchError(this.errorHandler.handleError<any>('Error saving Partner testing details'))
-        );
+                tap(savePartnerTesting => this.errorHandler.log(`successfully added Partner testing details`)),
+                catchError(this.errorHandler.handleError<any>('Error saving Partner testing details'))
+            );
     }
 
 
     public savePatientEducation(patientEducation: any): Observable<any> {
+        if (!patientEducation.IsCounsellingDone) {
+            return of([]);
+        }
+
         return this.http.post(this.API_URL + '/api/PatientEducationExamination/AddPatientCounsellingInfo',
             JSON.stringify(patientEducation), httpOptions).pipe(
                 tap(savePatientEducation => this.errorHandler.log(`successfully added Partner testing details`)),
                 catchError(this.errorHandler.handleError<any>('Error saving Partner testing details'))
+            );
+    }
+
+    public getPatientEducation(patientId: number, patientMasterVisitId: number): Observable<any[]> {
+        return this.http.get<any[]>(this.API_URL + '/api/PatientEducationExamination/GetPatientEducation/'
+            + patientId + '/' + patientMasterVisitId).pipe(
+                tap(getPatientEducation =>
+                    this.errorHandler.log(`successfully fetched patient education by patientId: `
+                        + patientId + ` and patientmastervisitid: ` + patientMasterVisitId)),
+                catchError(this.errorHandler.handleError<any>('Error fetching patient education'))
             );
     }
 
@@ -167,7 +181,7 @@ export class MaternityService {
 
     public getPatientDeliveryInfoByProfileId(profileId: number): Observable<PatientDeliveryInformationViewModel[]> {
         return this.http.get<PatientDeliveryInformationViewModel[]>(this.API_PMTCT_URL
-            + '/api/MaternityPatientDeliveryInfo/GetPatientDeliveryInfoByProfileId/' + profileId)
+            + '/api/MaternityPatientDeliveryInfo/GetDeliveryInfoByProfileId/' + profileId)
             .pipe(
                 tap(getPatientDeliveryInfoByProfileId => this.errorHandler.log(`successfully fetched patient delivery info by profile Id`)),
                 catchError(this.errorHandler.handleError<any>('Error Fetching patient delivery info by profile Id'))
@@ -186,29 +200,37 @@ export class MaternityService {
             );
     }
 
-    public GetDeliveredBabyInfo(masterVisitId:number) {
-        return this.http.get<any>(this.API_PMTCT_URL + '/api/MaternityPatientDeliveryInfo/GetDeliveredBabyInfoByMasterVisitId/' + masterVisitId).pipe(
-            tap(GetDeliveredBabyInfoByMasterVisitId => this.errorHandler.log('get delivered baby info by master Id')),
-            catchError(this.errorHandler.handleError<any[]>('GetDeliveredBabyInfoByMasterVisitId'))
+    public getPatientScreening(patientId: number, patientMasterVisitId: number): Observable<any[]> {
+        return this.http.get<any[]>(this.API_PMTCT_URL + '/api/PatientScreening/' + patientId + '/' + patientMasterVisitId).pipe(
+            tap(getPatientScreening => this.errorHandler.log(`successfully fetched patient screening`)),
+            catchError(this.errorHandler.handleError<any>('Error fetching patient screening'))
         );
     }
 
-  
-    public GetPatientDeliveryInfo(masterVisitId:number) {
+    public GetDeliveredBabyInfo(masterVisitId: number) {
+        return this.http.get<any>(this.API_PMTCT_URL + '/api/MaternityPatientDeliveryInfo/GetDeliveredBabyInfoByMasterVisitId/'
+            + masterVisitId).pipe(
+                tap(GetDeliveredBabyInfoByMasterVisitId => this.errorHandler.log('get delivered baby info by master Id')),
+                catchError(this.errorHandler.handleError<any[]>('GetDeliveredBabyInfoByMasterVisitId'))
+            );
+    }
+
+
+    public GetPatientDeliveryInfo(masterVisitId: number) {
         return this.http.get<any>(this.API_PMTCT_URL + '/api/MaternityPatientDeliveryInfo/GetDeliveryInfoByMasterVisitId/' + masterVisitId).pipe(
             tap(GetPatientDeliveryInfoByMasterVisitId => this.errorHandler.log('get patient delivery info by master Id')),
             catchError(this.errorHandler.handleError<any[]>('GetPatientDeliveryInfoByMasterVisitId'))
         );
     }
 
-    public GetPatientDischargeInfo(masterVisitId:number) {
+    public GetPatientDischargeInfo(masterVisitId: number) {
         return this.http.get<any>(this.API_PMTCT_URL + '/api/MaternityPatientDeliveryInfo/GetDischargeInfoByMasterVisitId/' + masterVisitId).pipe(
             tap(GetPatientDischargeInfo => this.errorHandler.log('get patient discharge info by master Id')),
             catchError(this.errorHandler.handleError<any[]>('GetPatientDischargeInfo'))
         );
     }
 
-    public GetPatientDiagnosisInfo(masterVisitId:number) {
+    public GetPatientDiagnosisInfo(masterVisitId: number) {
         return this.http.get<any>(this.API_PMTCT_URL + '/api/PatientDiagnosis/GetDiagnosisByMasterVisitId/' + masterVisitId).pipe(
             tap(GetPatientDiagnosisInfo => this.errorHandler.log('get patient diagnosis info by master Id')),
             catchError(this.errorHandler.handleError<any[]>('GetPatientDiagnosisInfo'))

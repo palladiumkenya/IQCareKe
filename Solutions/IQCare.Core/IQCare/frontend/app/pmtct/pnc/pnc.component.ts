@@ -134,12 +134,6 @@ export class PncComponent implements OnInit {
             }
         );
 
-        this.lookupitemservice.getByGroupNameAndItemName('Counselled On', 'Infant Feeding').subscribe(
-            (res) => {
-                this.infantFeedingTopicId = res['itemId'];
-            }
-        );
-
         this.lookupitemservice.getByGroupName('PncDrugAdministration').subscribe(
             (res) => {
                 this.drugAdministrationCategories = res['lookupItems'];
@@ -168,7 +162,8 @@ export class PncComponent implements OnInit {
                 cervicalCancerScreeningResultsOptions,
                 referralFromOptions,
                 motherExaminationOptions,
-                babyExaminationControls } = res;
+                babyExaminationControls,
+                counselledInfantFeedingOptions } = res;
             this.yesnoOptions = yesnoOptions['lookupItems'];
             this.hivFinalResultsOptions = hivFinalResultsOptions['lookupItems'];
             this.deliveryModeOptions = deliveryModeOptions['lookupItems'];
@@ -190,6 +185,7 @@ export class PncComponent implements OnInit {
             this.referralFromOptions = referralFromOptions['lookupItems'];
             this.motherExaminationOptions = motherExaminationOptions['lookupItems'];
             this.babyExaminationControls = babyExaminationControls['lookupItems'];
+            this.infantFeedingTopicId = counselledInfantFeedingOptions['itemId'];
         });
 
         this.pncHivOptions.push({
@@ -219,7 +215,8 @@ export class PncComponent implements OnInit {
         });
 
         this.patientEducationOptions.push({
-            'yesnoOptions': this.yesnoOptions
+            'yesnoOptions': this.yesnoOptions,
+            'infantFeedingTopicId': this.infantFeedingTopicId
         });
 
         this.drugAdministrationOptions.push({

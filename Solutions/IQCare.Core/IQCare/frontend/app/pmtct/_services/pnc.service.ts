@@ -85,6 +85,16 @@ export class PncService {
             );
     }
 
+    public getPncDrugAdministration(patientId: number, patientMasterVisitId: number): Observable<any[]> {
+        return this.http.get<any[]>(this.API_PMTCT_URL + '/api/PatientDrugAdministration/GetByPatientIdAndPatientMasterVisitId/'
+            + patientId + '/' + patientMasterVisitId).pipe(
+                tap(getPncDrugAdministration =>
+                    this.errorHandler.log(`successfully fetched patient drug administration by patientid: `
+                        + patientId + ` and patientMasterVisitId: ` + patientMasterVisitId)),
+                catchError(this.errorHandler.handleError<any>('Error fetching patient drug administration values'))
+            );
+    }
+
     public savePncScreening(): Observable<any> {
         return this.http.post<any>(this.API_URL + '', JSON.stringify(''), httpOptions).pipe(
             tap(savePncScreening => this.errorHandler.log(`successfully saved pnc screening`)),
@@ -98,6 +108,13 @@ export class PncService {
                 tap(savePartnerTesting => this.errorHandler.log(`successfully saved pnc partner testing`)),
                 catchError(this.errorHandler.handleError<any>('Error saving pnc partner testing'))
             );
+    }
+
+    public getPartnerTesting(patientId: number): Observable<any[]> {
+        return this.http.get<any[]>(this.API_PMTCT_URL + '/api/PatientPartnerTesting/Get/' + patientId).pipe(
+            tap(getPartnerTesting => this.errorHandler.log(`successfully fetched pnc partner testing`)),
+            catchError(this.errorHandler.handleError<any>('Error fetching pnc partner testing'))
+        );
     }
 
     public saveDiagnosis(pncPatientDiagnosis: PatientDiagnosisCommand): Observable<any> {
@@ -132,12 +149,26 @@ export class PncService {
             );
     }
 
+    public getFamilyPlanning(patientId: number): Observable<any[]> {
+        return this.http.get<any[]>(this.API_PMTCT_URL + '/api/FamilyPlanning/' + patientId).pipe(
+            tap(getFamilyPlanning => this.errorHandler.log(`successfully fetched family planning`)),
+            catchError(this.errorHandler.handleError<any>('Error fetching family planning'))
+        );
+    }
+
     public savePncFamilyPlanningMethod(familyPlanningMethodCommand: FamilyPlanningMethodCommand): Observable<any> {
         return this.http.post<any>(this.API_PMTCT_URL + '/api/AddFamilyPlanningMetods', JSON.stringify(familyPlanningMethodCommand),
             httpOptions).pipe(
                 tap(savePncFamilyPlanningMethod => this.errorHandler.log(`successfully saved pnc family planning method`)),
                 catchError(this.errorHandler.handleError<any>('Error saving pnc family planning method'))
             );
+    }
+
+    public getFamilyPlanningMethod(patientId: number): Observable<any[]> {
+        return this.http.get<any[]>(this.API_PMTCT_URL + '/api/AddFamilyPlanningMetods/' + patientId).pipe(
+            tap(getFamilyPlanningMethod => this.errorHandler.log(`successfully fetched family planning method`)),
+            catchError(this.errorHandler.handleError<any>('Error fetching family planning method'))
+        );
     }
 
     public getPncPostNatalExamBabyExaminationHistory(patientId: number, patientMasterVisitId: number): Observable<any> {

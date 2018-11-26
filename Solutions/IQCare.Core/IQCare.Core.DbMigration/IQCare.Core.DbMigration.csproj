@@ -6,6 +6,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Scripts\1.0.0.8\Common\01_SO_CreateVisitDetails_Table.sql" />
     <None Remove="Scripts\1.0.0.8\HEI\HEIEncounter.sql" />
     <None Remove="Scripts\1.0.0.8\HEI\HEIFeeding.sql" />
     <None Remove="Scripts\1.0.0.8\HEI\HEIProfile.sql" />
@@ -31,6 +32,7 @@
     <None Remove="Scripts\1.0.0.8\PMTCT\13_DO_Rename_Column_MilestoneComments.sql" />
     <None Remove="Scripts\1.0.0.8\PMTCT\14_DO_Rename_Column_MilestoneDate.sql" />
     <None Remove="Scripts\1.0.0.8\PMTCT\15_DO_Drop_Table_HeiMilestone.sql" />
+    <None Remove="Scripts\1.0.0.8\PMTCT\16_SO_CreateTableBaselineANC.sql" />
     <None Remove="Scripts\1.0.0.9\01_DO_Rename_Table_PMTCTBaby.sql" />
     <None Remove="Scripts\1.0.0.9\02_DO_CreateTable_DeliveredBabyApgarScore.sql" />
     <None Remove="Scripts\1.0.0.9\03_DO_AlterTable_DeliveredBabyBirthInfo_AlterColmn_DeliveryComplications.sql" />
@@ -75,6 +77,7 @@
     <None Remove="Scripts\1.0.0.9\35_AlterTable_PatientReferral_Rename_And_Change_Col_DataTypes.sql" />
     <None Remove="Scripts\1.0.0.9\36_DO_AlterTable_PatientDelivery_ChangeCol_DurationOfLabour.sql" />
     <None Remove="Scripts\1.0.0.9\37_DO_Insert_PNC_LookUpItems.sql" />
+    <None Remove="Scripts\1.0.0.9\38_BO_PatientScreeningView.sql" />
     <None Remove="Scripts\1.0.0.9\38_DO_CreateView_PatientChronicIllness.sql" />
     <None Remove="Scripts\1.0.0.9\40_DO_CreateSproc_GetPatientRelationships.sql" />
     <None Remove="Scripts\1.0.0.9\41_pr_iqcare_version_2.sql" />
@@ -96,6 +99,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <EmbeddedResource Include="Scripts\1.0.0.8\Common\01_SO_CreateVisitDetails_Table.sql" />
     <EmbeddedResource Include="Scripts\1.0.0.8\HEI\HEIEncounter.sql" />
     <EmbeddedResource Include="Scripts\1.0.0.8\HEI\HEIFeeding.sql" />
     <EmbeddedResource Include="Scripts\1.0.0.8\HEI\HEIProfile.sql" />
@@ -121,6 +125,8 @@
     <EmbeddedResource Include="Scripts\1.0.0.8\PMTCT\13_DO_Rename_Column_MilestoneComments.sql" />
     <EmbeddedResource Include="Scripts\1.0.0.8\PMTCT\14_DO_Rename_Column_MilestoneDate.sql" />
     <EmbeddedResource Include="Scripts\1.0.0.8\PMTCT\15_DO_Drop_Table_HeiMilestone.sql" />
+    <EmbeddedResource Include="Scripts\1.0.0.8\PMTCT\16_SO_CreateTableBaselineANC.sql" />
+    <EmbeddedResource Include="Scripts\1.0.0.9\38_BO_PatientScreeningView.sql" />
     <EmbeddedResource Include="Scripts\1.0.0.9\39_SO_vw_PatientEncounters.sql" />
     <EmbeddedResource Include="Scripts\1.0.0.9\32_DO_Insert_MaternalDrugAdmin_LookUp_Items.sql" />
   </ItemGroup>

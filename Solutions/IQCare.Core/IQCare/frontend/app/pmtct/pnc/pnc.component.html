@@ -83,21 +83,24 @@
 
                                         <!-- add Drug Administration Component to Stepper -->
                                         <app-pnc-drugadministration (notify)="onDrugAdministrationNotify($event)"
-                                            [drugAdministrationOptions]="drugAdministrationOptions">
+                                            [drugAdministrationOptions]="drugAdministrationOptions" [patientId]="patientId"
+                                            [isEdit]="isEdit" [patientMasterVisitId]="patientMasterVisitId">
                                         </app-pnc-drugadministration>
 
                                         <br />
 
                                         <!-- add Partner Testing Component to Stepper -->
                                         <app-pnc-partnertesting (notify)="onPartnerTestingNotify($event)"
-                                            [partnerTestingOptions]="partnerTestingOptions">
+                                            [partnerTestingOptions]="partnerTestingOptions" [patientId]="patientId"
+                                            [isEdit]="isEdit" [patientMasterVisitId]="patientMasterVisitId">
                                         </app-pnc-partnertesting>
 
                                         <br />
 
                                         <!-- add Patient Education Component to Stepper -->
                                         <app-pnc-patienteducation (notify)="onPatientEducationNotify($event)"
-                                            [patientEducationOptions]="patientEducationOptions">
+                                            [patientEducationOptions]="patientEducationOptions" [patientId]="patientId"
+                                            [isEdit]="isEdit" [patientMasterVisitId]="patientMasterVisitId">
                                         </app-pnc-patienteducation>
 
                                         <div class="row">
@@ -116,12 +119,14 @@
 
                                         <!-- add Cervical Cancer Screening Component to Stepper -->
                                         <app-pnc-cervicalcancerscreening (notify)="onCervicalCancerScreeningNotify($event)"
-                                            [cervicalCancerScreeningOptions]="cervicalCancerScreeningOptions">
+                                            [cervicalCancerScreeningOptions]="cervicalCancerScreeningOptions"
+                                            [patientId]="patientId" [isEdit]="isEdit" [patientMasterVisitId]="patientMasterVisitId">
                                         </app-pnc-cervicalcancerscreening>
 
                                         <!-- add Contraceptive History and Exercise Component to Stepper -->
                                         <app-pnc-contraceptivehistory (notify)="onContraceptiveHistoryNotify($event)"
-                                            [contraceptiveHistoryExercise]="contraceptiveHistoryExercise">
+                                            [contraceptiveHistoryExercise]="contraceptiveHistoryExercise" [patientId]="patientId"
+                                            [isEdit]="isEdit" [patientMasterVisitId]="patientMasterVisitId">
                                         </app-pnc-contraceptivehistory>
 
                                         <div class="row">

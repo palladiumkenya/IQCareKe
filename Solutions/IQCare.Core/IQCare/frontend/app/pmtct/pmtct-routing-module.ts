@@ -68,8 +68,13 @@ import { TbScreeningResolver } from './_services/resolvers/tb-screening.resolver
 import { MaternityEncounterComponent } from './maternity/maternity-encounter/maternity-encounter.component';
 import { MotherExaminationResolver } from './_services/resolvers/motherexamination.resolver';
 import { BabyExaminationResolver } from './_services/resolvers/baby-examination.resolver';
+<<<<<<< HEAD
 import {BirthOutcomeResolver} from './_services/resolvers/BirthOutcomeResolver';
 import { TriageComponent } from './triage/triage.component';
+=======
+import { BirthOutcomeResolver } from './_services/resolvers/BirthOutcomeResolver';
+import { CounselledInfantFeedingResolver } from './_services/resolvers/counselled-infant-feeding.resolver';
+>>>>>>> aba3c06fe6897c4e45e1191483b9bae544d61866
 
 
 const routes: Routes = [
@@ -258,7 +263,8 @@ const routes: Routes = [
                     cervicalCancerScreeningResultsOptions: CervicalCancerScreeningResultsResolver,
                     referralFromOptions: ReferralResolver,
                     motherExaminationOptions: MotherExaminationResolver,
-                    babyExaminationControls: BabyExaminationResolver
+                    babyExaminationControls: BabyExaminationResolver,
+                    counselledInfantFeedingOptions: CounselledInfantFeedingResolver
                 }
             },
             {
@@ -285,7 +291,8 @@ const routes: Routes = [
                     cervicalCancerScreeningResultsOptions: CervicalCancerScreeningResultsResolver,
                     referralFromOptions: ReferralResolver,
                     motherExaminationOptions: MotherExaminationResolver,
-                    babyExaminationControls: BabyExaminationResolver
+                    babyExaminationControls: BabyExaminationResolver,
+                    counselledInfantFeedingOptions: CounselledInfantFeedingResolver
                 }
             }
         ]

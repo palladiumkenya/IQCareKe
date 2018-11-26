@@ -101,7 +101,7 @@ export class RegisterComponent implements OnInit {
                     AgeYears: new FormControl(this.person.ageYears, [Validators.required]),
                     AgeMonths: new FormControl(this.person.ageMonths, [Validators.required]),
                     DobPrecision: new FormControl(this.person.dobPrecision, [Validators.required]),
-                    MaritalStatus: new FormControl(this.person.maritalStatus, [Validators.required]),
+                    MaritalStatus: new FormControl(this.person.maritalStatus),
                     EducationLevel: new FormControl(this.person.EducationLevel),
                     Occupation: new FormControl(this.person.Occupation),
                     IdentifierType: new FormControl(this.person.IdentifierType),
@@ -154,7 +154,6 @@ export class RegisterComponent implements OnInit {
     }
 
     getPersonDetails(id: number): any {
-        console.log('edit person');
         this.recordsService.getPersonDetails(id).subscribe(
             (result) => {
                 console.log(result);
@@ -511,6 +510,19 @@ export class RegisterComponent implements OnInit {
         } else {
             this.formGroup.controls['formArray']['controls'][0]['controls']['IdentifierNumber'].disable({ onlySelf: true });
             this.formGroup.controls['formArray']['controls'][0]['controls']['IdentifierNumber'].setValue('');
+        }
+    }
+
+    public checkAgeForValidation() {
+        const ageInYears = this.formArray['controls'][0]['controls']['AgeYears'].value;
+        if (ageInYears < 10) {
+            this.formArray['controls'][0]['controls']['MaritalStatus'].disable({ onlySelf: true });
+            this.formArray['controls'][0]['controls']['EducationLevel'].disable({ onlySelf: true });
+            this.formArray['controls'][0]['controls']['Occupation'].disable({ onlySelf: true });
+        } else {
+            this.formArray['controls'][0]['controls']['MaritalStatus'].enable();
+            this.formArray['controls'][0]['controls']['EducationLevel'].enable();
+            this.formArray['controls'][0]['controls']['Occupation'].enable();
         }
     }
 

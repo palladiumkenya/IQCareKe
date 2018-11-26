@@ -44,6 +44,20 @@ namespace IQCare.Maternity.WebApi.Controllers
             return BadRequest(response);
         }
 
+        [HttpGet("{patientId}/{patientMasterVisitId}")]
+        public async Task<IActionResult> GetByPatientIdAndPatientMasterVisitId(int patientId, int patientMasterVisitId)
+        {
+            var response = await _mediator.Send(new GetPatientDrugAdministrationByVisitInfoQuery()
+            {
+                PatientMasterVisitId = patientMasterVisitId,
+                PatientId = patientId
+            }, Request.HttpContext.RequestAborted);
+
+            if (response.IsValid)
+                return Ok(response.Value);
+            return BadRequest(response);
+        }
+
         [HttpGet("{Id}")]
         public async Task<object> GetById(int id)
         {
