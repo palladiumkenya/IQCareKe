@@ -48,13 +48,11 @@ export class PncContraceptivehistoryComponent implements OnInit {
     loadPncContraceptiviveHistory(): void {
         this.pncservice.getFamilyPlanning(this.patientId).subscribe(
             (result) => {
-                console.log(result);
                 for (let i = 0; i < result.length; i++) {
                     if (result[i].patientMasterVisitId == this.patientMasterVisitId) {
                         this.ContraceptiveHistoryForm.get('onFamilyPlanning').setValue(result[i].familyPlanningStatusId);
                         this.pncservice.getFamilyPlanningMethod(this.patientId).subscribe(
                             (res) => {
-                                console.log(res);
                                 for (let j = 0; j < res.length; j++) {
                                     if (res[j].patientFPId == result[i].id) {
                                         this.ContraceptiveHistoryForm.get('familyPlanningMethod').setValue(res[j].fpMethodId);

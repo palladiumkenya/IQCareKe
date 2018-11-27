@@ -143,11 +143,14 @@
                                             </span>
                                         </ng-template>
 
-                                        <app-diagnosis (notify)="onDiagnosisNotify($event)"></app-diagnosis>
+                                        <app-diagnosis (notify)="onDiagnosisNotify($event)" [PatientId]="patientId"
+                                            [isEdit]="isEdit" [PatientMasterVisitId]="patientMasterVisitId"></app-diagnosis>
 
-                                        <app-maternity-referral (notify)="onReferralNotify($event)" [dischargeOptions]="referralOptions"></app-maternity-referral>
+                                        <app-maternity-referral (notify)="onReferralNotify($event)" [dischargeOptions]="referralOptions"
+                                            [patientId]="patientId" [isEdit]="isEdit" [patientMasterVisitId]="patientMasterVisitId"></app-maternity-referral>
 
-                                        <app-maternity-next-appointment (notify)="onNextAppointmentNotify($event)">
+                                        <app-maternity-next-appointment (notify)="onNextAppointmentNotify($event)"
+                                            [patientId]="patientId" [isEdit]="isEdit" [patientMasterVisitId]="patientMasterVisitId">
                                         </app-maternity-next-appointment>
 
                                         <div class="row">
