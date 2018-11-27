@@ -27,7 +27,7 @@ namespace IQCare.Web.CCC.UC.Adherence
             if (!IsPostBack)
             {
                 populateQuestions();
-                //getPsychosocialCircumstances(PatientId,PatientMasterVisitId);
+                getPsychosocialCircumstances(PatientId,PatientMasterVisitId);
             }
         }
         protected void populateQuestions()
@@ -130,7 +130,7 @@ namespace IQCare.Web.CCC.UC.Adherence
             }
 
             var PSM = new PatientScreeningManager();
-            List<PatientScreening> screeningList = PSM.GetPatientScreening(PatientId);
+            List<PatientScreening> screeningList = PSM.GetPatientScreeningByVisitId(patientId, patientMasterVisitId);
             if (screeningList != null)
             {
                 foreach (var value in screeningList)

@@ -238,7 +238,7 @@ namespace IQCare.Web.CCC.UC.Depression
         public void getCageaidData(int PatientId)
         {
             var PSM = new PatientScreeningManager();
-            List<PatientScreening> screeningList = PSM.GetPatientScreeningByVisitId(PatientId, PmVisitId);
+            List<PatientScreening> screeningList = PSM.GetPatientScreeningByVisitId(PatientId, PatientMasterVisitId);
                 //PSM.GetPatientScreening(PatientId);
             if (screeningList != null)
             {
@@ -253,7 +253,7 @@ namespace IQCare.Web.CCC.UC.Depression
                 }
             }
             var PCN = new PatientClinicalNotesLogic();
-            List<PatientClinicalNotes> notesList = PCN.getPatientClinicalNotesByVisitId(PatientId, PmVisitId);
+            List<PatientClinicalNotes> notesList = PCN.getPatientClinicalNotesByVisitId(PatientId, PatientMasterVisitId);
                 //PCN.getPatientClinicalNotes(PatientId);
             if (notesList.Any())
             {

@@ -20155,6 +20155,33 @@
     <ListName>ServiceRegisteredForAtPharmacy</ListName>
   </Mst_Decode>
   <Mst_Decode>
+    <ID>1663</ID>
+    <Name>Under 5</Name>
+    <CodeID>1184</CodeID>
+    <SRNo>1</SRNo>
+    <DeleteFlag>0</DeleteFlag>
+    <SystemId>0</SystemId>
+    <ListName>Payment Exemption</ListName>
+  </Mst_Decode>
+  <Mst_Decode>
+    <ID>1664</ID>
+    <Name>Maternity</Name>
+    <CodeID>1184</CodeID>
+    <SRNo>1</SRNo>
+    <DeleteFlag>0</DeleteFlag>
+    <SystemId>0</SystemId>
+    <ListName>Payment Exemption</ListName>
+  </Mst_Decode>
+  <Mst_Decode>
+    <ID>1665</ID>
+    <Name>Prisoner</Name>
+    <CodeID>1184</CodeID>
+    <SRNo>1</SRNo>
+    <DeleteFlag>0</DeleteFlag>
+    <SystemId>0</SystemId>
+    <ListName>Payment Exemption</ListName>
+  </Mst_Decode>
+  <Mst_Decode>
     <ID>1530</ID>
     <Name>ADR Adverse Drug Reaction</Name>
     <CodeID>1176</CodeID>
@@ -29012,7 +29039,7 @@
     <FeatureId>8</FeatureId>
     <FeatureName>Care Tracking</FeatureName>
     <ReportFlag>0</ReportFlag>
-    <DeleteFlag>1</DeleteFlag>
+    <DeleteFlag>0</DeleteFlag>
     <AdminFlag>0</AdminFlag>
     <SystemID>0</SystemID>
   </Mst_Feature>
@@ -30841,14 +30868,6 @@
     <SystemID>0</SystemID>
   </Mst_Feature>
   <Mst_Feature>
-    <FeatureId>239</FeatureId>
-    <FeatureName>Billing Reversal Approval</FeatureName>
-    <ReportFlag>0</ReportFlag>
-    <DeleteFlag>0</DeleteFlag>
-    <AdminFlag>1</AdminFlag>
-    <SystemID>0</SystemID>
-  </Mst_Feature>
-  <Mst_Feature>
     <FeatureId>240</FeatureId>
     <FeatureName>Billing Quick Panel</FeatureName>
     <ReportFlag>0</ReportFlag>
@@ -31243,6 +31262,14 @@
   <Mst_Feature>
     <FeatureId>305</FeatureId>
     <FeatureName>Configure Custom Lists</FeatureName>
+    <ReportFlag>0</ReportFlag>
+    <DeleteFlag>0</DeleteFlag>
+    <AdminFlag>1</AdminFlag>
+    <SystemID>0</SystemID>
+  </Mst_Feature>
+  <Mst_Feature>
+    <FeatureId>306</FeatureId>
+    <FeatureName>Billing Reversal Approval</FeatureName>
     <ReportFlag>0</ReportFlag>
     <DeleteFlag>0</DeleteFlag>
     <AdminFlag>1</AdminFlag>

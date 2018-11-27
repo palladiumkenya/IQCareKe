@@ -23,7 +23,7 @@ namespace IQCare.Web.CCC.UC.Adherence
             if (!IsPostBack)
             {
                 populateQuestions();
-                //getUnderstanding(PatientId, PatientMasterVisitId);
+                getUnderstanding(PatientId, PatientMasterVisitId);
             }
         }
 
@@ -60,7 +60,7 @@ namespace IQCare.Web.CCC.UC.Adherence
         protected void getUnderstanding(int patientId, int patientMasterVisitId)
         {
             var PSM = new PatientScreeningManager();
-            List<PatientScreening> screeningList = PSM.GetPatientScreening(PatientId);
+            List<PatientScreening> screeningList = PSM.GetPatientScreeningByVisitId(patientId, patientMasterVisitId);
             if (screeningList != null)
             {
                 foreach (var value in screeningList)

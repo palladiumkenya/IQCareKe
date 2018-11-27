@@ -85,7 +85,7 @@ namespace IQCare.Web.CCC.UC.Depression
         public void getGbvScreeningData(int PatientId)
         {
             var PSM = new PatientScreeningManager();
-            List<PatientScreening> screeningList = PSM.GetPatientScreeningByVisitId(PatientId, PmVisitId);
+            List<PatientScreening> screeningList = PSM.GetPatientScreeningByVisitId(PatientId, PatientMasterVisitId);
                 //.GetPatientScreening(PatientId);
             if (screeningList != null)
             {

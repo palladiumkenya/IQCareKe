@@ -24,7 +24,7 @@ namespace IQCare.Web.CCC.UC.Adherence
             if (!IsPostBack)
             {
                 displayQuestions();
-                //getHIVAwareness(PatientId, PatientMasterVisitId);
+                getHIVAwareness(PatientId, PatientMasterVisitId);
             }
         }
 
@@ -61,7 +61,8 @@ namespace IQCare.Web.CCC.UC.Adherence
         protected void getHIVAwareness(int PatientId, int PatientMasterVisitId)
         {
             var PSM = new PatientScreeningManager();
-            List<PatientScreening> screeningList = PSM.GetPatientScreening(PatientId);
+            List<PatientScreening> screeningList = PSM.GetPatientScreeningByVisitId(PatientId, PatientMasterVisitId);
+
             if (screeningList != null)
             {
                 foreach (var value in screeningList)
