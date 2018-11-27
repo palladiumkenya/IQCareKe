@@ -108,6 +108,7 @@ import { BabyExaminationResolver } from './_services/resolvers/baby-examination.
 import { HeiMedicationComponent } from './hei/hei-medication/hei-medication.component';
 import { AncClientMonitoringComponent } from './anc/anc-client-monitoring/anc-client-monitoring.component';
 import {BirthOutcomeResolver} from './_services/resolvers/BirthOutcomeResolver';
+import { TriageComponent } from './triage/triage.component';
 import { CounselledInfantFeedingResolver } from './_services/resolvers/counselled-infant-feeding.resolver';
 
 @NgModule({
@@ -176,7 +177,8 @@ import { CounselledInfantFeedingResolver } from './_services/resolvers/counselle
         MaternityEncounterComponent,
         AncHivtestingComponent,
         HeiMedicationComponent,
-        AncClientMonitoringComponent
+        AncClientMonitoringComponent,
+        TriageComponent
     ],
     providers: [
         PlaceOfDeliveryResolver,

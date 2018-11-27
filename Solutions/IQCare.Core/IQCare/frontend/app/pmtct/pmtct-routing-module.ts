@@ -68,7 +68,8 @@ import { TbScreeningResolver } from './_services/resolvers/tb-screening.resolver
 import { MaternityEncounterComponent } from './maternity/maternity-encounter/maternity-encounter.component';
 import { MotherExaminationResolver } from './_services/resolvers/motherexamination.resolver';
 import { BabyExaminationResolver } from './_services/resolvers/baby-examination.resolver';
-import { BirthOutcomeResolver } from './_services/resolvers/BirthOutcomeResolver';
+import {BirthOutcomeResolver} from './_services/resolvers/BirthOutcomeResolver';
+import { TriageComponent } from './triage/triage.component';
 import { CounselledInfantFeedingResolver } from './_services/resolvers/counselled-infant-feeding.resolver';
 
 
@@ -224,6 +225,11 @@ const routes: Routes = [
     {
         path: 'maternity/encounters/:patientId/:personId/:serviceAreaId',
         component: MaternityEncounterComponent,
+        pathMatch: 'full'
+    },
+    {
+        path:'triage',
+        component: TriageComponent,
         pathMatch: 'full'
     },
     {

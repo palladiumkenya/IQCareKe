@@ -98,7 +98,7 @@ export class DeliveryMaternityComponent implements OnInit {
 
     public calculateGestation(deliveryDate: Date, dateLmp : Date): string{
         const now = moment(deliveryDate);
-        const gestation = moment.duration(now.diff(this.dateLMP)).asWeeks().toFixed(1);
+        const gestation = moment.duration(now.diff(dateLmp)).asWeeks().toFixed(1);
         return gestation;
     }
 
