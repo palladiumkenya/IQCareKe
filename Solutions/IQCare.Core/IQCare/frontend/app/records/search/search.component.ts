@@ -22,6 +22,7 @@ import * as AppState from '../../shared/reducers/app.states';
     ],
 })
 export class SearchComponent implements OnInit, AfterViewInit {
+    afterSearch: boolean = false;
     @ViewChild(MatPaginator) paginator: MatPaginator;
     @ViewChild(MatSort) sort: MatSort;
     displayedColumns = ['id', 'firstName', 'middleName', 'lastName', 'dateOfBirth', 'ageNumber', 'gender', 'fullName'];
@@ -60,10 +61,10 @@ export class SearchComponent implements OnInit, AfterViewInit {
     doSearch() {
         this.searchService.searchClient(this.clientSearch).subscribe(
             (res) => {
-                // console.log(res['personSearch']);
                 const rows = [];
                 res['personSearch'].forEach(element => rows.push(element, { detailRow: true, element }));
                 this.dataSource.data = rows;
+                this.afterSearch = true;
             },
             (error) => {
                 // console.error(error);

@@ -37,6 +37,7 @@ export class HeiComponent implements OnInit {
     patientEncounterId: number;
     visitDate: Date;
     visitType: number;
+    isEdit: boolean = false;
 
     defaultParameters: DefaultParameters;
 
@@ -120,18 +121,24 @@ export class HeiComponent implements OnInit {
     ngOnInit() {
         this.route.params.subscribe(
             (params) => {
-                console.log(params);
                 const { patientId, personId, serviceAreaId } = params;
                 this.patientId = patientId;
                 this.personId = personId;
                 this.serviceAreaId = serviceAreaId;
+                this.patientMasterVisitId = params.patientMasterVisitId;
+                this.patientEncounterId = params.patientEncounterId;
+
+                if (!this.patientMasterVisitId) {
+                    this.patientMasterVisitId = JSON.parse(localStorage.getItem('patientMasterVisitId'));
+                    this.patientEncounterId = JSON.parse(localStorage.getItem('patientEncounterId'));
+                } else {
+                    this.isEdit = true;
+                }
             }
         );
 
         this.userId = JSON.parse(localStorage.getItem('appUserId'));
         this.locationId = JSON.parse(localStorage.getItem('appLocationId'));
-        this.patientMasterVisitId = JSON.parse(localStorage.getItem('patientMasterVisitId'));
-        this.patientEncounterId = JSON.parse(localStorage.getItem('patientEncounterId'));
         this.visitDate = new Date(localStorage.getItem('visitDate'));
         this.visitType = JSON.parse(localStorage.getItem('visitType'));
 
@@ -234,7 +241,6 @@ export class HeiComponent implements OnInit {
 
         this.heiService.getPatientById(this.patientId).subscribe(
             (result) => {
-                console.log(result);
                 const { ptn_pk } = result;
                 this.ptn_pk = ptn_pk;
             }
@@ -337,13 +343,8 @@ export class HeiComponent implements OnInit {
             'Vaccinations': this.vaccination
         };
 
-
-        console.log('vaccine');
-        console.log(this.vaccination);
-
         for (let i = 0; i < this.milestone_table_data.length; i++) {
             for (let j = 0; j < this.milestone_table_data[i].length; j++) {
-                console.log(this.milestone_table_data[i][j]);
                 this.milestone.push({
                     Id: 0,
                     PatientId: this.patientId,

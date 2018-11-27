@@ -133,6 +133,13 @@ export class PncService {
             );
     }
 
+    public getReferral(): Observable<any[]> {
+        return this.http.get<any[]>(this.API_URL + '/').pipe(
+            tap(getReferral => this.errorHandler.log(`successfully fetched referral`)),
+            catchError(this.errorHandler.handleError<any>('Error fetching referral'))
+        );
+    }
+
     public savePncNextAppointment(pncNextAppointmentCommand: PatientAppointment): Observable<any> {
         return this.http.post<any>(this.API_URL + '/api/PatientReferralAndAppointment/AddPatientNextAppointment',
             JSON.stringify(pncNextAppointmentCommand), httpOptions).pipe(

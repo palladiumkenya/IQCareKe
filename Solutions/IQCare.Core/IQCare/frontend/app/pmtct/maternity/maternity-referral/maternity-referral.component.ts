@@ -1,3 +1,4 @@
+import { PncService } from './../../_services/pnc.service';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { NotificationService } from '../../../shared/_services/notification.service';
@@ -21,7 +22,8 @@ export class MaternityReferralComponent implements OnInit {
 
     constructor(private formBuilder: FormBuilder,
         private notificationService: NotificationService,
-        private snotifyService: SnotifyService) {
+        private snotifyService: SnotifyService,
+        private pncservice: PncService) {
     }
 
     ngOnInit() {
@@ -45,6 +47,12 @@ export class MaternityReferralComponent implements OnInit {
     }
 
     loadMaternityReferral(): void {
+        this.pncservice.getReferral().subscribe(
+            (result) => {
+            },
+            (error) => { },
+            () => { }
+        );
     }
 
 }

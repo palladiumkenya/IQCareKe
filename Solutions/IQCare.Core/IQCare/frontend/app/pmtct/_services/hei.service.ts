@@ -56,6 +56,13 @@ export class HeiService {
         );
     }
 
+    public getImmunizationHistory(patientId: number): Observable<any[]> {
+        return this.http.get<any[]>(this.API_URL + '/api/ImmunizationHistory/' + patientId).pipe(
+            tap(getImmunizationHistory => this.errorHandler.log(`successfully fetched immunization history`)),
+            catchError(this.errorHandler.handleError<any>('Error fetching immunization history'))
+        );
+    }
+
     public saveMilestoneHistory(milestone: Milestone[]): Observable<Milestone[]> {
         if (milestone.length == 0) {
             return of([]);
@@ -81,7 +88,6 @@ export class HeiService {
             'BirthWeight': heidelivery['birthweight'],
             'ProphylaxisReceived': heidelivery['arvprophylaxisreceived'],
             'ProphylaxisReceivedOther': heidelivery['arvprophylaxisother'],
-
             'MotherIsRegistered': isMotherRegistered,
             'MotherPersonId': maternalHistory['motherpersonid'],
             'MotherStatusId': maternalHistory['stateofmother'],
@@ -100,6 +106,13 @@ export class HeiService {
         return this.http.post<any>(this.API_URL + '/api/DeliveryMaternalHistory', JSON.stringify(Indata), httpOptions).pipe(
             tap(saveHieDelivery => this.errorHandler.log(`successfully added hei delivery`)),
             catchError(this.errorHandler.handleError<any>('Error saving hei delivery'))
+        );
+    }
+
+    public getHeiDelivery(patientId: number, patientMasterVisitId: number): Observable<any[]> {
+        return this.http.get<any[]>(this.API_URL + '/api/DeliveryMaternalHistory/' + patientId + '/' + patientMasterVisitId).pipe(
+            tap(getHeiDelivery => this.errorHandler.log(`successfully fetched hei delivery`)),
+            catchError(this.errorHandler.handleError<any>('Error fetching hei delivery'))
         );
     }
 

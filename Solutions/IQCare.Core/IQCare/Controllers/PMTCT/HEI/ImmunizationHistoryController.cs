@@ -28,7 +28,7 @@ namespace IQCare.Controllers.PMTCT.HEI
         {
             var response = await _mediator.Send(immunizationHistoryCommand, Request.HttpContext.RequestAborted);
             if (response.IsValid)
-                return Ok(response);
+                return Ok(response.Value);
             return BadRequest(response);
         }
 
