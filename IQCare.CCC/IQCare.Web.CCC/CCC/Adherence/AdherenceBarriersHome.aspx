@@ -104,12 +104,12 @@
          
         $(document).ready(function () {
               $('#VisitDatedatepicker').datetimepicker({
-        format: 'DD-MMM-YYYY',
+          format: 'DD-MMM-YYYY',
             date: VisitDate,
            allowInputToggle: true,
            useCurrent: false
 
-});
+        });
         
      $('#VisitDatedatepicker').datetimepicker({
             format: 'DD-MMM-YYYY',

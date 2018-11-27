@@ -108,6 +108,10 @@ function AddChronicIllness() {
     var chronicIllnessID = $('#ChronicIllnessName').find(":selected").val();
     var illnessTreatment = $("#illnessTreatment").val();
     var treatmentDose = $('#treatmentDose').val();
+    if (treatmentDose > 0)
+        treatmentDose = treatmentDose;
+    else
+        treatmentDose = "";
     var onSet = $('#txtOnsetDate').val();
     //Validate duplication
     var chronicIllnessFound = 0;

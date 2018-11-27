@@ -132,7 +132,7 @@ namespace IQCare.Web.CCC.UC.Depression
         public void getDepressionScreeningData()
         {
             var PSM = new PatientScreeningManager();
-            List<PatientScreening> screeningList = PSM.GetPatientScreeningByVisitId(PatientId, PmVisitId);
+            List<PatientScreening> screeningList = PSM.GetPatientScreeningByVisitId(PatientId, PatientMasterVisitId);
             if (screeningList != null)
             {
                 foreach (var value in screeningList)
@@ -151,7 +151,7 @@ namespace IQCare.Web.CCC.UC.Depression
                 }
             }
             var PCN = new PatientClinicalNotesLogic();
-            List<PatientClinicalNotes> notesList = PCN.getPatientClinicalNotesByVisitId(PatientId, PmVisitId);
+            List<PatientClinicalNotes> notesList = PCN.getPatientClinicalNotesByVisitId(PatientId, PatientMasterVisitId);
                 //getPatientClinicalNotes(PatientId);
             if (notesList.Any())
             {

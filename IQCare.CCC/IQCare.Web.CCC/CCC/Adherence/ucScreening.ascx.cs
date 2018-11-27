@@ -28,7 +28,7 @@ namespace IQCare.Web.CCC.UC.Adherence
             if (!IsPostBack)
             {
                 displayQuestions();
-                //getScreening(PatientId, PatientMasterVisitId);
+                getScreening(PatientId, PatientMasterVisitId);
             }
         }
         protected void displayQuestions()
