@@ -45,18 +45,18 @@ export class TriageComponent implements OnInit {
       height : new FormControl('', [ Validators.required,Validators.max(270)]),
       weight : new FormControl('',[Validators.required, Validators.max(600)]),
       bmi : new FormControl({value:0, disabled:true},[Validators.required]),
-      headCircumference : new FormControl('',[Validators.required]),
-      muac : new FormControl('',[Validators.required]),
-      weightForAge : new FormControl('',[Validators.required]),
-      weightForHeight : new FormControl('',[Validators.required]),
-      bmiZ : new FormControl('',[Validators.required]),
+      headCircumference : new FormControl(''),
+      muac : new FormControl(''),
+      weightForAge : new FormControl(''),
+      weightForHeight : new FormControl(''),
+      bmiZ : new FormControl(''),
       bpDiastolic : new FormControl('',[Validators.required]),
       bpSystolic : new FormControl('',[Validators.required]),
       temperature : new FormControl('',[Validators.required]),
-      respiratoryRate : new FormControl('',[Validators.required]),
-      heartRate : new FormControl('',[Validators.required]),
-      spo2:new FormControl('',[Validators.required]),
-      comment : new FormControl('',[Validators.required])
+      respiratoryRate : new FormControl(''),
+      heartRate : new FormControl(''),
+      spo2:new FormControl(''),
+      comment : new FormControl('')
     });
   }
 
