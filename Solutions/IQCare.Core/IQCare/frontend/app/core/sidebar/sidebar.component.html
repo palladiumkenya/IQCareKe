@@ -35,6 +35,15 @@
             </a>
         </li>
 
+        <ng-container *ngIf="">
+                <li>
+                 <a routerLink="/clinical/triage">
+                            <i class="menu-icon fa fa-user-md"></i>
+                            <span class="menu-text">Triage</span>
+                 </a>
+                </li>
+        </ng-container>
+
         <ng-container *ngIf="selectedService == 'hts'">
             <li>
                 <a routerLink="/registration/home">

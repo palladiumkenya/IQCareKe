@@ -44,25 +44,21 @@
         <input matInput placeholder="MUAC(cm)" formControlName="muac" required>
       </mat-form-field>
   </div>
-      <div class="col-lg-3 col-xs-12"></div>
-  </div>
-
-  <div class="row">
-      <div class="col-lg-3 col-xs-12">
-          <mat-form-field class="col-md-12">
-            <input matInput placeholder="Weight for age zscore" formControlName="weightForAge" required>
-          </mat-form-field>
-      </div>
-      <div class="col-lg-3 col-xs-12">
+  <div class="col-lg-3 col-xs-12">
         <mat-form-field class="col-md-12">
-          <input matInput placeholder="Height for age zscore" formControlName="weightForHeight" required>
+          <input matInput placeholder="Weight for age zscore" formControlName="weightForAge" required>
         </mat-form-field>
     </div>
     <div class="col-lg-3 col-xs-12">
       <mat-form-field class="col-md-12">
-        <input matInput placeholder="BMI Zscore" formControlName="bmiZ" required>
+        <input matInput placeholder="Height for age zscore" formControlName="weightForHeight" required>
       </mat-form-field>
-    </div>
+  </div>
+  <div class="col-lg-3 col-xs-12">
+    <mat-form-field class="col-md-12">
+      <input matInput placeholder="BMI Zscore" formControlName="bmiZ" required>
+    </mat-form-field>
+  </div>
 </div>
 
 <div class="row">
@@ -126,6 +122,12 @@
     <div class="col-lg-12 col-xs-12">
         <div class="example-container mat-elevation-z0">
             <mat-table #table [dataSource]="dataSource">
+                 <!-- Symbol Column -->
+                 <ng-container matColumnDef="visitdate">
+                        <mat-header-cell *matHeaderCellDef><strong>Visit Date</strong> </mat-header-cell>
+                        <mat-cell *matCellDef="let vitalsDataTable"> {{vitalsDataTable.visitDate | date:'dd/MM/yyyy'}} </mat-cell>
+                    </ng-container>
+    
                 <!-- Position Column -->
                 <ng-container matColumnDef="height">
                     <mat-header-cell *matHeaderCellDef><strong>Height(cm)</strong> </mat-header-cell>
@@ -143,13 +145,6 @@
                     <mat-header-cell *matHeaderCellDef> <strong>BMI</strong> </mat-header-cell>
                     <mat-cell *matCellDef="let vitalsDataTable"> {{vitalsDataTable.bmi}} </mat-cell>
                 </ng-container>
-
-                <!-- Symbol Column -->
-                <ng-container matColumnDef="muac">
-                    <mat-header-cell *matHeaderCellDef><strong>Muac (cm)</strong> </mat-header-cell>
-                    <mat-cell *matCellDef="let vitalsDataTable"> {{vitalsDataTable.muac}} </mat-cell>
-                </ng-container>
-
                 <!-- Symbol Column -->
                 <ng-container matColumnDef="diastolic">
                     <mat-header-cell *matHeaderCellDef><strong>BP (Diastolic)</strong> </mat-header-cell>
