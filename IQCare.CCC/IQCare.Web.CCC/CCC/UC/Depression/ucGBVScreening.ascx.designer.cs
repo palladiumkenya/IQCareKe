@@ -13,6 +13,15 @@ namespace IQCare.Web.CCC.UC.Depression {
     public partial class ucGBVScreening {
         
         /// <summary>
+        /// PersonVisitDate control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox PersonVisitDate;
+        
+        /// <summary>
         /// PHgbvquestions control.
         /// </summary>
         /// <remarks>

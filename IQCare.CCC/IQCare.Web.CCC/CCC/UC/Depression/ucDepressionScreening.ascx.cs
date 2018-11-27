@@ -10,20 +10,41 @@ using IQCare.CCC.UILogic.Screening;
 using Entities.CCC.Screening;
 using Entities.CCC.Encounter;
 using IQCare.CCC.UILogic.Encounter;
+using IQCare.CCC.UILogic.Visit;
+using Entities.CCC.Visit;
 
 namespace IQCare.Web.CCC.UC.Depression
 {
     public partial class ucDepressionScreening : System.Web.UI.UserControl
     {
-        public int depressionId, PatientId, PatientMasterVisitId, userId, NotesId, screenTypeId;
+        public int depressionId, PatientId, PatientMasterVisitId, userId, NotesId, screenTypeId,PmVisitId;
+        public DateTime? VisitDate;
         public RadioButtonList rbList;
         public TextBox depressionTotalTb;
         public TextBox depressionSeverityTb;
         public TextBox depressionReccommendationTb;
+        public int serviceAreaId;
+        
+        protected string DateOfEnrollment
+        {
+            get { return Session["DateOfEnrollment"].ToString(); }
+        }
+
         protected void Page_Load(object sender, EventArgs e)
         {
+            
             PatientId = Convert.ToInt32(HttpContext.Current.Session["PatientPK"]);
             PatientMasterVisitId = Convert.ToInt32(Request.QueryString["visitId"] != null ? Request.QueryString["visitId"] : HttpContext.Current.Session["PatientMasterVisitId"]);
+
+            PatientMasterVisitManager VisitManager = new PatientMasterVisitManager();
+            List<PatientMasterVisit> visitPatientMasterVisit = new List<PatientMasterVisit>();
+             visitPatientMasterVisit = VisitManager.GetVisitDateByMasterVisitId(PatientId, PatientMasterVisitId);
+            VisitDate = visitPatientMasterVisit[0].VisitDate;
+            PatientLookupManager patientLookupManager = new PatientLookupManager();
+            var patientDetails = patientLookupManager.GetPatientDetailSummary(PatientId);
+            Session["DateOfEnrollment"] = patientDetails.EnrollmentDate;
+            serviceAreaId = Convert.ToInt32(LookupLogic.GetLookupItemId("MoH 257 GREENCARD"));
+            PmVisitId = Convert.ToInt32(Session["ExistingRecordPatientMasterVisitID"].ToString() == "0" ? Session["PatientMasterVisitID"].ToString() : Session["ExistingRecordPatientMasterVisitID"].ToString());
             userId = Convert.ToInt32(Session["AppUserId"]);
             if (!IsPostBack)
             {
@@ -49,7 +70,7 @@ namespace IQCare.Web.CCC.UC.Depression
                 rbList.ID = value.ItemId.ToString();
                 rbList.RepeatColumns = 4;
                 rbList.ClientIDMode = System.Web.UI.ClientIDMode.Static;
-                rbList.CssClass = "rbList";
+                rbList.CssClass = "rbListDepression";
                 lookUp.populateRBL(rbList, "GeneralYesNo");
                 PlaceHolder2.Controls.Add(rbList);
                 PlaceHolder2.Controls.Add(new LiteralControl("</div>"));
@@ -68,7 +89,7 @@ namespace IQCare.Web.CCC.UC.Depression
                 rbList.ID = value.ItemId.ToString();
                 rbList.RepeatColumns = 4;
                 rbList.ClientIDMode = System.Web.UI.ClientIDMode.Static;
-                rbList.CssClass = "rbList";
+                rbList.CssClass = "rbListDepression";
                 lookUp.populateRBL(rbList, "DepressionFrequency");
                 PlaceHolder1.Controls.Add(rbList);
                 PlaceHolder1.Controls.Add(new LiteralControl("</div>"));
@@ -111,7 +132,7 @@ namespace IQCare.Web.CCC.UC.Depression
         public void getDepressionScreeningData()
         {
             var PSM = new PatientScreeningManager();
-            List<PatientScreening> screeningList = PSM.GetPatientScreening(PatientId);
+            List<PatientScreening> screeningList = PSM.GetPatientScreeningByVisitId(PatientId, PatientMasterVisitId);
             if (screeningList != null)
             {
                 foreach (var value in screeningList)
@@ -130,7 +151,8 @@ namespace IQCare.Web.CCC.UC.Depression
                 }
             }
             var PCN = new PatientClinicalNotesLogic();
-            List<PatientClinicalNotes> notesList = PCN.getPatientClinicalNotes(PatientId);
+            List<PatientClinicalNotes> notesList = PCN.getPatientClinicalNotesByVisitId(PatientId, PatientMasterVisitId);
+                //getPatientClinicalNotes(PatientId);
             if (notesList.Any())
             {
                 foreach (var value in notesList)

@@ -22,12 +22,16 @@ namespace IQCare.Web.CCC.UC.Depression
         public string AppointmentId;
         public Boolean IsEditAppointment = false;
         public int IsEditAppointmentId = 0;
+        public int PmVisitId;
         protected void Page_Load(object sender, EventArgs e)
         {
             age = Convert.ToInt32(HttpContext.Current.Session["Age"]);
             PatientId = Convert.ToInt32(HttpContext.Current.Session["PatientPK"]);
             gender = HttpContext.Current.Session["Gender"].ToString();
             PatientMasterVisitId = Convert.ToInt32(Request.QueryString["visitId"] != null ? Request.QueryString["visitId"] : HttpContext.Current.Session["PatientMasterVisitId"]);
+            PmVisitId = Convert.ToInt32(Session["ExistingRecordPatientMasterVisitID"].ToString() == "0" ? Session["PatientMasterVisitID"].ToString() : Session["ExistingRecordPatientMasterVisitID"].ToString());
+
+
             if (age >= 9 && age <= 19)
             {
                 Control crafftControl = Page.LoadControl("~/CCC/UC/Depression/ucCRAFFT.ascx");

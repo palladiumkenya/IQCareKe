@@ -556,10 +556,14 @@ namespace IQCare.Web.CCC.UC
             var PCN = new PatientClinicalNotesLogic();
             var PSM = new PatientScreeningManager();
             //get screening data
-            PatientScreening[] patientScreeningData = PSM.GetPatientScreening(PatientId).ToArray();
+            PatientScreening[] patientScreeningData = PSM.GetPatientScreeningByVisitId(PatientId, PmVisitId).ToArray();
+                //GetPatientScreening(PatientId).ToArray();
+                //(PatientId).ToArray();
             Session["patientScreeningData"] = patientScreeningData;
             //get notes data
-            PatientClinicalNotes[] patientNotesData = PCN.getPatientClinicalNotes(PatientId).ToArray();
+            PatientClinicalNotes[] patientNotesData = PCN.getPatientClinicalNotesByVisitId(PatientId, PmVisitId).ToArray();
+               // (PatientId).ToArray();
+                //.getPatientClinicalNotes(PatientId).ToArray();
             Session["patientNotesData"] = patientNotesData;
         }
     }

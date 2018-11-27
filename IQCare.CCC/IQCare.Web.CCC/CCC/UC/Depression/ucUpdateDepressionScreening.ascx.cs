@@ -15,7 +15,7 @@ namespace IQCare.Web.CCC.UC.Depression
 {
     public partial class ucUpdateDepressionScreening : System.Web.UI.UserControl
     {
-        public int depressionId, PatientId, PatientMasterVisitId, userId, NotesId, screenTypeId;
+        public int depressionId, PatientId, PatientMasterVisitId, userId, NotesId, screenTypeId,PmVisitId;
         public RadioButtonList rbList;
         public TextBox depressionTotalTb;
         public TextBox depressionSeverityTb;
@@ -25,6 +25,7 @@ namespace IQCare.Web.CCC.UC.Depression
             PatientId = Convert.ToInt32(HttpContext.Current.Session["PatientPK"]);
             PatientMasterVisitId = Convert.ToInt32(Request.QueryString["visitId"] != null ? Request.QueryString["visitId"] : HttpContext.Current.Session["PatientMasterVisitId"]);
             userId = Convert.ToInt32(Session["AppUserId"]);
+            PmVisitId = Convert.ToInt32(Session["ExistingRecordPatientMasterVisitID"].ToString() == "0" ? Session["PatientMasterVisitID"].ToString() : Session["ExistingRecordPatientMasterVisitID"].ToString());
             if (!IsPostBack)
             {
                 displayQuestions();
@@ -111,7 +112,8 @@ namespace IQCare.Web.CCC.UC.Depression
         public void getDepressionScreeningData()
         {
             var PSM = new PatientScreeningManager();
-            List<PatientScreening> screeningList = PSM.GetPatientScreening(PatientId);
+            List<PatientScreening> screeningList = PSM.GetPatientScreeningByVisitId(PatientId, PmVisitId);
+                //.GetPatientScreening(PatientId);
             if (screeningList != null)
             {
                 foreach (var value in screeningList)
@@ -130,7 +132,8 @@ namespace IQCare.Web.CCC.UC.Depression
                 }
             }
             var PCN = new PatientClinicalNotesLogic();
-            List<PatientClinicalNotes> notesList = PCN.getPatientClinicalNotes(PatientId);
+            List<PatientClinicalNotes> notesList = PCN.getPatientClinicalNotesByVisitId(PatientId, PmVisitId);
+                //.getPatientClinicalNotes(PatientId);
             if (notesList.Any())
             {
                 foreach (var value in notesList)

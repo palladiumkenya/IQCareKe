@@ -108,6 +108,10 @@ function AddChronicIllness() {
     var chronicIllnessID = $('#ChronicIllnessName').find(":selected").val();
     var illnessTreatment = $("#illnessTreatment").val();
     var treatmentDose = $('#treatmentDose').val();
+    if (treatmentDose > 0)
+        treatmentDose = treatmentDose;
+    else
+        treatmentDose = "";
     var onSet = $('#txtOnsetDate').val();
     //Validate duplication
     var chronicIllnessFound = 0;
@@ -315,14 +319,26 @@ var diagnosisList = new Array();
 var treatmentList = new Array();
 
 function AddDiagnosis() {
-    var diagnosisID = $('#txtDiagnosisID').val();
-    var diagnosis = $('#Diagnosis').val();
+
+    var value = $("#Diagnosis").val();
+    if  (value=== "") {
+        toastr.error("Error", "Please Enter Diagnosis");
+        return false;
+    }
+    var result = value.split("~");
+    
+    var diagnosisID = result[0] + "~" + result[1]
+    var diagnosis = result[2];
     var treatment = $('#DiagnosisTreatment').val();
+    if (treatment === "") {
+        toastr.error("Error,Please enter Treatment");
+        return false;
+    }
 
     //Validate duplication
     var diagnosisFound = 0;
     var treatmentFound = 0;
-
+   
     if (diagnosis === "") {
         toastr.error("Error", "Please enter Diagnosis");
         return false;
@@ -337,11 +353,19 @@ function AddDiagnosis() {
 
     } else {
 
-
+        
         diagnosisList.push("" + diagnosisID + "");
+        if (diagnosisListStatus.length > 0) {
+            diagnosisListStatus.push({ id: diagnosisID, Disease: diagnosis, Treatment: treatment, deleteflag: false, deleted: true })
+        }
+       // diagnosisListStatus.push({ id: diagnosisID, deleteflag: false });
+   
         treatmentList.push("" + treatment + "");
+        DiseaseList.push("" + diagnosis + "");
 
+        deleteflag = false;
         arrDiagnosisUI = [];
+      
 
         arrDiagnosisUI.push([
             diagnosisID, diagnosis, treatment,
@@ -350,8 +374,8 @@ function AddDiagnosis() {
 
         DrawDataTable("dtlDiagnosis", arrDiagnosisUI);
 
-        $('#txtDiagnosisID').val("");
-        $('#Diagnosis').val("");
+       // $('#txtDiagnosisID').val("");
+        $('#Diagnosis').select2("val", "0");
         $('#DiagnosisTreatment').val("");
         
     }

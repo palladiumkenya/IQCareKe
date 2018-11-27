@@ -157,6 +157,7 @@
     <Compile Include="Interoperability\ProcessViralLoadResults.cs" />
     <Compile Include="Interoperability\DTOValidator\PatientRegistrationValidation.cs" />
     <Compile Include="Interoperability\ViralLoadMessageManager.cs" />
+    <Compile Include="LookupICDCodesListManager.cs" />
     <Compile Include="LookupLogic.cs" />
     <Compile Include="MstPatientLogic.cs" />
     <Compile Include="NeontalEncounterManager.cs" />
