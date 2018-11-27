@@ -8,7 +8,10 @@ namespace IQCare.PMTCT.Core.Models
         [Key]
         public int Id { get; set; }
         public int PatientId { get; set; }
+        public int ServiceAreaId { get; set; }
         public int PatientMasterVisitId { get; set; }
+        public int? PregnancyId { get; set; }
+        public DateTime VisitDate { get; set; }
         public int? VisitNumber { get; set; }
         public int? DaysPostPartum { get; set; }
         public int ? VisitType { get; set; }

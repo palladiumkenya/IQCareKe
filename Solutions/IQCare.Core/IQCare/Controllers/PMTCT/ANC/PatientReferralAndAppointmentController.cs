@@ -8,6 +8,8 @@ using IQCare.PMTCT.BusinessProcess.Commands;
 using IQCare.PMTCT.Core.Models;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
+using GetPatientAppointmentCommand = IQCare.PMTCT.BusinessProcess.Commands.Appointment.GetPatientAppointmentCommand;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -38,6 +40,31 @@ namespace IQCare.Controllers.PMTCT.ANC
                 return Ok(response.Value);
 
             return BadRequest(response);
+        }
+
+        [HttpGet("{patientId}/{patientMasterVisitId}")]
+        public async Task<IActionResult> GetAppointment(int patientId, int patientMasterVisitId)
+        {
+            if (patientId < 1 || patientMasterVisitId < 1)
+                return BadRequest(patientId);
+            var response =
+                await _mediator.Send(new GetPatientAppointmentCommand{PatientId = patientId, PatientMasterVisitId = patientMasterVisitId},
+                    HttpContext.RequestAborted);
+            if (response.IsValid)
+                return Ok(response.Value);
+            return BadRequest(response.Value);
+        }
+
+        [HttpGet("{patientId}/{patientMasterVisitId}")]
+        public async Task<IActionResult> GetReferral(int patientId, int patientMasterVisitId)
+        {
+            if (patientId < 1 || patientMasterVisitId < 1)
+                return BadRequest(patientId);
+
+            var response = await _mediator.Send(new PmtctReferralCommand{ PatientId = patientId, PatientMasterVisitId = patientMasterVisitId },HttpContext.RequestAborted);
+            if (response.IsValid)
+                return Ok(response.Value);
+            return BadRequest(response.Value);
         }
 
 

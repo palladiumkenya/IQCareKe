@@ -217,14 +217,16 @@ export class MaternityService {
 
 
     public GetPatientDeliveryInfo(masterVisitId: number) {
-        return this.http.get<any>(this.API_PMTCT_URL + '/api/MaternityPatientDeliveryInfo/GetDeliveryInfoByMasterVisitId/' + masterVisitId).pipe(
+        return this.http.get<any>(this.API_PMTCT_URL + '/api/MaternityPatientDeliveryInfo/GetDeliveryInfoByMasterVisitId/' +
+            masterVisitId).pipe(
             tap(GetPatientDeliveryInfoByMasterVisitId => this.errorHandler.log('get patient delivery info by master Id')),
             catchError(this.errorHandler.handleError<any[]>('GetPatientDeliveryInfoByMasterVisitId'))
         );
     }
 
     public GetPatientDischargeInfo(masterVisitId: number) {
-        return this.http.get<any>(this.API_PMTCT_URL + '/api/MaternityPatientDeliveryInfo/GetDischargeInfoByMasterVisitId/' + masterVisitId).pipe(
+        return this.http.get<any>(this.API_PMTCT_URL + '/api/MaternityPatientDeliveryInfo/GetDischargeInfoByMasterVisitId/' +
+            masterVisitId).pipe(
             tap(GetPatientDischargeInfo => this.errorHandler.log('get patient discharge info by master Id')),
             catchError(this.errorHandler.handleError<any[]>('GetPatientDischargeInfo'))
         );

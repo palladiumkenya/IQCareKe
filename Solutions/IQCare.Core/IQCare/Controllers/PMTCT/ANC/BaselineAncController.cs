@@ -27,7 +27,7 @@ namespace IQCare.Controllers.PMTCT.ANC
             return BadRequest(response);
         }
         
-        [HttpGet("PatientId")]
+        [HttpGet("{PatientId}")]
         public async Task<IActionResult> Get(int patientId)
         {
             if (patientId < 1)

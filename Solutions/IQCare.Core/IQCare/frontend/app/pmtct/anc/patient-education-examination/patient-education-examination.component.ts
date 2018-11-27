@@ -40,6 +40,7 @@ export class PatientEducationExaminationComponent implements OnInit {
 
     public patientCounseling$: Subscription;
     public physicalExam$: Subscription;
+    public baseline$: Subscription;
 
     public patientEducationEmitterData: PatientEducationEmitter;
     public counsellingOptions: any[] = [];
@@ -94,27 +95,9 @@ export class PatientEducationExaminationComponent implements OnInit {
         if (this.isEdit) {
 
             this.getPatientCounselingData(this.PatientId, this.PatientMasterVisitId);
-            this.getPatientExaminationData(this.PatientId, this.PatientMasterVisitId);
+            this.getBaselineAncProfile(this.PatientId);
         }
     }
-
-    /*  public getLookupOptions(groupName: string, masterName: any[]) {
-          this.LookupItems$ = this._lookupItemService.getByGroupName(groupName)
-              .subscribe(
-                  p => {
-                      const lookupOptions = p['lookupItems'];
-                      for (let i = 0; i < lookupOptions.length; i++) {
-                          masterName.push({'itemId': lookupOptions[i]['itemId'], 'itemName': lookupOptions[i]['itemName']});
-                      }
-                  },
-                  (err) => {
-                      console.log(err);
-                      this.snotifyService.error('Error fetching lookups' + err, 'Encounter', this.notificationService.getConfig());
-                  },
-                  () => {
-                      console.log(this.lookupItemView$);
-                  });
-      }*/
 
     public moveNextStep() {
         console.log(this.PatientEducationFormGroup.value);
@@ -179,27 +162,23 @@ export class PatientEducationExaminationComponent implements OnInit {
              );
     }
 
-    public getPatientExaminationData(patientId: number, patientMasterVisitId: number): void {
-        this.physicalExam$ = this.ancService.getPatientPhysicalExaminationInfo(patientId, patientMasterVisitId)
+    public getBaselineAncProfile(patientId: number): void {
+        this.baseline$ = this.ancService.getBaselineAncProfile(patientId)
             .subscribe(
                 p => {
-                    console.log(p);
-                    const education = p;
-                    if (p) {
-                        const breastExam = education.filter(x => x.examinationType == 'GeneralExamination' && x.exam == 'Breast Exam');
-                        const syphilis = education.filter(x => x.examinationType == 'GeneralExamination' && x.exam == 'Treated Syphilis');
+                    const baseline = p;
 
-                        if (breastExam.length > 0) {
-                            this.PatientEducationFormGroup.get('breastExamDone').setValue(breastExam[0]['findingId']);
-                        }
-
-                        if (syphilis.length > 0) {
-                            this.PatientEducationFormGroup.get('breastExamDone').setValue(syphilis[0]['findingId']);
-                        }
+                    console.log('baseline info');
+                    console.log(baseline);
+                    console.log(baseline['breastExamDone']);
+                    if (baseline['id'] > 0) {
+                        this.PatientEducationFormGroup.get('breastExamDone').setValue(baseline['breastExamDone']);
+                        this.PatientEducationFormGroup.get('treatedSyphilis').setValue(baseline['treatedForSyphilis']);
                     }
-                },
-                (err) => {
-                    console.log(err);
+                }
+                ,
+                error1 => {
+
                 },
                 () => {
 

@@ -6,8 +6,9 @@ using MediatR;
 
 namespace IQCare.PMTCT.BusinessProcess.Commands.Appointment
 {
-    public class GetPatientAppointmentCommand: IRequest<Result<List<PatientAppointment>>>
+    public class GetPatientAppointmentCommand: IRequest<Result<PatientAppointment>>
     {
         public int PatientId { get; set; }
+        public int PatientMasterVisitId { get; set; }
     }
 }

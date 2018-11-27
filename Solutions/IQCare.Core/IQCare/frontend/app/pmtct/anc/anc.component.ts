@@ -20,10 +20,12 @@ import {PatientAppointment} from '../_models/PatientAppointmet';
 import {PatientEducation} from '../_models/PatientEducation';
 import {PatientChronicIllness} from '../_models/PatientChronicIllness';
 import {LookupItemService} from '../../shared/_services/lookup-item.service';
-import {HivStatusCommand} from '../_models/HivStatusCommand';
-import {HivTestsCommand} from '../_models/HivTestsCommand';
 import {AdministeredDrugInfo} from '../maternity/commands/administer-drug-info';
-import {DrugAdministrationCommand} from '../maternity/commands/drug-administration-command';
+import {VisitDetailsCommand} from '../_models/visit-details-command';
+import {PregnancyAncCommand} from '../_models/pregnancy-anc-command';
+import {HivTestsCommand} from '../_models/HivTestsCommand';
+import {HivStatusCommand} from '../_models/HivStatusCommand';
+import {BaselineAncProfileCommand} from '../_models/baseline-anc-profile-command';
 
 @Component({
     selector: 'app-anc',
@@ -57,6 +59,7 @@ export class AncComponent implements OnInit, OnDestroy {
     public visitDate: Date;
     locationId: number;
     hivTestEntryPoint: number;
+    public pregnancyId: number;
 
     visitDetailsOptions: any[] = [];
     patientEducationFormOptions: any[] = [];
@@ -247,6 +250,7 @@ export class AncComponent implements OnInit, OnDestroy {
 
     onVisitDetailsNotify(formGroup: FormGroup): void {
         this.visitDetailsFormGroup.push(formGroup);
+        this.getPatientPregnancy(this.patientId);
     }
 
     OnMotherProfileNotify(formGroup: FormGroup): void {
@@ -282,11 +286,18 @@ export class AncComponent implements OnInit, OnDestroy {
         this.ReferralMatFormGroup.push(formGroup);
     }
 
-    public getPatientPregnanc(patientId: number) {
-        this.getPatientPregnancy$ = this.visitDetailsService.getPregnancyProfile(this.patientId)
+    public getPatientPregnancy(patientId: number) {
+        this.getPatientPregnancy$ = this.visitDetailsService.getPregnancyProfile(patientId)
             .subscribe(
                 p => {
                     this.pregnancy = p;
+                    const pregnancy = p;
+                    if (pregnancy) {
+
+                        console.log(pregnancy);
+                        this.pregnancyId = pregnancy.id;
+                        console.log('pregancyId:' + this.pregnancyId);
+                    }
                 },
                 (err) => {
                     this.snotifyService.error('Error fetching pregnancy' + err, 'Pregnancy Profile', this.notificationService.getConfig());
@@ -316,6 +327,7 @@ export class AncComponent implements OnInit, OnDestroy {
 
     public onSubmit() {
 
+
         const ancVisitDetailsCommand: any = {
             PatientId: parseInt(this.patientId.toString(), 10),
             PatientMasterVisitId: this.patientMasterVisitId,
@@ -333,6 +345,30 @@ export class AncComponent implements OnInit, OnDestroy {
             UserId: this.userId,
             DaysPostPartum: 0
         };
+
+        const pregnancyCommand = {
+            PatientId: parseInt(this.patientId.toString(), 10),
+            PatientMasterVisitId: this.patientMasterVisitId,
+            Lmp: new Date(this.visitDetailsFormGroup.value[1]['dateLMP']),
+            Edd: this.visitDetailsFormGroup.value[1]['dateEDD'],
+            Gestation: this.visitDetailsFormGroup.value[1]['gestation'],
+            Gravidae: this.visitDetailsFormGroup.value[1]['gravidae'],
+            Parity: this.visitDetailsFormGroup.value[1]['parityOne'],
+            Parity2: this.visitDetailsFormGroup.value[1]['parityTwo'],
+            CreatedBy: this.userId
+        } as PregnancyAncCommand;
+
+        const visitDetailsCommand = {
+            PatientId: parseInt(this.patientId.toString(), 10),
+            ServiceAreaId: parseInt(this.serviceAreaId.toString(), 10),
+            PregnancyId: this.pregnancyId,
+            PatientMasterVisitId: this.patientMasterVisitId,
+            VisitDate: new Date(this.visitDetailsFormGroup.value[0]['visitDate']),
+            VisitNumber: parseInt(this.visitDetailsFormGroup.value[0]['visitNumber'], 10),
+            DaysPostPartum: (this.formType == 'pnc') ? this.visitDetailsFormGroup.value[1]['DaysPostPartum'] : 0,
+            VisitType: this.visitDetailsFormGroup.value[0]['visitType'],
+            UserId: this.userId
+        }as VisitDetailsCommand;
 
         for (let i = 0; i < this.counselling_data.length; i++) {
 
@@ -355,6 +391,16 @@ export class AncComponent implements OnInit, OnDestroy {
             CreateBy: this.userId,
             CounsellingTopics: this.counselling_data
         };
+
+        const baselineAncCommand = {
+            PatientId: this.patientId,
+            PatientMasterVisitId: this.patientMasterVisitId,
+            PregnancyId: this.pregnancyId,
+            HivStatusBeforeAnc: this.HivStatusMatFormGroup.value[0]['hivStatusBeforeFirstVisit'],
+            TreatedForSyphilis: this.PatientEducationMatFormGroup.value['treatedSyphilis'],
+            BreastExamDone: this.PatientEducationMatFormGroup.value['breastExamDone'],
+            CreatedBy: this.userId
+        } as BaselineAncProfileCommand;
 
         const yesOption = this.yesNoOptions.filter(obj => obj.itemName == 'Yes');
         const noOption = this.yesNoOptions.filter(obj => obj.itemName == 'No');
@@ -463,45 +509,6 @@ export class AncComponent implements OnInit, OnDestroy {
             }
         );
 
-        /*
-                this.patientDrug.push(
-                    {
-                        PatientId: this.patientId,
-                        PatientMasterVisitId: this.patientMasterVisitId,
-                        DrugAdministered: ARVFirstVisit[0].itemId,
-                        Value: this.HaartProphylaxisMatFormGroup.value[0]['onArvBeforeANCVisit'], DeleteFlag: 0, Description: '',
-                        Id: 0, CreatedBy: this.userId
-                    },
-                    {
-                        PatientId: this.patientId,
-                        PatientMasterVisitId: this.patientMasterVisitId,
-                        DrugAdministered: HaartAnc[0].itemId,
-                        Value: this.HaartProphylaxisMatFormGroup.value[0]['startedHaartANC'], DeleteFlag: 0, Description: '',
-                        Id: 0, CreatedBy: this.userId
-                    },
-                    {
-                        PatientId: this.patientId,
-                        PatientMasterVisitId: this.patientMasterVisitId,
-                        DrugAdministered: cotrimoxazole[0].itemId,
-                        Value: this.HaartProphylaxisMatFormGroup.value[0]['cotrimoxazole'], DeleteFlag: 0, Description: '',
-                        Id: 0, CreatedBy: this.userId
-                    },
-                    {
-                        PatientId: this.patientId,
-                        PatientMasterVisitId: this.patientMasterVisitId,
-                        DrugAdministered: AZT[0].itemId,
-                        Value: this.HaartProphylaxisMatFormGroup.value[0]['aztFortheBaby'], DeleteFlag: 0, Description: '',
-                        Id: 0, CreatedBy: this.userId
-                    },
-                    {
-                        PatientId: this.patientId,
-                        PatientMasterVisitId: this.patientMasterVisitId,
-                        DrugAdministered: NVP[0].itemId,
-                        Value: this.HaartProphylaxisMatFormGroup.value[0]['nvpForBaby'], DeleteFlag: 0, Description: '',
-                        Id: 0, CreatedBy: this.userId
-                    }
-                ); */
-
         for (let i = 0; i < this.chronicIllnessData.length; i++) {
 
             this.chronic_illness_data.push({
@@ -517,107 +524,176 @@ export class AncComponent implements OnInit, OnDestroy {
                 Active: 0,
                 CreateBy: this.userId
             });
+        }
 
 
-            const drugAdministrationCommand: any = {
-                Id: 0,
-                PatientId: this.patientId,
-                PatientMasterVisitId: this.patientMasterVisitId,
-                CreatedBy: this.userId,
-                AdministredDrugs: this.AdministredDrugs
-            };
+        const drugAdministrationCommand: any = {
+            Id: 0,
+            PatientId: this.patientId,
+            PatientMasterVisitId: this.patientMasterVisitId,
+            CreatedBy: this.userId,
+            AdministredDrugs: this.AdministredDrugs
+        };
 
 
+        const chronicIllnessCommand = {
+            'PatientChronicIllnesses': this.chronic_illness_data,
+        };
 
-            const chronicIllnessCommand = {
-                'PatientChronicIllnesses': this.chronic_illness_data,
-            };
-
-            const haartProphylaxisCommand = {
-                PatientDrugAdministration: this.patientDrug,
-                PatientChronicIllnesses: this.chronic_illness_data,
-                OtherIllness: this.HaartProphylaxisMatFormGroup.value[0]['otherIllness']
-            } as HaartProphylaxisCommand;
+        const haartProphylaxisCommand = {
+            PatientDrugAdministration: this.patientDrug,
+            PatientChronicIllnesses: this.chronic_illness_data,
+            OtherIllness: this.HaartProphylaxisMatFormGroup.value[0]['otherIllness']
+        } as HaartProphylaxisCommand;
 
 
-            for (let j = 0; j < this.preventiServicesData.length; j++) {
-                this.preventiveService.push(
-                    {
-                        Id: 0,
+        for (let j = 0; j < this.preventiServicesData.length; j++) {
+            this.preventiveService.push(
+                {
+                    Id: 0,
+                    PatientId: this.patientId,
+                    PatientMasterVisitId: this.patientMasterVisitId,
+                    PreventiveServiceId: this.preventiServicesData[j]['preventiveServiceId'],
+                    PreventiveServiceDate: this.preventiServicesData[j]['dateGiven'],
+                    Description: this.preventiServicesData[j]['comments'],
+                    NextSchedule: new Date(this.preventiServicesData[j]['nextSchedule'])
+                });
+        }
+
+        const preventiveServiceCommand: PatientPreventiveService = {
+            preventiveService: this.preventiveService,
+            InsecticideGivenDate: new Date(this.PreventiveServiceMatFormGroup.value[0]['insecticideTreatedNetGivenDate']),
+            AntenatalExercise: this.PreventiveServiceMatFormGroup.value[0]['antenatalExercise'],
+            PartnerTestingVisit: this.PreventiveServiceMatFormGroup.value[0]['PartnerTestingVisit'],
+            FinalHIVResult: this.PreventiveServiceMatFormGroup.value[0]['finalHIVResult'],
+            InsecticideTreatedNet: this.PreventiveServiceMatFormGroup.value[0]['insecticideTreatedNet'],
+            CreatedBy: this.userId
+        };
+
+        console.log('refferalFormGroup');
+        console.log(this.ReferralMatFormGroup);
+        const referralCommand = {
+            PatientId: this.patientId,
+            PatientMasterVisitId: this.patientMasterVisitId,
+            ReferredFrom: this.ReferralMatFormGroup.value[0]['referredFrom'],
+            ReferredTo: this.ReferralMatFormGroup.value[0]['referredTo'],
+            ReferralReason: 'n/a',
+            ReferralDate: new Date(),
+            RefferedBY: this.userId,
+            DeleteFlag: 0,
+            CreateBy: this.userId
+        } as PatientReferral;
+
+        const appointmentCommand = {
+            PatientId: this.patientId,
+            PatientMasterVisitId: this.patientMasterVisitId,
+            AppointmentDate: new Date(this.ReferralMatFormGroup.value[0]['nextAppointmentDate']),
+            Description: this.ReferralMatFormGroup.value[0]['serviceRemarks'],
+            CreatedBy: this.userId,
+            ServiceAreaId: this.serviceAreaId,
+            StatusDate: new Date(),
+            DifferentiatedCareId: 0,
+            AppointmentReason: 'Follow Up'
+        } as PatientAppointment;
+
+
+        // const AncPregnancy = this.ancService.savePregnancy(pregnancyCommand);
+        // const ancVisitDetails = this.ancService.saveANCVisitDetails(ancVisitDetailsCommand);
+        const visitDetails = this.ancService.saveVisitDetails(visitDetailsCommand);
+        const baseline = this.ancService.SaveBaselineProfile(baselineAncCommand);
+        const ancEducation = this.ancService.savePatientEducation(patientEducationCommand);
+        const ancHivStatus = this.ancService.saveAncHivStatus(hivStatusCommand, this.hiv_status_table_data);
+        const ancClientMonitoring = this.ancService.saveClientMonitoring(clientMonitoringCommand);
+        const ancHaart = this.ancService.saveHaartProphylaxis(haartProphylaxisCommand);
+        const drugAdministration = this.ancService.saveDrugAdministration(drugAdministrationCommand);
+        const chronicIllness = this.ancService.savePatientChronicIllness(chronicIllnessCommand);
+        const ancPreventiveService = this.ancService.savePreventiveServices(preventiveServiceCommand);
+        const ancReferral = this.ancService.saveReferral(referralCommand);
+        const ancAppointment = this.ancService.saveAppointment(appointmentCommand);
+
+        if (this.pregnancyId < 1) {
+            const AncPregnancy = this.ancService.savePregnancy(pregnancyCommand).subscribe(
+                (res) => {
+                    console.log(`pregancyId new` + res);
+                    this.pregnancyId = res.pregnancyId;
+                    console.log(res.pregnancyId);
+
+                    const visitDetailsCommands = {
+                        PatientId: parseInt(this.patientId.toString(), 10),
+                        ServiceAreaId: parseInt(this.serviceAreaId.toString(), 10),
+                        PregnancyId: res.pregnancyId,
+                        PatientMasterVisitId: this.patientMasterVisitId,
+                        VisitDate: new Date(this.visitDetailsFormGroup.value[0]['visitDate']),
+                        VisitNumber: parseInt(this.visitDetailsFormGroup.value[0]['visitNumber'], 10),
+                        DaysPostPartum: (this.formType == 'pnc') ? this.visitDetailsFormGroup.value[1]['DaysPostPartum'] : 0,
+                        VisitType: this.visitDetailsFormGroup.value[0]['visitType'],
+                        UserId: this.userId
+
+                    }as VisitDetailsCommand;
+
+                    const baselineAncCommands = {
                         PatientId: this.patientId,
                         PatientMasterVisitId: this.patientMasterVisitId,
-                        PreventiveServiceId: this.preventiServicesData[i]['preventiveServiceId'],
-                        PreventiveServiceDate: this.preventiServicesData[i]['dateGiven'],
-                        Description: this.preventiServicesData[i]['comments'],
-                        NextSchedule: new Date(this.preventiServicesData[i]['nextSchedule'])
-                    });
-            }
+                        PregnancyId: res,
+                        HivStatusBeforeAnc: this.HivStatusMatFormGroup.value[0]['hivStatusBeforeFirstVisit'],
+                        TreatedForSyphilis: this.PatientEducationMatFormGroup.value['treatedSyphilis'],
+                        BreastExamDone: this.PatientEducationMatFormGroup.value['breastExamDone'],
+                        CreatedBy: this.userId
+                    } as BaselineAncProfileCommand;
 
-            const preventiveServiceCommand: PatientPreventiveService = {
-                preventiveService: this.preventiveService,
-                InsecticideGivenDate: new Date(this.PreventiveServiceMatFormGroup.value[0]['insecticideTreatedNetGivenDate']),
-                AntenatalExercise: this.PreventiveServiceMatFormGroup.value[0]['antenatalExercise'],
-                PartnerTestingVisit: this.PreventiveServiceMatFormGroup.value[0]['PartnerTestingVisit'],
-                FinalHIVResult: this.PreventiveServiceMatFormGroup.value[0]['finalHIVResult'],
-                InsecticideTreatedNet: this.PreventiveServiceMatFormGroup.value[0]['insecticideTreatedNet'],
-                CreatedBy: this.userId
-            };
+                    const ancVisitDetail = this.ancService.saveVisitDetails(visitDetailsCommands);
+                    const baselineAnc = this.ancService.SaveBaselineProfile(baselineAncCommands);
 
-            console.log('refferalFormGroup');
-            console.log(this.ReferralMatFormGroup);
-            const referralCommand = {
-                PatientId: this.patientId,
-                PatientMasterVisitId: this.patientMasterVisitId,
-                ReferredFrom: this.ReferralMatFormGroup.value[0]['referredFrom'],
-                ReferredTo: this.ReferralMatFormGroup.value[0]['referredTo'],
-                ReferralReason: 'n/a',
-                ReferralDate: new Date(),
-                RefferedBY: this.userId,
-                DeleteFlag: 0,
-                CreateBy: this.userId
-            } as PatientReferral;
+                    forkJoin([
+                        ancVisitDetail,
+                        baselineAnc,
+                        ancEducation,
+                        ancHivStatus,
+                        ancClientMonitoring,
+                        drugAdministration,
+                        chronicIllness,
+                        ancPreventiveService,
+                        ancReferral,
+                        ancAppointment
 
-            const appointmentCommand = {
-                PatientId: this.patientId,
-                PatientMasterVisitId: this.patientMasterVisitId,
-                AppointmentDate: new Date(this.ReferralMatFormGroup.value[0]['nextAppointmentDate']),
-                Description: this.ReferralMatFormGroup.value[0]['serviceRemarks'],
-                CreatedBy: this.userId,
-                ServiceAreaId: this.serviceAreaId,
-                StatusDate: new Date(),
-                DifferentiatedCareId: 0,
-                AppointmentReason: 'Follow Up'
-            } as PatientAppointment;
-
-            const ancVisitDetails = this.ancService.saveANCVisitDetails(ancVisitDetailsCommand);
-            const ancEducation = this.ancService.savePatientEducation(patientEducationCommand);
-            const ancHivStatus = this.ancService.saveAncHivStatus(hivStatusCommand, this.hiv_status_table_data);
-            const ancClientMonitoring = this.ancService.saveClientMonitoring(clientMonitoringCommand);
-           // const ancHaart = this.ancService.saveHaartProphylaxis(haartProphylaxisCommand);
-             const drugAdministration = this.ancService.saveDrugAdministration(drugAdministrationCommand);
-             const chronicIllness = this.ancService.savePatientChronicIllness(chronicIllnessCommand);
-            const ancPreventiveService = this.ancService.savePreventiveServices(preventiveServiceCommand);
-            const ancReferral = this.ancService.saveReferral(referralCommand);
-            const ancAppointment = this.ancService.saveAppointment(appointmentCommand);
-
-
+                    ])
+                        .subscribe(
+                            (result) => {
+                                console.log(result);
+                                this.snotifyService.success('Successfully saved ANC encounter ', 'ANC',
+                                    this.notificationService.getConfig());
+                                this.zone.run(() => {
+                                    this.router.navigate(['/dashboard/personhome/' + this.personId], {relativeTo: this.route});
+                                });
+                            },
+                            (error) => {
+                                console.log(`error ` + error);
+                            },
+                            () => {
+                                console.log(`complete`);
+                            }
+                        );
+                }
+            );
+        } else {
             forkJoin([
-                ancVisitDetails,
-                ancEducation,
-                ancHivStatus,
-                ancClientMonitoring,
-                //  ancHaart,
-                ancPreventiveService,
-                ancReferral,
-                ancAppointment
+               // visitDetails,
+                baseline,
+              //  ancEducation,
+              //  ancHivStatus,
+              //  ancClientMonitoring,
+               // drugAdministration,
+              //  chronicIllness,
+              //  ancPreventiveService,
+              //  ancReferral,
+             //   ancAppointment
 
             ])
                 .subscribe(
                     (result) => {
                         console.log(result);
-
-                        this.snotifyService.success('Successfully saved ANC encounter ', 'ANC', this.notificationService.getConfig());
-
+                        this.snotifyService.success('Successfully saved ANC encounter ', 'ANC',
+                            this.notificationService.getConfig());
                         this.zone.run(() => {
                             this.router.navigate(['/dashboard/personhome/' + this.personId], {relativeTo: this.route});
                         });
@@ -630,9 +706,10 @@ export class AncComponent implements OnInit, OnDestroy {
                     }
                 );
         }
+
     }
 
     ngOnDestroy(): void {
-
+        this.getPatientPregnancy$.unsubscribe();
     }
 }

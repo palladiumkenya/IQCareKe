@@ -32,11 +32,9 @@ namespace IQCare.PMTCT.BusinessProcess.CommandHandlers.pregnancy
                     {
                         PatientId = request.PatientId,
                         PatientMasterVisitId = request.PatientMasterVisitId,
-                        CreateDate = request.CreateDate,
+                        CreateDate = DateTime.Now,
                         CreatedBy = request.CreatedBy,
-                        Outcome = request.Outcome,
-                        DateOfOutcome = request.DateOfOutcome,
-                        DeleteFlag = request.DeleteFlag,
+                        DeleteFlag = false,
                         Lmp = request.Lmp,
                         Edd = request.Edd,
                         Gestation = request.Gestation,
@@ -49,7 +47,7 @@ namespace IQCare.PMTCT.BusinessProcess.CommandHandlers.pregnancy
 
                     return Result<AddPregnancyCommandResult>.Valid(new AddPregnancyCommandResult()
                     {
-                        PatientId = _preganancy.PatientId,PregnancyId = _preganancy.Id
+                        PregnancyId = _preganancy.Id
                             
                     });
                 }

@@ -51,7 +51,10 @@
                                                 HIV Status
                                             </span>
                                         </ng-template>
-                                        <app-anc-hivtesting (notify)="onHivStatusNotify($event)" [hivTestingOptions]="hivTestingOptions"></app-anc-hivtesting>
+                                        <app-anc-hivtesting (notify)="onHivStatusNotify($event)" [hivTestingOptions]="hivTestingOptions"
+                                                            [isEdit]="isEdit"
+                                                            [PatientId]="patientId"
+                                                            [PatientMasterVisitId]="patientMasterVisitId"></app-anc-hivtesting>
 
                                         <div>
                                             <button mat-raised-button color="primary" matStepperPrevious type="button">Previous</button>

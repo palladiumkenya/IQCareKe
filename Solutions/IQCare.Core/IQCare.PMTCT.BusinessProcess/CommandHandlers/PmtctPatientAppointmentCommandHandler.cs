@@ -12,7 +12,7 @@ using Serilog;
 
 namespace IQCare.PMTCT.BusinessProcess.CommandHandlers
 {
-    public class PmtctPatientAppointmentCommandHandler: IRequestHandler<GetPatientAppointmentCommand, Result<List<PatientAppointment>>>
+    public class PmtctPatientAppointmentCommandHandler: IRequestHandler<GetPatientAppointmentCommand, Result<PatientAppointment>>
     {
         private readonly IPmtctUnitOfWork _unitOfWork;
 
@@ -21,20 +21,20 @@ namespace IQCare.PMTCT.BusinessProcess.CommandHandlers
             _unitOfWork = unitOfWork ?? throw new ArgumentException(nameof(unitOfWork));
         }
 
-        public async Task<Result<List<PatientAppointment>>> Handle(GetPatientAppointmentCommand request, CancellationToken cancellationToken)
+        public async Task<Result<PatientAppointment>> Handle(GetPatientAppointmentCommand request, CancellationToken cancellationToken)
         {
             using (_unitOfWork)
             {
                 try
                 {
-                    List<PatientAppointment> patientAppointment = await _unitOfWork.Repository<PatientAppointment>()
-                        .Get(x => x.PatientId == request.PatientId).ToListAsync();
-                    return Result<List<PatientAppointment>>.Valid(patientAppointment);
+                    PatientAppointment patientAppointment = await _unitOfWork.Repository<PatientAppointment>()
+                        .Get(x => x.PatientId == request.PatientId && x.PatientMasterVisitId==request.PatientMasterVisitId).FirstOrDefaultAsync();
+                    return Result<PatientAppointment>.Valid(patientAppointment);
                 }
                 catch (Exception e)
                 {
                     Log.Error(e.Message + " " + e.InnerException);
-                    return Library.Result<List<PatientAppointment>>.Invalid(e.Message);
+                    return Library.Result<PatientAppointment>.Invalid(e.Message);
                 }
             }
         }

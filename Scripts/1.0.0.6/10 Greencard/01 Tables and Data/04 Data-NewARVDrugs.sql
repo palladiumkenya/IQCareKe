@@ -15,7 +15,7 @@ INSERT INTO NewDrugList(DrugName,Abbreviation,strength) VALUES('Lopinavir/Ritona
 INSERT INTO NewDrugList(DrugName,Abbreviation,strength) VALUES('Lopinavir/Ritonavir-80mg/20mg/ml','LPV/r','80mg/20mg/ml');
 INSERT INTO NewDrugList(DrugName,Abbreviation,strength) VALUES('Lopinavir/Ritonavir-40mg/10mg','LPV/r','40mg/10mg');
 INSERT INTO NewDrugList(DrugName,Abbreviation,strength) VALUES('Reltegravir-400mg','RAL','400mg');
-INSERT INTO NewDrugList(DrugName,Abbreviation,strength) VALUES('Tenofavir/Lamivudine/Efavirenz/Dolutegravir-300mg/300mg/50mg','TDF/3TC/ DTG','300mg/300mg/50mg');
+INSERT INTO NewDrugList(DrugName,Abbreviation,strength) VALUES('Tenofavir/Lamivudine/Efavirenz/Dolutegravir-300mg/300mg/50mg','TDF/3TC/DTG','300mg/300mg/50mg');
 
 Declare @ItemId int=0,@genericId int,@count int,@counter int=0,@maxId int=0,@minId int=0;
 Declare @drugName varchar(100),@abbreviation varchar(10),@strength varchar(10);
