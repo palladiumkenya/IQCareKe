@@ -78,7 +78,7 @@
                 <mat-form-field class="col-md-12">
                     <mat-select formControlName="otherIllness" placeholder="Do the patient have other illnesses?" >
                         <mat-option value="0"> Select</mat-option>
-                        <mat-option *ngFor="let yesnonaOption of yesnonaOptions" [value]="yesnonaOption.itemId" >
+                        <mat-option *ngFor="let yesnonaOption of yesnonaOptions" [value]="yesnonaOption.itemId" (onSelectionChange)="onChangeOtherIllness($event)" >
                             {{yesnonaOption.itemName}}
                         </mat-option>
                     </mat-select>

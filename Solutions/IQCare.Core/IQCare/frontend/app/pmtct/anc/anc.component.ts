@@ -26,6 +26,7 @@ import {PregnancyAncCommand} from '../_models/pregnancy-anc-command';
 import {HivTestsCommand} from '../_models/HivTestsCommand';
 import {HivStatusCommand} from '../_models/HivStatusCommand';
 import {BaselineAncProfileCommand} from '../_models/baseline-anc-profile-command';
+import {DrugAdministerCommand} from '../_models/drug-administer-command';
 
 @Component({
     selector: 'app-anc',
@@ -60,6 +61,7 @@ export class AncComponent implements OnInit, OnDestroy {
     locationId: number;
     hivTestEntryPoint: number;
     public pregnancyId: number;
+    public appointmentCommand: any;
 
     visitDetailsOptions: any[] = [];
     patientEducationFormOptions: any[] = [];
@@ -136,11 +138,12 @@ export class AncComponent implements OnInit, OnDestroy {
                     this.visitId = this.patientMasterVisitId;
                     this.isEdit = true;
                 }
+
+
             }
         );
 
         this.userId = JSON.parse(localStorage.getItem('appUserId'));
-        this.patientMasterVisitId = JSON.parse(localStorage.getItem('patientMasterVisitId'));
         this.locationId = JSON.parse(localStorage.getItem('appLocationId'));
         this.visitDate = new Date(localStorage.getItem('visitDate'));
         this.visitType = JSON.parse(localStorage.getItem('visitType'));
@@ -279,6 +282,8 @@ export class AncComponent implements OnInit, OnDestroy {
     onPreventiveServiceNotify(formGroup: Object): void {
         this.PreventiveServiceMatFormGroup.push(formGroup['form']); // = formGroup;
         this.preventiServicesData = formGroup['preventive_service_data'];
+        console.log('preventive services');
+        console.log(this.preventiServicesData);
 
     }
 
@@ -475,8 +480,8 @@ export class AncComponent implements OnInit, OnDestroy {
             ScreeningTB: this.ClientMonitoringMatFormGroup.value[0]['screenedForTB'],
             CaCxMethod: (yesOption[0].itemId == screeningDone) ? this.ClientMonitoringMatFormGroup.value[0]['cacxMethod'] : 0,
             CaCxResult: (yesOption[0].itemId == screeningDone) ? this.ClientMonitoringMatFormGroup.value[0]['cacxResult'] : 0,
-            Comments: (yesOption[0].itemId == screeningDone) ? this.ClientMonitoringMatFormGroup.value[0]['cacxComments'] : '',
-            ClinicalNotes: (yesOption[0].itemId == screeningDone) ? this.ClientMonitoringMatFormGroup.value[0]['cacxComments'] : '',
+            Comments: (yesOption[0].itemId == screeningDone) ? this.ClientMonitoringMatFormGroup.value[0]['cacxComments'] : 'na',
+            ClinicalNotes: (yesOption[0].itemId == screeningDone) ? this.ClientMonitoringMatFormGroup.value[0]['cacxComments'] : 'n/a',
             CreatedBy: (this.userId < 1) ? 1 : this.userId
         } as ClientMonitoringCommand;
 
@@ -509,36 +514,46 @@ export class AncComponent implements OnInit, OnDestroy {
             }
         );
 
-        for (let i = 0; i < this.chronicIllnessData.length; i++) {
+        console.log('administered drugs');
+        console.log(this.AdministredDrugs);
 
-            this.chronic_illness_data.push({
-                Id: 0,
-                PatientId: this.patientId,
-                PatientMasterVisitId: this.patientMasterVisitId,
-                ChronicIllness: this.chronicIllnessData[i]['chronicIllnessId'],
-                Treatment: this.chronicIllnessData[i]['currentTreatment'],
-                Dose: this.chronicIllnessData[i]['dose'],
-                Duration: 0,
-                DeleteFlag: false,
-                OnsetDate: this.chronicIllnessData[i]['onSetDate'],
-                Active: 0,
-                CreateBy: this.userId
-            });
+        const yesno = this.yesNoOptions.filter(x => x.itemName == 'Yes');
+        const otherIllnessOption = this.HaartProphylaxisMatFormGroup.value[0]['otherIllness'];
+
+        if (otherIllnessOption == yesno[0]['itemId']) {
+            for (let i = 0; i < this.chronicIllnessData.length; i++) {
+
+                this.chronic_illness_data.push({
+                    Id: 0,
+                    PatientId: this.patientId,
+                    PatientMasterVisitId: this.patientMasterVisitId,
+                    ChronicIllness: this.chronicIllnessData[i]['chronicIllnessId'],
+                    Treatment: this.chronicIllnessData[i]['currentTreatment'],
+                    Dose: this.chronicIllnessData[i]['dose'],
+                    Duration: 0,
+                    DeleteFlag: false,
+                    OnsetDate: this.chronicIllnessData[i]['onSetDate'],
+                    Active: 0,
+                    CreateBy: this.userId
+                });
+            }
+        } else {
+            this.chronic_illness_data = [];
         }
 
 
-        const drugAdministrationCommand: any = {
+        const drugAdministrationCommand: DrugAdministerCommand = {
             Id: 0,
-            PatientId: this.patientId,
-            PatientMasterVisitId: this.patientMasterVisitId,
+            PatientId: parseInt(this.patientId.toString(), 10),
+            PatientMasterVisitId: parseInt(this.patientMasterVisitId.toString(), 10),
             CreatedBy: this.userId,
-            AdministredDrugs: this.AdministredDrugs
+            AdministeredDrugs: this.AdministredDrugs
         };
 
 
-        const chronicIllnessCommand = {
-            'PatientChronicIllnesses': this.chronic_illness_data,
-        };
+        /* const chronicIllnessCommand = {
+             PatientChronicIllnesses: this.chronic_illness_data,
+         };*/
 
         const haartProphylaxisCommand = {
             PatientDrugAdministration: this.patientDrug,
@@ -584,17 +599,33 @@ export class AncComponent implements OnInit, OnDestroy {
             CreateBy: this.userId
         } as PatientReferral;
 
-        const appointmentCommand = {
-            PatientId: this.patientId,
-            PatientMasterVisitId: this.patientMasterVisitId,
-            AppointmentDate: new Date(this.ReferralMatFormGroup.value[0]['nextAppointmentDate']),
-            Description: this.ReferralMatFormGroup.value[0]['serviceRemarks'],
-            CreatedBy: this.userId,
-            ServiceAreaId: this.serviceAreaId,
-            StatusDate: new Date(),
-            DifferentiatedCareId: 0,
-            AppointmentReason: 'Follow Up'
-        } as PatientAppointment;
+        const appointmentId = this.ReferralMatFormGroup.value[0]['scheduledAppointment'];
+        const yes = this.yesNoNaOptions.filter(x => x.itemName == 'Yes');
+        if (appointmentId == yes[0]['itemId']) {
+            this.appointmentCommand = {
+                PatientId: this.patientId,
+                PatientMasterVisitId: this.patientMasterVisitId,
+                AppointmentDate: new Date(this.ReferralMatFormGroup.value[0]['nextAppointmentDate']),
+                Description: this.ReferralMatFormGroup.value[0]['serviceRemarks'],
+                CreatedBy: this.userId,
+                ServiceAreaId: this.serviceAreaId,
+                StatusDate: new Date(),
+                DifferentiatedCareId: 0,
+                AppointmentReason: 'Follow Up'
+            } as PatientAppointment;
+        } else {
+            this.appointmentCommand = {
+                PatientId: this.patientId,
+                PatientMasterVisitId: this.patientMasterVisitId,
+                AppointmentDate: new Date(this.ReferralMatFormGroup.value[0]['nextAppointmentDate']),
+                Description: this.ReferralMatFormGroup.value[0]['serviceRemarks'],
+                CreatedBy: this.userId,
+                ServiceAreaId: this.serviceAreaId,
+                StatusDate: new Date(),
+                DifferentiatedCareId: 0,
+                AppointmentReason: 'None'
+            } as PatientAppointment;
+        }
 
 
         // const AncPregnancy = this.ancService.savePregnancy(pregnancyCommand);
@@ -606,10 +637,10 @@ export class AncComponent implements OnInit, OnDestroy {
         const ancClientMonitoring = this.ancService.saveClientMonitoring(clientMonitoringCommand);
         const ancHaart = this.ancService.saveHaartProphylaxis(haartProphylaxisCommand);
         const drugAdministration = this.ancService.saveDrugAdministration(drugAdministrationCommand);
-        const chronicIllness = this.ancService.savePatientChronicIllness(chronicIllnessCommand);
+        const chronicIllness = this.ancService.savePatientChronicIllness(this.chronic_illness_data);
         const ancPreventiveService = this.ancService.savePreventiveServices(preventiveServiceCommand);
         const ancReferral = this.ancService.saveReferral(referralCommand);
-        const ancAppointment = this.ancService.saveAppointment(appointmentCommand);
+        const ancAppointment = this.ancService.saveAppointment(this.appointmentCommand);
 
         if (this.pregnancyId < 1) {
             const AncPregnancy = this.ancService.savePregnancy(pregnancyCommand).subscribe(
@@ -632,7 +663,7 @@ export class AncComponent implements OnInit, OnDestroy {
                     }as VisitDetailsCommand;
 
                     const baselineAncCommands = {
-                        PatientId: this.patientId,
+                        PatientId: parseInt(this.patientId.toString(), 10),
                         PatientMasterVisitId: this.patientMasterVisitId,
                         PregnancyId: res,
                         HivStatusBeforeAnc: this.HivStatusMatFormGroup.value[0]['hivStatusBeforeFirstVisit'],
@@ -655,7 +686,6 @@ export class AncComponent implements OnInit, OnDestroy {
                         ancPreventiveService,
                         ancReferral,
                         ancAppointment
-
                     ])
                         .subscribe(
                             (result) => {
@@ -677,16 +707,16 @@ export class AncComponent implements OnInit, OnDestroy {
             );
         } else {
             forkJoin([
-               // visitDetails,
+                visitDetails,
                 baseline,
-              //  ancEducation,
-              //  ancHivStatus,
-              //  ancClientMonitoring,
-               // drugAdministration,
-              //  chronicIllness,
-              //  ancPreventiveService,
-              //  ancReferral,
-             //   ancAppointment
+                ancEducation,
+                ancHivStatus,
+                ancClientMonitoring,
+                drugAdministration,
+                chronicIllness,
+                ancPreventiveService,
+                ancReferral,
+                ancAppointment
 
             ])
                 .subscribe(

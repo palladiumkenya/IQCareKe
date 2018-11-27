@@ -121,14 +121,18 @@ export class AncService {
 
 
     public saveReferral(referralCommand: ReferralAppointmentCommandService): Observable<ReferralAppointmentCommandService> {
+
         return this.http.post<any>(this.API_URL + '' + this._url_ref, JSON.stringify(referralCommand), httpOptions).pipe(
             tap(saveReferralAppointment => this.errorHandler.log('Error posting saveReferral Command')),
             catchError(this.errorHandler.handleError<any>('ReferralAppointmentController'))
         );
     }
 
-    public saveAppointment(referralCommand: ReferralAppointmentCommandService): Observable<ReferralAppointmentCommandService> {
-        return this.http.post<any>(this.API_URL + '' + this._url_app, JSON.stringify(referralCommand), httpOptions).pipe(
+    public saveAppointment(appointmentCommand: ReferralAppointmentCommandService): Observable<ReferralAppointmentCommandService> {
+        if (appointmentCommand['AppointmentReason'] == 'None') {
+            return of([]);
+        }
+        return this.http.post<any>(this.API_URL + '' + this._url_app, JSON.stringify(appointmentCommand), httpOptions).pipe(
             tap(saveReferralAppointment => this.errorHandler.log('Error posting Appointment Command')),
             catchError(this.errorHandler.handleError<any>('ReferralAppointmentController'))
         );
@@ -255,6 +259,23 @@ export class AncService {
             patientId).pipe(
             tap(getPatientPartnerTestingInfo => this.errorHandler.log('get Partner Testing Data')),
             catchError(this.errorHandler.handleError<any[]>('getPatientPartnerTestingInfo'))
+        );
+    }
+
+    public getPatientAppointment(patientId: number, patientMasterVisitId: number) {
+        return this.http.get<any[]>(this.API_URL + '/api/PatientReferralAndAppointment/GetAppointment/' +
+            patientId + '/' + patientMasterVisitId).pipe(
+            tap(getPatientAppointment => this.errorHandler.log('get patientappointment data')),
+            catchError(this.errorHandler.handleError<any[]>('getPatientAppointment'))
+        );
+    }
+
+
+    public getPatientReferral(patientId: number, patientMasterVisitId: number) {
+        return this.http.get<any[]>(this.API_URL + '/api/PatientReferralAndAppointment/GetReferral/' +
+            patientId + '/' + patientMasterVisitId).pipe(
+            tap(getPatientReferral => this.errorHandler.log('get patient Referral data')),
+            catchError(this.errorHandler.handleError<any[]>('getPatientReferral'))
         );
     }
 
