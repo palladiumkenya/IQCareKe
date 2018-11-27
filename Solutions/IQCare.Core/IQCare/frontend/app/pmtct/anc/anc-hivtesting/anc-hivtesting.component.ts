@@ -3,6 +3,8 @@ import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms'
 import { Component, OnInit, EventEmitter, Output, Input } from '@angular/core';
 import { MatDialog, MatDialogConfig, MatTableDataSource } from '@angular/material';
 import { HivStatusComponent } from '../hiv-status/hiv-status.component';
+import {Subscription} from 'rxjs/index';
+import {AncService} from '../../_services/anc.service';
 
 @Component({
     selector: 'app-anc-hivtesting',
@@ -13,6 +15,7 @@ export class AncHivtestingComponent implements OnInit {
     ancHivStatusInitialVisitOptions: LookupItemView[];
     yesnoOptions: LookupItemView[];
     hivFinalResultsOptions: LookupItemView[];
+    baseline$: Subscription;
 
     isHivTestingDone: boolean = false;
 
@@ -24,10 +27,14 @@ export class AncHivtestingComponent implements OnInit {
     HivTestingForm: FormGroup;
     @Input('hivTestingOptions') hivTestingOptions: any;
     @Output() notify: EventEmitter<Object> = new EventEmitter<Object>();
+    @Input('isEdit') isEdit: boolean;
+    @Input('PatientId') PatientId: number;
+    @Input('PatientMasterVisitId') PatientMasterVisitId: number;
 
     constructor(
         private dialog: MatDialog,
-        private _formBuilder: FormBuilder
+        private _formBuilder: FormBuilder,
+        private ancService: AncService
     ) {
 
     }
@@ -49,6 +56,10 @@ export class AncHivtestingComponent implements OnInit {
         this.hivFinalResultsOptions = hivFinalResultsOptions;
 
         this.notify.emit({ 'form': this.HivTestingForm, 'table_data': this.hiv_testing_table_data });
+
+        if (this.isEdit) {
+            this.getBaselineAncProfile(this.PatientId);
+        }
     }
 
     AddHivTests() {
@@ -110,6 +121,29 @@ export class AncHivtestingComponent implements OnInit {
         } else if (event.isUserInput && event.source.selected) {
             this.HivTestingForm.controls['hivTestingDone'].enable();
         }
+    }
+
+    public getBaselineAncProfile(patientId: number): void {
+        this.baseline$ = this.ancService.getBaselineAncProfile(patientId)
+            .subscribe(
+                p => {
+                    const baseline = p;
+
+                    console.log('baseline info');
+                    console.log(baseline);
+                    console.log(baseline['hivStatusBeforeAnc']);
+                    if (baseline['id'] > 0) {
+                        this.HivTestingForm.get('hivStatusBeforeFirstVisit').setValue(baseline['hivStatusBeforeAnc']);
+                    }
+                }
+                ,
+                error1 => {
+
+                },
+                () => {
+
+                }
+            );
     }
 }
 

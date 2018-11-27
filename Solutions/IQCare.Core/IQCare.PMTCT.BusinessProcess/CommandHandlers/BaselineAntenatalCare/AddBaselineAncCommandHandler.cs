@@ -29,14 +29,14 @@ namespace IQCare.PMTCT.BusinessProcess.CommandHandlers.BaselineAntenatalCare
                     Core.Models.BaselineAntenatalCare baselineAntenatalCare = new Core.Models.BaselineAntenatalCare()
                     {
                         Id = 0,
-                        PatientId = request.BaselineAntenatalCare.PatientId,
-                        PatientMasterVisitId = request.BaselineAntenatalCare.PatientMasterVisitId,
-                        BreastExamDone = request.BaselineAntenatalCare.BreastExamDone,
-                        TreatedForSyphilis = request.BaselineAntenatalCare.TreatedForSyphilis,
+                        PatientId = request.PatientId,
+                        PatientMasterVisitId = request.PatientMasterVisitId,
+                        BreastExamDone = request.BreastExamDone,
+                        TreatedForSyphilis = request.TreatedForSyphilis,
                         CreateDate = DateTime.Now,
-                        CreatedBy = request.BaselineAntenatalCare.CreatedBy,
+                        CreatedBy = request.CreatedBy,
                         DeleteFlag = false,
-                        HivStatusBeforeAnc = request.BaselineAntenatalCare.HivStatusBeforeAnc
+                        HivStatusBeforeAnc = request.HivStatusBeforeAnc
                     };
 
                     await _unitOfWork.Repository<Core.Models.BaselineAntenatalCare>().AddAsync(baselineAntenatalCare);

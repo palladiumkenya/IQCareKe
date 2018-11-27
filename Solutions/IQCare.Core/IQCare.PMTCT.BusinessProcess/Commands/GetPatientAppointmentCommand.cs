@@ -1,11 +1,9 @@
-﻿using System.Diagnostics.Contracts;
-using IQCare.Library;
-using IQCare.PMTCT.Core.Models.Views;
+﻿using IQCare.Common.Core.Models;
 using MediatR;
 
 namespace IQCare.PMTCT.BusinessProcess.Commands
 {
-    public class PmtctReferralCommand: IRequest<Result<PmtctReferralView>>
+    public class GetPatientAppointmentCommand: IRequest<PatientAppointment>
     {
         public int PatientId { get; set; }
         public int PatientMasterVisitId { get; set; }

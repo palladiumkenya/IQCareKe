@@ -12,9 +12,10 @@ import { PatientPreventiveService } from '../_models/PatientPreventiveService';
 import { PatientProfile } from '../_models/patientProfile';
 import { PncVisitDetailsCommand } from '../_models/PncVisitDetailsCommand';
 import { HivStatusCommand } from '../_models/HivStatusCommand';
-import {PatientChronicIllness} from '../_models/PatientChronicIllness';
-import {DrugAdministrationCommand} from '../maternity/commands/drug-administration-command';
-import {AdministeredDrugInfo} from '../maternity/commands/administer-drug-info';
+import {VisitDetailsCommand} from '../_models/visit-details-command';
+import {PregnancyAncCommand} from '../_models/pregnancy-anc-command';
+import {BaselineAncProfileCommand} from '../_models/baseline-anc-profile-command';
+
 
 const httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -49,6 +50,31 @@ export class AncService {
             catchError(this.errorHandler.handleError<any>('Error saving ANC visit details'))
         );
     }
+
+    public savePregnancy(pregnancyCommand: PregnancyAncCommand): Observable<any> {
+        return this.http.post<any>(this.API_URL + '/api/Pregnancy/post', JSON.stringify(pregnancyCommand),
+            httpOptions).pipe(
+            tap(savePregnancy => this.errorHandler.log(`successfully saved Pregnancy details`)),
+            catchError(this.errorHandler.handleError<any>('Error saving Pregnancy details'))
+        );
+    }
+
+    public saveVisitDetails(visitDetailsCommand: VisitDetailsCommand): Observable<any> {
+        return this.http.post<any>(this.API_URL + '/api/AncVisitDetails/post', JSON.stringify(visitDetailsCommand),
+            httpOptions).pipe(
+            tap(saveVisitDetails => this.errorHandler.log(`successfully saved ANC visit details`)),
+            catchError(this.errorHandler.handleError<any>('Error saving ANC visit details'))
+        );
+    }
+
+    public SaveBaselineProfile(baselineAncCommand: BaselineAncProfileCommand): Observable<any> {
+        return this.http.post<any>(this.API_URL + '/api/BaselineAnc/post', JSON.stringify(baselineAncCommand),
+            httpOptions).pipe(
+            tap(SaveAncProfile => this.errorHandler.log(`successfully saved ANC Baseline`)),
+            catchError(this.errorHandler.handleError<any>('Error saving ANC Baseline'))
+        );
+    }
+
 
     public savePatientEducation(patientEducationCommand: PatientEducationCommand): Observable<PatientEducationCommand> {
         return this.http.post<any>(this.API_URL + '' + this._url_pedc, JSON.stringify(patientEducationCommand),
@@ -216,13 +242,23 @@ export class AncService {
         );
     }
 
+    public getBaselineAncProfile(patientId: number) {
+        return this.http.get<any[]>(this.API_URL + '/api/BaselineAnc/Get/' +
+            patientId).pipe(
+            tap(getBaselineAncProfile => this.errorHandler.log('get ANC Profile info Data')),
+            catchError(this.errorHandler.handleError<any[]>('getBaselineAncProfile'))
+        );
+    }
+
     public getPatientPartnerTestingInfo(patientId: number) {
         return this.http.get<any[]>(this.API_PMTCT_URL + '/api/PatientPartnerTesting/Get/' +
             patientId).pipe(
-            tap(getPatientPartnerTestingInfo => this.errorHandler.log('get Partner Testing info Data')),
+            tap(getPatientPartnerTestingInfo => this.errorHandler.log('get Partner Testing Data')),
             catchError(this.errorHandler.handleError<any[]>('getPatientPartnerTestingInfo'))
         );
     }
+
+
 
 
 }
