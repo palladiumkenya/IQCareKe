@@ -19,7 +19,6 @@ import { HaartProphylaxisComponent } from './anc/haart-prophylaxis/haart-prophyl
 import { ClientMonitoringComponent } from './anc/client-monitoring/client-monitoring.component';
 import { PatientEducationExaminationComponent } from './anc/patient-education-examination/patient-education-examination.component';
 import { AncComponent } from './anc/anc.component';
-
 import { NgModule, Component } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { VisitDetailsComponent } from './anc/visit-details/visit-details.component';
@@ -69,7 +68,6 @@ import { MaternityEncounterComponent } from './maternity/maternity-encounter/mat
 import { MotherExaminationResolver } from './_services/resolvers/motherexamination.resolver';
 import { BabyExaminationResolver } from './_services/resolvers/baby-examination.resolver';
 import {BirthOutcomeResolver} from './_services/resolvers/BirthOutcomeResolver';
-import { TriageComponent } from './triage/triage.component';
 import { CounselledInfantFeedingResolver } from './_services/resolvers/counselled-infant-feeding.resolver';
 
 
@@ -205,11 +203,6 @@ const routes: Routes = [
     {
         path: 'maternity/encounters/:patientId/:personId/:serviceAreaId',
         component: MaternityEncounterComponent,
-        pathMatch: 'full'
-    },
-    {
-        path:'triage',
-        component: TriageComponent,
         pathMatch: 'full'
     },
     {

@@ -108,7 +108,6 @@ import { BabyExaminationResolver } from './_services/resolvers/baby-examination.
 import { HeiMedicationComponent } from './hei/hei-medication/hei-medication.component';
 import { AncClientMonitoringComponent } from './anc/anc-client-monitoring/anc-client-monitoring.component';
 import {BirthOutcomeResolver} from './_services/resolvers/BirthOutcomeResolver';
-import { TriageComponent } from './triage/triage.component';
 import { CounselledInfantFeedingResolver } from './_services/resolvers/counselled-infant-feeding.resolver';
 
 @NgModule({
@@ -116,12 +115,12 @@ import { CounselledInfantFeedingResolver } from './_services/resolvers/counselle
         CommonModule,
         PmtctRoutingModule,
         CommonModule, HttpClientModule, MatDatepickerModule, MatFormFieldModule,
-        MatNativeDateModule, MatInputModule, MatDatepickerModule, MatFormFieldModule, MatNativeDateModule,
+        MatNativeDateModule, MatInputModule, MatFormFieldModule,
         MatTableModule, MatAutocompleteModule, MatButtonModule, MatButtonToggleModule, MatCardModule,
-        MatCheckboxModule, MatChipsModule, MatDatepickerModule, MatDialogModule, MatDividerModule, MatExpansionModule,
-        MatGridListModule, MatIconModule, MatListModule, MatMenuModule, MatNativeDateModule, MatPaginatorModule,
+        MatCheckboxModule, MatChipsModule, MatDialogModule, MatDividerModule, MatExpansionModule,
+        MatGridListModule, MatIconModule, MatListModule, MatMenuModule, MatPaginatorModule,
         MatProgressBarModule, MatProgressSpinnerModule, MatRadioModule, MatRippleModule, MatSelectModule, MatSidenavModule, MatSliderModule,
-        MatSlideToggleModule, MatSnackBarModule, MatSortModule, MatStepperModule, MatTableModule, MatTabsModule,
+        MatSlideToggleModule, MatSnackBarModule, MatSortModule, MatStepperModule, MatTabsModule,
         MatToolbarModule, MatTooltipModule, ReactiveFormsModule, MatInputModule, SharedModule, RecordsModule
     ],
     declarations: [
@@ -177,8 +176,7 @@ import { CounselledInfantFeedingResolver } from './_services/resolvers/counselle
         MaternityEncounterComponent,
         AncHivtestingComponent,
         HeiMedicationComponent,
-        AncClientMonitoringComponent,
-        TriageComponent
+        AncClientMonitoringComponent
     ],
     providers: [
         PlaceOfDeliveryResolver,

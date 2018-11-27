@@ -13,11 +13,11 @@ import { Router, ActivatedRoute } from '@angular/router';
   styleUrls: ['./triage.component.css']
 })
 export class TriageComponent implements OnInit {
-  @Input('PatientId') PatientId: number;
-  @Input('PatientMasterVisitId') PatientMasterVisitId: number;
+  @Input('PatientId') PatientId: number = 5;
+  @Input('PatientMasterVisitId') PatientMasterVisitId: number = 36;
 
  vitalsDataTable : any [] = [];
- displayedColumns = ['height', 'weight', 'bmi', 'muac', 'diastolic', 'systolic', 'temperature', 'respiratoryrate', 'heartrate',
+ displayedColumns = ['visitdate','height', 'weight', 'bmi', 'diastolic', 'systolic', 'temperature', 'respiratoryrate', 'heartrate',
         'action'];
  dataSource = new MatTableDataSource(this.vitalsDataTable);
  @ViewChild(MatPaginator) paginator: MatPaginator;
@@ -35,7 +35,7 @@ export class TriageComponent implements OnInit {
   ngOnInit() {
     this.vitalsFormGroup = this.BuildVitalsFormGroup();
     this.notify.emit(this.vitalsFormGroup);
-    this.getPatientVitalsInfo(21);
+    this.getPatientVitalsInfo(36);
   }
 
 
@@ -66,8 +66,8 @@ export class TriageComponent implements OnInit {
     if(this.vitalsFormGroup.invalid)
       return;
    const patientVitalCommand : AddPatientVitalCommand ={
-    PatientId: 5, //this.PatientId,
-    PatientmasterVisitId: 21, // this.PatientMasterVisitId,
+    PatientId: this.PatientId,
+    PatientmasterVisitId: this.PatientMasterVisitId,
     Temperature: this.vitalsFormGroup.get("temperature").value,
     RespiratoryRate: this.vitalsFormGroup.get("respiratoryRate").value,
     HeartRate: this.vitalsFormGroup.get("heartRate").value,
@@ -95,9 +95,11 @@ export class TriageComponent implements OnInit {
     ()=>{
       this.snotifyService.success('Patient vitals information added sucessfully', 'Triage',
       this.notificationService.getConfig());
-     this.zone.run(() => {
-        this.router.navigate(['/pmtct/triage'], {relativeTo: this.route});
-     });
+
+      this.vitalsFormGroup.reset();
+      this.vitalsFormGroup.clearValidators();
+
+      this.getPatientVitalsInfo(this.PatientMasterVisitId);
     });
   }
  
@@ -113,9 +115,11 @@ export class TriageComponent implements OnInit {
     this.triageService.GetPatientVitalsInfo(masterVisitId).subscribe(res=>{
       if(res == null)
         return;
+      this.vitalsDataTable = [];
 
-       res.forEach(info => {
+        res.forEach(info => {
          this.vitalsDataTable.push({
+          visitDate : info.visitDate,
           height : info.height,
           weight : info.weight,
           bmi : info.bmi,
