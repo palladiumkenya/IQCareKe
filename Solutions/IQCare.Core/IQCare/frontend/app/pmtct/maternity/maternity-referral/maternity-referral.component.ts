@@ -12,6 +12,10 @@ export class MaternityReferralComponent implements OnInit {
 
     referralFormGroup: FormGroup;
     @Input() dischargeOptions: any[] = [];
+    @Input('isEdit') isEdit: boolean;
+    @Input('patientId') patientId: number;
+    @Input('patientMasterVisitId') patientMasterVisitId: number;
+
     @Output() notify: EventEmitter<FormGroup> = new EventEmitter<FormGroup>();
     public referralOptions: any[] = [];
 
@@ -34,6 +38,13 @@ export class MaternityReferralComponent implements OnInit {
 
 
         this.notify.emit(this.referralFormGroup);
+
+        if (this.isEdit) {
+            this.loadMaternityReferral();
+        }
+    }
+
+    loadMaternityReferral(): void {
     }
 
 }

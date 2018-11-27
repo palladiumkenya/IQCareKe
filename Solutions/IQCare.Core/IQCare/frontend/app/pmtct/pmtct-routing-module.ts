@@ -130,26 +130,6 @@ const routes: Routes = [
 
     },
     {
-        path: 'pex',
-        component: PatientEducationExaminationComponent,
-        pathMatch: 'full',
-    },
-    {
-        path: 'cm',
-        component: ClientMonitoringComponent,
-        pathMatch: 'full',
-    },
-    {
-        path: 'haart',
-        component: HaartProphylaxisComponent,
-        pathMatch: 'full',
-    },
-    {
-        path: 'ps',
-        component: PreventiveServicesComponent,
-        pathMatch: 'full',
-    },
-    {
         path: 'hei',
         children: [
             {

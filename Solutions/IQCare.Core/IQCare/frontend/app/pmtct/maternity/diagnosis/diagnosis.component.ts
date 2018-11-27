@@ -22,7 +22,7 @@ export class DiagnosisComponent implements OnInit {
         private _lookupItemService: LookupItemService,
         private snotifyService: SnotifyService,
         private notificationService: NotificationService,
-        private maternityService : MaternityService) {
+        private maternityService: MaternityService) {
     }
 
     ngOnInit() {
@@ -31,16 +31,15 @@ export class DiagnosisComponent implements OnInit {
         });
 
         this.notify.emit(this.PatientdiagnosisFormGroup);
-         console.log("Master Visit Id " + this.PatientMasterVisitId);
-        if(this.isEdit)
-         {
-             this.getPatientDiagnosisInfo(this.PatientMasterVisitId);
-         }
+        console.log('Master Visit Id ' + this.PatientMasterVisitId);
+        if (this.isEdit) {
+            this.getPatientDiagnosisInfo(this.PatientMasterVisitId);
+        }
 
     }
 
     public getPatientDiagnosisInfo(masterVisitId: number): void {
-          this.maternityService.GetPatientDiagnosisInfo(masterVisitId)
+        this.maternityService.GetPatientDiagnosisInfo(masterVisitId)
             .subscribe(
                 diag => {
                     if (diag != null) {
