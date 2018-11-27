@@ -152,6 +152,8 @@
                                 10" [pageSize]="10" [pageSizeOptions]="[3, 5, 10, 20]"
                             [showFirstLastButtons]="true">
                         </mat-paginator>
+
+                        <div *ngIf="dataSource.data.length === 0 && afterSearch">No records found</div>
                     </div>
 
                     <div>

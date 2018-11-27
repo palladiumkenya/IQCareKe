@@ -30,12 +30,14 @@
                                         </ng-template>
 
                                         <!-- add Delivery Component to Stepper -->
-                                        <app-delivery (notify)="onDeliveryNotify($event)" [deliveryOptions]="deliveryOptions">
+                                        <app-delivery (notify)="onDeliveryNotify($event)" [deliveryOptions]="deliveryOptions"
+                                            [patientId]="patientId" [isEdit]="isEdit" [patientMasterVisitId]="patientMasterVisitId">
                                         </app-delivery>
 
                                         <!-- add Maternity History Component to Stepper -->
                                         <app-maternalhistory (notify)="onMatHistoryNotify($event)"
-                                            [maternalhistoryOptions]="maternalhistoryOptions">
+                                            [maternalhistoryOptions]="maternalhistoryOptions" [patientId]="patientId"
+                                            [isEdit]="isEdit" [patientMasterVisitId]="patientMasterVisitId">
                                         </app-maternalhistory>
 
                                         <div>
@@ -50,7 +52,8 @@
                                             <span matTooltip="Immunization History">Immunization</span>
                                         </ng-template>
                                         <app-immunization-history [immunizationHistoryOptions]="immunizationHistoryOptions"
-                                            (notify)="onImmunizationHistory($event)"></app-immunization-history>
+                                            (notify)="onImmunizationHistory($event)" [patientId]="patientId" [isEdit]="isEdit"
+                                            [patientMasterVisitId]="patientMasterVisitId"></app-immunization-history>
 
                                         <div>
                                             <button mat-raised-button color="primary" matStepperPrevious type="button">Previous</button>

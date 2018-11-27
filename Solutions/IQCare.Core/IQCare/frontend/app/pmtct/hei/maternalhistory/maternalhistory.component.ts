@@ -1,3 +1,5 @@
+import { LookupItemView } from './../../../shared/_models/LookupItemView';
+import { HeiService } from './../../_services/hei.service';
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
 import { NotificationService } from '../../../shared/_services/notification.service';
@@ -16,7 +18,7 @@ export class MaternalhistoryComponent implements OnInit {
     motherstateOptions: any[] = [];
     motherreceivedrugsOptions: any[] = [];
     heimotherregimenOptions: any[] = [];
-    yesnoOptions: any[] = [];
+    yesnoOptions: LookupItemView[] = [];
     motherdrugsatinfantenrollmentOptions: any[] = [];
     primarycaregiverOptions: any[] = [];
 
@@ -24,6 +26,10 @@ export class MaternalhistoryComponent implements OnInit {
     isMotherRegistered: boolean = false;
 
     @Input('maternalhistoryOptions') maternalhistoryOptions: any;
+    @Input('isEdit') isEdit: boolean;
+    @Input('patientId') patientId: number;
+    @Input('patientMasterVisitId') patientMasterVisitId: number;
+
     @Output() notify: EventEmitter<FormGroup> = new EventEmitter<FormGroup>();
 
     public cccPattern = /^((?!(0))[0-9]{10})$/;
@@ -31,7 +37,8 @@ export class MaternalhistoryComponent implements OnInit {
     constructor(private _formBuilder: FormBuilder,
         private notificationService: NotificationService,
         private snotifyService: SnotifyService,
-        private dialog: MatDialog) { }
+        private dialog: MatDialog,
+        private heiservice: HeiService) { }
 
     ngOnInit() {
         this.MaternalHistoryForm = this._formBuilder.group({
@@ -48,8 +55,6 @@ export class MaternalhistoryComponent implements OnInit {
             pmtctheimotherdrugsatinfantenrollment: new FormControl('', [Validators.required]),
         });
 
-        console.log(this.MaternalHistoryForm);
-
         const {
             motherstateOptions,
             motherreceivedrugsOptions,
@@ -65,6 +70,34 @@ export class MaternalhistoryComponent implements OnInit {
         this.primarycaregiverOptions = primarycaregiverOptions;
 
         this.notify.emit(this.MaternalHistoryForm);
+
+        if (this.isEdit) {
+            this.loadMaternalHistory();
+        }
+    }
+
+    loadMaternalHistory(): void {
+        this.heiservice.getHeiDelivery(this.patientId, this.patientMasterVisitId).subscribe(
+            (result) => {
+                for (let i = 0; i < result.length; i++) {
+                    const isMotherRegistered = result[i].motherRegisteredId ? 'Yes' : 'No';
+                    const yesNoOption = this.yesnoOptions.filter(obj => obj.itemName == isMotherRegistered);
+                    this.MaternalHistoryForm.get('motherregisteredinclinic').setValue(yesNoOption[0].itemId);
+                    this.MaternalHistoryForm.get('stateofmother').setValue(result[i].motherStatusId);
+                    this.MaternalHistoryForm.get('primarycaregiver').setValue(result[i].primaryCareGiverID);
+                    this.MaternalHistoryForm.get('nameofmother').setValue(result[i].motherName);
+                    this.MaternalHistoryForm.get('motherpersonid').setValue(result[i].motherPersonId);
+                    this.MaternalHistoryForm.get('cccno').setValue(result[i].motherCCCNumber);
+                    this.MaternalHistoryForm.get('pmtctheimotherreceivedrugs').setValue(result[i].motherPMTCTDrugsId);
+                    this.MaternalHistoryForm.get('pmtctheimotherregimen').setValue(result[i].motherPMTCTRegimenId);
+                    this.MaternalHistoryForm.get('otherspecify').setValue(result[i].motherPMTCTRegimenOther);
+                    this.MaternalHistoryForm.get('motheronartatinfantenrollment').setValue(result[i].motherArtInfantEnrolId);
+                    this.MaternalHistoryForm.get('pmtctheimotherdrugsatinfantenrollment').setValue(result[i].motherArtInfantEnrolRegimenId);
+                }
+            },
+            (error) => { },
+            () => { }
+        );
     }
 
     onMotherReceivedDrugsChange(event) {
