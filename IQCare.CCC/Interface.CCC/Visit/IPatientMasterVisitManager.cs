@@ -20,5 +20,8 @@ namespace Interface.CCC.Visit
        List<PatientMasterVisit> GetNonEnrollmentVisits(int patientId, int visitType);
        PatientMasterVisit GetLastPatientVisit(int patientId);
        PatientMasterVisit GetVisitById(int id);
+        List<PatientMasterVisit> GetPatientMasterVisitBasedonVisitDate(int patientId, DateTime visitDate);
+
+        List<PatientMasterVisit> GetVisitDateByMasterVisitId(int patientId, int PatientMasterVisitId);
    }
 }

@@ -42,6 +42,18 @@ namespace BusinessProcess.CCC.Encounters
                 return clinicalNotes.ToList();
             }
         }
+
+        public List<PatientClinicalNotes> getPatientClinicalNotesByCategoryVisitId(int patientId, int categoryId, int mastervisitid)
+        {
+
+            using (UnitOfWork unitOfWork = new UnitOfWork(new GreencardContext()))
+            {
+                var PCN = unitOfWork.PatientClinicalNotesRepository.GetAll().Where(x => x.PatientId == patientId & x.NotesCategoryId == categoryId & x.PatientMasterVisitId == mastervisitid).ToList();
+                unitOfWork.Dispose();
+                return PCN.ToList();
+                
+            }
+        }
         public List<PatientClinicalNotes> getPatientClinicalNotesByCategory(int patientId, int categoryId)
         {
             using (UnitOfWork unitOfWork = new UnitOfWork(new GreencardContext()))

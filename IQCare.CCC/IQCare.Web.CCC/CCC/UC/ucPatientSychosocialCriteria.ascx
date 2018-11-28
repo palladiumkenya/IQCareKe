@@ -399,7 +399,7 @@ counselling session?</label>
 
 
        $("#btnSupportSystemCriteria").click(function () {
-           debugger;
+       
             if (isDoneSupportSystemCriteria === 0) {
                 $.ajax({
                     type: "POST",

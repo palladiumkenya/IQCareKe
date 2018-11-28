@@ -30,7 +30,9 @@ namespace IQCare.CCC.UILogic.Triage
                 pg.PatientMasterVisitId = patientMasterVisitId;
                 pg.VisitDate = visitDate;
                 pg.PregnancyStatusId = pregnancyStatusId;
-                pg.AncProfile = ancProfile;
+                
+               pg.AncProfile = Convert.ToBoolean(ancProfile);
+                
                 if(ancProfileDate!=null && ancProfileDate != "")
                 {
                     pg.AncProfileDate = DateTime.Parse(ancProfileDate);
@@ -95,7 +97,7 @@ namespace IQCare.CCC.UILogic.Triage
                     LMP = lmp,
                     EDD = edd,
                     PregnancyStatusId = pregnancyStatusId,
-                    AncProfile = ancProfile,
+                    AncProfile = Convert.ToBoolean(ancProfile),
                     AncProfileDate = ancProfileDate
                 };
                 return _PregnancyIndicator.UpdatePreganacyIndcator(pg);
@@ -103,6 +105,19 @@ namespace IQCare.CCC.UILogic.Triage
             catch (Exception)
             {
 
+                throw;
+            }
+        }
+        public int GetLastPregnancyStatus(int patientId)
+        {
+
+            try
+            {
+                int indicator = _PregnancyIndicator.GetLastPregnancyStatus(patientId);
+                return indicator;
+            }
+            catch (Exception)
+            {
                 throw;
             }
         }

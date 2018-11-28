@@ -409,9 +409,14 @@
             if (IsPatientArtDistributionDone == 1) {
                 getPatientArtDistribution();
             }
+            
+            var pregnancyStatus = $("#<%=pregnancyStatus.ClientID%>").val();
+            if (parseInt(pregnancyStatus,10) < 1) {
+                getLastPregnancyIndicator();
+            }
 
             getPregnancyStatus();
-
+          
             $("#btnSave").click(function () {
                 if ($('#AppointmentForm').parsley().validate()) {
                     var futureDate = moment().add(7, 'months').format('DD-MMM-YYYY');
@@ -630,6 +635,8 @@
                         console.log(pregnancyOutcome);
                         if (pregnancyOutcome.Outcome == 0 || pregnancyOutcome.OutcomeStatus == "Unknown")
                             $("#<%=pregnancyStatus.ClientID%>").val(pregnancyOutcome.PregnancyStatusId);
+                         
+                        
                     }
                 },
                 error: function (xhr, errorType, exception) {
@@ -638,6 +645,33 @@
                     return false;
                 }
             });
+        }
+
+
+        function getLastPregnancyIndicator()
+        {
+            $.ajax({
+                type: "POST",
+                url: "../WebService/PatientVitals.asmx/GetLastPatientPregnancyIndicator",
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (response) {
+                    var pregnancyIndicator = response.d;
+
+                    if (pregnancyIndicator != null) {
+                        console.log(pregnancyIndicator);
+                        if (pregnancyIndicator > 0) {
+                            $("#<%=pregnancyStatus.ClientID%>").val(pregnancyIndicator);
+                        }
+                        }
+                },
+                error: function (xhr, errorType, exception) {
+                    var jsonError = jQuery.parseJSON(xhr.responseText);
+                    toastr.error("" + xhr.status + "" + jsonError.Message + " " + jsonError.StackTrace + " " + jsonError.ExceptionType);
+                    return false;
+                }
+            });
+
         }
 
     </script>

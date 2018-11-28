@@ -1003,12 +1003,23 @@ namespace IQCare.Web.CCC.WebService
             foreach (DataRow row in theDT.Rows)
             {
                 string active = "";
+                string dose = "";
                 if (row["active"].ToString() == "1")
                     active = "checked";
                 else
                     active = "";
+                if (row["dose"].ToString() == "0")
+                {
+                    dose = "";
+                }
+                else
+                {
+                    dose = row["dose"].ToString();
+                }
+                 
 
-                string[] i = new string[7] { row["chronicIllnessID"].ToString(), row["chronicIllnessName"].ToString(), row["Treatment"].ToString(), row["dose"].ToString(), row["OnsetDate"].ToString(),
+
+                string[] i = new string[7] { row["chronicIllnessID"].ToString(), row["chronicIllnessName"].ToString(), row["Treatment"].ToString(), dose, row["OnsetDate"].ToString(),
                     "<input type='checkbox' id='chkChronic" + row["chronicIllnessID"].ToString() + "' " + active + " >",
                     "<button type='button' class='btnDelete btn btn-danger fa fa-minus-circle btn-fill' > Remove</button>" };
                 rows.Add(i);

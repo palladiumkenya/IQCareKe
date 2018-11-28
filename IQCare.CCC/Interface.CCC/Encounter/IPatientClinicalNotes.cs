@@ -13,6 +13,7 @@ namespace Interface.CCC.Encounter
         int UpdatePatientClinicalNotes(PatientClinicalNotes PCN);
         List<PatientClinicalNotes> getPatientClinicalNotes(int patientId);
         List<PatientClinicalNotes> getPatientClinicalNotesByCategory(int patientId, int categoryId);
+        List<PatientClinicalNotes> getPatientClinicalNotesByCategoryVisitId(int patientId, int categoryId, int mastervisitid);
         int checkPatientNotesifExisting(int patientId, int categoryId);
         int checkPatientNotesifExistingByVisitId(int patientId, int patientMasterVisitId, int categoryId);
         List<PatientClinicalNotes> getPatientClinicalNotesByVisitId(int patientId,int patientMasterVisitId);
