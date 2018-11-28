@@ -78,6 +78,13 @@ export class HeiService {
         );
     }
 
+    public getMilestoneHistory(patientId: number): Observable<any[]> {
+        return this.http.get(this.API_URL + '/api/HeiMilestone/' + patientId).pipe(
+            tap(getMilestoneHistory => this.errorHandler.log(`successfully fetched milestone history`)),
+            catchError(this.errorHandler.handleError<any>('Error fetching milestone history for patientId: ' + patientId))
+        );
+    }
+
     public saveHieDelivery(patientId: number, patientMasterVisitId: number, userId: number,
         isMotherRegistered: boolean, heidelivery: any, maternalHistory: any): Observable<any> {
         const Indata = {
@@ -210,6 +217,13 @@ export class HeiService {
         return this.http.post<any>(this.API_URL + '/api/Hei', JSON.stringify(patientFeeding), httpOptions).pipe(
             tap(saveHeiInfantFeeding => this.errorHandler.log(`successfully saved infant feeding`)),
             catchError(this.errorHandler.handleError<any>('Error saving infant feeding'))
+        );
+    }
+
+    public getHeiInfantFeeding(patientId: number, patientMasterVisitId: number): Observable<any> {
+        return this.http.get(this.API_URL + '/api/Hei/GetHeiFeeding/' + patientId + '/' + patientMasterVisitId).pipe(
+            tap(getHeiInfantFeeding => this.errorHandler.log(`successfully fetched hei infant feeding`)),
+            catchError(this.errorHandler.handleError<any>('Error fetching hei infant feeding'))
         );
     }
 

@@ -49,7 +49,7 @@ export class ImmunizationHistoryComponent implements OnInit {
             period: new FormControl('', [Validators.required]),
             immunizationGiven: new FormControl('', [Validators.required]),
             dateImmunized: new FormControl('', [Validators.required]),
-            nextSchedule: new FormControl('', [Validators.required])
+            nextSchedule: new FormControl('')
         });
         const {
             immunizationPeriod,

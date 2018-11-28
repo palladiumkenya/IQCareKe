@@ -1,11 +1,11 @@
-import {Component, EventEmitter, Inject, Input, OnInit, Output} from '@angular/core';
-import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
-import {NotificationService} from '../../../shared/_services/notification.service';
-import {LookupItemService} from '../../../shared/_services/lookup-item.service';
-import {SnotifyService} from 'ng-snotify';
-import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
-import {HeiService} from '../../_services/hei.service';
-import {PatientIptWorkup} from '../../_models/hei/PatientIptWorkup';
+import { Component, EventEmitter, Inject, Input, OnInit, Output } from '@angular/core';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { NotificationService } from '../../../shared/_services/notification.service';
+import { LookupItemService } from '../../../shared/_services/lookup-item.service';
+import { SnotifyService } from 'ng-snotify';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
+import { HeiService } from '../../_services/hei.service';
+import { PatientIptWorkup } from '../../_models/hei/PatientIptWorkup';
 
 @Component({
     selector: 'app-ipt-client-workup',
@@ -27,12 +27,12 @@ export class IptClientWorkupComponent implements OnInit {
     @Output() notify: EventEmitter<FormGroup> = new EventEmitter<FormGroup>();
 
     constructor(private _formBuilder: FormBuilder,
-                private herService: HeiService,
-                private _lookupItemService: LookupItemService,
-                private snotifyService: SnotifyService,
-                private notificationService: NotificationService,
-                public dialogRef: MatDialogRef<IptClientWorkupComponent>,
-                @Inject(MAT_DIALOG_DATA) data) {
+        private herService: HeiService,
+        private _lookupItemService: LookupItemService,
+        private snotifyService: SnotifyService,
+        private notificationService: NotificationService,
+        public dialogRef: MatDialogRef<IptClientWorkupComponent>,
+        @Inject(MAT_DIALOG_DATA) data) {
         this.title = 'IPT Client Workup';
         this.yesnoOptions = data.yesNoOptions;
         this.patientId = data.patientId;
@@ -72,8 +72,23 @@ export class IptClientWorkupComponent implements OnInit {
             IptStartDate: this.IPTClientWorkupFormGroup.controls['dateIPTStarted'].value,
             IptRegimen: 0
         } as PatientIptWorkup;
-        this.herService.saveIptWorkup(patientIptWorkup);
+
+        this.herService.saveIptWorkup(patientIptWorkup).subscribe(
+            (result) => {
+                this.snotifyService.success('Successfully saved client workup ', 'Ipt Client Workup',
+                    this.notificationService.getConfig());
+
+                this.dialogRef.close();
+            },
+            (error) => {
+                this.snotifyService.error('Error saving client workup ' + error, 'Ipt Client Workup',
+                    this.notificationService.getConfig());
+            },
+            () => { }
+        );
     }
 
-
+    close(): void {
+        this.dialogRef.close();
+    }
 }
