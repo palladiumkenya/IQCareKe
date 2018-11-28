@@ -220,4 +220,12 @@ export class HeiService {
                 catchError(this.errorHandler.handleError<any>('Error saving infant feeding'))
             );
     }
+
+    public getPatientVisitDetails(patientId: number, serviceAreaId: number) {
+        return this.http.get<any[]>(this.API_URL + '/api/AncVisitDetails/GetVisitDetailsByVisitType/' +
+            patientId + '/' + serviceAreaId).pipe(
+            tap(getPatientVisitDetails => this.errorHandler.log('get patient visit details data')),
+            catchError(this.errorHandler.handleError<any[]>('getPatientVisitDetails'))
+        );
+    }
 }

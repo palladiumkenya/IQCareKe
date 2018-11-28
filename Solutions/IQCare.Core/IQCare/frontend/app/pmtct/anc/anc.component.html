@@ -20,7 +20,9 @@
                                       <!--  <app-visit-details (visitDetails)="visitDetails" [visitDetailsOptions]="visitDetailsOptions"
                                             (notify)="onVisitDetailsNotify($event)" (nextStep)="onSaveVisitDetails($event)"></app-visit-details> -->
                                         <app-hei-visit-details (notify)="onVisitDetailsNotify($event)"  [formtype]="formType"
-                                                               [visitDate]="visitDate" [visitType]="visitType" ></app-hei-visit-details>
+                                                               [visitDate]="visitDate" [visitType]="visitType" [patientId]="patientId" [serviceAreaId]="serviceAreaId"
+
+                                        ></app-hei-visit-details>
 
                                         <div class="">
                                             <app-mother-profile [patientId]="patientId" (notify)="OnMotherProfileNotify($event)"></app-mother-profile>
