@@ -89,6 +89,20 @@ namespace IQCare.CCC.UILogic.Encounter
                 throw;
             }
         }
+        public List<PatientClinicalNotes> getPatientClinicalNotesByCategoryVisitId(int PatientId,int categoryId,int PatientMasterVisitId)
+        {
+            List<PatientClinicalNotes> notesList = new List<PatientClinicalNotes>();
+            try
+            {
+                notesList = _patientNotes.getPatientClinicalNotesByCategoryVisitId(PatientId, categoryId, PatientMasterVisitId);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            return notesList;
+        }
+    
         public List<PatientClinicalNotes> getPatientClinicalNotesById(int PatientID, int categoryID)
         {
             List<PatientClinicalNotes> notesList = new List<PatientClinicalNotes>();

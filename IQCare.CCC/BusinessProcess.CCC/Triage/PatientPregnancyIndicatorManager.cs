@@ -72,6 +72,16 @@ namespace BusinessProcess.CCC.Triage
                 return pgIndicatorList;
             }
         }
+        public int  GetLastPregnancyStatus(int patientId)
+        {
+            using (UnitOfWork unitOfWork = new UnitOfWork(new GreencardContext()))
+            {
+                var pgPregnancyIndicator = unitOfWork.PatientPregnanacyIndicatorRepository.FindBy(x => x.PatientId == patientId & !x.DeleteFlag).OrderByDescending(x => x.PatientMasterVisitId).FirstOrDefault();
+                unitOfWork.Dispose();
+                return pgPregnancyIndicator.PregnancyStatusId;
+            }
+        }
+
 
         public int CheckIfPregnancyIndicatorExisists(int patientId)
         {
