@@ -279,6 +279,15 @@ export class AncService {
         );
     }
 
+    public getPatientVisitDetails(patientId: number, patientMasterVisitId: number) {
+        return this.http.get<any[]>(this.API_URL + '/api/AncVisitDetails/Get/' +
+            patientId + '/' + patientMasterVisitId).pipe(
+            tap(getPatientVisitDetails => this.errorHandler.log('get patient visit details data')),
+            catchError(this.errorHandler.handleError<any[]>('getPatientVisitDetails'))
+        );
+    }
+
+
 
 
 
