@@ -96,7 +96,7 @@ export class RegisterComponent implements OnInit {
                     MiddleName: new FormControl(this.person.middleName),
                     LastName: new FormControl(this.person.lastName, [Validators.required]),
                     Sex: new FormControl(this.person.sex, [Validators.required]),
-                    RegistrationDate: new FormControl(this.person.registrationDate, [Validators.required]),
+                    registrationDate: new FormControl(this.person.registrationDate, [Validators.required]),
                     DateOfBirth: new FormControl(this.person.dateOfBirth, [Validators.required]),
                     AgeYears: new FormControl(this.person.ageYears, [Validators.required]),
                     AgeMonths: new FormControl(this.person.ageMonths, [Validators.required]),
@@ -176,14 +176,14 @@ export class RegisterComponent implements OnInit {
                 this.formGroup.controls['formArray']['controls'][0]['controls'].MiddleName.setValue(middleName);
                 this.formGroup.controls['formArray']['controls'][0]['controls'].LastName.setValue(lastName);
                 this.formGroup.controls['formArray']['controls'][0]['controls'].Sex.setValue(sex);
-                this.formGroup.controls['formArray']['controls'][0]['controls'].RegistrationDate.setValue(registrationDate);
+                this.formGroup.controls['formArray']['controls'][0]['controls'].registrationDate.setValue(registrationDate);
                 this.formGroup.controls['formArray']['controls'][0]['controls'].DateOfBirth.setValue(dateOfBirth);
                 this.formGroup.controls['formArray']['controls'][0]['controls'].DobPrecision.setValue(exact);
                 this.formGroup.controls['formArray']['controls'][0]['controls'].MaritalStatus.setValue(maritalStatusId);
                 this.formGroup.controls['formArray']['controls'][0]['controls'].EducationLevel.setValue(educationLevelId);
                 this.formGroup.controls['formArray']['controls'][0]['controls'].Occupation.setValue(occupationId);
                 if (dateOfBirth) {
-                    this.getAge(new Date(dateOfBirth));
+                    this.getAge(moment(dateOfBirth));
                 }
 
                 // second tab wizard
@@ -237,16 +237,19 @@ export class RegisterComponent implements OnInit {
         );
     }
 
-    onDate(event: MatDatepickerInputEvent<Date>) {
+    onDate(event: MatDatepickerInputEvent<moment.Moment>) {
         this.getAge(event.value, true);
     }
 
-    getAge(dob: Date, setDobPrecision: boolean = false): any {
+    getAge(dob: moment.Moment, setDobPrecision: boolean = false): any {
         const today = new Date();
 
-        let age = today.getFullYear() - dob.getFullYear();
-        let ageMonths = today.getMonth() - dob.getMonth();
-        if (ageMonths < 0 || (ageMonths === 0 && today.getDate() < dob.getDate())) {
+        console.log(moment(dob).toDate());
+        console.log(dob.toISOString());
+
+        let age = today.getFullYear() - dob.toDate().getFullYear();
+        let ageMonths = today.getMonth() - dob.toDate().getMonth();
+        if (ageMonths < 0 || (ageMonths === 0 && today.getDate() < dob.toDate().getDate())) {
             age--;
         }
 
@@ -329,20 +332,16 @@ export class RegisterComponent implements OnInit {
     }
 
     onSubmitForm(tabIndex: number) {
-        console.log(this.formArray.value);
-        console.log(this.formGroup.valid);
         if (this.formGroup.valid) {
             this.person = { ...this.formArray.value[0] };
             this.clientAddress = { ...this.formArray.value[1] };
             this.clientContact = { ...this.formArray.value[2] };
+            this.person.dateOfBirth = moment(this.formArray.value[0]['DateOfBirth']).toDate();
+            this.person.registrationDate = moment(this.person.registrationDate).toDate();
 
             this.person.personId = 0;
             this.person.createdBy = JSON.parse(localStorage.getItem('appUserId'));
             this.person.PosId = JSON.parse(localStorage.getItem('appPosID'));
-
-            console.log(this.person);
-            console.log(this.clientAddress);
-            console.log(this.clientContact);
 
             if (this.id) {
                 // set person id for update
