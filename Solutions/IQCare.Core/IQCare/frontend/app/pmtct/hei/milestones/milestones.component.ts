@@ -1,3 +1,5 @@
+import { LookupItemView } from './../../../shared/_models/LookupItemView';
+import { HeiService } from './../../_services/hei.service';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { NotificationService } from '../../../shared/_services/notification.service';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
@@ -18,12 +20,15 @@ export class MilestonesComponent implements OnInit {
     milestone_data: MilestoneData[] = [];
 
     @Input('milestoneOptions') milestoneOptions: any;
-    @Output() notify: EventEmitter<Object> = new EventEmitter<Object>();
-    //  @Output() milestonData: EventEmitter<MilestoneData[]> = new EventEmitter<MilestoneData[]>();
+    @Input('isEdit') isEdit: boolean;
+    @Input('patientId') patientId: number;
+    @Input('patientMasterVisitId') patientMasterVisitId: number;
 
-    milestoneassessments: any[] = [];
-    milestonestatuses: any[] = [];
-    yesnoOptions: any[] = [];
+    @Output() notify: EventEmitter<Object> = new EventEmitter<Object>();
+
+    milestoneassessments: LookupItemView[] = [];
+    milestonestatuses: LookupItemView[] = [];
+    yesnoOptions: LookupItemView[] = [];
     milestone_table_data: MilestoneTableData[] = [];
 
 
@@ -33,7 +38,8 @@ export class MilestonesComponent implements OnInit {
     constructor(private _formBuilder: FormBuilder,
         private _lookupItemService: LookupItemService,
         private snotifyService: SnotifyService,
-        private notificationService: NotificationService) { }
+        private notificationService: NotificationService,
+        private heiservice: HeiService) { }
 
     ngOnInit() {
         this.milestonesFormGroup = this._formBuilder.group({
@@ -54,10 +60,40 @@ export class MilestonesComponent implements OnInit {
 
 
         this.notify.emit({ 'form': this.milestonesFormGroup, 'data': this.milestone_data });
+
+        if (this.isEdit) {
+            this.loadMilestones();
+        }
+    }
+
+    loadMilestones(): any {
+        this.heiservice.getMilestoneHistory(this.patientId).subscribe(
+            (result) => {
+                for (let i = 0; i < result.length; i++) {
+                    const milestone = this.milestoneassessments.filter(obj => obj.itemId == result[i].typeAssessedId);
+                    const yesOrNo = result[i].achievedId ? 'Yes' : 'No';
+                    const yesnoOption = this.yesnoOptions.filter(obj => obj.itemName == yesOrNo);
+                    const status = this.milestonestatuses.filter(obj => obj.itemId == result[i].statusId);
+
+                    this.milestone_table_data.push({
+                        milestone: milestone.length > 0 ? milestone[0].itemName : '',
+                        dateAssessed: result[i].dateAssessed,
+                        achieved: yesnoOption[0].itemName,
+                        status: status[0].itemName,
+                        comment: result[i].comment
+                    });
+                }
+
+                this.dataSource = new MatTableDataSource(this.milestone_table_data);
+            },
+            (error) => {
+                this.snotifyService.error('Error fethcing milestones ' + error, 'HEI Milestones', this.notificationService.getConfig());
+            },
+            () => { }
+        );
     }
 
     public AddMilestone() {
-        console.log(this.milestonesFormGroup.value);
         const milestone = this.milestonesFormGroup.get('milestoneAssessed').value.itemName;
         if (this.milestone_table_data.filter(x => x.milestone === milestone).length > 0) {
             this.snotifyService.warning('' + milestone + ' exists', 'HEI Milestones', this.notificationService.getConfig());

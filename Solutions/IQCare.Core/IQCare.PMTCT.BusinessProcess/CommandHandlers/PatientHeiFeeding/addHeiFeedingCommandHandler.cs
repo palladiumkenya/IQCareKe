@@ -32,7 +32,7 @@ namespace IQCare.PMTCT.BusinessProcess.CommandHandlers.PatientHeiFeeding
                         PatientMasterVisitId = request.PatientMasterVisitId,
                         FeedingModeId = request.FeedingModeId,
                         CreatedBy = request.UserId,
-                        CreatedDate = DateTime.Now,
+                        CreateDate = DateTime.Now,
                         DeleteFlag = false
                     };
 
