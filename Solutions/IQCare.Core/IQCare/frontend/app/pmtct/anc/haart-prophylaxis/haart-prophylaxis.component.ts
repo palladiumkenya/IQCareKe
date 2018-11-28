@@ -133,6 +133,7 @@ export class HaartProphylaxisComponent implements OnInit {
                 });
     }
 
+
     public moveNextStep() {
         console.log(this.HaartProphylaxisFormGroup.value);
 
@@ -291,6 +292,7 @@ export class HaartProphylaxisComponent implements OnInit {
                     const chronic = p;
                     console.log('chronic ');
                     console.log(chronic);
+
                     if (chronic.length > 0) {
                         for (let i = 0; i < chronic.length; i ++) {
                             this.chronicIllness.push({
@@ -301,6 +303,13 @@ export class HaartProphylaxisComponent implements OnInit {
                                 dose: chronic[i]['dose']
                             });
                         }
+                        const yesno = this.yesnonaOptions.filter(x => x.itemName == 'Yes');
+                        this.HaartProphylaxisFormGroup.get('otherIllness').setValue(yesno[0]['itemId']);
+                    } else {
+                       const yesnot = this.yesnonaOptions.filter(x => x.itemName == 'No');
+                       console.log(this.yesnonaOptions);
+
+                       this.HaartProphylaxisFormGroup.get('otherIllness').setValue(yesnot[0]['itemId']);
                     }
 
                 },

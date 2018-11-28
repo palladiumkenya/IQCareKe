@@ -16,7 +16,7 @@ namespace IQCare.PMTCT.Core.Models
         public int StatusId { get; set; }
         public DateTime? StatusDate { get; set; }
         public int DifferentiatedCareId { get; set; }
-        public int DeleteFlag { get; set; }
+        public Boolean DeleteFlag { get; set; }
         public int CreatedBy { get; set; }
         
     }
