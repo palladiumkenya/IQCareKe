@@ -1,3 +1,4 @@
+import { PncService } from './../../_services/pnc.service';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { NotificationService } from '../../../shared/_services/notification.service';
@@ -12,14 +13,17 @@ export class MaternityReferralComponent implements OnInit {
 
     referralFormGroup: FormGroup;
     @Input() dischargeOptions: any[] = [];
+    @Input('isEdit') isEdit: boolean;
+    @Input('patientId') patientId: number;
+    @Input('patientMasterVisitId') patientMasterVisitId: number;
+
     @Output() notify: EventEmitter<FormGroup> = new EventEmitter<FormGroup>();
-    // public deliveryStateOptions: any[] = [];
     public referralOptions: any[] = [];
-    // public yesnoOptions: any[] = [];
 
     constructor(private formBuilder: FormBuilder,
         private notificationService: NotificationService,
-        private snotifyService: SnotifyService) {
+        private snotifyService: SnotifyService,
+        private pncservice: PncService) {
     }
 
     ngOnInit() {
@@ -36,6 +40,19 @@ export class MaternityReferralComponent implements OnInit {
 
 
         this.notify.emit(this.referralFormGroup);
+
+        if (this.isEdit) {
+            this.loadMaternityReferral();
+        }
+    }
+
+    loadMaternityReferral(): void {
+        this.pncservice.getReferral().subscribe(
+            (result) => {
+            },
+            (error) => { },
+            () => { }
+        );
     }
 
 }

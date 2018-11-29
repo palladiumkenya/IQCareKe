@@ -6,7 +6,7 @@ namespace IQCare.PMTCT.Services.Interface
 {
     public interface IClientMonitoringService
     {
-        Task<int> AddPatientWhoStage(PatientWHOStage patientWhoStage);
+        Task<int> AddPatientWhoStage(PatientWhoStage patientWhoStage);
 
         Task<int> AddPatientScreening(PatientScreening patientScreening);
 

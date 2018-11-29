@@ -34,6 +34,7 @@ import { PersoncontactsComponent } from './person/personcontacts/personcontacts.
 import { PersonIdentifiersResolver } from './_services/personidentifiers.resolver';
 import { InlineSearchComponent } from './inline-search/inline-search.component';
 import { YesNoResolver } from '../pmtct/_services/yesno.resolver';
+import { CheckDuplicatesComponent } from './person/check-duplicates/check-duplicates.component';
 
 @NgModule({
     imports: [
@@ -54,7 +55,9 @@ import { YesNoResolver } from '../pmtct/_services/yesno.resolver';
         MatSnackBarModule, MatStepperModule, MatTabsModule, MatToolbarModule, MatTooltipModule,
         SharedModule
     ],
-    declarations: [SearchComponent, RegisterComponent, ViewComponent, PersoncontactsComponent, InlineSearchComponent],
+    declarations: [SearchComponent, RegisterComponent,
+        ViewComponent, PersoncontactsComponent,
+        InlineSearchComponent, CheckDuplicatesComponent],
     providers: [
         CountyResolver,
         CountyService,
@@ -72,10 +75,12 @@ import { YesNoResolver } from '../pmtct/_services/yesno.resolver';
     ],
     entryComponents: [
         PersoncontactsComponent,
-        InlineSearchComponent
+        InlineSearchComponent,
+        CheckDuplicatesComponent
     ],
     exports: [
-        InlineSearchComponent
+        InlineSearchComponent,
+        CheckDuplicatesComponent
     ]
 })
 export class RecordsModule { }

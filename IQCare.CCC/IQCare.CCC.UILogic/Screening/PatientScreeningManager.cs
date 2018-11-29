@@ -40,9 +40,16 @@ namespace IQCare.CCC.UILogic.Screening
         {
             try
             {
-                //(screening>0) ? update:add
-                int screeningResult = _patientScreening.checkScreeningByScreeningCategoryId(patientId, screeningType, screeningCategory);
-                if (screeningResult > 0)
+                int screeningResult;
+                if (patientMasterVisitId > 0)
+                {
+                    screeningResult = _patientScreening.checkScreeningByVisitId(patientId, patientMasterVisitId, screeningType, screeningCategory);
+                }
+                else {
+                    //(screening>0) ? update:add
+                    screeningResult = _patientScreening.checkScreeningByScreeningCategoryId(patientId, screeningType, screeningCategory);
+                }
+               if (screeningResult > 0)
                 {
                     var PS = new PatientScreening()
                     {

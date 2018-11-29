@@ -18,101 +18,80 @@ namespace IQCare.PMTCT.BusinessProcess.CommandHandlers
     public class VisitDetailsCommandHandler : IRequestHandler<VisitDetailsCommand, Library.Result<VisitDetailsCommandResult>>
     {
 
-        private readonly ICommonUnitOfWork _commonUnitOfWork;
         private readonly IPmtctUnitOfWork _unitOfWork;
         public int visitCount=0;
         public int VisitNumber = 0;
         public PatientPregnancy Pregnancy;
         public int PregnancyId { get; set; }
 
-        public VisitDetailsCommandHandler(ICommonUnitOfWork commonUnitOfWork, IPmtctUnitOfWork unitOfWork)
+        public VisitDetailsCommandHandler(IPmtctUnitOfWork unitOfWork)
         {
-            _commonUnitOfWork = commonUnitOfWork ?? throw new ArgumentNullException(nameof(commonUnitOfWork));
             _unitOfWork = unitOfWork ?? throw new ArgumentException(nameof(unitOfWork));
         }
 
         public async Task<Library.Result<VisitDetailsCommandResult>> Handle(VisitDetailsCommand request, CancellationToken cancellationToken)
         {
-            using (_commonUnitOfWork)
+            using (_unitOfWork)
             {
                 int profileId = 0;
 
                 try
                 {
-                    VisitNumber = request.VisitNumber;
-
-                    
-                    PatientMasterVisitService patientMasterVisitService = new PatientMasterVisitService(_commonUnitOfWork);
-                    LookupLogic lookupLogic = new LookupLogic(_commonUnitOfWork);
                     VisitDetailsService visitDetailsService = new VisitDetailsService(_unitOfWork);
-                    PatientEncounterService patientEncounterService = new PatientEncounterService(_commonUnitOfWork);
                     PregnancyServices patientPregnancyServices =new PregnancyServices(_unitOfWork);
 
-                    var patientMasterVisit = await patientMasterVisitService.Add(request.PatientId, 1,DateTime.Today, 0,request.VisitDate, request.VisitDate, 0,0,request.VisitType,0);
-
-                    PatientPregnancy patientPregnancy = new PatientPregnancy()
+                    PatientPregnancy pregnancyData = patientPregnancyServices.GetActivePregnancy(request.PatientId);
+                    if (pregnancyData != null)
                     {
-                        PatientId = request.PatientId,
-                        PatientMasterVisitId = patientMasterVisit.Id,
-                        Lmp = request.Lmp,
-                        Edd = request.Edd,
-                        Parity = request.ParityOne,
-                        Parity2 = request.ParityTwo,
-                        Gestation = request.Gestation,
-                        Gravidae = request.Gravidae,
-                        CreatedBy = request.UserId,
-                        CreateDate = DateTime.Now                                          
-                    };
+                        this.PregnancyId = pregnancyData.Id;
+                        VisitNumber = visitDetailsService.GetNumberOfVisit(request.PatientId, pregnancyData.Id);
+                        // check if the details have changed
+                        if (pregnancyData.Lmp != request.Lmp || pregnancyData.Parity != request.ParityOne ||
+                            pregnancyData.Parity2 != request.ParityTwo)
+                        {
+                            // TODO: insert into a tracking table
+                        }
 
-                    var encounterTypeId = await lookupLogic.GetLookupIdbyName(request.EncounterType);
-
-                    var encounter = await patientEncounterService.Add(request.PatientId, encounterTypeId, patientMasterVisit.Id, DateTime.Now, DateTime.Now, request.ServiceAreaId,request.UserId);
-
-                    if (VisitNumber <= 1)
-                    {
-                         this.Pregnancy = await visitDetailsService.AddPatientPregnancy(patientPregnancy);
-                         this.PregnancyId = 0;
                     }
                     else
                     {
-                        PatientPregnancy pregnancyData =  patientPregnancyServices.GetActivePregnancy(request.PatientId);
-                        this.PregnancyId = pregnancyData.Id;
+                        PatientPregnancy patientPregnancy = new PatientPregnancy()
+                        {
+                            PatientId = request.PatientId,
+                            PatientMasterVisitId = request.PatientMasterVisitId,
+                            Lmp = request.Lmp,
+                            Edd = request.Edd,
+                            Parity = request.ParityOne,
+                            Parity2 = request.ParityTwo,
+                            Gestation = request.Gestation,
+                            Gravidae = request.Gravidae,
+                            CreatedBy = request.UserId,
+                            CreateDate = DateTime.Now
+                        };
+                        this.Pregnancy = await visitDetailsService.AddPatientPregnancy(patientPregnancy);
+                        this.PregnancyId = this.Pregnancy.Id;
                     }
-                   
-                    var visits = await visitDetailsService.GetPatientProfile(request.PatientId);
-
-
-                    if (this.VisitNumber <=1)
-                    {
-
-                        this.VisitNumber += 1;
-                    }
-
+                       
 
                     PatientProfile patientProfile = new PatientProfile()
                     {
                         PatientId = request.PatientId,
-                        PatientMasterVisitId = patientMasterVisit.Id,
+                        PatientMasterVisitId = request.PatientMasterVisitId,
                         AgeMenarche = request.AgeAtMenarche,
                         PregnancyId = this.PregnancyId,
-                        VisitNumber = this.VisitNumber,
+                        VisitNumber = (this.VisitNumber+1),
                         VisitType = request.VisitType,
                         CreatedBy = (request.UserId < 1) ? 1 : request.UserId,
                         CreateDate = DateTime.Now,
                     };
-
-                          var profile = visitDetailsService.AddPatientProfile(patientProfile);
-                        profileId = profile.Id;
-                    
-
+                    var profile = visitDetailsService.AddPatientProfile(patientProfile);
+                    profileId = profile.Id;
 
 
                     return Library.Result<VisitDetailsCommandResult>.Valid(new VisitDetailsCommandResult()
                     {
-                        PatientMasterVisitId =  patientMasterVisit.Id,
                         PregancyId = (this.VisitNumber>=1)?this.PregnancyId:this.Pregnancy.Id,
-                        ProfileId=profileId,
-                        PatientEncounterId=encounter.Id
+                        ProfileId=profileId
                     });
                 }
 

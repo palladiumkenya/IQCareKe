@@ -71,6 +71,10 @@ export class PersonRegistrationService {
     }
 
     public addPersonMaritalStatus(personId: number, userId: number, maritalStatusId: number): Observable<any> {
+        if (!maritalStatusId) {
+            return of([]);
+        }
+
         const Indata = {
             'PersonId': personId,
             'MaritalStatusId': maritalStatusId,

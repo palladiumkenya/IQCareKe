@@ -32,11 +32,14 @@ namespace IQCare.Controllers.PMTCT.HEI
 
         // GET api/<controller>/5
         [HttpGet("{id}")]
-        public async Task<IActionResult> Get(GetPatientMilestoneCommand getPatientMilestone)
+        public async Task<IActionResult> Get(int id)
         {
-            var response = await _mediator.Send(getPatientMilestone, Request.HttpContext.RequestAborted);
+            var response = await _mediator.Send(new GetPatientMilestoneCommand()
+            {
+                PatientId = id
+            }, Request.HttpContext.RequestAborted);
             if (response.IsValid)
-                return Ok(response);
+                return Ok(response.Value);
             return BadRequest(response);
         }
 

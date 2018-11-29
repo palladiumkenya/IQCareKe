@@ -14,7 +14,7 @@ namespace IQCare.Lab.Core.Models
 
         public string DataType { get; set; }
 
-        public int OrdRank { get; set; }
+        public decimal OrdRank { get; set; }
 
         public string LoincCode { get; set; }
 

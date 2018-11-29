@@ -13,6 +13,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using IQCare.Library;
 
 namespace IQCare.PMTCT.BusinessProcess.CommandHandlers
 {
@@ -49,7 +50,9 @@ namespace IQCare.PMTCT.BusinessProcess.CommandHandlers
                     CreatedBy = (request.UserId < 1) ? 1 : request.UserId,
                     CreateDate = DateTime.Now,
                     DaysPostPartum = request.DaysPostPartum,
-                    VisitNumber = request.VisitNumber
+                    VisitNumber = request.VisitNumber,
+                    AgeMenarche = request.AgeMenarche
+                    
                 };
 
                 var profile = await visitDetailsService.AddPatientProfile(patientProfile);

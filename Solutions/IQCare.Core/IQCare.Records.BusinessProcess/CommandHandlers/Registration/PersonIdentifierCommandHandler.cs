@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Threading;
 using IQCare.Common.BusinessProcess.Services;
 using IQCare.Common.Services;
+using IQCare.Library;
 using Serilog;
 
 namespace IQCareRecords.Common.BusinessProcess.CommandHandlers

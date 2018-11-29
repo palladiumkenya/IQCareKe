@@ -290,10 +290,10 @@
 
 											<div>
 												<label class="pull-left" style="padding-right: 10px">
-													<input id="rdAnyComplaintsYes" type="radio" name="anyComplaints" value="1" clientidmode="Static" runat="server" onclick="showHidePresentingComplaintsDivs();" />Yes
+													<input id="rdAnyComplaintsYes" type="radio" name="anyComplaints" value="1" clientidmode="Static" runat="server"   data-parsley-required="true" onclick="showHidePresentingComplaintsDivs();" />Yes
 												</label>
 												<label class="pull-left" style="padding-right: 10px">
-													<input id="rdAnyComplaintsNo" type="radio" name="anyComplaints" value="0" clientidmode="Static" runat="server" data-parsley-required="true" onclick="showHidePresentingComplaintsDivs();" />No
+													<input id="rdAnyComplaintsNo" type="radio" name="anyComplaints" value="0" clientidmode="Static" runat="server"   data-parsley-required="true"                                                          onclick="showHidePresentingComplaintsDivs();" />No
 												</label>
 
 											</div>
@@ -1283,7 +1283,7 @@
 
 										<div class="col-md-1">
 											<div class="col-md-12">
-												<label class="control-label pull-left"><span class="fa fa-cog">Action</span></label>
+												<label  class="control-label pull-left"><span class="fa fa-cog">Action</span></label>
 											</div>
 											<div class="col-md-4">
 												<button type="button" class="btn btn-info btn-lg fa fa-plus-circle" id="btnAddAllergy" onclick="AddAllergy();">Add</button>
@@ -1742,6 +1742,7 @@
 							</div>
 							
 							<div class="panel panel-primary">
+                                <div class="panel-heading">WHO Staging</div>
 								<div class="panel-body">
 									<div class="col-md-12 form-group">
                                         <div class="col-md-12">
@@ -2262,7 +2263,7 @@
 														<div class="col-md-4">
 															<div class="col-md-12">
 																<label class="pull-left" style="padding-right: 10px">
-																	<input id="OiYes" type="radio" name="ActiveOis" value="true" clientidmode="Static" runat="server" />Yes
+																	<input id="OiYes" type="radio" name="ActiveOis" value="true" clientidmode="Static"  runat="server" />Yes
 																</label>
 																<label class="pull-left" style="padding-right: 10px">
 																	<input id="OiNo" type="radio" name="ActiveOis" value="false" clientidmode="Static" runat="server" data-parsley-required="true" />No
@@ -3736,6 +3737,7 @@
                 var previousStep = 0;
                 var totalError = 0;
                 var stepError = 0;
+                
                 /*var form = $("form[name='form1']");*/
 
 				if (data.direction === 'next')
@@ -3787,7 +3789,7 @@
                                 addPatientIcf();
                                 addPatientIcfAction();
                                 saveNutritionAssessment();
-                                savePatientEncounterPresentingComplaint();
+                                savePatientEncounterPresentingComplaint(evt);
                             } else {
                                 stepError = $('.parsley-error').length === 0;
                                 totalError += stepError;
@@ -3905,7 +3907,7 @@
 
             });
 
-        function savePatientEncounterPresentingComplaint() {
+        function savePatientEncounterPresentingComplaint(evt) {
             var visitDate = $("#<%=VisitDate.ClientID%>").val();
             var visitScheduled = $("input[name$=Scheduled]:checked").val();
 
@@ -3918,17 +3920,23 @@
 
 
             /////////////////////////////////////////////////////
-            if (anyComplaints === 1) {
+            if (parseInt(anyComplaints, 10) === 1) {
+               
                 if (!presentingComplaintsTable.data().any()) {
-                    toastr.error("Presenting Complaints", "Presenting complaints missing.");
+                  
+                    toastr.error("Presenting Complaints", "Presenting complaints missing.Kindly indicate the presenting complaints.");
+                    
                     evt.preventDefault();
+                   
                 }
             }
 
-            if (adverseEvents === 1) {
+            if (parseInt(adverseEvents,10) === 1) {
                 if (!advEventsTable.data().any()) {
-                    toastr.error("Adverse Event(s)", "Adverse Event(s) missing.");
-                    evt.preventDefault();
+                    toastr.error("Adverse Event(s)", "Adverse Event(s) missing.Kindly indicate the adverse events");
+                    
+                     evt.preventDefault();
+                   
                 }
             }
 
@@ -4452,23 +4460,29 @@
         }
 
        
-		function saveWhoStage() {
-			var whostage = $("#<%=WHOStage.ClientID%>").val();
+        function saveWhoStage() {
+            var whostage = $("#<%=WHOStage.ClientID%>").val();
 
-			$.ajax({
-				type: "POST",
-				url: "../WebService/PatientEncounterService.asmx/savePatientWhoStage",
-				data: "{'whoStage':'" + whostage + "'}",
-				contentType: "application/json; charset=utf-8",
-				dataType: "json",
-				success: function (response) {
-					toastr.success(response.d, "WHO Stage");
-				},
-				error: function (response) {
-					toastr.error(response.d, "WHO Stage Error");
-				}
-			});
-		}
+            if (whostage.length > 0) {
+                $.ajax({
+                    type: "POST",
+                    url: "../WebService/PatientEncounterService.asmx/savePatientWhoStage",
+                    data: "{'whoStage':'" + whostage + "'}",
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    success: function (response) {
+                        toastr.success(response.d, "WHO Stage");
+                    },
+                    error: function (response) {
+                        toastr.error(response.d, "WHO Stage Error");
+                    }
+                });
+            }
+            else {
+                toastr.info("No  WhoStage was recorded");
+               }
+
+         }
 
 		function savePatientPatientManagement() {
 			var workPlan = $("#<%=txtWorkPlan.ClientID%>").val();
@@ -5733,6 +5747,7 @@
 		});
 	}
 
+    
 	function showHidePresentingComplaintsDivs() {
 		var anyComplaints = $("input[name$=anyComplaints]:checked").val();
 		if (anyComplaints ==1) {

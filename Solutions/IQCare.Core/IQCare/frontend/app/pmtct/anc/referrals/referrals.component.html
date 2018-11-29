@@ -11,7 +11,7 @@
         <div class="col-md-4 col-xs-12 col-sm-12">
             <mat-form-field class="col-lg-12">
                 <mat-select class="col-lg-12 col-xs-12 col-sm-6" formControlName="referredFrom"
-                            placeholder="Reffered from ">
+                            placeholder="Reffered from" [required]="true">
                     <mat-option *ngFor="let referralOption of referralOptions" [value]="referralOption.itemId">
                         {{referralOption.itemName}}
                     </mat-option>
@@ -20,8 +20,8 @@
         </div>
         <div class="col-md-4 col-xs-12 col-sm-12">
             <mat-form-field class="col-lg-12">
-                <mat-select formControlName="referredTo" placeholder="Referred to">
-                    <mat-option *ngFor="let referralOption of referralOptions" [value]="referralOption.itemId">
+                <mat-select formControlName="referredTo" placeholder="Referred to" [required]="true">
+                    <mat-option *ngFor="let referralOption of referralOptions" [value]="referralOption.itemId" >
                         {{referralOption.itemName}}
                     </mat-option>
                 </mat-select>
@@ -41,7 +41,7 @@
     <div class="col-md-4 col-sm-12 col-xs-12">
         <mat-form-field class="col-md-12">
             <mat-select placeholder="Scheduled an Appointment" formControlName="scheduledAppointment" required>
-                <mat-option *ngFor="let yesnoOption of yesnoOptions" [value]="yesnoOption.itemId">
+                <mat-option *ngFor="let yesnoOption of yesnoOptions" [value]="yesnoOption.itemId" (onSelectionChange)="onScheduleAppointmentChange($event)">
                     {{yesnoOption.itemName}}
                 </mat-option>
             </mat-select>
@@ -51,20 +51,13 @@
     <div class="col-md-4 col-xs-12 col-sm-12">
         <mat-form-field class="col-md-8">
             <input formControlName="nextAppointmentDate" matInput [matDatepicker]="nextAppointmentDate"
-                   placeholder="Next appointment Date">
+                   placeholder="Next appointment Date" required>
             <mat-datepicker-toggle matSuffix [for]="nextAppointmentDate"></mat-datepicker-toggle>
             <mat-datepicker #nextAppointmentDate></mat-datepicker>
         </mat-form-field>
     </div>
     <div class="col-md-2 col-xs-12 col-sm-4"></div>
 </div>
-
-
-
-    <!-- <div class="col-md-2 col-xs-12 col-sm-4">
-         <button mat-raised-button class="mat-accent"> End Encounter</button>
-     </div> -->
-
 
 
     <div class="row">
@@ -77,7 +70,7 @@
 
 </form>
 
-<div class="row">
+<!--<div class="row">
     <div>
         <button mat-raised-button class="mat-warn" matStepperPrevious style="margin-right: 5px">Back</button>
         <button mat-raised-button class="mat-primary" (click)="moveNextStep()">Complete
@@ -85,7 +78,7 @@
         </button>
     </div>
 </div>
-<!--<div class="row">
+<div class="row">
     <div class="col-md-12">
         <div>
             <button mat-raised-button  class="mat-primary" mat-button matStepperNext style="margin-right:5px" (click)="moveNextStep()">Check </button>

@@ -55,6 +55,10 @@ export class AppStateService {
 
         const promise = this.http.post<any>(this.API_URL + this.url + '/getState',
             JSON.stringify(InData), httpOptions).toPromise().then((res) => {
+                const selectedService = localStorage.getItem('selectedService');
+                if (selectedService) {
+                    this.store.dispatch(new Consent.SelectedService(selectedService));
+                }
 
                 if (res['stateStore'].length > 0 && ((personId) || (patientId) || (patientMasterVisitId) || (htsEncounterId))) {
                     const response = res['stateStore'];

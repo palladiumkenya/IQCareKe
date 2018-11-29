@@ -23,7 +23,9 @@ namespace IQCare.Maternity.BusinessProcess.CommandHandlers
         }
         public async Task<Result<DischargePatientResponse>> Handle(DischargePatientCommand request, CancellationToken cancellationToken)
         {
-            try
+            using (_maternityUnitOfWork)
+            {
+                try
             {
                 var patientDischarge = new MaternalPatientDischargeInformation(request.PatientMasterVisitId, request.OutcomeStatus, request.OutcomeDescription, request.CreatedBy, request.DateDischarged);
 
@@ -37,6 +39,8 @@ namespace IQCare.Maternity.BusinessProcess.CommandHandlers
                 logger.Error(ex, $"An error occured while discharging patient with masterId {request.PatientMasterVisitId}");
                 return Result<DischargePatientResponse>.Invalid(ex.Message);
             }
+          }
+            
         }
     }
 }

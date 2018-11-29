@@ -1,7 +1,7 @@
 export interface MaternityDeliveryCommand {
-   PatinetMasterVisitId?: number;
+   PatientMasterVisitId?: number;
    ProfileId?: number;
-   DurationOfLabour?: number;
+   DurationOfLabour?: string;
    DateOfDelivery?: Date;
    TimeOfDelivery?: Date;
    ModeOfDelivery?: number;

@@ -1,3 +1,4 @@
+import { HeiService } from './../../_services/hei.service';
 import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
 import { MatTableDataSource, MatDialogConfig, MatDialog } from '@angular/material';
@@ -20,12 +21,17 @@ export class HeiHivtestingComponent implements OnInit {
     dataSource = new MatTableDataSource(this.hiv_testing_table_data);
 
     @Input('heiHivTestingOptions') heiHivTestingOptions: any;
+    @Input('isEdit') isEdit: boolean;
+    @Input('patientId') patientId: number;
+    @Input('patientMasterVisitId') patientMasterVisitId: number;
+
     @Output() notify: EventEmitter<any> = new EventEmitter<any>();
 
     constructor(private _formBuilder: FormBuilder,
         private snotifyService: SnotifyService,
         private notificationService: NotificationService,
-        private dialog: MatDialog) {
+        private dialog: MatDialog,
+        private heiservice: HeiService) {
         this.maxDate = new Date();
     }
 
@@ -36,6 +42,14 @@ export class HeiHivtestingComponent implements OnInit {
 
 
         this.notify.emit(this.hiv_testing_table_data);
+
+        if (this.isEdit) {
+            this.loadHeiHivTests();
+        }
+    }
+
+    loadHeiHivTests(): void {
+        // this.heiservice.getHeiLabTests();
     }
 
     AddHivTests() {
@@ -64,7 +78,8 @@ export class HeiHivtestingComponent implements OnInit {
                     dateofsamplecollection: data.dateofsamplecollection,
                     result: data.result,
                     dateresultscollected: data.dateresultscollected,
-                    comments: data.comments
+                    comments: data.comments,
+                    resultText: data.resultText
                 });
 
                 this.dataSource = new MatTableDataSource(this.hiv_testing_table_data);
@@ -85,4 +100,5 @@ export interface HivTestingTableData {
     result?: string;
     dateresultscollected?: Date;
     comments?: string;
+    resultText: string;
 }

@@ -5,8 +5,8 @@ export class Person {
     lastName: string;
     nickName: string;
     sex: number;
-    registrationDate: string;
-    dateOfBirth: string;
+    registrationDate: Date;
+    dateOfBirth: Date;
     ageYears: number;
     ageMonths: number;
     dobPrecision: number;

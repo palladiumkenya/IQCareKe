@@ -8,6 +8,7 @@ namespace IQCare.Maternity.BusinessProcess.Commands.Maternity
 {
     public class AddDeliveredBabyBirthInformationCommand : IRequest<Result<DeliveredBabyBirthInfoResult>>
     {
+
         public int PatientDeliveryInformationId { get; set; }
         public int PatientMasterVisitId { get; set; }
         public decimal? BirthWeight { get; set; }

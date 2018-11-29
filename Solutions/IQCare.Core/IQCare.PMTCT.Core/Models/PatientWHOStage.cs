@@ -4,7 +4,7 @@ using System.Text;
 
 namespace IQCare.PMTCT.Core.Models
 {
-    public class PatientWHOStage
+    public class PatientWhoStage
     {
         public int Id { get; set; }
         public int PatientId { get; set; }

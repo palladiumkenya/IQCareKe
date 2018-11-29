@@ -1,4 +1,5 @@
-import { forkJoin, Observable } from 'rxjs/index';
+import { HeiOutComeCommand } from './../_models/hei/HeiOutcomeCommand';
+import { forkJoin, Observable, of } from 'rxjs/index';
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { ErrorHandlerService } from '../../shared/_services/errorhandler.service';
@@ -11,7 +12,10 @@ import { PatientIcfAction } from '../_models/hei/PatientIcfAction';
 import { PatientIptWorkup } from '../_models/hei/PatientIptWorkup';
 import { PatientIptOutcome } from '../_models/hei/PatientIptOutcome';
 import { PatientIpt } from '../_models/hei/PatientIpt';
-import { LabOrder, LabOrderResponse } from '../_models/hei/LabOrder';
+import { LabOrder } from '../_models/hei/LabOrder';
+import { OrdVisitCommand } from '../_models/hei/OrdVisitCommand';
+import { CompleteLabOrderCommand } from '../_models/hei/CompleteLabOrderCommand';
+import { PatientFeedingCommand } from '../_models/hei/PatientFeedingCommand';
 
 
 const httpOptions = {
@@ -34,25 +38,17 @@ export class HeiService {
         );
     }
 
-    public saveHeiVisitDetails(patientId: number, patientMasterVisitId: number, visitData: any,
-        userId: number): Observable<any> {
-        const visitDetailsData = {
-            'Id': 0,
-            'PatientMasterVisitId': patientMasterVisitId,
-            'PatientId': patientId,
-            'VisitDate': visitData['visitDate'],
-            'VisitType': visitData['visitType'],
-            'CreatedDate': new Date(),
-            'CreatedBy': userId,
-            'DeleteFlag': 0
-        };
-        return this.http.post<any>(this.API_URL + '/api/HeiVisitDetails', JSON.stringify(visitDetailsData), httpOptions).pipe(
+    public saveHeiVisitDetails(visitDetails: any): Observable<any> {
+        return this.http.post<any>(this.API_URL + '/api/VisitDetails/AddPNCVisitDetails', JSON.stringify(visitDetails), httpOptions).pipe(
             tap(saveHeiVisitDetails => this.errorHandler.log(`successfully added hei visit details`)),
             catchError(this.errorHandler.handleError<any>('Error saving hei delivery'))
         );
     }
 
     public saveImmunizationHistory(vaccination: Vaccination[]): Observable<Vaccination[]> {
+        if (vaccination.length == 0) {
+            return of([]);
+        }
 
         return this.http.post<any>(this.API_URL + '/api/ImmunizationHistory', JSON.stringify(vaccination), httpOptions).pipe(
             tap(saveImmunizationHistory => this.errorHandler.log(`successfully added hei Immunization History`)),
@@ -60,10 +56,32 @@ export class HeiService {
         );
     }
 
+    public getImmunizationHistory(patientId: number): Observable<any[]> {
+        return this.http.get<any[]>(this.API_URL + '/api/ImmunizationHistory/' + patientId).pipe(
+            tap(getImmunizationHistory => this.errorHandler.log(`successfully fetched immunization history`)),
+            catchError(this.errorHandler.handleError<any>('Error fetching immunization history'))
+        );
+    }
+
     public saveMilestoneHistory(milestone: Milestone[]): Observable<Milestone[]> {
-        return this.http.post<any>(this.API_URL + '/api/HeiMilestone', JSON.stringify(milestone), httpOptions).pipe(
+        if (milestone.length == 0) {
+            return of([]);
+        }
+
+        const InData = {
+            'PatientMilestone': milestone
+        };
+
+        return this.http.post<any>(this.API_URL + '/api/HeiMilestone', JSON.stringify(InData), httpOptions).pipe(
             tap(saveMilestoneHistory => this.errorHandler.log(`successfully added hei Milestone History`)),
             catchError(this.errorHandler.handleError<any>('Error saving hei milestone History'))
+        );
+    }
+
+    public getMilestoneHistory(patientId: number): Observable<any[]> {
+        return this.http.get(this.API_URL + '/api/HeiMilestone/' + patientId).pipe(
+            tap(getMilestoneHistory => this.errorHandler.log(`successfully fetched milestone history`)),
+            catchError(this.errorHandler.handleError<any>('Error fetching milestone history for patientId: ' + patientId))
         );
     }
 
@@ -77,7 +95,6 @@ export class HeiService {
             'BirthWeight': heidelivery['birthweight'],
             'ProphylaxisReceived': heidelivery['arvprophylaxisreceived'],
             'ProphylaxisReceivedOther': heidelivery['arvprophylaxisother'],
-
             'MotherIsRegistered': isMotherRegistered,
             'MotherPersonId': maternalHistory['motherpersonid'],
             'MotherStatusId': maternalHistory['stateofmother'],
@@ -96,6 +113,13 @@ export class HeiService {
         return this.http.post<any>(this.API_URL + '/api/DeliveryMaternalHistory', JSON.stringify(Indata), httpOptions).pipe(
             tap(saveHieDelivery => this.errorHandler.log(`successfully added hei delivery`)),
             catchError(this.errorHandler.handleError<any>('Error saving hei delivery'))
+        );
+    }
+
+    public getHeiDelivery(patientId: number, patientMasterVisitId: number): Observable<any[]> {
+        return this.http.get<any[]>(this.API_URL + '/api/DeliveryMaternalHistory/' + patientId + '/' + patientMasterVisitId).pipe(
+            tap(getHeiDelivery => this.errorHandler.log(`successfully fetched hei delivery`)),
+            catchError(this.errorHandler.handleError<any>('Error fetching hei delivery'))
         );
     }
 
@@ -136,10 +160,86 @@ export class HeiService {
         );
     }
 
-    public saveHeiLabOrder(labOrder: LabOrder): Observable<LabOrderResponse> {
+    public saveHeiLabOrder(labOrder: LabOrder): Observable<any> {
+        console.log(labOrder);
+        if (labOrder.LabTests.length == 0) {
+            return of([]);
+        }
+
         return this.http.post<any>(this.API_LAB_URL + '/api/LabOrder/AddLabOrder', JSON.stringify(labOrder), httpOptions).pipe(
             tap(saveHeiLabOrder => this.errorHandler.log(`successfully added laborder`)),
             catchError(this.errorHandler.handleError<any>('Error saving laborder'))
+        );
+    }
+
+    public saveCompleteHeiLabOrder(completeLabOrderCommand: CompleteLabOrderCommand): Observable<any> {
+        return this.http.post(this.API_LAB_URL + '/api/LabOrder/CompleteLabOrder', JSON.stringify(completeLabOrderCommand),
+            httpOptions).pipe(
+                tap(saveCompleteHeiLabOrder => this.errorHandler.log(`successfully completed hei laborder`)),
+                catchError(this.errorHandler.handleError<any>('Error completing hei laborder'))
+            );
+    }
+
+    public getPatientById(patientId: number): Observable<any> {
+        return this.http.get<any>(this.API_URL + '/api/Register/GetPatientById/' + patientId).pipe(
+            tap(getPatientById => this.errorHandler.log(`successfully fetched patient`)),
+            catchError(this.errorHandler.handleError<any>('Getting patient'))
+        );
+    }
+
+    public saveOrdVisit(ordVisitCommand: OrdVisitCommand, laborder: LabOrder): Observable<any> {
+        if (laborder.LabTests.length == 0) {
+            return of([]);
+        }
+
+        return this.http.post<any>(this.API_URL + '/api/PatientMasterVisit/addOrdVisit', JSON.stringify(ordVisitCommand), httpOptions).pipe(
+            tap(saveOrdVisit => this.errorHandler.log(`successfully added ordVisit`)),
+            catchError(this.errorHandler.handleError<any>('Error saving ordVisit'))
+        );
+    }
+
+    public getHeiLabTests(): Observable<any[]> {
+        const options = JSON.stringify(['PCR', 'Viral Load', 'HIV Rapid Test']);
+        return this.http.post<any[]>(this.API_LAB_URL + '/api/LabTests/GetLabTests', options, httpOptions).pipe(
+            tap(getHeiLabTests => this.errorHandler.log(`successfully fetched hei labtests`)),
+            catchError(this.errorHandler.handleError<any>('Error fetching labtests'))
+        );
+    }
+
+    public getLabTestPametersByLabTestId(labTestId: number): Observable<any[]> {
+        return this.http.get<any[]>(this.API_LAB_URL + '/api/LabTests/GetLabTestPametersByLabTestId/' + labTestId).pipe(
+            tap(getHeiLabTests => this.errorHandler.log(`successfully fetched labtest parameters`)),
+            catchError(this.errorHandler.handleError<any>('Error fetching labtest parameters'))
+        );
+    }
+
+    public saveHeiInfantFeeding(patientFeeding: PatientFeedingCommand): Observable<any> {
+        return this.http.post<any>(this.API_URL + '/api/Hei', JSON.stringify(patientFeeding), httpOptions).pipe(
+            tap(saveHeiInfantFeeding => this.errorHandler.log(`successfully saved infant feeding`)),
+            catchError(this.errorHandler.handleError<any>('Error saving infant feeding'))
+        );
+    }
+
+    public getHeiInfantFeeding(patientId: number, patientMasterVisitId: number): Observable<any> {
+        return this.http.get(this.API_URL + '/api/Hei/GetHeiFeeding/' + patientId + '/' + patientMasterVisitId).pipe(
+            tap(getHeiInfantFeeding => this.errorHandler.log(`successfully fetched hei infant feeding`)),
+            catchError(this.errorHandler.handleError<any>('Error fetching hei infant feeding'))
+        );
+    }
+
+    public saveHeiOutCome(heiOutComeCommand: HeiOutComeCommand): Observable<any> {
+        return this.http.post<any>(this.API_URL + '/api/DeliveryMaternalHistory/UpdateOutComeAt24Months',
+            JSON.stringify(heiOutComeCommand), httpOptions).pipe(
+                tap(saveHeiInfantFeeding => this.errorHandler.log(`successfully saved infant feeding`)),
+                catchError(this.errorHandler.handleError<any>('Error saving infant feeding'))
+            );
+    }
+
+    public getPatientVisitDetails(patientId: number, serviceAreaId: number) {
+        return this.http.get<any[]>(this.API_URL + '/api/AncVisitDetails/GetVisitDetailsByVisitType/' +
+            patientId + '/' + serviceAreaId).pipe(
+            tap(getPatientVisitDetails => this.errorHandler.log('get patient visit details data')),
+            catchError(this.errorHandler.handleError<any[]>('getPatientVisitDetails'))
         );
     }
 }

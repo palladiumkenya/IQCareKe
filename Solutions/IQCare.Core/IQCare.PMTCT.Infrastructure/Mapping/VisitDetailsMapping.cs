@@ -1,4 +1,5 @@
 ﻿using IQCare.PMTCT.Core;
+using IQCare.PMTCT.Core.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 

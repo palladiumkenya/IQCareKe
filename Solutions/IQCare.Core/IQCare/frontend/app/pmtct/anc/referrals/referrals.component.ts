@@ -7,6 +7,7 @@ import {Subscription} from 'rxjs/index';
 import {ReferralsEmitter} from '../../emitters/ReferralsEmitter';
 import {LookupItemService} from '../../../shared/_services/lookup-item.service';
 import {NotificationService} from '../../../shared/_services/notification.service';
+import {AncService} from '../../_services/anc.service';
 
 
 @Component({
@@ -20,13 +21,18 @@ export class ReferralsComponent implements OnInit {
   public referralOptions: any[] = [];
   public yesnoOptions: any[] = [];
     @Output() nextStep = new EventEmitter <ReferralsEmitter> ();
+    @Output() notify: EventEmitter<FormGroup> = new EventEmitter<FormGroup>();
     @Input() referral: ReferralsEmitter;
     @Input() referralFormOptions: any[] = [];
+    @Input('isEdit') isEdit: boolean;
+    @Input('PatientId') PatientId: number;
+    @Input('PatientMasterVisitId') PatientMasterVisitId: number;
     public referralData: ReferralsEmitter;
 
   constructor(private _formBuilder: FormBuilder, private _lookupItemService: LookupItemService,
               private  snotifyService: SnotifyService,
-              private notificationService: NotificationService) { }
+              private notificationService: NotificationService,
+              private ancService: AncService ) { }
 
   ngOnInit() {
       this.ReferralFormGroup = this._formBuilder.group({
@@ -44,28 +50,58 @@ export class ReferralsComponent implements OnInit {
       this.referralOptions = referralOptions;
       this.yesnoOptions = yesNoOptions;
 
-    //  this.getLookupOptions('pmtctReferrals', this.referrals);
-     // this.getLookupOptions('YesNo', this.yesnos);
+      this.notify.emit(this.ReferralFormGroup);
+
+        if (this.isEdit) {
+                this.getPatientAppointment(this.PatientId, this.PatientMasterVisitId);
+                this.getPatientReferral(this.PatientId, this.PatientMasterVisitId);
+        }
   }
-/*
-    public  getLookupOptions(groupName: string, masterName: any[]) {
-        this.LookupItems$ = this._lookupItemService.getByGroupName(groupName)
+
+    public  getPatientAppointment(patientId: number, patientMasterVisitid: number) {
+        this.LookupItems$ = this.ancService.getPatientAppointment(patientId, patientMasterVisitid)
             .subscribe(
                 p => {
-                    const lookupOptions =  p['lookupItems'];
-                    for (let i = 0; i < lookupOptions.length; i++) {
-                        masterName.push({'itemId': lookupOptions[i]['itemId'], 'itemName': lookupOptions[i]['itemName']});
-                    }
-                    console.log(this.referrals);
+                        const appointment = p;
+                        console.log('appointment details');
+                        console.log(appointment);
+                        if (appointment) {
+                            const yesno = this.yesnoOptions.filter(x => x.itemName == 'Yes');
+                            this.ReferralFormGroup.get('nextAppointmentDate').setValue(appointment['appointmentDate']);
+                            this.ReferralFormGroup.get('scheduledAppointment').setValue(yesno[0]['itemId']);
+                            this.ReferralFormGroup.get('serviceRemarks').setValue(appointment['description']);
+                        }
                 },
                 (err) => {
                     console.log(err);
-                    this.snotifyService.error('Error fetching lookups' + err, 'Encounter', this.notificationService.getConfig());
+                    this.snotifyService.error('Error fetching patient appointment' + err, 'ANC',
+                        this.notificationService.getConfig());
                 },
                 () => {
                     console.log(this.LookupItems$);
                 });
-    }*/
+    }
+
+    public  getPatientReferral(patientId: number, patientMasterVisitid: number) {
+        this.LookupItems$ = this.ancService.getPatientReferral(patientId, patientMasterVisitid)
+            .subscribe(
+                p => {
+                    const referral = p;
+                    console.log('referral details');
+                    console.log(referral);
+
+                    this.ReferralFormGroup.get('referredFrom').setValue(referral['referredFrom']);
+                    this.ReferralFormGroup.get('referredTo').setValue(referral['referredTo']);
+                },
+                (err) => {
+                    console.log(err);
+                    this.snotifyService.error('Error fetching patient Referral' + err, 'ANC',
+                        this.notificationService.getConfig());
+                },
+                () => {
+                    console.log(this.LookupItems$);
+                });
+    }
 
     public moveNextStep() {
         console.log(this.ReferralFormGroup.value);
@@ -81,6 +117,17 @@ export class ReferralsComponent implements OnInit {
         };
         console.log(this.referralData);
         this.nextStep.emit(this.referralData);
+    }
+
+    public onScheduleAppointmentChange(event) {
+        if (event.isUserInput && event.source.selected && event.source.viewValue == 'Yes') {
+            this.ReferralFormGroup.controls['serviceRemarks'].enable({ onlySelf: true });
+            this.ReferralFormGroup.controls['nextAppointmentDate'].enable({ onlySelf: true });
+        } else {
+            this.ReferralFormGroup.controls['serviceRemarks'].setValue('');
+            this.ReferralFormGroup.controls['serviceRemarks'].disable({ onlySelf: true });
+            this.ReferralFormGroup.controls['nextAppointmentDate'].disable({ onlySelf: true });
+        }
     }
 
 }

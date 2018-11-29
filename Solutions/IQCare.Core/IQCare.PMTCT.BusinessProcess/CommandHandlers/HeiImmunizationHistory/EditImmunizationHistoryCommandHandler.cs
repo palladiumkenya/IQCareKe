@@ -32,7 +32,7 @@ namespace IQCare.PMTCT.BusinessProcess.CommandHandlers.HeiImmunizationHistory
                     if (vacc != null)
                     {
                         vacc.AppointmentId = request.Vaccination.PatientId;
-                        vacc.Period = request.Vaccination.Period;
+                        vacc.PeriodId = request.Vaccination.PeriodId;
                         vacc.VaccineDate = request.Vaccination.VaccineDate;
                         vacc.VaccineStage = request.Vaccination.VaccineStage;
                     }

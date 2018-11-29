@@ -36,7 +36,7 @@ namespace IQCare.Controllers.PMTCT.ANC
 
 
         //used to capture both maternity and ANC visit details
-        [HttpPost]
+        [HttpPost("AddANCVisit")]
         public async Task<IActionResult> Post([FromBody] VisitDetailsCommand visitDetailsCommand )
         {
             var response = await _mediator.Send(visitDetailsCommand, Request.HttpContext.RequestAborted);
@@ -76,9 +76,9 @@ namespace IQCare.Controllers.PMTCT.ANC
         }
 
         [HttpPost("postPregnancy")]
-        public async Task<IActionResult> post([FromBody] AddPregnancyCommand addPregnancyCommand)
+        public async Task<IActionResult> post([FromBody] AddPregnancyCommand command)
         {
-            var response = await _mediator.Send(addPregnancyCommand, Request.HttpContext.RequestAborted);
+            var response = await _mediator.Send(command, Request.HttpContext.RequestAborted);
             if (response.IsValid)
                 return Ok(response.Value);
             return BadRequest(response);

@@ -4,11 +4,11 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace IQCare.PMTCT.Infrastructure.Mapping.HEI
 {
-    class HEIMilestoneMapping : IEntityTypeConfiguration<HEIMilestone>
+    public class HEIMilestoneMapping : IEntityTypeConfiguration<HEIMilestone>
     {
-        void IEntityTypeConfiguration<HEIMilestone>.Configure(EntityTypeBuilder<HEIMilestone> builder)
+        public void Configure(EntityTypeBuilder<HEIMilestone> builder)
         {
-            builder.ToTable("HeiMilestone")
+            builder.ToTable("PatientMilestone")
                 .HasKey(c => c.Id);
         }
     }

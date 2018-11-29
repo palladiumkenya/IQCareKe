@@ -53,8 +53,10 @@
             localStorage.setItem('appLocationId', appLocationId);
             localStorage.setItem('appLocation', appLocation);
             localStorage.setItem('appPosID', appPosID);
-              localStorage.setItem('appVersionName', appVersionName);
+
+            localStorage.setItem('appVersionName', appVersionName);
             localStorage.setItem('appReleaseDate', appReleaseDate);
+
             console.log(localStorage);
         });
     </script>

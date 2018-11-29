@@ -68,6 +68,8 @@ END
 ALTER TABLE dbo.PatientMilestone ALTER Column MilestoneAssessedId [INT] NOT NULL;
 ALTER TABLE dbo.PatientMilestone ALTER Column	MilestoneDate [DateTime] NOT NULL;
 ALTER TABLE dbo.PatientMilestone ALTER Column	MilestoneAchievedId [INT] NOT NULL; 
+
+
 IF NOT EXISTS (  select *
       from sys.all_columns c
       join sys.tables t on t.object_id = c.object_id
@@ -82,6 +84,14 @@ ALTER TABLE dbo.PatientMilestone ALTER Column MilestoneStatusId [INT] NOT NULL;
 ALTER TABLE dbo.PatientMilestone ALTER Column	MilestoneComments [Text];
   
 END
+
+IF  NOT EXISTS(SELECT * FROM sys.columns 
+          WHERE Name = N'AuditData'
+          AND Object_ID = Object_ID(N'PatientMilestone'))
+		  BEGIN
+		 		  ALTER TABLE PatientMilestone ADD AuditData xml
+		   END
+
 
 IF NOT EXISTS
 (

@@ -1,13 +1,12 @@
+using Interface.Service;
 using System;
-using System.Data;
-using System.Collections;
-using System.Web.UI;
-using System.Web.UI.WebControls;
-using System.Web.UI.HtmlControls;  
 using System.Collections.Generic;
+using System.Data;
 using System.Text;
 using System.Web;
-using Interface.Service;
+using System.Web.UI;
+using System.Web.UI.HtmlControls;
+using System.Web.UI.WebControls;
 
 
 
@@ -915,7 +914,7 @@ namespace Application.Presentation
                 }
                 //}
             }
-            catch (Exception ex)
+            catch 
             {
                 userList = new Dictionary<int, string>();
             }

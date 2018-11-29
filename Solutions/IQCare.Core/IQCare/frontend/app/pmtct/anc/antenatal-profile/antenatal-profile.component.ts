@@ -15,7 +15,7 @@ export interface AntenatalProfile {
 }
 
 const AntenatalProfile_Data: AntenatalProfile[] = [
-    {position: 1, testName: 'Blood Group', dateDone: '11/11/2017', results: 'O+'}
+  //  {position: 1, testName: 'Blood Group', dateDone: '11/11/2017', results: 'O+'}
 ] ;
 
 @Component({

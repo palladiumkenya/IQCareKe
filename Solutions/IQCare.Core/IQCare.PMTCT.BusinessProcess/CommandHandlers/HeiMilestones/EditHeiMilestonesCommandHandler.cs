@@ -31,10 +31,10 @@ namespace IQCare.PMTCT.BusinessProcess.CommandHandlers.HeiMilestones
                         request.PatientMilestone.PatientMasterVisitId).FirstOrDefault();
                     if (milestone != null)
                     {
-                        milestone.Achieved = request.PatientMilestone.Achieved;
+                        milestone.AchievedId = request.PatientMilestone.AchievedId;
                         milestone.Comment = request.PatientMilestone.Comment;
-                        milestone.Status = request.PatientMilestone.Status;
-                        milestone.TypeAssessed = request.PatientMilestone.TypeAssessed;
+                        milestone.StatusId = request.PatientMilestone.StatusId;
+                        milestone.TypeAssessedId = request.PatientMilestone.TypeAssessedId;
                     }
 
                      _unitOfWork.Repository<HEIMilestone>().Update(milestone);

@@ -33,17 +33,20 @@
 
                                         <!-- add Maternity History Component to Stepper -->
                                         <app-pnc-maternalhistory (notify)="onMaternalHistoryNotify($event)"
-                                            [matHistoryOptions]="matHistoryOptions">
+                                            [matHistoryOptions]="matHistoryOptions" [patientId]="patientId" [isEdit]="isEdit"
+                                            [patientMasterVisitId]="patientMasterVisitId">
                                         </app-pnc-maternalhistory>
 
                                         <!-- add PostNatal Examination Component to Stepper -->
                                         <app-pnc-postnatalexam (notify)="onPostNatalExamNotify($event)"
-                                            [postNatalExamOptions]="postNatalExamOptions">
+                                            [postNatalExamOptions]="postNatalExamOptions" [patientId]="patientId"
+                                            [isEdit]="isEdit" [patientMasterVisitId]="patientMasterVisitId">
                                         </app-pnc-postnatalexam>
 
                                         <!-- add Baby Examination Component to Stepper -->
                                         <app-pnc-babyexamination (notify)="onBabyExaminationNotify($event)"
-                                            [babyExaminationOptions]="babyExaminationOptions">
+                                            [babyExaminationOptions]="babyExaminationOptions" [patientId]="patientId"
+                                            [isEdit]="isEdit" [patientMasterVisitId]="patientMasterVisitId">
                                         </app-pnc-babyexamination>
 
                                         <div class="row">
@@ -59,7 +62,9 @@
                                         </ng-template>
 
                                         <!-- add Hiv Status Component to Stepper -->
-                                        <app-pnc-hivtesting (notify)="onHivStatusNotify($event)" [pncHivOptions]="pncHivOptions">
+                                        <app-pnc-hivtesting (notify)="onHivStatusNotify($event)" [pncHivOptions]="pncHivOptions"
+                                            [patientId]="patientId" [isEdit]="isEdit" [patientMasterVisitId]="patientMasterVisitId"
+                                            [patientEncounterId]="patientEncounterId">
                                         </app-pnc-hivtesting>
 
                                         <div class="row">
@@ -78,21 +83,24 @@
 
                                         <!-- add Drug Administration Component to Stepper -->
                                         <app-pnc-drugadministration (notify)="onDrugAdministrationNotify($event)"
-                                            [drugAdministrationOptions]="drugAdministrationOptions">
+                                            [drugAdministrationOptions]="drugAdministrationOptions" [patientId]="patientId"
+                                            [isEdit]="isEdit" [patientMasterVisitId]="patientMasterVisitId">
                                         </app-pnc-drugadministration>
 
                                         <br />
 
                                         <!-- add Partner Testing Component to Stepper -->
                                         <app-pnc-partnertesting (notify)="onPartnerTestingNotify($event)"
-                                            [partnerTestingOptions]="partnerTestingOptions">
+                                            [partnerTestingOptions]="partnerTestingOptions" [patientId]="patientId"
+                                            [isEdit]="isEdit" [patientMasterVisitId]="patientMasterVisitId">
                                         </app-pnc-partnertesting>
 
                                         <br />
 
                                         <!-- add Patient Education Component to Stepper -->
                                         <app-pnc-patienteducation (notify)="onPatientEducationNotify($event)"
-                                            [patientEducationOptions]="patientEducationOptions">
+                                            [patientEducationOptions]="patientEducationOptions" [patientId]="patientId"
+                                            [isEdit]="isEdit" [patientMasterVisitId]="patientMasterVisitId">
                                         </app-pnc-patienteducation>
 
                                         <div class="row">
@@ -111,12 +119,14 @@
 
                                         <!-- add Cervical Cancer Screening Component to Stepper -->
                                         <app-pnc-cervicalcancerscreening (notify)="onCervicalCancerScreeningNotify($event)"
-                                            [cervicalCancerScreeningOptions]="cervicalCancerScreeningOptions">
+                                            [cervicalCancerScreeningOptions]="cervicalCancerScreeningOptions"
+                                            [patientId]="patientId" [isEdit]="isEdit" [patientMasterVisitId]="patientMasterVisitId">
                                         </app-pnc-cervicalcancerscreening>
 
                                         <!-- add Contraceptive History and Exercise Component to Stepper -->
                                         <app-pnc-contraceptivehistory (notify)="onContraceptiveHistoryNotify($event)"
-                                            [contraceptiveHistoryExercise]="contraceptiveHistoryExercise">
+                                            [contraceptiveHistoryExercise]="contraceptiveHistoryExercise" [patientId]="patientId"
+                                            [isEdit]="isEdit" [patientMasterVisitId]="patientMasterVisitId">
                                         </app-pnc-contraceptivehistory>
 
                                         <div class="row">
@@ -133,11 +143,14 @@
                                             </span>
                                         </ng-template>
 
-                                        <app-diagnosis (notify)="onDiagnosisNotify($event)"></app-diagnosis>
+                                        <app-diagnosis (notify)="onDiagnosisNotify($event)" [PatientId]="patientId"
+                                            [isEdit]="isEdit" [PatientMasterVisitId]="patientMasterVisitId"></app-diagnosis>
 
-                                        <app-maternity-referral (notify)="onReferralNotify($event)" [dischargeOptions]="referralOptions"></app-maternity-referral>
+                                        <app-maternity-referral (notify)="onReferralNotify($event)" [dischargeOptions]="referralOptions"
+                                            [patientId]="patientId" [isEdit]="isEdit" [patientMasterVisitId]="patientMasterVisitId"></app-maternity-referral>
 
-                                        <app-maternity-next-appointment (notify)="onNextAppointmentNotify($event)">
+                                        <app-maternity-next-appointment (notify)="onNextAppointmentNotify($event)"
+                                            [patientId]="patientId" [isEdit]="isEdit" [patientMasterVisitId]="patientMasterVisitId">
                                         </app-maternity-next-appointment>
 
                                         <div class="row">

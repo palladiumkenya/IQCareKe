@@ -40,7 +40,8 @@
             <ng-container matColumnDef="result">
                 <mat-header-cell *matHeaderCellDef> <strong> Results </strong> </mat-header-cell>
                 <mat-cell *matCellDef="let HivTestingTableData">
-                    {{ HivTestingTableData.result.itemName }}
+                    {{ HivTestingTableData.result ? HivTestingTableData.result.itemName :
+                    HivTestingTableData.resultText }}
                 </mat-cell>
             </ng-container>
 

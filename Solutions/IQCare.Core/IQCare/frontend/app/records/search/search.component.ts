@@ -6,6 +6,8 @@ import { Router, ActivatedRoute } from '../../../../node_modules/@angular/router
 import { SnotifyService } from 'ng-snotify';
 import { NotificationService } from '../../shared/_services/notification.service';
 import { animate, state, style, transition, trigger } from '@angular/animations';
+import { Store } from '@ngrx/store';
+import * as AppState from '../../shared/reducers/app.states';
 
 @Component({
     selector: 'app-search',
@@ -20,9 +22,10 @@ import { animate, state, style, transition, trigger } from '@angular/animations'
     ],
 })
 export class SearchComponent implements OnInit, AfterViewInit {
+    afterSearch: boolean = false;
     @ViewChild(MatPaginator) paginator: MatPaginator;
     @ViewChild(MatSort) sort: MatSort;
-    displayedColumns = ['id', 'firstName', 'middleName', 'lastName', 'dateOfBirth', 'gender', 'fullName'];
+    displayedColumns = ['id', 'firstName', 'middleName', 'lastName', 'dateOfBirth', 'ageNumber', 'gender', 'fullName'];
     dataSource = new MatTableDataSource();
     clientSearch: Search;
     expandedElement: any;
@@ -33,8 +36,12 @@ export class SearchComponent implements OnInit, AfterViewInit {
         private route: ActivatedRoute,
         public zone: NgZone,
         private snotifyService: SnotifyService,
-        private notificationService: NotificationService) {
+        private notificationService: NotificationService,
+        private store: Store<AppState>) {
+        store.dispatch(new AppState.ClearState());
         this.clientSearch = new Search();
+        localStorage.removeItem('selectedService');
+        this.store.dispatch(new AppState.ClearState());
     }
 
     ngAfterViewInit(): void {
@@ -45,29 +52,29 @@ export class SearchComponent implements OnInit, AfterViewInit {
         this.dataSource.sort = this.sort;
     }
 
-    OnKeyUp(event) {
+    /*OnKeyUp(event) {
         if (event.target.value.length > 2) {
             this.doSearch();
         }
-    }
+    }*/
 
     doSearch() {
         this.searchService.searchClient(this.clientSearch).subscribe(
             (res) => {
-                // console.log(res['personSearch']);
                 const rows = [];
                 res['personSearch'].forEach(element => rows.push(element, { detailRow: true, element }));
                 this.dataSource.data = rows;
+                this.afterSearch = true;
             },
             (error) => {
-                console.error(error);
+                // console.error(error);
                 this.snotifyService.error('Error searching person ' + error, 'SEARCH', this.notificationService.getConfig());
             }
         );
     }
 
     getSelectedRow(row: any) {
-        console.log(row);
+        // console.log(row);
         const personId = row['id'];
         this.zone.run(() => { this.router.navigate(['/dashboard/personhome/' + personId], { relativeTo: this.route }); });
     }

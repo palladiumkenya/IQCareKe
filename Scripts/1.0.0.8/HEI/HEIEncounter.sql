@@ -38,7 +38,7 @@ CREATE TABLE [dbo].[HEIEncounter](
 	[MotherPMTCTDrugsId] [int] NULL,
 	[MotherPMTCTRegimenId] [int] NULL,
 	[MotherPMTCTRegimenOther] [varchar](100) NULL,
-	[MotherArtInfantEnrolId] [bit] NULL,
+	[MotherArtInfantEnrolId] [int] NULL,
 	[MotherArtInfantEnrolRegimenId] [int] NULL,
 	[MotherCurrentRegimenId] [int] NULL,
 	[MotherLatestVL] [int] NULL,

@@ -8,7 +8,7 @@ namespace IQCare.Lab.Core.Models
     {
         public int UnitId { get; set; }
         public string UnitName { get; set; }
-        public bool DeleteFlag { get; set; }
+        public int? DeleteFlag { get; set; }
 
     }
 }

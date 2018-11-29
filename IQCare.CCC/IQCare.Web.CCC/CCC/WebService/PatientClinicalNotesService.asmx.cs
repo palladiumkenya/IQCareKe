@@ -30,10 +30,13 @@ namespace IQCare.Web.CCC.WebService
             try
             {
                 var PCN = new PatientClinicalNotesLogic();
-                Result = PCN.addPatientClinicalNotes(patientId,patientMasterVisitId,serviceAreaId,notesCategoryId,clinicalNotes,userId);
-                if (Result > 0)
+                if (!String.IsNullOrEmpty(clinicalNotes))
                 {
-                    Msg = "Notes Added";
+                    Result = PCN.addPatientClinicalNotes(patientId, patientMasterVisitId, serviceAreaId, notesCategoryId, clinicalNotes, userId);
+                    if (Result > 0)
+                    {
+                        Msg = "Notes Added";
+                    }
                 }
             }
             catch (Exception e)
@@ -48,10 +51,13 @@ namespace IQCare.Web.CCC.WebService
             try
             {
                 var PCN = new PatientClinicalNotesLogic();
-                Result = PCN.addPatientClinicalNotesByVisitId(Convert.ToInt32(Session["PatientPK"]), patientMasterVisitId, serviceAreaId, notesCategoryId, clinicalNotes, userId);
-                if (Result > 0)
+                if (!String.IsNullOrEmpty(clinicalNotes))
                 {
-                    Msg = "Notes Added";
+                    Result = PCN.addPatientClinicalNotesByVisitId(Convert.ToInt32(Session["PatientPK"]), patientMasterVisitId, serviceAreaId, notesCategoryId, clinicalNotes, userId);
+                    if (Result > 0)
+                    {
+                        Msg = "Notes Added";
+                    }
                 }
             }
             catch (Exception e)
@@ -163,6 +169,7 @@ namespace IQCare.Web.CCC.WebService
             }
             return mmasRecommendation;
         }
+        
         [WebMethod(EnableSession = true)]
         public string getPatientNotes(int PatientId)
         {

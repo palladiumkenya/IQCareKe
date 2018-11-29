@@ -10,12 +10,12 @@ namespace IQCare.Maternity.Core.Domain.Maternity
         {
 
         }
-        public MaternalDrugAdministration(int patientId, int masterVisitId, int drugAdministred, int value, 
+        public MaternalDrugAdministration(int patientId, int masterVisitId, int drugAdministered, int value, 
             string description, int createdBy)
         {
             PatientId = patientId;
             PatientMasterVisitId = masterVisitId;
-            DrugAdministered = drugAdministred;
+            DrugAdministered = drugAdministered;
             Value = value;
             Description = description;
             CreatedBy = createdBy;
@@ -31,5 +31,13 @@ namespace IQCare.Maternity.Core.Domain.Maternity
         public int CreatedBy { get; private set; }
         public DateTime DateCreated { get; private set; }
 
+        public void DeactivateDrugAdministration() => DeleteFlag = true;
+
+        public void Update(int drugAdministered, int value, string description)
+        {
+            DrugAdministered = drugAdministered;
+            Value = value;
+            Description = description;
+        }
     }
 }

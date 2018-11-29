@@ -32,7 +32,20 @@ export class HivtestingmodalComponent implements OnInit {
             result: new FormControl('', [Validators.required]),
             dateresultscollected: new FormControl('', [Validators.required]),
             comments: new FormControl(''),
+            resultText: new FormControl('', [Validators.required])
         });
+
+        this.HivTestingForm.get('resultText').disable({ onlySelf: true });
+    }
+
+    onTestTypeChange(event) {
+        if (event.isUserInput && event.source.selected && event.source.viewValue == 'Baseline Viral Load (for +ve)') {
+            this.HivTestingForm.get('resultText').enable({ onlySelf: true });
+            this.HivTestingForm.get('result').disable({ onlySelf: true });
+        } else {
+            this.HivTestingForm.get('resultText').disable({ onlySelf: true });
+            this.HivTestingForm.get('result').enable({ onlySelf: true });
+        }
     }
 
     save() {

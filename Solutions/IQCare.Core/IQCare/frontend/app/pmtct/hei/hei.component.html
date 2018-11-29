@@ -16,7 +16,8 @@
                                         <ng-template matStepLabel>
                                             <span matTooltip="Visit Details">Visit Details</span>
                                         </ng-template>
-                                        <app-hei-visit-details (notify)="onVisitDetailsNotify($event)" [formtype]="formType"></app-hei-visit-details>
+                                        <app-hei-visit-details (notify)="onVisitDetailsNotify($event)" [formtype]="formType"
+                                            [visitDate]="visitDate" [visitType]="visitType" [patientId]="patientId"></app-hei-visit-details>
 
                                         <div>
                                             <button mat-raised-button color="accent" matStepperNext type="button">Next</button>
@@ -29,12 +30,14 @@
                                         </ng-template>
 
                                         <!-- add Delivery Component to Stepper -->
-                                        <app-delivery (notify)="onDeliveryNotify($event)" [deliveryOptions]="deliveryOptions">
+                                        <app-delivery (notify)="onDeliveryNotify($event)" [deliveryOptions]="deliveryOptions"
+                                            [patientId]="patientId" [isEdit]="isEdit" [patientMasterVisitId]="patientMasterVisitId">
                                         </app-delivery>
 
                                         <!-- add Maternity History Component to Stepper -->
                                         <app-maternalhistory (notify)="onMatHistoryNotify($event)"
-                                            [maternalhistoryOptions]="maternalhistoryOptions">
+                                            [maternalhistoryOptions]="maternalhistoryOptions" [patientId]="patientId"
+                                            [isEdit]="isEdit" [patientMasterVisitId]="patientMasterVisitId">
                                         </app-maternalhistory>
 
                                         <div>
@@ -49,7 +52,8 @@
                                             <span matTooltip="Immunization History">Immunization</span>
                                         </ng-template>
                                         <app-immunization-history [immunizationHistoryOptions]="immunizationHistoryOptions"
-                                            (notify)="onImmunizationHistory($event)" (vaccineArray)="onImmunizationHistoryData($event)"></app-immunization-history>
+                                            (notify)="onImmunizationHistory($event)" [patientId]="patientId" [isEdit]="isEdit"
+                                            [patientMasterVisitId]="patientMasterVisitId"></app-immunization-history>
 
                                         <div>
                                             <button mat-raised-button color="primary" matStepperPrevious type="button">Previous</button>
@@ -63,8 +67,8 @@
                                         <ng-template matStepLabel>
                                             <span matTooltip="Milestones">Milestones</span>
                                         </ng-template>
-                                        <app-milestones (notify)="onMilestonesNotify($event)" (milestonData)="onMilsetoneTableData($event)"
-                                            [milestoneOptions]="milestoneOptions"></app-milestones>
+                                        <app-milestones (notify)="onMilestonesNotify($event)" [milestoneOptions]="milestoneOptions"
+                                            [patientId]="patientId" [isEdit]="isEdit" [patientMasterVisitId]="patientMasterVisitId"></app-milestones>
                                         <div>
                                             <button mat-raised-button color="primary" matStepperPrevious type="button">Previous</button>
                                             &nbsp;&nbsp;
@@ -79,7 +83,8 @@
                                         </ng-template>
 
                                         <app-hei-hivtesting (notify)="onHivTestingNotify($event)"
-                                            [heiHivTestingOptions]="hivtestingOptions">
+                                            [heiHivTestingOptions]="hivtestingOptions" [patientId]="patientId" [isEdit]="isEdit"
+                                            [patientMasterVisitId]="patientMasterVisitId">
                                         </app-hei-hivtesting>
 
                                         <div>
@@ -95,16 +100,8 @@
                                         </ng-template>
                                         <app-tb-assessment (notify)="onTbAssessment($event)" [tbAssessmentOptions]="tbAssessmentOptions"
                                             [defaultParameters]="defaultParameters"></app-tb-assessment>
-                                    </mat-step>
 
-                                    <mat-step [completed]="false" [stepControl]="infantFeedingFormGroup">
-                                        <ng-template matStepLabel>
-                                            <span matTooltip="Infant Feeding">Infant Feeding</span>
-                                        </ng-template>
 
-                                        <app-infant-feeding (notify)="onInfantFeedingNotify($event)"
-                                            [infantFeedingOptions]="infantFeedingOptions">
-                                        </app-infant-feeding>
                                         <div>
                                             <button mat-raised-button color="primary" matStepperPrevious type="button">Previous</button>
                                             &nbsp;&nbsp;
@@ -112,37 +109,32 @@
                                         </div>
                                     </mat-step>
 
-                                    <!--  <mat-step [completed]="false" [stepControl]="">
+                                    <mat-step [completed]="false" [stepControl]="infantFeedingFormGroup">
                                         <ng-template matStepLabel>
-                                            <span matTooltip="Infant Feeding">Infant Feeding</span>
+                                            <span matTooltip="Outcome,Feeding,Next appointment">Outcome </span>
                                         </ng-template>
+
+                                        <app-infant-feeding (notify)="onInfantFeedingNotify($event)"
+                                            [infantFeedingOptions]="infantFeedingOptions" [patientId]="patientId"
+                                            [isEdit]="isEdit" [patientMasterVisitId]="patientMasterVisitId">
+                                        </app-infant-feeding>
+                                        <!--<div>
+                                            <app-hei-medication></app-hei-medication>
+                                        </div>-->
 
                                         <div>
-                                            <button mat-raised-button color="primary" matStepperPrevious type="button">Previous</button>
-                                            &nbsp;&nbsp;
-                                            <button mat-raised-button color="accent" (click)="onCompleteEncounter()"
-                                                type="button">
-                                                Complete Encounter
-                                            </button>
+                                            <app-next-appointment (notify)="onNextAppointmentNotify($event)"></app-next-appointment>
                                         </div>
-                                    </mat-step> -->
-
-                                    <mat-step [completed]="false" [stepControl]="nextAppointmentFormGroup">
-                                        <ng-template matStepLabel>
-                                            <span matTooltip="Next Appointment">Next Appointment</span>
-                                        </ng-template>
                                         <app-hei-outcome (notify)="onHeiOutcomeNotify($event)" [heiOutcomeOptions]="heiOutcomeOptions">
                                         </app-hei-outcome>
-                                        <app-next-appointment (notify)="onNextAppointmentNotify($event)"></app-next-appointment>
                                         <div>
                                             <button mat-raised-button color="primary" matStepperPrevious type="button">Previous</button>
                                             &nbsp;&nbsp;
-                                            <button mat-raised-button color="accent" type="button" (click)="onCompleteEncounter()">
+                                            <button mat-raised-button color="accent" type="submit" (click)="onCompleteEncounter()">
                                                 Complete Encounter
                                             </button>
                                         </div>
                                     </mat-step>
-
                                 </mat-horizontal-stepper>
                             </div>
                         </div>
