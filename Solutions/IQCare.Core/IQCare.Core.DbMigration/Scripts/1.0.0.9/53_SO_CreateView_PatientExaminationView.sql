@@ -1,4 +1,6 @@
-
+IF OBJECT_ID('dbo.PhysicalExaminationView', 'V') IS NOT NULL
+    DROP VIEW [dbo].[PhysicalExaminationView]
+GO
 CREATE VIEW [dbo].[PhysicalExaminationView]
 AS
 SELECT       
