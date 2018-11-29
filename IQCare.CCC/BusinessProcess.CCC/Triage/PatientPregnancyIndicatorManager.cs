@@ -76,9 +76,18 @@ namespace BusinessProcess.CCC.Triage
         {
             using (UnitOfWork unitOfWork = new UnitOfWork(new GreencardContext()))
             {
+                int PregnancyStatusId;
                 var pgPregnancyIndicator = unitOfWork.PatientPregnanacyIndicatorRepository.FindBy(x => x.PatientId == patientId & !x.DeleteFlag).OrderByDescending(x => x.PatientMasterVisitId).FirstOrDefault();
                 unitOfWork.Dispose();
-                return pgPregnancyIndicator.PregnancyStatusId;
+                if (pgPregnancyIndicator != null)
+                {
+                    PregnancyStatusId = pgPregnancyIndicator.PregnancyStatusId;
+                }
+                else
+                {
+                    PregnancyStatusId = 0;
+                }
+                return PregnancyStatusId;
             }
         }
 

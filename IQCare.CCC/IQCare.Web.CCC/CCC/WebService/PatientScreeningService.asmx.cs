@@ -205,13 +205,17 @@ namespace IQCare.Web.CCC.WebService
             pmv = pmvManager.GetPatientMasterVisitBasedonVisitDate(PatientId, visitDate);
             if (pmv!=null)
             {
-                MasterVisitId = pmv[0].Id;
+                if (pmv.Count > 0)
+                {
+                    MasterVisitId = pmv[0].Id;
+                }
             }
+
             
             if(MasterVisitId > 0)
             {
                 
-                Result = patientEncounter.savePatientEncounter(PatientId, MasterVisitId, EncounterType, ServiceAreaId, Convert.ToInt32(Session["AppUserId"]));
+                Result = patientEncounter.SavePatientPreviousEncounter(PatientId, MasterVisitId, EncounterType, ServiceAreaId, Convert.ToInt32(Session["AppUserId"]),visitDate);
                 if (Result > 1)
                 {
                     ResultOutcome.Result = MasterVisitId;
@@ -233,7 +237,7 @@ namespace IQCare.Web.CCC.WebService
                 
                 int  PatientMasterVisitId= pmvManager.AddPatientMasterVisit(pm);
 
-                 int res = patientEncounter.savePatientEncounter(PatientId, PatientMasterVisitId, EncounterType, ServiceAreaId, Convert.ToInt32(Session["AppUserId"]));
+                 int res = patientEncounter.SavePatientPreviousEncounter(PatientId, PatientMasterVisitId, EncounterType, ServiceAreaId, Convert.ToInt32(Session["AppUserId"]), visitDate);
                 if (res > 0 )
                 {
                     Result = PatientMasterVisitId;

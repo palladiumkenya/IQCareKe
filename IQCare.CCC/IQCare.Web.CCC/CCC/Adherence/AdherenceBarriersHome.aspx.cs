@@ -36,7 +36,7 @@ namespace IQCare.Web.CCC.UC.Adherence
             var patientDetails = patientLookupManager.GetPatientDetailSummary(PatientId);
             Session["DateOfEnrollment"] = patientDetails.EnrollmentDate;
             serviceAreaId = Convert.ToInt32(LookupLogic.GetLookupItemId("MoH 257 GREENCARD"));
-            PmVisitId = Convert.ToInt32(Session["ExistingRecordPatientMasterVisitID"].ToString() == "0" ? Session["PatientMasterVisitID"].ToString() : Session["ExistingRecordPatientMasterVisitID"].ToString());
+            
             userId = Convert.ToInt32(Session["AppUserId"]);
 
 
@@ -46,7 +46,7 @@ namespace IQCare.Web.CCC.UC.Adherence
                 Session["ExistingRecordPatientMasterVisitID"] = Request.QueryString["visitId"].ToString();
                 PatientEncounterExists = Convert.ToInt32(Request.QueryString["visitId"].ToString());
             }
-
+            PmVisitId = Convert.ToInt32(Session["ExistingRecordPatientMasterVisitID"].ToString() == "0" ? Session["PatientMasterVisitID"].ToString() : Session["ExistingRecordPatientMasterVisitID"].ToString());
         }
     }
 }

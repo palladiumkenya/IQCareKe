@@ -209,7 +209,7 @@
     function addDepressionScreeningEncounter (visitDate ) {
         var patientId = <%=PatientId%>;
      var dateOfVisit = $("#PersonVisitDate").val();
-        var ServiceAreaId = <%=serviceAreaId%>;
+        var ServiceAreaId =203;
         var EncounterType = "DepressionScreening";
         var userId = <%=userId%>;
         var patientMasterVisitId = <%=PatientMasterVisitId%>;

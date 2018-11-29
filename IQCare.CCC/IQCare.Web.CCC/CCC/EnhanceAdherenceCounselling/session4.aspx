@@ -295,7 +295,7 @@
     function checkExistingS4Appointment() {
         var patientId = "<%=PatientId%>";
         var appointmentDate = $("#<%=appointmentDateTb.ClientID%>").val();
-        var serviceArea = <%=serviceAreaId%>;
+        var serviceArea = 203;
         var reason = <%=reasonId%>;
         var differentiatedCare = <%=differentiatedCareId%>
             jQuery.support.cors = true;
@@ -322,7 +322,7 @@
         });
     }
     function updateS4Appointment() {
-        var serviceArea = <%=serviceAreaId%>;
+        var serviceArea = 203;
         var reason = <%=reasonId%>;
         var description = "Session 4 Adherence Counselling";
         var status = <%=followupStatusId%>;
@@ -348,7 +348,7 @@
         });
     }
     function addPatientS4Appointment() {
-        var serviceArea = <%=serviceAreaId%>;
+        var serviceArea = 203;
         var reason = <%=reasonId%>;
         var description = "Session 4 Adherence Counselling";
         var status = <%=followupStatusId%>;

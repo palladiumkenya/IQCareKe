@@ -1742,26 +1742,60 @@ namespace IQCare.Web.CCC.WebService
                 if (IsPatientArtDistributionDone == 1)
                 {
                     PatientArtDistribution patientArtDistribution = artDistribution.GetPatientArtDistributionByPatientIdAndVisitId(patientId, patientMasterVisitId);
-                    patientArtDistribution.ArtRefillModel = artRefillModel;
-                    patientArtDistribution.Cough = cough;
-                    patientArtDistribution.Diarrhea = diarrhea;
-                    patientArtDistribution.FamilyPlanning = familyPlanning;
-                    patientArtDistribution.FamilyPlanningMethod = fpmethod;
-                    patientArtDistribution.Fatigue = fatigue;
-                    patientArtDistribution.Fever = fever;
-                    patientArtDistribution.MissedArvDoses = missedArvDoses;
-                    patientArtDistribution.GenitalSore = genitalSore;
-                    patientArtDistribution.MissedArvDosesCount = missedDosesCount;
-                    patientArtDistribution.Nausea = nausea;
-                    patientArtDistribution.NewMedication = newMedication;
-                    patientArtDistribution.NewMedicationText = newMedicineText;
-                    patientArtDistribution.OtherSymptom = otherSymptom;
-                    patientArtDistribution.PregnancyStatus = pregnancyStatus;
-                    patientArtDistribution.Rash = rash;
-                    patientArtDistribution.ReferedToClinic = referredToClinic;
-                    patientArtDistribution.ReferedToClinicDate = appointmentDate;
 
-                    Result = artDistribution.UpdatePatientArtDistribution(patientArtDistribution);
+                    if (patientArtDistribution != null)
+                    {
+                        patientArtDistribution.ArtRefillModel = artRefillModel;
+                        patientArtDistribution.Cough = cough;
+                        patientArtDistribution.Diarrhea = diarrhea;
+                        patientArtDistribution.FamilyPlanning = familyPlanning;
+                        patientArtDistribution.FamilyPlanningMethod = fpmethod;
+                        patientArtDistribution.Fatigue = fatigue;
+                        patientArtDistribution.Fever = fever;
+                        patientArtDistribution.MissedArvDoses = missedArvDoses;
+                        patientArtDistribution.GenitalSore = genitalSore;
+                        patientArtDistribution.MissedArvDosesCount = missedDosesCount;
+                        patientArtDistribution.Nausea = nausea;
+                        patientArtDistribution.NewMedication = newMedication;
+                        patientArtDistribution.NewMedicationText = newMedicineText;
+                        patientArtDistribution.OtherSymptom = otherSymptom;
+                        patientArtDistribution.PregnancyStatus = pregnancyStatus;
+                        patientArtDistribution.Rash = rash;
+                        patientArtDistribution.ReferedToClinic = referredToClinic;
+                        patientArtDistribution.ReferedToClinicDate = appointmentDate;
+
+                        Result = artDistribution.UpdatePatientArtDistribution(patientArtDistribution);
+                    }
+
+                    else
+                    {
+
+                        var patientArvDist = new PatientArtDistribution()
+                        {
+                            PatientId = patientId,
+                            PatientMasterVisitId = patientMasterVisitId,
+                            ArtRefillModel = artRefillModel,
+                            Cough = cough,
+                            Diarrhea = diarrhea,
+                            FamilyPlanning = familyPlanning,
+                            FamilyPlanningMethod = fpmethod,
+                            Fatigue = fatigue,
+                            Fever = fever,
+                            MissedArvDoses = missedArvDoses,
+                            GenitalSore = genitalSore,
+                            MissedArvDosesCount = missedDosesCount,
+                            Nausea = nausea,
+                            NewMedication = newMedication,
+                            NewMedicationText = newMedicineText,
+                            OtherSymptom = otherSymptom,
+                            PregnancyStatus = pregnancyStatus,
+                            Rash = rash,
+                            ReferedToClinic = referredToClinic,
+                            ReferedToClinicDate = appointmentDate,
+                        };
+
+                        Result = artDistribution.AddPatientArtDistribution(patientArvDist);
+                    }
                 }
                 else
                 {
@@ -1804,6 +1838,30 @@ namespace IQCare.Web.CCC.WebService
             }
             return Msg;
         }
+
+        [WebMethod(EnableSession = true)]
+        public string GetArtDistributionForVisitDate(int pmvisitid)
+        {
+            AutoMapper.Mapper.Initialize(cfg =>
+            {
+                cfg.CreateMap<PatientArtDistribution, ArtDistributionDeTails>();
+            });
+
+            int patientId = Convert.ToInt32(HttpContext.Current.Session["PatientPK"]);
+            int patientMasterVisitId = pmvisitid;
+
+            PatientArtDistributionManager artDistributionManager = new PatientArtDistributionManager();
+
+            PatientArtDistribution artDistribution = artDistributionManager.GetPatientArtDistributionByPatientIdAndVisitId(patientId, patientMasterVisitId);
+            var results = Mapper.Map<ArtDistributionDeTails>(artDistribution);
+            if (results != null)
+            {
+                results.DateReferedToClinic = String.Format("{0:dd-MMM-yyyy}", results.ReferedToClinicDate);
+
+            }
+            return new JavaScriptSerializer().Serialize(results);
+        }
+
 
         [WebMethod(EnableSession = true)]
         public string GetArtDistributionForVisit()
