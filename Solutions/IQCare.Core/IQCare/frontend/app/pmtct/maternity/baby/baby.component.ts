@@ -25,15 +25,16 @@ export class BabyComponent implements OnInit {
     public genderOptions: any[] = [];
     deliveryOutcomeOptions: any[] = [];
     yesnoOptions: any[] = [];
+    birthOutcomes: any[] = [];
 
     @Input('PatientId') PatientId: number;
     @Input('isEdit') isEdit: boolean;
     @Input('PatientMasterVisitId') PatientMasterVisitId: number;
-    showEdit : boolean = false;
+    showEdit: boolean = false;
 
     constructor(private formBuilder: FormBuilder,
                 private notificationService: NotificationService,
-                private snotifyService: SnotifyService,private maternityService: MaternityService) {
+                private snotifyService: SnotifyService, private maternityService: MaternityService) {
     }
 
     ngOnInit() {
@@ -56,22 +57,26 @@ export class BabyComponent implements OnInit {
         const {
             gender,
             deliveryOutcomes,
+            birthOutcomes,
             yesNos
         } = this.babySectionOptions[0];
         this.genderOptions = gender;
         this.deliveryOutcomeOptions = deliveryOutcomes;
         this.yesnoOptions = yesNos;
+        this.birthOutcomes = birthOutcomes;
 
         this.notify.emit(this.babyFormGroup);
         this.notifyData.emit(this.babyData);
-        if(this.isEdit)
-        this.getDeliveredBabyInfo(this.PatientMasterVisitId)
+        if (this.isEdit) {
+        this.getDeliveredBabyInfo(this.PatientMasterVisitId);
+        }
     }
 
     public AddBaby() {
 
-        if (this.babyFormGroup.invalid) 
+        if (this.babyFormGroup.invalid) { 
               return;
+        }
 
             this.babyData.push({
                 sex: this.babyFormGroup.get('babySex').value.itemId,
@@ -112,7 +117,7 @@ export class BabyComponent implements OnInit {
 
     public onRowClicked(row) {
         console.log('row clicked:', row);
-        if(this.isEdit){
+        if (this.isEdit) {
            this.setBabyFormValues(row);
         }
         this.showEdit = true;
@@ -123,22 +128,23 @@ export class BabyComponent implements OnInit {
         // this.dataSource = new MatTableDataSource(this.babyDataTable);
     }
 
-    public getDeliveredBabyInfo(masterVisitId : number): void {
+    public getDeliveredBabyInfo(masterVisitId: number): void {
         this.maternityService.GetDeliveredBabyInfo(masterVisitId)
             .subscribe(
                 bInfo => {
-                    if(bInfo == null)
+                    if (bInfo == null) {
                        return;
+                    }
                  bInfo.forEach(info => {
                     this.babyDataTable.push({
                         sex: info.sex,
-                        birthWeight:info.birthWeight,
+                        birthWeight: info.birthWeight,
                         outcome: info.deliveryOutcome,
                         apgarScore: info.apgarScores,
-                        resuscitate: info.resuscitationDone ? "Yes":"No",
-                        deformity:  info.birthDeformity ? "Yes":"No",
-                        teo:  info.teoGiven ? "Yes": "No",
-                        breastFeeding:info.breastFedWithinHour ? "Yes": "No",
+                        resuscitate: info.resuscitationDone ? 'Yes' : 'No',
+                        deformity:  info.birthDeformity ? 'Yes' : 'No',
+                        teo:  info.teoGiven ? 'Yes' : 'No',
+                        breastFeeding: info.breastFedWithinHour ? 'Yes' : 'No',
                         comment: info.comment,
                         notificationNumber: info.birthNotificationNumber,
                         id: info.id
@@ -155,35 +161,39 @@ export class BabyComponent implements OnInit {
                 });
     }
 
-    public setBabyFormValues(babyInfo : any) : void{
+    public setBabyFormValues(babyInfo: any): void {
                     this.babyFormGroup.controls['babySex'].setValue(this.getLookUpItemId(this.genderOptions, babyInfo.sex));
                     this.babyFormGroup.controls['birthWeight'].setValue(babyInfo.birthWeight);
-                    this.babyFormGroup.controls['outcome'].setValue(this.getLookUpItemId(this.deliveryOutcomeOptions,babyInfo.outcome));
+                    this.babyFormGroup.controls['outcome'].setValue(this.getLookUpItemId(this.deliveryOutcomeOptions, babyInfo.outcome));
                     this.babyFormGroup.controls['resuscitationDone']
-                    .setValue(babyInfo.resuscitate? this.getLookUpItemId(this.yesnoOptions,"Yes"): this.getLookUpItemId(this.yesnoOptions,"No"));
-                    this.babyFormGroup.controls['deformity'].setValue(babyInfo.deformity ? this.getLookUpItemId(this.yesnoOptions,"Yes"): this.getLookUpItemId(this.yesnoOptions,"No"));
-                    this.babyFormGroup.controls['teoGiven'].setValue(babyInfo.teo ? this.getLookUpItemId(this.yesnoOptions,"Yes"): this.getLookUpItemId(this.yesnoOptions,"No"));
-                    this.babyFormGroup.controls['breastFed'].setValue(babyInfo.breastFeeding ? this.getLookUpItemId(this.yesnoOptions,"Yes"): this.getLookUpItemId(this.yesnoOptions,"No"));
+                    .setValue(babyInfo.resuscitate ? this.getLookUpItemId(this.yesnoOptions, 'Yes') :
+                        this.getLookUpItemId(this.yesnoOptions, 'No'));
+                    this.babyFormGroup.controls['deformity'].setValue(babyInfo.deformity ? this.getLookUpItemId(this.yesnoOptions, 'Yes') :
+                        this.getLookUpItemId(this.yesnoOptions, 'No'));
+                    this.babyFormGroup.controls['teoGiven'].setValue(babyInfo.teo ? this.getLookUpItemId(this.yesnoOptions, 'Yes') :
+                        this.getLookUpItemId(this.yesnoOptions, 'No'));
+                    this.babyFormGroup.controls['breastFed'].setValue(babyInfo.breastFeeding ?
+                        this.getLookUpItemId(this.yesnoOptions, 'Yes') : this.getLookUpItemId(this.yesnoOptions, 'No'));
                     this.babyFormGroup.controls['comment'].setValue(babyInfo.comment);
-                    this.babyFormGroup.controls['agparScore1min'].setValue(this.getApgarScoreValue(babyInfo.apgarScore,"1min"));
-                    this.babyFormGroup.controls['agparScore5min'].setValue(this.getApgarScoreValue(babyInfo.apgarScore,"5min"));
-                    this.babyFormGroup.controls['agparScore10min'].setValue(this.getApgarScoreValue(babyInfo.apgarScore,"10min"));
+                    this.babyFormGroup.controls['agparScore1min'].setValue(this.getApgarScoreValue(babyInfo.apgarScore, '1min'));
+                    this.babyFormGroup.controls['agparScore5min'].setValue(this.getApgarScoreValue(babyInfo.apgarScore, '5min'));
+                    this.babyFormGroup.controls['agparScore10min'].setValue(this.getApgarScoreValue(babyInfo.apgarScore, '10min'));
                     this.babyFormGroup.controls['notificationNumber'].setValue(babyInfo.notificationNumber);
     }
 
    
-    public getApgarScoreValue(apgarScore :string, scoreType: string) : any {
-        var scoreArr = apgarScore.split(",");
-        var score = "0";
+    public getApgarScoreValue(apgarScore: string, scoreType: string): any {
+        const scoreArr = apgarScore.split(',');
+        let score = '0';
         switch (scoreType) {
-            case "1min":       
-               score = scoreArr[0].split("in")[0]       
+            case '1min':       
+               score = scoreArr[0].split('in')[0];       
                 break;
-            case "5min":    
-            score = scoreArr[1].split("in")[0]             
+            case '5min':    
+            score = scoreArr[1].split('in')[0];             
                 break;
-            case "10min":    
-            score = scoreArr[2].split("in")[0]                        
+            case '10min':    
+            score = scoreArr[2].split('in')[0];                        
                 break;
             default:
                 break;
@@ -192,10 +202,11 @@ export class BabyComponent implements OnInit {
     }
 
   
-    public getLookUpItemId(lookUpOptions : any [], lookupName : string): any {
+    public getLookUpItemId(lookUpOptions: any [], lookupName: string): any {
         for (let index = 0; index < lookUpOptions.length; index++) {
-            if(lookUpOptions[index].itemName == lookupName)
-              return lookUpOptions[index];  
+            if (lookUpOptions[index].itemName == lookupName) {
+              return lookUpOptions[index];
+            }  
         }
         return null;
     }
