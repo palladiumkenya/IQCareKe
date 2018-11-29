@@ -60,5 +60,47 @@ namespace IQCare.Common.Services
                 throw e;
             }
         }
+
+        public async Task<PersonOccupation> Update(int personId, string occupation, int userid)
+        {
+            try
+            {
+                List<PersonOccupation> personOccupations = await this.GetCurrentOccupation(personId);
+                PersonOccupation personOccupation = new PersonOccupation();
+                if (personOccupations.Count > 0)
+                {
+
+                    personOccupations[0].Occupation = Convert.ToInt32(occupation);
+                    personOccupation = await this.Update(personOccupations[0]);
+                }
+
+                else
+                {
+                    PersonOccupation pc = new PersonOccupation()
+                    {
+                        PersonId = personId,
+                        Occupation = Convert.ToInt32(occupation),
+                        CreateDate = DateTime.Now,
+                        CreatedBy = userid,
+                        Active = false,
+                        DeleteFlag = false
+                    };
+                    personOccupation = await this.Add(pc);
+                }
+
+
+
+
+                return personOccupation;
+            }
+            catch (Exception e)
+            {
+                Log.Error(e.Message + " " + e.InnerException);
+                throw e;
+            }
+
+
+
+        }
     }
 }

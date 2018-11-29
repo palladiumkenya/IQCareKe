@@ -3,6 +3,7 @@ export class Person {
     firstName: string;
     middleName: string;
     lastName: string;
+    nickName: string;
     sex: number;
     registrationDate: Date;
     dateOfBirth: Date;
