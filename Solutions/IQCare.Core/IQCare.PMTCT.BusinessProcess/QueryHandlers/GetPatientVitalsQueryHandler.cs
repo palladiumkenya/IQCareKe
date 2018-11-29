@@ -29,7 +29,7 @@ namespace IQCare.PMTCT.BusinessProcess.QueryHandlers
             try
             {
                 var patientVitals = _pmtctUnitOfWork.Repository<PatientVital>()
-                        .Get(x => x.PatientMasterVisitId == request.MasterVisitId).OrderByDescending(x=>x.DateCreated).AsEnumerable();
+                        .Get(x => x.PatientId == request.PatientId).OrderByDescending(x=>x.DateCreated).AsEnumerable();
 
                 var vitalsModel = _mapper.Map<List<PatientVitalViewModel>>(patientVitals);
 
@@ -38,7 +38,7 @@ namespace IQCare.PMTCT.BusinessProcess.QueryHandlers
             catch (Exception ex)
             {
                 string message =
-                    $"An error occured while getting patient vitals for master visit Id {request.MasterVisitId}";
+                    $"An error occured while getting patient vitals for master visit Id {request.PatientId}";
                 Log.Error(ex, message);
 
                 return Task.FromResult(Result<List<PatientVitalViewModel>>.Invalid(message));

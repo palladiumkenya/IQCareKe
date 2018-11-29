@@ -22,6 +22,8 @@ import { PersoncontactsComponent } from '../personcontacts/personcontacts.compon
 import { RecordsService } from '../../_services/records.service';
 import { SearchService } from '../../_services/search.service';
 import { Search } from '../../_models/search';
+import { Store } from '@ngrx/store';
+import * as AppState from '../../../shared/reducers/app.states';
 
 @Component({
     selector: 'app-register',
@@ -75,9 +77,11 @@ export class RegisterComponent implements OnInit {
         private recordsService: RecordsService,
         public zone: NgZone,
         private router: Router,
-        private searchService: SearchService) {
+        private searchService: SearchService,
+        private store: Store<AppState>) {
         this.maxDate = new Date();
         this.clientSearch = new Search();
+        this.store.dispatch(new AppState.ClearState());
     }
 
     ngOnInit() {

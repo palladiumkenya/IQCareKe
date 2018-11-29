@@ -5,6 +5,7 @@ import { MatTableDataSource, MatDialogConfig, MatDialog } from '@angular/materia
 import { SnotifyService } from 'ng-snotify';
 import { NotificationService } from '../../../shared/_services/notification.service';
 import { HivtestingmodalComponent } from './hivtestingmodal/hivtestingmodal.component';
+import * as moment from 'moment';
 
 @Component({
     selector: 'app-hei-hivtesting',
@@ -75,9 +76,9 @@ export class HeiHivtestingComponent implements OnInit {
 
                 this.hiv_testing_table_data.push({
                     testtype: data.testtype,
-                    dateofsamplecollection: data.dateofsamplecollection,
+                    dateofsamplecollection: moment(data.dateofsamplecollection).toDate(),
                     result: data.result,
-                    dateresultscollected: data.dateresultscollected,
+                    dateresultscollected: moment(data.dateresultscollected).toDate(),
                     comments: data.comments,
                     resultText: data.resultText
                 });

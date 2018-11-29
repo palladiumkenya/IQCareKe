@@ -11,7 +11,8 @@ export enum ClientActionTypes {
     PNS_SCREENED = '[ClientState] isPnsScreened',
     PNS_TRACING = '[ClientState] isPnsTracingDone',
     CLEAR_STATE = '[ClientState] clearState',
-    SERVICE = '[ClientState] service'
+    SERVICE = '[ClientState] service',
+    PERSONID = '[ClientState] PersonId'
 }
 
 export class SelectedService implements Action {
@@ -42,6 +43,13 @@ export class IsPositive implements Action {
     readonly type = ClientActionTypes.IS_POSITIVE;
 
     constructor(public payload: boolean) { }
+}
+
+export class PersonId implements Action {
+    readonly type = ClientActionTypes.PERSONID;
+
+    constructor(public payload: number) {
+    }
 }
 
 export class IsReferred implements Action {
@@ -89,4 +97,5 @@ export type ClientActions
     | IsPnsScreened
     | IsPnsTracingDone
     | ClearState
-    | SelectedService;
+    | SelectedService
+    | PersonId;

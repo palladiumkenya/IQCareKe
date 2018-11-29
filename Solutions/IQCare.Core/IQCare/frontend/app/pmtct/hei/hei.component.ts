@@ -18,6 +18,7 @@ import { SnotifyService } from 'ng-snotify';
 import { NotificationService } from '../../shared/_services/notification.service';
 import { CompleteLabOrderCommand } from '../_models/hei/CompleteLabOrderCommand';
 import { PatientFeedingCommand } from '../_models/hei/PatientFeedingCommand';
+import * as moment from 'moment';
 
 @Component({
     selector: 'app-hei',
@@ -331,7 +332,7 @@ export class HeiComponent implements OnInit {
                     DeleteFlag: 0,
                     CreatedBy: this.userId,
                     CreateDate: new Date(),
-                    VaccineDate: new Date(this.immunization_table_data[i][j]['dateImmunized']),
+                    VaccineDate: moment(this.immunization_table_data[i][j]['dateImmunized']).toDate(),
                     Active: 0,
                     AppointmentId: 0
                     //  NextSchedule: new Date(this.immunization_table_data[i][j]['nextScheduled'])
@@ -356,7 +357,7 @@ export class HeiComponent implements OnInit {
                     CreateDate: new Date(),
                     CreatedBy: this.userId,
                     DeleteFlag: 0,
-                    DateAssessed: this.milestone_table_data[i][j].dateAssessed
+                    DateAssessed: moment(this.milestone_table_data[i][j].dateAssessed).toDate()
                 });
             }
 
@@ -485,7 +486,7 @@ export class HeiComponent implements OnInit {
             PatientId: this.patientId,
             PatientMasterVisitId: this.patientMasterVisitId,
             ServiceAreaId: 3,
-            VisitDate: this.visitDetailsFormGroup.value[0]['visitDate'],
+            VisitDate: moment(this.visitDetailsFormGroup.value[0]['visitDate']).toDate(),
             VisitNumber: 0,
             VisitType: this.visitDetailsFormGroup.value[0]['visitType'],
             UserId: this.userId,

@@ -20,6 +20,6 @@ export interface HivStatusCommand {
     TbScreening?: number;
     ServiceAreaId: number;
     EncounterTypeId: number;
-    EncounterDate?: number;
+    EncounterDate?: Date;
     EncounterType: number;
 }

@@ -13,6 +13,7 @@ export class SidebarComponent implements OnInit {
     isReferred: boolean;
     hasConsentedPartnerListing: boolean;
     isEnrolled: boolean;
+    personId: number;
 
     constructor(private store: Store<AppState>) {
         store.pipe(select('app')).subscribe(res => {
@@ -60,6 +61,14 @@ export class SidebarComponent implements OnInit {
                 this.isEnrolled = res['isEnrolled'];
             } else {
                 this.isEnrolled = false;
+            }
+        });
+
+        store.pipe(select('app')).subscribe(res => {
+            if (res['PersonId']) {
+                this.personId = res['PersonId'];
+            } else {
+                this.personId = 0;
             }
         });
     }
