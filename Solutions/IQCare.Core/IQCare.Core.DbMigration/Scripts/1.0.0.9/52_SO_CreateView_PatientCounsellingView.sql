@@ -1,3 +1,6 @@
+IF OBJECT_ID('dbo.PatientCounsellingView', 'V') IS NOT NULL
+    DROP VIEW [dbo].[PatientCounsellingView]
+GO
 CREATE VIEW [dbo].[PatientCounsellingView]
 AS
 SELECT
