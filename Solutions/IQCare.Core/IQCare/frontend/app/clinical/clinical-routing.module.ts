@@ -4,13 +4,13 @@ import { TriageComponent } from './triage/triage.component';
 
 const routes: Routes = [
     {
-        path:'triage',
-        component:TriageComponent
+        path: 'triage/:patientId',
+        component: TriageComponent
     }
 ];
 
 @NgModule({
-  imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+    imports: [RouterModule.forChild(routes)],
+    exports: [RouterModule]
 })
 export class ClinicalRoutingModule { }

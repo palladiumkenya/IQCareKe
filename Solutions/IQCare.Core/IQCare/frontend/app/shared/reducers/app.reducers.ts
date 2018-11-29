@@ -11,6 +11,8 @@ export function consentReducer(state: {} = {}, action: ClientActions) {
             return { ...state, tested: action.payload };
         case ClientActionTypes.IS_POSITIVE:
             return { ...state, isPositive: action.payload };
+        case ClientActionTypes.PERSONID:
+            return { ...state, PersonId: action.payload };
         case ClientActionTypes.CONSENT_PARTNER_LISTING:
             return { ...state, consentPartnerListing: action.payload };
         case ClientActionTypes.IS_REFERRED:
