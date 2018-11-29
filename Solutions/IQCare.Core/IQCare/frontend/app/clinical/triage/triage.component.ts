@@ -1,11 +1,12 @@
 import { Component, OnInit, Output, EventEmitter, Input, ViewChild, NgZone } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { TriageService } from '../_services/triage.service';
-import { AddPatientVitalCommand  } from "../_models/AddPatientVitalCommand";
+import { AddPatientVitalCommand  } from '../_models/AddPatientVitalCommand';
 import { MatTableDataSource, MatPaginator } from '@angular/material';
 import { SnotifyService } from 'ng-snotify';
 import { NotificationService } from '../../shared/_services/notification.service';
 import { Router, ActivatedRoute } from '@angular/router';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-triage',
@@ -15,22 +16,23 @@ import { Router, ActivatedRoute } from '@angular/router';
 export class TriageComponent implements OnInit {
   @Input('PatientId') PatientId: number = 5;
   @Input('PatientMasterVisitId') PatientMasterVisitId: number = 36;
+  public maxDate = moment().toDate();
 
- vitalsDataTable : any [] = [];
- displayedColumns = ['visitdate','height', 'weight', 'bmi', 'diastolic', 'systolic', 'temperature', 'respiratoryrate', 'heartrate',
+ vitalsDataTable: any [] = [];
+ displayedColumns = ['visitdate', 'height', 'weight', 'bmi', 'diastolic', 'systolic', 'temperature', 'respiratoryrate', 'heartrate',
         'action'];
  dataSource = new MatTableDataSource(this.vitalsDataTable);
  @ViewChild(MatPaginator) paginator: MatPaginator;
 
 
- vitalsFormGroup : FormGroup;
+ vitalsFormGroup: FormGroup;
  @Output() notify: EventEmitter<FormGroup> = new EventEmitter<FormGroup>();
 
-  constructor(private _formBuilder: FormBuilder, private triageService:TriageService,
+  constructor(private _formBuilder: FormBuilder, private triageService: TriageService,
     private snotifyService: SnotifyService,
     private notificationService: NotificationService,
     public zone: NgZone,
-    private router: Router,private route:ActivatedRoute) { }
+    private router: Router, private route: ActivatedRoute) { }
 
   ngOnInit() {
     this.vitalsFormGroup = this.BuildVitalsFormGroup();
@@ -39,23 +41,23 @@ export class TriageComponent implements OnInit {
   }
 
 
-  public BuildVitalsFormGroup() : FormGroup {
+  public BuildVitalsFormGroup(): FormGroup {
     return  this._formBuilder.group({
-      visitDate: new FormControl('',[Validators.required]),
-      height : new FormControl('', [ Validators.required,Validators.max(270)]),
-      weight : new FormControl('',[Validators.required, Validators.max(600)]),
-      bmi : new FormControl({value:0, disabled:true},[Validators.required]),
+      visitDate: new FormControl('', [Validators.required]),
+      height : new FormControl('', [ Validators.required, Validators.max(270)]),
+      weight : new FormControl('', [Validators.required, Validators.max(600)]),
+      bmi : new FormControl({value: 0, disabled: true}, [Validators.required]),
       headCircumference : new FormControl(''),
       muac : new FormControl(''),
       weightForAge : new FormControl(''),
       weightForHeight : new FormControl(''),
       bmiZ : new FormControl(''),
-      bpDiastolic : new FormControl('',[Validators.required]),
-      bpSystolic : new FormControl('',[Validators.required]),
-      temperature : new FormControl('',[Validators.required]),
+      bpDiastolic : new FormControl('', [Validators.required]),
+      bpSystolic : new FormControl('', [Validators.required]),
+      temperature : new FormControl('', [Validators.required]),
       respiratoryRate : new FormControl(''),
       heartRate : new FormControl(''),
-      spo2:new FormControl(''),
+      spo2: new FormControl(''),
       comment : new FormControl('')
     });
   }
@@ -63,36 +65,37 @@ export class TriageComponent implements OnInit {
  
 
   public SubmitPatientVitalInfo() {
-    if(this.vitalsFormGroup.invalid)
+    if (this.vitalsFormGroup.invalid) {
       return;
-   const patientVitalCommand : AddPatientVitalCommand ={
+    }
+   const patientVitalCommand: AddPatientVitalCommand = {
     PatientId: this.PatientId,
     PatientmasterVisitId: this.PatientMasterVisitId,
-    Temperature: this.vitalsFormGroup.get("temperature").value,
-    RespiratoryRate: this.vitalsFormGroup.get("respiratoryRate").value,
-    HeartRate: this.vitalsFormGroup.get("heartRate").value,
-    BpDiastolic:this.vitalsFormGroup.get("bpDiastolic").value,
-    BpSystolic:this.vitalsFormGroup.get("bpSystolic").value,
-    Height: this.vitalsFormGroup.get("height").value,
-    Weight:this.vitalsFormGroup.get("weight").value,
-    Spo2:this.vitalsFormGroup.get("spo2").value,
-    Bmi: this.vitalsFormGroup.get("bmi").value,
-    HeadCircumference: this.vitalsFormGroup.get("headCircumference").value,
-    BmiZ: this.vitalsFormGroup.get("bmiZ").value,
-    WeightForAge: this.vitalsFormGroup.get("weightForAge").value,
-    WeightForHeight: this.vitalsFormGroup.get("weightForHeight").value,
-    Comment:this.vitalsFormGroup.get("comment").value,
-    Muac : this.vitalsFormGroup.get("muac").value,
-    VisitDate : this.vitalsFormGroup.get("visitDate").value
-    }
+    Temperature: this.vitalsFormGroup.get('temperature').value,
+    RespiratoryRate: this.vitalsFormGroup.get('respiratoryRate').value,
+    HeartRate: this.vitalsFormGroup.get('heartRate').value,
+    BpDiastolic: this.vitalsFormGroup.get('bpDiastolic').value,
+    BpSystolic: this.vitalsFormGroup.get('bpSystolic').value,
+    Height: this.vitalsFormGroup.get('height').value,
+    Weight: this.vitalsFormGroup.get('weight').value,
+    Spo2: this.vitalsFormGroup.get('spo2').value,
+    Bmi: this.vitalsFormGroup.get('bmi').value,
+    HeadCircumference: this.vitalsFormGroup.get('headCircumference').value,
+    BmiZ: this.vitalsFormGroup.get('bmiZ').value,
+    WeightForAge: this.vitalsFormGroup.get('weightForAge').value,
+    WeightForHeight: this.vitalsFormGroup.get('weightForHeight').value,
+    Comment: this.vitalsFormGroup.get('comment').value,
+    Muac : this.vitalsFormGroup.get('muac').value,
+    VisitDate : this.vitalsFormGroup.get('visitDate').value
+    };
 
-    this.triageService.AddPatientVitalInfo(patientVitalCommand).subscribe(res=>{
+    this.triageService.AddPatientVitalInfo(patientVitalCommand).subscribe(res => {
       console.log(`Add Patient Vital info`);
       console.log(res);
-    },(err)=>{
+    }, (err) => {
 
     },
-    ()=>{
+    () => {
       this.snotifyService.success('Patient vitals information added sucessfully', 'Triage',
       this.notificationService.getConfig());
 
@@ -104,17 +107,18 @@ export class TriageComponent implements OnInit {
   }
  
   public calculateBmi() {
-     var bmi = this.triageService.calculateBmi(this.vitalsFormGroup.get("weight").value,
-     this.vitalsFormGroup.get("height").value);
+     let bmi = this.triageService.calculateBmi(this.vitalsFormGroup.get('weight').value,
+     this.vitalsFormGroup.get('height').value);
     
-     this.vitalsFormGroup.controls["bmi"].setValue(bmi.toFixed(2));  
+     this.vitalsFormGroup.controls['bmi'].setValue(bmi.toFixed(2));  
   }
 
  
   public getPatientVitalsInfo(masterVisitId: number) {
-    this.triageService.GetPatientVitalsInfo(masterVisitId).subscribe(res=>{
-      if(res == null)
+    this.triageService.GetPatientVitalsInfo(masterVisitId).subscribe(res => {
+      if (res == null) {
         return;
+      }
       this.vitalsDataTable = [];
 
         res.forEach(info => {
@@ -130,7 +134,7 @@ export class TriageComponent implements OnInit {
           bmiZ : info.bmiZ,
           diastolic : info.bpDiastolic,
           systolic : info.bpSystolic,
-          temperature :info.temperature,
+          temperature : info.temperature,
           respiratoryRate : info.respiratoryRate,
           heartRate : info.heartRate,
           spo2: info.spo2,
@@ -142,12 +146,12 @@ export class TriageComponent implements OnInit {
 
        });
 
-    },(err)=>{
-       console.log(err + " An error occured while getting patient vitals info")
+    }, (err) => {
+       console.log(err + ' An error occured while getting patient vitals info');
 
-    },()=>{
+    }, () => {
 
-    })};
+    }); }
 
 
   }
