@@ -5,6 +5,7 @@ CREATE TABLE [dbo].[VisitDetails](
 	[Id] [int] IDENTITY(1,1) NOT NULL,
 	[PatientId] [int] NOT NULL,
 	[PatientMasterVisitId] [int] NOT NULL,
+	[PregnancyId] [int] null,
 	[ServiceAreaId] [int] NOT NULL,
 	[VisitDate] [Datetime]NOT NULL,
 	[VisitNumber] [int] NOT NULL,
