@@ -18,6 +18,8 @@ import { SnotifyService } from 'ng-snotify';
 import { NotificationService } from '../../shared/_services/notification.service';
 import { CompleteLabOrderCommand } from '../_models/hei/CompleteLabOrderCommand';
 import { PatientFeedingCommand } from '../_models/hei/PatientFeedingCommand';
+import {VisitDetailsCommand} from '../_models/visit-details-command';
+import * as moment from 'moment';
 
 @Component({
     selector: 'app-hei',
@@ -481,7 +483,7 @@ export class HeiComponent implements OnInit {
             }
         }
 
-        const visitDetailsData = {
+       /* const visitDetailsData = {
             PatientId: this.patientId,
             PatientMasterVisitId: this.patientMasterVisitId,
             ServiceAreaId: 3,
@@ -491,7 +493,19 @@ export class HeiComponent implements OnInit {
             UserId: this.userId,
             DaysPostPartum: 0,
             AgeMenarche: 0,
-        };
+        };*/
+
+        const visitDetailsCommand = {
+            PatientId: parseInt(this.patientId.toString(), 10),
+            ServiceAreaId: parseInt(this.serviceAreaId.toString(), 10),
+            PregnancyId: 0,
+            PatientMasterVisitId: this.patientMasterVisitId,
+            VisitDate: moment(this.visitDetailsFormGroup.value[0]['visitDate']).toDate(),
+            VisitNumber: 0,
+            DaysPostPartum: 0,
+            VisitType: this.visitDetailsFormGroup.value[0]['visitType'],
+            UserId: this.userId
+        }as VisitDetailsCommand;
 
         const patientFeedingCommand: PatientFeedingCommand = {
             PatientMasterVisitId: this.patientMasterVisitId,
@@ -517,7 +531,7 @@ export class HeiComponent implements OnInit {
             OutcomeAt24MonthsId: this.infantFeedingFormGroup.value[2]['heiOutcomeOptions']
         };
 
-        const heiVisitDetails = this.heiService.saveHeiVisitDetails(visitDetailsData);
+        const heiVisitDetails = this.heiService.saveHeiVisitDetails(visitDetailsCommand);
         const heiDelivery = this.heiService.saveHieDelivery(this.patientId, this.patientMasterVisitId, this.userId,
             isMotherRegistered, this.deliveryMatFormGroup.value[0], this.deliveryMatFormGroup.value[1]);
         const heiImmunization = this.heiService.saveImmunizationHistory(vaccineCommand);
