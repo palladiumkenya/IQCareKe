@@ -341,7 +341,7 @@
 
      
      var dateOfVisit = $("#PersonVisitDate").val();
-        var ServiceAreaId = <%=serviceAreaId%>;
+        var ServiceAreaId = 203;
         var EncounterType = "Adherence-Barriers";
         var userId = <%=userId%>;
         var patientMasterVisitId = <%=PatientMasterVisitId%>;

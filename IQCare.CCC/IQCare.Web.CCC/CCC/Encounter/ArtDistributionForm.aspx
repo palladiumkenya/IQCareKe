@@ -10,6 +10,100 @@
 
     <div class="col-md-12">
         <div id="callout-labels-inline-block" class="col-md-12  bs-callout bs-callout-primary" style="padding-bottom: 1%">
+
+            <div class="col-md-12">
+                                        <div class="datepicker fuelux form-group" id="PatientVisitDate">
+                                            <div class="input-group">
+                                                <asp:TextBox runat="server" ClientIDMode="Static" CssClass="form-control input-sm" ID="PVisitDate" onblur="DateFormat(this,this.value,event,false,'3')" onkeyup="DateFormat(this,this.value,event,false,'3')"></asp:TextBox>
+                                                <div class="input-group-btn">
+                                                    <button type="button" class="btn btn-default dropdown-toggle input-sm" data-toggle="dropdown">
+                                                        <span class="glyphicon glyphicon-calendar"></span>
+                                                        <span class="sr-only">Toggle Calendar</span>
+                                                    </button>
+                                                    <div class="dropdown-menu dropdown-menu-right datepicker-calendar-wrapper" role="menu">
+                                                        <div class="datepicker-calendar">
+                                                            <div class="datepicker-calendar-header">
+                                                                <button type="button" class="prev"><span class="glyphicon glyphicon-chevron-left input-sm"></span><span class="sr-only">Previous Month</span></button>
+                                                                <button type="button" class="next"><span class="glyphicon glyphicon-chevron-right input-sm"></span><span class="sr-only">Next Month</span></button>
+                                                                <button type="button" class="title" data-month="11" data-year="2014">
+                                                                    <span class="month">
+                                                                        <span data-month="False">January</span>
+                                                                        <span data-month="True">February</span>
+                                                                        <span data-month="2">March</span>
+                                                                        <span data-month="3">April</span>
+                                                                        <span data-month="4">May</span>
+                                                                        <span data-month="5">June</span>
+                                                                        <span data-month="6">July</span>
+                                                                        <span data-month="7">August</span>
+                                                                        <span data-month="8">September</span>
+                                                                        <span data-month="9">October</span>
+                                                                        <span data-month="10">November</span>
+                                                                        <span data-month="11" class="current">December</span>
+                                                                    </span><span class="year">2017</span>
+                                                                </button>
+                                                            </div>
+                                                            <table class="datepicker-calendar-days">
+                                                                <thead>
+                                                                <tr>
+                                                                    <th>Su</th>
+                                                                    <th>Mo</th>
+                                                                    <th>Tu</th>
+                                                                    <th>We</th>
+                                                                    <th>Th</th>
+                                                                    <th>Fr</th>
+                                                                    <th>Sa</th>
+                                                                </tr>
+                                                                </thead>
+                                                                <tbody></tbody>
+                                                            </table>
+                                                            <div class="datepicker-calendar-footer">
+                                                                <button type="button" class="datepicker-today">Today</button>
+                                                            </div>
+                                                        </div>
+                                                        <div class="datepicker-wheels" aria-hidden="true">
+                                                            <div class="datepicker-wheels-month">
+                                                                <h2 class="header">Month</h2>
+                                                                <ul>
+                                                                    <li data-month="False">
+                                                                        <button type="button">Jan</button></li>
+                                                                    <li data-month="True">
+                                                                        <button type="button">Feb</button></li>
+                                                                    <li data-month="2">
+                                                                        <button type="button">Mar</button></li>
+                                                                    <li data-month="3">
+                                                                        <button type="button">Apr</button></li>
+                                                                    <li data-month="4">
+                                                                        <button type="button">May</button></li>
+                                                                    <li data-month="5">
+                                                                        <button type="button">Jun</button></li>
+                                                                    <li data-month="6">
+                                                                        <button type="button">Jul</button></li>
+                                                                    <li data-month="7">
+                                                                        <button type="button">Aug</button></li>
+                                                                    <li data-month="8">
+                                                                        <button type="button">Sep</button></li>
+                                                                    <li data-month="9">
+                                                                        <button type="button">Oct</button></li>
+                                                                    <li data-month="10">
+                                                                        <button type="button">Nov</button></li>
+                                                                    <li data-month="11">
+                                                                        <button type="button">Dec</button></li>
+                                                                </ul>
+                                                            </div>
+                                                            <div class="datepicker-wheels-year">
+                                                                <h2 class="header">Year</h2>
+                                                                <ul></ul>
+                                                            </div>
+                                                            <div class="datepicker-wheels-footer clearfix">
+                                                                <button type="button" class="btn datepicker-wheels-back"><span class="glyphicon glyphicon-arrow-left"></span><span class="sr-only">Return to Calendar</span></button>
+                                                                <button type="button" class="btn datepicker-wheels-select">Select <span class="sr-only">Month and Year</span></button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
             <div class="col-md-12" id="AppointmentForm" data-parsley-validate="true" data-show-errors="true">
                 <div class="col-md-12 form-group">
                     <div class="col-md-12">
@@ -391,6 +485,53 @@
         </div>
     </div>
     <script type="text/javascript">
+        var VisitDate = "<%=VisitDate%>";
+        
+       /// console.log(VDate);
+        var enrollmentDate = "<%=DateOfEnrollment%>";
+ 
+        $('#PatientVisitDate').datepicker({
+            allowPastDates: true,
+           // restricted: [{ from: tomorrow, to: Infinity }],
+            momentConfig: { culture: 'en', format: 'DD-MMM-YYYY' },
+              date:VisitDate,
+            allowInputToggle: true,
+            useCurrent: false
+        });
+
+       
+        
+       
+         
+       // $('#PatientVisitDate').on('dp.change', function (e) {
+         $('#PatientVisitDate').on('changed.fu.datepicker dateClicked.fu.datepicker', function (event, date) {
+
+            if (!event.oldDate || !event.date.isSame(event.oldDate, 'day')) {
+               // $(this).data('DatePicker')
+                  $('#PatientVisitDate').datepicker("hide");
+                resetFields();
+
+            }
+        
+
+            var vDate = moment($("#PVisitDate").val(), 'DD-MMM-YYYYY').toDate();
+            var validDateOfVisit = moment(vDate).isBefore(enrollmentDate);
+            var futuredate = moment(vDate).isAfter(new Date());
+           
+            if (futuredate) {
+                $("#<%=PVisitDate.ClientID%>").val('');
+                toastr.error("Future dates not allowed!");
+               
+                return false;
+            }
+            if (validDateOfVisit) {
+                toastr.error("VISIT date CANNOT be before ENROLLMENT date");
+                $("#<%=PVisitDate.ClientID%>").val('');
+                return false;
+            }
+
+        });
+
         $('#PersonAppointmentDate').datepicker({
             allowPastDates: false,
             Date: 0,
@@ -409,42 +550,119 @@
             if (IsPatientArtDistributionDone == 1) {
                 getPatientArtDistribution();
             }
-            
+
             var pregnancyStatus = $("#<%=pregnancyStatus.ClientID%>").val();
-            if (parseInt(pregnancyStatus,10) < 1) {
+            if (parseInt(pregnancyStatus, 10) < 1) {
                 getLastPregnancyIndicator();
             }
 
             getPregnancyStatus();
-          
+
+
+
             $("#btnSave").click(function () {
-                if ($('#AppointmentForm').parsley().validate()) {
+                if (Validate() == true) {
+                    var visitdate = $("#<%=PVisitDate.ClientID%>").val();
+                    //addArtDistribution()
+                    addARTTrack(visitdate);
+                }
+                else {
+                    return false;
+                }
+
+                $("#AppointmentDate").val("");
+
+                $("#btnReset").click(function () {
+                    resetFields();
+                });
+                $("#btnCancel").click(function () {
+                    window.location.href = '<%=ResolveClientUrl("~/CCC/patient/patientHome.aspx") %>';
+                });
+
+
+            });
+
+        });
+        function addARTTrack(visitDate ) {
+        var patientId = <%=PatientId%>;
+     var dateOfVisit = $("#PVisitDate").val();
+        var ServiceAreaId = <%=serviceAreaId%>;
+        var EncounterType = "ARTFastTrack";
+        var userId = <%=userId%>;
+        var patientMasterVisitId = <%=PatientMasterVisitId%>;
+            $.ajax({
+               
+                type: "POST",
+                url: "../WebService/PatientScreeningService.asmx/GetPatientMasterVisitId",
+                data: "{'PatientId': '" + patientId + "','ServiceAreaId':'"+ServiceAreaId+"','UserId':'"+userId+"','EncounterType':'"+EncounterType+"','visitDate': '" + dateOfVisit + "'}",
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+             success: function (response) {
+                
+                 var res = JSON.parse(response.d);
+                 if (res.Result > 0) {
+
+                     var result = res.Result;
+                   
+                     toastr.success(res.Msg);
+                    
+                    
+                     addArtDistribution(result);
+                   }
+
+                },
+                error: function (response) {
+                    error = 1;
+                    toastr.error("ART Fast Track Was not  Saved");
+                    window.location.href = '<%=ResolveClientUrl("~/CCC/patient/patientHome.aspx") %>';
+
+
+                }
+           });
+        }
+
+
+        function Validate() {
+            if ($('#PatientVisitDate').parsley().validate()) {
+                var visitdate = $("#PVisitDate").val();
+                if (moment('' + visitdate + '').isAfter()) {
+                    toastr.error("Visit date cannot be a future date.");
+                    return false;
+                }
+                else if (visitdate === "" || visitdate === null) {
+                    toastr.error("VisitDate is a required field");
+                    return false;
+                }
+
+                else if ($('#AppointmentForm').parsley().validate()) {
                     var futureDate = moment().add(7, 'months').format('DD-MMM-YYYY');
                     var appDate = $("#<%=AppointmentDate.ClientID%>").val();
                     if (moment('' + appDate + '').isAfter(futureDate)) {
                         toastr.error("Appointment date cannot be set to over 7 months");
                         return false;
                     }
-                    addArtDistribution();
-                } else {
-                    return false;
+                    else {
+                        return true;
+                    }
+
                 }
-            });
+                else {
+                    return true;
+                }
 
-            $("#AppointmentDate").val("");
+            }
 
-            $("#btnReset").click(function () {
-                resetFields();
-            });
-            $("#btnCancel").click(function () {
-                window.location.href = '<%=ResolveClientUrl("~/CCC/patient/patientHome.aspx") %>';
-            });
-        });
 
+          }
+                
+          
         function getPatientArtDistribution() {
+            var patientMasterVisitId = <%=PatientMasterVisitId%>;
+
             $.ajax({
                 type: "POST",
-                url: "../WebService/PatientEncounterService.asmx/GetArtDistributionForVisit",
+                url: "../WebService/PatientEncounterService.asmx/GetArtDistributionForVisitDate",
+                data: "{ 'pmvisitid': '" + patientMasterVisitId+ "' }",
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",
                 success: function (response) {
@@ -500,7 +718,19 @@
                         $("#<%=newMedicineText.ClientID%>").val(artDetails.NewMedicationText);
                         $("#<%=fpmethod.ClientID%>").val(artDetails.FamilyPlanningMethod);
                         $("#<%=pregnancyStatus.ClientID%>").val(artDetails.PregnancyStatus);
-                        $('#PersonAppointmentDate').datepicker('setDate', artDetails.DateReferedToClinic);
+                        if (artDetails.DateReferedToClinic != null) {
+                            if (artDetails.DateReferedToClinic != "") {
+                                $('#PersonAppointmentDate').datepicker('setDate', artDetails.DateReferedToClinic);
+                            }
+                            else {
+                                     $("#AppointmentDate").val("");
+                            }
+
+                        }
+                        else {
+                            $("#AppointmentDate").val("");
+                        }
+                         $('#PatientVisitDate').datepicker("setDate", new Date(VisitDate) );
                     }
                 },
                 error: function (response) {
@@ -509,7 +739,7 @@
             });
         }
 
-        function addArtDistribution() {
+        function addArtDistribution(mastervisitid) {
             var artRefillModel = $("#<%=ArtRefill.ClientID%>").val();
             var missedArvDoses = $("input[name$=missedArvDoses]:checked").val();
             var missedDosesCount = $("#<%=missedDosesCount.ClientID%>").val();
@@ -531,8 +761,10 @@
             var pregnancyStatus = $("#<%=pregnancyStatus.ClientID%>").val();
             if (pregnancyStatus === undefined) { pregnancyStatus = 0 }
             var patientId = <%=PatientId%>;
-            var patientMasterVisitId = <%=PatientMasterVisitId%>;
+          
+            var patientMasterVisitId= mastervisitid;
             var IsPatientArtDistributionDone = <%=IsPatientArtDistributionDone%>;
+           
 
             $.ajax({
                 type: "POST",
@@ -619,6 +851,7 @@
             $("#otherSymptom").val("");
             $("#ArtRefill").val("");
             $("#missedDosesCount").val("");
+            $("#AppointmentDate").val("");
         }
 
         function getPregnancyStatus() {

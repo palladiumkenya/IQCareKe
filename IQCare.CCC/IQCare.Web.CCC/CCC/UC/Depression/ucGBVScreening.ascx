@@ -167,7 +167,7 @@
       function addGBVScreeningEncounter (visitDate ) {
         var patientId = <%=PatientId%>;
      var dateOfVisit = $("#PersonVisitDate").val();
-        var ServiceAreaId = <%=serviceAreaId%>;
+        var ServiceAreaId = 203;
         var EncounterType = "GBVScreening";
         var userId = <%=userId%>;
         var patientMasterVisitId = <%=PatientMasterVisitId%>;

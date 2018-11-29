@@ -602,7 +602,7 @@
         }
     });
     function addEnhanceAdherenceEncounter() {
-        var serviceArea = <%=serviceAreaId%>;
+        var serviceArea = 203;
         var EncounterType = "EnhanceAdherence";
         var userId = <%=userId%>;
         $.ajax({
@@ -641,7 +641,7 @@
     function checkExistingAppointment() {
         var patientId = "<%=PatientId%>";
         var appointmentDate = $("#<%=appointmentDateTb.ClientID%>").val();
-        var serviceArea = <%=serviceAreaId%>;
+        var serviceArea = 203;
         var reason = <%=reasonId%>;
         var differentiatedCare = <%=differentiatedCareId%>;
         jQuery.support.cors = true;
@@ -667,7 +667,7 @@
         });
     }
     function updateAppointment() {
-        var serviceArea = <%=serviceAreaId%>;
+        var serviceArea = 203;
         var reason = <%=reasonId%>;
         var description = "Session 2 Adherence Counselling";
         var status = <%=followupStatusId%>;
@@ -693,7 +693,7 @@
         });
     }
     function addPatientAppointment() {
-        var serviceArea = <%=serviceAreaId%>;
+        var serviceArea = 203;
         var reason = <%=reasonId%>;
         var description = "Session 2 Adherence Counselling";
         var status = <%=followupStatusId%>;

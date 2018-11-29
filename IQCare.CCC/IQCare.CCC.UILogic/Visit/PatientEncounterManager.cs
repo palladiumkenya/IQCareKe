@@ -11,6 +11,18 @@ namespace IQCare.CCC.UILogic.Visit
     {
         private readonly IPatientEncounterManager _patientEncounterManager = (IPatientEncounterManager)ObjectFactory.CreateInstance("BusinessProcess.CCC.visit.BPatientEncounterManager, BusinessProcess.CCC");
 
+        public int AddPatientEncounter(PatientEncounter pmt)
+        {
+            try
+            {
+                return _patientEncounterManager.AddpatientEncounter(pmt);
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+        }
+
         public int AddpatientEncounter(int patientId,int patientMasterVisitId,int encounterTypeId,int serviceId,int userId)
         {
             try
@@ -25,7 +37,7 @@ namespace IQCare.CCC.UILogic.Visit
                     PatientMasterVisitId = patientMasterVisitId,
                     CreatedBy = userId
 
-            };
+                 };
                 return _patientEncounterManager.AddpatientEncounter(patientVisitEncounter);
             }
             catch (Exception e)
