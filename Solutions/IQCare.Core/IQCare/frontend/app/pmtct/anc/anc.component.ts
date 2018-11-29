@@ -27,6 +27,7 @@ import {HivTestsCommand} from '../_models/HivTestsCommand';
 import {HivStatusCommand} from '../_models/HivStatusCommand';
 import {BaselineAncProfileCommand} from '../_models/baseline-anc-profile-command';
 import {DrugAdministerCommand} from '../_models/drug-administer-command';
+import * as moment from 'moment';
 
 @Component({
     selector: 'app-anc',
@@ -37,7 +38,7 @@ export class AncComponent implements OnInit, OnDestroy {
 
     formType: string;
     visitType: number;
-    isLinear: boolean = false;
+    isLinear: boolean = true;
     public isEdit = false;
     patientDrug: PatientDrugAdministration[] = [];
     public preventiveService: PreventiveService[] = [];
@@ -138,8 +139,6 @@ export class AncComponent implements OnInit, OnDestroy {
                     this.visitId = this.patientMasterVisitId;
                     this.isEdit = true;
                 }
-
-
             }
         );
 
@@ -337,7 +336,7 @@ export class AncComponent implements OnInit, OnDestroy {
             PatientId: parseInt(this.patientId.toString(), 10),
             PatientMasterVisitId: this.patientMasterVisitId,
             ServiceAreaId: parseInt(this.serviceAreaId.toString(), 10),
-            VisitDate: this.visitDetailsFormGroup.value[0]['visitDate'],
+            VisitDate: moment(this.visitDetailsFormGroup.value[0]['visitDate']).toDate(),
             VisitNumber: parseInt(this.visitDetailsFormGroup.value[0]['visitNumber'], 10),
             VisitType: this.visitDetailsFormGroup.value[0]['visitType'],
             Lmp: new Date(this.visitDetailsFormGroup.value[1]['dateLMP']),
@@ -354,8 +353,8 @@ export class AncComponent implements OnInit, OnDestroy {
         const pregnancyCommand = {
             PatientId: parseInt(this.patientId.toString(), 10),
             PatientMasterVisitId: this.patientMasterVisitId,
-            Lmp: new Date(this.visitDetailsFormGroup.value[1]['dateLMP']),
-            Edd: this.visitDetailsFormGroup.value[1]['dateEDD'],
+            Lmp: moment(this.visitDetailsFormGroup.value[1]['dateLMP']).toDate(),
+            Edd: moment(this.visitDetailsFormGroup.value[1]['dateEDD']).toDate(),
             Gestation: this.visitDetailsFormGroup.value[1]['gestation'],
             Gravidae: this.visitDetailsFormGroup.value[1]['gravidae'],
             Parity: this.visitDetailsFormGroup.value[1]['parityOne'],
@@ -368,7 +367,7 @@ export class AncComponent implements OnInit, OnDestroy {
             ServiceAreaId: parseInt(this.serviceAreaId.toString(), 10),
             PregnancyId: this.pregnancyId,
             PatientMasterVisitId: this.patientMasterVisitId,
-            VisitDate: new Date(this.visitDetailsFormGroup.value[0]['visitDate']),
+            VisitDate: moment(this.visitDetailsFormGroup.value[0]['visitDate']).toDate(),
             VisitNumber: parseInt(this.visitDetailsFormGroup.value[0]['visitNumber'], 10),
             DaysPostPartum: (this.formType == 'pnc') ? this.visitDetailsFormGroup.value[1]['DaysPostPartum'] : 0,
             VisitType: this.visitDetailsFormGroup.value[0]['visitType'],
@@ -380,7 +379,7 @@ export class AncComponent implements OnInit, OnDestroy {
             this.counselling_data_form.push({
                 CounsellingTopic: this.counselling_data[i]['counsellingTopic'],
                 CounsellingTopicId: this.counselling_data[i]['counsellingTopicId'],
-                CounsellingDate: this.counselling_data[i]['counsellingDate'],
+                CounsellingDate: moment(this.counselling_data[i]['counsellingDate']).toDate(),
                 description: this.counselling_data[i]['description']
             });
             console.log(this.counselling_data[i]['counsellingTopic']);
@@ -532,7 +531,7 @@ export class AncComponent implements OnInit, OnDestroy {
                     Dose: this.chronicIllnessData[i]['dose'],
                     Duration: 0,
                     DeleteFlag: false,
-                    OnsetDate: this.chronicIllnessData[i]['onSetDate'],
+                    OnsetDate: moment(this.chronicIllnessData[i]['onSetDate']).toDate(),
                     Active: 0,
                     CreateBy: this.userId
                 });
@@ -571,13 +570,13 @@ export class AncComponent implements OnInit, OnDestroy {
                     PreventiveServiceId: this.preventiServicesData[j]['preventiveServiceId'],
                     PreventiveServiceDate: this.preventiServicesData[j]['dateGiven'],
                     Description: this.preventiServicesData[j]['comments'],
-                    NextSchedule: new Date(this.preventiServicesData[j]['nextSchedule'])
+                    NextSchedule: moment(this.preventiServicesData[j]['nextSchedule']).toDate()
                 });
         }
 
         const preventiveServiceCommand: PatientPreventiveService = {
             preventiveService: this.preventiveService,
-            InsecticideGivenDate: new Date(this.PreventiveServiceMatFormGroup.value[0]['insecticideTreatedNetGivenDate']),
+            InsecticideGivenDate: moment(this.PreventiveServiceMatFormGroup.value[0]['insecticideTreatedNetGivenDate']).toDate(),
             AntenatalExercise: this.PreventiveServiceMatFormGroup.value[0]['antenatalExercise'],
             PartnerTestingVisit: this.PreventiveServiceMatFormGroup.value[0]['PartnerTestingVisit'],
             FinalHIVResult: this.PreventiveServiceMatFormGroup.value[0]['finalHIVResult'],
@@ -605,7 +604,7 @@ export class AncComponent implements OnInit, OnDestroy {
             this.appointmentCommand = {
                 PatientId: this.patientId,
                 PatientMasterVisitId: this.patientMasterVisitId,
-                AppointmentDate: new Date(this.ReferralMatFormGroup.value[0]['nextAppointmentDate']),
+                AppointmentDate: moment(this.ReferralMatFormGroup.value[0]['nextAppointmentDate']).toDate(),
                 Description: this.ReferralMatFormGroup.value[0]['serviceRemarks'],
                 CreatedBy: this.userId,
                 ServiceAreaId: this.serviceAreaId,
@@ -617,7 +616,7 @@ export class AncComponent implements OnInit, OnDestroy {
             this.appointmentCommand = {
                 PatientId: this.patientId,
                 PatientMasterVisitId: this.patientMasterVisitId,
-                AppointmentDate: new Date(this.ReferralMatFormGroup.value[0]['nextAppointmentDate']),
+                AppointmentDate: moment(this.ReferralMatFormGroup.value[0]['nextAppointmentDate']).toDate(),
                 Description: this.ReferralMatFormGroup.value[0]['serviceRemarks'],
                 CreatedBy: this.userId,
                 ServiceAreaId: this.serviceAreaId,

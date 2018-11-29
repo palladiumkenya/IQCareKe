@@ -21,6 +21,8 @@ import { PartnerTestingCommand } from '../_models/PartnerTestingCommand';
 import { MaternityCounsellingCommand } from '../maternity/commands/maternity-counselling-command';
 import { MaternityService } from '../_services/maternity.service';
 import { PatientScreeningCommand } from '../_models/PatientScreeningCommand';
+import {VisitDetailsCommand} from '../_models/visit-details-command';
+import * as moment from 'moment';
 
 @Component({
     selector: 'app-pnc',
@@ -315,7 +317,7 @@ export class PncComponent implements OnInit {
 
         // const motherExaminationTypeId = this.motherExaminationOptions.filter(obj => obj.masterName == 'MotherExamination');
 
-        const pncVisitDetailsCommand: PncVisitDetailsCommand = {
+       /* const pncVisitDetailsCommand: PncVisitDetailsCommand = {
             PatientId: this.patientId,
             ServiceAreaId: this.serviceAreaId,
             VisitDate: this.visitDetailsFormGroup.value[0]['visitDate'],
@@ -324,7 +326,20 @@ export class PncComponent implements OnInit {
             UserId: this.userId,
             DaysPostPartum: this.visitDetailsFormGroup.value[0]['dayPostPartum'],
             PatientMasterVisitId: this.patientMasterVisitId
-        };
+        };*/
+
+        const visitDetailsCommand = {
+            PatientId: parseInt(this.patientId.toString(), 10),
+            ServiceAreaId: parseInt(this.serviceAreaId.toString(), 10),
+            PregnancyId: 0,
+            PatientMasterVisitId: this.patientMasterVisitId,
+            VisitDate: moment(this.visitDetailsFormGroup.value[0]['visitDate']).toDate(),
+            VisitNumber: parseInt(this.visitDetailsFormGroup.value[0]['visitNumber'], 10),
+            DaysPostPartum: this.visitDetailsFormGroup.value[0]['dayPostPartum'],
+            VisitType: this.visitDetailsFormGroup.value[0]['visitType'],
+            UserId: this.userId
+        }as VisitDetailsCommand;
+
 
         const hivStatusCommand: HivStatusCommand = {
             PersonId: this.personId,
@@ -555,7 +570,7 @@ export class PncComponent implements OnInit {
             VisitDate: this.visitDetailsFormGroup.value[0]['visitDate']
         };
 
-        const pncVisitDetails = this.pncService.savePncVisitDetails(pncVisitDetailsCommand);
+        const pncVisitDetails = this.pncService.savePncVisitDetails(visitDetailsCommand);
         const pncPostNatalExam = this.pncService.savePncPostNatalExam(pncPostNatalExamCommand);
         const pncBabyExam = this.pncService.savePncPostNatalExam(pncBabyExaminationCommand);
         const pncHivStatus = this.pncService.savePncHivStatus(hivStatusCommand, this.hiv_status_table_data);
