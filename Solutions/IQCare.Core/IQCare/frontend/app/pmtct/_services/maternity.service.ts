@@ -33,8 +33,9 @@ export class MaternityService {
             );
     }
 
-    public getCurrentVisitDetails(patientId: number) {
-        return this.http.get<any>(this.API_URL + '/api/VisitDetails/GetCurrentVisit/' + patientId).pipe(
+    public getCurrentVisitDetails(patientId: number, serviceAreaName: string) {
+        return this.http.get<any>(this.API_URL + '/api/AncVisitDetails/GetVisitDetailsByServiceAreaName/' + patientId + '/'
+            + serviceAreaName).pipe(
             tap(getCurrentVisitDetails => this.errorHandler.log('get current visit data')),
             catchError(this.errorHandler.handleError<any[]>('getCurrentVisitDetails'))
         );

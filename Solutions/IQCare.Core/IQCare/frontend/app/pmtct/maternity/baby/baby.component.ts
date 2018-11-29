@@ -109,10 +109,8 @@ export class BabyComponent implements OnInit {
 
             console.log(this.babyDataTable);
             this.dataSource = new MatTableDataSource(this.babyDataTable);
-            this.babyFormGroup.reset();
-            this.babyFormGroup.clearValidators();
-        
-
+          //  this.babyFormGroup.reset();
+          //  this.babyFormGroup.clearValidators();
     }
 
     public onRowClicked(row) {

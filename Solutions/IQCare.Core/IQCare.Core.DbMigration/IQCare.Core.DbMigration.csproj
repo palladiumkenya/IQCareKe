@@ -94,6 +94,7 @@
     <None Remove="Scripts\1.0.0.9\52_SO_CreateView_PatientCounsellingView.sql" />
     <None Remove="Scripts\1.0.0.9\53_SO_CreateView_PatientExaminationView.sql" />
     <None Remove="Scripts\1.0.0.9\54_SO_CreateView_pmtctPatientScreeningView.sql" />
+    <None Remove="Scripts\1.0.0.9\56_SO_CreateView_VisitDetailsView.sql" />
     <None Remove="Scripts\2.0.0\01_SO_IQCare_Version.sql" />
     <None Remove="Scripts\2.0.0\02_DO_AlterView_PatientDeliveryInfo.sql" />
   </ItemGroup>
@@ -193,6 +194,7 @@
     <EmbeddedResource Include="Scripts\1.0.0.9\52_SO_CreateView_PatientCounsellingView.sql" />
     <EmbeddedResource Include="Scripts\1.0.0.9\53_SO_CreateView_PatientExaminationView.sql" />
     <EmbeddedResource Include="Scripts\1.0.0.9\54_SO_CreateView_pmtctPatientScreeningView.sql" />
+    <EmbeddedResource Include="Scripts\1.0.0.9\56_SO_CreateView_VisitDetailsView.sql" />
     <EmbeddedResource Include="Scripts\2.0.0\01_SO_IQCare_Version.sql" />
     <EmbeddedResource Include="Scripts\2.0.0\02_DO_AlterView_PatientDeliveryInfo.sql" />
   </ItemGroup>
