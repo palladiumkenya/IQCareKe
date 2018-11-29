@@ -1,11 +1,5 @@
-USE [IQCare_PMTCT]
-GO
-
-/****** Object:  View [dbo].[PatientPreventiveServiceView]    Script Date: 11/21/2018 9:35:31 AM ******/
-SET ANSI_NULLS ON
-GO
-
-SET QUOTED_IDENTIFIER ON
+IF OBJECT_ID('dbo.PatientPreventiveServiceView', 'V') IS NOT NULL
+    DROP VIEW [dbo].[PatientPreventiveServiceView]
 GO
 
 CREATE VIEW [dbo].[PatientPreventiveServiceView]

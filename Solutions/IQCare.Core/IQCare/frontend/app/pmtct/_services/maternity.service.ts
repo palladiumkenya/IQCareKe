@@ -33,8 +33,9 @@ export class MaternityService {
             );
     }
 
-    public getCurrentVisitDetails(patientId: number) {
-        return this.http.get<any>(this.API_URL + '/api/VisitDetails/GetCurrentVisit/' + patientId).pipe(
+    public getCurrentVisitDetails(patientId: number, serviceAreaName: string) {
+        return this.http.get<any>(this.API_URL + '/api/AncVisitDetails/GetVisitDetailsByServiceAreaName/' + patientId + '/'
+            + serviceAreaName).pipe(
             tap(getCurrentVisitDetails => this.errorHandler.log('get current visit data')),
             catchError(this.errorHandler.handleError<any[]>('getCurrentVisitDetails'))
         );
@@ -55,7 +56,7 @@ export class MaternityService {
     }
 
     public saveVisitDetails(visitDetails: any): Observable<any> {
-        return this.http.post(this.API_URL + '/api/VisitDetails/AddPNCVisitDetails', JSON.stringify(visitDetails), httpOptions).pipe(
+        return this.http.post(this.API_URL + '/api/AncVisitDetails/Post', JSON.stringify(visitDetails), httpOptions).pipe(
             tap(saveVisitDetals => this.errorHandler.log(`successfully added maternity visits`)),
             catchError(this.errorHandler.handleError<any>('Error saving maternity visit'))
         );

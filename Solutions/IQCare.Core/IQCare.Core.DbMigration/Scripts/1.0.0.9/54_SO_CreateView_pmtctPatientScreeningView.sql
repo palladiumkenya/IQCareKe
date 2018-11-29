@@ -1,4 +1,6 @@
-
+IF OBJECT_ID('dbo.pmtctPatientScreeningView', 'V') IS NOT NULL
+    DROP VIEW [dbo].[pmtctPatientScreeningView]
+GO
 
 CREATE VIEW [dbo].[pmtctPatientScreeningView]
 AS

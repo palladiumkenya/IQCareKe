@@ -6,6 +6,7 @@ import { MatTableDataSource, MatPaginator } from '@angular/material';
 import { SnotifyService } from 'ng-snotify';
 import { NotificationService } from '../../shared/_services/notification.service';
 import { Router, ActivatedRoute } from '@angular/router';
+import * as moment from 'moment';
 import { EncounterService } from '../../shared/_services/encounter.service';
 import { LookupItemService } from '../../shared/_services/lookup-item.service';
 import { PatientMasterVisitEncounter } from '../../pmtct/_models/PatientMasterVisitEncounter';
@@ -18,9 +19,10 @@ import { PatientMasterVisitEncounter } from '../../pmtct/_models/PatientMasterVi
 export class TriageComponent implements OnInit {
     @Input('PatientId') PatientId: number;
     @Input('PatientMasterVisitId') PatientMasterVisitId: number;
+    public maxDate = moment().toDate();
 
-    vitalsDataTable: any[] = [];
-    displayedColumns = ['visitdate', 'height', 'weight', 'bmi', 'diastolic', 'systolic', 'temperature', 'respiratoryrate', 'heartrate',
+ vitalsDataTable: any [] = [];
+ displayedColumns = ['visitdate', 'height', 'weight', 'bmi', 'diastolic', 'systolic', 'temperature', 'respiratoryrate', 'heartrate',
         'action'];
     dataSource = new MatTableDataSource(this.vitalsDataTable);
     @ViewChild(MatPaginator) paginator: MatPaginator;

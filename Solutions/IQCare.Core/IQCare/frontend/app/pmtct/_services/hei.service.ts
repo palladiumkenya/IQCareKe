@@ -39,7 +39,7 @@ export class HeiService {
     }
 
     public saveHeiVisitDetails(visitDetails: any): Observable<any> {
-        return this.http.post<any>(this.API_URL + '/api/VisitDetails/AddPNCVisitDetails', JSON.stringify(visitDetails), httpOptions).pipe(
+        return this.http.post<any>(this.API_URL + '/api/AncVisitDetails/Post', JSON.stringify(visitDetails), httpOptions).pipe(
             tap(saveHeiVisitDetails => this.errorHandler.log(`successfully added hei visit details`)),
             catchError(this.errorHandler.handleError<any>('Error saving hei delivery'))
         );

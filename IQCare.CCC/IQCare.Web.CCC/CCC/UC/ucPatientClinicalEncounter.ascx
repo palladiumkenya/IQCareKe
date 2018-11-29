@@ -6874,5 +6874,40 @@
             }
 
         }
+
+
+
+
+function GetGBVScreeningStatus() {
+        var patientId ="<%=PatientId%>";
+        var visitDate = moment("<%=visitdateval%>");
+        var screeningCategoryId = "<%=GbvScreeningCategoryId%>";
+
+        if (visitDate.isValid()) {
+            visitDate = visitDate.format('YYYY-MM-DD');
+
+            $.ajax({
+                type: "POST",
+                url: "../WebService/PatientService.asmx/getPatientScreening",
+                data: "{'patientId':'" + patientId + "', 'visitDate': '" + visitDate + "', 'screeningcategoryId': '" + screeningCategoryId + "'}",
+                dataType: "json",
+                contentType: "application/json; charset=utf-8",
+
+                success: function (response) {
+                    var itemList = JSON.parse(response.d);
+
+                    $("#lblGbvAssessmentDone").text(itemList.length > 0 ? 'Yes' : 'No');
+
+                }
+            });
+        } else {
+
+            $("#lblGbvAssessmentDone").text('No');
+
+        }
+    }
+
+    GetGBVScreeningStatus();
+
 </script>
 

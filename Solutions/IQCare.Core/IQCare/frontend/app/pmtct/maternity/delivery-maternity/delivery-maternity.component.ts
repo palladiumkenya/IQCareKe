@@ -80,9 +80,9 @@ export class DeliveryMaternityComponent implements OnInit {
         this.motherStateOptions = motherStates;
         this.yesnoOptions = yesNos;
 
-        this.getCurrentVisitDetails(this.PatientId);
+        this.getCurrentVisitDetails(this.PatientId, 'ANC');
         this.getPregnancyDetails(this.PatientId);
-         if(this.isEdit){
+         if (this.isEdit) {
              this.getPatientDeliveryInfo(this.PatientMasterVisitId);
          }
         this.notify.emit(this.deliveryFormGroup);
@@ -91,12 +91,12 @@ export class DeliveryMaternityComponent implements OnInit {
     public onDeliveryDateChange() {
         this.deliveryDate = this.deliveryFormGroup.controls['deliveryDate'].value;
 
-        const gestation = this.calculateGestation(this.deliveryDate,this.dateLMP)
+        const gestation = this.calculateGestation(this.deliveryDate, this.dateLMP);
         this.deliveryFormGroup.controls['gestationAtBirth'].setValue(gestation);
         this.deliveryFormGroup.controls['gestationAtBirth'].disable({ onlySelf: true });
     }
 
-    public calculateGestation(deliveryDate: Date, dateLmp : Date): string{
+    public calculateGestation(deliveryDate: Date, dateLmp: Date): string {
         const now = moment(deliveryDate);
         const gestation = moment.duration(now.diff(dateLmp)).asWeeks().toFixed(1);
         return gestation;
@@ -151,14 +151,14 @@ export class DeliveryMaternityComponent implements OnInit {
                 });
     }
 
-    public getCurrentVisitDetails(patientId: number): void {
-        this.visitDetails = this._matService.getCurrentVisitDetails(patientId)
+    public getCurrentVisitDetails(patientId: number, serviceAreaName: string): void {
+        this.visitDetails = this._matService.getCurrentVisitDetails(patientId, serviceAreaName)
             .subscribe(
                 p => {
                     const visit = p;
-                    if (visit && visit.visitNumber > 1) {
-                        this.deliveryFormGroup.controls['ancVisits'].setValue(visit.visitNumber);
-                        this.deliveryFormGroup.get('ancVisits').disable({ onlySelf: true });
+                    if (visit[0].visitNumber > 0) {
+                        this.deliveryFormGroup.controls['ancVisits'].setValue(visit.length);
+                      //  this.deliveryFormGroup.get('ancVisits').disable({ onlySelf: true });
                     } else {
                         this.deliveryFormGroup.controls['ancVisits'].setValue(1);
                     }
@@ -176,10 +176,12 @@ export class DeliveryMaternityComponent implements OnInit {
         this._matService.GetPatientDeliveryInfo(masterVisitId)
             .subscribe(
                 del => {
-                    console.log(del)
-                    if(del==null)
-                      return;                        
-                    this.deliveryFormGroup.controls['gestationAtBirth'].setValue( this.calculateGestation(del.dateOfDelivery,this.dateLMP));
+                    console.log(del);
+                    if (del == null) {
+                      return;
+                    }                        
+                    this.deliveryFormGroup.controls['gestationAtBirth'].setValue( this.calculateGestation(del.dateOfDelivery,
+                        this.dateLMP));
                     this.deliveryFormGroup.controls['gestationAtBirth'].disable({ onlySelf: true });
                     this.deliveryFormGroup.controls['deliveryDate'].setValue(del.dateOfDelivery);
                     this.deliveryFormGroup.controls['deliveryTime'].setValue(del.timeOfDelivery);
@@ -203,5 +205,7 @@ export class DeliveryMaternityComponent implements OnInit {
 
                 });
     }
+
+
 
 }

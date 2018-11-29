@@ -39,8 +39,8 @@ export class PncService {
             );
     }
 
-    public savePncVisitDetails(pncVisitDetailsCommand: PncVisitDetailsCommand): Observable<any> {
-        return this.http.post(this.API_URL + '/api/VisitDetails/AddPNCVisitDetails',
+    public savePncVisitDetails(pncVisitDetailsCommand: any): Observable<any> {
+        return this.http.post(this.API_URL + '/api/AncVisitDetails/Post',
             JSON.stringify(pncVisitDetailsCommand), httpOptions).pipe(
                 tap(savePncVisitDetails => this.errorHandler.log(`successfully saved pnc visit details`)),
                 catchError(this.errorHandler.handleError<any>('Error saving pnc visit details'))
