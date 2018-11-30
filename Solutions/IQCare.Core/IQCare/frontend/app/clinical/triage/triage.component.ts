@@ -177,7 +177,6 @@ export class TriageComponent implements OnInit {
 
 
     public calculateZscore() {
-        alert("Zscore");
         const bmi = this.triageService.calculateBmi(this.vitalsFormGroup.get('weight').value,
         this.vitalsFormGroup.get('height').value);
         this.vitalsFormGroup.controls['bmi'].setValue(bmi.toFixed(2));
@@ -197,7 +196,6 @@ export class TriageComponent implements OnInit {
             }
 
         this.triageService.calculateZscore(calculateZscoreCommand).subscribe(result=>{
-            console.log(result);
         this.vitalsFormGroup.controls['weightForAge'].setValue(result.weightForAge);
         this.vitalsFormGroup.controls['weightForHeight'].setValue(result.weightForHeight);
         this.vitalsFormGroup.controls['bmiZ'].setValue(result.bmiz);            
