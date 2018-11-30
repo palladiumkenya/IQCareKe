@@ -651,7 +651,7 @@ export class AncComponent implements OnInit, OnDestroy {
                     const visitDetailsCommands = {
                         PatientId: parseInt(this.patientId.toString(), 10),
                         ServiceAreaId: parseInt(this.serviceAreaId.toString(), 10),
-                        PregnancyId: res.pregnancyId,
+                        PregnancyId: this.pregnancyId,
                         PatientMasterVisitId: this.patientMasterVisitId,
                         VisitDate: new Date(this.visitDetailsFormGroup.value[0]['visitDate']),
                         VisitNumber: parseInt(this.visitDetailsFormGroup.value[0]['visitNumber'], 10),
