@@ -11,6 +11,7 @@ import { EncounterService } from '../../shared/_services/encounter.service';
 import { LookupItemService } from '../../shared/_services/lookup-item.service';
 import { PatientMasterVisitEncounter } from '../../pmtct/_models/PatientMasterVisitEncounter';
 import { CalculateZscoreCommand } from '../_models/CalculateZscoreCommand';
+import { PersonHomeService } from '../../dashboard/services/person-home.service';
 
 @Component({
     selector: 'app-triage',
@@ -42,7 +43,8 @@ export class TriageComponent implements OnInit {
         public zone: NgZone,
         private router: Router, private route: ActivatedRoute,
         private encounterService: EncounterService,
-        private lookupItemService: LookupItemService) { }
+        private lookupItemService: LookupItemService,
+        private personService : PersonHomeService) { }
 
     ngOnInit() {
         this.route.params.subscribe(
@@ -67,7 +69,6 @@ export class TriageComponent implements OnInit {
         this.vitalsFormGroup = this.BuildVitalsFormGroup();
         this.notify.emit(this.vitalsFormGroup);
         this.getPatientVitalsInfo(this.PatientId);
-        this.calculateZscore(7);
     }
 
 
@@ -79,9 +80,9 @@ export class TriageComponent implements OnInit {
             bmi: new FormControl({ value: 0, disabled: true }, [Validators.required]),
             headCircumference: new FormControl(''),
             muac: new FormControl(''),
-            weightForAge: new FormControl(''),
-            weightForHeight: new FormControl(''),
-            bmiZ: new FormControl(''),
+            weightForAge: new FormControl({value:0,disabled:true}),
+            weightForHeight: new FormControl({value:0,disabled:true}),
+            bmiZ: new FormControl({value:0,disabled:true}),
             bpDiastolic: new FormControl('', [Validators.required]),
             bpSystolic: new FormControl('', [Validators.required]),
             temperature: new FormControl('', [Validators.required]),
@@ -175,22 +176,41 @@ export class TriageComponent implements OnInit {
     }
 
 
-    public calculateZscore(personId:number) {
-        var patientInfo = this.triageService.getPersonDetails(personId);
-        if(patientInfo == null)
-           return ;
+    public calculateZscore() {
+        alert("Zscore");
+        const bmi = this.triageService.calculateBmi(this.vitalsFormGroup.get('weight').value,
+        this.vitalsFormGroup.get('height').value);
+        this.vitalsFormGroup.controls['bmi'].setValue(bmi.toFixed(2));
 
-        if(!this.triageService.qualifiesForZscoreCalculation(patientInfo.dateOfBirth))
-          return;
-        
-        const calculateZscoreCommand : CalculateZscoreCommand = {
-           DateOfBirth :patientInfo.dateOfBirth,
-           Weight : this.vitalsFormGroup.get('weight').value,
-           Height : this.vitalsFormGroup.get('height').value,
-           Sex : patientInfo.gender == "Male" ? 1 : 2
-        }
-        var result = this.triageService.calculateZscore(calculateZscoreCommand);
-        console.log(result);
+        this.personService.getPatientByPersonId(this.PersonId).subscribe(
+            person=>{
+             if(person == null)
+                  return;
+             if(!this.triageService.qualifiesForZscoreCalculation(person.dateOfBirth))
+                  return;
+            
+            const calculateZscoreCommand : CalculateZscoreCommand = {
+            DateOfBirth :person.dateOfBirth,
+            Weight : this.vitalsFormGroup.get('weight').value,
+            Height : this.vitalsFormGroup.get('height').value,
+            Sex : person.gender == "Male" ? 1 : 2
+            }
+
+        this.triageService.calculateZscore(calculateZscoreCommand).subscribe(result=>{
+            console.log(result);
+        this.vitalsFormGroup.controls['weightForAge'].setValue(result.weightForAge);
+        this.vitalsFormGroup.controls['weightForHeight'].setValue(result.weightForHeight);
+        this.vitalsFormGroup.controls['bmiZ'].setValue(result.bmiz);            
+       });
+            },
+            (err)=>
+            {
+               console.log(err);
+            },
+            ()=>{
+
+            });
+                
     }
 
 

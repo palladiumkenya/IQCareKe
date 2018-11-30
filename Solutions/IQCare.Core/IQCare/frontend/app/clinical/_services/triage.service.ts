@@ -7,7 +7,8 @@ import { Observable } from 'rxjs';
 import { tap, catchError } from 'rxjs/operators';
 import { CalculateZscoreCommand } from '../_models/CalculateZscoreCommand';
 import { PersonHomeService } from '../../dashboard/services/person-home.service';
-import moment = require('moment');
+import * as moment from 'moment';
+import { PersonView } from '../../records/_models/personView';
 
 const httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -56,12 +57,15 @@ export class TriageService {
 
    
     public getPersonDetails(personId:number) : any {
+       var personDetails : PersonView = null;
       this.personHomeService.getPatientByPersonId(personId).subscribe(person=>{
-          return person;
+          console.log(">> Person "+person.personId);
+          personDetails = person
+          return personDetails;
       });
     }
 
-    public qualifiesForZscoreCalculation(dateOfBirth:number) : any{
+    public qualifiesForZscoreCalculation(dateOfBirth:Date) : any{
        var zscoreMinimumAgeQualification = 15;
 
         var dobMoment = moment(dateOfBirth);

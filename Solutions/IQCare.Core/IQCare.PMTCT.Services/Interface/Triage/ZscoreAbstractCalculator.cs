@@ -6,14 +6,14 @@ namespace IQCare.PMTCT.Services.Interface.Triage
 {
     public abstract class LmsZscoreAbstractCalculator 
     {
-        public double CalculateZscore(double value,double median, double lambda,double sigma)
+        public double CalculateZscore(object value,object median, object lambda,object sigma)
         {
-            if (Math.Abs(value) > 0 && Math.Abs(lambda) > 0)
+            if (Math.Abs((double)value) > 0 && Math.Abs(Convert.ToDouble(lambda)) > 0)
             {
-                return (Math.Pow(value / (double) Convert.ToDecimal(median),
-                            lambda) - 1) / (sigma * lambda);
+                return (Math.Pow((double)value / (double) Convert.ToDecimal(median),
+                            Convert.ToDouble(lambda)) - 1) / ((double)sigma * Convert.ToDouble(lambda));
             }
-            return Math.Log(value / median) / sigma;
+            return Math.Log((double)value / (double) median) / (double)sigma;
         }
     }
 }

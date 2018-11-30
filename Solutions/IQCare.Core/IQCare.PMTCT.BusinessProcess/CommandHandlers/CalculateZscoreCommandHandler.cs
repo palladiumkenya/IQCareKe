@@ -63,7 +63,7 @@ namespace IQCare.PMTCT.BusinessProcess.CommandHandlers
                         ZscoreType = scoreType
                     });
 
-                    zScoreCalculationResultType.GetProperty(scoreType.ToString()).SetValue(zscoreCalculationResult, zscore);
+                    zScoreCalculationResultType.GetProperty(scoreType.ToString()).SetValue(zscoreCalculationResult, Math.Round(zscore,2));
 
                 }
 

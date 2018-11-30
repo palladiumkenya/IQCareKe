@@ -16,9 +16,9 @@ namespace IQCare.PMTCT.Services.Interface.Triage
     public class LmsParameter
     {
 
-        public float Lambda { get; set; }
-        public float Median { get; set; }
-        public float Sigma { get; set; }
+        public object Lambda { get; set; }
+        public object Median { get; set; }
+        public object Sigma { get; set; }
 
     }
 
@@ -59,14 +59,14 @@ namespace IQCare.PMTCT.Services.Interface.Triage
             switch (zscoreType)
             {
                 case ZscoreType.WeightForAge:
-                case ZscoreType.WeightForHeight:
+                case ZscoreType.Bmiz:
                 case ZscoreType.HeightForAge:
                     return new Dictionary<string, object>
                     {
                         {"@DateOfBirth", searchParams.DateOfBirth},
                         {"@Sex", searchParams.Sex}
                     };
-                case ZscoreType.Bmiz:
+                case ZscoreType.WeightForHeight:
                     return new Dictionary<string, object>
                     {
                         {"@Height", searchParams.Height},
@@ -82,30 +82,43 @@ namespace IQCare.PMTCT.Services.Interface.Triage
             using (var dbConnection = _sqlConnectionFunc())
             using (var command = new SqlCommand(sprocName, dbConnection))
             {
-                command.CommandType = CommandType.StoredProcedure;
-                foreach (var param in parameters)
+                try
                 {
-                    command.Parameters.AddWithValue(param.Key, param.Value);
-                    command.Parameters[param.Key].Direction = ParameterDirection.Input;
-                }
-                command.Connection.Open();
-                LmsParameter lmsParameter = null;
-
-                using (var reader = command.ExecuteReader())
-                {
-                    while (reader.HasRows)
+                    command.CommandType = CommandType.StoredProcedure;
+                    foreach (var param in parameters)
                     {
-                        reader.Read();
-                        lmsParameter = new LmsParameter()
-                        {
-                            Lambda = reader.GetFloat(2),
-                            Median = reader.GetFloat(3),
-                            Sigma = reader.GetFloat(4)
-                        };
+                        command.Parameters.AddWithValue(param.Key, param.Value);
+                        command.Parameters[param.Key].Direction = ParameterDirection.Input;
                     }
-                }
+                    command.Connection.Open();
+                    LmsParameter lmsParameter = null;
 
-                return lmsParameter;
+                    using (var reader = command.ExecuteReader())
+                    {
+                        while (reader.HasRows && reader.FieldCount > 1)
+                        {
+                            while (reader.Read())
+                            {
+                                var name = reader.GetDataTypeName(2);
+                                lmsParameter = new LmsParameter()
+                                {
+                                   
+                                    Lambda = reader.GetValue(2),
+                                    Median = reader.GetValue(3),
+                                    Sigma =  reader.GetValue(4)
+                                };
+                            }
+                            break;
+                        }
+                    }
+
+                    return lmsParameter;
+                }
+                catch (Exception ex)
+                {
+
+                    throw;
+                }
             }
         }
     }
