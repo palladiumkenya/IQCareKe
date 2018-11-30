@@ -43,7 +43,8 @@ CREATE TABLE [dbo].[PatientMilestone](
 	[CreatedBy] [int] NOT NULL,
 	[CreateDate] [datetime] NOT NULL,
 	[DeleteFlag] [bit] NOT NULL DEFAULT ((0)),
-	[DateAssessed] [datetime] NULL,
+	[DateAssessed] [datetime] NULL
+	
  CONSTRAINT [PK_PatientMilestone] PRIMARY KEY CLUSTERED 
 (
 	[id] ASC
@@ -51,6 +52,7 @@ CREATE TABLE [dbo].[PatientMilestone](
 ) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
 
 GO
+
 
 ALTER TABLE [dbo].[PatientMilestone]  WITH CHECK ADD  CONSTRAINT [FK_PatientMilestone_PatientMasterVisit] FOREIGN KEY([PatientMasterVisitId])
 REFERENCES [dbo].[PatientMasterVisit] ([Id])
@@ -66,7 +68,14 @@ GO
 ALTER TABLE [dbo].[PatientMilestone] CHECK CONSTRAINT [FK_PatientMilestone_Patient]
 GO
 
+IF NOT EXISTS(Select * from sys.columns where Name = N'AuditData' AND Object_ID = Object_ID(N'PatientMilestone'))
+BEGIN
+ALTER TABLE [dbo].[PatientMilestone]  Add AuditData [xml] null
+END
 
+
+
+GO
 
 IF NOT EXISTS
 (
