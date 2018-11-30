@@ -928,7 +928,7 @@ Select Id
 	  ,UpdateDate
 	  ,MovedToFamilyTestingTable
 	  ,cast(decryptbykey(RFirstName) As varchar(50)) As firstName
-	  ,cast(decryptbykey(RMiddlename) As varchar(50)) As Middlename
+	  ,null As Middlename
 	  ,cast(decryptbykey(RLastName) As varchar(50)) As lastName
 From dtl_FamilyInfo
 
