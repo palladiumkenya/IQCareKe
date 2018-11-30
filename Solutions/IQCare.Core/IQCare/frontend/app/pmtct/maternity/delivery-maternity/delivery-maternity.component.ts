@@ -156,6 +156,7 @@ export class DeliveryMaternityComponent implements OnInit {
             .subscribe(
                 p => {
                     const visit = p;
+
                     if (visit[0].visitNumber > 0) {
                         this.deliveryFormGroup.controls['ancVisits'].setValue(visit.length);
                       //  this.deliveryFormGroup.get('ancVisits').disable({ onlySelf: true });
