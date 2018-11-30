@@ -21,8 +21,8 @@ export class TriageComponent implements OnInit {
     @Input('PatientMasterVisitId') PatientMasterVisitId: number;
     public maxDate = moment().toDate();
 
- vitalsDataTable: any [] = [];
- displayedColumns = ['visitdate', 'height', 'weight', 'bmi', 'diastolic', 'systolic', 'temperature', 'respiratoryrate', 'heartrate',
+    vitalsDataTable: any[] = [];
+    displayedColumns = ['visitdate', 'height', 'weight', 'bmi', 'diastolic', 'systolic', 'temperature', 'respiratoryrate', 'heartrate',
         'action'];
     dataSource = new MatTableDataSource(this.vitalsDataTable);
     @ViewChild(MatPaginator) paginator: MatPaginator;
@@ -126,7 +126,7 @@ export class TriageComponent implements OnInit {
             WeightForHeight: this.vitalsFormGroup.get('weightForHeight').value,
             Comment: this.vitalsFormGroup.get('comment').value,
             Muac: this.vitalsFormGroup.get('muac').value,
-            VisitDate: this.vitalsFormGroup.get('visitDate').value
+            VisitDate: moment(this.vitalsFormGroup.get('visitDate').value).toDate()
         };
 
         this.encounterService.savePatientMasterVisit(patientMasterVisitEncounter).subscribe(
@@ -148,9 +148,9 @@ export class TriageComponent implements OnInit {
                             this.notificationService.getConfig());
 
                         this.vitalsFormGroup.reset();
-                        this.vitalsFormGroup.clearValidators();
+                        // this.vitalsFormGroup.clearValidators();
 
-                        this.getPatientVitalsInfo(this.PatientMasterVisitId);
+                        this.getPatientVitalsInfo(this.PatientId);
                     }
                 );
             },
