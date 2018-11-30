@@ -290,10 +290,10 @@
 
 											<div>
 												<label class="pull-left" style="padding-right: 10px">
-													<input id="rdAnyComplaintsYes" type="radio" name="anyComplaints" value="1" clientidmode="Static" runat="server" onclick="showHidePresentingComplaintsDivs();" />Yes
+													<input id="rdAnyComplaintsYes" type="radio" name="anyComplaints" value="1" clientidmode="Static" runat="server"   data-parsley-required="true" onclick="showHidePresentingComplaintsDivs();" />Yes
 												</label>
 												<label class="pull-left" style="padding-right: 10px">
-													<input id="rdAnyComplaintsNo" type="radio" name="anyComplaints" value="0" clientidmode="Static" runat="server" data-parsley-required="true" onclick="showHidePresentingComplaintsDivs();" />No
+													<input id="rdAnyComplaintsNo" type="radio" name="anyComplaints" value="0" clientidmode="Static" runat="server"   data-parsley-required="true"                                                          onclick="showHidePresentingComplaintsDivs();" />No
 												</label>
 
 											</div>
@@ -3737,6 +3737,7 @@
                 var previousStep = 0;
                 var totalError = 0;
                 var stepError = 0;
+                
                 /*var form = $("form[name='form1']");*/
 
 				if (data.direction === 'next')
@@ -3788,7 +3789,7 @@
                                 addPatientIcf();
                                 addPatientIcfAction();
                                 saveNutritionAssessment();
-                                savePatientEncounterPresentingComplaint();
+                                savePatientEncounterPresentingComplaint(evt);
                             } else {
                                 stepError = $('.parsley-error').length === 0;
                                 totalError += stepError;
@@ -3906,7 +3907,7 @@
 
             });
 
-        function savePatientEncounterPresentingComplaint() {
+        function savePatientEncounterPresentingComplaint(evt) {
             var visitDate = $("#<%=VisitDate.ClientID%>").val();
             var visitScheduled = $("input[name$=Scheduled]:checked").val();
 
@@ -3919,17 +3920,23 @@
 
 
             /////////////////////////////////////////////////////
-            if (anyComplaints === 1) {
+            if (parseInt(anyComplaints, 10) === 1) {
+               
                 if (!presentingComplaintsTable.data().any()) {
-                    toastr.error("Presenting Complaints", "Presenting complaints missing.");
+                  
+                    toastr.error("Presenting Complaints", "Presenting complaints missing.Kindly indicate the presenting complaints.");
+                    
                     evt.preventDefault();
+                   
                 }
             }
 
-            if (adverseEvents === 1) {
+            if (parseInt(adverseEvents,10) === 1) {
                 if (!advEventsTable.data().any()) {
-                    toastr.error("Adverse Event(s)", "Adverse Event(s) missing.");
-                    evt.preventDefault();
+                    toastr.error("Adverse Event(s)", "Adverse Event(s) missing.Kindly indicate the adverse events");
+                    
+                     evt.preventDefault();
+                   
                 }
             }
 
@@ -4453,23 +4460,29 @@
         }
 
        
-		function saveWhoStage() {
-			var whostage = $("#<%=WHOStage.ClientID%>").val();
+        function saveWhoStage() {
+            var whostage = $("#<%=WHOStage.ClientID%>").val();
 
-			$.ajax({
-				type: "POST",
-				url: "../WebService/PatientEncounterService.asmx/savePatientWhoStage",
-				data: "{'whoStage':'" + whostage + "'}",
-				contentType: "application/json; charset=utf-8",
-				dataType: "json",
-				success: function (response) {
-					toastr.success(response.d, "WHO Stage");
-				},
-				error: function (response) {
-					toastr.error(response.d, "WHO Stage Error");
-				}
-			});
-		}
+            if (whostage.length > 0) {
+                $.ajax({
+                    type: "POST",
+                    url: "../WebService/PatientEncounterService.asmx/savePatientWhoStage",
+                    data: "{'whoStage':'" + whostage + "'}",
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    success: function (response) {
+                        toastr.success(response.d, "WHO Stage");
+                    },
+                    error: function (response) {
+                        toastr.error(response.d, "WHO Stage Error");
+                    }
+                });
+            }
+            else {
+                toastr.info("No  WhoStage was recorded");
+               }
+
+         }
 
 		function savePatientPatientManagement() {
 			var workPlan = $("#<%=txtWorkPlan.ClientID%>").val();
@@ -6861,5 +6874,40 @@
             }
 
         }
+
+
+
+
+function GetGBVScreeningStatus() {
+        var patientId ="<%=PatientId%>";
+        var visitDate = moment("<%=visitdateval%>");
+        var screeningCategoryId = "<%=GbvScreeningCategoryId%>";
+
+        if (visitDate.isValid()) {
+            visitDate = visitDate.format('YYYY-MM-DD');
+
+            $.ajax({
+                type: "POST",
+                url: "../WebService/PatientService.asmx/getPatientScreening",
+                data: "{'patientId':'" + patientId + "', 'visitDate': '" + visitDate + "', 'screeningcategoryId': '" + screeningCategoryId + "'}",
+                dataType: "json",
+                contentType: "application/json; charset=utf-8",
+
+                success: function (response) {
+                    var itemList = JSON.parse(response.d);
+
+                    $("#lblGbvAssessmentDone").text(itemList.length > 0 ? 'Yes' : 'No');
+
+                }
+            });
+        } else {
+
+            $("#lblGbvAssessmentDone").text('No');
+
+        }
+    }
+
+    GetGBVScreeningStatus();
+
 </script>
 

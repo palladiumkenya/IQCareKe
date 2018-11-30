@@ -4,6 +4,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using IQCare.Common.BusinessProcess.Commands.Lookup;
 using IQCare.Common.BusinessProcess.Interfaces;
+using IQCare.Records.BusinessProcess.Command.Lookup;
+using IQCareRecords.Common.BusinessProcess.Command;
 using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -33,10 +35,23 @@ namespace IQCare.Controllers.Common
             return BadRequest(results);
         }
 
+        [HttpGet("GetbyGroupName/{groupName}")]
+        public async Task<IActionResult> GetbyGroupName(string groupName)
+        {
+            var results = await _mediator.Send(new GetOptionsByGroupNameCommand { GroupName = groupName },
+                HttpContext.RequestAborted);
+            
+            if (results.IsValid)
+                return Ok( results.Value);
+
+            return BadRequest(results);
+        }
+
+
         [HttpGet("htsOptions")]
         public async Task<IActionResult> Get()
         {
-            string[] options = new string[] { "HTSEntryPoints", "YesNo", "Disabilities", "TestedAs", "Strategy", "TbScreening", "ReasonsPartner", "HIVResults", "HIVTestKits", "HIVFinalResults" };
+            string[] options = new string[] { "HTSEntryPoints", "YesNo", "Disabilities", "TestedAs", "Strategy", "TbScreening", "ReasonsPartner", "HIVResults", "HIVTestKits", "HIVFinalResults","EducationalLevel","EducationOutcome","HTSOccupation" };
 
             var results = await _mediator.Send(new GetRegistrationOptionsCommand {RegistrationOptions = options},
                 HttpContext.RequestAborted);
@@ -48,7 +63,7 @@ namespace IQCare.Controllers.Common
             return BadRequest(results);
         }
 
-        [HttpGet("optionsByGroupandItemName")]
+        [HttpGet("optionsByGroupandItemName/{groupName}/{itemName}")]
         public async Task<IActionResult> Get(string groupName, string itemName)
         {
             var results =
@@ -62,16 +77,16 @@ namespace IQCare.Controllers.Common
             return BadRequest(results);
         }
 
-        //[HttpGet("getIdentifyerTypes")]
-        //public async Task<IActionResult> GetIdentifierType()
-        //{
-        //    var results = await _mediator.Send(new GetPersonIdentificationCommand { CodeName = "PersonIdentification" }, HttpContext.RequestAborted);
+        [HttpGet("getIdentifyerTypes")]
+        public async Task<IActionResult> GetIdentifierType()
+        {
+            var results = await _mediator.Send(new GetPersonIdentificationCommand { CodeName = "PersonIdentification" }, HttpContext.RequestAborted);
 
-        //    if (results.IsValid)
-        //        return Ok(results.Value);
-        //    return BadRequest(results);
+            if (results.IsValid)
+                return Ok(results.Value);
+            return BadRequest(results);
 
-        //}
+        }
 
         [HttpGet("getocc")]
         public async Task<IActionResult>  GetOccupations()
@@ -81,9 +96,8 @@ namespace IQCare.Controllers.Common
             if (results.IsValid)
                 return Ok(results.Value);
             return BadRequest(results);
+        }
 
-       
-       }
         [HttpGet("getEducation")]
         public async Task<IActionResult> GetRegConsentEducationOptions()
         {
@@ -92,7 +106,6 @@ namespace IQCare.Controllers.Common
             if (results.IsValid)
                 return Ok(results.Value);
             return BadRequest(results);
-
         }
 
         [HttpGet("getRegConsentOptions")]
@@ -103,7 +116,6 @@ namespace IQCare.Controllers.Common
             if (results.IsValid)
                 return Ok(results.Value);
             return BadRequest(results);
-
         }
          
         [HttpGet("getMaritalStatusOptions")]
@@ -149,11 +161,10 @@ namespace IQCare.Controllers.Common
             return BadRequest(results);
         }
 
-        [HttpGet("getGenderOptions")]
-        public async Task<IActionResult> GetGenderOptions()
+        [HttpGet("GetOptionsByMasterName/{masterName}")]
+        public async Task<IActionResult> GetOptionsByMasterName(string masterName)
         {
-            string options =  "Gender";
-            var results = await _mediator.Send(new GetOptionsByGroupNameCommand { GroupName = options },
+            var results = await _mediator.Send(new GetOptionsByMasterNameCommand { MasterName = masterName },
                 HttpContext.RequestAborted);
 
             if (results.IsValid)
@@ -263,24 +274,27 @@ namespace IQCare.Controllers.Common
         //        return Ok(results.Value);
         //    return BadRequest(results);
 
-        //}
+        [HttpGet("GetServiceAreaIdentifiers/{serviceAreaId}")]
+        public async Task<IActionResult> Get(int serviceAreaId)
+        {
+            var response = await _mediator.Send(new GetServiceAreaIdentifiersCommand()
+            {
+                ServiceAreaId = serviceAreaId
+            }, Request.HttpContext.RequestAborted);
 
+            if (response.IsValid)
+                return Ok(response.Value);
+            return BadRequest(response);
+        }
 
-
-
-    
-
-            
-            
-
-        //[HttpGet("getFacility/{mflCode}")]
-        //public async Task<IActionResult> GetFacility(string mflCode)
-        //{
-        //    var response = await _mediator.Send(new GetFacilityCommand() {MflCode = mflCode},
-        //        Request.HttpContext.RequestAborted);
-        //    if (response.IsValid)
-        //        return Ok(response.Value);
-        //    return BadRequest(response);
-        //}
-    } 
+        [HttpGet("getFacility/{mflCode}")]
+        public async Task<IActionResult> GetFacility(string mflCode)
+        {
+            var response = await _mediator.Send(new GetFacilityCommand() {MflCode = mflCode},
+                Request.HttpContext.RequestAborted);
+            if (response.IsValid)
+                return Ok(response.Value);
+            return BadRequest(response);
+        }
+    }
 }

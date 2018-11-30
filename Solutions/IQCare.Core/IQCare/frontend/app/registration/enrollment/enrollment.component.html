@@ -4,10 +4,10 @@
     </div>
     <div class="ibox-content">
         <div class="row">
-            <div class="col-md-2">
+            <!--<div class="col-md-2">
                 <app-leftnav></app-leftnav>
-            </div>
-            <div class="col-md-10 animated fadeIn">
+            </div>-->
+            <div class="col-md-12 animated fadeIn">
                 <div class="panel panel-default">
                     <div class="panel-heading">ENROLLMENT</div>
                     <div class="panel-body">
@@ -18,15 +18,20 @@
                                         <div class="col-lg-3 col-md-3 col-sm-3">
                                             <div class="form-group">
                                                 <mat-form-field>
-                                                    <mat-select placeholder="Service" autofocus id="service" name="service" tabindex="1" [(ngModel)]="enrollment.ServiceAreaId" #ServiceAreaId="ngModel">
-                                                        <mat-option value="2">{{appPosID}} - {{facilityName}} HTS Facility</mat-option>
+                                                    <mat-select placeholder="Service" autofocus id="service" name="service"
+                                                        tabindex="1" [(ngModel)]="enrollment.ServiceAreaId"
+                                                        #ServiceAreaId="ngModel">
+                                                        <mat-option value="2">{{appPosID}} - {{facilityName}} HTS
+                                                            Facility</mat-option>
                                                     </mat-select>
                                                 </mat-form-field>
                                             </div>
 
                                             <div class="form-group">
                                                 <mat-form-field>
-                                                    <input matInput placeholder="Serial" id="enrollmentNo" name="enrollmentNo" tabindex="3" [(ngModel)]="enrollment.EnrollmentNo" #EnrollmentNo="ngModel">
+                                                    <input matInput placeholder="Serial" id="enrollmentNo" name="enrollmentNo"
+                                                        tabindex="3" [(ngModel)]="enrollment.EnrollmentNo"
+                                                        #EnrollmentNo="ngModel">
                                                 </mat-form-field>
                                             </div>
                                         </div>
@@ -45,7 +50,10 @@
                                             <div class="form-group">
                                                 <div>
                                                     <mat-form-field>
-                                                        <input tabindex="4" [max]="maxDate" matInput placeholder="Registration Date" [matDatepicker]="registrationDateDatepicker" (click)="registrationDateDatepicker.open()" id="registrationDate" name="registrationDate" [(ngModel)]="enrollment.RegistrationDate" #RegistrationDate="ngModel" data-parsley-required="true">
+                                                        <input tabindex="4" [max]="maxDate" matInput placeholder="Registration Date"
+                                                            [matDatepicker]="registrationDateDatepicker" (click)="registrationDateDatepicker.open()"
+                                                            id="registrationDate" name="registrationDate" [(ngModel)]="enrollment.RegistrationDate"
+                                                            #RegistrationDate="ngModel" data-parsley-required="true">
                                                         <mat-datepicker-toggle matSuffix [for]="registrationDateDatepicker"></mat-datepicker-toggle>
                                                         <mat-datepicker #registrationDateDatepicker></mat-datepicker>
                                                     </mat-form-field>
@@ -57,7 +65,8 @@
                                     <div class="row">
                                         <div class="col-lg-3 col-md-3 col-sm-3">
                                             <div class="form-group">
-                                                <button class="btn btn-primary m-t-n-xs" value="submit" type="submit" [disabled]="!enrollmentForm.form.valid">
+                                                <button class="btn btn-primary m-t-n-xs" value="submit" type="submit"
+                                                    [disabled]="!enrollmentForm.form.valid">
                                                     <strong>Save and Continue</strong>
                                                 </button>
                                             </div>

@@ -1,0 +1,129 @@
+<form class="form-group" novalidate [formGroup]="PatientEducationFormGroup">
+
+
+    <div class="row">
+
+        <div class="col-md-12">
+            <div class="form-title">
+                <span class="primary">Patient Education & Examination </span>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-4 col-md-3 col-sm-6 col-xs-12">
+            <mat-form-field >
+                <mat-select placeholder="Breast Exam Done ?" formControlName="breastExamDone" required>
+                    <mat-option [value]="0">Select</mat-option>
+                    <mat-option *ngFor="let yesNoOption of yesNoOptions" [value]="yesNoOption.itemId">
+                        {{yesNoOption.itemName}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+        <div class="col-lg-8"></div>
+    </div>
+
+    <div class="row" style="margin-top:10px">
+
+        <div class="col-lg-4 col-md-3 col-sm-6 col-xs-12">
+            <mat-form-field >
+                <mat-select placeholder="Patient Counselled On ?" formControlName="counselledOn" required>
+                    <mat-option [value]="0">Select</mat-option>
+                    <mat-option *ngFor="let counsellingOption of counsellingOptions" [value]="counsellingOption">
+                        {{counsellingOption.itemName}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+
+        <div class="col-lg-4 col-md-3 col-sm-6 col-xs-12">
+            <mat-form-field>
+                <input [max]="maxDate" class="col-md-12" id="topicDate" matInput [matDatepicker]="topicDate"
+                       formControlName="counsellingDate" placeholder="Date Counselled">
+                <mat-datepicker-toggle matSuffix [for]="topicDate"></mat-datepicker-toggle>
+                <mat-datepicker #topicDate></mat-datepicker>
+            </mat-form-field>
+        </div>
+        <div class="col-lg-2 col-md-3 col-sm-6 col-xs-12"></div>
+        <div class="col-lg-2 col-md-3 col-sm-6 col-xs-12">
+            <button mat-raised-button color="primary"><span class="fa fa-plus-circle"
+                                                            (click)="addTopics()"> Add Topic</span>
+            </button>
+        </div>
+
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="example-container mat-elevation-z1">
+
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th scope="col"># Count</th>
+                        <th scope="col">Counselled On</th>
+                        <th scope="col">Counselling Date</th>
+                        <th scope="col">Action</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr *ngFor="let item_data of counselling_data; let index = index">
+                        <td>{{ index+1 }}</td>
+                        <td>{{ item_data.counsellingTopic}}</td>
+                        <td>{{ item_data.CounsellingDate | date: 'dd-MMM-yyyy' }}</td>
+                        <td>
+                            <i style="cursor: pointer;" class="danger material-icons" (click)="removeRow(index)">
+                                delete
+                            </i>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+
+            </div>
+        </div>
+    </div>
+
+
+
+
+        <app-antenatal-profile></app-antenatal-profile>
+
+    <div class="row" style="margin-top: 15px">
+        <div class="col-lg-4 col-md-3 col-sm-6 col-xs-12">
+            <mat-form-field >
+                <mat-select placeholder="Treated for Syphilis ?" formControlName="treatedSyphilis" required>
+                    <mat-option [value]="0">Select</mat-option>
+                    <mat-option *ngFor="let yesNoOption of yesNoOptions" [value]="yesNoOption.itemId">
+                        {{yesNoOption.itemName}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+        <div class="col-lg-4 col-md-4 col-xs-12 col-sm-6">
+
+          <!--  <mat-form-field class="col-md-12">
+                <mat-select formControlName="testResult" placeholder="*Before  first ANC  visit  " required>
+                    <mat-option placeholder="Test" *ngFor="let hivStatusOption of hivStatusOptions"
+                                [value]="hivStatusOption.itemId">
+                        {{hivStatusOption.itemName}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>-->
+        </div>
+
+        <div class="col-lg-4"></div>
+    </div>
+
+</form>
+<!-- <div class="row">
+    <div class="col-md-12">
+        <div>
+            <button mat-raised-button class="mat-accent" matStepperNext style="margin-right:5px"
+                    [disabled]="!PatientEducationFormGroup.valid" (click)="moveNextStep()"> Next
+            </button>
+            <button mat-raised-button class="mat-primary" matStepperPrevious>Previous</button>
+
+        </div>
+    </div>
+</div> -->

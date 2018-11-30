@@ -1,0 +1,121 @@
+<div class="row">
+    <div class="col-lg-12 col-sm-12 col-xs-12">
+        <div class="widget">
+            <!--Widget Header-->
+            <div class="widget-body  no-padding">
+                <div class="tickets-container">
+                    <ul class="tickets-list">
+                        <li class="ticket-item">
+                            <div class="row">
+                                <div class="ticket-time  col-lg-2 col-sm-2 col-xs-12">
+                                    <span>
+                                        <strong>SERVICE</strong>
+                                    </span>
+                                </div>
+
+                                <div class="ticket-time  col-lg-4 col-sm-4 col-xs-12">
+                                    <div class="divider hidden-md hidden-sm hidden-xs"></div>
+                                    <span>
+                                        <strong>ENROLLMENT DATE</strong>
+                                    </span>
+                                </div>
+
+                                <div class="ticket-time  col-lg-4 col-sm-4 col-xs-12">
+                                    <div class="divider hidden-md hidden-sm hidden-xs"></div>
+                                    <span>
+                                        <strong>ENROLLMENT NUMBER</strong>
+                                    </span>
+                                </div>
+
+                                <div class="ticket-time  col-lg-2 col-sm-2 col-xs-12">
+                                    <div class="divider hidden-md hidden-sm hidden-xs"></div>
+                                    <span class="fa fa-cog">
+                                        <strong>ACTION</strong>
+                                    </span>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+
+                    <ul class="tickets-list" *ngFor="let service of services;">
+                        <li class="ticket-item">
+                            <div class="row">
+                                <div class="ticket-user col-lg-2 col-sm-3 col-xs-12">
+                                    <span>{{ service.code }}</span>
+                                </div>
+                                <ng-container *ngIf="isPersonServiceEnrolled(service); else templateName">
+                                    <div class="ticket-time  col-lg-4 col-sm-4 col-xs-12">
+                                        <div class="divider hidden-md hidden-sm hidden-xs"></div>
+                                        <span class="label label-palegreen">
+                                            {{
+                                            getServiceEnrollmentDetails(service)[0]['enrollmentDate']
+                                            | date: 'dd-MMM-yyyy'
+                                            }}
+                                        </span>
+                                    </div>
+
+                                    <div class="ticket-time  col-lg-4 col-sm-4 col-xs-12">
+                                        <div class="divider hidden-md hidden-sm hidden-xs"></div>
+                                        <span class="identifierNumbers label label-palegreen">
+                                            <span style="font-size:15px;" *ngFor="let identifier of getServiceEnrollmentDetails(service)['identifiers'][0]">
+                                                {{
+                                                identifier['identifierTypeId'] + ': ' + identifier['identifierValue']
+                                                }}
+                                                <br />
+                                            </span>
+                                        </span>
+                                    </div>
+
+                                    <div class="ticket-time  col-lg-2 col-sm-2 col-xs-12">
+                                        <div class="divider hidden-md hidden-sm hidden-xs"></div>
+                                        <span>
+                                            <a class="btn btn-sm btn-success" (click)="newEncounter(service.id)">
+                                                Encounter History
+                                            </a>
+                                        </span>
+
+                                        <span>&nbsp;&nbsp;</span>
+
+                                        <span>
+                                            <a class="btn btn-sm btn-success" (click)="newTriage()">
+                                                Triage
+                                            </a>
+                                        </span>
+                                    </div>
+                                </ng-container>
+                                <ng-template #templateName>
+                                    <div class="ticket-time  col-lg-4 col-sm-4 col-xs-12">
+                                        <div class="divider hidden-md hidden-sm hidden-xs"></div>
+                                        <span class="label label-yellow">NOT ENROLLED</span>
+                                    </div>
+
+                                    <div class="ticket-time  col-lg-4 col-sm-4 col-xs-12">
+                                        <div class="divider hidden-md hidden-sm hidden-xs"></div>
+                                        <span>
+                                            &nbsp;
+                                        </span>
+                                    </div>
+
+                                    <div class="ticket-time  col-lg-2 col-sm-2 col-xs-12">
+                                        <div class="divider hidden-md hidden-sm hidden-xs"></div>
+                                        <span>
+                                            <ng-container *ngIf="isServiceEligible(service.id); else notEligibleTemplate">
+                                                <a class="btn btn-sm btn-primary" (click)="enrollToService(service.id, service.code)">
+                                                    Enroll
+                                                </a>
+                                            </ng-container>
+                                            <ng-template #notEligibleTemplate>
+                                                <span class="label label-orange">Not Eligible</span>
+                                            </ng-template>
+                                        </span>
+                                    </div>
+                                </ng-template>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>

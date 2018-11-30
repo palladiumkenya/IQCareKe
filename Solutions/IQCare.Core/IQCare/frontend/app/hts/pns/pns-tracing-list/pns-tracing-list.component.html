@@ -3,10 +3,10 @@
         <app-clientbrief></app-clientbrief>
     </div>
     <div class="ibox-content">
-        <div class="col-md-2">
+        <!--<div class="col-md-2">
             <app-leftnav></app-leftnav>
-        </div>
-        <div class="col-md-10 col-lg-10 col-sm-10 animated fadeIn">
+        </div>-->
+        <div class="col-md-12 col-lg-12 col-sm-12 animated fadeIn">
             <div class="panel panel-default">
                 <div class="panel-heading">PARTNERS TRACING</div>
                 <div class="panel-body">
@@ -19,7 +19,8 @@
                             <!-- Tracing Date Column -->
                             <ng-container matColumnDef="tracingDate">
                                 <mat-header-cell *matHeaderCellDef> Tracing Date </mat-header-cell>
-                                <mat-cell *matCellDef="let element"> {{ element.tracingDate | date: 'dd-MMM-yyyy' }} </mat-cell>
+                                <mat-cell *matCellDef="let element"> {{ element.tracingDate | date: 'dd-MMM-yyyy' }}
+                                </mat-cell>
                             </ng-container>
 
                             <!-- TracingMode Column -->
@@ -43,7 +44,8 @@
                             <!-- Date Booked for Testing Column -->
                             <ng-container matColumnDef="dateBookedTesting">
                                 <mat-header-cell *matHeaderCellDef> Date Booked for Testing </mat-header-cell>
-                                <mat-cell *matCellDef="let element"> {{ element.dateBookedTesting | date: 'dd-MMM-yyyy' }} </mat-cell>
+                                <mat-cell *matCellDef="let element"> {{ element.dateBookedTesting | date: 'dd-MMM-yyyy'
+                                    }} </mat-cell>
                             </ng-container>
 
                             <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>

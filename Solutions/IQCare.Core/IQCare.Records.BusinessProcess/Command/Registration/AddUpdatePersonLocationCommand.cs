@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using IQCare.Common.Core.Models;
+using IQCare.Library;
 using MediatR;
 namespace IQCareRecords.Common.BusinessProcess.Command
 {
@@ -23,5 +24,6 @@ namespace IQCareRecords.Common.BusinessProcess.Command
     public class AddUpdatePersonLocationResponse
     {
         public string Message { get; set; }
+        public int PersonLocationId { get; set; }
     }
 }

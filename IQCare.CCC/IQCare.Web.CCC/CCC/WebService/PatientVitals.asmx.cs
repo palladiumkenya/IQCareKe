@@ -106,5 +106,15 @@ namespace IQCare.Web.CCC.WebService
             PregnancyOutcomeLookupManager pregnancyOutcome = new PregnancyOutcomeLookupManager();
             return pregnancyOutcome.GetLastPregnancyOutcomeLookup(patient);
         }
+
+        [WebMethod(EnableSession = true)]
+        public int GetLastPatientPregnancyIndicator()
+        {
+            int patient = Convert.ToInt32(Session["PatientPK"].ToString());
+            PatientPregnancyIndicatorManager pregindicator = new PatientPregnancyIndicatorManager();
+
+            int pglist = pregindicator.GetLastPregnancyStatus(patient);
+            return pglist;
+        }  
     }
 }

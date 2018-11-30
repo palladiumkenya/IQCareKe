@@ -79,11 +79,11 @@ namespace IQCare.Common.BusinessProcess.Services
             }
         }
 
-        public async Task<List<SubCountyLookup>> GetSubCountyList(int CountyId)
+        public async Task<List<County>> GetSubCountyList(int CountyId)
         {
             try
             {
-                var result = await _unitOfWork.Repository<SubCountyLookup>().Get(x => x.CountyId == CountyId).ToListAsync();
+                var result = await _unitOfWork.Repository<County>().Get(x => x.CountyId == CountyId).ToListAsync();
                 return result.ToList();
             }
             catch(Exception e)

@@ -132,7 +132,7 @@
                             'screeningCategoryId': screeningCategoryId,
                             'screeningTypeId': screeningTypeId,
                             'screeningValueId': screeningValue,
-                            'comment': 'null'
+                            'comment': 'N/A'
                         });
 
                     }

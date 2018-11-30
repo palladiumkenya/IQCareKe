@@ -10,8 +10,21 @@ namespace IQCare.CCC.UILogic.Visit
 {
     public class PatientMasterVisitManager
     {
-       private readonly IPatientMasterVisitManager _patientMasterVisitManager = (IPatientMasterVisitManager)ObjectFactory.CreateInstance("BusinessProcess.CCC.visit.BPatientmasterVisit, BusinessProcess.CCC");
-        private int _result=0;
+        private readonly IPatientMasterVisitManager _patientMasterVisitManager = (IPatientMasterVisitManager)ObjectFactory.CreateInstance("BusinessProcess.CCC.visit.BPatientmasterVisit, BusinessProcess.CCC");
+        private int _result = 0;
+
+        public int AddPatientMasterVisit(PatientMasterVisit pm)
+        {
+            try
+            {
+                return _result = _patientMasterVisitManager.AddPatientmasterVisit(pm);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+
+            }
+        }
 
         public int AddPatientMasterVisit(int patientId, int userId, int visitType)
         {
@@ -114,11 +127,35 @@ namespace IQCare.CCC.UILogic.Visit
 
         }
 
+        public List<PatientMasterVisit> GetVisitDateByMasterVisitId(int patientId,int patientmasterVisitId)
+        {
+            try
+            {
+                return _patientMasterVisitManager.GetVisitDateByMasterVisitId(patientId,patientmasterVisitId);
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+        }
+    
             public PatientMasterVisit GetVisitById(int id)
         {
             try
             {
                 return _patientMasterVisitManager.GetVisitById(id);
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+        }
+
+        public List<PatientMasterVisit> GetPatientMasterVisitBasedonVisitDate(int patientId, DateTime visitDate)
+        {
+            try
+            {
+                return _patientMasterVisitManager.GetPatientMasterVisitBasedonVisitDate(patientId, visitDate);
             }
             catch (Exception e)
             {

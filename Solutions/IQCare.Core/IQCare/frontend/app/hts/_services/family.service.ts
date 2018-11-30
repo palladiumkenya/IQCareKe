@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
-import { environment } from '../../../environments/environment';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable } from 'rxjs';
-import { catchError, tap } from 'rxjs/operators';
-import { FamilyScreening } from '../_models/familyScreening';
-import { ErrorHandlerService } from '../../shared/_services/errorhandler.service';
-import { FamilyTracing } from '../_models/familyTracing';
+import {environment} from '../../../environments/environment';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {Observable} from 'rxjs';
+import {catchError, tap} from 'rxjs/operators';
+import {FamilyScreening} from '../_models/familyScreening';
+import {ErrorHandlerService} from '../../shared/_services/errorhandler.service';
+import {FamilyTracing} from '../_models/familyTracing';
 
 const httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -20,16 +20,16 @@ export class FamilyService {
     private family = '/api/HtsEncounter/tracing';
 
     constructor(private http: HttpClient,
-        private errorHandler: ErrorHandlerService) { }
+                private errorHandler: ErrorHandlerService) { }
 
     public getClientFamily(patientId: number): Observable<any[]> {
-        const relationshipTypes = JSON.stringify(['Sibling', 'Child', 'Father', 'Mother', 'Other']);
+        const relationshipTypes = JSON.stringify(['Sibling', 'Child', 'Father', 'Mother']);
 
         return this.http.post<any[]>(this.API_URL + this.url + '/getPartners/?patientId='
             + patientId, relationshipTypes, httpOptions).pipe(
-                tap(getClientFamily => this.errorHandler.log('fetched all family')),
-                catchError(this.errorHandler.handleError<any[]>('getClientFamily'))
-            );
+            tap(getClientFamily => this.errorHandler.log('fetched all family')),
+            catchError(this.errorHandler.handleError<any[]>('getClientFamily'))
+        );
     }
 
     public getCustomOptions(): Observable<any[]> {
