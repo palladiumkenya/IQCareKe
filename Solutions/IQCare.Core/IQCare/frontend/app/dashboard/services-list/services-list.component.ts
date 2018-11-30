@@ -67,7 +67,7 @@ export class ServicesListComponent implements OnInit {
         localStorage.setItem('selectedService', 'triage');
         this.store.dispatch(new Consent.SelectedService('triage'));
         this.zone.run(() => {
-            this.router.navigate(['/clinical/triage/' + this.patientId],
+            this.router.navigate(['/clinical/triage/' + this.patientId + '/' + this.personId],
                 { relativeTo: this.route });
         });
     }
