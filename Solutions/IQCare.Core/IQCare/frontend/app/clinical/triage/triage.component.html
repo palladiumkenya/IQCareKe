@@ -12,7 +12,7 @@
                                 <input [max]="maxDate" matInput [matDatepicker]="picker2" formControlName="visitDate"
                                     placeholder="Visit Date" required (click)="picker2.open()">
                                 <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
-                                <mat-datepicker #picker2></mat-datepicker>
+                                <mat-datepicker #picker2 ngDefaultControl></mat-datepicker>
                             </mat-form-field>
                         </div>
                     </div>

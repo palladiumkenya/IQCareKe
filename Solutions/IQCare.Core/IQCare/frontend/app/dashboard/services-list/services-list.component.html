@@ -99,18 +99,14 @@
                                     <div class="ticket-time  col-lg-2 col-sm-2 col-xs-12">
                                         <div class="divider hidden-md hidden-sm hidden-xs"></div>
                                         <span>
-                                            <ng-container *ngIf="enrolledServices">
-                                                <ng-container *ngIf="enrolledServices.length > 0">
-                                                    <ng-container *ngIf="isServiceEligible(service.id); else notEligibleTemplate">
-                                                        <a class="btn btn-sm btn-primary" (click)="enrollToService(service.id)">
-                                                            Enroll
-                                                        </a>
-                                                    </ng-container>
-                                                    <ng-template #notEligibleTemplate>
-                                                        <span class="label label-orange">Not Eligible</span>
-                                                    </ng-template>
-                                                </ng-container>
+                                            <ng-container *ngIf="isServiceEligible(service.id); else notEligibleTemplate">
+                                                <a class="btn btn-sm btn-primary" (click)="enrollToService(service.id, service.code)">
+                                                    Enroll
+                                                </a>
                                             </ng-container>
+                                            <ng-template #notEligibleTemplate>
+                                                <span class="label label-orange">Not Eligible</span>
+                                            </ng-template>
                                         </span>
                                     </div>
                                 </ng-template>
