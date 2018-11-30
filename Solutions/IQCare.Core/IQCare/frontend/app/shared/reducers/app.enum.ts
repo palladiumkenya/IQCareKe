@@ -9,5 +9,6 @@ export enum AppEnum {
     PNS_SCREENED,
     PNS_TRACING,
     FAMILY_SCREENED,
-    FAMILY_TRACED
+    FAMILY_TRACED,
+    PERSONID
 }

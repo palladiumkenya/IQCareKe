@@ -9,6 +9,7 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using IQCare.Common.Infrastructure;
+using IQCare.Library;
 
 namespace IQCare.HTS.BusinessProcess.CommandHandlers
 {

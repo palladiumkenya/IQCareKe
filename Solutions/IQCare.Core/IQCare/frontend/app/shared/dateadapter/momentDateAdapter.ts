@@ -1,32 +1,44 @@
-import { NativeDateAdapter } from '@angular/material';
+import { MomentDateAdapter } from '@angular/material-moment-adapter';
+import { Injectable, Inject, Optional } from '@angular/core';
+import { MAT_DATE_LOCALE } from '@angular/material';
+import { Moment } from 'moment';
 import * as moment from 'moment';
-import { Platform } from '../../../../node_modules/@angular/cdk/platform';
 
+@Injectable()
+export class AppDateAdapter extends MomentDateAdapter {
+    /**
+     *
+     */
+    constructor(@Optional() @Inject(MAT_DATE_LOCALE) dateLocale: string) {
+        super(dateLocale);
+    }
 
-export class AppDateAdapter extends NativeDateAdapter {
+    createDate(year: number, month: number, date: number): Moment {
+        // Moment.js will create an invalid date if any of the components are out of bounds, but we
+        // explicitly check each case so we can throw more descriptive errors.
+        if (month < 0 || month > 11) {
+            throw Error(`Invalid month index "${month}". Month index has to be between 0 and 11.`);
+        }
 
-    /*constructor() {
-        super('en-US', Platform);
-    }*/
+        if (date < 1) {
+            throw Error(`Invalid date "${date}". Date has to be greater than 0.`);
+        }
 
-    format(date: Date, displayFormat: Object): string {
-        if (displayFormat === 'input') {
+        const result = moment.utc({ year, month, date }).locale(this.locale);
+
+        // If the result isn't valid, the date must have been out of bounds for this month.
+        if (!result.isValid()) {
+            throw Error(`Invalid date "${date}" for month with index "${month}".`);
+        }
+
+        return result;
+    }
+
+    format(date: moment.Moment, displayFormat: Object): string {
+        if (displayFormat === 'l') {
             return moment(date).format('DD-MMM-YYYY');
         } else {
-            return date.toDateString();
+            return date.toDate().toDateString();
         }
     }
 }
-
-export const APP_DATE_FORMATS = {
-    parse: {
-        dateInput: { month: 'short', year: 'numeric', day: 'numeric' },
-    },
-    display: {
-        dateInput: 'input',
-        monthYearLabel: { year: 'numeric', month: 'numeric' },
-        dateA11yLabel: { year: 'numeric', month: 'long', day: 'numeric' },
-        monthYearA11yLabel: { year: 'numeric', month: 'long' },
-    }
-};
-

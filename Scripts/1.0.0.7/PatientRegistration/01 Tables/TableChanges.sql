@@ -16,11 +16,6 @@ END
 
 
 
-
-
-
-
-
 If Not Exists(Select * from sys.columns where Name = N'ConsentReason' AND Object_ID = Object_ID(N'PatientConsent'))
 BEGIN
 ALTER TABLE PatientConsent ADD ConsentReason varchar(max) null

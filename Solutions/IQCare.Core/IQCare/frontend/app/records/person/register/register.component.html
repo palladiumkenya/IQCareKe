@@ -1,0 +1,348 @@
+<div class="row">
+    <div class="col-lg-12 col-sm-12 col-xs-12">
+        <div class="widget">
+            <div class="widget-header bordered-bottom bordered-blue">
+                <span class="widget-caption">Register Person</span>
+            </div>
+            <div class="widget-body">
+                <div>
+                    <form [formGroup]="formGroup">
+                        <mat-horizontal-stepper #stepper="matHorizontalStepper" formArrayName="formArray" [linear]="isLinear">
+                            <mat-step formGroupName="0" [stepControl]="formArray.get([0])">
+                                <ng-template matStepLabel>Client Information</ng-template>
+                                <div class="row">
+                                    <div class="col-lg-3 col-sm-3 col-xs-12">
+                                        <mat-form-field>
+                                            <input tabindex="1" placeholder="Registration Date" matInput
+                                                [matDatepicker]="myDatepicker" [max]="maxDate" (focus)="myDatepicker.open()"
+                                                formControlName="registrationDate" required>
+                                            <mat-datepicker-toggle matSuffix [for]="myDatepicker"></mat-datepicker-toggle>
+                                            <mat-datepicker #myDatepicker name="RegistrationDate" ngDefaultControl></mat-datepicker>
+                                        </mat-form-field>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-lg-3 col-sm-3 col-xs-12">
+                                        <mat-form-field>
+                                            <input matInput placeholder="First Name" formControlName="FirstName" id="firstName"
+                                                name="firstName" tabindex="2" (change)="checkDuplicates()" required>
+                                        </mat-form-field>
+                                    </div>
+
+                                    <div class="col-lg-3 col-sm-3 col-xs-12">
+                                        <mat-form-field>
+                                            <input matInput placeholder="Middle Name" formControlName="MiddleName" id="middleName"
+                                                name="middleName" (change)="checkDuplicates()" tabindex="3">
+                                        </mat-form-field>
+                                    </div>
+
+                                    <div class="col-lg-3 col-sm-3 col-xs-12">
+                                        <mat-form-field>
+                                            <input matInput placeholder="Last Name" formControlName="LastName" id="lastName"
+                                                name="lastName" (change)="checkDuplicates()" tabindex="4">
+                                        </mat-form-field>
+                                    </div>
+
+                                    <div class="col-lg-3 col-sm-3 col-xs-12">
+                                        <mat-form-field>
+                                            <input matInput placeholder="Nick Name" formControlName="NickName" id="nickName"
+                                                tabindex="4">
+                                        </mat-form-field>
+
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-lg-3 col-sm-3 col-xs-12">
+                                        <mat-form-field>
+                                            <mat-select placeholder="Gender" formControlName="Sex" tabindex="5"
+                                                (change)="checkDuplicates()">
+                                                <mat-option></mat-option>
+                                                <mat-option *ngFor="let option of gender" [value]="option.itemId">{{option.itemName}}</mat-option>
+                                            </mat-select>
+                                        </mat-form-field>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-lg-3 col-sm-3 col-xs-12">
+                                        <mat-form-field>
+                                            <input placeholder="Date Of Birth" matInput [matDatepicker]="dateOfBirthDatepicker"
+                                                [max]="maxDate" (focus)="dateOfBirthDatepicker.open()" formControlName="DateOfBirth"
+                                                (dateInput)="onDate($event)" (dateChange)="checkDuplicates()"
+                                                (dateChange)="checkAgeForValidation()" tabindex="6" required>
+                                            <mat-datepicker-toggle matSuffix [for]="dateOfBirthDatepicker"></mat-datepicker-toggle>
+                                            <mat-datepicker #dateOfBirthDatepicker name="DateOfBirth" ngDefaultControl></mat-datepicker>
+                                        </mat-form-field>
+                                    </div>
+
+                                    <div class="col-lg-3 col-sm-3 col-xs-12">
+                                        <mat-form-field>
+                                            <input matInput placeholder="Age Years" formControlName="AgeYears" id="ageYears"
+                                                name="ageYears" (keyup)="estimateDob()" (change)="checkDuplicates()"
+                                                (change)="checkAgeForValidation()" required>
+                                        </mat-form-field>
+                                    </div>
+
+                                    <div class="col-lg-3 col-sm-3 col-xs-12">
+                                        <mat-form-field>
+                                            <input matInput placeholder="Age Months" formControlName="AgeMonths" id="ageMonths"
+                                                name="ageMonths" (keyup)="estimateDob()" (change)="checkDuplicates()"
+                                                required>
+                                        </mat-form-field>
+                                    </div>
+
+                                    <div class="col-lg-3 col-sm-3 col-xs-12">
+                                        <label>Date Of Birth Precision </label>
+                                        <div>
+                                            <mat-radio-group formControlName="DobPrecision" [required]="true">
+                                                <mat-radio-button [value]="0" required>Estimated</mat-radio-button>
+                                                <mat-radio-button [value]="1" required>Exact</mat-radio-button>
+                                            </mat-radio-group>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-lg-3 col-sm-3 col-xs-12">
+                                        <mat-form-field>
+                                            <mat-select placeholder="Marital Status" formControlName="MaritalStatus"
+                                                tabindex="7">
+                                                <mat-option></mat-option>
+                                                <mat-option *ngFor="let option of maritalStatus" [value]="option.itemId">{{option.itemName}}</mat-option>
+                                            </mat-select>
+                                        </mat-form-field>
+                                    </div>
+
+                                    <div class="col-lg-3 col-sm-3 col-xs-12">
+                                        <mat-form-field>
+                                            <mat-select placeholder="Education Level" formControlName="EducationLevel"
+                                                tabindex="8">
+                                                <mat-option></mat-option>
+                                                <mat-option *ngFor="let option of educationLevel" [value]="option.itemId">{{option.itemName}}</mat-option>
+                                            </mat-select>
+                                        </mat-form-field>
+                                    </div>
+
+                                    <div class="col-lg-3 col-sm-3 col-xs-12">
+                                        <mat-form-field>
+                                            <mat-select placeholder="Occupation" formControlName="Occupation" tabindex="9">
+                                                <mat-option></mat-option>
+                                                <mat-option *ngFor="let option of occupation" [value]="option.itemId">{{option.itemName}}</mat-option>
+                                            </mat-select>
+                                        </mat-form-field>
+                                    </div>
+
+                                    <div class="col-lg-3 col-sm-3 col-xs-12"></div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-lg-3 col-sm-3 col-xs-12">
+                                        <mat-form-field>
+                                            <mat-select placeholder="Identifier Type" formControlName="IdentifierType"
+                                                (selectionChange)="onIdentifierTypeChange()" tabindex="10">
+                                                <mat-option></mat-option>
+                                                <mat-option *ngFor="let option of personIdentifiers" [value]="option.id">{{option.name}}</mat-option>
+                                            </mat-select>
+                                        </mat-form-field>
+                                    </div>
+
+                                    <div class="col-lg-3 col-sm-3 col-xs-12">
+                                        <mat-form-field>
+                                            <input matInput placeholder="Identifier Number" formControlName="IdentifierNumber"
+                                                id="identifierNumber" name="identifierNumber" tabindex="11">
+                                        </mat-form-field>
+                                    </div>
+                                </div>
+                                <div>
+                                    <button mat-raised-button color="accent" matStepperNext type="button">Next</button>
+                                </div>
+                            </mat-step>
+
+                            <mat-step formGroupName="1" [stepControl]="formArray.get([1])">
+                                <ng-template matStepLabel>Client Location</ng-template>
+                                <div class="row">
+                                    <div class="col-lg-3 col-sm-3 col-xs-12">
+                                        <mat-form-field>
+                                            <mat-select placeholder="County" formControlName="County" (selectionChange)="onCountyChange()">
+                                                <mat-option></mat-option>
+                                                <mat-option *ngFor="let option of counties" [value]="option.countyId">{{option.countyName}}</mat-option>
+                                            </mat-select>
+                                        </mat-form-field>
+                                    </div>
+
+                                    <div class="col-lg-3 col-sm-3 col-xs-12">
+                                        <mat-form-field>
+                                            <mat-select placeholder="Sub County" formControlName="SubCounty"
+                                                (selectionChange)="onSubCountyChange()">
+                                                <mat-option></mat-option>
+                                                <mat-option *ngFor="let option of subCounties" [value]="option.subCountyId">{{option.subCountyName}}</mat-option>
+                                            </mat-select>
+                                        </mat-form-field>
+                                    </div>
+
+                                    <div class="col-lg-3 col-sm-3 col-xs-12">
+                                        <mat-form-field>
+                                            <mat-select placeholder="Ward" formControlName="Ward">
+                                                <mat-option></mat-option>
+                                                <mat-option *ngFor="let option of wards" [value]="option.wardId">{{option.wardName}}</mat-option>
+                                            </mat-select>
+                                        </mat-form-field>
+                                    </div>
+
+                                    <div class="col-lg-3 col-sm-3 col-xs-12">
+                                        <mat-form-field>
+                                            <input matInput placeholder="Nearest Health Facility" formControlName="NearestHealthCenter"
+                                                id="nearestHealthCenter" name="nearestHealthCenter">
+                                        </mat-form-field>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-lg-3 col-sm-3 col-xs-12">
+                                        <mat-form-field>
+                                            <textarea matInput placeholder="Landmark/Village/Locator Information"
+                                                formControlName="Landmark" id="landmark" name="landmark"></textarea>
+                                        </mat-form-field>
+                                    </div>
+                                </div>
+
+                                <div>
+                                    <button mat-raised-button color="primary" matStepperPrevious type="button">Back</button>
+                                    &nbsp;&nbsp;
+                                    <button mat-raised-button color="accent" matStepperNext type="button">Next</button>
+                                </div>
+                            </mat-step>
+
+                            <mat-step formGroupName="2" [stepControl]="formArray.get([2])">
+                                <ng-template matStepLabel>Client Address</ng-template>
+                                <div class="row">
+                                    <div class="col-lg-3 col-sm-3 col-xs-12">
+                                        <mat-form-field>
+                                            <input matInput placeholder="Mobile Number" formControlName="MobileNumber"
+                                                id="mobileNumber" name="mobileNumber" [pattern]="phonePattern">
+                                            <div *ngIf="formGroup.controls['formArray']['controls'][2]['controls'].MobileNumber.errors && (formGroup.controls['formArray']['controls'][2]['controls'].MobileNumber.dirty || formGroup.controls['formArray']['controls'][2]['controls'].MobileNumber.touched)"
+                                                class="alert alert-danger">
+                                                <div [hidden]="!formGroup.controls['formArray']['controls'][2]['controls'].MobileNumber.errors.pattern">
+                                                    Invalid Phone No!
+                                                    <br>
+                                                    Please enter a valid Kenyan mobile phone number. Format
+                                                    ((+2547XXXXXXXX) or (07XXXXXXXX) or (2547XXXXXXXX))
+                                                </div>
+                                            </div>
+                                        </mat-form-field>
+                                    </div>
+
+                                    <div class="col-lg-3 col-sm-3 col-xs-12">
+                                        <mat-form-field>
+                                            <input matInput placeholder="Alternative Mobile Number" formControlName="AlternativeMobileNumber"
+                                                id="alternativeMobileNumber" name="alternativeMobileNumber" [pattern]="phonePattern">
+                                            <div *ngIf="formGroup.controls['formArray']['controls'][2]['controls'].AlternativeMobileNumber.errors 
+                                            && (formGroup.controls['formArray']['controls'][2]['controls'].AlternativeMobileNumber.dirty || formGroup.controls['formArray']['controls'][2]['controls'].AlternativeMobileNumber.touched)"
+                                                class="alert alert-danger">
+                                                <div [hidden]="!formGroup.controls['formArray']['controls'][2]['controls'].AlternativeMobileNumber.errors.pattern">
+                                                    Invalid Phone No!
+                                                    <br>
+                                                    Please enter a valid Kenyan mobile phone number. Format
+                                                    ((+2547XXXXXXXX) or (07XXXXXXXX) or (2547XXXXXXXX))
+                                                </div>
+                                            </div>
+                                        </mat-form-field>
+                                    </div>
+
+                                    <div class="col-lg-3 col-sm-3 col-xs-12">
+                                        <mat-form-field>
+                                            <input matInput placeholder="Email Address" formControlName="EmailAddress"
+                                                id="emailAddress" name="emailAddress" email="true" pattern="[a-zA-Z0-9.-_]{1,}@[a-zA-Z.-]{2,}[.]{1}[a-zA-Z]{2,}">
+                                        </mat-form-field>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <button mat-raised-button color="primary" matStepperPrevious type="button">Back</button>
+                                    &nbsp;&nbsp;
+                                    <button mat-raised-button color="accent" matStepperNext type="button">Next</button>
+                                </div>
+                            </mat-step>
+
+                            <mat-step formGroupName="3" [stepControl]="formArray.get([3])">
+                                <ng-template matStepLabel>Next Of Kin & Emergency Contact</ng-template>
+
+                                <div class="row top-buffer ">
+                                    <button (click)="addRow()" class="btn btn-primary col-md-3">Add Next of Kin or
+                                        Emergency
+                                        Contact
+                                    </button>
+                                </div>
+
+                                <div class="row">&nbsp;</div>
+                                <div class="row">&nbsp;</div>
+
+                                <div class="row">
+                                    <div class="example-container mat-elevation-z8">
+                                        <table class="table table-striped">
+                                            <thead>
+                                                <tr>
+                                                    <th scope="col">#</th>
+                                                    <th scope="col">First Name</th>
+                                                    <th scope="col">Middle Name</th>
+                                                    <th scope="col">Last Name</th>
+                                                    <th scope="col">Gender</th>
+                                                    <th scope="col">Contact Category</th>
+                                                    <th scope="col">Relationship</th>
+                                                    <th scope="col">Mobile Number</th>
+                                                    <th scope="col">Consent</th>
+                                                    <th scope="col">&nbsp;</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr *ngFor="let data of dataSource; let index = index;">
+                                                    <td>{{ index }}</td>
+                                                    <td>{{ data.firstName }}</td>
+                                                    <td>{{ data.middleName }}</td>
+                                                    <td>{{ data.lastName }}</td>
+                                                    <td>{{ data.gender ? data.gender['itemName'] : "" }}</td>
+                                                    <td>{{ data.contactcategory ? data.contactcategory['itemName'] : ""
+                                                        }}</td>
+                                                    <td>{{ data.relationship ? data.relationship['itemName'] : "" }}</td>
+                                                    <td>{{ data.phoneno }}</td>
+                                                    <td>{{ data.consent ? data.consent['itemName'] : "" }}</td>
+                                                    <td [style.pointer-events]="data.disabled">
+                                                        <i style="cursor: pointer;" class="material-icons" (click)="deleteContact(data,
+                                                        index, $event);">
+                                                            delete
+                                                        </i>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+
+                                <div class="row">&nbsp;</div>
+                                <div class="row">&nbsp;</div>
+                                <div class="row">&nbsp;</div>
+                                <div class="row">&nbsp;</div>
+
+                                <div class="row ">
+                                    <button mat-raised-button color="primary" matStepperPrevious type="button ">Back</button>
+                                    &nbsp;&nbsp;
+                                    <button mat-raised-button color="accent" type="submit" (click)="onSubmitForm(1)">Register
+                                        and Continue</button>
+                                    &nbsp;&nbsp;
+                                    <button mat-raised-button color="accent" type="submit" (click)="onSubmitForm(2)">Save
+                                        and Register New</button>
+                                    &nbsp;&nbsp;
+                                    <button mat-raised-button color="accent" type="submit" (click)="closeForm()">Close
+                                        Registration
+                                    </button>
+                                </div>
+                            </mat-step>
+                        </mat-horizontal-stepper>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

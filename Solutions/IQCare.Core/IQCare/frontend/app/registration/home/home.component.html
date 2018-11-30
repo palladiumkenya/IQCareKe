@@ -3,10 +3,10 @@
         <app-clientbrief></app-clientbrief>
     </div>
     <div class="ibox-content">
-        <div class="col-md-2 col-lg-2 col-sm-2">
+        <!--<div class="col-md-2 col-lg-2 col-sm-2">
             <app-leftnav></app-leftnav>
-        </div>
-        <div class="col-md-10 col-lg-10 col-sm-10 animated fadeIn">
+        </div>-->
+        <div class="col-md-12 col-lg-12 col-sm-12 animated fadeIn">
             <div class="panel panel-default">
                 <div class="panel-heading">HOME</div>
                 <div class="panel-body">
@@ -19,7 +19,8 @@
                             <!-- Encounter Date Column -->
                             <ng-container matColumnDef="encounterDate">
                                 <mat-header-cell *matHeaderCellDef> Encounter Date </mat-header-cell>
-                                <mat-cell *matCellDef="let element"> {{element.encounterDate | date: 'dd-MMM-yyyy' }} </mat-cell>
+                                <mat-cell *matCellDef="let element"> {{element.encounterDate | date: 'dd-MMM-yyyy' }}
+                                </mat-cell>
                             </ng-container>
 
                             <ng-container matColumnDef="testType">
@@ -65,7 +66,7 @@
 
                             <ng-container matColumnDef="edit">
                                 <mat-header-cell *matHeaderCellDef></mat-header-cell>
-                                <mat-cell style="cursor: pointer;"  *matCellDef="let element">
+                                <mat-cell style="cursor: pointer;" *matCellDef="let element">
                                     <mat-icon (click)="onEdit(element)"><i className="material-icons">mode_edit</i></mat-icon>
                                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                     <mat-icon (click)="onView(element)"><i className="material-icons">remove_red_eye</i></mat-icon>

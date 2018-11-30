@@ -1,77 +1,45 @@
-﻿using System;
+﻿using IQCare.Common.Infrastructure;
+using IQCare.Common.Services;
+using IQCare.Library;
+using IQCare.Records.BusinessProcess.Command.Lookup;
+using MediatR;
+using Serilog;
+using System;
 using System.Collections.Generic;
-using System.Text;
-using IQCare.Common.BusinessProcess.Services;
-using IQCare.Common.Core.Models;
-using IQCare.Common.Infrastructure;
-using IQCareRecords.Common.BusinessProcess.Command;
 using System.Threading;
 using System.Threading.Tasks;
-using MediatR;
+using County = IQCare.Common.Core.Models.County;
+using SubCountyLookup = IQCare.Common.Core.Models.SubCountyLookup;
 
-namespace IQCareRecords.Common.BusinessProcess.CommandHandlers
+namespace IQCare.Records.BusinessProcess.CommandHandlers.Lookup
 {
-    public class GetSubCountiesCommandHandler:IRequestHandler<GetSubCountiesCommand,Result<AddSubCountiesResponse>>
+    public class GetSubCountiesCommandHandler:IRequestHandler<GetSubCountiesCommand,Result<List<SubCountyLookup>>>
     {
 
         private readonly ICommonUnitOfWork _unitOfWork;
-        List<SubCountyLookup> subcounties = new List<SubCountyLookup>();
-        int CountyId;
-        int SubCountyId;
-
 
         public GetSubCountiesCommandHandler(ICommonUnitOfWork unitOfWork)
         {
             _unitOfWork = unitOfWork ?? throw new ArgumentNullException(nameof(unitOfWork));
         }
 
-
-        public async Task<Result<AddSubCountiesResponse>> Handle (GetSubCountiesCommand request,CancellationToken cancellationToken)
+        public async Task<Result<List<SubCountyLookup>>> Handle(GetSubCountiesCommand request, CancellationToken cancellationToken)
         {
-            try
+            using (_unitOfWork)
             {
-                LookupLogic ll = new LookupLogic(_unitOfWork);
-
-                if (String.IsNullOrEmpty(request.CountyId))
+                try
                 {
-                    CountyId = 0;
+                    CountyService countyService = new CountyService(_unitOfWork);
+                    var subcounties = await countyService.GetSubCountyList(request.CountyId);
+
+                    return Result<List<SubCountyLookup>>.Valid(subcounties);
                 }
-                else
+                catch (Exception e)
                 {
-                    CountyId = Convert.ToInt32(request.CountyId);
+                    Log.Error(e.Message + " " + e.InnerException);
+                    return Result<List<SubCountyLookup>>.Invalid(e.Message);
                 }
-                if (String.IsNullOrEmpty(request.SubcountyId))
-                {
-                    SubCountyId = 0;
-
-                }
-                else
-                {
-                    SubCountyId = Convert.ToInt32(request.SubcountyId);
-                }
-
-
-
-                if (CountyId > 0 && SubCountyId == 0)
-                {
-                    subcounties = await ll.GetSubCountyList(CountyId);
-
-
-                }
-
-                return Result<AddSubCountiesResponse>.Valid(new AddSubCountiesResponse()
-                {
-                    SubCounties = subcounties
-
-
-                });
-
-            }
-            catch(Exception e)
-            {
-                return Result<AddSubCountiesResponse>.Invalid(e.Message);
             }
         }
-
     }
 }

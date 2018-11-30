@@ -3,8 +3,8 @@
 CREATE TABLE NewDrugList (
 	Id INT IDENTITY(1,1) PRIMARY KEY,
 	DrugName varchar(100),
-	Abbreviation varchar(20),
-	Strength varchar(20)
+	Abbreviation varchar(30),
+	Strength varchar(30)
 );
 
 INSERT INTO NewDrugList(DrugName,Abbreviation,strength) VALUES('Dolutegravir-50mg','DTG','50mg');
@@ -15,6 +15,7 @@ INSERT INTO NewDrugList(DrugName,Abbreviation,strength) VALUES('Lopinavir/Ritona
 INSERT INTO NewDrugList(DrugName,Abbreviation,strength) VALUES('Lopinavir/Ritonavir-80mg/20mg/ml','LPV/r','80mg/20mg/ml');
 INSERT INTO NewDrugList(DrugName,Abbreviation,strength) VALUES('Lopinavir/Ritonavir-40mg/10mg','LPV/r','40mg/10mg');
 INSERT INTO NewDrugList(DrugName,Abbreviation,strength) VALUES('Reltegravir-400mg','RAL','400mg');
+INSERT INTO NewDrugList(DrugName,Abbreviation,strength) VALUES('Tenofavir/Lamivudine/Efavirenz/Dolutegravir-300mg/300mg/50mg','TDF/3TC/DTG','300mg/300mg/50mg');
 
 Declare @ItemId int=0,@genericId int,@count int,@counter int=0,@maxId int=0,@minId int=0;
 Declare @drugName varchar(100),@abbreviation varchar(10),@strength varchar(10);
@@ -23,7 +24,8 @@ SET @count=(SELECT count(Id) FROM NewDrugList);
 SET @minId=(SELECT MIN(Id) FROM NewDrugList);
 SET @maxId=(SELECT max(Id) FROM NewDrugList);
 
-WHILE (@minId <@maxId)
+
+WHILE (@minId <=@maxId)
 BEGIN
 	SET @drugName=(SELECT DrugName FROM NewDrugList WHERE Id=@minId);
 	SET @abbreviation=(SELECT Abbreviation FROM NewDrugList WHERE Id=@minId);

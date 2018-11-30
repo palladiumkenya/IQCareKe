@@ -55,26 +55,53 @@ namespace IQCare.Controllers.HTS
             return BadRequest(response);
         }
 
+        [HttpGet("getTestResults/{patientMasterVisitId}/{patientEncounterId}")]
+        public async Task<IActionResult> Get(int patientMasterVisitId, int patientEncounterId)
+        {
+            var response = await _mediator.Send(new GetTestingCommand()
+            {
+                PatientMasterVisitId = patientMasterVisitId,
+                PatientEncounterId = patientEncounterId
+            }, Request.HttpContext.RequestAborted);
+            if (response.IsValid)
+                return Ok(response.Value);
+            return BadRequest(response);
+        }
+
         [HttpPost]
         public async Task<IActionResult> Post([FromBody] AddEncounterCommand addEncounterCommand)
         {
-            var encounter = await _mediator.Send(new AddEncounterVisitCommand
+            int patientMasterVisitId = 0;
+            int patientEncounterId = 0;
+            if (addEncounterCommand.Encounter.PatientEncounterID == 0)
             {
-                PatientId = addEncounterCommand.Encounter.PatientId,
-                ServiceAreaId = addEncounterCommand.Encounter.ServiceAreaId,
-                EncounterType = addEncounterCommand.Encounter.EncounterTypeId,
-                UserId = addEncounterCommand.Encounter.ProviderId,
-                EncounterDate = addEncounterCommand.Encounter.EncounterDate
-            }, Request.HttpContext.RequestAborted);
+                var encounter = await _mediator.Send(new AddEncounterVisitCommand
+                {
+                    PatientId = addEncounterCommand.Encounter.PatientId,
+                    ServiceAreaId = addEncounterCommand.Encounter.ServiceAreaId,
+                    EncounterType = addEncounterCommand.Encounter.EncounterTypeId,
+                    UserId = addEncounterCommand.Encounter.ProviderId,
+                    EncounterDate = addEncounterCommand.Encounter.EncounterDate
+                }, Request.HttpContext.RequestAborted);
 
-            if (encounter.IsValid)
-            {
-                addEncounterCommand.Encounter.PatientEncounterID = encounter.Value.PatientEncounterId;
+                if (encounter.IsValid)
+                {
+                    patientEncounterId = encounter.Value.PatientEncounterId;
+                    addEncounterCommand.Encounter.PatientEncounterID = patientEncounterId;
+                    patientMasterVisitId = encounter.Value.PatientMasterVisitId;
+                }
+                else
+                {
+                    return BadRequest(encounter);
+                }
             }
             else
             {
-                return BadRequest(encounter);
+                patientMasterVisitId = addEncounterCommand.Encounter.PatientMasterVisitId;
+                patientEncounterId = addEncounterCommand.Encounter.PatientEncounterID;
+                addEncounterCommand.Encounter.PatientEncounterID = patientEncounterId;
             }
+            
 
             var consentList = new List<KeyValuePair<string, int>>();
             consentList.Add(new KeyValuePair<string, int>("ConsentToBeTested", addEncounterCommand.Encounter.Consent));
@@ -82,7 +109,7 @@ namespace IQCare.Controllers.HTS
             var consent = await _mediator.Send(new AddConsentCommand()
             {
                 PatientID = addEncounterCommand.Encounter.PatientId,
-                PatientMasterVisitId = encounter.Value.PatientMasterVisitId,
+                PatientMasterVisitId = patientMasterVisitId,
                 ConsentDate = addEncounterCommand.Encounter.EncounterDate,
                 ConsentType = consentList,
                 ServiceAreaId = addEncounterCommand.Encounter.ServiceAreaId,
@@ -95,35 +122,39 @@ namespace IQCare.Controllers.HTS
             }
             else
             {
-                return BadRequest(encounter);
+                return BadRequest(consent);
             }
 
-            var screeningList = new List<KeyValuePair<string, int>>();
-            screeningList.Add(new KeyValuePair<string, int>("TbScreening", addEncounterCommand.Encounter.TbScreening));
-
-            var tbScreening = await _mediator.Send(new AddPatientScreeningCommand()
+            if (addEncounterCommand.Encounter.TbScreening.HasValue)
             {
-                PatientId = addEncounterCommand.Encounter.PatientId,
-                PatientMasterVisitId = encounter.Value.PatientMasterVisitId,
-                ScreeningDate = addEncounterCommand.Encounter.EncounterDate,
-                UserId = addEncounterCommand.Encounter.ProviderId,
-                PersonId = addEncounterCommand.Encounter.PersonId,
-                ScreeningType = screeningList
-            }, Request.HttpContext.RequestAborted);
+                var screeningList = new List<KeyValuePair<string, int>>();
+                screeningList.Add(new KeyValuePair<string, int>("TbScreening", addEncounterCommand.Encounter.TbScreening.Value));
 
-            if (tbScreening.IsValid)
-            {
+                var tbScreening = await _mediator.Send(new AddPatientScreeningCommand()
+                {
+                    PatientId = addEncounterCommand.Encounter.PatientId,
+                    PatientMasterVisitId = patientMasterVisitId,
+                    ScreeningDate = addEncounterCommand.Encounter.EncounterDate,
+                    UserId = addEncounterCommand.Encounter.ProviderId,
+                    PersonId = addEncounterCommand.Encounter.PersonId,
+                    ScreeningType = screeningList
+                }, Request.HttpContext.RequestAborted);
 
+                if (tbScreening.IsValid)
+                {
+
+                }
+                else
+                {
+                    return BadRequest(tbScreening);
+                }
             }
-            else
-            {
-                return BadRequest(tbScreening);
-            }
+            
 
             var response = await _mediator.Send(addEncounterCommand, Request.HttpContext.RequestAborted);
             if (response.IsValid)
             {
-                response.Value.PatientMasterVisitId = encounter.Value.PatientMasterVisitId;
+                response.Value.PatientMasterVisitId = patientMasterVisitId;
                 return Ok(response.Value);
             }
 
@@ -135,25 +166,28 @@ namespace IQCare.Controllers.HTS
         {
             updateEncounterCommand.encounterId = encounterId;
 
-            var screeningList = new List<KeyValuePair<string, int>>();
-            screeningList.Add(new KeyValuePair<string, int>("TbScreening", updateEncounterCommand.Encounter.TbScreening));
-
-            var result = await _mediator.Send(new UpdatePatientScreeningCommand()
+            if (updateEncounterCommand.Encounter.TbScreening.HasValue)
             {
-                ScreeningType = screeningList,
-                PatientMasterVisitId = patientMasterVisitId,
-                PatientId = updateEncounterCommand.Encounter.PatientId,
-                UserId = updateEncounterCommand.Encounter.ProviderId,
-                ScreeningDate = updateEncounterCommand.Encounter.EncounterDate
-            }, Request.HttpContext.RequestAborted);
+                var screeningList = new List<KeyValuePair<string, int>>();
+                screeningList.Add(new KeyValuePair<string, int>("TbScreening", updateEncounterCommand.Encounter.TbScreening.Value));
 
-            if (result.IsValid)
-            {
+                var result = await _mediator.Send(new UpdatePatientScreeningCommand()
+                {
+                    ScreeningType = screeningList,
+                    PatientMasterVisitId = patientMasterVisitId,
+                    PatientId = updateEncounterCommand.Encounter.PatientId,
+                    UserId = updateEncounterCommand.Encounter.ProviderId,
+                    ScreeningDate = updateEncounterCommand.Encounter.EncounterDate
+                }, Request.HttpContext.RequestAborted);
 
-            }
-            else
-            {
-                return BadRequest(result);
+                if (result.IsValid)
+                {
+
+                }
+                else
+                {
+                    return BadRequest(result);
+                }
             }
 
             var response = await _mediator.Send(updateEncounterCommand, Request.HttpContext.RequestAborted);

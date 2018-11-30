@@ -80,6 +80,10 @@
 		<Folder Include="DependancyResolution\" />
 		<Folder Include="App_Start\" />
 	</ItemGroup>
+
+<!--	<ItemGroup>
+	  <ProjectReference Include="..\IQCare.WebApi.Logic\IQCare.WebApi.Logic.csproj" />
+	</ItemGroup>-->
 	
 	<Target Name="PackageTarget" AfterTargets="Build">
     <Copy SourceFiles="@(IntermediateAssembly)" DestinationFolder="$(WebDir)" SkipUnchangedFiles="false" />

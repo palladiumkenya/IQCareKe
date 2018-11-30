@@ -2,6 +2,7 @@
 using IQCare.Common.BusinessProcess.Services;
 using IQCare.Common.Core.Models;
 using IQCare.Common.Infrastructure;
+using IQCare.Library;
 using MediatR;
 using Serilog;
 using System;
