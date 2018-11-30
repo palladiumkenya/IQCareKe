@@ -31,6 +31,9 @@ namespace IQCare.Web.CCC.WebService
         private string Msg { get; set; }
         private int Result{get; set;}
 
+        public string DateAssessed { get; set; }
+
+
         [WebMethod(EnableSession = true)]
         public string addNeonatalMilestones(int patientId, int patientMasterVisitId, int createdBy, int milestoneAssessed, DateTime milestoneOnsetDate, int milestoneAchieved, int milestoneStatus, string milestoneComment)
         {
@@ -41,11 +44,11 @@ namespace IQCare.Web.CCC.WebService
                     PatientId = patientId,
                     PatientMasterVisitId = patientMasterVisitId,
                     CreatedBy = createdBy,
-                    MilestoneAssessedId = milestoneAssessed,
-                    MilestoneDate = milestoneOnsetDate,
-                    MilestoneAchievedId = milestoneAchieved,
-                    MilestoneStatusId = milestoneStatus,
-                    MilestoneComments = milestoneComment
+                    TypeAssessedId = milestoneAssessed,
+                    DateAssessed = milestoneOnsetDate,
+                    AchievedId = milestoneAchieved,
+                    StatusId = milestoneStatus,
+                    Comment = milestoneComment
                 };
                 var neonatal = new PatientNeonatalManager();
                 //Check if milestone assessed exists
@@ -55,7 +58,7 @@ namespace IQCare.Web.CCC.WebService
                 int existingMilestone = 0;
                 foreach (var items in list)
                 {
-                    existingMilestone = items.MilestoneAssessedId;
+                    existingMilestone = items.TypeAssessedId;
                 }
 
                 if(existingMilestone == milestoneAssessed)
@@ -206,6 +209,7 @@ namespace IQCare.Web.CCC.WebService
         public ArrayList LoadMilestones()
         {
             ArrayList rows = new ArrayList();
+            
             var MilestonesLogic = new NeonatalHistoryLogic();
             List<PatientMilestone> list = new List<PatientMilestone>();
             list = MilestonesLogic.getPatientMilestones(Convert.ToInt32(Session["PatientPK"]));
@@ -213,8 +217,20 @@ namespace IQCare.Web.CCC.WebService
             {
                 foreach (var items in list)
                 {
-                    string milestoneAssessed = LookupLogic.GetLookupNameById(items.MilestoneAssessedId).ToString();
-                    string[] i = new string[7] { items.Id.ToString(), LookupLogic.GetLookupNameById(items.MilestoneAssessedId).ToString(), items.MilestoneDate.ToString("dd-MMM-yyyy"), items.MilestoneAchievedId == 1 ? "Yes" : "No", LookupLogic.GetLookupNameById(items.MilestoneStatusId).ToString(), items.MilestoneComments.ToString(), "<button type='button' class='btnDelete btn btn-danger fa fa-minus-circle btn-fill' > Remove</button>" };
+                    string milestoneAssessed = LookupLogic.GetLookupNameById(items.TypeAssessedId).ToString();
+                    
+                    if (items.DateAssessed.HasValue)
+                    {
+                        DateAssessed = items.DateAssessed.Value.ToString("dd-MMM-yyyy");
+
+                    }
+                    else
+                    {
+                        DateAssessed = "";
+                    }
+                    
+                 
+                    string[] i = new string[7] { items.Id.ToString(), LookupLogic.GetLookupNameById(items.TypeAssessedId).ToString(), DateAssessed, items.AchievedId == 1 ? "Yes" : "No", LookupLogic.GetLookupNameById(items.StatusId).ToString(), items.Comment.ToString(), "<button type='button' class='btnDelete btn btn-danger fa fa-minus-circle btn-fill' > Remove</button>" };
                     rows.Add(i);
                 }
             }
