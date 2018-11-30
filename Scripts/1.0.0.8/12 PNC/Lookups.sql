@@ -96,10 +96,10 @@ If Not Exists(Select 1 From LookupMasterItem where LookupMasterId=(SELECT TOP 1 
 If Not Exists(Select 1 From LookupMaster where Name='PostPartumHaemorrhage') Begin INSERT INTO LookupMaster (Name, DisplayName, DeleteFlag) VALUES ('PostPartumHaemorrhage','PostPartumHaemorrhage',0); End
 
 -- LookupMasterItem
-If Not Exists(Select 1 From LookupMasterItem where LookupMasterId=(SELECT TOP 1 Id FROM LookupMaster WHERE Name='PostPartumHaemorrhage') and LookupItemId=(SELECT TOP 1 Id FROM LookupItem WHERE Name='Contracted')) Begin Insert Into LookupMasterItem(LookupMasterId ,LookupItemId,DisplayName, OrdRank)VALUES((SELECT TOP 1 Id FROM LookupMaster WHERE Name='PostPartumHaemorrhage'),(SELECT TOP 1 Id FROM LookupItem WHERE Name='Contracted'),'Contracted',1); end
+/*If Not Exists(Select 1 From LookupMasterItem where LookupMasterId=(SELECT TOP 1 Id FROM LookupMaster WHERE Name='PostPartumHaemorrhage') and LookupItemId=(SELECT TOP 1 Id FROM LookupItem WHERE Name='Contracted')) Begin Insert Into LookupMasterItem(LookupMasterId ,LookupItemId,DisplayName, OrdRank)VALUES((SELECT TOP 1 Id FROM LookupMaster WHERE Name='PostPartumHaemorrhage'),(SELECT TOP 1 Id FROM LookupItem WHERE Name='Contracted'),'Contracted',1); end
 If Not Exists(Select 1 From LookupMasterItem where LookupMasterId=(SELECT TOP 1 Id FROM LookupMaster WHERE Name='PostPartumHaemorrhage') and LookupItemId=(SELECT TOP 1 Id FROM LookupItem WHERE Name='Not Contracted')) Begin Insert Into LookupMasterItem(LookupMasterId ,LookupItemId,DisplayName, OrdRank)VALUES((SELECT TOP 1 Id FROM LookupMaster WHERE Name='PostPartumHaemorrhage'),(SELECT TOP 1 Id FROM LookupItem WHERE Name='Not Contracted'),'Not Contracted',2); end 
 If Not Exists(Select 1 From LookupMasterItem where LookupMasterId=(SELECT TOP 1 Id FROM LookupMaster WHERE Name='PostPartumHaemorrhage') and LookupItemId=(SELECT TOP 1 Id FROM LookupItem WHERE Name='Other')) Begin Insert Into LookupMasterItem(LookupMasterId ,LookupItemId,DisplayName, OrdRank)VALUES((SELECT TOP 1 Id FROM LookupMaster WHERE Name='PostPartumHaemorrhage'),(SELECT TOP 1 Id FROM LookupItem WHERE Name='Other'),'Other',3); end 
-
+*/
 
 ------------PNCEpisiotomy
 -- master

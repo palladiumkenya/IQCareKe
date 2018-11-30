@@ -95,6 +95,10 @@ If Not Exists(Select 1 From LookupMasterItem where LookupMasterId=(SELECT TOP 1 
 -- master
 If Not Exists(Select 1 From LookupMaster where Name='PostPartumHaemorrhage') Begin INSERT INTO LookupMaster (Name, DisplayName, DeleteFlag) VALUES ('PostPartumHaemorrhage','PostPartumHaemorrhage',0); End
 
+-- lookupitem
+If Not Exists(Select 1 From LookupItem where Name='Absent') Begin INSERT INTO LookupItem (Name, DisplayName, DeleteFlag) VALUES ('Absent','Absent',0); End
+If Not Exists(Select 1 From LookupItem where Name='Present') Begin INSERT INTO LookupItem (Name, DisplayName, DeleteFlag) VALUES ('Present','Present',0); End
+
 -- LookupMasterItem
 If Not Exists(Select 1 From LookupMasterItem where LookupMasterId=(SELECT TOP 1 Id FROM LookupMaster WHERE Name='PostPartumHaemorrhage') and LookupItemId=(SELECT TOP 1 Id FROM LookupItem WHERE Name='Absent')) Begin Insert Into LookupMasterItem(LookupMasterId ,LookupItemId,DisplayName, OrdRank)VALUES((SELECT TOP 1 Id FROM LookupMaster WHERE Name='PostPartumHaemorrhage'),(SELECT TOP 1 Id FROM LookupItem WHERE Name='Absent'),'Absent',1); end
 If Not Exists(Select 1 From LookupMasterItem where LookupMasterId=(SELECT TOP 1 Id FROM LookupMaster WHERE Name='PostPartumHaemorrhage') and LookupItemId=(SELECT TOP 1 Id FROM LookupItem WHERE Name='Present')) Begin Insert Into LookupMasterItem(LookupMasterId ,LookupItemId,DisplayName, OrdRank)VALUES((SELECT TOP 1 Id FROM LookupMaster WHERE Name='PostPartumHaemorrhage'),(SELECT TOP 1 Id FROM LookupItem WHERE Name='Present'),'Present',2); end 
