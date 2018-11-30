@@ -153,7 +153,11 @@
                             [showFirstLastButtons]="true">
                         </mat-paginator>
 
-                        <div *ngIf="dataSource.data.length === 0 && afterSearch">No records found</div>
+                        <div *ngIf="dataSource.data.length === 0 && afterSearch" style="background-color: #FFC200; width: 100%;">
+                            <span style="font-size:16px; color: white;">
+                                No records found
+                            </span>
+                        </div>
                     </div>
 
                     <div>

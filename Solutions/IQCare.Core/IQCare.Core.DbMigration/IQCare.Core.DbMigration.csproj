@@ -14,9 +14,9 @@
     <None Remove="Scripts\1.0.0.8\HEI\Lookups.sql" />
     <None Remove="Scripts\1.0.0.8\HEI\PatientMilestone.sql" />
     <None Remove="Scripts\1.0.0.8\HEI\Vaccination.sql" />
-    <None Remove="Scripts\1.0.0.8\MATERNITY\12_Insert_MaternityEncounter.sql" />
-    <None Remove="Scripts\1.0.0.8\MATERNITY\Insert_Baby_Birth_Outcome_Lookup - Copy.sql" />
-    <None Remove="Scripts\1.0.0.8\MATERNITY\Insert_Drug_Administration_Lookup.sql" />
+    <None Remove="Scripts\1.0.0.8\MATERNITY\12_SO_Insert_MaternityEncounter.sql" />
+    <None Remove="Scripts\1.0.0.8\MATERNITY\13_SO_Insert_Baby_Birth_Outcome_Lookup.sql" />
+    <None Remove="Scripts\1.0.0.8\MATERNITY\14_SO_Insert_Drug_Administration_Lookup.sql" />
     <None Remove="Scripts\1.0.0.8\PMTCT\01_Insert_PNC_LookUp_Data.sql" />
     <None Remove="Scripts\1.0.0.8\PMTCT\02_Create_Table_PatientCounselling.sql" />
     <None Remove="Scripts\1.0.0.8\PMTCT\03_CreateTable_PatientDelivery.sql" />
@@ -109,9 +109,9 @@
     <EmbeddedResource Include="Scripts\1.0.0.8\HEI\Lookups.sql" />
     <EmbeddedResource Include="Scripts\1.0.0.8\HEI\PatientMilestone.sql" />
     <EmbeddedResource Include="Scripts\1.0.0.8\HEI\Vaccination.sql" />
-    <EmbeddedResource Include="Scripts\1.0.0.8\MATERNITY\12_Insert_MaternityEncounter.sql" />
-    <EmbeddedResource Include="Scripts\1.0.0.8\MATERNITY\Insert_Baby_Birth_Outcome_Lookup - Copy.sql" />
-    <EmbeddedResource Include="Scripts\1.0.0.8\MATERNITY\Insert_Drug_Administration_Lookup.sql" />
+    <EmbeddedResource Include="Scripts\1.0.0.8\MATERNITY\12_SO_Insert_MaternityEncounter.sql" />
+    <EmbeddedResource Include="Scripts\1.0.0.8\MATERNITY\13_SO_Insert_Baby_Birth_Outcome_Lookup.sql" />
+    <EmbeddedResource Include="Scripts\1.0.0.8\MATERNITY\14_SO_Insert_Drug_Administration_Lookup.sql" />
     <EmbeddedResource Include="Scripts\1.0.0.8\PMTCT\01_Insert_PNC_LookUp_Data.sql" />
     <EmbeddedResource Include="Scripts\1.0.0.8\PMTCT\02_Create_Table_PatientCounselling.sql" />
     <EmbeddedResource Include="Scripts\1.0.0.8\PMTCT\03_CreateTable_PatientDelivery.sql" />
