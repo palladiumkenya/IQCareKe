@@ -25,7 +25,7 @@ namespace IQCare.Common.BusinessProcess.CommandHandlers.Encounter
                 try
                 {
                     var masterVisits = await _unitOfWork.Repository<Core.Models.PatientMasterVisit>()
-                        .Get(x => x.PatientId == request.PatientId && x.VisitDate == request.EncounterDate)
+                        .Get(x => x.PatientId == request.PatientId && x.VisitDate == request.EncounterDate && x.ServiceId == request.ServiceAreaId)
                         .ToListAsync();
 
                     if (masterVisits.Count > 0)
