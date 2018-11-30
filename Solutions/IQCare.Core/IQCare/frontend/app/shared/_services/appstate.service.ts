@@ -41,11 +41,15 @@ export class AppStateService {
     }
 
     public initializeAppState(): Promise<any> {
-        const personId = localStorage.getItem('personId');
+        const personId = JSON.parse(localStorage.getItem('personId'));
         const patientId = localStorage.getItem('patientId');
         const patientMasterVisitId = localStorage.getItem('patientMasterVisitId');
         const htsEncounterId = localStorage.getItem('htsEncounterId');
 
+
+        if (personId) {
+            this.store.dispatch(new Consent.PersonId(personId));
+        }
         const InData = {
             'personId': personId,
             'patientId': patientId,

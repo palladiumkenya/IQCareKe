@@ -217,6 +217,23 @@
 
 							   <asp:LinkButton ID="menuNewEncounter" ClientIDMode="Static" runat="server" OnClick="New_Encounter_Click" CssClass="list-group-item">
 								  <span class="fa fa-user-md fa-2x pull-left text-info"></span><strong class="text-info">New Clinical Encounter</strong></asp:LinkButton>
+                               
+                               <asp:LinkButton ID="menuScreening" ClientIDMode="Static" runat="server" CssClass="list-group-item" OnClick="New_Depression_Click">
+								  <span class="fa fa-stethoscope fa-lg pull-left text-info  "></span><strong class="text-info">DepressionScreening</strong></asp:LinkButton>
+                                
+                             <asp:LinkButton ID="menuAlcoholScreening" ClientIDMode="Static" runat="server" CssClass="list-group-item" OnClick="New_AlcoholScreening_Click">
+								  <span class="fa fa-stethoscope fa-lg pull-left text-info  "></span><strong class="text-info">Alcohol And Drug Abuse Screening </strong></asp:LinkButton>   
+                             
+                             <asp:LinkButton ID="menuGenderBasedScreening" ClientIDMode="Static" runat="server" CssClass="list-group-item" OnClick="New_GBVScreening_Click">
+								  <span class="fa fa-stethoscope fa-lg pull-left text-info  "></span><strong class="text-info">Gender Based Violence Screening </strong></asp:LinkButton>  
+                               
+                               <asp:LinkButton ID="menuEnhanceAdherence" ClientIDMode="Static" runat="server" OnClick=" New_EnhanceAdherence_Click"  CssClass="list-group-item">
+								  <span class="fa fa-heart fa-lg pull-left text-info"></span><strong class="text-info">EnhanceAdherence</strong></asp:LinkButton>
+                               
+
+                                 <asp:LinkButton ID="menuBarriersAdherence" ClientIDMode="Static" runat="server" OnClick="New_AdherenceBarriers_Click"  CssClass="list-group-item">
+								  <span class="fa fa-exclamation-triangle fa-lg pull-left text-info"></span><strong class="text-info">Barriers To Adherence</strong></asp:LinkButton>
+
 
                              <asp:LinkButton ID="menuClinicalSummary" ClientIDMode="Static" runat="server" OnClick="Clinical_Summary_Click" CssClass="list-group-item">
 								  <span class="fa fa-bars fa-2x pull-left text-info"></span><strong class="text-info">Clinical Summary</strong></asp:LinkButton>
@@ -515,7 +532,11 @@
 				$("#menuFamilyTesting").hide();
 				$("#MenuOneTimeEventsTracker").hide();
 				$("#menuStopEncounter").hide();
-
+                $("#menuScreening").hide();
+                $("#menuGenderBasedScreening").hide();
+                $("#menuAlcoholScreening").hide();
+                $("#menuEnhanceAdherence").hide();
+                $("#menuBarriersAdherence").hide();
 			   // $("#menuPatientHome").hide();
 				$("#menuPatientAppointments").hide();
 				$("#menuPatientCareEnded").hide();
@@ -542,7 +563,12 @@
 				$("#menuBaseline").show();
 				$("#menuFamilyTesting").show();
 				$("#MenuOneTimeEventsTracker").show();
-				$("#menuStopEncounter").show();
+                $("#menuStopEncounter").show();
+                $("#menuScreening").show();
+                $("#menuGenderBasedScreening").show();
+                $("#menuAlcoholScreening").show();
+                $("#menuEnhanceAdherence").show();
+                $("#menuBarriersAdherence").show();
 				//$("#menuNewEncounter").hide();
 				$("#menuPatientHome").show();
 				$("#menuPatientAppointments").show();
@@ -579,7 +605,12 @@
 				$("#MenuOneTimeEventsTracker").hide();
 				$("#menuStopEncounter").hide();
 		        $("#titlePatientEncounter").hide();
-			    $("#menuPatientHome").hide();
+                $("#menuPatientHome").hide();
+                $("#menuScreening").hide();
+                $("#menuGenderBasedScreening").hide();
+                $("#menuAlcoholScreening").hide();
+                $("#menuEnhanceAdherence").hide();
+                $("#menuBarriersAdherence").hide();
 				$("#menuPatientAppointments").hide();
 				$("#menuPatientCareEnded").hide();
 				$("#menuScheduleAppointments").hide();

@@ -8,4 +8,5 @@ interface AppState {
     isPnsTracingDone: boolean;
     clearState: any;
     service: string;
+    PersonId: number;
 }

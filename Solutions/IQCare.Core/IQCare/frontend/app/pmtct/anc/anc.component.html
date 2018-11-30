@@ -20,7 +20,9 @@
                                       <!--  <app-visit-details (visitDetails)="visitDetails" [visitDetailsOptions]="visitDetailsOptions"
                                             (notify)="onVisitDetailsNotify($event)" (nextStep)="onSaveVisitDetails($event)"></app-visit-details> -->
                                         <app-hei-visit-details (notify)="onVisitDetailsNotify($event)"  [formtype]="formType"
-                                                               [visitDate]="visitDate" [visitType]="visitType" ></app-hei-visit-details>
+                                                               [visitDate]="visitDate" [visitType]="visitType" [patientId]="patientId" [serviceAreaId]="serviceAreaId"
+
+                                        ></app-hei-visit-details>
 
                                         <div class="">
                                             <app-mother-profile [patientId]="patientId" (notify)="OnMotherProfileNotify($event)"></app-mother-profile>
@@ -51,7 +53,10 @@
                                                 HIV Status
                                             </span>
                                         </ng-template>
-                                        <app-anc-hivtesting (notify)="onHivStatusNotify($event)" [hivTestingOptions]="hivTestingOptions"></app-anc-hivtesting>
+                                        <app-anc-hivtesting (notify)="onHivStatusNotify($event)" [hivTestingOptions]="hivTestingOptions"
+                                                            [isEdit]="isEdit"
+                                                            [PatientId]="patientId"
+                                                            [PatientMasterVisitId]="patientMasterVisitId"></app-anc-hivtesting>
 
                                         <div>
                                             <button mat-raised-button color="primary" matStepperPrevious type="button">Previous</button>
@@ -113,7 +118,9 @@
                                         <ng-template matStepLabel><span matTooltip="Referrals & Next Appointment">Referrals</span>
                                         </ng-template>
                                         <app-referrals [referralFormOptions]="referralFormOptions" (notify)="onReferralNotify($event)"
-                                        ></app-referrals>
+                                                        [isEdit]="isEdit"
+                                                       [PatientId]="patientId"
+                                                       [PatientMasterVisitId]="visitId"></app-referrals>
 
                                         <div>
                                             <button mat-raised-button color="primary" matStepperPrevious type="button">Previous</button>

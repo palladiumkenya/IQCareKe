@@ -55,7 +55,9 @@ import { CheckDuplicatesComponent } from './person/check-duplicates/check-duplic
         MatSnackBarModule, MatStepperModule, MatTabsModule, MatToolbarModule, MatTooltipModule,
         SharedModule
     ],
-    declarations: [SearchComponent, RegisterComponent, ViewComponent, PersoncontactsComponent, InlineSearchComponent, CheckDuplicatesComponent],
+    declarations: [SearchComponent, RegisterComponent,
+        ViewComponent, PersoncontactsComponent,
+        InlineSearchComponent, CheckDuplicatesComponent],
     providers: [
         CountyResolver,
         CountyService,

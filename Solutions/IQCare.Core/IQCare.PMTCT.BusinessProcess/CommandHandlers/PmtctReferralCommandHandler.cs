@@ -28,7 +28,7 @@ namespace IQCare.PMTCT.BusinessProcess.CommandHandlers
                 try
                 {
                     PmtctReferralView pmtctReferralView = await _unitOfWork.Repository<PmtctReferralView>()
-                        .Get(x => x.PatientId == request.PatientId).FirstOrDefaultAsync();
+                        .Get(x => x.PatientId == request.PatientId && x.PatientMasterVisitId==request.PatientMasterVisitId).FirstOrDefaultAsync();
                     return Result<PmtctReferralView>.Valid(pmtctReferralView);
                 }
                 catch (Exception e)

@@ -8,9 +8,10 @@
 <%@ Register Src="~/CCC/UC/ucPatientLabs.ascx" TagPrefix="uc" TagName="ucPatientLabs" %>
 <%@ Register Src="~/CCC/UC/ucPatientSychosocialCriteria.ascx" TagPrefix="uc" TagName="ucPatientPsycho" %>
 <%@ Register Src="~/CCC/UC/ucNeonatalHistory.ascx" TagPrefix="uc" TagName="ucNeonatalHistory" %>
-<%@ Register Src="~/CCC/UC/Adherence/ucAdherenceBarriersHome.ascx" TagPrefix="uc" TagName="ucAdherenceBarriers" %>
-<%--<%@ Register Src="~/CCC/UC/Depression/ucScreeningHome.ascx" TagPrefix="uc" TagName="ucHealthScreening" %>--%>
-<%@ Register Src="~/CCC/UC/EnhanceAdherenceCounselling/ucEnhanceAdherenceHome.ascx" TagPrefix="uc" TagName="ucEnhanceAdherenceHome"%> 
+<%--@ Register Src="~/CCC/UC/Adherence/ucAdherenceBarriersHome.ascx" TagPrefix="uc" TagName="ucAdherenceBarriers" --%>
+<%--@ Register Src="~/CCC/UC/Depression/ucScreeningHome.ascx" TagPrefix="uc" TagName="ucHealthScreening" --%>
+<%@ Register TagPrefix="uc" TagName="tnDisclosure" Src="~/CCC/UC/Depression/ucDisclosure.ascx" %>
+<%--@ Register Src="~/CCC/UC/EnhanceAdherenceCounselling/ucEnhanceAdherenceHome.ascx" TagPrefix="uc" TagName="ucEnhanceAdherenceHome"--%> 
 
 <asp:Content ID="Content1" ContentPlaceHolderID="IQCareContentPlaceHolder" runat="server">
     
@@ -21,12 +22,12 @@
 
         <ul class="nav nav-tabs" role="tablist">
             <li role="presentation" class="active"><a href="#ARTReadiness" aria-controls="ARTReadiness" role="tab" data-toggle="tab"><i class="fa fa-flask fa-lg" aria-hidden="true"></i> ART Readiness Assessment</a></li>
-            <li role="presentation" id="enhanceadherencetab"><a href="#EnhanceAdherence" aria-controls="EnhanceAdherence" role="tab" data-toggle="tab" id="loadEnhanceAdherence"><i class="fa fa-heart fa-lg" aria-hidden="true"></i> Enhance Adherence</a></li>
-            <li role="presentation"><a href="#adherencebarriers" aria-controls="adherencebarriers" role="tab" data-toggle="tab" id="loadAdherenceBarriers"><i class="fa fa-exclamation-triangle fa-lg" aria-hidden="true"></i> Barriers to Adherence</a></li>
+           <%-- <li role="presentation" id="enhanceadherencetab"><a href="#EnhanceAdherence" aria-controls="EnhanceAdherence" role="tab" data-toggle="tab" id="loadEnhanceAdherence"><i class="fa fa-heart fa-lg" aria-hidden="true"></i> Enhance Adherence</a></li>--%> 
+            <%--<li role="presentation"><a href="#adherencebarriers" aria-controls="adherencebarriers" role="tab" data-toggle="tab" id="loadAdherenceBarriers"><i class="fa fa-exclamation-triangle fa-lg" aria-hidden="true"></i> Barriers to Adherence</a></li>--%>
             <li role="presentation" class=""><a href="#encounter" aria-controls="encounter" role="tab" data-toggle="tab"><i class="fa fa-exchange fa-lg" aria-hidden="true"></i> Clinical Encounter</a></li>
             <li role="presentation"><a href="#vlTracker" aria-controls="vlTracker" role="tab" data-toggle="tab"><i class="fa fa-line-chart fa-lg" aria-hidden="true"></i> Viraload Tracker</a></li>
            
-            <li role="presentation"><a href="#healthscreening" aria-controls="healthscreening" role="tab" data-toggle="tab" id="loadHealthScreening"><i class="fa fa-stethoscope fa-lg" aria-hidden="true"></i> Screening</a></li>
+            <li role="presentation"><a href="#disclosurescreening" aria-controls="disclosurescreening" role="tab" data-toggle="tab" id="loaddisclosurescreening"><i class="fa fa-stethoscope fa-lg" aria-hidden="true"></i>Disclosure Screening</a></li>
             
             <%--<li role="presentation"><a href="#Summary" aria-controls="Test Summary" role="tab" data-toggle="tab"><i class="fa fa-tint fa-lg" aria-hidden="true"></i>Test Summary</a></li>--%>
      
@@ -110,17 +111,18 @@
             <%--       <div id="container" style="min-width: 450px; height: 300px; margin: 0 auto"></div> --%>
                       <!-- pw .implementation of viral load tracker line graph here-->
                 </div><!-- .viraload tracker-->
-                <div role="tabpanel" class="tab-pane fade" id="adherencebarriers">
-                    <uc:ucAdherenceBarriers runat="server" id="ucAdherenceBarriersHome" /> 
+                 <%-- <div role="tabpanel" class="tab-pane fade" id="adherencebarriers">
+                    <uc:ucAdherenceBarriers runat="server" id="ucAdherenceBarriersHome" /> --%>
                     <%--<div class="loading" style="display: none;"><img src="../../Images/PEPloading.gif" /></div>--%>
-                </div>
-                <div role="tabpanel" class="tab-pane fade" id="healthscreening">
+                <%--</div>--%>
+                <div role="tabpanel" class="tab-pane fade" id="disclosurescreening">
+                    <uc:tnDisclosure runat="server" ID="ucDisclosure" />
                     <div class="loading" style="display: none;"><img src="../../Images/PEPloading.gif" /></div>
                 </div>
-                <div role="tabpanel" class="tab-pane fade" id="EnhanceAdherence">
+               <%-- <div role="tabpanel" class="tab-pane fade" id="EnhanceAdherence">
                     <uc:ucEnhanceAdherenceHome runat="server" id="ucEnhanceAdherenceHome" /> 
-                </div>
-                <%--<div role="tabpanel" class="tab-pane fade" id="EnhanceAdherence">
+                </div>--%>
+             <%--   <div role="tabpanel" class="tab-pane fade" id="EnhanceAdherence">
                    <uc:ucEnhanceAdherence runat="server" id="ucEnhanceAdherence" />
                  </div>--%>
         </div>
@@ -564,11 +566,11 @@
         //    //$("#adherencebarriers .loading").hide();
         //});
 
-        $("#loadHealthScreening").click(function () {
-            $("#healthscreening .loading").show();
-            $("#healthscreening").load("../UC/Depression/ScreeningHome.aspx");
-            //$("#healthscreening .loading").hide();
-        });
+        //$("#loadHealthScreening").click(function () {
+        //    $("#healthscreening .loading").show();
+        //    $("#healthscreening").load("../Screening/PatientDisclosure.aspx");
+        //    //$("#healthscreening .loading").hide();
+        //});
     </script>
 
 </asp:Content>

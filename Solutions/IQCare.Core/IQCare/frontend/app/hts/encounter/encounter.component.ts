@@ -9,6 +9,7 @@ import { AppEnum } from '../../shared/reducers/app.enum';
 import { SnotifyService } from 'ng-snotify';
 import { NotificationService } from '../../shared/_services/notification.service';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import * as moment from 'moment';
 
 declare var $: any;
 
@@ -193,6 +194,7 @@ export class EncounterComponent implements OnInit {
     }
 
     editEncounter(encounterID: number, patientMasterVisitId: number) {
+        this.encounter.EncounterDate = moment(this.encounter.EncounterDate).toDate().toDateString();
         this._encounterService.editEncounter(this.encounter, encounterID, patientMasterVisitId).subscribe((res) => {
             this.snotifyService.success('Successfully edited encounter', 'Encounter', this.notificationService.getConfig());
             this.zone.run(() => { this.router.navigate(['/registration/home'], { relativeTo: this.route }); });
@@ -207,6 +209,7 @@ export class EncounterComponent implements OnInit {
         const isConsented = this.encounter.Consent;
         const testedAs = this.encounter.TestedAs;
         this.encounter.PatientMasterVisitId = 0;
+        this.encounter.EncounterDate = moment(this.encounter.EncounterDate).toDate().toDateString();
 
         this._encounterService.addEncounter(this.encounter).subscribe(data => {
             console.log(data);

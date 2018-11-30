@@ -21,6 +21,8 @@ import { PartnerTestingCommand } from '../_models/PartnerTestingCommand';
 import { MaternityCounsellingCommand } from '../maternity/commands/maternity-counselling-command';
 import { MaternityService } from '../_services/maternity.service';
 import { PatientScreeningCommand } from '../_models/PatientScreeningCommand';
+import {VisitDetailsCommand} from '../_models/visit-details-command';
+import * as moment from 'moment';
 
 @Component({
     selector: 'app-pnc',
@@ -315,16 +317,29 @@ export class PncComponent implements OnInit {
 
         // const motherExaminationTypeId = this.motherExaminationOptions.filter(obj => obj.masterName == 'MotherExamination');
 
-        const pncVisitDetailsCommand: PncVisitDetailsCommand = {
+       /* const pncVisitDetailsCommand: PncVisitDetailsCommand = {
             PatientId: this.patientId,
             ServiceAreaId: this.serviceAreaId,
-            VisitDate: this.visitDetailsFormGroup.value[0]['visitDate'],
+            VisitDate: moment(this.visitDetailsFormGroup.value[0]['visitDate']).toDate(),
             VisitNumber: this.visitDetailsFormGroup.value[0]['visitNumber'],
             VisitType: this.visitDetailsFormGroup.value[0]['visitType'],
             UserId: this.userId,
             DaysPostPartum: this.visitDetailsFormGroup.value[0]['dayPostPartum'],
             PatientMasterVisitId: this.patientMasterVisitId
-        };
+        };*/
+
+        const visitDetailsCommand = {
+            PatientId: parseInt(this.patientId.toString(), 10),
+            ServiceAreaId: parseInt(this.serviceAreaId.toString(), 10),
+            PregnancyId: 0,
+            PatientMasterVisitId: this.patientMasterVisitId,
+            VisitDate: moment(this.visitDetailsFormGroup.value[0]['visitDate']).toDate(),
+            VisitNumber: parseInt(this.visitDetailsFormGroup.value[0]['visitNumber'], 10),
+            DaysPostPartum: this.visitDetailsFormGroup.value[0]['dayPostPartum'],
+            VisitType: this.visitDetailsFormGroup.value[0]['visitType'],
+            UserId: this.userId
+        }as VisitDetailsCommand;
+
 
         const hivStatusCommand: HivStatusCommand = {
             PersonId: this.personId,
@@ -347,7 +362,7 @@ export class PncComponent implements OnInit {
             TbScreening: null,
             ServiceAreaId: this.serviceAreaId,
             EncounterTypeId: 1,
-            EncounterDate: this.visitDetailsFormGroup.value[0]['visitDate'],
+            EncounterDate: moment(this.visitDetailsFormGroup.value[0]['visitDate']).toDate(),
             EncounterType: this.hivStatusFormGroup.value[0]['testType']
         };
 
@@ -375,7 +390,7 @@ export class PncComponent implements OnInit {
                 hivTestsCommand.Testing.push({
                     KitId: this.hiv_status_table_data[i][j]['kitname']['itemId'],
                     KitLotNumber: this.hiv_status_table_data[i][j]['lotnumber'],
-                    ExpiryDate: this.hiv_status_table_data[i][j]['expirydate'],
+                    ExpiryDate: moment(this.hiv_status_table_data[i][j]['expirydate']).toDate(),
                     Outcome: this.hiv_status_table_data[i][j]['testresult']['itemId'],
                     TestRound: this.hiv_status_table_data[i][j]['testtype']['itemName'] == 'HIV Test-1' ? 1 : 2,
                 });
@@ -408,7 +423,7 @@ export class PncComponent implements OnInit {
             PatientId: this.patientId,
             PatientMasterVisitId: this.patientMasterVisitId,
             ServiceAreaId: this.serviceAreaId,
-            AppointmentDate: this.diagnosisReferralAppointmentFormGroup.value[2]['nextAppointmentDate'],
+            AppointmentDate: moment(this.diagnosisReferralAppointmentFormGroup.value[2]['nextAppointmentDate']).toDate(),
             Description: this.diagnosisReferralAppointmentFormGroup.value[2]['remarks'],
             StatusDate: null,
             DifferentiatedCareId: 0,
@@ -543,7 +558,7 @@ export class PncComponent implements OnInit {
             PatientMasterVisitId: this.patientMasterVisitId,
             ScreeningTypeId: screeningTypeId,
             ScreeningDone: isCacxDone[0].itemName == 'Yes' ? true : false,
-            ScreeningDate: new Date(),
+            ScreeningDate: moment(this.visitDetailsFormGroup.value[0]['visitDate']).toDate(),
             ScreeningCategoryId: this.cervicalCancerScreeningFormGroup.value[0]['method'],
             ScreeningValueId: this.cervicalCancerScreeningFormGroup.value[0]['results'],
             Comment: '',
@@ -552,10 +567,10 @@ export class PncComponent implements OnInit {
             CreatedBy: this.userId,
             CreateDate: new Date(),
             AuditData: '',
-            VisitDate: this.visitDetailsFormGroup.value[0]['visitDate']
+            VisitDate: moment(this.visitDetailsFormGroup.value[0]['visitDate']).toDate()
         };
 
-        const pncVisitDetails = this.pncService.savePncVisitDetails(pncVisitDetailsCommand);
+        const pncVisitDetails = this.pncService.savePncVisitDetails(visitDetailsCommand);
         const pncPostNatalExam = this.pncService.savePncPostNatalExam(pncPostNatalExamCommand);
         const pncBabyExam = this.pncService.savePncPostNatalExam(pncBabyExaminationCommand);
         const pncHivStatus = this.pncService.savePncHivStatus(hivStatusCommand, this.hiv_status_table_data);
@@ -609,9 +624,5 @@ export class PncComponent implements OnInit {
                     console.log(`complete`);
                 }
             );
-
-        /*this.zone.run(() => {
-            this.router.navigate(['/dashboard/personhome/'], { relativeTo: this.route });
-        });*/
     }
 }

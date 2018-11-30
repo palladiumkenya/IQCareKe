@@ -38,7 +38,7 @@ namespace IQCare.Controllers.PMTCT
         [HttpGet("{Id}")]
         public async Task<object> GetByMasterVisitId(int id)
         {
-            var response = await _mediator.Send(new GetPatientVitalsQuery {MasterVisitId = id}, HttpContext.RequestAborted);
+            var response = await _mediator.Send(new GetPatientVitalsQuery {PatientId = id}, HttpContext.RequestAborted);
 
             if (response.IsValid)
                 return Ok(response.Value);

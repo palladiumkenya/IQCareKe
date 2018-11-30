@@ -39,7 +39,7 @@ export class HeiService {
     }
 
     public saveHeiVisitDetails(visitDetails: any): Observable<any> {
-        return this.http.post<any>(this.API_URL + '/api/VisitDetails/AddPNCVisitDetails', JSON.stringify(visitDetails), httpOptions).pipe(
+        return this.http.post<any>(this.API_URL + '/api/AncVisitDetails/Post', JSON.stringify(visitDetails), httpOptions).pipe(
             tap(saveHeiVisitDetails => this.errorHandler.log(`successfully added hei visit details`)),
             catchError(this.errorHandler.handleError<any>('Error saving hei delivery'))
         );
@@ -53,6 +53,13 @@ export class HeiService {
         return this.http.post<any>(this.API_URL + '/api/ImmunizationHistory', JSON.stringify(vaccination), httpOptions).pipe(
             tap(saveImmunizationHistory => this.errorHandler.log(`successfully added hei Immunization History`)),
             catchError(this.errorHandler.handleError<any>('Error saving hei Immunization History'))
+        );
+    }
+
+    public getImmunizationHistory(patientId: number): Observable<any[]> {
+        return this.http.get<any[]>(this.API_URL + '/api/ImmunizationHistory/' + patientId).pipe(
+            tap(getImmunizationHistory => this.errorHandler.log(`successfully fetched immunization history`)),
+            catchError(this.errorHandler.handleError<any>('Error fetching immunization history'))
         );
     }
 
@@ -71,6 +78,13 @@ export class HeiService {
         );
     }
 
+    public getMilestoneHistory(patientId: number): Observable<any[]> {
+        return this.http.get(this.API_URL + '/api/HeiMilestone/' + patientId).pipe(
+            tap(getMilestoneHistory => this.errorHandler.log(`successfully fetched milestone history`)),
+            catchError(this.errorHandler.handleError<any>('Error fetching milestone history for patientId: ' + patientId))
+        );
+    }
+
     public saveHieDelivery(patientId: number, patientMasterVisitId: number, userId: number,
         isMotherRegistered: boolean, heidelivery: any, maternalHistory: any): Observable<any> {
         const Indata = {
@@ -81,7 +95,6 @@ export class HeiService {
             'BirthWeight': heidelivery['birthweight'],
             'ProphylaxisReceived': heidelivery['arvprophylaxisreceived'],
             'ProphylaxisReceivedOther': heidelivery['arvprophylaxisother'],
-
             'MotherIsRegistered': isMotherRegistered,
             'MotherPersonId': maternalHistory['motherpersonid'],
             'MotherStatusId': maternalHistory['stateofmother'],
@@ -100,6 +113,13 @@ export class HeiService {
         return this.http.post<any>(this.API_URL + '/api/DeliveryMaternalHistory', JSON.stringify(Indata), httpOptions).pipe(
             tap(saveHieDelivery => this.errorHandler.log(`successfully added hei delivery`)),
             catchError(this.errorHandler.handleError<any>('Error saving hei delivery'))
+        );
+    }
+
+    public getHeiDelivery(patientId: number, patientMasterVisitId: number): Observable<any[]> {
+        return this.http.get<any[]>(this.API_URL + '/api/DeliveryMaternalHistory/' + patientId + '/' + patientMasterVisitId).pipe(
+            tap(getHeiDelivery => this.errorHandler.log(`successfully fetched hei delivery`)),
+            catchError(this.errorHandler.handleError<any>('Error fetching hei delivery'))
         );
     }
 
@@ -200,11 +220,26 @@ export class HeiService {
         );
     }
 
+    public getHeiInfantFeeding(patientId: number, patientMasterVisitId: number): Observable<any> {
+        return this.http.get(this.API_URL + '/api/Hei/GetHeiFeeding/' + patientId + '/' + patientMasterVisitId).pipe(
+            tap(getHeiInfantFeeding => this.errorHandler.log(`successfully fetched hei infant feeding`)),
+            catchError(this.errorHandler.handleError<any>('Error fetching hei infant feeding'))
+        );
+    }
+
     public saveHeiOutCome(heiOutComeCommand: HeiOutComeCommand): Observable<any> {
         return this.http.post<any>(this.API_URL + '/api/DeliveryMaternalHistory/UpdateOutComeAt24Months',
             JSON.stringify(heiOutComeCommand), httpOptions).pipe(
                 tap(saveHeiInfantFeeding => this.errorHandler.log(`successfully saved infant feeding`)),
                 catchError(this.errorHandler.handleError<any>('Error saving infant feeding'))
             );
+    }
+
+    public getPatientVisitDetails(patientId: number, serviceAreaId: number) {
+        return this.http.get<any[]>(this.API_URL + '/api/AncVisitDetails/GetVisitDetailsByVisitType/' +
+            patientId + '/' + serviceAreaId).pipe(
+            tap(getPatientVisitDetails => this.errorHandler.log('get patient visit details data')),
+            catchError(this.errorHandler.handleError<any[]>('getPatientVisitDetails'))
+        );
     }
 }

@@ -16,6 +16,8 @@ namespace IQCareRecords.Common.BusinessProcess.Command
         public string FirstName { get; set; }
         public string MiddleName { get; set; }
         public string LastName { get; set; }
+
+        public string NickName { get; set; }
         public DateTime DateOfBirth { get; set; }
         public int Sex { get; set; }
         public int CreatedBy { get; set; }

@@ -39,8 +39,8 @@ export class PncService {
             );
     }
 
-    public savePncVisitDetails(pncVisitDetailsCommand: PncVisitDetailsCommand): Observable<any> {
-        return this.http.post(this.API_URL + '/api/VisitDetails/AddPNCVisitDetails',
+    public savePncVisitDetails(pncVisitDetailsCommand: any): Observable<any> {
+        return this.http.post(this.API_URL + '/api/AncVisitDetails/Post',
             JSON.stringify(pncVisitDetailsCommand), httpOptions).pipe(
                 tap(savePncVisitDetails => this.errorHandler.log(`successfully saved pnc visit details`)),
                 catchError(this.errorHandler.handleError<any>('Error saving pnc visit details'))
@@ -131,6 +131,13 @@ export class PncService {
                 tap(savePncReferral => this.errorHandler.log(`successfully saved pnc referral`)),
                 catchError(this.errorHandler.handleError<any>('Error saving pnc referral'))
             );
+    }
+
+    public getReferral(): Observable<any[]> {
+        return this.http.get<any[]>(this.API_URL + '/').pipe(
+            tap(getReferral => this.errorHandler.log(`successfully fetched referral`)),
+            catchError(this.errorHandler.handleError<any>('Error fetching referral'))
+        );
     }
 
     public savePncNextAppointment(pncNextAppointmentCommand: PatientAppointment): Observable<any> {

@@ -5,6 +5,7 @@ using Interface.CCC;
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Data.SqlTypes;
 using static Entities.CCC.Encounter.PatientEncounter;
 
 namespace BusinessProcess.CCC
@@ -148,7 +149,18 @@ namespace BusinessProcess.CCC
                         ClsUtility.AddParameters("@PatientID", SqlDbType.Int, patientID);
                         ClsUtility.AddParameters("@chronicIllness", SqlDbType.VarChar, chrIll.chronicIllnessID);
                         ClsUtility.AddParameters("@treatment", SqlDbType.VarChar, chrIll.treatment);
-                        ClsUtility.AddParameters("@dose", SqlDbType.VarChar, chrIll.dose);
+                        if (String.IsNullOrEmpty(chrIll.dose) == true)
+                        {
+                           
+                              
+                            ClsUtility.AddParameters("@dose", SqlDbType.VarChar, DBNull.Value.ToString());
+                        }
+                        
+                       else 
+                        {
+                            ClsUtility.AddParameters("@dose", SqlDbType.VarChar, chrIll.dose);
+                        }
+                        
                         ClsUtility.AddParameters("@onsetDate", SqlDbType.VarChar, chrIll.OnsetDate);
                         ClsUtility.AddParameters("@active", SqlDbType.VarChar, chrIll.Active);
                         ClsUtility.AddParameters("@userID", SqlDbType.VarChar, userID);

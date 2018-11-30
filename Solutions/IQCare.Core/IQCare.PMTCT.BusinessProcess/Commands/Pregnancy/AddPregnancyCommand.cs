@@ -17,17 +17,12 @@ namespace IQCare.PMTCT.BusinessProcess.Commands.Pregnancy
         public int? Gravidae { get; set; }
         public int? Parity { get; set; }
         public int? Parity2 { get; set; }
-        public int? Outcome { get; set; }
-        public DateTime? DateOfOutcome { get; set; }
         public int CreatedBy { get; set; }
-        public DateTime CreateDate { get; set; }
-        public bool DeleteFlag { get; set; }
     }
 
     public class AddPregnancyCommandResult
     {
         public int PregnancyId { get; set; }
-        public int PatientId { get; set; }
     }
 
 }

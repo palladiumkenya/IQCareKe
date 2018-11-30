@@ -1448,8 +1448,8 @@ namespace IQCare.Common.BusinessProcess.Services
                 StringBuilder sql = new StringBuilder();
                 sql.Append("exec pr_OpenDecryptedSession;");
                 sql.Append($"SELECT [Id] , CAST(DECRYPTBYKEY(FirstName) AS VARCHAR(50)) [FirstName] ,CAST(DECRYPTBYKEY(MidName) AS VARCHAR(50)) MidName" +
-                           $",CAST(DECRYPTBYKEY(LastName) AS VARCHAR(50)) [LastName] ,[Sex] ,[Active] ,[DeleteFlag] ,[CreateDate] " +
-                           $",[CreatedBy] ,[AuditData] ,[DateOfBirth] ,[DobPrecision], RegistrationDate, [FacilityId], CAST(DECRYPTBYKEY(NickName) AS VARCHAR(50)) NickName FROM [dbo].[Person] WHERE Id = '{personId}';");
+                           $",CAST(DECRYPTBYKEY(LastName) AS VARCHAR(50)) [LastName],CAST(DECRYPTBYKEY(NickName) AS VARCHAR(50)) [NickName] ,[Sex] ,[Active] ,[DeleteFlag] ,[CreateDate] " +
+                           $",[CreatedBy] ,[AuditData] ,[DateOfBirth] ,[DobPrecision],FacilityId ,[RegistrationDate] FROM [dbo].[Person] WHERE Id = '{personId}';");
                 sql.Append("exec [dbo].[pr_CloseDecryptedSession];");
 
                 var person = await _unitOfWork.Repository<Person>().FromSql(sql.ToString());
@@ -1462,7 +1462,7 @@ namespace IQCare.Common.BusinessProcess.Services
             }
         }
 
-        public async Task<Person> UpdatePerson(int personId, string firstName, string middleName, string lastName, int sex, DateTime dateOfBirth, int facilityId, DateTime? registrationDate = null, bool dobPrecision = true, string nickName = "")
+        public async Task<Person> UpdatePerson(int personId, string firstName, string middleName, string lastName, int sex, DateTime dateOfBirth, int facilityId, DateTime? registrationDate = null, bool dobPrecision = true,string NickName="")
         {
             try
             {
@@ -1470,17 +1470,33 @@ namespace IQCare.Common.BusinessProcess.Services
                 firstName = string.IsNullOrWhiteSpace(firstName) ? "" : firstName.Replace("'", "''");
                 middleName = string.IsNullOrWhiteSpace(middleName) ? "" : middleName.Replace("'", "''");
                 lastName = string.IsNullOrWhiteSpace(lastName) ? "" : lastName.Replace("'", "''");
-
+                if (string.IsNullOrEmpty(NickName))
+                {
+                    var registeredPerson = await this.GetPerson(personId);
+                    if (registeredPerson != null)
+                    {
+                        if (!string.IsNullOrEmpty(registeredPerson.NickName))
+                        {
+                            NickName = registeredPerson.NickName;
+                        }
+                        else
+                        {
+                            NickName = "";
+                        }
+                    }
+                }
+                NickName = string.IsNullOrWhiteSpace(NickName) ? "" : NickName.Replace("'", "''");
                 sql.Append("exec pr_OpenDecryptedSession;");
                 sql.Append($"UPDATE Person SET FirstName = ENCRYPTBYKEY(KEY_GUID('Key_CTC'), '{firstName}'), " +
                            $"MidName = ENCRYPTBYKEY(KEY_GUID('Key_CTC'), '{middleName}'), " +
                            $"LastName = ENCRYPTBYKEY(KEY_GUID('Key_CTC'), '{lastName}'), " +
+                           $"NickName=ENCRYPTBYKEY(KEY_GUID('Key_CTC'),'{NickName}'), " +
                            $"Sex = {sex}, DateOfBirth = '{dateOfBirth.ToString("yyyy-MM-dd")}', " +
                            $"RegistrationDate = '{registrationDate}', FacilityId = '{facilityId}', " +
-                           $"[DobPrecision] = '{dobPrecision}', NickName = ENCRYPTBYKEY(KEY_GUID('Key_CTC'), '{nickName}') WHERE Id = {personId}; ");
+                           $"[DobPrecision] = '{dobPrecision}' WHERE Id = {personId}; ");
                 sql.Append($"SELECT [Id] , CAST(DECRYPTBYKEY(FirstName) AS VARCHAR(50)) [FirstName] ,CAST(DECRYPTBYKEY(MidName) AS VARCHAR(50)) MidName" +
-                           $",CAST(DECRYPTBYKEY(LastName) AS VARCHAR(50)) [LastName] ,[Sex] ,[Active] ,[DeleteFlag] ,[CreateDate] " +
-                           $",[CreatedBy] ,[AuditData] ,[DateOfBirth] ,[DobPrecision], RegistrationDate, FacilityId, CAST(DECRYPTBYKEY(NickName) AS VARCHAR(50)) NickName FROM Person WHERE Id = '{personId}';");
+                           $",CAST(DECRYPTBYKEY(LastName) AS VARCHAR(50)) [LastName],CAST(DECRYPTBYKEY(NickName) AS VARCHAR(50)) [NickName]  ,[Sex] ,[Active] ,[DeleteFlag] ,[CreateDate] " +
+                           $",[CreatedBy] ,[AuditData] ,[DateOfBirth] ,[DobPrecision],FacilityId FROM Person WHERE Id = '{personId}';");
                 sql.Append("exec [dbo].[pr_CloseDecryptedSession];");
 
                 var personInsert = await _unitOfWork.Repository<Person>().FromSql(sql.ToString());
@@ -1492,25 +1508,25 @@ namespace IQCare.Common.BusinessProcess.Services
             }
         }
 
-        public async Task<Person> RegisterPerson(string firstName, string middleName, string lastName, int sex, int createdBy, int facilityId, DateTime? dateOfBirth, DateTime? registrationDate = null, string nickName = "")
+        public async Task<Person> RegisterPerson(string firstName, string middleName, string lastName, int sex, int createdBy, int facilityId, DateTime? dateOfBirth, DateTime? registrationDate = null, string nickName="")
         {
             try
             {
                 firstName = string.IsNullOrWhiteSpace(firstName) ? "" : firstName.Replace("'", "''");
                 middleName = string.IsNullOrWhiteSpace(middleName) ? "" : middleName.Replace("'", "''");
                 lastName = string.IsNullOrWhiteSpace(lastName) ? "" : lastName.Replace("'", "''");
+                nickName = string.IsNullOrWhiteSpace(nickName) ? "" : nickName.Replace("'", "''");
                 string dob = dateOfBirth.HasValue ? dateOfBirth.Value.ToString("yyyy-MM-dd") : null;
-                string regDate = registrationDate.HasValue ? registrationDate.Value.ToString("yyyy-MM-dd") : null;
 
                 var sql =
                     "exec pr_OpenDecryptedSession;" +
-                    "Insert Into Person(FirstName, MidName, LastName, Sex, DateOfBirth, DobPrecision, Active, DeleteFlag, CreateDate, CreatedBy, RegistrationDate, FacilityId, NickName)" +
+                    "Insert Into Person(FirstName, MidName, LastName,NickName, Sex, DateOfBirth, DobPrecision, Active, DeleteFlag, CreateDate, CreatedBy, RegistrationDate, FacilityId)" +
                     $"Values(ENCRYPTBYKEY(KEY_GUID('Key_CTC'), '{firstName}'), ENCRYPTBYKEY(KEY_GUID('Key_CTC'), '{middleName}')," +
-                    $"ENCRYPTBYKEY(KEY_GUID('Key_CTC'), '{lastName}'), {sex}, '{dob}', 1," +
-                    $"1,0,GETDATE(), '{createdBy}', '{regDate}', '{facilityId}', ENCRYPTBYKEY(KEY_GUID('Key_CTC'), '{nickName}'));" +
+                    $"ENCRYPTBYKEY(KEY_GUID('Key_CTC'), '{lastName}'),ENCRYPTBYKEY(KEY_GUID('Key_CTC'), '{nickName}') , {sex}, '{dob}', 1," +
+                    $"1,0,GETDATE(), '{createdBy}', '{registrationDate}', '{facilityId}');" +
                     "SELECT [Id] , CAST(DECRYPTBYKEY(FirstName) AS VARCHAR(50)) [FirstName] ,CAST(DECRYPTBYKEY(MidName) AS VARCHAR(50)) MidName" +
-                    ",CAST(DECRYPTBYKEY(LastName) AS VARCHAR(50)) [LastName] ,[Sex] ,[Active] ,[DeleteFlag] ,[CreateDate] " +
-                    ",[CreatedBy] ,[AuditData] ,[DateOfBirth] ,[DobPrecision], RegistrationDate, FacilityId, CAST(DECRYPTBYKEY(NickName) AS VARCHAR(50)) NickName FROM [dbo].[Person] WHERE Id = SCOPE_IDENTITY();" +
+                    ",CAST(DECRYPTBYKEY(LastName) AS VARCHAR(50)) [LastName], CAST(DECRYPTBYKEY(NickName) AS VARCHAR(50)) [NickName],[Sex] ,[Active] ,[DeleteFlag] ,[CreateDate] " +
+                    ",[CreatedBy] ,[AuditData] ,[DateOfBirth] ,[DobPrecision], RegistrationDate, FacilityId FROM [dbo].[Person] WHERE Id = SCOPE_IDENTITY();" +
                     "exec [dbo].[pr_CloseDecryptedSession];";
 
                 var personInsert = await _unitOfWork.Repository<Person>().FromSql(sql);

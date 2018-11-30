@@ -46,7 +46,7 @@ export class MotherProfileComponent implements OnInit {
         });
 
         this.getPregnancyDetails(this.patientId);
-        this.getCurrentVisitDetails(this.patientId);
+       // this.getCurrentVisitDetails(this.patientId, 'ANC');
 
         this.notify.emit(this.motherProfileFormGroup);
     }
@@ -54,7 +54,7 @@ export class MotherProfileComponent implements OnInit {
     public onLMPDateChange() {
         this.dateLMP = this.motherProfileFormGroup.controls['dateLMP'].value;
         const lmpDate = new Date(moment(this.motherProfileFormGroup.controls['dateLMP'].value).add(280, 'days').format(''));
-        const eddDate = new Date(moment(this.dateLMP).add(7, 'days').add(9, 'months').format(''))
+        const eddDate = new Date(moment(this.dateLMP).add(7, 'days').add(9, 'months').format(''));
         this.motherProfileFormGroup.controls['dateEDD'].setValue(eddDate);
 
         console.log(this.motherProfileFormGroup.controls['dateEDD'].value);
@@ -99,13 +99,15 @@ export class MotherProfileComponent implements OnInit {
                 });
     }
 
-    public getCurrentVisitDetails(patientId: number): void {
-        this.visitDetails = this._matServices.getCurrentVisitDetails(patientId)
+    public getCurrentVisitDetails(patientId: number, serviceAreaName: string): void {
+        this.visitDetails = this._matServices.getCurrentVisitDetails(patientId, serviceAreaName)
             .subscribe(
                 p => {
                     if (p) {
                         console.log('agetmenarche' + p.ageMenarche);
-                        this.motherProfileFormGroup.controls['ageAtMenarche'].setValue(p.ageMenarche);
+                        const visitNumber = p.length;
+
+                      //  this.motherProfileFormGroup.controls['ageAtMenarche'].setValue(p.ageMenarche);
 
                     }
                 },
@@ -117,5 +119,7 @@ export class MotherProfileComponent implements OnInit {
 
                 });
     }
+
+
 
 }

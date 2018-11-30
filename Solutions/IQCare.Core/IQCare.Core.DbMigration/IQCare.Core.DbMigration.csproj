@@ -6,12 +6,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Scripts\2.0.0\03_DO_CreateSproc_Get_WeightFor_Age_Zscore.sql\**" />
-    <EmbeddedResource Remove="Scripts\2.0.0\03_DO_CreateSproc_Get_WeightFor_Age_Zscore.sql\**" />
-    <None Remove="Scripts\2.0.0\03_DO_CreateSproc_Get_WeightFor_Age_Zscore.sql\**" />
-  </ItemGroup>
-
-  <ItemGroup>
     <None Remove="Scripts\1.0.0.8\Common\01_SO_CreateVisitDetails_Table.sql" />
     <None Remove="Scripts\1.0.0.8\HEI\HEIEncounter.sql" />
     <None Remove="Scripts\1.0.0.8\HEI\HEIFeeding.sql" />
@@ -100,12 +94,10 @@
     <None Remove="Scripts\1.0.0.9\52_SO_CreateView_PatientCounsellingView.sql" />
     <None Remove="Scripts\1.0.0.9\53_SO_CreateView_PatientExaminationView.sql" />
     <None Remove="Scripts\1.0.0.9\54_SO_CreateView_pmtctPatientScreeningView.sql" />
+    <None Remove="Scripts\1.0.0.9\56_SO_CreateView_VisitDetailsView.sql" />
     <None Remove="Scripts\2.0.0\01_SO_IQCare_Version.sql" />
     <None Remove="Scripts\2.0.0\02_DO_AlterView_PatientDeliveryInfo.sql" />
-    <None Remove="Scripts\2.0.0\03_DO_CreateSproc_Get_WeightFor_Age_Zscore.sql" />
-    <None Remove="Scripts\2.0.0\04_DO_CreateSproc_GetWeightForHeight_Zscore_Sproc.sql" />
-    <None Remove="Scripts\2.0.0\05_DO_CreateSproc_GetBmiZscore_Constants.sql" />
-    <None Remove="Scripts\2.0.0\06_DO_CreateSproc_GetHeightForAge_Zscore.sql" />
+    <None Remove="Scripts\2.0.0\03 pr_Security_UserLogin_Constella.sql" />
   </ItemGroup>
 
   <ItemGroup>
@@ -203,12 +195,10 @@
     <EmbeddedResource Include="Scripts\1.0.0.9\52_SO_CreateView_PatientCounsellingView.sql" />
     <EmbeddedResource Include="Scripts\1.0.0.9\53_SO_CreateView_PatientExaminationView.sql" />
     <EmbeddedResource Include="Scripts\1.0.0.9\54_SO_CreateView_pmtctPatientScreeningView.sql" />
-    <EmbeddedResource Include="Scripts\2.0.0\01_SO_IQCare_Version.sql" />
+    <EmbeddedResource Include="Scripts\1.0.0.9\56_SO_CreateView_VisitDetailsView.sql" />
+    <EmbeddedResource Include="Scripts\1.0.0.9\01_SO_IQCare_Version.sql" />
     <EmbeddedResource Include="Scripts\2.0.0\02_DO_AlterView_PatientDeliveryInfo.sql" />
-    <EmbeddedResource Include="Scripts\2.0.0\03_DO_CreateSproc_Get_WeightFor_Age_Zscore.sql" />
-    <EmbeddedResource Include="Scripts\2.0.0\04_DO_CreateSproc_GetWeightForHeight_Zscore_Sproc.sql" />
-    <EmbeddedResource Include="Scripts\2.0.0\05_DO_CreateSproc_GetBmiZscore_Constants.sql" />
-    <EmbeddedResource Include="Scripts\2.0.0\06_DO_CreateSproc_GetHeightForAge_Zscore.sql" />
+    <EmbeddedResource Include="Scripts\2.0.0\03 pr_Security_UserLogin_Constella.sql" />
   </ItemGroup>
 
   <ItemGroup>

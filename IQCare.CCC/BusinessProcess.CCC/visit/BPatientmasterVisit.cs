@@ -40,6 +40,7 @@ namespace BusinessProcess.CCC.visit
 
         }
 
+       
         public List<PatientMasterVisit> GetPatientCurrentVisit(int patientId, DateTime visitDate)
         {
             using (UnitOfWork unitOfWork = new UnitOfWork(new GreencardContext()))
@@ -55,6 +56,24 @@ namespace BusinessProcess.CCC.visit
                             return patientMasterVisitList;
             }
 
+        }
+        public List<PatientMasterVisit> GetPatientMasterVisitBasedonVisitDate(int patientId,DateTime vDate)
+        {
+            
+
+            using (UnitOfWork unitOfWork = new UnitOfWork(new GreencardContext()))
+            {
+                List<PatientMasterVisit> patientMasterVisitList =
+                unitOfWork.PatientMasterVisitRepository.FindBy(
+                                 x =>
+                            x.PatientId == patientId &&
+                            x.VisitDate.Value.Year == vDate.Year &&
+                            x.VisitDate.Value.Month == vDate.Month &&
+                            x.VisitDate.Value.Day == vDate.Day &&
+                            x.DeleteFlag==false).OrderByDescending(x => x.Id).Take(1).ToList();
+                unitOfWork.Dispose();
+                return patientMasterVisitList;
+            }
         }
 
         public List<PatientMasterVisit> GetPatientVisits(int patientId)
@@ -79,6 +98,15 @@ namespace BusinessProcess.CCC.visit
 
         }
 
+        public List<PatientMasterVisit> GetVisitDateByMasterVisitId(int patientId,int PatientMasterVisitId)
+        {
+            using (UnitOfWork unitOfWork = new UnitOfWork(new GreencardContext()))
+            {
+                List<PatientMasterVisit> patientVisitList = unitOfWork.PatientMasterVisitRepository.FindBy(x => x.PatientId == patientId & !x.DeleteFlag & x.Id==PatientMasterVisitId).OrderByDescending(x => x.Id).Take(1).ToList();
+                unitOfWork.Dispose();
+                return patientVisitList;
+            }
+        }
         public int PatientMasterVisitCheckin(int patientId,PatientMasterVisit patientMasterVisit)
         {
             using (UnitOfWork unitOfWork = new UnitOfWork(new GreencardContext()))

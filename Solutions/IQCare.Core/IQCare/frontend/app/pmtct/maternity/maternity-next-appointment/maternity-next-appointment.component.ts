@@ -14,6 +14,10 @@ export class MaternityNextAppointmentComponent implements OnInit {
     nextAppointmentFormGroup: FormGroup;
     public maxtDate: Date = moment().toDate();
     @Input() dischargeOptions: any[] = [];
+    @Input('isEdit') isEdit: boolean;
+    @Input('patientId') patientId: number;
+    @Input('patientMasterVisitId') patientMasterVisitId: number;
+
     @Output() notify: EventEmitter<FormGroup> = new EventEmitter<FormGroup>();
 
     constructor(private formBuilder: FormBuilder,

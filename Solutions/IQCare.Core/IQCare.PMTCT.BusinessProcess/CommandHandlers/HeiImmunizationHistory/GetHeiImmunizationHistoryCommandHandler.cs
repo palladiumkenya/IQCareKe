@@ -28,7 +28,7 @@ namespace IQCare.PMTCT.BusinessProcess.CommandHandlers.HeiImmunizationHistory
                 try
                 {
                     List<Vaccination> vaccine = await _unitOfWork.Repository<Vaccination>()
-                        .Get(x => x.PatientId == request.PatientId && x.DeleteFlag == 0)
+                        .Get(x => x.PatientId == request.PatientId && x.DeleteFlag == false)
                         .ToListAsync(cancellationToken: cancellationToken);
                     return Result<List<Vaccination>>.Valid(vaccine);
                 }

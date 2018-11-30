@@ -1,12 +1,15 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using IQCare.Library;
 using IQCare.PMTCT.BusinessProcess.Commands.VisitDetails;
+using IQCare.PMTCT.Core.Models;
 using IQCare.PMTCT.Infrastructure;
 using MediatR;
+using Microsoft.EntityFrameworkCore;
 using Serilog;
 
 namespace IQCare.PMTCT.BusinessProcess.CommandHandlers.VisitDetails
@@ -26,16 +29,22 @@ namespace IQCare.PMTCT.BusinessProcess.CommandHandlers.VisitDetails
             {
                 try
                 {
+                    //PatientPregnancy patientPregnancy = _unitOfWork.Repository<PatientPregnancy>()
+                    //    //.Get(x => x.PatientId == request.PatientId).FirstOrDefault();
+
                     Core.Models.VisitDetails visitDetails = new Core.Models.VisitDetails()
                     {
                         CreateDate = DateTime.Now,
-                        CreatedBy = request.VisitDetails.CreatedBy,
-                        DaysPostPartum = request.VisitDetails.DaysPostPartum,
+                        CreatedBy = request.UserId,
+                        DaysPostPartum = request.DaysPostPartum,
                         DeleteFlag = false,
-                        PatientId = request.VisitDetails.PatientId,
-                        PatientMasterVisitId = request.VisitDetails.PatientMasterVisitId,
-                        VisitNumber = request.VisitDetails.VisitNumber,
-                        VisitType = request.VisitDetails.VisitType                       
+                        PregnancyId = request.PregnancyId,
+                        PatientId = request.PatientId,
+                        PatientMasterVisitId = request.PatientMasterVisitId,
+                        VisitNumber = request.VisitNumber,
+                        VisitType = request.VisitType,
+                        VisitDate = request.VisitDate,
+                        ServiceAreaId = request.ServiceAreaId                                               
                     };
 
                     await _unitOfWork.Repository<Core.Models.VisitDetails>().AddAsync(visitDetails);

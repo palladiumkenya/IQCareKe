@@ -493,9 +493,34 @@ namespace IQCare.CCC.UILogic
                             theFrmRoot.NavigateUrl = "../Adherence/AdherenceBarriers.aspx?visitId=" + theDR["visitID"].ToString();
                             theFrmRoot.ImageUrl = "~/images/15px-Yes_check.svg.png";
                         }
+                        if(theDR["VisitName"].ToString()== "Depression Screening")
+                        {
+                            theFrmRoot.NavigateUrl= "../Screening/DepressionScreening.aspx?visitId=" + theDR["visitID"].ToString();
+                            theFrmRoot.ImageUrl = "~/images/15px-Yes_check.svg.png";
+                        }
+
+
+                        if (theDR["VisitName"].ToString() == "Gender Based Violence Screening")
+                        {
+                            theFrmRoot.NavigateUrl = "../Screening/GBVScreening.aspx?visitId=" + theDR["visitID"].ToString();
+                            theFrmRoot.ImageUrl = "~/images/15px-Yes_check.svg.png";
+                        }
+
+                        if (theDR["VisitName"].ToString() == "Alcohol and Drug Abuse Screening")
+                        {
+                            theFrmRoot.NavigateUrl = "../Screening/AlcoholDrugAbuseScreening.aspx?visitId=" + theDR["visitID"].ToString();
+                            theFrmRoot.ImageUrl = "~/images/15px-Yes_check.svg.png";
+                        }
+
+                        if(theDR["VisitName"].ToString()== "Adherence Barriers")
+                        {
+                            theFrmRoot.NavigateUrl = "../Adherence/AdherenceBarriersHome.aspx?visitId=" + theDR["visitID"].ToString();
+                            theFrmRoot.ImageUrl = "~/images/15px-Yes_check.svg.png";
+                        }
                         if (theDR["VisitName"].ToString() == "Enhance Adherence Counselling")
                         {
-                            theFrmRoot.NavigateUrl = "PatientEncounter.aspx?visitId=" + theDR["visitID"].ToString()+ "#EnhanceAdherence";
+                           
+                            theFrmRoot.NavigateUrl = "../EnhanceAdherenceCounselling/EnhanceAdherenceHome.aspx?visitId=" + theDR["visitID"].ToString();
                             theFrmRoot.ImageUrl = "~/images/15px-Yes_check.svg.png";
                         }
                         if (theDR["VisitName"].ToString() == "Triage")
@@ -725,7 +750,7 @@ namespace IQCare.CCC.UILogic
             {
                 result = patientEncounterManager.AddpatientEncounter(Convert.ToInt32(patientID),Convert.ToInt32(patientMasterVisitID), encounterTypeId, 203,userId);
             }
-            return (result > 0) ? val : 0;
+            return (result > 0) ? result : val;
         }
     }
 }

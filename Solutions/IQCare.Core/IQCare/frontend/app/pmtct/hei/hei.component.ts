@@ -18,6 +18,7 @@ import { SnotifyService } from 'ng-snotify';
 import { NotificationService } from '../../shared/_services/notification.service';
 import { CompleteLabOrderCommand } from '../_models/hei/CompleteLabOrderCommand';
 import { PatientFeedingCommand } from '../_models/hei/PatientFeedingCommand';
+import * as moment from 'moment';
 
 @Component({
     selector: 'app-hei',
@@ -37,6 +38,7 @@ export class HeiComponent implements OnInit {
     patientEncounterId: number;
     visitDate: Date;
     visitType: number;
+    isEdit: boolean = false;
 
     defaultParameters: DefaultParameters;
 
@@ -120,18 +122,24 @@ export class HeiComponent implements OnInit {
     ngOnInit() {
         this.route.params.subscribe(
             (params) => {
-                console.log(params);
                 const { patientId, personId, serviceAreaId } = params;
                 this.patientId = patientId;
                 this.personId = personId;
                 this.serviceAreaId = serviceAreaId;
+                this.patientMasterVisitId = params.patientMasterVisitId;
+                this.patientEncounterId = params.patientEncounterId;
+
+                if (!this.patientMasterVisitId) {
+                    this.patientMasterVisitId = JSON.parse(localStorage.getItem('patientMasterVisitId'));
+                    this.patientEncounterId = JSON.parse(localStorage.getItem('patientEncounterId'));
+                } else {
+                    this.isEdit = true;
+                }
             }
         );
 
         this.userId = JSON.parse(localStorage.getItem('appUserId'));
         this.locationId = JSON.parse(localStorage.getItem('appLocationId'));
-        this.patientMasterVisitId = JSON.parse(localStorage.getItem('patientMasterVisitId'));
-        this.patientEncounterId = JSON.parse(localStorage.getItem('patientEncounterId'));
         this.visitDate = new Date(localStorage.getItem('visitDate'));
         this.visitType = JSON.parse(localStorage.getItem('visitType'));
 
@@ -234,7 +242,6 @@ export class HeiComponent implements OnInit {
 
         this.heiService.getPatientById(this.patientId).subscribe(
             (result) => {
-                console.log(result);
                 const { ptn_pk } = result;
                 this.ptn_pk = ptn_pk;
             }
@@ -325,7 +332,7 @@ export class HeiComponent implements OnInit {
                     DeleteFlag: 0,
                     CreatedBy: this.userId,
                     CreateDate: new Date(),
-                    VaccineDate: new Date(this.immunization_table_data[i][j]['dateImmunized']),
+                    VaccineDate: moment(this.immunization_table_data[i][j]['dateImmunized']).toDate(),
                     Active: 0,
                     AppointmentId: 0
                     //  NextSchedule: new Date(this.immunization_table_data[i][j]['nextScheduled'])
@@ -337,13 +344,8 @@ export class HeiComponent implements OnInit {
             'Vaccinations': this.vaccination
         };
 
-
-        console.log('vaccine');
-        console.log(this.vaccination);
-
         for (let i = 0; i < this.milestone_table_data.length; i++) {
             for (let j = 0; j < this.milestone_table_data[i].length; j++) {
-                console.log(this.milestone_table_data[i][j]);
                 this.milestone.push({
                     Id: 0,
                     PatientId: this.patientId,
@@ -355,7 +357,7 @@ export class HeiComponent implements OnInit {
                     CreateDate: new Date(),
                     CreatedBy: this.userId,
                     DeleteFlag: 0,
-                    DateAssessed: this.milestone_table_data[i][j].dateAssessed
+                    DateAssessed: moment(this.milestone_table_data[i][j].dateAssessed).toDate()
                 });
             }
 
@@ -484,7 +486,7 @@ export class HeiComponent implements OnInit {
             PatientId: this.patientId,
             PatientMasterVisitId: this.patientMasterVisitId,
             ServiceAreaId: 3,
-            VisitDate: this.visitDetailsFormGroup.value[0]['visitDate'],
+            VisitDate: moment(this.visitDetailsFormGroup.value[0]['visitDate']).toDate(),
             VisitNumber: 0,
             VisitType: this.visitDetailsFormGroup.value[0]['visitType'],
             UserId: this.userId,

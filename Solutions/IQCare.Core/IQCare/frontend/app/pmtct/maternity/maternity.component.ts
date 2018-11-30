@@ -23,6 +23,8 @@ import { PartnerTestingCommand } from '../_models/PartnerTestingCommand';
 import { PatientReferralCommand } from '../_models/PatientReferralCommand';
 import { HivStatusCommand } from '../_models/HivStatusCommand';
 import { HivTestsCommand } from '../_models/HivTestsCommand';
+import * as moment from 'moment';
+import {VisitDetailsCommand} from '../_models/visit-details-command';
 
 
 
@@ -309,8 +311,20 @@ export class MaternityComponent implements OnInit {
 
     onSubmit() {
 
+        const visitDetailsCommand = {
+            PatientId: parseInt(this.patientId.toString(), 10),
+            ServiceAreaId: parseInt(this.serviceAreaId.toString(), 10),
+            PregnancyId: 0,
+            PatientMasterVisitId: this.patientMasterVisitId,
+            VisitDate: moment(this.visitDetailsFormGroup.value[0]['visitDate']).toDate(),
+            VisitNumber: 0,
+            DaysPostPartum: 0,
+            VisitType: 0,
+            UserId: this.userId
+        }as VisitDetailsCommand;
+
         console.log(this.maternityTestsFormGroup);
-        const visitDetailsCommand: MaternityVisitDetailsCommand = {
+      /*  const visitDetailsCommand: MaternityVisitDetailsCommand = {
             patientId: this.patientId,
             patientMasterVisitId: this.patientMasterVisitId,
             ageAtMenarche: 0,
@@ -322,7 +336,7 @@ export class MaternityComponent implements OnInit {
             createDate: new Date(),
             createdBy: this.userId,
             postpartum: 'na'
-        };
+        };*/
 
         console.log(this.visitDetailsFormGroup);
         const pregnancyCommand: PregnancyCommand = {
@@ -331,8 +345,8 @@ export class MaternityComponent implements OnInit {
             PatientMasterVisitId: this.patientMasterVisitId,
             Outcome: 0,
             DateOfOutcome: null,
-            Lmp: this.visitDetailsFormGroup.value[1]['dateLMP'],
-            Edd: new Date(this.visitDetailsFormGroup.value[1]['dateEDD']),
+            Lmp: moment(this.visitDetailsFormGroup.value[1]['dateLMP']).toDate(),
+            Edd: moment(this.visitDetailsFormGroup.value[1]['dateEDD']).toDate(),
             Gestation: this.visitDetailsFormGroup.value[1]['gestation'],
             Gravidae: parseInt(this.visitDetailsFormGroup.value[1]['gravidae'], 10),
             Parity: this.visitDetailsFormGroup.value[1]['parityOne'],
@@ -355,7 +369,7 @@ export class MaternityComponent implements OnInit {
             PatientMasterVisitId: this.patientMasterVisitId,
             ProfileId: 3,
             DurationOfLabour: this.diagnosisFormGroup.value[1]['labourDuration'],
-            DateOfDelivery: this.diagnosisFormGroup.value[1]['deliveryDate'],
+            DateOfDelivery: moment(this.diagnosisFormGroup.value[1]['deliveryDate']).toDate(),
             TimeOfDelivery: this.diagnosisFormGroup.value[1]['deliveryTime'],
             ModeOfDelivery: this.diagnosisFormGroup.value[1]['deliveryMode'],
             PlacentaComplete: this.diagnosisFormGroup.value[1]['placentaComplete'],
@@ -363,7 +377,7 @@ export class MaternityComponent implements OnInit {
             BloodLossClassification: this.diagnosisFormGroup.value[1]['bloodLoss'],
             MotherCondition: this.diagnosisFormGroup.value[1]['deliveryCondition'],
             MaternalDeathAudited: this.diagnosisFormGroup.value[1]['maternalDeathsAudited'],
-            MaternalDeathAuditDate: this.diagnosisFormGroup.value[1]['auditDate'],
+            MaternalDeathAuditDate: moment(this.diagnosisFormGroup.value[1]['auditDate']).toDate(),
             DeliveryComplicationsExperienced: this.diagnosisFormGroup.value[1]['deliveryComplications'],
             DeliveryComplicationNotes: this.diagnosisFormGroup.value[1]['deliveryComplicationNotes'],
             DeliveryConductedBy: this.diagnosisFormGroup.value[1]['deliveryConductedBy'],
@@ -497,7 +511,7 @@ export class MaternityComponent implements OnInit {
             PatientMasterVisitId: this.patientMasterVisitId,
             OutcomeDescription: 'na',
             OutcomeStatus: this.dischargeFormGroup.value[0]['babyStatus'],
-            DateDischarged: this.dischargeFormGroup.value[0]['dischargeDate'],
+            DateDischarged: moment(this.dischargeFormGroup.value[0]['dischargeDate']).toDate(),
             CreatedBy: this.userId
         };
 
@@ -532,7 +546,7 @@ export class MaternityComponent implements OnInit {
             PatientId: this.patientId,
             PatientMasterVisitId: this.patientMasterVisitId,
             ServiceAreaId: this.serviceAreaId,
-            AppointmentDate: this.dischargeFormGroup.value[2]['nextAppointmentDate'],
+            AppointmentDate: moment(this.dischargeFormGroup.value[2]['nextAppointmentDate']).toDate(),
             Description: this.dischargeFormGroup.value[2]['remarks'],
             StatusDate: new Date(),
             DifferentiatedCareId: 0,
@@ -567,7 +581,7 @@ export class MaternityComponent implements OnInit {
             TbScreening: null,
             ServiceAreaId: this.serviceAreaId,
             EncounterTypeId: 1,
-            EncounterDate: this.visitDetailsFormGroup.value[0]['visitDate'],
+            EncounterDate: moment(this.visitDetailsFormGroup.value[0]['visitDate']).toDate(),
             EncounterType: this.maternityTestsFormGroup.value[0]['testType']
         };
 
@@ -596,7 +610,7 @@ export class MaternityComponent implements OnInit {
                 hivTestsCommand.Testing.push({
                     KitId: this.hiv_status_table_data[i][j]['kitname']['itemId'],
                     KitLotNumber: this.hiv_status_table_data[i][j]['lotnumber'],
-                    ExpiryDate: this.hiv_status_table_data[i][j]['expirydate'],
+                    ExpiryDate: moment(this.hiv_status_table_data[i][j]['expirydate']).toDate(),
                     Outcome: this.hiv_status_table_data[i][j]['testresult']['itemId'],
                     TestRound: this.hiv_status_table_data[i][j]['testtype']['itemName'] == 'HIV Test-1' ? 1 : 2,
                 });

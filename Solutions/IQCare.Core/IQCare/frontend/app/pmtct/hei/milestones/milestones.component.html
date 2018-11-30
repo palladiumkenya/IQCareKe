@@ -101,14 +101,15 @@
                     <ng-container matColumnDef="action">
                         <mat-header-cell *matHeaderCellDef></mat-header-cell>
                         <mat-cell *matCellDef="let row">
-                            <button mat-raised-button class="mat-accent"><span class="fa fa-trash-o"> Delete</span>
+                            <button mat-raised-button class="mat-accent" (click)="onRowClicked(row)">
+                                <span class="fa fa-trash-o">Delete</span>
                             </button>
                         </mat-cell>
                     </ng-container>
 
 
                     <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-                    <mat-row *matRowDef="let row; columns: displayedColumns" (click)="onRowClicked(row)">
+                    <mat-row *matRowDef="let row; columns: displayedColumns">
                     </mat-row>
                 </mat-table>
             </div>

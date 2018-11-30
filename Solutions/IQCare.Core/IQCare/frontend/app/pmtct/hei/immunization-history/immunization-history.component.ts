@@ -1,3 +1,5 @@
+import { LookupItemView } from './../../../shared/_models/LookupItemView';
+import { HeiService } from './../../_services/hei.service';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { SnotifyService } from 'ng-snotify';
@@ -6,6 +8,7 @@ import { NotificationService } from '../../../shared/_services/notification.serv
 import { MatTableDataSource } from '@angular/material';
 import { ImmunizationHistory } from '../../_models/hei/ImmunizationHistory';
 import { ImmunizationHistoryTableData } from '../../_models/hei/ImmunizationHistoryTableData';
+import * as moment from 'moment';
 
 @Component({
     selector: 'app-immunization-history',
@@ -15,7 +18,7 @@ import { ImmunizationHistoryTableData } from '../../_models/hei/ImmunizationHist
 export class ImmunizationHistoryComponent implements OnInit {
 
     public ImmunizationHistoryFormGroup: FormGroup;
-    public immunizationperiods: any[] = [];
+    public immunizationperiods: LookupItemView[] = [];
     public vaccines: any[] = [];
     public yesnoOptions: any[] = [];
     public immunization_history_table_data: ImmunizationHistoryTableData[] = [];
@@ -26,13 +29,17 @@ export class ImmunizationHistoryComponent implements OnInit {
     dataSource = new MatTableDataSource(this.immunization_history_table_data);
 
     @Input('immunizationHistoryOptions') immunizationHistoryOptions: any;
+    @Input('isEdit') isEdit: boolean;
+    @Input('patientId') patientId: number;
+    @Input('patientMasterVisitId') patientMasterVisitId: number;
+
     @Output() notify: EventEmitter<object> = new EventEmitter<object>();
-    //  @Output() vaccineArray: EventEmitter<ImmunizationHistory[]> = new EventEmitter<ImmunizationHistory[]>();
 
     constructor(private _formBuilder: FormBuilder,
         private _lookupItemService: LookupItemService,
         private snotifyService: SnotifyService,
-        private notificationService: NotificationService) {
+        private notificationService: NotificationService,
+        private heiservice: HeiService) {
         this.maxDate = new Date();
     }
 
@@ -42,7 +49,7 @@ export class ImmunizationHistoryComponent implements OnInit {
             period: new FormControl('', [Validators.required]),
             immunizationGiven: new FormControl('', [Validators.required]),
             dateImmunized: new FormControl('', [Validators.required]),
-            nextSchedule: new FormControl('', [Validators.required])
+            nextSchedule: new FormControl('')
         });
         const {
             immunizationPeriod,
@@ -54,16 +61,40 @@ export class ImmunizationHistoryComponent implements OnInit {
         this.yesnoOptions = yesnoOption;
 
         this.notify.emit({ 'form': this.ImmunizationHistoryFormGroup, 'data': this.immunization_history });
-        // this.vaccineArray.emit(this.immunization_history);
+
+        if (this.isEdit) {
+            this.loadImmunizationHistory();
+        }
+    }
+
+    public loadImmunizationHistory(): void {
+        this.heiservice.getImmunizationHistory(this.patientId).subscribe(
+            (result) => {
+                for (let i = 0; i < result.length; i++) {
+                    const immunizationPeriod = this.immunizationperiods.filter(obj => obj.itemId == result[i].periodId);
+                    const immunizationGiven = this.vaccines.filter(obj => obj.itemId == result[i].vaccine);
+                    this.immunization_history_table_data.push({
+                        immunizationPeriod: immunizationPeriod.length > 0 ? immunizationPeriod[0].itemName : '',
+                        given: immunizationGiven.length > 0 ? immunizationGiven[0].itemName : '',
+                        dateImmunized: result[i].vaccineDate ? result[i].vaccineDate : null,
+                        nextSchedule: result[i].nextSchedule ? result[i].nextSchedule : null
+                    });
+                }
+
+                this.dataSource = new MatTableDataSource(this.immunization_history_table_data);
+            },
+            (error) => { },
+            () => { }
+        );
     }
 
     public AddImmunization() {
-        console.log(this.ImmunizationHistoryFormGroup.value);
         if (this.ImmunizationHistoryFormGroup.invalid) {
             this.snotifyService.warning('Please complete all fields before add', 'Immunization History',
                 this.notificationService.getConfig());
             return;
         }
+
         const period = this.ImmunizationHistoryFormGroup.get('period').value.itemName;
         if (this.immunization_history_table_data.filter(x => x.immunizationPeriod === period).length > 0) {
             this.snotifyService.warning('' + period + ' exists', 'Immunization History', this.notificationService.getConfig());

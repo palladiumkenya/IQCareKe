@@ -63,6 +63,15 @@ export class ServicesListComponent implements OnInit {
         });
     }
 
+    newTriage() {
+        localStorage.setItem('selectedService', 'triage');
+        this.store.dispatch(new Consent.SelectedService('triage'));
+        this.zone.run(() => {
+            this.router.navigate(['/clinical/triage/' + this.patientId],
+                { relativeTo: this.route });
+        });
+    }
+
     newEncounter(serviceId: number) {
         const selectedService = this.services.filter(obj => obj.id == serviceId);
         if (selectedService && selectedService.length > 0) {
@@ -111,6 +120,7 @@ export class ServicesListComponent implements OnInit {
     }
 
     isServiceEligible(serviceAreaId: number) {
+        const isCCCEnrolled = this.enrolledServices.filter(obj => obj.serviceAreaId == 1);
         const selectedService = this.services.filter(obj => obj.id == serviceAreaId);
         let isEligible: boolean = true;
         if (selectedService && selectedService.length > 0) {
@@ -141,6 +151,13 @@ export class ServicesListComponent implements OnInit {
                         isEligible = true;
                     } else {
                         isEligible = false;
+                    }
+                    break;
+                case 'HTS':
+                    if (isCCCEnrolled.length > 0) {
+                        isEligible = false;
+                    } else {
+                        isEligible = true;
                     }
                     break;
             }

@@ -43,6 +43,31 @@ namespace IQCare.Controllers.PMTCT.ANC
             return BadRequest(response.Value);
         }
 
+        [HttpGet("{patientId}/{serviceAreaId}")]
+        public async Task<IActionResult> GetVisitDetailsByVisitType(int patientId, int serviceAreaId )
+        {
+            if (patientId < 1 || serviceAreaId < 1)
+                return BadRequest(patientId + ' ' + serviceAreaId);
+            var response = await _mediator.Send(new GetVisitDetailsByServiceAreaIdCommand {PatientId= patientId, ServiceAreaId= serviceAreaId},HttpContext.RequestAborted);
+            if (response.IsValid)
+                return Ok(response.Value);
+            return BadRequest(response.Value);
+        }
+
+        [HttpGet("{patientId}/{serviceAreaName}")]
+        public async Task<IActionResult> GetVisitDetailsByServiceAreaName(int patientId, string serviceAreaName)
+        {
+            if (patientId < 1)
+                return BadRequest(patientId);
+            var response = await 
+                _mediator.Send(
+                    new GetVisitDetailsByServiceAreaNameCommand
+                        {PatientId = patientId, ServiceAreaName = serviceAreaName}, HttpContext.RequestAborted);
+            if (response.IsValid)
+                return Ok(response.Value);
+            return BadRequest(response.Value);
+        }
+
         [HttpPut]
         public async Task<IActionResult> Put([FromBody] EditVisitDetailsCommand command)
         {

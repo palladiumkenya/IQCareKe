@@ -12,13 +12,15 @@
     <!-- Sidebar Menu -->
     <ul class="nav sidebar-menu">
 
-        <!--Dashboard-->
-        <li>
-            <a href="/IQCare">
-                <i class="menu-icon glyphicon glyphicon-home"></i>
-                <span class="menu-text"> Facility Home </span>
-            </a>
-        </li>
+        <!-- Person Home-->
+        <ng-container *ngIf="selectedService">
+            <li>
+                <a routerLink="/dashboard/personhome/{{ personId }}">
+                    <i class="menu-icon glyphicon glyphicon-home"></i>
+                    <span class="menu-text">Person Home</span>
+                </a>
+            </li>
+        </ng-container>
 
         <!-- Search Person -->
         <li>
@@ -34,15 +36,6 @@
                 <span class="menu-text"> New Person </span>
             </a>
         </li>
-
-        <ng-container *ngIf="">
-                <li>
-                 <a routerLink="/clinical/triage">
-                            <i class="menu-icon fa fa-user-md"></i>
-                            <span class="menu-text">Triage</span>
-                 </a>
-                </li>
-        </ng-container>
 
         <ng-container *ngIf="selectedService == 'hts'">
             <li>
