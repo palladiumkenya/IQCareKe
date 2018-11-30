@@ -1,4 +1,8 @@
-﻿CREATE VIEW PatientDrugAdministrationView 
+﻿
+IF OBJECT_ID('dbo.PatientDrugAdministrationView', 'V') IS NOT NULL
+    DROP VIEW [dbo].[PatientDrugAdministrationView]
+GO
+CREATE VIEW PatientDrugAdministrationView 
 AS
 SELECT pd.*,drg.DisplayName AS StrDrugAdministered, 
 val.DisplayName AS StrValue FROM PatientDrugAdministration pd

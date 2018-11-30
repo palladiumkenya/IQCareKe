@@ -13,6 +13,7 @@ export class MaternityNextAppointmentComponent implements OnInit {
 
     nextAppointmentFormGroup: FormGroup;
     public maxtDate: Date = moment().toDate();
+    public minDate: Date = moment().toDate();
     @Input() dischargeOptions: any[] = [];
     @Input('isEdit') isEdit: boolean;
     @Input('patientId') patientId: number;
@@ -28,7 +29,7 @@ export class MaternityNextAppointmentComponent implements OnInit {
     ngOnInit() {
         this.nextAppointmentFormGroup = this.formBuilder.group({
             nextAppointmentDate: new FormControl('', [Validators.required]),
-            remarks: new FormControl('', [Validators.required])
+            remarks: new FormControl('none', [])
         });
 
         this.notify.emit(this.nextAppointmentFormGroup);
