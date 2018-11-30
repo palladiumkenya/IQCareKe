@@ -46,7 +46,7 @@ export class HeiVisitDetailsComponent implements OnInit {
             visitType: new FormControl('', [Validators.required]),
             visitDate: new FormControl('', [Validators.required]),
             cohort: new FormControl(''),
-            visitNumber: new FormControl('', [Validators.required]),
+            visitNumber: new FormControl('', [Validators.min(0) , Validators.max(40), Validators.required]),
             dayPostPartum: new FormControl('', [Validators.required])
         });
 
