@@ -1,4 +1,8 @@
-﻿CREATE VIEW [dbo].[PatientScreeningDetailsView]
+﻿IF OBJECT_ID('dbo.PatientScreeningDetailsView', 'V') IS NOT NULL
+    DROP VIEW [dbo].[PatientScreeningDetailsView]
+GO
+
+CREATE VIEW [dbo].[PatientScreeningDetailsView]
 AS
 
 SELECT ps.Id,ps.PatientId, ps.PatientMasterVisitId, ps.ScreeningTypeId, ps.ScreeningCategoryId,ps.ScreeningDate,
