@@ -45,5 +45,17 @@ namespace IQCare.Controllers.PMTCT
 
             return BadRequest(response);
         }
+
+        [HttpPost]
+        public async Task<object> CalculateZscore([FromBody]CalculateZscoreCommand zscoreCommand)
+        {
+            var zscoreResult = await _mediator.Send(zscoreCommand, HttpContext.RequestAborted);
+
+            if (zscoreResult.IsValid)
+                return Ok(zscoreResult.Value);
+
+            return BadRequest(zscoreResult);
+
+        }
     }
 }

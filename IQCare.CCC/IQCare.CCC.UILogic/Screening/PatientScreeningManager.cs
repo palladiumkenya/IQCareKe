@@ -236,13 +236,15 @@ namespace IQCare.CCC.UILogic.Screening
         }
 
        
-        public int UpdatePatientScreening(int id,DateTime visitDate ,int screeningTypeId, bool screeningDone, DateTime screeningDate, int screeningCategoryId, int screeningValueId, string comment)
+        public int UpdatePatientScreening(int id,DateTime visitDate,int patientId,int patientMasterVisitId,int screeningTypeId, bool screeningDone, DateTime screeningDate, int screeningCategoryId, int screeningValueId, string comment)
         {
             try
             {
                 var PS = new PatientScreening()
                 {
                     Id = id,
+                    PatientId=patientId,
+                    PatientMasterVisitId=patientMasterVisitId,
                     VisitDate = visitDate,
                     ScreeningTypeId = screeningTypeId,
                     ScreeningDone = Convert.ToBoolean(screeningDone),

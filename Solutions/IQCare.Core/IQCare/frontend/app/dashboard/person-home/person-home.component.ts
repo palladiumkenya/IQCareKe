@@ -38,9 +38,6 @@ export class PersonHomeComponent implements OnInit {
     ngOnInit() {
         this.route.params.subscribe(params => {
             this.personId = params['id'];
-            console.log('personId' + this.personId);
-
-            this.getPatientDetilsById(this.personId);
         });
 
         this.route.data.subscribe(res => {
@@ -48,6 +45,10 @@ export class PersonHomeComponent implements OnInit {
 
             this.services = servicesArray;
         });
+
+        console.log('personId' + this.personId);
+        this.getPatientDetailsById(this.personId);
+
         localStorage.removeItem('patientEncounterId');
         localStorage.removeItem('patientMasterVisitId');
         localStorage.removeItem('selectedService');
@@ -55,7 +56,7 @@ export class PersonHomeComponent implements OnInit {
         this.store.dispatch(new Consent.ClearState());
     }
 
-    public getPatientDetilsById(personId: number) {
+    public getPatientDetailsById(personId: number) {
         this.personView$ = this.personService.getPatientByPersonId(personId).subscribe(
             p => {
                 console.log(p);

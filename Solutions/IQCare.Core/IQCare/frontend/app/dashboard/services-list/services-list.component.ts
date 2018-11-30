@@ -51,14 +51,14 @@ export class ServicesListComponent implements OnInit {
         });
     }
 
-    enrollToService(serviceId: number) {
+    enrollToService(serviceId: number, serviceCode: string) {
         if (serviceId == 1) {
             this.snotifyService.error('Please Access CCC from the Greencard menu', 'Encounter History',
                 this.notificationService.getConfig());
             return;
         }
         this.zone.run(() => {
-            this.router.navigate(['/dashboard/enrollment/' + this.personId + '/' + serviceId],
+            this.router.navigate(['/dashboard/enrollment/' + this.personId + '/' + serviceId + '/' + serviceCode],
                 { relativeTo: this.route });
         });
     }
@@ -67,7 +67,7 @@ export class ServicesListComponent implements OnInit {
         localStorage.setItem('selectedService', 'triage');
         this.store.dispatch(new Consent.SelectedService('triage'));
         this.zone.run(() => {
-            this.router.navigate(['/clinical/triage/' + this.patientId],
+            this.router.navigate(['/clinical/triage/' + this.patientId + '/' + this.personId],
                 { relativeTo: this.route });
         });
     }
@@ -120,6 +120,12 @@ export class ServicesListComponent implements OnInit {
     }
 
     isServiceEligible(serviceAreaId: number) {
+        let isCCCEnrolled;
+
+        if (this.enrolledServices) {
+            isCCCEnrolled = this.enrolledServices.filter(obj => obj.serviceAreaId == 1);
+        }
+
         const selectedService = this.services.filter(obj => obj.id == serviceAreaId);
         let isEligible: boolean = true;
         if (selectedService && selectedService.length > 0) {
@@ -150,6 +156,13 @@ export class ServicesListComponent implements OnInit {
                         isEligible = true;
                     } else {
                         isEligible = false;
+                    }
+                    break;
+                case 'HTS':
+                    if (isCCCEnrolled && isCCCEnrolled.length > 0) {
+                        isEligible = false;
+                    } else {
+                        isEligible = true;
                     }
                     break;
             }
