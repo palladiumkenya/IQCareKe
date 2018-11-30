@@ -277,12 +277,12 @@
                     }
                    // checkExistingAppointment();
                 }
-                if (appointmentid > 0) {
-                    updateAppointment();
-                }
-                else {
-                    checkExistingAppointment();
-                }
+                //if (appointmentid > 0) {
+                //    updateAppointment();
+                //}
+                //else {
+                //    checkExistingAppointment();
+                //}
             });
             $("#btnReset").click(function () {
                 resetFields();
