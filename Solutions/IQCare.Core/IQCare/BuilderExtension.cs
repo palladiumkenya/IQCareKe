@@ -1,4 +1,6 @@
-﻿using System.Data.Common;
+﻿using System;
+using System.Data.Common;
+using System.Data.SqlClient;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -46,11 +48,6 @@ namespace IQCare
 
         public static IServiceCollection AddPmtctDatabase(this IServiceCollection services, IConfiguration configuration)
         {
-            //var dbConnectionString = configuration.GetConnectionString("IQCareConnection");
-            //services.AddDbContext<PmtctDbContext>(b => b.UseSqlServer(dbConnectionString));
-            //services.AddScoped(typeof(IPmtctRepository<>), typeof(PmtctRepository<>));
-            //services.AddScoped<IPmtctUnitOfWork>(c => new PmtctUnitOfWork(c.GetRequiredService<PmtctDbContext>()));
-
             services.AddDbContext<PmtctDbContext>(b => b.UseSqlServer(_connectionString));
             services.AddScoped(typeof(IPmtctRepository<>), typeof(PmtctRepository<>));
             services.AddScoped<PMTCT.Infrastructure.IPmtctUnitOfWork>(c => new PmtctUnitOfWork(c.GetRequiredService<PmtctDbContext>()));
@@ -60,16 +57,16 @@ namespace IQCare
 
         public static IServiceCollection AddCommonDatabase(this IServiceCollection services, IConfiguration configuration)
         {
-            //var dbConnectionString = configuration.GetConnectionString("IQCareConnection");
-            //var iqcareuri = configuration.GetSection("IQCareUri").Get<string>();
-            //var db = connectionString.GetConnectionString(iqcareuri);
-            //var dbConnectionString = db.Result;
-
             services.AddDbContext<CommonDbContext>(b => b.UseSqlServer(_connectionString));
             services.AddScoped(typeof(ICommonRepository<>), typeof(CommonRepository<>));
             services.AddScoped<Common.Infrastructure.ICommonUnitOfWork>(c => new CommonUnitOfWork(c.GetRequiredService<CommonDbContext>()));
 
             return services;
+        }
+
+        public static void AddCommonDatabaseFunc(this IServiceCollection services)
+        {
+            services.AddSingleton<Func<SqlConnection>>(() => new SqlConnection(_connectionString));
         }
     }
 }
