@@ -51,14 +51,14 @@ export class ServicesListComponent implements OnInit {
         });
     }
 
-    enrollToService(serviceId: number) {
+    enrollToService(serviceId: number, serviceCode: string) {
         if (serviceId == 1) {
             this.snotifyService.error('Please Access CCC from the Greencard menu', 'Encounter History',
                 this.notificationService.getConfig());
             return;
         }
         this.zone.run(() => {
-            this.router.navigate(['/dashboard/enrollment/' + this.personId + '/' + serviceId],
+            this.router.navigate(['/dashboard/enrollment/' + this.personId + '/' + serviceId + '/' + serviceCode],
                 { relativeTo: this.route });
         });
     }
