@@ -4,7 +4,7 @@ import { TriageComponent } from './triage/triage.component';
 
 const routes: Routes = [
     {
-        path: 'triage/:patientId',
+        path: 'triage/:patientId/:personId',
         component: TriageComponent
     }
 ];

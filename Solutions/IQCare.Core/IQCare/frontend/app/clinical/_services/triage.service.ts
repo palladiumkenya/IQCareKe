@@ -5,6 +5,9 @@ import { AddPatientVitalCommand } from "../_models/AddPatientVitalCommand";
 import { environment } from '../../../environments/environment';
 import { Observable } from 'rxjs';
 import { tap, catchError } from 'rxjs/operators';
+import { CalculateZscoreCommand } from '../_models/CalculateZscoreCommand';
+import { PersonHomeService } from '../../dashboard/services/person-home.service';
+import moment = require('moment');
 
 const httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -16,7 +19,8 @@ const httpOptions = {
 export class TriageService {
     private API_URL = environment.API_URL;
 
-    constructor(private httpClient: HttpClient, private errorHandlerService: ErrorHandlerService) {
+    constructor(private httpClient: HttpClient, private errorHandlerService: ErrorHandlerService,
+        private personHomeService :PersonHomeService) {
 
     }
 
@@ -37,8 +41,33 @@ export class TriageService {
         );
     }
 
+    public calculateZscore(zscoreCommand : CalculateZscoreCommand) : any {
+        return this.httpClient.post<CalculateZscoreCommand>(this.API_URL + '/api/PatientVitals/CalculateZscore',
+        JSON.stringify(zscoreCommand), httpOptions).pipe(
+            tap(calculatePatientZscore => this.errorHandlerService.log(`successfully calculated patient zscores`)),
+            catchError(this.errorHandlerService.handleError<any>('Error calculating patient zscore'))
+        );
+    }
+
     public calculateBmi(weight: number, heightInCm: number): any {
         const heightInMetres = heightInCm / 100;
         return weight / (heightInMetres * heightInMetres);
+    }
+
+   
+    public getPersonDetails(personId:number) : any {
+      this.personHomeService.getPatientByPersonId(personId).subscribe(person=>{
+          return person;
+      });
+    }
+
+    public qualifiesForZscoreCalculation(dateOfBirth:number) : any{
+       var zscoreMinimumAgeQualification = 15;
+
+        var dobMoment = moment(dateOfBirth);
+        var currentDate = moment(Date());
+       
+        var age = moment.duration(currentDate.diff(dobMoment)).asYears().toFixed(1);
+        return parseInt(age) <= zscoreMinimumAgeQualification;
     }
 }
