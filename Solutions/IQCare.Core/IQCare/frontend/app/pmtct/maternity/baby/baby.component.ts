@@ -51,7 +51,7 @@ export class BabyComponent implements OnInit {
             agparScore5min: new FormControl('', [Validators.required]),
             agparScore10min: new FormControl('', [Validators.required]),
             notificationNumber: new FormControl('', [Validators.required]),
-            comment: new FormControl('', [Validators.required])
+            comment: new FormControl('na', [])
         });
 
         const {
