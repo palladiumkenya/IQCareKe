@@ -65,7 +65,7 @@
               <xs:sequence>
                 <xs:element name="Id" type="xs:int" minOccurs="0" />
                 <xs:element name="Name" type="xs:string" minOccurs="0" />
-                <xs:element name="SRNo" type="xs:int" minOccurs="0" />
+                <xs:element name="SRNo" type="xs:decimal" minOccurs="0" />
                 <xs:element name="UpdateFlag" type="xs:int" minOccurs="0" />
                 <xs:element name="DeleteFlag" type="xs:int" minOccurs="0" />
                 <xs:element name="SystemID" type="xs:int" minOccurs="0" />
@@ -150,7 +150,7 @@
   </Mst_LabTest>
   <Mst_LabTest>
     <LabTestId>59</LabTestId>
-    <LabName>Colposcopy (Cervical CA ? female only)</LabName>
+    <LabName>Colposcopy (Cervical CA – female only)</LabName>
     <LabDepartmentId>1</LabDepartmentId>
     <LabTypeId>0</LabTypeId>
     <Sequence>10</Sequence>
@@ -294,7 +294,7 @@
   </Mst_LabTest>
   <Mst_LabTest>
     <LabTestId>66</LabTestId>
-    <LabName>Hepatitis B core ? antibody, total</LabName>
+    <LabName>Hepatitis B core – antibody, total</LabName>
     <LabDepartmentId>4</LabDepartmentId>
     <LabTypeId>0</LabTypeId>
     <Sequence>28</Sequence>
@@ -302,7 +302,7 @@
   </Mst_LabTest>
   <Mst_LabTest>
     <LabTestId>67</LabTestId>
-    <LabName>Hepatitis B surface ? antibody (HBsAb)</LabName>
+    <LabName>Hepatitis B surface – antibody (HBsAb)</LabName>
     <LabDepartmentId>4</LabDepartmentId>
     <LabTypeId>0</LabTypeId>
     <Sequence>29</Sequence>
@@ -310,7 +310,7 @@
   </Mst_LabTest>
   <Mst_LabTest>
     <LabTestId>68</LabTestId>
-    <LabName>Hepatitis B surface ? antigen (HBsAg)</LabName>
+    <LabName>Hepatitis B surface – antigen (HBsAg)</LabName>
     <LabDepartmentId>4</LabDepartmentId>
     <LabTypeId>0</LabTypeId>
     <Sequence>30</Sequence>
@@ -358,7 +358,7 @@
   </Mst_LabTest>
   <Mst_LabTest>
     <LabTestId>70</LabTestId>
-    <LabName>Pap Smear (Cervical CA ? female only)</LabName>
+    <LabName>Pap Smear (Cervical CA – female only)</LabName>
     <LabDepartmentId>3</LabDepartmentId>
     <LabTypeId>0</LabTypeId>
     <Sequence>36</Sequence>
@@ -574,15 +574,15 @@
   </Mst_LabTest>
   <Lnk_TestParameter>
     <SubTestId>1</SubTestId>
-    <SubTestName>CD4 Count</SubTestName>
+    <SubTestName>CD4</SubTestName>
     <TestId>1</TestId>
     <DeleteFlag>false</DeleteFlag>
   </Lnk_TestParameter>
   <Lnk_TestParameter>
     <SubTestId>2</SubTestId>
     <SubTestName>CD4 Percent</SubTestName>
-    <TestId>2</TestId>
-    <DeleteFlag>false</DeleteFlag>
+    <TestId>1</TestId>
+    <DeleteFlag>true</DeleteFlag>
   </Lnk_TestParameter>
   <Lnk_TestParameter>
     <SubTestId>3</SubTestId>
@@ -802,7 +802,7 @@
   </Lnk_TestParameter>
   <Lnk_TestParameter>
     <SubTestId>59</SubTestId>
-    <SubTestName>Colposcopy (Cervical CA ? female only)</SubTestName>
+    <SubTestName>Colposcopy (Cervical CA – female only)</SubTestName>
     <TestId>59</TestId>
     <DeleteFlag>false</DeleteFlag>
   </Lnk_TestParameter>
@@ -838,25 +838,25 @@
   </Lnk_TestParameter>
   <Lnk_TestParameter>
     <SubTestId>65</SubTestId>
-    <SubTestName>Hepatitis B core ? antibody IgM (HBsAb)</SubTestName>
+    <SubTestName>Hepatitis B core – antibody IgM (HBsAb)</SubTestName>
     <TestId>65</TestId>
     <DeleteFlag>false</DeleteFlag>
   </Lnk_TestParameter>
   <Lnk_TestParameter>
     <SubTestId>66</SubTestId>
-    <SubTestName>Hepatitis B core ? antibody. total</SubTestName>
+    <SubTestName>Hepatitis B core – antibody. total</SubTestName>
     <TestId>66</TestId>
     <DeleteFlag>false</DeleteFlag>
   </Lnk_TestParameter>
   <Lnk_TestParameter>
     <SubTestId>67</SubTestId>
-    <SubTestName>Hepatitis B surface ? antibody (HBsAb)</SubTestName>
+    <SubTestName>Hepatitis B surface – antibody (HBsAb)</SubTestName>
     <TestId>67</TestId>
     <DeleteFlag>false</DeleteFlag>
   </Lnk_TestParameter>
   <Lnk_TestParameter>
     <SubTestId>68</SubTestId>
-    <SubTestName>Hepatitis B surface ? antigen (HBsAg)</SubTestName>
+    <SubTestName>Hepatitis B surface – antigen (HBsAg)</SubTestName>
     <TestId>68</TestId>
     <DeleteFlag>false</DeleteFlag>
   </Lnk_TestParameter>
@@ -868,7 +868,7 @@
   </Lnk_TestParameter>
   <Lnk_TestParameter>
     <SubTestId>70</SubTestId>
-    <SubTestName>Pap Smear (Cervical CA ? female only)</SubTestName>
+    <SubTestName>Pap Smear (Cervical CA – female only)</SubTestName>
     <TestId>70</TestId>
     <DeleteFlag>false</DeleteFlag>
   </Lnk_TestParameter>
@@ -1805,14 +1805,14 @@
   </Lnk_ParameterResult>
   <LabTestOrder>
     <SubTestId>1</SubTestId>
-    <SubTestName>CD4 Count</SubTestName>
+    <SubTestName>CD4</SubTestName>
     <TestId>1</TestId>
     <DeleteFlag>false</DeleteFlag>
   </LabTestOrder>
   <LabTestOrder>
     <SubTestId>2</SubTestId>
     <SubTestName>CD4 Percent</SubTestName>
-    <TestId>2</TestId>
+    <TestId>1</TestId>
     <DeleteFlag>false</DeleteFlag>
   </LabTestOrder>
   <LabTestOrder>
@@ -2021,7 +2021,7 @@
   </LabTestOrder>
   <LabTestOrder>
     <SubTestId>59</SubTestId>
-    <SubTestName>Colposcopy (Cervical CA ? female only)</SubTestName>
+    <SubTestName>Colposcopy (Cervical CA – female only)</SubTestName>
     <TestId>59</TestId>
     <DeleteFlag>false</DeleteFlag>
   </LabTestOrder>
@@ -2057,25 +2057,25 @@
   </LabTestOrder>
   <LabTestOrder>
     <SubTestId>65</SubTestId>
-    <SubTestName>Hepatitis B core ? antibody IgM (HBsAb)</SubTestName>
+    <SubTestName>Hepatitis B core – antibody IgM (HBsAb)</SubTestName>
     <TestId>65</TestId>
     <DeleteFlag>false</DeleteFlag>
   </LabTestOrder>
   <LabTestOrder>
     <SubTestId>66</SubTestId>
-    <SubTestName>Hepatitis B core ? antibody. total</SubTestName>
+    <SubTestName>Hepatitis B core – antibody. total</SubTestName>
     <TestId>66</TestId>
     <DeleteFlag>false</DeleteFlag>
   </LabTestOrder>
   <LabTestOrder>
     <SubTestId>67</SubTestId>
-    <SubTestName>Hepatitis B surface ? antibody (HBsAb)</SubTestName>
+    <SubTestName>Hepatitis B surface – antibody (HBsAb)</SubTestName>
     <TestId>67</TestId>
     <DeleteFlag>false</DeleteFlag>
   </LabTestOrder>
   <LabTestOrder>
     <SubTestId>68</SubTestId>
-    <SubTestName>Hepatitis B surface ? antigen (HBsAg)</SubTestName>
+    <SubTestName>Hepatitis B surface – antigen (HBsAg)</SubTestName>
     <TestId>68</TestId>
     <DeleteFlag>false</DeleteFlag>
   </LabTestOrder>
@@ -2087,7 +2087,7 @@
   </LabTestOrder>
   <LabTestOrder>
     <SubTestId>70</SubTestId>
-    <SubTestName>Pap Smear (Cervical CA ? female only)</SubTestName>
+    <SubTestName>Pap Smear (Cervical CA – female only)</SubTestName>
     <TestId>70</TestId>
     <DeleteFlag>false</DeleteFlag>
   </LabTestOrder>
