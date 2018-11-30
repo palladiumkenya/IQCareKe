@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using IQCare.Library;
+using IQCare.PMTCT.Services.Interface.Triage;
 using MediatR;
 
 namespace IQCare.PMTCT.BusinessProcess.Commands
@@ -29,4 +30,23 @@ namespace IQCare.PMTCT.BusinessProcess.Commands
         public string Comment { get; set; }
         public int CreatedBy { get; set; }
     }
+
+    public class CalculateZscoreCommand : IRequest<Result<ZscoreCalculationResult>>
+    {
+        public DateTime DateOfBirth { get; set; }
+        public Sex Sex { get; set; }
+        public double Height { get; set; }
+        public double Weight { get; set; }
+    }
+
+
+    public class ZscoreCalculationResult
+    {
+        public double WeightForAge { get; set; }
+        public double WeightForHeight { get; set; }
+        public double Bmiz { get; set; }
+        public double HeightForAge { get; set; }
+    }
+   
+
 }
