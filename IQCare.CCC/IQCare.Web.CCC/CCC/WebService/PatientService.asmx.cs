@@ -143,10 +143,21 @@ namespace IQCare.Web.CCC.WebService
                     patientScreening.Id = screening.CheckIfPatientScreeningExists((Int32)patientScreening.PatientId, (DateTime)patientScreening.VisitDate, (Int32)patientScreening.ScreeningCategoryId, (Int32)patientScreening.ScreeningTypeId);
                     if ( patientScreening.Id <= 0)
                     {
-                        Result = screening.AddPatientScreening(patientScreening.PatientId, patientScreening.PatientMasterVisitId, (DateTime)patientScreening.VisitDate, (Int32)patientScreening.ScreeningTypeId, (bool)patientScreening.ScreeningDone, (DateTime)patientScreening.ScreeningDate, (Int32)patientScreening.ScreeningCategoryId, patientScreening.ScreeningValueId, patientScreening.Comment, userId);
+                        string comment="";
+                        if(patientScreening.Comment=="null")
+                        {
+                            comment = "";
+                        }
+                        Result = screening.AddPatientScreening(patientScreening.PatientId, patientScreening.PatientMasterVisitId, (DateTime)patientScreening.VisitDate, (Int32)patientScreening.ScreeningTypeId, (bool)patientScreening.ScreeningDone, (DateTime)patientScreening.ScreeningDate, (Int32)patientScreening.ScreeningCategoryId, patientScreening.ScreeningValueId, comment, userId);
                     }
                     else {
-                        Result = screening.UpdatePatientScreening(patientScreening.PatientId, (DateTime)patientScreening.VisitDate, (Int32)patientScreening.ScreeningTypeId, (bool)patientScreening.ScreeningDone, (DateTime)patientScreening.ScreeningDate, (Int32)patientScreening.ScreeningCategoryId, patientScreening.ScreeningValueId, patientScreening.Comment);
+
+                        string comment = "";
+                        if (patientScreening.Comment == "null")
+                        {
+                            comment = "";
+                        }
+                        Result = screening.UpdatePatientScreening(patientScreening.Id, (DateTime)patientScreening.VisitDate,patientScreening.PatientId,patientScreening.PatientMasterVisitId, (Int32)patientScreening.ScreeningTypeId, (bool)patientScreening.ScreeningDone, (DateTime)patientScreening.ScreeningDate, (Int32)patientScreening.ScreeningCategoryId, patientScreening.ScreeningValueId, comment);
                     }
                 }
                 Msg = (Result > 0) ? "Patient Screening Updated Successfully" : "";
