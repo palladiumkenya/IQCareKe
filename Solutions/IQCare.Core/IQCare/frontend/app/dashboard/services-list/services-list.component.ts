@@ -63,6 +63,15 @@ export class ServicesListComponent implements OnInit {
         });
     }
 
+    newTriage() {
+        localStorage.setItem('selectedService', 'triage');
+        this.store.dispatch(new Consent.SelectedService('triage'));
+        this.zone.run(() => {
+            this.router.navigate(['/clinical/triage/' + this.patientId],
+                { relativeTo: this.route });
+        });
+    }
+
     newEncounter(serviceId: number) {
         const selectedService = this.services.filter(obj => obj.id == serviceId);
         if (selectedService && selectedService.length > 0) {

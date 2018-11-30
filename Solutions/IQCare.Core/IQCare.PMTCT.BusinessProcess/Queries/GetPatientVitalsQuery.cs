@@ -9,7 +9,7 @@ namespace IQCare.PMTCT.BusinessProcess.Queries
 {
     public class GetPatientVitalsQuery : IRequest<Result<List<PatientVitalViewModel>>>
     {
-        public int MasterVisitId { get; set; }
+        public int PatientId { get; set; }
         
     }
 

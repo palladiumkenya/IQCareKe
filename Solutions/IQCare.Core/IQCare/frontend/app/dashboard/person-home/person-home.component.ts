@@ -60,6 +60,9 @@ export class PersonHomeComponent implements OnInit {
             p => {
                 console.log(p);
                 this.person = p;
+
+                localStorage.setItem('personId', this.person.personId.toString());
+                this.store.dispatch(new Consent.PersonId(this.person.personId));
             },
             (err) => {
                 this.snotifyService.error('Error editing encounter ' + err, 'person detail service',

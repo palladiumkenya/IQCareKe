@@ -22,7 +22,6 @@ export class PersonHomeService {
         private errorHandler: ErrorHandlerService) { }
 
     public getPatientByPersonId(personId: Number): Observable<PersonView> {
-        console.log(personId);
         return this.http.get<PersonView>(this.API_URL + '' + this._url + '/' + personId).pipe(
             tap(getPatientByPersonId => this.errorHandler.log('get ' + personId + 'options by Name')),
             catchError(this.errorHandler.handleError<PersonView>('getPatientByPersonId'))
@@ -60,13 +59,13 @@ export class PersonHomeService {
     }
 
 
-    public getChronicIllnessesByPatientId(patientId:number) : Observable<any> {
+    public getChronicIllnessesByPatientId(patientId: number): Observable<any> {
         return this.http.get<any>(this.API_URL + '/api/PatientChronicIllness/GetByPatientId/' + patientId).pipe(
             tap(getChronicIllnessesByPatientId => this.errorHandler.log(`get patient chronic illnesses`)),
             catchError(this.errorHandler.handleError<any>('getChronicIllnessesByPatientId'))
         );
     }
-    public getRelationshipsByPatientId(patientId:number) : Observable<any> {
+    public getRelationshipsByPatientId(patientId: number): Observable<any> {
         return this.http.get<any>(this.API_URL + '/api/PatientServices/GetRelationshipsByPatientId/' + patientId).pipe(
             tap(getRelationshipsByPatientId => this.errorHandler.log(`get patient relationships`)),
             catchError(this.errorHandler.handleError<any>('getRelationshipsByPatientId'))

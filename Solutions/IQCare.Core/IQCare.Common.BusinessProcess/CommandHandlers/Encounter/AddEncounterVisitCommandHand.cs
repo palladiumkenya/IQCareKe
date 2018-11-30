@@ -6,6 +6,7 @@ using IQCare.Common.Core.Models;
 using IQCare.Common.Infrastructure;
 using IQCare.Library;
 using MediatR;
+using Microsoft.EntityFrameworkCore;
 
 namespace IQCare.Common.BusinessProcess.CommandHandlers.Encounter
 {
@@ -23,6 +24,22 @@ namespace IQCare.Common.BusinessProcess.CommandHandlers.Encounter
             {
                 try
                 {
+                    var masterVisits = await _unitOfWork.Repository<Core.Models.PatientMasterVisit>()
+                        .Get(x => x.PatientId == request.PatientId && x.VisitDate == request.EncounterDate)
+                        .ToListAsync();
+
+                    if (masterVisits.Count > 0)
+                    {
+                        var patientEncounters = await _unitOfWork.Repository<PatientEncounter>()
+                            .Get(x => x.PatientMasterVisitId == masterVisits[0].Id).ToListAsync();
+
+                        return Result<AddEncounterVisitResponse>.Valid(new AddEncounterVisitResponse
+                        {
+                            PatientMasterVisitId = masterVisits[0].Id,
+                            PatientEncounterId = patientEncounters[0].Id
+                        });
+                    }
+
                     Core.Models.PatientMasterVisit patientMasterVisit = new Core.Models.PatientMasterVisit()
                     {
                         PatientId = request.PatientId,
