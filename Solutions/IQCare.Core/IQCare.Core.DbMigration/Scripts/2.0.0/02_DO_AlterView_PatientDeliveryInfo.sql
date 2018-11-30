@@ -2,7 +2,7 @@
     DROP VIEW [dbo].[PatientDeliveryInformationView]
 GO
 
-ALTER VIEW PatientDeliveryInformationView AS
+CREATE VIEW PatientDeliveryInformationView AS
 SELECT pt.DeliveryID AS Id, pt.PatientMasterVisitID AS PatientMasterVisitId, pt.ProfileID AS ProfileId, 
 pt.DurationOfLabour, pt.DateOfDelivery, pt.TimeOfDelivery,pt.BloodLossCapacity, blc.DisplayName AS BloodLossClassification,
 pt.BloodLossClassification AS BloodLossClassificationId,
