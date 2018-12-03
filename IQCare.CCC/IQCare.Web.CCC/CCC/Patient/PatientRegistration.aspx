@@ -613,7 +613,7 @@
                         $('#idnumbersection').hide();
                     }
                 }
-                if (patientage )
+                
 
 				$('#MyDateOfBirth').datepicker({
 						date:null,

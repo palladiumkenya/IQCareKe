@@ -58,7 +58,7 @@ namespace IQCare.Web.CCC.UC.Adherence
                 }
             }
         }
-        protected void getHIVAwareness(int PatientId, int PatientMasterVisitId)
+        public void getHIVAwareness(int PatientId, int PatientMasterVisitId)
         {
             var PSM = new PatientScreeningManager();
             List<PatientScreening> screeningList = PSM.GetPatientScreeningByVisitId(PatientId, PatientMasterVisitId);

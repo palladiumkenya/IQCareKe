@@ -1,5 +1,5 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="ucUnderstanding.ascx.cs" Inherits="IQCare.Web.CCC.UC.Adherence.ucUnderstanding" %>
-<%@ OutputCache duration="86400" varybyparam="none" %>
+
 <div class="col-md-12 form-group">
 	<div class="col-md-12">
 		<div class="panel panel-info">

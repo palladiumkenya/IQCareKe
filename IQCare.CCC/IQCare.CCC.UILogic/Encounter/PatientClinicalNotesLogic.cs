@@ -14,6 +14,7 @@ namespace IQCare.CCC.UILogic.Encounter
             try
             {
                 int notesId = _patientNotes.checkPatientNotesifExisting(patientId, notesCategoryId);
+               
                 if (notesId > 0)
                 {
                     var PCN = new PatientClinicalNotes()
