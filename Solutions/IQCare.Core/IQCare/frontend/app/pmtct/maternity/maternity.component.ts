@@ -668,15 +668,13 @@ export class MaternityComponent implements OnInit {
 
                     if(this.pregnancyId == 0){
                         this.matService.savePregnancyProfile(pregnancyCommand).subscribe((result)=>
-                        {      
-                            console.log("Pregnancy Id" + result.pregnancyId);   
+                        {          
                             maternityDeliveryCommand.PregnancyId = result.pregnancyId;
                             visitDetailsCommand.PregnancyId = result.pregnancyId;  
 
                             this.sendPatientDeliveryInfoRequest(maternityDeliveryCommand,babyConditionInfo);
                             this.sendVisitDetailsRequest(visitDetailsCommand);
 
-                            console.log("Pregancy add result " + result);
                         },
                         (err)=>
                         {
@@ -686,8 +684,8 @@ export class MaternityComponent implements OnInit {
                         });
 
                     }else{
-                        this.sendPatientDeliveryInfoRequest(maternityDeliveryCommand,babyConditionInfo);
-                        this.sendVisitDetailsRequest(visitDetailsCommand);
+                         this.sendPatientDeliveryInfoRequest(maternityDeliveryCommand,babyConditionInfo);
+                         this.sendVisitDetailsRequest(visitDetailsCommand);
                     }
                     
                     
