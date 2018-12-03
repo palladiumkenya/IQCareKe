@@ -1,16 +1,17 @@
-import {Component, NgZone, OnInit} from '@angular/core';
-import {FamilyScreening} from '../_models/familyScreening';
-import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
-import {ActivatedRoute, Router} from '@angular/router';
-import {LookupItemView} from '../../shared/_models/LookupItemView';
-import {FamilyService} from '../_services/family.service';
-import {NotificationService} from '../../shared/_services/notification.service';
-import {SnotifyService} from 'ng-snotify';
+import { Component, NgZone, OnInit } from '@angular/core';
+import { FamilyScreening } from '../_models/familyScreening';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
+import { LookupItemView } from '../../shared/_models/LookupItemView';
+import { FamilyService } from '../_services/family.service';
+import { NotificationService } from '../../shared/_services/notification.service';
+import { SnotifyService } from 'ng-snotify';
+import * as moment from 'moment';
 
 @Component({
-  selector: 'app-family-screening',
-  templateUrl: './family-screening.component.html',
-  styleUrls: ['./family-screening.component.css']
+    selector: 'app-family-screening',
+    templateUrl: './family-screening.component.html',
+    styleUrls: ['./family-screening.component.css']
 })
 export class FamilyScreeningComponent implements OnInit {
     familyScreening: FamilyScreening;
@@ -20,12 +21,12 @@ export class FamilyScreeningComponent implements OnInit {
     familyScreeningCategories: LookupItemView[];
 
     constructor(private _formBuilder: FormBuilder,
-                private route: ActivatedRoute,
-                private familyService: FamilyService,
-                private snotifyService: SnotifyService,
-                private notificationService: NotificationService,
-                private router: Router,
-                public zone: NgZone) { }
+        private route: ActivatedRoute,
+        private familyService: FamilyService,
+        private snotifyService: SnotifyService,
+        private notificationService: NotificationService,
+        private router: Router,
+        public zone: NgZone) { }
     ngOnInit() {
         this.familyScreening = new FamilyScreening();
         this.familyScreening.userId = JSON.parse(localStorage.getItem('appUserId'));
@@ -65,6 +66,8 @@ export class FamilyScreeningComponent implements OnInit {
 
             if (!this.familyScreening.dateBooked) {
                 this.familyScreening.dateBooked = '';
+            } else {
+                this.familyScreening.dateBooked = moment(this.familyScreening.dateBooked).toDate().toDateString();
             }
 
             const arr = new Array();
@@ -84,11 +87,13 @@ export class FamilyScreeningComponent implements OnInit {
                 arr.push(familyScreening);
             }
 
+            this.familyScreening.dateOfScreening = moment(this.familyScreening.dateOfScreening).toDate().toDateString();
+
             this.familyService.addFamilyScreening(this.familyScreening, arr).subscribe(res => {
                 console.log('res');
                 this.snotifyService.success('Successfully saved family screening',
                     'Family Screening', this.notificationService.getConfig());
-                this.zone.run(() => { this.router.navigate(['/hts/family'], { relativeTo: this.route}); });
+                this.zone.run(() => { this.router.navigate(['/hts/family'], { relativeTo: this.route }); });
             }, err => {
                 this.snotifyService.error('Error saving family screening ' + err,
                     'Family Screening', this.notificationService.getConfig());
@@ -108,13 +113,13 @@ export class FamilyScreeningComponent implements OnInit {
         });
 
         if (optionHivStatus[0]['itemName'] == 'Positive') {
-            this.formGroup.controls.eligibleForTesting.disable({onlySelf: true});
+            this.formGroup.controls.eligibleForTesting.disable({ onlySelf: true });
             this.formGroup.controls.eligibleForTesting.setValue(null);
-            this.formGroup.controls.dateBooked.disable({onlySelf: true});
+            this.formGroup.controls.dateBooked.disable({ onlySelf: true });
             this.formGroup.controls.dateBooked.setValue(null);
         } else {
-            this.formGroup.controls.eligibleForTesting.enable({onlySelf: true});
-            this.formGroup.controls.dateBooked.enable({onlySelf: true});
+            this.formGroup.controls.eligibleForTesting.enable({ onlySelf: true });
+            this.formGroup.controls.dateBooked.enable({ onlySelf: true });
         }
     }
 }

@@ -1,0 +1,4 @@
+﻿IF (EXISTS (SELECT *  FROM INFORMATION_SCHEMA.TABLES  WHERE TABLE_NAME = 'DeliveredBabyBirthInformation'))
+BEGIN 
+ALTER TABLE  [dbo].[DeliveredBabyBirthInformation] DROP COLUMN [APGAR1min],[APGAR5min],[APGAR10min]
+END

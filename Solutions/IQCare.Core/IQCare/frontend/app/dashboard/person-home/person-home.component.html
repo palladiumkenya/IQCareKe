@@ -1,0 +1,485 @@
+<div class="row">
+    <div class="col-md-12">
+        <div class="profile-container">
+            <div class="profile-header row">
+                <div class="col-lg-2 col-sm-2 col-xs-12 text-center">
+                    <img src="assets/img/avatars/default.png" alt="" class="header-avatar" />
+                </div>
+                <div class="col-lg-3 col-sm-3 col-xs-12 profile-info">
+                    <div class="header-fullname"><strong>{{person.lastName}},{{person.midName}}
+                            {{person.firstName}}</strong></div>
+                    <div class="stats-title">
+                        <span class="">{{person.patientType}} Patient</span>
+                    </div>
+                    <div class="header-information">
+                        <a (click)="onEdit()" style="cursor: pointer;">
+                            <mat-icon>
+                                <i className="material-icons">mode_edit</i>
+                            </mat-icon>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-lg-7 col-sm-7 col-xs-12 profile-stats">
+                    <div class="row">
+                        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 stats-col">
+                            <div class="stats-value pink">Gender</div>
+                            <div class="stats-title"><strong>{{person.gender}}</strong></div>
+                        </div>
+                        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 stats-col">
+                            <div class="stats-value pink">Age</div>
+                            <div class="stats-title"><strong>{{person.age}}</strong></div>
+                        </div>
+                        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 stats-col">
+                            <div class="stats-value pink">Marital Status</div>
+                            <div class="stats-title"><strong>{{person.maritalStatusName}}</strong></div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 inlinestats-col">
+                            <!-- <i class="glyphicon glyphicon-map-marker"></i>
+                             <strong>County:</strong> {{ person.county }} <br />
+                             <strong>SubCounty:</strong> {{ person.subCounty }} <br />
+                             <strong>Ward:</strong> {{ person.ward }} <br />
+                             <strong>Landmark:</strong> {{ person.landMark }} -->
+                        </div>
+                        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 inlinestats-col">
+                            <!--Emergency Contact: <strong>$250</strong>-->
+                        </div>
+                        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 inlinestats-col">
+                            Cell: <strong>{{ person.mobileNumber }}</strong>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="profile-body">
+                <div class="col-lg-12">
+                    <div class="tabbable">
+                        <ul class="nav nav-tabs tabs-flat  nav-justified" id="myTab11">
+                            <li class="active">
+                                <a data-toggle="tab" href="#overview">
+                                    <strong>Home</strong>
+                                </a>
+                            </li>
+                            <li class="tab-red">
+                                <a data-toggle="tab" href="#timeline">
+                                    <strong>History</strong>
+                                </a>
+                            </li>
+                            <li class="tab-palegreen">
+                                <a data-toggle="tab" id="contacttab" href="#contacts">
+                                    <strong>Contacts</strong>
+                                </a>
+                            </li>
+                            <li class="tab-yellow">
+                                <a data-toggle="tab" href="#settings">
+                                    <strong><span style="color: blue;">Service</span></strong>
+                                </a>
+                            </li>
+                        </ul>
+                        <div class="tab-content tabs-flat">
+                            <div id="overview" class="tab-pane active">
+                                <div class="row profile-overview">
+                                    <div class="col-md-12">
+                                        <h6 class="row-title before-themeprimary no-margin-top">Clinical Summary</h6>
+                                        <div class="row">
+                                            <!-- <div class="col-lg-6 col-sm-6 col-xs-12">
+                                                <div class="databox databox-xlg databox-halved databox-shadowed databox-vertical no-margin-bottom">
+                                                    <div class="databox-top bg-white padding-10">
+
+                                                        <div class="col-lg-8 col-sm-8 col-xs-8 text-align-left padding-10">
+                                                            <span class="databox-header carbon no-margin">ART SUMMARIES</span>
+                                                            <span class="databox-text lightcarbon no-margin blue">
+                                                                TDF/3TC/EFV
+                                                                | 7th-June-2017 </span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="databox-bottom bg-white no-padding">
+                                                        <div class="databox-row row-12">
+                                                            <div class="databox-row row-6 no-padding">
+                                                                <div class="databox-cell cell-4 no-padding text-align-center bordered-right bordered-platinum">
+                                                                    <span class="databox-text sonic-silver  no-margin">ART
+                                                                        Start Date</span>
+                                                                    <span class="databox-number lightcarbon no-margin">510</span>
+                                                                </div>
+                                                                <div class="databox-cell cell-4 no-padding text-align-center bordered-right bordered-platinum">
+                                                                    <span class="databox-text sonic-silver no-margin">Start
+                                                                        Regimen
+                                                                    </span>
+                                                                    <span class="databox-number lightcarbon no-margin">908</span>
+                                                                </div>
+                                                                <div class="databox-cell cell-4 no-padding text-align-center">
+                                                                    <span class="databox-text sonic-silver no-margin">Next
+                                                                        Visit
+                                                                    </span>
+                                                                    <span class="databox-number lightcarbon no-margin blue">286</span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>-->
+                                        </div>
+
+
+                                        <h6 class="row-title before-orange">Pharmacy Summary</h6>
+                                        <div class="row">
+                                            <!--<div class="col-lg-4 col-sm-6 col-xs-12">
+                                                <div class="databox databox-graded">
+                                                    <div class="databox-left no-padding">
+                                                        <img src="assets/img/avatars/Javi-Jimenez.jpg"
+                                                             style="width:65px; height:65px;">
+                                                    </div>
+                                                    <div class="databox-right padding-top-20 bg-whitesmoke">
+                                                        <div class="databox-stat orange radius-bordered">
+                                                            <i class="stat-icon glyphicon glyphicon-remove"></i>
+                                                        </div>
+                                                        <div class="databox-text darkgray">JAVI JIMENEZ</div>
+                                                        <div class="databox-text darkgray">Manager</div>
+                                                    </div>
+                                                </div>
+                                            </div>-->
+                                            <!-- <div class="col-lg-4 col-sm-6 col-xs-12">
+                                                <div class="databox databox-graded">
+                                                    <div class="databox-left no-padding">
+                                                        <img src="assets/img/avatars/adam-jansen.jpg"
+                                                             style="width:65px; height:65px;">
+                                                    </div>
+                                                    <div class="databox-right padding-top-20 bg-whitesmoke">
+                                                        <div class="databox-stat palegreen radius-bordered">
+                                                            <i class="stat-icon glyphicon glyphicon-plus"></i>
+                                                        </div>
+                                                        <div class="databox-text darkgray">LEE MUNROE</div>
+                                                        <div class="databox-text darkgray">Developer</div>
+                                                    </div>
+                                                </div>
+                                            </div> -->
+                                            <!--<div class="col-lg-4 col-sm-6 col-xs-12">
+                                                <div class="databox databox-graded">
+                                                    <div class="databox-left no-padding">
+                                                        <img src="assets/img/avatars/Nicolai-Larson.jpg"
+                                                             style="width:65px; height:65px;">
+                                                    </div>
+                                                    <div class="databox-right padding-top-20 bg-whitesmoke">
+                                                        <div class="databox-stat palegreen radius-bordered">
+                                                            <i class="stat-icon glyphicon glyphicon-plus"></i>
+                                                        </div>
+                                                        <div class="databox-text darkgray">NICOLAI LARSON</div>
+                                                        <div class="databox-text darkgray">Manager</div>
+                                                    </div>
+                                                </div>
+                                            </div> -->
+
+                                        </div>
+                                        <h6 class="row-title before-palegreen">Laboratory Summary</h6>
+                                        <div class="row">
+                                            <!-- <div class="col-lg-6 col-sm-6 col-xs-12">
+                                                <div class="databox">
+                                                    <div class="databox-left bg-white">
+                                                        <div class="databox-sparkline">
+                                                            <span data-sparkline="bar" data-height="40px"
+                                                                  data-width="100%"
+                                                                  data-barcolor="#57b5e3" data-negbarcolor="#a0d468"
+                                                                  data-zerocolor="#d73d32" data-barwidth="5px"
+                                                                  data-barspacing="1px">
+                                                                5,6,7,2,0,-4,-2,4
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="databox-right bg-white bordered bordered-platinum">
+                                                        <span class="databox-number sky">2485</span>
+                                                        <div class="databox-text darkgray">PAGE VIEWS</div>
+                                                        <div class="databox-stat bg-palegreen radius-bordered">
+                                                            <div class="stat-text">8%</div>
+                                                            <i class="stat-icon fa fa-arrow-up"></i>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div> -->
+
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="timeline" class="tab-pane">
+                                <ul class="timeline animated fadeInDown">
+                                    <li>
+
+                                        <div class="timeline-badge blue">
+                                            <i class="fa fa-tag"></i>
+                                        </div>
+                                        <div class="timeline-panel">
+                                            <div class="timeline-header bordered-bottom bordered-blue">
+                                                <span class="timeline-title">
+                                                    Chronic Conditions
+                                                </span>
+                                            </div>
+                                            <div class="timeline-body">
+                                                <app-chronich-illness>
+                                                </app-chronich-illness>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li class="timeline-inverted">
+
+                                        <div class="timeline-badge darkorange">
+                                            <i class="fa fa-map-marker font-120"></i>
+                                        </div>
+                                        <div class="timeline-panel bordered-right-3 bordered-orange">
+                                            <div class="timeline-header bordered-bottom bordered-blue">
+                                                <span class="timeline-title">
+                                                    Patient Relationships
+                                                </span>
+
+                                            </div>
+                                            <div class="timeline-body">
+                                                <app-patient-relationships>
+
+                                                </app-patient-relationships>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <!--  <li>
+                                        <div class="timeline-panel">
+                                            <div class="timeline-header bordered-bottom bordered-blue">
+                                                <span class="timeline-title">
+                                                    Chronic Conditions
+                                                </span>
+
+
+                                            </div>
+                                            <div class="timeline-body">
+                                                <app-chronich-illness>
+                                                </app-chronich-illness>
+                                            </div>
+                                        </div>
+                                        <div class="timeline-panel">
+                                            <div class="timeline-header bordered-bottom bordered-blue">
+                                                <span class="timeline-title">
+                                                    Patient Relationships
+                                                </span>
+                                                <div class="timeline-body">
+                                                    <app-patient-relationships>
+
+                                                    </app-patient-relationships>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </li> -->
+
+<!--
+                                    <li class="timeline-inverted">
+                                        <div class="timeline-datetime">
+                                            <span class="timeline-time">
+                                                3:10
+                                            </span><span class="timeline-date">Today</span>
+                                        </div>
+                                        <div class="timeline-badge darkorange">
+                                            <i class="fa fa-map-marker font-120"></i>
+                                        </div>
+                                        <div class="timeline-panel bordered-right-3 bordered-orange">
+                                            <div class="timeline-header bordered-bottom bordered-blue">
+                                                <span class="timeline-title">
+                                                    Allergies
+                                                </span>
+
+                                            </div>
+                                            <div class="timeline-body">
+                                                <p>Outdoor visit at California State Route 85 with John Boltana &amp;
+                                                    Harry
+                                                    Piterson regarding to setup a new show room.</p>
+                                                <p>
+                                                    <i class="orange fa fa-exclamation"></i> New task added for <span><a
+                                                            href="#" class="info">James Dean</a></span>
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </li> -->
+<!--
+                                    <li>
+                                        <div class="timeline-datetime">
+                                            <span class="timeline-time">
+                                                8:19
+                                            </span><span class="timeline-date">Yesterday</span>
+                                        </div>
+                                        <div class="timeline-badge sky">
+                                            <i class="fa fa-bar-chart-o"></i>
+                                        </div>
+                                        <div class="timeline-panel bordered-top-3 bordered-azure">
+                                            <div class="timeline-header bordered-bottom bordered-blue">
+                                                <span class="timeline-title">
+                                                    Social History
+                                                </span>
+                                                <p class="timeline-datetime">
+                                                    <small class="text-muted">
+                                                        <i class="glyphicon glyphicon-time">
+                                                        </i>
+                                                        <span class="timeline-date">Yesterday</span>
+                                                        -
+                                                        <span class="timeline-time">8:19</span>
+                                                    </small>
+                                                </p>
+                                            </div>
+                                            <div class="timeline-body">
+                                                <p>
+                                                    Curabitur ullamcorper ultricies nisi. Nam eget dui. Etiam rhoncus.
+                                                    Maecenas tempus, tellus eget condimentum rhoncus, sem
+                                                    quam semper libero, sem neque sed ipsum.
+                                                </p>
+                                                Tellus eget condimentum rhoncus, sem quam semper libero, sit amet
+                                                adipiscing sem neque sed ipsum. Nam quam nunc, blandit
+                                            </div>
+                                        </div>
+                                    </li> -->
+                                 <!--   <li class="timeline-inverted">
+                                        <div class="timeline-datetime">
+                                            <span class="timeline-time">
+                                                6:08
+                                            </span><span class="timeline-date">Yesterday</span>
+                                        </div>
+                                        <div class="timeline-badge sky">
+                                            <img src="assets/img/avatars/Sergey-Azovskiy.jpg" class="badge-picture" />
+                                        </div>
+                                        <div class="timeline-panel">
+                                            <div class="timeline-header bordered-bottom bordered-blue">
+                                                <span class="timeline-title">
+                                                    <a href="">Appointments</a>
+                                                </span>
+                                                <p class="timeline-datetime">
+                                                    <small class="text-muted">
+                                                        <i class="glyphicon glyphicon-time">
+                                                        </i>
+                                                        <span class="timeline-date">Yesterday</span>
+                                                        -
+                                                        <span class="timeline-time">6:08</span>
+                                                    </small>
+                                                </p>
+                                            </div>
+                                            <div class="timeline-body">
+                                                <p>
+                                                    <i class="orange fa fa-quote-left"></i> Happy Birthday Lydia.
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </li> -->
+                                 <!--   <li>
+                                        <div class="timeline-datetime">
+                                            <span class="timeline-time">
+                                                7:00
+                                            </span><span class="timeline-date">Yesterday</span>
+                                        </div>
+                                        <div class="timeline-badge danger">
+                                            <i class="fa fa-exclamation font-120"></i>
+                                        </div>
+                                        <div class="timeline-panel">
+                                            <div class="timeline-header bordered-bottom bordered-blue">
+                                                <span class="timeline-title danger">
+                                                    Family members Enrolled
+                                                </span>
+                                                <p class="timeline-datetime">
+                                                    <small class="text-muted">
+                                                        <i class="glyphicon glyphicon-time">
+                                                        </i>
+                                                        <span class="timeline-date">Yesterday</span>
+                                                        -
+                                                        <span class="timeline-time">7:00</span>
+                                                    </small>
+                                                </p>
+                                            </div>
+                                            <div class="timeline-body">
+                                                <p>Dyvia Phillips added new milestone <span><a class="danger" href="#">UI</a></span>
+                                                    Lorem ipsum dolor sit amet consiquest dio</p>
+                                            </div>
+                                        </div>
+                                    </li> -->
+                                  <!--  <li class="timeline-inverted">
+                                        <div class="timeline-datetime">
+                                            <span class="timeline-time">
+                                                3:09
+                                            </span><span class="timeline-date">Yesterday</span>
+                                        </div>
+                                        <div class="timeline-badge">
+                                            <i class="fa fa-picture-o darkpink"></i>
+                                        </div>
+                                        <div class="timeline-panel">
+                                            <div class="timeline-header bordered-bottom bordered-blue">
+                                                <p class="timeline-datetime">
+                                                    <small class="text-muted">
+                                                        <i class="glyphicon glyphicon-time">
+                                                        </i>
+                                                        <span class="timeline-date">Yesterday</span>
+                                                        -
+                                                        <span class="timeline-time">3:09</span>
+                                                    </small>
+                                                </p>
+                                            </div>
+                                            <div class="timeline-body">
+                                                <a href="#">John Travolta</a> shared an image on <a href="#">Dribble</a>
+                                                <div class="tl-wide text-center" style="padding: 5px; margin-top:10px; margin-bottom: 10px;">
+                                                    <img src="assets/img/temp1.png" alt="" style="max-height: 158px;max-width: 100%;">
+                                                </div>
+                                                <i class="text-muted text-sm">Lorem ipsum dolor sit amet, consectetur
+                                                    adipisicing
+                                                    elit, sed do eiusmod tempor incididunt ut labore et dolore magna
+                                                    aliqua.</i>
+                                            </div>
+                                        </div>
+                                    </li> -->
+                                  <!--  <li class="timeline-node">
+                                        <a class="btn btn-yellow">LOAD MORE</a>
+                                    </li> -->
+                                </ul>
+                            </div>
+                            <div id="contacts" class="tab-pane">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="profile-contacts">
+
+                                            <div class="profile-badge orange"><i class="fa fa-phone orange"></i><span>Contacts</span>
+                                            </div>
+                                            <div class="contact-info">
+                                                <p>
+                                                    Phone : {{person.mobileNumber}} <br> alternate Cell :
+                                                    {{person.mobileNumber}}
+                                                </p>
+                                                <p>
+                                                    Email : <strong></strong>
+                                                </p>
+
+                                            </div>
+                                            <div class="profile-badge azure">
+                                                <i class="fa fa-map-marker azure"></i><span>Location</span>
+                                            </div>
+                                            <div class="contact-info">
+                                                <p>
+                                                    County : <strong>{{person.county }}</strong> <br>
+                                                    SubCounty : <strong>{{person.subCounty }}</strong><br>
+                                                    Ward : <strong>{{ person.ward }}</strong><br>
+                                                    Landmark : <strong>{{ person.landMark }}</strong>
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div id="contact-map" class="animated flipInY"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="settings" class="tab-pane">
+
+                                <div class="form-title">
+                                    Clinical Services
+                                    <div class="row">
+                                        <app-services-list [personId]="personId" [services]="services" [person]="person"></app-services-list>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

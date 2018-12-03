@@ -1,0 +1,39 @@
+<form class="form-group" novalidate [formGroup]="PartnerTestingFormGroup">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="form-title">
+                <span class="mat-accent"> Partner Testing </span>
+            </div>
+        </div>
+                        <div class="row">
+                            <div class="col-md-4">
+                                    <mat-form-field class="col-md-12">
+                                            <mat-select formControlName="PartnerTestingVisit"  placeholder="Partner Tested during this visit">
+                                              <mat-option  *ngFor="let YesNoNa of YesNoNas" [value]="YesNoNa.itemId">
+                                                {{YesNoNa.itemName}}
+                                              </mat-option>
+                                            </mat-select>
+                                          </mat-form-field>
+                            </div>
+                            <div class="col-md-4">
+                                    <mat-form-field class="col-md-12">
+                                            <mat-select formControlName="finalHIVResult"  placeholder="Final HIV Result for Partner">
+                                              <mat-option *ngFor="let FinalResult of FinalResults" [value]="FinalResult.itemId">
+                                                {{FinalResult.itemName}}
+                                              </mat-option>
+                                            </mat-select>
+                                          </mat-form-field>
+                            </div>
+                            <div class="col-md-4"></div>
+                        </div>                     
+    </div>
+</form>
+<div class="row">
+    <div class="col-md-12">
+        <div>
+            <button mat-raised-button color="accent" class="primary" mat-button matStepperNext style="margin-right:5px"><span class="fa fa-arrow-circle-o-right"> Next</span> </button>
+            <button mat-raised-button color="primary" matStepperPrevious><span class="fa fa-arrow-circle-o-left"> Previous</span> </button>
+
+        </div>
+    </div>
+</div>

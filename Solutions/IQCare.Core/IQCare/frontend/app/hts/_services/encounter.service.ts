@@ -1,15 +1,15 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 
-import {Observable} from 'rxjs';
+import { Observable } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
 
 
 import { environment } from '../../../environments/environment';
-import {Encounter} from '../_models/encounter';
-import {FinalTestingResults} from '../_models/testing';
-import {ErrorHandlerService} from '../../shared/_services/errorhandler.service';
-import {EncounterDetails} from '../_models/encounterDetails';
+import { Encounter } from '../_models/encounter';
+import { FinalTestingResults } from '../_models/testing';
+import { ErrorHandlerService } from '../../shared/_services/errorhandler.service';
+import { EncounterDetails } from '../_models/encounterDetails';
 
 
 const httpOptions = {
@@ -24,12 +24,12 @@ export class EncounterService {
     private lookup = '/api/Lookup/getCustomOptions';
 
     constructor(private http: HttpClient,
-                private errorHandler: ErrorHandlerService) { }
+        private errorHandler: ErrorHandlerService) { }
 
     public getEncounters(patientId: number): Observable<any[]> {
-        return this.http.get<any[]>(this.API_URL + this._url + '/' + patientId ).pipe(
+        return this.http.get<any[]>(this.API_URL + this._url + '/' + patientId).pipe(
             tap(getEncounters => this.errorHandler.log('fetched all client encounters')),
-            catchError(this.errorHandler.handleError<any[]>('getEncounters', []), )
+            catchError(this.errorHandler.handleError<any[]>('getEncounters', []))
         );
     }
 
@@ -64,11 +64,11 @@ export class EncounterService {
     }
 
     public addTesting(finalTestingResults: FinalTestingResults, hivResults1: any[], hivResults2: any[],
-                      htsEncounterId: number, providerId: number, patientId: number,
-                      patientMasterVisitId: number, serviceAreaId: number): Observable<any> {
+        htsEncounterId: number, providerId: number, patientId: number,
+        patientMasterVisitId: number, serviceAreaId: number): Observable<any> {
         const finalResultsBody = finalTestingResults;
         const hivResultsBody = hivResults1;
-        if ( hivResults2.length > 0 ) {
+        if (hivResults2.length > 0) {
             hivResultsBody.push.apply(hivResults2);
         }
 
@@ -91,16 +91,16 @@ export class EncounterService {
     public getHtsEncounterOptions(): Observable<any[]> {
         return this.http.get<any[]>(this.API_URL + this._lookupurl + '/htsOptions').pipe(
             tap(htsoptions => this.errorHandler.log('fetched all hts options')),
-            catchError(this.errorHandler.handleError<any[]>('getHtsOptions', []), )
+            catchError(this.errorHandler.handleError<any[]>('getHtsOptions', []))
         );
     }
 
     public getEncounterType(): Observable<any> {
         return this.http.get<any>(this.API_URL + this._lookupurl +
-            '/optionsByGroupandItemName?groupName=EncounterType&itemName=Hts-encounter', httpOptions).pipe(
-            tap((getEncounterType: any) => this.errorHandler.log(`get encounter type`)),
-            catchError(this.errorHandler.handleError<any>('getEncounterType'))
-        );
+            '/optionsByGroupandItemName/EncounterType/Hts-encounter', httpOptions).pipe(
+                tap((getEncounterType: any) => this.errorHandler.log(`get encounter type`)),
+                catchError(this.errorHandler.handleError<any>('getEncounterType'))
+            );
     }
 
     public addEncounter(encounter: Encounter): Observable<Encounter> {
@@ -124,8 +124,8 @@ export class EncounterService {
 
         return this.http.put(this.API_URL + '/api/HtsEncounter/updateEncounter/' + encounterID + '/' + patientMasterVisitId,
             JSON.stringify(Indata), httpOptions).pipe(
-            tap((editEncounter: Encounter) => this.errorHandler.log(`edited encounter w/ id` + encounterID)),
-            catchError(this.errorHandler.handleError<Encounter>('editEncounter'))
-        );
+                tap((editEncounter: Encounter) => this.errorHandler.log(`edited encounter w/ id` + encounterID)),
+                catchError(this.errorHandler.handleError<Encounter>('editEncounter'))
+            );
     }
 }

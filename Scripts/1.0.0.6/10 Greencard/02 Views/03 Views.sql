@@ -10,7 +10,7 @@ GO
 
 CREATE VIEW [dbo].[API_PatientVitalsView]
 AS
-SELECT        Id, ptn_pk, PersonId, PatientIndex, PatientType, FacilityId, Active, DateOfBirth, DobPrecision, CAST(DECRYPTBYKEY(NationalId) AS Select dbo.PatientVitals.id
+SELECT dbo.PatientVitals.id
 	  ,dbo.PatientVitals.PatientId
 	  ,dbo.PatientVitals.PatientMasterVisitId
 	  ,dbo.PatientVitals.Height

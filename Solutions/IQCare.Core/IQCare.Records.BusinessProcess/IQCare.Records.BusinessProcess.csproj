@@ -17,6 +17,7 @@
     <ProjectReference Include="..\IQCare.Common.BusinessProcess\IQCare.Common.BusinessProcess.csproj" />
     <ProjectReference Include="..\IQCare.Common.Core\IQCare.Common.Core.csproj" />
     <ProjectReference Include="..\IQCare.Common.Infrastructure\IQCare.Common.Infrastructure.csproj" />
+    <ProjectReference Include="..\IQCare.Common.Services\IQCare.Common.Services.csproj" />
   </ItemGroup>
 
 </Project>

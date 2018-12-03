@@ -2,22 +2,20 @@
 using System.Collections.Generic;
 using System.Text;
 using IQCare.Common.BusinessProcess.Services;
-using IQCare.Common.Core.Models;
 using IQCare.Common.Infrastructure;
-using IQCareRecords.Common.BusinessProcess.Command;
 using System.Threading;
 using System.Threading.Tasks;
+using IQCare.Library;
+using IQCare.Records.BusinessProcess.Command.Lookup;
 using MediatR;
+using Serilog;
+using WardLookup = IQCare.Common.Core.Models.WardLookup;
 
-namespace IQCareRecords.Common.BusinessProcess.CommandHandlers.Lookup
+namespace IQCare.Records.BusinessProcess.CommandHandlers.Lookup
 {
-   public class GetWardCommandHandler:IRequestHandler<GetWardCommand,Result<AddWardListReponse>>
+   public class GetWardCommandHandler:IRequestHandler<GetWardCommand,Result<List<WardLookup>>>
     {
         private readonly ICommonUnitOfWork _unitOfWork;
-        List<WardLookup> wards = new List<WardLookup>();
-        int CountyId;
-        int SubCountyId;
-
 
         public GetWardCommandHandler(ICommonUnitOfWork unitOfWork)
         {
@@ -26,63 +24,20 @@ namespace IQCareRecords.Common.BusinessProcess.CommandHandlers.Lookup
 
 
 
-        public async Task<Result<AddWardListReponse>> Handle(GetWardCommand request,CancellationToken cancellationToken)
+        public async Task<Result<List<WardLookup>>> Handle(GetWardCommand request,CancellationToken cancellationToken)
         {
-
             try
             {
-
                 LookupLogic ll = new LookupLogic(_unitOfWork);
-                
-                if (String.IsNullOrEmpty(request.CountyId))
-                {
-                    CountyId = 0;
-                }
-                else
-                {
-                    CountyId = Convert.ToInt32(request.CountyId);
-                }
-                if (String.IsNullOrEmpty(request.SubcountyId))
-                {
-                    SubCountyId = 0;
-
-                }
-                else
-                {
-                    SubCountyId = Convert.ToInt32(request.SubcountyId);
-                }
-
-                if (CountyId == 0 && SubCountyId > 0)
-                {
-
-
-                    wards = await ll.GetWardList(SubCountyId);
-
-
-
-
-                }
-
-                return Result<AddWardListReponse>.Valid(new AddWardListReponse()
-
-
-                {
-
-                    Wards = wards
-
-
-                });
-
-
+                var wards = await ll.GetWardList(request.SubcountyId);
+                return Result<List<WardLookup>>.Valid(wards);
             }
             catch (Exception e)
             {
-                return Result<AddWardListReponse>.Invalid(e.Message);
+                Log.Error(e.Message + " " + e.InnerException);
+                return Result<List<WardLookup>>.Invalid(e.Message);
             }
-
         }
-            
-            
     }
 
 

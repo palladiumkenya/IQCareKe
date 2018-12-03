@@ -742,6 +742,7 @@ ALTER COLUMN RegimenName varchar(255);
 
 
 
+ GO
 
 
 SET IDENTITY_INSERT mst_Feature ON
@@ -774,13 +775,13 @@ SET IDENTITY_INSERT mst_Feature OFF
 IF NOT EXISTS(select * from lnk_GroupFeatures where GroupID='1' 
 and FeatureID=255 and FunctionID=1)
 BEGIN
-insert into [lnk_GroupFeatures] values(1,255,1,getdate(),null)
+insert into [lnk_GroupFeatures](GroupID,FeatureID,FunctionID,CreateDate,UpdateDate) values(1,255,1,getdate(),null)
 END
 
 IF NOT EXISTS(select * from lnk_GroupFeatures where GroupID='1' 
 and FeatureID=255 and FunctionID=2)
 BEGIN
-insert into [lnk_GroupFeatures] values(1,255,2,getdate(),null)
+insert into [lnk_GroupFeatures](GroupID,FeatureID,FunctionID,CreateDate,UpdateDate) values(1,255,2,getdate(),null)
 END
 
 
@@ -788,20 +789,20 @@ END
 IF NOT EXISTS(select * from lnk_GroupFeatures where GroupID='1' 
 and FeatureID=255 and FunctionID=3)
 BEGIN
-insert into [lnk_GroupFeatures] values(1,255,3,getdate(),null)
+insert into [lnk_GroupFeatures](GroupID,FeatureID,FunctionID,CreateDate,UpdateDate) values(1,255,3,getdate(),null)
 END
 
 
 IF NOT EXISTS(select * from lnk_GroupFeatures where GroupID='1' 
 and FeatureID=255 and FunctionID=4)
 BEGIN
-insert into [lnk_GroupFeatures] values(1,255,4,getdate(),null)
+insert into [lnk_GroupFeatures](GroupID,FeatureID,FunctionID,CreateDate,UpdateDate) values(1,255,4,getdate(),null)
 END
 
 IF NOT EXISTS(select * from lnk_GroupFeatures where GroupID='1' 
 and FeatureID=255 and FunctionID=5)
 BEGIN
-insert into [lnk_GroupFeatures] values(1,255,5,getdate(),null)
+insert into [lnk_GroupFeatures](GroupID,FeatureID,FunctionID,CreateDate,UpdateDate) values(1,255,5,getdate(),null)
 END
 
 

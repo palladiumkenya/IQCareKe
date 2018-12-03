@@ -1,20 +1,15 @@
-﻿using IQCare.Common.Core.Models;
-using MediatR;
+﻿using MediatR;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using IQCare.Library;
+using County = IQCare.Common.Core.Models.County;
+using SubCountyLookup = IQCare.Common.Core.Models.SubCountyLookup;
 
-namespace IQCareRecords.Common.BusinessProcess.Command
+namespace IQCare.Records.BusinessProcess.Command.Lookup
 {
-   public  class GetSubCountiesCommand: IRequest<Result<AddSubCountiesResponse>>
-    {
-        public string CountyId;
-        public string SubcountyId;
-    }
-
-
-    public class AddSubCountiesResponse
-    {
-        public List<SubCountyLookup> SubCounties { get; set; }
-    }
+   public  class GetSubCountiesCommand: IRequest<Result<List<SubCountyLookup>>>
+   {
+        public int CountyId;
+   }
 }

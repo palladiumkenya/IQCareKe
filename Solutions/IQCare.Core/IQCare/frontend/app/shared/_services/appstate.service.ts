@@ -41,11 +41,15 @@ export class AppStateService {
     }
 
     public initializeAppState(): Promise<any> {
-        const personId = localStorage.getItem('personId');
+        const personId = JSON.parse(localStorage.getItem('personId'));
         const patientId = localStorage.getItem('patientId');
         const patientMasterVisitId = localStorage.getItem('patientMasterVisitId');
         const htsEncounterId = localStorage.getItem('htsEncounterId');
 
+
+        if (personId) {
+            this.store.dispatch(new Consent.PersonId(personId));
+        }
         const InData = {
             'personId': personId,
             'patientId': patientId,
@@ -55,6 +59,10 @@ export class AppStateService {
 
         const promise = this.http.post<any>(this.API_URL + this.url + '/getState',
             JSON.stringify(InData), httpOptions).toPromise().then((res) => {
+                const selectedService = localStorage.getItem('selectedService');
+                if (selectedService) {
+                    this.store.dispatch(new Consent.SelectedService(selectedService));
+                }
 
                 if (res['stateStore'].length > 0 && ((personId) || (patientId) || (patientMasterVisitId) || (htsEncounterId))) {
                     const response = res['stateStore'];
