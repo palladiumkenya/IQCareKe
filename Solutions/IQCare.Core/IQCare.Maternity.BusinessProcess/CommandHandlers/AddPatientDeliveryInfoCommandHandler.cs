@@ -15,9 +15,9 @@ namespace IQCare.Maternity.BusinessProcess.CommandHandlers
 {
     public class AddPatientDeliveryInfoCommandHandler : IRequestHandler<AddMaternalPatientDeliveryInfoCommand, Result<AddPatientDeliveryInfoResponse>>
     {
-        IMaternityUnitOfWork _maternityUnitOfWork;
-        IMapper _mapper;
-        ILogger logger = Log.ForContext<AddPatientDeliveryInfoCommandHandler>();
+        private readonly IMaternityUnitOfWork _maternityUnitOfWork;
+        private readonly IMapper _mapper;
+        private readonly ILogger _logger = Log.ForContext<AddPatientDeliveryInfoCommandHandler>();
 
         public AddPatientDeliveryInfoCommandHandler(IMaternityUnitOfWork maternityUnitOfWork, IMapper mapper)
         {
@@ -38,13 +38,13 @@ namespace IQCare.Maternity.BusinessProcess.CommandHandlers
                 {
                     PatientDeliveryId = patientDelivery.Id,
                     PatientMasterVisitId = request.PatientMasterVisitId,
-                    ProfileId = request.ProfileId
+                    PregnancyId = request.PregnancyId
                 });
             }
             catch (Exception ex)
             {
                 string error = $"An error occured while capturing patient delivery information for Master visit {request.PatientMasterVisitId}";
-                logger.Error(ex, error);
+                _logger.Error(ex, error);
 
                 return Result<AddPatientDeliveryInfoResponse>.Invalid(error);
             }

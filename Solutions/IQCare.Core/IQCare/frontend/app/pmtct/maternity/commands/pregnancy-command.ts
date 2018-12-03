@@ -9,6 +9,7 @@ export interface PregnancyCommand {
     Parity?: number;
     Parity2?: number;
     Outcome?: number;
+    AgeAtMenarche ?:number;
     DateOfOutcome?: Date;
     CreatedBy?: number;
     CreateDate?: Date;

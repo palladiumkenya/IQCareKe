@@ -30,8 +30,8 @@ namespace IQCare.Maternity.BusinessProcess.QueryHandlers
         {
             try
             {
-                var patientDeliveryInfoView = request.ProfileId.HasValue
-                    ? _maternityUnitOfWork.Repository<PatientDeliveryInformationView>().Get(x => x.ProfileId == request.ProfileId)
+                var patientDeliveryInfoView = request.PregnancyId.HasValue
+                    ? _maternityUnitOfWork.Repository<PatientDeliveryInformationView>().Get(x => x.PregnancyId == request.PregnancyId)
                     : _maternityUnitOfWork.Repository<PatientDeliveryInformationView>().Get(x => x.PatientMasterVisitId == request.PatientMasterVisitId);
 
 
@@ -41,7 +41,7 @@ namespace IQCare.Maternity.BusinessProcess.QueryHandlers
             }
             catch (Exception ex)
             {
-                _Logger.Error($"An error occured while fetching patient delivery information for ProfileId {request.ProfileId}", ex);
+                _Logger.Error($"An error occured while fetching patient delivery information for Pregnancy {request.PregnancyId}", ex);
                 return Task.FromResult(Result<List<PatientDeliveryInfomationViewModel>>.Invalid(ex.Message));
             }
         }

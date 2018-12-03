@@ -25,6 +25,7 @@ import { HivStatusCommand } from '../_models/HivStatusCommand';
 import { HivTestsCommand } from '../_models/HivTestsCommand';
 import * as moment from 'moment';
 import {VisitDetailsCommand} from '../_models/visit-details-command';
+import { VisitDetailsService } from '../_services/visit-details.service';
 
 
 
@@ -67,7 +68,7 @@ export class MaternityComponent implements OnInit {
     patientEncounterId: number;
     visitDate: Date;
     visitType: number;
-    pregnancyId: number;
+    pregnancyId: number = 0;
     deliveryId: number;
 
 
@@ -99,6 +100,7 @@ export class MaternityComponent implements OnInit {
     constructor(private route: ActivatedRoute,
                 private matService: MaternityService,
                 private _lookupItemService: LookupItemService,
+                private visitDetailsService : VisitDetailsService,
                 private snotifyService: SnotifyService,
                 private notificationService: NotificationService,
                 public zone: NgZone,
@@ -234,6 +236,7 @@ export class MaternityComponent implements OnInit {
 
     onVisitDetailsNotify(formGroup: FormGroup): void {
         this.visitDetailsFormGroup.push(formGroup);
+        this.getPatientPregnancy(this.patientId);
     }
 
     OnMotherProfileNotify(formGroup: FormGroup): void {
@@ -309,12 +312,29 @@ export class MaternityComponent implements OnInit {
                 });
     }
 
-    onSubmit() {
+    public getPatientPregnancy(patientId: number) {
+         this.visitDetailsService.getPregnancyProfile(patientId)
+            .subscribe(
+                pregnancy => {
+                    if (pregnancy != null) {
+                        this.pregnancyId = pregnancy.id;
+                        console.log('pregancyId:' + this.pregnancyId);
+                    }
+                },
+                (err) => {
+                    this.snotifyService.error('Error fetching pregnancy' + err, 'Pregnancy Profile', this.notificationService.getConfig());
+                },
+                () => {
 
-        const visitDetailsCommand = {
+                }
+            );
+    }
+
+    onSubmit() {
+         const visitDetailsCommand = {
             PatientId: parseInt(this.patientId.toString(), 10),
             ServiceAreaId: parseInt(this.serviceAreaId.toString(), 10),
-            PregnancyId: 0,
+            PregnancyId: this.pregnancyId,
             PatientMasterVisitId: this.patientMasterVisitId,
             VisitDate: moment(this.visitDetailsFormGroup.value[0]['visitDate']).toDate(),
             VisitNumber: 0,
@@ -351,6 +371,7 @@ export class MaternityComponent implements OnInit {
             Gravidae: parseInt(this.visitDetailsFormGroup.value[1]['gravidae'], 10),
             Parity: this.visitDetailsFormGroup.value[1]['parityOne'],
             Parity2: this.visitDetailsFormGroup.value[1]['parityTwo'],
+            AgeAtMenarche : this.visitDetailsFormGroup.value[1]['ageAtMenarche'],
             CreateDate: new Date(),
             CreatedBy: this.userId,
             DeleteFlag: false
@@ -367,7 +388,6 @@ export class MaternityComponent implements OnInit {
 
         const maternityDeliveryCommand: MaternityDeliveryCommand = {
             PatientMasterVisitId: this.patientMasterVisitId,
-            ProfileId: 3,
             DurationOfLabour: this.diagnosisFormGroup.value[1]['labourDuration'],
             DateOfDelivery: moment(this.diagnosisFormGroup.value[1]['deliveryDate']).toDate(),
             TimeOfDelivery: this.diagnosisFormGroup.value[1]['deliveryTime'],
@@ -621,8 +641,6 @@ export class MaternityComponent implements OnInit {
             PatientPregnancy: pregnancyCommand
         };
 
-        const matMotherProfile = this.matService.savePregnancyProfile(pregnancyCommand);
-        const matVisitDetails = this.matService.saveVisitDetails(visitDetailsCommand);
         const matDiagnosis = this.matService.saveDiagnosis(diagnosisCommand);
         const matDrugAdministartion = this.matService.saveMaternalDrugAdministration(drugAdministrationCommand);
         const matEducation = this.matService.savePatientEducation(patiendEducationCommand);
@@ -633,8 +651,7 @@ export class MaternityComponent implements OnInit {
         const matHivStatus = this.matService.savePncHivStatus(hivStatusCommand, this.hiv_status_table_data);
 
 
-        forkJoin([matVisitDetails,
-            matMotherProfile,
+        forkJoin([
             matDiagnosis,
             matHivStatus,
             matDrugAdministartion,
@@ -649,37 +666,32 @@ export class MaternityComponent implements OnInit {
                     console.log(`success `);
                     console.log(result);
 
-                    this.pregnancyId = result[0]['profileId'];
-                    maternityDeliveryCommand.ProfileId = this.pregnancyId;
+                    if(this.pregnancyId == 0){
+                        this.matService.savePregnancyProfile(pregnancyCommand).subscribe((result)=>
+                        {      
+                            console.log("Pregnancy Id" + result.pregnancyId);   
+                            maternityDeliveryCommand.PregnancyId = result.pregnancyId;
+                            visitDetailsCommand.PregnancyId = result.pregnancyId;  
 
-                    const matDelivery = this.matService.savePatientDelivery(maternityDeliveryCommand).subscribe(
-                        (res) => {
+                            this.sendPatientDeliveryInfoRequest(maternityDeliveryCommand,babyConditionInfo);
+                            this.sendVisitDetailsRequest(visitDetailsCommand);
 
-                            this.deliveryId = res['patientDeliveryId'];
-                            console.log('patient DeliveryID:' + this.deliveryId);
-                            for (let i = 0; i < babyConditionInfo.DeliveredBabyBirthInfoCollection.length; i++) {
-                                babyConditionInfo.DeliveredBabyBirthInfoCollection[i].PatientDeliveryInformationId = this.deliveryId;
-                            }
-                            console.log(`result`, res);
-                            console.log(babyConditionInfo);
-                            const matBabyCondition = this.matService.saveBabySection(babyConditionInfo).subscribe(
-                                (re) => {
-                                    console.log(`Baby Delivery Information`);
-                                    console.log(res);
-                                },
-                                (er) => {
-                                    console.log(`error ` + er);
-                                },
-                                () => {
-                                    this.snotifyService.success('Successfully saved Maternity encounter ', 'Maternity',
-                                        this.notificationService.getConfig());
-                            this.zone.run(() => {
-                        this.router.navigate(['/dashboard/personhome/' + this.personId], {relativeTo: this.route});
-                    });
-                            }
-                            );
-                        }
-                    );
+                            console.log("Pregancy add result " + result);
+                        },
+                        (err)=>
+                        {
+                          console.log("An error occured while add patient pregnancy details",err);
+                        },()=>{
+
+                        });
+
+                    }else{
+                        this.sendPatientDeliveryInfoRequest(maternityDeliveryCommand,babyConditionInfo);
+                        this.sendVisitDetailsRequest(visitDetailsCommand);
+                    }
+                    
+                    
+
                 },
                 (error) => {
                     console.log(`error ` + error);
@@ -691,6 +703,53 @@ export class MaternityComponent implements OnInit {
                     // });
                 }
             );
+
+    }
+
+    private sendPatientDeliveryInfoRequest(deliveryCommand:MaternityDeliveryCommand,babyConditionInfo:any) {
+        this.matService.savePatientDelivery(deliveryCommand).subscribe(
+            (res) => {
+
+                this.deliveryId = res['patientDeliveryId'];
+                console.log('patient DeliveryID:' + this.deliveryId);
+                for (let i = 0; i < babyConditionInfo.DeliveredBabyBirthInfoCollection.length; i++) {
+                    babyConditionInfo.DeliveredBabyBirthInfoCollection[i].PatientDeliveryInformationId = this.deliveryId;
+                }
+                console.log(`result`, res);
+                console.log(babyConditionInfo);
+                const matBabyCondition = this.matService.saveBabySection(babyConditionInfo).subscribe(
+                    (re) => {
+                        console.log(`Baby Delivery Information`);
+                        console.log(res);
+                    },
+                    (er) => {
+                        console.log(`error ` + er);
+                    },
+                    () => {
+                        this.snotifyService.success('Successfully saved Maternity encounter ', 'Maternity',
+                            this.notificationService.getConfig());
+                this.zone.run(() => {
+            this.router.navigate(['/dashboard/personhome/' + this.personId], {relativeTo: this.route});
+        });
+                }
+                );
+            }
+        );
+    }
+
+    private sendVisitDetailsRequest(visitDetailsCommand:VisitDetailsCommand) {
+        this.matService.saveVisitDetails(visitDetailsCommand).subscribe((result)=>
+        {                    
+            console.log("Patient visit details added succesfully");
+        },
+        (err)=>
+        {
+          console.log("An error occured while adding patient visit details",err);
+
+        },()=>
+        {
+
+        });
     }
 }
 
