@@ -21,7 +21,7 @@ import { PartnerTestingCommand } from '../_models/PartnerTestingCommand';
 import { MaternityCounsellingCommand } from '../maternity/commands/maternity-counselling-command';
 import { MaternityService } from '../_services/maternity.service';
 import { PatientScreeningCommand } from '../_models/PatientScreeningCommand';
-import {VisitDetailsCommand} from '../_models/visit-details-command';
+import { VisitDetailsCommand } from '../_models/visit-details-command';
 import * as moment from 'moment';
 
 @Component({
@@ -287,7 +287,7 @@ export class PncComponent implements OnInit {
 
     onHivStatusNotify(formGroup: Object): void {
         this.hivStatusFormGroup.push(formGroup['form']);
-        this.hiv_status_table_data.push(formGroup['table_data']);
+        this.hiv_status_table_data = formGroup['table_data'];
     }
 
     onDiagnosisNotify(formGroup: FormGroup): void {
@@ -317,16 +317,16 @@ export class PncComponent implements OnInit {
 
         // const motherExaminationTypeId = this.motherExaminationOptions.filter(obj => obj.masterName == 'MotherExamination');
 
-       /* const pncVisitDetailsCommand: PncVisitDetailsCommand = {
-            PatientId: this.patientId,
-            ServiceAreaId: this.serviceAreaId,
-            VisitDate: moment(this.visitDetailsFormGroup.value[0]['visitDate']).toDate(),
-            VisitNumber: this.visitDetailsFormGroup.value[0]['visitNumber'],
-            VisitType: this.visitDetailsFormGroup.value[0]['visitType'],
-            UserId: this.userId,
-            DaysPostPartum: this.visitDetailsFormGroup.value[0]['dayPostPartum'],
-            PatientMasterVisitId: this.patientMasterVisitId
-        };*/
+        /* const pncVisitDetailsCommand: PncVisitDetailsCommand = {
+             PatientId: this.patientId,
+             ServiceAreaId: this.serviceAreaId,
+             VisitDate: moment(this.visitDetailsFormGroup.value[0]['visitDate']).toDate(),
+             VisitNumber: this.visitDetailsFormGroup.value[0]['visitNumber'],
+             VisitType: this.visitDetailsFormGroup.value[0]['visitType'],
+             UserId: this.userId,
+             DaysPostPartum: this.visitDetailsFormGroup.value[0]['dayPostPartum'],
+             PatientMasterVisitId: this.patientMasterVisitId
+         };*/
 
         const visitDetailsCommand = {
             PatientId: parseInt(this.patientId.toString(), 10),
@@ -338,7 +338,7 @@ export class PncComponent implements OnInit {
             DaysPostPartum: this.visitDetailsFormGroup.value[0]['dayPostPartum'],
             VisitType: this.visitDetailsFormGroup.value[0]['visitType'],
             UserId: this.userId
-        }as VisitDetailsCommand;
+        } as VisitDetailsCommand;
 
 
         const hivStatusCommand: HivStatusCommand = {

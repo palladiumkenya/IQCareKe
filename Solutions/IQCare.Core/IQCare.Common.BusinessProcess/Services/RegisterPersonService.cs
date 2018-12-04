@@ -22,6 +22,22 @@ namespace IQCare.Common.BusinessProcess.Services
             _unitOfWork = unitOfWork ?? throw new ArgumentNullException(nameof(unitOfWork));
         }
 
+        public async Task<PatientConsent> AddPatientConsent(PatientConsent patientConsent)
+        {
+            try
+            {
+                await _unitOfWork.Repository<PatientConsent>().AddAsync(patientConsent);
+                await _unitOfWork.SaveAsync();
+
+                return patientConsent;
+            }
+            catch (Exception e)
+            {
+                Log.Error(e.Message);
+                throw e;
+            }
+        }
+
         public async Task<Patient> AddRegistrationPatient(int personID, DateTime RegistrationDate, string NationalID, DateTime dateOfBirth, int userId, string facilityId = "")
         {
             try
@@ -209,8 +225,6 @@ namespace IQCare.Common.BusinessProcess.Services
             {
                 throw e;
             }
-
-
         }
 
         public async Task<PersonLocation> GetCurrentPersonLocation(int personId)
@@ -1500,6 +1514,20 @@ namespace IQCare.Common.BusinessProcess.Services
                 sql.Append("exec [dbo].[pr_CloseDecryptedSession];");
 
                 var personInsert = await _unitOfWork.Repository<Person>().FromSql(sql.ToString());
+                var patient = await GetPatientByPersonId(personInsert.FirstOrDefault().Id);
+                if (patient != null)
+                {
+                    var mstFacility = await _unitOfWork.Repository<Facility>().Get(x => x.FacilityID == facilityId)
+                        .ToListAsync();
+                    if (mstFacility.Count == 0)
+                    {
+                        mstFacility = await _unitOfWork.Repository<Facility>().Get(x => x.DeleteFlag == 0)
+                            .ToListAsync();
+                    }
+
+                    await UpdatePatient(patient.Id, dateOfBirth, mstFacility[0].PosID);
+                }
+
                 return personInsert.FirstOrDefault();
             }
             catch (Exception e)
@@ -1518,18 +1546,44 @@ namespace IQCare.Common.BusinessProcess.Services
                 nickName = string.IsNullOrWhiteSpace(nickName) ? "" : nickName.Replace("'", "''");
                 string dob = dateOfBirth.HasValue ? dateOfBirth.Value.ToString("yyyy-MM-dd") : null;
 
-                var sql =
-                    "exec pr_OpenDecryptedSession;" +
-                    "Insert Into Person(FirstName, MidName, LastName,NickName, Sex, DateOfBirth, DobPrecision, Active, DeleteFlag, CreateDate, CreatedBy, RegistrationDate, FacilityId)" +
-                    $"Values(ENCRYPTBYKEY(KEY_GUID('Key_CTC'), '{firstName}'), ENCRYPTBYKEY(KEY_GUID('Key_CTC'), '{middleName}')," +
-                    $"ENCRYPTBYKEY(KEY_GUID('Key_CTC'), '{lastName}'),ENCRYPTBYKEY(KEY_GUID('Key_CTC'), '{nickName}') , {sex}, '{dob}', 1," +
-                    $"1,0,GETDATE(), '{createdBy}', '{registrationDate}', '{facilityId}');" +
-                    "SELECT [Id] , CAST(DECRYPTBYKEY(FirstName) AS VARCHAR(50)) [FirstName] ,CAST(DECRYPTBYKEY(MidName) AS VARCHAR(50)) MidName" +
-                    ",CAST(DECRYPTBYKEY(LastName) AS VARCHAR(50)) [LastName], CAST(DECRYPTBYKEY(NickName) AS VARCHAR(50)) [NickName],[Sex] ,[Active] ,[DeleteFlag] ,[CreateDate] " +
-                    ",[CreatedBy] ,[AuditData] ,[DateOfBirth] ,[DobPrecision], RegistrationDate, FacilityId FROM [dbo].[Person] WHERE Id = SCOPE_IDENTITY();" +
-                    "exec [dbo].[pr_CloseDecryptedSession];";
+                StringBuilder sql = new StringBuilder();
+                sql.Append("exec pr_OpenDecryptedSession;");
+                if (!string.IsNullOrEmpty(dob))
+                {
+                    sql.Append("Insert Into Person(FirstName, MidName, LastName,NickName, " +
+                               "Sex, DateOfBirth, DobPrecision, Active, DeleteFlag, CreateDate, " +
+                               "CreatedBy, RegistrationDate, FacilityId)" +
+                               $"Values(ENCRYPTBYKEY(KEY_GUID('Key_CTC'), '{firstName}'), ENCRYPTBYKEY(KEY_GUID('Key_CTC'), '{middleName}')," +
+                               $"ENCRYPTBYKEY(KEY_GUID('Key_CTC'), '{lastName}'),ENCRYPTBYKEY(KEY_GUID('Key_CTC'), '{nickName}') , {sex}, '{dob}', 1," +
+                               $"1,0,GETDATE(), '{createdBy}', '{registrationDate}', '{facilityId}');");
+                }
+                else
+                {
+                    sql.Append("Insert Into Person(FirstName, MidName, LastName,NickName, " +
+                               "Sex, Active, DeleteFlag, CreateDate, " +
+                               "CreatedBy, RegistrationDate, FacilityId)" +
+                               $"Values(ENCRYPTBYKEY(KEY_GUID('Key_CTC'), '{firstName}'), ENCRYPTBYKEY(KEY_GUID('Key_CTC'), '{middleName}')," +
+                               $"ENCRYPTBYKEY(KEY_GUID('Key_CTC'), '{lastName}'),ENCRYPTBYKEY(KEY_GUID('Key_CTC'), '{nickName}') , {sex}," +
+                               $"1,0,GETDATE(), '{createdBy}', '{registrationDate}', '{facilityId}');");
+                }
+                
+                sql.Append("SELECT [Id] , CAST(DECRYPTBYKEY(FirstName) AS VARCHAR(50)) [FirstName] ,CAST(DECRYPTBYKEY(MidName) AS VARCHAR(50)) MidName" +
+                           ",CAST(DECRYPTBYKEY(LastName) AS VARCHAR(50)) [LastName], CAST(DECRYPTBYKEY(NickName) AS VARCHAR(50)) [NickName],[Sex] ,[Active] ,[DeleteFlag] ,[CreateDate] " +
+                           ",[CreatedBy] ,[AuditData] ,[DateOfBirth] ,[DobPrecision], RegistrationDate, FacilityId FROM [dbo].[Person] WHERE Id = SCOPE_IDENTITY();" +
+                           "exec [dbo].[pr_CloseDecryptedSession];");
 
-                var personInsert = await _unitOfWork.Repository<Person>().FromSql(sql);
+                //var sql2 =
+                //    "exec pr_OpenDecryptedSession;" +
+                //    "Insert Into Person(FirstName, MidName, LastName,NickName, Sex, DateOfBirth, DobPrecision, Active, DeleteFlag, CreateDate, CreatedBy, RegistrationDate, FacilityId)" +
+                //    $"Values(ENCRYPTBYKEY(KEY_GUID('Key_CTC'), '{firstName}'), ENCRYPTBYKEY(KEY_GUID('Key_CTC'), '{middleName}')," +
+                //    $"ENCRYPTBYKEY(KEY_GUID('Key_CTC'), '{lastName}'),ENCRYPTBYKEY(KEY_GUID('Key_CTC'), '{nickName}') , {sex}, '{dob}', 1," +
+                //    $"1,0,GETDATE(), '{createdBy}', '{registrationDate}', '{facilityId}');" +
+                //    "SELECT [Id] , CAST(DECRYPTBYKEY(FirstName) AS VARCHAR(50)) [FirstName] ,CAST(DECRYPTBYKEY(MidName) AS VARCHAR(50)) MidName" +
+                //    ",CAST(DECRYPTBYKEY(LastName) AS VARCHAR(50)) [LastName], CAST(DECRYPTBYKEY(NickName) AS VARCHAR(50)) [NickName],[Sex] ,[Active] ,[DeleteFlag] ,[CreateDate] " +
+                //    ",[CreatedBy] ,[AuditData] ,[DateOfBirth] ,[DobPrecision], RegistrationDate, FacilityId FROM [dbo].[Person] WHERE Id = SCOPE_IDENTITY();" +
+                //    "exec [dbo].[pr_CloseDecryptedSession];";
+
+                var personInsert = await _unitOfWork.Repository<Person>().FromSql(sql.ToString());
 
                 return personInsert.FirstOrDefault();
             }

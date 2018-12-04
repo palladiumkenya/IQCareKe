@@ -206,7 +206,7 @@
             Answers.push({ 'Id': categoryId, 'value': clinicalNotes});
         });
        
-
+        
        
     }
 
@@ -262,7 +262,7 @@
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",
              success: function (response) {
-                 debugger;
+          
                  var res = response.d;
                     console.log(Json.Parse(response.d));
               
@@ -277,7 +277,9 @@
     {
      
         var error = 0;
-       
+        var ScreeningData = new Array;
+        var ClinicalNotesData = new Array;
+
         $("#udepressionscreening .rbList").each(function () {
             var screeningValue = 0;
             var screeningType = <%=screenTypeId%>;
@@ -291,11 +293,22 @@
             if (typeof checkedValue != 'undefined')
             {
                 screeningValue = checkedValue;
+               
+                
             }
-            $.ajax({
+
+            ScreeningData.push({ 'Id': rdIdValue, 'screeningType': screeningType, 'screeningCategory': screeningCategory, 'screeningValue': screeningValue, 'userId': userId });
+           
+        });
+        if (ScreeningData.length > 0) {
+           
+
+            var patientId = <%=PatientId%>;
+                var patientMasterVisitId = mastervisitid;
+                 $.ajax({
                 type: "POST",
-                url: "../WebService/PatientScreeningService.asmx/AddUpdateScreeningData",
-                data: "{'patientId': '" + patientId + "','patientMasterVisitId': '" + patientMasterVisitId + "','screeningType':'" + screeningType + "','screeningCategory':'" + screeningCategory + "','screeningValue':'" + screeningValue + "','userId':'" + userId + "'}",
+                url: "../WebService/PatientScreeningService.asmx/AddUpdateScreeningRecord",
+                data: "{'patientId': '" + patientId + "','patientMasterVisitId': '" + patientMasterVisitId + "','ScreeningData':'" + JSON.stringify(ScreeningData) + "'}",
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",
                 success: function (response) {
@@ -305,19 +318,33 @@
                     error = 1;
                 }
             });
-        });
+
+            
+        }
+       
+
         $("#udepressionscreening input[type=text]").each(function () {
             var categoryId = ($(this).attr('id')).replace('uds', '');
             var patientId = <%=PatientId%>;
             var patientMasterVisitId = mastervisitid;
-      
+
             var clinicalNotes = $(this).val();
             var serviceAreaId = 203;
             var userId = <%=userId%>;
-            $.ajax({
+           ClinicalNotesData.push({ 'categoryId': categoryId, 'clinicalNotes': clinicalNotes, 'serviceAreaId': serviceAreaId, 'userId': userId  });
+            
+        });
+
+        if (ClinicalNotesData.length > 0) {
+         
+            var patientId = <%=PatientId%>;
+            var patientMasterVisitId = mastervisitid;
+         
+           
+                $.ajax({
                 type: "POST",
-                url: "../WebService/PatientClinicalNotesService.asmx/addPatientClinicalNotesByVisitId",
-                data: "{'patientId': '" + patientId + "','patientMasterVisitId': '" + patientMasterVisitId + "','serviceAreaId':'" + serviceAreaId + "','notesCategoryId':'" + categoryId + "','clinicalNotes':'" + clinicalNotes + "','userId':'" + userId + "'}",
+                url: "../WebService/PatientClinicalNotesService.asmx/AddPatientClinicalNotesRecord",
+                data: "{'patientId': '" + patientId + "','patientMasterVisitId': '" + patientMasterVisitId + "','clinicaldata':'" + JSON.stringify(ClinicalNotesData)+ "'}",
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",
                 success: function (response) {
@@ -327,7 +354,8 @@
                     error = 1;
                 }
             });
-        });
+            
+        }
         if (error == 0) {
             toastr.success("Depression Screening Saved");
            window.location.href = '<%=ResolveClientUrl("~/CCC/patient/patientHome.aspx") %>';

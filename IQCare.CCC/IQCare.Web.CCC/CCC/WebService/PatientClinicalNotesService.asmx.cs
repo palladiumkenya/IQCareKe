@@ -24,6 +24,66 @@ namespace IQCare.Web.CCC.WebService
 
         private string Msg { get; set; }
         private int Result { get; set; }
+
+        public class ClinicalOutput
+        {
+            public int serviceAreaId { get; set; }
+              public int notesCategoryId { get; set; }
+              public string clinicalNotes { get; set; }
+              public int userId { get; set; }
+        }
+
+        [WebMethod]
+
+        public string AddPatientClinicalNotesRecord(int patientId,int patientMasterVisitId,string clinicaldata)
+        {
+            try
+            {
+                ClinicalOutput[] result = new JavaScriptSerializer().Deserialize<ClinicalOutput[]>(clinicaldata);
+
+                if (result != null)
+                {
+                    if (result.Length > 0)
+                    {
+                        for (int i = 0; i < result.Length; i++)
+                        {
+                            int patId = patientId;
+                            int patiMasterId = patientMasterVisitId;
+                            string clinicalNotes = result[i].clinicalNotes;
+                            try
+                            {
+                                var PCN = new PatientClinicalNotesLogic();
+                                if (!String.IsNullOrEmpty(clinicalNotes))
+                                {
+                                    Result = PCN.addPatientClinicalNotesByVisitId(patientId, patientMasterVisitId, result[i].serviceAreaId, result[i].notesCategoryId, result[i].clinicalNotes, result[i].userId);
+                                    if (Result > 0)
+                                    {
+                                        Msg = "Notes Added";
+                                    }
+                                }
+                            }
+                            catch (Exception e)
+                            {
+                                Msg = e.Message;
+                            }
+
+
+                        }
+                    }
+
+                }
+
+            }
+            catch (Exception e)
+            {
+                Msg = e.Message;
+            }
+            return Msg;
+
+        }
+    
+           
+   
         [WebMethod]
         public string addPatientClinicalNotes(int patientId, int patientMasterVisitId, int serviceAreaId, int notesCategoryId, string clinicalNotes, int userId)
         {
