@@ -549,8 +549,7 @@ export class RegisterComponent implements OnInit {
         if (firstName && lastName && gender && dateOfBirth) {
             this.searchService.searchClient(this.clientSearch).subscribe(
                 (result) => {
-                    console.log(result['personSearch']);
-                    if (result && result['personSearch'] && result['personSearch'].length > 0) {
+                    if ((!this.id) && result && result['personSearch'] && result['personSearch'].length > 0) {
                         const dialogConfig = new MatDialogConfig();
 
                         dialogConfig.disableClose = true;
