@@ -1,6 +1,6 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="ucScreening.ascx.cs" Inherits="IQCare.Web.CCC.UC.Adherence.ucScreening" %>
 <%@ Register TagPrefix="uc" TagName="tnDepressionScreening" Src="~/CCC/UC/Depression/ucUpdateDepressionScreening.ascx" %>
-<%@ OutputCache duration="86400" varybyparam="none" %>
+
 <style>
     .modal-dialog {width: 80%;margin: 30px auto;}
     .modal-body{height: 500px;overflow-y: scroll;}

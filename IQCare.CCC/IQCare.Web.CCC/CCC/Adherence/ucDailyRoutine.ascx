@@ -1,5 +1,5 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="ucDailyRoutine.ascx.cs" Inherits="IQCare.Web.CCC.UC.Adherence.ucDailyRoutine" %>
-<%@ OutputCache duration="86400" varybyparam="none" %>
+
 <div class="col-md-12 form-group">
 	<div class="col-md-12">
 		<div class="panel panel-info">
@@ -113,7 +113,8 @@
       
     });
     jQuery(function ($) {
-        var dailyRoutineId = <%=dailyRoutineId%>;        if (dailyRoutineId > 0) {
+        var dailyRoutineId = <%=dailyRoutineId%>;
+        if (dailyRoutineId > 0) {
             $('#abmyWizard').wizard();
             $('#abmyWizard').find('#dsSectionTwo').toggleClass('complete', true);
             $('#abmyWizard').on('changed.fu.wizard', function (evt, data) {

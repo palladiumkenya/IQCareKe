@@ -5,7 +5,7 @@
 <%@ Register TagPrefix="uc" TagName="tnPsychosocialCircumstances" Src="ucPsychosocialCircumstances.ascx" %>
 <%@ Register TagPrefix="uc" TagName="tnScreening" Src="ucScreening.ascx" %>
 <%@ Register TagPrefix="uc" TagName="tnReferralsandNetworks" Src="ucReferralsandNetworks.ascx" %>
-<%@ OutputCache duration="86400" varybyparam="none" %>
+
 <style>
         .control-label{text-align: left !important;}
         .adherencebarriersloading{position: absolute;width: 100%;height: 100%;z-index:999;background: rgba(204, 204, 204, 0.5);}

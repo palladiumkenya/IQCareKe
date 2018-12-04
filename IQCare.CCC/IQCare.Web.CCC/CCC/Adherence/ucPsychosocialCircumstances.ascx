@@ -1,5 +1,5 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="ucPsychosocialCircumstances.ascx.cs" Inherits="IQCare.Web.CCC.UC.Adherence.ucPsychosocialCircumstances" %>
-<%@ OutputCache duration="86400" varybyparam="none" %>
+
 <style>
     .notessection{display: none;}
 </style>
