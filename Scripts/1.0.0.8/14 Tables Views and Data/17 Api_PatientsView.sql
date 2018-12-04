@@ -1,9 +1,4 @@
-
-
-
 /****** Object:  View [dbo].[Api_PatientsView]    Script Date: 8/24/2018 4:09:21 PM ******/
-
-
 IF  EXISTS (SELECT * FROM sys.views WHERE object_id = OBJECT_ID(N'[dbo].[Api_PatientsView]'))
 DROP VIEW [dbo].[Api_PatientsView]
 GO
@@ -28,7 +23,7 @@ SELECT
 	   CAST(DECRYPTBYKEY(P.[LastName]) AS VARCHAR(50)) AS [LastName],
 	   P.Sex,
 	   Gender = (SELECT TOP 1 ItemName FROM LookupItemView WHERE ItemId = P.Sex AND MasterName = 'Gender'),
-	   PT.[DateOfBirth],
+	   DateOfBirth = ISNULL(P.DateOfBirth, PT.DateOfBirth),
 	   PT.[DobPrecision],
 	   PatientType = CASE(SELECT ItemName FROM LookupItemView WHERE ItemId = PT.PatientType AND MasterName = 'PatientType') WHEN 'New' THEN 'NEW' WHEN 'Transfer-In' THEN 'TRANSFER-IN' WHEN 'Transit' THEN 'TRANSIT' ELSE '' END,
 	   CAST(DECRYPTBYKEY(PT.[NationalId]) AS VARCHAR(50)) AS [NationalId],

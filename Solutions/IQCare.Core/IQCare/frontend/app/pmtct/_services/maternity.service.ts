@@ -36,9 +36,9 @@ export class MaternityService {
     public getCurrentVisitDetails(patientId: number, serviceAreaName: string) {
         return this.http.get<any>(this.API_URL + '/api/AncVisitDetails/GetVisitDetailsByServiceAreaName/' + patientId + '/'
             + serviceAreaName).pipe(
-            tap(getCurrentVisitDetails => this.errorHandler.log('get current visit data')),
-            catchError(this.errorHandler.handleError<any[]>('getCurrentVisitDetails'))
-        );
+                tap(getCurrentVisitDetails => this.errorHandler.log('get current visit data')),
+                catchError(this.errorHandler.handleError<any[]>('getCurrentVisitDetails'))
+            );
     }
 
     public getPregnancyDetails(patientId: number) {
@@ -150,9 +150,6 @@ export class MaternityService {
     }
 
     public savePncHivStatus(hivStatusCommand: HivStatusCommand, anyTests: any[]): Observable<any> {
-        console.log("HIV tests " + anyTests);
-        return of([]);
-        
         if (anyTests.length == 0) {
             return of([]);
         }
@@ -223,17 +220,17 @@ export class MaternityService {
     public GetPatientDeliveryInfo(masterVisitId: number) {
         return this.http.get<any>(this.API_PMTCT_URL + '/api/MaternityPatientDeliveryInfo/GetDeliveryInfoByMasterVisitId/' +
             masterVisitId).pipe(
-            tap(GetPatientDeliveryInfoByMasterVisitId => this.errorHandler.log('get patient delivery info by master Id')),
-            catchError(this.errorHandler.handleError<any[]>('GetPatientDeliveryInfoByMasterVisitId'))
-        );
+                tap(GetPatientDeliveryInfoByMasterVisitId => this.errorHandler.log('get patient delivery info by master Id')),
+                catchError(this.errorHandler.handleError<any[]>('GetPatientDeliveryInfoByMasterVisitId'))
+            );
     }
 
     public GetPatientDischargeInfo(masterVisitId: number) {
         return this.http.get<any>(this.API_PMTCT_URL + '/api/MaternityPatientDeliveryInfo/GetDischargeInfoByMasterVisitId/' +
             masterVisitId).pipe(
-            tap(GetPatientDischargeInfo => this.errorHandler.log('get patient discharge info by master Id')),
-            catchError(this.errorHandler.handleError<any[]>('GetPatientDischargeInfo'))
-        );
+                tap(GetPatientDischargeInfo => this.errorHandler.log('get patient discharge info by master Id')),
+                catchError(this.errorHandler.handleError<any[]>('GetPatientDischargeInfo'))
+            );
     }
 
     public GetPatientDiagnosisInfo(masterVisitId: number) {
