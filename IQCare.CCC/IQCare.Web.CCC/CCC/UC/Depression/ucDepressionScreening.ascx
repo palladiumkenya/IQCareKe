@@ -206,7 +206,7 @@
             Answers.push({ 'Id': categoryId, 'value': clinicalNotes});
         });
        
-        console.log(Answers);
+        
        
     }
 
@@ -262,7 +262,7 @@
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",
              success: function (response) {
-                 debugger;
+          
                  var res = response.d;
                     console.log(Json.Parse(response.d));
               
