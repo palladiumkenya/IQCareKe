@@ -35,7 +35,7 @@ CREATE TABLE [dbo].[PatientMilestone](
 	[PatientMasterVisitId] [int] NOT NULL,
 	[PatientId] int not null,
 	[TypeAssessedId] [int] NULL,
-	[AchievedId] [bit] NULL,
+	[AchievedId] [int] NULL,
 	[StatusId] [int] NULL,
 	[Comment] [text] NULL,
 	[CreatedBy] [int] NOT NULL,

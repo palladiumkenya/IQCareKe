@@ -10,9 +10,12 @@ using System.Collections.Generic;
 using Entities.CCC.Encounter;
 using IQCare.CCC.UILogic.Visit;
 using Entities.CCC.Visit;
+using System.Collections;
 
 namespace IQCare.Web.CCC.WebService
 {
+
+    
     /// <summary>
     /// Summary description for PatientScreeningService
     /// </summary>
@@ -31,13 +34,80 @@ namespace IQCare.Web.CCC.WebService
             
         }
 
+      
         public class OutCome {
             public string Msg { get; set; }
             public int Result { get; set; }
 
         }
+
+
+        public class ScreeningRecord
+        {
+            public string Id { get; set; }
+
+            public int screeningType { get; set; }
+            public  int screeningCategory { get; set; }
+             public int screeningValue { get; set; }
+              public int userId { get; set; }
+
+        }
         private string Msg { get; set; }
         private int Result { get; set; }
+
+        [WebMethod(EnableSession = true)]
+        public string AddUpdateScreeningRecord(int patientId, int patientMasterVisitId,string ScreeningData)
+        {
+            try
+            {
+
+
+                ScreeningRecord[] result = new JavaScriptSerializer().Deserialize<ScreeningRecord[]>(ScreeningData);
+
+                //var  result = new JavaScriptSerializer().Deserialize<List<>(ScreeningData).ToArray();
+
+
+                if (result != null)
+                {
+                    if (result.Length > 0)
+                    {
+                        for (int i = 0; i < result.Length; i++)
+                        {
+                            int patId = patientId;
+                            int patiMasterId = patientMasterVisitId;
+                            
+                            try
+                            {
+                                int screeningValue = result[i].screeningValue;
+                                var PSM = new PatientScreeningManager();
+                                if (screeningValue > 0)
+                                {
+                                    Result = PSM.AddUpdatePatientScreening(patId, patiMasterId, result[i].screeningType, result[i].screeningCategory, result[i].screeningValue, result[i].userId);
+                                    if (Result > 0)
+                                    {
+                                        Msg = "Screening Added";
+                                    }
+                                }
+                            }
+                            catch (Exception e)
+                            {
+                                Msg = e.Message;
+                            }
+                          
+
+                        }
+                    }
+
+                }
+                
+            }
+           catch (Exception e)
+            {
+                Msg = e.Message;
+            }
+            return Msg;
+           
+        }
         [WebMethod(EnableSession = true)]
         public string AddUpdateScreeningData(int patientId, int patientMasterVisitId, int screeningType, int screeningCategory, int screeningValue, int userId)
         {

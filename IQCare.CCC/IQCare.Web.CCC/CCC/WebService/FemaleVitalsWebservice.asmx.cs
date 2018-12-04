@@ -110,7 +110,7 @@ namespace IQCare.Web.CCC.WebService
                 int familyPlanningStatus = Convert.ToInt32(Session["FamilyPlanningStatus"].ToString());
                 //var familyPlanningMethods = JsonConvert.DeserializeObject<IEnumerable<object>>(PatientFPId);
                 var familyPlanningMethods = new JavaScriptSerializer().Deserialize<IEnumerable<object>>(PatientFPId);
-
+               
                 int count = familyPlanningMethods.Count();
                 if (count > 0)
                 {
