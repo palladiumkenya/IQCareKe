@@ -30,9 +30,9 @@ namespace Entities.CCC.Triage
 
         [Required]
         public DateTime? EDD { get; set; }
-        public string Gravidae { get; set; }
-        public string parity { get; set; }
-        public int Outcome { get; set; }
+        public int? Gravidae { get; set; }
+        public int? Parity { get; set; }
+        public int? Outcome { get; set; }
         public DateTime? DateOfOutcome { get; set; }
     }
 }
