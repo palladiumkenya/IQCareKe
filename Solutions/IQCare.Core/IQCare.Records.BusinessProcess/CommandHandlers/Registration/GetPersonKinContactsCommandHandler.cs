@@ -48,9 +48,14 @@ namespace IQCare.Records.BusinessProcess.CommandHandlers.Registration
                                 .ToListAsync();
                         }
 
+                        var consentList = await _unitOfWork.Repository<LookupItemView>().Get(x =>
+                            x.ItemId == result[i].ConsentValue).ToListAsync();
+
                         result[i].GenderList = genderList;
                         result[i].ContactCategoryList = contactCategoryList;
                         result[i].ContactRelationshipList = contactRelationshipList;
+                        result[i].ConsentDeclineComments = result[i].Comments;
+                        result[i].ConsentList = consentList;
                     }
 
                     return Library.Result<List<PersonKinContactsView>>.Valid(result);

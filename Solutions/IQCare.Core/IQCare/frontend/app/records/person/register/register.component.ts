@@ -99,7 +99,7 @@ export class RegisterComponent implements OnInit {
                     FirstName: new FormControl(this.person.firstName, [Validators.required]),
                     MiddleName: new FormControl(this.person.middleName),
                     LastName: new FormControl(this.person.lastName, [Validators.required]),
-                    NickName:new FormControl(this.person.nickName),
+                    NickName: new FormControl(this.person.nickName),
                     Sex: new FormControl(this.person.sex, [Validators.required]),
                     registrationDate: new FormControl(this.person.registrationDate, [Validators.required]),
                     DateOfBirth: new FormControl(this.person.dateOfBirth, [Validators.required]),
@@ -164,7 +164,7 @@ export class RegisterComponent implements OnInit {
                 console.log(result);
                 const {
                     alternativeNumber, county, countyId, dateOfBirth, dobPrecision, educationLevel, educationLevelId,
-                    emailAddress, firstName, gender, lastName, maritalStatus, maritalStatusId, middleName,nickName,
+                    emailAddress, firstName, gender, lastName, maritalStatus, maritalStatusId, middleName, nickName,
                     mobileNumber, nearestHealthCentre, occupation, occupationId, registrationDate, sex,
                     subCounty, subCountyId, village, ward, wardId } = result[0];
 
@@ -224,7 +224,7 @@ export class RegisterComponent implements OnInit {
                         'contactcategory': res[i].contactCategoryList[0],
                         'relationship': res[i].contactRelationshipList[0],
                         'phoneno': res[i].mobileNo,
-                        'consent': null,
+                        'consent': res[i].consentList[0],
                         'disabled': 'none'
                     });
                 }

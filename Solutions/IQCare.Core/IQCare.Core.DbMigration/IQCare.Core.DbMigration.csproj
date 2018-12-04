@@ -98,6 +98,8 @@
     <None Remove="Scripts\2.0.0\01_SO_IQCare_Version.sql" />
     <None Remove="Scripts\2.0.0\02_DO_AlterView_PatientDeliveryInfo.sql" />
     <None Remove="Scripts\2.0.0\03 pr_Security_UserLogin_Constella.sql" />
+    <None Remove="Scripts\2.0.0\07_Nairobi_Missing_Subcounties_Wards.sql" />
+    <None Remove="Scripts\2.0.0\08_PatientConsent.sql" />
   </ItemGroup>
 
   <ItemGroup>
@@ -199,6 +201,8 @@
     <EmbeddedResource Include="Scripts\1.0.0.9\01_SO_IQCare_Version.sql" />
     <EmbeddedResource Include="Scripts\2.0.0\02_DO_AlterView_PatientDeliveryInfo.sql" />
     <EmbeddedResource Include="Scripts\2.0.0\03 pr_Security_UserLogin_Constella.sql" />
+    <EmbeddedResource Include="Scripts\2.0.0\07_Nairobi_Missing_Subcounties_Wards.sql" />
+    <EmbeddedResource Include="Scripts\2.0.0\08_PatientConsent.sql" />
   </ItemGroup>
 
   <ItemGroup>
