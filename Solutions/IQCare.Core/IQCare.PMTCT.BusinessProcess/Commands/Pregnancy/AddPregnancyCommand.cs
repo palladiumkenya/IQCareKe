@@ -17,6 +17,7 @@ namespace IQCare.PMTCT.BusinessProcess.Commands.Pregnancy
         public int? Gravidae { get; set; }
         public int? Parity { get; set; }
         public int? Parity2 { get; set; }
+        public decimal ? AgeAtMenarche { get; set; }
         public int CreatedBy { get; set; }
     }
 

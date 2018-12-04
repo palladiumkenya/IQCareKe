@@ -150,6 +150,9 @@ export class MaternityService {
     }
 
     public savePncHivStatus(hivStatusCommand: HivStatusCommand, anyTests: any[]): Observable<any> {
+        console.log("HIV tests " + anyTests);
+        return of([]);
+        
         if (anyTests.length == 0) {
             return of([]);
         }

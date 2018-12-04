@@ -404,6 +404,22 @@
 
             $("#EndCare").click(function () {
                 if ($("#CareEndedForm").parsley().validate()) {
+                    var careEndedDate = $('#CareEndDate').datepicker('getDate');
+                var reason = $("#<%=Reason.ClientID%>").val();
+                var careEndingNotes = escape($("#<%=txtCareEndingNotes.ClientID%>").val());
+                    var transferOutFacility = $("#<%=Facility.ClientID%>").val();
+                    var dateOfDeath = $('#DateOfDeath').datepicker('getDate');
+                if (careEndedDate == "Invalid Date") {
+                    careEndedDate = "";
+                    toastr.error("Kindly fill in the CareEnd Date");
+                    return false;
+                }
+                    if (dateOfDeath == "Invalid Date" && reason === 'Death') {
+                    toastr.error("Kindly fill in the Death Date");
+                    dateOfDeath = "";
+                    return false;
+                }
+
                     $.when(endCare()).then(function() {
                         setTimeout(function() {
                                 getCareEnded();
@@ -426,6 +442,17 @@
                 var careEndingNotes = escape($("#<%=txtCareEndingNotes.ClientID%>").val());
                 var transferOutFacility = $("#<%=Facility.ClientID%>").val();
                 var dateOfDeath = $('#DateOfDeath').datepicker('getDate');
+                debugger;
+                if (careEndedDate == "Invalid Date") {
+                    careEndedDate = "";
+                    
+                    return false;
+                }
+                if (dateOfDeath == "Invalid Date" && reason === 'Death') {
+                      
+                    dateOfDeath = "";
+                    return false;
+                }
 
                 if (Object.prototype.toString.call(dateOfDeath) === '[object Date]') {    
                     dateOfDeath = moment(moment(dateOfDeath, 'DD-MMM-YYYY')).format('DD-MMM-YYYY');

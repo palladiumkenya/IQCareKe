@@ -1,7 +1,7 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="ucDepressionScreening.ascx.cs" Inherits="IQCare.Web.CCC.UC.Depression.ucDepressionScreening" %>
 <style>
-    .rbListDepression{float: right;}
-    .rbListDepression input{margin-left: 5px;}
+    .rbList{float: right;}
+    .rbList input{margin-left: 5px;}
     .depression-results{padding-top: 10px;padding-bottom: 10px;}
 </style>
 <div class="col-md-12 form-group">
@@ -20,14 +20,14 @@
             </div>
         </div>
       
-	<div class="col-md-12" id="depressionscreening">
+	<div class="col-md-12" id="udepressionscreening">
 		<div class="panel panel-info">
 			<div class="panel-body">
 				<div class="col-md-12 form-group">
 					<label class="control-label pull-left"><span class="text-primary">During the last two weeks have you ever been bothered by:</span></label>
 				</div>
 
-				<div class="col-md-12 form-group" id="depressionscreeningquestions">
+				<div class="col-md-12 form-group" id="udepressionscreeningquestions">
 					<div class="row">
                         <asp:PlaceHolder ID="PlaceHolder2" runat="server"></asp:PlaceHolder>
 					</div>
@@ -36,7 +36,7 @@
 		</div>
 
         <!-- PHQ 9 -->
-        <div class="panel panel-info" id="phq9panel">
+        <div class="panel panel-info" id="uphq9panel">
 			<div class="panel-body">
                 <div class="col-md-12 form-group">
 					<label class="control-label pull-left"><span>PATIENT HAELTH QUESTIONNAIRE (PHQ - 9)</span></label>
@@ -81,6 +81,7 @@
 <script type="text/javascript"> 
     var contain = "";
     var Answers = new Array;
+     var Examples = new Array;
     var VisitDate = "<%=VisitDate%>";
 
     
@@ -173,15 +174,18 @@
     });
     function checkifFieldsHavevalue() {
         
-        $(".rbListDepression").each(function () {
+        $("#udepressionscreening .rbList").each(function () {
             var screeningValue = 0;
             var screeningType = <%=screenTypeId%>;
             var patientId = <%=PatientId%>;
-            var patientMasterVisitId = <%=PatientMasterVisitId%>;
+           // var patientMasterVisitId =mastervisitid;
             var userId = <%=userId%>;
-            var screeningCategory = $(this).attr('id');
-            var checkedValue = $('#' + screeningCategory + ' input[type=radio]:checked').val();
-            if (typeof checkedValue != 'undefined') {
+            var screeningCategory = $(this).attr('id').replace('uds', '');
+            var rdIdValue = $(this).attr('id');
+
+            var checkedValue = $('#' + rdIdValue+ ' input[type=radio]:checked').val();
+            if (typeof checkedValue != 'undefined')
+            {
                 screeningValue = checkedValue;
             }
             if (screeningValue > 0) {
@@ -190,14 +194,14 @@
             }
 
         });
-        $("#depressionscreening input[type=text]").each(function () {
-            var categoryId = ($(this).attr('id')).replace('notes', '');
+        $("#udepressionscreening input[type=text]").each(function () {
+            var categoryId = ($(this).attr('id')).replace('uds', '');
             var patientId = <%=PatientId%>;
-            var patientMasterVisitId = <%=PatientMasterVisitId%>;
+           // var patientMasterVisitId = mastervisitid;
+      
             var clinicalNotes = $(this).val();
             var serviceAreaId = 203;
-            var userId = <%=userId%>;
-
+            var userId = <%=userId%>
 
             Answers.push({ 'Id': categoryId, 'value': clinicalNotes});
         });
@@ -271,15 +275,19 @@
     }
     function addUpdateDepressionScreeningData(mastervisitid)
     {
+     
         var error = 0;
-        $(".rbListDepression").each(function () {
+       
+        $("#udepressionscreening .rbList").each(function () {
             var screeningValue = 0;
             var screeningType = <%=screenTypeId%>;
             var patientId = <%=PatientId%>;
             var patientMasterVisitId =mastervisitid;
             var userId = <%=userId%>;
-            var screeningCategory = $(this).attr('id');
-            var checkedValue = $('#' + screeningCategory + ' input[type=radio]:checked').val();
+            var screeningCategory = $(this).attr('id').replace('uds', '');
+            var rdIdValue = $(this).attr('id');
+
+            var checkedValue = $('#' + rdIdValue+ ' input[type=radio]:checked').val();
             if (typeof checkedValue != 'undefined')
             {
                 screeningValue = checkedValue;
@@ -298,8 +306,8 @@
                 }
             });
         });
-        $("#depressionscreening input[type=text]").each(function () {
-            var categoryId = ($(this).attr('id')).replace('notes', '');
+        $("#udepressionscreening input[type=text]").each(function () {
+            var categoryId = ($(this).attr('id')).replace('uds', '');
             var patientId = <%=PatientId%>;
             var patientMasterVisitId = mastervisitid;
       
@@ -308,7 +316,7 @@
             var userId = <%=userId%>;
             $.ajax({
                 type: "POST",
-                url: "../WebService/PatientClinicalNotesService.asmx/addPatientClinicalNotes",
+                url: "../WebService/PatientClinicalNotesService.asmx/addPatientClinicalNotesByVisitId",
                 data: "{'patientId': '" + patientId + "','patientMasterVisitId': '" + patientMasterVisitId + "','serviceAreaId':'" + serviceAreaId + "','notesCategoryId':'" + categoryId + "','clinicalNotes':'" + clinicalNotes + "','userId':'" + userId + "'}",
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",
@@ -326,9 +334,9 @@
         }
     }
 
-    $("#phq9panel input:radio").change(function (evt, data) {
+    $("#uphq9panel input:radio").change(function (evt, data) {
         var selectionTotal = 0;
-        $("#phq9panel input[type=radio]:checked").each(function () {
+        $("#uphq9panel input[type=radio]:checked").each(function () {
             var selectedValue = $(this).val();
             var rbName = $(this).attr('name');
             var radioButtons = $("input[name='" + rbName + "']");
@@ -338,8 +346,9 @@
         //select depression severity and recommended management
         selectDepressionNotes(selectionTotal);
         $("#<%=depressionTotalTb.ClientID%>").val(selectionTotal);
-        if ($("#sc<%=depressionTotalTb.ClientID%>").length != 0) {
-            $("#sc<%=depressionTotalTb.ClientID%>").val(selectionTotal);
+         var hometbid = ($("#<%=depressionTotalTb.ClientID%>").attr('id')).replace('uds', '');
+        if ($("#sc" + hometbid).length != 0) {
+            $("#sc" + hometbid).val(selectionTotal);
         }
     });
 
@@ -353,8 +362,9 @@
             dataType: "json",
             success: function (response) {
                 $("#<%=depressionSeverityTb.ClientID%>").val(response.d);
-                if ($("#sc<%=depressionSeverityTb.ClientID%>").length != 0) {
-                    $("#sc<%=depressionSeverityTb.ClientID%>").val(response.d);
+                var hometbid = ($("#<%=depressionSeverityTb.ClientID%>").attr('id')).replace('uds', '');
+                if ($("#sc" + hometbid).length != 0) {
+                    $("#sc" + hometbid).val(response.d);
                 }
             },
             error: function (response) {
@@ -369,8 +379,9 @@
             dataType: "json",
             success: function (response) {
                 $("#<%=depressionReccommendationTb.ClientID%>").val(response.d);
-                if ($("#sc<%=depressionReccommendationTb.ClientID%>").length != 0) {
-                    $("#sc<%=depressionReccommendationTb.ClientID%>").val(response.d);
+                var hometbid = ($("#<%=depressionReccommendationTb.ClientID%>").attr('id')).replace('uds', '');
+                if ($("#sc" + hometbid).length != 0) {
+                    $("#sc" + hometbid).val(response.d);
                 }
             },
             error: function (response) {
@@ -379,9 +390,9 @@
         });
     }
 
-    $("#depressionscreeningquestions input:radio").change(function (evt, data) {
+    $("#udepressionscreeningquestions input:radio").change(function (evt, data) {
         var selectionTotal = 0;
-        $("#depressionscreeningquestions input[type=radio]:checked").each(function () {
+        $("#udepressionscreeningquestions input[type=radio]:checked").each(function () {
             var selectedValue = $(this).val();
             var rbName = $(this).attr('name');
             var radioButtons = $("input[name='" + rbName + "']");
@@ -389,24 +400,28 @@
             if (selectedIndex == 0) {
                 selectionTotal = selectionTotal + 1;
             }
+            selectDepressionNotes(selectionTotal);
         });
         if (selectionTotal => 1) {
-            $("#phq9panel").show();
+            $("#uphq9panel").show();
         }
         else {
-            $("#phq9panel input[type=radio]:checked").each(function () {
+            $("#uphq9panel input[type=radio]:checked").each(function () {
                 $(this).prop('checked', false);
                 var selectionTotal = 0;
-                $("#<%=depressionTotalTb.ClientID%>").val(selectionTotal);
-                selectDepressionNotes(selectionTotal);
+               var hometbid = ($("#<%=depressionTotalTb.ClientID%>").attr('id')).replace('uds', '');
+                if ($("#sc" + hometbid).length != 0) {
+                    $("#sc" + hometbid).val(selectionTotal);
+                }
+                selectuDepressionNotes(selectionTotal);
             });
-            $("#phq9panel").hide();
+            $("#uphq9panel").hide();
         }
     });
 
     $(document).ready(function () {
         var selectionTotal = 0;
-        $("#depressionscreeningquestions input[type=radio]:checked").each(function () {
+        $("#udepressionscreeningquestions input[type=radio]:checked").each(function () {
             var selectedValue = $(this).val();
             var rbName = $(this).attr('name');
             var radioButtons = $("input[name='" + rbName + "']");
@@ -416,10 +431,10 @@
             }
         });
         if (selectionTotal => 1) {
-            $("#phq9panel").show();
+            $("#uphq9panel").show();
         }
         else {
-            $("#phq9panel").hide();
+            $("#uphq9panel").hide();
         }
     });
 </script>

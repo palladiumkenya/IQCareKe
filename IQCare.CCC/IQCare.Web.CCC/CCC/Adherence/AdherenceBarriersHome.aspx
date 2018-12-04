@@ -94,10 +94,10 @@
     </div>
 
     <script type="text/javascript">
-        var mastervisitid;
+       var mastervisitid;
         var encounterExists = "<%=PatientEncounterExists%>";
         var patientId = <%=PatientId%>;
-           
+        var PatientVisits = new Array;
             var contain = "";
         var Answers = new Array;
         var VisitDate = "<%=VisitDate%>";
@@ -157,7 +157,7 @@
               
       if (data.step === 1) {
           if ($('#PatientVisitDate').parsley().validate()) {
-             
+
               if (moment('' + dob + '').isAfter()) {
                   toastr.error("Visit date cannot be a future date.");
                   return;
@@ -167,55 +167,63 @@
                   evt.preventDefault();
                   return;
               }
-            }
+          }
 
           checkifFieldHIVAwarenessHaveValue();
           var values = HivAwarenessArray.filter((x) => { return x.value.length > 0 })
-        if (values != null) {
-                            if (values.length > 0) {
+          if (values != null) {
+              if (values.length > 0) {
 
-                                addAdherenceBarriesEncounter(dob);
-                                addUpdateHIVAwarenessScreeningData(mastervisitid);
-                            }
-                            else {
-                                toastr.info("Kindly fill the Awareness of HIV Status section");
-                              evt.preventDefault();
-                            return false;
-                            }
+                  addAdherenceBarriesEncounter(dob);
 
-                        }
-                        else {
-                            toastr.info("Kindly fill the Awareness of HIV Status section");
-                            evt.preventDefault();
-                            return false;
+
+
+              }
+              else {
+                  toastr.info("Kindly fill the Awareness of HIV Status section");
+                  evt.preventDefault();
+                  return false;
               }
 
-         checkifFieldUHScreeningData();
-                        var screeningvalues = UHScreeningData.filter((x) => { return x.value.length > 0 })
-                        if (screeningvalues != null) {
-                            if (screeningvalues.length > 0) {
-                                addAdherenceBarriesEncounter(dob);
-                                addUpdateUHScreeningData(mastervisitid);
-                            }
-                            else {
-                                toastr.info("Kindly fill Understanding of HIV infection and ART section ");
-                               evt.preventDefault();
-                            return false;
-                            }
+          }
+          else {
+              toastr.info("Kindly fill the Awareness of HIV Status section");
+              evt.preventDefault();
+              return false;
+          }
+         }
+         //checkifFieldUHScreeningData();
+         //               var screeningvalues = UHScreeningData.filter((x) => { return x.value.length > 0 })
+         //               if (screeningvalues != null) {
+         //                   if (screeningvalues.length > 0) {
+         //                       addAdherenceBarriesEncounter(dob);
+         //                        if (PatientVisits.length > 0) {
+         //                           mastervisitid = PatientVisits[0].PatientMasterVisitId;
+                                    
+         //                       console.log("after encounter saved" + mastervisitid);
+         //                           addUpdateHIVAwarenessScreeningData(mastervisitid);
+         //                       }
+         //                       addUpdateUHScreeningData(mastervisitid);
+         //                   }
+         //                   else {
+         //                       toastr.info("Kindly fill Understanding of HIV infection and ART section ");
+         //                      evt.preventDefault();
+         //                   return false;
+         //                   }
 
-                        }
-                        else {
-                            toastr.info("Kindly fill Understanding of HIV infection and ART section ");
-                           evt.preventDefault();
-                            return false;
+         //               }
+         //               else {
+         //                   toastr.info("Kindly fill Understanding of HIV infection and ART section ");
+         //                  evt.preventDefault();
+         //                   return false;
 
-                        }
+         //               }
 
 
                
           
 
-      }
+        
 
             else if (data.step ==2) {
                 if (data.direction == 'previous') {
@@ -279,7 +287,8 @@
                     var values = UpdateRNSScreeningArray .filter((x) => { return x.value.length > 0 })
                     if (values != null) {
                         if (values.length > 0) {
-                            addUpdateRNScreeningData();
+                            addUpdateRNScreeningData( mastervisitid);
+                           
                         }
                         else {
                            toastr.info("Kindly fill the Referral Networks data");
@@ -363,6 +372,14 @@
                    
 
                      mastervisitid = result;
+                     console.log("inside encounter saved" + mastervisitid);
+                     PatientVisits.length = 0;
+                     PatientVisits.push({ 'PatientMasterVisitId': mastervisitid });
+                     if (mastervisitid > 0) {
+                         addUpdateHIVAwarenessScreeningData(mastervisitid);
+                          addUpdateUHScreeningData(mastervisitid);
+                         }
+                     
                    //  addUpdateDepressionScreeningData(result);
                  }
 
@@ -374,7 +391,7 @@
 
 
                 }
-        });
+           });
     }
       
             //$('#abmyWizard').wizard();

@@ -9,7 +9,7 @@ namespace IQCare.Maternity.BusinessProcess.Commands.Maternity
     public class AddMaternalPatientDeliveryInfoCommand : IRequest<Result<AddPatientDeliveryInfoResponse>>
     {
         public int PatientMasterVisitId { get;  set; }
-        public int ProfileId { get;  set; }
+        public int ? PregnancyId { get;  set; }
         public string DurationOfLabour { get;  set; }
         public DateTime DateOfDelivery { get;  set; }
         public DateTime TimeOfDelivery { get;  set; }
@@ -30,7 +30,6 @@ namespace IQCare.Maternity.BusinessProcess.Commands.Maternity
     {
         public int PatientDeliveryId { get; set; }
         public int PatientMasterVisitId { get; set; }
-        public int ProfileId { get; set; }
-        
+        public int ? PregnancyId { get; set; }       
     }
 }

@@ -39,7 +39,9 @@ namespace IQCare.Web.CCC.UC.Adherence
             
             userId = Convert.ToInt32(Session["AppUserId"]);
 
-
+      
+           
+               
 
             if (Request.QueryString["visitId"] != null)
             {

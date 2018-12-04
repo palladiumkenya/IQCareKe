@@ -7,13 +7,13 @@
 
   <ItemGroup>
     <None Remove="Scripts\1.0.0.8\Common\01_SO_CreateVisitDetails_Table.sql" />
-    <None Remove="Scripts\1.0.0.8\HEI\HEIEncounter.sql" />
-    <None Remove="Scripts\1.0.0.8\HEI\HEIFeeding.sql" />
-    <None Remove="Scripts\1.0.0.8\HEI\HEIProfile.sql" />
-    <None Remove="Scripts\1.0.0.8\HEI\Insert_Drug_Administration_LookUpItems.sql" />
-    <None Remove="Scripts\1.0.0.8\HEI\Lookups.sql" />
-    <None Remove="Scripts\1.0.0.8\HEI\PatientMilestone.sql" />
-    <None Remove="Scripts\1.0.0.8\HEI\Vaccination.sql" />
+    <None Remove="Scripts\1.0.0.8\HEI\01_SO_Vaccination.sql" />
+    <None Remove="Scripts\1.0.0.8\HEI\02_SO_HEIProfile.sql" />
+    <None Remove="Scripts\1.0.0.8\HEI\03_SO_HEIFeeding.sql" />
+    <None Remove="Scripts\1.0.0.8\HEI\04_SO_HEIEncounter.sql" />
+    <None Remove="Scripts\1.0.0.8\HEI\06_SO_Insert_Drug_Administration_LookUpItems.sql" />
+    <None Remove="Scripts\1.0.0.8\HEI\07_SO_Lookups.sql" />
+    <None Remove="Scripts\1.0.0.8\HEI\08_SO_PatientMilestone.sql" />
     <None Remove="Scripts\1.0.0.8\MATERNITY\12_SO_Insert_MaternityEncounter.sql" />
     <None Remove="Scripts\1.0.0.8\MATERNITY\13_SO_Insert_Baby_Birth_Outcome_Lookup.sql" />
     <None Remove="Scripts\1.0.0.8\MATERNITY\14_SO_Insert_Drug_Administration_Lookup.sql" />
@@ -101,17 +101,26 @@
     <None Remove="Scripts\2.0.0\07_Nairobi_Missing_Subcounties_Wards.sql" />
     <None Remove="Scripts\2.0.0\08_PatientConsent.sql" />
     <None Remove="Scripts\2.0.0\09_PersonKinContactsView.sql" />
+    <None Remove="Scripts\2.0.0\07_DO_AlterTable_Pregnancy_AddColumn_AgeAtMenarch.sql" />
+    <None Remove="Scripts\2.0.0\08_DO_AlterTable_PatientDelivery_DropFK_ProfileId.sql" />
+    <None Remove="Scripts\2.0.0\09_DO_AlterTable_PatientDelivery_DropColumn_ProfileId.sql" />
+    <None Remove="Scripts\2.0.0\10_DO_AlterTable_PatientDelivery_AddColumn_PregnancyId.sql" />
+    <None Remove="Scripts\2.0.0\11_DO_AlterView_PatientDeliveryInfo.sql" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Scripts\2.0.0\11_DO_AlterView_PatientDeliveryInfo.sql" />
   </ItemGroup>
 
   <ItemGroup>
     <EmbeddedResource Include="Scripts\1.0.0.8\Common\01_SO_CreateVisitDetails_Table.sql" />
-    <EmbeddedResource Include="Scripts\1.0.0.8\HEI\HEIEncounter.sql" />
-    <EmbeddedResource Include="Scripts\1.0.0.8\HEI\HEIFeeding.sql" />
-    <EmbeddedResource Include="Scripts\1.0.0.8\HEI\HEIProfile.sql" />
-    <EmbeddedResource Include="Scripts\1.0.0.8\HEI\Insert_Drug_Administration_LookUpItems.sql" />
-    <EmbeddedResource Include="Scripts\1.0.0.8\HEI\Lookups.sql" />
-    <EmbeddedResource Include="Scripts\1.0.0.8\HEI\PatientMilestone.sql" />
-    <EmbeddedResource Include="Scripts\1.0.0.8\HEI\Vaccination.sql" />
+    <EmbeddedResource Include="Scripts\1.0.0.8\HEI\04_SO_HEIEncounter.sql" />
+    <EmbeddedResource Include="Scripts\1.0.0.8\HEI\03_SO_HEIFeeding.sql" />
+    <EmbeddedResource Include="Scripts\1.0.0.8\HEI\02_SO_HEIProfile.sql" />
+    <EmbeddedResource Include="Scripts\1.0.0.8\HEI\06_SO_Insert_Drug_Administration_LookUpItems.sql" />
+    <EmbeddedResource Include="Scripts\1.0.0.8\HEI\07_SO_Lookups.sql" />
+    <EmbeddedResource Include="Scripts\1.0.0.8\HEI\08_SO_PatientMilestone.sql" />
+    <EmbeddedResource Include="Scripts\1.0.0.8\HEI\01_SO_Vaccination.sql" />
     <EmbeddedResource Include="Scripts\1.0.0.8\MATERNITY\12_SO_Insert_MaternityEncounter.sql" />
     <EmbeddedResource Include="Scripts\1.0.0.8\MATERNITY\13_SO_Insert_Baby_Birth_Outcome_Lookup.sql" />
     <EmbeddedResource Include="Scripts\1.0.0.8\MATERNITY\14_SO_Insert_Drug_Administration_Lookup.sql" />
@@ -205,6 +214,10 @@
     <EmbeddedResource Include="Scripts\2.0.0\07_Nairobi_Missing_Subcounties_Wards.sql" />
     <EmbeddedResource Include="Scripts\2.0.0\08_PatientConsent.sql" />
     <EmbeddedResource Include="Scripts\2.0.0\09_PersonKinContactsView.sql" />
+    <EmbeddedResource Include="Scripts\2.0.0\07_DO_AlterTable_Pregnancy_AddColumn_AgeAtMenarch.sql" />
+    <EmbeddedResource Include="Scripts\2.0.0\08_DO_AlterTable_PatientDelivery_DropFK_ProfileId.sql" />
+    <EmbeddedResource Include="Scripts\2.0.0\09_DO_AlterTable_PatientDelivery_DropColumn_ProfileId.sql" />
+    <EmbeddedResource Include="Scripts\2.0.0\10_DO_AlterTable_PatientDelivery_AddColumn_PregnancyId.sql" />
   </ItemGroup>
 
   <ItemGroup>

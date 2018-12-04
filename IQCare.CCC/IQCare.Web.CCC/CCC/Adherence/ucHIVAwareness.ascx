@@ -1,5 +1,5 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="ucHIVAwareness.ascx.cs" Inherits="IQCare.Web.CCC.UC.Adherence.ucHIVAwareness" %>
-<%@ OutputCache duration="86400" varybyparam="none" %>
+
 <div class="col-md-12 form-group">
 	<div class="col-md-12">
 		<div class="panel panel-info">
@@ -63,6 +63,8 @@
                     contentType: "application/json; charset=utf-8",
                     dataType: "json",
                     success: function (response) {
+                        console.log("Entered AddUpdateScreening Data");
+                        console.log(response.d);
                         error = 0;
                     },
                     error: function (response) {
@@ -89,8 +91,8 @@
                  var res = JSON.parse(response.d);
                 if (res != null) {
                         $.each(JSON.parse(response.d), function (index, value) {
-                            if ($("#awareness" + this.ScreeningCategoryId).length > 0) {
-                                var radioBtns = "#awareness" + this.ScreeningCategoryId;
+                            if ($("#" + this.ScreeningCategoryId).length > 0) {
+                                var radioBtns = "#" + this.ScreeningCategoryId;
                                 $(radioBtns + " input:radio[value='" + this.ScreeningValueId + "']").attr("checked", true);
                             }
                         });
