@@ -88,9 +88,9 @@ namespace IQCare.Maternity.WebApi.Controllers
         }
 
         [HttpGet("{Id}")]
-        public async Task<object> GetDeliveryInfoByProfileId(int id)
+        public async Task<object> GetDeliveryInfoByPregnancyId(int id)
         {
-            var patientDeliveryInfo = await _mediator.Send(new GetPatientDeliveryInformationQuery { ProfileId = id }, HttpContext.RequestAborted);
+            var patientDeliveryInfo = await _mediator.Send(new GetPatientDeliveryInformationQuery { PregnancyId = id }, HttpContext.RequestAborted);
 
             if (patientDeliveryInfo.IsValid)
                 return Ok(patientDeliveryInfo.Value);

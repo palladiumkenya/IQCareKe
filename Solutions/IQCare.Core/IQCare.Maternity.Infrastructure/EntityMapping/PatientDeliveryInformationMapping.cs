@@ -14,7 +14,6 @@ namespace IQCare.Maternity.Infrastructure.EntityMapping
             string tableName = "PatientDelivery";
 
             builder.ToTable(tableName).Property(x => x.Id).HasColumnName("DeliveryID");
-            builder.ToTable(tableName).Property(x => x.ProfileId).HasColumnName("ProfileID");
             builder.ToTable(tableName).Property(x => x.PatientMasterVisitId).HasColumnName("PatientMasterVisitID");
 
             builder.ToTable(tableName).HasKey(x => x.Id);
