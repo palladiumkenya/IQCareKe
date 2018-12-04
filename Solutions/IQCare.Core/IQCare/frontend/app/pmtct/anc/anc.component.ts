@@ -664,7 +664,7 @@ export class AncComponent implements OnInit, OnDestroy {
                     const baselineAncCommands = {
                         PatientId: parseInt(this.patientId.toString(), 10),
                         PatientMasterVisitId: this.patientMasterVisitId,
-                        PregnancyId: res,
+                        PregnancyId: res.pregnancyId,
                         HivStatusBeforeAnc: this.HivStatusMatFormGroup.value[0]['hivStatusBeforeFirstVisit'],
                         TreatedForSyphilis: this.PatientEducationMatFormGroup.value['treatedSyphilis'],
                         BreastExamDone: this.PatientEducationMatFormGroup.value['breastExamDone'],
@@ -735,7 +735,6 @@ export class AncComponent implements OnInit, OnDestroy {
                     }
                 );
         }
-
     }
 
     ngOnDestroy(): void {
