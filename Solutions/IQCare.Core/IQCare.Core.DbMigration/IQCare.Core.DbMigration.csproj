@@ -98,6 +98,9 @@
     <None Remove="Scripts\2.0.0\01_SO_IQCare_Version.sql" />
     <None Remove="Scripts\2.0.0\02_DO_AlterView_PatientDeliveryInfo.sql" />
     <None Remove="Scripts\2.0.0\03 pr_Security_UserLogin_Constella.sql" />
+    <None Remove="Scripts\2.0.0\07_Nairobi_Missing_Subcounties_Wards.sql" />
+    <None Remove="Scripts\2.0.0\08_PatientConsent.sql" />
+    <None Remove="Scripts\2.0.0\09_PersonKinContactsView.sql" />
     <None Remove="Scripts\2.0.0\07_DO_AlterTable_Pregnancy_AddColumn_AgeAtMenarch.sql" />
     <None Remove="Scripts\2.0.0\08_DO_AlterTable_PatientDelivery_DropFK_ProfileId.sql" />
     <None Remove="Scripts\2.0.0\09_DO_AlterTable_PatientDelivery_DropColumn_ProfileId.sql" />
@@ -208,6 +211,9 @@
     <EmbeddedResource Include="Scripts\1.0.0.9\01_SO_IQCare_Version.sql" />
     <EmbeddedResource Include="Scripts\2.0.0\02_DO_AlterView_PatientDeliveryInfo.sql" />
     <EmbeddedResource Include="Scripts\2.0.0\03 pr_Security_UserLogin_Constella.sql" />
+    <EmbeddedResource Include="Scripts\2.0.0\07_Nairobi_Missing_Subcounties_Wards.sql" />
+    <EmbeddedResource Include="Scripts\2.0.0\08_PatientConsent.sql" />
+    <EmbeddedResource Include="Scripts\2.0.0\09_PersonKinContactsView.sql" />
     <EmbeddedResource Include="Scripts\2.0.0\07_DO_AlterTable_Pregnancy_AddColumn_AgeAtMenarch.sql" />
     <EmbeddedResource Include="Scripts\2.0.0\08_DO_AlterTable_PatientDelivery_DropFK_ProfileId.sql" />
     <EmbeddedResource Include="Scripts\2.0.0\09_DO_AlterTable_PatientDelivery_DropColumn_ProfileId.sql" />

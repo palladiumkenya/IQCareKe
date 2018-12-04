@@ -22,6 +22,22 @@ namespace IQCare.Common.BusinessProcess.Services
             _unitOfWork = unitOfWork ?? throw new ArgumentNullException(nameof(unitOfWork));
         }
 
+        public async Task<PatientConsent> AddPatientConsent(PatientConsent patientConsent)
+        {
+            try
+            {
+                await _unitOfWork.Repository<PatientConsent>().AddAsync(patientConsent);
+                await _unitOfWork.SaveAsync();
+
+                return patientConsent;
+            }
+            catch (Exception e)
+            {
+                Log.Error(e.Message);
+                throw e;
+            }
+        }
+
         public async Task<Patient> AddRegistrationPatient(int personID, DateTime RegistrationDate, string NationalID, DateTime dateOfBirth, int userId, string facilityId = "")
         {
             try
@@ -209,8 +225,6 @@ namespace IQCare.Common.BusinessProcess.Services
             {
                 throw e;
             }
-
-
         }
 
         public async Task<PersonLocation> GetCurrentPersonLocation(int personId)

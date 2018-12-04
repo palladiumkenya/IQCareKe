@@ -21,6 +21,7 @@ namespace IQCareRecords.Common.BusinessProcess.CommandHandlers.Registration
         {
             _unitOfWork = unitOfWork ?? throw new ArgumentNullException(nameof(unitOfWork));
         }
+
         public async Task<Result<AddPersonEmergencyContactResponse>> Handle(PersonEmergencyContactCommand request, CancellationToken cancellationToken)
         {
             try
@@ -59,8 +60,33 @@ namespace IQCareRecords.Common.BusinessProcess.CommandHandlers.Registration
                     await registerPersonService.addPersonContact(emergencyPersonId, "", request.Emergencycontact[i].MobileContact,
                         "", "", request.Emergencycontact[i].CreatedBy);
 
-                    //add person consent to sms
+                    var consentTypeList = await _unitOfWork.Repository<LookupItemView>()
+                        .Get(x => x.MasterName == "ConsentType" && x.ItemName == "ConsentToSendSMS").ToListAsync();
 
+                    int consentType = 0;
+                    if (consentTypeList.Count > 0)
+                    {
+                        consentType = consentTypeList[0].ItemId;
+                    }
+
+                    //add person consent to sms
+                    PatientConsent patientConsent = new PatientConsent()
+                    {
+                        PatientMasterVisitId = 0,
+                        PatientId = 0,
+                        ServiceAreaId = 0,
+                        ConsentType = consentType,
+                        ConsentValue = request.Emergencycontact[i].Consent,
+                        ConsentDate = DateTime.Now,
+                        DeclineReason = null,
+                        DeleteFlag = false,
+                        CreatedBy = request.Emergencycontact[i].CreatedBy,
+                        CreateDate = DateTime.Now,
+                        PersonId = emergencyPersonId,
+                        Comments = request.Emergencycontact[i].ConsentDecline
+                    };
+
+                    await registerPersonService.AddPatientConsent(patientConsent);
                 }
 
                 return Result<AddPersonEmergencyContactResponse>.Valid(new AddPersonEmergencyContactResponse()
