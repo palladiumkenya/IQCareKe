@@ -36,9 +36,9 @@ namespace Application.Presentation
 
         public GblIQCare()
         {
-            AppVersion = "Ver 2.0.0-BETA Kenya HMIS";
-            ReleaseDate = "27-Nov-2018";
-            VersionName = "Kenya HMIS Ver 2.0.0-BETA";
+            AppVersion = "Ver 2.0.0 Kenya HMIS";
+            ReleaseDate = "12-Dec-2018";
+            VersionName = "Kenya HMIS Ver 2.0.0 BETA";
             DbVersion = "Ver 2.0.0 Kenya HMIS";
         }
         public static int iFormMode;
@@ -48,10 +48,10 @@ namespace Application.Presentation
         public static DateTime dtmAppVersion;
 
         #region "Application Parameters"
-        public static string AppVersion = "Ver 2.0.0-BETA Kenya HMIS";
-        public static string DbVersion = "Ver 2.0.0-BETA Kenya HMIS";
-        public static string ReleaseDate = "27-Nov-2018";
-        public static string VersionName = "Kenya HMIS Ver 2.0.0-BETA";
+        public static string AppVersion = "Ver 2.0.0 Kenya HMIS";
+        public static string DbVersion = "Ver 2.0.0 Kenya HMIS";
+        public static string ReleaseDate = "04-Dec-2018";
+        public static string VersionName = "Kenya HMIS Ver 2.0.0 BETA";
         #endregion
 
         #region "Public Variables"
