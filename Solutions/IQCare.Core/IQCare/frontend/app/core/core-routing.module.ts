@@ -29,6 +29,10 @@ const routes: Routes = [
         loadChildren: '../pmtct/pmtct.module#PmtctModule'
     },
     {
+        path: 'clinical',
+        loadChildren: '../clinical/clinical.module#ClinicalModule'
+    },
+    {
         path: '**',
         component: NotFoundComponent
     }

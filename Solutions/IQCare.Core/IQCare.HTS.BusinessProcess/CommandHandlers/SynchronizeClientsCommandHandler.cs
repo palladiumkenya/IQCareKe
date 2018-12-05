@@ -9,6 +9,7 @@ using IQCare.Common.BusinessProcess.Commands.Setup;
 using IQCare.Common.BusinessProcess.Services;
 using IQCare.Common.Core.Models;
 using IQCare.Common.Infrastructure;
+using IQCare.Common.Services;
 using IQCare.HTS.BusinessProcess.Commands;
 using IQCare.HTS.BusinessProcess.Services;
 using IQCare.HTS.Infrastructure;
@@ -40,8 +41,10 @@ namespace IQCare.HTS.BusinessProcess.CommandHandlers
             {
                 LookupLogic lookupLogic = new LookupLogic(_unitOfWork);
                 RegisterPersonService registerPersonService = new RegisterPersonService(_unitOfWork);
+                PersonOccupationService pocc = new PersonOccupationService(_unitOfWork);
+                EducationLevelService educationLevelService = new EducationLevelService(_unitOfWork);
                 EncounterTestingService encounterTestingService = new EncounterTestingService(_unitOfWork, _htsUnitOfWork);
-                PersonDemographicsService personDemographicsService = new PersonDemographicsService(_unitOfWork);
+               // PersonDemographicsService personDemographicsService = new PersonDemographicsService(_unitOfWork);
                 for (int i = 0; i < request.CLIENTS.Count; i++)
                 {
                     for (int j = 0; j < request.CLIENTS[i].PATIENT_IDENTIFICATION.INTERNAL_PATIENT_ID.Count; j++)
@@ -139,12 +142,12 @@ namespace IQCare.HTS.BusinessProcess.CommandHandlers
                             if (registeredPerson != null)
                             {
                                 var updatedPerson = await registerPersonService.UpdatePerson(identifiers[0].PersonId,
-                                    firstName, middleName, lastName, sex, dateOfBirth, clientFacility.FacilityID);
+                                    firstName, middleName, lastName, sex, dateOfBirth, clientFacility.FacilityID,NickName:nickName);
                             }
                             else
                             {
                                 var person = await registerPersonService.RegisterPerson(firstName, middleName, lastName,
-                                    sex, userId, clientFacility.FacilityID, dateOfBirth);
+                                    sex, userId, clientFacility.FacilityID, dateOfBirth,nickName:nickName);
                             }
 
                             var patient = await registerPersonService.GetPatientByPersonId(identifiers[0].PersonId);
@@ -171,17 +174,21 @@ namespace IQCare.HTS.BusinessProcess.CommandHandlers
 
                             var updatedPersonPopulations = await registerPersonService.UpdatePersonPopulation(identifiers[0].PersonId,
                                 request.CLIENTS[i].PATIENT_IDENTIFICATION.KEY_POP, userId);
-                            if (!string.IsNullOrWhiteSpace(landmark) || !string.IsNullOrWhiteSpace(county) ||!string.IsNullOrWhiteSpace(subcounty)||!string.IsNullOrWhiteSpace(ward))
+                           /* if (!string.IsNullOrWhiteSpace(landmark))
                             {
-                                var updatedLocation = await registerPersonService.UpdatePersonLocation(identifiers[0].PersonId, landmark,ward,county,subcounty);
+                                var updatedLocation = await registerPersonService.UpdatePersonLocation(identifiers[0].PersonId, landmark);
+                            }*/
+                            if (!string.IsNullOrWhiteSpace(landmark) || (!string.IsNullOrWhiteSpace(county)) || (!string.IsNullOrWhiteSpace(subcounty)) || (!string.IsNullOrWhiteSpace(ward)))
+                            {
+                                var updatedLocation = await registerPersonService.UpdatePersonLocation(identifiers[0].PersonId, landmark, ward, county, subcounty, userId);
                             }
-                            if (!string.IsNullOrWhiteSpace(educationlevel) || Convert.ToInt32(educationlevel.ToString()) > 0)
+                            if (!string.IsNullOrWhiteSpace(educationlevel))
                             {
-                                var personeducation = await personDemographicsService.UpdatePersonEducation(identifiers[0].PersonId, educationlevel, educationoutcome, userId);
+                                var personeducation = await educationLevelService.UpdatePersonEducation(identifiers[0].PersonId, educationlevel, educationoutcome, userId);
                             }
-                            if (!string.IsNullOrWhiteSpace(occupation) || Convert.ToInt32(occupation.ToString()) > 0)
+                            if (!string.IsNullOrWhiteSpace(occupation))
                             {
-                                var personoccupation = await personDemographicsService.Update(identifiers[0].PersonId, occupation, userId);
+                                var personoccupation = await pocc.Update(identifiers[0].PersonId, occupation, userId);
                             }
 
                             if (!string.IsNullOrWhiteSpace(mobileNumber) || !string.IsNullOrWhiteSpace(physicalAddress))
@@ -636,7 +643,7 @@ namespace IQCare.HTS.BusinessProcess.CommandHandlers
                         {
                             // Add Person
                             var person = await registerPersonService.RegisterPerson(firstName, middleName, lastName, sex,
-                                userId, clientFacility.FacilityID, dateOfBirth);
+                                userId, clientFacility.FacilityID, dateOfBirth,nickName:nickName);
                             //Add Person to mst_patient
                             var mstResult = await registerPersonService.InsertIntoBlueCard(firstName, lastName,
                                 middleName, dateEnrollment, maritalStatusName, physicalAddress, mobileNumber, gender, dobPrecision, dateOfBirth, userId, facilityId);
@@ -656,18 +663,23 @@ namespace IQCare.HTS.BusinessProcess.CommandHandlers
                                 var population = await registerPersonService.addPersonPopulation(person.Id,
                                     request.CLIENTS[i].PATIENT_IDENTIFICATION.KEY_POP, userId);
                                 // Add Person Location
+                                //if (!string.IsNullOrWhiteSpace(landmark))
+                                //{
+                                //    var personLocation = await registerPersonService.addPersonLocation(person.Id, 0, 0, 0, "", landmark, userId);
+                                //}
                                 if (!string.IsNullOrWhiteSpace(landmark) || (!string.IsNullOrWhiteSpace(county)) || (!string.IsNullOrWhiteSpace(subcounty)) || (!string.IsNullOrWhiteSpace(ward)))
                                 {
                                     var personLocation = await registerPersonService.UpdatePersonLocation(person.Id, landmark, ward, county, subcounty, userId);
                                 }
-                                if (!string.IsNullOrWhiteSpace(educationlevel) || Convert.ToInt32(educationlevel.ToString()) > 0)
+                                if (!string.IsNullOrWhiteSpace(educationlevel))
                                 {
-                                    var personeducation = await personDemographicsService.UpdatePersonEducation(person.Id, educationlevel, educationoutcome, userId);
+                                    var personeducation = await educationLevelService.UpdatePersonEducation(person.Id, educationlevel, educationoutcome, userId);
                                 }
-                                if (!string.IsNullOrWhiteSpace(occupation) || Convert.ToInt32(occupation.ToString()) > 0)
+                                if (!string.IsNullOrWhiteSpace(occupation))
                                 {
-                                    var personoccupation = await personDemographicsService.Update(person.Id, occupation, userId);
+                                    var personoccupation = await pocc.Update(person.Id, occupation, userId);
                                 }
+
 
                                 if (!string.IsNullOrWhiteSpace(mobileNumber) || !string.IsNullOrWhiteSpace(physicalAddress))
                                 {

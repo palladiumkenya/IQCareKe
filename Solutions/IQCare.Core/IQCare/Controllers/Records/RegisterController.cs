@@ -122,6 +122,7 @@ namespace IQCare.Controllers.Records
             }
             return BadRequest(response);
         }
+
         [HttpGet("searchpersonlist")]
         public async Task<IActionResult> Get([FromQuery]SearchQuery searchQuery)
         {
@@ -131,7 +132,9 @@ namespace IQCare.Controllers.Records
                 firstName = searchQuery.FirstName,
                 middleName = searchQuery.MiddleName,
                 lastName = searchQuery.LastName,
-                MobileNumber = searchQuery.MobileNumber
+                MobileNumber = searchQuery.MobileNumber,
+                BirthDate = searchQuery.DateOfBirth,
+                Sex = searchQuery.Sex
             });
 
             if (response.IsValid)
@@ -158,6 +161,7 @@ namespace IQCare.Controllers.Records
                 return Ok(response.Value);
             return BadRequest(response);
         }
+
         [HttpGet("SearchContact")]
         public async Task<IActionResult> GetContacts(string identificationNumber, string firstName, string middleName, string lastName, string enrollmentNumber)
         {

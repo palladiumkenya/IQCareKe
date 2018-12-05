@@ -10,7 +10,7 @@ namespace IQCare.PMTCT.Core.Models.HEI
         public int PlaceOfDeliveryId { get; set; }
         public string PlaceOfDeliveryOther { get; set; }
         public int ModeOfDeliveryId { get; set; }
-        public float BirthWeight { get; set; }
+        public double BirthWeight { get; set; }
         public int ArvProphylaxisId { get; set; }
         public string ArvProphylaxisOther { get; set; }
         public bool MotherRegisteredId { get; set; }

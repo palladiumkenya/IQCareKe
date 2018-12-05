@@ -5,6 +5,7 @@ import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {ClientMonitoringEmitter} from '../../emitters/ClientMonitoringEmitter';
 import {LookupItemService} from '../../../shared/_services/lookup-item.service';
 import {NotificationService} from '../../../shared/_services/notification.service';
+import {AncService} from '../../_services/anc.service';
 
 export interface Options {
     value: string;
@@ -19,6 +20,9 @@ export interface Options {
 export class ClientMonitoringComponent implements OnInit {
 
     private lookupItemView$: Subscription;
+    private patientScreening$: Subscription;
+    private patientwhoStage$: Subscription;
+
     public TBScreeningOptions: any[] = [];
     public whoStagOptions: any[] = [];
     public YesNoNaOptions: any[] = [];
@@ -30,23 +34,26 @@ export class ClientMonitoringComponent implements OnInit {
     @Output() nextStep = new EventEmitter<ClientMonitoringEmitter>();
     @Input() clientMonitoring: ClientMonitoringEmitter;
     @Input() clientMonitoringOptions: any[] = [];
+    @Input('isEdit') isEdit: boolean;
+    @Input('patientId') patientId: number;
+    @Input('patientMasterVisitId') patientMasterVisitId: number;
     @Output() notify: EventEmitter<FormGroup> = new EventEmitter<FormGroup>();
     public clientMonitoringData: ClientMonitoringEmitter;
 
     constructor(private fb: FormBuilder, private lookupItemService: LookupItemService, private snotifyService: SnotifyService,
-                private notificationService: NotificationService) {
+                private notificationService: NotificationService,
+                private ancService: AncService) {
     }
 
     ngOnInit() {
         this.clientMonitoringFormGroup = this.fb.group({
-            WhoStage: new FormControl(['', Validators.required]),
-            viralLoadSampleTaken: new FormControl(['', Validators.required]),
-            screenedForTB: new FormControl(['', Validators.required]),
-            cacxScreeningDone: new FormControl(['', Validators.required]),
-            cacxMethod: new FormControl(['', Validators.required]),
-            cacxResult: new FormControl(['', Validators.required]),
-            cacxComments: new FormControl(['', Validators.required])
-
+            WhoStage: ['', Validators.required],
+            viralLoadSampleTaken: ['', Validators.required],
+            screenedForTB: ['', Validators.required],
+            cacxScreeningDone: ['', Validators.required],
+            cacxMethod: ['', Validators.required],
+            cacxResult: ['', Validators.required],
+            cacxComments: ['', Validators.required]
         });
 
         const {
@@ -65,6 +72,10 @@ export class ClientMonitoringComponent implements OnInit {
         this.YesNoOptions = yesnoOptions;
         console.log(this.cacxMethodOptions);
 
+        this.clientMonitoringFormGroup.controls['cacxMethod'].disable({ onlySelf: true });
+        this.clientMonitoringFormGroup.controls['cacxResult'].disable({ onlySelf: true });
+        this.clientMonitoringFormGroup.controls['cacxComments'].disable({ onlySelf: true });
+
       /*  this.getLookupItems('TBScreeningPMTCT', this.TBOptions);
         this.getLookupItems('WHOStage', this.WHOStagOptions);
         this.getLookupItems('YesNoNA', this.YesNoNa);
@@ -72,6 +83,11 @@ export class ClientMonitoringComponent implements OnInit {
         this.getLookupItems('CacxResult', this.CacxResults);
         this.getLookupItems('YesNo', this.YesNos);*/
       this.notify.emit(this.clientMonitoringFormGroup);
+
+      if (this.isEdit) {
+          this.getPatientScreeningInfo(this.patientId, this.patientMasterVisitId);
+          this.getPatientWhoStageInfo(this.patientId, this.patientMasterVisitId);
+      }
 
     }
 
@@ -115,4 +131,70 @@ export class ClientMonitoringComponent implements OnInit {
         this.notify.emit(this.clientMonitoringFormGroup);
     }
 
+    public oncacxScreeningChange(event) {
+
+        if (event.isUserInput && event.source.selected && event.source.viewValue == 'Yes') {
+            this.clientMonitoringFormGroup.controls['cacxMethod'].enable({ onlySelf: true });
+            this.clientMonitoringFormGroup.controls['cacxResult'].enable({ onlySelf: true });
+            this.clientMonitoringFormGroup.controls['cacxComments'].enable({ onlySelf: true });
+        } else {
+            this.clientMonitoringFormGroup.controls['cacxMethod'].disable({ onlySelf: true });
+            this.clientMonitoringFormGroup.controls['cacxResult'].disable({ onlySelf: true });
+            this.clientMonitoringFormGroup.controls['cacxComments'].disable({ onlySelf: true });
+        }
+    }
+
+    public getPatientWhoStageInfo(patientId: number, patientMasterVisitId: number) {
+        this.patientwhoStage$ = this.ancService.getPatientWhoStageInfo(patientId, patientMasterVisitId)
+            .subscribe(
+                p => {
+                    console.log('patientwho');
+                    console.log(p);
+                    console.log(p['whoStage']);
+                    if (p) {
+                        this.clientMonitoringFormGroup.get('WhoStage').setValue(p['whoStage']);
+                    }
+                },
+                (err) => {
+                    console.log(err);
+                    this.snotifyService.error('Error loading patient who stage ' + err, 'WHO', this.notificationService.getConfig());
+                },
+                () => {
+                    console.log(this.lookupItemView$);
+                });
+    }
+
+    public getPatientScreeningInfo(patientId: number, patientMasterVisitId: number) {
+        this.patientScreening$ = this.ancService.getPatientScreeningInfo(patientId, patientMasterVisitId)
+            .subscribe(
+                p => {
+                    console.log('patientscreening');
+                    console.log(p);
+                    const screening = p;
+                    if (p) {
+                        const cacx = screening.filter(obj => obj.screeningType == 'CaCxScreening');
+                        const tb = screening.filter(obj => obj.screeningType == 'TBScreeningPMTCT');
+                        console.log(cacx);
+                        console.log(cacx[0]['screeningDone']);
+
+                        if (tb.length > 0) {
+                            this.clientMonitoringFormGroup.get('screenedForTB').setValue(cacx[0]['screeningDone']);
+                        }
+                        if (cacx.length > 0) {
+                            this.clientMonitoringFormGroup.get('cacxScreeningDone').setValue(cacx[0]['screeningDone']);
+                            this.clientMonitoringFormGroup.get('cacxMethod').setValue(cacx[0]['screeningCategoryId']);
+                            this.clientMonitoringFormGroup.get('cacxResult').setValue(cacx[0]['screeningValueId']);
+                            this.clientMonitoringFormGroup.get('cacxComments').setValue(cacx[0]['comment']);
+                        }
+
+                    }
+                },
+                (err) => {
+                    console.log(err);
+                    this.snotifyService.error('Error loading patient screening ' + err, 'WHO', this.notificationService.getConfig());
+                },
+                () => {
+                    console.log(this.lookupItemView$);
+                });
+    }
 }

@@ -1,7 +1,11 @@
+import { NotificationService } from './../../shared/_services/notification.service';
 import { Component, OnInit, Input, NgZone } from '@angular/core';
 import { PersonHomeService } from '../services/person-home.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { PatientView } from '../_model/PatientView';
+import { SnotifyService } from 'ng-snotify';
+import { Store } from '@ngrx/store';
+import * as Consent from '../../shared/reducers/app.states';
 
 @Component({
     selector: 'app-services-list',
@@ -22,10 +26,14 @@ export class ServicesListComponent implements OnInit {
     public patientId: number;
     public Patient: PatientView = {};
 
-    constructor(private personhomeservice: PersonHomeService,
+    constructor(
+        private personhomeservice: PersonHomeService,
         public zone: NgZone,
         private router: Router,
-        private route: ActivatedRoute) {
+        private route: ActivatedRoute,
+        private snotifyService: SnotifyService,
+        private notificationService: NotificationService,
+        private store: Store<AppState>) {
     }
 
     ngOnInit() {
@@ -43,9 +51,23 @@ export class ServicesListComponent implements OnInit {
         });
     }
 
-    enrollToService(serviceId: number) {
+    enrollToService(serviceId: number, serviceCode: string) {
+        if (serviceId == 1) {
+            this.snotifyService.error('Please Access CCC from the Greencard menu', 'Encounter History',
+                this.notificationService.getConfig());
+            return;
+        }
         this.zone.run(() => {
-            this.router.navigate(['/dashboard/enrollment/' + this.personId + '/' + serviceId],
+            this.router.navigate(['/dashboard/enrollment/' + this.personId + '/' + serviceId + '/' + serviceCode],
+                { relativeTo: this.route });
+        });
+    }
+
+    newTriage() {
+        localStorage.setItem('selectedService', 'triage');
+        this.store.dispatch(new Consent.SelectedService('triage'));
+        this.zone.run(() => {
+            this.router.navigate(['/clinical/triage/' + this.patientId + '/' + this.personId],
                 { relativeTo: this.route });
         });
     }
@@ -53,20 +75,12 @@ export class ServicesListComponent implements OnInit {
     newEncounter(serviceId: number) {
         const selectedService = this.services.filter(obj => obj.id == serviceId);
         if (selectedService && selectedService.length > 0) {
+            const service = selectedService[0]['code'];
+            localStorage.setItem('selectedService', service.toLowerCase());
+
+            this.store.dispatch(new Consent.SelectedService(service.toLowerCase()));
+
             switch (selectedService[0]['code']) {
-                /* case 'ANC':
-                     this.zone.run(() => {
-                         // :patientId/:personId/:serviceAreaId
-                         this.router.navigate(['/pmtct/anc/' + this.patientId + '/' + this.personId + '/' + serviceId],
-                             { relativeTo: this.route });
-                     });
-                     break;
-                 case 'HEI':
-                     this.zone.run(() => {
-                         this.router.navigate(['/pmtct/hei/' + this.patientId + '/' + this.personId + '/' + serviceId],
-                             { relativeTo: this.route });
-                     });
-                     break;*/
                 case 'HTS':
                     this.zone.run(() => {
                         localStorage.setItem('personId', this.personId.toString());
@@ -75,22 +89,11 @@ export class ServicesListComponent implements OnInit {
                         this.router.navigate(['/registration/home/'], { relativeTo: this.route });
                     });
                     break;
-                /*  case 'PNC':
-                      this.zone.run(() => {
-                          this.router.navigate(
-                              ['/pmtct/pnc/encounters/' + this.patientId + '/' + this.personId + '/' + serviceId],
-                              { relativeTo: this.route });
-                      });
-                      break;
-                  case 'Maternity':
-                      this.zone.run(() => {
-                          this.router.navigate(
-                              ['/pmtct/maternity/encounters/' + this.patientId + '/' + this.personId + '/' + serviceId],
-                              { relativeTo: this.route });
-                      });
-                      break;*/
+                case 'CCC':
+                    this.snotifyService.error('Please Access CCC from the Greencard menu', 'Encounter History',
+                        this.notificationService.getConfig());
+                    break;
                 default:
-
                     this.zone.run(() => {
                         this.router.navigate(
                             ['/pmtct/patient-encounter/' + this.patientId + '/' + this.personId + '/' + serviceId + '/'
@@ -117,26 +120,32 @@ export class ServicesListComponent implements OnInit {
     }
 
     isServiceEligible(serviceAreaId: number) {
+        let isCCCEnrolled;
+
+        if (this.enrolledServices) {
+            isCCCEnrolled = this.enrolledServices.filter(obj => obj.serviceAreaId == 1);
+        }
+
         const selectedService = this.services.filter(obj => obj.id == serviceAreaId);
         let isEligible: boolean = true;
         if (selectedService && selectedService.length > 0) {
             switch (selectedService[0]['code']) {
                 case 'ANC':
-                    if (this.person.gender == 'Female') {
+                    if (this.person.gender == 'Female' && (this.person.ageNumber >= 9 && this.person.ageNumber <= 49)) {
                         isEligible = true;
                     } else {
                         isEligible = false;
                     }
                     break;
                 case 'PNC':
-                    if (this.person.gender == 'Female') {
+                    if (this.person.gender == 'Female' && (this.person.ageNumber >= 9 && this.person.ageNumber <= 49)) {
                         isEligible = true;
                     } else {
                         isEligible = false;
                     }
                     break;
                 case 'Maternity':
-                    if (this.person.gender == 'Female') {
+                    if (this.person.gender == 'Female' && (this.person.ageNumber >= 9 && this.person.ageNumber <= 49)) {
                         isEligible = true;
                     } else {
                         isEligible = false;
@@ -147,6 +156,13 @@ export class ServicesListComponent implements OnInit {
                         isEligible = true;
                     } else {
                         isEligible = false;
+                    }
+                    break;
+                case 'HTS':
+                    if (isCCCEnrolled && isCCCEnrolled.length > 0) {
+                        isEligible = false;
+                    } else {
+                        isEligible = true;
                     }
                     break;
             }

@@ -11,6 +11,7 @@ using System.Reflection;
 using IQCare.Helpers;
 using AutoMapper;
 using IQCare.PMTCT.BusinessProcess.MapperProfiles;
+using IQCare.PMTCT.Services.Interface.Triage;
 
 namespace IQCare
 {
@@ -59,6 +60,11 @@ namespace IQCare
                     o.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
 
             services.AddCors();
+            services.AddCommonDatabaseFunc();
+
+            services.AddGetZscoreParametersService();
+            services.AddZscoreCalculatorServices();
+            services.AddZscoreTypeAndSprocDictionaryMapping();
 
             foreach (var VARIABLE in services)
             {

@@ -33,18 +33,18 @@
             </div>
         </div>
 
-        <div class="row">
+        <div class="row" runat="server" id="dvHeadCircum">
             <div class="col-md-12">
-                <div class="col-md-5"><label class="control-label pull-left">Head Circumference (cm)</label></div>
+                <div class="col-md-5"><label  class="control-label pull-left">Head Circumference (cm)</label></div>
                 <div class="col-md-3">
                     <asp:Label runat="server" ID="vitalsCircumference" CssClass="control-label text-success pull-left"><span class="label label-danger">Not Taken</span></asp:Label>
                 </div>
             </div>
         </div>
 
-        <div class="row">
+        <div class="row" runat="server" id="dvMuac"> 
             <div class="col-md-12">
-                <div class="col-md-5"><label class="control-label pull-left">MUAC (cm)</label></div>
+                <div class="col-md-5"><label runat="server" ID="lblMuac" class="control-label pull-left">MUAC (cm)</label></div>
                 <div class="col-md-3">
                     <asp:Label runat="server" ID="vitalsMUAC" CssClass="control-label text-success pull-left"><span class="label label-danger">Not Taken</span></asp:Label>
                 </div>

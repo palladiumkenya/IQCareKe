@@ -10,10 +10,10 @@ namespace IQCare.Maternity.Core.Domain.Maternity
         {
 
         }
-        public PatientDeliveryInformation(int patientMasterVisitId, int profileId, string labourDuration, DateTime deliveryDate, DateTime deliveryTime, int? deliveryMode, int? placentaComplete, int? bloodLossCapacity, int? bloodLossClassification, int? motherCondition, int ? complicationsExperienced, string complicationNotes, string deliveryConductedBy, int createdBy, int ? maternalDeathAudited, DateTime? maternalDeathAuditDate)
+        public PatientDeliveryInformation(int patientMasterVisitId, int pregnancyId, string labourDuration, DateTime deliveryDate, DateTime deliveryTime, int? deliveryMode, int? placentaComplete, int? bloodLossCapacity, int? bloodLossClassification, int? motherCondition, int ? complicationsExperienced, string complicationNotes, string deliveryConductedBy, int createdBy, int ? maternalDeathAudited, DateTime? maternalDeathAuditDate)
         {
             PatientMasterVisitId = patientMasterVisitId;
-            ProfileId = profileId;
+            PregnancyId = pregnancyId;
             DurationOfLabour = labourDuration;
             DateOfDelivery = deliveryDate;
             TimeOfDelivery = deliveryTime;
@@ -33,7 +33,7 @@ namespace IQCare.Maternity.Core.Domain.Maternity
 
         public int Id { get; private set; }
         public int PatientMasterVisitId { get; private set; }
-        public int ProfileId { get; private set; }
+        public int ? PregnancyId { get; private set; }
         public string DurationOfLabour { get; private set; }
         public DateTime DateOfDelivery { get; private set; }
         public DateTime TimeOfDelivery { get; private set; }
@@ -50,6 +50,7 @@ namespace IQCare.Maternity.Core.Domain.Maternity
         public int CreatedBy { get; private set; }
         public DateTime CreateDate { get; private set; }
         public string AuditData { get; private set; }
+        public bool DeleteFlag { get; set; }
 
     }
 }

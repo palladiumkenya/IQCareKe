@@ -51,7 +51,7 @@ namespace IQCare.Controllers.Common
         [HttpGet("htsOptions")]
         public async Task<IActionResult> Get()
         {
-            string[] options = new string[] { "HTSEntryPoints", "YesNo", "Disabilities", "TestedAs", "Strategy", "TbScreening", "ReasonsPartner", "HIVResults", "HIVTestKits", "HIVFinalResults" };
+            string[] options = new string[] { "HTSEntryPoints", "YesNo", "Disabilities", "TestedAs", "Strategy", "TbScreening", "ReasonsPartner", "HIVResults", "HIVTestKits", "HIVFinalResults","EducationalLevel","EducationOutcome","HTSOccupation" };
 
             var results = await _mediator.Send(new GetRegistrationOptionsCommand {RegistrationOptions = options},
                 HttpContext.RequestAborted);
@@ -286,16 +286,15 @@ namespace IQCare.Controllers.Common
                 return Ok(response.Value);
             return BadRequest(response);
         }
-    }
 
-        //[HttpGet("getFacility/{mflCode}")]
-        //public async Task<IActionResult> GetFacility(string mflCode)
-        //{
-        //    var response = await _mediator.Send(new GetFacilityCommand() {MflCode = mflCode},
-        //        Request.HttpContext.RequestAborted);
-        //    if (response.IsValid)
-        //        return Ok(response.Value);
-        //    return BadRequest(response);
-        //}
-    //} 
+        [HttpGet("getFacility/{mflCode}")]
+        public async Task<IActionResult> GetFacility(string mflCode)
+        {
+            var response = await _mediator.Send(new GetFacilityCommand() {MflCode = mflCode},
+                Request.HttpContext.RequestAborted);
+            if (response.IsValid)
+                return Ok(response.Value);
+            return BadRequest(response);
+        }
+    }
 }

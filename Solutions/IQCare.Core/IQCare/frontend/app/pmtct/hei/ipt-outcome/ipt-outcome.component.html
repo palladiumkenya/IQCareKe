@@ -5,33 +5,35 @@
 
 <form [formGroup]="IPTClientOutcomeFormGroup">
 
-  <mat-dialog-content>
+    <mat-dialog-content>
 
 
-    <div class="row">
-      <mat-form-field class="col-md-12">
-        <mat-label>IPT Event</mat-label>
-        <mat-select formControlName="iptEvent" required minlength="1">
-          <mat-option [value]="0">select</mat-option>
-          <mat-option *ngFor="let iptOutcomeOption of iptOutcomeOptions" [value]="iptOutcomeOption.itemId">
-            {{iptOutcomeOption.itemName}}
-          </mat-option>
-        </mat-select>
-      </mat-form-field>
-    </div>
+        <div class="row">
+            <mat-form-field class="col-md-12">
+                <mat-label>IPT Event</mat-label>
+                <mat-select formControlName="iptEvent" required minlength="1">
+                    <mat-option [value]="0">select</mat-option>
+                    <mat-option *ngFor="let iptOutcomeOption of iptOutcomeOptions" [value]="iptOutcomeOption.itemId">
+                        {{iptOutcomeOption.itemName}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
 
-    <div class="row">
-      <mat-form-field class="col-md-12">
-        <input matInput
-               placeholder="Reason for Discontinuation"
-               formControlName="reasonsDiscontinued" required>
-      </mat-form-field>
-    </div>
-  </mat-dialog-content>
-  <mat-dialog-actions>
-    <button mat-raised-button class="mat-raised-button mat-primary"><span class="fa fa-plus-circle" (click)="onSave()"> Save </span>
-    </button>
-    <button mat-raised-button="" [mat-dialog-close]="true" class="mat-raised-button mat-accent"><span
-            class="fa fa-times">Close</span></button>
-  </mat-dialog-actions>
+        <div class="row">
+            <mat-form-field class="col-md-12">
+                <input matInput placeholder="Reason for Discontinuation" formControlName="reasonsDiscontinued" required>
+            </mat-form-field>
+        </div>
+    </mat-dialog-content>
+    <mat-dialog-actions>
+        <button mat-raised-button class="mat-raised-button mat-primary" (click)="onSave()">
+            <span class="fa fa-plus-circle">
+                Save
+            </span>
+        </button>
+        <button mat-raised-button="" [mat-dialog-close]="true" class="mat-raised-button mat-accent" (click)="close()">
+            <span class="fa fa-times">Close</span>
+        </button>
+    </mat-dialog-actions>
 </form>

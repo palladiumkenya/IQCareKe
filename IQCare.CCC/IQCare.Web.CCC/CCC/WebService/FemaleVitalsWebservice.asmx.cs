@@ -57,7 +57,7 @@ namespace IQCare.Web.CCC.WebService
         }
 
         [WebMethod(EnableSession = true)]
-        public string AddPatientPregnancy(int patientId, int patientMasterVisitId, DateTime LMP, DateTime EDD, string gravidae, string parity, int outcome, DateTime dateOfOutcome, int userId)
+        public string AddPatientPregnancy(int patientId, int patientMasterVisitId, DateTime LMP, DateTime EDD, int gravidae, int parity, int outcome, DateTime dateOfOutcome, int userId)
         {
             try
             {
@@ -110,7 +110,7 @@ namespace IQCare.Web.CCC.WebService
                 int familyPlanningStatus = Convert.ToInt32(Session["FamilyPlanningStatus"].ToString());
                 //var familyPlanningMethods = JsonConvert.DeserializeObject<IEnumerable<object>>(PatientFPId);
                 var familyPlanningMethods = new JavaScriptSerializer().Deserialize<IEnumerable<object>>(PatientFPId);
-
+               
                 int count = familyPlanningMethods.Count();
                 if (count > 0)
                 {

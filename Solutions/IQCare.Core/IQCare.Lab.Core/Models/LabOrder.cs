@@ -64,7 +64,7 @@ namespace IQCare.Lab.Core.Models
 
         public int DeletedBy { get; private set; }
 
-        public DateTime DeleteDate { get; private set; }
+        public DateTime? DeleteDate { get; private set; }
 
         public string DeleteReason { get; private set; }
 

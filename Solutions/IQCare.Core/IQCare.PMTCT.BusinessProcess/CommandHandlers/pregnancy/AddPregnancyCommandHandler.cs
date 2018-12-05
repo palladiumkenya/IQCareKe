@@ -26,30 +26,29 @@ namespace IQCare.PMTCT.BusinessProcess.CommandHandlers.pregnancy
 
                 try
                 {
-                    VisitDetailsService visitDetailsService = new VisitDetailsService(_unitOfWork);
+                    var visitDetailsService = new VisitDetailsService(_unitOfWork);
 
-                PatientPregnancy pregnancy = new PatientPregnancy()
+                    var patientPregnancy = new PatientPregnancy
                     {
                         PatientId = request.PatientId,
                         PatientMasterVisitId = request.PatientMasterVisitId,
-                        CreateDate = request.CreateDate,
+                        CreateDate = DateTime.Now,
                         CreatedBy = request.CreatedBy,
-                        Outcome = request.Outcome,
-                        DateOfOutcome = request.DateOfOutcome,
-                        DeleteFlag = request.DeleteFlag,
+                        DeleteFlag = false,
                         Lmp = request.Lmp,
                         Edd = request.Edd,
                         Gestation = request.Gestation,
                         Gravidae = request.Gravidae,
                         Parity = request.Parity,
                         Parity2 = request.Parity2,
+                        AgeAtMenarche = request.AgeAtMenarche
                     };
 
-                    var _preganancy = await visitDetailsService.AddPatientPregnancy(pregnancy);
+                    var pregnancyResult = await visitDetailsService.AddPatientPregnancy(patientPregnancy);
 
                     return Result<AddPregnancyCommandResult>.Valid(new AddPregnancyCommandResult()
                     {
-                        PatientId = _preganancy.PatientId,PregnancyId = _preganancy.Id
+                        PregnancyId = pregnancyResult.Id
                             
                     });
                 }

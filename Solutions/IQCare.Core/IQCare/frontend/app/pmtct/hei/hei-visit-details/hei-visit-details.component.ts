@@ -5,6 +5,7 @@ import { Subscription } from 'rxjs/index';
 import { LookupItemService } from '../../../shared/_services/lookup-item.service';
 import { NotificationService } from '../../../shared/_services/notification.service';
 import { MaternityService } from '../../_services/maternity.service';
+import {HeiService} from '../../_services/hei.service';
 
 @Component({
     selector: 'app-hei-visit-details',
@@ -23,16 +24,19 @@ export class HeiVisitDetailsComponent implements OnInit {
     public visitTypes: any[] = [];
 
     @Input('formtype') formtype: string;
+   // @Input('isEdit') isEdit: boolean;
     @Input('visitDate') visitDate: string;
     @Input('visitType') visitType: string;
     @Input('patientId') patientId: number;
+    @Input('serviceAreaId') serviceAreaId: number;
     @Output() notify: EventEmitter<FormGroup> = new EventEmitter<FormGroup>();
 
     constructor(private _formBuilder: FormBuilder,
         private _lookupItemService: LookupItemService,
         private snotifyService: SnotifyService,
         private notificationService: NotificationService,
-        private maternityService: MaternityService) {
+        private maternityService: MaternityService,
+        private heiService: HeiService) {
         this.maxDate = new Date();
     }
 
@@ -42,7 +46,7 @@ export class HeiVisitDetailsComponent implements OnInit {
             visitType: new FormControl('', [Validators.required]),
             visitDate: new FormControl('', [Validators.required]),
             cohort: new FormControl(''),
-            visitNumber: new FormControl('', [Validators.required]),
+            visitNumber: new FormControl('', [Validators.min(0) , Validators.max(40), Validators.required]),
             dayPostPartum: new FormControl('', [Validators.required])
         });
 
@@ -78,25 +82,27 @@ export class HeiVisitDetailsComponent implements OnInit {
             default:
         }
 
-        this.getCurrentVisitDetails(this.patientId);
+        this.getCurrentVisitDetails(this.patientId, this.serviceAreaId);
         this.notify.emit(this.HeiVisitDetailsFormGroup);
     }
 
-    public getCurrentVisitDetails(patientId: number): void {
-        this.visitDetails = this.maternityService.getCurrentVisitDetails(patientId)
+    public getCurrentVisitDetails(patientId: number, serviceAreaId: number): void {
+        this.visitDetails = this.heiService.getPatientVisitDetails(patientId, serviceAreaId)
             .subscribe(
                 p => {
                     const visit = p;
-                    console.log(p);
-                    if (visit && visit.visitNumber > 1) {
+                    console.log('visit data');
+
+                    if (p.length) {
                         const Item = this.visitTypes.filter(x => x.itemName.includes('Follow Up'));
                         if (Item.length > 0) {
                             this.HeiVisitDetailsFormGroup.get('visitType').patchValue(Item[0].itemId);
-                            console.log('visitNumber' + visit.visitNumber);
+                            console.log('visitNumber' + visit[0].visitNumber);
                         }
 
                         if (this.formtype == 'anc') {
-                            this.HeiVisitDetailsFormGroup.get('visitNumber').patchValue(visit.visitNumber);
+                            this.HeiVisitDetailsFormGroup.get('visitNumber').patchValue(p.length + 1);
+                            const visitId = this.visitTypes.filter(x => x.itemName.includes('Initial'));
                         }
                     } else {
                         this.HeiVisitDetailsFormGroup.get('visitNumber').patchValue(1);

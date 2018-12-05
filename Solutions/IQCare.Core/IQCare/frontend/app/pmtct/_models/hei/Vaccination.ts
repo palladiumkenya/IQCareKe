@@ -10,6 +10,6 @@ export interface Vaccination {
     VaccineDate?: Date;
     Active?: number;
     AppointmentId?: number;
-    Period?: number;
+    PeriodId?: number;
     NextSchedule?: Date;
 }

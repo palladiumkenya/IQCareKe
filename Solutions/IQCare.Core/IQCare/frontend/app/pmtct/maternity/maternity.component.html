@@ -15,7 +15,7 @@
                                             <span matTooltip="Visit Details">Visit Details</span>
                                         </ng-template>
                                         <app-hei-visit-details (notify)="onVisitDetailsNotify($event)" [formtype]="formType"
-                                                               [visitDate]="visitDate" [visitType]="visitType" [patientId]="patientId"></app-hei-visit-details>
+                                                               [visitDate]="visitDate" [visitType]="visitType" [patientId]="patientId" [serviceAreaId]="serviceAreaId"></app-hei-visit-details>
                                         <app-mother-profile [patientId]="patientId" (notify)="OnMotherProfileNotify($event)"></app-mother-profile>
                                         <div>
                                             <button mat-raised-button color="accent" matStepperNext type="button" (click)="log()">Next</button>
@@ -25,9 +25,19 @@
                                         <ng-template matStepLabel>
                                             <span matTooltip="Diagnosis">Diagnosis</span>
                                         </ng-template>
-                                        <app-diagnosis [diagnosisOptions]="diagnosisOptions" (notify)="onPatientDiagnosisNotify($event)"></app-diagnosis>
+                                        <app-diagnosis [diagnosisOptions]="diagnosisOptions" (notify)="onPatientDiagnosisNotify($event)" 
+                                        [isEdit]="isEdit"                                     
+                                        [PatientId]="patientId"
+                                        [PatientMasterVisitId]="visitId">
+                                    </app-diagnosis>
                                         <div>
-                                            <app-delivery-maternity [patientId]="patientId" [diagnosisOptions]="diagnosisOptions"  (notify)="onPatientDeliveryNotify($event)" ></app-delivery-maternity>
+                                            <app-delivery-maternity 
+                                             [diagnosisOptions]="diagnosisOptions" 
+                                             (notify)="onPatientDeliveryNotify($event)"
+                                             [isEdit]="isEdit" 
+                                             [PatientMasterVisitId]="visitId"
+                                             [PatientId]="patientId"
+                                             ></app-delivery-maternity>
                                         </div>
                                         <div>
                                             <button mat-raised-button color="primary" matStepperPrevious type="button">Previous</button>
@@ -40,7 +50,12 @@
                                         <ng-template matStepLabel>
                                             <span matTooltip="Baby Section">Baby Section</span>
                                         </ng-template>
-                                        <app-baby [babySectionOptions]="babySectionOptions" (notifyData)="onBabyNotfiyData($event)" (notify)="onBabyNotify($event)"></app-baby>
+                                        <app-baby [babySectionOptions]="babySectionOptions" 
+                                        (notifyData)="onBabyNotfiyData($event)" 
+                                        (notify)="onBabyNotify($event)"
+                                        [isEdit]="isEdit"                                     
+                                        [PatientId]="patientId"
+                                        [PatientMasterVisitId]="visitId"></app-baby>
 
                                         <div>
                                             <button mat-raised-button color="primary" matStepperPrevious type="button">Previous</button>

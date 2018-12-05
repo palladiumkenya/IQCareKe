@@ -2,6 +2,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { NotificationService } from '../../../shared/_services/notification.service';
 import { SnotifyService } from 'ng-snotify';
+import * as moment from 'moment';
 
 @Component({
     selector: 'app-maternity-next-appointment',
@@ -11,7 +12,13 @@ import { SnotifyService } from 'ng-snotify';
 export class MaternityNextAppointmentComponent implements OnInit {
 
     nextAppointmentFormGroup: FormGroup;
+    public maxtDate: Date = moment().toDate();
+    public minDate: Date = moment().toDate();
     @Input() dischargeOptions: any[] = [];
+    @Input('isEdit') isEdit: boolean;
+    @Input('patientId') patientId: number;
+    @Input('patientMasterVisitId') patientMasterVisitId: number;
+
     @Output() notify: EventEmitter<FormGroup> = new EventEmitter<FormGroup>();
 
     constructor(private formBuilder: FormBuilder,
@@ -22,7 +29,7 @@ export class MaternityNextAppointmentComponent implements OnInit {
     ngOnInit() {
         this.nextAppointmentFormGroup = this.formBuilder.group({
             nextAppointmentDate: new FormControl('', [Validators.required]),
-            remarks: new FormControl('', [Validators.required])
+            remarks: new FormControl('none', [])
         });
 
         this.notify.emit(this.nextAppointmentFormGroup);

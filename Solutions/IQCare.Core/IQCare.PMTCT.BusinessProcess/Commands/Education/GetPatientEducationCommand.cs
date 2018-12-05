@@ -8,6 +8,7 @@ namespace IQCare.PMTCT.BusinessProcess.Commands.Education
     public class GetPatientEducationCommand:IRequest<Result<List<PatientEducation>>>
     {
         public int PatientId { get; set; }
+        public int PatientMasterVisitId { get; set; }
     }
 
 }

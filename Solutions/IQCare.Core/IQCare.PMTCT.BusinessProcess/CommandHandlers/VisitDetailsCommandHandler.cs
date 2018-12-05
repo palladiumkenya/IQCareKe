@@ -18,61 +18,56 @@ namespace IQCare.PMTCT.BusinessProcess.CommandHandlers
     public class VisitDetailsCommandHandler : IRequestHandler<VisitDetailsCommand, Library.Result<VisitDetailsCommandResult>>
     {
 
-        private readonly ICommonUnitOfWork _commonUnitOfWork;
         private readonly IPmtctUnitOfWork _unitOfWork;
         public int visitCount=0;
         public int VisitNumber = 0;
         public PatientPregnancy Pregnancy;
         public int PregnancyId { get; set; }
 
-        public VisitDetailsCommandHandler(ICommonUnitOfWork commonUnitOfWork, IPmtctUnitOfWork unitOfWork)
+        public VisitDetailsCommandHandler(IPmtctUnitOfWork unitOfWork)
         {
-            _commonUnitOfWork = commonUnitOfWork ?? throw new ArgumentNullException(nameof(commonUnitOfWork));
             _unitOfWork = unitOfWork ?? throw new ArgumentException(nameof(unitOfWork));
         }
 
         public async Task<Library.Result<VisitDetailsCommandResult>> Handle(VisitDetailsCommand request, CancellationToken cancellationToken)
         {
-            using (_commonUnitOfWork)
+            using (_unitOfWork)
             {
                 int profileId = 0;
 
                 try
                 {
-                   
-
-                    
-                    LookupLogic lookupLogic = new LookupLogic(_commonUnitOfWork);
                     VisitDetailsService visitDetailsService = new VisitDetailsService(_unitOfWork);
                     PregnancyServices patientPregnancyServices =new PregnancyServices(_unitOfWork);
 
                     PatientPregnancy pregnancyData = patientPregnancyServices.GetActivePregnancy(request.PatientId);
-                    this.PregnancyId = pregnancyData.Id;
-
-                    if (pregnancyData.Id > 0)
+                    if (pregnancyData != null)
                     {
+                        this.PregnancyId = pregnancyData.Id;
                         VisitNumber = visitDetailsService.GetNumberOfVisit(request.PatientId, pregnancyData.Id);
-
                         // check if the details have changed
-                        if (pregnancyData.Lmp != request.Lmp || pregnancyData.Parity != request.ParityOne || pregnancyData.Parity2!=request.ParityTwo)
+                        if (pregnancyData.Lmp != request.Lmp || pregnancyData.Parity != request.ParityOne ||
+                            pregnancyData.Parity2 != request.ParityTwo)
                         {
                             // TODO: insert into a tracking table
                         }
+
                     }
                     else
-                    {                      
-                        PatientPregnancy patientPregnancy = new PatientPregnancy(){
-                        PatientId = request.PatientId,
-                        PatientMasterVisitId = request.PatientMasterVisitId,
-                        Lmp = request.Lmp,
-                        Edd = request.Edd,
-                        Parity = request.ParityOne,
-                        Parity2 = request.ParityTwo,
-                        Gestation = request.Gestation,
-                        Gravidae = request.Gravidae,
-                        CreatedBy = request.UserId,
-                        CreateDate = DateTime.Now                                          
-                       };
+                    {
+                        PatientPregnancy patientPregnancy = new PatientPregnancy()
+                        {
+                            PatientId = request.PatientId,
+                            PatientMasterVisitId = request.PatientMasterVisitId,
+                            Lmp = request.Lmp,
+                            Edd = request.Edd,
+                            Parity = request.ParityOne,
+                            Parity2 = request.ParityTwo,
+                            Gestation = request.Gestation,
+                            Gravidae = request.Gravidae,
+                            CreatedBy = request.UserId,
+                            CreateDate = DateTime.Now
+                        };
                         this.Pregnancy = await visitDetailsService.AddPatientPregnancy(patientPregnancy);
                         this.PregnancyId = this.Pregnancy.Id;
                     }

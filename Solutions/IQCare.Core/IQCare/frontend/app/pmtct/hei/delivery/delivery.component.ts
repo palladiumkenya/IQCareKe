@@ -1,3 +1,4 @@
+import { HeiService } from './../../_services/hei.service';
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 import { LookupItemService } from '../../../shared/_services/lookup-item.service';
@@ -17,11 +18,16 @@ export class DeliveryComponent implements OnInit {
     arvprophylaxisOptions: any[] = [];
 
     @Input('deliveryOptions') deliveryOptions: any;
+    @Input('isEdit') isEdit: boolean;
+    @Input('patientId') patientId: number;
+    @Input('patientMasterVisitId') patientMasterVisitId: number;
+
     @Output() notify: EventEmitter<FormGroup> = new EventEmitter<FormGroup>();
 
     constructor(private _formBuilder: FormBuilder,
         private notificationService: NotificationService,
-        private snotifyService: SnotifyService) {
+        private snotifyService: SnotifyService,
+        private heiservice: HeiService) {
     }
 
     ngOnInit() {
@@ -40,6 +46,10 @@ export class DeliveryComponent implements OnInit {
 
 
         this.notify.emit(this.DeliveryForm);
+
+        if (this.isEdit) {
+            this.loadHeiDelivery();
+        }
     }
 
     onArvProphylaxisReceivedChange(event) {
@@ -49,5 +59,21 @@ export class DeliveryComponent implements OnInit {
             this.DeliveryForm.controls.arvprophylaxisother.setValue('');
             this.DeliveryForm.controls['arvprophylaxisother'].disable();
         }
+    }
+
+    loadHeiDelivery(): void {
+        this.heiservice.getHeiDelivery(this.patientId, this.patientMasterVisitId).subscribe(
+            (result) => {
+                for (let i = 0; i < result.length; i++) {
+                    this.DeliveryForm.get('placeofdelivery').setValue(result[i].placeOfDeliveryId);
+                    this.DeliveryForm.get('modeofdelivery').setValue(result[i].modeOfDeliveryId);
+                    this.DeliveryForm.get('birthweight').setValue(result[i].birthWeight);
+                    this.DeliveryForm.get('arvprophylaxisreceived').setValue(result[i].arvProphylaxisId);
+                    this.DeliveryForm.get('arvprophylaxisother').setValue(result[i].arvProphylaxisOther);
+                }
+            },
+            (error) => { },
+            () => { }
+        );
     }
 }

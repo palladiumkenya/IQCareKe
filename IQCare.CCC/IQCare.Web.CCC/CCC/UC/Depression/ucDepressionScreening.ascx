@@ -5,14 +5,29 @@
     .depression-results{padding-top: 10px;padding-bottom: 10px;}
 </style>
 <div class="col-md-12 form-group">
-	<div class="col-md-12" id="depressionscreening">
+  
+    <div class="col-md-12" id="PatientVisitDate" data-parsley-validate="true" data-show-errors="true">
+            
+            <div class="col-md-12"><label class="required control-label pull-left">Visit Date</label></div>
+
+            <div class="col-md-4 form-group">
+                <div class='input-group date' id='VisitDatedatepicker'>
+                    <span class="input-group-addon">
+                        <span class="glyphicon glyphicon-calendar"></span>
+                    </span>
+                    <asp:TextBox runat="server" ClientIDMode="Static" CssClass="form-control input-sm" ID="PersonVisitDate" data-parsley-required="true" onblur="DateFormat(this,this.value,event,false,'3')" onkeyup="DateFormat(this,this.value,event,false,'3')"></asp:TextBox>        
+                </div>
+            </div>
+        </div>
+      
+	<div class="col-md-12" id="udepressionscreening">
 		<div class="panel panel-info">
 			<div class="panel-body">
 				<div class="col-md-12 form-group">
 					<label class="control-label pull-left"><span class="text-primary">During the last two weeks have you ever been bothered by:</span></label>
 				</div>
 
-				<div class="col-md-12 form-group" id="depressionscreeningquestions">
+				<div class="col-md-12 form-group" id="udepressionscreeningquestions">
 					<div class="row">
                         <asp:PlaceHolder ID="PlaceHolder2" runat="server"></asp:PlaceHolder>
 					</div>
@@ -21,7 +36,7 @@
 		</div>
 
         <!-- PHQ 9 -->
-        <div class="panel panel-info" id="phq9panel">
+        <div class="panel panel-info" id="uphq9panel">
 			<div class="panel-body">
                 <div class="col-md-12 form-group">
 					<label class="control-label pull-left"><span>PATIENT HAELTH QUESTIONNAIRE (PHQ - 9)</span></label>
@@ -58,36 +73,242 @@
 				</div>
 			</div>
 		</div>
-	</div>
-</div>
-<script type="text/javascript">
-    var currentStep;
-    $("#scmyWizard").on("actionclicked.fu.wizard", function (evt, data) {
-        currentStep = data.step;
-        if (currentStep == 1) {
-            addUpdateDepressionScreeningData();
-        }
-    });
 
-    function addUpdateDepressionScreeningData()
-    {
-        var error = 0;
-        $(".rbList").each(function () {
+        <button type="button" id="submitdata" class="btn btn-primary btn-next" data-last="Complete"/>
+	</div>
+      
+</div>
+<script type="text/javascript"> 
+    var contain = "";
+    var Answers = new Array;
+     var Examples = new Array;
+    var VisitDate = "<%=VisitDate%>";
+
+    
+
+    $(document).ready(function () {
+        $('#VisitDatedatepicker').datetimepicker({
+        format: 'DD-MMM-YYYY',
+            date: VisitDate,
+           allowInputToggle: true,
+           useCurrent: false
+
+});
+     
+     $('#VisitDatedatepicker').datetimepicker({
+            format: 'DD-MMM-YYYY',
+           allowInputToggle: true,
+           useCurrent: false
+        });
+
+
+        $('#VisitDatedatepicker').on('dp.change', function (e) {
+
+              if( !e.oldDate || !e.date.isSame(e.oldDate, 'day')){
+                 $(this).data('DateTimePicker').hide();
+                 }
+
+            var vDate = moment($("#PersonVisitDate").val(), 'DD-MMM-YYYYY').toDate();
+            var validDateOfVisit = moment(vDate).isBefore(enrollmentDate);
+            var futuredate = moment(vDate).isAfter(new Date());
+            if (futuredate) {
+                $("#<%=PersonVisitDate.ClientID%>").val('');
+                toastr.error("Future dates not allowed!");
+               
+                return false;
+            }
+            if (validDateOfVisit) {
+                toastr.error("VISIT date CANNOT be before ENROLLMENT date");
+                $("#<%=PersonVisitDate.ClientID%>").val('');
+                return false;
+            }
+
+        });
+
+        $("#submitdata").click(function () {
+
+            if ($('#PatientVisitDate').parsley().validate()) {
+                var dob = $("#<%=PersonVisitDate.ClientID%>").val();
+                if (moment('' + dob + '').isAfter()) {
+                    toastr.error("Visit date cannot be a future date.");
+                    return false;
+                } 
+          $('#VisitDatedatepicker').data('DateTimePicker').hide();
+                    
+                    checkifFieldsHavevalue();
+                    var values = Answers.filter((x) => {return x.value.length > 0})
+                if (values != null) {
+                    if (values.length > 0) {
+                        addDepressionScreeningEncounter(dob);
+                    }
+                    else {
+                        toastr.info("No data Saved since Fields are empty");
+                        window.location.href = '<%=ResolveClientUrl("~/CCC/patient/patientHome.aspx") %>';
+                    }
+
+
+                }
+                else {
+                    return;
+                }
+                   //addUpdateDepressionScreeningData();
+                  //getDepressionScreeningData();                   
+                
+            } 
+       
+       
+        
+        });
+     var enrollmentDate = "<%=DateOfEnrollment%>";
+    //var currentStep;
+    //$("#scmyWizard").on("actionclicked.fu.wizard", function (evt, data) {
+    //    currentStep = data.step;
+    //    if (currentStep == 1) {
+    //        addUpdateDepressionScreeningData();
+    //        getDepressionScreeningData();
+    //    }
+    //});
+
+
+
+    });
+    function checkifFieldsHavevalue() {
+        
+        $("#udepressionscreening .rbList").each(function () {
             var screeningValue = 0;
             var screeningType = <%=screenTypeId%>;
             var patientId = <%=PatientId%>;
-            var patientMasterVisitId = <%=PatientMasterVisitId%>;
+           // var patientMasterVisitId =mastervisitid;
             var userId = <%=userId%>;
-            var screeningCategory = $(this).attr('id');
-            var checkedValue = $('#' + screeningCategory + ' input[type=radio]:checked').val();
+            var screeningCategory = $(this).attr('id').replace('uds', '');
+            var rdIdValue = $(this).attr('id');
+
+            var checkedValue = $('#' + rdIdValue+ ' input[type=radio]:checked').val();
             if (typeof checkedValue != 'undefined')
             {
                 screeningValue = checkedValue;
             }
+            if (screeningValue > 0) {
+
+                Answers.push({ 'Id': screeningCategory, 'value': screeningValue });
+            }
+
+        });
+        $("#udepressionscreening input[type=text]").each(function () {
+            var categoryId = ($(this).attr('id')).replace('uds', '');
+            var patientId = <%=PatientId%>;
+           // var patientMasterVisitId = mastervisitid;
+      
+            var clinicalNotes = $(this).val();
+            var serviceAreaId = 203;
+            var userId = <%=userId%>
+
+            Answers.push({ 'Id': categoryId, 'value': clinicalNotes});
+        });
+       
+        
+       
+    }
+
+    function addDepressionScreeningEncounter (visitDate ) {
+        var patientId = <%=PatientId%>;
+     var dateOfVisit = $("#PersonVisitDate").val();
+        var ServiceAreaId =203;
+        var EncounterType = "DepressionScreening";
+        var userId = <%=userId%>;
+        var patientMasterVisitId = <%=PatientMasterVisitId%>;
             $.ajax({
+               
                 type: "POST",
-                url: "../WebService/PatientScreeningService.asmx/AddUpdateScreeningData",
-                data: "{'patientId': '" + patientId + "','patientMasterVisitId': '" + patientMasterVisitId + "','screeningType':'" + screeningType + "','screeningCategory':'" + screeningCategory + "','screeningValue':'" + screeningValue + "','userId':'" + userId + "'}",
+                url: "../WebService/PatientScreeningService.asmx/GetPatientMasterVisitId",
+                data: "{'PatientId': '" + patientId + "','ServiceAreaId':'"+ServiceAreaId+"','UserId':'"+userId+"','EncounterType':'"+EncounterType+"','visitDate': '" + dateOfVisit + "'}",
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+             success: function (response) {
+                
+                 var res = JSON.parse(response.d);
+                 if (res.Result > 0) {
+
+                     var result = res.Result;
+                    
+                     toastr.success(res.Msg);
+                   
+                    
+                     addUpdateDepressionScreeningData(result);
+                 }
+
+                },
+                error: function (response) {
+                    error = 1;
+                    toastr.error("Depression Screening not Saved");
+                    window.location.href = '<%=ResolveClientUrl("~/CCC/patient/patientHome.aspx") %>';
+
+
+                }
+        });
+    }
+
+    function getDepressionScreeningData() {
+       
+          var patientId = <%=PatientId%>;
+            var patientMasterVisitId = <%=PatientMasterVisitId%>;
+        var userId = <%=userId%>;
+
+        $.ajax({
+               
+                type: "POST",
+                url: "../WebService/PatientScreeningService.asmx/GetDepressionScreeningData",
+                data: "{'PatientId': '" + patientId + "','PatientMasterVisitId': '" + patientMasterVisitId + "'}",
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+             success: function (response) {
+          
+                 var res = response.d;
+                    console.log(Json.Parse(response.d));
+              
+
+                },
+                error: function (response) {
+                    error = 1;
+                }
+            });
+    }
+    function addUpdateDepressionScreeningData(mastervisitid)
+    {
+     
+        var error = 0;
+        var ScreeningData = new Array;
+        var ClinicalNotesData = new Array;
+
+        $("#udepressionscreening .rbList").each(function () {
+            var screeningValue = 0;
+            var screeningType = <%=screenTypeId%>;
+            var patientId = <%=PatientId%>;
+            var patientMasterVisitId =mastervisitid;
+            var userId = <%=userId%>;
+            var screeningCategory = $(this).attr('id').replace('uds', '');
+            var rdIdValue = $(this).attr('id');
+
+            var checkedValue = $('#' + rdIdValue+ ' input[type=radio]:checked').val();
+            if (typeof checkedValue != 'undefined')
+            {
+                screeningValue = checkedValue;
+               
+                
+            }
+
+            ScreeningData.push({ 'Id': rdIdValue, 'screeningType': screeningType, 'screeningCategory': screeningCategory, 'screeningValue': screeningValue, 'userId': userId });
+           
+        });
+        if (ScreeningData.length > 0) {
+           
+
+            var patientId = <%=PatientId%>;
+                var patientMasterVisitId = mastervisitid;
+                 $.ajax({
+                type: "POST",
+                url: "../WebService/PatientScreeningService.asmx/AddUpdateScreeningRecord",
+                data: "{'patientId': '" + patientId + "','patientMasterVisitId': '" + patientMasterVisitId + "','ScreeningData':'" + JSON.stringify(ScreeningData) + "'}",
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",
                 success: function (response) {
@@ -97,18 +318,33 @@
                     error = 1;
                 }
             });
-        });
-        $("#depressionscreening input[type=text]").each(function () {
-            var categoryId = ($(this).attr('id')).replace('notes', '');
+
+            
+        }
+       
+
+        $("#udepressionscreening input[type=text]").each(function () {
+            var categoryId = ($(this).attr('id')).replace('uds', '');
             var patientId = <%=PatientId%>;
-            var patientMasterVisitId = <%=PatientMasterVisitId%>;
+            var patientMasterVisitId = mastervisitid;
+
             var clinicalNotes = $(this).val();
             var serviceAreaId = 203;
             var userId = <%=userId%>;
-            $.ajax({
+           ClinicalNotesData.push({ 'categoryId': categoryId, 'clinicalNotes': clinicalNotes, 'serviceAreaId': serviceAreaId, 'userId': userId  });
+            
+        });
+
+        if (ClinicalNotesData.length > 0) {
+         
+            var patientId = <%=PatientId%>;
+            var patientMasterVisitId = mastervisitid;
+         
+           
+                $.ajax({
                 type: "POST",
-                url: "../WebService/PatientClinicalNotesService.asmx/addPatientClinicalNotes",
-                data: "{'patientId': '" + patientId + "','patientMasterVisitId': '" + patientMasterVisitId + "','serviceAreaId':'" + serviceAreaId + "','notesCategoryId':'" + categoryId + "','clinicalNotes':'" + clinicalNotes + "','userId':'" + userId + "'}",
+                url: "../WebService/PatientClinicalNotesService.asmx/AddPatientClinicalNotesRecord",
+                data: "{'patientId': '" + patientId + "','patientMasterVisitId': '" + patientMasterVisitId + "','clinicaldata':'" + JSON.stringify(ClinicalNotesData)+ "'}",
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",
                 success: function (response) {
@@ -118,15 +354,17 @@
                     error = 1;
                 }
             });
-        });
+            
+        }
         if (error == 0) {
             toastr.success("Depression Screening Saved");
+           window.location.href = '<%=ResolveClientUrl("~/CCC/patient/patientHome.aspx") %>';
         }
     }
 
-    $("#phq9panel input:radio").change(function (evt, data) {
+    $("#uphq9panel input:radio").change(function (evt, data) {
         var selectionTotal = 0;
-        $("#phq9panel input[type=radio]:checked").each(function () {
+        $("#uphq9panel input[type=radio]:checked").each(function () {
             var selectedValue = $(this).val();
             var rbName = $(this).attr('name');
             var radioButtons = $("input[name='" + rbName + "']");
@@ -136,8 +374,9 @@
         //select depression severity and recommended management
         selectDepressionNotes(selectionTotal);
         $("#<%=depressionTotalTb.ClientID%>").val(selectionTotal);
-        if ($("#sc<%=depressionTotalTb.ClientID%>").length != 0) {
-            $("#sc<%=depressionTotalTb.ClientID%>").val(selectionTotal);
+         var hometbid = ($("#<%=depressionTotalTb.ClientID%>").attr('id')).replace('uds', '');
+        if ($("#sc" + hometbid).length != 0) {
+            $("#sc" + hometbid).val(selectionTotal);
         }
     });
 
@@ -151,8 +390,9 @@
             dataType: "json",
             success: function (response) {
                 $("#<%=depressionSeverityTb.ClientID%>").val(response.d);
-                if ($("#sc<%=depressionSeverityTb.ClientID%>").length != 0) {
-                    $("#sc<%=depressionSeverityTb.ClientID%>").val(response.d);
+                var hometbid = ($("#<%=depressionSeverityTb.ClientID%>").attr('id')).replace('uds', '');
+                if ($("#sc" + hometbid).length != 0) {
+                    $("#sc" + hometbid).val(response.d);
                 }
             },
             error: function (response) {
@@ -167,8 +407,9 @@
             dataType: "json",
             success: function (response) {
                 $("#<%=depressionReccommendationTb.ClientID%>").val(response.d);
-                if ($("#sc<%=depressionReccommendationTb.ClientID%>").length != 0) {
-                    $("#sc<%=depressionReccommendationTb.ClientID%>").val(response.d);
+                var hometbid = ($("#<%=depressionReccommendationTb.ClientID%>").attr('id')).replace('uds', '');
+                if ($("#sc" + hometbid).length != 0) {
+                    $("#sc" + hometbid).val(response.d);
                 }
             },
             error: function (response) {
@@ -177,9 +418,9 @@
         });
     }
 
-    $("#depressionscreeningquestions input:radio").change(function (evt, data) {
+    $("#udepressionscreeningquestions input:radio").change(function (evt, data) {
         var selectionTotal = 0;
-        $("#depressionscreeningquestions input[type=radio]:checked").each(function () {
+        $("#udepressionscreeningquestions input[type=radio]:checked").each(function () {
             var selectedValue = $(this).val();
             var rbName = $(this).attr('name');
             var radioButtons = $("input[name='" + rbName + "']");
@@ -187,24 +428,28 @@
             if (selectedIndex == 0) {
                 selectionTotal = selectionTotal + 1;
             }
+            selectDepressionNotes(selectionTotal);
         });
         if (selectionTotal => 1) {
-            $("#phq9panel").show();
+            $("#uphq9panel").show();
         }
         else {
-            $("#phq9panel input[type=radio]:checked").each(function () {
+            $("#uphq9panel input[type=radio]:checked").each(function () {
                 $(this).prop('checked', false);
                 var selectionTotal = 0;
-                $("#<%=depressionTotalTb.ClientID%>").val(selectionTotal);
-                selectDepressionNotes(selectionTotal);
+               var hometbid = ($("#<%=depressionTotalTb.ClientID%>").attr('id')).replace('uds', '');
+                if ($("#sc" + hometbid).length != 0) {
+                    $("#sc" + hometbid).val(selectionTotal);
+                }
+                selectuDepressionNotes(selectionTotal);
             });
-            $("#phq9panel").hide();
+            $("#uphq9panel").hide();
         }
     });
 
     $(document).ready(function () {
         var selectionTotal = 0;
-        $("#depressionscreeningquestions input[type=radio]:checked").each(function () {
+        $("#udepressionscreeningquestions input[type=radio]:checked").each(function () {
             var selectedValue = $(this).val();
             var rbName = $(this).attr('name');
             var radioButtons = $("input[name='" + rbName + "']");
@@ -214,10 +459,10 @@
             }
         });
         if (selectionTotal => 1) {
-            $("#phq9panel").show();
+            $("#uphq9panel").show();
         }
         else {
-            $("#phq9panel").hide();
+            $("#uphq9panel").hide();
         }
     });
 </script>

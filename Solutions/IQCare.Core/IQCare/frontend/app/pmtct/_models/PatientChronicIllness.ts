@@ -6,8 +6,8 @@ export interface PatientChronicIllness {
     Treatment?: string;
     Dose?: number;
     Duration?: number;
-    DeleteFlag?: number;
+    DeleteFlag?: boolean;
     OnsetDate?: Date;
-    Active?: boolean;
+    Active?: number;
     CreateBy?: number;
 }

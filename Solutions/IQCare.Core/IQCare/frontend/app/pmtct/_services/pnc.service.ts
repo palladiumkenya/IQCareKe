@@ -39,8 +39,8 @@ export class PncService {
             );
     }
 
-    public savePncVisitDetails(pncVisitDetailsCommand: PncVisitDetailsCommand): Observable<any> {
-        return this.http.post(this.API_URL + '/api/VisitDetails/AddPNCVisitDetails',
+    public savePncVisitDetails(pncVisitDetailsCommand: any): Observable<any> {
+        return this.http.post(this.API_URL + '/api/AncVisitDetails/Post',
             JSON.stringify(pncVisitDetailsCommand), httpOptions).pipe(
                 tap(savePncVisitDetails => this.errorHandler.log(`successfully saved pnc visit details`)),
                 catchError(this.errorHandler.handleError<any>('Error saving pnc visit details'))
@@ -78,10 +78,20 @@ export class PncService {
     }
 
     public savePncDrugAdministration(drugAdministrationCommand: DrugAdministrationCommand): Observable<any> {
-        return this.http.post<any>(this.API_PMTCT_URL + '/api/PatientDiagnosis/AddDrugAdministrationInfo',
+        return this.http.post<any>(this.API_PMTCT_URL + '/api/PatientDrugAdministration/Add',
             JSON.stringify(drugAdministrationCommand), httpOptions).pipe(
                 tap(savePncDrugAdministration => this.errorHandler.log(`successfully saved pnc drug administration`)),
                 catchError(this.errorHandler.handleError<any>('Error saving pnc drug administration'))
+            );
+    }
+
+    public getPncDrugAdministration(patientId: number, patientMasterVisitId: number): Observable<any[]> {
+        return this.http.get<any[]>(this.API_PMTCT_URL + '/api/PatientDrugAdministration/GetByPatientIdAndPatientMasterVisitId/'
+            + patientId + '/' + patientMasterVisitId).pipe(
+                tap(getPncDrugAdministration =>
+                    this.errorHandler.log(`successfully fetched patient drug administration by patientid: `
+                        + patientId + ` and patientMasterVisitId: ` + patientMasterVisitId)),
+                catchError(this.errorHandler.handleError<any>('Error fetching patient drug administration values'))
             );
     }
 
@@ -93,11 +103,18 @@ export class PncService {
     }
 
     public savePartnerTesting(partnerTestingCommand: PartnerTestingCommand): Observable<any> {
-        return this.http.post<any>(this.API_PMTCT_URL + '/api/PatientPartnerTesting',
+        return this.http.post<any>(this.API_PMTCT_URL + '/api/PatientPartnerTesting/AddPartnerTesting',
             JSON.stringify(partnerTestingCommand), httpOptions).pipe(
                 tap(savePartnerTesting => this.errorHandler.log(`successfully saved pnc partner testing`)),
                 catchError(this.errorHandler.handleError<any>('Error saving pnc partner testing'))
             );
+    }
+
+    public getPartnerTesting(patientId: number): Observable<any[]> {
+        return this.http.get<any[]>(this.API_PMTCT_URL + '/api/PatientPartnerTesting/Get/' + patientId).pipe(
+            tap(getPartnerTesting => this.errorHandler.log(`successfully fetched pnc partner testing`)),
+            catchError(this.errorHandler.handleError<any>('Error fetching pnc partner testing'))
+        );
     }
 
     public saveDiagnosis(pncPatientDiagnosis: PatientDiagnosisCommand): Observable<any> {
@@ -116,6 +133,13 @@ export class PncService {
             );
     }
 
+    public getReferral(): Observable<any[]> {
+        return this.http.get<any[]>(this.API_URL + '/').pipe(
+            tap(getReferral => this.errorHandler.log(`successfully fetched referral`)),
+            catchError(this.errorHandler.handleError<any>('Error fetching referral'))
+        );
+    }
+
     public savePncNextAppointment(pncNextAppointmentCommand: PatientAppointment): Observable<any> {
         return this.http.post<any>(this.API_URL + '/api/PatientReferralAndAppointment/AddPatientNextAppointment',
             JSON.stringify(pncNextAppointmentCommand), httpOptions).pipe(
@@ -132,11 +156,41 @@ export class PncService {
             );
     }
 
+    public getFamilyPlanning(patientId: number): Observable<any[]> {
+        return this.http.get<any[]>(this.API_PMTCT_URL + '/api/FamilyPlanning/' + patientId).pipe(
+            tap(getFamilyPlanning => this.errorHandler.log(`successfully fetched family planning`)),
+            catchError(this.errorHandler.handleError<any>('Error fetching family planning'))
+        );
+    }
+
     public savePncFamilyPlanningMethod(familyPlanningMethodCommand: FamilyPlanningMethodCommand): Observable<any> {
         return this.http.post<any>(this.API_PMTCT_URL + '/api/AddFamilyPlanningMetods', JSON.stringify(familyPlanningMethodCommand),
             httpOptions).pipe(
                 tap(savePncFamilyPlanningMethod => this.errorHandler.log(`successfully saved pnc family planning method`)),
                 catchError(this.errorHandler.handleError<any>('Error saving pnc family planning method'))
+            );
+    }
+
+    public getFamilyPlanningMethod(patientId: number): Observable<any[]> {
+        return this.http.get<any[]>(this.API_PMTCT_URL + '/api/AddFamilyPlanningMetods/' + patientId).pipe(
+            tap(getFamilyPlanningMethod => this.errorHandler.log(`successfully fetched family planning method`)),
+            catchError(this.errorHandler.handleError<any>('Error fetching family planning method'))
+        );
+    }
+
+    public getPncPostNatalExamBabyExaminationHistory(patientId: number, patientMasterVisitId: number): Observable<any> {
+        return this.http.get<any[]>(this.API_PMTCT_URL + '/api/PostNatalAndBabyExamination/' + patientId + '/' + patientMasterVisitId).pipe(
+            tap(getPncPostNatalExamBabyExaminationHistory =>
+                this.errorHandler.log(`successfully fetched postnatal exam and baby examination history`)),
+            catchError(this.errorHandler.handleError<any>('Error fetching postnatal exam and baby examination history'))
+        );
+    }
+
+    public getHivTests(patientMasterVisitId: number, patientEncounterId: number): Observable<any> {
+        return this.http.get<any>(this.API_URL + '/api/HtsEncounter/getTestResults/' + patientMasterVisitId + '/' + patientEncounterId)
+            .pipe(
+                tap(getHivTests => this.errorHandler.log(`successfully fetched hiv tests`)),
+                catchError(this.errorHandler.handleError<any>('Error fetching hiv tests'))
             );
     }
 }

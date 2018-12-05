@@ -14,13 +14,11 @@ namespace IQCare.PMTCT.BusinessProcess.Commands.PatientHeiFeeding
         public int PatientMasterVisitId;
         public int PatientId;
         public int FeedingModeId;
-
+        public int UserId { get; set; }
     }
 
     public class AddHeiFeedingCommandResponse
     {
-        public int PatientMasterVisitId { get; set; }
-        public int PatientId { get; set; }
-        public int FeedingModeId { get; set; }
+        public int HeiFeedingId { get; set; }
     }
 }

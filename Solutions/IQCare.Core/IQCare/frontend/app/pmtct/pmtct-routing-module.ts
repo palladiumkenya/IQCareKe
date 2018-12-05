@@ -19,7 +19,6 @@ import { HaartProphylaxisComponent } from './anc/haart-prophylaxis/haart-prophyl
 import { ClientMonitoringComponent } from './anc/client-monitoring/client-monitoring.component';
 import { PatientEducationExaminationComponent } from './anc/patient-education-examination/patient-education-examination.component';
 import { AncComponent } from './anc/anc.component';
-
 import { NgModule, Component } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { VisitDetailsComponent } from './anc/visit-details/visit-details.component';
@@ -68,6 +67,8 @@ import { TbScreeningResolver } from './_services/resolvers/tb-screening.resolver
 import { MaternityEncounterComponent } from './maternity/maternity-encounter/maternity-encounter.component';
 import { MotherExaminationResolver } from './_services/resolvers/motherexamination.resolver';
 import { BabyExaminationResolver } from './_services/resolvers/baby-examination.resolver';
+import {BirthOutcomeResolver} from './_services/resolvers/BirthOutcomeResolver';
+import { CounselledInfantFeedingResolver } from './_services/resolvers/counselled-infant-feeding.resolver';
 
 
 const routes: Routes = [
@@ -77,77 +78,122 @@ const routes: Routes = [
         pathMatch: 'full',
     },
     {
-        path: 'anc/:patientId/:personId/:serviceAreaId',
-        component: AncComponent,
-        pathMatch: 'full',
-        resolve: {
-            yesNoOptions: YesNoResolver,
-            yesNoNaOptions: YesNoNaResolver,
-            referralOptions: ReferralResolver,
-            visitTypeOptions: VisitOptionsResolverService,
-            patientEducationOptions: PatientEducationResolver,
-            hivStatusOptions: HivStatusResolver,
-            whoStageOptions: WhoStagesResolver,
-            chronicIllnessOptions: ChronicIllnessResolver,
-            preventiveServiceOptions: PreventiveServiceResolver,
-            tbScreeningOptions: TbScreeningResolver,
-            cacxMethodOptions: CervicalCancerScreeningMethodResolver,
-            cacxResultOptions: CervicalCancerScreeningResultsResolver,
-            hivFinaResultOptions: FinalPartnerHivResultResolver,
-            ancHivStatusInitialVisitOptions: ANCHivStatusInitialVisitResolver,
-            hivFinalResultsOptions: HivFinalResultsResolver
-        }
+        path: 'anc',
+        children: [
+            {
+                path: ':patientId/:personId/:serviceAreaId',
+                component: AncComponent,
+                pathMatch: 'full',
+                resolve: {
+                    yesNoOptions: YesNoResolver,
+                    yesNoNaOptions: YesNoNaResolver,
+                    referralOptions: ReferralResolver,
+                    visitTypeOptions: VisitOptionsResolverService,
+                    patientEducationOptions: PatientEducationResolver,
+                    hivStatusOptions: HivStatusResolver,
+                    whoStageOptions: WhoStagesResolver,
+                    chronicIllnessOptions: ChronicIllnessResolver,
+                    preventiveServiceOptions: PreventiveServiceResolver,
+                    tbScreeningOptions: TbScreeningResolver,
+                    cacxMethodOptions: CervicalCancerScreeningMethodResolver,
+                    cacxResultOptions: CervicalCancerScreeningResultsResolver,
+                    hivFinaResultOptions: FinalPartnerHivResultResolver,
+                    ancHivStatusInitialVisitOptions: ANCHivStatusInitialVisitResolver,
+                    hivFinalResultsOptions: HivFinalResultsResolver
+                }
+            },
+            {
+                path: 'update/:patientId/:personId/:serviceAreaId/:patientMasterVisitId/:patientEncounterId',
+                component: AncComponent,
+                pathMatch: 'full',
+                resolve: {
+                    yesNoOptions: YesNoResolver,
+                    yesNoNaOptions: YesNoNaResolver,
+                    referralOptions: ReferralResolver,
+                    visitTypeOptions: VisitOptionsResolverService,
+                    patientEducationOptions: PatientEducationResolver,
+                    hivStatusOptions: HivStatusResolver,
+                    whoStageOptions: WhoStagesResolver,
+                    chronicIllnessOptions: ChronicIllnessResolver,
+                    preventiveServiceOptions: PreventiveServiceResolver,
+                    tbScreeningOptions: TbScreeningResolver,
+                    cacxMethodOptions: CervicalCancerScreeningMethodResolver,
+                    cacxResultOptions: CervicalCancerScreeningResultsResolver,
+                    hivFinaResultOptions: FinalPartnerHivResultResolver,
+                    ancHivStatusInitialVisitOptions: ANCHivStatusInitialVisitResolver,
+                    hivFinalResultsOptions: HivFinalResultsResolver
+                }
+            }
+        ]
+
     },
     {
-        path: 'pex',
-        component: PatientEducationExaminationComponent,
-        pathMatch: 'full',
-    },
-    {
-        path: 'cm',
-        component: ClientMonitoringComponent,
-        pathMatch: 'full',
-    },
-    {
-        path: 'haart',
-        component: HaartProphylaxisComponent,
-        pathMatch: 'full',
-    },
-    {
-        path: 'ps',
-        component: PreventiveServicesComponent,
-        pathMatch: 'full',
-    },
-    {
-        path: 'hei/:patientId/:personId/:serviceAreaId',
-        component: HeiComponent,
-        pathMatch: 'full',
-        resolve: {
-            placeofdeliveryOptions: PlaceOfDeliveryResolver,
-            deliveryModeOptions: DeliveryModeResolver,
-            arvprophylaxisOptions: ARVProphylaxisResolver,
-            motherstateOptions: MotherStateResolver,
-            motherreceivedrugsOptions: MotherReceiveDrugsResolver,
-            heimotherregimenOptions: HeiMotherRegimenResolver,
-            yesnoOptions: YesNoResolver,
-            primarycaregiverOptions: PrimaryCareGiverResolver,
-            motherdrugsatinfantenrollmentOptions: MotherDrugsAtInfantEnrollmentResolver,
-            infantFeedingOptions: InfantFeedingOptionsResolver,
-            immunizationPeriodOptions: ImmunizationPeriodOptionsResolverService,
-            immunizationGivenOptions: ImmunizationGivenOptionsResolverService,
-            milestoneAssessedOptions: MilestonesAssessedOptionsResolverService,
-            milestoneStatusOptions: MilestonesStatusOptionsResolverService,
-            heiOutcomeOptions: HeiOutcomeOptionsResolver,
-            sputumSmearOptions: SputumSmearResolverService,
-            geneXpertOptions: GeneXpertResolverService,
-            chestXrayOptions: ChestXrayResolverService,
-            tbScreeningOutComeOptions: TbScreeningOutcomeResolverService,
-            heiHivTestingOptions: HeiHivTestTypesResolver,
-            heiHivTestingResultsOptions: HeiHivTestResultsResolver,
-            iptOutcomeOptions: IptoutcomeResolverService,
-            medicationOptions: MedicationResolverService,
-            medicatinPlanOptions: MedicationPlanResolverService
-        }
+        path: 'hei',
+        children: [
+            {
+                path: ':patientId/:personId/:serviceAreaId',
+                component: HeiComponent,
+                pathMatch: 'full',
+                resolve: {
+                    placeofdeliveryOptions: PlaceOfDeliveryResolver,
+                    deliveryModeOptions: DeliveryModeResolver,
+                    arvprophylaxisOptions: ARVProphylaxisResolver,
+                    motherstateOptions: MotherStateResolver,
+                    motherreceivedrugsOptions: MotherReceiveDrugsResolver,
+                    heimotherregimenOptions: HeiMotherRegimenResolver,
+                    yesnoOptions: YesNoResolver,
+                    primarycaregiverOptions: PrimaryCareGiverResolver,
+                    motherdrugsatinfantenrollmentOptions: MotherDrugsAtInfantEnrollmentResolver,
+                    infantFeedingOptions: InfantFeedingOptionsResolver,
+                    immunizationPeriodOptions: ImmunizationPeriodOptionsResolverService,
+                    immunizationGivenOptions: ImmunizationGivenOptionsResolverService,
+                    milestoneAssessedOptions: MilestonesAssessedOptionsResolverService,
+                    milestoneStatusOptions: MilestonesStatusOptionsResolverService,
+                    heiOutcomeOptions: HeiOutcomeOptionsResolver,
+                    sputumSmearOptions: SputumSmearResolverService,
+                    geneXpertOptions: GeneXpertResolverService,
+                    chestXrayOptions: ChestXrayResolverService,
+                    tbScreeningOutComeOptions: TbScreeningOutcomeResolverService,
+                    heiHivTestingOptions: HeiHivTestTypesResolver,
+                    heiHivTestingResultsOptions: HeiHivTestResultsResolver,
+                    iptOutcomeOptions: IptoutcomeResolverService,
+                    medicationOptions: MedicationResolverService,
+                    medicatinPlanOptions: MedicationPlanResolverService
+                }
+            },
+            {
+                path: 'update/:patientId/:personId/:serviceAreaId/:patientMasterVisitId/:patientEncounterId',
+                component: HeiComponent,
+                pathMatch: 'full',
+                resolve: {
+                    placeofdeliveryOptions: PlaceOfDeliveryResolver,
+                    deliveryModeOptions: DeliveryModeResolver,
+                    arvprophylaxisOptions: ARVProphylaxisResolver,
+                    motherstateOptions: MotherStateResolver,
+                    motherreceivedrugsOptions: MotherReceiveDrugsResolver,
+                    heimotherregimenOptions: HeiMotherRegimenResolver,
+                    yesnoOptions: YesNoResolver,
+                    primarycaregiverOptions: PrimaryCareGiverResolver,
+                    motherdrugsatinfantenrollmentOptions: MotherDrugsAtInfantEnrollmentResolver,
+                    infantFeedingOptions: InfantFeedingOptionsResolver,
+                    immunizationPeriodOptions: ImmunizationPeriodOptionsResolverService,
+                    immunizationGivenOptions: ImmunizationGivenOptionsResolverService,
+                    milestoneAssessedOptions: MilestonesAssessedOptionsResolverService,
+                    milestoneStatusOptions: MilestonesStatusOptionsResolverService,
+                    heiOutcomeOptions: HeiOutcomeOptionsResolver,
+                    sputumSmearOptions: SputumSmearResolverService,
+                    geneXpertOptions: GeneXpertResolverService,
+                    chestXrayOptions: ChestXrayResolverService,
+                    tbScreeningOutComeOptions: TbScreeningOutcomeResolverService,
+                    heiHivTestingOptions: HeiHivTestTypesResolver,
+                    heiHivTestingResultsOptions: HeiHivTestResultsResolver,
+                    iptOutcomeOptions: IptoutcomeResolverService,
+                    medicationOptions: MedicationResolverService,
+                    medicatinPlanOptions: MedicationPlanResolverService
+                }
+            }
+        ]
+
     },
     {
         path: 'pnc/encounters/:patientId/:personId/:serviceAreaId',
@@ -186,7 +232,8 @@ const routes: Routes = [
                     cervicalCancerScreeningResultsOptions: CervicalCancerScreeningResultsResolver,
                     referralFromOptions: ReferralResolver,
                     motherExaminationOptions: MotherExaminationResolver,
-                    babyExaminationControls: BabyExaminationResolver
+                    babyExaminationControls: BabyExaminationResolver,
+                    counselledInfantFeedingOptions: CounselledInfantFeedingResolver
                 }
             },
             {
@@ -213,31 +260,61 @@ const routes: Routes = [
                     cervicalCancerScreeningResultsOptions: CervicalCancerScreeningResultsResolver,
                     referralFromOptions: ReferralResolver,
                     motherExaminationOptions: MotherExaminationResolver,
-                    babyExaminationControls: BabyExaminationResolver
+                    babyExaminationControls: BabyExaminationResolver,
+                    counselledInfantFeedingOptions: CounselledInfantFeedingResolver
                 }
             }
         ]
     },
     {
-        path: 'maternity/:patientId/:personId/:serviceAreaId',
-        component: MaternityComponent,
-        resolve: {
-            deliveryModeOptions: DeliveryModeResolver,
-            bloodLossOptions: BloodLossResolver,
-            motherStateOptions: MotherStateResolver,
-            yesNoOptions: YesNoResolver,
-            genderOptions: GenderResolver,
-            deliveryOutcomeOptions: DeliveryModeResolver,
-            yesNoNaOptions: YesNoNaResolver,
-            referralOptions: ReferralResolver,
-            hivFinalResultOptions: FinalPartnerHivResultResolver,
-            hivTestOptions: PmtctTestTypeResolver,
-            kitNameOptions: TestKitNameResolver,
-            hivTestResultOptions: HivTestResultResolver,
-            finalPartnerHivResultOptions: FinalPartnerHivResultResolver,
-            hivFinalResultsOptions: HivFinalResultsResolver,
-        },
-        pathMatch: 'full'
+        path: 'maternity',
+        children: [
+            {
+                path: ':patientId/:personId/:serviceAreaId',
+                component: MaternityComponent,
+                pathMatch: 'full',
+                resolve: {
+                    deliveryModeOptions: DeliveryModeResolver,
+                    bloodLossOptions: BloodLossResolver,
+                    motherStateOptions: MotherStateResolver,
+                    yesNoOptions: YesNoResolver,
+                    genderOptions: GenderResolver,
+                    deliveryOutcomeOptions: DeliveryModeResolver,
+                    birthOutcomeOptions: BirthOutcomeResolver,
+                    yesNoNaOptions: YesNoNaResolver,
+                    referralOptions: ReferralResolver,
+                    hivFinalResultOptions: FinalPartnerHivResultResolver,
+                    hivTestOptions: PmtctTestTypeResolver,
+                    kitNameOptions: TestKitNameResolver,
+                    hivTestResultOptions: HivTestResultResolver,
+                    finalPartnerHivResultOptions: FinalPartnerHivResultResolver,
+                    hivFinalResultsOptions: HivFinalResultsResolver,
+                }
+            },
+            {
+                path: 'update/:patientId/:personId/:serviceAreaId/:patientMasterVisitId/:patientEncounterId',
+                component: MaternityComponent,
+                pathMatch: 'full',
+                resolve: {
+                    deliveryModeOptions: DeliveryModeResolver,
+                    bloodLossOptions: BloodLossResolver,
+                    motherStateOptions: MotherStateResolver,
+                    yesNoOptions: YesNoResolver,
+                    genderOptions: GenderResolver,
+                    deliveryOutcomeOptions: DeliveryModeResolver,
+                    birthOutcomeOptions: BirthOutcomeResolver,
+                    yesNoNaOptions: YesNoNaResolver,
+                    referralOptions: ReferralResolver,
+                    hivFinalResultOptions: FinalPartnerHivResultResolver,
+                    hivTestOptions: PmtctTestTypeResolver,
+                    kitNameOptions: TestKitNameResolver,
+                    hivTestResultOptions: HivTestResultResolver,
+                    finalPartnerHivResultOptions: FinalPartnerHivResultResolver,
+                    hivFinalResultsOptions: HivFinalResultsResolver,
+                }
+            }
+        ]
+
     }
 ];
 

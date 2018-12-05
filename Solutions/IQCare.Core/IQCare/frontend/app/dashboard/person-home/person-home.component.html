@@ -3,11 +3,11 @@
         <div class="profile-container">
             <div class="profile-header row">
                 <div class="col-lg-2 col-sm-2 col-xs-12 text-center">
-                    <img src="assets/img/avatars/default.png" alt="" class="header-avatar"/>
+                    <img src="assets/img/avatars/default.png" alt="" class="header-avatar" />
                 </div>
                 <div class="col-lg-3 col-sm-3 col-xs-12 profile-info">
                     <div class="header-fullname"><strong>{{person.lastName}},{{person.midName}}
-                        {{person.firstName}}</strong></div>
+                            {{person.firstName}}</strong></div>
                     <div class="stats-title">
                         <span class="">{{person.patientType}} Patient</span>
                     </div>
@@ -43,7 +43,7 @@
                              <strong>Landmark:</strong> {{ person.landMark }} -->
                         </div>
                         <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 inlinestats-col">
-                            Emergency Contact: <strong>$250</strong>
+                            <!--Emergency Contact: <strong>$250</strong>-->
                         </div>
                         <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 inlinestats-col">
                             Cell: <strong>{{ person.mobileNumber }}</strong>
@@ -57,22 +57,22 @@
                         <ul class="nav nav-tabs tabs-flat  nav-justified" id="myTab11">
                             <li class="active">
                                 <a data-toggle="tab" href="#overview">
-                                    Home
+                                    <strong>Home</strong>
                                 </a>
                             </li>
                             <li class="tab-red">
                                 <a data-toggle="tab" href="#timeline">
-                                    History
+                                    <strong>History</strong>
                                 </a>
                             </li>
                             <li class="tab-palegreen">
                                 <a data-toggle="tab" id="contacttab" href="#contacts">
-                                    Contacts
+                                    <strong>Contacts</strong>
                                 </a>
                             </li>
                             <li class="tab-yellow">
                                 <a data-toggle="tab" href="#settings">
-                                    Service
+                                    <strong><span style="color: blue;">Service</span></strong>
                                 </a>
                             </li>
                         </ul>
@@ -138,7 +138,7 @@
                                                     </div>
                                                 </div>
                                             </div>-->
-                                           <!-- <div class="col-lg-4 col-sm-6 col-xs-12">
+                                            <!-- <div class="col-lg-4 col-sm-6 col-xs-12">
                                                 <div class="databox databox-graded">
                                                     <div class="databox-left no-padding">
                                                         <img src="assets/img/avatars/adam-jansen.jpg"
@@ -172,7 +172,7 @@
                                         </div>
                                         <h6 class="row-title before-palegreen">Laboratory Summary</h6>
                                         <div class="row">
-                                           <!-- <div class="col-lg-6 col-sm-6 col-xs-12">
+                                            <!-- <div class="col-lg-6 col-sm-6 col-xs-12">
                                                 <div class="databox">
                                                     <div class="databox-left bg-white">
                                                         <div class="databox-sparkline">
@@ -210,9 +210,9 @@
                                         </div>
                                         <div class="timeline-panel">
                                             <div class="timeline-header bordered-bottom bordered-blue">
-                                                 <span class="timeline-title">
-                                                      Chronic Conditions
-                                                 </span>
+                                                <span class="timeline-title">
+                                                    Chronic Conditions
+                                                </span>
                                             </div>
                                             <div class="timeline-body">
                                                 <app-chronich-illness>
@@ -227,9 +227,9 @@
                                         </div>
                                         <div class="timeline-panel bordered-right-3 bordered-orange">
                                             <div class="timeline-header bordered-bottom bordered-blue">
-                                                 <span class="timeline-title">
-                                                        Patient Relationships
-                                                  </span>
+                                                <span class="timeline-title">
+                                                    Patient Relationships
+                                                </span>
 
                                             </div>
                                             <div class="timeline-body">
@@ -268,7 +268,7 @@
                                         </div>
                                     </li> -->
 
-
+<!--
                                     <li class="timeline-inverted">
                                         <div class="timeline-datetime">
                                             <span class="timeline-time">
@@ -291,8 +291,8 @@
                                                 </app-patient-allergies>
                                             </div>
                                         </div>
-                                    </li>
-
+                                    </li> -->
+<!--
                                     <li>
                                         <div class="timeline-datetime">
                                             <span class="timeline-time">
@@ -327,15 +327,15 @@
                                                 adipiscing sem neque sed ipsum. Nam quam nunc, blandit
                                             </div>
                                         </div>
-                                    </li>
-                                    <li class="timeline-inverted">
+                                    </li> -->
+                                 <!--   <li class="timeline-inverted">
                                         <div class="timeline-datetime">
                                             <span class="timeline-time">
                                                 6:08
                                             </span><span class="timeline-date">Yesterday</span>
                                         </div>
                                         <div class="timeline-badge sky">
-                                            <img src="assets/img/avatars/Sergey-Azovskiy.jpg" class="badge-picture"/>
+                                            <img src="assets/img/avatars/Sergey-Azovskiy.jpg" class="badge-picture" />
                                         </div>
                                         <div class="timeline-panel">
                                             <div class="timeline-header bordered-bottom bordered-blue">
@@ -349,8 +349,8 @@
                                               
                                             </div>
                                         </div>
-                                    </li>
-                                    <li>
+                                    </li> -->
+                                 <!--   <li>
                                         <div class="timeline-datetime">
                                             <span class="timeline-time">
                                                 7:00
@@ -379,8 +379,8 @@
                                                     Lorem ipsum dolor sit amet consiquest dio</p>
                                             </div>
                                         </div>
-                                    </li>
-                                    <li class="timeline-inverted">
+                                    </li> -->
+                                  <!--  <li class="timeline-inverted">
                                         <div class="timeline-datetime">
                                             <span class="timeline-time">
                                                 3:09
@@ -403,10 +403,8 @@
                                             </div>
                                             <div class="timeline-body">
                                                 <a href="#">John Travolta</a> shared an image on <a href="#">Dribble</a>
-                                                <div class="tl-wide text-center"
-                                                     style="padding: 5px; margin-top:10px; margin-bottom: 10px;">
-                                                    <img src="assets/img/temp1.png" alt=""
-                                                         style="max-height: 158px;max-width: 100%;">
+                                                <div class="tl-wide text-center" style="padding: 5px; margin-top:10px; margin-bottom: 10px;">
+                                                    <img src="assets/img/temp1.png" alt="" style="max-height: 158px;max-width: 100%;">
                                                 </div>
                                                 <i class="text-muted text-sm">Lorem ipsum dolor sit amet, consectetur
                                                     adipisicing
@@ -414,10 +412,10 @@
                                                     aliqua.</i>
                                             </div>
                                         </div>
-                                    </li>
-                                    <li class="timeline-node">
+                                    </li> -->
+                                  <!--  <li class="timeline-node">
                                         <a class="btn btn-yellow">LOAD MORE</a>
-                                    </li>
+                                    </li> -->
                                 </ul>
                             </div>
                             <div id="contacts" class="tab-pane">
@@ -433,7 +431,7 @@
                                                     {{person.mobileNumber}}
                                                 </p>
                                                 <p>
-                                                    Email : <strong>na</strong>
+                                                    Email : <strong></strong>
                                                 </p>
 
                                             </div>
@@ -460,8 +458,7 @@
                                 <div class="form-title">
                                     Clinical Services
                                     <div class="row">
-                                        <app-services-list [personId]="personId" [services]="services"
-                                                           [person]="person"></app-services-list>
+                                        <app-services-list [personId]="personId" [services]="services" [person]="person"></app-services-list>
                                     </div>
                                 </div>
 

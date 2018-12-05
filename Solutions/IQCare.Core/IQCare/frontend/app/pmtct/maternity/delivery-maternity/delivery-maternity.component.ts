@@ -1,11 +1,12 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
-import {NotificationService} from '../../../shared/_services/notification.service';
-import {SnotifyService} from 'ng-snotify';
-import {LookupItemService} from '../../../shared/_services/lookup-item.service';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { NotificationService } from '../../../shared/_services/notification.service';
+import { SnotifyService } from 'ng-snotify';
+import { LookupItemService } from '../../../shared/_services/lookup-item.service';
 import * as moment from 'moment';
-import {MaternityService} from '../../_services/maternity.service';
-import {Subscription} from 'rxjs/index';
+import { MaternityService } from '../../_services/maternity.service';
+import { Subscription } from 'rxjs/index';
+import { isEmpty } from 'rxjs/internal/operators';
 
 @Component({
     selector: 'app-delivery-maternity',
@@ -16,7 +17,9 @@ export class DeliveryMaternityComponent implements OnInit {
 
     deliveryFormGroup: FormGroup;
     @Input() diagnosisOptions: any[] = [];
-    @Input('patientId') patientId: number;
+    @Input('PatientId') PatientId: number;
+    @Input('isEdit') isEdit: boolean;
+    @Input('PatientMasterVisitId') PatientMasterVisitId: number;
     @Output() notify: EventEmitter<FormGroup> = new EventEmitter<FormGroup>();
 
     public deliveryModeOptions: any[] = [];
@@ -27,11 +30,13 @@ export class DeliveryMaternityComponent implements OnInit {
     public visitDetails: Subscription;
     public motherProfile: Subscription;
     public dateLMP: Date;
+    public isMotherAlive: boolean = true;
+    public maxDate: Date = moment().toDate();
 
     constructor(private formBuilder: FormBuilder, private _lookupItemService: LookupItemService,
-                private snotifyService: SnotifyService,
-                private notificationService: NotificationService,
-                private _matService: MaternityService ) {
+        private snotifyService: SnotifyService,
+        private notificationService: NotificationService,
+        private _matService: MaternityService) {
 
     }
 
@@ -75,21 +80,26 @@ export class DeliveryMaternityComponent implements OnInit {
         this.motherStateOptions = motherStates;
         this.yesnoOptions = yesNos;
 
-        this.getCurrentVisitDetails(this.patientId);
-        this.getPregnancyDetails(this.patientId);
-
+        this.getCurrentVisitDetails(this.PatientId, 'ANC');
+        this.getPregnancyDetails(this.PatientId);
+         if (this.isEdit) {
+             this.getPatientDeliveryInfo(this.PatientMasterVisitId);
+         }
         this.notify.emit(this.deliveryFormGroup);
     }
 
     public onDeliveryDateChange() {
         this.deliveryDate = this.deliveryFormGroup.controls['deliveryDate'].value;
 
-
-        const now = moment(new Date());
-        const gestation = moment(this.deliveryDate).diff(this.dateLMP, 'weeks').toFixed(1);
-        this.deliveryFormGroup.controls['gestationAtBirth'].setValue(gestation + ' weeks');
-
+        const gestation = this.calculateGestation(this.deliveryDate, this.dateLMP);
+        this.deliveryFormGroup.controls['gestationAtBirth'].setValue(gestation);
         this.deliveryFormGroup.controls['gestationAtBirth'].disable({ onlySelf: true });
+    }
+
+    public calculateGestation(deliveryDate: Date, dateLmp: Date): string {
+        const now = moment(deliveryDate);
+        const gestation = moment.duration(now.diff(dateLmp)).asWeeks().toFixed(1);
+        return gestation;
     }
 
     onBloodLossChange(event) {
@@ -104,9 +114,11 @@ export class DeliveryMaternityComponent implements OnInit {
         if (event.isUserInput && event.source.selected && event.source.viewValue == 'Dead') {
             this.deliveryFormGroup.get('maternalDeathsAudited').enable({ onlySelf: true });
             this.deliveryFormGroup.get('auditDate').enable({ onlySelf: true });
-        } else {
+            this.isMotherAlive = false;
+        } else if (event.isUserInput && event.source.selected && event.source.viewValue == 'Alive') {
             this.deliveryFormGroup.get('maternalDeathsAudited').disable({ onlySelf: true });
             this.deliveryFormGroup.get('auditDate').disable({ onlySelf: true });
+            this.isMotherAlive = true;
         }
     }
 
@@ -118,13 +130,15 @@ export class DeliveryMaternityComponent implements OnInit {
         }
     }
 
-    public  getPregnancyDetails(patientId: number) {
+    public getPregnancyDetails(patientId: number) {
         this.motherProfile = this._matService.getPregnancyDetails(patientId)
             .subscribe(
                 p => {
-;
-                    this.dateLMP = p.lmp;
-                    console.log('lmp date' + this.dateLMP);
+                    if (p) {
+                        this.dateLMP = p.lmp;
+                        console.log('lmp date' + this.dateLMP);
+                    }
+
                 },
                 (err) => {
                     console.log(err);
@@ -137,12 +151,18 @@ export class DeliveryMaternityComponent implements OnInit {
                 });
     }
 
-    public getCurrentVisitDetails(patientId: number): void {
-        this.visitDetails = this._matService.getCurrentVisitDetails(patientId)
+    public getCurrentVisitDetails(patientId: number, serviceAreaName: string): void {
+        this.visitDetails = this._matService.getCurrentVisitDetails(patientId, serviceAreaName)
             .subscribe(
                 p => {
-                    this.deliveryFormGroup.controls['ancVisits'].setValue(p.visitNumber);
-                    this.deliveryFormGroup.get('ancVisits').disable({ onlySelf: true });
+                    const visit = p;
+                    if(visit[0] == null){
+                        this.deliveryFormGroup.controls['ancVisits'].setValue(1);
+                         return;                       
+                    } if (visit[0].visitNumber > 0) {
+                        this.deliveryFormGroup.controls['ancVisits'].setValue(visit.length);
+                      //  this.deliveryFormGroup.get('ancVisits').disable({ onlySelf: true });
+                    }
                 },
                 (err) => {
                     this.snotifyService.error('Error fetching visit details' + err,
@@ -152,4 +172,41 @@ export class DeliveryMaternityComponent implements OnInit {
 
                 });
     }
+
+    public getPatientDeliveryInfo(masterVisitId: number): void {
+        this._matService.GetPatientDeliveryInfo(masterVisitId)
+            .subscribe(
+                del => {
+                    console.log(del);
+                    if (del == null) {
+                      return;
+                    }                        
+                    this.deliveryFormGroup.controls['gestationAtBirth'].setValue( this.calculateGestation(del.dateOfDelivery,
+                        this.dateLMP));
+                    this.deliveryFormGroup.controls['gestationAtBirth'].disable({ onlySelf: true });
+                    this.deliveryFormGroup.controls['deliveryDate'].setValue(del.dateOfDelivery);
+                    this.deliveryFormGroup.controls['deliveryTime'].setValue(del.timeOfDelivery);
+                    this.deliveryFormGroup.controls['labourDuration'].setValue(del.durationOfLabour);
+                    this.deliveryFormGroup.controls['deliveryMode'].setValue(del.modeOfDeliveryId);
+                    this.deliveryFormGroup.controls['bloodLoss'].setValue(del.bloodLossClassificationId);
+                    this.deliveryFormGroup.controls['bloodLossCount'].setValue(del.bloodLossCapacity);
+                    this.deliveryFormGroup.controls['deliveryCondition'].setValue(del.motherConditionId);
+                    this.deliveryFormGroup.controls['placentaComplete'].setValue(del.placentaCompleteId);
+                    this.deliveryFormGroup.controls['maternalDeathsAudited'].setValue(del.maternalDeathAuditedId);
+                    this.deliveryFormGroup.controls['auditDate'].setValue(del.maternalDeathAuditDate);
+                    this.deliveryFormGroup.controls['deliveryComplications'].setValue(del.deliveryComplicationsExperiencedId);
+                    this.deliveryFormGroup.controls['deliveryComplicationNotes'].setValue(del.deliveryComplicationNotes);
+                    this.deliveryFormGroup.controls['deliveryConductedBy'].setValue(del.deliveryConductedBy);
+                },
+                (err) => {
+                    this.snotifyService.error('Error fetching patient delivery info details' + err,
+                        'Encounter', this.notificationService.getConfig());
+                },
+                () => {
+
+                });
+    }
+
+
+
 }

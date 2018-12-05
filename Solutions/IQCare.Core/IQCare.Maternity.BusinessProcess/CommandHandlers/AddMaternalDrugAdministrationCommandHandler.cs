@@ -1,48 +1,52 @@
-﻿using IQCare.Library;
-using IQCare.Maternity.BusinessProcess.Commands.Maternity;
-using IQCare.Maternity.Core.Domain.Maternity;
-using IQCare.Maternity.Infrastructure.UnitOfWork;
-using MediatR;
+﻿using MediatR;
 using Serilog;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
+using IQCare.Library;
+using IQCare.Maternity.BusinessProcess.Commands.Maternity;
+using IQCare.Maternity.Core.Domain.Maternity;
+using IQCare.Maternity.Infrastructure.UnitOfWork;
+
 namespace IQCare.Maternity.BusinessProcess.CommandHandlers
 {
-    public class AddMaternalDrugAdministrationCommandHandler : IRequestHandler<AddMaternalDrugAdministrationCommand, Result<AddMaternalDrugAdministrationResponse>>
+    public class AddMaternalDrugAdministrationCommandHandler : IRequestHandler<AddPatientDrugAdministrationCommand, Result<AddPatientDrugAdministrationResponse>>
     {
-        IMaternityUnitOfWork _maternityUnitOfWork;
-        ILogger logger = Log.ForContext<AddMaternalDrugAdministrationCommandHandler>();
+        
+        private readonly IMaternityUnitOfWork _maternityUnitOfWork;
+        private readonly ILogger _logger = Log.ForContext<AddMaternalDrugAdministrationCommandHandler>();
 
         public AddMaternalDrugAdministrationCommandHandler(IMaternityUnitOfWork maternityUnitOfWork)
         {
             _maternityUnitOfWork = maternityUnitOfWork;
         }
-        public async Task<Result<AddMaternalDrugAdministrationResponse>> Handle(AddMaternalDrugAdministrationCommand request,
+        public async Task<Result<AddPatientDrugAdministrationResponse>> Handle(AddPatientDrugAdministrationCommand request,
             CancellationToken cancellationToken)
         {
-            try
+            using (_maternityUnitOfWork)
             {
-                if (request.AdministredDrugs == null)
-                return Result<AddMaternalDrugAdministrationResponse>.Invalid("Administered drugs details not found");
+                try
+                {
+                    if (request.AdministeredDrugs == null)
+                        return Result<AddPatientDrugAdministrationResponse>.Invalid("Administered drugs details not found");
 
-                var administredDrugs = request.AdministredDrugs.Select(x => new MaternalDrugAdministration(request.PatientId, request.PatientMasterVisitId, x.Id, x.Value, x.Description, request.CreatedBy)).ToList();
+                    var administeredDrugs = request.AdministeredDrugs.Select(x => new MaternalDrugAdministration(request.PatientId, request.PatientMasterVisitId, x.Id, x.Value, x.Description, request.CreatedBy)).ToList();
 
-                await _maternityUnitOfWork.Repository<MaternalDrugAdministration>().AddRangeAsync(administredDrugs);
-                await _maternityUnitOfWork.SaveAsync();
+                    await _maternityUnitOfWork.Repository<MaternalDrugAdministration>().AddRangeAsync(administeredDrugs);
+                    await _maternityUnitOfWork.SaveAsync();
 
-                return Result<AddMaternalDrugAdministrationResponse>
-                    .Valid(new AddMaternalDrugAdministrationResponse { PatientMasterVisitId = request.PatientMasterVisitId });
+                    return Result<AddPatientDrugAdministrationResponse>
+                        .Valid(new AddPatientDrugAdministrationResponse { PatientMasterVisitId = request.PatientMasterVisitId });
+                }
+                catch (Exception ex)
+                {
+                    _logger.Error(ex, $"An error occured while adding drug administration details for PatientId {request.PatientId}");
+                    return Result<AddPatientDrugAdministrationResponse>.Invalid(ex.Message);
+                }
             }
-            catch (Exception ex)
-            {
-                logger.Error(ex, $"An error occured while adding drug admininstration details for PatientId {request.PatientId}");
-                return Result<AddMaternalDrugAdministrationResponse>.Invalid(ex.Message);
-            }
+            
 
         }
     }

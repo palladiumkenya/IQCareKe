@@ -14,6 +14,7 @@ namespace IQCare.CCC.UILogic.Encounter
             try
             {
                 int notesId = _patientNotes.checkPatientNotesifExisting(patientId, notesCategoryId);
+               
                 if (notesId > 0)
                 {
                     var PCN = new PatientClinicalNotes()
@@ -89,6 +90,20 @@ namespace IQCare.CCC.UILogic.Encounter
                 throw;
             }
         }
+        public List<PatientClinicalNotes> getPatientClinicalNotesByCategoryVisitId(int PatientId,int categoryId,int PatientMasterVisitId)
+        {
+            List<PatientClinicalNotes> notesList = new List<PatientClinicalNotes>();
+            try
+            {
+                notesList = _patientNotes.getPatientClinicalNotesByCategoryVisitId(PatientId, categoryId, PatientMasterVisitId);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            return notesList;
+        }
+    
         public List<PatientClinicalNotes> getPatientClinicalNotesById(int PatientID, int categoryID)
         {
             List<PatientClinicalNotes> notesList = new List<PatientClinicalNotes>();

@@ -1,3 +1,4 @@
+import { CheckDuplicatesComponent } from './../check-duplicates/check-duplicates.component';
 import { forkJoin } from 'rxjs';
 import { LookupItemView } from './../../../shared/_models/LookupItemView';
 import { County } from '../../_models/county';
@@ -19,6 +20,10 @@ import { CountyService } from '../../_services/county.service';
 import { PersonRegistrationService } from '../../_services/person-registration.service';
 import { PersoncontactsComponent } from '../personcontacts/personcontacts.component';
 import { RecordsService } from '../../_services/records.service';
+import { SearchService } from '../../_services/search.service';
+import { Search } from '../../_models/search';
+import { Store } from '@ngrx/store';
+import * as AppState from '../../../shared/reducers/app.states';
 
 @Component({
     selector: 'app-register',
@@ -54,11 +59,14 @@ export class RegisterComponent implements OnInit {
     personIdentifiers: any[];
     yesnoOptions: LookupItemView[];
 
+    clientSearch: Search;
+
     dataSource: any[];
     newContacts: any[];
     id: number;
 
-    
+    public phonePattern = /^(?:\+254|0|254)(\d{9})$/;
+
     constructor(private _formBuilder: FormBuilder,
         private snotifyService: SnotifyService,
         private notificationService: NotificationService,
@@ -68,8 +76,12 @@ export class RegisterComponent implements OnInit {
         private dialog: MatDialog,
         private recordsService: RecordsService,
         public zone: NgZone,
-        private router: Router) {
+        private router: Router,
+        private searchService: SearchService,
+        private store: Store<AppState>) {
         this.maxDate = new Date();
+        this.clientSearch = new Search();
+        this.store.dispatch(new AppState.ClearState());
     }
 
     ngOnInit() {
@@ -87,13 +99,14 @@ export class RegisterComponent implements OnInit {
                     FirstName: new FormControl(this.person.firstName, [Validators.required]),
                     MiddleName: new FormControl(this.person.middleName),
                     LastName: new FormControl(this.person.lastName, [Validators.required]),
+                    NickName: new FormControl(this.person.nickName),
                     Sex: new FormControl(this.person.sex, [Validators.required]),
-                    RegistrationDate: new FormControl(this.person.registrationDate, [Validators.required]),
+                    registrationDate: new FormControl(this.person.registrationDate, [Validators.required]),
                     DateOfBirth: new FormControl(this.person.dateOfBirth, [Validators.required]),
                     AgeYears: new FormControl(this.person.ageYears, [Validators.required]),
                     AgeMonths: new FormControl(this.person.ageMonths, [Validators.required]),
                     DobPrecision: new FormControl(this.person.dobPrecision, [Validators.required]),
-                    MaritalStatus: new FormControl(this.person.maritalStatus, [Validators.required]),
+                    MaritalStatus: new FormControl(this.person.maritalStatus),
                     EducationLevel: new FormControl(this.person.EducationLevel),
                     Occupation: new FormControl(this.person.Occupation),
                     IdentifierType: new FormControl(this.person.IdentifierType),
@@ -146,13 +159,12 @@ export class RegisterComponent implements OnInit {
     }
 
     getPersonDetails(id: number): any {
-        console.log('edit person');
         this.recordsService.getPersonDetails(id).subscribe(
             (result) => {
                 console.log(result);
                 const {
                     alternativeNumber, county, countyId, dateOfBirth, dobPrecision, educationLevel, educationLevelId,
-                    emailAddress, firstName, gender, lastName, maritalStatus, maritalStatusId, middleName,
+                    emailAddress, firstName, gender, lastName, maritalStatus, maritalStatusId, middleName, nickName,
                     mobileNumber, nearestHealthCentre, occupation, occupationId, registrationDate, sex,
                     subCounty, subCountyId, village, ward, wardId } = result[0];
 
@@ -168,15 +180,16 @@ export class RegisterComponent implements OnInit {
                 this.formGroup.controls['formArray']['controls'][0]['controls'].FirstName.setValue(firstName);
                 this.formGroup.controls['formArray']['controls'][0]['controls'].MiddleName.setValue(middleName);
                 this.formGroup.controls['formArray']['controls'][0]['controls'].LastName.setValue(lastName);
+                this.formGroup.controls['formArray']['controls'][0]['controls'].NickName.setValue(nickName);
                 this.formGroup.controls['formArray']['controls'][0]['controls'].Sex.setValue(sex);
-                this.formGroup.controls['formArray']['controls'][0]['controls'].RegistrationDate.setValue(registrationDate);
+                this.formGroup.controls['formArray']['controls'][0]['controls'].registrationDate.setValue(registrationDate);
                 this.formGroup.controls['formArray']['controls'][0]['controls'].DateOfBirth.setValue(dateOfBirth);
                 this.formGroup.controls['formArray']['controls'][0]['controls'].DobPrecision.setValue(exact);
                 this.formGroup.controls['formArray']['controls'][0]['controls'].MaritalStatus.setValue(maritalStatusId);
                 this.formGroup.controls['formArray']['controls'][0]['controls'].EducationLevel.setValue(educationLevelId);
                 this.formGroup.controls['formArray']['controls'][0]['controls'].Occupation.setValue(occupationId);
                 if (dateOfBirth) {
-                    this.getAge(new Date(dateOfBirth));
+                    this.getAge(moment(dateOfBirth));
                 }
 
                 // second tab wizard
@@ -211,7 +224,7 @@ export class RegisterComponent implements OnInit {
                         'contactcategory': res[i].contactCategoryList[0],
                         'relationship': res[i].contactRelationshipList[0],
                         'phoneno': res[i].mobileNo,
-                        'consent': null,
+                        'consent': res[i].consentList[0],
                         'disabled': 'none'
                     });
                 }
@@ -230,16 +243,19 @@ export class RegisterComponent implements OnInit {
         );
     }
 
-    onDate(event: MatDatepickerInputEvent<Date>) {
+    onDate(event: MatDatepickerInputEvent<moment.Moment>) {
         this.getAge(event.value, true);
     }
 
-    getAge(dob: Date, setDobPrecision: boolean = false): any {
+    getAge(dob: moment.Moment, setDobPrecision: boolean = false): any {
         const today = new Date();
 
-        let age = today.getFullYear() - dob.getFullYear();
-        let ageMonths = today.getMonth() - dob.getMonth();
-        if (ageMonths < 0 || (ageMonths === 0 && today.getDate() < dob.getDate())) {
+        console.log(moment(dob).toDate());
+        console.log(dob.toISOString());
+
+        let age = today.getFullYear() - dob.toDate().getFullYear();
+        let ageMonths = today.getMonth() - dob.toDate().getMonth();
+        if (ageMonths < 0 || (ageMonths === 0 && today.getDate() < dob.toDate().getDate())) {
             age--;
         }
 
@@ -257,8 +273,10 @@ export class RegisterComponent implements OnInit {
     estimateDob() {
         const ageYears = this.formGroup.value.formArray[0]['AgeYears'];
         const ageMonths = this.formGroup.value.formArray[0]['AgeMonths'];
+
         if (!ageYears) {
             this.snotifyService.error('Please enter (age years)', 'Registration', this.notificationService.getConfig());
+            return;
         }
 
         if (ageYears < 0) {
@@ -267,10 +285,27 @@ export class RegisterComponent implements OnInit {
             return;
         }
 
+        if (ageYears > 120) {
+            this.snotifyService.error('Age in years should not be more than 120 years old',
+                'Registration', this.notificationService.getConfig());
+            this.formArray['controls'][0]['controls']['AgeYears'].setValue('');
+            return;
+        }
+
         if (ageMonths < 0) {
             this.snotifyService.error('Age in months should not be negative', 'Registration', this.notificationService.getConfig());
             this.formArray['controls'][0]['controls']['AgeMonths'].setValue('');
             return;
+        }
+
+        if (ageMonths > 11) {
+            this.snotifyService.error('Age in months should not be more than 11', 'Registration', this.notificationService.getConfig());
+            this.formArray['controls'][0]['controls']['AgeMonths'].setValue('');
+            return;
+        }
+
+        if (!ageMonths) {
+            this.formArray['controls'][0]['controls']['AgeMonths'].setValue(0);
         }
 
         const today = new Date();
@@ -303,20 +338,16 @@ export class RegisterComponent implements OnInit {
     }
 
     onSubmitForm(tabIndex: number) {
-        console.log(this.formArray.value);
-        console.log(this.formGroup.valid);
         if (this.formGroup.valid) {
             this.person = { ...this.formArray.value[0] };
             this.clientAddress = { ...this.formArray.value[1] };
             this.clientContact = { ...this.formArray.value[2] };
+            this.person.dateOfBirth = moment(this.formArray.value[0]['DateOfBirth']).toDate();
+            this.person.registrationDate = moment(this.person.registrationDate).toDate();
 
             this.person.personId = 0;
             this.person.createdBy = JSON.parse(localStorage.getItem('appUserId'));
             this.person.PosId = JSON.parse(localStorage.getItem('appPosID'));
-
-            console.log(this.person);
-            console.log(this.clientAddress);
-            console.log(this.clientContact);
 
             if (this.id) {
                 // set person id for update
@@ -369,9 +400,12 @@ export class RegisterComponent implements OnInit {
                                             { relativeTo: this.route });
                                     });
                                 } else if (tabIndex == 2) {
-                                    this.zone.run(() => {
-                                        this.router.navigate(['/record/person/'], { relativeTo: this.route });
-                                    });
+                                    this.person = new Person();
+                                    this.clientAddress = new ClientAddress();
+                                    this.clientContact = new ClientContact();
+                                    this.nextOfKin = new NextOfKin();
+
+                                    window.location.reload();
                                 }
                             }
                         );
@@ -481,6 +515,69 @@ export class RegisterComponent implements OnInit {
         } else {
             this.formGroup.controls['formArray']['controls'][0]['controls']['IdentifierNumber'].disable({ onlySelf: true });
             this.formGroup.controls['formArray']['controls'][0]['controls']['IdentifierNumber'].setValue('');
+        }
+    }
+
+    public checkAgeForValidation() {
+        const ageInYears = this.formArray['controls'][0]['controls']['AgeYears'].value;
+        if (ageInYears < 10) {
+            this.formArray['controls'][0]['controls']['MaritalStatus'].disable({ onlySelf: true });
+            this.formArray['controls'][0]['controls']['EducationLevel'].disable({ onlySelf: true });
+            this.formArray['controls'][0]['controls']['Occupation'].disable({ onlySelf: true });
+        } else {
+            this.formArray['controls'][0]['controls']['MaritalStatus'].enable();
+            this.formArray['controls'][0]['controls']['EducationLevel'].enable();
+            this.formArray['controls'][0]['controls']['Occupation'].enable();
+        }
+    }
+
+    public checkDuplicates() {
+        const firstName = this.formGroup.controls['formArray']['controls'][0]['controls']['FirstName'].value;
+        const middleName = this.formGroup.controls['formArray']['controls'][0]['controls']['MiddleName'].value;
+        const lastName = this.formGroup.controls['formArray']['controls'][0]['controls']['LastName'].value;
+        const gender = this.formGroup.controls['formArray']['controls'][0]['controls']['Sex'].value;
+        const dateOfBirth = this.formGroup.controls['formArray']['controls'][0]['controls']['DateOfBirth'].value;
+
+        this.clientSearch.firstName = firstName == null ? '' : firstName;
+        this.clientSearch.middleName = middleName == null ? '' : middleName;
+        this.clientSearch.lastName = lastName == null ? '' : lastName;
+        this.clientSearch.identifierValue = '';
+        this.clientSearch.mobileNumber = '';
+        this.clientSearch.dateOfBirth = dateOfBirth;
+        this.clientSearch.sex = gender;
+
+        if (firstName && lastName && gender && dateOfBirth) {
+            this.searchService.searchClient(this.clientSearch).subscribe(
+                (result) => {
+                    if ((!this.id) && result && result['personSearch'] && result['personSearch'].length > 0) {
+                        const dialogConfig = new MatDialogConfig();
+
+                        dialogConfig.disableClose = true;
+                        dialogConfig.autoFocus = true;
+                        dialogConfig.height = '90%';
+                        dialogConfig.width = '80%';
+
+                        dialogConfig.data = {
+                            'persons': result['personSearch']
+                        };
+
+                        const dialogRef = this.dialog.open(CheckDuplicatesComponent, dialogConfig);
+
+                        dialogRef.afterClosed().subscribe(
+                            data => {
+                                if (!data) {
+                                    return;
+                                }
+
+                                console.log(data);
+                                this.zone.run(() => {
+                                    this.router.navigate(['/dashboard/personhome/' + data[0]['id']], { relativeTo: this.route });
+                                });
+                            }
+                        );
+                    }
+                }
+            );
         }
     }
 }

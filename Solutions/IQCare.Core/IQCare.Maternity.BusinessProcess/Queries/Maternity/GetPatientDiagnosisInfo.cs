@@ -8,8 +8,9 @@ namespace IQCare.Maternity.BusinessProcess.Queries.Maternity
 {
     public class GetPatientDiagnosisInfo : IRequest<Result<List<PatientDiagnosisViewModel>>>
     {
-        public int PatientId { get; set; }
+        public int ? PatientId { get; set; }
 
+        public int ? PatientMasterVisitId  { get; set; }
     }
 
     public class PatientDiagnosisViewModel

@@ -1,6 +1,9 @@
+import { NotificationService } from './../../../shared/_services/notification.service';
+import { PncService } from './../../_services/pnc.service';
 import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
 import { LookupItemView } from '../../../shared/_models/LookupItemView';
+import { SnotifyService } from 'ng-snotify';
 
 @Component({
     selector: 'app-pnc-contraceptivehistory',
@@ -13,9 +16,16 @@ export class PncContraceptivehistoryComponent implements OnInit {
     familyPlanningMethodOptions: LookupItemView[] = [];
 
     @Input('contraceptiveHistoryExercise') contraceptiveHistoryExercise: any;
+    @Input('isEdit') isEdit: boolean;
+    @Input('patientId') patientId: number;
+    @Input('patientMasterVisitId') patientMasterVisitId: number;
+
     @Output() notify: EventEmitter<FormGroup> = new EventEmitter<FormGroup>();
 
-    constructor(private _formBuilder: FormBuilder) { }
+    constructor(private _formBuilder: FormBuilder,
+        private pncservice: PncService,
+        private snotifyService: SnotifyService,
+        private notificationService: NotificationService) { }
 
     ngOnInit() {
         this.ContraceptiveHistoryForm = this._formBuilder.group({
@@ -29,6 +39,41 @@ export class PncContraceptivehistoryComponent implements OnInit {
         this.familyPlanningMethodOptions = familyPlanningMethodOptions;
 
         this.notify.emit(this.ContraceptiveHistoryForm);
+
+        if (this.isEdit) {
+            this.loadPncContraceptiviveHistory();
+        }
+    }
+
+    loadPncContraceptiviveHistory(): void {
+        this.pncservice.getFamilyPlanning(this.patientId).subscribe(
+            (result) => {
+                for (let i = 0; i < result.length; i++) {
+                    if (result[i].patientMasterVisitId == this.patientMasterVisitId) {
+                        this.ContraceptiveHistoryForm.get('onFamilyPlanning').setValue(result[i].familyPlanningStatusId);
+                        this.pncservice.getFamilyPlanningMethod(this.patientId).subscribe(
+                            (res) => {
+                                for (let j = 0; j < res.length; j++) {
+                                    if (res[j].patientFPId == result[i].id) {
+                                        this.ContraceptiveHistoryForm.get('familyPlanningMethod').setValue(res[j].fpMethodId);
+                                    }
+                                }
+                            },
+                            (error) => {
+                                this.snotifyService.success('Error fetching family planning methods ' + error, 'PNC Encounter',
+                                    this.notificationService.getConfig());
+                            },
+                            () => { }
+                        );
+                    }
+                }
+            },
+            (error) => {
+                this.snotifyService.success('Error fetching family planning ' + error, 'PNC Encounter',
+                    this.notificationService.getConfig());
+            },
+            () => { }
+        );
     }
 
     onFamilyPlanningChange(event) {

@@ -30,8 +30,10 @@ export class ChronichIllnessComponent implements OnInit {
   }
 
   public getChronicIllnessesByPatientId(patientId: number) {
-    if(patientId == null)
-    return;
+    if (patientId == null) {
+      return;
+    }
+    
     this.personService.getChronicIllnessesByPatientId(patientId).subscribe(
         data => {
           if (data.length == 0) {

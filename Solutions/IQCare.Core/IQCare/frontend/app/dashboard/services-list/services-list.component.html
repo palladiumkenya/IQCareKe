@@ -66,11 +66,21 @@
                                         </span>
                                     </div>
 
-                                    <div class="ticket-time  col-lg-2 col-sm-2 col-xs-12">
+                                    <div class="ticket-time  col-lg-2 col-sm-2 col-xs-12" style="height:100%;padding-left: 0px;
+                                    padding-right: 0px;">
                                         <div class="divider hidden-md hidden-sm hidden-xs"></div>
                                         <span>
                                             <a class="btn btn-sm btn-success" (click)="newEncounter(service.id)">
                                                 Encounter History
+                                            </a>
+                                        </span>
+
+                                        <span>&nbsp;&nbsp;</span>
+                                        <br />
+
+                                        <span>
+                                            <a class="btn btn-sm btn-success" (click)="newTriage()">
+                                                Triage
                                             </a>
                                         </span>
                                     </div>
@@ -92,7 +102,7 @@
                                         <div class="divider hidden-md hidden-sm hidden-xs"></div>
                                         <span>
                                             <ng-container *ngIf="isServiceEligible(service.id); else notEligibleTemplate">
-                                                <a class="btn btn-sm btn-primary" (click)="enrollToService(service.id)">
+                                                <a class="btn btn-sm btn-primary" (click)="enrollToService(service.id, service.code)">
                                                     Enroll
                                                 </a>
                                             </ng-container>

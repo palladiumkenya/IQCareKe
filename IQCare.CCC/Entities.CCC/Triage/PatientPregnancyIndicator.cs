@@ -33,7 +33,7 @@ namespace Entities.CCC.Triage
         public int PregnancyStatusId { get; set; }
 
         [Required]
-        public int AncProfile { get; set; }
+        public Boolean AncProfile { get; set; }
 
         public DateTime? AncProfileDate { get; set; }
 
