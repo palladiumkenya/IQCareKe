@@ -11,7 +11,7 @@ namespace IQCare.Common.Infrastructure.Mapping
     {
         public void Configure(EntityTypeBuilder<PatientAllergy> builder)
         {
-            builder.ToTable("PatientAllergies").HasKey(x => x.Id);
+            builder.ToTable("PatientAllergy").HasKey(x => x.Id);
         }
     }
 }

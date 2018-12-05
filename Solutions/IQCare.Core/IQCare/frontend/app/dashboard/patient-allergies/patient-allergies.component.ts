@@ -13,7 +13,7 @@ export class PatientAllergiesComponent implements OnInit {
   personId = 0;
   patient_allergy_data: any[] = [];
   dataSource = new MatTableDataSource(this.patient_allergy_data);
-  patient_allergy_displaycolumns = [ 'allagen', 'description', 'dateCreated'];
+  patient_allergy_displaycolumns = [ 'allergen', 'severity', 'createDate'];
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
   constructor(private personService: PersonHomeService, private route: ActivatedRoute) {
@@ -28,6 +28,7 @@ export class PatientAllergiesComponent implements OnInit {
      this.personService.getPatientByPersonId(this.personId).subscribe(patient => {
       console.log("Patient Id >>>>>" +patient.patientId)
        this.getPatientAllergies(patient.patientId);
+       console.log("check results" + this.getPatientAllergies)
     });
     });
   }
@@ -43,9 +44,9 @@ export class PatientAllergiesComponent implements OnInit {
             data.forEach(allergy => {
               this.patient_allergy_data.push({
              
-                allagen: allergy.allagen,
-                dateCreated: allergy.dateCreated,
-                description: allergy.description
+                allergen: allergy.allergen,
+                createDate: allergy.createDate,
+                severity: allergy.severity
                 
             });
             });

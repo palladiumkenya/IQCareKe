@@ -38,7 +38,7 @@ namespace IQCare.Common.BusinessProcess.CommandHandlers.Allergies
             }
             catch (Exception ex)
             {
-                Log.Error(ex, $"An error occured while adding patient Allery information for patientId {request.PatientId}");
+                Log.Error(ex, $"An error occured while adding patient Allergy information for patientId {request.PatientId}");
                 return Result<AddPatientAllergiesResponse>.Invalid(ex.Message);
             }
         }
