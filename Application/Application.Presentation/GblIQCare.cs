@@ -37,7 +37,7 @@ namespace Application.Presentation
         public GblIQCare()
         {
             AppVersion = "Ver 2.0.0 Kenya HMIS";
-            ReleaseDate = "12-Dec-2018";
+            ReleaseDate = "04-Dec-2018";
             VersionName = "Kenya HMIS Ver 2.0.0 BETA";
             DbVersion = "Ver 2.0.0 Kenya HMIS";
         }
