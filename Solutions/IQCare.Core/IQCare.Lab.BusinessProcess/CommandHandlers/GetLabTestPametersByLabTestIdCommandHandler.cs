@@ -14,7 +14,7 @@ namespace IQCare.Lab.BusinessProcess.CommandHandlers
 {
     public class GetLabTestPametersByLabTestIdCommandHandler : IRequestHandler<GetLabTestPametersByLabTestIdCommand, Result<List<LabTestParameter>>>
     {
-        ILabUnitOfWork _labUnitOfWork;
+        private readonly ILabUnitOfWork _labUnitOfWork;
 
         public GetLabTestPametersByLabTestIdCommandHandler(ILabUnitOfWork labUnitOfWork)
         {
