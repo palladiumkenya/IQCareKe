@@ -200,7 +200,7 @@ export class HeiService {
 
     public getHeiLabTests(): Observable<any[]> {
         const options = JSON.stringify(['PCR', 'Viral Load', 'HIV Rapid Test']);
-        return this.http.post<any[]>(this.API_LAB_URL + '/api/LabTests/GetLabTests', options, httpOptions).pipe(
+        return this.http.post<any[]>(this.API_LAB_URL + '/api/LabTests/GetFilteredLabTests', options, httpOptions).pipe(
             tap(getHeiLabTests => this.errorHandler.log(`successfully fetched hei labtests`)),
             catchError(this.errorHandler.handleError<any>('Error fetching labtests'))
         );

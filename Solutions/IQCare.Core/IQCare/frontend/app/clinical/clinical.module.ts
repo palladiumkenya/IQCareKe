@@ -11,6 +11,7 @@ import {
     MatTableModule, MatButtonModule
 } from '@angular/material';
 import { HttpClientModule } from '@angular/common/http';
+import { LabOrderComponent } from './lab-order/lab-order.component';
 
 @NgModule({
     imports: [
@@ -23,7 +24,8 @@ import { HttpClientModule } from '@angular/common/http';
         MatTableModule, MatButtonModule, FormsModule, HttpClientModule, SharedModule
     ],
     declarations: [
-        TriageComponent
+        TriageComponent,
+        LabOrderComponent
     ],
     providers: [TriageService]
 })

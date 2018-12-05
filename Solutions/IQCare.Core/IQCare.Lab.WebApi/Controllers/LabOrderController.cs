@@ -21,6 +21,12 @@ namespace IQCare.Lab.WebApi.Controllers
             _mediator = mediator ?? throw new ArgumentNullException(nameof(mediator));
         }
 
+
+        public IActionResult ApiStatus()
+        {
+            return Ok("Lab order api is running");
+        }
+
         [HttpPost]
         public async Task<IActionResult> AddLabOrder([FromBody]AddLabOrderCommand addLabOrderCommand)
         {
@@ -31,9 +37,9 @@ namespace IQCare.Lab.WebApi.Controllers
         }
 
         [HttpGet("{Id}")]
-        public async Task<IActionResult> GetLabOrderTestResultsByPatientId(int Id)
+        public async Task<IActionResult> GetLabOrderTestResultsByPatientId(int id)
         {
-            var labTestResults = await _mediator.Send(new GetLabTestResults { PatientId = Id });
+            var labTestResults = await _mediator.Send(new GetLabTestResults { PatientId = id });
             return Ok(labTestResults);
         }
 

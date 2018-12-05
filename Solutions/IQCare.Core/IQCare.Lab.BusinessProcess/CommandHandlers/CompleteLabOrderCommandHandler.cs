@@ -29,6 +29,8 @@ namespace IQCare.Lab.BusinessProcess.CommandHandlers
                 {
                     var submittedLabOrderTest = _labUnitOfwork.Repository<LabOrderTest>()
                         .Get(x => x.Id == request.LabOrderTestId).FirstOrDefault();
+                    if (submittedLabOrderTest == null)
+                      return Result<CompleteLabOrderResponse>.Invalid($"Lab order request with Id {request.LabOrderTestId} not found");
 
                     var labTestParameters = _labUnitOfwork.Repository<LabTestParameter>()
                         .Get(x => x.LabTestId == request.LabTestId && x.DeleteFlag == false).ToList();
@@ -89,18 +91,11 @@ namespace IQCare.Lab.BusinessProcess.CommandHandlers
         private Tuple<int, string> GetResultUnitDetails(int parameterId)
         {
             var unitId = _labUnitOfwork.Repository<LabTestParameterConfig>().Get(x => x.ParameterId == parameterId && x.DeleteFlag == false)
-                           .SingleOrDefault()?.UnitId;
-            if (unitId != null)
-            {
+                           .SingleOrDefault()?.UnitId;   
                 var parameterUnit = _labUnitOfwork.Repository<LabTestParameterUnit>().Get(x => x.UnitId == unitId)
                     .SingleOrDefault();
 
                 return new Tuple<int, string>((int) parameterUnit?.UnitId, parameterUnit?.UnitName);
-            }
-            else
-            {
-                return new Tuple<int, string>(Int32.MinValue, null);
-            }
             
         }
 
@@ -111,9 +106,9 @@ namespace IQCare.Lab.BusinessProcess.CommandHandlers
 
             var resultUnit = GetResultUnitDetails(parameterId);
 
-            var patientLabTracker = _labUnitOfwork.Repository<PatientLabTracker>()
-               .Get(x => x.LabOrderId == labOrderId).SingleOrDefault();
-
+            var patientLabTracker = _labUnitOfwork.Repository<PatientLabTracker>().Get(x => x.LabOrderId == labOrderId).SingleOrDefault();
+            if(patientLabTracker == null)
+                return;
             patientLabTracker.UpdateResults(DateTime.Now, labOrderTestResult.ResultText, resultUnit.Item2, labOrderTestResult.ResultValue);
             _labUnitOfwork.Repository<PatientLabTracker>().Update(patientLabTracker);
         }
