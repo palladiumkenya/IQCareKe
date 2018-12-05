@@ -250,6 +250,7 @@ export class HeiComponent implements OnInit {
         this.heiService.getHeiLabTests().subscribe(
             (result) => {
                 const labTestsList = result['labTestsList'];
+                console.log(result);
                 for (let i = 0; i < labTestsList.length; i++) {
                     const key = labTestsList[i]['key'];
                     if (labTestsList[i]['key'] == 'PCR') {

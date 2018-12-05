@@ -1,32 +1,32 @@
-import {Component, OnInit, OnDestroy, NgZone} from '@angular/core';
-import {NotificationService} from './../../shared/_services/notification.service';
-import {SnotifyService} from 'ng-snotify';
-import {ActivatedRoute, Router} from '@angular/router';
-import {VisitDetailsService} from '../_services/visit-details.service';
-import {PatientEducationCommand} from '../_models/PatientEducationCommand';
-import {PreventiveService} from '../_models/PreventiveService';
-import {forkJoin, Subscription} from 'rxjs/index';
-import {ClientMonitoringCommand} from '../_models/ClientMonitoringCommand';
-import {AncService} from '../_services/anc.service';
-import {HaartProphylaxisCommand} from '../_models/HaartProphylaxisCommand';
-import {PatientDrugAdministration} from '../_models/PatientDrugAdministration';
-import {PatientReferral} from '../_models/PatientReferral';
-import {PatientPreventiveService} from '../_models/PatientPreventiveService';
-import {PatientProfile} from '../_models/patientProfile';
-import {PregnancyViewModel} from '../_models/viewModel/PregnancyViewModel';
-import {FormArray, FormGroup} from '@angular/forms';
-import {LookupItemView} from '../../shared/_models/LookupItemView';
-import {PatientAppointment} from '../_models/PatientAppointmet';
-import {PatientEducation} from '../_models/PatientEducation';
-import {PatientChronicIllness} from '../_models/PatientChronicIllness';
-import {LookupItemService} from '../../shared/_services/lookup-item.service';
-import {AdministeredDrugInfo} from '../maternity/commands/administer-drug-info';
-import {VisitDetailsCommand} from '../_models/visit-details-command';
-import {PregnancyAncCommand} from '../_models/pregnancy-anc-command';
-import {HivTestsCommand} from '../_models/HivTestsCommand';
-import {HivStatusCommand} from '../_models/HivStatusCommand';
-import {BaselineAncProfileCommand} from '../_models/baseline-anc-profile-command';
-import {DrugAdministerCommand} from '../_models/drug-administer-command';
+import { Component, OnInit, OnDestroy, NgZone } from '@angular/core';
+import { NotificationService } from './../../shared/_services/notification.service';
+import { SnotifyService } from 'ng-snotify';
+import { ActivatedRoute, Router } from '@angular/router';
+import { VisitDetailsService } from '../_services/visit-details.service';
+import { PatientEducationCommand } from '../_models/PatientEducationCommand';
+import { PreventiveService } from '../_models/PreventiveService';
+import { forkJoin, Subscription } from 'rxjs/index';
+import { ClientMonitoringCommand } from '../_models/ClientMonitoringCommand';
+import { AncService } from '../_services/anc.service';
+import { HaartProphylaxisCommand } from '../_models/HaartProphylaxisCommand';
+import { PatientDrugAdministration } from '../_models/PatientDrugAdministration';
+import { PatientReferral } from '../_models/PatientReferral';
+import { PatientPreventiveService } from '../_models/PatientPreventiveService';
+import { PatientProfile } from '../_models/patientProfile';
+import { PregnancyViewModel } from '../_models/viewModel/PregnancyViewModel';
+import { FormArray, FormGroup } from '@angular/forms';
+import { LookupItemView } from '../../shared/_models/LookupItemView';
+import { PatientAppointment } from '../_models/PatientAppointmet';
+import { PatientEducation } from '../_models/PatientEducation';
+import { PatientChronicIllness } from '../_models/PatientChronicIllness';
+import { LookupItemService } from '../../shared/_services/lookup-item.service';
+import { AdministeredDrugInfo } from '../maternity/commands/administer-drug-info';
+import { VisitDetailsCommand } from '../_models/visit-details-command';
+import { PregnancyAncCommand } from '../_models/pregnancy-anc-command';
+import { HivTestsCommand } from '../_models/HivTestsCommand';
+import { HivStatusCommand } from '../_models/HivStatusCommand';
+import { BaselineAncProfileCommand } from '../_models/baseline-anc-profile-command';
+import { DrugAdministerCommand } from '../_models/drug-administer-command';
 import * as moment from 'moment';
 
 @Component({
@@ -105,12 +105,12 @@ export class AncComponent implements OnInit, OnDestroy {
 
 
     constructor(private route: ActivatedRoute, private visitDetailsService: VisitDetailsService,
-                private snotifyService: SnotifyService,
-                private lookupItemService: LookupItemService,
-                public zone: NgZone,
-                private router: Router,
-                private notificationService: NotificationService,
-                private ancService: AncService) {
+        private snotifyService: SnotifyService,
+        private lookupItemService: LookupItemService,
+        public zone: NgZone,
+        private router: Router,
+        private notificationService: NotificationService,
+        private ancService: AncService) {
         this.userId = JSON.parse(localStorage.getItem('appUserId'));
         this.visitDetailsFormGroup = new FormArray([]);
         this.PatientEducationMatFormGroup = new FormArray([]);
@@ -318,7 +318,7 @@ export class AncComponent implements OnInit, OnDestroy {
                 p => {
                     const options = p['lookupItems'];
                     for (let i = 0; i < options.length; i++) {
-                        objOptions.push({'itemId': options[i]['itemId'], 'itemName': options[i]['itemName']});
+                        objOptions.push({ 'itemId': options[i]['itemId'], 'itemName': options[i]['itemName'] });
                     }
                 },
                 (err) => {
@@ -372,7 +372,7 @@ export class AncComponent implements OnInit, OnDestroy {
             DaysPostPartum: (this.formType == 'pnc') ? this.visitDetailsFormGroup.value[1]['DaysPostPartum'] : 0,
             VisitType: this.visitDetailsFormGroup.value[0]['visitType'],
             UserId: this.userId
-        }as VisitDetailsCommand;
+        } as VisitDetailsCommand;
 
         for (let i = 0; i < this.counselling_data.length; i++) {
 
@@ -659,7 +659,7 @@ export class AncComponent implements OnInit, OnDestroy {
                         VisitType: this.visitDetailsFormGroup.value[0]['visitType'],
                         UserId: this.userId
 
-                    }as VisitDetailsCommand;
+                    } as VisitDetailsCommand;
 
                     const baselineAncCommands = {
                         PatientId: parseInt(this.patientId.toString(), 10),
@@ -692,7 +692,7 @@ export class AncComponent implements OnInit, OnDestroy {
                                 this.snotifyService.success('Successfully saved ANC encounter ', 'ANC',
                                     this.notificationService.getConfig());
                                 this.zone.run(() => {
-                                    this.router.navigate(['/dashboard/personhome/' + this.personId], {relativeTo: this.route});
+                                    this.router.navigate(['/dashboard/personhome/' + this.personId], { relativeTo: this.route });
                                 });
                             },
                             (error) => {
@@ -724,7 +724,7 @@ export class AncComponent implements OnInit, OnDestroy {
                         this.snotifyService.success('Successfully saved ANC encounter ', 'ANC',
                             this.notificationService.getConfig());
                         this.zone.run(() => {
-                            this.router.navigate(['/dashboard/personhome/' + this.personId], {relativeTo: this.route});
+                            this.router.navigate(['/dashboard/personhome/' + this.personId], { relativeTo: this.route });
                         });
                     },
                     (error) => {

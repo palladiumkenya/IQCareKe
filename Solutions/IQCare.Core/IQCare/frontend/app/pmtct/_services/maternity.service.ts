@@ -194,7 +194,7 @@ export class MaternityService {
             return of([]);
         }
 
-        return this.http.post<any>(this.API_PMTCT_URL + '/api/PatientScreening/', JSON.stringify(patientScreeningCommand), httpOptions)
+        return this.http.post<any>(this.API_PMTCT_URL + '/api/PatientScreening', JSON.stringify(patientScreeningCommand), httpOptions)
             .pipe(
                 tap(saveScreening => this.errorHandler.log(`successfully added patient screening`)),
                 catchError(this.errorHandler.handleError<any>('Error saving patient screening'))

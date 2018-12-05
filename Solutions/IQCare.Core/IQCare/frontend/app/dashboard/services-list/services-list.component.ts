@@ -127,32 +127,35 @@ export class ServicesListComponent implements OnInit {
         }
 
         const selectedService = this.services.filter(obj => obj.id == serviceAreaId);
-        let isEligible: boolean = true;
+        let isEligible: boolean = false;
         if (selectedService && selectedService.length > 0) {
             switch (selectedService[0]['code']) {
                 case 'ANC':
-                    if (this.person.gender == 'Female' && (this.person.ageNumber >= 9 && this.person.ageNumber <= 49)) {
+                    if (this.person.gender == 'Female'
+                        && ((this.person.dateOfBirth) && this.person.ageNumber >= 9 && this.person.ageNumber <= 49)) {
                         isEligible = true;
                     } else {
                         isEligible = false;
                     }
                     break;
                 case 'PNC':
-                    if (this.person.gender == 'Female' && (this.person.ageNumber >= 9 && this.person.ageNumber <= 49)) {
+                    if (this.person.gender == 'Female'
+                        && ((this.person.dateOfBirth) && this.person.ageNumber >= 9 && this.person.ageNumber <= 49)) {
                         isEligible = true;
                     } else {
                         isEligible = false;
                     }
                     break;
                 case 'Maternity':
-                    if (this.person.gender == 'Female' && (this.person.ageNumber >= 9 && this.person.ageNumber <= 49)) {
+                    if (this.person.gender == 'Female'
+                        && ((this.person.dateOfBirth) && this.person.ageNumber >= 9 && this.person.ageNumber <= 49)) {
                         isEligible = true;
                     } else {
                         isEligible = false;
                     }
                     break;
                 case 'HEI':
-                    if (this.person.ageNumber <= 2) {
+                    if (this.person.dateOfBirth && this.person.ageNumber <= 2) {
                         isEligible = true;
                     } else {
                         isEligible = false;
@@ -164,6 +167,9 @@ export class ServicesListComponent implements OnInit {
                     } else {
                         isEligible = true;
                     }
+                    break;
+                case 'CCC':
+                    isEligible = true;
                     break;
             }
         }
