@@ -18,8 +18,8 @@ namespace IQCare.Lab.BusinessProcess.CommandHandlers
 {
     public class AddLabOrderCommandHandler : IRequestHandler<AddLabOrderCommand, Result<AddLabOrderResponse>>
     {
-        ILabUnitOfWork _labUnitOfWork;
-        IMapper _mapper;
+        private readonly ILabUnitOfWork _labUnitOfWork;
+        private readonly IMapper _mapper;
 
         public AddLabOrderCommandHandler(ILabUnitOfWork labUnitOfWork, IMapper mapper)
         {
@@ -36,23 +36,24 @@ namespace IQCare.Lab.BusinessProcess.CommandHandlers
                     await _labUnitOfWork.Repository<LabOrder>().AddAsync(labOrder);
                     await _labUnitOfWork.SaveAsync();
 
-                    var labOrderTests = request.LabTests.Select(x => new LabOrderTest(labOrder.Id, x.Id, x.Notes, request.UserId, false)).ToList();
+                    var labOrderTests = request.LabTests.Select(x => new LabOrderTest(labOrder.Id, x.Id, x.Notes, request.UserId, false))
+                        .ToList();
                     await _labUnitOfWork.Repository<LabOrderTest>().AddRangeAsync(labOrderTests);
                     await _labUnitOfWork.SaveAsync();
 
-                    List<PatientLabTracker> patientLabTrackers = new List<PatientLabTracker>();
+                    var patientLabTrackers = new List<PatientLabTracker>();
 
                     foreach (var labOrderTest in labOrderTests)
                     {
                         var labName = request.LabTests.FirstOrDefault(x => x.Id == labOrderTest.LabTestId)?.LabTestName;
+
                         var parameterCount = _labUnitOfWork.Repository<LabTest>().Get(x => x.Id == labOrderTest.LabTestId)
                             .SingleOrDefault()?.ParameterCount;
-                        if(parameterCount == 1)  // PatientLabTracker is created only for LabTests with only one parameter count
-                        {
-                            var patientLabTacker = new PatientLabTracker(request.PatientId, labName, request.PatientMasterVisitId, labOrderTest.LabTestId, labOrder.Id, request.FacilityId, request.OrderDate, request.UserId, null);
 
-                            patientLabTrackers.Add(patientLabTacker);
-                        }                       
+                        if (parameterCount != 1) continue;
+                        var patientLabTacker = new PatientLabTracker(request.PatientId, labName, request.PatientMasterVisitId, labOrderTest.LabTestId, labOrder.Id, request.FacilityId, request.OrderDate, request.UserId, null);
+
+                        patientLabTrackers.Add(patientLabTacker);
                     }
 
                     await _labUnitOfWork.Repository<PatientLabTracker>().AddRangeAsync(patientLabTrackers);
