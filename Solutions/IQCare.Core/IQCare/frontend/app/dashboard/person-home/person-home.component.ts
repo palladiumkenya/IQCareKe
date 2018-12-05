@@ -2,6 +2,7 @@ import { Component, OnInit, NgZone } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { PersonHomeService } from '../services/person-home.service';
+
 import { NotificationService } from '../../shared/_services/notification.service';
 import { SnotifyService } from 'ng-snotify';
 import { PersonView } from '../../records/_models/personView';
@@ -21,6 +22,9 @@ export class PersonHomeComponent implements OnInit {
     public personId = 0;
     public person: PersonView;
     public personView$: Subscription;
+    public personAllergies$: Subscription;
+    public personAllergies: any;
+
     services: any[];
     chronic_illness_data: any[] = [];
     dataSource = new MatTableDataSource(this.chronic_illness_data);
@@ -79,5 +83,19 @@ export class PersonHomeComponent implements OnInit {
         this.zone.run(() => {
             this.router.navigate(['/record/person/update/' + this.personId], { relativeTo: this.route });
         });
+    }
+    getUserAllergies(patientId: number) {
+        this.personAllergies$ = this.personService.getPatientAllergies(patientId).subscribe(
+            personAllergies => {
+                console.log(personAllergies);
+                this.personAllergies = personAllergies;
+            },
+            (err) => {
+                this.snotifyService.error('Error retreaving person allergies...',
+                    this.notificationService.getConfig());
+            },
+            () => {
+                // console.log(this.personView$);
+            });
     }
 }

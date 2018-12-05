@@ -57,7 +57,12 @@ export class PersonHomeService {
             catchError(this.errorHandler.handleError<any[]>('getPatientType'))
         );
     }
-
+    public getPatientAllergies(patientId : number): Observable<any> {
+        return this.http.get<any>(this.API_URL + '/api/PatientAllergy/GetPatientAllergy?patientId=' + patientId).pipe(
+            tap(getPatientAllergies => this.errorHandler.log('get patient Allergy')),
+            catchError(this.errorHandler.handleError<any[]>('getPatientAllergies'))
+        );
+    }
 
     public getChronicIllnessesByPatientId(patientId: number): Observable<any> {
         return this.http.get<any>(this.API_URL + '/api/PatientChronicIllness/GetByPatientId/' + patientId).pipe(
@@ -72,10 +77,18 @@ export class PersonHomeService {
         );
     }
 
+
+    public GetPatientAppoitment(patientId: number): Observable<any> {
+        return this.http.get<any>(this.API_URL + '/api/PatientReferralAndAppointment/GetPatientAppoitment/' + patientId).pipe(
+            tap(getPatientAllergies => this.errorHandler.log('get patient Allergy')),
+            catchError(this.errorHandler.handleError<any[]>('getPatientAllergies'))
+        );
+        }
     public getPatientById(patientId: number): Observable<any> {
         return this.http.get<any>(this.API_URL + '/api/Register/GetPatientById/' + patientId).pipe(
             tap(getPatientById => this.errorHandler.log(`get patient details`)),
             catchError(this.errorHandler.handleError<any>('getPatientById'))
+
         );
     }
 

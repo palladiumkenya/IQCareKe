@@ -80,4 +80,5 @@ export class RecordsService {
             catchError(this.errorHandler.handleError<any[]>('getPersonIdentifiers'))
         );
     }
+    
 }
