@@ -42,7 +42,7 @@
 		</div>
     </div>
 
-      <button type="button" id="submitdata" class="btn btn-primary btn-next" data-last="Complete"/>
+      <button type="button" id="submitdata" class="btn btn-primary btn-next" data-last="Complete" onclientclick="return false;"/>
 </div>
 <script type="text/javascript">
     //var currentStep;
@@ -56,37 +56,43 @@
           var contain = "";
     var Answers = new Array;
     var VisitDate = "<%=VisitDate%>";
-        $(document).ready(function () {
-        $('#VisitDatedatepicker').datetimepicker({
-        format: 'DD-MMM-YYYY',
-            date: VisitDate,
-           allowInputToggle: true,
-           useCurrent: false
 
-            });
+('focus', function (ev) { ev.preventDefault(); });
+            
+
+      
+
+
+    
+    $(document).ready(function () {
+    
+      $('#VisitDatedatepicker').datetimepicker({
+        format: 'DD-MMM-YYYY',
+          date: VisitDate,
+          allowInputToggle: true,
+          
+          
+      });
      
-     $('#VisitDatedatepicker').datetimepicker({
-            format: 'DD-MMM-YYYY',
-           allowInputToggle: true,
-           useCurrent: false
-        });
+
 
 
         $('#VisitDatedatepicker').on('dp.change', function (e) {
 
             if (!e.oldDate || !e.date.isSame(e.oldDate, 'day')) {
+                Reset();
                 $(this).data('DateTimePicker').hide();
             }
-         
+
 
             var vDate = moment($("#PersonVisitDate").val(), 'DD-MMM-YYYYY').toDate();
             var validDateOfVisit = moment(vDate).isBefore(enrollmentDate);
             var futuredate = moment(vDate).isAfter(new Date());
-           
+
             if (futuredate) {
                 $("#<%=PersonVisitDate.ClientID%>").val('');
                 toastr.error("Future dates not allowed!");
-               
+
                 return false;
             }
             if (validDateOfVisit) {
@@ -96,54 +102,58 @@
             }
 
         });
+            
+            //.on
+       
+     var enrollmentDate = "<%=DateOfEnrollment%>";
+             $("#submitdata").click(function () {
 
-        $("#submitdata").click(function () {
-
-            if ($('#PatientVisitDate').parsley().validate()) {
-                var dob = $("#<%=PersonVisitDate.ClientID%>").val();
-                if (moment('' + dob + '').isAfter()) {
-                    toastr.error("Visit date cannot be a future date.");
-                    return false;
-                }
-                if (dob === "" || dob === null) {
-                    toastr.error("VisitDate is a required field");
-                }
-            }
-
-            $('#VisitDatedatepicker').data('DateTimePicker').hide();
-                   checkifFieldsHavevalue();
-                    var values = Answers.filter((x) => {return x.value.length > 0})
-            if (values != null) {
-                if (values.length > 0) {
-                    addGBVScreeningEncounter(dob);
-
-                }
-                else {
-                    toastr.info("No data Saved since Fields are empty");
-                    window.location.href = '<%=ResolveClientUrl("~/CCC/patient/patientHome.aspx") %>';
-                }
+                 if ($('#datastep1').parsley().validate()) {
+                     var dob = $("#<%=PersonVisitDate.ClientID%>").val();
+                     if (moment('' + dob + '').isAfter()) {
+                         toastr.error("Visit date cannot be a future date.");
+                         return false;
+                     }
+                     if (dob === "" || dob === null) {
+                         toastr.error("VisitDate is a required field");
+                         return false;
+                     }
 
 
-            }
+                     
+                   
+                   $('#VisitDatedatepicker').data('DateTimePicker').hide();
+                   
+                     checkifFieldsHavevalue();
+                     var values = Answers.filter((x) => { return x.value.length > 0 })
+                     if (values != null) {
+                         if (values.length > 0) {
+                             addGBVScreeningEncounter(dob);
+
+                         }
+                         else {
+                             toastr.info("No data Saved since Fields are empty");
+                             window.location.href = '<%=ResolveClientUrl("~/CCC/patient/patientHome.aspx") %>';
+                         }
+
+
+                     }
+                 }
             else {
-                return;
+                return false;
             }
                    //addUpdateDepressionScreeningData();
-                  //getDepressionScreeningData();                   
-                
-            
-            
-      
-       
-       
-        
-        });
-     var enrollmentDate = "<%=DateOfEnrollment%>";
-
+                 //getDepressionScreeningData();                   
+          });
 
 
     });
-
+    function Reset() {
+       
+        $('input:checked').removeAttr('checked');
+    
+       
+    }
     function checkifFieldsHavevalue() {
         $("#gbvscreening .gbvrbList").each(function () {
             var screeningValue = 0;

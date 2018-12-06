@@ -86,7 +86,7 @@
             if (categoryId > 1) {
                 $.ajax({
                     type: "POST",
-                    url: "../WebService/PatientClinicalNotesService.asmx/addPatientClinicalNotes",
+                    url: "../WebService/PatientClinicalNotesService.asmx/addPatientClinicalNotesByVisitId",
                     data: "{'patientId': '" + patientId + "','patientMasterVisitId': '" + patientMasterVisitId + "','serviceAreaId':'" + serviceAreaId + "','notesCategoryId':'" + categoryId + "','clinicalNotes':'" + clinicalNotes + "','userId':'" + userId + "'}",
                     contentType: "application/json; charset=utf-8",
                     dataType: "json",

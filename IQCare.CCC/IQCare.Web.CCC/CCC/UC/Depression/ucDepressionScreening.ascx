@@ -85,7 +85,6 @@
     var VisitDate = "<%=VisitDate%>";
 
     
-
     $(document).ready(function () {
         $('#VisitDatedatepicker').datetimepicker({
         format: 'DD-MMM-YYYY',
@@ -93,19 +92,19 @@
            allowInputToggle: true,
            useCurrent: false
 
-});
+    });
      
-     $('#VisitDatedatepicker').datetimepicker({
-            format: 'DD-MMM-YYYY',
-           allowInputToggle: true,
-           useCurrent: false
-        });
-
+ 
 
         $('#VisitDatedatepicker').on('dp.change', function (e) {
-
+            
+            if (e.date.isSame(e.oldDate, 'day')) {
+                $(this).data('DateTimePicker').hide();
+            }
               if( !e.oldDate || !e.date.isSame(e.oldDate, 'day')){
-                 $(this).data('DateTimePicker').hide();
+                  $(this).data('DateTimePicker').hide();
+                   
+                  Reset();
                  }
 
             var vDate = moment($("#PersonVisitDate").val(), 'DD-MMM-YYYYY').toDate();
@@ -125,40 +124,7 @@
 
         });
 
-        $("#submitdata").click(function () {
-
-            if ($('#PatientVisitDate').parsley().validate()) {
-                var dob = $("#<%=PersonVisitDate.ClientID%>").val();
-                if (moment('' + dob + '').isAfter()) {
-                    toastr.error("Visit date cannot be a future date.");
-                    return false;
-                } 
-          $('#VisitDatedatepicker').data('DateTimePicker').hide();
-                    
-                    checkifFieldsHavevalue();
-                    var values = Answers.filter((x) => {return x.value.length > 0})
-                if (values != null) {
-                    if (values.length > 0) {
-                        addDepressionScreeningEncounter(dob);
-                    }
-                    else {
-                        toastr.info("No data Saved since Fields are empty");
-                        window.location.href = '<%=ResolveClientUrl("~/CCC/patient/patientHome.aspx") %>';
-                    }
-
-
-                }
-                else {
-                    return;
-                }
-                   //addUpdateDepressionScreeningData();
-                  //getDepressionScreeningData();                   
-                
-            } 
-       
-       
         
-        });
      var enrollmentDate = "<%=DateOfEnrollment%>";
     //var currentStep;
     //$("#scmyWizard").on("actionclicked.fu.wizard", function (evt, data) {
@@ -169,9 +135,38 @@
     //    }
     //});
 
+        $("#submitdata").click(function () {
+
+        if ($('#datastep1').parsley().validate()) {
+            var dob = $("#<%=PersonVisitDate.ClientID%>").val();
+            if (moment('' + dob + '').isAfter()) {
+                toastr.error("Visit date cannot be a future date.");
+                return false;
+            }
+
+            $('#VisitDatedatepicker').data('DateTimePicker').hide();
+            checkifFieldsHavevalue();
+            var values = Answers.filter((x) => { return x.value.length > 0 })
+            if (values != null) {
+                if (values.length > 0) {
+                    addDepressionScreeningEncounter(dob);
+                }
+                else {
+                    toastr.info("No data Saved since Fields are empty");
+                    window.location.href = '<%=ResolveClientUrl("~/CCC/patient/patientHome.aspx") %>';
+                }
+            }
+        }
+       else {
+        return false;
+           }
+                  
+       });
 
 
     });
+    
+
     function checkifFieldsHavevalue() {
         
         $("#udepressionscreening .rbList").each(function () {
@@ -331,7 +326,7 @@
             var clinicalNotes = $(this).val();
             var serviceAreaId = 203;
             var userId = <%=userId%>;
-           ClinicalNotesData.push({ 'categoryId': categoryId, 'clinicalNotes': clinicalNotes, 'serviceAreaId': serviceAreaId, 'userId': userId  });
+           ClinicalNotesData.push({'notesCategoryId': categoryId, 'clinicalNotes': clinicalNotes, 'serviceAreaId': serviceAreaId, 'userId': userId  });
             
         });
 
@@ -416,6 +411,14 @@
                 toastr.error("Error selecting Depression Recommended Management");
             }
         });
+    }
+    function Reset() {
+       
+        $('input:checked').removeAttr('checked');
+        $("#udepressionscreening input[type=text]").val('');
+
+       // $("input[type=text]").val('');
+
     }
 
     $("#udepressionscreeningquestions input:radio").change(function (evt, data) {
