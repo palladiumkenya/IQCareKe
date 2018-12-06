@@ -101,7 +101,7 @@
     <None Remove="Scripts\2.0.0\07_Nairobi_Missing_Subcounties_Wards.sql" />
     <None Remove="Scripts\2.0.0\08_PatientConsent.sql" />
     <None Remove="Scripts\2.0.0\09_PersonKinContactsView.sql" />
-    <None Remove="Scripts\2.0.0\11_SO_CreateView_PmtctRefferealView.sql" />
+    <None Remove="Scripts\2.0.0\12_SO_CreateView_PmtctRefferealView.sql" />
   </ItemGroup>
 
   <ItemGroup>
@@ -199,7 +199,7 @@
     <EmbeddedResource Include="Scripts\2.0.0\07_Nairobi_Missing_Subcounties_Wards.sql" />
     <EmbeddedResource Include="Scripts\2.0.0\08_PatientConsent.sql" />
     <EmbeddedResource Include="Scripts\2.0.0\09_PersonKinContactsView.sql" />
-    <EmbeddedResource Include="Scripts\2.0.0\11_SO_CreateView_PmtctRefferealView.sql" />
+    <EmbeddedResource Include="Scripts\2.0.0\12_SO_CreateView_PmtctRefferealView.sql" />
   </ItemGroup>
 
   <ItemGroup>
