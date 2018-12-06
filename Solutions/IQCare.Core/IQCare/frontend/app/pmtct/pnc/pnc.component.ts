@@ -717,7 +717,7 @@ export class PncComponent implements OnInit {
         };
 
         const patientReferralEditCommand: PatientReferralEditCommand = {
-            Id: 0,
+            Id: this.diagnosisReferralAppointmentFormGroup.value[1]['id'],
             PatientId: this.patientId,
             PatientMasterVisitId: this.patientMasterVisitId,
             ReferredFrom: this.diagnosisReferralAppointmentFormGroup.value[1]['referredFrom'],

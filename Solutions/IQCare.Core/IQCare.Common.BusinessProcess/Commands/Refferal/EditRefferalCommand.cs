@@ -7,6 +7,7 @@ namespace IQCare.Common.BusinessProcess.Commands.Refferal
 {
     public class EditRefferalCommand:IRequest<Result<EditRefferalCommandResponse>>
     {
+        public int Id { get; set; }
         public DateTime ReferralDate { get; set; }
         public string ReferralReason { get; set; }
         public int ReferredBy { get; set; }
