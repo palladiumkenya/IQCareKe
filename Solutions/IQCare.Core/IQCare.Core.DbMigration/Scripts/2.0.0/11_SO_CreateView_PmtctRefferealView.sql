@@ -1,6 +1,6 @@
 
 IF OBJECT_ID('dbo.PmtctReferralView', 'V') IS NOT NULL
-    DROP VIEW [dbo].[PatientPreventiveServiceView]
+    DROP VIEW [dbo].[PmtctReferralView]
 GO
 
 
