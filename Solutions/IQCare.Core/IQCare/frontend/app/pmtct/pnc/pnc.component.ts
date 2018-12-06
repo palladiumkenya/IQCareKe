@@ -650,10 +650,48 @@ export class PncComponent implements OnInit {
             ManagementPlan: ''
         };
 
+        const pncPostNatalExamCommand: PostNatalExamCommand = {
+            Id: 0,
+            PatientId: this.patientId,
+            PatientMasterVisitId: this.patientMasterVisitId,
+            ExaminationTypeId: this.motherExaminationOptions[0]['masterId'],
+            CreateBy: this.userId,
+            DeleteFlag: false,
+            PostNatalExamResults: []
+        };
+
+        for (let i = 0; i < this.motherExaminationOptions.length; i++) {
+            pncPostNatalExamCommand.PostNatalExamResults.push({
+                ExamId: this.motherExaminationOptions[i].itemId,
+                FindingId: this.matHistory_PostNatalExam_FormGroup.value[1][this.motherExaminationOptions[i].itemName.toLowerCase()],
+                FindingsNotes: ''
+            });
+        }
+
+        const pncBabyExaminationCommand: PostNatalExamCommand = {
+            Id: 0,
+            PatientId: this.patientId,
+            PatientMasterVisitId: this.patientMasterVisitId,
+            ExaminationTypeId: this.babyExaminationControls[0]['masterId'],
+            CreateBy: this.userId,
+            DeleteFlag: false,
+            PostNatalExamResults: []
+        };
+
+        for (let i = 0; i < this.babyExaminationControls.length; i++) {
+            pncBabyExaminationCommand.PostNatalExamResults.push({
+                ExamId: this.babyExaminationControls[i].itemId,
+                FindingId: this.matHistory_PostNatalExam_FormGroup.value[2][this.babyExaminationControls[i].itemName.toLowerCase()],
+                FindingsNotes: ''
+            });
+        }
+
         const pncVisitDetailsEdit = this.pncService.editPncVisitDetails(visitDetailsEditCommand);
         const pncPatientDiagnosisEdit = this.pncService.updatePatientDiagnosis(patientDiagnosisEdit);
+        const pncPostnatalexamEdit = this.pncService.updatePncPostNatalExam(pncPostNatalExamCommand);
+        const pncbabyexamEdit = this.pncService.updatePncPostNatalExam(pncBabyExaminationCommand);
 
-        forkJoin([pncVisitDetailsEdit, pncPatientDiagnosisEdit]).subscribe(
+        forkJoin([pncVisitDetailsEdit, pncPatientDiagnosisEdit, pncPostnatalexamEdit, pncbabyexamEdit]).subscribe(
             (result) => {
                 console.log(result);
 

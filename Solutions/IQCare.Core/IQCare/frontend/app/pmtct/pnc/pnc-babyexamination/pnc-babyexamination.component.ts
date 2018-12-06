@@ -2,6 +2,8 @@ import { LookupItemView } from './../../../shared/_models/LookupItemView';
 import { Component, OnInit, EventEmitter, Output, Input } from '@angular/core';
 import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
 import { PncService } from '../../_services/pnc.service';
+import { SnotifyService } from 'ng-snotify';
+import { NotificationService } from '../../../shared/_services/notification.service';
 
 @Component({
     selector: 'app-pnc-babyexamination',
@@ -22,7 +24,9 @@ export class PncBabyexaminationComponent implements OnInit {
     @Output() notify: EventEmitter<FormGroup> = new EventEmitter<FormGroup>();
 
     constructor(private _formBuilder: FormBuilder,
-        private pncService: PncService) { }
+        private pncService: PncService,
+        private snotifyService: SnotifyService,
+        private notificationService: NotificationService) { }
 
     ngOnInit() {
         this.BabyExaminationForm = this._formBuilder.group({
@@ -52,6 +56,10 @@ export class PncBabyexaminationComponent implements OnInit {
 
                 this.BabyExaminationForm.get('babycondition').setValue(babyconditionValue[0].findingId);
                 this.BabyExaminationForm.get('breastfeeding').setValue(BreastfeedingValue[0].findingId);
+            },
+            (error) => {
+                this.snotifyService.error('Fetching baby examination ' + error, 'PNC Encounter',
+                    this.notificationService.getConfig());
             }
         );
     }

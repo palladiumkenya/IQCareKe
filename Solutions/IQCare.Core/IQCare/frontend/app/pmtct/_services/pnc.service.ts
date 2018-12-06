@@ -67,6 +67,14 @@ export class PncService {
             );
     }
 
+    public updatePncPostNatalExam(pncPostNatalExamCommand: PostNatalExamCommand): Observable<any> {
+        return this.http.post(this.API_PMTCT_URL
+            + '/api/PostNatalAndBabyExamination/UpdatePatientExamination', JSON.stringify(pncPostNatalExamCommand), httpOptions).pipe(
+                tap(updatePncPostNatalExam => this.errorHandler.log(`successfully edited postnatal exam`)),
+                catchError(this.errorHandler.handleError<any>('Error editing postnatal exam'))
+            );
+    }
+
     public savePncHivStatus(hivStatusCommand: HivStatusCommand, anyTests: any[]): Observable<any> {
         if (anyTests.length == 0) {
             return of([]);
@@ -156,8 +164,8 @@ export class PncService {
             );
     }
 
-    public getReferral(patientId: number, patientMasterVisitId: number): Observable<any[]> {
-        return this.http.get<any[]>(this.API_URL
+    public getReferral(patientId: number, patientMasterVisitId: number): Observable<any> {
+        return this.http.get<any>(this.API_URL
             + '/api/PatientReferralAndAppointment/GetReferral/' + patientId + '/' + patientMasterVisitId).pipe(
                 tap(getReferral => this.errorHandler.log(`successfully fetched referral`)),
                 catchError(this.errorHandler.handleError<any>('Error fetching referral'))
@@ -169,6 +177,14 @@ export class PncService {
             JSON.stringify(pncNextAppointmentCommand), httpOptions).pipe(
                 tap(savePncNextAppointment => this.errorHandler.log(`successfully saved pnc next appointment`)),
                 catchError(this.errorHandler.handleError<any>('Error saving pnc next appointment'))
+            );
+    }
+
+    public getAppointments(patientId: number, patientMasterVisitId: number): Observable<any> {
+        return this.http.get(this.API_URL
+            + '/api/PatientReferralAndAppointment/GetAppointment/' + patientId + '/' + patientMasterVisitId).pipe(
+                tap(getAppointments => this.errorHandler.log(`successfully fetched appointment`)),
+                catchError(this.errorHandler.handleError<any>('Error fetching appointment'))
             );
     }
 
