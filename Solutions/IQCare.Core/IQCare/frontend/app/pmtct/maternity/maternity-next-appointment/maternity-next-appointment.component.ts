@@ -31,7 +31,8 @@ export class MaternityNextAppointmentComponent implements OnInit {
     ngOnInit() {
         this.nextAppointmentFormGroup = this.formBuilder.group({
             nextAppointmentDate: new FormControl('', [Validators.required]),
-            remarks: new FormControl('none', [])
+            remarks: new FormControl(''),
+            id: new FormControl('')
         });
 
         this.notify.emit(this.nextAppointmentFormGroup);
@@ -48,6 +49,7 @@ export class MaternityNextAppointmentComponent implements OnInit {
                 if (result) {
                     this.nextAppointmentFormGroup.get('nextAppointmentDate').setValue(result.appointmentDate);
                     this.nextAppointmentFormGroup.get('remarks').setValue(result.description);
+                    this.nextAppointmentFormGroup.get('id').setValue(result.id);
                 }
             },
             (error) => {

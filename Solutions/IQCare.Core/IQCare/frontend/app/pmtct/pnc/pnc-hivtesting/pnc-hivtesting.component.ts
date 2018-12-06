@@ -186,10 +186,6 @@ export class PncHivtestingComponent implements OnInit, AfterViewInit {
             this.isHivTestingDone = false;
             this.HivTestingForm.controls['testType'].disable({ onlySelf: true });
             this.HivTestingForm.controls['finalTestResult'].disable({ onlySelf: true });
-
-            // set default value to null
-            //this.HivTestingForm.controls['testType'].setValue('');
-            //this.HivTestingForm.controls['finalTestResult'].setValue('');
         }
     }
 

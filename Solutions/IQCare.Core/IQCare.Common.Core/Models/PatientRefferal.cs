@@ -31,7 +31,7 @@ namespace IQCare.Common.Core.Models
         public string ReferralReason { get; private set; }
         public DateTime ? ReferralDate { get; private set; }
         public int ? ReferredBy { get; private set; }
-        public int DeleteFlag { get; private set; }
+        public bool DeleteFlag { get; private set; }
         public DateTime CreateDate { get; private set; }
         public int CreateBy { get; private set; }
 

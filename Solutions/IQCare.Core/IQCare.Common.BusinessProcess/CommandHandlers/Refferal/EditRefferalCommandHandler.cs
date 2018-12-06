@@ -25,9 +25,9 @@ namespace IQCare.Common.BusinessProcess.CommandHandlers.Refferal
             {
                 try
                 {
-                    PatientRefferal patientRefferal = await _unitOfWork.Repository<PatientRefferal>().FindAsync(x => x.PatientId == request.PatientRefferal.PatientId && x.PatientMasterVisitId == request.PatientRefferal.PatientMasterVisitId);
+                    PatientRefferal patientRefferal = await _unitOfWork.Repository<PatientRefferal>().FindAsync(x => x.PatientId == request.PatientId && x.PatientMasterVisitId == request.PatientMasterVisitId);
 
-                    var patientReferralEditInfo = request.PatientRefferal;
+                    var patientReferralEditInfo = request;
 
                     patientRefferal.UpdateReferralInfo(patientReferralEditInfo.ReferralDate, patientReferralEditInfo.ReferralReason, patientReferralEditInfo.ReferredBy, patientReferralEditInfo.ReferredFrom, patientReferralEditInfo.ReferredTo);
 
