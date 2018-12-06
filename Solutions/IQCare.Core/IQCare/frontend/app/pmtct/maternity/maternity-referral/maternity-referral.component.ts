@@ -42,16 +42,22 @@ export class MaternityReferralComponent implements OnInit {
         this.notify.emit(this.referralFormGroup);
 
         if (this.isEdit) {
-            // this.loadMaternityReferral();
+            this.loadMaternityReferral();
         }
     }
 
     loadMaternityReferral(): void {
         this.pncservice.getReferral(this.patientId, this.patientMasterVisitId).subscribe(
             (result) => {
-                console.log(result);
+                if (result) {
+                    this.referralFormGroup.get('referredFrom').setValue(result.referredFrom);
+                    this.referralFormGroup.get('referredTo').setValue(result.referredTo);
+                }
             },
-            (error) => { },
+            (error) => {
+                this.snotifyService.error('Fetching referal ' + error, 'Encounter',
+                    this.notificationService.getConfig());
+            },
             () => { }
         );
     }
