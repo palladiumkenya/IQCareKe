@@ -23,6 +23,7 @@ import { MaternityService } from '../_services/maternity.service';
 import { PatientScreeningCommand } from '../_models/PatientScreeningCommand';
 import { VisitDetailsCommand } from '../_models/visit-details-command';
 import * as moment from 'moment';
+import { VisitDetailsEditCommand } from '../_models/VisitDetailsEditCommand';
 
 @Component({
     selector: 'app-pnc',
@@ -309,6 +310,14 @@ export class PncComponent implements OnInit {
             return;
         }
 
+        if (this.isEdit) {
+            this.submitOnEdit();
+        } else {
+            this.submitOnAddNew();
+        }
+    }
+
+    submitOnAddNew(): void {
         const yesOption = this.yesnoOptions.filter(obj => obj.itemName == 'Yes');
         const noOption = this.yesnoOptions.filter(obj => obj.itemName == 'No');
         const naOption = this.yesNoNaOptions.filter(obj => obj.itemName == 'N/A');
@@ -624,5 +633,43 @@ export class PncComponent implements OnInit {
                     console.log(`complete`);
                 }
             );
+    }
+
+    submitOnEdit(): void {
+        const visitDetailsEditCommand: VisitDetailsEditCommand = {
+            Id: this.visitDetailsFormGroup.value[0]['id'],
+            VisitNumber: parseInt(this.visitDetailsFormGroup.value[0]['visitNumber'], 10),
+            VisitType: this.visitDetailsFormGroup.value[0]['visitType'],
+            DaysPostPartum: this.visitDetailsFormGroup.value[0]['dayPostPartum'],
+        };
+
+        const patientDiagnosisEdit = {
+            PatientMasterVisitId: this.patientMasterVisitId,
+            PatientId: this.patientId,
+            Diagnosis: this.diagnosisReferralAppointmentFormGroup.value[0]['diagnosis'],
+            ManagementPlan: ''
+        };
+
+        const pncVisitDetailsEdit = this.pncService.editPncVisitDetails(visitDetailsEditCommand);
+        const pncPatientDiagnosisEdit = this.pncService.updatePatientDiagnosis(patientDiagnosisEdit);
+
+        forkJoin([pncVisitDetailsEdit, pncPatientDiagnosisEdit]).subscribe(
+            (result) => {
+                console.log(result);
+
+                this.snotifyService.success('Successfully updated PNC encounter ', 'PNC', this.notificationService.getConfig());
+                this.zone.run(() => {
+                    this.zone.run(() => {
+                        this.router.navigate(['/dashboard/personhome/' + this.personId], { relativeTo: this.route });
+                    });
+                });
+            },
+            (error) => {
+                console.log(`error ` + error);
+            },
+            () => {
+
+            }
+        );
     }
 }

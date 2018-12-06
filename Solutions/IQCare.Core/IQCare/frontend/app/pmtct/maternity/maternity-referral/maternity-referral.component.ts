@@ -42,13 +42,14 @@ export class MaternityReferralComponent implements OnInit {
         this.notify.emit(this.referralFormGroup);
 
         if (this.isEdit) {
-            this.loadMaternityReferral();
+            // this.loadMaternityReferral();
         }
     }
 
     loadMaternityReferral(): void {
-        this.pncservice.getReferral().subscribe(
+        this.pncservice.getReferral(this.patientId, this.patientMasterVisitId).subscribe(
             (result) => {
+                console.log(result);
             },
             (error) => { },
             () => { }

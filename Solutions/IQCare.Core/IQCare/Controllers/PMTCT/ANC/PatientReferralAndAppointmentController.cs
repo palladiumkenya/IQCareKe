@@ -64,7 +64,7 @@ namespace IQCare.Controllers.PMTCT.ANC
             var response = await _mediator.Send(new PmtctReferralCommand{ PatientId = patientId, PatientMasterVisitId = patientMasterVisitId },HttpContext.RequestAborted);
             if (response.IsValid)
                 return Ok(response.Value);
-            return BadRequest(response.Value);
+            return BadRequest(response);
         }
 
 

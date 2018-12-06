@@ -53,19 +53,22 @@ export class PncCervicalcancerscreeningComponent implements OnInit {
         this.maternityService.getPatientScreening(this.patientId, this.patientMasterVisitId).subscribe(
             (result) => {
                 const cacxMethod = this.cervicalCancerScreeningMethodOptions.filter(obj => obj.masterName == 'CacxMethod');
+                if (result.length == 0) {
+                    const yesOption = this.yesnoOptions.filter(obj => obj.itemName == 'No');
+                    this.CervicalCancerScreeningForm.get('cervicalcancerscreening').setValue(yesOption[0].itemId);
+                } else {
+                    for (let i = 0; i < result.length; i++) {
+                        if (result[i].screeningTypeId == cacxMethod[0].masterId) {
+                            const yesOption = this.yesnoOptions.filter(obj => obj.itemName == 'Yes');
+                            const cacxMethodOption = this.cervicalCancerScreeningMethodOptions.filter(
+                                obj => obj.itemId == result[i].screeningCategoryId);
+                            const cacxResultOption = this.cervicalCancerScreeningResultsOptions.filter(
+                                obj => obj.itemId == result[i].screeningValueId);
 
-                for (let i = 0; i < result.length; i++) {
-                    if (result[i].screeningTypeId == cacxMethod[0].masterId) {
-                        const yesOption = this.yesnoOptions.filter(obj => obj.itemName == 'Yes');
-                        const cacxMethodOption = this.cervicalCancerScreeningMethodOptions.filter(
-                            obj => obj.itemId == result[i].screeningCategoryId);
-                        const cacxResultOption = this.cervicalCancerScreeningResultsOptions.filter(
-                            obj => obj.itemId == result[i].screeningValueId);
-
-                        this.CervicalCancerScreeningForm.get('cervicalcancerscreening').setValue(yesOption[0].itemId);
-                        this.CervicalCancerScreeningForm.get('method').setValue(cacxMethodOption[0].itemId);
-                        this.CervicalCancerScreeningForm.get('results').setValue(cacxResultOption[0].itemId);
-
+                            this.CervicalCancerScreeningForm.get('cervicalcancerscreening').setValue(yesOption[0].itemId);
+                            this.CervicalCancerScreeningForm.get('method').setValue(cacxMethodOption[0].itemId);
+                            this.CervicalCancerScreeningForm.get('results').setValue(cacxResultOption[0].itemId);
+                        }
                     }
                 }
             },

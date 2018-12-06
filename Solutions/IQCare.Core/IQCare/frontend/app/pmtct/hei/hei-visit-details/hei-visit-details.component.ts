@@ -5,7 +5,7 @@ import { Subscription } from 'rxjs/index';
 import { LookupItemService } from '../../../shared/_services/lookup-item.service';
 import { NotificationService } from '../../../shared/_services/notification.service';
 import { MaternityService } from '../../_services/maternity.service';
-import {HeiService} from '../../_services/hei.service';
+import { HeiService } from '../../_services/hei.service';
 
 @Component({
     selector: 'app-hei-visit-details',
@@ -24,12 +24,13 @@ export class HeiVisitDetailsComponent implements OnInit {
     public visitTypes: any[] = [];
 
     @Input('formtype') formtype: string;
-   // @Input('isEdit') isEdit: boolean;
+    @Input('isEdit') isEdit: boolean;
     @Input('visitDate') visitDate: string;
     @Input('visitType') visitType: string;
     @Input('patientId') patientId: number;
+    @Input('patientMasterVisitId') patientMasterVisitId: number;
     @Input('serviceAreaId') serviceAreaId: number;
-    @Output() notify: EventEmitter<FormGroup> = new EventEmitter<FormGroup>();
+    @Output() notify: EventEmitter<Object> = new EventEmitter<Object>();
 
     constructor(private _formBuilder: FormBuilder,
         private _lookupItemService: LookupItemService,
@@ -46,8 +47,9 @@ export class HeiVisitDetailsComponent implements OnInit {
             visitType: new FormControl('', [Validators.required]),
             visitDate: new FormControl('', [Validators.required]),
             cohort: new FormControl(''),
-            visitNumber: new FormControl('', [Validators.min(0) , Validators.max(40), Validators.required]),
-            dayPostPartum: new FormControl('', [Validators.required])
+            visitNumber: new FormControl('', [Validators.min(0), Validators.max(40), Validators.required]),
+            dayPostPartum: new FormControl('', [Validators.required]),
+            id: new FormControl('')
         });
 
         this.HeiVisitDetailsFormGroup.get('visitDate').setValue(this.visitDate);
@@ -92,6 +94,7 @@ export class HeiVisitDetailsComponent implements OnInit {
                 p => {
                     const visit = p;
                     console.log('visit data');
+                    console.log(p);
 
                     if (p.length) {
                         const Item = this.visitTypes.filter(x => x.itemName.includes('Follow Up'));
@@ -100,10 +103,21 @@ export class HeiVisitDetailsComponent implements OnInit {
                             console.log('visitNumber' + visit[0].visitNumber);
                         }
 
-                        if (this.formtype == 'anc') {
-                            this.HeiVisitDetailsFormGroup.get('visitNumber').patchValue(p.length + 1);
-                            const visitId = this.visitTypes.filter(x => x.itemName.includes('Initial'));
+                        // if (this.formtype == 'anc') {
+                        this.HeiVisitDetailsFormGroup.get('visitNumber').patchValue(p.length + 1);
+                        const visitId = this.visitTypes.filter(x => x.itemName.includes('Initial'));
+                        // }
+
+                        if (this.isEdit) {
+                            const y = p.filter(obj =>
+                                obj.patientId == this.patientId && obj.patientMasterVisitId == this.patientMasterVisitId);
+                            if (y) {
+                                this.HeiVisitDetailsFormGroup.get('dayPostPartum').setValue(y[0].daysPostPartum);
+                                this.HeiVisitDetailsFormGroup.get('visitNumber').setValue(y[0].visitNumber);
+                                this.HeiVisitDetailsFormGroup.get('id').setValue(y[0].id);
+                            }
                         }
+
                     } else {
                         this.HeiVisitDetailsFormGroup.get('visitNumber').patchValue(1);
                         const Item = this.visitTypes.filter(x => x.itemName.includes('Initial'));

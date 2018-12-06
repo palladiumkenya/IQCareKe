@@ -17,7 +17,9 @@
                                             <span matTooltip="Visit Details">Visit Details</span>
                                         </ng-template>
                                         <app-hei-visit-details (notify)="onVisitDetailsNotify($event)" [formtype]="formType"
-                                            [visitDate]="visitDate" [visitType]="visitType" [patientId]="patientId" [serviceAreaId]="serviceAreaId"></app-hei-visit-details>
+                                            [visitDate]="visitDate" [visitType]="visitType" [isEdit]="isEdit"
+                                            [patientMasterVisitId]="patientMasterVisitId" [patientId]="patientId"
+                                            [serviceAreaId]="serviceAreaId"></app-hei-visit-details>
 
                                         <div>
                                             <button mat-raised-button color="accent" matStepperNext type="button">Next</button>
