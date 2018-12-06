@@ -286,7 +286,7 @@ namespace IQCare.Web.CCC.WebService
             {
                 
                 Result = patientEncounter.SavePatientPreviousEncounter(PatientId, MasterVisitId, EncounterType, ServiceAreaId, Convert.ToInt32(Session["AppUserId"]),visitDate);
-                if (Result > 1)
+                if (Result > 0)
                 {
                     ResultOutcome.Result = MasterVisitId;
                     ResultOutcome.Msg = EncounterType + " Encounter Saved";

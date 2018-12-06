@@ -384,109 +384,110 @@
                 <%--$("#<%=weights.ClientID%>").val(parseInt(vitalList.Weight));
                 $("#<%=Heights.ClientID%>").val(parseInt(vitalList.Height));--%>
 
+                if (vitalList != null) {
+                    switch (vitalsType) {
 
-                switch (vitalsType) {
+                        case "weight":
 
-                    case "weight":
-                        
-                        current =parseInt($("#<%=weights.ClientID%>").val());
-                        previous = parseInt(vitalList.Weight);
+                            current = parseInt($("#<%=weights.ClientID%>").val());
+                            previous = parseInt(vitalList.Weight);
 
                         <%--$("#<%=weights.ClientID%>").val(parseInt(vitalList.Weight));
                         $("#<%=Heights.ClientID%>").val(parseInt(vitalList.Height));--%>
 
-                        if (current>previous && previous>0) {
-                            $("#weightAddons").empty("");
-                            $("#weightAddons").html("<strong class='label label-danger'>Gained " + (current - previous) + " Kgs</strong>");
-                            return false;
-                        } else if (current == previous) {
-                            $("#weightAddons").empty("");
-                            $("#weightAddons").append("<strong class='label label-danger'> No Change </strong>");
-                            return false;
-                        }
-                        else {
-                            $("#weightAddons").empty("");
-                            $("#weightAddons").append("<strong class='label label-danger'> Lost " + (previous -current) + " Kgs</strong>");
-                            return false;
-                        }
-                    break;
-                    case "height":
-                        current = parseInt($("#<%=Heights.ClientID%>").val());
-                        previous = parseInt(vitalList.Height);
-                        if (current > previous && previous>0) {
-                            $("#heightAddon").empty("");
-                            $("#heightAddon").html("<strong class='label label-danger'> Gained " + (current - previous) + " cms</strong>");
-                            return false;
-                        } else if (current == previous) {
-                            $("#heightAddon").empty("");
-                            $("#heightAddon").append("<strong class='label label-danger'> No Change </strong>");
-                            return false;
-                        }
-                        else {
-                            $("#heightAddon").empty("");
-                            $("#heightAddon").append("<strong class='label label-danger'> Lost " + (previous - current) + " cms</strong>");
-                            return false;
-                        }
-                        break;
-                    case "bmi":
-                        current = parseInt($("#<%=bmivalue.ClientID%>").val());
-                        previous = parseFloat(vitalList.BMI);
-                        var bmitransalated = "";
-                        if (previous < 18.5) { bmitransalated = '(Under weight)'; } else if (bmi >= 18.5 && bmi < 25) { bmitransalated = '(Normal weight)'; } else if (bmi >= 25 && bmi < 30) { bmitransalated = '(Over weight)'; } else { bmitransalated = '(Obese)'; }
-                        if (current > previous && previous>0) {
-                            $("#bmiAddon").empty("");
-                            $("#bmiAddon").html("<strong class='label label-danger'> " + bmitransalated + " cms</strong>");
-                            return false;
-                        } else if (current == previous) {
-                            $("#bmiAddon").empty("");
-                            $("#bmiAddon").append("<strong class='label label-danger'> No CHnage </strong>");
-                            return false;
-                        }
-                        else {
-                            $("#bmiAddon").empty("");
-                            $("#bmiAddon").append("<strong class='label label-danger'> " + bmitransalated+ " cms</strong>");
-                            return false;
-                        }
-                        break;
-                    case "distolic":
-                        current = parseInt($("#<%=distolic.ClientID%>").val());
-                        previous = parseInt(vitalList.Bpdiastolic);
+                            if (current > previous && previous > 0) {
+                                $("#weightAddons").empty("");
+                                $("#weightAddons").html("<strong class='label label-danger'>Gained " + (current - previous) + " Kgs</strong>");
+                                return false;
+                            } else if (current == previous) {
+                                $("#weightAddons").empty("");
+                                $("#weightAddons").append("<strong class='label label-danger'> No Change </strong>");
+                                return false;
+                            }
+                            else {
+                                $("#weightAddons").empty("");
+                                $("#weightAddons").append("<strong class='label label-danger'> Lost " + (previous - current) + " Kgs</strong>");
+                                return false;
+                            }
+                            break;
+                        case "height":
+                            current = parseInt($("#<%=Heights.ClientID%>").val());
+                            previous = parseInt(vitalList.Height);
+                            if (current > previous && previous > 0) {
+                                $("#heightAddon").empty("");
+                                $("#heightAddon").html("<strong class='label label-danger'> Gained " + (current - previous) + " cms</strong>");
+                                return false;
+                            } else if (current == previous) {
+                                $("#heightAddon").empty("");
+                                $("#heightAddon").append("<strong class='label label-danger'> No Change </strong>");
+                                return false;
+                            }
+                            else {
+                                $("#heightAddon").empty("");
+                                $("#heightAddon").append("<strong class='label label-danger'> Lost " + (previous - current) + " cms</strong>");
+                                return false;
+                            }
+                            break;
+                        case "bmi":
+                            current = parseInt($("#<%=bmivalue.ClientID%>").val());
+                            previous = parseFloat(vitalList.BMI);
+                            var bmitransalated = "";
+                            if (previous < 18.5) { bmitransalated = '(Under weight)'; } else if (bmi >= 18.5 && bmi < 25) { bmitransalated = '(Normal weight)'; } else if (bmi >= 25 && bmi < 30) { bmitransalated = '(Over weight)'; } else { bmitransalated = '(Obese)'; }
+                            if (current > previous && previous > 0) {
+                                $("#bmiAddon").empty("");
+                                $("#bmiAddon").html("<strong class='label label-danger'> " + bmitransalated + " cms</strong>");
+                                return false;
+                            } else if (current == previous) {
+                                $("#bmiAddon").empty("");
+                                $("#bmiAddon").append("<strong class='label label-danger'> No CHnage </strong>");
+                                return false;
+                            }
+                            else {
+                                $("#bmiAddon").empty("");
+                                $("#bmiAddon").append("<strong class='label label-danger'> " + bmitransalated + " cms</strong>");
+                                return false;
+                            }
+                            break;
+                        case "distolic":
+                            current = parseInt($("#<%=distolic.ClientID%>").val());
+                            previous = parseInt(vitalList.Bpdiastolic);
 
-                        if (current > previous && previous>0) {
-                            $("#distolicAddon").empty("");
-                            $("#distolicAddon").html("<strong class='label label-danger'> Increased " + (current - previous) + " mm[Hg]</strong>");
-                            return false;
-                        } else if (current == previous) {
-                            $("#distolicAddon").empty("");
-                            $("#distolicAddon").append("<strong class='label label-danger'> No Change </strong>");
-                            return false;
-                        }
-                        else {
-                            $("#distolicAddon").empty("");
-                            $("#distolicAddon").append("<strong class='label label-danger'> Reduced " + (previous - current) + " mm[Hg]</strong>");
-                            return false;
-                        }
-                        break;
-                    case "systolic":
-                        current = parseInt($("#<%=systolic.ClientID%>").val());
-                        previous = parseInt(vitalList.BpSystolic);
-                        if (current > previous && previous>0) {
-                            $("#systolicAddon").empty("");
-                            $("#systolicAddon").html("<strong class='label label-danger'> Increased " + (current - previous) + " mm[Hg]</strong>");
-                            return false;
-                        } else if (current == previous) {
-                            $("#systolicAddon").empty("");
-                            $("#systolicAddon").append("<strong class='label label-danger'> No Change </strong>");
-                            return false;
-                        }
-                        else {
-                            $("#systolicAddon").empty("");
-                            $("#systolicAddon").append("<strong class='label label-danger'> Reduced " + (previous - current) + " mm[Hg]</strong>");
-                            return false;
-                        }
-                        break;
-                default:
+                            if (current > previous && previous > 0) {
+                                $("#distolicAddon").empty("");
+                                $("#distolicAddon").html("<strong class='label label-danger'> Increased " + (current - previous) + " mm[Hg]</strong>");
+                                return false;
+                            } else if (current == previous) {
+                                $("#distolicAddon").empty("");
+                                $("#distolicAddon").append("<strong class='label label-danger'> No Change </strong>");
+                                return false;
+                            }
+                            else {
+                                $("#distolicAddon").empty("");
+                                $("#distolicAddon").append("<strong class='label label-danger'> Reduced " + (previous - current) + " mm[Hg]</strong>");
+                                return false;
+                            }
+                            break;
+                        case "systolic":
+                            current = parseInt($("#<%=systolic.ClientID%>").val());
+                            previous = parseInt(vitalList.BpSystolic);
+                            if (current > previous && previous > 0) {
+                                $("#systolicAddon").empty("");
+                                $("#systolicAddon").html("<strong class='label label-danger'> Increased " + (current - previous) + " mm[Hg]</strong>");
+                                return false;
+                            } else if (current == previous) {
+                                $("#systolicAddon").empty("");
+                                $("#systolicAddon").append("<strong class='label label-danger'> No Change </strong>");
+                                return false;
+                            }
+                            else {
+                                $("#systolicAddon").empty("");
+                                $("#systolicAddon").append("<strong class='label label-danger'> Reduced " + (previous - current) + " mm[Hg]</strong>");
+                                return false;
+                            }
+                            break;
+                        default:
 
+                    }
                 }
                 // <%--window.location.href('<%=ResolveClientUrl("~/CCC/patient/PatientHome.aspx")%>');--%>
             },
