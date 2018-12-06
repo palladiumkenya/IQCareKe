@@ -23,13 +23,22 @@ namespace IQCare.Lab.WebApi.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> GetLabTests([FromBody] string[] labTests)
+        public async Task<IActionResult> GetFilteredLabTests([FromBody] string[] labTests)
         {
-            var response = await _mediator.Send(new GetLabTestsCommand()
+            var response = await _mediator.Send(new GetLabTestsCommand
             {
                 LabTests = labTests
             }, Request.HttpContext.RequestAborted);
 
+            if (response.IsValid)
+                return Ok(response.Value.Select(l => new KeyValuePair<string, LabTestViewModel>(l.Name, l)).ToList());
+            return BadRequest(response);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> GetAllLabTests()
+        {
+            var response = await _mediator.Send(new GetLabTestsCommand(), Request.HttpContext.RequestAborted);
             if (response.IsValid)
                 return Ok(response.Value);
             return BadRequest(response);

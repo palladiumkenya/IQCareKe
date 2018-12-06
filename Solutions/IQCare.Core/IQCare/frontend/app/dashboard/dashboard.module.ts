@@ -26,6 +26,8 @@ import { SharedModule } from '../shared/shared.module';
 import { EnrollmentService } from '../registration/_services/enrollment.service';
 import { ChronichIllnessComponent } from './chronich-illness/chronich-illness.component';
 import { PatientRelationshipsComponent } from './patient-relationships/patient-relationships.component';
+import { PatientAllergiesComponent } from './patient-allergies/patient-allergies.component';
+import { PatientAppointmentComponent } from './patient-appointment/patient-appointment.component';
 
 @NgModule({
     imports: [
@@ -57,7 +59,9 @@ import { PatientRelationshipsComponent } from './patient-relationships/patient-r
         ServicesListComponent,
         EnrollmentServicesComponent,
         ChronichIllnessComponent,
-        PatientRelationshipsComponent
+        PatientRelationshipsComponent,
+        PatientAllergiesComponent,
+        PatientAppointmentComponent
     ],
     providers: [
         NotificationService,

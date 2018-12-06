@@ -249,16 +249,14 @@ export class HeiComponent implements OnInit {
 
         this.heiService.getHeiLabTests().subscribe(
             (result) => {
-                const labTestsList = result['labTestsList'];
-                console.log(result);
-                for (let i = 0; i < labTestsList.length; i++) {
-                    const key = labTestsList[i]['key'];
-                    if (labTestsList[i]['key'] == 'PCR') {
-                        this.pcrLabTest = labTestsList[i]['value'];
-                    } else if (labTestsList[i]['key'] == 'Viral Load') {
-                        this.viralLoadLabTest = labTestsList[i]['value'];
-                    } else if (labTestsList[i]['key'] == 'HIV Rapid Test') {
-                        this.antibodyLabTest = labTestsList[i]['value'];
+                console.log("Hei Lab Tests "+ result);
+                for (let i = 0; i < result.length; i++) {
+                    if (result[i].key == 'PCR') {
+                        this.pcrLabTest = result[i].value
+                    } else if (result[i].key == 'Viral Load') {
+                        this.viralLoadLabTest = result[i].value
+                    } else if (result[i].key == 'HIV Rapid Test') {
+                        this.antibodyLabTest = result[i].value
                     }
                 }
             }
@@ -429,9 +427,9 @@ export class HeiComponent implements OnInit {
                     || this.hivTestingFormGroup[i][j]['testtype']['itemName'] == 'Repeat confirmatory PCR (for +ve)'
                     || this.hivTestingFormGroup[i][j]['testtype']['itemName'] == 'Confirmatory PCR (for  +ve)'
                 ) {
-                    labTestId = this.pcrLabTest[0]['id'];
+                    labTestId = this.pcrLabTest.id;
                     latTestNotes = this.hivTestingFormGroup[i][j]['comments'];
-                    labTestName = this.pcrLabTest[0]['name'];
+                    labTestName = this.pcrLabTest.name;
 
                     this.heiService.getLabTestPametersByLabTestId(labTestId).subscribe(
                         (res) => {
@@ -440,9 +438,9 @@ export class HeiComponent implements OnInit {
                     );
                     // this.pcrLabTestParameters
                 } else if (this.hivTestingFormGroup[i][j]['testtype']['itemName'] == 'Baseline Viral Load (for +ve)') {
-                    labTestId = this.viralLoadLabTest[0]['id'];
+                    labTestId = this.viralLoadLabTest.id;
                     latTestNotes = this.hivTestingFormGroup[i][j]['comments'];
-                    labTestName = this.viralLoadLabTest[0]['name'];
+                    labTestName = this.viralLoadLabTest.name;
 
                     this.heiService.getLabTestPametersByLabTestId(labTestId).subscribe(
                         (res) => {
@@ -450,9 +448,9 @@ export class HeiComponent implements OnInit {
                         }
                     );
                 } else if (this.hivTestingFormGroup[i][j]['testtype']['itemName'] == 'Final Antibody') {
-                    labTestId = this.antibodyLabTest[0]['id'];
+                    labTestId = this.antibodyLabTest.id
                     latTestNotes = this.hivTestingFormGroup[i][j]['comments'];
-                    labTestName = this.antibodyLabTest[0]['name'];
+                    labTestName = this.antibodyLabTest.name;
 
                     this.heiService.getLabTestPametersByLabTestId(labTestId).subscribe(
                         (res) => {

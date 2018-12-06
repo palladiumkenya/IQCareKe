@@ -28,6 +28,8 @@ namespace IQCare.Lab.Core.Models
             ClinicalOrderNotes = clincalOrderNotes;
             OrderStatus = orderStatus;
             PatientMasterVisitId = patientMasterId;
+            CreateDate = DateTime.Now;
+            CreatedBy = userId;
         }
 
         public int Id { get; private set; }
