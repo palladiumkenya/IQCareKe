@@ -72,7 +72,12 @@ BEGIN
 ALTER TABLE [dbo].[PatientMilestone]  Add AuditData [xml] null
 END
 
+GO
 
+IF EXISTS(Select * from sys.columns where Name=N'AchievedId'  AND Object_ID = Object_ID(N'PatientMilestone'))
+BEGIN
+Alter table [dbo].[PatientMilestone] ALTER COLUMN  AchievedId INT NULL
+END
 
 GO
 
