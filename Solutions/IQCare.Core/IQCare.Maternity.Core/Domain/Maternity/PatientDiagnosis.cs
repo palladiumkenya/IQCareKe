@@ -30,5 +30,11 @@ namespace IQCare.Maternity.Core.Domain.Maternity
         public int CreatedBy { get; private set; }
         public DateTime DateCreated { get; private set; }
         public bool DeleteFlag { get; private set; }
+
+        public void Update(string diagnosis, string managementPlan)
+        {
+            Diagnosis = diagnosis;
+            ManagementPlan = managementPlan;
+        }
     }
 }

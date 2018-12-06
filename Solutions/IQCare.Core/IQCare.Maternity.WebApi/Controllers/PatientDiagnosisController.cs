@@ -34,6 +34,15 @@ namespace IQCare.Maternity.WebApi.Controllers
             return BadRequest(result);
         }
 
+        [HttpPost]
+        public async Task<IActionResult> UpdateDiagnosis([FromBody] UpdatePatientDiagnosisCommand updatePatientDiagnosisCommand)
+        {
+            var response = await _mediator.Send(updatePatientDiagnosisCommand, HttpContext.RequestAborted);
+            if (response.IsValid)
+                return Ok(response.Value);
+            return BadRequest(response);
+        }
+
         [HttpGet("{Id}")]
         public async Task<object> GetDiagnosisInfoByPatientId(int id)
         {

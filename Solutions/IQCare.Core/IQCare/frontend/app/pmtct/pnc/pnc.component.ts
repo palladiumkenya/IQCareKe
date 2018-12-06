@@ -643,14 +643,21 @@ export class PncComponent implements OnInit {
             DaysPostPartum: this.visitDetailsFormGroup.value[0]['dayPostPartum'],
         };
 
-        const pncVisitDetailsEdit = this.pncService.editPncVisitDetails(visitDetailsEditCommand);
-        // const pncPostNatalExamEdit = this.pncService.editPncVisitDetails();
+        const patientDiagnosisEdit = {
+            PatientMasterVisitId: this.patientMasterVisitId,
+            PatientId: this.patientId,
+            Diagnosis: this.diagnosisReferralAppointmentFormGroup.value[0]['diagnosis'],
+            ManagementPlan: ''
+        };
 
-        forkJoin([pncVisitDetailsEdit]).subscribe(
+        const pncVisitDetailsEdit = this.pncService.editPncVisitDetails(visitDetailsEditCommand);
+        const pncPatientDiagnosisEdit = this.pncService.updatePatientDiagnosis(patientDiagnosisEdit);
+
+        forkJoin([pncVisitDetailsEdit, pncPatientDiagnosisEdit]).subscribe(
             (result) => {
                 console.log(result);
 
-                this.snotifyService.success('Successfully saved PNC encounter ', 'PNC', this.notificationService.getConfig());
+                this.snotifyService.success('Successfully updated PNC encounter ', 'PNC', this.notificationService.getConfig());
                 this.zone.run(() => {
                     this.zone.run(() => {
                         this.router.navigate(['/dashboard/personhome/' + this.personId], { relativeTo: this.route });

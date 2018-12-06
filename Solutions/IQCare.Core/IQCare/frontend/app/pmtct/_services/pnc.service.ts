@@ -140,6 +140,14 @@ export class PncService {
             );
     }
 
+    public updatePatientDiagnosis(patientDiagnosisEdit: any) {
+        return this.http.post(this.API_PMTCT_URL
+            + '/api/PatientDiagnosis/UpdateDiagnosis', JSON.stringify(patientDiagnosisEdit), httpOptions).pipe(
+                tap(updatePatientDiagnosis => this.errorHandler.log(`successfully updated pnc diagnosis`)),
+                catchError(this.errorHandler.handleError<any>('Error editing pnc diagnosis'))
+            );
+    }
+
     public savePncReferral(pncReferralCommand: PatientReferralCommand): Observable<any> {
         return this.http.post<any>(this.API_URL + '/api/PatientReferralAndAppointment/AddPatientReferralInfo',
             JSON.stringify(pncReferralCommand), httpOptions).pipe(
