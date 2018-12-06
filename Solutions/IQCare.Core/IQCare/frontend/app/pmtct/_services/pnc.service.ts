@@ -17,6 +17,8 @@ import { PostNatalExamCommand } from '../_models/PostNatalExamCommand';
 import { FamilyPlanningMethodCommand } from '../_models/FamilyPlanningMethodCommand';
 import { PartnerTestingCommand } from '../_models/PartnerTestingCommand';
 import { DrugAdministrationCommand } from '../maternity/commands/drug-administration-command';
+import { PatientReferralEditCommand } from '../_models/PatientReferralEditCommand';
+import { PatientAppointmentEditCommand } from '../_models/PatientAppointmentEditCommand';
 
 const httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -172,6 +174,14 @@ export class PncService {
             );
     }
 
+    public updateReferral(patientReferralEditCommand: PatientReferralEditCommand): Observable<any> {
+        return this.http.post(this.API_URL
+            + '/api/PatientReferralAndAppointment/UpdatePatientReferralInfo', JSON.stringify(patientReferralEditCommand), httpOptions).pipe(
+                tap(updateReferral => this.errorHandler.log(`successfully updated referral`)),
+                catchError(this.errorHandler.handleError<any>('Error updating referral'))
+            );
+    }
+
     public savePncNextAppointment(pncNextAppointmentCommand: PatientAppointment): Observable<any> {
         return this.http.post<any>(this.API_URL + '/api/PatientReferralAndAppointment/AddPatientNextAppointment',
             JSON.stringify(pncNextAppointmentCommand), httpOptions).pipe(
@@ -185,6 +195,14 @@ export class PncService {
             + '/api/PatientReferralAndAppointment/GetAppointment/' + patientId + '/' + patientMasterVisitId).pipe(
                 tap(getAppointments => this.errorHandler.log(`successfully fetched appointment`)),
                 catchError(this.errorHandler.handleError<any>('Error fetching appointment'))
+            );
+    }
+
+    public updateAppointment(patientAppointmentEditCommand: PatientAppointmentEditCommand): Observable<any> {
+        return this.http.post(this.API_URL + '/api/PatientReferralAndAppointment/UpdatePatientNextAppointment',
+            JSON.stringify(patientAppointmentEditCommand), httpOptions).pipe(
+                tap(updateAppointment => this.errorHandler.log(`successfully updated appointment`)),
+                catchError(this.errorHandler.handleError<any>('Error updating appointment'))
             );
     }
 
