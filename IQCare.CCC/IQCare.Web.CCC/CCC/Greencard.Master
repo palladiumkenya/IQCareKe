@@ -217,6 +217,19 @@
 
 							   <asp:LinkButton ID="menuNewEncounter" ClientIDMode="Static" runat="server" OnClick="New_Encounter_Click" CssClass="list-group-item">
 								  <span class="fa fa-user-md fa-2x pull-left text-info"></span><strong class="text-info">New Clinical Encounter</strong></asp:LinkButton>
+
+                                     
+                               <asp:LinkButton ID="menuPharmacyPrescription" ClientIDMode="Static" runat="server" CssClass="list-group-item" OnClick="menuPharmacyPrescription_Click">
+								  <span class="fa fa-tint fa-2x pull-left text-info"></span><strong class="text-info">Pharmacy</strong></asp:LinkButton>
+
+                             <asp:LinkButton ID="menuLabOrder" ClientIDMode="Static" runat="server" CssClass="list-group-item" OnClick="menuLabOrder_Click">
+								  <span class="fa fa-flask fa-2x pull-left text-info"></span><strong class="text-info">Lab Order</strong></asp:LinkButton>
+
+
+                             <a href='<%=ResolveClientUrl("~/CCC/Appointment/PatientAppointments.aspx") %>' class="list-group-item" id="menuPatientAppointments">
+									<span class="fa fa-calendar fa-2x text-info pull-left"></span><strong class="text-info">Appointments </strong><span class="badge"><asp:Label ID="lblAppointments" runat="server">0</asp:Label></span>
+								</a>
+							  
                                
                                <asp:LinkButton ID="menuScreening" ClientIDMode="Static" runat="server" CssClass="list-group-item" OnClick="New_Depression_Click">
 								  <span class="fa fa-stethoscope fa-lg pull-left text-info  "></span><strong class="text-info">DepressionScreening</strong></asp:LinkButton>
@@ -240,12 +253,7 @@
 
                              <asp:LinkButton ID="menuFollowupEducation" ClientIDMode="Static" runat="server" OnClick="Follow_Up_Click" CssClass="list-group-item">
 								  <span class="fa fa-book fa-2x pull-left text-info"></span><strong class="text-info">Follow-up Education</strong></asp:LinkButton>
-                             
-                               <asp:LinkButton ID="menuPharmacyPrescription" ClientIDMode="Static" runat="server" CssClass="list-group-item" OnClick="menuPharmacyPrescription_Click">
-								  <span class="fa fa-tint fa-2x pull-left text-info"></span><strong class="text-info">Pharmacy</strong></asp:LinkButton>
-
-                             <asp:LinkButton ID="menuLabOrder" ClientIDMode="Static" runat="server" CssClass="list-group-item" OnClick="menuLabOrder_Click" >
-								  <span class="fa fa-flask fa-2x pull-left text-info"></span><strong class="text-info">Lab Order</strong></asp:LinkButton>
+                     
                              
 	 
 							
@@ -263,10 +271,7 @@
 								<!--<a  href="/CCC/Enrollment/ServiceEnrollment.aspx" class="list-group-item">
 									<span class="fa fa-arrow-circle-o-right fa-1x pull-left text-danger"></span> Enrollment  <span class="badge">8</span>
 								</a>-->
-								<a href='<%=ResolveClientUrl("~/CCC/Appointment/PatientAppointments.aspx") %>' class="list-group-item" id="menuPatientAppointments">
-									<span class="fa fa-calendar fa-2x text-info pull-left"></span><strong class="text-info">Appointments </strong><span class="badge"><asp:Label ID="lblAppointments" runat="server">0</asp:Label></span>
-								</a>
-							  
+								
 								<a href="<%=ResolveClientUrl("~/CCC/Patient/PatientCareEnded.aspx") %>" class="list-group-item" id="menuPatientCareEnded">
 									<span class="fa fa-user-times fa-2x pull-left text-danger"></span><strong class="text-info">Patient Care Ending</strong>
 								</a>

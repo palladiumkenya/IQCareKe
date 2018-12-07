@@ -1,5 +1,5 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="session2.aspx.cs" Inherits="IQCare.Web.CCC.UC.EnhanceAdherenceCounselling.session2" %>
-<%@ OutputCache duration="86400" varybyparam="none" %>
+
 <style>
     .mmrbList{float: right;}
     .mmas4-results{margin-bottom: 30px;}
@@ -466,7 +466,7 @@
             if (categoryId > 1) {
                 $.ajax({
                     type: "POST",
-                    url: "../WebService/PatientClinicalNotesService.asmx/addPatientClinicalNotes",
+                    url: "../WebService/PatientClinicalNotesService.asmx/addPatientClinicalNotesByVisitId",
                     data: "{'patientId': '" + patientId + "','patientMasterVisitId': '" + patientMasterVisitId + "','serviceAreaId':'" + serviceAreaId + "','notesCategoryId':'" + categoryId + "','clinicalNotes':'" + clinicalNotes + "','userId':'" + userId + "'}",
                     contentType: "application/json; charset=utf-8",
                     dataType: "json",
@@ -518,6 +518,7 @@
             dataType: "json",
             cache: false,
             success: function (response) {
+                var result = JSON.parse(response.d);
                 $.each(JSON.parse(response.d), function (index, value) {
                     inputnotes = this.ClinicalNotes;
                     if ($("#session2tb" + this.NotesCategoryId).length > 0) {
@@ -539,7 +540,11 @@
             dataType: "json",
             cache: false,
             success: function (response) {
+               
+                var result = JSON.parse(response.d);
+        
                 $.each(JSON.parse(response.d), function (index, value) {
+                  
                     if ($("#session2rb" + this.ScreeningCategoryId).length > 0) {
                         $("input:radio[name='session2rb" + this.ScreeningCategoryId + "'][value='" + this.ScreeningValueId + "']").attr("checked", true);
                     }

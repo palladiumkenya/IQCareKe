@@ -1,0 +1,29 @@
+<div class="mat-elevation-z1">
+  <table mat-table [dataSource]="LabTestDataSource">
+      <ng-container matColumnDef="test">
+        <th mat-header-cell *matHeaderCellDef> <strong>Lab Test</strong> </th>
+        <td mat-cell *matCellDef="let lab_test_data"> {{lab_test_data.test}} </td>
+      </ng-container>
+    
+      <ng-container matColumnDef="orderReason">
+        <th mat-header-cell *matHeaderCellDef><strong>Order Reason</strong>  </th>
+        <td mat-cell *matCellDef="let lab_test_data"> {{lab_test_data.orderReason }} </td>
+      </ng-container>
+    
+      <ng-container matColumnDef="testNotes">
+        <th mat-header-cell *matHeaderCellDef> <strong> Notes </strong>  </th>
+        <td mat-cell *matCellDef="let lab_test_data"> {{lab_test_data.testNotes}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="action">
+        <mat-cell *matCellDef="let row">
+            <button mat-raised-button class="mat-accent"><span class="fa fa-trash-o"> Delete</span>
+            </button>
+        </mat-cell>
+    </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="lab_test_displaycolumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: lab_test_displaycolumns;"></tr>
+    </table>
+    <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+</div>

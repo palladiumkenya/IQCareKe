@@ -11,18 +11,18 @@ using IQCare.Maternity.BusinessProcess.Queries.PNC;
 namespace IQCare.Maternity.WebApi.Controllers
 {
     [Produces("application/json")]
-    [Route("api/AddFamilyPlanningMetods")]
-    public class AddFamilyPlanningMethodsController : Controller
+    [Route("api/[controller]/[action]")]
+    public class FamilyPlanningMethodsController : Controller
     {
         IMediator _mediator;
-        public AddFamilyPlanningMethodsController(IMediator mediator)
+        public FamilyPlanningMethodsController(IMediator mediator)
         {
             _mediator = mediator;
         }
 
 
         [HttpPost]
-        public async Task<object> AddFamilyPlanning([FromBody] AddPatientFamilyPlanningMethodCommand command)
+        public async Task<IActionResult> AddFamilyPlanning([FromBody] AddPatientFamilyPlanningMethodCommand command)
         {
             if (!ModelState.IsValid)
                 return BadRequest(command);
@@ -33,6 +33,19 @@ namespace IQCare.Maternity.WebApi.Controllers
 
             return BadRequest(result);
         }
+
+        [HttpPost]
+        public async Task<IActionResult> UpdateFamilyPlanningMethod([FromBody]UpdatePatientFamilyPlanningMethodCommand updatePatientFamilyPlanningMethodCommand)
+        {
+            if (!ModelState.IsValid)
+                return BadRequest(updatePatientFamilyPlanningMethodCommand);
+            var response = await _mediator.Send(updatePatientFamilyPlanningMethodCommand,
+                Request.HttpContext.RequestAborted);
+            if (response.IsValid)
+                return Ok(response.Value);
+            return BadRequest(response);
+        }
+
         [HttpGet("{Id}")]
         public async Task<object> GetFamilyPlanningInfo(int Id)
         {

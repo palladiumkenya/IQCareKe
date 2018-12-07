@@ -42,6 +42,17 @@ namespace IQCare.Controllers.PMTCT.ANC
             return BadRequest(response);
         }
 
+        [HttpPost]
+        public async Task<IActionResult> UpdatePatientNextAppointment([FromBody] EditAppointmentCommand editAppointmentCommand)
+        {
+            if (!ModelState.IsValid)
+                return BadRequest(editAppointmentCommand);
+            var response = await _mediator.Send(editAppointmentCommand, Request.HttpContext.RequestAborted);
+            if (response.IsValid)
+                return Ok(response.Value);
+            return BadRequest(response);
+        }
+
         [HttpGet("{patientId}/{patientMasterVisitId}")]
         public async Task<IActionResult> GetAppointment(int patientId, int patientMasterVisitId)
         {
@@ -79,6 +90,18 @@ namespace IQCare.Controllers.PMTCT.ANC
             if (response.IsValid)
                 return Ok(response.Value);
 
+            return BadRequest(response);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> UpdatePatientReferralInfo([FromBody]EditRefferalCommand editRefferalCommand)
+        {
+            if (!ModelState.IsValid)
+                return BadRequest(editRefferalCommand);
+
+            var response = await _mediator.Send(editRefferalCommand, Request.HttpContext.RequestAborted);
+            if (response.IsValid)
+                return Ok(response.Value);
             return BadRequest(response);
         }
 
