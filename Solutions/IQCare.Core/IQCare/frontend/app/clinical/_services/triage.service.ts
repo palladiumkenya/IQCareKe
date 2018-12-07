@@ -59,7 +59,6 @@ export class TriageService {
     public getPersonDetails(personId:number) : any {
        var personDetails : PersonView = null;
       this.personHomeService.getPatientByPersonId(personId).subscribe(person=>{
-          console.log(">> Person "+person.personId);
           personDetails = person
           return personDetails;
       });

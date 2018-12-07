@@ -14,7 +14,7 @@ export interface AddLabTestResultCommand {
      ResultOption : number;
      ResultUnit : string
      ResultUnitId ? : number;
-    ResultConfigId ? : number;
-    Undetectable : boolean;
+     ResultConfigId ? : number;
+     Undetectable : boolean;
      DetectionLimit : number;
 }
