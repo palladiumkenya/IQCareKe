@@ -14,7 +14,7 @@ using System.Threading.Tasks;
 
 namespace IQCare.Maternity.BusinessProcess.CommandHandlers
 {
-    class AddPatientFamilyPlanningCommandHandler : IRequestHandler<AddPatientFamilyPlanningCommand, Result<AddFamilyPlaaningResultsResponse>>
+    public class AddPatientFamilyPlanningCommandHandler : IRequestHandler<AddPatientFamilyPlanningCommand, Result<AddFamilyPlaaningResultsResponse>>
     {
         IMaternityUnitOfWork _maternityUnitOfWork;
         IMapper _mapper;

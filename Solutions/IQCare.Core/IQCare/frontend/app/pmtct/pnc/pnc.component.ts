@@ -26,6 +26,8 @@ import * as moment from 'moment';
 import { VisitDetailsEditCommand } from '../_models/VisitDetailsEditCommand';
 import { PatientReferralEditCommand } from '../_models/PatientReferralEditCommand';
 import { PatientAppointmentEditCommand } from '../_models/PatientAppointmentEditCommand';
+import { FamilyPlanningEditCommand } from '../_models/FamilyPlanningEditCommand';
+import { PatientFamilyPlanningMethodEditCommand } from '../_models/PatientFamilyPlanningMethodEditCommand';
 
 @Component({
     selector: 'app-pnc',
@@ -736,6 +738,22 @@ export class PncComponent implements OnInit {
             Description: this.diagnosisReferralAppointmentFormGroup.value[2]['remarks']
         };
 
+        const familyPlanningEditCommand: FamilyPlanningEditCommand = {
+            Id: this.cervicalCancerScreeningFormGroup.value[1]['id'],
+            FamilyPlanningStatusId: this.cervicalCancerScreeningFormGroup.value[1]['onFamilyPlanning'],
+            ReasonNotOnFPId: 0
+        };
+
+        const fpMethodId = this.cervicalCancerScreeningFormGroup.value[1]['fpMethodId'];
+        const updateFamilyPlanningMethodCommand: PatientFamilyPlanningMethodEditCommand = {
+            Id: fpMethodId ? fpMethodId : 0,
+            FPMethodId: this.cervicalCancerScreeningFormGroup.value[1]['familyPlanningMethod'],
+            PatientId: this.patientId,
+            PatientFPId: this.cervicalCancerScreeningFormGroup.value[1]['id'],
+            UserId: this.userId
+        };
+
+
         const pncVisitDetailsEdit = this.pncService.editPncVisitDetails(visitDetailsEditCommand);
         const pncPatientDiagnosisEdit = this.pncService.updatePatientDiagnosis(patientDiagnosisEdit);
         const pncPostnatalexamEdit = this.pncService.updatePncPostNatalExam(pncPostNatalExamCommand);
@@ -743,10 +761,13 @@ export class PncComponent implements OnInit {
         const pncHivStatus = this.pncService.savePncHivStatus(hivStatusCommand, this.hiv_status_table_data);
         const pncReferralEdit = this.pncService.updateReferral(patientReferralEditCommand);
         const pncAppointmentEdit = this.pncService.updateAppointment(patientAppointmentEditCommand);
+        const pncFamilyPlanningEdit = this.pncService.updateFamilyPlanning(familyPlanningEditCommand);
+        const pncFamilyPlanningMethodEdit = this.pncService.updatePncFamilyPlanningMethod(updateFamilyPlanningMethodCommand);
 
         forkJoin([pncVisitDetailsEdit, pncPatientDiagnosisEdit,
             pncPostnatalexamEdit, pncbabyexamEdit, pncHivStatus,
-            pncReferralEdit, pncAppointmentEdit]).subscribe(
+            pncReferralEdit, pncAppointmentEdit, pncFamilyPlanningEdit,
+            pncFamilyPlanningMethodEdit]).subscribe(
                 (result) => {
                     console.log(result);
 
