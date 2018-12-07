@@ -101,7 +101,7 @@
                                             </div>
                                         </div>
                                         <div class="col-md-12">
-                                            <div style="min-height: 10px; max-height: 550px; overflow-y: auto; overflow-x: hidden;">
+                                            <div style="min-height: 10px; max-height: 550px; overflow-y: auto; overflow-x: auto;">
                                                 <table id="dtlDrugPrescription" class="table table-bordered table-striped" style="width:100%">
                                                     <thead>
                                                         <tr>
@@ -1002,6 +1002,7 @@
                 for (var i = 0; i < selectedRegimen.length; i++) {
                     sumSelectedRegimen += selectedRegimen.charCodeAt(i);
                 }
+               
 
             }
             catch (err) {
