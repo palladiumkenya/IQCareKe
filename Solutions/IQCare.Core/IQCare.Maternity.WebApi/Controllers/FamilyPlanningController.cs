@@ -20,9 +20,8 @@ namespace IQCare.Maternity.WebApi.Controllers
             _mediator = mediator;
         }
 
-
         [HttpPost]
-        public async Task<object> AddFamilyPlanning([FromBody] AddPatientFamilyPlanningCommand command)
+        public async Task<IActionResult> AddFamilyPlanning([FromBody] AddPatientFamilyPlanningCommand command)
         {
             if (!ModelState.IsValid)
                 return BadRequest(command);
@@ -33,6 +32,19 @@ namespace IQCare.Maternity.WebApi.Controllers
 
             return BadRequest(result);
         }
+
+        [HttpPost("UpdateFamilyPlanning")]
+        public async Task<IActionResult> UpdateFamilyPlanning([FromBody]UpdatePatientFamilyPlanningCommand updatePatientFamilyPlanningCommand)
+        {
+            if (!ModelState.IsValid)
+                return BadRequest(updatePatientFamilyPlanningCommand);
+
+            var response = await _mediator.Send(updatePatientFamilyPlanningCommand, Request.HttpContext.RequestAborted);
+            if (response.IsValid)
+                return Ok(response.Value);
+            return BadRequest(response);
+        }
+
         [HttpGet("{Id}")]
         public async Task<object> Get(int Id)
         {

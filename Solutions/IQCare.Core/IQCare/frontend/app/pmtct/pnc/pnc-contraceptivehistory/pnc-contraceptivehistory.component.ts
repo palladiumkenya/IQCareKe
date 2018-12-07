@@ -31,7 +31,9 @@ export class PncContraceptivehistoryComponent implements OnInit {
         this.ContraceptiveHistoryForm = this._formBuilder.group({
             onFamilyPlanning: new FormControl('', [Validators.required]),
             familyPlanningMethod: new FormControl('', [Validators.required]),
-            pncExercisesGiven: new FormControl('', [Validators.required])
+            pncExercisesGiven: new FormControl('', [Validators.required]),
+            id: new FormControl(''),
+            fpMethodId: new FormControl('')
         });
 
         const { yesnoOptions, familyPlanningMethodOptions } = this.contraceptiveHistoryExercise[0];
@@ -48,15 +50,16 @@ export class PncContraceptivehistoryComponent implements OnInit {
     loadPncContraceptiviveHistory(): void {
         this.pncservice.getFamilyPlanning(this.patientId).subscribe(
             (result) => {
-                console.log()
                 for (let i = 0; i < result.length; i++) {
                     if (result[i].patientMasterVisitId == this.patientMasterVisitId) {
                         this.ContraceptiveHistoryForm.get('onFamilyPlanning').setValue(result[i].familyPlanningStatusId);
+                        this.ContraceptiveHistoryForm.get('id').setValue(result[i].id);
                         this.pncservice.getFamilyPlanningMethod(this.patientId).subscribe(
                             (res) => {
                                 for (let j = 0; j < res.length; j++) {
                                     if (res[j].patientFPId == result[i].id) {
                                         this.ContraceptiveHistoryForm.get('familyPlanningMethod').setValue(res[j].fpMethodId);
+                                        this.ContraceptiveHistoryForm.get('fpMethodId').setValue(res[j].id);
                                     }
                                 }
                             },
