@@ -101,6 +101,8 @@
         var contain = "";
     var Answers = new Array;
     var VisitDate = "<%=VisitDate%>";
+     
+
         $(document).ready(function () {
         $('#VisitDatedatepicker').datetimepicker({
         format: 'DD-MMM-YYYY',
@@ -118,10 +120,13 @@
 
 
         $('#VisitDatedatepicker').on('dp.change', function (e) {
+          
 
-              if( !e.oldDate || !e.date.isSame(e.oldDate, 'day')){
-                 $(this).data('DateTimePicker').hide();
-                 }
+            if (!e.oldDate || !e.date.isSame(e.oldDate, 'day')) {
+                   Reset();
+                  $(this).data('DateTimePicker').hide();
+                
+            }
 
             var vDate = moment($("#PersonVisitDate").val(), 'DD-MMM-YYYYY').toDate();
             var validDateOfVisit = moment(vDate).isBefore(enrollmentDate);
@@ -141,23 +146,24 @@
 
         });
 
-        $("#submitdata").click(function () {
+    $("#submitdata").click(function () {
 
-            if ($('#PatientVisitDate').parsley().validate()) {
-                var dob = $("#<%=PersonVisitDate.ClientID%>").val();
-                if (moment('' + dob + '').isAfter()) {
-                    toastr.error("Visit date cannot be a future date.");
-                    return false;
-                }
-                if (dob === "" || dob === null) {
-                    toastr.error("VisitDate is a required field");
-                }
-
+        if ($('#datastep1').parsley().validate()) {
+            var dob = $("#<%=PersonVisitDate.ClientID%>").val();
+            if (moment('' + dob + '').isAfter()) {
+                toastr.error("Visit date cannot be a future date.");
+                return false;
             }
-              
-                       $('#VisitDatedatepicker').data('DateTimePicker').hide();
-                    checkifFieldsHavevalue();
-               var values = Answers.filter((x) => { return x.value.length > 0 });
+            if (dob === "" || dob === null) {
+                toastr.error("VisitDate is a required field");
+            }
+
+
+
+            $('#VisitDatedatepicker').data('DateTimePicker').hide();
+         
+            checkifFieldsHavevalue();
+            var values = Answers.filter((x) => { return x.value.length > 0 });
             if (values != null) {
                 if (values.length > 0) {
                     addAlcoholScreeningEncounter(dob);
@@ -169,24 +175,29 @@
 
 
             }
+        }
             else {
-                return;
+            return false;
             }
                    //addUpdateDepressionScreeningData();
                   //getDepressionScreeningData();                   
-                
-          
-      
+     });
+
+
        
-       
-        
-        });
      var enrollmentDate = "<%=DateOfEnrollment%>";
 
 
 
     });
+    function Reset() {
+       
+        $('input:checked').removeAttr('checked');
+        $("#cageaidscreening input[type=text] ").val('');
+        $("#cageaidscreening textarea").val('');
+        // $("input[type=text]").val('');
 
+    }
     function checkifFieldsHavevalue() {
         $("#cageaidscreening .cagerbList").each(function () {
             var screeningValue = 0;
@@ -237,6 +248,7 @@
     //    }
     //});
 
+
     function addAlcoholScreeningEncounter (visitDate ) {
         var patientId = <%=PatientId%>;
      var dateOfVisit = $("#PersonVisitDate").val();
@@ -277,7 +289,11 @@
 
     function addUpdateCAGEAIDScreeningData(mastervisitid)
     {
-        var error = 0;
+      
+       var error = 0;
+        var ScreeningData = new Array;
+        var ClinicalNotesData = new Array;
+
         $("#cageaidscreening .cagerbList").each(function () {
             var screeningValue = 0;
             var screeningType = <%=screenTypeId%>;
@@ -290,10 +306,17 @@
             if (typeof checkedValue != 'undefined') {
                 screeningValue = checkedValue;
             }
+            ScreeningData.push({ 'Id': rdIdValue, 'screeningType': screeningType, 'screeningCategory': screeningCategory, 'screeningValue': screeningValue, 'userId': userId });
+
+        });
+        
+        if (ScreeningData.length > 0) {
+            var patientId = <%=PatientId%>;
+            var patientMasterVisitId = mastervisitid;
             $.ajax({
                 type: "POST",
-                url: "../WebService/PatientScreeningService.asmx/AddUpdateScreeningData",
-                data: "{'patientId': '" + patientId + "','patientMasterVisitId': '" + patientMasterVisitId + "','screeningType':'" + screeningType + "','screeningCategory':'" + screeningCategory + "','screeningValue':'" + screeningValue + "','userId':'" + userId + "'}",
+                url: "../WebService/PatientScreeningService.asmx/AddUpdateScreeningRecord",
+                data: "{'patientId': '" + patientId + "','patientMasterVisitId': '" + patientMasterVisitId + "','ScreeningData':'" + JSON.stringify(ScreeningData) + "'}",
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",
                 success: function (response) {
@@ -303,7 +326,7 @@
                     error = 1;
                 }
             });
-        });
+        }
         $("#cageaidscreening input[type=text]").each(function () {
             var categoryId = ($(this).attr('id')).replace('cage', '');
             var patientId = <%=PatientId%>;
@@ -311,10 +334,17 @@
             var clinicalNotes = $(this).val();
             var serviceAreaId = 203;
             var userId = <%=userId%>;
+            ClinicalNotesData.push({ 'notesCategoryId': categoryId, 'clinicalNotes': clinicalNotes, 'serviceAreaId': serviceAreaId, 'userId': userId });
+
+        });
+        if (ClinicalNotesData.length > 0) {
+            var patientId = <%=PatientId%>;
+            var patientMasterVisitId = mastervisitid;
+
             $.ajax({
                 type: "POST",
-                url: "../WebService/PatientClinicalNotesService.asmx/addPatientClinicalNotes",
-                data: "{'patientId': '" + patientId + "','patientMasterVisitId': '" + patientMasterVisitId + "','serviceAreaId':'" + serviceAreaId + "','notesCategoryId':'" + categoryId + "','clinicalNotes':'" + clinicalNotes + "','userId':'" + userId + "'}",
+                url: "../WebService/PatientClinicalNotesService.asmx/AddPatientClinicalNotesRecord",
+                data: "{'patientId': '" + patientId + "','patientMasterVisitId': '" + patientMasterVisitId + "','clinicaldata':'" + JSON.stringify(ClinicalNotesData) + "'}",
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",
                 success: function (response) {
@@ -324,7 +354,7 @@
                     error = 1;
                 }
             });
-        });
+        }
         $("#cageaidscreening textarea").each(function () {
             var categoryId = ($(this).attr('id')).replace('cage', '');
             var patientId = <%=PatientId%>;
@@ -332,20 +362,29 @@
             var clinicalNotes = $(this).val();
             var serviceAreaId = 203;
             var userId = <%=userId%>;
-            $.ajax({
-                type: "POST",
-                url: "../WebService/PatientClinicalNotesService.asmx/addPatientClinicalNotes",
-                data: "{'patientId': '" + patientId + "','patientMasterVisitId': '" + patientMasterVisitId + "','serviceAreaId':'" + serviceAreaId + "','notesCategoryId':'" + categoryId + "','clinicalNotes':'" + clinicalNotes + "','userId':'" + userId + "'}",
-                contentType: "application/json; charset=utf-8",
-                dataType: "json",
-                success: function (response) {
-                    error = 0;
-                },
-                error: function (response) {
-                    error = 1;
-                }
-            });
+
+            ClinicalNotesData.push({ 'notesCategoryId': categoryId, 'clinicalNotes': clinicalNotes, 'serviceAreaId': serviceAreaId, 'userId': userId });
         });
+            if (ClinicalNotesData.length > 0) {
+
+                var patientId = <%=PatientId%>;
+                var patientMasterVisitId = mastervisitid;
+
+                $.ajax({
+                    type: "POST",
+                    url: "../WebService/PatientClinicalNotesService.asmx/AddPatientClinicalNotesRecord",
+                    data: "{'patientId': '" + patientId + "','patientMasterVisitId': '" + patientMasterVisitId + "','clinicaldata':'" + JSON.stringify(ClinicalNotesData) + "'}",
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    success: function (response) {
+                        error = 0;
+                    },
+                    error: function (response) {
+                        error = 1;
+                    }
+
+                });
+            }
         if (error == 0) {
             toastr.success("Alcohol and Drug Use Screening Saved");
              window.location.href = '<%=ResolveClientUrl("~/CCC/patient/patientHome.aspx") %>';

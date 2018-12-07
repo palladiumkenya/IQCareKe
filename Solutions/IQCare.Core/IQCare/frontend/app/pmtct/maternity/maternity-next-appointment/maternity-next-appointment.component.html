@@ -10,8 +10,8 @@
     <div class="row">
         <div class="col-md-4 col-xs-12 col-sm-12">
             <mat-form-field class="col-md-12">
-                <input [min]="minDate" formControlName="nextAppointmentDate" matInput [matDatepicker]="nextAppointmentDate" placeholder="Next appointment Date"
-                    id="nextAppointmentDate" name="nextAppointmentDate" (click)="nextAppointmentDate.open()">
+                <input [min]="minDate" formControlName="nextAppointmentDate" matInput [matDatepicker]="nextAppointmentDate"
+                    placeholder="Next appointment Date" id="nextAppointmentDate" name="nextAppointmentDate" (click)="nextAppointmentDate.open()">
                 <mat-datepicker-toggle matSuffix [for]="nextAppointmentDate"></mat-datepicker-toggle>
                 <mat-datepicker #nextAppointmentDate></mat-datepicker>
             </mat-form-field>
@@ -23,7 +23,7 @@
     <div class="row">
         <div class="col-md-12">
             <mat-form-field class="col-md-12">
-                <textarea formControlName="remarks" matInput placeholder="Remarks" required></textarea>
+                <textarea formControlName="remarks" id="remarks" name="remarks" matInput placeholder="Remarks"></textarea>
             </mat-form-field>
         </div>
     </div>

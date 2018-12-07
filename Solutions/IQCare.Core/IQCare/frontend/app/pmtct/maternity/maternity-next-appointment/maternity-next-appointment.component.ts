@@ -1,3 +1,4 @@
+import { PncService } from './../../_services/pnc.service';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { NotificationService } from '../../../shared/_services/notification.service';
@@ -23,16 +24,38 @@ export class MaternityNextAppointmentComponent implements OnInit {
 
     constructor(private formBuilder: FormBuilder,
         private notificationService: NotificationService,
-        private snotifyService: SnotifyService) {
+        private snotifyService: SnotifyService,
+        private pncservice: PncService) {
     }
 
     ngOnInit() {
         this.nextAppointmentFormGroup = this.formBuilder.group({
             nextAppointmentDate: new FormControl('', [Validators.required]),
-            remarks: new FormControl('none', [])
+            remarks: new FormControl(''),
+            id: new FormControl('')
         });
 
         this.notify.emit(this.nextAppointmentFormGroup);
+
+        if (this.isEdit) {
+            this.loadAppointments();
+        }
     }
 
+    loadAppointments(): void {
+        this.pncservice.getAppointments(this.patientId, this.patientMasterVisitId).subscribe(
+            (result) => {
+                console.log(result);
+                if (result) {
+                    this.nextAppointmentFormGroup.get('nextAppointmentDate').setValue(result.appointmentDate);
+                    this.nextAppointmentFormGroup.get('remarks').setValue(result.description);
+                    this.nextAppointmentFormGroup.get('id').setValue(result.id);
+                }
+            },
+            (error) => {
+                this.snotifyService.error('Fetching appointments ' + error, 'PNC Encounter',
+                    this.notificationService.getConfig());
+            }
+        );
+    }
 }

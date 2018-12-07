@@ -471,7 +471,7 @@
                         this.PatientMasterVisitId = value.PatientMasterVisitId;
                         if (this.PatientMasterVisitId > 0) {
                             $("#sessiononedata .loading").show();
-                            debugger;
+                           
                             toastr.info("Please wait, redirecting to ongoing Enhance Adherence Councelling");
                            // window.location.href = window.location.href + "?visitId=" + this.PatientMasterVisitId;
 
@@ -581,7 +581,7 @@
         var currentStep = data.step;
         if (currentStep == 1) {
             var patientMasterVisitId = GetURLParameter('visitId');
-            debugger;
+          
             CheckIfSession1DataHasValues();
             var values = Answers.filter((x) => { return x.value.length > 0 })
             if (values != null) {

@@ -25,20 +25,28 @@ namespace IQCare.Common.BusinessProcess.CommandHandlers.Refferal
             {
                 try
                 {
-                    PatientRefferal patientRefferal = await _unitOfWork.Repository<PatientRefferal>().FindAsync(x => x.PatientId == request.PatientRefferal.PatientId && x.PatientMasterVisitId == request.PatientRefferal.PatientMasterVisitId);
-
-                    var patientReferralEditInfo = request.PatientRefferal;
-
-                    patientRefferal.UpdateReferralInfo(patientReferralEditInfo.ReferralDate, patientReferralEditInfo.ReferralReason, patientReferralEditInfo.ReferredBy, patientReferralEditInfo.ReferredFrom, patientReferralEditInfo.ReferredTo);
-
-                    _unitOfWork.Repository<PatientRefferal>().Update(patientRefferal);
-                    var result = await _unitOfWork.SaveChangesAsync();
-
-                    return Result<EditRefferalCommandResponse>.Valid(new EditRefferalCommandResponse()
+                    //PatientRefferal patientRefferal = await _unitOfWork.Repository<PatientRefferal>().FindAsync(x => x.PatientId == request.PatientId && x.PatientMasterVisitId == request.PatientMasterVisitId);
+                    var patientRefferal = await _unitOfWork.Repository<PatientRefferal>().FindByIdAsync(request.Id);
+                    if (patientRefferal != null)
                     {
-                        Id=result
-                    });
+                        var patientReferralEditInfo = request;
 
+                        patientRefferal.UpdateReferralInfo(patientReferralEditInfo.ReferralDate,
+                            patientReferralEditInfo.ReferralReason, patientReferralEditInfo.ReferredBy,
+                            patientReferralEditInfo.ReferredFrom, patientReferralEditInfo.ReferredTo);
+
+                        _unitOfWork.Repository<PatientRefferal>().Update(patientRefferal);
+                        var result = await _unitOfWork.SaveChangesAsync();
+
+                        return Result<EditRefferalCommandResponse>.Valid(new EditRefferalCommandResponse()
+                        {
+                            Id = result
+                        });
+                    }
+                    else
+                    {
+                        return Result<EditRefferalCommandResponse>.Invalid("Error updating referral with referralId: " + request.Id);
+                    }
                 }
                 catch (Exception e)
                 {

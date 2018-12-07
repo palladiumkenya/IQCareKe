@@ -81,7 +81,7 @@ export class PncHivtestingComponent implements OnInit, AfterViewInit {
     loadHivTests(): void {
         this.pncService.getHivTests(this.patientMasterVisitId, this.patientEncounterId).subscribe(
             (result) => {
-                if (result && result['encounter']) {
+                if (result && result['encounter'] && result['encounter'].length > 0) {
                     const tests = result['testing'];
                     if (tests.length > 0) {
                         for (let i = 0; i < tests.length; i++) {
@@ -186,10 +186,6 @@ export class PncHivtestingComponent implements OnInit, AfterViewInit {
             this.isHivTestingDone = false;
             this.HivTestingForm.controls['testType'].disable({ onlySelf: true });
             this.HivTestingForm.controls['finalTestResult'].disable({ onlySelf: true });
-
-            // set default value to null
-            //this.HivTestingForm.controls['testType'].setValue('');
-            //this.HivTestingForm.controls['finalTestResult'].setValue('');
         }
     }
 

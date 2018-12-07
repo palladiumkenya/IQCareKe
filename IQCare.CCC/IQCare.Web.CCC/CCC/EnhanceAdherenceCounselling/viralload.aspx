@@ -1,5 +1,5 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="viralload.aspx.cs" Inherits="IQCare.Web.CCC.UC.EnhanceAdherenceCounselling.viralload" %>
-<%@ OutputCache duration="86400" varybyparam="none" %>
+
 <style>
     .viralloadloading{position: absolute;width: 100%;height: 100%;margin-left:-15px;z-index:999;background: rgba(204, 204, 204, 0.5);display: none;}
 </style>
@@ -67,6 +67,7 @@
             if (typeof checkedValue != 'undefined') {
                 screeningValue = checkedValue;
             }
+     
             $.ajax({
                 type: "POST",
                 url: "../WebService/PatientScreeningService.asmx/AddUpdateScreeningData",
@@ -93,7 +94,7 @@
             if (categoryId > 1) {
                 $.ajax({
                     type: "POST",
-                    url: "../WebService/PatientClinicalNotesService.asmx/addPatientClinicalNotes",
+                    url: "../WebService/PatientClinicalNotesService.asmx/addPatientClinicalNotesByVisitId",
                     data: "{'patientId': '" + patientId + "','patientMasterVisitId': '" + patientMasterVisitId + "','serviceAreaId':'" + serviceAreaId + "','notesCategoryId':'" + categoryId + "','clinicalNotes':'" + clinicalNotes + "','userId':'" + userId + "'}",
                     contentType: "application/json; charset=utf-8",
                     dataType: "json",
@@ -112,7 +113,7 @@
     }
     $(document).ready(function () {
         $('.viralloadloading').show();
-        debugger;
+        
         var patientId = <%=PatientId%>;
         var patientMasterVisitId = GetURLParameter('visitId');
       
@@ -138,7 +139,7 @@
 
 
                                 if ($("#endViralLoadTb" + this.NotesCategoryId).length > 0) {
-                                    debugger;
+                         
                                     $("#endViralLoadTb" + this.NotesCategoryId).val(inputnotes);
                                 }
 
@@ -154,8 +155,8 @@
         });
         $.ajax({
             type: "POST",
-            url: "../WebService/PatientScreeningService.asmx/getPatientScreening",
-            data: "{'PatientId': '" + patientId + "'}",
+            url: "../WebService/PatientScreeningService.asmx/getScreeningByIdandMasterVisit",
+            data:  "{'PatientId': '" + patientId + "','PatientMasterVisitId':'" + patientMasterVisitId + "'}",
             contentType: "application/json; charset=utf-8",
             dataType: "json",
             cache: false,

@@ -29,8 +29,8 @@ export class MaternityReferralComponent implements OnInit {
     ngOnInit() {
         this.referralFormGroup = this.formBuilder.group({
             referredFrom: new FormControl('', [Validators.required]),
-            referredTo: new FormControl('', [Validators.required])
-
+            referredTo: new FormControl('', [Validators.required]),
+            'id': new FormControl('')
         });
 
         const {
@@ -47,10 +47,18 @@ export class MaternityReferralComponent implements OnInit {
     }
 
     loadMaternityReferral(): void {
-        this.pncservice.getReferral().subscribe(
+        this.pncservice.getReferral(this.patientId, this.patientMasterVisitId).subscribe(
             (result) => {
+                if (result) {
+                    this.referralFormGroup.get('referredFrom').setValue(result.referredFrom);
+                    this.referralFormGroup.get('referredTo').setValue(result.referredTo);
+                    this.referralFormGroup.get('id').setValue(result.id);
+                }
             },
-            (error) => { },
+            (error) => {
+                this.snotifyService.error('Fetching referal ' + error, 'Encounter',
+                    this.notificationService.getConfig());
+            },
             () => { }
         );
     }

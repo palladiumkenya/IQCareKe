@@ -4441,50 +4441,50 @@ IF  exists(select * from LookupItem where Name = 'Session1FollowupDate')
 	END
 GO
 ---Session 2
-IF not exists(select * from LookupItem where Name = 'Session1FollowupDate')
+IF not exists(select * from LookupItem where Name = 'Session2FollowupDate')
 	BEGIN
-		insert into LookupItem(Name,DisplayName,DeleteFlag)values('Session1FollowupDate','Date filled in','0')
+		insert into LookupItem(Name,DisplayName,DeleteFlag)values('Session2FollowupDate','Date filled in','0')
 	END
 GO
 
-IF  exists(select * from LookupItem where Name = 'Session1FollowupDate')
+IF  exists(select * from LookupItem where Name = 'Session2FollowupDate')
 	BEGIN
 		if not Exists (select * from LookupMasterItem  lmi inner join LookupMaster lm on lm.Id=lmi.LookupMasterId inner join LookupItem lit on lit.Id=lmi.LookupItemId where 
-		lit.Name='Session1FollowupDate' AND lm.Name = 'Session1PillAdherence')
+		lit.Name='Session2FollowupDate' AND lm.Name = 'Session2PillAdherence')
 		BEGIN
-			insert into LookupMasterItem select lm.Id,lit.Id,lit.DisplayName,'1.00' as OrdRank from LookupMaster lm,LookupItem lit where lm.Name='Session1PillAdherence' and lit.Name='Session1FollowupDate'
+			insert into LookupMasterItem select lm.Id,lit.Id,lit.DisplayName,'1.00' as OrdRank from LookupMaster lm,LookupItem lit where lm.Name='Session2PillAdherence' and lit.Name='Session2FollowupDate'
 		END
 	END
 GO
 ---Session 3
-IF not exists(select * from LookupItem where Name = 'Session1FollowupDate')
+IF not exists(select * from LookupItem where Name = 'Session3FollowupDate')
 	BEGIN
-		insert into LookupItem(Name,DisplayName,DeleteFlag)values('Session1FollowupDate','Date filled in','0')
+		insert into LookupItem(Name,DisplayName,DeleteFlag)values('Session3FollowupDate','Date filled in','0')
 	END
 GO
 
-IF  exists(select * from LookupItem where Name = 'Session1FollowupDate')
+IF  exists(select * from LookupItem where Name = 'Session3FollowupDate')
 	BEGIN
 		if not Exists (select * from LookupMasterItem  lmi inner join LookupMaster lm on lm.Id=lmi.LookupMasterId inner join LookupItem lit on lit.Id=lmi.LookupItemId where 
-		lit.Name='Session1FollowupDate' AND lm.Name = 'Session1PillAdherence')
+		lit.Name='Session3FollowupDate' AND lm.Name = 'Session3PillAdherence')
 		BEGIN
-			insert into LookupMasterItem select lm.Id,lit.Id,lit.DisplayName,'1.00' as OrdRank from LookupMaster lm,LookupItem lit where lm.Name='Session1PillAdherence' and lit.Name='Session1FollowupDate'
+			insert into LookupMasterItem select lm.Id,lit.Id,lit.DisplayName,'1.00' as OrdRank from LookupMaster lm,LookupItem lit where lm.Name='Session3PillAdherence' and lit.Name='Session3FollowupDate'
 		END
 	END
 GO
 ---Session 4
-IF not exists(select * from LookupItem where Name = 'Session1FollowupDate')
+IF not exists(select * from LookupItem where Name = 'Session4FollowupDate')
 	BEGIN
-		insert into LookupItem(Name,DisplayName,DeleteFlag)values('Session1FollowupDate','Date filled in','0')
+		insert into LookupItem(Name,DisplayName,DeleteFlag)values('Session4FollowupDate','Date filled in','0')
 	END
 GO
 
-IF  exists(select * from LookupItem where Name = 'Session1FollowupDate')
+IF  exists(select * from LookupItem where Name = 'Session4FollowupDate')
 	BEGIN
 		if not Exists (select * from LookupMasterItem  lmi inner join LookupMaster lm on lm.Id=lmi.LookupMasterId inner join LookupItem lit on lit.Id=lmi.LookupItemId where 
-		lit.Name='Session1FollowupDate' AND lm.Name = 'Session1PillAdherence')
+		lit.Name='Session4FollowupDate' AND lm.Name = 'Session4PillAdherence')
 		BEGIN
-			insert into LookupMasterItem select lm.Id,lit.Id,lit.DisplayName,'1.00' as OrdRank from LookupMaster lm,LookupItem lit where lm.Name='Session1PillAdherence' and lit.Name='Session1FollowupDate'
+			insert into LookupMasterItem select lm.Id,lit.Id,lit.DisplayName,'1.00' as OrdRank from LookupMaster lm,LookupItem lit where lm.Name='Session4PillAdherence' and lit.Name='Session4FollowupDate'
 		END
 	END
 GO

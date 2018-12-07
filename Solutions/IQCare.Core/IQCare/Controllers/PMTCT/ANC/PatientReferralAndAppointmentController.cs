@@ -42,6 +42,17 @@ namespace IQCare.Controllers.PMTCT.ANC
             return BadRequest(response);
         }
 
+        [HttpPost]
+        public async Task<IActionResult> UpdatePatientNextAppointment([FromBody] EditAppointmentCommand editAppointmentCommand)
+        {
+            if (!ModelState.IsValid)
+                return BadRequest(editAppointmentCommand);
+            var response = await _mediator.Send(editAppointmentCommand, Request.HttpContext.RequestAborted);
+            if (response.IsValid)
+                return Ok(response.Value);
+            return BadRequest(response);
+        }
+
         [HttpGet("{patientId}/{patientMasterVisitId}")]
         public async Task<IActionResult> GetAppointment(int patientId, int patientMasterVisitId)
         {
@@ -64,7 +75,7 @@ namespace IQCare.Controllers.PMTCT.ANC
             var response = await _mediator.Send(new PmtctReferralCommand{ PatientId = patientId, PatientMasterVisitId = patientMasterVisitId },HttpContext.RequestAborted);
             if (response.IsValid)
                 return Ok(response.Value);
-            return BadRequest(response.Value);
+            return BadRequest(response);
         }
 
 
@@ -80,6 +91,27 @@ namespace IQCare.Controllers.PMTCT.ANC
                 return Ok(response.Value);
 
             return BadRequest(response);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> UpdatePatientReferralInfo([FromBody]EditRefferalCommand editRefferalCommand)
+        {
+            if (!ModelState.IsValid)
+                return BadRequest(editRefferalCommand);
+
+            var response = await _mediator.Send(editRefferalCommand, Request.HttpContext.RequestAborted);
+            if (response.IsValid)
+                return Ok(response.Value);
+            return BadRequest(response);
+        }
+
+        [HttpGet("{Id}")]
+        public async Task<object> GetPatientAppoitment(int Id)
+        {
+            var results = await _mediator.Send(new GetPatientAppointmentViewQuery() { PatientId = Id }, HttpContext.RequestAborted);
+            if (results.IsValid)
+                return Ok(results.Value);
+            return BadRequest(results);
         }
 
     }

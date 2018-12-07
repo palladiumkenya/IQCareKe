@@ -27,8 +27,9 @@ namespace IQCare.Web.CCC.WebService
 
         public class ClinicalOutput
         {
+            public int notesCategoryId { get; set; }
             public int serviceAreaId { get; set; }
-              public int notesCategoryId { get; set; }
+         
               public string clinicalNotes { get; set; }
               public int userId { get; set; }
         }
@@ -40,6 +41,9 @@ namespace IQCare.Web.CCC.WebService
             try
             {
                 ClinicalOutput[] result = new JavaScriptSerializer().Deserialize<ClinicalOutput[]>(clinicaldata);
+
+                List<ClinicalOutput> Outcome = new List<ClinicalOutput>();
+                Outcome= new JavaScriptSerializer().Deserialize<List<ClinicalOutput>>(clinicaldata);
 
                 if (result != null)
                 {
