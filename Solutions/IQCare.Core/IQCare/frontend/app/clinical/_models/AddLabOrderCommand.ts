@@ -1,10 +1,9 @@
 export interface AddLabOrderCommand {
   Ptn_Pk: number,
   PatientId : number,
-  LocationId : number,
- FacilityId : number,
+ LocationId : number,
  VisitId : number,
- ModuleId : number
+ Module : string,
  OrderedBy : number,
  OrderDate : Date,
  ClinicalOrderNotes : string,

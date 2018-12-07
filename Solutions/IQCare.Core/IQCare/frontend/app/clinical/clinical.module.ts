@@ -8,7 +8,7 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import {
     MatNativeDateModule, MatPaginatorModule, MatInputModule,
     MatDatepickerModule, MatFormFieldModule,
-    MatTableModule, MatButtonModule
+    MatTableModule, MatButtonModule, MatSelectModule
 } from '@angular/material';
 import { HttpClientModule } from '@angular/common/http';
 import { LabOrderComponent } from '../clinical/lab/lab-order/lab-order.component';
@@ -22,7 +22,7 @@ import { LabTestGridComponent } from './lab/lab-test-grid/lab-test-grid.componen
         MatPaginatorModule,
         MatNativeDateModule,
         MatInputModule, MatDatepickerModule, MatFormFieldModule,
-        MatTableModule, MatButtonModule, FormsModule, HttpClientModule, SharedModule
+        MatTableModule, MatButtonModule, FormsModule, HttpClientModule, SharedModule, MatSelectModule
     ],
     declarations: [
         TriageComponent,

@@ -51,7 +51,7 @@ namespace IQCare.Lab.BusinessProcess.CommandHandlers
                             .SingleOrDefault()?.ParameterCount;
 
                         if (parameterCount != 1) continue;
-                        var patientLabTacker = new PatientLabTracker(request.PatientId, labName, request.PatientMasterVisitId, labOrderTest.LabTestId, labOrder.Id, request.FacilityId, request.OrderDate, request.UserId, null);
+                        var patientLabTacker = new PatientLabTracker(request.PatientId, labName, request.PatientMasterVisitId, labOrderTest.LabTestId, labOrder.Id, request.LocationId, request.OrderDate, request.UserId, null);
 
                         patientLabTrackers.Add(patientLabTacker);
                     }

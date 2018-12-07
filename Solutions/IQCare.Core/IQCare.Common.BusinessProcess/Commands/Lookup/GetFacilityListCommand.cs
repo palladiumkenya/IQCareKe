@@ -14,4 +14,18 @@ namespace IQCare.Common.BusinessProcess.Commands.Lookup
     {
         public List<FacilityList> FacilityList { get; set; }
     }
+
+    public class FacilityViewModel
+    {
+        public int Id { get; set; }
+        public string MflCode { get; set; }
+        public string Name { get; set; }
+        public string PositionId { get; set; }
+    }
+
+    public class GetActiveFaciltyCommand : IRequest<Result<FacilityViewModel>>
+    {
+       
+
+    }
 }

@@ -21,7 +21,6 @@ namespace IQCare.Controllers.Shared
             _mediatR = mediator;
         }
 
-        // GET: api/<controller>
         [HttpGet]
         public async Task<IActionResult> Get()
         {
@@ -33,29 +32,16 @@ namespace IQCare.Controllers.Shared
             return BadRequest(results);
         }
 
-        // GET api/<controller>/5
-        [HttpGet("{id}")]
-        public string Get(int id)
+        [HttpGet("GetActiveFacility")]
+        public async Task<object> GetActiveFacility()
         {
-            return "value";
+            var response = await _mediatR.Send(new GetActiveFaciltyCommand(), Request.HttpContext.RequestAborted);
+            if (response.IsValid)
+                return Ok(response.Value);
+            return BadRequest(response);
         }
 
-        // POST api/<controller>
-        [HttpPost]
-        public void Post([FromBody]string value)
-        {
-        }
 
-        // PUT api/<controller>/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody]string value)
-        {
-        }
-
-        // DELETE api/<controller>/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
-        {
-        }
+       
     }
 }
