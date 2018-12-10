@@ -94,7 +94,6 @@
     <Compile Include="Encounter\PatientAdherenceAssessment.cs" />
     <Compile Include="Encounter\PatientAdherenceOutcome.cs" />
     <Compile Include="Encounter\PatientCareEnding.cs" />
-    <Compile Include="Encounter\PatientCareEndingView.cs" />
     <Compile Include="Encounter\PatientCategorization.cs" />
     <Compile Include="Encounter\PatientClinicalDiagnosis.cs" />
     <Compile Include="Encounter\PatientClinicalNotes.cs" />
