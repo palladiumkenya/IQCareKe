@@ -37,7 +37,7 @@ export class MotherProfileComponent implements OnInit {
         this.motherProfileFormGroup = this._formBuilder.group({
             dateLMP: new FormControl('', [ Validators.required]),
             dateEDD: new FormControl('', [Validators.required]),
-            gestation: new FormControl('', [Validators.max(20), Validators.required]),
+            gestation: new FormControl('', [Validators.max(42), Validators.required]),
             ageAtMenarche: new FormControl('', []),
             parityOne: new FormControl('', [ Validators.min(0) , Validators.max(20), Validators.required]),
             parityTwo: new FormControl('', [ Validators.min(0), Validators.max(20), Validators.required]),
