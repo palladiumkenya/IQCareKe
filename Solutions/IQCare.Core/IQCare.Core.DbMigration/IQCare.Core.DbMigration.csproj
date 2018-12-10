@@ -95,6 +95,7 @@
     <None Remove="Scripts\1.0.0.9\53_SO_CreateView_PatientExaminationView.sql" />
     <None Remove="Scripts\1.0.0.9\54_SO_CreateView_pmtctPatientScreeningView.sql" />
     <None Remove="Scripts\1.0.0.9\56_SO_CreateView_VisitDetailsView.sql" />
+    <None Remove="Scripts\1.0.0.9\58_Add_Lookups_ReviewOfSystems.sql" />
     <None Remove="Scripts\2.0.0\01_SO_IQCare_Version.sql" />
     <None Remove="Scripts\2.0.0\02_DO_AlterView_PatientDeliveryInfo.sql" />
     <None Remove="Scripts\2.0.0\03 pr_Security_UserLogin_Constella.sql" />
@@ -103,6 +104,15 @@
     <None Remove="Scripts\2.0.0\09_PersonKinContactsView.sql" />
     <None Remove="Scripts\2.0.0\12_DO_Insert_Clinical_Service_Area.sql" />
     <None Remove="Scripts\2.0.0\12_SO_CreateView_PmtctRefferealView.sql" />
+    <None Remove="Scripts\2.0.0\13_SO_CreateView_lnk_FacilityModule.sql" />
+    <None Remove="Scripts\2.0.0\14_SO_Alter_getPharmacyDrugList.sql" />
+    <None Remove="Scripts\2.0.0\15_SO_Add_Lookups_Digestive.sql" />
+    <None Remove="Scripts\2.0.0\16_SO_Lookups_Muscular.sql" />
+    <None Remove="Scripts\2.0.0\17_SO_Add_Lookups_Skeletal.sql" />
+    <None Remove="Scripts\2.0.0\18_SO_Add_Lookups_Endoctrine.sql" />
+    <None Remove="Scripts\2.0.0\19_Add_lookups_Immune.sql" />
+    <None Remove="Scripts\2.0.0\20_Add_Lookups_Lymphatic.sql" />
+    <None Remove="Scripts\2.0.0\21_Add_Lookups_Dental.sql" />
   </ItemGroup>
 
   <ItemGroup>
@@ -195,6 +205,7 @@
     <EmbeddedResource Include="Scripts\1.0.0.9\54_SO_CreateView_pmtctPatientScreeningView.sql" />
     <EmbeddedResource Include="Scripts\1.0.0.9\56_SO_CreateView_VisitDetailsView.sql" />
     <EmbeddedResource Include="Scripts\1.0.0.9\01_SO_IQCare_Version.sql" />
+    <EmbeddedResource Include="Scripts\1.0.0.9\58_Add_Lookups_ReviewOfSystems.sql" />
     <EmbeddedResource Include="Scripts\2.0.0\02_DO_AlterView_PatientDeliveryInfo.sql" />
     <EmbeddedResource Include="Scripts\2.0.0\03 pr_Security_UserLogin_Constella.sql" />
     <EmbeddedResource Include="Scripts\2.0.0\07_Nairobi_Missing_Subcounties_Wards.sql" />
@@ -202,6 +213,15 @@
     <EmbeddedResource Include="Scripts\2.0.0\09_PersonKinContactsView.sql" />
     <EmbeddedResource Include="Scripts\2.0.0\12_DO_Insert_Clinical_Service_Area.sql" />
     <EmbeddedResource Include="Scripts\2.0.0\12_SO_CreateView_PmtctRefferealView.sql" />
+    <EmbeddedResource Include="Scripts\2.0.0\13_SO_CreateView_lnk_FacilityModule.sql" />
+    <EmbeddedResource Include="Scripts\2.0.0\14_SO_Alter_getPharmacyDrugList.sql" />
+    <EmbeddedResource Include="Scripts\2.0.0\15_SO_Add_Lookups_Digestive.sql" />
+    <EmbeddedResource Include="Scripts\2.0.0\16_SO_Lookups_Muscular.sql" />
+    <EmbeddedResource Include="Scripts\2.0.0\17_SO_Add_Lookups_Skeletal.sql" />
+    <EmbeddedResource Include="Scripts\2.0.0\18_SO_Add_Lookups_Endoctrine.sql" />
+    <EmbeddedResource Include="Scripts\2.0.0\19_Add_lookups_Immune.sql" />
+    <EmbeddedResource Include="Scripts\2.0.0\20_Add_Lookups_Lymphatic.sql" />
+    <EmbeddedResource Include="Scripts\2.0.0\21_Add_Lookups_Dental.sql" />
   </ItemGroup>
 
   <ItemGroup>
