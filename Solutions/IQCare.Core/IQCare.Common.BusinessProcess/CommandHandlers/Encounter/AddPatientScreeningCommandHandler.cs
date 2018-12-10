@@ -1,13 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Threading;
-using System.Threading.Tasks;
-using IQCare.Common.BusinessProcess.Commands.Encounter;
+﻿using IQCare.Common.BusinessProcess.Commands.Encounter;
 using IQCare.Common.Core.Models;
 using IQCare.Common.Infrastructure;
+using IQCare.Library;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Serilog;
+using System;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace IQCare.Common.BusinessProcess.CommandHandlers.Encounter
 {

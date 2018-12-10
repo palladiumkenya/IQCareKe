@@ -177,7 +177,12 @@ namespace IQCare.Web.CCC.WebService
                         personContacts = personContactLookUpManager.GetPersonContactByPersonId(PersonId);
                         var address = "";
                         var phone = "";
-                        var facility = lookupLogic.GetFacility();
+
+                        var facility = lookupLogic.GetFacility(Session["AppPosID"].ToString());
+                        if (facility == null)
+                        {
+                            facility = lookupLogic.GetFacility();
+                        }
 
                         if (personContacts.Count > 0)
                         {

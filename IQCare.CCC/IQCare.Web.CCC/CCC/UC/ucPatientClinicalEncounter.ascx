@@ -290,10 +290,10 @@
 
 											<div>
 												<label class="pull-left" style="padding-right: 10px">
-													<input id="rdAnyComplaintsYes" type="radio" name="anyComplaints" value="1" clientidmode="Static" runat="server" onclick="showHidePresentingComplaintsDivs();" />Yes
+													<input id="rdAnyComplaintsYes" type="radio" name="anyComplaints" value="1" clientidmode="Static" runat="server"   data-parsley-required="true" onclick="showHidePresentingComplaintsDivs();" />Yes
 												</label>
 												<label class="pull-left" style="padding-right: 10px">
-													<input id="rdAnyComplaintsNo" type="radio" name="anyComplaints" value="0" clientidmode="Static" runat="server" data-parsley-required="true" onclick="showHidePresentingComplaintsDivs();" />No
+													<input id="rdAnyComplaintsNo" type="radio" name="anyComplaints" value="0" clientidmode="Static" runat="server"   data-parsley-required="true"                                                          onclick="showHidePresentingComplaintsDivs();" />No
 												</label>
 
 											</div>
@@ -1991,8 +1991,12 @@
 							</div>
 							<div class="col-md-12">
 								<div class="col-md-6 form-group">
-									<asp:TextBox ID="txtDiagnosisID" Enabled="false" runat="server" ClientIDMode="Static"></asp:TextBox>
-									<input type="text" id="Diagnosis" class="form-control input-sm" placeholder="Type Diagnosis......" runat="server" clientidmode="Static" />
+									<!--<asp:TextBox ID="txtDiagnosisID" Enabled="false" runat="server" ClientIDMode="Static"    ></asp:TextBox>
+									<input type="text" id="Diagnosis" class="form-control input-sm"  placeholder="Type Diagnosis......" runat="server" clientidmode="Static" />-->
+                                    <select class="form-control select2" data-placeholder="Select" id="Diagnosis" style="width: 100%;">
+                                        <option value="0"></option>
+                                    </select>
+
 								</div>
 
 								<div class="col-md-5 form-group">
@@ -2700,6 +2704,12 @@
     var NextAppointmentDate = "<%=NextAppointmentDate%>";
     var selectedstage = "";
     var OIdata = [];
+    var diagnosisListStatus = new Array();
+    var diagnosisListStatus = [];
+    var DiagnosisList = new Array();
+    var DiagnosisList = [];
+    var DiseaseList = new Array();
+    var DiseaseList = [];
     var PatientOIData = [];
     var arrHighRisk = [];
     var arrSexualHistory = [];
@@ -2708,7 +2718,7 @@
 	document.getElementById('txtPresentingComplaintsID').style.display = 'none';
 	document.getElementById('txtAllergyId').style.display = 'none';
 	document.getElementById('txtReactionTypeID').style.display = 'none';
-	document.getElementById('txtDiagnosisID').style.display = 'none';
+	//document.getElementById('txtDiagnosisID').style.display = 'none';
 	document.getElementById("<%=txtBMIZ.ClientID%>").style.display = 'none';
 
 	document.getElementById('adverseEventId').style.display = 'none';
@@ -2727,6 +2737,8 @@
         $('.errorBlock8').hide();
         $('.errorBlock').hide();
 
+
+
         if (($("#cough").val() === 'True') || ($("#fever").val() === 'True') || ($("#weightLoss").val() === 'True') || ($("#nightSweats").val() === 'True')) {
             $("#IcfActionForm").show();
         } else {
@@ -2740,8 +2752,7 @@
         //$("#IptOutcomeDetailsForm").hide();
         //$("#onIpt").prop("disabled", true);
         $("#MMAS8").hide();
-
-        
+     
         //  $("#EverBeenOnIpt").prop("disabled", true);
         //showHideFPControls();
         loadPresentingComplaints();
@@ -2767,6 +2778,8 @@
         loadWhoStageOIS(WhoStage4, "#dtlStageIV", "4");
         GetPatientOIS();
 
+       
+
         $(document).on('change', 'input[type=checkbox].flat-red', function (e) {
             if (this.checked) {
                 WhoStageCheckBoxClick(this, false);
@@ -2787,9 +2800,18 @@
                 $("#divAdverseEventOther").hide("fast");
             }
         });
+        
+
 
         $("#ddlHighRiskBehaviour").select2();
 
+ 
+
+        $("#Diagnosis").select2();
+       
+
+
+        
         //Show the AdverseEventModal Windows
         function loadAdverseEventOutcome() {
             $("#AdverseEventOutcomeModel").modal('show');
@@ -3446,23 +3468,47 @@
             ajax: {
                 type: "POST",
                 url: "../WebService/PatientEncounterService.asmx/GetDiagnosis",
-                dataSrc: 'd',
-                contentType: "application/json; charset=utf-8",
-                dataType: "json"
-            },
-            paging: false,
-            searching: false,
-            info: false,
-            ordering: false,
-            columnDefs: [
-                {
-                    "targets": [0],
-                    "visible": false,
-                    "searchable": false
-                }
-            ]
-        });
+                dataSrc: function (json) {
 
+
+                    var itemList = json.d;
+                    if (itemList !== null && itemList.length > 0) {
+
+                        for (var i = 0; i < itemList.length; i++) {
+                            //var j= 0;
+                             //j= i + 1;
+                            diagnosisListStatus.push({ id: itemList[i][0],Disease:itemList[i][1],Treatment:itemList[i][2], deleteflag:false,deleted:false })
+                            diagnosisList.push(itemList[i][0]);
+                            treatmentList.push(itemList[i][2]);
+                            DiseaseList.push(itemList[i][1]);
+                        }
+                    }
+                    return json.d;
+                }
+                ,
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+            },
+            
+
+                paging: false,
+                searching: false,
+                info: false,
+                ordering: false,
+                columnDefs: [
+                    {
+                        "targets": [0],
+                        "visible": false,
+                        "searchable": false
+                    }
+                ]
+            
+            });
+
+                
+               
+            
+           
 
         var presentingComplaintsTable = $('#dtlPresentingComplaints').DataTable({
             ajax: {
@@ -3610,12 +3656,25 @@
         $("#dtlDiagnosis").on('click',
             '.btnDelete',
             function () {
+                var index = DiseaseList.indexOf($(this).parents('tr').find('td:eq(0)').text());
                 diagnosisTable
                     .row($(this).parents('tr'))
                     .remove()
                     .draw();
-                var index = diagnosisList.indexOf($(this).parents('tr').find('td:eq(0)').text());
+              
                 if (index >= -1) {
+                    DiseaseList.splice(index, 1);
+                    diagnosisList.splice(index, 1);
+                    treatmentList.splice(index, 1);
+                    
+                    if (diagnosisListStatus.length > 0) {
+                        if (diagnosisListStatus[index].deleted == false) {
+                            diagnosisListStatus[index].deleteflag = true;
+                        }
+                        else if (diagnosisListStatus[index].deleted == true) {
+                            diagnosisListStatus.splice(index, 1);
+                        }
+                    }
                     diagnosisList.splice(index, 1);
                 }
 
@@ -3678,6 +3737,7 @@
                 var previousStep = 0;
                 var totalError = 0;
                 var stepError = 0;
+                
                 /*var form = $("form[name='form1']");*/
 
 				if (data.direction === 'next')
@@ -3729,7 +3789,7 @@
                                 addPatientIcf();
                                 addPatientIcfAction();
                                 saveNutritionAssessment();
-                                savePatientEncounterPresentingComplaint();
+                                savePatientEncounterPresentingComplaint(evt);
                             } else {
                                 stepError = $('.parsley-error').length === 0;
                                 totalError += stepError;
@@ -3847,7 +3907,7 @@
 
             });
 
-        function savePatientEncounterPresentingComplaint() {
+        function savePatientEncounterPresentingComplaint(evt) {
             var visitDate = $("#<%=VisitDate.ClientID%>").val();
             var visitScheduled = $("input[name$=Scheduled]:checked").val();
 
@@ -3860,17 +3920,23 @@
 
 
             /////////////////////////////////////////////////////
-            if (anyComplaints === 1) {
+            if (parseInt(anyComplaints, 10) === 1) {
+               
                 if (!presentingComplaintsTable.data().any()) {
-                    toastr.error("Presenting Complaints", "Presenting complaints missing.");
+                  
+                    toastr.error("Presenting Complaints", "Presenting complaints missing.Kindly indicate the presenting complaints.");
+                    
                     evt.preventDefault();
+                   
                 }
             }
 
-            if (adverseEvents === 1) {
+            if (parseInt(adverseEvents,10) === 1) {
                 if (!advEventsTable.data().any()) {
-                    toastr.error("Adverse Event(s)", "Adverse Event(s) missing.");
-                    evt.preventDefault();
+                    toastr.error("Adverse Event(s)", "Adverse Event(s) missing.Kindly indicate the adverse events");
+                    
+                     evt.preventDefault();
+                   
                 }
             }
 
@@ -4394,23 +4460,29 @@
         }
 
        
-		function saveWhoStage() {
-			var whostage = $("#<%=WHOStage.ClientID%>").val();
+        function saveWhoStage() {
+            var whostage = $("#<%=WHOStage.ClientID%>").val();
 
-			$.ajax({
-				type: "POST",
-				url: "../WebService/PatientEncounterService.asmx/savePatientWhoStage",
-				data: "{'whoStage':'" + whostage + "'}",
-				contentType: "application/json; charset=utf-8",
-				dataType: "json",
-				success: function (response) {
-					toastr.success(response.d, "WHO Stage");
-				},
-				error: function (response) {
-					toastr.error(response.d, "WHO Stage Error");
-				}
-			});
-		}
+            if (whostage.length > 0) {
+                $.ajax({
+                    type: "POST",
+                    url: "../WebService/PatientEncounterService.asmx/savePatientWhoStage",
+                    data: "{'whoStage':'" + whostage + "'}",
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    success: function (response) {
+                        toastr.success(response.d, "WHO Stage");
+                    },
+                    error: function (response) {
+                        toastr.error(response.d, "WHO Stage Error");
+                    }
+                });
+            }
+            else {
+                toastr.info("No  WhoStage was recorded");
+               }
+
+         }
 
 		function savePatientPatientManagement() {
 			var workPlan = $("#<%=txtWorkPlan.ClientID%>").val();
@@ -4420,13 +4492,31 @@
 
 			var rowCount = $('#dtlDiagnosis tbody tr').length;
 			var diagnosisArray = new Array();
-			try {
-				for (var i = 0; i < rowCount; i++) {
-					diagnosisArray[i] = {
-						"diagnosis": diagnosisTable.row(i).data()[0],
-						"treatment": diagnosisTable.row(i).data()[2]
-					}
-				}
+            try {
+                if (diagnosisListStatus.length > 0) {
+                    for (var i = 0; i < diagnosisListStatus.length; i++) {
+                        //var j= 0;
+                        diagnosisArray[i] = {
+                            "diagnosis": diagnosisListStatus[i].id,
+                            "treatment": diagnosisListStatus[i].Treatment,
+                            "deleteflag": diagnosisListStatus[i].deleteflag
+                        }
+
+
+
+                    }
+                }
+
+
+                else {
+                    for (var i = 0; i < rowCount; i++) {
+                        diagnosisArray[i] = {
+                            "diagnosis": diagnosisTable.row(i).data()[0],
+                            "treatment": diagnosisTable.row(i).data()[2],
+                            "deleteflag": false
+                        }
+                    }
+                }
 			}
 			catch (ex) { }
 
@@ -5503,19 +5593,95 @@
 
 	}
 
-	function loadDiagnosis() {
-		var diagnosisInput = document.getElementById('<%= Diagnosis.ClientID %>');
-		var awesomplete = new Awesomplete(diagnosisInput, {
-			minChars: 1
-		});
+    function loadDiagnosis() {
 
+       <%-- $("#Diagnosis").select2({
+            placeholder: {
+                id: '0',
+                text: 'select an option'
+            },
+            minimumInputLength: 3,
+            allowClear: true,
+            data:DiagnosisList
+            ajax: {
+                type: "POST",
+                url: "../WebService/PatientEncounterService.asmx/loadDiagnosis",
+                dataType: "json",
+                contentType: "application/json; charset=utf-8",
+                data: function (params) { // page is the one-based page number tracked by Select2
+                    return {
+                        q: params.term, //search term
+                        page: params.page, // page number
+
+                    };
+                },
+                processResults: function (data, params) {
+                    var serverData = data.d;
+                    params.page = params.page || 1;
+                    var DiagnosisList = [];
+
+                    for (var i = 0; i < serverData.length; i++) {
+                        //drugList.push(serverData[i][1]);
+                        DiagnosisList.push({ label: serverData[i][1], value: serverData[i][0] });
+                    }
+                    dataObj = new Array();
+                    for (var i = 0; i < DiagnosisList.length:i++)
+        {
+            if (DiagnosisList[i].value == params.term) {
+                dataObj.push({ label=DiagnosisList[i].label, value=DiagnosisList[i].value });
+            }
+        }
+        params.page = params.page || 1;
+        return {
+            results: dataObj,
+            pagination: {
+                more: (params.page * 30) < data.total_count
+            }
+        }
+    }
+   
+
+     
+		var diagnosisInput = document.getElementById('<%= Diagnosis.ClientID %>');
+        var awesomplete = new Awesomplete(diagnosisInput, {
+            minChars: 1,
+        
+      
+          
+                replace: function (suggestion) {
+                    this.input.value = suggestion.label;
+                    // default replace() inserts suggestion.value to input
+                    var result = suggestion.value.split("~");
+                    $("#<%=txtDiagnosisID.ClientID%>").val(result[0] + "~" + result[1]);
+                     $("#<%=Diagnosis.ClientID%>").val(result[2]);
+                     diagnosisInput.value = suggestion.value;
+                     suggestion.value = "";
+
+                },
+
+            });
+        $("#<%=Diagnosis.ClientID%>").on('click', function () {
+            this.addEventListener('awesomplete - selectcomplete', function () {
+                var result = this.value.split("~");
+                $("#<%=txtDiagnosisID.ClientID%>").val(result[0] + "~" + result[1]);
+                $("#<%=Diagnosis.ClientID%>").val(result[2]);
+            });
+        });
+
+        document.getElementById('<%= Diagnosis.ClientID %>').setAttribute('awesomplete-selectcomplete', function () {
+            var result = this.value.split("~");
+            $("#<%=txtDiagnosisID.ClientID%>").val(result[0] + "~" + result[1]);
+            $("#<%=Diagnosis.ClientID%>").val(result[2]);
+        });
 		document.getElementById('<%= Diagnosis.ClientID %>').addEventListener('awesomplete-selectcomplete', function () {
 			var result = this.value.split("~");
-			$("#<%=txtDiagnosisID.ClientID%>").val(result[0]);
-				   $("#<%=Diagnosis.ClientID%>").val(result[1]);
-		});
+			$("#<%=txtDiagnosisID.ClientID%>").val(result[0]+ "~"+result[1]);
+				   $("#<%=Diagnosis.ClientID%>").val(result[2]);
+        });
+        
+     --%>
 
-		$.ajax({
+	$.ajax({
 			type: "POST",
 			url: "../WebService/PatientEncounterService.asmx/loadDiagnosis",
 			dataType: "json",
@@ -5523,18 +5689,41 @@
 
 			success: function (data) {
 				var serverData = data.d;
-				var DiagnosisList = [];
+				//var DiagnosisList = [];
 
 				for (var i = 0; i < serverData.length; i++) {
 					//drugList.push(serverData[i][1]);
-					DiagnosisList.push({ label: serverData[i][1], value: serverData[i][0] });
-				}
-				awesomplete.list = DiagnosisList;
+					DiagnosisList.push({ id: serverData[i][0], text: serverData[i][1] });
+                }
+
+                LoadDiagnosisList(DiagnosisList);
+              
+				//awesomplete.list = DiagnosisList;
 			}
 		});
 
-	}
+    }
+    function LoadDiagnosisList(Array) {
 
+        console.log(DiagnosisList);
+        $("#Diagnosis").select2({
+            placeholder: {
+                id: '0',
+                text: 'select an option'
+
+            },
+            allowClear: true,
+            minimumInputLength: 2,
+            
+            data: DiagnosisList
+
+        });
+
+        $("#Diagnosis").select2("val", "0");
+        $("#Diagnosis").trigger('change.select2');
+    }
+   // $("#Diagnosis").select2("val", "0");
+    //$("#Diagnosis").trigger('change.select2');
 	function loadSystemReviews() {
 		var systemReviewName = $('#ddlExaminationType').find(":selected").text();
 
@@ -5879,6 +6068,7 @@
         $("#ddlPartnerGender").val("");
         $("#ddlSexualOrientation").val(0);
         $("#ddlHighRiskBehaviour").select2("val", "0");
+        
     }
         
    
@@ -6684,5 +6874,40 @@
             }
 
         }
+
+
+
+
+function GetGBVScreeningStatus() {
+        var patientId ="<%=PatientId%>";
+        var visitDate = moment("<%=visitdateval%>");
+        var screeningCategoryId = "<%=GbvScreeningCategoryId%>";
+
+        if (visitDate.isValid()) {
+            visitDate = visitDate.format('YYYY-MM-DD');
+
+            $.ajax({
+                type: "POST",
+                url: "../WebService/PatientService.asmx/getPatientScreening",
+                data: "{'patientId':'" + patientId + "', 'visitDate': '" + visitDate + "', 'screeningcategoryId': '" + screeningCategoryId + "'}",
+                dataType: "json",
+                contentType: "application/json; charset=utf-8",
+
+                success: function (response) {
+                    var itemList = JSON.parse(response.d);
+
+                    $("#lblGbvAssessmentDone").text(itemList.length > 0 ? 'Yes' : 'No');
+
+                }
+            });
+        } else {
+
+            $("#lblGbvAssessmentDone").text('No');
+
+        }
+    }
+
+    GetGBVScreeningStatus();
+
 </script>
 

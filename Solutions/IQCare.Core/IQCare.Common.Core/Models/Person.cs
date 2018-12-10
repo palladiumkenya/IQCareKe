@@ -19,9 +19,9 @@ namespace IQCare.Common.Core.Models
         public DateTime CreateDate { get; set; }
         public int CreatedBy { get; set; }
         public string AuditData { get; set; }
-        public DateTime DateOfBirth { get; set; }
+        public DateTime? DateOfBirth { get; set; }
         public bool? DobPrecision { get; set; }
-
+        public DateTime? RegistrationDate { get; set; }
         public int? FacilityId { get; set; }
     }
 }

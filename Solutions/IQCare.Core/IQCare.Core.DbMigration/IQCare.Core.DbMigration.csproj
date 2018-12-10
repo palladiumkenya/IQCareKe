@@ -1,0 +1,229 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>netcoreapp2.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Scripts\1.0.0.8\Common\01_SO_CreateVisitDetails_Table.sql" />
+    <None Remove="Scripts\1.0.0.8\HEI\HEIEncounter.sql" />
+    <None Remove="Scripts\1.0.0.8\HEI\HEIFeeding.sql" />
+    <None Remove="Scripts\1.0.0.8\HEI\HEIProfile.sql" />
+    <None Remove="Scripts\1.0.0.8\HEI\Insert_Drug_Administration_LookUpItems.sql" />
+    <None Remove="Scripts\1.0.0.8\HEI\Lookups.sql" />
+    <None Remove="Scripts\1.0.0.8\HEI\PatientMilestone.sql" />
+    <None Remove="Scripts\1.0.0.8\HEI\Vaccination.sql" />
+    <None Remove="Scripts\1.0.0.8\MATERNITY\12_SO_Insert_MaternityEncounter.sql" />
+    <None Remove="Scripts\1.0.0.8\MATERNITY\13_SO_Insert_Baby_Birth_Outcome_Lookup.sql" />
+    <None Remove="Scripts\1.0.0.8\MATERNITY\14_SO_Insert_Drug_Administration_Lookup.sql" />
+    <None Remove="Scripts\1.0.0.8\PMTCT\01_Insert_PNC_LookUp_Data.sql" />
+    <None Remove="Scripts\1.0.0.8\PMTCT\02_Create_Table_PatientCounselling.sql" />
+    <None Remove="Scripts\1.0.0.8\PMTCT\03_CreateTable_PatientDelivery.sql" />
+    <None Remove="Scripts\1.0.0.8\PMTCT\04_CreateTable_PatientDrugAdministration.sql" />
+    <None Remove="Scripts\1.0.0.8\PMTCT\05_CreateTable_PatientLabSample.sql" />
+    <None Remove="Scripts\1.0.0.8\PMTCT\06_CreateTable_PatientOutcome.sql" />
+    <None Remove="Scripts\1.0.0.8\PMTCT\07_CreateTable_PatientPatnerTesting.sql" />
+    <None Remove="Scripts\1.0.0.8\PMTCT\08_CreateTable_PatientPreventiveServices.sql" />
+    <None Remove="Scripts\1.0.0.8\PMTCT\09_CreateTable_PatientProfile.sql" />
+    <None Remove="Scripts\1.0.0.8\PMTCT\10_CreateTable_PmtctBaby.sql" />
+    <None Remove="Scripts\1.0.0.8\PMTCT\11_AlterTable_Pregnancy_AddCol.sql" />
+    <None Remove="Scripts\1.0.0.8\PMTCT\12_DO_Create_Table_PatientMilestone.sql" />
+    <None Remove="Scripts\1.0.0.8\PMTCT\13_DO_Rename_Column_MilestoneComments.sql" />
+    <None Remove="Scripts\1.0.0.8\PMTCT\14_DO_Rename_Column_MilestoneDate.sql" />
+    <None Remove="Scripts\1.0.0.8\PMTCT\15_DO_Drop_Table_HeiMilestone.sql" />
+    <None Remove="Scripts\1.0.0.8\PMTCT\16_SO_CreateTableBaselineANC.sql" />
+    <None Remove="Scripts\1.0.0.9\01_DO_Rename_Table_PMTCTBaby.sql" />
+    <None Remove="Scripts\1.0.0.9\02_DO_CreateTable_DeliveredBabyApgarScore.sql" />
+    <None Remove="Scripts\1.0.0.9\03_DO_AlterTable_DeliveredBabyBirthInfo_AlterColmn_DeliveryComplications.sql" />
+    <None Remove="Scripts\1.0.0.9\04_DO_AlterTable_DeliveredBabyBirthInfo_DropApagarColumns.sql" />
+    <None Remove="Scripts\1.0.0.9\05_DO_Insert_ApgrarScoreDetails_Into_LookUpTables.sql" />
+    <None Remove="Scripts\1.0.0.9\06_DO_CreateView_DeliveredBabyBirthInfoView.sql" />
+    <None Remove="Scripts\1.0.0.9\07_DO_AlterTable_DeliveredBabyApgarScore_AddColumn_Score.sql" />
+    <None Remove="Scripts\1.0.0.9\08_DO_AlterTable_PatientDelivery_RenameColumn_BloodLoss.sql" />
+    <None Remove="Scripts\1.0.0.9\09_DO_AlterTable_PatientDelivery_AddColumn_MaternalDeathAudited.sql" />
+    <None Remove="Scripts\1.0.0.9\10_DO_AlterTable_PatientDelivery_AddColumn_MaternalDeathAuditDate.sql" />
+    <None Remove="Scripts\1.0.0.9\11_DO_AlterTable_PatientDelivery_AddColumn_BloodLossType.sql" />
+    <None Remove="Scripts\1.0.0.9\12_DO_AlterTable_PatientDelivery_AddFK_BloodLossType.sql" />
+    <None Remove="Scripts\1.0.0.9\13_DO_AlterTable_PatientDelivery_AddFK_MaternalDeathAudited.sql" />
+    <None Remove="Scripts\1.0.0.9\14_DO_AlterTable_PatientDelivery_AlterCol_DeliveryComplications.sql" />
+    <None Remove="Scripts\1.0.0.9\15_DO_CreateView_PatientDeliveryInformationView.sql" />
+    <None Remove="Scripts\1.0.0.9\16_DO_AlterTablePatientOutCome_Add_Column_Id.sql" />
+    <None Remove="Scripts\1.0.0.9\17_DO_AlterTable_PatientOutcome_AddPrimaryKey.sql" />
+    <None Remove="Scripts\1.0.0.9\18_DO_AlterTable_DeliveredBabyApgarScore_DropFK.sql" />
+    <None Remove="Scripts\1.0.0.9\19_DO_AlterTableBabyBirthInformation_Drop_PK_BirthId.sql" />
+    <None Remove="Scripts\1.0.0.9\20_DO_AlterTable_DeliveredBabyBirthInfo_RenameColumn_BirthId.sql" />
+    <None Remove="Scripts\1.0.0.9\21_DO_AlterTable_DeliveredBabyBirthInfo_AddPK.sql" />
+    <None Remove="Scripts\1.0.0.9\22_DO_AlterTable_ApgarScore_AddFK_DeliveredBabyInfoId.sql" />
+    <None Remove="Scripts\1.0.0.9\23_DO_AlterView_DeliveredBabyInfoView.sql" />
+    <None Remove="Scripts\1.0.0.9\24_DO_AlterTable_DeliveredBabyBirthInfomation_New_IdentityPK.sql" />
+    <None Remove="Scripts\1.0.0.9\25_DO_AlterTable_DeliveredBabyBirthInfo_Change_Cols_to_Bool.sql" />
+    <None Remove="Scripts\1.0.0.9\26_DO_CreateView_Delivered_BabyApgarScoreView.sql" />
+    <None Remove="Scripts\1.0.0.9\06_BO_AlterTable_PatientProfile_AddColumnPostPartum.sql" />
+    <None Remove="Scripts\1.0.0.9\07_BO_AlterTable_PatientProfile_SetPregnancyIdToNullable.sql" />
+    <None Remove="Scripts\1.0.0.9\27_DO_AlterTable_PatientProfile_AlterCol_AgeMenarch_Null.sql" />
+    <None Remove="Scripts\1.0.0.9\28_DO_AlterTable_PatientAppointment_AllowNull_DifferentiatedCareId.sql" />
+    <None Remove="Scripts\1.0.0.9\29_DO_AlterTable_PatientOutcome_AddAuditColumns.sql" />
+    <None Remove="Scripts\1.0.0.9\29_SO_AlterTable_PatientOutcome.sql" />
+    <None Remove="Scripts\1.0.0.9\30_SO_MaternityEncounterView.sql" />
+    <None Remove="Scripts\1.0.0.9\31_AlterTable_PatientOutcome_RenameCol_DateOfOutcome.sql" />
+    <None Remove="Scripts\1.0.0.9\31_BO_PatientFamilyPlanningLookUpViewItems.sql" />
+    <None Remove="Scripts\1.0.0.9\31_DO_CreateView_PatientDischargeInfoView.sql" />
+    <None Remove="Scripts\1.0.0.9\32_BO_PatientFamilyPlanningMethodView.sql" />
+    <None Remove="Scripts\1.0.0.9\32_DO_Insert_MaternalDrugAdmin_LookUp_Items.sql" />
+    <None Remove="Scripts\1.0.0.9\33_BO_AlterPtientInfoSetPostPartumtoDaysPostPartum.sql" />
+    <None Remove="Scripts\1.0.0.9\33_DO_AlterTable_PatientDrugAdministration_AlterCol_CreatedDate.sql" />
+    <None Remove="Scripts\1.0.0.9\34_DO_CreateView_PatientDrugAdministrationView.sql" />
+    <None Remove="Scripts\1.0.0.9\35_AlterTable_PatientReferral_Rename_And_Change_Col_DataTypes.sql" />
+    <None Remove="Scripts\1.0.0.9\36_DO_AlterTable_PatientDelivery_ChangeCol_DurationOfLabour.sql" />
+    <None Remove="Scripts\1.0.0.9\37_DO_Insert_PNC_LookUpItems.sql" />
+    <None Remove="Scripts\1.0.0.9\38_BO_PatientScreeningView.sql" />
+    <None Remove="Scripts\1.0.0.9\38_DO_CreateView_PatientChronicIllness.sql" />
+    <None Remove="Scripts\1.0.0.9\40_DO_CreateSproc_GetPatientRelationships.sql" />
+    <None Remove="Scripts\1.0.0.9\41_pr_iqcare_version_2.sql" />
+    <None Remove="Scripts\1.0.0.9\42_DO_AlterTable_Pregancy_AlterColumns.sql" />
+    <None Remove="Scripts\1.0.0.9\43_DO_AlterTable_PreventiveServices_AddColumn_NextSchedule.sql" />
+    <None Remove="Scripts\1.0.0.9\44_DO_CreateView_ANC_Register.sql" />
+    <None Remove="Scripts\1.0.0.9\45_DO_CreateView_HeiRegister.sql" />
+    <None Remove="Scripts\1.0.0.9\46_DO_CreateView_MaternityRegister.sql" />
+    <None Remove="Scripts\1.0.0.9\47_DO_CreateView_PNC_Register.sql" />
+    <None Remove="Scripts\1.0.0.9\48_DO_AlterView_HTS_LAB_Register.sql" />
+    <None Remove="Scripts\1.0.0.9\49_DO_AlterView_vw_FamilyTestingRegister.sql" />
+    <None Remove="Scripts\1.0.0.9\50_DO_AlterView_vw_HIVTesting_Services_Referral_Linkage_Register.sql" />
+    <None Remove="Scripts\1.0.0.9\51_DO_AlterView_vw_PartnerNotificationRegister.sql" />
+    <None Remove="Scripts\1.0.0.9\52_SO_CreateView_PatientCounsellingView.sql" />
+    <None Remove="Scripts\1.0.0.9\53_SO_CreateView_PatientExaminationView.sql" />
+    <None Remove="Scripts\1.0.0.9\54_SO_CreateView_pmtctPatientScreeningView.sql" />
+    <None Remove="Scripts\1.0.0.9\56_SO_CreateView_VisitDetailsView.sql" />
+    <None Remove="Scripts\2.0.0\01_SO_IQCare_Version.sql" />
+    <None Remove="Scripts\2.0.0\02_DO_AlterView_PatientDeliveryInfo.sql" />
+    <None Remove="Scripts\2.0.0\03 pr_Security_UserLogin_Constella.sql" />
+    <None Remove="Scripts\2.0.0\07_Nairobi_Missing_Subcounties_Wards.sql" />
+    <None Remove="Scripts\2.0.0\08_PatientConsent.sql" />
+    <None Remove="Scripts\2.0.0\09_PersonKinContactsView.sql" />
+    <None Remove="Scripts\2.0.0\12_SO_CreateView_PmtctRefferealView.sql" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Scripts\1.0.0.8\Common\01_SO_CreateVisitDetails_Table.sql" />
+    <EmbeddedResource Include="Scripts\1.0.0.8\MATERNITY\12_SO_Insert_MaternityEncounter.sql" />
+    <EmbeddedResource Include="Scripts\1.0.0.8\MATERNITY\13_SO_Insert_Baby_Birth_Outcome_Lookup.sql" />
+    <EmbeddedResource Include="Scripts\1.0.0.8\MATERNITY\14_SO_Insert_Drug_Administration_Lookup.sql" />
+    <EmbeddedResource Include="Scripts\1.0.0.8\PMTCT\01_Insert_PNC_LookUp_Data.sql" />
+    <EmbeddedResource Include="Scripts\1.0.0.8\PMTCT\02_Create_Table_PatientCounselling.sql" />
+    <EmbeddedResource Include="Scripts\1.0.0.8\PMTCT\03_CreateTable_PatientDelivery.sql" />
+    <EmbeddedResource Include="Scripts\1.0.0.8\PMTCT\04_CreateTable_PatientDrugAdministration.sql" />
+    <EmbeddedResource Include="Scripts\1.0.0.8\PMTCT\05_CreateTable_PatientLabSample.sql" />
+    <EmbeddedResource Include="Scripts\1.0.0.8\PMTCT\06_CreateTable_PatientOutcome.sql" />
+    <EmbeddedResource Include="Scripts\1.0.0.8\PMTCT\07_CreateTable_PatientPatnerTesting.sql" />
+    <EmbeddedResource Include="Scripts\1.0.0.8\PMTCT\08_CreateTable_PatientPreventiveServices.sql" />
+    <EmbeddedResource Include="Scripts\1.0.0.8\PMTCT\09_CreateTable_PatientProfile.sql" />
+    <EmbeddedResource Include="Scripts\1.0.0.8\PMTCT\10_CreateTable_PmtctBaby.sql" />
+    <EmbeddedResource Include="Scripts\1.0.0.8\PMTCT\11_AlterTable_Pregnancy_AddCol.sql" />
+    <EmbeddedResource Include="Scripts\1.0.0.8\PMTCT\12_DO_Create_Table_PatientMilestone.sql" />
+    <EmbeddedResource Include="Scripts\1.0.0.8\PMTCT\13_DO_Rename_Column_MilestoneComments.sql" />
+    <EmbeddedResource Include="Scripts\1.0.0.8\PMTCT\14_DO_Rename_Column_MilestoneDate.sql" />
+    <EmbeddedResource Include="Scripts\1.0.0.8\PMTCT\15_DO_Drop_Table_HeiMilestone.sql" />
+    <EmbeddedResource Include="Scripts\1.0.0.8\PMTCT\16_SO_CreateTableBaselineANC.sql" />
+    <EmbeddedResource Include="Scripts\1.0.0.9\38_BO_PatientScreeningView.sql" />
+    <EmbeddedResource Include="Scripts\1.0.0.9\39_SO_vw_PatientEncounters.sql" />
+    <EmbeddedResource Include="Scripts\1.0.0.9\32_DO_Insert_MaternalDrugAdmin_LookUp_Items.sql" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Scripts\1.0.0.9\33_BO_AlterPtientInfoSetPostPartumtoDaysPostPartum.sql" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Scripts\1.0.0.9\01_DO_Rename_Table_PMTCTBaby.sql" />
+    <EmbeddedResource Include="Scripts\1.0.0.9\02_DO_CreateTable_DeliveredBabyApgarScore.sql" />
+    <EmbeddedResource Include="Scripts\1.0.0.9\03_DO_AlterTable_DeliveredBabyBirthInfo_AlterColmn_DeliveryComplications.sql" />
+    <EmbeddedResource Include="Scripts\1.0.0.9\04_DO_AlterTable_DeliveredBabyBirthInfo_DropApagarColumns.sql" />
+    <EmbeddedResource Include="Scripts\1.0.0.8\MATERNITY\05_DO_Insert_ApgrarScoreDetails_Into_LookUpTables.sql" />
+    <EmbeddedResource Include="Scripts\1.0.0.9\06_DO_CreateView_DeliveredBabyBirthInfoView.sql" />
+    <EmbeddedResource Include="Scripts\1.0.0.9\07_DO_AlterTable_DeliveredBabyApgarScore_AddColumn_Score.sql" />
+    <EmbeddedResource Include="Scripts\1.0.0.9\08_DO_AlterTable_PatientDelivery_RenameColumn_BloodLoss.sql" />
+    <EmbeddedResource Include="Scripts\1.0.0.9\09_DO_AlterTable_PatientDelivery_AddColumn_MaternalDeathAudited.sql" />
+    <EmbeddedResource Include="Scripts\1.0.0.9\10_DO_AlterTable_PatientDelivery_AddColumn_MaternalDeathAuditDate.sql" />
+    <EmbeddedResource Include="Scripts\1.0.0.9\11_DO_AlterTable_PatientDelivery_AddColumn_BloodLossType.sql" />
+    <EmbeddedResource Include="Scripts\1.0.0.9\12_DO_AlterTable_PatientDelivery_AddFK_BloodLossType.sql" />
+    <EmbeddedResource Include="Scripts\1.0.0.9\13_DO_AlterTable_PatientDelivery_AddFK_MaternalDeathAudited.sql" />
+    <EmbeddedResource Include="Scripts\1.0.0.9\14_DO_AlterTable_PatientDelivery_AlterCol_DeliveryComplications.sql" />
+    <EmbeddedResource Include="Scripts\1.0.0.9\15_DO_CreateView_PatientDeliveryInformationView.sql" />
+    <EmbeddedResource Include="Scripts\1.0.0.9\16_DO_AlterTablePatientOutCome_Add_Column_Id.sql" />
+    <EmbeddedResource Include="Scripts\1.0.0.9\17_DO_AlterTable_PatientOutcome_AddPrimaryKey.sql" />
+    <EmbeddedResource Include="Scripts\1.0.0.9\19_DO_AlterTableBabyBirthInformation_Drop_PK_BirthId.sql" />
+    <EmbeddedResource Include="Scripts\1.0.0.9\18_DO_AlterTable_DeliveredBabyApgarScore_DropFK.sql" />
+    <EmbeddedResource Include="Scripts\1.0.0.9\20_DO_AlterTable_DeliveredBabyBirthInfo_RenameColumn_BirthId.sql" />
+    <EmbeddedResource Include="Scripts\1.0.0.9\21_DO_AlterTable_DeliveredBabyBirthInfo_AddPK.sql" />
+    <EmbeddedResource Include="Scripts\1.0.0.9\22_DO_AlterTable_ApgarScore_AddFK_DeliveredBabyInfoId.sql" />
+    <EmbeddedResource Include="Scripts\1.0.0.9\23_DO_AlterView_DeliveredBabyInfoView.sql" />
+    <EmbeddedResource Include="Scripts\1.0.0.9\24_DO_AlterTable_DeliveredBabyBirthInfomation_New_IdentityPK.sql" />
+    <EmbeddedResource Include="Scripts\1.0.0.9\25_DO_AlterTable_DeliveredBabyBirthInfo_Change_Cols_to_Bool.sql" />
+    <EmbeddedResource Include="Scripts\1.0.0.9\26_DO_CreateView_Delivered_BabyApgarScoreView.sql" />
+    <EmbeddedResource Include="Scripts\1.0.0.9\06_BO_AlterTable_PatientProfile_AddColumnPostPartum.sql" />
+    <EmbeddedResource Include="Scripts\1.0.0.9\07_BO_AlterTable_PatientProfile_SetPregnancyIdToNullable.sql" />
+    <EmbeddedResource Include="Scripts\1.0.0.9\27_DO_AlterTable_PatientProfile_AlterCol_AgeMenarch_Null.sql" />
+    <EmbeddedResource Include="Scripts\1.0.0.9\28_DO_AlterTable_PatientAppointment_AllowNull_DifferentiatedCareId.sql" />
+    <EmbeddedResource Include="Scripts\1.0.0.9\29_DO_AlterTable_PatientOutcome_AddAuditColumns.sql" />
+    <EmbeddedResource Include="Scripts\1.0.0.9\29_SO_AlterTable_PatientOutcome.sql" />
+    <EmbeddedResource Include="Scripts\1.0.0.9\31_AlterTable_PatientOutcome_RenameCol_DateOfOutcome.sql" />
+    <EmbeddedResource Include="Scripts\1.0.0.9\31_BO_PatientFamilyPlanningLookUpViewItems.sql" />
+    <EmbeddedResource Include="Scripts\1.0.0.9\31_DO_CreateView_PatientDischargeInfoView.sql" />
+    <EmbeddedResource Include="Scripts\1.0.0.9\32_BO_PatientFamilyPlanningMethodView.sql" />
+    <EmbeddedResource Include="Scripts\1.0.0.9\33_DO_AlterTable_PatientDrugAdministration_AlterCol_CreatedDate.sql" />
+    <EmbeddedResource Include="Scripts\1.0.0.9\34_DO_CreateView_PatientDrugAdministrationView.sql" />
+    <EmbeddedResource Include="Scripts\1.0.0.9\35_AlterTable_PatientReferral_Rename_And_Change_Col_DataTypes.sql" />
+    <EmbeddedResource Include="Scripts\1.0.0.9\36_DO_AlterTable_PatientDelivery_ChangeCol_DurationOfLabour.sql" />
+    <EmbeddedResource Include="Scripts\1.0.0.9\37_DO_Insert_PNC_LookUpItems.sql" />
+    <EmbeddedResource Include="Scripts\1.0.0.9\38_DO_CreateView_PatientChronicIllness.sql" />
+    <EmbeddedResource Include="Scripts\1.0.0.9\40_DO_CreateSproc_GetPatientRelationships.sql" />
+    <EmbeddedResource Include="Scripts\1.0.0.9\41_pr_iqcare_version_2.sql" />
+    <EmbeddedResource Include="Scripts\1.0.0.9\42_DO_AlterTable_Pregancy_AlterColumns.sql" />
+    <EmbeddedResource Include="Scripts\1.0.0.9\43_DO_AlterTable_PreventiveServices_AddColumn_NextSchedule.sql" />
+    <EmbeddedResource Include="Scripts\1.0.0.9\44_DO_CreateView_ANC_Register.sql" />
+    <EmbeddedResource Include="Scripts\1.0.0.9\45_DO_CreateView_HeiRegister.sql" />
+    <EmbeddedResource Include="Scripts\1.0.0.9\46_DO_CreateView_MaternityRegister.sql" />
+    <EmbeddedResource Include="Scripts\1.0.0.9\47_DO_CreateView_PNC_Register.sql" />
+    <EmbeddedResource Include="Scripts\1.0.0.9\48_DO_AlterView_HTS_LAB_Register.sql" />
+    <EmbeddedResource Include="Scripts\1.0.0.9\49_DO_AlterView_vw_FamilyTestingRegister.sql" />
+    <EmbeddedResource Include="Scripts\1.0.0.9\50_DO_AlterView_vw_HIVTesting_Services_Referral_Linkage_Register.sql" />
+    <EmbeddedResource Include="Scripts\1.0.0.9\51_DO_AlterView_vw_PartnerNotificationRegister.sql" />
+    <EmbeddedResource Include="Scripts\1.0.0.9\52_SO_CreateView_PatientCounsellingView.sql" />
+    <EmbeddedResource Include="Scripts\1.0.0.9\53_SO_CreateView_PatientExaminationView.sql" />
+    <EmbeddedResource Include="Scripts\1.0.0.9\54_SO_CreateView_pmtctPatientScreeningView.sql" />
+    <EmbeddedResource Include="Scripts\1.0.0.9\56_SO_CreateView_VisitDetailsView.sql" />
+    <EmbeddedResource Include="Scripts\1.0.0.9\01_SO_IQCare_Version.sql" />
+    <EmbeddedResource Include="Scripts\2.0.0\02_DO_AlterView_PatientDeliveryInfo.sql" />
+    <EmbeddedResource Include="Scripts\2.0.0\03 pr_Security_UserLogin_Constella.sql" />
+    <EmbeddedResource Include="Scripts\2.0.0\07_Nairobi_Missing_Subcounties_Wards.sql" />
+    <EmbeddedResource Include="Scripts\2.0.0\08_PatientConsent.sql" />
+    <EmbeddedResource Include="Scripts\2.0.0\09_PersonKinContactsView.sql" />
+    <EmbeddedResource Include="Scripts\2.0.0\12_SO_CreateView_PmtctRefferealView.sql" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="dbup" Version="4.1.0" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="2.1.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="Microsoft.Extensions.Configuration">
+      <HintPath>..\..\..\..\..\..\..\..\Program Files\dotnet\sdk\NuGetFallbackFolder\microsoft.extensions.configuration\2.1.1\lib\netstandard2.0\Microsoft.Extensions.Configuration.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.Configuration.Abstractions">
+      <HintPath>..\..\..\..\..\..\..\..\Program Files\dotnet\sdk\NuGetFallbackFolder\microsoft.extensions.configuration.abstractions\2.1.1\lib\netstandard2.0\Microsoft.Extensions.Configuration.Abstractions.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\IQCare.SharedKernel.Infrastructure\IQCare.SharedKernel.Infrastructure.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="appsettings.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
+</Project>

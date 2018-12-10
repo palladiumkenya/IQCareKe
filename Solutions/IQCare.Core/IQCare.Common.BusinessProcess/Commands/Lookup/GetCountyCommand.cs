@@ -4,7 +4,7 @@ using MediatR;
 
 namespace IQCare.Common.BusinessProcess.Commands.Lookup
 {
-    public class GetCountyCommand : IRequest<Result<GetCountyResponse>>
+    public class GetCountyCommand : IRequest<Library.Result<GetCountyResponse>>
     {
         public int? CountyId { get; set; }
         public int? SubcountyId { get; set; }

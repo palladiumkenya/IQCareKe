@@ -1,0 +1,231 @@
+<div class="row">
+    <div class="col-lg-12 col-sm-12 col-xs-12">
+        <div class="widget">
+            <div class="widget-header bordered-bottom bordered-blue">
+                <span class="widget-caption">Triage</span>
+            </div>
+            <div class="widget-body">
+                <form class="form-group" novalidate [formGroup]="vitalsFormGroup">
+                    <div class="row">
+                        <div class="col-lg-3 col-xs-12">
+                            <mat-form-field class="col-md-12">
+                                <input [max]="maxDate" matInput [matDatepicker]="picker2" formControlName="visitDate"
+                                    placeholder="Visit Date" required (click)="picker2.open()">
+                                <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+                                <mat-datepicker #picker2 ngDefaultControl></mat-datepicker>
+                            </mat-form-field>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-title">
+                                <span class="mat-accent"> Anthropometric Measurements </span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-lg-3 col-xs-12">
+                            <mat-form-field class="col-md-12">
+                                <input matInput placeholder="Height (cm)" formControlName="height" required>
+                            </mat-form-field>
+                        </div>
+                        <div class="col-md-3 col-xs-12 col-sm-12">
+                            <mat-form-field class="col-md-12">
+                                <input matInput placeholder="Weight (kgs)" formControlName="weight"
+                                 (change)="calculateZscore()"
+                                    required>
+                            </mat-form-field>
+                        </div>
+                        <div class="col-lg-3 col-xs-12">
+                            <mat-form-field class="col-md-12">
+                                <input matInput placeholder="BMI" formControlName="bmi" required>
+                            </mat-form-field>
+                        </div>
+                        <div class="col-lg-3 col-xs-12">
+                            <mat-form-field class="col-md-12">
+                                <input matInput placeholder="Head Circumference" formControlName="headCircumference">
+                            </mat-form-field>
+                        </div>
+                        <div class="col-lg-3 col-xs-12">
+                            <mat-form-field class="col-md-12">
+                                <input matInput placeholder="MUAC(cm)" formControlName="muac">
+                            </mat-form-field>
+                        </div>
+                        <div class="col-lg-3 col-xs-12">
+                            <mat-form-field class="col-md-12">
+                                <input matInput placeholder="Weight for age zscore" formControlName="weightForAge">
+                            </mat-form-field>
+                        </div>
+                        <div class="col-lg-3 col-xs-12">
+                            <mat-form-field class="col-md-12">
+                                <input matInput placeholder="Weight for height zscore" formControlName="weightForHeight">
+                            </mat-form-field>
+                        </div>
+                        <div class="col-lg-3 col-xs-12">
+                            <mat-form-field class="col-md-12">
+                                <input matInput placeholder="BMI Zscore" formControlName="bmiZ">
+                            </mat-form-field>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-title">
+                                <span class="mat-accent"> Vital Signs </span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-lg-3 col-xs-12">
+                            <mat-form-field class="col-md-12">
+                                <input matInput placeholder="Systolic BP(mmHg)" formControlName="bpSystolic" required>
+                            </mat-form-field>
+                        </div>
+                        <div class="col-lg-3 col-xs-12">
+                            <mat-form-field class="col-md-12">
+                                <input matInput placeholder="Diastolic BP (mmHg)" formControlName="bpDiastolic"
+                                    required>
+                            </mat-form-field>
+                        </div>
+                        <div class="col-lg-3 col-xs-12">
+                            <mat-form-field class="col-md-12">
+                                <input matInput placeholder="Temperature (℃)" formControlName="temperature" required>
+                            </mat-form-field>
+                        </div>
+                        <div class="col-lg-3 col-xs-12">
+                            <mat-form-field class="col-md-12">
+                                <input matInput placeholder="Respiratory Rate(bpm)" formControlName="respiratoryRate">
+                            </mat-form-field>
+                        </div>
+                        <div class="col-lg-3 col-xs-12">
+                            <mat-form-field class="col-md-12">
+                                <input matInput placeholder="Heart Rate(bpm)" formControlName="heartRate">
+                            </mat-form-field>
+                        </div>
+                        <div class="col-lg-3 col-xs-12">
+                            <mat-form-field class="col-md-12">
+                                <input matInput placeholder="SPO2 (%)" formControlName="spo2">
+                            </mat-form-field>
+                        </div>
+
+                    </div>
+
+                    <div class="row">
+                        <div class="col-lg-8 col-xs-12">
+                            <mat-form-field class="col-lg-12">
+                                <textarea matInput placeholder="Nurse Comments" formControlName="comment"> </textarea>
+                            </mat-form-field>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-lg-4 col-xs-12"></div>
+                        <div class="col-lg-4 col-xs-12">
+                            <button mat-raised-button class="mat-primary" (click)="SubmitPatientVitalInfo()">
+                                <span class="fa fa-plus-circle">
+                                    Add Details
+                                </span>
+                            </button>
+                        </div>
+                        <div class="col-lg-4 col-xs-12"></div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-12 col-xs-12">
+                            <div class="example-container mat-elevation-z0">
+                                <mat-table #table [dataSource]="dataSource">
+                                    <!-- Symbol Column -->
+                                    <ng-container matColumnDef="visitdate">
+                                        <mat-header-cell *matHeaderCellDef><strong>Visit Date</strong>
+                                        </mat-header-cell>
+                                        <mat-cell *matCellDef="let vitalsDataTable"> {{vitalsDataTable.visitDate |
+                                            date:'dd-MMM-yyyy'}}
+                                        </mat-cell>
+                                    </ng-container>
+
+                                    <!-- Position Column -->
+                                    <ng-container matColumnDef="height">
+                                        <mat-header-cell *matHeaderCellDef><strong>Height(cm)</strong>
+                                        </mat-header-cell>
+                                        <mat-cell *matCellDef="let vitalsDataTable"> {{vitalsDataTable.height}}
+                                        </mat-cell>
+                                    </ng-container>
+
+                                    <!-- Name Column -->
+                                    <ng-container matColumnDef="weight">
+                                        <mat-header-cell *matHeaderCellDef> Weight (kg) </mat-header-cell>
+                                        <mat-cell *matCellDef="let vitalsDataTable"> {{vitalsDataTable.weight }}
+                                        </mat-cell>
+                                    </ng-container>
+
+                                    <!-- Weight Column -->
+                                    <ng-container matColumnDef="bmi">
+                                        <mat-header-cell *matHeaderCellDef> <strong>BMI</strong> </mat-header-cell>
+                                        <mat-cell *matCellDef="let vitalsDataTable"> {{vitalsDataTable.bmi}} </mat-cell>
+                                    </ng-container>
+                                    <!-- Symbol Column -->
+                                    <ng-container matColumnDef="diastolic">
+                                        <mat-header-cell *matHeaderCellDef><strong>BP (Diastolic)</strong>
+                                        </mat-header-cell>
+                                        <mat-cell *matCellDef="let vitalsDataTable"> {{vitalsDataTable.diastolic}}
+                                        </mat-cell>
+                                    </ng-container>
+
+                                    <!-- Symbol Column -->
+                                    <ng-container matColumnDef="systolic">
+                                        <mat-header-cell *matHeaderCellDef><strong>BP (Systolic)</strong>
+                                        </mat-header-cell>
+                                        <mat-cell *matCellDef="let vitalsDataTable"> {{vitalsDataTable.systolic}}
+                                        </mat-cell>
+                                    </ng-container>
+
+                                    <!-- Symbol Column -->
+                                    <ng-container matColumnDef="temperature">
+                                        <mat-header-cell *matHeaderCellDef><strong>Temperature (℃)</strong>
+                                        </mat-header-cell>
+                                        <mat-cell *matCellDef="let vitalsDataTable"> {{vitalsDataTable.temperature}}
+                                        </mat-cell>
+                                    </ng-container>
+
+                                    <!-- Symbol Column -->
+                                    <ng-container matColumnDef="respiratoryrate">
+                                        <mat-header-cell *matHeaderCellDef><strong>Respiratory Rate (bpm)</strong>
+                                        </mat-header-cell>
+                                        <mat-cell *matCellDef="let vitalsDataTable">
+                                            {{vitalsDataTable.respiratoryRate}} </mat-cell>
+                                    </ng-container>
+
+                                    <!-- Symbol Column -->
+                                    <ng-container matColumnDef="heartrate">
+                                        <mat-header-cell *matHeaderCellDef><strong>Heart Rate</strong>
+                                        </mat-header-cell>
+                                        <mat-cell *matCellDef="let vitalsDataTable"> {{vitalsDataTable.heartRate}}
+                                        </mat-cell>
+                                    </ng-container>
+
+
+                                    <!-- actions -->
+                                    <ng-container matColumnDef="action">
+                                        <mat-header-cell *matHeaderCellDef><strong class="fa fa-cog"> Action</strong></mat-header-cell>
+                                        <mat-cell *matCellDef="let row">
+                                            <button mat-raised-button class="mat-accent"><span class="fa fa-pencil">
+                                                    Edit </span>
+                                            </button>
+                                        </mat-cell>
+                                    </ng-container>
+
+
+                                    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                                    <mat-row *matRowDef="let row; columns: displayedColumns" (click)="onRowClicked(row)">
+                                    </mat-row>
+                                </mat-table>
+                                <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

@@ -40,9 +40,16 @@ namespace IQCare.CCC.UILogic.Screening
         {
             try
             {
-                //(screening>0) ? update:add
-                int screeningResult = _patientScreening.checkScreeningByScreeningCategoryId(patientId, screeningType, screeningCategory);
-                if (screeningResult > 0)
+                int screeningResult;
+                if (patientMasterVisitId > 0)
+                {
+                    screeningResult = _patientScreening.checkScreeningByVisitId(patientId, patientMasterVisitId, screeningType, screeningCategory);
+                }
+                else {
+                    //(screening>0) ? update:add
+                    screeningResult = _patientScreening.checkScreeningByScreeningCategoryId(patientId, screeningType, screeningCategory);
+                }
+               if (screeningResult > 0)
                 {
                     var PS = new PatientScreening()
                     {
@@ -229,13 +236,15 @@ namespace IQCare.CCC.UILogic.Screening
         }
 
        
-        public int UpdatePatientScreening(int id,DateTime visitDate ,int screeningTypeId, bool screeningDone, DateTime screeningDate, int screeningCategoryId, int screeningValueId, string comment)
+        public int UpdatePatientScreening(int id,DateTime visitDate,int patientId,int patientMasterVisitId,int screeningTypeId, bool screeningDone, DateTime screeningDate, int screeningCategoryId, int screeningValueId, string comment)
         {
             try
             {
                 var PS = new PatientScreening()
                 {
                     Id = id,
+                    PatientId=patientId,
+                    PatientMasterVisitId=patientMasterVisitId,
                     VisitDate = visitDate,
                     ScreeningTypeId = screeningTypeId,
                     ScreeningDone = Convert.ToBoolean(screeningDone),

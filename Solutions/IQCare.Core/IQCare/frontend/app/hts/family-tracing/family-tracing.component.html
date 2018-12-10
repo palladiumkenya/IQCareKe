@@ -4,10 +4,10 @@
     </div>
     <div class="ibox-content">
         <div class="row">
-            <div class="col-md-2">
+            <!--<div class="col-md-2">
                 <app-leftnav></app-leftnav>
-            </div>
-            <div class="col-md-10 animated fadeIn">
+            </div>-->
+            <div class="col-md-12 animated fadeIn">
                 <div class="panel panel-default">
                     <div class="panel-heading">FAMILY TRACING</div>
                     <div class="panel-body">
@@ -25,7 +25,8 @@
                                     </mat-form-field>
 
                                     <mat-form-field>
-                                        <mat-select placeholder="Tracing Outcome" formControlName="outcome" tabindex="4" (selectionChange)="onTracingOutcomeChange()">
+                                        <mat-select placeholder="Tracing Outcome" formControlName="outcome" tabindex="4"
+                                            (selectionChange)="onTracingOutcomeChange()">
                                             <mat-option></mat-option>
                                             <mat-option *ngFor="let option of tracingOutcomeOptions" [value]="option.itemId">{{option.itemName}}</mat-option>
                                         </mat-select>
@@ -35,7 +36,8 @@
 
                                 <div class="col-lg-4 col-md-4 col-sm-4">
                                     <mat-form-field>
-                                        <input matInput [matDatepicker]="myDatepicker" formControlName="dateFamilyContacted" placeholder="Date Contacted" tabindex="2" (click)="myDatepicker.open()">
+                                        <input matInput [matDatepicker]="myDatepicker" formControlName="dateFamilyContacted"
+                                            placeholder="Date Contacted" tabindex="2" (click)="myDatepicker.open()">
                                         <mat-datepicker-toggle matSuffix [for]="myDatepicker"></mat-datepicker-toggle>
                                         <mat-datepicker #myDatepicker></mat-datepicker>
                                     </mat-form-field>
@@ -50,13 +52,15 @@
 
                                 <div class="col-lg-4 col-md-4 col-sm-4">
                                     <mat-form-field>
-                                        <input matInput [matDatepicker]="indexDatepicker" formControlName="dateReminded" placeholder="Date Reminded" tabindex="3" (click)="indexDatepicker.open()">
+                                        <input matInput [matDatepicker]="indexDatepicker" formControlName="dateReminded"
+                                            placeholder="Date Reminded" tabindex="3" (click)="indexDatepicker.open()">
                                         <mat-datepicker-toggle matSuffix [for]="indexDatepicker"></mat-datepicker-toggle>
                                         <mat-datepicker #indexDatepicker></mat-datepicker>
                                     </mat-form-field>
 
                                     <mat-form-field>
-                                        <input matInput [matDatepicker]="bookedDatepicker" formControlName="dateBooked" placeholder="Date Booked" tabindex="6" (click)="bookedDatepicker.open()">
+                                        <input matInput [matDatepicker]="bookedDatepicker" formControlName="dateBooked"
+                                            placeholder="Date Booked" tabindex="6" (click)="bookedDatepicker.open()">
                                         <mat-datepicker-toggle matSuffix [for]="bookedDatepicker"></mat-datepicker-toggle>
                                         <mat-datepicker #bookedDatepicker></mat-datepicker>
                                     </mat-form-field>

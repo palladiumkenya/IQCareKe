@@ -1,0 +1,82 @@
+<form class="form-group" [formGroup]="motherProfileFormGroup">
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="form-title">
+                <span class="mat-accent"> Mother Profile </span>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-4 col-xs-12 col-sm-12">
+            <mat-form-field class="col-md-12 col-sm-6 col-xs-12">
+                <input matInput [max]="maxDate"  [matDatepicker]="dateLMP" formControlName="dateLMP" (dateChange)="onLMPDateChange()"
+                       placeholder="LMP" (click)="dateLMP.open()">
+                <mat-datepicker-toggle matSuffix [for]="dateLMP"></mat-datepicker-toggle>
+                <mat-datepicker #dateLMP></mat-datepicker>
+            </mat-form-field>
+        </div>
+
+        <div class="col-md-4 col-xs-12 col-sm-12">
+            <mat-form-field class="col-md-12">
+                <input matInput min="9"  [matDatepicker]="dateEDD" formControlName="dateEDD" placeholder="EDD" required (click)="dateEDD.open()" >
+                <mat-datepicker-toggle matSuffix [for]="dateEDD"></mat-datepicker-toggle>
+                <mat-datepicker #dateEDD></mat-datepicker>
+            </mat-form-field>
+        </div>
+
+        <div class="col-md-4 col-xs-12 col-sm-12">
+            <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12">
+                <mat-form-field class=" col-lg-12 col-xs-12">
+                    <input type="number" max="45"  matInput formControlName="gestation" placeholder="gestation (weeks)"  required>
+                </mat-form-field>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-4 col-sm-12 col-xs-12">
+            <mat-form-field class="col-lg-12 col-xs-12">
+                <input matInput formControlName="ageAtMenarche" placeholder="Age at Menarche (8yr-20yr)" >
+            </mat-form-field>
+
+        </div>
+        <div class="col-lg-4 col-sm-12 col-xs-12">
+            <div class="col-l-2 col-sm-6 col-xs-12">
+
+            </div>
+            <div class="col-l-2 col-sm-6 col-xs-12"></div>
+        </div>
+        <div class="col-lg-4 col-sm-12 col-xs-12">
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-4 col-xs-12 col-sm-12">
+            <mat-form-field class="col-md-4">
+                <input type="number" min="0" max="10" matInput formControlName="parityOne" class="red" placeholder="para" value="" required>
+            </mat-form-field>
+        </div>
+
+        <div class="col-md-4 col-xs-12 col-sm-12">
+            <mat-form-field class="col-md-4">
+                <input type="number" min="0" max="10" type="number " matInput formControlName="parityTwo" (change)="onParityTwoChange()"
+                       placeholder="Plus" value="" required>
+            </mat-form-field>
+        </div>
+
+        <div class="col-md-4 col-xs-12 col-sm-12"></div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-4 col-xs-12 col-sm-12 ">
+            <mat-form-field class=" col-lg-4 col-xs-12">
+                <input type="number" matInput placeholder="Gravidae" formControlName="gravidae" value="0">
+            </mat-form-field>
+        </div>
+        <div class="col-md-4 col-xs-12 col-sm-12 "></div>
+        <div class="col-md-4 col-xs-12 col-sm-12 "></div>
+    </div>
+
+</form>

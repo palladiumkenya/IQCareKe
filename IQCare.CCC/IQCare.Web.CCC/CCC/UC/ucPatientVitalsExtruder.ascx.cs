@@ -53,8 +53,22 @@ namespace IQCare.Web.CCC.UC
                 lblVitalsDate.Text = "<span class='label label-primary'>Date Taken :" + Convert.ToDateTime(patientTriage.VisitDate).ToString("dd-MMM-yyyy")+"</span>";
                 vitalHeight.Text = "<span class='label label-primary'>" + Convert.ToString(patientTriage.Height)+"</span>";
                 vitalsWeight.Text = "<span class='label label-primary'>" + patientTriage.Weight.ToString() + "</span>";
-                vitalsCircumference.Text = patientTriage.HeadCircumference.ToString();
-                vitalsMUAC.Text = patientTriage.Muac.ToString();
+                if (patientTriage.HeadCircumference > 0)
+                {
+                    vitalsCircumference.Text = patientTriage.HeadCircumference.ToString();
+                }
+                else
+                {
+                    dvHeadCircum.Visible = false;
+                }
+                if (patientTriage.Muac > 0)
+                {
+                    vitalsMUAC.Text =patientTriage.Muac.ToString();
+                }
+                else
+                {
+                    dvMuac.Visible = false;
+                }
                 vitalBloodPressure.Text = patientTriage.BpSystolic.ToString() + '/' +
                                           patientTriage.Bpdiastolic.ToString();
                 vitalTemperature.Text = patientTriage.Temperature.ToString();

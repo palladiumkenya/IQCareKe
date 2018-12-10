@@ -8,10 +8,11 @@ using System.Collections.Generic;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using IQCare.Library;
 
 namespace IQCareRecords.Common.BusinessProcess.CommandHandlers.Lookup
 {
-    
+
 
     public class GetPersonIdentificationCommandHandler : IRequestHandler<GetPersonIdentificationCommand, Result<GetPersonIdentificationResponse>>
     {
@@ -21,7 +22,7 @@ namespace IQCareRecords.Common.BusinessProcess.CommandHandlers.Lookup
         {
             _unitOfWork = unitOfWork ?? throw new ArgumentNullException(nameof(unitOfWork));
         }
-       
+
 
         public async Task<Result<GetPersonIdentificationResponse>> Handle(GetPersonIdentificationCommand request, CancellationToken cancellationToken)
         {

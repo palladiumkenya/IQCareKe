@@ -12,7 +12,7 @@ using Serilog;
 
 namespace IQCare.Common.BusinessProcess.CommandHandlers.Lookup
 {
-    public class GetCountyCommandHandler : IRequestHandler<GetCountyCommand, Result<GetCountyResponse>>
+    public class GetCountyCommandHandler : IRequestHandler<GetCountyCommand, Library.Result<GetCountyResponse>>
     {
         private readonly ICommonUnitOfWork _unitOfWork;
         public GetCountyCommandHandler(ICommonUnitOfWork unitOfWork)
@@ -20,7 +20,7 @@ namespace IQCare.Common.BusinessProcess.CommandHandlers.Lookup
             _unitOfWork = unitOfWork ?? throw new ArgumentNullException(nameof(unitOfWork));
         }
 
-        public async Task<Result<GetCountyResponse>> Handle(GetCountyCommand request, CancellationToken cancellationToken)
+        public async Task<Library.Result<GetCountyResponse>> Handle(GetCountyCommand request, CancellationToken cancellationToken)
         {
             try
             {
@@ -53,7 +53,7 @@ namespace IQCare.Common.BusinessProcess.CommandHandlers.Lookup
 
                     _unitOfWork.Dispose();
 
-                    return Result<GetCountyResponse>.Valid(new GetCountyResponse()
+                    return Library.Result<GetCountyResponse>.Valid(new GetCountyResponse()
                     {
                         County = result
                     });
@@ -62,7 +62,7 @@ namespace IQCare.Common.BusinessProcess.CommandHandlers.Lookup
             catch (Exception e)
             {
                 Log.Error(e.Message);
-                return Result<GetCountyResponse>.Invalid(e.Message);
+                return Library.Result<GetCountyResponse>.Invalid(e.Message);
             }
         }
     }

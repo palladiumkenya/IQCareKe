@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using IQCare.Common.BusinessProcess.Commands.PersonCommand;
 using IQCare.Common.Core.Models;
 using IQCare.Common.Infrastructure;
+using IQCare.Library;
 using MediatR;
 using Serilog;
 
@@ -27,7 +28,7 @@ namespace IQCare.Common.BusinessProcess.CommandHandlers.PersonCommand
                 {
                     StringBuilder sql = new StringBuilder();
                     sql.Append("exec pr_OpenDecryptedSession;");
-                    sql.Append($"SELECT * FROM Api_PatientsView WHERE PersonId = {request.PersonId};");
+                    sql.Append($"SELECT TOP 1 * FROM Api_PatientsView WHERE PersonId = {request.PersonId};");
                     sql.Append("exec [dbo].[pr_CloseDecryptedSession];");
 
                     var result = await _unitOfWork.Repository<PatientLookupView>().FromSql(sql.ToString());

@@ -49,6 +49,15 @@ namespace IQCare.Web.CCC.UC {
         protected global::System.Web.UI.WebControls.Label vitalsBMI;
         
         /// <summary>
+        /// dvHeadCircum control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl dvHeadCircum;
+        
+        /// <summary>
         /// vitalsCircumference control.
         /// </summary>
         /// <remarks>
@@ -56,6 +65,24 @@ namespace IQCare.Web.CCC.UC {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label vitalsCircumference;
+        
+        /// <summary>
+        /// dvMuac control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl dvMuac;
+        
+        /// <summary>
+        /// lblMuac control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl lblMuac;
         
         /// <summary>
         /// vitalsMUAC control.

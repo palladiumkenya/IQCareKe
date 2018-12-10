@@ -1,0 +1,177 @@
+<div class="row">
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        <div class="row">
+            <div class="col-lg-12 col-sm-12 col-xs-12">
+                <div class="widget">
+                    <div class="widget-header bordered-left">
+                        <span class="widget-caption">SEARCH</span>
+                    </div>
+                    <div class="widget-body bordered-left">
+                        <form class="form-inline" role="form">
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label class="sr-only" for="identifierNumber">Identifier Number</label>
+                                        <input type="text" autocomplete="off" class="form-control" id="identifierNumber"
+                                            name="identifierNumber" placeholder="Identifier Number" tabindex="1"
+                                            [(ngModel)]="clientSearch.identifierValue" #identifierValue="ngModel">
+                                    </div>
+                                </div>
+
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label class="sr-only" for="firstName">First Name</label>
+                                        <input type="text" autocomplete="off" class="form-control" id="firstName" name="firstName"
+                                            placeholder="First Name" tabindex="2" [(ngModel)]="clientSearch.firstName"
+                                            #firstName="ngModel">
+                                    </div>
+                                </div>
+
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label class="sr-only" for="middleName">Middle Name</label>
+                                        <input type="text" autocomplete="off" class="form-control" id="middleName" name="middleName"
+                                            placeholder="Middle Name" tabindex="3" [(ngModel)]="clientSearch.middleName"
+                                            #middleName="ngModel">
+                                    </div>
+                                </div>
+
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label class="sr-only" for="lastName">Last Name</label>
+                                        <input type="text" autocomplete="off" class="form-control" id="lastName" name="lastName"
+                                            placeholder="Last Name" tabindex="4" [(ngModel)]="clientSearch.lastName"
+                                            #lastName="ngModel">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div>&nbsp;</div>
+
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <label class="sr-only" for="mobileNumber">Mobile Number</label>
+                                    <div class="form-group">
+                                        <input type="text" autocomplete="off" class="form-control" id="mobileNumber"
+                                            name="mobileNumber" placeholder="Mobile Number" tabindex="5" [(ngModel)]="clientSearch.mobileNumber"
+                                            #mobileNumber="ngModel">
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-3 col-md-3 col-sm-3">
+                                    <div class="form-group">
+                                        <button class="btn btn-primary m-t-n-xs" (click)="doSearch()">
+                                            <strong>Search Person</strong>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+
+                    <div>
+                        &nbsp;
+                    </div>
+
+                    <div class="example-container mat-elevation-z8">
+                        <mat-table #table [dataSource]="dataSource">
+
+                            <!-- identifierValue Column -->
+                            <ng-container matColumnDef="id">
+                                <mat-header-cell *matHeaderCellDef> Person Id.
+                                </mat-header-cell>
+                                <mat-cell *matCellDef="let element"> {{element.id}} </mat-cell>
+                            </ng-container>
+
+                            <!-- First Name Column -->
+                            <ng-container matColumnDef="firstName">
+                                <mat-header-cell *matHeaderCellDef> First Name </mat-header-cell>
+                                <mat-cell *matCellDef="let element"> {{element.firstName}} </mat-cell>
+                            </ng-container>
+
+                            <!-- Middle Name Column -->
+                            <ng-container matColumnDef="middleName">
+                                <mat-header-cell *matHeaderCellDef> Middle Name </mat-header-cell>
+                                <mat-cell *matCellDef="let element"> {{element.middleName}} </mat-cell>
+                            </ng-container>
+
+                            <!-- Last Name Column -->
+                            <ng-container matColumnDef="lastName">
+                                <mat-header-cell *matHeaderCellDef> Last Name </mat-header-cell>
+                                <mat-cell *matCellDef="let element"> {{element.lastName}} </mat-cell>
+                            </ng-container>
+
+                            <!-- Date Of Birth Column -->
+                            <ng-container matColumnDef="dateOfBirth">
+                                <mat-header-cell *matHeaderCellDef> Date Of Birth </mat-header-cell>
+                                <mat-cell *matCellDef="let element"> {{element.dateOfBirth | date: 'dd-MMM-yyyy'}}
+                                </mat-cell>
+                            </ng-container>
+
+                            <!-- Age Column -->
+                            <ng-container matColumnDef="ageNumber">
+                                <mat-header-cell *matHeaderCellDef> Age </mat-header-cell>
+                                <mat-cell *matCellDef="let element"> {{ element.ageNumber }}
+                                </mat-cell>
+                            </ng-container>
+
+                            <!-- Gender Column -->
+                            <ng-container matColumnDef="gender">
+                                <mat-header-cell *matHeaderCellDef> Gender </mat-header-cell>
+                                <mat-cell *matCellDef="let element"> {{ element.gender }} </mat-cell>
+                            </ng-container>
+
+                            <!-- Gender Column -->
+                            <ng-container matColumnDef="fullName">
+                                <mat-header-cell *matHeaderCellDef></mat-header-cell>
+                                <mat-cell *matCellDef="let element" (click)="getSelectedRow(element)">
+                                    <a>
+                                        Person Home
+                                    </a>
+                                </mat-cell>
+                            </ng-container>
+
+                            <!-- Expanded Content Column - The detail row is made up of this one column -->
+                            <ng-container matColumnDef="expandedDetail">
+                                <mat-header-cell *matHeaderCellDef> Expanded </mat-header-cell>
+                                <mat-cell *matCellDef="let detail">
+                                    <div [innerHTML]="detail.element.identifierValue"></div>
+                                </mat-cell>
+                            </ng-container>
+
+                            <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                            <!--<tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>-->
+                            <mat-row *matRowDef="let row; columns: displayedColumns;" matRipple class="element-row"
+                                [class.expanded]="expandedElement == row" (click)="expandedElement = row"></mat-row>
+                            <mat-row *matRowDef="let row; columns: ['expandedDetail']; when: isExpansionDetailRow"
+                                [@detailExpand]="row.element == expandedElement ? 'expanded' : 'collapsed'" style="overflow: hidden">
+                            </mat-row>
+                        </mat-table>
+
+                        <mat-paginator [length]="
+                                10" [pageSize]="10" [pageSizeOptions]="[3, 5, 10, 20]"
+                            [showFirstLastButtons]="true">
+                        </mat-paginator>
+
+                        <div *ngIf="dataSource.data.length === 0 && afterSearch" style="background-color: #FFC200; width: 100%;">
+                            <span style="font-size:16px; color: white;">
+                                No records found
+                            </span>
+                        </div>
+                    </div>
+
+                    <div>
+                        &nbsp;
+                    </div>
+
+                    <div class="button-row pull-right">
+                        <a mat-raised-button color="accent" routerLink="/record/person">
+                            <i class="fa fa-plus"></i>
+                            <span>New Registration</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

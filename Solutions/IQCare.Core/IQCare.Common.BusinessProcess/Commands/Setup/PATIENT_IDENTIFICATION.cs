@@ -29,6 +29,7 @@ namespace IQCare.Common.BusinessProcess.Commands.Setup
         [Required]
         public int USER_ID { get; set; }
 
+
         public string EDUCATIONLEVEL { get; set; }
 
         public string EDUCATIONOUTCOME { get; set; }
