@@ -25,8 +25,8 @@ namespace Entities.CCC.Encounter
 
     public enum PatientCategorizationStatus
     {
-        None,
-        Stable,
-        UnStable
+        None=0,
+        Stable=1,
+        UnStable=2
     }
 }

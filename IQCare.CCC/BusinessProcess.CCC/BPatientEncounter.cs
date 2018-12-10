@@ -450,6 +450,10 @@ namespace BusinessProcess.CCC
                     pce.appontmentStatus = theDS.Tables[15].Rows[0]["StatusId"].ToString();
                 }
 
+                if (theDS.Tables[16].Rows.Count > 0)
+                {
+                    pce.StabilityCategorization = theDS.Tables[16].Rows[0]["Categorization"].ToString();
+                }
 
                 return pce;
             }

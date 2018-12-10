@@ -24,7 +24,7 @@
 <script type="text/javascript">
     $("#eahmyWizard").on("actionclicked.fu.wizard", function (evt, data) {
         var currentStep = data.step;
-        alert(currentStep);
+        //alert(currentStep);
         if (currentStep == 5) {
             updateCancellingStatus();
             addUpdateViralLoadData();
@@ -55,7 +55,7 @@
             var patientMasterVisitId = <%=PatientMasterVisitId%>;
             var userId = <%=userId%>;
             var screeningCategory = $(this).attr('id').replace('endvlrbList', '');
-            alert(screeningCategory);
+            //alert(screeningCategory);
             var rdIdValue = $(this).attr('id');
             var checkedValue = $('#' + rdIdValue + ' input[type=radio]:checked').val();
             if (typeof checkedValue != 'undefined') {
@@ -77,9 +77,9 @@
         });
         $("#eahdatastep5 textarea").each(function () {
             var categoryId = ($(this).attr('id')).replace('endViralLoadTb', '');
-            alert(categoryId);
+           // alert(categoryId);
             var patientId = <%=PatientId%>;
-            alert(patientId);
+           // alert(patientId);
             var patientMasterVisitId = <%=PatientMasterVisitId%>;
             var clinicalNotes = $(this).val();
             var serviceAreaId = 203;

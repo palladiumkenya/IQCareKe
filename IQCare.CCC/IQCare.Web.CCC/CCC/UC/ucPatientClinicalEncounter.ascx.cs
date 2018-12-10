@@ -442,6 +442,11 @@ namespace IQCare.Web.CCC.UC
 
             arvAdherance.SelectedValue = pce.ARVAdherence;
             ctxAdherance.SelectedValue = pce.CTXAdherence;
+            if (pce.StabilityCategorization != null)
+            {((PatientCategorizationStatus) Convert.ToInt16(pce.StabilityCategorization)).ToString();
+                var stabilityAsessment = ((PatientCategorizationStatus)Convert.ToInt16(pce.StabilityCategorization)).ToString();
+                stabilityStatus.SelectedValue = stabilityStatus.Items.FindByText(stabilityAsessment).Value;
+            }
             WHOStage.SelectedValue = pce.WhoStage;
 
             if (theDT.Rows.Count > 0 && isOnEdit)

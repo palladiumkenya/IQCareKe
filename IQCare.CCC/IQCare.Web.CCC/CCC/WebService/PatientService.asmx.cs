@@ -181,26 +181,35 @@ namespace IQCare.Web.CCC.WebService
         public string AddPatientAppointment(int patientId, int patientMasterVisitId, DateTime appointmentDate, string description, int reasonId, int serviceAreaId, int statusId, int differentiatedCareId, int userId)
         {
             
-            PatientAppointment patientAppointment = new PatientAppointment()
-            {
-                PatientId = patientId,
-                PatientMasterVisitId = patientMasterVisitId,
-                AppointmentDate = appointmentDate,
-                Description = description,
-                DifferentiatedCareId = differentiatedCareId,
-                ReasonId = reasonId,
-                ServiceAreaId = serviceAreaId,
-                StatusId = statusId,
-                CreatedBy = userId,
-                CreateDate = DateTime.Now
-            };
+           
             try
             {
-                var appointment = new PatientAppointmentManager();
-                Result = appointment.AddPatientAppointments(patientAppointment);
-                if (Result > 0)
+                if (appointmentDate != DateTime.MinValue)
                 {
-                    Msg = "Patient appointment Added Successfully!";
+                    PatientAppointment patientAppointment = new PatientAppointment()
+                    {
+                        PatientId = patientId,
+                        PatientMasterVisitId = patientMasterVisitId,
+                        AppointmentDate = appointmentDate,
+                        Description = description,
+                        DifferentiatedCareId = differentiatedCareId,
+                        ReasonId = reasonId,
+                        ServiceAreaId = serviceAreaId,
+                        StatusId = statusId,
+                        CreatedBy = userId,
+                        CreateDate = DateTime.Now
+                    };
+
+                    var appointment = new PatientAppointmentManager();
+                    Result = appointment.AddPatientAppointments(patientAppointment);
+                    if (Result > 0)
+                    {
+                        Msg = "Patient appointment Added Successfully!";
+                    }
+                }
+                else
+                {
+                    Msg = "Patient appointment not Saved Successfully";
                 }
             }
             catch (Exception e)
@@ -214,15 +223,16 @@ namespace IQCare.Web.CCC.WebService
         public string AddPatientFamilyTesting(string familyMembers)
         {
             string relationshipPersonId; int patientId; int patientMasterVisitId; string firstName; string middleName; string lastName; int sex; string dob; int relationshipId; string baselineHivStatusId; string baselineHivStatusDate;
-            /*string hivTestingresultId;*/ string hivTestingresultDate; bool cccreferal; string cccReferalNumber;  int userId;
+            /*string hivTestingresultId;*/
+            string hivTestingresultDate; bool cccreferal; string cccReferalNumber; int userId;
             DateTime? linkageDate;
-            bool dobPrecision;
+            bool? dobPrecision = null;
 
             //FamilyMembers[] familyMembrs = JsonConvert.DeserializeObject<FamilyMembers[]>(familyMembers);
             FamilyMembers[] familyMembrs = new JavaScriptSerializer().Deserialize<FamilyMembers[]>(familyMembers);
 
             int count = familyMembrs.Length;
-            for(int i=0; i < count; i++)
+            for (int i = 0; i < count; i++)
             {
                 patientId = int.Parse(HttpContext.Current.Session["PatientPK"].ToString());
                 patientMasterVisitId = int.Parse(Session["PatientMasterVisitId"].ToString());
@@ -234,6 +244,15 @@ namespace IQCare.Web.CCC.WebService
                 int hivresultId = familyMembrs[i].hivTestingresultId == "" ? 0 : Convert.ToInt32(familyMembrs[i].hivTestingresultId);
                 sex = familyMembrs[i].sex;
                 dob = familyMembrs[i].dob;
+                DateTime? dateOfBirth = null;
+                if (dob != "")
+                {
+                    dateOfBirth = DateTime.Parse(dob);
+                }
+                if (familyMembrs[i].dobPrecision != "")
+                {
+                    dobPrecision = Convert.ToBoolean(familyMembrs[i].dobPrecision);
+                }
                 if (familyMembrs[i].dobPrecision == "" || familyMembrs[i].dobPrecision == null)
                 {
                     dobPrecision = false;
@@ -244,16 +263,16 @@ namespace IQCare.Web.CCC.WebService
                 }
                 relationshipId = familyMembrs[i].relationshipId;
 
-              
+
 
                 baselineHivStatusId = familyMembrs[i].baselineHivStatusId;
 
                 if (!(String.IsNullOrEmpty(baselineHivStatusId)))
-                    {
+                {
                     baselinehivid = Convert.ToInt32(baselineHivStatusId);
 
-                    }
-         
+                }
+
 
                 baselineHivStatusDate = familyMembrs[i].baselineHivStatusDate;
                 cccreferal = familyMembrs[i].cccreferal;
@@ -269,10 +288,10 @@ namespace IQCare.Web.CCC.WebService
                     MiddleName = middleName,
                     LastName = lastName,
                     Sex = sex,
-                    DateOfBirth = DateTime.Parse(dob),
+                    DateOfBirth = dateOfBirth,
                     DobPrecision = dobPrecision,
                     RelationshipId = relationshipId,
-                BaseLineHivStatusId = baselinehivid,
+                    BaseLineHivStatusId = baselinehivid,
                     //BaselineHivStatusDate = baselineHivStatusDate,
                     //HivTestingResultsDate = hivTestingresultDate,
                     HivTestingResultsId = hivresultId,
@@ -297,9 +316,19 @@ namespace IQCare.Web.CCC.WebService
                                     x.RelationshipId == relationshipId);
                     if (!fam.Any())
                     {
-                        if (relationshipPersonId != null || Convert.ToInt32(relationshipPersonId) > 0)
+
+                        if (relationshipPersonId != null)
                         {
-                            Result = testing.AddPatientFamilyTestingsExisting(patientFamilyTesting, userId, Convert.ToInt32(relationshipPersonId));
+                            int relationshipPerson = Convert.ToInt32(relationshipPersonId.ToString());
+                            if (Convert.ToInt32(relationshipPerson) > 0)
+                            {
+                                Result = testing.AddPatientFamilyTestingsExisting(patientFamilyTesting, userId, Convert.ToInt32(relationshipPerson));
+                            }
+
+                            else
+                            {
+                                Result = testing.AddPatientFamilyTestings(patientFamilyTesting, userId);
+                            }
                         }
                         else
                         {
@@ -309,7 +338,10 @@ namespace IQCare.Web.CCC.WebService
                         {
                             Msg = "Patient family testing Added Successfully!";
                         }
+
                     }
+                        
+                    
                     else
                     {
                         Msg = firstName + " " + middleName + " " + lastName + " Not saved. Family member already exists!";
@@ -921,7 +953,8 @@ namespace IQCare.Web.CCC.WebService
         [WebMethod(EnableSession = true)]
         public string getAppointmentId(int PatientMasterVisitId, DateTime date)
         {
-            var appointmentManager = new PatientAppointmentManager();
+           var appointmentManager = new PatientAppointmentManager();
+           string PatientId = Session["PatientPk"].ToString();
             PatientAppointment[] pAppointment = appointmentManager.GetAppointmentId(Convert.ToInt32(Session["PatientPK"]),PatientMasterVisitId, date).ToArray();
             //PatientClinicalNotes[] patientNotesData = PCN.getPatientClinicalNotesByVisitId(PatientId, PatientMasterVisitId).ToArray();
             string jsonNotesObject = "[]";
@@ -1275,8 +1308,8 @@ namespace IQCare.Web.CCC.WebService
         public string MiddleName { get; set; }
         public string LastName { get; set; }
         public string Relationship { get; set; }
-        public DateTime DateOfBirth { get; set; }
-        public bool DobPrecision { get; set; }
+        public DateTime? DateOfBirth { get; set; }
+        public bool? DobPrecision { get; set; }
         public string Sex { get; set; }
         public string BaseLineHivStatus { get; set; }
         public DateTime ? BaseLineHivStatusDate { get; set; }

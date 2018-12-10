@@ -262,7 +262,7 @@ namespace BusinessProcess.CCC.visit
                     _unitOfWork.PatientLabOrderRepository.FindBy(
                             x =>
                                 x.Ptn_pk == patientId &
-                                DbFunctions.TruncateTime(x.CreateDate) == DbFunctions.TruncateTime(visitDate) &
+                                DbFunctions.TruncateTime(x.OrderDate) == DbFunctions.TruncateTime(visitDate) &
                                 !x.DeleteFlag)
                         .OrderByDescending(x => x.Id).ToList();
                 _unitOfWork.Dispose();
@@ -305,6 +305,16 @@ namespace BusinessProcess.CCC.visit
                         .OrderByDescending(x => x.Id).ToList();
                 _unitOfWork.Dispose();
                 return patientLabOrders;
+            }
+        }
+
+        public void EditPatientLabOrder(LabOrderEntity labOrder)
+        {
+            using (UnitOfWork _unitOfWork = new UnitOfWork(new GreencardContext()))
+            {
+                _unitOfWork.PatientLabOrderRepository.Update(labOrder);
+                Result = _unitOfWork.Complete();
+                _unitOfWork.Dispose();
             }
         }
     }

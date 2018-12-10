@@ -15,3 +15,11 @@ CREATE UNIQUE NONCLUSTERED INDEX [NCI_LookupMaster_Name] ON [dbo].[LookupMaster]
 	[Name] ASC
 )
 GO
+
+IF  EXISTS (SELECT * FROM sys.indexes WHERE object_id = OBJECT_ID(N'[dbo].[PatientScreening]') AND name = N'NCI_PatientScreening_PatIdScrId')
+DROP INDEX [NCI_PatientScreening_PatIdScrId] ON [dbo].[PatientScreening]
+GO
+CREATE NONCLUSTERED INDEX NCI_PatientScreening_PatIdScrId
+ON [dbo].[PatientScreening] ([PatientId],[ScreeningTypeId])
+INCLUDE ([Id],[ScreeningValueId])
+Go

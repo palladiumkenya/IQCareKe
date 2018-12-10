@@ -6,9 +6,11 @@ using System.Web.Services;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using Application.Presentation;
+using Entities.CCC.Enrollment;
 using Entities.CCC.Lookup;
 using Interface.CCC.Lookup;
 using IQCare.CCC.UILogic;
+using IQCare.CCC.UILogic.Enrollment;
 
 namespace IQCare.Web.CCC.OneTimeEvents
 {
@@ -19,11 +21,27 @@ namespace IQCare.Web.CCC.OneTimeEvents
             get { return Session["Gender"].ToString(); }
         }
 
+        public int maxLength { get; set; }
+        public int minLength { get; set; }
+
+
         public int PatientId;
         public int PatientMasterVisitId;
         public int UserId;
         public DateTime PatientDateOfBirth;
         public int PatientAge;
+        public Identifier PatientIdentifier
+        {
+            get
+            {
+                IdentifierManager IdMan = new IdentifierManager();
+
+                var identifier = IdMan.GetIdentifierByCode("CCCNumber");
+                minLength = (identifier.MinLength > 0) ? (Int32)identifier.MinLength : (Int32)0;
+                maxLength = (identifier.MaxLength > 0) ? (Int32)identifier.MaxLength : (Int32)0;
+                return identifier;
+            }
+        }
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)

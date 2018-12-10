@@ -172,7 +172,7 @@ namespace IQCare.Web.CCC.OneTimeEvents {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputText cccNumber;
+        protected global::System.Web.UI.WebControls.TextBox cccNumber;
         
         /// <summary>
         /// btnAdd control.

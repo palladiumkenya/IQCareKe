@@ -36,7 +36,7 @@ namespace IQCare.Common.BusinessProcess.CommandHandlers.Enrollment
 
                 var patientLookup = await patientDetails.GetPatientByPatientId(request.ClientEnrollment.PatientId);
 
-                if (patientLookup.Count > 0)
+                if (patientLookup.Count > 0 && patientLookup[0].ptn_pk == null)
                 {
                     var dobPrecision = "EXACT";
                     var dob = DateTime.Now;
@@ -47,7 +47,7 @@ namespace IQCare.Common.BusinessProcess.CommandHandlers.Enrollment
                         dob = patientLookup[0].DateOfBirth.Value;
 
 
-                    await registerPersonService.InsertIntoBlueCard(
+                    var response = await registerPersonService.InsertIntoBlueCard(
                         patientLookup[0].FirstName,
                         patientLookup[0].LastName,
                         patientLookup[0].MidName,
@@ -58,8 +58,15 @@ namespace IQCare.Common.BusinessProcess.CommandHandlers.Enrollment
                         patientLookup[0].Gender,
                         dobPrecision,
                         dob,
-                        request.ClientEnrollment.CreatedBy
+                        request.ClientEnrollment.CreatedBy,
+                        request.ClientEnrollment.PosId
                         );
+
+                    if (response.Count > 0)
+                    {
+                        await registerPersonService.UpdatePatient(request.ClientEnrollment.PatientId,
+                            request.ClientEnrollment.DateOfEnrollment, request.ClientEnrollment.PosId);
+                    }
                 }
 
 

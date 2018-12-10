@@ -21,11 +21,13 @@
 
         <ul class="nav nav-tabs" role="tablist">
             <li role="presentation" class="active"><a href="#ARTReadiness" aria-controls="ARTReadiness" role="tab" data-toggle="tab"><i class="fa fa-flask fa-lg" aria-hidden="true"></i> ART Readiness Assessment</a></li>
+            <li role="presentation" id="enhanceadherencetab"><a href="#EnhanceAdherence" aria-controls="EnhanceAdherence" role="tab" data-toggle="tab" id="loadEnhanceAdherence"><i class="fa fa-heart fa-lg" aria-hidden="true"></i> Enhance Adherence</a></li>
+            <li role="presentation"><a href="#adherencebarriers" aria-controls="adherencebarriers" role="tab" data-toggle="tab" id="loadAdherenceBarriers"><i class="fa fa-exclamation-triangle fa-lg" aria-hidden="true"></i> Barriers to Adherence</a></li>
             <li role="presentation" class=""><a href="#encounter" aria-controls="encounter" role="tab" data-toggle="tab"><i class="fa fa-exchange fa-lg" aria-hidden="true"></i> Clinical Encounter</a></li>
             <li role="presentation"><a href="#vlTracker" aria-controls="vlTracker" role="tab" data-toggle="tab"><i class="fa fa-line-chart fa-lg" aria-hidden="true"></i> Viraload Tracker</a></li>
-            <li role="presentation"><a href="#adherencebarriers" aria-controls="adherencebarriers" role="tab" data-toggle="tab" id="loadAdherenceBarriers"><i class="fa fa-exclamation-triangle fa-lg" aria-hidden="true"></i> Barriers to Adherence</a></li>
+           
             <li role="presentation"><a href="#healthscreening" aria-controls="healthscreening" role="tab" data-toggle="tab" id="loadHealthScreening"><i class="fa fa-stethoscope fa-lg" aria-hidden="true"></i> Screening</a></li>
-            <li role="presentation" id="enhanceadherencetab"><a href="#EnhanceAdherence" aria-controls="EnhanceAdherence" role="tab" data-toggle="tab" id="loadEnhanceAdherence"><i class="fa fa-heart fa-lg" aria-hidden="true"></i> Enhance Adherence</a></li>
+            
             <%--<li role="presentation"><a href="#Summary" aria-controls="Test Summary" role="tab" data-toggle="tab"><i class="fa fa-tint fa-lg" aria-hidden="true"></i>Test Summary</a></li>--%>
      
             <%--<li role="presentation"><a href="#Laboratory" aria-controls="Laboratory" role="tab" data-toggle="tab"><i class="fa fa-flask fa-lg" aria-hidden="true"></i>Laboratory</a></li>

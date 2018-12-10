@@ -17,10 +17,6 @@ const routes: Routes = [
         loadChildren: '../registration/registration.module#RegistrationModule'
     },
     {
-        path: 'recordregistration',
-        loadChildren:'../records/records.module#RecordModule'
-    },
-    {
         path: '**',
         component: NotFoundComponent
     }
@@ -30,7 +26,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+    imports: [RouterModule.forRoot(routes)],
+    exports: [RouterModule]
 })
 export class CoreRoutingModule { }

@@ -88,14 +88,14 @@
                         </div>
                         <div class="col-md-12 form-group">
                             <div class="col-md-6">
-                                <label class="required control-label pull-left">Date of Birth</label>
+                                <label class="control-label pull-left">Date of Birth</label>
                             </div>
                             <div class="col-md-6">
                                 <div class='input-group date' id='PersonDOBdatepicker'>
                                     <span class="input-group-addon">
                                         <span class="glyphicon glyphicon-calendar"></span>
                                     </span>
-                                    <asp:TextBox runat="server" ClientIDMode="Static" CssClass="form-control input-sm" ID="Dob" data-parsley-required="true" onblur="DateFormat(this,this.value,event,false,'3')" onkeyup="DateFormat(this,this.value,event,false,'3')"></asp:TextBox>        
+                                    <asp:TextBox runat="server" ClientIDMode="Static" CssClass="form-control input-sm" ID="Dob" data-parsley-required="false" onblur="DateFormat(this,this.value,event,false,'3')" onkeyup="DateFormat(this,this.value,event,false,'3')"></asp:TextBox>        
                                 </div>
                             </div>
                         </div>
@@ -105,7 +105,7 @@
                                 <label class="control-label pull-left">Age(Years)</label>
                             </div>
                             <div class="col-md-6">
-                                <asp:TextBox ID="personAge" runat="server" ClientIDMode="Static" CssClass="form-control input-sm" placeholder="0" required="true" min="0"></asp:TextBox>
+                                <asp:TextBox ID="personAge" runat="server" ClientIDMode="Static" CssClass="form-control input-sm"  placeholder="0"></asp:TextBox>
                                 <asp:HiddenField ID="dobPrecision" runat="server" ClientIDMode="Static" />
                             </div>
                         </div>
@@ -114,7 +114,7 @@
                                 <label class="control-label pull-left">Age(Months)</label>
                             </div>
                             <div class="col-md-6">
-                                <asp:TextBox ID="personMonth" runat="server" ClientIDMode="Static" CssClass="form-control input-sm" placeholder="0" required="true" min="0"></asp:TextBox>
+                                <asp:TextBox ID="personMonth" runat="server" ClientIDMode="Static" CssClass="form-control input-sm" placeholder="0"  min="0"></asp:TextBox>
                                
                             </div>
                         </div>
@@ -256,7 +256,8 @@
                                 <label class="control-label pull-left">CCC Number</label>
                             </div>
                             <div class="col-md-12" id="cccnum">
-                                <input id="cccNumber" class="form-control input-sm" type="text" runat="server" data-parsley-trigger="keyup" data-parsley-pattern-message="Please enter a valid CCC Number. Format ((XXXXX-XXXXX))" data-parsley-pattern="/^[0-9]{5}-[0-9]{5}$/" />
+                               <!-- data-parsley-pattern-message="# PatientIdentifier.FailedValidationMessage.ToString() %>" data-parsley-pattern="<# PatientIdentifier.ValidatorRegex %>"-->
+                               <asp:TextBox   id="cccNumber" name="cccNumber" class="form-control input-sm" type="text" data-parsley-trigger="keyup" data-parsley-pattern-message="<%# PatientIdentifier.FailedValidationMessage %>" data-parsley-pattern="<%# PatientIdentifier.ValidatorRegex %>" runat="server"/>
                             </div>
                         </div>
                     </div>
@@ -673,6 +674,9 @@
         var gender = "";
         var BaselineDate = "";
         var DobPrecision = "";
+       
+        var maxLength = <%=maxLength %>;
+        var minLength = <%=minLength%>;
         $(document).ready(function () {
             window.patientAge = <%=PatientAge%>;
             var date = moment("<%=PatientDateOfBirth%>").format('DD-MMM-YYYY');
@@ -683,6 +687,11 @@
 
             var todayDate = new Date();
             var todayDatePicker = moment(todayDate).add(2, 'hours');
+
+            $("#<%=cccNumber.ClientID%>").attr({
+                "min": minLength,
+                "max": maxLength
+            });
 
             //console.log(gender);
 
@@ -984,14 +993,14 @@
 
                                 }
 
-                                if (!(LinkageDate == null || LinkageDate == "undefined" || LinkageDate == "")) {
+                                if (!(LinkageDate == null || LinkageDate === "undefined" || LinkageDate === "")) {
                                     $("#<%=CCCReferalDate.ClientID%>").val(moment(LinkageDate).format('DD-MMM-YYYY'));
                                 } else {
                                     $("#<%=CCCReferalDate.ClientID%>").val("");
                                 }
                                 $("#CCCReferalDate").prop("disabled", true);
 
-                                if (!(CCCNumber == null || CCCNumber == "undefined" || CCCNumber == "" || CCCNumber == "0")) {
+                                if (!(CCCNumber == null || CCCNumber === "undefined" || CCCNumber === "" || CCCNumber === "0")) {
                                     $("#<%=cccNumber.ClientID%>").val(CCCNumber);
                                 }
 
@@ -1029,7 +1038,9 @@
                 }
             });
 
+
             $("#btnAdd").click(function (e) {
+
                 $('#FamilyTestingForm').parsley().destroy();
                 $('#FamilyTestingForm').parsley({
                     excluded:
@@ -1057,10 +1068,17 @@
                     hivTestingresult = hivTestingresult == "select" ? "" : hivTestingresult;
                     var hivTestingresultDate = $("#<%=HIVTestingDate.ClientID%>").val();
                     var cccreferal = $("#<%=CccReferal.ClientID%>").val();
-                    var cccReferalNumber = $("#<%=cccNumber.ClientID%>").val();
+                    var cccReferalNumber = $("#cccNumber").val();
                     var previousDate = moment().subtract(1, 'days').format('DD-MMM-YYYY');
                     var adult = moment().subtract(10, 'years').format('DD-MMM-YYYY');
                     var cccReferalDate = $("#CCCReferalDate").val();
+
+                    if (dob !== "") {
+                        var today = new Date();
+                        var birthDate = new Date(dob);
+                        var age = today.getFullYear() - birthDate.getFullYear();
+                    }
+                    
 
                     var today = new Date();
                     var birthDate = new Date(dob);
@@ -1070,9 +1088,8 @@
                     var cccNumberFound = null;
                     var count = 0;
                     console.log(cccArrayList);
-                    if (typeof cccReferalNumber !== "undefined" && cccReferalNumber != null && cccReferalNumber != "") {
+                    if (typeof cccReferalNumber !== "undefined" && cccReferalNumber != null && cccReferalNumber !== "") {
                         cccNumberFound = $.inArray("" + cccReferalNumber + "", cccArrayList);
-
 
                         if (cccNumberFound > -1) {
                             toastr.error("Error", cccReferalNumber + " CCC Number already exists in the List");
@@ -1080,31 +1097,39 @@
                         }
                         cccArrayList.push("" + cccReferalNumber + "");
                     }
+
+
                     //setTimeout(function() { CccNumberExists(cccReferalNumber); }, 200);
                     ////console.log(baselineHivStatusDate);
                     //console.log(hivTestingresultDate);
                     //validations
-                    if (baselineHivStatus != "Never Tested" && hivTestingresult == "Never Tested") {
+
+                    if (baselineHivStatus !== "Never Tested" && hivTestingresult === "Never Tested") {
                         toastr.error("Never Tested should not follow baseline(Tested Negative/Tested Positive).");
                         return false;
                     }
 
-                    if (moment('' + dob + '').isAfter()) {
-                        toastr.error("Date of birth cannot be a future date.");
-                        return false;
+                    if (dob !== "") {
+                        if (moment('' + dob + '').isAfter()) {
+                            toastr.error("Date of birth cannot be a future date.");
+                            return false;
+                        }
+                        if (moment('' + dob + '').isAfter(previousDate)) {
+                            toastr.error("Date of birth cannot be today.");
+                            return false;
+                        }
                     }
-                    if (moment('' + dob + '').isAfter(previousDate)) {
-                        toastr.error("Date of birth cannot be today.");
-                        return false;
-                    }
+
                     if (moment('' + baselineHivStatusDate + '').isAfter()) {
                         toastr.error("Baseline HIV status date cannot be a future date.");
                         return false;
                     }
+
                     if (moment('' + hivTestingresultDate + '').isAfter()) {
                         toastr.error("HIV testing result date cannot be a future date.");
                         return false;
                     }
+
                     console.log(baselineHivStatusDate);
 
                     if (((baselineHivStatusDate !== "") && !moment(baselineHivStatusDate, 'DD-MMM-YYYY').isValid())) {
@@ -1116,26 +1141,54 @@
                         toastr.error("HIV testing result date invalid.");
                         return false;
                     }
-                    if (moment('' + baselineHivStatusDate + '').isBefore(dob)) {
-                        toastr.error("Baseline HIV status date cannot be before the date of birth.");
-                        return false;
-                    }
-                    if (moment('' + hivTestingresultDate + '').isBefore(baselineHivStatusDate)) {
-                        toastr.error("Baseline HIV testing date cannot be after HIV testing result date.");
-                        return false;
-                    }
-                    if (moment('' + hivTestingresultDate + '').isBefore(dob)) {
-                        toastr.error("HIV testing result date cannot be before the date of birth.");
-                        return false;
+
+                    if (dob !== "") {
+                        if (moment('' + baselineHivStatusDate + '').isBefore(dob)) {
+                            toastr.error("Baseline HIV status date cannot be before the date of birth.");
+                            return false;
+                        }
+                        if (moment('' + hivTestingresultDate + '').isBefore(baselineHivStatusDate)) {
+                            toastr.error("Baseline HIV testing date cannot be after HIV testing result date.");
+                            return false;
+                        }
+                        if (moment('' + hivTestingresultDate + '').isBefore(dob)) {
+                            toastr.error("HIV testing result date cannot be before the date of birth.");
+                            return false;
+                        }
+                        if ((moment('' + dob + '').isAfter(adult)) &&
+                        (($("#Relationship :selected").text() === "Spouse") ||
+                            ($("#Relationship :selected").text() === "Partner"))) {
+                            if (moment('' + baselineHivStatusDate + '').isBefore(dob)) {
+                                toastr.error("Baseline HIV status date cannot be before the date of birth.");
+                                return false;
+                            }
+                            if (moment('' + hivTestingresultDate + '').isBefore(baselineHivStatusDate)) {
+                                toastr.error("Baseline HIV testing date cannot be after HIV testing result date.");
+                                return false;
+                            }
+                            if (moment('' + hivTestingresultDate + '').isBefore(dob)) {
+                                toastr.error("HIV testing result date cannot be before the date of birth.");
+                                return false;
+                            }
+                            if (moment('' + baselineHivStatusDate + '').isAfter(hivTestingresultDate)) {
+                                toastr.error(
+                                    "Baseline HIV status date cannot be greater than HIV testing result date.");
+                                return false;
+                            }
+                            if ((moment('' + dob + '').isAfter(adult)) &&
+                            (($("#Relationship :selected").text() === "Spouse") ||
+                                ($("#Relationship :selected").text() === "Partner"))) {
+                                toastr.error("A child cannot have a spouse or partner.");
+                                return false;
+                            }
+                        }
                     }
                     if (moment('' + baselineHivStatusDate + '').isAfter(hivTestingresultDate)) {
                         toastr.error("Baseline HIV status date cannot be greater than HIV testing result date.");
                         return false;
                     }
-                    if ((moment('' + dob + '').isAfter(adult)) && (($("#Relationship :selected").text() === "Spouse") || ($("#Relationship :selected").text() === "Partner"))) {
-                        toastr.error("A child cannot have a spouse or partner.");
-                        return false;
-                    }
+                   
+                  //  var fam = familyMembers.filter(function(el) {
                     var fam = familyMembers.filter(function (el) {
                         return (el.firstName === firstName) &&
                             (el.middleName === middleName) &&
@@ -1144,10 +1197,10 @@
                             (el.relationshipId === relationshipId);
                     });
 
-                    if (cccreferal == "") {
+                    if (cccreferal === "") {
                         cccreferal = false;
                     }
-                    if (baselineHivStatusDate != "") {
+                    if (baselineHivStatusDate !== "") {
                         baselineHivStatusDate = moment(baselineHivStatusDate, 'DD-MMM-YYYY').format("DD-MMM-YYYY");
                     }
 
@@ -1183,8 +1236,7 @@
 
                         
 
-                      
-
+                     
                         var testing = {
                             relationshipPersonId: RelationshipPersonId,
                             firstName: firstName,
@@ -1211,7 +1263,8 @@
                     return false;
                 }
 
-            });
+            }); /*-- end of btnAdd */
+
             $("#btnClose").click(function () {
                 
                 window.location.href = '<%=ResolveClientUrl("~/CCC/patient/patientHome.aspx") %>';
@@ -1228,8 +1281,7 @@
                     return false;
                 }
                 
-                    addFamilyTesting(familyMembers);
-                
+                    addFamilyTesting(familyMembers);                
             });
 
            
@@ -1660,31 +1712,48 @@
 
         function CccEnabled() {
             var testingResult = $("#hivtestingresult :selected").text();
-
+       
+    
             if ((testingResult === "Tested Negative")) {
+               // $("#cccNumber").prop('disabled', true);
                 $("#<%=cccNumber.ClientID%>").prop('disabled', true);
                 $("#<%=CccReferal.ClientID%>").val();
                 $("#<%=CccReferal.ClientID%>").prop('disabled', true);
                 $("#CCCReferalDate").prop('disabled', true);
                 $("#HIVTestingDate").prop('disabled', false);
-            } else if (testingResult === "Never Tested") {
+            }
+           else  if ((testingResult === "Unknown")) {
+               // $("#cccNumber").prop('disabled', true);
+                $("#<%=cccNumber.ClientID%>").prop('disabled', true);
+                $("#<%=CccReferal.ClientID%>").val();
+                $("#<%=CccReferal.ClientID%>").prop('disabled', true);
+                $("#CCCReferalDate").prop('disabled', true);
+                $("#HIVTestingDate").prop('disabled', true);
+            }
+
+          else if (testingResult === "Never Tested") {
+              //$("#cccNumber").prop('disabled', true);
                 $("#<%=cccNumber.ClientID%>").prop('disabled', true);
                 $("#<%=CccReferal.ClientID%>").val();
                 $("#<%=CccReferal.ClientID%>").prop('disabled', true);
                 $("#CCCReferalDate").prop('disabled', true);
                 $("#HIVTestingDate").prop('disabled', true);
             } else {
-                $("#<%=cccNumber.ClientID%>").prop('disabled',true);
+               // $("#cccNumber").prop('disabled', false);
+                $("#<%=cccNumber.ClientID%>").prop('disabled', false);
                 $("#<%=CccReferal.ClientID%>").prop('disabled', false);
                 $("#CCCReferalDate").prop('disabled', true);
+           
             }
 
             if ($("#CccReferal").val() === 'False') {
+               // $("#cccNumber").prop('disabled', true);
                 $("#<%=cccNumber.ClientID%>").prop('disabled', true);
                 $("#CCCReferalDate").prop('disabled', true);
             } else if ($("#CccReferal").val() === 'True')
             {
-                 $("#<%=cccNumber.ClientID%>").prop('disabled',false);
+                $("#<%=cccNumber.ClientID%>").prop('disabled', false);
+              //  $("#cccNumber").prop('disabled', false);
                 $("#<%=CccReferal.ClientID%>").prop('disabled', false);
                 $("#CCCReferalDate").prop('disabled', false);
 
@@ -1698,7 +1767,7 @@
             var baselinehivstatus = $("#BaselineHIVStatus :selected").text();
 
             if (baselinehivstatus === "Never Tested" || baselinehivstatus === "Unknown") {
-                $("#<%=cccNumber.ClientID%>").prop('disabled', true);
+                $("#cccNumber").prop('disabled', true);
                 $("#<%=CccReferal.ClientID%>").prop('disabled', true);
                 $("#<%=BaselineHIVStatusDate.ClientID%>").prop('disabled', true);
                 $("#BaselineHIVStatusD").addClass('noneevents');
@@ -1746,7 +1815,7 @@
                 $("#<%=BaselineHIVStatusDate.ClientID%>").prop('disabled', false);
                 $("#BaselineHIVStatusD").removeClass('noneevents');
 
-                $("#<%=cccNumber.ClientID%>").prop('disabled', false);
+                $("#cccNumber").prop('disabled', false);
                 $("#<%=CccReferal.ClientID%>").prop('disabled', false);
 
             } else if (baselinehivstatus === "Tested Negative") {
@@ -1766,7 +1835,7 @@
                 $("#HIVTestingDate").prop('disabled', false);
                 $("#TestingDate").removeClass('noneevents');
 
-                $("#<%=cccNumber.ClientID%>").prop('disabled', true);
+                $("#cccNumber").prop('disabled', true);
                 $("#<%=CccReferal.ClientID%>").prop('disabled', true);
 
                 $("#CCCReferalDate").prop('disabled', true);
@@ -1774,7 +1843,7 @@
 
                 $("#<%=BaselineHIVStatusDate.ClientID%>").prop('disabled', false);
             } else {
-                $("#<%=cccNumber.ClientID%>").prop('disabled', false);
+                $("#cccNumber").prop('disabled', false);
                 $("#<%=CccReferal.ClientID%>").prop('disabled',false);
                 $("#BaselineHIVStatusD").removeClass('noneevents');
                 $("#<%=BaselineHIVStatusDate.ClientID%>").prop('disabled', false);
@@ -1810,6 +1879,10 @@
         function CccEnabledMod() {
             var testingStatusMod = $("#testingStatusMod :selected").text();
 
+            
+                              
+
+                    
             if ((testingStatusMod === "Tested Negative") || (testingStatusMod === "Never Tested")) {
                 $("#<%=cccNumberMod.ClientID%>").prop('disabled',true);
                 $("#<%=cccReferalMod.ClientID%>").val("False");
@@ -2082,6 +2155,19 @@
             return Math.max.apply(null, vals);
         }
 
+         //Remove empty ReGex validation constraints from relevant textboxes
+        function removeEmptyValidationConstraints() {
+            $('input[type=text]').each(function () {
+                if ($(this).attr("data-parsley-pattern") == "") {
+                    $(this).removeAttr("data-parsley-pattern");
+                }
+                if ($(this).attr("data-parsley-pattern-message") == "") {
+                    $(this).removeAttr("data-parsley-pattern-message");
+                }
+            });
+        }
+
+        removeEmptyValidationConstraints();
     </script>
 
 </asp:Content>

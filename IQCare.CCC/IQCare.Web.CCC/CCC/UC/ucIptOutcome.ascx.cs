@@ -28,6 +28,8 @@ namespace IQCare.Web.CCC.UC
                 }
                 iptEvent.SelectedIndex = 0;
             }
+
+            PatientId = Convert.ToInt32(HttpContext.Current.Session["PatientPK"]);
         }
     }
 }
