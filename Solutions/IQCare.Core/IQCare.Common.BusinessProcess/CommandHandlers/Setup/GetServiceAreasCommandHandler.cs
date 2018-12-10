@@ -37,4 +37,29 @@ namespace IQCare.Common.BusinessProcess.CommandHandlers.Setup
             }
         }
     }
+
+    public  class GetServiceAreaByNameQueryHandler : IRequestHandler<GetServiceAreaByName,Result<ServiceArea>>
+    {
+        private readonly ICommonUnitOfWork _unitOfWork;
+
+        public GetServiceAreaByNameQueryHandler(ICommonUnitOfWork unitOfWork)
+        {
+            _unitOfWork = unitOfWork;
+        }
+        public Task<Result<ServiceArea>> Handle(GetServiceAreaByName request, CancellationToken cancellationToken)
+        {
+            try
+            {
+                var serviceArea = _unitOfWork.Repository<ServiceArea>()
+                        .Get(x => string.Equals(x.Name, request.Name, StringComparison.InvariantCultureIgnoreCase))
+                        .SingleOrDefault();
+
+                return Task.FromResult(Result<ServiceArea>.Valid(serviceArea));
+            }
+            catch (Exception ex)
+            {
+                return Task.FromResult(Result<ServiceArea>.Invalid(ex.Message));
+            }
+        }
+    }
 }

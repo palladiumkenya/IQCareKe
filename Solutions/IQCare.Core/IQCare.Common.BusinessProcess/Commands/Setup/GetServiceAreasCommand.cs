@@ -9,4 +9,11 @@ namespace IQCare.Common.BusinessProcess.Commands.Setup
     {
         
     }
+
+
+    public class GetServiceAreaByName : IRequest<Result<ServiceArea>>
+    {
+        public string Name { get; set; }
+
+    }
 }
