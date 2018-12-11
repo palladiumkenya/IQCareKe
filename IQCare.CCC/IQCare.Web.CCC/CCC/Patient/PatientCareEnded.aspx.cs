@@ -7,15 +7,20 @@ using System.Web.UI.WebControls;
 using Application.Presentation;
 using Entities.CCC.Lookup;
 using Interface.CCC.Lookup;
+using IQCare.CCC.UILogic;
 
 namespace IQCare.Web.CCC.Patient
 {
     public partial class PatientCareEnded : System.Web.UI.Page
     {
-        
+        protected int PmVisitId
+        {
+            get { return Convert.ToInt32(Request.QueryString["visitId"] != null ? Request.QueryString["visitId"] : "0"); }
+        }
         protected void Page_Load(object sender, EventArgs e)
         {
-   
+            PatientCareEndingManager careEndingManager = new PatientCareEndingManager();
+
             if (!IsPostBack)
             {
                 ILookupManager mgr =
@@ -31,8 +36,18 @@ namespace IQCare.Web.CCC.Patient
                     {
                         Reason.Items.Add(new ListItem(item.ItemName, item.ItemId.ToString()));
                     }
-                    }
-                    }
-                    }
+                }
+                int patientId = int.Parse(Session["PatientPK"].ToString());
+                //if (PmVisitId > 0)
+                //{
+                //    var careEnded = careEndingManager.GetPatientCareEndingByVisitId(patientId, PmVisitId);
+                //    if(careEnded.Count > 0)
+                //    {
+                //        careEnded[0].
+                //    }
+                //}
+            }
+
+        }
     }
 }

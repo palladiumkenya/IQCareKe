@@ -65,12 +65,32 @@ namespace BusinessProcess.CCC
                         ClsUtility.AddParameters("@ptn_pharmacy_pk", SqlDbType.Int, ptn_pharmacy_pk);
                         ClsUtility.AddParameters("@DrugId", SqlDbType.Int, drg.DrugId);
                         ClsUtility.AddParameters("@BatchId", SqlDbType.Int, drg.BatchId);
-                        //ClsUtility.AddParameters("@FreqId", SqlDbType.VarChar, drg.FreqId);
-                        //ClsUtility.AddParameters("@Dose", SqlDbType.VarChar, drg.Dose);
-                        ClsUtility.AddParameters("@Morning", SqlDbType.VarChar, drg.Morning == "" ? "0" : drg.Morning);
-                        ClsUtility.AddParameters("@Midday", SqlDbType.VarChar, drg.Midday == "" ? "0" : drg.Midday);
-                        ClsUtility.AddParameters("@Evening", SqlDbType.VarChar, drg.Evening == "" ? "0" : drg.Evening);
-                        ClsUtility.AddParameters("@Night", SqlDbType.VarChar, drg.Night == "" ? "0" : drg.Night);
+
+
+                        if (drg.FreqId != null)
+                        {
+                            ClsUtility.AddParameters("@FreqId", SqlDbType.VarChar, drg.FreqId);
+                        }
+                        if (drg.Dose != null)
+                        {
+                            ClsUtility.AddParameters("@Dose", SqlDbType.VarChar, drg.Dose);
+                        }
+                        if (drg.Morning != null)
+                        {
+                            ClsUtility.AddParameters("@Morning", SqlDbType.VarChar, drg.Morning == "" ? "0" : drg.Morning);
+                        }
+                        if (drg.Midday != null)
+                        {
+                            ClsUtility.AddParameters("@Midday", SqlDbType.VarChar, drg.Midday == "" ? "0" : drg.Midday);
+                        }
+                        if (drg.Evening != null)
+                        {
+                            ClsUtility.AddParameters("@Evening", SqlDbType.VarChar, drg.Evening == "" ? "0" : drg.Evening);
+                        }
+                        if (drg.Night != null)
+                        {
+                            ClsUtility.AddParameters("@Night", SqlDbType.VarChar, drg.Night == "" ? "0" : drg.Night);
+                        }
 
                         ClsUtility.AddParameters("@Duration", SqlDbType.VarChar, drg.Duration);
                         ClsUtility.AddParameters("@qtyPres", SqlDbType.VarChar, drg.qtyPres);

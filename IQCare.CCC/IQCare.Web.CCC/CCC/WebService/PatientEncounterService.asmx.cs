@@ -120,6 +120,7 @@ namespace IQCare.Web.CCC.WebService
         private int Result { get; set; }
        public  string numberofpartners;
         public int count = 1;
+       public  int DosageFrequency;
 
         public  string ItemDisplayName;
        public  string sexuallyactive;
@@ -1111,6 +1112,11 @@ namespace IQCare.Web.CCC.WebService
             DataTable theDT = patientEncounter.loadPatientPharmacyPrescription(Session["ExistingRecordPatientMasterVisitID"].ToString() == "0" ? Session["PatientMasterVisitID"].ToString() : Session["ExistingRecordPatientMasterVisitID"].ToString() );
             ArrayList rows = new ArrayList();
             string remove = "";
+            
+            if (Session["DosageFrequency"] !=null)
+            {
+                DosageFrequency = Convert.ToInt32(Session["DosageFrequency"]);
+            }
             foreach (DataRow row in theDT.Rows)
             {
                 if (row["DispensedQuantity"].ToString() == "")
@@ -1129,7 +1135,20 @@ namespace IQCare.Web.CCC.WebService
                     }
                 }
 
-                string[] i = new string[14] { row["Drug_Pk"].ToString(), row["batchId"].ToString(),
+                if (DosageFrequency == 1)
+                {
+                    string[] i = new string[13] { row["Drug_Pk"].ToString(), row["batchId"].ToString(),
+                    row["FrequencyID"].ToString(),row["abbr"].ToString(),row["DrugName"].ToString(),
+                    row["batchName"].ToString(),row["dose"].ToString(),row["freq"].ToString(),
+                    row["duration"].ToString(),row["OrderedQuantity"].ToString(),row["DispensedQuantity"].ToString(),
+                    row["prophylaxis"].ToString(), remove
+                     };
+                    rows.Add(i);
+                    
+                }
+                else
+                {
+                    string[] i = new string[14] { row["Drug_Pk"].ToString(), row["batchId"].ToString(),
                     //row["FrequencyID"].ToString(),
                     row["abbr"].ToString(),row["DrugName"].ToString(),
                     row["batchName"].ToString(),row["MorningDose"].ToString(),row["MiddayDose"].ToString(),
@@ -1137,7 +1156,9 @@ namespace IQCare.Web.CCC.WebService
                     row["duration"].ToString(),row["OrderedQuantity"].ToString(),row["DispensedQuantity"].ToString(),
                     row["prophylaxis"].ToString(), remove
                      };
-                rows.Add(i);
+                    rows.Add(i);
+                }
+             
             }
             return rows;
         }
