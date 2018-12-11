@@ -42,4 +42,34 @@ namespace IQCare.Common.BusinessProcess.CommandHandlers.Lookup
             }
         }
     }
+
+    public class GetActiveFaciltyCommandHandler : IRequestHandler<GetActiveFaciltyCommand, Result<FacilityViewModel>>
+    {
+        private readonly ICommonUnitOfWork _unitOfWork;
+
+        public GetActiveFaciltyCommandHandler(ICommonUnitOfWork unitOfWork)
+        {
+            _unitOfWork = unitOfWork;
+        }
+        public Task<Result<FacilityViewModel>> Handle(GetActiveFaciltyCommand request, CancellationToken cancellationToken)
+        {
+            try
+            {
+                var activeFacility = _unitOfWork.Repository<Facility>().Get(x => x.DeleteFlag == 0).Select(x =>
+                       new FacilityViewModel
+                       {
+                           Id = x.FacilityID,
+                           Name = x.FacilityName,
+                           PositionId = x.PosID
+                       }).SingleOrDefault();
+
+                return Task.FromResult(Result<FacilityViewModel>.Valid(activeFacility));
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex, "An error occurred while getting active facility");
+                return Task.FromResult(Result<FacilityViewModel>.Invalid(ex.Message));
+            }
+        }
+    }
 }
