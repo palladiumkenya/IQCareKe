@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, ViewChild } from '@angular/core';
 import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
 import { LabTestInfo, AddLabOrderCommand } from '../../_models/AddLabOrderCommand';
 import { LaborderService } from '../../_services/laborder.service';
@@ -11,6 +11,7 @@ import { LookupItemService } from '../../../shared/_services/lookup-item.service
 import { AddPatientOrdVisitCommand } from '../../../shared/_models/patientordvisit';
 import { PatientMasterVisitEncounter } from '../../../pmtct/_models/PatientMasterVisitEncounter';
 import { forkJoin } from 'rxjs';
+import { MatPaginator, MatTableDataSource } from '@angular/material';
 
 @Component({
   selector: 'app-lab-order',
@@ -31,10 +32,14 @@ patientMasterVisitId : any;
 encounterType : any;
 serviceAreaId : any;
 labTestReasonOptions : any[];
-@Output() notify: EventEmitter<FormGroup> = new EventEmitter<FormGroup>();
+
 @Output() notifyData: EventEmitter<any[]> = new EventEmitter<any[]>();
+@ViewChild(MatPaginator) paginator: MatPaginator;
 
+lab_test_displaycolumns = ['test', 'orderReason', 'testNotes', 'action'];
+dataSource =  new MatTableDataSource(this.labTestData);
 
+@Output() notify: EventEmitter<FormGroup> = new EventEmitter<FormGroup>();
 
   constructor(private formBuilder :FormBuilder, 
     private labOrderService: LaborderService,
@@ -53,7 +58,7 @@ labTestReasonOptions : any[];
       clinicalOrderNotes: new FormControl('', [Validators.required])
     });
     this.notify.emit(this.labOrderFormGroup);
-    this.notifyData.emit(this.labTestData);
+    this.dataSource =  new MatTableDataSource(this.labTestData);
    }
 
   ngOnInit() {
@@ -61,11 +66,8 @@ labTestReasonOptions : any[];
 
     this.activatedRoute.params.subscribe(params => {
       this.patientId = params['patientId'];
-      console.log("PAtient Id>> "+ this.patientId);
       this.personService.getPatientById(this.patientId).subscribe(patient => {
          this.patientInfo = patient;
-         console.log("PAtient Info>> "+ this.patientInfo.ptn_pk);
-
      });  
      
      this.activatedRoute.data.subscribe(
@@ -81,7 +83,7 @@ labTestReasonOptions : any[];
     this.getServiceArea();  
   }
 
- 
+
   public  AddLabTest() {
     this.labTestData.push({
       testId: this.labOrderFormGroup.get('labTestId').value.id,
@@ -90,6 +92,9 @@ labTestReasonOptions : any[];
       orderReasonId: this.labOrderFormGroup.get('labtestReasonId').value.itemId,
       testNotes: this.labOrderFormGroup.get('labTestNotes').value
     });
+    
+    this.dataSource = new MatTableDataSource(this.labTestData);
+    this.dataSource.paginator = this.paginator;
     console.log(this.labTestData);
   }
 
@@ -112,8 +117,8 @@ labTestReasonOptions : any[];
         ])
         .subscribe(
             (result) => {
-              console.log("ORD result >>" +result[0])
-              labOrderCommand.VisitId = result[0]['Visit_Id'];
+              console.log("ORD result >>" +result[0]['visit_Id'])
+              labOrderCommand.VisitId = result[0]['visit_Id'];
               labOrderCommand.PatientMasterVisitId = result[1]['patientMasterVisitId'];
               
               this.labOrderService.addLabOrder(labOrderCommand).subscribe(
@@ -142,7 +147,8 @@ labTestReasonOptions : any[];
             }
         );        
       
-
+      this.labOrderFormGroup.reset();
+      this.labOrderFormGroup.clearValidators();
      }
 
      public buildLabOrderCommand() : AddLabOrderCommand {
@@ -156,7 +162,6 @@ labTestReasonOptions : any[];
           LabTestName :x.test
         })
       });
-  console.log("Labtest Info >>" + labTestInfo)
      const labOrderCommand : AddLabOrderCommand = {
         Ptn_Pk: this.patientInfo.ptn_pk,
         PatientId : this.patientInfo.id,
@@ -189,9 +194,7 @@ labTestReasonOptions : any[];
      return ordVisitCommand;
     }
 
-    /**
-     * buildPatientEncounterCommand
-     */
+    
     public buildPatientEncounterCommand() :PatientMasterVisitEncounter {
       const encounterVisit : PatientMasterVisitEncounter = {
          EncounterDate : new Date,

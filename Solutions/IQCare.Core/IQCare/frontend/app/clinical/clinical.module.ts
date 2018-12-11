@@ -8,7 +8,7 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import {
     MatNativeDateModule, MatPaginatorModule, MatInputModule,
     MatDatepickerModule, MatFormFieldModule,
-    MatTableModule, MatButtonModule, MatSelectModule
+    MatTableModule, MatButtonModule, MatSelectModule, MatTableDataSource, MatGridListModule
 } from '@angular/material';
 import { HttpClientModule } from '@angular/common/http';
 import { LabOrderComponent } from '../clinical/lab/lab-order/lab-order.component';
@@ -24,7 +24,7 @@ import { LaborderService } from './_services/laborder.service';
         ReactiveFormsModule,
         MatPaginatorModule,
         MatNativeDateModule,
-        MatInputModule, MatDatepickerModule, MatFormFieldModule,
+        MatInputModule, MatDatepickerModule, MatFormFieldModule,MatGridListModule,
         MatTableModule, MatButtonModule, FormsModule, HttpClientModule, SharedModule, MatSelectModule,
     ],
     declarations: [

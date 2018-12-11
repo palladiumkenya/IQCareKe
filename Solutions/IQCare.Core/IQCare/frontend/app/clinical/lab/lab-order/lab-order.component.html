@@ -36,38 +36,61 @@
             <input matInput placeholder="Lab Test Notes" formControlName="labTestNotes" required>
         </mat-form-field>
     </div>
+  </div>
+  <div class="row">
+    <div class="mat-elevation-z1">
+        <table  mat-table  [dataSource]="dataSource">
+            <ng-container matColumnDef="test">
+              <th mat-header-cell *matHeaderCellDef> <strong>Lab Test</strong> </th>
+              <td mat-cell *matCellDef="let labTestData"> {{labTestData.test}} </td>
+            </ng-container>            
+            <ng-container matColumnDef="orderReason">
+              <th mat-header-cell *matHeaderCellDef><strong>Order Reason</strong>  </th>
+              <td mat-cell *matCellDef="let labTestData"> {{labTestData.orderReason }} </td>
+            </ng-container>
+          
+            <ng-container matColumnDef="testNotes">
+              <th mat-header-cell *matHeaderCellDef> <strong> Notes </strong>  </th>
+              <td mat-cell *matCellDef="let labTestData"> {{labTestData.testNotes}} </td>
+            </ng-container>
+      
+          <ng-container matColumnDef="action">
+            <th mat-header-cell *matHeaderCellDef><strong class="fa fa-cog"> Action</strong></th>
+            <td mat-cell *matCellDef="let row">
+                <button mat-raised-button class="mat-accent"><span class="fa fa-trash-o"> Delete</span>
+                </button>
+            </td>
+        </ng-container>     
+            <tr mat-header-row *matHeaderRowDef="lab_test_displaycolumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: lab_test_displaycolumns;"></tr>
+        </table>
+  </div> 
+  </div>
+  <div class="row">
+    <div class="col-lg-4 col-xs-12">
+        <button  mat-raised-button class="mat-primary" (click)="AddLabTest()"><span class="fa fa-plus-circle" > Add Test</span></button>
+    </div>
+   </div>  
 
     <div class="row">
-        <div class="col-lg-4 col-xs-12">
-            <button  mat-raised-button class="mat-primary" (click)="AddLabTest()"><span class="fa fa-plus-circle" > Add Test</span></button>
+        <div class="col-lg-3 col-xs-12">
+            <mat-form-field class="col-md-12">
+                <input [max]="maxDate" matInput [matDatepicker]="picker2" formControlName="orderDate"
+                    placeholder="Order Date" required (click)="picker2.open()">
+                <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+                <mat-datepicker #picker2 ngDefaultControl></mat-datepicker>
+            </mat-form-field>
+        </div>
+    
+          <div class="col-lg-8 col-xs-12">
+            <mat-form-field class="col-lg-12">
+                <input matInput placeholder="Clinical Order Notes" formControlName="clinicalOrderNotes" required>
+            </mat-form-field>
         </div>
     </div>
-      <!-- <div class="row">
-         <app-lab-test-grid>            
-         </app-lab-test-grid>
-      </div>  -->
-
-      <div class="col-lg-3 col-xs-12">
-        <mat-form-field class="col-md-12">
-            <input [max]="maxDate" matInput [matDatepicker]="picker2" formControlName="orderDate"
-                placeholder="Order Date" required (click)="picker2.open()">
-            <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
-            <mat-datepicker #picker2 ngDefaultControl></mat-datepicker>
-        </mat-form-field>
-    </div>
-
-      <div class="col-lg-8 col-xs-12">
-        <mat-form-field class="col-lg-12">
-            <input matInput placeholder="Clinical Order Notes" formControlName="clinicalOrderNotes" required>
-        </mat-form-field>
-    </div>
-
-  </div>
-
   <div class="row">
       <div class="col-lg-4 col-xs-12">
           <button  mat-raised-button class="mat-primary" (click)="SubmitOrder()"><span class="fa fa-plus-circle"> Submit Order </span></button>
       </div>
   </div>
-
 </form>

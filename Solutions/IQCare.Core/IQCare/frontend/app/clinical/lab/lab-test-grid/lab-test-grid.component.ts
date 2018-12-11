@@ -1,5 +1,5 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { MatPaginator, MatTableDataSource } from '@angular/material';
+import { Component, OnInit, ViewChild, Input } from '@angular/core';
+import { MatTableDataSource, MatPaginator } from '@angular/material';
 
 @Component({
   selector: 'app-lab-test-grid',
@@ -8,14 +8,26 @@ import { MatPaginator, MatTableDataSource } from '@angular/material';
 })
 export class LabTestGridComponent implements OnInit {
 
-  lab_test_data: any[] = [];
-  LabTestDataSource = new MatTableDataSource(this.lab_test_data);
+  @Input("lab_test_data") lab_test_data;
+  @Input("dataSource") dataSource //=   new MatTableDataSource(this.lab_test_data);
   lab_test_displaycolumns = ['test', 'orderReason', 'testNotes', 'action'];
+  // dataSource =  new MatTableDataSource(this.lab_test_data);
   @ViewChild(MatPaginator) paginator: MatPaginator;
-  
-  constructor() { }
+
+  constructor() {
+
+   }
 
   ngOnInit() {
+    // this.dataSource = new MatTableDataSource(this.lab_test_data);
+    // this.dataSource.paginator = this.paginator;
+    console.log("I have been notified "+ this.dataSource);
+
+  }
+
+
+  public onLabTestGridNotify(labtest:any[]) {
+    console.log("I have been notified "+ labtest);
   }
 
 }
