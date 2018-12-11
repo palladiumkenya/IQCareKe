@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using IQCare.Lab.BusinessProcess.Commands;
+﻿using IQCare.Lab.BusinessProcess.Commands;
 using IQCare.Lab.BusinessProcess.Queries;
 using MediatR;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System;
+using System.Threading.Tasks;
 
 namespace IQCare.Lab.WebApi.Controllers
 {
@@ -30,6 +27,9 @@ namespace IQCare.Lab.WebApi.Controllers
         [HttpPost]
         public async Task<IActionResult> AddLabOrder([FromBody]AddLabOrderCommand addLabOrderCommand)
         {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
             var response = await _mediator.Send(addLabOrderCommand, Request.HttpContext.RequestAborted);
             if (response.IsValid)
                 return Ok(response.Value);

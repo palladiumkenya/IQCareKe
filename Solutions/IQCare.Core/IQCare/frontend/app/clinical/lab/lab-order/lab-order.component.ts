@@ -20,7 +20,8 @@ import { forkJoin } from 'rxjs';
 export class LabOrderComponent implements OnInit {
 
 labOrderFormGroup : FormGroup;
-labTestData : any[];
+configuredLabTests : any[];
+labTestData : any[] = [];
 patientId : any;
 patientInfo : any;
 userId : any;
@@ -29,12 +30,11 @@ ordVisitId : any;
 patientMasterVisitId : any;
 encounterType : any;
 serviceAreaId : any;
-@Input() labTestReasons: any[] = [];
+labTestReasonOptions : any[];
 @Output() notify: EventEmitter<FormGroup> = new EventEmitter<FormGroup>();
 @Output() notifyData: EventEmitter<any[]> = new EventEmitter<any[]>();
 
 
-labTestReasonOptions : any[];
 
   constructor(private formBuilder :FormBuilder, 
     private labOrderService: LaborderService,
@@ -48,7 +48,7 @@ labTestReasonOptions : any[];
      this.labOrderFormGroup = this.formBuilder.group({
       labTestId: new FormControl('', [Validators.required]),
       labtestReasonId: new FormControl('', [Validators.required]),
-      labTestNotes: new FormControl('', [Validators.required]),
+      labTestNotes: new FormControl('', [Validators.required]),  
       orderDate: new FormControl('', [Validators.required]),
       clinicalOrderNotes: new FormControl('', [Validators.required])
     });
@@ -57,14 +57,23 @@ labTestReasonOptions : any[];
    }
 
   ngOnInit() {
-    this.labTestReasonOptions = this.labTestReasons;
     this.userId = JSON.parse(localStorage.getItem('appUserId'));
 
     this.activatedRoute.params.subscribe(params => {
       this.patientId = params['patientId'];
+      console.log("PAtient Id>> "+ this.patientId);
       this.personService.getPatientById(this.patientId).subscribe(patient => {
          this.patientInfo = patient;
-     });   
+         console.log("PAtient Info>> "+ this.patientInfo.ptn_pk);
+
+     });  
+     
+     this.activatedRoute.data.subscribe(
+       (data)=>
+       {
+        this.configuredLabTests = data["configuredLabTests"];
+        this.labTestReasonOptions = data["labTestReasonOptions"]["lookupItems"];
+       });
      });
 
     this.getEncounterType();
@@ -76,11 +85,12 @@ labTestReasonOptions : any[];
   public  AddLabTest() {
     this.labTestData.push({
       testId: this.labOrderFormGroup.get('labTestId').value.id,
-      test: this.labOrderFormGroup.get('labTestId').value.itemName,
-      orderReason: this.labOrderFormGroup.get('labtestReasonId').value.itemName,
+      test: this.labOrderFormGroup.get('labTestId').value.name,
+      orderReason: this.labOrderFormGroup.get('labtestReasonId').value.displayName,
       orderReasonId: this.labOrderFormGroup.get('labtestReasonId').value.itemId,
       testNotes: this.labOrderFormGroup.get('labTestNotes').value
     });
+    console.log(this.labTestData);
   }
 
 
@@ -94,6 +104,7 @@ labTestReasonOptions : any[];
 
         const patientEncounter = this.buildPatientEncounterCommand();
         const submitPatientEncounter = this.encouterService.savePatientMasterVisit(patientEncounter);
+        var labOrderCommand = this.buildLabOrderCommand();
 
         forkJoin([
           submitOrdVisit,
@@ -101,7 +112,7 @@ labTestReasonOptions : any[];
         ])
         .subscribe(
             (result) => {
-
+              console.log("ORD result >>" +result[0])
               labOrderCommand.VisitId = result[0]['Visit_Id'];
               labOrderCommand.PatientMasterVisitId = result[1]['patientMasterVisitId'];
               
@@ -129,10 +140,7 @@ labTestReasonOptions : any[];
             () => {
                 console.log(`complete`);
             }
-        );
-
-      var labOrderCommand = this.buildLabOrderCommand();
-        
+        );        
       
 
      }
@@ -148,23 +156,24 @@ labTestReasonOptions : any[];
           LabTestName :x.test
         })
       });
-  
+  console.log("Labtest Info >>" + labTestInfo)
      const labOrderCommand : AddLabOrderCommand = {
-        Ptn_Pk: this.patientInfo.ptn_Pk,
-        PatientId : this.patientInfo.patientId,
+        Ptn_Pk: this.patientInfo.ptn_pk,
+        PatientId : this.patientInfo.id,
         LocationId : this.facilityId,
         VisitId : null,
         Module : "Laboratory",
         OrderedBy : this.userId,
         OrderDate : this.labOrderFormGroup.get('orderDate').value,
-        ClinicalOrderNotes :  this.labOrderFormGroup.get('orderNotes').value,
+        ClinicalOrderNotes :  this.labOrderFormGroup.get('clinicalOrderNotes').value,
         CreateDate :new Date,
         OrderStatus : "Pending",
         UserId : this.userId,
         PatientMasterVisitId : null,
-        LastTests : this.labTestData
+        LabTests : labTestInfo
         }
-
+        
+        console.log("Lab order command " + labOrderCommand);
         return labOrderCommand;
   
     }
@@ -203,6 +212,7 @@ labTestReasonOptions : any[];
     
     public getServiceArea() {
       this.personService.getServiceArea("Clinical").subscribe(result=>{
+        console.log("Service Area "+ result);
         this.serviceAreaId = result.id;
     });
     }

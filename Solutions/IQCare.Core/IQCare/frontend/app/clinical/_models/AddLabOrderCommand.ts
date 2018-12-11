@@ -11,7 +11,7 @@ export interface AddLabOrderCommand {
  OrderStatus : string,
  UserId : number
  PatientMasterVisitId : number
- LastTests : LabTestInfo[]
+ LabTests : LabTestInfo[]
 }
 
 export interface LabTestInfo{
