@@ -23,25 +23,23 @@ namespace IQCare.PMTCT.BusinessProcess.CommandHandlers.Education
         {
             using (_unitOfWork)
             {
-                    try
+                try
+                {
+                    var patientEducation = await _unitOfWork.Repository<PatientEducation>().FindByIdAsync(request.Id);
+                    if(patientEducation==null)
+                        return Result<EditPatientEducationCommadResult>.Invalid($"Patient Education for Id: {request.Id} could not be found");
+
+                    patientEducation.Description = request.Description;
+                    patientEducation.CounsellingTopicId = request.CounsellingTopicId;
+
+                    _unitOfWork.Repository<PatientEducation>().Update(patientEducation);
+                    await _unitOfWork.SaveAsync();
+
+                    return Result<EditPatientEducationCommadResult>.Valid(new EditPatientEducationCommadResult()
                     {
-                        PatientEducation patientEducation = new PatientEducation()
-                        {
-                            PatientId = request.patientEducation.PatientId,
-                            PatientMasterVisitId = request.patientEducation.PatientMasterVisitId,
-                            CounsellingTopicId = request.patientEducation.CounsellingTopicId,
-                            CounsellingDate = request.patientEducation.CounsellingDate,
-                            Description = request.patientEducation.Description,
-                        };
-
-                         _unitOfWork.Repository<PatientEducation>().Update(patientEducation);
-                        await _unitOfWork.SaveAsync();
-
-                        return Result<EditPatientEducationCommadResult>.Valid(new EditPatientEducationCommadResult()
-                        {
-                            PatientEducationId = 1
-                        });
-                    }
+                        PatientEducationId = 1
+                    });
+                }
                 catch (Exception e)
                 {
                     Log.Error(e.Message);
