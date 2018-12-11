@@ -8,18 +8,18 @@ import { Observable } from 'rxjs';
 import { CompleteLabOrderCommand } from '../../pmtct/_models/hei/CompleteLabOrderCommand';
 
 const httpOptions = {
-  headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+    headers: new HttpHeaders({ 'Content-Type': 'application/json' })
 };
 
 @Injectable({
-  providedIn: 'root'
+    providedIn: 'root'
 })
 export class LaborderService {
   private LabOrder_ApiUrl = environment.API_LAB_URL;
 
-  constructor(private httpClient : HttpClient,
-    private errorHandlerService: ErrorHandlerService,) {
-  }
+    constructor(private httpClient: HttpClient,
+        private errorHandlerService: ErrorHandlerService, ) {
+    }
 
 
   public addLabOrder(addLabOrderCommand : AddLabOrderCommand) : Observable<any> {
@@ -50,5 +50,5 @@ export class LaborderService {
       );
 
 
-}
+    }
 }
