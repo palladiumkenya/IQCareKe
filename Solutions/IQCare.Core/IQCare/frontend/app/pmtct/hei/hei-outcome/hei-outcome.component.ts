@@ -5,29 +5,29 @@ import { LookupItemService } from '../../../shared/_services/lookup-item.service
 import { SnotifyService } from 'ng-snotify';
 
 @Component({
-  selector: 'app-hei-outcome',
-  templateUrl: './hei-outcome.component.html',
-  styleUrls: ['./hei-outcome.component.css']
+    selector: 'app-hei-outcome',
+    templateUrl: './hei-outcome.component.html',
+    styleUrls: ['./hei-outcome.component.css']
 })
 
 export class HeiOutcomeComponent implements OnInit {
 
 
-  HeiOutcomeFormGroup: FormGroup;
+    HeiOutcomeFormGroup: FormGroup;
     @Input() heiOutcomeOptions: any[] = [];
     @Output() notify: EventEmitter<FormGroup> = new EventEmitter<FormGroup>();
 
-  constructor(private _formBuilder: FormBuilder,
-    private _lookupItemService: LookupItemService,
-    private notificationService: NotificationService,
-    private snotifyService: SnotifyService) { }
+    constructor(private _formBuilder: FormBuilder,
+        private _lookupItemService: LookupItemService,
+        private notificationService: NotificationService,
+        private snotifyService: SnotifyService) { }
 
-  ngOnInit() {
-    this.HeiOutcomeFormGroup = this._formBuilder.group({
-      heiOutcomeOptions: new FormControl('', [Validators.required]),
-    });
+    ngOnInit() {
+        this.HeiOutcomeFormGroup = this._formBuilder.group({
+            heiOutcomeOptions: new FormControl('', [Validators.required]),
+        });
 
-    this.notify.emit(this.HeiOutcomeFormGroup);
-  }
+        this.notify.emit(this.HeiOutcomeFormGroup);
+    }
 
 }

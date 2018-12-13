@@ -40,7 +40,7 @@ namespace IQCare.PMTCT.BusinessProcess.CommandHandlers.HeiDeliveryMaternalHistor
                     }
                     else
                     {
-                        return Result<HEIEncounter>.Valid(null);
+                        return Result<HEIEncounter>.Invalid($"Could not find hei encouter for Id: {request.HeiEncounterId}");
                     }
                 }
                 catch (Exception e)

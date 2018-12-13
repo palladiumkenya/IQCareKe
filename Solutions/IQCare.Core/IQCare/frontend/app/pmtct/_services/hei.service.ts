@@ -16,6 +16,8 @@ import { LabOrder } from '../_models/hei/LabOrder';
 import { OrdVisitCommand } from '../_models/hei/OrdVisitCommand';
 import { CompleteLabOrderCommand } from '../_models/hei/CompleteLabOrderCommand';
 import { PatientFeedingCommand } from '../_models/hei/PatientFeedingCommand';
+import { HeiDeliveryEditCommand } from '../_models/HeiDeliveryEditCommand';
+import { HeiFeedingEditCommand } from '../_models/HeiFeedingEditCommand';
 
 
 const httpOptions = {
@@ -123,6 +125,14 @@ export class HeiService {
         );
     }
 
+    public updateHeiDelivery(heiDeliveryCommand: HeiDeliveryEditCommand): Observable<any> {
+        return this.http.post(this.API_URL
+            + '/api/DeliveryMaternalHistory/UpdateHeiEncounter', JSON.stringify(heiDeliveryCommand), httpOptions).pipe(
+                tap(updateHeiDelivery => this.errorHandler.log(`successfully updated hei delivery`)),
+                catchError(this.errorHandler.handleError<any>('Error updating hei delivery'))
+            );
+    }
+
     public saveTbAssessment(patientIcf: PatientIcf, patientIcfAction: PatientIcfAction): Observable<any> {
 
         const Icf = this.http.post<any>(this.API_URL + '/api/tbAssessment/AddPatientIcf', JSON.stringify(patientIcf), httpOptions).pipe(
@@ -227,6 +237,16 @@ export class HeiService {
         );
     }
 
+    public updateHeiInfantFeeding(heiFeedingCommand: HeiFeedingEditCommand): Observable<any> {
+        if (!heiFeedingCommand.Id) {
+            return of([]);
+        }
+        return this.http.put(this.API_URL + '/api/Hei/Put', JSON.stringify(heiFeedingCommand), httpOptions).pipe(
+            tap(updateHeiInfantFeeding => this.errorHandler.log(`successfully updated infant feeding`)),
+            catchError(this.errorHandler.handleError<any>('Error updating infant feeding'))
+        );
+    }
+
     public saveHeiOutCome(heiOutComeCommand: HeiOutComeCommand): Observable<any> {
         return this.http.post<any>(this.API_URL + '/api/DeliveryMaternalHistory/UpdateOutComeAt24Months',
             JSON.stringify(heiOutComeCommand), httpOptions).pipe(
@@ -238,8 +258,8 @@ export class HeiService {
     public getPatientVisitDetails(patientId: number, serviceAreaId: number) {
         return this.http.get<any[]>(this.API_URL + '/api/AncVisitDetails/GetVisitDetailsByVisitType/' +
             patientId + '/' + serviceAreaId).pipe(
-            tap(getPatientVisitDetails => this.errorHandler.log('get patient visit details data')),
-            catchError(this.errorHandler.handleError<any[]>('getPatientVisitDetails'))
-        );
+                tap(getPatientVisitDetails => this.errorHandler.log('get patient visit details data')),
+                catchError(this.errorHandler.handleError<any[]>('getPatientVisitDetails'))
+            );
     }
 }

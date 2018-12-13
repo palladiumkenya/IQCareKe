@@ -148,11 +148,11 @@ export class PncService {
     }
 
     public updatePartnerTesting(partnerTestingEditCommand: PartnerTestingEditCommand): Observable<any> {
-        return this.http.post(this.API_PMTCT_URL + '/api/PatientPartnerTesting/Edit', 
-        JSON.stringify(partnerTestingEditCommand), httpOptions).pipe(
-            tap(updatePartnerTesting => this.errorHandler.log(`successfully updated pnc partner testing`)),
-            catchError(this.errorHandler.handleError<any>('Error updating pnc partner testing'))
-        );
+        return this.http.post(this.API_PMTCT_URL + '/api/PatientPartnerTesting/Edit',
+            JSON.stringify(partnerTestingEditCommand), httpOptions).pipe(
+                tap(updatePartnerTesting => this.errorHandler.log(`successfully updated pnc partner testing`)),
+                catchError(this.errorHandler.handleError<any>('Error updating pnc partner testing'))
+            );
     }
 
     public saveDiagnosis(pncPatientDiagnosis: PatientDiagnosisCommand): Observable<any> {
@@ -196,6 +196,10 @@ export class PncService {
     }
 
     public savePncNextAppointment(pncNextAppointmentCommand: PatientAppointment): Observable<any> {
+        if (!pncNextAppointmentCommand.AppointmentDate) {
+            return of([]);
+        }
+
         return this.http.post<any>(this.API_URL + '/api/PatientReferralAndAppointment/AddPatientNextAppointment',
             JSON.stringify(pncNextAppointmentCommand), httpOptions).pipe(
                 tap(savePncNextAppointment => this.errorHandler.log(`successfully saved pnc next appointment`)),
