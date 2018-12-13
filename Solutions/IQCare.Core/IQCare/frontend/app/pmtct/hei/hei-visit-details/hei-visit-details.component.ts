@@ -52,8 +52,10 @@ export class HeiVisitDetailsComponent implements OnInit {
             id: new FormControl('')
         });
 
-        this.HeiVisitDetailsFormGroup.get('visitDate').setValue(this.visitDate);
-        this.HeiVisitDetailsFormGroup.get('visitType').setValue(this.visitType['itemId']);
+        if (!this.isEdit) {
+            this.HeiVisitDetailsFormGroup.get('visitDate').setValue(this.visitDate);
+            this.HeiVisitDetailsFormGroup.get('visitType').setValue(this.visitType['itemId']);
+        }
         this.HeiVisitDetailsFormGroup.get('visitNumber').disable({ onlySelf: true });
         this.HeiVisitDetailsFormGroup.get('dayPostPartum').disable({ onlySelf: true });
 
@@ -115,6 +117,9 @@ export class HeiVisitDetailsComponent implements OnInit {
                                 this.HeiVisitDetailsFormGroup.get('dayPostPartum').setValue(y[0].daysPostPartum);
                                 this.HeiVisitDetailsFormGroup.get('visitNumber').setValue(y[0].visitNumber);
                                 this.HeiVisitDetailsFormGroup.get('id').setValue(y[0].id);
+
+                                this.HeiVisitDetailsFormGroup.get('visitDate').setValue(y[0].visitDate);
+                                this.HeiVisitDetailsFormGroup.get('visitType').setValue(y[0].visitType);
                             }
                         }
 
@@ -124,6 +129,7 @@ export class HeiVisitDetailsComponent implements OnInit {
                         // console.log(Item);
                         if (Item.length > 0) {
                             this.HeiVisitDetailsFormGroup.get('visitType').patchValue(Item[0].itemId);
+                            this.visitType = Item[0];
                         }
                     }
                 },
