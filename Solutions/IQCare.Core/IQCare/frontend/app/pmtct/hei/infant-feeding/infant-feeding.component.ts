@@ -43,7 +43,6 @@ export class InfantFeedingComponent implements OnInit {
     loadInfantFeeding(): void {
         this.heiservice.getHeiInfantFeeding(this.patientId, this.patientMasterVisitId).subscribe(
             (result) => {
-                console.log(result);
                 if (result && result.feedingModeId && result.feedingModeId > 0) {
                     this.InfantFeedingFormGroup.get('infantFeedingOptions').setValue(result.feedingModeId);
                     this.InfantFeedingFormGroup.get('id').setValue(result.id);

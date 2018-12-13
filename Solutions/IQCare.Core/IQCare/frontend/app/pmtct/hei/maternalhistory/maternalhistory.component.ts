@@ -80,7 +80,6 @@ export class MaternalhistoryComponent implements OnInit {
     loadMaternalHistory(): void {
         this.heiservice.getHeiDelivery(this.patientId, this.patientMasterVisitId).subscribe(
             (result) => {
-                console.log(result);
                 for (let i = 0; i < result.length; i++) {
                     const isMotherRegistered = result[i].motherRegisteredId ? 'Yes' : 'No';
                     const yesNoOption = this.yesnoOptions.filter(obj => obj.itemName == isMotherRegistered);

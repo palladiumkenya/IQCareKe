@@ -62,9 +62,7 @@ export class ImmunizationHistoryComponent implements OnInit {
 
         this.notify.emit({ 'form': this.ImmunizationHistoryFormGroup, 'data': this.immunization_history });
 
-        if (this.isEdit) {
-            this.loadImmunizationHistory();
-        }
+        this.loadImmunizationHistory();
     }
 
     public loadImmunizationHistory(): void {
@@ -99,18 +97,24 @@ export class ImmunizationHistoryComponent implements OnInit {
         if (this.immunization_history_table_data.filter(x => x.immunizationPeriod === period).length > 0) {
             this.snotifyService.warning('' + period + ' exists', 'Immunization History', this.notificationService.getConfig());
         } else {
+
+            let nextScheduleDate;
+            if (this.ImmunizationHistoryFormGroup.controls['nextSchedule'].value) {
+                nextScheduleDate = new Date(this.ImmunizationHistoryFormGroup.controls['nextSchedule'].value);
+            }
+
             this.immunization_history_table_data.push({
                 immunizationPeriod: period,
                 given: this.ImmunizationHistoryFormGroup.controls['immunizationGiven'].value.itemName,
                 dateImmunized: new Date(this.ImmunizationHistoryFormGroup.controls['dateImmunized'].value),
-                nextSchedule: new Date(this.ImmunizationHistoryFormGroup.controls['nextSchedule'].value)
+                nextSchedule: nextScheduleDate
             });
 
             this.immunization_history.push({
                 immunizationPeriodId: this.ImmunizationHistoryFormGroup.get('period').value.itemId,
                 immunizationGivenId: this.ImmunizationHistoryFormGroup.controls['immunizationGiven'].value.itemId,
                 dateImmunized: new Date(this.ImmunizationHistoryFormGroup.controls['dateImmunized'].value),
-                nextScheduled: new Date(this.ImmunizationHistoryFormGroup.controls['nextSchedule'].value)
+                nextScheduled: nextScheduleDate
             });
 
             console.log(this.immunization_history_table_data);

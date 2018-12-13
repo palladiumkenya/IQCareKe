@@ -58,10 +58,10 @@ export class IptFollowUpComponent implements OnInit {
             adherenceMeasurementActionTaken: new FormControl('', [Validators.required]),
         });
 
-        const {
+        /*const {
             yesnoOption
         } = this.IPTFollowupOptions[0];
-        this.yesnoOptions = yesnoOption;
+        this.yesnoOptions = yesnoOption;*/
     }
 
     onSave(): void {

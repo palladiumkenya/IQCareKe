@@ -10,14 +10,15 @@
 
 
         <mat-form-field class="col-lg-12 col-xs-12">
-            <input [max]="maxDate" matInput [matDatepicker]="picker" formControlName="IPTDueDate" required placeholder="IPT Due Date">
+            <input [max]="maxDate" matInput [matDatepicker]="picker" formControlName="IPTDueDate" (click)="picker.open()"
+                required placeholder="IPT Due Date">
             <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
             <mat-datepicker #picker></mat-datepicker>
         </mat-form-field>
 
         <mat-form-field class="col-lg-12 col-xs-12">
-            <input [max]="maxDate" matInput [matDatepicker]="pickers" formControlName="IPTDateCollected" required
-                placeholder="IPT Date Collected">
+            <input [max]="maxDate" matInput [matDatepicker]="pickers" formControlName="IPTDateCollected" (click)="pickers.open()"
+                required placeholder="IPT Date Collected">
             <mat-datepicker-toggle matSuffix [for]="pickers"></mat-datepicker-toggle>
             <mat-datepicker #pickers></mat-datepicker>
         </mat-form-field>

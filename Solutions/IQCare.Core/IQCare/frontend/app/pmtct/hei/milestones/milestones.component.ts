@@ -61,9 +61,7 @@ export class MilestonesComponent implements OnInit {
 
         this.notify.emit({ 'form': this.milestonesFormGroup, 'data': this.milestone_data });
 
-        if (this.isEdit) {
-            this.loadMilestones();
-        }
+        this.loadMilestones();
     }
 
     loadMilestones(): any {
