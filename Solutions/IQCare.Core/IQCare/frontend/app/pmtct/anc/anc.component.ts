@@ -38,7 +38,7 @@ export class AncComponent implements OnInit, OnDestroy {
 
     formType: string;
     visitType: number;
-    isLinear: boolean = true;
+    isLinear: boolean = false;
     public isEdit = false;
     patientDrug: PatientDrugAdministration[] = [];
     public preventiveService: PreventiveService[] = [];
@@ -329,7 +329,16 @@ export class AncComponent implements OnInit, OnDestroy {
                 });
     }
 
-    public onSubmit() {
+    public onSubmit(): void {
+
+        if (this.isEdit) {
+            this.onSubmitEdit();
+        } else {
+            this.onSubmitNew();
+        }
+    }
+
+    public onSubmitNew() {
 
 
         const ancVisitDetailsCommand: any = {
@@ -528,7 +537,8 @@ export class AncComponent implements OnInit, OnDestroy {
                     PatientMasterVisitId: this.patientMasterVisitId,
                     ChronicIllness: this.chronicIllnessData[i]['chronicIllnessId'],
                     Treatment: this.chronicIllnessData[i]['currentTreatment'],
-                    Dose: this.chronicIllnessData[i]['dose'],
+                   // Dose: this.chronicIllnessData[i]['dose'],
+                    Dose: 0,
                     Duration: 0,
                     DeleteFlag: false,
                     OnsetDate: moment(this.chronicIllnessData[i]['onSetDate']).toDate(),
@@ -735,6 +745,21 @@ export class AncComponent implements OnInit, OnDestroy {
                     }
                 );
         }
+    }
+
+    public onSubmitEdit(): void {
+
+        forkJoin([
+
+        ]).subscribe(
+            (result) => {
+
+            },
+            (error) => {
+
+        },
+        () => {}
+        );
     }
 
     ngOnDestroy(): void {

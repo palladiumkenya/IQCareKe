@@ -53,7 +53,7 @@ export class PreventiveServicesComponent implements OnInit {
         this.PreventiveServicesFormGroup = this._formBuilder.group({
             preventiveServices: ['', Validators.required],
             dateGiven: ['', Validators.required],
-            comments: ['', Validators.required],
+            comments: ['n/a', Validators.required],
             nextSchedule: ['', Validators.required],
             insecticideTreatedNet: ['', Validators.required],
             insecticideTreatedNetGivenDate: ['', Validators.required],

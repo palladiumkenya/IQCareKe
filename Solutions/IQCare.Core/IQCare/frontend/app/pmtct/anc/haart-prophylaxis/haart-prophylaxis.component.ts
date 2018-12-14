@@ -82,13 +82,13 @@ export class HaartProphylaxisComponent implements OnInit {
             illness: ['', Validators.required],
             otherIllness: ['', Validators.required],
             onSetDate: ['', Validators.required],
-            currentTreatment: ['', Validators.required],
-            dose: ['', Validators.required]
+            currentTreatment: ['', Validators.required] // ,
+           // dose: ['', Validators.required]
         });
 
         this.HaartProphylaxisFormGroup.controls['illness'].disable({ onlySelf: true });
         this.HaartProphylaxisFormGroup.controls['currentTreatment'].disable({ onlySelf: true });
-        this.HaartProphylaxisFormGroup.controls['dose'].disable({ onlySelf: true });
+       // this.HaartProphylaxisFormGroup.controls['dose'].disable({ onlySelf: true });
         this.HaartProphylaxisFormGroup.controls['illness'].disable({ onlySelf: true });
         this.HaartProphylaxisFormGroup.controls['onSetDate'].disable({ onlySelf: true });
 
@@ -145,7 +145,7 @@ export class HaartProphylaxisComponent implements OnInit {
                     PatientMasterVisitId: parseInt(this.patientMasterVisitId.toString(), 10),
                     ChronicIllness: this.chronicIllness[i]['chronicIllnessId'],
                     Treatment: this.chronicIllness[i]['currentTreatment'],
-                    Dose: parseInt(this.chronicIllness[i]['dose'].toString(), 10),
+                  //  Dose: parseInt(this.chronicIllness[i]['dose'].toString(), 10),
                     DeleteFlag: false,
                     OnsetDate: this.chronicIllness[i]['onSetDate'],
                     Active: 0,
@@ -180,8 +180,8 @@ export class HaartProphylaxisComponent implements OnInit {
                 chronicIllness: illness,
                 chronicIllnessId: illnessId,
                 onSetDate: this.HaartProphylaxisFormGroup.controls['onSetDate'].value,
-                currentTreatment: this.HaartProphylaxisFormGroup.controls['currentTreatment'].value,
-                dose: parseInt(this.HaartProphylaxisFormGroup.controls['dose'].value.toString(), 10)
+                currentTreatment: this.HaartProphylaxisFormGroup.controls['currentTreatment'].value // ,
+               // dose: parseInt(this.HaartProphylaxisFormGroup.controls['dose'].value.toString(), 10)
             });
         }
         console.log(this.chronicIllness);
@@ -191,14 +191,14 @@ export class HaartProphylaxisComponent implements OnInit {
         if (event.isUserInput && event.source.selected && event.source.viewValue == 'Yes') {
             this.HaartProphylaxisFormGroup.controls['illness'].enable({ onlySelf: true });
             this.HaartProphylaxisFormGroup.controls['currentTreatment'].enable({ onlySelf: true });
-            this.HaartProphylaxisFormGroup.controls['dose'].enable({ onlySelf: true });
+           // this.HaartProphylaxisFormGroup.controls['dose'].enable({ onlySelf: true });
             this.HaartProphylaxisFormGroup.controls['illness'].enable({ onlySelf: true });
             this.HaartProphylaxisFormGroup.controls['onSetDate'].enable({ onlySelf: true });
             this.isDisabled = false;
         } else {
             this.HaartProphylaxisFormGroup.controls['illness'].disable({ onlySelf: true });
             this.HaartProphylaxisFormGroup.controls['currentTreatment'].disable({ onlySelf: true });
-            this.HaartProphylaxisFormGroup.controls['dose'].disable({ onlySelf: true });
+          //  this.HaartProphylaxisFormGroup.controls['dose'].disable({ onlySelf: true });
             this.HaartProphylaxisFormGroup.controls['illness'].disable({ onlySelf: true });
             this.HaartProphylaxisFormGroup.controls['onSetDate'].disable({ onlySelf: true });
             this.isDisabled = true;
@@ -303,6 +303,9 @@ export class HaartProphylaxisComponent implements OnInit {
                                 dose: chronic[i]['dose']
                             });
                         }
+
+                        const treatetNet = chronic.filter(x => x.description == 'Insecticide treated nets given');
+
                         const yesno = this.yesnonaOptions.filter(x => x.itemName == 'Yes');
                         this.HaartProphylaxisFormGroup.get('otherIllness').setValue(yesno[0]['itemId']);
                     } else {
