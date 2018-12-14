@@ -1,15 +1,14 @@
 
 
-/****** Object:  StoredProcedure [dbo].[Pr_Clinical_GetPatientSearchresults]    Script Date: 9/17/2018 12:48:31 PM ******/
 IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[Pr_Clinical_GetPatientSearchresults]') AND type in (N'P', N'PC'))
+BEGIN
 DROP PROCEDURE [dbo].[Pr_Clinical_GetPatientSearchresults]
-GO
 
+END
 
-
+/****** Object:  StoredProcedure [dbo].[Pr_Clinical_GetPatientSearchresults]  Script Date: 12/13/2018 10:59:48 AM ******/
 SET ANSI_NULLS ON
 GO
-
 SET QUOTED_IDENTIFIER ON
 GO
 
@@ -105,7 +104,7 @@ Left Outer Join (Select	CE.Ptn_Pk,	CE.CareEnded,	CE.PatientExitReason,	D.Name As
 TC.ModuleId	,Row_number() Over(Partition By TC.Ptn_Pk Order By TC.TrackingId Desc) EnrollmentIndex From dbo.dtl_PatientCareEnded As CE Inner Join	dbo.dtl_PatientTrackingCare As TC On TC.TrackingID = CE.TrackingId
 Inner Join	dbo.mst_Decode As D On D.ID = CE.PatientExitReason Where TC.ModuleId = @ModuleID ) As CT On CT.Ptn_Pk = P.Ptn_pk And CT.ModuleId = P.ModuleId Where P.ModuleID=@ModuleID ) CT On CT.Ptn_Pk=P.Ptn_Pk And CT.ModuleID=@ModuleID And EnrollmentIndex=1'
 
-      SELECT @ByStatus = ' Status = Case When CT.ModuleID Is Null Then ''Not Enrolled'' Else IsNull(CT.CareStatus,CT.CareEndReason) End , CT.CareEndReason, CT.CareStatus,ISNULL(CT.PatientCareEndStatus,0) PatientCareEndStatus ,'
+      SELECT @ByStatus = 'Status = Case When pce.CareEnded =''1'' then  ''Care Ended'' When CT.ModuleID Is Null And pce.ExitReason is null Then ''Not Enrolled''  Else IsNull(CT.CareStatus,CT.CareEndReason) End,CASE WHEN pce.ExitReason is null then CT.CareEndReason else pce.ExitReason END as CareEndReason, CT.CareStatus,CASE WHEN pce.PatientCareEndStatus is null then CT.PatientCareEndStatus  else  ISNULL(CT.PatientCareEndStatus,0) end as  PatientCareEndStatus ,'
 		SELECT @StatusStr = ' AND ( @Status IS NULL	OR 	ISNULL(CT.PatientCareEndStatus,0) = CASE @Status  WHEN 0 THEN 0  WHEN 1 THEN 1  END )';
 End
 
@@ -114,7 +113,14 @@ Set @Query=N'Select Top (@top) * From (Select  P.Ptn_Pk PatientId,Convert(varcha
 		Convert(varchar(50), Decryptbykey(LastName)) As LastName,IQNumber, PatientFacilityId,PatientEnrollmentID, '+ @IdentifierSQL +', LocationId,	F.FacilityName,
 		Case DOBPrecision	When 0 Then ''No'' When 1 Then ''Yes'' End As [Precision],Dob ,	Convert(varchar(100), Decryptbykey([Address])) [Address],	Convert(varchar(100), Decryptbykey(Phone)) [Phone],
 		convert(decimal(5,2),round(cast(datediff(dd,P.DOB,isnull(P.DateofDeath,getdate()))/365.25 as decimal(5,2)),2)) Age,	P.RegistrationDate,'+@ByStatus +' Sex = Case P.Sex When 16 Then ''Male'' Else ''Female'' End
-From dbo.mst_Patient As P Inner Join dbo.mst_Facility F	On F.FacilityID = P.LocationID'+ @ByModule +' Where  (P.DeleteFlag = 0 OR P.DeleteFlag Is Null)
+From dbo.mst_Patient As P Inner Join dbo.mst_Facility F	On F.FacilityID = P.LocationID
+LEFT JOIN (select pt.ptn_pk,CASE WHEN pt.CareEnded=''1''  then ''Care Ended'' end As CareStatus,pt.CareEnded,
+CASE pt.CareEnded WHEN 1 THEN 1 ELSE 0 END PatientCareEndStatus
+,pt.ExitDate,pt.ExitReason as Reason,pt.CreateDate,DisplayName as ExitReason from (select p.ptn_pk,''1'' as CareEnded,pce.ExitDate,pce.CreateDate,pce.DateOfDeath,pce.ExitReason,lv.DisplayName,ROW_NUMBER() OVER(partition by p.Ptn_pk order by pce.PatientMasterVisitId desc)rownum from  PatientCareending pce 
+ inner join Patient p on p.Id=pce.PatientId
+ inner join  LookupItemView lv on lv.ItemId=pce.ExitReason
+ where pce.DeleteFlag =0 or pce.DeleteFlag is null)pt where pt.rownum=''1'')pce  on pce.ptn_pk=p.Ptn_Pk
+'+ @ByModule +' Where  (P.DeleteFlag = 0 OR P.DeleteFlag Is Null)
 And Case When @FirstName Is  Null Or Convert(varchar(50), decryptbykey(P.FirstName)) Like  @Firstname Then 1 Else 0 End = 1
 And Case When @LastName Is  Null Or Convert(varchar(50), decryptbykey(P.LastName)) Like  @LastName Then 1	Else 0 End = 1
 And Case When @MiddleName Is  Null Or Convert(varchar(50), decryptbykey(P.MiddleName)) Like  @MiddleName Then 1	Else 0 End = 1
@@ -146,7 +152,4 @@ Execute sp_Executesql @Query, @ParamDefinition, @Sex, @Firstname,@LastName,@Midd
 	 
 End	   
 ;
-
-GO
-
 
