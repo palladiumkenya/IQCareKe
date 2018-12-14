@@ -74,7 +74,8 @@
 
 
         <mat-form-field class="col-lg-12 col-xs-12">
-            <input matInput [matDatepicker]="picker" formControlName="dateIPTStarted" required placeholder="Date IPT Started">
+            <input matInput [matDatepicker]="picker" formControlName="dateIPTStarted" required (click)="picker.open()"
+                placeholder="Date IPT Started">
             <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
             <mat-datepicker #picker></mat-datepicker>
         </mat-form-field>

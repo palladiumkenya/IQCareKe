@@ -241,7 +241,11 @@ export class HeiService {
         if (!heiFeedingCommand.Id) {
             return of([]);
         }
-        return this.http.put(this.API_URL + '/api/Hei/Put', JSON.stringify(heiFeedingCommand), httpOptions).pipe(
+
+        const Indata = {
+            heiFeeding: heiFeedingCommand
+        };
+        return this.http.put(this.API_URL + '/api/Hei/Put', JSON.stringify(Indata), httpOptions).pipe(
             tap(updateHeiInfantFeeding => this.errorHandler.log(`successfully updated infant feeding`)),
             catchError(this.errorHandler.handleError<any>('Error updating infant feeding'))
         );

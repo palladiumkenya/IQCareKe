@@ -21,6 +21,7 @@ import { PatientFeedingCommand } from '../_models/hei/PatientFeedingCommand';
 import * as moment from 'moment';
 import { HeiDeliveryEditCommand } from '../_models/HeiDeliveryEditCommand';
 import { HeiFeedingEditCommand } from '../_models/HeiFeedingEditCommand';
+import { PatientAppointmentEditCommand } from '../_models/PatientAppointmentEditCommand';
 
 @Component({
     selector: 'app-hei',
@@ -49,6 +50,7 @@ export class HeiComponent implements OnInit {
     vaccination: Vaccination[] = [];
     milestone: Milestone[] = [];
     deliveryOptions: any[] = [];
+    nextAppointmentOptions: any[] = [];
     maternalhistoryOptions: any[] = [];
     hivtestingOptions: any[] = [];
     motherreceivedrugsOptions: any[] = [];
@@ -242,6 +244,10 @@ export class HeiComponent implements OnInit {
             'testResults': this.heiHivTestingResultsOptions
         });
 
+        this.nextAppointmentOptions.push({
+            'YesNo': this.yesnoOptions
+        });
+
         this.heiService.getPatientById(this.patientId).subscribe(
             (result) => {
                 const { ptn_pk } = result;
@@ -251,7 +257,7 @@ export class HeiComponent implements OnInit {
 
         this.heiService.getHeiLabTests().subscribe(
             (result) => {
-                console.log('Hei Lab Tests ' + result);
+                // console.log('Hei Lab Tests ' + result);
                 for (let i = 0; i < result.length; i++) {
                     if (result[i].key == 'PCR') {
                         this.pcrLabTest = result[i].value;
@@ -314,9 +320,6 @@ export class HeiComponent implements OnInit {
             return;
         }
 
-        console.log(this.deliveryMatFormGroup.value[0]);
-        console.log(this.deliveryMatFormGroup.value[1]);
-
         const motherRegistered = this.yesnoOptions.filter(
             obj => obj.itemId == this.deliveryMatFormGroup.value[1]['motherregisteredinclinic']
         );
@@ -355,14 +358,47 @@ export class HeiComponent implements OnInit {
             FeedingModeId: this.infantFeedingFormGroup.value[0]['infantFeedingOptions']
         };
 
+        const heiOutComeCommand: HeiOutComeCommand = {
+            HeiEncounterId: this.deliveryMatFormGroup.value[1]['id'],
+            OutcomeAt24MonthsId: this.infantFeedingFormGroup.value[2]['heiOutcomeOptions']
+        };
+
+        const patientAppointmentEditCommand: PatientAppointmentEditCommand = {
+            AppointmentId: this.infantFeedingFormGroup.value[1]['id'],
+            AppointmentDate: this.infantFeedingFormGroup.value[1]['nextAppointmentDate'],
+            Description: this.infantFeedingFormGroup.value[1]['serviceRemarks']
+        };
+
+        const heiAppointment: PatientAppointment = {
+            PatientMasterVisitId: this.patientMasterVisitId,
+            ServiceAreaId: this.serviceAreaId,
+            PatientId: this.patientId,
+            AppointmentDate: this.infantFeedingFormGroup.value[1]['nextAppointmentDate'],
+            Description: this.infantFeedingFormGroup.value[1]['serviceRemarks'],
+            StatusDate: null,
+            DifferentiatedCareId: 0,
+            AppointmentReason: 'Follow Up',
+            CreatedBy: this.userId
+        };
+
         const heiDeliveryEditCommand = this.heiService.updateHeiDelivery(heiDeliveryCommand);
         const heiFeedingEditCommand = this.heiService.updateHeiInfantFeeding(heiFeedingCommand);
+        const heiOutCome = this.heiService.saveHeiOutCome(heiOutComeCommand);
+        const heiUpdateAppointment = this.pncService.updateAppointment(patientAppointmentEditCommand);
+        const heiAppoinment = this.pncService.savePncNextAppointment(heiAppointment);
+        let isAddOrInsertAppointment;
+        if (patientAppointmentEditCommand.AppointmentId && patientAppointmentEditCommand.AppointmentId > 0) {
+            isAddOrInsertAppointment = heiUpdateAppointment;
+        } else {
+            isAddOrInsertAppointment = heiAppoinment;
+        }
 
-        forkJoin([heiDeliveryEditCommand, heiFeedingEditCommand]).subscribe(
-            (result) => {
-                console.log(result);
-            }
-        );
+        forkJoin([heiDeliveryEditCommand, heiFeedingEditCommand, heiOutCome,
+            isAddOrInsertAppointment]).subscribe(
+                (result) => {
+                    console.log(result);
+                }
+            );
 
     }
 
