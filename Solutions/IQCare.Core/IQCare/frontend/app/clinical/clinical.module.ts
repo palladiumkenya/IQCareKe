@@ -8,11 +8,14 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import {
     MatNativeDateModule, MatPaginatorModule, MatInputModule,
     MatDatepickerModule, MatFormFieldModule,
-    MatTableModule, MatButtonModule
+    MatTableModule, MatButtonModule, MatSelectModule
 } from '@angular/material';
 import { HttpClientModule } from '@angular/common/http';
 import { LabOrderComponent } from '../clinical/lab/lab-order/lab-order.component';
 import { LabTestGridComponent } from './lab/lab-test-grid/lab-test-grid.component'
+import { LabTestsResolver } from './_services/labtests.resolver';
+import { LabTestReasonsResolver } from './_services/labtestreasons.resolver';
+import { LaborderService } from './_services/laborder.service';
 
 @NgModule({
     imports: [
@@ -22,13 +25,18 @@ import { LabTestGridComponent } from './lab/lab-test-grid/lab-test-grid.componen
         MatPaginatorModule,
         MatNativeDateModule,
         MatInputModule, MatDatepickerModule, MatFormFieldModule,
-        MatTableModule, MatButtonModule, FormsModule, HttpClientModule, SharedModule
+        MatTableModule, MatButtonModule, FormsModule, HttpClientModule, SharedModule, MatSelectModule,
     ],
     declarations: [
         TriageComponent,
         LabOrderComponent,
         LabTestGridComponent
     ],
-    providers: [TriageService]
+    providers: [
+        TriageService,
+        LabTestsResolver,
+        LabTestReasonsResolver,
+        LaborderService
+    ]
 })
 export class ClinicalModule { }

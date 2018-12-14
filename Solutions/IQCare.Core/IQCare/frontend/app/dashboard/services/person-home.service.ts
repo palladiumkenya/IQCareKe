@@ -41,6 +41,12 @@ export class PersonHomeService {
             catchError(this.errorHandler.handleError<any>('getPersonEnrolledServices'))
         );
     }
+    public getServiceArea(name: string): Observable<any> {
+        return this.http.get<any>(this.API_URL + '/api/ServiceArea/GetServiceArea?name=' + name).pipe(
+            tap(getServiceArea => this.errorHandler.log(`get service area`)),
+            catchError(this.errorHandler.handleError<any>('getServiceArea'))
+        );
+    }
 
     public getServiceAreaIdentifiers(serviceAreaId: number): Observable<any> {
         return this.http.get<any>(this.API_URL + '/api/Lookup/GetServiceAreaIdentifiers/' + serviceAreaId).pipe(

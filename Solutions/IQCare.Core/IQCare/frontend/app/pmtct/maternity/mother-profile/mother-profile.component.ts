@@ -20,7 +20,9 @@ export class MotherProfileComponent implements OnInit {
     motherProfile: Subscription;
     visitDetails: Subscription;
     @Input('patientId') patientId: number;
+    @Input ('visitDate') visitDate: Date;
     @Output() notify: EventEmitter<FormGroup> = new EventEmitter<FormGroup>();
+
     public maxDate: Date = moment().toDate();
     public minLmpDate: Date = moment().subtract( 1 , 'years').toDate();
     public minAgeMenarche: number = 9;
@@ -37,7 +39,7 @@ export class MotherProfileComponent implements OnInit {
         this.motherProfileFormGroup = this._formBuilder.group({
             dateLMP: new FormControl('', [ Validators.required]),
             dateEDD: new FormControl('', [Validators.required]),
-            gestation: new FormControl('', [Validators.max(20), Validators.required]),
+            gestation: new FormControl('', [Validators.max(42), Validators.required]),
             ageAtMenarche: new FormControl('', []),
             parityOne: new FormControl('', [ Validators.min(0) , Validators.max(20), Validators.required]),
             parityTwo: new FormControl('', [ Validators.min(0), Validators.max(20), Validators.required]),
@@ -52,6 +54,16 @@ export class MotherProfileComponent implements OnInit {
 
     public onLMPDateChange() {
         this.dateLMP = this.motherProfileFormGroup.controls['dateLMP'].value;
+        if (moment(this.dateLMP).isAfter(this.visitDate)) {
+            this.snotifyService.error('LMP Date CANNOT be before VisitDate', 'Mother Profile',
+                this.notificationService.getConfig());
+            this.motherProfileFormGroup.get('dateLMP').setValue('');
+            this.motherProfileFormGroup.get('dateEDD').setValue('');
+            this.motherProfileFormGroup.get('gestation').setValue('');
+
+            return false;
+        }
+
         const lmpDate = new Date(moment(this.motherProfileFormGroup.controls['dateLMP'].value).add(280, 'days').format(''));
         const eddDate = new Date(moment(this.dateLMP).add(7, 'days').add(9, 'months').format(''));
         this.motherProfileFormGroup.controls['dateEDD'].setValue(eddDate);
@@ -59,7 +71,7 @@ export class MotherProfileComponent implements OnInit {
         console.log(this.motherProfileFormGroup.controls['dateEDD'].value);
 
         const now = moment(new Date());
-        const gestation = moment.duration(now.diff(this.dateLMP)).asWeeks().toFixed(1);
+        const gestation = moment.duration(moment(this.visitDate).diff(this.dateLMP)).asWeeks().toFixed(1);
         this.motherProfileFormGroup.controls['gestation'].setValue(gestation);
 
         // this.motherProfileFormGroup.controls['dateEDD'].disable({ onlySelf: false });

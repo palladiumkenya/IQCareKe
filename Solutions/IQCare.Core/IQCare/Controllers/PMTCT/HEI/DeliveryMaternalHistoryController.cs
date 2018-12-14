@@ -29,6 +29,15 @@ namespace IQCare.Controllers.PMTCT.HEI
             return BadRequest(response);
         }
 
+        [HttpPost("UpdateHeiEncounter")]
+        public async Task<IActionResult> UpdateHeiEncounter([FromBody]UpdateHeiDeliveryCommand updateHeiDeliveryCommand)
+        {
+            var response = await _mediator.Send(updateHeiDeliveryCommand, Request.HttpContext.RequestAborted);
+            if (response.IsValid)
+                return Ok(response.Value);
+            return BadRequest(response);
+        }
+
         [HttpPost("UpdateOutComeAt24Months")]
         public async Task<IActionResult> UpdateOutComeAt24Months([FromBody] UpdateHeiDeliveryAt24MonthsCommand updateHeiDeliveryAt24MonthsCommand)
         {

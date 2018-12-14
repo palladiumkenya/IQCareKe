@@ -2571,10 +2571,16 @@
                 dataType: "json",
                 success: function (response) {
                     //console.log(response.d);
-                    toastr.success(response.d, "Re-Enrollment");
 
-                    setTimeout(function () { window.location.reload(); },2000);
+                    if (response.d === 'death') {
+                        toastr.warning('Patient care-ended as DEAD CANNOT be re-enrolled!', "Re-Enrollment");
+                        setTimeout(function () { window.location.reload(); },3000);
+                        return false;
+                    } else {
+                        toastr.success(data.d, "Re-Enrollment");
 
+                        setTimeout(function () { window.location.reload(); },3000);
+                    }
                 },
                 error: function (xhr, errorType, exception) {
                     var jsonError = jQuery.parseJSON(xhr.responseText);

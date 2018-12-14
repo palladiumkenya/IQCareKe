@@ -15,7 +15,7 @@ namespace IQCare.Lab.BusinessProcess.CommandHandlers
 {
     public class CompleteLabOrderCommandHandler : IRequestHandler<CompleteLabOrderCommand, Result<CompleteLabOrderResponse>>
     {
-        ILabUnitOfWork _labUnitOfwork;
+        private readonly ILabUnitOfWork _labUnitOfwork;
         public CompleteLabOrderCommandHandler(ILabUnitOfWork labUnitOfwork)
         {
             _labUnitOfwork = labUnitOfwork;

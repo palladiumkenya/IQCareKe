@@ -53,7 +53,7 @@ export class ClientMonitoringComponent implements OnInit {
             cacxScreeningDone: ['', Validators.required],
             cacxMethod: ['', Validators.required],
             cacxResult: ['', Validators.required],
-            cacxComments: ['', Validators.required]
+            cacxComments: ['n/a', Validators.required]
         });
 
         const {

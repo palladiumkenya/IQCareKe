@@ -57,9 +57,9 @@ namespace IQCare.Controllers.PMTCT.ANC
             return BadRequest(response);
         }
 
-      
-       [HttpPost]
-       public  async Task<object> AddPatientCounsellingInfo([FromBody] AddPatientEducationCommand command)
+
+        [HttpPost]
+        public  async Task<object> AddPatientCounsellingInfo([FromBody] AddPatientEducationCommand command)
         {
             if (!ModelState.IsValid)
                 return BadRequest(command);
@@ -70,6 +70,17 @@ namespace IQCare.Controllers.PMTCT.ANC
 
             return BadRequest(response);
         }
-      
+
+        [HttpPost]
+        public async Task<IActionResult> UpdatePatientCounsellingInfo([FromBody] EditPatientEducationCommand editPatientEducation)
+        {
+            if (!ModelState.IsValid)
+                return BadRequest(editPatientEducation);
+
+            var response = await _mediator.Send(editPatientEducation, Request.HttpContext.RequestAborted);
+            if (response.IsValid)
+                return Ok(response.Value);
+            return BadRequest(response);
+        }
     }
 }

@@ -83,8 +83,13 @@
                     <!-- Symbol Column -->
                     <ng-container matColumnDef="nextSchedule">
                         <mat-header-cell *matHeaderCellDef><strong>Next Schedule</strong> </mat-header-cell>
+
                         <mat-cell *matCellDef="let ImmunizationHistoryTableData">
-                            {{ImmunizationHistoryTableData.nextSchedule| date: 'dd-MMM-yyyy'}} </mat-cell>
+                            <ng-container *ngIf="ImmunizationHistoryTableData.nextSchedule">
+                                {{ ImmunizationHistoryTableData.nextSchedule | date: 'dd-MMM-yyyy'
+                                }}
+                            </ng-container>
+                        </mat-cell>
                     </ng-container>
 
 
