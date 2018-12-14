@@ -53,6 +53,7 @@ export class MaternalhistoryComponent implements OnInit {
             otherspecify: new FormControl('', [Validators.required]),
             motheronartatinfantenrollment: new FormControl('', [Validators.required]),
             pmtctheimotherdrugsatinfantenrollment: new FormControl('', [Validators.required]),
+            id: new FormControl('')
         });
 
         const {
@@ -93,6 +94,7 @@ export class MaternalhistoryComponent implements OnInit {
                     this.MaternalHistoryForm.get('otherspecify').setValue(result[i].motherPMTCTRegimenOther);
                     this.MaternalHistoryForm.get('motheronartatinfantenrollment').setValue(result[i].motherArtInfantEnrolId);
                     this.MaternalHistoryForm.get('pmtctheimotherdrugsatinfantenrollment').setValue(result[i].motherArtInfantEnrolRegimenId);
+                    this.MaternalHistoryForm.get('id').setValue(result[i].id);
                 }
             },
             (error) => { },

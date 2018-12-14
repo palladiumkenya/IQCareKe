@@ -80,7 +80,7 @@ export class CheckinComponent implements OnInit {
                     this.snotifyService.error('Error editing encounter ' + err, 'Encounter', this.notificationService.getConfig());
                 },
                 () => {
-                    console.log(this.lookupItems$);
+                    // console.log(this.lookupItems$);
                 });
     }
 }

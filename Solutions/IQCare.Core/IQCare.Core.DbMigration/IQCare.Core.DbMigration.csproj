@@ -108,7 +108,6 @@
     <None Remove="Scripts\2.0.0\01_SO_IQCare_Version.sql" />
     <None Remove="Scripts\2.0.0\02_DO_AlterView_PatientDeliveryInfo.sql" />
     <None Remove="Scripts\2.0.0\03 pr_Security_UserLogin_Constella.sql" />
-    <None Remove="Scripts\2.0.0\07_Nairobi_Missing_Subcounties_Wards.sql" />
     <None Remove="Scripts\2.0.0\08_PatientConsent.sql" />
     <None Remove="Scripts\2.0.0\09_PersonKinContactsView.sql" />
     <None Remove="Scripts\2.0.0\12_DO_Insert_Clinical_Service_Area.sql" />
@@ -122,6 +121,8 @@
     <None Remove="Scripts\2.0.0\19_Add_lookups_Immune.sql" />
     <None Remove="Scripts\2.0.0\20_Add_Lookups_Lymphatic.sql" />
     <None Remove="Scripts\2.0.0\21_Add_Lookups_Dental.sql" />
+    <None Remove="Scripts\2.0.0\22_Alter_County_Add_Identity.sql" />
+    <None Remove="Scripts\2.0.0\23_Nairobi_Missing_Subcounties_Wards.sql" />
   </ItemGroup>
 
   <ItemGroup>
@@ -226,7 +227,7 @@
     <EmbeddedResource Include="Scripts\1.0.0.9\58_Add_Lookups_ReviewOfSystems.sql" />
     <EmbeddedResource Include="Scripts\2.0.0\02_DO_AlterView_PatientDeliveryInfo.sql" />
     <EmbeddedResource Include="Scripts\2.0.0\03 pr_Security_UserLogin_Constella.sql" />
-    <EmbeddedResource Include="Scripts\2.0.0\07_Nairobi_Missing_Subcounties_Wards.sql" />
+    <EmbeddedResource Include="Scripts\2.0.0\23_Nairobi_Missing_Subcounties_Wards.sql" />
     <EmbeddedResource Include="Scripts\2.0.0\08_PatientConsent.sql" />
     <EmbeddedResource Include="Scripts\2.0.0\09_PersonKinContactsView.sql" />
     <EmbeddedResource Include="Scripts\2.0.0\12_DO_Insert_Clinical_Service_Area.sql" />
@@ -240,6 +241,7 @@
     <EmbeddedResource Include="Scripts\2.0.0\19_Add_lookups_Immune.sql" />
     <EmbeddedResource Include="Scripts\2.0.0\20_Add_Lookups_Lymphatic.sql" />
     <EmbeddedResource Include="Scripts\2.0.0\21_Add_Lookups_Dental.sql" />
+    <EmbeddedResource Include="Scripts\2.0.0\22_Alter_County_Add_Identity.sql" />
   </ItemGroup>
 
   <ItemGroup>

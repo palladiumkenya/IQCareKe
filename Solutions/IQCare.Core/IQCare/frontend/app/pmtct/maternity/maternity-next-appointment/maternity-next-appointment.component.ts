@@ -45,7 +45,6 @@ export class MaternityNextAppointmentComponent implements OnInit {
     loadAppointments(): void {
         this.pncservice.getAppointments(this.patientId, this.patientMasterVisitId).subscribe(
             (result) => {
-                console.log(result);
                 if (result) {
                     this.nextAppointmentFormGroup.get('nextAppointmentDate').setValue(result.appointmentDate);
                     this.nextAppointmentFormGroup.get('remarks').setValue(result.description);

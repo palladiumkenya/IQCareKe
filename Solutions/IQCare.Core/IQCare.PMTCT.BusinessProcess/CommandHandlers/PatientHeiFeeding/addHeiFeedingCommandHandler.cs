@@ -37,6 +37,7 @@ namespace IQCare.PMTCT.BusinessProcess.CommandHandlers.PatientHeiFeeding
                     };
 
                     await _unitOfWork.Repository<HeiFeeding>().AddAsync(heiFeeding);
+                    await _unitOfWork.SaveAsync();
                     return Result<AddHeiFeedingCommandResponse>.Valid(new AddHeiFeedingCommandResponse()
                     {
                         HeiFeedingId = heiFeeding.Id

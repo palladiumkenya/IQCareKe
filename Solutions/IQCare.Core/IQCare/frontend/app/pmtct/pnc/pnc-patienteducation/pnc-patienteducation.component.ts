@@ -31,7 +31,8 @@ export class PncPatienteducationComponent implements OnInit, AfterViewInit {
 
     ngOnInit() {
         this.PatientEducationForm = this._formBuilder.group({
-            counselledInfantFeeding: new FormControl('', [Validators.required])
+            counselledInfantFeeding: new FormControl('', [Validators.required]),
+            'id': new FormControl('')
         });
 
         const { yesnoOptions, infantFeedingTopicId } = this.patientEducationOptions[0];
@@ -51,10 +52,12 @@ export class PncPatienteducationComponent implements OnInit, AfterViewInit {
         let isCounsellingDone = false;
         this.maternityService.getPatientEducation(this.patientId, this.patientMasterVisitId).subscribe(
             (result) => {
+                console.log(result);
                 for (let i = 0; i < result.length; i++) {
                     if (result[i].counsellingTopicId == this.infantFeedingTopicId) {
                         isCounsellingDone = true;
                     }
+                    this.PatientEducationForm.get('id').setValue(result[i].id);
                 }
 
                 if (isCounsellingDone) {

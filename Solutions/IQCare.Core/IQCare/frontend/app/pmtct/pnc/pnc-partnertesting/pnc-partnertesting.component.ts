@@ -30,7 +30,8 @@ export class PncPartnertestingComponent implements OnInit, AfterViewInit {
     ngOnInit() {
         this.PartnerTestingForm = this._formBuilder.group({
             partnerHivTestDone: new FormControl('', [Validators.required]),
-            finalPartnerHivResult: new FormControl('', [Validators.required])
+            finalPartnerHivResult: new FormControl('', [Validators.required]),
+            id: new FormControl('')
         });
 
         const { yesNoNaOptions, finalPartnerHivResultOptions } = this.partnerTestingOptions[0];
@@ -53,6 +54,7 @@ export class PncPartnertestingComponent implements OnInit, AfterViewInit {
                 for (let i = 0; i < partnerTestingVisit.length; i++) {
                     this.PartnerTestingForm.get('partnerHivTestDone').setValue(result[i].partnerTested);
                     this.PartnerTestingForm.get('finalPartnerHivResult').setValue(result[i].partnerHIVResult);
+                    this.PartnerTestingForm.get('id').setValue(result[i].id);
                 }
             },
             (error) => {

@@ -50,7 +50,7 @@ export class HeiHivtestingComponent implements OnInit {
     }
 
     loadHeiHivTests(): void {
-        // this.heiservice.getHeiLabTests();
+        this.heiservice.getHeiLabTests();
     }
 
     AddHivTests() {
