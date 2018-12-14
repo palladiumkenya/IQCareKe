@@ -7,6 +7,14 @@
 
   <ItemGroup>
     <None Remove="Scripts\1.0.0.8\Common\01_SO_CreateVisitDetails_Table.sql" />
+    <None Remove="Scripts\1.0.0.8\HEI\01_SO_Vaccination.sql" />
+    <None Remove="Scripts\1.0.0.8\HEI\02_SO_HEIProfile.sql" />
+    <None Remove="Scripts\1.0.0.8\HEI\03_SO_HEIFeeding.sql" />
+    <None Remove="Scripts\1.0.0.8\HEI\04_SO_HEIEncounter.sql" />
+    <None Remove="Scripts\1.0.0.8\HEI\05_SO_Add_Hei_encounter.sql" />
+    <None Remove="Scripts\1.0.0.8\HEI\06_SO_Insert_Drug_Administration_LookUpItems.sql" />
+    <None Remove="Scripts\1.0.0.8\HEI\07_SO_Lookups.sql" />
+    <None Remove="Scripts\1.0.0.8\HEI\08_SO_PatientMilestone.sql" />
     <None Remove="Scripts\1.0.0.8\HEI\HEIEncounter.sql" />
     <None Remove="Scripts\1.0.0.8\HEI\HEIFeeding.sql" />
     <None Remove="Scripts\1.0.0.8\HEI\HEIProfile.sql" />
@@ -33,6 +41,7 @@
     <None Remove="Scripts\1.0.0.8\PMTCT\14_DO_Rename_Column_MilestoneDate.sql" />
     <None Remove="Scripts\1.0.0.8\PMTCT\15_DO_Drop_Table_HeiMilestone.sql" />
     <None Remove="Scripts\1.0.0.8\PMTCT\16_SO_CreateTableBaselineANC.sql" />
+    <None Remove="Scripts\1.0.0.8\PMTCT\17_SO_AlterTable_Add_Column_AgeAtMenarche.sql" />
     <None Remove="Scripts\1.0.0.9\01_DO_Rename_Table_PMTCTBaby.sql" />
     <None Remove="Scripts\1.0.0.9\02_DO_CreateTable_DeliveredBabyApgarScore.sql" />
     <None Remove="Scripts\1.0.0.9\03_DO_AlterTable_DeliveredBabyBirthInfo_AlterColmn_DeliveryComplications.sql" />
@@ -118,6 +127,14 @@
 
   <ItemGroup>
     <EmbeddedResource Include="Scripts\1.0.0.8\Common\01_SO_CreateVisitDetails_Table.sql" />
+    <EmbeddedResource Include="Scripts\1.0.0.8\HEI\01_SO_Vaccination.sql" />
+    <EmbeddedResource Include="Scripts\1.0.0.8\HEI\02_SO_HEIProfile.sql" />
+    <EmbeddedResource Include="Scripts\1.0.0.8\HEI\03_SO_HEIFeeding.sql" />
+    <EmbeddedResource Include="Scripts\1.0.0.8\HEI\04_SO_HEIEncounter.sql" />
+    <EmbeddedResource Include="Scripts\1.0.0.8\HEI\05_SO_Add_Hei_encounter.sql" />
+    <EmbeddedResource Include="Scripts\1.0.0.8\HEI\06_SO_Insert_Drug_Administration_LookUpItems.sql" />
+    <EmbeddedResource Include="Scripts\1.0.0.8\HEI\07_SO_Lookups.sql" />
+    <EmbeddedResource Include="Scripts\1.0.0.8\HEI\08_SO_PatientMilestone.sql" />
     <EmbeddedResource Include="Scripts\1.0.0.8\MATERNITY\12_SO_Insert_MaternityEncounter.sql" />
     <EmbeddedResource Include="Scripts\1.0.0.8\MATERNITY\13_SO_Insert_Baby_Birth_Outcome_Lookup.sql" />
     <EmbeddedResource Include="Scripts\1.0.0.8\MATERNITY\14_SO_Insert_Drug_Administration_Lookup.sql" />
@@ -137,6 +154,7 @@
     <EmbeddedResource Include="Scripts\1.0.0.8\PMTCT\14_DO_Rename_Column_MilestoneDate.sql" />
     <EmbeddedResource Include="Scripts\1.0.0.8\PMTCT\15_DO_Drop_Table_HeiMilestone.sql" />
     <EmbeddedResource Include="Scripts\1.0.0.8\PMTCT\16_SO_CreateTableBaselineANC.sql" />
+    <EmbeddedResource Include="Scripts\1.0.0.8\PMTCT\17_SO_AlterTable_Add_Column_AgeAtMenarche.sql" />
     <EmbeddedResource Include="Scripts\1.0.0.9\38_BO_PatientScreeningView.sql" />
     <EmbeddedResource Include="Scripts\1.0.0.9\39_SO_vw_PatientEncounters.sql" />
     <EmbeddedResource Include="Scripts\1.0.0.9\32_DO_Insert_MaternalDrugAdmin_LookUp_Items.sql" />
