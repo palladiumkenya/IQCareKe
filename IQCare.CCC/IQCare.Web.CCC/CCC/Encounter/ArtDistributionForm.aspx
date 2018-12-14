@@ -10,8 +10,15 @@
 
     <div class="col-md-12">
         <div id="callout-labels-inline-block" class="col-md-12  bs-callout bs-callout-primary" style="padding-bottom: 1%">
-
             <div class="col-md-12">
+            <div class="col-md-12">
+                     <div class="col-md-12">
+                <div  class="col-md-6">
+                    <div class="form-group">
+                <div class="col-md-4">
+                    <label for="PatientVisitDate" class="control-label pull-left">VisitDate</label>
+                </div>
+                <div class="col-md-8">
                                         <div class="datepicker fuelux form-group" id="PatientVisitDate">
                                             <div class="input-group">
                                                 <asp:TextBox runat="server" ClientIDMode="Static" CssClass="form-control input-sm" ID="PVisitDate" onblur="DateFormat(this,this.value,event,false,'3')" onkeyup="DateFormat(this,this.value,event,false,'3')"></asp:TextBox>
@@ -104,6 +111,11 @@
                                             </div>
                                         </div>
                                     </div>
+                </div>
+                </div>
+                     </div>
+             </div>
+        </div>
             <div class="col-md-12" id="AppointmentForm" data-parsley-validate="true" data-show-errors="true">
                 <div class="col-md-12 form-group">
                     <div class="col-md-12">
@@ -486,7 +498,7 @@
     </div>
     <script type="text/javascript">
         var VisitDate = "<%=VisitDate%>";
-        
+    
        /// console.log(VDate);
         var enrollmentDate = "<%=DateOfEnrollment%>";
  
@@ -500,7 +512,7 @@
         });
 
        
-        
+        $('#PatientVisitDate').datepicker('setDate',new Date(VisitDate ));
        
          
        // $('#PatientVisitDate').on('dp.change', function (e) {
@@ -569,8 +581,9 @@
                 else {
                     return false;
                 }
-
-                $("#AppointmentDate").val("");
+            });
+    
+              //  $("#AppointmentDate").val("");
 
                 $("#btnReset").click(function () {
                     resetFields();
@@ -580,9 +593,8 @@
                 });
 
 
-            });
-
-        });
+       }); 
+      
         function addARTTrack(visitDate ) {
         var patientId = <%=PatientId%>;
      var dateOfVisit = $("#PVisitDate").val();
@@ -623,37 +635,69 @@
 
 
         function Validate() {
+            var missedArvDoses = $("input[name$=missedArvDoses]:checked").val();
+            var newMedication = $("input[name$=newMedication]:checked").val();
+            var familyPlanning = $("input[name$=familyPlanning]:checked").val();
+
+            var error = 0; 
             if ($('#PatientVisitDate').parsley().validate()) {
                 var visitdate = $("#PVisitDate").val();
                 if (moment('' + visitdate + '').isAfter()) {
                     toastr.error("Visit date cannot be a future date.");
-                    return false;
+                    error = 1;
                 }
                 else if (visitdate === "" || visitdate === null) {
                     toastr.error("VisitDate is a required field");
-                    return false;
+                    error = 1;
                 }
-
-                else if ($('#AppointmentForm').parsley().validate()) {
-                    var futureDate = moment().add(7, 'months').format('DD-MMM-YYYY');
-                    var appDate = $("#<%=AppointmentDate.ClientID%>").val();
-                    if (moment('' + appDate + '').isAfter(futureDate)) {
-                        toastr.error("Appointment date cannot be set to over 7 months");
-                        return false;
-                    }
-                    else {
-                        return true;
-                    }
-
+            }
+            if ($('#AppointmentForm').parsley().validate()) {
+                var futureDate = moment().add(7, 'months').format('DD-MMM-YYYY');
+                var appDate = $("#<%=AppointmentDate.ClientID%>").val();
+                if (moment('' + appDate + '').isAfter(futureDate)) {
+                    toastr.error("Appointment date cannot be set to over 7 months");
+                    error = 1;
                 }
-                else {
-                    return true;
-                }
+                
 
             }
+            if (missedArvDoses == undefined || missedArvDoses == null) {
+
+                toastr.error("Missed arv doses is required");
+                error = 1;
+
+            }
+            
+            
 
 
-          }
+            if (newMedication == undefined || newMedication == null) {
+
+                toastr.error("Any new medication is required");
+                error = 1;
+            }
+           
+            
+            if (familyPlanning == undefined || familyPlanning == null) {
+
+                toastr.error("Family Planning is required");
+                error = 1;
+            }
+            
+          
+
+
+            if (error == 1) {
+                return false;
+            }
+            else {
+                return true;
+            }
+           
+        }
+
+
+          
                 
           
         function getPatientArtDistribution() {
@@ -676,8 +720,10 @@
 
                         if (artDetails.MissedArvDoses) {
                             $("#mYes").prop("checked", true);
+                              showHideMissedArv();
                         } else {
                             $("#mNo").prop("checked", true);
+                              showHideMissedArv();
                         }
 
                         var genitalSore = artDetails.GenitalSore ? "True" : "False";
@@ -699,20 +745,27 @@
 
                         if (artDetails.NewMedication) {
                             $("#medYes").prop("checked", true);
+                            showNewMedicine();
+                          
                         } else {
                             $("#medNo").prop("checked", true);
+                            showNewMedicine();
                         }
 
                         if (artDetails.FamilyPlanning) {
                             $("#fpYes").prop("checked", true);
+                            showFamilyPlanning();
                         } else {
                             $("#fpNo").prop("checked", true);
+                            showFamilyPlanning();
                         }
 
                         if (artDetails.ReferedToClinic) {
                             $("#refYes").prop("checked", true);
+                            showAppointmentDate();
                         } else {
                             $("#refNo").prop("checked", true);
+                            showAppointmentDate();
                         }
 
                         $("#<%=newMedicineText.ClientID%>").val(artDetails.NewMedicationText);
@@ -730,7 +783,7 @@
                         else {
                             $("#AppointmentDate").val("");
                         }
-                         $('#PatientVisitDate').datepicker("setDate", new Date(VisitDate) );
+                        // $('#PatientVisitDate').datepicker("setDate", new Date(VisitDate) );
                     }
                 },
                 error: function (response) {
@@ -761,9 +814,15 @@
             var pregnancyStatus = $("#<%=pregnancyStatus.ClientID%>").val();
             if (pregnancyStatus === undefined) { pregnancyStatus = 0 }
             var patientId = <%=PatientId%>;
-          
-            var patientMasterVisitId= mastervisitid;
+
+            var patientMasterVisitId = mastervisitid;
             var IsPatientArtDistributionDone = <%=IsPatientArtDistributionDone%>;
+            if (missedArvDoses != null || missedArvDoses != undefined) {
+                missedArvDoses = missedArvDoses
+            }
+            else {
+                missedArvDoses = "False";
+            }
            
 
             $.ajax({
@@ -785,6 +844,7 @@
                 }
             });
         }
+        
 
         function showHideMissedArv() {
             var missedArvs = $("input[name$=missedArvDoses]:checked").val();
