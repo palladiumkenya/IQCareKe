@@ -11,7 +11,7 @@ namespace IQCare.CCC.UILogic.Triage
         private IPatientPregnancyManager _PatientPregnancy = (IPatientPregnancyManager)ObjectFactory.CreateInstance("BusinessProcess.CCC.Triage.BPatientPregnancyManager, BusinessProcess.CCC");
 
 
-        public int AddPatientPregnancy(int patientId,int patientMasterVisitId,DateTime LMP,DateTime EDD,int gravidae,int parity,int outcome,DateTime dateOfOutcome,int userId)
+        public int AddPatientPregnancy(int patientId,int patientMasterVisitId,DateTime LMP,DateTime EDD,int? gravidae,int? parity,int? outcome,DateTime dateOfOutcome,int userId)
         {
             try
             {

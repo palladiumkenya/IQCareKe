@@ -30,6 +30,10 @@ namespace IQCare.Web.CCC.UC
             get { return Convert.ToInt32(Session["Age"]); }
         }
 
+        public int CaCxScreeningId { get; set; }
+        public int STIScreeningId { get; set; }
+        public int STIPartnerNotificationId { get; set; }
+
         protected void Page_Load(object sender, EventArgs e)
         {
             ILookupManager lookupManager = (ILookupManager)ObjectFactory.CreateInstance("BusinessProcess.CCC.BLookupManager, BusinessProcess.CCC");
@@ -49,6 +53,7 @@ namespace IQCare.Web.CCC.UC
             List<LookupItemView> cacxList = lookupManager.GetLookItemByGroup("CaCxScreening");
             if (cacxList != null && cacxList.Count > 0)
             {
+                CaCxScreeningId = cacxList[0].MasterId;
                 cacxscreening.Items.Add(new ListItem("select", "0"));
                 foreach (var k in cacxList)
                 {
@@ -56,9 +61,11 @@ namespace IQCare.Web.CCC.UC
                 }
             }
 
+
             List<LookupItemView> stiScreeList = lookupManager.GetLookItemByGroup("STIScreening");
             if (stiScreeList != null && stiScreeList.Count > 0)
             {
+                STIScreeningId = stiScreeList[0].MasterId;
                 stiScreening.Items.Add(new ListItem("select", "0"));
                 foreach (var k in stiScreeList)
                 {
@@ -69,6 +76,7 @@ namespace IQCare.Web.CCC.UC
             List<LookupItemView> stiPartnerList = lookupManager.GetLookItemByGroup("STIPartnerNotification");
             if (stiPartnerList != null && stiPartnerList.Count > 0)
             {
+                STIPartnerNotificationId = stiPartnerList[0].MasterId;
                 stiPartnerNotification.Items.Add(new ListItem("select", "0"));
                 foreach (var k in stiPartnerList)
                 {
