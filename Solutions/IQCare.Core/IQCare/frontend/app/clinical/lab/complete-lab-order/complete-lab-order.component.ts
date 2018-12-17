@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { LaborderService } from '../../_services/laborder.service';
 import { MatPaginator, MatTableDataSource } from '@angular/material';
 import { ActivatedRoute } from '@angular/router';
+import { $ } from 'protractor';
 
 @Component({
   selector: 'app-complete-lab-order',
@@ -11,7 +12,8 @@ import { ActivatedRoute } from '@angular/router';
 export class CompleteLabOrderComponent implements OnInit {
 
   @ViewChild(MatPaginator) paginator: MatPaginator;  
-
+  
+  labTestResults : any[] = [];
   completedLabTests : any[] = [];
   pendingLabTests : any[] = [];
 
@@ -25,7 +27,7 @@ export class CompleteLabOrderComponent implements OnInit {
   constructor(private labOrderService : LaborderService,route: ActivatedRoute) {
          route.params.subscribe(params=>{
            this.patientId = params['patientId'];
-           this.buildCompletedLabsGrid(this.patientId);
+           this.buildLabTestsGrid(this.patientId);
         });
    }
 
@@ -33,9 +35,9 @@ export class CompleteLabOrderComponent implements OnInit {
   }
 
 
-  public buildCompletedLabsGrid(patientId: number) {
-      this.labOrderService.getLabTestResults(patientId).subscribe(res=>{
-             this.completedLabTests.push({
+  public buildLabTestsGrid(patientId: number) {
+      this.labOrderService.getLabTestResults(patientId,null).subscribe(res=>{
+             this.labTestResults.push({
                labOrderTestId : res.labOrderTestId,
                test : res.labTestName,
                orderDate : res.sampleDate,
@@ -43,22 +45,27 @@ export class CompleteLabOrderComponent implements OnInit {
                labTestId : res.labTestId,
                unit : res.resultUnits,
                resultDate : res.resultDate,
-               result : res.resultTexts
+               result : res.resultTexts,
+               status : res.resultStatus
              });
+
+        for (let index = 0; index < this.labTestResults.length; index++) 
+        {
+            if(this.labTestResults[index].status =='Completed')
+               this.completedLabTests.push(this.labTestResults[index]);
+            else
+               this.pendingLabTests.push(this.labTestResults[index]);
+        }
+        
         this.completedLabsDataSource = new MatTableDataSource(this.completedLabTests);
+        this.pendingLabsDataSource = new MatTableDataSource(this.pendingLabTests);
+
         this.completedLabsDataSource.paginator = this.paginator;
+        this.pendingLabsDataSource = this.paginator;
 
       },(error)=>
       {
           console.log(error + "An error occured while getting completed labs");
       });  
   }
-
-  /**
-   * buildPendingLabsGrid
-patientId : number   */
-  public buildPendingLabsGrid(patientId : number) {
-    
-  }
-
 }

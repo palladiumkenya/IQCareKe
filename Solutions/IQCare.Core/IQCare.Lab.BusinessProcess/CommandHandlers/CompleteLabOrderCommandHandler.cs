@@ -88,15 +88,14 @@ namespace IQCare.Lab.BusinessProcess.CommandHandlers
           
         }
 
-        private Tuple<int, string> GetResultUnitDetails(int parameterId)
+        private Tuple<int ?, string> GetResultUnitDetails(int parameterId)
         {
             var unitId = _labUnitOfwork.Repository<LabTestParameterConfig>().Get(x => x.ParameterId == parameterId && x.DeleteFlag == false)
                            .SingleOrDefault()?.UnitId;   
                 var parameterUnit = _labUnitOfwork.Repository<LabTestParameterUnit>().Get(x => x.UnitId == unitId)
                     .SingleOrDefault();
 
-                return new Tuple<int, string>((int) parameterUnit?.UnitId, parameterUnit?.UnitName);
-            
+                return new Tuple<int ?, string>(parameterUnit?.UnitId, parameterUnit?.UnitName);      
         }
 
         private void UpdatePatientLabTestTracker(int parameterId, int labOrderId, int parameterCount, AddLabTestResultCommand labOrderTestResult)

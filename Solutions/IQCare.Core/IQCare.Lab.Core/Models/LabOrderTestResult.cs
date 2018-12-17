@@ -10,7 +10,7 @@ namespace IQCare.Lab.Core.Models
 
         }
         public LabOrderTestResult(int labOrderTestId, int labTestId,int parameterId, decimal ? resultValue,
-            int ? resultOptionId,string resultOption,string resultUnit,int resultUnitId,int userId,bool undetectedTable,decimal ? detectionLimit)
+            int ? resultOptionId,string resultOption,string resultUnit,int? resultUnitId,int userId,bool undetectedTable,decimal ? detectionLimit)
         {
             LabOrderTestId = labOrderTestId;
             LabTestId = labTestId;
@@ -18,7 +18,7 @@ namespace IQCare.Lab.Core.Models
             ResultValue = resultValue;
             ResultOption = resultOption;
             ResultUnit = resultUnit;
-            ResultUnitId = resultUnitId == Int32.MinValue? 0: resultUnitId;
+            ResultUnitId = resultUnitId.Value;
             UserId = userId;
             CreatedBy = userId;
             CreateDate = DateTime.Now;
@@ -35,7 +35,7 @@ namespace IQCare.Lab.Core.Models
         public int ? ResultOptionId { get; private set; }
         public string ResultOption { get; set; }
         public string ResultUnit { get; set; }
-        public int ResultUnitId { get; set; }
+        public int ? ResultUnitId { get; set; }
         public int ? ResultConfigId { get; set; }
         public bool Undetectable { get; set; }
         public decimal ? DetectionLimit { get; set; }
