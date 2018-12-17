@@ -31,6 +31,8 @@ patientMasterVisitId : any;
 encounterType : any;
 serviceAreaId : any;
 labTestReasonOptions : any[];
+maxDate : Date;
+
 @Output() notify: EventEmitter<FormGroup> = new EventEmitter<FormGroup>();
 @Output() notifyData: EventEmitter<any[]> = new EventEmitter<any[]>();
 
@@ -54,6 +56,7 @@ labTestReasonOptions : any[];
     });
     this.notify.emit(this.labOrderFormGroup);
     this.notifyData.emit(this.labTestData);
+    this.maxDate = new Date();
    }
 
   ngOnInit() {
