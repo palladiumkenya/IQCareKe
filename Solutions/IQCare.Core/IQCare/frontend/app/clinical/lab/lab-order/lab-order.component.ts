@@ -32,6 +32,7 @@ patientMasterVisitId : any;
 encounterType : any;
 serviceAreaId : any;
 labTestReasonOptions : any[];
+maxDate : Date;
 
 @Output() notifyData: EventEmitter<any[]> = new EventEmitter<any[]>();
 @ViewChild(MatPaginator) paginator: MatPaginator;
@@ -53,12 +54,13 @@ dataSource =  new MatTableDataSource(this.labTestData);
      this.labOrderFormGroup = this.formBuilder.group({
       labTestId: new FormControl('', [Validators.required]),
       labtestReasonId: new FormControl('', [Validators.required]),
-      labTestNotes: new FormControl('', [Validators.required]),  
+      labTestNotes: new FormControl(''),  
       orderDate: new FormControl('', [Validators.required]),
-      clinicalOrderNotes: new FormControl('', [Validators.required])
+      clinicalOrderNotes: new FormControl('')
     });
     this.notify.emit(this.labOrderFormGroup);
     this.dataSource =  new MatTableDataSource(this.labTestData);
+    this.maxDate = new Date();
    }
 
   ngOnInit() {
@@ -83,16 +85,30 @@ dataSource =  new MatTableDataSource(this.labTestData);
     this.getServiceArea();  
   }
 
+  addedLabTestIds: any[] = [];
 
   public  AddLabTest() {
+    if(this.labOrderFormGroup.invalid)
+       return;
+       var labTestId = this.labOrderFormGroup.get('labTestId').value.id;
+       var testName =  this.labOrderFormGroup.get('labTestId').value.name;
+
+    if(this.addedLabTestIds.indexOf(labTestId) >= 0)
+       {
+         this.snotifyService.error(testName + ' test already added','Lab',this.notificationService.getConfig());
+         return;
+       }
+
     this.labTestData.push({
-      testId: this.labOrderFormGroup.get('labTestId').value.id,
-      test: this.labOrderFormGroup.get('labTestId').value.name,
+      testId: labTestId,
+      test: testName,
       orderReason: this.labOrderFormGroup.get('labtestReasonId').value.displayName,
       orderReasonId: this.labOrderFormGroup.get('labtestReasonId').value.itemId,
       testNotes: this.labOrderFormGroup.get('labTestNotes').value
     });
-    
+
+    this.addedLabTestIds.push(labTestId);
+
     this.dataSource = new MatTableDataSource(this.labTestData);
     this.dataSource.paginator = this.paginator;
     console.log(this.labTestData);
@@ -117,7 +133,6 @@ dataSource =  new MatTableDataSource(this.labTestData);
         ])
         .subscribe(
             (result) => {
-              console.log("ORD result >>" +result[0]['visit_Id'])
               labOrderCommand.VisitId = result[0]['visit_Id'];
               labOrderCommand.PatientMasterVisitId = result[1]['patientMasterVisitId'];
               
@@ -159,7 +174,8 @@ dataSource =  new MatTableDataSource(this.labTestData);
         labTestInfo.push({
           Id : x.testId,
           Notes : x.testNotes,
-          LabTestName :x.test
+          LabTestName :x.test,
+          OrderReason : x.orderReason
         })
       });
      const labOrderCommand : AddLabOrderCommand = {

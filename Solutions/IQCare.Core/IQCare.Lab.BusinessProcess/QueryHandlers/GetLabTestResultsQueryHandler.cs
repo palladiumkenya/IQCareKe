@@ -9,26 +9,40 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using IQCare.Library;
+using Serilog;
 
 namespace IQCare.Lab.BusinessProcess.QueryHandlers
 {
-    public class GetLabTestResultsQueryHandler : IRequestHandler<GetLabTestResults, List<LabTestResultViewModel>>
+    public class GetLabTestResultsQueryHandler : IRequestHandler<GetLabTestResults,Result<List<LabTestResultViewModel>>>
     {
-        ILabUnitOfWork _labUnitOfWork;
-        IMapper _mapper;
+        private readonly ILabUnitOfWork _labUnitOfWork;
+        private readonly IMapper _mapper;
         public GetLabTestResultsQueryHandler(ILabUnitOfWork labUnitOfWork, IMapper mapper)
         {
             _labUnitOfWork = labUnitOfWork;
             _mapper = mapper;
         }
-        public Task<List<LabTestResultViewModel>> Handle(GetLabTestResults request, CancellationToken cancellationToken)
+        public Task<Result<List<LabTestResultViewModel>>> Handle(GetLabTestResults request, CancellationToken cancellationToken)
         {
             using (_labUnitOfWork)
             {
-                var labTestResults = _labUnitOfWork.Repository<PatientLabTracker>().Get(x => x.PatientId == request.PatientId).AsEnumerable();
-                var labTestModel = _mapper.Map<List<LabTestResultViewModel>>(labTestResults);
+                try
+                {
+                    var labTestResults = request.Status.HasValue
+                        ? _labUnitOfWork.Repository<PatientLabTracker>().Get(x =>
+                            x.PatientId == request.PatientId && x.Results == request.Status.ToString())
+                        : _labUnitOfWork.Repository<PatientLabTracker>().Get(x => x.PatientId == request.PatientId);
+                        
+                    var labTestModel = _mapper.Map<List<LabTestResultViewModel>>(labTestResults);
 
-                return Task.FromResult(labTestModel);
+                    return Task.FromResult(Result<List<LabTestResultViewModel>>.Valid(labTestModel));
+                }
+                catch (Exception ex)
+                {
+                    Log.Error(ex,"An error occured while getting lab test results");
+                    return Task.FromResult(Result<List<LabTestResultViewModel>>.Invalid(ex.Message));
+                }
             }          
         }
     }
