@@ -397,6 +397,11 @@ export class HeiComponent implements OnInit {
             isAddOrInsertAppointment]).subscribe(
                 (result) => {
                     console.log(result);
+
+                    this.snotifyService.success('Successfully updated HEI encounter ', 'HEI', this.notificationService.getConfig());
+                    this.zone.run(() => {
+                        this.router.navigate(['/dashboard/personhome/' + this.personId], { relativeTo: this.route });
+                    });
                 }
             );
 
