@@ -150,7 +150,11 @@ export class HeiService {
     }
 
     public saveIptWorkup(patientIptWorkup: PatientIptWorkup): Observable<PatientIptWorkup> {
-        return this.http.post<any>(this.API_URL + '/api/IptWorkup', JSON.stringify(patientIptWorkup), httpOptions).pipe(
+        const Indata = {
+            PatientIptWorkup: patientIptWorkup
+        };
+
+        return this.http.post<any>(this.API_URL + '/api/IptWorkup', JSON.stringify(Indata), httpOptions).pipe(
             tap(saveIptWorkup => this.errorHandler.log(`successfully added IPT Workup`)),
             catchError(this.errorHandler.handleError<any>('Error saving IPT workup'))
         );
