@@ -56,10 +56,9 @@ namespace IQCare.CCC.UILogic.Triage
 
                 return _PregnancyIndicator.AddPregnancyIndicator(pg);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-
-                throw;
+                throw ex;
             }
         }
 

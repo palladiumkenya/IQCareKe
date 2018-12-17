@@ -44,9 +44,7 @@ export class HeiHivtestingComponent implements OnInit {
 
         this.notify.emit(this.hiv_testing_table_data);
 
-        if (this.isEdit) {
-            this.loadHeiHivTests();
-        }
+        this.loadHeiHivTests();
     }
 
     loadHeiHivTests(): void {
