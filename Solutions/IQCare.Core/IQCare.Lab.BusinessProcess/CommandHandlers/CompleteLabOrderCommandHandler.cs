@@ -52,6 +52,7 @@ namespace IQCare.Lab.BusinessProcess.CommandHandlers
                     }
 
                     await _labUnitOfwork.Repository<LabOrderTestResult>().AddRangeAsync(labOrderTestResults);
+
                     // PatientLabTracker is updated only for LabTests with only one parameter count
                     UpdatePatientLabTestTracker(labTestParameters[0].Id, request.LabOrderId, totalLabTestParameterCount, request.LabTestResults[0]);
 

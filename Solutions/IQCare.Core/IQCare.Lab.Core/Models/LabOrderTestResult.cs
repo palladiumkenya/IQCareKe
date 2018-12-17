@@ -19,9 +19,7 @@ namespace IQCare.Lab.Core.Models
             ResultValue = resultValue;
             ResultOption = resultOption; 
             ResultUnit = resultUnit;
-
             ResultUnitId = resultUnitId;
->>>>
             UserId = userId;
             CreatedBy = userId;
             CreateDate = DateTime.Now;
