@@ -9,8 +9,8 @@ namespace IQCare.Lab.Core.Models
         {
 
         }
-        public LabOrderTestResult(int labOrderId, int labOrderTestId, int labTestId,int parameterId, decimal ? resultValue,
-            int ? resultOptionId,string resultOption,string resultUnit,int? resultUnitId,int userId,bool undetectedTable,decimal ? detectionLimit)
+
+        public LabOrderTestResult(int labOrderId, int labOrderTestId, int labTestId,int parameterId, decimal ? resultValue, int ? resultOptionId,string resultOption,string resultUnit,int? resultUnitId,int userId,bool undetectedTable,decimal ? detectionLimit)
         {
             LabOrderId = labOrderId;
             LabOrderTestId = labOrderTestId;

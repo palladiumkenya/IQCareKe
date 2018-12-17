@@ -29,6 +29,13 @@ export class LaborderService {
     )
   }
 
+  public getLabOrders(patientId: number,status:string) : Observable<any> {
+    return this.httpClient.get<any>(this.LabOrder_ApiUrl + '/api/LabOrder/GetLabOrdersByPatientId/' + patientId + '/' +status).pipe(
+        tap(getLabOrders => this.errorHandlerService.log('get patient lab orders')),
+        catchError(this.errorHandlerService.handleError<any[]>('getLabOrders'))
+    ); 
+    }
+
   public completeLabOrder(completeLabOrderCommand : CompleteLabOrderCommand ) : Observable<any> {
     return this.httpClient.post<CompleteLabOrderCommand>(this.LabOrder_ApiUrl + '/api/LabOrder/CompleteLabOrder',completeLabOrderCommand,httpOptions).pipe(
       tap(lab=> this.errorHandlerService.log('Complete lab order  request')),
@@ -36,9 +43,9 @@ export class LaborderService {
     )
   }
 
-  public getLabOrderTestResults(patientId: number) : Observable<any> {
-    return this.httpClient.get<any>(this.LabOrder_ApiUrl + '/api/LabOrder/GetLabOrderTestResultsByPatientId/' + patientId).pipe(
-        tap(getLabOrderTestResults => this.errorHandlerService.log('get lab order test results')),
+  public getLabTestResults(patientId: number,status:string) : Observable<any> {
+    return this.httpClient.get<any>(this.LabOrder_ApiUrl + '/api/LabOrder/GetLabTestResults/' + patientId+ '/' + status).pipe(
+        tap(getLabTestResults => this.errorHandlerService.log('get lab order test results')),
         catchError(this.errorHandlerService.handleError<any[]>('getLabOrderTestResults'))
     );
     }
@@ -48,7 +55,5 @@ export class LaborderService {
           tap(getConfiguredLabTests => this.errorHandlerService.log('get configured lab tests')),
           catchError(this.errorHandlerService.handleError<any[]>('getConfiguredLabTests'))
       );
-
-
     }
 }

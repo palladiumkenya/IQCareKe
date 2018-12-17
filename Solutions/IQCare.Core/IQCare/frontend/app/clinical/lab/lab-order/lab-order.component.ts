@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, ViewChild } from '@angular/core';
 import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
 import { LabTestInfo, AddLabOrderCommand } from '../../_models/AddLabOrderCommand';
 import { LaborderService } from '../../_services/laborder.service';
@@ -11,6 +11,7 @@ import { LookupItemService } from '../../../shared/_services/lookup-item.service
 import { AddPatientOrdVisitCommand } from '../../../shared/_models/patientordvisit';
 import { PatientMasterVisitEncounter } from '../../../pmtct/_models/PatientMasterVisitEncounter';
 import { forkJoin } from 'rxjs';
+import { MatPaginator, MatTableDataSource } from '@angular/material';
 
 @Component({
   selector: 'app-lab-order',
@@ -33,10 +34,17 @@ serviceAreaId : any;
 labTestReasonOptions : any[];
 maxDate : Date;
 
+<<<<<<< HEAD
+=======
 @Output() notify: EventEmitter<FormGroup> = new EventEmitter<FormGroup>();
+>>>>>>> bd4dac02ce0b51bdc0afb748e0108061b5f92cba
 @Output() notifyData: EventEmitter<any[]> = new EventEmitter<any[]>();
+@ViewChild(MatPaginator) paginator: MatPaginator;
 
+lab_test_displaycolumns = ['test', 'orderReason', 'testNotes', 'action'];
+dataSource =  new MatTableDataSource(this.labTestData);
 
+@Output() notify: EventEmitter<FormGroup> = new EventEmitter<FormGroup>();
 
   constructor(private formBuilder :FormBuilder, 
     private labOrderService: LaborderService,
@@ -50,12 +58,12 @@ maxDate : Date;
      this.labOrderFormGroup = this.formBuilder.group({
       labTestId: new FormControl('', [Validators.required]),
       labtestReasonId: new FormControl('', [Validators.required]),
-      labTestNotes: new FormControl('', [Validators.required]),  
+      labTestNotes: new FormControl(''),  
       orderDate: new FormControl('', [Validators.required]),
-      clinicalOrderNotes: new FormControl('', [Validators.required])
+      clinicalOrderNotes: new FormControl('')
     });
     this.notify.emit(this.labOrderFormGroup);
-    this.notifyData.emit(this.labTestData);
+    this.dataSource =  new MatTableDataSource(this.labTestData);
     this.maxDate = new Date();
    }
 
@@ -64,11 +72,8 @@ maxDate : Date;
 
     this.activatedRoute.params.subscribe(params => {
       this.patientId = params['patientId'];
-      console.log("PAtient Id>> "+ this.patientId);
       this.personService.getPatientById(this.patientId).subscribe(patient => {
          this.patientInfo = patient;
-         console.log("PAtient Info>> "+ this.patientInfo.ptn_pk);
-
      });  
      
      this.activatedRoute.data.subscribe(
@@ -84,15 +89,32 @@ maxDate : Date;
     this.getServiceArea();  
   }
 
- 
+  addedLabTestIds: any[] = [];
+
   public  AddLabTest() {
+    if(this.labOrderFormGroup.invalid)
+       return;
+       var labTestId = this.labOrderFormGroup.get('labTestId').value.id;
+       var testName =  this.labOrderFormGroup.get('labTestId').value.name;
+
+    if(this.addedLabTestIds.indexOf(labTestId) >= 0)
+       {
+         this.snotifyService.error(testName + ' test already added','Lab',this.notificationService.getConfig());
+         return;
+       }
+
     this.labTestData.push({
-      testId: this.labOrderFormGroup.get('labTestId').value.id,
-      test: this.labOrderFormGroup.get('labTestId').value.name,
+      testId: labTestId,
+      test: testName,
       orderReason: this.labOrderFormGroup.get('labtestReasonId').value.displayName,
       orderReasonId: this.labOrderFormGroup.get('labtestReasonId').value.itemId,
       testNotes: this.labOrderFormGroup.get('labTestNotes').value
     });
+
+    this.addedLabTestIds.push(labTestId);
+
+    this.dataSource = new MatTableDataSource(this.labTestData);
+    this.dataSource.paginator = this.paginator;
     console.log(this.labTestData);
   }
 
@@ -115,8 +137,7 @@ maxDate : Date;
         ])
         .subscribe(
             (result) => {
-              console.log("ORD result >>" +result[0])
-              labOrderCommand.VisitId = result[0]['Visit_Id'];
+              labOrderCommand.VisitId = result[0]['visit_Id'];
               labOrderCommand.PatientMasterVisitId = result[1]['patientMasterVisitId'];
               
               this.labOrderService.addLabOrder(labOrderCommand).subscribe(
@@ -145,7 +166,8 @@ maxDate : Date;
             }
         );        
       
-
+      this.labOrderFormGroup.reset();
+      this.labOrderFormGroup.clearValidators();
      }
 
      public buildLabOrderCommand() : AddLabOrderCommand {
@@ -156,10 +178,10 @@ maxDate : Date;
         labTestInfo.push({
           Id : x.testId,
           Notes : x.testNotes,
-          LabTestName :x.test
+          LabTestName :x.test,
+          OrderReason : x.orderReason
         })
       });
-  console.log("Labtest Info >>" + labTestInfo)
      const labOrderCommand : AddLabOrderCommand = {
         Ptn_Pk: this.patientInfo.ptn_pk,
         PatientId : this.patientInfo.id,
@@ -192,9 +214,7 @@ maxDate : Date;
      return ordVisitCommand;
     }
 
-    /**
-     * buildPatientEncounterCommand
-     */
+    
     public buildPatientEncounterCommand() :PatientMasterVisitEncounter {
       const encounterVisit : PatientMasterVisitEncounter = {
          EncounterDate : new Date,
