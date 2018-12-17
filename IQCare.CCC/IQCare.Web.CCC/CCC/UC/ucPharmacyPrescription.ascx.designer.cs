@@ -103,6 +103,24 @@ namespace IQCare.Web.CCC.UC {
         protected global::System.Web.UI.WebControls.DropDownList ddlBatch;
         
         /// <summary>
+        /// txtDose control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlInputText txtDose;
+        
+        /// <summary>
+        /// ddlFreq control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ddlFreq;
+        
+        /// <summary>
         /// txtMorning control.
         /// </summary>
         /// <remarks>

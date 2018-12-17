@@ -48,7 +48,7 @@ export class IptOutcomeComponent implements OnInit {
             iptEvent: new FormControl('', [Validators.required]),
             reasonsDiscontinued: new FormControl('', [Validators.required])
         });
-        this.IPTClientOutcomeFormGroup.get['reasonsDiscontinued'].disable({ onlySelf: false });
+        this.IPTClientOutcomeFormGroup.get('reasonsDiscontinued').disable({ onlySelf: false });
     }
 
     onIPTEventChange(event) {

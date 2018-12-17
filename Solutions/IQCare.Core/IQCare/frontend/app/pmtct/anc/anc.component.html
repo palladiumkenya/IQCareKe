@@ -23,7 +23,7 @@
                                             [serviceAreaId]="serviceAreaId" [isEdit]="isEdit" [patientMasterVisitId]="patientMasterVisitId"></app-hei-visit-details>
 
                                         <div class="">
-                                            <app-mother-profile [patientId]="patientId" (notify)="OnMotherProfileNotify($event)"></app-mother-profile>
+                                            <app-mother-profile [patientId]="patientId" [visitDate]="visitDate" (notify)="OnMotherProfileNotify($event)"></app-mother-profile>
                                         </div>
                                         <div>
                                             <button mat-raised-button color="accent" matStepperNext type="button"

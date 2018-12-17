@@ -305,9 +305,12 @@
                 var enrollmentDate = $('#DateOfEnrollment').val();
                 var personDateOfBirth = $("#PersonDOB").val();
 
+                console.log("EnrollmentDate: " + enrollmentDate);
+                console.log("DateOfBirth: " + personDateOfBirth);
+
                 var entryPointId = $("#entryPoint").val();
 
-                var isEnrollmentDateBeforeDob = moment(moment(moment(enrollmentDate, 'DD-MMM-YYYYY').toDate()).format('DD-MMM-YYYY')).isBefore(moment(moment(personDateOfBirth, 'DD-MMM-YYYYY').toDate()).format('DD-MMM-YYYY'));
+                var isEnrollmentDateBeforeDob = moment(moment(enrollmentDate, 'DD-MMM-YYYYY').toDate()).isBefore(moment(personDateOfBirth, 'DD-MMM-YYYYY').toDate());
 
                 if (isEnrollmentDateBeforeDob) {
                     toastr.error("Enrollment Date should not be before date of birth", "Patient Enrollment");
@@ -368,10 +371,12 @@
 
                 var enrollmentDate = $('#DateOfEnrollment').val();
                 var personDateOfBirth = $("#PersonDOB").val();
+                console.log("EnrollmentDate: " + enrollmentDate);
+                console.log("DateOfBirth: " + personDateOfBirth);
 
                 var entryPointId = $("#entryPoint").val();
 
-                var isEnrollmentDateBeforeDob = moment(moment(moment(enrollmentDate, 'DD-MMM-YYYYY').toDate()).format('DD-MMM-YYYY')).isBefore(moment(moment(personDateOfBirth, 'DD-MMM-YYYYY').toDate()).format('DD-MMM-YYYY'));
+                var isEnrollmentDateBeforeDob = moment(moment(enrollmentDate, 'DD-MMM-YYYYY').toDate()).isBefore(moment(personDateOfBirth, 'DD-MMM-YYYYY').toDate());
 
                 if (isEnrollmentDateBeforeDob) {
                     toastr.error("Enrollment Date should not be before date of birth", "Patient Enrollment");

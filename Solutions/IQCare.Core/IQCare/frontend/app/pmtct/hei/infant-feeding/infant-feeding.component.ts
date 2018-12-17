@@ -30,6 +30,7 @@ export class InfantFeedingComponent implements OnInit {
     ngOnInit() {
         this.InfantFeedingFormGroup = this._formBuilder.group({
             infantFeedingOptions: new FormControl('', [Validators.required]),
+            id: new FormControl(''),
         });
 
         this.notify.emit(this.InfantFeedingFormGroup);
@@ -42,9 +43,9 @@ export class InfantFeedingComponent implements OnInit {
     loadInfantFeeding(): void {
         this.heiservice.getHeiInfantFeeding(this.patientId, this.patientMasterVisitId).subscribe(
             (result) => {
-                console.log(result);
                 if (result && result.feedingModeId && result.feedingModeId > 0) {
                     this.InfantFeedingFormGroup.get('infantFeedingOptions').setValue(result.feedingModeId);
+                    this.InfantFeedingFormGroup.get('id').setValue(result.id);
                 }
             },
             (error) => {

@@ -382,6 +382,24 @@ namespace IQCare.Web.Admin {
         protected global::System.Web.UI.HtmlControls.HtmlInputCheckBox chkPaperlessclinic;
         
         /// <summary>
+        /// Dosage control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl Dosage;
+        
+        /// <summary>
+        /// chkDosagefrequency control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlInputCheckBox chkDosagefrequency;
+        
+        /// <summary>
         /// strongpassword control.
         /// </summary>
         /// <remarks>

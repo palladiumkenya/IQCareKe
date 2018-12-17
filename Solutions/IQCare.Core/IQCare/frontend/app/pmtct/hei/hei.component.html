@@ -125,16 +125,26 @@
                                         </div>-->
 
                                         <div>
-                                            <app-next-appointment (notify)="onNextAppointmentNotify($event)"></app-next-appointment>
+                                            <app-next-appointment (notify)="onNextAppointmentNotify($event)"
+                                                [nextAppointmentOptions]="nextAppointmentOptions" [patientId]="patientId"
+                                                [isEdit]="isEdit" [patientMasterVisitId]="patientMasterVisitId"></app-next-appointment>
                                         </div>
-                                        <app-hei-outcome (notify)="onHeiOutcomeNotify($event)" [heiOutcomeOptions]="heiOutcomeOptions">
+                                        <app-hei-outcome (notify)="onHeiOutcomeNotify($event)" [heiOutcomeOptions]="heiOutcomeOptions"
+                                            [patientId]="patientId" [isEdit]="isEdit" [patientMasterVisitId]="patientMasterVisitId">
                                         </app-hei-outcome>
                                         <div>
                                             <button mat-raised-button color="primary" matStepperPrevious type="button">Previous</button>
                                             &nbsp;&nbsp;
-                                            <button mat-raised-button color="accent" type="submit" (click)="onCompleteEncounter()">
-                                                Complete Encounter
-                                            </button>
+                                            <ng-container *ngIf="isEdit;else newEncounterTemplate">
+                                                <button mat-raised-button color="accent" type="submit" (click)="onUpdateHeiEncounter()">
+                                                    Update HEI Encounter
+                                                </button>
+                                            </ng-container>
+                                            <ng-template #newEncounterTemplate>
+                                                <button mat-raised-button color="accent" type="submit" (click)="onCompleteEncounter()">
+                                                    Complete Encounter
+                                                </button>
+                                            </ng-template>
                                         </div>
                                     </mat-step>
                                 </mat-horizontal-stepper>

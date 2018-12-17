@@ -19,6 +19,9 @@ import { NotificationService } from '../../shared/_services/notification.service
 import { CompleteLabOrderCommand } from '../_models/hei/CompleteLabOrderCommand';
 import { PatientFeedingCommand } from '../_models/hei/PatientFeedingCommand';
 import * as moment from 'moment';
+import { HeiDeliveryEditCommand } from '../_models/HeiDeliveryEditCommand';
+import { HeiFeedingEditCommand } from '../_models/HeiFeedingEditCommand';
+import { PatientAppointmentEditCommand } from '../_models/PatientAppointmentEditCommand';
 
 @Component({
     selector: 'app-hei',
@@ -47,6 +50,7 @@ export class HeiComponent implements OnInit {
     vaccination: Vaccination[] = [];
     milestone: Milestone[] = [];
     deliveryOptions: any[] = [];
+    nextAppointmentOptions: any[] = [];
     maternalhistoryOptions: any[] = [];
     hivtestingOptions: any[] = [];
     motherreceivedrugsOptions: any[] = [];
@@ -240,6 +244,10 @@ export class HeiComponent implements OnInit {
             'testResults': this.heiHivTestingResultsOptions
         });
 
+        this.nextAppointmentOptions.push({
+            'YesNo': this.yesnoOptions
+        });
+
         this.heiService.getPatientById(this.patientId).subscribe(
             (result) => {
                 const { ptn_pk } = result;
@@ -249,14 +257,14 @@ export class HeiComponent implements OnInit {
 
         this.heiService.getHeiLabTests().subscribe(
             (result) => {
-                console.log("Hei Lab Tests "+ result);
+                // console.log('Hei Lab Tests ' + result);
                 for (let i = 0; i < result.length; i++) {
                     if (result[i].key == 'PCR') {
-                        this.pcrLabTest = result[i].value
+                        this.pcrLabTest = result[i].value;
                     } else if (result[i].key == 'Viral Load') {
-                        this.viralLoadLabTest = result[i].value
+                        this.viralLoadLabTest = result[i].value;
                     } else if (result[i].key == 'HIV Rapid Test') {
-                        this.antibodyLabTest = result[i].value
+                        this.antibodyLabTest = result[i].value;
                     }
                 }
             }
@@ -305,19 +313,106 @@ export class HeiComponent implements OnInit {
         this.infantFeedingFormGroup.push(formGroup);
     }
 
-    onCompleteEncounter() {
-        console.log(this.infantFeedingFormGroup);
+    onUpdateHeiEncounter() {
         if (!this.infantFeedingFormGroup.valid) {
             this.snotifyService.error('Complete the highlighted fields before submitting', 'HEI Encounter',
                 this.notificationService.getConfig());
             return;
         }
 
-        console.log('immunization data');
-        console.log(this.immunization_table_data);
+        const motherRegistered = this.yesnoOptions.filter(
+            obj => obj.itemId == this.deliveryMatFormGroup.value[1]['motherregisteredinclinic']
+        );
 
-        console.log(this.visitDetailsFormGroup.value);
-        console.log(this.hivTestingFormGroup);
+        let isMotherRegistered: boolean = false;
+        if (motherRegistered.length > 0) {
+            if (motherRegistered[0]['itemName'] == 'Yes') {
+                isMotherRegistered = true;
+            } else if (motherRegistered[0]['itemName'] == 'No') {
+                isMotherRegistered = false;
+            }
+        }
+
+        const heiDeliveryCommand: HeiDeliveryEditCommand = {
+            Id: this.deliveryMatFormGroup.value[1]['id'],
+            PlaceOfDeliveryId: this.deliveryMatFormGroup.value[0]['placeofdelivery'],
+            ModeOfDeliveryId: this.deliveryMatFormGroup.value[0]['modeofdelivery'],
+            BirthWeight: this.deliveryMatFormGroup.value[0]['birthweight'],
+            ArvProphylaxisId: this.deliveryMatFormGroup.value[0]['arvprophylaxisreceived'],
+            ArvProphylaxisOther: this.deliveryMatFormGroup.value[0]['arvprophylaxisother'],
+            MotherIsRegistered: isMotherRegistered,
+            MotherArtInfantEnrolRegimenId: this.deliveryMatFormGroup.value[1]['pmtctheimotherdrugsatinfantenrollment'],
+            MotherPersonId: this.deliveryMatFormGroup.value[1]['motherpersonid'],
+            MotherStatusId: this.deliveryMatFormGroup.value[1]['stateofmother'],
+            PrimaryCareGiverID: this.deliveryMatFormGroup.value[1]['primarycaregiver'],
+            MotherName: this.deliveryMatFormGroup.value[1]['nameofmother'],
+            MotherCCCNumber: this.deliveryMatFormGroup.value[1]['cccno'],
+            MotherPMTCTDrugsId: this.deliveryMatFormGroup.value[1]['pmtctheimotherreceivedrugs'],
+            MotherPMTCTRegimenId: this.deliveryMatFormGroup.value[1]['pmtctheimotherregimen'],
+            MotherPMTCTRegimenOther: this.deliveryMatFormGroup.value[1]['otherspecify'],
+            MotherArtInfantEnrolId: this.deliveryMatFormGroup.value[1]['motheronartatinfantenrollment']
+        };
+
+        const heiFeedingCommand: HeiFeedingEditCommand = {
+            Id: this.infantFeedingFormGroup.value[0]['id'],
+            FeedingModeId: this.infantFeedingFormGroup.value[0]['infantFeedingOptions']
+        };
+
+        const heiOutComeCommand: HeiOutComeCommand = {
+            HeiEncounterId: this.deliveryMatFormGroup.value[1]['id'],
+            OutcomeAt24MonthsId: this.infantFeedingFormGroup.value[2]['heiOutcomeOptions']
+        };
+
+        const patientAppointmentEditCommand: PatientAppointmentEditCommand = {
+            AppointmentId: this.infantFeedingFormGroup.value[1]['id'],
+            AppointmentDate: this.infantFeedingFormGroup.value[1]['nextAppointmentDate'],
+            Description: this.infantFeedingFormGroup.value[1]['serviceRemarks']
+        };
+
+        const heiAppointment: PatientAppointment = {
+            PatientMasterVisitId: this.patientMasterVisitId,
+            ServiceAreaId: this.serviceAreaId,
+            PatientId: this.patientId,
+            AppointmentDate: this.infantFeedingFormGroup.value[1]['nextAppointmentDate'],
+            Description: this.infantFeedingFormGroup.value[1]['serviceRemarks'],
+            StatusDate: null,
+            DifferentiatedCareId: 0,
+            AppointmentReason: 'Follow Up',
+            CreatedBy: this.userId
+        };
+
+        const heiDeliveryEditCommand = this.heiService.updateHeiDelivery(heiDeliveryCommand);
+        const heiFeedingEditCommand = this.heiService.updateHeiInfantFeeding(heiFeedingCommand);
+        const heiOutCome = this.heiService.saveHeiOutCome(heiOutComeCommand);
+        const heiUpdateAppointment = this.pncService.updateAppointment(patientAppointmentEditCommand);
+        const heiAppoinment = this.pncService.savePncNextAppointment(heiAppointment);
+        let isAddOrInsertAppointment;
+        if (patientAppointmentEditCommand.AppointmentId && patientAppointmentEditCommand.AppointmentId > 0) {
+            isAddOrInsertAppointment = heiUpdateAppointment;
+        } else {
+            isAddOrInsertAppointment = heiAppoinment;
+        }
+
+        forkJoin([heiDeliveryEditCommand, heiFeedingEditCommand, heiOutCome,
+            isAddOrInsertAppointment]).subscribe(
+                (result) => {
+                    console.log(result);
+
+                    this.snotifyService.success('Successfully updated HEI encounter ', 'HEI', this.notificationService.getConfig());
+                    this.zone.run(() => {
+                        this.router.navigate(['/dashboard/personhome/' + this.personId], { relativeTo: this.route });
+                    });
+                }
+            );
+
+    }
+
+    onCompleteEncounter() {
+        if (!this.infantFeedingFormGroup.valid) {
+            this.snotifyService.error('Complete the highlighted fields before submitting', 'HEI Encounter',
+                this.notificationService.getConfig());
+            return;
+        }
 
         for (let i = 0; i < this.immunization_table_data.length; i++) {
             for (let j = 0; j < this.immunization_table_data[i].length; j++) {
@@ -448,7 +543,7 @@ export class HeiComponent implements OnInit {
                         }
                     );
                 } else if (this.hivTestingFormGroup[i][j]['testtype']['itemName'] == 'Final Antibody') {
-                    labTestId = this.antibodyLabTest.id
+                    labTestId = this.antibodyLabTest.id;
                     latTestNotes = this.hivTestingFormGroup[i][j]['comments'];
                     labTestName = this.antibodyLabTest.name;
 
@@ -484,7 +579,7 @@ export class HeiComponent implements OnInit {
         const visitDetailsData = {
             PatientId: this.patientId,
             PatientMasterVisitId: this.patientMasterVisitId,
-            ServiceAreaId: 3,
+            ServiceAreaId: this.serviceAreaId,
             VisitDate: moment(this.visitDetailsFormGroup.value[0]['visitDate']).toDate(),
             VisitNumber: 0,
             VisitType: this.visitDetailsFormGroup.value[0]['visitType'],
@@ -543,7 +638,7 @@ export class HeiComponent implements OnInit {
                 const heiLab = this.heiService.saveHeiLabOrder(laborder).subscribe(
                     (res) => {
                         console.log(res);
-                        if (res.length > 0) {
+                        if (res && res['labOrderId'] && res['labOrderTests']) {
                             const labOrderId = res['labOrderId'];
                             const labOrderTestId = res['labOrderTests'][0]['id'];
                             const labTestId = res['labOrderTests'][0]['labTestId'];
@@ -616,25 +711,35 @@ export class HeiComponent implements OnInit {
 
                             const completeHeiLabOrder = this.heiService.saveCompleteHeiLabOrder(completeLabOrderCommand).subscribe(
                                 (completeRes) => {
+                                    console.log('complete laborder');
                                     console.log(completeRes);
+                                },
+                                (completeError) => {
+                                    console.log('Error completing laborder' + completeError);
                                 }
                             );
+
+
                         }
                     }
                 );
 
-                heiOutComeCommand.HeiEncounterId = result[4]['HeiEncounterId'];
+                heiOutComeCommand.HeiEncounterId = result[4]['heiEncounterId'];
                 const heiOutCome = this.heiService.saveHeiOutCome(heiOutComeCommand).subscribe(
 
                 );
 
+
+                this.snotifyService.success('Successfully saved HEI encounter ', 'HEI', this.notificationService.getConfig());
+                this.zone.run(() => {
+                    this.router.navigate(['/dashboard/personhome/' + this.personId], { relativeTo: this.route });
+                });
             },
             (error) => {
                 console.log(`error ` + error);
             },
             () => {
                 console.log(`complete`);
-                this.snotifyService.success('Successfully saved HEI encounter ', 'HEI', this.notificationService.getConfig());
             }
         );
     }

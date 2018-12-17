@@ -1,13 +1,18 @@
 ﻿
 using IQCare.Library;
-using IQCare.PMTCT.Core.Models.HEI;
 using MediatR;
 
 namespace IQCare.PMTCT.BusinessProcess.Commands.PatientHeiFeeding
 {
-   public class EditHeiFeedingCommand:IRequest<Result<EditHeiFeedingCommandResult>>
+    public class EditHeiFeedingCommand:IRequest<Result<EditHeiFeedingCommandResult>>
     {
-        public HeiFeeding heiFeeding;
+        public HeiFeedingUpdate heiFeeding;
+    }
+
+    public class HeiFeedingUpdate
+    {
+        public int Id { get; set; }
+        public int FeedingModeId { get; set; }
     }
 
     public class EditHeiFeedingCommandResult

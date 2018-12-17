@@ -1623,11 +1623,18 @@
 
                                 if (patientType === 'Transfer-In') {
                                     
-                                        $("#<%=lblFirstline.ClientID%>").text(moment(itemList.DateStartedOnFirstline).format("DD-MMM-YYYY"));
+                                    $("#<%=lblFirstline.ClientID%>").text(moment(itemList.DateStartedOnFirstline).format("DD-MMM-YYYY"));
+                                    if (itemList.Cohort != null && itemList.Cohort != undefined) {
                                         $("#<%=lblcohort.ClientID%>").text(itemList.Cohort);
-                                    if (itemList.RegimenName === '') { $("#<%=lblRegimenName.ClientID%>").text("Not Issued");
-                                    } else {
-                                    $("#<%=lblRegimenName.ClientID%>").text(itemList.RegimenName);}
+                                    }
+                                    if (itemList.RegimenName != null && itemList.Cohort != undefined) {
+                                        if (itemList.RegimenName === '') {
+                                            $("#<%=lblRegimenName.ClientID%>").text("Not Issued");
+
+                                        } else {
+                                            $("#<%=lblRegimenName.ClientID%>").text(itemList.RegimenName);
+                                        }
+                                    }
                                         if (itemList.BaselineViralLoad === '') { $("#<%=lblbaselineVL.ClientID%>").text('Not Taken');} else { $("#<%=lblbaselineVL.ClientID%>").text(itemList.BaselineViralLoad + ' copies/ml');}
                                         $("#<%=lblBlDate.ClientID%>").text(moment(itemList.BaselineViralLoadDate).format("DD-MMM-YYYY"));
                                 }

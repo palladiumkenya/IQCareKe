@@ -18,6 +18,7 @@ export class HeiHivtestingComponent implements OnInit {
     maxDate: Date;
 
     public hiv_testing_table_data: HivTestingTableData[] = [];
+    public hiv_testing_history_data: HivTestingTableData[] = [];
     displayedColumns = ['testtype', 'dateofsamplecollection', 'result', 'dateresultscollected', 'action'];
     dataSource = new MatTableDataSource(this.hiv_testing_table_data);
 
@@ -44,13 +45,25 @@ export class HeiHivtestingComponent implements OnInit {
 
         this.notify.emit(this.hiv_testing_table_data);
 
-        if (this.isEdit) {
-            this.loadHeiHivTests();
-        }
+        this.loadHeiHivTests();
     }
 
     loadHeiHivTests(): void {
-        // this.heiservice.getHeiLabTests();
+        this.heiservice.getLabOrderTestResults(this.patientId).subscribe(
+            (res) => {
+                console.log(res);
+                for (let i = 0; i < res.length; i++) {
+                    /*this.hiv_testing_history_data.push({
+                        testtype: '',
+                        dateofsamplecollection: '',
+                        result: '',
+                        dateresultscollected: moment(data.dateresultscollected).toDate(),
+                        comments: data.comments,
+                        resultText: data.resultText
+                    });*/
+                }
+            }
+        );
     }
 
     AddHivTests() {

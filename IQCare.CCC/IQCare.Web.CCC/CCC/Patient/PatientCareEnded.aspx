@@ -3,6 +3,16 @@
 <%@ Register Src="~/CCC/UC/ucExtruder.ascx" TagPrefix="uc" TagName="ucExtruder" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="IQCareContentPlaceHolder" runat="server">
+    <style>
+          .CloseDetails{
+              visibility:visible;
+          }
+         .CareendDetails{
+             visibility:hidden;
+         }
+
+              
+    </style>
     <div class="col-md-12">
     <uc:PatientDetails runat="server" />
     <div class="col-md-12 col-xs-12 panel panel-default">
@@ -10,7 +20,7 @@
          <div class="panel-body">
               <div class="col-md-12 col-xs-12"><label class="control-label text-primary pull-left">Patient Care Ending.</label></div>
               <div class="col-md-12 col-xs-12"><hr/></div>
-              <div class="col-md-12 col-xs-12" id="PatientCareEndGrid">
+              <div class="col-md-12 col-xs-12" id="PatientCareEndGrid   ">
                  <table class="table table-condensed table-striped table-hover" id="tblCareEnded" clientidmode="Static" runat="server">
                     <thead>
                         <tr class="active">
@@ -18,6 +28,7 @@
                             <th><span class="text-primary" aria-hidden="true">Exit Date</span> </th>
                             <th><span class="text-primary" aria-hidden="true">Exit Reason</span> </th>
                             <th><span class="text-primary" aria-hidden="true">Status</span> </th>
+                           
                         </tr>
                     </thead>
                     <tbody>
@@ -27,7 +38,7 @@
 
               <div class="col-md-12 col-xs-12 form-group" id="CareEndedForm" data-parsley-validate="true">           
       
-                   <div class="col-md-12 col-xs-12 form-group">
+                   <div class="col-md-12 col-xs-12 form-group " >
                 
                         <div class="col-md-3">
                             
@@ -249,7 +260,7 @@
  
 
                   </div>
-                  <div class="col-md-12 col-xs-12">
+                  <div class="col-md-12 col-xs-12 ">
                       <div class="col-md-6 col-xs-6">
                                                 
 
@@ -271,12 +282,21 @@
                       <div class="col-md-12"><hr/></div>
                       <div class="col-md-12">
                           <div class="col-md-4"></div>
-                          <div class="col-md-6"></div>
+                          <div class="col-md-6  CloseDetails">
+                              
+                              
+                      <button type="button" id="btnClose" class="btn btn-info btn-lg fa fa fa-user-times text-danger pull-right"  onclick="CloseForm();">Close</button>
+                              
+                          </div>
                           <div class="col-md-2">
                               <div class="col-md-4"></div> 
-                              <div class="col-md-4"></div>
-                              <div class="col-md-4 pull-right">
-                            
+                              <div class="col-md-4">
+                                  
+
+                              </div>
+                              <div class="col-md-4 pull-right CareendDetails">
+                                  
+
                                 <asp:LinkButton runat="server" ID="EndCare" ClientIDMode="Static" OnClientClick="return false" CssClass=" btn btn-info btn-lg fa fa fa-user-times text-danger pull-right"> CareEnd Patient</asp:LinkButton>
                           
  
@@ -285,7 +305,7 @@
 
                       </div>
                   </div>
-
+                 
               </div> <!-- careending \form-->
          </div>
 
@@ -295,13 +315,33 @@
 </div>
     
     <script type="text/javascript">
+        var pmVisitId = <%=PmVisitId%> ;
+        function CloseForm() {
+                window.location.href = '<%=ResolveClientUrl( "~/CCC/Patient/PatientHome.aspx")%>';
+            }
         $(document).ready(function() {
 
+            if (pmVisitId > 0) {
+                  $('.CloseDetails').css('visibility', 'visible');
+
+                $('.CareendDetails').css('visibility', 'hidden');
+            }
             $("#Facility").prop("disabled", true);
             var today = new Date();
             var futuredate;
             
+            if (parseInt(pmVisitId, 10) > 0) {
+                $('.CloseDetails').css('visibility', 'visible');
 
+                $('.CareendDetails').css('visibility', 'hidden');
+            }
+            else {
+                 $('.CloseDetails').css('visibility', 'hidden');
+
+                $('.CareendDetails').css('visibility', 'visible');
+            }
+         getCareEndedByVisitId();
+           
          $("#CareEndDate").datepicker({
                 date: null,
                 allowPastDates: true,
@@ -317,6 +357,7 @@
          $("#DateOfDeath").datepicker('disable');
 
 
+          
         /* validate future dates for date of death */
 
          $('#DateOfDeath').on('changed.fu.datepicker dateClicked.fu.datepicker', function (evt, date) {
@@ -401,6 +442,8 @@
                     }
                 });
 
+           
+
 
             $("#EndCare").click(function () {
                 if ($("#CareEndedForm").parsley().validate()) {
@@ -479,7 +522,65 @@
                     }
                 });
             }
+            function getCareEndedByVisitId() {
+                if (parseInt(pmVisitId, 10) > 0) {
+                    $.ajax(
+                        {
+                            type: "POST",
+                            url: "../WebService/EnrollmentService.asmx/GetPatientCareEndingDetailsByVisitId",
+                            data: "{'PatientMasterVisitId':'" + pmVisitId + "'}",
+                            contentType: "application/json; charset=utf-8",
+                            dataType: "json",
+                            cache: false,
+                            success: function (response) {
+                                //$("#tblCareEnded > tbody").empty();
+                                $('#tblCareEnded tr:not(:first)').remove();
+                                console.log(response.d);
+                                var itemList = response.d;
+                                var table = '';
 
+                               
+
+                                if (itemList != null) {
+                                    //console.log(itemList);
+                                 
+                                    if (itemList.ExitDate != null || itemList.ExitDate != undefined) {
+                                        $('#CareEndDate').datepicker("setDate", moment(itemList.ExitDate).format('DD-MMM-YYYY').toString());
+                                    }
+                                    if (itemList.ExitReason != null || itemList.ExitReason!= undefined) {
+                                        $("#<%=Reason.ClientID%>").val(itemList.ExitReason.toString());
+                                    }
+                                    if (itemList.CareEndingNotes != null || itemList.CareEndingNotes != undefined) {
+                                        $("#<%=txtCareEndingNotes.ClientID%>").val(itemList.CareEndingNotes.toString());
+                                     }
+                                         if (itemList.TransferOutFacility != null || itemList.TransferOutFacility != undefined) {
+                                             $("#<%=Facility.ClientID%>").val(itemList.TransferOutFacility.toString());
+                                            }
+                         if (itemList.DateOfDeath != null || itemList.DateOfDeath != undefined) {
+                                 $('#DateOfDeath').datepicker("setDate", moment(itemList.DateOfDeath).format('DD-MMM-YYYY').toString())
+                                 }
+                                  }
+                        
+                                //itemList.forEach(function (item, i) {
+                                //    n = i + 1;
+                                //    table += '<tr><td style="text-align: left">' + n + '</td><td style="text-align: left">' + moment(item.ExitDate).format('DD-MMM-YYYY') + '</td><td style="text-align:left">' + item.ExitReason + '</td><td style="text-align: left">' + moment(item.dateOfDeath).format('DD-MMM-YYYY') + '</td><td style="text-align:left">' + item.transferOutFacility + '</td><td style="text-align:left">' + item.dateofDeath + '</td><td style="text-align:left">' + item.careEndingNotes + '</td></tr>';
+                                //});
+
+                                //$('#tblCareEnded').append(table);
+                            
+                            },
+
+                            error: function (xhr, errorType, exception) {
+                                var jsonError = jQuery.parseJSON(xhr.responseText);
+                                toastr.error("" + xhr.status + "" + jsonError.Message + " ");
+                                return false;
+                            }
+                        });
+                }
+            }
+
+            
+            
             function getCareEnded() {
                 $.ajax(
                 {

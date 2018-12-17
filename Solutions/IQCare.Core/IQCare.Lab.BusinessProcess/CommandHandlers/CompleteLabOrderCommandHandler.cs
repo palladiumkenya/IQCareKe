@@ -46,11 +46,12 @@ namespace IQCare.Lab.BusinessProcess.CommandHandlers
                     {
                         var resultUnit = GetResultUnitDetails(labTestResult.ParameterId);
 
-                        var labOrderTestResult = new LabOrderTestResult(request.LabOrderTestId, request.LabTestId, labTestResult.ParameterId, labTestResult.ResultValue, labTestResult.ResultOptionId, labTestResult.ResultOption, resultUnit.Item2, resultUnit.Item1, request.UserId, labTestResult.Undetectable, labTestResult.DetectionLimit);
+                        var labOrderTestResult = new LabOrderTestResult(request.LabOrderId, request.LabOrderTestId, request.LabTestId, labTestResult.ParameterId, labTestResult.ResultValue, labTestResult.ResultOptionId, labTestResult.ResultOption, resultUnit.Item2, resultUnit.Item1, request.UserId, labTestResult.Undetectable, labTestResult.DetectionLimit);
 
                         labOrderTestResults.Add(labOrderTestResult);
                     }
 
+                    await _labUnitOfwork.Repository<LabOrderTestResult>().AddRangeAsync(labOrderTestResults);
                     // PatientLabTracker is updated only for LabTests with only one parameter count
                     UpdatePatientLabTestTracker(labTestParameters[0].Id, request.LabOrderId, totalLabTestParameterCount, request.LabTestResults[0]);
 
@@ -88,14 +89,15 @@ namespace IQCare.Lab.BusinessProcess.CommandHandlers
           
         }
 
-        private Tuple<int ?, string> GetResultUnitDetails(int parameterId)
+        private Tuple<int?, string> GetResultUnitDetails(int parameterId)
+
         {
             var unitId = _labUnitOfwork.Repository<LabTestParameterConfig>().Get(x => x.ParameterId == parameterId && x.DeleteFlag == false)
                            .SingleOrDefault()?.UnitId;   
                 var parameterUnit = _labUnitOfwork.Repository<LabTestParameterUnit>().Get(x => x.UnitId == unitId)
                     .SingleOrDefault();
 
-                return new Tuple<int ?, string>(parameterUnit?.UnitId, parameterUnit?.UnitName);      
+                return new Tuple<int?, string>(parameterUnit?.UnitId, parameterUnit?.UnitName);         
         }
 
         private void UpdatePatientLabTestTracker(int parameterId, int labOrderId, int parameterCount, AddLabTestResultCommand labOrderTestResult)

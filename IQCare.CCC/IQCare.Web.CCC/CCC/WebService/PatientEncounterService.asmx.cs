@@ -22,6 +22,8 @@ using System.Linq;
 using IQCare.CCC.UILogic.Screening;
 using Entities.CCC.Screening;
 using IQCare.CCC.UILogic.Visit;
+using Interface.CCC.Lookup;
+using Entities.CCC.Appointment;
 
 
 //using static Entities.CCC.Encounter.PatientEncounter;
@@ -120,6 +122,7 @@ namespace IQCare.Web.CCC.WebService
         private int Result { get; set; }
        public  string numberofpartners;
         public int count = 1;
+       public  int DosageFrequency;
 
         public  string ItemDisplayName;
        public  string sexuallyactive;
@@ -1111,6 +1114,11 @@ namespace IQCare.Web.CCC.WebService
             DataTable theDT = patientEncounter.loadPatientPharmacyPrescription(Session["ExistingRecordPatientMasterVisitID"].ToString() == "0" ? Session["PatientMasterVisitID"].ToString() : Session["ExistingRecordPatientMasterVisitID"].ToString() );
             ArrayList rows = new ArrayList();
             string remove = "";
+            
+            if (Session["DosageFrequency"] !=null)
+            {
+                DosageFrequency = Convert.ToInt32(Session["DosageFrequency"]);
+            }
             foreach (DataRow row in theDT.Rows)
             {
                 if (row["DispensedQuantity"].ToString() == "")
@@ -1129,7 +1137,20 @@ namespace IQCare.Web.CCC.WebService
                     }
                 }
 
-                string[] i = new string[14] { row["Drug_Pk"].ToString(), row["batchId"].ToString(),
+                if (DosageFrequency == 1)
+                {
+                    string[] i = new string[13] { row["Drug_Pk"].ToString(), row["batchId"].ToString(),
+                    row["FrequencyID"].ToString(),row["abbr"].ToString(),row["DrugName"].ToString(),
+                    row["batchName"].ToString(),row["dose"].ToString(),row["freq"].ToString(),
+                    row["duration"].ToString(),row["OrderedQuantity"].ToString(),row["DispensedQuantity"].ToString(),
+                    row["prophylaxis"].ToString(), remove
+                     };
+                    rows.Add(i);
+                    
+                }
+                else
+                {
+                    string[] i = new string[14] { row["Drug_Pk"].ToString(), row["batchId"].ToString(),
                     //row["FrequencyID"].ToString(),
                     row["abbr"].ToString(),row["DrugName"].ToString(),
                     row["batchName"].ToString(),row["MorningDose"].ToString(),row["MiddayDose"].ToString(),
@@ -1137,7 +1158,9 @@ namespace IQCare.Web.CCC.WebService
                     row["duration"].ToString(),row["OrderedQuantity"].ToString(),row["DispensedQuantity"].ToString(),
                     row["prophylaxis"].ToString(), remove
                      };
-                rows.Add(i);
+                    rows.Add(i);
+                }
+             
             }
             return rows;
         }
@@ -1737,6 +1760,57 @@ namespace IQCare.Web.CCC.WebService
         {
             try
             {
+                ILookupManager mgr = (ILookupManager)ObjectFactory.CreateInstance("BusinessProcess.CCC.BLookupManager, BusinessProcess.CCC");
+                string FastTrackReason = mgr.GetLookupItemId("ARTFastTrackReferral").ToString() ;
+                string serviceAreaId = mgr.GetLookupItemId("MoH 257 GREENCARD").ToString();
+                string AppointmentStatus = mgr.GetLookupItemId("Pending").ToString();
+                string DifferentiatedCare = mgr.GetLookupItemId("Express Care").ToString();
+               // int patientId = Convert.ToInt32(Session["PatientPK"].ToString());
+                var patientAppointment = new PatientAppointmentManager();
+                if (patientId > 0)
+                {
+                    if (appointmentDate != null  && appointmentDate != DateTime.MinValue && appointmentDate != DateTime.MaxValue)
+                    {
+                        var appointment = patientAppointment.GetByPatientId(patientId).FirstOrDefault(n => n.AppointmentDate.Date == appointmentDate.Value.Date && n.ServiceAreaId == Convert.ToInt32(serviceAreaId) && n.ReasonId ==Convert.ToInt32(FastTrackReason));
+                        if(appointment!=null)
+                        {
+                            Msg += "Appointment  exists and is Scheduled";
+                        }
+                        else
+                        {
+                            if (appointmentDate != DateTime.MinValue || appointmentDate !=null)
+                            {
+
+                                PatientAppointment patientNewAppointment = new PatientAppointment()
+                                {
+                                    PatientId = patientId,
+                                    PatientMasterVisitId = patientMasterVisitId,
+                                    AppointmentDate = Convert.ToDateTime(appointmentDate),
+                                    DifferentiatedCareId = Convert.ToInt32(DifferentiatedCare),
+                                    ReasonId = Convert.ToInt32(FastTrackReason),
+                                    ServiceAreaId = Convert.ToInt32(serviceAreaId),
+                                    StatusId = Convert.ToInt32(AppointmentStatus),
+                                    Description = "", 
+                                    CreatedBy = Convert.ToInt32(Session["AppUserId"]),
+                                    CreateDate = DateTime.Now
+                                };
+
+                                var Newappointment = new PatientAppointmentManager();
+                                Result = Newappointment.AddPatientAppointments(patientNewAppointment);
+                                if (Result > 0)
+                                {
+                                    Msg += "Patient appointment Added Successfully!";
+                                }
+                            }
+                            else
+                            {
+                                Msg = "Patient appointment not Saved Successfully";
+                            }
+                        }
+
+                    }
+                   
+                }
                 var artDistribution = new PatientArtDistributionManager();
 
                 if (IsPatientArtDistributionDone == 1)
