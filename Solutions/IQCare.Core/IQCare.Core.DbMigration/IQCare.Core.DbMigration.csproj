@@ -121,6 +121,7 @@
     <None Remove="Scripts\2.0.0\19_Add_lookups_Immune.sql" />
     <None Remove="Scripts\2.0.0\20_Add_Lookups_Lymphatic.sql" />
     <None Remove="Scripts\2.0.0\21_Add_Lookups_Dental.sql" />
+    <None Remove="Scripts\2.0.0\22_Alter_County_Add_Identity.sql" />
     <None Remove="Scripts\2.0.0\23_Nairobi_Missing_Subcounties_Wards.sql" />
   </ItemGroup>
 
