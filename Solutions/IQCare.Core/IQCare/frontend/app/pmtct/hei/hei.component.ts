@@ -638,7 +638,7 @@ export class HeiComponent implements OnInit {
                 const heiLab = this.heiService.saveHeiLabOrder(laborder).subscribe(
                     (res) => {
                         console.log(res);
-                        if (res.length > 0) {
+                        if (res && res['labOrderId'] && res['labOrderTests']) {
                             const labOrderId = res['labOrderId'];
                             const labOrderTestId = res['labOrderTests'][0]['id'];
                             const labTestId = res['labOrderTests'][0]['labTestId'];
@@ -711,7 +711,11 @@ export class HeiComponent implements OnInit {
 
                             const completeHeiLabOrder = this.heiService.saveCompleteHeiLabOrder(completeLabOrderCommand).subscribe(
                                 (completeRes) => {
+                                    console.log('complete laborder');
                                     console.log(completeRes);
+                                },
+                                (completeError) => {
+                                    console.log('Error completing laborder' + completeError);
                                 }
                             );
 
