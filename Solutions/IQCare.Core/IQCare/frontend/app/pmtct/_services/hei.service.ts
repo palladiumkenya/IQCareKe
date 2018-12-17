@@ -235,6 +235,13 @@ export class HeiService {
         );
     }
 
+    public getLabOrderTestResults(patientId: number): Observable<any[]> {
+        return this.http.get<any[]>(this.API_LAB_URL + '/api/LabOrder/GetLabOrderTestResultsByPatientId/' + patientId).pipe(
+            tap(getLabOrderTestResults => this.errorHandler.log(`successfully fetched labOrderTestResults`)),
+            catchError(this.errorHandler.handleError<any>('Error fetching labOrderTestResults'))
+        );
+    }
+
     public saveHeiInfantFeeding(patientFeeding: PatientFeedingCommand): Observable<any> {
         return this.http.post<any>(this.API_URL + '/api/Hei', JSON.stringify(patientFeeding), httpOptions).pipe(
             tap(saveHeiInfantFeeding => this.errorHandler.log(`successfully saved infant feeding`)),
