@@ -150,21 +150,33 @@ export class HeiService {
     }
 
     public saveIptWorkup(patientIptWorkup: PatientIptWorkup): Observable<PatientIptWorkup> {
-        return this.http.post<any>(this.API_URL + '/api/IptWorkup', JSON.stringify(patientIptWorkup), httpOptions).pipe(
+        const Indata = {
+            PatientIptWorkup: patientIptWorkup
+        };
+
+        return this.http.post<any>(this.API_URL + '/api/IptWorkup', JSON.stringify(Indata), httpOptions).pipe(
             tap(saveIptWorkup => this.errorHandler.log(`successfully added IPT Workup`)),
             catchError(this.errorHandler.handleError<any>('Error saving IPT workup'))
         );
     }
 
     public saveIptOutcome(patientIptOutcome: PatientIptOutcome): Observable<PatientIptOutcome> {
-        return this.http.post<any>(this.API_URL + '/api/IptOutcome', JSON.stringify(patientIptOutcome), httpOptions).pipe(
+        const Indata = {
+            PatientIptOutcome: patientIptOutcome
+        };
+
+        return this.http.post<any>(this.API_URL + '/api/IptOutcome', JSON.stringify(Indata), httpOptions).pipe(
             tap(saveIptOutcome => this.errorHandler.log(`successfully added IPT Outcome`)),
             catchError(this.errorHandler.handleError<any>('Error saving IPT Outcome'))
         );
     }
 
     public saveIpt(patientIpt: PatientIpt): Observable<PatientIptOutcome> {
-        return this.http.post<any>(this.API_URL + '/api/PatientIpt', JSON.stringify(patientIpt), httpOptions).pipe(
+        const Indata = {
+            PatientIpt: patientIpt
+        };
+
+        return this.http.post<any>(this.API_URL + '/api/PatientIpt', JSON.stringify(Indata), httpOptions).pipe(
             tap(saveIpt => this.errorHandler.log(`successfully added IPT `)),
             catchError(this.errorHandler.handleError<any>('Error saving IPT '))
         );
