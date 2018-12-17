@@ -22,8 +22,6 @@ export class CompleteLabOrderComponent implements OnInit {
   
   patientId : number;
 
-
-
   constructor(private labOrderService : LaborderService,route: ActivatedRoute) {
          route.params.subscribe(params=>{
            this.patientId = params['patientId'];

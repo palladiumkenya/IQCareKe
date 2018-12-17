@@ -43,8 +43,8 @@ export class LaborderService {
     )
   }
 
-  public getLabTestResults(patientId: number) : Observable<any> {
-    return this.httpClient.get<any>(this.LabOrder_ApiUrl + '/api/LabOrder/GetLabTestResults/' + patientId).pipe(
+  public getLabTestResults(patientId: number,status:string) : Observable<any> {
+    return this.httpClient.get<any>(this.LabOrder_ApiUrl + '/api/LabOrder/GetLabTestResults/' + patientId+ '/' + status).pipe(
         tap(getLabTestResults => this.errorHandlerService.log('get lab order test results')),
         catchError(this.errorHandlerService.handleError<any[]>('getLabOrderTestResults'))
     );
