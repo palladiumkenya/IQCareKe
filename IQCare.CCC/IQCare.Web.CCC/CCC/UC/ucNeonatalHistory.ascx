@@ -238,10 +238,10 @@
         var userId = <%=userId%>
         var patientMasterVisitId = <%=PatientMasterVisitId%>;
         if ($("#<%=cbMilestoneAchieved.ClientID%>").prop("checked") == true) {
-            milestoneAchieved = 1;
+            milestoneAchieved = true;
         }
         else {
-            milestoneAchieved = 0;
+            milestoneAchieved = false;
         }
         $.ajax({
             type: "POST",
