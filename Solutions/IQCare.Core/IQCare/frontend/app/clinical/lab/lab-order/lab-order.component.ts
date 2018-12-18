@@ -34,10 +34,6 @@ serviceAreaId : any;
 labTestReasonOptions : any[];
 maxDate : Date;
 
-<<<<<<< HEAD
-=======
-@Output() notify: EventEmitter<FormGroup> = new EventEmitter<FormGroup>();
->>>>>>> bd4dac02ce0b51bdc0afb748e0108061b5f92cba
 @Output() notifyData: EventEmitter<any[]> = new EventEmitter<any[]>();
 @ViewChild(MatPaginator) paginator: MatPaginator;
 
