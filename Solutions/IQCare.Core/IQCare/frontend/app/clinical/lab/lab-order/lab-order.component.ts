@@ -34,7 +34,6 @@ serviceAreaId : any;
 labTestReasonOptions : any[];
 maxDate : Date;
 
-@Output() notifyData: EventEmitter<any[]> = new EventEmitter<any[]>();
 @ViewChild(MatPaginator) paginator: MatPaginator;
 
 lab_test_displaycolumns = ['test', 'orderReason', 'testNotes', 'action'];

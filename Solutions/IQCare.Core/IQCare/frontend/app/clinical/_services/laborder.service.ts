@@ -5,7 +5,7 @@ import { tap, catchError } from 'rxjs/operators';
 import { ErrorHandlerService } from '../../shared/_services/errorhandler.service';
 import { AddLabOrderCommand } from '../_models/AddLabOrderCommand';
 import { Observable } from 'rxjs';
-import { CompleteLabOrderCommand } from '../../pmtct/_models/hei/CompleteLabOrderCommand';
+import { CompleteLabOrderCommand } from '../_models/CompleteLabOrderCommand';
 
 const httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })

@@ -17,6 +17,7 @@ import { LabTestsResolver } from './_services/labtests.resolver';
 import { LabTestReasonsResolver } from './_services/labtestreasons.resolver';
 import { LaborderService } from './_services/laborder.service';
 import { CompleteLabOrderComponent } from './lab/complete-lab-order/complete-lab-order.component';
+import { AddLabResultComponent } from './lab/add-lab-result/add-lab-result.component';
 
 @NgModule({
     imports: [
@@ -32,7 +33,8 @@ import { CompleteLabOrderComponent } from './lab/complete-lab-order/complete-lab
         TriageComponent,
         LabOrderComponent,
         LabTestGridComponent,
-        CompleteLabOrderComponent
+        CompleteLabOrderComponent,
+        AddLabResultComponent
     ],
     providers: [
         TriageService,
