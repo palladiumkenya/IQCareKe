@@ -17,5 +17,6 @@ export interface AddLabOrderCommand {
 export interface LabTestInfo{
     Id : number,
     Notes : string,
-    LabTestName : string
+    LabTestName : string,
+    OrderReason : string
 }

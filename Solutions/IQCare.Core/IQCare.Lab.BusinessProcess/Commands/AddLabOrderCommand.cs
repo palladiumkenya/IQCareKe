@@ -27,6 +27,7 @@ namespace IQCare.Lab.BusinessProcess.Commands
         public int Id { get; set; }
         public string Notes { get; set; }
         public string LabTestName { get; set; }
+        public string OrderReason { get; set; }
     }
 
     public class AddLabOrderResponse

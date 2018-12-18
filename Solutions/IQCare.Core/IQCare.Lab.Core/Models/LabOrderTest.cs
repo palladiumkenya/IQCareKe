@@ -54,6 +54,7 @@ namespace IQCare.Lab.Core.Models
         public DateTime CreateDate { get; private set; }
 
         public int CreatedBy { get; private set; }
+        public virtual LabOrder LabOrder { get; set; }
 
         public void ReceiveResult(int receivedBy,DateTime resultDate)
         {

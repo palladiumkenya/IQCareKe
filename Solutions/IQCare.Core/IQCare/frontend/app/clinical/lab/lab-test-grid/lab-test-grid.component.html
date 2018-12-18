@@ -1,18 +1,18 @@
 <div class="mat-elevation-z1">
-  <table mat-table [dataSource]="LabTestDataSource">
+  <mat-table #table [dataSource]="dataSource">
       <ng-container matColumnDef="test">
         <th mat-header-cell *matHeaderCellDef> <strong>Lab Test</strong> </th>
-        <td mat-cell *matCellDef="let lab_test_data"> {{lab_test_data.test}} </td>
+        <td mat-cell *matCellDef="let lab_test_data"> {{labTestData.test}} </td>
       </ng-container>
     
       <ng-container matColumnDef="orderReason">
         <th mat-header-cell *matHeaderCellDef><strong>Order Reason</strong>  </th>
-        <td mat-cell *matCellDef="let lab_test_data"> {{lab_test_data.orderReason }} </td>
+        <td mat-cell *matCellDef="let lab_test_data"> {{labTestData.orderReason }} </td>
       </ng-container>
     
       <ng-container matColumnDef="testNotes">
         <th mat-header-cell *matHeaderCellDef> <strong> Notes </strong>  </th>
-        <td mat-cell *matCellDef="let lab_test_data"> {{lab_test_data.testNotes}} </td>
+        <td mat-cell *matCellDef="let lab_test_data"> {{labTestData.testNotes}} </td>
       </ng-container>
 
       <ng-container matColumnDef="action">
@@ -24,6 +24,6 @@
 
       <tr mat-header-row *matHeaderRowDef="lab_test_displaycolumns"></tr>
       <tr mat-row *matRowDef="let row; columns: lab_test_displaycolumns;"></tr>
-    </table>
+    </mat-table>
     <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
 </div>
