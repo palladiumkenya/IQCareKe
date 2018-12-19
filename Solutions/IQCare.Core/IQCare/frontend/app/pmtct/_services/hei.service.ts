@@ -134,13 +134,20 @@ export class HeiService {
     }
 
     public saveTbAssessment(patientIcf: PatientIcf, patientIcfAction: PatientIcfAction): Observable<any> {
+        const Indata = {
+            HeiPatientIcf: patientIcf
+        };
 
-        const Icf = this.http.post<any>(this.API_URL + '/api/tbAssessment/AddPatientIcf', JSON.stringify(patientIcf), httpOptions).pipe(
+        const Icf = this.http.post<any>(this.API_URL + '/api/tbAssessment/AddPatientIcf', JSON.stringify(Indata), httpOptions).pipe(
             tap(saveTbAssessmentIcf => this.errorHandler.log(`successfully added hei patient icf`)),
             catchError(this.errorHandler.handleError<any>('Error saving hei patient icf Action'))
         );
 
-        const IcfAction = this.http.post<any>(this.API_URL + '/api/tbAssessment/AddPatientIcfAction', JSON.stringify(patientIcfAction),
+        const Indata_Icf = {
+            HEiPatientIcfAction: patientIcfAction
+        };
+
+        const IcfAction = this.http.post<any>(this.API_URL + '/api/tbAssessment/AddPatientIcfAction', JSON.stringify(Indata_Icf),
             httpOptions)
             .pipe(
                 tap(saveTbAssessmentIcfAction => this.errorHandler.log(`successfully added hei patient icf Action`)),
@@ -179,6 +186,20 @@ export class HeiService {
         return this.http.post<any>(this.API_URL + '/api/PatientIpt', JSON.stringify(Indata), httpOptions).pipe(
             tap(saveIpt => this.errorHandler.log(`successfully added IPT `)),
             catchError(this.errorHandler.handleError<any>('Error saving IPT '))
+        );
+    }
+
+    public getTBAssessment(patientId: number): Observable<any[]> {
+        return this.http.get<any[]>(this.API_URL + '/api/tbAssessment/patientIcf/' + patientId).pipe(
+            tap(getTBAssessment => this.errorHandler.log(`successfully fetched PatientICF`)),
+            catchError(this.errorHandler.handleError<any>('Error fetching PatientICF '))
+        );
+    }
+
+    public getPatientIcfAction(patientId: number): Observable<any[]> {
+        return this.http.get<any[]>(this.API_URL + '/api/tbAssessment/patientIcfAction/' + patientId).pipe(
+            tap(getPatientIcfAction => this.errorHandler.log(`successfully fetched PatientICFAction`)),
+            catchError(this.errorHandler.handleError<any>('Error fetching PatientICFAction'))
         );
     }
 

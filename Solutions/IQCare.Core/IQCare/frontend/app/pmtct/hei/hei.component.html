@@ -101,7 +101,8 @@
                                             <span matTooltip="TB Assessment">TB Assessment</span>
                                         </ng-template>
                                         <app-tb-assessment (notify)="onTbAssessment($event)" [tbAssessmentOptions]="tbAssessmentOptions"
-                                            [defaultParameters]="defaultParameters"></app-tb-assessment>
+                                            [defaultParameters]="defaultParameters" [patientId]="patientId" [isEdit]="isEdit"
+                                            [patientMasterVisitId]="patientMasterVisitId"></app-tb-assessment>
 
 
                                         <div>
