@@ -18,3 +18,9 @@ export interface AddLabTestResultCommand {
      Undetectable : boolean;
      DetectionLimit : number;
 }
+
+export class ResultDataType {
+    Numeric ="NUMERIC";
+    Text = "TEXT";
+    Select = "SELECT"
+}

@@ -1,10 +1,10 @@
-import { Component, OnInit, Input, Output, EventEmitter, ViewChild } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, ViewChild, NgZone } from '@angular/core';
 import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
 import { LabTestInfo, AddLabOrderCommand } from '../../_models/AddLabOrderCommand';
 import { LaborderService } from '../../_services/laborder.service';
 import { SnotifyService } from 'ng-snotify';
 import { NotificationService } from '../../../shared/_services/notification.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { PersonHomeService } from '../../../dashboard/services/person-home.service';
 import { EncounterService } from '../../../shared/_services/encounter.service';
 import { LookupItemService } from '../../../shared/_services/lookup-item.service';
@@ -24,6 +24,7 @@ labOrderFormGroup : FormGroup;
 configuredLabTests : any[];
 labTestData : any[] = [];
 patientId : any;
+personId : any;
 patientInfo : any;
 userId : any;
 facilityId : any;
@@ -34,7 +35,6 @@ serviceAreaId : any;
 labTestReasonOptions : any[];
 maxDate : Date;
 
-@Output() notifyData: EventEmitter<any[]> = new EventEmitter<any[]>();
 @ViewChild(MatPaginator) paginator: MatPaginator;
 
 lab_test_displaycolumns = ['test', 'orderReason', 'testNotes', 'action'];
@@ -49,7 +49,9 @@ dataSource =  new MatTableDataSource(this.labTestData);
     private lookUpService : LookupItemService,
     private  snotifyService : SnotifyService,
     private notificationService: NotificationService,
-    private activatedRoute : ActivatedRoute) {
+    private activatedRoute : ActivatedRoute,
+    private router: Router,
+    public zone: NgZone) {
 
      this.labOrderFormGroup = this.formBuilder.group({
       labTestId: new FormControl('', [Validators.required]),
@@ -68,6 +70,7 @@ dataSource =  new MatTableDataSource(this.labTestData);
 
     this.activatedRoute.params.subscribe(params => {
       this.patientId = params['patientId'];
+      this.personId = params['personId'];
       this.personService.getPatientById(this.patientId).subscribe(patient => {
          this.patientInfo = patient;
      });  
@@ -148,8 +151,8 @@ dataSource =  new MatTableDataSource(this.labTestData);
                 this.snotifyService.error('Error saving lab order ' + err, 'Lab', this.notificationService.getConfig());
               },
               ()=>{
-                this.snotifyService.success('Lab order details added successfully', 'Lab',
-                this.notificationService.getConfig());
+                
+                this.zone.run(() => { this.router.navigate(['/clinical/completeorder/'+this.patientId+'/'+this.personId], { relativeTo: this.activatedRoute }); });
                 this.labOrderFormGroup.reset();
               });
   
@@ -161,9 +164,6 @@ dataSource =  new MatTableDataSource(this.labTestData);
                 console.log(`complete`);
             }
         );        
-      
-      this.labOrderFormGroup.reset();
-      this.labOrderFormGroup.clearValidators();
      }
 
      public buildLabOrderCommand() : AddLabOrderCommand {

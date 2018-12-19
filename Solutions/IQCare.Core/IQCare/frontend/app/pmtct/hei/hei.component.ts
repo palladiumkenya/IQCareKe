@@ -669,7 +669,6 @@ export class HeiComponent implements OnInit {
                                                 ResultOption: null,
                                                 ResultUnit: null,
                                                 ResultUnitId: null,
-                                                ResultConfigId: this.pcrLabTestParameters[0]['unitId'],
                                                 Undetectable: false,
                                                 DetectionLimit: this.pcrLabTestParameters[0]['detectionLimit'],
                                             });
@@ -685,7 +684,6 @@ export class HeiComponent implements OnInit {
                                                 ResultOption: null,
                                                 ResultUnit: null,
                                                 ResultUnitId: this.viralLoadLabTestParameters[0]['unitId'],
-                                                ResultConfigId: null,
                                                 Undetectable: false,
                                                 DetectionLimit: this.viralLoadLabTestParameters[0]['detectionLimit'],
                                             });
@@ -700,7 +698,6 @@ export class HeiComponent implements OnInit {
                                                 ResultOption: null,
                                                 ResultUnit: null,
                                                 ResultUnitId: this.antibodyLabTestParameters[0]['unitId'],
-                                                ResultConfigId: null,
                                                 Undetectable: false,
                                                 DetectionLimit: this.antibodyLabTestParameters[0]['detectionLimit'],
                                             });

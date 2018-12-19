@@ -10,7 +10,7 @@ namespace IQCare.Lab.BusinessProcess.Queries
     public class GetLabTestResults : IRequest<Result<List<LabTestResultViewModel>>>
     {
         public int PatientId { get; set; }
-        public LabOrderStatus ? Status { get; set; }          
+        public  string LabOrderStatus { get; set; }            
     }
 
     public class LabTestResultViewModel
@@ -18,6 +18,7 @@ namespace IQCare.Lab.BusinessProcess.Queries
         public int LabOrderTestId { get; set; }
         public string LabTestName { get; set; }
         public DateTime? SampleDate { get; set; }
+        public string OrderDate { get; set; }
         public string ResultStatus { get; set; }
         public string ResultTexts { get; set; }
         public int LabTestId { get; set; }

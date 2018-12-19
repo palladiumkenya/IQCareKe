@@ -4,6 +4,7 @@ import { TriageComponent } from './triage/triage.component';
 import { LabOrderComponent } from './lab/lab-order/lab-order.component';
 import { LabTestReasonsResolver } from './_services/labtestreasons.resolver';
 import { LabTestsResolver } from './_services/labtests.resolver';
+import { CompleteLabOrderComponent } from './lab/complete-lab-order/complete-lab-order.component';
 
 const routes: Routes = [
     {
@@ -18,6 +19,11 @@ const routes: Routes = [
             labTestReasonOptions : LabTestReasonsResolver ,
             configuredLabTests : LabTestsResolver
         }
+    },
+    {
+      path:'completeorder/:patientId/:personId',
+      component : CompleteLabOrderComponent,
+      pathMatch : 'full'
     }
 ];
 

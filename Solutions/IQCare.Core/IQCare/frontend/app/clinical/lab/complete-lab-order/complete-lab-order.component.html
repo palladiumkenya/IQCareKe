@@ -1,4 +1,4 @@
-<form class="form-group" novalidate [formGroup]="labOrderFormGroup">
+<form>
 
   <div class="row">
       <div class="col-md-12">
@@ -6,6 +6,8 @@
               <span class="mat-accent">Complete Lab Order</span>
           </div>
       </div>
+      <!-- <app-personbrief>        
+      </app-personbrief> -->
   </div>
      <div class="row">
         <div class="form-title">
@@ -24,7 +26,7 @@
               
                 <ng-container matColumnDef="orderDate">
                   <th mat-header-cell *matHeaderCellDef> <strong> Order Date </strong>  </th>
-                  <td mat-cell *matCellDef="let pendingTest"> {{pendingTest.orderDate || dd/MM/yyyy}} </td>
+                  <td mat-cell *matCellDef="let pendingTest"> {{pendingTest.orderDate}} </td>
                 </ng-container>
 
                 <ng-container matColumnDef="status">
@@ -39,8 +41,8 @@
                     </button>
                 </td>
             </ng-container>     
-                <tr mat-header-row *matHeaderRowDef="lab_test_displaycolumns"></tr>
-                <tr mat-row *matRowDef="let row; columns: lab_test_displaycolumns;"></tr>
+                <tr mat-header-row *matHeaderRowDef="pending_labs_displaycolumns"></tr>
+                <tr mat-row *matRowDef="let row; columns: pending_labs_displaycolumns;"></tr>
             </table>
       </div> 
       </div>
@@ -71,8 +73,8 @@
                       <th mat-header-cell *matHeaderCellDef> <strong> Unit </strong>  </th>
                       <td mat-cell *matCellDef="let completedLab"> {{completedLab.unit}} </td>
                  </ng-container>          
-              <tr mat-header-row *matHeaderRowDef="lab_test_displaycolumns"></tr>
-              <tr mat-row *matRowDef="let row; columns: lab_test_displaycolumns;"></tr>
+              <tr mat-header-row *matHeaderRowDef="completed_labs_displaycolumns"></tr>
+              <tr mat-row *matRowDef="let row; columns: completed_labs_displaycolumns;"></tr>
           </table>
     </div>      
   </div>
