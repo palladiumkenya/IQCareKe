@@ -11,11 +11,10 @@ ALTER TABLE [dbo].[PatientMilestone] DROP CONSTRAINT [FK_PatientMilestone_Patien
 IF EXISTS (SELECT * FROM sys.foreign_keys WHERE object_id = OBJECT_ID(N'dbo.FK_PatientMilestone_Patient') AND parent_object_id = OBJECT_ID(N'dbo.PatientMilestone'))
 ALTER TABLE [dbo].[PatientMilestone] DROP CONSTRAINT [FK_PatientMilestone_Patient]
 
-IF OBJECT_ID('dbo.PatientMilestone', 'U') IS NOT NULL DROP TABLE dbo.PatientMilestone
+
 
 IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[PatientMilestone]') AND type in (N'U'))
-
-
+BEGIN
 CREATE TABLE [dbo].[PatientMilestone](
 	[id] [int] IDENTITY(1,1) NOT NULL,
 	[PatientMasterVisitId] [int] NOT NULL,
@@ -28,12 +27,13 @@ CREATE TABLE [dbo].[PatientMilestone](
 	[CreateDate] [datetime] NOT NULL,
 	[DeleteFlag] [bit] NOT NULL DEFAULT ((0)),
 	[DateAssessed] [datetime] NULL,
+	[AuditData] [xml] NULL
  CONSTRAINT [PK_PatientMilestone] PRIMARY KEY CLUSTERED 
 (
 	[id] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
-
+END
 GO
 
 ALTER TABLE [dbo].[PatientMilestone]  WITH CHECK ADD  CONSTRAINT [FK_PatientMilestone_PatientMasterVisit] FOREIGN KEY([PatientMasterVisitId])

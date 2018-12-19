@@ -463,7 +463,10 @@ namespace IQCare.Web.CCC.WebService
 
                         PatientEntity updatePatient = new PatientEntity();
                         updatePatient.ptn_pk = patient.ptn_pk;
-                        updatePatient.DateOfBirth = patient.DateOfBirth;
+                      
+                            updatePatient.DateOfBirth = DateTime.Parse(personDateOfBirth);
+                        
+                       // updatePatient.DateOfBirth = patient.DateOfBirth;
                         updatePatient.NationalId = nationalId;
                         updatePatient.FacilityId = patient.FacilityId;
 

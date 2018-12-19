@@ -1,3 +1,6 @@
+
+GO
+
 IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[pr_SCM_GetPharmacyDrugHistory_Web]') AND type in (N'P', N'PC'))
 BEGIN
 EXEC('
@@ -57,7 +60,7 @@ BEGIN
 
 		,c.UserFirstName + '' '' + c.UserLastName AS DispensedBy
 
-	FROM vw_patientpharmacy a
+	FROM [dbo].[VW_PatientPharmacy] a
 
 	LEFT JOIN mst_User b ON a.OrderedBy = b.UserID
 
@@ -71,6 +74,8 @@ BEGIN
 
 END')
 END
+
+GO
 
 IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[pr_SCM_GetPharmacyDrugHistory_Web]') AND type in (N'P', N'PC'))
 BEGIN
@@ -131,7 +136,7 @@ BEGIN
 
 		,c.UserFirstName + '' '' + c.UserLastName AS DispensedBy
 
-	FROM vw_patientpharmacy a
+	FROM [dbo].[VW_PatientPharmacy] a
 
 	LEFT JOIN mst_User b ON a.OrderedBy = b.UserID
 
@@ -147,3 +152,4 @@ END')
 END
 
 
+GO

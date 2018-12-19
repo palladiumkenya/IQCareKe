@@ -172,6 +172,7 @@
     </style>
     
     <script type="text/javascript">
+       
         $(document).ready(function () {
             var newdate = new Date();
             var today = moment(newdate).add(2, 'hours');
@@ -246,6 +247,7 @@
             var patientType = '<%=Session["PatientType"]%>';
             
             //console.log(code);
+           
             if (personDOB != null && personDOB !="") {
                 $("#DateOfBirth").addClass("noneevents");
                 personDOB = new Date(personDOB);
@@ -713,7 +715,16 @@
 
                         //console.log(messageResponse);
                         if (messageResponse.DOB != null) {
-                            $("#PersonDOB").val(messageResponse.DOB);
+
+                            var personDOB = '<%=Session["PersonDob"]%>';
+                            if (personDOB != null && personDOB != "") {
+                                $("#DateOfBirth").addClass("noneevents");
+                                personDOB = new Date(personDOB);
+                                $('#PersonDOB').val(moment(personDOB.toISOString()).format('DD-MMM-YYYY'));
+                            }
+                            else {
+                                $("#PersonDOB").val(messageResponse.DOB);
+                            }
                             $("#<%=dobPrecision.ClientID%>").val(messageResponse.DobPrecision);
                             $("#PersonDOB").prop('disabled', true);
                         }
