@@ -33,6 +33,5 @@ namespace IQCare.Lab.BusinessProcess.Commands
     public class AddLabOrderResponse
     {
         public int LabOrderId { get; set; }
-        public List<LabOrderTest> LabOrderTests { get; set; }
     }
 }

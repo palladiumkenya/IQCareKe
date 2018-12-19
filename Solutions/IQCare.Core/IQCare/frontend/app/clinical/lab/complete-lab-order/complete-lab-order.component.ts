@@ -17,6 +17,9 @@ export class CompleteLabOrderComponent implements OnInit {
   completedLabTests : any[] = [];
   pendingLabTests : any[] = [];
 
+  pending_labs_displaycolumns : any[] = ['test','orderReason','orderDate','status','action'];
+  completed_labs_displaycolumns : any[] = ['test','orderReason','orderDate','result','unit'];
+
   completedLabsDataSource = new MatTableDataSource(this.completedLabTests);
   pendingLabsDataSource = new MatTableDataSource(this.pendingLabsDataSource);
   
@@ -38,31 +41,40 @@ export class CompleteLabOrderComponent implements OnInit {
 
   public buildLabTestsGrid(patientId: number) {
       this.labOrderService.getLabTestResults(patientId,null).subscribe(res=>{
-             this.labTestResults.push({
-               labOrderTestId : res.labOrderTestId,
-               test : res.labTestName,
-               orderDate : res.sampleDate,
-               orderReason : res.orderReason,
-               labTestId : res.labTestId,
-               unit : res.resultUnits,
-               resultDate : res.resultDate,
-               result : res.resultTexts,
-               status : res.resultStatus
-             });
+            if(res.length == 0)
+                return;
+               res.forEach(test => {               
+                this.labTestResults.push({
+                  labOrderTestId : test.labOrderTestId,
+                  test : test.labTestName,
+                  orderDate : test.orderDate,
+                  orderReason : test.orderReason,
+                  labTestId : test.labTestId,
+                  unit : test.resultUnits,
+                  resultDate : test.resultDate,
+                  result : test.resultTexts,
+                  status : test.resultStatus
+                });                
+               });
+                   
+             console.log(this.labTestResults.length + '>> Length');
 
         for (let index = 0; index < this.labTestResults.length; index++) 
         {
+          console.log(this.labTestResults[index].status + '>> Status');
+
             if(this.labTestResults[index].status =='Completed')
                this.completedLabTests.push(this.labTestResults[index]);
             else
                this.pendingLabTests.push(this.labTestResults[index]);
         }
         
+        console.log("Pending labs "+ this.pendingLabTests.length);
         this.completedLabsDataSource = new MatTableDataSource(this.completedLabTests);
         this.pendingLabsDataSource = new MatTableDataSource(this.pendingLabTests);
 
         this.completedLabsDataSource.paginator = this.paginator;
-        this.pendingLabsDataSource = this.paginator;
+        this.pendingLabsDataSource.paginator = this.paginator;
 
       },(error)=>
       {

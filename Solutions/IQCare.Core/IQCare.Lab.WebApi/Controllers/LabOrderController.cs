@@ -57,13 +57,12 @@ namespace IQCare.Lab.WebApi.Controllers
             return BadRequest(response);
         }
 
-
-        [HttpGet("{Id}/{status}")]
-        public async Task<IActionResult> GetLabTestResults(int patientId,LabOrderStatus ? status)
+        [HttpGet]
+        public async Task<IActionResult> GetLabTestResults(int patientId, string status)
         {
-            var response = await _mediator.Send(new GetLabTestResults { PatientId = patientId, Status = status });
+            var response = await _mediator.Send(new GetLabTestResults { PatientId = patientId, LabOrderStatus = status });
             if (response.IsValid)
-                return Ok(response);
+                return Ok(response.Value);
             return BadRequest(response);
         }
 

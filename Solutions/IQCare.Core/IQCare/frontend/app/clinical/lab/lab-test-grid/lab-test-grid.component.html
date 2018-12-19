@@ -22,8 +22,8 @@
         </mat-cell>
     </ng-container>
 
-      <tr mat-header-row *matHeaderRowDef="lab_test_displaycolumns"></tr>
-      <tr mat-row *matRowDef="let row; columns: lab_test_displaycolumns;"></tr>
+      <tr mat-header-row *matHeaderRowDef="labOrderTests_displaycolumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: labOrderTests_displaycolumns;"></tr>
     </mat-table>
     <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
 </div>

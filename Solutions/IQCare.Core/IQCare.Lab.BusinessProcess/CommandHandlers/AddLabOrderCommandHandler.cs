@@ -76,8 +76,7 @@ namespace IQCare.Lab.BusinessProcess.CommandHandlers
 
                     return Result<AddLabOrderResponse>.Valid(new AddLabOrderResponse
                     {
-                        LabOrderId = labOrder.Id,
-                        LabOrderTests = labOrderTests
+                        LabOrderId = labOrder.Id
                     });
                 }
                 catch (Exception ex)

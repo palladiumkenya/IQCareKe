@@ -29,12 +29,12 @@ namespace IQCare.Lab.BusinessProcess.QueryHandlers
             {
                 try
                 {
-                    var labTestResults = request.Status.HasValue
-                        ? _labUnitOfWork.Repository<PatientLabTracker>().Get(x =>
-                            x.PatientId == request.PatientId && x.Results == request.Status.ToString())
+                    var labTestResults =  !string.IsNullOrEmpty(request.LabOrderStatus)
+                        ? _labUnitOfWork.Repository<PatientLabTracker>()
+                            .Get(x =>x.PatientId == request.PatientId && x.Results == request.LabOrderStatus)
                         : _labUnitOfWork.Repository<PatientLabTracker>().Get(x => x.PatientId == request.PatientId);
                         
-                    var labTestModel = _mapper.Map<List<LabTestResultViewModel>>(labTestResults);
+                    var labTestModel = _mapper.Map<List<LabTestResultViewModel>>(labTestResults.OrderByDescending(x=>x.CreateDate));
 
                     return Task.FromResult(Result<List<LabTestResultViewModel>>.Valid(labTestModel));
                 }

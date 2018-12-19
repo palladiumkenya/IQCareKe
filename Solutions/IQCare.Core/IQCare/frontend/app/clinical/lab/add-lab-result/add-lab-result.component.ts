@@ -1,7 +1,7 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { FormGroup, FormBuilder, FormControl } from '@angular/forms';
 import { LaborderService } from '../../_services/laborder.service';
-import { CompleteLabOrderCommand, AddLabTestResultCommand } from '../../_models/CompleteLabOrderCommand';
+import { CompleteLabOrderCommand, AddLabTestResultCommand, ResultDataType } from '../../_models/CompleteLabOrderCommand';
 import { SnotifyService } from 'ng-snotify';
 import { NotificationService } from '../../../shared/_services/notification.service';
 
@@ -19,6 +19,12 @@ export class AddLabResultComponent implements OnInit {
   labTestId : any;
   labOrderTestId : any;
   userId : any;
+  isText : boolean;
+  isNumeric : boolean;
+  isSelect : boolean;
+  labTestResultOptions : any[];
+  resultDataTypes : ResultDataType;
+
   addLabResultForm : FormGroup;
   @Output() notify: EventEmitter<FormGroup> = new EventEmitter<FormGroup>();
 
@@ -37,16 +43,21 @@ export class AddLabResultComponent implements OnInit {
             detectionLimit : new FormControl(''),
             paramater : new FormControl('')
        });
+       this.resultDataTypes = new ResultDataType();
        this.notify.emit(this.addLabResultForm);
        this.userId = JSON.parse(localStorage.getItem('appUserId'));
    }
 
-  ngOnInit() {
+  ngOnInit() 
+  {
+     this.isNumeric = this.resultDataType == this.resultDataTypes.Numeric;
+     this.isText = this.resultDataType == this.resultDataTypes.Text;
+     this.isSelect = this.resultDataType == this.resultDataTypes.Select;
   }
 
    labTestResults : AddLabTestResultCommand [] = [];
 
-   private submitLabResult() {
+   public submitLabResult() {
     if(this.addLabResultForm.invalid)
          return;
 
