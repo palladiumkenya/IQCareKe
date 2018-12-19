@@ -12,7 +12,7 @@ namespace IQCare.PMTCT.Core.Models.HEI
         public int SputumSmear { get; set; }
         public int ChestXray { get; set; }
         public bool? StartAntiTb { get; set; }
-        public int InvitationOfContacts { get; set; }
+        public bool? InvitationOfContacts { get; set; }
         public bool? EvaluatedForIpt { get; set; }
         public bool DeleteFlag { get; set; }
         public int CreatedBy { get; set; }

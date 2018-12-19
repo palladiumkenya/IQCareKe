@@ -293,7 +293,7 @@ export class HeiComponent implements OnInit {
     }
 
     onImmunizationHistory(formGroup: Object): void {
-        this.immunizationHistoryFormGroup.push(formGroup['form']);
+        // this.immunizationHistoryFormGroup.push(formGroup['form']);
         this.immunization_table_data.push(formGroup['data']);
     }
 
@@ -381,6 +381,36 @@ export class HeiComponent implements OnInit {
             CreatedBy: this.userId
         };
 
+        const patientIcf = {
+            Id: 0,
+            PatientId: this.patientId,
+            PatientMasterVisitId: this.patientMasterVisitId,
+            CreateDate: new Date(),
+            CreatedBy: this.userId,
+            OnAntiTbDrugs: this.tbAssessmentFormGroup.value[0]['currentlyOnAntiTb'],
+            Cough: this.tbAssessmentFormGroup.value[0]['coughAnyDuration'],
+            Fever: this.tbAssessmentFormGroup.value[0]['fever'],
+            WeightLoss: this.tbAssessmentFormGroup.value[0]['weightLoss'],
+            ContactWithTb: this.tbAssessmentFormGroup.value[0]['contactTB'],
+
+        } as PatientIcf;
+
+        const patientIcfAction = {
+            Id: 0,
+            PatientId: this.patientId,
+            PatientMasterVisitId: this.patientMasterVisitId,
+            CreateDate: new Date(),
+            CreatedBy: this.userId,
+            SputumSmear: this.tbAssessmentFormGroup.value[0]['sputumSmear'],
+            ChestXray: this.tbAssessmentFormGroup.value[0]['chestXray'],
+            GeneXpert: this.tbAssessmentFormGroup.value[0]['geneXpert'],
+            StartAntiTb: this.tbAssessmentFormGroup.value[0]['startAntiTb'],
+            EvaluatedForIpt: this.tbAssessmentFormGroup.value[0]['EvaluatedForAAntitb'],
+            InvitationOfContacts: this.tbAssessmentFormGroup.value[0]['invitationContacts'],
+        } as PatientIcfAction;
+
+
+        const heitbAssessment = this.heiService.saveTbAssessment(patientIcf, patientIcfAction);
         const heiDeliveryEditCommand = this.heiService.updateHeiDelivery(heiDeliveryCommand);
         const heiFeedingEditCommand = this.heiService.updateHeiInfantFeeding(heiFeedingCommand);
         const heiOutCome = this.heiService.saveHeiOutCome(heiOutComeCommand);
@@ -394,7 +424,7 @@ export class HeiComponent implements OnInit {
         }
 
         forkJoin([heiDeliveryEditCommand, heiFeedingEditCommand, heiOutCome,
-            isAddOrInsertAppointment]).subscribe(
+            isAddOrInsertAppointment, heitbAssessment]).subscribe(
                 (result) => {
                     console.log(result);
 
@@ -629,7 +659,8 @@ export class HeiComponent implements OnInit {
             heiMilestone,
             heiDelivery,
             heiFeeding,
-            heiAppoinment
+            heiAppoinment,
+            heitbAssessment
         ]).subscribe(
             (result) => {
                 console.log(result);
