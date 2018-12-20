@@ -9,6 +9,8 @@ namespace IQCare.Lab.Infrastructure.Mapping
         public void Configure(EntityTypeBuilder<LabOrder> builder)
         {
             builder.ToTable("ord_LabOrder").HasKey(c => c.Id);
+            builder.ToTable("ord_LabOrder")
+                .HasMany(x => x.LabOrderTests).WithOne(x => x.LabOrder);
         }
     }
 }

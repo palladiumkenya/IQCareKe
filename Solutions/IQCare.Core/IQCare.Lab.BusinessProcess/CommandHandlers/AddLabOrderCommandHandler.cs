@@ -32,12 +32,17 @@ namespace IQCare.Lab.BusinessProcess.CommandHandlers
             {
                 try
                 {
+                    if (request.LabTests == null)
+                     throw new ArgumentException("LabTests details not found");
+
                     var labOrder = _mapper.Map<LabOrder>(request);
                     await _labUnitOfWork.Repository<LabOrder>().AddAsync(labOrder);
                     await _labUnitOfWork.SaveAsync();
 
-                    var labOrderTests = request.LabTests.Select(x => new LabOrderTest(labOrder.Id, x.Id, x.Notes, request.UserId, false))
+                    var labOrderTests = request.LabTests
+                        .Select(x => new LabOrderTest(labOrder.Id, x.Id, x.Notes, request.UserId, false))
                         .ToList();
+
                     await _labUnitOfWork.Repository<LabOrderTest>().AddRangeAsync(labOrderTests);
                     await _labUnitOfWork.SaveAsync();
 
@@ -50,8 +55,16 @@ namespace IQCare.Lab.BusinessProcess.CommandHandlers
                         var parameterCount = _labUnitOfWork.Repository<LabTest>().Get(x => x.Id == labOrderTest.LabTestId)
                             .SingleOrDefault()?.ParameterCount;
 
-                        if (parameterCount != 1) continue;
-                        var patientLabTacker = new PatientLabTracker(request.PatientId, labName, request.PatientMasterVisitId, labOrderTest.LabTestId, labOrder.Id, request.LocationId, request.OrderDate, request.UserId, null);
+                        if (parameterCount == 0)
+                            continue;
+
+                        var orderReason = request.LabTests.SingleOrDefault(x => x.Id == labOrderTest.LabTestId)
+                            ?.OrderReason;
+
+                        var patientLabTacker = new PatientLabTracker(request.PatientId, labName,
+                            request.PatientMasterVisitId, labOrderTest.LabTestId,
+                            labOrder.Id, labOrderTest.Id, request.LocationId, request.OrderDate, request.UserId,
+                            orderReason, null);
 
                         patientLabTrackers.Add(patientLabTacker);
                     }
@@ -63,8 +76,7 @@ namespace IQCare.Lab.BusinessProcess.CommandHandlers
 
                     return Result<AddLabOrderResponse>.Valid(new AddLabOrderResponse
                     {
-                        LabOrderId = labOrder.Id,
-                        LabOrderTests = labOrderTests
+                        LabOrderId = labOrder.Id
                     });
                 }
                 catch (Exception ex)

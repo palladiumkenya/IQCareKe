@@ -1,5 +1,6 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { MatPaginator, MatTableDataSource } from '@angular/material';
+import { Component, OnInit, ViewChild, Input } from '@angular/core';
+import { MatTableDataSource, MatPaginator } from '@angular/material';
+import { LaborderService } from '../../_services/laborder.service';
 
 @Component({
   selector: 'app-lab-test-grid',
@@ -7,15 +8,24 @@ import { MatPaginator, MatTableDataSource } from '@angular/material';
   styleUrls: ['./lab-test-grid.component.css']
 })
 export class LabTestGridComponent implements OnInit {
-
-  lab_test_data: any[] = [];
-  LabTestDataSource = new MatTableDataSource(this.lab_test_data);
-  lab_test_displaycolumns = ['test', 'orderReason', 'testNotes', 'action'];
+  @Input("PatientId") PatientId : number;
   @ViewChild(MatPaginator) paginator: MatPaginator;
-  
-  constructor() { }
+
+  labOrderTests: any[] = [];
+  labOrderTests_displaycolumns = ['test', 'orderReason', 'testNotes', 'action'];
+  dataSource =  new MatTableDataSource(this.labOrderTests);
+
+  constructor(private labOrderService:LaborderService) {
+   }
 
   ngOnInit() {
+    
+  }
+
+  public getPatientLabOrders(status:string) {
+    this.labOrderService.getLabOrders(this.PatientId,status).subscribe(result=>{
+         console.log("LAb tests result >> "+ result);
+    }) 
   }
 
 }

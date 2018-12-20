@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections;
+using System.Collections.Generic;
 
 namespace IQCare.Lab.Core.Models
 {
@@ -75,6 +77,8 @@ namespace IQCare.Lab.Core.Models
         public int PatientMasterVisitId { get; private set; }
 
         public string AuditData { get; private set; }
+
+        public virtual ICollection<LabOrderTest> LabOrderTests { get; set; }
 
         public  void CompleteOrder()
         {
