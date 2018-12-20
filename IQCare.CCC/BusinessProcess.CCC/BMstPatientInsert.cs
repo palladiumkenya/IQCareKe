@@ -60,5 +60,15 @@ namespace BusinessProcess.CCC
 
             DataTable dt = (DataTable)obj.ReturnObject(ClsUtility.theParams, "Ord_Visit_Insert", ClsUtility.ObjectEnum.DataTable);
         }
+
+        public void UpdateBlueCardCCCNumber(int ptn_pk, string patientEnrollmentID)
+        {
+            ClsObject obj = new ClsObject();
+            ClsUtility.Init_Hashtable();
+            ClsUtility.AddExtendedParameters("@Ptn_Pk", SqlDbType.Int, ptn_pk);
+            ClsUtility.AddExtendedParameters("@PatientEnrollmentID", SqlDbType.VarChar, patientEnrollmentID);
+
+            DataTable dt = (DataTable)obj.ReturnObject(ClsUtility.theParams, "mstPatient_Update", ClsUtility.ObjectEnum.DataTable);
+        }
     }
 }

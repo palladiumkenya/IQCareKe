@@ -27,5 +27,10 @@ namespace IQCare.CCC.UILogic
         {
             _mgr.AddOrdVisit(ptnPk, locationId, visitDate, visitType, userId, createDate, moduleId);
         }
+
+        public void UpdateBlueCardCCCNumber(int ptn_pk, string patientEnrollmentID)
+        {
+            _mgr.UpdateBlueCardCCCNumber(ptn_pk, patientEnrollmentID);
+        }
     }
 }
