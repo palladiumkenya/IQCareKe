@@ -452,6 +452,10 @@ namespace IQCare.Web.CCC.WebService
                                 };
                                 greencardlookup.AddPersonToBlueCardLookup(greenCardLookup);
                             }
+                            else
+                            {
+                                mstPatientLogic.UpdateBlueCardCCCNumber(greencardptnpk[0].Ptn_Pk, enrollmentBlueCardId);
+                            }
                         }
                         pk.Add(patientLookManager.GetPatientByPersonId(PersonId));
                         List<PatientEntity> listPatient = new List<PatientEntity>();

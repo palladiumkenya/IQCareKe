@@ -256,8 +256,10 @@
                                 <label class="control-label pull-left">CCC Number</label>
                             </div>
                             <div class="col-md-12" id="cccnum">
+                                <div><%# PatientIdentifier.ValidatorRegex %></div>
                                <!-- data-parsley-pattern-message="# PatientIdentifier.FailedValidationMessage.ToString() %>" data-parsley-pattern="<# PatientIdentifier.ValidatorRegex %>"-->
-                               <asp:TextBox   id="cccNumber" name="cccNumber" class="form-control input-sm" type="text" data-parsley-trigger="keyup" data-parsley-pattern-message="<%# PatientIdentifier.FailedValidationMessage %>" data-parsley-pattern="<%# PatientIdentifier.ValidatorRegex %>" runat="server"/>
+                                <asp:Panel ID="placeholder" runat="server"></asp:Panel>
+                               <asp:TextBox   id="cccNumber" name="cccNumber" class="form-control input-sm" type="text" data-parsley-trigger="keyup"  runat="server"/>
                             </div>
                         </div>
                     </div>
@@ -677,6 +679,10 @@
        
         var maxLength = <%=maxLength %>;
         var minLength = <%=minLength%>;
+
+        var FailedValidationMessage = '<%=PatientIdentifier.FailedValidationMessage%>';
+        var ValidatorRegex =  '<%=PatientIdentifier.ValidatorRegex%>';
+
         $(document).ready(function () {
             window.patientAge = <%=PatientAge%>;
             var date = moment("<%=PatientDateOfBirth%>").format('DD-MMM-YYYY');
@@ -689,9 +695,17 @@
             var todayDatePicker = moment(todayDate).add(2, 'hours');
 
             $("#<%=cccNumber.ClientID%>").attr({
-                "min": minLength,
-                "max": maxLength
+                // "min": minLength,
+                // "max": maxLength
             });
+
+            var myCCCNumber = document.getElementById('ctl00_IQCareContentPlaceHolder_cccNumber');
+            myCCCNumber.setAttribute('data-parsley-pattern-message', FailedValidationMessage);
+            myCCCNumber.setAttribute('data-parsley-pattern', ValidatorRegex);
+
+
+
+            $("#ctl00_IQCareContentPlaceHolder_placeholder").append();
 
             //console.log(gender);
 
