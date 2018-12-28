@@ -14,6 +14,7 @@ export class ImmunizationComponent implements OnInit {
     vaccines: LookupItemView[] = [];
     immunizationperiods: LookupItemView[] = [];
     yesnoOptions: LookupItemView[] = [];
+    public maxDate: Date;
 
     constructor(private _formBuilder: FormBuilder,
         private dialogRef: MatDialogRef<ImmunizationComponent>,
@@ -24,6 +25,7 @@ export class ImmunizationComponent implements OnInit {
         this.vaccines = data.vaccines;
         this.yesnoOptions = data.yesnoOptions;
 
+        this.maxDate = new Date();
         this.title = 'Immunization';
     }
 
