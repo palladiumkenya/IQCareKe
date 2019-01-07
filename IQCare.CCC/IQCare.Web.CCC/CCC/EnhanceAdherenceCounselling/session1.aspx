@@ -265,6 +265,7 @@
             getMmas8Recommendation(mmas8TotalScore);
         });
     }
+
     $("#sessionviralloadpane input:radio").change(function (evt, data) {
         var radioButtons = $("input[type='radio']");
         var selectedValue = $(this).val();
@@ -332,7 +333,38 @@
     $(document).ready(function () {
           $('.session1loading').show();
         var PatientMasterVisitId = GetURLParameter('visitId');
-       var patientId = '<%=PatientId%>';
+        var patientId = '<%=PatientId%>';
+        var SRNQuestion1='<%=SessionRefferal1ItemId%>';
+        var SRNQuestion3 = '<%=SessionRefferal3ItemId%>';
+
+        var ItemNo = '<%=ItemNo%>';
+        var ItemYes = '<%=ItemYes%>';
+
+         $("input:radio[name='session1rb"+SRNQuestion1+ "']").change(function (evt, data) {
+        //var radioButtons = $("input[type='radio']");
+             var selectedValue = $(this).val();
+             if (selectedValue > 0) {
+                 if (selectedValue == ItemYes) {
+
+
+                 
+
+                     $("#session1tb" + SRNQuestion3).prop('disabled', false);
+                 }
+                 else {
+
+                     $("#session1tb" + SRNQuestion3).prop('disabled', true);
+                 }
+             }
+             else {
+                 $("#session1tb" + SRNQuestion3).prop('disabled', false);
+             }
+       // var selectedIndex = radioButtons.index(radioButtons.filter(':checked'));
+       // var parentPanel = $(this).parent().closest('.row').attr('id').split(' ');
+       // var rbName = $(this).attr('name');
+        //showhidenotes(parentPanel, selectedValue, rbName);
+            });
+
        // var pagehash = window.location.hash;
         $('.session1loading').show();
         if (PatientMasterVisitId > 0
@@ -540,6 +572,8 @@
             //hide craffft subsequent panel
             $(".session1mmascontainer .mmas8container").hide();
         }
+
+
         $("#socioeconomicbarrierssection input[type=radio]:checked").each(function () {
             var selectedValue = $(this).val();
             var rbName = $(this).attr('name');
@@ -552,6 +586,10 @@
         }, 'fast');
         //$('#session1statusmodal').modal('hide');
     }
+
+
+  
+
     function showhidenotes(parentPanel, selectedValue, rbName) {
         var radioButtons = $("#socioeconomicbarrierssection input[name='" + rbName + "']");
         var selectedIndex = radioButtons.index(radioButtons.filter(':checked'));

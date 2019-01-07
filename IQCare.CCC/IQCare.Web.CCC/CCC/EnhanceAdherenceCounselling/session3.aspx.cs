@@ -32,6 +32,10 @@ namespace IQCare.Web.CCC.UC.EnhanceAdherenceCounselling
         public string differentiatedCareId;
         public string followupStatusId;
         public TextBox appointmentDateTb;
+        public string Session3Refferal1ItemId;
+        public string Session3Refferal3ItemId;
+        public string ItemYes;
+        public string ItemNo;
         protected void Page_Load(object sender, EventArgs e)
         {
             PatientId = Convert.ToInt32(HttpContext.Current.Session["PatientPK"]);
@@ -41,6 +45,10 @@ namespace IQCare.Web.CCC.UC.EnhanceAdherenceCounselling
             reasonId = LookupLogic.GetLookupItemId("Follow Up");
             differentiatedCareId = LookupLogic.GetLookupItemId("Standard Care");
             followupStatusId = LookupLogic.GetLookupItemId("Pending");
+            Session3Refferal1ItemId = LookupLogic.GetLookupItemId("Session3ReferralsNetworksQ1");
+            Session3Refferal3ItemId = LookupLogic.GetLookupItemId("Session3ReferralsNetworksQ3");
+            ItemYes = LookupLogic.GetLookupItemId("Yes");
+            ItemNo = LookupLogic.GetLookupItemId("No");
             if (!IsPostBack)
             {
                 populateMMAS();
