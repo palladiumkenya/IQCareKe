@@ -1,13 +1,13 @@
-import {Component, NgZone, OnInit} from '@angular/core';
-import {ActivatedRoute, Router} from '@angular/router';
-import {DataSource} from '@angular/cdk/collections';
-import {Observable} from 'rxjs';
-import {FamilyService} from '../_services/family.service';
+import { Component, NgZone, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { DataSource } from '@angular/cdk/collections';
+import { Observable } from 'rxjs';
+import { FamilyService } from '../_services/family.service';
 
 @Component({
-  selector: 'app-family',
-  templateUrl: './family.component.html',
-  styleUrls: ['./family.component.css']
+    selector: 'app-family',
+    templateUrl: './family.component.html',
+    styleUrls: ['./family.component.css']
 })
 export class FamilyComponent implements OnInit {
     patientId: number;
@@ -17,9 +17,9 @@ export class FamilyComponent implements OnInit {
     dataSource = new FamilyDataSource(this.familyService, this.patientId);
 
     constructor(private router: Router,
-                private route: ActivatedRoute,
-                public zone: NgZone,
-                private familyService: FamilyService) { }
+        private route: ActivatedRoute,
+        public zone: NgZone,
+        private familyService: FamilyService) { }
 
     ngOnInit() {
         this.patientId = JSON.parse(localStorage.getItem('patientId'));
@@ -33,7 +33,7 @@ export class FamilyComponent implements OnInit {
             'family': 1
         };
         localStorage.setItem('isPartner', JSON.stringify(newPartner));
-        this.zone.run(() => { this.router.navigate(['/registration/register'], {relativeTo: this.route}); });
+        this.zone.run(() => { this.router.navigate(['/registration/register'], { relativeTo: this.route }); });
     }
 
     getSelectedRow(row) {
@@ -43,7 +43,7 @@ export class FamilyComponent implements OnInit {
     }
 
     screenClient(row) {
-        console.log(row);
+        // console.log(row);
         localStorage.setItem('partnerId', row['personId']);
         this.zone.run(() => { this.router.navigate(['/hts/family/screening'], { relativeTo: this.route }); });
     }

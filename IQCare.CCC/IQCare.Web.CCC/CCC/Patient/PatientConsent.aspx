@@ -225,7 +225,10 @@
                     return false;
                 }
                 for (var i = 0, len = patientConsent.length; i < len; i++) {
-                    addPatientConsent(patientConsent[i]);
+                    // addPatientConsent(patientConsent[i]);
+                    var consentType = patientConsent[i].consentType;
+                    var patientId = <%=PatientId%>;
+                    getPatientConsentByType(patientId, consentType, patientConsent[i]);
                 }
                 
             });
@@ -258,6 +261,27 @@
             });
 
         });
+
+        function getPatientConsentByType(patientId, consentType, patientConsent) {
+            $.ajax({
+                type: "POST",
+                url: "../WebService/PatientService.asmx/GetPatientConsentByType",
+                data: "{'patientId': '" + patientId + "','consentType': '" + consentType + "'}",
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (response) {
+                    console.log(response);
+                    if (response.d.length > 0) {
+                        console.log(patientConsent);
+                    } else {
+                        addPatientConsent(patientConsent);
+                    }
+                },
+                error: function (response) {
+                    toastr.error(response.d, "Patient consent not saved");
+                }
+            });
+        }
 
         function addPatientConsent(consent) {
             var consentType = consent.consentType;

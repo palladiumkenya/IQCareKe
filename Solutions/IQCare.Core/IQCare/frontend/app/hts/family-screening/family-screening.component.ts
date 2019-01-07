@@ -55,9 +55,9 @@ export class FamilyScreeningComponent implements OnInit {
     }
 
     onSubmit() {
-        console.log(this.formGroup);
+        // console.log(this.formGroup);
         if (this.formGroup.valid) {
-            console.log('valid');
+            // console.log('valid');
             this.familyScreening = Object.assign(this.familyScreening, this.formGroup.value);
 
             this.familyScreening.personId = JSON.parse(localStorage.getItem('partnerId'));
@@ -90,7 +90,7 @@ export class FamilyScreeningComponent implements OnInit {
             this.familyScreening.dateOfScreening = moment(this.familyScreening.dateOfScreening).toDate().toDateString();
 
             this.familyService.addFamilyScreening(this.familyScreening, arr).subscribe(res => {
-                console.log('res');
+                // console.log('res');
                 this.snotifyService.success('Successfully saved family screening',
                     'Family Screening', this.notificationService.getConfig());
                 this.zone.run(() => { this.router.navigate(['/hts/family'], { relativeTo: this.route }); });
@@ -98,7 +98,7 @@ export class FamilyScreeningComponent implements OnInit {
                 this.snotifyService.error('Error saving family screening ' + err,
                     'Family Screening', this.notificationService.getConfig());
             });
-            console.log(this.familyScreening);
+            // console.log(this.familyScreening);
         } else {
             console.log('invalid');
             return;
