@@ -12,19 +12,21 @@ namespace IQCare.Lab.Core.Models
 
         }
 
-        public PatientLabTracker(int patientId, string labName, int patientMasterVisitId,int labTestId,int labOrderId, 
-            int facilityId, DateTime ? sampleDate, int createdBy, string auditData)
+        public PatientLabTracker(int patientId, string labName, int patientMasterVisitId,int labTestId,int labOrderId, int labOrderTestId,
+            int facilityId, DateTime ? sampleDate, int createdBy, string orderReason, string auditData)
         {
             PatientId = patientId;
             LabName = labName;
             PatientMasterVisitId = patientMasterVisitId;
             LabTestId = labTestId;
             LabOrderId = labOrderId;
+            LabOrderTestId = labOrderTestId;
             FacilityId = facilityId;
             CreatedBy = createdBy;
             CreateDate = DateTime.Now;
             Results = LabOrderStatus.Pending.ToString();
             SampleDate = sampleDate;
+            Reasons = orderReason;
             AuditData = auditData;
         }
 

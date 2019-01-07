@@ -4,6 +4,7 @@ using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Threading.Tasks;
+using IQCare.Lab.Core.Models;
 
 namespace IQCare.Lab.WebApi.Controllers
 {
@@ -36,13 +37,36 @@ namespace IQCare.Lab.WebApi.Controllers
             return BadRequest(response);
         }
 
-        [HttpGet("{Id}")]
-        public async Task<IActionResult> GetLabOrderTestResultsByPatientId(int id)
+        [HttpGet("{id}/{status}")]
+        public async Task<IActionResult> GetLabOrdersByPatientId(int id, string status="Completed")
         {
-            var labTestResults = await _mediator.Send(new GetLabTestResults { PatientId = id });
-            return Ok(labTestResults);
+            var result = await _mediator.Send(new GetLabOrdersQuery {OrderStatus = status, PatientId = id});
+
+            if (result.IsValid)
+                return Ok(result.Value);
+
+            return BadRequest(result);
         }
 
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetLabOrderTestsByOrderId(int id)
+        {
+            var response = await  _mediator.Send(new GetLabTestByOrderId {Id = id});
+            if (response.IsValid)
+                return Ok(response.Value);
+            return BadRequest(response);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> GetLabTestResults(int patientId, string status)
+        {
+            var response = await _mediator.Send(new GetLabTestResults { PatientId = patientId, LabOrderStatus = status });
+            if (response.IsValid)
+                return Ok(response.Value);
+            return BadRequest(response);
+        }
+
+        
         [HttpPost]
         public async Task<IActionResult> CompleteLabOrder([FromBody] CompleteLabOrderCommand completeLabOrder)
         {

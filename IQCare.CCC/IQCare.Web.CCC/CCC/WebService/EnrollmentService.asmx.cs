@@ -452,6 +452,10 @@ namespace IQCare.Web.CCC.WebService
                                 };
                                 greencardlookup.AddPersonToBlueCardLookup(greenCardLookup);
                             }
+                            else
+                            {
+                                mstPatientLogic.UpdateBlueCardCCCNumber(greencardptnpk[0].Ptn_Pk, enrollmentBlueCardId);
+                            }
                         }
                         pk.Add(patientLookManager.GetPatientByPersonId(PersonId));
                         List<PatientEntity> listPatient = new List<PatientEntity>();
@@ -463,7 +467,10 @@ namespace IQCare.Web.CCC.WebService
 
                         PatientEntity updatePatient = new PatientEntity();
                         updatePatient.ptn_pk = patient.ptn_pk;
-                        updatePatient.DateOfBirth = patient.DateOfBirth;
+                      
+                            updatePatient.DateOfBirth = DateTime.Parse(personDateOfBirth);
+                        
+                       // updatePatient.DateOfBirth = patient.DateOfBirth;
                         updatePatient.NationalId = nationalId;
                         updatePatient.FacilityId = patient.FacilityId;
 
