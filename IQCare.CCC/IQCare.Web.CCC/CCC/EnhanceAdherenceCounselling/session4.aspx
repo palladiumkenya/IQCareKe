@@ -456,6 +456,35 @@
  
          var PatientMasterVisitId = GetURLParameter('visitId');
         var patientId = '<%=PatientId%>';
+        var SRNQuestion1='<%=Session4Refferal1ItemId%>';
+        var SRNQuestion3 = '<%=Session4Refferal3ItemId%>';
+
+        var ItemNo = '<%=ItemNo%>';
+        var ItemYes = '<%=ItemYes%>';
+
+         $("input:radio[name='session4rb"+SRNQuestion1+ "']").change(function (evt, data) {
+        
+             var selectedValue = $(this).val();
+             if (selectedValue > 0) {
+                 if (selectedValue == ItemYes) {
+
+
+                   
+
+                     $("#session4tb" + SRNQuestion3).prop('disabled', false);
+                 }
+                 else {
+
+                     $("#session4tb" + SRNQuestion3).prop('disabled', true);
+                 }
+             }
+             else {
+                 $("#session4tb" + SRNQuestion3).prop('disabled', false);
+             }
+ 
+            });
+
+
         $.ajax({
             type: "POST",
             url: "../WebService/PatientClinicalNotesService.asmx/getPatientNotesByVisitId",

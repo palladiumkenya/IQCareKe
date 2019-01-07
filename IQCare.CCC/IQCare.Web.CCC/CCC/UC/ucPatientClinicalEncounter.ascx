@@ -2726,6 +2726,8 @@
 
     $(document).ready(function () {
         var encounterExists = "<%=PatientEncounterExists%>";
+       
+
         $('.errorBlock1').hide();
         $('.errorBlock2').hide();
         $('.errorBlock3').hide();
@@ -5004,9 +5006,12 @@
 			return selectedValues;
 		}
 
+        var visitByTS = $('#ddlVisitBy').find(":selected").text();
+
+        
 		//$("#AppointmentDate").val("");
 
-		if (encounterExists > 0) {
+		if (encounterExists > 0 && visitByTS !=="Treatment Supporter") {
 			//var $wizard = $('#myWizard').wizard();
 			//var wizard = $wizard.data('wizard');
 			//$wizard.off('click', 'li.complete');
