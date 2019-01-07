@@ -94,6 +94,8 @@ namespace IQCare.Web.Laboratory
             }
             txtlaborderedbydate.Attributes.Add("onkeyup", "DateFormat(this,this.value,event,false,'3')");
             txtlaborderedbydate.Attributes.Add("onblur", "DateFormat(this,this.value,event,true,'3')");
+            txtlabReportedbyDate.Attributes.Add("onkeyup", "DateFormat(this,this.value,event,false,'3')");
+            txtlabReportedbyDate.Attributes.Add("onblur", "DateFormat(this,this.value,event,true,'3')");
             txtLabtobeDone.Attributes.Add("onkeyup", "DateFormat(this,this.value,event,false,'3')");
             txtLabtobeDone.Attributes.Add("onblur", "DateFormat(this,this.value,event,true,'3')");
             (Master.FindControl("levelOneNavigationUserControl1").FindControl("lblRoot") as Label).Text = "Laboratory >> ";

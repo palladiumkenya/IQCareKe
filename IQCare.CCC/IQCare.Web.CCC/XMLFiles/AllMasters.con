@@ -14642,16 +14642,7 @@
     <DeleteFlag>0</DeleteFlag>
     <SatelliteID>0</SatelliteID>
     <SystemID>1</SystemID>
-    <FacilityAddress>P.O BOX 1134-5678</FacilityAddress>
-    <FacilityTel>0789567899</FacilityTel>
-    <FacilityCell />
-    <FacilityFax />
-    <FacilityEmail />
-    <FacilityURL />
-    <FacilityFooter />
     <FacilityTemplate>0</FacilityTemplate>
-    <FacilityLogo>Demo Facility.jpg</FacilityLogo>
-    <StrongPassFlag>0</StrongPassFlag>
   </Mst_Facility>
   <Mst_Facility>
     <FacilityName>mwala D/H</FacilityName>

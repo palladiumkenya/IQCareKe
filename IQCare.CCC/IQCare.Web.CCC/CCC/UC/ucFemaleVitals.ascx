@@ -303,7 +303,7 @@
                  return false;
              }
              lmpDate = moment(lmp).format('DD-MMM-YYYY');
-             $("#ExpectedDateOfChildBirth").val(moment(moment(lmp).add(280, 'days')).format('DD-MMM-YYYY'));
+             $("#ExpectedDateOfChildBirth").val(moment(moment(lmp).add(7, 'days').add(9, 'months')).format('DD-MMM-YYYY'));
          });
 
          $('#FemaleVisitDate').on('dp.change', function (e) {
