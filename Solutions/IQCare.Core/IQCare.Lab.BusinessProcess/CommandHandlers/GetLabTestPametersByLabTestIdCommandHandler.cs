@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using IQCare.Lab.BusinessProcess.Commands;
@@ -12,7 +13,7 @@ using Serilog;
 
 namespace IQCare.Lab.BusinessProcess.CommandHandlers
 {
-    public class GetLabTestPametersByLabTestIdCommandHandler : IRequestHandler<GetLabTestPametersByLabTestIdCommand, Result<List<LabTestParameter>>>
+    public class GetLabTestPametersByLabTestIdCommandHandler : IRequestHandler<GetLabTestPametersByLabTestIdCommand, Result<List<LabTestParamaterViewModel>>>
     {
         private readonly ILabUnitOfWork _labUnitOfWork;
 
@@ -21,20 +22,32 @@ namespace IQCare.Lab.BusinessProcess.CommandHandlers
             _labUnitOfWork = labUnitOfWork;
         }
 
-        public async Task<Result<List<LabTestParameter>>> Handle(GetLabTestPametersByLabTestIdCommand request, CancellationToken cancellationToken)
+        public async Task<Result<List<LabTestParamaterViewModel>>> Handle(GetLabTestPametersByLabTestIdCommand request, CancellationToken cancellationToken)
         {
+
             using (_labUnitOfWork)
             {
                 try
                 {
-                    var result = await _labUnitOfWork.Repository<LabTestParameter>()
-                        .Get(x => x.LabTestId == request.LabTestId && x.DeleteFlag == false).ToListAsync();
-                    return Result<List<LabTestParameter>>.Valid(result);
+                    var labTestParams = await _labUnitOfWork.Repository<LabTestParameter>()
+                        .Get(x => x.LabTestId == request.LabTestId && x.DeleteFlag == false)
+                        .Include(x=>x.LabTestParameterConfig.Unit)
+                        .ToListAsync();
+
+
+                    var viewModel = labTestParams.Select(x => new LabTestParamaterViewModel
+                    {
+                        Id = x.Id, LabTestId = x.LabTestId, ParameterName = x.ParameterName,
+                        UnitId = x.LabTestParameterConfig.UnitId, DataType = x.DataType,
+                        UnitName = x.LabTestParameterConfig.Unit.UnitName
+                    }).ToList();
+
+                    return Result<List<LabTestParamaterViewModel>>.Valid(viewModel);
                 }
                 catch (Exception e)
                 {
                     Log.Error(e.Message + " " + e.InnerException);
-                    return Result<List<LabTestParameter>>.Invalid(e.Message);
+                    return Result<List<LabTestParamaterViewModel>>.Invalid(e.Message);
                 }
             }
         }

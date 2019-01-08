@@ -1,9 +1,10 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, Inject } from '@angular/core';
 import { FormGroup, FormBuilder, FormControl } from '@angular/forms';
 import { LaborderService } from '../../_services/laborder.service';
 import { CompleteLabOrderCommand, AddLabTestResultCommand, ResultDataType } from '../../_models/CompleteLabOrderCommand';
 import { SnotifyService } from 'ng-snotify';
 import { NotificationService } from '../../../shared/_services/notification.service';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 
 @Component({
   selector: 'app-add-lab-result',
@@ -24,6 +25,8 @@ export class AddLabResultComponent implements OnInit {
   isSelect : boolean;
   labTestResultOptions : any[];
   resultDataTypes : ResultDataType;
+  labTestParameters : any[] = [];
+  dialogTitle : string;
 
   addLabResultForm : FormGroup;
   @Output() notify: EventEmitter<FormGroup> = new EventEmitter<FormGroup>();
@@ -31,7 +34,9 @@ export class AddLabResultComponent implements OnInit {
   constructor(private formBuilder :FormBuilder, 
     private labOrderService: LaborderService,
     private  snotifyService : SnotifyService,
-    private notificationService: NotificationService) 
+    private notificationService: NotificationService,
+    private dialogRef: MatDialogRef<AddLabResultComponent>,
+    @Inject(MAT_DIALOG_DATA) data) 
     {
        
        this.addLabResultForm = this.formBuilder.group({
@@ -41,11 +46,15 @@ export class AddLabResultComponent implements OnInit {
             resultUnit :   new FormControl(''),
             undetectable :  new FormControl(''),
             detectionLimit : new FormControl(''),
-            paramater : new FormControl('')
+            parameter : new FormControl('')
        });
+
+       this.labTestParameters = data;
        this.resultDataTypes = new ResultDataType();
        this.notify.emit(this.addLabResultForm);
        this.userId = JSON.parse(localStorage.getItem('appUserId'));
+       this.labOrderService.currentLabTestParams.subscribe(param => this.labTestParameters = param);
+       this.dialogTitle = 'Submit Lab Test Results';
    }
 
   ngOnInit() 
@@ -99,5 +108,15 @@ export class AddLabResultComponent implements OnInit {
         }
       return labResultCommand;
    }
+
+   save() {
+    if (!this.addLabResultForm.valid) 
+          return;
+    this.dialogRef.close(this.addLabResultForm.value);   
+}
+
+close() {
+    this.dialogRef.close();
+}
 
 }

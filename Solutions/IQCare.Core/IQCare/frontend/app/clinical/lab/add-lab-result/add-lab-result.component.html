@@ -1,38 +1,31 @@
-<form class="form-group" novalidate [formGroup]="addLabResultForm">
-
+<h2 mat-dialog-title>{{dialogTitle}}</h2>
+<br>
+<mat-dialog-content>
+<form [formGroup]="addLabResultForm">
   <div class="row">
-      <div class="col-md-12">
-          <div class="form-title">
-              <span class="mat-accent">Submit {{labTest}} Result</span>
-          </div>
-      </div>
-  </div>
-
-  <div class="row">
-      <div class="col-lg-8 col-xs-12">
-          <mat-form-field class="col-lg-12">
-              <input matInput placeholder="Parameter Name" formControlName="parameter" required>
+      <div class="col-lg-3 col-sm-3 col-xs-12">
+          <mat-form-field>
+              <input matInput placeholder="Parameter Name" formControlName="parameter">
           </mat-form-field>
       </div>
-      <ng-template [ngIf]="isText">
-        <div class="col-lg-8 col-xs-12">
-            <mat-form-field class="col-lg-12">
-                <input matInput  placeholder="Result Text" formControlName="resutText" required>
+   
+        <div class="col-lg-3 col-sm-3 col-xs-12">
+            <mat-form-field>
+                <input matInput  placeholder="Result Text" formControlName="resultText">
             </mat-form-field>
         </div>
-      </ng-template>
      
       <ng-template  [ngIf]="isNumeric">
-        <div class="col-lg-8 col-xs-12">
-            <mat-form-field class="col-lg-12">
-                <input matInput type="number" placeholder="Result Text" formControlName="resultValue" required>
+        <div class="col-lg-3 col-sm-3 col-xs-12">
+            <mat-form-field>
+                <input matInput type="number" placeholder="Result Text" formControlName="resultValue">
             </mat-form-field>
         </div>
       </ng-template>
       
       <ng-template  [ngIf]="isSelect">
-        <div class="col-lg-3 col-xs-12">
-            <mat-form-field class="col-md-12">
+        <div class="col-lg-3 col-sm-3 col-xs-12">
+            <mat-form-field>
                 <mat-label>Select Result</mat-label>
                 <mat-select formControlName="resultOption" required>
                     <mat-option [value]="0">Select</mat-option>
@@ -45,28 +38,28 @@
       </ng-template>
     
 
-      <div class="col-lg-8 col-xs-12">
-          <mat-form-field class="col-lg-12">
-              <input matInput placeholder="Result Unit" formControlName="resultUnit" required>
+      <div class="col-lg-3 col-sm-3 col-xs-12">
+          <mat-form-field>
+              <input matInput placeholder="Result Unit" formControlName="resultUnit">
           </mat-form-field>
       </div>
   </div>
   <div class="row">
-      <div class="col-lg-8 col-xs-12">
-          <mat-form-field class="col-lg-12">
-              <input matInput type="checkbox" placeholder="Result Undetectable ?" formControlName="undetectable" required>
-          </mat-form-field>
+        <div class="col-lg-3 col-sm-3 col-xs-12">
+             <mat-form-field>
+              <input  matInput placeholder="Detection Limit" formControlName="detectionLimit">
+             </mat-form-field>
+            </div>
+      <div class="col-lg-3 col-sm-3 col-xs-12">
+          <div>
+              <label>Result Undetectable ?: </label> <input  type="checkbox" formControlName="undetectable">
+          </div>
       </div>
-      <div class="col-lg-8 col-xs-12">
-          <mat-form-field class="col-lg-12">
-              <input matInput placeholder="Result Unit" formControlName="resultUnit" required>
-          </mat-form-field>
-      </div>
-  </div>
-  <div class="row">
-    <div class="col-lg-4 col-xs-12">
-        <button  mat-raised-button class="mat-primary" (click)="submitLabResult()"><span class="fa fa-plus-circle" > Submit </span></button>
-    </div>
-  </div>
-     
+  </div>     
 </form>
+</mat-dialog-content>
+
+<mat-dialog-actions>
+        <button class="mat-raised-button" (click)="close()">Close</button>
+        <button class="mat-raised-button mat-primary" (click)="submitLabResult()">Save</button>
+</mat-dialog-actions>

@@ -1,8 +1,9 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { LaborderService } from '../../_services/laborder.service';
-import { MatPaginator, MatTableDataSource } from '@angular/material';
+import { MatPaginator, MatTableDataSource, MatDialogConfig, MatDialog, MatDialogRef } from '@angular/material';
 import { ActivatedRoute } from '@angular/router';
 import { $ } from 'protractor';
+import { AddLabResultComponent } from '../add-lab-result/add-lab-result.component';
 
 @Component({
   selector: 'app-complete-lab-order',
@@ -16,6 +17,7 @@ export class CompleteLabOrderComponent implements OnInit {
   labTestResults : any[] = [];
   completedLabTests : any[] = [];
   pendingLabTests : any[] = [];
+  labTestParameters : any[] = [];
 
   pending_labs_displaycolumns : any[] = ['test','orderReason','orderDate','status','action'];
   completed_labs_displaycolumns : any[] = ['test','orderReason','orderDate','result','unit'];
@@ -25,7 +27,9 @@ export class CompleteLabOrderComponent implements OnInit {
   
   patientId : number;
 
-  constructor(private labOrderService : LaborderService, private route: ActivatedRoute)
+  constructor(private labOrderService : LaborderService, 
+     private route: ActivatedRoute,
+     private dialog: MatDialog)
    {
         
    }
@@ -81,4 +85,43 @@ export class CompleteLabOrderComponent implements OnInit {
           console.log(error + "An error occured while getting completed labs");
       });  
   }
+
+ 
+  public addResult(pendingTest : any) {
+     this.labOrderService.getLabTestParameters(pendingTest.labTestId).subscribe(result =>{
+      if(result.length == 0)
+         return;
+         result.forEach(param => {
+          this.labTestParameters.push({
+            Id : param.id,
+            ParamName : param.parameterName,
+            LabTestId : param.labTestId,
+            DataType : param.dataType,   
+            UnitId : param.unitId,
+            unitName : param.unitName        
+           });
+         });
+     });
+
+     const dialogConfig = new MatDialogConfig();
+
+     dialogConfig.disableClose = true;
+     dialogConfig.autoFocus = true;
+     dialogConfig.height = '90%';
+     dialogConfig.width = '60%';
+
+     dialogConfig.data = this.labTestParameters;
+  
+     const dialogRef = this.dialog.open(AddLabResultComponent, dialogConfig);
+     dialogRef.afterClosed().subscribe(
+      data => 
+      {
+        if (!data)
+          return;
+          console.log(data);
+      });
+      
+     this.labOrderService.updateParams(this.labTestParameters);
+  }
+
 }

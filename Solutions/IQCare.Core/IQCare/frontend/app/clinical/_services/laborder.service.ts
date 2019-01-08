@@ -6,6 +6,7 @@ import { ErrorHandlerService } from '../../shared/_services/errorhandler.service
 import { AddLabOrderCommand } from '../_models/AddLabOrderCommand';
 import { Observable } from 'rxjs';
 import { CompleteLabOrderCommand } from '../_models/CompleteLabOrderCommand';
+import { BehaviorSubject } from 'rxjs';
 
 const httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -15,12 +16,20 @@ const httpOptions = {
     providedIn: 'root'
 })
 export class LaborderService {
-  private LabOrder_ApiUrl = environment.API_LAB_URL;
+   private LabOrder_ApiUrl = environment.API_LAB_URL;
+
+   private labTestParamsMessageSource = new BehaviorSubject([]);
+   currentLabTestParams = this.labTestParamsMessageSource.asObservable();
 
     constructor(private httpClient: HttpClient,
         private errorHandlerService: ErrorHandlerService, ) {
     }
 
+
+
+ public updateParams(params :any[]) {
+   this.labTestParamsMessageSource.next(params);
+ }
 
   public addLabOrder(addLabOrderCommand : AddLabOrderCommand) : Observable<any> {
     return this.httpClient.post<AddLabOrderCommand>(this.LabOrder_ApiUrl + '/api/LabOrder/AddLabOrder',addLabOrderCommand,httpOptions).pipe(
@@ -58,5 +67,12 @@ export class LaborderService {
           tap(getConfiguredLabTests => this.errorHandlerService.log('get configured lab tests')),
           catchError(this.errorHandlerService.handleError<any[]>('getConfiguredLabTests'))
       );
+    }
+
+  
+    public getLabTestParameters(labTestId : number) : Observable<any> {
+      return this.httpClient.get<any>(this.LabOrder_ApiUrl + '/api/LabTests/GetLabTestPametersByLabTestId/' + labTestId)
+      .pipe(tap(param=> this.errorHandlerService.log('get Lab Test Parameters')),
+      catchError(this.errorHandlerService.handleError<any[]>('getLabTestParameters')))      
     }
 }

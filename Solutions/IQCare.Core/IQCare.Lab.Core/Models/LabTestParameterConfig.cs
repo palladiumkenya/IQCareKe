@@ -12,7 +12,8 @@
         public bool DefaultUnit { get; set; }
         public decimal DetectionLimit { get; set; }
         public bool DeleteFlag { get; set; }
+        public virtual LabTestParameter Parameter { get; set; }
+        public virtual   LabTestParameterUnit Unit { get; set; }
 
-        public virtual LabTestParameter Parameter { get; set; } 
     }
 }

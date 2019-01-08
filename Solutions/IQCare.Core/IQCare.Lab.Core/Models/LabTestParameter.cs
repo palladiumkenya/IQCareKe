@@ -27,5 +27,7 @@ namespace IQCare.Lab.Core.Models
         public bool DeleteFlag { get; set; }
 
         public virtual LabTest LabTest { get; set; }
+
+        public virtual LabTestParameterConfig LabTestParameterConfig { get; set; }
     }
 }
