@@ -162,9 +162,8 @@ namespace IQCare.CCC.UILogic.Interoperability
                                         HasResult = true
                                     };
                                     labOrderManager.AddPatientLabResults(labResults);
-                                    labOrder.OrderStatus = "Complete";
-                                    labOrderManager.savePatientLabOrder(labOrder);
-
+                                    // labOrder.OrderStatus = "Complete";
+                                    labOrderManager.UpdateLabOrderCompleteStatus(patient.Id, labOrder.PatientMasterVisitId, labOrder.Id, "Complete");
                                 }
                             }
                         Msg = "Success";

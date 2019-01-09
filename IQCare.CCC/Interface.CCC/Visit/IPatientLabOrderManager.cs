@@ -24,8 +24,10 @@ namespace Interface.CCC.Visit
         List<LabDetailsEntity> GetPatientLabDetailsByLabOrderId(int labOrderId);
         List<PatientLabTracker> GetAllPatientVLs(int patientId);
         PatientLabTracker GetPatientLastVL(int patientId);
+        List<PatientLabTracker> GetPatientLabTracker(int patientId, int patientMasterVisitId, int labOrderId);
 
         LabOrderEntity GetLabOrderById(int labOrderId);
         void EditPatientLabOrder(LabOrderEntity labOrder);
+        LabOrderEntity GetLabOrderEntityById(int labOrderId);
     }
 }

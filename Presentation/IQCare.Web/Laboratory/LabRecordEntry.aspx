@@ -379,7 +379,7 @@
                                     <div class="col-md-1"> </div>
                                 </td>
                             </tr>
-                            <tr style="">
+                            <tr>
                                 <td class="pad18" style="width: 50%">
                                     <div class="col-md-3"><label id="lblreportedby" runat="server" class="required control-label pull-left" for="ddlLabReportedbyName"> *Reported by:</label></div>
                                     <div class="col-md-6"><asp:DropDownList CssClass="form-control" ID="ddlLabReportedbyName" runat="Server">

@@ -22,10 +22,17 @@ namespace IQCare.Controllers.PMTCT.ANC
             _mediator = mediator;
         }
         // GET: api/<controller>
-        [HttpGet]
-        public IEnumerable<string> Get()
+        [HttpGet("{patientId}")]
+        public async Task<ActionResult> GetPatientScreeningByPatientId(int patientId)
         {
-            return new string[] { "value1", "value2" };
+            var response = await
+                _mediator.Send(
+                    new GetPatientScreeningByPatientIdCommand
+                        { PatientId = patientId },
+                    HttpContext.RequestAborted);
+            if (response.IsValid)
+                return Ok(response.Value);
+            return BadRequest(response.Value);
         }
 
         // GET api/<controller>/5
@@ -41,6 +48,8 @@ namespace IQCare.Controllers.PMTCT.ANC
                 return Ok(response.Value);
             return BadRequest(response.Value);
         }
+
+
 
         // POST api/<controller>
         [HttpPost]

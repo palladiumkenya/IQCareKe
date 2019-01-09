@@ -186,6 +186,25 @@ namespace IQCare.CCC.UILogic
             return orderId;
         }
 
+        public void UpdateLabOrderCompleteStatus(int patientId, int patientMasterVisitId, int orderId, string orderStatus)
+        {
+            var labOrder = _mgr.GetLabOrderEntityById(orderId);
+            var patientLabTrackers = _mgr.GetPatientLabTracker(patientId, patientMasterVisitId, orderId);
+            if (labOrder != null)
+            {
+                labOrder.OrderStatus = orderStatus;
+
+                _mgr.EditPatientLabOrder(labOrder);
+
+                if (patientLabTrackers.Count > 0)
+                {
+                    patientLabTrackers[0].Results = orderStatus;
+
+                    _mgr.UpdatePatientLabOrder(patientLabTrackers[0]);
+                }
+            }
+        }
+
         public List<PatientLabTracker> GetVlPendingCount(int facilityId)
         {
             var pendingLabs = _lookupTest.GetVlPendingCount(facilityId);

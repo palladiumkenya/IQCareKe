@@ -12,7 +12,8 @@ SELECT
   (SELECT top 1 i.ItemName FROM LookupItemView i WHERE i.ItemId=c.CounsellingTopicId) CounsellingTopic,
   c.CounsellingDate,
   c.Description,
-  c.CreatedBy
+  c.CreatedBy,
+  c.CreateDate
 FROM           
 	 dbo.PatientCounselling c
 GO

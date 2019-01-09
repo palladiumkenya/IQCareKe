@@ -10,6 +10,7 @@ namespace IQCare.PMTCT.BusinessProcess.Commands
     {
         public int PatientId { get; set; }
         public int PatientMasterVisitId { get; set; }
+        public int ViralLoadSampleTaken { get; set; }
         public int WhoStage { get; set; }
         public int? FacilityId { get; set; }
         public int? ServiceAreaId { get; set; }

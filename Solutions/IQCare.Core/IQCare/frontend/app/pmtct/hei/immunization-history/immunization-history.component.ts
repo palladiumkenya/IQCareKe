@@ -26,7 +26,7 @@ export class ImmunizationHistoryComponent implements OnInit {
 
     displayedColumns = ['period', 'given', 'dateImmunized', 'nextSchedule', 'action'];
     dataSource = new MatTableDataSource(this.immunization_history_table_data);
-
+    
     @Input('immunizationHistoryOptions') immunizationHistoryOptions: any;
     @Input('isEdit') isEdit: boolean;
     @Input('patientId') patientId: number;

@@ -122,6 +122,7 @@
     <None Remove="Scripts\2.0.0\20_Add_Lookups_Lymphatic.sql" />
     <None Remove="Scripts\2.0.0\21_Add_Lookups_Dental.sql" />
     <None Remove="Scripts\2.0.0\22_Alter_County_Add_Identity.sql" />
+    <None Remove="Scripts\2.0.0\22_SO_Add_Lookups_ViralLoadSample.sql" />
     <None Remove="Scripts\2.0.0\23_Nairobi_Missing_Subcounties_Wards.sql" />
     <None Remove="Scripts\2.0.0\24_DO_AlterTable_PatientIcf_AddColumn_ContactWithTb.sql" />
     <None Remove="Scripts\2.0.0\25_SPS_mstPatient_Update.sql" />
@@ -229,6 +230,7 @@
     <EmbeddedResource Include="Scripts\1.0.0.9\58_Add_Lookups_ReviewOfSystems.sql" />
     <EmbeddedResource Include="Scripts\2.0.0\02_DO_AlterView_PatientDeliveryInfo.sql" />
     <EmbeddedResource Include="Scripts\2.0.0\03 pr_Security_UserLogin_Constella.sql" />
+    <EmbeddedResource Include="Scripts\2.0.0\22_SO_Add_Lookups_ViralLoadSample.sql" />
     <EmbeddedResource Include="Scripts\2.0.0\23_Nairobi_Missing_Subcounties_Wards.sql" />
     <EmbeddedResource Include="Scripts\2.0.0\08_PatientConsent.sql" />
     <EmbeddedResource Include="Scripts\2.0.0\09_PersonKinContactsView.sql" />
