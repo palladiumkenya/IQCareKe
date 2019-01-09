@@ -59,6 +59,8 @@ export class AncHivtestingComponent implements OnInit {
 
         if (this.isEdit) {
             this.getBaselineAncProfile(this.PatientId);
+        } else {
+            this.getBaselineAncProfile(this.PatientId);
         }
     }
 

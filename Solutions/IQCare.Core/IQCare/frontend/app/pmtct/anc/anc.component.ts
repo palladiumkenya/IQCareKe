@@ -38,7 +38,7 @@ export class AncComponent implements OnInit, OnDestroy {
 
     formType: string;
     visitType: number;
-    isLinear: boolean = false;
+    isLinear: boolean = true;
     public isEdit = false;
     patientDrug: PatientDrugAdministration[] = [];
     public preventiveService: PreventiveService[] = [];
@@ -485,6 +485,7 @@ export class AncComponent implements OnInit, OnDestroy {
             ScreeningTypeId: 0,
             ScreeningDone: (yesOption[0].itemId == screeningDone) ? true : false,
             ScreeningDate: new Date(),
+            ViralLoadSampleTaken: this.ClientMonitoringMatFormGroup.value[0]['viralLoadSampleTaken'],
             ScreeningTB: this.ClientMonitoringMatFormGroup.value[0]['screenedForTB'],
             CaCxMethod: (yesOption[0].itemId == screeningDone) ? this.ClientMonitoringMatFormGroup.value[0]['cacxMethod'] : 0,
             CaCxResult: (yesOption[0].itemId == screeningDone) ? this.ClientMonitoringMatFormGroup.value[0]['cacxResult'] : 0,
@@ -560,9 +561,9 @@ export class AncComponent implements OnInit, OnDestroy {
         };
 
 
-        /* const chronicIllnessCommand = {
+         const chronicIllnessCommand = {
              PatientChronicIllnesses: this.chronic_illness_data,
-         };*/
+         };
 
         const haartProphylaxisCommand = {
             PatientDrugAdministration: this.patientDrug,
@@ -646,7 +647,7 @@ export class AncComponent implements OnInit, OnDestroy {
         const ancClientMonitoring = this.ancService.saveClientMonitoring(clientMonitoringCommand);
         const ancHaart = this.ancService.saveHaartProphylaxis(haartProphylaxisCommand);
         const drugAdministration = this.ancService.saveDrugAdministration(drugAdministrationCommand);
-        const chronicIllness = this.ancService.savePatientChronicIllness(this.chronic_illness_data);
+        const chronicIllness = this.ancService.savePatientChronicIllness(chronicIllnessCommand);
         const ancPreventiveService = this.ancService.savePreventiveServices(preventiveServiceCommand);
         const ancReferral = this.ancService.saveReferral(referralCommand);
         const ancAppointment = this.ancService.saveAppointment(this.appointmentCommand);
@@ -753,7 +754,12 @@ export class AncComponent implements OnInit, OnDestroy {
 
         ]).subscribe(
             (result) => {
-
+                console.log(result);
+                this.snotifyService.success('Successfully Edited ANC encounter ', 'ANC',
+                    this.notificationService.getConfig());
+                this.zone.run(() => {
+                    this.router.navigate(['/dashboard/personhome/' + this.personId], { relativeTo: this.route });
+                });
             },
             (error) => {
 
