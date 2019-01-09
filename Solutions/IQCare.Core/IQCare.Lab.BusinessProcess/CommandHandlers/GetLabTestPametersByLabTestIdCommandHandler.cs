@@ -31,6 +31,7 @@ namespace IQCare.Lab.BusinessProcess.CommandHandlers
                 {
                     var labTestParams = await _labUnitOfWork.Repository<LabTestParameter>()
                         .Get(x => x.LabTestId == request.LabTestId && x.DeleteFlag == false)
+                        .Include(x=>x.LabTestParameterResultOptions)
                         .Include(x=>x.LabTestParameterConfig.Unit)
                         .ToListAsync();
 
@@ -39,7 +40,15 @@ namespace IQCare.Lab.BusinessProcess.CommandHandlers
                     {
                         Id = x.Id, LabTestId = x.LabTestId, ParameterName = x.ParameterName,
                         UnitId = x.LabTestParameterConfig.UnitId, DataType = x.DataType,
-                        UnitName = x.LabTestParameterConfig.Unit.UnitName
+                        UnitName = x.LabTestParameterConfig.Unit.UnitName,
+                        ResultOptions = x.LabTestParameterResultOptions.Any()
+                            ? x.LabTestParameterResultOptions.Select(p =>
+                                new
+                                {
+                                    Id = p.Id.ToString(),
+                                    Value = p.Value.ToString()
+                                })
+                            : null
                     }).ToList();
 
                     return Result<List<LabTestParamaterViewModel>>.Valid(viewModel);
