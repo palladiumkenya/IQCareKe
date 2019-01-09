@@ -170,9 +170,9 @@ export class PreventiveServicesComponent implements OnInit {
                     console.log(service);
                    // const myService = service.filter(x => x.patientMasterVisitId == patientMasterVisitId);
 
-                    console.log(myService);
+                   // console.log(myService);
                     if (service.length > 0) {
-                        for (let i = 0; i < myService.length; i ++) {
+                        for (let i = 0; i < service.length; i ++) {
                             this.serviceData.push({
                                 preventiveService: service[i]['preventiveService'],
                                 preventiveServiceId: service[i]['preventiveServiceId'],

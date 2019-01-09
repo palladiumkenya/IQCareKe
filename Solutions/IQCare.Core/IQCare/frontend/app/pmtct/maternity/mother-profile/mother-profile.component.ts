@@ -83,8 +83,8 @@ export class MotherProfileComponent implements OnInit {
         console.log(this.motherProfileFormGroup.controls['dateEDD'].value);
 
         this.gestation = parseInt(moment.duration(moment(this.visitDate).diff(this.dateLMP)).asWeeks().toFixed(1), 10);
-        if (parseInt(this.gestation, 10) > 42) { this.gestation = parseInt(42, 10);  }
-        if (parseInt(this.gestation, 10) < 1) { this.gestation = 0; }
+        if (this.gestation > 42) { this.gestation = 42;  }
+        if (this.gestation < 1) { this.gestation = 0; }
         this.motherProfileFormGroup.controls['gestation'].setValue(this.gestation);
 
         // this.motherProfileFormGroup.controls['dateEDD'].disable({ onlySelf: false });
