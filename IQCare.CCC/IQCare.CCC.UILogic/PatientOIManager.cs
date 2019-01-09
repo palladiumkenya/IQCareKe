@@ -84,5 +84,16 @@ namespace IQCare.CCC.UILogic
                 throw new Exception(e.Message);
             }
         }
+        public List<PatientOI> GetPatientOIByPatient(int patientid)
+        {
+            try
+            {
+                return _mgr.GetOIListByPatient(patientid);
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+        }
     }
 }

@@ -57,7 +57,7 @@
 					                        <tr>
 						                        <th><span class="text-primary">Date</span></th>
 						                        <th><span class="text-primary">Regimen</span></th>
-						                        <th><span class="text-primary">Switch</span></th>
+						                        <th><span class="text-primary">TreatmentStatus</span></th>
 						                    </tr>
 				                        </thead>
 				                        <tbody></tbody>
@@ -116,11 +116,11 @@
                         <div class="col-md-12 col-xs-12 col-sm-12">
 	                        <div id="presentingComplaintsTable" class="panel panel-primary">
 		                        <div class="panel-heading">Anthropoemetric Measurements</div>
-		                        <div style="min-height: 10px; max-height: 550px; overflow-y: auto; overflow-x: hidden;">
+		                        <div style="min-height: 10px; max-height: 550px; overflow-y: scroll; overflow-x: scroll">
 			                        <table id="dtlPreviousTriage" class="table table-bordered table-striped" style="width: 100%">
 				                        <thead>
 					                        <tr>
-						                        <th><span class="text-primary">Date</span></th>
+						                        <th><span class="text-primary">VisitDate</span></th>
 						                        <th><span class="text-primary">Height</span></th>
 						                        <th><span class="text-primary">Weight</span></th>
 						                        <th><span class="text-primary">MUAC</span></th>
@@ -146,6 +146,9 @@
 </div>
 </div>
 <script type="text/javascript">
+    var OIList = [];
+    var WHOList = [];
+    var arrCurrentReg = [];
     $("#myWizard").on("actionclicked.fu.wizard", function (evt, data) {
         var currentStep = data.step;
         if (currentStep == 2) {
@@ -178,6 +181,68 @@
         }
     });
 
+    function DrawDataTable(ctrlName, arrUI) {
+
+    if (arrUI.length > 0) {
+        var table = $("#" + ctrlName).DataTable();
+        table.rows.add(arrUI).draw().nodes();
+    }
+      }
+
+    function LoadOIList() {
+        $.ajax({
+            type: "POST",
+            url: "../WebService/PatientEncounterService.asmx/LoadPatientOIList",
+           contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: function (response) {
+                OIList = response.d;
+                if (OIList != null) {
+                    if (OIList.length > 0) {
+                        DrawDataTable("dtlOIS", OIList);;
+                    }
+                }
+            }
+       
+        });
+    }
+
+    function LoadCurrentRegimen() {
+        $.ajax({
+            type: "POST",
+            url: "../WebService/PatientEncounterService.asmx/LoadCurrentRegimen",
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: function (response) {
+                arrCurrentReg = response.d;
+                if (arrCurrentReg != null) {
+                    if (arrCurrentReg.length > 0) {
+                        DrawDataTable("dtlRegimenChanges", arrCurrentReg);
+                    }
+                }
+            }
+        });
+    }
+
+    function LoadWHOList() {
+
+                 $.ajax({
+            type: "POST",
+            url: "../WebService/PatientEncounterService.asmx/LoadPatientWHOStageList",
+           contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: function (response) {
+                WHOList = response.d;
+                if (WHOList != null) {
+                    if (WHOList.length > 0) {
+                        DrawDataTable("dtlCondition", WHOList);
+                    }
+                }
+            }
+       
+        });
+    }
+
     jQuery(function ($) {
         var caseSummaryId = <%=caseSummaryId%>;
         if (caseSummaryId > 0) {
@@ -189,10 +254,15 @@
         }
     });
 
+  
+
     $(document).ready(function () {
         // alert("Page iko ready sasa");
        // $.hivce.loader('show');
         //GetClinicalSummaryData();
+        LoadOIList();
+        LoadWHOList();
+        LoadCurrentRegimen();
         var previousTriage = $('#dtlPreviousTriage').DataTable({
         ajax: {
             type: "POST",
@@ -213,6 +283,10 @@
             }
         ]
         });
+
+       
+       
+
 
         // Load Lab Results
          var previousTriage = $('#dtlLabResults').DataTable({

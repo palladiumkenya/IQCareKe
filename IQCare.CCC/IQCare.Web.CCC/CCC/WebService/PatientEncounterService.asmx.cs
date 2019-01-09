@@ -1323,7 +1323,7 @@ namespace IQCare.Web.CCC.WebService
             //}
             return rows;
         }
-
+        
         [WebMethod(EnableSession = true)]
         [ScriptMethod(UseHttpGet = false, ResponseFormat = ResponseFormat.Json)]
         public ArrayList GetCurrentRegimen()
@@ -1337,7 +1337,7 @@ namespace IQCare.Web.CCC.WebService
 
             if(lst.Count > 0)
             {
-                string[] i = new string[2] { lst[0].RegimenLine , lst[0].Regimen };
+                string[] i = new string[2] {lst[0].RegimenLine , lst[0].Regimen };
                 rows.Add(i);
             }
             return rows;
@@ -1974,6 +1974,90 @@ namespace IQCare.Web.CCC.WebService
                 string[] i = new string[10] { row["VisitDate"].ToString(), row["Height"].ToString(), row["Weight"].ToString(), row["Muac"].ToString(),
                 row["BPSystolic"].ToString(),row["BPDiastolic"].ToString(),row["Temperature"].ToString(),row["HeartRate"].ToString(),row["RespiratoryRate"].ToString(),
                 row["SpO2"].ToString()};
+                rows.Add(i);
+            }
+            return rows;
+        }
+        [WebMethod(EnableSession = true)]
+     public ArrayList LoadPatientWHOStageList()
+        {
+            int PatientId= Convert.ToInt32(Session["PatientPk"].ToString());
+            PatientWhoStageManager pms = new PatientWhoStageManager();
+            ArrayList arrWholist = new ArrayList();
+            PatientMasterVisitManager pmv = new PatientMasterVisitManager();
+            Entities.CCC.Visit.PatientMasterVisit pmastv = new Entities.CCC.Visit.PatientMasterVisit();
+            List<PatientWhoStage> pws = pms.WhoStagelistByPatientId(PatientId);
+            LookupLogic ll = new LookupLogic();
+            ArrayList row = new ArrayList();
+            if(pws!=null)
+            {
+                if(pws.Count > 0)
+                {
+                    pws.ForEach(x =>
+                    {
+                        int whostage = x.WHOStage;
+                       
+                      string Condition = ll.GetLookupItemNameById(x.WHOStage);
+                      pmastv = pmv.GetVisitById(x.PatientMasterVisitId);
+                      string VisitDate = pmastv.VisitDate.ToString();
+                        
+                        row.Add(new String[] { VisitDate, Condition });
+                    }
+                    );
+
+                    
+                }
+
+               
+            }
+            return row;
+        }
+
+        [WebMethod(EnableSession = true)]
+        public ArrayList LoadPatientOIList()
+        {
+            int PatientId = Convert.ToInt32(Session["PatientPk"].ToString());
+            ArrayList row = new ArrayList();
+            PatientOIManager poi = new PatientOIManager();
+            LookupLogic plm = new LookupLogic();
+            string oi;
+            PatientMasterVisitManager pmv = new PatientMasterVisitManager();
+            Entities.CCC.Visit.PatientMasterVisit pmastv = new Entities.CCC.Visit.PatientMasterVisit();
+           List<PatientOI> listoi = poi.GetPatientOIByPatient(PatientId);
+            if (listoi != null)
+            {
+                if (listoi.Count > 0)
+                {
+                    listoi.ToList().ForEach(i =>
+                    {
+                         oi = plm.GetLookupItemNameById(i.OIId).ToString();
+                        pmastv = pmv.GetVisitById(i.PatientMasterVisitId);
+                          row.Add(
+                            new string[] { pmastv.VisitDate.ToString(), oi });
+                    });
+                }
+
+
+            }
+
+            return row;
+        }
+
+
+        [WebMethod(EnableSession =true)]
+        [ScriptMethod(UseHttpGet =false,ResponseFormat =ResponseFormat.Json)]
+        public ArrayList LoadCurrentRegimen()
+        {
+            IPatientTreatmentTrackerManager patientTreatmentTrackerManager = (IPatientTreatmentTrackerManager)ObjectFactory.CreateInstance("BusinessProcess.CCC.Lookup.BPatientTreatmentTrackerManager, BusinessProcess.CCC");
+            int patientId = Convert.ToInt32(Session["PatientPK"].ToString());
+            var currentRegimen = patientTreatmentTrackerManager.GetCurrentPatientRegimen(patientId);
+            ArrayList rows = new ArrayList();
+            if (currentRegimen != null)
+            {
+                
+
+                string[] i = new string[3]
+                {currentRegimen.RegimenStartDate.ToString(),currentRegimen.Regimen,currentRegimen.TreatmentStatus };
                 rows.Add(i);
             }
             return rows;

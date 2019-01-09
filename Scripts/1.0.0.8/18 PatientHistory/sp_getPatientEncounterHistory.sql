@@ -34,14 +34,14 @@ inner join mst_user c on a.createdby = c.userid
 inner join PatientMasterVisit d on a.patientmastervisitid = d.id
 where a.patientid =@PatientID  and d.visitdate is not null
 
-union
+union all
 select pmv.Id as VisitID,'CCC' as VisitName,pmv.PatientId as patientid,pmv.VisitDate as VisitDate,c.UserName as username ,pmv.DeleteFlag as deleteflag,'0'  [status] 
  from PatientMasterVisit pmv 
  inner join mst_User c on c.UserID=pmv.CreatedBy
  inner join(
 select * from LookupItemView where ItemName ='TS'
-)ltv on ltv.ItemId=pmv.VisitBy
-where pmv.VisitBy is not null
+)ltv on ltv.ItemId=pmv.VisitBy 
+where pmv.VisitBy is not null  and  pmv.PatientId=@PatientID
 
 ) ph
 order by convert(date,ph.VisitDate) desc
