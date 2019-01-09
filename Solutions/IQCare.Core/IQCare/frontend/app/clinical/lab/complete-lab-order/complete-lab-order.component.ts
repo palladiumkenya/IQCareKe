@@ -4,6 +4,10 @@ import { MatPaginator, MatTableDataSource, MatDialogConfig, MatDialog, MatDialog
 import { ActivatedRoute } from '@angular/router';
 import { $ } from 'protractor';
 import { AddLabResultComponent } from '../add-lab-result/add-lab-result.component';
+import { FormControlBase } from '../../../shared/_models/dynamic-form/FormControlBase';
+import { TextboxFormControl } from '../../../shared/_models/dynamic-form/TextBoxFormControl';
+import { ResultDataType } from '../../_models/CompleteLabOrderCommand';
+import { SelectlistFormControl } from '../../../shared/_models/dynamic-form/SelectListFormControl';
 
 @Component({
   selector: 'app-complete-lab-order',
@@ -24,14 +28,17 @@ export class CompleteLabOrderComponent implements OnInit {
 
   completedLabsDataSource = new MatTableDataSource(this.completedLabTests);
   pendingLabsDataSource = new MatTableDataSource(this.pendingLabsDataSource);
+  formControls : FormControlBase<any>[] = [];
   
+  ResultDataType: ResultDataType;
+
   patientId : number;
 
   constructor(private labOrderService : LaborderService, 
      private route: ActivatedRoute,
      private dialog: MatDialog)
    {
-        
+        this.ResultDataType = new ResultDataType();
    }
 
   ngOnInit() {
@@ -107,8 +114,8 @@ export class CompleteLabOrderComponent implements OnInit {
 
      dialogConfig.disableClose = true;
      dialogConfig.autoFocus = true;
-     dialogConfig.height = '90%';
-     dialogConfig.width = '60%';
+     dialogConfig.height = '70%';
+     dialogConfig.width = '80%';
 
      dialogConfig.data = this.labTestParameters;
   
@@ -123,5 +130,43 @@ export class CompleteLabOrderComponent implements OnInit {
       
      this.labOrderService.updateParams(this.labTestParameters);
   }
+
+  private buildLabTestResultFormContol(parameter : any) : FormControlBase<any>
+  {
+      switch (parameter.dataType) {
+        case this.ResultDataType.Text:  
+
+            return new TextboxFormControl(
+              {
+                key: parameter.id,
+                label: 'Result Text',
+                value: ' ',
+                required: true,
+                order: 1
+              }); 
+          case this.ResultDataType.Select:   
+             return new SelectlistFormControl(
+             {
+              key: parameter.id,
+              label: 'Select Result',
+              options: parameter.resultOptions,
+              order: 3   
+             })
+          case this.ResultDataType.Numeric:   
+          return new TextboxFormControl(
+            {
+              key: parameter.id,
+              label: 'Result Value',
+              value: ' ',
+              required: true,
+              order: 1
+            }); 
+        default:
+          break;
+      }
+  
+  }
+
+
 
 }

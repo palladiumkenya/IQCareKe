@@ -1,5 +1,4 @@
 <h2 mat-dialog-title>{{dialogTitle}}</h2>
-<br>
 <mat-dialog-content>
 <form [formGroup]="addLabResultForm">
   <div class="row">
@@ -43,23 +42,19 @@
               <input matInput placeholder="Result Unit" formControlName="resultUnit">
           </mat-form-field>
       </div>
-  </div>
-  <div class="row">
-        <div class="col-lg-3 col-sm-3 col-xs-12">
-             <mat-form-field>
-              <input  matInput placeholder="Detection Limit" formControlName="detectionLimit">
-             </mat-form-field>
-            </div>
-      <div class="col-lg-3 col-sm-3 col-xs-12">
-          <div>
-              <label>Result Undetectable ?: </label> <input  type="checkbox" formControlName="undetectable">
-          </div>
-      </div>
-  </div>     
+ <div class="example-section">
+ <mat-checkbox formControlName="undetectable" >Undetectable </mat-checkbox>
+ </div>
+ <div class="col-lg-3 col-sm-3 col-xs-12">
+    <mat-form-field>
+     <input matInput placeholder="Detection Limit" formControlName="detectionLimit">
+    </mat-form-field>
+</div>
+  </div>    
 </form>
 </mat-dialog-content>
 
-<mat-dialog-actions>
+<mat-dialog-actions align="end">
         <button class="mat-raised-button" (click)="close()">Close</button>
         <button class="mat-raised-button mat-primary" (click)="submitLabResult()">Save</button>
 </mat-dialog-actions>

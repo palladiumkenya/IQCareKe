@@ -8,7 +8,7 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import {
     MatNativeDateModule, MatPaginatorModule, MatInputModule,
     MatDatepickerModule, MatFormFieldModule,
-    MatTableModule, MatButtonModule, MatSelectModule, MatTableDataSource, MatGridListModule, MatDialog, MatDialogModule
+    MatTableModule, MatButtonModule, MatSelectModule, MatGridListModule, MatDialogModule, MatCheckboxModule
 } from '@angular/material';
 import { HttpClientModule } from '@angular/common/http';
 import { LabOrderComponent } from '../clinical/lab/lab-order/lab-order.component';
@@ -26,6 +26,7 @@ import { AddLabResultComponent } from './lab/add-lab-result/add-lab-result.compo
         ReactiveFormsModule,
         MatPaginatorModule,
         MatNativeDateModule,
+        MatCheckboxModule,
         MatInputModule, MatDatepickerModule, MatFormFieldModule,MatGridListModule,MatDialogModule,
         MatTableModule, MatButtonModule, FormsModule, HttpClientModule, SharedModule, MatSelectModule,
     ],

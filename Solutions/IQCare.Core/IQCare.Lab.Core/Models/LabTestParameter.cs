@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace IQCare.Lab.Core.Models
 {
@@ -29,5 +30,7 @@ namespace IQCare.Lab.Core.Models
         public virtual LabTest LabTest { get; set; }
 
         public virtual LabTestParameterConfig LabTestParameterConfig { get; set; }
+        public virtual ICollection<ParameterResultOption> LabTestParameterResultOptions { get; set; }
+
     }
 }
