@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using DataAccess.Base;
 using DataAccess.CCC.Context;
@@ -50,6 +51,16 @@ namespace BusinessProcess.CCC
                 unitOfWork.Complete();
                 unitOfWork.Dispose();
                 return patientWhoStage.Id;
+            }
+        }
+
+        public List<PatientWhoStage> GetWhoStageListByPatient(int patientId)
+        {
+            using (UnitOfWork unitOfWork = new UnitOfWork(new GreencardContext()))
+            {
+                var whoStage = unitOfWork.PatientWhoStageRepository.FindBy(x=>x.PatientId==patientId).OrderByDescending(x=>x.PatientMasterVisitId).ToList();
+                unitOfWork.Dispose();
+                return whoStage;
             }
         }
     }

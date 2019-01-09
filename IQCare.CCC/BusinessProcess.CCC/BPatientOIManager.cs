@@ -45,6 +45,17 @@ namespace BusinessProcess.CCC
             }
         }
 
+        public List<PatientOI> GetOIListByPatient(int patientId)
+        {
+
+            using (UnitOfWork unitOfWork = new UnitOfWork(new GreencardContext()))
+            {
+                var OI = unitOfWork.PatientOIRepository.FindBy(
+                    x => x.PatientId == patientId && !x.DeleteFlag).ToList();
+                unitOfWork.Dispose();
+                return OI.ToList();
+            }
+        }
         public PatientOI GetPatientOIbyId(int entityId)
         {
             using (UnitOfWork unitOfWork = new UnitOfWork(new GreencardContext()))
