@@ -80,6 +80,8 @@ export class PreventiveServicesComponent implements OnInit {
         if (this.isEdit) {
             this.getPatientPreventiveServiceInfo(this.patientId, this.patientMasterVisitId);
             this.getPatientPartnerTestingInfo(this.patientId, this.patientMasterVisitId);
+        } else {
+           this.getPatientPreventiveServiceInfoAll(this.patientId);
         }
         /*this.getLookupItems('PreventiveService', this.services);
          this.getLookupItems('YesNo', this.yesnos);
@@ -156,6 +158,52 @@ export class PreventiveServicesComponent implements OnInit {
 
     public removeRow(idx) {
         this.serviceData.splice(idx, 1);
+    }
+
+    public getPatientPreventiveServiceInfoAll(patientId: number) {
+        this.preventiveService$ = this.ancService.getPatientPreventiveServiceInfo(patientId)
+            .subscribe(
+                p => {
+
+                    const service = p;
+                    console.log('preventiveservice ');
+                    console.log(service);
+                   // const myService = service.filter(x => x.patientMasterVisitId == patientMasterVisitId);
+
+                    console.log(myService);
+                    if (service.length > 0) {
+                        for (let i = 0; i < myService.length; i ++) {
+                            this.serviceData.push({
+                                preventiveService: service[i]['preventiveService'],
+                                preventiveServiceId: service[i]['preventiveServiceId'],
+                                dateGiven: service[i]['preventiveServiceDate'],
+                                comments: service[i]['description'],
+                                nextSchedule: service[i]['nextSchedule'],
+                            });
+                        }
+                    }
+                    const insecticide = service.filter(x => x.description == 'Insecticide treated nets given');
+                    const exercise = service.filter(x => x.description == 'Antenatal exercise');
+
+                    if (insecticide.length > 0) {
+                        this.PreventiveServicesFormGroup.get('insecticideTreatedNet').setValue(insecticide[0]['preventiveServiceId']);
+                        this.PreventiveServicesFormGroup.get('insecticideTreatedNetGivenDate').setValue(insecticide[0]
+                            ['preventiveServiceDate']);
+                    }
+
+                    if (exercise.length > 0) {
+                        this.PreventiveServicesFormGroup.get('antenatalExercise').setValue(exercise[0]['preventiveServiceId']);
+                    }
+                    console.log(insecticide);
+                    console.log(exercise);
+                },
+                (err) => {
+                    console.log(err);
+                    this.snotifyService.error('Error loading Preventive Services ' + err, 'WHO', this.notificationService.getConfig());
+                },
+                () => {
+                    console.log(this.lookupItemView$);
+                });
     }
 
     public getPatientPreventiveServiceInfo(patientId: number, patientMasterVisitId: number) {
