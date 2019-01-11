@@ -5,9 +5,12 @@ import { ActivatedRoute } from '@angular/router';
 import { $ } from 'protractor';
 import { AddLabResultComponent } from '../add-lab-result/add-lab-result.component';
 import { FormControlBase } from '../../../shared/_models/dynamic-form/FormControlBase';
-import { TextboxFormControl } from '../../../shared/_models/dynamic-form/TextBoxFormControl';
+import { TextboxFormControl, NumericTextboxFormControl } from '../../../shared/_models/dynamic-form/TextBoxFormControl';
 import { ResultDataType } from '../../_models/CompleteLabOrderCommand';
 import { SelectlistFormControl } from '../../../shared/_models/dynamic-form/SelectListFormControl';
+import { FormControlService } from '../../../shared/_services/form-control.service';
+import { FormGroup } from '@angular/forms';
+import { ThrowStmt } from '@angular/compiler';
 
 @Component({
   selector: 'app-complete-lab-order',
@@ -22,19 +25,21 @@ export class CompleteLabOrderComponent implements OnInit {
   completedLabTests : any[] = [];
   pendingLabTests : any[] = [];
   labTestParameters : any[] = [];
+  formControlCollection : FormControlBase<any>[] = [];
 
   pending_labs_displaycolumns : any[] = ['test','orderReason','orderDate','status','action'];
   completed_labs_displaycolumns : any[] = ['test','orderReason','orderDate','result','unit'];
 
   completedLabsDataSource = new MatTableDataSource(this.completedLabTests);
   pendingLabsDataSource = new MatTableDataSource(this.pendingLabsDataSource);
-  formControls : FormControlBase<any>[] = [];
   
   ResultDataType: ResultDataType;
-
   patientId : number;
 
+  labResultsFormGroup : FormGroup;
+
   constructor(private labOrderService : LaborderService, 
+    private formControlService : FormControlService,
      private route: ActivatedRoute,
      private dialog: MatDialog)
    {
@@ -92,22 +97,62 @@ export class CompleteLabOrderComponent implements OnInit {
           console.log(error + "An error occured while getting completed labs");
       });  
   }
-
  
+  formControl : FormControlBase<any>[] = [];
+
   public addResult(pendingTest : any) {
+
+    this.formControlCollection = [];
+    this.formControl = [];
+    this.labTestParameters = [];
+
      this.labOrderService.getLabTestParameters(pendingTest.labTestId).subscribe(result =>{
       if(result.length == 0)
          return;
-         result.forEach(param => {
-          this.labTestParameters.push({
-            Id : param.id,
-            ParamName : param.parameterName,
-            LabTestId : param.labTestId,
-            DataType : param.dataType,   
-            UnitId : param.unitId,
-            unitName : param.unitName        
-           });
-         });
+         result.forEach(param => 
+          {
+              this.formControl.push(this.getFormContolFromParam(param));
+
+              this.formControl.push(
+              new TextboxFormControl({
+                key:'paramName_' + param.id,
+                label: 'Parameter Name',
+                value: param.parameterName,
+                required: false,
+                order: 1
+              }));
+
+              this.formControl.push(new TextboxFormControl({
+                key: param.unitName +'_'+param.id ,
+                label: 'Result Unit',
+                value: param.unitName,
+                required: false,
+                order: 3
+              }));
+
+              this.formControl.push(new TextboxFormControl({
+                key:'detection_' + param.id,
+                label: 'Detection Limit',
+                value: ' ',
+                required: false,
+                order: 4
+              }));
+
+              this.labTestParameters.push({
+                Id : param.id,
+                ParamName : param.parameterName,
+                LabTestId : param.labTestId,
+                DataType : param.dataType,   
+                UnitId : param.unitId,
+                unitName : param.unitName,
+                formControls : this.formControl.sort((a,b)=> a.order - b.order)    
+              });
+              
+              this.formControlCollection = this.formControlCollection.concat(this.formControl);
+              this.formControl = [];
+         });    
+         console.log('Form control items >> '+ this.formControlCollection.length);
+         this.labOrderService.updateResultsForm(this.formControlCollection);
      });
 
      const dialogConfig = new MatDialogConfig();
@@ -127,46 +172,41 @@ export class CompleteLabOrderComponent implements OnInit {
           return;
           console.log(data);
       });
-      
-     this.labOrderService.updateParams(this.labTestParameters);
   }
 
-  private buildLabTestResultFormContol(parameter : any) : FormControlBase<any>
+  private getFormContolFromParam(parameter : any) : FormControlBase<any>
   {
+    console.log('parameter details >>' + parameter.dataType);
       switch (parameter.dataType) {
         case this.ResultDataType.Text:  
-
+            var type = parameter.dataType == this.ResultDataType.Text ? 'text' : 'number';
             return new TextboxFormControl(
               {
-                key: parameter.id,
+                key:'resultText_' + parameter.id,
                 label: 'Result Text',
                 value: ' ',
                 required: true,
-                order: 1
+                order: 2
               }); 
           case this.ResultDataType.Select:   
              return new SelectlistFormControl(
              {
-              key: parameter.id,
+              key:'select_' + parameter.id,
               label: 'Select Result',
               options: parameter.resultOptions,
-              order: 3   
-             })
-          case this.ResultDataType.Numeric:   
-          return new TextboxFormControl(
-            {
-              key: parameter.id,
-              label: 'Result Value',
-              value: ' ',
-              required: true,
-              order: 1
-            }); 
+              order: 2
+             });
+             case this.ResultDataType.Numeric:  
+            return new TextboxFormControl(
+              {
+                key:'resultText_' + parameter.id,
+                label: 'Result Text',
+                value: ' ',
+                required: true,
+                order: 2
+              }); 
         default:
           break;
       }
-  
   }
-
-
-
 }

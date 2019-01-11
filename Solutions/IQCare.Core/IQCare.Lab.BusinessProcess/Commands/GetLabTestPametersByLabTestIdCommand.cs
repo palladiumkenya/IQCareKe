@@ -15,7 +15,7 @@ namespace IQCare.Lab.BusinessProcess.Commands
         public int Id { get; set; }
         public string ParameterName { get; set; }
         public string DataType { get; set; }
-        public int UnitId { get; set; }
+        public int ? UnitId { get; set; }
         public string UnitName { get; set; }
         public int LabTestId { get; set; }
         public object ResultOptions { get; set; }

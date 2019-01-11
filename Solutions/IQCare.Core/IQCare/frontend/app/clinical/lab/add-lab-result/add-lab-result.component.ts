@@ -5,6 +5,8 @@ import { CompleteLabOrderCommand, AddLabTestResultCommand, ResultDataType } from
 import { SnotifyService } from 'ng-snotify';
 import { NotificationService } from '../../../shared/_services/notification.service';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+import { FormControlBase } from '../../../shared/_models/dynamic-form/FormControlBase';
+import { FormControlService } from '../../../shared/_services/form-control.service';
 
 @Component({
   selector: 'app-add-lab-result',
@@ -27,50 +29,39 @@ export class AddLabResultComponent implements OnInit {
   resultDataTypes : ResultDataType;
   labTestParameters : any[] = [];
   dialogTitle : string;
+  formControlCollection : FormControlBase<any>[] = [];
 
-  addLabResultForm : FormGroup;
+  labResultForm : FormGroup;
   @Output() notify: EventEmitter<FormGroup> = new EventEmitter<FormGroup>();
 
-  constructor(private formBuilder :FormBuilder, 
-    private labOrderService: LaborderService,
+  constructor(private labOrderService: LaborderService,
     private  snotifyService : SnotifyService,
     private notificationService: NotificationService,
     private dialogRef: MatDialogRef<AddLabResultComponent>,
+    private formControlService : FormControlService,
     @Inject(MAT_DIALOG_DATA) data) 
-    {
-       
-       this.addLabResultForm = this.formBuilder.group({
-            resultValue : new FormControl(''),
-            resultText :  new FormControl(''),
-            resultOption : new FormControl(''),
-            resultUnit :   new FormControl(''),
-            undetectable :  new FormControl(''),
-            detectionLimit : new FormControl(''),
-            parameter : new FormControl('')
-       });
-
+    {   
        this.labTestParameters = data;
        this.resultDataTypes = new ResultDataType();
-       this.notify.emit(this.addLabResultForm);
        this.userId = JSON.parse(localStorage.getItem('appUserId'));
-       this.labOrderService.currentLabTestParams.subscribe(param => this.labTestParameters = param);
+       this.notify.emit(this.labResultForm);
        this.dialogTitle = 'Submit Lab Test Results';
    }
 
   ngOnInit() 
   {
-     this.isNumeric = this.resultDataType == this.resultDataTypes.Numeric;
-     this.isText = this.resultDataType == this.resultDataTypes.Text;
-     this.isSelect = this.resultDataType == this.resultDataTypes.Select;
+    this.labOrderService.labTestResultForm.subscribe(form =>{  
+       this.formControlCollection = form;
+       this.labResultForm = this.formControlService.toFormGroup(this.formControlCollection);
+      console.log('Form Controls Count >> '+this.formControlCollection.length);
+     });
   }
 
    labTestResults : AddLabTestResultCommand [] = [];
 
    public submitLabResult() {
-    if(this.addLabResultForm.invalid)
+    if(this.labResultForm.invalid)
          return;
-
-      this.labTestResults.push(this.buildLabTestResultModel());
       const completeLabCommand : CompleteLabOrderCommand = {
         LabOrderId : this.labOrderId,
         LabOrderTestId : this.labOrderTestId,
@@ -92,27 +83,10 @@ export class AddLabResultComponent implements OnInit {
       })
      
    }
-
-   private buildLabTestResultModel() : AddLabTestResultCommand {
-    const labResultCommand :  AddLabTestResultCommand =
-        {
-        DetectionLimit :this.addLabResultForm.get('detectionLimit').value,
-        ParameterId : this.addLabResultForm.get('parameterId').value,
-        ResultOption : this.addLabResultForm.get('resultOption').value,
-        ResultOptionId : this.addLabResultForm.get('resultOption').value,
-        ResultText : this.addLabResultForm.get('resultText').value,
-        ResultUnit : this.addLabResultForm.get('resultUnit').value,
-        ResultUnitId : this.addLabResultForm.get('resultUnit').value,
-        ResultValue :  this.addLabResultForm.get('resultValue').value,
-        Undetectable :  this.addLabResultForm.get('undetectable').value,
-        }
-      return labResultCommand;
-   }
-
    save() {
-    if (!this.addLabResultForm.valid) 
+    if (!this.labResultForm.valid) 
           return;
-    this.dialogRef.close(this.addLabResultForm.value);   
+    this.dialogRef.close(this.labResultForm.value);   
 }
 
 close() {

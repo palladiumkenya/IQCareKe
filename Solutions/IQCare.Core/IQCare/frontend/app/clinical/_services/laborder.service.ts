@@ -7,6 +7,9 @@ import { AddLabOrderCommand } from '../_models/AddLabOrderCommand';
 import { Observable } from 'rxjs';
 import { CompleteLabOrderCommand } from '../_models/CompleteLabOrderCommand';
 import { BehaviorSubject } from 'rxjs';
+import { FormGroup } from '@angular/forms';
+import { FormControlService } from '../../shared/_services/form-control.service';
+import { FormControlBase } from '../../shared/_models/dynamic-form/FormControlBase';
 
 const httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -18,17 +21,19 @@ const httpOptions = {
 export class LaborderService {
    private LabOrder_ApiUrl = environment.API_LAB_URL;
 
-   private labTestParamsMessageSource = new BehaviorSubject([]);
-   currentLabTestParams = this.labTestParamsMessageSource.asObservable();
+   private labResultFormGroupSubject = new BehaviorSubject<FormControlBase<any>[]>([]);
+   labTestResultForm = this.labResultFormGroupSubject.asObservable();
 
     constructor(private httpClient: HttpClient,
-        private errorHandlerService: ErrorHandlerService, ) {
-    }
+        private errorHandlerService: ErrorHandlerService) 
+        {
+
+        }
 
 
 
- public updateParams(params :any[]) {
-   this.labTestParamsMessageSource.next(params);
+ public updateResultsForm(formControls : FormControlBase<any>[]) {
+   this.labResultFormGroupSubject.next(formControls);
  }
 
   public addLabOrder(addLabOrderCommand : AddLabOrderCommand) : Observable<any> {

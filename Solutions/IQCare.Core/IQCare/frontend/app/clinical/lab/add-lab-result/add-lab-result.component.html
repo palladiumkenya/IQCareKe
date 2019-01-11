@@ -1,56 +1,29 @@
 <h2 mat-dialog-title>{{dialogTitle}}</h2>
 <mat-dialog-content>
-<form [formGroup]="addLabResultForm">
-  <div class="row">
-      <div class="col-lg-3 col-sm-3 col-xs-12">
-          <mat-form-field>
-              <input matInput placeholder="Parameter Name" formControlName="parameter">
-          </mat-form-field>
-      </div>
-   
-        <div class="col-lg-3 col-sm-3 col-xs-12">
-            <mat-form-field>
-                <input matInput  placeholder="Result Text" formControlName="resultText">
-            </mat-form-field>
-        </div>
-     
-      <ng-template  [ngIf]="isNumeric">
-        <div class="col-lg-3 col-sm-3 col-xs-12">
-            <mat-form-field>
-                <input matInput type="number" placeholder="Result Text" formControlName="resultValue">
-            </mat-form-field>
-        </div>
-      </ng-template>
-      
-      <ng-template  [ngIf]="isSelect">
-        <div class="col-lg-3 col-sm-3 col-xs-12">
-            <mat-form-field>
-                <mat-label>Select Result</mat-label>
-                <mat-select formControlName="resultOption" required>
-                    <mat-option [value]="0">Select</mat-option>
-                    <mat-option *ngFor="let result of labTestResultOptions" [value]="result">
-                        {{result.displayName}}
-                    </mat-option>
-                </mat-select>
-            </mat-form-field>
-        </div>
-      </ng-template>
-    
+<form [formGroup]="labResultForm">
+  <div *ngFor = "let parameter of labTestParameters" class="row">
+      <div class="col-lg-3 col-sm-3 col-xs-12" *ngFor ="let control of parameter.formControls" >
+          <div [ngSwitch]="control.controlType">
+                <mat-form-field *ngSwitchCase="'textbox'" >
+                 <input  matInput [placeholder]="control.label" [formControlName]="control.key"
+                  [id] ="control.key" [value] ="control.value">
+               </mat-form-field>
 
-      <div class="col-lg-3 col-sm-3 col-xs-12">
-          <mat-form-field>
-              <input matInput placeholder="Result Unit" formControlName="resultUnit">
-          </mat-form-field>
+               <mat-form-field *ngSwitchCase="'selectlist'">
+                    <mat-label>{{ control.label }}</mat-label>
+                    <mat-select [formControlName]="control.key" [id]="control.key">
+                        <mat-option [value]="0">Select</mat-option>
+                        <mat-option *ngFor="let result of control.options" [value]="result.key">
+                            {{result.value}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+          </div>        
       </div>
- <div class="example-section">
- <mat-checkbox formControlName="undetectable" >Undetectable </mat-checkbox>
- </div>
- <div class="col-lg-3 col-sm-3 col-xs-12">
-    <mat-form-field>
-     <input matInput placeholder="Detection Limit" formControlName="detectionLimit">
-    </mat-form-field>
-</div>
-  </div>    
+     <!-- <div class="checkbox-style">
+        <mat-checkbox formControlName="undetectable" >Undetectable </mat-checkbox>
+     </div> -->
+</div> 
 </form>
 </mat-dialog-content>
 
