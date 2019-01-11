@@ -27,9 +27,9 @@ export class BabyComponent implements OnInit {
     yesnoOptions: any[] = [];
     birthOutcomes: any[] = [];
 
-    @Input('PatientId') PatientId: number;
-    @Input('isEdit') isEdit: boolean;
-    @Input('PatientMasterVisitId') PatientMasterVisitId: number;
+    @Input() PatientId: number;
+    @Input() isEdit: boolean;
+    @Input() PatientMasterVisitId: number;
     showEdit: boolean = false;
 
     constructor(private formBuilder: FormBuilder,
@@ -47,9 +47,9 @@ export class BabyComponent implements OnInit {
             teoGiven: new FormControl('', [Validators.required]),
             breastFed: new FormControl('', [Validators.required]),
 
-            agparScore1min: new FormControl('', [Validators.required]),
-            agparScore5min: new FormControl('', [Validators.required]),
-            agparScore10min: new FormControl('', [Validators.required]),
+            agparScore1min: new FormControl('', [Validators.required, Validators.max(10)]),
+            agparScore5min: new FormControl('', [Validators.required, Validators.max(10)]),
+            agparScore10min: new FormControl('', [Validators.required, Validators.max(10)]),
             notificationNumber: new FormControl('', [Validators.required]),
             comment: new FormControl('na', [])
         });
@@ -207,6 +207,36 @@ export class BabyComponent implements OnInit {
             }  
         }
         return null;
+    }
+
+    public onBabyOutcome(event) {
+
+        const noOption = this.yesnoOptions.filter(obj => obj.itemName == 'No');
+        console.log('yesNoOptions');
+        console.log(noOption);
+        const noId = noOption[0]['itemId'];
+        console.log('NoId' + noId);
+
+        if (event.isUserInput && event.source.selected && event.source.viewValue == 'Live Birth') {
+
+        }
+
+        if (event.isUserInput && event.source.selected && event.source.viewValue == 'Fresh Still Birth') {
+
+        }
+
+        if (event.isUserInput && event.source.selected && event.source.viewValue == 'Macerated Still Birth') {
+
+            this.babyFormGroup.get('resuscitationDone').setValue(105);
+          //  this.babyFormGroup.get('deformity').setValue(noId);
+          //  this.babyFormGroup.get('teoGiven').setValue(noId);
+          //  this.babyFormGroup.get('breastFed').setValue(noId);
+            this.babyFormGroup.get('agparScore1min').setValue(0);
+            this.babyFormGroup.get('agparScore5min').setValue(0);
+            this.babyFormGroup.get('agparScore10min').setValue(0);
+            this.babyFormGroup.get('notificationNumber').setValue(0);
+            this.babyFormGroup.get('comment').setValue('');
+        }
     }
 
     

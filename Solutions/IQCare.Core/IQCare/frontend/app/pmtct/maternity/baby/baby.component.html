@@ -30,7 +30,7 @@
                 <mat-label>Outcome</mat-label>
                 <mat-select formControlName="outcome" required>
                     <mat-option [value]="0">select</mat-option>
-                    <mat-option *ngFor="let birthOutcome of birthOutcomes" [value]="birthOutcome">
+                    <mat-option *ngFor="let birthOutcome of birthOutcomes" [value]="birthOutcome" (onSelectionChange)="onBabyOutcome($event)">
                         {{birthOutcome.itemName}}
                     </mat-option>
                 </mat-select>
@@ -43,7 +43,7 @@
             <mat-form-field class="col-md-12">
                 <mat-label>Resuscitation done</mat-label>
                 <mat-select formControlName="resuscitationDone" required minlength="1">
-                    <mat-option [value]="0">select</mat-option>
+
                     <mat-option *ngFor="let yesnoOption of yesnoOptions" [value]="yesnoOption">
                         {{yesnoOption.itemName}}
                     </mat-option>
@@ -54,7 +54,7 @@
             <mat-form-field class="col-md-12">
                 <mat-label>Birth with deformity</mat-label>
                 <mat-select formControlName="deformity" required minlength="1">
-                    <mat-option [value]="0">select</mat-option>
+
                     <mat-option *ngFor="let yesnoOption of yesnoOptions" [value]="yesnoOption">
                         {{yesnoOption.itemName}}
                     </mat-option>
@@ -65,7 +65,7 @@
             <mat-form-field class="col-md-12">
                 <mat-label>TEO given</mat-label>
                 <mat-select formControlName="teoGiven" required minlength="1">
-                    <mat-option [value]="0">select</mat-option>
+
                     <mat-option *ngFor="let yesnoOption of yesnoOptions" [value]="yesnoOption">
                         {{yesnoOption.itemName}}
                     </mat-option>
@@ -75,7 +75,7 @@
         <div class="col-lg-3 col-xs-12">
             <mat-form-field class="col-md-12">
                 <mat-label>Breast Fed < 1 hour</mat-label> <mat-select formControlName="breastFed" required minlength="1">
-                        <mat-option [value]="0">select</mat-option>
+
                         <mat-option *ngFor="let yesnoOption of yesnoOptions" [value]="yesnoOption">
                             {{yesnoOption.itemName}}
                         </mat-option>
@@ -88,19 +88,19 @@
     <div class="row">
         <div class="col-md-3 col-xs-12 col-sm-12">
             <mat-form-field class="col-md-12">
-                <input matInput placeholder="APGAR score 1 min" formControlName="agparScore1min" required>
+                <input matInput placeholder="APGAR score 1 min" formControlName="agparScore1min" min="0" max="10" required>
             </mat-form-field>
         </div>
 
         <div class="col-md-3 col-xs-12 col-sm-12">
             <mat-form-field class="col-md-12">
-                <input matInput placeholder="APGAR score 5 min" formControlName="agparScore5min" required>
+                <input matInput placeholder="APGAR score 5 min" formControlName="agparScore5min" min="0" max="10"  required>
             </mat-form-field>
         </div>
 
         <div class="col-md-3 col-xs-12 col-sm-12">
             <mat-form-field class="col-md-12">
-                <input matInput placeholder="APGAR score 10 min" formControlName="agparScore10min" required>
+                <input matInput placeholder="APGAR score 10 min" formControlName="agparScore10min" min="0" max="10"  required>
             </mat-form-field>
         </div>
         <div class="col-lg-3 col-xs-12">

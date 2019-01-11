@@ -11,9 +11,12 @@ using System;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using IQCare.Common.Core.Models;
 using IQCare.Common.Infrastructure;
 using IQCare.Library;
 using IQCare.PMTCT.Services;
+using PatientClinicalNotes = IQCare.PMTCT.Core.Models.PatientClinicalNotes;
+using PatientScreening = IQCare.PMTCT.Core.Models.PatientScreening;
 
 namespace IQCare.PMTCT.BusinessProcess.CommandHandlers
 {
@@ -46,10 +49,31 @@ namespace IQCare.PMTCT.BusinessProcess.CommandHandlers
                         
                     };
 
-                   int patientWhoStageResult= await clientMonitoringService.AddPatientWhoStage(patientWhoStage);
+                    int vlSampleTypeId = await _commonUnitOfWork.Repository<LookupMaster>()
+                        .Get(x => x.Name == "ViralLoadSampleTaken").Select(x => x.Id).FirstOrDefaultAsync();
+                    string yesNoId = await _commonUnitOfWork.Repository<LookupItem>()
+                        .Get(x => x.Id == request.ViralLoadSampleTaken).Select(x => x.Name).FirstOrDefaultAsync();
+                    int patientWhoStageResult= await clientMonitoringService.AddPatientWhoStage(patientWhoStage);
                     int tbscreeningTypeId = await _commonUnitOfWork.Repository<Common.Core.Models.LookupItemView>().Get(x => x.MasterName == "TBScreeningPMTCT").Select(x => x.MasterId).FirstOrDefaultAsync();
                     int tbScreeningcaegoryId = await _commonUnitOfWork.Repository<Common.Core.Models.LookupItem>().Get(x => x.Name == "TBScreening").Select(x => x.Id).FirstOrDefaultAsync();
 
+                    if (vlSampleTypeId>0)
+                    {
+                        PatientScreening patientViralLoadScreening = new PatientScreening()
+                        {
+                            PatientId = request.PatientId,
+                            PatientMasterVisitId = request.PatientMasterVisitId,
+                            ScreeningTypeId = vlSampleTypeId,
+                            ScreeningValueId = request.ViralLoadSampleTaken,
+                            ScreeningDone = (yesNoId=="Yes")? true: false,
+                            ScreeningDate = DateTime.Now,
+                            ScreeningCategoryId = vlSampleTypeId,
+                            Comment = request.Comments,
+                            CreateDate = DateTime.Now,
+                            CreatedBy = request.CreatedBy
+                        };
+                        PatientScreeningResult = await clientMonitoringService.AddPatientScreening(patientViralLoadScreening);
+                    }
                     if (request.ScreeningDone)
                     {
                         int cacxTypeId = await _commonUnitOfWork.Repository<Common.Core.Models.LookupItemView>().Get(x => x.MasterName == "CaCxScreening").Select(x => x.MasterId).FirstOrDefaultAsync();
@@ -64,7 +88,7 @@ namespace IQCare.PMTCT.BusinessProcess.CommandHandlers
                                 ScreeningValueId=request.cacxResult,
                                 ScreeningDone=request.ScreeningDone,
                                 ScreeningDate=DateTime.Now,
-                                ScreeningCategoryId= cacxCategoryId,
+                                ScreeningCategoryId= request.cacxMethod,
                                 Comment = request.Comments,
                                 CreateDate = DateTime.Now,
                                 CreatedBy = request.CreatedBy

@@ -22,10 +22,17 @@ namespace IQCare.Controllers.PMTCT.ANC
         }
 
         // GET: api/<controller>
-        [HttpGet]
-        public IEnumerable<string> Get()
+        [HttpGet("{patientId}")]
+        public async Task<IActionResult> GetWhoStageCurrent(int patientId)
         {
-            return new string[] { "value1", "value2" };
+            var response = await
+                _mediator.Send(
+                    new GetPatientWhoStageCurrentCommand { PatientId = patientId },
+                    HttpContext.RequestAborted);
+
+            if (response.IsValid)
+                return Ok(response.Value);
+            return BadRequest(response.Value);
         }
 
         // GET api/<controller>/5

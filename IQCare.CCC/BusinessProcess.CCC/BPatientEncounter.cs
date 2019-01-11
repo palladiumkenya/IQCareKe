@@ -304,15 +304,18 @@ namespace BusinessProcess.CCC
 
                     for (int i = 0; i < phdp.Count; i++)
                     {
-                        ClsObject phdpObj = new ClsObject();
-                        ClsUtility.Init_Hashtable();
-                        ClsUtility.AddParameters("@masterVisitID", SqlDbType.Int, PatientMasterVisitID);
-                        ClsUtility.AddParameters("@PatientID", SqlDbType.Int, PatientID);
-                        ClsUtility.AddParameters("@phdp", SqlDbType.VarChar, phdp[i].ToString());
-                        ClsUtility.AddParameters("@userID", SqlDbType.VarChar, userID);
+                        if (!(String.IsNullOrEmpty(phdp[i].ToString())))
+                         {
+                            ClsObject phdpObj = new ClsObject();
+                            ClsUtility.Init_Hashtable();
+                            ClsUtility.AddParameters("@masterVisitID", SqlDbType.Int, PatientMasterVisitID);
+                            ClsUtility.AddParameters("@PatientID", SqlDbType.Int, PatientID);
+                            ClsUtility.AddParameters("@phdp", SqlDbType.VarChar, phdp[i].ToString());
+                            ClsUtility.AddParameters("@userID", SqlDbType.VarChar, userID);
 
-                        int j = (int)phdpObj.ReturnObject(ClsUtility.theParams, "sp_savePatientEncounterPHDP", ClsUtility.ObjectEnum.ExecuteNonQuery);
-                    }
+                            int j = (int)phdpObj.ReturnObject(ClsUtility.theParams, "sp_savePatientEncounterPHDP", ClsUtility.ObjectEnum.ExecuteNonQuery);
+                        }
+                      }
 
 
                     //if (diagnosis.Count > 0)

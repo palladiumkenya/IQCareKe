@@ -10,5 +10,6 @@ namespace Interface.CCC.Encounter
         PatientOI GetPatientOIbyId(int entityId);
         PatientOI UpdatePatientOI(PatientOI patientOI);
         PatientOI GetPatientOI(int patientId, int patientMasterVisitId, int OI);
+        List<PatientOI> GetOIListByPatient(int patientId);
     }
 }

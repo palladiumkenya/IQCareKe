@@ -36,6 +36,10 @@ namespace IQCare.Web.CCC.UC.EnhanceAdherenceCounselling
         public int appointmentId;
         public TextBox appointmentDateTb;
         public PatientClinicalNotes[] notesList;
+        public string SessionRefferal1ItemId;
+        public string SessionRefferal3ItemId;
+        public string ItemYes;
+        public string ItemNo;
         protected void Page_Load(object sender, EventArgs e)
         {
             PatientId = Convert.ToInt32(HttpContext.Current.Session["PatientPK"]);
@@ -45,7 +49,10 @@ namespace IQCare.Web.CCC.UC.EnhanceAdherenceCounselling
             reasonId = LookupLogic.GetLookupItemId("Follow Up");
             differentiatedCareId = LookupLogic.GetLookupItemId("Standard Care");
             followupStatusId = LookupLogic.GetLookupItemId("Pending");
-
+            SessionRefferal1ItemId = LookupLogic.GetLookupItemId("SessionReferralsNetworksQ1");
+            SessionRefferal3ItemId = LookupLogic.GetLookupItemId("SessionReferralsNetworksQ3");
+            ItemYes = LookupLogic.GetLookupItemId("Yes");
+            ItemNo = LookupLogic.GetLookupItemId("No");
             if (!IsPostBack)
             {
                 getAdherenceCtrls();
@@ -152,6 +159,7 @@ namespace IQCare.Web.CCC.UC.EnhanceAdherenceCounselling
                     rbList.RepeatColumns = 2;
                     rbList.ClientIDMode = System.Web.UI.ClientIDMode.Static;
                     rbList.CssClass = "mmrbList";
+
                     lookUp.populateRBL(rbList, radioItems);
                     typePlaceHolder.Controls.Add(rbList);
                     typePlaceHolder.Controls.Add(new LiteralControl("</div>"));

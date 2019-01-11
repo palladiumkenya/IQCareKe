@@ -23,6 +23,14 @@ namespace IQCare.Controllers.PMTCT.ANC
             _mediator = mediator;
         }
 
+        [HttpGet("{patientId}")]
+        public async Task<ActionResult> GetPatientCounsellingAll(int patientId)
+        {
+            var response = await _mediator.Send(new GetPatientCounsellingAllCommand {PatientId = patientId});
+            if (response.IsValid)
+                return Ok(response.Value);
+            return BadRequest(response);
+        }
 
         [HttpGet("{patientId}/{patientMasterVisitId}")]
         public async Task<IActionResult> GetPatientEducation(int patientId, int patientMasterVisitId)

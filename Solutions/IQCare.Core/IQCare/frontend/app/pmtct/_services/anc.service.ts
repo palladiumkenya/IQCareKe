@@ -198,6 +198,14 @@ export class AncService {
         );
     }
 
+    public getPatientCounselingInfoAll(patientId: number) {
+        return this.http.get<any[]>(this.API_URL + '/api/PatientEducationExamination/GetPatientCounsellingAll/' +
+            patientId).pipe(
+            tap(getPatientCounselingInfoAll => this.errorHandler.log('get ANC Counseling Data All')),
+            catchError(this.errorHandler.handleError<any[]>('getPatientCounselingInfoAll'))
+        );
+    }
+
     public getPatientPhysicalExaminationInfo(patientId: number, patientMasterVisitId: number) {
         return this.http.get<any[]>(this.API_URL + '/api/PhysicalExamination/GetPhysicalExam/' +
             patientId + ' / ' + patientMasterVisitId).pipe(
@@ -206,11 +214,27 @@ export class AncService {
         );
     }
 
+    public getPatientWhoStageInfoCurrent(patientId: number) {
+        return this.http.get<any[]>(this.API_URL + '/api/PatientWhoStage/GetWhoStageCurrent/' +
+            patientId).pipe(
+            tap(getPatientWhoStageInfo => this.errorHandler.log('get WHO Stage info Data All')),
+            catchError(this.errorHandler.handleError<any[]>('getPatientWhoStageInfoAll'))
+        );
+    }
+
     public getPatientWhoStageInfo(patientId: number, patientMasterVisitId: number) {
         return this.http.get<any[]>(this.API_URL + '/api/PatientWhoStage/GetWhoStage/' +
             patientId + ' / ' + patientMasterVisitId).pipe(
             tap(getPatientWhoStageInfo => this.errorHandler.log('get WHO Stage info Data')),
             catchError(this.errorHandler.handleError<any[]>('getPatientWhoStageInfo'))
+        );
+    }
+
+    public getPatientScreeningInfoByPatientId(patientId: number) {
+        return this.http.get<any[]>(this.API_URL + '/api/PatientScreening/GetPatientScreeningByPatientId/' +
+            patientId ).pipe(
+            tap(getPatientScreeningInfo => this.errorHandler.log('get WHO Stage info Data All')),
+            catchError(this.errorHandler.handleError<any[]>('getPatientScreeningInfo All'))
         );
     }
 

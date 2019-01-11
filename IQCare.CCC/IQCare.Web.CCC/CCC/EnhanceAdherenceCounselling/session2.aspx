@@ -508,7 +508,37 @@
     }
     $(document).ready(function () {
         var PatientMasterVisitId = GetURLParameter('visitId');
-       var patientId = '<%=PatientId%>';
+        var patientId = '<%=PatientId%>';
+
+  var SRNQuestion1='<%=Session2Refferal1ItemId%>';
+        var SRNQuestion3 = '<%=Session2Refferal3ItemId%>';
+
+        var ItemNo = '<%=ItemNo%>';
+        var ItemYes = '<%=ItemYes%>';
+
+         $("input:radio[name='session2rb"+SRNQuestion1+ "']").change(function (evt, data) {
+        
+             var selectedValue = $(this).val();
+             if (selectedValue > 0) {
+                 if (selectedValue == ItemYes) {
+
+
+                     
+
+                     $("#session2tb" + SRNQuestion3).prop('disabled', false);
+                 }
+                 else {
+
+                     $("#session2tb" + SRNQuestion3).prop('disabled', true);
+                 }
+             }
+             else {
+                 $("#session2tb" + SRNQuestion3).prop('disabled', false);
+             }
+ 
+            });
+
+
         $('.session2loading').show();
         $.ajax({
             type: "POST",
