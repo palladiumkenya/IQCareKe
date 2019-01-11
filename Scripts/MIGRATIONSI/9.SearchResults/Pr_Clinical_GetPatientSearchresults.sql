@@ -134,7 +134,7 @@ And (@DOB Is Null Or P.DOB = @DOB) And (@RegistrationDate Is Null Or P.Registrat
 And Case When @PhoneNumber Is  Null Or Convert(varchar(50), decryptbykey(P.Phone)) =  @PhoneNumber Then 1	Else 0 End = 1
 And (@FacilityID Is Null Or P.LocationID=@FacilityID)' +@Identifiers + ') P '+ @RuleFilter  ;
 
-Set @Query = @Query + ' Order By [Status],P.RegistrationDate';
+Set @Query = @Query + ' Order By P.RegistrationDate';
 
 PRINT @Query;
 
