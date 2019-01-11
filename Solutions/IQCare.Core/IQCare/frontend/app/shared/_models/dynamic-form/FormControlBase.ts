@@ -5,6 +5,7 @@ label : string;
 required : boolean;
 order : number;
 controlType : string;
+disabled : boolean;
 
 constructor(options :{
     value ?: T,
@@ -12,7 +13,8 @@ constructor(options :{
     label ? : string,
     required ? : boolean,
     order ? : number,
-    controlType ? : string
+    controlType ? : string,
+    disabled ? : boolean
 } = {})
 {
     this.value = options.value;
@@ -21,6 +23,7 @@ constructor(options :{
     this.required = !!options.required;
     this.order = options.order === undefined ? 1 : options.order;
     this.controlType = options.controlType || '';
+    this.disabled = !! options.disabled;
 
 }
 }

@@ -39,9 +39,11 @@ export class AddLabResultComponent implements OnInit {
     private notificationService: NotificationService,
     private dialogRef: MatDialogRef<AddLabResultComponent>,
     private formControlService : FormControlService,
-    @Inject(MAT_DIALOG_DATA) data) 
+    @Inject(MAT_DIALOG_DATA) public data : any) 
     {   
-       this.labTestParameters = data;
+       this.labTestParameters = data.labTestParameters;
+       this.formControlCollection = data.formControlCollection;
+       this.labResultForm = this.formControlService.toFormGroup(data.formControlCollection);
        this.resultDataTypes = new ResultDataType();
        this.userId = JSON.parse(localStorage.getItem('appUserId'));
        this.notify.emit(this.labResultForm);
@@ -50,18 +52,21 @@ export class AddLabResultComponent implements OnInit {
 
   ngOnInit() 
   {
-    this.labOrderService.labTestResultForm.subscribe(form =>{  
-       this.formControlCollection = form;
-       this.labResultForm = this.formControlService.toFormGroup(this.formControlCollection);
-      console.log('Form Controls Count >> '+this.formControlCollection.length);
-     });
+    
   }
 
    labTestResults : AddLabTestResultCommand [] = [];
 
+
+  get isFormValid(){
+    return !this.labResultForm.invalid;
+  }
+
    public submitLabResult() {
     if(this.labResultForm.invalid)
          return;
+        console.log(JSON.stringify(this.labResultForm.value));
+        
       const completeLabCommand : CompleteLabOrderCommand = {
         LabOrderId : this.labOrderId,
         LabOrderTestId : this.labOrderTestId,

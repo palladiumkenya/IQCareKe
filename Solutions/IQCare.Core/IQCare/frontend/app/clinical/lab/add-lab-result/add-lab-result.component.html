@@ -5,7 +5,7 @@
       <div class="col-lg-3 col-sm-3 col-xs-12" *ngFor ="let control of parameter.formControls" >
           <div [ngSwitch]="control.controlType">
                 <mat-form-field *ngSwitchCase="'textbox'" >
-                 <input  matInput [placeholder]="control.label" [formControlName]="control.key"
+                 <input matInput [placeholder]="control.label" [formControlName]="control.key"
                   [id] ="control.key" [value] ="control.value">
                </mat-form-field>
 
@@ -18,16 +18,19 @@
                         </mat-option>
                     </mat-select>
                 </mat-form-field>
+                   <!-- <mat-checkbox *ngSwitchCase="'checkbox'" 
+                    [id]="control.key"
+                    [formControlName] ="control.key">
+                    {{control.label}} 
+                   </mat-checkbox> -->
           </div>        
       </div>
-     <!-- <div class="checkbox-style">
-        <mat-checkbox formControlName="undetectable" >Undetectable </mat-checkbox>
-     </div> -->
+    
 </div> 
 </form>
 </mat-dialog-content>
 
 <mat-dialog-actions align="end">
         <button class="mat-raised-button" (click)="close()">Close</button>
-        <button class="mat-raised-button mat-primary" (click)="submitLabResult()">Save</button>
+        <button class="mat-raised-button mat-primary" [disabled] ="!labResultForm.valid" (click)="submitLabResult()">Save</button>
 </mat-dialog-actions>

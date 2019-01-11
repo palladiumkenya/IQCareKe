@@ -5,7 +5,7 @@ import { ActivatedRoute } from '@angular/router';
 import { $ } from 'protractor';
 import { AddLabResultComponent } from '../add-lab-result/add-lab-result.component';
 import { FormControlBase } from '../../../shared/_models/dynamic-form/FormControlBase';
-import { TextboxFormControl, NumericTextboxFormControl } from '../../../shared/_models/dynamic-form/TextBoxFormControl';
+import { TextboxFormControl, NumericTextboxFormControl, CheckboxFormControl } from '../../../shared/_models/dynamic-form/TextBoxFormControl';
 import { ResultDataType } from '../../_models/CompleteLabOrderCommand';
 import { SelectlistFormControl } from '../../../shared/_models/dynamic-form/SelectListFormControl';
 import { FormControlService } from '../../../shared/_services/form-control.service';
@@ -38,8 +38,7 @@ export class CompleteLabOrderComponent implements OnInit {
 
   labResultsFormGroup : FormGroup;
 
-  constructor(private labOrderService : LaborderService, 
-    private formControlService : FormControlService,
+  constructor(private labOrderService : LaborderService,
      private route: ActivatedRoute,
      private dialog: MatDialog)
    {
@@ -119,7 +118,8 @@ export class CompleteLabOrderComponent implements OnInit {
                 label: 'Parameter Name',
                 value: param.parameterName,
                 required: false,
-                order: 1
+                order: 1,
+                disabled: true
               }));
 
               this.formControl.push(new TextboxFormControl({
@@ -127,15 +127,25 @@ export class CompleteLabOrderComponent implements OnInit {
                 label: 'Result Unit',
                 value: param.unitName,
                 required: false,
-                order: 3
+                order: 3,
+                disabled : true
+              }));
+              
+              this.formControl.push(new CheckboxFormControl({
+                 key :'undetectable_'+param.id,
+                 label : 'Undetectable',
+                 value :false,
+                 required : false,
+                 order : 4
               }));
 
               this.formControl.push(new TextboxFormControl({
                 key:'detection_' + param.id,
                 label: 'Detection Limit',
-                value: ' ',
+                value: 0,
                 required: false,
-                order: 4
+                order: 5,
+                disabled : false
               }));
 
               this.labTestParameters.push({
@@ -151,32 +161,31 @@ export class CompleteLabOrderComponent implements OnInit {
               this.formControlCollection = this.formControlCollection.concat(this.formControl);
               this.formControl = [];
          });    
-         console.log('Form control items >> '+ this.formControlCollection.length);
-         this.labOrderService.updateResultsForm(this.formControlCollection);
-     });
+          const dialogConfig = new MatDialogConfig();
 
-     const dialogConfig = new MatDialogConfig();
+          dialogConfig.disableClose = true;
+          dialogConfig.autoFocus = true;
+          
+          dialogConfig.data =  {
+                                 labTestParameters : this.labTestParameters,
+                                 formControlCollection : this.formControlCollection
+                               };
+        
+          const dialogRef = this.dialog.open(AddLabResultComponent, dialogConfig);
+          dialogRef.afterClosed().subscribe(
+            data => 
+            {
+              if (!data)
+                return;
+                console.log(data);
+            });
+          });
 
-     dialogConfig.disableClose = true;
-     dialogConfig.autoFocus = true;
-     dialogConfig.height = '70%';
-     dialogConfig.width = '80%';
-
-     dialogConfig.data = this.labTestParameters;
-  
-     const dialogRef = this.dialog.open(AddLabResultComponent, dialogConfig);
-     dialogRef.afterClosed().subscribe(
-      data => 
-      {
-        if (!data)
-          return;
-          console.log(data);
-      });
+     
   }
 
   private getFormContolFromParam(parameter : any) : FormControlBase<any>
   {
-    console.log('parameter details >>' + parameter.dataType);
       switch (parameter.dataType) {
         case this.ResultDataType.Text:  
             var type = parameter.dataType == this.ResultDataType.Text ? 'text' : 'number';
