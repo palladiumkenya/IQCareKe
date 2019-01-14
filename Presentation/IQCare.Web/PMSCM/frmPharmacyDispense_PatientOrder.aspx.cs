@@ -34,7 +34,7 @@ namespace IQCare.Web.PMSCM
             //(Master.FindControl("levelOneNavigationUserControl1").FindControl("lblheader") as Label).Text = "Current Order";
             //(Master.FindControl("levelTwoNavigationUserControl1").FindControl("lblformname") as Label).Text = "Pharmacy Dispense";
 
-            LoadPendingPharmacyOrders();
+           
 
             if (!IsPostBack)
             {
@@ -95,7 +95,7 @@ namespace IQCare.Web.PMSCM
                         ScriptManager.RegisterStartupScript(this, this.GetType(), "DispenseByNotSelected", str.ToString(), true);
                 }
             }
-
+            LoadPendingPharmacyOrders();
             setValidatorsBasedOntechnicalArea();
             JavaScriptFunctionsOnLoad();
             resizeScreen();
