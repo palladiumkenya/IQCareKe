@@ -39,7 +39,6 @@ export class FamilyComponent implements OnInit {
     getSelectedRow(row) {
         this.highlightedRow = [];
         this.highlightedRow.push(row);
-
     }
 
     screenClient(row) {

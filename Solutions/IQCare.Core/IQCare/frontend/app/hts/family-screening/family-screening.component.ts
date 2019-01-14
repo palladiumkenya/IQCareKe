@@ -90,7 +90,7 @@ export class FamilyScreeningComponent implements OnInit {
             this.familyScreening.dateOfScreening = moment(this.familyScreening.dateOfScreening).toDate().toDateString();
 
             this.familyService.addFamilyScreening(this.familyScreening, arr).subscribe(res => {
-                // console.log('res');
+
                 this.snotifyService.success('Successfully saved family screening',
                     'Family Screening', this.notificationService.getConfig());
                 this.zone.run(() => { this.router.navigate(['/hts/family'], { relativeTo: this.route }); });

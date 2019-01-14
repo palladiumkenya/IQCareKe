@@ -1,0 +1,57 @@
+<div class="row">
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        <div class="row">
+            <div class="col-lg-12 col-sm-6 col-xs-12">
+                <div class="widget">
+                    <div class="widget-header bordered-bottom bordered-sky">
+                        <span class="widget-caption"> HTS | FAMILY </span>
+                    </div>
+                    <div class="widget-body">
+                        <app-clientbrief></app-clientbrief>
+
+                        <div class="row bordered-top bordered-sky">
+                            &nbsp;
+                        </div>
+
+                        <div class="row">
+                            <form [formGroup]="formGroup">
+                                <div class="row">
+                                    <div class="col-lg-3 col-sm-3 col-xs-12">
+                                        <mat-form-field class="col-lg-12 col-sm-12 col-xs-12">
+                                            <mat-label>Is Client Registered in this Facility ? </mat-label>
+                                            <mat-select formControlName="isRegisteredInFacility" required>
+                                                <mat-option [value]=""></mat-option>
+                                                <mat-option *ngFor="let yesnoOption of yesnoOptions" [value]="yesnoOption.itemId"
+                                                    (onSelectionChange)="onRegisteredChange($event)">
+                                                    {{yesnoOption.itemName}}
+                                                </mat-option>
+                                            </mat-select>
+                                        </mat-form-field>
+                                    </div>
+
+                                    <div class="col-lg-4 col-sm-4 col-xs-12">
+                                        <button mat-raised-button class="mat-primary" (click)="findFamilyOrPartner()"
+                                            *ngIf="findRegistered">
+                                            <span class="fa fa-plus-circle">
+                                                Find Family
+                                            </span>
+                                        </button>
+                                    </div>
+                                </div>
+
+                                <div *ngFor="let question of questions" class="form-row">
+                                    <app-custom-form [question]="question" [form]="formGroup">
+                                    </app-custom-form>
+                                </div>
+
+                                <div class="form-row">
+                                    <button type="submit" [disabled]="!formGroup.valid">Save</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

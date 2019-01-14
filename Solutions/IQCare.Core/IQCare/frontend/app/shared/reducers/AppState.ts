@@ -9,4 +9,6 @@ interface AppState {
     clearState: any;
     service: string;
     PersonId: number;
+    isFamilyScreeningDone: boolean;
+    isFamilyTracingDone: boolean;
 }

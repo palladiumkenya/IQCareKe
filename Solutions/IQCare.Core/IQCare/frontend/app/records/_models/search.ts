@@ -7,4 +7,5 @@ export class Search {
     mobileNumber: string = '';
     dateOfBirth?: Date;
     sex?: number;
+    age?: number;
 }
