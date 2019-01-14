@@ -39,9 +39,11 @@ namespace IQCare.Lab.BusinessProcess.CommandHandlers
                     var viewModel = labTestParams.Select(x => new LabTestParamaterViewModel
                     {
                         Id = x.Id, LabTestId = x.LabTestId, ParameterName = x.ParameterName,
-                        UnitId = x.LabTestParameterConfig != null ? x.LabTestParameterConfig.UnitId :default(int),
+                        UnitId = x.LabTestParameterConfig != null ? x.LabTestParameterConfig.UnitId : default(int),
                         DataType = x.DataType,
-                        UnitName = x.LabTestParameterConfig != null ? x.LabTestParameterConfig.Unit.UnitName : "No Units",
+                        UnitName = x.LabTestParameterConfig != null
+                            ? x.LabTestParameterConfig.Unit.UnitName
+                            : "No Units",
                         ResultOptions = x.LabTestParameterResultOptions.Any()
                             ? x.LabTestParameterResultOptions.Select(p =>
                                 new
