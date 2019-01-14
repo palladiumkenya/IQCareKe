@@ -37,9 +37,10 @@
               <ng-container matColumnDef="action">
                 <th mat-header-cell *matHeaderCellDef><strong class="fa fa-cog"> Action</strong></th>
                 <td mat-cell *matCellDef="let row">
-                    <button mat-raised-button class="mat-accent"><span class="fa fa-plus"> Add Results</span>
+                    <button mat-raised-button  (click)="addResult(row)" class="mat-accent"><span class="fa fa-plus"> Add Results</span>
                     </button>
                 </td>
+
             </ng-container>     
                 <tr mat-header-row *matHeaderRowDef="pending_labs_displaycolumns"></tr>
                 <tr mat-row *matRowDef="let row; columns: pending_labs_displaycolumns;"></tr>

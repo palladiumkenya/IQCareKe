@@ -22,5 +22,5 @@ export interface AddLabTestResultCommand {
 export class ResultDataType {
     Numeric ="NUMERIC";
     Text = "TEXT";
-    Select = "SELECT"
+    Select = "SELECTLIST"
 }

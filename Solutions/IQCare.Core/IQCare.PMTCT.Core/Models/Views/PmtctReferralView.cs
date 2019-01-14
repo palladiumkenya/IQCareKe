@@ -13,7 +13,7 @@ namespace IQCare.PMTCT.Core.Models.Views
       public int   ReferredTo { get; set; }
       public string  RefferedToName { get; set; }
        public DateTime ReferralDate { get; set; }
-      public int ReferredBy { get; set; }
+      public int? ReferredBy { get; set; }
       public Boolean  DeleteFlag { get; set; }
       public int  CreateBy { get; set; }
       public  DateTime CreateDate { get; set; } 

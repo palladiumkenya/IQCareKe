@@ -111,6 +111,9 @@ export class HaartProphylaxisComponent implements OnInit {
         if (this.isEdit) {
             this.getPatientDrugAdministrationInfo(this.patientId);
             this.getPatientChronicIllnessInfo(this.patientId);
+        } else {
+            this.getPatientDrugAdministrationInfo(this.patientId);
+            this.getPatientChronicIllnessInfo(this.patientId);
         }
     }
 

@@ -151,6 +151,7 @@ namespace IQCare.CCC.UILogic.Visit
             }
         }
 
+     
         public List<PatientMasterVisit> GetPatientMasterVisitBasedonVisitDate(int patientId, DateTime visitDate)
         {
             try

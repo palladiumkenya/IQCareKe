@@ -20,7 +20,7 @@ import { PersonHomeService } from '../../dashboard/services/person-home.service'
 })
 export class TriageComponent implements OnInit {
     @Input('PatientId') PatientId: number;
-    public PersonId : number;
+    public PersonId: number;
     @Input('PatientMasterVisitId') PatientMasterVisitId: number;
     public maxDate = moment().toDate();
 
@@ -44,7 +44,7 @@ export class TriageComponent implements OnInit {
         private router: Router, private route: ActivatedRoute,
         private encounterService: EncounterService,
         private lookupItemService: LookupItemService,
-        private personService : PersonHomeService) { }
+        private personService: PersonHomeService) { }
 
     ngOnInit() {
         this.route.params.subscribe(
@@ -80,9 +80,9 @@ export class TriageComponent implements OnInit {
             bmi: new FormControl({ value: 0, disabled: true }, [Validators.required]),
             headCircumference: new FormControl(''),
             muac: new FormControl(''),
-            weightForAge: new FormControl({value:0,disabled:true}),
-            weightForHeight: new FormControl({value:0,disabled:true}),
-            bmiZ: new FormControl({value:0,disabled:true}),
+            weightForAge: new FormControl({value: 0, disabled: true}),
+            weightForHeight: new FormControl({value: 0, disabled: true}),
+            bmiZ: new FormControl({value: 0, disabled: true}),
             bpDiastolic: new FormControl('', [Validators.required]),
             bpSystolic: new FormControl('', [Validators.required]),
             temperature: new FormControl('', [Validators.required]),
@@ -182,30 +182,31 @@ export class TriageComponent implements OnInit {
         this.vitalsFormGroup.controls['bmi'].setValue(bmi.toFixed(2));
 
         this.personService.getPatientByPersonId(this.PersonId).subscribe(
-            person=>{
-             if(person == null)
+            person => {
+             if (person == null) {
                   return;
-             if(!this.triageService.qualifiesForZscoreCalculation(person.dateOfBirth))
+             }
+             if (!this.triageService.qualifiesForZscoreCalculation(person.dateOfBirth)) {
                   return;
+             }
             
-            const calculateZscoreCommand : CalculateZscoreCommand = {
-            DateOfBirth :person.dateOfBirth,
+            const calculateZscoreCommand: CalculateZscoreCommand = {
+            DateOfBirth : person.dateOfBirth,
             Weight : this.vitalsFormGroup.get('weight').value,
             Height : this.vitalsFormGroup.get('height').value,
-            Sex : person.gender == "Male" ? 1 : 2
-            }
+            Sex : person.gender == 'Male' ? 1 : 2
+            };
 
-        this.triageService.calculateZscore(calculateZscoreCommand).subscribe(result=>{
+        this.triageService.calculateZscore(calculateZscoreCommand).subscribe(result => {
         this.vitalsFormGroup.controls['weightForAge'].setValue(result.weightForAge);
         this.vitalsFormGroup.controls['weightForHeight'].setValue(result.weightForHeight);
         this.vitalsFormGroup.controls['bmiZ'].setValue(result.bmiz);            
        });
             },
-            (err)=>
-            {
+            (err) => {
                console.log(err);
             },
-            ()=>{
+            () => {
 
             });
                 

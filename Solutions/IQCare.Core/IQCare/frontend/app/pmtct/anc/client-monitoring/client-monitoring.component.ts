@@ -34,9 +34,9 @@ export class ClientMonitoringComponent implements OnInit {
     @Output() nextStep = new EventEmitter<ClientMonitoringEmitter>();
     @Input() clientMonitoring: ClientMonitoringEmitter;
     @Input() clientMonitoringOptions: any[] = [];
-    @Input('isEdit') isEdit: boolean;
-    @Input('patientId') patientId: number;
-    @Input('patientMasterVisitId') patientMasterVisitId: number;
+    @Input() isEdit: boolean;
+    @Input() patientId: number;
+    @Input() patientMasterVisitId: number;
     @Output() notify: EventEmitter<FormGroup> = new EventEmitter<FormGroup>();
     public clientMonitoringData: ClientMonitoringEmitter;
 
@@ -87,6 +87,9 @@ export class ClientMonitoringComponent implements OnInit {
       if (this.isEdit) {
           this.getPatientScreeningInfo(this.patientId, this.patientMasterVisitId);
           this.getPatientWhoStageInfo(this.patientId, this.patientMasterVisitId);
+      }else {
+          this.getPatientWhoStageInfoCurrent(this.patientId);
+          this.getPatientScreeningInfoByPatientId(this.patientId);
       }
 
     }
@@ -144,6 +147,26 @@ export class ClientMonitoringComponent implements OnInit {
         }
     }
 
+    public getPatientWhoStageInfoCurrent(patientId: number) {
+        this.patientwhoStage$ = this.ancService.getPatientWhoStageInfoCurrent(patientId)
+            .subscribe(
+                p => {
+                    console.log('patientwho');
+                    console.log(p);
+                    console.log(p['whoStage']);
+                    if (p) {
+                        this.clientMonitoringFormGroup.get('WhoStage').setValue(p['whoStage']);
+                    }
+                },
+                (err) => {
+                    console.log(err);
+                    this.snotifyService.error('Error loading patient who stage ' + err, 'WHO', this.notificationService.getConfig());
+                },
+                () => {
+                    console.log(this.lookupItemView$);
+                });
+    }
+
     public getPatientWhoStageInfo(patientId: number, patientMasterVisitId: number) {
         this.patientwhoStage$ = this.ancService.getPatientWhoStageInfo(patientId, patientMasterVisitId)
             .subscribe(
@@ -164,6 +187,46 @@ export class ClientMonitoringComponent implements OnInit {
                 });
     }
 
+    public getPatientScreeningInfoByPatientId(patientId: number) {
+        this.patientScreening$ = this.ancService.getPatientScreeningInfoByPatientId(patientId)
+            .subscribe(
+                p => {
+                    console.log('patientscreening');
+                    console.log(p);
+                    const screening = p;
+                    if (p) {
+                        const cacx = screening.filter(obj => obj.screeningType == 'CaCxScreening');
+                        const tb = screening.filter(obj => obj.screeningType == 'TBScreeningPMTCT');
+                        const vl = screening.filter(obj => obj.screeningType == 'ViralLoadSampleTaken');
+
+                        console.log(cacx);
+                        console.log(cacx[0]['screeningDone']);
+
+                        if (vl.length > 0) {
+                            this.clientMonitoringFormGroup.get('screenedForTB').setValue(vl[0]['screeningValueId']);
+                        }
+
+                        if (tb.length > 0) {
+                            this.clientMonitoringFormGroup.get('screenedForTB').setValue(cacx[0]['screeningDone']);
+                        }
+                        if (cacx.length > 0) {
+                            this.clientMonitoringFormGroup.get('cacxScreeningDone').setValue(cacx[0]['screeningDone']);
+                            this.clientMonitoringFormGroup.get('cacxMethod').setValue(cacx[0]['screeningCategoryId']);
+                            this.clientMonitoringFormGroup.get('cacxResult').setValue(cacx[0]['screeningValueId']);
+                            this.clientMonitoringFormGroup.get('cacxComments').setValue(cacx[0]['comment']);
+                        }
+
+                    }
+                },
+                (err) => {
+                    console.log(err);
+                    this.snotifyService.error('Error loading patient screening ' + err, 'WHO', this.notificationService.getConfig());
+                },
+                () => {
+                    console.log(this.lookupItemView$);
+                });
+    }
+
     public getPatientScreeningInfo(patientId: number, patientMasterVisitId: number) {
         this.patientScreening$ = this.ancService.getPatientScreeningInfo(patientId, patientMasterVisitId)
             .subscribe(
@@ -174,8 +237,14 @@ export class ClientMonitoringComponent implements OnInit {
                     if (p) {
                         const cacx = screening.filter(obj => obj.screeningType == 'CaCxScreening');
                         const tb = screening.filter(obj => obj.screeningType == 'TBScreeningPMTCT');
+                        const vl = screening.filter(obj => obj.screeningType == 'ViralLoadSampleTaken');
+
                         console.log(cacx);
                         console.log(cacx[0]['screeningDone']);
+
+                        if (vl.length > 0) {
+                            this.clientMonitoringFormGroup.get('screenedForTB').setValue(vl[0]['screeningValueId']);
+                        }
 
                         if (tb.length > 0) {
                             this.clientMonitoringFormGroup.get('screenedForTB').setValue(cacx[0]['screeningDone']);

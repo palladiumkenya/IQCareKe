@@ -91,8 +91,8 @@ dataSource =  new MatTableDataSource(this.labTestData);
   addedLabTestIds: any[] = [];
 
   public  AddLabTest() {
-    if(this.labOrderFormGroup.invalid)
-       return;
+     if(this.labOrderFormGroup.invalid)
+        return;
        var labTestId = this.labOrderFormGroup.get('labTestId').value.id;
        var testName =  this.labOrderFormGroup.get('labTestId').value.name;
 

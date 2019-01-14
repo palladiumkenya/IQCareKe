@@ -32,6 +32,11 @@ namespace IQCare.Web.CCC.UC.EnhanceAdherenceCounselling
         public string differentiatedCareId;
         public string followupStatusId;
         public TextBox appointmentDateTb;
+
+        public string Session4Refferal1ItemId;
+        public string Session4Refferal3ItemId;
+        public string ItemYes;
+        public string ItemNo;
         protected void Page_Load(object sender, EventArgs e)
         {
             PatientId = Convert.ToInt32(HttpContext.Current.Session["PatientPK"]);
@@ -40,6 +45,10 @@ namespace IQCare.Web.CCC.UC.EnhanceAdherenceCounselling
             serviceAreaId = LookupLogic.GetLookupItemId("MoH 257 GREENCARD");
             reasonId = LookupLogic.GetLookupItemId("Follow Up");
             differentiatedCareId = LookupLogic.GetLookupItemId("Standard Care");
+            Session4Refferal1ItemId = LookupLogic.GetLookupItemId("Session4ReferralsNetworksQ1");
+            Session4Refferal3ItemId = LookupLogic.GetLookupItemId("Session4ReferralsNetworksQ3");
+            ItemYes = LookupLogic.GetLookupItemId("Yes");
+            ItemNo = LookupLogic.GetLookupItemId("No");
             followupStatusId = LookupLogic.GetLookupItemId("Pending");
             if (!IsPostBack)
             {

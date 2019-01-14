@@ -1,21 +1,28 @@
-import { FormControlBase } from './../_models/FormControlBase';
 import { Injectable } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormControlBase } from '../_models/dynamic-form/FormControlBase';
+import { FormControl, Validators, FormGroup } from '@angular/forms';
+import { skip } from 'rxjs/operators';
 
 @Injectable({
-    providedIn: 'root'
+  providedIn: 'root'
 })
 export class FormControlService {
 
-    constructor() { }
+  constructor() { }
 
-    toFormGroup(questions: FormControlBase<any>[]) {
-        let group: any = {};
+  toFormGroup(formControls : FormControlBase<any>[]) {
+     let formGroup : any = {};
+     console.log('Form Controls at toFromGroup method >> ' + formControls.length)
+     
+     formControls.forEach(control =>
+     {
+        if(control === undefined)
+            return;
+            console.log(control.disabled +' Disabled')
+        formGroup[control.key] = control.required ? new FormControl({value: control.value || '', disabled:control.disabled },Validators.required) 
+                                                      : new FormControl({value :control.value || '',disabled:control.disabled});
+     });
+     return new FormGroup(formGroup);
 
-        questions.forEach(question => {
-            group[question.key] = question.required ? new FormControl(question.value || '', Validators.required)
-                : new FormControl(question.value || '');
-        });
-        return new FormGroup(group);
-    }
+  }
 }

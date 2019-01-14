@@ -667,9 +667,9 @@ export class MaternityComponent implements OnInit {
                     console.log(result);
 
                     if (this.pregnancyId == 0) {
-                        this.matService.savePregnancyProfile(pregnancyCommand).subscribe((result) => {
-                            maternityDeliveryCommand.PregnancyId = result.pregnancyId;
-                            visitDetailsCommand.PregnancyId = result.pregnancyId;
+                        this.matService.savePregnancyProfile(pregnancyCommand).subscribe((res) => {
+                            maternityDeliveryCommand.PregnancyId = res.pregnancyId;
+                            visitDetailsCommand.PregnancyId = res.pregnancyId;
 
                             this.sendPatientDeliveryInfoRequest(maternityDeliveryCommand, babyConditionInfo);
                             this.sendVisitDetailsRequest(visitDetailsCommand);
@@ -735,10 +735,10 @@ export class MaternityComponent implements OnInit {
 
     private sendVisitDetailsRequest(visitDetailsCommand: VisitDetailsCommand) {
         this.matService.saveVisitDetails(visitDetailsCommand).subscribe((result) => {
-            console.log("Patient visit details added succesfully");
+            console.log('Patient visit details added succesfully');
         },
             (err) => {
-                console.log("An error occured while adding patient visit details", err);
+                console.log('An error occured while adding patient visit details', err);
 
             }, () => {
 
