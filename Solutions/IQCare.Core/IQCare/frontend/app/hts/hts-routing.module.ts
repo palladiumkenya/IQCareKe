@@ -1,3 +1,4 @@
+import { FamilySearchComponent } from './family/family-search/family-search.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { EncounterComponent } from './encounter/encounter.component';
@@ -15,6 +16,7 @@ import { ViewEncounterComponent } from './view-encounter/view-encounter.componen
 import { PnsTracingListComponent } from './pns/pns-tracing-list/pns-tracing-list.component';
 import { PnsTracingComponent } from './pns/pnstracing/pnstracing.component';
 import { PsmartComponent } from './psmart/psmart.component';
+import { YesNoResolver } from '../pmtct/_services/yesno.resolver';
 
 const routes: Routes = [
     {
@@ -86,6 +88,14 @@ const routes: Routes = [
                     options: FamilyScreeningResolver
                 }
             },
+            {
+                path: 'search',
+                component: FamilySearchComponent,
+                pathMatch: 'full',
+                resolve: {
+                    yesnoOptions: YesNoResolver
+                }
+            }
         ]
     },
     {

@@ -63,6 +63,11 @@ namespace IQCare.Records.BusinessProcess.CommandHandlers.Lookup
                 result.ForEach(item => item.CalculateYourAge());
                 _unitOfWork.Dispose();
 
+                if (request.Age.HasValue)
+                {
+                    result = result.FindAll(x => x.AgeNumber == request.Age.Value);
+                }
+
                 return Result<SearchPersonListResponse>.Valid(new SearchPersonListResponse()
                 {
                     PersonSearch = result

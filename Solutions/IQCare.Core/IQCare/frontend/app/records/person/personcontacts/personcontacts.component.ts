@@ -107,8 +107,6 @@ export class PersoncontactsComponent implements OnInit {
                     return;
                 }
 
-                console.log(data);
-
                 this.form.controls.firstName.setValue(data[0]['firstName']);
                 this.form.controls.middleName.setValue(data[0]['middleName']);
                 this.form.controls.lastName.setValue(data[0]['lastName']);

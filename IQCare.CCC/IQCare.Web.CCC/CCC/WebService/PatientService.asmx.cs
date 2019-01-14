@@ -467,23 +467,30 @@ namespace IQCare.Web.CCC.WebService
         }
 
         [WebMethod]
+        public List<PatientConsent> GetPatientConsentByType(int patientId, int consentType)
+        {
+            try
+            {
+                var consent = new PatientConsentManager();
+                return consent.GetPatientConsentByType(patientId, consentType);
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+        }
+
+        [WebMethod]
         public string AddPatientConsent(int patientId, int patientMasterVisitId, int consentType, DateTime consentDate)
         {
             // Todo properly save service area. Remove hack
             ILookupManager mgr = (ILookupManager)ObjectFactory.CreateInstance("BusinessProcess.CCC.BLookupManager, BusinessProcess.CCC");
-            int serviceArea = 0;
-            List<LookupItemView> areas = mgr.GetLookItemByGroup("ServiceArea");
-            var sa = areas.FirstOrDefault();
-            if (sa != null)
-            {
-                serviceArea = sa.ItemId;
-            }
 
             PatientConsent patientConsent = new PatientConsent()
             {
                 PatientId = patientId,
                 PatientMasterVisitId = patientMasterVisitId,
-                ServiceAreaId = serviceArea,
+                ServiceAreaId = 1,
                 ConsentType = consentType,
                 ConsentDate = consentDate
             };
