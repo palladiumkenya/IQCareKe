@@ -7,10 +7,10 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace IQCare.Web.CCC.ClinicalSummary {
+namespace IQCare.Web.CCC.CaseSummary {
     
     
-    public partial class ClinicalSummary {
+    public partial class CaseSummary {
         
         /// <summary>
         /// ucPatientBrief control.
@@ -20,6 +20,15 @@ namespace IQCare.Web.CCC.ClinicalSummary {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::IQCare.Web.CCC.UC.ucPatientBrief ucPatientBrief;
+        
+        /// <summary>
+        /// PersonVisitDate control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox PersonVisitDate;
         
         /// <summary>
         /// ucCaseSummary control.

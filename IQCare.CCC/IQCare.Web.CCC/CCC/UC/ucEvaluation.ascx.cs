@@ -147,7 +147,7 @@ namespace IQCare.Web.CCC.UC
         protected void getEvaluation(int PatientId, int PatientMasterVisitId)
         {
             var PCN = new PatientClinicalNotesLogic();
-            List<PatientClinicalNotes> notesList = PCN.getPatientClinicalNotes(PatientId);
+            List<PatientClinicalNotes> notesList = PCN.getPatientClinicalNotesByVisitId(PatientId,PatientMasterVisitId);
             if (notesList.Any())
             {
                 foreach (var value in notesList)
@@ -163,7 +163,8 @@ namespace IQCare.Web.CCC.UC
             }
 
             var PSM = new PatientScreeningManager();
-            List<PatientScreening> screeningList = PSM.GetPatientScreening(PatientId);
+            List<PatientScreening> screeningList = PSM.GetPatientScreeningByVisitId(PatientId, PatientMasterVisitId);
+                
             if (screeningList != null)
             {
                 foreach (var value in screeningList)
