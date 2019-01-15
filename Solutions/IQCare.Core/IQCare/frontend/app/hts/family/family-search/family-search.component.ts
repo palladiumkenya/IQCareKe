@@ -37,7 +37,7 @@ export class FamilySearchComponent implements OnInit {
             }
         );
 
-        this.service.getRelationshipTypes().subscribe(
+        /*this.service.getRelationshipTypes().subscribe(
             (res) => {
                 const partnerOptions = ['Partner', 'Co-Wife', 'Spouse'];
                 const options = res['lookupItems'];
@@ -58,7 +58,7 @@ export class FamilySearchComponent implements OnInit {
             }
         );
 
-        this.formGroup.addControl('isRegisteredInFacility', new FormControl('isRegisteredInFacility'));
+        this.formGroup.addControl('isRegisteredInFacility', new FormControl('isRegisteredInFacility'));*/
     }
 
     onRegisteredChange(event) {
