@@ -74,5 +74,15 @@ namespace BusinessProcess.CCC
                 return consent;
             }
         }
+
+        public List<PatientConsent> GetPatientConsentByType(int patientId, int consentType)
+        {
+            using (UnitOfWork unitOfWork = new UnitOfWork(new GreencardContext()))
+            {
+                List<PatientConsent> consent = unitOfWork.PatientConsentRepository.FindBy(x => x.PatientId == patientId && x.ConsentType == consentType && x.DeleteFlag == false).ToList();
+                unitOfWork.Dispose();
+                return consent;
+            }
+        }
     }
 }

@@ -53,5 +53,10 @@ namespace IQCare.CCC.UILogic
             var consent = _consent.GetByPatientId(patientId);
             return consent;
         }
+
+        public List<PatientConsent> GetPatientConsentByType(int patientId, int consentType)
+        {
+            return _consent.GetPatientConsentByType(patientId, consentType);
+        }
     }
 }

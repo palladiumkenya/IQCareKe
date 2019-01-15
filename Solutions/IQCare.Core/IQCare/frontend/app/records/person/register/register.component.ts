@@ -250,9 +250,6 @@ export class RegisterComponent implements OnInit {
     getAge(dob: moment.Moment, setDobPrecision: boolean = false): any {
         const today = new Date();
 
-        console.log(moment(dob).toDate());
-        console.log(dob.toISOString());
-
         let age = today.getFullYear() - dob.toDate().getFullYear();
         let ageMonths = today.getMonth() - dob.toDate().getMonth();
         if (ageMonths < 0 || (ageMonths === 0 && today.getDate() < dob.toDate().getDate())) {
