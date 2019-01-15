@@ -17,7 +17,8 @@ namespace IQCare.Lab.Core.Models
             LabTestId = labTestId;
             ParameterId = parameterId;
             ResultValue = resultValue;
-            ResultOption = resultOption; 
+            ResultOption = resultOption;
+            ResultOptionId = resultOptionId;
             ResultUnit = resultUnit;
             ResultUnitId = resultUnitId;
             UserId = userId;

@@ -43,10 +43,15 @@ export class AddLabResultComponent implements OnInit {
     {   
        this.labTestParameters = data.labTestParameters;
        this.formControlCollection = data.formControlCollection;
+       this.labOrderId = data.labOrderId;
+       this.labTestId = data.labTestId;
+       this.labOrderTestId = data.labOrderTestId;  
        this.labResultForm = this.formControlService.toFormGroup(data.formControlCollection);
+
        this.resultDataTypes = new ResultDataType();
        this.userId = JSON.parse(localStorage.getItem('appUserId'));
        this.notify.emit(this.labResultForm);
+       
        this.dialogTitle = 'Submit Lab Test Results';
    }
 
@@ -65,14 +70,15 @@ export class AddLabResultComponent implements OnInit {
    public submitLabResult() {
     if(this.labResultForm.invalid)
          return;
-        console.log(JSON.stringify(this.labResultForm.value));
+        console.log(JSON.stringify(this.labResultForm.getRawValue()));
         
       const completeLabCommand : CompleteLabOrderCommand = {
         LabOrderId : this.labOrderId,
         LabOrderTestId : this.labOrderTestId,
         LabTestId : this.labTestId,
         LabTestResults : this.labTestResults,
-        UserId : this.userId
+        UserId : this.userId,
+        StrLabTestResults : JSON.stringify(this.labResultForm.getRawValue())
       };
 
       this.labOrderService.completeLabOrder(completeLabCommand).subscribe(res=>

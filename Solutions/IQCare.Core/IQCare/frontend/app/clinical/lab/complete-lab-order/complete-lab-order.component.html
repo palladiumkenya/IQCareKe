@@ -45,6 +45,7 @@
                 <tr mat-header-row *matHeaderRowDef="pending_labs_displaycolumns"></tr>
                 <tr mat-row *matRowDef="let row; columns: pending_labs_displaycolumns;"></tr>
             </table>
+            <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
       </div> 
       </div>
   <div class="row">
@@ -77,6 +78,8 @@
               <tr mat-header-row *matHeaderRowDef="completed_labs_displaycolumns"></tr>
               <tr mat-row *matRowDef="let row; columns: completed_labs_displaycolumns;"></tr>
           </table>
+          <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+
     </div>      
   </div>
 </form>

@@ -12,8 +12,9 @@ namespace IQCare.Lab.BusinessProcess.Commands
         public int LabOrderTestId { get; set; }
         public int LabTestId { get; set; }
         public int UserId { get; set; }
+        public string StrLabTestResults { get; set; }
         public List<AddLabTestResultCommand> LabTestResults { get; set; }
-    }  
+    }
 
     public class AddLabTestResultCommand
     {
@@ -25,7 +26,7 @@ namespace IQCare.Lab.BusinessProcess.Commands
         public string ResultUnit { get; set; }
         public int? ResultUnitId { get; set; }
         public bool Undetectable { get; set; }
-        public decimal DetectionLimit { get; set; }
+        public decimal? DetectionLimit { get; set; }
     }
 
     public class CompleteLabOrderResponse

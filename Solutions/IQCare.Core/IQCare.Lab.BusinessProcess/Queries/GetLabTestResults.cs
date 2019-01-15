@@ -15,6 +15,7 @@ namespace IQCare.Lab.BusinessProcess.Queries
 
     public class LabTestResultViewModel
     {
+        public int LabOrderId { get; set; }
         public int LabOrderTestId { get; set; }
         public string LabTestName { get; set; }
         public DateTime? SampleDate { get; set; }

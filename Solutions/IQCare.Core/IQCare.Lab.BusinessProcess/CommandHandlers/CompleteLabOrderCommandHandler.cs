@@ -3,6 +3,7 @@ using IQCare.Lab.Core.Models;
 using IQCare.Lab.Infrastructure.Interface;
 using IQCare.Library;
 using MediatR;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -10,6 +11,7 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 
 namespace IQCare.Lab.BusinessProcess.CommandHandlers
 {
@@ -27,10 +29,14 @@ namespace IQCare.Lab.BusinessProcess.CommandHandlers
             {
                 try
                 {
+                    request.LabTestResults = string.IsNullOrEmpty(request.StrLabTestResults)
+                        ? request.LabTestResults
+                        : BuildLabTestResultCommandCollection(request.StrLabTestResults);
+                       
                     var submittedLabOrderTest = _labUnitOfwork.Repository<LabOrderTest>()
                         .Get(x => x.Id == request.LabOrderTestId).FirstOrDefault();
                     if (submittedLabOrderTest == null)
-                      return Result<CompleteLabOrderResponse>.Invalid($"Lab order request with Id {request.LabOrderTestId} not found");
+                        return Result<CompleteLabOrderResponse>.Invalid($"Lab order request with Id {request.LabOrderTestId} not found");
 
                     var labTestParameters = _labUnitOfwork.Repository<LabTestParameter>()
                         .Get(x => x.LabTestId == request.LabTestId && x.DeleteFlag == false).ToList();
@@ -44,24 +50,35 @@ namespace IQCare.Lab.BusinessProcess.CommandHandlers
 
                     foreach (var labTestResult in request.LabTestResults)
                     {
-                        var resultUnit = GetResultUnitDetails(labTestResult.ParameterId);
+                        var parameterConfig = GetParamterConfigDetails(labTestResult.ParameterId);
 
-                        var labOrderTestResult = new LabOrderTestResult(request.LabOrderId, request.LabOrderTestId, request.LabTestId, labTestResult.ParameterId, labTestResult.ResultValue, labTestResult.ResultOptionId, labTestResult.ResultOption, resultUnit.Item2, resultUnit.Item1, request.UserId, labTestResult.Undetectable, labTestResult.DetectionLimit);
+                        var resultUnit = parameterConfig?.LabTestParameterConfig?.Unit;
+
+                        var resultOption =
+                            parameterConfig?.LabTestParameterResultOptions?.SingleOrDefault(x =>
+                                x.Id == labTestResult.ResultOptionId)?.Value;
+
+                        var labOrderTestResult = new LabOrderTestResult(request.LabOrderId, request.LabOrderTestId,
+                            request.LabTestId, labTestResult.ParameterId, labTestResult.ResultValue,
+                            labTestResult.ResultOptionId, resultOption, resultUnit?.UnitName, resultUnit?.UnitId,
+                            request.UserId, labTestResult.Undetectable, labTestResult.DetectionLimit);
 
                         labOrderTestResults.Add(labOrderTestResult);
                     }
+                   
 
                     await _labUnitOfwork.Repository<LabOrderTestResult>().AddRangeAsync(labOrderTestResults);
 
                     // PatientLabTracker is updated only for LabTests with only one parameter count
-                    UpdatePatientLabTestTracker(labTestParameters[0].Id, request.LabOrderId, totalLabTestParameterCount, request.LabTestResults[0]);
+                    UpdatePatientLabTestTracker(labTestParameters[0].Id, request.LabOrderId, totalLabTestParameterCount,
+                        request.LabOrderTestId, labOrderTestResults.FirstOrDefault());
 
                     submittedLabOrderTest.ReceiveResult(request.UserId, DateTime.Now);
                     submittedLabOrderTestResultsCount += labOrderTestResults.Count;
 
-                    if(submittedLabOrderTestResultsCount >= totalLabTestParameterCount)
-                       submittedLabOrderTest.MarkAsReceived();
-                    
+                    if (submittedLabOrderTestResultsCount >= totalLabTestParameterCount)
+                        submittedLabOrderTest.MarkAsReceived();
+
                     _labUnitOfwork.Repository<LabOrderTest>().Update(submittedLabOrderTest);
 
                     await _labUnitOfwork.SaveAsync();
@@ -69,12 +86,12 @@ namespace IQCare.Lab.BusinessProcess.CommandHandlers
                     var labOrderTestPendingSubmission = _labUnitOfwork.Repository<LabOrderTest>()
                         .Get(x => x.LabOrderId == request.LabOrderId && x.ResultStatus != ResultStatusEnum.Received.ToString()).Any();
 
-                    if(!labOrderTestPendingSubmission)
+                    if (!labOrderTestPendingSubmission)
                     {
                         var labOrder = _labUnitOfwork.Repository<LabOrder>().Get(x => x.Id == request.LabOrderId).SingleOrDefault();
                         labOrder?.CompleteOrder();
                         _labUnitOfwork.Repository<LabOrder>().Update(labOrder);
-                       await _labUnitOfwork.SaveAsync();
+                        await _labUnitOfwork.SaveAsync();
                     }
 
                     transaction.Commit();
@@ -87,32 +104,109 @@ namespace IQCare.Lab.BusinessProcess.CommandHandlers
                     throw;
                 }
             }
-          
+
         }
 
-        private Tuple<int?, string> GetResultUnitDetails(int parameterId)
+       
 
+        private LabTestParameter GetParamterConfigDetails(int parameterId)
         {
-            var unitId = _labUnitOfwork.Repository<LabTestParameterConfig>().Get(x => x.ParameterId == parameterId && x.DeleteFlag == false)
-                           .SingleOrDefault()?.UnitId;   
-                var parameterUnit = _labUnitOfwork.Repository<LabTestParameterUnit>().Get(x => x.UnitId == unitId)
-                    .SingleOrDefault();
+            var parameterConfig = _labUnitOfwork.Repository<LabTestParameter>()
+                .Get(x => x.Id == parameterId && x.DeleteFlag == false)
+                .Include(x=>x.LabTestParameterResultOptions)
+                .Include(x => x.LabTestParameterConfig.Unit).SingleOrDefault();
 
-                return new Tuple<int?, string>(parameterUnit?.UnitId, parameterUnit?.UnitName);         
+            return parameterConfig;
         }
 
-        private void UpdatePatientLabTestTracker(int parameterId, int labOrderId, int parameterCount, AddLabTestResultCommand labOrderTestResult)
+        private void UpdatePatientLabTestTracker(int parameterId, int labOrderId, int parameterCount,int labOrderTestId, LabOrderTestResult labOrderTestResult)
         {
             if (parameterCount > 1)
                 return;
 
-            var resultUnit = GetResultUnitDetails(parameterId);
+            var parameterConfig = GetParamterConfigDetails(parameterId);
 
-            var patientLabTracker = _labUnitOfwork.Repository<PatientLabTracker>().Get(x => x.LabOrderId == labOrderId).SingleOrDefault();
-            if(patientLabTracker == null)
+
+            var patientLabTracker = _labUnitOfwork.Repository<PatientLabTracker>()
+                .Get(x => x.LabOrderId == labOrderId && x.LabOrderTestId == labOrderTestId).SingleOrDefault();
+            if (patientLabTracker == null)
                 return;
-            patientLabTracker.UpdateResults(DateTime.Now, labOrderTestResult.ResultText, resultUnit.Item2, labOrderTestResult.ResultValue);
+            patientLabTracker.UpdateResults(DateTime.Now, labOrderTestResult.ResultText,
+                parameterConfig?.LabTestParameterConfig?.Unit?.UnitName, labOrderTestResult.ResultValue, labOrderTestResult.ResultOption);
+
             _labUnitOfwork.Repository<PatientLabTracker>().Update(patientLabTracker);
+        }
+
+        private List<AddLabTestResultCommand> BuildLabTestResultCommandCollection(string parameterResultJson)
+        {
+            var labTestResultCommandType = typeof(AddLabTestResultCommand);
+            var properties = labTestResultCommandType.GetProperties();
+
+
+            var paramaterResultDictionary = JsonConvert
+                .DeserializeObject<Dictionary<string, string>>(parameterResultJson)
+                .Where(x => !string.IsNullOrWhiteSpace(x.Value) &&
+                            !x.Value.Equals("No Units", StringComparison.OrdinalIgnoreCase))
+                .ToDictionary(r => r.Key, r => r.Value);
+
+            var labTestParameterIds = paramaterResultDictionary.Keys.Select(x => x.Split('_')[1]).Distinct().ToList();
+
+            var labTestResultCommandCollection = new List<AddLabTestResultCommand>();
+
+            foreach (var paramId in labTestParameterIds)
+            {
+                var testResultCommand = new AddLabTestResultCommand();
+                labTestResultCommandType.GetProperty("ParameterId").SetValue(testResultCommand, Convert.ToInt32(paramId));
+
+                var parameterSubmittedValuesDict = paramaterResultDictionary.Where(x => string.Equals(x.Key.Split('_')[1], paramId))
+                    .ToDictionary(p => p.Key.Split('_')[0], x => x.Value);
+
+                foreach (var paramDictItem in parameterSubmittedValuesDict)
+                {
+                    var propertyInfo = properties.SingleOrDefault(x =>
+                        x.Name.Equals(paramDictItem.Key, StringComparison.OrdinalIgnoreCase));
+
+                    if (propertyInfo != null)
+                    {
+                        if (propertyInfo.Name == "ResultOptionId")
+                        {
+                            var man = propertyInfo;
+
+                        }
+                        var typeCode = Type.GetTypeCode(propertyInfo.PropertyType);
+                        switch (typeCode)
+                        {
+                            case TypeCode.Int32:
+                                propertyInfo.SetValue(testResultCommand, Convert.ToInt32(paramDictItem.Value));
+                                break;
+                            case TypeCode.Boolean:
+                                propertyInfo.SetValue(testResultCommand, Convert.ToBoolean(paramDictItem.Value));
+                                break;
+                            case TypeCode.Decimal:
+                                propertyInfo.SetValue(testResultCommand, Convert.ToDecimal(paramDictItem.Value));
+                                break;
+
+                            case TypeCode.Object:
+                                if (propertyInfo.PropertyType == typeof(decimal?))
+                                    propertyInfo.SetValue(testResultCommand, decimal.Parse(paramDictItem.Value));
+                                else if (propertyInfo.PropertyType == typeof(int?))
+                                    propertyInfo.SetValue(testResultCommand, int.Parse(paramDictItem.Value));
+                                break;
+
+                            default:
+                                propertyInfo.SetValue(testResultCommand, paramDictItem.Value);
+                                break;
+                        }
+
+                    }
+                }
+
+                if (testResultCommand.ResultText != null || testResultCommand.ResultOptionId.HasValue ||
+                    testResultCommand.ResultValue.HasValue)
+                    labTestResultCommandCollection.Add(testResultCommand);
+            }
+
+            return labTestResultCommandCollection;
         }
     }
 }

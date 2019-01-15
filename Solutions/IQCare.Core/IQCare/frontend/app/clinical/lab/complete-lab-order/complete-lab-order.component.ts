@@ -61,6 +61,7 @@ export class CompleteLabOrderComponent implements OnInit {
                res.forEach(test => {               
                 this.labTestResults.push({
                   labOrderTestId : test.labOrderTestId,
+                  labOrderId : test.labOrderId,
                   test : test.labTestName,
                   orderDate : test.orderDate,
                   orderReason : test.orderReason,
@@ -72,13 +73,12 @@ export class CompleteLabOrderComponent implements OnInit {
                 });                
                });
                    
-             console.log(this.labTestResults.length + '>> Length');
 
         for (let index = 0; index < this.labTestResults.length; index++) 
         {
           console.log(this.labTestResults[index].status + '>> Status');
 
-            if(this.labTestResults[index].status =='Completed')
+            if(this.labTestResults[index].status =='Complete')
                this.completedLabTests.push(this.labTestResults[index]);
             else
                this.pendingLabTests.push(this.labTestResults[index]);
@@ -114,7 +114,7 @@ export class CompleteLabOrderComponent implements OnInit {
 
               this.formControl.push(
               new TextboxFormControl({
-                key:'paramName_' + param.id,
+                key:'ParameterName_' + param.id,
                 label: 'Parameter Name',
                 value: param.parameterName,
                 required: false,
@@ -123,7 +123,7 @@ export class CompleteLabOrderComponent implements OnInit {
               }));
 
               this.formControl.push(new TextboxFormControl({
-                key: param.unitName +'_'+param.id ,
+                key: 'ResultUnit_'+param.id ,
                 label: 'Result Unit',
                 value: param.unitName,
                 required: false,
@@ -132,7 +132,7 @@ export class CompleteLabOrderComponent implements OnInit {
               }));
               
               this.formControl.push(new CheckboxFormControl({
-                 key :'undetectable_'+param.id,
+                 key :'Undetectable_'+param.id,
                  label : 'Undetectable',
                  value :false,
                  required : false,
@@ -140,7 +140,7 @@ export class CompleteLabOrderComponent implements OnInit {
               }));
 
               this.formControl.push(new TextboxFormControl({
-                key:'detection_' + param.id,
+                key:'detectionLimit_' + param.id,
                 label: 'Detection Limit',
                 value: 0,
                 required: false,
@@ -168,7 +168,10 @@ export class CompleteLabOrderComponent implements OnInit {
           
           dialogConfig.data =  {
                                  labTestParameters : this.labTestParameters,
-                                 formControlCollection : this.formControlCollection
+                                 formControlCollection : this.formControlCollection,
+                                 labTestId : pendingTest.labTestId,
+                                 labOrderTestId : pendingTest.labOrderTestId,
+                                 labOrderId : pendingTest.labOrderId
                                };
         
           const dialogRef = this.dialog.open(AddLabResultComponent, dialogConfig);
@@ -191,7 +194,7 @@ export class CompleteLabOrderComponent implements OnInit {
             var type = parameter.dataType == this.ResultDataType.Text ? 'text' : 'number';
             return new TextboxFormControl(
               {
-                key:'resultText_' + parameter.id,
+                key:'ResultText_' + parameter.id,
                 label: 'Result Text',
                 value: ' ',
                 required: true,
@@ -200,7 +203,7 @@ export class CompleteLabOrderComponent implements OnInit {
           case this.ResultDataType.Select:   
              return new SelectlistFormControl(
              {
-              key:'select_' + parameter.id,
+              key:'ResultOptionId_' + parameter.id,
               label: 'Select Result',
               options: parameter.resultOptions,
               order: 2
@@ -208,7 +211,7 @@ export class CompleteLabOrderComponent implements OnInit {
              case this.ResultDataType.Numeric:  
             return new TextboxFormControl(
               {
-                key:'resultText_' + parameter.id,
+                key:'ResultValue_' + parameter.id,
                 label: 'Result Text',
                 value: ' ',
                 required: true,
