@@ -14,7 +14,8 @@ export enum ClientActionTypes {
     SERVICE = '[ClientState] service',
     PERSONID = '[ClientState] PersonId',
     FAMILY_SCREENED = '[ClientState] isFamilyScreeningDone',
-    FAMILY_TRACING = '[ClientState] isFamilyTracingDone'
+    FAMILY_TRACING = '[ClientState] isFamilyTracingDone',
+    PNS_SCREENED_POSITIVE = '[ClientState] PnsScreenedPositive'
 }
 
 export class SelectedService implements Action {
@@ -96,6 +97,12 @@ export class IsPnsTracingDone implements Action {
     constructor(public payload: any) { }
 }
 
+export class PnsScreenedPositive implements Action {
+    readonly type = ClientActionTypes.PNS_SCREENED_POSITIVE;
+
+    constructor(public payload: any) { }
+}
+
 export class ClearState implements Action {
     readonly type = ClientActionTypes.CLEAR_STATE;
 }
@@ -114,4 +121,5 @@ export type ClientActions
     | SelectedService
     | PersonId
     | IsFamilyScreeningDone
-    | IsFamilyTracingDone;
+    | IsFamilyTracingDone
+    | PnsScreenedPositive;

@@ -37,6 +37,10 @@ export function consentReducer(state: any = {}, action: ClientActions) {
             const newIsFamilyTracingDone = ('isFamilyTracingDone' in state) ?
                 [...state['isFamilyTracingDone'], JSON.parse(action.payload)] : [JSON.parse(action.payload)];
             return { ...state, isFamilyTracingDone: newIsFamilyTracingDone };
+        case ClientActionTypes.PNS_SCREENED_POSITIVE:
+            const newPnsScreenedPositive = ('PnsScreenedPositive' in state) ?
+                [...state['PnsScreenedPositive'], JSON.parse(action.payload)] : [JSON.parse(action.payload)];
+            return { ...state, PnsScreenedPositive: newPnsScreenedPositive };
         case ClientActionTypes.CLEAR_STATE:
             state = {};
             return state;
