@@ -116,6 +116,24 @@ namespace IQCare.Web.CCC.WebService
         }
 
         [WebMethod(EnableSession = true)]
+        public PatientVital GetCurrentVitalsByPatientId(int patientId)
+        {
+            try
+            {
+                PatientEncounterManager patientEncounterManager = new PatientEncounterManager();
+
+                var vital = new PatientVitalsManager();
+                PatientVital patientVital = vital.GetByPatientId(patientId);
+                return patientVital;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+        }
+
+        [WebMethod(EnableSession = true)]
         public string AddPatientScreening(int patientId, int patientMasterVisitid,DateTime visitDate, int screeningTypeId, bool screeningDone, DateTime screeningDate, int screeningCategoryId, int screeningValueId, string comment, int userId)
         {
             try
@@ -502,6 +520,8 @@ namespace IQCare.Web.CCC.WebService
             }
             return Msg;
         }
+
+
 
         [WebMethod]
         public IEnumerable<PatientAppointmentDisplay> GetPatientAppointments(string patientId)
