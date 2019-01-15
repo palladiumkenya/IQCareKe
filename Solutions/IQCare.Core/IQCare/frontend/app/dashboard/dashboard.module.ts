@@ -28,6 +28,7 @@ import { ChronichIllnessComponent } from './chronich-illness/chronich-illness.co
 import { PatientRelationshipsComponent } from './patient-relationships/patient-relationships.component';
 import { PatientAllergiesComponent } from './patient-allergies/patient-allergies.component';
 import { PatientAppointmentComponent } from './patient-appointment/patient-appointment.component';
+import { SearchService } from '../registration/_services/search.service';
 
 @NgModule({
     imports: [
@@ -67,7 +68,8 @@ import { PatientAppointmentComponent } from './patient-appointment/patient-appoi
         NotificationService,
         ServicesResolver,
         RegistrationService,
-        EnrollmentService
+        EnrollmentService,
+        SearchService
     ]
 })
 export class DashboardModule { }

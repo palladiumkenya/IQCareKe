@@ -100,6 +100,11 @@ export class AppStateService {
                                     this.store.dispatch(new Consent.IsPnsTracingDone(response[i].appStateStoreObjects[j].appStateObject));
                                 }
                                 break;
+                            case 13:
+                                for (let j = 0; j < response[i].appStateStoreObjects.length; j++) {
+                                    this.store.dispatch(new Consent.PnsScreenedPositive(response[i].appStateStoreObjects[j].appStateObject));
+                                }
+                                break;
                         }
                     }
                 }
