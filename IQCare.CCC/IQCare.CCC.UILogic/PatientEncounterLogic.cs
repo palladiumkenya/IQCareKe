@@ -509,6 +509,11 @@ namespace IQCare.CCC.UILogic
                             theFrmRoot.ImageUrl = "~/images/15px-Yes_check.svg.png";
                         }
 
+                        if(theDR["VisitName"].ToString()== "Case Summary")
+                        {
+                            theFrmRoot.NavigateUrl = "../CaseSummary/CaseSummary.aspx?visitId=" + theDR["visitID"].ToString();
+                            theFrmRoot.ImageUrl = "~/images/15px-Yes_check.svg.png";
+                        }
 
                         if (theDR["VisitName"].ToString() == "Gender Based Violence Screening")
                         {

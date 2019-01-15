@@ -1,5 +1,8 @@
 ﻿using Application.Presentation;
+using Entities.CCC.Visit;
 using Interface.CCC.ClinicalSummary;
+using IQCare.CCC.UILogic;
+using IQCare.CCC.UILogic.Visit;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,13 +10,40 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
-namespace IQCare.Web.CCC.ClinicalSummary
+namespace IQCare.Web.CCC.CaseSummary
 {
-    public partial class ClinicalSummary : System.Web.UI.Page
+    public partial class CaseSummary : System.Web.UI.Page
     {
         string response = string.Empty;
-        protected void Page_Load(object sender, EventArgs e)
+        protected string DateOfEnrollment
         {
+            get { return Session["DateOfEnrollment"].ToString(); }
+        }
+
+        public int PatientEncounterExists { get; set; }
+
+        public int caseSummaryId, PatientId, PatientMasterVisitId, userId, NotesId,visitPatientMasterVisitId;
+        public TextBox notesTb;
+        public DateTime? VisitDate;
+        protected void Page_Load(object sender, EventArgs e)
+         {
+
+            PatientId = Convert.ToInt32(HttpContext.Current.Session["PatientPK"]);
+            PatientMasterVisitId = Convert.ToInt32(Request.QueryString["visitId"] != null ? Request.QueryString["visitId"] : HttpContext.Current.Session["PatientMasterVisitId"]);
+            userId = Convert.ToInt32(Session["AppUserId"]);
+            PatientMasterVisitManager VisitManager = new PatientMasterVisitManager();
+            List<PatientMasterVisit> visitPatientMasterVisit = new List<PatientMasterVisit>();
+            visitPatientMasterVisit = VisitManager.GetVisitDateByMasterVisitId(PatientId, PatientMasterVisitId);
+            VisitDate = visitPatientMasterVisit[0].VisitDate;
+             visitPatientMasterVisitId = visitPatientMasterVisit[0].Id;
+            PatientLookupManager patientLookupManager = new PatientLookupManager();
+            var patientDetails = patientLookupManager.GetPatientDetailSummary(PatientId);
+            Session["DateOfEnrollment"] = patientDetails.EnrollmentDate;
+            if (Request.QueryString["visitId"] != null)
+            {
+                Session["ExistingRecordPatientMasterVisitID"] = Request.QueryString["visitId"].ToString();
+                PatientEncounterExists = Convert.ToInt32(Request.QueryString["visitId"].ToString());
+            }
             //if (Request.QueryString["data"].ToString() == "getdata")
             //{
             //    response = GetClinicalSummaryData(Convert.ToInt32(PatientId), visitPK, locationId);

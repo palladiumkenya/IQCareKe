@@ -46,7 +46,7 @@ namespace IQCare.Web.CCC.WebService
 
     public class PatientEncounterService : System.Web.Services.WebService
     {
-       
+
         public class OIData
         {
             public int OI { get; set; }
@@ -116,16 +116,16 @@ namespace IQCare.Web.CCC.WebService
             public string SexualOrientation { get; set; }
             public List<HighRisk> Highrisk { get; set; }
 
-            
+
         }
         private string Msg { get; set; }
         private int Result { get; set; }
-       public  string numberofpartners;
+        public string numberofpartners;
         public int count = 1;
-       public  int DosageFrequency;
+        public int DosageFrequency;
 
-        public  string ItemDisplayName;
-       public  string sexuallyactive;
+        public string ItemDisplayName;
+        public string sexuallyactive;
         private readonly IPatientMasterVisitManager _visitManager = (IPatientMasterVisitManager)ObjectFactory.CreateInstance("BusinessProcess.CCC.visit.BPatientmasterVisit, BusinessProcess.CCC");
         [WebMethod(EnableSession = true)]
         public int savePatientEncounterPresentingComplaints(string VisitDate, string VisitScheduled, string VisitBy, string anyComplaints, string Complaints, int TBScreening, int NutritionalStatus, string adverseEvent, string presentingComplaints)
@@ -164,6 +164,11 @@ namespace IQCare.Web.CCC.WebService
 
             patientEncounter.savePatientEncounterPhysicalExam(Session["ExistingRecordPatientMasterVisitID"].ToString() == "0" ? Session["PatientMasterVisitID"].ToString() : Session["ExistingRecordPatientMasterVisitID"].ToString(), Session["PatientPK"].ToString(), Session["AppUserId"].ToString(), physicalExam, generalExam);
         }
+
+
+
+
+
         [WebMethod(EnableSession = true)]
         [ScriptMethod(UseHttpGet = false, ResponseFormat = ResponseFormat.Json)]
         public ArrayList GetPatientOIs()
@@ -196,18 +201,18 @@ namespace IQCare.Web.CCC.WebService
             if (pmlist != null)
             {
                 PreviousMasterVisitId = pmlist.Id;
-             patientvisitdate = pmlist.VisitDate;
+                patientvisitdate = pmlist.VisitDate;
             }
             else
             {
                 PreviousMasterVisitId = 0;
                 patientvisitdate = new DateTime();
             }
-     
+
             PatientPartner pat = partman.GetPatientPartner(patientId, PreviousMasterVisitId);
 
-                List<PatientSexualHistory> patienthistory = psh.GetPatientSexualHistoryList(patientId, PreviousMasterVisitId);
-            
+            List<PatientSexualHistory> patienthistory = psh.GetPatientSexualHistoryList(patientId, PreviousMasterVisitId);
+
             if (pat != null)
             {
                 numberofpartners = pat.NoofPartners.ToString();
@@ -287,7 +292,7 @@ namespace IQCare.Web.CCC.WebService
 
                 }
             }
-           
+
             PreviousHistoryOutcome pho = new PreviousHistoryOutcome();
 
             if (numberofpartners == null)
@@ -303,7 +308,7 @@ namespace IQCare.Web.CCC.WebService
                 numberofpartners = "0";
             }
 
-          
+
             pho.noofpartners = Convert.ToInt32(numberofpartners);
             pho.Gender = Gen;
             pho.Orientation = Orient;
@@ -314,35 +319,35 @@ namespace IQCare.Web.CCC.WebService
 
         }
 
-        [WebMethod(EnableSession =true)]
+        [WebMethod(EnableSession = true)]
         [ScriptMethod(UseHttpGet = false, ResponseFormat = ResponseFormat.Json)]
         public string GetSexualHistory()
         {
             PatientHighRiskManager hr = new PatientHighRiskManager();
             PatientSexualHistoryManager psh = new PatientSexualHistoryManager();
             PatientPartnersManager partman = new PatientPartnersManager();
-            
-            
-            
+
+
+
             int patientId = Convert.ToInt32(Session["PatientPK"].ToString());
-        
+
 
             int userId = Convert.ToInt32(Session["AppUserId"]);
             int patientMasterVisitId = Convert.ToInt32(Session["ExistingRecordPatientMasterVisitID"].ToString() == "0" ? Session["PatientMasterVisitID"].ToString() : Session["ExistingRecordPatientMasterVisitID"].ToString());
-          
-           
+
+
 
             PatientScreeningManager pscreen = new PatientScreeningManager();
             List<SexualHistory> sexuallist = new List<SexualHistory>();
-            PatientScreening psc=  pscreen.GetCurrentPatientScreening(patientId, patientMasterVisitId);
+            PatientScreening psc = pscreen.GetCurrentPatientScreening(patientId, patientMasterVisitId);
             List<PatientSexualHistory> patienthistory = psh.GetPatientSexualHistoryList(patientId, patientMasterVisitId);
-           
-            
+
+
 
             PatientPartner pat = partman.GetPatientPartner(patientId, patientMasterVisitId);
             if (pat != null)
             {
-                 numberofpartners= pat.NoofPartners.ToString();
+                numberofpartners = pat.NoofPartners.ToString();
             }
             if (psc != null)
             {
@@ -373,13 +378,13 @@ namespace IQCare.Web.CCC.WebService
             SexualHistoryOutcome shc = new SexualHistoryOutcome();
             if (patienthistory != null)
             {
-                
+
                 foreach (PatientSexualHistory psexual in patienthistory)
                 {
                     SexualHistory sh = new SexualHistory();
 
                     sh.id = psexual.Id.ToString();
-                  
+
 
 
                     sh.uniqueid = count.ToString();
@@ -411,19 +416,19 @@ namespace IQCare.Web.CCC.WebService
                         {
                             highr.value = "null";
                         }
-                        
+
                         htr.Add(highr);
                         sh.Highrisk = htr;
-                        
+
                     }
                     sexuallist.Add(sh);
                     count = ++count;
-                   
-                 
+
+
 
                 }
-                
-               
+
+
             }
             shc.list = sexuallist;
             shc.sexualorient = lSexualOrientation;
@@ -436,10 +441,10 @@ namespace IQCare.Web.CCC.WebService
 
         }
 
-        [WebMethod(EnableSession =true)]
-        public string SaveSexualHistory(string data,string sexuallyactive,string partnersno)
+        [WebMethod(EnableSession = true)]
+        public string SaveSexualHistory(string data, string sexuallyactive, string partnersno)
         {
-            string Msg="";
+            string Msg = "";
             PatientHighRiskManager hr = new PatientHighRiskManager();
             PatientSexualHistoryManager psh = new PatientSexualHistoryManager();
             PatientPartnersManager partman = new PatientPartnersManager();
@@ -466,9 +471,9 @@ namespace IQCare.Web.CCC.WebService
                 }
             }
 
-            
-                List<LookupItemView> lv=LookupLogic.GetLookItemByGroup("SexualScreening");
-                LookupItemView itemview = new LookupItemView();
+
+            List<LookupItemView> lv = LookupLogic.GetLookItemByGroup("SexualScreening");
+            LookupItemView itemview = new LookupItemView();
             if (!String.IsNullOrEmpty(ItemDisplayName))
             {
                 itemview = lv.Find(x => x.DisplayName.ToLower() == ItemDisplayName.ToLower());
@@ -516,7 +521,7 @@ namespace IQCare.Web.CCC.WebService
             }
 
 
-           
+
             if (!String.IsNullOrEmpty(numberofpartners))
             {
                 int partners = Convert.ToInt32(numberofpartners);
@@ -529,7 +534,7 @@ namespace IQCare.Web.CCC.WebService
                         pat.NoofPartners = Convert.ToInt32(numberofpartners);
                         pat.UpdateDate = Convert.ToDateTime(DateTime.Now);
                         pat.CreatedBy = userId;
-                      
+
                         PatientPartner part = partman.UpdatePatientPartner(pat);
                         if (part != null)
                         {
@@ -559,7 +564,7 @@ namespace IQCare.Web.CCC.WebService
                     pat = partman.GetPatientPartner(patientId, patientMasterVisitId);
                     if (pat != null)
                     {
-                      
+
                         pat.UpdateDate = Convert.ToDateTime(DateTime.Now);
                         pat.CreatedBy = userId;
                         pat.DeleteFlag = true;
@@ -570,7 +575,7 @@ namespace IQCare.Web.CCC.WebService
                         }
                     }
                 }
-          
+
             }
             else
             {
@@ -591,28 +596,28 @@ namespace IQCare.Web.CCC.WebService
 
 
             }
-            if (sexualhist !=null)
+            if (sexualhist != null)
             {
-                foreach(SexualHistory sx in sexualhist)
+                foreach (SexualHistory sx in sexualhist)
                 {
-                    if(Convert.ToInt32(sx.id) > 0)
+                    if (Convert.ToInt32(sx.id) > 0)
                     {
                         PatientSexualHistory psexual = new PatientSexualHistory();
-                       psexual=psh.GetPatientSexualHistory(patientId, patientMasterVisitId, Convert.ToInt32(sx.id));
-                        if(psexual !=null)
+                        psexual = psh.GetPatientSexualHistory(patientId, patientMasterVisitId, Convert.ToInt32(sx.id));
+                        if (psexual != null)
                         {
-                            psexual.PartnerGender =Convert.ToInt32(sx.Gender);
+                            psexual.PartnerGender = Convert.ToInt32(sx.Gender);
                             psexual.PartnerHivStatus = Convert.ToInt32(sx.PartnerStatus);
                             psexual.PatientSexualOrientation = Convert.ToInt32(sx.SexualOrientation);
                             psexual.UpdateDate = Convert.ToDateTime(DateTime.Today);
                             psexual.CreatedBy = userId;
                             psexual.DeleteFlag = sx.DeleteFlag;
                             PatientSexualHistory updatedsexual = new PatientSexualHistory();
-                            updatedsexual= psh.UpdatePatientSexualHistory(psexual);
+                            updatedsexual = psh.UpdatePatientSexualHistory(psexual);
                             if (updatedsexual != null)
                             {
                                 partnerid = updatedsexual.Id;
-                               
+
                                 Msg += "Sexual History of Patient Successfully updated";
 
                                 if (partnerid > 0)
@@ -655,7 +660,7 @@ namespace IQCare.Web.CCC.WebService
                                                 PatientHighRisk paddrisk = new PatientHighRisk();
 
                                                 paddrisk = hr.addPatientHighRisk(paddh);
-                                               
+
                                                 if (paddrisk != null)
                                                 {
                                                     Msg += "Patient Risk Behaviour is added";
@@ -668,26 +673,26 @@ namespace IQCare.Web.CCC.WebService
                                 }
                             }
                         }
-                        }
-                        
+                    }
 
-                    
+
+
                     else
                     {
                         PatientSexualHistory psex = new PatientSexualHistory();
                         psex.PartnerGender = Convert.ToInt32(sx.Gender);
                         psex.PartnerHivStatus = Convert.ToInt32(sx.PartnerStatus);
                         psex.PatientSexualOrientation = Convert.ToInt32(sx.SexualOrientation);
-                        psex.CreateDate=Convert.ToDateTime(DateTime.Today);
+                        psex.CreateDate = Convert.ToDateTime(DateTime.Today);
                         psex.CreatedBy = userId;
                         psex.PatientId = patientId;
                         psex.PatientMasterVisitId = patientMasterVisitId;
                         PatientSexualHistory psexualadd = new PatientSexualHistory();
                         psexualadd = psh.AddPatientSexualHistory(psex);
-                        if(psexualadd !=null)
+                        if (psexualadd != null)
                         {
                             partnerid = psexualadd.Id;
-                            sx.id= Convert.ToString(partnerid);
+                            sx.id = Convert.ToString(partnerid);
                             Msg += "Sexual History of Patient Successfully added";
                             if (psexualadd.Id > 0)
                             {
@@ -709,7 +714,7 @@ namespace IQCare.Web.CCC.WebService
 
                                             PatientHighRisk pupdaterisk = new PatientHighRisk();
                                             pupdaterisk = hr.UpdatePatientHighRisk(phr);
-                                            if(pupdaterisk !=null)
+                                            if (pupdaterisk != null)
                                             {
                                                 Msg += "Patient Risk Behaviour is updated";
                                             }
@@ -728,7 +733,7 @@ namespace IQCare.Web.CCC.WebService
 
                                             PatientHighRisk paddrisk = new PatientHighRisk();
 
-                                          
+
                                             paddrisk = hr.addPatientHighRisk(paddh);
                                             if (paddrisk != null)
                                             {
@@ -736,28 +741,28 @@ namespace IQCare.Web.CCC.WebService
                                             }
                                         }
 
-                                       
-                                   }
-                               }
+
+                                    }
+                                }
                             }
                         }
-                        
+
 
                     }
 
-                   
+
 
 
                 }
 
-                
+
             }
 
             Output res = new Output();
             res.list = sexualhist;
             res.msg = Msg;
             return new JavaScriptSerializer().Serialize(res);
-          
+
 
 
         }
@@ -783,7 +788,7 @@ namespace IQCare.Web.CCC.WebService
                     {
                         patientoi.OIId = oi.OI;
                         patientoi.UpdateDate = DateTime.Now;
-                        patientoi.Current =oi.Current;
+                        patientoi.Current = oi.Current;
                         patientoi.CreatedBy = userId;
                         patientoi.PatientId = patientId;
                         patientoi.PatientMasterVisitId = patientMasterVisitId;
@@ -793,8 +798,8 @@ namespace IQCare.Web.CCC.WebService
                     else
                     {
                         PatientOI patient = new PatientOI();
-                           patient = patientoiManager.addPatientOI(patientId, patientMasterVisitId, oi.OI, userId,oi.Current);
-                        if(patient!=null)
+                        patient = patientoiManager.addPatientOI(patientId, patientMasterVisitId, oi.OI, userId, oi.Current);
+                        if (patient != null)
                         {
 
                             int facilityId = Convert.ToInt32(Session["AppPosID"]);
@@ -810,17 +815,17 @@ namespace IQCare.Web.CCC.WebService
 
                             Publisher.RaiseEventAsync(this, args).ConfigureAwait(false);
                         }
-                       
-                            
+
+
 
                     }
 
                 }
             }
         }
-    
 
-        
+
+
         [WebMethod(EnableSession = true)]
         public void savePatientWhoStage(int whoStage)
         {
@@ -837,7 +842,7 @@ namespace IQCare.Web.CCC.WebService
             }
             else
             {
-                int whoResult  = whoStageManager.addPatientWhoStage(patientId, patientMasterVisitId, whoStage);
+                int whoResult = whoStageManager.addPatientWhoStage(patientId, patientMasterVisitId, whoStage);
                 if (whoResult > 0)
                 {
                     int facilityId = Convert.ToInt32(Session["AppPosID"]);
@@ -858,18 +863,18 @@ namespace IQCare.Web.CCC.WebService
         }
 
         [WebMethod(EnableSession = true)]
-        public void savePatientManagement(string workplan, string phdp,string ARVAdherence,string CTXAdherence,string diagnosis)
+        public void savePatientManagement(string workplan, string phdp, string ARVAdherence, string CTXAdherence, string diagnosis)
         {
             PatientEncounterLogic patientEncounter = new PatientEncounterLogic();
 
-            patientEncounter.savePatientManagement(Session["ExistingRecordPatientMasterVisitID"].ToString() == "0" ? Session["PatientMasterVisitID"].ToString() : Session["ExistingRecordPatientMasterVisitID"].ToString(), Session["PatientPK"].ToString(), Session["AppUserId"].ToString(), workplan, ARVAdherence,CTXAdherence,phdp,diagnosis);
+            patientEncounter.savePatientManagement(Session["ExistingRecordPatientMasterVisitID"].ToString() == "0" ? Session["PatientMasterVisitID"].ToString() : Session["ExistingRecordPatientMasterVisitID"].ToString(), Session["PatientPK"].ToString(), Session["AppUserId"].ToString(), workplan, ARVAdherence, CTXAdherence, phdp, diagnosis);
         }
 
         [WebMethod(EnableSession = true)]
         [ScriptMethod(UseHttpGet = false, ResponseFormat = ResponseFormat.Json)]
         public ArrayList GetAdverseEvents()
         {
-            int adverseEventId=0;
+            int adverseEventId = 0;
             int patientId = Convert.ToInt32(Session["PatientPK"].ToString());
             int patientMasterVisitId = Convert.ToInt32(Session["ExistingRecordPatientMasterVisitID"].ToString() == "0" ? Session["PatientMasterVisitID"].ToString() : Session["ExistingRecordPatientMasterVisitID"].ToString());
             var outcomeString = "";
@@ -877,7 +882,7 @@ namespace IQCare.Web.CCC.WebService
             PatientEncounterLogic patientEncounter = new PatientEncounterLogic();
             PatientAdverseEventOutcomeManager patientAdverseEventOutcome = new PatientAdverseEventOutcomeManager();
 
-            LookupLogic lookupLogic=new LookupLogic();
+            LookupLogic lookupLogic = new LookupLogic();
 
 
             DataTable theDT = patientEncounter.loadPatientEncounterAdverseEvents(Session["ExistingRecordPatientMasterVisitID"].ToString() == "0" ? Session["PatientMasterVisitID"].ToString() : Session["ExistingRecordPatientMasterVisitID"].ToString(), Session["PatientPK"].ToString());
@@ -886,7 +891,7 @@ namespace IQCare.Web.CCC.WebService
             foreach (DataRow row in theDT.Rows)
             {
                 string eventoutcome = "";
-                DateTime outcomeDate=DateTime.Today ;
+                DateTime outcomeDate = DateTime.Today;
 
                 //get the adverse Event form the db
                 var items = lookupLogic.GetItemIdByGroupAndItemName("AdverseEvents", row["EventName"].ToString());
@@ -896,9 +901,9 @@ namespace IQCare.Web.CCC.WebService
                 }
 
                 // get the outcome for the adverse event
-               // var outcome =patientAdverseEventOutcome.GetAdverseEventOutcome(adverseEventId, patientMasterVisitId, patientId);
+                // var outcome =patientAdverseEventOutcome.GetAdverseEventOutcome(adverseEventId, patientMasterVisitId, patientId);
 
-               var adverseEventOutcomes= patientAdverseEventOutcome.GetAdverseEventOutcome(adverseEventId,patientMasterVisitId,patientId);
+                var adverseEventOutcomes = patientAdverseEventOutcome.GetAdverseEventOutcome(adverseEventId, patientMasterVisitId, patientId);
 
 
 
@@ -926,7 +931,7 @@ namespace IQCare.Web.CCC.WebService
                             outcomeString = "<span class='text-danger'><strong>" + eventoutcome +
                                             "</strong></span> | <span class='text-info'><strong>" + outcomeDate.ToString("dd-MMM-yyy") + "</strong></span>";
                         }
-                        else{
+                        else {
                             outcomeString = "<span class='text-primary'><strong>" + eventoutcome +
                                             "</strong></span> | <span class='text-info'><strong>" + outcomeDate.ToString("dd-MMM-yyy") + "</strong></span>";
                         }
@@ -1019,7 +1024,7 @@ namespace IQCare.Web.CCC.WebService
                 {
                     dose = row["dose"].ToString();
                 }
-                 
+
 
 
                 string[] i = new string[7] { row["chronicIllnessID"].ToString(), row["chronicIllnessName"].ToString(), row["Treatment"].ToString(), dose, row["OnsetDate"].ToString(),
@@ -1066,7 +1071,7 @@ namespace IQCare.Web.CCC.WebService
                     string[] i = new string[6] { row["vaccineID"].ToString(), row["vaccineStageID"].ToString(), row["VaccineName"].ToString(), row["VaccineStageName"].ToString(), row["VaccineDate"].ToString(), "<button type='button' class='btnDelete btn btn-danger fa fa-minus-circle btn-fill' > Remove</button>" };
                     rows.Add(i);
                 }
-                    
+
             }
             return rows;
         }
@@ -1111,11 +1116,11 @@ namespace IQCare.Web.CCC.WebService
         {
             PatientEncounterLogic patientEncounter = new PatientEncounterLogic();
 
-            DataTable theDT = patientEncounter.loadPatientPharmacyPrescription(Session["ExistingRecordPatientMasterVisitID"].ToString() == "0" ? Session["PatientMasterVisitID"].ToString() : Session["ExistingRecordPatientMasterVisitID"].ToString() );
+            DataTable theDT = patientEncounter.loadPatientPharmacyPrescription(Session["ExistingRecordPatientMasterVisitID"].ToString() == "0" ? Session["PatientMasterVisitID"].ToString() : Session["ExistingRecordPatientMasterVisitID"].ToString());
             ArrayList rows = new ArrayList();
             string remove = "";
-            
-            if (Session["DosageFrequency"] !=null)
+
+            if (Session["DosageFrequency"] != null)
             {
                 DosageFrequency = Convert.ToInt32(Session["DosageFrequency"]);
             }
@@ -1146,7 +1151,7 @@ namespace IQCare.Web.CCC.WebService
                     row["prophylaxis"].ToString(), remove
                      };
                     rows.Add(i);
-                    
+
                 }
                 else
                 {
@@ -1160,7 +1165,7 @@ namespace IQCare.Web.CCC.WebService
                      };
                     rows.Add(i);
                 }
-             
+
             }
             return rows;
         }
@@ -1209,16 +1214,16 @@ namespace IQCare.Web.CCC.WebService
 
         [WebMethod(EnableSession = true)]
         [ScriptMethod(UseHttpGet = false, ResponseFormat = ResponseFormat.Json)]
-        public ArrayList GetDrugList(string PMSCM,string treatmentPlan)
+        public ArrayList GetDrugList(string PMSCM, string treatmentPlan)
         {
             PatientEncounterLogic patientEncounter = new PatientEncounterLogic();
 
-            DataTable theDT = patientEncounter.getPharmacyDrugList(PMSCM,treatmentPlan);
+            DataTable theDT = patientEncounter.getPharmacyDrugList(PMSCM, treatmentPlan);
             ArrayList rows = new ArrayList();
 
             foreach (DataRow row in theDT.Rows)
             {
-                string[] i = new string[2] { row["val"].ToString(), row["DrugName"].ToString()};
+                string[] i = new string[2] { row["val"].ToString(), row["DrugName"].ToString() };
                 rows.Add(i);
             }
             return rows;
@@ -1236,7 +1241,7 @@ namespace IQCare.Web.CCC.WebService
 
             ArrayList rows = new ArrayList();
 
-            for(int i = 0; i < presentingComplaints.Count; i++)
+            for (int i = 0; i < presentingComplaints.Count; i++)
             {
                 string[] j = new string[2] { presentingComplaints[i].ItemId + "~" + presentingComplaints[i].DisplayName, presentingComplaints[i].DisplayName };
                 rows.Add(j);
@@ -1300,7 +1305,7 @@ namespace IQCare.Web.CCC.WebService
                 x.Name
 
             }));
-        
+
 
             //var data=list.Select(x => new string[]
             //     {
@@ -1310,12 +1315,12 @@ namespace IQCare.Web.CCC.WebService
             int number = rows.Count;
             for (int i = 0; i < diagnosis.Count; i++)
             {
-                string[] j = new string[2] { diagnosis[i].ItemId + "~" +"lookupitem" + "~" + diagnosis[i].DisplayName, diagnosis[i].DisplayName };
+                string[] j = new string[2] { diagnosis[i].ItemId + "~" + "lookupitem" + "~" + diagnosis[i].DisplayName, diagnosis[i].DisplayName };
                 rows.Add(j);
             }
-      
-            
-            
+
+
+
             //for (int i=0;i<list.Count;i++)
             //{
             //    string[] licd = new string[2] { list[i].Id + "~" + list[i].Name,list[i].Code+ "" + list[i].Name};
@@ -1323,7 +1328,7 @@ namespace IQCare.Web.CCC.WebService
             //}
             return rows;
         }
-        
+
         [WebMethod(EnableSession = true)]
         [ScriptMethod(UseHttpGet = false, ResponseFormat = ResponseFormat.Json)]
         public ArrayList GetCurrentRegimen()
@@ -1335,9 +1340,9 @@ namespace IQCare.Web.CCC.WebService
 
             ArrayList rows = new ArrayList();
 
-            if(lst.Count > 0)
+            if (lst.Count > 0)
             {
-                string[] i = new string[2] {lst[0].RegimenLine , lst[0].Regimen };
+                string[] i = new string[2] { lst[0].RegimenLine, lst[0].Regimen };
                 rows.Add(i);
             }
             return rows;
@@ -1350,10 +1355,10 @@ namespace IQCare.Web.CCC.WebService
             PatientEncounterLogic patientEncounter = new PatientEncounterLogic();
 
             List<Entities.CCC.Encounter.PatientEncounter.DrugBatch> lst = patientEncounter.getPharmacyDrugBatch(DrugPk);
-            
+
             ArrayList rows = new ArrayList();
 
-            for(int i=0; i < lst.Count; i++)
+            for (int i = 0; i < lst.Count; i++)
             {
                 string[] j = new string[2] { lst[i].id, lst[i].batch };
                 rows.Add(j);
@@ -1427,7 +1432,7 @@ namespace IQCare.Web.CCC.WebService
         }
 
         [WebMethod(EnableSession = true)]
-        public int savePatientPharmacy(string TreatmentProgram, string PeriodTaken, string TreatmentPlan, 
+        public int savePatientPharmacy(string TreatmentProgram, string PeriodTaken, string TreatmentPlan,
             string TreatmentPlanReason, string RegimenLine, string Regimen, string pmscm, string PrescriptionDate,
             string DispensedDate, string drugPrescription, string regimenText)
         {
@@ -1445,7 +1450,7 @@ namespace IQCare.Web.CCC.WebService
             }
             catch (Exception e)
             {
-                
+
                 throw new Exception(e.Message);
             }
 
@@ -1470,7 +1475,7 @@ namespace IQCare.Web.CCC.WebService
             double[] i = new double[6] { categorizationParameters.SameRegimen12Months, categorizationParameters.ActiveOIs, categorizationParameters.VL, categorizationParameters.Completed6MonthsIPT, categorizationParameters.BMI, categorizationParameters.age };
             rows.Add(i);
 
-            
+
             return rows;
         }
 
@@ -1478,7 +1483,7 @@ namespace IQCare.Web.CCC.WebService
         public ArrayList getZScoreValues(string height, string weight)
         {
             ArrayList result = new ArrayList();
-            string weightForAgeResult="", weightForHeight="", BMIz = "";
+            string weightForAgeResult = "", weightForHeight = "", BMIz = "";
             if (height != "" && weight != "")
             {
                 PatientEncounterLogic patientEncounter = new PatientEncounterLogic();
@@ -1534,47 +1539,47 @@ namespace IQCare.Web.CCC.WebService
                     if (zsValues.weightForHeight >= 4)
                     {
                         weightForHeight = "4 (Overweight)";
-                        
+
                     }
                     else if (zsValues.weightForHeight >= 3 && zsValues.weightForHeight < 4)
                     {
                         weightForHeight = "3 (Overweight)";
-                        
+
                     }
                     else if (zsValues.weightForHeight >= 2 && zsValues.weightForHeight < 3)
                     {
                         weightForHeight = "2 (Overweight)";
-                        
+
                     }
                     else if (zsValues.weightForHeight >= 1 && zsValues.weightForHeight < 2)
                     {
                         weightForHeight = "1 (Overweight)";
-                        
+
                     }
                     else if (zsValues.weightForHeight > -1 && zsValues.weightForHeight < 1)
                     {
                         weightForHeight = "0 (Normal)";
-                        
+
                     }
                     else if (zsValues.weightForHeight <= -1 && zsValues.weightForHeight > -2)
                     {
                         weightForHeight = "-1 (Mild)";
-                        
+
                     }
                     else if (zsValues.weightForHeight <= -2 && zsValues.weightForHeight > -3)
                     {
                         weightForHeight = "-2 (Moderate)";
-                        
+
                     }
                     else if (zsValues.weightForHeight <= -3 && zsValues.weightForHeight > -4)
                     {
                         weightForHeight = "-3 (Severe)";
-                        
+
                     }
                     else if (zsValues.weightForHeight <= -4)
                     {
                         weightForHeight = "-4 (Severe)";
-                        
+
                     }
                     else
                     {
@@ -1585,47 +1590,47 @@ namespace IQCare.Web.CCC.WebService
                     if (zsValues.BMIz >= 4)
                     {
                         BMIz = "4 (Overweight)";
-                        
+
                     }
                     else if (zsValues.BMIz >= 3 && zsValues.BMIz < 4)
                     {
                         BMIz = "3 (Overweight)";
-                        
+
                     }
                     else if (zsValues.BMIz >= 2 && zsValues.BMIz < 3)
                     {
                         BMIz = "2 (Overweight)";
-                        
+
                     }
                     else if (zsValues.BMIz >= 1 && zsValues.BMIz < 2)
                     {
                         BMIz = "1 (Overweight)";
-                        
+
                     }
                     else if (zsValues.BMIz > -1 && zsValues.BMIz < 1)
                     {
                         BMIz = "0 (Normal)";
-                        
+
                     }
                     else if (zsValues.BMIz <= -1 && zsValues.BMIz > -2)
                     {
                         BMIz = "-1 (Mild)";
-                        
+
                     }
                     else if (zsValues.BMIz <= -2 && zsValues.BMIz > -3)
                     {
                         BMIz = "-2 (Moderate)";
-                        
+
                     }
                     else if (zsValues.BMIz <= -3 && zsValues.BMIz > -4)
                     {
                         BMIz = "-3 (Severe)";
-                        
+
                     }
                     else if (zsValues.BMIz <= -4)
                     {
                         BMIz = "-4 (Severe)";
-                        
+
                     }
                     else
                     {
@@ -1657,7 +1662,7 @@ namespace IQCare.Web.CCC.WebService
         //{
         //    try
         //    {
- 
+
         //        PatientVital patientVital = new PatientVital()
         //        {
         //        }
@@ -1691,10 +1696,10 @@ namespace IQCare.Web.CCC.WebService
             if (adherenceScore == 0)
             {
                 adherenceRating = "Good";
-            }else if (adherenceScore >= 1 && adherenceScore <= 2)
+            } else if (adherenceScore >= 1 && adherenceScore <= 2)
             {
                 adherenceRating = "Fair";
-            }else if (adherenceScore >= 3 && adherenceScore <= 4)
+            } else if (adherenceScore >= 3 && adherenceScore <= 4)
             {
                 adherenceRating = "Poor";
             }
@@ -1737,7 +1742,7 @@ namespace IQCare.Web.CCC.WebService
             }
             if (result > 0)
             {
-                var lookUpLogic =  new LookupLogic();
+                var lookUpLogic = new LookupLogic();
                 var adherence = lookUpLogic.GetItemIdByGroupAndItemName("ARVAdherence", adherenceRating);
                 var itemId = 0;
                 var msg = "Successfully Saved Adherence Assessment";
@@ -1745,7 +1750,7 @@ namespace IQCare.Web.CCC.WebService
                 {
                     itemId = adherence[0].ItemId;
                 }
-                string[] arr1 = new string[] { msg, itemId.ToString()};
+                string[] arr1 = new string[] { msg, itemId.ToString() };
                 return new JavaScriptSerializer().Serialize(arr1);
             }
             else
@@ -1755,30 +1760,30 @@ namespace IQCare.Web.CCC.WebService
         [WebMethod(EnableSession = true)]
         public string AddArtDistribution(int patientId, int patientMasterVisitId, string artRefillModel, bool missedArvDoses,
             int missedDosesCount, bool fatigue, bool fever, bool nausea, bool diarrhea, bool cough, bool rash,
-            bool genitalSore, string otherSymptom, bool newMedication, string newMedicineText, bool familyPlanning, 
-            string fpmethod, bool referredToClinic,  DateTime ? appointmentDate, int pregnancyStatus, int IsPatientArtDistributionDone)
+            bool genitalSore, string otherSymptom, bool newMedication, string newMedicineText, bool familyPlanning,
+            string fpmethod, bool referredToClinic, DateTime? appointmentDate, int pregnancyStatus, int IsPatientArtDistributionDone)
         {
             try
             {
                 ILookupManager mgr = (ILookupManager)ObjectFactory.CreateInstance("BusinessProcess.CCC.BLookupManager, BusinessProcess.CCC");
-                string FastTrackReason = mgr.GetLookupItemId("ARTFastTrackReferral").ToString() ;
+                string FastTrackReason = mgr.GetLookupItemId("ARTFastTrackReferral").ToString();
                 string serviceAreaId = mgr.GetLookupItemId("MoH 257 GREENCARD").ToString();
                 string AppointmentStatus = mgr.GetLookupItemId("Pending").ToString();
                 string DifferentiatedCare = mgr.GetLookupItemId("Express Care").ToString();
-               // int patientId = Convert.ToInt32(Session["PatientPK"].ToString());
+                // int patientId = Convert.ToInt32(Session["PatientPK"].ToString());
                 var patientAppointment = new PatientAppointmentManager();
                 if (patientId > 0)
                 {
-                    if (appointmentDate != null  && appointmentDate != DateTime.MinValue && appointmentDate != DateTime.MaxValue)
+                    if (appointmentDate != null && appointmentDate != DateTime.MinValue && appointmentDate != DateTime.MaxValue)
                     {
-                        var appointment = patientAppointment.GetByPatientId(patientId).FirstOrDefault(n => n.AppointmentDate.Date == appointmentDate.Value.Date && n.ServiceAreaId == Convert.ToInt32(serviceAreaId) && n.ReasonId ==Convert.ToInt32(FastTrackReason));
-                        if(appointment!=null)
+                        var appointment = patientAppointment.GetByPatientId(patientId).FirstOrDefault(n => n.AppointmentDate.Date == appointmentDate.Value.Date && n.ServiceAreaId == Convert.ToInt32(serviceAreaId) && n.ReasonId == Convert.ToInt32(FastTrackReason));
+                        if (appointment != null)
                         {
                             Msg += "Appointment  exists and is Scheduled";
                         }
                         else
                         {
-                            if (appointmentDate != DateTime.MinValue || appointmentDate !=null)
+                            if (appointmentDate != DateTime.MinValue || appointmentDate != null)
                             {
 
                                 PatientAppointment patientNewAppointment = new PatientAppointment()
@@ -1790,7 +1795,7 @@ namespace IQCare.Web.CCC.WebService
                                     ReasonId = Convert.ToInt32(FastTrackReason),
                                     ServiceAreaId = Convert.ToInt32(serviceAreaId),
                                     StatusId = Convert.ToInt32(AppointmentStatus),
-                                    Description = "", 
+                                    Description = "",
                                     CreatedBy = Convert.ToInt32(Session["AppUserId"]),
                                     CreateDate = DateTime.Now
                                 };
@@ -1809,7 +1814,7 @@ namespace IQCare.Web.CCC.WebService
                         }
 
                     }
-                   
+
                 }
                 var artDistribution = new PatientArtDistributionManager();
 
@@ -1979,9 +1984,9 @@ namespace IQCare.Web.CCC.WebService
             return rows;
         }
         [WebMethod(EnableSession = true)]
-     public ArrayList LoadPatientWHOStageList()
+        public ArrayList LoadPatientWHOStageList()
         {
-            int PatientId= Convert.ToInt32(Session["PatientPk"].ToString());
+            int PatientId = Convert.ToInt32(Session["PatientPk"].ToString());
             PatientWhoStageManager pms = new PatientWhoStageManager();
             ArrayList arrWholist = new ArrayList();
             PatientMasterVisitManager pmv = new PatientMasterVisitManager();
@@ -1989,31 +1994,45 @@ namespace IQCare.Web.CCC.WebService
             List<PatientWhoStage> pws = pms.WhoStagelistByPatientId(PatientId);
             LookupLogic ll = new LookupLogic();
             ArrayList row = new ArrayList();
-            if(pws!=null)
+            if (pws != null)
             {
-                if(pws.Count > 0)
+                if (pws.Count > 0)
                 {
                     pws.ForEach(x =>
                     {
                         int whostage = x.WHOStage;
-                       
-                      string Condition = ll.GetLookupItemNameById(x.WHOStage);
-                      pmastv = pmv.GetVisitById(x.PatientMasterVisitId);
-                      string VisitDate = pmastv.VisitDate.ToString();
-                        
+
+                        string Condition = ll.GetLookupItemNameById(x.WHOStage);
+                        pmastv = pmv.GetVisitById(x.PatientMasterVisitId);
+                        string VisitDate = pmastv.VisitDate.ToString();
+
                         row.Add(new String[] { VisitDate, Condition });
                     }
                     );
 
-                    
+
                 }
 
-               
+
             }
             return row;
         }
-
         [WebMethod(EnableSession = true)]
+        public ArrayList GetPatientAllLabs()
+        {
+            int patientId = Convert.ToInt32(Session["PatientPK"].ToString());
+
+            PatientLookupLabManager plm = new PatientLookupLabManager();
+            List<PatientLab> pls = new List<PatientLab>();
+                pls= plm.GetPatientLabs(patientId);
+            ArrayList row = new ArrayList();
+            pls.ForEach(x => { row.Add(new String[] {x.OrderedbyDate.ToString() ,x.TestName ,x.TestResult   }); });
+            return row;
+        }
+
+    
+
+    [WebMethod(EnableSession = true)]
         public ArrayList LoadPatientOIList()
         {
             int PatientId = Convert.ToInt32(Session["PatientPk"].ToString());
