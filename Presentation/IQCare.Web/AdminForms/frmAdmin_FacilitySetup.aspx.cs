@@ -312,7 +312,7 @@ namespace IQCare.Web.Admin
             txtNationalId.Attributes.Add("onKeyup", "chkNumeric('" + txtNationalId.ClientID + "')");
 
             txtfacilityname.Text = "";
-           // txtcountryno.Text = "";
+            // txtcountryno.Text = "";
             txtLPTF.Text = "";
             txtSatelliteID.Text = "";
             txtGrace.Text = "";
