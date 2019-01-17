@@ -123,6 +123,10 @@ namespace DataAccess.CCC.Interface
         IImmunizationHistoryRepository ImmunizationHistoryRepository { get; }
         ITannersStagingRepository TannersStagingRepository { get; }
 
+        IPatientLookupLabsRepository PatientLookupLabsRepository { get; }
+
+
+
         //HIV Followup Education
        // IHIVEducationRepository PatientHIVFollowupEducation { get; }
 

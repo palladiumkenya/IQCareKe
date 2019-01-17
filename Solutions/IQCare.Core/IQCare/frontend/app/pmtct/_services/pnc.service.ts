@@ -23,6 +23,7 @@ import { FamilyPlanningEditCommand } from '../_models/FamilyPlanningEditCommand'
 import { PatientFamilyPlanningMethodEditCommand } from '../_models/PatientFamilyPlanningMethodEditCommand';
 import { UpdateDrugAdministrationCommand } from '../_models/UpdateDrugAdministrationCommand';
 import { PartnerTestingEditCommand } from '../_models/PartnerTestingEditCommand';
+import { PatientPncExercisesCommand } from '../_models/PatientPncExercisesCommand';
 
 const httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -172,6 +173,11 @@ export class PncService {
     }
 
     public savePncReferral(pncReferralCommand: PatientReferralCommand): Observable<any> {
+        if ((pncReferralCommand.ReferredFrom == null || pncReferralCommand.ReferredFrom == undefined || pncReferralCommand.ReferredFrom.toString() == '')
+            || (pncReferralCommand.ReferredTo == null || pncReferralCommand.ReferredTo == undefined || pncReferralCommand.ReferredTo.toString() == '')) {
+            return of([]);
+        }
+
         return this.http.post<any>(this.API_URL + '/api/PatientReferralAndAppointment/AddPatientReferralInfo',
             JSON.stringify(pncReferralCommand), httpOptions).pipe(
                 tap(savePncReferral => this.errorHandler.log(`successfully saved pnc referral`)),
@@ -188,6 +194,11 @@ export class PncService {
     }
 
     public updateReferral(patientReferralEditCommand: PatientReferralEditCommand): Observable<any> {
+        if ((patientReferralEditCommand.ReferredFrom == null || patientReferralEditCommand.ReferredFrom == undefined || patientReferralEditCommand.ReferredFrom.toString() == '')
+            || (patientReferralEditCommand.ReferredTo == null || patientReferralEditCommand.ReferredTo == undefined || patientReferralEditCommand.ReferredTo.toString() == '')) {
+            return of([]);
+        }
+
         return this.http.post(this.API_URL
             + '/api/PatientReferralAndAppointment/UpdatePatientReferralInfo', JSON.stringify(patientReferralEditCommand), httpOptions).pipe(
                 tap(updateReferral => this.errorHandler.log(`successfully updated referral`)),
@@ -268,6 +279,20 @@ export class PncService {
                 tap(updatePncFamilyPlanningMethod => this.errorHandler.log(`successfully updated family planning method`)),
                 catchError(this.errorHandler.handleError<any>('Error updating family planning method'))
             );
+    }
+
+    public savePncExercises(patientPncExercisesCommand: PatientPncExercisesCommand): Observable<any> {
+        return this.http.post(this.API_PMTCT_URL + '/api/PatientPncExercises/Post', JSON.stringify(patientPncExercisesCommand), httpOptions).pipe(
+            tap(savePncExercises => this.errorHandler.log(`successfully saved pnc exercises`)),
+            catchError(this.errorHandler.handleError<any>('Error saving pnc exercises'))
+        );
+    }
+
+    public getPncExercises(patientId: number, patientMasterVisitId: number): Observable<any[]> {
+        return this.http.get<any[]>(this.API_PMTCT_URL + '/api/PatientPncExercises/Get/' + patientId + '/' + patientMasterVisitId).pipe(
+            tap(getPncExercises => this.errorHandler.log(`successfully fetched pnc exercises`)),
+            catchError(this.errorHandler.handleError<any>('Error fetching pnc exercises'))
+        );
     }
 
     public getPncPostNatalExamBabyExaminationHistory(patientId: number, patientMasterVisitId: number): Observable<any> {

@@ -1,8 +1,10 @@
 ﻿using Entities.CCC.Encounter;
 using Entities.CCC.Lookup;
 using Entities.CCC.Triage;
+using Entities.CCC.Visit;
 using IQCare.CCC.UILogic;
 using IQCare.CCC.UILogic.Encounter;
+using IQCare.CCC.UILogic.Visit;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,15 +16,30 @@ namespace IQCare.Web.CCC.UC
 {
     public partial class ucCaseSummary : System.Web.UI.UserControl
     {
+        protected string DateOfEnrollment
+        {
+            get { return Session["DateOfEnrollment"].ToString(); }
+        }
+
+       
 
         public int caseSummaryId, PatientId, PatientMasterVisitId, userId, NotesId;
         public TextBox notesTb;
+        public DateTime? VisitDate;
         protected void Page_Load(object sender, EventArgs e)
         {
 
             PatientId = Convert.ToInt32(HttpContext.Current.Session["PatientPK"]);
             PatientMasterVisitId = Convert.ToInt32(Request.QueryString["visitId"] != null ? Request.QueryString["visitId"] : HttpContext.Current.Session["PatientMasterVisitId"]);
             userId = Convert.ToInt32(Session["AppUserId"]);
+            PatientMasterVisitManager VisitManager = new PatientMasterVisitManager();
+            List<PatientMasterVisit> visitPatientMasterVisit = new List<PatientMasterVisit>();
+            visitPatientMasterVisit = VisitManager.GetVisitDateByMasterVisitId(PatientId, PatientMasterVisitId);
+            VisitDate = visitPatientMasterVisit[0].VisitDate;
+            PatientLookupManager patientLookupManager = new PatientLookupManager();
+            var patientDetails = patientLookupManager.GetPatientDetailSummary(PatientId);
+            Session["DateOfEnrollment"] = patientDetails.EnrollmentDate;
+           
             if (!IsPostBack)
             {
                 populateQuestions();
@@ -65,7 +82,8 @@ namespace IQCare.Web.CCC.UC
         protected void getCaseSummaries(int PatientId, int PatientMasterVisitId)
         {
             var PCN = new PatientClinicalNotesLogic();
-            List<PatientClinicalNotes> notesList = PCN.getPatientClinicalNotes(PatientId);
+            List<PatientClinicalNotes> notesList = PCN.getPatientClinicalNotesByVisitId(PatientId, PatientMasterVisitId);
+               
             if (notesList.Any())
             {
                 foreach (var value in notesList)

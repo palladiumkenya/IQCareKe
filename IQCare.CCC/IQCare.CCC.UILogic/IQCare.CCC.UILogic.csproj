@@ -170,6 +170,7 @@
     <Compile Include="PatientEncounterLogic.cs" />
     <Compile Include="PatientDisclosureManager.cs" />
     <Compile Include="PatientHighRiskManager.cs" />
+    <Compile Include="PatientLookupLabManager.cs" />
     <Compile Include="PatientLookupManager.cs" />
     <Compile Include="PatientManager.cs" />
     <Compile Include="PatientNeonatalManager.cs" />
@@ -214,6 +215,12 @@
     <Compile Include="Triage\PregnancyOutcomeLookupManager.cs" />
     <Compile Include="Visit\PatientEncounterManager.cs" />
     <Compile Include="Visit\PatientMasterVisitManager.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\BusinessProcess.CCC\BusinessProcess.CCC.csproj">
+      <Project>{5C3B0D75-6637-49B9-B801-1358B7E55A10}</Project>
+      <Name>BusinessProcess.CCC</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

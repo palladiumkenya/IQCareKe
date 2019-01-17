@@ -105,7 +105,7 @@
                   $(this).data('DateTimePicker').hide();
                    
                   Reset();
-                 }
+             }
 
             var vDate = moment($("#PersonVisitDate").val(), 'DD-MMM-YYYYY').toDate();
             var validDateOfVisit = moment(vDate).isBefore(enrollmentDate);

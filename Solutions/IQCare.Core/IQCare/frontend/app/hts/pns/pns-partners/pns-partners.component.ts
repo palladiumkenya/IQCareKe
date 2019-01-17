@@ -17,6 +17,7 @@ export class PnsPartnersComponent implements OnInit {
 
     isPnsScreeningDone = [];
     isPnsTracingDone = [];
+    isPnsScreenedPositive = [];
 
     displayedColumns = ['firstName', 'midName', 'lastName', 'dateOfBirth', 'gender', 'relationshipType', 'actionsColumn'];
     dataSource = new PnsDataSource(this.pnsService, this.patientId);
@@ -27,6 +28,7 @@ export class PnsPartnersComponent implements OnInit {
         public zone: NgZone,
         private store: Store<AppState>) {
         store.pipe(select('app')).subscribe(res => {
+            console.log(res);
             if (typeof (res['isPnsScreened']) !== 'undefined' && res['isPnsScreened'] !== null) {
                 this.isPnsScreeningDone = res['isPnsScreened'];
             }
@@ -37,11 +39,15 @@ export class PnsPartnersComponent implements OnInit {
                 this.isPnsTracingDone = res['isPnsTracingDone'];
             }
         });
+
+        store.pipe(select('app')).subscribe(res => {
+            if (typeof (res['PnsScreenedPositive']) !== 'undefined' && res['PnsScreenedPositive'] !== null) {
+                this.isPnsScreenedPositive = res['PnsScreenedPositive'];
+            }
+        });
     }
 
     ngOnInit() {
-        console.log(this.isPnsScreeningDone);
-
         this.personId = JSON.parse(localStorage.getItem('personId'));
         this.patientId = JSON.parse(localStorage.getItem('patientId'));
 
@@ -85,6 +91,15 @@ export class PnsPartnersComponent implements OnInit {
     isPnsTracing(personID) {
         for (let i = 0; i < this.isPnsTracingDone.length; i++) {
             if (this.isPnsTracingDone[i]['partnerId'] == personID) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    PnsScreenedPositive(personID) {
+        for (let i = 0; i < this.isPnsScreenedPositive.length; i++) {
+            if (this.isPnsScreenedPositive[i]['partnerId'] == personID) {
                 return true;
             }
         }

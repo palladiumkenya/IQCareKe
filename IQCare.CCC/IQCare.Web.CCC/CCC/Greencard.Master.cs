@@ -211,9 +211,9 @@ namespace IQCare.Web.CCC
             Response.Redirect("~/CCC/Adherence/AdherenceBarriersHome.aspx");
 
         }
-        protected void Clinical_Summary_Click(object sender, EventArgs e)
+        protected void Case_Summary_Click(object sender, EventArgs e)
         {
-            Response.Redirect("~/CCC/ClinicalSummary/ClinicalSummary.aspx");
+            Response.Redirect("~/CCC/CaseSummary/CaseSummary.aspx");
         }
         protected void Follow_Up_Click(object sender, EventArgs e)
         {

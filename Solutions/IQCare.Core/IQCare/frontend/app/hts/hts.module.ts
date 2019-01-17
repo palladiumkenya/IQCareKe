@@ -1,3 +1,5 @@
+import { RecordsModule } from './../records/records.module';
+import { InlineSearchComponent } from './../records/inline-search/inline-search.component';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
@@ -42,18 +44,21 @@ import { PsmartComponent } from './psmart/psmart.component';
 import { PsmartService } from './_services/psmart.service';
 import { TracingComponent } from './tracing/tracing.component';
 import { PnsPartnersComponent } from './pns/pns-partners/pns-partners.component';
+import { FamilySearchComponent } from './family/family-search/family-search.component';
+import { YesNoResolver } from '../pmtct/_services/yesno.resolver';
+import { LookupItemService } from '../shared/_services/lookup-item.service';
 
 
 @NgModule({
     imports: [
         CommonModule, HttpClientModule, HtsRoutingModule, FormsModule, MatDatepickerModule, MatFormFieldModule,
-        MatNativeDateModule, MatInputModule, SharedModule, MatDatepickerModule, MatFormFieldModule, MatNativeDateModule,
+        MatNativeDateModule, MatInputModule, SharedModule, MatDatepickerModule, MatNativeDateModule,
         MatTableModule, MatAutocompleteModule, MatButtonModule, MatButtonToggleModule, MatCardModule,
         MatCheckboxModule, MatChipsModule, MatDatepickerModule, MatDialogModule, MatDividerModule, MatExpansionModule,
         MatGridListModule, MatIconModule, MatListModule, MatMenuModule, MatNativeDateModule, MatPaginatorModule,
         MatProgressBarModule, MatProgressSpinnerModule, MatRadioModule, MatRippleModule, MatSelectModule, MatSidenavModule, MatSliderModule,
         MatSlideToggleModule, MatSnackBarModule, MatSortModule, MatStepperModule, MatTableModule, MatTabsModule,
-        MatToolbarModule, MatTooltipModule, ReactiveFormsModule
+        MatToolbarModule, MatTooltipModule, ReactiveFormsModule, RecordsModule
     ],
     declarations: [
         EncounterComponent,
@@ -71,7 +76,8 @@ import { PnsPartnersComponent } from './pns/pns-partners/pns-partners.component'
         ViewEncounterComponent,
         PnsTracingListComponent,
         PsmartComponent,
-        TracingComponent
+        TracingComponent,
+        FamilySearchComponent
     ],
     exports: [
     ],
@@ -87,7 +93,9 @@ import { PnsPartnersComponent } from './pns/pns-partners/pns-partners.component'
         AppStateService,
         ErrorHandlerService,
         FamilyTracingResolver,
-        PsmartService
+        PsmartService,
+        YesNoResolver,
+        LookupItemService
     ],
     entryComponents: [
         TestDialogComponent,
