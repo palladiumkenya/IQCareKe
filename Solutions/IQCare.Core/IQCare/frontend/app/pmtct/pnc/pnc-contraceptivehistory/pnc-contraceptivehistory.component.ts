@@ -33,7 +33,8 @@ export class PncContraceptivehistoryComponent implements OnInit {
             familyPlanningMethod: new FormControl('', [Validators.required]),
             pncExercisesGiven: new FormControl('', [Validators.required]),
             id: new FormControl(''),
-            fpMethodId: new FormControl('')
+            fpMethodId: new FormControl(''),
+            pncExercisesId: new FormControl('')
         });
 
         const { yesnoOptions, familyPlanningMethodOptions } = this.contraceptiveHistoryExercise[0];
@@ -44,7 +45,24 @@ export class PncContraceptivehistoryComponent implements OnInit {
 
         if (this.isEdit) {
             this.loadPncContraceptiviveHistory();
+            this.loadPncExercises();
         }
+    }
+
+    loadPncExercises(): void {
+        this.pncservice.getPncExercises(this.patientId, this.patientMasterVisitId).subscribe(
+            (result) => {
+                if (result.length > 0) {
+                    this.ContraceptiveHistoryForm.get('pncExercisesGiven').setValue(result[0].pncExercisesDone);
+                    this.ContraceptiveHistoryForm.get('pncExercisesId').setValue(result[0].id);
+                }
+            },
+            (error) => {
+                this.snotifyService.error('Error fetching pnc exercises ' + error, 'PNC Encounter',
+                    this.notificationService.getConfig());
+            },
+            () => { }
+        );
     }
 
     loadPncContraceptiviveHistory(): void {
@@ -64,7 +82,7 @@ export class PncContraceptivehistoryComponent implements OnInit {
                                 }
                             },
                             (error) => {
-                                this.snotifyService.success('Error fetching family planning methods ' + error, 'PNC Encounter',
+                                this.snotifyService.error('Error fetching family planning methods ' + error, 'PNC Encounter',
                                     this.notificationService.getConfig());
                             },
                             () => { }

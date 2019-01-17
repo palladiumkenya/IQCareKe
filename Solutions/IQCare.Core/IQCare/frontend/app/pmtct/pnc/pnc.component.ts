@@ -30,6 +30,7 @@ import { FamilyPlanningEditCommand } from '../_models/FamilyPlanningEditCommand'
 import { PatientFamilyPlanningMethodEditCommand } from '../_models/PatientFamilyPlanningMethodEditCommand';
 import { UpdateDrugAdministrationCommand } from '../_models/UpdateDrugAdministrationCommand';
 import { PartnerTestingEditCommand } from '../_models/PartnerTestingEditCommand';
+import { PatientPncExercisesCommand } from '../_models/PatientPncExercisesCommand';
 
 @Component({
     selector: 'app-pnc',
@@ -507,6 +508,15 @@ export class PncComponent implements OnInit {
             AuditData: ''
         };
 
+        const pncExercisesId = this.cervicalCancerScreeningFormGroup.value[1]['pncExercisesId'] ? this.cervicalCancerScreeningFormGroup.value[1]['pncExercisesId'] : 0;
+        const patientPncExercisesCommand: PatientPncExercisesCommand = {
+            Id: pncExercisesId,
+            PatientId: this.patientId,
+            PatientMasterVisitId: this.patientMasterVisitId,
+            PncExercisesDoneId: this.cervicalCancerScreeningFormGroup.value[1]['pncExercisesGiven'],
+            UserId: this.userId,
+        };
+
         const drugAdministrationCommand: DrugAdministrationCommand = {
             Id: 0,
             PatientId: this.patientId,
@@ -597,13 +607,14 @@ export class PncComponent implements OnInit {
         const pncPartnerTesting = this.pncService.savePartnerTesting(partnerTestingCommand);
         const pncPatientEducation = this.maternityService.savePatientEducation(patiendEducationCommand);
         const pncPatientScreening = this.maternityService.saveScreening(patientScreeningCommand);
+        const pncPatientPncExercisesSave = this.pncService.savePncExercises(patientPncExercisesCommand);
 
         forkJoin([
             pncHivStatus, pncDiagnosis, pncReferral,
             pncNextAppointment, pncVisitDetails,
             pncPostNatalExam, pncBabyExam, pncFamilyPlanning,
             pncPartnerTesting, pncPatientEducation, pncDrugAdministration,
-            pncPatientScreening])
+            pncPatientScreening, pncPatientPncExercisesSave])
             .subscribe(
                 (result) => {
                     console.log(result);
@@ -792,6 +803,15 @@ export class PncComponent implements OnInit {
             PartnerHIVResult: this.drugAdministration_PartnerTesting_FormGroup.value[1]['finalPartnerHivResult'],
         };
 
+        const pncExercisesId = this.cervicalCancerScreeningFormGroup.value[1]['pncExercisesId'] ? this.cervicalCancerScreeningFormGroup.value[1]['pncExercisesId'] : 0;
+        const patientPncExercisesCommand: PatientPncExercisesCommand = {
+            Id: pncExercisesId,
+            PatientId: this.patientId,
+            PatientMasterVisitId: this.patientMasterVisitId,
+            PncExercisesDoneId: this.cervicalCancerScreeningFormGroup.value[1]['pncExercisesGiven'],
+            UserId: this.userId,
+        };
+
         const pncVisitDetailsEdit = this.pncService.editPncVisitDetails(visitDetailsEditCommand);
         const pncPatientDiagnosisEdit = this.pncService.updatePatientDiagnosis(patientDiagnosisEdit);
         const pncPostnatalexamEdit = this.pncService.updatePncPostNatalExam(pncPostNatalExamCommand);
@@ -802,11 +822,12 @@ export class PncComponent implements OnInit {
         const pncFamilyPlanningEdit = this.pncService.updateFamilyPlanning(familyPlanningEditCommand);
         const pncFamilyPlanningMethodEdit = this.pncService.updatePncFamilyPlanningMethod(updateFamilyPlanningMethodCommand);
         const pncPartnerTestingEdit = this.pncService.updatePartnerTesting(partnerTestingEditCommand);
+        const pncPatientPncExercisesSave = this.pncService.savePncExercises(patientPncExercisesCommand);
 
         forkJoin([pncVisitDetailsEdit, pncPatientDiagnosisEdit,
             pncPostnatalexamEdit, pncbabyexamEdit, pncHivStatus,
             pncReferralEdit, pncAppointmentEdit, pncFamilyPlanningEdit,
-            pncFamilyPlanningMethodEdit, pncPartnerTestingEdit]).subscribe(
+            pncFamilyPlanningMethodEdit, pncPartnerTestingEdit, pncPatientPncExercisesSave]).subscribe(
                 (result) => {
                     console.log(result);
 

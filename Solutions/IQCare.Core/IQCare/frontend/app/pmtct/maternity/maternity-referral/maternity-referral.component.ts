@@ -28,8 +28,8 @@ export class MaternityReferralComponent implements OnInit {
 
     ngOnInit() {
         this.referralFormGroup = this.formBuilder.group({
-            referredFrom: new FormControl('', [Validators.required]),
-            referredTo: new FormControl('', [Validators.required]),
+            referredFrom: new FormControl(''),
+            referredTo: new FormControl(''),
             'id': new FormControl('')
         });
 
