@@ -35,7 +35,7 @@ namespace IQCare.Lab.BusinessProcess.QueryHandlers
                         .Where(x => x.PatientId == request.PatientId && x.OrderStatus.Equals(request.OrderStatus,StringComparison.InvariantCultureIgnoreCase))
                         .Include(l => l.LabOrderTests);
 
-                var labOrderModel = labOrders.Select(x => new LabOrderViewModel
+                var labOrderModel = labOrders.OrderByDescending(x=>x.OrderDate).Select(x => new LabOrderViewModel
                 {
                     Id = x.Id,
                     DateCreated = x.CreateDate.ToShortDateString(),
@@ -44,7 +44,7 @@ namespace IQCare.Lab.BusinessProcess.QueryHandlers
                     OrderNumber = x.OrderNumber,
                     OrderStatus = x.OrderStatus,
                     PatientId = x.PatientId,
-                    LabTests = _mapper.Map<List<LabOrderTestViewModel>>(x.LabOrderTests)
+                    LabTests = _mapper.Map<List<LabOrderTestViewModel>>(x.LabOrderTests.OrderByDescending(l=>l.CreateDate))
                 }).ToList();
 
                 return Task.FromResult(Result<List<LabOrderViewModel>>.Valid(labOrderModel));
