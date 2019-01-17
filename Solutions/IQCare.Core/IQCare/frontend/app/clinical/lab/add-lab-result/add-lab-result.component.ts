@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter, Inject } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, Inject, NgZone } from '@angular/core';
 import { FormGroup, FormBuilder, FormControl } from '@angular/forms';
 import { LaborderService } from '../../_services/laborder.service';
 import { CompleteLabOrderCommand, AddLabTestResultCommand, ResultDataType } from '../../_models/CompleteLabOrderCommand';
@@ -7,6 +7,7 @@ import { NotificationService } from '../../../shared/_services/notification.serv
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { FormControlBase } from '../../../shared/_models/dynamic-form/FormControlBase';
 import { FormControlService } from '../../../shared/_services/form-control.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-add-lab-result',
@@ -39,7 +40,8 @@ export class AddLabResultComponent implements OnInit {
     private notificationService: NotificationService,
     private dialogRef: MatDialogRef<AddLabResultComponent>,
     private formControlService : FormControlService,
-    @Inject(MAT_DIALOG_DATA) public data : any) 
+    @Inject(MAT_DIALOG_DATA) public data : any
+    ) 
     {   
        this.labTestParameters = data.labTestParameters;
        this.formControlCollection = data.formControlCollection;
@@ -84,6 +86,7 @@ export class AddLabResultComponent implements OnInit {
       this.labOrderService.completeLabOrder(completeLabCommand).subscribe(res=>
       {
           this.snotifyService.success("Lab test results submitted sucessfully","Lab",this.notificationService.getConfig());
+          this.dialogRef.close();
 
       },(err)=>
       {

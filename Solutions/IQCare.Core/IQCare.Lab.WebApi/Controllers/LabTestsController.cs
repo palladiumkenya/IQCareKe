@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using IQCare.Lab.BusinessProcess.CommandHandlers;
 using IQCare.Lab.BusinessProcess.Commands;
+using IQCare.Lab.BusinessProcess.Queries;
 using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -56,5 +57,17 @@ namespace IQCare.Lab.WebApi.Controllers
                 return Ok(response.Value);
             return BadRequest(response);
         }
+
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetTestResultsByLabOrderTestId(int id)
+        {
+            var result = await _mediator.Send(new GetLabOrderTestResults {LabOrderTestId = id},
+                Request.HttpContext.RequestAborted);
+            if (result.IsValid)
+                return Ok(result.Value);
+            return BadRequest(result);
+        }
+
+
     }
 }

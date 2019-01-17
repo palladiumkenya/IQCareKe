@@ -1,5 +1,4 @@
 <form>
-
   <div class="row">
       <div class="col-md-12">
           <div class="form-title">
@@ -9,77 +8,12 @@
       <!-- <app-personbrief>        
       </app-personbrief> -->
   </div>
-     <div class="row">
-        <div class="form-title">
-            <span class="mat-accent">Pending Labs: </span>
-          </div>
-        <div class="mat-elevation-z1">
-            <table  mat-table  [dataSource]="pendingLabsDataSource">
-                <ng-container matColumnDef="test">
-                  <th mat-header-cell *matHeaderCellDef> <strong>Lab Test</strong> </th>
-                  <td mat-cell *matCellDef="let pendingTest"> {{pendingTest.test}} </td>
-                </ng-container>            
-                <ng-container matColumnDef="orderReason">
-                  <th mat-header-cell *matHeaderCellDef><strong>Order Reason</strong>  </th>
-                  <td mat-cell *matCellDef="let pendingTest"> {{pendingTest.orderReason }} </td>
-                </ng-container>
-              
-                <ng-container matColumnDef="orderDate">
-                  <th mat-header-cell *matHeaderCellDef> <strong> Order Date </strong>  </th>
-                  <td mat-cell *matCellDef="let pendingTest"> {{pendingTest.orderDate}} </td>
-                </ng-container>
-
-                <ng-container matColumnDef="status">
-                    <th mat-header-cell *matHeaderCellDef> <strong> Status </strong>  </th>
-                    <td mat-cell *matCellDef="let pendingTest"> {{pendingTest.status}} </td>
-                  </ng-container>
-            
-              <ng-container matColumnDef="action">
-                <th mat-header-cell *matHeaderCellDef><strong class="fa fa-cog"> Action</strong></th>
-                <td mat-cell *matCellDef="let row">
-                    <button mat-raised-button  (click)="addResult(row)" class="mat-accent"><span class="fa fa-plus"> Add Results</span>
-                    </button>
-                </td>
-
-            </ng-container>     
-                <tr mat-header-row *matHeaderRowDef="pending_labs_displaycolumns"></tr>
-                <tr mat-row *matRowDef="let row; columns: pending_labs_displaycolumns;"></tr>
-            </table>
-            <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
-      </div> 
-      </div>
   <div class="row">
-      <div class="form-title">
-          <span class="mat-accent">Completed Labs: </span>
-        </div>
-      <div class="mat-elevation-z1">
-          <table  mat-table  [dataSource]="completedLabsDataSource">
-              <ng-container matColumnDef="test">
-                <th mat-header-cell *matHeaderCellDef> <strong>Lab Test</strong> </th>
-                <td mat-cell *matCellDef="let completedLab"> {{completedLab.test}} </td>
-              </ng-container>            
-              <ng-container matColumnDef="orderReason">
-                <th mat-header-cell *matHeaderCellDef><strong>Order Reason</strong>  </th>
-                <td mat-cell *matCellDef="let completedLab"> {{completedLab.orderReason }} </td>
-              </ng-container>
-            
-               <ng-container matColumnDef="orderDate">
-                  <th mat-header-cell *matHeaderCellDef> <strong> Order Date </strong>  </th>
-                  <td mat-cell *matCellDef="let completedLab"> {{completedLab.orderDate || dd/MM/yyyy}} </td>
-                </ng-container>
-                <ng-container matColumnDef="result">
-                    <th mat-header-cell *matHeaderCellDef> <strong> Result </strong>  </th>
-                    <td mat-cell *matCellDef="let completedLab"> {{completedLab.result}} </td>
-                  </ng-container>  
-                  <ng-container matColumnDef="unit">
-                      <th mat-header-cell *matHeaderCellDef> <strong> Unit </strong>  </th>
-                      <td mat-cell *matCellDef="let completedLab"> {{completedLab.unit}} </td>
-                 </ng-container>          
-              <tr mat-header-row *matHeaderRowDef="completed_labs_displaycolumns"></tr>
-              <tr mat-row *matRowDef="let row; columns: completed_labs_displaycolumns;"></tr>
-          </table>
-          <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
-
-    </div>      
-  </div>
+       <app-pending-labs-grid [PatientId]="patientId">           
+       </app-pending-labs-grid>
+  </div> 
+  <div class="row">
+      <app-completed-labs-grid  [PatientId]="patientId">
+      </app-completed-labs-grid>       
+ </div>      
 </form>

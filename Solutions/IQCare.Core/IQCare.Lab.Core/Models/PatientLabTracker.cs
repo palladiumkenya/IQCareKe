@@ -60,5 +60,11 @@ namespace IQCare.Lab.Core.Models
             Results = LabOrderStatus.Complete.ToString();
         }
 
+        public void SetAsComplete()
+        {
+            Results = LabOrderStatus.Complete.ToString();
+            ResultDate = DateTime.Now;
+        }
+
     }
 }

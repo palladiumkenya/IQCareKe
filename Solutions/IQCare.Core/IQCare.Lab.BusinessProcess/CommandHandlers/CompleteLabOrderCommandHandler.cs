@@ -32,21 +32,16 @@ namespace IQCare.Lab.BusinessProcess.CommandHandlers
                     request.LabTestResults = string.IsNullOrEmpty(request.StrLabTestResults)
                         ? request.LabTestResults
                         : BuildLabTestResultCommandCollection(request.StrLabTestResults);
-                       
+
                     var submittedLabOrderTest = _labUnitOfwork.Repository<LabOrderTest>()
                         .Get(x => x.Id == request.LabOrderTestId).FirstOrDefault();
                     if (submittedLabOrderTest == null)
                         return Result<CompleteLabOrderResponse>.Invalid($"Lab order request with Id {request.LabOrderTestId} not found");
 
-                    var labTestParameters = _labUnitOfwork.Repository<LabTestParameter>()
-                        .Get(x => x.LabTestId == request.LabTestId && x.DeleteFlag == false).ToList();
+                    if (!request.LabTestResults.Any())
+                        return Result<CompleteLabOrderResponse>.Invalid($"Submit atleast one lab result to complete the lab order");
 
-                    var totalLabTestParameterCount = labTestParameters.Count;
-
-                    var submittedLabOrderTestResultsCount = _labUnitOfwork.Repository<LabOrderTestResult>()
-                        .Get(x => x.LabOrderTestId == request.LabOrderTestId).Count();
-
-                    var labOrderTestResults = new List<LabOrderTestResult>();
+                   var labOrderTestResults = new List<LabOrderTestResult>();
 
                     foreach (var labTestResult in request.LabTestResults)
                     {
@@ -59,25 +54,26 @@ namespace IQCare.Lab.BusinessProcess.CommandHandlers
                                 x.Id == labTestResult.ResultOptionId)?.Value;
 
                         var labOrderTestResult = new LabOrderTestResult(request.LabOrderId, request.LabOrderTestId,
-                            request.LabTestId, labTestResult.ParameterId, labTestResult.ResultValue,
+                            request.LabTestId, labTestResult.ParameterId, labTestResult.ResultValue,labTestResult.ResultText,
                             labTestResult.ResultOptionId, resultOption, resultUnit?.UnitName, resultUnit?.UnitId,
                             request.UserId, labTestResult.Undetectable, labTestResult.DetectionLimit);
 
                         labOrderTestResults.Add(labOrderTestResult);
                     }
-                   
+
 
                     await _labUnitOfwork.Repository<LabOrderTestResult>().AddRangeAsync(labOrderTestResults);
 
                     // PatientLabTracker is updated only for LabTests with only one parameter count
+                    var labTestParameters = _labUnitOfwork.Repository<LabTestParameter>()
+                        .Get(x => x.LabTestId == request.LabTestId && x.DeleteFlag == false).ToList();
+
+                    var totalLabTestParameterCount = labTestParameters.Count;
+
                     UpdatePatientLabTestTracker(labTestParameters[0].Id, request.LabOrderId, totalLabTestParameterCount,
                         request.LabOrderTestId, labOrderTestResults.FirstOrDefault());
-
                     submittedLabOrderTest.ReceiveResult(request.UserId, DateTime.Now);
-                    submittedLabOrderTestResultsCount += labOrderTestResults.Count;
-
-                    if (submittedLabOrderTestResultsCount >= totalLabTestParameterCount)
-                        submittedLabOrderTest.MarkAsReceived();
+                     submittedLabOrderTest.MarkAsReceived();
 
                     _labUnitOfwork.Repository<LabOrderTest>().Update(submittedLabOrderTest);
 
@@ -107,32 +103,35 @@ namespace IQCare.Lab.BusinessProcess.CommandHandlers
 
         }
 
-       
+
 
         private LabTestParameter GetParamterConfigDetails(int parameterId)
         {
             var parameterConfig = _labUnitOfwork.Repository<LabTestParameter>()
                 .Get(x => x.Id == parameterId && x.DeleteFlag == false)
-                .Include(x=>x.LabTestParameterResultOptions)
-                .Include(x => x.LabTestParameterConfig.Unit).SingleOrDefault();
+                .Include(x => x.LabTestParameterResultOptions)
+                .Include(x => x.LabTestParameterConfig.Unit).Distinct().FirstOrDefault();
 
             return parameterConfig;
         }
 
-        private void UpdatePatientLabTestTracker(int parameterId, int labOrderId, int parameterCount,int labOrderTestId, LabOrderTestResult labOrderTestResult)
+        private void UpdatePatientLabTestTracker(int parameterId, int labOrderId, int parameterCount, int labOrderTestId, LabOrderTestResult labOrderTestResult)
         {
-            if (parameterCount > 1)
-                return;
-
-            var parameterConfig = GetParamterConfigDetails(parameterId);
-
-
             var patientLabTracker = _labUnitOfwork.Repository<PatientLabTracker>()
                 .Get(x => x.LabOrderId == labOrderId && x.LabOrderTestId == labOrderTestId).SingleOrDefault();
+
             if (patientLabTracker == null)
                 return;
-            patientLabTracker.UpdateResults(DateTime.Now, labOrderTestResult.ResultText,
-                parameterConfig?.LabTestParameterConfig?.Unit?.UnitName, labOrderTestResult.ResultValue, labOrderTestResult.ResultOption);
+            if (parameterCount > 1)
+            {
+                patientLabTracker.SetAsComplete();
+            }
+            else
+            {
+                var parameterConfig = GetParamterConfigDetails(parameterId);
+                patientLabTracker.UpdateResults(DateTime.Now, labOrderTestResult.ResultText,
+                    parameterConfig?.LabTestParameterConfig?.Unit?.UnitName, labOrderTestResult.ResultValue, labOrderTestResult.ResultOption);
+            }
 
             _labUnitOfwork.Repository<PatientLabTracker>().Update(patientLabTracker);
         }

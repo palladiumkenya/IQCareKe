@@ -13,19 +13,23 @@ namespace IQCare.Lab.BusinessProcess.Queries
         public  string LabOrderStatus { get; set; }            
     }
 
+    public class GetLabOrderTestResults : IRequest<Result<List<LabTestResultViewModel>>>
+    {
+        public int LabOrderTestId { get; set; }
+    }
     public class LabTestResultViewModel
     {
+
         public int LabOrderId { get; set; }
         public int LabOrderTestId { get; set; }
         public string LabTestName { get; set; }
+        public string Parameter { get; set; }
         public DateTime? SampleDate { get; set; }
         public string OrderDate { get; set; }
         public string ResultStatus { get; set; }
-        public string ResultTexts { get; set; }
-        public int LabTestId { get; set; }
-        public decimal ResultValues { get; set; }
+        public string Result { get; set; }
         public string ResultUnits { get; set; }
-        public string ResultOptions { get; set; }
+        public int LabTestId { get; set; }
         public DateTime? ResultDate { get; set; }
         public string OrderReason { get; set; }
         

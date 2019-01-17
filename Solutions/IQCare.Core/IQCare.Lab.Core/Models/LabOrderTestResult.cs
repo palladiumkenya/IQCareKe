@@ -10,13 +10,15 @@ namespace IQCare.Lab.Core.Models
             
         }
 
-        public LabOrderTestResult(int labOrderId, int labOrderTestId, int labTestId,int parameterId, decimal ? resultValue, int ? resultOptionId,string resultOption,string resultUnit,int? resultUnitId,int userId,bool undetectedTable,decimal ? detectionLimit)
+        public LabOrderTestResult(int labOrderId, int labOrderTestId, int labTestId,int parameterId, decimal ? resultValue,string resultText, 
+            int ? resultOptionId,string resultOption,string resultUnit,int? resultUnitId,int userId,bool undetectedTable,decimal ? detectionLimit)
         {
             LabOrderId = labOrderId;
             LabOrderTestId = labOrderTestId;
             LabTestId = labTestId;
             ParameterId = parameterId;
             ResultValue = resultValue;
+            ResultText = resultText;
             ResultOption = resultOption;
             ResultOptionId = resultOptionId;
             ResultUnit = resultUnit;
@@ -50,6 +52,8 @@ namespace IQCare.Lab.Core.Models
         public string AuditData { get; set; }
         [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
         public bool HasResult { get; set; }
+
+        public virtual LabTestParameter Parameter { get; set; }
     }
 }
  

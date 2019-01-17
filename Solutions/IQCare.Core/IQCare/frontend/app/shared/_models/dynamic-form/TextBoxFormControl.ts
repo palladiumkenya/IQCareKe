@@ -4,6 +4,7 @@ import { extend } from "webdriver-js-extender";
 export class TextboxFormControl extends FormControlBase<string>{
     controlType = 'textbox';
     type : string;
+    pattern : "[\s\S]+"
 
     constructor(options : {} = {}){
         super(options);
@@ -15,7 +16,7 @@ export class TextboxFormControl extends FormControlBase<string>{
 export class NumericTextboxFormControl extends FormControlBase<number>{
     controlType = 'numeric';
     type : number;
-
+    pattern : "^\\d*\\.?\\d+$";
     constructor(options :{} = {}){
         super(options);
         this.type = options['type'] || '';
