@@ -1623,11 +1623,18 @@
 
                                 if (patientType === 'Transfer-In') {
                                     
-                                        $("#<%=lblFirstline.ClientID%>").text(moment(itemList.DateStartedOnFirstline).format("DD-MMM-YYYY"));
+                                    $("#<%=lblFirstline.ClientID%>").text(moment(itemList.DateStartedOnFirstline).format("DD-MMM-YYYY"));
+                                    if (itemList.Cohort != null && itemList.Cohort != undefined) {
                                         $("#<%=lblcohort.ClientID%>").text(itemList.Cohort);
-                                    if (itemList.RegimenName === '') { $("#<%=lblRegimenName.ClientID%>").text("Not Issued");
-                                    } else {
-                                    $("#<%=lblRegimenName.ClientID%>").text(itemList.RegimenName);}
+                                    }
+                                    if (itemList.RegimenName != null && itemList.Cohort != undefined) {
+                                        if (itemList.RegimenName === '') {
+                                            $("#<%=lblRegimenName.ClientID%>").text("Not Issued");
+
+                                        } else {
+                                            $("#<%=lblRegimenName.ClientID%>").text(itemList.RegimenName);
+                                        }
+                                    }
                                         if (itemList.BaselineViralLoad === '') { $("#<%=lblbaselineVL.ClientID%>").text('Not Taken');} else { $("#<%=lblbaselineVL.ClientID%>").text(itemList.BaselineViralLoad + ' copies/ml');}
                                         $("#<%=lblBlDate.ClientID%>").text(moment(itemList.BaselineViralLoadDate).format("DD-MMM-YYYY"));
                                 }
@@ -2564,10 +2571,16 @@
                 dataType: "json",
                 success: function (response) {
                     //console.log(response.d);
-                    toastr.success(response.d, "Re-Enrollment");
 
-                    setTimeout(function () { window.location.reload(); },2000);
+                    if (response.d === 'death') {
+                        toastr.warning('Patient care-ended as DEAD CANNOT be re-enrolled!', "Re-Enrollment");
+                        setTimeout(function () { window.location.reload(); },3000);
+                        return false;
+                    } else {
+                        toastr.success(data.d, "Re-Enrollment");
 
+                        setTimeout(function () { window.location.reload(); },3000);
+                    }
                 },
                 error: function (xhr, errorType, exception) {
                     var jsonError = jQuery.parseJSON(xhr.responseText);

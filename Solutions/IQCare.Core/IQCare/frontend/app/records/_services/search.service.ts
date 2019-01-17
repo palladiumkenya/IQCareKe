@@ -26,7 +26,7 @@ export class SearchService {
             + '?IdentifierValue=' + clientSearch.identifierValue + '&FirstName=' + clientSearch.firstName +
             '&MiddleName=' + clientSearch.middleName + '&LastName=' + clientSearch.lastName +
             '&MobileNumber=' + clientSearch.mobileNumber + '&DateOfBirth=' + clientSearch.dateOfBirth +
-            '&Sex=' + clientSearch.sex).pipe(
+            '&Sex=' + clientSearch.sex + '&Age=' + clientSearch.age).pipe(
                 tap((searchClient: any) => this.errorHandler.log(`search client`)),
                 catchError(this.errorHandler.handleError<any>('searchClient'))
             );

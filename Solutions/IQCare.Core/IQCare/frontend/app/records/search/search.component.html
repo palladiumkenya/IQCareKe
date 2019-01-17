@@ -58,6 +58,25 @@
                                     </div>
                                 </div>
 
+                                <div class="col-md-3">
+                                    <label class="sr-only" for="gender">Gender</label>
+                                    <div class="form-group">
+                                        <select class="form-control" id="gender" tabindex="6" [(ngModel)]="clientSearch.sex"
+                                            name="gender">
+                                            <option [ngValue]="undefined" disabled selected>Gender</option>
+                                            <option *ngFor="let genderOption of genderOptions" [value]="genderOption.itemId">{{genderOption.itemName}}</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-3">
+                                    <label class="sr-only" for="age">Age</label>
+                                    <div class="form-group">
+                                        <input type="text" autocomplete="off" class="form-control" id="age" name="age"
+                                            placeholder="Age" tabindex="7" [(ngModel)]="clientSearch.age" #age="ngModel">
+                                    </div>
+                                </div>
+
                                 <div class="col-lg-3 col-md-3 col-sm-3">
                                     <div class="form-group">
                                         <button class="btn btn-primary m-t-n-xs" (click)="doSearch()">
@@ -149,7 +168,7 @@
                         </mat-table>
 
                         <mat-paginator [length]="
-                                10" [pageSize]="10" [pageSizeOptions]="[3, 5, 10, 20]"
+                                10" [pageSize]="10" [pageSizeOptions]="[3, 5, 10, 20, 50]"
                             [showFirstLastButtons]="true">
                         </mat-paginator>
 

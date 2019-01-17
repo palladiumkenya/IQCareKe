@@ -33,9 +33,9 @@ namespace IQCare.Web.CCC.WebService
 
         public string DateAssessed { get; set; }
 
-
+        public string valueAchieved { get; set; }
         [WebMethod(EnableSession = true)]
-        public string addNeonatalMilestones(int patientId, int patientMasterVisitId, int createdBy, int milestoneAssessed, DateTime milestoneOnsetDate, int milestoneAchieved, int milestoneStatus, string milestoneComment)
+        public string addNeonatalMilestones(int patientId, int patientMasterVisitId, int createdBy, int milestoneAssessed, DateTime milestoneOnsetDate, bool milestoneAchieved, int milestoneStatus, string milestoneComment)
         {
             try
             {
@@ -228,9 +228,28 @@ namespace IQCare.Web.CCC.WebService
                     {
                         DateAssessed = "";
                     }
-                    
-                 
-                    string[] i = new string[7] { items.Id.ToString(), LookupLogic.GetLookupNameById(items.TypeAssessedId).ToString(), DateAssessed, items.AchievedId == 1 ? "Yes" : "No", LookupLogic.GetLookupNameById(items.StatusId).ToString(), items.Comment.ToString(), "<button type='button' class='btnDelete btn btn-danger fa fa-minus-circle btn-fill' > Remove</button>" };
+
+                  
+                    if (items.AchievedId != null)
+                    {
+                        if (items.AchievedId == true)
+                        {
+                            valueAchieved = "Yes";
+                        }
+                        else if(items.AchievedId==false)
+                        {
+                            valueAchieved = "No";
+                        }
+                        else
+                        {
+                            valueAchieved = "";
+                        }
+                    }
+                    else
+                    {
+                        valueAchieved = "";
+                    }
+                    string[] i = new string[7] { items.Id.ToString(), LookupLogic.GetLookupNameById(items.TypeAssessedId).ToString(), DateAssessed, valueAchieved, LookupLogic.GetLookupNameById(items.StatusId).ToString(), items.Comment.ToString(), "<button type='button' class='btnDelete btn btn-danger fa fa-minus-circle btn-fill' > Remove</button>" };
                     rows.Add(i);
                 }
             }

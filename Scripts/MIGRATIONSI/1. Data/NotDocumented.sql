@@ -1,4 +1,5 @@
-
+SET IDENTITY_INSERT County ON
+GO
 declare  @Countyid as int;
 declare @Ward as int;
 declare @SubCountyid as int;
@@ -44,4 +45,5 @@ INSERT INTO County(Id,CountyId,CountyName,SubcountyId,Subcountyname,WardId,WardN
 values( @id,@Countyid,'NOT DOCUMENTED',@SubCountyid,'NOT DOCUMENTED',@Ward,'NOT DOCUMENTED')
 END
 
-
+GO
+SET IDENTITY_INSERT County OFF

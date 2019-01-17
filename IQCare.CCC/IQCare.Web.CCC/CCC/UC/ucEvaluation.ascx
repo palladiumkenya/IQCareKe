@@ -26,15 +26,133 @@
 </div>
 </div>
 <script type="text/javascript">
-    $("#myWizard").on("actionclicked.fu.wizard", function (evt, data) {
+    var ArrayEvaluation = new Array;
+    var ScreeningArray = new Array;
+    function checkIfEvaluationHasValue() {
+        ScreeningArray.length = 0;
+        ArrayEvaluation.length = 0;
+        $("#evaluation input[type=radio]:checked").each(function () {
+            var screeningValue = $(this).val();
+            var screeningCategory = $(this).closest("table").attr('id');
+            var screeningType = <%=screenTypeId%>;
+            var patientId = <%=PatientId%>;
+            var patientMasterVisitId = <%=PatientMasterVisitId%>;
+            var userId = <%=userId%>;
+
+            ScreeningArray.push({ 'Id': screeningCategory, 'value': screeningValue });
+        });
+        $("#evaluation textarea").each(function () {
+            var categoryId = ($(this).attr('id')).replace('notes', '');
+            var patientId = <%=PatientId%>;
+           
+            var clinicalNotes = $(this).val();
+            var serviceAreaId = 203;
+            var userId = <%=userId%>;
+
+            ArrayEvaluation.push({ 'Id': categoryId, 'value': clinicalNotes});
+        });
+        $("#otherARTHistory textarea").each(function () {
+            var categoryId = $(this).attr('id').replace('notes', '');
+            //alert(categoryId);
+            var patientId = <%=PatientId%>;
+         
+            var clinicalNotes = $(this).val();
+            var serviceAreaId = 203;
+            var userId = <%=userId%>;
+             ArrayEvaluation.push({ 'Id': categoryId, 'value': clinicalNotes});
+        });
+   }
+
+    function AddUpdateEvaluation(mastervisitid) {
+        var ScreeningData = new Array;
+        var ClinicalNotesData = new Array;
+        var error = 0;
+        $("#evaluation input[type=radio]:checked").each(function () {
+            var screeningValue = $(this).val();
+            var rdIdValue = $(this).attr('id');
+            // alert(screeningValue);
+            var screeningCategory = $(this).closest("table").attr('id');
+            var screeningType = <%=screenTypeId%>;
+            var patientId = <%=PatientId%>;
+            var patientMasterVisitId = <%=PatientMasterVisitId%>;
+            var userId = <%=userId%>;
+            if (screeningValue > 0) {
+                ScreeningData.push({ 'Id': rdIdValue, 'screeningType': screeningType, 'screeningCategory': screeningCategory, 'screeningValue': screeningValue, 'userId': userId });
+            }
+        });
+        if (ScreeningData.length > 0) {
+                var patientId = <%=PatientId%>;
+                var patientMasterVisitId = mastervisitid;
+            $.ajax({
+                type: "POST",
+                url: "../WebService/PatientScreeningService.asmx/AddUpdateScreeningRecord",
+                data: "{'patientId': '" + patientId + "','patientMasterVisitId': '" + patientMasterVisitId + "','ScreeningData':'" + JSON.stringify(ScreeningData) + "'}",
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (response) {
+                    error = 0;
+                },
+                error: function (response) {
+                    error = 1;
+                }
+            });
+        }
+        $("#evaluation textarea").each(function () {
+            var categoryId = ($(this).attr('id')).replace('notes', '');
+            //alert(categoryId);
+            var patientId = <%=PatientId%>;
+            
+            var clinicalNotes = $(this).val();
+            var serviceAreaId = 203;
+            var userId = <%=userId%>;
+            ClinicalNotesData.push({'notesCategoryId': categoryId, 'clinicalNotes': clinicalNotes, 'serviceAreaId': serviceAreaId, 'userId': userId  });
+        });
+        $("#otherARTHistory textarea").each(function () {
+            var categoryId = $(this).attr('id').replace('notes', '');
+            //alert(categoryId);
+            var patientId = <%=PatientId%>;
+          
+            var clinicalNotes = $(this).val();
+            var serviceAreaId = 203;
+            var userId = <%=userId%>;
+           ClinicalNotesData.push({'notesCategoryId': categoryId, 'clinicalNotes': clinicalNotes, 'serviceAreaId': serviceAreaId, 'userId': userId  });;
+        });
+        if (ClinicalNotesData.length > 0) {
+              var patientId = <%=PatientId%>;
+            var patientMasterVisitId = mastervisitid;
+            $.ajax({
+                type: "POST",
+                url: "../WebService/PatientClinicalNotesService.asmx/AddPatientClinicalNotesRecord",
+                data: "{'patientId': '" + patientId + "','patientMasterVisitId': '" + patientMasterVisitId + "','clinicaldata':'" + JSON.stringify(ClinicalNotesData)+ "'}",
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (response) {
+                    error = 0;
+                },
+                error: function (response) {
+                    error = 1;
+                }
+            });
+        }
+     
+        if (error == 1) {
+            toastr.error("Not all Data was saved");
+        }
+        else {
+            toastr.info("Evaluation Data was saved");
+            window.location.href = '<%=ResolveClientUrl("~/CCC/patient/patientHome.aspx") %>';
+        }
+    }
+      
+    <%--$("#myWizard").on("actionclicked.fu.wizard", function (evt, data) {
         var currentStep = data.step;
         if (currentStep == 2) {
             var error = 0;
             $("#evaluation input[type=radio]:checked").each(function () {
                 var screeningValue = $(this).val();
-               // alert(screeningValue);
-            var screeningCategory = $(this).closest("table").attr('id');
-            var screeningType = <%=screenTypeId%>;
+                // alert(screeningValue);
+                var screeningCategory = $(this).closest("table").attr('id');
+                var screeningType = <%=screenTypeId%>;
             var patientId = <%=PatientId%>;
             var patientMasterVisitId = <%=PatientMasterVisitId%>;
             var userId = <%=userId%>;
@@ -100,9 +218,9 @@
                 toastr.success("Case Evaluation saved");
             }
         }
-    });
-
-    jQuery(function ($) {
+    });--%>
+ 
+<%--    jQuery(function ($) {
         var evaluationId = <%=evaluationId%>;
         if (evaluationId > 0) {
             $('#myWizard').wizard();
@@ -111,5 +229,5 @@
             $('#myWizard').find('#dsSectionTwo').toggleClass('complete', true);
             });
         }
-    });
+    });--%>
 </script>

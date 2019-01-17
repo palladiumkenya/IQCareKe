@@ -35,6 +35,15 @@ namespace IQCare.Controllers.PMTCT.HEI
             return BadRequest(response);
         }
 
+        [HttpPut("Put")]
+        public async Task<IActionResult> Put([FromBody]EditHeiFeedingCommand editHeiFeedingCommand)
+        {
+            var response = await _mediator.Send(editHeiFeedingCommand, Request.HttpContext.RequestAborted);
+            if (response.IsValid)
+                return Ok(response.Value);
+            return BadRequest(response);
+        }
+
         [HttpGet("GetHeiFeeding/{patientId}")]
         public async Task<IActionResult> GetHeiFeeding(int patientId)
         {

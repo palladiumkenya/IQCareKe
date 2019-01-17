@@ -261,6 +261,9 @@
          var patientAge = "<%=PatientAge%>";
          var today = new Date();
          var visitDate;
+         var CaCxScreeningId = "<%=CaCxScreeningId%>";
+         var STIScreeningId = "<%=STIScreeningId%>";
+         var STIPartnerNotificationId = "<%=STIPartnerNotificationId%>";
 
          $("#divNoFP").hide("fast");
 
@@ -300,7 +303,7 @@
                  return false;
              }
              lmpDate = moment(lmp).format('DD-MMM-YYYY');
-             $("#ExpectedDateOfChildBirth").val(moment(moment(lmp).add(280, 'days')).format('DD-MMM-YYYY'));
+             $("#ExpectedDateOfChildBirth").val(moment(moment(lmp).add(7, 'days').add(9, 'months')).format('DD-MMM-YYYY'));
          });
 
          $('#FemaleVisitDate').on('dp.change', function (e) {
@@ -405,7 +408,7 @@
              $.ajax({
                  type: "POST",
                  url: "../WebService/FemaleVitalsWebservice.asmx/AddPatientPregnancy",
-                 data: "{'patientId':'" + patientId + "','patientMasterVisitId':'" + patientId + "','LMP':'" + lmpDate + "','EDD':'" + eddDate + "','gravidae':'null','parity':'null','outcome':'0','dateOfOutcome':'" + dateOfOutcome + "','userId':'0'}",
+                 data: "{'patientId':'" + patientId + "','patientMasterVisitId':'" + patientId + "','LMP':'" + lmpDate + "','EDD':'" + eddDate + "','gravidae':'','parity':'','outcome':'','dateOfOutcome':'" + dateOfOutcome + "','userId':'0'}",
                  contentType: "application/json; charset=utf-8",
                  dataType: "json",
                  success: function (response) {
@@ -495,7 +498,7 @@
 
              var cacxId = $("#<%=cacxscreening.ClientID%>").find(":selected").val();
 
-             var screeningTypeId = 44;
+             var screeningTypeId = CaCxScreeningId;
              var screeningDone = true;
              $.ajax({
                  type: "POST",
@@ -516,7 +519,7 @@
          function addPatientScreeningSti() {
 
              var stiId = $("#<%=stiScreening.ClientID%>").find(":selected").val();
-             var screeningTypeId = 45;
+             var screeningTypeId = STIScreeningId;
              var screeningDone = true;
              $.ajax({
                  type: "POST",
@@ -537,7 +540,7 @@
          function addPatientScreeningStiNotification() {
 
              var stiNotificationId = $("#<%=stiPartnerNotification.ClientID%>").find(":selected").val();
-             var screeningTypeId = 87;
+             var screeningTypeId = STIPartnerNotificationId;
              var screeningDone = true;
              $.ajax({
                  type: "POST",

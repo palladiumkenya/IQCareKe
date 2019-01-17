@@ -7,6 +7,8 @@ import { FamilyService } from '../_services/family.service';
 import { NotificationService } from '../../shared/_services/notification.service';
 import { SnotifyService } from 'ng-snotify';
 import * as moment from 'moment';
+import * as Consent from '../../shared/reducers/app.states';
+import { Store } from '@ngrx/store';
 
 @Component({
     selector: 'app-family-screening',
@@ -26,7 +28,8 @@ export class FamilyScreeningComponent implements OnInit {
         private snotifyService: SnotifyService,
         private notificationService: NotificationService,
         private router: Router,
-        public zone: NgZone) { }
+        public zone: NgZone,
+        private store: Store<AppState>) { }
     ngOnInit() {
         this.familyScreening = new FamilyScreening();
         this.familyScreening.userId = JSON.parse(localStorage.getItem('appUserId'));
@@ -55,9 +58,9 @@ export class FamilyScreeningComponent implements OnInit {
     }
 
     onSubmit() {
-        console.log(this.formGroup);
+        // console.log(this.formGroup);
         if (this.formGroup.valid) {
-            console.log('valid');
+            // console.log('valid');
             this.familyScreening = Object.assign(this.familyScreening, this.formGroup.value);
 
             this.familyScreening.personId = JSON.parse(localStorage.getItem('partnerId'));
@@ -90,7 +93,12 @@ export class FamilyScreeningComponent implements OnInit {
             this.familyScreening.dateOfScreening = moment(this.familyScreening.dateOfScreening).toDate().toDateString();
 
             this.familyService.addFamilyScreening(this.familyScreening, arr).subscribe(res => {
-                console.log('res');
+                const partnerPnsTraced = {
+                    'familyId': this.familyScreening.personId,
+                    'familyTraced': true
+                };
+                this.store.dispatch(new Consent.IsFamilyScreeningDone(JSON.stringify(partnerPnsTraced)));
+
                 this.snotifyService.success('Successfully saved family screening',
                     'Family Screening', this.notificationService.getConfig());
                 this.zone.run(() => { this.router.navigate(['/hts/family'], { relativeTo: this.route }); });
@@ -98,7 +106,7 @@ export class FamilyScreeningComponent implements OnInit {
                 this.snotifyService.error('Error saving family screening ' + err,
                     'Family Screening', this.notificationService.getConfig());
             });
-            console.log(this.familyScreening);
+            // console.log(this.familyScreening);
         } else {
             console.log('invalid');
             return;

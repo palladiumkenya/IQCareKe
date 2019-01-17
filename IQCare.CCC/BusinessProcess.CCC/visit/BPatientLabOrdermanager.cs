@@ -317,6 +317,27 @@ namespace BusinessProcess.CCC.visit
                 _unitOfWork.Dispose();
             }
         }
+
+        public LabOrderEntity GetLabOrderEntityById(int labOrderId)
+        {
+            using (UnitOfWork _unitOfWork = new UnitOfWork(new GreencardContext()))
+            {
+                var labOrderEntity = _unitOfWork.PatientLabOrderRepository.GetById(labOrderId);
+                _unitOfWork.Dispose();
+
+                return labOrderEntity;
+            }
+        }
+
+        public List<PatientLabTracker> GetPatientLabTracker(int patientId, int patientMasterVisitId, int labOrderId)
+        {
+            using (UnitOfWork _unitOfWork = new UnitOfWork(new GreencardContext()))
+            {
+                List<PatientLabTracker> patientLabOrders = _unitOfWork.PatientLabTrackerRepository.FindBy(x => x.PatientId == patientId && x.PatientMasterVisitId == patientMasterVisitId && x.LabOrderId == labOrderId).ToList();
+                _unitOfWork.Dispose();
+                return patientLabOrders;
+            }
+        }
     }
 }
 

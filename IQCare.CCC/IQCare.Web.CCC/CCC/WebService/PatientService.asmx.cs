@@ -116,6 +116,24 @@ namespace IQCare.Web.CCC.WebService
         }
 
         [WebMethod(EnableSession = true)]
+        public PatientVital GetCurrentVitalsByPatientId(int patientId)
+        {
+            try
+            {
+                PatientEncounterManager patientEncounterManager = new PatientEncounterManager();
+
+                var vital = new PatientVitalsManager();
+                PatientVital patientVital = vital.GetByPatientId(patientId);
+                return patientVital;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+        }
+
+        [WebMethod(EnableSession = true)]
         public string AddPatientScreening(int patientId, int patientMasterVisitid,DateTime visitDate, int screeningTypeId, bool screeningDone, DateTime screeningDate, int screeningCategoryId, int screeningValueId, string comment, int userId)
         {
             try
@@ -467,23 +485,30 @@ namespace IQCare.Web.CCC.WebService
         }
 
         [WebMethod]
+        public List<PatientConsent> GetPatientConsentByType(int patientId, int consentType)
+        {
+            try
+            {
+                var consent = new PatientConsentManager();
+                return consent.GetPatientConsentByType(patientId, consentType);
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+        }
+
+        [WebMethod]
         public string AddPatientConsent(int patientId, int patientMasterVisitId, int consentType, DateTime consentDate)
         {
             // Todo properly save service area. Remove hack
             ILookupManager mgr = (ILookupManager)ObjectFactory.CreateInstance("BusinessProcess.CCC.BLookupManager, BusinessProcess.CCC");
-            int serviceArea = 0;
-            List<LookupItemView> areas = mgr.GetLookItemByGroup("ServiceArea");
-            var sa = areas.FirstOrDefault();
-            if (sa != null)
-            {
-                serviceArea = sa.ItemId;
-            }
 
             PatientConsent patientConsent = new PatientConsent()
             {
                 PatientId = patientId,
                 PatientMasterVisitId = patientMasterVisitId,
-                ServiceAreaId = serviceArea,
+                ServiceAreaId = 1,
                 ConsentType = consentType,
                 ConsentDate = consentDate
             };
@@ -502,6 +527,8 @@ namespace IQCare.Web.CCC.WebService
             }
             return Msg;
         }
+
+
 
         [WebMethod]
         public IEnumerable<PatientAppointmentDisplay> GetPatientAppointments(string patientId)

@@ -45,7 +45,6 @@ export class EnrollmentServicesComponent implements OnInit {
     ngOnInit() {
         this.route.params.subscribe(
             (params) => {
-                console.log(params);
                 const { serviceId, id, serviceCode } = params;
                 this.serviceId = serviceId;
                 this.personId = id;
@@ -82,7 +81,6 @@ export class EnrollmentServicesComponent implements OnInit {
             (res) => {
                 const { value } = res['lookupItems'][0];
                 this.patientTypeOptions = value;
-                console.log(res['lookupItems']);
             }
         );
     }

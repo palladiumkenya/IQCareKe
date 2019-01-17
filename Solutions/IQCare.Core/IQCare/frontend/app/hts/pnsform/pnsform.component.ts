@@ -1,28 +1,29 @@
-import {Component, NgZone, OnInit} from '@angular/core';
-import {PartnerView, Pnsform} from '../_models/pnsform';
-import {PnsService} from '../_services/pns.service';
-import {ClientService} from '../../shared/_services/client.service';
-import {ActivatedRoute, Router} from '@angular/router';
+import { LookupItemView } from './../../shared/_models/LookupItemView';
+import { Component, NgZone, OnInit } from '@angular/core';
+import { PartnerView, Pnsform } from '../_models/pnsform';
+import { PnsService } from '../_services/pns.service';
+import { ClientService } from '../../shared/_services/client.service';
+import { ActivatedRoute, Router } from '@angular/router';
 import * as Consent from '../../shared/reducers/app.states';
-import {select, Store} from '@ngrx/store';
-import {NotificationService} from '../../shared/_services/notification.service';
-import {SnotifyService} from 'ng-snotify';
-import {AppStateService} from '../../shared/_services/appstate.service';
-import {AppEnum} from '../../shared/reducers/app.enum';
+import { select, Store } from '@ngrx/store';
+import { NotificationService } from '../../shared/_services/notification.service';
+import { SnotifyService } from 'ng-snotify';
+import { AppStateService } from '../../shared/_services/appstate.service';
+import { AppEnum } from '../../shared/reducers/app.enum';
 
 @Component({
-  selector: 'app-pnsform',
-  templateUrl: './pnsform.component.html',
-  styleUrls: ['./pnsform.component.css']
+    selector: 'app-pnsform',
+    templateUrl: './pnsform.component.html',
+    styleUrls: ['./pnsform.component.css']
 })
 export class PnsformComponent implements OnInit {
     pnsForm: Pnsform;
     yesNoNAOptions: any[];
-    yesNoOptions: any[];
+    yesNoOptions: LookupItemView[];
     ipvOutcomeOptions: any[];
     yesNoDeclinedOptions: any[];
     pnsRelationshipOptions: any[];
-    hivStatusOptions: any[];
+    hivStatusOptions: LookupItemView[];
     pnsApproachOptions: any[];
     pnsScreeningCategories: any[];
     isNotIPVDone: boolean = false;
@@ -34,13 +35,13 @@ export class PnsformComponent implements OnInit {
     minDate: any;
 
     constructor(private pnsService: PnsService,
-                private router: Router,
-                private route: ActivatedRoute,
-                public zone: NgZone,
-                private store: Store<AppState>,
-                private snotifyService: SnotifyService,
-                private notificationService: NotificationService,
-                private appStateService: AppStateService) {
+        private router: Router,
+        private route: ActivatedRoute,
+        public zone: NgZone,
+        private store: Store<AppState>,
+        private snotifyService: SnotifyService,
+        private notificationService: NotificationService,
+        private appStateService: AppStateService) {
         this.maxDate = new Date();
         this.minDate = new Date();
     }
@@ -85,14 +86,14 @@ export class PnsformComponent implements OnInit {
                 }
             }
 
-            const pnsAcceptedOption = this.yesNoOptions.filter(function( obj ) {
+            const pnsAcceptedOption = this.yesNoOptions.filter(function (obj) {
                 return obj.itemName == 'Yes';
             });
 
             this.pnsForm.pnsAccepted = pnsAcceptedOption[0]['itemId'];
 
         }, err => {
-           console.log(err);
+            console.log(err);
         });
     }
 
@@ -148,12 +149,27 @@ export class PnsformComponent implements OnInit {
                 'pnsScreened': true
             };
 
+            const hivStatusSelected = this.hivStatusOptions.filter(obj => obj.itemId == this.pnsForm.hivStatus);
+            if (hivStatusSelected.length > 0 && hivStatusSelected[0].itemName == 'Positive') {
+                const partnerPnsTraced = {
+                    'partnerId': this.pnsForm.personId,
+                    'pnsScreenedPositive': true
+                };
+
+                this.store.dispatch(new Consent.PnsScreenedPositive(JSON.stringify(partnerPnsTraced)));
+                this.appStateService.addAppState(AppEnum.PNS_SCREENED_POSITIVE, JSON.parse(localStorage.getItem('personId')),
+                    JSON.parse(localStorage.getItem('patientId')), null, null, JSON.stringify({
+                        'partnerId': this.pnsForm.personId,
+                        'pnsScreenedPositive': true
+                    })).subscribe();
+            }
+
             this.store.dispatch(new Consent.IsPnsScreened(JSON.stringify(partnerPnsScreened)));
             this.appStateService.addAppState(AppEnum.PNS_SCREENED, JSON.parse(localStorage.getItem('personId')),
                 JSON.parse(localStorage.getItem('patientId')), null, null, JSON.stringify({
-                'partnerId': this.pnsForm.personId,
-                'pnsScreened': true
-            })).subscribe();
+                    'partnerId': this.pnsForm.personId,
+                    'pnsScreened': true
+                })).subscribe();
 
             this.store.pipe(select('app')).subscribe(res => {
                 localStorage.setItem('store', JSON.stringify(res));
@@ -162,7 +178,7 @@ export class PnsformComponent implements OnInit {
             this.snotifyService.success('Successfully pns screening',
                 'PNS Screening', this.notificationService.getConfig());
 
-            this.zone.run(() => { this.router.navigate(['/hts/pns'], {relativeTo: this.route }); });
+            this.zone.run(() => { this.router.navigate(['/hts/pns'], { relativeTo: this.route }); });
         }, (err) => {
             this.snotifyService.error('Error saving PNS screening ' + err,
                 'PNS Screening', this.notificationService.getConfig());
@@ -170,10 +186,11 @@ export class PnsformComponent implements OnInit {
     }
 
     public onIpvScreeningChange(val: number) {
-        const optionSelected = this.yesNoNAOptions.filter(function( obj ) {
+        const optionSelected = this.yesNoNAOptions.filter(function (obj) {
             return obj.itemId == val;
         });
-        if (optionSelected[0]['itemName'] !== 'Yes') {
+
+        if (optionSelected.length > 0 && optionSelected[0]['itemName'] !== 'Yes') {
             this.pnsForm.forcedSexualUncomfortable = null;
             this.pnsForm.partnerPhysicallyHurt = null;
             this.pnsForm.partnerThreatenedHurt = null;

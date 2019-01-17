@@ -16,9 +16,9 @@ export class MaternityNextAppointmentComponent implements OnInit {
     public maxtDate: Date = moment().toDate();
     public minDate: Date = moment().toDate();
     @Input() dischargeOptions: any[] = [];
-    @Input('isEdit') isEdit: boolean;
-    @Input('patientId') patientId: number;
-    @Input('patientMasterVisitId') patientMasterVisitId: number;
+    @Input() isEdit: boolean;
+    @Input() patientId: number;
+    @Input() patientMasterVisitId: number;
 
     @Output() notify: EventEmitter<FormGroup> = new EventEmitter<FormGroup>();
 
@@ -45,7 +45,6 @@ export class MaternityNextAppointmentComponent implements OnInit {
     loadAppointments(): void {
         this.pncservice.getAppointments(this.patientId, this.patientMasterVisitId).subscribe(
             (result) => {
-                console.log(result);
                 if (result) {
                     this.nextAppointmentFormGroup.get('nextAppointmentDate').setValue(result.appointmentDate);
                     this.nextAppointmentFormGroup.get('remarks').setValue(result.description);

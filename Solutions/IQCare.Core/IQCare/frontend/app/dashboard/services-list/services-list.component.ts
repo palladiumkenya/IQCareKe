@@ -6,6 +6,7 @@ import { PatientView } from '../_model/PatientView';
 import { SnotifyService } from 'ng-snotify';
 import { Store } from '@ngrx/store';
 import * as Consent from '../../shared/reducers/app.states';
+import { SearchService } from '../../registration/_services/search.service';
 
 @Component({
     selector: 'app-services-list',
@@ -33,7 +34,8 @@ export class ServicesListComponent implements OnInit {
         private route: ActivatedRoute,
         private snotifyService: SnotifyService,
         private notificationService: NotificationService,
-        private store: Store<AppState>) {
+        private store: Store<AppState>,
+        private searchService: SearchService) {
     }
 
     ngOnInit() {
@@ -82,11 +84,28 @@ export class ServicesListComponent implements OnInit {
 
             switch (selectedService[0]['code']) {
                 case 'HTS':
-                    this.zone.run(() => {
-                        localStorage.setItem('personId', this.personId.toString());
-                        localStorage.setItem('patientId', this.patientId.toString());
-                        localStorage.setItem('serviceAreaId', serviceId.toString());
-                        this.router.navigate(['/registration/home/'], { relativeTo: this.route });
+                    localStorage.removeItem('personId');
+                    localStorage.removeItem('patientId');
+                    localStorage.removeItem('partnerId');
+                    localStorage.removeItem('htsEncounterId');
+                    localStorage.removeItem('patientMasterVisitId');
+                    localStorage.removeItem('isPartner');
+                    localStorage.removeItem('editEncounterId');
+
+                    this.searchService.lastHtsEncounter(this.personId).subscribe((res) => {
+                        if (res['encounterId']) {
+                            localStorage.setItem('htsEncounterId', res['encounterId']);
+                        }
+                        if (res['patientMasterVisitId'] > 0) {
+                            localStorage.setItem('patientMasterVisitId', res['patientMasterVisitId']);
+                        }
+
+                        this.zone.run(() => {
+                            localStorage.setItem('personId', this.personId.toString());
+                            localStorage.setItem('patientId', this.patientId.toString());
+                            localStorage.setItem('serviceAreaId', serviceId.toString());
+                            this.router.navigate(['/registration/home/'], { relativeTo: this.route });
+                        });
                     });
                     break;
                 case 'CCC':

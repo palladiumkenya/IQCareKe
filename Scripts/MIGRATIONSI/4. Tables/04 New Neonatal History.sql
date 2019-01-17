@@ -35,7 +35,7 @@ CREATE TABLE [dbo].[PatientMilestone](
 	[PatientMasterVisitId] [int] NOT NULL,
 	[PatientId] int not null,
 	[TypeAssessedId] [int] NULL,
-	[AchievedId] [int] NULL,
+	[AchievedId] [bit] NULL,
 	[StatusId] [int] NULL,
 	[Comment] [text] NULL,
 	[CreatedBy] [int] NOT NULL,
@@ -76,7 +76,7 @@ GO
 
 IF EXISTS(Select * from sys.columns where Name=N'AchievedId'  AND Object_ID = Object_ID(N'PatientMilestone'))
 BEGIN
-Alter table [dbo].[PatientMilestone] ALTER COLUMN  AchievedId INT NULL
+Alter table [dbo].[PatientMilestone] ALTER COLUMN  AchievedId bit NULL
 END
 
 GO

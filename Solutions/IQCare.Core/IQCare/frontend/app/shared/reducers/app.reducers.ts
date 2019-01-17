@@ -1,7 +1,7 @@
 import { ClientActions, ClientActionTypes } from './app.states';
 
 
-export function consentReducer(state: {} = {}, action: ClientActions) {
+export function consentReducer(state: any = {}, action: ClientActions) {
     switch (action.type) {
         case ClientActionTypes.SERVICE:
             return { ...state, service: action.payload };
@@ -29,6 +29,18 @@ export function consentReducer(state: {} = {}, action: ClientActions) {
             const newIsPnsTracingDone = ('isPnsTracingDone' in state) ?
                 [...state['isPnsTracingDone'], JSON.parse(action.payload)] : [JSON.parse(action.payload)];
             return { ...state, isPnsTracingDone: newIsPnsTracingDone };
+        case ClientActionTypes.FAMILY_SCREENED:
+            const newIsFamilyScreeningDone = ('isFamilyScreeningDone' in state) ?
+                [...state['isFamilyScreeningDone'], JSON.parse(action.payload)] : [JSON.parse(action.payload)];
+            return { ...state, isFamilyScreeningDone: newIsFamilyScreeningDone };
+        case ClientActionTypes.FAMILY_TRACING:
+            const newIsFamilyTracingDone = ('isFamilyTracingDone' in state) ?
+                [...state['isFamilyTracingDone'], JSON.parse(action.payload)] : [JSON.parse(action.payload)];
+            return { ...state, isFamilyTracingDone: newIsFamilyTracingDone };
+        case ClientActionTypes.PNS_SCREENED_POSITIVE:
+            const newPnsScreenedPositive = ('PnsScreenedPositive' in state) ?
+                [...state['PnsScreenedPositive'], JSON.parse(action.payload)] : [JSON.parse(action.payload)];
+            return { ...state, PnsScreenedPositive: newPnsScreenedPositive };
         case ClientActionTypes.CLEAR_STATE:
             state = {};
             return state;

@@ -96,6 +96,8 @@ export class PatientEducationExaminationComponent implements OnInit {
 
             this.getPatientCounselingData(this.PatientId, this.PatientMasterVisitId);
             this.getBaselineAncProfile(this.PatientId);
+        } else {
+            this.getPatientCounselingDataAll(this.PatientId);
         }
     }
 
@@ -133,6 +135,33 @@ export class PatientEducationExaminationComponent implements OnInit {
 
     public removeRow(idx) {
         this.counselling_data.splice(idx, 1);
+    }
+
+    public getPatientCounselingDataAll(patientId: number): void {
+        this.patientCounseling$ = this.ancService.getPatientCounselingInfoAll(patientId)
+            .subscribe(
+                p => {
+                    console.log('counseling data');
+                    console.log(p);
+                    if (p) {
+                        for (let i = 0; i < p.length; i++) {
+                            this.counselling_data.push({
+                                counselledOn: p[i]['counsellingTopicId'],
+                                counsellingTopic: p[i]['counsellingTopic'],
+                                counsellingTopicId: p['counsellingTopicId'],
+                                description: p[i]['description'],
+                                CounsellingDate: p[i]['counsellingDate']
+                            });
+                        }
+                    }
+                },
+                (err) => {
+
+                },
+                () => {
+
+                }
+            );
     }
 
     public getPatientCounselingData(patientId: number, patientMasterVisitId: number): void {

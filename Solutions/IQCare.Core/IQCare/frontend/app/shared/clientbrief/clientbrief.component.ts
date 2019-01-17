@@ -14,8 +14,6 @@ export class ClientbriefComponent implements OnInit {
 
     constructor(private clientService: ClientService) { }
     ngOnInit() {
-        console.log(localStorage.getItem('personId'));
-        console.log(localStorage.getItem('patientId'));
         this.patientId = JSON.parse(localStorage.getItem('patientId'));
         this.serviceAreaId = 2;
 

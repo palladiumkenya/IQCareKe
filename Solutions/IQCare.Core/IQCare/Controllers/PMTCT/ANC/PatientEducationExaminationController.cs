@@ -23,6 +23,14 @@ namespace IQCare.Controllers.PMTCT.ANC
             _mediator = mediator;
         }
 
+        [HttpGet("{patientId}")]
+        public async Task<ActionResult> GetPatientCounsellingAll(int patientId)
+        {
+            var response = await _mediator.Send(new GetPatientCounsellingAllCommand {PatientId = patientId});
+            if (response.IsValid)
+                return Ok(response.Value);
+            return BadRequest(response);
+        }
 
         [HttpGet("{patientId}/{patientMasterVisitId}")]
         public async Task<IActionResult> GetPatientEducation(int patientId, int patientMasterVisitId)
@@ -57,9 +65,9 @@ namespace IQCare.Controllers.PMTCT.ANC
             return BadRequest(response);
         }
 
-      
-       [HttpPost]
-       public  async Task<object> AddPatientCounsellingInfo([FromBody] AddPatientEducationCommand command)
+
+        [HttpPost]
+        public  async Task<object> AddPatientCounsellingInfo([FromBody] AddPatientEducationCommand command)
         {
             if (!ModelState.IsValid)
                 return BadRequest(command);
@@ -70,6 +78,17 @@ namespace IQCare.Controllers.PMTCT.ANC
 
             return BadRequest(response);
         }
-      
+
+        [HttpPost]
+        public async Task<IActionResult> UpdatePatientCounsellingInfo([FromBody] EditPatientEducationCommand editPatientEducation)
+        {
+            if (!ModelState.IsValid)
+                return BadRequest(editPatientEducation);
+
+            var response = await _mediator.Send(editPatientEducation, Request.HttpContext.RequestAborted);
+            if (response.IsValid)
+                return Ok(response.Value);
+            return BadRequest(response);
+        }
     }
 }

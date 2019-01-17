@@ -28,20 +28,24 @@ namespace IQCare.Controllers.PMTCT.HEI
         }
 
         // GET api/<controller>/5
-        [HttpGet("patientIcf")]
-        public async Task<IActionResult> GetIcf([FromBody] GetPatientIcfCommand getPatientIcfCommand )
+        [HttpGet("patientIcf/{PatientId}")]
+        public async Task<IActionResult> GetIcf(int PatientId)
         {
-            var response = await _mediator.Send(getPatientIcfCommand, Request.HttpContext.RequestAborted);
+            var response = await _mediator.Send(new GetPatientIcfCommand() {
+                PatientId = PatientId
+            }, Request.HttpContext.RequestAborted);
             if (response.IsValid)
                 return Ok(response.Value);
             return BadRequest(response);
         }
 
         //Get PatientICFAction
-        [HttpGet("patientIcfAction")]
-        public async Task<IActionResult> GetIcfAction([FromBody] GetHeiPatientIcfActionCommand getPatientIcfActionCommand)
+        [HttpGet("patientIcfAction/{PatientId}")]
+        public async Task<IActionResult> GetIcfAction(int PatientId)
         {
-            var response = await _mediator.Send(getPatientIcfActionCommand, Request.HttpContext.RequestAborted);
+            var response = await _mediator.Send(new GetHeiPatientIcfActionCommand() {
+                PatientId = PatientId
+            }, Request.HttpContext.RequestAborted);
             if (response.IsValid)
                 return Ok(response.Value);
             return BadRequest(response);

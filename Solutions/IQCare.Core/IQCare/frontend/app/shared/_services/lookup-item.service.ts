@@ -34,8 +34,8 @@ export class LookupItemService {
         );
     }
 
-    public getByGroupNameAndItemName(groupName: string, itemName: string): Observable<LookupItemView[]> {
-        return this.http.get<LookupItemView[]>(this.API_URL + '/api/Lookup/optionsByGroupandItemName/' + groupName + '/' + itemName).pipe(
+    public getByGroupNameAndItemName(groupName: string, itemName: string): Observable<any> {
+        return this.http.get<any>(this.API_URL + '/api/Lookup/optionsByGroupandItemName/' + groupName + '/' + itemName).pipe(
             tap(getByGroupNameAndItemName => this.errorHandler.log('get ' + groupName + 'options by Name ' + itemName)),
             catchError(this.errorHandler.handleError<LookupItemView[]>('getByGroupNameAndItemName', []))
         );
@@ -45,6 +45,13 @@ export class LookupItemService {
         return this.http.get<Facility[]>(this.API_URL + '/api/Facility/').pipe(
             tap(getFacility => this.errorHandler.log('get facility list')),
             catchError(this.errorHandler.handleError<Facility[]>('getFacilityList', []))
+        );
+    }
+
+    public getActiveFacility() : Observable<any> {
+        return this.http.get<any>(this.API_URL + '/api/Facility/GetActiveFacility').pipe(
+            tap(getActiveFacility => this.errorHandler.log('get active facility')),
+            catchError(this.errorHandler.handleError<any>('GetActiveFacility', []))
         );
     }
 

@@ -1,83 +1,83 @@
-<div class="ibox">
-    <div class="ibox-title">
-        <app-clientbrief></app-clientbrief>
-    </div>
-    <div class="ibox-content">
-        <!--<div class="col-md-2">
-            <app-leftnav></app-leftnav>
-        </div>-->
-        <div class="col-md-12 animated fadeIn">
-            <div class="panel panel-default">
-                <div class="panel-heading">FAMILY</div>
-                <div class="panel-body">
-                    <div class="example-container mat-elevation-z8">
-                        <mat-table #table [dataSource]="dataSource">
+<div class="row">
+    <div class="col-lg-12 col-sm-12 col-xs-12">
+        <div class="widget">
+            <div class="widget-header bordered-bottom bordered-blue">
+                <span class="widget-caption">FAMILY</span>
+            </div>
+            <div class="widget-body bordered-left">
+                <app-clientbrief></app-clientbrief>
 
-                            <!--- Note that these columns can be defined in any order.
-              The actual rendered columns are set as a property on the row definition" -->
+                <div>
+                    &nbsp;
+                </div>
 
-                            <!-- FirstName Column -->
-                            <ng-container matColumnDef="firstName">
-                                <mat-header-cell *matHeaderCellDef> First Name </mat-header-cell>
-                                <mat-cell *matCellDef="let element"> {{element.firstName}} </mat-cell>
-                            </ng-container>
+                <div class="example-container mat-elevation-z8">
+                    <mat-table #table [dataSource]="dataSource">
 
-                            <!-- FirstName Column -->
-                            <ng-container matColumnDef="midName">
-                                <mat-header-cell *matHeaderCellDef> Middle Name </mat-header-cell>
-                                <mat-cell *matCellDef="let element"> {{element.midName}} </mat-cell>
-                            </ng-container>
+                        <!--- Note that these columns can be defined in any order.
+                      The actual rendered columns are set as a property on the row definition" -->
 
-                            <!-- Middle Name Column -->
-                            <ng-container matColumnDef="lastName">
-                                <mat-header-cell *matHeaderCellDef> Last Name </mat-header-cell>
-                                <mat-cell *matCellDef="let element"> {{element.lastName}} </mat-cell>
-                            </ng-container>
+                        <!-- FirstName Column -->
+                        <ng-container matColumnDef="firstName">
+                            <mat-header-cell *matHeaderCellDef> First Name </mat-header-cell>
+                            <mat-cell *matCellDef="let element"> {{element.firstName}} </mat-cell>
+                        </ng-container>
 
-                            <!-- Last Name Column -->
-                            <ng-container matColumnDef="dateOfBirth">
-                                <mat-header-cell *matHeaderCellDef> Date Of Birth </mat-header-cell>
-                                <mat-cell *matCellDef="let element"> {{element.dateOfBirth | date: 'dd-MMM-yyyy' }}
-                                </mat-cell>
-                            </ng-container>
+                        <!-- FirstName Column -->
+                        <ng-container matColumnDef="midName">
+                            <mat-header-cell *matHeaderCellDef> Middle Name </mat-header-cell>
+                            <mat-cell *matCellDef="let element"> {{element.midName}} </mat-cell>
+                        </ng-container>
 
-                            <!-- Date Of Birth Column -->
-                            <ng-container matColumnDef="gender">
-                                <mat-header-cell *matHeaderCellDef> Gender </mat-header-cell>
-                                <mat-cell *matCellDef="let element"> {{element.gender }} </mat-cell>
-                            </ng-container>
+                        <!-- Middle Name Column -->
+                        <ng-container matColumnDef="lastName">
+                            <mat-header-cell *matHeaderCellDef> Last Name </mat-header-cell>
+                            <mat-cell *matCellDef="let element"> {{element.lastName}} </mat-cell>
+                        </ng-container>
 
-                            <!-- Enrollment Date Column -->
-                            <ng-container matColumnDef="relationshipType">
-                                <mat-header-cell *matHeaderCellDef> Relationship Type </mat-header-cell>
-                                <mat-cell *matCellDef="let element"> {{element.relationshipType }} </mat-cell>
-                            </ng-container>
+                        <!-- Last Name Column -->
+                        <ng-container matColumnDef="dateOfBirth">
+                            <mat-header-cell *matHeaderCellDef> Date Of Birth </mat-header-cell>
+                            <mat-cell *matCellDef="let element"> {{element.dateOfBirth | date: 'dd-MMM-yyyy' }}
+                            </mat-cell>
+                        </ng-container>
 
-                            <ng-container matColumnDef="actionsColumn">
-                                <mat-header-cell *matHeaderCellDef>
-                                </mat-header-cell>
-                                <mat-cell *matCellDef="let row">
-                                    <button mat-raised-button *ngIf="!isPnsScreeningDone" [style.background]="'#4db6ac'"
-                                        (click)="screenClient(row)">Screen</button>
-                                    <button mat-raised-button [style.background]="'#616161'" (click)="traceClient(row)">Trace</button>
-                                </mat-cell>
-                            </ng-container>
+                        <!-- Date Of Birth Column -->
+                        <ng-container matColumnDef="gender">
+                            <mat-header-cell *matHeaderCellDef> Gender </mat-header-cell>
+                            <mat-cell *matCellDef="let element"> {{element.gender }} </mat-cell>
+                        </ng-container>
 
-                            <mat-header-row *matHeaderRowDef="displayedColumns" [style.background]="'#f5f5f5'"></mat-header-row>
-                            <mat-row *matRowDef="let row; columns: displayedColumns;" (click)="getSelectedRow(row)"
-                                [style.background]="highlightedRow.indexOf(row) != -1 ? 'lightblue': '#ffffff'">
+                        <!-- Enrollment Date Column -->
+                        <ng-container matColumnDef="relationshipType">
+                            <mat-header-cell *matHeaderCellDef> Relationship Type </mat-header-cell>
+                            <mat-cell *matCellDef="let element"> {{element.relationshipType }} </mat-cell>
+                        </ng-container>
 
-                            </mat-row>
-                        </mat-table>
-                    </div>
+                        <ng-container matColumnDef="actionsColumn">
+                            <mat-header-cell *matHeaderCellDef>
+                            </mat-header-cell>
+                            <mat-cell *matCellDef="let row">
+                                <button mat-raised-button *ngIf="!isPnsScreeningDone" [style.background]="'#4db6ac'"
+                                    (click)="screenClient(row)">Screen</button>
+                                <button mat-raised-button [style.background]="'#616161'" (click)="traceClient(row)">Trace</button>
+                            </mat-cell>
+                        </ng-container>
 
-                    <div>
-                        &nbsp;
-                    </div>
+                        <mat-header-row *matHeaderRowDef="displayedColumns" [style.background]="'#f5f5f5'"></mat-header-row>
+                        <mat-row *matRowDef="let row; columns: displayedColumns;" (click)="getSelectedRow(row)"
+                            [style.background]="highlightedRow.indexOf(row) != -1 ? 'lightblue': '#ffffff'">
 
-                    <div class="button-row pull-right">
-                        <button mat-fab (click)="newPartner()"><i class="fa fa-plus"></i></button>
-                    </div>
+                        </mat-row>
+                    </mat-table>
+                </div>
+
+                <div>
+                    &nbsp;
+                </div>
+
+                <div class="button-row pull-right">
+                    <button mat-fab (click)="newPartner()"><i class="fa fa-plus"></i></button>
                 </div>
             </div>
         </div>

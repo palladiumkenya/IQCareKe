@@ -151,6 +151,7 @@
     <Compile Include="Lookup\BFacilityListManager.cs" />
     <Compile Include="Lookup\BLookupICDCodesManager.cs" />
     <Compile Include="Lookup\BPatientBaselineLookupManager.cs" />
+    <Compile Include="Lookup\BPatientLookupLabManager.cs" />
     <Compile Include="Lookup\BPatientServiceEnrollmentLookupManager.cs" />
     <Compile Include="Lookup\BPatientStabilitySummaryManager.cs" />
     <Compile Include="Lookup\BPatientTreatmentSupporterLookupManager.cs" />

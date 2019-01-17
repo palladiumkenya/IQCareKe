@@ -363,6 +363,29 @@
 
     });
 
+    /* function to get Last height and Weight */
+    function ReadLastVitals() {
+        $.ajax({
+            type: "POST",
+            url: "../WebService/PatientVitals.asmx/GetCurrentPatientVitalsByPatientId",
+            data: "",
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: function(response) {
+                var vitalList = JSON.parse(response.d);
+                
+                $("#<%=weights.ClientID%>").val(vitalList.Weight);
+                $("#<%=Heights.ClientID%>").val(vitalList.Height);
+
+            },
+            error: function(xhr, errorType, exception) {
+                var jsonError = jQuery.parseJSON(xhr.responseText);
+                toastr.error("" + xhr.status + "" + jsonError.Message);
+            }
+        });
+    }
+
+    ReadLastVitals();
 
     /* monitor changes in patient vitals */
 
@@ -413,6 +436,7 @@
                         case "height":
                             current = parseInt($("#<%=Heights.ClientID%>").val());
                             previous = parseInt(vitalList.Height);
+
                             if (current > previous && previous > 0) {
                                 $("#heightAddon").empty("");
                                 $("#heightAddon").html("<strong class='label label-danger'> Gained " + (current - previous) + " cms</strong>");

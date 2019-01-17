@@ -16,11 +16,15 @@ import { Subscription } from 'rxjs/index';
 export class MotherProfileComponent implements OnInit {
 
     motherProfileFormGroup: FormGroup;
-    dateLMP: Date;
+     dateLMP: Date;
+     minLMpDate: Date;
+     gestation: number;
     motherProfile: Subscription;
     visitDetails: Subscription;
-    @Input('patientId') patientId: number;
+    @Input() patientId: number;
+    @Input () visitDate: Date;
     @Output() notify: EventEmitter<FormGroup> = new EventEmitter<FormGroup>();
+
     public maxDate: Date = moment().toDate();
     public minLmpDate: Date = moment().subtract( 1 , 'years').toDate();
     public minAgeMenarche: number = 9;
@@ -37,7 +41,7 @@ export class MotherProfileComponent implements OnInit {
         this.motherProfileFormGroup = this._formBuilder.group({
             dateLMP: new FormControl('', [ Validators.required]),
             dateEDD: new FormControl('', [Validators.required]),
-            gestation: new FormControl('', [Validators.max(20), Validators.required]),
+            gestation: new FormControl('', [Validators.max(42), Validators.required]),
             ageAtMenarche: new FormControl('', []),
             parityOne: new FormControl('', [ Validators.min(0) , Validators.max(20), Validators.required]),
             parityTwo: new FormControl('', [ Validators.min(0), Validators.max(20), Validators.required]),
@@ -52,15 +56,36 @@ export class MotherProfileComponent implements OnInit {
 
     public onLMPDateChange() {
         this.dateLMP = this.motherProfileFormGroup.controls['dateLMP'].value;
+        this.minLMpDate = moment(moment(this.visitDate).subtract(42, 'weeks').format('')).toDate();
+        
+        if (moment(this.dateLMP).isBefore(this.minLMpDate)) {
+
+            this.snotifyService.error('Current LMP Date CANNOT be More than 9 months after the VisitDate', 'Mother Profile',
+                this.notificationService.getConfig());
+            this.motherProfileFormGroup.get('dateLMP').setValue('');
+            return false;
+        }
+
+        if (moment(this.dateLMP).isAfter(this.visitDate)) {
+            this.snotifyService.error('LMP Date CANNOT be before VisitDate', 'Mother Profile',
+                this.notificationService.getConfig());
+            this.motherProfileFormGroup.get('dateLMP').setValue('');
+            this.motherProfileFormGroup.get('dateEDD').setValue('');
+            this.motherProfileFormGroup.get('gestation').setValue('');
+
+            return false;
+        }
+
         const lmpDate = new Date(moment(this.motherProfileFormGroup.controls['dateLMP'].value).add(280, 'days').format(''));
         const eddDate = new Date(moment(this.dateLMP).add(7, 'days').add(9, 'months').format(''));
         this.motherProfileFormGroup.controls['dateEDD'].setValue(eddDate);
 
         console.log(this.motherProfileFormGroup.controls['dateEDD'].value);
 
-        const now = moment(new Date());
-        const gestation = moment.duration(now.diff(this.dateLMP)).asWeeks().toFixed(1);
-        this.motherProfileFormGroup.controls['gestation'].setValue(gestation);
+        this.gestation = parseInt(moment.duration(moment(this.visitDate).diff(this.dateLMP)).asWeeks().toFixed(1), 10);
+        if (this.gestation > 42) { this.gestation = 42;  }
+        if (this.gestation < 1) { this.gestation = 0; }
+        this.motherProfileFormGroup.controls['gestation'].setValue(this.gestation);
 
         // this.motherProfileFormGroup.controls['dateEDD'].disable({ onlySelf: false });
         console.log(moment(this.motherProfileFormGroup.controls['dateLMP'].value, 'DD-MM-YYYY').add(280, 'days'));

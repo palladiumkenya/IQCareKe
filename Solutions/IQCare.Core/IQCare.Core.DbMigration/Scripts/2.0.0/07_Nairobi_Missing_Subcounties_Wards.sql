@@ -1,2 +1,0 @@
---INSERT INTO [dbo].[County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName])
---VALUES();

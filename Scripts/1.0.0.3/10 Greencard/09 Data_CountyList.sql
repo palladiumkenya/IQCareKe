@@ -1,5 +1,7 @@
 TRUNCATE TABLE [dbo].[County]
 go
+SET IDENTITY_INSERT [dbo].[County] ON 
+Go
 Insert into [County] ([Id], [CountyId], [CountyName], [SubcountyId], [Subcountyname], [WardId], [WardName]) 
 Select 1, 1, 'MOMBASA', 1, 'CHANGAMWE', 1, 'PORT REITZ' Union All
 Select 2, 1, 'MOMBASA', 1, 'CHANGAMWE', 2, 'KIPEVU' Union All
@@ -1426,3 +1428,5 @@ Select 1422, 47, 'NAIROBI', 285, 'EMBAKASI EAST', 1422, 'LOWER SAVANNAH' Union A
 Select 1423, 47, 'NAIROBI', 285, 'EMBAKASI EAST', 1423, 'EMBAKASI' Union All
 Select 1424, 47, 'NAIROBI', 285, 'EMBAKASI EAST', 1424, 'UTAWALA' 
 go
+ SET IDENTITY_INSERT [dbo].[County] Off 
+Go

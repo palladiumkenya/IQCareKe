@@ -24,7 +24,6 @@ namespace IQCare.Lab.BusinessProcess.Commands
         public string ResultOption { get; set; }
         public string ResultUnit { get; set; }
         public int? ResultUnitId { get; set; }
-        public int? ResultConfigId { get; set; }
         public bool Undetectable { get; set; }
         public decimal DetectionLimit { get; set; }
     }

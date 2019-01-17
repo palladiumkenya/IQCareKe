@@ -134,7 +134,8 @@ namespace IQCare.Controllers.Records
                 lastName = searchQuery.LastName,
                 MobileNumber = searchQuery.MobileNumber,
                 BirthDate = searchQuery.DateOfBirth,
-                Sex = searchQuery.Sex
+                Sex = searchQuery.Sex,
+                Age = searchQuery.Age,
             });
 
             if (response.IsValid)

@@ -28,6 +28,8 @@ import { PatientReferralEditCommand } from '../_models/PatientReferralEditComman
 import { PatientAppointmentEditCommand } from '../_models/PatientAppointmentEditCommand';
 import { FamilyPlanningEditCommand } from '../_models/FamilyPlanningEditCommand';
 import { PatientFamilyPlanningMethodEditCommand } from '../_models/PatientFamilyPlanningMethodEditCommand';
+import { UpdateDrugAdministrationCommand } from '../_models/UpdateDrugAdministrationCommand';
+import { PartnerTestingEditCommand } from '../_models/PartnerTestingEditCommand';
 
 @Component({
     selector: 'app-pnc',
@@ -624,11 +626,8 @@ export class PncComponent implements OnInit {
 
                     this.snotifyService.success('Successfully saved PNC encounter ', 'PNC', this.notificationService.getConfig());
                     this.zone.run(() => {
-                        this.zone.run(() => {
-                            this.router.navigate(['/dashboard/personhome/' + this.personId], { relativeTo: this.route });
-                        });
+                        this.router.navigate(['/dashboard/personhome/' + this.personId], { relativeTo: this.route });
                     });
-
                 },
                 (error) => {
                     console.log(`error ` + error);
@@ -753,6 +752,45 @@ export class PncComponent implements OnInit {
             UserId: this.userId
         };
 
+        for (let i = 0; i < this.drugAdministrationCategories.length; i++) {
+            let value;
+            let id;
+            if (this.drugAdministrationCategories[i].itemName == 'Started HAART in PNC') {
+                value = this.drugAdministration_PartnerTesting_FormGroup.value[0]['startedARTPncVisit'];
+                id = this.drugAdministration_PartnerTesting_FormGroup.value[0]['id_startedart'];
+            } else if (this.drugAdministrationCategories[i].itemName == 'Haematinics given') {
+                value = this.drugAdministration_PartnerTesting_FormGroup.value[0]['haematinics_given'];
+                id = this.drugAdministration_PartnerTesting_FormGroup.value[0]['id_haematinics'];
+            } else if (this.drugAdministrationCategories[i].itemName == 'Infant_Drug') {
+                value = this.drugAdministration_PartnerTesting_FormGroup.value[0]['infant_drug'];
+                id = this.drugAdministration_PartnerTesting_FormGroup.value[0]['id_infantdrug'];
+            } else if (this.drugAdministrationCategories[i].itemName == 'Infant_Start_Continue') {
+                value = this.drugAdministration_PartnerTesting_FormGroup.value[0]['infant_start'];
+                id = this.drugAdministration_PartnerTesting_FormGroup.value[0]['id_infantstart'];
+            }
+
+            const updateDrugAdministrationCommand: UpdateDrugAdministrationCommand = {
+                Id: id,
+                DrugAdministered: this.drugAdministrationCategories[i].itemId,
+                Value: value,
+                Description: this.drugAdministrationCategories[i].itemName
+            };
+
+            const pncDrugAdministrationEdit = this.pncService.updateDrugAdministration(updateDrugAdministrationCommand).subscribe(
+                (result) => {
+                    console.log(result);
+                },
+                (error) => {
+                    console.log(error);
+                }
+            );
+        }
+
+        const partnerTestingEditCommand: PartnerTestingEditCommand = {
+            Id: this.drugAdministration_PartnerTesting_FormGroup.value[1]['id'],
+            PartnerTested: this.drugAdministration_PartnerTesting_FormGroup.value[1]['partnerHivTestDone'],
+            PartnerHIVResult: this.drugAdministration_PartnerTesting_FormGroup.value[1]['finalPartnerHivResult'],
+        };
 
         const pncVisitDetailsEdit = this.pncService.editPncVisitDetails(visitDetailsEditCommand);
         const pncPatientDiagnosisEdit = this.pncService.updatePatientDiagnosis(patientDiagnosisEdit);
@@ -763,11 +801,12 @@ export class PncComponent implements OnInit {
         const pncAppointmentEdit = this.pncService.updateAppointment(patientAppointmentEditCommand);
         const pncFamilyPlanningEdit = this.pncService.updateFamilyPlanning(familyPlanningEditCommand);
         const pncFamilyPlanningMethodEdit = this.pncService.updatePncFamilyPlanningMethod(updateFamilyPlanningMethodCommand);
+        const pncPartnerTestingEdit = this.pncService.updatePartnerTesting(partnerTestingEditCommand);
 
         forkJoin([pncVisitDetailsEdit, pncPatientDiagnosisEdit,
             pncPostnatalexamEdit, pncbabyexamEdit, pncHivStatus,
             pncReferralEdit, pncAppointmentEdit, pncFamilyPlanningEdit,
-            pncFamilyPlanningMethodEdit]).subscribe(
+            pncFamilyPlanningMethodEdit, pncPartnerTestingEdit]).subscribe(
                 (result) => {
                     console.log(result);
 

@@ -34,7 +34,11 @@ export class PncDrugadministrationComponent implements OnInit, AfterViewInit {
             startedARTPncVisit: new FormControl('', [Validators.required]),
             haematinics_given: new FormControl('', [Validators.required]),
             infant_drug: new FormControl('', [Validators.required]),
-            infant_start: new FormControl('', [Validators.required])
+            infant_start: new FormControl('', [Validators.required]),
+            id_startedart: new FormControl(''),
+            id_haematinics: new FormControl(''),
+            id_infantdrug: new FormControl(''),
+            id_infantstart: new FormControl(''),
         });
 
         const { yesNoNaOptions,
@@ -61,12 +65,16 @@ export class PncDrugadministrationComponent implements OnInit, AfterViewInit {
                 for (let i = 0; i < result.length; i++) {
                     if (result[i]['strDrugAdministered'] == 'Started HAART in PNC') {
                         this.DrugAdministrationForm.get('startedARTPncVisit').setValue(result[i]['value']);
+                        this.DrugAdministrationForm.get('id_startedart').setValue(result[i]['id']);
                     } else if (result[i]['strDrugAdministered'] == 'Haematinics given') {
                         this.DrugAdministrationForm.get('haematinics_given').setValue(result[i]['value']);
+                        this.DrugAdministrationForm.get('id_haematinics').setValue(result[i]['id']);
                     } else if (result[i]['strDrugAdministered'] == 'Infant_Drug') {
                         this.DrugAdministrationForm.get('infant_drug').setValue(result[i]['value']);
+                        this.DrugAdministrationForm.get('id_infantdrug').setValue(result[i]['id']);
                     } else if (result[i]['strDrugAdministered'] == 'Infant_Start_Continue') {
                         this.DrugAdministrationForm.get('infant_start').setValue(result[i]['value']);
+                        this.DrugAdministrationForm.get('id_infantstart').setValue(result[i]['id']);
                     }
                 }
             },

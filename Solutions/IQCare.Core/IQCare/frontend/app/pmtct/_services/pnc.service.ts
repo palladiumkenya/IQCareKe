@@ -21,6 +21,8 @@ import { PatientReferralEditCommand } from '../_models/PatientReferralEditComman
 import { PatientAppointmentEditCommand } from '../_models/PatientAppointmentEditCommand';
 import { FamilyPlanningEditCommand } from '../_models/FamilyPlanningEditCommand';
 import { PatientFamilyPlanningMethodEditCommand } from '../_models/PatientFamilyPlanningMethodEditCommand';
+import { UpdateDrugAdministrationCommand } from '../_models/UpdateDrugAdministrationCommand';
+import { PartnerTestingEditCommand } from '../_models/PartnerTestingEditCommand';
 
 const httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -122,11 +124,12 @@ export class PncService {
             );
     }
 
-    public savePncScreening(): Observable<any> {
-        return this.http.post<any>(this.API_URL + '', JSON.stringify(''), httpOptions).pipe(
-            tap(savePncScreening => this.errorHandler.log(`successfully saved pnc screening`)),
-            catchError(this.errorHandler.handleError<any>(`Error saving pnc screening`))
-        );
+    public updateDrugAdministration(updateDrugAdministrationCommand: UpdateDrugAdministrationCommand): Observable<any> {
+        return this.http.put(this.API_PMTCT_URL + '/api/PatientDrugAdministration/Edit',
+            JSON.stringify(updateDrugAdministrationCommand), httpOptions).pipe(
+                tap(updateDrugAdministration => this.errorHandler.log(`successfully updated drug administration`)),
+                catchError(this.errorHandler.handleError<any>('Error updating drug administration'))
+            );
     }
 
     public savePartnerTesting(partnerTestingCommand: PartnerTestingCommand): Observable<any> {
@@ -142,6 +145,14 @@ export class PncService {
             tap(getPartnerTesting => this.errorHandler.log(`successfully fetched pnc partner testing`)),
             catchError(this.errorHandler.handleError<any>('Error fetching pnc partner testing'))
         );
+    }
+
+    public updatePartnerTesting(partnerTestingEditCommand: PartnerTestingEditCommand): Observable<any> {
+        return this.http.post(this.API_PMTCT_URL + '/api/PatientPartnerTesting/Edit',
+            JSON.stringify(partnerTestingEditCommand), httpOptions).pipe(
+                tap(updatePartnerTesting => this.errorHandler.log(`successfully updated pnc partner testing`)),
+                catchError(this.errorHandler.handleError<any>('Error updating pnc partner testing'))
+            );
     }
 
     public saveDiagnosis(pncPatientDiagnosis: PatientDiagnosisCommand): Observable<any> {
@@ -185,6 +196,10 @@ export class PncService {
     }
 
     public savePncNextAppointment(pncNextAppointmentCommand: PatientAppointment): Observable<any> {
+        if (!pncNextAppointmentCommand.AppointmentDate) {
+            return of([]);
+        }
+
         return this.http.post<any>(this.API_URL + '/api/PatientReferralAndAppointment/AddPatientNextAppointment',
             JSON.stringify(pncNextAppointmentCommand), httpOptions).pipe(
                 tap(savePncNextAppointment => this.errorHandler.log(`successfully saved pnc next appointment`)),

@@ -1,3 +1,4 @@
+import { LookupItemView } from './../../../shared/_models/LookupItemView';
 import { HeiService } from './../../_services/hei.service';
 import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
@@ -13,11 +14,12 @@ import * as moment from 'moment';
     styleUrls: ['./hei-hivtesting.component.css']
 })
 export class HeiHivtestingComponent implements OnInit {
-    hivTestType: any[] = [];
-    testResults: any[] = [];
+    hivTestType: LookupItemView[] = [];
+    testResults: LookupItemView[] = [];
     maxDate: Date;
 
     public hiv_testing_table_data: HivTestingTableData[] = [];
+    public hiv_testing_history_data: HivTestingTableData[] = [];
     displayedColumns = ['testtype', 'dateofsamplecollection', 'result', 'dateresultscollected', 'action'];
     dataSource = new MatTableDataSource(this.hiv_testing_table_data);
 
@@ -44,13 +46,37 @@ export class HeiHivtestingComponent implements OnInit {
 
         this.notify.emit(this.hiv_testing_table_data);
 
-        if (this.isEdit) {
-            this.loadHeiHivTests();
-        }
+        this.loadHeiHivTests();
     }
 
     loadHeiHivTests(): void {
-        // this.heiservice.getHeiLabTests();
+        this.heiservice.getLabOrderTestResults(this.patientId).subscribe(
+            (res) => {
+                console.log(res);
+                for (let i = 0; i < res.length; i++) {
+                    const testType = this.hivTestType.filter(obj => obj.itemName.includes(res[i].labTestName));
+                    const testResultHistorical = this.testResults.filter(obj => obj.itemName.includes(res[i].resultTexts));
+                    let resultValue = null;
+                    let resultText = null;
+                    if (testResultHistorical.length > 0) {
+                        resultValue = testResultHistorical[0];
+                    } else {
+                        resultText = res[i].resultValues;
+                    }
+
+                    this.hiv_testing_history_data.push({
+                        testtype: testType[0],
+                        dateofsamplecollection: res[i].sampleDate,
+                        result: resultValue,
+                        dateresultscollected: res[i].resultDate,
+                        comments: '',
+                        resultText: resultText
+                    });
+                }
+
+                this.dataSource = new MatTableDataSource(this.hiv_testing_history_data);
+            }
+        );
     }
 
     AddHivTests() {
@@ -96,9 +122,9 @@ export class HeiHivtestingComponent implements OnInit {
 }
 
 export interface HivTestingTableData {
-    testtype?: string;
+    testtype?: LookupItemView;
     dateofsamplecollection?: Date;
-    result?: string;
+    result?: LookupItemView;
     dateresultscollected?: Date;
     comments?: string;
     resultText: string;

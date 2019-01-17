@@ -12,7 +12,10 @@ namespace IQCare.Lab.BusinessProcess.MapperProfiles
         public PatientLabTrackerMapperProfile()
         {
             CreateMap<PatientLabTracker, LabTestResultViewModel>()
-                .ForMember(src => src.LabTestName, dest => dest.MapFrom(x => x.LabName))
+                .ForMember(dest => dest.LabTestName, src => src.MapFrom(x => x.LabName))
+                .ForMember(dest => dest.OrderReason, src => src.MapFrom(x => x.Reasons))
+                .ForMember(dest=>dest.OrderDate,src=>src.MapFrom(x=>x.SampleDate.HasValue ? x.SampleDate.Value.ToShortDateString() : null))
+                .ForMember(dest=>dest.ResultStatus,src=>src.MapFrom(x=>x.Results))
                 .ReverseMap();
         }
     }

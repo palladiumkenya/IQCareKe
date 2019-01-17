@@ -60,7 +60,7 @@
     <Content Include="CCC\Adherence\ucUnderstanding.ascx" />
     <Content Include="CCC\Appointment\ScheduleAppointment.aspx" />
     <Content Include="CCC\Appointment\PatientAppointments.aspx" />
-    <Content Include="CCC\ClinicalSummary\ClinicalSummary.aspx" />
+    <Content Include="CCC\CaseSummary\CaseSummary.aspx" />
     <Content Include="CCC\Data\States.xml" />
     <Content Include="CCC\Depression\DepressionScreening.aspx" />
     <Content Include="CCC\Encounter\ArtDistributionForm.aspx" />
@@ -507,12 +507,12 @@
     <Compile Include="CCC\Appointment\PatientAppointments.aspx.designer.cs">
       <DependentUpon>PatientAppointments.aspx</DependentUpon>
     </Compile>
-    <Compile Include="CCC\ClinicalSummary\ClinicalSummary.aspx.cs">
-      <DependentUpon>ClinicalSummary.aspx</DependentUpon>
+    <Compile Include="CCC\CaseSummary\CaseSummary.aspx.cs">
+      <DependentUpon>CaseSummary.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="CCC\ClinicalSummary\ClinicalSummary.aspx.designer.cs">
-      <DependentUpon>ClinicalSummary.aspx</DependentUpon>
+    <Compile Include="CCC\CaseSummary\CaseSummary.aspx.designer.cs">
+      <DependentUpon>CaseSummary.aspx</DependentUpon>
     </Compile>
     <Compile Include="CCC\Depression\DepressionScreening.aspx.cs">
       <DependentUpon>DepressionScreening.aspx</DependentUpon>

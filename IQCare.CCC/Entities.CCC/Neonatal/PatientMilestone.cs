@@ -21,7 +21,7 @@ namespace Entities.CCC.Neonatal
         public virtual PatientMasterVisit PatientMasterVisit { get; set; }
         public int TypeAssessedId { get; set; }
         public DateTime? DateAssessed { get; set; }
-        public int AchievedId { get; set; }
+        public bool? AchievedId { get; set; }
         public int  StatusId { get; set; }
         public string Comment { get; set; }
     }

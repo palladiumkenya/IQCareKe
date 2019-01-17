@@ -100,15 +100,16 @@ import { TestKitNameResolver } from './_services/resolvers/test-kit-name.resolve
 import { HivTestResultResolver } from './_services/resolvers/hiv-test-result.resolver';
 import { PncEncountersComponent } from './pnc/pnc-encounters/pnc-encounters.component';
 import { CheckinComponent } from './checkin/checkin.component';
-import {TbScreeningResolver} from './_services/resolvers/tb-screening.resolver';
+import { TbScreeningResolver } from './_services/resolvers/tb-screening.resolver';
 import { AncHivtestingComponent } from './anc/anc-hivtesting/anc-hivtesting.component';
 import { ANCHivStatusInitialVisitResolver } from './_services/resolvers/anc-hiv-status-initial-visit.resolver';
 import { MotherExaminationResolver } from './_services/resolvers/motherexamination.resolver';
 import { BabyExaminationResolver } from './_services/resolvers/baby-examination.resolver';
 import { HeiMedicationComponent } from './hei/hei-medication/hei-medication.component';
 import { AncClientMonitoringComponent } from './anc/anc-client-monitoring/anc-client-monitoring.component';
-import {BirthOutcomeResolver} from './_services/resolvers/BirthOutcomeResolver';
+import { BirthOutcomeResolver } from './_services/resolvers/BirthOutcomeResolver';
 import { CounselledInfantFeedingResolver } from './_services/resolvers/counselled-infant-feeding.resolver';
+import { ImmunizationComponent } from './hei/immunization-history/immunization/immunization.component';
 
 @NgModule({
     imports: [
@@ -176,7 +177,8 @@ import { CounselledInfantFeedingResolver } from './_services/resolvers/counselle
         MaternityEncounterComponent,
         AncHivtestingComponent,
         HeiMedicationComponent,
-        AncClientMonitoringComponent
+        AncClientMonitoringComponent,
+        ImmunizationComponent
     ],
     providers: [
         PlaceOfDeliveryResolver,
@@ -229,7 +231,8 @@ import { CounselledInfantFeedingResolver } from './_services/resolvers/counselle
         IptOutcomeComponent,
         HivtestingmodalComponent,
         HivStatusComponent,
-        CheckinComponent
+        CheckinComponent,
+        ImmunizationComponent
     ],
     exports: [
         IptClientWorkupComponent,

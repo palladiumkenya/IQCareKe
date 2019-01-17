@@ -489,6 +489,15 @@ namespace IQCare.CCC.UILogic
                             theFrmRoot.NavigateUrl = "PatientEncounter.aspx?visitId=" + theDR["visitID"].ToString();
                             theFrmRoot.ImageUrl = "~/images/15px-Yes_check.svg.png";
                         }
+
+
+                        if (theDR["VisitName"].ToString() == "Care Ended")
+                        {
+                            theFrmRoot.NavigateUrl = "../Patient/PatientCareEnded.aspx?visitId=" + theDR["visitID"].ToString();
+                            theFrmRoot.ImageUrl = "~/images/15px-Yes_check.svg.png";
+                        }
+
+
                         if (theDR["VisitName"].ToString() == "Adherence Barriers")
                         {
                             theFrmRoot.NavigateUrl = "../Adherence/AdherenceBarriers.aspx?visitId=" + theDR["visitID"].ToString();
@@ -500,6 +509,11 @@ namespace IQCare.CCC.UILogic
                             theFrmRoot.ImageUrl = "~/images/15px-Yes_check.svg.png";
                         }
 
+                        if(theDR["VisitName"].ToString()== "Case Summary")
+                        {
+                            theFrmRoot.NavigateUrl = "../CaseSummary/CaseSummary.aspx?visitId=" + theDR["visitID"].ToString();
+                            theFrmRoot.ImageUrl = "~/images/15px-Yes_check.svg.png";
+                        }
 
                         if (theDR["VisitName"].ToString() == "Gender Based Violence Screening")
                         {

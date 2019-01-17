@@ -28,5 +28,14 @@ namespace IQCare.Controllers.Shared
                 return Ok(results.Value);
             return BadRequest(results);
         }
+
+        [HttpGet("GetServiceArea")]
+        public async Task<IActionResult> GetServiceArea(string name)
+        {
+            var results = await _mediator.Send(new GetServiceAreaByName{Name = name}, Request.HttpContext.RequestAborted);
+            if (results.IsValid)
+                return Ok(results.Value);
+            return BadRequest(results);
+        }
     }
 }
