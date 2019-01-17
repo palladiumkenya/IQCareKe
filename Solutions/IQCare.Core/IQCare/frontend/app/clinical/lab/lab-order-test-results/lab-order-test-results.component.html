@@ -1,0 +1,25 @@
+<h2 mat-dialog-title>{{dialogTitle}}</h2>
+<mat-dialog-content>
+        <table  mat-table  [dataSource]="testResultsDataSource">
+            <ng-container matColumnDef="parameter">
+              <th mat-header-cell *matHeaderCellDef> <strong>Parameter</strong> </th>
+              <td mat-cell *matCellDef="let result"> {{result.parameter}} </td>
+            </ng-container>            
+            <ng-container matColumnDef="result">
+              <th mat-header-cell *matHeaderCellDef><strong>Result</strong>  </th>
+              <td mat-cell *matCellDef="let result"> {{result.result }} </td>
+            </ng-container>
+          
+            <ng-container matColumnDef="unit">
+              <th mat-header-cell *matHeaderCellDef> <strong> Unit </strong>  </th>
+              <td mat-cell *matCellDef="let result"> {{result.unit}} </td>
+            </ng-container>
+            <tr mat-header-row *matHeaderRowDef="test_results_displaycolumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: test_results_displaycolumns;"></tr>
+        </table>
+        <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+        <button class="mat-raised-button" (click)="close()">Close</button>
+</mat-dialog-actions>

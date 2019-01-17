@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace IQCare.Lab.Core.Models
 {
@@ -52,7 +53,7 @@ namespace IQCare.Lab.Core.Models
         public string AuditData { get; private set; }
 
         public DateTime CreateDate { get; private set; }
-
+        public virtual ICollection<LabOrderTestResult> LabOrderTestResults { get; set; }
         public int CreatedBy { get; private set; }
         public virtual LabOrder LabOrder { get; set; }
 

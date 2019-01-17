@@ -11,16 +11,13 @@ export class FormControlService {
   constructor() { }
 
   toFormGroup(formControls : FormControlBase<any>[]) {
-     let formGroup : any = {};
-     console.log('Form Controls at toFromGroup method >> ' + formControls.length)
-     
+     let formGroup : any = {};    
      formControls.forEach(control =>
      {
         if(control === undefined)
             return;
-            console.log(control.disabled +' Disabled')
-        formGroup[control.key] = control.required ? new FormControl({value: control.value || '', disabled:control.disabled },Validators.required) 
-                                                      : new FormControl({value :control.value || '',disabled:control.disabled});
+        formGroup[control.key] =  new FormControl({value: control.value || '', disabled:control.disabled },Validators.pattern(control.pattern));
+                                                      
      });
      return new FormGroup(formGroup);
 
