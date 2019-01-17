@@ -27,15 +27,15 @@ namespace IQCare.PMTCT.BusinessProcess.CommandHandlers.BaselineAntenatalCare
                 {
                     Core.Models.BaselineAntenatalCare baselineAntenatalCare = await _unitOfWork
                         .Repository<Core.Models.BaselineAntenatalCare>().Get(x =>
-                            x.Id == request.BaselineAntenatalCare.Id &&
-                            x.PatientId == request.BaselineAntenatalCare.PatientId).FirstOrDefaultAsync();
+                            x.PatientMasterVisitId == request.PatientMasterVisitId &&
+                            x.PatientId == request.PatientId).FirstOrDefaultAsync();
 
                     if (baselineAntenatalCare != null)
                     {
-                        baselineAntenatalCare.BreastExamDone = request.BaselineAntenatalCare.BreastExamDone;
-                        baselineAntenatalCare.TreatedForSyphilis = request.BaselineAntenatalCare.TreatedForSyphilis;
-                        baselineAntenatalCare.HivStatusBeforeAnc = request.BaselineAntenatalCare.HivStatusBeforeAnc;
-                        baselineAntenatalCare.PregnancyId = request.BaselineAntenatalCare.PregnancyId;
+                        baselineAntenatalCare.BreastExamDone = request.BreastExamDone;
+                        baselineAntenatalCare.TreatedForSyphilis = request.TreatedForSyphilis;
+                        baselineAntenatalCare.HivStatusBeforeAnc = request.HivStatusBeforeAnc;
+                        baselineAntenatalCare.PregnancyId = request.PregnancyId;
                     }
                     
                     _unitOfWork.Repository<Core.Models.BaselineAntenatalCare>().Update(baselineAntenatalCare);
