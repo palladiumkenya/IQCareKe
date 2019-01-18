@@ -17,6 +17,7 @@ import { PnsTracingListComponent } from './pns/pns-tracing-list/pns-tracing-list
 import { PnsTracingComponent } from './pns/pnstracing/pnstracing.component';
 import { PsmartComponent } from './psmart/psmart.component';
 import { YesNoResolver } from '../pmtct/_services/yesno.resolver';
+import { FamilyTracingListComponent } from './family-tracing/family-tracing-list/family-tracing-list.component';
 
 const routes: Routes = [
     {
@@ -89,12 +90,9 @@ const routes: Routes = [
                 }
             },
             {
-                path: 'search',
-                component: FamilySearchComponent,
-                pathMatch: 'full',
-                resolve: {
-                    yesnoOptions: YesNoResolver
-                }
+                path: 'familytracinglist',
+                component: FamilyTracingListComponent,
+                pathMatch: 'full'
             }
         ]
     },

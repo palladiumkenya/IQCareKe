@@ -100,9 +100,24 @@ export class AppStateService {
                                     this.store.dispatch(new Consent.IsPnsTracingDone(response[i].appStateStoreObjects[j].appStateObject));
                                 }
                                 break;
+                            case 10:
+                                for (let j = 0; j < response[i].appStateStoreObjects.length; j++) {
+                                    this.store.dispatch(new Consent.IsFamilyScreeningDone(response[i].appStateStoreObjects[j].appStateObject));
+                                }
+                                break;
+                            case 11:
+                                for (let j = 0; j < response[i].appStateStoreObjects.length; j++) {
+                                    this.store.dispatch(new Consent.IsFamilyTracingDone(response[i].appStateStoreObjects[j].appStateObject));
+                                }
+                                break;
                             case 13:
                                 for (let j = 0; j < response[i].appStateStoreObjects.length; j++) {
                                     this.store.dispatch(new Consent.PnsScreenedPositive(response[i].appStateStoreObjects[j].appStateObject));
+                                }
+                                break;
+                            case 14:
+                                for (let j = 0; j < response[i].appStateStoreObjects.length; j++) {
+                                    this.store.dispatch(new Consent.FamilyScreenedPositive(response[i].appStateStoreObjects[j].appStateObject));
                                 }
                                 break;
                         }

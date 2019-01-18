@@ -5,10 +5,6 @@
 
     <div class="ibox-content">
         <div class="row">
-            <!--<div class="col-lg-2">
-                <app-leftnav></app-leftnav>
-            </div>-->
-
             <div class="col-md-12 animated fadeIn">
                 <div class="panel panel-default">
                     <div class="panel-heading">HTS-LAB FORM</div>
@@ -128,8 +124,16 @@
                                             </mat-form-field>
 
                                             <mat-form-field>
+                                                <mat-select placeholder="HIV Counselling Done" name="HivCounsellingDone"
+                                                    id="HivCounsellingDone" formControlName="HivCounsellingDone">
+                                                    <mat-option [value]=""></mat-option>
+                                                    <mat-option *ngFor="let counselling of yesNoOptions" [value]="counselling.itemId">{{counselling.itemName}}</mat-option>
+                                                </mat-select>
+                                            </mat-form-field>
+
+                                            <mat-form-field>
                                                 <textarea matInput placeholder="Remarks" id="remarks" name="remarks"
-                                                    rows="5" formControlName="EncounterRemarks"></textarea>
+                                                    formControlName="EncounterRemarks"></textarea>
                                             </mat-form-field>
                                         </div>
 

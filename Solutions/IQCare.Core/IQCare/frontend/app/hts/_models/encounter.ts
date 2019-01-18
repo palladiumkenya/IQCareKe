@@ -22,4 +22,5 @@ export class Encounter {
     TbScreening?: number;
     GeoLocation?: string;
     EncounterType: number;
+    HivCounsellingDone: number;
 }
