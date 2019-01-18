@@ -58,9 +58,22 @@
                             <mat-header-cell *matHeaderCellDef>
                             </mat-header-cell>
                             <mat-cell *matCellDef="let row">
-                                <button mat-raised-button *ngIf="!isPnsScreeningDone" [style.background]="'#4db6ac'"
-                                    (click)="screenClient(row)">Screen</button>
-                                <button mat-raised-button [style.background]="'#616161'" (click)="traceClient(row)">Trace</button>
+                                <button mat-raised-button *ngIf="!isFamilyScreened(row['personId']) else screeningDone"
+                                    [style.background]="'#4db6ac'" (click)="screenClient(row)">Screen</button>
+                                <ng-template #screeningDone>
+                                    Screening Done
+                                </ng-template>
+                                &nbsp;&nbsp;
+                                <ng-container *ngIf="isFamilyScreened(row['personId']) else screeningNotDone">
+                                    <button mat-raised-button *ngIf="!FamilyScreenedPositive(row['personId']) else FamilyKnownPositive"
+                                        [style.background]="'#616161'" (click)="traceClient(row)">Trace</button>
+                                    <ng-template #FamilyKnownPositive>
+                                        Known Positive
+                                    </ng-template>
+                                </ng-container>
+                                <ng-template #screeningNotDone>
+                                    Screening Not Done
+                                </ng-template>
                             </mat-cell>
                         </ng-container>
 
