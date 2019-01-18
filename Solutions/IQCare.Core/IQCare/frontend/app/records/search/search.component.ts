@@ -44,7 +44,27 @@ export class SearchComponent implements OnInit, AfterViewInit {
         private lookupitemservice: LookupItemService) {
         store.dispatch(new AppState.ClearState());
         this.clientSearch = new Search();
+
+        //Reset Localstorage
         localStorage.removeItem('selectedService');
+        localStorage.removeItem('personId');
+        localStorage.removeItem('patientId');
+        localStorage.removeItem('partnerId');
+        localStorage.removeItem('htsEncounterId');
+        localStorage.removeItem('patientMasterVisitId');
+        localStorage.removeItem('isPartner');
+        localStorage.removeItem('editEncounterId');
+        localStorage.removeItem('encounterTypeId');
+        localStorage.removeItem('facilityList');
+        localStorage.removeItem('ff');
+        localStorage.removeItem('store');
+        localStorage.removeItem('visitDate');
+        localStorage.removeItem('visitType');
+        localStorage.removeItem('serviceAreaId');
+        localStorage.removeItem('onEdit');
+        localStorage.removeItem('ageNumber');
+        localStorage.removeItem('');
+
         this.store.dispatch(new AppState.ClearState());
     }
 

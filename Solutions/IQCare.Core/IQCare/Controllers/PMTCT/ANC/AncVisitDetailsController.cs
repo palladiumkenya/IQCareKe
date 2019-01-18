@@ -1,4 +1,5 @@
 using System.Threading.Tasks;
+using IQCare.PMTCT.BusinessProcess.Commands;
 using IQCare.PMTCT.BusinessProcess.Commands.VisitDetails;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
@@ -69,7 +70,7 @@ namespace IQCare.Controllers.PMTCT.ANC
         }
 
         [HttpPut]
-        public async Task<IActionResult> Put([FromBody] EditVisitDetailsCommand command)
+        public async Task<IActionResult> Put([FromBody] VisitDetailsCommandEdit command)
         {
             if (!ModelState.IsValid)
                 return BadRequest(command);

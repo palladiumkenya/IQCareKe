@@ -13,7 +13,8 @@
                     <div class="panel-body">
                         <app-personbrief></app-personbrief>
                         <br>
-                        <form id="form" action="#" class="wizard-big" (ngSubmit)="onSubmit()" #pnsScreeingForm="ngForm">
+                        <form id="form" name="form" class="wizard-big" (ngSubmit)="pnsScreeingForm.form.valid && onSubmit()"
+                            #pnsScreeingForm="ngForm">
                             <fieldset>
                                 <h2>PNS SCREENING</h2>
                                 <div class="example-container">
@@ -25,7 +26,7 @@
                                                         <input matInput [matDatepicker]="myDatepicker" placeholder="Screening Date"
                                                             tabindex="1" [max]="maxDate" (click)="myDatepicker.open()"
                                                             id="screeningDate" name="screeningDate" [(ngModel)]="pnsForm.screeningDate"
-                                                            #screeningDate="ngModel">
+                                                            #screeningDate="ngModel" required>
                                                         <mat-datepicker-toggle matSuffix [for]="myDatepicker"></mat-datepicker-toggle>
                                                         <mat-datepicker #myDatepicker></mat-datepicker>
                                                     </mat-form-field>
@@ -38,7 +39,8 @@
                                                         <mat-select name="partnerPhysicallyHurt" id="partnerPhysicallyHurt"
                                                             tabindex="4" placeholder="Has partner ever physically hurt you?"
                                                             [(ngModel)]="pnsForm.partnerPhysicallyHurt"
-                                                            #partnerPhysicallyHurt="ngModel" [disabled]="isNotIPVDone">
+                                                            #partnerPhysicallyHurt="ngModel" [disabled]="isNotIPVDone"
+                                                            required>
                                                             <mat-option></mat-option>
                                                             <mat-option *ngFor="let option of yesNoNAOptions" [value]="option.itemId">{{option.itemName}}</mat-option>
                                                         </mat-select>
@@ -52,7 +54,7 @@
                                                     <mat-form-field>
                                                         <mat-select name="ipvOutcome" id="ipvOutcome" tabindex="7"
                                                             placeholder="IPV Outcome?" [(ngModel)]="pnsForm.ipvOutcome"
-                                                            #ipvOutcome="ngModel">
+                                                            #ipvOutcome="ngModel" required>
                                                             <mat-option></mat-option>
                                                             <mat-option *ngFor="let option of ipvOutcomeOptions"
                                                                 [value]="option.itemId">{{option.itemName}}</mat-option>
@@ -66,7 +68,7 @@
                                                     <mat-form-field>
                                                         <mat-select name="livingWithClient" id="livingWithClient"
                                                             tabindex="10" placeholder="Living With Client" [(ngModel)]="pnsForm.livingWithClient"
-                                                            #livingWithClient="ngModel">
+                                                            #livingWithClient="ngModel" required>
                                                             <mat-option></mat-option>
                                                             <mat-option *ngFor="let option of yesNoDeclinedOptions"
                                                                 [value]="option.itemId">{{option.itemName}}</mat-option>
@@ -81,7 +83,7 @@
                                                         <mat-select name="eligibleTesting" id="eligibleTesting"
                                                             tabindex="13" placeholder="Eligible for Testing"
                                                             [(ngModel)]="pnsForm.eligibleTesting" #eligibleTesting="ngModel"
-                                                            [disabled]="ishivStatusPositive">
+                                                            [disabled]="ishivStatusPositive" required>
                                                             <mat-option></mat-option>
                                                             <mat-option *ngFor="let option of yesNoNAOptions" [value]="option.itemId">{{option.itemName}}</mat-option>
                                                         </mat-select>
@@ -98,7 +100,8 @@
                                                     <mat-form-field>
                                                         <mat-select name="pnsAccepted" id="pnsAccepted" tabindex="2"
                                                             placeholder="Pns Accepted" [(ngModel)]="pnsForm.pnsAccepted"
-                                                            #pnsAccepted="ngModel" [disabled]="isPnsAcceptedDisabled">
+                                                            #pnsAccepted="ngModel" [disabled]="isPnsAcceptedDisabled"
+                                                            required>
                                                             <mat-option></mat-option>
                                                             <mat-option *ngFor="let option of yesNoOptions" [value]="option.itemId">{{option.itemName}}</mat-option>
                                                         </mat-select>
@@ -112,7 +115,8 @@
                                                         <mat-select name="partnerThreatenedHurt" id="partnerThreatenedHurt"
                                                             tabindex="5" placeholder="Has partner ever threatened to hurt you?"
                                                             [(ngModel)]="pnsForm.partnerThreatenedHurt"
-                                                            #partnerThreatenedHurt="ngModel" [disabled]="isNotIPVDone">
+                                                            #partnerThreatenedHurt="ngModel" [disabled]="isNotIPVDone"
+                                                            required>
                                                             <mat-option></mat-option>
                                                             <mat-option *ngFor="let option of yesNoNAOptions" [value]="option.itemId">{{option.itemName}}</mat-option>
                                                         </mat-select>
@@ -125,7 +129,7 @@
                                                     <mat-form-field>
                                                         <input matInput placeholder="Occupation" name="occupation"
                                                             tabindex="8" id="occupation" [(ngModel)]="pnsForm.occupation"
-                                                            #occupation="ngModel">
+                                                            #occupation="ngModel" required>
                                                     </mat-form-field>
                                                 </div>
                                             </div>
@@ -135,7 +139,8 @@
                                                     <mat-form-field>
                                                         <mat-select name="hivStatus" id="hivStatus" tabindex="11"
                                                             placeholder="HIV Status" [(ngModel)]="pnsForm.hivStatus"
-                                                            #hivStatus="ngModel" (selectionChange)="onHivStatus(pnsForm.hivStatus)">
+                                                            #hivStatus="ngModel" (selectionChange)="onHivStatus(pnsForm.hivStatus)"
+                                                            required>
                                                             <mat-option></mat-option>
                                                             <mat-option *ngFor="let option of hivStatusOptions" [value]="option.itemId">{{option.itemName}}</mat-option>
                                                         </mat-select>
@@ -149,7 +154,8 @@
                                                         <input matInput [matDatepicker]="bookingDatepicker" placeholder="Booking Date"
                                                             (click)="bookingDatepicker.open()" [min]="minDate" id="bookingDate"
                                                             tabindex="14" name="bookingDate" [(ngModel)]="pnsForm.bookingDate"
-                                                            #bookingDate="ngModel" [disabled]="ishivStatusPositive">
+                                                            #bookingDate="ngModel" [disabled]="ishivStatusPositive"
+                                                            required>
                                                         <mat-datepicker-toggle matSuffix [for]="bookingDatepicker"></mat-datepicker-toggle>
                                                         <mat-datepicker #bookingDatepicker></mat-datepicker>
                                                     </mat-form-field>
@@ -164,7 +170,8 @@
                                                     <mat-form-field>
                                                         <mat-select name="ipvScreeningDone" id="ipvScreeningDone"
                                                             tabindex="3" placeholder="IPV Screening Done" [(ngModel)]="pnsForm.ipvScreeningDone"
-                                                            #ipvScreeningDone="ngModel" (selectionChange)="onIpvScreeningChange(pnsForm.ipvScreeningDone)">
+                                                            #ipvScreeningDone="ngModel" (selectionChange)="onIpvScreeningChange(pnsForm.ipvScreeningDone)"
+                                                            required>
                                                             <mat-option></mat-option>
                                                             <mat-option *ngFor="let option of yesNoNAOptions" [value]="option.itemId">{{option.itemName}}</mat-option>
                                                         </mat-select>
@@ -179,7 +186,8 @@
                                                         <mat-select name="forcedYouTodoSexuallyUncomfortable" id="forcedYouTodoSexuallyUncomfortable"
                                                             tabindex="6" placeholder="Has partner forced you something sexual that made you feel uncomfortable?"
                                                             [(ngModel)]="pnsForm.forcedSexualUncomfortable"
-                                                            #forcedSexualUncomfortable="ngModel" [disabled]="isNotIPVDone">
+                                                            #forcedSexualUncomfortable="ngModel" [disabled]="isNotIPVDone"
+                                                            required>
                                                             <mat-option></mat-option>
                                                             <mat-option *ngFor="let option of yesNoNAOptions" [value]="option.itemId">{{option.itemName}}</mat-option>
                                                         </mat-select>
@@ -193,7 +201,7 @@
                                                     <mat-form-field>
                                                         <mat-select name="pnsRelationship" id="pnsRelationship"
                                                             tabindex="9" placeholder="PNS Relationship" [(ngModel)]="pnsForm.pnsRelationship"
-                                                            #pnsRelationship="ngModel">
+                                                            #pnsRelationship="ngModel" required>
                                                             <mat-option></mat-option>
                                                             <mat-option *ngFor="let option of pnsRelationshipOptions"
                                                                 [value]="option.itemId">{{option.itemName}}</mat-option>
@@ -207,7 +215,8 @@
                                                     <mat-form-field>
                                                         <mat-select name="pnsApproach" id="pnsApproach" tabindex="12"
                                                             placeholder="PNS Approach" [(ngModel)]="pnsForm.pnsApproach"
-                                                            #pnsApproach="ngModel" [disabled]="ishivStatusPositive">
+                                                            #pnsApproach="ngModel" [disabled]="ishivStatusPositive"
+                                                            required>
                                                             <mat-option></mat-option>
                                                             <mat-option *ngFor="let option of pnsApproachOptions"
                                                                 [value]="option.itemId">{{option.itemName}}</mat-option>

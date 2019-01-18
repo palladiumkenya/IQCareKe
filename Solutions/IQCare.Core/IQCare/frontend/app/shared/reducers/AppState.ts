@@ -11,4 +11,5 @@ interface AppState {
     PersonId: number;
     isFamilyScreeningDone: boolean;
     isFamilyTracingDone: boolean;
+    PnsScreenedPositive: boolean;
 }

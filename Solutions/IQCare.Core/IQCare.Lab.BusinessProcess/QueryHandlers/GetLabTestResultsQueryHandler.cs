@@ -10,6 +10,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using IQCare.Library;
+using Microsoft.EntityFrameworkCore;
 using Serilog;
 
 namespace IQCare.Lab.BusinessProcess.QueryHandlers
@@ -44,6 +45,37 @@ namespace IQCare.Lab.BusinessProcess.QueryHandlers
                     return Task.FromResult(Result<List<LabTestResultViewModel>>.Invalid(ex.Message));
                 }
             }          
+        }
+    }
+
+    public class GetLabOrderTestResultsQueryHandler : IRequestHandler<GetLabOrderTestResults, Result<List<LabTestResultViewModel>>>
+    {
+        private readonly ILabUnitOfWork _labUnitOfWork;
+        private readonly IMapper _mapper;
+
+        public GetLabOrderTestResultsQueryHandler(ILabUnitOfWork labUnitOfWork, IMapper mapper)
+        {
+            _labUnitOfWork = labUnitOfWork;
+            _mapper = mapper;
+        }
+        public Task<Result<List<LabTestResultViewModel>>> Handle(GetLabOrderTestResults request, CancellationToken cancellationToken)
+        {
+            try
+            {
+                var results = _labUnitOfWork.Repository<LabOrderTestResult>().Get(x => x.LabOrderTestId == request.LabOrderTestId)
+                       .Include(x => x.Parameter).ToList();
+
+                var resultModel = _mapper.Map<List<LabTestResultViewModel>>(results);
+
+                return Task.FromResult(Result<List<LabTestResultViewModel>>.Valid(resultModel.Where(x=>!string.IsNullOrEmpty(x.Result)).ToList()));
+
+            }
+            catch (Exception ex)
+            {
+                var  message = $"An error occured while fetching test results for lab order test Id {request.LabOrderTestId}";
+                Log.Error(ex,message);
+                return Task.FromResult(Result<List<LabTestResultViewModel>>.Invalid(message));
+            }
         }
     }
 }

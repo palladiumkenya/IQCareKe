@@ -33,6 +33,7 @@ namespace IQCare.Lab.BusinessProcess.CommandHandlers
                         .Get(x => x.LabTestId == request.LabTestId && x.DeleteFlag == false)
                         .Include(x=>x.LabTestParameterResultOptions)
                         .Include(x=>x.LabTestParameterConfig.Unit)
+                        .Distinct()
                         .ToListAsync();
 
 

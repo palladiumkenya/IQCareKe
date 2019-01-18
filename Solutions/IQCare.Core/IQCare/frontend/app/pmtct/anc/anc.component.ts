@@ -28,6 +28,7 @@ import { HivStatusCommand } from '../_models/HivStatusCommand';
 import { BaselineAncProfileCommand } from '../_models/baseline-anc-profile-command';
 import { DrugAdministerCommand } from '../_models/drug-administer-command';
 import * as moment from 'moment';
+import {VisitDetailsEditCommand} from '../_models/VisitDetailsEditCommand';
 
 @Component({
     selector: 'app-anc',
@@ -49,6 +50,9 @@ export class AncComponent implements OnInit, OnDestroy {
     chronicIllnessData: any[] = [];
     lookupItems$: Subscription;
     drugOptions: LookupItemView[] = [];
+
+    /* Edit parameters */
+    public visitDetailsId: number;
 
 
     public personId: number;
@@ -135,9 +139,11 @@ export class AncComponent implements OnInit, OnDestroy {
                 if (!this.patientMasterVisitId) {
                     this.patientMasterVisitId = JSON.parse(localStorage.getItem('patientMasterVisitId'));
                     this.patientEncounterId = JSON.parse(localStorage.getItem('patientEncounterId'));
+                    this.isLinear=true;
                 } else {
                     this.visitId = this.patientMasterVisitId;
                     this.isEdit = true;
+                    this.isLinear =false;
                 }
             }
         );
@@ -750,7 +756,52 @@ export class AncComponent implements OnInit, OnDestroy {
 
     public onSubmitEdit(): void {
 
+        const ancVisitDetailsCommandEdit: any = {
+            Id: this.pregnancyId,
+            PatientId: parseInt(this.patientId.toString(), 10),
+            PatientMasterVisitId: this.visitId,
+            ServiceAreaId: parseInt(this.serviceAreaId.toString(), 10),
+            VisitDate: moment(this.visitDetailsFormGroup.value[0]['visitDate']).toDate(),
+            VisitNumber: parseInt(this.visitDetailsFormGroup.value[0]['visitNumber'], 10),
+            VisitType: this.visitDetailsFormGroup.value[0]['visitType'],
+            Lmp: new Date(this.visitDetailsFormGroup.value[1]['dateLMP']),
+            Edd: this.visitDetailsFormGroup.value[1]['dateEDD'],
+            Gestation: this.visitDetailsFormGroup.value[1]['gestation'],
+            AgeAtMenarche: this.visitDetailsFormGroup.value[1]['ageAtMenarche'],
+            ParityOne: this.visitDetailsFormGroup.value[1]['parityOne'],
+            ParityTwo: this.visitDetailsFormGroup.value[1]['parityTwo'],
+            Gravidae: this.visitDetailsFormGroup.value[1]['gravidae'],
+            UserId: this.userId,
+            DaysPostPartum: 0
+        };
+
+        const visitDetailsEditCommand: any = {
+            Id: this.visitDetailsFormGroup.value[0]['id'],
+            VisitNumber: parseInt(this.visitDetailsFormGroup.value[0]['visitNumber'], 10),
+            VisitType: this.visitDetailsFormGroup.value[0]['visitType'],
+            DaysPostPartum: 0
+        };
+
+        const VisitDetails= { VisitDetails: visitDetailsEditCommand };
+
+        const baselineAncCommandEdit = {
+            PatientId: this.patientId,
+            PatientMasterVisitId: this.patientMasterVisitId,
+            PregnancyId: this.pregnancyId,
+            HivStatusBeforeAnc: this.HivStatusMatFormGroup.value[0]['hivStatusBeforeFirstVisit'],
+            TreatedForSyphilis: this.PatientEducationMatFormGroup.value['treatedSyphilis'],
+            BreastExamDone: this.PatientEducationMatFormGroup.value['breastExamDone'],
+            CreatedBy: this.userId
+        } as BaselineAncProfileCommand;
+
+        const AncvisitDetailsEdit = this.ancService.EditANCVisitDetails(ancVisitDetailsCommandEdit);
+        const visitDetailsEdit = this.ancService.EditVisitDetails(VisitDetails);
+        const baselineEdit = this.ancService.SaveBaselineProfile(baselineAncCommandEdit);
+
         forkJoin([
+             AncvisitDetailsEdit,
+            visitDetailsEdit,
+            baselineEdit
 
         ]).subscribe(
             (result) => {

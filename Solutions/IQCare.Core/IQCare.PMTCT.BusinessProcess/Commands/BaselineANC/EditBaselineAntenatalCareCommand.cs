@@ -6,6 +6,11 @@ namespace IQCare.PMTCT.BusinessProcess.Commands.BaselineANC
 {
     public class EditBaselineAntenatalCareCommand: IRequest<Result<BaselineAntenatalCare>>
     {
-        public BaselineAntenatalCare BaselineAntenatalCare { get; set; }
+        public int PatientId { get; set; }
+        public int PatientMasterVisitId { get; set; }
+        public int PregnancyId { get; set; }
+        public int HivStatusBeforeAnc { get; set; }
+        public int TreatedForSyphilis { get; set; }
+        public int BreastExamDone { get; set; }
     }
 }
