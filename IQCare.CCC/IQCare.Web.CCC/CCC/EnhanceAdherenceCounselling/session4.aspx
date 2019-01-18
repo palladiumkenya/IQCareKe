@@ -458,6 +458,7 @@
         var patientId = '<%=PatientId%>';
         var SRNQuestion1='<%=Session4Refferal1ItemId%>';
         var SRNQuestion3 = '<%=Session4Refferal3ItemId%>';
+        var SRNQuestion2 = '<%=Session4Refferal2ItemId%>';
 
         var ItemNo = '<%=ItemNo%>';
         var ItemYes = '<%=ItemYes%>';
@@ -472,14 +473,21 @@
                    
 
                      $("#session4tb" + SRNQuestion3).prop('disabled', false);
+                    // $("#session4tb" + SRNQuestion2).prop('disabled', false);
+                      $("input:radio[name='session4rb" + SRNQuestion2 + "']").prop('disabled', false);
                  }
                  else {
 
                      $("#session4tb" + SRNQuestion3).prop('disabled', true);
+                    // $("#session4tb" + SRNQuestion2).prop('disabled', true);
+                     $("input:radio[name='session4rb" + SRNQuestion2 + "']").prop('disabled', true);
+                      $("input:radio[name='session4rb" + SRNQuestion2 + "']").prop('checked', false);
                  }
              }
              else {
                  $("#session4tb" + SRNQuestion3).prop('disabled', false);
+                 //$("#session4tb" + SRNQuestion2).prop('disabled', false);
+                  $("input:radio[name='session4rb" + SRNQuestion2 + "']").prop('disabled', false);
              }
  
             });

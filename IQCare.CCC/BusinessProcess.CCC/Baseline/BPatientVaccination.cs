@@ -52,7 +52,14 @@ namespace BusinessProcess.CCC.Baseline
 
         public int updatePatientVaccination(PatientVaccination patientVaccination)
         {
-            throw new NotImplementedException();
+            using (UnitOfWork unitOfWork = new UnitOfWork(new GreencardContext()))
+            {
+                unitOfWork.PatientVaccinationRepository.Update(patientVaccination);
+                Result = unitOfWork.Complete();
+                unitOfWork.Dispose();
+                return Result;
+              
+            }
         }
 
         public void deletePatientVaccination(PatientVaccination patientVaccination)
