@@ -20,17 +20,16 @@ import { LabOrderTestResultsComponent } from '../lab-order-test-results/lab-orde
 })
 export class CompleteLabOrderComponent implements OnInit {
   
-  labTestParameters : any[] = [];
-  formControlCollection : FormControlBase<any>[] = [];
-  ResultDataType: ResultDataType;
-
-  patientId : number;
+   patientId : number;
+   personId : string;
   
   constructor(private route: ActivatedRoute)
    {
         this.route.params.subscribe(params=>
           {
             this.patientId = params['patientId'];
+            this.personId = params['personId'];
+            localStorage.setItem('partnerId', this.personId);
           });      
    }
 
