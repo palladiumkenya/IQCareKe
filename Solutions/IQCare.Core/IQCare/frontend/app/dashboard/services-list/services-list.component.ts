@@ -1,3 +1,5 @@
+import { AppEnum } from './../../shared/reducers/app.enum';
+import { AppStateService } from './../../shared/_services/appstate.service';
 import { NotificationService } from './../../shared/_services/notification.service';
 import { Component, OnInit, Input, NgZone } from '@angular/core';
 import { PersonHomeService } from '../services/person-home.service';
@@ -35,7 +37,8 @@ export class ServicesListComponent implements OnInit {
         private snotifyService: SnotifyService,
         private notificationService: NotificationService,
         private store: Store<AppState>,
-        private searchService: SearchService) {
+        private searchService: SearchService,
+        private appStateService: AppStateService) {
     }
 
     ngOnInit() {
@@ -81,6 +84,7 @@ export class ServicesListComponent implements OnInit {
             localStorage.setItem('selectedService', service.toLowerCase());
 
             this.store.dispatch(new Consent.SelectedService(service.toLowerCase()));
+            this.appStateService.addAppState(AppEnum.PATIENTID, this.personId, this.patientId).subscribe();
 
             switch (selectedService[0]['code']) {
                 case 'HTS':

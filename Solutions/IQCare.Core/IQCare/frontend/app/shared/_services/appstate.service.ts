@@ -21,8 +21,8 @@ export class AppStateService {
         private store: Store<AppState>,
         private errorHandler: ErrorHandlerService) { }
 
-    public addAppState(appStateId: number, personId: number, patientId: number, patientMasterVisitId: number,
-        encounterId: number, appStateObject: string = ''): Observable<any> {
+    public addAppState(appStateId: number, personId: number, patientId: number, patientMasterVisitId: number = null,
+        encounterId: number = null, appStateObject: string = ''): Observable<any> {
         const Indata = {
             PersonId: personId,
             PatientId: patientId,
@@ -42,9 +42,9 @@ export class AppStateService {
 
     public initializeAppState(): Promise<any> {
         const personId = JSON.parse(localStorage.getItem('personId'));
-        const patientId = localStorage.getItem('patientId');
-        const patientMasterVisitId = localStorage.getItem('patientMasterVisitId');
-        const htsEncounterId = localStorage.getItem('htsEncounterId');
+        const patientId = JSON.parse(localStorage.getItem('patientId'));
+        const patientMasterVisitId = JSON.parse(localStorage.getItem('patientMasterVisitId'));
+        const htsEncounterId = JSON.parse(localStorage.getItem('htsEncounterId'));
 
 
         if (personId) {
@@ -119,6 +119,9 @@ export class AppStateService {
                                 for (let j = 0; j < response[i].appStateStoreObjects.length; j++) {
                                     this.store.dispatch(new Consent.FamilyScreenedPositive(response[i].appStateStoreObjects[j].appStateObject));
                                 }
+                                break;
+                            case 15:
+                                this.store.dispatch(new Consent.PatientId(patientId));
                                 break;
                         }
                     }
