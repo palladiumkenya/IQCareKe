@@ -141,7 +141,7 @@ export class EncounterComponent implements OnInit {
                     this.hasDisabilityChanged();
                     this.onConsentChanged();
 
-                    console.log(this.encounter);
+                    // console.log(this.encounter);
                 }
             });
         }

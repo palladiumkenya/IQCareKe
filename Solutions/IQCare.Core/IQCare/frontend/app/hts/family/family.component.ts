@@ -25,7 +25,6 @@ export class FamilyComponent implements OnInit {
         private familyService: FamilyService,
         private store: Store<AppState>) {
         store.pipe(select('app')).subscribe(res => {
-            console.log(res);
             if (typeof (res['isFamilyScreeningDone']) !== 'undefined' && res['isFamilyScreeningDone'] !== null) {
                 this.isFamilyScreeningDone = res['isFamilyScreeningDone'];
             }
