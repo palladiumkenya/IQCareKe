@@ -13,4 +13,5 @@ interface AppState {
     isFamilyTracingDone: boolean;
     PnsScreenedPositive: boolean;
     FamilyScreenedPositive: boolean;
+    PatientId: number;
 }

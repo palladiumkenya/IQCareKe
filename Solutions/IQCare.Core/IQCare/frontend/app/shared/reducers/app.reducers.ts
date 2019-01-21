@@ -13,6 +13,8 @@ export function consentReducer(state: any = {}, action: ClientActions) {
             return { ...state, isPositive: action.payload };
         case ClientActionTypes.PERSONID:
             return { ...state, PersonId: action.payload };
+        case ClientActionTypes.PATIENTID:
+            return { ...state, PatientId: action.payload };
         case ClientActionTypes.CONSENT_PARTNER_LISTING:
             return { ...state, consentPartnerListing: action.payload };
         case ClientActionTypes.IS_REFERRED:

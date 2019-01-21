@@ -50,14 +50,13 @@ export class PersonHomeComponent implements OnInit {
             this.services = servicesArray;
         });
 
-        console.log('personId' + this.personId);
-        this.getPatientDetailsById(this.personId);
-
         localStorage.removeItem('patientEncounterId');
         localStorage.removeItem('patientMasterVisitId');
         localStorage.removeItem('selectedService');
-
         this.store.dispatch(new Consent.ClearState());
+
+        // console.log('personId' + this.personId);
+        this.getPatientDetailsById(this.personId);
     }
 
     public getPatientDetailsById(personId: number) {
@@ -68,6 +67,11 @@ export class PersonHomeComponent implements OnInit {
 
                 localStorage.setItem('personId', this.person.personId.toString());
                 this.store.dispatch(new Consent.PersonId(this.person.personId));
+
+                if (this.person.patientId && this.person.patientId > 0) {
+                    this.store.dispatch(new Consent.PatientId(this.person.patientId));
+                    localStorage.setItem('patientId', this.person.patientId.toString());
+                }
             },
             (err) => {
                 this.snotifyService.error('Error editing encounter ' + err, 'person detail service',

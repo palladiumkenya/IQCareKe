@@ -11,17 +11,6 @@
     <!-- /Page Sidebar Header -->
     <!-- Sidebar Menu -->
     <ul class="nav sidebar-menu">
-
-        <!-- Person Home-->
-        <ng-container *ngIf="selectedService">
-            <li>
-                <a routerLink="/dashboard/personhome/{{ personId }}">
-                    <i class="menu-icon glyphicon glyphicon-home"></i>
-                    <span class="menu-text">Person Home</span>
-                </a>
-            </li>
-        </ng-container>
-
         <!-- Search Person -->
         <li>
             <a routerLink="/record">
@@ -36,6 +25,32 @@
                 <span class="menu-text"> New Person </span>
             </a>
         </li>
+
+        <!-- Person Home-->
+        <ng-container *ngIf="selectedService">
+            <li>
+                <a routerLink="/dashboard/personhome/{{ personId }}">
+                    <i class="menu-icon glyphicon glyphicon-home"></i>
+                    <span class="menu-text">Person Home</span>
+                </a>
+            </li>
+        </ng-container>
+
+        <ng-container *ngIf="patientId > 0">
+            <li>
+                <a routerLink="/clinical/laborder/{{ patientId }}/{{ personId }}">
+                    <i class="menu-icon fa fa-tint"></i>
+                    <span class="menu-text"> Lab </span>
+                </a>
+            </li>
+
+            <li>
+                <a routerLink="/clinical/triage/{{ patientId }}/{{ personId }}">
+                    <i class="menu-icon fa fa-heartbeat"></i>
+                    <span class="menu-text"> Triage </span>
+                </a>
+            </li>
+        </ng-container>
 
         <ng-container *ngIf="selectedService == 'hts'">
             <li>
