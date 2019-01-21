@@ -23,5 +23,6 @@ export class Pnsform {
 export class PartnerView {
     fullName: string;
     DateOfBirth: string;
-    Gender: string
+    Gender: string ;
+    MaritalStatus : string;
 }
