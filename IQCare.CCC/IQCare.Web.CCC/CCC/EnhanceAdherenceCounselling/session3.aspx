@@ -458,6 +458,7 @@
         
       var SRNQuestion1='<%=Session3Refferal1ItemId%>';
         var SRNQuestion3 = '<%=Session3Refferal3ItemId%>';
+        var SRNQuestion2 = '<%= Session3Refferal2ItemId%>';
 
         var ItemNo = '<%=ItemNo%>';
         var ItemYes = '<%=ItemYes%>';
@@ -472,14 +473,22 @@
                      
 
                      $("#session3tb" + SRNQuestion3).prop('disabled', false);
+                    // $("#session3tb" + SRNQuestion2).prop('disabled', false);
+                    $("input:radio[name='session3rb" + SRNQuestion2 + "']").prop('disabled', false);
                  }
                  else {
 
                      $("#session3tb" + SRNQuestion3).prop('disabled', true);
+                     //$("#session3tb" + SRNQuestion2).prop('disabled', true);
+                     $("input:radio[name='session3rb" + SRNQuestion2 + "']").prop('disabled', true);
+                      $("input:radio[name='session3rb" + SRNQuestion2 + "']").prop('checked', false);
                  }
              }
              else {
                  $("#session3tb" + SRNQuestion3).prop('disabled', false);
+                // $("#session3tb" + SRNQuestion2).prop('disabled', false); 
+                  $("input:radio[name='session3rb" + SRNQuestion2 + "']").prop('disabled', false);
+
              }
  
             });

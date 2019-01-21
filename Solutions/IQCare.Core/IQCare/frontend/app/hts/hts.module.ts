@@ -47,6 +47,7 @@ import { PnsPartnersComponent } from './pns/pns-partners/pns-partners.component'
 import { FamilySearchComponent } from './family/family-search/family-search.component';
 import { YesNoResolver } from '../pmtct/_services/yesno.resolver';
 import { LookupItemService } from '../shared/_services/lookup-item.service';
+import { FamilyTracingListComponent } from './family-tracing/family-tracing-list/family-tracing-list.component';
 
 
 @NgModule({
@@ -77,7 +78,8 @@ import { LookupItemService } from '../shared/_services/lookup-item.service';
         PnsTracingListComponent,
         PsmartComponent,
         TracingComponent,
-        FamilySearchComponent
+        FamilySearchComponent,
+        FamilyTracingListComponent
     ],
     exports: [
     ],

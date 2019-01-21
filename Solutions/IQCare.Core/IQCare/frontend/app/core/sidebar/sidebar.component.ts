@@ -14,6 +14,7 @@ export class SidebarComponent implements OnInit {
     hasConsentedPartnerListing: boolean;
     isEnrolled: boolean;
     personId: number;
+    patientId: number;
 
     constructor(private store: Store<AppState>) {
         store.pipe(select('app')).subscribe(res => {
@@ -69,6 +70,14 @@ export class SidebarComponent implements OnInit {
                 this.personId = res['PersonId'];
             } else {
                 this.personId = 0;
+            }
+        });
+
+        store.pipe(select('app')).subscribe(res => {
+            if (res['PatientId']) {
+                this.patientId = res['PatientId'];
+            } else {
+                this.patientId = 0;
             }
         });
     }

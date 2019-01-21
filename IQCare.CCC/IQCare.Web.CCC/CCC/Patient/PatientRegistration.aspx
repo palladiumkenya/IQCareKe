@@ -1410,11 +1410,16 @@
 							console.log(patientDetails.population);
 
 							if (patientDetails.population == "General Population") {
-								var d = document.getElementById("GenPopulation");
-								d.className += " checked";
+                             $('input:radio[name*="PopulationType"]').filter('[value="' + patientDetails.populationTypeId +'"]').closest("td").find("label").attr('class','checked');
+
+                            // var d= document.getElementById("GenPopulation");           
+  
+							//	d.className += " checked";
 							} else if(patientDetails.population == "Key Population") {
-								var d = document.getElementById("KeyPopulation");
-								d.className += " checked";
+                            $('input:radio[name*="PopulationType"]').filter('[value="' + patientDetails.populationTypeId +'"]').closest("td").find("label").attr('class','checked');
+								//var d = document.getElementById("KeyPopulation");
+								//d.className += " checked";
+                                
 							}
 							$('input:radio[name="Population"]').filter('[value="' + patientDetails.population +'"]').attr('checked', true);
 							

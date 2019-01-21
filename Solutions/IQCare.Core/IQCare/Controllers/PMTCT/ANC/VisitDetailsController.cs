@@ -6,6 +6,7 @@ using IQCare.HTS.BusinessProcess.Commands;
 using IQCare.PMTCT.BusinessProcess.Commands;
 using IQCare.PMTCT.BusinessProcess.Commands.Pregnancy;
 using IQCare.PMTCT.BusinessProcess.Commands.Profile;
+using IQCare.PMTCT.BusinessProcess.Commands.VisitDetails;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
@@ -46,6 +47,16 @@ namespace IQCare.Controllers.PMTCT.ANC
                 return Ok(response.Value);
             }
             return BadRequest(response);
+        }
+
+        [HttpPut("EditAncVisit")]
+        public async Task<IActionResult> Put([FromBody] EditVisitDetailsCommand visitDetailsCommandEdit)
+
+        {
+            var results = await _mediator.Send(visitDetailsCommandEdit, Request.HttpContext.RequestAborted);
+            if (results.IsValid)
+                return Ok(results.Value);
+            return BadRequest(results);
         }
 
         [HttpGet("GetAncProfile/{patientId}/{pregnancyId}")]

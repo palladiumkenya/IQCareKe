@@ -126,8 +126,10 @@
     <None Remove="Scripts\2.0.0\23_Nairobi_Missing_Subcounties_Wards.sql" />
     <None Remove="Scripts\2.0.0\24_DO_AlterTable_PatientIcf_AddColumn_ContactWithTb.sql" />
     <None Remove="Scripts\2.0.0\25_SPS_mstPatient_Update.sql" />
+    <None Remove="Scripts\2.0.0\27_SO_AddNewARVDrugs.sql" />
     <None Remove="Scripts\2.0.0\26_Person_Update.sql" />
     <None Remove="Scripts\2.0.0\27_Create_PatientPncExercises.sql" />
+    <None Remove="Scripts\2.0.0\28_HtsEncounter_Add_HivCounsellingDone.sql" />
   </ItemGroup>
 
   <ItemGroup>
@@ -249,8 +251,10 @@
     <EmbeddedResource Include="Scripts\2.0.0\21_Add_Lookups_Dental.sql" />
     <EmbeddedResource Include="Scripts\2.0.0\24_DO_AlterTable_PatientIcf_AddColumn_ContactWithTb.sql" />
     <EmbeddedResource Include="Scripts\2.0.0\25_SPS_mstPatient_Update.sql" />
+    <EmbeddedResource Include="Scripts\2.0.0\27_SO_AddNewARVDrugs.sql" />
     <EmbeddedResource Include="Scripts\2.0.0\26_Person_Update.sql" />
     <EmbeddedResource Include="Scripts\2.0.0\27_Create_PatientPncExercises.sql" />
+    <EmbeddedResource Include="Scripts\2.0.0\28_HtsEncounter_Add_HivCounsellingDone.sql" />
   </ItemGroup>
 
   <ItemGroup>

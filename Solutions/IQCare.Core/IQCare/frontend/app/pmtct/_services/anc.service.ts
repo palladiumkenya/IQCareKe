@@ -51,6 +51,14 @@ export class AncService {
         );
     }
 
+    public EditVisitDetails(VisitDetailsEditCommand: any): Observable<any> {
+        return this.http.put<any>(this.API_URL + '/api/VisitDetails/EditANCVisit', JSON.stringify(VisitDetailsEditCommand),
+            httpOptions).pipe(
+            tap(saveANCVisitDetails => this.errorHandler.log(`successfully Edited ANC visit details`)),
+            catchError(this.errorHandler.handleError<any>('Error Editing ANC visit details'))
+        );
+    }
+
     public savePregnancy(pregnancyCommand: PregnancyAncCommand): Observable<any> {
         return this.http.post<any>(this.API_URL + '/api/Pregnancy/post', JSON.stringify(pregnancyCommand),
             httpOptions).pipe(
@@ -67,11 +75,27 @@ export class AncService {
         );
     }
 
+    public EditANCVisitDetails(visitDetailsCommand: any): Observable<any> {
+        return this.http.put<any>(this.API_URL + '/api/AncVisitDetails/put', JSON.stringify(visitDetailsCommand),
+            httpOptions).pipe(
+            tap(saveVisitDetails => this.errorHandler.log(`successfully EDited ANC visit details`)),
+            catchError(this.errorHandler.handleError<any>('Error Editing ANC visit details'))
+        );
+    }
+
     public SaveBaselineProfile(baselineAncCommand: BaselineAncProfileCommand): Observable<any> {
         return this.http.post<any>(this.API_URL + '/api/BaselineAnc/post', JSON.stringify(baselineAncCommand),
             httpOptions).pipe(
             tap(SaveAncProfile => this.errorHandler.log(`successfully saved ANC Baseline`)),
             catchError(this.errorHandler.handleError<any>('Error saving ANC Baseline'))
+        );
+    }
+
+    public EditBaselineProfile(baselineAncCommand: any): Observable<any> {
+        return this.http.put<any>(this.API_URL + '/api/BaselineAnc/post', JSON.stringify(baselineAncCommand),
+            httpOptions).pipe(
+            tap(BAselineProfile => this.errorHandler.log(`successfully Edited ANC Baseline`)),
+            catchError(this.errorHandler.handleError<any>('Error Editing ANC Baseline'))
         );
     }
 
