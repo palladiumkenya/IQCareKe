@@ -73,6 +73,7 @@ dataSource =  new MatTableDataSource(this.labTestData);
     this.activatedRoute.params.subscribe(params => {
       this.patientId = params['patientId'];
       this.personId = params['personId'];
+      localStorage.setItem('partnerId', this.personId);
       this.personService.getPatientById(this.patientId).subscribe(patient => {
          this.patientInfo = patient;
      });  
