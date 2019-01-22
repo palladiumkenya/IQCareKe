@@ -292,10 +292,10 @@ namespace IQCare.Web.PMSCM
             IDrug thePharmacyManager = (IDrug)ObjectFactory.CreateInstance("BusinessProcess.SCM.BDrug, BusinessProcess.SCM");
             if (Session["StoreID"] != null)
             {
-                StoreId = Session["StoreID"].ToString();
-                if(String.IsNullOrEmpty(StoreId))
+               
+                if(String.IsNullOrEmpty(Session["StoreID"].ToString()))
                 {
-                    StoreId = "0";
+                    Session["StoreID"] = StoreId;
                 }
             }
             string PatientId = Session["PatientID"].ToString();
@@ -483,6 +483,7 @@ namespace IQCare.Web.PMSCM
             BindManager.BindCombo(ddlDispensingStore, theDT, "Name", "id");
             ddlDispensingStore.SelectedIndex = 1;
             HttpContext.Current.Session["StoreID"] = ddlDispensingStore.SelectedValue;
+            StoreId = ddlDispensingStore.SelectedValue;
 
             theDT = dsPharmacyVitals.Tables[10];
             //BindManager.BindCombo(ddlPrescribedBy, theDT, "Name", "EmployeeId");
