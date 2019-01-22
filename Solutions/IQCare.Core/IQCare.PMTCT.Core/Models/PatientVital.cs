@@ -25,15 +25,34 @@ namespace IQCare.PMTCT.Core.Models
         public decimal? Spo2 { get; set; }
         public decimal? Bmi { get; set; }
         public decimal? HeadCircumference { get; set; }
-        public decimal ? Muac  { get; set; }
+        public decimal? Muac { get; set; }
         public string BmiZ { get; set; }
         public string WeightForAge { get; set; }
-        public string WeightForHeight  { get; set; }
+        public string WeightForHeight { get; set; }
         [NotMapped]
         public string HeightForAge { get; set; }
         public bool Active { get; set; }
         public DateTime? VisitDate { get; set; }
         public DateTime DateCreated { get; set; }
         public int CreatedBy { get; set; }
+
+        public void UpdateVitalsInfo(dynamic vitalsInfo)
+        {
+            Weight = vitalsInfo.Weight;
+            Height = vitalsInfo.Height;
+            Temperature = vitalsInfo.Temperature;
+            Bmi = vitalsInfo.Bmi;
+            BmiZ = vitalsInfo.BmiZ.ToString();
+            RespiratoryRate = vitalsInfo.RespiratoryRate;
+            HeartRate = vitalsInfo.HeartRate;
+            BpDiastolic = vitalsInfo.BpDiastolic;
+            BpSystolic = vitalsInfo.BpSystolic;
+            Spo2 = vitalsInfo.Spo2;
+            HeadCircumference = vitalsInfo.HeadCircumference;
+            Muac = vitalsInfo.Muac;
+            WeightForAge = vitalsInfo.WeightForAge;
+            HeightForAge = vitalsInfo.HeightForAge;
+            VisitDate = vitalsInfo.VisitDate;
+        }
     }
 }

@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild, Input } from '@angular/core';
-import { MatTableDataSource, MatPaginator } from '@angular/material';
+import { MatTableDataSource, MatPaginator, MatDialog, MatDialogConfig } from '@angular/material';
 import { TriageService } from '../../_services/triage.service';
+import { AddTriageComponent } from '../add-triage/add-triage.component';
 
 @Component({
   selector: 'app-triage-info-grid',
@@ -15,7 +16,8 @@ export class TriageInfoGridComponent implements OnInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   
   @Input('PatientId') PatientId : number;
-  constructor(private triageService: TriageService) {
+  constructor(private triageService: TriageService,
+     private dialog : MatDialog) {
    }
 
   ngOnInit() {
@@ -34,6 +36,7 @@ export class TriageInfoGridComponent implements OnInit {
 
         res.forEach(info => {
             this.vitalsDataTable.push({
+                id: info.id,
                 visitDate: info.visitDate,
                 height: info.height,
                 weight: info.weight,
@@ -49,7 +52,9 @@ export class TriageInfoGridComponent implements OnInit {
                 respiratoryRate: info.respiratoryRate,
                 heartRate: info.heartRate,
                 spo2: info.spo2,
-                comment: info.comment
+                comment: info.comment,
+                patientId : info.patientId,
+                patientMasterVisitId : info.patientMasterVisitId
             });
 
             this.dataSource = new MatTableDataSource(this.vitalsDataTable);
@@ -64,6 +69,30 @@ export class TriageInfoGridComponent implements OnInit {
 
     }
     );
+}
+
+
+public editTriageInfo(triageInfo: any) {
+    console.log('Triage Info ' + triageInfo)
+
+    const triageDialogConfig = new MatDialogConfig();
+
+    triageDialogConfig.disableClose = false;
+    triageDialogConfig.autoFocus = true;
+    
+    triageDialogConfig.data =  {
+                           isEdit : true,
+                           triageInfo : triageInfo
+                         };
+  
+    const dialogRef = this.dialog.open(AddTriageComponent, triageDialogConfig);
+    dialogRef.afterClosed().subscribe(
+      data => 
+      {
+        if (!data)
+          return;
+          console.log(data);
+      });  
 }
 
 }

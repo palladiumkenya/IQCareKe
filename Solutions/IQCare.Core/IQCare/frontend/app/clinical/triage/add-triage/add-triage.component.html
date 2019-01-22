@@ -118,5 +118,6 @@
   </mat-dialog-content>
   <mat-dialog-actions align="end">
     <button class="mat-raised-button" (click)="close()">Close</button>
-    <button class="mat-raised-button mat-primary" [disabled] ="!vitalsFormGroup.valid" (click)="SubmitPatientVitalInfo()">Save</button>
+    <button class="mat-raised-button mat-primary" *ngIf="!isEdit" [disabled] ="!vitalsFormGroup.valid" (click)="SubmitPatientVitalInfo()">Save</button>
+    <button class="mat-raised-button mat-primary" *ngIf="isEdit" [disabled] ="!vitalsFormGroup.valid" (click)="UpdatePatientVitalInfo()">Update</button>
 </mat-dialog-actions>
