@@ -927,10 +927,16 @@
 								</div>
 							</div>
 							<div class="col-md-3">
-								<div class="col-md-12">
+								
+								<div class="col-md-12 AdultBMI">
 									<asp:Label runat="server" class="control-label pull-left" ID="lblBMI">BMI </asp:Label></div>
-								<div class="col-md-12">
+								<div class="col-md-12 AdultBMI">
 									<asp:TextBox runat="server" CssClass="form-control input-sm" ID="BaselineBMI" ClientIDMode="Static" ReadOnly="True" Type="Number"></asp:TextBox>
+								</div>
+                                <div class="col-md-12 PaedsBMI">
+									<asp:Label runat="server" class="control-label pull-left" ID="Label3">BMIz </asp:Label></div>
+								<div class="col-md-12 PaedsBMI">
+									<asp:TextBox runat="server" CssClass="form-control input-sm" ID="txtBMIz" ClientIDMode="Static" Enabled="False"  ></asp:TextBox>
 								</div>
 							</div>
 						</div>
@@ -1224,6 +1230,18 @@
 
 			var today = new Date();
 
+           if(age > 15)
+        {
+            $('.AdultBMI').show();
+            $('.PaedsBMI').hide();
+            //document.getElementById('divBMI').style.display = 'block';
+            //document.getElementById('peadsZScores').style.display = 'none';
+        }
+        else{
+            $('.AdultBMI').hide();
+            $('.PaedsBMI').show();
+        }
+
 			$('#TIARTStartDate').datepicker({
 				date: null,
 				allowPastDates: true,
@@ -1283,12 +1301,24 @@
 			$("#<%=BaselineWeight.ClientID%>").on('change',
 				function() {
 					var bmi = calcBmi();
+                   if(age > 15){
 					$("#<%=BaselineBMI.ClientID%>").val(bmi);
+                    }
+                    else {
+                          calcZScore();
+                        }
+
+
 				});
 			$("#<%=BaselineHeight.ClientID%>").on('change',
 				function() {
 					var bmi = calcBmi();
+                     if(age>15){
 					$("#<%=BaselineBMI.ClientID%>").val(bmi);
+                        }   
+                    else {
+                    calcZScore();
+                        }
 				});
 
 		    $("#<%=WHOStageAtEnrollment.ClientID%>").on('change',
@@ -1762,7 +1792,29 @@
 				$("#<%=transferInNotes.ClientID%>").prop('disabled', false);
 
 			}
-
+    
+      function calcZScore()
+        {
+        var weight = document.getElementById('BaselineWeight').value;
+		var height = document.getElementById('BaselineHeight').value;
+      
+        $.ajax({
+            url: '../WebService/PatientEncounterService.asmx/getZScoreValues',
+            type: 'POST',
+            dataType: 'json',
+            data: "{'height':'" + height + "','weight':'" + weight + "'}",
+            contentType: "application/json; charset=utf-8",
+            success: function (data) {
+                var serverData = data.d;
+                for (var i = 0; i < serverData.length; i++) {
+                   
+                    $("#<%=txtBMIz.ClientID%>").val(serverData[i][2]);
+                    
+                       
+                }
+            }
+        });
+          }
 			function disableIfNotTransferIn() {
 
 				/*-- disable the DIVs not required --*/
@@ -1821,6 +1873,7 @@
 					}
 				});
             }
+     
 
             function getPatientDateARTInitiation() {
                 $.ajax({
@@ -1893,7 +1946,15 @@
 									$("#<%=BaselineMUAC.ClientID%>").val(obj.MUAC);
 									$("#<%=BaselineWeight.ClientID%>").val(obj.Weight);
 									$("#<%=BaselineHeight.ClientID%>").val(obj.Height);
+                                    
+                                     if(age > 15){
 									$("#<%=BaselineBMI.ClientID%>").val(obj.BMI);
+                                        }
+                                       else {
+                                                 calcZScore();
+                                                                                            
+
+                                            }                                                                               
 									if (obj.HBVInfected) {
 										var value = 104;
                                         $(".BVCoInfectioninput input[value=" + value + "]").attr('checked', 'checked');
@@ -1919,6 +1980,10 @@
 									$("#BaselineViralloadDate")
 										.datepicker('setDate', moment(obj.BaselineViralLoadDate).format('DD-MMM-YYYY'));
 
+                                    console.log(obj.CurrentTreatmentName);
+                                    
+                               if(obj.CurrentTreatmentName !=null)   
+                                {
 									// $("#").datepicker('setDate',moment(obj.HivDiagnosisDate).format('DD-MMM-YYYY'));
 									$.ajax({
 										type: "POST",
@@ -2024,6 +2089,7 @@
 										error: function(response) {}
 									}); //ajax end 
 									//----------------------
+                                    }
 									$.ajax({
 										type: "POST",
 										url: "../WebService/PatientBaselineService.asmx/GetRegimenCategory",
