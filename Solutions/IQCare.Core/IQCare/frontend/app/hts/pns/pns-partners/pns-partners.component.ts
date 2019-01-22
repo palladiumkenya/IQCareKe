@@ -75,7 +75,7 @@ export class PnsPartnersComponent implements OnInit {
             'family': 0
         };
         localStorage.setItem('isPartner', JSON.stringify(newPartner));
-        this.zone.run(() => { this.router.navigate(['/registration/register'], { relativeTo: this.route }); });
+        this.zone.run(() => { this.router.navigate(['/hts/family/familysearch'], { relativeTo: this.route }); });
     }
 
     isPnsScreened(personID) {

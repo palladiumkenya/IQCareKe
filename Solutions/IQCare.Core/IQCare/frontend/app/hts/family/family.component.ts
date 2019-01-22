@@ -48,8 +48,9 @@ export class FamilyComponent implements OnInit {
             'partner': 0,
             'family': 1
         };
+
         localStorage.setItem('isPartner', JSON.stringify(newPartner));
-        this.zone.run(() => { this.router.navigate(['/registration/register'], { relativeTo: this.route }); });
+        this.zone.run(() => { this.router.navigate(['/hts/family/familysearch'], { relativeTo: this.route }); });
     }
 
     getSelectedRow(row) {

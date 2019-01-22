@@ -331,7 +331,7 @@
                                     <button mat-raised-button color="accent" type="submit" (click)="onSubmitForm(1)">Register
                                         and Continue</button>
                                     &nbsp;&nbsp;
-                                    <button mat-raised-button color="accent" type="submit" (click)="onSubmitForm(2)">Save
+                                    <button mat-raised-button color="accent" type="submit" *ngIf="!partnerType" (click)="onSubmitForm(2)">Save
                                         and Register New</button>
                                     &nbsp;&nbsp;
                                     <button mat-raised-button color="accent" type="submit" (click)="closeForm()">Close
