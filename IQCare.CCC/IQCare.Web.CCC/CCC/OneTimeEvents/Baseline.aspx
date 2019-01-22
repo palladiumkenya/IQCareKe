@@ -677,15 +677,23 @@
 						</div>
 
 						<div class="form-group col-md-12">
-							<div class="col-md-4">
+							<div class="col-md-3">
 								<div class="col-md-12">
 									<label class="control-label pull-left">Purpose</label></div>
 								<div class="col-md-12">
-                                    <asp:DropDownList ID="RegimenPurpose" runat="server" ClientIDMode="Static" CssClass="form-control input-sm" data-parsley-required="true" data-parsley-min="1" data-parsley-min-message="Please select purpose"></asp:DropDownList>
+                                    <asp:DropDownList ID="RegimenPurpose" runat="server" ClientIDMode="Static" onChange="selectRegimens();" CssClass="form-control input-sm" data-parsley-required="true" data-parsley-min="1" data-parsley-min-message="Please select purpose"></asp:DropDownList>
 								</div>
 							</div>
+                            
+						    <div class="col-md-3">
+						        <div class="col-md-12">
+						            <label class="control-label pull-left">Regimen Line</label></div>
+						        <div class="col-md-12">
+						            <asp:DropDownList ID="DropDownList1" runat="server" ClientIDMode="Static" CssClass="form-control input-sm" data-parsley-required="true" data-parsley-min="1" data-parsley-min-message="Please select Regimen"></asp:DropDownList>
+						        </div>
+						    </div>
 
-							<div class="col-md-3">
+							<div class="col-md-2">
 								<div class="col-md-12">
 									<label class="control-label pull-left">Regimen</label></div>
 								<div class="col-md-12">
@@ -693,7 +701,7 @@
 								</div>
 							</div>
 
-							<div class="col-md-3">
+							<div class="col-md-2">
 								<div class="col-md-12">
 									<label class="control-label pull-left">Date Last Used</label></div>
 								<div class="col-md-12">
@@ -1331,6 +1339,55 @@
 			//}
 
 			//$(window).on("load",getPatientEnrollmentDate);
+
+
+		    function selectRegimens()
+		    {
+		        var valSelected = $("#<%=RegimenPurpose.ClientID%>").find(":selected").text();
+           
+		        if(valSelected === "Select")
+		        {
+		            $("#<%=DropDownList1.ClientID%>").prop('disabled', true);
+		        }
+		        else{
+		            $("#<%=DropDownList1.ClientID%>").prop('disabled', false);
+		        }
+
+                valSelected = valSelected.replace(/\s/g, '');
+
+		        switch (valSelected) {
+                    case "PEP":
+                        valSelected = 'PEP Regimens';
+                        break;
+                    
+                    case "PrEP":
+                        valSelected = 'PrEP Regimens';
+                        break;
+                    case "PMTCT":
+                        valSelected = 'PMTCTRegimens';
+                        break;
+                    case "ART":
+                        valSelected = 'ART';
+                        break;		            
+		        default:
+		        }
+
+		        $.ajax({
+		            url: '../WebService/PatientEncounterService.asmx/GetRegimensBasedOnRegimenLine',
+		            type: 'POST',
+		            dataType: 'json',
+		            data: "{'RegimenLine':'" + valSelected + "'}",
+		            contentType: "application/json; charset=utf-8",
+		            success: function (data) {
+		                var serverData = data.d;
+		                $("#<%=DropDownList1.ClientID%>").find('option').remove().end();
+		                $("#<%=DropDownList1.ClientID%>").append('<option value="0">Select</option>');
+		                for (var i = 0; i < serverData.length; i++) {
+		                    $("#<%=DropDownList1.ClientID%>").append('<option value="' + serverData[i][0] + '">' + serverData[i][1] + '</option>');
+		                }
+		            }
+		        });
+		    }
 
 
 			/*-- check for future dates -- check if ART start Date >TI Date */
