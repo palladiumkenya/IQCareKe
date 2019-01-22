@@ -51,7 +51,7 @@ namespace IQCare.PMTCT.Core.Models
             HeadCircumference = vitalsInfo.HeadCircumference;
             Muac = vitalsInfo.Muac;
             WeightForAge = vitalsInfo.WeightForAge;
-            HeightForAge = vitalsInfo.HeightForAge;
+            WeightForHeight = vitalsInfo.WeightForHeight;
             VisitDate = vitalsInfo.VisitDate;
         }
     }
