@@ -35,8 +35,8 @@ export class TriageService {
     }
 
 
-    public GetPatientVitalsInfo(masterVisitId: number): Observable<any> {
-        return this.httpClient.get<any>(this.API_URL + '/api/PatientVitals/GetByMasterVisitId/' + masterVisitId).pipe(
+    public GetPatientVitalsInfo(patientId: number): Observable<any> {
+        return this.httpClient.get<any>(this.API_URL + '/api/PatientVitals/GetByPatientId/' + patientId).pipe(
             tap(GetPatientVitalsInfo => this.errorHandlerService.log('get patient master visit details')),
             catchError(this.errorHandlerService.handleError<any>('GetPatientVitalsInfo'))
         );

@@ -21,6 +21,8 @@ import { AddLabResultComponent } from './lab/add-lab-result/add-lab-result.compo
 import { LabOrderTestResultsComponent } from './lab/lab-order-test-results/lab-order-test-results.component';
 import { PendingLabsGridComponent } from './lab/pending-labs-grid/pending-labs-grid.component';
 import { CompletedLabsGridComponent } from './lab/completed-labs-grid/completed-labs-grid.component';
+import { AddTriageComponent } from './triage/add-triage/add-triage.component';
+import { TriageInfoGridComponent } from './triage/triage-info-grid/triage-info-grid.component';
 
 @NgModule({
     imports: [
@@ -31,7 +33,7 @@ import { CompletedLabsGridComponent } from './lab/completed-labs-grid/completed-
         MatNativeDateModule,
         MatCheckboxModule,
         MatInputModule, MatDatepickerModule, MatFormFieldModule,MatGridListModule,MatDialogModule,
-        MatTableModule, MatButtonModule, FormsModule, HttpClientModule, SharedModule, MatSelectModule,
+        MatTableModule, MatButtonModule, FormsModule, HttpClientModule, SharedModule, MatSelectModule
     ],
     declarations: [
         TriageComponent,
@@ -41,11 +43,14 @@ import { CompletedLabsGridComponent } from './lab/completed-labs-grid/completed-
         AddLabResultComponent,
         LabOrderTestResultsComponent,
         PendingLabsGridComponent,
-        CompletedLabsGridComponent
+        CompletedLabsGridComponent,
+        AddTriageComponent,
+        TriageInfoGridComponent
     ],
     entryComponents :[
      AddLabResultComponent,
-     LabOrderTestResultsComponent
+     LabOrderTestResultsComponent,
+     AddTriageComponent
     ],
     providers: [
         TriageService,

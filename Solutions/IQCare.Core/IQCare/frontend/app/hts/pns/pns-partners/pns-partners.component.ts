@@ -28,7 +28,6 @@ export class PnsPartnersComponent implements OnInit {
         public zone: NgZone,
         private store: Store<AppState>) {
         store.pipe(select('app')).subscribe(res => {
-            console.log(res);
             if (typeof (res['isPnsScreened']) !== 'undefined' && res['isPnsScreened'] !== null) {
                 this.isPnsScreeningDone = res['isPnsScreened'];
             }

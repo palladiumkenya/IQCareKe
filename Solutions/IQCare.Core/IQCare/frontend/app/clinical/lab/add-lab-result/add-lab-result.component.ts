@@ -89,10 +89,11 @@ export class AddLabResultComponent implements OnInit {
           this.dialogRef.close();
 
       },(err)=>
-      {
-            this.snotifyService.error('An error occured while completing lab order', 'Lab', this.notificationService.getConfig());
-            console.log(err,'complete lab order error');
+      {  
+            this.snotifyService.error(err, 'Lab', this.notificationService.getConfig());
+            console.log(err,'Submit Lab');
       },()=>{
+        location.reload();
 
       })
      

@@ -5,7 +5,6 @@ import { FormControlBase } from '../../../shared/_models/dynamic-form/FormContro
 import { ResultDataType } from '../../_models/CompleteLabOrderCommand';
 import { AddLabResultComponent } from '../add-lab-result/add-lab-result.component';
 import { TextboxFormControl, CheckboxFormControl, NumericTextboxFormControl } from '../../../shared/_models/dynamic-form/TextBoxFormControl';
-import { SelectlistFormControl } from '../../../shared/_models/dynamic-form/SelectListFormControl';
 
 @Component({
   selector: 'app-pending-labs-grid',
@@ -63,7 +62,7 @@ formControl : FormControlBase<any>[] = [];
 
 public addResult(pendingTest : any) {
   this.disableBtn = true;
-  console.log(this.disableBtn +" Button")
+
   this.formControlCollection = [];
   this.formControl = [];
   this.labTestParameters = [];

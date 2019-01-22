@@ -13,6 +13,8 @@ export function consentReducer(state: any = {}, action: ClientActions) {
             return { ...state, isPositive: action.payload };
         case ClientActionTypes.PERSONID:
             return { ...state, PersonId: action.payload };
+        case ClientActionTypes.PATIENTID:
+            return { ...state, PatientId: action.payload };
         case ClientActionTypes.CONSENT_PARTNER_LISTING:
             return { ...state, consentPartnerListing: action.payload };
         case ClientActionTypes.IS_REFERRED:
@@ -41,6 +43,10 @@ export function consentReducer(state: any = {}, action: ClientActions) {
             const newPnsScreenedPositive = ('PnsScreenedPositive' in state) ?
                 [...state['PnsScreenedPositive'], JSON.parse(action.payload)] : [JSON.parse(action.payload)];
             return { ...state, PnsScreenedPositive: newPnsScreenedPositive };
+        case ClientActionTypes.FAMILY_SCREENED_POSITIVE:
+            const newFamilyScreenedPositive = ('FamilyScreenedPositive' in state) ?
+                [...state['FamilyScreenedPositive'], JSON.parse(action.payload)] : [JSON.parse(action.payload)];
+            return { ...state, FamilyScreenedPositive: newFamilyScreenedPositive };
         case ClientActionTypes.CLEAR_STATE:
             state = {};
             return state;

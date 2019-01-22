@@ -18,7 +18,7 @@
                             <div class="row">
                                 <div class="col-lg-6 col-md-6 col-sm-6">
                                     <mat-form-field>
-                                        <input matInput [matDatepicker]="myDatepicker" formControlName="dateOfScreening"
+                                        <input matInput [matDatepicker]="myDatepicker" [max]="maxDate" formControlName="dateOfScreening"
                                             placeholder="Date of Screening" tabindex="1" (click)="myDatepicker.open()">
                                         <mat-datepicker-toggle matSuffix [for]="myDatepicker"></mat-datepicker-toggle>
                                         <mat-datepicker #myDatepicker></mat-datepicker>
@@ -44,8 +44,9 @@
                                     </mat-form-field>
 
                                     <mat-form-field>
-                                        <input matInput [matDatepicker]="datebookedDatepicker" formControlName="dateBooked"
-                                            placeholder="Date Booked for testing" tabindex="4" (click)="datebookedDatepicker.open()">
+                                        <input matInput [matDatepicker]="datebookedDatepicker" [min]="maxDate"
+                                            formControlName="dateBooked" placeholder="Date Booked for testing" tabindex="4"
+                                            (click)="datebookedDatepicker.open()">
                                         <mat-datepicker-toggle matSuffix [for]="datebookedDatepicker"></mat-datepicker-toggle>
                                         <mat-datepicker #datebookedDatepicker></mat-datepicker>
                                     </mat-form-field>

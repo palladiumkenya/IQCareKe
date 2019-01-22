@@ -42,6 +42,7 @@ namespace IQCare.HTS.BusinessProcess.CommandHandlers
                         htsEncounter.TestEntryPoint = request.Encounter.TestEntryPoint;
                         htsEncounter.TestingStrategy = request.Encounter.TestingStrategy;
                         htsEncounter.EncounterType = request.Encounter.EncounterType;
+                        htsEncounter.HivCounsellingDone = request.Encounter.HivCounsellingDone;
 
 
                         _unitOfWork.Repository<HtsEncounter>().Update(htsEncounter);

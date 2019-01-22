@@ -1,13 +1,16 @@
 <form>
+  
   <div class="row">
       <div class="col-md-12">
           <div class="form-title">
               <span class="mat-accent">Complete Lab Order</span>
           </div>
       </div>
-      <!-- <app-personbrief>        
-      </app-personbrief> -->
   </div>
+
+  <app-personbrief>        
+  </app-personbrief>
+    <br>
   <div class="row">
        <app-pending-labs-grid [PatientId]="patientId">           
        </app-pending-labs-grid>

@@ -9,6 +9,8 @@ import { SnotifyService } from 'ng-snotify';
 import { NotificationService } from '../../../shared/_services/notification.service';
 import * as Consent from '../../../shared/reducers/app.states';
 import { Store } from '@ngrx/store';
+import { AppStateService } from '../../../shared/_services/appstate.service';
+import { AppEnum } from '../../../shared/reducers/app.enum';
 
 @Component({
     selector: 'app-enrollment-services',
@@ -36,7 +38,8 @@ export class EnrollmentServicesComponent implements OnInit {
         public zone: NgZone,
         private snotifyService: SnotifyService,
         private notificationService: NotificationService,
-        private store: Store<AppState>) {
+        private store: Store<AppState>,
+        private appStateService: AppStateService) {
         this.userId = JSON.parse(localStorage.getItem('appUserId'));
         this.posId = localStorage.getItem('appPosID');
         this.maxDate = new Date();
@@ -111,12 +114,17 @@ export class EnrollmentServicesComponent implements OnInit {
                     enrollment.PatientId = this.patientId;
                     this.enrollmentService.enrollClient(enrollment).subscribe(
                         (response) => {
+                            console.log(response);
                             this.snotifyService.success('Successfully Enrolled ', 'Enrollment',
                                 this.notificationService.getConfig());
 
                             localStorage.setItem('selectedService', this.serviceCode.toLowerCase());
 
                             this.store.dispatch(new Consent.SelectedService(this.serviceCode.toLowerCase()));
+
+                            this.store.dispatch(new Consent.PatientId(this.patientId));
+                            this.appStateService.addAppState(AppEnum.PATIENTID, this.personId,
+                                this.patientId).subscribe();
 
                             switch (this.serviceCode) {
                                 case 'HTS':
