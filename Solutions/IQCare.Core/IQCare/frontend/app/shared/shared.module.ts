@@ -16,7 +16,8 @@ import {
     MAT_DATE_LOCALE,
     MatSelectModule,
     MatFormFieldModule,
-    MatInputModule
+    MatInputModule,
+    MatButtonModule
 } from '@angular/material';
 import { AppDateAdapter } from './dateadapter/momentDateAdapter';
 import { NotificationService } from './_services/notification.service';
@@ -38,7 +39,8 @@ import { ReactiveFormsModule } from '@angular/forms';
         ReactiveFormsModule,
         MatSelectModule,
         MatFormFieldModule,
-        MatInputModule
+        MatInputModule,
+        MatButtonModule
     ],
     declarations: [
         LeftnavComponent,

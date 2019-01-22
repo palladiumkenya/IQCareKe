@@ -28,7 +28,6 @@ export class PnsPartnersComponent implements OnInit {
         public zone: NgZone,
         private store: Store<AppState>) {
         store.pipe(select('app')).subscribe(res => {
-            console.log(res);
             if (typeof (res['isPnsScreened']) !== 'undefined' && res['isPnsScreened'] !== null) {
                 this.isPnsScreeningDone = res['isPnsScreened'];
             }
@@ -52,6 +51,7 @@ export class PnsPartnersComponent implements OnInit {
         this.patientId = JSON.parse(localStorage.getItem('patientId'));
 
         this.dataSource = new PnsDataSource(this.pnsService, this.patientId);
+        localStorage.removeItem('isPartner');
     }
 
     getSelectedRow(row) {
@@ -76,7 +76,7 @@ export class PnsPartnersComponent implements OnInit {
             'family': 0
         };
         localStorage.setItem('isPartner', JSON.stringify(newPartner));
-        this.zone.run(() => { this.router.navigate(['/registration/register'], { relativeTo: this.route }); });
+        this.zone.run(() => { this.router.navigate(['/hts/family/familysearch'], { relativeTo: this.route }); });
     }
 
     isPnsScreened(personID) {

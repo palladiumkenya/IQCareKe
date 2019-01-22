@@ -25,7 +25,6 @@ export class FamilyComponent implements OnInit {
         private familyService: FamilyService,
         private store: Store<AppState>) {
         store.pipe(select('app')).subscribe(res => {
-            console.log(res);
             if (typeof (res['isFamilyScreeningDone']) !== 'undefined' && res['isFamilyScreeningDone'] !== null) {
                 this.isFamilyScreeningDone = res['isFamilyScreeningDone'];
             }
@@ -42,6 +41,7 @@ export class FamilyComponent implements OnInit {
         this.patientId = JSON.parse(localStorage.getItem('patientId'));
 
         this.dataSource = new FamilyDataSource(this.familyService, this.patientId);
+        localStorage.removeItem('isPartner');
     }
 
     newPartner() {
@@ -49,8 +49,9 @@ export class FamilyComponent implements OnInit {
             'partner': 0,
             'family': 1
         };
+
         localStorage.setItem('isPartner', JSON.stringify(newPartner));
-        this.zone.run(() => { this.router.navigate(['/registration/register'], { relativeTo: this.route }); });
+        this.zone.run(() => { this.router.navigate(['/hts/family/familysearch'], { relativeTo: this.route }); });
     }
 
     getSelectedRow(row) {
