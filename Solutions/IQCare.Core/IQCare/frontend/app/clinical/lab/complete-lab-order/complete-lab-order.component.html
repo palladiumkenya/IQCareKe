@@ -11,6 +11,11 @@
   <app-personbrief>        
   </app-personbrief>
     <br>
+    <div class="row">
+        <div class="col-lg-4 col-xs-12">
+            <button  mat-raised-button class="mat-primary" routerLink="/clinical/laborder/{{patientId}}/{{personId}}"  ><span class="fa fa-plus-circle"> Add Lab Order </span></button>
+        </div>      
+    </div>
   <div class="row">
        <app-pending-labs-grid [PatientId]="patientId">           
        </app-pending-labs-grid>
