@@ -886,7 +886,43 @@ namespace Application.Presentation
             }
         }
 
-        private static Dictionary<int, string> GetUserList()
+        public static Dictionary<int, string> GetUsers()
+        {
+            
+                Dictionary<int, string> userList = new Dictionary<int, string>();
+                ICommonData commonData = (ICommonData)ObjectFactory.CreateInstance("BusinessProcess.Service.BCommonData,BusinessProcess.Service");
+                DataTable dtUsers = commonData.getUserList();
+                //DataSet WriteXMLDS = new DataSet();
+
+                try
+                {
+                    //DataSet dataSet = new DataSet();
+                    //string xmlFilesPath = string.Empty;
+
+                    //if (!string.IsNullOrEmpty(ConfigurationManager.AppSettings["XMLFilesPath"].ToString()))
+                    //{
+                    //xmlFilesPath = ConfigurationManager.AppSettings["XMLFilesPath"].ToString();
+                    //}
+                    //if (!string.IsNullOrEmpty(xmlFilesPath))
+                    //{
+                    //  userList.Add(0, "Select");
+                    //                    string allMaster = xmlFilesPath + "AllMasters.con";
+                    //                  dataSet.ReadXml(allMaster);
+                    foreach (DataRow row in dtUsers.Rows)
+                    {
+                        string val = row["UserName"].ToString() + " - " + row["Designation"].ToString();
+                        userList.Add(Convert.ToInt32(row["UserID"].ToString()), val);
+                    }
+                    //}
+                }
+                catch
+                {
+                    userList = new Dictionary<int, string>();
+                }
+                return userList;
+
+            }
+       private static Dictionary<int, string> GetUserList()
         {
             Dictionary<int, string> userList = new Dictionary<int, string>();
             ICommonData commonData = (ICommonData)ObjectFactory.CreateInstance("BusinessProcess.Service.BCommonData,BusinessProcess.Service");
@@ -920,6 +956,8 @@ namespace Application.Presentation
             }
             return userList;
         }
+
+       
 
         #region "To be Deleted"
         public void CreateCustomControls(Panel panelCustomList, string pnlName, ref StringBuilder sbParameter, DataRow theRow, ref string tableName, string frmPrefix, Int32 rowindex)

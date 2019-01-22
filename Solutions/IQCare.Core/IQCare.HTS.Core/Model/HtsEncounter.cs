@@ -23,5 +23,6 @@ namespace IQCare.HTS.Core.Model
         public int? EverSelfTested { get; set; }
         public string GeoLocation { get; set; }
         public int EncounterType { get; set; }
+        public int? HivCounsellingDone { get; set; }
     }
 }

@@ -35,6 +35,7 @@ namespace IQCare.Web.CCC.UC.EnhanceAdherenceCounselling
 
         public string Session4Refferal1ItemId;
         public string Session4Refferal3ItemId;
+        public string Session4Refferal2ItemId;
         public string ItemYes;
         public string ItemNo;
         protected void Page_Load(object sender, EventArgs e)
@@ -47,6 +48,7 @@ namespace IQCare.Web.CCC.UC.EnhanceAdherenceCounselling
             differentiatedCareId = LookupLogic.GetLookupItemId("Standard Care");
             Session4Refferal1ItemId = LookupLogic.GetLookupItemId("Session4ReferralsNetworksQ1");
             Session4Refferal3ItemId = LookupLogic.GetLookupItemId("Session4ReferralsNetworksQ3");
+            Session4Refferal2ItemId = LookupLogic.GetLookupItemId("Session4ReferralsNetworksQ2");
             ItemYes = LookupLogic.GetLookupItemId("Yes");
             ItemNo = LookupLogic.GetLookupItemId("No");
             followupStatusId = LookupLogic.GetLookupItemId("Pending");

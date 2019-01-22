@@ -67,6 +67,24 @@ namespace IQCare.Web.CCC.UC {
         protected global::System.Web.UI.WebControls.TextBox txtWeight;
         
         /// <summary>
+        /// lblBMI control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl lblBMI;
+        
+        /// <summary>
+        /// lblBMIz control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl lblBMIz;
+        
+        /// <summary>
         /// txtBMI control.
         /// </summary>
         /// <remarks>

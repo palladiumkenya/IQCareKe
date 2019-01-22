@@ -38,6 +38,7 @@ namespace IQCare.Web.CCC.UC.EnhanceAdherenceCounselling
         public PatientClinicalNotes[] notesList;
         public string SessionRefferal1ItemId;
         public string SessionRefferal3ItemId;
+        public string SessionRefferal2ItemId;
         public string ItemYes;
         public string ItemNo;
         protected void Page_Load(object sender, EventArgs e)
@@ -51,6 +52,7 @@ namespace IQCare.Web.CCC.UC.EnhanceAdherenceCounselling
             followupStatusId = LookupLogic.GetLookupItemId("Pending");
             SessionRefferal1ItemId = LookupLogic.GetLookupItemId("SessionReferralsNetworksQ1");
             SessionRefferal3ItemId = LookupLogic.GetLookupItemId("SessionReferralsNetworksQ3");
+            SessionRefferal2ItemId = LookupLogic.GetLookupItemId("SessionReferralsNetworksQ2");
             ItemYes = LookupLogic.GetLookupItemId("Yes");
             ItemNo = LookupLogic.GetLookupItemId("No");
             if (!IsPostBack)

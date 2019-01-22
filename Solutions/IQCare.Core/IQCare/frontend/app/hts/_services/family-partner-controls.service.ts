@@ -27,39 +27,4 @@ export class FamilyPartnerControlsService {
             catchError(this.errorHandler.handleError<any[]>('getRelationshipTypes'))
         );
     }
-
-    getFamilyControls(familyRelationships: LookupItemView[]) {
-        console.log(familyRelationships);
-        let controls: FormControlBase<any>[] = [
-
-            new DropdownFormControl({
-                key: 'partnerRelationship',
-                label: 'Relationship',
-                options: [
-                    { key: 'solid', value: 'Solid' },
-                    { key: 'great', value: 'Great' },
-                    { key: 'good', value: 'Good' },
-                    { key: 'unproven', value: 'Unproven' }
-                ],
-                order: 1
-            }),
-
-            /*new TextboxFormControl({
-                 key: 'firstName',
-                 label: 'First name',
-                 value: 'Bombasto',
-                 required: true,
-                 order: 1
-             }),
-  
-             new TextboxFormControl({
-                 key: 'emailAddress',
-                 label: 'Email',
-                 type: 'email',
-                 order: 2
-             })*/
-        ];
-
-        return controls.sort((a, b) => a.order - b.order);
-    }
 }

@@ -9,6 +9,8 @@ import { SnotifyService } from 'ng-snotify';
 import * as moment from 'moment';
 import * as Consent from '../../shared/reducers/app.states';
 import { Store } from '@ngrx/store';
+import { AppStateService } from '../../shared/_services/appstate.service';
+import { AppEnum } from '../../shared/reducers/app.enum';
 
 @Component({
     selector: 'app-family-screening',
@@ -21,6 +23,7 @@ export class FamilyScreeningComponent implements OnInit {
     eligibleTestingOptions: LookupItemView[];
     hivStatusOptions: LookupItemView[];
     familyScreeningCategories: LookupItemView[];
+    maxDate: Date;
 
     constructor(private _formBuilder: FormBuilder,
         private route: ActivatedRoute,
@@ -29,7 +32,11 @@ export class FamilyScreeningComponent implements OnInit {
         private notificationService: NotificationService,
         private router: Router,
         public zone: NgZone,
-        private store: Store<AppState>) { }
+        private store: Store<AppState>,
+        private appStateService: AppStateService) {
+        this.maxDate = new Date();
+    }
+
     ngOnInit() {
         this.familyScreening = new FamilyScreening();
         this.familyScreening.userId = JSON.parse(localStorage.getItem('appUserId'));
@@ -93,11 +100,32 @@ export class FamilyScreeningComponent implements OnInit {
             this.familyScreening.dateOfScreening = moment(this.familyScreening.dateOfScreening).toDate().toDateString();
 
             this.familyService.addFamilyScreening(this.familyScreening, arr).subscribe(res => {
+
+                const hivStatusSelected = this.hivStatusOptions.filter(obj => obj.itemId == this.familyScreening.hivStatus);
+                if (hivStatusSelected.length > 0 && hivStatusSelected[0].itemName == 'Positive') {
+                    const partnerPnsTraced = {
+                        'familyId': this.familyScreening.personId,
+                        'familyScreenedPositive': true
+                    };
+
+                    this.store.dispatch(new Consent.FamilyScreenedPositive(JSON.stringify(partnerPnsTraced)));
+                    this.appStateService.addAppState(AppEnum.FAMILY_SCREENED_POSITIVE, JSON.parse(localStorage.getItem('personId')),
+                        JSON.parse(localStorage.getItem('patientId')), null, null, JSON.stringify({
+                            'familyId': this.familyScreening.personId,
+                            'familyScreenedPositive': true
+                        })).subscribe();
+                }
+
                 const partnerPnsTraced = {
                     'familyId': this.familyScreening.personId,
                     'familyTraced': true
                 };
                 this.store.dispatch(new Consent.IsFamilyScreeningDone(JSON.stringify(partnerPnsTraced)));
+                this.appStateService.addAppState(AppEnum.FAMILY_SCREENED, JSON.parse(localStorage.getItem('personId')),
+                    JSON.parse(localStorage.getItem('patientId')), null, null, JSON.stringify({
+                        'familyId': this.familyScreening.personId,
+                        'familyTraced': true
+                    })).subscribe();
 
                 this.snotifyService.success('Successfully saved family screening',
                     'Family Screening', this.notificationService.getConfig());

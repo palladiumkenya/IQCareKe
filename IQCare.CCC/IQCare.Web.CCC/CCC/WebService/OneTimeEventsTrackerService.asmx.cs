@@ -31,6 +31,14 @@ namespace IQCare.Web.CCC.WebService
             this.ChildVaccination.Add(item);
         }
     }
+
+    public class VaccinationList
+    {
+        public string VaccineStage { get; set; }
+        public string Vaccine { get; set; }
+        public int DeleteFlag { get; set; }
+        public int Exist { get; set; }
+    }
     public class ListVaccination
     {
         public string vaccineType { get; set; }
@@ -46,9 +54,15 @@ namespace IQCare.Web.CCC.WebService
     [System.Web.Script.Services.ScriptService]
     public class OneTimeEventsTrackerService : System.Web.Services.WebService
     {
+        public bool DeleteVaccination;
         private string Msg { get; set; }
         private DateTime? IsCompletionDate { get; set; }
         private DateTime? IsINHStartDateValue { get; set; }
+
+
+        public int? VaccineStageId;
+
+        public int PeriodId;
 
         [WebMethod]
         public string HelloWorld()
@@ -58,12 +72,13 @@ namespace IQCare.Web.CCC.WebService
 
         [WebMethod(EnableSession = true)]
         public string addOneTimeEventsTracker(string Stage1DateValue, string Stage2DateValue, string Stage3DateValue,
-            string SexPartnerDateValue, string INHStartDateValue, string INHCompletion, string CompletionDate, string adultVaccine, string vaccines)
+            string SexPartnerDateValue, string INHStartDateValue, string INHCompletion, string CompletionDate, string adultVaccine, string vaccines,string VaccinationList)
         {
             try
             {
                 var jss = new JavaScriptSerializer();
                 IList<ListVaccination> data = jss.Deserialize<IList<ListVaccination>>(vaccines);
+                var vaccinationList = jss.Deserialize<List<VaccinationList>>(VaccinationList);
 
                 var dataAdult = jss.Deserialize<IList<Object>>(adultVaccine);
 
@@ -172,21 +187,66 @@ namespace IQCare.Web.CCC.WebService
                 }
                 var lookup = new LookupLogic();
 
-                for (var i = 0; i < data.Count; i++)
-                {
+            //    for (var i = 0; i < data.Count; i++)
+              //  {
+                   
 
-                    PatientVaccination patientVaccine = new PatientVaccination()
+                    //for (int i=0;i<vaccinationList.Count;i++)
+                    // {
+                    //    if(data[i].vaccineStage==vaccinationList[i].VaccineStage)
+                    //     {
+                    //         DeleteFlag=vaccinationList[i].DeleteFlag
+                    //     }
+                    // }
+
+                    for (int i = 0;i < vaccinationList.Count; i++)
                     {
-                        PatientId = patientId,
-                        PatientMasterVisitId = patientMasterVisitId,
-                        Vaccine = lookup.GetItemIdByGroupAndDisplayName(data[i].vaccineType, data[i].vaccineStage)[0].ItemId,// LookupLogic.GetLookUpMasterId(data[i].vaccineType),
-                        VaccineStage = data[i].vaccineStage
-                    };
+                         VaccineStageId = lookup.GetItemIdByGroupAndDisplayName(vaccinationList[i].Vaccine, vaccinationList[i].VaccineStage)[0].ItemId;
+
+
+                        if (vaccinationList[i].DeleteFlag == 1)
+                        {
+                            DeleteVaccination = true;
+                         }
+                        else if(vaccinationList[i].DeleteFlag==0)
+                        {
+                            DeleteVaccination = false;
+                        }
+                        PatientVaccination patientVaccine = new PatientVaccination()
+                        {
+                            PatientId = patientId,
+                            PatientMasterVisitId = patientMasterVisitId,
+                            // Vaccine = lookup.GetItemIdByGroupAndDisplayName(data[i].vaccineType, data[i].vaccineStage)[0].ItemId,
+                            Vaccine = lookup.GetItemIdByGroupAndDisplayName("Vaccinations", vaccinationList[i].Vaccine)[0].ItemId,
+                            // VaccineStage =     data[i].vaccineStage
+                            VaccineStage= vaccinationList[i].VaccineStage,
+                            VaccineStageId = VaccineStageId,
+                            DeleteFlag = DeleteVaccination
+
+                        };
                     var vaccineExistsChild =
-                        patientVaccination.VaccineExists(patientId, patientVaccine.Vaccine, data[i].vaccineStage);
+                            patientVaccination.VaccineExists(patientId, patientVaccine.Vaccine, vaccinationList[i].VaccineStage);
                     if (vaccineExistsChild.Count == 0)
+                    {
                         patientVaccination.addPatientVaccination(patientVaccine);
-                }
+                    }
+                   if (vaccineExistsChild.Count > 0){
+                        for(int t = 0; t < vaccineExistsChild.Count; t++)
+                        {
+                            vaccineExistsChild[t].Patient = patientVaccine.Patient;
+                            vaccineExistsChild[t].PatientMasterVisitId = patientVaccine.PatientMasterVisitId;
+                            vaccineExistsChild[t].Vaccine = patientVaccine.Vaccine;
+                            vaccineExistsChild[t].VaccineStage = patientVaccine.VaccineStage;
+                            vaccineExistsChild[t].DeleteFlag = patientVaccine.DeleteFlag;
+                            vaccineExistsChild[t].VaccineStageId = patientVaccine.VaccineStageId;
+                            patientVaccination.UpdatePatientVaccination(vaccineExistsChild[t]);
+
+                        }
+
+                    }
+
+                    }
+                
 
                 for (var i = 0; i < dataAdult.Count; i++)
                 {
@@ -206,7 +266,9 @@ namespace IQCare.Web.CCC.WebService
                             PatientId = patientId,
                             PatientMasterVisitId = patientMasterVisitId,
                             Vaccine = vaccine,
-                            VaccineStage = dataAdult[i].ToString()
+                            VaccineStage = dataAdult[i].ToString(),
+                            VaccineStageId=vaccine
+                          
                         };
 
                         var vaccineExists = patientVaccination.VaccineExists(patientId, vaccine, dataAdult[i].ToString());
@@ -285,26 +347,60 @@ namespace IQCare.Web.CCC.WebService
                     checkOneTimeEventsdone++;
                     foreach (var itemVaccination in vaccinations)
                     {
-                        if (itemVaccination.VaccineStage == "FluVaccine")
+                        
+                        if(itemVaccination.PeriodId !=null)
                         {
-                            oneTimeEventsDetails.FluVaccine = "1";
-                        }
-                        else if (itemVaccination.VaccineStage == "HBV")
-                        {
-                            oneTimeEventsDetails.HBV = "1";
-                        }
-                        else if (itemVaccination.Vaccine == 0)
-                        {
-                            oneTimeEventsDetails.OtherVaccination = itemVaccination.VaccineStage;
+                            if (PeriodId > 0)
+                            {
+                                PeriodId = Convert.ToInt32(itemVaccination.PeriodId.ToString());
+                            }
+                            else
+                            {
+                                PeriodId = 0;
+                            }
                         }
                         else
                         {
-                            //var lookuplogic = new LookupLogic();
-                            itemVaccination.Name = LookupLogic.GetLookupMasterNameByMasterIdDisplayName(itemVaccination.Vaccine, itemVaccination.VaccineStage);
-                            //var ItemId = lookuplogic.GetItemIdByGroupAndItemName("Vaccinations", itemVaccination.Name);
-                            itemVaccination.Id = itemVaccination.Vaccine;
-                            oneTimeEventsDetails.AddChildVaccination(itemVaccination);
-                            //oneTimeEventsDetails.ChildVaccination.Add(oneTimeEventsDetails);
+                            PeriodId = 0;
+                        }
+
+                        if (PeriodId == 0)
+                        {
+
+                            if (!String.IsNullOrEmpty(itemVaccination.VaccineStage))
+                            {
+                                if (itemVaccination.VaccineStage == "FluVaccine")
+                                {
+                                    oneTimeEventsDetails.FluVaccine = "1";
+                                }
+                                else if (itemVaccination.VaccineStage == "HBV")
+                                {
+                                    oneTimeEventsDetails.HBV = "1";
+                                }
+                                else if (itemVaccination.Vaccine == 0)
+                                {
+                                    oneTimeEventsDetails.OtherVaccination = itemVaccination.VaccineStage;
+                                }
+                                else
+                                {
+
+                                    //var lookuplogic = new LookupLogic();
+                                    string Vaccine = LookupLogic.GetLookupNameById(itemVaccination.Vaccine);
+                                    if (!String.IsNullOrEmpty(Vaccine))
+                                    {
+                                        itemVaccination.Name = Vaccine;
+                                    }
+                                    else
+                                    {
+                                        itemVaccination.Name = "";
+                                    }
+
+                                    //var ItemId = lookuplogic.GetItemIdByGroupAndItemName("Vaccinations", itemVaccination.Name);
+                                    itemVaccination.Id = itemVaccination.Vaccine;
+                                    oneTimeEventsDetails.AddChildVaccination(itemVaccination);
+                                    //oneTimeEventsDetails.ChildVaccination.Add(oneTimeEventsDetails);
+                                }
+                            }
                         }
                     }
                 }

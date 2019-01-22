@@ -213,11 +213,12 @@
 										</div>
 										<div class="col-md-3">
 											<div class="col-md-12">
-												<label class="control-label pull-left input-sm">BMI</label>
+												<label runat="server" ID="lblBMI" class="control-label pull-left input-sm">BMI</label>
+                                                <label runat="server" ID="lblBMIz" class="control-label pull-left input-sm">BMIz</label>
 											</div>
 											<div class="col-md-12">
 												<asp:TextBox ID="txtBMI" CssClass="form-control input-sm" ClientIDMode="Static" Enabled="false" runat="server"></asp:TextBox>
-												<asp:TextBox ID="txtBMIZ" runat="server" CssClass="form-control input-sm" ClientIDMode="Static"></asp:TextBox>
+												<asp:TextBox ID="txtBMIZ" runat="server" CssClass="form-control input-sm" Enabled="false" ClientIDMode="Static"></asp:TextBox>
 											</div>
 										</div>
 										<div class="col-md-3">
@@ -2720,7 +2721,7 @@
 	document.getElementById('txtReactionTypeID').style.display = 'none';
 	//document.getElementById('txtDiagnosisID').style.display = 'none';
 	document.getElementById("<%=txtBMIZ.ClientID%>").style.display = 'none';
-
+   document.getElementById("<%=lblBMIz.ClientID%>").style.display = 'none';
 	document.getElementById('adverseEventId').style.display = 'none';
 
 
@@ -2957,6 +2958,10 @@
 
         if (Age > 15) {
             var txtBmi = $("#<%=txtBMI.ClientID%>").val();
+            document.getElementById("<%=txtBMIZ.ClientID%>").style.display = 'none';
+             document.getElementById("<%=lblBMIz.ClientID%>").style.display = 'none';
+            document.getElementById("<%=lblBMI.ClientID%>").style.display = 'block';
+            document.getElementById("<%=txtBMI.ClientID%>").style.display = 'block';
             if (txtBmi > 0 && txtBmi < 16) {
                 $("#nutritionscreeningstatus option").filter(function () {
                     return $(this).text() === 'Severe Acute Malnutrition';
@@ -2974,6 +2979,10 @@
             }
         } else {
             var txtBMIZ = $("#<%=txtBMIZ.ClientID%>").val();
+            document.getElementById("<%=txtBMIZ.ClientID%>").style.display = 'block';
+            document.getElementById("<%=txtBMI.ClientID%>").style.display = 'none';
+            document.getElementById("<%=lblBMIz.ClientID%>").style.display = 'block';
+            document.getElementById("<%=lblBMI.ClientID%>").style.display = 'none';
             console.log(txtBMIZ);
             if ((txtBMIZ == "4 (Overweight)") || (txtBMIZ === "3 (Overweight)") || (txtBMIZ === "2 (Overweight)") || (txtBMIZ === "1 (Overweight)")) {
                 $("#nutritionscreeningstatus option").filter(function () { return $(this).text() === 'Overweight/Obese'; }).prop('selected', true);

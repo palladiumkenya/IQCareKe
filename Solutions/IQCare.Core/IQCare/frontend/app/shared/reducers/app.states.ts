@@ -15,7 +15,9 @@ export enum ClientActionTypes {
     PERSONID = '[ClientState] PersonId',
     FAMILY_SCREENED = '[ClientState] isFamilyScreeningDone',
     FAMILY_TRACING = '[ClientState] isFamilyTracingDone',
-    PNS_SCREENED_POSITIVE = '[ClientState] PnsScreenedPositive'
+    PNS_SCREENED_POSITIVE = '[ClientState] PnsScreenedPositive',
+    FAMILY_SCREENED_POSITIVE = '[ClientState] FamilyScreenedPositive',
+    PATIENTID = '[ClientState] PatientId'
 }
 
 export class SelectedService implements Action {
@@ -50,6 +52,13 @@ export class IsPositive implements Action {
 
 export class PersonId implements Action {
     readonly type = ClientActionTypes.PERSONID;
+
+    constructor(public payload: number) {
+    }
+}
+
+export class PatientId implements Action {
+    readonly type = ClientActionTypes.PATIENTID;
 
     constructor(public payload: number) {
     }
@@ -103,6 +112,12 @@ export class PnsScreenedPositive implements Action {
     constructor(public payload: any) { }
 }
 
+export class FamilyScreenedPositive implements Action {
+    readonly type = ClientActionTypes.FAMILY_SCREENED_POSITIVE;
+
+    constructor(public payload: any) { }
+}
+
 export class ClearState implements Action {
     readonly type = ClientActionTypes.CLEAR_STATE;
 }
@@ -122,4 +137,6 @@ export type ClientActions
     | PersonId
     | IsFamilyScreeningDone
     | IsFamilyTracingDone
-    | PnsScreenedPositive;
+    | PnsScreenedPositive
+    | FamilyScreenedPositive
+    | PatientId;

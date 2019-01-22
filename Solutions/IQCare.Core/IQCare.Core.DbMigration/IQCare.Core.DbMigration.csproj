@@ -129,6 +129,7 @@
     <None Remove="Scripts\2.0.0\27_SO_AddNewARVDrugs.sql" />
     <None Remove="Scripts\2.0.0\26_Person_Update.sql" />
     <None Remove="Scripts\2.0.0\27_Create_PatientPncExercises.sql" />
+    <None Remove="Scripts\2.0.0\28_HtsEncounter_Add_HivCounsellingDone.sql" />
   </ItemGroup>
 
   <ItemGroup>
@@ -253,6 +254,7 @@
     <EmbeddedResource Include="Scripts\2.0.0\27_SO_AddNewARVDrugs.sql" />
     <EmbeddedResource Include="Scripts\2.0.0\26_Person_Update.sql" />
     <EmbeddedResource Include="Scripts\2.0.0\27_Create_PatientPncExercises.sql" />
+    <EmbeddedResource Include="Scripts\2.0.0\28_HtsEncounter_Add_HivCounsellingDone.sql" />
   </ItemGroup>
 
   <ItemGroup>

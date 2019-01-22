@@ -77,6 +77,7 @@ export class EncounterComponent implements OnInit {
             TbScreening: new FormControl(this.encounter.TbScreening, [Validators.required]),
             EncounterRemarks: new FormControl(this.encounter.EncounterRemarks),
             Disabilities: new FormControl(this.encounter.Disabilities, [Validators.required]),
+            HivCounsellingDone: new FormControl('', [Validators.required])
         });
     }
 
@@ -87,6 +88,7 @@ export class EncounterComponent implements OnInit {
                     const encounterValue = res['encounter'][0];
                     let hasDisability = this.yesNoOptions.find(obj => obj.itemName == 'No').itemId;
                     const consent = res['consent'][0]['consentValue'];
+                    const HivCounsellingDone = res['']
                     let tbScreening = '';
                     if (res['tbStatus'].length > 0) {
                         tbScreening = res['tbStatus'][0]['screeningValueId'];
@@ -126,7 +128,7 @@ export class EncounterComponent implements OnInit {
                         TbScreening: tbScreening,
                         EncounterRemarks: encounterValue.encounterRemarks,
                         Disabilities: disabilities,
-
+                        HivCounsellingDone: encounterValue.hivCounsellingDone
                     });
 
                     this.encounter.PersonId = encounterValue['personId'];
@@ -139,7 +141,7 @@ export class EncounterComponent implements OnInit {
                     this.hasDisabilityChanged();
                     this.onConsentChanged();
 
-                    console.log(this.encounter);
+                    // console.log(this.encounter);
                 }
             });
         }

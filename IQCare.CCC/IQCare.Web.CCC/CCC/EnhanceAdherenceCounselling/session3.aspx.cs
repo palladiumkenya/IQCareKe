@@ -34,6 +34,7 @@ namespace IQCare.Web.CCC.UC.EnhanceAdherenceCounselling
         public TextBox appointmentDateTb;
         public string Session3Refferal1ItemId;
         public string Session3Refferal3ItemId;
+        public string Session3Refferal2ItemId;
         public string ItemYes;
         public string ItemNo;
         protected void Page_Load(object sender, EventArgs e)
@@ -47,6 +48,7 @@ namespace IQCare.Web.CCC.UC.EnhanceAdherenceCounselling
             followupStatusId = LookupLogic.GetLookupItemId("Pending");
             Session3Refferal1ItemId = LookupLogic.GetLookupItemId("Session3ReferralsNetworksQ1");
             Session3Refferal3ItemId = LookupLogic.GetLookupItemId("Session3ReferralsNetworksQ3");
+            Session3Refferal2ItemId = LookupLogic.GetLookupItemId("Session3ReferralsNetworksQ2");
             ItemYes = LookupLogic.GetLookupItemId("Yes");
             ItemNo = LookupLogic.GetLookupItemId("No");
             if (!IsPostBack)
