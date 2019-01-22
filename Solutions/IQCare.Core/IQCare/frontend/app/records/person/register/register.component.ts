@@ -24,6 +24,7 @@ import { SearchService } from '../../_services/search.service';
 import { Search } from '../../_models/search';
 import { Store } from '@ngrx/store';
 import * as AppState from '../../../shared/reducers/app.states';
+import { Partner } from '../../../shared/_models/partner';
 
 @Component({
     selector: 'app-register',
@@ -65,6 +66,8 @@ export class RegisterComponent implements OnInit {
     newContacts: any[];
     id: number;
 
+    partnerType: Partner;
+
     public phonePattern = /^(?:\+254|0|254)(\d{9})$/;
 
     constructor(private _formBuilder: FormBuilder,
@@ -81,7 +84,6 @@ export class RegisterComponent implements OnInit {
         private store: Store<AppState>) {
         this.maxDate = new Date();
         this.clientSearch = new Search();
-        this.store.dispatch(new AppState.ClearState());
     }
 
     ngOnInit() {
@@ -155,6 +157,12 @@ export class RegisterComponent implements OnInit {
 
         if (this.id) {
             this.getPersonDetails(this.id);
+        }
+
+        this.partnerType = new Partner();
+        this.partnerType = JSON.parse(localStorage.getItem('isPartner'));
+        if (this.partnerType == null) {
+            this.store.dispatch(new AppState.ClearState());
         }
     }
 
@@ -391,18 +399,34 @@ export class RegisterComponent implements OnInit {
                                 this.snotifyService.success('Successfully Registered Person', 'Person Registration',
                                     this.notificationService.getConfig());
 
-                                if (tabIndex == 1) {
-                                    this.zone.run(() => {
-                                        this.router.navigate(['/dashboard/personhome/' + personId],
-                                            { relativeTo: this.route });
-                                    });
-                                } else if (tabIndex == 2) {
-                                    this.person = new Person();
-                                    this.clientAddress = new ClientAddress();
-                                    this.clientContact = new ClientContact();
-                                    this.nextOfKin = new NextOfKin();
+                                if (this.partnerType != null) {
+                                    if (this.partnerType != null) {
+                                        if (this.partnerType.partner == 1) {
+                                            this.zone.run(() => {
+                                                this.router.navigate(['/hts/family/familysearch/' + personId],
+                                                    { relativeTo: this.route });
+                                            });
+                                        } else if (this.partnerType.family == 1) {
+                                            this.zone.run(() => {
+                                                this.router.navigate(['/hts/family/familysearch/' + personId],
+                                                    { relativeTo: this.route });
+                                            });
+                                        }
+                                    }
+                                } else {
+                                    if (tabIndex == 1) {
+                                        this.zone.run(() => {
+                                            this.router.navigate(['/dashboard/personhome/' + personId],
+                                                { relativeTo: this.route });
+                                        });
+                                    } else if (tabIndex == 2) {
+                                        this.person = new Person();
+                                        this.clientAddress = new ClientAddress();
+                                        this.clientContact = new ClientContact();
+                                        this.nextOfKin = new NextOfKin();
 
-                                    window.location.reload();
+                                        window.location.reload();
+                                    }
                                 }
                             }
                         );

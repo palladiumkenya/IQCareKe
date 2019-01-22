@@ -4,7 +4,7 @@
             <div class="col-lg-12 col-sm-6 col-xs-12">
                 <div class="widget">
                     <div class="widget-header bordered-bottom bordered-sky">
-                        <span class="widget-caption"> HTS | FAMILY </span>
+                        <span class="widget-caption"> HTS | PNS/FAMILY </span>
                     </div>
                     <div class="widget-body">
                         <app-clientbrief></app-clientbrief>
@@ -14,40 +14,128 @@
                         </div>
 
                         <div class="row">
-                            <form [formGroup]="formGroup">
-                                <div class="row">
-                                    <div class="col-lg-3 col-sm-3 col-xs-12">
-                                        <mat-form-field class="col-lg-12 col-sm-12 col-xs-12">
-                                            <mat-label>Is Client Registered in this Facility ? </mat-label>
-                                            <mat-select formControlName="isRegisteredInFacility" required>
-                                                <mat-option [value]=""></mat-option>
-                                                <mat-option *ngFor="let yesnoOption of yesnoOptions" [value]="yesnoOption.itemId"
-                                                    (onSelectionChange)="onRegisteredChange($event)">
-                                                    {{yesnoOption.itemName}}
-                                                </mat-option>
-                                            </mat-select>
-                                        </mat-form-field>
+                            <div class="panel-body">
+                                <form class="form-group" [formGroup]="formGroup">
+                                    <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12">
+                                        <div class="form-title">
+                                            <span class="mat-accent"> PNS/Family Search </span>
+                                        </div>
                                     </div>
 
-                                    <div class="col-lg-4 col-sm-4 col-xs-12">
-                                        <button mat-raised-button class="mat-primary" (click)="findFamilyOrPartner()"
-                                            *ngIf="findRegistered">
-                                            <span class="fa fa-plus-circle">
-                                                Find Family
-                                            </span>
-                                        </button>
+                                    <div class="row">
+                                        <div class="col-lg-3 col-sm-3 col-xs-12">
+                                            <mat-form-field class="col-lg-12 col-sm-12 col-xs-12">
+                                                <mat-label>Is Client Registered in this Facility ? </mat-label>
+                                                <mat-select formControlName="isRegisteredInFacility" required>
+                                                    <mat-option [value]=""></mat-option>
+                                                    <mat-option *ngFor="let yesnoOption of yesnoOptions" [value]="yesnoOption.itemId"
+                                                        (onSelectionChange)="onRegisteredChange($event)">
+                                                        {{yesnoOption.itemName}}
+                                                    </mat-option>
+                                                </mat-select>
+                                            </mat-form-field>
+                                        </div>
+
+                                        <div class="col-lg-3 col-sm-3 col-xs-12">
+                                            <button mat-raised-button class="mat-primary" (click)="findFamilyOrPartner()"
+                                                *ngIf="findRegistered">
+                                                <span class="fa fa-plus-circle">
+                                                    Find Family
+                                                </span>
+                                            </button>
+
+                                            <button mat-raised-button class="mat-primary" *ngIf="registerContact"
+                                                (click)="registerNewContact()">
+                                                <span class="fa fa-plus-circle">
+                                                    Register New
+                                                </span>
+                                            </button>
+                                        </div>
                                     </div>
-                                </div>
 
-                                <div *ngFor="let question of questions" class="form-row">
-                                    <app-custom-form [question]="question" [form]="formGroup">
-                                    </app-custom-form>
-                                </div>
+                                    <div class="row">
+                                        <div class="col-lg-3 col-sm-3 col-xs-12">
+                                            <mat-form-field class="col-lg-12 col-sm-12 col-xs-12">
+                                                <mat-label>Relationship </mat-label>
+                                                <mat-select formControlName="relationship" required>
+                                                    <mat-option [value]=""></mat-option>
+                                                    <mat-option *ngFor="let relationshipOption of relationshipOptions"
+                                                        [value]="relationshipOption.itemId">
+                                                        {{
+                                                        relationshipOption.itemName
+                                                        }}
+                                                    </mat-option>
+                                                </mat-select>
+                                            </mat-form-field>
+                                        </div>
+                                    </div>
 
-                                <div class="form-row">
-                                    <button type="submit" [disabled]="!formGroup.valid">Save</button>
-                                </div>
-                            </form>
+                                    <div>
+                                        &nbsp;
+                                    </div>
+
+                                    <div>
+                                        <div class="example-container mat-elevation-z8">
+                                            <mat-table #table [dataSource]="dataSource">
+
+                                                <!--- Note that these columns can be defined in any order.
+                                                      The actual rendered columns are set as a property on the row definition" -->
+
+                                                <!-- FirstName Column -->
+                                                <ng-container matColumnDef="firstName">
+                                                    <mat-header-cell *matHeaderCellDef> First Name </mat-header-cell>
+                                                    <mat-cell *matCellDef="let element"> {{element.firstName}}
+                                                    </mat-cell>
+                                                </ng-container>
+
+                                                <!-- FirstName Column -->
+                                                <ng-container matColumnDef="midName">
+                                                    <mat-header-cell *matHeaderCellDef> Middle Name </mat-header-cell>
+                                                    <mat-cell *matCellDef="let element"> {{element.midName}} </mat-cell>
+                                                </ng-container>
+
+                                                <!-- Middle Name Column -->
+                                                <ng-container matColumnDef="lastName">
+                                                    <mat-header-cell *matHeaderCellDef> Last Name </mat-header-cell>
+                                                    <mat-cell *matCellDef="let element"> {{element.lastName}}
+                                                    </mat-cell>
+                                                </ng-container>
+
+                                                <!-- Last Name Column -->
+                                                <ng-container matColumnDef="dateOfBirth">
+                                                    <mat-header-cell *matHeaderCellDef> Date Of Birth </mat-header-cell>
+                                                    <mat-cell *matCellDef="let element"> {{element.dateOfBirth | date:
+                                                        'dd-MMM-yyyy' }}
+                                                    </mat-cell>
+                                                </ng-container>
+
+                                                <!-- Date Of Birth Column -->
+                                                <ng-container matColumnDef="gender">
+                                                    <mat-header-cell *matHeaderCellDef> Gender </mat-header-cell>
+                                                    <mat-cell *matCellDef="let element"> {{element.gender }} </mat-cell>
+                                                </ng-container>
+
+                                                <mat-header-row *matHeaderRowDef="displayedColumns" [style.background]="'#f5f5f5'"></mat-header-row>
+                                                <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+                                            </mat-table>
+                                        </div>
+                                    </div>
+
+                                    <div>
+                                        &nbsp;
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-lg-3 col-sm-3 col-xs-12">
+                                            <div class="form-group">
+                                                <button type="submit" mat-raised-button color="primary" (click)="saveRelationship()">
+                                                    <strong>Save Changes</strong>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
                         </div>
                     </div>
                 </div>

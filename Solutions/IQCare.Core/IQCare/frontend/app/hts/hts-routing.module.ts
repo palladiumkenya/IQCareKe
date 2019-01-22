@@ -93,6 +93,20 @@ const routes: Routes = [
                 path: 'familytracinglist',
                 component: FamilyTracingListComponent,
                 pathMatch: 'full'
+            },
+            {
+                path: 'familysearch',
+                component: FamilySearchComponent,
+                resolve: {
+                    yesnoOptions: YesNoResolver
+                }
+            },
+            {
+                path: 'familysearch/:personId',
+                component: FamilySearchComponent,
+                resolve: {
+                    yesnoOptions: YesNoResolver
+                }
             }
         ]
     },

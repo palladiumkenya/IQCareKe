@@ -48,6 +48,7 @@ import { FamilySearchComponent } from './family/family-search/family-search.comp
 import { YesNoResolver } from '../pmtct/_services/yesno.resolver';
 import { LookupItemService } from '../shared/_services/lookup-item.service';
 import { FamilyTracingListComponent } from './family-tracing/family-tracing-list/family-tracing-list.component';
+import { RegistrationService } from '../registration/_services/registration.service';
 
 
 @NgModule({
@@ -97,7 +98,8 @@ import { FamilyTracingListComponent } from './family-tracing/family-tracing-list
         FamilyTracingResolver,
         PsmartService,
         YesNoResolver,
-        LookupItemService
+        LookupItemService,
+        RegistrationService
     ],
     entryComponents: [
         TestDialogComponent,
