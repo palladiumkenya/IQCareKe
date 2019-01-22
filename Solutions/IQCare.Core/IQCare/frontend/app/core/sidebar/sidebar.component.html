@@ -38,16 +38,16 @@
 
         <ng-container *ngIf="patientId > 0">
             <li>
-                <a routerLink="/clinical/laborder/{{ patientId }}/{{ personId }}">
+                <a routerLink="/clinical/completeorder/{{ patientId }}/{{ personId }}">
                     <i class="menu-icon fa fa-tint"></i>
-                    <span class="menu-text"> Lab </span>
+                    <span class="menu-text"> LAB </span>
                 </a>
             </li>
 
             <li>
                 <a routerLink="/clinical/triage/{{ patientId }}/{{ personId }}">
                     <i class="menu-icon fa fa-heartbeat"></i>
-                    <span class="menu-text"> Triage </span>
+                    <span class="menu-text"> TRIAGE </span>
                 </a>
             </li>
         </ng-container>
