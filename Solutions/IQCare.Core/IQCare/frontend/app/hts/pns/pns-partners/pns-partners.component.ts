@@ -51,6 +51,7 @@ export class PnsPartnersComponent implements OnInit {
         this.patientId = JSON.parse(localStorage.getItem('patientId'));
 
         this.dataSource = new PnsDataSource(this.pnsService, this.patientId);
+        localStorage.removeItem('isPartner');
     }
 
     getSelectedRow(row) {

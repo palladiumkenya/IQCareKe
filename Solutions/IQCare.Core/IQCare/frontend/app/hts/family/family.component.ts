@@ -41,6 +41,7 @@ export class FamilyComponent implements OnInit {
         this.patientId = JSON.parse(localStorage.getItem('patientId'));
 
         this.dataSource = new FamilyDataSource(this.familyService, this.patientId);
+        localStorage.removeItem('isPartner');
     }
 
     newPartner() {
