@@ -9,6 +9,7 @@ namespace IQCare.PMTCT.BusinessProcess.Commands
 {
     public class AddPatientVitalCommand : IRequest<Result<object>>
     {
+        public int Id { get; set; }
         public int PatientId { get; set; }
         public int PatientMasterVisitId { get; set; }
         public decimal? Temperature { get; set; }
@@ -29,6 +30,12 @@ namespace IQCare.PMTCT.BusinessProcess.Commands
         public DateTime? VisitDate { get; set; }
         public string Comment { get; set; }
         public int CreatedBy { get; set; }
+    }
+
+    public class UpdatePatientVitalCommand :IRequest<Result<object>>
+    {
+        public AddPatientVitalCommand PatientVitalInfo { get; set; }
+
     }
 
     public class CalculateZscoreCommand : IRequest<Result<ZscoreCalculationResult>>

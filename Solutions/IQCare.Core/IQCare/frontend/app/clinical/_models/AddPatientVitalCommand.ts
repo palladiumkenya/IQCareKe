@@ -1,4 +1,5 @@
 export interface AddPatientVitalCommand{
+    Id ?:number;
     PatientId?: number;
     PatientmasterVisitId?: number;
     Temperature?: number;
@@ -17,4 +18,10 @@ export interface AddPatientVitalCommand{
     VisitDate?: Date;
     Muac ? : number;
     Comment:string;
+    CreatedBy ? : number
+}
+
+export interface UpdatePatientVitalCommand
+{
+    PatientVitalInfo ? : AddPatientVitalCommand
 }
