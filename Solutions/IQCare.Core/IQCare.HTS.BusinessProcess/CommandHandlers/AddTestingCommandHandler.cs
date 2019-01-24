@@ -56,7 +56,8 @@ namespace IQCare.HTS.BusinessProcess.CommandHandlers
                         FinalResult = request.FinalTestingResult.FinalResult,
                         HtsEncounterId = request.HtsEncounterId,
                         RoundOneTestResult = request.FinalTestingResult.FinalResultHiv1,
-                        RoundTwoTestResult = request.FinalTestingResult.FinalResultHiv2
+                        RoundTwoTestResult = request.FinalTestingResult.FinalResultHiv2,
+                        EncounterResultRemarks = request.FinalTestingResult.FinalResultsRemarks
                     };
 
                     await _unitOfWork.Repository<HtsEncounterResult>().AddAsync(hTSEncounterResult);

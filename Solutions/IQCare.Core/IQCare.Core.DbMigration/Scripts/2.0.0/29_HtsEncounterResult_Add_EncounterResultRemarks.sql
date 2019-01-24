@@ -1,0 +1,1 @@
+ALTER TABLE [dbo].[HtsEncounterResult] ADD EncounterResultRemarks varchar(50) NULL;
