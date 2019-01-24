@@ -88,6 +88,32 @@ export class EncounterService {
         );
     }
 
+    public updateTesting(patientId: number, patientMasterVisitId: number, providerId: number, serviceAreaId: number, htsEncounterId: number,
+        coupleDiscordant: number, finalResultGiven: number,
+        roundOneTestResult: number, roundTwoTestResult: number, finalResult: number, acceptedPartnerListing: number,
+        reasonsDeclinePartnerListing: number, finalResultsRemarks: string): Observable<any> {
+        const Indata = {
+            PatientId: patientId,
+            PatientMasterVisitId: patientMasterVisitId,
+            ProviderId: providerId,
+            ServiceAreaId: serviceAreaId,
+            HtsEncounterId: htsEncounterId,
+            CoupleDiscordant: coupleDiscordant,
+            FinalResultGiven: finalResultGiven,
+            RoundOneTestResult: roundOneTestResult,
+            RoundTwoTestResult: roundTwoTestResult,
+            FinalResult: finalResult,
+            AcceptedPartnerListing: acceptedPartnerListing,
+            ReasonsDeclinePartnerListing: reasonsDeclinePartnerListing,
+            FinalResultsRemarks: finalResultsRemarks
+        };
+
+        return this.http.post<any>(this.API_URL + '/api/HtsEncounter/updateTestResults', JSON.stringify(Indata), httpOptions).pipe(
+            tap((updateTesting: any) => this.errorHandler.log(`successfully edited Testing`)),
+            catchError(this.errorHandler.handleError<any>('updateTesting'))
+        );
+    }
+
     public getHtsEncounterOptions(): Observable<any[]> {
         return this.http.get<any[]>(this.API_URL + this._lookupurl + '/htsOptions').pipe(
             tap(htsoptions => this.errorHandler.log('fetched all hts options')),
