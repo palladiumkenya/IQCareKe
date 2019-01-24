@@ -93,7 +93,15 @@ namespace BusinessProcess.CCC
             }
           
         }
-
+        public List<PatientAppointment> GetAppointmentId(int PatientId, int PatientMasterVisitId, DateTime date)
+        {
+            using (UnitOfWork unitOfWork = new UnitOfWork(new GreencardContext()))
+            {
+                List<PatientAppointment> appointments = unitOfWork.PatientAppointmentRepository.GetAppointmentId(PatientId,PatientMasterVisitId,date);
+                unitOfWork.Dispose();
+                return appointments;
+            }
+        }
         public List<PatientAppointment> GetByDateRange(DateTime startDate, DateTime endDate)
         {
             using (UnitOfWork unitOfWork = new UnitOfWork(new GreencardContext()))

@@ -1,0 +1,1 @@
+﻿ALTER TABLE PatientOutCome ADD CONSTRAINT PK_PatientOutCome_Id PRIMARY KEY(Id);

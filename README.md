@@ -1,0 +1,2 @@
+# IQCareKe
+IQCare— (International  Quality  Care)  is  a  freely available electronic health record application system  developed by Palladium since 2008. Ìt is free and open-source, freely licensed to use, copy, study, and change the software in any way, and the source code is openly shared so that people are encouraged to voluntarily improve the design of the software. It has been approved for National use by National AIDS/STD control program in collaboration with CDC.

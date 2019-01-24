@@ -24,6 +24,17 @@ namespace BusinessProcess.CCC
                 return Id;
             }
         }
+        public List<PatientCareEnding> GetPatientCareEndingsByVisitId(int patientId,int patientmastervisitid)
+        {
+            using (UnitOfWork unitOfWork = new UnitOfWork(new GreencardContext()))
+            {
+                var ptnCareending = unitOfWork.PatientCareEndingRepository.FindBy(x => x.PatientId == patientId &&x.PatientMasterVisitId==patientmastervisitid).OrderByDescending(x=>x.Id).ToList();
+                unitOfWork.Dispose();
+                return ptnCareending;
+
+            }
+
+        }
 
         public List<PatientCareEnding> GetPatientCareEndings(int patientId)
         {

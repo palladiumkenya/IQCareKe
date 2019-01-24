@@ -57,15 +57,28 @@ namespace IQCare.Web.CCC.WebService
         }
 
         [WebMethod(EnableSession = true)]
-        public string AddPatientPregnancy(int patientId, int patientMasterVisitId, DateTime LMP, DateTime EDD, string gravidae, string parity, int outcome, DateTime dateOfOutcome, int userId)
+        public string AddPatientPregnancy(int patientId, int patientMasterVisitId, DateTime LMP, DateTime EDD, string gravidae, string parity, string outcome, DateTime dateOfOutcome, int userId)
         {
             try
             {
                 var patientPregnancy = new PatientPregnancyManager();
                 patientId = Convert.ToInt32(HttpContext.Current.Session["PatientPK"]);
                 patientMasterVisitId = Convert.ToInt32(HttpContext.Current.Session["PatientmasterVisitId"]);
+                userId = Convert.ToInt32(HttpContext.Current.Session["AppUserId"]);
 
-                result = patientPregnancy.AddPatientPregnancy(patientId, patientMasterVisitId, LMP, EDD, gravidae, parity, outcome, dateOfOutcome, Convert.ToInt32(HttpContext.Current.Session["AppUserId"]));
+                int? gravidaeValue = null;
+                if (!string.IsNullOrWhiteSpace(gravidae))
+                    gravidaeValue = Convert.ToInt32(gravidae);
+
+                int? parityValue = null;
+                if (!string.IsNullOrWhiteSpace(parity))
+                    parityValue = Convert.ToInt32(parity);
+
+                int? outcomeValue = null;
+                if (!string.IsNullOrWhiteSpace(outcome))
+                    outcomeValue = Convert.ToInt32(outcome);
+
+                result = patientPregnancy.AddPatientPregnancy(patientId, patientMasterVisitId, LMP, EDD, gravidaeValue, parityValue, outcomeValue, dateOfOutcome, Convert.ToInt32(HttpContext.Current.Session["AppUserId"]));
                 jsonMessage = (result > 0) ? "Patient Pregnancy Added successfully!" : "";
             }
             catch (Exception e)
@@ -110,7 +123,7 @@ namespace IQCare.Web.CCC.WebService
                 int familyPlanningStatus = Convert.ToInt32(Session["FamilyPlanningStatus"].ToString());
                 //var familyPlanningMethods = JsonConvert.DeserializeObject<IEnumerable<object>>(PatientFPId);
                 var familyPlanningMethods = new JavaScriptSerializer().Deserialize<IEnumerable<object>>(PatientFPId);
-
+               
                 int count = familyPlanningMethods.Count();
                 if (count > 0)
                 {

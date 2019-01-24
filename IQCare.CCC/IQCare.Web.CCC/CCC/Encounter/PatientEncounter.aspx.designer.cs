@@ -58,6 +58,15 @@ namespace IQCare.Web.CCC.Encounter {
         protected global::System.Web.UI.HtmlControls.HtmlTable tblVL;
         
         /// <summary>
+        /// ucDisclosure control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::IQCare.Web.CCC.UC.Depression.ucDisclosure ucDisclosure;
+        
+        /// <summary>
         /// ucExtruder control.
         /// </summary>
         /// <remarks>

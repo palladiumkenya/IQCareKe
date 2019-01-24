@@ -20,6 +20,7 @@ using Entities.CCC.Baseline;
 using Interface.CCC.Baseline;
 using IQCare.Events;
 using Convert = System.Convert;
+using Entities.CCC.Encounter;
 
 namespace IQCare.Web.CCC.WebService
 {
@@ -177,7 +178,12 @@ namespace IQCare.Web.CCC.WebService
                         personContacts = personContactLookUpManager.GetPersonContactByPersonId(PersonId);
                         var address = "";
                         var phone = "";
-                        var facility = lookupLogic.GetFacility();
+
+                        var facility = lookupLogic.GetFacility(Session["AppPosID"].ToString());
+                        if (facility == null)
+                        {
+                            facility = lookupLogic.GetFacility();
+                        }
 
                         if (personContacts.Count > 0)
                         {
@@ -315,8 +321,12 @@ namespace IQCare.Web.CCC.WebService
                                     assigningFacility = facilityId.ToString();
                                 }
 
-                                patientIdentifierId = patientIdentifierManager.addPatientIdentifier(patientId,
-                                patientEnrollmentId, Convert.ToInt32(item.Key), item.Value, facilityId, assigningFacility);
+                                if(item.Value != "")
+                                {
+                                    patientIdentifierId = patientIdentifierManager.addPatientIdentifier(patientId,
+                                    patientEnrollmentId, Convert.ToInt32(item.Key), item.Value, facilityId, assigningFacility);
+                                }
+                                
                                 
                                 var identifierManager = new IdentifierManager();
                                 var identifierList = identifierManager.GetIdentifiersById(Convert.ToInt32(item.Key));
@@ -442,6 +452,10 @@ namespace IQCare.Web.CCC.WebService
                                 };
                                 greencardlookup.AddPersonToBlueCardLookup(greenCardLookup);
                             }
+                            else
+                            {
+                                mstPatientLogic.UpdateBlueCardCCCNumber(greencardptnpk[0].Ptn_Pk, enrollmentBlueCardId);
+                            }
                         }
                         pk.Add(patientLookManager.GetPatientByPersonId(PersonId));
                         List<PatientEntity> listPatient = new List<PatientEntity>();
@@ -453,7 +467,10 @@ namespace IQCare.Web.CCC.WebService
 
                         PatientEntity updatePatient = new PatientEntity();
                         updatePatient.ptn_pk = patient.ptn_pk;
-                        updatePatient.DateOfBirth = patient.DateOfBirth;
+                      
+                            updatePatient.DateOfBirth = DateTime.Parse(personDateOfBirth);
+                        
+                       // updatePatient.DateOfBirth = patient.DateOfBirth;
                         updatePatient.NationalId = nationalId;
                         updatePatient.FacilityId = patient.FacilityId;
 
@@ -503,7 +520,8 @@ namespace IQCare.Web.CCC.WebService
                                     var entityIdentifierAuditData = AuditDataUtility.Serializer(identifiersByPatientId);
                                     entityIdentifier.IdentifierValue = item.Value;
                                     entityIdentifier.AuditData = entityIdentifierAuditData;
-                                    patientIdentifierManager.UpdatePatientIdentifier(entityIdentifier, facilityId);
+
+                                        patientIdentifierManager.UpdatePatientIdentifier(entityIdentifier, facilityId);
                                 }
                             }
                             else
@@ -687,12 +705,13 @@ namespace IQCare.Web.CCC.WebService
                 PatientCareEndingManager careEndingManager = new PatientCareEndingManager();
                 PatientEnrollmentManager enrollmentManager = new PatientEnrollmentManager();
                 PatientLookupManager patientLookupManager = new PatientLookupManager();
-                
-                
 
+                PatientEncounterManager patientEncounterManager = new PatientEncounterManager();
+                int userId = Convert.ToInt32(Session["AppUserId"]);
 
                 patientId = int.Parse(Session["PatientPK"].ToString());
                 patientMasterVisitId = int.Parse(Session["PatientMasterVisitId"].ToString());
+
                 var enrollments = enrollmentManager.GetPatientEnrollmentByPatientId(patientId);
                 if (enrollments.Count > 0)
                     patientEnrollmentId = enrollments[0].Id;
@@ -730,6 +749,15 @@ namespace IQCare.Web.CCC.WebService
                     Session["PatientEditId"] = 0;
                     Session["PatientPK"] = 0;
                     Msg = "Patient has been successfully care ended";
+                    if (patientMasterVisitId > 0)
+                    {
+                       int Result = patientEncounterManager.AddpatientEncounter(patientId, patientMasterVisitId, patientEncounterManager.GetPatientEncounterId("EncounterType", "CareEnded".ToLower()), 203, userId);
+
+                        if (Result > 0) {
+                            Msg += "Patient Encounter Added Successfully!"; }
+                    }
+
+
                     MessageEventArgs args = new MessageEventArgs()
                     {
                         PatientId = patientId,
@@ -753,6 +781,27 @@ namespace IQCare.Web.CCC.WebService
             }
             return Msg;
         }
+
+      
+        [WebMethod(EnableSession =true)]
+        public PatientCareEnding GetPatientCareEndingDetailsByVisitId(int PatientMasterVisitId)
+        {
+            PatientCareEndingManager careEndingManager = new PatientCareEndingManager();
+            List<PatientCareEnding> careEndings = new List<PatientCareEnding>();
+            patientId = int.Parse(Session["PatientPK"].ToString());
+            if (PatientMasterVisitId > 0)
+            {
+                var careEnded = careEndingManager.GetPatientCareEndingByVisitId(patientId, PatientMasterVisitId);
+                if (careEnded.Count > 0)
+                {
+                    careEndings = careEnded;
+                }
+            
+            }
+            return careEndings[0];
+
+        }
+    
 
         [WebMethod(EnableSession = true)]
         public List<CareEndingDetails> GetPatientCareEnded()

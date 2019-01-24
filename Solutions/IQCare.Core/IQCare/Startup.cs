@@ -1,7 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.Diagnostics;
-using IQCare.Common.BusinessProcess.Interfaces;
-using IQCare.Common.BusinessProcess.Services;
 using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -11,6 +9,9 @@ using Microsoft.Extensions.DependencyInjection;
 using System.IO;
 using System.Reflection;
 using IQCare.Helpers;
+using AutoMapper;
+using IQCare.PMTCT.BusinessProcess.MapperProfiles;
+using IQCare.PMTCT.Services.Interface.Triage;
 
 namespace IQCare
 {
@@ -40,7 +41,8 @@ namespace IQCare
 
             //Context
             services.AddDatabase(Configuration, ConnectionString);
-            services.AddCommonDatabase(Configuration, ConnectionString);
+            services.AddCommonDatabase(Configuration);
+            services.AddPmtctDatabase(Configuration);
             services.AddMediatR();
             var assemblyNames =  Assembly.GetEntryAssembly().GetReferencedAssemblies();
             List<Assembly> assemblies = new List<Assembly>();
@@ -48,13 +50,21 @@ namespace IQCare
             {
                 assemblies.Add(Assembly.Load(assemblyName));
             }
+           
             services.AddMediatR(assemblies);
+            services.AddAutoMapper(assemblies);
+
             services.AddMvc()
                 .AddMvcOptions(o => o.OutputFormatters.Add(new XmlDataContractSerializerOutputFormatter()))
                 .AddJsonOptions(o =>
                     o.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
 
             services.AddCors();
+            services.AddCommonDatabaseFunc();
+
+            services.AddGetZscoreParametersService();
+            services.AddZscoreCalculatorServices();
+            services.AddZscoreTypeAndSprocDictionaryMapping();
 
             foreach (var VARIABLE in services)
             {

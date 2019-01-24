@@ -34,7 +34,17 @@ namespace BusinessProcess.CCC.Baseline
         {
             using (UnitOfWork unitOfWork = new UnitOfWork(new GreencardContext()))
             {
-                var vaccinations = unitOfWork.PatientVaccinationRepository.FindBy(x => x.PatientId == patientId).ToList();
+                var vaccinations = unitOfWork.PatientVaccinationRepository.FindBy(x => x.PatientId == patientId && x.DeleteFlag == false).ToList();
+                unitOfWork.Dispose();
+                return vaccinations;
+            }
+        }
+
+        public List<PatientVaccination> GetPatientVaccinationsById(int vaccineId)
+        {
+            using (UnitOfWork unitOfWork = new UnitOfWork(new GreencardContext()))
+            {
+                var vaccinations = unitOfWork.PatientVaccinationRepository.FindBy(x => x.Id == vaccineId && x.DeleteFlag == false).ToList();
                 unitOfWork.Dispose();
                 return vaccinations;
             }
@@ -42,7 +52,24 @@ namespace BusinessProcess.CCC.Baseline
 
         public int updatePatientVaccination(PatientVaccination patientVaccination)
         {
-            throw new NotImplementedException();
+            using (UnitOfWork unitOfWork = new UnitOfWork(new GreencardContext()))
+            {
+                unitOfWork.PatientVaccinationRepository.Update(patientVaccination);
+                Result = unitOfWork.Complete();
+                unitOfWork.Dispose();
+                return Result;
+              
+            }
+        }
+
+        public void deletePatientVaccination(PatientVaccination patientVaccination)
+        {
+            using (UnitOfWork unitOfWork = new UnitOfWork(new GreencardContext()))
+            {
+                unitOfWork.PatientVaccinationRepository.Update(patientVaccination);
+                unitOfWork.Complete();
+                unitOfWork.Dispose();
+            }
         }
 
         public List<PatientVaccination> VaccineExists(int patientId, int vaccine, string vaccineStage)
@@ -50,7 +77,7 @@ namespace BusinessProcess.CCC.Baseline
             using (UnitOfWork unitOfWork = new UnitOfWork(new GreencardContext()))
             {
                 var vaccinations = unitOfWork.PatientVaccinationRepository
-                    .FindBy(x => x.PatientId == patientId && x.Vaccine == vaccine && x.VaccineStage == vaccineStage)
+                    .FindBy(x => x.PatientId == patientId && x.Vaccine == vaccine && x.VaccineStage == vaccineStage && x.DeleteFlag == false)
                     .ToList();
                 unitOfWork.Dispose();
                 return vaccinations;

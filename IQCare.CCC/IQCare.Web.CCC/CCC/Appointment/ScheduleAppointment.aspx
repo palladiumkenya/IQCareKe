@@ -29,6 +29,13 @@
                                 </div>
                                 <div class="col-md-12">
                                     <div class='input-group date' id='PersonAppointmentDate'>
+										<span class="input-group-addon">
+											<span class="glyphicon glyphicon-calendar"></span>
+										</span>
+										<asp:TextBox runat="server"  CssClass="form-control input-sm" ID="AppointmentDate" onblur="DateFormat(this,this.value,event,false,'3')" onkeyup="DateFormat(this,this.value,event,false,'3')" required ="True" data-parsley-min-message="Input the appointment date"></asp:TextBox>
+									</div>
+                                    <%--<div class="datepicker fuelux form-group" id="PersonAppointmentDate">
+                                    <div class='input-group date' id='PersonAppointmentDate'>
                                         <span class="input-group-addon">
                                             <span class="glyphicon glyphicon-calendar"></span>
                                         </span>
@@ -124,6 +131,10 @@
                                                 </div>
                                             </div>
                                         </div>
+                                    </div>--%>
+                                <%--</div>
+                            </div>
+                        </div>
                                     </div>--%>
                                 </div> 
 
@@ -231,33 +242,23 @@
     </div>
 
     <script type="text/javascript">
-        //$('#PersonAppointmentDate').datepicker({
-        //    allowPastDates: false,
-        //    Date: 0,
-        //    momentConfig: { culture: 'en', format: 'DD-MMM-YYYY' }
-        //});
-
-
+        $("#PersonAppointmentDate").datetimepicker({
+            defaultDate: $("#<%=AppointmentDate.ClientID%>").val(),
+            format: 'DD-MMM-YYYY',
+            allowInputToggle: true,
+            useCurrent: false
+        }).on("dp.change", function (selectedDate) {
+            var futureDate = moment().add(7, 'months').format('DD-MMM-YYYY');
+            var appDate = $("#<%=AppointmentDate.ClientID%>").val();
+            if (moment('' + appDate + '').isAfter(futureDate)) {
+                toastr.error("Appointment date cannot be set to over 7 months");
+                $("#<%=AppointmentDate.ClientID%>").val("");
+                return false;
+            }
+            AppointmentCount();
+        });
 
         $(document).ready(function () {
-
-          //  $("#<%=AppointmentDate.ClientID%>").val("09-JUN-2018");
-            $("#PersonAppointmentDate").datetimepicker({
-                defaultDate:$("#<%=AppointmentDate.ClientID%>").val(),
-                format: 'DD-MMM-YYYY',
-                allowInputToggle: true,
-                useCurrent: false
-            }).on("dp.change", function (selectedDate) {
-                var futureDate = moment().add(7, 'months').format('DD-MMM-YYYY');
-                var appDate = $("#<%=AppointmentDate.ClientID%>").val();
-                if (moment('' + appDate + '').isAfter(futureDate)) {
-                    toastr.error("Appointment date cannot be set to over 7 months");
-                    $("#<%=AppointmentDate.ClientID%>").val("");
-                    return false;
-                }
-                AppointmentCount();
-            });
-
             $("#AppointmentDate").val("");
             $("#btnSaveAppointment").click(function () {
                 var appointmentid = <%=AppointmentId%>;
@@ -268,14 +269,20 @@
                         toastr.error("Appointment date cannot be set to over 7 months");
                         return false;
                     }
+                    if (appointmentid > 0) {
+                        updateAppointment();
+                    }
+                    else {
+                        checkExistingAppointment();
+                    }
                    // checkExistingAppointment();
                 }
-                if (appointmentid > 0) {
-                    updateAppointment();
-                }
-                else {
-                    checkExistingAppointment();
-                }
+                //if (appointmentid > 0) {
+                //    updateAppointment();
+                //}
+                //else {
+                //    checkExistingAppointment();
+                //}
             });
             $("#btnReset").click(function () {
                 resetFields();
@@ -294,6 +301,7 @@
 
         });
 
+        
 <%--        $("#AppointmentDate").change(function () {
             var futureDate = moment().add(7, 'months').format('DD-MMM-YYYY');
             var appDate = $("#<%=AppointmentDate.ClientID%>").val();
@@ -305,6 +313,8 @@
             AppointmentCount();
         });--%>
 
+        <%--$('#PersonAppointmentDate').on('changed.fu.datepicker dateClicked.fu.datepicker', function (event, date) {
+            alert("Appointment Date Changed");
 <%--        $('#PersonAppointmentDate').on('changed.fu.datepicker dateClicked.fu.datepicker', function (event, date) {
             var futureDate = moment().add(7, 'months').format('DD-MMM-YYYY');
             var appDate = $("#<%=AppointmentDate.ClientID%>").val();
@@ -359,10 +369,11 @@
                         if (response.d != null) {
                             toastr.error("Appointment already exists");
                             return false;
-                        } else {
-                            addPatientAppointment();
                         }
-                       
+                        else
+                        {
+                            addPatientAppointment();
+                        } 
                     },
                     error: function (msg) {
                         //alert(msg.responseText);
@@ -409,6 +420,35 @@
             var patientId = <%=PatientId%>;
             var patientMasterVisitId = <%=PatientMasterVisitId%>;
             var userId = <%=UserId%>;
+            var appointmentid = <%=AppointmentId%>
+            $.ajax({
+                    type: "POST",
+                    url: "../WebService/PatientService.asmx/UpdatePatientAppointment",
+                    data: "{'patientId': '" + patientId + "','patientMasterVisitId': '" + patientMasterVisitId + "','appointmentDate': '" + appointmentDate + "','description': '" + description + "','reasonId': '" + reason + "','serviceAreaId': '" + serviceArea + "','statusId': '" + status + "','differentiatedCareId': '" + differentiatedCareId + "','userId':'" + userId + "','appointmentId':'" + appointmentid+"'}",
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    success: function (response) {
+                        toastr.success(response.d, "Appointment saved successfully");
+                        resetFields();
+                        setTimeout(function () { window.location.href = '<%=ResolveClientUrl("~/CCC/patient/patientHome.aspx") %>'; }, 2500);
+                },
+                error: function (response) {
+                    toastr.error(response.d, "Appointment not saved");
+                }
+            });
+        }
+
+        <%--function updateAppointment() {
+            var serviceArea = $("#<%=ServiceArea.ClientID%>").val();
+            var reason = $("#<%=Reason.ClientID%>").val();
+            var description = $("#<%=description.ClientID%>").val();
+            var status = $("#<%=status.ClientID%>").val();
+            var differentiatedCareId = $("#<%=DifferentiatedCare.ClientID%>").val();
+            /*if (status === '') { status = null }*/
+            var appointmentDate = $("#<%=AppointmentDate.ClientID%>").val();
+            var patientId = <%=PatientId%>;
+            var patientMasterVisitId = <%=PatientMasterVisitId%>;
+            var userId = <%=UserId%>;
             var appointmentid = <%=AppointmentId%>;
             $.ajax({
                 type: "POST",
@@ -425,15 +465,20 @@
                     toastr.error(response.d, "Appointment not saved");
                 }
             });
-        }
+        }--%>
 
         function resetFields(parameters) {
-            $("#ServiceArea").val("");
-            $("#Reason").val("");
-            $("#DifferentiatedCare").val("");
-            $("#description").val("");
-            $("#AppointmentDate").val("");
+            var appointmentid = <%=AppointmentId%>;
+            if (appointmentid < 1) {
+                $("#ServiceArea").val("");
+                $("#Reason").val("");
+                $("#DifferentiatedCare").val("");
+                $("#description").val("");
+                $("#AppointmentDate").val("");
+            }
         }
+
+        
     </script>
 </asp:Content>
 

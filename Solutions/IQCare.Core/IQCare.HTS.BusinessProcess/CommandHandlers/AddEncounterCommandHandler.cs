@@ -9,6 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using IQCare.Library;
 using Serilog;
 
 namespace IQCare.HTS.BusinessProcess.CommandHandlers
@@ -43,7 +44,8 @@ namespace IQCare.HTS.BusinessProcess.CommandHandlers
                         TestedAs = request.Encounter.TestedAs,
                         TestEntryPoint = request.Encounter.TestEntryPoint,
                         TestingStrategy = request.Encounter.TestingStrategy,
-                        EncounterType = request.Encounter.EncounterType
+                        EncounterType = request.Encounter.EncounterType,
+                        HivCounsellingDone = request.Encounter.HivCounsellingDone
                     };
 
                     await _unitOfWork.Repository<HtsEncounter>().AddAsync(htsEncounter);

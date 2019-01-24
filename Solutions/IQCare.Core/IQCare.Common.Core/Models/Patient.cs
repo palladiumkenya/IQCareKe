@@ -22,5 +22,8 @@ namespace IQCare.Common.Core.Models
         public DateTime CreateDate { get; set; }
         public string AuditData { get; set; }
         public DateTime RegistrationDate { get; set; }
+
+       // public List<PreventiveService> PreventiveServices { get; set; }
+        //public List<PatientCounselling> PatientCounsellings { get; set; }
     }
 }

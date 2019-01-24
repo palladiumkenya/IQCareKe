@@ -1,0 +1,1 @@
+﻿ALTER TABLE PatientDelivery ALTER COLUMN DurationOfLabour VARCHAR(50) NULL

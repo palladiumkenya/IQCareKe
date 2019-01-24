@@ -172,11 +172,12 @@
     </style>
     
     <script type="text/javascript">
+       
         $(document).ready(function () {
             var newdate = new Date();
             var today = moment(newdate).add(2, 'hours');
             var patType = '<%=patType%>';
-            var appLocation = '<%=AppLocation%>';
+            var appLocation = "<%=AppLocation%>";
             //console.log(today);
 
             $('#PersonDOBdatepicker').datetimepicker({
@@ -246,6 +247,7 @@
             var patientType = '<%=Session["PatientType"]%>';
             
             //console.log(code);
+           
             if (personDOB != null && personDOB !="") {
                 $("#DateOfBirth").addClass("noneevents");
                 personDOB = new Date(personDOB);
@@ -305,9 +307,12 @@
                 var enrollmentDate = $('#DateOfEnrollment').val();
                 var personDateOfBirth = $("#PersonDOB").val();
 
+                console.log("EnrollmentDate: " + enrollmentDate);
+                console.log("DateOfBirth: " + personDateOfBirth);
+
                 var entryPointId = $("#entryPoint").val();
 
-                var isEnrollmentDateBeforeDob = moment(moment(moment(enrollmentDate, 'DD-MMM-YYYYY').toDate()).format('DD-MMM-YYYY')).isBefore(moment(moment(personDateOfBirth, 'DD-MMM-YYYYY').toDate()).format('DD-MMM-YYYY'));
+                var isEnrollmentDateBeforeDob = moment(moment(enrollmentDate, 'DD-MMM-YYYYY').toDate()).isBefore(moment(personDateOfBirth, 'DD-MMM-YYYYY').toDate());
 
                 if (isEnrollmentDateBeforeDob) {
                     toastr.error("Enrollment Date should not be before date of birth", "Patient Enrollment");
@@ -368,10 +373,12 @@
 
                 var enrollmentDate = $('#DateOfEnrollment').val();
                 var personDateOfBirth = $("#PersonDOB").val();
+                console.log("EnrollmentDate: " + enrollmentDate);
+                console.log("DateOfBirth: " + personDateOfBirth);
 
                 var entryPointId = $("#entryPoint").val();
 
-                var isEnrollmentDateBeforeDob = moment(moment(moment(enrollmentDate, 'DD-MMM-YYYYY').toDate()).format('DD-MMM-YYYY')).isBefore(moment(moment(personDateOfBirth, 'DD-MMM-YYYYY').toDate()).format('DD-MMM-YYYY'));
+                var isEnrollmentDateBeforeDob = moment(moment(enrollmentDate, 'DD-MMM-YYYYY').toDate()).isBefore(moment(personDateOfBirth, 'DD-MMM-YYYYY').toDate());
 
                 if (isEnrollmentDateBeforeDob) {
                     toastr.error("Enrollment Date should not be before date of birth", "Patient Enrollment");
@@ -567,7 +574,7 @@
                         //generate('success', '<p>,</p>' + response.d);
                         var messageResponse = JSON.parse(response.d);
                         //console.log(messageResponse);
-                        var table = "<table width='100%'>";
+                      var table = "<table width='100%'>";
                         for (var i = 0; i < messageResponse.length; i++) {
                             //console.log(messageResponse[i]);
                             table += "<tr>";
@@ -708,7 +715,16 @@
 
                         //console.log(messageResponse);
                         if (messageResponse.DOB != null) {
-                            $("#PersonDOB").val(messageResponse.DOB);
+
+                            var personDOB = '<%=Session["PersonDob"]%>';
+                            if (personDOB != null && personDOB != "") {
+                                $("#DateOfBirth").addClass("noneevents");
+                                personDOB = new Date(personDOB);
+                                $('#PersonDOB').val(moment(personDOB.toISOString()).format('DD-MMM-YYYY'));
+                            }
+                            else {
+                                $("#PersonDOB").val(messageResponse.DOB);
+                            }
                             $("#<%=dobPrecision.ClientID%>").val(messageResponse.DobPrecision);
                             $("#PersonDOB").prop('disabled', true);
                         }

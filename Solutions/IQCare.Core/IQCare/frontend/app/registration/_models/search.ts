@@ -3,4 +3,5 @@ export class Search {
     firstName: string = '';
     midName: string = '';
     lastName: string = '';
+    fullName: string = '';
 }

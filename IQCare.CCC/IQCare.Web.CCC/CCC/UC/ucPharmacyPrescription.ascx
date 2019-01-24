@@ -2,7 +2,17 @@
 
 <asp:HiddenField ID="drugID" runat="server" ClientIDMode="Static" />
 <asp:HiddenField ID="drugAbbr" runat="server" ClientIDMode="Static" />
+<style>
 
+    .VisibleFrequency{
+         visibility: hidden;
+         display: none;
+    }
+    .VisibleMorningEvening{
+        visibility: visible;
+        display:table-row;
+    }
+</style>
 <div class="col-md-12" style="padding-top: 10px" id="PharmacySection" data-parsley-validate="true" data-show-errors="true">
     <%--<div class="panel panel-info">--%>
 
@@ -66,11 +76,18 @@
                                         
                                         <div class="col-md-12">
                                             <div class="col-md-2 pull-left"><label class="control-label pull-left">Batch</label></div>
-                                            <div class="col-md-1 pull-left"><label class="control-label pull-left">Dose</label></div>
-                                            <div class="col-md-2 pull-left"><label class="control-label pull-left">Frequency</label></div>
+                                            <div class="col-md-1 pull-left  VisibleFrequency"><label class="control-label pull-left">Dose</label></div>
+                                            <div class="col-md-2 pull-left  VisibleFrequency"><label class="control-label pull-left">Frequency</label></div>
+
+
+                                            <div class="col-md-1 pull-left VisibleMorningEvening"><label class="control-label pull-left">Morning</label></div>
+                                            <div class="col-md-1 pull-left VisibleMorningEvening"><label class="control-label pull-left">Midday</label></div>
+                                            <div class="col-md-1 pull-left VisibleMorningEvening"><label class="control-label pull-left">Evening</label></div>
+                                            <div class="col-md-1 pull-left  VisibleMorningEvening"><label class="control-label pull-left">Night</label></div>
+
                                             <div class="col-md-1 pull-left"><label class="control-label pull-left">Duration</label></div>
                                             <div class="col-md-2 pull-left"><label class="control-label pull-left">Qty Prescribed</label></div>
-                                            <div class="col-md-2 pull-left"><label class="control-label pull-left">Qty Dispensed</label></div>
+                                            <div class="col-md-1 pull-left"><label class="control-label pull-left">Qty Dispensed</label></div>
                                             <div class="col-md-1 pull-left"><label class="control-label pull-left">Prophylaxis</label></div>
                                             <div class="col-md-1 pull-left"><label class="control-label pull-left"></label></div>
                                         </div>  
@@ -78,31 +95,62 @@
                                             <div class="col-md-2">
                                                 <asp:DropDownList ID="ddlBatch" runat="server" CssClass="form-control input-sm" ClientIDMode="Static"></asp:DropDownList>
                                             </div>
-                                            <div class="col-md-1"><input type="text" class="form-control input-sm" runat="server" id="txtDose" ClientIDMode="Static" onkeyup="CalculateQtyPrescribed();" /> </div>
-                                            <div class="col-md-2">
-                                                <asp:DropDownList ID="ddlFreq" runat="server" CssClass="form-control input-sm" ClientIDMode="Static" onchange="CalculateQtyPrescribed();"></asp:DropDownList>
+                                          <div class="col-md-1 VisibleFrequency"><input type="text" class="form-control input-sm " runat="server" id="txtDose" ClientIDMode="Static" onkeyup="CalculateQtyPrescribed();" /> </div>
+                                            <div class="col-md-2 VisibleFrequency">
+                                                <asp:DropDownList ID="ddlFreq" runat="server" CssClass="form-control input-sm " ClientIDMode="Static" onchange="CalculateQtyPrescribed();"></asp:DropDownList>
                                             </div>
+                                            <div class="col-md-1 VisibleMorningEvening"><input type="text" class="form-control input-sm" runat="server" id="txtMorning" ClientIDMode="Static" onkeyup="CalculateQtyPrescribed();" /> </div>
+                                            <div class="col-md-1 VisibleMorningEvening"><input type="text" class="form-control input-sm " runat="server" id="txtMidday" ClientIDMode="Static" onkeyup="CalculateQtyPrescribed();" /> </div>
+                                            <div class="col-md-1 VisibleMorningEvening"><input type="text" class="form-control input-sm " runat="server" id="txtEvening" ClientIDMode="Static" onkeyup="CalculateQtyPrescribed();" /> </div>
+                                            <div class="col-md-1 VisibleMorningEvening"><input type="text" class="form-control input-sm" runat="server" id="txtNight" ClientIDMode="Static" onkeyup="CalculateQtyPrescribed();" /> </div>
+
                                             <div class="col-md-1"><input type="text" class="form-control input-sm" runat="server" id="txtDuration" ClientIDMode="Static" onkeyup="CalculateQtyPrescribed();" /> </div>
                                             <div class="col-md-2"><input type="text" class="form-control input-sm" runat="server" id="txtQuantityPres" ClientIDMode="Static" /> </div>
-                                            <div class="col-md-2"><input type="text" class="form-control input-sm" runat="server" id="txtQuantityDisp" ClientIDMode="Static" onblur="ChkQtyDispensed();" /> </div>
+                                            <div class="col-md-1"><input type="text" class="form-control input-sm" runat="server" id="txtQuantityDisp" ClientIDMode="Static" onblur="ChkQtyDispensed();" /> </div>
                                             <div class="col-md-1"><input type="checkbox" runat="server" id="chkProphylaxis" ClientIDMode="Static" /> </div>
                                             <div class="col-md-1 pull-left">
-                                                <button type="button" Class="btn btn-info btn-lg fa fa-plus-circle" id="btnAddDrugs" onclick="AddDrugPrescription();">Add</button>
+                                                <button type="button" Class="btn btn-info btn-lg fa fa-plus-circle" id="btnAddDrugs" onclick="AddCorrectDrugPrescription();">Add</button>
                                             </div>
                                         </div>
-                                        <div class="col-md-12">
-                                            <div style="min-height: 10px; max-height: 550px; overflow-y: auto; overflow-x: hidden;">
+                                        <div class="col-md-12 VisibleFrequency">
+                                            <div style="min-height: 10px; max-height: 550px; overflow-y: auto; overflow-x: auto;">
+                                                <table id="dtlDrugPrescriptionFrequency" class="table table-bordered table-striped" style="width:100%">
+                                                    <thead>
+                                                        <tr>
+                                                            <th><span class="text-primary">DrugId</span></th>
+                                                            <th><span class="text-primary">BatchId</span></th>
+                                                            <th> <span class="text-primary">FreqId</span></th>
+                                                            <th><span class="text-primary">DrugAbbr</span></th>
+                                                            <th><span class="text-primary">Drug</span></th>
+                                                            <th><span class="text-primary">Batch</span></th>
+                                                            <th ><span class="text-primary">Dose</span></th>
+                                                            <th><span class="text-primary" >Frequency</span></th>
+                                                           <th><span class="text-primary">Duration</span></th>
+                                                            <th><span class="text-primary">Qty Prescribed</span></th>
+                                                            <th><span class="text-primary">Qty Dispensed</span></th>
+                                                            <th><span class="text-primary">Prophylaxis</span></th>
+                                                            <th><span class="text-primary"></span></th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody></tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="col-md-12 VisibleMorningEvening">
+                                            <div style="min-height: 10px; max-height: 550px; overflow-y: auto; overflow-x: auto;">
                                                 <table id="dtlDrugPrescription" class="table table-bordered table-striped" style="width:100%">
                                                     <thead>
                                                         <tr>
                                                             <th><span class="text-primary">DrugId</span></th>
                                                             <th><span class="text-primary">BatchId</span></th>
-                                                            <th><span class="text-primary">FreqId</span></th>
                                                             <th><span class="text-primary">DrugAbbr</span></th>
                                                             <th><span class="text-primary">Drug</span></th>
                                                             <th><span class="text-primary">Batch</span></th>
-                                                            <th><span class="text-primary">Dose</span></th>
-                                                            <th><span class="text-primary">Frequency</span></th>
+                                                            <th><span class="text-primary ">Morning</span></th>
+                                                            <th ><span class="text-primary">Midday</span></th>
+                                                            <th ><span class="text-primary">Evening</span></th>
+                                                            <th ><span class="text-primary">Night</span></>
                                                             <th><span class="text-primary">Duration</span></th>
                                                             <th><span class="text-primary">Qty Prescribed</span></th>
                                                             <th><span class="text-primary">Qty Dispensed</span></th>
@@ -355,7 +403,8 @@
     var patType = "<%=patType.ToString().ToLower() %>";
     var gender = "<%=Session["Gender"]%>";
     var age = "<%=Session["Age"]%>";
-
+    var DosageFrequency = "<%= this.DosageFrequency %>";
+    var DrugPrescriptionTable;
     //Date processing
     var today = new Date();
     var tomorrow = new Date();
@@ -371,6 +420,23 @@
         enrolmentDate = 0;
     
     $(document).ready(function () {
+
+        if (DosageFrequency.toString() == "1") {
+            $('.VisibleFrequency').css('visibility', 'visible');
+
+            $('.VisibleMorningEvening').css('visibility', 'hidden');
+            
+            $('.VisibleMorningEvening').css('display', 'none');
+            $('.VisibleFrequency').css('display', 'inline');
+          
+
+        }
+        else {
+            $('.VisibleFrequency').css('visibility', 'hidden');
+            $('.VisibleFrequency').css('display', 'none');
+             $('.VisibleMorningEvening').css('display', 'inline');
+            $('.VisibleMorningEvening').css('visibility', 'visible');
+        }
         
         //alert(pmscmSamePointDispense);
         ///////////////////////////////////////////////////////////////////////////////////////
@@ -507,9 +573,60 @@
 
     });
 
+    //$(function () {
+    //    var regExp = /[a-z]/i;
+    //    $('#txtDose').on('keydown keyup', function (e) {
+    //        var value = String.fromCharCode(e.which) || e.key;
+
+    //        // No letters
+    //        if (regExp.test(value)) {
+    //            e.preventDefault();
+    //            return false;
+    //        }
+    //    });
+    //});
     $(function () {
         var regExp = /[a-z]/i;
-        $('#txtDose').on('keydown keyup', function (e) {
+        $('#txtMorning').on('keydown keyup', function (e) {
+            var value = String.fromCharCode(e.which) || e.key;
+
+            // No letters
+            if (regExp.test(value)) {
+                e.preventDefault();
+                return false;
+            }
+        });
+    });
+
+    $(function () {
+        var regExp = /[a-z]/i;
+        $('#txtMidday').on('keydown keyup', function (e) {
+            var value = String.fromCharCode(e.which) || e.key;
+
+            // No letters
+            if (regExp.test(value)) {
+                e.preventDefault();
+                return false;
+            }
+        });
+    });
+
+    $(function () {
+        var regExp = /[a-z]/i;
+        $('#txtEvening').on('keydown keyup', function (e) {
+            var value = String.fromCharCode(e.which) || e.key;
+
+            // No letters
+            if (regExp.test(value)) {
+                e.preventDefault();
+                return false;
+            }
+        });
+    });
+
+    $(function () {
+        var regExp = /[a-z]/i;
+        $('#txtNight').on('keydown keyup', function (e) {
             var value = String.fromCharCode(e.which) || e.key;
 
             // No letters
@@ -559,19 +676,21 @@
         });
     });
 
-      var DrugPrescriptionTable = $('#dtlDrugPrescription').DataTable({
-                ajax: {
-                    type: "POST",
-                    url: "../WebService/PatientEncounterService.asmx/GetPharmacyPrescriptionDetails",
-                    dataSrc: 'd',
-                    contentType: "application/json; charset=utf-8",
-                    dataType: "json"
-                },
-                paging: false,
-                searching: false,
-                info: false,
-                ordering: false,
-                columnDefs: [
+
+    if (DosageFrequency.toString() == "1") {
+       DrugPrescriptionTable = $('#dtlDrugPrescriptionFrequency').DataTable({
+            ajax: {
+                type: "POST",
+                url: "../WebService/PatientEncounterService.asmx/GetPharmacyPrescriptionDetails",
+                dataSrc: 'd',
+                contentType: "application/json; charset=utf-8",
+                dataType: "json"
+            },
+            paging: false,
+            searching: false,
+            info: false,
+            ordering: false,
+            columnDefs: [
                 {
                     "targets": [0],
                     "visible": false,
@@ -586,34 +705,108 @@
                     "targets": [2],
                     "visible": false,
                     "searchable": false
+                }
+                //,
+                //{
+                //    "targets": [3],
+                //    "visible": false,
+                //    "searchable": false
+                //}
+            ]
+        });
+    }
+    else {
+         DrugPrescriptionTable = $('#dtlDrugPrescription').DataTable({
+            ajax: {
+                type: "POST",
+                url: "../WebService/PatientEncounterService.asmx/GetPharmacyPrescriptionDetails",
+                dataSrc: 'd',
+                contentType: "application/json; charset=utf-8",
+                dataType: "json"
+            },
+            paging: false,
+            searching: false,
+            info: false,
+            ordering: false,
+            columnDefs: [
+                {
+                    "targets": [0],
+                    "visible": false,
+                    "searchable": false
                 },
                 {
-                    "targets": [3],
+                    "targets": [1],
+                    "visible": false,
+                    "searchable": false
+                },
+                {
+                    "targets": [2],
                     "visible": false,
                     "searchable": false
                 }
-                    ]
+                //,
+                //{
+                //    "targets": [3],
+                //    "visible": false,
+                //    "searchable": false
+                //}
+            ]
+        });
+
+    }
+    $("#dtlDrugPrescription").on('click', '.btnDelete',
+            function () {
+                DrugPrescriptionTable
+                    .row($(this).parents('tr'))
+                    .remove()
+                    .draw();
+
+                var index = drugNameArr.indexOf($(this).parents('tr').find('td:eq(0)').text());
+                if (index > -1) {
+                    drugNameArr.splice(index, 1);
+                }
+
+                var index1 = batchNoArr.indexOf($(this).parents('tr').find('td:eq(1)').text());
+                if (index1 > -1) {
+                    batchNoArr.splice(index1, 1);
+                }
+            });
+    $("#dtlDrugPrescriptionFrequency").on('click', '.btnDelete',
+        function () {
+
+            var res = $(this).parents('tr').find('td:eq(0)').text();
+            var res2 = $(this).parents('tr').find('td:eq(1)').text();
+            var res3= $(this).parents('tr').find('td:eq(2)').text();
+            console.log(res);
+            console.log(res2);
+            console.log(res3);
+            console.log(drugNameArr);
+            console.log(batchNoArr);
+                var index = drugNameArr.indexOf($(this).parents('tr').find('td:eq(1)').text()); 
+                console.log(index);
+
+                if (index > -1) {
+
+                    drugNameArr.splice(index, 1);
+                }
+
+                var index1 = batchNoArr.indexOf($(this).parents('tr').find('td:eq(2)').text());
+                console.log(index1);
+                if (index1 > -1) {
+                    batchNoArr.splice(index1, 1);
+                }
+
+                 DrugPrescriptionTable
+                    .row($(this).parents('tr'))
+                    .remove()
+                .draw();
+
+             console.log(drugNameArr);
+            console.log(batchNoArr);
             });
 
-           $("#dtlDrugPrescription").on('click','.btnDelete',
-                function () {
-                    DrugPrescriptionTable
-                        .row($(this).parents('tr'))
-                        .remove()
-                        .draw();
-
-                    var index = drugNameArr.indexOf($(this).parents('tr').find('td:eq(0)').text());
-                    if (index > -1) {
-                        drugNameArr.splice(index, 1);
-                    }
-
-                    var index1 = batchNoArr.indexOf($(this).parents('tr').find('td:eq(1)').text());
-                    if (index1 > -1) {
-                        batchNoArr.splice(index1, 1);
-                    }
-                });
-
-      
+    
+    
            function SelectDrug() {
                    var result = this.value.split("~");
                    if (pmscmSamePointDispense ==="PM/SCM With Same point dispense"){ getBatches(result[0]);}
@@ -665,8 +858,17 @@
         $("#txtDateDispensed").val("");
 
         $("#ddlBatch").val("0");
-        $("#txtDose").val("");
-        $("#ddlFreq").val("0");
+        if (DosageFrequency.toString() == "1") {
+            $("#txtDose").val("");
+            $("#ddlFreq").val("0");
+        }
+        else {
+
+            $("#txtMorning").val("0");
+            $("#txtMidday").val("0");
+            $("#txtEvening").val("0");
+            $("#txtNight").val("0");
+        }
         $("#txtDuration").val("");
         $("#txtQuantityDisp").val("");
         $("#txtQuantityPres").val("");
@@ -803,8 +1005,232 @@
                    }
                }
            });
-       }
+    }
 
+   function DrawDataTable(ctrlName, arrUI) {
+
+    if (arrUI.length > 0) {
+        var table = $("#" + ctrlName).DataTable();
+        table.rows.add(arrUI).draw().nodes();
+    }
+}
+
+    var drugNameArr = new Array();
+var batchNoArr = new Array();
+    function AddCorrectDrugPrescription() {
+        console.log(DosageFrequency.toString());
+        if (DosageFrequency.toString() == "1") {
+             var drugId = $("#drugID").val();
+            var drugAbbr = $("#drugAbbr").val();
+            var drugName = $("#txtDrugs").val();
+            var batchId = $('#ddlBatch').find(":selected").val();
+            var batchText = $('#ddlBatch').find(":selected").text();
+            var dose = $("#txtDose").val();
+            var freqId = $('#ddlFreq').find(":selected").val();
+            var freqTxt = $('#ddlFreq').find(":selected").text();
+            //var morning = $("#txtMorning").val();
+            //var midday = $("#txtMidday").val();
+            //var evening = $("#txtEvening").val();
+            //var night = $("#txtNight").val();
+
+            var duration = $("#txtDuration").val();
+            var quantityPres = $("#txtQuantityPres").val();
+            var quantityDisp = $("#txtQuantityDisp").val();
+            batchText = batchText.substring(0, batchText.indexOf('~'));
+
+
+            if ($('#chkProphylaxis').is(":checked")) {
+                var prophylaxis = 1;
+            }
+            else {
+                var prophylaxis = 0;
+            }
+
+            //Validate duplication
+            if (batchId == undefined)
+                batchId = 0;
+
+            var drugFound = 0;
+            var batchFound = 0;
+
+            if (drugName === "") {
+                toastr.error("Error", "Please select drug");
+                return false;
+            }
+
+            if (dose === "" || dose === "0") {
+                toastr.error("Error", "Please enter the dose");
+                return false;
+            }
+
+            if (freqId === "0") {
+                toastr.error("Error", "Please enter the frequency");
+                return false;
+            }
+            //if ((parseInt(morning) || 0) + (parseInt(midday) || 0) + (parseInt(evening) || 0) + (parseInt(night) || 0) === 0) {
+            //    toastr.error("Error", "Please enter the dose");
+            //    return false;
+            //}
+
+            if (duration == "0" || duration === "") {
+                toastr.error("Error", "Please enter the duration");
+                return false;
+            }
+
+            if (quantityPres === "0" || quantityPres === "") {
+                toastr.error("Error", "Please enter the quantity prescribed");
+                return false;
+            }
+
+            drugFound = $.inArray("" + drugName + "", drugNameArr);
+            batchFound = $.inArray("" + batchText + "", batchNoArr);
+
+
+
+            if (drugFound > -1 && batchFound > -1) {
+                toastr.error("Error", drugName + " and/or batch no. " + batchText + " already exists in the List");
+                return false; // message box herer
+            }
+            else {
+                drugNameArr.push("" + drugName + "");
+                batchNoArr.push("" + batchText + "");
+
+                arrDrugPrescriptionUI = [];
+
+                arrDrugPrescriptionUI.push([
+                    drugId, batchId, freqId, drugAbbr, drugName, batchText, dose, freqTxt, duration, quantityPres, quantityDisp,
+                    prophylaxis,
+                    "<button type='button' class='btnDelete btn btn-danger fa fa-minus-circle btn-fill' > Remove</button>"
+                ]);
+
+                //arrDrugPrescriptionUI.push([
+                //    drugId, batchId, drugAbbr, drugName, batchText, morning, midday, evening, night, duration, quantityPres, quantityDisp,
+                //    prophylaxis,
+                //    "<button type='button' class='btnDelete btn btn-danger fa fa-minus-circle btn-fill' > Remove</button>"
+                //]);
+
+                DrawDataTable("dtlDrugPrescriptionFrequency", arrDrugPrescriptionUI);
+                console.log(arrDrugPrescriptionUI);
+
+
+                
+        $("#txtDrugs").val("");
+        $("#ddlBatch").val("");
+        $("#txtDose").val("");
+        $('#ddlFreq').val("0");
+        $("#txtDuration").val("0");
+        $("#txtQuantityPres").val("0");
+        $("#txtQuantityDisp").val("0");
+        $('#chkProphylaxis').attr('checked', false);
+
+            }
+
+        }
+        else {
+            var drugId = $("#drugID").val();
+            var drugAbbr = $("#drugAbbr").val();
+            var drugName = $("#txtDrugs").val();
+            var batchId = $('#ddlBatch').find(":selected").val();
+            var batchText = $('#ddlBatch').find(":selected").text();
+            //var dose = $("#txtDose").val();
+            //var freqId = $('#ddlFreq').find(":selected").val();
+            //var freqTxt = $('#ddlFreq').find(":selected").text();
+            var morning = $("#txtMorning").val();
+            var midday = $("#txtMidday").val();
+            var evening = $("#txtEvening").val();
+            var night = $("#txtNight").val();
+
+            var duration = $("#txtDuration").val();
+            var quantityPres = $("#txtQuantityPres").val();
+            var quantityDisp = $("#txtQuantityDisp").val();
+            batchText = batchText.substring(0, batchText.indexOf('~'));
+
+
+            if ($('#chkProphylaxis').is(":checked")) {
+                var prophylaxis = 1;
+            }
+            else {
+                var prophylaxis = 0;
+            }
+
+            //Validate duplication
+            if (batchId == undefined)
+                batchId = 0;
+
+            var drugFound = 0;
+            var batchFound = 0;
+
+            if (drugName === "") {
+                toastr.error("Error", "Please select drug");
+                return false;
+            }
+
+            //if (dose === "" || dose === "0") {
+            //    toastr.error("Error", "Please enter the dose");
+            //    return false;
+            //}
+
+            //if (freqId === "0") {
+            //    toastr.error("Error", "Please enter the frequency");
+            //    return false;
+            //}
+            if ((parseInt(morning) || 0) + (parseInt(midday) || 0) + (parseInt(evening) || 0) + (parseInt(night) || 0) === 0) {
+                toastr.error("Error", "Please enter the dose");
+                return false;
+            }
+
+            if (duration == "0" || duration === "") {
+                toastr.error("Error", "Please enter the duration");
+                return false;
+            }
+
+            if (quantityPres === "0" || quantityPres === "") {
+                toastr.error("Error", "Please enter the quantity prescribed");
+                return false;
+            }
+
+            drugFound = $.inArray("" + drugName + "", drugNameArr);
+            batchFound = $.inArray("" + batchText + "", batchNoArr);
+
+
+
+            if (drugFound > -1 && batchFound > -1) {
+                toastr.error("Error", drugName + " and/or batch no. " + batchText + " already exists in the List");
+                return false; // message box herer
+            }
+            else {
+                drugNameArr.push("" + drugName + "");
+                batchNoArr.push("" + batchText + "");
+
+                arrDrugPrescriptionUI = [];
+
+                //arrDrugPrescriptionUI.push([
+                //    drugId, batchId, freqId, drugAbbr, drugName, batchText, dose, freqTxt, duration, quantityPres, quantityDisp,
+                //    prophylaxis,
+                //    "<button type='button' class='btnDelete btn btn-danger fa fa-minus-circle btn-fill' > Remove</button>"
+                //]);
+
+                arrDrugPrescriptionUI.push([
+                    drugId, batchId, drugAbbr, drugName, batchText, morning, midday, evening, night, duration, quantityPres, quantityDisp,
+                    prophylaxis,
+                    "<button type='button' class='btnDelete btn btn-danger fa fa-minus-circle btn-fill' > Remove</button>"
+                ]);
+
+                DrawDataTable("dtlDrugPrescription", arrDrugPrescriptionUI);
+
+                $("#txtDrugs").val("");
+                $("#ddlBatch").val("");
+                $("#txtMorning").val("0");
+                $('#ddlMidday').val("0");
+                $('#ddlEvening').val("0");
+                $('#ddlNight').val("0");
+                $("#txtDuration").val("0");
+                $("#txtQuantityPres").val("0");
+                $("#txtQuantityDisp").val("0");
+                $('#chkProphylaxis').attr('checked', false);
+            }
+        } 
+}
        function selectRegimens(regimenLine)
        {
            var valSelected = $("#<%=regimenLine.ClientID%>").find(":selected").text();
@@ -877,29 +1303,64 @@
 
             var allAbbr = "";
             ///////////////////////////////////////////////////////////////////
-            var rowCount = $('#dtlDrugPrescription tbody tr').length;
+         
             var drugPrescriptionArray = new Array();
             try {
-                for (var i = 0 ; i < rowCount; i++) {
-                    drugPrescriptionArray[i] = {
-                        "DrugId": DrugPrescriptionTable.row(i).data()[0],
-                        "BatchId": DrugPrescriptionTable.row(i).data()[1],
-                        "FreqId": DrugPrescriptionTable.row(i).data()[2],
-                        "DrugAbbr": DrugPrescriptionTable.row(i).data()[3],
-                        "Dose": DrugPrescriptionTable.row(i).data()[6],
-                        "Duration": DrugPrescriptionTable.row(i).data()[8],
-                        "qtyPres": DrugPrescriptionTable.row(i).data()[9],
-                        "qtyDisp": DrugPrescriptionTable.row(i).data()[10],
-                        "prophylaxis": DrugPrescriptionTable.row(i).data()[11]
-                    }
+                
+              
+                   
+                if (DosageFrequency.toString() == "1") {
+                    var rowCount = $('#dtlDrugPrescriptionFrequency tbody tr').length;
+                    console.log(DrugPrescriptionTable);
+                    for (var i = 0; i < rowCount; i++) {
+                        drugPrescriptionArray[i] = {
+                            "DrugId": DrugPrescriptionTable.row(i).data()[0],
+                            "BatchId": DrugPrescriptionTable.row(i).data()[1],
+                            "FreqId": DrugPrescriptionTable.row(i).data()[2],
+                            "DrugAbbr": DrugPrescriptionTable.row(i).data()[3],
+                            "Dose": DrugPrescriptionTable.row(i).data()[6],
+                            // "Morning": DrugPrescriptionTable.row(i).data()[5],
+                            // "Midday": DrugPrescriptionTable.row(i).data()[6],
+                            // "Evening": DrugPrescriptionTable.row(i).data()[7],
+                            // "Night": DrugPrescriptionTable.row(i).data()[8],
 
-                    if (!allAbbr.toUpperCase().includes(DrugPrescriptionTable.row(i).data()[3].toUpperCase())) {
-                        if (DrugPrescriptionTable.row(i).data()[3] != "")
-                            allAbbr += DrugPrescriptionTable.row(i).data()[3] + "/";
+                            "Duration": DrugPrescriptionTable.row(i).data()[8],
+                            "qtyPres": DrugPrescriptionTable.row(i).data()[9],
+                            "qtyDisp": DrugPrescriptionTable.row(i).data()[10],
+                            "prophylaxis": DrugPrescriptionTable.row(i).data()[11]
+                        }
+                    }
+                    console.log(drugPrescriptionArray);
+                }
+                else {
+                    var rowCount = $('#dtlDrugPrescription tbody tr').length;
+                    for (var i = 0; i < rowCount; i++) {
+                        drugPrescriptionArray[i] = {
+                            "DrugId": DrugPrescriptionTable.row(i).data()[0],
+                            "BatchId": DrugPrescriptionTable.row(i).data()[1],
+                            //"FreqId": DrugPrescriptionTable.row(i).data()[2],
+                            "DrugAbbr": DrugPrescriptionTable.row(i).data()[2],
+                            //"Dose": DrugPrescriptionTable.row(i).data()[6],
+                            "Morning": DrugPrescriptionTable.row(i).data()[5],
+                            "Midday": DrugPrescriptionTable.row(i).data()[6],
+                            "Evening": DrugPrescriptionTable.row(i).data()[7],
+                            "Night": DrugPrescriptionTable.row(i).data()[8],
+
+                            "Duration": DrugPrescriptionTable.row(i).data()[9],
+                            "qtyPres": DrugPrescriptionTable.row(i).data()[10],
+                            "qtyDisp": DrugPrescriptionTable.row(i).data()[11],
+                            "prophylaxis": DrugPrescriptionTable.row(i).data()[12]
+                        }
                     }
                 }
-            }
+                    if (!allAbbr.toUpperCase().includes(DrugPrescriptionTable.row(i).data()[2].toUpperCase())) {
+                        if (DrugPrescriptionTable.row(i).data()[2] != "")
+                            allAbbr += DrugPrescriptionTable.row(i).data()[2] + "/";
+                    }
+                }
+            
             catch (ex) { }
+          
             //////////////////////////////////////////////////////////////////
             allAbbr = allAbbr.replace(/\/$/, "");
 
@@ -926,6 +1387,7 @@
                 for (var i = 0; i < selectedRegimen.length; i++) {
                     sumSelectedRegimen += selectedRegimen.charCodeAt(i);
                 }
+               
 
             }
             catch (err) {
@@ -996,12 +1458,16 @@
             toastr.error("Please enter missing fields.");
         }
 
-    }
+       }
 
-        function CalculateQtyPrescribed() {
+    function CalculateQtyPrescribed() {
+        
+        var morning, midday, evening, night;
+        if (DosageFrequency.toString() == "1") {
+            
             var dose = $("#<%=txtDose.ClientID%>").val();
             var frequencyID = $("#<%=ddlFreq.ClientID%>").find(":selected").val();
-            var duration = $("#<%=txtDuration.ClientID%>").val();
+                var duration = $("#<%=txtDuration.ClientID%>").val();
             var multiplier = 0;
             if(dose == "")
                 dose = "0";
@@ -1022,12 +1488,26 @@
                 
                 },
                 error: function (data) {
-                    //toastr.error(data.d, "Failed to get Multiplier");
+                    toastr.error(data.d, "Failed to get Multiplier");
                 }
             });
-
-
         }
+        else {
+           var morning = $("#<%=txtMorning.ClientID%>").val();
+          var   midday = $("#<%=txtMidday.ClientID%>").val();
+           var  evening = $("#<%=txtEvening.ClientID%>").val();
+           var  night = $("#<%=txtNight.ClientID%>").val();
+
+            var duration = $("#<%=txtDuration.ClientID%>").val();
+
+            result = ((parseInt(morning) || 0) + (parseInt(midday) || 0) + (parseInt(evening) || 0) + (parseInt(night) || 0)) * duration;
+            $("#<%=txtQuantityPres.ClientID%>").val(result);
+        }
+
+            
+
+
+    }
 
     function getCurrentRegimen() {
         var treatmentPlan = $("#<%=ddlTreatmentPlan.ClientID%>").find(":selected").text();
@@ -1070,45 +1550,88 @@
 
     function loadDataContinueCurrentTreatment() {
         if (pmscmSamePointDispense != "PM/SCM With Same point dispense") {
-            DrugPrescriptionTable.destroy();
+            if (DosageFrequency.toString == "1") {
+                DrugPrescriptionTable.destroy();
+                DrugPrescriptionTable = $('#dtlDrugPrescriptionFrequency').DataTable({
+                    ajax: {
+                        type: "POST",
+                        url: "../WebService/PatientEncounterService.asmx/GetLatestPharmacyPrescriptionDetails",
+                        //data: "{'PMSCM':'" + pmscm + "'}",
+                        dataSrc: 'd',
+                        contentType: "application/json; charset=utf-8",
+                        dataType: "json"
+                    },
+                    paging: false,
+                    searching: false,
+                    info: false,
+                    ordering: false,
+                    columnDefs: [
+                        {
+                            "targets": [0],
+                            "visible": false,
+                            "searchable": false
+                        },
+                        {
+                            "targets": [1],
+                            "visible": false,
+                            "searchable": false
+                        },
+                        {
+                            "targets": [2],
+                            "visible": false,
+                            "searchable": false
+                        }
+                        //    ,
+                        //{
+                        //    "targets": [3],
+                        //    "visible": false,
+                        //    "searchable": false
+                        //}
+                    ]
+                });
+            }
+            else {
+                DrugPrescriptionTable.destroy();
 
-            DrugPrescriptionTable = $('#dtlDrugPrescription').DataTable({
-                ajax: {
-                    type: "POST",
-                    url: "../WebService/PatientEncounterService.asmx/GetLatestPharmacyPrescriptionDetails",
-                    //data: "{'PMSCM':'" + pmscm + "'}",
-                    dataSrc: 'd',
-                    contentType: "application/json; charset=utf-8",
-                    dataType: "json"
-                },
-                paging: false,
-                searching: false,
-                info: false,
-                ordering: false,
-                columnDefs: [
-                {
-                    "targets": [0],
-                    "visible": false,
-                    "searchable": false
-                },
-                {
-                    "targets": [1],
-                    "visible": false,
-                    "searchable": false
-                },
-                {
-                    "targets": [2],
-                    "visible": false,
-                    "searchable": false
-                },
-                {
-                    "targets": [3],
-                    "visible": false,
-                    "searchable": false
-                }
-                ]
-            });
-        }
+                DrugPrescriptionTable = $('#dtlDrugPrescription').DataTable({
+                    ajax: {
+                        type: "POST",
+                        url: "../WebService/PatientEncounterService.asmx/GetLatestPharmacyPrescriptionDetails",
+                        //data: "{'PMSCM':'" + pmscm + "'}",
+                        dataSrc: 'd',
+                        contentType: "application/json; charset=utf-8",
+                        dataType: "json"
+                    },
+                    paging: false,
+                    searching: false,
+                    info: false,
+                    ordering: false,
+                    columnDefs: [
+                        {
+                            "targets": [0],
+                            "visible": false,
+                            "searchable": false
+                        },
+                        {
+                            "targets": [1],
+                            "visible": false,
+                            "searchable": false
+                        },
+                        {
+                            "targets": [2],
+                            "visible": false,
+                            "searchable": false
+                        }
+                        //    ,
+                        //{
+                        //    "targets": [3],
+                        //    "visible": false,
+                        //    "searchable": false
+                        //}
+                    ]
+                });
+            }
+            }
         
     }
 

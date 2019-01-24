@@ -1,0 +1,2 @@
+﻿ALTER TABLE DeliveredBabyApgarScore ADD CONSTRAINT FK_DeliveredBabyApgarScore_DeliveredBabyBirthInformation_Id
+ FOREIGN KEY(DeliveredBabyBirthInformationId) REFERENCES DeliveredBabyBirthInformation(Id)

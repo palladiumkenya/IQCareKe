@@ -7,6 +7,7 @@
   <ItemGroup>
     <ProjectReference Include="..\IQCare.Common.BusinessProcess\IQCare.Common.BusinessProcess.csproj" />
     <ProjectReference Include="..\IQCare.Common.Infrastructure\IQCare.Common.Infrastructure.csproj" />
+    <ProjectReference Include="..\IQCare.Common.Services\IQCare.Common.Services.csproj" />
     <ProjectReference Include="..\IQCare.HTS.Core\IQCare.HTS.Core.csproj" />
     <ProjectReference Include="..\IQCare.HTS.Infrastructure\IQCare.HTS.Infrastructure.csproj" />
   </ItemGroup>
@@ -14,6 +15,7 @@
   <ItemGroup>
     <PackageReference Include="MediatR" Version="4.0.1" />
     <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="4.0.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Relational" Version="2.0.2" />
     <PackageReference Include="Serilog" Version="2.6.0" />
   </ItemGroup>
 

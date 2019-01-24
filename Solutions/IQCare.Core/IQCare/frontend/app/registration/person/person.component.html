@@ -4,10 +4,10 @@
     </div>
     <div class="ibox-content">
         <div class="row">
-            <div class="col-md-2">
+            <!--<div class="col-md-2">
                 <app-leftnav></app-leftnav>
-            </div>
-            <div class="col-md-10 animated fadeIn">
+            </div>-->
+            <div class="col-md-12 animated fadeIn">
                 <div class="panel panel-default">
                     <div class="panel-heading">REGISTER CLIENT</div>
                     <div class="panel-body">
@@ -18,36 +18,43 @@
                                     <div class="row">
                                         <div class="col-lg-3 col-md-3 col-sm-3">
                                             <mat-form-field>
-                                                <input matInput placeholder="First Name" formControlName="FirstName" id="firstName" name="firstName" tabindex="1" required>
+                                                <input matInput placeholder="First Name" formControlName="FirstName" id="firstName"
+                                                    name="firstName" tabindex="1" required>
                                             </mat-form-field>
 
                                             <mat-form-field>
-                                                <input tabindex="5" placeholder="Date Of Birth" matInput [matDatepicker]="myDatepicker" [max]="maxDate" formControlName="DateOfBirth"
+                                                <input tabindex="5" placeholder="Date Of Birth" matInput
+                                                    [matDatepicker]="myDatepicker" [max]="maxDate" formControlName="DateOfBirth"
                                                     required>
                                                 <mat-datepicker-toggle matSuffix [for]="myDatepicker"></mat-datepicker-toggle>
-                                                <mat-datepicker #myDatepicker name="DateOfBirth" ngDefaultControl (selectedChanged)="onDate($event)"></mat-datepicker>
+                                                <mat-datepicker #myDatepicker name="DateOfBirth" ngDefaultControl
+                                                    (selectedChanged)="onDate($event)"></mat-datepicker>
                                             </mat-form-field>
 
                                         </div>
 
                                         <div class="col-lg-3 col-md-3 col-sm-3">
                                             <mat-form-field>
-                                                <input matInput placeholder="Middle Name" formControlName="MiddleName" tabindex="2">
+                                                <input matInput placeholder="Middle Name" formControlName="MiddleName"
+                                                    tabindex="2">
                                             </mat-form-field>
 
                                             <mat-form-field>
-                                                <input matInput placeholder="Age(Years)" tabindex="6" type="number" formControlName="personAge" id="personAge" name="personAge"
+                                                <input matInput placeholder="Age(Years)" tabindex="6" type="number"
+                                                    formControlName="personAge" id="personAge" name="personAge"
                                                     (change)="estimateDob()" required>
                                             </mat-form-field>
                                         </div>
 
                                         <div class="col-lg-3 col-md-3 col-sm-3">
                                             <mat-form-field>
-                                                <input matInput placeholder="Last Name" formControlName="LastName" required tabindex="3">
+                                                <input matInput placeholder="Last Name" formControlName="LastName"
+                                                    required tabindex="3">
                                             </mat-form-field>
 
                                             <mat-form-field>
-                                                <mat-select placeholder="Marital Status" formControlName="MaritalStatus" tabindex="7">
+                                                <mat-select placeholder="Marital Status" formControlName="MaritalStatus"
+                                                    tabindex="7">
                                                     <mat-option></mat-option>
                                                     <mat-option *ngFor="let maritalStatus of maritalStatuses" [value]="maritalStatus.itemId">{{maritalStatus.itemName}}</mat-option>
                                                 </mat-select>
@@ -57,11 +64,13 @@
                                         <div class="col-lg-3 col-md-3 col-sm-3">
                                             <label>Gender </label>
                                             <div>
-                                                <mat-radio-group formControlName="Sex" [required]="true" tabindex="4" (change)="onSexChange()">
+                                                <mat-radio-group formControlName="Sex" [required]="true" tabindex="4"
+                                                    (change)="onSexChange()">
                                                     <mat-radio-button [value]="male" required>Male</mat-radio-button>
                                                     <mat-radio-button [value]="female" required>Female</mat-radio-button>
                                                 </mat-radio-group>
-                                                <mat-error *ngIf="!formGroup.controls['formArray']['controls'][0].controls.Sex.valid">Please select Gender</mat-error>
+                                                <mat-error *ngIf="!formGroup.controls['formArray']['controls'][0].controls.Sex.valid">Please
+                                                    select Gender</mat-error>
                                             </div>
                                         </div>
 
@@ -99,36 +108,42 @@
                                         <div class="col-lg-4 col-md-4 col-sm-4">
                                             <label>Select Population type</label>
                                             <div>
-                                                <mat-radio-group formControlName="populationType" [required]="true" (change)="onPopulationTypeChange()">
+                                                <mat-radio-group formControlName="populationType" [required]="true"
+                                                    (change)="onPopulationTypeChange()">
                                                     <mat-radio-button [value]="1" required>General Population</mat-radio-button>
                                                     <mat-radio-button [value]="2" required>Key Population</mat-radio-button>
                                                 </mat-radio-group>
-                                                <mat-error *ngIf="!formGroup.controls['formArray']['controls'][2].controls.populationType.valid">Please select Population Type</mat-error>
+                                                <mat-error *ngIf="!formGroup.controls['formArray']['controls'][2].controls.populationType.valid">Please
+                                                    select Population Type</mat-error>
                                             </div>
 
-                                            <br/>
+                                            <br />
 
                                             <label>Priority Population</label>
                                             <div>
-                                                <mat-radio-group formControlName="priorityPop" [required]="true" (change)="onPriorityChange()">
+                                                <mat-radio-group formControlName="priorityPop" [required]="true"
+                                                    (change)="onPriorityChange()">
                                                     <mat-radio-button [value]="1">Yes</mat-radio-button>
                                                     <mat-radio-button [value]="2">No</mat-radio-button>
                                                 </mat-radio-group>
-                                                <mat-error *ngIf="!formGroup.controls['formArray']['controls'][2].controls.priorityPop.valid">Please select Priority Type</mat-error>
+                                                <mat-error *ngIf="!formGroup.controls['formArray']['controls'][2].controls.priorityPop.valid">Please
+                                                    select Priority Type</mat-error>
                                             </div>
                                         </div>
 
                                         <div class="col-lg-4 col-md-4 col-sm-4">
                                             <mat-form-field>
-                                                <mat-select placeholder="Key Population" formControlName="KeyPopulation" disableRipple multiple required>
+                                                <mat-select placeholder="Key Population" formControlName="KeyPopulation"
+                                                    disableRipple multiple required>
                                                     <mat-option *ngFor="let keyPop of keyPops" [value]="keyPop.itemId">{{keyPop.itemDisplayName}}</mat-option>
                                                 </mat-select>
                                             </mat-form-field>
 
-                                            <br/>
+                                            <br />
 
                                             <mat-form-field>
-                                                <mat-select placeholder="Priority Population" formControlName="priorityPopulation" disableRipple multiple required>
+                                                <mat-select placeholder="Priority Population" formControlName="priorityPopulation"
+                                                    disableRipple multiple required>
                                                     <mat-option *ngFor="let option of priorityPops" [value]="option.itemId">{{option.itemDisplayName}}</mat-option>
                                                 </mat-select>
                                             </mat-form-field>
@@ -137,7 +152,8 @@
                                         <div class="col-lg-3 col-md-3 col-sm-3">
                                             <div *ngIf="partnerType != null">
                                                 <mat-form-field>
-                                                    <mat-select placeholder="Relationship" formControlName="partnerRelationship" required>
+                                                    <mat-select placeholder="Relationship" formControlName="partnerRelationship"
+                                                        required>
                                                         <mat-option></mat-option>
                                                         <mat-option *ngFor="let option of optionToShow" [value]="option.itemId">{{option.itemDisplayName}}</mat-option>
                                                     </mat-select>

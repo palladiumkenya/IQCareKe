@@ -5,5 +5,7 @@
 
 export const environment = {
     production: false,
-    API_URL: 'http://localhost:3333'
+    API_URL: 'http://localhost:3333',
+    API_LAB_URL: 'http://localhost:5000',
+    API_PMTCT_URL: 'http://localhost:56486'
 };

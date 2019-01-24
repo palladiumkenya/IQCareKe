@@ -47,9 +47,7 @@ END;
 
 IF NOT EXISTS(SELECT TOP 1 Id FROM [dbo].[Interop_PlacerType] WHERE Name = N'AFYAMOBILE')
 BEGIN
-	SET IDENTITY_INSERT [dbo].[Interop_PlacerType] ON
-	INSERT INTO [dbo].[Interop_PlacerType] ([Id], [Name]) VALUES (6, N'AFYAMOBILE');
-	SET IDENTITY_INSERT [dbo].[Interop_PlacerType] OFF
+	INSERT INTO [dbo].[Interop_PlacerType] ([Name]) VALUES (N'AFYAMOBILE');
 END;
 
 
