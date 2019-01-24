@@ -15,6 +15,7 @@ namespace IQCare.PMTCT.BusinessProcess.Queries
 
     public class PatientVitalViewModel
     {
+        public int Id { get; set; }
         public int PatientId { get; set; }
         public int PatientMasterVisitId { get; set; }
         public decimal? Temperature { get; set; }

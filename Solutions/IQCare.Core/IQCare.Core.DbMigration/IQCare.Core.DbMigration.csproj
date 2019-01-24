@@ -131,6 +131,7 @@
     <None Remove="Scripts\2.0.0\27_Create_PatientPncExercises.sql" />
     <None Remove="Scripts\2.0.0\28_HtsEncounter_Add_HivCounsellingDone.sql" />
     <None Remove="Scripts\2.0.0\29_HtsEncounterResult_Add_EncounterResultRemarks.sql" />
+    <None Remove="Scripts\2.0.0\29_SO_Create_SP_GetPharmcyRegimens.sql" />
   </ItemGroup>
 
   <ItemGroup>
@@ -257,6 +258,7 @@
     <EmbeddedResource Include="Scripts\2.0.0\27_Create_PatientPncExercises.sql" />
     <EmbeddedResource Include="Scripts\2.0.0\28_HtsEncounter_Add_HivCounsellingDone.sql" />
     <EmbeddedResource Include="Scripts\2.0.0\29_HtsEncounterResult_Add_EncounterResultRemarks.sql" />
+    <EmbeddedResource Include="Scripts\2.0.0\29_SO_Create_SP_GetPharmcyRegimens.sql" />
   </ItemGroup>
 
   <ItemGroup>

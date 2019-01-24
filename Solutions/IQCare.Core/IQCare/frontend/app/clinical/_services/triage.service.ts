@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { ErrorHandlerService } from '../../shared/_services/errorhandler.service';
-import { AddPatientVitalCommand } from "../_models/AddPatientVitalCommand";
+import { AddPatientVitalCommand, UpdatePatientVitalCommand } from "../_models/AddPatientVitalCommand";
 import { environment } from '../../../environments/environment';
 import { Observable } from 'rxjs';
 import { tap, catchError } from 'rxjs/operators';
@@ -33,6 +33,15 @@ export class TriageService {
                 catchError(this.errorHandlerService.handleError<any>('Error adding ntmastervisit'))
             );
     }
+
+    public UpdatePatientVitalInfo(updatePatientVitalCommand: UpdatePatientVitalCommand): Observable<any> {
+        return this.httpClient.post<AddPatientVitalCommand>(this.API_URL + '/api/PatientVitals/Update',
+            JSON.stringify(updatePatientVitalCommand), httpOptions).pipe(
+                tap(UpdatePatientVitalInfo => this.errorHandlerService.log(`successfully updated patient vitals info`)),
+                catchError(this.errorHandlerService.handleError<any>('Error updating patient vitals info'))
+            );
+    }
+
 
 
     public GetPatientVitalsInfo(patientId: number): Observable<any> {

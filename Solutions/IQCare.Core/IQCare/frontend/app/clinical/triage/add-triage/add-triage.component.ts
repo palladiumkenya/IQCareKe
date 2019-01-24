@@ -9,7 +9,7 @@ import { LookupItemService } from '../../../shared/_services/lookup-item.service
 import { PersonHomeService } from '../../../dashboard/services/person-home.service';
 import { CalculateZscoreCommand } from '../../_models/CalculateZscoreCommand';
 import { PatientMasterVisitEncounter } from '../../../pmtct/_models/PatientMasterVisitEncounter';
-import { AddPatientVitalCommand } from '../../_models/AddPatientVitalCommand';
+import { AddPatientVitalCommand, UpdatePatientVitalCommand } from '../../_models/AddPatientVitalCommand';
 import * as moment from 'moment';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { VitalsValidationConstants } from '../../_models/VitalsValidationConstants';
@@ -26,12 +26,17 @@ export class AddTriageComponent implements OnInit {
     patientMasterVisitId: number;
     public maxDate = moment().toDate();
     dialogTitle : string;
+    isEdit : boolean = false;
+    triageInfo : any;
 
     vitalsFormGroup: FormGroup;
     @Output() notify: EventEmitter<FormGroup> = new EventEmitter<FormGroup>();
     userId: number;
-    encounterTypeId: number
+    encounterTypeId: number;
+    vitalsId : number;
+
     VitalsValidation : VitalsValidationConstants;
+
 
   constructor(private _formBuilder: FormBuilder,
         private triageService: TriageService,
@@ -42,9 +47,10 @@ export class AddTriageComponent implements OnInit {
         private personService: PersonHomeService, 
         private dialogRef : MatDialogRef<AddTriageComponent>,
         @Inject(MAT_DIALOG_DATA) public data : any) {
+
             this.dialogTitle = 'Add Triage Info';
-          this.userId = JSON.parse(localStorage.getItem('appUserId'));
-          this.lookupItemService.getByGroupNameAndItemName('EncounterType', 'Triage-encounter').subscribe(
+            this.userId = JSON.parse(localStorage.getItem('appUserId'));
+            this.lookupItemService.getByGroupNameAndItemName('EncounterType', 'Triage-encounter').subscribe(
               (result) => {
                   if (result) {
                       this.encounterTypeId = result['itemId'];
@@ -57,8 +63,14 @@ export class AddTriageComponent implements OnInit {
           
           this.patientId = data.patientId;
           this.personId = data.personId;
-
+          this.isEdit = data.isEdit;
+          this.triageInfo = data.triageInfo;
           this.vitalsFormGroup = this.BuildVitalsFormGroup();
+          if(this.isEdit){
+            this.dialogTitle = 'Update Triage Info'
+            this.setTriageFormValues(this.triageInfo);
+          }
+
           this.notify.emit(this.vitalsFormGroup);
          }
 
@@ -175,26 +187,7 @@ public SubmitPatientVitalInfo() {
       UserId: this.userId
   };
 
-  const patientVitalCommand: AddPatientVitalCommand = {
-      PatientId: this.patientId,
-      PatientmasterVisitId: this.patientMasterVisitId,
-      Temperature: this.vitalsFormGroup.get('temperature').value,
-      RespiratoryRate: this.vitalsFormGroup.get('respiratoryRate').value,
-      HeartRate: this.vitalsFormGroup.get('heartRate').value,
-      BpDiastolic: this.vitalsFormGroup.get('bpDiastolic').value,
-      BpSystolic: this.vitalsFormGroup.get('bpSystolic').value,
-      Height: this.vitalsFormGroup.get('height').value,
-      Weight: this.vitalsFormGroup.get('weight').value,
-      Spo2: this.vitalsFormGroup.get('spo2').value,
-      Bmi: this.vitalsFormGroup.get('bmi').value,
-      HeadCircumference: this.vitalsFormGroup.get('headCircumference').value,
-      BmiZ: this.vitalsFormGroup.get('bmiZ').value,
-      WeightForAge: this.vitalsFormGroup.get('weightForAge').value,
-      WeightForHeight: this.vitalsFormGroup.get('weightForHeight').value,
-      Comment: this.vitalsFormGroup.get('comment').value,
-      Muac: this.vitalsFormGroup.get('muac').value,
-      VisitDate: moment(this.vitalsFormGroup.get('visitDate').value).toDate()
-  };
+  const patientVitalCommand = this.buildPatientVitalsModel(this.vitalsFormGroup);
 
   this.encounterService.savePatientMasterVisit(patientMasterVisitEncounter).subscribe(
       (result) => {
@@ -226,9 +219,93 @@ public SubmitPatientVitalInfo() {
   );
 }
 
+
+public UpdatePatientVitalInfo() {
+    if(this.vitalsFormGroup.invalid)
+       return ;
+  
+  const patientVitalsInfo = this.buildPatientVitalsModel(this.vitalsFormGroup);
+  patientVitalsInfo.PatientId = this.patientId;
+  patientVitalsInfo.PatientmasterVisitId = this.patientMasterVisitId;
+  patientVitalsInfo.Id = this.vitalsId;
+
+  const updateVitalsCommand : UpdatePatientVitalCommand = {
+      PatientVitalInfo : patientVitalsInfo
+  }
+
+  
+  this.triageService.UpdatePatientVitalInfo(updateVitalsCommand).subscribe(
+    res => {
+        console.log(res);
+        this.snotifyService.success('Patient vitals information updated sucessfully', 'Triage', this.notificationService.getConfig());
+    },
+    (err) => {
+        this.snotifyService.error('Error updating vitals ' + err, 'Triage', this.notificationService.getConfig());
+    },
+    () => {
+        this.dialogRef.close();
+         location.reload();
+        this.vitalsFormGroup.reset();
+    }
+);
+    
+}
+
+
+
+public setTriageFormValues(triageInfo: any) 
+{
+   this.patientId = triageInfo.patientId;
+   this.patientMasterVisitId = triageInfo.patientMasterVisitId;
+   this.vitalsId = triageInfo.id;
+   this.vitalsFormGroup.controls['visitDate'].setValue(triageInfo.visitDate);
+   this.vitalsFormGroup.controls['height'].setValue(triageInfo.height);
+   this.vitalsFormGroup.controls['weight'].setValue (triageInfo.weight);
+   this.vitalsFormGroup.controls['bmi'].setValue(triageInfo.bmi)
+   this.vitalsFormGroup.controls['temperature'].setValue(triageInfo.temperature);
+   this.vitalsFormGroup.controls['respiratoryRate'].setValue(triageInfo.respiratoryRate);
+   this.vitalsFormGroup.controls['heartRate'].setValue(triageInfo.heartRate);
+   this.vitalsFormGroup.controls['bpDiastolic'].setValue(triageInfo.diastolic);
+   this.vitalsFormGroup.controls['bpSystolic'].setValue(triageInfo.systolic);
+   this.vitalsFormGroup.controls['spo2'].setValue(triageInfo.spo2);
+   this.vitalsFormGroup.controls['weightForAge'].setValue(triageInfo.weightForAge);
+   this.vitalsFormGroup.controls['weightForHeight'].setValue(triageInfo.weightForHeight);
+   this.vitalsFormGroup.controls['comment'].setValue(triageInfo.comment);
+   this.vitalsFormGroup.controls['headCircumference'].setValue(triageInfo.headCircumference);
+   this.vitalsFormGroup.controls['muac'].setValue(triageInfo.muac);
+   this.vitalsFormGroup.controls['bmiZ'].setValue(triageInfo.bmiZ);
+}
+
 /**
- * close
+ * buildPatientVitalsModel
  */
+public buildPatientVitalsModel(formGroup: FormGroup) : AddPatientVitalCommand{
+    const patientVitalCommand: AddPatientVitalCommand = {
+        PatientId: this.patientId,
+        PatientmasterVisitId: this.patientMasterVisitId,
+        Temperature: this.vitalsFormGroup.get('temperature').value,
+        RespiratoryRate: this.vitalsFormGroup.get('respiratoryRate').value,
+        HeartRate: this.vitalsFormGroup.get('heartRate').value,
+        BpDiastolic: this.vitalsFormGroup.get('bpDiastolic').value,
+        BpSystolic: this.vitalsFormGroup.get('bpSystolic').value,
+        Height: this.vitalsFormGroup.get('height').value,
+        Weight: this.vitalsFormGroup.get('weight').value,
+        Spo2: this.vitalsFormGroup.get('spo2').value,
+        Bmi: this.vitalsFormGroup.get('bmi').value,
+        HeadCircumference: this.vitalsFormGroup.get('headCircumference').value,
+        BmiZ: this.vitalsFormGroup.get('bmiZ').value,
+        WeightForAge: this.vitalsFormGroup.get('weightForAge').value,
+        WeightForHeight: this.vitalsFormGroup.get('weightForHeight').value,
+        Comment: this.vitalsFormGroup.get('comment').value,
+        Muac: this.vitalsFormGroup.get('muac').value,
+        VisitDate: moment(this.vitalsFormGroup.get('visitDate').value).toDate(),
+        CreatedBy : this.userId
+    };
+
+    return patientVitalCommand;
+}
+
+
 public close() {
     this.dialogRef.close();
 }
