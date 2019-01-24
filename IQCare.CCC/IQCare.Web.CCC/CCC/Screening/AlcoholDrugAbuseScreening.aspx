@@ -6,8 +6,8 @@
         .control-label{text-align: left !important;}
     </style>
      <div class="col-md-12" style="padding-top: 20px">
-        <div class="col-md-12">
-            <div class="wizard" data-initialize="wizard" id="myWizard">
+        <div class="col-md-12" id="Menu">
+            <div class="wizard" data-initialize="wizard" id="myWizard" >
                 <div class="steps-container">
                     <ul class="steps">
 					    <li data-step="1" id="dsSectionOne" data-name="template" class="active complete">
@@ -41,4 +41,15 @@
             </div>
         </div>
     </div>
+    <script type="text/javascript">      
+        $(document).ready(function () {
+            var age = "<%=age%>";
+            if (age < 9) {
+                $('#Menu').hide();
+            }
+            else {
+                $('#Menu').show();
+            }
+        });
+    </script>
 </asp:Content>
