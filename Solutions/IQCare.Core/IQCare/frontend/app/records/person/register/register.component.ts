@@ -531,6 +531,18 @@ export class RegisterComponent implements OnInit {
     }
 
     onIdentifierTypeChange() {
+        const selectedIdentifier = this.personIdentifiers.filter(obj => obj.id == this.formArray.value[0]['IdentifierType']);
+        if (selectedIdentifier.length > 0) {
+            const ageInYears = this.formArray['controls'][0]['controls']['AgeYears'].value;
+
+            if (selectedIdentifier[0]['name'] == 'NationalID' && ageInYears < 18) {
+                // this.formArray['controls'][0]['controls']['IdentifierType'].disable({ onlySelf: true });
+                this.snotifyService.error('Children of less than 18 years are not assigned National IDs ', 'Person Registration',
+                    this.notificationService.getConfig());
+                return;
+            }
+        }
+
         if (this.formArray.value[0]['IdentifierType']) {
             this.formGroup.controls['formArray']['controls'][0]['controls']['IdentifierNumber'].enable({ onlySelf: false });
         } else {
