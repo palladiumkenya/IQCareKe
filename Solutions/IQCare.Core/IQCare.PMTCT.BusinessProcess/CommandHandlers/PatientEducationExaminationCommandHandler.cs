@@ -35,6 +35,7 @@ namespace IQCare.PMTCT.BusinessProcess.CommandHandlers
                 try
                 {
                     PatientEducationExaminationService _service = new PatientEducationExaminationService(_unitOfWork, _commonUnitOfWork);
+                    int patientEducationResultId = 0;
 
                     var breastExamId =await  _commonUnitOfWork.Repository<LookupItem>().Get(x => x.Name == "Breast Exam").Select(x => x.Id).FirstOrDefaultAsync();
                     var examinationTypeId =await  _commonUnitOfWork.Repository<LookupItemView>().Get(x => x.MasterName == "GeneralExamination").Select(x => x.MasterId).FirstOrDefaultAsync();
@@ -66,23 +67,31 @@ namespace IQCare.PMTCT.BusinessProcess.CommandHandlers
 
                     List<PatientEducation> patientCounselling = new List<PatientEducation>();
 
-                    foreach (var item in request.CounsellingTopics)
+                    if (request.CounsellingTopics.Count > 0)
                     {
-                        PatientEducation data = new PatientEducation
+                        foreach (var item in request.CounsellingTopics)
                         {
-                            PatientId = request.PatientId,
-                            PatientMasterVisitId = request.PatientMasterVisitId,
-                            CounsellingTopicId = item.CounsellingTopicId,
-                            CounsellingDate = item.CounsellingDate,
-                            Description = item.Description,
-                            CreateDate = DateTime.Now,
-                            CreatedBy = request.CreatedBy
-                           
-                        };
-                        patientCounselling.Add(data);
+                            if (item.CounsellingTopicId > 0)
+                            {
+                                PatientEducation data = new PatientEducation
+                                {
+                                    PatientId = request.PatientId,
+                                    PatientMasterVisitId = request.PatientMasterVisitId,
+                                    CounsellingTopicId = item.CounsellingTopicId,
+                                    CounsellingDate = item.CounsellingDate,
+                                    Description = item.Description,
+                                    CreateDate = DateTime.Now,
+                                    CreatedBy = request.CreatedBy
+
+                                };
+                                patientCounselling.Add(data);
+                            }
+                        }
+
+                         patientEducationResultId = await _service.AddPatientEducation(patientCounselling);
+
                     }
 
-                    int patientEducationResultId = await _service.AddPatientEducation(patientCounselling);
 
                     if (breastExamResult > 0 & syphillisResultId > 0 & patientEducationResultId > 0)
                     {

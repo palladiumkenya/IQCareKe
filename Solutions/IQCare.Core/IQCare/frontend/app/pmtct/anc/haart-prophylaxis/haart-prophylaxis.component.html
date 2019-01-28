@@ -91,7 +91,7 @@
             <div class="col-md-4 col-xs-12 col-sm-6">
                 <mat-form-field class="col-md-12">
                     <mat-select formControlName="illness" placeholder="Select Illness" required minlength="0" >
-                        <mat-option value="0"> Select</mat-option>
+
                         <mat-option *ngFor="let chronicIllnessOption of chronicIllnessOptions" [value]="chronicIllnessOption">
                             {{chronicIllnessOption.itemName}}
                         </mat-option>

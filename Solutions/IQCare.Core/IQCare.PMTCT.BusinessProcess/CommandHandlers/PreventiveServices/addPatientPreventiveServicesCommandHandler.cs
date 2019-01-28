@@ -28,29 +28,33 @@ namespace IQCare.PMTCT.BusinessProcess.CommandHandlers.PreventiveServices
                 {
                     List<PreventiveService> preventiveServices = new List<PreventiveService>();
 
-                    foreach (var item in request.preventiveService)
+                    if (request.preventiveService.Count > 0)
                     {
-                        PreventiveService _preventiveServices = new PreventiveService()
-                        {                          
-                            Id=item.Id, 
-                              PatientId =item.PatientId,
-                             PatientMasterVisitId =item.PatientMasterVisitId,
-                             PreventiveServiceId=item.PreventiveServiceId,
-                             PreventiveServiceDate =item.PreventiveServiceDate,
-                            Description=item.Description
-                        };
-                        preventiveServices.Add(_preventiveServices);
+                        foreach (var item in request.preventiveService)
+                        {
+                            PreventiveService _preventiveServices = new PreventiveService()
+                            {
+                                Id = item.Id,
+                                PatientId = item.PatientId,
+                                PatientMasterVisitId = item.PatientMasterVisitId,
+                                PreventiveServiceId = item.PreventiveServiceId,
+                                PreventiveServiceDate = item.PreventiveServiceDate,
+                                Description = item.Description
+                            };
+                            preventiveServices.Add(_preventiveServices);
+                        }
+                        await _pmtctUnitOfWork.Repository<PreventiveService>().AddRangeAsync(preventiveServices);
+                        await _pmtctUnitOfWork.SaveAsync();
+                        return Result<AddPatientPreventiveServiceCommandResponse>.Valid(new AddPatientPreventiveServiceCommandResponse()
+                        {
+                            PreventiveServiceId = 1
+
+                        });
                     }
-                    await _pmtctUnitOfWork.Repository<PreventiveService>().AddRangeAsync(preventiveServices);
-                     await _pmtctUnitOfWork.SaveAsync();
-
-                    _pmtctUnitOfWork.Dispose();
-
-                    return Result<AddPatientPreventiveServiceCommandResponse>.Valid(new AddPatientPreventiveServiceCommandResponse()
+                    else
                     {
-                        PreventiveServiceId = 1
-
-                    });
+                        return Result<AddPatientPreventiveServiceCommandResponse>.Valid(new AddPatientPreventiveServiceCommandResponse {PreventiveServiceId = 1});
+                    }                
                 }
                 catch (Exception e)
                 {

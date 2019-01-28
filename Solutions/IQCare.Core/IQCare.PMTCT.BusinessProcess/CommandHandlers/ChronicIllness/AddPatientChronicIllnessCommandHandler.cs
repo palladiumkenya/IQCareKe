@@ -28,29 +28,37 @@ namespace IQCare.PMTCT.BusinessProcess.CommandHandlers.ChronicIllness
                 {
                     List<PatientChronicIllness> patientChronicIllness = new List<PatientChronicIllness>();
 
-                    foreach (var item in request.PatientChronicIllnesses)
+                    if (request.PatientChronicIllnesses.Count > 0)
                     {
-                        PatientChronicIllness patientChronic = new PatientChronicIllness()
+                        foreach (var item in request.PatientChronicIllnesses)
                         {
-                            Active = false,
-                            ChronicIllness = item.ChronicIllness,
-                            CreateBy = item.CreateBy,
-                            DeleteFlag = item.DeleteFlag,
-                            Dose = item.Dose,
-                            Duration = item.Duration,
-                            OnsetDate = item.OnsetDate,
-                            Treatment = item.Treatment,
-                            PatientId = item.PatientId,
-                            PatientMasterVisitId = item.PatientMasterVisitId,
-                        };
+                            PatientChronicIllness patientChronic = new PatientChronicIllness()
+                            {
+                                Active = false,
+                                ChronicIllness = item.ChronicIllness,
+                                CreateBy = item.CreateBy,
+                                DeleteFlag = item.DeleteFlag,
+                                Dose = item.Dose,
+                                Duration = item.Duration,
+                                OnsetDate = item.OnsetDate,
+                                Treatment = item.Treatment,
+                                PatientId = item.PatientId,
+                                PatientMasterVisitId = item.PatientMasterVisitId,
+                            };
 
-                        patientChronicIllness.Add(patientChronic);
+                            patientChronicIllness.Add(patientChronic);
+                        }
+
+                        await _unitOfWork.Repository<PatientChronicIllness>().AddRangeAsync(patientChronicIllness);
+                        await _unitOfWork.SaveAsync();
+                        return Result<PatientChronicIllness>.Valid(request.PatientChronicIllnesses[0]);
+                    }
+                    else
+                    {
+                        return Result<PatientChronicIllness>.Valid(new PatientChronicIllness());
                     }
 
-                    await _unitOfWork.Repository<PatientChronicIllness>().AddRangeAsync(patientChronicIllness);
-                    await _unitOfWork.SaveAsync();
-
-                    return Result<PatientChronicIllness>.Valid(request.PatientChronicIllnesses[0]);
+                    
                 }
                 catch (Exception e)
                 {

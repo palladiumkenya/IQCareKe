@@ -39,7 +39,7 @@ export class AncComponent implements OnInit, OnDestroy {
 
     formType: string;
     visitType: number;
-    isLinear: boolean = true;
+    isLinear: boolean = false;
     public isEdit = false;
     patientDrug: PatientDrugAdministration[] = [];
     public preventiveService: PreventiveService[] = [];
@@ -139,11 +139,11 @@ export class AncComponent implements OnInit, OnDestroy {
                 if (!this.patientMasterVisitId) {
                     this.patientMasterVisitId = JSON.parse(localStorage.getItem('patientMasterVisitId'));
                     this.patientEncounterId = JSON.parse(localStorage.getItem('patientEncounterId'));
-                    this.isLinear=true;
+                   // this.isLinear = true;
                 } else {
                     this.visitId = this.patientMasterVisitId;
                     this.isEdit = true;
-                    this.isLinear =false;
+                  // this.isLinear = false;
                 }
             }
         );
@@ -692,7 +692,7 @@ export class AncComponent implements OnInit, OnDestroy {
                     const baselineAnc = this.ancService.SaveBaselineProfile(baselineAncCommands);
 
                     forkJoin([
-                        ancVisitDetail,
+                       ancVisitDetail,
                         baselineAnc,
                         ancEducation,
                         ancHivStatus,
@@ -729,11 +729,10 @@ export class AncComponent implements OnInit, OnDestroy {
                 ancHivStatus,
                 ancClientMonitoring,
                 drugAdministration,
-                chronicIllness,
+                chronicIllness ,
                 ancPreventiveService,
                 ancReferral,
                 ancAppointment
-
             ])
                 .subscribe(
                     (result) => {
@@ -782,7 +781,7 @@ export class AncComponent implements OnInit, OnDestroy {
             DaysPostPartum: 0
         };
 
-        const VisitDetails= { VisitDetails: visitDetailsEditCommand };
+        const VisitDetails = { VisitDetails: visitDetailsEditCommand };
 
         const baselineAncCommandEdit = {
             PatientId: this.patientId,
@@ -794,14 +793,38 @@ export class AncComponent implements OnInit, OnDestroy {
             CreatedBy: this.userId
         } as BaselineAncProfileCommand;
 
+        for (let i = 0; i < this.counselling_data.length; i++) {
+
+            this.counselling_data_form.push({
+                CounsellingTopic: this.counselling_data[i]['counsellingTopic'],
+                CounsellingTopicId: this.counselling_data[i]['counsellingTopicId'],
+                CounsellingDate: moment(this.counselling_data[i]['counsellingDate']).toDate(),
+                description: this.counselling_data[i]['description']
+            });
+            console.log(this.counselling_data[i]['counsellingTopic']);
+        }
+
+        console.log('patient education');
+        console.log(this.PatientEducationMatFormGroup);
+        const patientEducationCommand: PatientEducationCommand = {
+            PatientId: this.patientId,
+            PatientMasterVisitId: this.patientMasterVisitId,
+            BreastExamDone: this.PatientEducationMatFormGroup.value['breastExamDone'],
+            TreatedSyphilis: this.PatientEducationMatFormGroup.value['treatedSyphilis'],
+            CreateBy: this.userId,
+            CounsellingTopics: this.counselling_data
+        };
+
         const AncvisitDetailsEdit = this.ancService.EditANCVisitDetails(ancVisitDetailsCommandEdit);
         const visitDetailsEdit = this.ancService.EditVisitDetails(VisitDetails);
         const baselineEdit = this.ancService.SaveBaselineProfile(baselineAncCommandEdit);
+        const ancEducation = this.ancService.savePatientEducation(patientEducationCommand);
 
         forkJoin([
              AncvisitDetailsEdit,
             visitDetailsEdit,
-            baselineEdit
+            baselineEdit,
+            ancEducation
 
         ]).subscribe(
             (result) => {

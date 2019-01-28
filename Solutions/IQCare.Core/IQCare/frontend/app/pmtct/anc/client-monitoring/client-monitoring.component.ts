@@ -85,18 +85,18 @@ export class ClientMonitoringComponent implements OnInit {
       this.notify.emit(this.clientMonitoringFormGroup);
 
       if (this.isEdit) {
-          this.getPatientScreeningInfo(this.patientId, this.patientMasterVisitId);
-          this.getPatientWhoStageInfo(this.patientId, this.patientMasterVisitId);
-      }else {
+         /* this.getPatientScreeningInfo(this.patientId, this.patientMasterVisitId);
+          this.getPatientWhoStageInfo(this.patientId, this.patientMasterVisitId);*/
+          this.getPatientWhoStageInfoCurrent(this.patientId);
+          this.getPatientScreeningInfoByPatientId(this.patientId);
+      } else {
           this.getPatientWhoStageInfoCurrent(this.patientId);
           this.getPatientScreeningInfoByPatientId(this.patientId);
       }
 
     }
 
-    public testingFunc() {
-        console.log('');
-    }
+
 
     public getLookupItems(groupName: string, _options: any[]) {
         this.lookupItemView$ = this.lookupItemService.getByGroupName(groupName)
@@ -154,8 +154,9 @@ export class ClientMonitoringComponent implements OnInit {
                     console.log('patientwho');
                     console.log(p);
                     console.log(p['whoStage']);
-                    if (p) {
-                        this.clientMonitoringFormGroup.get('WhoStage').setValue(p['whoStage']);
+                    const whostage = p;
+                    if (whostage) {
+                        this.clientMonitoringFormGroup.get('WhoStage').setValue(whostage['whoStage']);
                     }
                 },
                 (err) => {
@@ -171,9 +172,7 @@ export class ClientMonitoringComponent implements OnInit {
         this.patientwhoStage$ = this.ancService.getPatientWhoStageInfo(patientId, patientMasterVisitId)
             .subscribe(
                 p => {
-                    console.log('patientwho');
-                    console.log(p);
-                    console.log(p['whoStage']);
+
                     if (p) {
                         this.clientMonitoringFormGroup.get('WhoStage').setValue(p['whoStage']);
                     }
@@ -198,9 +197,6 @@ export class ClientMonitoringComponent implements OnInit {
                         const cacx = screening.filter(obj => obj.screeningType == 'CaCxScreening');
                         const tb = screening.filter(obj => obj.screeningType == 'TBScreeningPMTCT');
                         const vl = screening.filter(obj => obj.screeningType == 'ViralLoadSampleTaken');
-
-                        console.log(cacx);
-                        console.log(cacx[0]['screeningDone']);
 
                         if (vl.length > 0) {
                             this.clientMonitoringFormGroup.get('screenedForTB').setValue(vl[0]['screeningValueId']);
@@ -238,9 +234,6 @@ export class ClientMonitoringComponent implements OnInit {
                         const cacx = screening.filter(obj => obj.screeningType == 'CaCxScreening');
                         const tb = screening.filter(obj => obj.screeningType == 'TBScreeningPMTCT');
                         const vl = screening.filter(obj => obj.screeningType == 'ViralLoadSampleTaken');
-
-                        console.log(cacx);
-                        console.log(cacx[0]['screeningDone']);
 
                         if (vl.length > 0) {
                             this.clientMonitoringFormGroup.get('screenedForTB').setValue(vl[0]['screeningValueId']);

@@ -67,13 +67,16 @@ export class PatientEducationExaminationComponent implements OnInit {
     }
 
     ngOnInit() {
+
+
         this.PatientEducationFormGroup = this._formBuilder.group({
             breastExamDone: ['', Validators.required],
             counsellingDate: ['', Validators.required],
             counselledOn: ['', Validators.required],
             treatedSyphilis: ['', Validators.required]
-           // testResult: new FormControl(['', Validators.required])
+            // testResult: new FormControl(['', Validators.required])
         });
+
         this.userId = JSON.parse(localStorage.getItem('appUserId'));
         //  this.getLookupOptions('counselledOn', this.topics);
         //  this.getLookupOptions('yesno', this.yesnos);
@@ -90,11 +93,15 @@ export class PatientEducationExaminationComponent implements OnInit {
 
 
         this.nextStep.emit(this.patientEducationEmitterData);
-        this.notify.emit({ 'form': this.PatientEducationFormGroup, 'counselling_data': this.counselling_data});
+        this.notify.emit({'form': this.PatientEducationFormGroup, 'counselling_data': this.counselling_data});
 
         if (this.isEdit) {
 
-            this.getPatientCounselingData(this.PatientId, this.PatientMasterVisitId);
+            this.PatientEducationFormGroup.get('counsellingDate').clearValidators();
+            this.PatientEducationFormGroup.get('counselledOn').clearValidators();
+
+            // this.getPatientCounselingData(this.PatientId, this.PatientMasterVisitId);
+            this.getPatientCounselingDataAll(this.PatientId);
             this.getBaselineAncProfile(this.PatientId);
         } else {
             this.getPatientCounselingDataAll(this.PatientId);
@@ -109,8 +116,8 @@ export class PatientEducationExaminationComponent implements OnInit {
             treatedSyphilis: parseInt(this.PatientEducationFormGroup.get('treatedSyphilis').value, 10),
             counsellingTopics: this.counselling_data
         };
-            console.log('breastexamDone' + this.patientEducationEmitterData.breastExamDone + 'from form ' +
-                this.PatientEducationFormGroup.get('breastExamDone').value.itemId);
+        console.log('breastexamDone' + this.patientEducationEmitterData.breastExamDone + 'from form ' +
+            this.PatientEducationFormGroup.get('breastExamDone').value.itemId);
         console.log(this.patientEducationEmitterData);
         this.nextStep.emit(this.patientEducationEmitterData);
     }
@@ -119,6 +126,10 @@ export class PatientEducationExaminationComponent implements OnInit {
 
         const topic = this.PatientEducationFormGroup.controls['counselledOn'].value.itemName;
         const topicId = this.PatientEducationFormGroup.controls['counselledOn'].value.itemId;
+
+        if (topic === '' || this.PatientEducationFormGroup.controls['counsellingDate'].value === '') {
+            return false;
+        }
 
         if (this.counselling_data.filter(x => x.counsellingTopic === topic).length > 0) {
             this.snotifyService.warning('' + topic + ' exists', 'Counselling', this.notificationService.getConfig());
@@ -165,30 +176,30 @@ export class PatientEducationExaminationComponent implements OnInit {
     }
 
     public getPatientCounselingData(patientId: number, patientMasterVisitId: number): void {
-         this.patientCounseling$ = this.ancService.getPatientCounselingInfo(patientId, patientMasterVisitId)
-             .subscribe(
-                 p => {
-                     console.log('counseling data');
-                     console.log(p);
-                     if (p) {
-                         for (let i = 0; i < p.length; i++) {
-                             this.counselling_data.push({
+        this.patientCounseling$ = this.ancService.getPatientCounselingInfo(patientId, patientMasterVisitId)
+            .subscribe(
+                p => {
+                    console.log('counseling data');
+                    console.log(p);
+                    if (p) {
+                        for (let i = 0; i < p.length; i++) {
+                            this.counselling_data.push({
                                 counselledOn: p[i]['counsellingTopicId'],
-                                 counsellingTopic: p[i]['counsellingTopic'],
-                                 counsellingTopicId: p['counsellingTopicId'],
-                                 description: p[i]['description'],
-                                 CounsellingDate: p[i]['counsellingDate']
-                             });
-                         }
-                     }
-                 },
-                 (err) => {
+                                counsellingTopic: p[i]['counsellingTopic'],
+                                counsellingTopicId: p['counsellingTopicId'],
+                                description: p[i]['description'],
+                                CounsellingDate: p[i]['counsellingDate']
+                            });
+                        }
+                    }
+                },
+                (err) => {
 
-                 },
-                 () => {
+                },
+                () => {
 
-                 }
-             );
+                }
+            );
     }
 
     public getBaselineAncProfile(patientId: number): void {
@@ -214,7 +225,6 @@ export class PatientEducationExaminationComponent implements OnInit {
                 }
             );
     }
-
 
 
 }
