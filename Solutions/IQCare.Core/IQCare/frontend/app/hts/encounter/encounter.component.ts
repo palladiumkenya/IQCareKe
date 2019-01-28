@@ -197,14 +197,17 @@ export class EncounterComponent implements OnInit {
 
     editEncounter(encounterID: number, patientMasterVisitId: number) {
         this.encounter.EncounterDate = moment(this.encounter.EncounterDate).toDate().toDateString();
-        this._encounterService.editEncounter(this.encounter, encounterID, patientMasterVisitId).subscribe((res) => {
-            this.snotifyService.success('Successfully edited encounter', 'Encounter', this.notificationService.getConfig());
-            this.zone.run(() => { this.router.navigate(['/registration/home'], { relativeTo: this.route }); });
-        }, (err) => {
-            this.snotifyService.error('Error editing encounter ' + err, 'Encounter', this.notificationService.getConfig());
-        }, () => {
-            // this.zone.run(() => { this.router.navigate(['/hts/testing'], {relativeTo: this.route }); });
-        });
+        this._encounterService.editEncounter(this.encounter, encounterID, patientMasterVisitId).subscribe(
+            (res) => {
+                this.snotifyService.success('Successfully edited encounter', 'Encounter', this.notificationService.getConfig());
+                this.zone.run(() => { this.router.navigate(['/hts/testingedit/' + this.encounter.PatientId + '/' + encounterID + '/' + patientMasterVisitId], { relativeTo: this.route }); });
+            },
+            (err) => {
+                this.snotifyService.error('Error editing encounter ' + err, 'Encounter', this.notificationService.getConfig());
+            },
+            () => {
+                // this.zone.run(() => { this.router.navigate(['/hts/testing'], {relativeTo: this.route }); });
+            });
     }
 
     addNewEncounter() {

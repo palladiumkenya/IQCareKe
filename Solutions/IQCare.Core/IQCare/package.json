@@ -9,7 +9,7 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "vs": "ng serve --proxy-config proxy.config.json",
+    "vs": "ng serve --open --proxy-config proxy.config.json",
     "net": "dotnet watch run"
   },
   "private": true,

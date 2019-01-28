@@ -17,7 +17,7 @@ namespace IQCare.CCC.UILogic.Enrollment
     public class IdentifierManager
     {
         private IIdentifiersManager mgr =
-            (IIdentifiersManager) ObjectFactory.CreateInstance(
+            (IIdentifiersManager)ObjectFactory.CreateInstance(
                 "BusinessProcess.CCC.Enrollment.BIdentifier, BusinessProcess.CCC");
 
         public List<Identifier> GetIdentifiersById(int identifierId)
@@ -47,6 +47,12 @@ namespace IQCare.CCC.UILogic.Enrollment
         public Identifier GetIdentifierByCode(string code)
         {
             return mgr.GetIdentifierByCode(code);
+        }
+
+        public Identifier GetIdentifierByName(string name)
+
+        {
+            return mgr.GetIdentifierByName(name);
         }
     }
 }

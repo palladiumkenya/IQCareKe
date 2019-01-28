@@ -1,3 +1,4 @@
+import { TestingEditComponent } from './testing/testing-edit/testing-edit.component';
 import { FamilySearchComponent } from './family/family-search/family-search.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
@@ -119,6 +120,10 @@ const routes: Routes = [
         path: 'testing',
         component: TestingComponent,
         pathMatch: 'full'
+    },
+    {
+        path: 'testingedit/:patientId/:htsEncounterId/:patientMasterVisitId',
+        component: TestingEditComponent
     },
     {
         path: 'psmart',
