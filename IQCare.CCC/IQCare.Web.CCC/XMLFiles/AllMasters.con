@@ -610,6 +610,13 @@
     <Deleteflag>0</Deleteflag>
     <SystemId>1</SystemId>
   </Mst_Provider>
+  <Mst_Ward>
+    <Id>1</Id>
+    <Name>MUKAA</Name>
+    <SRNO>3.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+    <SystemID>1</SystemID>
+  </Mst_Ward>
   <Mst_Division>
     <Id>1</Id>
     <Name>yathui</Name>
@@ -617,6 +624,1062 @@
     <Deleteflag>0</Deleteflag>
     <SystemID>1</SystemID>
   </Mst_Division>
+  <Mst_District>
+    <Id>176</Id>
+    <Name>Machakos Town</Name>
+    <SRNO>1.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+    <SystemId>1</SystemId>
+  </Mst_District>
+  <Mst_District>
+    <Id>1</Id>
+    <SRNO>4.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>2</Id>
+    <Name>A/RIVER</Name>
+    <SRNO>6.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>3</Id>
+    <Name>AMREF KBZ</Name>
+    <SRNO>7.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>4</Id>
+    <Name>ARUSHA</Name>
+    <SRNO>8.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>5</Id>
+    <Name>ATHIRIVER</Name>
+    <SRNO>9.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>6</Id>
+    <Name>BANANA</Name>
+    <SRNO>10.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>7</Id>
+    <Name>BOMU MEDICAL CENTRE</Name>
+    <SRNO>11.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>8</Id>
+    <Name>BONDO</Name>
+    <SRNO>12.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>9</Id>
+    <Name>BUDALANGI</Name>
+    <SRNO>13.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>10</Id>
+    <Name>BUNGOMA</Name>
+    <SRNO>14.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>11</Id>
+    <Name>BUSIA</Name>
+    <SRNO>15.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>12</Id>
+    <Name>BUSIA/NANGINA</Name>
+    <SRNO>16.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>13</Id>
+    <Name>CATHOLIC</Name>
+    <SRNO>17.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>14</Id>
+    <Name>CHANGAMWE</Name>
+    <SRNO>18.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>15</Id>
+    <Name>CHUKA</Name>
+    <SRNO>19.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>16</Id>
+    <Name>COAST</Name>
+    <SRNO>20.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>17</Id>
+    <Name>DAGORETTI</Name>
+    <SRNO>21.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>18</Id>
+    <Name>ELD</Name>
+    <SRNO>22.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>19</Id>
+    <Name>EMALI</Name>
+    <SRNO>23.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>20</Id>
+    <Name>EMALI AHF</Name>
+    <SRNO>24.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>21</Id>
+    <Name>EMBAKASI</Name>
+    <SRNO>25.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>22</Id>
+    <Name>HOLA HOSP</Name>
+    <SRNO>26.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>23</Id>
+    <Name>HOMABAY</Name>
+    <SRNO>27.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>24</Id>
+    <Name>IKUTHA</Name>
+    <SRNO>28.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>25</Id>
+    <Name>KABETE</Name>
+    <SRNO>29.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>26</Id>
+    <Name>KAI</Name>
+    <SRNO>30.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>27</Id>
+    <Name>KAIMOSI</Name>
+    <SRNO>31.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>28</Id>
+    <Name>KAITI</Name>
+    <SRNO>32.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>29</Id>
+    <Name>KAJIADO</Name>
+    <SRNO>33.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>30</Id>
+    <Name>KAJIANDO</Name>
+    <SRNO>34.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>31</Id>
+    <Name>KALOLENI</Name>
+    <SRNO>35.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>32</Id>
+    <Name>KALULUINI</Name>
+    <SRNO>36.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>33</Id>
+    <Name>KAMAKWA</Name>
+    <SRNO>37.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>34</Id>
+    <Name>KAMBOO</Name>
+    <SRNO>38.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>35</Id>
+    <Name>KAMBUU</Name>
+    <SRNO>39.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>36</Id>
+    <Name>KANGUNDO</Name>
+    <SRNO>40.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>37</Id>
+    <Name>KAPSABET</Name>
+    <SRNO>41.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>38</Id>
+    <Name>KARIOBANGI</Name>
+    <SRNO>42.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>39</Id>
+    <Name>KASARANI</Name>
+    <SRNO>43.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>40</Id>
+    <Name>KASIKEU</Name>
+    <SRNO>44.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>41</Id>
+    <Name>KATHIANI</Name>
+    <SRNO>45.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>42</Id>
+    <Name>KATHONWENI</Name>
+    <SRNO>46.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>43</Id>
+    <Name>KATHONZWENI</Name>
+    <SRNO>47.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>44</Id>
+    <Name>KAUNGUNI</Name>
+    <SRNO>48.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>45</Id>
+    <Name>KAVETE HC</Name>
+    <SRNO>49.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>46</Id>
+    <Name>KBZ</Name>
+    <SRNO>50.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>47</Id>
+    <Name>KBZ EAST</Name>
+    <SRNO>51.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>48</Id>
+    <Name>KBZ WEST</Name>
+    <SRNO>52.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>49</Id>
+    <Name>KIAMBU</Name>
+    <SRNO>53.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>50</Id>
+    <Name>KIBOKO</Name>
+    <SRNO>54.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>51</Id>
+    <Name>KIBWEZ SCH</Name>
+    <SRNO>55.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>52</Id>
+    <Name>KIBWEZI</Name>
+    <SRNO>56.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>53</Id>
+    <Name>KIBWEZI EAST</Name>
+    <SRNO>57.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>54</Id>
+    <Name>KIBWEZI SCH</Name>
+    <SRNO>58.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>55</Id>
+    <Name>KIBWEZI SDH</Name>
+    <SRNO>59.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>56</Id>
+    <Name>KIBWEZI WEST</Name>
+    <SRNO>60.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>57</Id>
+    <Name>KIBWEZI WEST SC</Name>
+    <SRNO>61.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>58</Id>
+    <Name>KIBWEZUI</Name>
+    <SRNO>62.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>59</Id>
+    <Name>KIKUYU</Name>
+    <SRNO>63.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>60</Id>
+    <Name>KIKUYUNI</Name>
+    <SRNO>64.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>61</Id>
+    <Name>KILIFI</Name>
+    <SRNO>65.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>62</Id>
+    <Name>KILINDINI</Name>
+    <SRNO>66.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>63</Id>
+    <Name>KILOME</Name>
+    <SRNO>67.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>64</Id>
+    <Name>KINANGO</Name>
+    <SRNO>68.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>65</Id>
+    <Name>KIRUGUYA</Name>
+    <SRNO>69.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>66</Id>
+    <Name>KISAUNI</Name>
+    <SRNO>70.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>67</Id>
+    <Name>KISIIYO</Name>
+    <SRNO>71.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>68</Id>
+    <Name>KISUMU</Name>
+    <SRNO>72.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>69</Id>
+    <Name>KITENGELA</Name>
+    <SRNO>73.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>70</Id>
+    <Name>KITUI</Name>
+    <SRNO>74.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>71</Id>
+    <Name>KITUTU MASABA</Name>
+    <SRNO>75.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>72</Id>
+    <Name>KOMBEWA</Name>
+    <SRNO>76.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>73</Id>
+    <Name>KONGOWEA</Name>
+    <SRNO>77.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>74</Id>
+    <Name>KOTTOKTOK</Name>
+    <SRNO>78.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>75</Id>
+    <Name>KWALE</Name>
+    <SRNO>79.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>76</Id>
+    <Name>LAMU</Name>
+    <SRNO>80.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>77</Id>
+    <Name>LANG'ATA H.C</Name>
+    <SRNO>81.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>78</Id>
+    <Name>LANGATA</Name>
+    <SRNO>82.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>79</Id>
+    <Name>LEA TOTO-NRB</Name>
+    <SRNO>83.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>80</Id>
+    <Name>LIKONI</Name>
+    <SRNO>84.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>81</Id>
+    <Name>LIKONI H/C</Name>
+    <SRNO>85.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>82</Id>
+    <Name>LOITOKOTOK</Name>
+    <SRNO>86.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>83</Id>
+    <Name>LOITOKTOK</Name>
+    <SRNO>87.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>84</Id>
+    <Name>LUGARI</Name>
+    <SRNO>88.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>85</Id>
+    <Name>M.ANDEI</Name>
+    <SRNO>89.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>86</Id>
+    <Name>MACHAKOS</Name>
+    <SRNO>90.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>87</Id>
+    <Name>MACHAKOS G.H</Name>
+    <SRNO>91.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>88</Id>
+    <Name>MACHAKOS LEVEL 5 HOSP</Name>
+    <SRNO>92.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>89</Id>
+    <Name>MAGONGO H/C</Name>
+    <SRNO>93.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>90</Id>
+    <Name>MAKADARA</Name>
+    <SRNO>94.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>91</Id>
+    <Name>MAKINDU</Name>
+    <SRNO>95.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>92</Id>
+    <Name>MAKINDU CATHOLIC</Name>
+    <SRNO>96.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>93</Id>
+    <Name>MAKINDU SCH</Name>
+    <SRNO>97.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>94</Id>
+    <Name>MAKINDU SUB COUNTY</Name>
+    <SRNO>98.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>95</Id>
+    <Name>MAKUENI</Name>
+    <SRNO>99.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>96</Id>
+    <Name>MALILU</Name>
+    <SRNO>100.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>97</Id>
+    <Name>MALINDI</Name>
+    <SRNO>101.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>98</Id>
+    <Name>MARAGUA</Name>
+    <SRNO>102.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>99</Id>
+    <Name>MARIAKANI</Name>
+    <SRNO>103.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>100</Id>
+    <Name>MASHRU</Name>
+    <SRNO>104.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>101</Id>
+    <Name>MASINGA</Name>
+    <SRNO>105.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>102</Id>
+    <Name>MATHARE</Name>
+    <SRNO>106.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>103</Id>
+    <Name>MATILIKU</Name>
+    <SRNO>107.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>104</Id>
+    <Name>MATTER HOSP</Name>
+    <SRNO>108.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>105</Id>
+    <Name>MATUU</Name>
+    <SRNO>109.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>106</Id>
+    <Name>MAVOKO</Name>
+    <SRNO>110.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>107</Id>
+    <Name>MBAGATHI</Name>
+    <SRNO>111.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>108</Id>
+    <Name>MBIRIKANI</Name>
+    <SRNO>112.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>109</Id>
+    <Name>MBITA</Name>
+    <SRNO>113.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>110</Id>
+    <Name>MBOONI</Name>
+    <SRNO>114.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>111</Id>
+    <Name>MBOONI WEST</Name>
+    <SRNO>115.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>112</Id>
+    <Name>MIKINDANI HC</Name>
+    <SRNO>116.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>113</Id>
+    <Name>MIKUYUNI</Name>
+    <SRNO>117.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>114</Id>
+    <Name>MKD</Name>
+    <SRNO>118.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>115</Id>
+    <Name>MKU</Name>
+    <SRNO>119.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>116</Id>
+    <Name>MOMBASA</Name>
+    <SRNO>120.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>117</Id>
+    <Name>MOMVASA</Name>
+    <SRNO>121.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>118</Id>
+    <Name>MSA</Name>
+    <SRNO>122.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>119</Id>
+    <Name>MSAMBWENI</Name>
+    <SRNO>123.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>120</Id>
+    <Name>MTITO ANDEI</Name>
+    <SRNO>124.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>121</Id>
+    <Name>MTWAPA</Name>
+    <SRNO>125.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>122</Id>
+    <Name>MUHORONI</Name>
+    <SRNO>126.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>123</Id>
+    <Name>MUKAA</Name>
+    <SRNO>127.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>124</Id>
+    <Name>MUKAA/KASIKEU</Name>
+    <SRNO>128.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>125</Id>
+    <Name>MUMIAS</Name>
+    <SRNO>129.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>126</Id>
+    <Name>MUTOMO</Name>
+    <SRNO>130.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>127</Id>
+    <Name>MUUMANDU HC</Name>
+    <SRNO>131.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>128</Id>
+    <Name>MWALA</Name>
+    <SRNO>132.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>129</Id>
+    <Name>MWEMBE  TAYARI</Name>
+    <SRNO>133.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>130</Id>
+    <Name>MWINGI EAST</Name>
+    <SRNO>134.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>131</Id>
+    <Name>NAIROBI</Name>
+    <SRNO>135.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>132</Id>
+    <Name>NAIROBI/ST VINCENT</Name>
+    <SRNO>136.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>133</Id>
+    <Name>NAIVASHA</Name>
+    <SRNO>137.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>134</Id>
+    <Name>NAKURU, BAHATI HOSP</Name>
+    <SRNO>138.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>135</Id>
+    <Name>NANDI</Name>
+    <SRNO>139.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>136</Id>
+    <Name>NAROK</Name>
+    <SRNO>140.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>137</Id>
+    <Name>NDILI</Name>
+    <SRNO>141.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>138</Id>
+    <Name>NGWARA/BARAKA</Name>
+    <SRNO>142.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>139</Id>
+    <Name>NGWATA</Name>
+    <SRNO>143.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>140</Id>
+    <Name>NJORO</Name>
+    <SRNO>144.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>141</Id>
+    <Name>NRB</Name>
+    <SRNO>145.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>142</Id>
+    <Name>NYAKACH</Name>
+    <SRNO>146.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>143</Id>
+    <Name>NYERI</Name>
+    <SRNO>147.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>144</Id>
+    <Name>NZAU</Name>
+    <SRNO>148.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>145</Id>
+    <Name>NZAUI</Name>
+    <SRNO>149.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>146</Id>
+    <Name>OLOITOKTOK</Name>
+    <SRNO>150.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>147</Id>
+    <Name>OPD</Name>
+    <SRNO>151.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>148</Id>
+    <Name>OYUGIS</Name>
+    <SRNO>152.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>149</Id>
+    <Name>PORT REITZ</Name>
+    <SRNO>153.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>150</Id>
+    <Name>PORTREITZ CCC</Name>
+    <SRNO>154.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>151</Id>
+    <Name>RABAI</Name>
+    <SRNO>155.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>152</Id>
+    <Name>RARIENDA</Name>
+    <SRNO>156.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>153</Id>
+    <Name>RIFTVALLEY</Name>
+    <SRNO>157.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>154</Id>
+    <Name>RONGO</Name>
+    <SRNO>158.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>155</Id>
+    <Name>RUIRU</Name>
+    <SRNO>159.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>156</Id>
+    <Name>RVD</Name>
+    <SRNO>160.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>157</Id>
+    <Name>S/HAMUD</Name>
+    <SRNO>161.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>158</Id>
+    <Name>SOKO MJINGA</Name>
+    <SRNO>162.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>159</Id>
+    <Name>ST.VINCENT CATHOLIC CLINIC</Name>
+    <SRNO>163.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>160</Id>
+    <Name>STAREHE</Name>
+    <SRNO>164.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>161</Id>
+    <Name>STC NAIROBI</Name>
+    <SRNO>165.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>162</Id>
+    <Name>T/I KAJIADO</Name>
+    <SRNO>166.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>163</Id>
+    <Name>TAITA</Name>
+    <SRNO>167.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>164</Id>
+    <Name>TAITA TAVETA</Name>
+    <SRNO>168.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>165</Id>
+    <Name>TAITA TAVETA DIST</Name>
+    <SRNO>169.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>166</Id>
+    <Name>TAVETA</Name>
+    <SRNO>170.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>167</Id>
+    <Name>THIKA</Name>
+    <SRNO>171.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>168</Id>
+    <Name>THITHI</Name>
+    <SRNO>172.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>169</Id>
+    <Name>TRANSNZOIA</Name>
+    <SRNO>173.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>170</Id>
+    <Name>U.O.N</Name>
+    <SRNO>174.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>171</Id>
+    <Name>UGANDA</Name>
+    <SRNO>175.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>172</Id>
+    <Name>UOM</Name>
+    <SRNO>176.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>173</Id>
+    <Name>UON</Name>
+    <SRNO>177.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>174</Id>
+    <Name>UON MARPS</Name>
+    <SRNO>178.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
+  <Mst_District>
+    <Id>175</Id>
+    <Name>VOI</Name>
+    <SRNO>179.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_District>
   <Mst_Reason>
     <Id>25</Id>
     <Name>Start TB Treatment</Name>
@@ -1356,93 +2419,816 @@
     <SystemID>1</SystemID>
   </Mst_Education>
   <Mst_Designation>
-    <Id>1</Id>
-    <Name>Physician/Clinical Officer</Name>
+    <Id>12</Id>
+    <Name>Clinical Officer</Name>
     <SRNO>1.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+    <SystemID>1</SystemID>
+  </Mst_Designation>
+  <Mst_Designation>
+    <Id>1</Id>
+    <Name>Physician</Name>
+    <SRNO>2.00</SRNO>
     <Deleteflag>0</Deleteflag>
     <SystemID>1</SystemID>
   </Mst_Designation>
   <Mst_Designation>
     <Id>2</Id>
     <Name>Nurse/Midwife</Name>
-    <SRNO>2.00</SRNO>
+    <SRNO>3.00</SRNO>
     <Deleteflag>0</Deleteflag>
     <SystemID>1</SystemID>
   </Mst_Designation>
   <Mst_Designation>
     <Id>6</Id>
     <Name>Counselor</Name>
-    <SRNO>3.00</SRNO>
+    <SRNO>4.00</SRNO>
     <Deleteflag>0</Deleteflag>
     <SystemID>1</SystemID>
   </Mst_Designation>
   <Mst_Designation>
     <Id>8</Id>
     <Name>Pharmacist</Name>
-    <SRNO>4.00</SRNO>
+    <SRNO>5.00</SRNO>
     <Deleteflag>0</Deleteflag>
     <SystemID>1</SystemID>
   </Mst_Designation>
   <Mst_Designation>
     <Id>3</Id>
     <Name>Lab Technician</Name>
-    <SRNO>5.00</SRNO>
+    <SRNO>6.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+    <SystemID>1</SystemID>
+  </Mst_Designation>
+  <Mst_Designation>
+    <Id>24</Id>
+    <Name>Laboratory</Name>
+    <SRNO>7.00</SRNO>
     <Deleteflag>0</Deleteflag>
     <SystemID>1</SystemID>
   </Mst_Designation>
   <Mst_Designation>
     <Id>5</Id>
     <Name>Adherence Staff</Name>
-    <SRNO>6.00</SRNO>
+    <SRNO>8.00</SRNO>
     <Deleteflag>0</Deleteflag>
     <SystemID>1</SystemID>
   </Mst_Designation>
   <Mst_Designation>
     <Id>4</Id>
     <Name>M&amp;E</Name>
-    <SRNO>7.00</SRNO>
+    <SRNO>9.00</SRNO>
     <Deleteflag>0</Deleteflag>
     <SystemID>1</SystemID>
   </Mst_Designation>
   <Mst_Designation>
     <Id>7</Id>
     <Name>Community Health Worker</Name>
-    <SRNO>8.00</SRNO>
+    <SRNO>10.00</SRNO>
     <Deleteflag>0</Deleteflag>
     <SystemID>1</SystemID>
   </Mst_Designation>
   <Mst_Designation>
     <Id>11</Id>
     <Name>HRIO</Name>
-    <SRNO>9.00</SRNO>
+    <SRNO>11.00</SRNO>
     <Deleteflag>0</Deleteflag>
     <SystemID>1</SystemID>
   </Mst_Designation>
   <Mst_Designation>
     <Id>9</Id>
     <Name>Social Worker</Name>
-    <SRNO>10.00</SRNO>
+    <SRNO>12.00</SRNO>
     <Deleteflag>0</Deleteflag>
     <SystemID>1</SystemID>
   </Mst_Designation>
   <Mst_Designation>
     <Id>10</Id>
     <Name>Other</Name>
-    <SRNO>11.00</SRNO>
+    <SRNO>13.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+    <SystemID>1</SystemID>
+  </Mst_Designation>
+  <Mst_Designation>
+    <Id>13</Id>
+    <Name>PharmTech</Name>
+    <SRNO>14.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+    <SystemID>1</SystemID>
+  </Mst_Designation>
+  <Mst_Designation>
+    <Id>14</Id>
+    <Name>Lab Technologist</Name>
+    <SRNO>15.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+    <SystemID>1</SystemID>
+  </Mst_Designation>
+  <Mst_Designation>
+    <Id>15</Id>
+    <Name>Nutritionist</Name>
+    <SRNO>16.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+    <SystemID>1</SystemID>
+  </Mst_Designation>
+  <Mst_Designation>
+    <Id>16</Id>
+    <Name>Medical Officer</Name>
+    <SRNO>17.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+    <SystemID>1</SystemID>
+  </Mst_Designation>
+  <Mst_Designation>
+    <Id>17</Id>
+    <Name>Peer Educator</Name>
+    <SRNO>18.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+    <SystemID>1</SystemID>
+  </Mst_Designation>
+  <Mst_Designation>
+    <Id>18</Id>
+    <Name>Mentor Mother</Name>
+    <SRNO>19.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+    <SystemID>1</SystemID>
+  </Mst_Designation>
+  <Mst_Designation>
+    <Id>19</Id>
+    <Name>HTS Counselor</Name>
+    <SRNO>20.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+    <SystemID>1</SystemID>
+  </Mst_Designation>
+  <Mst_Designation>
+    <Id>21</Id>
+    <Name>Surgeon</Name>
+    <SRNO>21.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+    <SystemID>1</SystemID>
+  </Mst_Designation>
+  <Mst_Designation>
+    <Id>20</Id>
+    <Name>ICT Officer</Name>
+    <SRNO>22.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+    <SystemID>1</SystemID>
+  </Mst_Designation>
+  <Mst_Designation>
+    <Id>22</Id>
+    <Name>Med Sup</Name>
+    <SRNO>23.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+    <SystemID>1</SystemID>
+  </Mst_Designation>
+  <Mst_Designation>
+    <Id>23</Id>
+    <Name>SCASCO</Name>
+    <SRNO>24.00</SRNO>
     <Deleteflag>0</Deleteflag>
     <SystemID>1</SystemID>
   </Mst_Designation>
   <Mst_Employee>
+    <EmployeeId>2</EmployeeId>
+    <Id>2</Id>
+    <FirstName>Patience</FirstName>
+    <LastName>Mwikali   </LastName>
+    <Name>Patience Mwikali   </Name>
+    <EmployeeName>Patience Mwikali   </EmployeeName>
+    <DesignationId>11</DesignationId>
+    <SRNO>0.00</SRNO>
+    <DeleteFlag>0</DeleteFlag>
+  </Mst_Employee>
+  <Mst_Employee>
+    <EmployeeId>3</EmployeeId>
+    <Id>3</Id>
+    <FirstName>EVA</FirstName>
+    <LastName>MASOMO    </LastName>
+    <Name>EVA MASOMO    </Name>
+    <EmployeeName>EVA MASOMO    </EmployeeName>
+    <DesignationId>12</DesignationId>
+    <SRNO>0.00</SRNO>
+    <DeleteFlag>0</DeleteFlag>
+  </Mst_Employee>
+  <Mst_Employee>
+    <EmployeeId>4</EmployeeId>
+    <Id>4</Id>
+    <FirstName>Isaac</FirstName>
+    <LastName>Kithusi   </LastName>
+    <Name>Isaac Kithusi   </Name>
+    <EmployeeName>Isaac Kithusi   </EmployeeName>
+    <DesignationId>13</DesignationId>
+    <SRNO>0.00</SRNO>
+    <DeleteFlag>0</DeleteFlag>
+  </Mst_Employee>
+  <Mst_Employee>
+    <EmployeeId>5</EmployeeId>
+    <Id>5</Id>
+    <FirstName>Diana</FirstName>
+    <LastName>Musyoka   </LastName>
+    <Name>Diana Musyoka   </Name>
+    <EmployeeName>Diana Musyoka   </EmployeeName>
+    <DesignationId>14</DesignationId>
+    <SRNO>0.00</SRNO>
+    <DeleteFlag>0</DeleteFlag>
+  </Mst_Employee>
+  <Mst_Employee>
+    <EmployeeId>6</EmployeeId>
+    <Id>6</Id>
+    <FirstName>Samuel</FirstName>
+    <LastName>Musyoka   </LastName>
+    <Name>Samuel Musyoka   </Name>
+    <EmployeeName>Samuel Musyoka   </EmployeeName>
+    <DesignationId>2</DesignationId>
+    <SRNO>0.00</SRNO>
+    <DeleteFlag>0</DeleteFlag>
+  </Mst_Employee>
+  <Mst_Employee>
+    <EmployeeId>7</EmployeeId>
+    <Id>7</Id>
+    <FirstName>Kenneth</FirstName>
+    <LastName>Mutuma    </LastName>
+    <Name>Kenneth Mutuma    </Name>
+    <EmployeeName>Kenneth Mutuma    </EmployeeName>
+    <DesignationId>11</DesignationId>
+    <SRNO>0.00</SRNO>
+    <DeleteFlag>0</DeleteFlag>
+  </Mst_Employee>
+  <Mst_Employee>
+    <EmployeeId>8</EmployeeId>
+    <Id>8</Id>
+    <FirstName>WINNIE</FirstName>
+    <LastName>MULU      </LastName>
+    <Name>WINNIE MULU      </Name>
+    <EmployeeName>WINNIE MULU      </EmployeeName>
+    <DesignationId>12</DesignationId>
+    <SRNO>0.00</SRNO>
+    <DeleteFlag>0</DeleteFlag>
+  </Mst_Employee>
+  <Mst_Employee>
+    <EmployeeId>9</EmployeeId>
+    <Id>9</Id>
+    <FirstName>DORCUS</FirstName>
+    <LastName>MUTUNE    </LastName>
+    <Name>DORCUS MUTUNE    </Name>
+    <EmployeeName>DORCUS MUTUNE    </EmployeeName>
+    <DesignationId>12</DesignationId>
+    <SRNO>0.00</SRNO>
+    <DeleteFlag>0</DeleteFlag>
+  </Mst_Employee>
+  <Mst_Employee>
+    <EmployeeId>10</EmployeeId>
+    <Id>10</Id>
+    <FirstName>Juliet</FirstName>
+    <LastName>Mweresa   </LastName>
+    <Name>Juliet Mweresa   </Name>
+    <EmployeeName>Juliet Mweresa   </EmployeeName>
+    <DesignationId>13</DesignationId>
+    <SRNO>0.00</SRNO>
+    <DeleteFlag>0</DeleteFlag>
+  </Mst_Employee>
+  <Mst_Employee>
+    <EmployeeId>11</EmployeeId>
+    <Id>11</Id>
+    <FirstName>Veronica</FirstName>
+    <LastName>kioko     </LastName>
+    <Name>Veronica kioko     </Name>
+    <EmployeeName>Veronica kioko     </EmployeeName>
+    <DesignationId>2</DesignationId>
+    <SRNO>0.00</SRNO>
+    <DeleteFlag>0</DeleteFlag>
+  </Mst_Employee>
+  <Mst_Employee>
+    <EmployeeId>12</EmployeeId>
+    <Id>12</Id>
+    <FirstName>Diana</FirstName>
+    <LastName>Musyoka   </LastName>
+    <Name>Diana Musyoka   </Name>
+    <EmployeeName>Diana Musyoka   </EmployeeName>
+    <DesignationId>14</DesignationId>
+    <SRNO>0.00</SRNO>
+    <DeleteFlag>0</DeleteFlag>
+  </Mst_Employee>
+  <Mst_Employee>
+    <EmployeeId>13</EmployeeId>
+    <Id>13</Id>
+    <FirstName>Raphael</FirstName>
+    <LastName>Mwaka     </LastName>
+    <Name>Raphael Mwaka     </Name>
+    <EmployeeName>Raphael Mwaka     </EmployeeName>
+    <DesignationId>14</DesignationId>
+    <SRNO>0.00</SRNO>
+    <DeleteFlag>0</DeleteFlag>
+  </Mst_Employee>
+  <Mst_Employee>
+    <EmployeeId>14</EmployeeId>
+    <Id>14</Id>
+    <FirstName>Harvey</FirstName>
+    <LastName>Mbithi    </LastName>
+    <Name>Harvey Mbithi    </Name>
+    <EmployeeName>Harvey Mbithi    </EmployeeName>
+    <DesignationId>8</DesignationId>
+    <SRNO>0.00</SRNO>
+    <DeleteFlag>0</DeleteFlag>
+  </Mst_Employee>
+  <Mst_Employee>
+    <EmployeeId>15</EmployeeId>
+    <Id>15</Id>
+    <FirstName>Brian</FirstName>
+    <LastName>Malombe   </LastName>
+    <Name>Brian Malombe   </Name>
+    <EmployeeName>Brian Malombe   </EmployeeName>
+    <DesignationId>14</DesignationId>
+    <SRNO>0.00</SRNO>
+    <DeleteFlag>0</DeleteFlag>
+  </Mst_Employee>
+  <Mst_Employee>
+    <EmployeeId>16</EmployeeId>
+    <Id>16</Id>
+    <FirstName>Sarah</FirstName>
+    <LastName>Amburuka  </LastName>
+    <Name>Sarah Amburuka  </Name>
+    <EmployeeName>Sarah Amburuka  </EmployeeName>
+    <DesignationId>11</DesignationId>
+    <SRNO>0.00</SRNO>
+    <DeleteFlag>0</DeleteFlag>
+  </Mst_Employee>
+  <Mst_Employee>
+    <EmployeeId>17</EmployeeId>
+    <Id>17</Id>
+    <FirstName>JACKLINE</FirstName>
+    <LastName>MWANGANGI                                         </LastName>
+    <Name>JACKLINE MWANGANGI                                         </Name>
+    <EmployeeName>JACKLINE MWANGANGI                                         </EmployeeName>
+    <DesignationId>11</DesignationId>
+    <SRNO>0.00</SRNO>
+    <DeleteFlag>0</DeleteFlag>
+  </Mst_Employee>
+  <Mst_Employee>
+    <EmployeeId>18</EmployeeId>
+    <Id>18</Id>
+    <FirstName>mwatika</FirstName>
+    <LastName>patience  </LastName>
+    <Name>mwatika patience  </Name>
+    <EmployeeName>mwatika patience  </EmployeeName>
+    <DesignationId>11</DesignationId>
+    <SRNO>0.00</SRNO>
+    <DeleteFlag>0</DeleteFlag>
+  </Mst_Employee>
+  <Mst_Employee>
+    <EmployeeId>19</EmployeeId>
+    <Id>19</Id>
+    <FirstName>Masomo ndanu</FirstName>
+    <LastName>Eva       </LastName>
+    <Name>Masomo ndanu Eva       </Name>
+    <EmployeeName>Masomo ndanu Eva       </EmployeeName>
+    <DesignationId>12</DesignationId>
+    <SRNO>0.00</SRNO>
+    <DeleteFlag>0</DeleteFlag>
+  </Mst_Employee>
+  <Mst_Employee>
+    <EmployeeId>20</EmployeeId>
+    <Id>20</Id>
+    <FirstName>Mulu kamwei</FirstName>
+    <LastName>Winfred   </LastName>
+    <Name>Mulu kamwei Winfred   </Name>
+    <EmployeeName>Mulu kamwei Winfred   </EmployeeName>
+    <DesignationId>12</DesignationId>
+    <SRNO>0.00</SRNO>
+    <DeleteFlag>0</DeleteFlag>
+  </Mst_Employee>
+  <Mst_Employee>
+    <EmployeeId>21</EmployeeId>
+    <Id>21</Id>
+    <FirstName>Moffat</FirstName>
+    <LastName>Maitha                                            </LastName>
+    <Name>Moffat Maitha                                            </Name>
+    <EmployeeName>Moffat Maitha                                            </EmployeeName>
+    <DesignationId>2</DesignationId>
+    <SRNO>0.00</SRNO>
+    <DeleteFlag>0</DeleteFlag>
+  </Mst_Employee>
+  <Mst_Employee>
+    <EmployeeId>22</EmployeeId>
+    <Id>22</Id>
+    <FirstName>MUTUNE</FirstName>
+    <LastName>DORCAS                                            </LastName>
+    <Name>MUTUNE DORCAS                                            </Name>
+    <EmployeeName>MUTUNE DORCAS                                            </EmployeeName>
+    <DesignationId>12</DesignationId>
+    <SRNO>0.00</SRNO>
+    <DeleteFlag>0</DeleteFlag>
+  </Mst_Employee>
+  <Mst_Employee>
+    <EmployeeId>23</EmployeeId>
+    <Id>23</Id>
+    <FirstName>MUSYOKA</FirstName>
+    <LastName>SAMUEL                                            </LastName>
+    <Name>MUSYOKA SAMUEL                                            </Name>
+    <EmployeeName>MUSYOKA SAMUEL                                            </EmployeeName>
+    <DesignationId>2</DesignationId>
+    <SRNO>0.00</SRNO>
+    <DeleteFlag>0</DeleteFlag>
+  </Mst_Employee>
+  <Mst_Employee>
+    <EmployeeId>24</EmployeeId>
+    <Id>24</Id>
+    <FirstName>Veronica wavinya</FirstName>
+    <LastName>Kioko                                             </LastName>
+    <Name>Veronica wavinya Kioko                                             </Name>
+    <EmployeeName>Veronica wavinya Kioko                                             </EmployeeName>
+    <DesignationId>2</DesignationId>
+    <SRNO>0.00</SRNO>
+    <DeleteFlag>0</DeleteFlag>
+  </Mst_Employee>
+  <Mst_Employee>
+    <EmployeeId>25</EmployeeId>
+    <Id>25</Id>
+    <FirstName>Daniel</FirstName>
+    <LastName>Mbuvi                                             </LastName>
+    <Name>Daniel Mbuvi                                             </Name>
+    <EmployeeName>Daniel Mbuvi                                             </EmployeeName>
+    <DesignationId>12</DesignationId>
+    <SRNO>0.00</SRNO>
+    <DeleteFlag>0</DeleteFlag>
+  </Mst_Employee>
+  <Mst_Employee>
+    <EmployeeId>26</EmployeeId>
+    <Id>26</Id>
+    <FirstName>Materi Bundi</FirstName>
+    <LastName>Asteria                                           </LastName>
+    <Name>Materi Bundi Asteria                                           </Name>
+    <EmployeeName>Materi Bundi Asteria                                           </EmployeeName>
+    <DesignationId>2</DesignationId>
+    <SRNO>0.00</SRNO>
+    <DeleteFlag>0</DeleteFlag>
+  </Mst_Employee>
+  <Mst_Employee>
+    <EmployeeId>27</EmployeeId>
+    <Id>27</Id>
+    <FirstName>Mbuvi</FirstName>
+    <LastName>Daniel                                            </LastName>
+    <Name>Mbuvi Daniel                                            </Name>
+    <EmployeeName>Mbuvi Daniel                                            </EmployeeName>
+    <DesignationId>12</DesignationId>
+    <SRNO>0.00</SRNO>
+    <DeleteFlag>0</DeleteFlag>
+  </Mst_Employee>
+  <Mst_Employee>
+    <EmployeeId>28</EmployeeId>
+    <Id>28</Id>
+    <FirstName>Nicodemus</FirstName>
+    <LastName>Kisengese                                         </LastName>
+    <Name>Nicodemus Kisengese                                         </Name>
+    <EmployeeName>Nicodemus Kisengese                                         </EmployeeName>
+    <DesignationId>12</DesignationId>
+    <SRNO>0.00</SRNO>
+    <DeleteFlag>0</DeleteFlag>
+  </Mst_Employee>
+  <Mst_Employee>
     <EmployeeId>1</EmployeeId>
     <Id>1</Id>
-    <FirstName>Importer</FirstName>
-    <LastName>Data</LastName>
-    <Name>Importer Data</Name>
-    <EmployeeName>Importer Data</EmployeeName>
-    <DesignationId>10</DesignationId>
+    <FirstName>Asteria</FirstName>
+    <LastName>Bundi     </LastName>
+    <Name>Asteria Bundi     </Name>
+    <EmployeeName>Asteria Bundi     </EmployeeName>
+    <DesignationId>2</DesignationId>
     <SRNO>1.00</SRNO>
     <DeleteFlag>0</DeleteFlag>
   </Mst_Employee>
+  <Mst_Province>
+    <Id>3</Id>
+    <Name>Mombasa 001</Name>
+    <SRNO>1.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+    <SystemID>1</SystemID>
+  </Mst_Province>
+  <Mst_Province>
+    <Id>4</Id>
+    <Name>Kwale 002</Name>
+    <SRNO>2.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+    <SystemID>1</SystemID>
+  </Mst_Province>
+  <Mst_Province>
+    <Id>5</Id>
+    <Name>Kilifi 003</Name>
+    <SRNO>3.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+    <SystemID>1</SystemID>
+  </Mst_Province>
+  <Mst_Province>
+    <Id>6</Id>
+    <Name>Tana River 004</Name>
+    <SRNO>4.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+    <SystemID>1</SystemID>
+  </Mst_Province>
+  <Mst_Province>
+    <Id>7</Id>
+    <Name>Lamu 005</Name>
+    <SRNO>5.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+    <SystemID>1</SystemID>
+  </Mst_Province>
+  <Mst_Province>
+    <Id>8</Id>
+    <Name>Taita-Taveta 006</Name>
+    <SRNO>6.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+    <SystemID>1</SystemID>
+  </Mst_Province>
+  <Mst_Province>
+    <Id>9</Id>
+    <Name>Garissa 007</Name>
+    <SRNO>7.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+    <SystemID>1</SystemID>
+  </Mst_Province>
+  <Mst_Province>
+    <Id>10</Id>
+    <Name>Wajir 008</Name>
+    <SRNO>8.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+    <SystemID>1</SystemID>
+  </Mst_Province>
+  <Mst_Province>
+    <Id>11</Id>
+    <Name>Mandera 009</Name>
+    <SRNO>9.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+    <SystemID>1</SystemID>
+  </Mst_Province>
+  <Mst_Province>
+    <Id>12</Id>
+    <Name>Marsabit 010</Name>
+    <SRNO>10.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+    <SystemID>1</SystemID>
+  </Mst_Province>
+  <Mst_Province>
+    <Id>13</Id>
+    <Name>Isiolo 011</Name>
+    <SRNO>11.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+    <SystemID>1</SystemID>
+  </Mst_Province>
+  <Mst_Province>
+    <Id>14</Id>
+    <Name>Meru 012</Name>
+    <SRNO>12.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+    <SystemID>1</SystemID>
+  </Mst_Province>
+  <Mst_Province>
+    <Id>15</Id>
+    <Name>Tharaka-Nithi  013</Name>
+    <SRNO>13.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+    <SystemID>1</SystemID>
+  </Mst_Province>
+  <Mst_Province>
+    <Id>1</Id>
+    <Name>MAKUENI</Name>
+    <SRNO>14.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+  </Mst_Province>
+  <Mst_Province>
+    <Id>16</Id>
+    <Name>Kitui 015</Name>
+    <SRNO>15.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+    <SystemID>1</SystemID>
+  </Mst_Province>
+  <Mst_Province>
+    <Id>17</Id>
+    <Name>Machakos 016</Name>
+    <SRNO>16.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+    <SystemID>1</SystemID>
+  </Mst_Province>
+  <Mst_Province>
+    <Id>18</Id>
+    <Name>Makueni 017</Name>
+    <SRNO>17.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+    <SystemID>1</SystemID>
+  </Mst_Province>
+  <Mst_Province>
+    <Id>19</Id>
+    <Name>Nyandarua 018</Name>
+    <SRNO>18.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+    <SystemID>1</SystemID>
+  </Mst_Province>
+  <Mst_Province>
+    <Id>20</Id>
+    <Name>Nyeri 019</Name>
+    <SRNO>19.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+    <SystemID>1</SystemID>
+  </Mst_Province>
+  <Mst_Province>
+    <Id>21</Id>
+    <Name>Kirinyaga 020</Name>
+    <SRNO>20.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+    <SystemID>1</SystemID>
+  </Mst_Province>
+  <Mst_Province>
+    <Id>22</Id>
+    <Name>Murang'a 021</Name>
+    <SRNO>21.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+    <SystemID>1</SystemID>
+  </Mst_Province>
+  <Mst_Province>
+    <Id>23</Id>
+    <Name>Kiambu 022</Name>
+    <SRNO>22.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+    <SystemID>1</SystemID>
+  </Mst_Province>
+  <Mst_Province>
+    <Id>24</Id>
+    <Name>Turkana 023</Name>
+    <SRNO>23.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+    <SystemID>1</SystemID>
+  </Mst_Province>
+  <Mst_Province>
+    <Id>25</Id>
+    <Name>West Pokot 024</Name>
+    <SRNO>24.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+    <SystemID>1</SystemID>
+  </Mst_Province>
+  <Mst_Province>
+    <Id>26</Id>
+    <Name>Samburu 025</Name>
+    <SRNO>25.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+    <SystemID>1</SystemID>
+  </Mst_Province>
+  <Mst_Province>
+    <Id>28</Id>
+    <Name>Uasin-Gishu 026</Name>
+    <SRNO>26.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+    <SystemID>1</SystemID>
+  </Mst_Province>
+  <Mst_Province>
+    <Id>2</Id>
+    <Name>MALILI</Name>
+    <SRNO>27.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+    <SystemID>1</SystemID>
+  </Mst_Province>
+  <Mst_Province>
+    <Id>29</Id>
+    <Name>Elgeyo- Marakwet 028</Name>
+    <SRNO>28.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+    <SystemID>1</SystemID>
+  </Mst_Province>
+  <Mst_Province>
+    <Id>30</Id>
+    <Name>Nandi 029</Name>
+    <SRNO>29.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+    <SystemID>1</SystemID>
+  </Mst_Province>
+  <Mst_Province>
+    <Id>31</Id>
+    <Name>Baringo 030</Name>
+    <SRNO>30.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+    <SystemID>1</SystemID>
+  </Mst_Province>
+  <Mst_Province>
+    <Id>32</Id>
+    <Name>Laikipia 031</Name>
+    <SRNO>31.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+    <SystemID>1</SystemID>
+  </Mst_Province>
+  <Mst_Province>
+    <Id>33</Id>
+    <Name>Nakuru 032</Name>
+    <SRNO>32.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+    <SystemID>1</SystemID>
+  </Mst_Province>
+  <Mst_Province>
+    <Id>34</Id>
+    <Name>Narok 033</Name>
+    <SRNO>33.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+    <SystemID>1</SystemID>
+  </Mst_Province>
+  <Mst_Province>
+    <Id>35</Id>
+    <Name>Kajiado 034</Name>
+    <SRNO>34.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+    <SystemID>1</SystemID>
+  </Mst_Province>
+  <Mst_Province>
+    <Id>36</Id>
+    <Name>Kericho 035</Name>
+    <SRNO>35.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+    <SystemID>1</SystemID>
+  </Mst_Province>
+  <Mst_Province>
+    <Id>37</Id>
+    <Name>Bomet 036</Name>
+    <SRNO>36.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+    <SystemID>1</SystemID>
+  </Mst_Province>
+  <Mst_Province>
+    <Id>38</Id>
+    <Name>Kakamega 037</Name>
+    <SRNO>37.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+    <SystemID>1</SystemID>
+  </Mst_Province>
+  <Mst_Province>
+    <Id>39</Id>
+    <Name>Vihiga 038</Name>
+    <SRNO>38.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+    <SystemID>1</SystemID>
+  </Mst_Province>
+  <Mst_Province>
+    <Id>40</Id>
+    <Name>Bungoma 039</Name>
+    <SRNO>39.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+    <SystemID>1</SystemID>
+  </Mst_Province>
+  <Mst_Province>
+    <Id>41</Id>
+    <Name>Busia 040</Name>
+    <SRNO>40.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+    <SystemID>1</SystemID>
+  </Mst_Province>
+  <Mst_Province>
+    <Id>42</Id>
+    <Name>Siaya 041</Name>
+    <SRNO>41.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+    <SystemID>1</SystemID>
+  </Mst_Province>
+  <Mst_Province>
+    <Id>43</Id>
+    <Name>Kisumu 042</Name>
+    <SRNO>42.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+    <SystemID>1</SystemID>
+  </Mst_Province>
+  <Mst_Province>
+    <Id>44</Id>
+    <Name>Homabay 043</Name>
+    <SRNO>43.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+    <SystemID>1</SystemID>
+  </Mst_Province>
+  <Mst_Province>
+    <Id>45</Id>
+    <Name>Migori 044</Name>
+    <SRNO>44.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+    <SystemID>1</SystemID>
+  </Mst_Province>
+  <Mst_Province>
+    <Id>46</Id>
+    <Name>Kisii 045</Name>
+    <SRNO>45.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+    <SystemID>1</SystemID>
+  </Mst_Province>
+  <Mst_Province>
+    <Id>47</Id>
+    <Name>Nyamira 046</Name>
+    <SRNO>46.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+    <SystemID>1</SystemID>
+  </Mst_Province>
+  <Mst_Province>
+    <Id>48</Id>
+    <Name>Nairobi 047</Name>
+    <SRNO>47.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+    <SystemID>1</SystemID>
+  </Mst_Province>
+  <Mst_Province>
+    <Id>27</Id>
+    <Name>Trans-Nzoia 027</Name>
+    <SRNO>48.00</SRNO>
+    <Deleteflag>0</Deleteflag>
+    <SystemID>1</SystemID>
+  </Mst_Province>
   <Mst_Code>
     <CodeId>1</CodeId>
     <Name>Units</Name>
@@ -4312,13 +6098,16 @@
     <ListName>Appointment Reason</ListName>
   </Mst_Decode>
   <Mst_Decode>
-    <ID>62</ID>
-    <Name>Suspected ARV side effect</Name>
-    <CodeID>18</CodeID>
+    <ID>392</ID>
+    <Name>VCT</Name>
+    <CodeID>17</CodeID>
     <SRNo>1.00</SRNo>
     <DeleteFlag>0</DeleteFlag>
-    <SystemId>0</SystemId>
-    <ListName>DeathReason</ListName>
+    <SystemId>1</SystemId>
+    <Code />
+    <DisplayName> = VCT</DisplayName>
+    <ModuleId>202</ModuleId>
+    <ListName>Patient Referred</ListName>
   </Mst_Decode>
   <Mst_Decode>
     <ID>312</ID>
@@ -4347,16 +6136,6 @@
     <DeleteFlag>0</DeleteFlag>
     <SystemId>1</SystemId>
     <ModuleId>2</ModuleId>
-    <ListName>Patient Referred</ListName>
-  </Mst_Decode>
-  <Mst_Decode>
-    <ID>320</ID>
-    <Name>TB</Name>
-    <CodeID>17</CodeID>
-    <SRNo>1.00</SRNo>
-    <DeleteFlag>0</DeleteFlag>
-    <SystemId>1</SystemId>
-    <ModuleId>202</ModuleId>
     <ListName>Patient Referred</ListName>
   </Mst_Decode>
   <Mst_Decode>
@@ -4427,6 +6206,27 @@
     <ListName>ARV Eligibility</ListName>
   </Mst_Decode>
   <Mst_Decode>
+    <ID>302</ID>
+    <Name>Outsourced-Faith Based</Name>
+    <CodeID>203</CodeID>
+    <SRNo>1.00</SRNo>
+    <UpdateFlag>0</UpdateFlag>
+    <DeleteFlag>0</DeleteFlag>
+    <SystemId>0</SystemId>
+    <ListName>Laboratory Test Location</ListName>
+  </Mst_Decode>
+  <Mst_Decode>
+    <ID>346</ID>
+    <Name>Cashier</Name>
+    <CodeID>214</CodeID>
+    <SRNo>1.00</SRNo>
+    <DeleteFlag>0</DeleteFlag>
+    <SystemId>0</SystemId>
+    <Code>6</Code>
+    <DisplayName>6 = Cashier</DisplayName>
+    <ListName>Waiting List</ListName>
+  </Mst_Decode>
+  <Mst_Decode>
     <ID>337</ID>
     <Name>Clinical Form</Name>
     <CodeID>1009</CodeID>
@@ -4465,7 +6265,7 @@
     <ListName>Payment Exemption</ListName>
   </Mst_Decode>
   <Mst_Decode>
-    <ID>391</ID>
+    <ID>413</ID>
     <Name>Under 5</Name>
     <CodeID>1010</CodeID>
     <SRNo>1.00</SRNo>
@@ -4474,7 +6274,7 @@
     <ListName>Payment Exemption</ListName>
   </Mst_Decode>
   <Mst_Decode>
-    <ID>392</ID>
+    <ID>414</ID>
     <Name>Maternity</Name>
     <CodeID>1010</CodeID>
     <SRNo>1.00</SRNo>
@@ -4483,7 +6283,7 @@
     <ListName>Payment Exemption</ListName>
   </Mst_Decode>
   <Mst_Decode>
-    <ID>393</ID>
+    <ID>415</ID>
     <Name>Prisoner</Name>
     <CodeID>1010</CodeID>
     <SRNo>1.00</SRNo>
@@ -4503,7 +6303,7 @@
     <ListName>Billing Price Plans</ListName>
   </Mst_Decode>
   <Mst_Decode>
-    <ID>394</ID>
+    <ID>388</ID>
     <Name>Hepatitis B</Name>
     <CodeID>1012</CodeID>
     <SRNo>1.00</SRNo>
@@ -4511,6 +6311,18 @@
     <DeleteFlag>0</DeleteFlag>
     <SystemId>0</SystemId>
     <ListName>ServiceRegisteredForAtPharmacy</ListName>
+  </Mst_Decode>
+  <Mst_Decode>
+    <ID>391</ID>
+    <Name>Anza Sasa( Test and Treat)</Name>
+    <CodeID>1007</CodeID>
+    <SRNo>1.00</SRNo>
+    <DeleteFlag>0</DeleteFlag>
+    <SystemId>0</SystemId>
+    <Code />
+    <DisplayName> = Anza Sasa( Test and Treat)</DisplayName>
+    <ModuleId>203</ModuleId>
+    <ListName>ARV Eligibility</ListName>
   </Mst_Decode>
   <Mst_Decode>
     <ID>333</ID>
@@ -4524,23 +6336,13 @@
     <ListName>Form Category</ListName>
   </Mst_Decode>
   <Mst_Decode>
-    <ID>397</ID>
+    <ID>416</ID>
     <Name>Well</Name>
     <CodeID>1013</CodeID>
     <SRNo>1.00</SRNo>
     <DeleteFlag>0</DeleteFlag>
     <SystemId>1</SystemId>
     <ListName>Patient Classification</ListName>
-  </Mst_Decode>
-  <Mst_Decode>
-    <ID>155</ID>
-    <Name>N/A</Name>
-    <CodeID>22</CodeID>
-    <SRNo>1.00</SRNo>
-    <UpdateFlag>0</UpdateFlag>
-    <DeleteFlag>0</DeleteFlag>
-    <SystemId>1</SystemId>
-    <ListName>WHO Stage</ListName>
   </Mst_Decode>
   <Mst_Decode>
     <ID>124</ID>
@@ -4552,13 +6354,13 @@
     <ListName>Laboratory Unit</ListName>
   </Mst_Decode>
   <Mst_Decode>
-    <ID>91</ID>
-    <Name>Lost to follow-up</Name>
-    <CodeID>23</CodeID>
+    <ID>62</ID>
+    <Name>Suspected ARV side effect</Name>
+    <CodeID>18</CodeID>
     <SRNo>1.00</SRNo>
     <DeleteFlag>0</DeleteFlag>
     <SystemId>0</SystemId>
-    <ListName>Exit Reason</ListName>
+    <ListName>DeathReason</ListName>
   </Mst_Decode>
   <Mst_Decode>
     <ID>140</ID>
@@ -4610,6 +6412,24 @@
     <ListName>PharmacyUnit</ListName>
   </Mst_Decode>
   <Mst_Decode>
+    <ID>91</ID>
+    <Name>Lost to follow-up</Name>
+    <CodeID>23</CodeID>
+    <SRNo>1.00</SRNo>
+    <DeleteFlag>0</DeleteFlag>
+    <SystemId>0</SystemId>
+    <ListName>Exit Reason</ListName>
+  </Mst_Decode>
+  <Mst_Decode>
+    <ID>222</ID>
+    <Name>ART</Name>
+    <CodeID>33</CodeID>
+    <SRNo>1.00</SRNo>
+    <DeleteFlag>0</DeleteFlag>
+    <SystemId>0</SystemId>
+    <ListName>Treatment Program</ListName>
+  </Mst_Decode>
+  <Mst_Decode>
     <ID>235</ID>
     <Name>Self Discontinued</Name>
     <CodeID>34</CodeID>
@@ -4640,13 +6460,14 @@
     <ListName>ART Ended Reason</ListName>
   </Mst_Decode>
   <Mst_Decode>
-    <ID>222</ID>
-    <Name>ART</Name>
-    <CodeID>33</CodeID>
+    <ID>155</ID>
+    <Name>N/A</Name>
+    <CodeID>22</CodeID>
     <SRNo>1.00</SRNo>
+    <UpdateFlag>0</UpdateFlag>
     <DeleteFlag>0</DeleteFlag>
-    <SystemId>0</SystemId>
-    <ListName>Treatment Program</ListName>
+    <SystemId>1</SystemId>
+    <ListName>WHO Stage</ListName>
   </Mst_Decode>
   <Mst_Decode>
     <ID>295</ID>
@@ -4669,37 +6490,6 @@
     <ListName>Item Type</ListName>
   </Mst_Decode>
   <Mst_Decode>
-    <ID>302</ID>
-    <Name>Outsourced-Faith Based</Name>
-    <CodeID>203</CodeID>
-    <SRNo>1.00</SRNo>
-    <UpdateFlag>0</UpdateFlag>
-    <DeleteFlag>0</DeleteFlag>
-    <SystemId>0</SystemId>
-    <ListName>Laboratory Test Location</ListName>
-  </Mst_Decode>
-  <Mst_Decode>
-    <ID>346</ID>
-    <Name>Cashier</Name>
-    <CodeID>214</CodeID>
-    <SRNo>1.00</SRNo>
-    <DeleteFlag>0</DeleteFlag>
-    <SystemId>0</SystemId>
-    <Code>6</Code>
-    <DisplayName>6 = Cashier</DisplayName>
-    <ListName>Waiting List</ListName>
-  </Mst_Decode>
-  <Mst_Decode>
-    <ID>303</ID>
-    <Name>Outsourced-Government</Name>
-    <CodeID>203</CodeID>
-    <SRNo>2.00</SRNo>
-    <UpdateFlag>0</UpdateFlag>
-    <DeleteFlag>0</DeleteFlag>
-    <SystemId>0</SystemId>
-    <ListName>Laboratory Test Location</ListName>
-  </Mst_Decode>
-  <Mst_Decode>
     <ID>300</ID>
     <Name>Pharmaceuticals</Name>
     <CodeID>202</CodeID>
@@ -4720,15 +6510,6 @@
     <ListName>Cost Allocation Category</ListName>
   </Mst_Decode>
   <Mst_Decode>
-    <ID>223</ID>
-    <Name>PMTCT</Name>
-    <CodeID>33</CodeID>
-    <SRNo>2.00</SRNo>
-    <DeleteFlag>0</DeleteFlag>
-    <SystemId>0</SystemId>
-    <ListName>Treatment Program</ListName>
-  </Mst_Decode>
-  <Mst_Decode>
     <ID>145</ID>
     <Name>Treatment Failure-Virologic</Name>
     <CodeID>34</CodeID>
@@ -4739,13 +6520,13 @@
     <ListName>ART Ended Reason</ListName>
   </Mst_Decode>
   <Mst_Decode>
-    <ID>213</ID>
-    <Name>g</Name>
-    <CodeID>32</CodeID>
+    <ID>223</ID>
+    <Name>PMTCT</Name>
+    <CodeID>33</CodeID>
     <SRNo>2.00</SRNo>
     <DeleteFlag>0</DeleteFlag>
     <SystemId>0</SystemId>
-    <ListName>PharmacyUnit</ListName>
+    <ListName>Treatment Program</ListName>
   </Mst_Decode>
   <Mst_Decode>
     <ID>92</ID>
@@ -4757,6 +6538,24 @@
     <ListName>Exit Reason</ListName>
   </Mst_Decode>
   <Mst_Decode>
+    <ID>213</ID>
+    <Name>g</Name>
+    <CodeID>32</CodeID>
+    <SRNo>2.00</SRNo>
+    <DeleteFlag>0</DeleteFlag>
+    <SystemId>0</SystemId>
+    <ListName>PharmacyUnit</ListName>
+  </Mst_Decode>
+  <Mst_Decode>
+    <ID>63</ID>
+    <Name>Suspected Opportunistic Infection</Name>
+    <CodeID>18</CodeID>
+    <SRNo>2.00</SRNo>
+    <DeleteFlag>0</DeleteFlag>
+    <SystemId>0</SystemId>
+    <ListName>DeathReason</ListName>
+  </Mst_Decode>
+  <Mst_Decode>
     <ID>125</ID>
     <Name>10^9 c/L</Name>
     <CodeID>30</CodeID>
@@ -4766,7 +6565,7 @@
     <ListName>Laboratory Unit</ListName>
   </Mst_Decode>
   <Mst_Decode>
-    <ID>398</ID>
+    <ID>417</ID>
     <Name>Advance HIV Disease</Name>
     <CodeID>1013</CodeID>
     <SRNo>2.00</SRNo>
@@ -4786,7 +6585,7 @@
     <ListName>Form Category</ListName>
   </Mst_Decode>
   <Mst_Decode>
-    <ID>395</ID>
+    <ID>389</ID>
     <Name>PEP</Name>
     <CodeID>1012</CodeID>
     <SRNo>2.00</SRNo>
@@ -4805,6 +6604,16 @@
     <Code>FACILITY_REPORT</Code>
     <DisplayName>FACILITY_REPORT = Facility Report</DisplayName>
     <ListName>Feature Type</ListName>
+  </Mst_Decode>
+  <Mst_Decode>
+    <ID>303</ID>
+    <Name>Outsourced-Government</Name>
+    <CodeID>203</CodeID>
+    <SRNo>2.00</SRNo>
+    <UpdateFlag>0</UpdateFlag>
+    <DeleteFlag>0</DeleteFlag>
+    <SystemId>0</SystemId>
+    <ListName>Laboratory Test Location</ListName>
   </Mst_Decode>
   <Mst_Decode>
     <ID>329</ID>
@@ -4863,13 +6672,16 @@
     <ListName>EmploymentStatus</ListName>
   </Mst_Decode>
   <Mst_Decode>
-    <ID>63</ID>
-    <Name>Suspected Opportunistic Infection</Name>
-    <CodeID>18</CodeID>
+    <ID>393</ID>
+    <Name>Nutrition Clinic</Name>
+    <CodeID>17</CodeID>
     <SRNo>2.00</SRNo>
     <DeleteFlag>0</DeleteFlag>
-    <SystemId>0</SystemId>
-    <ListName>DeathReason</ListName>
+    <SystemId>1</SystemId>
+    <Code />
+    <DisplayName> = Nutrition Clinic</DisplayName>
+    <ModuleId>202</ModuleId>
+    <ListName>Patient Referred</ListName>
   </Mst_Decode>
   <Mst_Decode>
     <ID>87</ID>
@@ -4917,13 +6729,16 @@
     <ListName>WHO Stage</ListName>
   </Mst_Decode>
   <Mst_Decode>
-    <ID>64</ID>
-    <Name>Other</Name>
-    <CodeID>18</CodeID>
+    <ID>394</ID>
+    <Name>Laboratory</Name>
+    <CodeID>17</CodeID>
     <SRNo>3.00</SRNo>
     <DeleteFlag>0</DeleteFlag>
-    <SystemId>0</SystemId>
-    <ListName>DeathReason</ListName>
+    <SystemId>1</SystemId>
+    <Code />
+    <DisplayName> = Laboratory</DisplayName>
+    <ModuleId>202</ModuleId>
+    <ListName>Patient Referred</ListName>
   </Mst_Decode>
   <Mst_Decode>
     <ID>60</ID>
@@ -4943,16 +6758,6 @@
     <DeleteFlag>0</DeleteFlag>
     <SystemId>0</SystemId>
     <ListName>EmploymentStatus</ListName>
-  </Mst_Decode>
-  <Mst_Decode>
-    <ID>321</ID>
-    <Name>Under 5</Name>
-    <CodeID>17</CodeID>
-    <SRNo>3.00</SRNo>
-    <DeleteFlag>0</DeleteFlag>
-    <SystemId>1</SystemId>
-    <ModuleId>202</ModuleId>
-    <ListName>Patient Referred</ListName>
   </Mst_Decode>
   <Mst_Decode>
     <ID>313</ID>
@@ -5002,6 +6807,16 @@
     <ListName>ARV Eligibility</ListName>
   </Mst_Decode>
   <Mst_Decode>
+    <ID>304</ID>
+    <Name>Facility with Reagents</Name>
+    <CodeID>203</CodeID>
+    <SRNo>3.00</SRNo>
+    <UpdateFlag>0</UpdateFlag>
+    <DeleteFlag>0</DeleteFlag>
+    <SystemId>0</SystemId>
+    <ListName>Laboratory Test Location</ListName>
+  </Mst_Decode>
+  <Mst_Decode>
     <ID>339</ID>
     <Name>Patient Report</Name>
     <CodeID>1009</CodeID>
@@ -5013,7 +6828,7 @@
     <ListName>Feature Type</ListName>
   </Mst_Decode>
   <Mst_Decode>
-    <ID>396</ID>
+    <ID>390</ID>
     <Name>Goldstar</Name>
     <CodeID>1012</CodeID>
     <SRNo>3.00</SRNo>
@@ -5034,7 +6849,7 @@
     <ListName>Form Category</ListName>
   </Mst_Decode>
   <Mst_Decode>
-    <ID>399</ID>
+    <ID>418</ID>
     <Name>Stable</Name>
     <CodeID>1013</CodeID>
     <SRNo>3.00</SRNo>
@@ -5052,14 +6867,13 @@
     <ListName>Laboratory Unit</ListName>
   </Mst_Decode>
   <Mst_Decode>
-    <ID>93</ID>
-    <Name>Death</Name>
-    <CodeID>23</CodeID>
+    <ID>64</ID>
+    <Name>Other</Name>
+    <CodeID>18</CodeID>
     <SRNo>3.00</SRNo>
-    <UpdateFlag>0</UpdateFlag>
     <DeleteFlag>0</DeleteFlag>
     <SystemId>0</SystemId>
-    <ListName>Exit Reason</ListName>
+    <ListName>DeathReason</ListName>
   </Mst_Decode>
   <Mst_Decode>
     <ID>214</ID>
@@ -5071,14 +6885,14 @@
     <ListName>PharmacyUnit</ListName>
   </Mst_Decode>
   <Mst_Decode>
-    <ID>146</ID>
-    <Name>Treatment Failure-Immunologic</Name>
-    <CodeID>34</CodeID>
+    <ID>93</ID>
+    <Name>Death</Name>
+    <CodeID>23</CodeID>
     <SRNo>3.00</SRNo>
     <UpdateFlag>0</UpdateFlag>
     <DeleteFlag>0</DeleteFlag>
     <SystemId>0</SystemId>
-    <ListName>ART Ended Reason</ListName>
+    <ListName>Exit Reason</ListName>
   </Mst_Decode>
   <Mst_Decode>
     <ID>224</ID>
@@ -5088,6 +6902,16 @@
     <DeleteFlag>0</DeleteFlag>
     <SystemId>0</SystemId>
     <ListName>Treatment Program</ListName>
+  </Mst_Decode>
+  <Mst_Decode>
+    <ID>146</ID>
+    <Name>Treatment Failure-Immunologic</Name>
+    <CodeID>34</CodeID>
+    <SRNo>3.00</SRNo>
+    <UpdateFlag>0</UpdateFlag>
+    <DeleteFlag>0</DeleteFlag>
+    <SystemId>0</SystemId>
+    <ListName>ART Ended Reason</ListName>
   </Mst_Decode>
   <Mst_Decode>
     <ID>297</ID>
@@ -5110,14 +6934,126 @@
     <ListName>Item Type</ListName>
   </Mst_Decode>
   <Mst_Decode>
-    <ID>304</ID>
-    <Name>Facility with Reagents</Name>
-    <CodeID>203</CodeID>
-    <SRNo>3.00</SRNo>
+    <ID>308</ID>
+    <Name>Old Lab Tests</Name>
+    <CodeID>202</CodeID>
+    <SRNo>4.00</SRNo>
+    <UpdateFlag>0</UpdateFlag>
+    <DeleteFlag>1</DeleteFlag>
+    <SystemId>0</SystemId>
+    <ListName>Item Type</ListName>
+  </Mst_Decode>
+  <Mst_Decode>
+    <ID>355</ID>
+    <Name>VisitType</Name>
+    <CodeID>202</CodeID>
+    <SRNo>4.00</SRNo>
+    <DeleteFlag>0</DeleteFlag>
+    <ListName>Item Type</ListName>
+  </Mst_Decode>
+  <Mst_Decode>
+    <ID>358</ID>
+    <Name>Lab Tests</Name>
+    <CodeID>202</CodeID>
+    <SRNo>4.00</SRNo>
+    <DeleteFlag>0</DeleteFlag>
+    <ListName>Item Type</ListName>
+  </Mst_Decode>
+  <Mst_Decode>
+    <ID>298</ID>
+    <Name>Laboratory</Name>
+    <CodeID>201</CodeID>
+    <SRNo>4.00</SRNo>
     <UpdateFlag>0</UpdateFlag>
     <DeleteFlag>0</DeleteFlag>
     <SystemId>0</SystemId>
-    <ListName>Laboratory Test Location</ListName>
+    <ListName>Cost Allocation Category</ListName>
+  </Mst_Decode>
+  <Mst_Decode>
+    <ID>147</ID>
+    <Name>Treatment Failure-Clinical</Name>
+    <CodeID>34</CodeID>
+    <SRNo>4.00</SRNo>
+    <UpdateFlag>0</UpdateFlag>
+    <DeleteFlag>0</DeleteFlag>
+    <SystemId>0</SystemId>
+    <ListName>ART Ended Reason</ListName>
+  </Mst_Decode>
+  <Mst_Decode>
+    <ID>225</ID>
+    <Name>Non-ART</Name>
+    <CodeID>33</CodeID>
+    <SRNo>4.00</SRNo>
+    <DeleteFlag>0</DeleteFlag>
+    <SystemId>0</SystemId>
+    <ListName>Treatment Program</ListName>
+  </Mst_Decode>
+  <Mst_Decode>
+    <ID>215</ID>
+    <Name>%</Name>
+    <CodeID>32</CodeID>
+    <SRNo>4.00</SRNo>
+    <DeleteFlag>0</DeleteFlag>
+    <SystemId>0</SystemId>
+    <ListName>PharmacyUnit</ListName>
+  </Mst_Decode>
+  <Mst_Decode>
+    <ID>65</ID>
+    <Name>Unknown</Name>
+    <CodeID>18</CodeID>
+    <SRNo>4.00</SRNo>
+    <DeleteFlag>0</DeleteFlag>
+    <SystemId>0</SystemId>
+    <ListName>DeathReason</ListName>
+  </Mst_Decode>
+  <Mst_Decode>
+    <ID>114</ID>
+    <Name>Confirmed HIV Negative</Name>
+    <CodeID>23</CodeID>
+    <SRNo>4.00</SRNo>
+    <DeleteFlag>0</DeleteFlag>
+    <SystemId>0</SystemId>
+    <ListName>Exit Reason</ListName>
+  </Mst_Decode>
+  <Mst_Decode>
+    <ID>127</ID>
+    <Name>c/mm^3</Name>
+    <CodeID>30</CodeID>
+    <SRNo>4.00</SRNo>
+    <DeleteFlag>0</DeleteFlag>
+    <SystemId>0</SystemId>
+    <ListName>Laboratory Unit</ListName>
+  </Mst_Decode>
+  <Mst_Decode>
+    <ID>419</ID>
+    <Name>Unstable</Name>
+    <CodeID>1013</CodeID>
+    <SRNo>4.00</SRNo>
+    <DeleteFlag>0</DeleteFlag>
+    <SystemId>1</SystemId>
+    <ListName>Patient Classification</ListName>
+  </Mst_Decode>
+  <Mst_Decode>
+    <ID>336</ID>
+    <Name>Registration</Name>
+    <CodeID>1008</CodeID>
+    <SRNo>4.00</SRNo>
+    <DeleteFlag>0</DeleteFlag>
+    <SystemId>0</SystemId>
+    <Code>REGISTRATION</Code>
+    <DisplayName>REGISTRATION = Registration</DisplayName>
+    <ListName>Form Category</ListName>
+  </Mst_Decode>
+  <Mst_Decode>
+    <ID>340</ID>
+    <Name>List</Name>
+    <CodeID>1009</CodeID>
+    <SRNo>4.00</SRNo>
+    <DeleteFlag>0</DeleteFlag>
+    <SystemId>0</SystemId>
+    <Code>LIST</Code>
+    <DisplayName>LIST = List</DisplayName>
+    <ListName>Feature Type</ListName>
   </Mst_Decode>
   <Mst_Decode>
     <ID>305</ID>
@@ -5139,119 +7075,6 @@
     <Code>1</Code>
     <DisplayName>1 = Consultation</DisplayName>
     <ListName>Waiting List</ListName>
-  </Mst_Decode>
-  <Mst_Decode>
-    <ID>308</ID>
-    <Name>Old Lab Tests</Name>
-    <CodeID>202</CodeID>
-    <SRNo>4.00</SRNo>
-    <UpdateFlag>0</UpdateFlag>
-    <DeleteFlag>1</DeleteFlag>
-    <SystemId>0</SystemId>
-    <ListName>Item Type</ListName>
-  </Mst_Decode>
-  <Mst_Decode>
-    <ID>355</ID>
-    <Name>VisitType</Name>
-    <CodeID>202</CodeID>
-    <SRNo>4.00</SRNo>
-    <DeleteFlag>0</DeleteFlag>
-    <ListName>Item Type</ListName>
-  </Mst_Decode>
-  <Mst_Decode>
-    <ID>298</ID>
-    <Name>Laboratory</Name>
-    <CodeID>201</CodeID>
-    <SRNo>4.00</SRNo>
-    <UpdateFlag>0</UpdateFlag>
-    <DeleteFlag>0</DeleteFlag>
-    <SystemId>0</SystemId>
-    <ListName>Cost Allocation Category</ListName>
-  </Mst_Decode>
-  <Mst_Decode>
-    <ID>225</ID>
-    <Name>Non-ART</Name>
-    <CodeID>33</CodeID>
-    <SRNo>4.00</SRNo>
-    <DeleteFlag>0</DeleteFlag>
-    <SystemId>0</SystemId>
-    <ListName>Treatment Program</ListName>
-  </Mst_Decode>
-  <Mst_Decode>
-    <ID>147</ID>
-    <Name>Treatment Failure-Clinical</Name>
-    <CodeID>34</CodeID>
-    <SRNo>4.00</SRNo>
-    <UpdateFlag>0</UpdateFlag>
-    <DeleteFlag>0</DeleteFlag>
-    <SystemId>0</SystemId>
-    <ListName>ART Ended Reason</ListName>
-  </Mst_Decode>
-  <Mst_Decode>
-    <ID>215</ID>
-    <Name>%</Name>
-    <CodeID>32</CodeID>
-    <SRNo>4.00</SRNo>
-    <DeleteFlag>0</DeleteFlag>
-    <SystemId>0</SystemId>
-    <ListName>PharmacyUnit</ListName>
-  </Mst_Decode>
-  <Mst_Decode>
-    <ID>114</ID>
-    <Name>Confirmed HIV Negative</Name>
-    <CodeID>23</CodeID>
-    <SRNo>4.00</SRNo>
-    <DeleteFlag>0</DeleteFlag>
-    <SystemId>0</SystemId>
-    <ListName>Exit Reason</ListName>
-  </Mst_Decode>
-  <Mst_Decode>
-    <ID>127</ID>
-    <Name>c/mm^3</Name>
-    <CodeID>30</CodeID>
-    <SRNo>4.00</SRNo>
-    <DeleteFlag>0</DeleteFlag>
-    <SystemId>0</SystemId>
-    <ListName>Laboratory Unit</ListName>
-  </Mst_Decode>
-  <Mst_Decode>
-    <ID>400</ID>
-    <Name>Unstable</Name>
-    <CodeID>1013</CodeID>
-    <SRNo>4.00</SRNo>
-    <DeleteFlag>0</DeleteFlag>
-    <SystemId>1</SystemId>
-    <ListName>Patient Classification</ListName>
-  </Mst_Decode>
-  <Mst_Decode>
-    <ID>336</ID>
-    <Name>Registration</Name>
-    <CodeID>1008</CodeID>
-    <SRNo>4.00</SRNo>
-    <DeleteFlag>0</DeleteFlag>
-    <SystemId>0</SystemId>
-    <Code>REGISTRATION</Code>
-    <DisplayName>REGISTRATION = Registration</DisplayName>
-    <ListName>Form Category</ListName>
-  </Mst_Decode>
-  <Mst_Decode>
-    <ID>358</ID>
-    <Name>Lab Tests</Name>
-    <CodeID>202</CodeID>
-    <SRNo>4.00</SRNo>
-    <DeleteFlag>0</DeleteFlag>
-    <ListName>Item Type</ListName>
-  </Mst_Decode>
-  <Mst_Decode>
-    <ID>340</ID>
-    <Name>List</Name>
-    <CodeID>1009</CodeID>
-    <SRNo>4.00</SRNo>
-    <DeleteFlag>0</DeleteFlag>
-    <SystemId>0</SystemId>
-    <Code>LIST</Code>
-    <DisplayName>LIST = List</DisplayName>
-    <ListName>Feature Type</ListName>
   </Mst_Decode>
   <Mst_Decode>
     <ID>368</ID>
@@ -5292,16 +7115,6 @@
     <ListName>Patient Referred</ListName>
   </Mst_Decode>
   <Mst_Decode>
-    <ID>322</ID>
-    <Name>Outreach</Name>
-    <CodeID>17</CodeID>
-    <SRNo>4.00</SRNo>
-    <DeleteFlag>0</DeleteFlag>
-    <SystemId>1</SystemId>
-    <ModuleId>202</ModuleId>
-    <ListName>Patient Referred</ListName>
-  </Mst_Decode>
-  <Mst_Decode>
     <ID>189</ID>
     <Name>Widowed</Name>
     <CodeID>12</CodeID>
@@ -5321,13 +7134,14 @@
     <ListName>Patient Referred</ListName>
   </Mst_Decode>
   <Mst_Decode>
-    <ID>65</ID>
-    <Name>Unknown</Name>
-    <CodeID>18</CodeID>
+    <ID>320</ID>
+    <Name>TB</Name>
+    <CodeID>17</CodeID>
     <SRNo>4.00</SRNo>
     <DeleteFlag>0</DeleteFlag>
-    <SystemId>0</SystemId>
-    <ListName>DeathReason</ListName>
+    <SystemId>1</SystemId>
+    <ModuleId>202</ModuleId>
+    <ListName>Patient Referred</ListName>
   </Mst_Decode>
   <Mst_Decode>
     <ID>89</ID>
@@ -5348,6 +7162,18 @@
     <ListName>WHO Stage</ListName>
   </Mst_Decode>
   <Mst_Decode>
+    <ID>395</ID>
+    <Name>PITC</Name>
+    <CodeID>17</CodeID>
+    <SRNo>5.00</SRNo>
+    <DeleteFlag>0</DeleteFlag>
+    <SystemId>1</SystemId>
+    <Code />
+    <DisplayName> = PITC</DisplayName>
+    <ModuleId>202</ModuleId>
+    <ListName>Patient Referred</ListName>
+  </Mst_Decode>
+  <Mst_Decode>
     <ID>59</ID>
     <Name>TB outpatient</Name>
     <CodeID>17</CodeID>
@@ -5355,16 +7181,6 @@
     <DeleteFlag>0</DeleteFlag>
     <SystemId>1</SystemId>
     <ModuleId>2</ModuleId>
-    <ListName>Patient Referred</ListName>
-  </Mst_Decode>
-  <Mst_Decode>
-    <ID>323</ID>
-    <Name>Medical out patient</Name>
-    <CodeID>17</CodeID>
-    <SRNo>5.00</SRNo>
-    <DeleteFlag>0</DeleteFlag>
-    <SystemId>1</SystemId>
-    <ModuleId>202</ModuleId>
     <ListName>Patient Referred</ListName>
   </Mst_Decode>
   <Mst_Decode>
@@ -5493,15 +7309,6 @@
     <ListName>Item Type</ListName>
   </Mst_Decode>
   <Mst_Decode>
-    <ID>380</ID>
-    <Name>HBV</Name>
-    <CodeID>33</CodeID>
-    <SRNo>6.00</SRNo>
-    <DeleteFlag>0</DeleteFlag>
-    <SystemId>1</SystemId>
-    <ListName>Treatment Program</ListName>
-  </Mst_Decode>
-  <Mst_Decode>
     <ID>356</ID>
     <Name>Billables</Name>
     <CodeID>202</CodeID>
@@ -5510,14 +7317,13 @@
     <ListName>Item Type</ListName>
   </Mst_Decode>
   <Mst_Decode>
-    <ID>307</ID>
-    <Name>OutSourced-Private</Name>
-    <CodeID>203</CodeID>
+    <ID>380</ID>
+    <Name>HBV</Name>
+    <CodeID>33</CodeID>
     <SRNo>6.00</SRNo>
-    <UpdateFlag>0</UpdateFlag>
     <DeleteFlag>0</DeleteFlag>
-    <SystemId>0</SystemId>
-    <ListName>Laboratory Test Location</ListName>
+    <SystemId>1</SystemId>
+    <ListName>Treatment Program</ListName>
   </Mst_Decode>
   <Mst_Decode>
     <ID>149</ID>
@@ -5539,15 +7345,6 @@
     <ListName>Treatment Program</ListName>
   </Mst_Decode>
   <Mst_Decode>
-    <ID>217</ID>
-    <Name>mcg</Name>
-    <CodeID>32</CodeID>
-    <SRNo>6.00</SRNo>
-    <DeleteFlag>0</DeleteFlag>
-    <SystemId>0</SystemId>
-    <ListName>PharmacyUnit</ListName>
-  </Mst_Decode>
-  <Mst_Decode>
     <ID>118</ID>
     <Name>Transfer to another LPTF</Name>
     <CodeID>23</CodeID>
@@ -5555,6 +7352,15 @@
     <DeleteFlag>0</DeleteFlag>
     <SystemId>0</SystemId>
     <ListName>Exit Reason</ListName>
+  </Mst_Decode>
+  <Mst_Decode>
+    <ID>217</ID>
+    <Name>mcg</Name>
+    <CodeID>32</CodeID>
+    <SRNo>6.00</SRNo>
+    <DeleteFlag>0</DeleteFlag>
+    <SystemId>0</SystemId>
+    <ListName>PharmacyUnit</ListName>
   </Mst_Decode>
   <Mst_Decode>
     <ID>129</ID>
@@ -5575,6 +7381,16 @@
     <Code>PATIENT_ACTION</Code>
     <DisplayName>PATIENT_ACTION = Patient Actions</DisplayName>
     <ListName>Feature Type</ListName>
+  </Mst_Decode>
+  <Mst_Decode>
+    <ID>307</ID>
+    <Name>OutSourced-Private</Name>
+    <CodeID>203</CodeID>
+    <SRNo>6.00</SRNo>
+    <UpdateFlag>0</UpdateFlag>
+    <DeleteFlag>0</DeleteFlag>
+    <SystemId>0</SystemId>
+    <ListName>Laboratory Test Location</ListName>
   </Mst_Decode>
   <Mst_Decode>
     <ID>370</ID>
@@ -5627,8 +7443,8 @@
     <ListName>Patient Referred</ListName>
   </Mst_Decode>
   <Mst_Decode>
-    <ID>324</ID>
-    <Name>STI</Name>
+    <ID>321</ID>
+    <Name>Under 5</Name>
     <CodeID>17</CodeID>
     <SRNo>6.00</SRNo>
     <DeleteFlag>0</DeleteFlag>
@@ -5647,12 +7463,14 @@
     <ListName>Patient Referred</ListName>
   </Mst_Decode>
   <Mst_Decode>
-    <ID>325</ID>
-    <Name>Inpatient</Name>
+    <ID>396</ID>
+    <Name>Special Clinic</Name>
     <CodeID>17</CodeID>
     <SRNo>7.00</SRNo>
     <DeleteFlag>0</DeleteFlag>
     <SystemId>1</SystemId>
+    <Code />
+    <DisplayName> = Special Clinic</DisplayName>
     <ModuleId>202</ModuleId>
     <ListName>Patient Referred</ListName>
   </Mst_Decode>
@@ -5753,6 +7571,14 @@
     <ListName>Item Type</ListName>
   </Mst_Decode>
   <Mst_Decode>
+    <ID>359</ID>
+    <Name>Ward Admission</Name>
+    <CodeID>202</CodeID>
+    <SRNo>8.00</SRNo>
+    <DeleteFlag>0</DeleteFlag>
+    <ListName>Item Type</ListName>
+  </Mst_Decode>
+  <Mst_Decode>
     <ID>151</ID>
     <Name>Patient Preference</Name>
     <CodeID>34</CodeID>
@@ -5792,14 +7618,6 @@
     <ListName>Feature Type</ListName>
   </Mst_Decode>
   <Mst_Decode>
-    <ID>359</ID>
-    <Name>Ward Admission</Name>
-    <CodeID>202</CodeID>
-    <SRNo>8.00</SRNo>
-    <DeleteFlag>0</DeleteFlag>
-    <ListName>Item Type</ListName>
-  </Mst_Decode>
-  <Mst_Decode>
     <ID>372</ID>
     <Name>Hepatitis B+</Name>
     <CodeID>1007</CodeID>
@@ -5828,8 +7646,8 @@
     <ListName>Patient Referred</ListName>
   </Mst_Decode>
   <Mst_Decode>
-    <ID>326</ID>
-    <Name>Exposed infant</Name>
+    <ID>322</ID>
+    <Name>Outreach</Name>
     <CodeID>17</CodeID>
     <SRNo>8.00</SRNo>
     <DeleteFlag>0</DeleteFlag>
@@ -5838,8 +7656,8 @@
     <ListName>Patient Referred</ListName>
   </Mst_Decode>
   <Mst_Decode>
-    <ID>327</ID>
-    <Name>Other: Specify</Name>
+    <ID>323</ID>
+    <Name>Medical out patient</Name>
     <CodeID>17</CodeID>
     <SRNo>9.00</SRNo>
     <DeleteFlag>0</DeleteFlag>
@@ -5917,6 +7735,18 @@
     <ListName>ART Ended Reason</ListName>
   </Mst_Decode>
   <Mst_Decode>
+    <ID>403</ID>
+    <Name>Transfer In</Name>
+    <CodeID>17</CodeID>
+    <SRNo>10.00</SRNo>
+    <DeleteFlag>0</DeleteFlag>
+    <SystemId>1</SystemId>
+    <Code />
+    <DisplayName> = Transfer In</DisplayName>
+    <ModuleId>202</ModuleId>
+    <ListName>Patient Referred</ListName>
+  </Mst_Decode>
+  <Mst_Decode>
     <ID>133</ID>
     <Name>mg/dL</Name>
     <CodeID>30</CodeID>
@@ -5945,6 +7775,16 @@
     <Code />
     <DisplayName> = Child Welfare Clinic</DisplayName>
     <ModuleId>2</ModuleId>
+    <ListName>Patient Referred</ListName>
+  </Mst_Decode>
+  <Mst_Decode>
+    <ID>324</ID>
+    <Name>STI</Name>
+    <CodeID>17</CodeID>
+    <SRNo>11.00</SRNo>
+    <DeleteFlag>0</DeleteFlag>
+    <SystemId>1</SystemId>
+    <ModuleId>202</ModuleId>
     <ListName>Patient Referred</ListName>
   </Mst_Decode>
   <Mst_Decode>
@@ -5985,6 +7825,26 @@
     <ListName>Laboratory Unit</ListName>
   </Mst_Decode>
   <Mst_Decode>
+    <ID>325</ID>
+    <Name>Inpatient</Name>
+    <CodeID>17</CodeID>
+    <SRNo>12.00</SRNo>
+    <DeleteFlag>0</DeleteFlag>
+    <SystemId>1</SystemId>
+    <ModuleId>202</ModuleId>
+    <ListName>Patient Referred</ListName>
+  </Mst_Decode>
+  <Mst_Decode>
+    <ID>326</ID>
+    <Name>Exposed infant</Name>
+    <CodeID>17</CodeID>
+    <SRNo>13.00</SRNo>
+    <DeleteFlag>0</DeleteFlag>
+    <SystemId>1</SystemId>
+    <ModuleId>202</ModuleId>
+    <ListName>Patient Referred</ListName>
+  </Mst_Decode>
+  <Mst_Decode>
     <ID>136</ID>
     <Name>No units</Name>
     <CodeID>30</CodeID>
@@ -6012,6 +7872,16 @@
     <Code>3</Code>
     <DisplayName>3 = Laboratory</DisplayName>
     <ListName>Waiting List</ListName>
+  </Mst_Decode>
+  <Mst_Decode>
+    <ID>327</ID>
+    <Name>Other: Specify</Name>
+    <CodeID>17</CodeID>
+    <SRNo>14.00</SRNo>
+    <DeleteFlag>0</DeleteFlag>
+    <SystemId>1</SystemId>
+    <ModuleId>202</ModuleId>
+    <ListName>Patient Referred</ListName>
   </Mst_Decode>
   <Mst_Decode>
     <ID>138</ID>
@@ -14636,13 +16506,22 @@
     <FacilityTemplate>0</FacilityTemplate>
   </Mst_Facility>
   <Mst_Facility>
-    <FacilityName>Demo Facility</FacilityName>
+    <FacilityName>MAKINDU SUB COUNTY HOSPITAL</FacilityName>
     <FacilityID>755</FacilityID>
-    <PosID>12618</PosID>
+    <PosID>12455</PosID>
     <DeleteFlag>0</DeleteFlag>
     <SatelliteID>0</SatelliteID>
     <SystemID>1</SystemID>
+    <FacilityAddress>P.O Box 81, 90138</FacilityAddress>
+    <FacilityTel>+254715231122</FacilityTel>
+    <FacilityCell />
+    <FacilityFax />
+    <FacilityEmail />
+    <FacilityURL />
+    <FacilityFooter />
     <FacilityTemplate>0</FacilityTemplate>
+    <FacilityLogo>MAKINDU SUB COUNTY HOSPITAL.jpg</FacilityLogo>
+    <StrongPassFlag>0</StrongPassFlag>
   </Mst_Facility>
   <Mst_Facility>
     <FacilityName>mwala D/H</FacilityName>
@@ -17459,11 +19338,6 @@
   <Mst_Module>
     <ModuleID>3</ModuleID>
     <ModuleName>SMART ART FORM</ModuleName>
-    <DeleteFlag>false</DeleteFlag>
-  </Mst_Module>
-  <Mst_Module>
-    <ModuleID>4</ModuleID>
-    <ModuleName>TB Module</ModuleName>
     <DeleteFlag>false</DeleteFlag>
   </Mst_Module>
   <Mst_Module>
@@ -21517,6 +23391,38 @@
     <CreateDate>2016-09-07T12:29:10.08+03:00</CreateDate>
     <Name>TBAdherenceMeasurement</Name>
   </Mst_ModCode>
+  <Mst_ModCode>
+    <CodeID>100</CodeID>
+    <DeleteFlag>0</DeleteFlag>
+    <Predefined>0</Predefined>
+    <UserID>1</UserID>
+    <CreateDate>2017-10-17T11:31:37.567+03:00</CreateDate>
+    <Name>EntryPointSpecify</Name>
+  </Mst_ModCode>
+  <Mst_ModCode>
+    <CodeID>101</CodeID>
+    <DeleteFlag>0</DeleteFlag>
+    <Predefined>0</Predefined>
+    <UserID>1</UserID>
+    <CreateDate>2018-01-24T13:07:02.013+03:00</CreateDate>
+    <Name>TransferredOutTo</Name>
+  </Mst_ModCode>
+  <Mst_ModCode>
+    <CodeID>102</CodeID>
+    <DeleteFlag>0</DeleteFlag>
+    <Predefined>0</Predefined>
+    <UserID>1</UserID>
+    <CreateDate>2018-01-24T13:10:55.643+03:00</CreateDate>
+    <Name>Patient_Village</Name>
+  </Mst_ModCode>
+  <Mst_ModCode>
+    <CodeID>103</CodeID>
+    <DeleteFlag>0</DeleteFlag>
+    <Predefined>0</Predefined>
+    <UserID>1</UserID>
+    <CreateDate>2018-01-24T13:11:23.667+03:00</CreateDate>
+    <Name>Patient_SubCounty</Name>
+  </Mst_ModCode>
   <VWDiseaseSymptom>
     <ID>128</ID>
     <DiseaseID>113</DiseaseID>
@@ -22925,17 +24831,317 @@
     <CreateDate>2011-08-19T12:00:10+03:00</CreateDate>
   </mst_RegimenLine>
   <Users>
-    <UserId>20</UserId>
+    <UserId>42</UserId>
+    <SystemUserName>materi</SystemUserName>
+    <Name> Bundi Materi Asteria</Name>
+    <EmployeeName>Materi Bundi Asteria                                           </EmployeeName>
+    <UserDeleteFlag>0</UserDeleteFlag>
+    <EmployeeId>26</EmployeeId>
+    <DesignationId>2</DesignationId>
+    <Designation>Nurse/Midwife</Designation>
+    <EmployeeDeleteFlag>0</EmployeeDeleteFlag>
+  </Users>
+  <Users>
+    <UserId>41</UserId>
+    <SystemUserName>daniel</SystemUserName>
+    <Name> Mbuvi Daniel Mukosi</Name>
+    <EmployeeName>Daniel Mbuvi                                             </EmployeeName>
+    <UserDeleteFlag>0</UserDeleteFlag>
+    <EmployeeId>25</EmployeeId>
+    <DesignationId>12</DesignationId>
+    <Designation>Clinical Officer</Designation>
+    <EmployeeDeleteFlag>0</EmployeeDeleteFlag>
+  </Users>
+  <Users>
+    <UserId>46</UserId>
+    <SystemUserName>brian</SystemUserName>
+    <Name>Brian Malombe</Name>
+    <EmployeeName>Brian Malombe   </EmployeeName>
+    <UserDeleteFlag>0</UserDeleteFlag>
+    <EmployeeId>15</EmployeeId>
+    <DesignationId>14</DesignationId>
+    <Designation>Lab Technologist</Designation>
+    <EmployeeDeleteFlag>0</EmployeeDeleteFlag>
+  </Users>
+  <Users>
+    <UserId>47</UserId>
+    <SystemUserName>diana</SystemUserName>
+    <Name>Diana Musyoka</Name>
+    <EmployeeName>Diana Musyoka   </EmployeeName>
+    <UserDeleteFlag>0</UserDeleteFlag>
+    <EmployeeId>12</EmployeeId>
+    <DesignationId>14</DesignationId>
+    <Designation>Lab Technologist</Designation>
+    <EmployeeDeleteFlag>0</EmployeeDeleteFlag>
+  </Users>
+  <Users>
+    <UserId>38</UserId>
+    <SystemUserName>mutune</SystemUserName>
+    <Name>DORCUS MUTUNE N.</Name>
+    <EmployeeName>MUTUNE DORCAS                                            </EmployeeName>
+    <UserDeleteFlag>0</UserDeleteFlag>
+    <EmployeeId>22</EmployeeId>
+    <DesignationId>12</DesignationId>
+    <Designation>Clinical Officer</Designation>
+    <EmployeeDeleteFlag>0</EmployeeDeleteFlag>
+  </Users>
+  <Users>
+    <UserId>35</UserId>
+    <SystemUserName>masomo</SystemUserName>
+    <Name>Eva Masomo ndanu</Name>
+    <EmployeeName>Masomo ndanu Eva       </EmployeeName>
+    <UserDeleteFlag>0</UserDeleteFlag>
+    <EmployeeId>19</EmployeeId>
+    <DesignationId>12</DesignationId>
+    <Designation>Clinical Officer</Designation>
+    <EmployeeDeleteFlag>0</EmployeeDeleteFlag>
+  </Users>
+  <Users>
+    <UserId>22</UserId>
+    <SystemUserName>Amburuka</SystemUserName>
+    <Name>FName amburuka</Name>
+    <EmployeeName>Samuel Musyoka   </EmployeeName>
+    <UserDeleteFlag>1</UserDeleteFlag>
+    <EmployeeId>6</EmployeeId>
+    <DesignationId>2</DesignationId>
+    <Designation>Nurse/Midwife</Designation>
+    <EmployeeDeleteFlag>0</EmployeeDeleteFlag>
+  </Users>
+  <Users>
+    <UserId>1</UserId>
+    <SystemUserName>Admin</SystemUserName>
+    <Name>FName LName</Name>
+    <UserDeleteFlag>0</UserDeleteFlag>
+    <EmployeeDeleteFlag>0</EmployeeDeleteFlag>
+  </Users>
+  <Users>
+    <UserId>24</UserId>
+    <SystemUserName>EMASOMO</SystemUserName>
+    <Name>FName LName</Name>
+    <EmployeeName>WINNIE MULU      </EmployeeName>
+    <UserDeleteFlag>1</UserDeleteFlag>
+    <EmployeeId>8</EmployeeId>
+    <DesignationId>12</DesignationId>
+    <Designation>Clinical Officer</Designation>
+    <EmployeeDeleteFlag>0</EmployeeDeleteFlag>
+  </Users>
+  <Users>
+    <UserId>31</UserId>
+    <SystemUserName>mbuvi</SystemUserName>
+    <Name>FName mbuvi</Name>
+    <UserDeleteFlag>1</UserDeleteFlag>
+    <EmployeeDeleteFlag>0</EmployeeDeleteFlag>
+  </Users>
+  <Users>
+    <UserId>25</UserId>
+    <SystemUserName>WMULU</SystemUserName>
+    <Name>FName MULU</Name>
+    <EmployeeName>DORCUS MUTUNE    </EmployeeName>
+    <UserDeleteFlag>1</UserDeleteFlag>
+    <EmployeeId>9</EmployeeId>
+    <DesignationId>12</DesignationId>
+    <Designation>Clinical Officer</Designation>
+    <EmployeeDeleteFlag>0</EmployeeDeleteFlag>
+  </Users>
+  <Users>
+    <UserId>27</UserId>
+    <SystemUserName>Musyoka</SystemUserName>
+    <Name>FName Musyoka</Name>
+    <EmployeeName>Veronica kioko     </EmployeeName>
+    <UserDeleteFlag>1</UserDeleteFlag>
+    <EmployeeId>11</EmployeeId>
+    <DesignationId>2</DesignationId>
+    <Designation>Nurse/Midwife</Designation>
+    <EmployeeDeleteFlag>0</EmployeeDeleteFlag>
+  </Users>
+  <Users>
+    <UserId>23</UserId>
+    <SystemUserName>DMUTUNE</SystemUserName>
+    <Name>FName MUTUNE</Name>
+    <EmployeeName>Juliet Mweresa   </EmployeeName>
+    <UserDeleteFlag>1</UserDeleteFlag>
+    <EmployeeId>10</EmployeeId>
+    <DesignationId>13</DesignationId>
+    <Designation>PharmTech</Designation>
+    <EmployeeDeleteFlag>0</EmployeeDeleteFlag>
+  </Users>
+  <Users>
+    <UserId>44</UserId>
+    <SystemUserName>harvey</SystemUserName>
+    <Name>Harvey Mbithi</Name>
+    <EmployeeName>Harvey Mbithi    </EmployeeName>
+    <UserDeleteFlag>0</UserDeleteFlag>
+    <EmployeeId>14</EmployeeId>
+    <DesignationId>8</DesignationId>
+    <Designation>Pharmacist</Designation>
+    <EmployeeDeleteFlag>0</EmployeeDeleteFlag>
+  </Users>
+  <Users>
+    <UserId>48</UserId>
     <SystemUserName>interop</SystemUserName>
     <Name>Interop System</Name>
     <UserDeleteFlag>0</UserDeleteFlag>
     <EmployeeDeleteFlag>0</EmployeeDeleteFlag>
   </Users>
   <Users>
-    <UserId>1</UserId>
-    <SystemUserName>Admin</SystemUserName>
-    <Name>System Admin</Name>
+    <UserId>45</UserId>
+    <SystemUserName>issac</SystemUserName>
+    <Name>Issac Kithusi</Name>
+    <EmployeeName>Isaac Kithusi   </EmployeeName>
     <UserDeleteFlag>0</UserDeleteFlag>
+    <EmployeeId>4</EmployeeId>
+    <DesignationId>13</DesignationId>
+    <Designation>PharmTech</Designation>
+    <EmployeeDeleteFlag>0</EmployeeDeleteFlag>
+  </Users>
+  <Users>
+    <UserId>33</UserId>
+    <SystemUserName>JACKLINE</SystemUserName>
+    <Name>JACKLINE MWANGANGI</Name>
+    <EmployeeName>JACKLINE MWANGANGI                                         </EmployeeName>
+    <UserDeleteFlag>0</UserDeleteFlag>
+    <EmployeeId>17</EmployeeId>
+    <DesignationId>11</DesignationId>
+    <Designation>HRIO</Designation>
+    <EmployeeDeleteFlag>0</EmployeeDeleteFlag>
+  </Users>
+  <Users>
+    <UserId>43</UserId>
+    <SystemUserName>juliet</SystemUserName>
+    <Name>Juliet Mweresa</Name>
+    <EmployeeName>Juliet Mweresa   </EmployeeName>
+    <UserDeleteFlag>0</UserDeleteFlag>
+    <EmployeeId>10</EmployeeId>
+    <DesignationId>13</DesignationId>
+    <Designation>PharmTech</Designation>
+    <EmployeeDeleteFlag>0</EmployeeDeleteFlag>
+  </Users>
+  <Users>
+    <UserId>29</UserId>
+    <SystemUserName>KEMRI CVR</SystemUserName>
+    <Name>KEMRI CVR LName</Name>
+    <UserDeleteFlag>1</UserDeleteFlag>
+    <EmployeeDeleteFlag>0</EmployeeDeleteFlag>
+  </Users>
+  <Users>
+    <UserId>20</UserId>
+    <SystemUserName>Ken</SystemUserName>
+    <Name>kenneth mutuma</Name>
+    <EmployeeName>Patience Mwikali   </EmployeeName>
+    <UserDeleteFlag>0</UserDeleteFlag>
+    <EmployeeId>2</EmployeeId>
+    <DesignationId>11</DesignationId>
+    <Designation>HRIO</Designation>
+    <EmployeeDeleteFlag>0</EmployeeDeleteFlag>
+  </Users>
+  <Users>
+    <UserId>40</UserId>
+    <SystemUserName>wavinya</SystemUserName>
+    <Name>Kioko Veronica wavinya</Name>
+    <EmployeeName>Veronica wavinya Kioko                                             </EmployeeName>
+    <UserDeleteFlag>0</UserDeleteFlag>
+    <EmployeeId>24</EmployeeId>
+    <DesignationId>2</DesignationId>
+    <Designation>Nurse/Midwife</Designation>
+    <EmployeeDeleteFlag>0</EmployeeDeleteFlag>
+  </Users>
+  <Users>
+    <UserId>37</UserId>
+    <SystemUserName>moffat</SystemUserName>
+    <Name>Moffat Maitha</Name>
+    <EmployeeName>Moffat Maitha                                            </EmployeeName>
+    <UserDeleteFlag>0</UserDeleteFlag>
+    <EmployeeId>21</EmployeeId>
+    <DesignationId>2</DesignationId>
+    <Designation>Nurse/Midwife</Designation>
+    <EmployeeDeleteFlag>0</EmployeeDeleteFlag>
+  </Users>
+  <Users>
+    <UserId>39</UserId>
+    <SystemUserName>mutyota</SystemUserName>
+    <Name>MUSYOKA SAMUEL MUTYOTA</Name>
+    <EmployeeName>MUSYOKA SAMUEL                                            </EmployeeName>
+    <UserDeleteFlag>0</UserDeleteFlag>
+    <EmployeeId>23</EmployeeId>
+    <DesignationId>2</DesignationId>
+    <Designation>Nurse/Midwife</Designation>
+    <EmployeeDeleteFlag>0</EmployeeDeleteFlag>
+  </Users>
+  <Users>
+    <UserId>34</UserId>
+    <SystemUserName>mwikali</SystemUserName>
+    <Name>mwatika patience</Name>
+    <EmployeeName>mwatika patience  </EmployeeName>
+    <UserDeleteFlag>0</UserDeleteFlag>
+    <EmployeeId>18</EmployeeId>
+    <DesignationId>11</DesignationId>
+    <Designation>HRIO</Designation>
+    <EmployeeDeleteFlag>0</EmployeeDeleteFlag>
+  </Users>
+  <Users>
+    <UserId>26</UserId>
+    <SystemUserName>Nico </SystemUserName>
+    <Name>Nicodemus Kisengese</Name>
+    <EmployeeName>Nicodemus Kisengese                                         </EmployeeName>
+    <UserDeleteFlag>0</UserDeleteFlag>
+    <EmployeeId>28</EmployeeId>
+    <DesignationId>12</DesignationId>
+    <Designation>Clinical Officer</Designation>
+    <EmployeeDeleteFlag>0</EmployeeDeleteFlag>
+  </Users>
+  <Users>
+    <UserId>32</UserId>
+    <SystemUserName>purity</SystemUserName>
+    <Name>purity LName</Name>
+    <EmployeeName>Brian Malombe   </EmployeeName>
+    <UserDeleteFlag>1</UserDeleteFlag>
+    <EmployeeId>15</EmployeeId>
+    <DesignationId>14</DesignationId>
+    <Designation>Lab Technologist</Designation>
+    <EmployeeDeleteFlag>0</EmployeeDeleteFlag>
+  </Users>
+  <Users>
+    <UserId>30</UserId>
+    <SystemUserName>mwaka</SystemUserName>
+    <Name>Raphael Mwaka</Name>
+    <EmployeeName>Raphael Mwaka     </EmployeeName>
+    <UserDeleteFlag>0</UserDeleteFlag>
+    <EmployeeId>13</EmployeeId>
+    <DesignationId>14</DesignationId>
+    <Designation>Lab Technologist</Designation>
+    <EmployeeDeleteFlag>0</EmployeeDeleteFlag>
+  </Users>
+  <Users>
+    <UserId>21</UserId>
+    <SystemUserName>sarah</SystemUserName>
+    <Name>Sarah Amburuka</Name>
+    <EmployeeName>Sarah Amburuka  </EmployeeName>
+    <UserDeleteFlag>0</UserDeleteFlag>
+    <EmployeeId>16</EmployeeId>
+    <DesignationId>11</DesignationId>
+    <Designation>HRIO</Designation>
+    <EmployeeDeleteFlag>0</EmployeeDeleteFlag>
+  </Users>
+  <Users>
+    <UserId>28</UserId>
+    <SystemUserName>Veronica</SystemUserName>
+    <Name>Veronica LName</Name>
+    <EmployeeName>Samuel Musyoka   </EmployeeName>
+    <UserDeleteFlag>1</UserDeleteFlag>
+    <EmployeeId>6</EmployeeId>
+    <DesignationId>2</DesignationId>
+    <Designation>Nurse/Midwife</Designation>
+    <EmployeeDeleteFlag>0</EmployeeDeleteFlag>
+  </Users>
+  <Users>
+    <UserId>36</UserId>
+    <SystemUserName>winfred</SystemUserName>
+    <Name>Winfred Mulu kamwei</Name>
+    <EmployeeName>Mulu kamwei Winfred   </EmployeeName>
+    <UserDeleteFlag>0</UserDeleteFlag>
+    <EmployeeId>20</EmployeeId>
+    <DesignationId>12</DesignationId>
+    <Designation>Clinical Officer</Designation>
     <EmployeeDeleteFlag>0</EmployeeDeleteFlag>
   </Users>
 </NewDataSet>
