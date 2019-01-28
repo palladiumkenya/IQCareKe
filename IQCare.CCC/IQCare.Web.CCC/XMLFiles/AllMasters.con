@@ -1433,17 +1433,6 @@
     <SystemID>1</SystemID>
   </Mst_Designation>
   <Mst_Employee>
-    <EmployeeId>2</EmployeeId>
-    <Id>2</Id>
-    <FirstName>test</FirstName>
-    <LastName>test      </LastName>
-    <Name>test test      </Name>
-    <EmployeeName>test test      </EmployeeName>
-    <DesignationId>3</DesignationId>
-    <SRNO>0.00</SRNO>
-    <DeleteFlag>0</DeleteFlag>
-  </Mst_Employee>
-  <Mst_Employee>
     <EmployeeId>1</EmployeeId>
     <Id>1</Id>
     <FirstName>Importer</FirstName>
@@ -4476,7 +4465,7 @@
     <ListName>Payment Exemption</ListName>
   </Mst_Decode>
   <Mst_Decode>
-    <ID>422</ID>
+    <ID>391</ID>
     <Name>Under 5</Name>
     <CodeID>1010</CodeID>
     <SRNo>1.00</SRNo>
@@ -4485,7 +4474,7 @@
     <ListName>Payment Exemption</ListName>
   </Mst_Decode>
   <Mst_Decode>
-    <ID>423</ID>
+    <ID>392</ID>
     <Name>Maternity</Name>
     <CodeID>1010</CodeID>
     <SRNo>1.00</SRNo>
@@ -4494,7 +4483,7 @@
     <ListName>Payment Exemption</ListName>
   </Mst_Decode>
   <Mst_Decode>
-    <ID>424</ID>
+    <ID>393</ID>
     <Name>Prisoner</Name>
     <CodeID>1010</CodeID>
     <SRNo>1.00</SRNo>
@@ -14647,22 +14636,13 @@
     <FacilityTemplate>0</FacilityTemplate>
   </Mst_Facility>
   <Mst_Facility>
-    <FacilityName>Demo County Facility</FacilityName>
+    <FacilityName>Demo Facility</FacilityName>
     <FacilityID>755</FacilityID>
     <PosID>12618</PosID>
     <DeleteFlag>0</DeleteFlag>
     <SatelliteID>0</SatelliteID>
     <SystemID>1</SystemID>
-    <FacilityAddress>Nairobi</FacilityAddress>
-    <FacilityTel>+254789654</FacilityTel>
-    <FacilityCell />
-    <FacilityFax />
-    <FacilityEmail />
-    <FacilityURL />
-    <FacilityFooter />
     <FacilityTemplate>0</FacilityTemplate>
-    <FacilityLogo>Demo County Facility.jpg</FacilityLogo>
-    <StrongPassFlag>0</StrongPassFlag>
   </Mst_Facility>
   <Mst_Facility>
     <FacilityName>mwala D/H</FacilityName>
@@ -22948,11 +22928,7 @@
     <UserId>20</UserId>
     <SystemUserName>interop</SystemUserName>
     <Name>Interop System</Name>
-    <EmployeeName>Importer Data</EmployeeName>
     <UserDeleteFlag>0</UserDeleteFlag>
-    <EmployeeId>1</EmployeeId>
-    <DesignationId>10</DesignationId>
-    <Designation>Other</Designation>
     <EmployeeDeleteFlag>0</EmployeeDeleteFlag>
   </Users>
   <Users>
@@ -22960,17 +22936,6 @@
     <SystemUserName>Admin</SystemUserName>
     <Name>System Admin</Name>
     <UserDeleteFlag>0</UserDeleteFlag>
-    <EmployeeDeleteFlag>0</EmployeeDeleteFlag>
-  </Users>
-  <Users>
-    <UserId>21</UserId>
-    <SystemUserName>lab</SystemUserName>
-    <Name>test lab</Name>
-    <EmployeeName>test test      </EmployeeName>
-    <UserDeleteFlag>0</UserDeleteFlag>
-    <EmployeeId>2</EmployeeId>
-    <DesignationId>3</DesignationId>
-    <Designation>Lab Technician</Designation>
     <EmployeeDeleteFlag>0</EmployeeDeleteFlag>
   </Users>
 </NewDataSet>

@@ -12356,7 +12356,7 @@
   <Mst_Generic>
     <GenericId>600</GenericId>
     <GenericName>Tenofavir/Lamivudine/Efavirenz/Dolutegravir-300mg/300mg/50mg</GenericName>
-    <GenericAbbrevation>TDF/3TC/ D</GenericAbbrevation>
+    <GenericAbbrevation>TDF/3TC/DT</GenericAbbrevation>
   </Mst_Generic>
   <Mst_DrugType>
     <DrugTypeId>1</DrugTypeId>
@@ -12856,14 +12856,14 @@
     <Name>TID</Name>
     <SRNO>5.00</SRNO>
     <Deleteflag>0</Deleteflag>
-    <multiplier>3</multiplier>
+    <multiplier>0</multiplier>
   </Mst_Frequency>
   <Mst_Frequency>
     <Id>6</Id>
     <Name>QID</Name>
     <SRNO>6.00</SRNO>
     <Deleteflag>0</Deleteflag>
-    <multiplier>4</multiplier>
+    <multiplier>0</multiplier>
   </Mst_Frequency>
   <Mst_Frequency>
     <Id>7</Id>
