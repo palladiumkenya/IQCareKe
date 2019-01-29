@@ -11,5 +11,7 @@ namespace Interface.CCC.Enrollment
         List<Identifier> GetIdentifiersById(int identifierId);
         List<Identifier> GetAllIdentifiers();
         Identifier GetIdentifierByCode(string code);
+
+        Identifier GetIdentifierByName(string name);
     }
 }
