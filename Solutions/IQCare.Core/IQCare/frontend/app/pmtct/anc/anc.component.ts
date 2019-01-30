@@ -755,6 +755,11 @@ export class AncComponent implements OnInit, OnDestroy {
 
     public onSubmitEdit(): void {
 
+        const yesOption = this.yesNoOptions.filter(obj => obj.itemName == 'Yes');
+        const noOption = this.yesNoOptions.filter(obj => obj.itemName == 'No');
+        const naOption = this.yesNoNaOptions.filter(obj => obj.itemName == 'N/A');
+        const screeningDone = this.ClientMonitoringMatFormGroup.value[0]['cacxScreeningDone'];
+
         const ancVisitDetailsCommandEdit: any = {
             Id: this.pregnancyId,
             PatientId: parseInt(this.patientId.toString(), 10),
@@ -815,16 +820,36 @@ export class AncComponent implements OnInit, OnDestroy {
             CounsellingTopics: this.counselling_data
         };
 
+        const clientMonitoringCommand = {
+            PatientId: this.patientId,
+            PatientMasterVisitId: this.patientMasterVisitId,
+            FacilityId: 755,
+            WhoStage: this.ClientMonitoringMatFormGroup.value[0]['WhoStage'],
+            ServiceAreaId: 3,
+            ScreeningTypeId: 0,
+            ScreeningDone: (yesOption[0].itemId == screeningDone) ? true : false,
+            ScreeningDate: new Date(),
+            ViralLoadSampleTaken: this.ClientMonitoringMatFormGroup.value[0]['viralLoadSampleTaken'],
+            ScreeningTB: this.ClientMonitoringMatFormGroup.value[0]['screenedForTB'],
+            CaCxMethod: (yesOption[0].itemId == screeningDone) ? this.ClientMonitoringMatFormGroup.value[0]['cacxMethod'] : 0,
+            CaCxResult: (yesOption[0].itemId == screeningDone) ? this.ClientMonitoringMatFormGroup.value[0]['cacxResult'] : 0,
+            Comments: (yesOption[0].itemId == screeningDone) ? this.ClientMonitoringMatFormGroup.value[0]['cacxComments'] : 'na',
+            ClinicalNotes: (yesOption[0].itemId == screeningDone) ? this.ClientMonitoringMatFormGroup.value[0]['cacxComments'] : 'n/a',
+            CreatedBy: (this.userId < 1) ? 1 : this.userId
+        } as ClientMonitoringCommand;
+
         const AncvisitDetailsEdit = this.ancService.EditANCVisitDetails(ancVisitDetailsCommandEdit);
         const visitDetailsEdit = this.ancService.EditVisitDetails(VisitDetails);
         const baselineEdit = this.ancService.SaveBaselineProfile(baselineAncCommandEdit);
         const ancEducation = this.ancService.savePatientEducation(patientEducationCommand);
+        const ancClientMonitoringEdit = this.ancService.saveClientMonitoring(clientMonitoringCommand);
 
         forkJoin([
              AncvisitDetailsEdit,
             visitDetailsEdit,
             baselineEdit,
-            ancEducation
+            ancEducation,
+            ancClientMonitoringEdit
 
         ]).subscribe(
             (result) => {

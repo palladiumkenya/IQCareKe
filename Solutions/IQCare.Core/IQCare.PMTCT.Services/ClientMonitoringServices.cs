@@ -101,12 +101,12 @@ namespace IQCare.PMTCT.Services
             }
         }
 
-        public PatientWhoStage GetPatientWhoStage(int patientId, int PatientMasterVisitId)
+        public PatientWhoStage GetPatientWhoStage(int patientId, int patientMasterVisitId)
         {
             try
             {
                 PatientWhoStage patientWhoStage = _unitOfWork.Repository<PatientWhoStage>()
-                    .Get(x => x.PatientId == patientId && x.PatientMasterVisitId == PatientMasterVisitId)
+                    .Get(x => x.PatientId == patientId && x.PatientMasterVisitId == patientMasterVisitId)
                     .FirstOrDefault();
                 return patientWhoStage;
             }
