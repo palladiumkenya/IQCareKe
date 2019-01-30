@@ -247,4 +247,23 @@ export class MaternityService {
             catchError(this.errorHandler.handleError<any[]>('GetPatientDiagnosisInfo'))
         );
     }
+
+    public getMaternityLookUpOptionByName(lookUpOptions: any [], lookupName: string): any {
+        console.log("Options >> "+ lookUpOptions)
+        for (let index = 0; index < lookUpOptions.length; index++) {
+            if (lookUpOptions[index].itemName.toUpperCase() === lookupName.toUpperCase()) {
+              return lookUpOptions[index];
+            }  
+        }
+        return null;
+    }
+
+    public getMaternityLoopUpOptionById(lookUpOptions: any [], lookUpId: any): any {
+        for (let index = 0; index < lookUpOptions.length; index++) {
+            if (lookUpOptions[index].itemId == lookUpId) {
+              return lookUpOptions[index];
+            }  
+        }
+        return null;
+    }
 }

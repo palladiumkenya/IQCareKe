@@ -112,14 +112,18 @@ close() {
 public OnChange(event,key:any) {
   var paramId = key.split('_');
   var detectionLimitControlName = 'detectionLimit_'+paramId[1];
-  console.log(detectionLimitControlName);
-
-if(this.disabled){
+  var resultValueControlName = 'ResultValue_' + paramId[1];
+  
+if(this.disabled)
+{
   this.labResultForm.get(detectionLimitControlName).disable();
-}else{
+  this.labResultForm.get(resultValueControlName).enable();
+}else
+{
   this.labResultForm.get(detectionLimitControlName).enable();
+  this.labResultForm.get(resultValueControlName).disable();
+
 }
-  console.log("Event "+ event + "Key " + key);
 }
 
 }

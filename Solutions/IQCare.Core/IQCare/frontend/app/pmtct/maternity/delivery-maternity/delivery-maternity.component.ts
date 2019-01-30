@@ -187,14 +187,15 @@ export class DeliveryMaternityComponent implements OnInit {
                     this.deliveryFormGroup.controls['deliveryDate'].setValue(del.dateOfDelivery);
                     this.deliveryFormGroup.controls['deliveryTime'].setValue(del.timeOfDelivery);
                     this.deliveryFormGroup.controls['labourDuration'].setValue(del.durationOfLabour);
-                    this.deliveryFormGroup.controls['deliveryMode'].setValue(del.modeOfDeliveryId);
-                    this.deliveryFormGroup.controls['bloodLoss'].setValue(del.bloodLossClassificationId);
+                    this.deliveryFormGroup.controls['deliveryMode'].setValue(this._matService.getMaternityLookUpOptionByName(this.deliveryModeOptions, del.modeOfDelivery));
+                    this.deliveryFormGroup.controls['bloodLoss'].setValue(this._matService.getMaternityLookUpOptionByName(this.bloodlossOptions, del.bloodLossClassification));
                     this.deliveryFormGroup.controls['bloodLossCount'].setValue(del.bloodLossCapacity);
-                    this.deliveryFormGroup.controls['deliveryCondition'].setValue(del.motherConditionId);
-                    this.deliveryFormGroup.controls['placentaComplete'].setValue(del.placentaCompleteId);
+                    this.deliveryFormGroup.controls['deliveryCondition'].setValue(this._matService.getMaternityLookUpOptionByName(this.motherStateOptions, del.motherCondition));
+                    this.deliveryFormGroup.controls['placentaComplete'].setValue(this._matService.getMaternityLookUpOptionByName(this.yesnoOptions, del.placentaComplete));
                     this.deliveryFormGroup.controls['maternalDeathsAudited'].setValue(del.maternalDeathAuditedId);
                     this.deliveryFormGroup.controls['auditDate'].setValue(del.maternalDeathAuditDate);
-                    this.deliveryFormGroup.controls['deliveryComplications'].setValue(del.deliveryComplicationsExperiencedId);
+                    this.deliveryFormGroup.controls['deliveryComplications']
+                    .setValue(this._matService.getMaternityLookUpOptionByName(this.yesnoOptions,del.deliveryComplicationsExperienced));
                     this.deliveryFormGroup.controls['deliveryComplicationNotes'].setValue(del.deliveryComplicationNotes);
                     this.deliveryFormGroup.controls['deliveryConductedBy'].setValue(del.deliveryConductedBy);
                 },

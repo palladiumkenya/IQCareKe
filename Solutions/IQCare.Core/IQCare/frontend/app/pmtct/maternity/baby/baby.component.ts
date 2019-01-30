@@ -160,18 +160,21 @@ export class BabyComponent implements OnInit {
     }
 
     public setBabyFormValues(babyInfo: any): void {
-                    this.babyFormGroup.controls['babySex'].setValue(this.getLookUpItemId(this.genderOptions, babyInfo.sex));
+                    this.babyFormGroup.controls['babySex'].setValue(this.maternityService.getMaternityLookUpOptionByName(this.genderOptions, babyInfo.sex));
                     this.babyFormGroup.controls['birthWeight'].setValue(babyInfo.birthWeight);
-                    this.babyFormGroup.controls['outcome'].setValue(this.getLookUpItemId(this.deliveryOutcomeOptions, babyInfo.outcome));
+                    this.babyFormGroup.controls['outcome'].setValue(this.maternityService.getMaternityLookUpOptionByName(this.deliveryOutcomeOptions, babyInfo.outcome));
                     this.babyFormGroup.controls['resuscitationDone']
-                    .setValue(babyInfo.resuscitate ? this.getLookUpItemId(this.yesnoOptions, 'Yes') :
-                        this.getLookUpItemId(this.yesnoOptions, 'No'));
-                    this.babyFormGroup.controls['deformity'].setValue(babyInfo.deformity ? this.getLookUpItemId(this.yesnoOptions, 'Yes') :
-                        this.getLookUpItemId(this.yesnoOptions, 'No'));
-                    this.babyFormGroup.controls['teoGiven'].setValue(babyInfo.teo ? this.getLookUpItemId(this.yesnoOptions, 'Yes') :
-                        this.getLookUpItemId(this.yesnoOptions, 'No'));
+                    .setValue(babyInfo.resuscitate ? this.maternityService.getMaternityLookUpOptionByName(this.yesnoOptions, 'Yes') :
+                        this.maternityService.getMaternityLookUpOptionByName(this.yesnoOptions, 'No'));
+                    this.babyFormGroup.controls['deformity'].setValue(babyInfo.deformity ? 
+                         this.maternityService.getMaternityLookUpOptionByName(this.yesnoOptions, 'Yes') :
+                         this.maternityService.getMaternityLookUpOptionByName(this.yesnoOptions, 'No'));
+                    this.babyFormGroup.controls['teoGiven'].setValue(babyInfo.teo ? 
+                         this.maternityService.getMaternityLookUpOptionByName(this.yesnoOptions, 'Yes') :
+                         this.maternityService.getMaternityLookUpOptionByName(this.yesnoOptions, 'No'));
                     this.babyFormGroup.controls['breastFed'].setValue(babyInfo.breastFeeding ?
-                        this.getLookUpItemId(this.yesnoOptions, 'Yes') : this.getLookUpItemId(this.yesnoOptions, 'No'));
+                        this.maternityService.getMaternityLookUpOptionByName(this.yesnoOptions, 'Yes') : 
+                         this.maternityService.getMaternityLookUpOptionByName(this.yesnoOptions, 'No'));
                     this.babyFormGroup.controls['comment'].setValue(babyInfo.comment);
                     this.babyFormGroup.controls['agparScore1min'].setValue(this.getApgarScoreValue(babyInfo.apgarScore, '1min'));
                     this.babyFormGroup.controls['agparScore5min'].setValue(this.getApgarScoreValue(babyInfo.apgarScore, '5min'));
@@ -197,16 +200,6 @@ export class BabyComponent implements OnInit {
                 break;
         }
         return score;
-    }
-
-  
-    public getLookUpItemId(lookUpOptions: any [], lookupName: string): any {
-        for (let index = 0; index < lookUpOptions.length; index++) {
-            if (lookUpOptions[index].itemName == lookupName) {
-              return lookUpOptions[index];
-            }  
-        }
-        return null;
     }
 
     public onBabyOutcome(event) {
