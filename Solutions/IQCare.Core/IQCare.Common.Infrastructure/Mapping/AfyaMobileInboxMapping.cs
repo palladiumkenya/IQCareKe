@@ -4,11 +4,11 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace IQCare.Common.Infrastructure.Mapping
 {
-    public class AfyaMobileInboxMapping : IEntityTypeConfiguration<AfyaMobileInbox>
+    public class AfyaMobileInboxMapping : IEntityTypeConfiguration<ApiInbox>
     {
-        public void Configure(EntityTypeBuilder<AfyaMobileInbox> builder)
+        public void Configure(EntityTypeBuilder<ApiInbox> builder)
         {
-            builder.ToTable("AfyaMobileInbox").HasKey(c => c.Id);
+            builder.ToTable("ApiInbox").HasKey(c => c.Id);
         }
     }
 }
