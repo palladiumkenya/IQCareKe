@@ -44,6 +44,15 @@ namespace IQCare.Controllers.Afyamobile
             return BadRequest(response);
         }
 
+        [HttpPost("htsTests")]
+        public async Task<IActionResult> PostTests([FromBody]AfyaMobileSynchronizeHtsTestsCommand afyaMobileSynchronizeHtsTestsCommand)
+        {
+            var response = await _mediator.Send(afyaMobileSynchronizeHtsTestsCommand, Request.HttpContext.RequestAborted);
+            if (response.IsValid)
+                return Ok(response);
+            return BadRequest(response);
+        }
+
         [HttpPost("partner")]
         public async Task<IActionResult> PostPartner([FromBody] SynchronizePartnersCommand synchronizePartnersCommand)
         {
