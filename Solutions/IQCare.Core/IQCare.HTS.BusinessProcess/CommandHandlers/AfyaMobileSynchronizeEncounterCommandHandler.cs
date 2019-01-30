@@ -87,12 +87,6 @@ namespace IQCare.HTS.BusinessProcess.CommandHandlers
                     int screeningTypeId = screeningType != null ? screeningType.MasterId : 0;
                     int tbStatus = request.PRE_TEST.TB_SCREENING;
 
-                    //Get Consent to screen partners itemId
-                    var consentPartnerType = await _unitOfWork.Repository<LookupItemView>()
-                        .Get(x => x.MasterName == "ConsentType" && x.ItemName == "ConsentToListPartners")
-                        .FirstOrDefaultAsync();
-                    int consentListPartnersTypeId = consentPartnerType != null ? consentPartnerType.ItemId : 0;
-
                     if (identifiers.Count > 0)
                     {
                         var person = await registerPersonService.GetPerson(identifiers[0].PersonId);
