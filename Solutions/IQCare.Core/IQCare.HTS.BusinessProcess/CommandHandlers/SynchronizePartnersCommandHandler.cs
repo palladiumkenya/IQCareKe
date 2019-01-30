@@ -60,7 +60,7 @@ namespace IQCare.HTS.BusinessProcess.CommandHandlers
                         }
                     }
 
-                    var afyaMobileMessage = await registerPersonService.AddAfyaMobileInbox(DateTime.Now, indexClientAfyaMobileId, JsonConvert.SerializeObject(request), false);
+                    var afyaMobileMessage = await registerPersonService.AddAfyaMobileInbox(DateTime.Now, request.MESSAGE_HEADER.MESSAGE_TYPE, indexClientAfyaMobileId, JsonConvert.SerializeObject(request), false);
                     try
                     {
                         string firstName = request.PARTNERS[i].PATIENT_IDENTIFICATION.PATIENT_NAME.FIRST_NAME;

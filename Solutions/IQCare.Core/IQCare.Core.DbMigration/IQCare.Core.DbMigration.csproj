@@ -134,6 +134,7 @@
     <None Remove="Scripts\2.0.0\29_SO_Create_SP_GetPharmcyRegimens.sql" />
     <None Remove="Scripts\2.0.0\30_BlueCardGreencard_sync_Alter.sql" />
     <None Remove="Scripts\2.0.0\31_Person_Update_DateOfBirth.sql" />
+    <None Remove="Scripts\2.0.0\32_Remove_S_P_From_PNSRelationship.sql" />
   </ItemGroup>
 
   <ItemGroup>
@@ -263,6 +264,7 @@
     <EmbeddedResource Include="Scripts\2.0.0\29_SO_Create_SP_GetPharmcyRegimens.sql" />
     <EmbeddedResource Include="Scripts\2.0.0\30_BlueCardGreencard_sync_Alter.sql" />
     <EmbeddedResource Include="Scripts\2.0.0\31_Person_Update_DateOfBirth.sql" />
+    <EmbeddedResource Include="Scripts\2.0.0\32_Remove_S_P_From_PNSRelationship.sql" />
   </ItemGroup>
 
   <ItemGroup>
