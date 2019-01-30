@@ -78,8 +78,15 @@ export class PreventiveServicesComponent implements OnInit {
         this.notify.emit({'form': this.PreventiveServicesFormGroup, 'preventive_service_data': this.serviceData});
 
         if (this.isEdit) {
-            this.getPatientPreventiveServiceInfo(this.patientId, this.patientMasterVisitId);
+           // this.getPatientPreventiveServiceInfo(this.patientId, this.patientMasterVisitId);
+
+            this.PreventiveServicesFormGroup.get('preventiveServices').clearValidators();
+            this.PreventiveServicesFormGroup.get('dateGiven').clearValidators();
+            this.PreventiveServicesFormGroup.get('comments').clearValidators();
+            this.PreventiveServicesFormGroup.get('nextSchedule').clearValidators();
+
             this.getPatientPartnerTestingInfo(this.patientId, this.patientMasterVisitId);
+            this.getPatientPreventiveServiceInfoAll(this.patientId);
         } else {
            this.getPatientPreventiveServiceInfoAll(this.patientId);
         }

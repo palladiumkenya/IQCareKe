@@ -67,7 +67,7 @@
                                 <div class="col-md-12">
                                     <div class="col-md-1 pull-left"><label class="control-label pull-left">Drug</label></div>
                                     <div class="col-md-11">
-                                        <input id="txtDrugs" type="text" class="form-control input-sm" ClientIDMode="Static" runat="server" placeholder="Type to search..." style="width:100%" />
+                                        <input id="txtDrugs" type="text" class="form-control input-sm awesomplete-selectcomplete" ClientIDMode="Static" runat="server" placeholder="Type to search..." style="width:100%"  />
                                     </div>                        
                                 </div>
                                 
@@ -819,7 +819,8 @@
                
                var drugInput = document.getElementById('<%= txtDrugs.ClientID %>');
                var awesomplete = new Awesomplete(drugInput, {
-                   minChars: 2
+                   minChars: 2,
+                   maxItems:100
                });
                
                document.getElementById('<%= txtDrugs.ClientID %>').addEventListener('awesomplete-selectcomplete', SelectDrug);
