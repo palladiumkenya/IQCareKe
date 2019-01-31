@@ -820,7 +820,7 @@
                var drugInput = document.getElementById('<%= txtDrugs.ClientID %>');
                var awesomplete = new Awesomplete(drugInput, {
                    minChars: 2,
-                   maxItems:100
+                   maxItems:50
                });
                
                document.getElementById('<%= txtDrugs.ClientID %>').addEventListener('awesomplete-selectcomplete', SelectDrug);
