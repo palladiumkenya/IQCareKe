@@ -1101,14 +1101,14 @@
 											</div>
 										</div>
 
-										<div class="col-md-2 form-group">
+										<!--<div class="col-md-2 form-group">
 											<div class="col-md-12">
 												<label class="control-label pull-left">Dose</label>
 											</div>
 											<div class="col-md-12">
 												<asp:TextBox runat="server" ID="treatmentDose" CssClass="form-control input-sm" ClientIDMode="Static" placeholder="dose.." data-parsley-min="1"></asp:TextBox>
 											</div>
-										</div>
+										</div>-->
 										
 
 										<div class="col-md-1">
@@ -1131,7 +1131,7 @@
 															<th><span class="text-primary">IllnessID</span></th>
 															<th><span class="text-primary">Illness</span></th>
 															<th><span class="text-primary">Current Treatment</span></th>
-															<th><span class="text-primary">Dose</span></th>
+															<!--<th><span class="text-primary">Dose</span></th>-->
 															<th><span class="text-primary">Onset Date</span></th>
 															<th><span class="text-primary">Active</span></th>
 															<th></th>
@@ -4033,8 +4033,8 @@
                         "chronicIllnessID": chronicTable.row(i).data()[0],
                         "chronicIllness": chronicTable.row(i).data()[1],
                         "treatment": chronicTable.row(i).data()[2],
-                        "dose": chronicTable.row(i).data()[3],
-                        "OnsetDate": chronicTable.row(i).data()[4],
+                        "dose": "",
+                        "OnsetDate": chronicTable.row(i).data()[3],
                         "Active": active
                         //"Active": chronicTable.row(i).checkboxes.selected()[5]
                     }

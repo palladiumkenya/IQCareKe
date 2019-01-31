@@ -107,11 +107,11 @@ function AddChronicIllness() {
     var chronicIllness = $('#ChronicIllnessName').find(":selected").text();
     var chronicIllnessID = $('#ChronicIllnessName').find(":selected").val();
     var illnessTreatment = $("#illnessTreatment").val();
-    var treatmentDose = $('#treatmentDose').val();
-    if (treatmentDose > 0)
-        treatmentDose = treatmentDose;
-    else
-        treatmentDose = "";
+    //var treatmentDose = $('#treatmentDose').val();
+    //if (treatmentDose > 0)
+      //  treatmentDose = treatmentDose;
+    //else
+      //  treatmentDose = "";
     var onSet = $('#txtOnsetDate').val();
     //Validate duplication
     var chronicIllnessFound = 0;
@@ -137,7 +137,7 @@ function AddChronicIllness() {
        
        chronicIllnessList.push("" + chronicIllness + "");
         arrChronicIllnessUI = [];
-        arrChronicIllnessUI.push([chronicIllnessID, chronicIllness, illnessTreatment, treatmentDose, onSet,
+        arrChronicIllnessUI.push([chronicIllnessID, chronicIllness, illnessTreatment, onSet,
             "<input type='checkbox' id='chkChronic" + chronicIllnessID + "' >", "<button type='button' class='btnDelete btn btn-danger fa fa-minus-circle btn-fill' > Remove</button>"]);
         
         DrawDataTable("dtlChronicIllness", arrChronicIllnessUI);
