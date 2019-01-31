@@ -57,6 +57,7 @@ namespace IQCare.HTS.BusinessProcess.CommandHandlers
                             afyaMobileId = request.INTERNAL_PATIENT_ID[j].ID;
                         }
                     }
+
                     //check if person already exists
                     var identifiers = await registerPersonService.getPersonIdentifiers(afyaMobileId, 10);
                     if (identifiers.Count > 0)
