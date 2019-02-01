@@ -1,3 +1,4 @@
+import { MilestonesFormComponent } from './milestones-form/milestones-form.component';
 import { LookupItemView } from './../../../shared/_models/LookupItemView';
 import { HeiService } from './../../_services/hei.service';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
@@ -5,7 +6,7 @@ import { NotificationService } from '../../../shared/_services/notification.serv
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { SnotifyService } from 'ng-snotify';
 import { LookupItemService } from '../../../shared/_services/lookup-item.service';
-import { MatTableDataSource } from '@angular/material';
+import { MatTableDataSource, MatDialogConfig, MatDialog } from '@angular/material';
 import { MilestoneTableData } from '../../_models/hei/MilestoneTableData';
 import { MilestoneData } from '../../_models/hei/MilestoneData';
 
@@ -16,7 +17,7 @@ import { MilestoneData } from '../../_models/hei/MilestoneData';
 })
 export class MilestonesComponent implements OnInit {
 
-    milestonesFormGroup: FormGroup;
+    // milestonesFormGroup: FormGroup;
     milestone_data: MilestoneData[] = [];
 
     @Input('milestoneOptions') milestoneOptions: any;
@@ -39,16 +40,17 @@ export class MilestonesComponent implements OnInit {
         private _lookupItemService: LookupItemService,
         private snotifyService: SnotifyService,
         private notificationService: NotificationService,
-        private heiservice: HeiService) { }
+        private heiservice: HeiService,
+        private dialog: MatDialog) { }
 
     ngOnInit() {
-        this.milestonesFormGroup = this._formBuilder.group({
+        /*this.milestonesFormGroup = this._formBuilder.group({
             milestoneAssessed: new FormControl('', [Validators.required]),
             dateAssessed: new FormControl('', [Validators.required]),
             achieved: new FormControl('', [Validators.required]),
             status: new FormControl('', [Validators.required]),
             comment: new FormControl('')
-        });
+        });*/
 
         const {
             assessed,
@@ -59,7 +61,7 @@ export class MilestonesComponent implements OnInit {
         this.yesnoOptions = yesnoOption;
 
 
-        this.notify.emit({ 'form': this.milestonesFormGroup, 'data': this.milestone_data });
+        this.notify.emit({ /*'form': this.milestonesFormGroup,*/ 'data': this.milestone_data });
 
         this.loadMilestones();
     }
@@ -92,34 +94,61 @@ export class MilestonesComponent implements OnInit {
     }
 
     public AddMilestone() {
-        const milestone = this.milestonesFormGroup.get('milestoneAssessed').value.itemName;
-        if (this.milestone_table_data.filter(x => x.milestone === milestone).length > 0) {
-            this.snotifyService.warning('' + milestone + ' exists', 'HEI Milestones', this.notificationService.getConfig());
-        } else {
-            this.milestone_table_data.push({
-                milestone: this.milestonesFormGroup.controls['milestoneAssessed'].value.itemName,
-                dateAssessed: new Date(this.milestonesFormGroup.controls['dateAssessed'].value),
-                achieved: this.milestonesFormGroup.controls['achieved'].value.itemName,
-                status: this.milestonesFormGroup.controls['status'].value.itemName,
-                comment: this.milestonesFormGroup.controls['comment'].value
-            });
-            this.milestone_data.push({
-                milestoneId: this.milestonesFormGroup.controls['milestoneAssessed'].value.itemId,
-                dateAssessed: new Date(this.milestonesFormGroup.controls['dateAssessed'].value),
-                achievedId: this.milestonesFormGroup.controls['achieved'].value.itemId,
-                statusId: this.milestonesFormGroup.controls['status'].value.itemId,
-                comment: this.milestonesFormGroup.controls['comment'].value
-            });
 
-            console.log(this.milestone_table_data);
-            this.dataSource = new MatTableDataSource(this.milestone_table_data);
-        }
     }
+
     public onRowClicked(row) {
         console.log('row clicked:', row);
         const index = this.milestone_table_data.indexOf(row.milestone);
         this.milestone_table_data.splice(index, 1);
         this.dataSource = new MatTableDataSource(this.milestone_table_data);
+    }
+
+    public NewMilestone() {
+        const dialogConfig = new MatDialogConfig();
+
+        dialogConfig.disableClose = true;
+        dialogConfig.autoFocus = true;
+
+        dialogConfig.data = {
+            milestoneassessments: this.milestoneassessments,
+            milestonestatuses: this.milestonestatuses,
+            yesnoOptions: this.yesnoOptions
+        };
+
+        const dialogRef = this.dialog.open(MilestonesFormComponent, dialogConfig);
+
+        dialogRef.afterClosed().subscribe(
+            data => {
+                if (!data) {
+                    return;
+                }
+
+                // console.log(data);
+
+                const milestone = data.milestoneAssessed.itemName;
+                if (this.milestone_table_data.filter(x => x.milestone === milestone).length > 0) {
+                    this.snotifyService.warning('' + milestone + ' exists', 'HEI Milestones', this.notificationService.getConfig());
+                } else {
+                    this.milestone_table_data.push({
+                        milestone: data.milestoneAssessed.itemName,
+                        dateAssessed: new Date(data.dateAssessed),
+                        achieved: data.achieved.itemName,
+                        status: data.status.itemName,
+                        comment: data.comment
+                    });
+                    this.milestone_data.push({
+                        milestoneId: data.milestoneAssessed.itemId,
+                        dateAssessed: new Date(data.dateAssessed),
+                        achievedId: data.achieved.itemId,
+                        statusId: data.status.itemId,
+                        comment: data.comment
+                    });
+
+                    console.log(this.milestone_table_data);
+                    this.dataSource = new MatTableDataSource(this.milestone_table_data);
+                }
+            });
     }
 }
 

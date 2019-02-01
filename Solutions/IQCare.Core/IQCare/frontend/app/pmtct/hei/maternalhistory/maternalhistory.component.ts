@@ -143,6 +143,7 @@ export class MaternalhistoryComponent implements OnInit {
         dialogConfig.width = '80%';
 
         dialogConfig.data = {
+            gender: 'female'
         };
 
 
@@ -155,6 +156,7 @@ export class MaternalhistoryComponent implements OnInit {
                     return;
                 }
 
+                console.log(data);
                 const firstName = data[0]['firstName'] ? data[0]['firstName'] : '';
                 const middleName = data[0]['middleName'] ? data[0]['middleName'] : '';
                 const lastName = data[0]['lastName'] ? data[0]['lastName'] : '';

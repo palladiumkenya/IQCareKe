@@ -204,7 +204,6 @@ export class HeiService {
     }
 
     public saveHeiLabOrder(labOrder: LabOrder): Observable<any> {
-        console.log(labOrder);
         if (labOrder.LabTests.length == 0) {
             return of([]);
         }
@@ -212,6 +211,13 @@ export class HeiService {
         return this.http.post<any>(this.API_LAB_URL + '/api/LabOrder/AddLabOrder', JSON.stringify(labOrder), httpOptions).pipe(
             tap(saveHeiLabOrder => this.errorHandler.log(`successfully added laborder`)),
             catchError(this.errorHandler.handleError<any>('Error saving laborder'))
+        );
+    }
+
+    public getLabOrderTestsByOrderId(labOrderId: number): Observable<any> {
+        return this.http.get<any>(this.API_LAB_URL + '/api/LabOrder/GetLabOrderTestsByOrderId/' + labOrderId).pipe(
+            tap(getLabOrderTestsByOrderId => this.errorHandler.log(`successfully fetched LabOrderTestsByOrderId`)),
+            catchError(this.errorHandler.handleError<any>('Error getLabOrderTestsByOrderId'))
         );
     }
 
@@ -257,7 +263,7 @@ export class HeiService {
     }
 
     public getLabOrderTestResults(patientId: number): Observable<any[]> {
-        return this.http.get<any[]>(this.API_LAB_URL + '/api/LabOrder/GetLabOrderTestResultsByPatientId/' + patientId).pipe(
+        return this.http.get<any[]>(this.API_LAB_URL + '/api/LabOrder/GetLabTestResults?patientId=' + patientId).pipe(
             tap(getLabOrderTestResults => this.errorHandler.log(`successfully fetched labOrderTestResults`)),
             catchError(this.errorHandler.handleError<any>('Error fetching labOrderTestResults'))
         );
@@ -299,7 +305,7 @@ export class HeiService {
             );
     }
 
-    public getPatientVisitDetails(patientId: number, serviceAreaId: number) {
+    public getPatientVisitDetails(patientId: number, serviceAreaId: number): Observable<any> {
         return this.http.get<any[]>(this.API_URL + '/api/AncVisitDetails/GetVisitDetailsByVisitType/' +
             patientId + '/' + serviceAreaId).pipe(
                 tap(getPatientVisitDetails => this.errorHandler.log('get patient visit details data')),

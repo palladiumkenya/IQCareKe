@@ -1549,6 +1549,7 @@ namespace IQCare.Common.BusinessProcess.Services
                 lastName = string.IsNullOrWhiteSpace(lastName) ? "" : lastName.Replace("'", "''");
                 nickName = string.IsNullOrWhiteSpace(nickName) ? "" : nickName.Replace("'", "''");
                 string dob = dateOfBirth.HasValue ? dateOfBirth.Value.ToString("yyyy-MM-dd") : null;
+                string regDate = registrationDate.HasValue ? registrationDate.Value.ToString("yyyy-MM-dd") : null;
 
                 StringBuilder sql = new StringBuilder();
                 sql.Append("exec pr_OpenDecryptedSession;");
@@ -1559,7 +1560,7 @@ namespace IQCare.Common.BusinessProcess.Services
                                "CreatedBy, RegistrationDate, FacilityId)" +
                                $"Values(ENCRYPTBYKEY(KEY_GUID('Key_CTC'), '{firstName}'), ENCRYPTBYKEY(KEY_GUID('Key_CTC'), '{middleName}')," +
                                $"ENCRYPTBYKEY(KEY_GUID('Key_CTC'), '{lastName}'),ENCRYPTBYKEY(KEY_GUID('Key_CTC'), '{nickName}') , {sex}, '{dob}', 1," +
-                               $"1,0,GETDATE(), '{createdBy}', '{registrationDate}', '{facilityId}');");
+                               $"1,0,GETDATE(), '{createdBy}', '{regDate}', '{facilityId}');");
                 }
                 else
                 {
@@ -1568,7 +1569,7 @@ namespace IQCare.Common.BusinessProcess.Services
                                "CreatedBy, RegistrationDate, FacilityId)" +
                                $"Values(ENCRYPTBYKEY(KEY_GUID('Key_CTC'), '{firstName}'), ENCRYPTBYKEY(KEY_GUID('Key_CTC'), '{middleName}')," +
                                $"ENCRYPTBYKEY(KEY_GUID('Key_CTC'), '{lastName}'),ENCRYPTBYKEY(KEY_GUID('Key_CTC'), '{nickName}') , {sex}," +
-                               $"1,0,GETDATE(), '{createdBy}', '{registrationDate}', '{facilityId}');");
+                               $"1,0,GETDATE(), '{createdBy}', '{regDate}', '{facilityId}');");
                 }
                 
                 sql.Append("SELECT [Id] , CAST(DECRYPTBYKEY(FirstName) AS VARCHAR(50)) [FirstName] ,CAST(DECRYPTBYKEY(MidName) AS VARCHAR(50)) MidName" +
