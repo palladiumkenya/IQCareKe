@@ -14,6 +14,7 @@ import { NotificationService } from '../../shared/_services/notification.service
 })
 export class InlineSearchComponent implements OnInit, AfterViewInit {
     title: string;
+    gender: string;
     form: FormGroup;
     displayedColumns: string[] = ['select', 'firstName', 'middleName', 'lastName', 'dateOfBirth', 'gender'];
     dataSource = new MatTableDataSource();
@@ -29,6 +30,9 @@ export class InlineSearchComponent implements OnInit, AfterViewInit {
         private notificationService: NotificationService) {
         this.title = 'Person Search';
 
+        if (data.gender) {
+            this.gender = data.gender;
+        }
         const initialSelection = [];
         const allowMultiSelect = false;
         this.selection = new SelectionModel<any>(allowMultiSelect, initialSelection);
@@ -76,6 +80,9 @@ export class InlineSearchComponent implements OnInit, AfterViewInit {
             clientSearch.middleName = this.form.value.middleName;
         }
 
+        if (this.gender == 'female') {
+            clientSearch.sex = 52;
+        }
 
         this.searchService.searchClient(clientSearch).subscribe(
             (res) => {
