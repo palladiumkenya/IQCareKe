@@ -6679,7 +6679,7 @@
                 format: 'YYYY-MM-DD',
 
                 calendarWeeks: true,
-
+                maxDate: new Date(),
                 showClear: true,
                 showClose: true,
                
@@ -6691,7 +6691,7 @@
             $("#" + event.target.id).focus(function () {
                 $("#" + event.target.id).datetimepicker({
                     format: 'YYYY-MM-DD',
-
+                    maxDate: new Date(),
                     calendarWeeks: true,
 
                     showClose: true,
@@ -6706,7 +6706,7 @@
                     format: 'YYYY-MM-DD',
 
                     calendarWeeks: true,
-
+                    
                     showClear: true,
                     showClose: true,
 

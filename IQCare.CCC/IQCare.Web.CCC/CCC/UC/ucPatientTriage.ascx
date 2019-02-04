@@ -653,7 +653,7 @@
         columnDefs: [
             {
                 "targets": [0],
-                "visible": false,
+                "visible": true,
                 "searchable": false
             }
         ]
