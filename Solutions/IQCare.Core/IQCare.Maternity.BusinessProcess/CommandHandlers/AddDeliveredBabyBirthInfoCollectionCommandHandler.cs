@@ -30,8 +30,8 @@ namespace IQCare.Maternity.BusinessProcess.CommandHandlers
 
             try
             {
-                if (request.DeliveredBabyBirthInfoCollection == null)
-                    return Result<DeliveredBabyBirthInfoResult>.Invalid("Delivered baby bith info not found");
+                if (request.DeliveredBabyBirthInfoCollection == null && request.DeliveredBabyBirthInfoCollection.Count == 0)
+                    return Result<DeliveredBabyBirthInfoResult>.Invalid("Delivered baby birth info not found");
 
 
                 foreach (var deliveredBabyBirthInfo in request.DeliveredBabyBirthInfoCollection)

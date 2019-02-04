@@ -125,7 +125,10 @@ export class DeliveryMaternityComponent implements OnInit {
     onDeliveryComplicationsChange(event) {
         if (event.isUserInput && event.source.selected && event.source.viewValue == 'Yes') {
             this.deliveryFormGroup.get('deliveryComplicationNotes').enable({ onlySelf: true });
+            console.log("Comp change " +event.source.viewValue)
         } else {
+            console.log("Comp change " +event.source.viewValue)
+
             this.deliveryFormGroup.get('deliveryComplicationNotes').disable({ onlySelf: true });
         }
     }

@@ -10,7 +10,7 @@ namespace IQCare.Maternity.Core.Domain.Maternity
         {
 
         }
-        public PatientDeliveryInformation(int patientMasterVisitId, int pregnancyId, string labourDuration, DateTime deliveryDate, DateTime deliveryTime, int? deliveryMode, int? placentaComplete, int? bloodLossCapacity, int? bloodLossClassification, int? motherCondition, int ? complicationsExperienced, string complicationNotes, string deliveryConductedBy, int createdBy, int ? maternalDeathAudited, DateTime? maternalDeathAuditDate)
+        public PatientDeliveryInformation(int patientMasterVisitId, int pregnancyId, string labourDuration, DateTime deliveryDate, TimeSpan deliveryTime, int? deliveryMode, int? placentaComplete, int? bloodLossCapacity, int? bloodLossClassification, int? motherCondition, int ? complicationsExperienced, string complicationNotes, string deliveryConductedBy, int createdBy, int ? maternalDeathAudited, DateTime? maternalDeathAuditDate)
         {
             PatientMasterVisitId = patientMasterVisitId;
             PregnancyId = pregnancyId;
@@ -36,7 +36,7 @@ namespace IQCare.Maternity.Core.Domain.Maternity
         public int ? PregnancyId { get; private set; }
         public string DurationOfLabour { get; private set; }
         public DateTime DateOfDelivery { get; private set; }
-        public DateTime TimeOfDelivery { get; private set; }
+        public TimeSpan TimeOfDelivery { get; private set; }
         public int? ModeOfDelivery { get; private set; }
         public int? PlacentaComplete { get; private set; }
         public int? BloodLossCapacity { get; private set; }

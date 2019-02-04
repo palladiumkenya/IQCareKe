@@ -30,12 +30,22 @@ namespace IQCare.Maternity.BusinessProcess.CommandHandlers
         {
             try
             {
+                if (request.PatientDeliveryInformationId == default(int))
+                {
+                    var patientDeliveryInfo = _maternityUnitOfWork.Repository<PatientDeliveryInformation>()
+                        .Get(x => x.PatientMasterVisitId == request.PatientMasterVisitId).FirstOrDefault();
+
+                    request.PatientDeliveryInformationId = patientDeliveryInfo != null ? patientDeliveryInfo.Id : 0;
+                }
+
                 var deliveredBabyBirthInformation = _mapper.Map<DeliveredBabyBirthInformation>(request);
+
                 await _maternityUnitOfWork.Repository<DeliveredBabyBirthInformation>().AddAsync(deliveredBabyBirthInformation);
 
                 if (request.ApgarScores != null)
                 {
-                    var apgarScores = request.ApgarScores.Select(x => new DeliveredBabyApgarScore(x.ApgarScoreId, deliveredBabyBirthInformation.Id, x.Score)).ToList();
+                    var apgarScores = request.ApgarScores
+                        .Select(x => new DeliveredBabyApgarScore(x.ApgarScoreId, deliveredBabyBirthInformation.Id, x.Score)).ToList();
 
                     await _maternityUnitOfWork.Repository<DeliveredBabyApgarScore>().AddRangeAsync(apgarScores);
                 }
