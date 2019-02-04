@@ -144,7 +144,7 @@
                        <div class="col-md-12">
                            <label class="control-label  pull-left">STI Partner Notification</label>
                        </div>
-                       <div class="col-md-12">
+                       <div class="col-md-12" id="divPartnerNotification">
                            <asp:DropDownList runat="server" ID="stiPartnerNotification" CssClass="form-control input-sm" ClientIDMode="Static" data-parsley-required="true" data-parsley-min="1"/>
                        </div>
                    </div>
@@ -339,6 +339,18 @@
                  $("#divOnFP").show("fast", function () { $("#divNoFP").hide("fast"); });
              }
 
+         });
+         $("#<%=stiScreening.ClientID%>").on('change', function () {
+             var sti = $(this).find(":selected").text();
+
+             if (sti === "No") {
+           
+                 $("#stiPartnerNotification").attr("disabled", true);
+                 $("#<%=stiPartnerNotification.ClientID%>").val('0');
+             }
+             else {
+                 $("#stiPartnerNotification").attr("disabled", false);
+             }
          });
 
 
@@ -542,20 +554,23 @@
              var stiNotificationId = $("#<%=stiPartnerNotification.ClientID%>").find(":selected").val();
              var screeningTypeId = STIPartnerNotificationId;
              var screeningDone = true;
-             $.ajax({
-                 type: "POST",
-                 url: "../WebService/FemaleVitalsWebservice.asmx/AddPatientScreening",
-                 data: "{'patientId':'" + patientId + "','patientMasterVisitid':'" + patientMasterVisitId + "','visitDate':'" + visitDate + "','screeningTypeId':'" + screeningTypeId + "', 'screeningDone':" + screeningDone + ", 'screeningDate':'15-Jun-1900', 'screeningCategoryId':'0', 'screeningValueId':'" + stiNotificationId + "','comment':'null','userId':'0'}",
-                 contentType: "application/json; charset=utf-8",
-                 dataType: "json",
-                 success: function (response) {
-                     toastr.success(response.d);
-                 },
-                 error: function (xhr, errorType, exception) {
-                     var jsonError = jQuery.parseJSON(xhr.responseText);
-                     toastr.error("" + xhr.status + "" + jsonError.Message);
-                 }
-             });
+          
+                 $.ajax({
+                     type: "POST",
+                     url: "../WebService/FemaleVitalsWebservice.asmx/AddPatientScreening",
+                     data: "{'patientId':'" + patientId + "','patientMasterVisitid':'" + patientMasterVisitId + "','visitDate':'" + visitDate + "','screeningTypeId':'" + screeningTypeId + "', 'screeningDone':" + screeningDone + ", 'screeningDate':'15-Jun-1900', 'screeningCategoryId':'0', 'screeningValueId':'" + stiNotificationId + "','comment':'null','userId':'0'}",
+                     contentType: "application/json; charset=utf-8",
+                     dataType: "json",
+                     success: function (response) {
+                         toastr.success(response.d);
+                     },
+                     error: function (xhr, errorType, exception) {
+                         var jsonError = jQuery.parseJSON(xhr.responseText);
+                         toastr.error("" + xhr.status + "" + jsonError.Message);
+                     }
+                 });
+
+             
          }
 
          function doesPregnancyExists() {

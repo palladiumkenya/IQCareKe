@@ -114,7 +114,7 @@
                                 <label class="control-label pull-left">Age(Months)</label>
                             </div>
                             <div class="col-md-6">
-                                <asp:TextBox ID="personMonth" runat="server" ClientIDMode="Static" CssClass="form-control input-sm" placeholder="0"  min="0"></asp:TextBox>
+                                <asp:TextBox ID="personMonth"  runat="server" ClientIDMode="Static" CssClass="form-control input-sm" placeholder="0"  min="0"></asp:TextBox>
                                
                             </div>
                         </div>
@@ -779,12 +779,39 @@
                 momentConfig: { culture: 'en', format: 'DD-MMM-YYYY' }
             });
 
+            $("#personMonth").keyup(function () {
+                var personAge = parseInt($("#personAge").val());
+                 personAge = (isNaN(personAge)) ? 0 : personAge;
+                  var personMonth = parseInt($("#personMonth").val());
+                if (personMonth < 0) {
+                    $("#personMonth").val("");
+                    toastr.error("Patient's Month should  be more than zero", "Person Month");
+                    return false;
+                    personMonth.val("");
+
+                }
+                if (personAge != null && personAge != "" && (personAge > 0 || personAge <= 120)) 
+                   {
+                    personAge = personAge;
+                    
+                  }
+               if (personAge == null || personAge == "" || personAge <= 0  || personAge ==undefined) {
+                   personAge= 0
+               }
+
+                 if (personMonth >= 0) {
+                        $('#Dob').val(estimateDob(personAge, personMonth ));
+                   }  
+                
+
+            });
             $("#personAge").keyup(function () {
                 var personAge = parseInt($("#personAge").val());
-
+                var personMonth = parseInt($("#personMonth").val());
+                 personMonth = (isNaN(personMonth)) ? 0 : personMonth;
                 if (personAge <= 0) {
                     $("#Dob").val("");
-                    toastr.error("Patient's Age should not be zero", "Person Age");
+                    toastr.error("Patient's Age should not be zero or less than zero", "Person Age");
                     return false;
                 } else if (personAge > 120) {
                     $("#Dob").val("");
@@ -793,7 +820,15 @@
                 }
 
                 if (personAge != null && personAge != "" && (personAge > 0 || personAge <= 120)) {
-                    $('#Dob').val(estimateDob(personAge));
+                    if (personMonth >= 0 ) {
+
+                        personMonth = personMonth;
+                    }
+                    else {
+                        personMonth = 0;
+                    }
+                   $('#Dob').val(estimateDob(personAge, personMonth));
+                    
                 }
 
                 $("#dobPrecision").val("false");
@@ -934,6 +969,7 @@
                                     $("#personAge").val(age);
 
                                 }
+
 
                                 if (!(LastName == null || LastName == 'undefined' || LastName == "")) {
                                     $("#<%=LastName.ClientID%>").val(LastName);
@@ -1433,7 +1469,7 @@
                                     '<td style="text-align: left">' + baselineDate + '</td>' +
                                     '<td style="text-align: left">' + item.HivStatusResult + '</td>' +
                                     '<td style="text-align: left">' + testingDate + '</td>' +
-                                    '<td style="text-align: left">' + referred + "</td>" +
+                                  '<td style="text-align: left">' + referred + "</td>" +
                                     '<td style="text-align: left">' + linkageDate + "</td>" +
                                     '<td style="text-align: left">' + action + '</td>' +
                                     '<td align="right">' + enrollment + '</td></tr>';
@@ -1995,15 +2031,17 @@
             }
         }
 
-        function estimateDob(personAge) {
+        function estimateDob(personAge,personMonth) {
             var currentDate = new Date();
-            currentDate.setDate(15);
-            currentDate.setMonth(5);
+            //currentDate.setDate(15);
+            //currentDate.setMonth(5);
             console.log(currentDate);
-            var estDob = moment(currentDate.toISOString());
-            var dob = estDob.add((personAge * -1), 'years');
+            //var estDob = moment(currentDate.toISOString());
+            //var dob = estDob.add((personAge * -1), 'years').subtract(personMonth, 'months');
+            var dob=moment().subtract(personAge,'years').subtract(personMonth, 'months');
             return moment(dob).format('DD-MMM-YYYY');
         }
+      
 
         function getAge(dateString) {
             var today = new Date();
@@ -2012,6 +2050,9 @@
             var m = today.getMonth() - birthDate.getMonth();
             if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
                 age--;
+            }
+            if (m < 0) {
+                m = 12 - (-m + 1);
             }
 
              $("#personMonth").val(m);

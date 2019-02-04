@@ -998,7 +998,7 @@ namespace IQCare.Web.CCC.WebService
             }
             return rows;
         }
-
+        
         [WebMethod(EnableSession = true)]
         [ScriptMethod(UseHttpGet = false, ResponseFormat = ResponseFormat.Json)]
         public ArrayList GetChronicIllness()
@@ -1027,7 +1027,7 @@ namespace IQCare.Web.CCC.WebService
 
 
 
-                string[] i = new string[7] { row["chronicIllnessID"].ToString(), row["chronicIllnessName"].ToString(), row["Treatment"].ToString(), dose, row["OnsetDate"].ToString(),
+                string[] i = new string[6] { row["chronicIllnessID"].ToString(), row["chronicIllnessName"].ToString(), row["Treatment"].ToString(), row["OnsetDate"].ToString(),
                     "<input type='checkbox' id='chkChronic" + row["chronicIllnessID"].ToString() + "' " + active + " >",
                     "<button type='button' class='btnDelete btn btn-danger fa fa-minus-circle btn-fill' > Remove</button>" };
                 rows.Add(i);
