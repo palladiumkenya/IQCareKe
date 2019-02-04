@@ -1,11 +1,11 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {Subscription} from 'rxjs/index';
-import {SnotifyService} from 'ng-snotify';
-import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
-import {ClientMonitoringEmitter} from '../../emitters/ClientMonitoringEmitter';
-import {LookupItemService} from '../../../shared/_services/lookup-item.service';
-import {NotificationService} from '../../../shared/_services/notification.service';
-import {AncService} from '../../_services/anc.service';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Subscription } from 'rxjs/index';
+import { SnotifyService } from 'ng-snotify';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { ClientMonitoringEmitter } from '../../emitters/ClientMonitoringEmitter';
+import { LookupItemService } from '../../../shared/_services/lookup-item.service';
+import { NotificationService } from '../../../shared/_services/notification.service';
+import { AncService } from '../../_services/anc.service';
 
 export interface Options {
     value: string;
@@ -41,8 +41,8 @@ export class ClientMonitoringComponent implements OnInit {
     public clientMonitoringData: ClientMonitoringEmitter;
 
     constructor(private fb: FormBuilder, private lookupItemService: LookupItemService, private snotifyService: SnotifyService,
-                private notificationService: NotificationService,
-                private ancService: AncService) {
+        private notificationService: NotificationService,
+        private ancService: AncService) {
     }
 
     ngOnInit() {
@@ -76,23 +76,23 @@ export class ClientMonitoringComponent implements OnInit {
         this.clientMonitoringFormGroup.controls['cacxResult'].disable({ onlySelf: true });
         this.clientMonitoringFormGroup.controls['cacxComments'].disable({ onlySelf: true });
 
-      /*  this.getLookupItems('TBScreeningPMTCT', this.TBOptions);
-        this.getLookupItems('WHOStage', this.WHOStagOptions);
-        this.getLookupItems('YesNoNA', this.YesNoNa);
-        this.getLookupItems('CacxMethod', this.CaCxMethods);
-        this.getLookupItems('CacxResult', this.CacxResults);
-        this.getLookupItems('YesNo', this.YesNos);*/
-      this.notify.emit(this.clientMonitoringFormGroup);
+        /*  this.getLookupItems('TBScreeningPMTCT', this.TBOptions);
+          this.getLookupItems('WHOStage', this.WHOStagOptions);
+          this.getLookupItems('YesNoNA', this.YesNoNa);
+          this.getLookupItems('CacxMethod', this.CaCxMethods);
+          this.getLookupItems('CacxResult', this.CacxResults);
+          this.getLookupItems('YesNo', this.YesNos);*/
+        this.notify.emit(this.clientMonitoringFormGroup);
 
-      if (this.isEdit) {
-         /* this.getPatientScreeningInfo(this.patientId, this.patientMasterVisitId);
-          this.getPatientWhoStageInfo(this.patientId, this.patientMasterVisitId);*/
-          this.getPatientWhoStageInfoCurrent(this.patientId);
-          this.getPatientScreeningInfoByPatientId(this.patientId);
-      } else {
-          this.getPatientWhoStageInfoCurrent(this.patientId);
-          this.getPatientScreeningInfoByPatientId(this.patientId);
-      }
+        if (this.isEdit) {
+            /* this.getPatientScreeningInfo(this.patientId, this.patientMasterVisitId);
+             this.getPatientWhoStageInfo(this.patientId, this.patientMasterVisitId);*/
+            this.getPatientWhoStageInfoCurrent(this.patientId);
+            this.getPatientScreeningInfoByPatientId(this.patientId);
+        } else {
+            this.getPatientWhoStageInfoCurrent(this.patientId);
+            this.getPatientScreeningInfoByPatientId(this.patientId);
+        }
 
     }
 
@@ -105,7 +105,7 @@ export class ClientMonitoringComponent implements OnInit {
                     const options = p['lookupItems'];
                     console.log(options);
                     for (let i = 0; i < options.length; i++) {
-                        _options.push({'itemId': options[i]['itemId'], 'itemName': options[i]['itemName']});
+                        _options.push({ 'itemId': options[i]['itemId'], 'itemName': options[i]['itemName'] });
                     }
                 },
                 (err) => {
@@ -153,7 +153,6 @@ export class ClientMonitoringComponent implements OnInit {
                 p => {
                     console.log('patientwho');
                     console.log(p);
-                    console.log(p['whoStage']);
                     const whostage = p;
                     if (whostage) {
                         this.clientMonitoringFormGroup.get('WhoStage').setValue(whostage['whoStage']);

@@ -345,6 +345,11 @@ namespace IQCare.Web.CCC.WebService
                     guardId = int.Parse(Session["PersonGuardianId"].ToString());
                 }
 
+                if (string.IsNullOrWhiteSpace(firstname) || string.IsNullOrWhiteSpace(lastname) || gender == 0)
+                {
+                    return Msg = "<p>Invalid Guardian names and gender</p>";
+                }
+
                 if ((guardId>0) || (patientid !=null && int.Parse(patientid) > 0))
                 {
                     var personLogic = new PersonManager();

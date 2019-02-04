@@ -215,6 +215,9 @@ export class HeiService {
     }
 
     public getLabOrderTestsByOrderId(labOrderId: number): Observable<any> {
+        if (!labOrderId) {
+            return of([]);
+        }
         return this.http.get<any>(this.API_LAB_URL + '/api/LabOrder/GetLabOrderTestsByOrderId/' + labOrderId).pipe(
             tap(getLabOrderTestsByOrderId => this.errorHandler.log(`successfully fetched LabOrderTestsByOrderId`)),
             catchError(this.errorHandler.handleError<any>('Error getLabOrderTestsByOrderId'))
@@ -222,6 +225,10 @@ export class HeiService {
     }
 
     public saveCompleteHeiLabOrder(completeLabOrderCommand: CompleteLabOrderCommand): Observable<any> {
+        if (!completeLabOrderCommand.LabOrderId) {
+            return of([]);
+        }
+
         return this.http.post(this.API_LAB_URL + '/api/LabOrder/CompleteLabOrder', JSON.stringify(completeLabOrderCommand),
             httpOptions).pipe(
                 tap(saveCompleteHeiLabOrder => this.errorHandler.log(`successfully completed hei laborder`)),
@@ -298,6 +305,10 @@ export class HeiService {
     }
 
     public saveHeiOutCome(heiOutComeCommand: HeiOutComeCommand): Observable<any> {
+        if (!heiOutComeCommand.OutcomeAt24MonthsId) {
+            return of([]);
+        }
+
         return this.http.post<any>(this.API_URL + '/api/DeliveryMaternalHistory/UpdateOutComeAt24Months',
             JSON.stringify(heiOutComeCommand), httpOptions).pipe(
                 tap(saveHeiInfantFeeding => this.errorHandler.log(`successfully saved infant feeding`)),
