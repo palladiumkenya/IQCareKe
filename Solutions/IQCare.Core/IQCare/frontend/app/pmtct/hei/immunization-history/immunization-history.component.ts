@@ -26,7 +26,7 @@ export class ImmunizationHistoryComponent implements OnInit {
 
     displayedColumns = ['period', 'given', 'dateImmunized', 'nextSchedule', 'action'];
     dataSource = new MatTableDataSource(this.immunization_history_table_data);
-    
+
     @Input('immunizationHistoryOptions') immunizationHistoryOptions: any;
     @Input('isEdit') isEdit: boolean;
     @Input('patientId') patientId: number;
@@ -102,7 +102,10 @@ export class ImmunizationHistoryComponent implements OnInit {
                 }
 
                 const period = data.period.itemName;
-                if (this.immunization_history_table_data.filter(x => x.immunizationPeriod === period).length > 0) {
+                const immunizationGiven = data.immunizationGiven.itemName;
+
+                if (this.immunization_history_table_data.filter(x => x.immunizationPeriod === period
+                    && x.given == immunizationGiven).length > 0) {
                     this.snotifyService.warning('' + period + ' exists', 'Immunization History', this.notificationService.getConfig());
                 } else {
 
@@ -125,7 +128,6 @@ export class ImmunizationHistoryComponent implements OnInit {
                         nextScheduled: nextScheduleDate
                     });
 
-                    console.log(this.immunization_history_table_data);
                     this.dataSource = new MatTableDataSource(this.immunization_history_table_data);
                 }
             }

@@ -25,6 +25,7 @@ export class TestDialogComponent implements OnInit {
     otherKitexpiryDate: Date;
     determineKitexpiryDate: Date;
     firstResponseKitexpiryDate: Date;
+    htsEncounterDate: Date;
 
     minDate: any;
 
@@ -44,6 +45,8 @@ export class TestDialogComponent implements OnInit {
         this.otherKitexpiryDate = data.otherKitexpiryDate;
         this.determineKitexpiryDate = data.determineKitexpiryDate;
         this.firstResponseKitexpiryDate = data.firstResponseKitexpiryDate;
+
+        this.htsEncounterDate = data.htsEncounterDate;
 
         this.minDate = new Date();
     }
