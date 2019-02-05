@@ -2845,6 +2845,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>LabReport.rpt</DependentUpon>
       <SubType>Component</SubType>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Compile>
     <Compile Include="Laboratory\Reports\PrintOut.aspx.cs">
       <DependentUpon>PrintOut.aspx</DependentUpon>
@@ -3213,10 +3214,11 @@
     <None Include="XMLFiles\AllPatientARVPickup" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Laboratory\Reports\LabReport.rpt">
+    <Content Include="Laboratory\Reports\LabReport.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>LabReport.cs</LastGenOutput>
-    </EmbeddedResource>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <None Include="Reports\rptPatientDrugs.rpt" />
     <None Include="Reports\rptAppointment.rpt" />
     <None Include="Reports\rptClinicalNotes.rpt" />
