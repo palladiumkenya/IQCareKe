@@ -53,13 +53,14 @@ namespace IQCare.PMTCT.BusinessProcess.CommandHandlers
 
                     List<PreventiveService> preventiveServices = new List<PreventiveService>();
 
+
                     PreventiveService insecticideNet = new PreventiveService()
                     {
                         PatientId = request.PreventiveService[0].PatientId,
                         PatientMasterVisitId = request.PreventiveService[0].PatientMasterVisitId,
                         PreventiveServiceId = request.InsecticideTreatedNet,
                         PreventiveServiceDate = request.InsecticideGivenDate,
-                        Description = "Insecticide treated nets given",
+                        Description = request.InsecticideGivenDate.HasValue? "Insecticide treated nets given": "Insecticide Treated Net Not given",
                         CreatedBy = request.CreatedBy,
                         DeleteFlag = false
                         

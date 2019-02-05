@@ -591,14 +591,17 @@ export class AncComponent implements OnInit, OnDestroy {
                 });
         }
 
+        const InsecticideGivenDate: Date = moment(this.PreventiveServiceMatFormGroup.value[0]['insecticideTreatedNetGivenDate']).toDate();
+        const InsecticideTreatedNet: string = this.PreventiveServiceMatFormGroup.value[0]['insecticideTreatedNet'];
         const preventiveServiceCommand: PatientPreventiveService = {
             preventiveService: this.preventiveService,
-            InsecticideGivenDate: moment(this.PreventiveServiceMatFormGroup.value[0]['insecticideTreatedNetGivenDate']).toDate(),
             AntenatalExercise: this.PreventiveServiceMatFormGroup.value[0]['antenatalExercise'],
             PartnerTestingVisit: this.PreventiveServiceMatFormGroup.value[0]['PartnerTestingVisit'],
             FinalHIVResult: this.PreventiveServiceMatFormGroup.value[0]['finalHIVResult'],
-            InsecticideTreatedNet: this.PreventiveServiceMatFormGroup.value[0]['insecticideTreatedNet'],
+            InsecticideTreatedNet: InsecticideTreatedNet,
+            InsecticideGivenDate: (InsecticideTreatedNet === 'Yes') ? InsecticideGivenDate : '' ,
             CreatedBy: this.userId
+
         };
 
         console.log('refferalFormGroup');
