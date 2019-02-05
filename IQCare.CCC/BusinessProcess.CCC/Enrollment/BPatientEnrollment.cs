@@ -54,7 +54,7 @@ namespace BusinessProcess.CCC.Enrollment
         {
             using (UnitOfWork _unitOfWork = new UnitOfWork(new GreencardContext()))
             {
-                var patientEnrollmentList = _unitOfWork.PatientEnrollmentRepository.FindBy(x => x.PatientId == patientId && !x.CareEnded).ToList();
+                var patientEnrollmentList = _unitOfWork.PatientEnrollmentRepository.FindBy(x => x.PatientId == patientId && x.ServiceAreaId == 1 && !x.CareEnded).ToList();
                 _unitOfWork.Dispose();
                 return patientEnrollmentList;
             }
