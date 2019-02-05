@@ -26,6 +26,7 @@ export class ReferralsComponent implements OnInit {
     @Input() referralFormOptions: any[] = [];
     @Input('isEdit') isEdit: boolean;
     @Input('PatientId') PatientId: number;
+    @Input('visitDate') visitDate: Date;
     @Input('PatientMasterVisitId') PatientMasterVisitId: number;
     public referralData: ReferralsEmitter;
 

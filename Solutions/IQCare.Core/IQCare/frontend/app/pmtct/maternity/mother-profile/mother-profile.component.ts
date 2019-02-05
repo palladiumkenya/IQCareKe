@@ -42,7 +42,7 @@ export class MotherProfileComponent implements OnInit {
             dateLMP: new FormControl('', [ Validators.required]),
             dateEDD: new FormControl('', [Validators.required]),
             gestation: new FormControl('', [Validators.max(42), Validators.required]),
-            ageAtMenarche: new FormControl('', []),
+            ageAtMenarche: new FormControl('', [Validators.min(8), Validators.max(20)]),
             parityOne: new FormControl('', [ Validators.min(0) , Validators.max(20), Validators.required]),
             parityTwo: new FormControl('', [ Validators.min(0), Validators.max(20), Validators.required]),
             gravidae: new FormControl('', [Validators.required]),
