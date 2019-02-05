@@ -12,6 +12,7 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 import { AppStateService } from '../../shared/_services/appstate.service';
 import { AppEnum } from '../../shared/reducers/app.enum';
 import { ClientService } from '../../shared/_services/client.service';
+import * as moment from 'moment';
 
 @Component({
     selector: 'app-testing',
@@ -50,6 +51,7 @@ export class TestingComponent implements OnInit {
     firstResponseKitexpiryDate: Date;
 
     finalTestingResults: FinalTestingResults;
+    htsEncounterDate: Date;
 
     constructor(private dialog: MatDialog,
         private encounterService: EncounterService,
@@ -87,6 +89,8 @@ export class TestingComponent implements OnInit {
             reasonsDeclinePartnerListing: new FormControl(this.finalTestingResults.reasonsDeclinePartnerListing, [Validators.required]),
             finalResultsRemarks: new FormControl(this.finalTestingResults.finalResultsRemarks)
         });
+
+        this.htsEncounterDate = moment(localStorage.getItem('encounterDate')).toDate();
 
         this.encounterService.getCustomOptions().subscribe(data => {
             const options = data['lookupItems'];
@@ -194,7 +198,8 @@ export class TestingComponent implements OnInit {
 
             otherKitexpiryDate: this.otherKitexpiryDate,
             determineKitexpiryDate: this.determineKitexpiryDate,
-            firstResponseKitexpiryDate: this.firstResponseKitexpiryDate
+            firstResponseKitexpiryDate: this.firstResponseKitexpiryDate,
+            htsEncounterDate: this.htsEncounterDate
         };
 
         const dialogRef = this.dialog.open(TestDialogComponent, dialogConfig);
@@ -365,6 +370,7 @@ export class TestingComponent implements OnInit {
                             patientId, patientMasterVisitId, htsEncounterId).subscribe();
                     }
 
+                    localStorage.removeItem('encounterDate');
                     this.snotifyService.success('Successfully saved', 'Testing', this.notificationService.getConfig());
                     this.zone.run(() => { this.router.navigate(['/registration/home'], { relativeTo: this.route }); });
                 }, (err) => {

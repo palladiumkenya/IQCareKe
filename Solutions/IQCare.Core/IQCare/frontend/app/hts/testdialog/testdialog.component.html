@@ -20,7 +20,7 @@
         </mat-form-field>
 
         <mat-form-field>
-            <input matInput [min]="minDate" placeholder="Expiry Date" required [matDatepicker]="expiryDatepicker"
+            <input matInput [min]="htsEncounterDate" placeholder="Expiry Date" required [matDatepicker]="expiryDatepicker"
                 (click)="expiryDatepicker.open()" id="expiryDatepicker" name="expiryDatepicker" autocomplete="off"
                 formControlName="expiryDate" required>
             <mat-datepicker-toggle matSuffix [for]="expiryDatepicker"></mat-datepicker-toggle>
