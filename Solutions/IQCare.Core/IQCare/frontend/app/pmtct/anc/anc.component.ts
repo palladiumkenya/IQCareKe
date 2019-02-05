@@ -592,14 +592,14 @@ export class AncComponent implements OnInit, OnDestroy {
         }
 
         const InsecticideGivenDate: Date = moment(this.PreventiveServiceMatFormGroup.value[0]['insecticideTreatedNetGivenDate']).toDate();
-        const InsecticideTreatedNet: string = this.PreventiveServiceMatFormGroup.value[0]['insecticideTreatedNet'];
+        const InsecticideTreatedNet: number = this.PreventiveServiceMatFormGroup.value[0]['insecticideTreatedNet'];
         const preventiveServiceCommand: PatientPreventiveService = {
             preventiveService: this.preventiveService,
             AntenatalExercise: this.PreventiveServiceMatFormGroup.value[0]['antenatalExercise'],
             PartnerTestingVisit: this.PreventiveServiceMatFormGroup.value[0]['PartnerTestingVisit'],
             FinalHIVResult: this.PreventiveServiceMatFormGroup.value[0]['finalHIVResult'],
             InsecticideTreatedNet: InsecticideTreatedNet,
-            InsecticideGivenDate: (InsecticideTreatedNet === 'Yes') ? InsecticideGivenDate : '' ,
+            InsecticideGivenDate: (yesno[0]['itemId'] == InsecticideTreatedNet) ? InsecticideGivenDate : null ,
             CreatedBy: this.userId
 
         };
