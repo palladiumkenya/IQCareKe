@@ -3214,11 +3214,11 @@
     <None Include="XMLFiles\AllPatientARVPickup" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Laboratory\Reports\LabReport.rpt">
+    <Content Include="Laboratory\Reports\LabReport.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>LabReport.cs</LastGenOutput>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Compile>
+    </Content>
     <None Include="Reports\rptPatientDrugs.rpt" />
     <None Include="Reports\rptAppointment.rpt" />
     <None Include="Reports\rptClinicalNotes.rpt" />
