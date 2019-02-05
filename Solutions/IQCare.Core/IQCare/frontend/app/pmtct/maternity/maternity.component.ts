@@ -28,6 +28,7 @@ import { VisitDetailsCommand } from '../_models/visit-details-command';
 import { VisitDetailsService } from '../_services/visit-details.service';
 import { MatDialogConfig, MatDialog } from '@angular/material';
 import { AddBirthInfoComponent } from './baby/add-birth-info/add-birth-info.component';
+import { AddBabyDialogComponent } from './baby/add-baby-dialog/add-baby-dialog.component';
 
 
 []
@@ -377,6 +378,7 @@ export class MaternityComponent implements OnInit {
 
         const maternityDeliveryCommand: MaternityDeliveryCommand = {
             PatientMasterVisitId: this.patientMasterVisitId,
+            PregnancyId : this.pregnancyId,
             DurationOfLabour: this.diagnosisFormGroup.value[1]['labourDuration'],
             DateOfDelivery: moment(this.diagnosisFormGroup.value[1]['deliveryDate']).toDate(),
             TimeOfDelivery: this.diagnosisFormGroup.value[1]['deliveryTime'],
@@ -728,10 +730,10 @@ export class MaternityComponent implements OnInit {
             babySectionOptions : this.babySectionOptions,
             patientId : this.patientId,
             patientMasterVisitId : this.patientMasterVisitId,
-            isEdit : true
+            isNew : true
           };
-      
-        const dialogRef = this.dialog.open(AddBirthInfoComponent, dialogConfig);
+    
+        const dialogRef = this.dialog.open(AddBabyDialogComponent, dialogConfig);
         dialogRef.afterClosed().subscribe(
           data => 
           {

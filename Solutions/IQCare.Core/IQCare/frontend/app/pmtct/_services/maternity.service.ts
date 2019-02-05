@@ -118,6 +118,13 @@ export class MaternityService {
             );
     }
 
+    public updateBabyInfo(babyInfo : any) : Observable<any>{
+        return this.http.post(this.API_PMTCT_URL + '/api/MaternityPatientDeliveryInfo/UpdateDeliveredBabyBirthInfo',JSON.stringify(babyInfo),
+        httpOptions).pipe(tap(updateBabyInfo => this.errorHandler.log(`successfully updated baby info`)),
+            catchError(this.errorHandler.handleError<any>('Error updating baby information'))
+        );
+    }
+
     public saveMaternalDrugAdministration(drug: any): Observable<any> {
         return this.http.post(this.API_PMTCT_URL + '/api/PatientDrugAdministration/Add',
             JSON.stringify(drug), httpOptions).pipe(

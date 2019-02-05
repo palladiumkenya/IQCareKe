@@ -1,8 +1,10 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { MatTableDataSource } from '@angular/material';
+import { MatTableDataSource, MatDialogConfig, MatDialog } from '@angular/material';
 import { MaternityService } from '../../../_services/maternity.service';
 import { NotificationService } from '../../../../shared/_services/notification.service';
 import { SnotifyService } from 'ng-snotify';
+import { AddBirthInfoComponent } from '../add-birth-info/add-birth-info.component';
+import { AddBabyDialogComponent } from '../add-baby-dialog/add-baby-dialog.component';
 
 @Component({
   selector: 'app-birth-info-grid',
@@ -18,11 +20,14 @@ export class BirthInfoGridComponent implements OnInit {
  @Input() PatientId: number;
  @Input() isEdit: boolean;
  @Input() PatientMasterVisitId: number;
+ @Input() BabySectionOptions: any[] = [];
  @Output() notify: EventEmitter<any[]> = new EventEmitter<any[]>();
 
  dataSource = new MatTableDataSource(this.babyData);
   ngOnInit() 
   {   
+    console.log(this.BabySectionOptions.length +' baby Section Options Init')
+
     if(this.isEdit)
     {
       this.getDeliveredBabyInfo(this.PatientMasterVisitId)
@@ -39,7 +44,8 @@ export class BirthInfoGridComponent implements OnInit {
   }
   constructor(private maternityService: MaternityService,
                 private notificationService: NotificationService,
-                private snotifyService: SnotifyService)
+                private snotifyService: SnotifyService,
+                private dialog: MatDialog)
                {
                    
                }
@@ -65,7 +71,9 @@ export class BirthInfoGridComponent implements OnInit {
                     breastFeedingStr: info.breastFedWithinHour ? 'Yes' : 'No',
                     comment: info.comment,
                     notificationNumber: info.birthNotificationNumber,
-                    id: info.id
+                    id: info.id,
+                    patientDeliveryInformationId : info.patientDeliveryInformationId,
+                    patientMasterVisitId : info.patientMasterVisitId
                 });
              });
              this.dataSource = new MatTableDataSource(this.babyData);
@@ -77,7 +85,29 @@ export class BirthInfoGridComponent implements OnInit {
             () => {
 
             });
-}
+   }
+
+   public onEditBabyInfo(element : any){
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.disableClose = false;
+    dialogConfig.autoFocus = true;
+    
+    dialogConfig.data =  {
+       babyInfo : element,
+       babySectionOptions : this.BabySectionOptions,
+       isUpdate : true
+      };
+  
+    const dialogRef = this.dialog.open(AddBabyDialogComponent, dialogConfig);
+    dialogRef.afterClosed().subscribe(
+      data => 
+      {
+        if (!data)
+          return;
+          console.log(data);
+      });
+
+   }
 
   
 

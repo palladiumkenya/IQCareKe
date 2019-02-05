@@ -112,6 +112,7 @@ import { CounselledInfantFeedingResolver } from './_services/resolvers/counselle
 import { ImmunizationComponent } from './hei/immunization-history/immunization/immunization.component';
 import { BirthInfoGridComponent } from './maternity/baby/birth-info-grid/birth-info-grid.component';
 import { AddBirthInfoComponent } from './maternity/baby/add-birth-info/add-birth-info.component';
+import { AddBabyDialogComponent } from './maternity/baby/add-baby-dialog/add-baby-dialog.component';
 
 @NgModule({
     imports: [
@@ -182,7 +183,8 @@ import { AddBirthInfoComponent } from './maternity/baby/add-birth-info/add-birth
         AncClientMonitoringComponent,
         ImmunizationComponent,
         BirthInfoGridComponent,
-        AddBirthInfoComponent
+        AddBirthInfoComponent,
+        AddBabyDialogComponent
     ],
     providers: [
         PlaceOfDeliveryResolver,
@@ -237,7 +239,7 @@ import { AddBirthInfoComponent } from './maternity/baby/add-birth-info/add-birth
         HivStatusComponent,
         CheckinComponent,
         ImmunizationComponent,
-        AddBirthInfoComponent
+        AddBabyDialogComponent
     ],
     exports: [
         IptClientWorkupComponent,

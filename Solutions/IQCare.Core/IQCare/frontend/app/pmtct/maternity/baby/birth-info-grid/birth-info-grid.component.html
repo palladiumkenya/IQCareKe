@@ -59,15 +59,17 @@
               <!-- actions -->
               <ng-container matColumnDef="action">
                   <mat-header-cell *matHeaderCellDef><strong class="fa fa-cog"> Action</strong></mat-header-cell>
-                  <mat-cell *matCellDef="let row">
-                      <button mat-raised-button class="mat-accent"><span class="fa fa-trash-o"> Delete</span>
-                      </button>
-                  </mat-cell>
+                  <mat-cell style="cursor: pointer;" *matCellDef="let element">
+                    <mat-icon *ngIf="isEdit" (click)="onEditBabyInfo(element)">
+                        <i className="material-icons">mode_edit</i>
+                    </mat-icon>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <mat-icon *ngIf="!isEdit"><i className="material-icons">delete</i>
+                    </mat-icon>
+                </mat-cell>
               </ng-container>
-
-
               <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-              <mat-row *matRowDef="let row; columns: displayedColumns" (click)="onRowClicked(row)">
+              <mat-row *matRowDef="let row; columns: displayedColumns">
               </mat-row>
           </mat-table>
       </div>

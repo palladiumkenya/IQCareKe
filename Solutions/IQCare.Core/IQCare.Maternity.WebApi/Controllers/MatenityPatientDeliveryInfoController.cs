@@ -27,7 +27,20 @@ namespace IQCare.Maternity.WebApi.Controllers
             if (!ModelState.IsValid)
                 return BadRequest(command);
 
-            var response = await _mediator.Send(command, HttpContext.RequestAborted).ConfigureAwait(false);
+            var response = await _mediator.Send(command, HttpContext.RequestAborted);
+
+            if (response.IsValid)
+                return Ok(response.Value);
+
+            return BadRequest(response);
+        }
+
+        [HttpPost]
+        public async Task<object> UpdateDeliveredBabyBirthInfo([FromBody]UpdateDeliveredBabyBirthInfoCommand command)
+        {
+            if (!ModelState.IsValid)
+                return BadRequest(command);
+            var response = await _mediator.Send(command, HttpContext.RequestAborted);
 
             if (response.IsValid)
                 return Ok(response.Value);

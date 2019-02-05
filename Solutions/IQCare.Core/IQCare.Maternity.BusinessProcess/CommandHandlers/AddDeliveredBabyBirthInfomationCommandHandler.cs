@@ -32,7 +32,7 @@ namespace IQCare.Maternity.BusinessProcess.CommandHandlers
             {
                 if (request.PatientDeliveryInformationId == default(int))
                 {
-                    var patientDeliveryInfo = _maternityUnitOfWork.Repository<PatientDeliveryInformation>()
+                    var patientDeliveryInfo = _maternityUnitOfWork.Repository<PatientDeliveryInformationView>()
                         .Get(x => x.PatientMasterVisitId == request.PatientMasterVisitId).FirstOrDefault();
 
                     request.PatientDeliveryInformationId = patientDeliveryInfo != null ? patientDeliveryInfo.Id : 0;
@@ -66,6 +66,47 @@ namespace IQCare.Maternity.BusinessProcess.CommandHandlers
 
                 return Result<DeliveredBabyBirthInfoResult>.Invalid(errorMessage);
             }
+        }
+    }
+
+    public class UpdateDeliveredBabyBirthInfoCommandHandler : IRequestHandler<UpdateDeliveredBabyBirthInfoCommand, Result<object>>
+    {
+        private readonly IMaternityUnitOfWork _maternityUnitOfWork;
+
+        public UpdateDeliveredBabyBirthInfoCommandHandler(IMaternityUnitOfWork maternityUnitOfWork)
+        {
+            _maternityUnitOfWork = maternityUnitOfWork;
+        }
+
+        public Task<Result<object>> Handle(UpdateDeliveredBabyBirthInfoCommand request, CancellationToken cancellationToken)
+        {
+            try
+            {
+                var deliveredBabyInfo = _maternityUnitOfWork.Repository<DeliveredBabyBirthInformation>()
+                        .Get(x => x.Id == request.DeliveredBabyBirthInformation.Id).SingleOrDefault();
+
+                if (deliveredBabyInfo == null)
+                    return Task.FromResult(Result<object>.Valid(new
+                    {
+                        Message = $"Delivered baby info not found for Id {request.DeliveredBabyBirthInformation.Id}"
+                    }));
+
+                deliveredBabyInfo.Update(request.DeliveredBabyBirthInformation);
+                _maternityUnitOfWork.Repository<DeliveredBabyBirthInformation>().Update(deliveredBabyInfo);
+
+                _maternityUnitOfWork.Save();
+
+                return Task.FromResult(Result<object>.Valid(new
+                {
+                    Message = "Baby details updated succesfully",
+                    deliveredBabyInfo.Id
+                }));
+            }
+            catch (Exception ex)
+            {
+                return Task.FromResult(Result<object>.Invalid("An error occured while updating baby details"));
+            }
+
         }
     }
 }
