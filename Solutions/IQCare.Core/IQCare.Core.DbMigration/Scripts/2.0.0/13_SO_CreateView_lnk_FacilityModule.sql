@@ -1,8 +1,8 @@
-IF EXISTS (SELECT * FROM sys.views WHERE object_id = OBJECT_ID(N'[dbo].[vw_ln_FacilityModule]'))
-DROP VIEW [vw_ln_FacilityModule]
+IF EXISTS (SELECT * FROM sys.views WHERE object_id = OBJECT_ID(N'[dbo].[vw_lnk_FacilityModule]'))
+DROP VIEW [vw_lnk_FacilityModule]
 GO
 
-CREATE VIEW [dbo].[vw_ln_FacilityModule]
+CREATE VIEW [dbo].[vw_lnk_FacilityModule]
 AS
 SELECT 
 l.FacilityID,

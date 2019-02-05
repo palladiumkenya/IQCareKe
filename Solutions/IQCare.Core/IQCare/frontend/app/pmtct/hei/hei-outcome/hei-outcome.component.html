@@ -12,7 +12,7 @@
             <div class="col-lg-3 col-sm-3 col-xs-12">
                 <mat-form-field class="col-lg-12 col-sm-12 col-xs-12">
                     <mat-label>Select</mat-label>
-                    <mat-select formControlName="heiOutcomeOptions" required>
+                    <mat-select formControlName="heiOutcomeOptions">
                         <mat-option [value]=""></mat-option>
                         <mat-option *ngFor="let heiOutcomeOption of heiOutcomeOptions" [value]="heiOutcomeOption.itemId">
                             {{heiOutcomeOption.itemName}}

@@ -54,7 +54,7 @@ export class PersoncontactsComponent implements OnInit {
             registeredPersonId: new FormControl(0)
         });
 
-        console.log(this.form.controls);
+        // console.log(this.form.controls);
 
         this.form.controls.consentDeclineReason.disable({ onlySelf: true });
     }

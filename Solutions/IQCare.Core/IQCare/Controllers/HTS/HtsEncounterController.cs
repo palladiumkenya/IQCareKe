@@ -299,5 +299,18 @@ namespace IQCare.Controllers.HTS
                 return Ok(response.Value);
             return BadRequest(response);
         }
+
+        [HttpGet("GetLastLotNumberByKitIdCommand/{kitId}")]
+        public async Task<IActionResult> GetLastLotNumberByKitIdCommand(int kitId)
+        {
+            var response = await _mediator.Send(new GetLastLotNumberByKitIdCommand()
+            {
+                KitId = kitId
+            }, Request.HttpContext.RequestAborted);
+
+            if (response.IsValid)
+                return Ok(response.Value);
+            return BadRequest(response);
+        }
     }
 }

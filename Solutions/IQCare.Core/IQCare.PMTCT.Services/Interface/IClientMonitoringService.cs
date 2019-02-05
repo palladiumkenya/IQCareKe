@@ -11,5 +11,7 @@ namespace IQCare.PMTCT.Services.Interface
         Task<int> AddPatientScreening(PatientScreening patientScreening);
 
         Task<int> AddPatientClinicalNotes(PatientClinicalNotes patientClinicalNotes);
+        PatientScreening GetPatientScreening(int patientId, int patientMasterVisitId, int screeningId);
+        PatientWhoStage GetPatientWhoStage(int patientId, int patientMasterVisitId);
     }
 }

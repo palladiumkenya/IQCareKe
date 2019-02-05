@@ -113,6 +113,7 @@ import { ImmunizationComponent } from './hei/immunization-history/immunization/i
 import { BirthInfoGridComponent } from './maternity/baby/birth-info-grid/birth-info-grid.component';
 import { AddBirthInfoComponent } from './maternity/baby/add-birth-info/add-birth-info.component';
 import { AddBabyDialogComponent } from './maternity/baby/add-baby-dialog/add-baby-dialog.component';
+import { MilestonesFormComponent } from './hei/milestones/milestones-form/milestones-form.component';
 
 @NgModule({
     imports: [
@@ -184,7 +185,8 @@ import { AddBabyDialogComponent } from './maternity/baby/add-baby-dialog/add-bab
         ImmunizationComponent,
         BirthInfoGridComponent,
         AddBirthInfoComponent,
-        AddBabyDialogComponent
+        AddBabyDialogComponent,
+        MilestonesFormComponent
     ],
     providers: [
         PlaceOfDeliveryResolver,
@@ -239,7 +241,8 @@ import { AddBabyDialogComponent } from './maternity/baby/add-baby-dialog/add-bab
         HivStatusComponent,
         CheckinComponent,
         ImmunizationComponent,
-        AddBabyDialogComponent
+        AddBabyDialogComponent,
+        MilestonesFormComponent
     ],
     exports: [
         IptClientWorkupComponent,

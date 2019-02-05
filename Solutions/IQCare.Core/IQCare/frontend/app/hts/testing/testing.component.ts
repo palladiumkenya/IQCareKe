@@ -1,3 +1,4 @@
+import { LookupItemView } from './../../shared/_models/LookupItemView';
 import { Component, NgZone, OnInit } from '@angular/core';
 import { MatDialog, MatDialogConfig } from '@angular/material';
 import { TestDialogComponent } from '../testdialog/testdialog.component';
@@ -11,6 +12,7 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 import { AppStateService } from '../../shared/_services/appstate.service';
 import { AppEnum } from '../../shared/reducers/app.enum';
 import { ClientService } from '../../shared/_services/client.service';
+import * as moment from 'moment';
 
 @Component({
     selector: 'app-testing',
@@ -25,7 +27,7 @@ export class TestingComponent implements OnInit {
 
     formTesting: FormGroup;
 
-    hivTestKits: any[];
+    hivTestKits: LookupItemView[];
     hivResultsOptions: any[];
     hivFinalResultsOptions: any[];
     yesNoOptions: any[];
@@ -38,7 +40,18 @@ export class TestingComponent implements OnInit {
     hiv1: Testing[];
     hiv2: Testing[];
 
+    // other kit
+    otherLotNumber: string;
+    otherKitexpiryDate: Date;
+    // determine
+    determineLotNumber: string;
+    determineKitexpiryDate: Date;
+    // first response
+    firstResponseLotNumber: string;
+    firstResponseKitexpiryDate: Date;
+
     finalTestingResults: FinalTestingResults;
+    htsEncounterDate: Date;
 
     constructor(private dialog: MatDialog,
         private encounterService: EncounterService,
@@ -77,6 +90,8 @@ export class TestingComponent implements OnInit {
             finalResultsRemarks: new FormControl(this.finalTestingResults.finalResultsRemarks)
         });
 
+        this.htsEncounterDate = moment(localStorage.getItem('encounterDate')).toDate();
+
         this.encounterService.getCustomOptions().subscribe(data => {
             const options = data['lookupItems'];
 
@@ -108,7 +123,49 @@ export class TestingComponent implements OnInit {
                 }
             });
 
+            const otherKit = this.hivTestKits.filter(obj => obj.itemName == 'Other');
+            const determineKit = this.hivTestKits.filter(obj => obj.itemName == 'Determine');
+            const firstResponseKit = this.hivTestKits.filter(obj => obj.itemName == 'First Response');
+
+            this.getFirstResponseLastUsed(firstResponseKit[0].itemId);
+
+            this.getDetermineLastUsed(determineKit[0].itemId);
+
+            this.getOtherKitLastUsed(otherKit[0].itemId);
         });
+    }
+
+    getOtherKitLastUsed(kitId: number) {
+        this.encounterService.getLastUsedKit(kitId).subscribe(
+            (res) => {
+                if (res) {
+                    this.otherLotNumber = res.kitLotNumber;
+                    this.otherKitexpiryDate = res.expiryDate;
+                }
+            }
+        );
+    }
+
+    getDetermineLastUsed(kitId: number) {
+        this.encounterService.getLastUsedKit(kitId).subscribe(
+            (res) => {
+                if (res) {
+                    this.determineLotNumber = res.kitLotNumber;
+                    this.determineKitexpiryDate = res.expiryDate;
+                }
+            }
+        );
+    }
+
+    getFirstResponseLastUsed(kitId: number) {
+        this.encounterService.getLastUsedKit(kitId).subscribe(
+            (res) => {
+                if (res) {
+                    this.firstResponseLotNumber = res.kitLotNumber;
+                    this.firstResponseKitexpiryDate = res.expiryDate;
+                }
+            }
+        );
     }
 
     getAge(dateString) {
@@ -133,7 +190,16 @@ export class TestingComponent implements OnInit {
         dialogConfig.data = {
             screeningType: screeningType,
             hivTestKits: this.hivTestKits,
-            hivResultsOptions: this.hivResultsOptions
+            hivResultsOptions: this.hivResultsOptions,
+
+            otherLotNumber: this.otherLotNumber,
+            determineLotNumber: this.determineLotNumber,
+            firstResponseLotNumber: this.firstResponseLotNumber,
+
+            otherKitexpiryDate: this.otherKitexpiryDate,
+            determineKitexpiryDate: this.determineKitexpiryDate,
+            firstResponseKitexpiryDate: this.firstResponseKitexpiryDate,
+            htsEncounterDate: this.htsEncounterDate
         };
 
         const dialogRef = this.dialog.open(TestDialogComponent, dialogConfig);
@@ -304,6 +370,7 @@ export class TestingComponent implements OnInit {
                             patientId, patientMasterVisitId, htsEncounterId).subscribe();
                     }
 
+                    localStorage.removeItem('encounterDate');
                     this.snotifyService.success('Successfully saved', 'Testing', this.notificationService.getConfig());
                     this.zone.run(() => { this.router.navigate(['/registration/home'], { relativeTo: this.route }); });
                 }, (err) => {

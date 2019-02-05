@@ -59,7 +59,30 @@ namespace IQCare.Controllers.PMTCT.ANC
                 return Ok(response.Value);
             }
             return BadRequest(response);
+        }
 
+        [HttpPut]
+        public async Task<IActionResult> Put([FromBody] ClientMonitoringCommand command)
+        {
+            var response = await _mediator.Send(new ClientMonitoringCommand
+            {
+                PatientId = command.PatientId,
+                PatientMasterVisitId = command.PatientMasterVisitId,
+                WhoStage = command.WhoStage,
+                ServiceAreaId = command.ServiceAreaId,
+                ClinicalNotes = command.ClinicalNotes,
+                ScreeningTypeId = command.ScreeningTypeId,
+                ScreeningDone = command.ScreeningDone,
+                ScreeningDate = command.ScreeningDate,
+                cacxMethod = command.cacxMethod,
+                cacxResult = command.cacxResult,
+            }, Request.HttpContext.RequestAborted);
+
+            if (response.IsValid)
+            {
+                return Ok(response.Value);
+            }
+            return BadRequest(response);
         }
 
         // PUT api/<controller>/5

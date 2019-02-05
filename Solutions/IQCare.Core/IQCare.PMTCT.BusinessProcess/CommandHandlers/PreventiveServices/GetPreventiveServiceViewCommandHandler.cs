@@ -28,7 +28,7 @@ namespace IQCare.PMTCT.BusinessProcess.CommandHandlers.PreventiveServices
                 try
                 {
                     List<PatientPreventiveServiceView> patientPreventiveServiceViews = await _unitOfWork
-                        .Repository<PatientPreventiveServiceView>().Get(x => x.PatientId == request.PatientId)
+                        .Repository<PatientPreventiveServiceView>().Get(x => x.PatientId == request.PatientId && x.PreventiveServiceId>0)
                         .ToListAsync();
                     return Result<List<PatientPreventiveServiceView>>.Valid(patientPreventiveServiceViews);
                 }

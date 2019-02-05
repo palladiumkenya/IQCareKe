@@ -6,6 +6,7 @@ import { LookupItemService } from '../../../shared/_services/lookup-item.service
 import { NotificationService } from '../../../shared/_services/notification.service';
 import { MaternityService } from '../../_services/maternity.service';
 import { HeiService } from '../../_services/hei.service';
+import * as moment from 'moment';
 
 @Component({
     selector: 'app-hei-visit-details',
@@ -29,6 +30,7 @@ export class HeiVisitDetailsComponent implements OnInit {
     @Input('visitType') visitType: string;
     @Input('patientId') patientId: number;
     @Input('patientMasterVisitId') patientMasterVisitId: number;
+    @Input('personId') personId: number;
     @Input('serviceAreaId') serviceAreaId: number;
     @Output() notify: EventEmitter<Object> = new EventEmitter<Object>();
 
@@ -87,7 +89,20 @@ export class HeiVisitDetailsComponent implements OnInit {
         }
 
         this.getCurrentVisitDetails(this.patientId, this.serviceAreaId);
+        this.calculateCohort(this.personId);
         this.notify.emit(this.HeiVisitDetailsFormGroup);
+    }
+
+    public calculateCohort(personId: number) {
+        this.heiService.getPersonDetails(personId).subscribe(
+            (res) => {
+                console.log(res);
+                if (res.length > 0) {
+                    const dateOfBirth = res[0]['dateOfBirth'];
+                    this.HeiVisitDetailsFormGroup.get('cohort').setValue(moment(dateOfBirth).format('MMM-YYYY'));
+                }
+            }
+        );
     }
 
     public getCurrentVisitDetails(patientId: number, serviceAreaId: number): void {
