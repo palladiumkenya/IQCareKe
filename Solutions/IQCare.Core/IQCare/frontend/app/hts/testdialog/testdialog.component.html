@@ -8,7 +8,7 @@
         <mat-form-field>
             <mat-select placeholder="Kit Name" formControlName="kitName" required>
                 <mat-option value=""></mat-option>
-                <mat-option *ngFor="let option of hivTestKits" [value]="option">{{option.itemName}}</mat-option>
+                <mat-option *ngFor="let option of hivTestKits" [value]="option" (onSelectionChange)="onTestKitChange($event)">{{option.itemName}}</mat-option>
             </mat-select>
             <mat-error *ngIf="!form.controls['kitName'].valid">Please select Kit Name</mat-error>
         </mat-form-field>

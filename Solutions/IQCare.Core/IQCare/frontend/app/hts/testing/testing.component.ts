@@ -1,3 +1,4 @@
+import { LookupItemView } from './../../shared/_models/LookupItemView';
 import { Component, NgZone, OnInit } from '@angular/core';
 import { MatDialog, MatDialogConfig } from '@angular/material';
 import { TestDialogComponent } from '../testdialog/testdialog.component';
@@ -25,7 +26,7 @@ export class TestingComponent implements OnInit {
 
     formTesting: FormGroup;
 
-    hivTestKits: any[];
+    hivTestKits: LookupItemView[];
     hivResultsOptions: any[];
     hivFinalResultsOptions: any[];
     yesNoOptions: any[];
@@ -37,6 +38,16 @@ export class TestingComponent implements OnInit {
     hivResults2: Testing[];
     hiv1: Testing[];
     hiv2: Testing[];
+
+    // other kit
+    otherLotNumber: string;
+    otherKitexpiryDate: Date;
+    // determine
+    determineLotNumber: string;
+    determineKitexpiryDate: Date;
+    // first response
+    firstResponseLotNumber: string;
+    firstResponseKitexpiryDate: Date;
 
     finalTestingResults: FinalTestingResults;
 
@@ -108,7 +119,49 @@ export class TestingComponent implements OnInit {
                 }
             });
 
+            const otherKit = this.hivTestKits.filter(obj => obj.itemName == 'Other');
+            const determineKit = this.hivTestKits.filter(obj => obj.itemName == 'Determine');
+            const firstResponseKit = this.hivTestKits.filter(obj => obj.itemName == 'First Response');
+
+            this.getFirstResponseLastUsed(firstResponseKit[0].itemId);
+
+            this.getDetermineLastUsed(determineKit[0].itemId);
+
+            this.getOtherKitLastUsed(otherKit[0].itemId);
         });
+    }
+
+    getOtherKitLastUsed(kitId: number) {
+        this.encounterService.getLastUsedKit(kitId).subscribe(
+            (res) => {
+                if (res) {
+                    this.otherLotNumber = res.kitLotNumber;
+                    this.otherKitexpiryDate = res.expiryDate;
+                }
+            }
+        );
+    }
+
+    getDetermineLastUsed(kitId: number) {
+        this.encounterService.getLastUsedKit(kitId).subscribe(
+            (res) => {
+                if (res) {
+                    this.determineLotNumber = res.kitLotNumber;
+                    this.determineKitexpiryDate = res.expiryDate;
+                }
+            }
+        );
+    }
+
+    getFirstResponseLastUsed(kitId: number) {
+        this.encounterService.getLastUsedKit(kitId).subscribe(
+            (res) => {
+                if (res) {
+                    this.firstResponseLotNumber = res.kitLotNumber;
+                    this.firstResponseKitexpiryDate = res.expiryDate;
+                }
+            }
+        );
     }
 
     getAge(dateString) {
@@ -133,7 +186,15 @@ export class TestingComponent implements OnInit {
         dialogConfig.data = {
             screeningType: screeningType,
             hivTestKits: this.hivTestKits,
-            hivResultsOptions: this.hivResultsOptions
+            hivResultsOptions: this.hivResultsOptions,
+
+            otherLotNumber: this.otherLotNumber,
+            determineLotNumber: this.determineLotNumber,
+            firstResponseLotNumber: this.firstResponseLotNumber,
+
+            otherKitexpiryDate: this.otherKitexpiryDate,
+            determineKitexpiryDate: this.determineKitexpiryDate,
+            firstResponseKitexpiryDate: this.firstResponseKitexpiryDate
         };
 
         const dialogRef = this.dialog.open(TestDialogComponent, dialogConfig);
