@@ -13,6 +13,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="5.0.1" />
     <PackageReference Include="MediatR" Version="4.1.0" />
     <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="4.1.0" />
     <PackageReference Include="Microsoft.AspNetCore" Version="2.0.3" />
@@ -28,6 +29,9 @@
     <ProjectReference Include="..\IQCare.Common.Infrastructure\IQCare.Common.Infrastructure.csproj" />
     <ProjectReference Include="..\IQCare.HTS.BusinessProcess\IQCare.HTS.BusinessProcess.csproj" />
     <ProjectReference Include="..\IQCare.HTS.Infrastructure\IQCare.HTS.Infrastructure.csproj" />
+    <ProjectReference Include="..\IQCare.PMTCT.BusinessProcess\IQCare.PMTCT.BusinessProcess.csproj" />
+    <ProjectReference Include="..\IQCare.PMTCT.Infrastructure\IQCare.PMTCT.Infrastructure.csproj" />
+    <ProjectReference Include="..\IQCare.Records.BusinessProcess\IQCare.Records.BusinessProcess.csproj" />
   </ItemGroup>
 
   <ItemGroup>
@@ -35,10 +39,10 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Remove="Controllers\Records\**" />
-    <Content Remove="Controllers\Records\**" />
-    <EmbeddedResource Remove="Controllers\Records\**" />
-    <None Remove="Controllers\Records\**" />
+    <Compile Remove="angular_material_schematics-QYLYm6\**" />
+    <Content Remove="angular_material_schematics-QYLYm6\**" />
+    <EmbeddedResource Remove="angular_material_schematics-QYLYm6\**" />
+    <None Remove="angular_material_schematics-QYLYm6\**" />
   </ItemGroup>
 
   <ItemGroup>

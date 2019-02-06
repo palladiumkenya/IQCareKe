@@ -1,19 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using IQCare.Common.Core.Models;
+using IQCare.Library;
 using MediatR;
+using WardLookup = IQCare.Common.Core.Models.WardLookup;
 
-namespace IQCareRecords.Common.BusinessProcess.Command
+namespace IQCare.Records.BusinessProcess.Command.Lookup
 {
-    public class GetWardCommand:IRequest<Result<AddWardListReponse>>
+    public class GetWardCommand:IRequest<Result<List<WardLookup>>>
     {
-        public string CountyId;
-        public string SubcountyId;
-    }
-
-    public class AddWardListReponse
-    {
-        public List<WardLookup> Wards { get; set; }
+        public int SubcountyId;
     }
 }

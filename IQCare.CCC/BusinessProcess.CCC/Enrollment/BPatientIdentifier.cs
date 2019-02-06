@@ -93,7 +93,7 @@ namespace BusinessProcess.CCC.Enrollment
             {
                 var identifiers =
                     unitOfWork.PatientIdentifierRepository.FindBy(
-                        x => x.IdentifierValue == identifierValue && x.IdentifierTypeId == identifierTypeId).ToList();
+                        x => x.IdentifierValue == identifierValue && x.IdentifierTypeId == identifierTypeId && x.DeleteFlag == false).ToList();
                 unitOfWork.Dispose();
                 return identifiers;
             }

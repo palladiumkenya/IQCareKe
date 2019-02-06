@@ -5,13 +5,35 @@ using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Web.ModelBinding;
+using IQCare.Web.UILogic;
 
 namespace IQCare.CCC.UILogic.Visit
 {
     public class PatientMasterVisitManager
     {
-       private readonly IPatientMasterVisitManager _patientMasterVisitManager = (IPatientMasterVisitManager)ObjectFactory.CreateInstance("BusinessProcess.CCC.visit.BPatientmasterVisit, BusinessProcess.CCC");
-        private int _result=0;
+        private readonly IPatientMasterVisitManager _patientMasterVisitManager = (IPatientMasterVisitManager)ObjectFactory.CreateInstance("BusinessProcess.CCC.visit.BPatientmasterVisit, BusinessProcess.CCC");
+        private int _result = 0;
+        private int _facilityId = 0;
+
+        public PatientMasterVisitManager()
+        {
+            _facilityId = SessionManager.FacilityId;
+        }
+
+        public int AddPatientMasterVisit(PatientMasterVisit pm)
+        {
+
+            try
+            {
+                pm.FacilityId = _facilityId;
+                return _result = _patientMasterVisitManager.AddPatientmasterVisit(pm);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+
+            }
+        }
 
         public int AddPatientMasterVisit(int patientId, int userId, int visitType)
         {
@@ -27,7 +49,8 @@ namespace IQCare.CCC.UILogic.Visit
                     DeleteFlag = false,
                     VisitDate = DateTime.Now,
                     CreatedBy = userId,
-                    VisitType = visitType
+                    VisitType = visitType,
+                    FacilityId = _facilityId
                 };
 
                 return _result = _patientMasterVisitManager.AddPatientmasterVisit(visit);
@@ -61,7 +84,8 @@ namespace IQCare.CCC.UILogic.Visit
                 Status = 1,
                 Start = DateTime.Now,
                 VisitDate = DateTime.Now,
-                CreatedBy =userId
+                CreatedBy =userId,
+                FacilityId = _facilityId
             };
 
             if (patientId > 0)
@@ -114,11 +138,36 @@ namespace IQCare.CCC.UILogic.Visit
 
         }
 
+        public List<PatientMasterVisit> GetVisitDateByMasterVisitId(int patientId,int patientmasterVisitId)
+        {
+            try
+            {
+                return _patientMasterVisitManager.GetVisitDateByMasterVisitId(patientId,patientmasterVisitId);
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+        }
+    
             public PatientMasterVisit GetVisitById(int id)
         {
             try
             {
                 return _patientMasterVisitManager.GetVisitById(id);
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+        }
+
+     
+        public List<PatientMasterVisit> GetPatientMasterVisitBasedonVisitDate(int patientId, DateTime visitDate)
+        {
+            try
+            {
+                return _patientMasterVisitManager.GetPatientMasterVisitBasedonVisitDate(patientId, visitDate);
             }
             catch (Exception e)
             {

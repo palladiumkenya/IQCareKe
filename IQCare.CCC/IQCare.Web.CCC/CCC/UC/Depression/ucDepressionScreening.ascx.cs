@@ -10,20 +10,41 @@ using IQCare.CCC.UILogic.Screening;
 using Entities.CCC.Screening;
 using Entities.CCC.Encounter;
 using IQCare.CCC.UILogic.Encounter;
+using IQCare.CCC.UILogic.Visit;
+using Entities.CCC.Visit;
 
 namespace IQCare.Web.CCC.UC.Depression
 {
     public partial class ucDepressionScreening : System.Web.UI.UserControl
     {
-        public int depressionId, PatientId, PatientMasterVisitId, userId, NotesId, screenTypeId;
+        public int depressionId, PatientId, PatientMasterVisitId, userId, NotesId, screenTypeId,PmVisitId;
+        public DateTime? VisitDate;
         public RadioButtonList rbList;
         public TextBox depressionTotalTb;
         public TextBox depressionSeverityTb;
         public TextBox depressionReccommendationTb;
+        public int serviceAreaId;
+        
+        protected string DateOfEnrollment
+        {
+            get { return Session["DateOfEnrollment"].ToString(); }
+        }
+
         protected void Page_Load(object sender, EventArgs e)
         {
+            
             PatientId = Convert.ToInt32(HttpContext.Current.Session["PatientPK"]);
             PatientMasterVisitId = Convert.ToInt32(Request.QueryString["visitId"] != null ? Request.QueryString["visitId"] : HttpContext.Current.Session["PatientMasterVisitId"]);
+
+            PatientMasterVisitManager VisitManager = new PatientMasterVisitManager();
+            List<PatientMasterVisit> visitPatientMasterVisit = new List<PatientMasterVisit>();
+             visitPatientMasterVisit = VisitManager.GetVisitDateByMasterVisitId(PatientId, PatientMasterVisitId);
+            VisitDate = visitPatientMasterVisit[0].VisitDate;
+            PatientLookupManager patientLookupManager = new PatientLookupManager();
+            var patientDetails = patientLookupManager.GetPatientDetailSummary(PatientId);
+            Session["DateOfEnrollment"] = patientDetails.EnrollmentDate;
+            serviceAreaId = Convert.ToInt32(LookupLogic.GetLookupItemId("MoH 257 GREENCARD"));
+            PmVisitId = Convert.ToInt32(Session["ExistingRecordPatientMasterVisitID"].ToString() == "0" ? Session["PatientMasterVisitID"].ToString() : Session["ExistingRecordPatientMasterVisitID"].ToString());
             userId = Convert.ToInt32(Session["AppUserId"]);
             if (!IsPostBack)
             {
@@ -46,7 +67,8 @@ namespace IQCare.Web.CCC.UC.Depression
                 PlaceHolder2.Controls.Add(new LiteralControl("</div>"));
                 PlaceHolder2.Controls.Add(new LiteralControl("<div class='col-md-4 text-right'>"));
                 rbList = new RadioButtonList();
-                rbList.ID = value.ItemId.ToString();
+                rbList.ID = "uds" + value.ItemId.ToString();
+              //  rbList.ID = value.ItemId.ToString();
                 rbList.RepeatColumns = 4;
                 rbList.ClientIDMode = System.Web.UI.ClientIDMode.Static;
                 rbList.CssClass = "rbList";
@@ -65,7 +87,7 @@ namespace IQCare.Web.CCC.UC.Depression
                 PlaceHolder1.Controls.Add(new LiteralControl("</div>"));
                 PlaceHolder1.Controls.Add(new LiteralControl("<div class='col-md-7 text-right'>"));
                 rbList = new RadioButtonList();
-                rbList.ID = value.ItemId.ToString();
+                rbList.ID = "uds" + value.ItemId.ToString();
                 rbList.RepeatColumns = 4;
                 rbList.ClientIDMode = System.Web.UI.ClientIDMode.Static;
                 rbList.CssClass = "rbList";
@@ -81,7 +103,9 @@ namespace IQCare.Web.CCC.UC.Depression
             depressionTotalTb = new TextBox();
             depressionTotalTb.CssClass = "form-control input-sm";
             depressionTotalTb.ClientIDMode = System.Web.UI.ClientIDMode.Static;
-            depressionTotalTb.ID = LookupLogic.GetLookupItemId("DepressionTotal");
+            depressionTotalTb.ID = "uds" + LookupLogic.GetLookupItemId("DepressionTotal");
+
+            //depressionTotalTb.ID = LookupLogic.GetLookupItemId("DepressionTotal");
             depressionTotalTb.Enabled = false;
             PHDepressionTotal.Controls.Add(depressionTotalTb);
             PHDepressionTotal.Controls.Add(new LiteralControl("<span class='input-group-addon'>/ 30</span>"));
@@ -92,7 +116,8 @@ namespace IQCare.Web.CCC.UC.Depression
             depressionSeverityTb = new TextBox();
             depressionSeverityTb.CssClass = "form-control input-sm";
             depressionSeverityTb.ClientIDMode = System.Web.UI.ClientIDMode.Static;
-            depressionSeverityTb.ID = LookupLogic.GetLookupItemId("DepressionSeverity");
+            // depressionSeverityTb.ID = LookupLogic.GetLookupItemId("DepressionSeverity");
+            depressionSeverityTb.ID = "uds" + LookupLogic.GetLookupItemId("DepressionSeverity");
             depressionSeverityTb.Enabled = false;
             PHDepressionSeverity.Controls.Add(depressionSeverityTb);
             PHDepressionSeverity.Controls.Add(new LiteralControl("</div>"));
@@ -102,7 +127,7 @@ namespace IQCare.Web.CCC.UC.Depression
             depressionReccommendationTb = new TextBox();
             depressionReccommendationTb.CssClass = "form-control input-sm";
             depressionReccommendationTb.ClientIDMode = System.Web.UI.ClientIDMode.Static;
-            depressionReccommendationTb.ID = LookupLogic.GetLookupItemId("ReccommendedManagement");
+            depressionReccommendationTb.ID ="uds"+ LookupLogic.GetLookupItemId("ReccommendedManagement");
             depressionReccommendationTb.Enabled = false;
             PHRecommendedManagement.Controls.Add(depressionReccommendationTb);
             PHRecommendedManagement.Controls.Add(new LiteralControl("</div>"));
@@ -111,18 +136,18 @@ namespace IQCare.Web.CCC.UC.Depression
         public void getDepressionScreeningData()
         {
             var PSM = new PatientScreeningManager();
-            List<PatientScreening> screeningList = PSM.GetPatientScreening(PatientId);
+            List<PatientScreening> screeningList = PSM.GetPatientScreeningByVisitId(PatientId, PatientMasterVisitId);
             if (screeningList != null)
             {
                 foreach (var value in screeningList)
                 {
                     depressionId = Convert.ToInt32(value.ScreeningTypeId);
-                    RadioButtonList rblPC1Qs = (RadioButtonList)PlaceHolder1.FindControl(value.ScreeningCategoryId.ToString());
+                    RadioButtonList rblPC1Qs = (RadioButtonList)PlaceHolder1.FindControl("uds" + value.ScreeningCategoryId.ToString());
                     if (rblPC1Qs != null)
                     {
                         rblPC1Qs.SelectedValue = value.ScreeningValueId.ToString();
                     }
-                    RadioButtonList rblPC2Qs = (RadioButtonList)PlaceHolder2.FindControl(value.ScreeningCategoryId.ToString());
+                    RadioButtonList rblPC2Qs = (RadioButtonList)PlaceHolder2.FindControl("uds" + value.ScreeningCategoryId.ToString());
                     if (rblPC2Qs != null)
                     {
                         rblPC2Qs.SelectedValue = value.ScreeningValueId.ToString();
@@ -130,12 +155,13 @@ namespace IQCare.Web.CCC.UC.Depression
                 }
             }
             var PCN = new PatientClinicalNotesLogic();
-            List<PatientClinicalNotes> notesList = PCN.getPatientClinicalNotes(PatientId);
+            List<PatientClinicalNotes> notesList = PCN.getPatientClinicalNotesByVisitId(PatientId, PatientMasterVisitId);
+                //getPatientClinicalNotes(PatientId);
             if (notesList.Any())
             {
                 foreach (var value in notesList)
                 {
-                    TextBox ntb = (TextBox)PlaceHolder2.FindControl(value.NotesCategoryId.ToString());
+                    TextBox ntb = (TextBox)PlaceHolder2.FindControl("uds" +value.NotesCategoryId.ToString());
                     if (ntb != null)
                     {
                         ntb.Text = value.ClinicalNotes;

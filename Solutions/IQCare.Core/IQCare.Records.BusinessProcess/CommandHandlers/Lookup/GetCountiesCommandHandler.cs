@@ -7,15 +7,14 @@ using IQCare.Common.Infrastructure;
 using IQCareRecords.Common.BusinessProcess.Command;
 using System.Threading;
 using System.Threading.Tasks;
+using IQCare.Library;
 using MediatR;
 namespace IQCareRecords.Common.BusinessProcess.CommandHandlers.Lookup
 {
     public class GetCountiesCommandHandler:IRequestHandler<GetCountiesCommand,Result<AddCountyListResponse>>
     {
         private readonly ICommonUnitOfWork _unitOfWork;
-    List<CountyLookup> counties =new List<CountyLookup>();
-        List<SubCountyLookup> subcounties = new List<SubCountyLookup>();
-        List<WardLookup> wards = new List<WardLookup>();
+        List<CountyLookup> counties =new List<CountyLookup>();
 
         int CountyId;
         int SubcountyId;

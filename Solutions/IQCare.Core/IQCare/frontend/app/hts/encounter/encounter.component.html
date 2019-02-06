@@ -1,135 +1,159 @@
-<div class="ibox">
-    <div class="ibox-title">
-        <app-clientbrief></app-clientbrief>
-    </div>
-
-    <div class="ibox-content">
-        <div class="row">
-            <div class="col-lg-2">
-                <app-leftnav></app-leftnav>
+<div class="row">
+    <div class="col-lg-12 col-sm-12 col-xs-12">
+        <div class="widget">
+            <div class="widget-header bordered-bottom bordered-blue">
+                <span class="widget-caption">HTS-LAB FORM</span>
             </div>
+            <div class="widget-body bordered-left">
+                <app-clientbrief></app-clientbrief>
 
-            <div class="col-md-10 animated fadeIn">
-                <div class="panel panel-default">
-                    <div class="panel-heading">HTS-LAB FORM</div>
-                    <div class="panel-body">
-                        <form [formGroup]="form">
-                            <fieldset>
-                                <h2>PRE-TEST</h2>
-                                <div class="example-container">
-                                    <div class="row">
-                                        <div class="col-lg-3 col-md-3 col-sm-3">
-                                            <mat-radio-group name="encounterType" formControlName="EncounterType" required>
-                                                <mat-radio-button [value]="1" id="initial">Initial Test</mat-radio-button>
-                                                <mat-radio-button [value]="2" id="repeat">Repeat Test</mat-radio-button>
-                                            </mat-radio-group>
-                                            <mat-error *ngIf="!form.controls['EncounterType'].valid">Please Select Encounter Type</mat-error>
-                                        </div>
-                                    </div>
-
-                                    <div class="row">
-                                        <div class="col-lg-3 col-md-3 col-sm-3">
-                                            <mat-form-field>
-                                                <input placeholder="Encounter Date" matInput (click)="encounterDatepicker.open()" [matDatepicker]="encounterDatepicker" [max]="maxDate" formControlName="EncounterDate" required>
-                                                <mat-datepicker-toggle matSuffix [for]="encounterDatepicker"></mat-datepicker-toggle>
-                                                <mat-datepicker #encounterDatepicker name="EncounterDate"></mat-datepicker>
-                                            </mat-form-field>
-
-                                            <mat-form-field>
-                                                <mat-select placeholder="Ever Tested?" name="everTested" id="everTested" required formControlName="EverTested" (selectionChange)="everTestedChanged()" required>
-                                                    <mat-option value=""></mat-option>
-                                                    <mat-option *ngFor="let entryPoint of yesNoOptions" [value]="entryPoint.itemId">{{entryPoint.itemName}}</mat-option>
-                                                </mat-select>
-                                            </mat-form-field>
-
-                                            <mat-form-field>
-                                                <input matInput placeholder="Re-Testing (No. Months since last test)" id="noofmonthsretest" formControlName="MonthsSinceLastTest" name="noofmonthsretest" required>
-                                            </mat-form-field>
-                                        </div>
-
-                                        <div class="col-lg-3 col-md-3 col-sm-3">
-                                            <mat-form-field>
-                                                <mat-select placeholder="Service Delivery Point" required name="serviceDeliveryPoint" id="serviceEntryPoint" formControlName="TestEntryPoint" required>
-                                                    <mat-option value=""></mat-option>
-                                                    <mat-option *ngFor="let entryPoint of entryPoints" [value]="entryPoint.itemId">{{entryPoint.itemName}}</mat-option>
-                                                </mat-select>
-                                            </mat-form-field>
-
-                                            <mat-form-field>
-                                                <mat-select placeholder="HIV self-test in the past 12 months" required id="selfTest" name="selfTest" formControlName="EverSelfTested" required>
-                                                    <mat-option value=""></mat-option>
-                                                    <mat-option *ngFor="let entryPoint of yesNoOptions" [value]="entryPoint.itemId">{{entryPoint.itemName}}</mat-option>
-                                                </mat-select>
-                                            </mat-form-field>
-
-                                            <mat-form-field>
-                                                <mat-select placeholder="Has Any Disability" id="hasDisability" required name="hasDisability" formControlName="HasDisability" (selectionChange)="hasDisabilityChanged()" required>
-                                                    <mat-option value=""></mat-option>
-                                                    <mat-option *ngFor="let entryPoint of yesNoOptions" [value]="entryPoint.itemId">{{entryPoint.itemName}}</mat-option>
-                                                </mat-select>
-                                            </mat-form-field>
-
-                                            <mat-form-field>
-                                                <mat-select placeholder="Disability" id="disability" required name="disability" formControlName="Disabilities" multiple="multiple" required>
-                                                    <mat-option value=""></mat-option>
-                                                    <mat-option *ngFor="let option of disabilities" [value]="option.itemId">{{option.itemName}}</mat-option>
-                                                </mat-select>
-                                            </mat-form-field>
-                                        </div>
-
-                                        <div class="col-lg-3 col-md-3 col-sm-3">
-                                            <mat-form-field>
-                                                <mat-select placeholder="Consent" name="consent" id="consent" required formControlName="Consent" (selectionChange)="onConsentChanged()" required>
-                                                    <mat-option value=""></mat-option>
-                                                    <mat-option *ngFor="let entryPoint of yesNoOptions" [value]="entryPoint.itemId">{{entryPoint.itemName}}</mat-option>
-                                                </mat-select>
-                                            </mat-form-field>
-
-                                            <mat-form-field>
-                                                <mat-select placeholder="Client tested as" name="clientTestedAs" id="clientTestedAs" formControlName="TestedAs" required>
-                                                    <mat-option value=""></mat-option>
-                                                    <mat-option *ngFor="let option of testedAs" [value]="option.itemId">{{option.itemName}}</mat-option>
-                                                </mat-select>
-                                            </mat-form-field>
-
-                                            <mat-form-field>
-                                                <mat-select placeholder="Strategy" name="strategy" id="strategy" formControlName="TestingStrategy" required>
-                                                    <mat-option value=""></mat-option>
-                                                    <mat-option *ngFor="let option of strategyOptions" [value]="option.itemId">{{option.itemName}}</mat-option>
-                                                </mat-select>
-                                            </mat-form-field>
-                                        </div>
-
-                                        <div class="col-lg-3 col-md-3 col-sm-3">
-                                            <mat-form-field>
-                                                <mat-select placeholder="TB Screeening" name="tbScreening" id="tbScreening" formControlName="TbScreening" required>
-                                                    <mat-option value=""></mat-option>
-                                                    <mat-option *ngFor="let option of tbStatus" [value]="option.itemId">{{option.itemName}}</mat-option>
-                                                </mat-select>
-                                            </mat-form-field>
-
-                                            <mat-form-field>
-                                                <textarea matInput placeholder="Remarks" id="remarks" name="remarks" rows="5" formControlName="EncounterRemarks"></textarea>
-                                            </mat-form-field>
-                                        </div>
-
-                                    </div>
-
-                                    <div class="row">
-                                        <div class="col-lg-12 col-md-12 col-sm-12">
-                                            <div class="form-group pull-right">
-                                                <button type="submit" mat-raised-button color="primary" (click)="validate()">
-                                                    <strong>Save Changes</strong>
-                                                </button>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                </div>
-                            </fieldset>
-                        </form>
-                    </div>
+                <div>
+                    &nbsp;
                 </div>
+
+                <form [formGroup]="form">
+                    <fieldset>
+                        <div class="form-title">
+                            <span class="mat-accent"><strong>PRE-TEST</strong></span>
+                        </div>
+
+                        <div class="example-container">
+                            <div class="row">
+                                <div class="col-lg-3 col-md-3 col-sm-3">
+                                    <mat-radio-group name="encounterType" formControlName="EncounterType" required>
+                                        <mat-radio-button [value]="1" id="initial">Initial Test</mat-radio-button>
+                                        <mat-radio-button [value]="2" id="repeat">Repeat Test</mat-radio-button>
+                                    </mat-radio-group>
+                                    <mat-error *ngIf="!form.controls['EncounterType'].valid">Please Select
+                                        Encounter Type</mat-error>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-lg-3 col-md-3 col-sm-3">
+                                    <mat-form-field>
+                                        <input placeholder="Encounter Date" matInput (click)="encounterDatepicker.open()"
+                                            [matDatepicker]="encounterDatepicker" [max]="maxDate" formControlName="EncounterDate"
+                                            required>
+                                        <mat-datepicker-toggle matSuffix [for]="encounterDatepicker"></mat-datepicker-toggle>
+                                        <mat-datepicker #encounterDatepicker name="EncounterDate"></mat-datepicker>
+                                    </mat-form-field>
+
+                                    <mat-form-field>
+                                        <mat-select placeholder="Ever Tested?" name="everTested" id="everTested"
+                                            required formControlName="EverTested" (selectionChange)="everTestedChanged()"
+                                            required>
+                                            <mat-option value=""></mat-option>
+                                            <mat-option *ngFor="let entryPoint of yesNoOptions" [value]="entryPoint.itemId">{{entryPoint.itemName}}</mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+
+                                    <mat-form-field>
+                                        <input matInput placeholder="Re-Testing (No. Months since last test)" id="noofmonthsretest"
+                                            formControlName="MonthsSinceLastTest" name="noofmonthsretest" required>
+                                    </mat-form-field>
+                                </div>
+
+                                <div class="col-lg-3 col-md-3 col-sm-3">
+                                    <mat-form-field>
+                                        <mat-select placeholder="Service Delivery Point" required name="serviceDeliveryPoint"
+                                            id="serviceEntryPoint" formControlName="TestEntryPoint" required>
+                                            <mat-option value=""></mat-option>
+                                            <mat-option *ngFor="let entryPoint of entryPoints" [value]="entryPoint.itemId">{{entryPoint.itemName}}</mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+
+                                    <mat-form-field>
+                                        <mat-select placeholder="HIV self-test in the past 12 months" required id="selfTest"
+                                            name="selfTest" formControlName="EverSelfTested" required>
+                                            <mat-option value=""></mat-option>
+                                            <mat-option *ngFor="let entryPoint of yesNoOptions" [value]="entryPoint.itemId">{{entryPoint.itemName}}</mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+
+                                    <mat-form-field>
+                                        <mat-select placeholder="Has Any Disability" id="hasDisability" required name="hasDisability"
+                                            formControlName="HasDisability" (selectionChange)="hasDisabilityChanged()"
+                                            required>
+                                            <mat-option value=""></mat-option>
+                                            <mat-option *ngFor="let entryPoint of yesNoOptions" [value]="entryPoint.itemId">{{entryPoint.itemName}}</mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+
+                                    <mat-form-field>
+                                        <mat-select placeholder="Disability" id="disability" required name="disability"
+                                            formControlName="Disabilities" multiple="multiple" required>
+                                            <mat-option value=""></mat-option>
+                                            <mat-option *ngFor="let option of disabilities" [value]="option.itemId">{{option.itemName}}</mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+                                </div>
+
+                                <div class="col-lg-3 col-md-3 col-sm-3">
+                                    <mat-form-field>
+                                        <mat-select placeholder="Consent" name="consent" id="consent" required
+                                            formControlName="Consent" (selectionChange)="onConsentChanged()" required>
+                                            <mat-option value=""></mat-option>
+                                            <mat-option *ngFor="let entryPoint of yesNoOptions" [value]="entryPoint.itemId">{{entryPoint.itemName}}</mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+
+                                    <mat-form-field>
+                                        <mat-select placeholder="Client tested as" name="clientTestedAs" id="clientTestedAs"
+                                            formControlName="TestedAs" required>
+                                            <mat-option value=""></mat-option>
+                                            <mat-option *ngFor="let option of testedAs" [value]="option.itemId">{{option.itemName}}</mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+
+                                    <mat-form-field>
+                                        <mat-select placeholder="Strategy" name="strategy" id="strategy"
+                                            formControlName="TestingStrategy" required>
+                                            <mat-option value=""></mat-option>
+                                            <mat-option *ngFor="let option of strategyOptions" [value]="option.itemId">{{option.itemName}}</mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+                                </div>
+
+                                <div class="col-lg-3 col-md-3 col-sm-3">
+                                    <mat-form-field>
+                                        <mat-select placeholder="TB Screeening" name="tbScreening" id="tbScreening"
+                                            formControlName="TbScreening" required>
+                                            <mat-option value=""></mat-option>
+                                            <mat-option *ngFor="let option of tbStatus" [value]="option.itemId">{{option.itemName}}</mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+
+                                    <mat-form-field>
+                                        <mat-select placeholder="HIV Counselling Done" name="HivCounsellingDone" id="HivCounsellingDone"
+                                            formControlName="HivCounsellingDone">
+                                            <mat-option [value]=""></mat-option>
+                                            <mat-option *ngFor="let counselling of yesNoOptions" [value]="counselling.itemId">{{counselling.itemName}}</mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+
+                                    <mat-form-field>
+                                        <textarea matInput placeholder="Remarks" id="remarks" name="remarks"
+                                            formControlName="EncounterRemarks"></textarea>
+                                    </mat-form-field>
+                                </div>
+
+                            </div>
+
+                            <div class="row">
+                                <div class="col-lg-12 col-md-12 col-sm-12">
+                                    <div class="form-group pull-right">
+                                        <button type="submit" mat-raised-button color="primary" (click)="validate()">
+                                            <strong>Save Changes</strong>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </fieldset>
+                </form>
+
             </div>
         </div>
     </div>

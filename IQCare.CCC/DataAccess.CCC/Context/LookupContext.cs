@@ -66,5 +66,9 @@ namespace DataAccess.CCC.Context
 
         public DbSet<ILMessageStats> IlMessageStats { get; set; }
         public DbSet<ILMessageViewer> IlMessageViewers { get; set; }
+
+        public DbSet<ICDCodeList> ICDCodeList { get; set; }
+
+        public DbSet<PatientLab> PatientLabs { get; set; }
     }
 }

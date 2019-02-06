@@ -33,6 +33,7 @@ namespace IQCare.Web.CCC
             get { return 60; }
         }
 
+
         protected void lnkLogOut_Click(object sender, EventArgs e)
         {
             Response.Redirect("~/frmLogOff.aspx");
@@ -178,13 +179,41 @@ namespace IQCare.Web.CCC
             lblrelDate.Text = GblIQCare.ReleaseDate;//AuthenticationManager.ReleaseDate;
         }
 
+
+        protected  void New_GBVScreening_Click(object sender,EventArgs e)
+        {
+            Response.Redirect("~/CCC/Screening/GBVScreening.aspx");
+        }
+
+
+        protected void New_Depression_Click(object sender,EventArgs e)
+        {
+            Response.Redirect("~/CCC/Screening/DepressionScreening.aspx");
+        }
+
+        protected void New_AlcoholScreening_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("~/CCC/Screening/AlcoholDrugAbuseScreening.aspx");
+        }
         protected void New_Encounter_Click(object sender, EventArgs e)
         {
             Response.Redirect("~/CCC/Encounter/PatientEncounter.aspx");
         }
-        protected void Clinical_Summary_Click(object sender, EventArgs e)
+        
+        protected void New_EnhanceAdherence_Click(object sender,EventArgs e)
         {
-            Response.Redirect("~/CCC/ClinicalSummary/ClinicalSummary.aspx");
+            // Response.Redirect("~/CCC/EnhanceAdherenceCounselling/EnhanceAdherenceHome.aspx?visitId=" + this.PatientMasterVisitId);
+           Response.Redirect("~/CCC/EnhanceAdherenceCounselling/EnhanceAdherenceHome.aspx");
+        }
+
+        protected void New_AdherenceBarriers_Click(object sender,EventArgs e)
+        {
+            Response.Redirect("~/CCC/Adherence/AdherenceBarriersHome.aspx");
+
+        }
+        protected void Case_Summary_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("~/CCC/CaseSummary/CaseSummary.aspx");
         }
         protected void Follow_Up_Click(object sender, EventArgs e)
         {

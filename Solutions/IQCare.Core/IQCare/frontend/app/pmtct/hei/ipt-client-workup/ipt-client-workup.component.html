@@ -1,0 +1,93 @@
+<h2 mat-dialog-title>{{title}}</h2>
+
+<mat-divider></mat-divider>
+<br>
+
+<form [formGroup]="IPTClientWorkupFormGroup">
+
+    <mat-dialog-content>
+        <div class="col-lg-12"><span class="primary">ASk the Following</span></div>
+
+
+        <mat-form-field class="col-md-12">
+            <mat-label>Yellow coloured urine</mat-label>
+            <mat-select formControlName="yellowColouredUrine" required minlength="1">
+                <mat-option [value]="0">select</mat-option>
+                <mat-option *ngFor="let yesnoOption of yesnoOptions" [value]="yesnoOption.itemId">
+                    {{yesnoOption.itemName}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+
+        <mat-form-field class="col-md-12">
+            <mat-label>Numbness/Burning sensation</mat-label>
+            <mat-select formControlName="numbness" required minlength="1">
+                <mat-option [value]="0">select</mat-option>
+                <mat-option *ngFor="let yesnoOption of yesnoOptions" [value]="yesnoOption.itemId">
+                    {{yesnoOption.itemName}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+
+        <div class="col-md-12">
+            <div class="form-title">
+                <span class="mat-accent"> Examine the following </span>
+            </div>
+        </div>
+
+
+        <mat-form-field class="col-md-12">
+            <mat-label>Yellowness of eyes</mat-label>
+            <mat-select formControlName="yellowEyes" required minlength="1">
+                <mat-option [value]="0">select</mat-option>
+                <mat-option *ngFor="let yesnoOption of yesnoOptions" [value]="yesnoOption.itemId">
+                    {{yesnoOption.itemName}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+
+
+        <mat-form-field class="col-md-12">
+            <mat-label>Tenderness in the upper right quadrant of the abdomen</mat-label>
+            <mat-select formControlName="yellowEyes" required minlength="1">
+                <mat-option [value]="0">select</mat-option>
+                <mat-option *ngFor="let yesnoOption of yesnoOptions" [value]="yesnoOption.itemId">
+                    {{yesnoOption.itemName}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+
+
+        <mat-form-field class="col-md-12">
+            <input matInput placeholder="Liver function tests (if available)" formControlName="liverFunctionTest">
+        </mat-form-field>
+
+        <mat-form-field class="col-md-12">
+            <mat-label>Start IPT</mat-label>
+            <mat-select formControlName="startIpt" required minlength="1">
+                <mat-option [value]="0">select</mat-option>
+                <mat-option *ngFor="let yesnoOption of yesnoOptions" [value]="yesnoOption.itemId">
+                    {{yesnoOption.itemName}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+
+
+        <mat-form-field class="col-lg-12 col-xs-12">
+            <input matInput [matDatepicker]="picker" formControlName="dateIPTStarted" required (click)="picker.open()"
+                placeholder="Date IPT Started">
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+
+    </mat-dialog-content>
+    <mat-divider></mat-divider>
+    <mat-dialog-actions>
+        <button mat-raised-button class="mat-raised-button mat-primary" (click)="onSave()">
+            <span class="fa fa-plus-circle">Save</span>
+        </button>
+        <button mat-raised-button="" [mat-dialog-close]="true" class="mat-raised-button mat-accent" (click)="close()">
+            <span class="fa fa-times">Close</span>
+        </button>
+    </mat-dialog-actions>
+</form>

@@ -1,0 +1,66 @@
+<h2 mat-dialog-title>{{title}}</h2>
+
+<mat-divider></mat-divider>
+<br>
+
+<mat-dialog-content>
+    <div class="row">
+        <div class="example-container mat-elevation-z8">
+            <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+                <ng-container matColumnDef="select">
+                    <th mat-header-cell *matHeaderCellDef>
+                        <mat-checkbox (change)="$event ? masterToggle() : null" [checked]="selection.hasValue() && isAllSelected()"
+                            [indeterminate]="selection.hasValue() && !isAllSelected()">
+                        </mat-checkbox>
+                    </th>
+                    <td mat-cell *matCellDef="let row">
+                        <mat-checkbox (click)="$event.stopPropagation()" (change)="$event ? selection.toggle(row) : null"
+                            [checked]="selection.isSelected(row)">
+                        </mat-checkbox>
+                    </td>
+                </ng-container>
+
+                <!-- Position Column -->
+                <ng-container matColumnDef="firstName">
+                    <th mat-header-cell *matHeaderCellDef> First Name </th>
+                    <td mat-cell *matCellDef="let element"> {{element.firstName}} </td>
+                </ng-container>
+
+                <!-- middleName Column -->
+                <ng-container matColumnDef="middleName">
+                    <th mat-header-cell *matHeaderCellDef> Middle Name </th>
+                    <td mat-cell *matCellDef="let element"> {{element.middleName}} </td>
+                </ng-container>
+
+                <!-- lastName Column -->
+                <ng-container matColumnDef="lastName">
+                    <th mat-header-cell *matHeaderCellDef> Last Name </th>
+                    <td mat-cell *matCellDef="let element"> {{element.lastName}} </td>
+                </ng-container>
+
+                <!-- dateOfBirth Column -->
+                <ng-container matColumnDef="dateOfBirth">
+                    <th mat-header-cell *matHeaderCellDef> Date Of Birth </th>
+                    <td mat-cell *matCellDef="let element"> {{element.dateOfBirth | date: 'dd-MMM-yyyy' }} </td>
+                </ng-container>
+
+                <!-- gender Column -->
+                <ng-container matColumnDef="gender">
+                    <th mat-header-cell *matHeaderCellDef> Gender </th>
+                    <td mat-cell *matCellDef="let element"> {{element.gender}} </td>
+                </ng-container>
+
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+            </table>
+
+            <mat-paginator [length]="5" [pageSize]="5" [pageSizeOptions]="[3, 5, 10, 20]" [showFirstLastButtons]="true">
+            </mat-paginator>
+        </div>
+    </div>
+</mat-dialog-content>
+
+<mat-dialog-actions>
+    <button class="mat-raised-button" (click)="close()">Person Not Duplicate</button>
+    <button class="mat-raised-button mat-primary" (click)="save()">Select Existing Person</button>
+</mat-dialog-actions>

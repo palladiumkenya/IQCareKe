@@ -1,3 +1,5 @@
+import { TestingEditComponent } from './testing/testing-edit/testing-edit.component';
+import { FamilySearchComponent } from './family/family-search/family-search.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { EncounterComponent } from './encounter/encounter.component';
@@ -15,6 +17,8 @@ import { ViewEncounterComponent } from './view-encounter/view-encounter.componen
 import { PnsTracingListComponent } from './pns/pns-tracing-list/pns-tracing-list.component';
 import { PnsTracingComponent } from './pns/pnstracing/pnstracing.component';
 import { PsmartComponent } from './psmart/psmart.component';
+import { YesNoResolver } from '../pmtct/_services/yesno.resolver';
+import { FamilyTracingListComponent } from './family-tracing/family-tracing-list/family-tracing-list.component';
 
 const routes: Routes = [
     {
@@ -86,6 +90,25 @@ const routes: Routes = [
                     options: FamilyScreeningResolver
                 }
             },
+            {
+                path: 'familytracinglist',
+                component: FamilyTracingListComponent,
+                pathMatch: 'full'
+            },
+            {
+                path: 'familysearch',
+                component: FamilySearchComponent,
+                resolve: {
+                    yesnoOptions: YesNoResolver
+                }
+            },
+            {
+                path: 'familysearch/:personId',
+                component: FamilySearchComponent,
+                resolve: {
+                    yesnoOptions: YesNoResolver
+                }
+            }
         ]
     },
     {
@@ -97,6 +120,10 @@ const routes: Routes = [
         path: 'testing',
         component: TestingComponent,
         pathMatch: 'full'
+    },
+    {
+        path: 'testingedit/:patientId/:htsEncounterId/:patientMasterVisitId',
+        component: TestingEditComponent
     },
     {
         path: 'psmart',

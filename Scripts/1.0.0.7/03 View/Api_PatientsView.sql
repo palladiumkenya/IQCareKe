@@ -25,7 +25,7 @@ SELECT
 	   PT.[DobPrecision],
 	   PatientType = CASE(SELECT ItemName FROM LookupItemView WHERE ItemId = PT.PatientType AND MasterName = 'PatientType') WHEN 'New' THEN 'NEW' WHEN 'Transfer-In' THEN 'TRANSFER-IN' WHEN 'Transit' THEN 'TRANSIT' ELSE '' END,
 	   CAST(DECRYPTBYKEY(PT.[NationalId]) AS VARCHAR(50)) AS [NationalId],
-	   [RegistrationDate],
+	   P.[RegistrationDate],
 	   PE.EnrollmentDate,
 	   pni.IdentifierValue,
 	   SE.Id ServiceAreaId,

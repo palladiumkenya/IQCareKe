@@ -1,11 +1,12 @@
-﻿using System;
-using System.Threading;
-using System.Threading.Tasks;
-using IQCare.Common.BusinessProcess.Commands.Consent;
+﻿using IQCare.Common.BusinessProcess.Commands.Consent;
 using IQCare.Common.Core.Models;
 using IQCare.Common.Infrastructure;
+using IQCare.Library;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
+using System;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace IQCare.Common.BusinessProcess.CommandHandlers.Consent
 {
@@ -27,6 +28,22 @@ namespace IQCare.Common.BusinessProcess.CommandHandlers.Consent
                     var consentType = await _unitOfWork.Repository<LookupItemView>().Get(x => x.MasterName == "ConsentType" && x.ItemName == consent.Key).FirstOrDefaultAsync();
                     int consentTypeId = consentType != null ? consentType.ItemId : 0;
 
+
+                    var consentList = await _unitOfWork.Repository<PatientConsent>().Get(x =>
+                        x.PatientId == request.PatientID && x.PatientMasterVisitId == request.PatientMasterVisitId &&
+                        x.ServiceAreaId == request.ServiceAreaId && x.ConsentType == consentTypeId).ToListAsync();
+
+                    if (consentList.Count > 0)
+                    {
+                        consentList[0].ConsentValue = consent.Value;
+                        _unitOfWork.Repository<PatientConsent>().Update(consentList[0]);
+                        await _unitOfWork.SaveAsync();
+
+                        return Result<AddConsentResponse>.Valid(new AddConsentResponse()
+                        {
+                            IsConsentAdded = true
+                        });
+                    }
 
                     PatientConsent patientConsent = new PatientConsent()
                     {

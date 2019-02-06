@@ -164,6 +164,7 @@
                                         <th><span class="text-primary">Id</span></th>
 								        <th><span class="text-primary">Period</span></th>
 								        <th><span class="text-primary">Immunization Given</span></th>
+                                        <th><span class="text-primary">VaccinationStage</span></th>
 								        <th><span class="text-primary">Date Immunized</span></th>
                                         <th><span class="text-primary">Delete</span></th>
 							        </tr>
@@ -238,10 +239,10 @@
         var userId = <%=userId%>
         var patientMasterVisitId = <%=PatientMasterVisitId%>;
         if ($("#<%=cbMilestoneAchieved.ClientID%>").prop("checked") == true) {
-            milestoneAchieved = 1;
+            milestoneAchieved = true;
         }
         else {
-            milestoneAchieved = 0;
+            milestoneAchieved = false;
         }
         $.ajax({
             type: "POST",
@@ -442,16 +443,26 @@
     $("#dtlImmunizationHistory").on('click', '.btnDelete', function () {
         var immunizationId = getImmunizationTbl.row($(this).parents('tr')).data()["0"];
         var immunizationPeriod = getImmunizationTbl.row($(this).parents('tr')).data()["1"];
+         console.log(immunizationPeriod);
+        var ImmunizationGiven = getImmunizationTbl.row($(this).parents('tr')).data()["2"];
+        console.log(ImmunizationGiven);
+  
         var clickSection = this;
-        var delStatus = confirmDeleteImmunization(immunizationId, immunizationPeriod, clickSection);
+        var delStatus = confirmDeleteImmunization(immunizationId, immunizationPeriod,clickSection, ImmunizationGiven);
         if (delStatus == "Immunization not deleted") {
             toastr.error("immunization not deleted");
         }
     });
 
-    function confirmDeleteImmunization(immunizationId, immunizationPeriod, clickSection) {
+    function confirmDeleteImmunization(immunizationId, immunizationPeriod,clickSection,ImmunizationGiven) {
         var txt;
-        var r = confirm("Delete " + immunizationPeriod + " Period");
+      
+        if (immunizationPeriod =="") {
+          var  r = confirm("Delete the Immunization Given Record of:" + ImmunizationGiven);
+        }
+        else {
+         var   r = confirm("Delete " + immunizationPeriod + " Period");
+        }
         if (r == true) {
             DeleteImmunization(immunizationId, clickSection);
         }

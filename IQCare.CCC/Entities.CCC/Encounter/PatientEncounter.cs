@@ -67,8 +67,11 @@ namespace Entities.CCC.Encounter
         [Serializable]
         public class Diagnosis
         {
+
             public string diagnosis { get; set; }
             public string treatment { get; set; }
+
+            public Boolean deleteflag { get; set; }
         }
 
         [Serializable]
@@ -161,7 +164,9 @@ namespace Entities.CCC.Encounter
         {
             public string DrugId { get; set; }
             public string BatchId { get; set; }
-            //public string FreqId { get; set; }
+            public string FreqId { get; set; }
+
+            public string Dose { get; set; }
             public string DrugAbbr { get; set; }
             public string Morning { get; set; }
             public string Midday { get; set; }

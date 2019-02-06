@@ -31,8 +31,12 @@ namespace IQCare.Web.CCC.WebService
         private string Msg { get; set; }
         private int Result{get; set;}
 
+        public string DateAssessed { get; set; }
+
+        public string valueAchieved { get; set; }
+        public string VaccineStage;
         [WebMethod(EnableSession = true)]
-        public string addNeonatalMilestones(int patientId, int patientMasterVisitId, int createdBy, int milestoneAssessed, DateTime milestoneOnsetDate, int milestoneAchieved, int milestoneStatus, string milestoneComment)
+        public string addNeonatalMilestones(int patientId, int patientMasterVisitId, int createdBy, int milestoneAssessed, DateTime milestoneOnsetDate, bool milestoneAchieved, int milestoneStatus, string milestoneComment)
         {
             try
             {
@@ -41,11 +45,11 @@ namespace IQCare.Web.CCC.WebService
                     PatientId = patientId,
                     PatientMasterVisitId = patientMasterVisitId,
                     CreatedBy = createdBy,
-                    MilestoneAssessedId = milestoneAssessed,
-                    MilestoneDate = milestoneOnsetDate,
-                    MilestoneAchievedId = milestoneAchieved,
-                    MilestoneStatusId = milestoneStatus,
-                    MilestoneComments = milestoneComment
+                    TypeAssessedId = milestoneAssessed,
+                    DateAssessed = milestoneOnsetDate,
+                    AchievedId = milestoneAchieved,
+                    StatusId = milestoneStatus,
+                    Comment = milestoneComment
                 };
                 var neonatal = new PatientNeonatalManager();
                 //Check if milestone assessed exists
@@ -55,7 +59,7 @@ namespace IQCare.Web.CCC.WebService
                 int existingMilestone = 0;
                 foreach (var items in list)
                 {
-                    existingMilestone = items.MilestoneAssessedId;
+                    existingMilestone = items.TypeAssessedId;
                 }
 
                 if(existingMilestone == milestoneAssessed)
@@ -89,9 +93,10 @@ namespace IQCare.Web.CCC.WebService
                     PatientId = patientId,
                     PatientMasterVisitId = patientMasterVisitId,
                     CreatedBy = createdBy,
-                    VaccineStage = immunizationPeriod,
+                    VaccineStage = "",
                     Vaccine = immunizationGiven,
-                    VaccineDate = immunizationDate
+                    VaccineDate = immunizationDate,
+                    PeriodId = Convert.ToInt32(immunizationPeriod)
                 };
                 var ImmunizationHistory = new PatientVaccinationManager();
                 Result = ImmunizationHistory.addPatientVaccination(immunizationHistory);
@@ -116,13 +121,59 @@ namespace IQCare.Web.CCC.WebService
             var vaccineLogic = new PatientVaccinationManager();
             List<PatientVaccination> list = new List<PatientVaccination>();
             list = vaccineLogic.GetPatientVaccinations(Convert.ToInt32(Session["PatientPK"]));
-            foreach (var items in list)
+            if (list.Count > 0)
             {
-                List<LookupItemView> lookupList = ll.GetItemIdByGroupAndItemName("ImmunizationPeriod", LookupLogic.GetLookupNameById(Convert.ToInt32(items.VaccineStage)).ToString());
-                if (lookupList.Any())
+                foreach (var items in list)
                 {
-                    string[] i = new string[5] { items.Id.ToString(), LookupLogic.GetLookupNameById(Convert.ToInt32(items.VaccineStage)).ToString(), LookupLogic.GetLookupNameById(Convert.ToInt32(items.Vaccine)).ToString(), Convert.ToDateTime(items.VaccineDate).ToString("dd-MMM-yyyy"), "<button type='button' class='btnDelete btn btn-danger fa fa-minus-circle btn-fill' > Remove</button>" };
-                    rows.Add(i);
+                    string PeriodId;
+                    string Vaccine;
+                    string VaccineDate;
+                  
+                    //List<LookupItemView> lookupList = ll.GetItemIdByGroupAndItemName("ImmunizationPeriod", LookupLogic.GetLookupNameById(Convert.ToInt32(items.PeriodId)).ToString());
+                    if (!String.IsNullOrEmpty(items.PeriodId.ToString()))
+                    {
+                        PeriodId = LookupLogic.GetLookupNameById(Convert.ToInt32(items.PeriodId)).ToString();
+                    }
+                    else
+                    {
+                        PeriodId = "";
+                    }
+                    if (!String.IsNullOrEmpty(items.Vaccine.ToString()))
+                    {
+                        if (items.Vaccine > 0)
+                        {
+                            Vaccine = LookupLogic.GetLookupNameById(Convert.ToInt32(items.Vaccine)).ToString();
+                        }
+                        else
+                        {
+                            Vaccine = "";
+                        }
+                    }
+                    else
+                    {
+                        Vaccine = "";
+                    }
+                    if (items.VaccineDate != null)
+                    {
+                        VaccineDate = Convert.ToDateTime(items.VaccineDate).ToString("dd-MMM-yyyy").ToString();
+                    }
+                    else
+                    {
+                        VaccineDate = "";
+                    }
+
+                    if(items.VaccineStage!=null)
+                    {
+                        VaccineStage = items.VaccineStage.ToString();
+                    }
+                    //if (lookupList.Any())
+                    //{
+                        string[] i = new string[6] { items.Id.ToString(),PeriodId,Vaccine,VaccineStage,VaccineDate, //LookupLogic.GetLookupNameById(Convert.ToInt32(items.PeriodId)).ToString()
+                            //, LookupLogic.GetLookupNameById(Convert.ToInt32(items.Vaccine)).ToString()
+                            //, Convert.ToDateTime(items.VaccineDate).ToString("dd-MMM-yyyy"),
+                            "<button type='button' class='btnDelete btn btn-danger fa fa-minus-circle btn-fill' > Remove</button>" };
+                        rows.Add(i);
+                    //}
                 }
             }
             return rows;
@@ -206,6 +257,7 @@ namespace IQCare.Web.CCC.WebService
         public ArrayList LoadMilestones()
         {
             ArrayList rows = new ArrayList();
+            
             var MilestonesLogic = new NeonatalHistoryLogic();
             List<PatientMilestone> list = new List<PatientMilestone>();
             list = MilestonesLogic.getPatientMilestones(Convert.ToInt32(Session["PatientPK"]));
@@ -213,8 +265,39 @@ namespace IQCare.Web.CCC.WebService
             {
                 foreach (var items in list)
                 {
-                    string milestoneAssessed = LookupLogic.GetLookupNameById(items.MilestoneAssessedId).ToString();
-                    string[] i = new string[7] { items.Id.ToString(), LookupLogic.GetLookupNameById(items.MilestoneAssessedId).ToString(), items.MilestoneDate.ToString("dd-MMM-yyyy"), items.MilestoneAchievedId == 1 ? "Yes" : "No", LookupLogic.GetLookupNameById(items.MilestoneStatusId).ToString(), items.MilestoneComments.ToString(), "<button type='button' class='btnDelete btn btn-danger fa fa-minus-circle btn-fill' > Remove</button>" };
+                    string milestoneAssessed = LookupLogic.GetLookupNameById(items.TypeAssessedId).ToString();
+                    
+                    if (items.DateAssessed.HasValue)
+                    {
+                        DateAssessed = items.DateAssessed.Value.ToString("dd-MMM-yyyy");
+
+                    }
+                    else
+                    {
+                        DateAssessed = "";
+                    }
+
+                  
+                    if (items.AchievedId != null)
+                    {
+                        if (items.AchievedId == true)
+                        {
+                            valueAchieved = "Yes";
+                        }
+                        else if(items.AchievedId==false)
+                        {
+                            valueAchieved = "No";
+                        }
+                        else
+                        {
+                            valueAchieved = "";
+                        }
+                    }
+                    else
+                    {
+                        valueAchieved = "";
+                    }
+                    string[] i = new string[7] { items.Id.ToString(), LookupLogic.GetLookupNameById(items.TypeAssessedId).ToString(), DateAssessed, valueAchieved, LookupLogic.GetLookupNameById(items.StatusId).ToString(), items.Comment.ToString(), "<button type='button' class='btnDelete btn btn-danger fa fa-minus-circle btn-fill' > Remove</button>" };
                     rows.Add(i);
                 }
             }

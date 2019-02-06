@@ -1,0 +1,132 @@
+<div class="row">
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        <div class="row">
+            <div class="col-lg-12 col-sm-6 col-xs-12">
+                <div class="widget">
+                    <div class="widget-header bordered-bottom bordered-sky">
+                        <span class="widget-caption"> PMTCT | MATERNITY WORKFLOW </span>
+                    </div>
+                    <div class="widget-body">
+                        <div class="row">
+                            <div class="col-lg-12 col-sm-6 col-xs-12">
+                                <mat-horizontal-stepper [linear]="isLinear" #stepper>
+                                    <mat-step [completed]="false" [stepControl]="visitDetailsFormGroup">
+                                        <ng-template matStepLabel>
+                                            <span matTooltip="Visit Details">Visit Details</span>
+                                        </ng-template>
+                                        <app-hei-visit-details (notify)="onVisitDetailsNotify($event)" [formtype]="formType"
+                                            [visitDate]="visitDate" [visitType]="visitType" [patientId]="patientId"
+                                            [serviceAreaId]="serviceAreaId" [isEdit]="isEdit" [patientMasterVisitId]="patientMasterVisitId"></app-hei-visit-details>
+                                        <app-mother-profile [patientId]="patientId" [visitDate]="visitDate" (notify)="OnMotherProfileNotify($event)"></app-mother-profile>
+                                        <div>
+                                            <button mat-raised-button color="accent" matStepperNext type="button"
+                                                (click)="log()">Next</button>
+                                        </div>
+                                    </mat-step>
+                                    <mat-step [completed]="false" [stepControl]="diagnosisFormGroup">
+                                        <ng-template matStepLabel>
+                                            <span matTooltip="Diagnosis">Diagnosis</span>
+                                        </ng-template>
+                                        <app-diagnosis [diagnosisOptions]="diagnosisOptions" (notify)="onPatientDiagnosisNotify($event)"
+                                            [isEdit]="isEdit" [PatientId]="patientId" [PatientMasterVisitId]="visitId">
+                                        </app-diagnosis>
+                                        <div>
+                                            <app-delivery-maternity [diagnosisOptions]="diagnosisOptions" (notify)="onPatientDeliveryNotify($event)"
+                                                [isEdit]="isEdit" [PatientMasterVisitId]="visitId" [PatientId]="patientId"></app-delivery-maternity>
+                                        </div>
+                                        <div>
+                                            <button mat-raised-button color="primary" matStepperPrevious type="button">Previous</button>
+                                            &nbsp;&nbsp;
+                                            <button mat-raised-button color="accent" matStepperNext type="button">Next</button>
+                                        </div>
+                                    </mat-step>
+
+                                    <mat-step [completed]="false" [stepControl]="babyFormGroup">
+                                        <ng-template matStepLabel>
+                                            <span matTooltip="Baby Section">Baby Section</span>
+                                        </ng-template>
+                                        <app-baby [babySectionOptions]="babySectionOptions" (notifyData)="onBabyNotfiyData($event)"
+                                            (notify)="onBabyNotify($event)" [isEdit]="isEdit" [PatientId]="patientId"
+                                            [PatientMasterVisitId]="visitId"></app-baby>
+
+                                        <div>
+                                            <button mat-raised-button color="primary" matStepperPrevious type="button">Previous</button>
+                                            &nbsp;&nbsp;
+                                            <button mat-raised-button color="accent" matStepperNext type="button">Next</button>
+                                        </div>
+                                    </mat-step>
+
+                                    <mat-step [completed]="false" [stepControl]="maternityTestsFormGroup">
+                                        <ng-template matStepLabel>
+                                            <span matTooltip="Maternity Tests">Maternity Tests</span>
+                                        </ng-template>
+                                        <app-mternity-tests [maternityTestOptions]="maternityTestOptions" (notify)="onMaternityTests($event)"></app-mternity-tests>
+
+                                        <div>
+                                            <app-pnc-hivtesting (notify)="onHivStatusNotify($event)" [pncHivOptions]="pncHivOptions">
+
+                                            </app-pnc-hivtesting>
+                                        </div>
+                                        <div>
+                                            <button mat-raised-button color="primary" matStepperPrevious type="button">Previous</button>
+                                            &nbsp;&nbsp;
+                                            <button mat-raised-button color="accent" matStepperNext type="button">Next</button>
+                                        </div>
+                                    </mat-step>
+
+
+                                    <mat-step [completed]="false" [stepControl]="maternalDrugAdministrationForGroup">
+                                        <ng-template matStepLabel>
+                                            <span matTooltip="Maternal Drug Administration"> Drug Administration</span>
+                                        </ng-template>
+                                        <app-maternal-drug-administration [drugAdministrationOptions]="drugAdministrationOptions"
+                                            (notify)="onMaternalDrugAdministration($event)"></app-maternal-drug-administration>
+                                        <div>
+                                            <app-pnc-partnertesting [partnerTestingOptions]="partnerTestingOptions"
+                                                (notify)="onPartnerTestingNotify($event)"></app-pnc-partnertesting>
+                                        </div>
+
+                                        <div>
+                                            <app-pnc-patienteducation [patientEducationOptions]="patientEducationOptions"
+                                                (notify)="onPatientEducationNotify($event)"></app-pnc-patienteducation>
+                                        </div>
+                                        <div>
+                                            <button mat-raised-button color="primary" matStepperPrevious type="button">Previous</button>
+                                            &nbsp;&nbsp;
+                                            <button mat-raised-button color="accent" matStepperNext type="button">Next</button>
+                                        </div>
+                                    </mat-step>
+
+                                    <mat-step [completed]="false" [stepControl]="dischargeFormGroup">
+                                        <ng-template matStepLabel>
+                                            <span matTooltip="Discharge">Discharge</span>
+                                        </ng-template>
+                                        <app-discharge [dischargeOptions]="dischargeOptions" (notify)="onPatientDischarge($event)"></app-discharge>
+
+                                        <div>
+                                            <app-maternity-referral [dischargeOptions]="dischargeOptions" (notify)="onPatientreferralNotify($event)"></app-maternity-referral>
+                                        </div>
+
+                                        <div>
+                                            <app-maternity-next-appointment [dischargeOptions]="dischargeOptions"
+                                                (notify)="onPatientNextAppointent($event)"></app-maternity-next-appointment>
+                                        </div>
+
+                                        <div>
+                                            <button mat-raised-button color="primary" matStepperPrevious type="button">Previous</button>
+                                            &nbsp;&nbsp;
+                                            <button mat-raised-button color="accent" matStepperNext type="button"
+                                                (click)="onSubmit()">Complete Encounter</button>
+                                        </div>
+                                    </mat-step>
+
+                                </mat-horizontal-stepper>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

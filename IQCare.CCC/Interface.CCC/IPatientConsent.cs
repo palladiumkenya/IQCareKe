@@ -14,5 +14,7 @@ namespace Interface.CCC
         int UpdatePatientConsent(PatientConsent p);
 
         List<PatientConsent> GetByPatientId(int patientId);
+
+        List<PatientConsent> GetPatientConsentByType(int patientId, int consentType);
     }
 }

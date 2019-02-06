@@ -132,10 +132,11 @@
     <Compile Include="Interface\Lookup\IFacilityListRepository.cs" />
     <Compile Include="Interface\Lookup\ILookupFacilityStatisticsRepository.cs" />
     <Compile Include="Interface\Lookup\ILookupFacilityViralLoad.cs" />
+    <Compile Include="Interface\Lookup\ILookupICDCodesRepository.cs" />
     <Compile Include="Interface\Lookup\ILookupParameter.cs" />
     <Compile Include="Interface\Lookup\ILookupPatientAdherenceRepository.cs" />
     <Compile Include="Interface\Lookup\ILookupPatientRegimenMap.cs" />
-    <Compile Include="Interface\Lookup\Interface1.cs" />
+    <Compile Include="Interface\Lookup\IPatientLookupLabsRepository.cs" />
     <Compile Include="Interface\Lookup\IPatientRegistrationLookupRepository.cs" />
     <Compile Include="Interface\Lookup\IPatientStabilitySummaryRepository.cs" />
     <Compile Include="Interface\Lookup\IPatientTreatmentTrackerLookupRepository.cs" />
@@ -248,11 +249,13 @@
     <Compile Include="Repository\Lookup\LookupFacilityRepository.cs" />
     <Compile Include="Repository\Lookup\LookupFacilityStatisticsRepository.cs" />
     <Compile Include="Repository\Lookup\LookupFacilityViralLoadRepository.cs" />
+    <Compile Include="Repository\Lookup\LookupICDCodesRepository.cs" />
     <Compile Include="Repository\Lookup\LookupLabsRepository.cs" />
     <Compile Include="Repository\Lookup\LookupParameterRepository.cs" />
     <Compile Include="Repository\Lookup\LookupPatientRegimenMapRepository.cs" />
     <Compile Include="Repository\Lookup\PatientBaselineLookupRepository.cs" />
     <Compile Include="Repository\Lookup\PatientLookupAdherenceRepository.cs" />
+    <Compile Include="Repository\Lookup\PatientLookupLabsRepository.cs" />
     <Compile Include="Repository\Lookup\PatientLookupRepository.cs" />
     <Compile Include="Repository\Lookup\PatientRegistrationLookupRepository.cs" />
     <Compile Include="Repository\Lookup\PatientServiceEnrollmentLookupRepository.cs" />

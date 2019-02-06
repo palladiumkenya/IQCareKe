@@ -1,0 +1,35 @@
+<form class="form-group" [formGroup]="PartnerTestingForm">
+    <div class="row">
+        <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12">
+            <div class="form-title">
+                <span class="mat-accent"> Partner Testing </span>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-3 col-sm-3 col-xs-12">
+                <mat-form-field class="col-lg-12 col-sm-12 col-xs-12">
+                    <mat-label>Partner HIV Testing</mat-label>
+                    <mat-select formControlName="partnerHivTestDone" required>
+                        <mat-option [value]=""></mat-option>
+                        <mat-option *ngFor="let yesNoNaOption of yesNoNaOptions" [value]="yesNoNaOption.itemId" (onSelectionChange)="onPartnerTestingChange($event)">
+                            {{yesNoNaOption.itemName}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+
+            <div class="col-lg-3 col-sm-3 col-xs-12">
+                <mat-form-field class="col-lg-12 col-sm-12 col-xs-12">
+                    <mat-label>Final HIV Result for Partner</mat-label>
+                    <mat-select formControlName="finalPartnerHivResult" required>
+                        <mat-option [value]=""></mat-option>
+                        <mat-option *ngFor="let finalPartnerHivResultOption of finalPartnerHivResultOptions" [value]="finalPartnerHivResultOption.itemId">
+                            {{finalPartnerHivResultOption.itemName}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+        </div>
+    </div>
+</form>

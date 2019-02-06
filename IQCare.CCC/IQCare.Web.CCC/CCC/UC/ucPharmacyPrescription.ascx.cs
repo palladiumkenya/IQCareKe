@@ -22,6 +22,8 @@ namespace IQCare.Web.CCC.UC
         public bool StartTreatment { get; set; }
         public string patType { get; set; }
 
+        public int DosageFrequency { get; set; }
+
         protected void Page_Load(object sender, EventArgs e)
         {
             if (Request.QueryString["visitId"] != null)
@@ -32,8 +34,12 @@ namespace IQCare.Web.CCC.UC
             {
                 Session["ExistingRecordPatientMasterVisitID"] = "0";
             }
+            if (Session["DosageFrequency"] !=null)
+            {
+                DosageFrequency = Convert.ToInt32(Session["DosageFrequency"]);
+            }
 
-            if (!IsPostBack)
+                if (!IsPostBack)
             {
                 if (Session["SCMModule"] != null)
                     PMSCM = Session["SCMModule"].ToString();
@@ -65,7 +71,7 @@ namespace IQCare.Web.CCC.UC
                     lookUp.populateDDL(regimenLine, "RegimenClassificationPaeds");
                 }
                 
-                //lookUp.getPharmacyDrugFrequency(ddlFreq);
+                lookUp.getPharmacyDrugFrequency(ddlFreq);
 
                 PatientEncounterLogic pel = new PatientEncounterLogic();
                 pel.getPharmacyTreatmentProgram(ddlTreatmentProgram);

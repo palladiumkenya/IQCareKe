@@ -8,19 +8,21 @@
         <mat-form-field>
             <mat-select placeholder="Kit Name" formControlName="kitName" required>
                 <mat-option value=""></mat-option>
-                <mat-option *ngFor="let option of hivTestKits" [value]="option">{{option.itemName}}</mat-option>
+                <mat-option *ngFor="let option of hivTestKits" [value]="option" (onSelectionChange)="onTestKitChange($event)">{{option.itemName}}</mat-option>
             </mat-select>
             <mat-error *ngIf="!form.controls['kitName'].valid">Please select Kit Name</mat-error>
         </mat-form-field>
 
         <mat-form-field>
-            <input matInput placeholder="Lot Number" type="text" id="lotNumber" name="lotNumber" formControlName="lotNumber" required>
+            <input matInput placeholder="Lot Number" type="text" id="lotNumber" name="lotNumber" formControlName="lotNumber"
+                autocomplete="off" required>
             <mat-error *ngIf="!form.controls['lotNumber'].valid">Please select a lot number</mat-error>
         </mat-form-field>
 
         <mat-form-field>
-            <input matInput [min]="minDate" placeholder="Expiry Date" required [matDatepicker]="expiryDatepicker" (click)="expiryDatepicker.open()"
-                id="expiryDatepicker" name="expiryDatepicker" formControlName="expiryDate" required>
+            <input matInput [min]="htsEncounterDate" placeholder="Expiry Date" required [matDatepicker]="expiryDatepicker"
+                (click)="expiryDatepicker.open()" id="expiryDatepicker" name="expiryDatepicker" autocomplete="off"
+                formControlName="expiryDate" required>
             <mat-datepicker-toggle matSuffix [for]="expiryDatepicker"></mat-datepicker-toggle>
             <mat-datepicker #expiryDatepicker></mat-datepicker>
             <mat-error *ngIf="!form.controls['expiryDate'].valid">Please select an Expiry Date</mat-error>

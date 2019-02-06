@@ -23,6 +23,7 @@ namespace IQCare.Web.PMSCM
         IDrug PrescriptionManager;
         StringBuilder str = new StringBuilder();
         private static int chkavdrugs = 1;
+        public string StoreId;
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -34,7 +35,7 @@ namespace IQCare.Web.PMSCM
             //(Master.FindControl("levelOneNavigationUserControl1").FindControl("lblheader") as Label).Text = "Current Order";
             //(Master.FindControl("levelTwoNavigationUserControl1").FindControl("lblformname") as Label).Text = "Pharmacy Dispense";
 
-            LoadPendingPharmacyOrders();
+           
 
             if (!IsPostBack)
             {
@@ -95,7 +96,7 @@ namespace IQCare.Web.PMSCM
                         ScriptManager.RegisterStartupScript(this, this.GetType(), "DispenseByNotSelected", str.ToString(), true);
                 }
             }
-
+            LoadPendingPharmacyOrders();
             setValidatorsBasedOntechnicalArea();
             JavaScriptFunctionsOnLoad();
             resizeScreen();
@@ -289,8 +290,16 @@ namespace IQCare.Web.PMSCM
         private void LoadPendingPharmacyOrders()
         {
             IDrug thePharmacyManager = (IDrug)ObjectFactory.CreateInstance("BusinessProcess.SCM.BDrug, BusinessProcess.SCM");
-           
-            DataTable theDT = thePharmacyManager.GetPharmacyExistingRecord(Convert.ToInt32(Session["PatientID"]), Convert.ToInt32(Session["StoreID"] == null ? "0" : Session["StoreID"].ToString()));
+            if (Session["StoreID"] != null)
+            {
+               
+                if(String.IsNullOrEmpty(Session["StoreID"].ToString()))
+                {
+                    Session["StoreID"] = StoreId;
+                }
+            }
+            string PatientId = Session["PatientID"].ToString();
+                DataTable theDT = thePharmacyManager.GetPharmacyExistingRecord(Convert.ToInt32(Session["PatientID"]), Convert.ToInt32(Session["StoreID"] == null ? "0" : StoreId));
             gvPendingorders.DataSource = theDT;
             gvPendingorders.DataBind();
         }
@@ -474,6 +483,7 @@ namespace IQCare.Web.PMSCM
             BindManager.BindCombo(ddlDispensingStore, theDT, "Name", "id");
             ddlDispensingStore.SelectedIndex = 1;
             HttpContext.Current.Session["StoreID"] = ddlDispensingStore.SelectedValue;
+            StoreId = ddlDispensingStore.SelectedValue;
 
             theDT = dsPharmacyVitals.Tables[10];
             //BindManager.BindCombo(ddlPrescribedBy, theDT, "Name", "EmployeeId");
@@ -1688,11 +1698,15 @@ namespace IQCare.Web.PMSCM
                 IDrug thePharmacyManager = (IDrug)ObjectFactory.CreateInstance("BusinessProcess.SCM.BDrug, BusinessProcess.SCM");
                 DataSet theDS = thePharmacyManager.GetPharmacyExistingRecordDetails_Web(visitID);
 
+                PrescriptionManager = (IDrug)ObjectFactory.CreateInstance("BusinessProcess.SCM.BDrug,BusinessProcess.SCM");
+                DataSet dsPharmacyVitals = PrescriptionManager.GetPharmacyVitals(Convert.ToInt32(Session["PatientID"]));
+
+
                 if (theDS.Tables[0].Rows.Count > 0)
                 {
 
                     HttpContext.Current.Session["typeOfDispense"] = theDS.Tables[2].Rows[0]["OrderStatus"].ToString();
-
+                     
                     //--------------------------------------------------------------------
                     /*if (Session["typeOfDispense"].ToString().ToLower() == "partial dispense")
                     {
@@ -1736,7 +1750,23 @@ namespace IQCare.Web.PMSCM
                     gvDispenseDrugs.DataBind();
                     HttpContext.Current.Session["StoreID"] = theDS.Tables[1].Rows[0]["StoreId"].ToString();
                     Session["ptnPharmacyPK"] = theDS.Tables[1].Rows[0]["ptn_pharmacy_pk"].ToString();
-                    ddlPrescribedBy.SelectedValue = theDS.Tables[1].Rows[0]["OrderedBy"].ToString();
+                    string OrderedBy = theDS.Tables[1].Rows[0]["OrderedBy"].ToString();
+                    Dictionary<int, string> userList = new Dictionary<int, string>();
+                    userList=CustomFieldClinical.GetUsers();
+                    if (!string.IsNullOrEmpty(OrderedBy))
+                    {
+                        if (userList.ContainsKey(Convert.ToInt32(OrderedBy)))
+                        {
+                            ddlPrescribedBy.SelectedValue = theDS.Tables[1].Rows[0]["OrderedBy"].ToString();
+                           
+                            //SecurityPerTabSignature = userId;
+                        }
+                        else
+                        {
+                            ddlPrescribedBy.SelectedValue = "0";
+                        }
+                    }
+                  //  ddlPrescribedBy.SelectedValue = theDS.Tables[1].Rows[0]["OrderedBy"].ToString();
                     //added by VY
                     ddlTreatmentProg.SelectedValue = theDS.Tables[0].Rows[0]["TreatmentProgram"].ToString();
                     ddlregimenLine.SelectedValue = theDS.Tables[0].Rows[0]["RegimenLine"].ToString();
@@ -1763,8 +1793,23 @@ namespace IQCare.Web.PMSCM
                     else
                         txtprescriptionDate.Value = theDS.Tables[1].Rows[0]["OrderedByDate"].ToString();
 
+                    string Dispensedby = theDS.Tables[1].Rows[0]["DispensedBy"].ToString();
+                    Dictionary<int, string> userListDispensed = new Dictionary<int, string>();
+                    userListDispensed = CustomFieldClinical.GetUsers();
+                    if (!string.IsNullOrEmpty(Dispensedby))
+                    {
+                        if (userListDispensed.ContainsKey(Convert.ToInt32(Dispensedby)))
+                        {
+                            ddlDispensedBy.SelectedValue = theDS.Tables[1].Rows[0]["DispensedBy"].ToString();
 
-                    ddlDispensedBy.SelectedValue = theDS.Tables[1].Rows[0]["DispensedBy"].ToString();
+                            //SecurityPerTabSignature = userId;
+                        }
+                        else
+                        {
+                            ddlDispensedBy.SelectedValue = "0";
+                        }
+                    }
+                   // ddlDispensedBy.SelectedValue = theDS.Tables[1].Rows[0]["DispensedBy"].ToString();
 
 
                     if (theDS.Tables[1].Rows[0]["DispensedBy"].ToString() != "")

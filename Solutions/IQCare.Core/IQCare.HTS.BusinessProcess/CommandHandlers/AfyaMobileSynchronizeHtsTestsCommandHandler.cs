@@ -1,0 +1,154 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Threading;
+using System.Threading.Tasks;
+using IQCare.Common.BusinessProcess.Commands.Setup;
+using IQCare.Common.BusinessProcess.Services;
+using IQCare.Common.Core.Models;
+using IQCare.Common.Infrastructure;
+using IQCare.HTS.BusinessProcess.Commands;
+using IQCare.HTS.BusinessProcess.Services;
+using IQCare.HTS.Infrastructure;
+using IQCare.Library;
+using MediatR;
+using Microsoft.EntityFrameworkCore;
+using Serilog;
+
+namespace IQCare.HTS.BusinessProcess.CommandHandlers
+{
+    public class AfyaMobileSynchronizeHtsTestsCommandHandler: IRequestHandler<AfyaMobileSynchronizeHtsTestsCommand, Result<string>>
+    {
+        private readonly ICommonUnitOfWork _unitOfWork;
+        private readonly IHTSUnitOfWork _htsUnitOfWork;
+
+        public AfyaMobileSynchronizeHtsTestsCommandHandler(IHTSUnitOfWork htsUnitOfWork, ICommonUnitOfWork unitOfWork)
+        {
+            _htsUnitOfWork = htsUnitOfWork ?? throw new ArgumentNullException(nameof(htsUnitOfWork));
+            _unitOfWork = unitOfWork ?? throw new ArgumentNullException(nameof(unitOfWork));
+        }
+
+        public async Task<Result<string>> Handle(AfyaMobileSynchronizeHtsTestsCommand request, CancellationToken cancellationToken)
+        {
+            string afyaMobileId = String.Empty;
+            string enrollmentNo = string.Empty;
+
+            using (var trans = _htsUnitOfWork.Context.Database.BeginTransaction())
+            {
+                RegisterPersonService registerPersonService = new RegisterPersonService(_unitOfWork);
+                EncounterTestingService encounterTestingService = new EncounterTestingService(_unitOfWork, _htsUnitOfWork);
+
+                try
+                {
+                    //Person Identifier
+                    for (int j = 0; j < request.INTERNAL_PATIENT_ID.Count; j++)
+                    {
+                        if (request.INTERNAL_PATIENT_ID[j].ASSIGNING_AUTHORITY ==
+                            "HTS" && request.INTERNAL_PATIENT_ID[j]
+                                .IDENTIFIER_TYPE == "HTS_SERIAL")
+                        {
+                            enrollmentNo = request.INTERNAL_PATIENT_ID[j].ID;
+                        }
+
+                        if (request.INTERNAL_PATIENT_ID[j].IDENTIFIER_TYPE ==
+                            "AFYA_MOBILE_ID" &&
+                            request.INTERNAL_PATIENT_ID[j].ASSIGNING_AUTHORITY ==
+                            "AFYAMOBILE")
+                        {
+                            afyaMobileId = request.INTERNAL_PATIENT_ID[j].ID;
+                        }
+                    }
+
+                    //check if person already exists
+                    var identifiers = await registerPersonService.getPersonIdentifiers(afyaMobileId, 10);
+                    if (identifiers.Count > 0)
+                    {
+                        var person = await registerPersonService.GetPerson(identifiers[0].PersonId);
+                        var patient = await registerPersonService.GetPatientByPersonId(identifiers[0].PersonId);
+
+                        int pnsAccepted = request.HIV_TESTS.SUMMARY.PNS_ACCEPTED;
+                        int pnsDeclineReason = request.HIV_TESTS.SUMMARY.PNS_DECLINE_REASON;
+                        List<NewTests> screeningTests = request.HIV_TESTS.SCREENING;
+                        List<NewTests> confirmatoryTests = request.HIV_TESTS.CONFIRMATORY;
+                        int coupleDiscordant = request.HIV_TESTS.SUMMARY.COUPLE_DISCORDANT;
+                        int finalResultGiven = request.HIV_TESTS.SUMMARY.FINAL_RESULT_GIVEN;
+                        int roundOneTestResult = request.HIV_TESTS.SUMMARY.SCREENING_RESULT;
+                        int? roundTwoTestResult = request.HIV_TESTS.SUMMARY.CONFIRMATORY_RESULT;
+                        int? finalResult = request.HIV_TESTS.SUMMARY.FINAL_RESULT;
+                        var encounterNumber = request.PLACER_DETAIL.ENCOUNTER_NUMBER;
+                        int providerId = request.PLACER_DETAIL.PROVIDER_ID;
+
+                        //Get Consent to screen partners itemId
+                        var consentPartnerType = await _unitOfWork.Repository<LookupItemView>()
+                            .Get(x => x.MasterName == "ConsentType" && x.ItemName == "ConsentToListPartners")
+                            .FirstOrDefaultAsync();
+                        int consentListPartnersTypeId = consentPartnerType != null ? consentPartnerType.ItemId : 0;
+
+                        var resultPlacerGet = await registerPersonService.GetInteropPlacerValue(7, 4, encounterNumber);
+                        if (resultPlacerGet.Count > 0)
+                        {
+                            var getHtsEncounter = await encounterTestingService.GetHtsEncounter(resultPlacerGet[0].EntityId);
+                            var getPatientEncounter = await encounterTestingService.GetPatientEncounterById(getHtsEncounter.PatientEncounterID);
+                            var getPatientConsents = await encounterTestingService.GetPatientConsent(patient.Id, getPatientEncounter.PatientMasterVisitId, 2, consentListPartnersTypeId);
+                            if (getPatientConsents.Count > 0)
+                            {
+                                getPatientConsents[0].ConsentValue = pnsAccepted;
+                                getPatientConsents[0].ConsentDate = getPatientEncounter.EncounterStartTime;
+                                getPatientConsents[0].DeclineReason = pnsDeclineReason;
+
+                                await encounterTestingService.UpdatePatientConsent(getPatientConsents[0]);
+                            }
+                            else
+                            {
+                                //add consent to list partners
+                                var partnersConsent = await encounterTestingService.addPatientConsent(patient.Id,
+                                    getPatientEncounter.PatientMasterVisitId, 2, pnsAccepted, consentListPartnersTypeId, getPatientEncounter.EncounterStartTime, providerId,
+                                    pnsDeclineReason);
+                            }
+
+                            //Screening Tests
+                            var updatedScreeningTests = await encounterTestingService.UpdateTesting(getHtsEncounter.Id, screeningTests, providerId, 1);
+                            //Confirmatory Tests
+                            var updatedConfirmatoryTests = await encounterTestingService.UpdateTesting(getHtsEncounter.Id, confirmatoryTests, providerId, 2);
+
+                            getHtsEncounter.CoupleDiscordant = coupleDiscordant;
+                            getHtsEncounter.FinalResultGiven = finalResultGiven;
+
+                            await encounterTestingService.updateHtsEncounter(getHtsEncounter.Id, getHtsEncounter);
+                            var getHtsEncounterResults = await encounterTestingService.GetHtsEncounterResultByEncounterId(getHtsEncounter.Id);
+                            if (getHtsEncounterResults.Count > 0)
+                            {
+                                getHtsEncounterResults[0].RoundOneTestResult = roundOneTestResult;
+                                getHtsEncounterResults[0].RoundTwoTestResult = roundTwoTestResult;
+                                getHtsEncounterResults[0].FinalResult = finalResult;
+
+                                var updatedHtsEncounterResult = await encounterTestingService.UpdateHtsEncounterResult(getHtsEncounterResults[0]);
+                            }
+                            else
+                            {
+                                var htsEncounterResult = await encounterTestingService.addHtsEncounterResult(getHtsEncounter.Id, roundOneTestResult, roundTwoTestResult, finalResult);
+                            }
+                        }
+                        else
+                        {
+                            Result<string>.Invalid(
+                                $"HTS PRE-TEST with encounter number: {encounterNumber} could not be found");
+                        }
+                    }
+                    else
+                    {
+                        return Result<string>.Invalid($"Person with afyaMobileId: {afyaMobileId} could not be found");
+                    }
+
+                    trans.Commit();
+                    return Result<string>.Valid("Successfully synchronized HTS tests");
+                }
+                catch (Exception ex)
+                {
+                    trans.Rollback();
+                    Log.Error(ex.Message);
+                    return Result<string>.Invalid($"Failed to synchronize Hts tests for clientid: {afyaMobileId} " + ex.Message + " " + ex.InnerException);
+                }
+            }
+        }
+    }
+}

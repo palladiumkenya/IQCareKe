@@ -17,6 +17,7 @@ export class PnsPartnersComponent implements OnInit {
 
     isPnsScreeningDone = [];
     isPnsTracingDone = [];
+    isPnsScreenedPositive = [];
 
     displayedColumns = ['firstName', 'midName', 'lastName', 'dateOfBirth', 'gender', 'relationshipType', 'actionsColumn'];
     dataSource = new PnsDataSource(this.pnsService, this.patientId);
@@ -37,15 +38,20 @@ export class PnsPartnersComponent implements OnInit {
                 this.isPnsTracingDone = res['isPnsTracingDone'];
             }
         });
+
+        store.pipe(select('app')).subscribe(res => {
+            if (typeof (res['PnsScreenedPositive']) !== 'undefined' && res['PnsScreenedPositive'] !== null) {
+                this.isPnsScreenedPositive = res['PnsScreenedPositive'];
+            }
+        });
     }
 
     ngOnInit() {
-        console.log(this.isPnsScreeningDone);
-
         this.personId = JSON.parse(localStorage.getItem('personId'));
         this.patientId = JSON.parse(localStorage.getItem('patientId'));
 
         this.dataSource = new PnsDataSource(this.pnsService, this.patientId);
+        localStorage.removeItem('isPartner');
     }
 
     getSelectedRow(row) {
@@ -70,7 +76,7 @@ export class PnsPartnersComponent implements OnInit {
             'family': 0
         };
         localStorage.setItem('isPartner', JSON.stringify(newPartner));
-        this.zone.run(() => { this.router.navigate(['/registration/register'], { relativeTo: this.route }); });
+        this.zone.run(() => { this.router.navigate(['/hts/family/familysearch'], { relativeTo: this.route }); });
     }
 
     isPnsScreened(personID) {
@@ -85,6 +91,15 @@ export class PnsPartnersComponent implements OnInit {
     isPnsTracing(personID) {
         for (let i = 0; i < this.isPnsTracingDone.length; i++) {
             if (this.isPnsTracingDone[i]['partnerId'] == personID) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    PnsScreenedPositive(personID) {
+        for (let i = 0; i < this.isPnsScreenedPositive.length; i++) {
+            if (this.isPnsScreenedPositive[i]['partnerId'] == personID) {
                 return true;
             }
         }

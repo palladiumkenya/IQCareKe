@@ -5,6 +5,7 @@ using Interface.CCC;
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Data.SqlTypes;
 using static Entities.CCC.Encounter.PatientEncounter;
 
 namespace BusinessProcess.CCC
@@ -148,7 +149,18 @@ namespace BusinessProcess.CCC
                         ClsUtility.AddParameters("@PatientID", SqlDbType.Int, patientID);
                         ClsUtility.AddParameters("@chronicIllness", SqlDbType.VarChar, chrIll.chronicIllnessID);
                         ClsUtility.AddParameters("@treatment", SqlDbType.VarChar, chrIll.treatment);
-                        ClsUtility.AddParameters("@dose", SqlDbType.VarChar, chrIll.dose);
+                        if (String.IsNullOrEmpty(chrIll.dose) == true)
+                        {
+                           
+                              
+                            ClsUtility.AddParameters("@dose", SqlDbType.VarChar, DBNull.Value.ToString());
+                        }
+                        
+                       else 
+                        {
+                            ClsUtility.AddParameters("@dose", SqlDbType.VarChar, chrIll.dose);
+                        }
+                        
                         ClsUtility.AddParameters("@onsetDate", SqlDbType.VarChar, chrIll.OnsetDate);
                         ClsUtility.AddParameters("@active", SqlDbType.VarChar, chrIll.Active);
                         ClsUtility.AddParameters("@userID", SqlDbType.VarChar, userID);
@@ -292,15 +304,18 @@ namespace BusinessProcess.CCC
 
                     for (int i = 0; i < phdp.Count; i++)
                     {
-                        ClsObject phdpObj = new ClsObject();
-                        ClsUtility.Init_Hashtable();
-                        ClsUtility.AddParameters("@masterVisitID", SqlDbType.Int, PatientMasterVisitID);
-                        ClsUtility.AddParameters("@PatientID", SqlDbType.Int, PatientID);
-                        ClsUtility.AddParameters("@phdp", SqlDbType.VarChar, phdp[i].ToString());
-                        ClsUtility.AddParameters("@userID", SqlDbType.VarChar, userID);
+                        if (!(String.IsNullOrEmpty(phdp[i].ToString())))
+                         {
+                            ClsObject phdpObj = new ClsObject();
+                            ClsUtility.Init_Hashtable();
+                            ClsUtility.AddParameters("@masterVisitID", SqlDbType.Int, PatientMasterVisitID);
+                            ClsUtility.AddParameters("@PatientID", SqlDbType.Int, PatientID);
+                            ClsUtility.AddParameters("@phdp", SqlDbType.VarChar, phdp[i].ToString());
+                            ClsUtility.AddParameters("@userID", SqlDbType.VarChar, userID);
 
-                        int j = (int)phdpObj.ReturnObject(ClsUtility.theParams, "sp_savePatientEncounterPHDP", ClsUtility.ObjectEnum.ExecuteNonQuery);
-                    }
+                            int j = (int)phdpObj.ReturnObject(ClsUtility.theParams, "sp_savePatientEncounterPHDP", ClsUtility.ObjectEnum.ExecuteNonQuery);
+                        }
+                      }
 
 
                     //if (diagnosis.Count > 0)
@@ -319,10 +334,22 @@ namespace BusinessProcess.CCC
                         ClsUtility.Init_Hashtable();
                         ClsUtility.AddParameters("@masterVisitID", SqlDbType.Int, PatientMasterVisitID);
                         ClsUtility.AddParameters("@PatientID", SqlDbType.Int, PatientID);
-                        ClsUtility.AddParameters("@diagnosis", SqlDbType.VarChar, diag.diagnosis);
+                        string[] diaglist = diag.diagnosis.Split('~');
+                        if (diaglist[1].ToString() == "mstICD")
+                            ClsUtility.AddParameters("@LookupTableFlag", SqlDbType.Bit,"0");
+                        else if(diaglist[1].ToString()== "lookupitem")
+                            ClsUtility.AddParameters("@LookupTableFlag", SqlDbType.Bit, "1");
+                        ClsUtility.AddParameters("@diagnosis", SqlDbType.VarChar, diaglist[0]);
                         ClsUtility.AddParameters("@treatment", SqlDbType.VarChar, diag.treatment);
                         ClsUtility.AddParameters("@userID", SqlDbType.VarChar, userID);
-
+                        if (diag.deleteflag == true)
+                        {
+                            ClsUtility.AddParameters("@DeleteFlag", SqlDbType.Bit, "1");
+                        }
+                        else if(diag.deleteflag==false)
+                        {
+                            ClsUtility.AddParameters("@DeleteFlag", SqlDbType.Bit, "0");
+                        }
                         int d = (int)advEvents.ReturnObject(ClsUtility.theParams, "sp_savePatientEncounterDiagnosis", ClsUtility.ObjectEnum.ExecuteNonQuery);
                     }
 

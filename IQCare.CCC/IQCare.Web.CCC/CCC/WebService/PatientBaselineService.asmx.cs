@@ -88,14 +88,115 @@ namespace IQCare.Web.CCC.WebService
                 {
                     foreach (var item in artuse)
                     {
-                        _result = patientHivHistory.AddPatientArtUseHistory(id, patientId, patientMasterVisitId, item.treatment.ToString(),item.purpose.ToString(), item.regimen.ToString(),Convert.ToDateTime(item.dateLastUsed), userId);
+                        string treatment;
+                        string purpose;
+                        string regimen;
+                        DateTime dateLastUsed;
+                        if (item.ContainsKey("treatment")
+                                && item["treatment"] != null
+                            && !string.IsNullOrEmpty(item["treatment"].ToString())
+                                    )
+                        {
+                            treatment= item["treatment"].ToString();
+                        }
+                        else
+                        {
+                            treatment = String.Empty;
+                        }
+                        if (item.ContainsKey("purpose")
+                                 && item["purpose"] != null
+                             && !string.IsNullOrEmpty(item["purpose"].ToString())
+                                     )
+                        {
+                            purpose = item["purpose"].ToString();
+                        }
+                        else
+                        {
+                            purpose = String.Empty;
+                        }
+
+                        if (item.ContainsKey("regimen")
+                                && item["regimen"] != null
+                            && !string.IsNullOrEmpty(item["regimen"].ToString())
+                                    )
+                        {
+                            regimen = item["regimen"].ToString();
+                        }
+                        else
+                        {
+                           regimen = String.Empty;
+                        }
+                        if (item.ContainsKey("dateLastUsed")
+                               && item["dateLastUsed"] != null
+                           
+                                   )
+                        {
+                            dateLastUsed = Convert.ToDateTime(item["dateLastUsed"]);
+                        }
+                        else
+                        {
+                            dateLastUsed = DateTime.MinValue;
+                        }
+
+                        _result = patientHivHistory.AddPatientArtUseHistory(id, patientId, patientMasterVisitId, treatment.ToString(),purpose.ToString(), regimen.ToString(),dateLastUsed, userId);
                     }   
                 }
                 else
                 {
                     foreach (var item in artuse)
                     {
-                        _result = patientHivHistory.UpdatePatientArtUseHistory(id, patientId, patientMasterVisitId, item.treatment, item.purpose, item.regimen, item.dateLastUsed, userId);
+                        string treatment;
+                        string purpose;
+                        string regimen;
+                        DateTime dateLastUsed;
+                        if (item.ContainsKey("treatment")
+                                && item["treatment"] != null
+                            && !string.IsNullOrEmpty(item["treatment"].ToString())
+                                    )
+                        {
+                            treatment = item["treatment"].ToString();
+                        }
+                        else
+                        {
+                            treatment = String.Empty;
+                        }
+                        if (item.ContainsKey("purpose")
+                                 && item["purpose"] != null
+                             && !string.IsNullOrEmpty(item["purpose"].ToString())
+                                     )
+                        {
+                            purpose = item["purpose"].ToString();
+                        }
+                        else
+                        {
+                            purpose = String.Empty;
+                        }
+
+                        if (item.ContainsKey("regimen")
+                                && item["regimen"] != null
+                            && !string.IsNullOrEmpty(item["regimen"].ToString())
+                                    )
+                        {
+                            regimen = item["regimen"].ToString();
+                        }
+                        else
+                        {
+                            regimen = String.Empty;
+                        }
+                        if (item.ContainsKey("dateLastUsed")
+                               && item["dateLastUsed"] != null
+
+                                   )
+                        {
+                            dateLastUsed = Convert.ToDateTime(item["dateLastUsed"]);
+                        }
+                        else
+                        {
+                            dateLastUsed = DateTime.MinValue;
+                        }
+
+
+                        _result = patientHivHistory.UpdatePatientArtUseHistory(id, patientId, patientMasterVisitId, treatment.ToString(), purpose.ToString(), regimen.ToString(), dateLastUsed, userId);
                     }
                 }
                 if (_result > 0)

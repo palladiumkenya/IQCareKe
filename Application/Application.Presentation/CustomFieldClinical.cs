@@ -1,13 +1,12 @@
+using Interface.Service;
 using System;
-using System.Data;
-using System.Collections;
-using System.Web.UI;
-using System.Web.UI.WebControls;
-using System.Web.UI.HtmlControls;  
 using System.Collections.Generic;
+using System.Data;
 using System.Text;
 using System.Web;
-using Interface.Service;
+using System.Web.UI;
+using System.Web.UI.HtmlControls;
+using System.Web.UI.WebControls;
 
 
 
@@ -887,7 +886,43 @@ namespace Application.Presentation
             }
         }
 
-        private static Dictionary<int, string> GetUserList()
+        public static Dictionary<int, string> GetUsers()
+        {
+            
+                Dictionary<int, string> userList = new Dictionary<int, string>();
+                ICommonData commonData = (ICommonData)ObjectFactory.CreateInstance("BusinessProcess.Service.BCommonData,BusinessProcess.Service");
+                DataTable dtUsers = commonData.getUserList();
+                //DataSet WriteXMLDS = new DataSet();
+
+                try
+                {
+                    //DataSet dataSet = new DataSet();
+                    //string xmlFilesPath = string.Empty;
+
+                    //if (!string.IsNullOrEmpty(ConfigurationManager.AppSettings["XMLFilesPath"].ToString()))
+                    //{
+                    //xmlFilesPath = ConfigurationManager.AppSettings["XMLFilesPath"].ToString();
+                    //}
+                    //if (!string.IsNullOrEmpty(xmlFilesPath))
+                    //{
+                    //  userList.Add(0, "Select");
+                    //                    string allMaster = xmlFilesPath + "AllMasters.con";
+                    //                  dataSet.ReadXml(allMaster);
+                    foreach (DataRow row in dtUsers.Rows)
+                    {
+                        string val = row["UserName"].ToString() + " - " + row["Designation"].ToString();
+                        userList.Add(Convert.ToInt32(row["UserID"].ToString()), val);
+                    }
+                    //}
+                }
+                catch
+                {
+                    userList = new Dictionary<int, string>();
+                }
+                return userList;
+
+            }
+       private static Dictionary<int, string> GetUserList()
         {
             Dictionary<int, string> userList = new Dictionary<int, string>();
             ICommonData commonData = (ICommonData)ObjectFactory.CreateInstance("BusinessProcess.Service.BCommonData,BusinessProcess.Service");
@@ -915,12 +950,14 @@ namespace Application.Presentation
                 }
                 //}
             }
-            catch (Exception ex)
+            catch 
             {
                 userList = new Dictionary<int, string>();
             }
             return userList;
         }
+
+       
 
         #region "To be Deleted"
         public void CreateCustomControls(Panel panelCustomList, string pnlName, ref StringBuilder sbParameter, DataRow theRow, ref string tableName, string frmPrefix, Int32 rowindex)

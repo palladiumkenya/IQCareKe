@@ -86,6 +86,12 @@ namespace IQCare.CCC.UILogic
         }
 
 
+        public List<PatientCareEnding>  GetPatientCareEndingByVisitId(int patientId,int patientmasterVisitId)
+        {
+         
+                return mgr.GetPatientCareEndingsByVisitId(patientId, patientmasterVisitId);
+            
+        }
 
         public List<PatientCareEnding> GetPatientCareEndings(int patientId)
         {

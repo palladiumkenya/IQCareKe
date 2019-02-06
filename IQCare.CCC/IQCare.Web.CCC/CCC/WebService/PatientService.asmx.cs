@@ -116,6 +116,24 @@ namespace IQCare.Web.CCC.WebService
         }
 
         [WebMethod(EnableSession = true)]
+        public PatientVital GetCurrentVitalsByPatientId(int patientId)
+        {
+            try
+            {
+                PatientEncounterManager patientEncounterManager = new PatientEncounterManager();
+
+                var vital = new PatientVitalsManager();
+                PatientVital patientVital = vital.GetByPatientId(patientId);
+                return patientVital;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+        }
+
+        [WebMethod(EnableSession = true)]
         public string AddPatientScreening(int patientId, int patientMasterVisitid,DateTime visitDate, int screeningTypeId, bool screeningDone, DateTime screeningDate, int screeningCategoryId, int screeningValueId, string comment, int userId)
         {
             try
@@ -143,10 +161,21 @@ namespace IQCare.Web.CCC.WebService
                     patientScreening.Id = screening.CheckIfPatientScreeningExists((Int32)patientScreening.PatientId, (DateTime)patientScreening.VisitDate, (Int32)patientScreening.ScreeningCategoryId, (Int32)patientScreening.ScreeningTypeId);
                     if ( patientScreening.Id <= 0)
                     {
-                        Result = screening.AddPatientScreening(patientScreening.PatientId, patientScreening.PatientMasterVisitId, (DateTime)patientScreening.VisitDate, (Int32)patientScreening.ScreeningTypeId, (bool)patientScreening.ScreeningDone, (DateTime)patientScreening.ScreeningDate, (Int32)patientScreening.ScreeningCategoryId, patientScreening.ScreeningValueId, patientScreening.Comment, userId);
+                        string comment="";
+                        if(patientScreening.Comment=="null")
+                        {
+                            comment = "";
+                        }
+                        Result = screening.AddPatientScreening(patientScreening.PatientId, patientScreening.PatientMasterVisitId, (DateTime)patientScreening.VisitDate, (Int32)patientScreening.ScreeningTypeId, (bool)patientScreening.ScreeningDone, (DateTime)patientScreening.ScreeningDate, (Int32)patientScreening.ScreeningCategoryId, patientScreening.ScreeningValueId, comment, userId);
                     }
                     else {
-                        Result = screening.UpdatePatientScreening(patientScreening.PatientId, (DateTime)patientScreening.VisitDate, (Int32)patientScreening.ScreeningTypeId, (bool)patientScreening.ScreeningDone, (DateTime)patientScreening.ScreeningDate, (Int32)patientScreening.ScreeningCategoryId, patientScreening.ScreeningValueId, patientScreening.Comment);
+
+                        string comment = "";
+                        if (patientScreening.Comment == "null")
+                        {
+                            comment = "";
+                        }
+                        Result = screening.UpdatePatientScreening(patientScreening.Id, (DateTime)patientScreening.VisitDate,patientScreening.PatientId,patientScreening.PatientMasterVisitId, (Int32)patientScreening.ScreeningTypeId, (bool)patientScreening.ScreeningDone, (DateTime)patientScreening.ScreeningDate, (Int32)patientScreening.ScreeningCategoryId, patientScreening.ScreeningValueId, comment);
                     }
                 }
                 Msg = (Result > 0) ? "Patient Screening Updated Successfully" : "";
@@ -181,26 +210,35 @@ namespace IQCare.Web.CCC.WebService
         public string AddPatientAppointment(int patientId, int patientMasterVisitId, DateTime appointmentDate, string description, int reasonId, int serviceAreaId, int statusId, int differentiatedCareId, int userId)
         {
             
-            PatientAppointment patientAppointment = new PatientAppointment()
-            {
-                PatientId = patientId,
-                PatientMasterVisitId = patientMasterVisitId,
-                AppointmentDate = appointmentDate,
-                Description = description,
-                DifferentiatedCareId = differentiatedCareId,
-                ReasonId = reasonId,
-                ServiceAreaId = serviceAreaId,
-                StatusId = statusId,
-                CreatedBy = userId,
-                CreateDate = DateTime.Now
-            };
+           
             try
             {
-                var appointment = new PatientAppointmentManager();
-                Result = appointment.AddPatientAppointments(patientAppointment);
-                if (Result > 0)
+                if (appointmentDate != DateTime.MinValue)
                 {
-                    Msg = "Patient appointment Added Successfully!";
+                    PatientAppointment patientAppointment = new PatientAppointment()
+                    {
+                        PatientId = patientId,
+                        PatientMasterVisitId = patientMasterVisitId,
+                        AppointmentDate = appointmentDate,
+                        Description = description,
+                        DifferentiatedCareId = differentiatedCareId,
+                        ReasonId = reasonId,
+                        ServiceAreaId = serviceAreaId,
+                        StatusId = statusId,
+                        CreatedBy = userId,
+                        CreateDate = DateTime.Now
+                    };
+
+                    var appointment = new PatientAppointmentManager();
+                    Result = appointment.AddPatientAppointments(patientAppointment);
+                    if (Result > 0)
+                    {
+                        Msg = "Patient appointment Added Successfully!";
+                    }
+                }
+                else
+                {
+                    Msg = "Patient appointment not Saved Successfully";
                 }
             }
             catch (Exception e)
@@ -447,23 +485,30 @@ namespace IQCare.Web.CCC.WebService
         }
 
         [WebMethod]
+        public List<PatientConsent> GetPatientConsentByType(int patientId, int consentType)
+        {
+            try
+            {
+                var consent = new PatientConsentManager();
+                return consent.GetPatientConsentByType(patientId, consentType);
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+        }
+
+        [WebMethod]
         public string AddPatientConsent(int patientId, int patientMasterVisitId, int consentType, DateTime consentDate)
         {
             // Todo properly save service area. Remove hack
             ILookupManager mgr = (ILookupManager)ObjectFactory.CreateInstance("BusinessProcess.CCC.BLookupManager, BusinessProcess.CCC");
-            int serviceArea = 0;
-            List<LookupItemView> areas = mgr.GetLookItemByGroup("ServiceArea");
-            var sa = areas.FirstOrDefault();
-            if (sa != null)
-            {
-                serviceArea = sa.ItemId;
-            }
 
             PatientConsent patientConsent = new PatientConsent()
             {
                 PatientId = patientId,
                 PatientMasterVisitId = patientMasterVisitId,
-                ServiceAreaId = serviceArea,
+                ServiceAreaId = 1,
                 ConsentType = consentType,
                 ConsentDate = consentDate
             };
@@ -482,6 +527,8 @@ namespace IQCare.Web.CCC.WebService
             }
             return Msg;
         }
+
+
 
         [WebMethod]
         public IEnumerable<PatientAppointmentDisplay> GetPatientAppointments(string patientId)
@@ -944,7 +991,8 @@ namespace IQCare.Web.CCC.WebService
         [WebMethod(EnableSession = true)]
         public string getAppointmentId(int PatientMasterVisitId, DateTime date)
         {
-            var appointmentManager = new PatientAppointmentManager();
+           var appointmentManager = new PatientAppointmentManager();
+           string PatientId = Session["PatientPk"].ToString();
             PatientAppointment[] pAppointment = appointmentManager.GetAppointmentId(Convert.ToInt32(Session["PatientPK"]),PatientMasterVisitId, date).ToArray();
             //PatientClinicalNotes[] patientNotesData = PCN.getPatientClinicalNotesByVisitId(PatientId, PatientMasterVisitId).ToArray();
             string jsonNotesObject = "[]";

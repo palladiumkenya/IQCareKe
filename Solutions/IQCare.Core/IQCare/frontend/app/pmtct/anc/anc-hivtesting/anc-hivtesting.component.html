@@ -1,0 +1,180 @@
+<div class="col-lg-12 col-sm-12 col-xs-12">
+    <div class="form-title">
+        <span class="mat-accent"> HIV Testing </span>
+    </div>
+</div>
+
+<div class="row">
+    <form class="form-group" [formGroup]="HivTestingForm">
+        <div class="row">
+            <div class="col-lg-4 col-sm-4 col-xs-12">
+                <mat-form-field class="col-lg-12 col-sm-12 col-xs-12">
+                    <mat-label>Before  first ANC  visit</mat-label>
+                    <mat-select id="hivStatusBeforeFirstVisit" name="hivStatusBeforeFirstVisit" formControlName="hivStatusBeforeFirstVisit"
+                        required>
+                        <mat-option [value]=""></mat-option>
+                        <mat-option *ngFor="let ancHivStatusInitialVisitOption of ancHivStatusInitialVisitOptions"
+                            [value]="ancHivStatusInitialVisitOption.itemId" (onSelectionChange)="onHivStatusBeforeFirstVisitChange($event)">
+                            {{ancHivStatusInitialVisitOption.itemName}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-4 col-sm-4 col-xs-12">
+                <mat-form-field class="col-lg-12 col-sm-12 col-xs-12">
+                    <mat-label>HIV testing done in ANC</mat-label>
+                    <mat-select id="hivTestingDone" name="hivTestingDone" formControlName="hivTestingDone" required>
+                        <mat-option [value]=""></mat-option>
+                        <mat-option *ngFor="let yesnoOption of yesnoOptions" [value]="yesnoOption.itemId"
+                            (onSelectionChange)="onHivTestDoneChange($event)">
+                            {{yesnoOption.itemName}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+
+
+            <div class="col-lg-4 col-sm-4 col-xs-12">
+                <button mat-raised-button class="mat-primary" (click)="AddHivTests()" *ngIf="isHivTestingDone">
+                    <span class="fa fa-plus-circle">
+                        Add New HIV Test
+                    </span>
+                </button>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-4 col-sm-4 col-xs-12">
+                <mat-form-field class="col-lg-12 col-sm-12 col-xs-12">
+                    <mat-label>HIV testing done during this visit</mat-label>
+                    <mat-select formControlName="testType" required>
+                        <mat-option [value]=""></mat-option>
+                        <mat-option [value]="1" id="initial">Initial Test</mat-option>
+                        <mat-option [value]="2" id="repeat">Repeat Test</mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+
+            <div class="col-lg-4 col-sm-4 col-xs-12">
+                <mat-form-field class="col-lg-12 col-sm-12 col-xs-12">
+                    <mat-label>Final Result</mat-label>
+                    <mat-select formControlName="finalTestResult" required>
+                        <mat-option [value]=""></mat-option>
+                        <mat-option *ngFor="let hivFinalResultsOption of hivFinalResultsOptions" [value]="hivFinalResultsOption.itemId">
+                            {{hivFinalResultsOption.itemName}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+        </div>
+    </form>
+</div>
+
+<div class="row">&nbsp;&nbsp;</div>
+
+<div class="row">&nbsp;&nbsp;</div>
+
+<div class="row">
+    <div class="example-container mat-elevation-z0">
+
+        <mat-table #table [dataSource]="dataSource">
+            <!-- Position Column -->
+            <ng-container matColumnDef="testdate">
+                <mat-header-cell *matHeaderCellDef><strong> Date </strong> </mat-header-cell>
+                <mat-cell *matCellDef="let HivTestingTableData">
+                    {{ HivTestingTableData.testdate | date: 'dd-MMM-yyyy' }}
+                </mat-cell>
+            </ng-container>
+
+            <!-- Name Column -->
+            <ng-container matColumnDef="testtype">
+                <mat-header-cell *matHeaderCellDef> <strong> Test </strong> </mat-header-cell>
+                <mat-cell *matCellDef="let HivTestingTableData">
+                    {{ HivTestingTableData.testtype.itemName }}
+                </mat-cell>
+            </ng-container>
+
+            <!-- Weight Column -->
+            <ng-container matColumnDef="kitname">
+                <mat-header-cell *matHeaderCellDef> <strong> Kit Name </strong> </mat-header-cell>
+                <mat-cell *matCellDef="let HivTestingTableData">
+                    {{ HivTestingTableData.kitname.itemName }}
+                </mat-cell>
+            </ng-container>
+
+            <!-- Symbol Column -->
+            <ng-container matColumnDef="lotnumber">
+                <mat-header-cell *matHeaderCellDef><strong> Lot Number </strong> </mat-header-cell>
+                <mat-cell *matCellDef="let HivTestingTableData">
+                    {{ HivTestingTableData.lotnumber }}
+                </mat-cell>
+            </ng-container>
+
+            <!-- Symbol Column -->
+            <ng-container matColumnDef="expirydate">
+                <mat-header-cell *matHeaderCellDef><strong> Expiry Date </strong> </mat-header-cell>
+                <mat-cell *matCellDef="let HivTestingTableData">
+                    {{ HivTestingTableData.expirydate | date: 'dd-MMM-yyyy' }}
+                </mat-cell>
+            </ng-container>
+
+
+            <!-- Symbol Column -->
+            <ng-container matColumnDef="testresult">
+                <mat-header-cell *matHeaderCellDef><strong> Result </strong> </mat-header-cell>
+                <mat-cell *matCellDef="let HivTestingTableData">
+                    {{ HivTestingTableData.testresult.itemName }}
+                </mat-cell>
+            </ng-container>
+
+            <!-- Symbol Column -->
+            <ng-container matColumnDef="nexthivtest">
+                <mat-header-cell *matHeaderCellDef><strong> Next HIV Test </strong> </mat-header-cell>
+                <mat-cell *matCellDef="let HivTestingTableData">
+                    {{ HivTestingTableData.nexthivtest | date: 'dd-MMM-yyyy' }}
+                </mat-cell>
+            </ng-container>
+
+
+            <!-- Symbol Column -->
+            <ng-container matColumnDef="testpoint">
+                <mat-header-cell *matHeaderCellDef><strong> Testing Point </strong> </mat-header-cell>
+                <mat-cell *matCellDef="let HivTestingTableData">
+                    {{ HivTestingTableData.testpoint }}
+                </mat-cell>
+            </ng-container>
+
+
+            <!-- actions -->
+            <ng-container matColumnDef="action">
+                <mat-header-cell *matHeaderCellDef><strong class="fa fa-cog"> Action</strong></mat-header-cell>
+                <mat-cell *matCellDef="let row">
+                    <button mat-raised-button class="mat-accent" (click)="onRowClicked(row)">
+                        <span class="fa fa-trash-o">
+                            Delete
+                        </span>
+                    </button>
+                </mat-cell>
+            </ng-container>
+
+
+            <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+            <mat-row *matRowDef="let row; columns: displayedColumns">
+            </mat-row>
+        </mat-table>
+    </div>
+</div>
+
+<div class="row">&nbsp;&nbsp;</div>
+
+<!--<div class="row">
+    <div class="col-md-12">
+        <div>
+            <button mat-raised-button class="mat-primary" mat-button matStepperNext style="margin-right:5px" [disabled]="!HivTestingForm.valid">Next</button>
+            <button mat-raised-button class="mat-accent" matStepperPrevious>Previous</button>
+        </div>
+    </div>
+</div> -->

@@ -14,5 +14,7 @@ namespace Interface.CCC.Encounter
         List<PatientCareEnding> GetPatientCareEndings(int patientId);
         string PatientCareEndingStatus(int patientId);
         int ResetPatientCareEnding(PatientCareEnding patientCareEnding);
+
+        List<PatientCareEnding> GetPatientCareEndingsByVisitId(int patientId, int patientmastervisitid);
     }
 }

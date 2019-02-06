@@ -11,7 +11,7 @@ namespace IQCare.CCC.UILogic.Triage
         private IPatientPregnancyManager _PatientPregnancy = (IPatientPregnancyManager)ObjectFactory.CreateInstance("BusinessProcess.CCC.Triage.BPatientPregnancyManager, BusinessProcess.CCC");
 
 
-        public int AddPatientPregnancy(int patientId,int patientMasterVisitId,DateTime LMP,DateTime EDD,string gravidae,string parity,int outcome,DateTime dateOfOutcome,int userId)
+        public int AddPatientPregnancy(int patientId,int patientMasterVisitId,DateTime LMP,DateTime EDD,int? gravidae,int? parity,int? outcome,DateTime dateOfOutcome,int userId)
         {
             try
             {
@@ -22,7 +22,7 @@ namespace IQCare.CCC.UILogic.Triage
                     LMP = LMP,
                     EDD = EDD,
                     Gravidae = gravidae,
-                    parity = parity,
+                    Parity = parity,
                     Outcome = outcome,
                     DateOfOutcome = dateOfOutcome,
                     CreatedBy=userId
@@ -40,7 +40,8 @@ namespace IQCare.CCC.UILogic.Triage
         {
             try
             {
-                return _PatientPregnancy.CheckIfPatientPregnancyExisists(patientId);
+                int pregnancyId = _PatientPregnancy.CheckIfPatientPregnancyExisists(patientId);
+                return pregnancyId;
             }
             catch (Exception)
             {
@@ -66,6 +67,7 @@ namespace IQCare.CCC.UILogic.Triage
         {
             try
             {
+
                 return _PatientPregnancy.GetPatientPregnancy(patientId);
             }
             catch (Exception)
@@ -75,7 +77,7 @@ namespace IQCare.CCC.UILogic.Triage
             }
         }
 
-        public int UpdatePatientPreganacy(int id, DateTime LMP, DateTime EDD, string gravidae, string parity, int outcome, DateTime dateOfOutcome)
+        public int UpdatePatientPreganacy(int id, DateTime LMP, DateTime EDD, int gravidae, int parity, int outcome, DateTime dateOfOutcome)
         {
             try
             {
@@ -85,7 +87,7 @@ namespace IQCare.CCC.UILogic.Triage
                     LMP = LMP,
                     EDD = EDD,
                     Gravidae = gravidae,
-                    parity = parity,
+                    Parity = parity,
                     Outcome = outcome,
                     DateOfOutcome = dateOfOutcome
                 };

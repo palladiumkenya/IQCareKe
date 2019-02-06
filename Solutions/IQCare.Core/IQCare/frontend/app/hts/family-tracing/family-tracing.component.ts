@@ -1,17 +1,17 @@
-import {Component, NgZone, OnInit} from '@angular/core';
-import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
-import {Tracing} from '../_models/tracing';
-import {ActivatedRoute, Router} from '@angular/router';
-import {LookupItemView} from '../../shared/_models/LookupItemView';
-import {FamilyTracing} from '../_models/familyTracing';
-import {FamilyService} from '../_services/family.service';
-import {SnotifyService} from 'ng-snotify';
-import {NotificationService} from '../../shared/_services/notification.service';
+import { Component, NgZone, OnInit } from '@angular/core';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { Tracing } from '../_models/tracing';
+import { ActivatedRoute, Router } from '@angular/router';
+import { LookupItemView } from '../../shared/_models/LookupItemView';
+import { FamilyTracing } from '../_models/familyTracing';
+import { FamilyService } from '../_services/family.service';
+import { SnotifyService } from 'ng-snotify';
+import { NotificationService } from '../../shared/_services/notification.service';
 
 @Component({
-  selector: 'app-family-tracing',
-  templateUrl: './family-tracing.component.html',
-  styleUrls: ['./family-tracing.component.css']
+    selector: 'app-family-tracing',
+    templateUrl: './family-tracing.component.html',
+    styleUrls: ['./family-tracing.component.css']
 })
 export class FamilyTracingComponent implements OnInit {
     formGroup: FormGroup;
@@ -22,14 +22,18 @@ export class FamilyTracingComponent implements OnInit {
     consentToTestingOptions: LookupItemView[];
     tracingTypeOptions: LookupItemView[];
 
+    maxDate: Date;
+
 
     constructor(private _formBuilder: FormBuilder,
-                private route: ActivatedRoute,
-                private familyService: FamilyService,
-                private snotifyService: SnotifyService,
-                private notificationService: NotificationService,
-                private router: Router,
-                public zone: NgZone) { }
+        private route: ActivatedRoute,
+        private familyService: FamilyService,
+        private snotifyService: SnotifyService,
+        private notificationService: NotificationService,
+        private router: Router,
+        public zone: NgZone) {
+        this.maxDate = new Date();
+    }
 
     ngOnInit() {
         this.tracing = new FamilyTracing();
@@ -66,7 +70,7 @@ export class FamilyTracingComponent implements OnInit {
     onSubmit() {
         // console.log(this.formGroup);
         if (this.formGroup.valid) {
-            this.tracing = {...this.tracing, ...this.formGroup.value};
+            this.tracing = { ...this.tracing, ...this.formGroup.value };
 
             const tracingTypeValue = this.tracingTypeOptions.filter(function (obj) {
                 return obj.itemName == 'Family';
@@ -78,7 +82,7 @@ export class FamilyTracingComponent implements OnInit {
                 this.snotifyService.success('Successfully Traced Family Member', 'Family Tracing',
                     this.notificationService.getConfig());
 
-                this.zone.run(() => { this.router.navigate(['/hts/family'], { relativeTo: this.route}); });
+                this.zone.run(() => { this.router.navigate(['/hts/family/familytracinglist'], { relativeTo: this.route }); });
             }, err => {
                 this.snotifyService.error('Error saving family tracing ' + err,
                     'Family Tracing', this.notificationService.getConfig());
@@ -93,13 +97,13 @@ export class FamilyTracingComponent implements OnInit {
         console.log(this.formGroup.value.outcome);
         const selectedItem = this.tracingOutcomeOptions.filter(obj => obj.itemId == this.formGroup.value.outcome);
         if (selectedItem.length > 0 && selectedItem[0].itemName == 'Not Contacted') {
-            this.formGroup.controls.consent.disable({onlySelf: true});
+            this.formGroup.controls.consent.disable({ onlySelf: true });
             this.formGroup.controls.consent.setValue('');
-            this.formGroup.controls.dateBooked.disable({onlySelf: true});
+            this.formGroup.controls.dateBooked.disable({ onlySelf: true });
             this.formGroup.controls.dateBooked.setValue('');
         } else {
-            this.formGroup.controls.consent.enable({onlySelf: false});
-            this.formGroup.controls.dateBooked.enable({onlySelf: false});
+            this.formGroup.controls.consent.enable({ onlySelf: false });
+            this.formGroup.controls.dateBooked.enable({ onlySelf: false });
         }
     }
 }

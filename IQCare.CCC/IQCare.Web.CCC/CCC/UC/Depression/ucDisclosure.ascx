@@ -1,5 +1,5 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="ucDisclosure.ascx.cs" Inherits="IQCare.Web.CCC.UC.Depression.ucDisclosure" %>
-<div class="col-md-12 form-group">
+<div class="col-md-12 form-group" >
 	<div class="col-md-12" id="disclosurescreening">
         <div class="panel panel-info">
 			<div class="panel-body">
@@ -9,11 +9,28 @@
 				<div class="col-md-12 form-group" id="disclosurequestionscontainer">
                     <asp:PlaceHolder ID="PHDisclosureQuestions" runat="server"></asp:PlaceHolder>
 				</div>
+               
+                     
+         
 			</div>
+
+           
 		</div>
+       
+    </div>
+    <div class="actions" style="display:block;">
+     <button type="button" id="submitdata" class="btn btn-primary btn-next" data-last="Complete">
+         Complete
+         </button>
     </div>
 </div>
 <script type="text/javascript">
+     
+    $("#submitdata").click(function () {
+
+           addUpdateDisclosureData();
+
+    });
     $("#disclosurescreening input:radio").change(function (evt, data) {
         var disclosedToRbList = $(".disclosedToList").closest("div .col-md-6").attr('id');
         $("#disclosurescreening input[type=radio]:checked").each(function () {
@@ -43,12 +60,12 @@
             }
         });
     });
-    $("#scmyWizard").on("actionclicked.fu.wizard", function (evt, data) {
-        var currentStep = data.step;
-        if (currentStep == 4 || currentStep == 3) {
-            addUpdateDisclosureData();
-        }
-    });
+    //$("#scmyWizard").on("actionclicked.fu.wizard", function (evt, data) {
+    //    var currentStep = data.step;
+    //    if (currentStep == 4 || currentStep == 3) {
+    //        addUpdateDisclosureData();
+    //    }
+    //});
     function addUpdateDisclosureData()
     {
         var error = 0;

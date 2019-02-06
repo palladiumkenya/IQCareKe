@@ -3,6 +3,7 @@ export class Encounter {
     PersonId?: number;
     ProviderId?: number;
     PatientEncounterID?: number;
+    PatientMasterVisitId?: number;
     PatientId?: number;
     ServiceAreaId?: number;
     EncounterDate: string;
@@ -21,4 +22,5 @@ export class Encounter {
     TbScreening?: number;
     GeoLocation?: string;
     EncounterType: number;
+    HivCounsellingDone: number;
 }

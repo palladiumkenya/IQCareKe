@@ -1,0 +1,52 @@
+<h2 mat-dialog-title>{{title}}</h2>
+
+<mat-divider></mat-divider>
+<br>
+
+<form [formGroup]="ImmunizationHistoryFormGroup">
+    <mat-dialog-content>
+        <div class="row">
+            <div class="col-md-3 col-xs-12">
+                <mat-form-field class="col-md-12">
+                    <mat-select formControlName="period" placeholder="Period" required minlength="1">
+                        <mat-option value=""> Select</mat-option>
+                        <mat-option *ngFor="let immunizationperiod of immunizationperiods" [value]="immunizationperiod">
+                            {{ immunizationperiod.itemName }}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+            <div class="col-md-3 col-xs-12">
+                <mat-form-field class="col-md-12">
+                    <mat-select formControlName="immunizationGiven" placeholder="immunization Given" required minlength="1">
+                        <mat-option value=""> Select</mat-option>
+                        <mat-option *ngFor="let vaccine of vaccines" [value]="vaccine">
+                            {{ vaccine.itemName }}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+            <div class="col-md-3 col-xs-12">
+                <mat-form-field class="col-md-12">
+                    <input formControlName="dateImmunized" [max]="maxDate" matInput (focus)="dateImmunized.open()"
+                        [matDatepicker]="dateImmunized" placeholder="Date Immunized">
+                    <mat-datepicker-toggle matSuffix [for]="dateImmunized"></mat-datepicker-toggle>
+                    <mat-datepicker #dateImmunized></mat-datepicker>
+                </mat-form-field>
+            </div>
+            <div class="col-md-2 col-xs-12">
+                <mat-form-field class="col-md-12">
+                    <input formControlName="nextSchedule" [min]="maxDate" matInput (focus)="nextSchedule.open()"
+                        [matDatepicker]="nextSchedule" placeholder="Next Schedule">
+                    <mat-datepicker-toggle matSuffix [for]="nextSchedule"></mat-datepicker-toggle>
+                    <mat-datepicker #nextSchedule></mat-datepicker>
+                </mat-form-field>
+            </div>
+        </div>
+    </mat-dialog-content>
+
+    <mat-dialog-actions>
+        <button class="mat-raised-button" (click)="close()">Close</button>
+        <button class="mat-raised-button mat-primary" (click)="save()">Save</button>
+    </mat-dialog-actions>
+</form>

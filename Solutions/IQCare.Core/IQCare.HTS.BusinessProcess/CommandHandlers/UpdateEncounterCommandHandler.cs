@@ -7,6 +7,7 @@ using IQCare.Common.Core.Models;
 using IQCare.HTS.BusinessProcess.Commands;
 using IQCare.HTS.Core.Model;
 using IQCare.HTS.Infrastructure;
+using IQCare.Library;
 using MediatR;
 using Serilog;
 
@@ -41,6 +42,7 @@ namespace IQCare.HTS.BusinessProcess.CommandHandlers
                         htsEncounter.TestEntryPoint = request.Encounter.TestEntryPoint;
                         htsEncounter.TestingStrategy = request.Encounter.TestingStrategy;
                         htsEncounter.EncounterType = request.Encounter.EncounterType;
+                        htsEncounter.HivCounsellingDone = request.Encounter.HivCounsellingDone;
 
 
                         _unitOfWork.Repository<HtsEncounter>().Update(htsEncounter);

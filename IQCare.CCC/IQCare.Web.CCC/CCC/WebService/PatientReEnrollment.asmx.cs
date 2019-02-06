@@ -36,29 +36,47 @@ namespace IQCare.Web.CCC.WebService
                 var patientReEnrollmentManager = new PatientReEnrollmentManager();
                 var patientCareEndingManager = new PatientCareEndingManager();
                 var patientEnrollmentManager = new PatientEnrollmentManager();
+                var lookupLogic = new LookupLogic();
 
                 int patientId = Convert.ToInt32(Session["PatientPK"].ToString());
                 DateTime enrollmentDate = DateTime.Parse(reEnrollmentDate);
 
                 int reEnrollmentId = patientReEnrollmentManager.AddPatientReEnrollment(patientId, enrollmentDate);
+
                 List<PatientCareEnding> careEndings = patientCareEndingManager.GetPatientCareEndings(patientId);
+                var careEndOptions = lookupLogic.GetItemIdByGroupAndItemName("CareEnded", "Death");
+                int deathId = careEndOptions[0].ItemId;
                 List<PatientEntityEnrollment> enrollmentList = patientEnrollmentManager.GetPatientByPatientIdCareEnded(patientId);
                 if (reEnrollmentId > 0)
                 {
-                    foreach (var itemCareEnding in careEndings)
+                    if (careEndings.Count > 0)
                     {
-                        itemCareEnding.DeleteFlag = true;
-                        itemCareEnding.Active = true;
-                        patientCareEndingManager.ResetPatientCareEnding(itemCareEnding);
-                    }
 
-                    if (enrollmentList.Count > 0)
-                    {
-                        enrollmentList[0].CareEnded = false;
-                        patientEnrollmentManager.updatePatientEnrollment(enrollmentList[0]);
-                    }
+                        var exitStatus = careEndings.Find(x => x.ExitReason == deathId);
 
-                    msg = "Patient has been re-enrolled";
+                        if (exitStatus!=null)
+                        {
+                            msg = "death";
+                        
+                        }
+                        else
+                        {
+                            foreach (var itemCareEnding in careEndings)
+                            {
+                                itemCareEnding.DeleteFlag = true;
+                                itemCareEnding.Active = true;
+                                patientCareEndingManager.ResetPatientCareEnding(itemCareEnding);
+                            }
+
+                            if (enrollmentList.Count > 0)
+                            {
+                                enrollmentList[0].CareEnded = false;
+                                patientEnrollmentManager.updatePatientEnrollment(enrollmentList[0]);
+                            }
+
+                            msg = "Patient has been re-enrolled";
+                        }  
+                    }                   
                 }
             }
             catch (Exception)

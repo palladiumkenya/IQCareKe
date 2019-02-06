@@ -1,11 +1,11 @@
-﻿using System;
-using System.Threading;
-using System.Threading.Tasks;
-using IQCare.Common.BusinessProcess.Commands.ClientLookup;
+﻿using IQCare.Common.BusinessProcess.Commands.ClientLookup;
 using IQCare.Common.Core.Models;
 using IQCare.Common.Infrastructure;
+using IQCare.Library;
 using MediatR;
-using Microsoft.EntityFrameworkCore;
+using System;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace IQCare.Common.BusinessProcess.CommandHandlers.ClientLookup
 {
