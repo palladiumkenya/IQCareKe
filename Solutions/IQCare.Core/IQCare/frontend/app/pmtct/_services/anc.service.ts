@@ -78,7 +78,7 @@ export class AncService {
     public EditANCVisitDetails(visitDetailsCommand: any): Observable<any> {
         return this.http.put<any>(this.API_URL + '/api/AncVisitDetails/put', JSON.stringify(visitDetailsCommand),
             httpOptions).pipe(
-            tap(saveVisitDetails => this.errorHandler.log(`successfully EDited ANC visit details`)),
+            tap(saveVisitDetails => this.errorHandler.log(`successfully Edited ANC visit details`)),
             catchError(this.errorHandler.handleError<any>('Error Editing ANC visit details'))
         );
     }
@@ -103,30 +103,30 @@ export class AncService {
     public savePatientEducation(patientEducationCommand: PatientEducationCommand): Observable<PatientEducationCommand> {
         return this.http.post<any>(this.API_URL + '' + this._url_pedc, JSON.stringify(patientEducationCommand),
             httpOptions).pipe(
-                tap(savePatientEducation => this.errorHandler.log('Error posting patientEducationCommand')),
-                catchError(this.errorHandler.handleError<any>('PatientEducationExaminationController'))
+                tap(savePatientEducation => this.errorHandler.log('Successfully saved patient education')),
+                catchError(this.errorHandler.handleError<any>('Error in saving Patient Education'))
             );
     }
 
     public saveClientMonitoring(clientMonitoringCommand: ClientMonitoringCommand): Observable<ClientMonitoringCommand> {
         return this.http.put<any>(this.API_URL + '' + this._url_cm, JSON.stringify(clientMonitoringCommand), httpOptions).pipe(
-            tap(saveClientMonitoring => this.errorHandler.log('Error posting client monitoring Command')),
-            catchError(this.errorHandler.handleError<any>('ClientMonitoringController' + this.API_URL + '' + this._url_pedc))
+            tap(saveClientMonitoring => this.errorHandler.log('Successfully saved client monitoring')),
+            catchError(this.errorHandler.handleError<any>('Error in saving ' + this.API_URL + '' + this._url_pedc))
         );
     }
 
     public EditClientMonitoring(clientMonitoringCommand: ClientMonitoringCommand): Observable<ClientMonitoringCommand> {
         return this.http.post<any>(this.API_URL + '' + this._url_cm, JSON.stringify(clientMonitoringCommand), httpOptions).pipe(
-            tap(saveClientMonitoring => this.errorHandler.log('Error editing client monitoring Command')),
-            catchError(this.errorHandler.handleError<any>('ClientMonitoringController' + this.API_URL + '' + this._url_pedc))
+            tap(saveClientMonitoring => this.errorHandler.log('Successfully edited client monitoring Command')),
+            catchError(this.errorHandler.handleError<any>('Error in Editing client monitoring' + this.API_URL + '' + this._url_pedc))
         );
     }
 
 
     public saveHaartProphylaxis(haartProphylaxisCommand: HaartProphylaxisCommand): Observable<HaartProphylaxisCommand> {
         return this.http.post<any>(this.API_URL + '' + this._url_haart, JSON.stringify(haartProphylaxisCommand), httpOptions).pipe(
-            tap(saveHaartProphylaxis => this.errorHandler.log('Error posting HaartProphylaxis Command')),
-            catchError(this.errorHandler.handleError<any>('HaartProphylaxisController'))
+            tap(saveHaartProphylaxis => this.errorHandler.log('Successfully saved Haart Prophylaxis')),
+            catchError(this.errorHandler.handleError<any>('Error in saving Haart Prophylaxis'))
         );
     }
 
@@ -135,8 +135,8 @@ export class AncService {
             return of([]);
         }
         return this.http.post<any>(this.API_URL + '' + this._url_pci, JSON.stringify(chronicIllnessCommand), httpOptions).pipe(
-            tap(savePatientChronicIllness => this.errorHandler.log('Error posting Patient Chronic Illness Command')),
-            catchError(this.errorHandler.handleError<any>('PatientChronicIllnessController'))
+            tap(savePatientChronicIllness => this.errorHandler.log('Successfully saved chronic illness')),
+            catchError(this.errorHandler.handleError<any>('Error in saving Patient Chronic Illness'))
         );
     }
 
@@ -146,8 +146,8 @@ export class AncService {
         }
         return this.http.post<any>(this.API_PMTCT_URL + '/api/PatientDrugAdministration/Add',
             JSON.stringify(drug), httpOptions).pipe(
-            tap(saveDrugAdministration => this.errorHandler.log('Error posting Patient Drug Administration Command')),
-            catchError(this.errorHandler.handleError<any>('DrugAdministration Controller'))
+            tap(saveDrugAdministration => this.errorHandler.log('Successfully saved Drug Administration')),
+            catchError(this.errorHandler.handleError<any>('Error in saving Drug Administration'))
         );
     }
 
@@ -155,8 +155,8 @@ export class AncService {
     public saveReferral(referralCommand: ReferralAppointmentCommandService): Observable<ReferralAppointmentCommandService> {
 
         return this.http.post<any>(this.API_URL + '' + this._url_ref, JSON.stringify(referralCommand), httpOptions).pipe(
-            tap(saveReferralAppointment => this.errorHandler.log('Error posting saveReferral Command')),
-            catchError(this.errorHandler.handleError<any>('ReferralAppointmentController'))
+            tap(saveReferralAppointment => this.errorHandler.log('Successfully saved Referral')),
+            catchError(this.errorHandler.handleError<any>('Error in saving Patient Referral'))
         );
     }
 
@@ -165,15 +165,15 @@ export class AncService {
             return of([]);
         }
         return this.http.post<any>(this.API_URL + '' + this._url_app, JSON.stringify(appointmentCommand), httpOptions).pipe(
-            tap(saveReferralAppointment => this.errorHandler.log('Error posting Appointment Command')),
-            catchError(this.errorHandler.handleError<any>('ReferralAppointmentController'))
+            tap(saveReferralAppointment => this.errorHandler.log('Successfully saved Patient Appointment')),
+            catchError(this.errorHandler.handleError<any>('Error in saving Patient Appointment'))
         );
     }
 
     public savePreventiveServices(patientPreventiveService: PatientPreventiveService): Observable<PatientPreventiveService> {
         return this.http.post<any>(this.API_URL + '' + this._url_pre, JSON.stringify(patientPreventiveService), httpOptions).pipe(
-            tap(savePreventiveServices => this.errorHandler.log('Error posting Preventive Service Command')),
-            catchError(this.errorHandler.handleError<any>('PreventiveServiceController'))
+            tap(savePreventiveServices => this.errorHandler.log('Successfully saved Preventive Services')),
+            catchError(this.errorHandler.handleError<any>('Error in saving Preventive Services'))
         );
     }
 

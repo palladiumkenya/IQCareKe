@@ -107,7 +107,7 @@
                                         <ng-template matStepLabel><span matTooltip="Referrals & Next Appointment">Referrals</span>
                                         </ng-template>
                                         <app-referrals [referralFormOptions]="referralFormOptions" (notify)="onReferralNotify($event)"
-                                            [isEdit]="isEdit" [PatientId]="patientId" [PatientMasterVisitId]="visitId"></app-referrals>
+                                            [isEdit]="isEdit" [visitDate]="visitDate" [PatientId]="patientId" [PatientMasterVisitId]="visitId"></app-referrals>
 
                                         <div>
                                             <button mat-raised-button color="primary" matStepperPrevious type="button">Previous</button>

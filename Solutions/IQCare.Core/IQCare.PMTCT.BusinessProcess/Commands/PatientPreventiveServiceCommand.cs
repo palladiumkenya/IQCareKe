@@ -10,7 +10,7 @@ namespace IQCare.PMTCT.BusinessProcess.Commands
    {
        public List<PreventiveService> PreventiveService;
        public int InsecticideTreatedNet { get; set; }
-       public DateTime InsecticideGivenDate { get; set; }
+       public DateTime? InsecticideGivenDate { get; set; }
        public int AntenatalExercise { get; set; }
         public int PartnerTestingVisit { get; set; }
         public int FinalHIVResult { get; set; }

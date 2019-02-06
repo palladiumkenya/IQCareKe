@@ -3,8 +3,8 @@ import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms'
 import { Component, OnInit, EventEmitter, Output, Input } from '@angular/core';
 import { MatDialog, MatDialogConfig, MatTableDataSource } from '@angular/material';
 import { HivStatusComponent } from '../hiv-status/hiv-status.component';
-import {Subscription} from 'rxjs/index';
-import {AncService} from '../../_services/anc.service';
+import { Subscription } from 'rxjs/index';
+import { AncService } from '../../_services/anc.service';
 
 @Component({
     selector: 'app-anc-hivtesting',
@@ -133,8 +133,8 @@ export class AncHivtestingComponent implements OnInit {
 
                     console.log('baseline info');
                     console.log(baseline);
-                    console.log(baseline['hivStatusBeforeAnc']);
-                    if (baseline['id'] > 0) {
+                    // console.log(baseline['hivStatusBeforeAnc']);
+                    if (baseline) {
                         this.HivTestingForm.get('hivStatusBeforeFirstVisit').setValue(baseline['hivStatusBeforeAnc']);
                     }
                 }

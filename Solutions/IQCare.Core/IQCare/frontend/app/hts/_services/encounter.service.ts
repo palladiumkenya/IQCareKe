@@ -154,4 +154,11 @@ export class EncounterService {
                 catchError(this.errorHandler.handleError<Encounter>('editEncounter'))
             );
     }
+
+    public getLastUsedKit(kitId: number): Observable<any> {
+        return this.http.get(this.API_URL + '/api/HtsEncounter/GetLastLotNumberByKitIdCommand/' + kitId).pipe(
+            tap((getLastUsedKit: any) => this.errorHandler.log(`fetched last used kit w/ id` + kitId)),
+            catchError(this.errorHandler.handleError<Encounter>('getLastUsedKit'))
+        );
+    }
 }

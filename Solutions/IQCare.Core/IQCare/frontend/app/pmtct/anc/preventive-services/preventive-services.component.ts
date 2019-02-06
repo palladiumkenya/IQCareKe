@@ -29,6 +29,7 @@ export class PreventiveServicesComponent implements OnInit {
     public YesNoNaOptions: any[] = [];
     public FinalResultOptions: any[] = [];
     public maxDate: Date = moment().toDate();
+    public minDate: Date;
     public preventiveService$: Subscription;
     public partnerTesting$: Subscription;
 
@@ -53,7 +54,7 @@ export class PreventiveServicesComponent implements OnInit {
         this.PreventiveServicesFormGroup = this._formBuilder.group({
             preventiveServices: ['', Validators.required],
             dateGiven: ['', Validators.required],
-            comments: ['n/a', Validators.required],
+            comments: ['', []],
             nextSchedule: ['', Validators.required],
             insecticideTreatedNet: ['', Validators.required],
             insecticideTreatedNetGivenDate: ['', Validators.required],
@@ -62,6 +63,8 @@ export class PreventiveServicesComponent implements OnInit {
             PartnerTestingVisit: ['', Validators.required],
             finalHIVResult: ['', Validators.required]
         });
+
+        this.PreventiveServicesFormGroup.get('insecticideTreatedNetGivenDate').disable({onlySelf: true  });
 
         const {
             yesNoNaOptions,
@@ -154,12 +157,27 @@ export class PreventiveServicesComponent implements OnInit {
         console.log(this.serviceData);
     }
 
-    public onPartnerTestingChnage(event) {
+    public onPartnerTestingChange(event) {
         if (event.isUserInput && event.source.selected && event.source.viewValue == 'Yes') {
 
         } else {
             const final = this.FinalResultOptions.filter(x => x.itemName == 'N/A');
             this.PreventiveServicesFormGroup.get('finalHIVResult').setValue(final[0].itemId);
+        }
+    }
+
+    public onGivenDateChange(event) {
+        const givenDate: Date = moment(event.isUserInput && event.source.selected && event.source.viewValue).toDate();
+       this.minDate = givenDate;
+    }
+
+    public onInsecticideTreatedNetGivenChange(event) {
+
+        if (event.isUserInput && event.source.selected && event.source.viewValue == 'Yes') {
+           this.PreventiveServicesFormGroup.get('insecticideTreatedNetGivenDate').enable({onlySelf: true});
+        } else {
+            this.PreventiveServicesFormGroup.get('insecticideTreatedNetGivenDate').setValue('');
+            this.PreventiveServicesFormGroup.get('insecticideTreatedNetGivenDate').disable({onlySelf: true  });
         }
     }
 
