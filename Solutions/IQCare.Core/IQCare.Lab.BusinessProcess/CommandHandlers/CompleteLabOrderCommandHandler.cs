@@ -128,8 +128,11 @@ namespace IQCare.Lab.BusinessProcess.CommandHandlers
             }
             else
             {
+                var resultText = labOrderTestResult.Undetectable
+                    ? $"Undetectable (Detection limit = {labOrderTestResult.DetectionLimit})": labOrderTestResult.ResultText;
+
                 var parameterConfig = GetParamterConfigDetails(parameterId);
-                patientLabTracker.UpdateResults(DateTime.Now, labOrderTestResult.ResultText,
+                patientLabTracker.UpdateResults(DateTime.Now, resultText,
                     parameterConfig?.LabTestParameterConfig?.Unit?.UnitName, labOrderTestResult.ResultValue, labOrderTestResult.ResultOption);
             }
 
@@ -167,11 +170,6 @@ namespace IQCare.Lab.BusinessProcess.CommandHandlers
 
                     if (propertyInfo != null)
                     {
-                        if (propertyInfo.Name == "ResultOptionId")
-                        {
-                            var man = propertyInfo;
-
-                        }
                         var typeCode = Type.GetTypeCode(propertyInfo.PropertyType);
                         switch (typeCode)
                         {
@@ -201,7 +199,7 @@ namespace IQCare.Lab.BusinessProcess.CommandHandlers
                 }
 
                 if (testResultCommand.ResultText != null || testResultCommand.ResultOptionId.HasValue ||
-                    testResultCommand.ResultValue.HasValue)
+                    testResultCommand.ResultValue.HasValue || testResultCommand.DetectionLimit.HasValue)
                     labTestResultCommandCollection.Add(testResultCommand);
             }
 

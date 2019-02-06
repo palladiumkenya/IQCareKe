@@ -3,12 +3,16 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
 import { ErrorHandlerService } from '../../shared/_services/errorhandler.service';
 import { catchError, tap } from 'rxjs/operators';
-import { Observable, of } from 'rxjs/index';
+import { Observable, of, BehaviorSubject, Subscription } from 'rxjs/index';
 import { PatientMasterVisitEncounter } from '../_models/PatientMasterVisitEncounter';
 import { PatientProfileViewModel } from '../_models/viewModel/PatientProfileViewModel';
 import { PatientDeliveryInformationViewModel } from '../_models/viewModel/PatientDeliveryInformationViewModel';
 import { PatientScreeningCommand } from '../_models/PatientScreeningCommand';
 import { HivStatusCommand } from '../_models/HivStatusCommand';
+import { BabyConditionCommand } from '../maternity/commands/baby-condition-command';
+import { FormGroup } from '@angular/forms';
+import { LookupItemService } from '../../shared/_services/lookup-item.service';
+import { ApgarScoreCommand } from '../maternity/commands/apgar-score-command';
 
 const httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -21,10 +25,22 @@ const httpOptions = {
 export class MaternityService {
     private API_URL = environment.API_URL;
     private API_PMTCT_URL = environment.API_PMTCT_URL;
+    private babyDataMessageSource = new BehaviorSubject([]);
+    currentBabyData = this.babyDataMessageSource.asObservable();
+    private lookUpItemSubscription : Subscription;
+    apgarScoreOptions : any[] = [];
 
-    constructor(private http: HttpClient, private errorHandler: ErrorHandlerService) {
+    constructor(private http: HttpClient, private errorHandler: ErrorHandlerService,
+         private lookUpService : LookupItemService)
+    {
+        this.getLookupItems('ApgarScore', this.apgarScoreOptions);
+        console.log(this.apgarScoreOptions.length + ' >> Apgar score')
     }
 
+
+    public updateBabyDataInfo(babyInfo:any){
+         this.babyDataMessageSource.next(babyInfo)
+    }
     public saveMaternityMasterVisit(patientMasterVisitEncounter: PatientMasterVisitEncounter): Observable<any> {
         return this.http.post<PatientMasterVisitEncounter>(this.API_URL + '/api/PatientMasterVisit',
             JSON.stringify(patientMasterVisitEncounter), httpOptions).pipe(
@@ -91,6 +107,22 @@ export class MaternityService {
                 tap(saveBabySection => this.errorHandler.log(`successfully added maternity baby section`)),
                 catchError(this.errorHandler.handleError<any>('Error saving maternity baby section'))
             );
+    }
+
+    public addNewBabyInfo(babyInfoCommand: any): Observable<any> {
+        return this.http.post(this.API_PMTCT_URL + '/api/MaternityPatientDeliveryInfo/AddDeliveredBabyBirthInfo',
+            JSON.stringify(babyInfoCommand),
+            httpOptions).pipe(
+                tap(addNewBabyInfo => this.errorHandler.log(`successfully added maternity baby section`)),
+                catchError(this.errorHandler.handleError<any>('Error saving maternity baby section'))
+            );
+    }
+
+    public updateBabyInfo(babyInfo : any) : Observable<any>{
+        return this.http.post(this.API_PMTCT_URL + '/api/MaternityPatientDeliveryInfo/UpdateDeliveredBabyBirthInfo',JSON.stringify(babyInfo),
+        httpOptions).pipe(tap(updateBabyInfo => this.errorHandler.log(`successfully updated baby info`)),
+            catchError(this.errorHandler.handleError<any>('Error updating baby information'))
+        );
     }
 
     public saveMaternalDrugAdministration(drug: any): Observable<any> {
@@ -247,4 +279,79 @@ export class MaternityService {
             catchError(this.errorHandler.handleError<any[]>('GetPatientDiagnosisInfo'))
         );
     }
+
+    public getMaternityLookUpOptionByName(lookUpOptions: any [], lookupName: string): any {
+        for (let index = 0; index < lookUpOptions.length; index++) {
+            if (lookUpOptions[index].itemName.toUpperCase() === lookupName.toUpperCase()) {
+              return lookUpOptions[index];
+            }  
+        }
+        return null;
+    }
+
+    public getMaternityLoopUpOptionById(lookUpOptions: any [], lookUpId: any): any {
+        for (let index = 0; index < lookUpOptions.length; index++) {
+            if (lookUpOptions[index].itemId == lookUpId) {
+              return lookUpOptions[index];
+            }  
+        }
+        return null;
+    }
+
+
+public buildAddBabyCommandModel (babyFormGroup : FormGroup) : BabyConditionCommand
+{
+   
+    var apgarScores : ApgarScoreCommand[] = [];
+    apgarScores.push(
+        {
+            ApgarScoreId : this.GetScoreTypeId("Apgar Score 1 min"),
+            Score : babyFormGroup.get('agparScore1min').value
+        },
+        {
+            ApgarScoreId : this.GetScoreTypeId("Apgar Score 5 min"),
+            Score : babyFormGroup.get('agparScore5min').value
+        },
+        {
+            ApgarScoreId : this.GetScoreTypeId("Apgar Score 10 min"),
+            Score : babyFormGroup.get('agparScore10min').value
+        })
+
+    const babyCondition : BabyConditionCommand = {
+        Sex: babyFormGroup.get('babySex').value.itemId,
+        BirthWeight: babyFormGroup.get('birthWeight').value,
+        DeliveryOutcome: babyFormGroup.get('outcome').value.itemId,
+        ApgarScores : apgarScores,     
+        ResuscitationDone: (babyFormGroup.get('resuscitationDone').value.itemName == 'Yes') ? true : false,
+        BirthDeformity:  (babyFormGroup.get('deformity').value.itemName == 'Yes') ? true : false,
+        TeoGiven:  (babyFormGroup.get('teoGiven').value.itemName == 'Yes') ? true : false,
+        BreastFedWithinHour:  (babyFormGroup.get('breastFed').value.itemName == 'Yes') ? true : false ,
+        Comment: babyFormGroup.get('comment').value,
+        BirthNotificationNumber: babyFormGroup.get('notificationNumber').value
+    }
+
+    return babyCondition;
+}
+
+private getLookupItems(groupName: string, objOptions: any[] = [])  {
+    this.lookUpItemSubscription = this.lookUpService.getByGroupName(groupName)
+        .subscribe(
+            p => {
+                const options = p['lookupItems'];
+                console.log(options.length +' OPtions Man')
+                for (let i = 0; i < options.length; i++) {
+                    objOptions.push({ 'itemId': options[i]['itemId'], 'itemName': options[i]['itemName'] });
+                }
+                console.log("New options Length ?? " + objOptions.length)
+            });
+}
+
+private GetScoreTypeId(scoreType: string) : any
+{
+  var score = this.apgarScoreOptions.filter(x => x.itemName == scoreType);
+  if(score.length < 0)
+      return 0;
+  return score[0].itemId;
+}
+
 }

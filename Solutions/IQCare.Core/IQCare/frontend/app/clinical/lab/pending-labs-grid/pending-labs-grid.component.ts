@@ -93,24 +93,26 @@ public addResult(pendingTest : any) {
               disabled : true
             }));
             
-            this.formControl.push(new CheckboxFormControl({
-               key :'Undetectable_'+param.id,
-               label : 'Undetectable',
-               value :false,
-               required : false,
-               order : 4
-            }));
-
-            this.formControl.push(new TextboxFormControl({
-              key:'detectionLimit_' + param.id, 
-              label: 'Detection Limit',
-              required: false,
-              order: 5,
-              value : null,
-              disabled : param.parameterName != 'Viral Load',
-              pattern : "^\\d*\\.?\\d+$"
-            }));
-
+            if(param.parameterName == 'Viral Load'){
+              this.formControl.push(new CheckboxFormControl({
+                key :'Undetectable_'+param.id,
+                label : 'Undetectable',
+                value :false,
+                required : false,
+                order : 4
+             }));
+ 
+             this.formControl.push(new TextboxFormControl({
+               key:'detectionLimit_' + param.id, 
+               label: 'Detection Limit',
+               required: false,
+               order: 5,
+               value : null,
+               disabled : true,
+               pattern : "^\\d*\\.?\\d+$"
+             }));
+            }
+           
             this.labTestParameters.push({
               Id : param.id,
               ParamName : param.parameterName,

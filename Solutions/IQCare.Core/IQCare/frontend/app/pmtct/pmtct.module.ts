@@ -110,6 +110,9 @@ import { AncClientMonitoringComponent } from './anc/anc-client-monitoring/anc-cl
 import { BirthOutcomeResolver } from './_services/resolvers/BirthOutcomeResolver';
 import { CounselledInfantFeedingResolver } from './_services/resolvers/counselled-infant-feeding.resolver';
 import { ImmunizationComponent } from './hei/immunization-history/immunization/immunization.component';
+import { BirthInfoGridComponent } from './maternity/baby/birth-info-grid/birth-info-grid.component';
+import { AddBirthInfoComponent } from './maternity/baby/add-birth-info/add-birth-info.component';
+import { AddBabyDialogComponent } from './maternity/baby/add-baby-dialog/add-baby-dialog.component';
 import { MilestonesFormComponent } from './hei/milestones/milestones-form/milestones-form.component';
 
 @NgModule({
@@ -180,6 +183,9 @@ import { MilestonesFormComponent } from './hei/milestones/milestones-form/milest
         HeiMedicationComponent,
         AncClientMonitoringComponent,
         ImmunizationComponent,
+        BirthInfoGridComponent,
+        AddBirthInfoComponent,
+        AddBabyDialogComponent,
         MilestonesFormComponent
     ],
     providers: [
@@ -235,6 +241,7 @@ import { MilestonesFormComponent } from './hei/milestones/milestones-form/milest
         HivStatusComponent,
         CheckinComponent,
         ImmunizationComponent,
+        AddBabyDialogComponent,
         MilestonesFormComponent
     ],
     exports: [
