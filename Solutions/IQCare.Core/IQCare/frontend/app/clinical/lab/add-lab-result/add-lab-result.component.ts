@@ -31,6 +31,7 @@ export class AddLabResultComponent implements OnInit {
   labTestParameters : any[] = [];
   dialogTitle : string;
   formControlCollection : FormControlBase<any>[] = [];
+  disabled = false;
 
   labResultForm : FormGroup;
   @Output() notify: EventEmitter<FormGroup> = new EventEmitter<FormGroup>();
@@ -106,6 +107,23 @@ export class AddLabResultComponent implements OnInit {
 
 close() {
     this.dialogRef.close();
+}
+
+public OnChange(event,key:any) {
+  var paramId = key.split('_');
+  var detectionLimitControlName = 'detectionLimit_'+paramId[1];
+  var resultValueControlName = 'ResultValue_' + paramId[1];
+  
+if(this.disabled)
+{
+  this.labResultForm.get(detectionLimitControlName).disable();
+  this.labResultForm.get(resultValueControlName).enable();
+}else
+{
+  this.labResultForm.get(detectionLimitControlName).enable();
+  this.labResultForm.get(resultValueControlName).disable();
+
+}
 }
 
 }

@@ -250,7 +250,6 @@ dataSource =  new MatTableDataSource(this.labTestData);
     }
 
    public labTestReasonChange(reason :any){
-     console.log('Reason Change '+ reason.displayName);
      this.labOrderFormGroup.controls['otherTestReason'].reset();
 
       this.otherReason = reason.displayName === 'Other';

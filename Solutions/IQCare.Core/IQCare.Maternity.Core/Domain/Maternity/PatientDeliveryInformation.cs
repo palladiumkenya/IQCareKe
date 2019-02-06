@@ -52,5 +52,22 @@ namespace IQCare.Maternity.Core.Domain.Maternity
         public string AuditData { get; private set; }
         public bool DeleteFlag { get; set; }
 
+        public void Update(dynamic deliveryInfo)
+        {
+            DurationOfLabour = deliveryInfo.DurationOfLabour;
+            DateOfDelivery = deliveryInfo.DateOfDelivery;
+            TimeOfDelivery = deliveryInfo.TimeOfDelivery;
+            ModeOfDelivery = deliveryInfo.ModeOfDelivery;
+            PlacentaComplete = deliveryInfo.PlacentaComplete;
+            BloodLossCapacity = deliveryInfo.BloodLossCapacity;
+            MotherCondition = deliveryInfo.MotherCondition;
+            DeliveryComplicationsExperienced = deliveryInfo.DeliveryComplicationsExperienced;
+            DeliveryComplicationNotes = deliveryInfo.DeliveryComplicationNotes;
+            DeliveryConductedBy = deliveryInfo.DeliveryConductedBy;
+            BloodLossClassification = deliveryInfo.BloodLossClassification;
+            MaternalDeathAuditDate = deliveryInfo.MaternalDeathAuditDate;
+            MaternalDeathAudited = deliveryInfo.MaternalDeathAudited;
+        }
+
     }
 }
