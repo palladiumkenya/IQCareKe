@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Web.UI.HtmlControls;
 using System.Web.UI.WebControls;
 using Application.Presentation;
 using Entities.CCC.Lookup;
@@ -15,7 +16,8 @@ namespace IQCare.Web.CCC.Patient
     public partial class PatientHome : System.Web.UI.Page
     {
         public decimal march_height;
-        protected int ptnPk = 0;
+        // protected int ptnPk = 0;
+        public int ptnPk { get; set; }
         protected int labTestId = 0;
         protected Decimal vlValue = 0;
         protected IPatientLabOrderManager _lookupData = (IPatientLabOrderManager)ObjectFactory.CreateInstance("BusinessProcess.CCC.visit.BPatientLabOrdermanager, BusinessProcess.CCC");
@@ -64,10 +66,18 @@ namespace IQCare.Web.CCC.Patient
             var patientTransfer = new PatientTransferInmanager();
             var patientDiagnosis = new PatientHivDiagnosisManager();
             var patientEntryPoint = new PatientEntryPointManager();
+            PatientLookupManager patientLookup = new PatientLookupManager();
+
             Session["TechnicalAreaId"] = 203;
             var objTransfer = patientTransfer.GetPatientTransferIns(PatientId);
             var objDiagnosis = patientDiagnosis.GetPatientHivDiagnosisList(PatientId);
             var objEntryPoint = patientEntryPoint.GetPatientEntryPoints(Convert.ToInt32(Session["PatientPK"]));
+            var patientDetailSummary = patientLookup.GetPatientDetailSummary(Convert.ToInt32(Session["PatientPK"]));
+            if (patientDetailSummary != null)
+            {
+                this.ptnPk = patientDetailSummary.ptn_pk.HasValue ? patientDetailSummary.ptn_pk.Value : 0;
+            }
+
 
             if (objTransfer.Count > 0)
             {
@@ -510,6 +520,30 @@ namespace IQCare.Web.CCC.Patient
                     }
                     
 
+                }
+
+                PharmacyHistoryDrugSubstitutionsManager pharmacyHistoryDrug = new PharmacyHistoryDrugSubstitutionsManager();
+                var pharmacyDrugsSubstitutionsSwitchesData = pharmacyHistoryDrug.GetPharmacyDrugsSubstitutionsSwitchesData(this.ptnPk);
+
+                if (pharmacyDrugsSubstitutionsSwitchesData.Count > 0)
+                {   
+                    for (int p = 0; p < pharmacyDrugsSubstitutionsSwitchesData.Count; p++)
+                    {
+                        HtmlTableRow tableRow = new HtmlTableRow();
+                        HtmlTableCell idcell = new HtmlTableCell();
+                        idcell.InnerHtml = (p+1).ToString();
+                        tableRow.Controls.Add(idcell);
+
+                        HtmlTableCell cell = new HtmlTableCell();
+                        cell.InnerHtml = pharmacyDrugsSubstitutionsSwitchesData[p].regimentype;
+                        tableRow.Controls.Add(cell);
+
+                        HtmlTableCell cell2 = new HtmlTableCell();
+                        cell2.InnerHtml = pharmacyDrugsSubstitutionsSwitchesData[p].DispensedByDate.ToString("dd-MMM-yyyy");
+                        tableRow.Controls.Add(cell2);
+
+                        tblPharmacyHistory.Rows.Add(tableRow);
+                    }
                 }
             }
         }

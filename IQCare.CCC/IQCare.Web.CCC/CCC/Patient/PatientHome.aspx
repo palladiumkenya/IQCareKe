@@ -84,6 +84,7 @@
             <li><a data-toggle="tab" href="#Registration">Registration Summary </a></li>
             <li><a data-toggle="tab" href="#EntryPoint"><strong>Entry Point & Transfer Status</strong></a> </li>
             <li><a data-toggle="tab" href="#Baseline">Baseline Assessment & Treament Initiation </a></li>
+            <li><a data-toggle="tab" href="#PharmacyHistory">ART Substitutions and Interruptions History</a></li>
         </ul>
 
         <div class="col-md-12 col-xs-12 col-xs-12 form-group">
@@ -1201,6 +1202,28 @@
 
                     </div>
                 </div>
+                <div id="PharmacyHistory" class="tab-pane fade">
+                    <div class="col-md-4 col-xs-4 col-sm-4">
+                        <div class="col-md-12 label label-info">
+                            <label class="control-label"><strong class="text-primary"></strong>
+                                <h6>ART Substitutions and Interruptions History Summary</h6>
+                            </label>
+                        </div>
+                        
+                        <div class="col-md-12">
+                            <hr style="margin-top: 1%" />
+                        </div>
+                        
+                        <table runat="server" id="tblPharmacyHistory" class="table table-hover">
+                            <tr>
+                                <th>#</th>
+                                <th>Regimen</th>
+                                <th>Treatment Start Date</th>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+
                 <div id="Baseline" class="tab-pane fade">
                     <div class="col-md-4 col-xs-4 col-sm-4">
                         <div class="col-md-12 label label-info">
