@@ -1,6 +1,7 @@
 import {ApgarScoreCommand} from './apgar-score-command';
 
 export interface BabyConditionCommand {
+Id ?:number
 PatientDeliveryInformationId?: number;
 PatientMasterVisitId?: number;
 BirthWeight?: number;
@@ -14,4 +15,9 @@ BirthNotificationNumber?: string;
 Comment?: string;
 CreatedBy?: number;
 ApgarScores: ApgarScoreCommand[];
+}
+
+export interface UpdateDeliveredBabyBirthInfoCommand 
+{
+    DeliveredBabyBirthInformation : BabyConditionCommand
 }

@@ -49,5 +49,18 @@ namespace IQCare.Maternity.Core.Domain.Maternity
         public DateTime CreateDate { get; private set; }
         public string AuditData { get; private set; }
         public bool DeleteFlag { get; private set; }
+
+        public void Update(dynamic babyInfo)
+        {
+            PatientDeliveryInformationId = babyInfo.PatientDeliveryInformationId;
+            BirthWeight = babyInfo.BirthWeight;
+            Sex = babyInfo.Sex;
+            DeliveryOutcome = babyInfo.DeliveryOutcome;
+            ResuscitationDone = babyInfo.ResuscitationDone;
+            TeoGiven = babyInfo.TeoGiven;
+            BreastFedWithinHour = babyInfo.BreastFedWithinHour;
+            BirthNotificationNumber = babyInfo.BirthNotificationNumber;
+            Comment = babyInfo.Comment;
+        }
     }
 }

@@ -124,6 +124,7 @@
     <Compile Include="BPersonRelationshipManager.cs" />
     <Compile Include="BTannersStaging.cs" />
     <Compile Include="ClinicalSummary\BClinicalSummary.cs" />
+    <Compile Include="ClinicalSummary\BPharmacyHistoryDrugSubstitutionsSwitches.cs" />
     <Compile Include="Encounters\BNeonatalHistory.cs" />
     <Compile Include="Encounters\BPatientClinicalNotes.cs" />
     <Compile Include="Encounters\BSocialHistory.cs" />
