@@ -621,6 +621,8 @@ export class PncComponent implements OnInit {
                     this.htsEncounterId = result[0]['htsEncounterId'];
 
                     hivTestsCommand.HtsEncounterId = this.htsEncounterId;
+                    hivTestsCommand.PatientMasterVisitId = result[0]['patientMasterVisitId'];
+
                     const pncHivTests = this.pncService.savePncHivTests(hivTestsCommand).subscribe(
                         (res) => {
                             console.log(`result`, res);
