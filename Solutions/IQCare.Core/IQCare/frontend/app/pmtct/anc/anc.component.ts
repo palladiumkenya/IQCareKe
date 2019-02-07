@@ -139,11 +139,11 @@ export class AncComponent implements OnInit, OnDestroy {
                 if (!this.patientMasterVisitId) {
                     this.patientMasterVisitId = JSON.parse(localStorage.getItem('patientMasterVisitId'));
                     this.patientEncounterId = JSON.parse(localStorage.getItem('patientEncounterId'));
-                    // this.isLinear = true;
+                    this.isLinear = true;
                 } else {
                     this.visitId = this.patientMasterVisitId;
                     this.isEdit = true;
-                    // this.isLinear = false;
+                   this.isLinear = false;
                 }
             }
         );
@@ -700,6 +700,7 @@ export class AncComponent implements OnInit, OnDestroy {
                         ancEducation,
                         ancHivStatus,
                         ancClientMonitoring,
+                        ancHaart,
                         drugAdministration,
                         chronicIllness,
                         ancPreventiveService,
@@ -739,6 +740,7 @@ export class AncComponent implements OnInit, OnDestroy {
                 ancEducation,
                 ancHivStatus,
                 ancClientMonitoring,
+                ancHaart,
                 drugAdministration,
                 chronicIllness,
                 ancPreventiveService,
