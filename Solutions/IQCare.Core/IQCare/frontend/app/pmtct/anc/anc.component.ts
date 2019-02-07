@@ -599,7 +599,7 @@ export class AncComponent implements OnInit, OnDestroy {
             PartnerTestingVisit: this.PreventiveServiceMatFormGroup.value[0]['PartnerTestingVisit'],
             FinalHIVResult: this.PreventiveServiceMatFormGroup.value[0]['finalHIVResult'],
             InsecticideTreatedNet: InsecticideTreatedNet,
-           // InsecticideGivenDate: (InsecticideTreatedNet === 'Yes') ? InsecticideGivenDate : null ,
+            InsecticideGivenDate: (yesno[0]['itemId'] == InsecticideTreatedNet) ? InsecticideGivenDate : null ,
             CreatedBy: this.userId
 
         };
