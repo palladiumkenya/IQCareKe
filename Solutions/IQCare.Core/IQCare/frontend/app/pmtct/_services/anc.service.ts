@@ -92,9 +92,9 @@ export class AncService {
     }
 
     public EditBaselineProfile(baselineAncCommand: any): Observable<any> {
-        return this.http.put<any>(this.API_URL + '/api/BaselineAnc/post', JSON.stringify(baselineAncCommand),
+        return this.http.put<any>(this.API_URL + '/api/BaselineAnc/put', JSON.stringify(baselineAncCommand),
             httpOptions).pipe(
-            tap(BAselineProfile => this.errorHandler.log(`successfully Edited ANC Baseline`)),
+            tap(BaselineProfile => this.errorHandler.log(`successfully Edited ANC Baseline`)),
             catchError(this.errorHandler.handleError<any>('Error Editing ANC Baseline'))
         );
     }
@@ -109,14 +109,14 @@ export class AncService {
     }
 
     public saveClientMonitoring(clientMonitoringCommand: ClientMonitoringCommand): Observable<ClientMonitoringCommand> {
-        return this.http.put<any>(this.API_URL + '' + this._url_cm, JSON.stringify(clientMonitoringCommand), httpOptions).pipe(
+        return this.http.post<any>(this.API_URL + '' + this._url_cm, JSON.stringify(clientMonitoringCommand), httpOptions).pipe(
             tap(saveClientMonitoring => this.errorHandler.log('Successfully saved client monitoring')),
             catchError(this.errorHandler.handleError<any>('Error in saving ' + this.API_URL + '' + this._url_pedc))
         );
     }
 
-    public EditClientMonitoring(clientMonitoringCommand: ClientMonitoringCommand): Observable<ClientMonitoringCommand> {
-        return this.http.post<any>(this.API_URL + '' + this._url_cm, JSON.stringify(clientMonitoringCommand), httpOptions).pipe(
+    public EditClientMonitoring(clientMonitoringCommand: any): Observable<any> {
+        return this.http.put<any>(this.API_URL + '' + this._url_cm, JSON.stringify(clientMonitoringCommand), httpOptions).pipe(
             tap(saveClientMonitoring => this.errorHandler.log('Successfully edited client monitoring Command')),
             catchError(this.errorHandler.handleError<any>('Error in Editing client monitoring' + this.API_URL + '' + this._url_pedc))
         );

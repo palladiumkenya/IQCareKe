@@ -1,6 +1,7 @@
 export interface ClientMonitoringCommand {
     PatientId?: number;
     PatientmasterVisitId?: number;
+    ViralLoadSampleTaken?: boolean;
     WhoStage?: number;
     FacilityId?: number;
     ServiceAreaId?: number;
@@ -8,7 +9,7 @@ export interface ClientMonitoringCommand {
     ScreeningTypeId?: number;
     ScreeningDone?: boolean;
     ScreeningDate?: Date;
-    ScreeningTB?: number;
+    ScreenedTB?: number;
     CaCxMethod?: number;
     CaCxResult?: number;
     Comments?: string;

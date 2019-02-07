@@ -481,6 +481,7 @@ export class AncComponent implements OnInit, OnDestroy {
             }
         }
         const screeningDone = this.ClientMonitoringMatFormGroup.value[0]['cacxScreeningDone'];
+        const viralLoadSampleTaken = this.ClientMonitoringMatFormGroup.value[0]['viralLoadSampleTaken'];
 
         const clientMonitoringCommand = {
             PatientId: this.patientId,
@@ -491,8 +492,8 @@ export class AncComponent implements OnInit, OnDestroy {
             ScreeningTypeId: 0,
             ScreeningDone: (yesOption[0].itemId == screeningDone) ? true : false,
             ScreeningDate: new Date(),
-            ViralLoadSampleTaken: this.ClientMonitoringMatFormGroup.value[0]['viralLoadSampleTaken'],
-            ScreeningTB: this.ClientMonitoringMatFormGroup.value[0]['screenedForTB'],
+            ViralLoadSampleTaken: viralLoadSampleTaken, // (yesOption[0].itemId == viralLoadSampleTaken) ? true : false,
+            ScreenedTB: this.ClientMonitoringMatFormGroup.value[0]['screenedForTB'],
             CaCxMethod: (yesOption[0].itemId == screeningDone) ? this.ClientMonitoringMatFormGroup.value[0]['cacxMethod'] : 0,
             CaCxResult: (yesOption[0].itemId == screeningDone) ? this.ClientMonitoringMatFormGroup.value[0]['cacxResult'] : 0,
             Comments: (yesOption[0].itemId == screeningDone) ? this.ClientMonitoringMatFormGroup.value[0]['cacxComments'] : 'na',
@@ -764,6 +765,7 @@ export class AncComponent implements OnInit, OnDestroy {
         const noOption = this.yesNoOptions.filter(obj => obj.itemName == 'No');
         const naOption = this.yesNoNaOptions.filter(obj => obj.itemName == 'N/A');
         const screeningDone = this.ClientMonitoringMatFormGroup.value[0]['cacxScreeningDone'];
+        const viralLoadSampleTaken = this.ClientMonitoringMatFormGroup.value[0]['viralLoadSampleTaken'];
 
         const ancVisitDetailsCommandEdit: any = {
             Id: this.pregnancyId,
@@ -825,29 +827,33 @@ export class AncComponent implements OnInit, OnDestroy {
             CounsellingTopics: this.counselling_data
         };
 
-        const clientMonitoringCommand = {
+        const clientMonitoringCommandEdit: any = {
             PatientId: this.patientId,
             PatientMasterVisitId: this.patientMasterVisitId,
-            FacilityId: 755,
+            ViralLoadSampleTaken: (viralLoadSampleTaken < 1 ) ? 0 : viralLoadSampleTaken,
             WhoStage: this.ClientMonitoringMatFormGroup.value[0]['WhoStage'],
+            FacilityId: 755,
             ServiceAreaId: 3,
+            ClinicalNotes: (yesOption[0].itemId == screeningDone) ? this.ClientMonitoringMatFormGroup.value[0]['cacxComments'] : 'n/a',
             ScreeningTypeId: 0,
             ScreeningDone: (yesOption[0].itemId == screeningDone) ? true : false,
             ScreeningDate: new Date(),
-            ViralLoadSampleTaken: this.ClientMonitoringMatFormGroup.value[0]['viralLoadSampleTaken'],
-            ScreeningTB: this.ClientMonitoringMatFormGroup.value[0]['screenedForTB'],
+            ScreenedTB: this.ClientMonitoringMatFormGroup.value[0]['screenedForTB'],
             CaCxMethod: (yesOption[0].itemId == screeningDone) ? this.ClientMonitoringMatFormGroup.value[0]['cacxMethod'] : 0,
             CaCxResult: (yesOption[0].itemId == screeningDone) ? this.ClientMonitoringMatFormGroup.value[0]['cacxResult'] : 0,
             Comments: (yesOption[0].itemId == screeningDone) ? this.ClientMonitoringMatFormGroup.value[0]['cacxComments'] : 'na',
-            ClinicalNotes: (yesOption[0].itemId == screeningDone) ? this.ClientMonitoringMatFormGroup.value[0]['cacxComments'] : 'n/a',
             CreatedBy: (this.userId < 1) ? 1 : this.userId
-        } as ClientMonitoringCommand;
+        };
 
+     //   const clientMonitoringEditCommand = { clientMonitoringEditCommand: clientMonitoringCommandEdit }
+
+        console.log('client monitoring command edit');
+        console.log(clientMonitoringCommandEdit);
         const AncvisitDetailsEdit = this.ancService.EditANCVisitDetails(ancVisitDetailsCommandEdit);
         const visitDetailsEdit = this.ancService.EditVisitDetails(VisitDetails);
-        const baselineEdit = this.ancService.SaveBaselineProfile(baselineAncCommandEdit);
+        const baselineEdit = this.ancService.EditBaselineProfile(baselineAncCommandEdit);
         const ancEducation = this.ancService.savePatientEducation(patientEducationCommand);
-        const ancClientMonitoringEdit = this.ancService.saveClientMonitoring(clientMonitoringCommand);
+        const ancClientMonitoringEdit = this.ancService.EditClientMonitoring(clientMonitoringCommandEdit);
 
         forkJoin([
              AncvisitDetailsEdit,

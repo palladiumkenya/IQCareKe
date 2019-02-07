@@ -15,7 +15,7 @@ using PatientScreening = IQCare.PMTCT.Core.Models.PatientScreening;
 
 namespace IQCare.PMTCT.BusinessProcess.CommandHandlers
 {
-    public class ClientMonitoringEditCommandHandler : IRequestHandler<ClientMonitoringCommand, Result<ClientMonitoringCommandResponse>>
+    public class ClientMonitoringEditCommandHandler : IRequestHandler<ClientMonitoringEditCommand, Result<ClientMonitoringCommandEditResponse>>
     {
         private readonly ICommonUnitOfWork _commonUnitOfWork;
         private readonly IPmtctUnitOfWork _unitOfWork;
@@ -27,7 +27,7 @@ namespace IQCare.PMTCT.BusinessProcess.CommandHandlers
             _unitOfWork = unitOfWork ?? throw new ArgumentNullException(nameof(unitOfWork));
         }
 
-        public async Task<Result<ClientMonitoringCommandResponse>> Handle(ClientMonitoringCommand request, CancellationToken cancellationToken)
+        public async Task<Result<ClientMonitoringCommandEditResponse>> Handle(ClientMonitoringEditCommand request, CancellationToken cancellationToken)
         {
             using (_unitOfWork)
             {
@@ -45,7 +45,7 @@ namespace IQCare.PMTCT.BusinessProcess.CommandHandlers
                     .Get(x => x.Name == "ViralLoadSampleTaken").Select(x => x.Id).FirstOrDefaultAsync();
                 string yesNoId = await _commonUnitOfWork.Repository<LookupItem>()
                     .Get(x => x.Id == request.ViralLoadSampleTaken).Select(x => x.Name).FirstOrDefaultAsync();
-                int patientWhoStageResult = await clientMonitoringService.AddPatientWhoStage(patientWhoStage);
+                int patientWhoStageResult = await clientMonitoringService.EditPatientWhoStage(patientWhoStage);
                 int tbscreeningTypeId = await _commonUnitOfWork.Repository<Common.Core.Models.LookupItemView>().Get(x => x.MasterName == "TBScreeningPMTCT").Select(x => x.MasterId).FirstOrDefaultAsync();
                 int tbScreeningcaegoryId = await _commonUnitOfWork.Repository<Common.Core.Models.LookupItem>().Get(x => x.Name == "TBScreening").Select(x => x.Id).FirstOrDefaultAsync();
 
@@ -102,8 +102,8 @@ namespace IQCare.PMTCT.BusinessProcess.CommandHandlers
                 }
 
                 if(tbScreeingId>0 & pmtctScreeningId>0 & vlSampleTypeId>0)
-                    return Result<ClientMonitoringCommandResponse>.Valid(new ClientMonitoringCommandResponse {resultId = 1});
-                return Result<ClientMonitoringCommandResponse>.Valid(new ClientMonitoringCommandResponse {resultId = 0});
+                    return Result<ClientMonitoringCommandEditResponse>.Valid(new ClientMonitoringCommandEditResponse {resultId = 1});
+                return Result<ClientMonitoringCommandEditResponse>.Valid(new ClientMonitoringCommandEditResponse {resultId = 0});
             }
         }
     }
