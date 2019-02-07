@@ -28,7 +28,7 @@ import { HivStatusCommand } from '../_models/HivStatusCommand';
 import { BaselineAncProfileCommand } from '../_models/baseline-anc-profile-command';
 import { DrugAdministerCommand } from '../_models/drug-administer-command';
 import * as moment from 'moment';
-import {VisitDetailsEditCommand} from '../_models/VisitDetailsEditCommand';
+import { VisitDetailsEditCommand } from '../_models/VisitDetailsEditCommand';
 
 @Component({
     selector: 'app-anc',
@@ -39,7 +39,7 @@ export class AncComponent implements OnInit, OnDestroy {
 
     formType: string;
     visitType: number;
-    isLinear: boolean = false;
+    isLinear: boolean = true;
     public isEdit = false;
     patientDrug: PatientDrugAdministration[] = [];
     public preventiveService: PreventiveService[] = [];
@@ -143,7 +143,7 @@ export class AncComponent implements OnInit, OnDestroy {
                 } else {
                     this.visitId = this.patientMasterVisitId;
                     this.isEdit = true;
-                   this.isLinear = false;
+                    this.isLinear = false;
                 }
             }
         );
@@ -249,11 +249,6 @@ export class AncComponent implements OnInit, OnDestroy {
             'yesNoOptions': this.yesNoOptions
         });
 
-    }
-
-    onNextClick() {
-        console.log(this.visitDetailsFormGroup.value);
-        return;
     }
 
     onVisitDetailsNotify(formGroup: FormGroup): void {
@@ -397,11 +392,11 @@ export class AncComponent implements OnInit, OnDestroy {
                 CounsellingDate: moment(this.counselling_data[i]['counsellingDate']).toDate(),
                 description: this.counselling_data[i]['description']
             });
-            console.log(this.counselling_data[i]['counsellingTopic']);
+            // console.log(this.counselling_data[i]['counsellingTopic']);
         }
 
-        console.log('patient education');
-        console.log(this.PatientEducationMatFormGroup);
+        // console.log('patient education');
+        // console.log(this.PatientEducationMatFormGroup);
         const patientEducationCommand: PatientEducationCommand = {
             PatientId: this.patientId,
             PatientMasterVisitId: this.patientMasterVisitId,
@@ -530,8 +525,8 @@ export class AncComponent implements OnInit, OnDestroy {
             }
         );
 
-        console.log('administered drugs');
-        console.log(this.AdministredDrugs);
+        // console.log('administered drugs');
+        // console.log(this.AdministredDrugs);
 
         const yesno = this.yesNoOptions.filter(x => x.itemName == 'Yes');
         const otherIllnessOption = this.HaartProphylaxisMatFormGroup.value[0]['otherIllness'];
@@ -545,7 +540,7 @@ export class AncComponent implements OnInit, OnDestroy {
                     PatientMasterVisitId: this.patientMasterVisitId,
                     ChronicIllness: this.chronicIllnessData[i]['chronicIllnessId'],
                     Treatment: this.chronicIllnessData[i]['currentTreatment'],
-                   // Dose: this.chronicIllnessData[i]['dose'],
+                    // Dose: this.chronicIllnessData[i]['dose'],
                     Dose: 0,
                     Duration: 0,
                     DeleteFlag: false,
@@ -568,9 +563,9 @@ export class AncComponent implements OnInit, OnDestroy {
         };
 
 
-         const chronicIllnessCommand = {
-             PatientChronicIllnesses: this.chronic_illness_data,
-         };
+        const chronicIllnessCommand = {
+            PatientChronicIllnesses: this.chronic_illness_data,
+        };
 
         const haartProphylaxisCommand = {
             PatientDrugAdministration: this.patientDrug,
@@ -600,13 +595,13 @@ export class AncComponent implements OnInit, OnDestroy {
             PartnerTestingVisit: this.PreventiveServiceMatFormGroup.value[0]['PartnerTestingVisit'],
             FinalHIVResult: this.PreventiveServiceMatFormGroup.value[0]['finalHIVResult'],
             InsecticideTreatedNet: InsecticideTreatedNet,
-            InsecticideGivenDate: (yesno[0]['itemId'] == InsecticideTreatedNet) ? InsecticideGivenDate : null ,
+            InsecticideGivenDate: (yesno[0]['itemId'] == InsecticideTreatedNet) ? InsecticideGivenDate : null,
             CreatedBy: this.userId
 
         };
 
-        console.log('refferalFormGroup');
-        console.log(this.ReferralMatFormGroup);
+        // console.log('refferalFormGroup');
+        // console.log(this.ReferralMatFormGroup);
         const referralCommand = {
             PatientId: this.patientId,
             PatientMasterVisitId: this.patientMasterVisitId,
@@ -696,7 +691,7 @@ export class AncComponent implements OnInit, OnDestroy {
                     const baselineAnc = this.ancService.SaveBaselineProfile(baselineAncCommands);
 
                     forkJoin([
-                       ancVisitDetail,
+                        ancVisitDetail,
                         baselineAnc,
                         ancEducation,
                         ancHivStatus,
@@ -710,7 +705,14 @@ export class AncComponent implements OnInit, OnDestroy {
                     ])
                         .subscribe(
                             (result) => {
-                                console.log(result);
+                                hivTestsCommand.HtsEncounterId = result[3]['htsEncounterId'];
+                                hivTestsCommand.PatientMasterVisitId = result[3]['patientMasterVisitId'];
+                                const ancHivResultsCommand = this.ancService.saveHivResults(hivTestsCommand).subscribe(
+                                    (testRes) => {
+                                        console.log(testRes);
+                                    }
+                                );
+                                // console.log(result);
                                 this.snotifyService.success('Successfully saved ANC encounter ', 'ANC',
                                     this.notificationService.getConfig());
                                 this.zone.run(() => {
@@ -727,6 +729,7 @@ export class AncComponent implements OnInit, OnDestroy {
                 }
             );
         } else {
+            // spinner
             forkJoin([
                 visitDetails,
                 baseline,
@@ -735,7 +738,7 @@ export class AncComponent implements OnInit, OnDestroy {
                 ancClientMonitoring,
                 ancHaart,
                 drugAdministration,
-                chronicIllness ,
+                chronicIllness,
                 ancPreventiveService,
                 ancReferral,
                 ancAppointment
@@ -743,6 +746,13 @@ export class AncComponent implements OnInit, OnDestroy {
                 .subscribe(
                     (result) => {
                         console.log(result);
+                        hivTestsCommand.HtsEncounterId = result[3]['htsEncounterId'];
+                        hivTestsCommand.PatientMasterVisitId = result[3]['patientMasterVisitId'];
+                        const ancHivResultsCommand = this.ancService.saveHivResults(hivTestsCommand).subscribe(
+                            (testRes) => {
+                                console.log(testRes);
+                            }
+                        );
                         this.snotifyService.success('Successfully saved ANC encounter ', 'ANC',
                             this.notificationService.getConfig());
                         this.zone.run(() => {
@@ -753,6 +763,7 @@ export class AncComponent implements OnInit, OnDestroy {
                         console.log(`error ` + error);
                     },
                     () => {
+                        // close spinner
                         console.log(`complete`);
                     }
                 );
@@ -856,7 +867,7 @@ export class AncComponent implements OnInit, OnDestroy {
         const ancClientMonitoringEdit = this.ancService.EditClientMonitoring(clientMonitoringCommandEdit);
 
         forkJoin([
-             AncvisitDetailsEdit,
+            AncvisitDetailsEdit,
             visitDetailsEdit,
             baselineEdit,
             ancEducation,
@@ -873,8 +884,8 @@ export class AncComponent implements OnInit, OnDestroy {
             },
             (error) => {
 
-        },
-        () => {}
+            },
+            () => { }
         );
     }
 

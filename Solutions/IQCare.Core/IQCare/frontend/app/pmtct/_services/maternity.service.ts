@@ -27,19 +27,18 @@ export class MaternityService {
     private API_PMTCT_URL = environment.API_PMTCT_URL;
     private babyDataMessageSource = new BehaviorSubject([]);
     currentBabyData = this.babyDataMessageSource.asObservable();
-    private lookUpItemSubscription : Subscription;
-    apgarScoreOptions : any[] = [];
+    private lookUpItemSubscription: Subscription;
+    apgarScoreOptions: any[] = [];
 
     constructor(private http: HttpClient, private errorHandler: ErrorHandlerService,
-         private lookUpService : LookupItemService)
-    {
+        private lookUpService: LookupItemService) {
         this.getLookupItems('ApgarScore', this.apgarScoreOptions);
-        console.log(this.apgarScoreOptions.length + ' >> Apgar score')
+        // console.log(this.apgarScoreOptions.length + ' >> Apgar score')
     }
 
 
-    public updateBabyDataInfo(babyInfo:any){
-         this.babyDataMessageSource.next(babyInfo)
+    public updateBabyDataInfo(babyInfo: any) {
+        this.babyDataMessageSource.next(babyInfo)
     }
     public saveMaternityMasterVisit(patientMasterVisitEncounter: PatientMasterVisitEncounter): Observable<any> {
         return this.http.post<PatientMasterVisitEncounter>(this.API_URL + '/api/PatientMasterVisit',
@@ -118,11 +117,11 @@ export class MaternityService {
             );
     }
 
-    public updateBabyInfo(babyInfo : any) : Observable<any>{
-        return this.http.post(this.API_PMTCT_URL + '/api/MaternityPatientDeliveryInfo/UpdateDeliveredBabyBirthInfo',JSON.stringify(babyInfo),
-        httpOptions).pipe(tap(updateBabyInfo => this.errorHandler.log(`successfully updated baby info`)),
-            catchError(this.errorHandler.handleError<any>('Error updating baby information'))
-        );
+    public updateBabyInfo(babyInfo: any): Observable<any> {
+        return this.http.post(this.API_PMTCT_URL + '/api/MaternityPatientDeliveryInfo/UpdateDeliveredBabyBirthInfo', JSON.stringify(babyInfo),
+            httpOptions).pipe(tap(updateBabyInfo => this.errorHandler.log(`successfully updated baby info`)),
+                catchError(this.errorHandler.handleError<any>('Error updating baby information'))
+            );
     }
 
     public saveMaternalDrugAdministration(drug: any): Observable<any> {
@@ -280,78 +279,76 @@ export class MaternityService {
         );
     }
 
-    public getMaternityLookUpOptionByName(lookUpOptions: any [], lookupName: string): any {
+    public getMaternityLookUpOptionByName(lookUpOptions: any[], lookupName: string): any {
         for (let index = 0; index < lookUpOptions.length; index++) {
             if (lookUpOptions[index].itemName.toUpperCase() === lookupName.toUpperCase()) {
-              return lookUpOptions[index];
-            }  
+                return lookUpOptions[index];
+            }
         }
         return null;
     }
 
-    public getMaternityLoopUpOptionById(lookUpOptions: any [], lookUpId: any): any {
+    public getMaternityLoopUpOptionById(lookUpOptions: any[], lookUpId: any): any {
         for (let index = 0; index < lookUpOptions.length; index++) {
             if (lookUpOptions[index].itemId == lookUpId) {
-              return lookUpOptions[index];
-            }  
+                return lookUpOptions[index];
+            }
         }
         return null;
     }
 
 
-public buildAddBabyCommandModel (babyFormGroup : FormGroup) : BabyConditionCommand
-{
-   
-    var apgarScores : ApgarScoreCommand[] = [];
-    apgarScores.push(
-        {
-            ApgarScoreId : this.GetScoreTypeId("Apgar Score 1 min"),
-            Score : babyFormGroup.get('agparScore1min').value
-        },
-        {
-            ApgarScoreId : this.GetScoreTypeId("Apgar Score 5 min"),
-            Score : babyFormGroup.get('agparScore5min').value
-        },
-        {
-            ApgarScoreId : this.GetScoreTypeId("Apgar Score 10 min"),
-            Score : babyFormGroup.get('agparScore10min').value
-        })
+    public buildAddBabyCommandModel(babyFormGroup: FormGroup): BabyConditionCommand {
 
-    const babyCondition : BabyConditionCommand = {
-        Sex: babyFormGroup.get('babySex').value.itemId,
-        BirthWeight: babyFormGroup.get('birthWeight').value,
-        DeliveryOutcome: babyFormGroup.get('outcome').value.itemId,
-        ApgarScores : apgarScores,     
-        ResuscitationDone: (babyFormGroup.get('resuscitationDone').value.itemName == 'Yes') ? true : false,
-        BirthDeformity:  (babyFormGroup.get('deformity').value.itemName == 'Yes') ? true : false,
-        TeoGiven:  (babyFormGroup.get('teoGiven').value.itemName == 'Yes') ? true : false,
-        BreastFedWithinHour:  (babyFormGroup.get('breastFed').value.itemName == 'Yes') ? true : false ,
-        Comment: babyFormGroup.get('comment').value,
-        BirthNotificationNumber: babyFormGroup.get('notificationNumber').value
+        var apgarScores: ApgarScoreCommand[] = [];
+        apgarScores.push(
+            {
+                ApgarScoreId: this.GetScoreTypeId("Apgar Score 1 min"),
+                Score: babyFormGroup.get('agparScore1min').value
+            },
+            {
+                ApgarScoreId: this.GetScoreTypeId("Apgar Score 5 min"),
+                Score: babyFormGroup.get('agparScore5min').value
+            },
+            {
+                ApgarScoreId: this.GetScoreTypeId("Apgar Score 10 min"),
+                Score: babyFormGroup.get('agparScore10min').value
+            })
+
+        const babyCondition: BabyConditionCommand = {
+            Sex: babyFormGroup.get('babySex').value.itemId,
+            BirthWeight: babyFormGroup.get('birthWeight').value,
+            DeliveryOutcome: babyFormGroup.get('outcome').value.itemId,
+            ApgarScores: apgarScores,
+            ResuscitationDone: (babyFormGroup.get('resuscitationDone').value.itemName == 'Yes') ? true : false,
+            BirthDeformity: (babyFormGroup.get('deformity').value.itemName == 'Yes') ? true : false,
+            TeoGiven: (babyFormGroup.get('teoGiven').value.itemName == 'Yes') ? true : false,
+            BreastFedWithinHour: (babyFormGroup.get('breastFed').value.itemName == 'Yes') ? true : false,
+            Comment: babyFormGroup.get('comment').value,
+            BirthNotificationNumber: babyFormGroup.get('notificationNumber').value
+        }
+
+        return babyCondition;
     }
 
-    return babyCondition;
-}
+    private getLookupItems(groupName: string, objOptions: any[] = []) {
+        this.lookUpItemSubscription = this.lookUpService.getByGroupName(groupName)
+            .subscribe(
+                p => {
+                    const options = p['lookupItems'];
+                    console.log(options.length + ' OPtions Man')
+                    for (let i = 0; i < options.length; i++) {
+                        objOptions.push({ 'itemId': options[i]['itemId'], 'itemName': options[i]['itemName'] });
+                    }
+                    console.log("New options Length ?? " + objOptions.length)
+                });
+    }
 
-private getLookupItems(groupName: string, objOptions: any[] = [])  {
-    this.lookUpItemSubscription = this.lookUpService.getByGroupName(groupName)
-        .subscribe(
-            p => {
-                const options = p['lookupItems'];
-                console.log(options.length +' OPtions Man')
-                for (let i = 0; i < options.length; i++) {
-                    objOptions.push({ 'itemId': options[i]['itemId'], 'itemName': options[i]['itemName'] });
-                }
-                console.log("New options Length ?? " + objOptions.length)
-            });
-}
-
-private GetScoreTypeId(scoreType: string) : any
-{
-  var score = this.apgarScoreOptions.filter(x => x.itemName == scoreType);
-  if(score.length < 0)
-      return 0;
-  return score[0].itemId;
-}
+    private GetScoreTypeId(scoreType: string): any {
+        var score = this.apgarScoreOptions.filter(x => x.itemName == scoreType);
+        if (score.length < 0)
+            return 0;
+        return score[0].itemId;
+    }
 
 }
