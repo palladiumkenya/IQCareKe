@@ -142,6 +142,8 @@
     <None Remove="Scripts\2.0.0\32_Remove_S_P_From_PNSRelationship.sql" />
     <None Remove="Scripts\2.0.0\33_Pregnancy_Alter_Gravidae_Parity.sql" />
     <None Remove="Scripts\2.0.0\34_Person_Update_Alter.sql" />
+    <None Remove="Scripts\2.0.0\35_Pharmacy_History.sql" />
+    <None Remove="Scripts\2.0.0\36_LO_HtsPnsReferral.sql" />
   </ItemGroup>
 
   <ItemGroup>
@@ -279,6 +281,8 @@
     <EmbeddedResource Include="Scripts\2.0.0\32_Remove_S_P_From_PNSRelationship.sql" />
     <EmbeddedResource Include="Scripts\2.0.0\33_Pregnancy_Alter_Gravidae_Parity.sql" />
     <EmbeddedResource Include="Scripts\2.0.0\34_Person_Update_Alter.sql" />
+    <EmbeddedResource Include="Scripts\2.0.0\35_Pharmacy_History.sql" />
+    <EmbeddedResource Include="Scripts\2.0.0\36_LO_HtsPnsReferral.sql" />
   </ItemGroup>
 
   <ItemGroup>

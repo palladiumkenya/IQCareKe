@@ -71,6 +71,7 @@
     <Compile Include="Baseline\IPatientHivEnrolmetBaselineManager.cs" />
     <Compile Include="Baseline\IPatientTranfersInManager.cs" />
     <Compile Include="ClinicalSummary\IClinicalSummaryForm.cs" />
+    <Compile Include="ClinicalSummary\IPharmacyHistoryDrugSubstitutionsSwitches.cs" />
     <Compile Include="Encounter\INeonatalHistory.cs" />
     <Compile Include="Encounter\IPatientAdherenceAssessessment.cs" />
     <Compile Include="Encounter\IPatientCareEnding.cs" />

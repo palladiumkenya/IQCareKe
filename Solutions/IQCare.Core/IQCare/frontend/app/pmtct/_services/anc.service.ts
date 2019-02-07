@@ -12,9 +12,10 @@ import { PatientPreventiveService } from '../_models/PatientPreventiveService';
 import { PatientProfile } from '../_models/patientProfile';
 import { PncVisitDetailsCommand } from '../_models/PncVisitDetailsCommand';
 import { HivStatusCommand } from '../_models/HivStatusCommand';
-import {VisitDetailsCommand} from '../_models/visit-details-command';
-import {PregnancyAncCommand} from '../_models/pregnancy-anc-command';
-import {BaselineAncProfileCommand} from '../_models/baseline-anc-profile-command';
+import { VisitDetailsCommand } from '../_models/visit-details-command';
+import { PregnancyAncCommand } from '../_models/pregnancy-anc-command';
+import { BaselineAncProfileCommand } from '../_models/baseline-anc-profile-command';
+import { HivTestsCommand } from '../_models/HivTestsCommand';
 
 
 const httpOptions = {
@@ -49,9 +50,9 @@ export class AncService {
     public saveANCVisitDetails(ancVisitDetailsCommand: PncVisitDetailsCommand): Observable<any> {
         return this.http.post<any>(this.API_URL + '/api/VisitDetails/AddANCVisit', JSON.stringify(ancVisitDetailsCommand),
             httpOptions).pipe(
-            tap(saveANCVisitDetails => this.errorHandler.log(`successfully saved ANC visit details`)),
-            catchError(this.errorHandler.handleError<any>('Error saving ANC visit details'))
-        );
+                tap(saveANCVisitDetails => this.errorHandler.log(`successfully saved ANC visit details`)),
+                catchError(this.errorHandler.handleError<any>('Error saving ANC visit details'))
+            );
     }
 
    
@@ -62,49 +63,49 @@ export class AncService {
     public EditVisitDetails(VisitDetailsEditCommand: any): Observable<any> {
         return this.http.put<any>(this.API_URL + '/api/VisitDetails/EditANCVisit', JSON.stringify(VisitDetailsEditCommand),
             httpOptions).pipe(
-            tap(saveANCVisitDetails => this.errorHandler.log(`successfully Edited ANC visit details`)),
-            catchError(this.errorHandler.handleError<any>('Error Editing ANC visit details'))
-        );
+                tap(saveANCVisitDetails => this.errorHandler.log(`successfully Edited ANC visit details`)),
+                catchError(this.errorHandler.handleError<any>('Error Editing ANC visit details'))
+            );
     }
 
     public savePregnancy(pregnancyCommand: PregnancyAncCommand): Observable<any> {
         return this.http.post<any>(this.API_URL + '/api/Pregnancy/post', JSON.stringify(pregnancyCommand),
             httpOptions).pipe(
-            tap(savePregnancy => this.errorHandler.log(`successfully saved Pregnancy details`)),
-            catchError(this.errorHandler.handleError<any>('Error saving Pregnancy details'))
-        );
+                tap(savePregnancy => this.errorHandler.log(`successfully saved Pregnancy details`)),
+                catchError(this.errorHandler.handleError<any>('Error saving Pregnancy details'))
+            );
     }
 
     public saveVisitDetails(visitDetailsCommand: VisitDetailsCommand): Observable<any> {
         return this.http.post<any>(this.API_URL + '/api/AncVisitDetails/post', JSON.stringify(visitDetailsCommand),
             httpOptions).pipe(
-            tap(saveVisitDetails => this.errorHandler.log(`successfully saved ANC visit details`)),
-            catchError(this.errorHandler.handleError<any>('Error saving ANC visit details'))
-        );
+                tap(saveVisitDetails => this.errorHandler.log(`successfully saved ANC visit details`)),
+                catchError(this.errorHandler.handleError<any>('Error saving ANC visit details'))
+            );
     }
 
     public EditANCVisitDetails(visitDetailsCommand: any): Observable<any> {
         return this.http.put<any>(this.API_URL + '/api/AncVisitDetails/put', JSON.stringify(visitDetailsCommand),
             httpOptions).pipe(
-            tap(saveVisitDetails => this.errorHandler.log(`successfully Edited ANC visit details`)),
-            catchError(this.errorHandler.handleError<any>('Error Editing ANC visit details'))
-        );
+                tap(saveVisitDetails => this.errorHandler.log(`successfully Edited ANC visit details`)),
+                catchError(this.errorHandler.handleError<any>('Error Editing ANC visit details'))
+            );
     }
 
     public SaveBaselineProfile(baselineAncCommand: BaselineAncProfileCommand): Observable<any> {
         return this.http.post<any>(this.API_URL + '/api/BaselineAnc/post', JSON.stringify(baselineAncCommand),
             httpOptions).pipe(
-            tap(SaveAncProfile => this.errorHandler.log(`successfully saved ANC Baseline`)),
-            catchError(this.errorHandler.handleError<any>('Error saving ANC Baseline'))
-        );
+                tap(SaveAncProfile => this.errorHandler.log(`successfully saved ANC Baseline`)),
+                catchError(this.errorHandler.handleError<any>('Error saving ANC Baseline'))
+            );
     }
 
     public EditBaselineProfile(baselineAncCommand: any): Observable<any> {
         return this.http.put<any>(this.API_URL + '/api/BaselineAnc/post', JSON.stringify(baselineAncCommand),
             httpOptions).pipe(
-            tap(BAselineProfile => this.errorHandler.log(`successfully Edited ANC Baseline`)),
-            catchError(this.errorHandler.handleError<any>('Error Editing ANC Baseline'))
-        );
+                tap(BAselineProfile => this.errorHandler.log(`successfully Edited ANC Baseline`)),
+                catchError(this.errorHandler.handleError<any>('Error Editing ANC Baseline'))
+            );
     }
 
 
@@ -154,9 +155,9 @@ export class AncService {
         }
         return this.http.post<any>(this.API_PMTCT_URL + '/api/PatientDrugAdministration/Add',
             JSON.stringify(drug), httpOptions).pipe(
-            tap(saveDrugAdministration => this.errorHandler.log('Successfully saved Drug Administration')),
-            catchError(this.errorHandler.handleError<any>('Error in saving Drug Administration'))
-        );
+                tap(saveDrugAdministration => this.errorHandler.log('Successfully saved Drug Administration')),
+                catchError(this.errorHandler.handleError<any>('Error in saving Drug Administration'))
+            );
     }
 
 
@@ -185,18 +186,6 @@ export class AncService {
         );
     }
 
-    /* public saveHivStatus(htsAncEncounter: any): Observable<any> {
-         const Indata = {
-             'Encounter': htsAncEncounter
-         };
- 
-         return this.http.post<any>(this.API_URL + '/api/HtsEncounter',
-             JSON.stringify(Indata), httpOptions).pipe(
-                 tap(saveHivStatus => this.errorHandler.log('SaveHivStatus command')),
-                 catchError(this.errorHandler.handleError<any>('PreventiveServiceController'))
-             );
-     }*/
-
     public saveAncHivStatus(hivStatusCommand: HivStatusCommand, anyTests: any[]): Observable<any> {
         if (anyTests.length == 0) {
             return of([]);
@@ -212,19 +201,12 @@ export class AncService {
         );
     }
 
-    public saveHivResults(serviceAreaId: number, patientMasterVisitId: number,
-        patientId: number, providerId: number, htsEncounterId: number, testing: any[], finalResultsBody: {}): Observable<any> {
-        const Indata = {
-            'Testing': testing,
-            'FinalTestingResult': finalResultsBody,
-            'HtsEncounterId': htsEncounterId,
-            'ProviderId': providerId,
-            'PatientId': patientId,
-            'PatientMasterVisitId': patientMasterVisitId,
-            'ServiceAreaId': serviceAreaId
-        };
+    public saveHivResults(hivTestsCommand: HivTestsCommand): Observable<any> {
+        if (!hivTestsCommand.HtsEncounterId || hivTestsCommand.HtsEncounterId == null || hivTestsCommand.HtsEncounterId == 0) {
+            return of([]);
+        }
 
-        return this.http.post<any>(this.API_URL + '/api/HtsEncounter/addTestResults', JSON.stringify(Indata), httpOptions).pipe(
+        return this.http.post<any>(this.API_URL + '/api/HtsEncounter/addTestResults', JSON.stringify(hivTestsCommand), httpOptions).pipe(
             tap(saveHivResults => this.errorHandler.log('SaveHivResults command')),
             catchError(this.errorHandler.handleError<any>('PreventiveServiceController'))
         );
@@ -233,122 +215,122 @@ export class AncService {
     public getPatientCounselingInfo(patientId: number, patientMasterVisitId: number) {
         return this.http.get<any[]>(this.API_URL + '/api/PatientEducationExamination/GetPatientCounseling/' +
             patientId + ' / ' + patientMasterVisitId).pipe(
-            tap(getPatientCounselingInfo => this.errorHandler.log('get ANC Counseling Data')),
-            catchError(this.errorHandler.handleError<any[]>('getPatientCounselingInfo'))
-        );
+                tap(getPatientCounselingInfo => this.errorHandler.log('get ANC Counseling Data')),
+                catchError(this.errorHandler.handleError<any[]>('getPatientCounselingInfo'))
+            );
     }
 
     public getPatientCounselingInfoAll(patientId: number) {
         return this.http.get<any[]>(this.API_URL + '/api/PatientEducationExamination/GetPatientCounsellingAll/' +
             patientId).pipe(
-            tap(getPatientCounselingInfoAll => this.errorHandler.log('get ANC Counseling Data All')),
-            catchError(this.errorHandler.handleError<any[]>('getPatientCounselingInfoAll'))
-        );
+                tap(getPatientCounselingInfoAll => this.errorHandler.log('get ANC Counseling Data All')),
+                catchError(this.errorHandler.handleError<any[]>('getPatientCounselingInfoAll'))
+            );
     }
 
     public getPatientPhysicalExaminationInfo(patientId: number, patientMasterVisitId: number) {
         return this.http.get<any[]>(this.API_URL + '/api/PhysicalExamination/GetPhysicalExam/' +
             patientId + ' / ' + patientMasterVisitId).pipe(
-            tap(getPatientPhysicalExminationInfo => this.errorHandler.log('get ANC Physical examination Data')),
-            catchError(this.errorHandler.handleError<any[]>('getPatientPhysicalExaminationInfo'))
-        );
+                tap(getPatientPhysicalExminationInfo => this.errorHandler.log('get ANC Physical examination Data')),
+                catchError(this.errorHandler.handleError<any[]>('getPatientPhysicalExaminationInfo'))
+            );
     }
 
     public getPatientWhoStageInfoCurrent(patientId: number) {
         return this.http.get<any[]>(this.API_URL + '/api/PatientWhoStage/GetWhoStageCurrent/' +
             patientId).pipe(
-            tap(getPatientWhoStageInfo => this.errorHandler.log('get WHO Stage info Data All')),
-            catchError(this.errorHandler.handleError<any[]>('getPatientWhoStageInfoAll'))
-        );
+                tap(getPatientWhoStageInfo => this.errorHandler.log('get WHO Stage info Data All')),
+                catchError(this.errorHandler.handleError<any[]>('getPatientWhoStageInfoAll'))
+            );
     }
 
     public getPatientWhoStageInfo(patientId: number, patientMasterVisitId: number) {
         return this.http.get<any[]>(this.API_URL + '/api/PatientWhoStage/GetWhoStage/' +
             patientId + ' / ' + patientMasterVisitId).pipe(
-            tap(getPatientWhoStageInfo => this.errorHandler.log('get WHO Stage info Data')),
-            catchError(this.errorHandler.handleError<any[]>('getPatientWhoStageInfo'))
-        );
+                tap(getPatientWhoStageInfo => this.errorHandler.log('get WHO Stage info Data')),
+                catchError(this.errorHandler.handleError<any[]>('getPatientWhoStageInfo'))
+            );
     }
 
     public getPatientScreeningInfoByPatientId(patientId: number) {
         return this.http.get<any[]>(this.API_URL + '/api/PatientScreening/GetPatientScreeningByPatientId/' +
-            patientId ).pipe(
-            tap(getPatientScreeningInfo => this.errorHandler.log('get WHO Stage info Data All')),
-            catchError(this.errorHandler.handleError<any[]>('getPatientScreeningInfo All'))
-        );
+            patientId).pipe(
+                tap(getPatientScreeningInfo => this.errorHandler.log('get WHO Stage info Data All')),
+                catchError(this.errorHandler.handleError<any[]>('getPatientScreeningInfo All'))
+            );
     }
 
     public getPatientScreeningInfo(patientId: number, patientMasterVisitId: number) {
         return this.http.get<any[]>(this.API_URL + '/api/PatientScreening/GetPatientScreening/' +
             patientId + ' / ' + patientMasterVisitId).pipe(
-            tap(getPatientScreeningInfo => this.errorHandler.log('get WHO Stage info Data')),
-            catchError(this.errorHandler.handleError<any[]>('getPatientScreeningInfo'))
-        );
+                tap(getPatientScreeningInfo => this.errorHandler.log('get WHO Stage info Data')),
+                catchError(this.errorHandler.handleError<any[]>('getPatientScreeningInfo'))
+            );
     }
 
     public getPatientDrugAdministrationInfo(patientId: number) {
         return this.http.get<any[]>(this.API_PMTCT_URL + '/api/PatientDrugAdministration/GetByPatientId/' +
             patientId).pipe(
-            tap(getPatientDrugAdministrationInfo => this.errorHandler.log('get Drug Administration info Data')),
-            catchError(this.errorHandler.handleError<any[]>('getPatientDrugAdministrationInfo'))
-        );
+                tap(getPatientDrugAdministrationInfo => this.errorHandler.log('get Drug Administration info Data')),
+                catchError(this.errorHandler.handleError<any[]>('getPatientDrugAdministrationInfo'))
+            );
     }
 
     public getPatientChronicIllnessInfo(patientId: number) {
         return this.http.get<any[]>(this.API_URL + '/api/PatientChronicIllness/GetByPatientId/' +
-            patientId ).pipe(
-            tap(getPatientChronicIllnessInfo => this.errorHandler.log('get chronic info Data')),
-            catchError(this.errorHandler.handleError<any[]>('getPatientChronicIllnessInfo'))
-        );
+            patientId).pipe(
+                tap(getPatientChronicIllnessInfo => this.errorHandler.log('get chronic info Data')),
+                catchError(this.errorHandler.handleError<any[]>('getPatientChronicIllnessInfo'))
+            );
     }
 
     public getPatientPreventiveServiceInfo(patientId: number) {
         return this.http.get<any[]>(this.API_URL + '/api/PatientService/GetByPatientId/' +
-            patientId ).pipe(
-            tap(getPatientPreventiveServiceInfo => this.errorHandler.log('get preventive service')),
-            catchError(this.errorHandler.handleError<any[]>('getPatientPreventiveServiceInfo'))
-        );
+            patientId).pipe(
+                tap(getPatientPreventiveServiceInfo => this.errorHandler.log('get preventive service')),
+                catchError(this.errorHandler.handleError<any[]>('getPatientPreventiveServiceInfo'))
+            );
     }
 
     public getBaselineAncProfile(patientId: number) {
         return this.http.get<any[]>(this.API_URL + '/api/BaselineAnc/Get/' +
             patientId).pipe(
-            tap(getBaselineAncProfile => this.errorHandler.log('get ANC Profile info Data')),
-            catchError(this.errorHandler.handleError<any[]>('getBaselineAncProfile'))
-        );
+                tap(getBaselineAncProfile => this.errorHandler.log('get ANC Profile info Data')),
+                catchError(this.errorHandler.handleError<any[]>('getBaselineAncProfile'))
+            );
     }
 
     public getPatientPartnerTestingInfo(patientId: number) {
         return this.http.get<any[]>(this.API_PMTCT_URL + '/api/PatientPartnerTesting/Get/' +
             patientId).pipe(
-            tap(getPatientPartnerTestingInfo => this.errorHandler.log('get Partner Testing Data')),
-            catchError(this.errorHandler.handleError<any[]>('getPatientPartnerTestingInfo'))
-        );
+                tap(getPatientPartnerTestingInfo => this.errorHandler.log('get Partner Testing Data')),
+                catchError(this.errorHandler.handleError<any[]>('getPatientPartnerTestingInfo'))
+            );
     }
 
     public getPatientAppointment(patientId: number, patientMasterVisitId: number) {
         return this.http.get<any[]>(this.API_URL + '/api/PatientReferralAndAppointment/GetAppointment/' +
             patientId + '/' + patientMasterVisitId).pipe(
-            tap(getPatientAppointment => this.errorHandler.log('get patientappointment data')),
-            catchError(this.errorHandler.handleError<any[]>('getPatientAppointment'))
-        );
+                tap(getPatientAppointment => this.errorHandler.log('get patientappointment data')),
+                catchError(this.errorHandler.handleError<any[]>('getPatientAppointment'))
+            );
     }
 
 
     public getPatientReferral(patientId: number, patientMasterVisitId: number) {
         return this.http.get<any[]>(this.API_URL + '/api/PatientReferralAndAppointment/GetReferral/' +
             patientId + '/' + patientMasterVisitId).pipe(
-            tap(getPatientReferral => this.errorHandler.log('get patient Referral data')),
-            catchError(this.errorHandler.handleError<any[]>('getPatientReferral'))
-        );
+                tap(getPatientReferral => this.errorHandler.log('get patient Referral data')),
+                catchError(this.errorHandler.handleError<any[]>('getPatientReferral'))
+            );
     }
 
     public getPatientVisitDetails(patientId: number, patientMasterVisitId: number) {
         return this.http.get<any[]>(this.API_URL + '/api/AncVisitDetails/Get/' +
             patientId + '/' + patientMasterVisitId).pipe(
-            tap(getPatientVisitDetails => this.errorHandler.log('get patient visit details data')),
-            catchError(this.errorHandler.handleError<any[]>('getPatientVisitDetails'))
-        );
+                tap(getPatientVisitDetails => this.errorHandler.log('get patient visit details data')),
+                catchError(this.errorHandler.handleError<any[]>('getPatientVisitDetails'))
+            );
     }
 
 

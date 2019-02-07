@@ -98,7 +98,8 @@ export class PncService {
     }
 
     public savePncHivTests(hivTestsCommand: HivTestsCommand): Observable<any> {
-        if (hivTestsCommand.Testing.length == 0) {
+        if (hivTestsCommand.Testing.length == 0 ||
+            (!hivTestsCommand.HtsEncounterId || hivTestsCommand.HtsEncounterId == null || hivTestsCommand.HtsEncounterId == 0)) {
             return of([]);
         }
         return this.http.post<any>(this.API_URL + '/api/HtsEncounter/addTestResults', JSON.stringify(hivTestsCommand), httpOptions).pipe(

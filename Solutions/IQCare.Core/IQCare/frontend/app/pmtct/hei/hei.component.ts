@@ -56,7 +56,7 @@ export class HeiComponent implements OnInit {
     hivtestingOptions: any[] = [];
     motherreceivedrugsOptions: any[] = [];
     heimotherregimenOptions: any[] = [];
-    yesnoOptions: any[] = [];
+    yesnoOptions: LookupItemView[] = [];
     motherdrugsatinfantenrollmentOptions: any[] = [];
     primarycaregiverOptions: any[] = [];
     immunizationHistoryOptions: any[] = [];
@@ -382,18 +382,61 @@ export class HeiComponent implements OnInit {
             CreatedBy: this.userId
         };
 
+        const OnAntiTbDrugsValue = this.yesnoOptions.filter(obj => obj.itemId == this.tbAssessmentFormGroup.value[0]['currentlyOnAntiTb']);
+        let OnAntiTbDrugs = null;
+        if (OnAntiTbDrugsValue.length > 0) {
+            OnAntiTbDrugs = OnAntiTbDrugsValue[0].itemName == 'Yes' ? true : false;
+        }
+
+        const CoughValue = this.yesnoOptions.filter(obj => obj.itemId == this.tbAssessmentFormGroup.value[0]['coughAnyDuration']);
+        let Cough = null;
+        if (CoughValue.length > 0) {
+            Cough = CoughValue[0].itemName == 'Yes' ? true : false;
+        }
+
+        const FeverValue = this.yesnoOptions.filter(obj => obj.itemId == this.tbAssessmentFormGroup.value[0]['fever']);
+        let Fever = null;
+        if (FeverValue.length > 0) {
+            Fever = FeverValue[0].itemName == 'Yes' ? true : false;
+        }
+
+        const WeightLossValue = this.yesnoOptions.filter(obj => obj.itemId == this.tbAssessmentFormGroup.value[0]['weightLoss']);
+        let WeightLoss = null;
+        if (WeightLossValue.length > 0) {
+            WeightLoss = WeightLossValue[0].itemName == 'Yes' ? true : false;
+        }
+
+        const ContactWithTbValue = this.yesnoOptions.filter(obj => obj.itemId == this.tbAssessmentFormGroup.value[0]['contactTB']);
+        let ContactWithTb = null;
+        if (ContactWithTbValue.length > 0) {
+            ContactWithTb = ContactWithTbValue[0].itemName == 'Yes' ? true : false;
+        }
+
+        const OnIptValue = this.yesnoOptions.filter(obj => obj.itemId == this.tbAssessmentFormGroup.value[0]['onIPT']);
+        let OnIpt = null;
+        if (OnIptValue.length > 0) {
+            OnIpt = OnIptValue[0].itemName == 'Yes' ? true : false;
+        }
+
+        const EverBeenOnIptValue = this.yesnoOptions.filter(obj => obj.itemId == this.tbAssessmentFormGroup.value[0]['startIPT']);
+        let EverBeenOnIpt = null;
+        if (EverBeenOnIptValue.length > 0) {
+            EverBeenOnIpt = EverBeenOnIptValue[0].itemName == 'Yes' ? true : false;
+        }
+
         const patientIcf = {
             Id: 0,
             PatientId: this.patientId,
             PatientMasterVisitId: this.patientMasterVisitId,
             CreateDate: new Date(),
             CreatedBy: this.userId,
-            OnAntiTbDrugs: this.tbAssessmentFormGroup.value[0]['currentlyOnAntiTb'],
-            Cough: this.tbAssessmentFormGroup.value[0]['coughAnyDuration'],
-            Fever: this.tbAssessmentFormGroup.value[0]['fever'],
-            WeightLoss: this.tbAssessmentFormGroup.value[0]['weightLoss'],
-            ContactWithTb: this.tbAssessmentFormGroup.value[0]['contactTB'],
-
+            OnAntiTbDrugs: OnAntiTbDrugs,
+            Cough: Cough,
+            Fever: Fever,
+            WeightLoss: WeightLoss,
+            ContactWithTb: ContactWithTb,
+            OnIpt: OnIpt,
+            EverBeenOnIpt: EverBeenOnIpt
         } as PatientIcf;
 
         const patientIcfAction = {
@@ -488,18 +531,61 @@ export class HeiComponent implements OnInit {
 
         }
 
+        const OnAntiTbDrugsValue = this.yesnoOptions.filter(obj => obj.itemId == this.tbAssessmentFormGroup.value[0]['currentlyOnAntiTb']);
+        let OnAntiTbDrugs = null;
+        if (OnAntiTbDrugsValue.length > 0) {
+            OnAntiTbDrugs = OnAntiTbDrugsValue[0].itemName == 'Yes' ? true : false;
+        }
+
+        const CoughValue = this.yesnoOptions.filter(obj => obj.itemId == this.tbAssessmentFormGroup.value[0]['coughAnyDuration']);
+        let Cough = null;
+        if (CoughValue.length > 0) {
+            Cough = CoughValue[0].itemName == 'Yes' ? true : false;
+        }
+
+        const FeverValue = this.yesnoOptions.filter(obj => obj.itemId == this.tbAssessmentFormGroup.value[0]['fever']);
+        let Fever = null;
+        if (FeverValue.length > 0) {
+            Fever = FeverValue[0].itemName == 'Yes' ? true : false;
+        }
+
+        const WeightLossValue = this.yesnoOptions.filter(obj => obj.itemId == this.tbAssessmentFormGroup.value[0]['weightLoss']);
+        let WeightLoss = null;
+        if (WeightLossValue.length > 0) {
+            WeightLoss = WeightLossValue[0].itemName == 'Yes' ? true : false;
+        }
+
+        const ContactWithTbValue = this.yesnoOptions.filter(obj => obj.itemId == this.tbAssessmentFormGroup.value[0]['contactTB']);
+        let ContactWithTb = null;
+        if (ContactWithTbValue.length > 0) {
+            ContactWithTb = ContactWithTbValue[0].itemName == 'Yes' ? true : false;
+        }
+
+        const OnIptValue = this.yesnoOptions.filter(obj => obj.itemId == this.tbAssessmentFormGroup.value[0]['onIPT']);
+        let OnIpt = null;
+        if (OnIptValue.length > 0) {
+            OnIpt = OnIptValue[0].itemName == 'Yes' ? true : false;
+        }
+
+        const EverBeenOnIptValue = this.yesnoOptions.filter(obj => obj.itemId == this.tbAssessmentFormGroup.value[0]['startIPT']);
+        let EverBeenOnIpt = null;
+        if (EverBeenOnIptValue.length > 0) {
+            EverBeenOnIpt = EverBeenOnIptValue[0].itemName == 'Yes' ? true : false;
+        }
+
         const patientIcf = {
             Id: 0,
             PatientId: this.patientId,
             PatientMasterVisitId: this.patientMasterVisitId,
             CreateDate: new Date(),
             CreatedBy: this.userId,
-            OnAntiTbDrugs: this.tbAssessmentFormGroup.value[0]['currentlyOnAntiTb'],
-            Cough: this.tbAssessmentFormGroup.value[0]['coughAnyDuration'],
-            Fever: this.tbAssessmentFormGroup.value[0]['fever'],
-            WeightLoss: this.tbAssessmentFormGroup.value[0]['weightLoss'],
-            ContactWithTb: this.tbAssessmentFormGroup.value[0]['contactTB'],
-
+            OnAntiTbDrugs: OnAntiTbDrugs,
+            Cough: Cough,
+            Fever: Fever,
+            WeightLoss: WeightLoss,
+            ContactWithTb: ContactWithTb,
+            OnIpt: OnIpt,
+            EverBeenOnIpt: EverBeenOnIpt
         } as PatientIcf;
 
         const patientIcfAction = {
@@ -680,9 +766,11 @@ export class HeiComponent implements OnInit {
                     mergeMap(res => this.heiService.getLabOrderTestsByOrderId(res['labOrderId']))
                 ).subscribe(res => {
                     // console.log(res);
-                    completeLabOrderCommand.LabOrderId = res[0]['labOrderId'];
-                    completeLabOrderCommand.LabOrderTestId = res[0]['id'];
-                    completeLabOrderCommand.LabTestId = res[0]['labTestId'];
+                    if (res.length > 0 && res[0]['labOrderId']) {
+                        completeLabOrderCommand.LabOrderId = res[0]['labOrderId'];
+                        completeLabOrderCommand.LabOrderTestId = res[0]['id'];
+                        completeLabOrderCommand.LabTestId = res[0]['labTestId'];
+                    }
 
                     for (let i = 0; i < this.hivTestingFormGroup.length; i++) {
                         for (let j = 0; j < this.hivTestingFormGroup[i].length; j++) {
