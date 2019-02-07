@@ -101,23 +101,7 @@ export class TbAssessmentComponent implements OnInit, OnChanges {
     loadTBAssessment(): void {
         this.heiservice.getTBAssessment(this.patientId).subscribe(
             (result) => {
-                console.log(result);
-                /*
-                this.TbAssessmentFormGroup = this._formBuilder.group({
-                    currentlyOnAntiTb: new FormControl('', [Validators.required]),
-                    coughAnyDuration: new FormControl('', [Validators.required]),
-                    fever: new FormControl('', [Validators.required]),
-                    weightLoss: new FormControl('', [Validators.required]),
-                    contactTB: new FormControl('', [Validators.required]),
-                    sputumSmear: new FormControl('', [Validators.required]),
-                    geneXpert: new FormControl('', [Validators.required]),
-                    chestXray: new FormControl('', [Validators.required]),
-                    invitationContacts: new FormControl('', [Validators.required]),
-                    tbScreaningOutcome: new FormControl('', [Validators.required]),
-                    onIPT: new FormControl('', [Validators.required]),
-                    startIPT: new FormControl('', [Validators.required])
-                });
-                */
+                // console.log('tbassessment', result);                
 
                 for (let i = 0; i < result.length; i++) {
                     // On TB drugs
@@ -125,25 +109,52 @@ export class TbAssessmentComponent implements OnInit, OnChanges {
                     const currentlyOnAntiTb = this.yesnoOptions.filter(obj => obj.itemName == onAntiTbDrugs);
                     this.TbAssessmentFormGroup.get('currentlyOnAntiTb').setValue(currentlyOnAntiTb[0].itemId);
                     // cough
-                    const cough = result[i].cough ? 'Yes' : 'No';
-                    const coughAnyDuration = this.yesnoOptions.filter(obj => obj.itemName == cough);
-                    this.TbAssessmentFormGroup.get('coughAnyDuration').setValue(coughAnyDuration[0].itemId);
+                    let cough;
+                    if (result[i].cough != null) {
+                        cough = result[i].cough ? 'Yes' : 'No';
+                        const coughAnyDuration = this.yesnoOptions.filter(obj => obj.itemName == cough);
+                        this.TbAssessmentFormGroup.get('coughAnyDuration').setValue(coughAnyDuration[0].itemId);
+                    }
+
                     // fever
-                    const fever = result[i].fever ? 'Yes' : 'No';
-                    const feverValue = this.yesnoOptions.filter(obj => obj.itemName == fever);
-                    this.TbAssessmentFormGroup.get('fever').setValue(feverValue[0].itemId);
+                    let fever;
+                    if (result[i].fever != null) {
+                        fever = result[i].fever ? 'Yes' : 'No';
+                        const feverValue = this.yesnoOptions.filter(obj => obj.itemName == fever);
+                        this.TbAssessmentFormGroup.get('fever').setValue(feverValue[0].itemId);
+                    }
+
                     // weightLoss
-                    const weightLoss = result[i].weightLoss ? 'Yes' : 'No';
-                    const weightLossValue = this.yesnoOptions.filter(obj => obj.itemName == weightLoss);
-                    this.TbAssessmentFormGroup.get('weightLoss').setValue(weightLossValue[0].itemId);
+                    let weightLoss;
+                    if (result[i].weightLoss != null) {
+                        weightLoss = result[i].weightLoss ? 'Yes' : 'No';
+                        const weightLossValue = this.yesnoOptions.filter(obj => obj.itemName == weightLoss);
+                        this.TbAssessmentFormGroup.get('weightLoss').setValue(weightLossValue[0].itemId);
+                    }
+
                     // contactTB
-                    const contactWithTb = result[i].contactWithTb ? 'Yes' : 'No';
-                    const contactTB = this.yesnoOptions.filter(obj => obj.itemName == contactWithTb);
-                    this.TbAssessmentFormGroup.get('contactTB').setValue(contactTB[0].itemId);
+                    let contactWithTb;
+                    if (result[i].contactWithTb != null) {
+                        contactWithTb = result[i].contactWithTb ? 'Yes' : 'No';
+                        const contactTB = this.yesnoOptions.filter(obj => obj.itemName == contactWithTb);
+                        this.TbAssessmentFormGroup.get('contactTB').setValue(contactTB[0].itemId);
+                    }
+
                     // onIpt
-                    this.TbAssessmentFormGroup.get('onIPT').setValue(result[i].onIpt);
+                    let onIpt;
+                    if (result[i].onIpt != null) {
+                        onIpt = result[i].onIpt ? 'Yes' : 'No';
+                        const Ipt = this.yesnoOptions.filter(obj => obj.itemName == onIpt);
+                        this.TbAssessmentFormGroup.get('onIPT').setValue(Ipt[0].itemId);
+                    }
+
                     // onAntiTbDrugs
-                    this.TbAssessmentFormGroup.get('onIPT').setValue(result[i].onIpt);
+                    let startIPT;
+                    if (result[i].everBeenOnIpt != null) {
+                        startIPT = result[i].everBeenOnIpt ? 'Yes' : 'No';
+                        const _startIPT = this.yesnoOptions.filter(obj => obj.itemName == startIPT);
+                        this.TbAssessmentFormGroup.get('startIPT').setValue(_startIPT[0].itemId);
+                    }
                 }
             },
             (error) => {

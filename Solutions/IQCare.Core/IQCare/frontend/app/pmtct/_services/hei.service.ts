@@ -225,7 +225,7 @@ export class HeiService {
     }
 
     public saveCompleteHeiLabOrder(completeLabOrderCommand: CompleteLabOrderCommand): Observable<any> {
-        if (!completeLabOrderCommand.LabOrderId) {
+        if (!completeLabOrderCommand.LabOrderId || completeLabOrderCommand.LabOrderId == 0) {
             return of([]);
         }
 
