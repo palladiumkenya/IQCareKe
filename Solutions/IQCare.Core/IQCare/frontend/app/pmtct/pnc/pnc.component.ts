@@ -73,6 +73,7 @@ export class PncComponent implements OnInit {
     motherExaminationOptions: LookupItemView[] = [];
     babyExaminationControls: LookupItemView[] = [];
     drugAdministrationCategories: LookupItemView[] = [];
+    administeredInfantDrugs : any[] = [];
 
     pncHivOptions: any[] = [];
     matHistoryOptions: any[] = [];
@@ -310,6 +311,10 @@ export class PncComponent implements OnInit {
         this.diagnosisReferralAppointmentFormGroup.push(formGroup);
     }
 
+    onInfantDrugsNotify(infantDrugs: any[]){
+      this.administeredInfantDrugs = infantDrugs;
+    }
+
     onSubmitForm() {
         if (!this.diagnosisReferralAppointmentFormGroup.valid) {
             this.snotifyService.error('Complete the highlighted fields before submitting', 'PNC Encounter',
@@ -531,18 +536,25 @@ export class PncComponent implements OnInit {
                 value = this.drugAdministration_PartnerTesting_FormGroup.value[0]['startedARTPncVisit'];
             } else if (this.drugAdministrationCategories[i].itemName == 'Haematinics given') {
                 value = this.drugAdministration_PartnerTesting_FormGroup.value[0]['haematinics_given'];
-            } else if (this.drugAdministrationCategories[i].itemName == 'Infant_Drug') {
-                value = this.drugAdministration_PartnerTesting_FormGroup.value[0]['infant_drug'];
-            } else if (this.drugAdministrationCategories[i].itemName == 'Infant_Start_Continue') {
-                value = this.drugAdministration_PartnerTesting_FormGroup.value[0]['infant_start'];
+            } 
+            if(value != 0)
+            {
+                drugAdministrationCommand.AdministeredDrugs.push({
+                    Id: this.drugAdministrationCategories[i].itemId,
+                    Value: value,
+                    Description: this.drugAdministrationCategories[i].itemName
+                });
             }
-
-            drugAdministrationCommand.AdministeredDrugs.push({
-                Id: this.drugAdministrationCategories[i].itemId,
-                Value: value,
-                Description: this.drugAdministrationCategories[i].itemName
-            });
+           
         }
+
+        this.administeredInfantDrugs.forEach(drug=>{
+            drugAdministrationCommand.AdministeredDrugs.push({
+                Id: drug.drugId,
+                Value: drug.statusId,
+                Description: drug.drugName
+            });
+        })
 
         const partnerTestingCommand: PartnerTestingCommand = {
             PatientId: this.patientId,

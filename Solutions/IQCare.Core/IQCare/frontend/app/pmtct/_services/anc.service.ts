@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { ErrorHandlerService } from '../../shared/_services/errorhandler.service';
 import { environment } from '../../../environments/environment';
-import { Observable, of } from 'rxjs/index';
+import { Observable, of, BehaviorSubject } from 'rxjs/index';
 import { catchError, tap } from 'rxjs/operators';
 import { PatientEducationCommand } from '../_models/PatientEducationCommand';
 import { ClientMonitoringCommand } from '../_models/ClientMonitoringCommand';
@@ -40,6 +40,9 @@ export class AncService {
 
     public profile: PatientProfile = {};
 
+    private visitDateMessageSource = new BehaviorSubject<any>({});
+    visitDate = this.visitDateMessageSource.asObservable();
+
 
     constructor(private http: HttpClient,
         private errorHandler: ErrorHandlerService) { }
@@ -50,6 +53,11 @@ export class AncService {
                 tap(saveANCVisitDetails => this.errorHandler.log(`successfully saved ANC visit details`)),
                 catchError(this.errorHandler.handleError<any>('Error saving ANC visit details'))
             );
+    }
+
+   
+    public updateVisitDate(visitDate: any) {
+        this.visitDateMessageSource.next(visitDate)
     }
 
     public EditVisitDetails(VisitDetailsEditCommand: any): Observable<any> {

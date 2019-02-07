@@ -4,6 +4,7 @@ import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms'
 import { LookupItemView } from '../../../shared/_models/LookupItemView';
 import { NotificationService } from '../../../shared/_services/notification.service';
 import { SnotifyService } from 'ng-snotify';
+import { MatTableDataSource } from '@angular/material';
 
 @Component({
     selector: 'app-pnc-drugadministration',
@@ -17,12 +18,18 @@ export class PncDrugadministrationComponent implements OnInit, AfterViewInit {
     infantPncDrugOptions: LookupItemView[] = [];
     infantDrugsStartContinueOptions: LookupItemView[] = [];
 
+    drugs_displaycolumns : any[] = ['drugName','status','action'];
+    added_drugs_data : any[] = [];
+    dataSource = new MatTableDataSource(this.added_drugs_data);
+
+     
     @Input('drugAdministrationOptions') drugAdministrationOptions: any;
     @Input('isEdit') isEdit: boolean;
     @Input('patientId') patientId: number;
     @Input('patientMasterVisitId') patientMasterVisitId: number;
 
     @Output() notify: EventEmitter<FormGroup> = new EventEmitter<FormGroup>();
+    @Output() notifyInfantDrug : EventEmitter<any[]> = new EventEmitter<any[]>();
 
     constructor(private _formBuilder: FormBuilder,
         private pncService: PncService,
@@ -83,5 +90,41 @@ export class PncDrugadministrationComponent implements OnInit, AfterViewInit {
                     this.notificationService.getConfig());
             }
         );
+    }
+
+   
+    public AddDrug() 
+    {
+        var drugId =  this.DrugAdministrationForm.get('infant_drug').value;
+        var statusId =  this.DrugAdministrationForm.get('infant_start').value;
+         
+        if(drugId == undefined || statusId == undefined)
+            return;
+
+        var drugExists = this.added_drugs_data.filter(x=>x.drugId == drugId).length > 0;
+        if(drugExists){
+            this.snotifyService.error('Selected drug already added', 'PNC Encounter',
+            this.notificationService.getConfig());
+            return;
+        }
+
+        this.added_drugs_data.push(
+        {
+           drugId : drugId,
+           drugName : this.infantPncDrugOptions.filter(x=>x.itemId == drugId)[0].displayName,
+           statusId : statusId,
+           status : this.infantDrugsStartContinueOptions.filter(x=>x.itemId == statusId)[0].displayName
+        })
+        this.notifyInfantDrug.emit(this.added_drugs_data);
+        this.dataSource = new MatTableDataSource(this.added_drugs_data);
+    }
+
+   
+    public removeDrug(element:any) 
+    {
+        var removedDrugIndex = this.added_drugs_data.indexOf(element);
+        this.added_drugs_data.splice(removedDrugIndex,1);
+        this.notifyInfantDrug.emit(this.added_drugs_data);
+        this.dataSource = new MatTableDataSource(this.added_drugs_data);
     }
 }
