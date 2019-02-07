@@ -64,7 +64,7 @@
                         <mat-form-field class="col-md-12">
                             <input formControlName="nextAppointmentDate" [min]="minDate" (click)="nextAppointmentDate.open()"
                                 id="nextAppointmentDate" name="nextAppointmentDate" matInput [matDatepicker]="nextAppointmentDate"
-                                formControlname="nextAppointmentDate" placeholder="Next HIV Test" required>
+                                formControlname="nextAppointmentDate" placeholder="Next HIV Test">
                             <mat-datepicker-toggle matSuffix [for]="nextAppointmentDate"></mat-datepicker-toggle>
                             <mat-datepicker #nextAppointmentDate></mat-datepicker>
                         </mat-form-field>
