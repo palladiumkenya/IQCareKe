@@ -84,6 +84,7 @@
 
                                         <!-- add Drug Administration Component to Stepper -->
                                         <app-pnc-drugadministration (notify)="onDrugAdministrationNotify($event)"
+                                            (notifyInfantDrug)="onInfantDrugsNotify($event)"
                                             [drugAdministrationOptions]="drugAdministrationOptions" [patientId]="patientId"
                                             [isEdit]="isEdit" [patientMasterVisitId]="patientMasterVisitId">
                                         </app-pnc-drugadministration>
@@ -107,7 +108,7 @@
                                         <div class="row">
                                             <button mat-raised-button color="primary" matStepperPrevious type="button">Previous</button>
                                             &nbsp;&nbsp;
-                                            <button mat-raised-button color="accent" matStepperNext type="button">Next</button>
+                                            <button mat-raised-button color="accent" (click)="onNextNav()" matStepperNext type="button">Next</button>
                                         </div>
                                     </mat-step>
 
