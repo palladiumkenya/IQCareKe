@@ -598,8 +598,8 @@ export class AncComponent implements OnInit, OnDestroy {
             AntenatalExercise: this.PreventiveServiceMatFormGroup.value[0]['antenatalExercise'],
             PartnerTestingVisit: this.PreventiveServiceMatFormGroup.value[0]['PartnerTestingVisit'],
             FinalHIVResult: this.PreventiveServiceMatFormGroup.value[0]['finalHIVResult'],
-            InsecticideTreatedNet: InsecticideTreatedNet,
-            InsecticideGivenDate: (InsecticideTreatedNet === 'Yes') ? InsecticideGivenDate : '' ,
+            //InsecticideTreatedNet: InsecticideTreatedNet,
+            InsecticideGivenDate: (InsecticideTreatedNet === 'Yes') ? InsecticideGivenDate : null ,
             CreatedBy: this.userId
 
         };

@@ -23,20 +23,29 @@ namespace IQCare
         public static string _connectionString { get; set; }
         public static IServiceCollection AddDatabase(this IServiceCollection services, IConfiguration configuration, IConnectionString connectionString)
         {
-            //var dbConnectionString = configuration.GetConnectionString("IQCareConnection");
+            var dbConnectionString = configuration.GetConnectionString("IQCareConnection");
             var iqcareuri = configuration.GetSection("IQCareUri").Get<string>();
-            var db = connectionString.GetConnectionString(iqcareuri);
+            var useLocal=configuration.GetSection("UseLocal").Get<bool>();
+            if (useLocal)
+            {
+                _connectionString = dbConnectionString;
+            }
+            else
+            {
+                var db = connectionString.GetConnectionString(iqcareuri);
+                
+                _connectionString = db.Result.Replace("\"","").Replace("Application Name=IQCare_EMR;","").Replace("Server", "Data Source").
+                    Replace("Type System Version=SQL Data Source 2005;","").Replace("Database", "Initial Catalog")
+                    .Replace("Integrated Security=false;", "").Replace("packet size=4128;Min Pool Size=3;Max Pool Size=200;","");
 
-            _connectionString = db.Result.Replace("\"","").Replace("Application Name=IQCare_EMR;","").Replace("Server", "Data Source").
-                Replace("Type System Version=SQL Data Source 2005;","").Replace("Database", "Initial Catalog")
-                .Replace("Integrated Security=false;", "").Replace("packet size=4128;Min Pool Size=3;Max Pool Size=200;","");
+                _connectionString = _connectionString.Replace(@"\\", @"\");
+                StringBuilder conn = new StringBuilder();
+                conn.Append(_connectionString);
+                conn.Append("MultipleActiveResultSets=True;");
 
-            _connectionString = _connectionString.Replace(@"\\", @"\");
-            StringBuilder conn = new StringBuilder();
-            conn.Append(_connectionString);
-            conn.Append("MultipleActiveResultSets=True;");
-
-            _connectionString = conn.ToString();
+                _connectionString = conn.ToString();
+            }
+            
             Log.Debug(_connectionString);
 
             services.AddDbContext<HtsDbContext>(b => b.UseSqlServer(_connectionString));
