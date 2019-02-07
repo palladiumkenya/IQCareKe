@@ -1,15 +1,15 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
-import {SnotifyService} from 'ng-snotify';
+import { SnotifyService } from 'ng-snotify';
 
-import {Subscription} from 'rxjs/index';
-import {PreventiveServiceEmitter} from '../../emitters/PreventiveServiceEmitter';
-import {PreventiveEmitter} from '../../emitters/PreventiveEmitter';
-import {LookupItemService} from '../../../shared/_services/lookup-item.service';
-import {NotificationService} from '../../../shared/_services/notification.service';
+import { Subscription } from 'rxjs/index';
+import { PreventiveServiceEmitter } from '../../emitters/PreventiveServiceEmitter';
+import { PreventiveEmitter } from '../../emitters/PreventiveEmitter';
+import { LookupItemService } from '../../../shared/_services/lookup-item.service';
+import { NotificationService } from '../../../shared/_services/notification.service';
 import * as moment from 'moment';
-import {AncService} from '../../_services/anc.service';
+import { AncService } from '../../_services/anc.service';
 
 export interface Options {
     value: string;
@@ -45,9 +45,9 @@ export class PreventiveServicesComponent implements OnInit {
 
 
     constructor(private _formBuilder: FormBuilder, private _lookupItemService: LookupItemService,
-                private  snotifyService: SnotifyService,
-                private notificationService: NotificationService,
-                private ancService: AncService ) {
+        private snotifyService: SnotifyService,
+        private notificationService: NotificationService,
+        private ancService: AncService) {
     }
 
     ngOnInit() {
@@ -59,12 +59,12 @@ export class PreventiveServicesComponent implements OnInit {
             insecticideTreatedNet: ['', Validators.required],
             insecticideTreatedNetGivenDate: ['', Validators.required],
             antenatalExercise: ['', Validators.required],
-         //   insecticideGivenDate: ['', Validators.required],
+            //   insecticideGivenDate: ['', Validators.required],
             PartnerTestingVisit: ['', Validators.required],
             finalHIVResult: ['', Validators.required]
         });
 
-        this.PreventiveServicesFormGroup.get('insecticideTreatedNetGivenDate').disable({onlySelf: true  });
+        this.PreventiveServicesFormGroup.get('insecticideTreatedNetGivenDate').disable({ onlySelf: true });
 
         const {
             yesNoNaOptions,
@@ -77,11 +77,11 @@ export class PreventiveServicesComponent implements OnInit {
         this.FinalResultOptions = hivFinalResultOptions;
         this.preventiveServicesOptions = preventiveServicesOptions;
 
-        console.log('preventive service' + hivFinalResultOptions[0].itemName);
-        this.notify.emit({'form': this.PreventiveServicesFormGroup, 'preventive_service_data': this.serviceData});
+        // console.log('preventive service' + hivFinalResultOptions[0].itemName);
+        this.notify.emit({ 'form': this.PreventiveServicesFormGroup, 'preventive_service_data': this.serviceData });
 
         if (this.isEdit) {
-           // this.getPatientPreventiveServiceInfo(this.patientId, this.patientMasterVisitId);
+            // this.getPatientPreventiveServiceInfo(this.patientId, this.patientMasterVisitId);
 
             this.PreventiveServicesFormGroup.get('preventiveServices').clearValidators();
             this.PreventiveServicesFormGroup.get('dateGiven').clearValidators();
@@ -91,7 +91,7 @@ export class PreventiveServicesComponent implements OnInit {
             this.getPatientPartnerTestingInfo(this.patientId, this.patientMasterVisitId);
             this.getPatientPreventiveServiceInfoAll(this.patientId);
         } else {
-           this.getPatientPreventiveServiceInfoAll(this.patientId);
+            this.getPatientPreventiveServiceInfoAll(this.patientId);
         }
         /*this.getLookupItems('PreventiveService', this.services);
          this.getLookupItems('YesNo', this.yesnos);
@@ -168,16 +168,16 @@ export class PreventiveServicesComponent implements OnInit {
 
     public onGivenDateChange(event) {
         const givenDate: Date = moment(event.isUserInput && event.source.selected && event.source.viewValue).toDate();
-       this.minDate = givenDate;
+        this.minDate = givenDate;
     }
 
     public onInsecticideTreatedNetGivenChange(event) {
 
         if (event.isUserInput && event.source.selected && event.source.viewValue == 'Yes') {
-           this.PreventiveServicesFormGroup.get('insecticideTreatedNetGivenDate').enable({onlySelf: true});
+            this.PreventiveServicesFormGroup.get('insecticideTreatedNetGivenDate').enable({ onlySelf: true });
         } else {
             this.PreventiveServicesFormGroup.get('insecticideTreatedNetGivenDate').setValue('');
-            this.PreventiveServicesFormGroup.get('insecticideTreatedNetGivenDate').disable({onlySelf: true  });
+            this.PreventiveServicesFormGroup.get('insecticideTreatedNetGivenDate').disable({ onlySelf: true });
         }
     }
 
@@ -193,11 +193,11 @@ export class PreventiveServicesComponent implements OnInit {
                     const service = p;
                     console.log('preventiveservice ');
                     console.log(service);
-                   // const myService = service.filter(x => x.patientMasterVisitId == patientMasterVisitId);
+                    // const myService = service.filter(x => x.patientMasterVisitId == patientMasterVisitId);
 
-                   // console.log(myService);
+                    // console.log(myService);
                     if (service.length > 0) {
-                        for (let i = 0; i < service.length; i ++) {
+                        for (let i = 0; i < service.length; i++) {
                             this.serviceData.push({
                                 preventiveService: service[i]['preventiveService'],
                                 preventiveServiceId: service[i]['preventiveServiceId'],
@@ -213,7 +213,7 @@ export class PreventiveServicesComponent implements OnInit {
                     if (insecticide.length > 0) {
                         this.PreventiveServicesFormGroup.get('insecticideTreatedNet').setValue(insecticide[0]['preventiveServiceId']);
                         this.PreventiveServicesFormGroup.get('insecticideTreatedNetGivenDate').setValue(insecticide[0]
-                            ['preventiveServiceDate']);
+                        ['preventiveServiceDate']);
                     }
 
                     if (exercise.length > 0) {
@@ -243,7 +243,7 @@ export class PreventiveServicesComponent implements OnInit {
 
                     console.log(myService);
                     if (myService.length > 0) {
-                        for (let i = 0; i < myService.length; i ++) {
+                        for (let i = 0; i < myService.length; i++) {
                             this.serviceData.push({
                                 preventiveService: myService[i]['preventiveService'],
                                 preventiveServiceId: myService[i]['preventiveServiceId'],
@@ -259,7 +259,7 @@ export class PreventiveServicesComponent implements OnInit {
                     if (insecticide.length > 0) {
                         this.PreventiveServicesFormGroup.get('insecticideTreatedNet').setValue(insecticide[0]['preventiveServiceId']);
                         this.PreventiveServicesFormGroup.get('insecticideTreatedNetGivenDate').setValue(insecticide[0]
-                            ['preventiveServiceDate']);
+                        ['preventiveServiceDate']);
                     }
 
                     if (exercise.length > 0) {
