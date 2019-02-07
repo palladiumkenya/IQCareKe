@@ -7,6 +7,8 @@ import { NotificationService } from '../../../shared/_services/notification.serv
 import { MaternityService } from '../../_services/maternity.service';
 import { HeiService } from '../../_services/hei.service';
 import * as moment from 'moment';
+import { MatDatepickerInputEvent } from '@angular/material';
+import { AncService } from '../../_services/anc.service';
 
 @Component({
     selector: 'app-hei-visit-details',
@@ -38,7 +40,7 @@ export class HeiVisitDetailsComponent implements OnInit {
         private _lookupItemService: LookupItemService,
         private snotifyService: SnotifyService,
         private notificationService: NotificationService,
-        private maternityService: MaternityService,
+        private ancService : AncService,
         private heiService: HeiService) {
         this.maxDate = new Date();
     }
@@ -128,7 +130,8 @@ export class HeiVisitDetailsComponent implements OnInit {
                         if (this.isEdit) {
                             const y = p.filter(obj =>
                                 obj.patientId == this.patientId && obj.patientMasterVisitId == this.patientMasterVisitId);
-                            if (y) {
+                                console.log(y+ '   Yyyy')
+                            if (y != null) {
                                 this.HeiVisitDetailsFormGroup.get('dayPostPartum').setValue(y[0].daysPostPartum);
                                 this.HeiVisitDetailsFormGroup.get('visitNumber').setValue(y[0].visitNumber);
                                 this.HeiVisitDetailsFormGroup.get('id').setValue(y[0].id);
@@ -173,6 +176,12 @@ export class HeiVisitDetailsComponent implements OnInit {
                 () => {
                     // console.log(this.lookupItems$);
                 });
+    }
+
+    public vistDateChange(event: MatDatepickerInputEvent<Date>)
+    {
+        console.log('Changed Date '+ event.value);
+        this.ancService.updateVisitDate(event.value);
     }
 
 }

@@ -59,6 +59,7 @@ export class PatientEducationExaminationComponent implements OnInit {
 
     displayedColumns: string[] = ['topicId', 'topic', 'onSetDate'];
     dataSource = ELEMENT_DATA;
+    visitDate : Date;
 
     constructor(private _formBuilder: FormBuilder, private _lookupItemService: LookupItemService,
                 private  snotifyService: SnotifyService,
@@ -67,7 +68,10 @@ export class PatientEducationExaminationComponent implements OnInit {
     }
 
     ngOnInit() {
-
+        this.ancService.visitDate.subscribe(date=>{
+            this.visitDate = date;
+            console.log('The visit Date Education'+ this.visitDate)
+         })
 
         this.PatientEducationFormGroup = this._formBuilder.group({
             breastExamDone: ['', Validators.required],
@@ -76,6 +80,8 @@ export class PatientEducationExaminationComponent implements OnInit {
             treatedSyphilis: ['', Validators.required]
             // testResult: new FormControl(['', Validators.required])
         });
+
+      
 
         this.userId = JSON.parse(localStorage.getItem('appUserId'));
         //  this.getLookupOptions('counselledOn', this.topics);

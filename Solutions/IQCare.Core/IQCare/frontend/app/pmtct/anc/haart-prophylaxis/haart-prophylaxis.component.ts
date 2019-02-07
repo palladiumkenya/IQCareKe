@@ -246,7 +246,6 @@ export class HaartProphylaxisComponent implements OnInit {
             .subscribe(
                 p => {
                     console.log('drug');
-                    console.log(p);
                     const drugAdministration = p;
 
                     if (drugAdministration) {
@@ -255,13 +254,6 @@ export class HaartProphylaxisComponent implements OnInit {
                         const cotrim = drugAdministration.filter(x => x.strDrugAdministered == 'Cotrimoxazole');
                         const aztBaby = drugAdministration.filter(x => x.strDrugAdministered == 'AZT for the baby dispensed');
                         const nvpBaby = drugAdministration.filter(x => x.strDrugAdministered ==  'NVP for baby dispensed');
-
-                        console.log(firstAncVisit);
-                        console.log(haartAnc);
-                        console.log(cotrim);
-                        console.log(aztBaby);
-                        console.log(nvpBaby);
-                        console.log('end drugs admin');
 
                         if (firstAncVisit.length > 0) {
                             this.HaartProphylaxisFormGroup.get('onArvBeforeANCVisit').setValue(firstAncVisit[0]['value']);
