@@ -143,7 +143,7 @@ export class AncComponent implements OnInit, OnDestroy {
                 } else {
                     this.visitId = this.patientMasterVisitId;
                     this.isEdit = true;
-                   this.isLinear = false;
+                    this.isLinear = false;
                 }
             }
         );
@@ -250,11 +250,6 @@ export class AncComponent implements OnInit, OnDestroy {
         });
 
     }
-
-    /*onNextClick() {
-        console.log(this.visitDetailsFormGroup.value);
-        return;
-    }*/
 
     onVisitDetailsNotify(formGroup: FormGroup): void {
         this.visitDetailsFormGroup.push(formGroup);

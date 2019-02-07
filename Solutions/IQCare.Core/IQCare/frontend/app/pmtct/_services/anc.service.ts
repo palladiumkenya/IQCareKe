@@ -176,7 +176,7 @@ export class AncService {
             tap(savePreventiveServices => this.errorHandler.log('Successfully saved Preventive Services')),
             catchError(this.errorHandler.handleError<any>('Error in saving Preventive Services'))
         );
-    }    
+    }
 
     public saveAncHivStatus(hivStatusCommand: HivStatusCommand, anyTests: any[]): Observable<any> {
         if (anyTests.length == 0) {
@@ -194,6 +194,10 @@ export class AncService {
     }
 
     public saveHivResults(hivTestsCommand: HivTestsCommand): Observable<any> {
+        if (!hivTestsCommand.HtsEncounterId || hivTestsCommand.HtsEncounterId == null || hivTestsCommand.HtsEncounterId == 0) {
+            return of([]);
+        }
+
         return this.http.post<any>(this.API_URL + '/api/HtsEncounter/addTestResults', JSON.stringify(hivTestsCommand), httpOptions).pipe(
             tap(saveHivResults => this.errorHandler.log('SaveHivResults command')),
             catchError(this.errorHandler.handleError<any>('PreventiveServiceController'))
