@@ -58,7 +58,7 @@
                                 <div class="col-md-3 form-group">                  
                                     <div class="col-md-12"><label class="control-label pull-left">Regimen </label></div>     
                                     <div class="col-md-12  pull-right">
-                                        <asp:DropDownList runat="server" CssClass="form-control input-sm" ID="ddlRegimen" ClientIDMode="Static" />
+                                        <asp:DropDownList runat="server" CssClass="form-control input-sm" ID="ddlRegimen" ClientIDMode="Static" onChange="SelectRegimenLine()" />
                                     </div>                        
                                 </div> 
                             </div>
@@ -392,10 +392,12 @@
 </div><%-- .col-md-12--%>
 
 <script type="text/javascript">
+    var regimen = "";
     var pmscm = "<%=PMSCM%>";
     var tp = "";
     var pmscmSamePointDispense = "<%=PMSCMSAmePointDispense%>";
     var pmscmFlag = "0";
+    var patientweight = "<%=patientweight%>";
     var prescriptionDate = "<%= this.prescriptionDate %>";
     var dispenseDate = "<%= this.dispenseDate %>";
     var enrolmentDate = "<%= this.enrolmentDate %>";
@@ -425,25 +427,25 @@
             $('.VisibleFrequency').css('visibility', 'visible');
 
             $('.VisibleMorningEvening').css('visibility', 'hidden');
-            
+
             $('.VisibleMorningEvening').css('display', 'none');
             $('.VisibleFrequency').css('display', 'inline');
-          
+
 
         }
         else {
             $('.VisibleFrequency').css('visibility', 'hidden');
             $('.VisibleFrequency').css('display', 'none');
-             $('.VisibleMorningEvening').css('display', 'inline');
+            $('.VisibleMorningEvening').css('display', 'inline');
             $('.VisibleMorningEvening').css('visibility', 'visible');
         }
-        
+
         //alert(pmscmSamePointDispense);
         ///////////////////////////////////////////////////////////////////////////////////////
         tp = $("#<%=ddlTreatmentProgram.ClientID%>").find(":selected").text();
 
         if (pmscmSamePointDispense === "PM/SCM With Same point dispense") {
-                       // tp = $("#<%=ddlTreatmentProgram.ClientID%>").find(":selected").text();
+            // tp = $("#<%=ddlTreatmentProgram.ClientID%>").find(":selected").text();
 
             pmscmFlag = "1";
             drugList(1, tp);
@@ -470,6 +472,14 @@
             $("#btnDateDisp").prop('disabled', false);
         }
         ////////////////////////////////////////////////////////////////////////////////////////////////
+      
+    
+                 
+            
+           
+
+
+      
 
             $("#<%=ddlTreatmentProgram.ClientID%>").on('change',
                 function () {
@@ -805,7 +815,35 @@
             console.log(batchNoArr);
             });
 
-    
+    function SelectRegimenLine() {
+       
+        regimen = $("#<%=ddlRegimen.ClientID%>").find(":selected").text();
+
+       
+      
+         if (regimen == "AF2E(TDF + 3TC + DTG)") {
+
+
+                if (patientweight != "") {
+                    if (parseInt(patientweight) < 35 && parseInt(age) > 15) {
+                        toastr.error("This regimen is recommended for paeds who are  15 years old  or weight of 35 kg and above");
+                        $("#<%=ddlRegimen.ClientID%>").val("");
+                        return false;
+                    }
+                }
+                if (age < 15 && patientweight == "") {
+                    toastr.error("Kindly take the weight for the patient vitals since the regimen is recommended for paeds who are 15 years old or weight of 35 kg and above ");
+                    $("#<%=ddlRegimen.ClientID%>").val("");
+                    return false;
+                }
+
+
+
+
+            }
+
+        
+    }
     
            function SelectDrug() {
                    var result = this.value.split("~");
