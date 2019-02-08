@@ -32,6 +32,8 @@ export class PncHivtestingComponent implements OnInit, AfterViewInit {
     @Input('patientId') patientId: number;
     @Input('patientMasterVisitId') patientMasterVisitId: number;
     @Input('patientEncounterId') patientEncounterId: number;
+    @Input() serviceAreaId: number;
+    serviceAreaName: string;
 
     @Output() notify: EventEmitter<Object> = new EventEmitter<Object>();
     isHivTestingDone: boolean = false;
@@ -63,6 +65,18 @@ export class PncHivtestingComponent implements OnInit, AfterViewInit {
         const { yesnoOptions, hivFinalResultsOptions } = this.pncHivOptions[0];
         this.yesnoOptions = yesnoOptions;
         this.hivFinalResultsOptions = hivFinalResultsOptions;
+
+        if (this.serviceAreaId == 3) {
+            this.serviceAreaName = 'ANC';
+        } else if (this.serviceAreaId == 4) {
+            this.serviceAreaName = 'PNC';
+        } else if (this.serviceAreaId == 5) {
+            this.serviceAreaName = 'Maternity';
+        } else if (this.serviceAreaId == 6) {
+            this.serviceAreaName = 'HEI';
+        } else {
+            this.serviceAreaName = 'HTS';
+        }
 
         this.notify.emit({ 'form': this.HivTestingForm, 'table_data': this.hiv_testing_table_data });
 
@@ -102,18 +116,19 @@ export class PncHivtestingComponent implements OnInit, AfterViewInit {
                                 expirydate: expirydate,
                                 testresult: outcome,
                                 nexthivtest: null,
-                                testpoint: 'PNC'
+                                testpoint: this.serviceAreaName
                             });
                         }
                     }
 
-
-                    this.HivTestingForm.controls.testType.setValue(result['encounter'][0]['encounterType']);
-                    const finalTestResult = this.hivFinalResultsOptions.find(
-                        obj => obj.itemId == result['encounterResults'][0]['finalResult']);
-                    this.HivTestingForm.get('finalTestResult').setValue(finalTestResult.itemId);
-                    if (finalTestResult.itemName == 'Positive') {
-                        this.HivTestingForm.get('hivTestingDone').disable({ onlySelf: false });
+                    if (result['encounterResults'].length > 0) {
+                        this.HivTestingForm.controls.testType.setValue(result['encounter'][0]['encounterType']);
+                        const finalTestResult = this.hivFinalResultsOptions.find(
+                            obj => obj.itemId == result['encounterResults'][0]['finalResult']);
+                        this.HivTestingForm.get('finalTestResult').setValue(finalTestResult.itemId);
+                        if (finalTestResult.itemName == 'Positive') {
+                            this.HivTestingForm.get('hivTestingDone').disable({ onlySelf: false });
+                        }
                     }
                     this.dataSource = new MatTableDataSource(this.historical_hiv_testing_data);
                 }

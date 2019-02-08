@@ -26,6 +26,7 @@ export class ReferralsComponent implements OnInit {
     @Input() referralFormOptions: any[] = [];
     @Input('isEdit') isEdit: boolean;
     @Input('PatientId') PatientId: number;
+    @Input('visitDate') visitDate: Date;
     @Input('PatientMasterVisitId') PatientMasterVisitId: number;
     public referralData: ReferralsEmitter;
 
@@ -89,9 +90,12 @@ export class ReferralsComponent implements OnInit {
                     const referral = p;
                     console.log('referral details');
                     console.log(referral);
+                    if (referral) {
+                        this.ReferralFormGroup.get('referredFrom').setValue(referral['referredFrom']);
+                        this.ReferralFormGroup.get('referredTo').setValue(referral['referredTo']);
+                    }
 
-                    this.ReferralFormGroup.get('referredFrom').setValue(referral['referredFrom']);
-                    this.ReferralFormGroup.get('referredTo').setValue(referral['referredTo']);
+
                 },
                 (err) => {
                     console.log(err);

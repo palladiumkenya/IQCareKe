@@ -102,6 +102,12 @@ namespace BusinessProcess.SCM
             return (DataTable)theManager.ReturnObject(ClsUtility.theParams, "pr_SCM_GetExistingPharmacyDispense_Futures", ClsUtility.ObjectEnum.DataTable);
         }
 
+        public DataTable GetmstRegimenLineClassification()
+        {
+            ClsUtility.Init_Hashtable();
+            ClsObject theManager = new ClsObject();
+            return (DataTable)theManager.ReturnObject(ClsUtility.theParams, "select * from mst_RegimenLine", ClsUtility.ObjectEnum.DataTable);
+        }
         public DataTable GetPharmacyRegimenClassification()
         {
             ClsUtility.Init_Hashtable();

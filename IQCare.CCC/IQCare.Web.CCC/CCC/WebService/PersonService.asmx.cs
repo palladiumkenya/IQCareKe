@@ -88,6 +88,8 @@ namespace IQCare.Web.CCC.WebService
         public string FirstName { get; set; }
         public string MiddleName { get; set; }
         public string LastName { get; set; }
+
+        public string NationalId { get; set; }
         public string PatientType { get; set; }
         public Decimal Age { get; set; }
         public int Sex { get; set; }
@@ -95,6 +97,26 @@ namespace IQCare.Web.CCC.WebService
         public DateTime DoB { get; set; }
         public bool DateOfBirthPrecision { get; set; }
         public string KeyPopName { get; set; }
+        public int PatientTreatmentSupporterId { get; set; }
+
+        public int CountyId { get; set; }
+        public string NearestHealthCentre { get; internal set; }
+        public string LandMark { get; internal set; }
+        public string SubLocation { get; internal set; }
+        public string Location { get; internal set; }
+        public string Village { get; internal set; }
+        public int? Ward { get; internal set; }
+        public int? SubCounty { get; internal set; }
+        public string PatientPostalAddress { get; internal set; }
+        public string EmailAddress { get; internal set; }
+        public string AlternativeNumber { get; internal set; }
+        public string MobileNumber { get; internal set; }
+        public string tsFname { get; internal set; }
+        public string ISContacts { get; internal set; }
+        public int tsGender { get; internal set; }
+        public string tsLastName { get; internal set; }
+        public string tsMiddleName { get; internal set; }
+        public string population { get; internal set; }
         public string GetAge(DateTime DateOfBirth)
         {
             TimeSpan age = DateTime.Now - DateOfBirth;
@@ -121,6 +143,7 @@ namespace IQCare.Web.CCC.WebService
         private string Msg { get; set; }
         private int Result { get; set; }
 
+       
         private List<PatientLookup> Patient { get; set; }
        // Utility _utility = new Utility();
         readonly TextInfo _textInfo = new CultureInfo("en-US", false).TextInfo;
@@ -320,6 +343,11 @@ namespace IQCare.Web.CCC.WebService
                 if (Session["PersonGuardianId"] != null)
                 {
                     guardId = int.Parse(Session["PersonGuardianId"].ToString());
+                }
+
+                if (string.IsNullOrWhiteSpace(firstname) || string.IsNullOrWhiteSpace(lastname) || gender == 0)
+                {
+                    return Msg = "<p>Invalid Guardian names and gender</p>";
                 }
 
                 if ((guardId>0) || (patientid !=null && int.Parse(patientid) > 0))
@@ -861,11 +889,29 @@ namespace IQCare.Web.CCC.WebService
                 var mstatus=new PersonMaritalStatusManager();
                 var keyPopulationManager = new PatientPopulationManager();
                 var personNotEnrolled = personMgr.GetPersonById(personId);
+               
                 var maritalStatus = mstatus.GetCurrentPatientMaritalStatus(personId);
                 var KeyPop = keyPopulationManager.GetCurrentPatientPopulations(personId);
                 int patientType = 261;
                 var ptype = lkMgr.GetItemIdByGroupAndItemName("PatientType", "New").FirstOrDefault();
-                if(ptype != null)
+                var personLocation = new PersonLocationManager();
+                var perLocation = personLocation.GetCurrentPersonLocation(personId);
+                PersonLookUp supporter = new PersonLookUp();
+                var personLookUpManager = new PersonLookUpManager();
+                var personContacts = new List<PersonContactLookUp>();
+                var personContactLookUpManager = new PersonContactLookUpManager();
+                var patientTreatmentSupporterManager = new PatientTreatmentSupporterManager();
+                var patientTreatmentSupporterLookupManager = new PatientTreatmentSupporterLookupManager();
+                var patientTreatmentSupporter = new List<PatientTreatmentSupporterLookup>();
+                personContacts = personContactLookUpManager.GetPersonContactByPersonId(personId);
+                IdentifierManager idm = new IdentifierManager();
+                var IdentifierName = idm.GetIdentifierByName("NationalID");
+               
+                PersonIdentifierManager pim = new PersonIdentifierManager();
+                
+                patientTreatmentSupporter = patientTreatmentSupporterLookupManager.GetAllPatientTreatmentSupporter(personId);
+
+                if (ptype != null)
                 {
                     patientType = ptype.ItemId;
                 }
@@ -883,8 +929,84 @@ namespace IQCare.Web.CCC.WebService
                     MaritalStatus = (null==maritalStatus)?0: maritalStatus.MaritalStatusId,
                     Age = Convert.ToDecimal(notEnrolled.GetAge(dob.Value)),
                     DateOfBirthPrecision = true,
+                    
+
+
                     KeyPopName = (KeyPop.Count>0)? KeyPop[0].PopulationType:""
                 };
+
+                if (IdentifierName != null)
+                {
+                    var PersonIdentifier = pim.GetPersonIdentifiers(personId, IdentifierName.Id);
+                    if (PersonIdentifier != null)
+                    {
+                        if (PersonIdentifier.Count > 0)
+                        {
+
+                            personNotEnrolledData.NationalId = PersonIdentifier[0].IdentifierValue.ToString();
+                        }
+
+                    }
+                }
+
+                if (perLocation.Count > 0)
+                {
+                    personNotEnrolledData.CountyId = perLocation[0].County;
+                    personNotEnrolledData.SubCounty = perLocation[0].SubCounty;
+                    personNotEnrolledData.Ward = perLocation[0].Ward;
+                    personNotEnrolledData.Village = perLocation[0].Village;
+                    personNotEnrolledData.Location = perLocation[0].Location;
+                    personNotEnrolledData.SubLocation = perLocation[0].SubLocation;
+                    personNotEnrolledData.LandMark = perLocation[0].LandMark;
+                    personNotEnrolledData.NearestHealthCentre = perLocation[0].NearestHealthCentre;
+                }
+                //Person Contacts
+                if (personContacts.Count > 0)
+                {
+                    personNotEnrolledData.PatientPostalAddress = (personContacts[0].PhysicalAddress);
+                    personNotEnrolledData.MobileNumber = (personContacts[0].MobileNumber);
+                    personNotEnrolledData.AlternativeNumber = (personContacts[0].AlternativeNumber);
+                    personNotEnrolledData.EmailAddress = (personContacts[0].EmailAddress);
+                }
+
+                if (patientTreatmentSupporter.Count > 0)
+                {
+                    supporter = personLookUpManager.GetPersonById(patientTreatmentSupporter[0].SupporterId);
+
+                    if (supporter != null)
+                    {
+                        var supporterContact = personContactLookUpManager.GetPersonContactByPersonId(supporter.Id);
+                        personNotEnrolledData.tsFname = (supporter.FirstName);
+                        personNotEnrolledData.tsMiddleName = (supporter.MiddleName);
+                        personNotEnrolledData.tsLastName = (supporter.LastName);
+                        personNotEnrolledData.tsGender = supporter.Sex;
+                       
+                            if (supporterContact != null)
+                            {
+                                if (supporterContact.Count > 0)
+                                {
+
+                                    personNotEnrolledData.ISContacts = supporterContact[0].MobileNumber;
+                                }
+                                else
+                                {
+                                    personNotEnrolledData.ISContacts = Convert.ToString(patientTreatmentSupporter[0].MobileContact);
+                                }
+                            }
+                            else
+                            {
+                                personNotEnrolledData.ISContacts = Convert.ToString(patientTreatmentSupporter[0].MobileContact);
+                            }
+                        
+                       
+                     
+
+                    
+                        
+                        personNotEnrolledData.PatientTreatmentSupporterId = supporter.Id;
+                    }
+
+                }
                 Session["editPersonId"] = 0;
                 return new JavaScriptSerializer().Serialize(personNotEnrolledData);
             }

@@ -12,6 +12,10 @@
             <!-- Page Body -->
             <div class="page-body">
                 <ng-snotify></ng-snotify>
+                <ngx-spinner bdOpacity=0.1 bdColor="rgba(255,255,255,0.7)" size="small" color="#ff0303" type="square-loader"
+                    fullScreen="false">
+                    <p style="color: rgb(247, 11, 11)"> Loading... </p>
+                </ngx-spinner>
                 <router-outlet></router-outlet>
             </div>
             <!-- /Page Body -->

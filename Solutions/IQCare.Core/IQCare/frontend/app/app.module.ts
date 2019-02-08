@@ -10,6 +10,8 @@ import { CoreModule } from './core/core.module';
 import { AppLoadService } from './shared/_services/appload.service';
 import { AppStateService } from './shared/_services/appstate.service';
 import { ErrorHandlerService } from './shared/_services/errorhandler.service';
+// Import library module
+import { NgxSpinnerModule } from 'ngx-spinner';
 
 
 export function init_app(appStateService: AppStateService) {
@@ -26,6 +28,7 @@ export function init_app(appStateService: AppStateService) {
         CoreModule,
         BrowserAnimationsModule,
         SnotifyModule,
+        NgxSpinnerModule,
         StoreModule.forRoot({ app: consentReducer })
     ],
     providers: [

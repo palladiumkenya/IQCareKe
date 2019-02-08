@@ -19,6 +19,7 @@ namespace IQCare.WebApi.Logic.Helpers
         [Description("MLAB SMS APP")]
         MLAB_SMS_APP,
         KENYAEMR,
-        IL
+        IL,
+        HAPI
     }
 }

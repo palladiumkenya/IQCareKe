@@ -22,6 +22,7 @@ import * as moment from 'moment';
 import { HeiDeliveryEditCommand } from '../_models/HeiDeliveryEditCommand';
 import { HeiFeedingEditCommand } from '../_models/HeiFeedingEditCommand';
 import { PatientAppointmentEditCommand } from '../_models/PatientAppointmentEditCommand';
+import { mergeMap, switchMap, concatMap } from 'rxjs/operators';
 
 @Component({
     selector: 'app-hei',
@@ -55,7 +56,7 @@ export class HeiComponent implements OnInit {
     hivtestingOptions: any[] = [];
     motherreceivedrugsOptions: any[] = [];
     heimotherregimenOptions: any[] = [];
-    yesnoOptions: any[] = [];
+    yesnoOptions: LookupItemView[] = [];
     motherdrugsatinfantenrollmentOptions: any[] = [];
     primarycaregiverOptions: any[] = [];
     immunizationHistoryOptions: any[] = [];
@@ -257,7 +258,7 @@ export class HeiComponent implements OnInit {
 
         this.heiService.getHeiLabTests().subscribe(
             (result) => {
-                // console.log('Hei Lab Tests ' + result);
+                console.log('Hei Lab Tests ', result);
                 for (let i = 0; i < result.length; i++) {
                     if (result[i].key == 'PCR') {
                         this.pcrLabTest = result[i].value;
@@ -288,7 +289,7 @@ export class HeiComponent implements OnInit {
     }
 
     onMilestonesNotify(formGroup: object): void {
-        this.milestonesFormGroup.push(formGroup['form']);
+        // this.milestonesFormGroup.push(formGroup['form']);
         this.milestone_table_data.push(formGroup['data']);
     }
 
@@ -381,18 +382,61 @@ export class HeiComponent implements OnInit {
             CreatedBy: this.userId
         };
 
+        const OnAntiTbDrugsValue = this.yesnoOptions.filter(obj => obj.itemId == this.tbAssessmentFormGroup.value[0]['currentlyOnAntiTb']);
+        let OnAntiTbDrugs = null;
+        if (OnAntiTbDrugsValue.length > 0) {
+            OnAntiTbDrugs = OnAntiTbDrugsValue[0].itemName == 'Yes' ? true : false;
+        }
+
+        const CoughValue = this.yesnoOptions.filter(obj => obj.itemId == this.tbAssessmentFormGroup.value[0]['coughAnyDuration']);
+        let Cough = null;
+        if (CoughValue.length > 0) {
+            Cough = CoughValue[0].itemName == 'Yes' ? true : false;
+        }
+
+        const FeverValue = this.yesnoOptions.filter(obj => obj.itemId == this.tbAssessmentFormGroup.value[0]['fever']);
+        let Fever = null;
+        if (FeverValue.length > 0) {
+            Fever = FeverValue[0].itemName == 'Yes' ? true : false;
+        }
+
+        const WeightLossValue = this.yesnoOptions.filter(obj => obj.itemId == this.tbAssessmentFormGroup.value[0]['weightLoss']);
+        let WeightLoss = null;
+        if (WeightLossValue.length > 0) {
+            WeightLoss = WeightLossValue[0].itemName == 'Yes' ? true : false;
+        }
+
+        const ContactWithTbValue = this.yesnoOptions.filter(obj => obj.itemId == this.tbAssessmentFormGroup.value[0]['contactTB']);
+        let ContactWithTb = null;
+        if (ContactWithTbValue.length > 0) {
+            ContactWithTb = ContactWithTbValue[0].itemName == 'Yes' ? true : false;
+        }
+
+        const OnIptValue = this.yesnoOptions.filter(obj => obj.itemId == this.tbAssessmentFormGroup.value[0]['onIPT']);
+        let OnIpt = null;
+        if (OnIptValue.length > 0) {
+            OnIpt = OnIptValue[0].itemName == 'Yes' ? true : false;
+        }
+
+        const EverBeenOnIptValue = this.yesnoOptions.filter(obj => obj.itemId == this.tbAssessmentFormGroup.value[0]['startIPT']);
+        let EverBeenOnIpt = null;
+        if (EverBeenOnIptValue.length > 0) {
+            EverBeenOnIpt = EverBeenOnIptValue[0].itemName == 'Yes' ? true : false;
+        }
+
         const patientIcf = {
             Id: 0,
             PatientId: this.patientId,
             PatientMasterVisitId: this.patientMasterVisitId,
             CreateDate: new Date(),
             CreatedBy: this.userId,
-            OnAntiTbDrugs: this.tbAssessmentFormGroup.value[0]['currentlyOnAntiTb'],
-            Cough: this.tbAssessmentFormGroup.value[0]['coughAnyDuration'],
-            Fever: this.tbAssessmentFormGroup.value[0]['fever'],
-            WeightLoss: this.tbAssessmentFormGroup.value[0]['weightLoss'],
-            ContactWithTb: this.tbAssessmentFormGroup.value[0]['contactTB'],
-
+            OnAntiTbDrugs: OnAntiTbDrugs,
+            Cough: Cough,
+            Fever: Fever,
+            WeightLoss: WeightLoss,
+            ContactWithTb: ContactWithTb,
+            OnIpt: OnIpt,
+            EverBeenOnIpt: EverBeenOnIpt
         } as PatientIcf;
 
         const patientIcfAction = {
@@ -487,18 +531,61 @@ export class HeiComponent implements OnInit {
 
         }
 
+        const OnAntiTbDrugsValue = this.yesnoOptions.filter(obj => obj.itemId == this.tbAssessmentFormGroup.value[0]['currentlyOnAntiTb']);
+        let OnAntiTbDrugs = null;
+        if (OnAntiTbDrugsValue.length > 0) {
+            OnAntiTbDrugs = OnAntiTbDrugsValue[0].itemName == 'Yes' ? true : false;
+        }
+
+        const CoughValue = this.yesnoOptions.filter(obj => obj.itemId == this.tbAssessmentFormGroup.value[0]['coughAnyDuration']);
+        let Cough = null;
+        if (CoughValue.length > 0) {
+            Cough = CoughValue[0].itemName == 'Yes' ? true : false;
+        }
+
+        const FeverValue = this.yesnoOptions.filter(obj => obj.itemId == this.tbAssessmentFormGroup.value[0]['fever']);
+        let Fever = null;
+        if (FeverValue.length > 0) {
+            Fever = FeverValue[0].itemName == 'Yes' ? true : false;
+        }
+
+        const WeightLossValue = this.yesnoOptions.filter(obj => obj.itemId == this.tbAssessmentFormGroup.value[0]['weightLoss']);
+        let WeightLoss = null;
+        if (WeightLossValue.length > 0) {
+            WeightLoss = WeightLossValue[0].itemName == 'Yes' ? true : false;
+        }
+
+        const ContactWithTbValue = this.yesnoOptions.filter(obj => obj.itemId == this.tbAssessmentFormGroup.value[0]['contactTB']);
+        let ContactWithTb = null;
+        if (ContactWithTbValue.length > 0) {
+            ContactWithTb = ContactWithTbValue[0].itemName == 'Yes' ? true : false;
+        }
+
+        const OnIptValue = this.yesnoOptions.filter(obj => obj.itemId == this.tbAssessmentFormGroup.value[0]['onIPT']);
+        let OnIpt = null;
+        if (OnIptValue.length > 0) {
+            OnIpt = OnIptValue[0].itemName == 'Yes' ? true : false;
+        }
+
+        const EverBeenOnIptValue = this.yesnoOptions.filter(obj => obj.itemId == this.tbAssessmentFormGroup.value[0]['startIPT']);
+        let EverBeenOnIpt = null;
+        if (EverBeenOnIptValue.length > 0) {
+            EverBeenOnIpt = EverBeenOnIptValue[0].itemName == 'Yes' ? true : false;
+        }
+
         const patientIcf = {
             Id: 0,
             PatientId: this.patientId,
             PatientMasterVisitId: this.patientMasterVisitId,
             CreateDate: new Date(),
             CreatedBy: this.userId,
-            OnAntiTbDrugs: this.tbAssessmentFormGroup.value[0]['currentlyOnAntiTb'],
-            Cough: this.tbAssessmentFormGroup.value[0]['coughAnyDuration'],
-            Fever: this.tbAssessmentFormGroup.value[0]['fever'],
-            WeightLoss: this.tbAssessmentFormGroup.value[0]['weightLoss'],
-            ContactWithTb: this.tbAssessmentFormGroup.value[0]['contactTB'],
-
+            OnAntiTbDrugs: OnAntiTbDrugs,
+            Cough: Cough,
+            Fever: Fever,
+            WeightLoss: WeightLoss,
+            ContactWithTb: ContactWithTb,
+            OnIpt: OnIpt,
+            EverBeenOnIpt: EverBeenOnIpt
         } as PatientIcf;
 
         const patientIcfAction = {
@@ -558,6 +645,7 @@ export class HeiComponent implements OnInit {
 
                     this.heiService.getLabTestPametersByLabTestId(labTestId).subscribe(
                         (res) => {
+                            console.log('pcr', res);
                             this.pcrLabTestParameters = res;
                         }
                     );
@@ -642,6 +730,14 @@ export class HeiComponent implements OnInit {
             OutcomeAt24MonthsId: this.infantFeedingFormGroup.value[2]['heiOutcomeOptions']
         };
 
+        const completeLabOrderCommand: CompleteLabOrderCommand = {
+            LabOrderId: 0,
+            LabOrderTestId: 0,
+            LabTestId: 0,
+            UserId: this.userId,
+            LabTestResults: []
+        };
+
         const heiVisitDetails = this.heiService.saveHeiVisitDetails(visitDetailsData);
         const heiDelivery = this.heiService.saveHieDelivery(this.patientId, this.patientMasterVisitId, this.userId,
             isMotherRegistered, this.deliveryMatFormGroup.value[0], this.deliveryMatFormGroup.value[1]);
@@ -663,94 +759,84 @@ export class HeiComponent implements OnInit {
             heitbAssessment
         ]).subscribe(
             (result) => {
-                console.log(result);
+                // console.log(result);
 
                 laborder.VisitId = result[0]['visit_Id'];
-                const heiLab = this.heiService.saveHeiLabOrder(laborder).subscribe(
-                    (res) => {
-                        console.log(res);
-                        if (res && res['labOrderId'] && res['labOrderTests']) {
-                            const labOrderId = res['labOrderId'];
-                            const labOrderTestId = res['labOrderTests'][0]['id'];
-                            const labTestId = res['labOrderTests'][0]['labTestId'];
+                const heiLab = this.heiService.saveHeiLabOrder(laborder).pipe(
+                    mergeMap(res => this.heiService.getLabOrderTestsByOrderId(res['labOrderId']))
+                ).subscribe(res => {
+                    // console.log(res);
+                    if (res.length > 0 && res[0]['labOrderId']) {
+                        completeLabOrderCommand.LabOrderId = res[0]['labOrderId'];
+                        completeLabOrderCommand.LabOrderTestId = res[0]['id'];
+                        completeLabOrderCommand.LabTestId = res[0]['labTestId'];
+                    }
 
-                            const completeLabOrderCommand: CompleteLabOrderCommand = {
-                                LabOrderId: labOrderId,
-                                LabOrderTestId: labOrderTestId,
-                                LabTestId: labTestId,
-                                UserId: this.userId,
-                                LabTestResults: []
-                            };
-
-                            for (let i = 0; i < this.hivTestingFormGroup.length; i++) {
-                                for (let j = 0; j < this.hivTestingFormGroup[i].length; j++) {
-                                    if (
-                                        this.hivTestingFormGroup[i][j]['testtype']['itemName'] == '1st DNA PCR'
-                                        || this.hivTestingFormGroup[i][j]['testtype']['itemName'] == '2nd DNA PCR'
-                                        || this.hivTestingFormGroup[i][j]['testtype']['itemName'] == '3rd DNA PCR'
-                                        || this.hivTestingFormGroup[i][j]['testtype']['itemName'] == 'Repeat confirmatory PCR (for +ve)'
-                                        || this.hivTestingFormGroup[i][j]['testtype']['itemName'] == 'Confirmatory PCR (for  +ve)'
-                                    ) {
-                                        if (this.pcrLabTestParameters.length > 0) {
-                                            completeLabOrderCommand.LabTestResults.push({
-                                                ParameterId: this.pcrLabTestParameters[0]['id'],
-                                                ResultValue: null,
-                                                ResultText: this.hivTestingFormGroup[i][j]['result']['itemName'],
-                                                ResultOptionId: null,
-                                                ResultOption: null,
-                                                ResultUnit: null,
-                                                ResultUnitId: null,
-                                                Undetectable: false,
-                                                DetectionLimit: this.pcrLabTestParameters[0]['detectionLimit'],
-                                            });
-                                        }
-                                    } else if (
-                                        this.hivTestingFormGroup[i][j]['testtype']['itemName'] == 'Baseline Viral Load (for +ve)') {
-                                        if (this.viralLoadLabTestParameters.length > 0) {
-                                            completeLabOrderCommand.LabTestResults.push({
-                                                ParameterId: this.viralLoadLabTestParameters[0]['id'],
-                                                ResultValue: this.hivTestingFormGroup[i][j]['resultText'],
-                                                ResultText: null,
-                                                ResultOptionId: null,
-                                                ResultOption: null,
-                                                ResultUnit: null,
-                                                ResultUnitId: this.viralLoadLabTestParameters[0]['unitId'],
-                                                Undetectable: false,
-                                                DetectionLimit: this.viralLoadLabTestParameters[0]['detectionLimit'],
-                                            });
-                                        }
-                                    } else if (this.hivTestingFormGroup[i][j]['testtype']['itemName'] == 'Final Antibody') {
-                                        if (this.antibodyLabTestParameters.length > 0) {
-                                            completeLabOrderCommand.LabTestResults.push({
-                                                ParameterId: this.antibodyLabTestParameters[0]['id'],
-                                                ResultValue: this.hivTestingFormGroup[i][j]['result']['itemName'] == 'Positive' ? 1 : 2,
-                                                ResultText: null,
-                                                ResultOptionId: null,
-                                                ResultOption: null,
-                                                ResultUnit: null,
-                                                ResultUnitId: this.antibodyLabTestParameters[0]['unitId'],
-                                                Undetectable: false,
-                                                DetectionLimit: this.antibodyLabTestParameters[0]['detectionLimit'],
-                                            });
-                                        }
-                                    }
+                    for (let i = 0; i < this.hivTestingFormGroup.length; i++) {
+                        for (let j = 0; j < this.hivTestingFormGroup[i].length; j++) {
+                            if (
+                                this.hivTestingFormGroup[i][j]['testtype']['itemName'] == '1st DNA PCR'
+                                || this.hivTestingFormGroup[i][j]['testtype']['itemName'] == '2nd DNA PCR'
+                                || this.hivTestingFormGroup[i][j]['testtype']['itemName'] == '3rd DNA PCR'
+                                || this.hivTestingFormGroup[i][j]['testtype']['itemName'] == 'Repeat confirmatory PCR (for +ve)'
+                                || this.hivTestingFormGroup[i][j]['testtype']['itemName'] == 'Confirmatory PCR (for  +ve)'
+                            ) {
+                                if (this.pcrLabTestParameters.length > 0) {
+                                    completeLabOrderCommand.LabTestResults.push({
+                                        ParameterId: this.pcrLabTestParameters[0]['id'],
+                                        ResultValue: null,
+                                        ResultText: this.hivTestingFormGroup[i][j]['result']['itemName'],
+                                        ResultOptionId: null,
+                                        ResultOption: null,
+                                        ResultUnit: null,
+                                        ResultUnitId: null,
+                                        Undetectable: false,
+                                        DetectionLimit: this.pcrLabTestParameters[0]['detectionLimit'],
+                                    });
+                                }
+                            } else if (
+                                this.hivTestingFormGroup[i][j]['testtype']['itemName'] == 'Baseline Viral Load (for +ve)') {
+                                if (this.viralLoadLabTestParameters.length > 0) {
+                                    completeLabOrderCommand.LabTestResults.push({
+                                        ParameterId: this.viralLoadLabTestParameters[0]['id'],
+                                        ResultValue: this.hivTestingFormGroup[i][j]['resultText'],
+                                        ResultText: null,
+                                        ResultOptionId: null,
+                                        ResultOption: null,
+                                        ResultUnit: null,
+                                        ResultUnitId: this.viralLoadLabTestParameters[0]['unitId'],
+                                        Undetectable: false,
+                                        DetectionLimit: this.viralLoadLabTestParameters[0]['detectionLimit'],
+                                    });
+                                }
+                            } else if (this.hivTestingFormGroup[i][j]['testtype']['itemName'] == 'Final Antibody') {
+                                if (this.antibodyLabTestParameters.length > 0) {
+                                    completeLabOrderCommand.LabTestResults.push({
+                                        ParameterId: this.antibodyLabTestParameters[0]['id'],
+                                        ResultValue: this.hivTestingFormGroup[i][j]['result']['itemName'] == 'Positive' ? 1 : 2,
+                                        ResultText: null,
+                                        ResultOptionId: null,
+                                        ResultOption: null,
+                                        ResultUnit: null,
+                                        ResultUnitId: this.antibodyLabTestParameters[0]['unitId'],
+                                        Undetectable: false,
+                                        DetectionLimit: this.antibodyLabTestParameters[0]['detectionLimit'],
+                                    });
                                 }
                             }
-
-                            const completeHeiLabOrder = this.heiService.saveCompleteHeiLabOrder(completeLabOrderCommand).subscribe(
-                                (completeRes) => {
-                                    console.log('complete laborder');
-                                    console.log(completeRes);
-                                },
-                                (completeError) => {
-                                    console.log('Error completing laborder' + completeError);
-                                }
-                            );
-
-
                         }
                     }
-                );
+
+                    const completeHeiLabOrder = this.heiService.saveCompleteHeiLabOrder(completeLabOrderCommand).subscribe(
+                        (completeRes) => {
+                            console.log('complete laborder');
+                            console.log(completeRes);
+                        },
+                        (completeError) => {
+                            console.log('Error completing laborder' + completeError);
+                        }
+                    );
+                });
 
                 heiOutComeCommand.HeiEncounterId = result[4]['heiEncounterId'];
                 const heiOutCome = this.heiService.saveHeiOutCome(heiOutComeCommand).subscribe(

@@ -511,17 +511,17 @@ namespace IQCare.Common.BusinessProcess.Services
         //    }
         //}
 
-        public async Task<AfyaMobileInbox> UpdateAfyaMobileInbox(int id, string afyamobileId = null, bool processed = false, DateTime? dateProcessed = null, string logMessage = null)
+        public async Task<ApiInbox> UpdateAfyaMobileInbox(int id, string afyamobileId = null, bool processed = false, DateTime? dateProcessed = null, string logMessage = null)
         {
             try
             {
-                var afyaMobileMessage = await _unitOfWork.Repository<AfyaMobileInbox>().FindByIdAsync(id);
-                afyaMobileMessage.AfyamobileId = afyamobileId;
+                var afyaMobileMessage = await _unitOfWork.Repository<ApiInbox>().FindByIdAsync(id);
+                // afyaMobileMessage.AfyamobileId = afyamobileId;
                 afyaMobileMessage.Processed = processed;
                 afyaMobileMessage.DateProcessed = dateProcessed;
                 afyaMobileMessage.LogMessage = logMessage;
 
-                _unitOfWork.Repository<AfyaMobileInbox>().Update(afyaMobileMessage);
+                _unitOfWork.Repository<ApiInbox>().Update(afyaMobileMessage);
                 await _unitOfWork.SaveAsync();
 
                 return afyaMobileMessage;
@@ -533,20 +533,23 @@ namespace IQCare.Common.BusinessProcess.Services
             }
         }
 
-        public async Task<AfyaMobileInbox> AddAfyaMobileInbox(DateTime dateReceived, string afyaMobileId = null, string message = null, bool processed = false, DateTime? dateProcessed = null, string logMessage = null)
+        public async Task<ApiInbox> AddAfyaMobileInbox(DateTime dateReceived, string messageType, string afyaMobileId = null, string message = null, bool processed = false, DateTime? dateProcessed = null, string logMessage = null, bool isSuccess = false)
         {
             try
             {
-                AfyaMobileInbox afyaMobileInbox = new AfyaMobileInbox()
+                ApiInbox afyaMobileInbox = new ApiInbox()
                 {
                     DateReceived = dateReceived,
-                    AfyamobileId = afyaMobileId,
+                    uid = afyaMobileId,
+                    SenderId = 7,
                     Message = message,
                     Processed = processed,
                     DateProcessed = dateProcessed,
-                    LogMessage = logMessage
+                    LogMessage = logMessage,
+                    MessageType = messageType,
+                    IsSuccess = isSuccess
                 };
-                await _unitOfWork.Repository<AfyaMobileInbox>().AddAsync(afyaMobileInbox);
+                await _unitOfWork.Repository<ApiInbox>().AddAsync(afyaMobileInbox);
                 await _unitOfWork.SaveAsync();
                 return afyaMobileInbox;
             }
@@ -899,6 +902,7 @@ namespace IQCare.Common.BusinessProcess.Services
                     int Ward = string.IsNullOrWhiteSpace(ward) ? 0 : Convert.ToInt32(ward);
                     int County = string.IsNullOrWhiteSpace(county) ? 0 : Convert.ToInt32(county);
                     int SubCounty = string.IsNullOrWhiteSpace(subcounty) ? 0 : Convert.ToInt32(subcounty);
+                    landmark = string.IsNullOrWhiteSpace(landmark) ? "n/a" : landmark;
                     int user;
                     if (userid > 0)
                     {
@@ -1545,6 +1549,7 @@ namespace IQCare.Common.BusinessProcess.Services
                 lastName = string.IsNullOrWhiteSpace(lastName) ? "" : lastName.Replace("'", "''");
                 nickName = string.IsNullOrWhiteSpace(nickName) ? "" : nickName.Replace("'", "''");
                 string dob = dateOfBirth.HasValue ? dateOfBirth.Value.ToString("yyyy-MM-dd") : null;
+                string regDate = registrationDate.HasValue ? registrationDate.Value.ToString("yyyy-MM-dd") : null;
 
                 StringBuilder sql = new StringBuilder();
                 sql.Append("exec pr_OpenDecryptedSession;");
@@ -1555,7 +1560,7 @@ namespace IQCare.Common.BusinessProcess.Services
                                "CreatedBy, RegistrationDate, FacilityId)" +
                                $"Values(ENCRYPTBYKEY(KEY_GUID('Key_CTC'), '{firstName}'), ENCRYPTBYKEY(KEY_GUID('Key_CTC'), '{middleName}')," +
                                $"ENCRYPTBYKEY(KEY_GUID('Key_CTC'), '{lastName}'),ENCRYPTBYKEY(KEY_GUID('Key_CTC'), '{nickName}') , {sex}, '{dob}', 1," +
-                               $"1,0,GETDATE(), '{createdBy}', '{registrationDate}', '{facilityId}');");
+                               $"1,0,GETDATE(), '{createdBy}', '{regDate}', '{facilityId}');");
                 }
                 else
                 {
@@ -1564,7 +1569,7 @@ namespace IQCare.Common.BusinessProcess.Services
                                "CreatedBy, RegistrationDate, FacilityId)" +
                                $"Values(ENCRYPTBYKEY(KEY_GUID('Key_CTC'), '{firstName}'), ENCRYPTBYKEY(KEY_GUID('Key_CTC'), '{middleName}')," +
                                $"ENCRYPTBYKEY(KEY_GUID('Key_CTC'), '{lastName}'),ENCRYPTBYKEY(KEY_GUID('Key_CTC'), '{nickName}') , {sex}," +
-                               $"1,0,GETDATE(), '{createdBy}', '{registrationDate}', '{facilityId}');");
+                               $"1,0,GETDATE(), '{createdBy}', '{regDate}', '{facilityId}');");
                 }
                 
                 sql.Append("SELECT [Id] , CAST(DECRYPTBYKEY(FirstName) AS VARCHAR(50)) [FirstName] ,CAST(DECRYPTBYKEY(MidName) AS VARCHAR(50)) MidName" +

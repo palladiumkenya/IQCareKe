@@ -3,8 +3,8 @@ import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms'
 import { Component, OnInit, EventEmitter, Output, Input } from '@angular/core';
 import { MatDialog, MatDialogConfig, MatTableDataSource } from '@angular/material';
 import { HivStatusComponent } from '../hiv-status/hiv-status.component';
-import {Subscription} from 'rxjs/index';
-import {AncService} from '../../_services/anc.service';
+import { Subscription } from 'rxjs/index';
+import { AncService } from '../../_services/anc.service';
 
 @Component({
     selector: 'app-anc-hivtesting',
@@ -30,6 +30,9 @@ export class AncHivtestingComponent implements OnInit {
     @Input('isEdit') isEdit: boolean;
     @Input('PatientId') PatientId: number;
     @Input('PatientMasterVisitId') PatientMasterVisitId: number;
+    @Input() serviceAreaId: number;
+
+    serviceAreaName: string;
 
     constructor(
         private dialog: MatDialog,
@@ -46,6 +49,19 @@ export class AncHivtestingComponent implements OnInit {
             testType: new FormControl('', [Validators.required]),
             finalTestResult: new FormControl('', [Validators.required])
         });
+
+        // console.log(this.serviceAreaId);
+        if (this.serviceAreaId == 3) {
+            this.serviceAreaName = 'ANC';
+        } else if (this.serviceAreaId == 4) {
+            this.serviceAreaName = 'PNC';
+        } else if (this.serviceAreaId == 5) {
+            this.serviceAreaName = 'Maternity';
+        } else if (this.serviceAreaId == 6) {
+            this.serviceAreaName = 'HEI';
+        } else {
+            this.serviceAreaName = 'HTS';
+        }
 
         this.HivTestingForm.controls['testType'].disable({ onlySelf: true });
         this.HivTestingForm.controls['finalTestResult'].disable({ onlySelf: true });
@@ -72,6 +88,7 @@ export class AncHivtestingComponent implements OnInit {
         dialogConfig.data = {
         };
 
+        // console.log(this.serviceAreaName);
         const dialogRef = this.dialog.open(HivStatusComponent, dialogConfig);
 
         dialogRef.afterClosed().subscribe(
@@ -80,7 +97,7 @@ export class AncHivtestingComponent implements OnInit {
                     return;
                 }
 
-                console.log(data);
+                // console.log(data);
 
                 this.hiv_testing_table_data.push({
                     testdate: new Date(),
@@ -90,7 +107,7 @@ export class AncHivtestingComponent implements OnInit {
                     expirydate: data.expiryDate,
                     testresult: data.testResult,
                     nexthivtest: data.nextAppointmentDate,
-                    testpoint: 'PNC'
+                    testpoint: this.serviceAreaName
                 });
 
                 this.dataSource = new MatTableDataSource(this.hiv_testing_table_data);
@@ -115,7 +132,7 @@ export class AncHivtestingComponent implements OnInit {
     }
 
     onHivStatusBeforeFirstVisitChange(event) {
-        console.log(event);
+        // console.log(event);
         if (event.isUserInput && event.source.selected && event.source.viewValue == 'Known Positive') {
             this.HivTestingForm.controls['hivTestingDone'].disable({ onlySelf: true });
             this.HivTestingForm.controls['testType'].disable({ onlySelf: true });
@@ -131,10 +148,10 @@ export class AncHivtestingComponent implements OnInit {
                 p => {
                     const baseline = p;
 
-                    console.log('baseline info');
-                    console.log(baseline);
-                    console.log(baseline['hivStatusBeforeAnc']);
-                    if (baseline['id'] > 0) {
+                    // console.log('baseline info');
+                    // console.log(baseline);
+                    // console.log(baseline['hivStatusBeforeAnc']);
+                    if (baseline) {
                         this.HivTestingForm.get('hivStatusBeforeFirstVisit').setValue(baseline['hivStatusBeforeAnc']);
                     }
                 }

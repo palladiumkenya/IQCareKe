@@ -55,13 +55,14 @@ export class HeiHivtestingComponent implements OnInit {
                 console.log(res);
                 for (let i = 0; i < res.length; i++) {
                     const testType = this.hivTestType.filter(obj => obj.itemName.includes(res[i].labTestName));
-                    const testResultHistorical = this.testResults.filter(obj => obj.itemName.includes(res[i].resultTexts));
+                    const testResultHistorical = this.testResults.filter(obj => obj.itemName.includes(res[i].result));
+                    // console.log('testResultHistorical', this.testResults);
                     let resultValue = null;
                     let resultText = null;
                     if (testResultHistorical.length > 0) {
                         resultValue = testResultHistorical[0];
                     } else {
-                        resultText = res[i].resultValues;
+                        resultText = res[i].result;
                     }
 
                     this.hiv_testing_history_data.push({

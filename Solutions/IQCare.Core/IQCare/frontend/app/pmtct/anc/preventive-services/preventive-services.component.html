@@ -12,7 +12,7 @@
         <div class="col-md-4 col-xs-12 col-sm-6">
             <mat-form-field class="col-md-12">
                 <mat-select formControlName="preventiveServices" placeholder="Preventive Service">
-                    <mat-option value="0"> Select</mat-option>
+                    <mat-option value=""> Select</mat-option>
                     <mat-option *ngFor="let preventiveServicesOption of preventiveServicesOptions" [value]="preventiveServicesOption" required minlength="0">
                         {{preventiveServicesOption.itemName}}
                     </mat-option>
@@ -21,9 +21,9 @@
         </div>
         <div class="col-md-2 col-xs-12 col-sm-6">
             <mat-form-field class="col-md-12">
-                <input [max]="maxDate" formControlName="dateGiven" id="dateGiven" matInput [matDatepicker]="dateGiven"
-                       placeholder="Date Given">
-                <mat-datepicker-toggle matSuffix [for]="dateGiven"></mat-datepicker-toggle>
+                <input  [max]="maxDate" formControlName="dateGiven" id="dateGiven" matInput [matDatepicker]="dateGiven"
+                       placeholder="Date Given" (dateChange)="onGivenDateChange($event)">
+                <mat-datepicker-toggle matSuffix [for]="dateGiven" ></mat-datepicker-toggle>
                 <mat-datepicker #dateGiven></mat-datepicker>
             </mat-form-field>
         </div>
@@ -34,7 +34,7 @@
         </div>
         <div class="col-md-2 col-xs-12 col-sm-6">
             <mat-form-field class="col-md-12">
-                <input formControlName="nextSchedule" id="nextSchedule" matInput [matDatepicker]="nextSchedule"
+                <input [min]="minDate" formControlName="nextSchedule" id="nextSchedule" matInput [matDatepicker]="nextSchedule"
                        placeholder="Next Schedule">
                 <mat-datepicker-toggle matSuffix [for]="nextSchedule"></mat-datepicker-toggle>
                 <mat-datepicker #nextSchedule></mat-datepicker>
@@ -92,8 +92,8 @@
         <div class="col-lg-4 col-sm-6 col-xs-12">
             <mat-form-field class="col-md-12">
                 <mat-select formControlName="insecticideTreatedNet" placeholder="Insecticide Treated Net given">
-                    <mat-option value="0"> Select</mat-option>
-                    <mat-option *ngFor="let yesnoOption of YesNoOptions" [value]="yesnoOption.itemId" required minlength="0">
+                    <mat-option value=""> Select</mat-option>
+                    <mat-option *ngFor="let yesnoOption of YesNoOptions" [value]="yesnoOption.itemId" required minlength="0" (onSelectionChange)="onInsecticideTreatedNetGivenChange($event)">
                         {{yesnoOption.itemName}}
                     </mat-option>
                 </mat-select>
@@ -111,7 +111,7 @@
             <mat-form-field class="col-md-12">
                 <mat-select formControlName="antenatalExercise"
                             placeholder="Underwent antenatal exercise on this visit">
-                    <mat-option value="0"> Select</mat-option>
+                    <mat-option value=""> Select</mat-option>
                     <mat-option *ngFor="let yesnoOption of YesNoOptions" [value]="yesnoOption.itemId" minlength="0">
                         {{yesnoOption.itemName}}
                     </mat-option>
@@ -132,7 +132,7 @@
         <div class="col-md-4">
             <mat-form-field class="col-md-12">
                 <mat-select formControlName="PartnerTestingVisit" placeholder="Partner Tested during this visit">
-                    <mat-option *ngFor="let YesNoNaOption of YesNoNaOptions" [value]="YesNoNaOption.itemId" (onSelectionChange)="onPartnerTestingChnage($event)">
+                    <mat-option *ngFor="let YesNoNaOption of YesNoNaOptions" [value]="YesNoNaOption.itemId" (onSelectionChange)="onPartnerTestingChange($event)">
                         {{YesNoNaOption.itemName}}
                     </mat-option>
                 </mat-select>

@@ -1,3 +1,4 @@
+import { AncService } from './../_services/anc.service';
 import { Component, OnInit, NgZone } from '@angular/core';
 import { FormArray, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -26,8 +27,9 @@ import { HivTestsCommand } from '../_models/HivTestsCommand';
 import * as moment from 'moment';
 import { VisitDetailsCommand } from '../_models/visit-details-command';
 import { VisitDetailsService } from '../_services/visit-details.service';
-
-
+import { MatDialogConfig, MatDialog } from '@angular/material';
+import { AddBirthInfoComponent } from './baby/add-birth-info/add-birth-info.component';
+import { AddBabyDialogComponent } from './baby/add-baby-dialog/add-baby-dialog.component';
 
 @Component({
     selector: 'app-maternity',
@@ -104,7 +106,9 @@ export class MaternityComponent implements OnInit {
         private snotifyService: SnotifyService,
         private notificationService: NotificationService,
         public zone: NgZone,
-        private router: Router) {
+        private router: Router,
+        private dialog: MatDialog,
+        private ancservice: AncService) {
         this.visitDetailsFormGroup = new FormArray([]);
         this.diagnosisFormGroup = new FormArray([]);
         this.maternalDrugAdministrationForGroup = new FormArray([]);
@@ -255,7 +259,8 @@ export class MaternityComponent implements OnInit {
         this.babyFormGroup.push(formGroup);
     }
 
-    onBabyNotfiyData(babyNotifyData: any[]): void {
+    onBabyNotifyData(babyNotifyData: any[]): void {
+        console.log("Baby Notify data " + this.babyNotifyData.length);
         this.babyNotifyData.push(babyNotifyData);
     }
 
@@ -265,8 +270,8 @@ export class MaternityComponent implements OnInit {
 
     onHivStatusNotify(formGroup: Object): void {
         this.maternityTestsFormGroup.push(formGroup['form']);
-        console.log(formGroup);
-        this.hiv_status_table_data = formGroup['table_data'];
+        // console.log(formGroup);
+        this.hiv_status_table_data.push(formGroup['table_data']);
     }
 
     onMaternalDrugAdministration(formGroup: FormGroup): void {
@@ -343,21 +348,6 @@ export class MaternityComponent implements OnInit {
             UserId: this.userId
         } as VisitDetailsCommand;
 
-        console.log(this.maternityTestsFormGroup);
-        /*  const visitDetailsCommand: MaternityVisitDetailsCommand = {
-              patientId: this.patientId,
-              patientMasterVisitId: this.patientMasterVisitId,
-              ageAtMenarche: 0,
-              pregnancyId: 0,
-              visitNumber: 0,
-              visitType: 0,
-              treatedForSyphilis: 0,
-              deleteFlag: false,
-              createDate: new Date(),
-              createdBy: this.userId,
-              postpartum: 'na'
-          };*/
-
         console.log(this.visitDetailsFormGroup);
         const pregnancyCommand: PregnancyCommand = {
             Id: 0,
@@ -388,17 +378,18 @@ export class MaternityComponent implements OnInit {
 
         const maternityDeliveryCommand: MaternityDeliveryCommand = {
             PatientMasterVisitId: this.patientMasterVisitId,
+            PregnancyId: this.pregnancyId,
             DurationOfLabour: this.diagnosisFormGroup.value[1]['labourDuration'],
             DateOfDelivery: moment(this.diagnosisFormGroup.value[1]['deliveryDate']).toDate(),
             TimeOfDelivery: this.diagnosisFormGroup.value[1]['deliveryTime'],
-            ModeOfDelivery: this.diagnosisFormGroup.value[1]['deliveryMode'],
-            PlacentaComplete: this.diagnosisFormGroup.value[1]['placentaComplete'],
+            ModeOfDelivery: this.diagnosisFormGroup.value[1]['deliveryMode'].itemId,
+            PlacentaComplete: this.diagnosisFormGroup.value[1]['placentaComplete'].itemId,
             BloodLossCapacity: parseInt(this.diagnosisFormGroup.value[1]['bloodLossCount'], 10),
-            BloodLossClassification: this.diagnosisFormGroup.value[1]['bloodLoss'],
-            MotherCondition: this.diagnosisFormGroup.value[1]['deliveryCondition'],
+            BloodLossClassification: this.diagnosisFormGroup.value[1]['bloodLoss'].itemId,
+            MotherCondition: this.diagnosisFormGroup.value[1]['deliveryCondition'].itemId,
             MaternalDeathAudited: this.diagnosisFormGroup.value[1]['maternalDeathsAudited'],
             MaternalDeathAuditDate: moment(this.diagnosisFormGroup.value[1]['auditDate']).toDate(),
-            DeliveryComplicationsExperienced: this.diagnosisFormGroup.value[1]['deliveryComplications'],
+            DeliveryComplicationsExperienced: this.diagnosisFormGroup.value[1]['deliveryComplications'].itemId,
             DeliveryComplicationNotes: this.diagnosisFormGroup.value[1]['deliveryComplicationNotes'],
             DeliveryConductedBy: this.diagnosisFormGroup.value[1]['deliveryConductedBy'],
             CreatedBy: this.userId
@@ -408,22 +399,7 @@ export class MaternityComponent implements OnInit {
         const apgarscoreTwo = this.apgarOptions.filter(x => x.itemName == 'Apgar Score 5 min');
         const apgarscoreThree = this.apgarOptions.filter(x => x.itemName == 'Apgar Score 10 min');
 
-        this.apgarSCore.push(
-            {
-                ApgarSCoreId: apgarscoreOne[0].itemId, ApgarScoreType: 'Apgar Score 1 min',
-                SCore: this.babyFormGroup.value[0]['agparScore1min']
-            },
-            {
-                ApgarSCoreId: apgarscoreTwo[0].itemId, ApgarScoreType: 'Apgar Score 5 min',
-                SCore: this.babyFormGroup.value[0]['agparScore5min']
-            },
-            {
-                ApgarSCoreId: apgarscoreThree[0].itemId, ApgarScoreType: 'Apgar Score 10 min',
-                SCore: this.babyFormGroup.value[0]['agparScore10min']
-            }
-        );
-
-        console.log('baby data' + this.babyNotifyData.length[0]);
+        console.log('baby data' + this.babyNotifyData.length);
         console.log(this.babyNotifyData);
 
         for (let i = 0; i < this.babyNotifyData.length; i++) {
@@ -459,7 +435,6 @@ export class MaternityComponent implements OnInit {
                 });
             }
         }
-
 
         const babyConditionInfo = {
             DeliveredBabyBirthInfoCollection: this.DeliveredBabyBirthInfoCollection
@@ -666,6 +641,14 @@ export class MaternityComponent implements OnInit {
                     console.log(`success `);
                     console.log(result);
 
+                    hivTestsCommand.HtsEncounterId = result[1]['htsEncounterId'];
+                    hivTestsCommand.PatientMasterVisitId = result[1]['patientMasterVisitId'];
+                    const ancHivResultsCommand = this.ancservice.saveHivResults(hivTestsCommand).subscribe(
+                        (testRes) => {
+                            console.log(testRes);
+                        }
+                    );
+
                     if (this.pregnancyId == 0) {
                         this.matService.savePregnancyProfile(pregnancyCommand).subscribe((res) => {
                             maternityDeliveryCommand.PregnancyId = res.pregnancyId;
@@ -674,6 +657,9 @@ export class MaternityComponent implements OnInit {
                             this.sendPatientDeliveryInfoRequest(maternityDeliveryCommand, babyConditionInfo);
                             this.sendVisitDetailsRequest(visitDetailsCommand);
 
+                            this.zone.run(() => {
+                                this.router.navigate(['/dashboard/personhome/' + this.personId], { relativeTo: this.route });
+                            });
                         },
                             (err) => {
                                 console.log('An error occured while add patient pregnancy details', err);
@@ -684,10 +670,11 @@ export class MaternityComponent implements OnInit {
                     } else {
                         this.sendPatientDeliveryInfoRequest(maternityDeliveryCommand, babyConditionInfo);
                         this.sendVisitDetailsRequest(visitDetailsCommand);
+
+                        this.zone.run(() => {
+                            this.router.navigate(['/dashboard/personhome/' + this.personId], { relativeTo: this.route });
+                        });
                     }
-
-
-
                 },
                 (error) => {
                     console.log(`error ` + error);
@@ -742,6 +729,27 @@ export class MaternityComponent implements OnInit {
 
             }, () => {
 
+            });
+    }
+
+    public AddNewBabyInfo() {
+        const dialogConfig = new MatDialogConfig();
+        dialogConfig.disableClose = false;
+        dialogConfig.autoFocus = true;
+
+        dialogConfig.data = {
+            babySectionOptions: this.babySectionOptions,
+            patientId: this.patientId,
+            patientMasterVisitId: this.patientMasterVisitId,
+            isNew: true
+        };
+
+        const dialogRef = this.dialog.open(AddBabyDialogComponent, dialogConfig);
+        dialogRef.afterClosed().subscribe(
+            data => {
+                if (!data)
+                    return;
+                console.log(data);
             });
     }
 }

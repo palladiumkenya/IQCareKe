@@ -25,6 +25,7 @@ import { Search } from '../../_models/search';
 import { Store } from '@ngrx/store';
 import * as AppState from '../../../shared/reducers/app.states';
 import { Partner } from '../../../shared/_models/partner';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
     selector: 'app-register',
@@ -81,7 +82,8 @@ export class RegisterComponent implements OnInit {
         public zone: NgZone,
         private router: Router,
         private searchService: SearchService,
-        private store: Store<AppState>) {
+        private store: Store<AppState>,
+        private spinner: NgxSpinnerService) {
         this.maxDate = new Date();
         this.clientSearch = new Search();
     }
@@ -344,6 +346,7 @@ export class RegisterComponent implements OnInit {
 
     onSubmitForm(tabIndex: number) {
         if (this.formGroup.valid) {
+            this.spinner.show();
             this.person = { ...this.formArray.value[0] };
             this.clientAddress = { ...this.formArray.value[1] };
             this.clientContact = { ...this.formArray.value[2] };
@@ -434,6 +437,9 @@ export class RegisterComponent implements OnInit {
                 (error) => {
                     this.snotifyService.error('Error creating person ' + error, 'Person Registration',
                         this.notificationService.getConfig());
+                },
+                () => {
+                    this.spinner.hide();
                 }
             );
         } else {
@@ -531,6 +537,18 @@ export class RegisterComponent implements OnInit {
     }
 
     onIdentifierTypeChange() {
+        const selectedIdentifier = this.personIdentifiers.filter(obj => obj.id == this.formArray.value[0]['IdentifierType']);
+        if (selectedIdentifier.length > 0) {
+            const ageInYears = this.formArray['controls'][0]['controls']['AgeYears'].value;
+
+            if (selectedIdentifier[0]['name'] == 'NationalID' && ageInYears < 18) {
+                // this.formArray['controls'][0]['controls']['IdentifierType'].disable({ onlySelf: true });
+                this.snotifyService.error('Children of less than 18 years are not assigned National IDs ', 'Person Registration',
+                    this.notificationService.getConfig());
+                return;
+            }
+        }
+
         if (this.formArray.value[0]['IdentifierType']) {
             this.formGroup.controls['formArray']['controls'][0]['controls']['IdentifierNumber'].enable({ onlySelf: false });
         } else {

@@ -32,6 +32,7 @@ namespace IQCare.HTS.BusinessProcess.CommandHandlers
             _htsUnitOfWork = htsUnitOfWork ?? throw new ArgumentNullException(nameof(htsUnitOfWork));
         }
 
+
         public async Task<Result<string>> Handle(SynchronizeClientsCommand request, CancellationToken cancellationToken)
         {
             string afyaMobileId = String.Empty;
@@ -58,7 +59,7 @@ namespace IQCare.HTS.BusinessProcess.CommandHandlers
                         }
                     }
                 }
-                var afyaMobileMessage = await registerPersonService.AddAfyaMobileInbox(DateTime.Now, afyaMobileId, JsonConvert.SerializeObject(request), false);
+                var afyaMobileMessage = await registerPersonService.AddAfyaMobileInbox(DateTime.Now, request.MESSAGE_HEADER.MESSAGE_TYPE, afyaMobileId, JsonConvert.SerializeObject(request), false);
 
                 try
                 {
@@ -691,6 +692,7 @@ namespace IQCare.HTS.BusinessProcess.CommandHandlers
                                 /***
                                  * Encounter
                                  */
+
 
                                 if (request.CLIENTS[i].ENCOUNTER != null)
                                 {

@@ -86,11 +86,11 @@ export class HaartProphylaxisComponent implements OnInit {
            // dose: ['', Validators.required]
         });
 
-        this.HaartProphylaxisFormGroup.controls['illness'].disable({ onlySelf: true });
+        /*this.HaartProphylaxisFormGroup.controls['illness'].disable({ onlySelf: true });
         this.HaartProphylaxisFormGroup.controls['currentTreatment'].disable({ onlySelf: true });
        // this.HaartProphylaxisFormGroup.controls['dose'].disable({ onlySelf: true });
         this.HaartProphylaxisFormGroup.controls['illness'].disable({ onlySelf: true });
-        this.HaartProphylaxisFormGroup.controls['onSetDate'].disable({ onlySelf: true });
+        this.HaartProphylaxisFormGroup.controls['onSetDate'].disable({ onlySelf: true });*/
 
        // this.isDisabled = true;
 
@@ -191,7 +191,8 @@ export class HaartProphylaxisComponent implements OnInit {
     }
 
     public onChangeOtherIllness(event) {
-        if (event.isUserInput && event.source.selected && event.source.viewValue == 'Yes') {
+        if (event.isUserInput && event.source.selected && event.source.viewValue === 'Yes') {
+            console.log('chronic illness required');
             this.HaartProphylaxisFormGroup.controls['illness'].enable({ onlySelf: true });
             this.HaartProphylaxisFormGroup.controls['currentTreatment'].enable({ onlySelf: true });
            // this.HaartProphylaxisFormGroup.controls['dose'].enable({ onlySelf: true });
@@ -199,11 +200,12 @@ export class HaartProphylaxisComponent implements OnInit {
             this.HaartProphylaxisFormGroup.controls['onSetDate'].enable({ onlySelf: true });
             this.isDisabled = false;
         } else {
-            this.HaartProphylaxisFormGroup.controls['illness'].disable({ onlySelf: true });
-            this.HaartProphylaxisFormGroup.controls['currentTreatment'].disable({ onlySelf: true });
+            console.log('chronic NOt illness required');
+            this.HaartProphylaxisFormGroup.controls['illness'].disable({ onlySelf: false });
+            this.HaartProphylaxisFormGroup.controls['currentTreatment'].disable({ onlySelf: false });
           //  this.HaartProphylaxisFormGroup.controls['dose'].disable({ onlySelf: true });
-            this.HaartProphylaxisFormGroup.controls['illness'].disable({ onlySelf: true });
-            this.HaartProphylaxisFormGroup.controls['onSetDate'].disable({ onlySelf: true });
+            this.HaartProphylaxisFormGroup.controls['illness'].disable({ onlySelf: false });
+            this.HaartProphylaxisFormGroup.controls['onSetDate'].disable({ onlySelf: false });
             this.isDisabled = true;
         }
 
@@ -244,7 +246,6 @@ export class HaartProphylaxisComponent implements OnInit {
             .subscribe(
                 p => {
                     console.log('drug');
-                    console.log(p);
                     const drugAdministration = p;
 
                     if (drugAdministration) {
@@ -253,13 +254,6 @@ export class HaartProphylaxisComponent implements OnInit {
                         const cotrim = drugAdministration.filter(x => x.strDrugAdministered == 'Cotrimoxazole');
                         const aztBaby = drugAdministration.filter(x => x.strDrugAdministered == 'AZT for the baby dispensed');
                         const nvpBaby = drugAdministration.filter(x => x.strDrugAdministered ==  'NVP for baby dispensed');
-
-                        console.log(firstAncVisit);
-                        console.log(haartAnc);
-                        console.log(cotrim);
-                        console.log(aztBaby);
-                        console.log(nvpBaby);
-                        console.log('end drugs admin');
 
                         if (firstAncVisit.length > 0) {
                             this.HaartProphylaxisFormGroup.get('onArvBeforeANCVisit').setValue(firstAncVisit[0]['value']);

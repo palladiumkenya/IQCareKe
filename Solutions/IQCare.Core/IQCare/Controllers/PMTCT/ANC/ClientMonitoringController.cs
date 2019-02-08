@@ -44,6 +44,8 @@ namespace IQCare.Controllers.PMTCT.ANC
             {
                 PatientId = clientMonitoringCommand.PatientId,
                 PatientMasterVisitId=clientMonitoringCommand.PatientMasterVisitId,
+                ViralLoadSampleTaken = clientMonitoringCommand.ViralLoadSampleTaken,
+                screenedTB = clientMonitoringCommand.screenedTB,
                 WhoStage=clientMonitoringCommand.WhoStage,
                 ServiceAreaId = clientMonitoringCommand.ServiceAreaId,
                 ClinicalNotes = clientMonitoringCommand.ClinicalNotes,
@@ -59,7 +61,32 @@ namespace IQCare.Controllers.PMTCT.ANC
                 return Ok(response.Value);
             }
             return BadRequest(response);
+        }
 
+        [HttpPut]
+        public async Task<IActionResult> Put([FromBody] ClientMonitoringEditCommand command)
+        {
+            var response = await _mediator.Send(new ClientMonitoringEditCommand
+            {
+                PatientId = command.PatientId,
+                PatientMasterVisitId = command.PatientMasterVisitId,
+                ViralLoadSampleTaken = command.ViralLoadSampleTaken,
+                WhoStage = command.WhoStage,
+                ServiceAreaId = command.ServiceAreaId,
+                ClinicalNotes = command.ClinicalNotes,
+                ScreeningTypeId = command.ScreeningTypeId,
+                ScreeningDone = command.ScreeningDone,
+                ScreeningDate = command.ScreeningDate,
+                screenedTB = command.screenedTB,
+                cacxMethod = command.cacxMethod,
+                cacxResult = command.cacxResult,
+            }, Request.HttpContext.RequestAborted);
+
+            if (response.IsValid)
+            {
+                return Ok(response.Value);
+            }
+            return BadRequest(response);
         }
 
         // PUT api/<controller>/5
