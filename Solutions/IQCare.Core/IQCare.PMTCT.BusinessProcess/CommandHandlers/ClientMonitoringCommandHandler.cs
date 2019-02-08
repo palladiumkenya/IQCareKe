@@ -113,18 +113,21 @@ namespace IQCare.PMTCT.BusinessProcess.CommandHandlers
                   
                     await clientMonitoringService.AddPatientScreening(patientScreeningTb);
 
-                    PatientClinicalNotes patientClinicalNotes = new PatientClinicalNotes()
+                    if (request.ClinicalNotes != "n/a")
                     {
-                        PatientId = request.PatientId,
-                        PatientMasterVisitId = request.PatientMasterVisitId,
-                        ServiceAreaId = request.ServiceAreaId,
-                        ClinicalNotes = request.ClinicalNotes,
-                        CreateDate = DateTime.Now,
-                        CreatedBy = request.CreatedBy,
-                        Active = false                    
-                    };
+                        PatientClinicalNotes patientClinicalNotes = new PatientClinicalNotes()
+                        {
+                            PatientId = request.PatientId,
+                            PatientMasterVisitId = request.PatientMasterVisitId,
+                            ServiceAreaId = request.ServiceAreaId,
+                            ClinicalNotes = request.ClinicalNotes,
+                            CreateDate = DateTime.Now,
+                            CreatedBy = request.CreatedBy,
+                            Active = false
+                        };
 
-                    int clinicalNotesId =await clientMonitoringService.AddPatientClinicalNotes(patientClinicalNotes);
+                        int clinicalNotesId = await clientMonitoringService.AddPatientClinicalNotes(patientClinicalNotes);
+                    }
 
                     return Result<ClientMonitoringCommandResponse>.Valid(new ClientMonitoringCommandResponse()
                     {

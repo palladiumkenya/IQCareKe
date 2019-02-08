@@ -53,7 +53,7 @@ export class ClientMonitoringComponent implements OnInit {
             cacxScreeningDone: ['', Validators.required],
             cacxMethod: ['', Validators.required],
             cacxResult: ['', Validators.required],
-            cacxComments: ['n/a', Validators.required]
+            cacxComments: ['', Validators.required]
         });
 
         const {
@@ -95,8 +95,6 @@ export class ClientMonitoringComponent implements OnInit {
         }
 
     }
-
-
 
     public getLookupItems(groupName: string, _options: any[]) {
         this.lookupItemView$ = this.lookupItemService.getByGroupName(groupName)
@@ -198,11 +196,11 @@ export class ClientMonitoringComponent implements OnInit {
                         const vl = screening.filter(obj => obj.screeningType == 'ViralLoadSampleTaken');
 
                         if (vl.length > 0) {
-                            this.clientMonitoringFormGroup.get('screenedForTB').setValue(vl[0]['screeningValueId']);
+                            this.clientMonitoringFormGroup.get('viralLoadSampleTaken').setValue(vl[0]['screeningValueId']);
                         }
 
                         if (tb.length > 0) {
-                            this.clientMonitoringFormGroup.get('screenedForTB').setValue(cacx[0]['screeningDone']);
+                            this.clientMonitoringFormGroup.get('screenedForTB').setValue(tb[0]['screeningValueId']);
                         }
                         if (cacx.length > 0) {
                             this.clientMonitoringFormGroup.get('cacxScreeningDone').setValue(cacx[0]['screeningDone']);
