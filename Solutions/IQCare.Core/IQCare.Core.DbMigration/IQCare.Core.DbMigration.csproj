@@ -145,6 +145,7 @@
     <None Remove="Scripts\2.0.0\35_Pharmacy_History.sql" />
     <None Remove="Scripts\2.0.0\36_LO_HtsPnsReferral.sql" />
     <None Remove="Scripts\2.0.0\37_UpdatePaediatricRegimen.sql" />
+    <None Remove="Scripts\2.0.0\38_IPTOutcomeDate.sql" />
   </ItemGroup>
 
   <ItemGroup>
@@ -285,6 +286,7 @@
     <EmbeddedResource Include="Scripts\2.0.0\35_Pharmacy_History.sql" />
     <EmbeddedResource Include="Scripts\2.0.0\36_LO_HtsPnsReferral.sql" />
     <EmbeddedResource Include="Scripts\2.0.0\37_UpdatePaediatricRegimen.sql" />
+    <EmbeddedResource Include="Scripts\2.0.0\38_IPTOutcomeDate.sql" />
   </ItemGroup>
 
   <ItemGroup>
