@@ -67,7 +67,6 @@ export class AddBirthInfoComponent implements OnInit {
     if (this.babyFormGroup.invalid) { 
           return;
     }
-
         this.babyData.push({
             sex: this.babyFormGroup.get('babySex').value.itemId,
             sexStr: this.babyFormGroup.get('babySex').value.itemName,
