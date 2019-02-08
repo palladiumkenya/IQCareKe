@@ -105,7 +105,7 @@
                                 <label class="control-label pull-left">Age(Years)</label>
                             </div>
                             <div class="col-md-6">
-                                <asp:TextBox ID="personAge" runat="server" ClientIDMode="Static" CssClass="form-control input-sm"  placeholder="0"></asp:TextBox>
+                                <asp:TextBox ID="personAge" runat="server" ClientIDMode="Static" CssClass="form-control input-sm" onkeypress="return isNumberKey(event)"  placeholder="0"></asp:TextBox>
                                 <asp:HiddenField ID="dobPrecision" runat="server" ClientIDMode="Static" />
                             </div>
                         </div>
@@ -438,7 +438,7 @@
                                             <label class="control-label pull-left">Age(Years)</label>
                                         </div>
                                         <div class="col-md-6">
-                                            <asp:TextBox ID="TextBox2" runat="server" ClientIDMode="Static" CssClass="form-control input-sm" placeholder="0" required="true" min="0"></asp:TextBox>
+                                            <asp:TextBox ID="TextBox2" runat="server"   ClientIDMode="Static" CssClass="form-control input-sm"  placeholder="0" required="true" min="0"></asp:TextBox>
                                         </div>
                                     </div>
 
@@ -808,6 +808,7 @@
             $("#personAge").keyup(function () {
                 var personAge = parseInt($("#personAge").val());
                 var personMonth = parseInt($("#personMonth").val());
+                 
                  personMonth = (isNaN(personMonth)) ? 0 : personMonth;
                 if (personAge <= 0) {
                     $("#Dob").val("");
@@ -896,6 +897,16 @@
                 });
                 return result;
             }
+   function isNumberKey(evt){
+    var charCode = (evt.which) ? evt.which : event.keyCode;
+    var num = document.getElementById('someid').value;
+    if ((charCode > 31 && (charCode < 48 || charCode > 57)) || (num > 10)){
+        
+        return false;
+        }else{
+        return true;
+        }
+     } 
        
             function GetPatientBaselineandResult(personId, patientId) {
                
@@ -1122,6 +1133,7 @@
                     var previousDate = moment().subtract(1, 'days').format('DD-MMM-YYYY');
                     var adult = moment().subtract(10, 'years').format('DD-MMM-YYYY');
                     var cccReferalDate = $("#CCCReferalDate").val();
+                    
 
                     if (dob !== "") {
                         var today = new Date();
@@ -1233,6 +1245,22 @@
                             }
                         }
                     }
+                if (age > patientAge && (($("#Relationship :selected").text() === "Child"))) {
+                    toastr.error("A child cannot be older than the parent");
+                    return false;
+                    }
+
+              
+                if (patientAge > age  && (($("#Relationship :selected").text() === "Father"))) {
+                    toastr.error("Patient cannot be older than Father");
+                    return false;
+                    }
+                    
+
+                if (patientAge> age && (($("#Relationship :selected").text() === "Mother"))) {
+                    toastr.error("Patient cannot be older than Mother");
+                    return false;
+                }
                     if (moment('' + baselineHivStatusDate + '').isAfter(hivTestingresultDate)) {
                         toastr.error("Baseline HIV status date cannot be greater than HIV testing result date.");
                         return false;
@@ -1639,9 +1667,12 @@
                 var previousDate = moment().subtract(1, 'days').format('DD-MMM-YYYY');
                 var adult = moment().subtract(15, 'years').format('DD-MMM-YYYY');
                 var cccReferalModDate = $("#CccReferalModDDate").val();
+                
                 //console.log(CccReferalModDate);
                 ////validations
                 //return false;
+               
+
 
                 if (hivTestingresultText == "Never Tested") {
                     toastr.error("Never Tested should not be a follow up test result");
@@ -1689,6 +1720,8 @@
                     toastr.error("A child cannot have a spouse.");
                     return false;
                 }
+
+
                 if (patientAge < 16 && (($("#Relationship :selected").text() === "Partner"))) {
                     $("#Relationship").val(0);
                     toastr.error("A child cannot have a partner.");
@@ -1699,6 +1732,7 @@
                     toastr.error("A child cannot have a child.");
                     return false;
                 }
+                
                 else {
                     $.ajax({
                         type: "POST",

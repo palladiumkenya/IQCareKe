@@ -24,6 +24,7 @@ namespace IQCare.Web.PMSCM
         StringBuilder str = new StringBuilder();
         private static int chkavdrugs = 1;
         public string StoreId;
+        public List<DataRow> regimenlines;
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -1701,6 +1702,8 @@ namespace IQCare.Web.PMSCM
                 PrescriptionManager = (IDrug)ObjectFactory.CreateInstance("BusinessProcess.SCM.BDrug,BusinessProcess.SCM");
                 DataSet dsPharmacyVitals = PrescriptionManager.GetPharmacyVitals(Convert.ToInt32(Session["PatientID"]));
 
+                Interface.SCM.IDrug regimen = (Interface.SCM.IDrug)ObjectFactory.CreateInstance("BusinessProcess.SCM.BDrug, BusinessProcess.SCM");
+                DataTable dtRegimenLine = regimen.GetmstRegimenLineClassification();
 
                 if (theDS.Tables[0].Rows.Count > 0)
                 {
@@ -1769,7 +1772,28 @@ namespace IQCare.Web.PMSCM
                   //  ddlPrescribedBy.SelectedValue = theDS.Tables[1].Rows[0]["OrderedBy"].ToString();
                     //added by VY
                     ddlTreatmentProg.SelectedValue = theDS.Tables[0].Rows[0]["TreatmentProgram"].ToString();
-                    ddlregimenLine.SelectedValue = theDS.Tables[0].Rows[0]["RegimenLine"].ToString();
+
+                    regimenlines = dtRegimenLine.Rows.Cast<DataRow>().ToList();
+                    if (regimenlines != null)
+                    {
+                        if (regimenlines.Count > 0)
+                        {
+                            string regimenvalue = theDS.Tables[0].Rows[0]["RegimenLine"].ToString();
+
+                            var result = regimenlines.Any(row => row[0].Equals(Convert.ToInt32(regimenvalue)));
+                            if (result ==true)
+                            {
+                                
+                                    ddlregimenLine.SelectedValue = theDS.Tables[0].Rows[0]["RegimenLine"].ToString();
+                            }
+                            else
+                            {
+                                ddlregimenLine.SelectedValue = "0";
+
+                            }
+                        }
+                    }
+                   // ddlregimenLine.SelectedValue = theDS.Tables[0].Rows[0]["RegimenLine"].ToString();
 
                     if (theDS.Tables[0].Rows[0]["PatientClassification"] != null)
                     {
@@ -2052,6 +2076,7 @@ namespace IQCare.Web.PMSCM
                 if (theDV.Table != null)
                 {
                     DataTable theDT = (DataTable)theUtils.CreateTableFromDataView(theDV);
+                    
                     BindFunctions theBindMgr = new BindFunctions();
                     theBindMgr.BindCombo(ddlregimenLine, theDT, "Name", "Id");
                     theDV.Dispose();
