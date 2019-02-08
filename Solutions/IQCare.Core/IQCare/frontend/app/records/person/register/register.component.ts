@@ -317,12 +317,18 @@ export class RegisterComponent implements OnInit {
 
         const today = new Date();
         today.setDate(15);
-        today.setMonth(5);
+        if (ageYears > 0) {
+            today.setMonth(5);
+        }
+
+        if (ageYears == 0 && (!ageMonths || ageMonths == 0)) {
+            today.setDate(new Date().getDate());
+        }
 
         const estDob = moment(today.toISOString());
         let dob = estDob.add((ageYears * -1), 'years');
         if (ageMonths) {
-            dob = estDob.add(ageMonths, 'months');
+            dob = estDob.add(ageMonths * -1, 'months');
         }
 
         this.formArray['controls'][0]['controls']['DateOfBirth'].setValue(moment(dob).toDate());
