@@ -1,3 +1,4 @@
+import { AncService } from './../_services/anc.service';
 import { Component, OnInit, NgZone } from '@angular/core';
 import { FormArray, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -30,8 +31,6 @@ import { MatDialogConfig, MatDialog } from '@angular/material';
 import { AddBirthInfoComponent } from './baby/add-birth-info/add-birth-info.component';
 import { AddBabyDialogComponent } from './baby/add-baby-dialog/add-baby-dialog.component';
 
-
-[]
 @Component({
     selector: 'app-maternity',
     templateUrl: './maternity.component.html',
@@ -108,7 +107,8 @@ export class MaternityComponent implements OnInit {
         private notificationService: NotificationService,
         public zone: NgZone,
         private router: Router,
-        private dialog: MatDialog) {
+        private dialog: MatDialog,
+        private ancservice: AncService) {
         this.visitDetailsFormGroup = new FormArray([]);
         this.diagnosisFormGroup = new FormArray([]);
         this.maternalDrugAdministrationForGroup = new FormArray([]);
@@ -260,7 +260,7 @@ export class MaternityComponent implements OnInit {
     }
 
     onBabyNotifyData(babyNotifyData: any[]): void {
-        console.log("Baby Notify data "+ this.babyNotifyData.length);
+        console.log("Baby Notify data " + this.babyNotifyData.length);
         this.babyNotifyData.push(babyNotifyData);
     }
 
@@ -270,8 +270,8 @@ export class MaternityComponent implements OnInit {
 
     onHivStatusNotify(formGroup: Object): void {
         this.maternityTestsFormGroup.push(formGroup['form']);
-        console.log(formGroup);
-        this.hiv_status_table_data = formGroup['table_data'];
+        // console.log(formGroup);
+        this.hiv_status_table_data.push(formGroup['table_data']);
     }
 
     onMaternalDrugAdministration(formGroup: FormGroup): void {
@@ -299,7 +299,7 @@ export class MaternityComponent implements OnInit {
     onPatientNextAppointent(formGroup: FormGroup): void {
         this.dischargeFormGroup.push(formGroup);
     }
-   
+
     public getLookupItems(groupName: string, objOptions: any[] = []) {
         this.lookupItems$ = this._lookupItemService.getByGroupName(groupName)
             .subscribe(
@@ -346,7 +346,7 @@ export class MaternityComponent implements OnInit {
             DaysPostPartum: 0,
             VisitType: 0,
             UserId: this.userId
-        } as VisitDetailsCommand;      
+        } as VisitDetailsCommand;
 
         console.log(this.visitDetailsFormGroup);
         const pregnancyCommand: PregnancyCommand = {
@@ -378,7 +378,7 @@ export class MaternityComponent implements OnInit {
 
         const maternityDeliveryCommand: MaternityDeliveryCommand = {
             PatientMasterVisitId: this.patientMasterVisitId,
-            PregnancyId : this.pregnancyId,
+            PregnancyId: this.pregnancyId,
             DurationOfLabour: this.diagnosisFormGroup.value[1]['labourDuration'],
             DateOfDelivery: moment(this.diagnosisFormGroup.value[1]['deliveryDate']).toDate(),
             TimeOfDelivery: this.diagnosisFormGroup.value[1]['deliveryTime'],
@@ -435,7 +435,7 @@ export class MaternityComponent implements OnInit {
                 });
             }
         }
-           
+
         const babyConditionInfo = {
             DeliveredBabyBirthInfoCollection: this.DeliveredBabyBirthInfoCollection
         };
@@ -641,6 +641,14 @@ export class MaternityComponent implements OnInit {
                     console.log(`success `);
                     console.log(result);
 
+                    hivTestsCommand.HtsEncounterId = result[1]['htsEncounterId'];
+                    hivTestsCommand.PatientMasterVisitId = result[1]['patientMasterVisitId'];
+                    const ancHivResultsCommand = this.ancservice.saveHivResults(hivTestsCommand).subscribe(
+                        (testRes) => {
+                            console.log(testRes);
+                        }
+                    );
+
                     if (this.pregnancyId == 0) {
                         this.matService.savePregnancyProfile(pregnancyCommand).subscribe((res) => {
                             maternityDeliveryCommand.PregnancyId = res.pregnancyId;
@@ -649,6 +657,9 @@ export class MaternityComponent implements OnInit {
                             this.sendPatientDeliveryInfoRequest(maternityDeliveryCommand, babyConditionInfo);
                             this.sendVisitDetailsRequest(visitDetailsCommand);
 
+                            this.zone.run(() => {
+                                this.router.navigate(['/dashboard/personhome/' + this.personId], { relativeTo: this.route });
+                            });
                         },
                             (err) => {
                                 console.log('An error occured while add patient pregnancy details', err);
@@ -659,10 +670,11 @@ export class MaternityComponent implements OnInit {
                     } else {
                         this.sendPatientDeliveryInfoRequest(maternityDeliveryCommand, babyConditionInfo);
                         this.sendVisitDetailsRequest(visitDetailsCommand);
+
+                        this.zone.run(() => {
+                            this.router.navigate(['/dashboard/personhome/' + this.personId], { relativeTo: this.route });
+                        });
                     }
-
-
-
                 },
                 (error) => {
                     console.log(`error ` + error);
@@ -720,27 +732,25 @@ export class MaternityComponent implements OnInit {
             });
     }
 
-    public AddNewBabyInfo()
-    {
+    public AddNewBabyInfo() {
         const dialogConfig = new MatDialogConfig();
         dialogConfig.disableClose = false;
         dialogConfig.autoFocus = true;
-        
-        dialogConfig.data =  {
-            babySectionOptions : this.babySectionOptions,
-            patientId : this.patientId,
-            patientMasterVisitId : this.patientMasterVisitId,
-            isNew : true
-          };
-    
+
+        dialogConfig.data = {
+            babySectionOptions: this.babySectionOptions,
+            patientId: this.patientId,
+            patientMasterVisitId: this.patientMasterVisitId,
+            isNew: true
+        };
+
         const dialogRef = this.dialog.open(AddBabyDialogComponent, dialogConfig);
         dialogRef.afterClosed().subscribe(
-          data => 
-          {
-            if (!data)
-              return;
-              console.log(data);
-          });
+            data => {
+                if (!data)
+                    return;
+                console.log(data);
+            });
     }
 }
 

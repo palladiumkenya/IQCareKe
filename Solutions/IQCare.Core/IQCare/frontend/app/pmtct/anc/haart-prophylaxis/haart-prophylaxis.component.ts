@@ -1,16 +1,16 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
-import {LookupItemService} from '../../../shared/_services/lookup-item.service';
-import {SnotifyService} from 'ng-snotify';
-import {NotificationService} from '../../../shared/_services/notification.service';
-import {Subscription} from 'rxjs/index';
-import {ClientMonitoringEmitter} from '../../emitters/ClientMonitoringEmitter';
-import {HAARTProphylaxisEmitter} from '../../emitters/HAARTProphylaxisEmitter';
-import {ActivatedRoute} from '@angular/router';
-import {ChronicIllnessEmitter} from '../../emitters/ChronicIllnessEmitter';
-import {PatientChronicIllness} from '../../_models/PatientChronicIllness';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { LookupItemService } from '../../../shared/_services/lookup-item.service';
+import { SnotifyService } from 'ng-snotify';
+import { NotificationService } from '../../../shared/_services/notification.service';
+import { Subscription } from 'rxjs/index';
+import { ClientMonitoringEmitter } from '../../emitters/ClientMonitoringEmitter';
+import { HAARTProphylaxisEmitter } from '../../emitters/HAARTProphylaxisEmitter';
+import { ActivatedRoute } from '@angular/router';
+import { ChronicIllnessEmitter } from '../../emitters/ChronicIllnessEmitter';
+import { PatientChronicIllness } from '../../_models/PatientChronicIllness';
 import * as moment from 'moment';
-import {AncService} from '../../_services/anc.service';
+import { AncService } from '../../_services/anc.service';
 
 export interface Options {
     value: string;
@@ -43,17 +43,17 @@ export class HaartProphylaxisComponent implements OnInit {
     public patientchronicIllnessData: PatientChronicIllness[] = [];
 
     public personId: number;
-   // public patientMasterVisitId: number;
+    // public patientMasterVisitId: number;
     public serviceAreaId: number;
-  //  public patientId: number;
+    //  public patientId: number;
     public userId: number;
-    public isDisabled: boolean = true ;
+    public isDisabled: boolean = true;
 
     public maxDate: Date = moment().toDate();
 
     constructor(private route: ActivatedRoute, private _formBuilder: FormBuilder, private _lookupItemService: LookupItemService,
-                private  snotifyService: SnotifyService,
-                private notificationService: NotificationService, private ancService: AncService) {
+        private snotifyService: SnotifyService,
+        private notificationService: NotificationService, private ancService: AncService) {
     }
 
     ngOnInit() {
@@ -83,7 +83,7 @@ export class HaartProphylaxisComponent implements OnInit {
             otherIllness: ['', Validators.required],
             onSetDate: ['', Validators.required],
             currentTreatment: ['', Validators.required] // ,
-           // dose: ['', Validators.required]
+            // dose: ['', Validators.required]
         });
 
         /*this.HaartProphylaxisFormGroup.controls['illness'].disable({ onlySelf: true });
@@ -92,7 +92,7 @@ export class HaartProphylaxisComponent implements OnInit {
         this.HaartProphylaxisFormGroup.controls['illness'].disable({ onlySelf: true });
         this.HaartProphylaxisFormGroup.controls['onSetDate'].disable({ onlySelf: true });*/
 
-       // this.isDisabled = true;
+        // this.isDisabled = true;
 
 
         const {
@@ -107,7 +107,7 @@ export class HaartProphylaxisComponent implements OnInit {
         /* this.getLookupItems('YesNoNa', this.yesnonas);
          this.getLookupItems('ChronicIllness', this.chronics);
          this.getLookupItems('YesNo', this.YesNos); */
-        this.notify.emit({'form': this.HaartProphylaxisFormGroup, 'illness_data': this.chronicIllness });
+        this.notify.emit({ 'form': this.HaartProphylaxisFormGroup, 'illness_data': this.chronicIllness });
         if (this.isEdit) {
             this.getPatientDrugAdministrationInfo(this.patientId);
             this.getPatientChronicIllnessInfo(this.patientId);
@@ -124,7 +124,7 @@ export class HaartProphylaxisComponent implements OnInit {
                     const options = p['lookupItems'];
                     console.log(options);
                     for (let i = 0; i < options.length; i++) {
-                        _options.push({'itemId': options[i]['itemId'], 'itemName': options[i]['itemName']});
+                        _options.push({ 'itemId': options[i]['itemId'], 'itemName': options[i]['itemName'] });
                     }
                 },
                 (err) => {
@@ -148,7 +148,7 @@ export class HaartProphylaxisComponent implements OnInit {
                     PatientMasterVisitId: parseInt(this.patientMasterVisitId.toString(), 10),
                     ChronicIllness: this.chronicIllness[i]['chronicIllnessId'],
                     Treatment: this.chronicIllness[i]['currentTreatment'],
-                  //  Dose: parseInt(this.chronicIllness[i]['dose'].toString(), 10),
+                    //  Dose: parseInt(this.chronicIllness[i]['dose'].toString(), 10),
                     DeleteFlag: false,
                     OnsetDate: this.chronicIllness[i]['onSetDate'],
                     Active: 0,
@@ -184,7 +184,7 @@ export class HaartProphylaxisComponent implements OnInit {
                 chronicIllnessId: illnessId,
                 onSetDate: this.HaartProphylaxisFormGroup.controls['onSetDate'].value,
                 currentTreatment: this.HaartProphylaxisFormGroup.controls['currentTreatment'].value // ,
-               // dose: parseInt(this.HaartProphylaxisFormGroup.controls['dose'].value.toString(), 10)
+                // dose: parseInt(this.HaartProphylaxisFormGroup.controls['dose'].value.toString(), 10)
             });
         }
         console.log(this.chronicIllness);
@@ -192,35 +192,22 @@ export class HaartProphylaxisComponent implements OnInit {
 
     public onChangeOtherIllness(event) {
         if (event.isUserInput && event.source.selected && event.source.viewValue === 'Yes') {
-            console.log('chronic illness required');
+
             this.HaartProphylaxisFormGroup.controls['illness'].enable({ onlySelf: true });
             this.HaartProphylaxisFormGroup.controls['currentTreatment'].enable({ onlySelf: true });
-           // this.HaartProphylaxisFormGroup.controls['dose'].enable({ onlySelf: true });
+            // this.HaartProphylaxisFormGroup.controls['dose'].enable({ onlySelf: true });
             this.HaartProphylaxisFormGroup.controls['illness'].enable({ onlySelf: true });
             this.HaartProphylaxisFormGroup.controls['onSetDate'].enable({ onlySelf: true });
-            this.isDisabled = false;
-        } else {
-            console.log('chronic NOt illness required');
-            this.HaartProphylaxisFormGroup.controls['illness'].disable({ onlySelf: false });
-            this.HaartProphylaxisFormGroup.controls['currentTreatment'].disable({ onlySelf: false });
-          //  this.HaartProphylaxisFormGroup.controls['dose'].disable({ onlySelf: true });
-            this.HaartProphylaxisFormGroup.controls['illness'].disable({ onlySelf: false });
-            this.HaartProphylaxisFormGroup.controls['onSetDate'].disable({ onlySelf: false });
-            this.isDisabled = true;
-        }
+            // this.isDisabled = false;
+        } else if (event.isUserInput && event.source.selected) {
 
-      /* const OtherIllness = this.HaartProphylaxisFormGroup.controls['otherIllness'].value.itemName;
-        if (OtherIllness == 'Yes') {
-
-            this.isDisabled = false;
-        } else {
             this.HaartProphylaxisFormGroup.controls['illness'].disable({ onlySelf: true });
-            this.HaartProphylaxisFormGroup.controls['onsetDate'].disable({ onlySelf: true });
             this.HaartProphylaxisFormGroup.controls['currentTreatment'].disable({ onlySelf: true });
-            this.HaartProphylaxisFormGroup.controls['Dose'].disable({ onlySelf: true });
+            //  this.HaartProphylaxisFormGroup.controls['dose'].disable({ onlySelf: true });
             this.HaartProphylaxisFormGroup.controls['illness'].disable({ onlySelf: true });
-            this.isDisabled = true;
-        } */
+            this.HaartProphylaxisFormGroup.controls['onSetDate'].disable({ onlySelf: true });
+            // this.isDisabled = true;
+        }
     }
 
 
@@ -230,12 +217,12 @@ export class HaartProphylaxisComponent implements OnInit {
     }
 
     public onARVBeforeFirstANC(event) {
-       console.log('yesno options');
+        console.log('yesno options');
         console.log(this.YesNoOptions);
         const no = this.yesnonaOptions.filter(x => x.itemName = 'No');
         // console.log(option);
         if (event.isUserInput && event.source.selected && event.source.viewValue == 'Yes') {
-                this.HaartProphylaxisFormGroup.get('startedHaartANC').setValue(no[0]['itemId']);
+            this.HaartProphylaxisFormGroup.get('startedHaartANC').setValue(no[0]['itemId']);
         } else {
 
         }
@@ -246,7 +233,6 @@ export class HaartProphylaxisComponent implements OnInit {
             .subscribe(
                 p => {
                     console.log('drug');
-                    console.log(p);
                     const drugAdministration = p;
 
                     if (drugAdministration) {
@@ -254,14 +240,7 @@ export class HaartProphylaxisComponent implements OnInit {
                         const haartAnc = drugAdministration.filter(x => x.strDrugAdministered == 'Started HAART in ANC');
                         const cotrim = drugAdministration.filter(x => x.strDrugAdministered == 'Cotrimoxazole');
                         const aztBaby = drugAdministration.filter(x => x.strDrugAdministered == 'AZT for the baby dispensed');
-                        const nvpBaby = drugAdministration.filter(x => x.strDrugAdministered ==  'NVP for baby dispensed');
-
-                        console.log(firstAncVisit);
-                        console.log(haartAnc);
-                        console.log(cotrim);
-                        console.log(aztBaby);
-                        console.log(nvpBaby);
-                        console.log('end drugs admin');
+                        const nvpBaby = drugAdministration.filter(x => x.strDrugAdministered == 'NVP for baby dispensed');
 
                         if (firstAncVisit.length > 0) {
                             this.HaartProphylaxisFormGroup.get('onArvBeforeANCVisit').setValue(firstAncVisit[0]['value']);
@@ -299,7 +278,7 @@ export class HaartProphylaxisComponent implements OnInit {
                     console.log(chronic);
 
                     if (chronic.length > 0) {
-                        for (let i = 0; i < chronic.length; i ++) {
+                        for (let i = 0; i < chronic.length; i++) {
                             this.chronicIllness.push({
                                 chronicIllness: chronic[i]['chronicIllness'],
                                 chronicIllnessId: chronic[i]['chronicIllnessId'],
@@ -314,10 +293,10 @@ export class HaartProphylaxisComponent implements OnInit {
                         const yesno = this.yesnonaOptions.filter(x => x.itemName == 'Yes');
                         this.HaartProphylaxisFormGroup.get('otherIllness').setValue(yesno[0]['itemId']);
                     } else {
-                       const yesnot = this.yesnonaOptions.filter(x => x.itemName == 'No');
-                       console.log(this.yesnonaOptions);
+                        const yesnot = this.yesnonaOptions.filter(x => x.itemName == 'No');
+                        console.log(this.yesnonaOptions);
 
-                       this.HaartProphylaxisFormGroup.get('otherIllness').setValue(yesnot[0]['itemId']);
+                        this.HaartProphylaxisFormGroup.get('otherIllness').setValue(yesnot[0]['itemId']);
                     }
 
                 },

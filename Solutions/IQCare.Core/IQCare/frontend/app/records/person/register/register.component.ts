@@ -25,6 +25,7 @@ import { Search } from '../../_models/search';
 import { Store } from '@ngrx/store';
 import * as AppState from '../../../shared/reducers/app.states';
 import { Partner } from '../../../shared/_models/partner';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
     selector: 'app-register',
@@ -81,7 +82,8 @@ export class RegisterComponent implements OnInit {
         public zone: NgZone,
         private router: Router,
         private searchService: SearchService,
-        private store: Store<AppState>) {
+        private store: Store<AppState>,
+        private spinner: NgxSpinnerService) {
         this.maxDate = new Date();
         this.clientSearch = new Search();
     }
@@ -315,12 +317,18 @@ export class RegisterComponent implements OnInit {
 
         const today = new Date();
         today.setDate(15);
-        today.setMonth(5);
+        if (ageYears > 0) {
+            today.setMonth(5);
+        }
+
+        if (ageYears == 0 && (!ageMonths || ageMonths == 0)) {
+            today.setDate(new Date().getDate());
+        }
 
         const estDob = moment(today.toISOString());
         let dob = estDob.add((ageYears * -1), 'years');
         if (ageMonths) {
-            dob = estDob.add(ageMonths, 'months');
+            dob = estDob.add(ageMonths * -1, 'months');
         }
 
         this.formArray['controls'][0]['controls']['DateOfBirth'].setValue(moment(dob).toDate());
@@ -344,6 +352,7 @@ export class RegisterComponent implements OnInit {
 
     onSubmitForm(tabIndex: number) {
         if (this.formGroup.valid) {
+            this.spinner.show();
             this.person = { ...this.formArray.value[0] };
             this.clientAddress = { ...this.formArray.value[1] };
             this.clientContact = { ...this.formArray.value[2] };
@@ -434,6 +443,9 @@ export class RegisterComponent implements OnInit {
                 (error) => {
                     this.snotifyService.error('Error creating person ' + error, 'Person Registration',
                         this.notificationService.getConfig());
+                },
+                () => {
+                    this.spinner.hide();
                 }
             );
         } else {
