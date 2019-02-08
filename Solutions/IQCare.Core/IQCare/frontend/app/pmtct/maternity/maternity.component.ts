@@ -270,8 +270,8 @@ export class MaternityComponent implements OnInit {
 
     onHivStatusNotify(formGroup: Object): void {
         this.maternityTestsFormGroup.push(formGroup['form']);
-        console.log(formGroup);
-        this.hiv_status_table_data = formGroup['table_data'];
+        // console.log(formGroup);
+        this.hiv_status_table_data.push(formGroup['table_data']);
     }
 
     onMaternalDrugAdministration(formGroup: FormGroup): void {

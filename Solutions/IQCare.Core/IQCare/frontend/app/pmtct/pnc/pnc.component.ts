@@ -295,7 +295,7 @@ export class PncComponent implements OnInit {
 
     onHivStatusNotify(formGroup: Object): void {
         this.hivStatusFormGroup.push(formGroup['form']);
-        this.hiv_status_table_data = formGroup['table_data'];
+        this.hiv_status_table_data.push(formGroup['table_data']);
     }
 
     onDiagnosisNotify(formGroup: FormGroup): void {
@@ -330,19 +330,6 @@ export class PncComponent implements OnInit {
         const naOption = this.yesNoNaOptions.filter(obj => obj.itemName == 'N/A');
         const isCounsellingDone = this.yesnoOptions.filter(obj =>
             obj.itemId == this.drugAdministration_PartnerTesting_FormGroup.value[2]['counselledInfantFeeding']);
-
-        // const motherExaminationTypeId = this.motherExaminationOptions.filter(obj => obj.masterName == 'MotherExamination');
-
-        /* const pncVisitDetailsCommand: PncVisitDetailsCommand = {
-             PatientId: this.patientId,
-             ServiceAreaId: this.serviceAreaId,
-             VisitDate: moment(this.visitDetailsFormGroup.value[0]['visitDate']).toDate(),
-             VisitNumber: this.visitDetailsFormGroup.value[0]['visitNumber'],
-             VisitType: this.visitDetailsFormGroup.value[0]['visitType'],
-             UserId: this.userId,
-             DaysPostPartum: this.visitDetailsFormGroup.value[0]['dayPostPartum'],
-             PatientMasterVisitId: this.patientMasterVisitId
-         };*/
 
         const visitDetailsCommand = {
             PatientId: parseInt(this.patientId.toString(), 10),
@@ -508,7 +495,8 @@ export class PncComponent implements OnInit {
             AuditData: ''
         };
 
-        const pncExercisesId = this.cervicalCancerScreeningFormGroup.value[1]['pncExercisesId'] ? this.cervicalCancerScreeningFormGroup.value[1]['pncExercisesId'] : 0;
+        const pncExercisesId = this.cervicalCancerScreeningFormGroup.value[1]['pncExercisesId'] ?
+            this.cervicalCancerScreeningFormGroup.value[1]['pncExercisesId'] : 0;
         const patientPncExercisesCommand: PatientPncExercisesCommand = {
             Id: pncExercisesId,
             PatientId: this.patientId,
@@ -623,6 +611,7 @@ export class PncComponent implements OnInit {
                     hivTestsCommand.HtsEncounterId = this.htsEncounterId;
                     hivTestsCommand.PatientMasterVisitId = result[0]['patientMasterVisitId'];
 
+                    console.log(`hivTestsCommand`, hivTestsCommand);
                     const pncHivTests = this.pncService.savePncHivTests(hivTestsCommand).subscribe(
                         (res) => {
                             console.log(`result`, res);
@@ -805,7 +794,8 @@ export class PncComponent implements OnInit {
             PartnerHIVResult: this.drugAdministration_PartnerTesting_FormGroup.value[1]['finalPartnerHivResult'],
         };
 
-        const pncExercisesId = this.cervicalCancerScreeningFormGroup.value[1]['pncExercisesId'] ? this.cervicalCancerScreeningFormGroup.value[1]['pncExercisesId'] : 0;
+        const pncExercisesId = this.cervicalCancerScreeningFormGroup.value[1]['pncExercisesId'] ?
+            this.cervicalCancerScreeningFormGroup.value[1]['pncExercisesId'] : 0;
         const patientPncExercisesCommand: PatientPncExercisesCommand = {
             Id: pncExercisesId,
             PatientId: this.patientId,
