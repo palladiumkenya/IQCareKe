@@ -65,7 +65,8 @@
                                         <!-- add Hiv Status Component to Stepper -->
                                         <app-pnc-hivtesting (notify)="onHivStatusNotify($event)" [pncHivOptions]="pncHivOptions"
                                             [patientId]="patientId" [isEdit]="isEdit" [patientMasterVisitId]="patientMasterVisitId"
-                                            [patientEncounterId]="patientEncounterId" [serviceAreaId]="serviceAreaId">
+                                            [patientEncounterId]="patientEncounterId" [serviceAreaId]="serviceAreaId"
+                                            [personId]="personId">
                                         </app-pnc-hivtesting>
 
                                         <div class="row">
@@ -108,7 +109,8 @@
                                         <div class="row">
                                             <button mat-raised-button color="primary" matStepperPrevious type="button">Previous</button>
                                             &nbsp;&nbsp;
-                                            <button mat-raised-button color="accent" (click)="onNextNav()" matStepperNext type="button">Next</button>
+                                            <button mat-raised-button color="accent" (click)="onNextNav()"
+                                                matStepperNext type="button">Next</button>
                                         </div>
                                     </mat-step>
 

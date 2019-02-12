@@ -312,5 +312,18 @@ namespace IQCare.Controllers.HTS
                 return Ok(response.Value);
             return BadRequest(response);
         }
+
+        [HttpGet("GetIsPersonInPositiveList/{personId}")]
+        public async Task<IActionResult> GetIsPersonInPositiveList(int personId)
+        {
+            var response = await _mediator.Send(new GetHivPositiveListCommand()
+            {
+                PersonId = personId
+            }, Request.HttpContext.RequestAborted);
+
+            if (response.IsValid)
+                return Ok(response.Value);
+            return BadRequest(response);
+        }
     }
 }
