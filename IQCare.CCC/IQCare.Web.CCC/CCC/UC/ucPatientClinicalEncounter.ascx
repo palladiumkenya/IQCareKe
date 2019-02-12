@@ -3734,8 +3734,17 @@
 
         //Save patient IPT Outcome
         $("#btnSaveIptOutcome").click(function () {
-            addPatientIptOutcome();
-            $('#IptOutcomeModal').modal('hide');
+            
+          var IPTDate = $('#IPTDate').val();
+            if (IPTDate == "" || IPTDate == undefined) {
+                toastr.error("Kindly note IPT Outcome Date is required");
+                $('#IptOutcomeModal').modal('show');
+                return;
+            }
+            else {
+                addPatientIptOutcome();
+                $('#IptOutcomeModal').modal('hide');
+            }
         });
 
 
@@ -4655,13 +4664,15 @@
 
 		function addPatientIptOutcome() {
 			var iptEvent = $("#iptEvent").val();
-			var reasonForDiscontinuation = $("#discontinuation").val();
+            var reasonForDiscontinuation = $("#discontinuation").val();
+           
+            var iptOutComeDate = $("#IPTDate").val();
 			var patientId = <%=PatientId%>;
 			var patientMasterVisitId = <%=PatientMasterVisitId%>;
 			$.ajax({
 				type: "POST",
 				url: "../WebService/PatientTbService.asmx/AddPatientIptOutcome",
-				data: "{'patientId': '" + patientId + "','patientMasterVisitId': '" + patientMasterVisitId + "','iptEvent': '" + iptEvent + "','reasonForDiscontinuation': '" + reasonForDiscontinuation + "'}",
+				data: "{'patientId': '" + patientId + "','IPTDate':'" + iptOutComeDate + "','patientMasterVisitId': '" + patientMasterVisitId + "','iptEvent': '" + iptEvent + "','reasonForDiscontinuation': '" + reasonForDiscontinuation + "'}",
 				contentType: "application/json; charset=utf-8",
 				dataType: "json",
 				success: function (response) {

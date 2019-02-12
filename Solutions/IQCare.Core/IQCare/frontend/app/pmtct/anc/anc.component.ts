@@ -856,6 +856,46 @@ export class AncComponent implements OnInit, OnDestroy {
             CreatedBy: (this.userId < 1) ? 1 : this.userId
         };
 
+        const appointmentId = this.ReferralMatFormGroup.value[0]['scheduledAppointment'];
+        const yes = this.yesNoNaOptions.filter(x => x.itemName == 'Yes');
+        if (appointmentId == yes[0]['itemId']) {
+            this.appointmentCommand = {
+                PatientId: this.patientId,
+                PatientMasterVisitId: this.patientMasterVisitId,
+                AppointmentDate: moment(this.ReferralMatFormGroup.value[0]['nextAppointmentDate']).toDate(),
+                Description: this.ReferralMatFormGroup.value[0]['serviceRemarks'],
+                CreatedBy: this.userId,
+                ServiceAreaId: this.serviceAreaId,
+                StatusDate: new Date(),
+                DifferentiatedCareId: 0,
+                AppointmentReason: 'Follow Up'
+            } as PatientAppointment;
+        } else {
+            this.appointmentCommand = {
+                PatientId: this.patientId,
+                PatientMasterVisitId: this.patientMasterVisitId,
+                AppointmentDate: moment(this.ReferralMatFormGroup.value[0]['nextAppointmentDate']).toDate(),
+                Description: this.ReferralMatFormGroup.value[0]['serviceRemarks'],
+                CreatedBy: this.userId,
+                ServiceAreaId: this.serviceAreaId,
+                StatusDate: new Date(),
+                DifferentiatedCareId: 0,
+                AppointmentReason: 'None'
+            } as PatientAppointment;
+        };
+
+        const referralEditCommand = {
+            PatientId: this.patientId,
+            PatientMasterVisitId: this.patientMasterVisitId,
+            ReferredFrom: this.ReferralMatFormGroup.value[0]['referredFrom'],
+            ReferredTo: this.ReferralMatFormGroup.value[0]['referredTo'],
+            ReferralReason: 'n/a',
+            ReferralDate: new Date(),
+            RefferedBY: this.userId,
+            DeleteFlag: 0,
+            CreateBy: this.userId
+        } as PatientReferral;
+
      //   const clientMonitoringEditCommand = { clientMonitoringEditCommand: clientMonitoringCommandEdit }
 
         console.log('client monitoring command edit');
@@ -866,12 +906,17 @@ export class AncComponent implements OnInit, OnDestroy {
         const ancEducation = this.ancService.savePatientEducation(patientEducationCommand);
         const ancClientMonitoringEdit = this.ancService.EditClientMonitoring(clientMonitoringCommandEdit);
 
+        const PatientAppointmentEdit = this.ancService.EditAppointment(this.appointmentCommand);
+        const referralEdit = this.ancService.EditReferral(referralEditCommand)
+
         forkJoin([
             AncvisitDetailsEdit,
             visitDetailsEdit,
             baselineEdit,
             ancEducation,
             ancClientMonitoringEdit
+            // PatientAppointmentEdit,
+           // referralEdit
 
         ]).subscribe(
             (result) => {

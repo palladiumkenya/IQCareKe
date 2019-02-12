@@ -221,16 +221,19 @@ namespace IQCare.Web.CCC.WebService
             }
             return Msg;
         }
-
+       
         [WebMethod(EnableSession = true)]
-        public string AddPatientIptOutcome(int patientId, int patientMasterVisitId, int iptEvent, string reasonForDiscontinuation)
+        public string AddPatientIptOutcome(int patientId,DateTime? IPTDate,int patientMasterVisitId, int iptEvent, string reasonForDiscontinuation)
         {
+           
+     
             PatientIptOutcome patientIptOutcome = new PatientIptOutcome()
             {
                 PatientId = patientId,
                 PatientMasterVisitId = patientMasterVisitId,
                 IptEvent = iptEvent,
-                ReasonForDiscontinuation = reasonForDiscontinuation
+                ReasonForDiscontinuation = reasonForDiscontinuation,
+                IPTOutComeDate=IPTDate
             };
             try
             {
@@ -272,7 +275,8 @@ namespace IQCare.Web.CCC.WebService
                         PatientMasterVisitId = x.PatientMasterVisitId,
                         IptEvent = x.IptEvent,
                         ReasonForDiscontinuation = x.ReasonForDiscontinuation,
-                        Id = x.Id
+                        Id = x.Id,
+                        IPTOutComeDate=x.IPTOutComeDate
                     };
                     JavaScriptSerializer parser = new JavaScriptSerializer();
 

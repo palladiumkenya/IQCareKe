@@ -35,6 +35,10 @@ export class AncService {
     private _url_haart = '/api/HaartProphylaxis/';
     private _url_ref = '/api/PatientReferralAndAppointment/AddPatientReferralInfo';
     private _url_app = '/api/PatientReferralAndAppointment/AddPatientNextAppointment';
+
+    private _url_ref_edit = '/api/PatientReferralAndAppointment/UpdatePatientReferralInfo';
+    private _url_app_edit = '/api/PatientReferralAndAppointment/UpdatePatientNextAppointment';
+
     private _url_pre = '/api/ANCPreventivervice/';
     private _url_pci = '/api/PatientChronicIllness/post';
 
@@ -169,6 +173,14 @@ export class AncService {
         );
     }
 
+    public EditReferral(referralCommand: ReferralAppointmentCommandService): Observable<ReferralAppointmentCommandService> {
+
+        return this.http.put<any>(this.API_URL + '' + this._url_ref_edit, JSON.stringify(referralCommand), httpOptions).pipe(
+            tap(saveReferralAppointment => this.errorHandler.log('Successfully Edit Patient Referral')),
+            catchError(this.errorHandler.handleError<any>('Error in Editing Patient Referral'))
+        );
+    }
+
     public saveAppointment(appointmentCommand: ReferralAppointmentCommandService): Observable<ReferralAppointmentCommandService> {
         if (appointmentCommand['AppointmentReason'] == 'None') {
             return of([]);
@@ -176,6 +188,16 @@ export class AncService {
         return this.http.post<any>(this.API_URL + '' + this._url_app, JSON.stringify(appointmentCommand), httpOptions).pipe(
             tap(saveReferralAppointment => this.errorHandler.log('Successfully saved Patient Appointment')),
             catchError(this.errorHandler.handleError<any>('Error in saving Patient Appointment'))
+        );
+    }
+
+    public EditAppointment(appointmentCommand: ReferralAppointmentCommandService): Observable<ReferralAppointmentCommandService> {
+        if (appointmentCommand['AppointmentReason'] == 'None') {
+            return of([]);
+        }
+        return this.http.put<any>(this.API_URL + '' + this._url_app_edit, JSON.stringify(appointmentCommand), httpOptions).pipe(
+            tap(saveReferralAppointment => this.errorHandler.log('Successfully Edited Patient Appointment')),
+            catchError(this.errorHandler.handleError<any>('Error in Editing Patient Appointment'))
         );
     }
 
