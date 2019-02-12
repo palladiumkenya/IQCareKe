@@ -82,9 +82,9 @@ export class DeliveryMaternityComponent implements OnInit {
 
         this.getCurrentVisitDetails(this.PatientId, 'ANC');
         this.getPregnancyDetails(this.PatientId);
-         if (this.isEdit) {
-             this.getPatientDeliveryInfo(this.PatientMasterVisitId);
-         }
+        if (this.isEdit) {
+            this.getPatientDeliveryInfo(this.PatientMasterVisitId);
+        }
         this.notify.emit(this.deliveryFormGroup);
     }
 
@@ -125,10 +125,9 @@ export class DeliveryMaternityComponent implements OnInit {
     onDeliveryComplicationsChange(event) {
         if (event.isUserInput && event.source.selected && event.source.viewValue == 'Yes') {
             this.deliveryFormGroup.get('deliveryComplicationNotes').enable({ onlySelf: true });
-            console.log("Comp change " +event.source.viewValue)
+            // console.log('Comp change ' + event.source.viewValue);
         } else {
-            console.log("Comp change " +event.source.viewValue)
-
+            // console.log('Comp change ' + event.source.viewValue);
             this.deliveryFormGroup.get('deliveryComplicationNotes').disable({ onlySelf: true });
         }
     }
@@ -139,18 +138,18 @@ export class DeliveryMaternityComponent implements OnInit {
                 p => {
                     if (p) {
                         this.dateLMP = p.lmp;
-                        console.log('lmp date' + this.dateLMP);
+                        // console.log('lmp date' + this.dateLMP);
                     }
 
                 },
                 (err) => {
-                    console.log(err);
+                    // console.log(err);
                     this.snotifyService.error('Error fetching previous pregnacy Profile' + err,
                         'Encounter', this.notificationService.getConfig());
                 },
                 () => {
 
-                    console.log(this.motherProfile);
+                    // console.log(this.motherProfile);
                 });
     }
 
@@ -159,12 +158,12 @@ export class DeliveryMaternityComponent implements OnInit {
             .subscribe(
                 p => {
                     const visit = p;
-                    if(visit[0] == null){
+                    if (visit[0] == null) {
                         this.deliveryFormGroup.controls['ancVisits'].setValue(1);
-                         return;                       
+                        return;
                     } if (visit[0].visitNumber > 0) {
                         this.deliveryFormGroup.controls['ancVisits'].setValue(visit.length);
-                      //  this.deliveryFormGroup.get('ancVisits').disable({ onlySelf: true });
+                        //  this.deliveryFormGroup.get('ancVisits').disable({ onlySelf: true });
                     }
                 },
                 (err) => {
@@ -182,9 +181,9 @@ export class DeliveryMaternityComponent implements OnInit {
                 del => {
                     console.log(del);
                     if (del == null) {
-                      return;
-                    }                        
-                    this.deliveryFormGroup.controls['gestationAtBirth'].setValue( this.calculateGestation(del.dateOfDelivery,
+                        return;
+                    }
+                    this.deliveryFormGroup.controls['gestationAtBirth'].setValue(this.calculateGestation(del.dateOfDelivery,
                         this.dateLMP));
                     this.deliveryFormGroup.controls['gestationAtBirth'].disable({ onlySelf: true });
                     this.deliveryFormGroup.controls['deliveryDate'].setValue(del.dateOfDelivery);
@@ -198,7 +197,7 @@ export class DeliveryMaternityComponent implements OnInit {
                     this.deliveryFormGroup.controls['maternalDeathsAudited'].setValue(del.maternalDeathAuditedId);
                     this.deliveryFormGroup.controls['auditDate'].setValue(del.maternalDeathAuditDate);
                     this.deliveryFormGroup.controls['deliveryComplications']
-                    .setValue(this._matService.getMaternityLookUpOptionByName(this.yesnoOptions,del.deliveryComplicationsExperienced));
+                        .setValue(this._matService.getMaternityLookUpOptionByName(this.yesnoOptions, del.deliveryComplicationsExperienced));
                     this.deliveryFormGroup.controls['deliveryComplicationNotes'].setValue(del.deliveryComplicationNotes);
                     this.deliveryFormGroup.controls['deliveryConductedBy'].setValue(del.deliveryConductedBy);
                 },

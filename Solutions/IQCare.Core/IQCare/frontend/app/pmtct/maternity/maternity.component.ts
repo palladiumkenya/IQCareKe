@@ -88,8 +88,9 @@ export class MaternityComponent implements OnInit {
     hivTestOptions: LookupItemView[] = [];
     kitNameOptions: LookupItemView[] = [];
     hivTestResultOptions: LookupItemView[] = [];
-    hivTestResultsOptions: LookupItemView[] = [];
+    // hivTestResultsOptions: LookupItemView[] = [];
     hivFinalResultsOptions: LookupItemView[] = [];
+    hivStatusOptions: LookupItemView[] = [];
 
     diagnosisOptions: any[] = [];
     babySectionOptions: any[] = [];
@@ -124,7 +125,7 @@ export class MaternityComponent implements OnInit {
         this.getLookupItems('counselledOn', this.counsellingOptions);
         this.route.params.subscribe(
             (params) => {
-                console.log(params);
+                // console.log(params);
                 const { patientId, personId, serviceAreaId, patientMasterVisitId } = params;
                 this.patientId = parseInt(patientId, 10);
                 this.personId = personId;
@@ -159,12 +160,12 @@ export class MaternityComponent implements OnInit {
                 referralOptions,
                 hivFinalResultOptions,
                 hivFinalResultsOptions,
-                hivTestOptions,
-                kitNameOptions,
-                hivTestResultOptions,
+                // hivTestOptions,
+                // kitNameOptions
+                hivStatusOptions
             } = res;
-            console.log('test options');
-            console.log(res);
+            // console.log('test options');
+            // console.log(res);
             this.deliveryModeOptions = deliveryModeOptions['lookupItems'];
             this.bloodLossOptions = bloodLossOptions['lookupItems'];
             this.motherStateOptions = motherStateOptions['lookupItems'];
@@ -176,10 +177,11 @@ export class MaternityComponent implements OnInit {
             this.birthoutcomeOptions = birthOutcomeOptions['lookupItems'];
             this.referralOptions = referralOptions['lookupItems'];
             this.hivFinalResultOptions = hivFinalResultOptions['lookupItems'];
-            this.hivTestOptions = hivTestOptions['lookupItems'];
-            this.kitNameOptions = kitNameOptions['lookupItems'];
-            this.hivTestResultOptions = hivTestResultOptions['LookupItems'];
+            // this.hivTestOptions = hivTestOptions['lookupItems'];
+            // this.kitNameOptions = kitNameOptions['lookupItems'];
+            // this.hivTestResultOptions = hivTestResultOptions['LookupItems'];
             this.hivFinalResultsOptions = hivFinalResultsOptions['lookupItems'];
+            this.hivStatusOptions = hivStatusOptions['lookupItems'];
         });
 
         this.diagnosisOptions.push({
@@ -194,8 +196,8 @@ export class MaternityComponent implements OnInit {
             'hivFinalResultsOptions': this.hivFinalResultsOptions
         });
 
-        console.log('hiv test');
-        console.log(this.pncHivOptions);
+        // console.log('hiv test');
+        // console.log(this.pncHivOptions);
 
         this.babySectionOptions.push({
             'gender': this.genderOptions,
@@ -205,7 +207,8 @@ export class MaternityComponent implements OnInit {
         });
 
         this.maternityTestOptions.push({
-            'yesNos': this.yesNoOptions
+            'yesNos': this.yesNoOptions,
+            'hivStatusOptions': this.hivStatusOptions
         });
 
         this.drugAdministrationOptions.push({
@@ -313,7 +316,7 @@ export class MaternityComponent implements OnInit {
                     this.snotifyService.error('Error editing encounter ' + err, 'Encounter', this.notificationService.getConfig());
                 },
                 () => {
-                    console.log(this.lookupItems$);
+                    // console.log(this.lookupItems$);
                 });
     }
 

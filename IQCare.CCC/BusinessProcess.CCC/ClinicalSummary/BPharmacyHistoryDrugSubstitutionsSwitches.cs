@@ -22,12 +22,12 @@ namespace BusinessProcess.CCC.ClinicalSummary
             {
                 foreach (DataRow dataRow in dt.Rows)
                 {
-                    var dispensedByDate = dataRow["DispensedByDate"];
+                    var dispensedByDate = dataRow["DispensedByDate"].ToString();
                     var regimentype = dataRow["regimentype"];
 
                     dataList.Add(new PharmacyHistory()
                     {
-                        DispensedByDate = DateTime.Parse(dispensedByDate.ToString()),
+                        DispensedByDate = !string.IsNullOrWhiteSpace(dispensedByDate)?DateTime.Parse(dispensedByDate): (DateTime?) null,
                         regimentype = regimentype.ToString()
                     });
                 }

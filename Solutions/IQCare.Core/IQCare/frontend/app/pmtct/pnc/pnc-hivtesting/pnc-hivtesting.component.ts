@@ -32,6 +32,7 @@ export class PncHivtestingComponent implements OnInit, AfterViewInit {
     @Input('patientId') patientId: number;
     @Input('patientMasterVisitId') patientMasterVisitId: number;
     @Input('patientEncounterId') patientEncounterId: number;
+    @Input() personId: number;
     @Input() serviceAreaId: number;
     serviceAreaName: string;
 
@@ -84,6 +85,8 @@ export class PncHivtestingComponent implements OnInit, AfterViewInit {
         this.getLookupOptions('HIVTestKits', this.kits);
         this.getLookupOptions('PMTCTHIVTests', this.tests);
         this.getLookupOptions('HIVResults', this.testResults);
+
+        // this.personCurrentHivStatus();
     }
 
     ngAfterViewInit() {

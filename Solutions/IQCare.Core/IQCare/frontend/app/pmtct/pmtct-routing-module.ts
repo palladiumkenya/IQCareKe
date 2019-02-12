@@ -67,7 +67,7 @@ import { TbScreeningResolver } from './_services/resolvers/tb-screening.resolver
 import { MaternityEncounterComponent } from './maternity/maternity-encounter/maternity-encounter.component';
 import { MotherExaminationResolver } from './_services/resolvers/motherexamination.resolver';
 import { BabyExaminationResolver } from './_services/resolvers/baby-examination.resolver';
-import {BirthOutcomeResolver} from './_services/resolvers/BirthOutcomeResolver';
+import { BirthOutcomeResolver } from './_services/resolvers/BirthOutcomeResolver';
 import { CounselledInfantFeedingResolver } from './_services/resolvers/counselled-infant-feeding.resolver';
 
 
@@ -284,11 +284,12 @@ const routes: Routes = [
                     yesNoNaOptions: YesNoNaResolver,
                     referralOptions: ReferralResolver,
                     hivFinalResultOptions: FinalPartnerHivResultResolver,
-                    hivTestOptions: PmtctTestTypeResolver,
-                    kitNameOptions: TestKitNameResolver,
-                    hivTestResultOptions: HivTestResultResolver,
-                    finalPartnerHivResultOptions: FinalPartnerHivResultResolver,
+                    // hivTestOptions: PmtctTestTypeResolver,
+                    // kitNameOptions: TestKitNameResolver,
+                    // hivTestResultOptions: HivTestResultResolver,
+                    // finalPartnerHivResultOptions: FinalPartnerHivResultResolver,
                     hivFinalResultsOptions: HivFinalResultsResolver,
+                    hivStatusOptions: HivStatusResolver
                 }
             },
             {
@@ -306,11 +307,12 @@ const routes: Routes = [
                     yesNoNaOptions: YesNoNaResolver,
                     referralOptions: ReferralResolver,
                     hivFinalResultOptions: FinalPartnerHivResultResolver,
-                    hivTestOptions: PmtctTestTypeResolver,
-                    kitNameOptions: TestKitNameResolver,
-                    hivTestResultOptions: HivTestResultResolver,
-                    finalPartnerHivResultOptions: FinalPartnerHivResultResolver,
+                    // hivTestOptions: PmtctTestTypeResolver,
+                    // kitNameOptions: TestKitNameResolver,
+                    // hivTestResultOptions: HivTestResultResolver,
+                    // finalPartnerHivResultOptions: FinalPartnerHivResultResolver,
                     hivFinalResultsOptions: HivFinalResultsResolver,
+                    hivStatusOptions: HivStatusResolver
                 }
             }
         ]

@@ -69,8 +69,9 @@
                                         <ng-template matStepLabel>
                                             <span matTooltip="Maternity Tests">Maternity Tests</span>
                                         </ng-template>
-                                        <app-mternity-tests [maternityTestOptions]="maternityTestOptions" (notify)="onMaternityTests($event)"></app-mternity-tests>
-                               
+                                        <app-mternity-tests [maternityTestOptions]="maternityTestOptions" [personId]="personId"
+                                            (notify)="onMaternityTests($event)"></app-mternity-tests>
+
                                         <div>
                                             <app-pnc-hivtesting (notify)="onHivStatusNotify($event)" [pncHivOptions]="pncHivOptions"
                                                 [serviceAreaId]="serviceAreaId">
