@@ -539,7 +539,9 @@ namespace IQCare.Web.CCC.Patient
                         tableRow.Controls.Add(cell);
 
                         HtmlTableCell cell2 = new HtmlTableCell();
-                        cell2.InnerHtml = pharmacyDrugsSubstitutionsSwitchesData[p].DispensedByDate.ToString("dd-MMM-yyyy");
+                        cell2.InnerHtml = pharmacyDrugsSubstitutionsSwitchesData[p].DispensedByDate.HasValue
+                            ? pharmacyDrugsSubstitutionsSwitchesData[p].DispensedByDate.Value.ToString("dd-MMM-yyyy")
+                            : "not dispensed";
                         tableRow.Controls.Add(cell2);
 
                         tblPharmacyHistory.Rows.Add(tableRow);

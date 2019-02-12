@@ -12,6 +12,6 @@ namespace Interface.CCC.ClinicalSummary
     public class PharmacyHistory
     {
         public string regimentype { get; set; }
-        public DateTime DispensedByDate { get; set; }
+        public DateTime? DispensedByDate { get; set; }
     }
 }

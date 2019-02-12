@@ -149,6 +149,7 @@
     <None Remove="Scripts\2.0.0\38_LO_HEI_Register.sql" />
     <None Remove="Scripts\2.0.0\39_IndicatorTables.sql" />
     <None Remove="Scripts\2.0.0\40_IndicatorData.sql" />
+    <None Remove="Scripts\2.0.0\37_HIVPositiveListView.sql" />
   </ItemGroup>
 
   <ItemGroup>
@@ -293,6 +294,7 @@
     <EmbeddedResource Include="Scripts\2.0.0\38_LO_HEI_Register.sql" />
     <EmbeddedResource Include="Scripts\2.0.0\39_IndicatorTables.sql" />
     <EmbeddedResource Include="Scripts\2.0.0\40_IndicatorData.sql" />
+    <EmbeddedResource Include="Scripts\2.0.0\37_HIVPositiveListView.sql" />
   </ItemGroup>
 
   <ItemGroup>

@@ -1,17 +1,18 @@
-﻿using AutoMapper;
-using IQCare.Maternity.BusinessProcess.Commands.Maternity;
-using IQCare.Maternity.BusinessProcess.MapperProfiles;
-using IQCare.Maternity.Infrastructure.Installers;
+﻿using System;
+using System.Collections.Generic;
+using System.Reflection;
+using IQCare.Common.Infrastructure.Installers;
 using IQCare.SharedKernel.Infrastructure.Helpers;
 using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using static IQCare.SharedKernel.Infrastructure.Helpers.ConnectionStringBuilder;
 
 
-namespace IQCareMaternityWebApi
+namespace IQCare.Common.Web
 {
     public class Startup
     {
@@ -28,12 +29,10 @@ namespace IQCareMaternityWebApi
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddMvc();
-            services.AddMaternityDbContext(IQCareConnectionString);
+            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+            services.AddMediatR();
 
-            services.AddMediatR(typeof(AddMaternalPatientDeliveryInfoCommand).Assembly);
-            services.AddAutoMapper(typeof(DeliveredBabyBirthInformationProfile).Assembly);
-            services.AddCors();
+            services.AddCommonDbContext(IQCareConnectionString);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -43,13 +42,12 @@ namespace IQCareMaternityWebApi
             {
                 app.UseDeveloperExceptionPage();
             }
+            else
+            {
+                app.UseHsts();
+            }
 
-            app.UseCors(builder => builder
-               .AllowAnyOrigin()
-               .AllowAnyMethod()
-               .AllowAnyHeader()
-               .AllowCredentials());
-
+            app.UseHttpsRedirection();
             app.UseMvc();
         }
     }
