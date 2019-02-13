@@ -97,6 +97,18 @@ namespace IQCare.Common.BusinessProcess.Commands.Setup
         public List<PARTNER_TRACING> TRACING { get; set; }
     }
 
+    public class PARTNER_SCREENING_ENCOUNTER
+    {
+        public PLACER_DETAIL PLACER_DETAIL { get; set; }
+        public PARTNER_SCREENING PARTNER_SCREENING { get; set; }
+    }
+
+    public class PARTNER_TRACING_ENCOUNTER
+    {
+        public PLACER_DETAIL PLACER_DETAIL { get; set; }
+        public List<PARTNER_TRACING> TRACING { get; set; }
+    }
+
     public class PARTNER_TRACING
     {
         public string TRACING_DATE { get; set; }
