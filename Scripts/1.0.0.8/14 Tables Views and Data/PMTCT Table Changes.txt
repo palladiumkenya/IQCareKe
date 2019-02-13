@@ -1,0 +1,12 @@
+Alter table [dbo].[PatientEncounter]
+add FacilityId int null;
+
+ALTER TABLE [dbo].[Pregnancy]
+ADD Parity2 int Null;
+ALTER TABLE [dbo].[Pregnancy]
+alter column Parity int Null;
+ALTER TABLE [dbo].[Pregnancy]
+alter column Gravidae int Null;
+Alter table [dbo].Pregnancy
+alter column Gestation decimal(8,1) null;
+

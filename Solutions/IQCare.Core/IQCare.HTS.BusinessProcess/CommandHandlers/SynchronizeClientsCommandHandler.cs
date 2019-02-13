@@ -9,9 +9,11 @@ using IQCare.Common.BusinessProcess.Commands.Setup;
 using IQCare.Common.BusinessProcess.Services;
 using IQCare.Common.Core.Models;
 using IQCare.Common.Infrastructure;
+using IQCare.Common.Services;
 using IQCare.HTS.BusinessProcess.Commands;
 using IQCare.HTS.BusinessProcess.Services;
 using IQCare.HTS.Infrastructure;
+using IQCare.Library;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Storage;
@@ -30,6 +32,7 @@ namespace IQCare.HTS.BusinessProcess.CommandHandlers
             _htsUnitOfWork = htsUnitOfWork ?? throw new ArgumentNullException(nameof(htsUnitOfWork));
         }
 
+
         public async Task<Result<string>> Handle(SynchronizeClientsCommand request, CancellationToken cancellationToken)
         {
             string afyaMobileId = String.Empty;
@@ -39,8 +42,10 @@ namespace IQCare.HTS.BusinessProcess.CommandHandlers
             {
                 LookupLogic lookupLogic = new LookupLogic(_unitOfWork);
                 RegisterPersonService registerPersonService = new RegisterPersonService(_unitOfWork);
+                PersonOccupationService pocc = new PersonOccupationService(_unitOfWork);
+                EducationLevelService educationLevelService = new EducationLevelService(_unitOfWork);
                 EncounterTestingService encounterTestingService = new EncounterTestingService(_unitOfWork, _htsUnitOfWork);
-
+               // PersonDemographicsService personDemographicsService = new PersonDemographicsService(_unitOfWork);
                 for (int i = 0; i < request.CLIENTS.Count; i++)
                 {
                     for (int j = 0; j < request.CLIENTS[i].PATIENT_IDENTIFICATION.INTERNAL_PATIENT_ID.Count; j++)
@@ -54,7 +59,7 @@ namespace IQCare.HTS.BusinessProcess.CommandHandlers
                         }
                     }
                 }
-                var afyaMobileMessage = await registerPersonService.AddAfyaMobileInbox(DateTime.Now, afyaMobileId, JsonConvert.SerializeObject(request), false);
+                var afyaMobileMessage = await registerPersonService.AddAfyaMobileInbox(DateTime.Now, request.MESSAGE_HEADER.MESSAGE_TYPE, afyaMobileId, JsonConvert.SerializeObject(request), false);
 
                 try
                 {
@@ -65,6 +70,7 @@ namespace IQCare.HTS.BusinessProcess.CommandHandlers
                         string firstName = request.CLIENTS[i].PATIENT_IDENTIFICATION.PATIENT_NAME.FIRST_NAME;
                         string middleName = string.IsNullOrWhiteSpace(request.CLIENTS[i].PATIENT_IDENTIFICATION.PATIENT_NAME.MIDDLE_NAME) ? "" : request.CLIENTS[i].PATIENT_IDENTIFICATION.PATIENT_NAME.MIDDLE_NAME;
                         string lastName = request.CLIENTS[i].PATIENT_IDENTIFICATION.PATIENT_NAME.LAST_NAME;
+                        string nickName = (request.CLIENTS[i].PATIENT_IDENTIFICATION.PATIENT_NAME.NICK_NAME == null) ? "" : request.CLIENTS[i].PATIENT_IDENTIFICATION.PATIENT_NAME.NICK_NAME.ToString();
                         int sex = request.CLIENTS[i].PATIENT_IDENTIFICATION.SEX;
                         DateTime dateOfBirth = DateTime.ParseExact(request.CLIENTS[i].PATIENT_IDENTIFICATION.DATE_OF_BIRTH, "yyyyMMdd", null);
                         string dobPrecision = request.CLIENTS[i].PATIENT_IDENTIFICATION.DATE_OF_BIRTH_PRECISION;
@@ -72,6 +78,13 @@ namespace IQCare.HTS.BusinessProcess.CommandHandlers
                         int maritalStatusId = request.CLIENTS[i].PATIENT_IDENTIFICATION.MARITAL_STATUS;
                         string landmark = request.CLIENTS[i].PATIENT_IDENTIFICATION.PATIENT_ADDRESS.PHYSICAL_ADDRESS
                             .LANDMARK;
+                       
+                        string ward = (request.CLIENTS[i].PATIENT_IDENTIFICATION.PATIENT_ADDRESS.PHYSICAL_ADDRESS.WARD == null) ? "" : request.CLIENTS[i].PATIENT_IDENTIFICATION.PATIENT_ADDRESS.PHYSICAL_ADDRESS.WARD.ToString();
+                        string county = (request.CLIENTS[i].PATIENT_IDENTIFICATION.PATIENT_ADDRESS.PHYSICAL_ADDRESS.COUNTY == null) ? "" : request.CLIENTS[i].PATIENT_IDENTIFICATION.PATIENT_ADDRESS.PHYSICAL_ADDRESS.COUNTY.ToString();
+                        string subcounty = (request.CLIENTS[i].PATIENT_IDENTIFICATION.PATIENT_ADDRESS.PHYSICAL_ADDRESS.SUB_COUNTY == null) ? "" : request.CLIENTS[i].PATIENT_IDENTIFICATION.PATIENT_ADDRESS.PHYSICAL_ADDRESS.SUB_COUNTY.ToString();
+                        string educationlevel = (request.CLIENTS[i].PATIENT_IDENTIFICATION.EDUCATIONLEVEL == null) ? "" : request.CLIENTS[i].PATIENT_IDENTIFICATION.EDUCATIONLEVEL.ToString();
+                        string educationoutcome = (request.CLIENTS[i].PATIENT_IDENTIFICATION.EDUCATIONOUTCOME == null) ? "" : request.CLIENTS[i].PATIENT_IDENTIFICATION.EDUCATIONOUTCOME.ToString();
+                        string occupation = (request.CLIENTS[i].PATIENT_IDENTIFICATION.OCCUPATION == null) ? "" : request.CLIENTS[i].PATIENT_IDENTIFICATION.OCCUPATION.ToString();
                         string physicalAddress = request.CLIENTS[i].PATIENT_IDENTIFICATION.PATIENT_ADDRESS.POSTAL_ADDRESS;
                         string mobileNumber = request.CLIENTS[i].PATIENT_IDENTIFICATION.PHONE_NUMBER;
                         string enrollmentNo = string.Empty;
@@ -115,22 +128,27 @@ namespace IQCare.HTS.BusinessProcess.CommandHandlers
                             }
                         }
 
-                        //var afyaMobileMessage = await registerPersonService.AddAfyaMobileInbox(DateTime.Now, afyaMobileId, JsonConvert.SerializeObject(request), false);
+                        Facility clientFacility = await _unitOfWork.Repository<Facility>().Get(x => x.PosID == facilityId).FirstOrDefaultAsync();
+                        if (clientFacility == null)
+                        {
+                            clientFacility = await _unitOfWork.Repository<Facility>().Get(x => x.DeleteFlag == 0).FirstOrDefaultAsync();
+                        }
 
                         //check if person already exists
                         var identifiers = await registerPersonService.getPersonIdentifiers(afyaMobileId, 10);
                         if (identifiers.Count > 0)
                         {
                             var registeredPerson = await registerPersonService.GetPerson(identifiers[0].PersonId);
+
                             if (registeredPerson != null)
                             {
                                 var updatedPerson = await registerPersonService.UpdatePerson(identifiers[0].PersonId,
-                                    firstName, middleName, lastName, sex, dateOfBirth);
+                                    firstName, middleName, lastName, sex, dateOfBirth, clientFacility.FacilityID,NickName:nickName);
                             }
                             else
                             {
                                 var person = await registerPersonService.RegisterPerson(firstName, middleName, lastName,
-                                    sex, dateOfBirth, userId);
+                                    sex, userId, clientFacility.FacilityID, dateOfBirth,nickName:nickName);
                             }
 
                             var patient = await registerPersonService.GetPatientByPersonId(identifiers[0].PersonId);
@@ -157,9 +175,21 @@ namespace IQCare.HTS.BusinessProcess.CommandHandlers
 
                             var updatedPersonPopulations = await registerPersonService.UpdatePersonPopulation(identifiers[0].PersonId,
                                 request.CLIENTS[i].PATIENT_IDENTIFICATION.KEY_POP, userId);
-                            if (!string.IsNullOrWhiteSpace(landmark))
+                           /* if (!string.IsNullOrWhiteSpace(landmark))
                             {
                                 var updatedLocation = await registerPersonService.UpdatePersonLocation(identifiers[0].PersonId, landmark);
+                            }*/
+                            if (!string.IsNullOrWhiteSpace(landmark) || (!string.IsNullOrWhiteSpace(county)) || (!string.IsNullOrWhiteSpace(subcounty)) || (!string.IsNullOrWhiteSpace(ward)))
+                            {
+                                var updatedLocation = await registerPersonService.UpdatePersonLocation(identifiers[0].PersonId, landmark, ward, county, subcounty, userId);
+                            }
+                            if (!string.IsNullOrWhiteSpace(educationlevel))
+                            {
+                                var personeducation = await educationLevelService.UpdatePersonEducation(identifiers[0].PersonId, educationlevel, educationoutcome, userId);
+                            }
+                            if (!string.IsNullOrWhiteSpace(occupation))
+                            {
+                                var personoccupation = await pocc.Update(identifiers[0].PersonId, occupation, userId);
                             }
 
                             if (!string.IsNullOrWhiteSpace(mobileNumber) || !string.IsNullOrWhiteSpace(physicalAddress))
@@ -170,6 +200,7 @@ namespace IQCare.HTS.BusinessProcess.CommandHandlers
                                         physicalAddress, mobileNumber);
                             }
 
+                          
                             /**
                              * Encounter
                              * 
@@ -362,7 +393,7 @@ namespace IQCare.HTS.BusinessProcess.CommandHandlers
                                             {
                                                 DateTime dateToBeEnrolled = DateTime.ParseExact(request.CLIENTS[i].ENCOUNTER.REFERRAL.DATE_TO_BE_ENROLLED, "yyyyMMdd", null);
                                                 string facilityReferred = request.CLIENTS[i].ENCOUNTER.REFERRAL.REFERRED_TO;
-
+                                                int MFLCode = 0;
                                                 var referralReason = await _unitOfWork.Repository<LookupItemView>()
                                                     .Get(x => x.MasterName == "ReferralReason" &&
                                                               x.ItemName == "CCCEnrollment").ToListAsync();
@@ -382,9 +413,19 @@ namespace IQCare.HTS.BusinessProcess.CommandHandlers
                                                     }
                                                     else
                                                     {
+                                                        if (searchFacility.Count > 0)
+                                                        {
+                                                            MFLCode = Convert.ToInt32(searchFacility[0].MFLCode);
+
+
+                                                        }
+                                                        else
+                                                        {
+                                                            MFLCode = 0;
+                                                        }
                                                         await encounterTestingService.AddReferral(identifiers[0].PersonId,
                                                             facility[0].FacilityID, 2,
-                                                            Convert.ToInt32(searchFacility[0].MFLCode),
+                                                            MFLCode,
                                                             referralReason[0].ItemId, userId, dateToBeEnrolled, "");
                                                     }
                                                 }
@@ -531,7 +572,7 @@ namespace IQCare.HTS.BusinessProcess.CommandHandlers
                                 {
                                     DateTime dateToBeEnrolled = DateTime.ParseExact(request.CLIENTS[i].ENCOUNTER.REFERRAL.DATE_TO_BE_ENROLLED, "yyyyMMdd", null);
                                     string facilityReferred = request.CLIENTS[i].ENCOUNTER.REFERRAL.REFERRED_TO;
-
+                                    int MFLCode = 0;
                                     var referralReason = await _unitOfWork.Repository<LookupItemView>()
                                         .Get(x => x.MasterName == "ReferralReason" &&
                                                   x.ItemName == "CCCEnrollment").ToListAsync();
@@ -550,8 +591,18 @@ namespace IQCare.HTS.BusinessProcess.CommandHandlers
                                         }
                                         else
                                         {
+                                            if (searchFacility.Count > 0)
+                                            {
+                                                MFLCode = Convert.ToInt32(searchFacility[0].MFLCode);
+
+
+                                            }
+                                            else
+                                            {
+                                                MFLCode = 0;
+                                            }
                                             await encounterTestingService.AddReferral(identifiers[0].PersonId,
-                                                facility[0].FacilityID, 2, Convert.ToInt32(searchFacility[0].MFLCode),
+                                                facility[0].FacilityID, 2, MFLCode,
                                                 referralReason[0].ItemId, userId, dateToBeEnrolled, "");
                                         }
                                     }
@@ -568,8 +619,18 @@ namespace IQCare.HTS.BusinessProcess.CommandHandlers
                                         }
                                         else
                                         {
+                                            if (searchFacility.Count > 0)
+                                            {
+                                                MFLCode = Convert.ToInt32(searchFacility[0].MFLCode);
+
+
+                                            }
+                                            else
+                                            {
+                                                MFLCode = 0;
+                                            }
                                             await encounterTestingService.AddReferral(identifiers[0].PersonId,
-                                                facility[0].FacilityID, 2, Convert.ToInt32(searchFacility[0].MFLCode),
+                                                facility[0].FacilityID, 2, MFLCode,
                                                 referralReason[0].ItemId, userId, dateToBeEnrolled, facilityReferred);
                                         }
                                     }
@@ -583,7 +644,7 @@ namespace IQCare.HTS.BusinessProcess.CommandHandlers
                         {
                             // Add Person
                             var person = await registerPersonService.RegisterPerson(firstName, middleName, lastName, sex,
-                                dateOfBirth, userId);
+                                userId, clientFacility.FacilityID, dateOfBirth,nickName:nickName);
                             //Add Person to mst_patient
                             var mstResult = await registerPersonService.InsertIntoBlueCard(firstName, lastName,
                                 middleName, dateEnrollment, maritalStatusName, physicalAddress, mobileNumber, gender, dobPrecision, dateOfBirth, userId, facilityId);
@@ -603,10 +664,23 @@ namespace IQCare.HTS.BusinessProcess.CommandHandlers
                                 var population = await registerPersonService.addPersonPopulation(person.Id,
                                     request.CLIENTS[i].PATIENT_IDENTIFICATION.KEY_POP, userId);
                                 // Add Person Location
-                                if (!string.IsNullOrWhiteSpace(landmark))
+                                //if (!string.IsNullOrWhiteSpace(landmark))
+                                //{
+                                //    var personLocation = await registerPersonService.addPersonLocation(person.Id, 0, 0, 0, "", landmark, userId);
+                                //}
+                                if (!string.IsNullOrWhiteSpace(landmark) || (!string.IsNullOrWhiteSpace(county)) || (!string.IsNullOrWhiteSpace(subcounty)) || (!string.IsNullOrWhiteSpace(ward)))
                                 {
-                                    var personLocation = await registerPersonService.addPersonLocation(person.Id, 0, 0, 0, "", landmark, userId);
+                                    var personLocation = await registerPersonService.UpdatePersonLocation(person.Id, landmark, ward, county, subcounty, userId);
                                 }
+                                if (!string.IsNullOrWhiteSpace(educationlevel))
+                                {
+                                    var personeducation = await educationLevelService.UpdatePersonEducation(person.Id, educationlevel, educationoutcome, userId);
+                                }
+                                if (!string.IsNullOrWhiteSpace(occupation))
+                                {
+                                    var personoccupation = await pocc.Update(person.Id, occupation, userId);
+                                }
+
 
                                 if (!string.IsNullOrWhiteSpace(mobileNumber) || !string.IsNullOrWhiteSpace(physicalAddress))
                                 {
@@ -618,6 +692,7 @@ namespace IQCare.HTS.BusinessProcess.CommandHandlers
                                 /***
                                  * Encounter
                                  */
+
 
                                 if (request.CLIENTS[i].ENCOUNTER != null)
                                 {
@@ -788,7 +863,7 @@ namespace IQCare.HTS.BusinessProcess.CommandHandlers
                                     {
                                         DateTime dateToBeEnrolled = DateTime.ParseExact(request.CLIENTS[i].ENCOUNTER.REFERRAL.DATE_TO_BE_ENROLLED, "yyyyMMdd", null);
                                         string facilityReferred = request.CLIENTS[i].ENCOUNTER.REFERRAL.REFERRED_TO;
-
+                                        int MFLCode = 0;
                                         var referralReason = await _unitOfWork.Repository<LookupItemView>()
                                             .Get(x => x.MasterName == "ReferralReason" &&
                                                       x.ItemName == "CCCEnrollment").ToListAsync();
@@ -807,9 +882,19 @@ namespace IQCare.HTS.BusinessProcess.CommandHandlers
                                             }
                                             else
                                             {
+                                                if (searchFacility.Count > 0)
+                                                {
+                                                    MFLCode = Convert.ToInt32(searchFacility[0].MFLCode);
+
+
+                                                }
+                                                else
+                                                {
+                                                    MFLCode = 0;
+                                                }
                                                 await encounterTestingService.AddReferral(identifiers[0].PersonId,
                                                     facility[0].FacilityID, 2,
-                                                    Convert.ToInt32(searchFacility[0].MFLCode),
+                                                    MFLCode,
                                                     referralReason[0].ItemId, userId, dateToBeEnrolled, "");
                                             }
                                         }

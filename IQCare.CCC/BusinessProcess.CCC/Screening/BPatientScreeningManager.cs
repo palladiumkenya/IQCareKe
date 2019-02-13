@@ -49,6 +49,17 @@ namespace BusinessProcess.CCC.Screening
             }
         }
 
+        public int updatePatientScreeningById(PatientScreening p)
+        {
+            using (UnitOfWork _unitOfWork = new UnitOfWork(new GreencardContext()))
+            {
+                _unitOfWork.PatientScreeningRepository.Update(p);
+                Result = _unitOfWork.Complete();
+                _unitOfWork.Dispose();
+                return Result;
+            }
+        }
+
         public int DeletePatientScreening(int id)
         {
             using (UnitOfWork unitOfWork = new UnitOfWork(new GreencardContext()))
@@ -61,6 +72,16 @@ namespace BusinessProcess.CCC.Screening
             }
         }
 
+        public PatientScreening GetCurrentPatientScreening(int patientId,int patientmastervisitid)
+        {
+            using (UnitOfWork unitOfWork = new UnitOfWork(new GreencardContext()))
+            {
+                var screeningList = unitOfWork.PatientScreeningRepository.FindBy(x => x.PatientId == patientId  & x.PatientMasterVisitId==patientmastervisitid & !x.DeleteFlag).FirstOrDefault();
+                unitOfWork.Dispose();
+                return screeningList;
+            }
+
+        }
         public List<PatientScreening> GetPatientScreening(int patientId)
         {
             using (UnitOfWork unitOfWork = new UnitOfWork(new GreencardContext()))
@@ -92,6 +113,28 @@ namespace BusinessProcess.CCC.Screening
                 return Convert.ToInt32(PS);
             }
         }
+        public int checkScreeningByScreeningCategoryId(int patientId, int screenTypeId, int screeningCategoryId)
+        {
+            using (UnitOfWork unitOfWork = new UnitOfWork(new GreencardContext()))
+            {
+                var PS = unitOfWork.PatientScreeningRepository.FindBy(x => x.PatientId == patientId & x.ScreeningTypeId == screenTypeId & x.ScreeningCategoryId == screeningCategoryId & !x.DeleteFlag)
+                      .Select(x => x.Id)
+                      .FirstOrDefault();
+                unitOfWork.Dispose();
+                return Convert.ToInt32(PS);
+            }
+        }
+        public int checkScreeningByVisitId(int patientId,int patientMasterVisitId, int screenTypeId, int screeningCategoryId)
+        {
+            using (UnitOfWork unitOfWork = new UnitOfWork(new GreencardContext()))
+            {
+                var PS = unitOfWork.PatientScreeningRepository.FindBy(x => x.PatientId == patientId & x.PatientMasterVisitId == patientMasterVisitId & x.ScreeningTypeId == screenTypeId & x.ScreeningCategoryId == screeningCategoryId & !x.DeleteFlag)
+                      .Select(x => x.Id)
+                      .FirstOrDefault();
+                unitOfWork.Dispose();
+                return Convert.ToInt32(PS);
+            }
+        }
 
         public int CheckIfPatientScreeningExists(int patientId, DateTime visitDate, int screeningCategoryId, int screeningTypeId ) {
             using (UnitOfWork unitOfWork = new UnitOfWork(new GreencardContext()))
@@ -101,6 +144,24 @@ namespace BusinessProcess.CCC.Screening
                       .FirstOrDefault();
                 unitOfWork.Dispose();
                 return Convert.ToInt32(PS);
+            }
+        }
+        public List<PatientScreening> GetPatientScreeningByVisitId(int patientId, int patientMasterVisitId)
+        {
+            using (UnitOfWork unitOfWork = new UnitOfWork(new GreencardContext()))
+            {
+                var screeningList = unitOfWork.PatientScreeningRepository.FindBy(x => x.PatientId == patientId & x.PatientMasterVisitId == patientMasterVisitId & !x.DeleteFlag).ToList();
+                unitOfWork.Dispose();
+                return screeningList;
+            }
+        }
+        public List<PatientScreening> GetPatientScreeningStatus(int patientId, int statusId)
+        {
+            using (UnitOfWork unitOfWork = new UnitOfWork(new GreencardContext()))
+            {
+                var screeningList = unitOfWork.PatientScreeningRepository.FindBy(x => x.PatientId == patientId & x.ScreeningValueId == statusId & !x.DeleteFlag).OrderByDescending(x=>x.PatientMasterVisitId).ToList();
+                unitOfWork.Dispose();
+                return screeningList;
             }
         }
     }

@@ -98,11 +98,17 @@ namespace IQCare.CCC.UILogic
             var appointment = _appointment.GetByPatientId(patientId);
             var bluecardappointment = _appointment.GetBluecardPatientAppointmentsBypatientId(patientId);
             return appointment.Count + bluecardappointment.Count;
+
         }
 
         public List<PatientAppointment> GetByDate(DateTime date)
         {
             var appointment = _appointment.GetByDate(date);
+            return appointment;
+        }
+        public List<PatientAppointment> GetAppointmentId(int PatientId, int PatientMasterVisitId, DateTime date)
+        {
+            var appointment = _appointment.GetAppointmentId(PatientId, PatientMasterVisitId, date);
             return appointment;
         }
 

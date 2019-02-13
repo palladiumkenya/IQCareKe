@@ -1,0 +1,20 @@
+.example-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.example-container > * {
+    width: 100%;
+}
+
+.mat-form-field {
+    display: block;
+}
+
+.mat-card {
+    background-color: #dff9fb;
+}
+
+.container{
+    margin: 20px 0;
+}

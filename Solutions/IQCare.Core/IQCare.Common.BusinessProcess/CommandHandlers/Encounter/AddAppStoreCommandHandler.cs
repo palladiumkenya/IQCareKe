@@ -1,11 +1,13 @@
-﻿using System;
-using System.Threading;
-using System.Threading.Tasks;
-using IQCare.Common.BusinessProcess.Commands.Encounter;
+﻿using IQCare.Common.BusinessProcess.Commands.Encounter;
 using IQCare.Common.Core.Models;
 using IQCare.Common.Infrastructure;
+using IQCare.Library;
 using MediatR;
 using Serilog;
+using System;
+using System.Threading;
+using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 
 namespace IQCare.Common.BusinessProcess.CommandHandlers.Encounter
 {
@@ -23,6 +25,21 @@ namespace IQCare.Common.BusinessProcess.CommandHandlers.Encounter
             {
                 using (_unitOfWork)
                 {
+                    if (request.PersonId.HasValue && request.PatientId.HasValue && !request.PatientMasterVisitId.HasValue)
+                    {
+                        var appStateList = await _unitOfWork.Repository<AppStateStore>().Get(x =>
+                            x.PersonId == request.PersonId.Value && x.PatientId == request.PatientId.Value &&
+                            x.AppStateId == request.AppStateId).ToListAsync();
+
+                        if (appStateList.Count > 0)
+                        {
+                            return Result<AddAppStoreResponse>.Valid(new AddAppStoreResponse()
+                            {
+                                IsSavedSuccessfully = true
+                            });
+                        }
+                    }
+
                     AppStateStore appStateStore = new AppStateStore();
                     appStateStore.PersonId = request.PersonId;
                     appStateStore.PatientId = request.PatientId;

@@ -14,6 +14,6 @@
 
         public int WardId { get; set; }
 
-        public int WardName { get; set; }
+        public string WardName { get; set; }
     }
 }

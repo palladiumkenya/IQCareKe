@@ -25,22 +25,22 @@ namespace BusinessProcess.CCC.Triage
             }
         }
 
-        public int UpdatePatientPreganacy(PatientPreganancy u)
+        public int UpdatePatientPreganacy(PatientPreganancy patientPreganancy)
         {
             using (UnitOfWork _unitOfWork = new UnitOfWork(new GreencardContext()))
             {
                 var PG =
                    _unitOfWork.PatientPregnancyRepository.FindBy(
-                           x => x.PatientId == u.PatientId & !x.DeleteFlag)
+                           x => x.PatientId == patientPreganancy.PatientId & !x.DeleteFlag)
                        .FirstOrDefault();
                 if (PG != null)
                 {
-                    PG.LMP = u.LMP;
-                    PG.EDD = u.EDD;
-                    PG.Gravidae = u.Gravidae;
-                    PG.parity = u.parity;
-                    PG.Outcome = u.Outcome;
-                    PG.DateOfOutcome = u.DateOfOutcome;
+                    PG.LMP = patientPreganancy.LMP;
+                    PG.EDD = patientPreganancy.EDD;
+                    PG.Gravidae = patientPreganancy.Gravidae;
+                    PG.Parity = patientPreganancy.Parity;
+                    PG.Outcome = patientPreganancy.Outcome;
+                    PG.DateOfOutcome = patientPreganancy.DateOfOutcome;
                 }
                 _unitOfWork.PatientPregnancyRepository.Update(PG);
                 result= _unitOfWork.Complete();
@@ -66,12 +66,15 @@ namespace BusinessProcess.CCC.Triage
         {
             using (UnitOfWork _unitOfWork = new UnitOfWork(new GreencardContext()))
             {
-                var PG =
-                  _unitOfWork.PatientPregnancyRepository.FindBy(x => x.PatientId == patientId & !x.DeleteFlag & x.Outcome==0)
-                      .Select(x => x.Id)
+                PatientPreganancy pregnancy =_unitOfWork.PatientPregnancyRepository.FindBy(x => x.PatientId == patientId & !x.DeleteFlag & x.Outcome==0)
+                     // .Select(x => x.Id)
                       .FirstOrDefault();
                 _unitOfWork.Dispose();
-                return Convert.ToInt32(PG);
+                if (pregnancy != null)
+                    return pregnancy.Id;
+                return 0;
+
+               
             }
         }
 

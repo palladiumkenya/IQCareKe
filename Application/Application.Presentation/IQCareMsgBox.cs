@@ -338,6 +338,39 @@ namespace Application.Presentation
             }
         }
 
+        public static void HideMessage(Page frmName)
+        {
+            Panel pnlerror = FindControlFromMaster<Panel>("divError", frmName.Master);
+            if (pnlerror != null && pnlerror.Visible == true)
+            {
+                pnlerror.Visible = false;
+            }
+            else
+            {
+                Panel pnlpageerror = (Panel)frmName.FindControl("divError");
+                if (pnlpageerror != null && pnlpageerror.Visible == true)
+                {
+                    pnlpageerror.Visible = false;
+                }
+            }
+        }
+        public static void HideMessage(Control frmName)
+        {
+
+            Panel pnlerror = FindControlFromMaster<Panel>("divError", frmName.Page.Master);
+            if (pnlerror != null && pnlerror.Visible == true)
+            {
+                pnlerror.Visible = false;
+            }
+            else
+            {
+                Panel pnlpageerror = (Panel)frmName.FindControl("divError");
+                if (pnlpageerror != null && pnlpageerror.Visible == true)
+                {
+                    pnlpageerror.Visible = false;
+                }
+            }
+        }
 
     }
 }

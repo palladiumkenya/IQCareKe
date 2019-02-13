@@ -473,17 +473,23 @@ namespace IQCare.Web.Scheduler
                 }
                 else if ((cmbPatientExitReason.SelectedValue.ToString() == "115") || (cmbPatientExitReason.SelectedValue.ToString() == "118"))
                 {
-                    if (this.txtDateLastContact.Value != "")
+                    if (this.txtDateLastContact.Value != ""  )
                     {
-                        this.txtCareEndDate.Value = String.Format("{0:dd-MMM-yyyy}", Convert.ToDateTime(this.txtDateLastContact.Value));
+                        if (this.txtCareEndDate.Value == "")
+                        {
+                            this.txtCareEndDate.Value = String.Format("{0:dd-MMM-yyyy}", Convert.ToDateTime(this.txtDateLastContact.Value));
+                        }
                     }
                 }
                 else if ((cmbPatientExitReason.SelectedValue.ToString() == "92") || (cmbPatientExitReason.SelectedValue.ToString() == "114"))
                 {
                     if (this.txtDateLastContact.Value != "")
                     {
-                        this.txtCareEndDate.Value = String.Format("{0:dd-MMM-yyyy}", Convert.ToDateTime(this.txtDateLastContact.Value));
-                    }
+                        if (this.txtCareEndDate.Value == "")
+                        {
+                            this.txtCareEndDate.Value = String.Format("{0:dd-MMM-yyyy}", Convert.ToDateTime(this.txtDateLastContact.Value));
+                        }
+                   }
                 }
                 else if (cmbPatientExitReason.SelectedValue.ToString() == "93")
                 {
@@ -575,7 +581,10 @@ namespace IQCare.Web.Scheduler
                 DataSet theDS;
                 IContactCare CareManager = (IContactCare)ObjectFactory.CreateInstance("BusinessProcess.Scheduler.BContactCare,BusinessProcess.Scheduler");
                 theDS = (DataSet)CareManager.GetFieldsforID(Convert.ToInt32(Session["PatientId"]), Convert.ToInt32(Session["AppLocationId"]), Convert.ToInt32(Session["SystemId"]), 1, 8);
-                this.txtDateLastContact.Value = ((DateTime)theDS.Tables[2].Rows[0]["Last_Ac_Con_date"]).ToString(Session["AppDateFormat"].ToString());
+                if (this.txtDateLastContact.Value == "")
+                {
+                    this.txtDateLastContact.Value = ((DateTime)theDS.Tables[2].Rows[0]["Last_Ac_Con_date"]).ToString(Session["AppDateFormat"].ToString());
+                }
             }
             else
             {

@@ -202,6 +202,78 @@ namespace IQCare.Web.CCC {
         protected global::System.Web.UI.WebControls.LinkButton menuLabOrder;
         
         /// <summary>
+        /// lblAppointments control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblAppointments;
+        
+        /// <summary>
+        /// menuScreening control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton menuScreening;
+        
+        /// <summary>
+        /// menuAlcoholScreening control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton menuAlcoholScreening;
+        
+        /// <summary>
+        /// menuGenderBasedScreening control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton menuGenderBasedScreening;
+        
+        /// <summary>
+        /// menuEnhanceAdherence control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton menuEnhanceAdherence;
+        
+        /// <summary>
+        /// menuBarriersAdherence control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton menuBarriersAdherence;
+        
+        /// <summary>
+        /// menuCaseSummary control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton menuCaseSummary;
+        
+        /// <summary>
+        /// menuFollowupEducation control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton menuFollowupEducation;
+        
+        /// <summary>
         /// LinkButton2 control.
         /// </summary>
         /// <remarks>
@@ -218,15 +290,6 @@ namespace IQCare.Web.CCC {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.LinkButton menuMoH257;
-        
-        /// <summary>
-        /// lblAppointments control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblAppointments;
         
         /// <summary>
         /// renrollmentDate control.

@@ -14,5 +14,6 @@ namespace IQCare.Common.Core.Models
         public int CreatedBy { get; set; }
         public DateTime CreateDate { get; set; }
         public string AuditData { get; set; }
+        public int? IndexPersonId { get; set; }
     }
 }

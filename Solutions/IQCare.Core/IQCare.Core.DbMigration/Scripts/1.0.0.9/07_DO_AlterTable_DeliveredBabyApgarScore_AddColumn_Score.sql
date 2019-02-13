@@ -1,0 +1,1 @@
+﻿ALTER TABLE [dbo].[DeliveredBabyApgarScore] ADD Score INT NOT NULL 

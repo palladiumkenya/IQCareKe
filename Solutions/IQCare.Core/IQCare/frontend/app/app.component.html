@@ -1,17 +1,28 @@
-<div id="wrapper">
-    <div id="page-wrapper" class="gray-bg">
-        <app-header></app-header>
-        <div class="wrapper wrapper-content animated">
-            <div class="container-fluid">
-				<ng-snotify></ng-snotify>
-                <app-nav-header></app-nav-header>				
-                <div class="row">
-                    <div class="col-md-12 col-xs-12 col-sm-12">
-                        <router-outlet></router-outlet>
-                    </div>
-                </div>
+<app-header></app-header>
+<!-- Main Container -->
+<div class="main-container container-fluid">
+    <!-- Page Container -->
+    <div class="page-container">
+        <app-sidebar></app-sidebar>
+        <app-chatbar></app-chatbar>
+        <!-- Page Content -->
+        <div class="page-content">
+            <app-breadcrumb></app-breadcrumb>
+            <app-pageheader></app-pageheader>
+            <!-- Page Body -->
+            <div class="page-body">
+                <ng-snotify></ng-snotify>
+                <ngx-spinner bdOpacity=0.1 bdColor="rgba(255,255,255,0.7)" size="small" color="#ff0303" type="square-loader"
+                    fullScreen="false">
+                    <p style="color: rgb(247, 11, 11)"> Loading... </p>
+                </ngx-spinner>
+                <router-outlet></router-outlet>
             </div>
+            <!-- /Page Body -->
         </div>
-        <app-footer></app-footer>
+        <!-- /Page Content -->
     </div>
+    <!-- /Page Container -->
+    <!-- Main Container -->
 </div>
+<!--<app-footer></app-footer>-->

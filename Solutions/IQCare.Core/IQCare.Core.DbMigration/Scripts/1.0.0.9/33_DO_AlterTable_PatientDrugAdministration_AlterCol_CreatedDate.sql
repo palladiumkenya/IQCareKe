@@ -1,0 +1,1 @@
+﻿ALTER TABLE [dbo].[PatientDrugAdministration] ALTER COLUMN CreateDate DATETIME NULL 

@@ -268,7 +268,7 @@ namespace IQCare.Web.UILogic
             //    ClickAction = RedirectAction.ModuleAction,
             //    ServiceAreaName = "CCC"
             //});
-            Facility.Modules.Where(m => m.PublishFlag == true).OrderBy(o => o.Clinical).ThenBy(n => n.Name).ToList().ForEach(
+            Facility.Modules.Where(m => m.PublishFlag == true).OrderBy(n => n.Name).ToList().ForEach(
             s =>
             {
                 if (this.HasModuleRight(s.Id, s.Clinical))
@@ -350,7 +350,8 @@ namespace IQCare.Web.UILogic
                                             EnrolFlag = Convert.ToBoolean(row["CanEnroll"]),
                                             ModuleFlag = Convert.ToBoolean(row["ModuleFlag"]),
                                             Clinical = Convert.ToBoolean(row["CanEnroll"]),
-                                            PublishFlag = (Convert.ToString(row["ModuleName"]) == "PM/SCM") ? false : true,
+                                            //PublishFlag = (Convert.ToString(row["ModuleName"]) == "PM/SCM") ? false : true,
+                                            PublishFlag = true,
                                             DeleteFlag = false,
                                             Active = true,
                                             BusinessRules = null,
@@ -361,10 +362,13 @@ namespace IQCare.Web.UILogic
                     if (!facility.PaperLess)
                     {
 
-                        facility.Modules.RemoveAll(m => m.Name.ToUpper() == "LABORATORY" || m.Name.ToUpper() == "PHARMACY" || m.Name.ToUpper() == "PM/SCM");
+                        facility.Modules.RemoveAll(m => m.Name.ToUpper() == "LABORATORY" || m.Name.ToUpper() == "PHARMACY" 
+                       // || 
+                      //  m.Name.ToUpper() == "PM/SCM"
+                        );
                     }
                     this.HasBilling = facility.Modules.Exists(m => m.Name.ToUpper() == "BILLING");
-                    this.HasPMSCM = facility.Modules.Exists(m => m.Name.ToUpper() == "PM/SCM") && (facility.PaperLess == true);
+                    this.HasPMSCM = facility.Modules.Exists(m => m.Name.ToUpper() == "PM/SCM");                       //&& (facility.PaperLess == true);
                     this.HasWardAdmission = facility.Modules.Exists(m => m.Name.ToUpper() == "WARD ADMISSION");
                     this.HasLabModule = facility.Modules.Exists(m => m.Name.ToUpper() == "LABORATORY") && (facility.PaperLess == true);
                     DataTable dtUser = ds.Tables[0];

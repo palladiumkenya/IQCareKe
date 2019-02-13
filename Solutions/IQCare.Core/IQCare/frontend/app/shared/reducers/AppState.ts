@@ -7,4 +7,11 @@ interface AppState {
     isPnsScreened: boolean;
     isPnsTracingDone: boolean;
     clearState: any;
+    service: string;
+    PersonId: number;
+    isFamilyScreeningDone: boolean;
+    isFamilyTracingDone: boolean;
+    PnsScreenedPositive: boolean;
+    FamilyScreenedPositive: boolean;
+    PatientId: number;
 }

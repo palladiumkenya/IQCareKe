@@ -28,6 +28,13 @@ namespace IQCare.Common.BusinessProcess.Commands.Setup
         public string REGISTRATION_DATE { get; set; }
         [Required]
         public int USER_ID { get; set; }
+
+
+        public string EDUCATIONLEVEL { get; set; }
+
+        public string EDUCATIONOUTCOME { get; set; }
+
+        public string OCCUPATION { get; set; }
     }
 
     public class PATIENT_ADDRESS
@@ -40,9 +47,9 @@ namespace IQCare.Common.BusinessProcess.Commands.Setup
     public class PHYSICAL_ADDRESS
     {
         public string VILLAGE { get; set; }
-        public string WARD { get; set; }
-        public string SUB_COUNTY { get; set; }
-        public string COUNTY { get; set; }
+        public int WARD { get; set; }
+        public int SUB_COUNTY { get; set; }
+        public int COUNTY { get; set; }
         public string LANDMARK { get; set; }
         public string GPS_LOCATION { get; set; }
     }
@@ -54,6 +61,8 @@ namespace IQCare.Common.BusinessProcess.Commands.Setup
         public string MIDDLE_NAME { get; set; }
         [Required(AllowEmptyStrings = false)]
         public string LAST_NAME { get; set; }
+
+        public string NICK_NAME { get; set; }
     }
 
     public class INTERNAL_PATIENT_ID

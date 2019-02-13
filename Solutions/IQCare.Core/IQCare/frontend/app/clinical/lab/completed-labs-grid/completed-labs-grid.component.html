@@ -1,0 +1,38 @@
+  <div class="form-title">
+      <span class="mat-accent">Completed Labs: </span>
+    </div>
+  <div class="mat-elevation-z1">
+      <table  mat-table  [dataSource]="completedLabsDataSource">
+          <ng-container matColumnDef="test">
+            <th mat-header-cell *matHeaderCellDef> <strong>Lab Test</strong> </th>
+            <td mat-cell *matCellDef="let completedLab"> {{completedLab.test}} </td>
+          </ng-container>            
+          <ng-container matColumnDef="orderReason">
+            <th mat-header-cell *matHeaderCellDef><strong>Order Reason</strong>  </th>
+            <td mat-cell *matCellDef="let completedLab"> {{completedLab.orderReason }} </td>
+          </ng-container>
+        
+           <ng-container matColumnDef="orderDate">
+              <th mat-header-cell *matHeaderCellDef> <strong> Order Date </strong>  </th>
+              <td mat-cell *matCellDef="let completedLab"> {{completedLab.orderDate || dd/MM/yyyy}} </td>
+            </ng-container>
+            <ng-container matColumnDef="result">
+                <th mat-header-cell *matHeaderCellDef> <strong> Result </strong>  </th>
+                <td mat-cell *matCellDef="let completedLab">
+                     <a *ngIf="completedLab.result == null; else result" (click)="viewResults(completedLab)">
+                               View
+                     </a>
+                     <ng-template #result>
+                       {{completedLab.result}}
+                    </ng-template>
+                 </td>                 
+              </ng-container>  
+              <ng-container matColumnDef="unit">
+                  <th mat-header-cell *matHeaderCellDef> <strong> Unit </strong>  </th>
+                  <td mat-cell *matCellDef="let completedLab"> {{completedLab.unit}} </td>
+             </ng-container>          
+          <tr mat-header-row *matHeaderRowDef="completed_labs_displaycolumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: completed_labs_displaycolumns;"></tr>
+      </table>
+      <mat-paginator  id="completed-paginator" [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+</div>      

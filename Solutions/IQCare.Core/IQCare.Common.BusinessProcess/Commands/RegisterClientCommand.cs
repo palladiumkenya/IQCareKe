@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using IQCare.Common.Core.Models;
+using IQCare.Library;
 using MediatR;
 
 namespace IQCare.Common.BusinessProcess.Commands
@@ -23,5 +24,6 @@ namespace IQCare.Common.BusinessProcess.Commands
         public bool IsPartner { get; set; }
         public int? PatientId { get; set; }
         public int CreatedBy { get; set; }
+        public int FacilityId { get; set; }
     }
 }

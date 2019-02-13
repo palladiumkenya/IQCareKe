@@ -21,21 +21,37 @@ namespace IQCare.Web.CCC.OneTimeEvents
             get { return Session["Gender"].ToString(); }
         }
 
+        public int maxLength { get; set; }
+        public int minLength { get; set; }
+
+
         public int PatientId;
         public int PatientMasterVisitId;
         public int UserId;
         public DateTime PatientDateOfBirth;
         public int PatientAge;
-        public Identifier PatientIdentifier
+        public Identifier PatientIdentifier { get; set; }
+        /*public Identifier PatientIdentifier
         {
             get
             {
                 IdentifierManager IdMan = new IdentifierManager();
-                return IdMan.GetIdentifierByCode("CCCNumber");
+
+                var identifier = IdMan.GetIdentifierByCode("CCCNumber");
+                minLength = (identifier.MinLength > 0) ? (Int32)identifier.MinLength : (Int32)0;
+                maxLength = (identifier.MaxLength > 0) ? (Int32)identifier.MaxLength : (Int32)0;
+                return identifier;
             }
-        }
+        }*/
         protected void Page_Load(object sender, EventArgs e)
         {
+            IdentifierManager IdMan = new IdentifierManager();
+
+            var identifier = IdMan.GetIdentifierByCode("CCCNumber");
+            minLength = (identifier.MinLength > 0) ? (Int32)identifier.MinLength : (Int32)0;
+            maxLength = (identifier.MaxLength > 0) ? (Int32)identifier.MaxLength : (Int32)0;
+            this.PatientIdentifier = identifier;
+
             if (!IsPostBack)
             {
                 ILookupManager mgr = (ILookupManager)ObjectFactory.CreateInstance("BusinessProcess.CCC.BLookupManager, BusinessProcess.CCC");

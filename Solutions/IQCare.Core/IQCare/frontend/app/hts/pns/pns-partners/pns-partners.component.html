@@ -3,10 +3,10 @@
         <app-clientbrief></app-clientbrief>
     </div>
     <div class="ibox-content">
-        <div class="col-md-2">
+        <!--<div class="col-md-2">
             <app-leftnav></app-leftnav>
-        </div>
-        <div class="col-md-10 animated fadeIn">
+        </div>-->
+        <div class="col-md-12 animated fadeIn">
             <div class="panel panel-default">
                 <div class="panel-heading">PARTNERS</div>
                 <div class="panel-body">
@@ -37,7 +37,8 @@
                             <!-- Last Name Column -->
                             <ng-container matColumnDef="dateOfBirth">
                                 <mat-header-cell *matHeaderCellDef> Date Of Birth </mat-header-cell>
-                                <mat-cell *matCellDef="let element"> {{element.dateOfBirth | date: 'dd-MMM-yyyy' }} </mat-cell>
+                                <mat-cell *matCellDef="let element"> {{element.dateOfBirth | date: 'dd-MMM-yyyy' }}
+                                </mat-cell>
                             </ng-container>
 
                             <!-- Date Of Birth Column -->
@@ -56,13 +57,28 @@
                                 <mat-header-cell *matHeaderCellDef>
                                 </mat-header-cell>
                                 <mat-cell *matCellDef="let row">
-                                    <button mat-raised-button *ngIf="!isPnsScreened(row['personId'])" [style.background]="'#4db6ac'" (click)="screenClient(row)">Screen</button>
-                                    <button mat-raised-button [style.background]="'#616161'" (click)="traceClient(row)">Trace</button>
+                                    <button mat-raised-button *ngIf="!isPnsScreened(row['personId']) else screeningDone"
+                                        [style.background]="'#4db6ac'" (click)="screenClient(row)">Screen</button>
+                                    <ng-template #screeningDone>
+                                        Screening Done
+                                    </ng-template>
+                                    &nbsp;&nbsp;
+                                    <ng-container *ngIf="isPnsScreened(row['personId']) else screeningNotDone">
+                                        <button mat-raised-button *ngIf="!PnsScreenedPositive(row['personId']) else PnsPositive"
+                                            [style.background]="'#616161'" (click)="traceClient(row)">Trace</button>
+                                        <ng-template #PnsPositive>
+                                            Known Positive
+                                        </ng-template>
+                                    </ng-container>
+                                    <ng-template #screeningNotDone>
+                                        Screening Not Done
+                                    </ng-template>
                                 </mat-cell>
                             </ng-container>
 
                             <mat-header-row *matHeaderRowDef="displayedColumns" [style.background]="'#f5f5f5'"></mat-header-row>
-                            <mat-row *matRowDef="let row; columns: displayedColumns;" (click)="getSelectedRow(row)" [style.background]="highlightedRow.indexOf(row) != -1 ? 'lightblue': '#ffffff'">
+                            <mat-row *matRowDef="let row; columns: displayedColumns;" (click)="getSelectedRow(row)"
+                                [style.background]="highlightedRow.indexOf(row) != -1 ? 'lightblue': '#ffffff'">
 
                             </mat-row>
                         </mat-table>

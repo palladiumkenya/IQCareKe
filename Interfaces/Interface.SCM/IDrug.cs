@@ -49,6 +49,9 @@ namespace Interface.SCM
         DataSet GetPharmacyExistingRecordDetails(int orderId);
         void SavePharmacyReturn(int patientId, int locationId, int storeId, DateTime returnDate, int userId, int pharmacyId, DataTable theDT);
         DataSet GetPharmacyDetailsByDespenced(int orderId);
+
+        DataSet GetAllergyData(int PatientID);
+        DataSet GetPharmacyDrugHistory_Web(int PatientID);
         DataSet GetDrugTypeID(int itemId);
         DataSet SaveArtData(int patientId, DateTime dispensedDate);
         DataSet CheckDispencedDate(int patientId, int locationId, DateTime dispDate, int orderId);
@@ -56,6 +59,7 @@ namespace Interface.SCM
         DataSet SaveHivTreatementPharmacyField(int orderId, string weight, string height, int program, int periodTaken, int provider, int regimenLine, DateTime nextAppDate, int reason);
         DataSet GetPharmacyPrescriptionDetails(int pharmacyId, int patientId, int IQCareFlag);
         DataTable GetPharmacyRegimenClassification();
+        DataTable GetmstRegimenLineClassification();
         int saveUpdatePatientRegistration(string fname, string mname, string lname, string enrollment, string dob, string gender,
             string locationid, string regDate, string userid, string serviceid);
         DataTable getPatientsRegistered();
@@ -63,5 +67,19 @@ namespace Interface.SCM
         int detelePatientPharmacyOrder(int ptn_pharmacy_pk);
         DataSet pendingPharmacyOrders();
         DataTable GetPMTCTPeriodDrugTaken();
+        DataSet GetDrugBatchDetails(int DrugID, int StoreID);
+        DataSet GetPharmacyVitals(int PatientID);
+        DataTable ReturnDatatableQuery(string theQuery);
+        DataSet GetSelectedDrugDetails(int DrugID, int StoreID);
+        DataTable SavePharmacyDispense_Web(Int32 PatientId, Int32 LocationId, Int32 StoreId, Int32 UserId, int dispensedBy, string DispDate,
+          Int32 OrderType, Int32 ProgramId, string Regimen, Int32 OrderId, DataTable theDT, string PharmacyRefillDate, Int32 DataStatus, int orderedBy, string orderDate,
+            string deleteScript, int regimenLine, int regimenCode, int therapyPlan, int patientClassification, int isEnrolDifferenciatedCare);
+        void SaveUpdateIPTData(Int32 PatientID, int visitId, DateTime INHStartDate, DateTime INHEndDate);
+        void LockpatientForDispensing(int PatientId, int OrderId, string UserName, string StartDate, bool LockPatient);
+        void SavePharmacyRefill_Web(DataTable dt, int iserId, int dispensedBy, string DispensedByDate, string deleteScript);
+        DataSet SaveHivTreatementPharmacyField(Int32 theOrderId, string weight, string height, int Program, int PeriodTaken, int Provider, int RegimenLine, int RegimenCode, DateTime NxtAppDate, int Reason);
+        DataSet GetPriorPrescription(Int32 thePatientId);
+        DataSet GetPharmacyExistingRecordDetails_Web(Int32 VisitID);
+        DataSet MarkOrderAsFullyDispensed(Int32 orderID, string Reason);
     }
 }

@@ -166,8 +166,6 @@ export class PersonComponent implements OnInit {
     }
 
     onSubmitForm() {
-        console.log(this.formGroup.valid);
-        console.log(this.formGroup);
         if (this.formGroup.valid) {
             if (JSON.parse(localStorage.getItem('isHtsEnrolled')) == 1) {
                 this.updatePersonSubmit();

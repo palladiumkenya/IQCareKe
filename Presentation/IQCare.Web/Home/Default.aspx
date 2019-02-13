@@ -1,5 +1,6 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterPage/IQCare.master" AutoEventWireup="True"
     CodeBehind="Default.aspx.cs" Inherits="IQCare.Web.Home.Default" %>
+<%@ Import Namespace="Application.Presentation" %>
 
 <%@ MasterType VirtualPath="~/MasterPage/IQCare.master" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="IQCareContentPlaceHolder" runat="server">
@@ -40,12 +41,21 @@
             var appLocationId = '<%= Session["AppLocationId"] %>';
             var appLocation = '<%= Session["AppLocation"] %>';
             var appPosID = '<%= Session["AppPosID"] %>';
+            var appVersionName = '<%= GblIQCare.VersionName %>';
+            var appReleaseDate = '<%= GblIQCare.ReleaseDate %>';
+
+           
+            var appVersionName = '<%= Session["IQCareAppVersionName"] %>';
+            var appReleaseDate = '<%= Session["IQCareAppReleaseDate"] %>';
 
             localStorage.setItem('appUserId', appUserId);
             localStorage.setItem('appUserName', appUserName);
             localStorage.setItem('appLocationId', appLocationId);
             localStorage.setItem('appLocation', appLocation);
             localStorage.setItem('appPosID', appPosID);
+
+            localStorage.setItem('appVersionName', appVersionName);
+            localStorage.setItem('appReleaseDate', appReleaseDate);
 
             console.log(localStorage);
         });

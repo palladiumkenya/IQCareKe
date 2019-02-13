@@ -1,4 +1,5 @@
-﻿using IQCare.CCC.UILogic;
+﻿using Entities.CCC.Triage;
+using IQCare.CCC.UILogic;
 using IQCare.CCC.UILogic.Enrollment;
 using System;
 using System.Collections.Generic;
@@ -14,6 +15,12 @@ namespace IQCare.Web.CCC.UC
 {
     public partial class ucPharmacyPrescription : System.Web.UI.UserControl
     {
+        protected int PatientId
+        {
+            get { return Convert.ToInt32(Session["PatientPK"]); }
+        }
+
+        public string patientweight { get; set; }
         public string PMSCM = "0";
         public string PMSCMSAmePointDispense = "0";
         public string prescriptionDate = "";
@@ -21,6 +28,8 @@ namespace IQCare.Web.CCC.UC
         public string enrolmentDate = "";
         public bool StartTreatment { get; set; }
         public string patType { get; set; }
+
+        public int DosageFrequency { get; set; }
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -32,8 +41,22 @@ namespace IQCare.Web.CCC.UC
             {
                 Session["ExistingRecordPatientMasterVisitID"] = "0";
             }
+            if (Session["DosageFrequency"] !=null)
+            {
+                DosageFrequency = Convert.ToInt32(Session["DosageFrequency"]);
+            }
 
-            if (!IsPostBack)
+            PatientVitalsManager pvm = new PatientVitalsManager();
+            PatientVital patientvital = pvm.GetPatientVitals(PatientId);
+            if(patientvital !=null)
+            {
+                patientweight = patientvital.Weight.ToString();
+            }
+            else
+            {
+                patientweight = "";
+            }
+                if (!IsPostBack)
             {
                 if (Session["SCMModule"] != null)
                     PMSCM = Session["SCMModule"].ToString();

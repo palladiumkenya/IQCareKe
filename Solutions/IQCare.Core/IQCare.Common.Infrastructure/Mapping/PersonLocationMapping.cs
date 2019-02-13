@@ -6,7 +6,7 @@ namespace IQCare.Common.Infrastructure.Mapping
 {
     public class PersonLocationMapping : IEntityTypeConfiguration<PersonLocation>
     {
-        public void Configure(EntityTypeBuilder<PersonLocation> builder)
+        void IEntityTypeConfiguration<PersonLocation>.Configure(EntityTypeBuilder<PersonLocation> builder)
         {
             builder.ToTable("PersonLocation")
                 .HasKey(c => c.Id);

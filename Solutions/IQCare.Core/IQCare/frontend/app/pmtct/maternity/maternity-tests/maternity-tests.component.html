@@ -1,0 +1,40 @@
+<form class="form-group" novalidate [formGroup]="maternityTestsFormGroup">
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="form-title">
+                <span class="mat-accent">Maternity Tests </span>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-3 col-xs-12">
+            <mat-form-field class="col-md-12">
+                <mat-label>Treated for Syphilis</mat-label>
+                <mat-select formControlName="treatedSyphilis">
+                    <mat-option [value]="">select</mat-option>
+                    <mat-option *ngFor="let yesnoOption of yesnoOptions" [value]="yesnoOption.itemId">
+                        {{yesnoOption.itemName}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+
+        <div class="col-lg-3 col-xs-12">
+            <mat-form-field class="col-md-12">
+                <mat-label>Hiv Status at last ANC</mat-label>
+                <mat-select formControlName="HIVStatusLastANC">
+                    <mat-option [value]="">select</mat-option>
+                    <mat-option *ngFor="let hivStatusOption of hivStatusOptions" [value]="hivStatusOption.itemId">
+                        {{hivStatusOption.itemName}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+
+        <div class="col-lg-3 col-xs-12"></div>
+        <div class="col-lg-3 col-xs-12"></div>
+
+    </div>
+</form>

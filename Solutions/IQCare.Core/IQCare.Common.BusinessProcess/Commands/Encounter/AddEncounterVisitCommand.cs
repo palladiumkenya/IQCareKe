@@ -1,6 +1,6 @@
-﻿using System;
-using IQCare.Common.Core.Models;
+﻿using IQCare.Library;
 using MediatR;
+using System;
 
 namespace IQCare.Common.BusinessProcess.Commands.Encounter
 {

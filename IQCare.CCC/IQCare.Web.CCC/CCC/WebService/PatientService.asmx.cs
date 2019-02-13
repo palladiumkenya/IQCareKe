@@ -25,11 +25,13 @@ using Entities.CCC.Enrollment;
 using IQCare.CCC.UILogic.Enrollment;
 using IQCare.CCC.UILogic.Visit;
 using System.Data;
+using Entities.Common;
 
 namespace IQCare.Web.CCC.WebService
 {
     public class FamilyMembers
     {
+        public string RelationshipPersonId { get; set; }
         public string firstName { get; set; }
         public string middleName { get; set; }
         public string lastName { get; set; }
@@ -37,7 +39,7 @@ namespace IQCare.Web.CCC.WebService
         public string dob { get; set; }
         public string dobPrecision { get; set; }
         public int relationshipId { get; set; }
-        public int baselineHivStatusId { get; set; }
+        public string baselineHivStatusId { get; set; }
         public string baselineHivStatusDate { get; set; }
         public string hivTestingresultId { get; set; }
         public string hivTestingresultDate { get; set; }
@@ -60,11 +62,13 @@ namespace IQCare.Web.CCC.WebService
         private int Result { get; set; }
         string appointmentid;
 
+        int? baselinehivid;
 
         [WebMethod(EnableSession = true)]
         public string AddpatientVitals(int patientId, int bpSystolic, int bpDiastolic, decimal heartRate, decimal height,
             decimal muac, int patientMasterVisitId, decimal respiratoryRate, decimal spo2, decimal tempreture,
-            decimal weight, decimal bmi, decimal headCircumference,string bmiz,string weightForAge,string weightForHeight,DateTime visitDate)
+            decimal weight, decimal bmi, decimal headCircumference,string bmiz,string weightForAge,string weightForHeight,DateTime visitDate,
+            decimal ageforZ, string nursesComments)
         {
             try
             {
@@ -113,6 +117,24 @@ namespace IQCare.Web.CCC.WebService
         }
 
         [WebMethod(EnableSession = true)]
+        public PatientVital GetCurrentVitalsByPatientId(int patientId)
+        {
+            try
+            {
+                PatientEncounterManager patientEncounterManager = new PatientEncounterManager();
+
+                var vital = new PatientVitalsManager();
+                PatientVital patientVital = vital.GetByPatientId(patientId);
+                return patientVital;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+        }
+
+        [WebMethod(EnableSession = true)]
         public string AddPatientScreening(int patientId, int patientMasterVisitid,DateTime visitDate, int screeningTypeId, bool screeningDone, DateTime screeningDate, int screeningCategoryId, int screeningValueId, string comment, int userId)
         {
             try
@@ -137,13 +159,24 @@ namespace IQCare.Web.CCC.WebService
                 var screening = new PatientScreeningManager();
                 foreach (PatientScreening patientScreening in screeningResponses)
                 {
-                    patientScreening.Id = screening.CheckIfPatientScreeningExists((Int32)patientScreening.PatientId, (DateTime)patientScreening.VisitDate, patientScreening.ScreeningCategoryId, (Int32)patientScreening.ScreeningTypeId);
+                    patientScreening.Id = screening.CheckIfPatientScreeningExists((Int32)patientScreening.PatientId, (DateTime)patientScreening.VisitDate, (Int32)patientScreening.ScreeningCategoryId, (Int32)patientScreening.ScreeningTypeId);
                     if ( patientScreening.Id <= 0)
                     {
-                        Result = screening.AddPatientScreening(patientScreening.PatientId, patientScreening.PatientMasterVisitId, (DateTime)patientScreening.VisitDate, (Int32)patientScreening.ScreeningTypeId, (bool)patientScreening.ScreeningDone, (DateTime)patientScreening.ScreeningDate, patientScreening.ScreeningCategoryId, patientScreening.ScreeningValueId, patientScreening.Comment, userId);
+                        string comment="";
+                        if(patientScreening.Comment=="null")
+                        {
+                            comment = "";
+                        }
+                        Result = screening.AddPatientScreening(patientScreening.PatientId, patientScreening.PatientMasterVisitId, (DateTime)patientScreening.VisitDate, (Int32)patientScreening.ScreeningTypeId, (bool)patientScreening.ScreeningDone, (DateTime)patientScreening.ScreeningDate, (Int32)patientScreening.ScreeningCategoryId, patientScreening.ScreeningValueId, comment, userId);
                     }
                     else {
-                        Result = screening.UpdatePatientScreening(patientScreening.PatientId, (DateTime)patientScreening.VisitDate, (Int32)patientScreening.ScreeningTypeId, (bool)patientScreening.ScreeningDone, (DateTime)patientScreening.ScreeningDate, patientScreening.ScreeningCategoryId, patientScreening.ScreeningValueId, patientScreening.Comment);
+
+                        string comment = "";
+                        if (patientScreening.Comment == "null")
+                        {
+                            comment = "";
+                        }
+                        Result = screening.UpdatePatientScreening(patientScreening.Id, (DateTime)patientScreening.VisitDate,patientScreening.PatientId,patientScreening.PatientMasterVisitId, (Int32)patientScreening.ScreeningTypeId, (bool)patientScreening.ScreeningDone, (DateTime)patientScreening.ScreeningDate, (Int32)patientScreening.ScreeningCategoryId, patientScreening.ScreeningValueId, comment);
                     }
                 }
                 Msg = (Result > 0) ? "Patient Screening Updated Successfully" : "";
@@ -178,26 +211,35 @@ namespace IQCare.Web.CCC.WebService
         public string AddPatientAppointment(int patientId, int patientMasterVisitId, DateTime appointmentDate, string description, int reasonId, int serviceAreaId, int statusId, int differentiatedCareId, int userId)
         {
             
-            PatientAppointment patientAppointment = new PatientAppointment()
-            {
-                PatientId = patientId,
-                PatientMasterVisitId = patientMasterVisitId,
-                AppointmentDate = appointmentDate,
-                Description = description,
-                DifferentiatedCareId = differentiatedCareId,
-                ReasonId = reasonId,
-                ServiceAreaId = serviceAreaId,
-                StatusId = statusId,
-                CreatedBy = userId,
-                CreateDate = DateTime.Now
-            };
+           
             try
             {
-                var appointment = new PatientAppointmentManager();
-                Result = appointment.AddPatientAppointments(patientAppointment);
-                if (Result > 0)
+                if (appointmentDate != DateTime.MinValue)
                 {
-                    Msg = "Patient appointment Added Successfully!";
+                    PatientAppointment patientAppointment = new PatientAppointment()
+                    {
+                        PatientId = patientId,
+                        PatientMasterVisitId = patientMasterVisitId,
+                        AppointmentDate = appointmentDate,
+                        Description = description,
+                        DifferentiatedCareId = differentiatedCareId,
+                        ReasonId = reasonId,
+                        ServiceAreaId = serviceAreaId,
+                        StatusId = statusId,
+                        CreatedBy = userId,
+                        CreateDate = DateTime.Now
+                    };
+
+                    var appointment = new PatientAppointmentManager();
+                    Result = appointment.AddPatientAppointments(patientAppointment);
+                    if (Result > 0)
+                    {
+                        Msg = "Patient appointment Added Successfully!";
+                    }
+                }
+                else
+                {
+                    Msg = "Patient appointment not Saved Successfully";
                 }
             }
             catch (Exception e)
@@ -210,7 +252,9 @@ namespace IQCare.Web.CCC.WebService
         [WebMethod(EnableSession = true)]
         public string AddPatientFamilyTesting(string familyMembers)
         {
-            int patientId; int patientMasterVisitId; string firstName; string middleName; string lastName; int sex; string dob; int relationshipId; int baselineHivStatusId; string baselineHivStatusDate; /*string hivTestingresultId;*/ string hivTestingresultDate; bool cccreferal; string cccReferalNumber;  int userId;
+            string relationshipPersonId; int patientId; int patientMasterVisitId; string firstName; string middleName; string lastName; int sex; string dob; int relationshipId; string baselineHivStatusId; string baselineHivStatusDate;
+            /*string hivTestingresultId;*/
+            string hivTestingresultDate; bool cccreferal; string cccReferalNumber; int userId;
             DateTime? linkageDate;
             bool? dobPrecision = null;
 
@@ -218,12 +262,12 @@ namespace IQCare.Web.CCC.WebService
             FamilyMembers[] familyMembrs = new JavaScriptSerializer().Deserialize<FamilyMembers[]>(familyMembers);
 
             int count = familyMembrs.Length;
-            for(int i=0; i < count; i++)
+            for (int i = 0; i < count; i++)
             {
                 patientId = int.Parse(HttpContext.Current.Session["PatientPK"].ToString());
                 patientMasterVisitId = int.Parse(Session["PatientMasterVisitId"].ToString());
                 userId = Convert.ToInt32(Session["AppUserId"]);
-
+                relationshipPersonId = GlobalObject.unescape(familyMembrs[i].RelationshipPersonId);
                 firstName = GlobalObject.unescape(familyMembrs[i].firstName);
                 middleName = GlobalObject.unescape(familyMembrs[i].middleName);
                 lastName = GlobalObject.unescape(familyMembrs[i].lastName);
@@ -239,8 +283,27 @@ namespace IQCare.Web.CCC.WebService
                 {
                     dobPrecision = Convert.ToBoolean(familyMembrs[i].dobPrecision);
                 }
+                if (familyMembrs[i].dobPrecision == "" || familyMembrs[i].dobPrecision == null)
+                {
+                    dobPrecision = false;
+                }
+                else
+                {
+                    dobPrecision = Convert.ToBoolean(familyMembrs[i].dobPrecision);
+                }
                 relationshipId = familyMembrs[i].relationshipId;
+
+
+
                 baselineHivStatusId = familyMembrs[i].baselineHivStatusId;
+
+                if (!(String.IsNullOrEmpty(baselineHivStatusId)))
+                {
+                    baselinehivid = Convert.ToInt32(baselineHivStatusId);
+
+                }
+
+
                 baselineHivStatusDate = familyMembrs[i].baselineHivStatusDate;
                 cccreferal = familyMembrs[i].cccreferal;
                 cccReferalNumber = familyMembrs[i].cccReferalNumber;
@@ -258,7 +321,7 @@ namespace IQCare.Web.CCC.WebService
                     DateOfBirth = dateOfBirth,
                     DobPrecision = dobPrecision,
                     RelationshipId = relationshipId,
-                    BaseLineHivStatusId = baselineHivStatusId,
+                    BaseLineHivStatusId = baselinehivid,
                     //BaselineHivStatusDate = baselineHivStatusDate,
                     //HivTestingResultsDate = hivTestingresultDate,
                     HivTestingResultsId = hivresultId,
@@ -283,12 +346,32 @@ namespace IQCare.Web.CCC.WebService
                                     x.RelationshipId == relationshipId);
                     if (!fam.Any())
                     {
-                        Result = testing.AddPatientFamilyTestings(patientFamilyTesting, userId);
+
+                        if (relationshipPersonId != null)
+                        {
+                            int relationshipPerson = Convert.ToInt32(relationshipPersonId.ToString());
+                            if (Convert.ToInt32(relationshipPerson) > 0)
+                            {
+                                Result = testing.AddPatientFamilyTestingsExisting(patientFamilyTesting, userId, Convert.ToInt32(relationshipPerson));
+                            }
+
+                            else
+                            {
+                                Result = testing.AddPatientFamilyTestings(patientFamilyTesting, userId);
+                            }
+                        }
+                        else
+                        {
+                            Result = testing.AddPatientFamilyTestings(patientFamilyTesting, userId);
+                        }
                         if (Result > 0)
                         {
                             Msg = "Patient family testing Added Successfully!";
                         }
+
                     }
+                        
+                    
                     else
                     {
                         Msg = firstName + " " + middleName + " " + lastName + " Not saved. Family member already exists!";
@@ -403,23 +486,30 @@ namespace IQCare.Web.CCC.WebService
         }
 
         [WebMethod]
+        public List<PatientConsent> GetPatientConsentByType(int patientId, int consentType)
+        {
+            try
+            {
+                var consent = new PatientConsentManager();
+                return consent.GetPatientConsentByType(patientId, consentType);
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+        }
+
+        [WebMethod]
         public string AddPatientConsent(int patientId, int patientMasterVisitId, int consentType, DateTime consentDate)
         {
             // Todo properly save service area. Remove hack
             ILookupManager mgr = (ILookupManager)ObjectFactory.CreateInstance("BusinessProcess.CCC.BLookupManager, BusinessProcess.CCC");
-            int serviceArea = 0;
-            List<LookupItemView> areas = mgr.GetLookItemByGroup("ServiceArea");
-            var sa = areas.FirstOrDefault();
-            if (sa != null)
-            {
-                serviceArea = sa.ItemId;
-            }
 
             PatientConsent patientConsent = new PatientConsent()
             {
                 PatientId = patientId,
                 PatientMasterVisitId = patientMasterVisitId,
-                ServiceAreaId = serviceArea,
+                ServiceAreaId = 1,
                 ConsentType = consentType,
                 ConsentDate = consentDate
             };
@@ -438,6 +528,8 @@ namespace IQCare.Web.CCC.WebService
             }
             return Msg;
         }
+
+
 
         [WebMethod]
         public IEnumerable<PatientAppointmentDisplay> GetPatientAppointments(string patientId)
@@ -499,6 +591,362 @@ namespace IQCare.Web.CCC.WebService
             }
             return appointmentDisplay;
         }
+        [WebMethod(EnableSession =true)]
+        public string GetPatientBaselineandHivTesting(int personId,int patientId)
+        {
+            string output=null;
+            string CCCNumb="";
+            try
+            {
+
+                PatientManager patientmanager = new PatientManager();
+
+
+                int Currentpatient = int.Parse(HttpContext.Current.Session["PatientPK"].ToString());
+                int CurrentPersonId = patientmanager.GetPersonId(Currentpatient);
+
+                if (CurrentPersonId == personId)
+                {
+
+                    string result = "self";
+                    output = new JavaScriptSerializer().Serialize(result);
+                }
+                else
+                {
+                    PersonRelationshipManager rlm = new PersonRelationshipManager();
+                    
+                    PersonLookUpManager personlookup = new PersonLookUpManager();
+                    PatientHivTestingManager pht = new PatientHivTestingManager();
+                    PatientLinkageManager plm = new PatientLinkageManager();
+                    List<PersonRelationship> relations = new List<PersonRelationship>();
+                    List<PatientHivTesting> patientshivtest = new List<PatientHivTesting>();
+                    List<PatientLinkage> patientslinkage = new List<PatientLinkage>();
+                    PersonLookUp person = new PersonLookUp();
+                    person = personlookup.GetPersonById(personId);
+                    PatientLookupManager patientlookupman = new PatientLookupManager();
+                    PatientLookup patientlook = new PatientLookup();
+                    patientlook = patientlookupman.GetPatientByPersonId(person.Id);
+                    if(patientlook !=null)
+                    {
+                        IdentifierManager im = new IdentifierManager();
+                        Identifier id = new Identifier();
+                        id=im.GetIdentifierByCode("CCCNumber");
+                        PatientIdentifierManager pim = new PatientIdentifierManager();
+                        PatientManager pm = new PatientManager();
+                        if (patientlook.TransferIn == true)
+                        {
+                            PatientTransferInmanager pt = new PatientTransferInmanager();
+                            List<PatientTransferIn> pti = pt.GetPatientTransferIns(patientlook.Id);
+                            string mflcode = pti.Where(t => t != null && t.DeleteFlag == false).OrderByDescending(t => t.CreateDate).Select(t => t.MflCode).FirstOrDefault().ToString();
+
+                            if (patientlook.EnrollmentNumber.Length < 5)
+                            {
+                                string CCCnum = string.Format("{0}-{1}", mflcode, patientlook.EnrollmentNumber);
+                                CCCNumb = CCCnum;
+                            }
+
+                        }
+                        else
+                        {
+                            if (patientlook.EnrollmentNumber.Length < 5)
+                            {
+                                string CCCnum = string.Format("{0}-{1}", patientlook.FacilityId, patientlook.EnrollmentNumber);
+                                CCCNumb = CCCnum;
+
+                            }
+                            else
+                            {
+                                CCCNumb = patientlook.EnrollmentNumber;
+                            }
+                        }
+
+                       // PatientEntity prl = new PatientEntity();
+                        // prl = pm.GetPatientEntityByPersonId(personId);
+
+                       // List<PatientEntityIdentifier> pid = new List<PatientEntityIdentifier>();
+
+                            // pid=pim.GetPatientEntityIdentifiersByPatientId(prl.Id, id.Id);
+                         // string CCCNumber = pid.Where(t => t != null && t.PatientId == prl.Id && t.DeleteFlag == false).OrderByDescending(t => t.CreateDate).Select(t=>t.IdentifierValue).FirstOrDefault();
+
+                       /// CCCNumb = CCCNumber;
+                    }
+                    PersonRelationship rl = new PersonRelationship();
+                    rl = rlm.GetSpecificRelationship(Currentpatient, personId);
+                    relations.Add(rl);
+                    PatientHivTesting ph = new PatientHivTesting();
+                    ph = pht.GetPatientHivTesting(personId);
+                    PatientLinkage patientl = new PatientLinkage();
+                    patientl = plm.GetPatientLinkage(personId);
+                    patientshivtest.Add(ph);
+                    patientslinkage.Add(patientl);
+                    Dictionary<string, string> dic = new Dictionary<string, string>();
+                    if (CCCNumb != null)
+                    {
+                        dic.Add("CCCNumber", CCCNumb);
+                    }
+                    else
+                    {
+                        dic.Add("CCCNumber", "0");
+                    }
+                    if (patientlook != null) { 
+                        dic.Add("EnrollmentNumber", patientlook.EnrollmentNumber);
+                     }
+                     else
+                        {
+                         dic.Add("EnrollmentNumber", "0");
+                     }
+                    dic.Add("PersonId", person.Id.ToString());
+                    dic.Add("FirstName", person.FirstName);
+                    dic.Add("MiddleName", person.MiddleName);
+                    dic.Add("DOB", patientlook.DateOfBirth.ToString());
+                    dic.Add("LastName", person.LastName);
+                    dic.Add("gender", person.Sex.ToString());
+                    dic.Add("DobPrecision", patientlook.DobPrecision.ToString());
+                    dic.Add("Relationshiptype", relations.Where(t => t != null && t.PersonId == Convert.ToInt32(personId)).Select(t => t.RelationshipTypeId.ToString()).DefaultIfEmpty(null).FirstOrDefault());
+                    dic.Add("BaselineResult", relations.Where(t => t != null && t.PersonId == Convert.ToInt32(personId)).Select(t => t.BaselineResult.ToString()).DefaultIfEmpty(null).FirstOrDefault());
+                    dic.Add("BaselineDate", relations.Where(t => t != null && t.PersonId == Convert.ToInt32(personId)).Select(t => t.BaselineDate.ToString()).DefaultIfEmpty(null).FirstOrDefault());
+                    dic.Add("HivTestingResult", patientshivtest.Where(t => t != null && t.PersonId == Convert.ToInt32(personId)).Select(t => t.TestingResult.ToString()).DefaultIfEmpty(null).FirstOrDefault());
+                    dic.Add("HivTestingDate", patientshivtest.Where(t => t != null && t.PersonId == Convert.ToInt32(personId)).Select(t => t.TestingDate.ToString()).DefaultIfEmpty(null).FirstOrDefault());
+                    dic.Add("ReferredToCare", patientshivtest.Where(t => t != null && t.PersonId == Convert.ToInt32(personId)).Select(t => t.ReferredToCare.ToString()).DefaultIfEmpty(null).FirstOrDefault());
+                    dic.Add("LinkageDate", patientslinkage.Where(t => t != null && t.PersonId == Convert.ToInt32(personId)).Select(t => t.LinkageDate.ToString()).DefaultIfEmpty(null).FirstOrDefault());
+
+                    var data = dic.ToArray();
+
+                    output = new JavaScriptSerializer().Serialize(data);
+                }
+            }
+            catch (Exception e)
+            {
+                //Dispose();
+                output = e.Message;
+            }
+            finally
+            {
+                Dispose();
+            }
+            return output;
+        }
+        
+
+        [WebMethod(EnableSession = true)]
+        public string GetPatientSearchList(List<Data> dataPayLoad)
+        {
+            String output = null;
+            int filteredRecords = 0;
+            int totalCount = 0;
+
+           int  Currentpatient = int.Parse(HttpContext.Current.Session["PatientPK"].ToString());
+            PersonRelationshipManager rlm = new PersonRelationshipManager();
+
+            PatientHivTestingManager pht = new PatientHivTestingManager();
+            PatientLinkageManager plm = new PatientLinkageManager();
+
+            var jsonData = new List<PatientLookup>();
+
+            try
+            {
+                string patientId = "";
+                string firstName = null;
+                string middleName = null;
+                string lastName = null;
+                string isEnrolled = null;
+
+                PatientLookupManager patientLookup = new PatientLookupManager();
+
+
+                patientId = dataPayLoad.FirstOrDefault(x => x.name == "patientId").value;
+                firstName = Convert.ToString(dataPayLoad.FirstOrDefault(x => x.name == "firstName").value);
+                middleName = Convert.ToString(dataPayLoad.FirstOrDefault(x => x.name == "middleName").value);
+                lastName = Convert.ToString(dataPayLoad.FirstOrDefault(x => x.name == "lastName").value);
+                isEnrolled = Convert.ToString(dataPayLoad.FirstOrDefault(x => x.name == "isEnrolled").value);
+
+                //patientId = patientId != "" ? patientId : 0;
+
+                if (patientId != "" || !string.IsNullOrWhiteSpace(firstName) || !string.IsNullOrWhiteSpace(middleName) || !string.IsNullOrWhiteSpace(lastName))
+                {
+                    jsonData = patientLookup.GetPatientSearchListPayload(patientId, isEnrolled, firstName, middleName, lastName);
+                }
+                else
+                {
+                    jsonData = patientLookup.GetPatientSearchListPayload(isEnrolled);
+                }
+
+                if (jsonData.Count > 0)
+                {
+                    var sEcho = Convert.ToInt32(dataPayLoad.FirstOrDefault(x => x.name == "sEcho").value);
+                    var displayLength = Convert.ToInt32(dataPayLoad.FirstOrDefault(x => x.name == "iDisplayLength").value);
+                    var displayStart = Convert.ToInt32(dataPayLoad.FirstOrDefault(x => x.name == "iDisplayStart").value);
+
+
+                    // var dateOfBirth = Convert.ToDateTime(dataPayLoad.FirstOrDefault(x => x.name == "DateOfBirth").value);
+                    // var gender = Convert.ToInt32(dataPayLoad.FirstOrDefault(x => x.name == "gender").value);
+                    var facility = Convert.ToInt32(dataPayLoad.FirstOrDefault(x => x.name == "facility").value);
+
+                    var sortCol = Convert.ToInt32(dataPayLoad.FirstOrDefault(x => x.name == "iSortCol_0").value);
+                    string sortDir = dataPayLoad.FirstOrDefault(x => x.name == "sSortDir_0").value;
+                    string searchString = dataPayLoad.FirstOrDefault(x => x.name == "sSearch").value;
+
+
+                    //if (!string.IsNullOrWhiteSpace(patientId))
+                    //{
+                    //    //jsonData = jsonData.Where(x => x.EnrollmentNumber == patientId).ToList();
+                    //    jsonData = jsonData.Where(x => x.EnrollmentNumber.Contains(patientId)).ToList();
+                    //}
+
+                    //if (!string.IsNullOrWhiteSpace(firstName))
+                    //{
+                    //    jsonData =
+                    //        jsonData.Where(x => x.FirstName.ToLower().Contains(firstName.ToLower()))
+                    //            .ToList();
+                    //}
+                    //if (!string.IsNullOrWhiteSpace(lastName))
+                    //{
+                    //    jsonData =
+                    //        jsonData.Where(x => x.LastName.ToLower().Contains(lastName.ToLower()))
+                    //            .ToList();
+                    //}
+                    //if (!string.IsNullOrWhiteSpace(middleName))
+                    //{
+                    //    jsonData =
+                    //        jsonData.Where(x => x.MiddleName.ToLower().Contains(middleName.ToLower()))
+                    //            .ToList();
+                    //}
+
+                    /*-- order columns based on payload received -- */
+                    switch (sortCol)
+                    {
+                        case 0:
+                            jsonData = (sortDir == "desc")
+                                ? jsonData = jsonData.OrderByDescending(x => x.Id).ToList()
+                                : jsonData.OrderBy(x => x.Id).ToList();
+
+                            break;
+                        case 1:
+                            jsonData = (sortDir == "desc")
+                                ? jsonData = jsonData.OrderByDescending(x => x.EnrollmentNumber).ToList()
+                                : jsonData.OrderBy(x => x.EnrollmentNumber).ToList();
+                            break;
+                        case 2:
+                            jsonData = (sortDir == "desc")
+                                ? jsonData = jsonData.OrderByDescending(x => x.FirstName).ToList()
+                                : jsonData.OrderBy(x => x.FirstName).ToList();
+                            break;
+                        case 3:
+                            jsonData = (sortDir == "desc")
+                                ? jsonData = jsonData.OrderByDescending(x => x.MiddleName).ToList()
+                                : jsonData.OrderBy(x => x.MiddleName).ToList();
+                            break;
+                        case 4:
+                            jsonData = (sortDir == "desc")
+                                ? jsonData.OrderBy(x => x.LastName).ToList()
+                                : jsonData = jsonData.OrderByDescending(x => x.LastName).ToList();
+                            break;
+                        case 5:
+                            jsonData = (sortDir == "desc")
+                                ? jsonData.OrderBy(x => x.DateOfBirth).ToList()
+                                : jsonData = jsonData.OrderByDescending(x => x.DateOfBirth).ToList();
+                            break;
+                        case 6:
+                            jsonData = (sortDir == "desc")
+                                ? jsonData.OrderBy(x => LookupLogic.GetLookupNameById(x.Sex)).ToList()
+                                : jsonData =
+                                    jsonData.OrderByDescending(x => LookupLogic.GetLookupNameById(x.Sex)).ToList();
+                            break;
+                        case 7:
+                            jsonData = (sortDir == "desc")
+                                ? jsonData = jsonData.OrderByDescending(x => x.EnrollmentDate).ToList()
+                                : jsonData.OrderBy(x => x.EnrollmentDate).ToList();
+                            break;
+                        case 8:
+                            break;
+                    }
+
+                    /*-- implement search -- */
+                    if (searchString.Length > 0 || !string.IsNullOrWhiteSpace(searchString))
+                    {
+                        jsonData = jsonData.Where(x => x.EnrollmentNumber.Equals(searchString) ||
+                                                       x.FirstName
+                                                           .ToLower()
+                                                           .Contains(searchString.ToLower()) ||
+                                                       x.MiddleName
+                                                           .ToLower()
+                                                           .Contains(searchString.ToLower()) ||
+                                                       x.LastName
+                                                           .ToLower()
+                                                           .Contains(searchString.ToLower()) ||
+                                                       LookupLogic.GetLookupNameById(x.Sex)
+                                                           .Contains(searchString.ToLower()) ||
+                                                       x.EnrollmentNumber.Contains(searchString.ToString()) ||
+                                                       x.MobileNumber.Contains(searchString)
+                            )
+                            .ToList();
+                        filteredRecords = jsonData.Count();
+                    }
+                    else
+                    {
+                        filteredRecords = jsonData.Count();
+                    }
+
+                    /*---- Perform paging based on request */
+                    //  var skip = (displayLength * displayStart);
+                    // var ableToSkip = skip < displayLength;
+                    //string patientStatus;
+                    totalCount = jsonData.Count();
+                    jsonData = jsonData.Skip(displayStart).Take(displayLength).ToList();
+                   
+
+           
+                    var json = new
+                    {
+                        draw = sEcho,
+                        recordsTotal = totalCount,
+                        recordsFiltered = filteredRecords,
+
+                      
+                        data = jsonData.Select(x => new string[]
+                        {
+
+//(isEnrolled=="notEnrolledClients")? x.PersonId.ToString(): x.Id.ToString(),
+                            (isEnrolled=="notEnrolledClients")? "0": x.Id.ToString(),
+                            x.EnrollmentNumber.ToString(),
+                            x.FirstName,
+                            x.MiddleName,
+                            x.LastName,
+                            x.DateOfBirth.ToString("dd-MMM-yyyy"),
+                            LookupLogic.GetLookupNameById(x.Sex),
+                           
+                    //x.RegistrationDate.ToString("dd-MMM-yyyy"),
+                    (isEnrolled=="notEnrolledClients")? Convert.ToDateTime(x.RegistrationDate).ToString("dd-MMM-yyyy") : x.EnrollmentDate.ToString("dd-MMM-yyyy"),
+                            x.PatientStatus.ToString(),
+                              x.PersonId.ToString()
+                             //relations.Where(t=>t!=null &&t.PersonId==Convert.ToInt32(x.PersonId)).Select(t=>t.RelationshipTypeId.ToString()).DefaultIfEmpty("null").FirstOrDefault(),
+                             //relations.Where(t=>t!=null && t.PersonId==Convert.ToInt32(x.PersonId)).Select(t=>t.BaselineResult.ToString()).DefaultIfEmpty("null").FirstOrDefault(),
+                             //relations.Where(t=>t!=null &&t.PersonId==Convert.ToInt32(x.PersonId)).Select(t=>t.BaselineDate.ToString()).DefaultIfEmpty("null").FirstOrDefault(),
+                             //patientshivtest.Where(t=>t!=null &&t.PersonId==Convert.ToInt32(x.PersonId)).Select(t=>t.TestingResult.ToString()).DefaultIfEmpty("null").FirstOrDefault(),
+                             //patientshivtest.Where(t=>t!=null &&t.PersonId==Convert.ToInt32(x.PersonId)).Select(t=>t.TestingDate.ToString()).DefaultIfEmpty("null").FirstOrDefault(),
+                             // patientshivtest.Where(t=>t!=null &&t.PersonId==Convert.ToInt32(x.PersonId)).Select(t=>t.ReferredToCare.ToString()).DefaultIfEmpty("null").FirstOrDefault(),
+                             //patientslinkage.Where(t=>t!=null &&t.PersonId==Convert.ToInt32(x.PersonId)).Select(t=>t.LinkageDate.ToString()).DefaultIfEmpty("null").FirstOrDefault(),
+                          
+                            //,utility.Decrypt(x.MobileNumber)
+                        })
+                    };
+
+                    //output = JsonConvert.SerializeObject(json);
+                    output = new JavaScriptSerializer().Serialize(json);
+                }
+            }
+            catch (Exception e)
+            {
+                //Dispose();
+                output = e.Message;
+            }
+            finally
+            {
+                Dispose();
+            }
+            return output;
+        }
+
 
         [WebMethod]
         public List<PatientFamilyDisplay> GetFamilyTestings(string patientId)
@@ -541,7 +989,17 @@ namespace IQCare.Web.CCC.WebService
             }
             return count;
         }
-
+        [WebMethod(EnableSession = true)]
+        public string getAppointmentId(int PatientMasterVisitId, DateTime date)
+        {
+           var appointmentManager = new PatientAppointmentManager();
+           string PatientId = Session["PatientPk"].ToString();
+            PatientAppointment[] pAppointment = appointmentManager.GetAppointmentId(Convert.ToInt32(Session["PatientPK"]),PatientMasterVisitId, date).ToArray();
+            //PatientClinicalNotes[] patientNotesData = PCN.getPatientClinicalNotesByVisitId(PatientId, PatientMasterVisitId).ToArray();
+            string jsonNotesObject = "[]";
+            jsonNotesObject = new JavaScriptSerializer().Serialize(pAppointment);
+            return jsonNotesObject;
+        }
         [WebMethod]
         public List<PatientConsentDisplay> GetpatientConsent(string patientId)
         {
@@ -700,9 +1158,9 @@ namespace IQCare.Web.CCC.WebService
             string reason = "";
             string serviceArea = "";
             string differentiatedCare = "";
-            string editAppointment = "<a href='ScheduleAppointment.aspx?appointmentid=" + appointmentid + "' type='button' class='btn btn-success fa fa-pencil-square btn-fill' > Edit</a>";
+            string editAppointment = "<a href='ScheduleAppointment.aspx?appointmentid="+appointmentid+"' type='button' class='btn btn-success fa fa-pencil-square btn-fill' > Edit</a>";
             string deleteAppointment = "<button type='button' class='btnDelete btn btn-danger fa fa-minus-circle btn-fill' > Remove</button>";
-            List<LookupItemView> statuses = mgr.GetLookItemByGroup("AppointmentStatus");
+            List <LookupItemView> statuses = mgr.GetLookItemByGroup("AppointmentStatus");
             var s = statuses.FirstOrDefault(n => n.ItemId == a.StatusId);
             if (s != null)
             {

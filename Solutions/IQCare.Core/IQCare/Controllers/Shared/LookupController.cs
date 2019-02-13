@@ -4,6 +4,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using IQCare.Common.BusinessProcess.Commands.Lookup;
 using IQCare.Common.BusinessProcess.Interfaces;
+using IQCare.Records.BusinessProcess.Command.Lookup;
+using IQCareRecords.Common.BusinessProcess.Command;
 using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -33,10 +35,23 @@ namespace IQCare.Controllers.Common
             return BadRequest(results);
         }
 
+        [HttpGet("GetbyGroupName/{groupName}")]
+        public async Task<IActionResult> GetbyGroupName(string groupName)
+        {
+            var results = await _mediator.Send(new GetOptionsByGroupNameCommand { GroupName = groupName },
+                HttpContext.RequestAborted);
+            
+            if (results.IsValid)
+                return Ok( results.Value);
+
+            return BadRequest(results);
+        }
+
+
         [HttpGet("htsOptions")]
         public async Task<IActionResult> Get()
         {
-            string[] options = new string[] { "HTSEntryPoints", "YesNo", "Disabilities", "TestedAs", "Strategy", "TbScreening", "ReasonsPartner", "HIVResults", "HIVTestKits", "HIVFinalResults" };
+            string[] options = new string[] { "HTSEntryPoints", "YesNo", "Disabilities", "TestedAs", "Strategy", "TbScreening", "ReasonsPartner", "HIVResults", "HIVTestKits", "HIVFinalResults","EducationalLevel","EducationOutcome","HTSOccupation" };
 
             var results = await _mediator.Send(new GetRegistrationOptionsCommand {RegistrationOptions = options},
                 HttpContext.RequestAborted);
@@ -48,7 +63,7 @@ namespace IQCare.Controllers.Common
             return BadRequest(results);
         }
 
-        [HttpGet("optionsByGroupandItemName")]
+        [HttpGet("optionsByGroupandItemName/{groupName}/{itemName}")]
         public async Task<IActionResult> Get(string groupName, string itemName)
         {
             var results =
@@ -62,6 +77,100 @@ namespace IQCare.Controllers.Common
             return BadRequest(results);
         }
 
+        [HttpGet("getIdentifyerTypes")]
+        public async Task<IActionResult> GetIdentifierType()
+        {
+            var results = await _mediator.Send(new GetPersonIdentificationCommand { CodeName = "PersonIdentification" }, HttpContext.RequestAborted);
+
+            if (results.IsValid)
+                return Ok(results.Value);
+            return BadRequest(results);
+
+        }
+
+        [HttpGet("getocc")]
+        public async Task<IActionResult>  GetOccupations()
+        {
+            string options =  "Occupation";
+            var results = await _mediator.Send(new GetOptionsByGroupNameCommand { GroupName = options }, HttpContext.RequestAborted);
+            if (results.IsValid)
+                return Ok(results.Value);
+            return BadRequest(results);
+        }
+
+        [HttpGet("getEducation")]
+        public async Task<IActionResult> GetRegConsentEducationOptions()
+        {
+            string options = "EducationalLevel";
+            var results = await _mediator.Send(new GetOptionsByGroupNameCommand { GroupName =options }, HttpContext.RequestAborted);
+            if (results.IsValid)
+                return Ok(results.Value);
+            return BadRequest(results);
+        }
+
+        [HttpGet("getRegConsentOptions")]
+        public async Task<IActionResult> GetRegConsentOptions()
+        {
+            string options = "ConsentOptions";
+            var results = await _mediator.Send(new GetOptionsByGroupNameCommand { GroupName = options }, HttpContext.RequestAborted);
+            if (results.IsValid)
+                return Ok(results.Value);
+            return BadRequest(results);
+        }
+         
+        [HttpGet("getMaritalStatusOptions")]
+        public async Task<IActionResult> GetMaritalStatusOptions()
+        {
+            string options =   "MaritalStatus" ;
+            var results = await _mediator.Send(new GetOptionsByGroupNameCommand { GroupName = options }, HttpContext.RequestAborted);
+            if (results.IsValid)
+                return Ok(results.Value);
+            return BadRequest(results);
+        }
+
+        
+
+        [HttpGet("getRegOccConsentEducationOptions")]
+        public async Task<IActionResult> GetRegOccConsentEducationOptions()
+        {
+            string[] options = new string[] { "Occupation", "EducationalLevel", "ConsentOptions", "MaritalStatus" };
+            var results = await _mediator.Send(new GetRegistrationOptionsCommand { RegistrationOptions = options }, HttpContext.RequestAborted);
+            if (results.IsValid)
+                return Ok(results.Value);
+            return BadRequest(results);
+        }
+        [HttpGet("getContactType")]
+        public async Task<IActionResult> GetContactType()
+        {
+            string[] options = new string[] { "PersonContactType" };
+            var results = await _mediator.Send(new GetRegistrationOptionsCommand { RegistrationOptions = options }, HttpContext.RequestAborted);
+            if (results.IsValid)
+                return Ok(results.Value);
+            return BadRequest(results);
+        }
+        //}
+        [HttpGet("getRelOptions")]
+        public async Task<IActionResult> GetRelationshipOptions()
+        {
+            string options =  "Relationship" ;
+            var results = await _mediator.Send(new GetOptionsByGroupNameCommand { GroupName = options },
+                HttpContext.RequestAborted);
+
+            if (results.IsValid)
+                return Ok(results.Value);
+            return BadRequest(results);
+        }
+
+        [HttpGet("GetOptionsByMasterName/{masterName}")]
+        public async Task<IActionResult> GetOptionsByMasterName(string masterName)
+        {
+            var results = await _mediator.Send(new GetOptionsByMasterNameCommand { MasterName = masterName },
+                HttpContext.RequestAborted);
+
+            if (results.IsValid)
+                return Ok(results.Value);
+            return BadRequest(results);
+        }
 
         [HttpGet("registrationOptions")]
         public async Task<IActionResult> GetOptions()
@@ -125,6 +234,59 @@ namespace IQCare.Controllers.Common
             return BadRequest(results);
         }
 
+
+        //[HttpGet("getConsentType")]
+        //public async Task<IActionResult> GetConsentOptions()
+        //{
+        //    var results = await _mediator.Send(new GetConsentTypeCommand() { ItemName = "ConsentToSendSMS" }, HttpContext.RequestAborted);
+        //    if (results.IsValid)
+        //        return Ok(results.Value);
+        //    return BadRequest(results);
+        //}
+
+        //[HttpGet("getCountylist")]
+        //public async Task<IActionResult> GetCountyList(string countyid,string subcountyid)
+        //{
+        //    var results = await _mediator.Send(new GetCountiesCommand() { CountyId = countyid, SubcountyId = subcountyid }, HttpContext.RequestAborted);
+        //    if (results.IsValid)
+        //        return Ok(results.Value);
+        //    return BadRequest(results);
+
+        //}
+
+
+        //[HttpGet("getSubCountylist")]
+        //public async Task<IActionResult> GetSubCountyList(string countyid, string subcountyid)
+        //{
+        //    var results = await _mediator.Send(new GetSubCountiesCommand() { CountyId = countyid, SubcountyId = subcountyid }, HttpContext.RequestAborted);
+        //    if (results.IsValid)
+        //        return Ok(results.Value);
+        //    return BadRequest(results);
+
+        //}
+
+
+        //[HttpGet("getWardlist")]
+        //public async Task<IActionResult> GetWardList(string countyid, string subcountyid)
+        //{
+        //    var results = await _mediator.Send(new GetWardCommand() { CountyId = countyid, SubcountyId = subcountyid }, HttpContext.RequestAborted);
+        //    if (results.IsValid)
+        //        return Ok(results.Value);
+        //    return BadRequest(results);
+
+        [HttpGet("GetServiceAreaIdentifiers/{serviceAreaId}")]
+        public async Task<IActionResult> Get(int serviceAreaId)
+        {
+            var response = await _mediator.Send(new GetServiceAreaIdentifiersCommand()
+            {
+                ServiceAreaId = serviceAreaId
+            }, Request.HttpContext.RequestAborted);
+
+            if (response.IsValid)
+                return Ok(response.Value);
+            return BadRequest(response);
+        }
+
         [HttpGet("getFacility/{mflCode}")]
         public async Task<IActionResult> GetFacility(string mflCode)
         {
@@ -134,5 +296,5 @@ namespace IQCare.Controllers.Common
                 return Ok(response.Value);
             return BadRequest(response);
         }
-    } 
+    }
 }

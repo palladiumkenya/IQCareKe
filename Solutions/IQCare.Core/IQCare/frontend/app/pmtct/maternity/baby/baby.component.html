@@ -1,0 +1,20 @@
+<div>
+    <div *ngIf="!isEdit">
+            <app-add-birth-info  
+            [isEdit]="isEdit" 
+            [PatientId]="PatientId"
+            [PatientMasterVisitId]="PatientMasterVisitId"
+            [babySectionOptions] = "babySectionOptions">   
+            </app-add-birth-info>
+    </div>
+ 
+    <div class="row">
+      <button *ngIf="isEdit" mat-raised-button class="mat-primary" (click)="SubmitBabyInfo()"><span class="fa fa-plus-circle" > Add New</span></button>
+        <app-birth-info-grid 
+        [isEdit]="isEdit" 
+        [PatientId]="PatientId"
+        [PatientMasterVisitId]="PatientMasterVisitId"
+        (notify)="onBabyNotify($event)">
+        </app-birth-info-grid>
+     </div>
+</div>

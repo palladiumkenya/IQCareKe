@@ -5,8 +5,12 @@ import { NotFoundComponent } from './not-found/not-found.component';
 const routes: Routes = [
     {
         path: '',
-        redirectTo: 'registration',
+        redirectTo: 'dashboard',
         pathMatch: 'full'
+    },
+    {
+        path: 'dashboard',
+        loadChildren: '../dashboard/dashboard.module#DashboardModule'
     },
     {
         path: 'hts',
@@ -17,13 +21,25 @@ const routes: Routes = [
         loadChildren: '../registration/registration.module#RegistrationModule'
     },
     {
+        path: 'record',
+        loadChildren: '../records/records.module#RecordsModule'
+    },
+    {
+        path: 'pmtct',
+        loadChildren: '../pmtct/pmtct.module#PmtctModule'
+    },
+    {
+        path: 'clinical',
+        loadChildren: '../clinical/clinical.module#ClinicalModule'
+    },
+    {
         path: '**',
         component: NotFoundComponent
     }
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+    imports: [RouterModule.forRoot(routes)],
+    exports: [RouterModule]
 })
 export class CoreRoutingModule { }

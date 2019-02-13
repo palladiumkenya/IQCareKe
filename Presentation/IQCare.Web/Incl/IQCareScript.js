@@ -2608,3 +2608,96 @@ function validateStrongPassword(objtxt, options) {
     // great success!
     return true;
 }
+
+function CalculateBSA(txtWeight, txtHeight, txtBSA) {
+    var weight = document.getElementById(txtWeight).value;
+    var height = document.getElementById(txtHeight).value;
+
+    if (weight == "" || height == "") {
+        weight = 0;
+        height = 0;
+        document.getElementById(txtBSA).value = "";
+    }
+    else {
+        var BSA = Math.sqrt((height * weight) / 3600.0);
+        BSA = BSA.toFixed(2);
+        document.getElementById(txtBSA).value = BSA;
+    }
+}
+
+function CalculateDaysToNextAppointment(txtAppointmentDate, txtDays) {
+    var appointmentdate = new Date(Date.parse(document.getElementById(txtAppointmentDate).value));
+    var todayDate = new Date();
+
+    alert(appointmentdate);
+
+    var noOfDays = ((appointmentdate.getTime() - todayDate.getTime()) / 1000 * 60 * 60 * 24);
+
+    alert(noOfDays);
+
+    document.getElementById(txtDays).value = noOfDays;
+}
+
+function CalculateNextAppointment(txtAppointmentDate, txtDays) {
+    var todaydate = new Date();
+    var days = document.getElementById(txtDays).value;
+
+    var month = new Array();
+    month[0] = "Jan";
+    month[1] = "Feb";
+    month[2] = "Mar";
+    month[3] = "Apr";
+    month[4] = "May";
+    month[5] = "Jun";
+    month[6] = "Jul";
+    month[7] = "Aug";
+    month[8] = "Sep";
+    month[9] = "Oct";
+    month[10] = "Nov";
+    month[11] = "Dec";
+
+    var appDate = new Date(todaydate.setTime(todaydate.getTime() + days * 86400000));
+
+    var dd = appDate.getDate();
+    var mm = month[appDate.getMonth()];
+    var y = appDate.getFullYear();
+
+    document.getElementById(txtAppointmentDate).value = dd + '-' + mm + '-' + y;
+}
+
+function CalculateDrugsPrescribed(txtMorning, txtMidday, txtEvening, txtNight, txtDuration, txtQtyPrescribed, valSyrup, valQtyUnitDisp) {
+    var morning = document.getElementById(txtMorning).value;
+    var midday = document.getElementById(txtMidday).value;
+    var evening = document.getElementById(txtEvening).value;
+    var night = document.getElementById(txtNight).value;
+    var duration = document.getElementById(txtDuration).value;
+
+    if (morning == "") morning = 0;
+    if (midday == "") midday = 0;
+    if (evening == "") evening = 0;
+    if (night == "") night = 0;
+
+    document.getElementById(txtMorning).value = morning;
+    document.getElementById(txtMidday).value = midday;
+    document.getElementById(txtEvening).value = evening;
+    document.getElementById(txtNight).value = night;
+
+    //alert((morning + midday + evening + night));
+
+    if ((parseFloat(morning) + parseFloat(midday) + parseFloat(evening) + parseFloat(night)) > -1 && duration != "") {
+
+        if (valSyrup == "1") {
+            var qty = 1;
+            document.getElementById(txtQtyPrescribed).value = qty;
+        }
+        else {
+
+            var qty = duration * (1 * parseFloat(morning) + 1 * parseFloat(midday) + 1 * parseFloat(evening) + 1 * parseFloat(night));
+            document.getElementById(txtQtyPrescribed).value = qty;
+        }
+    }
+    else {
+        document.getElementById(txtQtyPrescribed).value = "";
+    }
+}
+

@@ -102,6 +102,12 @@ namespace BusinessProcess.SCM
             return (DataTable)theManager.ReturnObject(ClsUtility.theParams, "pr_SCM_GetExistingPharmacyDispense_Futures", ClsUtility.ObjectEnum.DataTable);
         }
 
+        public DataTable GetmstRegimenLineClassification()
+        {
+            ClsUtility.Init_Hashtable();
+            ClsObject theManager = new ClsObject();
+            return (DataTable)theManager.ReturnObject(ClsUtility.theParams, "select * from mst_RegimenLine", ClsUtility.ObjectEnum.DataTable);
+        }
         public DataTable GetPharmacyRegimenClassification()
         {
             ClsUtility.Init_Hashtable();
@@ -454,5 +460,349 @@ namespace BusinessProcess.SCM
             return (DataSet)PharmacyManager.ReturnObject(ClsUtility.theParams, "sp_PharmacyPendingOrders", ClsUtility.ObjectEnum.DataSet);
         }
 
+        public DataSet GetDrugBatchDetails(int DrugID, int StoreID)
+        {
+            ClsUtility.Init_Hashtable();
+            ClsUtility.AddParameters("@Drug_id", SqlDbType.Int, DrugID.ToString());
+            ClsUtility.AddParameters("@StoreID", SqlDbType.Int, StoreID.ToString());
+            ClsObject theManager = new ClsObject();
+            return (DataSet)theManager.ReturnObject(ClsUtility.theParams, "pr_SCM_GetDrugBatchDetails", ClsUtility.ObjectEnum.DataSet);
+        }
+
+        public DataSet GetPharmacyVitals(int PatientID)
+        {
+            ClsUtility.Init_Hashtable();
+            ClsUtility.AddParameters("@ptn_pk", SqlDbType.Int, PatientID.ToString());
+            ClsObject theManager = new ClsObject();
+            return (DataSet)theManager.ReturnObject(ClsUtility.theParams, "pr_SCM_GetPharmacyVitals", ClsUtility.ObjectEnum.DataSet);
+        }
+
+        public DataTable ReturnDatatableQuery(string theQuery)
+        {
+            lock (this)
+            {
+                ClsObject theQB = new ClsObject();
+                ClsUtility.Init_Hashtable();
+                ClsUtility.AddParameters("@QryString", SqlDbType.VarChar, theQuery);
+                return (DataTable)theQB.ReturnObject(ClsUtility.theParams, "pr_General_SQLTable_Parse", ClsUtility.ObjectEnum.DataTable);
+            }
+        }
+
+        public DataSet GetSelectedDrugDetails(int DrugID, int StoreID)
+        {
+            ClsUtility.Init_Hashtable();
+            ClsUtility.AddParameters("@Drug_id", SqlDbType.Int, DrugID.ToString());
+            ClsUtility.AddParameters("@StoreID", SqlDbType.Int, StoreID.ToString());
+            ClsObject theManager = new ClsObject();
+            return (DataSet)theManager.ReturnObject(ClsUtility.theParams, "pr_SCM_GetSelectedDrugDetails", ClsUtility.ObjectEnum.DataSet);
+        }
+
+        public DataTable SavePharmacyDispense_Web(Int32 PatientId, Int32 LocationId, Int32 StoreId, Int32 UserId, int dispensedBy, string DispDate,
+          Int32 OrderType, Int32 ProgramId, string theRegimen, Int32 OrderId, DataTable theDT, string PharmacyRefillDate, Int32 DataStatus,
+            int orderedBy, string orderDate, string deleteScript, int regimenLine = 0, int regimenCode = 0, int therapyPlan = 0
+            , int patientClassification = 0, int isEnrolDifferenciatedCare = 0)
+        {
+            string Morning, Midday, Evening, Night;
+            DataTable thePharmacyDT = new DataTable();
+            //Added by VY for regimen
+            #region "Regimen"
+
+            //string theRegimen = "";
+            string thetmpRegimen = "";
+            for (int i = 0; i < theDT.Rows.Count; i++)
+            {
+
+                if (theDT.Rows[i]["GenericAbbrevation"].ToString() != "")
+                {
+                    if (thetmpRegimen == "")
+                    {
+                        thetmpRegimen = theDT.Rows[i]["GenericAbbrevation"].ToString();
+                    }
+                    else
+                    {
+                        thetmpRegimen = String.Format("{0}/{1}", thetmpRegimen, theDT.Rows[i]["GenericAbbrevation"]);
+                    }
+                }
+                thetmpRegimen = thetmpRegimen.Trim();
+
+
+            }
+
+            foreach (string s in thetmpRegimen.Split('/'))
+            {
+                if (theRegimen == "" && s != "")
+                    theRegimen = theRegimen + s;
+                else if (theRegimen != "" && s != "")
+                    if (!theRegimen.Contains(s))
+                        theRegimen = theRegimen + "/" + s;
+            }
+            #endregion
+            try
+            {
+                this.Connection = DataMgr.GetConnection();
+                this.Transaction = DataMgr.BeginTransaction(this.Connection);
+                ClsObject theManager = new ClsObject();
+                ClsUtility.Init_Hashtable();
+                ClsUtility.AddParameters("@Ptn_Pk", SqlDbType.Int, PatientId.ToString());
+                ClsUtility.AddParameters("@LocationId", SqlDbType.Int, LocationId.ToString());
+                ClsUtility.AddParameters("@DispensedBy", SqlDbType.Int, dispensedBy.ToString());
+                if (DispDate.ToString() != "")
+                    ClsUtility.AddParameters("@DispensedByDate", SqlDbType.VarChar, DispDate.ToString());
+                ClsUtility.AddParameters("@OrderType", SqlDbType.Int, OrderType.ToString());
+                ClsUtility.AddParameters("@ProgramId", SqlDbType.Int, ProgramId.ToString());
+                ClsUtility.AddParameters("@StoreId", SqlDbType.Int, StoreId.ToString());
+                ClsUtility.AddParameters("@Regimen", SqlDbType.VarChar, theRegimen);
+                ClsUtility.AddParameters("@UserId", SqlDbType.Int, UserId.ToString());
+                ClsUtility.AddParameters("@OrderId", SqlDbType.Int, OrderId.ToString());
+                ClsUtility.AddParameters("@AppointmentDate", SqlDbType.VarChar, PharmacyRefillDate.ToString());
+                ClsUtility.AddParameters("@OrderedBy", SqlDbType.Int, orderedBy.ToString());
+                if (orderDate.ToString() != "")
+                    ClsUtility.AddParameters("@OrderDate", SqlDbType.VarChar, orderDate.ToString());
+                if (deleteScript != "")
+                    ClsUtility.AddParameters("@deleteScript", SqlDbType.VarChar, deleteScript);
+                ClsUtility.AddParameters("@RegimenLine", SqlDbType.Int, regimenLine.ToString());
+                ClsUtility.AddParameters("@RegimenCode", SqlDbType.Int, regimenCode.ToString());
+                ClsUtility.AddParameters("@TherapyPlan", SqlDbType.Int, therapyPlan.ToString());
+
+                ClsUtility.AddParameters("@PatientClassification", SqlDbType.Int, patientClassification.ToString());
+                ClsUtility.AddParameters("@IsEnrolDifferenciatedCare", SqlDbType.Int, isEnrolDifferenciatedCare.ToString());
+
+                thePharmacyDT = (DataTable)theManager.ReturnObject(ClsUtility.theParams, "pr_SCM_SavePharmacyDispenseOrder_Web", ClsUtility.ObjectEnum.DataTable);
+
+
+                foreach (DataRow theDR in theDT.Rows)
+                {
+                    ClsUtility.Init_Hashtable();
+                    ClsUtility.AddParameters("@Ptn_Pk", SqlDbType.Int, PatientId.ToString());
+                    ClsUtility.AddParameters("@StoreId", SqlDbType.Int, StoreId.ToString());
+                    ClsUtility.AddParameters("@VisitId", SqlDbType.Int, thePharmacyDT.Rows[0]["VisitId"].ToString());
+                    ClsUtility.AddParameters("@Ptn_Pharmacy_Pk", SqlDbType.Int, thePharmacyDT.Rows[0]["Ptn_Pharmacy_Pk"].ToString());
+                    ClsUtility.AddParameters("@Drug_Pk", SqlDbType.Int, theDR["DrugId"].ToString());
+
+                    ClsUtility.AddParameters("@MorningDose", SqlDbType.Decimal, Morning = (theDR["Morning"].ToString() == "") ? "0" : theDR["Morning"].ToString());
+                    ClsUtility.AddParameters("@MiddayDose", SqlDbType.Decimal, Midday = (theDR["Midday"].ToString() == "") ? "0" : theDR["Midday"].ToString());
+                    ClsUtility.AddParameters("@EveningDose", SqlDbType.Decimal, Evening = (theDR["Evening"].ToString() == "") ? "0" : theDR["Evening"].ToString());
+                    ClsUtility.AddParameters("@NightDose", SqlDbType.Decimal, Night = (theDR["Night"].ToString() == "") ? "0" : theDR["Night"].ToString());
+
+                    ClsUtility.AddParameters("@DispensedQuantity", SqlDbType.Int, "0");
+
+                    ClsUtility.AddParameters("@Prophylaxis", SqlDbType.Int, theDR["Prophylaxis"].ToString() == "True" ? "1" : "0");
+
+                    ClsUtility.AddParameters("@BatchId", SqlDbType.Int, theDR["BatchId"].ToString());
+
+                    if (theDR["BatchNo"].ToString().Contains("("))
+                    {
+                        ClsUtility.AddParameters("@BatchNo", SqlDbType.VarChar, theDR["BatchNo"].ToString().Substring(0, theDR["BatchNo"].ToString().IndexOf('(')));
+                    }
+                    else
+                    {
+                        ClsUtility.AddParameters("@BatchNo", SqlDbType.VarChar, theDR["BatchNo"].ToString());
+                    }
+
+                    ClsUtility.AddParameters("@ExpiryDate", SqlDbType.VarChar, theDR["ExpiryDate"].ToString());
+                    ClsUtility.AddParameters("@DispensingUnit", SqlDbType.Int, theDR["DispensingUnitId"].ToString());
+                    if (DispDate.ToString() != "")
+                        ClsUtility.AddParameters("@DispensedByDate", SqlDbType.VarChar, DispDate.ToString());
+                    ClsUtility.AddParameters("@LocationId", SqlDbType.Int, LocationId.ToString());
+                    ClsUtility.AddParameters("@UserId", SqlDbType.Int, UserId.ToString());
+                    ClsUtility.AddParameters("@DataStatus", SqlDbType.Int, DataStatus.ToString());
+
+                    ClsUtility.AddParameters("@Duration", SqlDbType.Decimal, theDR["Duration"].ToString() != "" ? theDR["Duration"].ToString() : "0");
+                    ClsUtility.AddParameters("@PrescribeOrderedQuantity", SqlDbType.Decimal, theDR["QtyPrescribed"].ToString() != "" ? theDR["QtyPrescribed"].ToString() : "0");
+                    ClsUtility.AddParameters("@PillCount", SqlDbType.VarChar, theDR["PillCount"].ToString() == "" ? "0" : theDR["PillCount"].ToString());
+                    ClsUtility.AddParameters("@PrintPrescriptionStatus", SqlDbType.Int, theDR["PrintPrescriptionStatus"].ToString() == "True" ? "1" : "0");
+                    ClsUtility.AddParameters("@PatientInstructions", SqlDbType.VarChar, theDR["Instructions"].ToString());
+                    ClsUtility.AddParameters("@Comments", SqlDbType.VarChar, theDR["Comments"].ToString());
+
+                    Int32 theRowCount = (Int32)theManager.ReturnObject(ClsUtility.theParams, "pr_SCM_SavePharmacyDispenseOrderDetail_Web", ClsUtility.ObjectEnum.ExecuteNonQuery);
+
+                    //Save details to dtl_PatientPharmacyOrderpartialDispense table
+                    ClsUtility.Init_Hashtable();
+                    ClsUtility.AddParameters("@Ptn_Pk", SqlDbType.Int, PatientId.ToString());
+                    ClsUtility.AddParameters("@StoreId", SqlDbType.Int, StoreId.ToString());
+                    ClsUtility.AddParameters("@ptn_pharmacy_pk", SqlDbType.Int, thePharmacyDT.Rows[0]["Ptn_Pharmacy_Pk"].ToString());
+                    ClsUtility.AddParameters("@drug_pk", SqlDbType.Int, theDR["DrugId"].ToString());
+                    ClsUtility.AddParameters("@batchid", SqlDbType.Int, theDR["BatchId"].ToString());
+                    ClsUtility.AddParameters("@ExpiryDate", SqlDbType.VarChar, theDR["ExpiryDate"].ToString());
+                    ClsUtility.AddParameters("@DispensedQuantity", SqlDbType.Int, theDR["QtyDispensed"].ToString() == "" ? "0" : theDR["QtyDispensed"].ToString());
+                    //ClsUtility.AddParameters("@DispensedQuantity", SqlDbType.Decimal, theDR["RefillQty"].ToString() == "" ? "0" : theDR["RefillQty"].ToString());
+                    ClsUtility.AddParameters("@DispensedBy", SqlDbType.Int, dispensedBy.ToString());
+                    if (DispDate.ToString() != "")
+                        ClsUtility.AddParameters("@DispensedByDate", SqlDbType.VarChar, DispDate.ToString());
+                    ClsUtility.AddParameters("@PrintPrescriptionStatus", SqlDbType.Int, theDR["PrintPrescriptionStatus"].ToString() == "True" ? "1" : "0");
+                    ClsUtility.AddParameters("@comments", SqlDbType.Int, theDR["comments"].ToString());
+                    ClsUtility.AddParameters("@UserId", SqlDbType.Int, UserId.ToString());
+                    DataTable dt = (DataTable)theManager.ReturnObject(ClsUtility.theParams, "pr_SCM_SavePharmacyPartialDispense_Web", ClsUtility.ObjectEnum.DataTable);
+                }
+
+                DataMgr.CommitTransaction(this.Transaction);
+                DataMgr.ReleaseConnection(this.Connection);
+            }
+            catch
+            {
+                DataMgr.RollBackTransation(this.Transaction);
+                throw;
+            }
+            finally
+            {
+                if (this.Connection != null)
+                    DataMgr.ReleaseConnection(this.Connection);
+            }
+            return thePharmacyDT;
+        }
+
+        public void SaveUpdateIPTData(Int32 PatientID, int visitId, DateTime INHStartDate, DateTime INHEndDate)
+        {
+            ClsUtility.Init_Hashtable();
+            ClsUtility.AddParameters("@Ptn_pk", SqlDbType.Int, PatientID.ToString());
+            ClsUtility.AddParameters("@Visit_Pk", SqlDbType.Int, PatientID.ToString());
+            ClsUtility.AddParameters("@INHStartDate", SqlDbType.VarChar, INHStartDate.ToString("dd-MMM-yyyy"));
+            ClsUtility.AddParameters("@INHEndDate", SqlDbType.VarChar, INHEndDate.ToString("dd-MMM-yyyy"));
+            ClsObject theManager = new ClsObject();
+            Int32 theRowCount = (Int32)theManager.ReturnObject(ClsUtility.theParams, "pr_Clinical_SaveUpdate_IPTDetails", ClsUtility.ObjectEnum.ExecuteNonQuery);
+        }
+
+        public void LockpatientForDispensing(int PatientId, int OrderId, string UserName, string StartDate, bool LockPatient)
+        {
+            ClsUtility.Init_Hashtable();
+            ClsUtility.AddParameters("@ptn_pk", SqlDbType.Int, PatientId.ToString());
+            ClsUtility.AddParameters("@ptn_pharmacy_pk", SqlDbType.Int, OrderId.ToString());
+            ClsUtility.AddParameters("@UserName", SqlDbType.VarChar, UserName);
+            ClsUtility.AddParameters("@StartDate", SqlDbType.VarChar, StartDate.ToString());
+            ClsUtility.AddParameters("@LockPatient", SqlDbType.Bit, LockPatient.ToString());
+            ClsObject theManager = new ClsObject();
+            theManager.ReturnObject(ClsUtility.theParams, "pr_SCM_SaveLockpatientForDispensing", ClsUtility.ObjectEnum.DataSet);
+        }
+
+        public void SavePharmacyRefill_Web(DataTable dt, int iserId, int dispensedBy, string DispensedByDate, string deleteScript)
+        {
+            DataTable thePharmacyDT = new DataTable();
+            try
+            {
+                this.Connection = DataMgr.GetConnection();
+                this.Transaction = DataMgr.BeginTransaction(this.Connection);
+                ClsObject theManager = new ClsObject();
+
+                foreach (DataRow theDR in dt.Rows)
+                {
+
+                    ClsUtility.Init_Hashtable();
+                    ClsUtility.AddParameters("@ptn_pharmacy_pk", SqlDbType.Int, theDR["orderId"].ToString());
+                    ClsUtility.AddParameters("@drug_pk", SqlDbType.Int, theDR["DrugId"].ToString());
+                    ClsUtility.AddParameters("@batchid", SqlDbType.Int, theDR["BatchId"].ToString());
+                    //ClsUtility.AddParameters("@DispensedQuantity", SqlDbType.Decimal, theDR["RefillQty"].ToString() == "" ? "0" : theDR["RefillQty"].ToString());
+                    ClsUtility.AddParameters("@DispensedQuantity", SqlDbType.Decimal, theDR["QtyDispensed"].ToString() == "" ? "0" : theDR["QtyDispensed"].ToString());
+                    ClsUtility.AddParameters("@DispensedBy", SqlDbType.Int, dispensedBy.ToString());
+                    if (DispensedByDate.ToString() != "")
+                        ClsUtility.AddParameters("@DispensedByDate", SqlDbType.VarChar, DispensedByDate.ToString());
+                    ClsUtility.AddParameters("@PrintPrescriptionStatus", SqlDbType.Int, theDR["PrintPrescriptionStatus"].ToString() == "True" ? "1" : "0");
+                    ClsUtility.AddParameters("@comments", SqlDbType.Int, theDR["comments"].ToString());
+                    if (deleteScript != "")
+                        ClsUtility.AddParameters("@deleteScript", SqlDbType.VarChar, deleteScript);
+
+                    theManager.ReturnObject(ClsUtility.theParams, "pr_SCM_SavePharmacyPartialDispense_Web", ClsUtility.ObjectEnum.DataTable);
+                }
+
+                DataMgr.CommitTransaction(this.Transaction);
+                DataMgr.ReleaseConnection(this.Connection);
+            }
+            catch
+            {
+                DataMgr.RollBackTransation(this.Transaction);
+                throw;
+            }
+            finally
+            {
+                if (this.Connection != null)
+                    DataMgr.ReleaseConnection(this.Connection);
+            }
+        }
+
+        public DataSet SaveHivTreatementPharmacyField(Int32 theOrderId, string weight, string height, int Program, int PeriodTaken, int Provider, int RegimenLine, int RegimenCode, DateTime NxtAppDate, int Reason)
+        {
+            ClsUtility.Init_Hashtable();
+            ClsUtility.AddParameters("@OrderID", SqlDbType.Int, theOrderId.ToString());
+            ClsUtility.AddParameters("@weight", SqlDbType.VarChar, weight.ToString());
+            ClsUtility.AddParameters("@height", SqlDbType.VarChar, height.ToString());
+            ClsUtility.AddParameters("@Programe", SqlDbType.Int, Program.ToString());
+            ClsUtility.AddParameters("@Periodtaken", SqlDbType.Int, PeriodTaken.ToString());
+            ClsUtility.AddParameters("@Provider", SqlDbType.Int, Provider.ToString());
+            ClsUtility.AddParameters("@RegimenLine", SqlDbType.Int, RegimenLine.ToString());
+            ClsUtility.AddParameters("@RegimenCode", SqlDbType.Int, RegimenCode.ToString());
+            ClsUtility.AddParameters("@NxtAppDate", SqlDbType.VarChar, NxtAppDate.ToString("dd-MMM-yyyy"));
+            ClsUtility.AddParameters("@Region", SqlDbType.Int, Reason.ToString());
+
+            ClsObject theManager = new ClsObject();
+            return (DataSet)theManager.ReturnObject(ClsUtility.theParams, "pr_SCM_SaveUpdateHivTreatementPharmacyField_Futures", ClsUtility.ObjectEnum.DataSet);
+        }
+
+        public DataSet GetAllergyData(int PatientID)
+        {
+            ClsUtility.Init_Hashtable();
+            ClsUtility.AddParameters("@Ptn_Pk", SqlDbType.Int, PatientID.ToString());
+            ClsObject theManager = new ClsObject();
+            return (DataSet)theManager.ReturnObject(ClsUtility.theParams, "pr_Clinical_GetAllergy", ClsUtility.ObjectEnum.DataSet);
+        }
+        public DataSet GetPharmacyDrugHistory_Web(int PatientID)
+        {
+            ClsUtility.Init_Hashtable();
+            ClsUtility.AddParameters("@Ptn_Pk", SqlDbType.Int, PatientID.ToString());
+            ClsObject theManager = new ClsObject();
+            return (DataSet)theManager.ReturnObject(ClsUtility.theParams, "pr_SCM_GetPharmacyDrugHistory_Web", ClsUtility.ObjectEnum.DataSet);
+        }
+
+        public DataSet GetPriorPrescription(Int32 thePatientId)
+        {
+            lock (this)
+            {
+                ClsUtility.Init_Hashtable();
+                ClsUtility.AddParameters("@Ptn_Pk", SqlDbType.Int, thePatientId.ToString());
+                ClsObject theManager = new ClsObject();
+                return (DataSet)theManager.ReturnObject(ClsUtility.theParams, "pr_GetPharmacypriorPrescription_Web", ClsUtility.ObjectEnum.DataSet);
+            }
+        }
+
+        public DataSet GetPharmacyExistingRecordDetails_Web(Int32 VisitID)
+        {
+            ClsUtility.Init_Hashtable();
+            ClsUtility.AddParameters("@visit_id", SqlDbType.Int, VisitID.ToString());
+            ClsObject theManager = new ClsObject();
+            return (DataSet)theManager.ReturnObject(ClsUtility.theParams, "pr_SCM_GetPharmacyOrderDetail_web", ClsUtility.ObjectEnum.DataSet);
+        }
+
+        public DataSet MarkOrderAsFullyDispensed(Int32 orderID, string Reason)
+        {
+            DataSet dataset = new DataSet();
+
+            try
+            {
+                this.Connection = DataMgr.GetConnection();
+                this.Transaction = DataMgr.BeginTransaction(this.Connection);
+                ClsObject theManager = new ClsObject();
+
+                theManager.Connection = this.Connection;
+                theManager.Transaction = this.Transaction;
+
+                ClsUtility.Init_Hashtable();
+                ClsUtility.AddParameters("@ptn_pharmacy_pk", SqlDbType.Int, orderID.ToString());
+                ClsUtility.AddParameters("@Reason", SqlDbType.VarChar, Reason);
+
+                dataset = (DataSet)theManager.ReturnObject(ClsUtility.theParams, "pr_SCM_SavePharmacyMarkOrderFullyDispensed_Web", ClsUtility.ObjectEnum.DataSet);
+
+                DataMgr.CommitTransaction(this.Transaction);
+                DataMgr.ReleaseConnection(this.Connection);
+            }
+            catch
+            {
+                DataMgr.RollBackTransation(this.Transaction);
+                throw;
+            }
+            finally
+            {
+                if (this.Connection != null)
+                    DataMgr.ReleaseConnection(this.Connection);
+            }
+            return dataset;
+        }
     }
 }

@@ -18,7 +18,7 @@ namespace IQCare
                 .MinimumLevel.Override("Microsoft", LogEventLevel.Debug)
                 .Enrich.FromLogContext()
                 .WriteTo.Console(LogEventLevel.Debug)
-                .WriteTo.RollingFile("logs\\IQCarelog-{Date}.txt", LogEventLevel.Error)
+                .WriteTo.RollingFile("logs/IQCarelog-{Date}.txt", LogEventLevel.Error)
                 .CreateLogger();
 
             try

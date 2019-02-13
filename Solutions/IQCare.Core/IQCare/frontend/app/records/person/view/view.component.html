@@ -1,0 +1,81 @@
+<div class="row">
+    <div class="col-lg-12 col-sm-12 col-xs-12">
+        <div class="widget">
+            <div class="widget-header bordered-bottom bordered-blue">
+                <span class="widget-caption">View Person</span>
+            </div>
+            <div class="widget-body">
+                <div class="row">
+                    <div class="col-lg-3 col-sm-3 col-xs-12">
+                        <strong>Names: </strong>
+                        {{ firstName + ' ' + middleName + ' ' + lastName }}
+                    </div>
+
+                    <div class="col-lg-3 col-sm-3 col-xs-12">
+                        <strong>Gender: </strong> {{ gender }}
+                    </div>
+
+                    <div class="col-lg-3 col-sm-3 col-xs-12">
+                        <strong>Date Of Birth: </strong> {{ dateOfBirth | date: 'dd-MMM-yyyy' }}
+                    </div>
+
+                    <div class="col-lg-3 col-sm-3 col-xs-12">
+                        <strong>Date Of Precision: </strong> {{ dobPrecision }}
+                    </div>
+                </div>
+                <div>&nbsp;</div>
+                <div class="row">
+                    <div class="col-lg-3 col-sm-3 col-xs-12">
+                        <strong>Marital Status: </strong> {{ maritalStatus }}
+                    </div>
+
+                    <div class="col-lg-3 col-sm-3 col-xs-12">
+                        <strong>Education Level: </strong> {{ educationLevel }}
+                    </div>
+
+                    <div class="col-lg-3 col-sm-3 col-xs-12">
+                        <strong>Occupation: </strong> {{ occupation }}
+                    </div>
+                </div>
+                <div>&nbsp;</div>
+                <div class="row">
+                    <div class="col-lg-3 col-sm-3 col-xs-12">
+                        <strong>County: </strong> {{ county }}
+                    </div>
+
+                    <div class="col-lg-3 col-sm-3 col-xs-12">
+                        <strong>Sub County: </strong> {{ subCounty }}
+                    </div>
+
+                    <div class="col-lg-3 col-sm-3 col-xs-12">
+                        <strong>Ward: </strong> {{ ward }}
+                    </div>
+
+                    <div class="col-lg-3 col-sm-3 col-xs-12">
+                        <strong>Nearest Health Facility: </strong> {{ nearestHealthCentre }}
+                    </div>
+                </div>
+                <div>&nbsp;</div>
+                <div class="row">
+                    <div class="col-lg-3 col-sm-3 col-xs-12">
+                        <strong>Village: </strong> {{ village }}
+                    </div>
+                </div>
+                <div>&nbsp;</div>
+                <div class="row">
+                    <div class="col-lg-3 col-sm-3 col-xs-12">
+                        <strong>Mobile Number: </strong> {{ mobileNumber }}
+                    </div>
+
+                    <div class="col-lg-3 col-sm-3 col-xs-12">
+                        <strong>Alternative Mobile: </strong> {{ alternativeNumber }}
+                    </div>
+
+                    <div class="col-lg-3 col-sm-3 col-xs-12">
+                        <strong>Email: </strong> {{ emailAddress }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

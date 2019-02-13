@@ -1,0 +1,563 @@
+<?xml version="1.0"?>
+<ClinicalDocument xmlns="urn:hl7-org:v3">
+  <NewDataSet>
+    <xs:schema id="NewDataSet" xmlns="" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+      <xs:element name="NewDataSet" msdata:IsDataSet="true" msdata:UseCurrentLocale="true">
+        <xs:complexType>
+          <xs:choice minOccurs="0" maxOccurs="unbounded">
+            <xs:element name="patientinfo">
+              <xs:complexType>
+                <xs:sequence>
+                  <xs:element name="FacilityName" type="xs:string" minOccurs="0" />
+                  <xs:element name="PatientClinicNumber" type="xs:string" minOccurs="0" />
+                  <xs:element name="UniquePatNumber" type="xs:string" minOccurs="0" />
+                  <xs:element name="FirstName" type="xs:string" minOccurs="0" />
+                  <xs:element name="LastName" type="xs:string" minOccurs="0" />
+                  <xs:element name="DOB" type="xs:dateTime" minOccurs="0" />
+                  <xs:element name="Age" type="xs:int" minOccurs="0" />
+                  <xs:element name="Gender" type="xs:string" minOccurs="0" />
+                  <xs:element name="Address" type="xs:string" minOccurs="0" />
+                  <xs:element name="TelContact" type="xs:string" minOccurs="0" />
+                  <xs:element name="District" type="xs:string" minOccurs="0" />
+                  <xs:element name="SubLocation" type="xs:string" minOccurs="0" />
+                  <xs:element name="Location" type="xs:string" minOccurs="0" />
+                  <xs:element name="LandMark" type="xs:string" minOccurs="0" />
+                  <xs:element name="MaritalStatus" type="xs:string" minOccurs="0" />
+                  <xs:element name="ptn_pk" type="xs:int" minOccurs="0" />
+                </xs:sequence>
+              </xs:complexType>
+            </xs:element>
+            <xs:element name="EmergContact">
+              <xs:complexType>
+                <xs:sequence>
+                  <xs:element name="TSName" type="xs:string" minOccurs="0" />
+                  <xs:element name="TSRelation" type="xs:string" minOccurs="0" />
+                  <xs:element name="TSPhone" type="xs:string" minOccurs="0" />
+                  <xs:element name="TSAddress" type="xs:string" minOccurs="0" />
+                </xs:sequence>
+              </xs:complexType>
+            </xs:element>
+            <xs:element name="Referred">
+              <xs:complexType>
+                <xs:sequence>
+                  <xs:element name="ReferredFrom" type="xs:string" minOccurs="0" />
+                  <xs:element name="ReferredFacilityName" type="xs:string" minOccurs="0" />
+                  <xs:element name="Transfered" type="xs:int" minOccurs="0" />
+                  <xs:element name="Transfered_x0020_From_x0020_Facility" type="xs:string" minOccurs="0" />
+                  <xs:element name="TransferInDate" type="xs:dateTime" minOccurs="0" />
+                  <xs:element name="ARTStartDate" type="xs:dateTime" minOccurs="0" />
+                </xs:sequence>
+              </xs:complexType>
+            </xs:element>
+            <xs:element name="PrevARV">
+              <xs:complexType>
+                <xs:sequence>
+                  <xs:element name="PrevARVExposure" type="xs:int" minOccurs="0" />
+                  <xs:element name="PrevARV1" type="xs:string" minOccurs="0" />
+                  <xs:element name="PrevARV1dtUsed" type="xs:dateTime" minOccurs="0" />
+                  <xs:element name="PrevARV2" type="xs:string" minOccurs="0" />
+                  <xs:element name="PrevARV2dtUsed" type="xs:dateTime" minOccurs="0" />
+                  <xs:element name="PrevARV3" type="xs:string" minOccurs="0" />
+                  <xs:element name="PrevARV3dtUsed" type="xs:dateTime" minOccurs="0" />
+                </xs:sequence>
+              </xs:complexType>
+            </xs:element>
+            <xs:element name="HIVDiagnosis">
+              <xs:complexType>
+                <xs:sequence>
+                  <xs:element name="DtConfirmHIVPositive" type="xs:dateTime" minOccurs="0" />
+                  <xs:element name="dtEnrolledHIVCare" type="xs:dateTime" minOccurs="0" />
+                  <xs:element name="WHOStage" type="xs:string" minOccurs="0" />
+                </xs:sequence>
+              </xs:complexType>
+            </xs:element>
+            <xs:element name="patientAllergy">
+              <xs:complexType>
+                <xs:sequence>
+                  <xs:element name="Allergy" type="xs:string" minOccurs="0" />
+                </xs:sequence>
+              </xs:complexType>
+            </xs:element>
+            <xs:element name="FamilyInfo">
+              <xs:complexType>
+                <xs:sequence>
+                  <xs:element name="RName" type="xs:string" minOccurs="0" />
+                  <xs:element name="AgeYear" type="xs:int" minOccurs="0" />
+                  <xs:element name="Relation" type="xs:string" minOccurs="0" />
+                  <xs:element name="HIVStatus" type="xs:string" minOccurs="0" />
+                  <xs:element name="InCare" type="xs:string" minOccurs="0" />
+                  <xs:element name="CCCNumber" type="xs:string" minOccurs="0" />
+                </xs:sequence>
+              </xs:complexType>
+            </xs:element>
+            <xs:element name="patientlabresults">
+              <xs:complexType>
+                <xs:sequence>
+                  <xs:element name="CD4Count" type="xs:decimal" minOccurs="0" />
+                  <xs:element name="WHOStage" type="xs:string" minOccurs="0" />
+                  <xs:element name="Weight" type="xs:decimal" minOccurs="0" />
+                  <xs:element name="Height" type="xs:decimal" minOccurs="0" />
+                  <xs:element name="BMI" type="xs:decimal" minOccurs="0" />
+                </xs:sequence>
+              </xs:complexType>
+            </xs:element>
+            <xs:element name="firstgegimen">
+              <xs:complexType>
+                <xs:sequence>
+                  <xs:element name="RegDate" type="xs:dateTime" minOccurs="0" />
+                  <xs:element name="RegimenType" type="xs:string" minOccurs="0" />
+                </xs:sequence>
+              </xs:complexType>
+            </xs:element>
+            <xs:element name="IEFuinfopervisit">
+              <xs:complexType>
+                <xs:sequence>
+                  <xs:element name="Visit_id" type="xs:int" minOccurs="0" />
+                  <xs:element name="visitdate" type="xs:dateTime" minOccurs="0" />
+                  <xs:element name="Visit_x0020_Type" type="xs:string" minOccurs="0" />
+                  <xs:element name="ptn_pk" type="xs:int" minOccurs="0" />
+                  <xs:element name="DateHIVDiagnosis" type="xs:dateTime" minOccurs="0" />
+                  <xs:element name="HIVDiagnosisVerified" type="xs:string" minOccurs="0" />
+                  <xs:element name="Discloused" type="xs:string" minOccurs="0" />
+                  <xs:element name="Pregnancy_x0020_Status" type="xs:string" minOccurs="0" />
+                  <xs:element name="LMP" type="xs:dateTime" minOccurs="0" />
+                  <xs:element name="Pregnancy_x0020_EDD" type="xs:dateTime" minOccurs="0" />
+                  <xs:element name="Temp" type="xs:decimal" minOccurs="0" />
+                  <xs:element name="RR" type="xs:decimal" minOccurs="0" />
+                  <xs:element name="HR" type="xs:decimal" minOccurs="0" />
+                  <xs:element name="BP" type="xs:string" minOccurs="0" />
+                  <xs:element name="Height" type="xs:decimal" minOccurs="0" />
+                  <xs:element name="Weight" type="xs:decimal" minOccurs="0" />
+                  <xs:element name="Pain" type="xs:int" minOccurs="0" />
+                  <xs:element name="BMI" type="xs:decimal" minOccurs="0" />
+                  <xs:element name="WABStage" type="xs:string" minOccurs="0" />
+                  <xs:element name="WHOStage" type="xs:string" minOccurs="0" />
+                  <xs:element name="ClinicalNotes" type="xs:string" minOccurs="0" />
+                  <xs:element name="TherapyPlan" type="xs:string" minOccurs="0" />
+                  <xs:element name="TherapyChangeReason" type="xs:string" minOccurs="0" />
+                  <xs:element name="Adherence_Missed_x0020_Last_x0020_Week" type="xs:int" minOccurs="0" />
+                  <xs:element name="Adherence_Missed_x0020_Last_month" type="xs:int" minOccurs="0" />
+                  <xs:element name="Adherence_Missed_other_reason" type="xs:string" minOccurs="0" />
+                  <xs:element name="Adherence_Dot_per_week" type="xs:int" minOccurs="0" />
+                  <xs:element name="Adherence_home_visit_per_weeks" type="xs:int" minOccurs="0" />
+                  <xs:element name="Adherence_support_Group" type="xs:int" minOccurs="0" />
+                  <xs:element name="Adherence_Interrupted_date" type="xs:dateTime" minOccurs="0" />
+                  <xs:element name="Adherence_Interrupted_Num_days" type="xs:int" minOccurs="0" />
+                  <xs:element name="Adherence_stopped_date" type="xs:dateTime" minOccurs="0" />
+                  <xs:element name="Adherence_stopped_num_days" type="xs:int" minOccurs="0" />
+                  <xs:element name="Adherence_HerbalsMeds" type="xs:int" minOccurs="0" />
+                  <xs:element name="Adherence_Reason" type="xs:string" minOccurs="0" />
+                  <xs:element name="Patient_x0020_ART_x0020_Restart" type="xs:dateTime" minOccurs="0" />
+                  <xs:element name="AppDate" type="xs:dateTime" minOccurs="0" />
+                  <xs:element name="Appointment_x0020_Reason" type="xs:string" minOccurs="0" />
+                  <xs:element name="Appointment_x0020_Status" type="xs:string" minOccurs="0" />
+                  <xs:element name="HistoricalART" type="xs:string" minOccurs="0" />
+                  <xs:element name="HistoricalARTStDate" type="xs:dateTime" minOccurs="0" />
+                  <xs:element name="PrevARVExposure" type="xs:string" minOccurs="0" />
+                  <xs:element name="PrevNVPExposure" type="xs:int" minOccurs="0" />
+                  <xs:element name="PrevNVPDate1" type="xs:dateTime" minOccurs="0" />
+                  <xs:element name="PrevNVPDate2" type="xs:dateTime" minOccurs="0" />
+                  <xs:element name="PrevARVRegimen1Name" type="xs:string" minOccurs="0" />
+                  <xs:element name="PrevARVRegimen1Months" type="xs:int" minOccurs="0" />
+                  <xs:element name="PrevARVRegimen2Name" type="xs:string" minOccurs="0" />
+                  <xs:element name="PrevARVRegimen2Months" type="xs:int" minOccurs="0" />
+                  <xs:element name="PrevARVRegimen3Name" type="xs:string" minOccurs="0" />
+                  <xs:element name="PrevARVRegimen3Months" type="xs:int" minOccurs="0" />
+                  <xs:element name="PrevARVRegimen4Name" type="xs:string" minOccurs="0" />
+                  <xs:element name="PrevARVRegimen4Months" type="xs:int" minOccurs="0" />
+                  <xs:element name="PreviousARVRegimen" type="xs:string" minOccurs="0" />
+                  <xs:element name="PrevLowestCD4" type="xs:decimal" minOccurs="0" />
+                  <xs:element name="PrevLowestCD4Percent" type="xs:int" minOccurs="0" />
+                  <xs:element name="PrevLowestCD4Date" type="xs:dateTime" minOccurs="0" />
+                  <xs:element name="PrevMostRecentCD4" type="xs:decimal" minOccurs="0" />
+                  <xs:element name="PrevMostRecentCD4Percent" type="xs:decimal" minOccurs="0" />
+                  <xs:element name="PrevMostRecentCD4Date" type="xs:dateTime" minOccurs="0" />
+                  <xs:element name="CD4PriorStARV" type="xs:decimal" minOccurs="0" />
+                  <xs:element name="CD4PriorStARVPercent" type="xs:int" minOccurs="0" />
+                  <xs:element name="CD4PriorStARVDate" type="xs:dateTime" minOccurs="0" />
+                  <xs:element name="PreTherapyVL" type="xs:decimal" minOccurs="0" />
+                  <xs:element name="PreTherapyVLDate" type="xs:dateTime" minOccurs="0" />
+                  <xs:element name="longTermMedsSulfa" type="xs:int" minOccurs="0" />
+                  <xs:element name="longTermMedsSulfaDesc" type="xs:string" minOccurs="0" />
+                  <xs:element name="longTermMedsOther1" type="xs:int" minOccurs="0" />
+                  <xs:element name="longTermMedsOther2" type="xs:int" minOccurs="0" />
+                  <xs:element name="longTermTBMed" type="xs:int" minOccurs="0" />
+                  <xs:element name="longTermTBMedDesc" type="xs:string" minOccurs="0" />
+                  <xs:element name="longTermTBStartDate" type="xs:dateTime" minOccurs="0" />
+                  <xs:element name="longTermMedsOther1Desc" type="xs:string" minOccurs="0" />
+                  <xs:element name="longTermMedsOther2Desc" type="xs:string" minOccurs="0" />
+                  <xs:element name="longTermMedsOther3desc" type="xs:string" minOccurs="0" />
+                </xs:sequence>
+              </xs:complexType>
+            </xs:element>
+            <xs:element name="Disclosure">
+              <xs:complexType>
+                <xs:sequence>
+                  <xs:element name="DisclosureTo" type="xs:string" minOccurs="0" />
+                </xs:sequence>
+              </xs:complexType>
+            </xs:element>
+            <xs:element name="NewOisOtherProblems">
+              <xs:complexType>
+                <xs:sequence>
+                  <xs:element name="Visit_Pk" type="xs:int" minOccurs="0" />
+                  <xs:element name="patientdisease" type="xs:string" minOccurs="0" />
+                </xs:sequence>
+              </xs:complexType>
+            </xs:element>
+            <xs:element name="CotrimoxazoleAdherence">
+              <xs:complexType>
+                <xs:sequence>
+                  <xs:element name="Visit_Id" type="xs:int" minOccurs="0" />
+                  <xs:element name="visitdate" type="xs:dateTime" minOccurs="0" />
+                  <xs:element name="genericname" type="xs:string" minOccurs="0" />
+                </xs:sequence>
+              </xs:complexType>
+            </xs:element>
+            <xs:element name="INHdrug">
+              <xs:complexType>
+                <xs:sequence>
+                  <xs:element name="Visit_Id" type="xs:int" minOccurs="0" />
+                  <xs:element name="visitdate" type="xs:dateTime" minOccurs="0" />
+                  <xs:element name="DrugName" type="xs:string" minOccurs="0" />
+                </xs:sequence>
+              </xs:complexType>
+            </xs:element>
+            <xs:element name="sideeffect">
+              <xs:complexType>
+                <xs:sequence>
+                  <xs:element name="Visit_Pk" type="xs:int" minOccurs="0" />
+                  <xs:element name="symptom" type="xs:string" minOccurs="0" />
+                </xs:sequence>
+              </xs:complexType>
+            </xs:element>
+            <xs:element name="Patientvisitinfo">
+              <xs:complexType>
+                <xs:sequence>
+                  <xs:element name="signature" type="xs:string" minOccurs="0" />
+                  <xs:element name="Visit_Id" type="xs:int" minOccurs="0" />
+                  <xs:element name="PatientEnrollmentID" type="xs:string" minOccurs="0" />
+                  <xs:element name="IQNumber" type="xs:string" minOccurs="0" />
+                  <xs:element name="VisitType" type="xs:short" minOccurs="0" />
+                  <xs:element name="ARTStartDate" type="xs:dateTime" minOccurs="0" />
+                </xs:sequence>
+              </xs:complexType>
+            </xs:element>
+            <xs:element name="Tuberclulosis">
+              <xs:complexType>
+                <xs:sequence>
+                  <xs:element name="Visit_Id" type="xs:int" minOccurs="0" />
+                  <xs:element name="visitdate" type="xs:dateTime" minOccurs="0" />
+                  <xs:element name="TBStatus" type="xs:string" minOccurs="0" />
+                  <xs:element name="TBRegimen" type="xs:string" minOccurs="0" />
+                </xs:sequence>
+              </xs:complexType>
+            </xs:element>
+            <xs:element name="otherMedication">
+              <xs:complexType>
+                <xs:sequence>
+                  <xs:element name="visit_Id" type="xs:int" minOccurs="0" />
+                  <xs:element name="visitdate" type="xs:dateTime" minOccurs="0" />
+                  <xs:element name="OtherMeds" type="xs:string" minOccurs="0" />
+                </xs:sequence>
+              </xs:complexType>
+            </xs:element>
+            <xs:element name="labinvestigation">
+              <xs:complexType>
+                <xs:sequence>
+                  <xs:element name="visit_Id" type="xs:int" minOccurs="0" />
+                  <xs:element name="visitdate" type="xs:dateTime" minOccurs="0" />
+                  <xs:element name="LabTestId" type="xs:int" minOccurs="0" />
+                  <xs:element name="ParameterId" type="xs:int" minOccurs="0" />
+                  <xs:element name="TestResults" type="xs:string" minOccurs="0" />
+                  <xs:element name="SubTestName" type="xs:string" minOccurs="0" />
+                </xs:sequence>
+              </xs:complexType>
+            </xs:element>
+            <xs:element name="ArvdrugAdherence">
+              <xs:complexType>
+                <xs:sequence>
+                  <xs:element name="Visit_Pk" type="xs:int" minOccurs="0" />
+                  <xs:element name="Adherence_Missed_Reason" type="xs:string" minOccurs="0" />
+                </xs:sequence>
+              </xs:complexType>
+            </xs:element>
+            <xs:element name="HIVTest">
+              <xs:complexType>
+                <xs:sequence>
+                  <xs:element name="PartnerTested" type="xs:string" minOccurs="0" />
+                </xs:sequence>
+              </xs:complexType>
+            </xs:element>
+          </xs:choice>
+        </xs:complexType>
+      </xs:element>
+    </xs:schema>
+    <patientinfo>
+      <FacilityName>Liverpool VCT</FacilityName>
+      <UniquePatNumber>5965</UniquePatNumber>
+      <FirstName>DICKSON</FirstName>
+      <LastName>IMBAYA</LastName>
+      <DOB>1958-04-17T00:00:00+03:00</DOB>
+      <Age>60</Age>
+      <Gender>Male</Gender>
+      <TelContact>0723101867</TelContact>
+      <District>Dagoretti</District>
+      <Location>Nairobi</Location>
+      <MaritalStatus>Divorced/separated</MaritalStatus>
+      <ptn_pk>5779</ptn_pk>
+    </patientinfo>
+    <EmergContact>
+      <TSRelation>Child</TSRelation>
+    </EmergContact>
+    <Referred>
+      <ARTStartDate>2013-08-19T00:00:00+03:00</ARTStartDate>
+    </Referred>
+    <patientAllergy />
+    <FamilyInfo>
+      <RName>GRACE NGOYA</RName>
+      <AgeYear>4</AgeYear>
+      <Relation>Child</Relation>
+      <HIVStatus>Negative</HIVStatus>
+      <InCare>No</InCare>
+    </FamilyInfo>
+    <firstgegimen>
+      <RegDate>2017-12-15T00:00:00+03:00</RegDate>
+      <RegimenType>3TC/EFV/TDF</RegimenType>
+    </firstgegimen>
+    <firstgegimen>
+      <RegDate>2017-06-20T00:00:00+03:00</RegDate>
+      <RegimenType>3TC/EFV/TDF</RegimenType>
+    </firstgegimen>
+    <firstgegimen>
+      <RegDate>2017-03-20T00:00:00+03:00</RegDate>
+      <RegimenType>3TC/EFV/TDF</RegimenType>
+    </firstgegimen>
+    <Disclosure />
+    <sideeffect>
+      <Visit_Pk>5779</Visit_Pk>
+    </sideeffect>
+    <Patientvisitinfo>
+      <Visit_Id>98382</Visit_Id>
+      <PatientEnrollmentID>5965</PatientEnrollmentID>
+      <IQNumber>IQ-000DI195804177555779</IQNumber>
+      <VisitType>17</VisitType>
+      <ARTStartDate>2013-08-19T00:00:00+03:00</ARTStartDate>
+    </Patientvisitinfo>
+    <Patientvisitinfo>
+      <Visit_Id>101572</Visit_Id>
+      <PatientEnrollmentID>5965</PatientEnrollmentID>
+      <IQNumber>IQ-000DI195804177555779</IQNumber>
+      <VisitType>17</VisitType>
+      <ARTStartDate>2013-08-19T00:00:00+03:00</ARTStartDate>
+    </Patientvisitinfo>
+    <Patientvisitinfo>
+      <Visit_Id>105825</Visit_Id>
+      <PatientEnrollmentID>5965</PatientEnrollmentID>
+      <IQNumber>IQ-000DI195804177555779</IQNumber>
+      <VisitType>17</VisitType>
+      <ARTStartDate>2013-08-19T00:00:00+03:00</ARTStartDate>
+    </Patientvisitinfo>
+    <Patientvisitinfo>
+      <Visit_Id>114589</Visit_Id>
+      <PatientEnrollmentID>5965</PatientEnrollmentID>
+      <IQNumber>IQ-000DI195804177555779</IQNumber>
+      <VisitType>17</VisitType>
+      <ARTStartDate>2013-08-19T00:00:00+03:00</ARTStartDate>
+    </Patientvisitinfo>
+    <Patientvisitinfo>
+      <Visit_Id>116696</Visit_Id>
+      <PatientEnrollmentID>5965</PatientEnrollmentID>
+      <IQNumber>IQ-000DI195804177555779</IQNumber>
+      <VisitType>17</VisitType>
+      <ARTStartDate>2013-08-19T00:00:00+03:00</ARTStartDate>
+    </Patientvisitinfo>
+    <Patientvisitinfo>
+      <Visit_Id>127009</Visit_Id>
+      <PatientEnrollmentID>5965</PatientEnrollmentID>
+      <IQNumber>IQ-000DI195804177555779</IQNumber>
+      <VisitType>17</VisitType>
+      <ARTStartDate>2013-08-19T00:00:00+03:00</ARTStartDate>
+    </Patientvisitinfo>
+    <Patientvisitinfo>
+      <Visit_Id>146711</Visit_Id>
+      <PatientEnrollmentID>5965</PatientEnrollmentID>
+      <IQNumber>IQ-000DI195804177555779</IQNumber>
+      <VisitType>17</VisitType>
+      <ARTStartDate>2013-08-19T00:00:00+03:00</ARTStartDate>
+    </Patientvisitinfo>
+    <Patientvisitinfo>
+      <Visit_Id>166089</Visit_Id>
+      <PatientEnrollmentID>5965</PatientEnrollmentID>
+      <IQNumber>IQ-000DI195804177555779</IQNumber>
+      <VisitType>17</VisitType>
+      <ARTStartDate>2013-08-19T00:00:00+03:00</ARTStartDate>
+    </Patientvisitinfo>
+    <Patientvisitinfo>
+      <Visit_Id>183957</Visit_Id>
+      <PatientEnrollmentID>5965</PatientEnrollmentID>
+      <IQNumber>IQ-000DI195804177555779</IQNumber>
+      <VisitType>17</VisitType>
+      <ARTStartDate>2013-08-19T00:00:00+03:00</ARTStartDate>
+    </Patientvisitinfo>
+    <Patientvisitinfo>
+      <Visit_Id>216809</Visit_Id>
+      <PatientEnrollmentID>5965</PatientEnrollmentID>
+      <IQNumber>IQ-000DI195804177555779</IQNumber>
+      <VisitType>17</VisitType>
+      <ARTStartDate>2013-08-19T00:00:00+03:00</ARTStartDate>
+    </Patientvisitinfo>
+    <Patientvisitinfo>
+      <Visit_Id>240383</Visit_Id>
+      <PatientEnrollmentID>5965</PatientEnrollmentID>
+      <IQNumber>IQ-000DI195804177555779</IQNumber>
+      <VisitType>17</VisitType>
+      <ARTStartDate>2013-08-19T00:00:00+03:00</ARTStartDate>
+    </Patientvisitinfo>
+    <Patientvisitinfo>
+      <Visit_Id>256925</Visit_Id>
+      <PatientEnrollmentID>5965</PatientEnrollmentID>
+      <IQNumber>IQ-000DI195804177555779</IQNumber>
+      <VisitType>17</VisitType>
+      <ARTStartDate>2013-08-19T00:00:00+03:00</ARTStartDate>
+    </Patientvisitinfo>
+    <Patientvisitinfo>
+      <Visit_Id>277511</Visit_Id>
+      <PatientEnrollmentID>5965</PatientEnrollmentID>
+      <IQNumber>IQ-000DI195804177555779</IQNumber>
+      <VisitType>17</VisitType>
+      <ARTStartDate>2013-08-19T00:00:00+03:00</ARTStartDate>
+    </Patientvisitinfo>
+    <Patientvisitinfo>
+      <Visit_Id>307334</Visit_Id>
+      <PatientEnrollmentID>5965</PatientEnrollmentID>
+      <IQNumber>IQ-000DI195804177555779</IQNumber>
+      <VisitType>17</VisitType>
+      <ARTStartDate>2013-08-19T00:00:00+03:00</ARTStartDate>
+    </Patientvisitinfo>
+    <Patientvisitinfo>
+      <Visit_Id>330858</Visit_Id>
+      <PatientEnrollmentID>5965</PatientEnrollmentID>
+      <IQNumber>IQ-000DI195804177555779</IQNumber>
+      <VisitType>17</VisitType>
+      <ARTStartDate>2013-08-19T00:00:00+03:00</ARTStartDate>
+    </Patientvisitinfo>
+    <Patientvisitinfo>
+      <Visit_Id>348403</Visit_Id>
+      <PatientEnrollmentID>5965</PatientEnrollmentID>
+      <IQNumber>IQ-000DI195804177555779</IQNumber>
+      <VisitType>17</VisitType>
+      <ARTStartDate>2013-08-19T00:00:00+03:00</ARTStartDate>
+    </Patientvisitinfo>
+    <Patientvisitinfo>
+      <Visit_Id>373786</Visit_Id>
+      <PatientEnrollmentID>5965</PatientEnrollmentID>
+      <IQNumber>IQ-000DI195804177555779</IQNumber>
+      <VisitType>17</VisitType>
+      <ARTStartDate>2013-08-19T00:00:00+03:00</ARTStartDate>
+    </Patientvisitinfo>
+    <Patientvisitinfo>
+      <Visit_Id>408925</Visit_Id>
+      <PatientEnrollmentID>5965</PatientEnrollmentID>
+      <IQNumber>IQ-000DI195804177555779</IQNumber>
+      <VisitType>17</VisitType>
+      <ARTStartDate>2013-08-19T00:00:00+03:00</ARTStartDate>
+    </Patientvisitinfo>
+    <otherMedication>
+      <visit_Id>98382</visit_Id>
+      <visitdate>2013-08-19T00:00:00+03:00</visitdate>
+      <OtherMeds>3TC/EFV/TDF</OtherMeds>
+    </otherMedication>
+    <otherMedication>
+      <visit_Id>101572</visit_Id>
+      <visitdate>2013-09-03T00:00:00+03:00</visitdate>
+      <OtherMeds>3TC/EFV/TDF</OtherMeds>
+    </otherMedication>
+    <otherMedication>
+      <visit_Id>105825</visit_Id>
+      <visitdate>2013-10-03T00:00:00+03:00</visitdate>
+      <OtherMeds>3TC/EFV/TDF</OtherMeds>
+    </otherMedication>
+    <otherMedication>
+      <visit_Id>114589</visit_Id>
+      <visitdate>2013-12-03T00:00:00+03:00</visitdate>
+      <OtherMeds>3TC/EFV/TDF</OtherMeds>
+    </otherMedication>
+    <otherMedication>
+      <visit_Id>127009</visit_Id>
+      <visitdate>2014-03-03T00:00:00+03:00</visitdate>
+      <OtherMeds>3TC/EFV/TDF</OtherMeds>
+    </otherMedication>
+    <otherMedication>
+      <visit_Id>146711</visit_Id>
+      <visitdate>2014-07-03T00:00:00+03:00</visitdate>
+      <OtherMeds>3TC/EFV/TDF</OtherMeds>
+    </otherMedication>
+    <otherMedication>
+      <visit_Id>166089</visit_Id>
+      <visitdate>2014-10-30T00:00:00+03:00</visitdate>
+      <OtherMeds>3TC/EFV/TDF</OtherMeds>
+    </otherMedication>
+    <otherMedication>
+      <visit_Id>183957</visit_Id>
+      <visitdate>2015-02-27T00:00:00+03:00</visitdate>
+      <OtherMeds>3TC/EFV/TDF</OtherMeds>
+    </otherMedication>
+    <otherMedication>
+      <visit_Id>216809</visit_Id>
+      <visitdate>2015-08-27T00:00:00+03:00</visitdate>
+      <OtherMeds>3TC/EFV/TDF</OtherMeds>
+    </otherMedication>
+    <otherMedication>
+      <visit_Id>240383</visit_Id>
+      <visitdate>2015-11-25T00:00:00+03:00</visitdate>
+      <OtherMeds>3TC/EFV/TDF</OtherMeds>
+    </otherMedication>
+    <otherMedication>
+      <visit_Id>277511</visit_Id>
+      <visitdate>2016-05-26T00:00:00+03:00</visitdate>
+      <OtherMeds>3TC/EFV/TDF</OtherMeds>
+    </otherMedication>
+    <otherMedication>
+      <visit_Id>307334</visit_Id>
+      <visitdate>2016-09-23T00:00:00+03:00</visitdate>
+      <OtherMeds>3TC/EFV/TDF</OtherMeds>
+    </otherMedication>
+    <otherMedication>
+      <visit_Id>330858</visit_Id>
+      <visitdate>2017-01-19T00:00:00+03:00</visitdate>
+      <OtherMeds>3TC/EFV/TDF</OtherMeds>
+    </otherMedication>
+    <otherMedication>
+      <visit_Id>348403</visit_Id>
+      <visitdate>2017-03-20T00:00:00+03:00</visitdate>
+      <OtherMeds>3TC/EFV/TDF</OtherMeds>
+    </otherMedication>
+    <otherMedication>
+      <visit_Id>373786</visit_Id>
+      <visitdate>2017-06-20T00:00:00+03:00</visitdate>
+      <OtherMeds>3TC/EFV/TDF</OtherMeds>
+    </otherMedication>
+    <otherMedication>
+      <visit_Id>408925</visit_Id>
+      <visitdate>2017-12-15T00:00:00+03:00</visitdate>
+      <OtherMeds>3TC/EFV/TDF</OtherMeds>
+    </otherMedication>
+    <labinvestigation>
+      <visit_Id>127009</visit_Id>
+      <visitdate>2014-03-03T00:00:00+03:00</visitdate>
+      <LabTestId>1</LabTestId>
+      <ParameterId>1</ParameterId>
+      <TestResults>476.00</TestResults>
+      <SubTestName>CD4 Count</SubTestName>
+    </labinvestigation>
+    <labinvestigation>
+      <visit_Id>127009</visit_Id>
+      <visitdate>2014-03-03T00:00:00+03:00</visitdate>
+      <LabTestId>6</LabTestId>
+      <ParameterId>6</ParameterId>
+      <TestResults>14.10</TestResults>
+      <SubTestName>Hb</SubTestName>
+    </labinvestigation>
+  </NewDataSet>
+</ClinicalDocument>

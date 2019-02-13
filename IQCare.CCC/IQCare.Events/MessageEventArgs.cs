@@ -20,7 +20,8 @@ namespace IQCare.Events
     public enum ObservationType
     {
         WhoStage,
-        Vitals
+        Vitals,
+        PatientOI
     }
     public enum MessageType
     {

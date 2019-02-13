@@ -107,7 +107,11 @@ function AddChronicIllness() {
     var chronicIllness = $('#ChronicIllnessName').find(":selected").text();
     var chronicIllnessID = $('#ChronicIllnessName').find(":selected").val();
     var illnessTreatment = $("#illnessTreatment").val();
-    var treatmentDose = $('#treatmentDose').val();
+    //var treatmentDose = $('#treatmentDose').val();
+    //if (treatmentDose > 0)
+      //  treatmentDose = treatmentDose;
+    //else
+      //  treatmentDose = "";
     var onSet = $('#txtOnsetDate').val();
     //Validate duplication
     var chronicIllnessFound = 0;
@@ -133,7 +137,7 @@ function AddChronicIllness() {
        
        chronicIllnessList.push("" + chronicIllness + "");
         arrChronicIllnessUI = [];
-        arrChronicIllnessUI.push([chronicIllnessID, chronicIllness, illnessTreatment, treatmentDose, onSet,
+        arrChronicIllnessUI.push([chronicIllnessID, chronicIllness, illnessTreatment, onSet,
             "<input type='checkbox' id='chkChronic" + chronicIllnessID + "' >", "<button type='button' class='btnDelete btn btn-danger fa fa-minus-circle btn-fill' > Remove</button>"]);
         
         DrawDataTable("dtlChronicIllness", arrChronicIllnessUI);
@@ -315,14 +319,26 @@ var diagnosisList = new Array();
 var treatmentList = new Array();
 
 function AddDiagnosis() {
-    var diagnosisID = $('#txtDiagnosisID').val();
-    var diagnosis = $('#Diagnosis').val();
+
+    var value = $("#Diagnosis").val();
+    if  (value=== "") {
+        toastr.error("Error", "Please Enter Diagnosis");
+        return false;
+    }
+    var result = value.split("~");
+    
+    var diagnosisID = result[0] + "~" + result[1]
+    var diagnosis = result[2];
     var treatment = $('#DiagnosisTreatment').val();
+    if (treatment === "") {
+        toastr.error("Error,Please enter Treatment");
+        return false;
+    }
 
     //Validate duplication
     var diagnosisFound = 0;
     var treatmentFound = 0;
-
+   
     if (diagnosis === "") {
         toastr.error("Error", "Please enter Diagnosis");
         return false;
@@ -337,11 +353,19 @@ function AddDiagnosis() {
 
     } else {
 
-
+        
         diagnosisList.push("" + diagnosisID + "");
+        if (diagnosisListStatus.length > 0) {
+            diagnosisListStatus.push({ id: diagnosisID, Disease: diagnosis, Treatment: treatment, deleteflag: false, deleted: true })
+        }
+       // diagnosisListStatus.push({ id: diagnosisID, deleteflag: false });
+   
         treatmentList.push("" + treatment + "");
+        DiseaseList.push("" + diagnosis + "");
 
+        deleteflag = false;
         arrDiagnosisUI = [];
+      
 
         arrDiagnosisUI.push([
             diagnosisID, diagnosis, treatment,
@@ -350,8 +374,8 @@ function AddDiagnosis() {
 
         DrawDataTable("dtlDiagnosis", arrDiagnosisUI);
 
-        $('#txtDiagnosisID').val("");
-        $('#Diagnosis').val("");
+       // $('#txtDiagnosisID').val("");
+        $('#Diagnosis').select2("val", "0");
         $('#DiagnosisTreatment').val("");
         
     }
@@ -488,9 +512,14 @@ function AddDrugPrescription() {
     var drugName = $("#txtDrugs").val();
     var batchId = $('#ddlBatch').find(":selected").val();
     var batchText = $('#ddlBatch').find(":selected").text();
-    var dose = $("#txtDose").val();
-    var freqId = $('#ddlFreq').find(":selected").val();
-    var freqTxt = $('#ddlFreq').find(":selected").text();
+    //var dose = $("#txtDose").val();
+    //var freqId = $('#ddlFreq').find(":selected").val();
+    //var freqTxt = $('#ddlFreq').find(":selected").text();
+    var morning = $("#txtMorning").val();
+    var midday = $("#txtMidday").val();
+    var evening = $("#txtEvening").val();
+    var night = $("#txtNight").val();
+    
     var duration = $("#txtDuration").val();
     var quantityPres = $("#txtQuantityPres").val();
     var quantityDisp = $("#txtQuantityDisp").val();
@@ -517,13 +546,17 @@ function AddDrugPrescription() {
         return false;
     }
 
-    if (dose === "" || dose === "0") {
-        toastr.error("Error", "Please enter the dose");
-        return false;
-    }
+    //if (dose === "" || dose === "0") {
+    //    toastr.error("Error", "Please enter the dose");
+    //    return false;
+    //}
 
-    if (freqId === "0") {
-        toastr.error("Error", "Please enter the frequency");
+    //if (freqId === "0") {
+    //    toastr.error("Error", "Please enter the frequency");
+    //    return false;
+    //}
+    if ((parseInt(morning) || 0) + (parseInt(midday) || 0) + (parseInt(evening) || 0) + (parseInt(night) || 0) === 0) {
+        toastr.error("Error", "Please enter the dose");
         return false;
     }
 
@@ -552,8 +585,14 @@ function AddDrugPrescription() {
 
         arrDrugPrescriptionUI = [];
 
+        //arrDrugPrescriptionUI.push([
+        //    drugId, batchId, freqId, drugAbbr, drugName, batchText, dose, freqTxt, duration, quantityPres, quantityDisp,
+        //    prophylaxis,
+        //    "<button type='button' class='btnDelete btn btn-danger fa fa-minus-circle btn-fill' > Remove</button>"
+        //]);
+
         arrDrugPrescriptionUI.push([
-            drugId, batchId, freqId, drugAbbr, drugName, batchText, dose, freqTxt, duration, quantityPres, quantityDisp,
+            drugId, batchId, drugAbbr, drugName, batchText, morning, midday, evening, night, duration, quantityPres, quantityDisp,
             prophylaxis,
             "<button type='button' class='btnDelete btn btn-danger fa fa-minus-circle btn-fill' > Remove</button>"
         ]);
@@ -562,8 +601,10 @@ function AddDrugPrescription() {
 
         $("#txtDrugs").val("");
         $("#ddlBatch").val("");
-        $("#txtDose").val("");
-        $('#ddlFreq').val("0");
+        $("#txtMorning").val("0");
+        $('#ddlMidday').val("0");
+        $('#ddlEvening').val("0");
+        $('#ddlNight').val("0");
         $("#txtDuration").val("0");
         $("#txtQuantityPres").val("0");
         $("#txtQuantityDisp").val("0");
