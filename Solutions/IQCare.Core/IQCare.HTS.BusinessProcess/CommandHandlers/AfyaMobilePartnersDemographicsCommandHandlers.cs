@@ -136,13 +136,13 @@ namespace IQCare.HTS.BusinessProcess.CommandHandlers
                         }
                     }
 
-                    return Result<string>.Valid($"Successfully synchronized partner: {afyaMobileId}");
+                    return Result<string>.Valid($"Successfully synchronized family/partner: {afyaMobileId}");
                 }
                 catch (Exception ex)
                 {
                     trans.Rollback();
                     Log.Error(ex.Message);
-                    return Result<string>.Invalid($"Failed to synchronize partner: {afyaMobileId} for clientid: {indexClientAfyaMobileId} " + ex.Message + " " + ex.InnerException);
+                    return Result<string>.Invalid($"Failed to synchronize family/partner: {afyaMobileId} for clientid: {indexClientAfyaMobileId} " + ex.Message + " " + ex.InnerException);
                 }
             }
         }
