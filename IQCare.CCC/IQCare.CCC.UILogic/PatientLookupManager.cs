@@ -188,5 +188,10 @@ namespace IQCare.CCC.UILogic
         {
             return _patientLookupmanager.GetPersonExtLookups(personId);
         }
+
+        public System.Data.DataTable GetDuplicatePatientRecords(bool matchFirstName, bool matchLastName, bool matchMiddleName, bool matchSex, bool matchEnrollmentNumber, bool matchDob, bool matchEnrollmentDate, bool matchARTStartDate, bool matchHIVDiagnosisDate)
+        {
+            return _patientLookupmanager.GetDuplicatePatientRecords(matchFirstName, matchLastName, matchMiddleName, matchSex, matchEnrollmentNumber, matchDob, matchEnrollmentDate, matchARTStartDate, matchHIVDiagnosisDate);
+        }
     }
 }

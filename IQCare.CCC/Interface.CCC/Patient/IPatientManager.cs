@@ -17,5 +17,6 @@ namespace Interface.CCC.Patient
         List<PatientRegistrationLookup> GetPatientIdByPersonId(int personId);
         List<PatientRegistrationLookup> GetPatientByPtn_Pk(int ptn_pk);
         void UpdatePatientType(int PatientId, int PatientType);
+        int MergePatientRecords(int preferredPatientId, int unpreferredPatientId, int userId);
     }
 }
