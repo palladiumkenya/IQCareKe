@@ -91,6 +91,33 @@ namespace IQCare.Controllers.Afyamobile
             return BadRequest(response);
         }
 
+        [HttpPost("familypartnerdemographics")]
+        public async Task<IActionResult> PostPartnerDemographics([FromBody]AfyaMobilePartnersDemographicsCommand partnersDemographicsCommand)
+        {
+            var response = await _mediator.Send(partnersDemographicsCommand, Request.HttpContext.RequestAborted);
+            if (response.IsValid)
+                return Ok(response);
+            return BadRequest(response);
+        }
+
+        [HttpPost("partnerScreening")]
+        public async Task<IActionResult> PostPartnerScreening([FromBody]AfyaMobilePartnerScreeningEncounterCommand afyaMobilePartnerScreeningEncounterCommand)
+        {
+            var response = await _mediator.Send(afyaMobilePartnerScreeningEncounterCommand, Request.HttpContext.RequestAborted);
+            if (response.IsValid)
+                return Ok(response);
+            return BadRequest(response);
+        }
+
+        [HttpPost("partnerTracing")]
+        public async Task<IActionResult> PostPartnerTracing([FromBody] AfyaMobilePartnerTracingEncounterCommand afyaMobilePartnerTracingEncounterCommand)
+        {
+            var response = await _mediator.Send(afyaMobilePartnerTracingEncounterCommand, Request.HttpContext.RequestAborted);
+            if (response.IsValid)
+                return Ok(response);
+            return BadRequest(response);
+        }
+
         [HttpPost("family")]
         public async Task<IActionResult> PostFamily([FromBody]SynchronizeFamilyCommand synchronizeFamilyCommand)
         {

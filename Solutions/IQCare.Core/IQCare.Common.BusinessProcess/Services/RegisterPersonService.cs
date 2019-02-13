@@ -869,7 +869,7 @@ namespace IQCare.Common.BusinessProcess.Services
         }
 
 
-        public async Task<PersonLocation> UpdatePersonLocation(int personId, string landmark, string ward = "", string county = "", string subcounty = "", int userid = 1)
+        public async Task<PersonLocation> UpdatePersonLocation(int personId, string landmark, int ward = 0, int county = 0, int subcounty = 0, int userid = 1)
         {
             try
             {
@@ -882,26 +882,15 @@ namespace IQCare.Common.BusinessProcess.Services
                     {
                         location.LandMark = landmark;
                     }
-                    if (!string.IsNullOrEmpty(ward))
-                    {
-                        location.Ward = Convert.ToInt32(ward);
-                    }
-                    if (!string.IsNullOrEmpty(county))
-                    {
-                        location.County = Convert.ToInt32(county);
-                    }
-                    if (!string.IsNullOrEmpty(subcounty))
-                    {
-                        location.SubCounty = Convert.ToInt32(subcounty);
-                    }
+                    location.Ward = ward;
+                    location.County = county;
+                    location.SubCounty = subcounty;
+
                     _unitOfWork.Repository<PersonLocation>().Update(location);
                     await _unitOfWork.SaveAsync();
                 }
                 else
                 {
-                    int Ward = string.IsNullOrWhiteSpace(ward) ? 0 : Convert.ToInt32(ward);
-                    int County = string.IsNullOrWhiteSpace(county) ? 0 : Convert.ToInt32(county);
-                    int SubCounty = string.IsNullOrWhiteSpace(subcounty) ? 0 : Convert.ToInt32(subcounty);
                     landmark = string.IsNullOrWhiteSpace(landmark) ? "n/a" : landmark;
                     int user;
                     if (userid > 0)
@@ -912,8 +901,8 @@ namespace IQCare.Common.BusinessProcess.Services
                     {
                         user = 1;
                     }
-                    location = await addPersonLocation(personId, County, SubCounty, Ward, "", landmark, user);
 
+                    location = await addPersonLocation(personId, county, subcounty, ward, "", landmark, user);
                 }
                 return location;
             }

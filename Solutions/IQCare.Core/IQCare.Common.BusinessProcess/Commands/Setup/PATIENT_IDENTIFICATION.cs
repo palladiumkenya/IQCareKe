@@ -47,9 +47,9 @@ namespace IQCare.Common.BusinessProcess.Commands.Setup
     public class PHYSICAL_ADDRESS
     {
         public string VILLAGE { get; set; }
-        public string WARD { get; set; }
-        public string SUB_COUNTY { get; set; }
-        public string COUNTY { get; set; }
+        public int WARD { get; set; }
+        public int SUB_COUNTY { get; set; }
+        public int COUNTY { get; set; }
         public string LANDMARK { get; set; }
         public string GPS_LOCATION { get; set; }
     }
