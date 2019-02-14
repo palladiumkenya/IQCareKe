@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using IQCare.Common.BusinessProcess.Commands;
-using IQCare.Common.BusinessProcess.Commands.Matrix;
+﻿using IQCare.Common.BusinessProcess.Commands.Matrix;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using System.Threading.Tasks;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
