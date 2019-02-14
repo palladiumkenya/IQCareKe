@@ -13,16 +13,16 @@ using Serilog;
 
 namespace IQCare.HTS.BusinessProcess.CommandHandlers
 {
-    public class AfyaMobilePartnersDemographicsCommandHandlers : IRequestHandler<AfyaMobilePartnersDemographicsCommand, Result<string>>
+    public class AfyaMobileFamilyDemographicsCommandHandler: IRequestHandler<AfyaMobileFamilyDemographicsCommand, Result<string>>
     {
         private readonly ICommonUnitOfWork _unitOfWork;
 
-        public AfyaMobilePartnersDemographicsCommandHandlers(ICommonUnitOfWork commonUnitOfWork)
+        public AfyaMobileFamilyDemographicsCommandHandler(ICommonUnitOfWork commonUnitOfWork)
         {
             _unitOfWork = commonUnitOfWork ?? throw new ArgumentNullException(nameof(commonUnitOfWork));
         }
 
-        public async Task<Result<string>> Handle(AfyaMobilePartnersDemographicsCommand request, CancellationToken cancellationToken)
+        public async Task<Result<string>> Handle(AfyaMobileFamilyDemographicsCommand request, CancellationToken cancellationToken)
         {
             string afyaMobileId = string.Empty;
             string indexClientAfyaMobileId = string.Empty;
@@ -34,39 +34,39 @@ namespace IQCare.HTS.BusinessProcess.CommandHandlers
 
                 try
                 {
-                    for (int i = 0; i < request.PARTNERS.Count; i++)
+                    for (int i = 0; i < request.FAMILY.Count; i++)
                     {
-                        for (int j = 0; j < request.PARTNERS[i].PATIENT_IDENTIFICATION.INTERNAL_PATIENT_ID.Count; j++)
+                        for (int j = 0; j < request.FAMILY[i].PATIENT_IDENTIFICATION.INTERNAL_PATIENT_ID.Count; j++)
                         {
-                            if (request.PARTNERS[i].PATIENT_IDENTIFICATION.INTERNAL_PATIENT_ID[j].IDENTIFIER_TYPE == "AFYA_MOBILE_ID")
+                            if (request.FAMILY[i].PATIENT_IDENTIFICATION.INTERNAL_PATIENT_ID[j].IDENTIFIER_TYPE == "AFYA_MOBILE_ID")
                             {
-                                afyaMobileId = request.PARTNERS[i].PATIENT_IDENTIFICATION.INTERNAL_PATIENT_ID[j].ID;
+                                afyaMobileId = request.FAMILY[i].PATIENT_IDENTIFICATION.INTERNAL_PATIENT_ID[j].ID;
                             }
 
-                            if (request.PARTNERS[i].PATIENT_IDENTIFICATION.INTERNAL_PATIENT_ID[j].IDENTIFIER_TYPE == "INDEX_CLIENT_AFYAMOBILE_ID")
+                            if (request.FAMILY[i].PATIENT_IDENTIFICATION.INTERNAL_PATIENT_ID[j].IDENTIFIER_TYPE == "INDEX_CLIENT_AFYAMOBILE_ID")
                             {
-                                indexClientAfyaMobileId = request.PARTNERS[i].PATIENT_IDENTIFICATION.INTERNAL_PATIENT_ID[j].ID;
+                                indexClientAfyaMobileId = request.FAMILY[i].PATIENT_IDENTIFICATION.INTERNAL_PATIENT_ID[j].ID;
                             }
                         }
 
                         var afyaMobileMessage = await registerPersonService.AddAfyaMobileInbox(DateTime.Now, request.MESSAGE_HEADER.MESSAGE_TYPE, afyaMobileId, JsonConvert.SerializeObject(request), false);
 
-                        string firstName = request.PARTNERS[i].PATIENT_IDENTIFICATION.PATIENT_NAME.FIRST_NAME;
-                        string middleName = request.PARTNERS[i].PATIENT_IDENTIFICATION.PATIENT_NAME.MIDDLE_NAME;
-                        string lastName = request.PARTNERS[i].PATIENT_IDENTIFICATION.PATIENT_NAME.LAST_NAME;
-                        int sex = request.PARTNERS[i].PATIENT_IDENTIFICATION.SEX;
-                        DateTime dateOfBirth = DateTime.ParseExact(request.PARTNERS[i].PATIENT_IDENTIFICATION.DATE_OF_BIRTH, "yyyyMMdd", null);
-                        int providerId = request.PARTNERS[i].PATIENT_IDENTIFICATION.USER_ID;
-                        int maritalStatusId = request.PARTNERS[i].PATIENT_IDENTIFICATION.MARITAL_STATUS;
-                        string mobileNumber = request.PARTNERS[i].PATIENT_IDENTIFICATION.PHONE_NUMBER;
+                        string firstName = request.FAMILY[i].PATIENT_IDENTIFICATION.PATIENT_NAME.FIRST_NAME;
+                        string middleName = request.FAMILY[i].PATIENT_IDENTIFICATION.PATIENT_NAME.MIDDLE_NAME;
+                        string lastName = request.FAMILY[i].PATIENT_IDENTIFICATION.PATIENT_NAME.LAST_NAME;
+                        int sex = request.FAMILY[i].PATIENT_IDENTIFICATION.SEX;
+                        DateTime dateOfBirth = DateTime.ParseExact(request.FAMILY[i].PATIENT_IDENTIFICATION.DATE_OF_BIRTH, "yyyyMMdd", null);
+                        int providerId = request.FAMILY[i].PATIENT_IDENTIFICATION.USER_ID;
+                        int maritalStatusId = request.FAMILY[i].PATIENT_IDENTIFICATION.MARITAL_STATUS;
+                        string mobileNumber = request.FAMILY[i].PATIENT_IDENTIFICATION.PHONE_NUMBER;
 
-                        string landmark = request.PARTNERS[i].PATIENT_IDENTIFICATION.PATIENT_ADDRESS.PHYSICAL_ADDRESS.LANDMARK;
-                        int countyId = request.PARTNERS[i].PATIENT_IDENTIFICATION.PATIENT_ADDRESS.PHYSICAL_ADDRESS.COUNTY;
-                        int subCountyId = request.PARTNERS[i].PATIENT_IDENTIFICATION.PATIENT_ADDRESS.PHYSICAL_ADDRESS.SUB_COUNTY;
-                        int wardId = request.PARTNERS[i].PATIENT_IDENTIFICATION.PATIENT_ADDRESS.PHYSICAL_ADDRESS.WARD;
+                        string landmark = request.FAMILY[i].PATIENT_IDENTIFICATION.PATIENT_ADDRESS.PHYSICAL_ADDRESS.LANDMARK;
+                        int countyId = request.FAMILY[i].PATIENT_IDENTIFICATION.PATIENT_ADDRESS.PHYSICAL_ADDRESS.COUNTY;
+                        int subCountyId = request.FAMILY[i].PATIENT_IDENTIFICATION.PATIENT_ADDRESS.PHYSICAL_ADDRESS.SUB_COUNTY;
+                        int wardId = request.FAMILY[i].PATIENT_IDENTIFICATION.PATIENT_ADDRESS.PHYSICAL_ADDRESS.WARD;
 
 
-                        int relationshipType = request.PARTNERS[i].PATIENT_IDENTIFICATION.RELATIONSHIP_TYPE;
+                        int relationshipType = request.FAMILY[i].PATIENT_IDENTIFICATION.RELATIONSHIP_TYPE;
 
                         Facility clientFacility = await _unitOfWork.Repository<Facility>().Get(x => x.PosID == facilityId).FirstOrDefaultAsync();
                         if (clientFacility == null)
@@ -130,22 +130,22 @@ namespace IQCare.HTS.BusinessProcess.CommandHandlers
                         else
                         {
                             //update message has been processed
-                            await registerPersonService.UpdateAfyaMobileInbox(afyaMobileMessage.Id, afyaMobileId, true, DateTime.Now, $"Index clientid: {indexClientAfyaMobileId} for partnerid: {afyaMobileId} not found", false);
-                            return Result<string>.Invalid($"Index clientid: {indexClientAfyaMobileId} for partnerid: {afyaMobileId} not found");
+                            await registerPersonService.UpdateAfyaMobileInbox(afyaMobileMessage.Id, afyaMobileId, true, DateTime.Now, $"Index clientid: {indexClientAfyaMobileId} for familyid: {afyaMobileId} not found", false);
+                            return Result<string>.Invalid($"Index clientid: {indexClientAfyaMobileId} for familyid: {afyaMobileId} not found");
                         }
 
                         //update message has been processed
                         await registerPersonService.UpdateAfyaMobileInbox(afyaMobileMessage.Id, afyaMobileId, true, DateTime.Now, "success", true);
                     }
-                    
+
                     trans.Commit();
-                    return Result<string>.Valid($"Successfully synchronized partner: {afyaMobileId}");
+                    return Result<string>.Valid($"Successfully synchronized family: {afyaMobileId}");
                 }
                 catch (Exception ex)
                 {
                     trans.Rollback();
-                    Log.Error($"Failed to synchronize partner: {afyaMobileId} for clientid: {indexClientAfyaMobileId} " + ex.Message + " " + ex.InnerException);
-                    return Result<string>.Invalid($"Failed to synchronize partner: {afyaMobileId} for clientid: {indexClientAfyaMobileId} " + ex.Message + " " + ex.InnerException);
+                    Log.Error($"Failed to synchronize family: {afyaMobileId} for clientid: {indexClientAfyaMobileId} " + ex.Message + " " + ex.InnerException);
+                    return Result<string>.Invalid($"Failed to synchronize family: {afyaMobileId} for clientid: {indexClientAfyaMobileId} " + ex.Message + " " + ex.InnerException);
                 }
             }
         }
