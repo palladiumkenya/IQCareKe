@@ -256,9 +256,9 @@ export class AncComponent implements OnInit, OnDestroy {
         this.getPatientPregnancy(this.patientId);
     }
 
-    OnMotherProfileNotify(formGroup: FormGroup): void {
-        this.visitDetailsFormGroup.push(formGroup);
-    }
+  //  OnMotherProfileNotify(formGroup: FormGroup): void {
+    //    this.visitDetailsFormGroup.push(formGroup);
+    // } -->
 
     onPatientEducationNotify(formGroup: Object): void {
         this.PatientEducationMatFormGroup = formGroup['form'];
@@ -882,7 +882,7 @@ export class AncComponent implements OnInit, OnDestroy {
                 DifferentiatedCareId: 0,
                 AppointmentReason: 'None'
             } as PatientAppointment;
-        };
+        }
 
         const referralEditCommand = {
             PatientId: this.patientId,
@@ -907,7 +907,7 @@ export class AncComponent implements OnInit, OnDestroy {
         const ancClientMonitoringEdit = this.ancService.EditClientMonitoring(clientMonitoringCommandEdit);
 
         const PatientAppointmentEdit = this.ancService.EditAppointment(this.appointmentCommand);
-        const referralEdit = this.ancService.EditReferral(referralEditCommand)
+        const referralEdit = this.ancService.EditReferral(referralEditCommand);
 
         forkJoin([
             AncvisitDetailsEdit,
