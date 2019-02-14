@@ -511,7 +511,7 @@ namespace IQCare.Common.BusinessProcess.Services
         //    }
         //}
 
-        public async Task<ApiInbox> UpdateAfyaMobileInbox(int id, string afyamobileId = null, bool processed = false, DateTime? dateProcessed = null, string logMessage = null)
+        public async Task<ApiInbox> UpdateAfyaMobileInbox(int id, string afyamobileId = null, bool processed = false, DateTime? dateProcessed = null, string logMessage = null, bool isSuccess = false)
         {
             try
             {
@@ -520,6 +520,7 @@ namespace IQCare.Common.BusinessProcess.Services
                 afyaMobileMessage.Processed = processed;
                 afyaMobileMessage.DateProcessed = dateProcessed;
                 afyaMobileMessage.LogMessage = logMessage;
+                afyaMobileMessage.IsSuccess = isSuccess;
 
                 _unitOfWork.Repository<ApiInbox>().Update(afyaMobileMessage);
                 await _unitOfWork.SaveAsync();
