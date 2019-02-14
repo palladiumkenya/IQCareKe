@@ -21,5 +21,6 @@ namespace IQCare.AIR.Core.Domain
         public bool DeleteFlag { get; private set; }
         public int  CreatedBy { get; private set; }
         public virtual ReportSection ReportSection { get;  set; }
+        public  virtual  ICollection<Indicator> Indicators { get; set; }
     }
 }

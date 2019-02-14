@@ -16,7 +16,7 @@ namespace IQCare.AIR.Infrastructure.EntityMapping
             builder.Property(x => x.Name).HasColumnName("SubSectionName");
             builder.Property(x => x.ReportSectionId).HasColumnName("SectionId");
 
-            builder.ToTable("Section");
+            builder.ToTable("SubSection");
         }
     }
 }

@@ -4,18 +4,18 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace IQCare.AIR.BusinessProcess.Command
+namespace IQCare.AIR.BusinessProcess.Queries
 {
-   public  class GetFormValueCommand:IRequest<Result<GetFormValueResponse>>
+    public class GetFormValueQuery : IRequest<Result<GetFormValueResponse>>
     {
-       public int Id { get; set; }
+        public int Id { get; set; }
 
-       
+
     }
     public class GetFormValueResponse
-{
+    {
         public List<ReportingValues> reportingValues { get; set; }
-}
+    }
 
     public class ReportingValues
     {
