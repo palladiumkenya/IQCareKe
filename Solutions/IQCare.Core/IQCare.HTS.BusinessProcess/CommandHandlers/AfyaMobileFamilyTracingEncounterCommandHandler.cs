@@ -10,6 +10,7 @@ using IQCare.HTS.Infrastructure;
 using IQCare.Library;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
+using Newtonsoft.Json;
 using Serilog;
 
 namespace IQCare.HTS.BusinessProcess.CommandHandlers
@@ -50,6 +51,8 @@ namespace IQCare.HTS.BusinessProcess.CommandHandlers
                         }
                     }
 
+                    var afyaMobileMessage = await registerPersonService.AddAfyaMobileInbox(DateTime.Now, request.MESSAGE_HEADER.MESSAGE_TYPE, afyaMobileId, JsonConvert.SerializeObject(request), false);
+
                     var indexClientIdentifiers = await registerPersonService.getPersonIdentifiers(indexClientAfyaMobileId, 10);
                     if (indexClientIdentifiers.Count > 0)
                     {
@@ -82,20 +85,27 @@ namespace IQCare.HTS.BusinessProcess.CommandHandlers
                         }
                         else
                         {
+                            //update message has been processed
+                            await registerPersonService.UpdateAfyaMobileInbox(afyaMobileMessage.Id, afyaMobileId, true, DateTime.Now, $"Family member with afyamobileid: {afyaMobileId} could not be found", false);
                             return Result<string>.Invalid($"Family member with afyamobileid: {afyaMobileId} could not be found");
                         }
                     }
                     else
                     {
+                        //update message has been processed
+                        await registerPersonService.UpdateAfyaMobileInbox(afyaMobileMessage.Id, afyaMobileId, true, DateTime.Now, $"Index client with afyamobileid: {indexClientAfyaMobileId} could not be found for family member: {afyaMobileId}", false);
                         return Result<string>.Invalid($"Index client with afyamobileid: {indexClientAfyaMobileId} could not be found for family member: {afyaMobileId}");
                     }
 
+                    //update message has been processed
+                    await registerPersonService.UpdateAfyaMobileInbox(afyaMobileMessage.Id, afyaMobileId, true, DateTime.Now, $"Successfully synchronized family tracing for afyamobileid: {afyaMobileId}", true);
+                    trans.Commit();
                     return Result<string>.Valid($"Successfully synchronized family tracing for afyamobileid: {afyaMobileId}");
                 }
                 catch (Exception ex)
                 {
                     trans.Rollback();
-                    Log.Error(ex.Message);
+                    Log.Error($"Failed to synchronize family tracing for clientId: {afyaMobileId} " + ex.Message + " " + ex.InnerException);
                     return Result<string>.Invalid($"Failed to synchronize family tracing for clientId: {afyaMobileId} " + ex.Message + " " + ex.InnerException);
                 }
             }

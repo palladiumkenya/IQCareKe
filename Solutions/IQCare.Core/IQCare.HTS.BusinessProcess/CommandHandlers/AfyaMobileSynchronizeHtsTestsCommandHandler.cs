@@ -12,6 +12,7 @@ using IQCare.HTS.Infrastructure;
 using IQCare.Library;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
+using Newtonsoft.Json;
 using Serilog;
 
 namespace IQCare.HTS.BusinessProcess.CommandHandlers
@@ -30,7 +31,6 @@ namespace IQCare.HTS.BusinessProcess.CommandHandlers
         public async Task<Result<string>> Handle(AfyaMobileSynchronizeHtsTestsCommand request, CancellationToken cancellationToken)
         {
             string afyaMobileId = String.Empty;
-            string enrollmentNo = string.Empty;
 
             using (var trans = _htsUnitOfWork.Context.Database.BeginTransaction())
             {
@@ -42,22 +42,13 @@ namespace IQCare.HTS.BusinessProcess.CommandHandlers
                     //Person Identifier
                     for (int j = 0; j < request.INTERNAL_PATIENT_ID.Count; j++)
                     {
-                        if (request.INTERNAL_PATIENT_ID[j].ASSIGNING_AUTHORITY ==
-                            "HTS" && request.INTERNAL_PATIENT_ID[j]
-                                .IDENTIFIER_TYPE == "HTS_SERIAL")
-                        {
-                            enrollmentNo = request.INTERNAL_PATIENT_ID[j].ID;
-                        }
-
-                        if (request.INTERNAL_PATIENT_ID[j].IDENTIFIER_TYPE ==
-                            "AFYA_MOBILE_ID" &&
-                            request.INTERNAL_PATIENT_ID[j].ASSIGNING_AUTHORITY ==
-                            "AFYAMOBILE")
+                        if (request.INTERNAL_PATIENT_ID[j].IDENTIFIER_TYPE == "AFYA_MOBILE_ID" && request.INTERNAL_PATIENT_ID[j].ASSIGNING_AUTHORITY == "AFYAMOBILE")
                         {
                             afyaMobileId = request.INTERNAL_PATIENT_ID[j].ID;
                         }
                     }
-
+                    var afyaMobileMessage = await registerPersonService.AddAfyaMobileInbox(DateTime.Now, request.MESSAGE_HEADER.MESSAGE_TYPE, afyaMobileId, JsonConvert.SerializeObject(request), false);
+                    
                     //check if person already exists
                     var identifiers = await registerPersonService.getPersonIdentifiers(afyaMobileId, 10);
                     if (identifiers.Count > 0)
@@ -130,17 +121,22 @@ namespace IQCare.HTS.BusinessProcess.CommandHandlers
                         }
                         else
                         {
-                            Result<string>.Invalid(
-                                $"HTS PRE-TEST with encounter number: {encounterNumber} could not be found");
+                            //update message has been processed
+                            await registerPersonService.UpdateAfyaMobileInbox(afyaMobileMessage.Id, afyaMobileId, true, DateTime.Now, $"HTS PRE-TEST with encounter number: {encounterNumber} could not be found", false);
+                            Result<string>.Invalid($"HTS PRE-TEST with encounter number: {encounterNumber} could not be found");
                         }
                     }
                     else
                     {
+                        //update message has been processed
+                        await registerPersonService.UpdateAfyaMobileInbox(afyaMobileMessage.Id, afyaMobileId, true, DateTime.Now, $"Person with afyaMobileId: {afyaMobileId} could not be found", false);
                         return Result<string>.Invalid($"Person with afyaMobileId: {afyaMobileId} could not be found");
                     }
 
+                    //update message has been processed
+                    await registerPersonService.UpdateAfyaMobileInbox(afyaMobileMessage.Id, afyaMobileId, true, DateTime.Now, $"Successfully synchronized HTS tests for afyamobileid: {afyaMobileId}", true);
                     trans.Commit();
-                    return Result<string>.Valid("Successfully synchronized HTS tests");
+                    return Result<string>.Valid($"Successfully synchronized HTS tests for afyamobileid: {afyaMobileId}");
                 }
                 catch (Exception ex)
                 {

@@ -38,21 +38,18 @@ namespace IQCare.HTS.BusinessProcess.CommandHandlers
                     {
                         for (int j = 0; j < request.PARTNERS[i].PATIENT_IDENTIFICATION.INTERNAL_PATIENT_ID.Count; j++)
                         {
-                            if (request.PARTNERS[i].PATIENT_IDENTIFICATION.INTERNAL_PATIENT_ID[j].IDENTIFIER_TYPE ==
-                                "AFYA_MOBILE_ID")
+                            if (request.PARTNERS[i].PATIENT_IDENTIFICATION.INTERNAL_PATIENT_ID[j].IDENTIFIER_TYPE == "AFYA_MOBILE_ID")
                             {
                                 afyaMobileId = request.PARTNERS[i].PATIENT_IDENTIFICATION.INTERNAL_PATIENT_ID[j].ID;
                             }
 
-                            if (request.PARTNERS[i].PATIENT_IDENTIFICATION.INTERNAL_PATIENT_ID[j].IDENTIFIER_TYPE ==
-                                "INDEX_CLIENT_AFYAMOBILE_ID")
+                            if (request.PARTNERS[i].PATIENT_IDENTIFICATION.INTERNAL_PATIENT_ID[j].IDENTIFIER_TYPE == "INDEX_CLIENT_AFYAMOBILE_ID")
                             {
-                                indexClientAfyaMobileId =
-                                    request.PARTNERS[i].PATIENT_IDENTIFICATION.INTERNAL_PATIENT_ID[j].ID;
+                                indexClientAfyaMobileId = request.PARTNERS[i].PATIENT_IDENTIFICATION.INTERNAL_PATIENT_ID[j].ID;
                             }
                         }
 
-                        var afyaMobileMessage = await registerPersonService.AddAfyaMobileInbox(DateTime.Now, request.MESSAGE_HEADER.MESSAGE_TYPE, indexClientAfyaMobileId, JsonConvert.SerializeObject(request), false);
+                        var afyaMobileMessage = await registerPersonService.AddAfyaMobileInbox(DateTime.Now, request.MESSAGE_HEADER.MESSAGE_TYPE, afyaMobileId, JsonConvert.SerializeObject(request), false);
 
                         string firstName = request.PARTNERS[i].PATIENT_IDENTIFICATION.PATIENT_NAME.FIRST_NAME;
                         string middleName = request.PARTNERS[i].PATIENT_IDENTIFICATION.PATIENT_NAME.MIDDLE_NAME;
@@ -132,16 +129,22 @@ namespace IQCare.HTS.BusinessProcess.CommandHandlers
                         }
                         else
                         {
+                            //update message has been processed
+                            await registerPersonService.UpdateAfyaMobileInbox(afyaMobileMessage.Id, afyaMobileId, true, DateTime.Now, $"Index clientid: {indexClientAfyaMobileId} for partnerid: {afyaMobileId} not found", false);
                             return Result<string>.Invalid($"Index clientid: {indexClientAfyaMobileId} for partnerid: {afyaMobileId} not found");
                         }
-                    }
 
+                        //update message has been processed
+                        await registerPersonService.UpdateAfyaMobileInbox(afyaMobileMessage.Id, afyaMobileId, true, DateTime.Now, "success", true);
+                    }
+                    
+                    trans.Commit();
                     return Result<string>.Valid($"Successfully synchronized family/partner: {afyaMobileId}");
                 }
                 catch (Exception ex)
                 {
                     trans.Rollback();
-                    Log.Error(ex.Message);
+                    Log.Error($"Failed to synchronize family/partner: {afyaMobileId} for clientid: {indexClientAfyaMobileId} " + ex.Message + " " + ex.InnerException);
                     return Result<string>.Invalid($"Failed to synchronize family/partner: {afyaMobileId} for clientid: {indexClientAfyaMobileId} " + ex.Message + " " + ex.InnerException);
                 }
             }
