@@ -71,9 +71,11 @@ namespace IQCare.HTS.BusinessProcess.CommandHandlers
                        
                         int sex = request.FAMILY[i].PATIENT_IDENTIFICATION.SEX;
                         string nickName = (request.FAMILY[i].PATIENT_IDENTIFICATION.PATIENT_NAME.NICK_NAME == null) ? "" : request.FAMILY[i].PATIENT_IDENTIFICATION.PATIENT_NAME.NICK_NAME.ToString();
-                        string ward = (request.FAMILY[i].PATIENT_IDENTIFICATION.PATIENT_ADDRESS.PHYSICAL_ADDRESS.WARD == null) ? "" : request.FAMILY[i].PATIENT_IDENTIFICATION.PATIENT_ADDRESS.PHYSICAL_ADDRESS.WARD.ToString();
-                        string county = (request.FAMILY[i].PATIENT_IDENTIFICATION.PATIENT_ADDRESS.PHYSICAL_ADDRESS.COUNTY == null) ? "" : request.FAMILY[i].PATIENT_IDENTIFICATION.PATIENT_ADDRESS.PHYSICAL_ADDRESS.COUNTY.ToString();
-                        string subcounty = (request.FAMILY[i].PATIENT_IDENTIFICATION.PATIENT_ADDRESS.PHYSICAL_ADDRESS.SUB_COUNTY == null) ? "" : request.FAMILY[i].PATIENT_IDENTIFICATION.PATIENT_ADDRESS.PHYSICAL_ADDRESS.SUB_COUNTY.ToString();
+
+                        int ward = request.FAMILY[i].PATIENT_IDENTIFICATION.PATIENT_ADDRESS.PHYSICAL_ADDRESS.WARD;
+                        int county = request.FAMILY[i].PATIENT_IDENTIFICATION.PATIENT_ADDRESS.PHYSICAL_ADDRESS.COUNTY;
+                        int subcounty = request.FAMILY[i].PATIENT_IDENTIFICATION.PATIENT_ADDRESS.PHYSICAL_ADDRESS.SUB_COUNTY;
+
                         string educationlevel = (request.FAMILY[i].PATIENT_IDENTIFICATION.EDUCATIONLEVEL == null) ? "" : request.FAMILY[i].PATIENT_IDENTIFICATION.EDUCATIONLEVEL.ToString();
                         string educationoutcome = (request.FAMILY[i].PATIENT_IDENTIFICATION.EDUCATIONOUTCOME == null) ? "" : request.FAMILY[i].PATIENT_IDENTIFICATION.EDUCATIONOUTCOME.ToString();
                         string occupation = (request.FAMILY[i].PATIENT_IDENTIFICATION.OCCUPATION == null) ? "" : request.FAMILY[i].PATIENT_IDENTIFICATION.OCCUPATION.ToString();
@@ -106,10 +108,11 @@ namespace IQCare.HTS.BusinessProcess.CommandHandlers
                                 await registerPersonService.UpdateMaritalStatus(partnetPersonIdentifiers[0].PersonId, maritalStatusId);
                                 if (!string.IsNullOrWhiteSpace(mobileNumber))
                                     await registerPersonService.UpdatePersonContact(partnetPersonIdentifiers[0].PersonId, null, mobileNumber);
-                                if (!string.IsNullOrWhiteSpace(landmark) || (!string.IsNullOrWhiteSpace(county)) || (!string.IsNullOrWhiteSpace(subcounty)) || (!string.IsNullOrWhiteSpace(ward)))
+                                if (!string.IsNullOrWhiteSpace(landmark) || (county > 0) || (subcounty > 0) || (ward > 0))
                                 {
                                    var personlocation= await registerPersonService.UpdatePersonLocation(partnetPersonIdentifiers[0].PersonId, landmark,ward,county,subcounty,Userid);
                                 }
+
                                 if(!string.IsNullOrWhiteSpace(educationlevel))
                                 {
                                    var personeducation= await educationLevelService.UpdatePersonEducation(partnetPersonIdentifiers[0].PersonId, educationlevel, educationoutcome,Userid);
@@ -223,7 +226,7 @@ namespace IQCare.HTS.BusinessProcess.CommandHandlers
                                     var partnerLocation = await registerPersonService.addPersonLocation(person.Id, 0, 0, 0, "", landmark, providerId);
                                 }*/
 
-                                if (!string.IsNullOrWhiteSpace(landmark) || (!string.IsNullOrWhiteSpace(county)) || (!string.IsNullOrWhiteSpace(subcounty)) || (!string.IsNullOrWhiteSpace(ward)))
+                                if (!string.IsNullOrWhiteSpace(landmark) || (county > 0) || (subcounty > 0) || (ward > 0))
                                 {
                                   var partnerLocation=  await registerPersonService.UpdatePersonLocation(person.Id, landmark, ward, county, subcounty, Userid);
                                 }
