@@ -75,12 +75,13 @@
 
                 <div class="col-md-3">
                 </div>
-                <div class="col-md-3">
+                <div class="col-md-1"></div>
+                <div class="col-md-2">
                     <div class="col-md-12 col-xs-12 col-sm-12">
-                        <label>Duplicate finder</label>
+                        <label><span class="fa fa-search-plus"></span> Duplicate finder</label>
                     </div>
-                    <div class="col-md-12 col-xs-12 col-sm-12">
-                        <a id="btnFindDuplicate" class="btn btn-info btn-lg  btn-block  fa fa-copy" href="PatientDuplicateFinder.aspx"> Find Duplicates</a>
+                    <div class="col-md-12 col-xs-12 col-sm-12" >
+                        <a id="btnFindDuplicate" class="btn btn-success btn-lg  btn-block  fa fa-object-ungroup" href="PatientDuplicateFinder.aspx"> Find Duplicates</a>
                     </div>
                 </div>
             </div>
