@@ -204,5 +204,28 @@ namespace BusinessProcess.CCC.Patient
                 return personId;
             }
         }
+
+        public int MergePatientRecords(int preferredPatientId, int unpreferredPatientId, int userId)
+        {
+            ClsObject obj = new ClsObject();
+            ClsUtility.Init_Hashtable();
+
+            ClsUtility.AddExtendedParameters("@preferredPatientId", SqlDbType.Int, preferredPatientId);
+            ClsUtility.AddExtendedParameters("@unpreferredPatientId", SqlDbType.Int, unpreferredPatientId);
+            ClsUtility.AddExtendedParameters("@userId", SqlDbType.Int, userId);
+
+            int i;
+
+            try
+            {
+                obj.ReturnObject(ClsUtility.theParams, "sp_MergePatientData", ClsUtility.ObjectEnum.ExecuteNonQuery);
+                i = 1;
+
+            } catch (Exception ex) {
+                i = -1;
+            }
+
+            return i;
+        }
     }
 }
