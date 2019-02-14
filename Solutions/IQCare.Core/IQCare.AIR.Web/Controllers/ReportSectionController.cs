@@ -23,6 +23,7 @@ namespace IQCare.AIR.Web.Controllers
         public async Task<IActionResult> GetReportSectionByFormId(int id)
         {
             var response = await _mediator.Send(new GetReportSectionQuery {FormId = id}, HttpContext.RequestAborted);
+
             if(!response.IsValid)
               return BadRequest(response);
 
@@ -38,6 +39,7 @@ namespace IQCare.AIR.Web.Controllers
 
             if (!response.IsValid)
                 return BadRequest(response);
+
             return Ok(response.Value);
         }
 
