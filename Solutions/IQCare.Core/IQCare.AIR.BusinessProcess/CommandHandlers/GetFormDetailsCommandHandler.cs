@@ -35,7 +35,7 @@ namespace IQCare.AIR.BusinessProcess.CommandHandlers
                 List<ReportSubSection> reportsubsections = new List<ReportSubSection>();
                 List<Indicator> ids = new List<Indicator>();
                 IndicatorDetails idl = new IndicatorDetails();
-                List<IndicatorDetails> idls=new List<IndicatorDetails>()l
+                List<IndicatorDetails> idls = new List<IndicatorDetails>();
 
                 
                 if (request.FormId > 0)

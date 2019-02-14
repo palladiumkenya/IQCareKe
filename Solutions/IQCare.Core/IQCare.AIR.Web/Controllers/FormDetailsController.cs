@@ -13,23 +13,23 @@ namespace IQCare.AIR.Web.Controllers
     public class FormDetailsController : Controller
     {
         private readonly IMediator _mediator;
-        public  FormDetailsController(IMediator mediator)
+        public FormDetailsController(IMediator mediator)
         {
             _mediator = mediator ?? throw new ArgumentNullException(nameof(mediator));
         }
 
 
         [HttpGet("getFormDetails")]
-        public async  Task<IActionResult> GetFormDetails (int FormId)
+        public async Task<IActionResult> GetFormDetails(int FormId)
         {
             var response = await _mediator.Send(new GetFormDetailsCommand
             {
                 FormId = FormId
             }, Request.HttpContext.RequestAborted);
-            if(response.IsValid)
+            if (response.IsValid)
             {
                 return Ok(response.Value);
-                
+
             }
             else
             {
@@ -38,6 +38,24 @@ namespace IQCare.AIR.Web.Controllers
 
         }
 
-       
+        [HttpGet("getFormData")]
+        public async Task<IActionResult> GetFormData(int ReportingId)
+        {
+            var Response = await _mediator.Send(new GetFormValueCommand
+            {
+                Id = ReportingId
+            }, Request.HttpContext.RequestAborted);
+            if(Response.IsValid)
+            {
+                return Ok(Response.Value);
+            }
+            else
+            {
+                return BadRequest(Response);
+            }
+        }
+
     }
+       
+    
 }
