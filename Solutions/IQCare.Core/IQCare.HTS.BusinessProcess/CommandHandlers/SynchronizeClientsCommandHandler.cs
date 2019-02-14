@@ -79,9 +79,10 @@ namespace IQCare.HTS.BusinessProcess.CommandHandlers
                         string landmark = request.CLIENTS[i].PATIENT_IDENTIFICATION.PATIENT_ADDRESS.PHYSICAL_ADDRESS
                             .LANDMARK;
                        
-                        string ward = (request.CLIENTS[i].PATIENT_IDENTIFICATION.PATIENT_ADDRESS.PHYSICAL_ADDRESS.WARD == null) ? "" : request.CLIENTS[i].PATIENT_IDENTIFICATION.PATIENT_ADDRESS.PHYSICAL_ADDRESS.WARD.ToString();
-                        string county = (request.CLIENTS[i].PATIENT_IDENTIFICATION.PATIENT_ADDRESS.PHYSICAL_ADDRESS.COUNTY == null) ? "" : request.CLIENTS[i].PATIENT_IDENTIFICATION.PATIENT_ADDRESS.PHYSICAL_ADDRESS.COUNTY.ToString();
-                        string subcounty = (request.CLIENTS[i].PATIENT_IDENTIFICATION.PATIENT_ADDRESS.PHYSICAL_ADDRESS.SUB_COUNTY == null) ? "" : request.CLIENTS[i].PATIENT_IDENTIFICATION.PATIENT_ADDRESS.PHYSICAL_ADDRESS.SUB_COUNTY.ToString();
+                        int ward = request.CLIENTS[i].PATIENT_IDENTIFICATION.PATIENT_ADDRESS.PHYSICAL_ADDRESS.WARD;
+                        int county = request.CLIENTS[i].PATIENT_IDENTIFICATION.PATIENT_ADDRESS.PHYSICAL_ADDRESS.COUNTY;
+                        int subcounty = request.CLIENTS[i].PATIENT_IDENTIFICATION.PATIENT_ADDRESS.PHYSICAL_ADDRESS.SUB_COUNTY;
+
                         string educationlevel = (request.CLIENTS[i].PATIENT_IDENTIFICATION.EDUCATIONLEVEL == null) ? "" : request.CLIENTS[i].PATIENT_IDENTIFICATION.EDUCATIONLEVEL.ToString();
                         string educationoutcome = (request.CLIENTS[i].PATIENT_IDENTIFICATION.EDUCATIONOUTCOME == null) ? "" : request.CLIENTS[i].PATIENT_IDENTIFICATION.EDUCATIONOUTCOME.ToString();
                         string occupation = (request.CLIENTS[i].PATIENT_IDENTIFICATION.OCCUPATION == null) ? "" : request.CLIENTS[i].PATIENT_IDENTIFICATION.OCCUPATION.ToString();
@@ -179,7 +180,7 @@ namespace IQCare.HTS.BusinessProcess.CommandHandlers
                             {
                                 var updatedLocation = await registerPersonService.UpdatePersonLocation(identifiers[0].PersonId, landmark);
                             }*/
-                            if (!string.IsNullOrWhiteSpace(landmark) || (!string.IsNullOrWhiteSpace(county)) || (!string.IsNullOrWhiteSpace(subcounty)) || (!string.IsNullOrWhiteSpace(ward)))
+                            if (!string.IsNullOrWhiteSpace(landmark) || (county>0) || (subcounty>0) || (ward>0))
                             {
                                 var updatedLocation = await registerPersonService.UpdatePersonLocation(identifiers[0].PersonId, landmark, ward, county, subcounty, userId);
                             }
@@ -668,7 +669,7 @@ namespace IQCare.HTS.BusinessProcess.CommandHandlers
                                 //{
                                 //    var personLocation = await registerPersonService.addPersonLocation(person.Id, 0, 0, 0, "", landmark, userId);
                                 //}
-                                if (!string.IsNullOrWhiteSpace(landmark) || (!string.IsNullOrWhiteSpace(county)) || (!string.IsNullOrWhiteSpace(subcounty)) || (!string.IsNullOrWhiteSpace(ward)))
+                                if (!string.IsNullOrWhiteSpace(landmark) || (county>0) || (subcounty>0) || (ward>0))
                                 {
                                     var personLocation = await registerPersonService.UpdatePersonLocation(person.Id, landmark, ward, county, subcounty, userId);
                                 }

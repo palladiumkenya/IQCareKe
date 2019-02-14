@@ -10,6 +10,7 @@ using IQCare.HTS.Infrastructure;
 using IQCare.Library;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
+using Newtonsoft.Json;
 using Serilog;
 
 namespace IQCare.HTS.BusinessProcess.CommandHandlers
@@ -28,7 +29,6 @@ namespace IQCare.HTS.BusinessProcess.CommandHandlers
         public async Task<Result<string>> Handle(AfyaMobileSynchronizeTracingCommand request, CancellationToken cancellationToken)
         {
             string afyaMobileId = String.Empty;
-            string enrollmentNo = string.Empty;
 
             using (var trans = _htsUnitOfWork.Context.Database.BeginTransaction())
             {
@@ -37,25 +37,15 @@ namespace IQCare.HTS.BusinessProcess.CommandHandlers
 
                 try
                 {
-                    var facilityId = request.MESSAGE_HEADER.SENDING_FACILITY;
                     //Person Identifier
                     for (int j = 0; j < request.INTERNAL_PATIENT_ID.Count; j++)
                     {
-                        if (request.INTERNAL_PATIENT_ID[j].ASSIGNING_AUTHORITY ==
-                            "HTS" && request.INTERNAL_PATIENT_ID[j]
-                                .IDENTIFIER_TYPE == "HTS_SERIAL")
-                        {
-                            enrollmentNo = request.INTERNAL_PATIENT_ID[j].ID;
-                        }
-
-                        if (request.INTERNAL_PATIENT_ID[j].IDENTIFIER_TYPE ==
-                            "AFYA_MOBILE_ID" &&
-                            request.INTERNAL_PATIENT_ID[j].ASSIGNING_AUTHORITY ==
-                            "AFYAMOBILE")
+                        if (request.INTERNAL_PATIENT_ID[j].IDENTIFIER_TYPE == "AFYA_MOBILE_ID" && request.INTERNAL_PATIENT_ID[j].ASSIGNING_AUTHORITY == "AFYAMOBILE")
                         {
                             afyaMobileId = request.INTERNAL_PATIENT_ID[j].ID;
                         }
                     }
+                    var afyaMobileMessage = await registerPersonService.AddAfyaMobileInbox(DateTime.Now, request.MESSAGE_HEADER.MESSAGE_TYPE, afyaMobileId, JsonConvert.SerializeObject(request), false);
 
                     //Tracing
                     var enrollmentTracing = await _unitOfWork.Repository<LookupItemView>()
@@ -87,16 +77,20 @@ namespace IQCare.HTS.BusinessProcess.CommandHandlers
                     }
                     else
                     {
+                        //update message has been processed
+                        await registerPersonService.UpdateAfyaMobileInbox(afyaMobileMessage.Id, afyaMobileId, true, DateTime.Now, $"Person with afyaMobileId: {afyaMobileId} could not be found", false);
                         return Result<string>.Invalid($"Person with afyaMobileId: {afyaMobileId} could not be found");
                     }
 
+                    //update message has been processed
+                    await registerPersonService.UpdateAfyaMobileInbox(afyaMobileMessage.Id, afyaMobileId, true, DateTime.Now, $"Successfully synchronized HTS Tracing for afyamobileid: {afyaMobileId}", true);
                     trans.Commit();
-                    return Result<string>.Valid("Successfully synchronized HTS Tracing");
+                    return Result<string>.Valid($"Successfully synchronized HTS Tracing for afyamobileid: {afyaMobileId}");
                 }
                 catch (Exception ex)
                 {
                     trans.Rollback();
-                    Log.Error(ex.Message);
+                    Log.Error($"Failed to synchronize Hts Referral for clientid: {afyaMobileId} " + ex.Message + " " + ex.InnerException);
                     return Result<string>.Invalid($"Failed to synchronize Hts Referral for clientid: {afyaMobileId} " + ex.Message + " " + ex.InnerException);
                 }
             }
