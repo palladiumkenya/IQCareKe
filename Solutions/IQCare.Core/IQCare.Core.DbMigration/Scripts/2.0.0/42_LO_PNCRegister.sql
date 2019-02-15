@@ -2,15 +2,15 @@ IF OBJECT_ID('dbo.[PNC Register]', 'V') IS NOT NULL
     DROP VIEW [dbo].[PNC Register]
 GO
 
-CREATE VIEW [dbo].[PNC Register]
+Create VIEW [dbo].[PNC Register]
 AS
 SELECT  distinct      a.Ptn_Pk, b.Id,d.VisitDate, b.FacilityId, c.IdentifierValue AS [PNC Register Number], a.FirstName, a.MiddleName, a.LastName, a.VillageName, a.Phone, a.DOB, a.Sex,delivery.DateOfDelivery,''PlaceOfDelivery, delivery.ModeOfDelivery, 
 						 g.VisitType, h.Name AS ServiceArea,k.Temperature, k.[HeartRate], k.BPSystolic, k.BPDiastolic, k.Muac,pallor.Pallor,breast.Breast,Uterus.Uterus,PPH.PPH,C_SectionSite.C_SectionSite,Lochia.Lochia,Episiotomy.Episiotomy,
 						 '' as Infections,Breastfeeding.Breastfeeding,g.VisitNumber,case when g.[DaysPostPartum] between 0 and 2 then 1 when g.[DaysPostPartum] between 3 and 30 then 2 when g.[DaysPostPartum] between 31 and 44 then 3 end as [DaysPostPartum], 
-						 '' [Prior Known Status], ''[HIV testing],HIVTest.OneKitId, HIVTest.OneLotNumber, HIVTest.OneExpiryDate, HIVTest.FinalTestOneResult, HIVTest.twokitid, HIVTest.twolotnumber, HIVTest.twoexpirydate, HIVTest.FinalTestTwoResult, [Started HAART PNC],
+						 '' [Prior Known Status], ''[HIV testing],HIVTest.OneKitId, HIVTest.OneLotNumber, HIVTest.OneExpiryDate, HIVTest.FinalTestOneResult, HIVTest.twokitid, HIVTest.twolotnumber, HIVTest.twoexpirydate, HIVTest.FinalTestTwoResult, FinalResult,[Started HAART PNC],
 						 ----Remember <=6wks and >6wks
 						 z.FinalResult [FinalResult <=6wks],z.FinalResult [FinalResult >6wks], [AZT for Baby] [AZT for Baby <=6wks],[NVP for Baby] [NVP for Baby <=6wks],[AZT for Baby] [AZT for Baby >6wks],[NVP for Baby] [NVP for Baby >6wks],
-						 partnerTesting.[PartnerTested],partnerTesting.[PartnerHIVResult],Fistula_Screening.Fistula_Screening,''[Cacx Method],'' [Cacx Result],'' [PNC Exercises],''[Modern FP] ,diag.Diagnosis
+						 partnerTesting.[PartnerTested],partnerTesting.[PartnerHIVResult],Fistula_Screening.Fistula_Screening,Cacx.ScreeningCategory [Cacx Method],Cacx.Results [Cacx Result],'' [PNC Exercises],FP.FP [Modern FP] ,diag.Diagnosis
 FROM            dbo.mst_Patient AS a INNER JOIN
                          dbo.Patient AS b ON a.Ptn_Pk = b.ptn_pk INNER JOIN
                           dbo.PersonIdentifier c ON b.PersonId = c.PersonId INNER JOIN
@@ -73,6 +73,13 @@ FROM            dbo.mst_Patient AS a INNER JOIN
 														 dbo.LookupItemView d ON d.ItemId = a.[PartnerTested] LEFT OUTER JOIN
 														 dbo.LookupItemView e ON e.ItemId = a.[PartnerHIVResult]
 								WHERE        (c.ItemName = 'pnc-encounter'))partnerTesting on partnerTesting.PatientId=b.Id and partnerTesting.PatientMasterVisitId=d.id left outer join
+								
+						(SELECT a.[PatientId],b.ItemName FP,PatientMasterVisitId FROM [dbo].[PatientFamilyPlanningMethod] a inner join lookupitemview b on b.ItemId=a.[FPMethodId] inner join [PatientFamilyPlanning]c on c.[Id]=a.PatientFPId
+								inner join [PatientMasterVisit] d on d.[Id]=c.[PatientMasterVisitId]  where b.ItemName not in ('UND') or [FPMethodId] is null)FP on FP.PatientId=b.Id and FP.PatientMasterVisitId=d.id	left outer join
+						(SELECT distinct [PatientId],[PatientMasterVisitId],[ScreeningDate],c.Itemname ScreeningCategory,d.itemname Results,[VisitDate]
+							FROM [dbo].[PatientScreening] a inner join lookupitemview b on b.masterid=a.[ScreeningTypeId]
+							inner join lookupitemview c on c.itemid=a.[ScreeningCategoryId] inner join lookupitemview d on d.itemid=a.[ScreeningValueId]
+							where b.mastername='CacxMethod')Cacx on Cacx.PatientId=b.Id and Cacx.PatientMasterVisitId=d.id	 left join
 
                         (SELECT DISTINCT 
                                                          e.PersonId, one.kitid AS OneKitId, one.KitLotNumber AS OneLotNumber, one.outcome AS FinalTestOneResult, two.outcome AS FinalTestTwoResult, one.ExpiryDate AS OneExpiryDate, two.kitid AS twokitid, 
@@ -103,6 +110,15 @@ FROM            dbo.mst_Patient AS a INNER JOIN
 								dbo.LookupItemView AS lk ON lk.ItemId = her.FinalResult
 								WHERE  (lk1.ItemName = 'pnc-encounter')) AS z ON z.PersonId = b.PersonId
 WHERE        (h.Name = 'PNC')
+
+
+
+
+
+
+
+
+
 
 
 GO

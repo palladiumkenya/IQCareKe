@@ -155,6 +155,7 @@
     <None Remove="Scripts\2.0.0\43_LO_MaternityRegister.sql" />
     <None Remove="Scripts\2.0.0\44_LO_IQCareViews.sql" />
     <None Remove="Scripts\2.0.0\45_LO_ANCRegister.sql" />
+    <None Remove="Scripts\2.0.0\46_LO_HEIRegister.sql" />
   </ItemGroup>
 
   <ItemGroup>
@@ -305,6 +306,7 @@
     <EmbeddedResource Include="Scripts\2.0.0\43_LO_MaternityRegister.sql" />
     <EmbeddedResource Include="Scripts\2.0.0\44_LO_IQCareViews.sql" />
     <EmbeddedResource Include="Scripts\2.0.0\45_LO_ANCRegister.sql" />
+    <EmbeddedResource Include="Scripts\2.0.0\46_LO_HEIRegister.sql" />
   </ItemGroup>
 
   <ItemGroup>
