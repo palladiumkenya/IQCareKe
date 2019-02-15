@@ -31,7 +31,7 @@ namespace IQCare.AIR.Web.Controllers
             return Ok(response.Value);
         }
 
-        [HttpGet("getFormData")]
+        [HttpGet("{Id}")]
         public async Task<IActionResult> GetFormData(int reportingId)
         {
             var response = await _mediator.Send(new GetFormValueQuery()

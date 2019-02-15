@@ -30,7 +30,14 @@ namespace IQCare.AIR.BusinessProcess.QueryHandlers
                 var reportSections = _airUnitOfWork.Repository<ReportSection>()
                     .Get(x => x.ReportingFormId == request.FormId).Include(x => x.ReportSubSections).AsEnumerable();
 
-                var reportSectionViewModel = _mapper.Map<List<ReportSectionViewModel>>(reportSections);
+                var reportSectionViewModel = reportSections.Select(x => new ReportSectionViewModel
+                {
+                    Id = x.Id,
+                    Name = x.Name,
+                    DateCreated = x.DateCreated,
+                    ReportingFormId = x.ReportingFormId,
+                    ReportSubSections = _mapper.Map<List<ReportSubSectionViewModel>>(x.ReportSubSections)
+                }).ToList();
 
                 return Task.FromResult(Result<List<ReportSectionViewModel>>.Valid(reportSectionViewModel));
             }

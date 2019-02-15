@@ -7,9 +7,18 @@ namespace IQCare.AIR.Core.Domain
 {
     public class ReportingPeriod
     {
+
         public ReportingPeriod()
         {
+            
+        }
 
+        public ReportingPeriod(int reportingFormId, DateTime reportDate,int createdBy)
+        {
+            ReportingFormId = reportingFormId;
+            ReportDate = reportDate;
+            DateCreated = DateTime.Now;
+            CreatedBy = createdBy;
         }
 
         [Key]
