@@ -26,7 +26,7 @@ namespace IQCare.AIR.Infrastructure.UnitOfWork
 
             if (!repositories.ContainsKey(type))
             {
-                var repositoryType = typeof(IAirRepository<>);
+                var repositoryType = typeof(AirRepository<>);
                 var repositoryInstance = Activator.CreateInstance(repositoryType.MakeGenericType(typeof(T)), dbContext);
                 repositories.Add(type, repositoryInstance);
             }

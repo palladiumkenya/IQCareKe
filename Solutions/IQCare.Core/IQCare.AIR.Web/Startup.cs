@@ -2,8 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
+using IQCare.AIR.BusinessProcess.MapperProfiles;
+using IQCare.AIR.BusinessProcess.Queries;
 using IQCare.AIR.Infrastructure.Installers;
 using IQCare.SharedKernel.Infrastructure.Helpers;
+using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -32,6 +36,9 @@ namespace IQCare.AIR.Web
         {
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
             services.AddAirDbContext(IQCareConnectionString);
+
+            services.AddMediatR(typeof(GetReportingFormDetailsQuery).Assembly);
+            services.AddAutoMapper(typeof(IndicatorProfile).Assembly);
 
         }
 

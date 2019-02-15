@@ -53,7 +53,7 @@ namespace IQCare.AIR.BusinessProcess.Services
         {
             try
             {
-                var Sections = await _airUnitWork.Repository<ReportSection>().Get(x => x.ReportigFormId == FormId).ToListAsync();
+                var Sections = await _airUnitWork.Repository<ReportSection>().Get(x => x.ReportingFormId == FormId).ToListAsync();
                 return Sections;
             }
             catch (Exception ex)

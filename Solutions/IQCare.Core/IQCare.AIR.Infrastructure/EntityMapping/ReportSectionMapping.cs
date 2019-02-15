@@ -14,7 +14,7 @@ namespace IQCare.AIR.Infrastructure.EntityMapping
             builder.Property(x => x.DateCreated).HasColumnName("CreateDate");
             builder.Property(x => x.DateUpdated).HasColumnName("UpdateDate");
             builder.Property(x => x.Name).HasColumnName("SectionName");
-            builder.Property(x => x.ReportigFormId).HasColumnName("FormId");
+            builder.Property(x => x.ReportingFormId).HasColumnName("FormId");
 
             builder.ToTable("Section");
         }
