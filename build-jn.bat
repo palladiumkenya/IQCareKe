@@ -136,7 +136,7 @@ dotnet publish Solutions/IQCare.Core/IQCare/IQCare.csproj -o ../../../package/ap
 @echo "********** Building IQCare LAB **********" >> %log%
 @echo ********** Building IQCare LAB **********
 
-dotnet publish Solutions/IQCare.Core/IQCare.Lab.WebApi/IQCare.Lab.WebApi.csproj -o ../../../package/lab
+dotnet publish Solutions/IQCare.Core/IQCare.Lab.WebApi/IQCare.Lab.WebApi.csproj -o ../../../package/lab -v d
 
 @echo ********** END OF BUILINDING IQCare LAB ********** >> %log%
 @echo ********** END OF BUILINDING IQCare LAB ********** >> %log%
@@ -150,6 +150,16 @@ dotnet publish Solutions/IQCare.Core/IQCare.Maternity.WebApi/IQCare.Maternity.We
 
 @echo ********** END OF BUILINDING IQCare MATERNITY ********** >> %log%
 @echo ********** END OF BUILINDING IQCare MATERNITY ********** >> %log%
+
+
+@echo "********** Building IQCare COMMON WEB **********" >> %log%
+@echo ********** Building IQCare COMMON WEB **********
+
+dotnet publish Solutions/IQCare.Core/IQCare.Common.Web/IQCare.Common.Web.csproj -o ../../../package/common
+
+@echo ********** END OF BUILINDING IQCare COMMON WEB ********** >> %log%
+@echo ********** END OF BUILINDING IQCare COMMON WEB ********** >> %log%
+
 
 cd Solutions/IQCare.Core/IQCare
 

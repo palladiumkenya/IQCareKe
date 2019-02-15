@@ -120,6 +120,7 @@ namespace IQCare.HTS.BusinessProcess.CommandHandlers
                                 //add partner location
                                 if (!string.IsNullOrWhiteSpace(landmark) || (countyId > 0) || (subCountyId > 0) || (wardId > 0))
                                 {
+                                    landmark = string.IsNullOrWhiteSpace(landmark) ? "" : landmark;
                                     var partnerLocation = await registerPersonService.addPersonLocation(person.Id, countyId, subCountyId, wardId, " ", landmark, providerId);
                                 }
 
