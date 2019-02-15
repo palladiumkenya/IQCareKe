@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using IQCare.AIR.BusinessProcess.Command;
+using IQCare.AIR.BusinessProcess.Queries;
 using IQCare.AIR.BusinessProcess.Services;
 using IQCare.AIR.Infrastructure.UnitOfWork;
 using IQCare.Library;
@@ -11,9 +11,9 @@ using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Serilog;
 
-namespace IQCare.AIR.BusinessProcess.CommandHandlers
+namespace IQCare.AIR.BusinessProcess.QueryHandlers
 {
-    public class GetFormValueCommandHandler:IRequestHandler<GetFormValueCommand,Result<GetFormValueResponse>>
+    public class GetFormValueCommandHandler:IRequestHandler<GetFormValueQuery,Result<GetFormValueResponse>>
     {
         private readonly IAirUnitOfWork _airUnitOfWork;
 
@@ -22,7 +22,7 @@ namespace IQCare.AIR.BusinessProcess.CommandHandlers
             _airUnitOfWork = airUnitOfWork ?? throw new ArgumentNullException(nameof(airUnitOfWork));
         }
 
-        public async Task<Result<GetFormValueResponse>> Handle(GetFormValueCommand request,CancellationToken cancellationToken )
+        public async Task<Result<GetFormValueResponse>> Handle(GetFormValueQuery request,CancellationToken cancellationToken )
         {
             try
             {

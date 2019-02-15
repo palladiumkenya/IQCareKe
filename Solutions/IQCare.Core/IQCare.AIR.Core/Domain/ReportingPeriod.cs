@@ -9,7 +9,7 @@ namespace IQCare.AIR.Core.Domain
     {
         public ReportingPeriod()
         {
-                
+
         }
 
         [Key]
@@ -21,5 +21,6 @@ namespace IQCare.AIR.Core.Domain
         public bool DeleteFlag { get; private set; }
         public int CreatedBy { get; private set; }
         public virtual ReportingForm ReportingForm { get; set; }
+        public virtual ICollection<IndicatorResult> IndicatorResults { get; set; }
     }
 }
