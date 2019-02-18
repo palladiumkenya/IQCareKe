@@ -31,5 +31,13 @@ namespace IQCare.AIR.Web.Controllers
 
             return Ok(response.Value);
         }
+
+
+        [HttpGet("{Id}")]
+        public async Task<IActionResult> GetResults(int reprotingFormId)
+        {
+
+            return Ok();
+        }
     }
 }

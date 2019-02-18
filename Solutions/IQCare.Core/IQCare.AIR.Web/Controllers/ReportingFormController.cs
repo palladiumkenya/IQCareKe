@@ -43,9 +43,19 @@ namespace IQCare.AIR.Web.Controllers
                 return BadRequest(response);
 
             return Ok(response.Value);
-
-
         }
+
+        [HttpGet]
+        public async Task<IActionResult> GetReportingFormPeriods()
+        {
+            var response = await _mediator.Send(new GetFormReportingPeriodQuery { }, HttpContext.RequestAborted);
+
+            if (!response.IsValid)
+                return BadRequest(response);
+            return Ok(response.Value);
+        }
+
+
 
     }
 

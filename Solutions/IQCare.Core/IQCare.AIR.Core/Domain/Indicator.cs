@@ -21,6 +21,6 @@ namespace IQCare.AIR.Core.Domain
         public int CreatedBy { get; private set; }
         public virtual  IndicatorResultDataType DataType { get; set; }
         public virtual ReportSubSection ReportSubSection { get; set; }
-
+        public virtual ICollection<IndicatorResult> IndicatorResults { get; set; }
     }
 }
