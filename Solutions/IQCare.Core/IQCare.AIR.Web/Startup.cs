@@ -3,8 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
+using FluentValidation.AspNetCore;
 using IQCare.AIR.BusinessProcess.MapperProfiles;
 using IQCare.AIR.BusinessProcess.Queries;
+using IQCare.AIR.BusinessProcess.Validators;
 using IQCare.AIR.Infrastructure.Installers;
 using IQCare.SharedKernel.Infrastructure.Helpers;
 using MediatR;
@@ -34,7 +36,10 @@ namespace IQCare.AIR.Web
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1)
+                .AddFluentValidation(opt =>
+                    opt.RegisterValidatorsFromAssemblyContaining<SubmitIndicatorResultsCommandValidator>());
+
             services.AddAirDbContext(IQCareConnectionString);
 
             services.AddMediatR(typeof(GetReportingFormDetailsQuery).Assembly);
@@ -49,12 +54,14 @@ namespace IQCare.AIR.Web
             {
                 app.UseDeveloperExceptionPage();
             }
-            else
-            {
-                app.UseHsts();
-            }
 
-            app.UseHttpsRedirection();
+            app.UseCors(builder => builder
+                .AllowAnyOrigin()
+                .AllowAnyMethod()
+                .AllowAnyHeader()
+                .AllowCredentials());
+
+
             app.UseMvc();
         }
     }

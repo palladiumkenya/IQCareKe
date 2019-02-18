@@ -48,5 +48,7 @@ namespace IQCare.AIR.BusinessProcess.Queries
         public string Code { get; set; }
         public string Name { get; set; }
         public string DataType { get; set; }
+        public string Result { get; set; }
+        
     }
 }

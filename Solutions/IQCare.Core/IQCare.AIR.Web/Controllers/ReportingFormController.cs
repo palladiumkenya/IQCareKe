@@ -31,7 +31,7 @@ namespace IQCare.AIR.Web.Controllers
             return Ok(response.Value);
         }
 
-        [HttpGet("getFormData")]
+        [HttpGet("{Id}")]
         public async Task<IActionResult> GetFormData(int reportingId)
         {
             var response = await _mediator.Send(new GetFormValueQuery()
@@ -43,9 +43,30 @@ namespace IQCare.AIR.Web.Controllers
                 return BadRequest(response);
 
             return Ok(response.Value);
-
-
         }
+
+        [HttpGet]
+        public async Task<IActionResult> GetReportingFormPeriods()
+        {
+            var response = await _mediator.Send(new GetFormReportingPeriodQuery { }, HttpContext.RequestAborted);
+
+            if (!response.IsValid)
+                return BadRequest(response);
+
+            return Ok(response.Value);
+        }
+
+        [HttpGet("{Id}")]
+        public async Task<IActionResult> GetReportingFormIndicatorResults(int reportingPeriodId)
+        {
+            var response = await _mediator.Send(new GetIndicatorResultQuery() {ReportingPeriodId = reportingPeriodId},
+                HttpContext.RequestAborted);
+
+            if (!response.IsValid)
+                return BadRequest(response);
+            return Ok(response.Value);
+        }
+
 
     }
 
