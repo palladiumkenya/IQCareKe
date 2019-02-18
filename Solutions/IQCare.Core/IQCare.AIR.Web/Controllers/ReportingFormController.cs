@@ -52,9 +52,20 @@ namespace IQCare.AIR.Web.Controllers
 
             if (!response.IsValid)
                 return BadRequest(response);
+
             return Ok(response.Value);
         }
 
+        [HttpGet("{Id}")]
+        public async Task<IActionResult> GetReportingFormIndicatorResults(int reportingPeriodId)
+        {
+            var response = await _mediator.Send(new GetIndicatorResultQuery() {ReportingPeriodId = reportingPeriodId},
+                HttpContext.RequestAborted);
+
+            if (!response.IsValid)
+                return BadRequest(response);
+            return Ok(response.Value);
+        }
 
 
     }
