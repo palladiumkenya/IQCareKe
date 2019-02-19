@@ -12,11 +12,7 @@ namespace IQCare.AIR.Infrastructure.Installers
     {
         public static void AddAirDbContext(this IServiceCollection services,string connectionString)
         {
-            services.AddDbContext<AirDbContext>(opt => opt.UseSqlServer(connectionString, 
-                options =>
-                {
-                    options.EnableRetryOnFailure(3);                    
-                }));
+            services.AddDbContext<AirDbContext>(opt => opt.UseSqlServer(connectionString));
             services.AddScoped(typeof(IAirRepository<>), typeof(AirRepository<>));
             services.AddScoped(typeof(IAirUnitOfWork), typeof(AirUnitOfWork));
 

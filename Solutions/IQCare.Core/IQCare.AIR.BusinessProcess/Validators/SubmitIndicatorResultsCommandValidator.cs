@@ -20,7 +20,7 @@ namespace IQCare.AIR.BusinessProcess.Validators
 
             RuleFor(x => x).Custom((result, context) =>
             {
-                if (result.IndicatorResults == null || result.IndicatorResults.Any())
+                if (result.IndicatorResults == null || !result.IndicatorResults.Any())
                 {
                     context.AddFailure("Please ensure indicator result values are provided before submitting");
                      return;
