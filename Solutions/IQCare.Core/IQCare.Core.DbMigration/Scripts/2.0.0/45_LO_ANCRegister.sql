@@ -1,13 +1,14 @@
+
 IF OBJECT_ID('dbo.[ANC Register]', 'V') IS NOT NULL
     DROP VIEW [dbo].[ANC Register]
 GO
 
-CREATE VIEW [dbo].[ANC Register]
+Create VIEW [dbo].[ANC Register]
 AS
 SELECT  distinct a.Ptn_Pk,b.Id, a.FirstName, a.MiddleName, a.LastName, a.DOB, a.Sex, a.MaritalStatus, a.Phone, 
         d.VisitDate, g.VisitType, c.IdentifierValue AS ANC_Number, h.Name AS ServiceArea, b.FacilityId, g.VisitNumber, 
         i.Parity, i.Gravidae, a.Landmark, a.VillageName, i.LMP, i.EDD EDC, k.Weight, k.Height, 
-        k.BPSystolic, k.BPDiastolic, k.Muac,BAC.BreastExamDone BreastExam,'' AS CounselledOn,NULL HB,BAC.TreatedForSyphillis AS [RPR/VDRL],'' AS [RPR/VDRL Results],BAC.HivStatusBeforeAnc [HIV status before 1st ANC],
+        k.BPSystolic, k.BPDiastolic, k.Muac,BAC.BreastExamDone BreastExam,'' AS CounselledOn,NULL HB,BAC.TreatedForSyphillis AS [RPR/VDRL],'' AS [RPR/VDRL Results],BAC.TreatedForSyphillis AS [Syphilis Treated],BAC.HivStatusBeforeAnc [HIV status before 1st ANC],
 		case when encounterone=1 then 'I' when encounterone=2 then 'R' end as [HIV testing] ,HIVTest.OneKitId,HIVTest.OneLotNumber,HIVTest.OneExpiryDate,HIVTest.FinalTestOneResult,
 		HIVTest.twokitid,HIVTest.twolotnumber,HIVTest.twoexpirydate,HIVTest.FinalTestTwoResult, z.FinalResult,WHO.[WHOStage],
 		j.[On ARV Before 1st ANC Visit], [Started HAART in ANC],[CTX],[AZT for Baby],[NVP for Baby],
@@ -121,6 +122,8 @@ FROM  dbo.mst_Patient a INNER JOIN
                                                          dbo.LookupItemView AS lk ON lk.ItemId = her.FinalResult
                                WHERE        (lk1.ItemName = 'ANC-Encounter')) AS z ON z.PersonId = b.PersonId
 WHERE        (h.Name = 'ANC')
+
+
 
 
 

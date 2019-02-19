@@ -1,8 +1,7 @@
 IF OBJECT_ID('dbo.[Maternity Register]', 'V') IS NOT NULL
     DROP VIEW [dbo].[Maternity Register]
 GO
-
-CREATE VIEW [dbo].[Maternity Register]
+create VIEW [dbo].[Maternity Register]
 AS
 SELECT       distinct  a.Ptn_Pk, b.Id, b.FacilityId, c.IdentifierValue AS [Admission Number], d.VisitDate AS [Date of Admission], a.FirstName, a.MiddleName, a.LastName, a.VillageName, a.Phone, a.Landmark, a.DOB, a.Sex, a.MaritalStatus, 
                          g.VisitType, h.Name AS ServiceArea, g.VisitNumber, I.Parity, I.Gravidae, I.LMP, I.EDD AS EDC, diag.Diagnosis, delivery.DurationOfLabour, delivery.DateOfDelivery, delivery.TimeOfDelivery, delivery.ModeOfDelivery, 
@@ -14,6 +13,7 @@ SELECT       distinct  a.Ptn_Pk, b.Id, b.FacilityId, c.IdentifierValue AS [Admis
 						 HIVTest.twokitid,HIVTest.twolotnumber,HIVTest.twoexpirydate,HIVTest.FinalTestTwoResult, '' FinalResult, 
 						 k.Weight, k.Height, k.BPSystolic, k.BPDiastolic, k.Muac, baby.BirthNotificationNumber, 
 						 null [DateDischarged], ''OutcomeStatus, 
+						 partnerTesting.[PartnerTested],partnerTesting.[PartnerHIVResult],
 						 Refferals.ReferredFrom, Refferals.ReferredTo, notes.ClinicalNotes
 FROM            dbo.mst_Patient AS a INNER JOIN
                          dbo.Patient AS b ON a.Ptn_Pk = b.ptn_pk INNER JOIN  
@@ -107,6 +107,8 @@ FROM            dbo.mst_Patient AS a INNER JOIN
 --														 dbo.LookupItemView AS lk ON lk.ItemId = her.FinalResult
 --							   WHERE        (lk1.ItemName = 'Maternity')) AS z ON z.PersonId = b.PersonId
 WHERE        (h.Name = 'Maternity')
+
+
 
 
 
