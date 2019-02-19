@@ -33,7 +33,7 @@ namespace IQCare
             else
             {
                 var db = connectionString.GetConnectionString(iqcareuri);
-                
+
                 _connectionString = db.Result.Replace("\"","").Replace("Application Name=IQCare_EMR;","").Replace("Server", "Data Source").
                     Replace("Type System Version=SQL Data Source 2005;","").Replace("Database", "Initial Catalog")
                     .Replace("Integrated Security=false;", "").Replace("packet size=4128;Min Pool Size=3;Max Pool Size=200;","");
@@ -45,7 +45,7 @@ namespace IQCare
 
                 _connectionString = conn.ToString();
             }
-            
+
             Log.Debug(_connectionString);
 
             services.AddDbContext<HtsDbContext>(b => b.UseSqlServer(_connectionString));
