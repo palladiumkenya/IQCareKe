@@ -257,7 +257,7 @@
     <EmbeddedResource Include="Scripts\1.0.0.9\54_SO_CreateView_pmtctPatientScreeningView.sql" />
     <EmbeddedResource Include="Scripts\1.0.0.9\55_SO_CreateVIew_PatientPreventiveServiceView.sql" />
     <EmbeddedResource Include="Scripts\1.0.0.9\56_SO_CreateView_VisitDetailsView.sql" />
-    <EmbeddedResource Include="Scripts\2.0.0\37_SO_IQCare_Version.sql" />
+    <EmbeddedResource Include="Scripts\2.0.0\47_SO_IQCare_Version.sql" />
     <EmbeddedResource Include="Scripts\1.0.0.9\58_Add_Lookups_ReviewOfSystems.sql" />
     <EmbeddedResource Include="Scripts\2.0.0\02_DO_AlterView_PatientDeliveryInfo.sql" />
     <EmbeddedResource Include="Scripts\2.0.0\03 pr_Security_UserLogin_Constella.sql" />
