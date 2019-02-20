@@ -136,7 +136,7 @@ dotnet publish Solutions/IQCare.Core/IQCare/IQCare.csproj -o ../../../package/ap
 @echo "********** Building IQCare LAB **********" >> %log%
 @echo ********** Building IQCare LAB **********
 
-dotnet publish Solutions/IQCare.Core/IQCare.Lab.WebApi/IQCare.Lab.WebApi.csproj -o ../../../package/lab -v d
+dotnet publish Solutions/IQCare.Core/IQCare.Lab.WebApi/IQCare.Lab.WebApi.csproj -o ../../../package/lab
 
 @echo ********** END OF BUILINDING IQCare LAB ********** >> %log%
 @echo ********** END OF BUILINDING IQCare LAB ********** >> %log%
@@ -161,9 +161,13 @@ dotnet publish Solutions/IQCare.Core/IQCare.Common.Web/IQCare.Common.Web.csproj 
 @echo ********** END OF BUILINDING IQCare COMMON WEB ********** >> %log%
 
 
+dotnet publish Solutions/IQCare.Core/IQCare.Core.DbMigration/IQCare.Core.DbMigration.csproj -o ../../../Release/DbMigration/win-x64 -r win-x64
+dotnet publish Solutions/IQCare.Core/IQCare.Core.DbMigration/IQCare.Core.DbMigration.csproj -o ../../../Release/DbMigration/win-x86 -r win-x86
+
+
 cd Solutions/IQCare.Core/IQCare
 
-ng build --base-href "/frontend/" --prod
+ng build --base-href "/frontend/" --prod --aot --output-hashing=all
 
 pause
 
