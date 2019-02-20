@@ -150,7 +150,6 @@
     <None Remove="Scripts\2.0.0\39_IndicatorTables.sql" />
     <None Remove="Scripts\2.0.0\40_IndicatorData.sql" />
     <None Remove="Scripts\2.0.0\37_HIVPositiveListView.sql" />
-    <None Remove="Scripts\2.0.0\41_SO_Create_EmrMatrixDetailsView.sql" />
     <None Remove="Scripts\2.0.0\42_LO_PNCRegister.sql" />
     <None Remove="Scripts\2.0.0\43_LO_MaternityRegister.sql" />
     <None Remove="Scripts\2.0.0\44_LO_IQCareViews.sql" />
@@ -302,7 +301,6 @@
     <EmbeddedResource Include="Scripts\2.0.0\39_IndicatorTables.sql" />
     <EmbeddedResource Include="Scripts\2.0.0\40_IndicatorData.sql" />
     <EmbeddedResource Include="Scripts\2.0.0\37_HIVPositiveListView.sql" />
-    <EmbeddedResource Include="Scripts\2.0.0\41_SO_Create_EmrMatrixDetailsView.sql" />
     <EmbeddedResource Include="Scripts\2.0.0\42_LO_PNCRegister.sql" />
     <EmbeddedResource Include="Scripts\2.0.0\43_LO_MaternityRegister.sql" />
     <EmbeddedResource Include="Scripts\2.0.0\44_LO_IQCareViews.sql" />
