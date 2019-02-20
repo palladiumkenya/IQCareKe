@@ -49,7 +49,7 @@ namespace IQCare.AIR.BusinessProcess.QueryHandlers
 
         }
 
-        private List<ReportSectionViewModel> GetReportSectionModel(ICollection<ReportSection> reportSection, 
+        private List<ReportSectionViewModel> GetReportSectionModel(ICollection<ReportSection> reportSection,
             ICollection<IndicatorResult> indicatorResults)
         {
             return reportSection.Select(x => new ReportSectionViewModel()
@@ -64,13 +64,14 @@ namespace IQCare.AIR.BusinessProcess.QueryHandlers
                     DateCreated = r.DateCreated,
                     Name = r.Name,
                     ReportSectionId = r.ReportSectionId,
-                    Indicators = indicatorResults.Select(i => new IndicatorViewModel()
-                    {
-                        Id = i.Id,
-                        Name = i.Indicator.Name,
-                        Code = i.Indicator.Code,
-                        Result = i.ResultNumeric.HasValue ? i.ResultNumeric.Value.ToString() : i.ResultText
-                    }).ToList()
+                    Indicators = indicatorResults.OrderByDescending(i => i.Id)
+                        .Select(i => new IndicatorViewModel()
+                        {
+                            Id = i.Id,
+                            Name = i.Indicator.Name,
+                            Code = i.Indicator.Code,
+                            Result = i.ResultNumeric.HasValue ? i.ResultNumeric.Value.ToString() : i.ResultText
+                        }).ToList()
                 }).ToList()
             }).ToList();
         }

@@ -4,9 +4,8 @@ import { IndicatorReportingPeriodComponent } from './indicator-reporting-period/
 
 const routes: Routes = [
      {
-      path: 'air/submittedreports',
+      path: 'indicatorreportingperiod',
       component: IndicatorReportingPeriodComponent,
-      pathMatch: 'full',
      }
 ];
 

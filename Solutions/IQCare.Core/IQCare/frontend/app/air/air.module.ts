@@ -7,12 +7,14 @@ import { ReportIndicatorResultComponent } from './report-indicator-result/report
 import { IndicatorReportingPeriodComponent } from './indicator-reporting-period/indicator-reporting-period.component';
 import { MatTableModule, MatPaginatorModule } from '@angular/material';
 import { IndicatorService } from './_services/indicator.service';
+import { IndicatorResultsGridComponent } from './indicator-results-grid/indicator-results-grid.component';
 
 @NgModule({
   declarations: [
     ActiveFormReportComponent,
     ReportIndicatorResultComponent,
-    IndicatorReportingPeriodComponent
+    IndicatorReportingPeriodComponent,
+    IndicatorResultsGridComponent
   ],
   imports: [
     CommonModule,
