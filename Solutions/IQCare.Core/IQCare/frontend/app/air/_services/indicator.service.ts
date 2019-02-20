@@ -23,4 +23,15 @@ export class IndicatorService {
       catchError(this.errorHandlerService.handleError<any[]>('getFormIndicatorReportingPeriods'))
   );      
   }
+   
+
+  public getReportingPeriodIndicatorResults(reportingPeriodId: any) : Observable<any> {
+    return this.httpClient.get<any>(this.Air_WebApiUrl + '/api/ReportingForm/GetReportingFormIndicatorResults/'+reportingPeriodId).pipe(
+      tap(result => this.errorHandlerService.log('get form indicator results')),
+      catchError(this.errorHandlerService.handleError<any[]>('getReportingPeriodIndicatorResults')));
+  }
+
+
+
+
 }

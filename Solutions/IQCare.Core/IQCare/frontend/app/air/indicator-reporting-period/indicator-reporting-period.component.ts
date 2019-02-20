@@ -26,23 +26,20 @@ export class IndicatorReportingPeriodComponent implements OnInit {
 
   private getReportingPeriods() {
       this.indicatorService.getFormIndicatorReportingPeriods().subscribe(r=>{
-           this.reportingPeriods.push({
-               reportName : r.reportName,
-               reportDate : r.strReportDate,
-               dateCreated : r.dateCreated
-           });
-
+        r.forEach(data => {
+          this.reportingPeriods.push({
+            id : data.id,
+            reportName : data.reportName,
+            reportDate : data.strReportDate,
+            dateCreated : data.dateCreated
+          });
+        });
           this.reportingPeriodsDataSource = new MatTableDataSource(this.reportingPeriods);
           this.reportingPeriodsDataSource.paginator = this.paginator;
       },(error)=>{
 
         console.log("An error occured while fetching reporting periods " + error);
       })
-  }
-
-
-  public viewResults(row : any){
-    console.log('View Results '+row);
   }
 
 }

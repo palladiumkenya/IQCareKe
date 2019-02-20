@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, ViewChild } from '@angular/core';
+import { MatTableDataSource, MatPaginator } from '@angular/material';
 
 @Component({
   selector: 'app-indicator-results-grid',
@@ -7,9 +8,20 @@ import { Component, OnInit } from '@angular/core';
 })
 export class IndicatorResultsGridComponent implements OnInit {
 
-  constructor() { }
+  @Input('IndicatorResults')  IndicatorResults : any[];
+  indicator_results_displaycolumns : any[] = ['code','name','result'];
 
-  ngOnInit() {
+  indicatorResultsDataSource = new MatTableDataSource(this.IndicatorResults);
+  @ViewChild(MatPaginator) paginator : MatPaginator;
+
+  constructor() { 
+
   }
+
+  ngOnInit() 
+  {
+       this.indicatorResultsDataSource.paginator = this.paginator;
+  }
+  
 
 }
