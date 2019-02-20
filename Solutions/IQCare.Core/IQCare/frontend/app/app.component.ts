@@ -1,7 +1,8 @@
 import { NgxSpinnerService } from 'ngx-spinner';
 import { Router, Event, NavigationStart, NavigationCancel, NavigationError, NavigationEnd } from '@angular/router';
-import { Component, isDevMode } from '@angular/core';
+import { Component } from '@angular/core';
 import { AppLoadService } from './shared/_services/appload.service';
+import { environment } from '../environments/environment';
 
 @Component({
     selector: 'app-root',
@@ -16,13 +17,16 @@ export class AppComponent {
         private spinner: NgxSpinnerService) {
         localStorage.setItem('facilityList', JSON.stringify(this.appLoadService.getFacilities()));
 
-        if (isDevMode) {
-            localStorage.setItem('appLocation', 'Demo Site');
+        const isProduction = environment.production;
+        // localStorage.clear();
+
+        if (!isProduction) {
+            /*localStorage.setItem('appLocation', 'Demo Site');
             localStorage.setItem('appLocationId', '755');
             localStorage.setItem('appPosID', '13056');
             localStorage.setItem('appUserId', '1');
             localStorage.setItem('appUserName', 'System Admin');
-            localStorage.setItem('serviceAreaId', '3');
+            localStorage.setItem('serviceAreaId', '3');*/
         }
 
         this.router.events.subscribe((event: Event) => {

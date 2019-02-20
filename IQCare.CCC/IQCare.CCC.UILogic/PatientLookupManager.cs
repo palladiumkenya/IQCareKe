@@ -167,7 +167,27 @@ namespace IQCare.CCC.UILogic
                         }
                         else
                         {
-                            patient = _patientLookupmanager.GetPatientByCccNumber(cccNumber.TrimStart('0'));
+                            var lookupLogic = new LookupLogic();
+                            var facility = lookupLogic.GetFacility();
+                            if (cccNumberLength == 5)
+                            {
+                                patient = _patientLookupmanager.GetPatientByCccNumber(facility.MFLCode +  cccNumber);
+                            }
+                            else if (cccNumberLength < 5)
+                            {
+                                var count = 5 - cccNumberLength;
+                                var stringPadding = "";
+                                while (count > 0)
+                                {
+                                    stringPadding += '0';
+                                    count--;
+                                }
+                                patient = _patientLookupmanager.GetPatientByCccNumber(facility.MFLCode + stringPadding + cccNumber);
+                            }
+                            else
+                            {
+                                patient = _patientLookupmanager.GetPatientByCccNumber(cccNumber.TrimStart('0'));
+                            }
                         }
                     }
                 }
