@@ -5,7 +5,7 @@
            <h4 style="text-align:center"> {{reportSection.name}} </h4>
            <mat-tab-group>
             <mat-tab *ngFor="let subSection of reportSection.ReportSubSections" label="subSection.name">
-              <app-indicator-results-grid [IndicatorResults] = "{{subSection.Indicators}}" >              
+              <app-indicator-results-grid [IndicatorResults] = "subSection.Indicators" >              
               </app-indicator-results-grid>
             </mat-tab>
           </mat-tab-group>

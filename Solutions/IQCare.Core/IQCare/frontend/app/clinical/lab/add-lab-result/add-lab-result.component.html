@@ -1,7 +1,7 @@
 <h2 mat-dialog-title>{{dialogTitle}}</h2>
 <mat-dialog-content>
 <form [formGroup]="labResultForm">
-  <div *ngFor = "let parameter of labTestParameters" class="row"class="row">
+  <div *ngFor = "let parameter of labTestParameters" class="row">
       <div [className] = "parameter.formControls.length == 5 ? 'col-md-5ths col-xs-6' : 'col-lg-4 col-xs-12'"
        *ngFor ="let control of parameter.formControls" >
           <div [ngSwitch]="control.controlType">
