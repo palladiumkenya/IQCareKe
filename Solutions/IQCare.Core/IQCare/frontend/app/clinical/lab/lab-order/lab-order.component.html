@@ -97,11 +97,27 @@
                 <tr mat-header-row *matHeaderRowDef="lab_test_displaycolumns"></tr>
                 <tr mat-row *matRowDef="let row; columns: lab_test_displaycolumns;"></tr>
             </table>
-      </div> 
-      </div>
-  <div class="row">
+       </div>
+    </div>
+
+  <div class="row" style="margin-top: 5px">
       <div class="col-lg-4 col-xs-12">
           <button  mat-raised-button class="mat-primary" (click)="SubmitOrder()"><span class="fa fa-plus-circle"> Submit Order(s) </span></button>
       </div>      
   </div>
+
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="3"></div>
+            <div class="3"></div>
+            <div class="3"></div>
+            <div class="3 pull-right">
+                <a routerLink="/dashboard/personhome/{{ personId }}">
+                    <i class="menu-icon glyphicon glyphicon-home"></i>
+                    <span class="menu-text"> PERSON HOME </span>
+                </a>
+            </div>
+        </div>
+
+    </div>
 </form>
