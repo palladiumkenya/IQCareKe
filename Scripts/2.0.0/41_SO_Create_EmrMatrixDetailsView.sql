@@ -15,7 +15,7 @@ SELECT
   (		
 		CASE (SELECT [name] FROM master.dbo.sysdatabases WHERE [name]='IQTools_KeHMIS')
 			 WHEN 'IQTools_KeHMIS' THEN (SELECT max(ReportRunDate) FROM  [IQTools_KeHMIS].[dbo].ReportRunLog WHERE ReportName='NASCOP_MOH731')
-			 WHEN 'IQTools' THEN (SELECT max(ReportRunDate) FROM  [IQTools_KeHMIS].[dbo].ReportRunLog WHERE ReportName='NASCOP_MOH731')
+			-- WHEN 'IQTools' THEN (SELECT max(ReportRunDate) FROM  [IQTools_KeHMIS].[dbo].ReportRunLog WHERE ReportName='NASCOP_MOH731')
 			 WHEN NULL THEN NULL 
 		 END
   ) as 'LastMoH731RunDate'
