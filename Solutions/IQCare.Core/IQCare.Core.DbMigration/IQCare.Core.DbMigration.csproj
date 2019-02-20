@@ -156,6 +156,7 @@
     <None Remove="Scripts\2.0.0\44_LO_IQCareViews.sql" />
     <None Remove="Scripts\2.0.0\45_LO_ANCRegister.sql" />
     <None Remove="Scripts\2.0.0\46_LO_HEIRegister.sql" />
+    <None Remove="Scripts\2.0.0\48_SO_CreateVIew_PmtctPatientScreeningView.sql" />
   </ItemGroup>
 
   <ItemGroup>
@@ -307,6 +308,7 @@
     <EmbeddedResource Include="Scripts\2.0.0\44_LO_IQCareViews.sql" />
     <EmbeddedResource Include="Scripts\2.0.0\45_LO_ANCRegister.sql" />
     <EmbeddedResource Include="Scripts\2.0.0\46_LO_HEIRegister.sql" />
+    <EmbeddedResource Include="Scripts\2.0.0\48_SO_CreateVIew_PmtctPatientScreeningView.sql" />
   </ItemGroup>
 
   <ItemGroup>

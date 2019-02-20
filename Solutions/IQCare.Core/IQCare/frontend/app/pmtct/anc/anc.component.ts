@@ -256,9 +256,9 @@ export class AncComponent implements OnInit, OnDestroy {
         this.getPatientPregnancy(this.patientId);
     }
 
-  //  OnMotherProfileNotify(formGroup: FormGroup): void {
-    //    this.visitDetailsFormGroup.push(formGroup);
-    // } -->
+    OnMotherProfileNotify(formGroup: FormGroup): void {
+        this.visitDetailsFormGroup.push(formGroup);
+     }
 
     onPatientEducationNotify(formGroup: Object): void {
         this.PatientEducationMatFormGroup = formGroup['form'];
