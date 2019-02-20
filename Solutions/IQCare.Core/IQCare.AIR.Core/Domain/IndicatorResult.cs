@@ -30,7 +30,7 @@ namespace IQCare.AIR.Core.Domain
         public DateTime DateCreated { get; private set; }
         public int CreatedBy { get; private set; }
         public DateTime? DateUpdated { get; private set; }
-        public bool Active { get; private set; }
+        public bool DeleteFlag { get; private set; }
         public virtual  ReportingPeriod ReportingPeriod { get; set; }
         public virtual Indicator Indicator { get; set; }
 

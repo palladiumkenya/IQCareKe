@@ -35,6 +35,10 @@ const routes: Routes = [
     {
         path: '**',
         component: NotFoundComponent
+    },
+    {
+        path:'air',
+        loadChildren:'../air/air.module#AirModule'
     }
 ];
 

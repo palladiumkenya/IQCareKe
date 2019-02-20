@@ -26,9 +26,10 @@ namespace IQCare.AIR.BusinessProcess.CommandHandlers
 
         public async Task<Result<IndicatorResponse>> Handle(SubmitIndicatorResultsCommand request, CancellationToken cancellationToken)
         {
-            try
+
+            using (var transaction = _airUnitOfWork.BeginTransaction(IsolationLevel.ReadCommitted))
             {
-                using (var transaction = _airUnitOfWork.BeginTransaction(IsolationLevel.ReadCommitted))
+                try
                 {
                     var reportingPeriod = new ReportingPeriod(request.ReportingFormId, request.ReportingDate, request.CreatedBy);
                     await _airUnitOfWork.Repository<ReportingPeriod>().AddAsync(reportingPeriod);
@@ -47,15 +48,17 @@ namespace IQCare.AIR.BusinessProcess.CommandHandlers
                         ReportingFormId = request.ReportingFormId
                     });
                 }
-               
-            }
-            catch (Exception ex)
-            {
-                _logger.Error(ex,
-                    $"An error occured while submitting indicator results for period {request.ReportingDate} and ReportId {request.ReportingFormId}");
+                catch (Exception ex)
+                {
+                    _logger.Error(ex,
+                        $"An error occured while submitting indicator results for period {request.ReportingDate} and ReportId {request.ReportingFormId}");
+                    transaction.Rollback();
 
-                return Result<IndicatorResponse>.Invalid("An error occured while submittig indicator results");
+                    return Result<IndicatorResponse>.Invalid("An error occured while submittig indicator results");
+                }
+
             }
+
 
         }
     }
