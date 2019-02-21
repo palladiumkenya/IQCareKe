@@ -150,13 +150,13 @@
     <None Remove="Scripts\2.0.0\39_IndicatorTables.sql" />
     <None Remove="Scripts\2.0.0\40_IndicatorData.sql" />
     <None Remove="Scripts\2.0.0\37_HIVPositiveListView.sql" />
-    <None Remove="Scripts\2.0.0\41_SO_Create_EmrMatrixDetailsView.sql" />
     <None Remove="Scripts\2.0.0\42_LO_PNCRegister.sql" />
     <None Remove="Scripts\2.0.0\43_LO_MaternityRegister.sql" />
     <None Remove="Scripts\2.0.0\44_LO_IQCareViews.sql" />
     <None Remove="Scripts\2.0.0\45_LO_ANCRegister.sql" />
     <None Remove="Scripts\2.0.0\46_SO_IQCare_Version.sql" />
     <None Remove="Scripts\2.0.0\46_LO_HEIRegister.sql" />
+	<None Remove="Scripts\2.0.0\47_SO_IQCare_Version.sql" />
   </ItemGroup>
 
   <ItemGroup>
@@ -258,7 +258,6 @@
     <EmbeddedResource Include="Scripts\1.0.0.9\54_SO_CreateView_pmtctPatientScreeningView.sql" />
     <EmbeddedResource Include="Scripts\1.0.0.9\55_SO_CreateVIew_PatientPreventiveServiceView.sql" />
     <EmbeddedResource Include="Scripts\1.0.0.9\56_SO_CreateView_VisitDetailsView.sql" />
-    <EmbeddedResource Include="Scripts\2.0.0\47_SO_IQCare_Version.sql" />
     <EmbeddedResource Include="Scripts\1.0.0.9\58_Add_Lookups_ReviewOfSystems.sql" />
     <EmbeddedResource Include="Scripts\2.0.0\02_DO_AlterView_PatientDeliveryInfo.sql" />
     <EmbeddedResource Include="Scripts\2.0.0\03 pr_Security_UserLogin_Constella.sql" />
@@ -302,13 +301,12 @@
     <EmbeddedResource Include="Scripts\2.0.0\39_IndicatorTables.sql" />
     <EmbeddedResource Include="Scripts\2.0.0\40_IndicatorData.sql" />
     <EmbeddedResource Include="Scripts\2.0.0\37_HIVPositiveListView.sql" />
-    <EmbeddedResource Include="Scripts\2.0.0\41_SO_Create_EmrMatrixDetailsView.sql" />
     <EmbeddedResource Include="Scripts\2.0.0\42_LO_PNCRegister.sql" />
     <EmbeddedResource Include="Scripts\2.0.0\43_LO_MaternityRegister.sql" />
     <EmbeddedResource Include="Scripts\2.0.0\44_LO_IQCareViews.sql" />
     <EmbeddedResource Include="Scripts\2.0.0\45_LO_ANCRegister.sql" />
-    <EmbeddedResource Include="Scripts\2.0.0\46_SO_IQCare_Version.sql" />
     <EmbeddedResource Include="Scripts\2.0.0\46_LO_HEIRegister.sql" />
+	<EmbeddedResource Include="Scripts\2.0.0\47_SO_IQCare_Version.sql" />
   </ItemGroup>
 
   <ItemGroup>
