@@ -35,6 +35,7 @@ serviceAreaId : any;
 labTestReasonOptions : any[];
 maxDate : Date;
 otherReason : boolean = false;
+disabled : boolean = true;
 
 @ViewChild(MatPaginator) paginator: MatPaginator;
 
@@ -56,7 +57,7 @@ dataSource =  new MatTableDataSource(this.labTestData);
 
      this.labOrderFormGroup = this.formBuilder.group({
       labTestId: new FormControl('', [Validators.required]),
-      labtestReasonId: new FormControl('', [Validators.required]),
+      labtestReasonId: new FormControl({value:'',disabled:true}, [Validators.required]),
       labTestNotes: new FormControl(''),  
       orderDate: new FormControl('', [Validators.required]),
       clinicalOrderNotes: new FormControl(''),
@@ -98,7 +99,9 @@ dataSource =  new MatTableDataSource(this.labTestData);
         return;
        var labTestId = this.labOrderFormGroup.get('labTestId').value.id;
        var testName =  this.labOrderFormGroup.get('labTestId').value.name;
-       var labOrderReason = this.labOrderFormGroup.get('labtestReasonId').value.displayName;
+       var labOrderFormControlValue = this.labOrderFormGroup.get('labtestReasonId').value;
+        
+       var labOrderReason = labOrderFormControlValue == null ? 'N/A' : labOrderFormControlValue.displayName;
 
        labOrderReason = labOrderReason === 'Other' ? this.labOrderFormGroup.get('otherTestReason').value : labOrderReason;
 
@@ -112,7 +115,6 @@ dataSource =  new MatTableDataSource(this.labTestData);
       testId: labTestId,
       test: testName,
       orderReason: labOrderReason,
-      orderReasonId: this.labOrderFormGroup.get('labtestReasonId').value.itemId,
       testNotes: this.labOrderFormGroup.get('labTestNotes').value
     });
 
@@ -124,6 +126,9 @@ dataSource =  new MatTableDataSource(this.labTestData);
   }
 
 
+  public removeTest(row:any) {
+     console.log('The index '+this.labTestData.indexOf(row))
+  }
 
   public SubmitOrder() {
     if(this.labOrderFormGroup.invalid)
@@ -135,6 +140,11 @@ dataSource =  new MatTableDataSource(this.labTestData);
         const patientEncounter = this.buildPatientEncounterCommand();
         const submitPatientEncounter = this.encouterService.savePatientMasterVisit(patientEncounter);
         var labOrderCommand = this.buildLabOrderCommand();
+
+        if(labOrderCommand.LabTests.length == 0){
+           this.snotifyService.error('Please add atleast one lab test before submitting the order','Lab',this.notificationService.getConfig())
+          return;
+        }
 
         forkJoin([
           submitOrdVisit,
@@ -262,8 +272,27 @@ dataSource =  new MatTableDataSource(this.labTestData);
       }
       this.labOrderFormGroup.controls['otherTestReason'].updateValueAndValidity();
 
-      console.log(this.otherReason);
    }
+    
+   labTestWithOrderReasons : any[] =['Viral Load','CD4'];
+   public onLabTestChange(test:any){
+     const exists = this.labTestWithOrderReasons.filter(x=>x == test.name).length >= 1     
+     this.labOrderFormGroup.controls['labtestReasonId'].reset();
+
+     if(exists)
+     {
+      this.labOrderFormGroup.controls['labtestReasonId'].enable();
+      return;
+     }
+     else
+     {
+        this.labOrderFormGroup.controls['labtestReasonId'].disable();
+        this.labOrderFormGroup.controls['otherTestReason'].clearValidators();
+        this.otherReason = false;
+     }
+    
+    
+    }
 
 }
 
