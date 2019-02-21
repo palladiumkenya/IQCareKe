@@ -150,13 +150,16 @@
     <None Remove="Scripts\2.0.0\39_IndicatorTables.sql" />
     <None Remove="Scripts\2.0.0\40_IndicatorData.sql" />
     <None Remove="Scripts\2.0.0\37_HIVPositiveListView.sql" />
-    <None Remove="Scripts\2.0.0\41_SO_Create_EmrMatrixDetailsView.sql" />
     <None Remove="Scripts\2.0.0\42_LO_PNCRegister.sql" />
     <None Remove="Scripts\2.0.0\43_LO_MaternityRegister.sql" />
     <None Remove="Scripts\2.0.0\44_LO_IQCareViews.sql" />
     <None Remove="Scripts\2.0.0\45_LO_ANCRegister.sql" />
     <None Remove="Scripts\2.0.0\46_SO_IQCare_Version.sql" />
     <None Remove="Scripts\2.0.0\46_LO_HEIRegister.sql" />
+    <None Remove="Scripts\2.0.0\48_SO_CreateVIew_PmtctPatientScreeningView.sql" />
+    <None Remove="Scripts\2.0.0\49_SO_Add_Identifiers_BirthNotification.sql" />
+    <None Remove="Scripts\2.0.0\50_SO_ChangeIQCareVersion2Name.sql" />
+    <None Remove="Scripts\2.0.0\51_SO_AddCacxMethod_VIAVILI.sql" />
   </ItemGroup>
 
   <ItemGroup>
@@ -302,13 +305,16 @@
     <EmbeddedResource Include="Scripts\2.0.0\39_IndicatorTables.sql" />
     <EmbeddedResource Include="Scripts\2.0.0\40_IndicatorData.sql" />
     <EmbeddedResource Include="Scripts\2.0.0\37_HIVPositiveListView.sql" />
-    <EmbeddedResource Include="Scripts\2.0.0\41_SO_Create_EmrMatrixDetailsView.sql" />
     <EmbeddedResource Include="Scripts\2.0.0\42_LO_PNCRegister.sql" />
     <EmbeddedResource Include="Scripts\2.0.0\43_LO_MaternityRegister.sql" />
     <EmbeddedResource Include="Scripts\2.0.0\44_LO_IQCareViews.sql" />
     <EmbeddedResource Include="Scripts\2.0.0\45_LO_ANCRegister.sql" />
     <EmbeddedResource Include="Scripts\2.0.0\46_SO_IQCare_Version.sql" />
     <EmbeddedResource Include="Scripts\2.0.0\46_LO_HEIRegister.sql" />
+    <EmbeddedResource Include="Scripts\2.0.0\48_SO_CreateVIew_PmtctPatientScreeningView.sql" />
+    <EmbeddedResource Include="Scripts\2.0.0\49_SO_Add_Identifiers_BirthNotification.sql" />
+    <EmbeddedResource Include="Scripts\2.0.0\50_SO_ChangeIQCareVersion2Name.sql" />
+    <EmbeddedResource Include="Scripts\2.0.0\51_SO_AddCacxMethod_VIAVILI.sql" />
   </ItemGroup>
 
   <ItemGroup>
