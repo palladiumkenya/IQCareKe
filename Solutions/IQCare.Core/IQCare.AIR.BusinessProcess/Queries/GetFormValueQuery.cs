@@ -30,7 +30,8 @@ namespace IQCare.AIR.BusinessProcess.Queries
 
         public int ReportingPeriodId { get; set; }
 
-        public decimal ResultNumeric { get; set; }
+        public decimal ? ResultNumeric { get; set; }
+
 
         public string ResultText { get; set; }
 

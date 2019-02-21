@@ -1,0 +1,14 @@
+<div>
+  <h3 style="text-align:center"> <b> {{ reportName }} Results For {{reportDate}} Period </b> </h3>
+     
+   <div class="row" *ngFor="let reportSection of reportSections">
+           <h4 style="text-align:center"> {{reportSection.name}} </h4>
+           <mat-tab-group>
+            <mat-tab *ngFor="let subSection of reportSection.ReportSubSections" label="subSection.name">
+              <app-indicator-results-grid [IndicatorResults] = "subSection.Indicators" >              
+              </app-indicator-results-grid>
+            </mat-tab>
+          </mat-tab-group>
+   </div>
+
+</div>

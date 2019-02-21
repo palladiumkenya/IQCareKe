@@ -10,6 +10,7 @@ using IQCare.AIR.Core.Domain;
 using IQCare.AIR.Infrastructure.UnitOfWork;
 using IQCare.Library;
 using MediatR;
+using Microsoft.EntityFrameworkCore;
 
 namespace IQCare.AIR.BusinessProcess.QueryHandlers
 {
@@ -27,9 +28,16 @@ namespace IQCare.AIR.BusinessProcess.QueryHandlers
             try
             {
                 var reportSubSections = _airUnitOfWork.Repository<ReportSubSection>()
-                       .Get(x => x.ReportSectionId == request.SectionId).AsEnumerable();
+                    .Get(x => x.ReportSectionId == request.SectionId).Include(x => x.Indicators).AsEnumerable();
 
-                var subSectionsModel = _mapper.Map<List<ReportSubSectionViewModel>>(reportSubSections);
+                var subSectionsModel = reportSubSections.Select(x => new ReportSubSectionViewModel()
+                {
+                    Id = x.Id,
+                    DateCreated = x.DateCreated,
+                    Name = x.Name,
+                    ReportSectionId = x.ReportSectionId,
+                    Indicators = _mapper.Map<List<IndicatorViewModel>>(x.Indicators)
+                }).ToList();
 
                 return Task.FromResult(Result<List<ReportSubSectionViewModel>>.Valid(subSectionsModel));
             }

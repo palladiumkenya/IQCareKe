@@ -9,6 +9,11 @@ import {SubSectionFilterPipe, IndicatorFilterPipe} from './_model/pipe/subsectio
 import { NativeDateAdapter, DateAdapter, MatDatepicker } from '@angular/material';
 import { CustomDateAdapter }  from './_model/CustomDateAdapter';
 import { NotificationService } from '../shared/_services/notification.service';
+import { ReportIndicatorResultComponent } from './report-indicator-result/report-indicator-result.component';
+import { IndicatorReportingPeriodComponent } from './indicator-reporting-period/indicator-reporting-period.component';
+import { MatTableModule, MatPaginatorModule, MatTabsModule } from '@angular/material';
+import { IndicatorService } from './_services/indicator.service';
+import { IndicatorResultsGridComponent } from './indicator-results-grid/indicator-results-grid.component';
 
 import {
   MatAutocompleteModule, MatButtonModule, MatButtonToggleModule,
@@ -22,7 +27,14 @@ import {
   MatTableModule, MatTabsModule, MatToolbarModule, MatTooltipModule
 } from '@angular/material';
 @NgModule({
-  declarations: [ActiveFormReportComponent,SubSectionFilterPipe,IndicatorFilterPipe],
+  declarations: [
+    ActiveFormReportComponent,
+    ReportIndicatorResultComponent,
+    IndicatorReportingPeriodComponent,
+      IndicatorResultsGridComponent,
+      SubSectionFilterPipe,
+      IndicatorFilterPipe
+  ],
   imports: [
     CommonModule,
     AirRoutingModule,
@@ -44,6 +56,13 @@ import {
     FormDetailsService,
     NotificationService,
   { provide: DateAdapter, useClass: CustomDateAdapter },
+    AirRoutingModule,
+    MatTableModule,
+    MatPaginatorModule,
+      MatTabsModule
+    IndicatorService
+
   ]
+ 
 })
 export class AirModule { }
