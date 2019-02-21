@@ -20,7 +20,10 @@ export class IndicatorResultsGridComponent implements OnInit {
 
   ngOnInit() 
   {
+    console.log('Indicator Results >>> ' + this.indicatorResultsDataSource)
+       this.indicatorResultsDataSource =new MatTableDataSource(this.IndicatorResults);
        this.indicatorResultsDataSource.paginator = this.paginator;
+
   }
   
 

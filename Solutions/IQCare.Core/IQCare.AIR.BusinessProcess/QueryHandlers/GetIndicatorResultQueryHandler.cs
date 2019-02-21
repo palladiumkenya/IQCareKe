@@ -35,6 +35,11 @@ namespace IQCare.AIR.BusinessProcess.QueryHandlers
                 .ThenInclude(x => x.ReportSubSection)
                 .ThenInclude(x => x.ReportSection).SingleOrDefault();
 
+            if (reportingPeriodResult == null)
+                return Task.FromResult(
+                    Result<ReportingFormIndicatorResultViewModel>.Invalid(
+                        "Indicator results for the specified period not found"));
+
             var indicatorResultViewModel = new ReportingFormIndicatorResultViewModel()
             {
                 Id = reportingPeriodResult.Id,
@@ -54,7 +59,7 @@ namespace IQCare.AIR.BusinessProcess.QueryHandlers
         {
             return reportSection.Select(x => new ReportSectionViewModel()
             {
-                Id = x.Id,
+                Id = x.Id, 
                 DateCreated = x.DateCreated,
                 Name = x.Name,
                 ReportingFormId = x.ReportingFormId,
@@ -64,7 +69,7 @@ namespace IQCare.AIR.BusinessProcess.QueryHandlers
                     DateCreated = r.DateCreated,
                     Name = r.Name,
                     ReportSectionId = r.ReportSectionId,
-                    Indicators = indicatorResults.OrderByDescending(i => i.Id)
+                    Indicators = indicatorResults.OrderBy(i => i.Id)
                         .Select(i => new IndicatorViewModel()
                         {
                             Id = i.Id,
