@@ -13,10 +13,6 @@ const routes: Routes = [
         loadChildren: '../dashboard/dashboard.module#DashboardModule'
     },
     {
-    path:'ReportingForm',
-    loadChildren: '../air/air.module#AirModule'
-    },
-    {
         path: 'hts',
         loadChildren: '../hts/hts.module#HtsModule'
     },
@@ -37,13 +33,14 @@ const routes: Routes = [
         loadChildren: '../clinical/clinical.module#ClinicalModule'
     },
     {
-        path: '**',
-        component: NotFoundComponent
-    },
-    {
         path:'air',
         loadChildren:'../air/air.module#AirModule'
+    },
+    {
+        path: '**',
+        component: NotFoundComponent
     }
+    
 ];
 
 @NgModule({

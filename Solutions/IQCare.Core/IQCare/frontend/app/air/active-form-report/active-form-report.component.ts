@@ -5,7 +5,7 @@ import { SnotifyService, SnotifyPosition } from 'ng-snotify';
 import { NotificationService } from '../../shared/_services/notification.service';
 import { RouterInitializer } from '@angular/router/src/router_module';
 import { IndicatorQuestionBase } from '../_model/indicatorquestion-base';
-import { NativeDateAdapter, DateAdapter, MatDatepicker } from '@angular/material';
+import { NativeDateAdapter, DateAdapter, MatDatepickerModule } from '@angular/material';
 import { Section, Form, SubSection, FormResults } from '../_model/Sectionidentifier';
 import { AbstractControl, FormBuilder, FormControl, FormGroup, Validators, FormArray } from '@angular/forms';
 import * as _ from 'lodash';
@@ -23,7 +23,7 @@ import * as moment from 'moment';
 export class ActiveFormReportComponent implements OnInit {
 
 
-    @ViewChild(MatDatepicker) picker;
+    @ViewChild(MatDatepickerModule) picker;
     date = new FormControl();
     IndicatorQuestions: IndicatorQuestionBase[] = [];
 

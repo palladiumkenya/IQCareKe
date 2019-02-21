@@ -5,9 +5,8 @@ import { ReportIndicatorResultComponent } from './report-indicator-result/report
 import { ActiveFormReportComponent } from './active-form-report/active-form-report.component'
 import { FormDetailResolver } from './_services/customformdetails.resolver';
 const routes: Routes = [
-     {
-      path: 'air',
-      pathMatch : 'full',
+    {
+      path: '',
       children : [
         {
            path: 'report',
@@ -18,14 +17,14 @@ const routes: Routes = [
           path: 'indicator/result/:reportingPeriodId',
           pathMatch :'full',
           component : ReportIndicatorResultComponent
-        }
-      ]
-    }
-    path: 'formdetails/:id',
-    component: ActiveFormReportComponent,
-    resolve: {
-        FormDetails: FormDetailResolver
-    }
+        },
+        
+        
+      ],
+      
+
+    },
+   
 ];
 
 
