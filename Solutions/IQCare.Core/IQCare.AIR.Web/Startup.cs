@@ -48,13 +48,17 @@ namespace IQCare.AIR.Web
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
+                
             }
-            else
-            {
-                app.UseHsts();
-            }
+            
+            
 
-            app.UseHttpsRedirection();
+            app.UseCors(builder => builder
+                  .AllowAnyOrigin()
+                  .AllowAnyMethod()
+                  .AllowAnyHeader()
+                  .AllowCredentials());
+
             app.UseMvc();
         }
     }

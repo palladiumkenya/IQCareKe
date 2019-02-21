@@ -9,7 +9,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace IQCare.AIR.Web.Controllers
 {
     [Produces("application/json")]
-    [Route("api/[Controller]/[Action]")]
+    [Route("api/[controller]/[action]")]
     public class ReportingFormController : Controller
     {
         private readonly IMediator _mediator;
@@ -19,16 +19,15 @@ namespace IQCare.AIR.Web.Controllers
         }
 
 
-        [HttpGet("{Id}")]
+        [HttpGet("{id}")]
         public async Task<IActionResult> GetReportingFormDetails(int id)
         {
-            var response = await _mediator.Send(new GetReportingFormDetailsQuery { Id = id },
-                Request.HttpContext.RequestAborted);
+            var response = await _mediator.Send(new GetReportingFormDetailsQuery { Id = id }
+           );
 
-            if (!response.IsValid)
-                return BadRequest(response);
-
-            return Ok(response.Value);
+            if (response.IsValid)
+                return Ok(response.Value);
+            return BadRequest(response);
         }
 
         [HttpGet("getFormData")]

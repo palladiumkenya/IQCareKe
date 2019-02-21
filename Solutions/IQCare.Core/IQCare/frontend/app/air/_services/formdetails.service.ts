@@ -11,16 +11,16 @@ const httpOptions ={
 
 @Injectable()
 export class FormDetailsService {
-    private API_AIR_URL=environment.API_AIR_URL;
-    constructor (private http:HttpClient,
-        private errorHandler:ErrorHandlerService){
-
+    private API_AIR_URL = environment.API_AIR_URL;
+    constructor (private http: HttpClient,
+        private errorHandler: ErrorHandlerService){
+ 
         }
 
 
-        public getFormDetails(formId :number):Observable<any[]>{
-            return this.http.get<any[]>(this.API_AIR_URL +'/api/Forms/getFormDetails/'+formId).pipe(tap
-                (getFormDetails=>this.errorHandler.log(`fetched Form Details for` + formId)),
+        public getFormDetails(formId: number): Observable<any[]>{
+            return this.http.get<any[]>(this.API_AIR_URL + '/api/ReportingForm/GetReportingFormDetails/' + formId).pipe(tap
+                (getFormDetails => this.errorHandler.log(`fetched Form Details for` + formId)),
                 catchError(this.errorHandler.handleError<any[]>('getFormDetails'))
             );
 
