@@ -5,26 +5,22 @@ import { ReportIndicatorResultComponent } from './report-indicator-result/report
 import { ActiveFormReportComponent } from './active-form-report/active-form-report.component'
 import { FormDetailResolver } from './_services/customformdetails.resolver';
 const routes: Routes = [
-    {
+     {
       path: '',
+      component : IndicatorReportingPeriodComponent,
       children : [
         {
            path: 'report',
-           pathMatch : 'full',
-           component : IndicatorReportingPeriodComponent
-        },
-        {
-          path: 'indicator/result/:reportingPeriodId',
-          pathMatch :'full',
-          component : ReportIndicatorResultComponent
-        },
-        
-        
+           component : IndicatorReportingPeriodComponent,
+           pathMatch : 'full'
+        }
       ],
-      
-
-    },
-   
+     },
+     {
+      path: 'indicator/result/:reportingPeriodId',
+      component : ReportIndicatorResultComponent,
+      pathMatch :'full'
+    }
 ];
 
 

@@ -13,6 +13,8 @@ export class ReportIndicatorResultComponent implements OnInit {
   reportingPeriodId : any;
   reportDate : any;
   reportName : any;
+  errorMessage :any;
+  isValid : boolean;
 
   constructor(private indicatorService: IndicatorService,
    private route : ActivatedRoute) { 
@@ -27,18 +29,14 @@ export class ReportIndicatorResultComponent implements OnInit {
   }
 
     private getReportingPeriodIndicatorResults(periodId: any){
-        this.indicatorService.getReportingPeriodIndicatorResults(periodId).subscribe(result=>{
-            console.log(result +' Result Details Response');
-
-            this.reportSections = result.ReportSections;
+        this.indicatorService.getReportingPeriodIndicatorResults(periodId).subscribe(result=>{           
+            this.reportSections = result.reportSections;
             this.reportDate = result.strReportDate;
             this.reportName = result.reportName;
-
-            console .log('Report Sections '+ this.reportSections);
         },(err)=>{
-          console.log(err +' An error occured while fetching reporting period results');
+           console.log(' An error occured while fetching reporting period results: '+ err);
+             this.errorMessage = err;
         })   
-
     }
 
 }

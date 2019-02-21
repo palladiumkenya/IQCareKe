@@ -56,9 +56,9 @@ namespace IQCare.AIR.Web.Controllers
         }
 
         [HttpGet("{Id}")]
-        public async Task<IActionResult> GetReportingFormIndicatorResults(int reportingPeriodId)
+        public async Task<IActionResult> GetReportingFormIndicatorResults(int id)
         {
-            var response = await _mediator.Send(new GetIndicatorResultQuery() {ReportingPeriodId = reportingPeriodId},
+            var response = await _mediator.Send(new GetIndicatorResultQuery() {ReportingPeriodId = id},
                 HttpContext.RequestAborted);
 
             if (!response.IsValid)
