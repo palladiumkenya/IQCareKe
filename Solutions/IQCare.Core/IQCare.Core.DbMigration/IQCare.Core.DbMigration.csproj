@@ -157,6 +157,10 @@
     <None Remove="Scripts\2.0.0\46_SO_IQCare_Version.sql" />
     <None Remove="Scripts\2.0.0\46_LO_HEIRegister.sql" />
 	<None Remove="Scripts\2.0.0\47_SO_IQCare_Version.sql" />
+    <None Remove="Scripts\2.0.0\48_SO_CreateVIew_PmtctPatientScreeningView.sql" />
+    <None Remove="Scripts\2.0.0\49_SO_Add_Identifiers_BirthNotification.sql" />
+    <None Remove="Scripts\2.0.0\50_SO_ChangeIQCareVersion2Name.sql" />
+    <None Remove="Scripts\2.0.0\51_SO_AddCacxMethod_VIAVILI.sql" />
   </ItemGroup>
 
   <ItemGroup>
@@ -307,6 +311,10 @@
     <EmbeddedResource Include="Scripts\2.0.0\45_LO_ANCRegister.sql" />
     <EmbeddedResource Include="Scripts\2.0.0\46_LO_HEIRegister.sql" />
 	<EmbeddedResource Include="Scripts\2.0.0\47_SO_IQCare_Version.sql" />
+    <EmbeddedResource Include="Scripts\2.0.0\48_SO_CreateVIew_PmtctPatientScreeningView.sql" />
+    <EmbeddedResource Include="Scripts\2.0.0\49_SO_Add_Identifiers_BirthNotification.sql" />
+    <EmbeddedResource Include="Scripts\2.0.0\50_SO_ChangeIQCareVersion2Name.sql" />
+    <EmbeddedResource Include="Scripts\2.0.0\51_SO_AddCacxMethod_VIAVILI.sql" />
   </ItemGroup>
 
   <ItemGroup>
