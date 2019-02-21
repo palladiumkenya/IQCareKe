@@ -4913,8 +4913,9 @@
   <COMPONENT cid="caphyon.advinst.msicomp.AppPoolComponent">
     <ROW AppPoolId="0" Name="IQCare" Condition="1" Flags="65909" ManagedRuntimeVersion="v4.0"/>
     <ROW AppPoolId="1" Name="IQCareApi" Condition="1" Flags="65909"/>
-    <ROW AppPoolId="2" Name="IQCarePMTCT" Condition="1" Flags="65653"/>
-    <ROW AppPoolId="3" Name="IQCareLab" Condition="1" Flags="65653"/>
+    <ROW AppPoolId="2" Name="IQCarePMTCT" Condition="1" Flags="65909"/>
+    <ROW AppPoolId="3" Name="IQCareLab" Condition="1" Flags="65909"/>
+    <ROW AppPoolId="4" Name="IQCareSettingsApi" Condition="1" Flags="65909"/>
   </COMPONENT>
   <COMPONENT cid="caphyon.advinst.msicomp.AppXCfgComponent">
     <ROW ID="Configuration" Order="1" ManifestFile="AppxManifest.xml" TargetOs="4"/>
@@ -5115,9 +5116,10 @@
   </COMPONENT>
   <COMPONENT cid="caphyon.advinst.msicomp.VirtualDirectoriesComponent">
     <ROW VirtualDirectoryId="0" Path="IQCare_Dir" Condition="1" AccessFlags="537182753" AccessPerm="513" AppPool="0" AspNetVers="4.0.30319" VirtualDirectory="IQCare" WebApplication="0"/>
-    <ROW VirtualDirectoryId="1" Path="IQCareAPI_Dir" Condition="1" AccessFlags="49697" AccessPerm="513" AppPool="1" VirtualDirectory="IQCareAPI" WebApplication="0"/>
-    <ROW VirtualDirectoryId="2" Path="IQCareMaternity_Dir" Condition="1" AccessFlags="49697" AccessPerm="513" AppPool="2" VirtualDirectory="IQCarePMTCT" WebApplication="0"/>
-    <ROW VirtualDirectoryId="3" Path="IQCareLab_Dir" Condition="1" AccessFlags="49697" AccessPerm="513" AppPool="3" VirtualDirectory="IQCareLab" WebApplication="0"/>
+    <ROW VirtualDirectoryId="1" Path="IQCareAPI_Dir" Condition="1" AccessFlags="49697" AccessPerm="515" AppPool="1" VirtualDirectory="IQCareAPI" WebApplication="0"/>
+    <ROW VirtualDirectoryId="2" Path="IQCareMaternity_Dir" Condition="1" AccessFlags="49697" AccessPerm="515" AppPool="2" VirtualDirectory="IQCarePMTCT" WebApplication="0"/>
+    <ROW VirtualDirectoryId="3" Path="IQCareLab_Dir" Condition="1" AccessFlags="49697" AccessPerm="515" AppPool="3" VirtualDirectory="IQCareLab" WebApplication="0"/>
+    <ROW VirtualDirectoryId="4" Path="NewFolder_Dir" Condition="1" AccessFlags="49697" AccessPerm="515" AppPool="4" VirtualDirectory="IQCareSettingsApi" WebApplication="0"/>
   </COMPONENT>
   <COMPONENT cid="caphyon.advinst.msicomp.WebApplicationsComponent">
     <ROW WebSiteId="0" Root="APPDIR" Condition="1" AccessFlags="49761" AccessPerm="513" DocumentList="index.html, index.htm, default.htm" WebApplication="Default Web Site" ServerBindings=":80:" AccessSSLFlags="0" ConnectionTimeout="-1" MaxConcurrentRequests="-1" MaxRequests="-1" TimeLimit="-1"/>
