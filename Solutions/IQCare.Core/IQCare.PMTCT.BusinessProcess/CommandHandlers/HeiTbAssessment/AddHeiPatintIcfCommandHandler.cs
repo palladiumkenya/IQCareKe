@@ -43,7 +43,9 @@ namespace IQCare.PMTCT.BusinessProcess.CommandHandlers.HeiTbAssessment
                         heiPatient.Fever = request.HeiPatientIcf.Fever;
                         heiPatient.OnAntiTbDrugs = request.HeiPatientIcf.OnAntiTbDrugs;
                         heiPatient.ContactWithTb = request.HeiPatientIcf.ContactWithTb;
-                         _unitOfWork.Repository<HeiPatientIcf>().Update(heiPatient);
+                        heiPatient.OnIpt = request.HeiPatientIcf.OnIpt;
+                        heiPatient.EverBeenOnIpt = request.HeiPatientIcf.EverBeenOnIpt;
+                        _unitOfWork.Repository<HeiPatientIcf>().Update(heiPatient);
                         await _unitOfWork.SaveAsync();
                     }                   
                     return Result<HeiPatientIcf>.Valid(request.HeiPatientIcf);

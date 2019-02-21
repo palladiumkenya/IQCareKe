@@ -47,7 +47,7 @@
                 <mat-label>Mode of Delivery</mat-label>
                 <mat-select formControlName="deliveryMode" required minlength="1">
                     <mat-option [value]="">select</mat-option>
-                    <mat-option *ngFor="let deliveryModeOption of deliveryModeOptions" [value]="deliveryModeOption.itemId">
+                    <mat-option *ngFor="let deliveryModeOption of deliveryModeOptions" [value]="deliveryModeOption">
                         {{deliveryModeOption.itemName}}
                     </mat-option>
                 </mat-select>
@@ -59,7 +59,7 @@
                 <mat-label>blood Loss</mat-label>
                 <mat-select formControlName="bloodLoss" required minlength="1">
                     <mat-option [value]="">select</mat-option>
-                    <mat-option *ngFor="let bloodlossOption of bloodlossOptions" [value]="bloodlossOption.itemId"
+                    <mat-option *ngFor="let bloodlossOption of bloodlossOptions" [value]="bloodlossOption"
                         (onSelectionChange)="onBloodLossChange($event)">
                         {{bloodlossOption.itemName}}
                     </mat-option>
@@ -80,7 +80,7 @@
                 <mat-label>Condition of Mother after Delivery</mat-label>
                 <mat-select formControlName="deliveryCondition" required minlength="1">
                     <mat-option [value]="">select</mat-option>
-                    <mat-option *ngFor="let motherStateOption of motherStateOptions" [value]="motherStateOption.itemId"
+                    <mat-option *ngFor="let motherStateOption of motherStateOptions" [value]="motherStateOption"
                         (onSelectionChange)="onChangeDeliveryConditions($event)">
                         {{motherStateOption.itemName}}
                     </mat-option>
@@ -93,7 +93,7 @@
                 <mat-label>Maternal Deaths Audited</mat-label>
                 <mat-select formControlName="maternalDeathsAudited" required minlength="1">
                     <mat-option [value]="">select</mat-option>
-                    <mat-option *ngFor="let yesnoOption of yesnoOptions" [value]="yesnoOption.itemId">
+                    <mat-option *ngFor="let yesnoOption of yesnoOptions" [value]="yesnoOption">
                         {{yesnoOption.itemName}}
                     </mat-option>
                 </mat-select>
@@ -114,7 +114,7 @@
                 <mat-label>Placenta Complete</mat-label>
                 <mat-select formControlName="placentaComplete" required minlength="1">
                     <mat-option [value]="0">select</mat-option>
-                    <mat-option *ngFor="let yesnoOption of yesnoOptions" [value]="yesnoOption.itemId">
+                    <mat-option *ngFor="let yesnoOption of yesnoOptions" [value]="yesnoOption">
                         {{yesnoOption.itemName}}
                     </mat-option>
                 </mat-select>
@@ -139,7 +139,7 @@
                 <mat-label>Delivery Complications Experienced</mat-label>
                 <mat-select formControlName="deliveryComplications" required minlength="1">
                     <mat-option [value]="0">select</mat-option>
-                    <mat-option *ngFor="let yesnoOption of yesnoOptions" [value]="yesnoOption.itemId"
+                    <mat-option *ngFor="let yesnoOption of yesnoOptions" [value]="yesnoOption"
                         (onSelectionChange)="onDeliveryComplicationsChange($event)">
                         {{yesnoOption.itemName}}
                     </mat-option>

@@ -24,7 +24,7 @@
            <div class="col-md-10">
                <label class="control-lable pull-left">1. Understands the nature of HIV infection and benefits of ART?</label>
            </div>
-           <div class="col-md-2  pull-right">   
+           <div class="col-md-2  pull-right radio-inline">   
                 <label class="radio-custom radio-inline highlight" data-initialize="radio" id="benefitARTlbl1">
                     <input id="radiobenefitsARTYes" class="sr-only benefitsART"  name="benefitsART" type="radio" value="1" >Yes
                 </label>
@@ -41,7 +41,7 @@
                <label class="control-lable pull-left">2. Has screened negative for alcohol or other drug use disorder, or is stable on treatment (see Section
 4.6)</label>
            </div>
-           <div class="col-md-2 pull-right">
+           <div class="col-md-2 pull-right radio-inline">
                <!--<input type="checkbox" class="onoffswitch-checkbox" id="screenAlcohol" value="0"/>-->
                <label class="radio-custom radio-inline highlight" data-initialize="radio" id="screenAlcohollbl1">
                     <input id="screenAlcoholYes" class="sr-only"  name="screenAlcohol" type="radio" value="1" >Yes
@@ -59,7 +59,7 @@
                <label class="control-lable pull-left">3. Has screened negative for depression or other psychiatric illness, or is stable on treatment (see
 Section 4.6)</label>
            </div>
-           <div class="col-md-2 pull-right">
+           <div class="col-md-2 pull-right radio-inline">
 
               <!-- <input type="checkbox" class="onoffswitch-checkbox" id="depression" value="0"/>-->
                 <label class="radio-custom radio-inline highlight" data-initialize="radio" id="depressionlbl1">
@@ -77,7 +77,7 @@ Section 4.6)</label>
            <div class="col-md-10">
                <label class="control-lable pull-left">4. Is willing to disclose/has disclosed HIV status, ideally to a family member or close friend?</label>
            </div>
-           <div class="col-md-2">
+           <div class="col-md-2 pull-right radio-inline">
                <!--<input type="checkbox" class="onoffswitch-checkbox" id="disclosure" value="0"/>-->
 
                 <label class="radio-custom radio-inline highlight" data-initialize="radio" id="disclosurelbl1">
@@ -95,10 +95,10 @@ Section 4.6)</label>
            <div class="col-md-10">
                <label class="control-lable pull-left">5. Has received demonstration of how to take/administer ART and other prescribed medication?</label>
            </div>
-           <div class="col-md-2">
+           <div class="col-md-2 pull-right radio-inline">
               <!-- <input type="checkbox" class="onoffswitch-checkbox" id="administerART" value="0"/>-->
 
-                    <label class="radio-custom radio-inline highlight" data-initialize="radio" id="administerARTlbl1">
+                    <label class="radio-custom radio-inline highlight " data-initialize="radio" id="administerARTlbl1">
                     <input id="administerARTYes" class="sr-only"  name="administerART" type="radio" value="1" >Yes
                 </label>
                   <label class="radio-custom radio-inline highlight" data-initialize="radio" id="administerARTlbl2">
@@ -114,7 +114,7 @@ Section 4.6)</label>
                <label class="control-lable pull-left">6. Has received information on predictable side effects of ART and understands what steps to take in
 case of these side effects?</label>
            </div>
-           <div class="col-md-2 pull-right">
+           <div class="col-md-2 pull-right radio-inline">
               <!-- <input type="checkbox" class="onoffswitch-checkbox" id="effectsART" value="0"/>-->
 
                    <label class="radio-custom radio-inline highlight" data-initialize="radio" id="effectsARTlbl1">
@@ -134,7 +134,7 @@ case of these side effects?</label>
                <label class="control-lable pull-left">7. For patients dependent on a caregiver: caregiver is committed to long-term support of the patient,
 daily administration of ART, and meets the criteria above?</label>
            </div>
-           <div class="col-md-2 pull-right">
+           <div class="col-md-2 pull-right radio-inline">
               <!--<input type="checkbox" class="onoffswitch-checkbox" id="dependents" value="0"/>-->
 
                 <label class="radio-custom radio-inline highlight" data-initialize="radio" id="dependentslbl1">
@@ -154,7 +154,7 @@ daily administration of ART, and meets the criteria above?</label>
                <label class="control-lable pull-left">8. Other likely barriers to adherence have been identified and there is a plan in place to address them
 (e.g. frequent travel for work, plan to deal with unexpected travel, distance from clinic, etc)?</label>
            </div>
-           <div class="col-md-2 pull-right">
+           <div class="col-md-2 pull-right radio-inline">
                <!--<input type="checkbox" class="onoffswitch-checkbox" id="adherenceBarriers" value="0"/>-->
 
                  <label class="radio-custom radio-inline highlight" data-initialize="radio" id="adherenceBarrierslbl1">
@@ -172,7 +172,7 @@ daily administration of ART, and meets the criteria above?</label>
            <div class="col-md-10">
                <label class="control-lable pull-left">9. Patient/caregiver has provided accurate locator information and contact details?</label>
            </div>
-           <div class="col-md-2 pull-right">
+           <div class="col-md-2 pull-right radio-inline">
               <!-- <input type="checkbox" class="onoffswitch-checkbox" id="locator" value="0"/>-->
 
 
@@ -193,7 +193,7 @@ daily administration of ART, and meets the criteria above?</label>
            <div class="col-md-10">
                <label class="control-lable pull-left">10. Patient/caregiver feels ready to start ART today?</label>
            </div>
-           <div class="col-md-2 pull-right">
+           <div class="col-md-2 pull-right radio-inline">
               <!--<input type="checkbox" class="onoffswitch-checkbox" id="caregiver" value="0"/>-->
 
                 <label class="radio-custom radio-inline highlight" data-initialize="radio" id="caregiverlbl1">
@@ -231,7 +231,7 @@ daily administration of ART, and meets the criteria above?</label>
                <label class="control-lable pull-left">1. Has identified convenient time/s of day for taking ART, and/or associated dose/s with daily
 event/s?</label>
            </div>
-           <div class="col-md-2 pull-right">
+           <div class="col-md-2 pull-right radio-inline">
               <!-- <input type="checkbox" class="onoffswitch-checkbox" id="convinient" value="0"/>-->
                
                 <label class="radio-custom radio-inline highlight" data-initialize="radio" id="convinientlbl1">
@@ -251,7 +251,7 @@ event/s?</label>
                <label class="control-lable pull-left">2. Treatment supporter has been identified and engaged in HIV education, or will attend next
 counselling session?</label>
            </div>
-           <div class="col-md-2">
+           <div class="col-md-2 pull-right radio-inline">
               <!-- <input type="checkbox" class="onoffswitch-checkbox" id="TSIdentified" value="0"/>-->
 
                 <label class="radio-custom radio-inline highlight" data-initialize="radio" id="TSIdentifiedlbl1">
@@ -269,7 +269,7 @@ counselling session?</label>
            <div class="col-md-10">
                <label class="control-lable pull-left">3. Is aware of support group meeting time/s?</label>
            </div>
-           <div class="col-md-2 pull-right">
+           <div class="col-md-2 pull-right radio-inline">
               <!-- <input type="checkbox" class="onoffswitch-checkbox" id="supportGroup" value="0"/>-->
 
                
@@ -288,7 +288,7 @@ counselling session?</label>
            <div class="col-md-10">
                <label class="control-lable pull-left">4. If facility has SMS reminder system: Has enrolled into SMS reminder system?</label>
            </div>
-           <div class="col-md-2 pull-right">
+           <div class="col-md-2 pull-right radio-inline">
                <!--<input type="checkbox" class="onoffswitch-checkbox" id="EnrollSMSReminder" value="0"/>-->
                   <label class="radio-custom radio-inline highlight" data-initialize="radio" id="EnrollSMSReminderlbl1">
                     <input id="EnrollSMSReminderYes" class="sr-only"  name="EnrollSMSReminder" type="radio" value="1" >Yes
@@ -305,7 +305,7 @@ counselling session?</label>
            <div class="col-md-10">
                <label class="control-lable pull-left">5. Other support systems are in place or planned (e.g. setting phone alarm, pill box)?</label>
            </div>
-           <div class="col-md-2 pull-right">
+           <div class="col-md-2 pull-right radio-inline">
               <!-- <input type="checkbox" class="onoffswitch-checkbox" id="OtherSupportSystem" value="0"/>-->
                <label class="radio-custom radio-inline highlight" data-initialize="radio" id="OtherSupportSystemlbl1">
                     <input id="OtherSupportSystemYes" class="sr-only"  name="OtherSupportSystem" type="radio" value="1" >Yes
@@ -599,8 +599,38 @@ counselling session?</label>
 
         var patientId ="<%=PatientId%>";
         var patientMasterVisitId = "<%=PatientMasterVisitId%>";
+        var isPatientOnART = 0;
+      
+  
+               
         var isDonePyschosocialCriteria = 0;
         var isDoneSupportSystemCriteria = 0;
+        function CheckPatientRegimen() {
+            $.ajax({
+                type: "POST",
+                url: "../WebService/PatientEncounterService.asmx/LoadCurrentRegimen",
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (response) {
+                    arrCurrentReg = response.d;
+                    if (arrCurrentReg != null) {
+                        if (arrCurrentReg.length > 0) {
+                            isPatientOnART = 1;
+
+                            $("#divsuccess").show('fast', function () {
+                                $("#success").append("ART Treatment Preparation Cannot be done on Patients already on ARVs");
+                                // disbale buttons
+                                $("#btnPsychosocialCriterial").prop('disabled', true);
+                                $("#btnSupportSystemCriteria").prop('disabled', true);
+                            });
+                        }
+                    }
+                }
+            });
+
+        }
+
+         CheckPatientRegimen();
 
         $.ajax({
             type: "POST",
@@ -609,15 +639,18 @@ counselling session?</label>
             contentType: "application/json; charset=utf-8",
             dataType: "json",
             success: function (response) {
+               
                 isDonePyschosocialCriteria = response.d;
                 if (isDonePyschosocialCriteria < 1) {
-
-                $("#divMessage").show('fast', function() {
-                    $("#danger").append("ART Treatment Preparation Assessment is PENDING! --for this Client");
-                    //enable buttons
-                    $("#btnPsychosocialCriterial").prop('disabled', false);
-                    $("#btnSupportSystemCriteria").prop('disabled', false);
-                });                   
+                    if (isPatientOnART < 1) {
+                        $("#divMessage").show('fast', function () {
+                            $("#danger").append("ART Treatment Preparation Assessment is PENDING! --for this Client");
+                            //enable buttons
+                            $("#btnPsychosocialCriterial").prop('disabled', false);
+                            $("#btnSupportSystemCriteria").prop('disabled', false);
+                        });
+                    }
+                
                 } else {
                     $("#divsuccess").show('fast', function() {
                         $("#success").append("ART Treatment Preparation Completed! | View Answers for the ART Treatment preparation Questions");
@@ -751,7 +784,7 @@ counselling session?</label>
                 toastr.error("" + xhr.status + "" + jsonError.Message);
             }
         });
-
+        
         /* insert is ART preparation is missing */
         
         $("#btnPsychosocialCriterial").click(function () {

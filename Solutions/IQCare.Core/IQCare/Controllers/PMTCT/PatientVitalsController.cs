@@ -35,8 +35,21 @@ namespace IQCare.Controllers.PMTCT
             return BadRequest(result);
         }
 
+        [HttpPost]
+        public async Task<object> Update([FromBody] UpdatePatientVitalCommand command)
+        {
+            if (!ModelState.IsValid)
+                return BadRequest(command);
+
+            var result = await _mediator.Send(command, HttpContext.RequestAborted);
+            if (result.IsValid)
+                return Ok(result.Value);
+
+            return BadRequest(result);
+        }
+
         [HttpGet("{Id}")]
-        public async Task<object> GetByMasterVisitId(int id)
+        public async Task<object> GetByPatientId(int id)
         {
             var response = await _mediator.Send(new GetPatientVitalsQuery {PatientId = id}, HttpContext.RequestAborted);
 

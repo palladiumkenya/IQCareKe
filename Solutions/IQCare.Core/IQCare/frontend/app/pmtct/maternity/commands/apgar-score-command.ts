@@ -1,5 +1,5 @@
 export interface ApgarScoreCommand {
-    ApgarSCoreId?: number;
+    ApgarScoreId?: number;
     ApgarScoreType?: string;
-    SCore?: number;
+    Score?: number;
 }

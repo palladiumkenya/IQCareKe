@@ -1,0 +1,37 @@
+  <div class="form-title">
+      <span class="mat-accent">Pending Labs: </span>
+  </div>
+  <div class="mat-elevation-z1">
+      <table  mat-table  [dataSource]="pendingLabsDataSource">
+          <ng-container matColumnDef="test">
+            <th mat-header-cell *matHeaderCellDef> <strong>Lab Test</strong> </th>
+            <td mat-cell *matCellDef="let pendingTest"> {{pendingTest.test}} </td>
+          </ng-container>            
+          <ng-container matColumnDef="orderReason">
+            <th mat-header-cell *matHeaderCellDef><strong>Order Reason</strong>  </th>
+            <td mat-cell *matCellDef="let pendingTest"> {{pendingTest.orderReason }} </td>
+          </ng-container>
+        
+          <ng-container matColumnDef="orderDate">
+            <th mat-header-cell *matHeaderCellDef> <strong> Order Date </strong>  </th>
+            <td mat-cell *matCellDef="let pendingTest"> {{pendingTest.orderDate}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="status">
+              <th mat-header-cell *matHeaderCellDef> <strong> Status </strong>  </th>
+              <td mat-cell *matCellDef="let pendingTest"> {{pendingTest.status}} </td>
+            </ng-container>
+      
+        <ng-container matColumnDef="action">
+          <th mat-header-cell *matHeaderCellDef><strong class="fa fa-cog"> Action</strong></th>
+          <td mat-cell *matCellDef="let row">
+              <button mat-raised-button  [disabled]="disableBtn" (click)="addResult(row)" class="mat-accent"><span class="fa fa-plus"> Add Results</span>
+              </button>
+          </td>
+
+      </ng-container>     
+          <tr mat-header-row *matHeaderRowDef="pending_labs_displaycolumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: pending_labs_displaycolumns;"></tr>
+      </table>
+      <mat-paginator id="pending-paginator" [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+</div> 

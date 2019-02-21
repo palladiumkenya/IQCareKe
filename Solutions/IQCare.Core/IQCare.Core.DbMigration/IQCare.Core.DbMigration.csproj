@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
@@ -103,6 +103,7 @@
     <None Remove="Scripts\1.0.0.9\52_SO_CreateView_PatientCounsellingView.sql" />
     <None Remove="Scripts\1.0.0.9\53_SO_CreateView_PatientExaminationView.sql" />
     <None Remove="Scripts\1.0.0.9\54_SO_CreateView_pmtctPatientScreeningView.sql" />
+    <None Remove="Scripts\1.0.0.9\55_SO_CreateVIew_PatientPreventiveServiceView.sql" />
     <None Remove="Scripts\1.0.0.9\56_SO_CreateView_VisitDetailsView.sql" />
     <None Remove="Scripts\1.0.0.9\58_Add_Lookups_ReviewOfSystems.sql" />
     <None Remove="Scripts\2.0.0\01_SO_IQCare_Version.sql" />
@@ -123,11 +124,43 @@
     <None Remove="Scripts\2.0.0\21_Add_Lookups_Dental.sql" />
     <None Remove="Scripts\2.0.0\22_Alter_County_Add_Identity.sql" />
     <None Remove="Scripts\2.0.0\22_SO_Add_Lookups_ViralLoadSample.sql" />
-    <None Remove="Scripts\2.0.0\23_Nairobi_Missing_Subcounties_Wards.sql" />
     <None Remove="Scripts\2.0.0\24_DO_AlterTable_PatientIcf_AddColumn_ContactWithTb.sql" />
     <None Remove="Scripts\2.0.0\25_SPS_mstPatient_Update.sql" />
+    <None Remove="Scripts\2.0.0\26_SO_AlterTable_PatientMasterVisit_AddCol_FacilityId.sql" />
+    <None Remove="Scripts\2.0.0\27_SO_AddNewARVDrugs.sql" />
     <None Remove="Scripts\2.0.0\26_Person_Update.sql" />
     <None Remove="Scripts\2.0.0\27_Create_PatientPncExercises.sql" />
+    <None Remove="Scripts\2.0.0\28_HtsEncounter_Add_HivCounsellingDone.sql" />
+    <None Remove="Scripts\2.0.0\29_HtsEncounterResult_Add_EncounterResultRemarks.sql" />
+    <None Remove="Scripts\2.0.0\29_SO_Create_SP_GetPharmcyRegimens.sql" />
+    <None Remove="Scripts\2.0.0\30_BlueCardGreencard_sync_Alter.sql" />
+    <None Remove="Scripts\2.0.0\31_DO_Insert_Into_LabTestMaster_New_LabTests.sql" />
+    <None Remove="Scripts\2.0.0\32_DO_Insert_Into_LabTestParameters_New_Params.sql" />
+    <None Remove="Scripts\2.0.0\33_DO_InsertInto_LabTestParameterResultOption_NewOptions.sql" />
+    <None Remove="Scripts\2.0.0\34_DO_Update_PregnancyLabTest_Parameter_Values.sql" />
+    <None Remove="Scripts\2.0.0\31_Person_Update_DateOfBirth.sql" />
+    <None Remove="Scripts\2.0.0\32_Remove_S_P_From_PNSRelationship.sql" />
+    <None Remove="Scripts\2.0.0\33_Pregnancy_Alter_Gravidae_Parity.sql" />
+    <None Remove="Scripts\2.0.0\34_Person_Update_Alter.sql" />
+    <None Remove="Scripts\2.0.0\35_Pharmacy_History.sql" />
+    <None Remove="Scripts\2.0.0\36_LO_HtsPnsReferral.sql" />
+    <None Remove="Scripts\2.0.0\37_UpdatePaediatricRegimen.sql" />
+    <None Remove="Scripts\2.0.0\38_IPTOutcomeDate.sql" />
+    <None Remove="Scripts\2.0.0\38_LO_HEI_Register.sql" />
+    <None Remove="Scripts\2.0.0\39_IndicatorTables.sql" />
+    <None Remove="Scripts\2.0.0\40_IndicatorData.sql" />
+    <None Remove="Scripts\2.0.0\37_HIVPositiveListView.sql" />
+    <None Remove="Scripts\2.0.0\42_LO_PNCRegister.sql" />
+    <None Remove="Scripts\2.0.0\43_LO_MaternityRegister.sql" />
+    <None Remove="Scripts\2.0.0\44_LO_IQCareViews.sql" />
+    <None Remove="Scripts\2.0.0\45_LO_ANCRegister.sql" />
+    <None Remove="Scripts\2.0.0\46_SO_IQCare_Version.sql" />
+    <None Remove="Scripts\2.0.0\46_LO_HEIRegister.sql" />
+	<None Remove="Scripts\2.0.0\47_SO_IQCare_Version.sql" />
+    <None Remove="Scripts\2.0.0\48_SO_CreateVIew_PmtctPatientScreeningView.sql" />
+    <None Remove="Scripts\2.0.0\49_SO_Add_Identifiers_BirthNotification.sql" />
+    <None Remove="Scripts\2.0.0\50_SO_ChangeIQCareVersion2Name.sql" />
+    <None Remove="Scripts\2.0.0\51_SO_AddCacxMethod_VIAVILI.sql" />
   </ItemGroup>
 
   <ItemGroup>
@@ -227,13 +260,12 @@
     <EmbeddedResource Include="Scripts\1.0.0.9\52_SO_CreateView_PatientCounsellingView.sql" />
     <EmbeddedResource Include="Scripts\1.0.0.9\53_SO_CreateView_PatientExaminationView.sql" />
     <EmbeddedResource Include="Scripts\1.0.0.9\54_SO_CreateView_pmtctPatientScreeningView.sql" />
+    <EmbeddedResource Include="Scripts\1.0.0.9\55_SO_CreateVIew_PatientPreventiveServiceView.sql" />
     <EmbeddedResource Include="Scripts\1.0.0.9\56_SO_CreateView_VisitDetailsView.sql" />
-    <EmbeddedResource Include="Scripts\1.0.0.9\01_SO_IQCare_Version.sql" />
     <EmbeddedResource Include="Scripts\1.0.0.9\58_Add_Lookups_ReviewOfSystems.sql" />
     <EmbeddedResource Include="Scripts\2.0.0\02_DO_AlterView_PatientDeliveryInfo.sql" />
     <EmbeddedResource Include="Scripts\2.0.0\03 pr_Security_UserLogin_Constella.sql" />
     <EmbeddedResource Include="Scripts\2.0.0\22_SO_Add_Lookups_ViralLoadSample.sql" />
-    <EmbeddedResource Include="Scripts\2.0.0\23_Nairobi_Missing_Subcounties_Wards.sql" />
     <EmbeddedResource Include="Scripts\2.0.0\08_PatientConsent.sql" />
     <EmbeddedResource Include="Scripts\2.0.0\09_PersonKinContactsView.sql" />
     <EmbeddedResource Include="Scripts\2.0.0\12_DO_Insert_Clinical_Service_Area.sql" />
@@ -249,25 +281,50 @@
     <EmbeddedResource Include="Scripts\2.0.0\21_Add_Lookups_Dental.sql" />
     <EmbeddedResource Include="Scripts\2.0.0\24_DO_AlterTable_PatientIcf_AddColumn_ContactWithTb.sql" />
     <EmbeddedResource Include="Scripts\2.0.0\25_SPS_mstPatient_Update.sql" />
+    <EmbeddedResource Include="Scripts\2.0.0\26_SO_AlterTable_PatientMasterVisit_AddCol_FacilityId.sql" />
+    <EmbeddedResource Include="Scripts\2.0.0\27_SO_AddNewARVDrugs.sql" />
     <EmbeddedResource Include="Scripts\2.0.0\26_Person_Update.sql" />
     <EmbeddedResource Include="Scripts\2.0.0\27_Create_PatientPncExercises.sql" />
+    <EmbeddedResource Include="Scripts\2.0.0\28_HtsEncounter_Add_HivCounsellingDone.sql" />
+    <EmbeddedResource Include="Scripts\2.0.0\29_HtsEncounterResult_Add_EncounterResultRemarks.sql" />
+    <EmbeddedResource Include="Scripts\2.0.0\29_SO_Create_SP_GetPharmcyRegimens.sql" />
+    <EmbeddedResource Include="Scripts\2.0.0\30_BlueCardGreencard_sync_Alter.sql" />
+    <EmbeddedResource Include="Scripts\2.0.0\31_DO_Insert_Into_LabTestMaster_New_LabTests.sql" />
+    <EmbeddedResource Include="Scripts\2.0.0\32_DO_Insert_Into_LabTestParameters_New_Params.sql" />
+    <EmbeddedResource Include="Scripts\2.0.0\33_DO_InsertInto_LabTestParameterResultOption_NewOptions.sql" />
+    <EmbeddedResource Include="Scripts\2.0.0\34_DO_Update_PregnancyLabTest_Parameter_Values.sql" />
+    <EmbeddedResource Include="Scripts\2.0.0\31_Person_Update_DateOfBirth.sql" />
+    <EmbeddedResource Include="Scripts\2.0.0\32_Remove_S_P_From_PNSRelationship.sql" />
+    <EmbeddedResource Include="Scripts\2.0.0\33_Pregnancy_Alter_Gravidae_Parity.sql" />
+    <EmbeddedResource Include="Scripts\2.0.0\34_Person_Update_Alter.sql" />
+    <EmbeddedResource Include="Scripts\2.0.0\35_Pharmacy_History.sql" />
+    <EmbeddedResource Include="Scripts\2.0.0\36_LO_HtsPnsReferral.sql" />
+    <EmbeddedResource Include="Scripts\2.0.0\37_UpdatePaediatricRegimen.sql" />
+    <EmbeddedResource Include="Scripts\2.0.0\38_IPTOutcomeDate.sql" />
+    <EmbeddedResource Include="Scripts\2.0.0\38_LO_HEI_Register.sql" />
+    <EmbeddedResource Include="Scripts\2.0.0\39_IndicatorTables.sql" />
+    <EmbeddedResource Include="Scripts\2.0.0\40_IndicatorData.sql" />
+    <EmbeddedResource Include="Scripts\2.0.0\37_HIVPositiveListView.sql" />
+    <EmbeddedResource Include="Scripts\2.0.0\42_LO_PNCRegister.sql" />
+    <EmbeddedResource Include="Scripts\2.0.0\43_LO_MaternityRegister.sql" />
+    <EmbeddedResource Include="Scripts\2.0.0\44_LO_IQCareViews.sql" />
+    <EmbeddedResource Include="Scripts\2.0.0\45_LO_ANCRegister.sql" />
+    <EmbeddedResource Include="Scripts\2.0.0\46_LO_HEIRegister.sql" />
+	<EmbeddedResource Include="Scripts\2.0.0\47_SO_IQCare_Version.sql" />
+    <EmbeddedResource Include="Scripts\2.0.0\48_SO_CreateVIew_PmtctPatientScreeningView.sql" />
+    <EmbeddedResource Include="Scripts\2.0.0\49_SO_Add_Identifiers_BirthNotification.sql" />
+    <EmbeddedResource Include="Scripts\2.0.0\50_SO_ChangeIQCareVersion2Name.sql" />
+    <EmbeddedResource Include="Scripts\2.0.0\51_SO_AddCacxMethod_VIAVILI.sql" />
   </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="dbup" Version="4.1.0" />
     <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="2.1.1" />
+    <PackageReference Include="Microsoft.Extensions.Configuration" Version="2.1.1" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="2.1.1" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Reference Include="Microsoft.Extensions.Configuration">
-      <HintPath>..\..\..\..\..\..\..\..\Program Files\dotnet\sdk\NuGetFallbackFolder\microsoft.extensions.configuration\2.1.1\lib\netstandard2.0\Microsoft.Extensions.Configuration.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.Extensions.Configuration.Abstractions">
-      <HintPath>..\..\..\..\..\..\..\..\Program Files\dotnet\sdk\NuGetFallbackFolder\microsoft.extensions.configuration.abstractions\2.1.1\lib\netstandard2.0\Microsoft.Extensions.Configuration.Abstractions.dll</HintPath>
-    </Reference>
-  </ItemGroup>
-
-  <ItemGroup>
+ <ItemGroup>
     <ProjectReference Include="..\IQCare.SharedKernel.Infrastructure\IQCare.SharedKernel.Infrastructure.csproj" />
   </ItemGroup>
 

@@ -11,37 +11,52 @@
     <!-- /Page Sidebar Header -->
     <!-- Sidebar Menu -->
     <ul class="nav sidebar-menu">
-
-        <!-- Person Home-->
-        <ng-container *ngIf="selectedService">
-            <li>
-                <a routerLink="/dashboard/personhome/{{ personId }}">
-                    <i class="menu-icon glyphicon glyphicon-home"></i>
-                    <span class="menu-text">Person Home</span>
-                </a>
-            </li>
-        </ng-container>
-
         <!-- Search Person -->
         <li>
             <a routerLink="/record">
                 <i class="menu-icon glyphicon glyphicon-search"></i>
-                <span class="menu-text"> Find Person </span>
+                <span class="menu-text"> FIND PERSON </span>
             </a>
         </li>
 
         <li>
             <a routerLink="/record/person">
                 <i class="menu-icon glyphicon glyphicon-user"></i>
-                <span class="menu-text"> New Person </span>
+                <span class="menu-text"> NEW PERSON </span>
             </a>
         </li>
+
+        <!-- Person Home-->
+        <ng-container *ngIf="selectedService">
+            <li>
+                <a routerLink="/dashboard/personhome/{{ personId }}">
+                    <i class="menu-icon glyphicon glyphicon-home"></i>
+                    <span class="menu-text"> PERSON HOME </span>
+                </a>
+            </li>
+        </ng-container>
+
+        <ng-container *ngIf="patientId > 0">
+            <li>
+                <a routerLink="/clinical/completeorder/{{ patientId }}/{{ personId }}">
+                    <i class="menu-icon fa fa-tint"></i>
+                    <span class="menu-text"> LAB </span>
+                </a>
+            </li>
+
+            <li>
+                <a routerLink="/clinical/triage/{{ patientId }}/{{ personId }}">
+                    <i class="menu-icon fa fa-heartbeat"></i>
+                    <span class="menu-text"> TRIAGE </span>
+                </a>
+            </li>
+        </ng-container>
 
         <ng-container *ngIf="selectedService == 'hts'">
             <li>
                 <a routerLink="/registration/home">
                     <i class="menu-icon fa fa-user-md"></i>
-                    <span class="menu-text">HTS Encounters</span>
+                    <span class="menu-text">HTS ENCOUNTERS</span>
                 </a>
             </li>
 

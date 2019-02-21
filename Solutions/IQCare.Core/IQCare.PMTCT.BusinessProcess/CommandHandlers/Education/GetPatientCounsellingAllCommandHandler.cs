@@ -28,7 +28,7 @@ namespace IQCare.PMTCT.BusinessProcess.CommandHandlers.Education
                 try
                 {
                     List<PatientCounsellingView> counselingView = await _unitOfWork.Repository<PatientCounsellingView>().Get(x =>
-                        x.PatientId == request.PatientId).ToListAsync();
+                        x.PatientId == request.PatientId && x.CounsellingTopicId>0).ToListAsync();
                     return Result<List<PatientCounsellingView>>.Valid(counselingView);
                 }
                 catch (Exception e)

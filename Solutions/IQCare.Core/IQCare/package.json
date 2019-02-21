@@ -9,7 +9,7 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "vs": "ng serve --proxy-config proxy.config.json",
+    "vs": "ng serve --open --proxy-config proxy.config.json",
     "net": "dotnet watch run"
   },
   "private": true,
@@ -35,13 +35,14 @@
     "material-icons": "^0.2.3",
     "moment": "^2.23.0",
     "ng-snotify": "^4.3.1",
+    "ngx-spinner": "^7.0.0",
     "rxjs": "^6.3.3",
     "rxjs-compat": "^6.3.3",
     "web-animations-js": "^2.3.1",
     "zone.js": "^0.8.26"
   },
   "devDependencies": {
-    "@angular-devkit/build-angular": "^0.11.3",
+    "@angular-devkit/build-angular": "^0.13.1",
     "@angular-devkit/core": "^0.4.8",
     "@angular/cli": "^7.1.3",
     "@angular/compiler-cli": "^7.1.4",

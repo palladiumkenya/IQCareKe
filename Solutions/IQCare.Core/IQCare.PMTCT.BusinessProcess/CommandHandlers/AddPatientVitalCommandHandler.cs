@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -38,6 +39,40 @@ namespace IQCare.PMTCT.BusinessProcess.CommandHandlers
                     $"An error occured while adding patient vital details for patient master visit {request.PatientMasterVisitId}";
                  Log.Error(message,ex);              
                 return  Result<object>.Invalid(message);
+            }
+        }
+    }
+
+    public class UpdatePatientVitalCommandHandler : IRequestHandler<UpdatePatientVitalCommand, Result<object>>
+    {
+        private readonly IPmtctUnitOfWork _pmtctUnitOfWork;
+
+        public UpdatePatientVitalCommandHandler(IPmtctUnitOfWork pmtctUnitOfWork)
+        {
+            _pmtctUnitOfWork = pmtctUnitOfWork;
+            
+        }
+        public async Task<Result<object>> Handle(UpdatePatientVitalCommand request, CancellationToken cancellationToken)
+        {
+            try
+            {
+                var patientVitalInfoToUpdate = _pmtctUnitOfWork.Repository<PatientVital>().Get(x => x.Id == request.PatientVitalInfo.Id)
+                        .SingleOrDefault();
+                if (patientVitalInfoToUpdate == null)
+                    return Result<object>.Invalid($"Patient vitals information with Id {request.PatientVitalInfo.Id} not found");
+
+                patientVitalInfoToUpdate.UpdateVitalsInfo(request.PatientVitalInfo);
+                _pmtctUnitOfWork.Repository<PatientVital>().Update(patientVitalInfoToUpdate);
+                await _pmtctUnitOfWork.SaveAsync();
+
+                return Result<object>.Valid(new { Message = "Succussfully updated patient vitals information", PatientVitalId = request.PatientVitalInfo.Id });
+            }
+            catch (Exception ex)
+            {
+                string errorMessage =$"An error occured while updating patient vital information with Id {request.PatientVitalInfo.Id}";
+
+                Log.Error(ex, errorMessage);
+               return Result<object>.Invalid(errorMessage);
             }
         }
     }

@@ -85,6 +85,7 @@
     <Content Include="CCC\FollowupEducation\frmFollowUpEducation.aspx" />
     <Content Include="CCC\Patient\PatientCareEnded.aspx" />
     <Content Include="CCC\Patient\PatientConsent.aspx" />
+    <Content Include="CCC\Patient\PatientDuplicateFinder.aspx" />
     <Content Include="CCC\Screening\AlcoholDrugAbuseScreening.aspx" />
     <Content Include="CCC\Screening\DepressionScreening.aspx" />
     <Content Include="CCC\Screening\GBVScreening.aspx" />
@@ -177,6 +178,7 @@
     <Content Include="CCC\UC\ucPatientBrief.ascx" />
     <Content Include="CCC\UC\ucPatientClinicalEncounter.ascx" />
     <Content Include="CCC\UC\ucPatientDetails.ascx" />
+    <Content Include="CCC\UC\ucPatientDuplicateFinder.ascx" />
     <Content Include="CCC\UC\ucPatientLabs.ascx" />
     <Content Include="CCC\UC\ucPatientLabsExtruder.ascx" />
     <Content Include="CCC\UC\ucPatientSychosocialCriteria.ascx" />
@@ -717,6 +719,13 @@
     <Compile Include="CCC\Patient\PatientConsent.aspx.designer.cs">
       <DependentUpon>PatientConsent.aspx</DependentUpon>
     </Compile>
+    <Compile Include="CCC\Patient\PatientDuplicateFinder.aspx.cs">
+      <DependentUpon>PatientDuplicateFinder.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CCC\Patient\PatientDuplicateFinder.aspx.designer.cs">
+      <DependentUpon>PatientDuplicateFinder.aspx</DependentUpon>
+    </Compile>
     <Compile Include="CCC\Patient\PatientFinder.aspx.cs">
       <DependentUpon>PatientFinder.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -961,6 +970,13 @@
     </Compile>
     <Compile Include="CCC\UC\ucPatientDetails.ascx.designer.cs">
       <DependentUpon>ucPatientDetails.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="CCC\UC\ucPatientDuplicateFinder.ascx.cs">
+      <DependentUpon>ucPatientDuplicateFinder.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CCC\UC\ucPatientDuplicateFinder.ascx.designer.cs">
+      <DependentUpon>ucPatientDuplicateFinder.ascx</DependentUpon>
     </Compile>
     <Compile Include="CCC\UC\ucPatientLabs.ascx.cs">
       <DependentUpon>ucPatientLabs.ascx</DependentUpon>

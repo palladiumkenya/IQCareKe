@@ -42,7 +42,7 @@ namespace IQCare.CCC.UILogic.Baseline
                 int patientMasterVisitId = 0;
                 int vaccine = 0;
                 string vaccineStage = "";
-                DateTime vaccineDate = new DateTime();
+                DateTime? vaccineDate = new DateTime();
                 List<PatientVaccination> patientVaccinationList = _mgr.GetPatientVaccinationsById(immunizationId);
                 foreach(var value in patientVaccinationList)
                 {

@@ -98,7 +98,8 @@ export class PncService {
     }
 
     public savePncHivTests(hivTestsCommand: HivTestsCommand): Observable<any> {
-        if (hivTestsCommand.Testing.length == 0) {
+        if (hivTestsCommand.Testing.length == 0 ||
+            (!hivTestsCommand.HtsEncounterId || hivTestsCommand.HtsEncounterId == null || hivTestsCommand.HtsEncounterId == 0)) {
             return of([]);
         }
         return this.http.post<any>(this.API_URL + '/api/HtsEncounter/addTestResults', JSON.stringify(hivTestsCommand), httpOptions).pipe(
@@ -282,10 +283,11 @@ export class PncService {
     }
 
     public savePncExercises(patientPncExercisesCommand: PatientPncExercisesCommand): Observable<any> {
-        return this.http.post(this.API_PMTCT_URL + '/api/PatientPncExercises/Post', JSON.stringify(patientPncExercisesCommand), httpOptions).pipe(
-            tap(savePncExercises => this.errorHandler.log(`successfully saved pnc exercises`)),
-            catchError(this.errorHandler.handleError<any>('Error saving pnc exercises'))
-        );
+        return this.http.post(this.API_PMTCT_URL + '/api/PatientPncExercises/Post', JSON.stringify(patientPncExercisesCommand),
+            httpOptions).pipe(
+                tap(savePncExercises => this.errorHandler.log(`successfully saved pnc exercises`)),
+                catchError(this.errorHandler.handleError<any>('Error saving pnc exercises'))
+            );
     }
 
     public getPncExercises(patientId: number, patientMasterVisitId: number): Observable<any[]> {
@@ -309,5 +311,12 @@ export class PncService {
                 tap(getHivTests => this.errorHandler.log(`successfully fetched hiv tests`)),
                 catchError(this.errorHandler.handleError<any>('Error fetching hiv tests'))
             );
+    }
+
+    public getPersonCurrentHivStatus(personId: number): Observable<any[]> {
+        return this.http.get<any[]>(this.API_URL + '/api/HtsEncounter/GetIsPersonInPositiveList/' + personId).pipe(
+            tap(getPersonCurrentHivStatus => this.errorHandler.log(`successfully current person hiv status`)),
+            catchError(this.errorHandler.handleError<any>('Error fetching current person hiv status'))
+        );
     }
 }

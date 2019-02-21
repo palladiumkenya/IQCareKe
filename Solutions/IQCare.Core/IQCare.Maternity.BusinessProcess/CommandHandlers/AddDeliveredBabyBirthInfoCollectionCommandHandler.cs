@@ -30,8 +30,8 @@ namespace IQCare.Maternity.BusinessProcess.CommandHandlers
 
             try
             {
-                if (request.DeliveredBabyBirthInfoCollection == null)
-                    return Result<DeliveredBabyBirthInfoResult>.Invalid("Delivered baby bith info not found");
+                if (request.DeliveredBabyBirthInfoCollection == null && request.DeliveredBabyBirthInfoCollection.Count == 0)
+                    return Result<DeliveredBabyBirthInfoResult>.Invalid("Delivered baby birth info not found");
 
 
                 foreach (var deliveredBabyBirthInfo in request.DeliveredBabyBirthInfoCollection)
@@ -47,6 +47,24 @@ namespace IQCare.Maternity.BusinessProcess.CommandHandlers
                         await _maternityUnitOfWork.Repository<DeliveredBabyApgarScore>().AddRangeAsync(apgarScores);
                     }
 
+                }
+
+                var patientDeliveryInfo = _maternityUnitOfWork.Repository<PatientDeliveryInformationView>()
+                    .Get(x => x.Id == request.DeliveredBabyBirthInfoCollection[0].PatientDeliveryInformationId)
+                    .FirstOrDefault();
+
+                if (patientDeliveryInfo != null)
+                {
+                    var pregnancyInfo = _maternityUnitOfWork.Repository<Pregnancy>()
+                        .Get(x => x.Id == patientDeliveryInfo.PregnancyId).SingleOrDefault();
+
+                    if (pregnancyInfo != null)
+                    {
+                        pregnancyInfo.UpdateOutcome(request.DeliveredBabyBirthInfoCollection[0].DeliveryOutcome,
+                            patientDeliveryInfo.CreateDate);
+
+                        _maternityUnitOfWork.Repository<Pregnancy>().Update(pregnancyInfo);
+                    }
                 }
 
                 await _maternityUnitOfWork.SaveAsync();

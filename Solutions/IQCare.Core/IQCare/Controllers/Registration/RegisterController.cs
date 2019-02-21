@@ -135,7 +135,7 @@ namespace IQCare.Controllers.Registration
         [HttpGet("getPerson/{personId}")]
         public async Task<IActionResult> Get(int personId)
         {
-            var response = await _mediator.Send(new GetPartnerCommand() {PersonId = personId});
+            var response = await _mediator.Send(new GetPersonDetailsCommand	() {PersonId = personId});
             if (response.IsValid)
                 return Ok(response.Value);
             return BadRequest(response);

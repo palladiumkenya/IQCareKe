@@ -57,5 +57,14 @@ namespace IQCare.Controllers.Afyamobile
                 return Ok(response.Value);
             return BadRequest(response);
         }
+
+        [HttpGet("iqcareversion")]
+        public async Task<IActionResult> IqCareVersion()
+        {
+            var response = await _mediator.Send(new GetIqcareVersionCommand(), Request.HttpContext.RequestAborted);
+            if (response.IsValid)
+                return Ok(response.Value);
+            return BadRequest(response);
+        }
     }
 }

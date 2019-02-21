@@ -1273,7 +1273,7 @@
 		                    $('input[name=PatientTypeId][value=' + personDetails.patientType + ']').attr('checked', true);
                             $("#Gender").val(personDetails.Sex);
                            
-
+                            $("#NationalId").val(personDetails.NationalId);
                             if (moment('1900-06-15').isSame(personDetails.DoB)) {
                                 $("#DateOfEnrollment").val("");
                             } else {
@@ -1294,6 +1294,39 @@
                             $("#MaritalStatusId").val(personDetails.MaritalStatus);
                             
                             $("#<%=dobPrecision.ClientID%>").val(personDetails.DateOfBirthPrecision);
+                            $("#countyId").val(personDetails.CountyId);
+							$.when(getSubcountyList()).then(function() {
+								setTimeout(function(){
+
+									$("#SubcountyId").val(personDetails.SubCounty);
+
+									$.when(getWardList()).then(function() {
+										setTimeout(function(){
+											$("#WardId").val(personDetails.Ward);
+										}, 2000);
+									});
+
+								}, 2000);
+							});
+
+							
+                            $("#LocalCouncils").val(personDetails.Village);
+							$("#PatientLocation").val(personDetails.Location);
+							$("#ctl00_IQCareContentPlaceHolder_sublocation").val(personDetails.SubLocation);
+							$("#ctl00_IQCareContentPlaceHolder_PatientLandmark").val(personDetails.LandMark);
+							$("#NearestHealthCentre").val(personDetails.NearestHealthCentre);
+							/*Person Contact*/
+							$("#PatientPostalAddress").val(personDetails.PatientPostalAddress);
+							$("#PatientMobileNo").val(personDetails.MobileNumber);
+							$("#PatientAlternativeMobile").val(personDetails.AlternativeNumber);
+							$("#PatientEmailAddress").val(personDetails.EmailAddress);
+							/*Treatment Supporter*/
+							$("#tsFname").val(personDetails.tsFname);
+							$("#tsMiddleName").val(personDetails.tsMiddleName);
+							$("#tsLastName").val(personDetails.tsLastName);
+							$("#tsGender").val(personDetails.tsGender);
+							$("#ctl00_IQCareContentPlaceHolder_TSContacts").val(personDetails.ISContacts);
+							
 
 		                    var RBID = '<%=PopulationType.ClientID %>';
 		                    var RB1 = document.getElementById(RBID);
@@ -1410,11 +1443,16 @@
 							console.log(patientDetails.population);
 
 							if (patientDetails.population == "General Population") {
-								var d = document.getElementById("GenPopulation");
-								d.className += " checked";
+                             $('input:radio[name*="PopulationType"]').filter('[value="' + patientDetails.populationTypeId +'"]').closest("td").find("label").attr('class','checked');
+
+                            // var d= document.getElementById("GenPopulation");           
+  
+							//	d.className += " checked";
 							} else if(patientDetails.population == "Key Population") {
-								var d = document.getElementById("KeyPopulation");
-								d.className += " checked";
+                            $('input:radio[name*="PopulationType"]').filter('[value="' + patientDetails.populationTypeId +'"]').closest("td").find("label").attr('class','checked');
+								//var d = document.getElementById("KeyPopulation");
+								//d.className += " checked";
+                                
 							}
 							$('input:radio[name="Population"]').filter('[value="' + patientDetails.population +'"]').attr('checked', true);
 							

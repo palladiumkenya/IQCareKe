@@ -34,6 +34,7 @@ encounterType : any;
 serviceAreaId : any;
 labTestReasonOptions : any[];
 maxDate : Date;
+otherReason : boolean = false;
 
 @ViewChild(MatPaginator) paginator: MatPaginator;
 
@@ -58,7 +59,8 @@ dataSource =  new MatTableDataSource(this.labTestData);
       labtestReasonId: new FormControl('', [Validators.required]),
       labTestNotes: new FormControl(''),  
       orderDate: new FormControl('', [Validators.required]),
-      clinicalOrderNotes: new FormControl('')
+      clinicalOrderNotes: new FormControl(''),
+      otherTestReason : new FormControl('')
     });
     this.notify.emit(this.labOrderFormGroup);
     this.dataSource =  new MatTableDataSource(this.labTestData);
@@ -71,6 +73,7 @@ dataSource =  new MatTableDataSource(this.labTestData);
     this.activatedRoute.params.subscribe(params => {
       this.patientId = params['patientId'];
       this.personId = params['personId'];
+      localStorage.setItem('partnerId', this.personId);
       this.personService.getPatientById(this.patientId).subscribe(patient => {
          this.patientInfo = patient;
      });  
@@ -95,6 +98,9 @@ dataSource =  new MatTableDataSource(this.labTestData);
         return;
        var labTestId = this.labOrderFormGroup.get('labTestId').value.id;
        var testName =  this.labOrderFormGroup.get('labTestId').value.name;
+       var labOrderReason = this.labOrderFormGroup.get('labtestReasonId').value.displayName;
+
+       labOrderReason = labOrderReason === 'Other' ? this.labOrderFormGroup.get('otherTestReason').value : labOrderReason;
 
     if(this.addedLabTestIds.indexOf(labTestId) >= 0)
        {
@@ -105,7 +111,7 @@ dataSource =  new MatTableDataSource(this.labTestData);
     this.labTestData.push({
       testId: labTestId,
       test: testName,
-      orderReason: this.labOrderFormGroup.get('labtestReasonId').value.displayName,
+      orderReason: labOrderReason,
       orderReasonId: this.labOrderFormGroup.get('labtestReasonId').value.itemId,
       testNotes: this.labOrderFormGroup.get('labTestNotes').value
     });
@@ -242,6 +248,22 @@ dataSource =  new MatTableDataSource(this.labTestData);
         this.encounterType = result.ItemId;
     });
     }
+
+   public labTestReasonChange(reason :any){
+     this.labOrderFormGroup.controls['otherTestReason'].reset();
+
+      this.otherReason = reason.displayName === 'Other';
+      if(this.otherReason){
+        this.labOrderFormGroup.controls['otherTestReason'].setValidators(Validators.required);
+      }
+      else
+      {
+        this.labOrderFormGroup.controls['otherTestReason'].clearValidators();
+      }
+      this.labOrderFormGroup.controls['otherTestReason'].updateValueAndValidity();
+
+      console.log(this.otherReason);
+   }
 
 }
 

@@ -3,7 +3,8 @@ export interface CompleteLabOrderCommand {
     LabOrderTestId : number;
     LabTestId : number;
     UserId : number;
-    LabTestResults : AddLabTestResultCommand[]
+    LabTestResults : AddLabTestResultCommand[],
+    StrLabTestResults : any
 }
 
 export interface AddLabTestResultCommand {

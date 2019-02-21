@@ -195,6 +195,7 @@
     <Compile Include="PersonMaritalStatusManager.cs" />
     <Compile Include="PersonOvcStatusManager.cs" />
     <Compile Include="PersonRelationshipManager.cs" />
+    <Compile Include="PharmacyHistoryDrugSubstitutionsManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="PatientLabOrderManager.cs" />
     <Compile Include="Screening\PatientScreeningManager.cs" />

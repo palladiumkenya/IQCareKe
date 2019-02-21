@@ -1,6 +1,11 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="True" CodeBehind="session1.aspx.cs" Inherits="IQCare.Web.CCC.UC.EnhanceAdherenceCounselling.session1" %>
 <!--<%@ OutputCache duration="86400" varybyparam="none" %>-->
 <style>
+    .disabled {
+    color: darkgray;
+    opacity:0.7;
+
+    }
     .mmrbList{float: right;}
     .mmas4-results{margin-bottom: 30px;}
     .possiblebarrierstitle, .title-div{margin-top: 15px;}
@@ -336,7 +341,7 @@
         var patientId = '<%=PatientId%>';
         var SRNQuestion1='<%=SessionRefferal1ItemId%>';
         var SRNQuestion3 = '<%=SessionRefferal3ItemId%>';
-
+        var SRNQuestion2='<%= SessionRefferal2ItemId%>'
         var ItemNo = '<%=ItemNo%>';
         var ItemYes = '<%=ItemYes%>';
 
@@ -350,14 +355,21 @@
                  
 
                      $("#session1tb" + SRNQuestion3).prop('disabled', false);
+                    // $("#session1rb" + SRNQuestion2).prop('disabled', false);
+                     $("input:radio[name='session1rb" + SRNQuestion2 + "']").prop('disabled', false);
                  }
                  else {
 
                      $("#session1tb" + SRNQuestion3).prop('disabled', true);
+                     //$("#session1rb" + SRNQuestion2).prop('disabled', true);
+                     $("input:radio[name='session1rb" + SRNQuestion2 + "']").prop('disabled', true);
+                     $("input:radio[name='session1rb" + SRNQuestion2 + "']").prop('checked', false);
                  }
              }
              else {
                  $("#session1tb" + SRNQuestion3).prop('disabled', false);
+               //  $("#session1rb" + SRNQuestion2).prop('disabled', false);
+                   $("input:radio[name='session1rb" + SRNQuestion2 + "']").prop('disabled', false);
              }
        // var selectedIndex = radioButtons.index(radioButtons.filter(':checked'));
        // var parentPanel = $(this).parent().closest('.row').attr('id').split(' ');

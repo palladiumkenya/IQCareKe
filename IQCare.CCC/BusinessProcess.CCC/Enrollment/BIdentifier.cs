@@ -22,6 +22,15 @@ namespace BusinessProcess.CCC.Enrollment
             }
         }
 
+        public Identifier GetIdentifierByName(string name)
+        {
+            using (UnitOfWork unitOfWork = new UnitOfWork(new GreencardContext()))
+            {
+                var identifier = unitOfWork.IdentifierRepository.FindBy(x => x.Name==name && !x.DeleteFlag).FirstOrDefault();
+                unitOfWork.Dispose();
+                return identifier;
+            }
+        }
         public Identifier GetIdentifierByCode(string code)
         {
             using (UnitOfWork unitOfWork = new UnitOfWork(new GreencardContext()))

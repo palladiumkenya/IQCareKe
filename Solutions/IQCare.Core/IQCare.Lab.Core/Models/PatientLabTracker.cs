@@ -50,13 +50,20 @@ namespace IQCare.Lab.Core.Models
         public DateTime CreateDate { get; set; }
         public string AuditData { get; set; }
 
-        public void UpdateResults(DateTime resultDate,string resultText,string resultUnit, decimal? resultValues)
+        public void UpdateResults(DateTime resultDate,string resultText,string resultUnit, decimal? resultValues, string resultOption)
         {
             ResultValues = resultValues;
             ResultDate = resultDate;
             ResultTexts = resultText;
             ResultUnits = resultUnit;
+            ResultOptions = resultOption;
             Results = LabOrderStatus.Complete.ToString();
+        }
+
+        public void SetAsComplete()
+        {
+            Results = LabOrderStatus.Complete.ToString();
+            ResultDate = DateTime.Now;
         }
 
     }

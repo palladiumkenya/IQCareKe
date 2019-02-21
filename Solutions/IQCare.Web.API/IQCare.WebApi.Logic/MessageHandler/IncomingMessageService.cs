@@ -87,6 +87,9 @@ namespace IQCare.WebApi.Logic.MessageHandler
                 case "KENYAEMR":
                     senderId = (int) Senders.KENYAEMR;
                     break;
+                case "HAPI":
+                    senderId = (int) Senders.HAPI;
+                    break;
                     default:
                         senderId = 1;
                     break;

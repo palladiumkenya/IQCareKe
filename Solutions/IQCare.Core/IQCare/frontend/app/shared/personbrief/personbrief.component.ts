@@ -22,10 +22,12 @@ export class PersonbriefComponent implements OnInit {
 
     getPartnerDetails() {
         this.clientService.getPersonDetails(this.partnerId).subscribe(res => {
-            // console.log(res);
+             console.log(this.partnerId + ' Partner Id');
+             console.log(res +' Response Person')
             this.partnerView.fullName = res['firstName'] + ' ' + res['midName'] + ' ' + res['lastName'];
             this.partnerView.DateOfBirth = res['dateOfBirth'];
             this.partnerView.Gender = res['gender'];
+            this.partnerView.MaritalStatus = res['maritalStatusName'];
         });
     }
 

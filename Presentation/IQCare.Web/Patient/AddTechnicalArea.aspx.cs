@@ -957,6 +957,7 @@ namespace IQCare.Web.Patient
                             Insertcb2.Append(" UpdateDate=Getdate(),StartDate='" + ReEnrollDate + "' where Ptn_Pk=" + Convert.ToInt32(Session["PatientId"]) + " and ModuleId=" + Convert.ToInt32(ddlTecharea.SelectedValue));
                             Insertcb2.Append("; Insert into Lnk_PatientReEnrollment(Ptn_Pk,LocationId,ModuleId,ReEnrollDate,OldEnrollDate,UserId,CreateDate)");
                             Insertcb2.Append("Values(" + Convert.ToInt32(Session["PatientId"]) + ", " + Session["AppLocationId"].ToString() + "," + Convert.ToInt32(ddlTecharea.SelectedValue) + ",'" + ReEnrollDate + "','" + visitdate + "'," + Session["AppUserId"].ToString() + ", Getdate())");
+                           
                             theReEnroll = true;
                         }
                     }
@@ -974,6 +975,7 @@ namespace IQCare.Web.Patient
                     {
                         IPatientHome theReactivationManager = (IPatientHome)ObjectFactory.CreateInstance("BusinessProcess.Clinical.BPatientHome, BusinessProcess.Clinical");
                         theReactivationManager.ReActivatePatient(Convert.ToInt32(Session["PatientId"]), Convert.ToInt32(ddlTecharea.SelectedValue));
+                        ReenrollPatient(Convert.ToInt32(Session["PatientId"]), ReEnrollDate);
                     }
                     theReEnroll = false;
                     if (icountprog == 0)
@@ -1020,6 +1022,39 @@ namespace IQCare.Web.Patient
             }
             return strmaxvalue;
         }
+
+        private void ReenrollPatient (int patientid,DateTime reenrolldate)
+        {
+
+            ICustomFields CustomFields;
+            
+            try
+            {
+                StringBuilder Insertcbl = new StringBuilder();
+                string[] strarr = new string[1];
+                Insertcbl.Append("Update  pr WITH(ROWLOCK) SET");
+                Insertcbl.Append(" DeleteFlag=1 FROM PatientReenrollment pr inner join Patient pt on pt.id=pr.PatientId where pt.Ptn_pk=" + patientid);
+                Insertcbl.Append("; IF EXISTS(select* from Patient where ptn_pk='" + patientid + "')");
+                Insertcbl.Append("  BEGIN ");
+                Insertcbl.Append(" Insert into PatientReenrollment(PatientId, ReenrollmentDate, CreatedBy)"); 
+                Insertcbl.Append("Values((select Id from Patient where Ptn_pk = '" + patientid + "'), '" + reenrolldate + "'," + Session["AppUserId"].ToString() + ")");
+                Insertcbl.Append("END");
+                Insertcbl.Append(" update pce WITH(ROWLOCK) SET");
+                Insertcbl.Append("  DeleteFlag = 1, Active = 1 FROM PatientCareEnding pce INNER JOIN Patient pt on pt.Id = pce.PatientId where pt.Ptn_pk =" + patientid);
+                Insertcbl.Append(" update pe WITH(ROWLOCK) SET");
+                Insertcbl.Append("  CareEnded= 0 FROM PatientEnrollment  pe INNER JOIN Patient pt on pt.Id = pe.PatientId where pt.Ptn_pk =" + patientid);
+
+                strarr[0] = Insertcbl.ToString();
+                CustomFields = (ICustomFields)ObjectFactory.CreateInstance("BusinessProcess.Administration.BCustomFields, BusinessProcess.Administration");
+                int icountprog = CustomFields.SaveUpdateCustomFieldValues(strarr);
+
+                
+            }
+            catch(Exception err)
+            {
+                IQCareMsgBox.NotifyAction(err.Message, "Error", false, this, "");
+            }
+         }
         /// <summary>
         /// Saves the patient registration.
         /// </summary>

@@ -34,6 +34,7 @@ namespace IQCare.Web.CCC.WebService
         public string DateAssessed { get; set; }
 
         public string valueAchieved { get; set; }
+        public string VaccineStage;
         [WebMethod(EnableSession = true)]
         public string addNeonatalMilestones(int patientId, int patientMasterVisitId, int createdBy, int milestoneAssessed, DateTime milestoneOnsetDate, bool milestoneAchieved, int milestoneStatus, string milestoneComment)
         {
@@ -92,9 +93,10 @@ namespace IQCare.Web.CCC.WebService
                     PatientId = patientId,
                     PatientMasterVisitId = patientMasterVisitId,
                     CreatedBy = createdBy,
-                    VaccineStage = immunizationPeriod,
+                    VaccineStage = "",
                     Vaccine = immunizationGiven,
-                    VaccineDate = immunizationDate
+                    VaccineDate = immunizationDate,
+                    PeriodId = Convert.ToInt32(immunizationPeriod)
                 };
                 var ImmunizationHistory = new PatientVaccinationManager();
                 Result = ImmunizationHistory.addPatientVaccination(immunizationHistory);
@@ -119,13 +121,59 @@ namespace IQCare.Web.CCC.WebService
             var vaccineLogic = new PatientVaccinationManager();
             List<PatientVaccination> list = new List<PatientVaccination>();
             list = vaccineLogic.GetPatientVaccinations(Convert.ToInt32(Session["PatientPK"]));
-            foreach (var items in list)
+            if (list.Count > 0)
             {
-                List<LookupItemView> lookupList = ll.GetItemIdByGroupAndItemName("ImmunizationPeriod", LookupLogic.GetLookupNameById(Convert.ToInt32(items.VaccineStage)).ToString());
-                if (lookupList.Any())
+                foreach (var items in list)
                 {
-                    string[] i = new string[5] { items.Id.ToString(), LookupLogic.GetLookupNameById(Convert.ToInt32(items.VaccineStage)).ToString(), LookupLogic.GetLookupNameById(Convert.ToInt32(items.Vaccine)).ToString(), Convert.ToDateTime(items.VaccineDate).ToString("dd-MMM-yyyy"), "<button type='button' class='btnDelete btn btn-danger fa fa-minus-circle btn-fill' > Remove</button>" };
-                    rows.Add(i);
+                    string PeriodId;
+                    string Vaccine;
+                    string VaccineDate;
+                  
+                    //List<LookupItemView> lookupList = ll.GetItemIdByGroupAndItemName("ImmunizationPeriod", LookupLogic.GetLookupNameById(Convert.ToInt32(items.PeriodId)).ToString());
+                    if (!String.IsNullOrEmpty(items.PeriodId.ToString()))
+                    {
+                        PeriodId = LookupLogic.GetLookupNameById(Convert.ToInt32(items.PeriodId)).ToString();
+                    }
+                    else
+                    {
+                        PeriodId = "";
+                    }
+                    if (!String.IsNullOrEmpty(items.Vaccine.ToString()))
+                    {
+                        if (items.Vaccine > 0)
+                        {
+                            Vaccine = LookupLogic.GetLookupNameById(Convert.ToInt32(items.Vaccine)).ToString();
+                        }
+                        else
+                        {
+                            Vaccine = "";
+                        }
+                    }
+                    else
+                    {
+                        Vaccine = "";
+                    }
+                    if (items.VaccineDate != null)
+                    {
+                        VaccineDate = Convert.ToDateTime(items.VaccineDate).ToString("dd-MMM-yyyy").ToString();
+                    }
+                    else
+                    {
+                        VaccineDate = "";
+                    }
+
+                    if(items.VaccineStage!=null)
+                    {
+                        VaccineStage = items.VaccineStage.ToString();
+                    }
+                    //if (lookupList.Any())
+                    //{
+                        string[] i = new string[6] { items.Id.ToString(),PeriodId,Vaccine,VaccineStage,VaccineDate, //LookupLogic.GetLookupNameById(Convert.ToInt32(items.PeriodId)).ToString()
+                            //, LookupLogic.GetLookupNameById(Convert.ToInt32(items.Vaccine)).ToString()
+                            //, Convert.ToDateTime(items.VaccineDate).ToString("dd-MMM-yyyy"),
+                            "<button type='button' class='btnDelete btn btn-danger fa fa-minus-circle btn-fill' > Remove</button>" };
+                        rows.Add(i);
+                    //}
                 }
             }
             return rows;

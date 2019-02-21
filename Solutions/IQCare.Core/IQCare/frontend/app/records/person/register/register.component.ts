@@ -24,6 +24,7 @@ import { SearchService } from '../../_services/search.service';
 import { Search } from '../../_models/search';
 import { Store } from '@ngrx/store';
 import * as AppState from '../../../shared/reducers/app.states';
+import { Partner } from '../../../shared/_models/partner';
 
 @Component({
     selector: 'app-register',
@@ -65,6 +66,8 @@ export class RegisterComponent implements OnInit {
     newContacts: any[];
     id: number;
 
+    partnerType: Partner;
+
     public phonePattern = /^(?:\+254|0|254)(\d{9})$/;
 
     constructor(private _formBuilder: FormBuilder,
@@ -81,7 +84,6 @@ export class RegisterComponent implements OnInit {
         private store: Store<AppState>) {
         this.maxDate = new Date();
         this.clientSearch = new Search();
-        this.store.dispatch(new AppState.ClearState());
     }
 
     ngOnInit() {
@@ -155,6 +157,12 @@ export class RegisterComponent implements OnInit {
 
         if (this.id) {
             this.getPersonDetails(this.id);
+        }
+
+        this.partnerType = new Partner();
+        this.partnerType = JSON.parse(localStorage.getItem('isPartner'));
+        if (this.partnerType == null) {
+            this.store.dispatch(new AppState.ClearState());
         }
     }
 
@@ -307,12 +315,18 @@ export class RegisterComponent implements OnInit {
 
         const today = new Date();
         today.setDate(15);
-        today.setMonth(5);
+        if (ageYears > 0) {
+            today.setMonth(5);
+        }
+
+        if (ageYears == 0 && (!ageMonths || ageMonths == 0)) {
+            today.setDate(new Date().getDate());
+        }
 
         const estDob = moment(today.toISOString());
         let dob = estDob.add((ageYears * -1), 'years');
         if (ageMonths) {
-            dob = estDob.add(ageMonths, 'months');
+            dob = estDob.add(ageMonths * -1, 'months');
         }
 
         this.formArray['controls'][0]['controls']['DateOfBirth'].setValue(moment(dob).toDate());
@@ -391,18 +405,34 @@ export class RegisterComponent implements OnInit {
                                 this.snotifyService.success('Successfully Registered Person', 'Person Registration',
                                     this.notificationService.getConfig());
 
-                                if (tabIndex == 1) {
-                                    this.zone.run(() => {
-                                        this.router.navigate(['/dashboard/personhome/' + personId],
-                                            { relativeTo: this.route });
-                                    });
-                                } else if (tabIndex == 2) {
-                                    this.person = new Person();
-                                    this.clientAddress = new ClientAddress();
-                                    this.clientContact = new ClientContact();
-                                    this.nextOfKin = new NextOfKin();
+                                if (this.partnerType != null) {
+                                    if (this.partnerType != null) {
+                                        if (this.partnerType.partner == 1) {
+                                            this.zone.run(() => {
+                                                this.router.navigate(['/hts/family/familysearch/' + personId],
+                                                    { relativeTo: this.route });
+                                            });
+                                        } else if (this.partnerType.family == 1) {
+                                            this.zone.run(() => {
+                                                this.router.navigate(['/hts/family/familysearch/' + personId],
+                                                    { relativeTo: this.route });
+                                            });
+                                        }
+                                    }
+                                } else {
+                                    if (tabIndex == 1) {
+                                        this.zone.run(() => {
+                                            this.router.navigate(['/dashboard/personhome/' + personId],
+                                                { relativeTo: this.route });
+                                        });
+                                    } else if (tabIndex == 2) {
+                                        this.person = new Person();
+                                        this.clientAddress = new ClientAddress();
+                                        this.clientContact = new ClientContact();
+                                        this.nextOfKin = new NextOfKin();
 
-                                    window.location.reload();
+                                        window.location.reload();
+                                    }
                                 }
                             }
                         );
@@ -410,6 +440,8 @@ export class RegisterComponent implements OnInit {
                 (error) => {
                     this.snotifyService.error('Error creating person ' + error, 'Person Registration',
                         this.notificationService.getConfig());
+                },
+                () => {
                 }
             );
         } else {
@@ -507,6 +539,18 @@ export class RegisterComponent implements OnInit {
     }
 
     onIdentifierTypeChange() {
+        const selectedIdentifier = this.personIdentifiers.filter(obj => obj.id == this.formArray.value[0]['IdentifierType']);
+        if (selectedIdentifier.length > 0) {
+            const ageInYears = this.formArray['controls'][0]['controls']['AgeYears'].value;
+
+            if (selectedIdentifier[0]['name'] == 'NationalID' && ageInYears < 18) {
+                // this.formArray['controls'][0]['controls']['IdentifierType'].disable({ onlySelf: true });
+                this.snotifyService.error('Children of less than 18 years are not assigned National IDs ', 'Person Registration',
+                    this.notificationService.getConfig());
+                return;
+            }
+        }
+
         if (this.formArray.value[0]['IdentifierType']) {
             this.formGroup.controls['formArray']['controls'][0]['controls']['IdentifierNumber'].enable({ onlySelf: false });
         } else {

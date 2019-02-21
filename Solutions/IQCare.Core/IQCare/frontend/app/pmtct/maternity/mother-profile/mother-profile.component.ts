@@ -16,17 +16,17 @@ import { Subscription } from 'rxjs/index';
 export class MotherProfileComponent implements OnInit {
 
     motherProfileFormGroup: FormGroup;
-     dateLMP: Date;
-     minLMpDate: Date;
-     gestation: number;
+    dateLMP: Date;
+    minLMpDate: Date;
+    gestation: number;
     motherProfile: Subscription;
     visitDetails: Subscription;
     @Input() patientId: number;
-    @Input () visitDate: Date;
+    @Input() visitDate: Date;
     @Output() notify: EventEmitter<FormGroup> = new EventEmitter<FormGroup>();
 
     public maxDate: Date = moment().toDate();
-    public minLmpDate: Date = moment().subtract( 1 , 'years').toDate();
+    public minLmpDate: Date = moment().subtract(1, 'years').toDate();
     public minAgeMenarche: number = 9;
 
 
@@ -39,17 +39,17 @@ export class MotherProfileComponent implements OnInit {
 
     ngOnInit() {
         this.motherProfileFormGroup = this._formBuilder.group({
-            dateLMP: new FormControl('', [ Validators.required]),
+            dateLMP: new FormControl('', [Validators.required]),
             dateEDD: new FormControl('', [Validators.required]),
             gestation: new FormControl('', [Validators.max(42), Validators.required]),
-            ageAtMenarche: new FormControl('', []),
-            parityOne: new FormControl('', [ Validators.min(0) , Validators.max(20), Validators.required]),
-            parityTwo: new FormControl('', [ Validators.min(0), Validators.max(20), Validators.required]),
+            ageAtMenarche: new FormControl('', [Validators.min(8), Validators.max(20)]),
+            parityOne: new FormControl('', [Validators.min(0), Validators.max(20), Validators.required]),
+            parityTwo: new FormControl('', [Validators.min(0), Validators.max(20), Validators.required]),
             gravidae: new FormControl('', [Validators.required]),
         });
 
         this.getPregnancyDetails(this.patientId);
-       // this.getCurrentVisitDetails(this.patientId, 'ANC');
+        // this.getCurrentVisitDetails(this.patientId, 'ANC');
 
         this.notify.emit(this.motherProfileFormGroup);
     }
@@ -57,7 +57,7 @@ export class MotherProfileComponent implements OnInit {
     public onLMPDateChange() {
         this.dateLMP = this.motherProfileFormGroup.controls['dateLMP'].value;
         this.minLMpDate = moment(moment(this.visitDate).subtract(42, 'weeks').format('')).toDate();
-        
+
         if (moment(this.dateLMP).isBefore(this.minLMpDate)) {
 
             this.snotifyService.error('Current LMP Date CANNOT be More than 9 months after the VisitDate', 'Mother Profile',
@@ -83,7 +83,7 @@ export class MotherProfileComponent implements OnInit {
         console.log(this.motherProfileFormGroup.controls['dateEDD'].value);
 
         this.gestation = parseInt(moment.duration(moment(this.visitDate).diff(this.dateLMP)).asWeeks().toFixed(1), 10);
-        if (this.gestation > 42) { this.gestation = 42;  }
+        if (this.gestation > 42) { this.gestation = 42; }
         if (this.gestation < 1) { this.gestation = 0; }
         this.motherProfileFormGroup.controls['gestation'].setValue(this.gestation);
 
@@ -109,17 +109,16 @@ export class MotherProfileComponent implements OnInit {
                     this.motherProfileFormGroup.controls['parityOne'].setValue(p.parity);
                     this.motherProfileFormGroup.controls['parityTwo'].setValue(p.parity2);
                     this.motherProfileFormGroup.controls['gravidae'].setValue(p.gravidae);
-                    console.log('pregnancy details');
-                    console.log(p);
+                    // console.log('pregnancy details');
+                    // console.log(p);
                 },
                 (err) => {
-                    console.log(err);
+                    // console.log(err);
                     this.snotifyService.error('Error fetching previous pregnacy Profile' + err,
                         'Encounter', this.notificationService.getConfig());
                 },
                 () => {
-
-                    console.log(this.motherProfile);
+                    // console.log(this.motherProfile);
                 });
     }
 
@@ -131,7 +130,7 @@ export class MotherProfileComponent implements OnInit {
                         console.log('agetmenarche' + p.ageMenarche);
                         const visitNumber = p.length;
 
-                      //  this.motherProfileFormGroup.controls['ageAtMenarche'].setValue(p.ageMenarche);
+                        //  this.motherProfileFormGroup.controls['ageAtMenarche'].setValue(p.ageMenarche);
 
                     }
                 },

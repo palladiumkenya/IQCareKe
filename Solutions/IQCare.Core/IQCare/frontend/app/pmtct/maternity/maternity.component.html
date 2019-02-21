@@ -45,10 +45,19 @@
                                         <ng-template matStepLabel>
                                             <span matTooltip="Baby Section">Baby Section</span>
                                         </ng-template>
-                                        <app-baby [babySectionOptions]="babySectionOptions" (notifyData)="onBabyNotfiyData($event)"
-                                            (notify)="onBabyNotify($event)" [isEdit]="isEdit" [PatientId]="patientId"
-                                            [PatientMasterVisitId]="visitId"></app-baby>
-
+                                        <div *ngIf="!isEdit">
+                                            <app-add-birth-info [isEdit]="isEdit" [PatientId]="patientId"
+                                                [PatientMasterVisitId]="patientMasterVisitId" [babySectionOptions]="babySectionOptions">
+                                            </app-add-birth-info>
+                                        </div>
+                                        <div class="row">
+                                            <button *ngIf="isEdit" mat-raised-button class="mat-primary" (click)="AddNewBabyInfo()"><span
+                                                    class="fa fa-plus-circle"> Add New</span></button>
+                                            <app-birth-info-grid [isEdit]="isEdit" [PatientId]="patientId"
+                                                [PatientMasterVisitId]="patientMasterVisitId" [BabySectionOptions]="babySectionOptions"
+                                                (notify)="onBabyNotifyData($event)">
+                                            </app-birth-info-grid>
+                                        </div>
                                         <div>
                                             <button mat-raised-button color="primary" matStepperPrevious type="button">Previous</button>
                                             &nbsp;&nbsp;
@@ -60,11 +69,12 @@
                                         <ng-template matStepLabel>
                                             <span matTooltip="Maternity Tests">Maternity Tests</span>
                                         </ng-template>
-                                        <app-mternity-tests [maternityTestOptions]="maternityTestOptions" (notify)="onMaternityTests($event)"></app-mternity-tests>
+                                        <app-mternity-tests [maternityTestOptions]="maternityTestOptions" [personId]="personId"
+                                            (notify)="onMaternityTests($event)"></app-mternity-tests>
 
                                         <div>
-                                            <app-pnc-hivtesting (notify)="onHivStatusNotify($event)" [pncHivOptions]="pncHivOptions">
-
+                                            <app-pnc-hivtesting (notify)="onHivStatusNotify($event)" [pncHivOptions]="pncHivOptions"
+                                                [serviceAreaId]="serviceAreaId">
                                             </app-pnc-hivtesting>
                                         </div>
                                         <div>

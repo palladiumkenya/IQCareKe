@@ -30,7 +30,7 @@ export class HeiOutcomeComponent implements OnInit {
 
     ngOnInit() {
         this.HeiOutcomeFormGroup = this._formBuilder.group({
-            heiOutcomeOptions: new FormControl('', [Validators.required]),
+            heiOutcomeOptions: new FormControl('')
         });
 
         this.notify.emit(this.HeiOutcomeFormGroup);

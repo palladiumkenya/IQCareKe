@@ -55,7 +55,7 @@ export class HivStatusComponent implements OnInit {
             testResult: new FormControl('', [Validators.required]),
             lotNumber: new FormControl('', [Validators.required]),
             expiryDate: new FormControl('', [Validators.required]),
-            nextAppointmentDate: new FormControl('', [Validators.required])
+            nextAppointmentDate: new FormControl('')
         });
 
         this.getLookupOptions('PMTCTHIVTestVisit', this.testVisits);

@@ -22,6 +22,30 @@ namespace IQCare.Controllers.HTS
             _mediator = mediator ?? throw new ArgumentNullException(nameof(mediator));
         }
 
+        [HttpPost("updateTestResults")]
+        public async Task<IActionResult> Post([FromBody] UpdateTestingCommand updateTestingCommand)
+        {
+            var consentList = new List<KeyValuePair<string, int>>();
+            //consentList.Add(new KeyValuePair<string, int>("ConsentToBeTested", addEncounterCommand.Encounter.Consent));
+            consentList.Add(new KeyValuePair<string, int>("ConsentToListPartners", updateTestingCommand.AcceptedPartnerListing));
+
+            var consent = await _mediator.Send(new AddConsentCommand()
+            {
+                PatientID = updateTestingCommand.PatientId,
+                PatientMasterVisitId = updateTestingCommand.PatientMasterVisitId,
+                ConsentDate = DateTime.Now,
+                ConsentType = consentList,
+                ServiceAreaId = updateTestingCommand.ServiceAreaId,
+                DeclineReason = updateTestingCommand.ReasonsDeclinePartnerListing,
+                UserId = updateTestingCommand.ProviderId
+            }, Request.HttpContext.RequestAborted);
+
+            var response = await _mediator.Send(updateTestingCommand, Request.HttpContext.RequestAborted);
+            if (response.IsValid)
+                return Ok(response.Value);
+            return BadRequest(response);
+        }
+
         [HttpPost("addTestResults")]
         public async Task<IActionResult> Post([FromBody]AddTestingCommand addTestingCommand)
         {
@@ -267,6 +291,32 @@ namespace IQCare.Controllers.HTS
         public async Task<IActionResult> GetPsmartData(int personId)
         {
             var response = await _mediator.Send(new GetClientPsmartDataCommand()
+            {
+                PersonId = personId
+            }, Request.HttpContext.RequestAborted);
+
+            if (response.IsValid)
+                return Ok(response.Value);
+            return BadRequest(response);
+        }
+
+        [HttpGet("GetLastLotNumberByKitIdCommand/{kitId}")]
+        public async Task<IActionResult> GetLastLotNumberByKitIdCommand(int kitId)
+        {
+            var response = await _mediator.Send(new GetLastLotNumberByKitIdCommand()
+            {
+                KitId = kitId
+            }, Request.HttpContext.RequestAborted);
+
+            if (response.IsValid)
+                return Ok(response.Value);
+            return BadRequest(response);
+        }
+
+        [HttpGet("GetIsPersonInPositiveList/{personId}")]
+        public async Task<IActionResult> GetIsPersonInPositiveList(int personId)
+        {
+            var response = await _mediator.Send(new GetHivPositiveListCommand()
             {
                 PersonId = personId
             }, Request.HttpContext.RequestAborted);

@@ -1,15 +1,18 @@
 <mat-card>
   <div class="row">
     <div class="col-lg-3 col-md-3 col-sm-3">
-      Name: {{this.partnerView.fullName}}
+     <b> Name: </b>  {{this.partnerView.fullName}}
     </div>
 
     <div class="col-lg-3 col-md-3 col-sm-3">
-      Date Of Birth: {{this.partnerView.DateOfBirth | date: 'dd-MMM-yyyy' }}
+     <b>Date Of Birth: </b>  {{this.partnerView.DateOfBirth | date: 'dd-MMM-yyyy' }}
     </div>
 
     <div class="col-lg-3 col-md-3 col-sm-3">
-      Gender: {{this.partnerView.Gender}}
+    <b> Gender: </b> {{this.partnerView.Gender}}
+    </div>
+    <div class="col-lg-3 col-md-3 col-sm-3">
+        <b> Marital Status: </b> {{this.partnerView.MaritalStatus}}
     </div>
   </div>
 </mat-card>

@@ -77,6 +77,7 @@ export class EncounterComponent implements OnInit {
             TbScreening: new FormControl(this.encounter.TbScreening, [Validators.required]),
             EncounterRemarks: new FormControl(this.encounter.EncounterRemarks),
             Disabilities: new FormControl(this.encounter.Disabilities, [Validators.required]),
+            HivCounsellingDone: new FormControl('', [Validators.required])
         });
     }
 
@@ -87,6 +88,7 @@ export class EncounterComponent implements OnInit {
                     const encounterValue = res['encounter'][0];
                     let hasDisability = this.yesNoOptions.find(obj => obj.itemName == 'No').itemId;
                     const consent = res['consent'][0]['consentValue'];
+                    const HivCounsellingDone = res['']
                     let tbScreening = '';
                     if (res['tbStatus'].length > 0) {
                         tbScreening = res['tbStatus'][0]['screeningValueId'];
@@ -126,7 +128,7 @@ export class EncounterComponent implements OnInit {
                         TbScreening: tbScreening,
                         EncounterRemarks: encounterValue.encounterRemarks,
                         Disabilities: disabilities,
-
+                        HivCounsellingDone: encounterValue.hivCounsellingDone
                     });
 
                     this.encounter.PersonId = encounterValue['personId'];
@@ -139,7 +141,7 @@ export class EncounterComponent implements OnInit {
                     this.hasDisabilityChanged();
                     this.onConsentChanged();
 
-                    console.log(this.encounter);
+                    // console.log(this.encounter);
                 }
             });
         }
@@ -195,14 +197,20 @@ export class EncounterComponent implements OnInit {
 
     editEncounter(encounterID: number, patientMasterVisitId: number) {
         this.encounter.EncounterDate = moment(this.encounter.EncounterDate).toDate().toDateString();
-        this._encounterService.editEncounter(this.encounter, encounterID, patientMasterVisitId).subscribe((res) => {
-            this.snotifyService.success('Successfully edited encounter', 'Encounter', this.notificationService.getConfig());
-            this.zone.run(() => { this.router.navigate(['/registration/home'], { relativeTo: this.route }); });
-        }, (err) => {
-            this.snotifyService.error('Error editing encounter ' + err, 'Encounter', this.notificationService.getConfig());
-        }, () => {
-            // this.zone.run(() => { this.router.navigate(['/hts/testing'], {relativeTo: this.route }); });
-        });
+        this._encounterService.editEncounter(this.encounter, encounterID, patientMasterVisitId).subscribe(
+            (res) => {
+                this.snotifyService.success('Successfully edited encounter', 'Encounter', this.notificationService.getConfig());
+                this.zone.run(() => {
+                    this.router.navigate(['/hts/testingedit/' + this.encounter.PatientId + '/' + encounterID + '/' + patientMasterVisitId],
+                        { relativeTo: this.route });
+                });
+            },
+            (err) => {
+                this.snotifyService.error('Error editing encounter ' + err, 'Encounter', this.notificationService.getConfig());
+            },
+            () => {
+                // this.zone.run(() => { this.router.navigate(['/hts/testing'], {relativeTo: this.route }); });
+            });
     }
 
     addNewEncounter() {
@@ -214,6 +222,7 @@ export class EncounterComponent implements OnInit {
         this._encounterService.addEncounter(this.encounter).subscribe(data => {
             console.log(data);
             localStorage.setItem('htsEncounterId', data['htsEncounterId']);
+            localStorage.setItem('encounterDate', this.encounter.EncounterDate.toString());
             localStorage.setItem('patientMasterVisitId', data['patientMasterVisitId']);
 
             const optionSelected = this.yesNoOptions.filter(function (obj) {

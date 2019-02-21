@@ -105,7 +105,7 @@
                                 <label class="control-label pull-left">Age(Years)</label>
                             </div>
                             <div class="col-md-6">
-                                <asp:TextBox ID="personAge" runat="server" ClientIDMode="Static" CssClass="form-control input-sm"  placeholder="0"></asp:TextBox>
+                                <asp:TextBox ID="personAge" runat="server" ClientIDMode="Static" CssClass="form-control input-sm" onkeypress="return isNumberKey(event)"  placeholder="0"></asp:TextBox>
                                 <asp:HiddenField ID="dobPrecision" runat="server" ClientIDMode="Static" />
                             </div>
                         </div>
@@ -114,7 +114,7 @@
                                 <label class="control-label pull-left">Age(Months)</label>
                             </div>
                             <div class="col-md-6">
-                                <asp:TextBox ID="personMonth" runat="server" ClientIDMode="Static" CssClass="form-control input-sm" placeholder="0"  min="0"></asp:TextBox>
+                                <asp:TextBox ID="personMonth"  runat="server" ClientIDMode="Static" CssClass="form-control input-sm" placeholder="0"  min="0"></asp:TextBox>
                                
                             </div>
                         </div>
@@ -438,7 +438,7 @@
                                             <label class="control-label pull-left">Age(Years)</label>
                                         </div>
                                         <div class="col-md-6">
-                                            <asp:TextBox ID="TextBox2" runat="server" ClientIDMode="Static" CssClass="form-control input-sm" placeholder="0" required="true" min="0"></asp:TextBox>
+                                            <asp:TextBox ID="TextBox2" runat="server"   ClientIDMode="Static" CssClass="form-control input-sm"  placeholder="0" required="true" min="0"></asp:TextBox>
                                         </div>
                                     </div>
 
@@ -779,12 +779,40 @@
                 momentConfig: { culture: 'en', format: 'DD-MMM-YYYY' }
             });
 
+            $("#personMonth").keyup(function () {
+                var personAge = parseInt($("#personAge").val());
+                 personAge = (isNaN(personAge)) ? 0 : personAge;
+                  var personMonth = parseInt($("#personMonth").val());
+                if (personMonth < 0) {
+                    $("#personMonth").val("");
+                    toastr.error("Patient's Month should  be more than zero", "Person Month");
+                    return false;
+                    personMonth.val("");
+
+                }
+                if (personAge != null && personAge != "" && (personAge > 0 || personAge <= 120)) 
+                   {
+                    personAge = personAge;
+                    
+                  }
+               if (personAge == null || personAge == "" || personAge <= 0  || personAge ==undefined) {
+                   personAge= 0
+               }
+
+                 if (personMonth >= 0) {
+                        $('#Dob').val(estimateDob(personAge, personMonth ));
+                   }  
+                
+
+            });
             $("#personAge").keyup(function () {
                 var personAge = parseInt($("#personAge").val());
-
+                var personMonth = parseInt($("#personMonth").val());
+                 
+                 personMonth = (isNaN(personMonth)) ? 0 : personMonth;
                 if (personAge <= 0) {
                     $("#Dob").val("");
-                    toastr.error("Patient's Age should not be zero", "Person Age");
+                    toastr.error("Patient's Age should not be zero or less than zero", "Person Age");
                     return false;
                 } else if (personAge > 120) {
                     $("#Dob").val("");
@@ -793,7 +821,15 @@
                 }
 
                 if (personAge != null && personAge != "" && (personAge > 0 || personAge <= 120)) {
-                    $('#Dob').val(estimateDob(personAge));
+                    if (personMonth >= 0 ) {
+
+                        personMonth = personMonth;
+                    }
+                    else {
+                        personMonth = 0;
+                    }
+                   $('#Dob').val(estimateDob(personAge, personMonth));
+                    
                 }
 
                 $("#dobPrecision").val("false");
@@ -861,6 +897,16 @@
                 });
                 return result;
             }
+   function isNumberKey(evt){
+    var charCode = (evt.which) ? evt.which : event.keyCode;
+    var num = document.getElementById('someid').value;
+    if ((charCode > 31 && (charCode < 48 || charCode > 57)) || (num > 10)){
+        
+        return false;
+        }else{
+        return true;
+        }
+     } 
        
             function GetPatientBaselineandResult(personId, patientId) {
                
@@ -934,6 +980,7 @@
                                     $("#personAge").val(age);
 
                                 }
+
 
                                 if (!(LastName == null || LastName == 'undefined' || LastName == "")) {
                                     $("#<%=LastName.ClientID%>").val(LastName);
@@ -1086,6 +1133,7 @@
                     var previousDate = moment().subtract(1, 'days').format('DD-MMM-YYYY');
                     var adult = moment().subtract(10, 'years').format('DD-MMM-YYYY');
                     var cccReferalDate = $("#CCCReferalDate").val();
+                    
 
                     if (dob !== "") {
                         var today = new Date();
@@ -1197,6 +1245,22 @@
                             }
                         }
                     }
+                if (age > patientAge && (($("#Relationship :selected").text() === "Child"))) {
+                    toastr.error("A child cannot be older than the parent");
+                    return false;
+                    }
+
+              
+                if (patientAge > age  && (($("#Relationship :selected").text() === "Father"))) {
+                    toastr.error("Patient cannot be older than Father");
+                    return false;
+                    }
+                    
+
+                if (patientAge> age && (($("#Relationship :selected").text() === "Mother"))) {
+                    toastr.error("Patient cannot be older than Mother");
+                    return false;
+                }
                     if (moment('' + baselineHivStatusDate + '').isAfter(hivTestingresultDate)) {
                         toastr.error("Baseline HIV status date cannot be greater than HIV testing result date.");
                         return false;
@@ -1433,7 +1497,7 @@
                                     '<td style="text-align: left">' + baselineDate + '</td>' +
                                     '<td style="text-align: left">' + item.HivStatusResult + '</td>' +
                                     '<td style="text-align: left">' + testingDate + '</td>' +
-                                    '<td style="text-align: left">' + referred + "</td>" +
+                                  '<td style="text-align: left">' + referred + "</td>" +
                                     '<td style="text-align: left">' + linkageDate + "</td>" +
                                     '<td style="text-align: left">' + action + '</td>' +
                                     '<td align="right">' + enrollment + '</td></tr>';
@@ -1603,9 +1667,12 @@
                 var previousDate = moment().subtract(1, 'days').format('DD-MMM-YYYY');
                 var adult = moment().subtract(15, 'years').format('DD-MMM-YYYY');
                 var cccReferalModDate = $("#CccReferalModDDate").val();
+                
                 //console.log(CccReferalModDate);
                 ////validations
                 //return false;
+               
+
 
                 if (hivTestingresultText == "Never Tested") {
                     toastr.error("Never Tested should not be a follow up test result");
@@ -1653,6 +1720,8 @@
                     toastr.error("A child cannot have a spouse.");
                     return false;
                 }
+
+
                 if (patientAge < 16 && (($("#Relationship :selected").text() === "Partner"))) {
                     $("#Relationship").val(0);
                     toastr.error("A child cannot have a partner.");
@@ -1663,6 +1732,7 @@
                     toastr.error("A child cannot have a child.");
                     return false;
                 }
+                
                 else {
                     $.ajax({
                         type: "POST",
@@ -1995,15 +2065,17 @@
             }
         }
 
-        function estimateDob(personAge) {
+        function estimateDob(personAge,personMonth) {
             var currentDate = new Date();
-            currentDate.setDate(15);
-            currentDate.setMonth(5);
+            //currentDate.setDate(15);
+            //currentDate.setMonth(5);
             console.log(currentDate);
-            var estDob = moment(currentDate.toISOString());
-            var dob = estDob.add((personAge * -1), 'years');
+            //var estDob = moment(currentDate.toISOString());
+            //var dob = estDob.add((personAge * -1), 'years').subtract(personMonth, 'months');
+            var dob=moment().subtract(personAge,'years').subtract(personMonth, 'months');
             return moment(dob).format('DD-MMM-YYYY');
         }
+      
 
         function getAge(dateString) {
             var today = new Date();
@@ -2012,6 +2084,9 @@
             var m = today.getMonth() - birthDate.getMonth();
             if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
                 age--;
+            }
+            if (m < 0) {
+                m = 12 - (-m + 1);
             }
 
              $("#personMonth").val(m);

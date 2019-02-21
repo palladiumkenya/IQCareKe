@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
     <TargetFramework>netcoreapp2.0</TargetFramework>
@@ -8,7 +8,7 @@
 
   <ItemGroup>
     <Folder Include="frontend\app\records\listduplicate\" />
-    <Folder Include="logs\" />
+    <Folder Include="logs" />
     <Folder Include="wwwroot\" />
   </ItemGroup>
 

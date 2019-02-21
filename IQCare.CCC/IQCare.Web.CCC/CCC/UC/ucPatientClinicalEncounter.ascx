@@ -213,11 +213,12 @@
 										</div>
 										<div class="col-md-3">
 											<div class="col-md-12">
-												<label class="control-label pull-left input-sm">BMI</label>
+												<label runat="server" ID="lblBMI" class="control-label pull-left input-sm">BMI</label>
+                                                <label runat="server" ID="lblBMIz" class="control-label pull-left input-sm">BMIz</label>
 											</div>
 											<div class="col-md-12">
 												<asp:TextBox ID="txtBMI" CssClass="form-control input-sm" ClientIDMode="Static" Enabled="false" runat="server"></asp:TextBox>
-												<asp:TextBox ID="txtBMIZ" runat="server" CssClass="form-control input-sm" ClientIDMode="Static"></asp:TextBox>
+												<asp:TextBox ID="txtBMIZ" runat="server" CssClass="form-control input-sm" Enabled="false" ClientIDMode="Static"></asp:TextBox>
 											</div>
 										</div>
 										<div class="col-md-3">
@@ -1100,14 +1101,14 @@
 											</div>
 										</div>
 
-										<div class="col-md-2 form-group">
+										<!--<div class="col-md-2 form-group">
 											<div class="col-md-12">
 												<label class="control-label pull-left">Dose</label>
 											</div>
 											<div class="col-md-12">
 												<asp:TextBox runat="server" ID="treatmentDose" CssClass="form-control input-sm" ClientIDMode="Static" placeholder="dose.." data-parsley-min="1"></asp:TextBox>
 											</div>
-										</div>
+										</div>-->
 										
 
 										<div class="col-md-1">
@@ -1130,7 +1131,7 @@
 															<th><span class="text-primary">IllnessID</span></th>
 															<th><span class="text-primary">Illness</span></th>
 															<th><span class="text-primary">Current Treatment</span></th>
-															<th><span class="text-primary">Dose</span></th>
+															<!--<th><span class="text-primary">Dose</span></th>-->
 															<th><span class="text-primary">Onset Date</span></th>
 															<th><span class="text-primary">Active</span></th>
 															<th></th>
@@ -2720,7 +2721,7 @@
 	document.getElementById('txtReactionTypeID').style.display = 'none';
 	//document.getElementById('txtDiagnosisID').style.display = 'none';
 	document.getElementById("<%=txtBMIZ.ClientID%>").style.display = 'none';
-
+   document.getElementById("<%=lblBMIz.ClientID%>").style.display = 'none';
 	document.getElementById('adverseEventId').style.display = 'none';
 
 
@@ -2957,6 +2958,10 @@
 
         if (Age > 15) {
             var txtBmi = $("#<%=txtBMI.ClientID%>").val();
+            document.getElementById("<%=txtBMIZ.ClientID%>").style.display = 'none';
+             document.getElementById("<%=lblBMIz.ClientID%>").style.display = 'none';
+            document.getElementById("<%=lblBMI.ClientID%>").style.display = 'block';
+            document.getElementById("<%=txtBMI.ClientID%>").style.display = 'block';
             if (txtBmi > 0 && txtBmi < 16) {
                 $("#nutritionscreeningstatus option").filter(function () {
                     return $(this).text() === 'Severe Acute Malnutrition';
@@ -2974,6 +2979,10 @@
             }
         } else {
             var txtBMIZ = $("#<%=txtBMIZ.ClientID%>").val();
+            document.getElementById("<%=txtBMIZ.ClientID%>").style.display = 'block';
+            document.getElementById("<%=txtBMI.ClientID%>").style.display = 'none';
+            document.getElementById("<%=lblBMIz.ClientID%>").style.display = 'block';
+            document.getElementById("<%=lblBMI.ClientID%>").style.display = 'none';
             console.log(txtBMIZ);
             if ((txtBMIZ == "4 (Overweight)") || (txtBMIZ === "3 (Overweight)") || (txtBMIZ === "2 (Overweight)") || (txtBMIZ === "1 (Overweight)")) {
                 $("#nutritionscreeningstatus option").filter(function () { return $(this).text() === 'Overweight/Obese'; }).prop('selected', true);
@@ -3700,6 +3709,13 @@
 
         ///////////////////////////////////////////////////////////////////////////////////////////////////
 
+<%--        var onAntiTbDrug = $("#<%=ddlOnAntiTBDrugs.ClientID%>").val();
+        if (onAntiTbDrug === 'yes') {
+            alert('on anti-tb');
+        } else {
+            alert("not on anti-tb");}--%>
+
+
         //Save patient IPT client workup
         $("#btnSaveIptWorkup").click(function () {
             addPatientIptWorkup();
@@ -3708,6 +3724,8 @@
 
         //Save patient IPT Details
         $("#btnSaveIptDetails").click(function () {
+
+           /* if (onAntiTbDrug === 'yes') {}
             if ($('#IptFormDetails').parsley().validate()) {
                 var dob = $("#IptDateCollected").val();
                 if (moment('' + dob + '').isAfter()) {
@@ -3720,13 +3738,24 @@
                 }
             } else {
                 return false;
-            }
+            }-*/
+            addPatientIptOutcome();
+            $('#IptOutcomeModal').modal('hide');
         });
 
         //Save patient IPT Outcome
         $("#btnSaveIptOutcome").click(function () {
-            addPatientIptOutcome();
-            $('#IptOutcomeModal').modal('hide');
+            
+          var IPTDate = $('#IPTDate').val();
+            if (IPTDate == "" || IPTDate == undefined) {
+                toastr.error("Kindly note IPT Outcome Date is required");
+                $('#IptOutcomeModal').modal('show');
+              //  return;
+            }
+            else {
+                addPatientIptOutcome();
+                $('#IptOutcomeModal').modal('hide');
+            }
         });
 
 
@@ -4024,8 +4053,8 @@
                         "chronicIllnessID": chronicTable.row(i).data()[0],
                         "chronicIllness": chronicTable.row(i).data()[1],
                         "treatment": chronicTable.row(i).data()[2],
-                        "dose": chronicTable.row(i).data()[3],
-                        "OnsetDate": chronicTable.row(i).data()[4],
+                        "dose": "",
+                        "OnsetDate": chronicTable.row(i).data()[3],
                         "Active": active
                         //"Active": chronicTable.row(i).checkboxes.selected()[5]
                     }
@@ -4646,13 +4675,15 @@
 
 		function addPatientIptOutcome() {
 			var iptEvent = $("#iptEvent").val();
-			var reasonForDiscontinuation = $("#discontinuation").val();
+            var reasonForDiscontinuation = $("#discontinuation").val();
+           
+            var iptOutComeDate = $("#IPTDate").val();
 			var patientId = <%=PatientId%>;
 			var patientMasterVisitId = <%=PatientMasterVisitId%>;
 			$.ajax({
 				type: "POST",
 				url: "../WebService/PatientTbService.asmx/AddPatientIptOutcome",
-				data: "{'patientId': '" + patientId + "','patientMasterVisitId': '" + patientMasterVisitId + "','iptEvent': '" + iptEvent + "','reasonForDiscontinuation': '" + reasonForDiscontinuation + "'}",
+				data: "{'patientId': '" + patientId + "','IPTDate':'" + iptOutComeDate + "','patientMasterVisitId': '" + patientMasterVisitId + "','iptEvent': '" + iptEvent + "','reasonForDiscontinuation': '" + reasonForDiscontinuation + "'}",
 				contentType: "application/json; charset=utf-8",
 				dataType: "json",
 				success: function (response) {
@@ -6670,7 +6701,7 @@
                 format: 'YYYY-MM-DD',
 
                 calendarWeeks: true,
-
+                maxDate: new Date(),
                 showClear: true,
                 showClose: true,
                
@@ -6682,7 +6713,7 @@
             $("#" + event.target.id).focus(function () {
                 $("#" + event.target.id).datetimepicker({
                     format: 'YYYY-MM-DD',
-
+                    maxDate: new Date(),
                     calendarWeeks: true,
 
                     showClose: true,
@@ -6697,7 +6728,7 @@
                     format: 'YYYY-MM-DD',
 
                     calendarWeeks: true,
-
+                    
                     showClear: true,
                     showClose: true,
 
