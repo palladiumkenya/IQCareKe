@@ -147,7 +147,8 @@ namespace IQCare.Web.Patient
                     Session["PatientSex"]= lblsex.Text = patient.Sex;
                     //theDS.Tables[0].Rows[0]["sex"].ToString();
 
-                    lbldob.Text = patient.DateOfRegistration.ToString("dd-MMM-yyyy");
+                    //lbldob.Text = patient.DateOfRegistration.ToString("dd-MMM-yyyy");
+                    lbldob.Text = patient.DateOfBirth.ToString("dd-MMM-yyyy");
 
                     //theDS.Tables[0].Rows[0]["dob"].ToString();
                     lblIQno.Text = patient.IQNumber;
