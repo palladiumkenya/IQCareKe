@@ -20,7 +20,7 @@ INSERT INTO NewDrugList(DrugName,Abbreviation,strength) VALUES('Atazanavir/Riton
 INSERT INTO NewDrugList(DrugName,Abbreviation,strength) VALUES('Lopinavir/Ritonavir-200mg/50mg','LPV/r','200mg/50mg');
 INSERT INTO NewDrugList(DrugName,Abbreviation,strength) VALUES('Lopinavir/Ritonavir-80mg/20mg/ml','LPV/r','80mg/20mg/ml');
 INSERT INTO NewDrugList(DrugName,Abbreviation,strength) VALUES('Lopinavir/Ritonavir-40mg/10mg','LPV/r','40mg/10mg');
-INSERT INTO NewDrugList(DrugName,Abbreviation,strength) VALUES('Reltegravir-400mg','RAL','400mg');
+INSERT INTO NewDrugList(DrugName,Abbreviation,strength) VALUES('Raltegravir-400mg','RAL','400mg');
 INSERT INTO NewDrugList(DrugName,Abbreviation,strength) VALUES('Tenofovir Disoproxil Fumarate/Lamivudine/Dolutegravir-300mg/300mg/50mg','TDF/3TC/DTG','300mg/300mg/50mg');
 INSERT INTO NewDrugList(DrugName,Abbreviation,strength) VALUES('Abacavir/Lamivudine-120mg/60mg','ABC/3TC','120mg/60mg');
 INSERT INTO NewDrugList(DrugName,Abbreviation,strength) VALUES('Tenofovir Disoproxil Fumarate/Lamivudine/Efavirenz-300mg/300mg/400mg','TDF/3TC/EFV','300mg/300mg/400mg');

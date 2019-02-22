@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
@@ -148,6 +148,17 @@
     <None Remove="Scripts\2.0.0\38_IPTOutcomeDate.sql" />
     <None Remove="Scripts\2.0.0\38_LO_HEI_Register.sql" />
     <None Remove="Scripts\2.0.0\37_HIVPositiveListView.sql" />
+    <None Remove="Scripts\2.0.0\42_LO_PNCRegister.sql" />
+    <None Remove="Scripts\2.0.0\43_LO_MaternityRegister.sql" />
+    <None Remove="Scripts\2.0.0\44_LO_IQCareViews.sql" />
+    <None Remove="Scripts\2.0.0\45_LO_ANCRegister.sql" />
+    <None Remove="Scripts\2.0.0\46_SO_IQCare_Version.sql" />
+    <None Remove="Scripts\2.0.0\46_LO_HEIRegister.sql" />
+	<None Remove="Scripts\2.0.0\47_SO_IQCare_Version.sql" />
+    <None Remove="Scripts\2.0.0\48_SO_CreateVIew_PmtctPatientScreeningView.sql" />
+    <None Remove="Scripts\2.0.0\49_SO_Add_Identifiers_BirthNotification.sql" />
+    <None Remove="Scripts\2.0.0\50_SO_ChangeIQCareVersion2Name.sql" />
+    <None Remove="Scripts\2.0.0\51_SO_AddCacxMethod_VIAVILI.sql" />
   </ItemGroup>
 
   <ItemGroup>
@@ -249,13 +260,12 @@
     <EmbeddedResource Include="Scripts\1.0.0.9\54_SO_CreateView_pmtctPatientScreeningView.sql" />
     <EmbeddedResource Include="Scripts\1.0.0.9\55_SO_CreateVIew_PatientPreventiveServiceView.sql" />
     <EmbeddedResource Include="Scripts\1.0.0.9\56_SO_CreateView_VisitDetailsView.sql" />
-    <EmbeddedResource Include="Scripts\2.0.0\37_SO_IQCare_Version.sql" />
     <EmbeddedResource Include="Scripts\1.0.0.9\58_Add_Lookups_ReviewOfSystems.sql" />
     <EmbeddedResource Include="Scripts\2.0.0\02_DO_AlterView_PatientDeliveryInfo.sql" />
     <EmbeddedResource Include="Scripts\2.0.0\03 pr_Security_UserLogin_Constella.sql" />
+    <EmbeddedResource Include="Scripts\2.0.0\09_PersonKinContactsView.sql" />
     <EmbeddedResource Include="Scripts\2.0.0\22_SO_Add_Lookups_ViralLoadSample.sql" />
     <EmbeddedResource Include="Scripts\2.0.0\08_PatientConsent.sql" />
-    <EmbeddedResource Include="Scripts\2.0.0\09_PersonKinContactsView.sql" />
     <EmbeddedResource Include="Scripts\2.0.0\12_DO_Insert_Clinical_Service_Area.sql" />
     <EmbeddedResource Include="Scripts\2.0.0\12_SO_CreateView_PmtctRefferealView.sql" />
     <EmbeddedResource Include="Scripts\2.0.0\13_SO_CreateView_lnk_FacilityModule.sql" />
@@ -291,23 +301,26 @@
     <EmbeddedResource Include="Scripts\2.0.0\38_IPTOutcomeDate.sql" />
     <EmbeddedResource Include="Scripts\2.0.0\38_LO_HEI_Register.sql" />
     <EmbeddedResource Include="Scripts\2.0.0\37_HIVPositiveListView.sql" />
+    <EmbeddedResource Include="Scripts\2.0.0\42_LO_PNCRegister.sql" />
+    <EmbeddedResource Include="Scripts\2.0.0\43_LO_MaternityRegister.sql" />
+    <EmbeddedResource Include="Scripts\2.0.0\44_LO_IQCareViews.sql" />
+    <EmbeddedResource Include="Scripts\2.0.0\45_LO_ANCRegister.sql" />
+    <EmbeddedResource Include="Scripts\2.0.0\46_LO_HEIRegister.sql" />
+	<EmbeddedResource Include="Scripts\2.0.0\47_SO_IQCare_Version.sql" />
+    <EmbeddedResource Include="Scripts\2.0.0\48_SO_CreateVIew_PmtctPatientScreeningView.sql" />
+    <EmbeddedResource Include="Scripts\2.0.0\49_SO_Add_Identifiers_BirthNotification.sql" />
+    <EmbeddedResource Include="Scripts\2.0.0\50_SO_ChangeIQCareVersion2Name.sql" />
+    <EmbeddedResource Include="Scripts\2.0.0\51_SO_AddCacxMethod_VIAVILI.sql" />
   </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="dbup" Version="4.1.0" />
     <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="2.1.1" />
+    <PackageReference Include="Microsoft.Extensions.Configuration" Version="2.1.1" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="2.1.1" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Reference Include="Microsoft.Extensions.Configuration">
-      <HintPath>..\..\..\..\..\..\..\..\Program Files\dotnet\sdk\NuGetFallbackFolder\microsoft.extensions.configuration\2.1.1\lib\netstandard2.0\Microsoft.Extensions.Configuration.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.Extensions.Configuration.Abstractions">
-      <HintPath>..\..\..\..\..\..\..\..\Program Files\dotnet\sdk\NuGetFallbackFolder\microsoft.extensions.configuration.abstractions\2.1.1\lib\netstandard2.0\Microsoft.Extensions.Configuration.Abstractions.dll</HintPath>
-    </Reference>
-  </ItemGroup>
-
-  <ItemGroup>
+ <ItemGroup>
     <ProjectReference Include="..\IQCare.SharedKernel.Infrastructure\IQCare.SharedKernel.Infrastructure.csproj" />
   </ItemGroup>
 

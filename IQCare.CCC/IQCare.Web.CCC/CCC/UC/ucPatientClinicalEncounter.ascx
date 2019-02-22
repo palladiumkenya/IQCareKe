@@ -3709,6 +3709,13 @@
 
         ///////////////////////////////////////////////////////////////////////////////////////////////////
 
+<%--        var onAntiTbDrug = $("#<%=ddlOnAntiTBDrugs.ClientID%>").val();
+        if (onAntiTbDrug === 'yes') {
+            alert('on anti-tb');
+        } else {
+            alert("not on anti-tb");}--%>
+
+
         //Save patient IPT client workup
         $("#btnSaveIptWorkup").click(function () {
             addPatientIptWorkup();
@@ -3717,6 +3724,8 @@
 
         //Save patient IPT Details
         $("#btnSaveIptDetails").click(function () {
+
+           /* if (onAntiTbDrug === 'yes') {}
             if ($('#IptFormDetails').parsley().validate()) {
                 var dob = $("#IptDateCollected").val();
                 if (moment('' + dob + '').isAfter()) {
@@ -3729,7 +3738,9 @@
                 }
             } else {
                 return false;
-            }
+            }-*/
+            addPatientIptOutcome();
+            $('#IptOutcomeModal').modal('hide');
         });
 
         //Save patient IPT Outcome
@@ -3739,7 +3750,7 @@
             if (IPTDate == "" || IPTDate == undefined) {
                 toastr.error("Kindly note IPT Outcome Date is required");
                 $('#IptOutcomeModal').modal('show');
-                return;
+              //  return;
             }
             else {
                 addPatientIptOutcome();

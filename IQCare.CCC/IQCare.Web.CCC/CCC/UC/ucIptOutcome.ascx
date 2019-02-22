@@ -17,7 +17,7 @@
          <div class="col-md-12">
 									<div class="datepicker" id="IPTOutcomeDate">
 										<div class="input-group">
-											<asp:TextBox ID="IPTDate"   runat="server"   ClientIDMode="Static" class="form-control input-sm" data-parsley-required="true" onblur="DateFormat(this,this.value,event,false,'3')" onkeyup="DateFormat(this,this.value,event,false,'3')"></asp:TextBox>
+											<asp:TextBox ID="IPTDate"   runat="server"   ClientIDMode="Static" class="form-control input-sm"  onblur="DateFormat(this,this.value,event,false,'3')" onkeyup="DateFormat(this,this.value,event,false,'3')"></asp:TextBox>
 											<%--<input class="form-control input-sm" id="VisitDate" type="text" runat="server" data-parsley-required="true" />--%>
 											<div class="input-group-btn">
 												<button type="button" class="btn btn-default dropdown-toggle input-sm" data-toggle="dropdown">
