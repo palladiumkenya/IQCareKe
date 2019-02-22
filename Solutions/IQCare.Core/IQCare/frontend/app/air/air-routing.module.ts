@@ -22,7 +22,7 @@ const routes: Routes = [
       pathMatch :'full'
     },
     {
-        path: 'formdetails/:id',
+        path: 'formdetails/:id/:reportingformid',
        component: ActiveFormReportComponent,
       resolve: {
           FormDetails: FormDetailResolver

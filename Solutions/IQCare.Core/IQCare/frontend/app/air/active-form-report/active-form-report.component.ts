@@ -28,7 +28,7 @@ export class ActiveFormReportComponent implements OnInit {
     @ViewChild(MatDatepicker) picker;
     date = new FormControl();
     IndicatorQuestions: IndicatorQuestionBase[] = [];
-
+    ExistingData: any[] = [];
     Sections: Section[];
     Forms: Form[];
     total: number;
@@ -44,17 +44,20 @@ export class ActiveFormReportComponent implements OnInit {
     filteritems: IndicatorQuestionBase[];
     filterSubSection: SubSection[];
     filtervalue: boolean;
-    numericnumber:number;
-    resultvalue:string;
+    numericnumber: number;
+    resultvalue: string;
+    ReportingFormId: number;
+    existing:[]
     constructor(private route: ActivatedRoute,
         private formBuilder: FormBuilder,
         private snotifyService: SnotifyService,
         private notificationService: NotificationService,
         private formdetailservice:FormDetailsService,
+        public zone: NgZone,
         private router: Router,
         private spinner: NgxSpinnerService ) {
         this.Forms = [];
-
+        this.ExistingData = [];
         this.Sections = [];
         this.IndicatorQuestions = [];
         this.SubSections = [];
@@ -68,7 +71,8 @@ export class ActiveFormReportComponent implements OnInit {
         this.total = 0;
         this.filtervalue = false;
         this.IndicatorResults=[];
-
+        this.existing=[];
+        
         //this.indicators=new FormArray([]);
         //const controls=this.IndicatorQuestions.map(c=>new FormControl(false));
 
@@ -90,8 +94,11 @@ export class ActiveFormReportComponent implements OnInit {
         });
         console.log(this.FormItems);
 
+        this.route.params.subscribe(params => {
+            this.ReportingFormId = params['reportingformid'];
 
-
+        });
+       
         let Form = {
             FormId: this.FormItems['id'],
             FormName: this.FormItems['name']
@@ -171,7 +178,9 @@ export class ActiveFormReportComponent implements OnInit {
 
 
         }
-
+         
+     
+    
         console.log("Section identificatioon");
         console.log(this.Sections);
         console.log("SubSection identificatioon");
@@ -180,15 +189,88 @@ export class ActiveFormReportComponent implements OnInit {
         console.log(this.IndicatorQuestions);
 
 
-
+        this.GetFormData();
+        console.log('After loading existing data');
+        console.log(this.IndicatorQuestions);
         this.formGroup = this.formBuilder.group({
             // IndicatorQuestions:this.formBuilder.control(this.IndicatorQuestions),
             IndicatorQuestions: this.formBuilder.array(this.IndicatorQuestions.map(o => new FormControl(o))),
 
             Period: new FormControl(this.FormResults.Period, [Validators.required])
         });
+
+
         console.log(this.formGroup);
+
+       
+}   
+    GetFormData()
+    {
+        if (this.ReportingFormId > 0)
+        {
+            
+            this.formdetailservice.getFormdata(this.ReportingFormId).subscribe(res => {
+
+                console.log(res);
+           
+               this.ExistingData = res;
+
+               console.log("existingdata");
+               console.log(this.ExistingData['reportingValues'][0]['resultNumeric']);
+               this.date.setValue(moment(this.ExistingData['reportingValues'][0]['reportDate']).toDate());
+
+            
+            this.FormResults.Period = moment(moment(this.ExistingData['reportingValues'][0]['reportDate']).format('DD-MMM-YYYY')).toDate();
+              
+       if(this.ExistingData['reportingValues'].length > 0)
+       {
+         for(let i = 0 ; i < this.ExistingData['reportingValues'].length;i++)
+          {
+              
+             
+              var Indicator = this.ExistingData['reportingValues'][i]['indicatorId'].toString();
+               var numvalue = this.ExistingData['reportingValues'][i]['resultNumeric'].toString();
+               var text = this.ExistingData['reportingValues'][i]['resultText'].toString();
+              
+
+              for (let t = 0; t < this.IndicatorQuestions.length; t++) {
+             
+                var  Identification = this.IndicatorQuestions[t].Id.toString();
+                var  control = this.IndicatorQuestions[t].controlType.toString();
+                if (Identification === Indicator)  {
+                    if (control.toLowerCase() == 'number')
+                    {
+                        this.IndicatorQuestions[t].value = numvalue;
+                      //  this.formGroup.controls.IndicatorQuestions.value[].value = numvalue;
+                        console.log('ValueChanged');
+                        console.log(this.IndicatorQuestions[t].value);
+                    }
+                    else if (control.toLowerCase() == 'text')
+                    {
+                        console.log('ValueChanged');
+                        //this.formGroup.controls.IndicatorQuestions.value[index].value = text;
+                        console.log(this.IndicatorQuestions[t].value);
+                        this.IndicatorQuestions[t].value = text;
+                    }
+                  }
+                }
+               
+           }
+              
+
+        } 
+              // console.log(res.resultNumeric);
+
+            });
+
+
+        }
+
+
+    
+
     }
+
     log(val) { console.log(val); }
 
     GetType(val) {
@@ -215,7 +297,7 @@ export class ActiveFormReportComponent implements OnInit {
 
       
         const element = document.getElementById(codeId)  ;
-        if(element !=undefined)
+        if(element != undefined)
         {
         element.remove();
         }
@@ -367,7 +449,14 @@ export class ActiveFormReportComponent implements OnInit {
 
         return true;
     }
-
+  close()
+  {
+    this.zone.run(() => {
+        this.router.navigate(['/air/'],
+            { relativeTo: this.route });
+    });
+   // console.log(messag
+  }
 
     submitResult() {
         let returnvalue= false;
@@ -443,6 +532,10 @@ export class ActiveFormReportComponent implements OnInit {
                 console.log(response['reportingFormId']);
                 console.log(response.message);
                 console.log(response.reportingFormId);
+                this.zone.run(() => {
+                    this.router.navigate(['/air/'],
+                        { relativeTo: this.route });
+                });
                // console.log(message['Message']);
                // console.log(message('ReportingFormId'));
                this.snotifyService.success(response.message, 'Submit Indicator Results',
@@ -452,6 +545,7 @@ export class ActiveFormReportComponent implements OnInit {
                 this.snotifyService.error('Error submitting Indicator Results ' + error, 'Submit Indicator Results',
                     this.notificationService.getConfig());
                     this.spinner.hide();
+
                 },
                 
                 () => {

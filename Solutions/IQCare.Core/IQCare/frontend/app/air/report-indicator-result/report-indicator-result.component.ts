@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,NgZone } from '@angular/core';
 import { IndicatorService } from '../_services/indicator.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute ,Router} from '@angular/router';
+
 
 @Component({
   selector: 'app-report-indicator-result',
@@ -17,7 +18,9 @@ export class ReportIndicatorResultComponent implements OnInit {
   isValid : boolean;
 
   constructor(private indicatorService: IndicatorService,
-   private route : ActivatedRoute) { 
+   private route : ActivatedRoute,
+   public zone: NgZone,
+   private router: Router) { 
        route.params.subscribe(param => {
             this.reportingPeriodId = param['reportingPeriodId'];
        });
@@ -26,6 +29,15 @@ export class ReportIndicatorResultComponent implements OnInit {
   ngOnInit() 
   {
        this.getReportingPeriodIndicatorResults(this.reportingPeriodId);
+  }
+
+  close()
+  {
+    this.zone.run(() => {
+        this.router.navigate(['/air/'],
+            { relativeTo: this.route });
+    });
+   // console.log(messag
   }
 
     private getReportingPeriodIndicatorResults(periodId: any){
