@@ -48,7 +48,7 @@ export class LookupItemService {
         );
     }
 
-    public getActiveFacility() : Observable<any> {
+    public getActiveFacility(): Observable<any> {
         return this.http.get<any>(this.API_URL + '/api/Facility/GetActiveFacility').pipe(
             tap(getActiveFacility => this.errorHandler.log('get active facility')),
             catchError(this.errorHandler.handleError<any>('GetActiveFacility', []))
