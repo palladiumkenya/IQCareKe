@@ -20,7 +20,14 @@ const routes: Routes = [
       path: 'indicator/result/:reportingPeriodId',
       component : ReportIndicatorResultComponent,
       pathMatch :'full'
-    }
+    },
+    {
+        path: 'formdetails/:id',
+       component: ActiveFormReportComponent,
+      resolve: {
+          FormDetails: FormDetailResolver
+         }
+     }
 ];
 
 

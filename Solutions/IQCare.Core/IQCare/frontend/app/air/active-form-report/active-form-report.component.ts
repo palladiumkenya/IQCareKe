@@ -5,11 +5,13 @@ import { SnotifyService, SnotifyPosition } from 'ng-snotify';
 import { NotificationService } from '../../shared/_services/notification.service';
 import { RouterInitializer } from '@angular/router/src/router_module';
 import { IndicatorQuestionBase } from '../_model/indicatorquestion-base';
-import { NativeDateAdapter, DateAdapter, MatDatepickerModule } from '@angular/material';
+import { NativeDateAdapter, DateAdapter, MatDatepicker } from '@angular/material';
 import { Section, Form, SubSection, FormResults } from '../_model/Sectionidentifier';
 import { AbstractControl, FormBuilder, FormControl, FormGroup, Validators, FormArray } from '@angular/forms';
 import * as _ from 'lodash';
 import * as moment from 'moment';
+import {FormDetailsService} from '../_services/formdetails.service';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 
 
@@ -23,7 +25,7 @@ import * as moment from 'moment';
 export class ActiveFormReportComponent implements OnInit {
 
 
-    @ViewChild(MatDatepickerModule) picker;
+    @ViewChild(MatDatepicker) picker;
     date = new FormControl();
     IndicatorQuestions: IndicatorQuestionBase[] = [];
 
@@ -41,12 +43,17 @@ export class ActiveFormReportComponent implements OnInit {
     filteritems: IndicatorQuestionBase[];
     filterSubSection: SubSection[];
     filtervalue: boolean;
+    numericnumber:number;
+    resultvalue:string;
     constructor(private route: ActivatedRoute,
         private formBuilder: FormBuilder,
         private snotifyService: SnotifyService,
         private notificationService: NotificationService,
-        private router: Router) {
+        private formdetailservice:FormDetailsService,
+        private router: Router,
+        private spinner: NgxSpinnerService ) {
         this.Forms = [];
+
         this.Sections = [];
         this.IndicatorQuestions = [];
         this.SubSections = [];
@@ -146,6 +153,7 @@ export class ActiveFormReportComponent implements OnInit {
                         SubSectionId: this.FormItems['reportSections'][i]['reportSubSections'][t].id,
                         code: this.FormItems["reportSections"][i]['reportSubSections'][t]['indicators'][r].code,
                         key: this.ItemKey,
+                        Id:this.FormItems["reportSections"][i]['reportSubSections'][t]['indicators'][r].id,
                         //this.FormItems["reportSections"][i]['reportSubSections'][t]['indicators'][r].id,
                         label: this.FormItems["reportSections"][i]['reportSubSections'][t]['indicators'][r].name,
                         required: true,
@@ -388,13 +396,62 @@ export class ActiveFormReportComponent implements OnInit {
          {
              return;
          }
-         else {
+         else { 
+           const reportingDate= moment(this.FormResults.Period).format('DD-MMM-YYYY').toString();
+           const reportingFormId=this.Forms[0].FormId; 
+           const createdby=parseInt(localStorage.getItem('appUserId'));
+           const  IndicatorResults=[];
 
-        console.log(this.FormResults.Period);
-         }
+            for (let i = 0; i < this.IndicatorQuestions.length; i++) { 
+           ///  if(this.IndicatorQuestions[i].ControlType=)
+           const controltype=this.IndicatorQuestions[i].controlType;
+           
+           if(controltype=='number')
+           {
+           this.numericnumber=parseInt(this.IndicatorQuestions[i].value.toString())
+           this.resultvalue="";
+           
+           }
+           else if(controltype=='Text')
+           { 
+            this.resultvalue=this.IndicatorQuestions[i].value.toString()
+            this.numericnumber=0;
+          }
+         
+          
+            IndicatorResults.push({
+                'Id':this.IndicatorQuestions[i].Id,
+                'ResultText':this.resultvalue,
+                'ResultNumeric':this.numericnumber
+            });
+        }
+            this.spinner.show();
+
+            this.formdetailservice.submitIndicatorResults(reportingDate,reportingFormId,createdby,IndicatorResults).subscribe(
+                (response)=>{
+                console.log(response);
+                console.log(response.Message);
+                console.log(response.ReportingFormId);
+
+                },
+                (error) => {
+                this.snotifyService.error('Error submitting Indicator Results ' + error, 'Submit Indicator Results',
+                    this.notificationService.getConfig());
+                },
+                () => {
+                this.spinner.hide();
+                }
+            );
+
+
+        
+        }
+        
+    
+    }
         // console.log(this.formGroup);
 
-    }
+    
 }
 
 

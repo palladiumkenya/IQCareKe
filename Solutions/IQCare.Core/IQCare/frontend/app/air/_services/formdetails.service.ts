@@ -25,4 +25,21 @@ export class FormDetailsService {
             );
 
         }
+
+
+        public submitIndicatorResults(reportingdate:string, reportingformId:number , createdby:number ,indicatorresults:any[]):Observable<any>{
+                const Indata={
+                    'ReportingDate':reportingdate,
+                    'ReportingFormId':reportingformId,
+                    'CreatedBy':createdby,
+                    'IndicatorResults':indicatorresults
+                }
+
+            return this.http.post<any>(this.API_AIR_URL + '/api/Indicator/AddResults',JSON.stringify(Indata), httpOptions).pipe(
+                tap((submitIndicatorResults: any) => this.errorHandler.log(`Submit Indicator Results`)),
+                catchError(this.errorHandler.handleError<any>('submitIndicatorResults'))
+            );
+        }
+
+    
 }

@@ -23,3 +23,9 @@ export class FormResults{
     FormName: string;
     Period: Date;
 }
+
+export class IndicatorResults{
+    Id:string;
+    ResultText:string;
+    ResultNumeric:string;
+}

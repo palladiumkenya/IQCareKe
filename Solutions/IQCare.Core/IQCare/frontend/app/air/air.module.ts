@@ -6,7 +6,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {FormDetailResolver} from'./_services/customformdetails.resolver';
 import {FormDetailsService} from './_services/formdetails.service';
 import {SubSectionFilterPipe, IndicatorFilterPipe} from './_model/pipe/subsectionfilter.pipe';
-import { NativeDateAdapter, DateAdapter } from '@angular/material';
+import { NativeDateAdapter, DateAdapter,MatDatepicker } from '@angular/material';
 import { CustomDateAdapter }  from './_model/CustomDateAdapter';
 import { NotificationService } from '../shared/_services/notification.service';
 import { ReportIndicatorResultComponent } from './report-indicator-result/report-indicator-result.component';
@@ -29,7 +29,7 @@ import {
 } from '@angular/material';
 @NgModule({
 
-    imports:[FormsModule, ReactiveFormsModule,RouterModule,
+    imports:[FormsModule, ReactiveFormsModule,RouterModule,AirRoutingModule,
         CommonModule,
       MatAutocompleteModule, MatButtonModule, MatButtonToggleModule,
       MatCardModule,     MatCheckboxModule, MatChipsModule, MatDatepickerModule,

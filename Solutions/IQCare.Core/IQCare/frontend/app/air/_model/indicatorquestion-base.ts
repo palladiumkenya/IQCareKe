@@ -1,4 +1,5 @@
 export class IndicatorQuestionBase {
+    Id:number
     SubSectionId: number;
     value: string;
     key: string;
