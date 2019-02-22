@@ -32,6 +32,7 @@ export class ActiveFormReportComponent implements OnInit {
     Sections: Section[];
     Forms: Form[];
     total: number;
+    IndicatorResults:any[];
     SubSections: SubSection[] = [];
     FormItems: [] = [];
     ControlType: string;
@@ -66,6 +67,7 @@ export class ActiveFormReportComponent implements OnInit {
         this.filterSubSection = [];
         this.total = 0;
         this.filtervalue = false;
+        this.IndicatorResults=[];
 
         //this.indicators=new FormArray([]);
         //const controls=this.IndicatorQuestions.map(c=>new FormControl(false));
@@ -141,7 +143,7 @@ export class ActiveFormReportComponent implements OnInit {
                     else if (this.FormItems["reportSections"][i]['reportSubSections'][t]['indicators'][r].dataType === 'Numeric') {
                         this.ControlType = "number";
 
-                        this.ItemValue = "0";
+                        this.ItemValue = '';
 
                     }
                     let SubSectionName = this.FormItems['reportSections'][i]['reportSubSections'][t].name;
@@ -260,7 +262,12 @@ export class ActiveFormReportComponent implements OnInit {
                 for (let i = 0; i < this.filteritems.length; i++) {
                     const filterlabel = this.filteritems[i]['label'].toString();
                     if (filterlabel !== 'Total Assessed for HIV Risk' && filterlabel !== 'Self Testing Total' && filterlabel !== 'Circumcised Total' && filterlabel !== 'PEP Total') {
-                        this.total += parseInt(this.filteritems[i].value, 10);
+                        const value = this.filteritems[i].value.toString();
+                        if (value == '')
+                        {
+                            this.total += 0;
+                        }
+                        else { this.total += parseInt(this.filteritems[i].value, 10); }
                     }
 
 
@@ -367,7 +374,7 @@ export class ActiveFormReportComponent implements OnInit {
         let valuevalidation=false;
         for (let i = 0; i < this.IndicatorQuestions.length; i++) {
             const val = this.IndicatorQuestions[i].value.toString();
-            if (val == '0' || val == '') {
+            if ( val == '') {
                 console.log(this.IndicatorQuestions[i].code.toString()); 
                 const code=this.IndicatorQuestions[i].code.toString();
                 const element = document.getElementById(code) ;
@@ -400,44 +407,53 @@ export class ActiveFormReportComponent implements OnInit {
            const reportingDate= moment(this.FormResults.Period).format('DD-MMM-YYYY').toString();
            const reportingFormId=this.Forms[0].FormId; 
            const createdby=parseInt(localStorage.getItem('appUserId'));
-           const  IndicatorResults=[];
+        
 
             for (let i = 0; i < this.IndicatorQuestions.length; i++) { 
            ///  if(this.IndicatorQuestions[i].ControlType=)
-           const controltype=this.IndicatorQuestions[i].controlType;
+           const controltype = this.IndicatorQuestions[i].controlType.toString();
            
-           if(controltype=='number')
+           if (controltype == 'number')
            {
-           this.numericnumber=parseInt(this.IndicatorQuestions[i].value.toString())
-           this.resultvalue="";
+           this.numericnumber = parseInt(this.IndicatorQuestions[i].value.toString())
+           this.resultvalue = "";
            
            }
-           else if(controltype=='Text')
+           else if  (controltype == 'Text')
            { 
-            this.resultvalue=this.IndicatorQuestions[i].value.toString()
-            this.numericnumber=0;
+            this.resultvalue = this.IndicatorQuestions[i].value.toString()
+            this.numericnumber = 0;
           }
          
           
-            IndicatorResults.push({
-                'Id':this.IndicatorQuestions[i].Id,
-                'ResultText':this.resultvalue,
-                'ResultNumeric':this.numericnumber
+            this.IndicatorResults.push({
+                'Id': this.IndicatorQuestions[i].Id,
+                'ResultText': this.resultvalue,
+                'ResultNumeric': this.numericnumber
             });
         }
             this.spinner.show();
-
-            this.formdetailservice.submitIndicatorResults(reportingDate,reportingFormId,createdby,IndicatorResults).subscribe(
+               console.log("IndicatorResults");
+               console.log(this.IndicatorResults);
+            this.formdetailservice.submitIndicatorResults(reportingDate,reportingFormId,createdby,this.IndicatorResults).subscribe(
                 (response)=>{
                 console.log(response);
-                console.log(response.Message);
-                console.log(response.ReportingFormId);
-
+               // const message = response;
+                console.log(response['message']);
+                console.log(response['reportingFormId']);
+                console.log(response.message);
+                console.log(response.reportingFormId);
+               // console.log(message['Message']);
+               // console.log(message('ReportingFormId'));
+               this.snotifyService.success(response.message, 'Submit Indicator Results',
+               this.notificationService.getConfig());
                 },
                 (error) => {
                 this.snotifyService.error('Error submitting Indicator Results ' + error, 'Submit Indicator Results',
                     this.notificationService.getConfig());
+                    this.spinner.hide();
                 },
+                
                 () => {
                 this.spinner.hide();
                 }
