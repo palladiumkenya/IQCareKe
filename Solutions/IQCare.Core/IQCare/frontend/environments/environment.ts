@@ -8,5 +8,5 @@ export const environment = {
     API_URL: location.protocol + '//localhost:3333',
     API_LAB_URL: location.protocol + '//localhost:5000',
     API_PMTCT_URL: location.protocol + '//localhost:56486',
-    API_AIR_URL : location.protocol + '//localhost:56071'
-};
+    API_AIR_URL:location.protocol + '//localhost:44398'
+}
