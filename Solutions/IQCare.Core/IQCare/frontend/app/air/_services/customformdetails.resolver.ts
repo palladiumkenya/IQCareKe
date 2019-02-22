@@ -21,3 +21,6 @@ export class FormDetailResolver implements Resolve<Observable<any[]>>{
         return this.formdetailservice.getFormDetails(number);
     }
 }
+
+
+

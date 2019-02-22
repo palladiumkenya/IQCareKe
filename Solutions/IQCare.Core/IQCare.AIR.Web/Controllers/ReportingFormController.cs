@@ -30,12 +30,12 @@ namespace IQCare.AIR.Web.Controllers
             return BadRequest(response);
         }
 
-        [HttpGet("{Id}")]
-        public async Task<IActionResult> GetFormData(int reportingId)
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetFormData(int id)
         {
             var response = await _mediator.Send(new GetFormValueQuery()
             {
-                Id = reportingId
+                Id = id
             }, Request.HttpContext.RequestAborted);
 
             if (!response.IsValid)

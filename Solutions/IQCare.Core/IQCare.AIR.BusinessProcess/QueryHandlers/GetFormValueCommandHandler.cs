@@ -27,7 +27,7 @@ namespace IQCare.AIR.BusinessProcess.QueryHandlers
             try
             {
                 FormDetailsService fds = new FormDetailsService(_airUnitOfWork);
-                ReportingValues rs = new ReportingValues();
+               // ReportingValues rs = new ReportingValues();
                 List<ReportingValues> rlist = new List<ReportingValues>();
 
                 if (request.Id > 0)
@@ -38,8 +38,11 @@ namespace IQCare.AIR.BusinessProcess.QueryHandlers
                         var Indicators = await Task.Run(() => fds.GetIndicatorResults(ReportingForm.Id));
                         if (Indicators != null)
                         {
+
+                           
                             Indicators.ForEach(x =>
                             {
+                                ReportingValues rs = new ReportingValues();
                                 rs.ReportingFormId = x.ReportingPeriod.ReportingFormId;
                                 rs.ReportingId = x.Id;
                                 rs.ReportDate = x.ReportingPeriod.ReportDate;

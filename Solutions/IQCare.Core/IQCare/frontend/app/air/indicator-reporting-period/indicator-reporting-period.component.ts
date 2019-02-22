@@ -9,8 +9,9 @@ import { MatTableDataSource, MatPaginator } from '@angular/material';
 })
 export class IndicatorReportingPeriodComponent implements OnInit {
   
-  reporting_period_displaycolumns : any[] = ['reportName','reportDate','dateCreated','action']
+  reporting_period_displaycolumns : any[] = ['reportName','reportDate','dateCreated','action','edit']
   reportingPeriods : any[] = [];
+ reportingformid:number;
 
   reportingPeriodsDataSource = new MatTableDataSource(this.reportingPeriods);
   @ViewChild(MatPaginator) paginator : MatPaginator;
@@ -25,15 +26,23 @@ export class IndicatorReportingPeriodComponent implements OnInit {
   
 
   private getReportingPeriods() {
-      this.indicatorService.getFormIndicatorReportingPeriods().subscribe(r=>{
+      this.indicatorService.getFormIndicatorReportingPeriods().subscribe(r=>
+        {
+          
         r.forEach(data => {
-          this.reportingPeriods.push({
+            console.log(data);
+            this.reportingformid=data.reportingFormId;
+            console.log(this.reportingformid);
+           this.reportingPeriods.push({
             id : data.id,
             reportName : data.reportName,
+
             reportDate : data.strReportDate,
             dateCreated : data.dateCreated
           });
         });
+
+      
           this.reportingPeriodsDataSource = new MatTableDataSource(this.reportingPeriods);
           this.reportingPeriodsDataSource.paginator = this.paginator;
       },(error)=>{
