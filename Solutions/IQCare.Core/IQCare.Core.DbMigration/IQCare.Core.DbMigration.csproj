@@ -150,6 +150,7 @@
     <None Remove="Scripts\2.0.0\39_IndicatorTables.sql" />
     <None Remove="Scripts\2.0.0\40_IndicatorData.sql" />
     <None Remove="Scripts\2.0.0\37_HIVPositiveListView.sql" />
+    <None Remove="Scripts\2.0.0\41_DO_Create_View_IndicatorResults.sql" />
   </ItemGroup>
 
   <ItemGroup>
@@ -295,6 +296,7 @@
     <EmbeddedResource Include="Scripts\2.0.0\39_IndicatorTables.sql" />
     <EmbeddedResource Include="Scripts\2.0.0\40_IndicatorData.sql" />
     <EmbeddedResource Include="Scripts\2.0.0\37_HIVPositiveListView.sql" />
+    <EmbeddedResource Include="Scripts\2.0.0\41_DO_Create_View_IndicatorResults.sql" />
   </ItemGroup>
 
   <ItemGroup>

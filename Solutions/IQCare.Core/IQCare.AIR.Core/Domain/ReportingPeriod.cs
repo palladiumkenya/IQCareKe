@@ -31,5 +31,11 @@ namespace IQCare.AIR.Core.Domain
         public int CreatedBy { get; private set; }
         public virtual ReportingForm ReportingForm { get; set; }
         public virtual ICollection<IndicatorResult> IndicatorResults { get; set; }
+
+        public void Update(DateTime reportDate)
+        {
+            ReportDate = reportDate;
+            DateUpdated = DateTime.Now;
+        }
     }
 }
