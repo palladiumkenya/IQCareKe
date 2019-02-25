@@ -34,5 +34,12 @@ namespace IQCare.AIR.Core.Domain
         public virtual  ReportingPeriod ReportingPeriod { get; set; }
         public virtual Indicator Indicator { get; set; }
 
+        public void UpdateResult(decimal ? resultNumeric, string resultText)
+        {
+            ResultNumeric = resultNumeric;
+            ResultText = resultText;
+            DateUpdated = DateTime.Now;
+        }
+
     }
 }
