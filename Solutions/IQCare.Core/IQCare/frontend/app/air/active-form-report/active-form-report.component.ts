@@ -459,18 +459,18 @@ export class ActiveFormReportComponent implements OnInit {
   }
 
     submitResult() {
-        let returnvalue= false;
-        let valuevalidation=false;
+        let returnvalue = false;
+        let valuevalidation = false;
         for (let i = 0; i < this.IndicatorQuestions.length; i++) {
             const val = this.IndicatorQuestions[i].value.toString();
             if ( val == '') {
                 console.log(this.IndicatorQuestions[i].code.toString()); 
-                const code=this.IndicatorQuestions[i].code.toString();
+                const code = this.IndicatorQuestions[i].code.toString();
                 const element = document.getElementById(code) ;
                 
-                element.innerHTML="<span style='color:red;'>Required</span>";
-                returnvalue =true;
-                valuevalidation=true;
+                element.innerHTML = "<span style='color:red;'>Required</span>";
+                returnvalue = true;
+                valuevalidation = true;
             }
         }
 
@@ -482,20 +482,20 @@ export class ActiveFormReportComponent implements OnInit {
         if (this.FormResults.Period == undefined) {
             this.snotifyService.error('Kindly note the monthly period is required ', 'Monthly Period',
                 this.notificationService.getConfig());
-            returnvalue=true;
+            returnvalue = true;
         }
         
         /// return returnvalue;
           
 
-         if(returnvalue ==true)
+         if(returnvalue == true)
          {
              return;
          }
          else { 
-           const reportingDate= moment(this.FormResults.Period).format('DD-MMM-YYYY').toString();
-           const reportingFormId=this.Forms[0].FormId; 
-           const createdby=parseInt(localStorage.getItem('appUserId'));
+           const reportingDate = moment(this.FormResults.Period).format('DD-MMM-YYYY').toString();
+           const reportingFormId = this.Forms[0].FormId; 
+           const createdby = parseInt(localStorage.getItem('appUserId'));
         
 
             for (let i = 0; i < this.IndicatorQuestions.length; i++) { 
@@ -525,7 +525,7 @@ export class ActiveFormReportComponent implements OnInit {
                console.log("IndicatorResults");
                console.log(this.IndicatorResults);
             this.formdetailservice.submitIndicatorResults(reportingDate,reportingFormId,createdby,this.IndicatorResults).subscribe(
-                (response)=>{
+                (response) => {
                 console.log(response);
                // const message = response;
                 console.log(response['message']);
