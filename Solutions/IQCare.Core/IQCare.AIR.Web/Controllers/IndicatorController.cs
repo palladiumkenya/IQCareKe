@@ -32,6 +32,20 @@ namespace IQCare.AIR.Web.Controllers
             return Ok(response.Value);
         }
 
+        [HttpPost]
+        public async Task<IActionResult> EditResults([FromBody] EditIndicatorResultsCommand command)
+        {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState.Values.Select(x => x.Errors));
+
+            var response = await _mediator.Send(command, HttpContext.RequestAborted);
+
+            if (!response.IsValid)
+                return BadRequest(response);
+
+            return Ok(response.Value);
+        }
+
 
     }
 }
