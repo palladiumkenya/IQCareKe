@@ -43,7 +43,7 @@ export class AddBabyDialogComponent implements OnInit {
   ngOnInit() {
     this.babyFormGroup = this.formBuilder.group({
       babySex: new FormControl('', [Validators.required]),
-      birthWeight: new FormControl('', [Validators.required]),
+      birthWeight: new FormControl('', [Validators.required,Validators.min(0),Validators.max(10)]),
       outcome: new FormControl('', [Validators.required]),
       resuscitationDone: new FormControl('', [Validators.required]),
       deformity: new FormControl('', [Validators.required]),

@@ -34,7 +34,7 @@ export class DeliveryComponent implements OnInit {
         this.DeliveryForm = this._formBuilder.group({
             placeofdelivery: new FormControl('', [Validators.required]),
             modeofdelivery: new FormControl('', [Validators.required]),
-            birthweight: new FormControl('', [Validators.required]),
+            birthweight: new FormControl('', [Validators.required, Validators.min(0), Validators.max(5)]),
             arvprophylaxisreceived: new FormControl('', [Validators.required]),
             arvprophylaxisother: new FormControl('', [Validators.required])
         });
