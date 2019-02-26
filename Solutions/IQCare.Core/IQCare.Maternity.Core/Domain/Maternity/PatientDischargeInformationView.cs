@@ -14,6 +14,7 @@ namespace IQCare.Maternity.Core.Domain.Maternity
         public int Id { get; set; }
         public int? PatientMasterVisitId { get; set; }
         public string OutcomeStatus { get; set; }
+        public int OutcomeStatusId { get; set; }       
         public DateTime? DateDischarged { get; set; }
         public string OutcomeDescription { get; set; }
         public int CreatedBy { get; set; }
