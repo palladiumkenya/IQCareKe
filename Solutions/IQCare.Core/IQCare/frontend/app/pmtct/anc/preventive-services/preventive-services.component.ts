@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, OnDestroy } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 import { SnotifyService } from 'ng-snotify';
@@ -21,7 +21,7 @@ export interface Options {
     templateUrl: './preventive-services.component.html',
     styleUrls: ['./preventive-services.component.css']
 })
-export class PreventiveServicesComponent implements OnInit {
+export class PreventiveServicesComponent implements OnInit, OnDestroy {
     public PreventiveServicesFormGroup: FormGroup;
     lookupItemView$: Subscription;
     preventiveServicesOptions: any[] = [];
@@ -301,5 +301,10 @@ export class PreventiveServicesComponent implements OnInit {
                 () => {
                     console.log(this.lookupItemView$);
                 });
+    }
+
+    ngOnDestroy(): void {
+        this.partnerTesting$.unsubscribe();
+        this.preventiveService$.unsubscribe();
     }
 }

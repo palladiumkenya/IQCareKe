@@ -1,14 +1,15 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
-import {Subscription} from 'rxjs';
-import {SnotifyService} from 'ng-snotify';
-import {PatientEducationEmitter} from '../../emitters/PatientEducationEmitter';
-import {CounsellingTopicsEmitters} from '../../emitters/counsellingTopicsEmitters';
-import {PatientEducationCommand} from '../../_models/PatientEducationCommand';
-import {LookupItemService} from '../../../shared/_services/lookup-item.service';
-import {NotificationService} from '../../../shared/_services/notification.service';
+import { Component, EventEmitter, Input, OnInit, Output, OnDestroy } from '@angular/core';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { Subscription } from 'rxjs';
+import { SnotifyService } from 'ng-snotify';
+import { PatientEducationEmitter } from '../../emitters/PatientEducationEmitter';
+import { CounsellingTopicsEmitters } from '../../emitters/counsellingTopicsEmitters';
+import { PatientEducationCommand } from '../../_models/PatientEducationCommand';
+import { LookupItemService } from '../../../shared/_services/lookup-item.service';
+import { NotificationService } from '../../../shared/_services/notification.service';
+
 import * as moment from 'moment';
-import {AncService} from '../../_services/anc.service';
+import { AncService } from '../../_services/anc.service';
 
 
 export interface PeriodicElement {
@@ -18,8 +19,8 @@ export interface PeriodicElement {
 }
 
 const ELEMENT_DATA: PeriodicElement[] = [
-    {topicId: 1, topic: 'sex', onSetDate: 'Hydrogen'},
-    {topicId: 2, topic: 'church', onSetDate: 'Helium'}
+    { topicId: 1, topic: 'sex', onSetDate: 'Hydrogen' },
+    { topicId: 2, topic: 'church', onSetDate: 'Helium' }
 ];
 
 
@@ -30,7 +31,7 @@ const ELEMENT_DATA: PeriodicElement[] = [
 })
 
 
-export class PatientEducationExaminationComponent implements OnInit {
+export class PatientEducationExaminationComponent implements OnInit, OnDestroy {
     PatientEducationFormGroup: FormGroup;
 
     public yesnos: any[] = [];
@@ -59,19 +60,19 @@ export class PatientEducationExaminationComponent implements OnInit {
 
     displayedColumns: string[] = ['topicId', 'topic', 'onSetDate'];
     dataSource = ELEMENT_DATA;
-    visitDate : Date;
+    visitDate: Date;
 
     constructor(private _formBuilder: FormBuilder, private _lookupItemService: LookupItemService,
-                private  snotifyService: SnotifyService,
-                private notificationService: NotificationService,
-                private ancService: AncService) {
+        private snotifyService: SnotifyService,
+        private notificationService: NotificationService,
+        private ancService: AncService) {
     }
 
     ngOnInit() {
-        this.ancService.visitDate.subscribe(date=>{
+        this.ancService.visitDate.subscribe(date => {
             this.visitDate = date;
-            console.log('The visit Date Education'+ this.visitDate)
-         })
+            // console.log('The visit Date Education' + this.visitDate);
+        });
 
         this.PatientEducationFormGroup = this._formBuilder.group({
             breastExamDone: ['', Validators.required],
@@ -81,7 +82,7 @@ export class PatientEducationExaminationComponent implements OnInit {
             // testResult: new FormControl(['', Validators.required])
         });
 
-      
+
 
         this.userId = JSON.parse(localStorage.getItem('appUserId'));
         //  this.getLookupOptions('counselledOn', this.topics);
@@ -99,7 +100,7 @@ export class PatientEducationExaminationComponent implements OnInit {
 
 
         this.nextStep.emit(this.patientEducationEmitterData);
-        this.notify.emit({'form': this.PatientEducationFormGroup, 'counselling_data': this.counselling_data});
+        this.notify.emit({ 'form': this.PatientEducationFormGroup, 'counselling_data': this.counselling_data });
 
         if (this.isEdit) {
 
@@ -230,6 +231,11 @@ export class PatientEducationExaminationComponent implements OnInit {
 
                 }
             );
+    }
+
+    ngOnDestroy(): void {
+        this.baseline$.unsubscribe();
+        this.patientCounseling$.unsubscribe();
     }
 
 

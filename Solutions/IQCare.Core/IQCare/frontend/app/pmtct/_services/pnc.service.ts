@@ -195,7 +195,9 @@ export class PncService {
     }
 
     public updateReferral(patientReferralEditCommand: PatientReferralEditCommand): Observable<any> {
+        // tslint:disable-next-line:max-line-length
         if ((patientReferralEditCommand.ReferredFrom == null || patientReferralEditCommand.ReferredFrom == undefined || patientReferralEditCommand.ReferredFrom.toString() == '')
+            // tslint:disable-next-line:max-line-length
             || (patientReferralEditCommand.ReferredTo == null || patientReferralEditCommand.ReferredTo == undefined || patientReferralEditCommand.ReferredTo.toString() == '')) {
             return of([]);
         }
@@ -208,7 +210,7 @@ export class PncService {
     }
 
     public savePncNextAppointment(pncNextAppointmentCommand: PatientAppointment): Observable<any> {
-        if (!pncNextAppointmentCommand.AppointmentDate) {
+        if (!pncNextAppointmentCommand.AppointmentDate || pncNextAppointmentCommand.AppointmentDate == null) {
             return of([]);
         }
 

@@ -30,7 +30,7 @@ export class MaternityNextAppointmentComponent implements OnInit {
 
     ngOnInit() {
         this.nextAppointmentFormGroup = this.formBuilder.group({
-            nextAppointmentDate: new FormControl('', [Validators.required]),
+            nextAppointmentDate: new FormControl(''),
             remarks: new FormControl(''),
             id: new FormControl('')
         });

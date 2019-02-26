@@ -160,12 +160,8 @@ export class MaternityComponent implements OnInit {
                 referralOptions,
                 hivFinalResultOptions,
                 hivFinalResultsOptions,
-                // hivTestOptions,
-                // kitNameOptions
                 hivStatusOptions
             } = res;
-            // console.log('test options');
-            // console.log(res);
             this.deliveryModeOptions = deliveryModeOptions['lookupItems'];
             this.bloodLossOptions = bloodLossOptions['lookupItems'];
             this.motherStateOptions = motherStateOptions['lookupItems'];
@@ -177,9 +173,6 @@ export class MaternityComponent implements OnInit {
             this.birthoutcomeOptions = birthOutcomeOptions['lookupItems'];
             this.referralOptions = referralOptions['lookupItems'];
             this.hivFinalResultOptions = hivFinalResultOptions['lookupItems'];
-            // this.hivTestOptions = hivTestOptions['lookupItems'];
-            // this.kitNameOptions = kitNameOptions['lookupItems'];
-            // this.hivTestResultOptions = hivTestResultOptions['LookupItems'];
             this.hivFinalResultsOptions = hivFinalResultsOptions['lookupItems'];
             this.hivStatusOptions = hivStatusOptions['lookupItems'];
         });
