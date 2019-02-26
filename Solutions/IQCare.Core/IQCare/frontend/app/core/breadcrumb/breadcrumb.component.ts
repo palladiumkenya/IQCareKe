@@ -6,10 +6,12 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./breadcrumb.component.css']
 })
 export class BreadcrumbComponent implements OnInit {
+  afyaMobileUrl : string;
 
   constructor() { }
 
   ngOnInit() {
+    this.afyaMobileUrl = location.protocol + "//" + location.hostname + ":4747/dashboard";
   }
 
 }

@@ -16,7 +16,7 @@
     <div class="container">
         <div class="row">
             <div class="col-md-6">
-                 <img src="Images/kenya1.png"  class="pull-left" alt="Keany Court of Arms"/>  
+                 <img src="Images/kenya1.png"  class="pull-left" alt="Kenya Court of Arms"/>  
             </div>
             <div class="col-md-6">
                

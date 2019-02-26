@@ -235,13 +235,13 @@
 								  <span class="fa fa-stethoscope fa-lg pull-left text-info  "></span><strong class="text-info">DepressionScreening</strong></asp:LinkButton>
                                 
                              <asp:LinkButton ID="menuAlcoholScreening" ClientIDMode="Static" runat="server" CssClass="list-group-item" OnClick="New_AlcoholScreening_Click">
-								  <span class="fa fa-stethoscope fa-lg pull-left text-info  "></span><strong class="text-info">Alcohol And Drug Abuse Screening </strong></asp:LinkButton>   
+								  <span class="fa fa-stethoscope fa-lg pull-left text-info  "></span><strong class="text-info">Alcohol & Drug Abuse Screening </strong></asp:LinkButton>   
                              
                              <asp:LinkButton ID="menuGenderBasedScreening" ClientIDMode="Static" runat="server" CssClass="list-group-item" OnClick="New_GBVScreening_Click">
 								  <span class="fa fa-stethoscope fa-lg pull-left text-info  "></span><strong class="text-info">Gender Based Violence Screening </strong></asp:LinkButton>  
                                
                                <asp:LinkButton ID="menuEnhanceAdherence" ClientIDMode="Static" runat="server" OnClick=" New_EnhanceAdherence_Click"  CssClass="list-group-item">
-								  <span class="fa fa-heart fa-lg pull-left text-info"></span><strong class="text-info">EnhanceAdherence</strong></asp:LinkButton>
+								  <span class="fa fa-heart fa-lg pull-left text-info"></span><strong class="text-info">Enhanced Adherence</strong></asp:LinkButton>
                                
 
                                  <asp:LinkButton ID="menuBarriersAdherence" ClientIDMode="Static" runat="server" OnClick="New_AdherenceBarriers_Click"  CssClass="list-group-item">

@@ -41,7 +41,7 @@ export class ReferralsComponent implements OnInit {
           referredTo: ['', Validators.required],
           nextAppointmentDate: ['', Validators.required],
           scheduledAppointment: ['', Validators.required],
-          serviceRemarks: ['', Validators.required]
+          serviceRemarks: ['', []]
       });
 
       const {

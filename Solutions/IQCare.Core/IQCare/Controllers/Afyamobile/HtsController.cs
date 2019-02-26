@@ -93,10 +93,19 @@ namespace IQCare.Controllers.Afyamobile
             return BadRequest(response);
         }
 
-        [HttpPost("familypartnerdemographics")]
+        [HttpPost("partnerdemographics")]
         public async Task<IActionResult> PostPartnerDemographics([FromBody]AfyaMobilePartnersDemographicsCommand partnersDemographicsCommand)
         {
             var response = await _mediator.Send(partnersDemographicsCommand, Request.HttpContext.RequestAborted);
+            if (response.IsValid)
+                return Ok(response);
+            return BadRequest(response);
+        }
+
+        [HttpPost("familydemographics")]
+        public async Task<IActionResult> PostFamilyDemographics([FromBody] AfyaMobileFamilyDemographicsCommand afyaMobileFamilyDemographicsCommand)
+        {
+            var response = await _mediator.Send(afyaMobileFamilyDemographicsCommand, Request.HttpContext.RequestAborted);
             if (response.IsValid)
                 return Ok(response);
             return BadRequest(response);

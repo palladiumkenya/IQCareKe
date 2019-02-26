@@ -8,7 +8,7 @@
 
   <ItemGroup>
     <Folder Include="frontend\app\records\listduplicate\" />
-    <Folder Include="logs\" />
+    <Folder Include="logs" />
     <Folder Include="wwwroot\" />
   </ItemGroup>
 

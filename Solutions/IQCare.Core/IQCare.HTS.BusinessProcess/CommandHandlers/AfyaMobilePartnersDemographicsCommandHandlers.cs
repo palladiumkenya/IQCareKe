@@ -120,6 +120,7 @@ namespace IQCare.HTS.BusinessProcess.CommandHandlers
                                 //add partner location
                                 if (!string.IsNullOrWhiteSpace(landmark) || (countyId > 0) || (subCountyId > 0) || (wardId > 0))
                                 {
+                                    landmark = string.IsNullOrWhiteSpace(landmark) ? "" : landmark;
                                     var partnerLocation = await registerPersonService.addPersonLocation(person.Id, countyId, subCountyId, wardId, " ", landmark, providerId);
                                 }
 
@@ -139,13 +140,13 @@ namespace IQCare.HTS.BusinessProcess.CommandHandlers
                     }
                     
                     trans.Commit();
-                    return Result<string>.Valid($"Successfully synchronized family/partner: {afyaMobileId}");
+                    return Result<string>.Valid($"Successfully synchronized partner: {afyaMobileId}");
                 }
                 catch (Exception ex)
                 {
                     trans.Rollback();
-                    Log.Error($"Failed to synchronize family/partner: {afyaMobileId} for clientid: {indexClientAfyaMobileId} " + ex.Message + " " + ex.InnerException);
-                    return Result<string>.Invalid($"Failed to synchronize family/partner: {afyaMobileId} for clientid: {indexClientAfyaMobileId} " + ex.Message + " " + ex.InnerException);
+                    Log.Error($"Failed to synchronize partner: {afyaMobileId} for clientid: {indexClientAfyaMobileId} " + ex.Message + " " + ex.InnerException);
+                    return Result<string>.Invalid($"Failed to synchronize partner: {afyaMobileId} for clientid: {indexClientAfyaMobileId} " + ex.Message + " " + ex.InnerException);
                 }
             }
         }

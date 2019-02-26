@@ -151,9 +151,23 @@ dotnet publish Solutions/IQCare.Core/IQCare.Maternity.WebApi/IQCare.Maternity.We
 @echo ********** END OF BUILINDING IQCare MATERNITY ********** >> %log%
 @echo ********** END OF BUILINDING IQCare MATERNITY ********** >> %log%
 
+
+@echo "********** Building IQCare COMMON WEB **********" >> %log%
+@echo ********** Building IQCare COMMON WEB **********
+
+dotnet publish Solutions/IQCare.Core/IQCare.Common.Web/IQCare.Common.Web.csproj -o ../../../package/common
+
+@echo ********** END OF BUILINDING IQCare COMMON WEB ********** >> %log%
+@echo ********** END OF BUILINDING IQCare COMMON WEB ********** >> %log%
+
+
+dotnet publish Solutions/IQCare.Core/IQCare.Core.DbMigration/IQCare.Core.DbMigration.csproj -o ../../../Release/DbMigration/win-x64 -r win-x64
+dotnet publish Solutions/IQCare.Core/IQCare.Core.DbMigration/IQCare.Core.DbMigration.csproj -o ../../../Release/DbMigration/win-x86 -r win-x86
+
+
 cd Solutions/IQCare.Core/IQCare
 
-ng build --base-href "/frontend/" --prod
+ng build --base-href "/frontend/" --prod --aot --output-hashing=all
 
 pause
 

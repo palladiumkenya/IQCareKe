@@ -143,10 +143,7 @@ public calculateZscore() {
        if (person == null) {
             return;
        }
-       if (!this.triageService.qualifiesForZscoreCalculation(person.dateOfBirth)) {
-            return;
-       }
-      
+          
       const calculateZscoreCommand: CalculateZscoreCommand = {
       DateOfBirth : person.dateOfBirth,
       Weight : this.vitalsFormGroup.get('weight').value,
