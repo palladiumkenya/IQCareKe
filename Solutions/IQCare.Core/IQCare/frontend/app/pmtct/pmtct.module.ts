@@ -107,7 +107,6 @@ import { ANCHivStatusInitialVisitResolver } from './_services/resolvers/anc-hiv-
 import { MotherExaminationResolver } from './_services/resolvers/motherexamination.resolver';
 import { BabyExaminationResolver } from './_services/resolvers/baby-examination.resolver';
 import { HeiMedicationComponent } from './hei/hei-medication/hei-medication.component';
-import { AncClientMonitoringComponent } from './anc/anc-client-monitoring/anc-client-monitoring.component';
 import { BirthOutcomeResolver } from './_services/resolvers/BirthOutcomeResolver';
 import { CounselledInfantFeedingResolver } from './_services/resolvers/counselled-infant-feeding.resolver';
 import { ImmunizationComponent } from './hei/immunization-history/immunization/immunization.component';
@@ -184,7 +183,6 @@ import { PriorHivStatusComponent } from './pnc/prior-hiv-status/prior-hiv-status
         MaternityEncounterComponent,
         AncHivtestingComponent,
         HeiMedicationComponent,
-        AncClientMonitoringComponent,
         ImmunizationComponent,
         BirthInfoGridComponent,
         AddBirthInfoComponent,
@@ -233,7 +231,6 @@ import { PriorHivStatusComponent } from './pnc/prior-hiv-status/prior-hiv-status
         ANCHivStatusInitialVisitResolver,
         MotherExaminationResolver,
         BabyExaminationResolver,
-        AncClientMonitoringComponent,
         BirthOutcomeResolver,
         CounselledInfantFeedingResolver,
         DataService,
