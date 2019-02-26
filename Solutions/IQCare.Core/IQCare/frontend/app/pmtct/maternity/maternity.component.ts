@@ -444,24 +444,24 @@ export class MaternityComponent implements OnInit {
 
         this.AdministeredDrugs.push(
             {
-                Id: vitaminA[0].itemId, Value: this.maternalDrugAdministrationForGroup.value[0]['vitaminASupplement'],
+                Id: vitaminA[0].itemId, Value: this.maternalDrugAdministrationForGroup.value[0]['VitaminASupplementation'],
                 Description: 'Vitamin A Supplementation'
             },
             {
-                Id: haartAnc[0].itemId, Value: this.maternalDrugAdministrationForGroup.value[0]['HaartANC'],
+                Id: haartAnc[0].itemId, Value: this.maternalDrugAdministrationForGroup.value[0]['StartedHAARTinANC'],
                 Description: 'Started HAART in ANC'
             },
             {
-                Id: cotrimoxazole[0].itemId, Value: this.maternalDrugAdministrationForGroup.value[0]['cotrimoxazole'],
+                Id: cotrimoxazole[0].itemId, Value: this.maternalDrugAdministrationForGroup.value[0]['Cotrimoxazole'],
+                Description: 'Cotrimoxazole'
+            },
+            {
+                Id: maternityArv[0].itemId, Value: this.maternalDrugAdministrationForGroup.value[0]['ARVsStartedinMaternity'],
                 Description: 'ARVs Started in Maternity'
             },
             {
-                Id: maternityArv[0].itemId, Value: this.maternalDrugAdministrationForGroup.value[0]['ARVStartedMaternity'],
+                Id: infantArv[0].itemId, Value: this.maternalDrugAdministrationForGroup.value[0]['InfantProvidedWithARVprophylaxis'],
                 Description: 'Infant Provided With ARV prophylaxis'
-            },
-            {
-                Id: infantArv[0].itemId, Value: this.maternalDrugAdministrationForGroup.value[0]['ARVStartedMaternity'],
-                Description: 'Cotrimoxazole'
             }
         );
 

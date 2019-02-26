@@ -74,6 +74,8 @@
 
                                         <div>
                                             <app-pnc-hivtesting (notify)="onHivStatusNotify($event)" [pncHivOptions]="pncHivOptions"
+                                            [isEdit]="isEdit" [patientId]="patientId"
+                                            [patientMasterVisitId]="patientMasterVisitId"
                                                 [serviceAreaId]="serviceAreaId">
                                             </app-pnc-hivtesting>
                                         </div>
@@ -89,16 +91,22 @@
                                         <ng-template matStepLabel>
                                             <span matTooltip="Maternal Drug Administration"> Drug Administration</span>
                                         </ng-template>
-                                        <app-maternal-drug-administration [drugAdministrationOptions]="drugAdministrationOptions"
+                                        <app-maternal-drug-administration  [isEdit]="isEdit" [PatientId]="patientId"
+                                        [PatientMasterVisitId]="patientMasterVisitId"  [drugAdministrationOptions]="drugAdministrationOptions"
                                             (notify)="onMaternalDrugAdministration($event)"></app-maternal-drug-administration>
                                         <div>
                                             <app-pnc-partnertesting [partnerTestingOptions]="partnerTestingOptions"
+                                            [isEdit]="isEdit" [patientId]="patientId"
+                                            [patientMasterVisitId]="patientMasterVisitId"
                                                 (notify)="onPartnerTestingNotify($event)"></app-pnc-partnertesting>
                                         </div>
 
                                         <div>
                                             <app-pnc-patienteducation [patientEducationOptions]="patientEducationOptions"
-                                                (notify)="onPatientEducationNotify($event)"></app-pnc-patienteducation>
+                                            [isEdit]="isEdit" 
+                                            [patientId]="patientId"
+                                            [patientMasterVisitId]="patientMasterVisitId"
+                                            (notify)="onPatientEducationNotify($event)"></app-pnc-patienteducation>
                                         </div>
                                         <div>
                                             <button mat-raised-button color="primary" matStepperPrevious type="button">Previous</button>
@@ -111,15 +119,30 @@
                                         <ng-template matStepLabel>
                                             <span matTooltip="Discharge">Discharge</span>
                                         </ng-template>
-                                        <app-discharge [dischargeOptions]="dischargeOptions" (notify)="onPatientDischarge($event)"></app-discharge>
+                                        <app-discharge [dischargeOptions]="dischargeOptions" 
+                                         [isEdit]="isEdit"
+                                         [patientId]="patientId"
+                                         [patientMasterVisitId]="patientMasterVisitId"
+                                        (notify)="onPatientDischarge($event)"></app-discharge>
 
                                         <div>
-                                            <app-maternity-referral [dischargeOptions]="dischargeOptions" (notify)="onPatientreferralNotify($event)"></app-maternity-referral>
+                                            <app-maternity-referral
+                                            [isEdit]="isEdit"
+                                            [patientId]="patientId"
+                                            [patientMasterVisitId]="patientMasterVisitId"
+                                             [dischargeOptions]="dischargeOptions"
+                                             (notify)="onPatientreferralNotify($event)">
+
+                                            </app-maternity-referral>
                                         </div>
 
                                         <div>
-                                            <app-maternity-next-appointment [dischargeOptions]="dischargeOptions"
-                                                (notify)="onPatientNextAppointent($event)"></app-maternity-next-appointment>
+                                            <app-maternity-next-appointment 
+                                            [isEdit]="isEdit"
+                                            [patientId]="patientId"
+                                            [patientMasterVisitId]="patientMasterVisitId"
+                                            [dischargeOptions]="dischargeOptions"
+                                            (notify)="onPatientNextAppointent($event)"></app-maternity-next-appointment>
                                         </div>
 
                                         <div>

@@ -16,7 +16,6 @@ export class MaternityTestsComponent implements OnInit {
     maternityTestsFormGroup: FormGroup;
     @Input() maternityTestOptions: any[] = [];
     @Input() personId: number;
-
     @Output() notify: EventEmitter<FormGroup> = new EventEmitter<FormGroup>();
     public yesnoOptions: any[] = [];
     public hivStatusOptions: LookupItemView[] = [];
