@@ -27,7 +27,7 @@ namespace IQCare.PMTCT.BusinessProcess.CommandHandlers.pregnancy
             {
                 try
                 {
-                    PatientPregnancy result = await _unitOfWork.Repository<PatientPregnancy>().Get(x => x.PatientId == request.PatientId  && !x.Outcome.HasValue).OrderByDescending(x=>x.Id) .FirstOrDefaultAsync();
+                    PatientPregnancy result = await _unitOfWork.Repository<PatientPregnancy>().Get(x => x.PatientId == request.PatientId).OrderByDescending(x=>x.Id) .FirstOrDefaultAsync();
                     PregnancyViewModel pregnancyView = new PregnancyViewModel();;
                     if (result != null)
                     {

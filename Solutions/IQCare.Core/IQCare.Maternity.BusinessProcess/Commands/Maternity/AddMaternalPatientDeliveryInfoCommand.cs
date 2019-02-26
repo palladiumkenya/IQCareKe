@@ -20,7 +20,7 @@ namespace IQCare.Maternity.BusinessProcess.Commands.Maternity
         public int? MotherCondition { get;  set; }
         public int ? MaternalDeathAudited { get;  set; }
         public DateTime? MaternalDeathAuditDate { get;  set; }
-        public bool DeliveryComplicationsExperienced { get;  set; }
+        public int ? DeliveryComplicationsExperienced { get;  set; }
         public string DeliveryComplicationNotes { get;  set; }
         public string DeliveryConductedBy { get;  set; }
         public int CreatedBy { get;  set; }

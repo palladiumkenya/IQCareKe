@@ -257,7 +257,7 @@ export class MaternityService {
 
 
     public GetPatientDeliveryInfo(masterVisitId: number) {
-        return this.http.get<any>(this.API_PMTCT_URL + '/api/MaternityPatientDeliveryInfo/GetDeliveryInfoByMasterVisitId/' +
+        return this.http.get<any>(this.API_PMTCT_URL + '/api/MaternityPatientDeliveryInfo/GetDeliveryInfoByMasterVisitIdGetDeliveryInfoByMasterVisitId/' +
             masterVisitId).pipe(
                 tap(GetPatientDeliveryInfoByMasterVisitId => this.errorHandler.log('get patient delivery info by master Id')),
                 catchError(this.errorHandler.handleError<any[]>('GetPatientDeliveryInfoByMasterVisitId'))
@@ -280,8 +280,10 @@ export class MaternityService {
     }
 
     public getMaternityLookUpOptionByName(lookUpOptions: any[], lookupName: string): any {
+        console.log('Delivery Complications '+ lookupName)
         for (let index = 0; index < lookUpOptions.length; index++) {
             if (lookUpOptions[index].itemName.toUpperCase() === lookupName.toUpperCase()) {
+                console.log('Delivery Complications two '+ lookupName)
                 return lookUpOptions[index];
             }
         }
