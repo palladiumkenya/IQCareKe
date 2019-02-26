@@ -6,6 +6,7 @@ import { ClientMonitoringEmitter } from '../../emitters/ClientMonitoringEmitter'
 import { LookupItemService } from '../../../shared/_services/lookup-item.service';
 import { NotificationService } from '../../../shared/_services/notification.service';
 import { AncService } from '../../_services/anc.service';
+import { DataService } from '../../_services/data.service';
 
 export interface Options {
     value: string;
@@ -37,12 +38,15 @@ export class ClientMonitoringComponent implements OnInit {
     @Input() isEdit: boolean;
     @Input() patientId: number;
     @Input() patientMasterVisitId: number;
+    public hiv_status: string;
+
     @Output() notify: EventEmitter<FormGroup> = new EventEmitter<FormGroup>();
     public clientMonitoringData: ClientMonitoringEmitter;
 
     constructor(private fb: FormBuilder, private lookupItemService: LookupItemService, private snotifyService: SnotifyService,
         private notificationService: NotificationService,
-        private ancService: AncService) {
+        private ancService: AncService,
+        private dataservice: DataService) {
     }
 
     ngOnInit() {
@@ -54,6 +58,15 @@ export class ClientMonitoringComponent implements OnInit {
             cacxMethod: ['', Validators.required],
             cacxResult: ['', Validators.required],
             cacxComments: ['', []]
+        });
+
+        this.dataservice.currentHivStatus.subscribe(hivStatus => {
+            this.hiv_status = hivStatus;
+
+            if (this.hiv_status !== '' && this.hiv_status !== 'Positive') {
+                this.clientMonitoringFormGroup.get('WhoStage').disable({ onlySelf: true });
+                this.clientMonitoringFormGroup.get('viralLoadSampleTaken').disable({ onlySelf: true });
+            }
         });
 
         const {
@@ -70,7 +83,7 @@ export class ClientMonitoringComponent implements OnInit {
         this.cacxResultOptions = cacxResultOptions;
         this.cacxMethodOptions = cacxMethodOptions;
         this.YesNoOptions = yesnoOptions;
-        console.log(this.cacxMethodOptions);
+        // console.log(this.cacxMethodOptions);
 
         this.clientMonitoringFormGroup.controls['cacxMethod'].disable({ onlySelf: true });
         this.clientMonitoringFormGroup.controls['cacxResult'].disable({ onlySelf: true });
@@ -149,19 +162,19 @@ export class ClientMonitoringComponent implements OnInit {
         this.patientwhoStage$ = this.ancService.getPatientWhoStageInfoCurrent(patientId)
             .subscribe(
                 p => {
-                    console.log('patientwho');
-                    console.log(p);
+                    // console.log('patientwho');
+                    // console.log(p);
                     const whostage = p;
                     if (whostage) {
                         this.clientMonitoringFormGroup.get('WhoStage').setValue(whostage['whoStage']);
                     }
                 },
                 (err) => {
-                    console.log(err);
+                    // console.log(err);
                     this.snotifyService.error('Error loading patient who stage ' + err, 'WHO', this.notificationService.getConfig());
                 },
                 () => {
-                    console.log(this.lookupItemView$);
+                    // console.log(this.lookupItemView$);
                 });
     }
 
@@ -175,11 +188,11 @@ export class ClientMonitoringComponent implements OnInit {
                     }
                 },
                 (err) => {
-                    console.log(err);
+                    // console.log(err);
                     this.snotifyService.error('Error loading patient who stage ' + err, 'WHO', this.notificationService.getConfig());
                 },
                 () => {
-                    console.log(this.lookupItemView$);
+                    // console.log(this.lookupItemView$);
                 });
     }
 
@@ -187,8 +200,8 @@ export class ClientMonitoringComponent implements OnInit {
         this.patientScreening$ = this.ancService.getPatientScreeningInfoByPatientId(patientId)
             .subscribe(
                 p => {
-                    console.log('patientscreening');
-                    console.log(p);
+                    // console.log('patientscreening');
+                    // console.log(p);
                     const screening = p;
                     if (p) {
                         const cacx = screening.filter(obj => obj.screeningType == 'CaCxScreening');
@@ -212,11 +225,11 @@ export class ClientMonitoringComponent implements OnInit {
                     }
                 },
                 (err) => {
-                    console.log(err);
+                    // console.log(err);
                     this.snotifyService.error('Error loading patient screening ' + err, 'WHO', this.notificationService.getConfig());
                 },
                 () => {
-                    console.log(this.lookupItemView$);
+                    // console.log(this.lookupItemView$);
                 });
     }
 

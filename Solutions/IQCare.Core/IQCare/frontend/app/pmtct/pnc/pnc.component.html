@@ -15,13 +15,15 @@
                                             <span matTooltip="Visit Details">Visit Details</span>
                                         </ng-template>
 
-                                        <app-hei-visit-details (notify)="onVisitDetailsNotify($event)" [formtype]="formType"
-                                            [visitDate]="visitDate" [visitType]="visitType" [patientId]="patientId"
-                                            [serviceAreaId]="serviceAreaId" [isEdit]="isEdit" [patientMasterVisitId]="patientMasterVisitId">
+                                        <app-hei-visit-details (notify)="onVisitDetailsNotify($event)"
+                                            [formtype]="formType" [visitDate]="visitDate" [visitType]="visitType"
+                                            [patientId]="patientId" [serviceAreaId]="serviceAreaId" [isEdit]="isEdit"
+                                            [patientMasterVisitId]="patientMasterVisitId">
                                         </app-hei-visit-details>
 
                                         <div class="row">
-                                            <button mat-raised-button color="accent" matStepperNext type="button">Next</button>
+                                            <button mat-raised-button color="accent" matStepperNext
+                                                type="button">Next</button>
                                         </div>
                                     </mat-step>
 
@@ -34,8 +36,8 @@
 
                                         <!-- add Maternity History Component to Stepper -->
                                         <app-pnc-maternalhistory (notify)="onMaternalHistoryNotify($event)"
-                                            [matHistoryOptions]="matHistoryOptions" [patientId]="patientId" [isEdit]="isEdit"
-                                            [patientMasterVisitId]="patientMasterVisitId">
+                                            [matHistoryOptions]="matHistoryOptions" [patientId]="patientId"
+                                            [isEdit]="isEdit" [patientMasterVisitId]="patientMasterVisitId">
                                         </app-pnc-maternalhistory>
 
                                         <!-- add PostNatal Examination Component to Stepper -->
@@ -51,9 +53,11 @@
                                         </app-pnc-babyexamination>
 
                                         <div class="row">
-                                            <button mat-raised-button color="primary" matStepperPrevious type="button">Previous</button>
+                                            <button mat-raised-button color="primary" matStepperPrevious
+                                                type="button">Previous</button>
                                             &nbsp;&nbsp;
-                                            <button mat-raised-button color="accent" matStepperNext type="button">Next</button>
+                                            <button mat-raised-button color="accent" matStepperNext
+                                                type="button">Next</button>
                                         </div>
                                     </mat-step>
 
@@ -62,23 +66,35 @@
                                             <span matTooltip="Hiv Status">Hiv Status</span>
                                         </ng-template>
 
+                                        <app-prior-hiv-status [priorHivOptions]="priorHivOptions"
+                                            [patientId]="patientId" [isEdit]="isEdit"
+                                            [patientMasterVisitId]="patientMasterVisitId"
+                                            [patientEncounterId]="patientEncounterId" [serviceAreaId]="serviceAreaId"
+                                            [personId]="personId">
+                                        </app-prior-hiv-status>
+
                                         <!-- add Hiv Status Component to Stepper -->
-                                        <app-pnc-hivtesting (notify)="onHivStatusNotify($event)" [pncHivOptions]="pncHivOptions"
-                                            [patientId]="patientId" [isEdit]="isEdit" [patientMasterVisitId]="patientMasterVisitId"
+                                        <app-pnc-hivtesting (notify)="onHivStatusNotify($event)"
+                                            [pncHivOptions]="pncHivOptions" [patientId]="patientId" [isEdit]="isEdit"
+                                            [patientMasterVisitId]="patientMasterVisitId"
                                             [patientEncounterId]="patientEncounterId" [serviceAreaId]="serviceAreaId"
                                             [personId]="personId">
                                         </app-pnc-hivtesting>
 
                                         <div class="row">
-                                            <button mat-raised-button color="primary" matStepperPrevious type="button">Previous</button>
+                                            <button mat-raised-button color="primary" matStepperPrevious
+                                                type="button">Previous</button>
                                             &nbsp;&nbsp;
-                                            <button mat-raised-button color="accent" matStepperNext type="button">Next</button>
+                                            <button mat-raised-button color="accent" matStepperNext
+                                                type="button">Next</button>
                                         </div>
                                     </mat-step>
 
-                                    <mat-step [completed]="false" [stepControl]="drugAdministration_PartnerTesting_FormGroup">
+                                    <mat-step [completed]="false"
+                                        [stepControl]="drugAdministration_PartnerTesting_FormGroup">
                                         <ng-template matStepLabel>
-                                            <span matTooltip="Drug Administration && Partner Testing && Patient Education">
+                                            <span
+                                                matTooltip="Drug Administration && Partner Testing && Patient Education">
                                                 Drug Administration
                                             </span>
                                         </ng-template>
@@ -86,8 +102,9 @@
                                         <!-- add Drug Administration Component to Stepper -->
                                         <app-pnc-drugadministration (notify)="onDrugAdministrationNotify($event)"
                                             (notifyInfantDrug)="onInfantDrugsNotify($event)"
-                                            [drugAdministrationOptions]="drugAdministrationOptions" [patientId]="patientId"
-                                            [isEdit]="isEdit" [patientMasterVisitId]="patientMasterVisitId">
+                                            [drugAdministrationOptions]="drugAdministrationOptions"
+                                            [patientId]="patientId" [isEdit]="isEdit"
+                                            [patientMasterVisitId]="patientMasterVisitId">
                                         </app-pnc-drugadministration>
 
                                         <br />
@@ -107,35 +124,43 @@
                                         </app-pnc-patienteducation>
 
                                         <div class="row">
-                                            <button mat-raised-button color="primary" matStepperPrevious type="button">Previous</button>
+                                            <button mat-raised-button color="primary" matStepperPrevious
+                                                type="button">Previous</button>
                                             &nbsp;&nbsp;
-                                            <button mat-raised-button color="accent" matStepperNext type="button">Next</button>
+                                            <button mat-raised-button color="accent" matStepperNext
+                                                type="button">Next</button>
                                         </div>
                                     </mat-step>
 
                                     <mat-step [completed]="false" [stepControl]="cervicalCancerScreeningFormGroup">
                                         <ng-template matStepLabel>
-                                            <span matTooltip="Cervical Cancer Screening && Contraceptive History and Exercise">
+                                            <span
+                                                matTooltip="Cervical Cancer Screening && Contraceptive History and Exercise">
                                                 Cervical Cancer Screening
                                             </span>
                                         </ng-template>
 
                                         <!-- add Cervical Cancer Screening Component to Stepper -->
-                                        <app-pnc-cervicalcancerscreening (notify)="onCervicalCancerScreeningNotify($event)"
+                                        <app-pnc-cervicalcancerscreening
+                                            (notify)="onCervicalCancerScreeningNotify($event)"
                                             [cervicalCancerScreeningOptions]="cervicalCancerScreeningOptions"
-                                            [patientId]="patientId" [isEdit]="isEdit" [patientMasterVisitId]="patientMasterVisitId">
+                                            [patientId]="patientId" [isEdit]="isEdit"
+                                            [patientMasterVisitId]="patientMasterVisitId">
                                         </app-pnc-cervicalcancerscreening>
 
                                         <!-- add Contraceptive History and Exercise Component to Stepper -->
                                         <app-pnc-contraceptivehistory (notify)="onContraceptiveHistoryNotify($event)"
-                                            [contraceptiveHistoryExercise]="contraceptiveHistoryExercise" [patientId]="patientId"
-                                            [isEdit]="isEdit" [patientMasterVisitId]="patientMasterVisitId">
+                                            [contraceptiveHistoryExercise]="contraceptiveHistoryExercise"
+                                            [patientId]="patientId" [isEdit]="isEdit"
+                                            [patientMasterVisitId]="patientMasterVisitId">
                                         </app-pnc-contraceptivehistory>
 
                                         <div class="row">
-                                            <button mat-raised-button color="primary" matStepperPrevious type="button">Previous</button>
+                                            <button mat-raised-button color="primary" matStepperPrevious
+                                                type="button">Previous</button>
                                             &nbsp;&nbsp;
-                                            <button mat-raised-button color="accent" matStepperNext type="button">Next</button>
+                                            <button mat-raised-button color="accent" matStepperNext
+                                                type="button">Next</button>
                                         </div>
                                     </mat-step>
 
@@ -147,19 +172,25 @@
                                         </ng-template>
 
                                         <app-diagnosis (notify)="onDiagnosisNotify($event)" [PatientId]="patientId"
-                                            [isEdit]="isEdit" [PatientMasterVisitId]="patientMasterVisitId"></app-diagnosis>
+                                            [isEdit]="isEdit" [PatientMasterVisitId]="patientMasterVisitId">
+                                        </app-diagnosis>
 
-                                        <app-maternity-referral (notify)="onReferralNotify($event)" [dischargeOptions]="referralOptions"
-                                            [patientId]="patientId" [isEdit]="isEdit" [patientMasterVisitId]="patientMasterVisitId"></app-maternity-referral>
+                                        <app-maternity-referral (notify)="onReferralNotify($event)"
+                                            [dischargeOptions]="referralOptions" [patientId]="patientId"
+                                            [isEdit]="isEdit" [patientMasterVisitId]="patientMasterVisitId">
+                                        </app-maternity-referral>
 
                                         <app-maternity-next-appointment (notify)="onNextAppointmentNotify($event)"
-                                            [patientId]="patientId" [isEdit]="isEdit" [patientMasterVisitId]="patientMasterVisitId">
+                                            [patientId]="patientId" [isEdit]="isEdit"
+                                            [patientMasterVisitId]="patientMasterVisitId">
                                         </app-maternity-next-appointment>
 
                                         <div class="row">
-                                            <button mat-raised-button color="primary" matStepperPrevious type="button">Previous</button>
+                                            <button mat-raised-button color="primary" matStepperPrevious
+                                                type="button">Previous</button>
                                             &nbsp;&nbsp;
-                                            <button mat-raised-button color="accent" type="submit" (click)="onSubmitForm()">
+                                            <button mat-raised-button color="accent" type="submit"
+                                                (click)="onSubmitForm()">
                                                 Complete PNC Encounter
                                             </button>
                                         </div>

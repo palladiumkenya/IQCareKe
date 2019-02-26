@@ -73,7 +73,8 @@ export class PncComponent implements OnInit {
     motherExaminationOptions: LookupItemView[] = [];
     babyExaminationControls: LookupItemView[] = [];
     drugAdministrationCategories: LookupItemView[] = [];
-    administeredInfantDrugs : any[] = [];
+    hivStatusOptions: LookupItemView[] = [];
+    administeredInfantDrugs: any[] = [];
 
     pncHivOptions: any[] = [];
     matHistoryOptions: any[] = [];
@@ -85,6 +86,7 @@ export class PncComponent implements OnInit {
     cervicalCancerScreeningOptions: any[] = [];
     contraceptiveHistoryExercise: any[] = [];
     referralOptions: any[] = [];
+    priorHivOptions: any[] = [];
 
     hiv_status_table_data: any[] = [];
     hivTestEntryPoint: number;
@@ -174,7 +176,8 @@ export class PncComponent implements OnInit {
                 referralFromOptions,
                 motherExaminationOptions,
                 babyExaminationControls,
-                counselledInfantFeedingOptions } = res;
+                counselledInfantFeedingOptions,
+                hivStatusOptions } = res;
             this.yesnoOptions = yesnoOptions['lookupItems'];
             this.hivFinalResultsOptions = hivFinalResultsOptions['lookupItems'];
             this.deliveryModeOptions = deliveryModeOptions['lookupItems'];
@@ -197,11 +200,18 @@ export class PncComponent implements OnInit {
             this.motherExaminationOptions = motherExaminationOptions['lookupItems'];
             this.babyExaminationControls = babyExaminationControls['lookupItems'];
             this.infantFeedingTopicId = counselledInfantFeedingOptions['itemId'];
+            this.hivStatusOptions = hivStatusOptions['lookupItems'];
         });
+
+        // console.log(this.finalPartnerHivResultOptions);
 
         this.pncHivOptions.push({
             'yesnoOptions': this.yesnoOptions,
             'hivFinalResultsOptions': this.hivFinalResultsOptions
+        });
+
+        this.priorHivOptions.push({
+            'hivStatusOptions': this.hivStatusOptions
         });
 
         this.matHistoryOptions.push({
@@ -311,8 +321,8 @@ export class PncComponent implements OnInit {
         this.diagnosisReferralAppointmentFormGroup.push(formGroup);
     }
 
-    onInfantDrugsNotify(infantDrugs: any[]){
-      this.administeredInfantDrugs = infantDrugs;
+    onInfantDrugsNotify(infantDrugs: any[]) {
+        this.administeredInfantDrugs = infantDrugs;
     }
 
     onSubmitForm() {
@@ -524,25 +534,24 @@ export class PncComponent implements OnInit {
                 value = this.drugAdministration_PartnerTesting_FormGroup.value[0]['startedARTPncVisit'];
             } else if (this.drugAdministrationCategories[i].itemName == 'Haematinics given') {
                 value = this.drugAdministration_PartnerTesting_FormGroup.value[0]['haematinics_given'];
-            } 
-            if(value != 0)
-            {
+            }
+            if (value != 0) {
                 drugAdministrationCommand.AdministeredDrugs.push({
                     Id: this.drugAdministrationCategories[i].itemId,
                     Value: value,
                     Description: this.drugAdministrationCategories[i].itemName
                 });
             }
-           
+
         }
 
-        this.administeredInfantDrugs.forEach(drug=>{
+        this.administeredInfantDrugs.forEach(drug => {
             drugAdministrationCommand.AdministeredDrugs.push({
                 Id: drug.drugId,
                 Value: drug.statusId,
                 Description: drug.drugName
             });
-        })
+        });
 
         const partnerTestingCommand: PartnerTestingCommand = {
             PatientId: this.patientId,

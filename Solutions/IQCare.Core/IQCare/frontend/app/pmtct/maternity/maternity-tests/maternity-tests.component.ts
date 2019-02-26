@@ -5,6 +5,7 @@ import { SnotifyService } from 'ng-snotify';
 import { MatTableDataSource } from '@angular/material';
 import { PncService } from '../../_services/pnc.service';
 import { LookupItemView } from '../../../shared/_models/LookupItemView';
+import { DataService } from '../../_services/data.service';
 
 @Component({
     selector: 'app-mternity-tests',
@@ -12,11 +13,7 @@ import { LookupItemView } from '../../../shared/_models/LookupItemView';
     styleUrls: ['./maternity-tests.component.css']
 })
 export class MaternityTestsComponent implements OnInit {
-
     maternityTestsFormGroup: FormGroup;
-    // maternityTestData: any[] = [];
-    // displayedColumns = ['testName', 'date', 'results', 'action'];
-    // dataSource = new MatTableDataSource(this.maternityTestData);
     @Input() maternityTestOptions: any[] = [];
     @Input() personId: number;
 
@@ -27,7 +24,8 @@ export class MaternityTestsComponent implements OnInit {
     constructor(private _formBuilder: FormBuilder,
         private notificationService: NotificationService,
         private snotifyService: SnotifyService,
-        private pncService: PncService) {
+        private pncService: PncService,
+        private dataservice: DataService) {
     }
 
     ngOnInit() {
@@ -51,9 +49,13 @@ export class MaternityTestsComponent implements OnInit {
                     const hivPositiveResult = this.hivStatusOptions.filter(obj => obj.itemName == 'Positive');
                     if (hivPositiveResult.length > 0) {
                         this.maternityTestsFormGroup.get('HIVStatusLastANC').setValue(hivPositiveResult[0].itemId);
+                        this.dataservice.changeHivStatus('Positive');
                     }
-
                 }
+            },
+            (error) => {
+                this.snotifyService.error('Error loading previous hiv status ', 'Maternity',
+                    this.notificationService.getConfig());
             }
         );
     }

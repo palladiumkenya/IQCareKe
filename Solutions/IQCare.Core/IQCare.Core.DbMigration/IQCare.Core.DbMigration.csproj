@@ -161,6 +161,7 @@
     <None Remove="Scripts\2.0.0\49_SO_Add_Identifiers_BirthNotification.sql" />
     <None Remove="Scripts\2.0.0\50_SO_ChangeIQCareVersion2Name.sql" />
     <None Remove="Scripts\2.0.0\51_SO_AddCacxMethod_VIAVILI.sql" />
+    <None Remove="Scripts\2.0.0\52_PersonListView.sql" />
   </ItemGroup>
 
   <ItemGroup>
@@ -315,6 +316,7 @@
     <EmbeddedResource Include="Scripts\2.0.0\49_SO_Add_Identifiers_BirthNotification.sql" />
     <EmbeddedResource Include="Scripts\2.0.0\50_SO_ChangeIQCareVersion2Name.sql" />
     <EmbeddedResource Include="Scripts\2.0.0\51_SO_AddCacxMethod_VIAVILI.sql" />
+    <EmbeddedResource Include="Scripts\2.0.0\52_PersonListView.sql" />
   </ItemGroup>
 
   <ItemGroup>

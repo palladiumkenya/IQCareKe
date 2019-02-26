@@ -1,3 +1,4 @@
+import { RecordsService } from './../records/_services/records.service';
 ///<reference path="maternity/maternity.component.ts"/>
 import { PncService } from './_services/pnc.service';
 import { CervicalCancerScreeningResultsResolver } from './_services/resolvers/cervical-cancer-screening-results.resolver';
@@ -114,6 +115,8 @@ import { BirthInfoGridComponent } from './maternity/baby/birth-info-grid/birth-i
 import { AddBirthInfoComponent } from './maternity/baby/add-birth-info/add-birth-info.component';
 import { AddBabyDialogComponent } from './maternity/baby/add-baby-dialog/add-baby-dialog.component';
 import { MilestonesFormComponent } from './hei/milestones/milestones-form/milestones-form.component';
+import { DataService } from '../shared/_services/data.service';
+import { PriorHivStatusComponent } from './pnc/prior-hiv-status/prior-hiv-status.component';
 
 @NgModule({
     imports: [
@@ -186,7 +189,8 @@ import { MilestonesFormComponent } from './hei/milestones/milestones-form/milest
         BirthInfoGridComponent,
         AddBirthInfoComponent,
         AddBabyDialogComponent,
-        MilestonesFormComponent
+        MilestonesFormComponent,
+        PriorHivStatusComponent
     ],
     providers: [
         PlaceOfDeliveryResolver,
@@ -231,7 +235,9 @@ import { MilestonesFormComponent } from './hei/milestones/milestones-form/milest
         BabyExaminationResolver,
         AncClientMonitoringComponent,
         BirthOutcomeResolver,
-        CounselledInfantFeedingResolver
+        CounselledInfantFeedingResolver,
+        DataService,
+        RecordsService
     ],
     entryComponents: [
         IptClientWorkupComponent,
