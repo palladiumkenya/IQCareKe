@@ -35,16 +35,16 @@ export class AddBirthInfoComponent implements OnInit {
   ngOnInit() {
     this.babyFormGroup = this.formBuilder.group({
       babySex: new FormControl('', [Validators.required]),
-      birthWeight: new FormControl('', [Validators.required]),
+      birthWeight: new FormControl('', [Validators.required, Validators.min(0), Validators.max(5)]),
       outcome: new FormControl('', [Validators.required]),
       resuscitationDone: new FormControl('', [Validators.required]),
       deformity: new FormControl('', [Validators.required]),
       teoGiven: new FormControl('', [Validators.required]),
       breastFed: new FormControl('', [Validators.required]),
 
-      agparScore1min: new FormControl('', [Validators.required, Validators.max(10)]),
-      agparScore5min: new FormControl('', [Validators.required, Validators.max(10)]),
-      agparScore10min: new FormControl('', [Validators.required, Validators.max(10)]),
+      agparScore1min: new FormControl('', [Validators.required, Validators.min(0), Validators.max(10)]),
+      agparScore5min: new FormControl('', [Validators.required, Validators.min(0),  Validators.max(10)]),
+      agparScore10min: new FormControl('', [Validators.required, Validators.min(0),  Validators.max(10)]),
       notificationNumber: new FormControl('', [Validators.required]),
       comment: new FormControl('na', [])
   });

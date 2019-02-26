@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Subscription } from 'rxjs';
@@ -7,6 +8,17 @@ import { CounsellingTopicsEmitters } from '../../emitters/counsellingTopicsEmitt
 import { PatientEducationCommand } from '../../_models/PatientEducationCommand';
 import { LookupItemService } from '../../../shared/_services/lookup-item.service';
 import { NotificationService } from '../../../shared/_services/notification.service';
+=======
+import {Component, EventEmitter, Input, OnInit, Output, OnDestroy} from '@angular/core';
+import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
+import {Subscription} from 'rxjs';
+import {SnotifyService} from 'ng-snotify';
+import {PatientEducationEmitter} from '../../emitters/PatientEducationEmitter';
+import {CounsellingTopicsEmitters} from '../../emitters/counsellingTopicsEmitters';
+import {PatientEducationCommand} from '../../_models/PatientEducationCommand';
+import {LookupItemService} from '../../../shared/_services/lookup-item.service';
+import {NotificationService} from '../../../shared/_services/notification.service';
+>>>>>>> 7cfb083314d2250bdef4cbef0c08ab85dcd26a3a
 import * as moment from 'moment';
 import { AncService } from '../../_services/anc.service';
 
@@ -30,7 +42,7 @@ const ELEMENT_DATA: PeriodicElement[] = [
 })
 
 
-export class PatientEducationExaminationComponent implements OnInit {
+export class PatientEducationExaminationComponent implements OnInit, OnDestroy {
     PatientEducationFormGroup: FormGroup;
 
     public yesnos: any[] = [];
@@ -230,6 +242,11 @@ export class PatientEducationExaminationComponent implements OnInit {
 
                 }
             );
+    }
+
+    ngOnDestroy(): void {
+        this.baseline$.unsubscribe();
+        this.patientCounseling$.unsubscribe();
     }
 
 
