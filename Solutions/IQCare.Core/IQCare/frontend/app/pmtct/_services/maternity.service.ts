@@ -223,7 +223,8 @@ export class MaternityService {
         return this.http.get<PatientDeliveryInformationViewModel[]>(this.API_PMTCT_URL
             + '/api/MaternityPatientDeliveryInfo/GetDeliveryInfoByPregnancyId/' + pregnancyId)
             .pipe(
-                tap(getPatientDeliveryInfoByPregnancyId => this.errorHandler.log(`successfully fetched patient delivery info by profile Id`)),
+                tap(getPatientDeliveryInfoByPregnancyId =>
+                    this.errorHandler.log(`successfully fetched patient delivery info by profile Id`)),
                 catchError(this.errorHandler.handleError<any>('Error Fetching patient delivery info by profile Id'))
             );
     }
