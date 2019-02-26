@@ -38,7 +38,8 @@ export class MaternityNextAppointmentComponent implements OnInit {
         });
 
          this.dataService.visitDate.subscribe(date=>{
-             this.minDate = date
+             this.minDate = date;
+             console.log(date + ' Miiin Date')
          });
 
         this.notify.emit(this.nextAppointmentFormGroup);
