@@ -1,7 +1,8 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
-import {NotificationService} from '../../../shared/_services/notification.service';
-import {SnotifyService} from 'ng-snotify';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { NotificationService } from '../../../shared/_services/notification.service';
+import { SnotifyService } from 'ng-snotify';
+import { DataService } from '../../_services/data.service';
 
 @Component({
     selector: 'app-maternal-drug-administration',
@@ -16,11 +17,13 @@ export class MaternalDrugAdministrationComponent implements OnInit {
     public yesnoOptions: any[] = [];
     public finaResultOptions: any[] = [];
     public yesnonaOptions: any[] = [];
+    hiv_status: string;
 
 
     constructor(private formBuilder: FormBuilder,
-                private notificationService: NotificationService,
-                private snotifyService: SnotifyService) {
+        private notificationService: NotificationService,
+        private snotifyService: SnotifyService,
+        private dataservice: DataService) {
     }
 
     ngOnInit() {
@@ -42,6 +45,18 @@ export class MaternalDrugAdministrationComponent implements OnInit {
         this.finaResultOptions = finalResult;
 
         this.notify.emit(this.maternalDrugAdministrationFormGroup);
+
+        this.dataservice.currentHivStatus.subscribe(hivStatus => {
+            this.hiv_status = hivStatus;
+
+            if (this.hiv_status !== '' && this.hiv_status != 'Positive') {
+                this.maternalDrugAdministrationFormGroup.get('vitaminASupplement').disable({ onlySelf: true });
+                this.maternalDrugAdministrationFormGroup.get('HaartANC').disable({ onlySelf: true });
+                this.maternalDrugAdministrationFormGroup.get('ARVStartedMaternity').disable({ onlySelf: true });
+                this.maternalDrugAdministrationFormGroup.get('cotrimoxazole').disable({ onlySelf: true });
+                this.maternalDrugAdministrationFormGroup.get('infantARVProphylaxis').disable({ onlySelf: true });
+            }
+        });
     }
 
 }

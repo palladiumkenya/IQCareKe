@@ -1,3 +1,4 @@
+import { SnotifyService } from 'ng-snotify';
 import { LookupItemView } from './../../../shared/_models/LookupItemView';
 import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
 import { Component, OnInit, EventEmitter, Output, Input } from '@angular/core';
@@ -5,6 +6,9 @@ import { MatDialog, MatDialogConfig, MatTableDataSource } from '@angular/materia
 import { HivStatusComponent } from '../hiv-status/hiv-status.component';
 import { Subscription } from 'rxjs/index';
 import { AncService } from '../../_services/anc.service';
+import { PncService } from '../../_services/pnc.service';
+import { NotificationService } from '../../../shared/_services/notification.service';
+import { DataService } from '../../_services/data.service';
 
 @Component({
     selector: 'app-anc-hivtesting',
@@ -30,6 +34,7 @@ export class AncHivtestingComponent implements OnInit {
     @Input('isEdit') isEdit: boolean;
     @Input('PatientId') PatientId: number;
     @Input('PatientMasterVisitId') PatientMasterVisitId: number;
+    @Input() personId: number;
     @Input() serviceAreaId: number;
 
     serviceAreaName: string;
@@ -37,8 +42,11 @@ export class AncHivtestingComponent implements OnInit {
     constructor(
         private dialog: MatDialog,
         private _formBuilder: FormBuilder,
-        private ancService: AncService
-    ) {
+        private ancService: AncService,
+        private pncService: PncService,
+        private notificationService: NotificationService,
+        private snotifyService: SnotifyService,
+        private dataservice: DataService) {
 
     }
 
@@ -78,6 +86,8 @@ export class AncHivtestingComponent implements OnInit {
         } else {
             this.getBaselineAncProfile(this.PatientId);
         }
+
+        this.personCurrentHivStatus();
     }
 
     AddHivTests() {
@@ -120,7 +130,7 @@ export class AncHivtestingComponent implements OnInit {
             this.isHivTestingDone = true;
             this.HivTestingForm.controls['testType'].enable({ onlySelf: true });
             this.HivTestingForm.controls['finalTestResult'].enable({ onlySelf: true });
-        } else if (event.source.selected) {
+        } else if (event.isUserInput && event.source.selected && event.source.viewValue == 'No') {
             this.isHivTestingDone = false;
             this.HivTestingForm.controls['testType'].disable({ onlySelf: true });
             this.HivTestingForm.controls['finalTestResult'].disable({ onlySelf: true });
@@ -148,14 +158,10 @@ export class AncHivtestingComponent implements OnInit {
                 p => {
                     const baseline = p;
 
-                    // console.log('baseline info');
-                    // console.log(baseline);
-                    // console.log(baseline['hivStatusBeforeAnc']);
                     if (baseline) {
                         this.HivTestingForm.get('hivStatusBeforeFirstVisit').setValue(baseline['hivStatusBeforeAnc']);
                     }
-                }
-                ,
+                },
                 error1 => {
 
                 },
@@ -163,6 +169,40 @@ export class AncHivtestingComponent implements OnInit {
 
                 }
             );
+    }
+
+    public personCurrentHivStatus() {
+        this.pncService.getPersonCurrentHivStatus(this.personId).subscribe(
+            (res) => {
+                if (res.length > 0) {
+                    const hivPositiveResult = this.ancHivStatusInitialVisitOptions.filter(obj => obj.itemName == 'Known Positive');
+                    if (hivPositiveResult.length > 0) {
+                        this.HivTestingForm.get('hivStatusBeforeFirstVisit').setValue(hivPositiveResult[0].itemId);
+
+                        // set hiv_status
+                        this.dataservice.changeHivStatus('Positive');
+                        // set the default to null
+                        this.isHivTestingDone = false;
+                        this.HivTestingForm.controls['testType'].setValue('');
+                        this.HivTestingForm.controls['finalTestResult'].setValue('');
+                    }
+                }
+            },
+            (error) => {
+                this.snotifyService.error('Error loading previous hiv status ', 'Maternity',
+                    this.notificationService.getConfig());
+            }
+        );
+    }
+
+    public onHivTestFinalResultChange(event) {
+        if (event.isUserInput && event.source.selected && event.source.viewValue == 'Positive') {
+            this.dataservice.changeHivStatus('Positive');
+        } else if (event.isUserInput && event.source.selected && event.source.viewValue == 'Negative') {
+            this.dataservice.changeHivStatus('Negative');
+        } else if (event.isUserInput && event.source.selected && event.source.viewValue == 'Inconclusive') {
+            this.dataservice.changeHivStatus('Inconclusive');
+        }
     }
 }
 

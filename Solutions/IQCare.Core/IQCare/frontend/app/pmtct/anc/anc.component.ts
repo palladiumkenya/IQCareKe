@@ -258,7 +258,7 @@ export class AncComponent implements OnInit, OnDestroy {
 
     OnMotherProfileNotify(formGroup: FormGroup): void {
         this.visitDetailsFormGroup.push(formGroup);
-     }
+    }
 
     onPatientEducationNotify(formGroup: Object): void {
         this.PatientEducationMatFormGroup = formGroup['form'];
@@ -841,7 +841,7 @@ export class AncComponent implements OnInit, OnDestroy {
         const clientMonitoringCommandEdit: any = {
             PatientId: this.patientId,
             PatientMasterVisitId: this.patientMasterVisitId,
-            ViralLoadSampleTaken: (viralLoadSampleTaken < 1 ) ? 0 : viralLoadSampleTaken,
+            ViralLoadSampleTaken: (viralLoadSampleTaken < 1) ? 0 : viralLoadSampleTaken,
             WhoStage: this.ClientMonitoringMatFormGroup.value[0]['WhoStage'],
             FacilityId: 755,
             ServiceAreaId: 3,
@@ -896,7 +896,7 @@ export class AncComponent implements OnInit, OnDestroy {
             CreateBy: this.userId
         } as PatientReferral;
 
-     //   const clientMonitoringEditCommand = { clientMonitoringEditCommand: clientMonitoringCommandEdit }
+        //   const clientMonitoringEditCommand = { clientMonitoringEditCommand: clientMonitoringCommandEdit }
 
         console.log('client monitoring command edit');
         console.log(clientMonitoringCommandEdit);
@@ -916,7 +916,7 @@ export class AncComponent implements OnInit, OnDestroy {
             ancEducation,
             ancClientMonitoringEdit
             // PatientAppointmentEdit,
-           // referralEdit
+            // referralEdit
 
         ]).subscribe(
             (result) => {

@@ -233,7 +233,8 @@ const routes: Routes = [
                     referralFromOptions: ReferralResolver,
                     motherExaminationOptions: MotherExaminationResolver,
                     babyExaminationControls: BabyExaminationResolver,
-                    counselledInfantFeedingOptions: CounselledInfantFeedingResolver
+                    counselledInfantFeedingOptions: CounselledInfantFeedingResolver,
+                    hivStatusOptions: HivStatusResolver
                 }
             },
             {
@@ -261,7 +262,8 @@ const routes: Routes = [
                     referralFromOptions: ReferralResolver,
                     motherExaminationOptions: MotherExaminationResolver,
                     babyExaminationControls: BabyExaminationResolver,
-                    counselledInfantFeedingOptions: CounselledInfantFeedingResolver
+                    counselledInfantFeedingOptions: CounselledInfantFeedingResolver,
+                    hivStatusOptions: HivStatusResolver
                 }
             }
         ]

@@ -8,6 +8,7 @@ import { PncService } from '../../_services/pnc.service';
 import { Subscription } from 'rxjs';
 import { NotificationService } from '../../../shared/_services/notification.service';
 import { LookupItemService } from '../../../shared/_services/lookup-item.service';
+import { DataService } from '../../_services/data.service';
 
 @Component({
     selector: 'app-pnc-hivtesting',
@@ -35,6 +36,8 @@ export class PncHivtestingComponent implements OnInit, AfterViewInit {
     @Input() personId: number;
     @Input() serviceAreaId: number;
     serviceAreaName: string;
+    hiv_status: string;
+    message: any;
 
     @Output() notify: EventEmitter<Object> = new EventEmitter<Object>();
     isHivTestingDone: boolean = false;
@@ -51,7 +54,8 @@ export class PncHivtestingComponent implements OnInit, AfterViewInit {
         private pncService: PncService,
         private notificationService: NotificationService,
         private snotifyService: SnotifyService,
-        private _lookupItemService: LookupItemService) { }
+        private _lookupItemService: LookupItemService,
+        private dataservice: DataService) { }
 
     ngOnInit() {
         this.HivTestingForm = this._formBuilder.group({
@@ -86,7 +90,20 @@ export class PncHivtestingComponent implements OnInit, AfterViewInit {
         this.getLookupOptions('PMTCTHIVTests', this.tests);
         this.getLookupOptions('HIVResults', this.testResults);
 
-        // this.personCurrentHivStatus();
+        this.dataservice.currentHivStatus.subscribe(hivStatus => {
+            this.hiv_status = hivStatus;
+
+            if (this.hiv_status !== '' && this.hiv_status == 'Positive') {
+                const noOption = this.yesnoOptions.filter(obj => obj.itemName == 'No');
+                if (noOption.length > 0) {
+                    this.HivTestingForm.controls['hivTestingDone'].setValue(noOption[0].itemId);
+                }
+                this.message = 'HIV Positive';
+            } else {
+                this.HivTestingForm.controls['hivTestingDone'].enable({ onlySelf: true });
+                this.message = '';
+            }
+        });
     }
 
     ngAfterViewInit() {

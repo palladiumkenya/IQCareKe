@@ -80,5 +80,12 @@ export class RecordsService {
             catchError(this.errorHandler.handleError<any[]>('getPersonIdentifiers'))
         );
     }
-    
+
+    public getPatientIdentifiersList(patientId: number): Observable<any[]> {
+        return this.http.get<any[]>(this.API_URL + '/api/Register/GetPatientIdentifiers/' + patientId).pipe(
+            tap(getPatientIdentifiersList => this.errorHandler.log('get patient identifiers list')),
+            catchError(this.errorHandler.handleError<any[]>('getPatientIdentifiersList'))
+        );
+    }
+
 }
