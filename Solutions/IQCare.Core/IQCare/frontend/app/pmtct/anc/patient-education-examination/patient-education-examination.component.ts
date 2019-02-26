@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output, OnDestroy} from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {Subscription} from 'rxjs';
 import {SnotifyService} from 'ng-snotify';
@@ -30,7 +30,7 @@ const ELEMENT_DATA: PeriodicElement[] = [
 })
 
 
-export class PatientEducationExaminationComponent implements OnInit {
+export class PatientEducationExaminationComponent implements OnInit, OnDestroy {
     PatientEducationFormGroup: FormGroup;
 
     public yesnos: any[] = [];
@@ -230,6 +230,11 @@ export class PatientEducationExaminationComponent implements OnInit {
 
                 }
             );
+    }
+
+    ngOnDestroy(): void {
+        this.baseline$.unsubscribe();
+        this.patientCounseling$.unsubscribe();
     }
 
 

@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs/index';
 import { SnotifyService } from 'ng-snotify';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
@@ -17,7 +17,7 @@ export interface Options {
     templateUrl: './client-monitoring.component.html',
     styleUrls: ['./client-monitoring.component.css']
 })
-export class ClientMonitoringComponent implements OnInit {
+export class ClientMonitoringComponent implements OnInit, OnDestroy {
 
     private lookupItemView$: Subscription;
     private patientScreening$: Subscription;
@@ -255,5 +255,11 @@ export class ClientMonitoringComponent implements OnInit {
                 () => {
                     console.log(this.lookupItemView$);
                 });
+    }
+
+    ngOnDestroy(): void {
+        this.lookupItemView$.unsubscribe();
+        this.patientScreening$.unsubscribe();
+        this.patientwhoStage$.unsubscribe();
     }
 }
