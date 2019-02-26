@@ -42,15 +42,9 @@ export class AddBirthInfoComponent implements OnInit {
       teoGiven: new FormControl('', [Validators.required]),
       breastFed: new FormControl('', [Validators.required]),
 
-<<<<<<< HEAD
-      agparScore1min: new FormControl('', [Validators.required,Validators.min(0),Validators.max(10)]),
-      agparScore5min: new FormControl('', [Validators.required,Validators.min(0), Validators.max(10)]),
-      agparScore10min: new FormControl('', [Validators.required,Validators.min(0), Validators.max(10)]),
-=======
       agparScore1min: new FormControl('', [Validators.required, Validators.min(0), Validators.max(10)]),
       agparScore5min: new FormControl('', [Validators.required, Validators.min(0),  Validators.max(10)]),
       agparScore10min: new FormControl('', [Validators.required, Validators.min(0),  Validators.max(10)]),
->>>>>>> 10ea0dc79a187ad933a42b28dcafc54888696cda
       notificationNumber: new FormControl('', [Validators.required]),
       comment: new FormControl('na', [])
   });
