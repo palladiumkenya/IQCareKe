@@ -55,7 +55,7 @@
                     <mat-select formControlName="finalTestResult" required>
                         <mat-option [value]=""></mat-option>
                         <mat-option *ngFor="let hivFinalResultsOption of hivFinalResultsOptions"
-                            [value]="hivFinalResultsOption.itemId">
+                            [value]="hivFinalResultsOption.itemId" (onSelectionChange)="onFinalHivResultChange($event)">
                             {{hivFinalResultsOption.itemName}}
                         </mat-option>
                     </mat-select>
