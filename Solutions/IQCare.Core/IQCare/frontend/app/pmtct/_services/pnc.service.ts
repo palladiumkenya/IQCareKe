@@ -202,7 +202,7 @@ export class PncService {
             return of([]);
         }
 
-        return this.http.post(this.API_URL
+        return this.http.put(this.API_URL
             + '/api/PatientReferralAndAppointment/UpdatePatientReferralInfo', JSON.stringify(patientReferralEditCommand), httpOptions).pipe(
                 tap(updateReferral => this.errorHandler.log(`successfully updated referral`)),
                 catchError(this.errorHandler.handleError<any>('Error updating referral'))
@@ -230,7 +230,14 @@ export class PncService {
     }
 
     public updateAppointment(patientAppointmentEditCommand: PatientAppointmentEditCommand): Observable<any> {
-        return this.http.post(this.API_URL + '/api/PatientReferralAndAppointment/UpdatePatientNextAppointment',
+        // console.log(patientAppointmentEditCommand);
+
+        if ((!patientAppointmentEditCommand.AppointmentDate || !patientAppointmentEditCommand.AppointmentId)
+            || (patientAppointmentEditCommand.AppointmentDate == null || patientAppointmentEditCommand.AppointmentId == null)) {
+            return of([]);
+        }
+
+        return this.http.put(this.API_URL + '/api/PatientReferralAndAppointment/UpdatePatientNextAppointment',
             JSON.stringify(patientAppointmentEditCommand), httpOptions).pipe(
                 tap(updateAppointment => this.errorHandler.log(`successfully updated appointment`)),
                 catchError(this.errorHandler.handleError<any>('Error updating appointment'))
