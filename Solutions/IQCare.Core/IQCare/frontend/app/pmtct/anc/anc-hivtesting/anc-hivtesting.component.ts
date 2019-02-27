@@ -185,6 +185,8 @@ export class AncHivtestingComponent implements OnInit {
                         this.isHivTestingDone = false;
                         this.HivTestingForm.controls['testType'].setValue('');
                         this.HivTestingForm.controls['finalTestResult'].setValue('');
+                    } else {
+                        this.dataservice.changeHivStatus('Negative');
                     }
                 }
             },

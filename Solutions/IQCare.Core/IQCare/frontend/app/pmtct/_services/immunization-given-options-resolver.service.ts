@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
-import {LookupItemService} from '../../shared/_services/lookup-item.service';
-import {Observable} from 'rxjs/index';
-import {LookupItemView} from '../../shared/_models/LookupItemView';
+import { LookupItemService } from '../../shared/_services/lookup-item.service';
+import { Observable } from 'rxjs/index';
+import { LookupItemView } from '../../shared/_models/LookupItemView';
 
 @Injectable({
-  providedIn: 'root'
+    providedIn: 'root'
 })
 export class ImmunizationGivenOptionsResolverService {
 
@@ -13,6 +13,6 @@ export class ImmunizationGivenOptionsResolverService {
     }
 
     public resolve(): Observable<LookupItemView[]> {
-        return this._lookupItemService.getByGroupName('Vaccinations');
+        return this._lookupItemService.getByGroupName('VaccinesComprehensive');
     }
 }

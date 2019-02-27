@@ -101,6 +101,15 @@ export class HeiHivtestingComponent implements OnInit {
                     return;
                 }
 
+                console.log(data);
+
+                const testExists = this.hiv_testing_history_data.filter(x => x.testtype == data.testtype).length > 0;
+                if (testExists) {
+                    this.snotifyService.error(data.testtype.itemName + ' has already been added', 'HEI Encounter',
+                        this.notificationService.getConfig());
+                    return;
+                }
+
                 this.hiv_testing_table_data.push({
                     testtype: data.testtype,
                     dateofsamplecollection: moment(data.dateofsamplecollection).toDate(),
@@ -110,7 +119,16 @@ export class HeiHivtestingComponent implements OnInit {
                     resultText: data.resultText
                 });
 
-                this.dataSource = new MatTableDataSource(this.hiv_testing_table_data);
+                this.hiv_testing_history_data.push({
+                    testtype: data.testtype,
+                    dateofsamplecollection: moment(data.dateofsamplecollection).toDate(),
+                    result: data.result,
+                    dateresultscollected: moment(data.dateresultscollected).toDate(),
+                    comments: data.comments,
+                    resultText: data.resultText
+                });
+
+                this.dataSource = new MatTableDataSource(this.hiv_testing_history_data);
             }
         );
     }
@@ -118,7 +136,11 @@ export class HeiHivtestingComponent implements OnInit {
     public onRowClicked(row) {
         const index = this.hiv_testing_table_data.indexOf(row.milestone);
         this.hiv_testing_table_data.splice(index, 1);
-        this.dataSource = new MatTableDataSource(this.hiv_testing_table_data);
+
+        const indexHistory = this.hiv_testing_history_data.indexOf(row.milestone);
+        this.hiv_testing_history_data.splice(indexHistory, 1);
+
+        this.dataSource = new MatTableDataSource(this.hiv_testing_history_data);
     }
 }
 

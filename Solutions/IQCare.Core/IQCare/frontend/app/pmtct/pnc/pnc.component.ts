@@ -797,6 +797,10 @@ export class PncComponent implements OnInit {
             UserId: this.userId
         };
 
+        console.log(this.drugAdministration_PartnerTesting_FormGroup);
+        console.log(this.drugAdministrationCategories);
+        console.log(this.administeredInfantDrugs);
+
         for (let i = 0; i < this.drugAdministrationCategories.length; i++) {
             let value;
             let id;
@@ -806,29 +810,50 @@ export class PncComponent implements OnInit {
             } else if (this.drugAdministrationCategories[i].itemName == 'Haematinics given') {
                 value = this.drugAdministration_PartnerTesting_FormGroup.value[0]['haematinics_given'];
                 id = this.drugAdministration_PartnerTesting_FormGroup.value[0]['id_haematinics'];
-            } else if (this.drugAdministrationCategories[i].itemName == 'Infant_Drug') {
+            } /*else if (this.drugAdministrationCategories[i].itemName == 'Infant_Drug') {
                 value = this.drugAdministration_PartnerTesting_FormGroup.value[0]['infant_drug'];
                 id = this.drugAdministration_PartnerTesting_FormGroup.value[0]['id_infantdrug'];
             } else if (this.drugAdministrationCategories[i].itemName == 'Infant_Start_Continue') {
                 value = this.drugAdministration_PartnerTesting_FormGroup.value[0]['infant_start'];
                 id = this.drugAdministration_PartnerTesting_FormGroup.value[0]['id_infantstart'];
+            }*/
+
+            if (value && id) {
+                const updateDrugAdministrationCommand: UpdateDrugAdministrationCommand = {
+                    Id: id,
+                    DrugAdministered: this.drugAdministrationCategories[i].itemId,
+                    Value: value,
+                    Description: this.drugAdministrationCategories[i].itemName
+                };
+
+                const pncDrugAdministrationEdit = this.pncService.updateDrugAdministration(updateDrugAdministrationCommand).subscribe(
+                    (result) => {
+                        console.log(result);
+                    },
+                    (error) => {
+                        console.log(error);
+                    }
+                );
+            } else {
+                const drugAdministrationCommand: DrugAdministrationCommand = {
+                    Id: 0,
+                    PatientId: this.patientId,
+                    PatientMasterVisitId: this.patientMasterVisitId,
+                    CreatedBy: this.userId,
+                    AdministeredDrugs: []
+                };
+
+                this.administeredInfantDrugs.forEach(drug => {
+                    drugAdministrationCommand.AdministeredDrugs.push({
+                        Id: drug.drugId,
+                        Value: drug.statusId,
+                        Description: drug.drugName
+                    });
+                });
+
+
+                const pncDrugAdministration = this.pncService.savePncDrugAdministration(drugAdministrationCommand).subscribe();
             }
-
-            const updateDrugAdministrationCommand: UpdateDrugAdministrationCommand = {
-                Id: id,
-                DrugAdministered: this.drugAdministrationCategories[i].itemId,
-                Value: value,
-                Description: this.drugAdministrationCategories[i].itemName
-            };
-
-            /*const pncDrugAdministrationEdit = this.pncService.updateDrugAdministration(updateDrugAdministrationCommand).subscribe(
-                (result) => {
-                    console.log(result);
-                },
-                (error) => {
-                    console.log(error);
-                }
-            );*/
         }
 
         const partnerTestingEditCommand: PartnerTestingEditCommand = {
