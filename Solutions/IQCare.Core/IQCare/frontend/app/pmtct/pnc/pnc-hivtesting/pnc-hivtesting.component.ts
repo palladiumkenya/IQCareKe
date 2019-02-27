@@ -241,6 +241,16 @@ export class PncHivtestingComponent implements OnInit, AfterViewInit {
                     // console.log(this.lookupItemView$);
                 });
     }
+
+    public onFinalHivResultChange(event) {
+        if (event.isUserInput && event.source.selected && event.source.viewValue == 'Positive') {
+            this.dataservice.changeHivStatus('Positive');
+        } else if (event.isUserInput && event.source.selected && event.source.viewValue == 'Negative') {
+            this.dataservice.changeHivStatus('Negative');
+        } else if (event.isUserInput && event.source.selected && event.source.viewValue == 'Inconclusive') {
+            this.dataservice.changeHivStatus('Inconclusive');
+        }
+    }
 }
 
 

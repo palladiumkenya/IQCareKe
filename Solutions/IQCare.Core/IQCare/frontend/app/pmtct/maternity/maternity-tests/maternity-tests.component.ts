@@ -49,6 +49,8 @@ export class MaternityTestsComponent implements OnInit {
                     if (hivPositiveResult.length > 0) {
                         this.maternityTestsFormGroup.get('HIVStatusLastANC').setValue(hivPositiveResult[0].itemId);
                         this.dataservice.changeHivStatus('Positive');
+                    } else {
+                        this.dataservice.changeHivStatus('Negative');
                     }
                 }
             },
