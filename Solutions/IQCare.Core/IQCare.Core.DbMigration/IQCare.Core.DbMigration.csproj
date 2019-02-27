@@ -207,13 +207,9 @@
     <None Remove="Scripts\2.0.0\56_SO_CreateViewPatientEncounterView.sql" />
     <EmbeddedResource Include="Scripts\2.0.0\56_SO_CreateViewPatientEncounterView.sql" />
     <None Remove="Scripts\2.0.0\09_DO_AlterTable_PatientDelivery_DropColumn_ProfileId.sql" />
-    <EmbeddedResource Include="Scripts\2.0.0\09_DO_AlterTable_PatientDelivery_DropColumn_ProfileId.sql" />
     <None Remove="Scripts\2.0.0\10_DO_AlterTable_PatientDelivery_AddColumn_PregnancyId.sql" />
-    <EmbeddedResource Include="Scripts\2.0.0\10_DO_AlterTable_PatientDelivery_AddColumn_PregnancyId.sql" />
     <None Remove="Scripts\2.0.0\11_DO_AlterView_PatientDeliveryInfo.sql" />
-    <EmbeddedResource Include="Scripts\2.0.0\11_DO_AlterView_PatientDeliveryInfo.sql" />
     <None Remove="Scripts\2.0.0\08_DO_AlterTable_PatientDelivery_DropFK_ProfileId.sql" />
-    <EmbeddedResource Include="Scripts\2.0.0\08_DO_AlterTable_PatientDelivery_DropFK_ProfileId.sql" />
     <None Remove="Scripts\2.0.0\03_DO_CreateSproc_Get_WeightFor_Age_Zscore.sql" />
     <EmbeddedResource Include="Scripts\2.0.0\03_DO_CreateSproc_Get_WeightFor_Age_Zscore.sql" />
     <None Remove="Scripts\2.0.0\04_DO_CreateSproc_GetWeightForHeight_Zscore_Sproc.sql" />
