@@ -271,7 +271,7 @@ export class ClientMonitoringComponent implements OnInit, OnDestroy {
     }
 
     ngOnDestroy(): void {
-        this.lookupItemView$.unsubscribe();
+       // this.lookupItemView$.unsubscribe();
         this.patientScreening$.unsubscribe();
         this.patientwhoStage$.unsubscribe();
     }

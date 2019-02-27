@@ -61,7 +61,7 @@ export class AncService {
 
    
     public updateVisitDate(visitDate: any) {
-        this.visitDateMessageSource.next(visitDate)
+        this.visitDateMessageSource.next(visitDate);
     }
 
     public EditVisitDetails(VisitDetailsEditCommand: any): Observable<any> {
@@ -114,12 +114,14 @@ export class AncService {
 
 
     public savePatientEducation(patientEducationCommand: PatientEducationCommand): Observable<PatientEducationCommand> {
+
         return this.http.post<any>(this.API_URL + '' + this._url_pedc, JSON.stringify(patientEducationCommand),
             httpOptions).pipe(
                 tap(savePatientEducation => this.errorHandler.log('Successfully saved patient education')),
                 catchError(this.errorHandler.handleError<any>('Error in saving Patient Education'))
             );
     }
+
 
     public saveClientMonitoring(clientMonitoringCommand: ClientMonitoringCommand): Observable<ClientMonitoringCommand> {
         return this.http.post<any>(this.API_URL + '' + this._url_cm, JSON.stringify(clientMonitoringCommand), httpOptions).pipe(
@@ -354,10 +356,6 @@ export class AncService {
                 catchError(this.errorHandler.handleError<any[]>('getPatientVisitDetails'))
             );
     }
-
-
-
-
 
 }
 

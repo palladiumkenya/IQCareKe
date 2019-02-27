@@ -532,19 +532,19 @@ export class AncComponent implements OnInit, OnDestroy {
         const otherIllnessOption = this.HaartProphylaxisMatFormGroup.value[0]['otherIllness'];
 
         if (otherIllnessOption == yesno[0]['itemId']) {
-            for (let i = 0; i < this.chronicIllnessData.length; i++) {
+            for (let z = 0; z < this.chronicIllnessData.length; z++) {
 
                 this.chronic_illness_data.push({
                     Id: 0,
                     PatientId: this.patientId,
                     PatientMasterVisitId: this.patientMasterVisitId,
-                    ChronicIllness: this.chronicIllnessData[i]['chronicIllnessId'],
-                    Treatment: this.chronicIllnessData[i]['currentTreatment'],
+                    ChronicIllness: this.chronicIllnessData[z]['chronicIllnessId'],
+                    Treatment: this.chronicIllnessData[z]['currentTreatment'],
                     // Dose: this.chronicIllnessData[i]['dose'],
                     Dose: 0,
                     Duration: 0,
                     DeleteFlag: false,
-                    OnsetDate: moment(this.chronicIllnessData[i]['onSetDate']).toDate(),
+                    OnsetDate: moment(this.chronicIllnessData[z]['onSetDate']).toDate(),
                     Active: 0,
                     CreateBy: this.userId
                 });
@@ -911,10 +911,10 @@ export class AncComponent implements OnInit, OnDestroy {
 
         forkJoin([
             AncvisitDetailsEdit,
-            visitDetailsEdit,
+            // visitDetailsEdit,
             baselineEdit,
-            ancEducation,
-            ancClientMonitoringEdit
+           // ancEducation,
+          //  ancClientMonitoringEdit
             // PatientAppointmentEdit,
             // referralEdit
 

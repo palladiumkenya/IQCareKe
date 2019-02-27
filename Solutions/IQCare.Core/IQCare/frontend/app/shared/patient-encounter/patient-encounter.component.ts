@@ -122,7 +122,8 @@ export class PatientEncounterComponent implements OnInit {
                     // console.log('patient encounters');
                     // console.log(p);
                     if (p.length == 0) { return; }
-
+                    console.log(p);
+                    this.encounterDataTable = [];
                     for (let i = 0; i < p.length; i++) {
                         this.encounterDataTable.push({
                             Id: p[i].id,
