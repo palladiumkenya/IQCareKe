@@ -113,8 +113,12 @@ export class PncHivtestingComponent implements OnInit, AfterViewInit {
     }
 
     loadHivTests(): void {
+        // console.log(this.patientEncounterId);
+        // console.log(this.patientMasterVisitId);
+
         this.pncService.getHivTests(this.patientMasterVisitId, this.patientEncounterId).subscribe(
             (result) => {
+                console.log(result);
                 if (result && result['encounter'] && result['encounter'].length > 0) {
                     const tests = result['testing'];
                     if (tests.length > 0) {
@@ -138,6 +142,7 @@ export class PncHivtestingComponent implements OnInit, AfterViewInit {
                                 nexthivtest: null,
                                 testpoint: this.serviceAreaName
                             });
+                            console.log(this.historical_hiv_testing_data);
                         }
                     }
 
@@ -150,6 +155,7 @@ export class PncHivtestingComponent implements OnInit, AfterViewInit {
                             this.HivTestingForm.get('hivTestingDone').disable({ onlySelf: false });
                         }
                     }
+                    console.log(this.historical_hiv_testing_data, 'datasource');
                     this.dataSource = new MatTableDataSource(this.historical_hiv_testing_data);
                 }
             },

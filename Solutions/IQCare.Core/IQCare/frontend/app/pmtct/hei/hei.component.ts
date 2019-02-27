@@ -548,6 +548,47 @@ export class HeiComponent implements OnInit {
             LabTestResults: []
         };
 
+        for (let i = 0; i < this.immunization_table_data.length; i++) {
+            for (let j = 0; j < this.immunization_table_data[i].length; j++) {
+                this.vaccination.push({
+                    Id: 0,
+                    PatientId: this.patientId,
+                    PatientMasterVisitId: this.patientMasterVisitId,
+                    PeriodId: this.immunization_table_data[i][j]['immunizationPeriodId'],
+                    Vaccine: this.immunization_table_data[i][j]['immunizationGivenId'],
+                    VaccineStage: this.immunization_table_data[i][j]['immunizationPeriodId'],
+                    DeleteFlag: 0,
+                    CreatedBy: this.userId,
+                    CreateDate: new Date(),
+                    VaccineDate: moment(this.immunization_table_data[i][j]['dateImmunized']).toDate(),
+                    Active: 0,
+                    AppointmentId: 0
+                    //  NextSchedule: new Date(this.immunization_table_data[i][j]['nextScheduled'])
+                });
+            }
+        }
+
+        for (let i = 0; i < this.milestone_table_data.length; i++) {
+            for (let j = 0; j < this.milestone_table_data[i].length; j++) {
+                this.milestone.push({
+                    Id: 0,
+                    PatientId: this.patientId,
+                    PatientMasterVisitId: this.patientMasterVisitId,
+                    TypeAssessedId: this.milestone_table_data[i][j].milestoneId,
+                    AchievedId: this.milestone_table_data[i][j].achievedId,
+                    StatusId: this.milestone_table_data[i][j].statusId,
+                    Comment: this.milestone_table_data[i][j].comment,
+                    CreateDate: new Date(),
+                    CreatedBy: this.userId,
+                    DeleteFlag: 0,
+                    DateAssessed: moment(this.milestone_table_data[i][j].dateAssessed).toDate()
+                });
+            }
+
+        }
+
+        const heiMilestone = this.heiService.saveMilestoneHistory(this.milestone);
+        const heiImmunization = this.heiService.saveImmunizationHistory(this.vaccination);
         const heiOrdVisit = this.heiService.saveOrdVisit(ordVisitCommand, laborder);
         const heitbAssessment = this.heiService.saveTbAssessment(patientIcf, patientIcfAction);
         const heiDeliveryEditCommand = this.heiService.updateHeiDelivery(heiDeliveryCommand);
@@ -563,7 +604,7 @@ export class HeiComponent implements OnInit {
         }
 
         forkJoin([heiOrdVisit, heiDeliveryEditCommand, heiFeedingEditCommand, heiOutCome,
-            isAddOrInsertAppointment, heitbAssessment]).subscribe(
+            isAddOrInsertAppointment, heitbAssessment, heiImmunization, heiMilestone]).subscribe(
                 (result) => {
                     console.log(result);
 
@@ -679,10 +720,6 @@ export class HeiComponent implements OnInit {
                 });
             }
         }
-
-        const vaccineCommand: any = {
-            'Vaccinations': this.vaccination
-        };
 
         for (let i = 0; i < this.milestone_table_data.length; i++) {
             for (let j = 0; j < this.milestone_table_data[i].length; j++) {
@@ -913,7 +950,7 @@ export class HeiComponent implements OnInit {
         const heiVisitDetails = this.heiService.saveHeiVisitDetails(visitDetailsData);
         const heiDelivery = this.heiService.saveHieDelivery(this.patientId, this.patientMasterVisitId, this.userId,
             isMotherRegistered, this.deliveryMatFormGroup.value[0], this.deliveryMatFormGroup.value[1]);
-        const heiImmunization = this.heiService.saveImmunizationHistory(vaccineCommand);
+        const heiImmunization = this.heiService.saveImmunizationHistory(this.vaccination);
         const heiMilestone = this.heiService.saveMilestoneHistory(this.milestone);
         const heitbAssessment = this.heiService.saveTbAssessment(patientIcf, patientIcfAction);
         const heiOrdVisit = this.heiService.saveOrdVisit(ordVisitCommand, laborder);
