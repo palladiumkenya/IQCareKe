@@ -61,6 +61,12 @@ export class MaternalDrugAdministrationComponent implements OnInit {
                 this.maternalDrugAdministrationFormGroup.get('ARVsStartedinMaternity').disable({ onlySelf: true });
                 this.maternalDrugAdministrationFormGroup.get('Cotrimoxazole').disable({ onlySelf: true });
                 this.maternalDrugAdministrationFormGroup.get('InfantProvidedWithARVprophylaxis').disable({ onlySelf: true });
+            } else {
+                this.maternalDrugAdministrationFormGroup.get('VitaminASupplementation').enable({ onlySelf: false });
+                this.maternalDrugAdministrationFormGroup.get('StartedHAARTinANC').enable({ onlySelf: false });
+                this.maternalDrugAdministrationFormGroup.get('ARVsStartedinMaternity').enable({ onlySelf: false });
+                this.maternalDrugAdministrationFormGroup.get('Cotrimoxazole').enable({ onlySelf: false });
+                this.maternalDrugAdministrationFormGroup.get('InfantProvidedWithARVprophylaxis').enable({ onlySelf: false });
             }
         });
         if (this.isEdit) {
