@@ -10,6 +10,7 @@ import { NotificationService } from '../../../shared/_services/notification.serv
 
 import * as moment from 'moment';
 import { AncService } from '../../_services/anc.service';
+import { DataService } from '../../../shared/_services/data.service';
 
 
 export interface PeriodicElement {
@@ -65,11 +66,12 @@ export class PatientEducationExaminationComponent implements OnInit, OnDestroy {
     constructor(private _formBuilder: FormBuilder, private _lookupItemService: LookupItemService,
         private snotifyService: SnotifyService,
         private notificationService: NotificationService,
-        private ancService: AncService) {
+        private dataService: DataService,
+        private ancService : AncService) {
     }
 
     ngOnInit() {
-        this.ancService.visitDate.subscribe(date => {
+        this.dataService.visitDate.subscribe(date => {
             this.visitDate = date;
             // console.log('The visit Date Education' + this.visitDate);
         });
