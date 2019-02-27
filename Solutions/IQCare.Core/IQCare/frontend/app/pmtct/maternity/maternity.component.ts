@@ -109,7 +109,8 @@ export class MaternityComponent implements OnInit {
         public zone: NgZone,
         private router: Router,
         private dialog: MatDialog,
-        private ancservice: AncService) {
+        private ancservice: AncService,
+        private lookupitemservice: LookupItemService) {
         this.visitDetailsFormGroup = new FormArray([]);
         this.diagnosisFormGroup = new FormArray([]);
         this.maternalDrugAdministrationForGroup = new FormArray([]);
@@ -123,16 +124,25 @@ export class MaternityComponent implements OnInit {
         this.getLookupItems('ApgarScore', this.apgarOptions);
         this.getLookupItems('MaternalDrugAdministration', this.drugAdminOptions);
         this.getLookupItems('counselledOn', this.counsellingOptions);
+
+        this.lookupitemservice.getByGroupNameAndItemName('HTSEntryPoints', 'PMTCT').subscribe(
+            (res) => {
+                this.hivTestEntryPoint = res['itemId'];
+            }
+        );
+
         this.route.params.subscribe(
             (params) => {
-                // console.log(params);
+                console.log(params);
                 const { patientId, personId, serviceAreaId, patientMasterVisitId } = params;
                 this.patientId = parseInt(patientId, 10);
                 this.personId = personId;
                 this.patientMasterVisitId = patientMasterVisitId;
                 this.serviceAreaId = serviceAreaId;
+                this.patientEncounterId = params.patientEncounterId;
 
                 if (!this.patientMasterVisitId) {
+                    console.log('test here');
                     this.patientMasterVisitId = JSON.parse(localStorage.getItem('patientMasterVisitId'));
                     this.patientEncounterId = JSON.parse(localStorage.getItem('patientEncounterId'));
                 } else {
@@ -143,7 +153,7 @@ export class MaternityComponent implements OnInit {
         );
 
         this.userId = JSON.parse(localStorage.getItem('appUserId'));
-        this.patientEncounterId = JSON.parse(localStorage.getItem('patientEncounterId'));
+        // this.patientEncounterId = JSON.parse(localStorage.getItem('patientEncounterId'));
         this.visitDate = new Date(localStorage.getItem('visitDate'));
         this.visitType = JSON.parse(localStorage.getItem('visitType'));
 
@@ -555,7 +565,7 @@ export class MaternityComponent implements OnInit {
         const hivStatusCommand: HivStatusCommand = {
             PersonId: this.personId,
             ProviderId: this.userId,
-            PatientEncounterID: this.patientEncounterId,
+            PatientEncounterID: this.patientEncounterId ? this.patientEncounterId : 0,
             PatientMasterVisitId: this.patientMasterVisitId,
             PatientId: this.patientId,
             EverTested: null,
@@ -576,7 +586,6 @@ export class MaternityComponent implements OnInit {
             EncounterDate: moment(this.visitDetailsFormGroup.value[0]['visitDate']).toDate(),
             EncounterType: this.maternityTestsFormGroup.value[0]['testType']
         };
-
 
         const hivTestsCommand: HivTestsCommand = {
             HtsEncounterId: 0,
