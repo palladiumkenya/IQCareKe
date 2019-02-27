@@ -33,6 +33,7 @@ export class PncHivtestingComponent implements OnInit, AfterViewInit {
     @Input('patientId') patientId: number;
     @Input('patientMasterVisitId') patientMasterVisitId: number;
     @Input('patientEncounterId') patientEncounterId: number;
+    @Input() visitDate: Date;
     @Input() personId: number;
     @Input() serviceAreaId: number;
     serviceAreaName: string;
@@ -171,6 +172,7 @@ export class PncHivtestingComponent implements OnInit, AfterViewInit {
         dialogConfig.autoFocus = true;
 
         dialogConfig.data = {
+            'visitDate': this.visitDate
         };
 
         const dialogRef = this.dialog.open(HivStatusComponent, dialogConfig);

@@ -61,6 +61,12 @@ export class MaternalDrugAdministrationComponent implements OnInit {
                 this.maternalDrugAdministrationFormGroup.get('ARVsStartedinMaternity').disable({ onlySelf: true });
                 this.maternalDrugAdministrationFormGroup.get('Cotrimoxazole').disable({ onlySelf: true });
                 this.maternalDrugAdministrationFormGroup.get('InfantProvidedWithARVprophylaxis').disable({ onlySelf: true });
+            } else {
+                this.maternalDrugAdministrationFormGroup.get('VitaminASupplementation').enable({ onlySelf: false });
+                this.maternalDrugAdministrationFormGroup.get('StartedHAARTinANC').enable({ onlySelf: false });
+                this.maternalDrugAdministrationFormGroup.get('ARVsStartedinMaternity').enable({ onlySelf: false });
+                this.maternalDrugAdministrationFormGroup.get('Cotrimoxazole').enable({ onlySelf: false });
+                this.maternalDrugAdministrationFormGroup.get('InfantProvidedWithARVprophylaxis').enable({ onlySelf: false });
             }
         });
         if (this.isEdit) {
@@ -70,14 +76,14 @@ export class MaternalDrugAdministrationComponent implements OnInit {
 
     private getDrugsAdministered(patientId: any, patientMasterVisitId: any) {
         this.maternityService.getPatientAdministeredDrugs(patientId, patientMasterVisitId).subscribe(res => {
-              res.forEach(data => {
+            res.forEach(data => {
                 const drugName = data.strDrugAdministered.split(' ').join('');
 
-                 this.maternalDrugAdministrationFormGroup
-                 .get(drugName)
-                 .setValue(data.value);
-              });
-           }, (err) => {
+                this.maternalDrugAdministrationFormGroup
+                    .get(drugName)
+                    .setValue(data.value);
+            });
+        }, (err) => {
             console.log(err);
         });
     }

@@ -58,7 +58,9 @@
                                         <app-anc-hivtesting (notify)="onHivStatusNotify($event)"
                                             [hivTestingOptions]="hivTestingOptions" [isEdit]="isEdit"
                                             [PatientId]="patientId" [PatientMasterVisitId]="patientMasterVisitId"
-                                            [serviceAreaId]="serviceAreaId" [personId]="personId"></app-anc-hivtesting>
+                                            [serviceAreaId]="serviceAreaId" [personId]="personId"
+                                            [patientEncounterId]="patientEncounterId" [visitDate]="visitDate">
+                                        </app-anc-hivtesting>
 
                                         <div>
                                             <button mat-raised-button color="primary" matStepperPrevious
