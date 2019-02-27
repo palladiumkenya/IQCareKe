@@ -36,7 +36,7 @@ namespace IQCare.Maternity.WebApi.Controllers
         }
 
         [HttpPost]
-        public async Task<object> UpdateDeliveredBabyBirthInfo([FromBody]UpdateDeliveredBabyBirthInfoCommand command)
+        public async Task<object> UpdateDeliveredBabyBirthInfo([FromBody] UpdateDeliveredBabyBirthInfoCommand command)
         {
             if (!ModelState.IsValid)
                 return BadRequest(command);
@@ -63,7 +63,7 @@ namespace IQCare.Maternity.WebApi.Controllers
             return BadRequest(response);
         }
 
-        
+
 
         [HttpGet("{Id}")]
         public async Task<object> GetDeliveredBabyBirthInfoByPatientDeliveryId(int id)
@@ -79,7 +79,7 @@ namespace IQCare.Maternity.WebApi.Controllers
         [HttpGet("{Id}")]
         public async Task<object> GetDeliveredBabyInfoByMasterVisitId(int id)
         {
-            var deliveredBabyInfo = await _mediator.Send(new GetDeliveredBabyBirthInfoQuery {  PatientMasterVisitId = id }, HttpContext.RequestAborted);
+            var deliveredBabyInfo = await _mediator.Send(new GetDeliveredBabyBirthInfoQuery { PatientMasterVisitId = id }, HttpContext.RequestAborted);
 
             if (deliveredBabyInfo.IsValid)
                 return Ok(deliveredBabyInfo.Value);
@@ -100,6 +100,18 @@ namespace IQCare.Maternity.WebApi.Controllers
             return BadRequest(response);
         }
 
+        [HttpPost]
+        public async Task<object> UpdatePatientDeliveryInfo([FromBody] UpdateMaternalPatientDeliveryInfoCommand command)
+        {
+            if (!ModelState.IsValid)
+                return BadRequest(command);
+            var response = await _mediator.Send(command, HttpContext.RequestAborted);
+            if (response.IsValid)
+                return Ok(response.Value);
+            return BadRequest(response);
+
+        }
+
         [HttpGet("{Id}")]
         public async Task<object> GetDeliveryInfoByPregnancyId(int id)
         {
@@ -114,8 +126,8 @@ namespace IQCare.Maternity.WebApi.Controllers
         [HttpGet("{Id}")]
         public async Task<object> GetDeliveryInfoByMasterVisitId(int id)
         {
-            var patientDeliveryInfo = 
-                await _mediator.Send(new GetPatientDeliveryInformationQuery {PatientMasterVisitId = id},HttpContext.RequestAborted);
+            var patientDeliveryInfo =
+                await _mediator.Send(new GetPatientDeliveryInformationQuery { PatientMasterVisitId = id }, HttpContext.RequestAborted);
 
             if (patientDeliveryInfo.IsValid)
                 return Ok(patientDeliveryInfo.Value.FirstOrDefault());
@@ -140,7 +152,7 @@ namespace IQCare.Maternity.WebApi.Controllers
         [HttpGet("{Id}")]
         public async Task<object> GetDischargeInfoByMasterVisitId(int id)
         {
-            var response = await _mediator.Send(new GetPatientDischargeInfoQuery {  PatientMasterVisitId = id }, HttpContext.RequestAborted);
+            var response = await _mediator.Send(new GetPatientDischargeInfoQuery { PatientMasterVisitId = id }, HttpContext.RequestAborted);
             if (response.IsValid)
                 return Ok(response.Value);
             return BadRequest(response);

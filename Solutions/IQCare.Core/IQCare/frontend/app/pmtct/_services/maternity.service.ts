@@ -99,6 +99,15 @@ export class MaternityService {
             );
     }
 
+ 
+    public updatePatientDeliveryInfo(deliveryInfo: any) {
+        return this.http.post(this.API_PMTCT_URL + '/api/MaternityPatientDeliveryInfo/UpdatePatientDeliveryInfo', JSON.stringify(deliveryInfo),
+        httpOptions).pipe(
+            tap(del => this.errorHandler.log(`successfully updated maternity delivery info`)),
+            catchError(this.errorHandler.handleError<any>('Error updating maternity Delivery info'))
+        );
+    }
+
     public saveBabySection(babysection: any): Observable<any> {
         return this.http.post(this.API_PMTCT_URL + '/api/MaternityPatientDeliveryInfo/AddDeliveredBabyBirthInfoCollection',
             JSON.stringify(babysection),

@@ -42,6 +42,7 @@ export class DeliveryMaternityComponent implements OnInit {
 
     ngOnInit() {
         this.deliveryFormGroup = this.formBuilder.group({
+            deliveryId : new FormControl(''),
             ancVisits: new FormControl('', [Validators.required]),
             deliveryDate: new FormControl('', [Validators.required]),
             gestationAtBirth: new FormControl('', [Validators.required]),
@@ -183,6 +184,7 @@ export class DeliveryMaternityComponent implements OnInit {
                     if (del == null) {
                         return;
                     }
+                    this.deliveryFormGroup.controls['deliveryId'].setValue(del.id)
                     this.deliveryFormGroup.controls['gestationAtBirth'].setValue(this.calculateGestation(del.dateOfDelivery,
                         this.dateLMP));
                     this.deliveryFormGroup.controls['gestationAtBirth'].disable({ onlySelf: true });

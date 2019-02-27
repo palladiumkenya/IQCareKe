@@ -331,6 +331,29 @@ export class MaternityComponent implements OnInit {
             );
     }
 
+    private buildMaternalDeliveryCommand() : MaternityDeliveryCommand {
+        const maternityDeliveryCommand: MaternityDeliveryCommand = {
+            PatientMasterVisitId: this.patientMasterVisitId,
+            PregnancyId: this.pregnancyId,
+            DurationOfLabour: this.diagnosisFormGroup.value[1]['labourDuration'],
+            DateOfDelivery: moment(this.diagnosisFormGroup.value[1]['deliveryDate']).toDate(),
+            TimeOfDelivery: this.diagnosisFormGroup.value[1]['deliveryTime'],
+            ModeOfDelivery: this.diagnosisFormGroup.value[1]['deliveryMode'].itemId,
+            PlacentaComplete: this.diagnosisFormGroup.value[1]['placentaComplete'].itemId,
+            BloodLossCapacity: parseInt(this.diagnosisFormGroup.value[1]['bloodLossCount'], 10),
+            BloodLossClassification: this.diagnosisFormGroup.value[1]['bloodLoss'].itemId,
+            MotherCondition: this.diagnosisFormGroup.value[1]['deliveryCondition'].itemId,
+            MaternalDeathAudited: this.diagnosisFormGroup.value[1]['maternalDeathsAudited'],
+            MaternalDeathAuditDate: moment(this.diagnosisFormGroup.value[1]['auditDate']).toDate(),
+            DeliveryComplicationsExperienced: this.diagnosisFormGroup.value[1]['deliveryComplications'].itemId,
+            DeliveryComplicationNotes: this.diagnosisFormGroup.value[1]['deliveryComplicationNotes'],
+            DeliveryConductedBy: this.diagnosisFormGroup.value[1]['deliveryConductedBy'],
+            CreatedBy: this.userId
+        };
+
+        return maternityDeliveryCommand;
+    }
+
     onSubmit() {
         const visitDetailsCommand = {
             PatientId: parseInt(this.patientId.toString(), 10),
@@ -372,24 +395,7 @@ export class MaternityComponent implements OnInit {
             CreatedBy: this.userId
         };
 
-        const maternityDeliveryCommand: MaternityDeliveryCommand = {
-            PatientMasterVisitId: this.patientMasterVisitId,
-            PregnancyId: this.pregnancyId,
-            DurationOfLabour: this.diagnosisFormGroup.value[1]['labourDuration'],
-            DateOfDelivery: moment(this.diagnosisFormGroup.value[1]['deliveryDate']).toDate(),
-            TimeOfDelivery: this.diagnosisFormGroup.value[1]['deliveryTime'],
-            ModeOfDelivery: this.diagnosisFormGroup.value[1]['deliveryMode'].itemId,
-            PlacentaComplete: this.diagnosisFormGroup.value[1]['placentaComplete'].itemId,
-            BloodLossCapacity: parseInt(this.diagnosisFormGroup.value[1]['bloodLossCount'], 10),
-            BloodLossClassification: this.diagnosisFormGroup.value[1]['bloodLoss'].itemId,
-            MotherCondition: this.diagnosisFormGroup.value[1]['deliveryCondition'].itemId,
-            MaternalDeathAudited: this.diagnosisFormGroup.value[1]['maternalDeathsAudited'],
-            MaternalDeathAuditDate: moment(this.diagnosisFormGroup.value[1]['auditDate']).toDate(),
-            DeliveryComplicationsExperienced: this.diagnosisFormGroup.value[1]['deliveryComplications'].itemId,
-            DeliveryComplicationNotes: this.diagnosisFormGroup.value[1]['deliveryComplicationNotes'],
-            DeliveryConductedBy: this.diagnosisFormGroup.value[1]['deliveryConductedBy'],
-            CreatedBy: this.userId
-        };
+        const maternityDeliveryCommand: MaternityDeliveryCommand = this.buildMaternalDeliveryCommand();
 
         const apgarscoreOne = this.apgarOptions.filter(x => x.itemName == 'Apgar Score 1 min');
         const apgarscoreTwo = this.apgarOptions.filter(x => x.itemName == 'Apgar Score 5 min');
