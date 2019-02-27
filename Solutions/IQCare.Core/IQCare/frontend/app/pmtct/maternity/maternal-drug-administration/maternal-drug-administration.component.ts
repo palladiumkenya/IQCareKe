@@ -76,14 +76,14 @@ export class MaternalDrugAdministrationComponent implements OnInit {
 
     private getDrugsAdministered(patientId: any, patientMasterVisitId: any) {
         this.maternityService.getPatientAdministeredDrugs(patientId, patientMasterVisitId).subscribe(res => {
-              res.forEach(data => {
+            res.forEach(data => {
                 const drugName = data.strDrugAdministered.split(' ').join('');
 
-                 this.maternalDrugAdministrationFormGroup
-                 .get(drugName)
-                 .setValue(data.value);
-              });
-           }, (err) => {
+                this.maternalDrugAdministrationFormGroup
+                    .get(drugName)
+                    .setValue(data.value);
+            });
+        }, (err) => {
             console.log(err);
         });
     }

@@ -50,6 +50,10 @@ export class MaternityTestsComponent implements OnInit {
                         this.maternityTestsFormGroup.get('HIVStatusLastANC').setValue(hivPositiveResult[0].itemId);
                         this.dataservice.changeHivStatus('Positive');
                     } else {
+                        const hivNegativeResult = this.hivStatusOptions.filter(obj => obj.itemName == 'Negative');
+                        if (hivNegativeResult.length > 0) {
+                            this.maternityTestsFormGroup.get('HIVStatusLastANC').setValue(hivNegativeResult[0].itemId);
+                        }
                         this.dataservice.changeHivStatus('Negative');
                     }
                 }

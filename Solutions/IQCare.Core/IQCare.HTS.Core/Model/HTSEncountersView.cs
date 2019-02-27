@@ -23,5 +23,6 @@ namespace IQCare.HTS.Core.Model
 
         public string PartnerListingConsent { get; set; }
         public string TestType { get; set; }
+        public string ServiceArea { get; set; }
     }
 }
