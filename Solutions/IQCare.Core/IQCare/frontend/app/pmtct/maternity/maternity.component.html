@@ -17,7 +17,7 @@
                                         <app-hei-visit-details (notify)="onVisitDetailsNotify($event)" [formtype]="formType"
                                             [visitDate]="visitDate" [visitType]="visitType" [patientId]="patientId"
                                             [serviceAreaId]="serviceAreaId" [isEdit]="isEdit" [patientMasterVisitId]="patientMasterVisitId"></app-hei-visit-details>
-                                        <app-mother-profile [patientId]="patientId" [visitDate]="visitDate" (notify)="OnMotherProfileNotify($event)"></app-mother-profile>
+                                        <app-mother-profile [patientId]="patientId" [visitDate]="visitDate"  (notify)="OnMotherProfileNotify($event)"></app-mother-profile>
                                         <div>
                                             <button mat-raised-button color="accent" matStepperNext type="button"
                                                 (click)="log()">Next</button>

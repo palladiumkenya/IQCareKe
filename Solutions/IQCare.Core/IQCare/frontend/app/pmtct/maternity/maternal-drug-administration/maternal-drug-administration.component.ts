@@ -28,7 +28,7 @@ export class MaternalDrugAdministrationComponent implements OnInit {
     constructor(private formBuilder: FormBuilder,
         private notificationService: NotificationService,
         private snotifyService: SnotifyService,
-        private maternityService : MaternityService,
+        private maternityService: MaternityService,
         private dataservice: DataService) {
     }
 
@@ -63,24 +63,23 @@ export class MaternalDrugAdministrationComponent implements OnInit {
                 this.maternalDrugAdministrationFormGroup.get('InfantProvidedWithARVprophylaxis').disable({ onlySelf: true });
             }
         });
-        if(this.isEdit){
-            this.getDrugsAdministered(this.PatientId,this.PatientMasterVisitId)
+        if (this.isEdit) {
+            this.getDrugsAdministered(this.PatientId, this.PatientMasterVisitId);
         }
     }
 
-    private getDrugsAdministered(patientId: any, patientMasterVisitId:any) {
-        this.maternityService.getPatientAdministeredDrugs(patientId,patientMasterVisitId).subscribe(res=>
-          {
+    private getDrugsAdministered(patientId: any, patientMasterVisitId: any) {
+        this.maternityService.getPatientAdministeredDrugs(patientId, patientMasterVisitId).subscribe(res => {
               res.forEach(data => {
-                var drugName = data.strDrugAdministered.split(' ').join('');
+                const drugName = data.strDrugAdministered.split(' ').join('');
 
                  this.maternalDrugAdministrationFormGroup
                  .get(drugName)
                  .setValue(data.value);
               });
-           },(err)=>{
+           }, (err) => {
             console.log(err);
-        })
+        });
     }
 
 }
