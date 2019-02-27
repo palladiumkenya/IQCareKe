@@ -132,6 +132,16 @@ export class MaternityService {
             );
     }
 
+    /**
+     * getPatientAdministeredDrugs
+     */
+    public getPatientAdministeredDrugs(patientId:any,masterVisitId:any) {
+        return this.http.get<any[]>(this.API_PMTCT_URL + '/api/PatientDrugAdministration/GetByPatientIdAndPatientMasterVisitId/'+ patientId + '/' + masterVisitId).pipe(
+            tap(drug => this.errorHandler.log(`successfully fetched patient drugs `+ patientId + ` and patientmastervisitid: ` + masterVisitId)),
+            catchError(this.errorHandler.handleError<any>('Error fetching patient education'))
+        );
+    }
+
 
     public savePartnerTesting(partner: any): Observable<any> {
         return this.http.post(this.API_PMTCT_URL + '/api/PatientPartnerTesting/AddPartnerTesting',
@@ -178,6 +188,13 @@ export class MaternityService {
                 tap(saveDischarge => this.errorHandler.log(`successfully added discharge details`)),
                 catchError(this.errorHandler.handleError<any>('Error saving Partner discharge details'))
             );
+    }
+
+    public getPatientDischargeInfo(mastervisitId: any) {
+        return this.http.get<any[]>(this.API_PMTCT_URL + '/api/MaternityPatientDeliveryInfo/GetDischargeInfoByMasterVisitId/'+mastervisitId).pipe(
+            tap(discharge =>this.errorHandler.log(`successfully fetched patient education by patientId: `+ mastervisitId)),
+            catchError(this.errorHandler.handleError<any>('Error fetching patient education'))
+        );
     }
 
     public saveReferrals(referral: any): Observable<any> {
@@ -270,13 +287,6 @@ export class MaternityService {
             );
     }
 
-    public GetPatientDischargeInfo(masterVisitId: number) {
-        return this.http.get<any>(this.API_PMTCT_URL + '/api/MaternityPatientDeliveryInfo/GetDischargeInfoByMasterVisitId/' +
-            masterVisitId).pipe(
-                tap(GetPatientDischargeInfo => this.errorHandler.log('get patient discharge info by master Id')),
-                catchError(this.errorHandler.handleError<any[]>('GetPatientDischargeInfo'))
-            );
-    }
 
     public GetPatientDiagnosisInfo(masterVisitId: number) {
         return this.http.get<any>(this.API_PMTCT_URL + '/api/PatientDiagnosis/GetDiagnosisByMasterVisitId/' + masterVisitId).pipe(
@@ -286,10 +296,8 @@ export class MaternityService {
     }
 
     public getMaternityLookUpOptionByName(lookUpOptions: any[], lookupName: string): any {
-        console.log('Delivery Complications ' + lookupName)
         for (let index = 0; index < lookUpOptions.length; index++) {
             if (lookUpOptions[index].itemName.toUpperCase() === lookupName.toUpperCase()) {
-                console.log('Delivery Complications two ' + lookupName)
                 return lookUpOptions[index];
             }
         }
