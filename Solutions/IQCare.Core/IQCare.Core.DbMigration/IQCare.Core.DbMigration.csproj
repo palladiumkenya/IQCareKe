@@ -168,6 +168,7 @@
     <None Remove="Scripts\2.0.0\52_DO_AlterView_PatientDeliveryInfo.sql" />
     <None Remove="Scripts\2.0.0\52_PersonListView.sql" />
     <None Remove="Scripts\2.0.0\51_SO_AddPMTCTMotherRegimensLookups.sql" />
+    <None Remove="Scripts\2.0.0\53_DO_AlterViewPatientDeliveryInfo.sql" />
   </ItemGroup>
 
   <ItemGroup>
@@ -329,6 +330,7 @@
     <EmbeddedResource Include="Scripts\2.0.0\52_DO_AlterView_PatientDeliveryInfo.sql" />
     <EmbeddedResource Include="Scripts\2.0.0\52_PersonListView.sql" />
     <EmbeddedResource Include="Scripts\2.0.0\51_SO_AddPMTCTMotherRegimensLookups.sql" />
+    <EmbeddedResource Include="Scripts\2.0.0\53_DO_AlterViewPatientDeliveryInfo.sql" />
   </ItemGroup>
 
   <ItemGroup>

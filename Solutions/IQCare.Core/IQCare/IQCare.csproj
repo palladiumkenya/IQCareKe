@@ -91,4 +91,6 @@
     <TypeScriptCompile Include="frontend\app\records\validators\telephonevalidator.ts" />
   </ItemGroup>
 
+  <ProjectExtensions><VisualStudio><UserProperties appsettings_1json__JSONSchema="http://json.schemastore.org/babelrc" /></VisualStudio></ProjectExtensions>
+
 </Project>

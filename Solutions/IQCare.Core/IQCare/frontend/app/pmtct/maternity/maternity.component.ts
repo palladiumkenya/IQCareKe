@@ -543,7 +543,8 @@ export class MaternityComponent implements OnInit {
             PatientId: this.patientId,
             PatientMasterVisitId: this.patientMasterVisitId,
             ServiceAreaId: this.serviceAreaId,
-            AppointmentDate: moment(this.dischargeFormGroup.value[2]['nextAppointmentDate']).toDate(),
+            AppointmentDate: this.dischargeFormGroup.value[2]['nextAppointmentDate']
+                ? moment(this.dischargeFormGroup.value[2]['nextAppointmentDate']).toDate() : null,
             Description: this.dischargeFormGroup.value[2]['remarks'],
             StatusDate: new Date(),
             DifferentiatedCareId: 0,

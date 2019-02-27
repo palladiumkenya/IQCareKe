@@ -69,7 +69,7 @@ export class PncDrugadministrationComponent implements OnInit, AfterViewInit {
                 this.DrugAdministrationForm.get('startedARTPncVisit').disable({ onlySelf: true });
                 this.DrugAdministrationForm.get('haematinics_given').disable({ onlySelf: true });
                 this.DrugAdministrationForm.get('infant_drug').disable({ onlySelf: true });
-                this.DrugAdministrationForm.get('infant_start').disable({ onlySelf: true });                
+                this.DrugAdministrationForm.get('infant_start').disable({ onlySelf: true });
             }
         });
     }
@@ -83,6 +83,7 @@ export class PncDrugadministrationComponent implements OnInit, AfterViewInit {
     loadDrugAdministrationInfo(): void {
         this.pncService.getPncDrugAdministration(this.patientId, this.patientMasterVisitId).subscribe(
             (result) => {
+                console.log(result);
                 for (let i = 0; i < result.length; i++) {
                     if (result[i]['strDrugAdministered'] == 'Started HAART in PNC') {
                         this.DrugAdministrationForm.get('startedARTPncVisit').setValue(result[i]['value']);
