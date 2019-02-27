@@ -9,6 +9,7 @@ import { AncService } from '../../_services/anc.service';
 import { PncService } from '../../_services/pnc.service';
 import { NotificationService } from '../../../shared/_services/notification.service';
 import { DataService } from '../../_services/data.service';
+import { LookupItemService } from '../../../shared/_services/lookup-item.service';
 
 @Component({
     selector: 'app-anc-hivtesting',
@@ -24,6 +25,8 @@ export class AncHivtestingComponent implements OnInit {
     isHivTestingDone: boolean = false;
 
     public hiv_testing_table_data: HivTestingTableData[] = [];
+    public historical_hiv_testing_data: HivTestingTableData[] = [];
+
     displayedColumns = ['testdate', 'testtype', 'kitname', 'lotnumber',
         'expirydate', 'testresult', 'nexthivtest', 'testpoint', 'action'];
     dataSource = new MatTableDataSource(this.hiv_testing_table_data);
@@ -34,8 +37,18 @@ export class AncHivtestingComponent implements OnInit {
     @Input('isEdit') isEdit: boolean;
     @Input('PatientId') PatientId: number;
     @Input('PatientMasterVisitId') PatientMasterVisitId: number;
+    @Input() patientEncounterId: number;
     @Input() personId: number;
     @Input() serviceAreaId: number;
+    @Input() visitDate: Date;
+
+    lookupItemView$: Subscription;
+    LookupItems$: Subscription;
+
+    public testVisits: LookupItemView[] = [];
+    public kits: LookupItemView[] = [];
+    public tests: LookupItemView[] = [];
+    public testResults: LookupItemView[] = [];
 
     serviceAreaName: string;
 
@@ -46,7 +59,8 @@ export class AncHivtestingComponent implements OnInit {
         private pncService: PncService,
         private notificationService: NotificationService,
         private snotifyService: SnotifyService,
-        private dataservice: DataService) {
+        private dataservice: DataService,
+        private _lookupItemService: LookupItemService) {
 
     }
 
@@ -79,15 +93,71 @@ export class AncHivtestingComponent implements OnInit {
         this.yesnoOptions = yesnoOptions;
         this.hivFinalResultsOptions = hivFinalResultsOptions;
 
+        this.getLookupOptions('PMTCTHIVTestVisit', this.testVisits);
+        this.getLookupOptions('HIVTestKits', this.kits);
+        this.getLookupOptions('PMTCTHIVTests', this.tests);
+        this.getLookupOptions('HIVResults', this.testResults);
+
         this.notify.emit({ 'form': this.HivTestingForm, 'table_data': this.hiv_testing_table_data });
 
         if (this.isEdit) {
             this.getBaselineAncProfile(this.PatientId);
+            this.loadHivTests();
         } else {
             this.getBaselineAncProfile(this.PatientId);
         }
 
         this.personCurrentHivStatus();
+    }
+
+    loadHivTests(): void {
+        this.pncService.getHivTests(this.PatientMasterVisitId, this.patientEncounterId).subscribe(
+            (result) => {
+                // console.log(result);
+                if (result && result['encounter'] && result['encounter'].length > 0) {
+                    const tests = result['testing'];
+                    if (tests.length > 0) {
+                        for (let i = 0; i < tests.length; i++) {
+                            const testRound = tests[i].testRound == 1 ? 'HIV Test-1' : 'HIV Test-2';
+                            const testType = this.tests.find(obj => obj.itemName == testRound);
+                            const kitName = this.kits.find(obj => obj.itemId == tests[i].kitId);
+                            const lotnumber = tests[i].kitLotNumber;
+                            const expirydate = tests[i].expiryDate;
+                            const outcome = this.testResults.find(obj => obj.itemId == tests[i].outcome);
+                            const testEntryPoint = result['encounter'];
+
+
+                            this.historical_hiv_testing_data.push({
+                                testdate: new Date(),
+                                testtype: testType,
+                                kitname: kitName,
+                                lotnumber: lotnumber,
+                                expirydate: expirydate,
+                                testresult: outcome,
+                                nexthivtest: null,
+                                testpoint: this.serviceAreaName
+                            });
+                            // console.log(this.historical_hiv_testing_data);
+                        }
+                    }
+
+                    if (result['encounterResults'].length > 0) {
+                        this.HivTestingForm.controls.testType.setValue(result['encounter'][0]['encounterType']);
+                        const finalTestResult = this.hivFinalResultsOptions.find(
+                            obj => obj.itemId == result['encounterResults'][0]['finalResult']);
+                        this.HivTestingForm.get('finalTestResult').setValue(finalTestResult.itemId);
+                        if (finalTestResult.itemName == 'Positive') {
+                            this.HivTestingForm.get('hivTestingDone').disable({ onlySelf: false });
+                        }
+                    }
+                    // console.log(this.historical_hiv_testing_data, 'datasource');
+                    this.dataSource = new MatTableDataSource(this.historical_hiv_testing_data);
+                }
+            },
+            (error) => {
+
+            }
+        );
     }
 
     AddHivTests() {
@@ -96,6 +166,7 @@ export class AncHivtestingComponent implements OnInit {
         dialogConfig.autoFocus = true;
 
         dialogConfig.data = {
+            'visitDate': this.visitDate
         };
 
         // console.log(this.serviceAreaName);
@@ -120,7 +191,18 @@ export class AncHivtestingComponent implements OnInit {
                     testpoint: this.serviceAreaName
                 });
 
-                this.dataSource = new MatTableDataSource(this.hiv_testing_table_data);
+                this.historical_hiv_testing_data.push({
+                    testdate: new Date(),
+                    testtype: data.hivTest,
+                    kitname: data.kitName,
+                    lotnumber: data.lotNumber,
+                    expirydate: data.expiryDate,
+                    testresult: data.testResult,
+                    nexthivtest: data.nextAppointmentDate,
+                    testpoint: this.serviceAreaName
+                });
+
+                this.dataSource = new MatTableDataSource(this.historical_hiv_testing_data);
             }
         );
     }
@@ -205,6 +287,24 @@ export class AncHivtestingComponent implements OnInit {
         } else if (event.isUserInput && event.source.selected && event.source.viewValue == 'Inconclusive') {
             this.dataservice.changeHivStatus('Inconclusive');
         }
+    }
+
+    public getLookupOptions(groupName: string, masterName: any[]) {
+        this.LookupItems$ = this._lookupItemService.getByGroupName(groupName)
+            .subscribe(
+                p => {
+                    const lookupOptions = p['lookupItems'];
+                    for (let i = 0; i < lookupOptions.length; i++) {
+                        masterName.push({ 'itemId': lookupOptions[i]['itemId'], 'itemName': lookupOptions[i]['itemName'] });
+                    }
+                },
+                (err) => {
+                    // console.log(err);
+                    this.snotifyService.error('Error fetching lookups' + err, 'Encounter', this.notificationService.getConfig());
+                },
+                () => {
+                    // console.log(this.lookupItemView$);
+                });
     }
 }
 

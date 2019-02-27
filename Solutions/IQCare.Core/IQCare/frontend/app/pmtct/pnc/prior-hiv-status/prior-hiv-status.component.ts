@@ -53,6 +53,10 @@ export class PriorHivStatusComponent implements OnInit {
                         this.dataservice.changeHivStatus('Positive');
                     }
                 } else {
+                    const hivNegativeResult = this.hivStatusOptions.filter(obj => obj.itemName == 'Negative');
+                    if (hivNegativeResult.length > 0) {
+                        this.priorHivStatusFormGroup.get('priorHivStatus').setValue(hivNegativeResult[0].itemId);
+                    }
                     this.dataservice.changeHivStatus('Negative');
                 }
             },
