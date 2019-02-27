@@ -204,6 +204,11 @@ export class MaternityService {
     }
 
     public saveNextAppointment(appointment: any): Observable<any> {
+        if (!appointment.AppointmentDate || appointment.AppointmentDate == null
+            || appointment.AppointmentDate == 'null') {
+            return of([]);
+        }
+
         return this.http.post(this.API_URL + '/api/PatientReferralAndAppointment/AddPatientNextAppointment', JSON.stringify(appointment),
             httpOptions).pipe(
                 tap(saveReferrals => this.errorHandler.log(`successfully added Referral details`)),
@@ -281,10 +286,10 @@ export class MaternityService {
     }
 
     public getMaternityLookUpOptionByName(lookUpOptions: any[], lookupName: string): any {
-        console.log('Delivery Complications '+ lookupName)
+        console.log('Delivery Complications ' + lookupName)
         for (let index = 0; index < lookUpOptions.length; index++) {
             if (lookUpOptions[index].itemName.toUpperCase() === lookupName.toUpperCase()) {
-                console.log('Delivery Complications two '+ lookupName)
+                console.log('Delivery Complications two ' + lookupName)
                 return lookUpOptions[index];
             }
         }
