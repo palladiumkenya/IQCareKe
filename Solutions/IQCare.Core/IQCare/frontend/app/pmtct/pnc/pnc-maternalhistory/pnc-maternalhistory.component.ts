@@ -37,9 +37,11 @@ export class PncMaternalhistoryComponent implements OnInit {
 
         this.maternityService.getInitialProfileDetailsByPatientd(this.patientId).subscribe(
             (res) => {
+                console.log(res);
                 if (res && res.id > 0) {
                     this.maternityService.getPatientDeliveryInfoByPregnancyId(res.pregnancyId).subscribe(
                         (result) => {
+                            console.log(result);
                             if (result.length > 0) {
                                 this.MaternalHistoryForm.get('dateofdelivery').setValue(result[0].dateOfDelivery);
                                 this.MaternalHistoryForm.get('modeofdelivery').setValue(result[0].modeOfDelivery);

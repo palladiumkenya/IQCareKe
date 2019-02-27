@@ -8,6 +8,7 @@ using IQCare.Common.Infrastructure;
 using System.Threading;
 using System.Threading.Tasks;
 using IQCare.Library;
+using Serilog;
 
 namespace IQCare.Records.BusinessProcess.CommandHandlers.Lookup
 {
@@ -75,9 +76,8 @@ namespace IQCare.Records.BusinessProcess.CommandHandlers.Lookup
             }
             catch (Exception e)
             {
-                return Result<SearchPersonListResponse>.Invalid(e.Message);
-               
-
+                Log.Error($"Error searching persons, exception message: {e.Message}, innerexception: {e.InnerException}");
+                return Result<SearchPersonListResponse>.Invalid($"Error searching persons, exception message: {e.Message}");
             }
         }
     }
