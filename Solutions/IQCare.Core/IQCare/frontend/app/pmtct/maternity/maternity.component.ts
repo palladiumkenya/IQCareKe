@@ -652,6 +652,9 @@ export class MaternityComponent implements OnInit {
                     const ancHivResultsCommand = this.ancservice.saveHivResults(hivTestsCommand).subscribe(
                         (testRes) => {
                             console.log(testRes);
+                        },
+                        (testerror) => {
+                            console.log(testerror);
                         }
                     );
 
