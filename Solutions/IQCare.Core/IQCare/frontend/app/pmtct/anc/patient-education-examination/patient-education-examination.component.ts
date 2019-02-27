@@ -236,7 +236,7 @@ export class PatientEducationExaminationComponent implements OnInit, OnDestroy {
     }
 
     ngOnDestroy(): void {
-        this.baseline$.unsubscribe();
+       // this.baseline$.unsubscribe();
         this.patientCounseling$.unsubscribe();
     }
 
