@@ -38,7 +38,7 @@ export class MaternityService {
 
 
     public updateBabyDataInfo(babyInfo: any) {
-        this.babyDataMessageSource.next(babyInfo)
+        this.babyDataMessageSource.next(babyInfo);
     }
     public saveMaternityMasterVisit(patientMasterVisitEncounter: PatientMasterVisitEncounter): Observable<any> {
         return this.http.post<PatientMasterVisitEncounter>(this.API_URL + '/api/PatientMasterVisit',
@@ -60,6 +60,13 @@ export class MaternityService {
         return this.http.get<any>(this.API_URL + '/api/VisitDetails/GetPregnancyProfile/' + patientId).pipe(
             tap(getPregnancyDetails => this.errorHandler.log('get current pregnancy details')),
             catchError(this.errorHandler.handleError<any[]>('getPregnancyDetails'))
+        );
+    }
+
+    public getPatientPregnancy(patientId: number): Observable<any> {
+        return this.http.get<any>(this.API_URL + '/api/Pregnancy/Get/' + patientId).pipe(
+            tap(getPatientPregnancy => this.errorHandler.log('get patient pregnancy')),
+            catchError(this.errorHandler.handleError<any[]>('getPatientPregnancy'))
         );
     }
 
@@ -118,7 +125,8 @@ export class MaternityService {
     }
 
     public updateBabyInfo(babyInfo: any): Observable<any> {
-        return this.http.post(this.API_PMTCT_URL + '/api/MaternityPatientDeliveryInfo/UpdateDeliveredBabyBirthInfo', JSON.stringify(babyInfo),
+        return this.http.post(this.API_PMTCT_URL +
+            '/api/MaternityPatientDeliveryInfo/UpdateDeliveredBabyBirthInfo', JSON.stringify(babyInfo),
             httpOptions).pipe(tap(updateBabyInfo => this.errorHandler.log(`successfully updated baby info`)),
                 catchError(this.errorHandler.handleError<any>('Error updating baby information'))
             );
@@ -135,11 +143,13 @@ export class MaternityService {
     /**
      * getPatientAdministeredDrugs
      */
-    public getPatientAdministeredDrugs(patientId:any,masterVisitId:any) {
-        return this.http.get<any[]>(this.API_PMTCT_URL + '/api/PatientDrugAdministration/GetByPatientIdAndPatientMasterVisitId/'+ patientId + '/' + masterVisitId).pipe(
-            tap(drug => this.errorHandler.log(`successfully fetched patient drugs `+ patientId + ` and patientmastervisitid: ` + masterVisitId)),
-            catchError(this.errorHandler.handleError<any>('Error fetching patient education'))
-        );
+    public getPatientAdministeredDrugs(patientId: any, masterVisitId: any) {
+        return this.http.get<any[]>(this.API_PMTCT_URL +
+            '/api/PatientDrugAdministration/GetByPatientIdAndPatientMasterVisitId/' + patientId + '/' + masterVisitId).pipe(
+                tap(drug => this.errorHandler.log(`successfully fetched patient drugs ` + patientId
+                    + ` and patientmastervisitid: ` + masterVisitId)),
+                catchError(this.errorHandler.handleError<any>('Error fetching patient education'))
+            );
     }
 
 
@@ -191,10 +201,11 @@ export class MaternityService {
     }
 
     public getPatientDischargeInfo(mastervisitId: any) {
-        return this.http.get<any[]>(this.API_PMTCT_URL + '/api/MaternityPatientDeliveryInfo/GetDischargeInfoByMasterVisitId/'+mastervisitId).pipe(
-            tap(discharge =>this.errorHandler.log(`successfully fetched patient education by patientId: `+ mastervisitId)),
-            catchError(this.errorHandler.handleError<any>('Error fetching patient education'))
-        );
+        return this.http.get<any[]>(this.API_PMTCT_URL
+            + '/api/MaternityPatientDeliveryInfo/GetDischargeInfoByMasterVisitId/' + mastervisitId).pipe(
+                tap(discharge => this.errorHandler.log(`successfully fetched patient education by patientId: ` + mastervisitId)),
+                catchError(this.errorHandler.handleError<any>('Error fetching patient education'))
+            );
     }
 
     public saveReferrals(referral: any): Observable<any> {
@@ -316,20 +327,20 @@ export class MaternityService {
 
     public buildAddBabyCommandModel(babyFormGroup: FormGroup): BabyConditionCommand {
 
-        var apgarScores: ApgarScoreCommand[] = [];
+        const apgarScores: ApgarScoreCommand[] = [];
         apgarScores.push(
             {
-                ApgarScoreId: this.GetScoreTypeId("Apgar Score 1 min"),
+                ApgarScoreId: this.GetScoreTypeId('Apgar Score 1 min'),
                 Score: babyFormGroup.get('agparScore1min').value
             },
             {
-                ApgarScoreId: this.GetScoreTypeId("Apgar Score 5 min"),
+                ApgarScoreId: this.GetScoreTypeId('Apgar Score 5 min'),
                 Score: babyFormGroup.get('agparScore5min').value
             },
             {
-                ApgarScoreId: this.GetScoreTypeId("Apgar Score 10 min"),
+                ApgarScoreId: this.GetScoreTypeId('Apgar Score 10 min'),
                 Score: babyFormGroup.get('agparScore10min').value
-            })
+            });
 
         const babyCondition: BabyConditionCommand = {
             Sex: babyFormGroup.get('babySex').value.itemId,
@@ -342,7 +353,7 @@ export class MaternityService {
             BreastFedWithinHour: (babyFormGroup.get('breastFed').value.itemName == 'Yes') ? true : false,
             Comment: babyFormGroup.get('comment').value,
             BirthNotificationNumber: babyFormGroup.get('notificationNumber').value
-        }
+        };
 
         return babyCondition;
     }
@@ -352,19 +363,19 @@ export class MaternityService {
             .subscribe(
                 p => {
                     const options = p['lookupItems'];
-                    console.log(options.length + ' OPtions Man')
+                    console.log(options.length + ' OPtions Man');
                     for (let i = 0; i < options.length; i++) {
                         objOptions.push({ 'itemId': options[i]['itemId'], 'itemName': options[i]['itemName'] });
                     }
-                    console.log("New options Length ?? " + objOptions.length)
+                    console.log('New options Length ?? ' + objOptions.length);
                 });
     }
 
     private GetScoreTypeId(scoreType: string): any {
-        var score = this.apgarScoreOptions.filter(x => x.itemName == scoreType);
-        if (score.length < 0)
+        const score = this.apgarScoreOptions.filter(x => x.itemName == scoreType);
+        if (score.length < 0) {
             return 0;
+        }
         return score[0].itemId;
     }
-
 }

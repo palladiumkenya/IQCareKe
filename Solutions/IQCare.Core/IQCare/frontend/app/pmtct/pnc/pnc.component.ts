@@ -441,7 +441,8 @@ export class PncComponent implements OnInit {
             PatientId: this.patientId,
             PatientMasterVisitId: this.patientMasterVisitId,
             ServiceAreaId: this.serviceAreaId,
-            AppointmentDate: moment(this.diagnosisReferralAppointmentFormGroup.value[2]['nextAppointmentDate']).toDate(),
+            AppointmentDate: this.diagnosisReferralAppointmentFormGroup.value[2]['nextAppointmentDate']
+                ? moment(this.diagnosisReferralAppointmentFormGroup.value[2]['nextAppointmentDate']).toDate() : null,
             Description: this.diagnosisReferralAppointmentFormGroup.value[2]['remarks'],
             StatusDate: null,
             DifferentiatedCareId: 0,
@@ -606,8 +607,8 @@ export class PncComponent implements OnInit {
 
         const patientMaternalDeliveryInfo: any = {
             PatientMasterVisitId: this.patientMasterVisitId,
-            DateOfDelivery: this.matHistory_PostNatalExam_FormGroup[0]['dateofdelivery'],
-            ModeOfDelivery: this.matHistory_PostNatalExam_FormGroup[0]['modeofdelivery'],
+            DateOfDelivery: this.matHistory_PostNatalExam_FormGroup.value[0]['dateofdelivery'],
+            ModeOfDelivery: this.matHistory_PostNatalExam_FormGroup.value[0]['modeofdelivery'],
             CreatedBy: this.userId
         };
 
@@ -772,7 +773,8 @@ export class PncComponent implements OnInit {
             PatientId: this.patientId,
             PatientMasterVisitId: this.patientMasterVisitId,
             ServiceAreaId: this.serviceAreaId,
-            AppointmentDate: moment(this.diagnosisReferralAppointmentFormGroup.value[2]['nextAppointmentDate']).toDate(),
+            AppointmentDate: this.diagnosisReferralAppointmentFormGroup.value[2]['nextAppointmentDate'] ?
+                moment(this.diagnosisReferralAppointmentFormGroup.value[2]['nextAppointmentDate']).toDate() : null,
             Description: this.diagnosisReferralAppointmentFormGroup.value[2]['remarks'],
             StatusDate: null,
             DifferentiatedCareId: 0,
