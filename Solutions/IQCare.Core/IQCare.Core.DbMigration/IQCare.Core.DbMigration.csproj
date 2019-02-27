@@ -109,8 +109,12 @@
     <None Remove="Scripts\2.0.0\01_SO_IQCare_Version.sql" />
     <None Remove="Scripts\2.0.0\02_DO_AlterView_PatientDeliveryInfo.sql" />
     <None Remove="Scripts\2.0.0\03 pr_Security_UserLogin_Constella.sql" />
+    <None Remove="Scripts\2.0.0\08_DO_AlterTable_PatientDelivery_DropFK_ProfileId.sql" />
     <None Remove="Scripts\2.0.0\08_PatientConsent.sql" />
+    <None Remove="Scripts\2.0.0\09_DO_AlterTable_PatientDelivery_DropColumn_ProfileId.sql" />
     <None Remove="Scripts\2.0.0\09_PersonKinContactsView.sql" />
+    <None Remove="Scripts\2.0.0\10_DO_AlterTable_PatientDelivery_AddColumn_PregnancyId.sql" />
+    <None Remove="Scripts\2.0.0\11_DO_AlterView_PatientDeliveryInfo.sql" />
     <None Remove="Scripts\2.0.0\12_DO_Insert_Clinical_Service_Area.sql" />
     <None Remove="Scripts\2.0.0\12_SO_CreateView_PmtctRefferealView.sql" />
     <None Remove="Scripts\2.0.0\13_SO_CreateView_lnk_FacilityModule.sql" />
@@ -164,6 +168,7 @@
     <None Remove="Scripts\2.0.0\52_DO_AlterView_PatientDeliveryInfo.sql" />
     <None Remove="Scripts\2.0.0\52_PersonListView.sql" />
     <None Remove="Scripts\2.0.0\51_SO_AddPMTCTMotherRegimensLookups.sql" />
+    <None Remove="Scripts\2.0.0\53_DO_AlterViewPatientDeliveryInfo.sql" />
   </ItemGroup>
 
   <ItemGroup>
@@ -288,7 +293,11 @@
     <EmbeddedResource Include="Scripts\1.0.0.9\58_Add_Lookups_ReviewOfSystems.sql" />
     <EmbeddedResource Include="Scripts\2.0.0\02_DO_AlterView_PatientDeliveryInfo.sql" />
     <EmbeddedResource Include="Scripts\2.0.0\03 pr_Security_UserLogin_Constella.sql" />
+    <EmbeddedResource Include="Scripts\2.0.0\08_DO_AlterTable_PatientDelivery_DropFK_ProfileId.sql" />
+    <EmbeddedResource Include="Scripts\2.0.0\09_DO_AlterTable_PatientDelivery_DropColumn_ProfileId.sql" />
     <EmbeddedResource Include="Scripts\2.0.0\09_PersonKinContactsView.sql" />
+    <EmbeddedResource Include="Scripts\2.0.0\10_DO_AlterTable_PatientDelivery_AddColumn_PregnancyId.sql" />
+    <EmbeddedResource Include="Scripts\2.0.0\11_DO_AlterView_PatientDeliveryInfo.sql" />
     <EmbeddedResource Include="Scripts\2.0.0\22_SO_Add_Lookups_ViralLoadSample.sql" />
     <EmbeddedResource Include="Scripts\2.0.0\08_PatientConsent.sql" />
     <EmbeddedResource Include="Scripts\2.0.0\12_DO_Insert_Clinical_Service_Area.sql" />
@@ -341,6 +350,7 @@
     <EmbeddedResource Include="Scripts\2.0.0\52_DO_AlterView_PatientDeliveryInfo.sql" />
     <EmbeddedResource Include="Scripts\2.0.0\52_PersonListView.sql" />
     <EmbeddedResource Include="Scripts\2.0.0\51_SO_AddPMTCTMotherRegimensLookups.sql" />
+    <EmbeddedResource Include="Scripts\2.0.0\53_DO_AlterViewPatientDeliveryInfo.sql" />
   </ItemGroup>
 
   <ItemGroup>

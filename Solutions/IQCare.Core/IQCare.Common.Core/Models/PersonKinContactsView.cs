@@ -25,8 +25,8 @@ namespace IQCare.Common.Core.Models
         public string MobileNo { get; set; }
 
         public bool DeleteFlag { get; set; }
-        public int ConsentType { get; set; }
-        public int ConsentValue { get; set; }
+        public int? ConsentType { get; set; }
+        public int? ConsentValue { get; set; }
         public string Comments { get; set; }
 
         public List<LookupItemView> GenderList;
