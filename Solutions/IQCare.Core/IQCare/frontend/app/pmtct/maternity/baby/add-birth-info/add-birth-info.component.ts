@@ -20,15 +20,14 @@ export class AddBirthInfoComponent implements OnInit {
     deliveryOutcomeOptions: any[] = [];
     yesnoOptions: any[] = [];
     birthOutcomes: any[] = [];
-    babyInfo : any ;
+    babyInfo: any ;
  
 
     @Input() PatientId: number;
     @Input() isEdit: boolean;
     @Input() PatientMasterVisitId: number;
     constructor(private formBuilder: FormBuilder,
-    private maternityService: MaternityService) 
-    {
+    private maternityService: MaternityService) {
         
     }
 
@@ -79,6 +78,7 @@ export class AddBirthInfoComponent implements OnInit {
             apgarScoreOne: this.babyFormGroup.get('agparScore1min').value,
             apgarScoreFive: this.babyFormGroup.get('agparScore5min').value,
             apgarScoreTen: this.babyFormGroup.get('agparScore10min').value,
+            resuscitateStr: this.babyFormGroup.get('resuscitationDone').value.itemName,
             resuscitate: (this.babyFormGroup.get('resuscitationDone').value.itemName == 'Yes') ? true : false,
             deformityStr:  this.babyFormGroup.get('deformity').value.itemName,
             deformity:  (this.babyFormGroup.get('deformity').value.itemName == 'Yes') ? true : false,
@@ -89,6 +89,7 @@ export class AddBirthInfoComponent implements OnInit {
             comment: this.babyFormGroup.get('comment').value,
             notificationNo: this.babyFormGroup.get('notificationNumber').value
         });
+    console.log(this.babyData);
         this.maternityService.updateBabyDataInfo(this.babyData);
 }
 

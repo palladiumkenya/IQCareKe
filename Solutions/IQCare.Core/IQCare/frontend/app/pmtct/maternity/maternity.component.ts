@@ -266,7 +266,7 @@ export class MaternityComponent implements OnInit {
     }
 
     onBabyNotifyData(babyNotifyData: any[]): void {
-        console.log("Baby Notify data " + this.babyNotifyData.length);
+        console.log('Baby Notify data ' + this.babyNotifyData.length);
         this.babyNotifyData.push(babyNotifyData);
     }
 
@@ -753,8 +753,9 @@ export class MaternityComponent implements OnInit {
         const dialogRef = this.dialog.open(AddBabyDialogComponent, dialogConfig);
         dialogRef.afterClosed().subscribe(
             data => {
-                if (!data)
+                if (!data) {
                     return;
+                }
                 console.log(data);
             });
     }
