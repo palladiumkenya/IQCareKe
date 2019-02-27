@@ -678,7 +678,12 @@ export class MaternityComponent implements OnInit {
 
                     } else {
                         this.sendPatientDeliveryInfoRequest(maternityDeliveryCommand, babyConditionInfo);
-                        this.sendVisitDetailsRequest(visitDetailsCommand);
+                        if (this.isEdit) {
+
+                        } else {
+                            this.sendVisitDetailsRequest(visitDetailsCommand);
+                        }
+
 
                         this.zone.run(() => {
                             this.router.navigate(['/dashboard/personhome/' + this.personId], { relativeTo: this.route });
@@ -740,6 +745,7 @@ export class MaternityComponent implements OnInit {
 
             });
     }
+
 
     public AddNewBabyInfo() {
         const dialogConfig = new MatDialogConfig();
