@@ -145,9 +145,11 @@ export class AncHivtestingComponent implements OnInit {
                         this.HivTestingForm.controls.testType.setValue(result['encounter'][0]['encounterType']);
                         const finalTestResult = this.hivFinalResultsOptions.find(
                             obj => obj.itemId == result['encounterResults'][0]['finalResult']);
-                        this.HivTestingForm.get('finalTestResult').setValue(finalTestResult.itemId);
-                        if (finalTestResult.itemName == 'Positive') {
-                            this.HivTestingForm.get('hivTestingDone').disable({ onlySelf: false });
+                        if (finalTestResult) {
+                            this.HivTestingForm.get('finalTestResult').setValue(finalTestResult.itemId);
+                            if (finalTestResult.itemName == 'Positive') {
+                                this.HivTestingForm.get('hivTestingDone').disable({ onlySelf: false });
+                            }
                         }
                     }
                     // console.log(this.historical_hiv_testing_data, 'datasource');

@@ -23,6 +23,8 @@ import { HeiDeliveryEditCommand } from '../_models/HeiDeliveryEditCommand';
 import { HeiFeedingEditCommand } from '../_models/HeiFeedingEditCommand';
 import { PatientAppointmentEditCommand } from '../_models/PatientAppointmentEditCommand';
 import { mergeMap, switchMap, concatMap } from 'rxjs/operators';
+import { RegistrationService } from '../../registration/_services/registration.service';
+import { FamilyPartnerControlsService } from '../../hts/_services/family-partner-controls.service';
 
 @Component({
     selector: 'app-hei',
@@ -101,6 +103,7 @@ export class HeiComponent implements OnInit {
     heiOutcomeFormGroup: FormArray;
     // nextAppointmentFormGroup: FormArray;
     hivTestingFormGroup: any[];
+    motherRelationshipId: number;
 
     constructor(private route: ActivatedRoute,
         private heiService: HeiService,
@@ -108,7 +111,9 @@ export class HeiComponent implements OnInit {
         private zone: NgZone,
         private router: Router,
         private snotifyService: SnotifyService,
-        private notificationService: NotificationService) {
+        private notificationService: NotificationService,
+        private registrationService: RegistrationService,
+        private service: FamilyPartnerControlsService) {
         this.deliveryMatFormGroup = new FormArray([]);
         this.visitDetailsFormGroup = new FormArray([]);
         this.tbAssessmentFormGroup = new FormArray([]);
@@ -125,6 +130,18 @@ export class HeiComponent implements OnInit {
     }
 
     ngOnInit() {
+        this.service.getRelationshipTypes().subscribe(
+            (res) => {
+                const motherOption = ['Mother'];
+                const options = res['lookupItems'];
+                for (let j = 0; j < options.length; j++) {
+                    if (motherOption.includes(options[j].itemName)) {
+                        this.motherRelationshipId = options[j].itemId;
+                    }
+                }
+            }
+        );
+
         this.route.params.subscribe(
             (params) => {
                 const { patientId, personId, serviceAreaId } = params;
@@ -596,6 +613,7 @@ export class HeiComponent implements OnInit {
         const heiOutCome = this.heiService.saveHeiOutCome(heiOutComeCommand);
         const heiUpdateAppointment = this.pncService.updateAppointment(patientAppointmentEditCommand);
         const heiAppoinment = this.pncService.savePncNextAppointment(heiAppointment);
+
         let isAddOrInsertAppointment;
         if (patientAppointmentEditCommand.AppointmentId && patientAppointmentEditCommand.AppointmentId > 0) {
             isAddOrInsertAppointment = heiUpdateAppointment;
@@ -946,6 +964,22 @@ export class HeiComponent implements OnInit {
             UserId: this.userId,
             LabTestResults: []
         };
+
+        if (isMotherRegistered) {
+            const personRelation = {};
+            personRelation['PersonId'] = this.deliveryMatFormGroup.value[1]['motherpersonid'];
+            personRelation['PatientId'] = this.patientId;
+            personRelation['RelationshipTypeId'] = this.motherRelationshipId;
+            personRelation['UserId'] = this.userId;
+
+            const patientAdd = this.registrationService.addPersonRelationship(personRelation);
+            patientAdd.subscribe(
+                (relationshipResult) => {
+                    console.log(relationshipResult);
+                }
+            );
+        }
+
 
         const heiVisitDetails = this.heiService.saveHeiVisitDetails(visitDetailsData);
         const heiDelivery = this.heiService.saveHieDelivery(this.patientId, this.patientMasterVisitId, this.userId,

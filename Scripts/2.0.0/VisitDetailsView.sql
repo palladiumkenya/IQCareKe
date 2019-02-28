@@ -2,6 +2,10 @@ IF OBJECT_ID('dbo.VisitDetailsView', 'V') IS NOT NULL
     DROP VIEW [dbo].[VisitDetailsView]
 GO
 
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
 
 CREATE VIEW  [dbo].[VisitDetailsView]
 AS
@@ -22,3 +26,5 @@ select
   v.CreatedBy
   FROM 
 VisitDetails v
+
+GO
