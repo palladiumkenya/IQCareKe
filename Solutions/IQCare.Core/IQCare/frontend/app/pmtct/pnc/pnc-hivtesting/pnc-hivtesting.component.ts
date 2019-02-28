@@ -119,7 +119,7 @@ export class PncHivtestingComponent implements OnInit, AfterViewInit {
 
         this.pncService.getHivTests(this.patientMasterVisitId, this.patientEncounterId).subscribe(
             (result) => {
-                // console.log(result);
+                console.log(result);
                 if (result && result['encounter'] && result['encounter'].length > 0) {
                     const tests = result['testing'];
                     if (tests.length > 0) {
