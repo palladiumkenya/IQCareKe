@@ -38,7 +38,8 @@ export class MaternalDrugAdministrationComponent implements OnInit {
             StartedHAARTinANC: new FormControl('', [Validators.required]),
             ARVsStartedinMaternity: new FormControl('', [Validators.required]),
             Cotrimoxazole: new FormControl('', [Validators.required]),
-            InfantProvidedWithARVprophylaxis: new FormControl('', [Validators.required])
+            InfantProvidedWithARVprophylaxis: new FormControl('', [Validators.required]),
+            id: new FormControl('')
         });
 
         const {
@@ -61,6 +62,7 @@ export class MaternalDrugAdministrationComponent implements OnInit {
                 this.maternalDrugAdministrationFormGroup.get('ARVsStartedinMaternity').disable({ onlySelf: true });
                 this.maternalDrugAdministrationFormGroup.get('Cotrimoxazole').disable({ onlySelf: true });
                 this.maternalDrugAdministrationFormGroup.get('InfantProvidedWithARVprophylaxis').disable({ onlySelf: true });
+                this.maternalDrugAdministrationFormGroup.get('id').setValue('0');
             } else {
                 this.maternalDrugAdministrationFormGroup.get('VitaminASupplementation').enable({ onlySelf: false });
                 this.maternalDrugAdministrationFormGroup.get('StartedHAARTinANC').enable({ onlySelf: false });
@@ -76,14 +78,14 @@ export class MaternalDrugAdministrationComponent implements OnInit {
 
     private getDrugsAdministered(patientId: any, patientMasterVisitId: any) {
         this.maternityService.getPatientAdministeredDrugs(patientId, patientMasterVisitId).subscribe(res => {
-            res.forEach(data => {
+              res.forEach(data => {
                 const drugName = data.strDrugAdministered.split(' ').join('');
 
-                this.maternalDrugAdministrationFormGroup
-                    .get(drugName)
-                    .setValue(data.value);
-            });
-        }, (err) => {
+                 this.maternalDrugAdministrationFormGroup
+                 .get(drugName)
+                 .setValue(data.value);
+              });
+           }, (err) => {
             console.log(err);
         });
     }
