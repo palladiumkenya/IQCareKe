@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import {ReportSectionSettingComponent} from './report-section-setting/report-section-setting.component';
 import { IndicatorReportingPeriodComponent } from './indicator-reporting-period/indicator-reporting-period.component';
 import { ReportIndicatorResultComponent } from './report-indicator-result/report-indicator-result.component';
 import { ActiveFormReportComponent } from './active-form-report/active-form-report.component'
@@ -19,7 +20,7 @@ const routes: Routes = [
      {
       path: 'indicator/result/:reportingPeriodId',
       component : ReportIndicatorResultComponent,
-      pathMatch :'full'
+      pathMatch : 'full'
     },
     {
         path: 'formdetails/:id/:reportingformid',
@@ -27,6 +28,12 @@ const routes: Routes = [
       resolve: {
           FormDetails: FormDetailResolver
          }
+     },
+     {
+         path: 'sections/:id',
+         component: ReportSectionSettingComponent,
+         pathMatch: 'full'
+
      }
 ];
 

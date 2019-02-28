@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using IQCare.AIR.BusinessProcess.Command;
 using IQCare.AIR.BusinessProcess.Queries;
 using MediatR;
 using Microsoft.AspNetCore.Http;
@@ -43,6 +44,19 @@ namespace IQCare.AIR.Web.Controllers
             return Ok(response.Value);
         }
 
+        [HttpPost]
+        public async Task<IActionResult> EditReportSection([FromBody] ActivateFormSectionCommand command)
+        {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState.Values.Select(x => x.Errors));
+
+            var response = await _mediator.Send(command, HttpContext.RequestAborted);
+
+            if (!response.IsValid)
+                return BadRequest(response);
+
+            return Ok(response.Value);
+        }
 
     }
 }

@@ -10,11 +10,11 @@
             <div class='row'>
                 <div class="col-lg-3 col-md-3 col-sm-3">
                     <mat-form-field>
-                        <input tabindex="5" matInput [matDatepicker]="picker" placeholder="Choose a Reporting Period"
-                            [formControl]="date" formControlName="Period" required>
+                        <input  tabindex="5" matInput readonly [matDatepicker]="picker" placeholder="Choose a Reporting Period"
+                            [formControl]="date" formControlName="Period" required >
                         <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                         <mat-datepicker #picker startView="multi-year" (monthSelected)="monthSelected($event)">
-                        </mat-datepicker>
+                        </mat-datepicker >
                     </mat-form-field>
                 </div>
             </div>

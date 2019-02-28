@@ -1,41 +1,48 @@
-<div class="form-title">
-  <span class="mat-accent">Reporting Periods </span>
+<div class="title ">
+
+    <span class="mat-accent card-container-left">Reporting Periods </span>
+    <a routerLink="sections/{{reportingformid}}" mat-raised-button class="mat-accent card-container-right"> Settings </a>
+
 </div>
+
+
+
 <div class="mat-elevation-z1">
-  <table  mat-table  [dataSource]="reportingPeriodsDataSource">
-      <ng-container matColumnDef="reportName">
-        <th mat-header-cell *matHeaderCellDef> <strong>Report Name</strong> </th>
-        <td mat-cell *matCellDef="let period"> {{period.reportName}} </td>
-      </ng-container>            
-      <ng-container matColumnDef="reportDate">
-        <th mat-header-cell *matHeaderCellDef><strong>Report Date</strong>  </th>
-        <td mat-cell *matCellDef="let period"> {{period.reportDate }} </td>
-      </ng-container>
-    
-      <ng-container matColumnDef="dateCreated">
-        <th mat-header-cell *matHeaderCellDef> <strong> Date Submitted </strong>  </th>
-        <td mat-cell *matCellDef="let period"> {{ period.dateCreated | date: 'dd/MM/yyyy' }} </td>
-      </ng-container>
-    <ng-container matColumnDef="action">
-      <th mat-header-cell *matHeaderCellDef><strong class="fa fa-cog"> Action</strong></th>
-      <td mat-cell *matCellDef="let row">
-          <a routerLink ="indicator/result/{{row.id}}" mat-raised-button class="mat-accent"> View Results </a>
-      </td>
+    <table mat-table [dataSource]="reportingPeriodsDataSource">
+        <ng-container matColumnDef="reportName">
+            <th mat-header-cell *matHeaderCellDef> <strong>Report Name</strong> </th>
+            <td mat-cell *matCellDef="let period"> {{period.reportName}} </td>
+        </ng-container>
+        <ng-container matColumnDef="reportDate">
+            <th mat-header-cell *matHeaderCellDef><strong>Report Date</strong> </th>
+            <td mat-cell *matCellDef="let period"> {{period.reportDate }} </td>
+        </ng-container>
 
-  </ng-container>  
-  <ng-container matColumnDef="edit">
-    <th mat-header-cell *matHeaderCellDef><strong class="fa fa-cog"> Edit</strong></th>
-    <td mat-cell *matCellDef="let row">
-        <a routerLink ="formdetails/{{reportingformid}}/{{row.id}}" mat-raised-button class="mat-accent"> Edit Form </a>
-    </td>
+        <ng-container matColumnDef="dateCreated">
+            <th mat-header-cell *matHeaderCellDef> <strong> Date Submitted </strong> </th>
+            <td mat-cell *matCellDef="let period"> {{ period.dateCreated | date: 'dd/MM/yyyy' }} </td>
+        </ng-container>
+        <ng-container matColumnDef="action">
+            <th mat-header-cell *matHeaderCellDef><strong class="fa fa-cog"> Action</strong></th>
+            <td mat-cell *matCellDef="let row">
+                <a routerLink="indicator/result/{{row.id}}" mat-raised-button class="mat-accent"> View Results </a>
+            </td>
 
-</ng-container>
+        </ng-container>
+        <ng-container matColumnDef="edit">
+            <th mat-header-cell *matHeaderCellDef><strong class="fa fa-cog"> Edit</strong></th>
+            <td mat-cell *matCellDef="let row">
+                <a routerLink="formdetails/{{reportingformid}}/{{row.id}}" mat-raised-button class="mat-accent"> Edit
+                    Form </a>
+            </td>
 
-      <tr mat-header-row *matHeaderRowDef="reporting_period_displaycolumns"></tr>
-      <tr mat-row *matRowDef="let row; columns: reporting_period_displaycolumns;"></tr>
-  </table>
-  <mat-paginator id="paginator" [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
-</div> 
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="reporting_period_displaycolumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: reporting_period_displaycolumns;"></tr>
+    </table>
+    <mat-paginator id="paginator" [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+</div>
 
 <div>
     &nbsp;

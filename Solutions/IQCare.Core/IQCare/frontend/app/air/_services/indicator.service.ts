@@ -25,12 +25,17 @@ export class IndicatorService {
   }
    
 
-  public getReportingPeriodIndicatorResults(reportingPeriodId: any) : Observable<any> {
+  public getReportingPeriodIndicatorResults(reportingPeriodId: any): Observable<any> {
     return this.httpClient.get<any>(this.Air_WebApiUrl + '/api/ReportingForm/GetReportingFormIndicatorResults/'+reportingPeriodId).pipe(
       tap(result => this.errorHandlerService.log('get form indicator results')),
       catchError(this.errorHandlerService.handleError<any[]>('getReportingPeriodIndicatorResults')));
   }
 
+  public  getReportSections(FormId: any): Observable<any>{
+    return this.httpClient.get<any>(this.Air_WebApiUrl + '/api/ReportingForm/GetReportingSections/' + FormId).pipe(
+        tap(result => this.errorHandlerService.log('get form sections')),
+        catchError(this.errorHandlerService.handleError<any[]>('getReportSections')));
+  }
 
 
 

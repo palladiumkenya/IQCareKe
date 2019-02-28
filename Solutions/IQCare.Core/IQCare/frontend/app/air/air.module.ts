@@ -14,7 +14,7 @@ import { IndicatorReportingPeriodComponent } from './indicator-reporting-period/
 import { IndicatorService } from './_services/indicator.service';
 import { IndicatorResultsGridComponent } from './indicator-results-grid/indicator-results-grid.component';
 import {  RouterModule } from '@angular/router'
-
+import { ReportSectionSettingComponent } from './report-section-setting/report-section-setting.component';
 import {
     
   MatAutocompleteModule, MatButtonModule, MatButtonToggleModule,
@@ -27,6 +27,7 @@ import {
   MatSnackBarModule, MatSortModule, MatStepperModule,        // <----- import for date formating(optional)
   MatTableModule, MatTabsModule, MatToolbarModule, MatTooltipModule
 } from '@angular/material';
+
 @NgModule({
 
     imports:[FormsModule, ReactiveFormsModule,RouterModule,AirRoutingModule,
@@ -46,7 +47,8 @@ import {
     IndicatorReportingPeriodComponent,
       IndicatorResultsGridComponent,
       SubSectionFilterPipe,
-      IndicatorFilterPipe
+      IndicatorFilterPipe,
+      ReportSectionSettingComponent
   ],
  
   providers:[

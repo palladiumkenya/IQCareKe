@@ -10,6 +10,7 @@ namespace IQCare.AIR.Core.Domain
         {
             
         }
+        
 
         public int Id { get; private set; }
         public int ReportingFormId { get; set; }
@@ -19,10 +20,18 @@ namespace IQCare.AIR.Core.Domain
         public DateTime DateCreated { get; private set; }
         public DateTime ? DateUpdated { get; private set; }
         public int CreatedBy { get; private set; }
+        public bool DeleteFlag { get; private set; }
         public virtual ReportingForm ReportingForm { get; set; }
         public  virtual  ICollection<ReportSubSection> ReportSubSections { get; set; }
 
+        public void UpdateSection(bool activate)
+        {
+            Active = activate;
+            DateUpdated = DateTime.Now;
         }
+
+
+    }
 
 
 }

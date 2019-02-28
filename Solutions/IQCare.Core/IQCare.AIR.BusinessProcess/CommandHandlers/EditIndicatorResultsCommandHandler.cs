@@ -59,7 +59,8 @@ namespace IQCare.AIR.BusinessProcess.CommandHandlers
 
                 return Task.FromResult(Result<EditIndicatorResponse>.Valid(new EditIndicatorResponse
                 {
-                    Message = $"Indicator results for report periodId{request.ReportingPeriodId} updated succesfully",
+                    Message = $"Indicator results for report periodId:   {request.ReportingPeriodId}  and report month of  {request.ReportingDate.Month} and reporting year of " +
+                    $" {request.ReportingDate.Year} updated succesfully",
                     ReportingPeriodId = request.ReportingPeriodId
                 }));
             }

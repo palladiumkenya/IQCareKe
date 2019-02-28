@@ -2,3 +2,21 @@ table {
     width: 100%;
   }
   
+  .card-container-right{
+    display: inline;
+    float: right;
+  }
+  
+  .card-container-left{
+    display: inline;
+    
+  }
+  .title{
+  display: block;
+  padding: 8px;
+  font-size: 15px;
+  font-weight: 300;
+  color: #262626;
+  margin-bottom: 15px;
+  
+  }

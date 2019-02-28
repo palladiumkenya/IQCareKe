@@ -151,6 +151,8 @@
     <None Remove="Scripts\2.0.0\40_IndicatorData.sql" />
     <None Remove="Scripts\2.0.0\37_HIVPositiveListView.sql" />
     <None Remove="Scripts\2.0.0\41_DO_Create_View_IndicatorResults.sql" />
+    <None Remove="Scripts\2.0.0\42DefaultConstraintsSection.sql" />
+    <None Remove="Scripts\2.0.0\43_UpdateUIDIndicators.sql" />
   </ItemGroup>
 
   <ItemGroup>
@@ -297,6 +299,8 @@
     <EmbeddedResource Include="Scripts\2.0.0\40_IndicatorData.sql" />
     <EmbeddedResource Include="Scripts\2.0.0\37_HIVPositiveListView.sql" />
     <EmbeddedResource Include="Scripts\2.0.0\41_DO_Create_View_IndicatorResults.sql" />
+    <EmbeddedResource Include="Scripts\2.0.0\42DefaultConstraintsSection.sql" />
+    <EmbeddedResource Include="Scripts\2.0.0\43_UpdateUIDIndicators.sql" />
   </ItemGroup>
 
   <ItemGroup>

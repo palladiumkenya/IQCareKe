@@ -40,15 +40,15 @@ export class ReportIndicatorResultComponent implements OnInit {
    // console.log(messag
   }
 
-    private getReportingPeriodIndicatorResults(periodId: any){
-        this.indicatorService.getReportingPeriodIndicatorResults(periodId).subscribe(result=>{           
+    private getReportingPeriodIndicatorResults(periodId: any) {
+        this.indicatorService.getReportingPeriodIndicatorResults(periodId).subscribe(result => {           
             this.reportSections = result.reportSections;
             this.reportDate = result.strReportDate;
             this.reportName = result.reportName;
-        },(err)=>{
+        }, (err) => {
            console.log(' An error occured while fetching reporting period results: '+ err);
              this.errorMessage = err;
-        })   
+        });   
     }
 
 }
