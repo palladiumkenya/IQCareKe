@@ -310,6 +310,7 @@ BEGIN
 INSERT INTO [dbo].[Indicator](SubSectionId,IndicatorName,Code,DataTypeId,CreateDate,DeleteFlag,CreatedBy)
 VALUES((select Id  from [dbo].[SubSection] where SubSectionName='Post-Exposure Prophylaxis(PEP)'),'PEP Occupational','HV05-04'
 ,(select Id from [dbo].[DataType] where [Name]='Numeric'),GETDATE(),'0','1')
+
 END
 
 
@@ -318,6 +319,7 @@ END
 
 IF NOT EXISTS(select * from [dbo].[Indicator] where IndicatorName='PEP Other'  and Code='HV05-05')
 BEGIN
+
 INSERT INTO [dbo].[Indicator](SubSectionId,IndicatorName,Code,DataTypeId,CreateDate,DeleteFlag,CreatedBy)
 VALUES((select Id  from [dbo].[SubSection] where SubSectionName='Post-Exposure Prophylaxis(PEP)'),'PEP Other','HV05-05'
 ,(select Id from [dbo].[DataType] where [Name]='Numeric'),GETDATE(),'0','1')
@@ -325,11 +327,15 @@ END
 
 
 
+
+
 IF NOT EXISTS(select * from [dbo].[Indicator] where IndicatorName='PEP Total'  and Code='(Sum HV05-01 to HV05-05)HV05-06')
 BEGIN
+
 INSERT INTO [dbo].[Indicator](SubSectionId,IndicatorName,Code,DataTypeId,CreateDate,DeleteFlag,CreatedBy)
 VALUES((select Id  from [dbo].[SubSection] where SubSectionName='Post-Exposure Prophylaxis(PEP)'),'PEP Total','(Sum HV05-01 to HV05-05)HV05-06'
 ,(select Id from [dbo].[DataType] where [Name]='Numeric'),GETDATE(),'0','1')
+
 END
 
 

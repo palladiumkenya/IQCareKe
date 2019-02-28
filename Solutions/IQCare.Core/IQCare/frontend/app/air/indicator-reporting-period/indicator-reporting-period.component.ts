@@ -9,7 +9,7 @@ import { MatTableDataSource, MatPaginator } from '@angular/material';
 })
 export class IndicatorReportingPeriodComponent implements OnInit {
   
-  reporting_period_displaycolumns : any[] = ['reportName','reportDate','dateCreated','action','edit']
+  reporting_period_displaycolumns : any[] = ['reportName', 'reportDate', 'dateCreated', 'action', 'edit']
   reportingPeriods : any[] = [];
  reportingformid:number;
 
@@ -24,6 +24,7 @@ export class IndicatorReportingPeriodComponent implements OnInit {
     this.getReportingPeriods();
   }
   
+ 
 
   private getReportingPeriods() {
       this.indicatorService.getFormIndicatorReportingPeriods().subscribe(r=>
@@ -45,7 +46,7 @@ export class IndicatorReportingPeriodComponent implements OnInit {
       
           this.reportingPeriodsDataSource = new MatTableDataSource(this.reportingPeriods);
           this.reportingPeriodsDataSource.paginator = this.paginator;
-      },(error)=>{
+      },(error)=> {
 
         console.log("An error occured while fetching reporting periods " + error);
       })

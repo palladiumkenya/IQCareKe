@@ -10,7 +10,7 @@ import { Section, Form, SubSection, FormResults } from '../_model/Sectionidentif
 import { AbstractControl, FormBuilder, FormControl, FormGroup, Validators, FormArray } from '@angular/forms';
 import * as _ from 'lodash';
 import * as moment from 'moment';
-import {FormDetailsService} from '../_services/formdetails.service';
+import { FormDetailsService } from '../_services/formdetails.service';
 import { NgxSpinnerService } from 'ngx-spinner';
 
 
@@ -32,7 +32,7 @@ export class ActiveFormReportComponent implements OnInit {
     Sections: Section[];
     Forms: Form[];
     total: number;
-    IndicatorResults:any[];
+    IndicatorResults: any[];
     SubSections: SubSection[] = [];
     FormItems: [] = [];
     ControlType: string;
@@ -47,15 +47,16 @@ export class ActiveFormReportComponent implements OnInit {
     numericnumber: number;
     resultvalue: string;
     ReportingFormId: number;
-    existing:[]
+    existing: [];
+    existingperiod: [];
     constructor(private route: ActivatedRoute,
         private formBuilder: FormBuilder,
         private snotifyService: SnotifyService,
         private notificationService: NotificationService,
-        private formdetailservice:FormDetailsService,
+        private formdetailservice: FormDetailsService,
         public zone: NgZone,
         private router: Router,
-        private spinner: NgxSpinnerService ) {
+        private spinner: NgxSpinnerService) {
         this.Forms = [];
         this.ExistingData = [];
         this.Sections = [];
@@ -70,11 +71,11 @@ export class ActiveFormReportComponent implements OnInit {
         this.filterSubSection = [];
         this.total = 0;
         this.filtervalue = false;
-        this.IndicatorResults=[];
-        this.existing=[];
-        
-        //this.indicators=new FormArray([]);
-        //const controls=this.IndicatorQuestions.map(c=>new FormControl(false));
+        this.IndicatorResults = [];
+        this.existing = [];
+        this.existingperiod = [];
+
+
 
     }
     monthSelected(params) {
@@ -98,7 +99,7 @@ export class ActiveFormReportComponent implements OnInit {
             this.ReportingFormId = params['reportingformid'];
 
         });
-       
+
         let Form = {
             FormId: this.FormItems['id'],
             FormName: this.FormItems['name']
@@ -162,7 +163,7 @@ export class ActiveFormReportComponent implements OnInit {
                         SubSectionId: this.FormItems['reportSections'][i]['reportSubSections'][t].id,
                         code: this.FormItems["reportSections"][i]['reportSubSections'][t]['indicators'][r].code,
                         key: this.ItemKey,
-                        Id:this.FormItems["reportSections"][i]['reportSubSections'][t]['indicators'][r].id,
+                        Id: this.FormItems["reportSections"][i]['reportSubSections'][t]['indicators'][r].id,
                         //this.FormItems["reportSections"][i]['reportSubSections'][t]['indicators'][r].id,
                         label: this.FormItems["reportSections"][i]['reportSubSections'][t]['indicators'][r].name,
                         required: true,
@@ -178,9 +179,9 @@ export class ActiveFormReportComponent implements OnInit {
 
 
         }
-         
-     
-    
+
+
+
         console.log("Section identificatioon");
         console.log(this.Sections);
         console.log("SubSection identificatioon");
@@ -198,68 +199,79 @@ export class ActiveFormReportComponent implements OnInit {
 
             Period: new FormControl(this.FormResults.Period, [Validators.required])
         });
-
+        if (this.ReportingFormId > 0) {
+          
+           /*  this.picker.disable({onlySelf: true});
+            this.formGroup.controls.Period.enable({
+                onlySelf: false
+            });
+       */
+           
+      this.formGroup.controls.Period.disable();
+      
+        }
+        else {
+        this.formGroup.controls.Period.enable();
+            /* this.formGroup.controls.Period.enable({
+                onlySelf: true
+            });
+            */
+        }
 
         console.log(this.formGroup);
 
-       
-}   
-    GetFormData()
-    {
-        if (this.ReportingFormId > 0)
-        {
-            
+
+    }
+    GetFormData() {
+        if (this.ReportingFormId > 0) {
+
             this.formdetailservice.getFormdata(this.ReportingFormId).subscribe(res => {
 
                 console.log(res);
-           
-               this.ExistingData = res;
 
-               console.log("existingdata");
-               console.log(this.ExistingData['reportingValues'][0]['resultNumeric']);
-               this.date.setValue(moment(this.ExistingData['reportingValues'][0]['reportDate']).toDate());
+                this.ExistingData = res;
 
-            
-            this.FormResults.Period = moment(moment(this.ExistingData['reportingValues'][0]['reportDate']).format('DD-MMM-YYYY')).toDate();
-              
-       if(this.ExistingData['reportingValues'].length > 0)
-       {
-         for(let i = 0 ; i < this.ExistingData['reportingValues'].length;i++)
-          {
-              
-             
-              var Indicator = this.ExistingData['reportingValues'][i]['indicatorId'].toString();
-               var numvalue = this.ExistingData['reportingValues'][i]['resultNumeric'].toString();
-               var text = this.ExistingData['reportingValues'][i]['resultText'].toString();
-              
+                console.log("existingdata");
+                console.log(this.ExistingData['reportingValues'][0]['resultNumeric']);
+                this.date.setValue(moment(this.ExistingData['reportingValues'][0]['reportDate']).toDate());
 
-              for (let t = 0; t < this.IndicatorQuestions.length; t++) {
-             
-                var  Identification = this.IndicatorQuestions[t].Id.toString();
-                var  control = this.IndicatorQuestions[t].controlType.toString();
-                if (Identification === Indicator)  {
-                    if (control.toLowerCase() == 'number')
-                    {
-                        this.IndicatorQuestions[t].value = numvalue;
-                      //  this.formGroup.controls.IndicatorQuestions.value[].value = numvalue;
-                        console.log('ValueChanged');
-                        console.log(this.IndicatorQuestions[t].value);
+
+                this.FormResults.Period = moment(moment(this.ExistingData['reportingValues'][0]['reportDate']).format('DD-MMM-YYYY')).toDate();
+
+                if (this.ExistingData['reportingValues'].length > 0) {
+                    for (let i = 0; i < this.ExistingData['reportingValues'].length; i++) {
+
+
+                        var Indicator = this.ExistingData['reportingValues'][i]['indicatorId'].toString();
+                        var numvalue = this.ExistingData['reportingValues'][i]['resultNumeric'].toString();
+                        var text = this.ExistingData['reportingValues'][i]['resultText'].toString();
+
+
+                        for (let t = 0; t < this.IndicatorQuestions.length; t++) {
+
+                            var Identification = this.IndicatorQuestions[t].Id.toString();
+                            var control = this.IndicatorQuestions[t].controlType.toString();
+                            if (Identification === Indicator) {
+                                if (control.toLowerCase() == 'number') {
+                                    this.IndicatorQuestions[t].value = numvalue;
+                                    //  this.formGroup.controls.IndicatorQuestions.value[].value = numvalue;
+                                    console.log('ValueChanged');
+                                    console.log(this.IndicatorQuestions[t].value);
+                                }
+                                else if (control.toLowerCase() == 'text') {
+                                    console.log('ValueChanged');
+                                    //this.formGroup.controls.IndicatorQuestions.value[index].value = text;
+                                    console.log(this.IndicatorQuestions[t].value);
+                                    this.IndicatorQuestions[t].value = text;
+                                }
+                            }
+                        }
+
                     }
-                    else if (control.toLowerCase() == 'text')
-                    {
-                        console.log('ValueChanged');
-                        //this.formGroup.controls.IndicatorQuestions.value[index].value = text;
-                        console.log(this.IndicatorQuestions[t].value);
-                        this.IndicatorQuestions[t].value = text;
-                    }
-                  }
+
+
                 }
-               
-           }
-              
-
-        } 
-              // console.log(res.resultNumeric);
+                // console.log(res.resultNumeric);
 
             });
 
@@ -267,7 +279,7 @@ export class ActiveFormReportComponent implements OnInit {
         }
 
 
-    
+
 
     }
 
@@ -295,11 +307,10 @@ export class ActiveFormReportComponent implements OnInit {
         let val = $event.target.value;
         let index = -1;
 
-      
-        const element = document.getElementById(codeId)  ;
-        if(element != undefined)
-        {
-        element.remove();
+
+        const element = document.getElementById(codeId);
+        if (element != undefined) {
+            element.remove();
         }
         for (let i = 0; i < this.IndicatorQuestions.length; i++) {
             const code = this.IndicatorQuestions[i].code.toString();
@@ -343,15 +354,16 @@ export class ActiveFormReportComponent implements OnInit {
 
                 for (let i = 0; i < this.filteritems.length; i++) {
                     const filterlabel = this.filteritems[i]['label'].toString();
-                    if (filterlabel !== 'Total Assessed for HIV Risk' && filterlabel !== 'Self Testing Total' && filterlabel !== 'Circumcised Total' && filterlabel !== 'PEP Total') {
-                        const value = this.filteritems[i].value.toString();
-                        if (value == '')
-                        {
-                            this.total += 0;
+                    const CircumcisedCode = ['Circumcised HIV+', 'Circumcised HIV-', 'Circumcised_HIV NK'];
+                    if (!CircumcisedCode.includes(filterlabel)) {
+                        if (filterlabel !== 'Total Assessed for HIV Risk' && filterlabel !== 'Self Testing Total' && filterlabel !== 'Circumcised Total' && filterlabel !== 'PEP Total') {
+                            const value = this.filteritems[i].value.toString();
+                            if (value == '') {
+                                this.total += 0;
+                            }
+                            else { this.total += parseInt(this.filteritems[i].value, 10); }
                         }
-                        else { this.total += parseInt(this.filteritems[i].value, 10); }
                     }
-
 
                 }
 
@@ -373,10 +385,9 @@ export class ActiveFormReportComponent implements OnInit {
                     const code = this.IndicatorQuestions[i].label.toString();
                     if (code === Indicatorlabel) {
                         this.IndicatorQuestions[i].value = this.total.toString();
-                        const codeValue = document.getElementById(this.IndicatorQuestions[i].code.toString()) ;
-                        if(codeValue !=undefined)
-                        {
-                        codeValue.remove();
+                        const codeValue = document.getElementById(this.IndicatorQuestions[i].code.toString());
+                        if (codeValue != undefined) {
+                            codeValue.remove();
                         }
                     }
                 }
@@ -391,10 +402,9 @@ export class ActiveFormReportComponent implements OnInit {
                     const code = this.IndicatorQuestions[i].label.toString();
                     if (code === Indicatorlabel) {
                         this.IndicatorQuestions[i].value = this.total.toString();
-                        const codeValue = document.getElementById(this.IndicatorQuestions[i].code.toString()) ;
-                        if(codeValue !=undefined)
-                        {
-                        codeValue.remove();
+                        const codeValue = document.getElementById(this.IndicatorQuestions[i].code.toString());
+                        if (codeValue != undefined) {
+                            codeValue.remove();
                         }
                     }
                 }
@@ -403,20 +413,27 @@ export class ActiveFormReportComponent implements OnInit {
             if (SubSectionNameId === "Number Circumcised") {
                 const element = document.getElementById('Number Circumcised_(Sum HV04-01 to HV04-06)HV04-07_32') as HTMLInputElement;
                 element.value = this.total.toString();
-                const Indicatorlabel = 'Circumcised Total'
+
+                const Indicatorlabel = 'Circumcised Total';
+
+
                 for (let i = 0; i < this.IndicatorQuestions.length; i++) {
                     const code = this.IndicatorQuestions[i].label.toString();
                     if (code === Indicatorlabel) {
-                        this.IndicatorQuestions[i].value = this.total.toString();
-                        const codeValue = document.getElementById(this.IndicatorQuestions[i].code.toString()) ;
-                        if(codeValue !=undefined)
-                        {
-                        codeValue.remove();
-                        }
-                    }
-                }
 
+                        this.IndicatorQuestions[i].value = this.total.toString();
+                        const codeValue = document.getElementById(this.IndicatorQuestions[i].code.toString());
+                        if (codeValue != undefined) {
+                            codeValue.remove();
+                        }
+
+                    }
+
+
+
+                }
             }
+
             if (SubSectionNameId === "Post-Exposure Prophylaxis(PEP)") {
                 const element = document.getElementById('Post-Exposure Prophylaxis(PEP)_(Sum HV05-01 to HV05-05)HV05-06_20') as HTMLInputElement;
                 element.value = this.total.toString();
@@ -425,10 +442,9 @@ export class ActiveFormReportComponent implements OnInit {
                     const code = this.IndicatorQuestions[i].label.toString();
                     if (code === Indicatorlabel) {
                         this.IndicatorQuestions[i].value = this.total.toString();
-                        const codeValue = document.getElementById(this.IndicatorQuestions[i].code.toString()) ;
-                        if(codeValue !=undefined)
-                        {
-                        codeValue.remove();
+                        const codeValue = document.getElementById(this.IndicatorQuestions[i].code.toString());
+                        if (codeValue != undefined) {
+                            codeValue.remove();
                         }
                     }
                 }
@@ -437,10 +453,11 @@ export class ActiveFormReportComponent implements OnInit {
 
         }
 
-
-
-
     }
+
+
+
+
     isNumberKey($evt) {
         const charCode = ($evt.which) ? $evt.which : $evt.keyCode
         if (charCode > 31 && (charCode < 48 || charCode > 57)) {
@@ -449,119 +466,171 @@ export class ActiveFormReportComponent implements OnInit {
 
         return true;
     }
-  close()
-  {
-    this.zone.run(() => {
-        this.router.navigate(['/air/'],
-            { relativeTo: this.route });
-    });
-   // console.log(messag
-  }
+    close() {
+        this.zone.run(() => {
+            this.router.navigate(['/air/'],
+                { relativeTo: this.route });
+        });
+        // console.log(messag
+    }
 
     submitResult() {
         let returnvalue = false;
         let valuevalidation = false;
         for (let i = 0; i < this.IndicatorQuestions.length; i++) {
             const val = this.IndicatorQuestions[i].value.toString();
-            if ( val == '') {
-                console.log(this.IndicatorQuestions[i].code.toString()); 
+            if (val == '') {
+                console.log(this.IndicatorQuestions[i].code.toString());
                 const code = this.IndicatorQuestions[i].code.toString();
-                const element = document.getElementById(code) ;
-                
+                const element = document.getElementById(code);
+
                 element.innerHTML = "<span style='color:red;'>Required</span>";
                 returnvalue = true;
                 valuevalidation = true;
             }
         }
 
-        if(valuevalidation==true)
-        {
+        if (valuevalidation == true) {
             this.snotifyService.error('Kindly note the all values of the indicator  are required ', 'Indicators',
-            this.notificationService.getConfig());
+                this.notificationService.getConfig());
         }
         if (this.FormResults.Period == undefined) {
             this.snotifyService.error('Kindly note the monthly period is required ', 'Monthly Period',
                 this.notificationService.getConfig());
             returnvalue = true;
         }
-        
+
         /// return returnvalue;
-          
 
-         if(returnvalue == true)
-         {
-             return;
-         }
-         else { 
-           const reportingDate = moment(this.FormResults.Period).format('DD-MMM-YYYY').toString();
-           const reportingFormId = this.Forms[0].FormId; 
-           const createdby = parseInt(localStorage.getItem('appUserId'));
-        
 
-            for (let i = 0; i < this.IndicatorQuestions.length; i++) { 
-           ///  if(this.IndicatorQuestions[i].ControlType=)
-           const controltype = this.IndicatorQuestions[i].controlType.toString();
-           
-           if (controltype == 'number')
-           {
-           this.numericnumber = parseInt(this.IndicatorQuestions[i].value.toString())
-           this.resultvalue = "";
-           
-           }
-           else if  (controltype == 'Text')
-           { 
-            this.resultvalue = this.IndicatorQuestions[i].value.toString()
-            this.numericnumber = 0;
-          }
-         
-          
-            this.IndicatorResults.push({
-                'Id': this.IndicatorQuestions[i].Id,
-                'ResultText': this.resultvalue,
-                'ResultNumeric': this.numericnumber
-            });
+        if (returnvalue == true) {
+            return;
         }
-            this.spinner.show();
-               console.log("IndicatorResults");
-               console.log(this.IndicatorResults);
-            this.formdetailservice.submitIndicatorResults(reportingDate,reportingFormId,createdby,this.IndicatorResults).subscribe(
-                (response) => {
-                console.log(response);
-               // const message = response;
-                console.log(response['message']);
-                console.log(response['reportingFormId']);
-                console.log(response.message);
-                console.log(response.reportingFormId);
-                this.zone.run(() => {
-                    this.router.navigate(['/air/'],
-                        { relativeTo: this.route });
-                });
-               // console.log(message['Message']);
-               // console.log(message('ReportingFormId'));
-               this.snotifyService.success(response.message, 'Submit Indicator Results',
-               this.notificationService.getConfig());
-                },
-                (error) => {
-                this.snotifyService.error('Error submitting Indicator Results ' + error, 'Submit Indicator Results',
-                    this.notificationService.getConfig());
-                    this.spinner.hide();
+        else {
+            const reportingDate = moment(this.FormResults.Period).format('DD-MMM-YYYY').toString();
+            const reportingFormId = this.Forms[0].FormId;
+            const createdby = parseInt(localStorage.getItem('appUserId'));
 
-                },
-                
-                () => {
-                this.spinner.hide();
+
+            for (let i = 0; i < this.IndicatorQuestions.length; i++) {
+                ///  if(this.IndicatorQuestions[i].ControlType=)
+                const controltype = this.IndicatorQuestions[i].controlType.toString();
+
+                if (controltype == 'number') {
+                    this.numericnumber = parseInt(this.IndicatorQuestions[i].value.toString())
+                    this.resultvalue = "";
+
                 }
-            );
+                else if (controltype == 'Text') {
+                    this.resultvalue = this.IndicatorQuestions[i].value.toString()
+                    this.numericnumber = 0;
+                }
 
 
+                this.IndicatorResults.push({
+                    'Id': this.IndicatorQuestions[i].Id,
+                    'ResultText': this.resultvalue,
+                    'ResultNumeric': this.numericnumber
+                });
+            }
+            this.spinner.show();
+            console.log("IndicatorResults");
+
+            console.log(this.IndicatorResults);
+            if (this.ReportingFormId > 0) {
+
+                this.formdetailservice.EditIndicatorResults(reportingDate
+                    , reportingFormId, this.ReportingFormId, createdby, this.IndicatorResults).subscribe(
+                        (response) => {
+                            this.zone.run(() => {
+                                this.router.navigate(['/air/'],
+                                    { relativeTo: this.route });
+                            });
+                            // console.log(message['Message']);
+                            // console.log(message('ReportingFormId'));
+                            this.snotifyService.success(response.message, 'Edited Indicator Results',
+                                this.notificationService.getConfig());
+                        },
+                        (error) => {
+                            // JSON.stringify(Indata), httpOptions
+                            this.snotifyService.error('Error  Editing Indicator Results ' + error, 'Edit',
+                            this.notificationService.getConfig());
+                        this.spinner.hide();
+                        },
+
+                        () => {
+                            this.spinner.hide();
+
+                        });
+
+
+            } else {
+                this.formdetailservice.checkIfPeriodExists(reportingDate).subscribe(
+                    (response) => {
+                        console.log(response['message']);
+                        console.log(response['period']);
+                        this.existingperiod = response['period'];
+                        if (this.existingperiod.length > 0) {
+                            this.snotifyService.error('Kindly note the period already exists choose another reporting period ', 'ExistingPeriod',
+                            this.notificationService.getConfig());
+                            
         
+                            this.spinner.hide();
+                            return;
+                            
+                        
+                        } else {
+                            this.spinner.show();
+                            this.formdetailservice.submitIndicatorResults(reportingDate, reportingFormId, createdby, this.IndicatorResults).subscribe(
+                                (response) => {
+                                    console.log(response);
+                                    // const message = response;
+                                    console.log(response['message']);
+                                    console.log(response['reportingFormId']);
+                                    console.log(response.message);
+                                    console.log(response.reportingFormId);
+                                    this.zone.run(() => {
+                                        this.router.navigate(['/air/'],
+                                            { relativeTo: this.route });
+                                    });
+                                    // console.log(message['Message']);
+                                    // console.log(message('ReportingFormId'));
+                                    this.snotifyService.success(response.message, 'Submit Indicator Results',
+                                        this.notificationService.getConfig());
+                                },
+                                (error) => {
+                                    this.snotifyService.error('Error submitting Indicator Results ' + error, 'Submit Indicator Results',
+                                        this.notificationService.getConfig());
+                                    this.spinner.hide();
+        
+                                },
+        
+                                () => {
+                                    this.spinner.hide();
+                                }
+                            );
+                        }
+                
+                    },
+                    (error) => {
+                        this.snotifyService.error('Error checking reporting period ' + error, 'Checking if Reporting Period Exists',
+                            this.notificationService.getConfig());
+                        this.spinner.hide();
+                    },
+                    () => {
+                        this.spinner.hide();
+                    }
+                );
+                
+            }
+
         }
-        
-    
-    }
-        // console.log(this.formGroup);
 
-    
+
+    }
+    // console.log(this.formGroup);
+
+
 }
 
 

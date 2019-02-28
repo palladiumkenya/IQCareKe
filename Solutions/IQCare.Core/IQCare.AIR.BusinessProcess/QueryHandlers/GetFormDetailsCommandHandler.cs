@@ -68,7 +68,7 @@ namespace IQCare.AIR.BusinessProcess.QueryHandlers
             if (sections == null || !sections.Any())
                 return new List<ReportSectionViewModel>();
 
-            return sections.Select(x => new ReportSectionViewModel()
+            return sections.Where(x=>x.DeleteFlag==false && x.Active==true).Select(x => new ReportSectionViewModel()
             {
                 Id = x.Id,
                 DateCreated = x.DateCreated,
