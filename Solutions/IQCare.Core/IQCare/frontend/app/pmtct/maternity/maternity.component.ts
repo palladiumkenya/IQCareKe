@@ -1,5 +1,5 @@
 import { AncService } from './../_services/anc.service';
-import { Component, OnInit, NgZone } from '@angular/core';
+import { Component, OnInit, NgZone, ViewChild } from '@angular/core';
 import { FormArray, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { LookupItemView } from '../../shared/_models/LookupItemView';
@@ -27,7 +27,7 @@ import { HivTestsCommand } from '../_models/HivTestsCommand';
 import * as moment from 'moment';
 import { VisitDetailsCommand } from '../_models/visit-details-command';
 import { VisitDetailsService } from '../_services/visit-details.service';
-import { MatDialogConfig, MatDialog } from '@angular/material';
+import { MatDialogConfig, MatDialog, MatStepper } from '@angular/material';
 import { AddBirthInfoComponent } from './baby/add-birth-info/add-birth-info.component';
 import { AddBabyDialogComponent } from './baby/add-baby-dialog/add-baby-dialog.component';
 
@@ -73,6 +73,7 @@ export class MaternityComponent implements OnInit {
     pregnancyId: number = 0;
     deliveryId: number;
 
+    addedBabyDetails : any[] = [];
 
     deliveryModeOptions: LookupItemView[] = [];
     bloodLossOptions: LookupItemView[] = [];
@@ -130,6 +131,10 @@ export class MaternityComponent implements OnInit {
                 this.hivTestEntryPoint = res['itemId'];
             }
         );
+
+        this.matService.currentBabyData.subscribe(data=>{
+            this.addedBabyDetails = data;
+        })
 
         this.route.params.subscribe(
             (params) => {
@@ -750,6 +755,27 @@ export class MaternityComponent implements OnInit {
             }, () => {
 
             });
+    }
+
+
+
+   
+//@ViewChild('stepper') stepper : MatStepper;
+
+    babyDetailsValid : boolean = true;
+    public validateBabyDetails(stepper : MatStepper)
+    {
+        if(!this.isEdit && this.addedBabyDetails.length == 0)
+           this.babyDetailsValid = false;
+         else
+            this.babyDetailsValid = true;
+
+        if(this.babyDetailsValid)
+         stepper.next()
+         else
+         this.snotifyService.error('Please fill in the baby section before proceeding','Baby Section',this.notificationService.getConfig());
+
+        console.log("MAt stpper clicked " + this.babyDetailsValid)
     }
 
 
