@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using AutoMapper;
 using IQCare.Common.BusinessProcess.Commands.Allergies;
 using IQCare.Common.Core.Models;
@@ -10,6 +11,7 @@ using Serilog;
 using System.Threading;
 using System.Threading.Tasks;
 using IQCare.Common.BusinessProcess.Commands.Appointment;
+using Microsoft.EntityFrameworkCore;
 
 namespace IQCare.Common.BusinessProcess.CommandHandlers.Appointment
 {
@@ -28,6 +30,7 @@ namespace IQCare.Common.BusinessProcess.CommandHandlers.Appointment
             try
             {
                 var patientAppoitment = _commontUnitOfWork.Repository<Api_PatientAppointmentsView>().Get(x => x.PatientId == request.PatientId);
+                patientAppoitment.ToList().ForEach(item => item.ConvertToDate());
                 var patientAppointmentViewModel = _mapper.Map<List<PatientAppointmentMethodViewModel>>(patientAppoitment);
                 return Task.FromResult(Result<List<PatientAppointmentMethodViewModel>>.Valid(patientAppointmentViewModel));
             }

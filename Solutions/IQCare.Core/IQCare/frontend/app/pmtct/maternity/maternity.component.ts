@@ -342,6 +342,12 @@ export class MaternityComponent implements OnInit {
     }
 
     onSubmit() {
+        if (!this.dischargeFormGroup.valid) {
+            this.snotifyService.error('Complete the highlighted fields before submitting', 'Maternity Encounter',
+                this.notificationService.getConfig());
+            return;
+        }
+
         const visitDetailsCommand = {
             PatientId: parseInt(this.patientId.toString(), 10),
             ServiceAreaId: parseInt(this.serviceAreaId.toString(), 10),

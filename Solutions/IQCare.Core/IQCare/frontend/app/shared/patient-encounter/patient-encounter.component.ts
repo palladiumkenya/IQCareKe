@@ -1,3 +1,4 @@
+import { RecordsService } from './../../records/_services/records.service';
 import { Component, NgZone, OnInit, ViewChild } from '@angular/core';
 import { MatDialog, MatDialogConfig, MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
 import { Subscription } from 'rxjs/index';
@@ -36,6 +37,8 @@ export class PatientEncounterComponent implements OnInit {
     displayedColumns = ['Id', 'PatientId', 'visitNumber', 'EncounterStartTime', 'EncounterEndTime', 'Encounter', 'edit'];
     dataSource = new MatTableDataSource(this.encounterDataTable);
 
+    enrollmentDate: Date;
+
     constructor(private dialog: MatDialog,
         private route: ActivatedRoute,
         public zone: NgZone,
@@ -43,7 +46,8 @@ export class PatientEncounterComponent implements OnInit {
         private snotifyService: SnotifyService,
         private notificationService: NotificationService,
         private lookupItemService: LookupItemService,
-        private encounterService: EncounterService) {
+        private encounterService: EncounterService,
+        private recordsService: RecordsService) {
 
     }
 
@@ -59,6 +63,15 @@ export class PatientEncounterComponent implements OnInit {
 
         const encounterName = this.serviceName.toLowerCase() + '-encounter';
         this.getLookupItems('EncounterType', this.encounterTypes, '' + encounterName + '');
+
+        this.recordsService.personEnrollmentDetails(this.personId, this.serviceAreaId).subscribe(
+            (res) => {
+                const patientLookup = res['patientLookup'];
+                if (patientLookup.length > 0) {
+                    this.enrollmentDate = patientLookup[0]['enrollmentDate'];
+                }
+            }
+        );
     }
 
     matCheckIn() {
@@ -67,8 +80,8 @@ export class PatientEncounterComponent implements OnInit {
         dialogConfig.autoFocus = true;
 
         dialogConfig.data = {
-            section: '' + this.serviceName.toLowerCase() + ''
-
+            section: '' + this.serviceName.toLowerCase() + '',
+            'enrollmentDate': this.enrollmentDate
         };
         const dialogRef = this.dialog.open(CheckinComponent, dialogConfig);
 

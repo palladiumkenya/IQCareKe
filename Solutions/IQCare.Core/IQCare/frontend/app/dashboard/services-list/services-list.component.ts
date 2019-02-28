@@ -42,6 +42,7 @@ export class ServicesListComponent implements OnInit {
     }
 
     ngOnInit() {
+        console.log(this.person);
         this.getPersonEnrolledServices(this.personId);
     }
 
