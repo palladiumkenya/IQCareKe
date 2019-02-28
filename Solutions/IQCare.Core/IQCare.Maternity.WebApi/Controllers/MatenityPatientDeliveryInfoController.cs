@@ -149,6 +149,21 @@ namespace IQCare.Maternity.WebApi.Controllers
             return BadRequest(response);
         }
 
+        [HttpPost]
+        public async Task<object> UpdatePatientDischargeInfo([FromBody] UpdatePatientDischargeCommand command)
+        {
+            if (!ModelState.IsValid)
+                return BadRequest(command);
+
+            var response = await _mediator.Send(command, HttpContext.RequestAborted);
+
+            if (response.IsValid)
+                return Ok(response.Value);
+
+            return BadRequest(response);
+        }
+
+
         [HttpGet("{Id}")]
         public async Task<object> GetDischargeInfoByMasterVisitId(int id)
         {
@@ -158,5 +173,7 @@ namespace IQCare.Maternity.WebApi.Controllers
             return BadRequest(response);
 
         }
+
+
     }
 }

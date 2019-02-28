@@ -12,6 +12,7 @@ namespace IQCare.Maternity.BusinessProcess.MapperProfiles
         public PatientDeliveryProfile()
         {
             CreateMap<AddMaternalPatientDeliveryInfoCommand, PatientDeliveryInformation>()
+                .ForMember(dest=>dest.TimeOfDelivery,src=>src.MapFrom(x=>x.DateOfDelivery.TimeOfDay))
                 .ForMember(dest => dest.CreateDate, src => src.MapFrom(x => DateTime.Now))
                 .ForMember(dest => dest.DeleteFlag, src => src.MapFrom(x => false))
                 .ReverseMap();

@@ -8,3 +8,11 @@ export interface PartnerTestingCommand {
     DeleteFlag: boolean;
     AuditData: string;
 }
+
+
+export interface UpdatePatientPartnerTestingCommand
+{
+    Id : number;
+    PartnerTested: number;
+    PartnerHIVResult: number;
+}

@@ -10,3 +10,10 @@ export interface NextAppointmentCommand {
     AppointmentReason?: string;
     CreatedBy?: number;
 }
+
+export interface EditAppointmentCommand
+{
+    AppointmentId : number;
+    AppointmentDate: Date;
+    Description?: string;
+}

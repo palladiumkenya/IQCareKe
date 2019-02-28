@@ -6,3 +6,9 @@ export interface DiagnosisCommand {
     ManagementPlan?: string;
     CreatedBy?: number;
 }
+
+
+export interface UpdatePatientDiagnosisCommand{
+    DiagnosisId : number;
+    PatientDiagnosisCommand : DiagnosisCommand;
+}

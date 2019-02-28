@@ -98,6 +98,14 @@ export class MaternityService {
         );
     }
 
+  
+    public updateDiagnosis(diagnosis : any) : Observable<any> {
+        return this.http.post(this.API_PMTCT_URL + '/api/PatientDiagnosis/UpdateDiagnosis', JSON.stringify(diagnosis), httpOptions).pipe(
+            tap(diag => this.errorHandler.log(`successfully updated maternity diagnosis`)),
+            catchError(this.errorHandler.handleError<any>('Error updating maternity diagnosis'))
+        );
+    }
+
     public savePatientDelivery(delivery: any): Observable<any> {
         return this.http.post(this.API_PMTCT_URL + '/api/MaternityPatientDeliveryInfo/AddPatientDeliveryInfo', JSON.stringify(delivery),
             httpOptions).pipe(
@@ -149,9 +157,15 @@ export class MaternityService {
             );
     }
 
-    /**
-     * getPatientAdministeredDrugs
-     */
+    public updateDrugAdministration(drug: any): Observable<any> {
+        return this.http.post(this.API_PMTCT_URL + '/api/PatientDrugAdministration/Edit',
+            JSON.stringify(drug), httpOptions).pipe(
+                tap(updateDrug => this.errorHandler.log(`successfully updated maternal drug administration`)),
+                catchError(this.errorHandler.handleError<any>('Error updating maternal drug administration'))
+            );
+    }
+
+    
     public getPatientAdministeredDrugs(patientId: any, masterVisitId: any) {
         return this.http.get<any[]>(this.API_PMTCT_URL +
             '/api/PatientDrugAdministration/GetByPatientIdAndPatientMasterVisitId/' + patientId + '/' + masterVisitId).pipe(
@@ -167,6 +181,14 @@ export class MaternityService {
             JSON.stringify(partner), httpOptions).pipe(
                 tap(savePartnerTesting => this.errorHandler.log(`successfully added Partner testing details`)),
                 catchError(this.errorHandler.handleError<any>('Error saving Partner testing details'))
+            );
+    }
+
+    public updatePartnerTesting(partner: any): Observable<any> {
+        return this.http.post(this.API_PMTCT_URL + '/api/PatientPartnerTesting/Edit',
+            JSON.stringify(partner), httpOptions).pipe(
+                tap(update => this.errorHandler.log(`successfully updated Partner testing details`)),
+                catchError(this.errorHandler.handleError<any>('Error updating Partner testing details'))
             );
     }
 
@@ -193,9 +215,9 @@ export class MaternityService {
             );
     }
 
-    public updatePatientEducation(): Observable<any> {
+    public updatePatientEducation(education: any): Observable<any> {
         return this.http.post(this.API_URL + '/api/PatientEducationExamination/UpdatePatientCounsellingInfo',
-            JSON.stringify(''), httpOptions).pipe(
+            JSON.stringify(education), httpOptions).pipe(
                 tap(updatePatientEducation => this.errorHandler.log(`successfully updated patient education details`)),
                 catchError(this.errorHandler.handleError<any>('Error updating patient education details'))
             );
@@ -205,8 +227,16 @@ export class MaternityService {
         return this.http.post(this.API_PMTCT_URL + '/api/MaternityPatientDeliveryInfo/DischargePatient',
             JSON.stringify(discharge), httpOptions).pipe(
                 tap(saveDischarge => this.errorHandler.log(`successfully added discharge details`)),
-                catchError(this.errorHandler.handleError<any>('Error saving Partner discharge details'))
+                catchError(this.errorHandler.handleError<any>('Error saving patient discharge details'))
             );
+    }
+
+    public updateDischargeInfo(discharge:any): Observable<any>{
+        return this.http.post(this.API_PMTCT_URL + '/api/MaternityPatientDeliveryInfo/UpdatePatientDischargeInfo',
+        JSON.stringify(discharge), httpOptions).pipe(
+            tap(update => this.errorHandler.log(`successfully updated discharge details`)),
+            catchError(this.errorHandler.handleError<any>('Error updating patient discharge details'))
+        );
     }
 
     public getPatientDischargeInfo(mastervisitId: any) {
@@ -221,6 +251,14 @@ export class MaternityService {
         return this.http.post(this.API_URL + '/api/PatientReferralAndAppointment/AddPatientReferralInfo',
             JSON.stringify(referral), httpOptions).pipe(
                 tap(saveReferrals => this.errorHandler.log(`successfully added Referral details`)),
+                catchError(this.errorHandler.handleError<any>('Error saving Referral details'))
+            );
+    }
+
+    public updatePatientReferral(referral: any): Observable<any> {
+        return this.http.post(this.API_URL + '/api/PatientReferralAndAppointment/UpdatePatientReferralInfo',
+            JSON.stringify(referral), httpOptions).pipe(
+                tap(ref => this.errorHandler.log(`successfully updated Referral details`)),
                 catchError(this.errorHandler.handleError<any>('Error saving Referral details'))
             );
     }
@@ -250,6 +288,14 @@ export class MaternityService {
             httpOptions).pipe(
                 tap(saveReferrals => this.errorHandler.log(`successfully added Referral details`)),
                 catchError(this.errorHandler.handleError<any>('Error saving Referral details'))
+            );
+    }
+
+    public updateNextAppointment(appointment: any): Observable<any> {
+        return this.http.post(this.API_URL + '/api/PatientReferralAndAppointment/UpdatePatientNextAppointment', JSON.stringify(appointment),
+            httpOptions).pipe(
+                tap(update => this.errorHandler.log(`successfully updated appointment`)),
+                catchError(this.errorHandler.handleError<any>('Error updating appointments'))
             );
     }
 
