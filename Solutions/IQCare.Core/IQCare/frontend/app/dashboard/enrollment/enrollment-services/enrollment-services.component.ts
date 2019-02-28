@@ -1,3 +1,4 @@
+import { RecordsService } from './../../../records/_services/records.service';
 import { PersonHomeService } from './../../services/person-home.service';
 import { Component, OnInit, NgZone } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -39,10 +40,11 @@ export class EnrollmentServicesComponent implements OnInit {
         private snotifyService: SnotifyService,
         private notificationService: NotificationService,
         private store: Store<AppState>,
-        private appStateService: AppStateService) {
+        private appStateService: AppStateService,
+        private recordsService: RecordsService) {
         this.userId = JSON.parse(localStorage.getItem('appUserId'));
         this.posId = localStorage.getItem('appPosID');
-        this.maxDate = new Date();
+        // this.maxDate = new Date();
     }
 
     ngOnInit() {
@@ -79,7 +81,7 @@ export class EnrollmentServicesComponent implements OnInit {
 
                 }
 
-                console.log(this.formGroup.get('identifiers'));
+                // console.log(this.formGroup.get('identifiers'));
             }
         );
 
@@ -87,6 +89,19 @@ export class EnrollmentServicesComponent implements OnInit {
             (res) => {
                 const { value } = res['lookupItems'][0];
                 this.patientTypeOptions = value;
+            }
+        );
+
+        this.recordsService.getPersonDetails(this.personId).subscribe(
+            (res) => {
+                console.log(res);
+                const { registrationDate } = res[0];
+                if (registrationDate) {
+                    this.maxDate = registrationDate;
+                } else {
+                    this.maxDate = new Date();
+                }
+
             }
         );
     }

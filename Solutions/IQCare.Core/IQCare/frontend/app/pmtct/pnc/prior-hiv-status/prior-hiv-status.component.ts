@@ -57,7 +57,7 @@ export class PriorHivStatusComponent implements OnInit {
                     if (hivNegativeResult.length > 0) {
                         this.priorHivStatusFormGroup.get('priorHivStatus').setValue(hivNegativeResult[0].itemId);
                     }
-                    this.dataservice.changeHivStatus('Negative');
+                    // this.dataservice.changeHivStatus('Negative');
                 }
             },
             (error) => {

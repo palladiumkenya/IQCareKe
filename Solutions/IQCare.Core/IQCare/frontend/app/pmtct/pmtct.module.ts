@@ -116,6 +116,8 @@ import { AddBabyDialogComponent } from './maternity/baby/add-baby-dialog/add-bab
 import { MilestonesFormComponent } from './hei/milestones/milestones-form/milestones-form.component';
 import { DataService } from '../shared/_services/data.service';
 import { PriorHivStatusComponent } from './pnc/prior-hiv-status/prior-hiv-status.component';
+import { RegistrationService } from '../registration/_services/registration.service';
+import { FamilyPartnerControlsService } from '../hts/_services/family-partner-controls.service';
 
 @NgModule({
     imports: [
@@ -234,7 +236,9 @@ import { PriorHivStatusComponent } from './pnc/prior-hiv-status/prior-hiv-status
         BirthOutcomeResolver,
         CounselledInfantFeedingResolver,
         DataService,
-        RecordsService
+        RecordsService,
+        RegistrationService,
+        FamilyPartnerControlsService
     ],
     entryComponents: [
         IptClientWorkupComponent,

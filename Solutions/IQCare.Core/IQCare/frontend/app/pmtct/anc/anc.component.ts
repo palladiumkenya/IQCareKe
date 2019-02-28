@@ -1,3 +1,4 @@
+import { PncService } from './../_services/pnc.service';
 import { Component, OnInit, OnDestroy, NgZone } from '@angular/core';
 import { NotificationService } from './../../shared/_services/notification.service';
 import { SnotifyService } from 'ng-snotify';
@@ -29,6 +30,7 @@ import { BaselineAncProfileCommand } from '../_models/baseline-anc-profile-comma
 import { DrugAdministerCommand } from '../_models/drug-administer-command';
 import * as moment from 'moment';
 import { VisitDetailsEditCommand } from '../_models/VisitDetailsEditCommand';
+import { PatientAppointmentEditCommand } from '../_models/PatientAppointmentEditCommand';
 
 @Component({
     selector: 'app-anc',
@@ -114,7 +116,8 @@ export class AncComponent implements OnInit, OnDestroy {
         public zone: NgZone,
         private router: Router,
         private notificationService: NotificationService,
-        private ancService: AncService) {
+        private ancService: AncService,
+        private pncService: PncService) {
         this.userId = JSON.parse(localStorage.getItem('appUserId'));
         this.visitDetailsFormGroup = new FormArray([]);
         this.PatientEducationMatFormGroup = new FormArray([]);
@@ -127,7 +130,6 @@ export class AncComponent implements OnInit, OnDestroy {
     }
 
     ngOnInit() {
-
         this.route.params.subscribe(
             (params) => {
                 this.patientId = params.patientId;
@@ -143,7 +145,7 @@ export class AncComponent implements OnInit, OnDestroy {
                 } else {
                     this.visitId = this.patientMasterVisitId;
                     this.isEdit = true;
-                    this.isLinear = false;
+                    // this.isLinear = false;
                 }
             }
         );
@@ -652,7 +654,7 @@ export class AncComponent implements OnInit, OnDestroy {
         const ancClientMonitoring = this.ancService.saveClientMonitoring(clientMonitoringCommand);
         const ancHaart = this.ancService.saveHaartProphylaxis(haartProphylaxisCommand);
         const drugAdministration = this.ancService.saveDrugAdministration(drugAdministrationCommand);
-        const chronicIllness = this.ancService.savePatientChronicIllness(chronicIllnessCommand);
+        const chronicIllness = this.ancService.savePatientChronicIllness(this.chronic_illness_data);
         const ancPreventiveService = this.ancService.savePreventiveServices(preventiveServiceCommand);
         const ancReferral = this.ancService.saveReferral(referralCommand);
         const ancAppointment = this.ancService.saveAppointment(this.appointmentCommand);
@@ -856,6 +858,26 @@ export class AncComponent implements OnInit, OnDestroy {
             CreatedBy: (this.userId < 1) ? 1 : this.userId
         };
 
+
+        const patientAppointmentEditCommand: PatientAppointmentEditCommand = {
+            AppointmentId: this.ReferralMatFormGroup.value[0]['appointmentid'],
+            AppointmentDate: moment(this.ReferralMatFormGroup.value[0]['nextAppointmentDate']).toDate(),
+            Description: this.ReferralMatFormGroup.value[0]['serviceRemarks']
+        };
+
+        const pncNextAppointmentCommand: PatientAppointment = {
+            PatientId: this.patientId,
+            PatientMasterVisitId: this.patientMasterVisitId,
+            ServiceAreaId: this.serviceAreaId,
+            AppointmentDate: this.ReferralMatFormGroup.value[0]['nextAppointmentDate'] ?
+                moment(this.ReferralMatFormGroup.value[0]['nextAppointmentDate']).toDate() : null,
+            Description: this.ReferralMatFormGroup.value[0]['serviceRemarks'],
+            StatusDate: null,
+            DifferentiatedCareId: 0,
+            CreatedBy: this.userId,
+            AppointmentReason: 'Follow Up'
+        };
+
         const appointmentId = this.ReferralMatFormGroup.value[0]['scheduledAppointment'];
         const yes = this.yesNoNaOptions.filter(x => x.itemName == 'Yes');
         if (appointmentId == yes[0]['itemId']) {
@@ -885,6 +907,7 @@ export class AncComponent implements OnInit, OnDestroy {
         }
 
         const referralEditCommand = {
+            Id: this.ReferralMatFormGroup.value[0]['referralid'],
             PatientId: this.patientId,
             PatientMasterVisitId: this.patientMasterVisitId,
             ReferredFrom: this.ReferralMatFormGroup.value[0]['referredFrom'],
@@ -896,6 +919,16 @@ export class AncComponent implements OnInit, OnDestroy {
             CreateBy: this.userId
         } as PatientReferral;
 
+        const pncNextAppointment = this.pncService.savePncNextAppointment(pncNextAppointmentCommand);
+        const pncAppointmentEdit = this.pncService.updateAppointment(patientAppointmentEditCommand);
+
+        let appointment;
+        if (!patientAppointmentEditCommand.AppointmentId || patientAppointmentEditCommand.AppointmentId == null) {
+            appointment = pncNextAppointment;
+        } else {
+            appointment = pncAppointmentEdit;
+        }
+
         //   const clientMonitoringEditCommand = { clientMonitoringEditCommand: clientMonitoringCommandEdit }
 
         console.log('client monitoring command edit');
@@ -906,17 +939,17 @@ export class AncComponent implements OnInit, OnDestroy {
         const ancEducation = this.ancService.savePatientEducation(patientEducationCommand);
         const ancClientMonitoringEdit = this.ancService.EditClientMonitoring(clientMonitoringCommandEdit);
 
-        const PatientAppointmentEdit = this.ancService.EditAppointment(this.appointmentCommand);
+        // const PatientAppointmentEdit = this.ancService.EditAppointment(this.appointmentCommand);
         const referralEdit = this.ancService.EditReferral(referralEditCommand);
 
         forkJoin([
             AncvisitDetailsEdit,
-            // visitDetailsEdit,
+            visitDetailsEdit,
             baselineEdit,
-           // ancEducation,
-          //  ancClientMonitoringEdit
-            // PatientAppointmentEdit,
-            // referralEdit
+            ancEducation,
+            ancClientMonitoringEdit,
+            appointment,
+            referralEdit
 
         ]).subscribe(
             (result) => {

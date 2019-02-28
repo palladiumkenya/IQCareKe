@@ -43,3 +43,4 @@ ALTER TABLE [dbo].[VisitDetails] CHECK CONSTRAINT [FK_VisitDetails_PatientMaster
 
 
 END
+GO
