@@ -340,6 +340,15 @@ export class AncService {
             );
     }
 
+    public getPatientAppointmentAnc(patientId: number, patientMasterVisitId: number) {
+        return this.http.get<any[]>(this.API_URL + '/api/PatientReferralAndAppointment/GetAppointmentAnc/' +
+            patientId + '/' + patientMasterVisitId).pipe(
+            tap(getPatientAppointment => this.errorHandler.log('get patientappointment data')),
+            catchError(this.errorHandler.handleError<any[]>('getPatientAppointment'))
+        );
+    }
+
+
 
     public getPatientReferral(patientId: number, patientMasterVisitId: number) {
         return this.http.get<any[]>(this.API_URL + '/api/PatientReferralAndAppointment/GetReferral/' +
