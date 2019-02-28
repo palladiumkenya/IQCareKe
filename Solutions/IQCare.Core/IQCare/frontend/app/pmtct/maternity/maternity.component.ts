@@ -758,10 +758,6 @@ export class MaternityComponent implements OnInit {
     }
 
 
-
-   
-//@ViewChild('stepper') stepper : MatStepper;
-
     babyDetailsValid : boolean = true;
     public validateBabyDetails(stepper : MatStepper)
     {
