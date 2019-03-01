@@ -30,6 +30,7 @@ import { HivStatusCommand } from '../_models/HivStatusCommand';
 import { BaselineAncProfileCommand } from '../_models/baseline-anc-profile-command';
 import { DrugAdministerCommand } from '../_models/drug-administer-command';
 import * as moment from 'moment';
+import { MatDialogConfig, MatDialog, MatStepper } from '@angular/material';
 import { VisitDetailsEditCommand } from '../_models/VisitDetailsEditCommand';
 import { PatientAppointmentEditCommand } from '../_models/PatientAppointmentEditCommand';
 import { MatStepper } from '@angular/material';
@@ -339,6 +340,49 @@ export class AncComponent implements OnInit, OnDestroy {
             );
     }
 
+    public checkEducationFilled(stepper: MatStepper) {
+        if (this.counselling_data.length < 1) {
+            this.snotifyService.error('Add Counselling data' , 'ANC', this.notificationService.getConfig());
+
+        } else {
+            stepper.next();
+        }
+    }
+
+    public checkChroniIllnessAdded(stepper: MatStepper) {
+        const chronicIllnessId = this.HaartProphylaxisMatFormGroup.value[0]['otherIllness'];
+        const noId = this.yesNoOptions.filter(x => x.itemName === 'No');
+        if (noId[0]['itemId'] === chronicIllnessId) {
+                stepper.next();
+        } else {
+           if (!this.isEdit) {
+               if (this.chronicIllnessData.length < 1) {
+                   this.snotifyService.error('Add Chronic Illness data' , 'ANC', this.notificationService.getConfig());
+               } else {
+                   stepper.next();
+               }
+           } else {
+               stepper.next();
+           }
+
+        }
+    }
+
+    public checkPreventiveServicesAdded(stepper: MatStepper) {
+        console.log(this.preventiServicesData);
+        if (!this.isEdit) {
+            if (this.preventiServicesData.length < 1) {
+                this.snotifyService.error('Add preventive service data' , 'ANC', this.notificationService.getConfig());
+
+            } else {
+                stepper.next();
+            }
+        } else {
+            stepper.next();
+        }
+
+    }
+
     public getLookupItems(groupName: string, objOptions: any[] = []) {
         this.lookupItems$ = this.lookupItemService.getByGroupName(groupName)
             .subscribe(
@@ -507,6 +551,7 @@ export class AncComponent implements OnInit, OnDestroy {
         }
         const screeningDone = this.ClientMonitoringMatFormGroup.value[0]['cacxScreeningDone'];
         const viralLoadSampleTaken = this.ClientMonitoringMatFormGroup.value[0]['viralLoadSampleTaken'];
+        const comment = this.ClientMonitoringMatFormGroup.value[0]['cacxComments'];
 
         const clientMonitoringCommand = {
             PatientId: this.patientId,
@@ -521,8 +566,8 @@ export class AncComponent implements OnInit, OnDestroy {
             ScreenedTB: this.ClientMonitoringMatFormGroup.value[0]['screenedForTB'],
             CaCxMethod: (yesOption[0].itemId == screeningDone) ? this.ClientMonitoringMatFormGroup.value[0]['cacxMethod'] : 0,
             CaCxResult: (yesOption[0].itemId == screeningDone) ? this.ClientMonitoringMatFormGroup.value[0]['cacxResult'] : 0,
-            Comments: (yesOption[0].itemId == screeningDone) ? this.ClientMonitoringMatFormGroup.value[0]['cacxComments'] : 'na',
-            ClinicalNotes: (yesOption[0].itemId == screeningDone) ? this.ClientMonitoringMatFormGroup.value[0]['cacxComments'] : 'n/a',
+            Comments: (yesOption[0].itemId == screeningDone) ? (comment === '') ? 'no notes given' : comment :  'no notes given',
+            ClinicalNotes: (yesOption[0].itemId == screeningDone) ? (comment === '') ? 'no notes given' : comment : 'no notes given',
             CreatedBy: (this.userId < 1) ? 1 : this.userId
         } as ClientMonitoringCommand;
 
