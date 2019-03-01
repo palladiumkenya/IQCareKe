@@ -43,7 +43,7 @@ namespace IQCare.Controllers.PMTCT.ANC
             return BadRequest(response);
         }
 
-        [HttpPut]
+        [HttpPost]
         public async Task<IActionResult> UpdatePatientNextAppointment([FromBody] EditAppointmentCommand editAppointmentCommand)
         {
             if (!ModelState.IsValid)
@@ -107,7 +107,7 @@ namespace IQCare.Controllers.PMTCT.ANC
             return BadRequest(response);
         }
 
-        [HttpPut]
+        [HttpPost]
         public async Task<IActionResult> UpdatePatientReferralInfo([FromBody]EditRefferalCommand editRefferalCommand)
         {
             if (!ModelState.IsValid)

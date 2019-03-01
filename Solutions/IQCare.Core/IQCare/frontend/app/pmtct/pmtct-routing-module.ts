@@ -291,7 +291,8 @@ const routes: Routes = [
                     // hivTestResultOptions: HivTestResultResolver,
                     // finalPartnerHivResultOptions: FinalPartnerHivResultResolver,
                     hivFinalResultsOptions: HivFinalResultsResolver,
-                    hivStatusOptions: HivStatusResolver
+                    hivStatusOptions: HivStatusResolver,
+                    counselledInfantFeedingOptions: CounselledInfantFeedingResolver,
                 }
             },
             {
@@ -314,7 +315,9 @@ const routes: Routes = [
                     // hivTestResultOptions: HivTestResultResolver,
                     // finalPartnerHivResultOptions: FinalPartnerHivResultResolver,
                     hivFinalResultsOptions: HivFinalResultsResolver,
-                    hivStatusOptions: HivStatusResolver
+                    hivStatusOptions: HivStatusResolver,             
+                    counselledInfantFeedingOptions: CounselledInfantFeedingResolver
+
                 }
             }
         ]

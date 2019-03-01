@@ -36,8 +36,8 @@ export class DischargeComponent implements OnInit {
     ngOnInit() {
         this.dischargeFormGroup = this.formBuilder.group({
             dischargeDate: new FormControl('', [Validators.required]),
-            babyStatus: new FormControl('', [Validators.required])
-
+            babyStatus: new FormControl('', [Validators.required]),
+            id : new FormControl('')
         });
         const {
             deliveryStates,
@@ -61,8 +61,7 @@ export class DischargeComponent implements OnInit {
 
     private getPatientDischargeInfo(masterVisitId : any){
         this.maternityService.getPatientDischargeInfo(masterVisitId).subscribe(res=>{
-            console.log('Resrsrs '+ res )
-
+             this.dischargeFormGroup.get('id').setValue(res.id)
              this.dischargeFormGroup.get('dischargeDate').setValue(res.dateDischarged)
              this.dischargeFormGroup.get('babyStatus').setValue(res.outcomeStatusId)
         })
