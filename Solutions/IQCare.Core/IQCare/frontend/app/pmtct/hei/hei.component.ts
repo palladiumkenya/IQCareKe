@@ -25,6 +25,7 @@ import { PatientAppointmentEditCommand } from '../_models/PatientAppointmentEdit
 import { mergeMap, switchMap, concatMap } from 'rxjs/operators';
 import { RegistrationService } from '../../registration/_services/registration.service';
 import { FamilyPartnerControlsService } from '../../hts/_services/family-partner-controls.service';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
     selector: 'app-hei',
@@ -113,7 +114,8 @@ export class HeiComponent implements OnInit {
         private snotifyService: SnotifyService,
         private notificationService: NotificationService,
         private registrationService: RegistrationService,
-        private service: FamilyPartnerControlsService) {
+        private service: FamilyPartnerControlsService,
+        private spinner: NgxSpinnerService) {
         this.deliveryMatFormGroup = new FormArray([]);
         this.visitDetailsFormGroup = new FormArray([]);
         this.tbAssessmentFormGroup = new FormArray([]);
@@ -340,11 +342,14 @@ export class HeiComponent implements OnInit {
     }
 
     onUpdateHeiEncounter() {
+
         if (!this.infantFeedingFormGroup.valid) {
             this.snotifyService.error('Complete the highlighted fields before submitting', 'HEI Encounter',
                 this.notificationService.getConfig());
             return;
         }
+
+        this.spinner.show();
 
         const motherRegistered = this.yesnoOptions.filter(
             obj => obj.itemId == this.deliveryMatFormGroup.value[1]['motherregisteredinclinic']
@@ -703,6 +708,7 @@ export class HeiComponent implements OnInit {
                         );
                     });
 
+                    this.spinner.hide();
                     this.snotifyService.success('Successfully updated HEI encounter ', 'HEI', this.notificationService.getConfig());
                     this.zone.run(() => {
                         this.router.navigate(['/dashboard/personhome/' + this.personId], { relativeTo: this.route });
@@ -718,6 +724,8 @@ export class HeiComponent implements OnInit {
                 this.notificationService.getConfig());
             return;
         }
+
+        this.spinner.show();
 
         for (let i = 0; i < this.immunization_table_data.length; i++) {
             for (let j = 0; j < this.immunization_table_data[i].length; j++) {
@@ -1086,7 +1094,7 @@ export class HeiComponent implements OnInit {
 
                 );
 
-
+                this.spinner.hide();
                 this.snotifyService.success('Successfully saved HEI encounter ', 'HEI', this.notificationService.getConfig());
                 this.zone.run(() => {
                     this.router.navigate(['/dashboard/personhome/' + this.personId], { relativeTo: this.route });
