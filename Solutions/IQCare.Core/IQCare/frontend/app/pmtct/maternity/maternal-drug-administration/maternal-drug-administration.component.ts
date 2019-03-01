@@ -28,7 +28,7 @@ export class MaternalDrugAdministrationComponent implements OnInit {
     constructor(private formBuilder: FormBuilder,
         private notificationService: NotificationService,
         private snotifyService: SnotifyService,
-        private maternityService : MaternityService,
+        private maternityService: MaternityService,
         private dataservice: DataService) {
     }
 
@@ -38,7 +38,8 @@ export class MaternalDrugAdministrationComponent implements OnInit {
             StartedHAARTinANC: new FormControl('', [Validators.required]),
             ARVsStartedinMaternity: new FormControl('', [Validators.required]),
             Cotrimoxazole: new FormControl('', [Validators.required]),
-            InfantProvidedWithARVprophylaxis: new FormControl('', [Validators.required])
+            InfantProvidedWithARVprophylaxis: new FormControl('', [Validators.required]),
+            id: new FormControl('')
         });
 
         const {
@@ -61,26 +62,32 @@ export class MaternalDrugAdministrationComponent implements OnInit {
                 this.maternalDrugAdministrationFormGroup.get('ARVsStartedinMaternity').disable({ onlySelf: true });
                 this.maternalDrugAdministrationFormGroup.get('Cotrimoxazole').disable({ onlySelf: true });
                 this.maternalDrugAdministrationFormGroup.get('InfantProvidedWithARVprophylaxis').disable({ onlySelf: true });
+                this.maternalDrugAdministrationFormGroup.get('id').setValue('0');
+            } else {
+                this.maternalDrugAdministrationFormGroup.get('VitaminASupplementation').enable({ onlySelf: false });
+                this.maternalDrugAdministrationFormGroup.get('StartedHAARTinANC').enable({ onlySelf: false });
+                this.maternalDrugAdministrationFormGroup.get('ARVsStartedinMaternity').enable({ onlySelf: false });
+                this.maternalDrugAdministrationFormGroup.get('Cotrimoxazole').enable({ onlySelf: false });
+                this.maternalDrugAdministrationFormGroup.get('InfantProvidedWithARVprophylaxis').enable({ onlySelf: false });
             }
         });
-        if(this.isEdit){
-            this.getDrugsAdministered(this.PatientId,this.PatientMasterVisitId)
+        if (this.isEdit) {
+            this.getDrugsAdministered(this.PatientId, this.PatientMasterVisitId);
         }
     }
 
-    private getDrugsAdministered(patientId: any, patientMasterVisitId:any) {
-        this.maternityService.getPatientAdministeredDrugs(patientId,patientMasterVisitId).subscribe(res=>
-          {
+    private getDrugsAdministered(patientId: any, patientMasterVisitId: any) {
+        this.maternityService.getPatientAdministeredDrugs(patientId, patientMasterVisitId).subscribe(res => {
               res.forEach(data => {
-                var drugName = data.strDrugAdministered.split(' ').join('');
+                const drugName = data.strDrugAdministered.split(' ').join('');
 
                  this.maternalDrugAdministrationFormGroup
                  .get(drugName)
                  .setValue(data.value);
               });
-           },(err)=>{
+           }, (err) => {
             console.log(err);
-        })
+        });
     }
 
 }

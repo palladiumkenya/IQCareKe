@@ -7,6 +7,11 @@ namespace IQCare.Maternity.Core.Domain.Maternity
     public class MaternalPatientDischargeInformation
     {
 
+        public MaternalPatientDischargeInformation()
+        {
+                
+        }
+
         public MaternalPatientDischargeInformation(int? patientMasterVisitId, int? outcomeStatus,
             string outcomeDescription, int createdBy, DateTime ? dateDischarged)
         {

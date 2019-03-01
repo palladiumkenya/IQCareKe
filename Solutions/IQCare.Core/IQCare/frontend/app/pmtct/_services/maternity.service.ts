@@ -293,8 +293,7 @@ export class MaternityService {
 
     public updateNextAppointment(appointment: any): Observable<any> {
         return this.http.post(this.API_URL + '/api/PatientReferralAndAppointment/UpdatePatientNextAppointment', JSON.stringify(appointment),
-            httpOptions).pipe(
-                tap(update => this.errorHandler.log(`successfully updated appointment`)),
+            httpOptions).pipe(tap(update => this.errorHandler.log(`successfully updated appointment`)),
                 catchError(this.errorHandler.handleError<any>('Error updating appointments'))
             );
     }
@@ -362,6 +361,8 @@ export class MaternityService {
     }
 
     public getMaternityLookUpOptionByName(lookUpOptions: any[], lookupName: string): any {
+        if(lookupName == null)
+            return null;
         for (let index = 0; index < lookUpOptions.length; index++) {
             if (lookUpOptions[index].itemName.toUpperCase() === lookupName.toUpperCase()) {
                 return lookUpOptions[index];

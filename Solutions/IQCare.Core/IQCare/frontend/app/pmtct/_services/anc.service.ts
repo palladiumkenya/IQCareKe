@@ -59,9 +59,9 @@ export class AncService {
             );
     }
 
-   
+
     public updateVisitDate(visitDate: any) {
-        this.visitDateMessageSource.next(visitDate)
+        this.visitDateMessageSource.next(visitDate);
     }
 
     public EditVisitDetails(VisitDetailsEditCommand: any): Observable<any> {
@@ -107,19 +107,21 @@ export class AncService {
     public EditBaselineProfile(baselineAncCommand: any): Observable<any> {
         return this.http.put<any>(this.API_URL + '/api/BaselineAnc/put', JSON.stringify(baselineAncCommand),
             httpOptions).pipe(
-            tap(BaselineProfile => this.errorHandler.log(`successfully Edited ANC Baseline`)),
-            catchError(this.errorHandler.handleError<any>('Error Editing ANC Baseline'))
-        );
+                tap(BaselineProfile => this.errorHandler.log(`successfully Edited ANC Baseline`)),
+                catchError(this.errorHandler.handleError<any>('Error Editing ANC Baseline'))
+            );
     }
 
 
     public savePatientEducation(patientEducationCommand: PatientEducationCommand): Observable<PatientEducationCommand> {
+
         return this.http.post<any>(this.API_URL + '' + this._url_pedc, JSON.stringify(patientEducationCommand),
             httpOptions).pipe(
                 tap(savePatientEducation => this.errorHandler.log('Successfully saved patient education')),
                 catchError(this.errorHandler.handleError<any>('Error in saving Patient Education'))
             );
     }
+
 
     public saveClientMonitoring(clientMonitoringCommand: ClientMonitoringCommand): Observable<ClientMonitoringCommand> {
         return this.http.post<any>(this.API_URL + '' + this._url_cm, JSON.stringify(clientMonitoringCommand), httpOptions).pipe(
@@ -143,11 +145,17 @@ export class AncService {
         );
     }
 
-    public savePatientChronicIllness(chronicIllnessCommand: any): Observable<any> {
+    public savePatientChronicIllness(chronicIllnessCommand: any[]): Observable<any> {
+        // console.log(chronicIllnessCommand);
         if (chronicIllnessCommand.length == 0) {
             return of([]);
         }
-        return this.http.post<any>(this.API_URL + '' + this._url_pci, JSON.stringify(chronicIllnessCommand), httpOptions).pipe(
+
+        const Indata = {
+            'PatientChronicIllnesses': chronicIllnessCommand
+        };
+
+        return this.http.post<any>(this.API_URL + '' + this._url_pci, JSON.stringify(Indata), httpOptions).pipe(
             tap(savePatientChronicIllness => this.errorHandler.log('Successfully saved chronic illness')),
             catchError(this.errorHandler.handleError<any>('Error in saving Patient Chronic Illness'))
         );
@@ -201,7 +209,10 @@ export class AncService {
         );
     }
 
-    public savePreventiveServices(patientPreventiveService: PatientPreventiveService): Observable<PatientPreventiveService> {
+    public savePreventiveServices(patientPreventiveService: PatientPreventiveService): Observable<any> {
+        if (patientPreventiveService.preventiveService.length == 0) {
+            return of([]);
+        }
         return this.http.post<any>(this.API_URL + '' + this._url_pre, JSON.stringify(patientPreventiveService), httpOptions).pipe(
             tap(savePreventiveServices => this.errorHandler.log('Successfully saved Preventive Services')),
             catchError(this.errorHandler.handleError<any>('Error in saving Preventive Services'))
@@ -338,6 +349,15 @@ export class AncService {
             );
     }
 
+    public getPatientAppointmentAnc(patientId: number, patientMasterVisitId: number) {
+        return this.http.get<any[]>(this.API_URL + '/api/PatientReferralAndAppointment/GetAppointmentAnc/' +
+            patientId + '/' + patientMasterVisitId).pipe(
+            tap(getPatientAppointment => this.errorHandler.log('get patientappointment data')),
+            catchError(this.errorHandler.handleError<any[]>('getPatientAppointment'))
+        );
+    }
+
+
 
     public getPatientReferral(patientId: number, patientMasterVisitId: number) {
         return this.http.get<any[]>(this.API_URL + '/api/PatientReferralAndAppointment/GetReferral/' +
@@ -354,10 +374,6 @@ export class AncService {
                 catchError(this.errorHandler.handleError<any[]>('getPatientVisitDetails'))
             );
     }
-
-
-
-
 
 }
 

@@ -37,10 +37,16 @@ namespace IQCare.HTS.BusinessProcess.CommandHandlers
 
                     if (encounter.Count > 0)
                     {
-                        testings = await _unitOfWork.Repository<Core.Model.Testing>().Get(x => x.HtsEncounterId == encounter[0].Id)
-                            .ToListAsync();
-                        encounterResults = await _unitOfWork.Repository<HtsEncounterResult>()
-                            .Get(x => x.HtsEncounterId == encounter[0].Id).ToListAsync();
+                        for (int i = 0; i < encounter.Count; i++)
+                        {
+                            var resulttestings = await _unitOfWork.Repository<Core.Model.Testing>().Get(x => x.HtsEncounterId == encounter[i].Id)
+                                .ToListAsync();
+                            testings.AddRange(resulttestings);
+
+                            var resultEncounterResults = await _unitOfWork.Repository<HtsEncounterResult>()
+                                .Get(x => x.HtsEncounterId == encounter[0].Id).ToListAsync();
+                            encounterResults.AddRange(resultEncounterResults);
+                        }
                     }
 
                     return Result<GetTestingResultsResponse>.Valid(new GetTestingResultsResponse()

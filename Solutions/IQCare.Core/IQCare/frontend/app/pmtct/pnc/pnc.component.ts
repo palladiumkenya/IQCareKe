@@ -31,6 +31,7 @@ import { PatientFamilyPlanningMethodEditCommand } from '../_models/PatientFamily
 import { UpdateDrugAdministrationCommand } from '../_models/UpdateDrugAdministrationCommand';
 import { PartnerTestingEditCommand } from '../_models/PartnerTestingEditCommand';
 import { PatientPncExercisesCommand } from '../_models/PatientPncExercisesCommand';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
     selector: 'app-pnc',
@@ -108,7 +109,8 @@ export class PncComponent implements OnInit {
         private router: Router,
         private pncService: PncService,
         private lookupitemservice: LookupItemService,
-        private maternityService: MaternityService) {
+        private maternityService: MaternityService,
+        private spinner: NgxSpinnerService) {
         this.visitDetailsFormGroup = new FormArray([]);
         this.matHistory_PostNatalExam_FormGroup = new FormArray([]);
         this.drugAdministration_PartnerTesting_FormGroup = new FormArray([]);
@@ -332,6 +334,7 @@ export class PncComponent implements OnInit {
             return;
         }
 
+
         if (this.isEdit) {
             this.submitOnEdit();
         } else {
@@ -340,6 +343,7 @@ export class PncComponent implements OnInit {
     }
 
     submitOnAddNew(): void {
+        this.spinner.show();
         const yesOption = this.yesnoOptions.filter(obj => obj.itemName == 'Yes');
         const noOption = this.yesnoOptions.filter(obj => obj.itemName == 'No');
         const naOption = this.yesNoNaOptions.filter(obj => obj.itemName == 'N/A');
@@ -656,6 +660,7 @@ export class PncComponent implements OnInit {
                         }
                     );
 
+                    this.spinner.hide();
                     this.snotifyService.success('Successfully saved PNC encounter ', 'PNC', this.notificationService.getConfig());
                     this.zone.run(() => {
                         this.router.navigate(['/dashboard/personhome/' + this.personId], { relativeTo: this.route });
@@ -671,6 +676,7 @@ export class PncComponent implements OnInit {
     }
 
     submitOnEdit(): void {
+        this.spinner.show();
         const yesOption = this.yesnoOptions.filter(obj => obj.itemName == 'Yes');
         const noOption = this.yesnoOptions.filter(obj => obj.itemName == 'No');
 
@@ -797,6 +803,10 @@ export class PncComponent implements OnInit {
             UserId: this.userId
         };
 
+        console.log(this.drugAdministration_PartnerTesting_FormGroup);
+        console.log(this.drugAdministrationCategories);
+        console.log(this.administeredInfantDrugs);
+
         for (let i = 0; i < this.drugAdministrationCategories.length; i++) {
             let value;
             let id;
@@ -806,29 +816,50 @@ export class PncComponent implements OnInit {
             } else if (this.drugAdministrationCategories[i].itemName == 'Haematinics given') {
                 value = this.drugAdministration_PartnerTesting_FormGroup.value[0]['haematinics_given'];
                 id = this.drugAdministration_PartnerTesting_FormGroup.value[0]['id_haematinics'];
-            } else if (this.drugAdministrationCategories[i].itemName == 'Infant_Drug') {
+            } /*else if (this.drugAdministrationCategories[i].itemName == 'Infant_Drug') {
                 value = this.drugAdministration_PartnerTesting_FormGroup.value[0]['infant_drug'];
                 id = this.drugAdministration_PartnerTesting_FormGroup.value[0]['id_infantdrug'];
             } else if (this.drugAdministrationCategories[i].itemName == 'Infant_Start_Continue') {
                 value = this.drugAdministration_PartnerTesting_FormGroup.value[0]['infant_start'];
                 id = this.drugAdministration_PartnerTesting_FormGroup.value[0]['id_infantstart'];
+            }*/
+
+            if (value && id) {
+                const updateDrugAdministrationCommand: UpdateDrugAdministrationCommand = {
+                    Id: id,
+                    DrugAdministered: this.drugAdministrationCategories[i].itemId,
+                    Value: value,
+                    Description: this.drugAdministrationCategories[i].itemName
+                };
+
+                const pncDrugAdministrationEdit = this.pncService.updateDrugAdministration(updateDrugAdministrationCommand).subscribe(
+                    (result) => {
+                        console.log(result);
+                    },
+                    (error) => {
+                        console.log(error);
+                    }
+                );
+            } else {
+                const drugAdministrationCommand: DrugAdministrationCommand = {
+                    Id: 0,
+                    PatientId: this.patientId,
+                    PatientMasterVisitId: this.patientMasterVisitId,
+                    CreatedBy: this.userId,
+                    AdministeredDrugs: []
+                };
+
+                this.administeredInfantDrugs.forEach(drug => {
+                    drugAdministrationCommand.AdministeredDrugs.push({
+                        Id: drug.drugId,
+                        Value: drug.statusId,
+                        Description: drug.drugName
+                    });
+                });
+
+
+                const pncDrugAdministration = this.pncService.savePncDrugAdministration(drugAdministrationCommand).subscribe();
             }
-
-            const updateDrugAdministrationCommand: UpdateDrugAdministrationCommand = {
-                Id: id,
-                DrugAdministered: this.drugAdministrationCategories[i].itemId,
-                Value: value,
-                Description: this.drugAdministrationCategories[i].itemName
-            };
-
-            /*const pncDrugAdministrationEdit = this.pncService.updateDrugAdministration(updateDrugAdministrationCommand).subscribe(
-                (result) => {
-                    console.log(result);
-                },
-                (error) => {
-                    console.log(error);
-                }
-            );*/
         }
 
         const partnerTestingEditCommand: PartnerTestingEditCommand = {
@@ -876,6 +907,7 @@ export class PncComponent implements OnInit {
                 (result) => {
                     console.log(result);
 
+                    this.spinner.hide();
                     this.snotifyService.success('Successfully updated PNC encounter ', 'PNC', this.notificationService.getConfig());
                     this.zone.run(() => {
                         this.zone.run(() => {

@@ -45,13 +45,19 @@ export class PriorHivStatusComponent implements OnInit {
     public personCurrentHivStatus() {
         this.pncService.getPersonCurrentHivStatus(this.personId).subscribe(
             (res) => {
-                // console.log(res);
+                console.log(res);
                 if (res.length > 0) {
                     const hivPositiveResult = this.hivStatusOptions.filter(obj => obj.itemName == 'Positive');
                     if (hivPositiveResult.length > 0) {
                         this.priorHivStatusFormGroup.get('priorHivStatus').setValue(hivPositiveResult[0].itemId);
                         this.dataservice.changeHivStatus('Positive');
                     }
+                } else {
+                    const hivNegativeResult = this.hivStatusOptions.filter(obj => obj.itemName == 'Negative');
+                    if (hivNegativeResult.length > 0) {
+                        this.priorHivStatusFormGroup.get('priorHivStatus').setValue(hivNegativeResult[0].itemId);
+                    }
+                    // this.dataservice.changeHivStatus('Negative');
                 }
             },
             (error) => {

@@ -10,5 +10,5 @@ export interface DiagnosisCommand {
 
 export interface UpdatePatientDiagnosisCommand{
     DiagnosisId : number;
-    PatientDiagnosisCommand : DiagnosisCommand;
+    DiagnosisCommand : DiagnosisCommand;
 }

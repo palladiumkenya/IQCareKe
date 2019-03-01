@@ -63,6 +63,7 @@ export class ImmunizationHistoryComponent implements OnInit {
     public loadImmunizationHistory(): void {
         this.heiservice.getImmunizationHistory(this.patientId).subscribe(
             (result) => {
+                console.log(result);
                 for (let i = 0; i < result.length; i++) {
                     const immunizationPeriod = this.immunizationperiods.filter(obj => obj.itemId == result[i].periodId);
                     const immunizationGiven = this.vaccines.filter(obj => obj.itemId == result[i].vaccine);

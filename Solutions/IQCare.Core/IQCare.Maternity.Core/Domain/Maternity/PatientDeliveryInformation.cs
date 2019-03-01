@@ -54,9 +54,11 @@ namespace IQCare.Maternity.Core.Domain.Maternity
 
         public void Update(dynamic deliveryInfo)
         {
+            DateTime deliveryTime = Convert.ToDateTime(deliveryInfo.TimeOfDelivery);
+
             DurationOfLabour = deliveryInfo.DurationOfLabour;
             DateOfDelivery = deliveryInfo.DateOfDelivery;
-            TimeOfDelivery = deliveryInfo.TimeOfDelivery;
+            TimeOfDelivery = deliveryTime.TimeOfDay;
             ModeOfDelivery = deliveryInfo.ModeOfDelivery;
             PlacentaComplete = deliveryInfo.PlacentaComplete;
             BloodLossCapacity = deliveryInfo.BloodLossCapacity;

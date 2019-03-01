@@ -15,5 +15,5 @@ export interface EditAppointmentCommand
 {
     AppointmentId : number;
     AppointmentDate: Date;
-    Description?: string;
+    Description: string;
 }

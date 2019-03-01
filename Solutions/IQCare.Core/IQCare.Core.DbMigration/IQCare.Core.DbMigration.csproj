@@ -169,6 +169,7 @@
     <None Remove="Scripts\2.0.0\52_PersonListView.sql" />
     <None Remove="Scripts\2.0.0\51_SO_AddPMTCTMotherRegimensLookups.sql" />
     <None Remove="Scripts\2.0.0\53_DO_AlterViewPatientDeliveryInfo.sql" />
+    <None Remove="Scripts\2.0.1\01_IQCareFinalBuild.sql" />
   </ItemGroup>
 
   <ItemGroup>
@@ -182,7 +183,6 @@
     <EmbeddedResource Include="Scripts\1.0.0.8\HEI\07_SO_Lookups.sql" />
     <EmbeddedResource Include="Scripts\1.0.0.8\HEI\08_SO_PatientMilestone.sql" />
     <EmbeddedResource Include="Scripts\1.0.0.8\MATERNITY\12_SO_Insert_MaternityEncounter.sql" />
-    <EmbeddedResource Include="Scripts\1.0.0.8\MATERNITY\13_SO_Insert_Baby_Birth_Outcome_Lookup.sql" />
     <EmbeddedResource Include="Scripts\1.0.0.8\MATERNITY\14_SO_Insert_Drug_Administration_Lookup.sql" />
     <EmbeddedResource Include="Scripts\1.0.0.8\PMTCT\01_Insert_PNC_LookUp_Data.sql" />
     <EmbeddedResource Include="Scripts\1.0.0.8\PMTCT\02_Create_Table_PatientCounselling.sql" />
@@ -204,6 +204,34 @@
     <EmbeddedResource Include="Scripts\1.0.0.9\38_BO_PatientScreeningView.sql" />
     <EmbeddedResource Include="Scripts\1.0.0.9\39_SO_vw_PatientEncounters.sql" />
     <EmbeddedResource Include="Scripts\1.0.0.9\32_DO_Insert_MaternalDrugAdmin_LookUp_Items.sql" />
+    <None Remove="Scripts\2.0.0\56_SO_CreateViewPatientEncounterView.sql" />
+    <EmbeddedResource Include="Scripts\2.0.0\56_SO_CreateViewPatientEncounterView.sql" />
+    <None Remove="Scripts\2.0.0\09_DO_AlterTable_PatientDelivery_DropColumn_ProfileId.sql" />
+    <None Remove="Scripts\2.0.0\10_DO_AlterTable_PatientDelivery_AddColumn_PregnancyId.sql" />
+    <None Remove="Scripts\2.0.0\11_DO_AlterView_PatientDeliveryInfo.sql" />
+    <None Remove="Scripts\2.0.0\08_DO_AlterTable_PatientDelivery_DropFK_ProfileId.sql" />
+    <None Remove="Scripts\2.0.0\03_DO_CreateSproc_Get_WeightFor_Age_Zscore.sql" />
+    <EmbeddedResource Include="Scripts\2.0.0\03_DO_CreateSproc_Get_WeightFor_Age_Zscore.sql" />
+    <None Remove="Scripts\2.0.0\04_DO_CreateSproc_GetWeightForHeight_Zscore_Sproc.sql" />
+    <EmbeddedResource Include="Scripts\2.0.0\04_DO_CreateSproc_GetWeightForHeight_Zscore_Sproc.sql" />
+    <None Remove="Scripts\2.0.0\05_DO_CreateSproc_GetBmiZscore_Constants.sql" />
+    <EmbeddedResource Include="Scripts\2.0.0\05_DO_CreateSproc_GetBmiZscore_Constants.sql" />
+    <None Remove="Scripts\2.0.0\06_DO_CreateSproc_GetHeightForAge_Zscore.sql" />
+    <EmbeddedResource Include="Scripts\2.0.0\06_DO_CreateSproc_GetHeightForAge_Zscore.sql" />
+    <None Remove="Scripts\2.0.0\07_DO_AlterTable_Pregnancy_AddColumn_AgeAtMenarch.sql" />
+    <EmbeddedResource Include="Scripts\2.0.0\07_DO_AlterTable_Pregnancy_AddColumn_AgeAtMenarch.sql" />
+    <None Remove="Scripts\1.0.0.9\01_SO_IQCare_Version.sql" />
+    <EmbeddedResource Include="Scripts\1.0.0.9\01_SO_IQCare_Version.sql" />
+    <None Remove="Scripts\1.0.0.9\30_BO_PosNatalExaminationItemLookUp.sql" />
+    <EmbeddedResource Include="Scripts\1.0.0.9\30_BO_PosNatalExaminationItemLookUp.sql" />
+    <None Remove="Scripts\1.0.0.9\57_SO_AlterTablePatientMIlestone.sql" />
+    <EmbeddedResource Include="Scripts\1.0.0.9\57_SO_AlterTablePatientMIlestone.sql" />
+    <None Remove="Scripts\2.0.0\53_PersonListView.sql" />
+    <EmbeddedResource Include="Scripts\2.0.0\53_PersonListView.sql" />
+    <None Remove="Scripts\2.0.0\37_SO_IQCare_Version.sql" />
+    <EmbeddedResource Include="Scripts\2.0.0\37_SO_IQCare_Version.sql" />
+    <None Remove="Scripts\2.0.0\23_Nairobi_Missing_Subcounties_Wards.sql" />
+    <EmbeddedResource Include="Scripts\2.0.0\23_Nairobi_Missing_Subcounties_Wards.sql" />
   </ItemGroup>
 
   <ItemGroup>
@@ -331,6 +359,7 @@
     <EmbeddedResource Include="Scripts\2.0.0\52_PersonListView.sql" />
     <EmbeddedResource Include="Scripts\2.0.0\51_SO_AddPMTCTMotherRegimensLookups.sql" />
     <EmbeddedResource Include="Scripts\2.0.0\53_DO_AlterViewPatientDeliveryInfo.sql" />
+    <EmbeddedResource Include="Scripts\2.0.1\01_IQCareFinalBuild.sql" />
   </ItemGroup>
 
   <ItemGroup>
@@ -348,6 +377,13 @@
     <None Update="appsettings.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="Scripts\2.0.0\07_SO_SetPrefixTypeInIdentifiers.sql" />
+    <EmbeddedResource Include="Scripts\2.0.0\07_SO_SetPrefixTypeInIdentifiers.sql" />
+    <None Remove="Scripts\1.0.0.9\37_BO_AddPhsicalExaminationView.sql" />
+    <Resource Include="Scripts\1.0.0.9\37_BO_AddPhsicalExaminationView.sql" />
   </ItemGroup>
 
 </Project>

@@ -1,5 +1,5 @@
 import { AncService } from './../_services/anc.service';
-import { Component, OnInit, NgZone } from '@angular/core';
+import { Component, OnInit, NgZone, ViewChild } from '@angular/core';
 import { FormArray, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { LookupItemView } from '../../shared/_models/LookupItemView';
@@ -30,6 +30,7 @@ import { VisitDetailsService } from '../_services/visit-details.service';
 import { MatDialogConfig, MatDialog, MatStepper } from '@angular/material';
 import { AddBirthInfoComponent } from './baby/add-birth-info/add-birth-info.component';
 import { AddBabyDialogComponent } from './baby/add-baby-dialog/add-baby-dialog.component';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
     selector: 'app-maternity',
@@ -53,7 +54,6 @@ export class MaternityComponent implements OnInit {
     lookupItems$: Subscription;
     apgarOptions: any[] = [];
     drugAdminOptions: any[] = [];
-    counsellingOptions: any[] = [];
     babyNotifyData: any[] = [];
     pncHivOptions: any[] = [];
     DeliveredBabyBirthInfoCollection: any[] = [];
@@ -73,6 +73,7 @@ export class MaternityComponent implements OnInit {
     pregnancyId: number = 0;
     deliveryId: number;
 
+    addedBabyDetails : any[] = [];
 
     deliveryModeOptions: LookupItemView[] = [];
     bloodLossOptions: LookupItemView[] = [];
@@ -99,6 +100,8 @@ export class MaternityComponent implements OnInit {
     dischargeOptions: any[] = [];
     partnerTestingOptions: any[] = [];
     patientEducationOptions: any[] = [];
+    counselledInfantFeedingOptions : any[] = [];
+    infantFeedingTopicId : number ;
 
     constructor(private route: ActivatedRoute,
         private matService: MaternityService,
@@ -109,7 +112,9 @@ export class MaternityComponent implements OnInit {
         public zone: NgZone,
         private router: Router,
         private dialog: MatDialog,
-        private ancservice: AncService) {
+        private ancservice: AncService,
+        private lookupitemservice: LookupItemService,
+        private spinner: NgxSpinnerService) {
         this.visitDetailsFormGroup = new FormArray([]);
         this.diagnosisFormGroup = new FormArray([]);
         this.maternalDrugAdministrationForGroup = new FormArray([]);
@@ -122,17 +127,29 @@ export class MaternityComponent implements OnInit {
     ngOnInit() {
         this.getLookupItems('ApgarScore', this.apgarOptions);
         this.getLookupItems('MaternalDrugAdministration', this.drugAdminOptions);
-        this.getLookupItems('counselledOn', this.counsellingOptions);
+
+        this.lookupitemservice.getByGroupNameAndItemName('HTSEntryPoints', 'PMTCT').subscribe(
+            (res) => {
+                this.hivTestEntryPoint = res['itemId'];
+            }
+        );
+
+        this.matService.currentBabyData.subscribe(data=>{
+            this.addedBabyDetails = data;
+        })
+
         this.route.params.subscribe(
             (params) => {
-                // console.log(params);
+                console.log(params);
                 const { patientId, personId, serviceAreaId, patientMasterVisitId } = params;
                 this.patientId = parseInt(patientId, 10);
                 this.personId = personId;
                 this.patientMasterVisitId = patientMasterVisitId;
                 this.serviceAreaId = serviceAreaId;
+                this.patientEncounterId = params.patientEncounterId;
 
                 if (!this.patientMasterVisitId) {
+                    console.log('test here');
                     this.patientMasterVisitId = JSON.parse(localStorage.getItem('patientMasterVisitId'));
                     this.patientEncounterId = JSON.parse(localStorage.getItem('patientEncounterId'));
                 } else {
@@ -143,7 +160,7 @@ export class MaternityComponent implements OnInit {
         );
 
         this.userId = JSON.parse(localStorage.getItem('appUserId'));
-        this.patientEncounterId = JSON.parse(localStorage.getItem('patientEncounterId'));
+        // this.patientEncounterId = JSON.parse(localStorage.getItem('patientEncounterId'));
         this.visitDate = new Date(localStorage.getItem('visitDate'));
         this.visitType = JSON.parse(localStorage.getItem('visitType'));
 
@@ -160,7 +177,9 @@ export class MaternityComponent implements OnInit {
                 referralOptions,
                 hivFinalResultOptions,
                 hivFinalResultsOptions,
-                hivStatusOptions
+                hivStatusOptions,
+                counselledInfantFeedingOptions
+
             } = res;
             this.deliveryModeOptions = deliveryModeOptions['lookupItems'];
             this.bloodLossOptions = bloodLossOptions['lookupItems'];
@@ -175,6 +194,7 @@ export class MaternityComponent implements OnInit {
             this.hivFinalResultOptions = hivFinalResultOptions['lookupItems'];
             this.hivFinalResultsOptions = hivFinalResultsOptions['lookupItems'];
             this.hivStatusOptions = hivStatusOptions['lookupItems'];
+            this.infantFeedingTopicId = counselledInfantFeedingOptions['itemId']
         });
 
         this.diagnosisOptions.push({
@@ -226,9 +246,12 @@ export class MaternityComponent implements OnInit {
             'yesNoOptions': this.yesNoOptions
         });
         this.patientEducationOptions.push({
-            'yesnoOptions': this.yesNoOptions
+            'yesnoOptions': this.yesNoOptions,
+            'infantFeedingTopicId' : this.infantFeedingTopicId
         });
+
     }
+
 
     log() {
         console.log(this.visitDetailsFormGroup);
@@ -256,7 +279,7 @@ export class MaternityComponent implements OnInit {
     }
 
     onBabyNotifyData(babyNotifyData: any[]): void {
-        console.log("Baby Notify data " + this.babyNotifyData.length);
+        console.log('Baby Notify data ' + this.babyNotifyData.length);
         this.babyNotifyData.push(babyNotifyData);
     }
 
@@ -332,6 +355,8 @@ export class MaternityComponent implements OnInit {
     }
 
     private buildMaternalDeliveryCommand() : MaternityDeliveryCommand {
+        var isMotherConditionDead = this.diagnosisFormGroup.value[1]['deliveryCondition'].itemName == 'Dead';
+
         const maternityDeliveryCommand: MaternityDeliveryCommand = {
             PatientMasterVisitId: this.patientMasterVisitId,
             PregnancyId: this.pregnancyId,
@@ -343,14 +368,13 @@ export class MaternityComponent implements OnInit {
             BloodLossCapacity: parseInt(this.diagnosisFormGroup.value[1]['bloodLossCount'], 10),
             BloodLossClassification: this.diagnosisFormGroup.value[1]['bloodLoss'].itemId,
             MotherCondition: this.diagnosisFormGroup.value[1]['deliveryCondition'].itemId,
-            MaternalDeathAudited: this.diagnosisFormGroup.value[1]['maternalDeathsAudited'],
-            MaternalDeathAuditDate: moment(this.diagnosisFormGroup.value[1]['auditDate']).toDate(),
+            MaternalDeathAudited: isMotherConditionDead ? this.diagnosisFormGroup.value[1]['maternalDeathsAudited'].itemId : null,
+            MaternalDeathAuditDate:isMotherConditionDead ? moment(this.diagnosisFormGroup.value[1]['auditDate']).toDate() : null,
             DeliveryComplicationsExperienced: this.diagnosisFormGroup.value[1]['deliveryComplications'].itemId,
             DeliveryComplicationNotes: this.diagnosisFormGroup.value[1]['deliveryComplicationNotes'],
             DeliveryConductedBy: this.diagnosisFormGroup.value[1]['deliveryConductedBy'],
             CreatedBy: this.userId
         };
-
         return maternityDeliveryCommand;
     }
 
@@ -363,7 +387,6 @@ export class MaternityComponent implements OnInit {
             ManagementPlan: 'na',
             CreatedBy: this.userId
         };
-
         return diagnosisCommand;
     }
 
@@ -410,11 +433,10 @@ export class MaternityComponent implements OnInit {
     }
 
     onSubmit() {
-
+        this.spinner.show();
         const visitDetailsCommand = {
             PatientId: parseInt(this.patientId.toString(), 10),
             ServiceAreaId: parseInt(this.serviceAreaId.toString(), 10),
-            PregnancyId: this.pregnancyId,
             PatientMasterVisitId: this.patientMasterVisitId,
             VisitDate: moment(this.visitDetailsFormGroup.value[0]['visitDate']).toDate(),
             VisitNumber: 0,
@@ -512,13 +534,10 @@ export class MaternityComponent implements OnInit {
             AuditData: ''
         };
 
-
-        const infantFeeding = this.counsellingOptions.filter(x => x.itemName == 'Infant Feeding');
-
         const patiendEducationCommand: MaternityCounsellingCommand = {
             PatientId: this.patientId,
             PatientMasterVisitId: this.patientMasterVisitId,
-            CounsellingTopicId: infantFeeding[0].itemId,
+            CounsellingTopicId:this.infantFeedingTopicId,
             IsCounsellingDone: this.maternalDrugAdministrationForGroup.value[2]['counselledInfantFeeding'],
             CounsellingDate: new Date(),
             Description: null,
@@ -582,7 +601,7 @@ export class MaternityComponent implements OnInit {
         const hivStatusCommand: HivStatusCommand = {
             PersonId: this.personId,
             ProviderId: this.userId,
-            PatientEncounterID: this.patientEncounterId,
+            PatientEncounterID: this.patientEncounterId ? this.patientEncounterId : 0,
             PatientMasterVisitId: this.patientMasterVisitId,
             PatientId: this.patientId,
             EverTested: null,
@@ -603,7 +622,6 @@ export class MaternityComponent implements OnInit {
             EncounterDate: moment(this.visitDetailsFormGroup.value[0]['visitDate']).toDate(),
             EncounterType: this.maternityTestsFormGroup.value[0]['testType']
         };
-
 
         const hivTestsCommand: HivTestsCommand = {
             HtsEncounterId: 0,
@@ -670,6 +688,9 @@ export class MaternityComponent implements OnInit {
                     const ancHivResultsCommand = this.ancservice.saveHivResults(hivTestsCommand).subscribe(
                         (testRes) => {
                             console.log(testRes);
+                        },
+                        (testerror) => {
+                            console.log(testerror);
                         }
                     );
 
@@ -681,6 +702,7 @@ export class MaternityComponent implements OnInit {
                             this.sendPatientDeliveryInfoRequest(maternityDeliveryCommand, babyConditionInfo);
                             this.sendVisitDetailsRequest(visitDetailsCommand);
 
+                            this.spinner.hide();
                             this.zone.run(() => {
                                 this.router.navigate(['/dashboard/personhome/' + this.personId], { relativeTo: this.route });
                             });
@@ -693,8 +715,13 @@ export class MaternityComponent implements OnInit {
 
                     } else {
                         this.sendPatientDeliveryInfoRequest(maternityDeliveryCommand, babyConditionInfo);
-                        this.sendVisitDetailsRequest(visitDetailsCommand);
+                        if (this.isEdit) {
 
+                        } else {
+                            this.sendVisitDetailsRequest(visitDetailsCommand);
+                        }
+
+                        this.spinner.hide();
                         this.zone.run(() => {
                             this.router.navigate(['/dashboard/personhome/' + this.personId], { relativeTo: this.route });
                         });
@@ -719,11 +746,11 @@ export class MaternityComponent implements OnInit {
             MaternalPatientDeliveryInfoCommand : this.buildMaternalDeliveryCommand()
         }
 
-        console.log(editMotherDeliveryInfoCommand + ' edit MotherDelivery InfoCommand')
+        console.log(editMotherDeliveryInfoCommand.PatientDeliveryInfoId + ' edit MotherDelivery InfoCommand')
 
         const editDiagnosisCommad : UpdatePatientDiagnosisCommand = {
-             DiagnosisId : this.diagnosisFormGroup.value[1]['diagnosisId'],
-             PatientDiagnosisCommand : this.buildDiagnosisCommandModel()
+             DiagnosisId : this.diagnosisFormGroup.value[0]['diagnosisId'],
+             DiagnosisCommand : this.buildDiagnosisCommandModel()
         }
 
           this.buildDrugAdministrationModel();
@@ -740,11 +767,10 @@ export class MaternityComponent implements OnInit {
             PartnerHIVResult: this.maternalDrugAdministrationForGroup.value[1]['finalPartnerHivResult'],
         }
 
-        const infantFeedingId = this.counsellingOptions.filter(x => x.itemName == 'Infant Feeding')[0].itemId;
 
         const editCounsellingCommand : EditMaternityCounsellingCommand ={
             Id :  this.maternalDrugAdministrationForGroup.value[2]['id'],
-            CounsellingTopicId: infantFeedingId,
+            CounsellingTopicId: this.infantFeedingTopicId,
             IsCounsellingDone: this.maternalDrugAdministrationForGroup.value[2]['counselledInfantFeeding'],
         }
         
@@ -758,22 +784,21 @@ export class MaternityComponent implements OnInit {
         
 
         const editRefferalCommand : EditReferalCommand ={
-            Id :  this.diagnosisFormGroup.value[1]['id'],
+            Id :  this.dischargeFormGroup.value[1]['id'],
             ReferralDate : new Date(),
-            ReferredFrom: this.diagnosisFormGroup.value[1]['referredFrom'],
-            ReferredTo: this.diagnosisFormGroup.value[1]['referredTo'],
-            ReferralReason : null
+            ReferredFrom: this.dischargeFormGroup.value[1]['referredFrom'],
+            ReferredTo: this.dischargeFormGroup.value[1]['referredTo'],
+            ReferralReason : 'Referral',
+            ReferredBy : this.userId
         }
 
 
         const editAppointment : EditAppointmentCommand ={
-            AppointmentId : this.dischargeFormGroup.value[2]['nextAppointmentDate'],
+            AppointmentId : this.dischargeFormGroup.value[2]['id'],
             AppointmentDate: this.dischargeFormGroup.value[2]['nextAppointmentDate']
             ? moment(this.dischargeFormGroup.value[2]['nextAppointmentDate']).toDate() : null,
             Description: this.dischargeFormGroup.value[2]['remarks'],
         }
-       console.log(editDiagnosisCommad +' Edit diagnosis')
-       console.log(editAppointment.AppointmentDate + ' Appointment')
 
       const updatePartnerTesting = this.matService.updatePartnerTesting(editPartnerTestingCommand);
        const updatePatientDelivery = this.matService.updatePatientDeliveryInfo(editMotherDeliveryInfoCommand);
@@ -786,12 +811,12 @@ export class MaternityComponent implements OnInit {
 
        forkJoin([
         updateAppointment,
+        updateRefferal,
+        updateDrugInfo,
+        updateDischarge,
         updatePatientDelivery,
         updateDiagnosis,
-        updateDrugInfo,
         patientCounselling,
-        updateDischarge,
-        updateRefferal,
         updatePartnerTesting
     ])
         .subscribe(
@@ -809,16 +834,6 @@ export class MaternityComponent implements OnInit {
         },()=>{
 
         })
-}
-
-validateBabyDetails(stepper : MatStepper){
-   if(this.isEdit){
-      stepper.next()
-   }else
-   {
-      
-   }
-
 }
 
     private sendPatientDeliveryInfoRequest(deliveryCommand: MaternityDeliveryCommand, babyConditionInfo: any) {
@@ -864,6 +879,24 @@ validateBabyDetails(stepper : MatStepper){
             });
     }
 
+
+    babyDetailsValid : boolean = true;
+    public validateBabyDetails(stepper : MatStepper)
+    {
+        if(!this.isEdit && this.addedBabyDetails.length == 0)
+           this.babyDetailsValid = false;
+         else
+            this.babyDetailsValid = true;
+
+        if(this.babyDetailsValid)
+         stepper.next()
+         else
+         this.snotifyService.error('Please fill in the baby section before proceeding','Baby Section',this.notificationService.getConfig());
+
+        console.log("MAt stpper clicked " + this.babyDetailsValid)
+    }
+
+
     public AddNewBabyInfo() {
         const dialogConfig = new MatDialogConfig();
         dialogConfig.disableClose = false;
@@ -879,8 +912,9 @@ validateBabyDetails(stepper : MatStepper){
         const dialogRef = this.dialog.open(AddBabyDialogComponent, dialogConfig);
         dialogRef.afterClosed().subscribe(
             data => {
-                if (!data)
+                if (!data) {
                     return;
+                }
                 console.log(data);
             });
     }

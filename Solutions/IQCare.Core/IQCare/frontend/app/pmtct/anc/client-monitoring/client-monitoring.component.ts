@@ -66,6 +66,9 @@ export class ClientMonitoringComponent implements OnInit, OnDestroy {
             if (this.hiv_status !== '' && this.hiv_status !== 'Positive') {
                 this.clientMonitoringFormGroup.get('WhoStage').disable({ onlySelf: true });
                 this.clientMonitoringFormGroup.get('viralLoadSampleTaken').disable({ onlySelf: true });
+            } else {
+                this.clientMonitoringFormGroup.get('WhoStage').enable({ onlySelf: false });
+                this.clientMonitoringFormGroup.get('viralLoadSampleTaken').enable({ onlySelf: false });
             }
         });
 
@@ -271,7 +274,7 @@ export class ClientMonitoringComponent implements OnInit, OnDestroy {
     }
 
     ngOnDestroy(): void {
-        this.lookupItemView$.unsubscribe();
+        // this.lookupItemView$.unsubscribe();
         this.patientScreening$.unsubscribe();
         this.patientwhoStage$.unsubscribe();
     }

@@ -28,7 +28,7 @@ export class DiagnosisComponent implements OnInit {
     ngOnInit() {
         this.PatientdiagnosisFormGroup = this._formBuilder.group({
             diagnosis: new FormControl('', [Validators.required]),
-            diagnosisid : new FormControl('')
+            diagnosisId : new FormControl('')
         });
 
         this.notify.emit(this.PatientdiagnosisFormGroup);
@@ -45,6 +45,8 @@ export class DiagnosisComponent implements OnInit {
                 diag => {
                     if (diag != null) {
                         this.PatientdiagnosisFormGroup.controls['diagnosis'].setValue(diag.diagnosis);
+                        this.PatientdiagnosisFormGroup.controls['diagnosisId'].setValue(diag.id);
+
 
                     }
                 },

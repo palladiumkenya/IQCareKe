@@ -42,6 +42,7 @@ export class PreventiveServicesComponent implements OnInit, OnDestroy {
     @Output() notify: EventEmitter<Object> = new EventEmitter<Object>();
     public preventiveServicesData: PreventiveServiceEmitter;
     public serviceData: PreventiveEmitter[] = [];
+    public serviceDataEdit: PreventiveEmitter[] = [];
 
 
     constructor(private _formBuilder: FormBuilder, private _lookupItemService: LookupItemService,
@@ -78,7 +79,8 @@ export class PreventiveServicesComponent implements OnInit, OnDestroy {
         this.preventiveServicesOptions = preventiveServicesOptions;
 
         // console.log('preventive service' + hivFinalResultOptions[0].itemName);
-        this.notify.emit({ 'form': this.PreventiveServicesFormGroup, 'preventive_service_data': this.serviceData });
+        this.notify.emit({ 'form': this.PreventiveServicesFormGroup, 'preventive_service_data': (this.isEdit) ?
+                this.serviceDataEdit : this.serviceData });
 
         if (this.isEdit) {
             // this.getPatientPreventiveServiceInfo(this.patientId, this.patientMasterVisitId);
@@ -142,18 +144,32 @@ export class PreventiveServicesComponent implements OnInit, OnDestroy {
         const service = this.PreventiveServicesFormGroup.controls['preventiveServices'].value.itemName;
         const serviceId = this.PreventiveServicesFormGroup.controls['preventiveServices'].value.itemId;
 
+if (this.isEdit) {
+    if (this.serviceDataEdit.filter(x => x.preventiveService === service).length > 0) {
+        this.snotifyService.warning('' + service + ' exists', 'preventive Service', this.notificationService.getConfig());
+    } else {
+        this.serviceDataEdit.push({
+            preventiveService: service,
+            preventiveServiceId: serviceId,
+            dateGiven: this.PreventiveServicesFormGroup.controls['dateGiven'].value,
+            comments: this.PreventiveServicesFormGroup.controls['comments'].value,
+            nextSchedule: this.PreventiveServicesFormGroup.controls['nextSchedule'].value
+        });
+    }
+} else {
+    if (this.serviceData.filter(x => x.preventiveService === service).length > 0) {
+        this.snotifyService.warning('' + service + ' exists', 'preventive Service', this.notificationService.getConfig());
+    } else {
+        this.serviceData.push({
+            preventiveService: service,
+            preventiveServiceId: serviceId,
+            dateGiven: this.PreventiveServicesFormGroup.controls['dateGiven'].value,
+            comments: this.PreventiveServicesFormGroup.controls['comments'].value,
+            nextSchedule: this.PreventiveServicesFormGroup.controls['nextSchedule'].value
+        });
+    }
+}
 
-        if (this.serviceData.filter(x => x.preventiveService === service).length > 0) {
-            this.snotifyService.warning('' + service + ' exists', 'preventive Service', this.notificationService.getConfig());
-        } else {
-            this.serviceData.push({
-                preventiveService: service,
-                preventiveServiceId: serviceId,
-                dateGiven: this.PreventiveServicesFormGroup.controls['dateGiven'].value,
-                comments: this.PreventiveServicesFormGroup.controls['comments'].value,
-                nextSchedule: this.PreventiveServicesFormGroup.controls['nextSchedule'].value
-            });
-        }
         console.log(this.serviceData);
     }
 
@@ -304,7 +320,7 @@ export class PreventiveServicesComponent implements OnInit, OnDestroy {
     }
 
     ngOnDestroy(): void {
-        this.partnerTesting$.unsubscribe();
+       // this.partnerTesting$.unsubscribe();
         this.preventiveService$.unsubscribe();
     }
 }

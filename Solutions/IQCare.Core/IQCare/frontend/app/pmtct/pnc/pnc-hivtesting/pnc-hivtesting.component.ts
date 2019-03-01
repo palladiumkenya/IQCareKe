@@ -33,6 +33,7 @@ export class PncHivtestingComponent implements OnInit, AfterViewInit {
     @Input('patientId') patientId: number;
     @Input('patientMasterVisitId') patientMasterVisitId: number;
     @Input('patientEncounterId') patientEncounterId: number;
+    @Input() visitDate: Date;
     @Input() personId: number;
     @Input() serviceAreaId: number;
     serviceAreaName: string;
@@ -113,8 +114,12 @@ export class PncHivtestingComponent implements OnInit, AfterViewInit {
     }
 
     loadHivTests(): void {
+        // console.log(this.patientEncounterId);
+        // console.log(this.patientMasterVisitId);
+
         this.pncService.getHivTests(this.patientMasterVisitId, this.patientEncounterId).subscribe(
             (result) => {
+                console.log(result);
                 if (result && result['encounter'] && result['encounter'].length > 0) {
                     const tests = result['testing'];
                     if (tests.length > 0) {
@@ -138,18 +143,23 @@ export class PncHivtestingComponent implements OnInit, AfterViewInit {
                                 nexthivtest: null,
                                 testpoint: this.serviceAreaName
                             });
+                            // console.log(this.historical_hiv_testing_data);
                         }
                     }
 
                     if (result['encounterResults'].length > 0) {
                         this.HivTestingForm.controls.testType.setValue(result['encounter'][0]['encounterType']);
-                        const finalTestResult = this.hivFinalResultsOptions.find(
-                            obj => obj.itemId == result['encounterResults'][0]['finalResult']);
-                        this.HivTestingForm.get('finalTestResult').setValue(finalTestResult.itemId);
-                        if (finalTestResult.itemName == 'Positive') {
-                            this.HivTestingForm.get('hivTestingDone').disable({ onlySelf: false });
-                        }
+                        const finalTestResult = this.hivFinalResultsOptions.find(obj => obj.itemId == result['encounterResults'][0]['finalResult']);
+                         if(finalTestResult != null || finalTestResult != undefined)
+                         {
+                            this.HivTestingForm.get('finalTestResult').setValue(finalTestResult.itemId);
+                            if (finalTestResult.itemName == 'Positive') {
+                                this.HivTestingForm.get('hivTestingDone').disable({ onlySelf: false });
+                            }
+                         }
+                        
                     }
+                    // console.log(this.historical_hiv_testing_data, 'datasource');
                     this.dataSource = new MatTableDataSource(this.historical_hiv_testing_data);
                 }
             },
@@ -165,6 +175,7 @@ export class PncHivtestingComponent implements OnInit, AfterViewInit {
         dialogConfig.autoFocus = true;
 
         dialogConfig.data = {
+            'visitDate': this.visitDate
         };
 
         const dialogRef = this.dialog.open(HivStatusComponent, dialogConfig);
@@ -240,6 +251,16 @@ export class PncHivtestingComponent implements OnInit, AfterViewInit {
                 () => {
                     // console.log(this.lookupItemView$);
                 });
+    }
+
+    public onFinalHivResultChange(event) {
+        if (event.isUserInput && event.source.selected && event.source.viewValue == 'Positive') {
+            this.dataservice.changeHivStatus('Positive');
+        } else if (event.isUserInput && event.source.selected && event.source.viewValue == 'Negative') {
+            this.dataservice.changeHivStatus('Negative');
+        } else if (event.isUserInput && event.source.selected && event.source.viewValue == 'Inconclusive') {
+            this.dataservice.changeHivStatus('Inconclusive');
+        }
     }
 }
 

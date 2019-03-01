@@ -44,7 +44,8 @@ export class HivStatusComponent implements OnInit {
         private visitDetailsService: VisitDetailsService,
         private dialogRef: MatDialogRef<HivStatusComponent>,
         @Inject(MAT_DIALOG_DATA) data) {
-        this.minDate = new Date();
+        this.minDate = data.visitDate;
+        // this.minDate = new Date();
     }
 
     ngOnInit() {
