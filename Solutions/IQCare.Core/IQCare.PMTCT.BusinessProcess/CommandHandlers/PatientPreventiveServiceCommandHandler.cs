@@ -132,7 +132,8 @@ namespace IQCare.PMTCT.BusinessProcess.CommandHandlers
                             
                             preventiveService.Add(rawData);
                             
-                            if (data.NextSchedule.HasValue)
+                            
+                            if (data.NextSchedule.HasValue && !Equals(data.NextSchedule,"1900-01-01T00:00:00"))
                             {  
                                 PatientAppointment appointment = new PatientAppointment()
                                 {

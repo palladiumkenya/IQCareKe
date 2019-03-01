@@ -28,7 +28,8 @@ namespace IQCare.PMTCT.BusinessProcess.CommandHandlers
                 {
                     PatientAppointment patientAppointment = await _unitOfWork.Repository<PatientAppointment>()
                         .Get(x => x.PatientId == request.PatientId && x.PatientMasterVisitId==request.PatientMasterVisitId
-                                  && x.Description=="ANC Follow-up").FirstOrDefaultAsync();
+                                  && x.Description=="ANC Follow-up"
+                                  && x.PatientMasterVisitId>0).FirstOrDefaultAsync();
                     return Result<PatientAppointment>.Valid(new PatientAppointment());
                 }
                 catch (Exception e)

@@ -171,7 +171,7 @@ export class PreventiveServicesComponent implements OnInit, OnDestroy {
                 });
             }
         } else {
-            if (this.serviceData.filter(x => x.dateGiven === dateGivens && x.preventiveService === service).length > 0) {
+            if (this.serviceData.filter(x => x.preventiveService === service).length > 0) {
                 this.snotifyService.warning('' + service + ' exists', 'preventive Service', this.notificationService.getConfig());
             } else {
                 this.serviceData.push({

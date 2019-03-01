@@ -135,14 +135,14 @@ export class PatientEducationExaminationComponent implements OnInit, OnDestroy {
 
         const topic = this.PatientEducationFormGroup.controls['counselledOn'].value.itemName;
         const topicId = this.PatientEducationFormGroup.controls['counselledOn'].value.itemId;
-        const counsellingDate = moment(this.PatientEducationFormGroup.controls['counsellingDate'].value).toDate();
+        const counsellingDates = moment(this.PatientEducationFormGroup.controls['counsellingDate'].value).toDate();
 
         if (topic === '' || this.PatientEducationFormGroup.controls['counsellingDate'].value === '') {
             this.snotifyService.warning('counselling topic, counselling date required', this.notificationService.getConfig());
             return false;
         }
 
-        if (this.counselling_data.filter(x => x.counsellingTopic === topic && x.CounsellingDate === counsellingDate).length > 0) {
+        if (this.counselling_data.filter(x =>  x.counsellingTopic === topic ).length > 0) {
             this.snotifyService.warning('' + topic + ' exists', 'Counselling', this.notificationService.getConfig());
         } else {
             this.counselling_data.push({
