@@ -33,6 +33,8 @@ import * as moment from 'moment';
 import { MatDialogConfig, MatDialog, MatStepper } from '@angular/material';
 import { VisitDetailsEditCommand } from '../_models/VisitDetailsEditCommand';
 import { PatientAppointmentEditCommand } from '../_models/PatientAppointmentEditCommand';
+import { MatStepper } from '@angular/material';
+import { DataService } from '../_services/data.service';
 
 @Component({
     selector: 'app-anc',
@@ -121,7 +123,8 @@ export class AncComponent implements OnInit, OnDestroy {
         private notificationService: NotificationService,
         private ancService: AncService,
         private pncService: PncService,
-        private spinner: NgxSpinnerService) {
+        private spinner: NgxSpinnerService,
+        private dataservice: DataService) {
         this.userId = JSON.parse(localStorage.getItem('appUserId'));
         this.visitDetailsFormGroup = new FormArray([]);
         this.PatientEducationMatFormGroup = new FormArray([]);
@@ -295,6 +298,24 @@ export class AncComponent implements OnInit, OnDestroy {
 
     onReferralNotify(formGroup: FormGroup): void {
         this.ReferralMatFormGroup.push(formGroup);
+    }
+
+    validateHaartProphylaxisMatFormGroup(stepper: MatStepper) {
+        this.dataservice.currentHivStatus.subscribe(hivStatus => {
+            if (hivStatus !== '' && hivStatus != 'Positive') {
+                console.log('here');
+                console.log(this.HaartProphylaxisMatFormGroup);
+                stepper.next();
+            } else {
+                console.log('there');
+                if (this.HaartProphylaxisMatFormGroup.valid) {
+                    stepper.next();
+                } else {
+                    return;
+                }
+            }
+        });
+
     }
 
     public getPatientPregnancy(patientId: number) {

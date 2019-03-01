@@ -14,9 +14,9 @@
         </mat-form-field>
 
         <mat-form-field>
-            <input matInput placeholder="Visit Date" [min]="enrollmentDate" required [matDatepicker]="visitDatepicker"
-                (click)="visitDatepicker.open()" id="visitDatepicker" name="visitDatepicker" formControlName="visitDate"
-                required>
+            <input matInput placeholder="Visit Date" [min]="enrollmentDate" [max]="maxDate" required
+                [matDatepicker]="visitDatepicker" (click)="visitDatepicker.open()" id="visitDatepicker"
+                name="visitDatepicker" formControlName="visitDate" required>
             <mat-datepicker-toggle matSuffix [for]="visitDatepicker"></mat-datepicker-toggle>
             <mat-datepicker #visitDatepicker></mat-datepicker>
             <mat-error *ngIf="!form.controls['visitDate'].valid">Please select Visit Date</mat-error>
