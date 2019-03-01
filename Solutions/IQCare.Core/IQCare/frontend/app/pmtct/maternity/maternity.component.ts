@@ -30,6 +30,7 @@ import { VisitDetailsService } from '../_services/visit-details.service';
 import { MatDialogConfig, MatDialog } from '@angular/material';
 import { AddBirthInfoComponent } from './baby/add-birth-info/add-birth-info.component';
 import { AddBabyDialogComponent } from './baby/add-baby-dialog/add-baby-dialog.component';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
     selector: 'app-maternity',
@@ -110,7 +111,8 @@ export class MaternityComponent implements OnInit {
         private router: Router,
         private dialog: MatDialog,
         private ancservice: AncService,
-        private lookupitemservice: LookupItemService) {
+        private lookupitemservice: LookupItemService,
+        private spinner: NgxSpinnerService) {
         this.visitDetailsFormGroup = new FormArray([]);
         this.diagnosisFormGroup = new FormArray([]);
         this.maternalDrugAdministrationForGroup = new FormArray([]);
@@ -348,6 +350,7 @@ export class MaternityComponent implements OnInit {
             return;
         }
 
+        this.spinner.show();
         const visitDetailsCommand = {
             PatientId: parseInt(this.patientId.toString(), 10),
             ServiceAreaId: parseInt(this.serviceAreaId.toString(), 10),
@@ -672,6 +675,7 @@ export class MaternityComponent implements OnInit {
                             this.sendPatientDeliveryInfoRequest(maternityDeliveryCommand, babyConditionInfo);
                             this.sendVisitDetailsRequest(visitDetailsCommand);
 
+                            this.spinner.hide();
                             this.zone.run(() => {
                                 this.router.navigate(['/dashboard/personhome/' + this.personId], { relativeTo: this.route });
                             });
@@ -690,7 +694,7 @@ export class MaternityComponent implements OnInit {
                             this.sendVisitDetailsRequest(visitDetailsCommand);
                         }
 
-
+                        this.spinner.hide();
                         this.zone.run(() => {
                             this.router.navigate(['/dashboard/personhome/' + this.personId], { relativeTo: this.route });
                         });

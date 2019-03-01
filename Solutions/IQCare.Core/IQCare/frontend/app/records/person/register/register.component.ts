@@ -112,7 +112,8 @@ export class RegisterComponent implements OnInit {
                     EducationLevel: new FormControl(this.person.EducationLevel),
                     Occupation: new FormControl(this.person.Occupation),
                     IdentifierType: new FormControl(this.person.IdentifierType),
-                    IdentifierNumber: new FormControl(this.person.IdentifierNumber, [Validators.required])
+                    IdentifierNumber: new FormControl(this.person.IdentifierNumber,
+                        Validators.compose([Validators.required, Validators.maxLength(50)]))
                 }),
                 this._formBuilder.group({
                     County: new FormControl(this.clientAddress.County, [Validators.required]),

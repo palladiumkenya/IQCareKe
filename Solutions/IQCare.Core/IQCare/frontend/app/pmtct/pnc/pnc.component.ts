@@ -31,6 +31,7 @@ import { PatientFamilyPlanningMethodEditCommand } from '../_models/PatientFamily
 import { UpdateDrugAdministrationCommand } from '../_models/UpdateDrugAdministrationCommand';
 import { PartnerTestingEditCommand } from '../_models/PartnerTestingEditCommand';
 import { PatientPncExercisesCommand } from '../_models/PatientPncExercisesCommand';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
     selector: 'app-pnc',
@@ -108,7 +109,8 @@ export class PncComponent implements OnInit {
         private router: Router,
         private pncService: PncService,
         private lookupitemservice: LookupItemService,
-        private maternityService: MaternityService) {
+        private maternityService: MaternityService,
+        private spinner: NgxSpinnerService) {
         this.visitDetailsFormGroup = new FormArray([]);
         this.matHistory_PostNatalExam_FormGroup = new FormArray([]);
         this.drugAdministration_PartnerTesting_FormGroup = new FormArray([]);
@@ -332,6 +334,7 @@ export class PncComponent implements OnInit {
             return;
         }
 
+
         if (this.isEdit) {
             this.submitOnEdit();
         } else {
@@ -340,6 +343,7 @@ export class PncComponent implements OnInit {
     }
 
     submitOnAddNew(): void {
+        this.spinner.show();
         const yesOption = this.yesnoOptions.filter(obj => obj.itemName == 'Yes');
         const noOption = this.yesnoOptions.filter(obj => obj.itemName == 'No');
         const naOption = this.yesNoNaOptions.filter(obj => obj.itemName == 'N/A');
@@ -656,6 +660,7 @@ export class PncComponent implements OnInit {
                         }
                     );
 
+                    this.spinner.hide();
                     this.snotifyService.success('Successfully saved PNC encounter ', 'PNC', this.notificationService.getConfig());
                     this.zone.run(() => {
                         this.router.navigate(['/dashboard/personhome/' + this.personId], { relativeTo: this.route });
@@ -671,6 +676,7 @@ export class PncComponent implements OnInit {
     }
 
     submitOnEdit(): void {
+        this.spinner.show();
         const yesOption = this.yesnoOptions.filter(obj => obj.itemName == 'Yes');
         const noOption = this.yesnoOptions.filter(obj => obj.itemName == 'No');
 
@@ -901,6 +907,7 @@ export class PncComponent implements OnInit {
                 (result) => {
                     console.log(result);
 
+                    this.spinner.hide();
                     this.snotifyService.success('Successfully updated PNC encounter ', 'PNC', this.notificationService.getConfig());
                     this.zone.run(() => {
                         this.zone.run(() => {
