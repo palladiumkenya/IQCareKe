@@ -7,3 +7,10 @@ export interface MaternityCounsellingCommand {
     Description?: Date;
     CreatedBy?: number;
 }
+
+export interface EditMaternityCounsellingCommand{
+    Id : number,
+    CounsellingTopicId?: number;
+    IsCounsellingDone?: boolean;
+    Description ? :string
+}

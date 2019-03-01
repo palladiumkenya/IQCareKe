@@ -25,7 +25,7 @@ namespace IQCare.Common.BusinessProcess.CommandHandlers.Refferal
             {
                 try
                 {
-                    //PatientRefferal patientRefferal = await _unitOfWork.Repository<PatientRefferal>().FindAsync(x => x.PatientId == request.PatientId && x.PatientMasterVisitId == request.PatientMasterVisitId);
+                   
                     var patientRefferal = await _unitOfWork.Repository<PatientRefferal>().FindByIdAsync(request.Id);
                     if (patientRefferal != null)
                     {

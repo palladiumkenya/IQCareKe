@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using AutoMapper;
@@ -29,15 +30,14 @@ namespace IQCare.Maternity.BusinessProcess.CommandHandlers
             {
                 try
                 {
-                    var patientDiagnoses = await _maternityUnitOfWork.Repository<PatientDiagnosis>().Get(x =>
-                            x.PatientId == request.PatientId && x.PatientMasterVisitId == request.PatientMasterVisitId)
-                        .FirstOrDefaultAsync();
+                    var patientDiagnosis = await _maternityUnitOfWork.Repository<PatientDiagnosis>().Get(x=>x.Id == request.DiagnosisId)
+                        .SingleOrDefaultAsync();
 
-                    if(patientDiagnoses==null)
+                    if(patientDiagnosis==null)
                         return Result<UpdatePatientDiagnosisResponse>.Invalid("Patient diagnosis could not be found");
 
-                    patientDiagnoses.Update(request.Diagnosis, request.ManagementPlan);
-                    _maternityUnitOfWork.Repository<PatientDiagnosis>().Update(patientDiagnoses);
+                    patientDiagnosis.Update(request.DiagnosisCommand.Diagnosis, request.DiagnosisCommand.ManagementPlan);
+                    _maternityUnitOfWork.Repository<PatientDiagnosis>().Update(patientDiagnosis);
                     await _maternityUnitOfWork.SaveAsync();
 
                     return Result<UpdatePatientDiagnosisResponse>.Valid(new UpdatePatientDiagnosisResponse()

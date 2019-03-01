@@ -1518,8 +1518,41 @@ namespace IQCare.Common.BusinessProcess.Services
                         mstFacility = await _unitOfWork.Repository<Facility>().Get(x => x.DeleteFlag == 0)
                             .ToListAsync();
                     }
-
+                    
                     await UpdatePatient(patient.Id, dateOfBirth, mstFacility[0].PosID);
+
+                    if (patient.Ptn_pk > 0)
+                    {
+                        var gender = 0;
+                        var lookupGender = await _unitOfWork.Repository<LookupItemView>().Get(x => x.ItemId == sex).ToListAsync();
+                        if (lookupGender.Count > 0)
+                        {
+                            if (lookupGender[0].ItemName == "Male")
+                            {
+                                gender = 16;
+                            }
+                            else if (lookupGender[0].ItemName == "Female")
+                            {
+                                gender = 17;
+                            }
+
+                            StringBuilder stringBuilder = new StringBuilder();
+                            stringBuilder.Append("exec pr_OpenDecryptedSession;");
+                            stringBuilder.Append($"UPDATE mst_Patient SET " +
+                                                 $"FirstName = ENCRYPTBYKEY(KEY_GUID('Key_CTC'), '{firstName}')," +
+                                                 $"MiddleName = ENCRYPTBYKEY(KEY_GUID('Key_CTC'), '{middleName}')," +
+                                                 $"LastName = ENCRYPTBYKEY(KEY_GUID('Key_CTC'), '{lastName}')," +
+                                                 $"Sex = {gender}," +
+                                                 $"DOB = {dateOfBirth.ToString("yyyy-MM-dd")}" +
+                                                 $"where Ptn_Pk = {patient.Ptn_pk};");
+                            stringBuilder.Append("exec [dbo].[pr_CloseDecryptedSession];");
+                            stringBuilder.Append($"SELECT Ptn_Pk, " +
+                                                 $"CAST(DECRYPTBYKEY(FirstName) AS VARCHAR(50)) FirstName, " +
+                                                 $"CAST(DECRYPTBYKEY(LastName) AS VARCHAR(50)) LastName, LocationID FROM mst_Patient WHERE Ptn_Pk = {patient.Ptn_pk};");
+
+                            await _unitOfWork.Repository<MstPatient>().FromSql(stringBuilder.ToString());
+                        }
+                    }
                 }
 
                 return personInsert.FirstOrDefault();
@@ -1567,19 +1600,7 @@ namespace IQCare.Common.BusinessProcess.Services
                            ",[CreatedBy] ,[AuditData] ,[DateOfBirth] ,[DobPrecision], RegistrationDate, FacilityId FROM [dbo].[Person] WHERE Id = SCOPE_IDENTITY();" +
                            "exec [dbo].[pr_CloseDecryptedSession];");
 
-                //var sql2 =
-                //    "exec pr_OpenDecryptedSession;" +
-                //    "Insert Into Person(FirstName, MidName, LastName,NickName, Sex, DateOfBirth, DobPrecision, Active, DeleteFlag, CreateDate, CreatedBy, RegistrationDate, FacilityId)" +
-                //    $"Values(ENCRYPTBYKEY(KEY_GUID('Key_CTC'), '{firstName}'), ENCRYPTBYKEY(KEY_GUID('Key_CTC'), '{middleName}')," +
-                //    $"ENCRYPTBYKEY(KEY_GUID('Key_CTC'), '{lastName}'),ENCRYPTBYKEY(KEY_GUID('Key_CTC'), '{nickName}') , {sex}, '{dob}', 1," +
-                //    $"1,0,GETDATE(), '{createdBy}', '{registrationDate}', '{facilityId}');" +
-                //    "SELECT [Id] , CAST(DECRYPTBYKEY(FirstName) AS VARCHAR(50)) [FirstName] ,CAST(DECRYPTBYKEY(MidName) AS VARCHAR(50)) MidName" +
-                //    ",CAST(DECRYPTBYKEY(LastName) AS VARCHAR(50)) [LastName], CAST(DECRYPTBYKEY(NickName) AS VARCHAR(50)) [NickName],[Sex] ,[Active] ,[DeleteFlag] ,[CreateDate] " +
-                //    ",[CreatedBy] ,[AuditData] ,[DateOfBirth] ,[DobPrecision], RegistrationDate, FacilityId FROM [dbo].[Person] WHERE Id = SCOPE_IDENTITY();" +
-                //    "exec [dbo].[pr_CloseDecryptedSession];";
-
                 var personInsert = await _unitOfWork.Repository<Person>().FromSql(sql.ToString());
-
                 return personInsert.FirstOrDefault();
             }
             catch (Exception e)

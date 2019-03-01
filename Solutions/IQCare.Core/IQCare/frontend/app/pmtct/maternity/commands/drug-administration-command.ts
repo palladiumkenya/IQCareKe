@@ -7,3 +7,9 @@ export interface DrugAdministrationCommand {
     CreatedBy?: number;
     AdministeredDrugs: AdministeredDrugInfo[];
 }
+
+
+export interface UpdateDrugAdministrationCommand{
+    PatientMasterVisitId?: number;
+    AdministeredDrugs: AdministeredDrugInfo[];
+}

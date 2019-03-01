@@ -32,4 +32,19 @@ namespace IQCare.Maternity.BusinessProcess.Commands.Maternity
         public int PatientMasterVisitId { get; set; }
         public int ? PregnancyId { get; set; }       
     }
+
+    public class UpdateMaternalPatientDeliveryInfoCommand : IRequest<Result<UpdatePatientDeliveryInfoResponse>>
+    {
+        public int PatientDeliveryInfoId { get; set; }
+        public AddMaternalPatientDeliveryInfoCommand MaternalPatientDeliveryInfoCommand { get; set; }
+
+    }
+
+    public class UpdatePatientDeliveryInfoResponse
+    {
+        public int PatientDeliveryId { get; set; }
+        public int PatientMasterVisitId { get; set; }
+        public string Message { get; set; }
+
+    }
 }

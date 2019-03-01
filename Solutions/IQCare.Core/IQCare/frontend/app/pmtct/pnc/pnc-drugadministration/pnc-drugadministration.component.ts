@@ -51,6 +51,7 @@ export class PncDrugadministrationComponent implements OnInit, AfterViewInit {
             id_haematinics: new FormControl(''),
             id_infantdrug: new FormControl(''),
             id_infantstart: new FormControl(''),
+            id_startedart0: new FormControl(''),
         });
 
         const { yesNoNaOptions,
@@ -68,10 +69,16 @@ export class PncDrugadministrationComponent implements OnInit, AfterViewInit {
             this.hiv_status = hivStatus;
 
             if (this.hiv_status !== '' && this.hiv_status != 'Positive') {
-                this.DrugAdministrationForm.get('startedARTPncVisit').disable({ onlySelf: false });
-                this.DrugAdministrationForm.get('haematinics_given').disable({ onlySelf: false });
-                this.DrugAdministrationForm.get('infant_drug').disable({ onlySelf: false });
-                this.DrugAdministrationForm.get('infant_start').disable({ onlySelf: false });
+                this.DrugAdministrationForm.get('startedARTPncVisit').disable({ onlySelf: true });
+                this.DrugAdministrationForm.get('haematinics_given').disable({ onlySelf: true });
+                this.DrugAdministrationForm.get('infant_drug').disable({ onlySelf: true });
+                this.DrugAdministrationForm.get('infant_start').disable({ onlySelf: true });
+            } else {
+                this.DrugAdministrationForm.get('startedARTPncVisit').enable({ onlySelf: false });
+                this.DrugAdministrationForm.get('haematinics_given').enable({ onlySelf: false });
+                this.DrugAdministrationForm.get('infant_drug').enable({ onlySelf: false });
+                this.DrugAdministrationForm.get('infant_start').enable({ onlySelf: false });
+                this.DrugAdministrationForm.get('id_startedart0').setValue('0');
             }
         });
     }
