@@ -279,7 +279,7 @@ export class MaternityComponent implements OnInit {
     }
 
     onBabyNotifyData(babyNotifyData: any[]): void {
-        console.log('Baby Notify data ' + this.babyNotifyData.length);
+        this.babyNotifyData = [];
         this.babyNotifyData.push(babyNotifyData);
     }
 
