@@ -1,15 +1,15 @@
-import { Component, EventEmitter, Input, OnInit, Output, OnDestroy } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import {Component, EventEmitter, Input, OnInit, Output, OnDestroy} from '@angular/core';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 
-import { SnotifyService } from 'ng-snotify';
+import {SnotifyService} from 'ng-snotify';
 
-import { Subscription } from 'rxjs/index';
-import { PreventiveServiceEmitter } from '../../emitters/PreventiveServiceEmitter';
-import { PreventiveEmitter } from '../../emitters/PreventiveEmitter';
-import { LookupItemService } from '../../../shared/_services/lookup-item.service';
-import { NotificationService } from '../../../shared/_services/notification.service';
+import {Subscription} from 'rxjs/index';
+import {PreventiveServiceEmitter} from '../../emitters/PreventiveServiceEmitter';
+import {PreventiveEmitter} from '../../emitters/PreventiveEmitter';
+import {LookupItemService} from '../../../shared/_services/lookup-item.service';
+import {NotificationService} from '../../../shared/_services/notification.service';
 import * as moment from 'moment';
-import { AncService } from '../../_services/anc.service';
+import {AncService} from '../../_services/anc.service';
 
 export interface Options {
     value: string;
@@ -46,17 +46,17 @@ export class PreventiveServicesComponent implements OnInit, OnDestroy {
 
 
     constructor(private _formBuilder: FormBuilder, private _lookupItemService: LookupItemService,
-        private snotifyService: SnotifyService,
-        private notificationService: NotificationService,
-        private ancService: AncService) {
+                private snotifyService: SnotifyService,
+                private notificationService: NotificationService,
+                private ancService: AncService) {
     }
 
     ngOnInit() {
         this.PreventiveServicesFormGroup = this._formBuilder.group({
-            preventiveServices: ['', Validators.required],
-            dateGiven: ['', Validators.required],
+            preventiveServices: ['', (this.isEdit) ? [] : Validators.required],
+            dateGiven: ['', (this.isEdit) ? [] : Validators.required],
             comments: ['', []],
-            nextSchedule: ['', Validators.required],
+            nextSchedule: ['', []],
             insecticideTreatedNet: ['', Validators.required],
             insecticideTreatedNetGivenDate: ['', Validators.required],
             antenatalExercise: ['', Validators.required],
@@ -65,7 +65,7 @@ export class PreventiveServicesComponent implements OnInit, OnDestroy {
             finalHIVResult: ['', Validators.required]
         });
 
-        this.PreventiveServicesFormGroup.get('insecticideTreatedNetGivenDate').disable({ onlySelf: true });
+        this.PreventiveServicesFormGroup.get('insecticideTreatedNetGivenDate').disable({onlySelf: true});
 
         const {
             yesNoNaOptions,
@@ -79,8 +79,10 @@ export class PreventiveServicesComponent implements OnInit, OnDestroy {
         this.preventiveServicesOptions = preventiveServicesOptions;
 
         // console.log('preventive service' + hivFinalResultOptions[0].itemName);
-        this.notify.emit({ 'form': this.PreventiveServicesFormGroup, 'preventive_service_data': (this.isEdit) ?
-                this.serviceDataEdit : this.serviceData });
+        this.notify.emit({
+            'form': this.PreventiveServicesFormGroup, 'preventive_service_data': (this.isEdit) ?
+                this.serviceDataEdit : this.serviceData
+        });
 
         if (this.isEdit) {
             // this.getPatientPreventiveServiceInfo(this.patientId, this.patientMasterVisitId);
@@ -124,10 +126,13 @@ export class PreventiveServicesComponent implements OnInit, OnDestroy {
     public moveNextStep() {
         console.log(this.PreventiveServicesFormGroup.value);
 
+        const insectedTreatedNet = this.PreventiveServicesFormGroup.controls['insecticideTreatedNet'].value.itemName;
+
         this.preventiveServicesData = {
             preventiveService: this.serviceData,
             insecticideTreatedNet: parseInt(this.PreventiveServicesFormGroup.controls['insecticideTreatedNet'].value, 10),
-            insecticideTreatedNetGivenDate: this.PreventiveServicesFormGroup.controls['insecticideTreatedNetGivenDate'].value,
+            insecticideTreatedNetGivenDate: (insectedTreatedNet === 'No') ?
+                this.PreventiveServicesFormGroup.controls['insecticideTreatedNetGivenDate'].value : this.maxDate,
             antenatalExercise: parseInt(this.PreventiveServicesFormGroup.controls['antenatalExercise'].value, 10),
             //  insecticideGivenDate: this.PreventiveServicesFormGroup.controls['insecticideGivenDate'].value,
             PartnerTestingVisit: parseInt(this.PreventiveServicesFormGroup.controls['PartnerTestingVisit'].value, 10),
@@ -143,32 +148,41 @@ export class PreventiveServicesComponent implements OnInit, OnDestroy {
 
         const service = this.PreventiveServicesFormGroup.controls['preventiveServices'].value.itemName;
         const serviceId = this.PreventiveServicesFormGroup.controls['preventiveServices'].value.itemId;
+        const dateGivens = moment(this.PreventiveServicesFormGroup.controls['nextSchedule'].value).toDate();
 
-if (this.isEdit) {
-    if (this.serviceDataEdit.filter(x => x.preventiveService === service).length > 0) {
-        this.snotifyService.warning('' + service + ' exists', 'preventive Service', this.notificationService.getConfig());
-    } else {
-        this.serviceDataEdit.push({
-            preventiveService: service,
-            preventiveServiceId: serviceId,
-            dateGiven: this.PreventiveServicesFormGroup.controls['dateGiven'].value,
-            comments: this.PreventiveServicesFormGroup.controls['comments'].value,
-            nextSchedule: this.PreventiveServicesFormGroup.controls['nextSchedule'].value
-        });
-    }
-} else {
-    if (this.serviceData.filter(x => x.preventiveService === service).length > 0) {
-        this.snotifyService.warning('' + service + ' exists', 'preventive Service', this.notificationService.getConfig());
-    } else {
-        this.serviceData.push({
-            preventiveService: service,
-            preventiveServiceId: serviceId,
-            dateGiven: this.PreventiveServicesFormGroup.controls['dateGiven'].value,
-            comments: this.PreventiveServicesFormGroup.controls['comments'].value,
-            nextSchedule: this.PreventiveServicesFormGroup.controls['nextSchedule'].value
-        });
-    }
-}
+        if (service === '' || this.PreventiveServicesFormGroup.controls['dateGiven'].value === ''
+            ) {
+            this.snotifyService.warning('Please provide service,date given', 'preventive Service',
+                this.notificationService.getConfig());
+            return false;
+        }
+
+        if (this.isEdit) {
+            if (this.serviceDataEdit.filter(x => x.preventiveService === service).length > 0) {
+                this.snotifyService.warning('' + service + ' exists', 'preventive Service', this.notificationService.getConfig());
+            } else {
+                this.serviceDataEdit.push({
+                    preventiveService: service,
+                    preventiveServiceId: serviceId,
+                    dateGiven: this.PreventiveServicesFormGroup.controls['dateGiven'].value,
+                    comments: this.PreventiveServicesFormGroup.controls['comments'].value,
+                    nextSchedule: (this.PreventiveServicesFormGroup.controls['nextSchedule'].value === '') ?
+                       '1900-01-01T00:00:00' : this.PreventiveServicesFormGroup.controls['nextSchedule'].value
+                });
+            }
+        } else {
+            if (this.serviceData.filter(x => x.dateGiven === dateGivens && x.preventiveService === service).length > 0) {
+                this.snotifyService.warning('' + service + ' exists', 'preventive Service', this.notificationService.getConfig());
+            } else {
+                this.serviceData.push({
+                    preventiveService: service,
+                    preventiveServiceId: serviceId,
+                    dateGiven: this.PreventiveServicesFormGroup.controls['dateGiven'].value,
+                    comments: this.PreventiveServicesFormGroup.controls['comments'].value,
+                    nextSchedule: this.PreventiveServicesFormGroup.controls['nextSchedule'].value
+                });
+            }
+        }
 
         console.log(this.serviceData);
     }
@@ -190,10 +204,10 @@ if (this.isEdit) {
     public onInsecticideTreatedNetGivenChange(event) {
 
         if (event.isUserInput && event.source.selected && event.source.viewValue == 'Yes') {
-            this.PreventiveServicesFormGroup.get('insecticideTreatedNetGivenDate').enable({ onlySelf: true });
+            this.PreventiveServicesFormGroup.get('insecticideTreatedNetGivenDate').enable({onlySelf: true});
         } else {
             this.PreventiveServicesFormGroup.get('insecticideTreatedNetGivenDate').setValue('');
-            this.PreventiveServicesFormGroup.get('insecticideTreatedNetGivenDate').disable({ onlySelf: true });
+            this.PreventiveServicesFormGroup.get('insecticideTreatedNetGivenDate').disable({onlySelf: true});
         }
     }
 
@@ -229,7 +243,7 @@ if (this.isEdit) {
                     if (insecticide.length > 0) {
                         this.PreventiveServicesFormGroup.get('insecticideTreatedNet').setValue(insecticide[0]['preventiveServiceId']);
                         this.PreventiveServicesFormGroup.get('insecticideTreatedNetGivenDate').setValue(insecticide[0]
-                        ['preventiveServiceDate']);
+                            ['preventiveServiceDate']);
                     }
 
                     if (exercise.length > 0) {
@@ -275,7 +289,7 @@ if (this.isEdit) {
                     if (insecticide.length > 0) {
                         this.PreventiveServicesFormGroup.get('insecticideTreatedNet').setValue(insecticide[0]['preventiveServiceId']);
                         this.PreventiveServicesFormGroup.get('insecticideTreatedNetGivenDate').setValue(insecticide[0]
-                        ['preventiveServiceDate']);
+                            ['preventiveServiceDate']);
                     }
 
                     if (exercise.length > 0) {
@@ -320,7 +334,7 @@ if (this.isEdit) {
     }
 
     ngOnDestroy(): void {
-       // this.partnerTesting$.unsubscribe();
+        // this.partnerTesting$.unsubscribe();
         this.preventiveService$.unsubscribe();
     }
 }
