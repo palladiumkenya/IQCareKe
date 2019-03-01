@@ -1,3 +1,4 @@
+import { NgxSpinnerService } from 'ngx-spinner';
 import { PncService } from './../_services/pnc.service';
 import { Component, OnInit, OnDestroy, NgZone } from '@angular/core';
 import { NotificationService } from './../../shared/_services/notification.service';
@@ -110,14 +111,16 @@ export class AncComponent implements OnInit, OnDestroy {
     public ReferralMatFormGroup: FormArray;
 
 
-    constructor(private route: ActivatedRoute, private visitDetailsService: VisitDetailsService,
+    constructor(private route: ActivatedRoute,
+        private visitDetailsService: VisitDetailsService,
         private snotifyService: SnotifyService,
         private lookupItemService: LookupItemService,
         public zone: NgZone,
         private router: Router,
         private notificationService: NotificationService,
         private ancService: AncService,
-        private pncService: PncService) {
+        private pncService: PncService,
+        private spinner: NgxSpinnerService) {
         this.userId = JSON.parse(localStorage.getItem('appUserId'));
         this.visitDetailsFormGroup = new FormArray([]);
         this.PatientEducationMatFormGroup = new FormArray([]);
@@ -333,6 +336,11 @@ export class AncComponent implements OnInit, OnDestroy {
     }
 
     public onSubmit(): void {
+        if (!this.ReferralMatFormGroup.valid) {
+            this.snotifyService.error('Complete the highlighted fields before submitting', 'ANC Encounter',
+                this.notificationService.getConfig());
+            return;
+        }
 
         if (this.isEdit) {
             this.onSubmitEdit();
@@ -342,8 +350,7 @@ export class AncComponent implements OnInit, OnDestroy {
     }
 
     public onSubmitNew() {
-
-
+        this.spinner.show();
         const ancVisitDetailsCommand: any = {
             PatientId: parseInt(this.patientId.toString(), 10),
             PatientMasterVisitId: this.patientMasterVisitId,
@@ -714,6 +721,8 @@ export class AncComponent implements OnInit, OnDestroy {
                                         console.log(testRes);
                                     }
                                 );
+
+                                this.spinner.hide();
                                 // console.log(result);
                                 this.snotifyService.success('Successfully saved ANC encounter ', 'ANC',
                                     this.notificationService.getConfig());
@@ -755,6 +764,8 @@ export class AncComponent implements OnInit, OnDestroy {
                                 console.log(testRes);
                             }
                         );
+
+                        this.spinner.hide();
                         this.snotifyService.success('Successfully saved ANC encounter ', 'ANC',
                             this.notificationService.getConfig());
                         this.zone.run(() => {
@@ -773,7 +784,7 @@ export class AncComponent implements OnInit, OnDestroy {
     }
 
     public onSubmitEdit(): void {
-
+        this.spinner.show();
         const yesOption = this.yesNoOptions.filter(obj => obj.itemName == 'Yes');
         const noOption = this.yesNoOptions.filter(obj => obj.itemName == 'No');
         const naOption = this.yesNoNaOptions.filter(obj => obj.itemName == 'N/A');
@@ -953,6 +964,7 @@ export class AncComponent implements OnInit, OnDestroy {
 
         ]).subscribe(
             (result) => {
+                this.spinner.hide();
                 console.log(result);
                 this.snotifyService.success('Successfully Edited ANC encounter ', 'ANC',
                     this.notificationService.getConfig());
