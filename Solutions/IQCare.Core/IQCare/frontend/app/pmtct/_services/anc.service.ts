@@ -146,7 +146,7 @@ export class AncService {
     }
 
     public savePatientChronicIllness(chronicIllnessCommand: any[]): Observable<any> {
-        // console.log(chronicIllnessCommand);
+         console.log(chronicIllnessCommand);
         if (chronicIllnessCommand.length == 0) {
             return of([]);
         }

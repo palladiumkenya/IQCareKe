@@ -44,8 +44,8 @@
                                             <button mat-raised-button color="primary" matStepperPrevious
                                                 type="button">Previous</button>
                                             &nbsp;&nbsp;
-                                            <button mat-raised-button color="accent" matStepperNext
-                                                type="button">Next</button>
+                                            <button mat-raised-button color="accent"
+                                                type="button" (click)="checkEducationFilled(stepper)">Next</button>
                                         </div>
                                     </mat-step>
 
@@ -55,7 +55,7 @@
                                                 HIV Status
                                             </span>
                                         </ng-template>
-                                        
+
                                         <app-anc-hivtesting (notify)="onHivStatusNotify($event)"
                                             [hivTestingOptions]="hivTestingOptions" [isEdit]="isEdit"
                                             [PatientId]="patientId" [PatientMasterVisitId]="patientMasterVisitId"
@@ -68,7 +68,7 @@
                                                 type="button">Previous</button>
                                             &nbsp;&nbsp;
                                             <button mat-raised-button color="accent" matStepperNext
-                                                type="button">Next</button>
+                                                type="button" >Next</button>
                                         </div>
 
                                     </mat-step>
@@ -107,8 +107,8 @@
                                             <button mat-raised-button color="primary" matStepperPrevious
                                                 type="button">Previous</button>
                                             &nbsp;&nbsp;
-                                            <button mat-raised-button color="accent" matStepperNext
-                                                type="button">Next</button>
+                                            <button mat-raised-button color="accent"
+                                                type="button" (click)="checkChroniIllnessAdded(stepper)">Next</button>
                                         </div>
                                     </mat-step>
                                     <mat-step [completed]="false" [stepControl]="PreventiveServiceMatFormGroup">
@@ -125,8 +125,8 @@
                                             <button mat-raised-button color="primary" matStepperPrevious
                                                 type="button">Previous</button>
                                             &nbsp;&nbsp;
-                                            <button mat-raised-button color="accent" matStepperNext
-                                                type="button">Next</button>
+                                            <button mat-raised-button color="accent"
+                                                type="button" (click)="checkPreventiveServicesAdded(stepper)">Next</button>
                                         </div>
                                     </mat-step>
 
