@@ -86,10 +86,10 @@ export class HaartProphylaxisComponent implements OnInit, OnDestroy {
             cotrimoxazole: ['', Validators.required],
             aztFortheBaby: ['', Validators.required],
             nvpForBaby: ['', Validators.required],
-            illness: ['', Validators.required],
-            otherIllness: ['', Validators.required],
-            onSetDate: ['', Validators.required],
-            currentTreatment: ['', Validators.required] // ,
+            illness: ['', (this.isEdit) ? [] : Validators.required],
+            otherIllness: ['', (this.isEdit) ? [] : Validators.required],
+            onSetDate: ['', (this.isEdit) ? [] : Validators.required],
+            currentTreatment: ['', (this.isEdit) ? [] : Validators.required] // ,
             // dose: ['', Validators.required]
         });
 
@@ -183,9 +183,16 @@ export class HaartProphylaxisComponent implements OnInit, OnDestroy {
     public AddOtherIllness() {
         const illness = this.HaartProphylaxisFormGroup.controls['illness'].value.itemName;
         const illnessId = parseInt(this.HaartProphylaxisFormGroup.controls['illness'].value.itemId, 10);
+        const onsetDates =  moment(this.HaartProphylaxisFormGroup.controls['onSetDate'].value).toDate();
+
+        if (illness === '' || this.HaartProphylaxisFormGroup.controls['onSetDate'].value === '' ||
+            this.HaartProphylaxisFormGroup.controls['currentTreatment'].value === '' ) {
+            this.snotifyService.warning('illness,onsetDate and current Treatment is required', this.notificationService.getConfig());
+            return false;
+        }
 
         if (this.isEdit) {
-            if (this.chronicIllnessEdit.filter(x => x.chronicIllness === illness).length > 0) {
+            if (this.chronicIllnessEdit.filter(x => x.onSetDate === onsetDates && x.chronicIllness === illness).length > 0) {
                 this.snotifyService.warning('' + illness + ' exists', 'Counselling', this.notificationService.getConfig());
             } else {
                 this.chronicIllnessEdit.push({
@@ -209,7 +216,6 @@ export class HaartProphylaxisComponent implements OnInit, OnDestroy {
                 });
             }
         }
-
 
         console.log(this.chronicIllness);
     }
