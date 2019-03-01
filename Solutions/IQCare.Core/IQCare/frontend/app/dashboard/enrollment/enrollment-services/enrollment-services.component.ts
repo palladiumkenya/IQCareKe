@@ -26,6 +26,7 @@ export class EnrollmentServicesComponent implements OnInit {
     posId: string;
     patientId: number;
     maxDate: Date;
+    minDate: Date;
     serviceCode: string;
 
     patientTypeOptions: any;
@@ -44,7 +45,7 @@ export class EnrollmentServicesComponent implements OnInit {
         private recordsService: RecordsService) {
         this.userId = JSON.parse(localStorage.getItem('appUserId'));
         this.posId = localStorage.getItem('appPosID');
-        // this.maxDate = new Date();
+        this.maxDate = new Date();
     }
 
     ngOnInit() {
@@ -97,9 +98,9 @@ export class EnrollmentServicesComponent implements OnInit {
                 console.log(res);
                 const { registrationDate } = res[0];
                 if (registrationDate) {
-                    this.maxDate = registrationDate;
+                    this.minDate = registrationDate;
                 } else {
-                    this.maxDate = new Date();
+                    this.minDate = new Date();
                 }
 
             }

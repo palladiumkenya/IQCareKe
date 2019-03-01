@@ -89,7 +89,9 @@ export class HaartProphylaxisComponent implements OnInit, OnDestroy {
             illness: ['', Validators.required],
             otherIllness: ['', Validators.required],
             onSetDate: ['', Validators.required],
-            currentTreatment: ['', Validators.required] // ,
+            currentTreatment: ['', Validators.required],
+            placeholder: new FormControl('0')
+            // ,
             // dose: ['', Validators.required]
         });
 
@@ -111,11 +113,26 @@ export class HaartProphylaxisComponent implements OnInit, OnDestroy {
                 this.HaartProphylaxisFormGroup.get('cotrimoxazole').disable({ onlySelf: true });
                 this.HaartProphylaxisFormGroup.get('aztFortheBaby').disable({ onlySelf: true });
                 this.HaartProphylaxisFormGroup.get('nvpForBaby').disable({ onlySelf: true });
+
+                this.HaartProphylaxisFormGroup.get('onArvBeforeANCVisit').markAsTouched();
+                this.HaartProphylaxisFormGroup.get('startedHaartANC').markAsTouched();
+                this.HaartProphylaxisFormGroup.get('cotrimoxazole').markAsTouched();
+                this.HaartProphylaxisFormGroup.get('aztFortheBaby').markAsTouched();
+                this.HaartProphylaxisFormGroup.get('nvpForBaby').markAsTouched();
+                this.HaartProphylaxisFormGroup.get('placeholder').setValue('0');
+            } else {
+                this.HaartProphylaxisFormGroup.get('onArvBeforeANCVisit').enable({ onlySelf: false });
+                this.HaartProphylaxisFormGroup.get('startedHaartANC').enable({ onlySelf: false });
+                this.HaartProphylaxisFormGroup.get('cotrimoxazole').enable({ onlySelf: false });
+                this.HaartProphylaxisFormGroup.get('aztFortheBaby').enable({ onlySelf: false });
+                this.HaartProphylaxisFormGroup.get('nvpForBaby').enable({ onlySelf: false });
             }
         });
 
-        this.notify.emit({ 'form': this.HaartProphylaxisFormGroup, 'illness_data': (this.isEdit) ?
-                this.chronicIllnessEdit : this.chronicIllness });
+        this.notify.emit({
+            'form': this.HaartProphylaxisFormGroup, 'illness_data': (this.isEdit) ?
+                this.chronicIllnessEdit : this.chronicIllness
+        });
         if (this.isEdit) {
             this.getPatientDrugAdministrationInfo(this.patientId);
             this.getPatientChronicIllnessInfo(this.patientId);
