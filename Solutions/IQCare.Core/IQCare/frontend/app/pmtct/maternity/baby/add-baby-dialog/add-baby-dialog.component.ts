@@ -16,8 +16,8 @@ export class AddBabyDialogComponent implements OnInit {
   @Input() PatientId: number;
   @Input() isEdit: boolean;
   @Input() PatientMasterVisitId: number;
-  patientDeliveryInfoId : number;
-  deliveredBabyInfoId : number;
+  patientDeliveryInfoId: number;
+  deliveredBabyInfoId: number;
   babyFormGroup: FormGroup;
 
   public genderOptions: any[] = [];
@@ -25,17 +25,16 @@ export class AddBabyDialogComponent implements OnInit {
   yesnoOptions: any[] = [];
   birthOutcomes: any[] = [];
 
-  isUpdate : boolean;
-  isNew : boolean;
+  isUpdate: boolean;
+  isNew: boolean;
 
-  babyInfo :any;
-  constructor( private dialogRef : MatDialogRef<AddBabyDialogComponent>,
-              @Inject(MAT_DIALOG_DATA) public dialogData : any,
+  babyInfo: any;
+  constructor( private dialogRef: MatDialogRef<AddBabyDialogComponent>,
+              @Inject(MAT_DIALOG_DATA) public dialogData: any,
               private formBuilder: FormBuilder,
               private maternityService: MaternityService,
               private snotifyService: SnotifyService,
-              private notificationService: NotificationService) 
-              { 
+              private notificationService: NotificationService) { 
                 
  
               }
@@ -43,7 +42,7 @@ export class AddBabyDialogComponent implements OnInit {
   ngOnInit() {
     this.babyFormGroup = this.formBuilder.group({
       babySex: new FormControl('', [Validators.required]),
-      birthWeight: new FormControl('', [Validators.required]),
+      birthWeight: new FormControl('', [Validators.required, Validators.min(0), Validators.max(10)]),
       outcome: new FormControl('', [Validators.required]),
       resuscitationDone: new FormControl('', [Validators.required]),
       deformity: new FormControl('', [Validators.required]),
@@ -58,9 +57,9 @@ export class AddBabyDialogComponent implements OnInit {
   });
 
 
-       this.babySectionOptions = this.dialogData.babySectionOptions
-       this.PatientId = this.dialogData.patientId
-       this.PatientMasterVisitId = this.dialogData.patientMasterVisitId
+       this.babySectionOptions = this.dialogData.babySectionOptions;
+       this.PatientId = this.dialogData.patientId;
+       this.PatientMasterVisitId = this.dialogData.patientMasterVisitId;
        this.babyInfo = this.dialogData.babyInfo;
        this.isNew = this.dialogData.isNew;
        this.isUpdate = this.dialogData.isUpdate;
@@ -76,10 +75,10 @@ export class AddBabyDialogComponent implements OnInit {
     this.yesnoOptions = yesNos;
     this.birthOutcomes = birthOutcomes;
     
-    if(this.isUpdate){
+    if (this.isUpdate) {
        this.setBabyFormValues(this.babyInfo);
-       this.patientDeliveryInfoId = this.babyInfo.patientDeliveryInformationId
-       this.deliveredBabyInfoId = this.babyInfo.id
+       this.patientDeliveryInfoId = this.babyInfo.patientDeliveryInformationId;
+       this.deliveredBabyInfoId = this.babyInfo.id;
     }
   }
 
@@ -89,68 +88,68 @@ export class AddBabyDialogComponent implements OnInit {
           return;
     }
 
-        var babyInfoCommand = this.maternityService.buildAddBabyCommandModel(this.babyFormGroup);
+        const babyInfoCommand = this.maternityService.buildAddBabyCommandModel(this.babyFormGroup);
         babyInfoCommand.PatientMasterVisitId = this.PatientMasterVisitId;
     
-        this.maternityService.addNewBabyInfo(babyInfoCommand).subscribe(res=>{
+        this.maternityService.addNewBabyInfo(babyInfoCommand).subscribe(res => {
             console.log(res);
             this.snotifyService.success('Baby information added sucessfully', 'Maternity', this.notificationService.getConfig());
             this.dialogRef.close();
         },
-        (err)=>
-        {
-            console.log(err+ " An error occured while adding new baby info")
+        (err) => {
+            console.log(err + ' An error occured while adding new baby info');
             this.snotifyService.error('Error adding baby information ' + err, 'Maternity', this.notificationService.getConfig());
 
         },
-        ()=>{
+        () => {
             
-        })      
+        });      
 }
 
-public UpdateBabyDetails(){
-  if (this.babyFormGroup.invalid)
-      return;    
-    var babyInfoCommand = this.maternityService.buildAddBabyCommandModel(this.babyFormGroup);
+public UpdateBabyDetails() {
+  if (this.babyFormGroup.invalid) {
+      return;
+  }    
+    const babyInfoCommand = this.maternityService.buildAddBabyCommandModel(this.babyFormGroup);
     babyInfoCommand.Id = this.deliveredBabyInfoId;
     babyInfoCommand.PatientDeliveryInformationId = this.patientDeliveryInfoId;
     babyInfoCommand.PatientMasterVisitId = this.PatientMasterVisitId;
     
-    const updateBabyInfoModel : UpdateDeliveredBabyBirthInfoCommand =
-    {
+    const updateBabyInfoModel: UpdateDeliveredBabyBirthInfoCommand = {
       DeliveredBabyBirthInformation  : babyInfoCommand
-    }
+    };
         
-    this.maternityService.updateBabyInfo(updateBabyInfoModel).subscribe(res=>{
-      console.log('update response '+ res)
+    this.maternityService.updateBabyInfo(updateBabyInfoModel).subscribe(res => {
+      console.log('update response ' + res);
       this.snotifyService.success('Baby information updated sucessfully', 'Maternity', this.notificationService.getConfig());
       this.dialogRef.close();
   },
-  (err)=>
-  {
-      console.log(err+ " An error occured while updating baby info")
+  (err) => {
+      console.log(err + ' An error occured while updating baby info');
       this.snotifyService.error('Error updating baby information ' + err, 'Maternity', this.notificationService.getConfig());
 
   },
-  ()=>{
+  () => {
       
-  })  
+  });  
 }
 
 public setBabyFormValues(babyInfo: any): void {
-  this.babyFormGroup.controls['babySex'].setValue(this.maternityService.getMaternityLookUpOptionByName(this.genderOptions, babyInfo.sexStr));
+  this.babyFormGroup.controls['babySex'].setValue(this.maternityService.getMaternityLookUpOptionByName(this.genderOptions,
+      babyInfo.sexStr));
   this.babyFormGroup.controls['birthWeight'].setValue(babyInfo.birthWeight);
-  this.babyFormGroup.controls['outcome'].setValue(this.maternityService.getMaternityLookUpOptionByName(this.birthOutcomes, babyInfo.outcomeName));
+  this.babyFormGroup.controls['outcome'].setValue(this.maternityService.getMaternityLookUpOptionByName(this.birthOutcomes,
+      babyInfo.outcomeName));
   this.babyFormGroup.controls['resuscitationDone']
   .setValue(babyInfo.resuscitateStr == 'Yes' ? this.maternityService.getMaternityLookUpOptionByName(this.yesnoOptions, 'Yes') :
       this.maternityService.getMaternityLookUpOptionByName(this.yesnoOptions, 'No'));
   this.babyFormGroup.controls['deformity'].setValue(babyInfo.deformityStr == 'Yes' ? 
        this.maternityService.getMaternityLookUpOptionByName(this.yesnoOptions, 'Yes') :
        this.maternityService.getMaternityLookUpOptionByName(this.yesnoOptions, 'No'));
-  this.babyFormGroup.controls['teoGiven'].setValue(babyInfo.teoStr =='Yes' ? 
+  this.babyFormGroup.controls['teoGiven'].setValue(babyInfo.teoStr == 'Yes' ? 
        this.maternityService.getMaternityLookUpOptionByName(this.yesnoOptions, 'Yes') :
        this.maternityService.getMaternityLookUpOptionByName(this.yesnoOptions, 'No'));
-  this.babyFormGroup.controls['breastFed'].setValue(babyInfo.breastFeedingStr =='Yes' ?
+  this.babyFormGroup.controls['breastFed'].setValue(babyInfo.breastFeedingStr == 'Yes' ?
       this.maternityService.getMaternityLookUpOptionByName(this.yesnoOptions, 'Yes') : 
        this.maternityService.getMaternityLookUpOptionByName(this.yesnoOptions, 'No'));
   this.babyFormGroup.controls['comment'].setValue(babyInfo.comment);

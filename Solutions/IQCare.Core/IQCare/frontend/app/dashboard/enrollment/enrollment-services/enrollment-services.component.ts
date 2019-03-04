@@ -1,3 +1,4 @@
+import { RecordsService } from './../../../records/_services/records.service';
 import { PersonHomeService } from './../../services/person-home.service';
 import { Component, OnInit, NgZone } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -25,6 +26,7 @@ export class EnrollmentServicesComponent implements OnInit {
     posId: string;
     patientId: number;
     maxDate: Date;
+    minDate: Date;
     serviceCode: string;
 
     patientTypeOptions: any;
@@ -39,7 +41,8 @@ export class EnrollmentServicesComponent implements OnInit {
         private snotifyService: SnotifyService,
         private notificationService: NotificationService,
         private store: Store<AppState>,
-        private appStateService: AppStateService) {
+        private appStateService: AppStateService,
+        private recordsService: RecordsService) {
         this.userId = JSON.parse(localStorage.getItem('appUserId'));
         this.posId = localStorage.getItem('appPosID');
         this.maxDate = new Date();
@@ -57,6 +60,7 @@ export class EnrollmentServicesComponent implements OnInit {
 
         this.formGroup = new FormGroup({
             EnrollmentDate: new FormControl([Validators.required]),
+            EnrollmentNumber: new FormControl('', [Validators.required]),
             // Status: new FormControl([Validators.required]),
             identifiers: new FormArray([])
         });
@@ -69,14 +73,16 @@ export class EnrollmentServicesComponent implements OnInit {
                     for (let j = 0; j < identifiers.length; j++) {
                         if (identifiers[j]['id'] == serviceAreaIdentifiers[i]['identifierId']) {
                             (<FormArray>this.formGroup.get('identifiers')).push(this.fb.group({
-                                name: '',
-                                displayName: identifiers[j]['displayName'],
-                                identifierId: identifiers[j]['id']
+                                'name': '',
+                                'displayName': identifiers[j]['displayName'],
+                                'identifierId': identifiers[j]['id']
                             }));
                         }
                     }
 
                 }
+
+                // console.log(this.formGroup.get('identifiers'));
             }
         );
 
@@ -86,11 +92,24 @@ export class EnrollmentServicesComponent implements OnInit {
                 this.patientTypeOptions = value;
             }
         );
+
+        this.recordsService.getPersonDetails(this.personId).subscribe(
+            (res) => {
+                console.log(res);
+                const { registrationDate } = res[0];
+                if (registrationDate) {
+                    this.minDate = registrationDate;
+                } else {
+                    this.minDate = new Date();
+                }
+
+            }
+        );
     }
 
     submitEnrollment() {
         if (this.formGroup.valid) {
-            const { EnrollmentDate, Status, identifiers } = this.formGroup.value;
+            const { EnrollmentDate, Status, identifiers, EnrollmentNumber } = this.formGroup.value;
 
             const enrollment = new Enrollment();
             for (let i = 0; i < identifiers.length; i++) {
@@ -101,6 +120,8 @@ export class EnrollmentServicesComponent implements OnInit {
                     });
                 }
             }
+
+            enrollment.ServiceIdentifiersList[0]['IdentifierValue'] = EnrollmentNumber;
             enrollment.DateOfEnrollment = EnrollmentDate;
             enrollment.ServiceAreaId = this.serviceId;
             enrollment.PersonId = this.personId;

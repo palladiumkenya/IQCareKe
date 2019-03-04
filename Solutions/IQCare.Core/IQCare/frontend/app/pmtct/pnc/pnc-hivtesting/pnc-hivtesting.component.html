@@ -5,6 +5,14 @@
 </div>
 
 <div class="row">
+    <div class="col-lg-12 col-sm-12 col-xs-12">
+        <div *ngIf="message" class="alert alert-warning">
+            <span style="color:black;">{{message}}</span>
+        </div>
+    </div>
+</div>
+
+<div class="row">
     <form class="form-group" [formGroup]="HivTestingForm">
         <div class="row">
             <div class="col-lg-4 col-sm-4 col-xs-12">
@@ -46,7 +54,8 @@
                     <mat-label>Final Result</mat-label>
                     <mat-select formControlName="finalTestResult" required>
                         <mat-option [value]=""></mat-option>
-                        <mat-option *ngFor="let hivFinalResultsOption of hivFinalResultsOptions" [value]="hivFinalResultsOption.itemId">
+                        <mat-option *ngFor="let hivFinalResultsOption of hivFinalResultsOptions"
+                            [value]="hivFinalResultsOption.itemId" (onSelectionChange)="onFinalHivResultChange($event)">
                             {{hivFinalResultsOption.itemName}}
                         </mat-option>
                     </mat-select>

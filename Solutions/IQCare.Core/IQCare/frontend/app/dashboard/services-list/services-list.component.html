@@ -57,7 +57,8 @@
                                     <div class="ticket-time  col-lg-4 col-sm-4 col-xs-12">
                                         <div class="divider hidden-md hidden-sm hidden-xs"></div>
                                         <span class="identifierNumbers label label-palegreen">
-                                            <span style="font-size:15px;" *ngFor="let identifier of getServiceEnrollmentDetails(service)['identifiers'][0]">
+                                            <span style="font-size:15px;"
+                                                *ngFor="let identifier of getServiceEnrollmentDetails(service)['identifiers'][0]">
                                                 {{
                                                 identifier['identifierTypeId'] + ': ' + identifier['identifierValue']
                                                 }}
@@ -71,7 +72,7 @@
                                         <div class="divider hidden-md hidden-sm hidden-xs"></div>
                                         <span>
                                             <a class="btn btn-sm btn-success" (click)="newEncounter(service.id)">
-                                                Encounter History
+                                                Encounters
                                             </a>
                                         </span>
 
@@ -101,8 +102,10 @@
                                     <div class="ticket-time  col-lg-2 col-sm-2 col-xs-12">
                                         <div class="divider hidden-md hidden-sm hidden-xs"></div>
                                         <span>
-                                            <ng-container *ngIf="isServiceEligible(service.id); else notEligibleTemplate">
-                                                <a class="btn btn-sm btn-primary" (click)="enrollToService(service.id, service.code)">
+                                            <ng-container
+                                                *ngIf="isServiceEligible(service.id); else notEligibleTemplate">
+                                                <a class="btn btn-sm btn-primary"
+                                                    (click)="enrollToService(service.id, service.code)">
                                                     Enroll
                                                 </a>
                                             </ng-container>

@@ -34,7 +34,8 @@ export class PncPatienteducationComponent implements OnInit, AfterViewInit {
             counselledInfantFeeding: new FormControl('', [Validators.required]),
             'id': new FormControl('')
         });
-
+          
+       console.log(this.patientEducationOptions.length +' patientEducationOptions') 
         const { yesnoOptions, infantFeedingTopicId } = this.patientEducationOptions[0];
         this.yesnoOptions = yesnoOptions;
         this.infantFeedingTopicId = infantFeedingTopicId;
@@ -67,6 +68,7 @@ export class PncPatienteducationComponent implements OnInit, AfterViewInit {
                     const noOption = this.yesnoOptions.filter(obj => obj.itemName == 'No');
                     this.PatientEducationForm.get('counselledInfantFeeding').setValue(noOption[0].itemId);
                 }
+                console.log(isCounsellingDone +'  isCounsellingDone')
             },
             (error) => {
                 this.snotifyService.error('Fetching patient education ' + error, 'PNC Encounter',

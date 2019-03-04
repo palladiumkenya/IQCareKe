@@ -7,6 +7,11 @@ namespace IQCare.Maternity.Core.Domain.Maternity
     public class MaternalPatientDischargeInformation
     {
 
+        public MaternalPatientDischargeInformation()
+        {
+                
+        }
+
         public MaternalPatientDischargeInformation(int? patientMasterVisitId, int? outcomeStatus,
             string outcomeDescription, int createdBy, DateTime ? dateDischarged)
         {
@@ -25,5 +30,12 @@ namespace IQCare.Maternity.Core.Domain.Maternity
         public int CreatedBy { get; private set; }
         public DateTime DateCreated { get; private set; }
         public bool DeleteFlag { get; private set; }
+
+        public void Update(int ? outcomeStatus, DateTime ? dateDischarged, string outcomeDescription)
+        {
+            OutcomeStatus = outcomeStatus;
+            DateDischarged = dateDischarged;
+            OutcomeDescription = outcomeDescription;
+        }
     }
 }

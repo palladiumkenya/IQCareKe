@@ -15,8 +15,11 @@ export interface MaternityDeliveryCommand {
     DeliveryComplicationNotes?: string;
     DeliveryConductedBy?: string;
     CreatedBy?: number;
+}
 
 
-
-
+export interface UpdateMaternalPatientDeliveryCommand
+{
+    PatientDeliveryInfoId? : number;
+    MaternalPatientDeliveryInfoCommand : MaternityDeliveryCommand
 }

@@ -35,14 +35,14 @@ namespace IQCare.PMTCT.BusinessProcess.CommandHandlers
                 try
                 {
                     List<PatientDrugAdministration> patientDrugAdministion_data = new List<PatientDrugAdministration>();
-                    List<PatientChronicIllness> patientChronicIllnesses_data = new List<PatientChronicIllness>();
+                   // List<PatientChronicIllness> patientChronicIllnesses_data = new List<PatientChronicIllness>();
                     List<PreventiveService> preventiveServices_data = new List<PreventiveService>();
 
-                  int result1=  await _service.AddPatientChronicIllness(request.PatientChronicIllnesses);
+                //  int result1=  await _service.AddPatientChronicIllness(request.PatientChronicIllnesses);
                   int result2=  await _service.AddPatientDrugAdministration(request.PatientDrugAdministration);
 
                  // int result3=  await _service.AddPreventiveService(request.preventiveServices);
-                   if(result1>0 & result2 >0)
+                   if(result2 >0)
                     {
                         result = 1;
                     }

@@ -13,7 +13,7 @@ export class BabyComponent implements OnInit {
     @Input() PatientId: number;
     @Input() isEdit: boolean;
     @Input() PatientMasterVisitId: number;
-    BabyData : any[] = [];
+    BabyData: any[] = [];
 
     @Output() notifyBabyData: EventEmitter<any[]> = new EventEmitter<any[]>();
 
@@ -21,10 +21,10 @@ export class BabyComponent implements OnInit {
     }
 
     ngOnInit() {
-        //this.notifyBabyData.emit(this.BabyData);
+        // this.notifyBabyData.emit(this.BabyData);
     }
 
-    onBabyNotify($event){
+    onBabyNotify($event) {
         this.BabyData = $event;
         this.notifyBabyData.emit(this.BabyData);
     }

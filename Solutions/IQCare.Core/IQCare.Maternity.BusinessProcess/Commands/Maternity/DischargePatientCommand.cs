@@ -18,6 +18,17 @@ namespace IQCare.Maternity.BusinessProcess.Commands.Maternity
     public class DischargePatientResponse
     {
         public int PatientDischargeId { get; set; }
+        public string Message { get; set; }
+        
+    }
+
+    public class UpdatePatientDischargeCommand : IRequest<Result<DischargePatientResponse>>
+    {
+        public int Id { get; set; }
+        public int? OutcomeStatus { get; set; }
+        public string OutcomeDescription { get; set; }
+        public DateTime? DateDischarged { get; set; }
 
     }
+
 }

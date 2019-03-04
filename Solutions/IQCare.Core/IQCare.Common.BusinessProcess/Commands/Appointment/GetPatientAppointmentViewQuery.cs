@@ -21,5 +21,6 @@ namespace IQCare.Common.BusinessProcess.Commands.Appointment
         public string AppointmentStatus { get; set; }
         public string AppointmentType { get; set; }
         public string Description { get; set; }
+        public DateTime AppDate { get; set; }
     }
 }

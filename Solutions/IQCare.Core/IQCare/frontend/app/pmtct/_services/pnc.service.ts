@@ -195,12 +195,14 @@ export class PncService {
     }
 
     public updateReferral(patientReferralEditCommand: PatientReferralEditCommand): Observable<any> {
+        // tslint:disable-next-line:max-line-length
         if ((patientReferralEditCommand.ReferredFrom == null || patientReferralEditCommand.ReferredFrom == undefined || patientReferralEditCommand.ReferredFrom.toString() == '')
+            // tslint:disable-next-line:max-line-length
             || (patientReferralEditCommand.ReferredTo == null || patientReferralEditCommand.ReferredTo == undefined || patientReferralEditCommand.ReferredTo.toString() == '')) {
             return of([]);
         }
 
-        return this.http.post(this.API_URL
+        return this.http.put(this.API_URL
             + '/api/PatientReferralAndAppointment/UpdatePatientReferralInfo', JSON.stringify(patientReferralEditCommand), httpOptions).pipe(
                 tap(updateReferral => this.errorHandler.log(`successfully updated referral`)),
                 catchError(this.errorHandler.handleError<any>('Error updating referral'))
@@ -208,7 +210,7 @@ export class PncService {
     }
 
     public savePncNextAppointment(pncNextAppointmentCommand: PatientAppointment): Observable<any> {
-        if (!pncNextAppointmentCommand.AppointmentDate) {
+        if (!pncNextAppointmentCommand.AppointmentDate || pncNextAppointmentCommand.AppointmentDate == null) {
             return of([]);
         }
 
@@ -228,7 +230,14 @@ export class PncService {
     }
 
     public updateAppointment(patientAppointmentEditCommand: PatientAppointmentEditCommand): Observable<any> {
-        return this.http.post(this.API_URL + '/api/PatientReferralAndAppointment/UpdatePatientNextAppointment',
+        // console.log(patientAppointmentEditCommand);
+
+        if ((!patientAppointmentEditCommand.AppointmentDate || !patientAppointmentEditCommand.AppointmentId)
+            || (patientAppointmentEditCommand.AppointmentDate == null || patientAppointmentEditCommand.AppointmentId == null)) {
+            return of([]);
+        }
+
+        return this.http.put(this.API_URL + '/api/PatientReferralAndAppointment/UpdatePatientNextAppointment',
             JSON.stringify(patientAppointmentEditCommand), httpOptions).pipe(
                 tap(updateAppointment => this.errorHandler.log(`successfully updated appointment`)),
                 catchError(this.errorHandler.handleError<any>('Error updating appointment'))
