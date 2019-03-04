@@ -22,3 +22,5 @@ select
   v.CreatedBy
   FROM 
 VisitDetails v
+
+go
