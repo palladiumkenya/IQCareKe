@@ -87,8 +87,12 @@ export class EncounterComponent implements OnInit {
                 if (res['encounter'].length > 0) {
                     const encounterValue = res['encounter'][0];
                     let hasDisability = this.yesNoOptions.find(obj => obj.itemName == 'No').itemId;
-                    const consent = res['consent'][0]['consentValue'];
-                    const HivCounsellingDone = res['']
+                    let consent = null;
+                    if (res['consent'] && res['consent'][0] && res['consent'][0]['consentValue']) {
+                        consent = res['consent'][0]['consentValue'];
+                    }
+
+                    const HivCounsellingDone = res[''];
                     let tbScreening = '';
                     if (res['tbStatus'].length > 0) {
                         tbScreening = res['tbStatus'][0]['screeningValueId'];
@@ -266,7 +270,7 @@ export class EncounterComponent implements OnInit {
             return obj.itemId == everTested;
         });
 
-        if (optionSelected[0].itemName == 'Yes') {
+        if (optionSelected[0] && optionSelected[0].itemName && optionSelected[0].itemName == 'Yes') {
             this.form.controls.MonthsSinceLastTest.enable({ onlySelf: false });
         } else {
             this.form.controls.MonthsSinceLastTest.disable({ onlySelf: true });
@@ -295,7 +299,7 @@ export class EncounterComponent implements OnInit {
             return obj.itemId == consent;
         });
 
-        if (optionSelected[0].itemName == 'No') {
+        if (optionSelected[0] && optionSelected[0].itemName && optionSelected[0].itemName == 'No') {
             this.form.controls.TestedAs.disable({ onlySelf: true });
             this.form.controls.TestingStrategy.disable({ onlySelf: true });
             this.form.controls.TestedAs.setValue('');
