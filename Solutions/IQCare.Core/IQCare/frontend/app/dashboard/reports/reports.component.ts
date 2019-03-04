@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormDetailsService } from '../../air/_services/formdetails.service';
+import { map } from 'rxjs/operators';
+import { BehaviorSubject, Observable } from 'rxjs';
 
 @Component({
   selector: 'app-reports',
@@ -8,22 +10,17 @@ import { FormDetailsService } from '../../air/_services/formdetails.service';
 })
 export class ReportsComponent implements OnInit {
 
-  configuredForms : any[] = [];
+  configuredForms: Observable<any[]>;
   
   constructor(private formReportingService : FormDetailsService) {
   }
 
   ngOnInit() 
   {
-    this.getConfiguredForms();
-    console.log(this.configuredForms.length +' configured active Forms')
+    
+   this.configuredForms = this.formReportingService.activeConfiguredReportingForms.asObservable();
+    this.formReportingService.getConfiguredReportingForms();
   }
 
-  private getConfiguredForms() {
-    this.formReportingService.getConfiguredReportingForms().subscribe(res=>
-     {
-       this.configuredForms = res;
-       console.log(res.length + ' Forms Length')
-     })
-  }
+  
 }

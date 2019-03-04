@@ -14,7 +14,7 @@ export class ReportDashboardComponent implements OnInit {
   }
   ngOnInit() 
   {
-     console.log(this.ReportingForm.Id +' Reporting Form Info')
+     console.log(this.ReportingForm.id +' Reporting Form Info')
   }
 
 }
