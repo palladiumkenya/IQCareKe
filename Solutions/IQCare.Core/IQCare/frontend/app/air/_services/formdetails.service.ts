@@ -44,6 +44,13 @@ export class FormDetailsService {
         );
        }
 
+       public getConfiguredReportingForms() : Observable<any[]>{
+        return this.http.get<any[]>(this.API_AIR_URL + '/api/ReportingForm/GetConfiguredReportingForms').pipe(tap
+            (getFormdata => this.errorHandler.log(`Get configured reporting forms`)),
+            catchError(this.errorHandler.handleError<any[]>('getExisting FormData  Details'))
+        );
+       }
+
         public submitIndicatorResults(reportingdate: string, reportingformId: number
              , createdby: number , indicatorresults: any[]): Observable<any>{
          
