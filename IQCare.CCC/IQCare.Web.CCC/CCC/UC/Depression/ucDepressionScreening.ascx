@@ -53,7 +53,7 @@
                         <div class="col-md-12">
                             <div class="depression-measurements">
                                 Depression Severity: <span class="label label-success">0-4 None</span>
-                                <span class="label label-primary">5-9 Mild</span> <span class="label label-info">10-14 Moderate</span> <span class="label label-warning">15-19 Moderately Severe</span> <span class="label label-danger">20 - 30 Severe</span>
+                                <span class="label label-primary">5-9 Mild</span> <span class="label label-info">10-14 Moderate</span> <span class="label label-warning">15-19 Moderately Severe</span> <span class="label label-danger">20 - 27 Severe</span>
                             </div>
                         </div>
                     </div>
