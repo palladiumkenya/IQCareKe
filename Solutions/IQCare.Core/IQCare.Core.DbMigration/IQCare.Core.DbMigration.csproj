@@ -167,6 +167,7 @@
     <None Remove="Scripts\2.0.0\52_PersonListView.sql" />
     <None Remove="Scripts\2.0.0\51_SO_AddPMTCTMotherRegimensLookups.sql" />
     <None Remove="Scripts\2.0.0\53_DO_AlterViewPatientDeliveryInfo.sql" />
+    <None Remove="Scripts\2.0.0\57_PHQQuestion.sql" />
     <None Remove="Scripts\2.0.1\01_IQCareFinalBuild.sql" />
   </ItemGroup>
 
@@ -355,6 +356,7 @@
     <EmbeddedResource Include="Scripts\2.0.0\52_PersonListView.sql" />
     <EmbeddedResource Include="Scripts\2.0.0\51_SO_AddPMTCTMotherRegimensLookups.sql" />
     <EmbeddedResource Include="Scripts\2.0.0\53_DO_AlterViewPatientDeliveryInfo.sql" />
+    <EmbeddedResource Include="Scripts\2.0.0\57_PHQQuestion.sql" />
     <EmbeddedResource Include="Scripts\2.0.1\01_IQCareFinalBuild.sql" />
   </ItemGroup>
 
