@@ -151,8 +151,6 @@
     <None Remove="Scripts\2.0.0\37_UpdatePaediatricRegimen.sql" />
     <None Remove="Scripts\2.0.0\38_IPTOutcomeDate.sql" />
     <None Remove="Scripts\2.0.0\38_LO_HEI_Register.sql" />
-    <None Remove="Scripts\2.0.0\39_IndicatorTables.sql" />
-    <None Remove="Scripts\2.0.0\40_IndicatorData.sql" />
     <None Remove="Scripts\2.0.0\37_HIVPositiveListView.sql" />
     <None Remove="Scripts\2.0.0\42_LO_PNCRegister.sql" />
     <None Remove="Scripts\2.0.0\43_LO_MaternityRegister.sql" />
@@ -169,6 +167,7 @@
     <None Remove="Scripts\2.0.0\52_PersonListView.sql" />
     <None Remove="Scripts\2.0.0\51_SO_AddPMTCTMotherRegimensLookups.sql" />
     <None Remove="Scripts\2.0.0\53_DO_AlterViewPatientDeliveryInfo.sql" />
+    <None Remove="Scripts\2.0.0\57_PHQQuestion.sql" />
     <None Remove="Scripts\2.0.1\01_IQCareFinalBuild.sql" />
   </ItemGroup>
 
@@ -342,8 +341,6 @@
     <EmbeddedResource Include="Scripts\2.0.0\37_UpdatePaediatricRegimen.sql" />
     <EmbeddedResource Include="Scripts\2.0.0\38_IPTOutcomeDate.sql" />
     <EmbeddedResource Include="Scripts\2.0.0\38_LO_HEI_Register.sql" />
-    <EmbeddedResource Include="Scripts\2.0.0\39_IndicatorTables.sql" />
-    <EmbeddedResource Include="Scripts\2.0.0\40_IndicatorData.sql" />
     <EmbeddedResource Include="Scripts\2.0.0\37_HIVPositiveListView.sql" />
     <EmbeddedResource Include="Scripts\2.0.0\42_LO_PNCRegister.sql" />
     <EmbeddedResource Include="Scripts\2.0.0\43_LO_MaternityRegister.sql" />
@@ -359,6 +356,7 @@
     <EmbeddedResource Include="Scripts\2.0.0\52_PersonListView.sql" />
     <EmbeddedResource Include="Scripts\2.0.0\51_SO_AddPMTCTMotherRegimensLookups.sql" />
     <EmbeddedResource Include="Scripts\2.0.0\53_DO_AlterViewPatientDeliveryInfo.sql" />
+    <EmbeddedResource Include="Scripts\2.0.0\57_PHQQuestion.sql" />
     <EmbeddedResource Include="Scripts\2.0.1\01_IQCareFinalBuild.sql" />
   </ItemGroup>
 
