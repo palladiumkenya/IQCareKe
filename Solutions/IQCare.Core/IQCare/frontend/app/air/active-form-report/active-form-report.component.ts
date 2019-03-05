@@ -50,6 +50,7 @@ export class ActiveFormReportComponent implements OnInit {
     existing: [];
     existingperiod: [];
     isEdit : boolean = false;
+    reportingPeriodId : number;
     maxDate : Date = new Date();
     minDate : Date = new Date(2000,JAN);
     constructor(private route: ActivatedRoute,
@@ -99,6 +100,7 @@ export class ActiveFormReportComponent implements OnInit {
 
         this.route.params.subscribe(params => {
             this.ReportingFormId = params['reportingFormId'];
+            this.reportingPeriodId = params['reportingPeriodId'];
         });
 
         let Form = {
@@ -186,10 +188,11 @@ export class ActiveFormReportComponent implements OnInit {
     }
     GetFormData() {
         if (this.isEdit) {
-
-            this.formdetailservice.getFormdata(this.ReportingFormId).subscribe(res => {
+             console.log(this.reportingPeriodId + ' reportingPeriodId')
+            this.formdetailservice.getFormdata(this.reportingPeriodId).subscribe(res => {
                 this.ExistingData = res;
-
+                console.log(this.ExistingData['reportingValues'][0]['reportDate'] + 'Reporting date');
+                console.log(moment(this.ExistingData['reportingValues'][0]['reportDate']).toDate() +' Report Date');
                 this.date.setValue(moment(this.ExistingData['reportingValues'][0]['reportDate']).toDate());
 
 
