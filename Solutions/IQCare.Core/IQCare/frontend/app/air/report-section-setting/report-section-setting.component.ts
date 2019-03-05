@@ -35,7 +35,7 @@ export class ReportSectionSettingComponent implements OnInit {
 
     ngOnInit() {
         this.route.params.subscribe(params => {
-            this.FormId = params['id'];
+            this.FormId = params['reportingFormId'];
 
         });
 
@@ -71,13 +71,6 @@ export class ReportSectionSettingComponent implements OnInit {
         }
 
     }
-    close() {
-        this.zone.run(() => {
-            this.router.navigate(['/air/'],
-                { relativeTo: this.route });
-        });
-
-    }
 
     Submit() {
         console.log(this.SectionList);
@@ -90,7 +83,7 @@ export class ReportSectionSettingComponent implements OnInit {
                 this.snotifyService.success(response.message, 'Settings', this.notificationService.getConfig());
 
                 this.zone.run(() => {
-                    this.router.navigate(['/air/'],
+                    this.router.navigate(['/air/report/'+this.FormId],
                         { relativeTo: this.route });
                 });
             },

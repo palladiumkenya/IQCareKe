@@ -27,6 +27,7 @@ import {
   MatSnackBarModule, MatSortModule, MatStepperModule,        // <----- import for date formating(optional)
   MatTableModule, MatTabsModule, MatToolbarModule, MatTooltipModule
 } from '@angular/material';
+import { ReportDashboardComponent } from './report-dashboard/report-dashboard.component';
 
 @NgModule({
 
@@ -41,6 +42,9 @@ import {
       MatSelectModule, MatSidenavModule, MatSliderModule, MatSlideToggleModule,
       MatSnackBarModule, MatSortModule, MatStepperModule,        // <----- import for date formating(optional)
       MatTableModule, MatTabsModule, MatToolbarModule, MatTooltipModule],
+      exports :[
+        ReportDashboardComponent
+      ],
   declarations: [
     ActiveFormReportComponent,
     ReportIndicatorResultComponent,
@@ -48,7 +52,8 @@ import {
       IndicatorResultsGridComponent,
       SubSectionFilterPipe,
       IndicatorFilterPipe,
-      ReportSectionSettingComponent
+      ReportSectionSettingComponent,
+      ReportDashboardComponent
   ],
  
   providers:[

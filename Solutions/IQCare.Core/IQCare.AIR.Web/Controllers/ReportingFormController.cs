@@ -90,6 +90,16 @@ namespace IQCare.AIR.Web.Controllers
             return Ok(response.Value);
         }
 
+        [HttpGet]
+        public async Task<IActionResult> GetConfiguredReportingForms()
+        {
+            var response = await _mediator.Send(new GetConfiguredReportingFormsQuery(), HttpContext.RequestAborted);
+            if (response.IsValid)
+                return Ok(response.Value);
+            return BadRequest(response);
+        }
+
+
     }
 
 

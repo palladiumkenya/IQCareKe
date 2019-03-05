@@ -5,7 +5,7 @@ import { SnotifyService, SnotifyPosition } from 'ng-snotify';
 import { NotificationService } from '../../shared/_services/notification.service';
 import { RouterInitializer } from '@angular/router/src/router_module';
 import { IndicatorQuestionBase } from '../_model/indicatorquestion-base';
-import { NativeDateAdapter, DateAdapter, MatDatepicker } from '@angular/material';
+import { NativeDateAdapter, DateAdapter, MatDatepicker, JAN } from '@angular/material';
 import { Section, Form, SubSection, FormResults } from '../_model/Sectionidentifier';
 import { AbstractControl, FormBuilder, FormControl, FormGroup, Validators, FormArray } from '@angular/forms';
 import * as _ from 'lodash';
@@ -49,6 +49,9 @@ export class ActiveFormReportComponent implements OnInit {
     ReportingFormId: number;
     existing: [];
     existingperiod: [];
+    isEdit : boolean = false;
+    maxDate : Date = new Date();
+    minDate : Date = new Date(2000,JAN);
     constructor(private route: ActivatedRoute,
         private formBuilder: FormBuilder,
         private snotifyService: SnotifyService,
@@ -89,15 +92,13 @@ export class ActiveFormReportComponent implements OnInit {
     ngOnInit() {
 
         this.route.data.subscribe(res => {
-            console.log(res);
+            this.isEdit = res.isEdit;
             const { FormDetails } = res;
             this.FormItems = FormDetails
         });
-        console.log(this.FormItems);
 
         this.route.params.subscribe(params => {
-            this.ReportingFormId = params['reportingformid'];
-
+            this.ReportingFormId = params['reportingFormId'];
         });
 
         let Form = {
@@ -105,20 +106,9 @@ export class ActiveFormReportComponent implements OnInit {
             FormName: this.FormItems['name']
         }
 
-
-
-
-        console.log(Form);
         this.Forms.push(Form);
 
-        console.log("form identificatioon");
-        console.log(this.Forms);
-
-        console.log(this.FormItems['reportSections']);
-        console.log(this.FormItems['reportSections'][0]['reportSubSections']);
-
         for (let i = 0; i < this.FormItems['reportSections'].length; i++) {
-            console.log(this.FormItems['reportSections'][i]);
             let section = {
                 SectionId: this.FormItems['reportSections'][i].id,
                 SectionName: this.FormItems['reportSections'][i].name,
@@ -139,9 +129,7 @@ export class ActiveFormReportComponent implements OnInit {
 
                 this.SubSections.push(SubSection);
 
-                console.log(this.FormItems['reportSections'][i]['reportSubSections'][t]);
                 for (let r = 0; r < this.FormItems['reportSections'][i]['reportSubSections'][t]['indicators'].length; r++) {
-                    console.log(this.FormItems["reportSections"][i]['reportSubSections'][t]['indicators'][r]);
                     if (this.FormItems["reportSections"][i]['reportSubSections'][t]['indicators'][r].dataType === 'Text') {
                         this.ControlType = "Text";
 
@@ -157,8 +145,6 @@ export class ActiveFormReportComponent implements OnInit {
                     let SubSectionName = this.FormItems['reportSections'][i]['reportSubSections'][t].name;
                     let Code = this.FormItems["reportSections"][i]['reportSubSections'][t]['indicators'][r].code
                     this.ItemKey = SubSectionName + '_' + Code + '_' + this.FormItems["reportSections"][i]['reportSubSections'][t]['indicators'][r].id
-                    console.log("Itemkey");
-                    console.log(this.ItemKey);
                     let IndicatorQuestion = {
                         SubSectionId: this.FormItems['reportSections'][i]['reportSubSections'][t].id,
                         code: this.FormItems["reportSections"][i]['reportSubSections'][t]['indicators'][r].code,
@@ -181,58 +167,29 @@ export class ActiveFormReportComponent implements OnInit {
         }
 
 
-
-        console.log("Section identificatioon");
-        console.log(this.Sections);
-        console.log("SubSection identificatioon");
-        console.log(this.SubSections);
-        console.log("indictator identificatioon");
-        console.log(this.IndicatorQuestions);
-
-
         this.GetFormData();
-        console.log('After loading existing data');
-        console.log(this.IndicatorQuestions);
         this.formGroup = this.formBuilder.group({
             // IndicatorQuestions:this.formBuilder.control(this.IndicatorQuestions),
             IndicatorQuestions: this.formBuilder.array(this.IndicatorQuestions.map(o => new FormControl(o))),
 
             Period: new FormControl(this.FormResults.Period, [Validators.required])
         });
-        if (this.ReportingFormId > 0) {
-          
-           /*  this.picker.disable({onlySelf: true});
-            this.formGroup.controls.Period.enable({
-                onlySelf: false
-            });
-       */
-           
-      this.formGroup.controls.Period.disable();
+        if (this.isEdit) {
+                 
+            this.formGroup.controls.Period.disable();
       
         }
         else {
         this.formGroup.controls.Period.enable();
-            /* this.formGroup.controls.Period.enable({
-                onlySelf: true
-            });
-            */
         }
-
-        console.log(this.formGroup);
-
 
     }
     GetFormData() {
-        if (this.ReportingFormId > 0) {
+        if (this.isEdit) {
 
             this.formdetailservice.getFormdata(this.ReportingFormId).subscribe(res => {
-
-                console.log(res);
-
                 this.ExistingData = res;
 
-                console.log("existingdata");
-                console.log(this.ExistingData['reportingValues'][0]['resultNumeric']);
                 this.date.setValue(moment(this.ExistingData['reportingValues'][0]['reportDate']).toDate());
 
 
@@ -255,13 +212,9 @@ export class ActiveFormReportComponent implements OnInit {
                                 if (control.toLowerCase() == 'number') {
                                     this.IndicatorQuestions[t].value = numvalue;
                                     //  this.formGroup.controls.IndicatorQuestions.value[].value = numvalue;
-                                    console.log('ValueChanged');
-                                    console.log(this.IndicatorQuestions[t].value);
                                 }
                                 else if (control.toLowerCase() == 'text') {
-                                    console.log('ValueChanged');
                                     //this.formGroup.controls.IndicatorQuestions.value[index].value = text;
-                                    console.log(this.IndicatorQuestions[t].value);
                                     this.IndicatorQuestions[t].value = text;
                                 }
                             }
@@ -271,7 +224,6 @@ export class ActiveFormReportComponent implements OnInit {
 
 
                 }
-                // console.log(res.resultNumeric);
 
             });
 
@@ -283,10 +235,8 @@ export class ActiveFormReportComponent implements OnInit {
 
     }
 
-    log(val) { console.log(val); }
 
     GetType(val) {
-        console.log(val);
         if (val === 'Numeric') {
             this.ControlType = 'number';
 
@@ -295,15 +245,10 @@ export class ActiveFormReportComponent implements OnInit {
             this.ControlType = 'text';
         }
 
-        console.log(this.ControlType);
     }
 
     OnValueChange($event, codeId) {
         this.total = 0;
-        console.log("Event change");
-        console.log($event.target.id);
-        console.log($event.target.name);
-        console.log($event.target.value);
         let val = $event.target.value;
         let index = -1;
 
@@ -320,7 +265,6 @@ export class ActiveFormReportComponent implements OnInit {
         }
         this.IndicatorQuestions[index].value = val;
         this.formGroup.controls.IndicatorQuestions.value[index].value = val;
-        console.log(this.formGroup.controls.IndicatorQuestions.value[index]);
 
         const name = $event.target.name;
 
@@ -468,10 +412,9 @@ export class ActiveFormReportComponent implements OnInit {
     }
     close() {
         this.zone.run(() => {
-            this.router.navigate(['/air/'],
+            this.router.navigate(['/air/report/'+this.ReportingFormId],
                 { relativeTo: this.route });
         });
-        // console.log(messag
     }
 
     submitResult() {
@@ -480,7 +423,6 @@ export class ActiveFormReportComponent implements OnInit {
         for (let i = 0; i < this.IndicatorQuestions.length; i++) {
             const val = this.IndicatorQuestions[i].value.toString();
             if (val == '') {
-                console.log(this.IndicatorQuestions[i].code.toString());
                 const code = this.IndicatorQuestions[i].code.toString();
                 const element = document.getElementById(code);
 
@@ -534,16 +476,14 @@ export class ActiveFormReportComponent implements OnInit {
                 });
             }
             this.spinner.show();
-            console.log("IndicatorResults");
 
-            console.log(this.IndicatorResults);
-            if (this.ReportingFormId > 0) {
+            if (this.isEdit) {
 
                 this.formdetailservice.EditIndicatorResults(reportingDate
                     , reportingFormId, this.ReportingFormId, createdby, this.IndicatorResults).subscribe(
                         (response) => {
                             this.zone.run(() => {
-                                this.router.navigate(['/air/'],
+                                this.router.navigate(['/air/report/'+this.ReportingFormId],
                                     { relativeTo: this.route });
                             });
                             // console.log(message['Message']);
@@ -567,8 +507,6 @@ export class ActiveFormReportComponent implements OnInit {
             } else {
                 this.formdetailservice.checkIfPeriodExists(reportingDate).subscribe(
                     (response) => {
-                        console.log(response['message']);
-                        console.log(response['period']);
                         this.existingperiod = response['period'];
                         if (this.existingperiod.length > 0) {
                             this.snotifyService.error('Kindly note the period already exists choose another reporting period ', 'ExistingPeriod',
@@ -583,18 +521,11 @@ export class ActiveFormReportComponent implements OnInit {
                             this.spinner.show();
                             this.formdetailservice.submitIndicatorResults(reportingDate, reportingFormId, createdby, this.IndicatorResults).subscribe(
                                 (response) => {
-                                    console.log(response);
-                                    // const message = response;
-                                    console.log(response['message']);
-                                    console.log(response['reportingFormId']);
-                                    console.log(response.message);
-                                    console.log(response.reportingFormId);
                                     this.zone.run(() => {
-                                        this.router.navigate(['/air/'],
+                                        this.router.navigate(['/air/report/'+this.ReportingFormId],
                                             { relativeTo: this.route });
                                     });
-                                    // console.log(message['Message']);
-                                    // console.log(message('ReportingFormId'));
+                             
                                     this.snotifyService.success(response.message, 'Submit Indicator Results',
                                         this.notificationService.getConfig());
                                 },
@@ -628,7 +559,6 @@ export class ActiveFormReportComponent implements OnInit {
 
 
     }
-    // console.log(this.formGroup);
 
 
 }

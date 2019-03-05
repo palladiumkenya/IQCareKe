@@ -15,7 +15,7 @@ export class FormDetailResolver implements Resolve<Observable<any[]>>{
         route: ActivatedRouteSnapshot,
         state: RouterStateSnapshot): Observable<any[]> {
 
-        let number: any = route.params['id'];
+        let number: any = route.params['reportingFormId'];
         
 
         return this.formdetailservice.getFormDetails(number);

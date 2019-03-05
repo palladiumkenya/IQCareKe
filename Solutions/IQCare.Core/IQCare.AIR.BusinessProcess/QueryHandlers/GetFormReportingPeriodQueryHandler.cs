@@ -31,9 +31,11 @@ namespace IQCare.AIR.BusinessProcess.QueryHandlers
         {
             try
             {
-                var reportingPeriods = _airUnitOfWork.Repository<ReportingPeriod>().Get(x => x.DeleteFlag == false)
-                        .Include(x => x.ReportingForm)
-                        .OrderByDescending(x => x.ReportDate).AsEnumerable();
+                var reportingPeriods = request.ReportingFormId.HasValue
+                    ? _airUnitOfWork.Repository<ReportingPeriod>().Get(x =>x.ReportingFormId == request.ReportingFormId.Value
+                            && x.DeleteFlag == false).Include(x => x.ReportingForm).OrderByDescending(x => x.ReportDate).AsEnumerable()
+                    : _airUnitOfWork.Repository<ReportingPeriod>().Get(x => x.DeleteFlag == false)
+                        .Include(x => x.ReportingForm).OrderByDescending(x => x.ReportDate).AsEnumerable();
 
                 var reportingPeriodViewModel = _mapper.Map<List<FormReportingPeriodViewModel>>(reportingPeriods);
 

@@ -1,4 +1,4 @@
-import {of , Observable} from 'rxjs';
+import {of , Observable, BehaviorSubject} from 'rxjs';
 import {Injectable, Inject} from '@angular/core';
 import {environment} from '../../../environments/environment';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
@@ -15,6 +15,8 @@ const httpOptions ={
 @Injectable()
 export class FormDetailsService {
     private API_AIR_URL = environment.API_AIR_URL;
+     activeConfiguredReportingForms = new BehaviorSubject<any[]>([]);
+
     constructor (private http: HttpClient,
         private errorHandler: ErrorHandlerService){
  
@@ -42,6 +44,15 @@ export class FormDetailsService {
             (getFormdata => this.errorHandler.log(`fetched Existing FormData  Details for` + formreportingid)),
             catchError(this.errorHandler.handleError<any[]>('getExisting FormData  Details'))
         );
+       }
+
+
+       public getConfiguredReportingForms() {
+        return this.http.get<any[]>(this.API_AIR_URL + '/api/ReportingForm/GetConfiguredReportingForms')
+        .subscribe(res=> 
+         {
+            this.activeConfiguredReportingForms.next(res)
+        })
        }
 
         public submitIndicatorResults(reportingdate: string, reportingformId: number
