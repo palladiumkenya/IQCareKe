@@ -12,6 +12,7 @@ export class ReportIndicatorResultComponent implements OnInit {
   
   reportSections : any[] = [];
   reportingPeriodId : any;
+  reportingFormId : any;
   reportDate : any;
   reportName : any;
   errorMessage :any;
@@ -23,6 +24,7 @@ export class ReportIndicatorResultComponent implements OnInit {
    private router: Router) { 
        route.params.subscribe(param => {
             this.reportingPeriodId = param['reportingPeriodId'];
+            this.reportingFormId = param['reportingFormId'];
        });
   }
 

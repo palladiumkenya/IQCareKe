@@ -1,7 +1,7 @@
 <div class="title ">
 
     <span class="mat-accent card-container-left">Reporting Periods </span>
-    <a routerLink="sections/{{reportingformid}}" mat-raised-button class="mat-accent card-container-right"> Settings </a>
+    <a routerLink="/air/sections/{{reportingFormId}}" mat-raised-button class="mat-accent card-container-right"> Settings </a>
 
 </div>
 
@@ -25,14 +25,14 @@
         <ng-container matColumnDef="action">
             <th mat-header-cell *matHeaderCellDef><strong class="fa fa-cog"> Action</strong></th>
             <td mat-cell *matCellDef="let row">
-                <a routerLink="indicator/result/{{row.id}}" mat-raised-button class="mat-accent"> View Results </a>
+                <a routerLink="/air/indicator/result/{{reportingFormId}}/{{row.id}}" mat-raised-button class="mat-accent"> View Results </a>
             </td>
 
         </ng-container>
         <ng-container matColumnDef="edit">
             <th mat-header-cell *matHeaderCellDef><strong class="fa fa-cog"> Edit</strong></th>
             <td mat-cell *matCellDef="let row">
-                <a routerLink="formdetails/{{reportingformid}}/{{row.id}}" mat-raised-button class="mat-accent"> Edit
+                <a routerLink="/air/formdetails/edit/{{reportingFormId}}" mat-raised-button class="mat-accent"> Edit
                     Form </a>
             </td>
 
@@ -49,7 +49,7 @@
 </div>
 
 <div class="button-row pull-right">
-    <a mat-raised-button color="accent" routerLink="formdetails/{{reportingformid}}/{{reportingformid}}">
+    <a mat-raised-button color="accent" routerLink="/air/formdetails/{{reportingFormId}}">
         <i class="fa fa-plus"></i>
         <span>New AIR Form</span>
     </a>

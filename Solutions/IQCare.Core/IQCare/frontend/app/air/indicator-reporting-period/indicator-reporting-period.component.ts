@@ -24,10 +24,12 @@ export class IndicatorReportingPeriodComponent implements OnInit {
    }
 
   ngOnInit() {
-    this.activedRoute.params.subscribe(param=>{
-       this.reportingFormId = param['reportingFormId'];
+    this.activedRoute.params.subscribe((param)=>{
+       this.reportingFormId = param.reportingFormId;
        this.getReportingPeriods(this.reportingFormId);       
     })
+
+    console.log('Reporting Form Id '+ this.reportingFormId)
   }
   
  
