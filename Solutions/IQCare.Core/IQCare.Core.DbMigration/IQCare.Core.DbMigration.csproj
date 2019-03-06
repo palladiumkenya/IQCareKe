@@ -169,6 +169,11 @@
     <None Remove="Scripts\2.0.0\53_DO_AlterViewPatientDeliveryInfo.sql" />
     <None Remove="Scripts\2.0.0\57_PHQQuestion.sql" />
     <None Remove="Scripts\2.0.1\01_IQCareFinalBuild.sql" />
+    <None Remove="Scripts\2.0.1\02_LO_ANCRegister.sql" />
+    <None Remove="Scripts\2.0.1\03_LO_HEIRegister.sql" />
+    <None Remove="Scripts\2.0.1\04_LO_HTSLabRegister.sql" />
+    <None Remove="Scripts\2.0.1\05_LO_MaternityRegister.sql" />
+    <None Remove="Scripts\2.0.1\06_LO_PNCRegister.sql" />
   </ItemGroup>
 
   <ItemGroup>
@@ -358,6 +363,11 @@
     <EmbeddedResource Include="Scripts\2.0.0\53_DO_AlterViewPatientDeliveryInfo.sql" />
     <EmbeddedResource Include="Scripts\2.0.0\57_PHQQuestion.sql" />
     <EmbeddedResource Include="Scripts\2.0.1\01_IQCareFinalBuild.sql" />
+    <EmbeddedResource Include="Scripts\2.0.1\02_LO_ANCRegister.sql" />
+    <EmbeddedResource Include="Scripts\2.0.1\03_LO_HEIRegister.sql" />
+    <EmbeddedResource Include="Scripts\2.0.1\04_LO_HTSLabRegister.sql" />
+    <EmbeddedResource Include="Scripts\2.0.1\05_LO_MaternityRegister.sql" />
+    <EmbeddedResource Include="Scripts\2.0.1\06_LO_PNCRegister.sql" />
   </ItemGroup>
 
   <ItemGroup>
