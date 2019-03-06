@@ -20,7 +20,12 @@ const routes: Routes = [
     },
     {
         path: 'enrollment/:id/:serviceId/:serviceCode',
-        component: EnrollmentServicesComponent
+        children: [
+            {
+                path: '',
+                component: EnrollmentServicesComponent
+            }
+        ]
     }
 
 ];

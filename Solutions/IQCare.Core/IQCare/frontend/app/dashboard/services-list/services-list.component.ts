@@ -114,8 +114,13 @@ export class ServicesListComponent implements OnInit {
                     });
                     break;
                 case 'CCC':
-                    this.snotifyService.error('Please Access CCC from the Greencard menu', 'Encounter History',
-                        this.notificationService.getConfig());
+                    this.searchService.setSession(this.personId, this.patientId).subscribe((res) => {
+                        console.log(res);
+                        window.location.href = location.protocol + '//' + window.location.hostname + ':' + window.location.port +
+                            '/IQCare/CCC/Patient/PatientHome.aspx';
+                    });
+                    /*this.snotifyService.error('Please Access CCC from the Greencard menu', 'Encounter History',
+                        this.notificationService.getConfig());*/
                     break;
                 default:
                     this.zone.run(() => {

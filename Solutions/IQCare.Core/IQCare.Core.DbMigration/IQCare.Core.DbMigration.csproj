@@ -169,6 +169,8 @@
     <None Remove="Scripts\2.0.0\53_DO_AlterViewPatientDeliveryInfo.sql" />
     <None Remove="Scripts\2.0.0\57_PHQQuestion.sql" />
     <None Remove="Scripts\2.0.1\01_IQCareFinalBuild.sql" />
+    <None Remove="Scripts\2.0.1\02_IQCareFinalBuild.sql" />
+    <None Remove="Scripts\2.0.1\03_VisitDetailsView.sql" />
     <None Remove="Scripts\2.0.1\02_LO_ANCRegister.sql" />
     <None Remove="Scripts\2.0.1\03_LO_HEIRegister.sql" />
     <None Remove="Scripts\2.0.1\04_LO_HTSLabRegister.sql" />
@@ -363,6 +365,7 @@
     <EmbeddedResource Include="Scripts\2.0.0\53_DO_AlterViewPatientDeliveryInfo.sql" />
     <EmbeddedResource Include="Scripts\2.0.0\57_PHQQuestion.sql" />
     <EmbeddedResource Include="Scripts\2.0.1\01_IQCareFinalBuild.sql" />
+    <EmbeddedResource Include="Scripts\2.0.1\02_IQCareFinalBuild.sql" />
     <EmbeddedResource Include="Scripts\2.0.1\02_LO_ANCRegister.sql" />
     <EmbeddedResource Include="Scripts\2.0.1\03_LO_HEIRegister.sql" />
     <EmbeddedResource Include="Scripts\2.0.1\04_LO_HTSLabRegister.sql" />
@@ -391,6 +394,7 @@
     <None Remove="Scripts\2.0.0\07_SO_SetPrefixTypeInIdentifiers.sql" />
     <EmbeddedResource Include="Scripts\2.0.0\07_SO_SetPrefixTypeInIdentifiers.sql" />
     <None Remove="Scripts\1.0.0.9\37_BO_AddPhsicalExaminationView.sql" />
+    <EmbeddedResource Include="Scripts\2.0.1\03_VisitDetailsView.sql" />
     <Resource Include="Scripts\1.0.0.9\37_BO_AddPhsicalExaminationView.sql" />
   </ItemGroup>
 
