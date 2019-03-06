@@ -13,6 +13,7 @@ import { NotificationService } from '../../shared/_services/notification.service
 export class LinkageComponent implements OnInit {
     linkage: Linkage;
     isEdit: boolean = false;
+    public maxDate: Date;
     public cccPattern = /^((?!(0))[0-9]{10})$/;
 
     constructor(private linkageService: LinkageReferralService,
@@ -24,7 +25,7 @@ export class LinkageComponent implements OnInit {
 
     ngOnInit() {
         this.linkage = new Linkage();
-
+        this.maxDate = new Date();
         this.getPreviousLinkage();
     }
 
