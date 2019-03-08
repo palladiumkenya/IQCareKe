@@ -50,9 +50,17 @@ namespace IQCare.AIR.BusinessProcess.CommandHandlers
                 {
                     var newResultValue = request.IndicatorResults.SingleOrDefault(x => x.Id == result.IndicatorId);
                     if (newResultValue == null)
-                        continue;
-                    result.UpdateResult(newResultValue.ResultNumeric, newResultValue.ResultText);
-                    _airUnitOfWork.Repository<IndicatorResult>().Update(result);
+                    {
+                        var IndicatorResult = new IndicatorResult(reportingPeriod.Id, result.Id, result.ResultText, result.ResultNumeric, reportingPeriod.CreatedBy);
+
+                         _airUnitOfWork.Repository<IndicatorResult>().AddRangeAsync(indicatorResults);
+                         _airUnitOfWork.SaveAsync();
+                        
+                    }
+                    else {
+                        result.UpdateResult(newResultValue.ResultNumeric, newResultValue.ResultText);
+                        _airUnitOfWork.Repository<IndicatorResult>().Update(result);
+                    }
                 }
 
                 _airUnitOfWork.Save();

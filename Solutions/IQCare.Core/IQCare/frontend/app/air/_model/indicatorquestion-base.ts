@@ -7,6 +7,7 @@ export class IndicatorQuestionBase {
     required: boolean;
     controlType: string;
     code: string;
+  
 
 }
 
