@@ -72,7 +72,7 @@
                                 <mat-form-field>
                                     <input matInput id={{indicatorquest.key}} type={{indicatorquest.controlType}}
                                         name={{indicatorquest.SubSectionId}} value={{indicatorquest.value}}
-                                        (change)=(OnValueChange($event,indicatorquest.code))  (keypress)="(isNumberKey($event))"   required>
+                                        (change)=(OnValueChange($event,indicatorquest.code))  (keypress)="(isNumberKey($event))" min="0"  required>
                                 </mat-form-field>
 
 

@@ -49,10 +49,10 @@ export class ActiveFormReportComponent implements OnInit {
     ReportingFormId: number;
     existing: [];
     existingperiod: [];
-    isEdit : boolean = false;
-    reportingPeriodId : number;
-    maxDate : Date = new Date();
-    minDate : Date = new Date(2000,JAN);
+    isEdit: boolean = false;
+    reportingPeriodId: number;
+    maxDate: Date = new Date();
+    minDate: Date = new Date(2000, JAN);
     constructor(private route: ActivatedRoute,
         private formBuilder: FormBuilder,
         private snotifyService: SnotifyService,
@@ -146,7 +146,7 @@ export class ActiveFormReportComponent implements OnInit {
                     }
                     let SubSectionName = this.FormItems['reportSections'][i]['reportSubSections'][t].name;
                     let Code = this.FormItems["reportSections"][i]['reportSubSections'][t]['indicators'][r].code
-                    this.ItemKey = SubSectionName + '_' + Code + '_' + this.FormItems["reportSections"][i]['reportSubSections'][t]['indicators'][r].id
+                    this.ItemKey = SubSectionName + '_' + Code
                     let IndicatorQuestion = {
                         SubSectionId: this.FormItems['reportSections'][i]['reportSubSections'][t].id,
                         code: this.FormItems["reportSections"][i]['reportSubSections'][t]['indicators'][r].code,
@@ -177,22 +177,22 @@ export class ActiveFormReportComponent implements OnInit {
             Period: new FormControl(this.FormResults.Period, [Validators.required])
         });
         if (this.isEdit) {
-                 
+
             this.formGroup.controls.Period.disable();
-      
+
         }
         else {
-        this.formGroup.controls.Period.enable();
+            this.formGroup.controls.Period.enable();
         }
 
     }
     GetFormData() {
         if (this.isEdit) {
-             console.log(this.reportingPeriodId + ' reportingPeriodId')
+            console.log(this.reportingPeriodId + ' reportingPeriodId')
             this.formdetailservice.getFormdata(this.reportingPeriodId).subscribe(res => {
                 this.ExistingData = res;
                 console.log(this.ExistingData['reportingValues'][0]['reportDate'] + 'Reporting date');
-                console.log(moment(this.ExistingData['reportingValues'][0]['reportDate']).toDate() +' Report Date');
+                console.log(moment(this.ExistingData['reportingValues'][0]['reportDate']).toDate() + ' Report Date');
                 this.date.setValue(moment(this.ExistingData['reportingValues'][0]['reportDate']).toDate());
 
 
@@ -258,16 +258,280 @@ export class ActiveFormReportComponent implements OnInit {
 
         const element = document.getElementById(codeId);
         if (element != undefined) {
-            element.remove();
+            //element.remove();
+            element.innerHTML = "";
         }
         for (let i = 0; i < this.IndicatorQuestions.length; i++) {
             const code = this.IndicatorQuestions[i].code.toString();
             if (code === codeId) {
-                index = i
+                index = i;
             }
         }
         this.IndicatorQuestions[index].value = val;
         this.formGroup.controls.IndicatorQuestions.value[index].value = val;
+        const NumberCircumcisedHIV = ['Number Circumcised_HV04-08', 'Number Circumcised_HV04-09', 'Number Circumcised_HV04-10'];
+        const TypeofCircumcision = ['Type of Circumcision_HV04-11', 'Type of Circumcision_HV04-12'];
+        const exposedtotal = ['Post-Exposure Prophylaxis(PEP)_HV05-01', 'Post-Exposure Prophylaxis(PEP)_HV05-02'];
+        const peptotal = ['Post-Exposure Prophylaxis(PEP)_HV05-04', 'Post-Exposure Prophylaxis(PEP)_HV05-05'];
+
+        const Pep = ['Post-Exposure Prophylaxis(PEP)_HV05-01', 'Post-Exposure Prophylaxis(PEP)_HV05-02',
+            'Post-Exposure Prophylaxis(PEP)_HV05-03'
+            , 'Post-Exposure Prophylaxis(PEP)_HV05-04',
+            'Post-Exposure Prophylaxis(PEP)_HV05-05', 'Post-Exposure Prophylaxis(PEP)_HV05-06']
+
+        if (exposedtotal.includes(this.IndicatorQuestions[index].key)) {
+            let valuetotal = 0;
+            const totalno = document.getElementById('Post-Exposure Prophylaxis(PEP)_HV05-03') as HTMLInputElement;
+            valuetotal = totalno.valueAsNumber;
+            const result = this.IndicatorQuestions.filter((t) => exposedtotal.includes(t.key));
+            const res = exposedtotal.filter(f => this.IndicatorQuestions.filter(t => t.key == f));
+            console.log(result);
+            let valuecalc = 0;
+            for (let i = 0; i < result.length; i++) {
+                const value = result[i].value.toString();
+                if (value == '') {
+                    valuecalc += 0;
+                }
+                else { valuecalc += parseInt(result[i].value, 10); }
+            }
+            const elementexposedtotal = document.getElementById('Post-Exposure Prophylaxis(PEP)_HV05-03') as HTMLInputElement;
+            elementexposedtotal.value = valuecalc.toString();
+
+
+
+
+        }
+        if (peptotal.includes(this.IndicatorQuestions[index].key)) {
+            let valuetotal = 0;
+            let exposedtotal = 0;
+            const totalp = document.getElementById('Post-Exposure Prophylaxis(PEP)_HV05-06') as HTMLInputElement;
+            const elementexposedtotal = document.getElementById('Post-Exposure Prophylaxis(PEP)_HV05-03') as HTMLInputElement;
+            exposedtotal = parseInt(elementexposedtotal.value.toString(), 10);
+            valuetotal = totalp.valueAsNumber;
+            const result = this.IndicatorQuestions.filter((t) => peptotal.includes(t.key));
+            const res = peptotal.filter(f => this.IndicatorQuestions.filter(t => t.key == f));
+            console.log(result);
+            let valuecalc = 0;
+            for (let i = 0; i < result.length; i++) {
+                const value = result[i].value.toString();
+                if (value == '') {
+                    valuecalc += 0;
+                }
+                else { valuecalc += parseInt(result[i].value, 10); }
+            }
+            if (this.IndicatorQuestions[index].key == 'Post-Exposure Prophylaxis(PEP)_HV05-04') {
+                const exposedoccupational = document.getElementById('Post-Exposure Prophylaxis(PEP)_HV05-01') as HTMLInputElement;
+                const exposedocctotal = exposedoccupational.valueAsNumber;
+                const pepoccupational = parseInt(this.IndicatorQuestions[index].value, 10);
+                const elementpeptotal = document.getElementById('Post-Exposure Prophylaxis(PEP)_HV05-06') as HTMLInputElement;
+                const finaltotal = parseInt(elementpeptotal.value.toString(), 10);
+                if (exposedocctotal > 0) {
+                    if (pepoccupational > exposedocctotal) {
+                        let currentelement = document.getElementById(codeId);
+
+                        currentelement.innerHTML = "<span style='color:red;'>The value cannot be greater than the exposed occupational value</span>";
+                        const elementselected = document.getElementById(this.IndicatorQuestions[index].key) as HTMLInputElement;
+                        elementselected.value = '';
+
+
+                        this.IndicatorQuestions[index].value = '';
+                        this.formGroup.controls.IndicatorQuestions.value[index].value = '';
+                        return;
+
+                    }
+                    else if (pepoccupational > finaltotal) {
+                        let currentelement = document.getElementById(codeId);
+
+                        currentelement.innerHTML = "<span style='color:red;'>The value cannot be greater than the exposed total value</span>";
+                        const elementselected = document.getElementById(this.IndicatorQuestions[index].key) as HTMLInputElement;
+                        elementselected.value = '';
+
+
+                        this.IndicatorQuestions[index].value = '';
+                        this.formGroup.controls.IndicatorQuestions.value[index].value = '';
+                        return;
+
+
+                    }
+                }
+
+            }
+            if (this.IndicatorQuestions[index].key == 'Post-Exposure Prophylaxis(PEP)_HV05-05') {
+                const exposedother = document.getElementById('Post-Exposure Prophylaxis(PEP)_HV05-02') as HTMLInputElement;
+                const exposedothertotal = exposedother.valueAsNumber;
+                const pepother = parseInt(this.IndicatorQuestions[index].value, 10);
+                const elementpeptotal = document.getElementById('Post-Exposure Prophylaxis(PEP)_HV05-06') as HTMLInputElement;
+                const finaltotal = elementpeptotal.valueAsNumber;
+                if (exposedothertotal > 0) {
+                    if (pepother > exposedothertotal) {
+                        let currentelement = document.getElementById(codeId);
+
+                        currentelement.innerHTML = "<span style='color:red;'>The value cannot be greater than the exposed other value</span>";
+                        const elementselected = document.getElementById(this.IndicatorQuestions[index].key) as HTMLInputElement;
+                        elementselected.value = '';
+
+
+                        this.IndicatorQuestions[index].value = '';
+                        this.formGroup.controls.IndicatorQuestions.value[index].value = '';
+                        return;
+
+                    }
+                    else if (pepother > finaltotal) {
+                        let currentelement = document.getElementById(codeId);
+
+                        currentelement.innerHTML = "<span style='color:red;'>The value cannot be greater than the exposed total value</span>";
+                        const elementselected = document.getElementById(this.IndicatorQuestions[index].key) as HTMLInputElement;
+                        elementselected.value = '';
+
+
+                        this.IndicatorQuestions[index].value = '';
+                        this.formGroup.controls.IndicatorQuestions.value[index].value = '';
+                        return;
+
+
+                    }
+                }
+
+            }
+            if (exposedtotal > 0) {
+                if (valuecalc > exposedtotal) {
+
+                    this.IndicatorQuestions[index].value = '';
+                    this.formGroup.controls.IndicatorQuestions.value[index].value = '';
+                    const elementselected = document.getElementById(this.IndicatorQuestions[index].key) as HTMLInputElement;
+                    elementselected.value = '';
+                    const elementpeptotal = document.getElementById('Post-Exposure Prophylaxis(PEP)_HV05-06') as HTMLInputElement;
+                    elementpeptotal.value = '';
+                    this.snotifyService.error('Kindly note the total of values' +
+                        'under code HV05-04, HV05-05  cannot be more than Exposed total ', 'Circumcised Total',
+                        this.notificationService.getConfig());
+                    return;
+
+                }
+                else {
+                    const elementpeptotal = document.getElementById('Post-Exposure Prophylaxis(PEP)_HV05-06') as HTMLInputElement;
+                    elementpeptotal.value = valuecalc.toString();
+
+                }
+            }
+
+
+
+
+
+        }
+
+        if (TypeofCircumcision.includes(this.IndicatorQuestions[index].key)) {
+            let valuetotal = 0;
+            const element = document.getElementById('Number Circumcised_HV04-07') as HTMLInputElement;
+            valuetotal = element.valueAsNumber;
+            if (valuetotal > 0) {
+                let valuecircumcised = 0;
+                let valueIndicator = parseInt(this.IndicatorQuestions[index].value);
+                if (valueIndicator > valuetotal) {
+
+                    let currentelement = document.getElementById(codeId);
+
+                    currentelement.innerHTML = "<span style='color:red;'>The value cannot be greater than the Circumcised Total</span>";
+                    const elementselected = document.getElementById(this.IndicatorQuestions[index].key) as HTMLInputElement;
+                    elementselected.value = '';
+
+
+                    this.IndicatorQuestions[index].value = '';
+                    this.formGroup.controls.IndicatorQuestions.value[index].value = '';
+                    return;
+
+
+                }
+                else {
+                    const result = this.IndicatorQuestions.filter((t) => TypeofCircumcision.includes(t.key));
+                    const res = TypeofCircumcision.filter(f => this.IndicatorQuestions.filter(t => t.key == f));
+                    console.log(result);
+                    let valuecalc = 0;
+                    for (let i = 0; i < result.length; i++) {
+                        const value = result[i].value.toString();
+                        if (value == '') {
+                            valuecalc += 0;
+                        }
+                        else { valuecalc += parseInt(result[i].value, 10); }
+                    }
+
+                    if (valuecalc > valuetotal) {
+
+                        this.IndicatorQuestions[index].value = '';
+                        this.formGroup.controls.IndicatorQuestions.value[index].value = '';
+                        const elementselected = document.getElementById(this.IndicatorQuestions[index].key) as HTMLInputElement;
+                        elementselected.value = '';
+
+                        this.snotifyService.error('Kindly note the total of values' +
+                            'under code HV04-11, HV04-12  cannot be more than Circumcised total ', 'Circumcised Total',
+                            this.notificationService.getConfig());
+                        return;
+
+                    }
+                }
+
+            }
+
+
+
+        }
+
+
+
+        if (NumberCircumcisedHIV.includes(this.IndicatorQuestions[index].key)) {
+            let valuetotal = 0;
+            const element = document.getElementById('Number Circumcised_HV04-07') as HTMLInputElement;
+            valuetotal = element.valueAsNumber;
+            if (valuetotal > 0) {
+                let valuecircumcised = 0;
+                let valueIndicator = parseInt(this.IndicatorQuestions[index].value);
+                if (valueIndicator > valuetotal) {
+
+                    let currentelement = document.getElementById(codeId);
+
+                    currentelement.innerHTML = "<span style='color:red;'>The value cannot be greater than the Circumcised Total</span>";
+                    const elementselected = document.getElementById(this.IndicatorQuestions[index].key) as HTMLInputElement;
+                    elementselected.value = '';
+
+
+                    this.IndicatorQuestions[index].value = '';
+                    this.formGroup.controls.IndicatorQuestions.value[index].value = '';
+                    return;
+
+
+                }
+                else {
+                    const result = this.IndicatorQuestions.filter((t) => NumberCircumcisedHIV.includes(t.key));
+                    const res = NumberCircumcisedHIV.filter(f => this.IndicatorQuestions.filter(t => t.key == f));
+                    console.log(result);
+                    let valuecalc = 0;
+                    for (let i = 0; i < result.length; i++) {
+                        const value = result[i].value.toString();
+                        if (value == '') {
+                            valuecalc += 0;
+                        }
+                        else { valuecalc += parseInt(result[i].value, 10); }
+                    }
+
+                    if (valuecalc > valuetotal) {
+
+                        this.IndicatorQuestions[index].value = '';
+                        this.formGroup.controls.IndicatorQuestions.value[index].value = '';
+                        const elementselected = document.getElementById(this.IndicatorQuestions[index].key) as HTMLInputElement;
+                        elementselected.value = '';
+
+                        this.snotifyService.error('Kindly note the total of values' +
+                            'under code HV04-08, HV04-09, HV04-10  cannot be more than Circumcised total ', 'Circumcised Total',
+                            this.notificationService.getConfig());
+                        return;
+
+                    }
+                }
+
+            }
+
+        }
 
         const name = $event.target.name;
 
@@ -290,6 +554,13 @@ export class ActiveFormReportComponent implements OnInit {
             else {
                 this.filtervalue = false;
             }
+            if (SubSectionName !== 'Post-Exposure Prophylaxis(PEP)') {
+                this.filtervalue = true;
+            }
+            else {
+                this.filtervalue = false;
+            }
+
 
         }
 
@@ -325,7 +596,7 @@ export class ActiveFormReportComponent implements OnInit {
 
 
             if (SubSectionNameId === "Number Assessed for HIV risk") {
-                const element = document.getElementById('Number Assessed for HIV risk_Sum HV01-37 to HV01-44_9') as HTMLInputElement;
+                const element = document.getElementById('Number Assessed for HIV risk_HV01-45') as HTMLInputElement;
                 element.value = this.total.toString();
                 const Indicatorlabel = 'Total Assessed for HIV Risk'
                 for (let i = 0; i < this.IndicatorQuestions.length; i++) {
@@ -341,7 +612,7 @@ export class ActiveFormReportComponent implements OnInit {
 
             }
             if (SubSectionNameId === "Number Self Testing for HIV") {
-                const element = document.getElementById('Number Self Testing for HIV_(Sum HV01-46 To HV01-49)HV01-50_14') as HTMLInputElement;
+                const element = document.getElementById('Number Self Testing for HIV_HV01-50') as HTMLInputElement;
                 element.value = this.total.toString();
 
                 const Indicatorlabel = 'Self Testing Total'
@@ -358,7 +629,7 @@ export class ActiveFormReportComponent implements OnInit {
 
             }
             if (SubSectionNameId === "Number Circumcised") {
-                const element = document.getElementById('Number Circumcised_(Sum HV04-01 to HV04-06)HV04-07_32') as HTMLInputElement;
+                const element = document.getElementById('Number Circumcised_HV04-07') as HTMLInputElement;
                 element.value = this.total.toString();
 
                 const Indicatorlabel = 'Circumcised Total';
@@ -381,22 +652,6 @@ export class ActiveFormReportComponent implements OnInit {
                 }
             }
 
-            if (SubSectionNameId === "Post-Exposure Prophylaxis(PEP)") {
-                const element = document.getElementById('Post-Exposure Prophylaxis(PEP)_(Sum HV05-01 to HV05-05)HV05-06_20') as HTMLInputElement;
-                element.value = this.total.toString();
-                const Indicatorlabel = 'PEP Total'
-                for (let i = 0; i < this.IndicatorQuestions.length; i++) {
-                    const code = this.IndicatorQuestions[i].label.toString();
-                    if (code === Indicatorlabel) {
-                        this.IndicatorQuestions[i].value = this.total.toString();
-                        const codeValue = document.getElementById(this.IndicatorQuestions[i].code.toString());
-                        if (codeValue != undefined) {
-                            codeValue.remove();
-                        }
-                    }
-                }
-
-            }
 
         }
 
@@ -415,7 +670,7 @@ export class ActiveFormReportComponent implements OnInit {
     }
     close() {
         this.zone.run(() => {
-            this.router.navigate(['/air/report/'+this.ReportingFormId],
+            this.router.navigate(['/air/report/' + this.ReportingFormId],
                 { relativeTo: this.route });
         });
     }
@@ -486,7 +741,7 @@ export class ActiveFormReportComponent implements OnInit {
                     , reportingFormId, this.ReportingFormId, createdby, this.IndicatorResults).subscribe(
                         (response) => {
                             this.zone.run(() => {
-                                this.router.navigate(['/air/report/'+this.ReportingFormId],
+                                this.router.navigate(['/air/report/' + this.ReportingFormId],
                                     { relativeTo: this.route });
                             });
                             // console.log(message['Message']);
@@ -497,8 +752,8 @@ export class ActiveFormReportComponent implements OnInit {
                         (error) => {
                             // JSON.stringify(Indata), httpOptions
                             this.snotifyService.error('Error  Editing Indicator Results ' + error, 'Edit',
-                            this.notificationService.getConfig());
-                        this.spinner.hide();
+                                this.notificationService.getConfig());
+                            this.spinner.hide();
                         },
 
                         () => {
@@ -513,22 +768,22 @@ export class ActiveFormReportComponent implements OnInit {
                         this.existingperiod = response['period'];
                         if (this.existingperiod.length > 0) {
                             this.snotifyService.error('Kindly note the period already exists choose another reporting period ', 'ExistingPeriod',
-                            this.notificationService.getConfig());
-                            
-        
+                                this.notificationService.getConfig());
+
+
                             this.spinner.hide();
                             return;
-                            
-                        
+
+
                         } else {
                             this.spinner.show();
                             this.formdetailservice.submitIndicatorResults(reportingDate, reportingFormId, createdby, this.IndicatorResults).subscribe(
                                 (response) => {
                                     this.zone.run(() => {
-                                        this.router.navigate(['/air/report/'+this.ReportingFormId],
+                                        this.router.navigate(['/air/report/' + this.ReportingFormId],
                                             { relativeTo: this.route });
                                     });
-                             
+
                                     this.snotifyService.success(response.message, 'Submit Indicator Results',
                                         this.notificationService.getConfig());
                                 },
@@ -536,15 +791,15 @@ export class ActiveFormReportComponent implements OnInit {
                                     this.snotifyService.error('Error submitting Indicator Results ' + error, 'Submit Indicator Results',
                                         this.notificationService.getConfig());
                                     this.spinner.hide();
-        
+
                                 },
-        
+
                                 () => {
                                     this.spinner.hide();
                                 }
                             );
                         }
-                
+
                     },
                     (error) => {
                         this.snotifyService.error('Error checking reporting period ' + error, 'Checking if Reporting Period Exists',
@@ -555,7 +810,7 @@ export class ActiveFormReportComponent implements OnInit {
                         this.spinner.hide();
                     }
                 );
-                
+
             }
 
         }
