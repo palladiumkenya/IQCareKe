@@ -511,7 +511,7 @@ namespace IQCare.Common.BusinessProcess.Services
         //    }
         //}
 
-        public async Task<ApiInbox> UpdateAfyaMobileInbox(int id, string afyamobileId = null, bool processed = false, DateTime? dateProcessed = null, string logMessage = null)
+        public async Task<ApiInbox> UpdateAfyaMobileInbox(int id, string afyamobileId = null, bool processed = false, DateTime? dateProcessed = null, string logMessage = null, bool isSuccess = false)
         {
             try
             {
@@ -520,6 +520,7 @@ namespace IQCare.Common.BusinessProcess.Services
                 afyaMobileMessage.Processed = processed;
                 afyaMobileMessage.DateProcessed = dateProcessed;
                 afyaMobileMessage.LogMessage = logMessage;
+                afyaMobileMessage.IsSuccess = isSuccess;
 
                 _unitOfWork.Repository<ApiInbox>().Update(afyaMobileMessage);
                 await _unitOfWork.SaveAsync();
@@ -869,7 +870,7 @@ namespace IQCare.Common.BusinessProcess.Services
         }
 
 
-        public async Task<PersonLocation> UpdatePersonLocation(int personId, string landmark, string ward = "", string county = "", string subcounty = "", int userid = 1)
+        public async Task<PersonLocation> UpdatePersonLocation(int personId, string landmark, int ward = 0, int county = 0, int subcounty = 0, int userid = 1)
         {
             try
             {
@@ -882,26 +883,15 @@ namespace IQCare.Common.BusinessProcess.Services
                     {
                         location.LandMark = landmark;
                     }
-                    if (!string.IsNullOrEmpty(ward))
-                    {
-                        location.Ward = Convert.ToInt32(ward);
-                    }
-                    if (!string.IsNullOrEmpty(county))
-                    {
-                        location.County = Convert.ToInt32(county);
-                    }
-                    if (!string.IsNullOrEmpty(subcounty))
-                    {
-                        location.SubCounty = Convert.ToInt32(subcounty);
-                    }
+                    location.Ward = ward;
+                    location.County = county;
+                    location.SubCounty = subcounty;
+
                     _unitOfWork.Repository<PersonLocation>().Update(location);
                     await _unitOfWork.SaveAsync();
                 }
                 else
                 {
-                    int Ward = string.IsNullOrWhiteSpace(ward) ? 0 : Convert.ToInt32(ward);
-                    int County = string.IsNullOrWhiteSpace(county) ? 0 : Convert.ToInt32(county);
-                    int SubCounty = string.IsNullOrWhiteSpace(subcounty) ? 0 : Convert.ToInt32(subcounty);
                     landmark = string.IsNullOrWhiteSpace(landmark) ? "n/a" : landmark;
                     int user;
                     if (userid > 0)
@@ -912,8 +902,8 @@ namespace IQCare.Common.BusinessProcess.Services
                     {
                         user = 1;
                     }
-                    location = await addPersonLocation(personId, County, SubCounty, Ward, "", landmark, user);
 
+                    location = await addPersonLocation(personId, county, subcounty, ward, "", landmark, user);
                 }
                 return location;
             }
@@ -1528,8 +1518,41 @@ namespace IQCare.Common.BusinessProcess.Services
                         mstFacility = await _unitOfWork.Repository<Facility>().Get(x => x.DeleteFlag == 0)
                             .ToListAsync();
                     }
-
+                    
                     await UpdatePatient(patient.Id, dateOfBirth, mstFacility[0].PosID);
+
+                    if (patient.Ptn_pk > 0)
+                    {
+                        var gender = 0;
+                        var lookupGender = await _unitOfWork.Repository<LookupItemView>().Get(x => x.ItemId == sex).ToListAsync();
+                        if (lookupGender.Count > 0)
+                        {
+                            if (lookupGender[0].ItemName == "Male")
+                            {
+                                gender = 16;
+                            }
+                            else if (lookupGender[0].ItemName == "Female")
+                            {
+                                gender = 17;
+                            }
+
+                            StringBuilder stringBuilder = new StringBuilder();
+                            stringBuilder.Append("exec pr_OpenDecryptedSession;");
+                            stringBuilder.Append($"UPDATE mst_Patient SET " +
+                                                 $"FirstName = ENCRYPTBYKEY(KEY_GUID('Key_CTC'), '{firstName}')," +
+                                                 $"MiddleName = ENCRYPTBYKEY(KEY_GUID('Key_CTC'), '{middleName}')," +
+                                                 $"LastName = ENCRYPTBYKEY(KEY_GUID('Key_CTC'), '{lastName}')," +
+                                                 $"Sex = {gender}," +
+                                                 $"DOB = {dateOfBirth.ToString("yyyy-MM-dd")}" +
+                                                 $"where Ptn_Pk = {patient.Ptn_pk};");
+                            stringBuilder.Append("exec [dbo].[pr_CloseDecryptedSession];");
+                            stringBuilder.Append($"SELECT Ptn_Pk, " +
+                                                 $"CAST(DECRYPTBYKEY(FirstName) AS VARCHAR(50)) FirstName, " +
+                                                 $"CAST(DECRYPTBYKEY(LastName) AS VARCHAR(50)) LastName, LocationID FROM mst_Patient WHERE Ptn_Pk = {patient.Ptn_pk};");
+
+                            await _unitOfWork.Repository<MstPatient>().FromSql(stringBuilder.ToString());
+                        }
+                    }
                 }
 
                 return personInsert.FirstOrDefault();
@@ -1577,19 +1600,7 @@ namespace IQCare.Common.BusinessProcess.Services
                            ",[CreatedBy] ,[AuditData] ,[DateOfBirth] ,[DobPrecision], RegistrationDate, FacilityId FROM [dbo].[Person] WHERE Id = SCOPE_IDENTITY();" +
                            "exec [dbo].[pr_CloseDecryptedSession];");
 
-                //var sql2 =
-                //    "exec pr_OpenDecryptedSession;" +
-                //    "Insert Into Person(FirstName, MidName, LastName,NickName, Sex, DateOfBirth, DobPrecision, Active, DeleteFlag, CreateDate, CreatedBy, RegistrationDate, FacilityId)" +
-                //    $"Values(ENCRYPTBYKEY(KEY_GUID('Key_CTC'), '{firstName}'), ENCRYPTBYKEY(KEY_GUID('Key_CTC'), '{middleName}')," +
-                //    $"ENCRYPTBYKEY(KEY_GUID('Key_CTC'), '{lastName}'),ENCRYPTBYKEY(KEY_GUID('Key_CTC'), '{nickName}') , {sex}, '{dob}', 1," +
-                //    $"1,0,GETDATE(), '{createdBy}', '{registrationDate}', '{facilityId}');" +
-                //    "SELECT [Id] , CAST(DECRYPTBYKEY(FirstName) AS VARCHAR(50)) [FirstName] ,CAST(DECRYPTBYKEY(MidName) AS VARCHAR(50)) MidName" +
-                //    ",CAST(DECRYPTBYKEY(LastName) AS VARCHAR(50)) [LastName], CAST(DECRYPTBYKEY(NickName) AS VARCHAR(50)) [NickName],[Sex] ,[Active] ,[DeleteFlag] ,[CreateDate] " +
-                //    ",[CreatedBy] ,[AuditData] ,[DateOfBirth] ,[DobPrecision], RegistrationDate, FacilityId FROM [dbo].[Person] WHERE Id = SCOPE_IDENTITY();" +
-                //    "exec [dbo].[pr_CloseDecryptedSession];";
-
                 var personInsert = await _unitOfWork.Repository<Person>().FromSql(sql.ToString());
-
                 return personInsert.FirstOrDefault();
             }
             catch (Exception e)

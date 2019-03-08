@@ -771,14 +771,25 @@
         });
 
         var Age = $("#Age").val();
-        if (Age <= 14 || Age >= 6) {
-            $("#<%=Stage1Date.ClientID%>").attr('disabled', 'disbaled');
-            $("#Stage1").addClass("noneevents");
-            $("#<%=Stage2Date.ClientID%>").attr('disabled', 'disbaled');
-            $("#Stage2").addClass("noneevents");
-            $("#<%=Stage3Date.ClientID%>").attr('disabled', 'disbaled');
-            $("#Stage3").addClass("noneevents");
+        if (Age <= 19 && Age >= 6) {
+   
+            $("#Stage1").datepicker('enable');
+           // $("#Stage1").addClass("noneevents");
+     
+            $("#Stage2").datepicker('enable');
+            //$("#Stage2").addClass("noneevents");
+     
+            $("#Stage3").datepicker('enable');
+            //$("#Stage3").addClass("noneevents");
+        } else {
+            $("#Stage1").datepicker('disable');
+            //$("#Stage1").addClass("noneevents");
+            $("#Stage2").datepicker('disable');
+            //$("#Stage2").addClass("noneevents");
+            $("#Stage3").datepicker('disable');
+            //$("#Stage3").addClass("noneevents");
         }
+
         if (Age <= 14) {
             $("#<%=SexPartnerDate.ClientID%>").attr('disabled', 'disbaled');
             $("#SexPartner").addClass("noneevents");

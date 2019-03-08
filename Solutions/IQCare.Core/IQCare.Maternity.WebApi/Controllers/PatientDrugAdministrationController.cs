@@ -70,7 +70,7 @@ namespace IQCare.Maternity.WebApi.Controllers
             return BadRequest(response);
         }
 
-        [HttpPut]
+        [HttpPost]
         public async Task<object> Edit([FromBody]UpdateDrugAdministrationCommand command)
         {
             var response = await  _mediator.Send(command, HttpContext.RequestAborted);

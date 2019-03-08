@@ -16,7 +16,7 @@ namespace IQCare.Maternity.Core.Domain.Maternity
             PregnancyId = pregnancyId;
             DurationOfLabour = labourDuration;
             DateOfDelivery = deliveryDate;
-            TimeOfDelivery = deliveryTime;
+            TimeOfDelivery = deliveryTime.TimeOfDay;
             ModeOfDelivery = deliveryMode;
             PlacentaComplete = placentaComplete;
             BloodLossCapacity = bloodLossCapacity;
@@ -36,7 +36,7 @@ namespace IQCare.Maternity.Core.Domain.Maternity
         public int ? PregnancyId { get; private set; }
         public string DurationOfLabour { get; private set; }
         public DateTime DateOfDelivery { get; private set; }
-        public DateTime TimeOfDelivery { get; private set; }
+        public TimeSpan TimeOfDelivery { get; private set; }
         public int? ModeOfDelivery { get; private set; }
         public int? PlacentaComplete { get; private set; }
         public int? BloodLossCapacity { get; private set; }
@@ -54,9 +54,11 @@ namespace IQCare.Maternity.Core.Domain.Maternity
 
         public void Update(dynamic deliveryInfo)
         {
+            DateTime deliveryTime = Convert.ToDateTime(deliveryInfo.TimeOfDelivery);
+
             DurationOfLabour = deliveryInfo.DurationOfLabour;
             DateOfDelivery = deliveryInfo.DateOfDelivery;
-            TimeOfDelivery = deliveryInfo.TimeOfDelivery;
+            TimeOfDelivery = deliveryTime.TimeOfDay;
             ModeOfDelivery = deliveryInfo.ModeOfDelivery;
             PlacentaComplete = deliveryInfo.PlacentaComplete;
             BloodLossCapacity = deliveryInfo.BloodLossCapacity;

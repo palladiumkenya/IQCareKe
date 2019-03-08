@@ -233,7 +233,8 @@ const routes: Routes = [
                     referralFromOptions: ReferralResolver,
                     motherExaminationOptions: MotherExaminationResolver,
                     babyExaminationControls: BabyExaminationResolver,
-                    counselledInfantFeedingOptions: CounselledInfantFeedingResolver
+                    counselledInfantFeedingOptions: CounselledInfantFeedingResolver,
+                    hivStatusOptions: HivStatusResolver
                 }
             },
             {
@@ -261,7 +262,8 @@ const routes: Routes = [
                     referralFromOptions: ReferralResolver,
                     motherExaminationOptions: MotherExaminationResolver,
                     babyExaminationControls: BabyExaminationResolver,
-                    counselledInfantFeedingOptions: CounselledInfantFeedingResolver
+                    counselledInfantFeedingOptions: CounselledInfantFeedingResolver,
+                    hivStatusOptions: HivStatusResolver
                 }
             }
         ]
@@ -289,7 +291,8 @@ const routes: Routes = [
                     // hivTestResultOptions: HivTestResultResolver,
                     // finalPartnerHivResultOptions: FinalPartnerHivResultResolver,
                     hivFinalResultsOptions: HivFinalResultsResolver,
-                    hivStatusOptions: HivStatusResolver
+                    hivStatusOptions: HivStatusResolver,
+                    counselledInfantFeedingOptions: CounselledInfantFeedingResolver,
                 }
             },
             {
@@ -312,7 +315,9 @@ const routes: Routes = [
                     // hivTestResultOptions: HivTestResultResolver,
                     // finalPartnerHivResultOptions: FinalPartnerHivResultResolver,
                     hivFinalResultsOptions: HivFinalResultsResolver,
-                    hivStatusOptions: HivStatusResolver
+                    hivStatusOptions: HivStatusResolver,             
+                    counselledInfantFeedingOptions: CounselledInfantFeedingResolver
+
                 }
             }
         ]

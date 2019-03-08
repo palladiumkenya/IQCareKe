@@ -28,6 +28,7 @@ namespace IQCare.PMTCT.BusinessProcess.CommandHandlers.ChronicIllness
             {
                 try
                 {
+                   
                     PatientChronicIllness patientChronicIllness =  _unitOfWork.Repository<PatientChronicIllness>()
                         .Get(x => x.Id == request.PatientChronicIllness.Id &&
                                   x.PatientId == request.PatientChronicIllness.PatientId).FirstOrDefault();

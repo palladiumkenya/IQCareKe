@@ -1,6 +1,10 @@
 
 update mst_Module set DeleteFlag=0 where ModuleName='PM/SCM'
 
+update mst_Module set Status= 2 where ModuleName='PM/SCM'
+
+
+
 update mst_feature set featuretypeid = (select top 1 id from mst_decode where name = 'Module Actions') where featurename='Drug Dispense'
 
  IF NOT EXISTS (

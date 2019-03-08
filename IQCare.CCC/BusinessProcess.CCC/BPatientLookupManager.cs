@@ -438,5 +438,26 @@ namespace BusinessProcess.CCC
                 return patientLookup;
             }
         }
+
+        public DataTable GetDuplicatePatientRecords(bool matchFirstName, bool matchLastName, bool matchMiddleName, bool matchSex, bool matchEnrollmentNumber, bool matchDob, bool matchEnrollmentDate, bool matchARTStartDate, bool matchHIVDiagnosisDate)
+        {
+            lock (this)
+            {
+                ClsObject Patient = new ClsObject();
+                ClsUtility.Init_Hashtable();
+                ClsUtility.AddParameters("@matchFirstName", SqlDbType.Bit, Convert.ToString(matchFirstName));
+                ClsUtility.AddParameters("@matchLastName", SqlDbType.Bit, Convert.ToString(matchLastName));
+                ClsUtility.AddParameters("@matchMiddleName", SqlDbType.Bit, Convert.ToString(matchMiddleName));
+                ClsUtility.AddParameters("@matchSex", SqlDbType.Bit, Convert.ToString(matchSex));
+                ClsUtility.AddParameters("@matchEnrollmentNumber", SqlDbType.Bit, Convert.ToString(matchEnrollmentNumber));
+                ClsUtility.AddParameters("@matchDOB", SqlDbType.Bit, Convert.ToString(matchDob));
+                ClsUtility.AddParameters("@matchEnrollmentDate", SqlDbType.Bit, Convert.ToString(matchEnrollmentDate));
+                ClsUtility.AddParameters("@matchARTStartDate", SqlDbType.Bit, Convert.ToString(matchARTStartDate));
+                ClsUtility.AddParameters("@matchHIVDiagnosisDate", SqlDbType.Bit, Convert.ToString(matchHIVDiagnosisDate));
+
+                return (DataTable)Patient.ReturnObject(ClsUtility.theParams, "sp_GetDuplicatePatientRecords", ClsUtility.ObjectEnum.DataTable);
+            }
+
+        }
     }
 }

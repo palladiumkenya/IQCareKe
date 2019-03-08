@@ -89,7 +89,7 @@ export class AddBirthInfoComponent implements OnInit {
             comment: this.babyFormGroup.get('comment').value,
             notificationNo: this.babyFormGroup.get('notificationNumber').value
         });
-         console.log(this.babyData);
+    console.log(this.babyData);
         this.maternityService.updateBabyDataInfo(this.babyData);
 }
 

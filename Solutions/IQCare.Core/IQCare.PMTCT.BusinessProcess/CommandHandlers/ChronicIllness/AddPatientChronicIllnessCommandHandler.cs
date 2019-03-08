@@ -1,12 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 using IQCare.Library;
 using IQCare.PMTCT.BusinessProcess.Commands.ChronicIllness;
 using IQCare.PMTCT.Core.Models;
 using IQCare.PMTCT.Infrastructure;
 using MediatR;
+using Microsoft.EntityFrameworkCore;
 using Serilog;
 
 namespace IQCare.PMTCT.BusinessProcess.CommandHandlers.ChronicIllness
@@ -28,25 +31,35 @@ namespace IQCare.PMTCT.BusinessProcess.CommandHandlers.ChronicIllness
                 {
                     List<PatientChronicIllness> patientChronicIllness = new List<PatientChronicIllness>();
 
+                    List<PatientChronicIllness> patientChronicIllnessExists = _unitOfWork
+                        .Repository<PatientChronicIllness>().Get(x =>
+                            x.PatientId == request.PatientChronicIllnesses[0].PatientId && !x.DeleteFlag)
+                        .ToList();
                     if (request.PatientChronicIllnesses.Count > 0)
                     {
                         foreach (var item in request.PatientChronicIllnesses)
                         {
-                            PatientChronicIllness patientChronic = new PatientChronicIllness()
+                            bool itemExist = patientChronicIllnessExists.Exists(x =>
+                                x.PatientId == item.PatientId && x.ChronicIllness == item.ChronicIllness &&
+                                x.OnsetDate.ToString() == item.OnsetDate.ToString());
+                            if (!itemExist)
                             {
-                                Active = false,
-                                ChronicIllness = item.ChronicIllness,
-                                CreateBy = item.CreateBy,
-                                DeleteFlag = item.DeleteFlag,
-                                Dose = item.Dose,
-                                Duration = item.Duration,
-                                OnsetDate = item.OnsetDate,
-                                Treatment = item.Treatment,
-                                PatientId = item.PatientId,
-                                PatientMasterVisitId = item.PatientMasterVisitId,
-                            };
-
-                            patientChronicIllness.Add(patientChronic);
+                                PatientChronicIllness patientChronic = new PatientChronicIllness()
+                                {
+                                    Active = 0,
+                                    ChronicIllness = item.ChronicIllness,
+                                    CreateBy = item.CreateBy,
+                                    DeleteFlag = item.DeleteFlag,
+                                    Dose = item.Dose,
+                                    Duration = item.Duration,
+                                    OnsetDate = item.OnsetDate,
+                                    Treatment = item.Treatment,
+                                    PatientId = item.PatientId,
+                                    PatientMasterVisitId = item.PatientMasterVisitId,
+                                };
+                           
+                                patientChronicIllness.Add(patientChronic);
+                            }     
                         }
 
                         await _unitOfWork.Repository<PatientChronicIllness>().AddRangeAsync(patientChronicIllness);

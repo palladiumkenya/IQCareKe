@@ -17,7 +17,7 @@ export class CompletedLabsGridComponent implements OnInit {
 
   completedLabTests : any[] = [];
   completedLabsDataSource = new MatTableDataSource(this.completedLabTests);
-  
+  defaultResultUnit = 'No Units';
 
   constructor(private labOrderService : LaborderService,
     private dialog : MatDialog) { 
@@ -38,9 +38,9 @@ export class CompletedLabsGridComponent implements OnInit {
                 labOrderId : test.labOrderId,
                 test : test.labTestName,
                 orderDate : test.orderDate,
-                orderReason : test.orderReason,
+                orderReason : test.orderReason == null || test.orderReason == '' ?'N/A' :test.orderReason,
                 labTestId : test.labTestId,
-                unit : test.resultUnits,
+                unit : test.resultUnits.toUpperCase() == this.defaultResultUnit.toUpperCase() ? 'N/A' : test.resultUnits,
                 resultDate : test.resultDate,
                 result : test.result,
                 status : test.resultStatus
@@ -64,7 +64,7 @@ public viewResults(completedLab : any) {
          labOrderTestResults.push({
           parameter: rs.parameter,
           result : rs.result,
-          unit : rs.resultUnits
+          unit : rs.resultUnits.toUpperCase() == this.defaultResultUnit.toUpperCase() ? 'N/A' : rs.resultUnits,
         });                
      });     
      const resultsDialogConfig = new MatDialogConfig();

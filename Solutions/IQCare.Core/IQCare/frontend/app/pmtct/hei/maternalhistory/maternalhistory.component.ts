@@ -6,6 +6,7 @@ import { NotificationService } from '../../../shared/_services/notification.serv
 import { SnotifyService } from 'ng-snotify';
 import { MatDialogConfig, MatDialog } from '@angular/material';
 import { InlineSearchComponent } from '../../../records/inline-search/inline-search.component';
+import { RecordsService } from '../../../records/_services/records.service';
 
 @Component({
     selector: 'app-maternalhistory',
@@ -38,7 +39,8 @@ export class MaternalhistoryComponent implements OnInit {
         private notificationService: NotificationService,
         private snotifyService: SnotifyService,
         private dialog: MatDialog,
-        private heiservice: HeiService) { }
+        private heiservice: HeiService,
+        private recordsService: RecordsService) { }
 
     ngOnInit() {
         this.MaternalHistoryForm = this._formBuilder.group({
@@ -47,7 +49,7 @@ export class MaternalhistoryComponent implements OnInit {
             primarycaregiver: new FormControl('', [Validators.required]),
             nameofmother: new FormControl('', [Validators.required]),
             motherpersonid: new FormControl('0'),
-            cccno: new FormControl('', [Validators.required]),
+            cccno: new FormControl(''),
             pmtctheimotherreceivedrugs: new FormControl('', [Validators.required]),
             pmtctheimotherregimen: new FormControl('', [Validators.required]),
             otherspecify: new FormControl('', [Validators.required]),
@@ -165,6 +167,20 @@ export class MaternalhistoryComponent implements OnInit {
                 this.isMotherRegistered = false;
                 this.MaternalHistoryForm.controls.nameofmother.setValue(mothernames);
                 this.MaternalHistoryForm.controls.motherpersonid.setValue(data[0]['id']);
+                if (data[0]['patientId']) {
+                    this.recordsService.getPatientIdentifiersList(data[0]['patientId']).subscribe(
+                        (res) => {
+                            console.log(res);
+                            if (res.length > 0) {
+                                for (let i = 0; i < res.length; i++) {
+                                    if (res[i]['identifierTypeId'] == 1) {
+                                        this.MaternalHistoryForm.controls.cccno.setValue(res[i]['identifierValue']);
+                                    }
+                                }
+                            }
+                        }
+                    );
+                }
             }
         );
     }

@@ -34,23 +34,20 @@ namespace IQCare.HTS.BusinessProcess.CommandHandlers
                 PersonOccupationService pocc = new PersonOccupationService(_unitOfWork);
                 EducationLevelService educationLevelService = new EducationLevelService(_unitOfWork);
 
-                try
+                for (int i = 0; i < request.CLIENTS.Count; i++)
                 {
-                    for (int i = 0; i < request.CLIENTS.Count; i++)
+                    for (int j = 0; j < request.CLIENTS[i].PATIENT_IDENTIFICATION.INTERNAL_PATIENT_ID.Count; j++)
                     {
-                        for (int j = 0; j < request.CLIENTS[i].PATIENT_IDENTIFICATION.INTERNAL_PATIENT_ID.Count; j++)
+                        if (request.CLIENTS[i].PATIENT_IDENTIFICATION.INTERNAL_PATIENT_ID[j].IDENTIFIER_TYPE == "AFYA_MOBILE_ID" &&
+                            request.CLIENTS[i].PATIENT_IDENTIFICATION.INTERNAL_PATIENT_ID[j].ASSIGNING_AUTHORITY == "AFYAMOBILE")
                         {
-                            if (request.CLIENTS[i].PATIENT_IDENTIFICATION.INTERNAL_PATIENT_ID[j].IDENTIFIER_TYPE ==
-                                "AFYA_MOBILE_ID" &&
-                                request.CLIENTS[i].PATIENT_IDENTIFICATION.INTERNAL_PATIENT_ID[j].ASSIGNING_AUTHORITY ==
-                                "AFYAMOBILE")
-                            {
-                                afyaMobileId = request.CLIENTS[i].PATIENT_IDENTIFICATION.INTERNAL_PATIENT_ID[j].ID;
-                            }
+                            afyaMobileId = request.CLIENTS[i].PATIENT_IDENTIFICATION.INTERNAL_PATIENT_ID[j].ID;
                         }
                     }
-
-                    var afyaMobileMessage = await registerPersonService.AddAfyaMobileInbox(DateTime.Now, request.MESSAGE_HEADER.MESSAGE_TYPE, afyaMobileId, JsonConvert.SerializeObject(request), false);
+                }
+                var afyaMobileMessage = await registerPersonService.AddAfyaMobileInbox(DateTime.Now, request.MESSAGE_HEADER.MESSAGE_TYPE, afyaMobileId, JsonConvert.SerializeObject(request), false);
+                try
+                {
                     var facilityId = request.MESSAGE_HEADER.SENDING_FACILITY;
 
                     for (int i = 0; i < request.CLIENTS.Count; i++)
@@ -67,9 +64,10 @@ namespace IQCare.HTS.BusinessProcess.CommandHandlers
                         string landmark = request.CLIENTS[i].PATIENT_IDENTIFICATION.PATIENT_ADDRESS.PHYSICAL_ADDRESS
                             .LANDMARK;
 
-                        string ward = (request.CLIENTS[i].PATIENT_IDENTIFICATION.PATIENT_ADDRESS.PHYSICAL_ADDRESS.WARD == null) ? "" : request.CLIENTS[i].PATIENT_IDENTIFICATION.PATIENT_ADDRESS.PHYSICAL_ADDRESS.WARD.ToString();
-                        string county = (request.CLIENTS[i].PATIENT_IDENTIFICATION.PATIENT_ADDRESS.PHYSICAL_ADDRESS.COUNTY == null) ? "" : request.CLIENTS[i].PATIENT_IDENTIFICATION.PATIENT_ADDRESS.PHYSICAL_ADDRESS.COUNTY.ToString();
-                        string subcounty = (request.CLIENTS[i].PATIENT_IDENTIFICATION.PATIENT_ADDRESS.PHYSICAL_ADDRESS.SUB_COUNTY == null) ? "" : request.CLIENTS[i].PATIENT_IDENTIFICATION.PATIENT_ADDRESS.PHYSICAL_ADDRESS.SUB_COUNTY.ToString();
+                        int ward = request.CLIENTS[i].PATIENT_IDENTIFICATION.PATIENT_ADDRESS.PHYSICAL_ADDRESS.WARD;
+                        int county = request.CLIENTS[i].PATIENT_IDENTIFICATION.PATIENT_ADDRESS.PHYSICAL_ADDRESS.COUNTY;
+                        int subcounty = request.CLIENTS[i].PATIENT_IDENTIFICATION.PATIENT_ADDRESS.PHYSICAL_ADDRESS.SUB_COUNTY;
+
                         string educationlevel = (request.CLIENTS[i].PATIENT_IDENTIFICATION.EDUCATIONLEVEL == null) ? "" : request.CLIENTS[i].PATIENT_IDENTIFICATION.EDUCATIONLEVEL.ToString();
                         string educationoutcome = (request.CLIENTS[i].PATIENT_IDENTIFICATION.EDUCATIONOUTCOME == null) ? "" : request.CLIENTS[i].PATIENT_IDENTIFICATION.EDUCATIONOUTCOME.ToString();
                         string occupation = (request.CLIENTS[i].PATIENT_IDENTIFICATION.OCCUPATION == null) ? "" : request.CLIENTS[i].PATIENT_IDENTIFICATION.OCCUPATION.ToString();
@@ -95,16 +93,13 @@ namespace IQCare.HTS.BusinessProcess.CommandHandlers
                         for (int j = 0; j < request.CLIENTS[i].PATIENT_IDENTIFICATION.INTERNAL_PATIENT_ID.Count; j++)
                         {
                             if (request.CLIENTS[i].PATIENT_IDENTIFICATION.INTERNAL_PATIENT_ID[j].ASSIGNING_AUTHORITY ==
-                                "HTS" && request.CLIENTS[i].PATIENT_IDENTIFICATION.INTERNAL_PATIENT_ID[j]
-                                    .IDENTIFIER_TYPE == "HTS_SERIAL")
+                                "HTS" && request.CLIENTS[i].PATIENT_IDENTIFICATION.INTERNAL_PATIENT_ID[j].IDENTIFIER_TYPE == "HTS_SERIAL")
                             {
                                 enrollmentNo = request.CLIENTS[i].PATIENT_IDENTIFICATION.INTERNAL_PATIENT_ID[j].ID;
                             }
 
-                            if (request.CLIENTS[i].PATIENT_IDENTIFICATION.INTERNAL_PATIENT_ID[j].IDENTIFIER_TYPE ==
-                                "AFYA_MOBILE_ID" &&
-                                request.CLIENTS[i].PATIENT_IDENTIFICATION.INTERNAL_PATIENT_ID[j].ASSIGNING_AUTHORITY ==
-                                "AFYAMOBILE")
+                            if (request.CLIENTS[i].PATIENT_IDENTIFICATION.INTERNAL_PATIENT_ID[j].IDENTIFIER_TYPE == "AFYA_MOBILE_ID" &&
+                                request.CLIENTS[i].PATIENT_IDENTIFICATION.INTERNAL_PATIENT_ID[j].ASSIGNING_AUTHORITY == "AFYAMOBILE")
                             {
                                 afyaMobileId = request.CLIENTS[i].PATIENT_IDENTIFICATION.INTERNAL_PATIENT_ID[j].ID;
                             }
@@ -159,7 +154,7 @@ namespace IQCare.HTS.BusinessProcess.CommandHandlers
                                 request.CLIENTS[i].PATIENT_IDENTIFICATION.KEY_POP, userId);
                              
                             //Location
-                            if (!string.IsNullOrWhiteSpace(landmark) && (!string.IsNullOrWhiteSpace(county)) && (!string.IsNullOrWhiteSpace(subcounty)) && (!string.IsNullOrWhiteSpace(ward)))
+                            if (!string.IsNullOrWhiteSpace(landmark) || (county > 0) || (subcounty > 0) || (ward > 0))
                             {
                                 var updatedLocation = await registerPersonService.UpdatePersonLocation(identifiers[0].PersonId, landmark, ward, county, subcounty, userId);
                             }
@@ -182,7 +177,7 @@ namespace IQCare.HTS.BusinessProcess.CommandHandlers
                             }
 
                             // update message as processed
-                            await registerPersonService.UpdateAfyaMobileInbox(afyaMobileMessage.Id, afyaMobileId, true, DateTime.Now, "success");
+                            await registerPersonService.UpdateAfyaMobileInbox(afyaMobileMessage.Id, afyaMobileId, true, DateTime.Now, "success", true);
                         }
                         else
                         {
@@ -190,8 +185,7 @@ namespace IQCare.HTS.BusinessProcess.CommandHandlers
                             var person = await registerPersonService.RegisterPerson(firstName, middleName, lastName, sex,
                                 userId, clientFacility.FacilityID, dateOfBirth, nickName: nickName);
                             //Add Person to mst_patient
-                            var mstResult = await registerPersonService.InsertIntoBlueCard(firstName, lastName,
-                                middleName, dateEnrollment, maritalStatusName, physicalAddress, mobileNumber, gender, dobPrecision, dateOfBirth, userId, facilityId);
+                            var mstResult = await registerPersonService.InsertIntoBlueCard(firstName, lastName, middleName, dateEnrollment, maritalStatusName, physicalAddress, mobileNumber, gender, dobPrecision, dateOfBirth, userId, facilityId);
                             if (mstResult.Count > 0)
                             {
                                 //Add PersonIdentifiers
@@ -205,10 +199,10 @@ namespace IQCare.HTS.BusinessProcess.CommandHandlers
                                 // Add Marital Status
                                 var maritalStatus = await registerPersonService.AddMaritalStatus(person.Id, maritalStatusId, userId);
                                 // Add Person Key pop
-                                var population = await registerPersonService.addPersonPopulation(person.Id,
-                                    request.CLIENTS[i].PATIENT_IDENTIFICATION.KEY_POP, userId);
+                                var population = await registerPersonService.addPersonPopulation(person.Id, request.CLIENTS[i].PATIENT_IDENTIFICATION.KEY_POP, userId);
+
                                 // Add Person Location
-                                if (!string.IsNullOrWhiteSpace(landmark) || (!string.IsNullOrWhiteSpace(county)) || (!string.IsNullOrWhiteSpace(subcounty)) || (!string.IsNullOrWhiteSpace(ward)))
+                                if (!string.IsNullOrWhiteSpace(landmark) || (county > 0) || (subcounty > 0) || (ward > 0))
                                 {
                                     var personLocation = await registerPersonService.UpdatePersonLocation(person.Id, landmark, ward, county, subcounty, userId);
                                 }
@@ -231,20 +225,20 @@ namespace IQCare.HTS.BusinessProcess.CommandHandlers
                                 }
 
                                 //update message has been processed
-                                await registerPersonService.UpdateAfyaMobileInbox(afyaMobileMessage.Id, afyaMobileId, true, DateTime.Now, "success");
+                                await registerPersonService.UpdateAfyaMobileInbox(afyaMobileMessage.Id, afyaMobileId, true, DateTime.Now, "success", true);
                             }
                         }
                     }
 
                     //update message has been processed
-                    await registerPersonService.UpdateAfyaMobileInbox(afyaMobileMessage.Id, afyaMobileId, true, DateTime.Now, "success");
+                    await registerPersonService.UpdateAfyaMobileInbox(afyaMobileMessage.Id, afyaMobileId, true, DateTime.Now, "success", true);
                     trans.Commit();
                     return Result<string>.Valid(afyaMobileId);
                 }
                 catch (Exception ex)
                 {
                     trans.Rollback();
-                    Log.Error(ex.Message);
+                    Log.Error($"Error syncronizing afyamobileid: {afyaMobileId}. Exception Message: {ex.Message},  Inner Exception {ex.InnerException}");
                     return Result<string>.Invalid($"Failed to synchronize clientId: {afyaMobileId} " + ex.Message + " " + ex.InnerException);
                 }
             }

@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Reflection;
+using IQCare.Common.BusinessProcess.Commands;
+using IQCare.Common.BusinessProcess.Commands.Matrix;
 using IQCare.Common.Infrastructure.Installers;
 using IQCare.SharedKernel.Infrastructure.Helpers;
 using MediatR;
@@ -29,10 +31,10 @@ namespace IQCare.Common.Web
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
-            services.AddMediatR();
-
+            services.AddMvc();
             services.AddCommonDbContext(IQCareConnectionString);
+            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+            services.AddMediatR(typeof(MatrixCommand).GetTypeInfo().Assembly);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -42,12 +44,13 @@ namespace IQCare.Common.Web
             {
                 app.UseDeveloperExceptionPage();
             }
-            else
-            {
-                app.UseHsts();
-            }
 
-            app.UseHttpsRedirection();
+            app.UseCors(builder => builder
+                .AllowAnyOrigin()
+                .AllowAnyMethod()
+                .AllowAnyHeader()
+                .AllowCredentials());
+
             app.UseMvc();
         }
     }

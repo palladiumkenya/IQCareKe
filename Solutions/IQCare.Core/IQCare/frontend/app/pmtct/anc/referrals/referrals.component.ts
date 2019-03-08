@@ -1,26 +1,26 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 
-import {SnotifyService} from 'ng-snotify';
+import { SnotifyService } from 'ng-snotify';
 
-import {Subscription} from 'rxjs/index';
-import {ReferralsEmitter} from '../../emitters/ReferralsEmitter';
-import {LookupItemService} from '../../../shared/_services/lookup-item.service';
-import {NotificationService} from '../../../shared/_services/notification.service';
-import {AncService} from '../../_services/anc.service';
+import { Subscription } from 'rxjs/index';
+import { ReferralsEmitter } from '../../emitters/ReferralsEmitter';
+import { LookupItemService } from '../../../shared/_services/lookup-item.service';
+import { NotificationService } from '../../../shared/_services/notification.service';
+import { AncService } from '../../_services/anc.service';
 
 
 @Component({
-  selector: 'app-referrals',
-  templateUrl: './referrals.component.html',
-  styleUrls: ['./referrals.component.css']
+    selector: 'app-referrals',
+    templateUrl: './referrals.component.html',
+    styleUrls: ['./referrals.component.css']
 })
 export class ReferralsComponent implements OnInit {
-  public ReferralFormGroup: FormGroup;
-  public LookupItems$: Subscription;
-  public referralOptions: any[] = [];
-  public yesnoOptions: any[] = [];
-    @Output() nextStep = new EventEmitter <ReferralsEmitter> ();
+    public ReferralFormGroup: FormGroup;
+    public LookupItems$: Subscription;
+    public referralOptions: any[] = [];
+    public yesnoOptions: any[] = [];
+    @Output() nextStep = new EventEmitter<ReferralsEmitter>();
     @Output() notify: EventEmitter<FormGroup> = new EventEmitter<FormGroup>();
     @Input() referral: ReferralsEmitter;
     @Input() referralFormOptions: any[] = [];
@@ -30,48 +30,53 @@ export class ReferralsComponent implements OnInit {
     @Input('PatientMasterVisitId') PatientMasterVisitId: number;
     public referralData: ReferralsEmitter;
 
-  constructor(private _formBuilder: FormBuilder, private _lookupItemService: LookupItemService,
-              private  snotifyService: SnotifyService,
-              private notificationService: NotificationService,
-              private ancService: AncService ) { }
+    constructor(private _formBuilder: FormBuilder, private _lookupItemService: LookupItemService,
+        private snotifyService: SnotifyService,
+        private notificationService: NotificationService,
+        private ancService: AncService) { }
 
-  ngOnInit() {
-      this.ReferralFormGroup = this._formBuilder.group({
-          referredFrom: ['', Validators.required],
-          referredTo: ['', Validators.required],
-          nextAppointmentDate: ['', Validators.required],
-          scheduledAppointment: ['', Validators.required],
-          serviceRemarks: ['', Validators.required]
-      });
+    ngOnInit() {
+        this.ReferralFormGroup = this._formBuilder.group({
+            referredFrom: ['', Validators.required],
+            referredTo: ['', Validators.required],
+            nextAppointmentDate: ['', Validators.required],
+            scheduledAppointment: ['', Validators.required],
+            serviceRemarks: ['', []],
+            referralid: new FormControl(''),
+            appointmentid: new FormControl('')
+        });
 
-      const {
-          referralOptions,
-          yesNoOptions
-      } = this.referralFormOptions[0];
-      this.referralOptions = referralOptions;
-      this.yesnoOptions = yesNoOptions;
+        const {
+            referralOptions,
+            yesNoOptions
+        } = this.referralFormOptions[0];
+        this.referralOptions = referralOptions;
+        this.yesnoOptions = yesNoOptions;
 
-      this.notify.emit(this.ReferralFormGroup);
+        this.notify.emit(this.ReferralFormGroup);
 
         if (this.isEdit) {
-                this.getPatientAppointment(this.PatientId, this.PatientMasterVisitId);
-                this.getPatientReferral(this.PatientId, this.PatientMasterVisitId);
+            this.getPatientAppointment(this.PatientId, this.PatientMasterVisitId);
+            this.getPatientReferral(this.PatientId, this.PatientMasterVisitId);
         }
-  }
+    }
 
-    public  getPatientAppointment(patientId: number, patientMasterVisitid: number) {
-        this.LookupItems$ = this.ancService.getPatientAppointment(patientId, patientMasterVisitid)
+    public getPatientAppointment(patientId: number, patientMasterVisitid: number) {
+        this.LookupItems$ = this.ancService.getPatientAppointmentAnc(patientId, patientMasterVisitid)
             .subscribe(
                 p => {
-                        const appointment = p;
-                        console.log('appointment details');
-                        console.log(appointment);
-                        if (appointment) {
-                            const yesno = this.yesnoOptions.filter(x => x.itemName == 'Yes');
-                            this.ReferralFormGroup.get('nextAppointmentDate').setValue(appointment['appointmentDate']);
-                            this.ReferralFormGroup.get('scheduledAppointment').setValue(yesno[0]['itemId']);
-                            this.ReferralFormGroup.get('serviceRemarks').setValue(appointment['description']);
-                        }
+                    const appointment = p;
+                    console.log('appointment details');
+                    console.log(appointment);
+                    if (appointment.length > 0) {
+                        const yesno = this.yesnoOptions.filter(x => x.itemName == 'Yes');
+                        this.ReferralFormGroup.get('nextAppointmentDate').setValue(appointment['appointmentDate']);
+                        this.ReferralFormGroup.get('scheduledAppointment').setValue(yesno[0]['itemId']);
+                        this.ReferralFormGroup.get('serviceRemarks').setValue(appointment['description']);
+                    } else {
+                        const yesno = this.yesnoOptions.filter(x => x.itemName == 'No');
+                        this.ReferralFormGroup.get('scheduledAppointment').setValue(yesno[0]['itemId']);
+                    }
                 },
                 (err) => {
                     console.log(err);
@@ -83,7 +88,7 @@ export class ReferralsComponent implements OnInit {
                 });
     }
 
-    public  getPatientReferral(patientId: number, patientMasterVisitid: number) {
+    public getPatientReferral(patientId: number, patientMasterVisitid: number) {
         this.LookupItems$ = this.ancService.getPatientReferral(patientId, patientMasterVisitid)
             .subscribe(
                 p => {
@@ -91,6 +96,7 @@ export class ReferralsComponent implements OnInit {
                     console.log('referral details');
                     console.log(referral);
                     if (referral) {
+                        this.ReferralFormGroup.get('referralid').setValue(referral['id']);
                         this.ReferralFormGroup.get('referredFrom').setValue(referral['referredFrom']);
                         this.ReferralFormGroup.get('referredTo').setValue(referral['referredTo']);
                     }
@@ -112,7 +118,7 @@ export class ReferralsComponent implements OnInit {
 
         this.referralData = {
             referredFrom: parseInt(this.ReferralFormGroup.controls['referredFrom'].value, 10),
-            referredTo: parseInt(this.ReferralFormGroup.controls['referredTo'].value, 10 ),
+            referredTo: parseInt(this.ReferralFormGroup.controls['referredTo'].value, 10),
             nextAppointmentDate: this.ReferralFormGroup.controls['nextAppointmentDate'].value,
             scheduledAppointment: parseInt(this.ReferralFormGroup.controls['scheduledAppointment'].value, 10),
             serviceRemarks: this.ReferralFormGroup.controls['serviceRemarks'].value,

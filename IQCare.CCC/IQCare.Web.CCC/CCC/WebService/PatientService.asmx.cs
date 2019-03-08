@@ -24,6 +24,7 @@ using Entities.CCC.Encounter;
 using Entities.CCC.Enrollment;
 using IQCare.CCC.UILogic.Enrollment;
 using IQCare.CCC.UILogic.Visit;
+using System.Data;
 using Entities.Common;
 
 namespace IQCare.Web.CCC.WebService
@@ -1323,6 +1324,125 @@ namespace IQCare.Web.CCC.WebService
 
             return appointment;
         }
+
+        [WebMethod]
+        public string GetDuplicatePatientRecords(List<Data> dataPayLoad)        
+        {
+            var output = "";
+            List<PatientLookup> duplicatePatientRecords = new List<PatientLookup>();
+            try
+            {
+                var patientRecordManager = new PatientLookupManager();
+
+                bool matchFirstName = Convert.ToBoolean(dataPayLoad.FirstOrDefault(x => x.name == "matchFirstName").value);
+                bool matchLastName = Convert.ToBoolean(dataPayLoad.FirstOrDefault(x => x.name == "matchLastName").value);
+                bool matchMiddleName = Convert.ToBoolean(dataPayLoad.FirstOrDefault(x => x.name == "matchMiddleName").value);
+                bool matchSex = Convert.ToBoolean(dataPayLoad.FirstOrDefault(x => x.name == "matchSex").value);
+                bool matchEnrollmentNumber = Convert.ToBoolean(dataPayLoad.FirstOrDefault(x => x.name == "matchEnrollmentNumber").value);
+                bool matchDob = Convert.ToBoolean(dataPayLoad.FirstOrDefault(x => x.name == "matchDob").value);
+                bool matchEnrollmentDate = Convert.ToBoolean(dataPayLoad.FirstOrDefault(x => x.name == "matchEnrollmentDate").value);
+                bool matchARTStartDate = Convert.ToBoolean(dataPayLoad.FirstOrDefault(x => x.name == "matchARTStartDate").value);
+                bool matchHIVDiagnosisDate = Convert.ToBoolean(dataPayLoad.FirstOrDefault(x => x.name == "matchHIVDiagnosisDate").value);
+                int sEcho = Convert.ToInt32(dataPayLoad.FirstOrDefault(x => x.name == "sEcho").value);
+                int displayLength = Convert.ToInt32(dataPayLoad.FirstOrDefault(x => x.name == "iDisplayLength").value);
+                int displayStart = Convert.ToInt32(dataPayLoad.FirstOrDefault(x => x.name == "iDisplayStart").value);
+                string searchString = dataPayLoad.FirstOrDefault(x => x.name == "sSearch").value;
+
+                DataTable theDT = patientRecordManager.GetDuplicatePatientRecords( matchFirstName,  matchLastName,  matchMiddleName,  matchSex,  matchEnrollmentNumber,  matchDob,  matchEnrollmentDate,  matchARTStartDate,  matchHIVDiagnosisDate);
+                foreach (DataRow row in theDT.Rows)
+                {
+                    int personId = Convert.ToInt32(row["personId"]);
+                    PatientLookup patient = patientRecordManager.GetPatientByPersonId(personId);
+                    if (patient != null)
+                    {
+                        patient.categorization = Convert.ToInt32(row["GroupingFilter"]);
+                        duplicatePatientRecords.Add(patient);
+                    }
+                }
+
+                var filteredRecords = 0;
+                var totalCount = 0;
+
+                totalCount = duplicatePatientRecords.Count;
+
+                if (searchString.Length > 0 || !string.IsNullOrWhiteSpace(searchString))
+                {
+                    duplicatePatientRecords = duplicatePatientRecords.FindAll(
+                        x => x.FirstName.ToLower().Contains(searchString) 
+                        || x.LastName.ToLower().Contains(searchString)
+                        || x.MiddleName.ToLower().Contains(searchString)
+                        || x.EnrollmentNumber.ToLower().Contains(searchString)
+                        //|| x.MobileNumber.ToLower().Contains(searchString)
+                        );
+
+                    filteredRecords = duplicatePatientRecords.Count();
+                }
+                else
+                {
+                    filteredRecords = duplicatePatientRecords.Count();
+                }
+
+                duplicatePatientRecords = duplicatePatientRecords.Skip(displayStart).Take(displayLength).ToList();
+
+                //if (totalCount > 10)
+                //{
+                //    duplicatePatientRecords = duplicatePatientRecords.Take(10).ToList();
+                //}
+
+                var json = new
+                {
+                    draw = sEcho,
+                    recordsTotal = totalCount,
+                    recordsFiltered = filteredRecords,
+                    // recordsFiltered =(filteredRecords>0)?filteredRecords: jsonData.Count(),
+
+                    data = duplicatePatientRecords.OrderBy(z => z.categorization).Select(x => new string[]
+                       {
+                                                x.FirstName,
+                                                x.MiddleName,
+                                                x.LastName,
+                                                x.DateOfBirth.ToString("dd-MMM-yyyy"),
+                                                x.EnrollmentNumber.ToString(),
+                                                LookupLogic.GetLookupNameById(x.Sex),
+                                                x.RegistrationDate.Value.ToString("dd-MMM-yyyy"),
+                                                x.MobileNumber,
+                                                x.Id.ToString(),
+                                                x.categorization.ToString()
+                       })
+
+            };
+
+                output = new JavaScriptSerializer().Serialize(json);
+
+            }
+            catch (Exception e)
+            {
+                output = e.Message;
+            }
+            return output;
+        }
+
+        [WebMethod(EnableSession = true)]
+        public string MergePatientRecords(int preferredPatientId, int unPreferredPatientId)
+        {
+
+            try
+            {
+                var patientMgr = new PatientManager();
+                var userId = Session["AppUserID"] != null ? Convert.ToInt32(Session["AppUserID"]) : 0;
+                Result = patientMgr.MergePatientRecords(preferredPatientId, unPreferredPatientId, userId);
+                if (Result > 0)
+                {
+                    Msg = "Patient records merged Successfully!";
+                }
+            }
+            catch (Exception e)
+            {
+                Msg = e.Message;
+            }
+            return Msg;
+        }
+
     }
 
 

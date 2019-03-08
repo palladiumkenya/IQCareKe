@@ -48,11 +48,16 @@ export class HeiService {
     }
 
     public saveImmunizationHistory(vaccination: Vaccination[]): Observable<Vaccination[]> {
+        // console.log(vaccination);
         if (vaccination.length == 0) {
             return of([]);
         }
 
-        return this.http.post<any>(this.API_URL + '/api/ImmunizationHistory', JSON.stringify(vaccination), httpOptions).pipe(
+        const Indata = {
+            'Vaccinations': vaccination
+        };
+
+        return this.http.post<any>(this.API_URL + '/api/ImmunizationHistory', JSON.stringify(Indata), httpOptions).pipe(
             tap(saveImmunizationHistory => this.errorHandler.log(`successfully added hei Immunization History`)),
             catchError(this.errorHandler.handleError<any>('Error saving hei Immunization History'))
         );

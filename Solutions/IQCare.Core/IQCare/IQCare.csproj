@@ -8,7 +8,7 @@
 
   <ItemGroup>
     <Folder Include="frontend\app\records\listduplicate\" />
-    <Folder Include="logs\" />
+    <Folder Include="logs" />
     <Folder Include="wwwroot\" />
   </ItemGroup>
 
@@ -91,5 +91,7 @@
     <TypeScriptCompile Include="frontend\app\records\services\recordssearch.ts" />
     <TypeScriptCompile Include="frontend\app\records\validators\telephonevalidator.ts" />
   </ItemGroup>
+
+  <ProjectExtensions><VisualStudio><UserProperties appsettings_1json__JSONSchema="http://json.schemastore.org/babelrc" /></VisualStudio></ProjectExtensions>
 
 </Project>

@@ -66,6 +66,8 @@ namespace IQCare.PMTCT.BusinessProcess.CommandHandlers
                     int syphillisResultId = await _service.AddPatientPhysicalExamination(syphillisExam);
 
                     List<PatientEducation> patientCounselling = new List<PatientEducation>();
+                    List<PatientEducation> patientEducationExists = _unitOfWork.Repository<PatientEducation>()
+                        .Get(x => x.PatientId == request.PatientId).ToList();
 
                     if (request.CounsellingTopics.Count > 0)
                     {
@@ -73,18 +75,25 @@ namespace IQCare.PMTCT.BusinessProcess.CommandHandlers
                         {
                             if (item.CounsellingTopicId > 0)
                             {
-                                PatientEducation data = new PatientEducation
+                                bool itemExists = patientEducationExists.Exists(x =>
+                                    x.CounsellingTopicId == item.CounsellingTopicId &&
+                                    x.CounsellingDate == item.CounsellingDate);
+                                if (!itemExists)
                                 {
-                                    PatientId = request.PatientId,
-                                    PatientMasterVisitId = request.PatientMasterVisitId,
-                                    CounsellingTopicId = item.CounsellingTopicId,
-                                    CounsellingDate = item.CounsellingDate,
-                                    Description = item.Description,
-                                    CreateDate = DateTime.Now,
-                                    CreatedBy = request.CreatedBy
+                                    PatientEducation data = new PatientEducation
+                                    {
+                                        PatientId = request.PatientId,
+                                        PatientMasterVisitId = request.PatientMasterVisitId,
+                                        CounsellingTopicId = item.CounsellingTopicId,
+                                        CounsellingDate = item.CounsellingDate,
+                                        Description = item.Description,
+                                        CreateDate = DateTime.Now,
+                                        CreatedBy = request.CreatedBy
 
-                                };
-                                patientCounselling.Add(data);
+                                    };
+                                    patientCounselling.Add(data);
+                                }
+                                
                             }
                         }
 
