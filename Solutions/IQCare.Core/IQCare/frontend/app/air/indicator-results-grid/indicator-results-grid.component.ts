@@ -9,6 +9,9 @@ import { MatTableDataSource, MatPaginator } from '@angular/material';
 export class IndicatorResultsGridComponent implements OnInit {
 
   @Input('IndicatorResults')  IndicatorResults : any[];
+  filteredIndicatorResults : any[] = [];
+  @Input('SubSectionId')     SubSectionId : number;
+
   indicator_results_displaycolumns : any[] = ['code','name','result'];
 
   indicatorResultsDataSource = new MatTableDataSource(this.IndicatorResults);
@@ -20,11 +23,11 @@ export class IndicatorResultsGridComponent implements OnInit {
 
   ngOnInit() 
   {
-    console.log('Indicator Results >>> ' + this.indicatorResultsDataSource)
-       this.indicatorResultsDataSource = new MatTableDataSource(this.IndicatorResults);
-       this.indicatorResultsDataSource.paginator = this.paginator;
+    this.indicatorResultsDataSource = new MatTableDataSource(this.IndicatorResults);
+    this.indicatorResultsDataSource.paginator = this.paginator;
+  }
 
+  
+      
   }
   
-
-}

@@ -1,6 +1,8 @@
 import { Pipe, PipeTransform } from '@angular/core';
 import {SubSection,Section} from  '../Sectionidentifier';
 import {IndicatorQuestionBase} from '../indicatorquestion-base'
+import { importExpr } from '@angular/compiler/src/output/output_ast';
+import { filter } from 'rxjs/operators';
 
 @Pipe({
     name: 'subSectionfilter',
@@ -32,3 +34,4 @@ export class IndicatorFilterPipe implements PipeTransform {
         return items.filter(item => item.SubSectionId === filter);
     }
 }
+

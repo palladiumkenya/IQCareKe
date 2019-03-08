@@ -69,13 +69,14 @@ namespace IQCare.AIR.BusinessProcess.QueryHandlers
                     DateCreated = r.DateCreated,
                     Name = r.Name,
                     ReportSectionId = r.ReportSectionId,
-                    Indicators = indicatorResults.OrderBy(i => i.Id)
+                    Indicators = indicatorResults.Where(id=>id.Indicator.ReportSubSectionId == r.Id).OrderBy(i => i.Id)
                         .Select(i => new IndicatorViewModel()
                         {
                             Id = i.Id,
                             Name = i.Indicator.Name,
                             Code = i.Indicator.Code,
-                            Result = i.ResultNumeric.HasValue ? i.ResultNumeric.Value.ToString() : i.ResultText
+                            Result = i.ResultNumeric.HasValue ? i.ResultNumeric.Value.ToString() : i.ResultText,
+                            ReportSubSectionId = r.Id
                         }).ToList()
                 }).ToList()
             }).ToList();
