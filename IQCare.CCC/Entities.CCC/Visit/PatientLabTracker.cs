@@ -26,7 +26,7 @@ namespace Entities.CCC.Visit
         public int LabOrderId { get; set; }
         public int LabTestId { get; set; }
         public int FacilityId { get; set; }
-        public decimal ResultValues { get; set; }
+        public decimal? ResultValues { get; set; }
         public string ResultTexts { get; set; }
         public int LabOrderTestId { get; set; }
         public string ResultUnits { get; set; }

@@ -13,7 +13,7 @@ import { ConsentSmsResolver } from './_services/consentsms.resolver';
 import { ContactCategoryResolver } from './_services/contactcategory.resolver';
 import { PersonIdentifiersResolver } from './_services/personidentifiers.resolver';
 import { YesNoResolver } from '../pmtct/_services/yesno.resolver';
-import {PatientEncounterComponent} from '../shared/patient-encounter/patient-encounter.component';
+import { PatientEncounterComponent } from '../shared/patient-encounter/patient-encounter.component';
 
 const routes: Routes = [
     {
@@ -63,7 +63,7 @@ const routes: Routes = [
         ]
     },
     {
-        path: 'patient-encounter/:patientId/:personId/:serviceAreaId/:serviceName' ,
+        path: 'patient-encounter/:patientId/:personId/:serviceAreaId/:serviceName',
         component: PatientEncounterComponent,
         pathMatch: 'full'
     }

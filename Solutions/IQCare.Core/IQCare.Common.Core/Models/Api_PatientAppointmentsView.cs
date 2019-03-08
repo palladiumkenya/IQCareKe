@@ -16,5 +16,22 @@ namespace IQCare.Common.Core.Models
         public string AppointmentStatus { get; set; }
         public string AppointmentType { get; set; }
         public string Description { get; set; }
+        public DateTime AppDate;
+
+        public void ConvertToDate()
+        {
+            try
+            {
+                if (!string.IsNullOrWhiteSpace(this.AppointmentDate))
+                {
+                    var convertedDate = DateTime.ParseExact(this.AppointmentDate, "yyyyMMdd", null);
+
+                    this.AppDate = convertedDate;
+                }
+            }
+            catch (Exception e)
+            {
+            }
+        }
     }
 }

@@ -7,6 +7,9 @@ export class DataService {
     private isPositive = new BehaviorSubject<boolean>(false);
     private hasConsentedPartnerListing = new BehaviorSubject<boolean>(false);
 
+    private visitDateMessageSource = new BehaviorSubject<any>({});
+    visitDate = this.visitDateMessageSource.asObservable();
+
     currentHasConsented = this.hasConsented.asObservable();
     currentIsPositive = this.isPositive.asObservable();
     currentHasConsentedPartnerListing =  this.hasConsentedPartnerListing.asObservable();
@@ -27,5 +30,9 @@ export class DataService {
     updateHasConsentedPartnerListing(hasConsentedPartnerListing: boolean) {
         console.log('partner listing consent changed');
         this.hasConsentedPartnerListing.next(hasConsentedPartnerListing);
+    }
+
+    public updateVisitDate(visitDate: any) {
+        this.visitDateMessageSource.next(visitDate)
     }
 }

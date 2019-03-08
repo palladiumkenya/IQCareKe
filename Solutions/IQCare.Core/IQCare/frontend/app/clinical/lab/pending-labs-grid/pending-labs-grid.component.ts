@@ -41,7 +41,7 @@ export class PendingLabsGridComponent implements OnInit {
                 labOrderId : test.labOrderId,
                 test : test.labTestName,
                 orderDate : test.orderDate,
-                orderReason : test.orderReason,
+                orderReason : test.orderReason == null || test.orderReason == '' ?'N/A' :test.orderReason,
                 labTestId : test.labTestId,
                 unit : test.resultUnits,
                 resultDate : test.resultDate,
@@ -59,6 +59,7 @@ export class PendingLabsGridComponent implements OnInit {
 }
 
 formControl : FormControlBase<any>[] = [];
+defaultUnitName = 'No Units';
 
 public addResult(pendingTest : any) {
   this.disableBtn = true;
@@ -87,7 +88,7 @@ public addResult(pendingTest : any) {
             this.formControl.push(new TextboxFormControl({
               key: 'ResultUnit_'+param.id ,
               label: 'Result Unit',
-              value: param.unitName,
+              value:  param.unitName.toUpperCase() ==this.defaultUnitName.toUpperCase() ? 'N/A': param.unitName,
               required: false,
               order: 3,
               disabled : true
@@ -119,7 +120,7 @@ public addResult(pendingTest : any) {
               LabTestId : param.labTestId,
               DataType : param.dataType,   
               UnitId : param.unitId,
-              unitName : param.unitName,
+              unitName : param.unitName.toUpperCase() ==this.defaultUnitName.toUpperCase() ? 'N/A': param.unitName,
               formControls : this.formControl.sort((a,b)=> a.order - b.order)    
             });
             

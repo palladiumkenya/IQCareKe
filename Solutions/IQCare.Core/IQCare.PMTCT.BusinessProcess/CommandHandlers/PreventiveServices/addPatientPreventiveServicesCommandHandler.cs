@@ -6,9 +6,11 @@ using MediatR;
 using Serilog;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 
 namespace IQCare.PMTCT.BusinessProcess.CommandHandlers.PreventiveServices
 {
@@ -28,20 +30,34 @@ namespace IQCare.PMTCT.BusinessProcess.CommandHandlers.PreventiveServices
                 {
                     List<PreventiveService> preventiveServices = new List<PreventiveService>();
 
+                    List<PreventiveService> preventiveServicesExist = _pmtctUnitOfWork
+                        .Repository<PreventiveService>().Get(x => x.PatientId == request.preventiveService[0].PatientId)
+                        .ToList();
+
                     if (request.preventiveService.Count > 0)
                     {
+                        
+                        
                         foreach (var item in request.preventiveService)
                         {
-                            PreventiveService _preventiveServices = new PreventiveService()
+                            bool itemExists = preventiveServicesExist.Exists(x =>
+                                x.PreventiveServiceId == item.PreventiveServiceId && x.PatientId == item.PatientId
+                                                                                  && x.PreventiveServiceDate ==
+                                                                                  item.PreventiveServiceDate);
+                            if (!itemExists)
                             {
-                                Id = item.Id,
-                                PatientId = item.PatientId,
-                                PatientMasterVisitId = item.PatientMasterVisitId,
-                                PreventiveServiceId = item.PreventiveServiceId,
-                                PreventiveServiceDate = item.PreventiveServiceDate,
-                                Description = item.Description
-                            };
-                            preventiveServices.Add(_preventiveServices);
+                                PreventiveService _preventiveServices = new PreventiveService()
+                                {
+                                    Id = item.Id,
+                                    PatientId = item.PatientId,
+                                    PatientMasterVisitId = item.PatientMasterVisitId,
+                                    PreventiveServiceId = item.PreventiveServiceId,
+                                    PreventiveServiceDate = item.PreventiveServiceDate,
+                                    Description = item.Description
+                                };
+                                preventiveServices.Add(_preventiveServices);
+                            }
+                         
                         }
                         await _pmtctUnitOfWork.Repository<PreventiveService>().AddRangeAsync(preventiveServices);
                         await _pmtctUnitOfWork.SaveAsync();

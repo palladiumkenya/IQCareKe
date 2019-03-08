@@ -16,6 +16,7 @@ export class CheckinComponent implements OnInit {
     title: string;
     form: FormGroup;
     section: string;
+    enrollmentDate: Date;
 
     public lookupItems$: Subscription;
     public visitTypes: any[] = [];
@@ -30,6 +31,8 @@ export class CheckinComponent implements OnInit {
         private notificationService: NotificationService) {
         this.title = 'Check In';
         this.section = data.section;
+        this.enrollmentDate = data.enrollmentDate;
+        console.log(data);
 
         switch (this.section) {
             case 'hei':

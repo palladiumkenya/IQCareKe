@@ -7,6 +7,7 @@ using System.Runtime.InteropServices;
 using System.Web.Services.Discovery;
 using Entities.CCC.Lookup;
 using IQCare.CCC.UILogic.Helpers;
+using System.Collections;
 
 namespace IQCare.CCC.UILogic
 {
@@ -115,6 +116,12 @@ namespace IQCare.CCC.UILogic
         public int GetPersonId(int patientId)
         {
             return _mgr.GetPersonId(patientId);
+        }
+
+        public int MergePatientRecords(int preferredPatientId, int unpreferredPatientId, int userId)
+        {
+            return _mgr.MergePatientRecords(preferredPatientId, unpreferredPatientId, userId);
+
         }
     }
 }

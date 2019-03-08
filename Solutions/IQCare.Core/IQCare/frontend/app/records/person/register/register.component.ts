@@ -25,7 +25,6 @@ import { Search } from '../../_models/search';
 import { Store } from '@ngrx/store';
 import * as AppState from '../../../shared/reducers/app.states';
 import { Partner } from '../../../shared/_models/partner';
-import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
     selector: 'app-register',
@@ -82,8 +81,7 @@ export class RegisterComponent implements OnInit {
         public zone: NgZone,
         private router: Router,
         private searchService: SearchService,
-        private store: Store<AppState>,
-        private spinner: NgxSpinnerService) {
+        private store: Store<AppState>) {
         this.maxDate = new Date();
         this.clientSearch = new Search();
     }
@@ -114,7 +112,8 @@ export class RegisterComponent implements OnInit {
                     EducationLevel: new FormControl(this.person.EducationLevel),
                     Occupation: new FormControl(this.person.Occupation),
                     IdentifierType: new FormControl(this.person.IdentifierType),
-                    IdentifierNumber: new FormControl(this.person.IdentifierNumber, [Validators.required])
+                    IdentifierNumber: new FormControl(this.person.IdentifierNumber,
+                        Validators.compose([Validators.required, Validators.maxLength(50)]))
                 }),
                 this._formBuilder.group({
                     County: new FormControl(this.clientAddress.County, [Validators.required]),
@@ -352,7 +351,6 @@ export class RegisterComponent implements OnInit {
 
     onSubmitForm(tabIndex: number) {
         if (this.formGroup.valid) {
-            this.spinner.show();
             this.person = { ...this.formArray.value[0] };
             this.clientAddress = { ...this.formArray.value[1] };
             this.clientContact = { ...this.formArray.value[2] };
@@ -445,7 +443,6 @@ export class RegisterComponent implements OnInit {
                         this.notificationService.getConfig());
                 },
                 () => {
-                    this.spinner.hide();
                 }
             );
         } else {

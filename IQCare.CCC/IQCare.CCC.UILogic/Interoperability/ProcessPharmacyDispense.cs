@@ -23,6 +23,7 @@ namespace IQCare.CCC.UILogic.Interoperability
                 LookupLogic facilityLookup = new LookupLogic();
                 string receivingFacilityMflCode = drugDispensed.MESSAGE_HEADER.RECEIVING_FACILITY;
                 string sendingFacilityMflCode = drugDispensed.MESSAGE_HEADER.SENDING_FACILITY;
+               
                 int interopUserId = InteropUser.UserId;
                 if (string.IsNullOrEmpty(receivingFacilityMflCode))
                 {
@@ -38,6 +39,7 @@ namespace IQCare.CCC.UILogic.Interoperability
                 {
                     return Msg = "The sending facility is not the same as the receiving facility!";
                 }
+
                 //check if facility exists
                 LookupFacility recieverfacility = facilityLookup.GetFacility(receivingFacilityMflCode);
               //  LookupFacility senderfacility = facilityLookup.GetFacility(sendingFacilityMflCode);

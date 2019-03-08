@@ -9,6 +9,7 @@ import { HeiService } from '../../_services/hei.service';
 import * as moment from 'moment';
 import { MatDatepickerInputEvent } from '@angular/material';
 import { AncService } from '../../_services/anc.service';
+import { DataService } from '../../../shared/_services/data.service';
 
 @Component({
     selector: 'app-hei-visit-details',
@@ -40,7 +41,7 @@ export class HeiVisitDetailsComponent implements OnInit {
         private _lookupItemService: LookupItemService,
         private snotifyService: SnotifyService,
         private notificationService: NotificationService,
-        private ancService : AncService,
+        private dataService : DataService,
         private heiService: HeiService) {
         this.maxDate = new Date();
     }
@@ -181,7 +182,7 @@ export class HeiVisitDetailsComponent implements OnInit {
     public vistDateChange(event: MatDatepickerInputEvent<Date>)
     {
         console.log('Changed Date '+ event.value);
-        this.ancService.updateVisitDate(event.value);
+        this.dataService.updateVisitDate(event.value);
     }
 
 }

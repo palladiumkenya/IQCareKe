@@ -8,7 +8,7 @@ namespace IQCare.Maternity.BusinessProcess.Commands.Maternity
 {
     public class AddPatientDiagnosisCommand : IRequest<Result<AddPatientDiagnosisResponse>>
     {
-        public int Id { get;  set; }
+        public int ? Id { get;  set; }
         public int PatientId { get;  set; }
         public int PatientMasterVisitId { get;  set; }
         public string Diagnosis { get;  set; }

@@ -29,26 +29,52 @@ export class PncMaternalhistoryComponent implements OnInit {
     ngOnInit() {
         this.MaternalHistoryForm = this._formBuilder.group({
             dateofdelivery: new FormControl('', [Validators.required]),
-            modeofdelivery: new FormControl('', [Validators.required])
+            modeofdelivery: new FormControl('', [Validators.required]),
+            deliveryid: new FormControl('')
         });
 
         const { deliveryModeOptions } = this.matHistoryOptions[0];
         this.deliveryModeOptions = deliveryModeOptions;
 
-        this.maternityService.getInitialProfileDetailsByPatientd(this.patientId).subscribe(
+        this.maternityService.getPatientPregnancy(this.patientId).subscribe(
             (res) => {
-                if (res && res.id > 0) {
-                    this.maternityService.getPatientDeliveryInfoByPregnancyId(res.pregnancyId).subscribe(
+                // console.log(res);
+                if (res && res.id) {
+                    this.maternityService.getPatientDeliveryInfoByPregnancyId(res.id).subscribe(
                         (result) => {
+                            console.log(result);
                             if (result.length > 0) {
                                 this.MaternalHistoryForm.get('dateofdelivery').setValue(result[0].dateOfDelivery);
-                                this.MaternalHistoryForm.get('modeofdelivery').setValue(result[0].modeOfDelivery);
+                                if (result[0].modeOfDelivery) {
+                                    const delivery = this.deliveryModeOptions.filter(obj =>
+                                        obj.itemName == result[0].modeOfDelivery);
+                                    this.MaternalHistoryForm.get('modeofdelivery').setValue(delivery[0].itemId);
+                                }
+                                this.MaternalHistoryForm.get('deliveryid').setValue(result[0].id);
+                            } else {
+                                this.maternityService.GetPatientDeliveryInfo(this.patientMasterVisitId).subscribe(
+                                    (deliveryRes) => {
+                                        console.log(deliveryRes);
+                                        if (deliveryRes) {
+                                            if (deliveryRes.dateOfDelivery) {
+                                                this.MaternalHistoryForm.get('dateofdelivery').setValue(deliveryRes.dateOfDelivery);
+                                                this.MaternalHistoryForm.get('deliveryid').setValue(deliveryRes.id);
+                                            }
+                                            if (deliveryRes.modeOfDelivery) {
+                                                const delivery = this.deliveryModeOptions.filter(obj =>
+                                                    obj.itemName == deliveryRes.modeOfDelivery);
+                                                this.MaternalHistoryForm.get('modeofdelivery').setValue(delivery[0].itemId);
+                                            }
+                                        }
+                                    }
+                                );
                             }
                         }
                     );
                 }
             }
         );
+
 
         this.notify.emit(this.MaternalHistoryForm);
 

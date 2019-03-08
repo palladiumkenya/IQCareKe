@@ -42,6 +42,7 @@ export class DeliveryMaternityComponent implements OnInit {
 
     ngOnInit() {
         this.deliveryFormGroup = this.formBuilder.group({
+            deliveryId : new FormControl(''),
             ancVisits: new FormControl('', [Validators.required]),
             deliveryDate: new FormControl('', [Validators.required]),
             gestationAtBirth: new FormControl('', [Validators.required]),
@@ -123,13 +124,15 @@ export class DeliveryMaternityComponent implements OnInit {
     }
 
     onDeliveryComplicationsChange(event) {
-        if (event.isUserInput && event.source.selected && event.source.viewValue == 'Yes') {
+        if (event.itemName == 'Yes') {
             this.deliveryFormGroup.get('deliveryComplicationNotes').enable({ onlySelf: true });
-            // console.log('Comp change ' + event.source.viewValue);
-        } else {
-            // console.log('Comp change ' + event.source.viewValue);
+    
+        } else 
+        {
+            this.deliveryFormGroup.get('deliveryComplicationNotes').reset();
             this.deliveryFormGroup.get('deliveryComplicationNotes').disable({ onlySelf: true });
         }
+
     }
 
     public getPregnancyDetails(patientId: number) {
@@ -183,6 +186,7 @@ export class DeliveryMaternityComponent implements OnInit {
                     if (del == null) {
                         return;
                     }
+                    this.deliveryFormGroup.controls['deliveryId'].setValue(del.id)
                     this.deliveryFormGroup.controls['gestationAtBirth'].setValue(this.calculateGestation(del.dateOfDelivery,
                         this.dateLMP));
                     this.deliveryFormGroup.controls['gestationAtBirth'].disable({ onlySelf: true });
@@ -194,12 +198,17 @@ export class DeliveryMaternityComponent implements OnInit {
                     this.deliveryFormGroup.controls['bloodLossCount'].setValue(del.bloodLossCapacity);
                     this.deliveryFormGroup.controls['deliveryCondition'].setValue(this._matService.getMaternityLookUpOptionByName(this.motherStateOptions, del.motherCondition));
                     this.deliveryFormGroup.controls['placentaComplete'].setValue(this._matService.getMaternityLookUpOptionByName(this.yesnoOptions, del.placentaComplete));
-                    this.deliveryFormGroup.controls['maternalDeathsAudited'].setValue(del.maternalDeathAuditedId);
+                    this.deliveryFormGroup.controls['maternalDeathsAudited'].setValue(this._matService.getMaternityLookUpOptionByName(this.yesnoOptions, del.maternalDeathAudited));
                     this.deliveryFormGroup.controls['auditDate'].setValue(del.maternalDeathAuditDate);
                     this.deliveryFormGroup.controls['deliveryComplications']
                         .setValue(this._matService.getMaternityLookUpOptionByName(this.yesnoOptions, del.deliveryComplicationsExperienced));
+                        this.deliveryFormGroup.controls['deliveryConductedBy'].setValue(del.deliveryConductedBy);   
+                    console.log(del.deliveryComplicationsExperienced +' del.deliveryComplicationsExperienced')                
+                     if(del.deliveryComplicationsExperienced == 'yes')
+                     this.deliveryFormGroup.get('deliveryComplicationNotes').enable({ onlySelf: true });
                     this.deliveryFormGroup.controls['deliveryComplicationNotes'].setValue(del.deliveryComplicationNotes);
-                    this.deliveryFormGroup.controls['deliveryConductedBy'].setValue(del.deliveryConductedBy);
+
+                    
                 },
                 (err) => {
                     this.snotifyService.error('Error fetching patient delivery info details' + err,

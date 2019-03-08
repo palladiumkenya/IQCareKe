@@ -167,7 +167,27 @@ namespace IQCare.CCC.UILogic
                         }
                         else
                         {
-                            patient = _patientLookupmanager.GetPatientByCccNumber(cccNumber.TrimStart('0'));
+                            var lookupLogic = new LookupLogic();
+                            var facility = lookupLogic.GetFacility();
+                            if (cccNumberLength == 5)
+                            {
+                                patient = _patientLookupmanager.GetPatientByCccNumber(facility.MFLCode +  cccNumber);
+                            }
+                            else if (cccNumberLength < 5)
+                            {
+                                var count = 5 - cccNumberLength;
+                                var stringPadding = "";
+                                while (count > 0)
+                                {
+                                    stringPadding += '0';
+                                    count--;
+                                }
+                                patient = _patientLookupmanager.GetPatientByCccNumber(facility.MFLCode + stringPadding + cccNumber);
+                            }
+                            else
+                            {
+                                patient = _patientLookupmanager.GetPatientByCccNumber(cccNumber.TrimStart('0'));
+                            }
                         }
                     }
                 }
@@ -187,6 +207,11 @@ namespace IQCare.CCC.UILogic
         public PersonExtLookup GetPersonExtLookups(int personId)
         {
             return _patientLookupmanager.GetPersonExtLookups(personId);
+        }
+
+        public System.Data.DataTable GetDuplicatePatientRecords(bool matchFirstName, bool matchLastName, bool matchMiddleName, bool matchSex, bool matchEnrollmentNumber, bool matchDob, bool matchEnrollmentDate, bool matchARTStartDate, bool matchHIVDiagnosisDate)
+        {
+            return _patientLookupmanager.GetDuplicatePatientRecords(matchFirstName, matchLastName, matchMiddleName, matchSex, matchEnrollmentNumber, matchDob, matchEnrollmentDate, matchARTStartDate, matchHIVDiagnosisDate);
         }
     }
 }

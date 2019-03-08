@@ -2,6 +2,7 @@
 using Entities.CCC.Lookup;
 using System;
 using System.Collections.Generic;
+using System.Data;
 
 namespace Interface.CCC.Lookup
 {
@@ -23,6 +24,7 @@ namespace Interface.CCC.Lookup
 
         List<PatientRelationshipDTO> GetPatientRelationshipView(int patientId);
         PersonExtLookup GetPersonExtLookups(int personId);
+        DataTable GetDuplicatePatientRecords(bool matchFirstName, bool matchLastName, bool matchMiddleName, bool matchSex, bool matchEnrolmentNumber, bool matchDob, bool matchEnrolmentDate, bool matchARTStartDate, bool matchHIVDiagnosisDate);
     }
 }
  
