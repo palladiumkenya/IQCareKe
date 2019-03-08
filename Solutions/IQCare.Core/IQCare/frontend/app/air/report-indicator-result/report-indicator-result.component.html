@@ -4,8 +4,8 @@
    <div class="row" *ngFor="let reportSection of reportSections">
            <h4 style="text-align:center"> {{reportSection.name}} </h4>
            <mat-tab-group>
-            <mat-tab *ngFor="let subSection of reportSection.reportSubSections" label={{subSection.name}}>
-              <app-indicator-results-grid [IndicatorResults] = "subSection.indicators" >              
+            <mat-tab *ngFor="let subSection of reportSection.reportSubSections " label={{subSection.name}}>
+              <app-indicator-results-grid [IndicatorResults] = "subSection.indicators">              
               </app-indicator-results-grid>
             </mat-tab>
           </mat-tab-group>
