@@ -14,7 +14,7 @@ using System.Threading.Tasks;
 
 namespace IQCare.Maternity.BusinessProcess.QueryHandlers
 {
-    public class GetPatientDischargeInfoQueryHandler : IRequestHandler<GetPatientDischargeInfoQuery, Result<List<PatientDischargeInfoViewModel>>>
+    public class GetPatientDischargeInfoQueryHandler : IRequestHandler<GetPatientDischargeInfoQuery, Result<PatientDischargeInfoViewModel>>
     {
         IMapper _mapper;
         IMaternityUnitOfWork _maternityUnitOfWork;
@@ -25,22 +25,23 @@ namespace IQCare.Maternity.BusinessProcess.QueryHandlers
             _mapper = mapper;
             _maternityUnitOfWork = maternityUnitOfWork;
         }
-        public Task<Result<List<PatientDischargeInfoViewModel>>> Handle(GetPatientDischargeInfoQuery request,
+        public Task<Result<PatientDischargeInfoViewModel>> Handle(GetPatientDischargeInfoQuery request,
             CancellationToken cancellationToken)
         {
             try
             {
                 var patientDischargeInfo = _maternityUnitOfWork.Repository<PatientDischargeInformationView>()
-                       .Get(x => x.PatientMasterVisitId == request.PatientMasterVisitId).AsEnumerable();
+                    .Get(x => x.PatientMasterVisitId == request.PatientMasterVisitId)
+                    .OrderByDescending(x => x.DateDischarged).FirstOrDefault();
 
-                var dischargeInfoViewModel = _mapper.Map<List<PatientDischargeInfoViewModel>>(patientDischargeInfo);
+                var dischargeInfoViewModel = _mapper.Map<PatientDischargeInfoViewModel>(patientDischargeInfo);
 
-                return Task.FromResult(Result<List<PatientDischargeInfoViewModel>>.Valid(dischargeInfoViewModel));
+                return Task.FromResult(Result<PatientDischargeInfoViewModel>.Valid(dischargeInfoViewModel));
             }
             catch (Exception ex)
             {
                 logger.Error(ex, $"An error occured while getting patient discharge info for master visit Id {request.PatientMasterVisitId}");
-                return Task.FromResult(Result<List<PatientDischargeInfoViewModel>>.Invalid(ex.Message));
+                return Task.FromResult(Result<PatientDischargeInfoViewModel>.Invalid(ex.Message));
             }
         }
     }

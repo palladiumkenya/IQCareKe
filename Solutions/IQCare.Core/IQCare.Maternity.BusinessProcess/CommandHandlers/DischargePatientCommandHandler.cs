@@ -6,6 +6,7 @@ using MediatR;
 using Serilog;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -41,6 +42,44 @@ namespace IQCare.Maternity.BusinessProcess.CommandHandlers
             }
           }
             
+        }
+    }
+
+    public class UpdatePatientDischargeCommandHandler : IRequestHandler<UpdatePatientDischargeCommand, Result<DischargePatientResponse>>
+    {
+        private readonly IMaternityUnitOfWork _maternityUnitOfWork;
+        private readonly ILogger _logger = Log.ForContext<UpdatePatientDischargeCommandHandler>();
+
+        public UpdatePatientDischargeCommandHandler(IMaternityUnitOfWork maternityUnitOfWork)
+        {
+            _maternityUnitOfWork = maternityUnitOfWork;
+        }
+        public Task<Result<DischargePatientResponse>> Handle(UpdatePatientDischargeCommand request, CancellationToken cancellationToken)
+        {
+            try
+            {
+                var patientDischarge = _maternityUnitOfWork.Repository<MaternalPatientDischargeInformation>()
+                       .Get(x => x.Id == request.Id).SingleOrDefault();
+                if (patientDischarge == null)
+                    return Task.FromResult(Result<DischargePatientResponse>.Invalid($"Patient discharge information with Id {request.Id} not found"));
+
+                patientDischarge.Update(request.OutcomeStatus, request.DateDischarged, request.OutcomeDescription);
+
+                _maternityUnitOfWork.Repository<MaternalPatientDischargeInformation>().Update(patientDischarge);
+                _maternityUnitOfWork.Save();
+
+                return Task.FromResult(Result<DischargePatientResponse>.Valid(new DischargePatientResponse
+                {
+                    Message = "Patient discharge information updated succesfully",
+                    PatientDischargeId = request.Id
+                }));
+            }
+            catch (Exception ex)
+            {
+                string message = $"An error occured while updating patient discharge information for Id {request.Id}";
+                _logger.Error(ex, message);
+                return Task.FromResult(Result<DischargePatientResponse>.Invalid(message));
+            }
         }
     }
 }

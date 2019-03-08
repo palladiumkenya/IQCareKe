@@ -1,14 +1,16 @@
-import {Component, EventEmitter, Input, OnInit, Output, OnDestroy} from '@angular/core';
-import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
-import {Subscription} from 'rxjs';
-import {SnotifyService} from 'ng-snotify';
-import {PatientEducationEmitter} from '../../emitters/PatientEducationEmitter';
-import {CounsellingTopicsEmitters} from '../../emitters/counsellingTopicsEmitters';
-import {PatientEducationCommand} from '../../_models/PatientEducationCommand';
-import {LookupItemService} from '../../../shared/_services/lookup-item.service';
-import {NotificationService} from '../../../shared/_services/notification.service';
+import { Component, EventEmitter, Input, OnInit, Output, OnDestroy } from '@angular/core';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { Subscription } from 'rxjs';
+import { SnotifyService } from 'ng-snotify';
+import { PatientEducationEmitter } from '../../emitters/PatientEducationEmitter';
+import { CounsellingTopicsEmitters } from '../../emitters/counsellingTopicsEmitters';
+import { PatientEducationCommand } from '../../_models/PatientEducationCommand';
+import { LookupItemService } from '../../../shared/_services/lookup-item.service';
+import { NotificationService } from '../../../shared/_services/notification.service';
+
 import * as moment from 'moment';
-import {AncService} from '../../_services/anc.service';
+import { AncService } from '../../_services/anc.service';
+import { DataService } from '../../../shared/_services/data.service';
 
 
 export interface PeriodicElement {
@@ -18,8 +20,8 @@ export interface PeriodicElement {
 }
 
 const ELEMENT_DATA: PeriodicElement[] = [
-    {topicId: 1, topic: 'sex', onSetDate: 'Hydrogen'},
-    {topicId: 2, topic: 'church', onSetDate: 'Helium'}
+    { topicId: 1, topic: 'sex', onSetDate: 'Hydrogen' },
+    { topicId: 2, topic: 'church', onSetDate: 'Helium' }
 ];
 
 
@@ -59,29 +61,30 @@ export class PatientEducationExaminationComponent implements OnInit, OnDestroy {
 
     displayedColumns: string[] = ['topicId', 'topic', 'onSetDate'];
     dataSource = ELEMENT_DATA;
-    visitDate : Date;
+    visitDate: Date;
 
     constructor(private _formBuilder: FormBuilder, private _lookupItemService: LookupItemService,
-                private  snotifyService: SnotifyService,
-                private notificationService: NotificationService,
-                private ancService: AncService) {
+        private snotifyService: SnotifyService,
+        private notificationService: NotificationService,
+        private dataService: DataService,
+        private ancService: AncService) {
     }
 
     ngOnInit() {
-        this.ancService.visitDate.subscribe(date=>{
+        this.dataService.visitDate.subscribe(date => {
             this.visitDate = date;
-            console.log('The visit Date Education'+ this.visitDate)
-         })
+            // console.log('The visit Date Education' + this.visitDate);
+        });
 
         this.PatientEducationFormGroup = this._formBuilder.group({
             breastExamDone: ['', Validators.required],
-            counsellingDate: ['', Validators.required],
-            counselledOn: ['', Validators.required],
+            counsellingDate: ['', (this.isEdit) ? [] : Validators.required],
+            counselledOn: ['', (this.isEdit) ? [] : Validators.required],
             treatedSyphilis: ['', Validators.required]
             // testResult: new FormControl(['', Validators.required])
         });
 
-      
+
 
         this.userId = JSON.parse(localStorage.getItem('appUserId'));
         //  this.getLookupOptions('counselledOn', this.topics);
@@ -99,7 +102,7 @@ export class PatientEducationExaminationComponent implements OnInit, OnDestroy {
 
 
         this.nextStep.emit(this.patientEducationEmitterData);
-        this.notify.emit({'form': this.PatientEducationFormGroup, 'counselling_data': this.counselling_data});
+        this.notify.emit({ 'form': this.PatientEducationFormGroup, 'counselling_data': this.counselling_data });
 
         if (this.isEdit) {
 
@@ -132,12 +135,17 @@ export class PatientEducationExaminationComponent implements OnInit, OnDestroy {
 
         const topic = this.PatientEducationFormGroup.controls['counselledOn'].value.itemName;
         const topicId = this.PatientEducationFormGroup.controls['counselledOn'].value.itemId;
+        const counsellingDates = this.PatientEducationFormGroup.controls['counsellingDate'].value;
+
 
         if (topic === '' || this.PatientEducationFormGroup.controls['counsellingDate'].value === '') {
+            this.snotifyService.warning('counselling topic, counselling date required', this.notificationService.getConfig());
             return false;
         }
 
-        if (this.counselling_data.filter(x => x.counsellingTopic === topic).length > 0) {
+
+        if (this.counselling_data.filter(x =>  x.counsellingTopic === topic )
+            .length > 0) {
             this.snotifyService.warning('' + topic + ' exists', 'Counselling', this.notificationService.getConfig());
         } else {
             this.counselling_data.push({
@@ -233,7 +241,7 @@ export class PatientEducationExaminationComponent implements OnInit, OnDestroy {
     }
 
     ngOnDestroy(): void {
-        this.baseline$.unsubscribe();
+       // this.baseline$.unsubscribe();
         this.patientCounseling$.unsubscribe();
     }
 

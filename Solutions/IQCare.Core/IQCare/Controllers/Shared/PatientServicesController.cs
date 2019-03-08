@@ -109,7 +109,6 @@ namespace IQCare.Controllers.Shared
             return BadRequest(response);
         }
 
-
         // POST: api/PatientServices
         [HttpPost]
         public void Post([FromBody]string value)

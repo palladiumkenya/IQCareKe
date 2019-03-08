@@ -10,3 +10,12 @@ export interface ReferralCommand {
     DeleteFlag?: boolean;
     CreatedBy?: number;
 }
+
+export interface EditReferalCommand {
+    Id?: number;
+    ReferredFrom?: number;
+    ReferredTo?: number;
+    ReferralReason?: string;
+    ReferralDate?: Date;
+    ReferredBy?: number;
+}

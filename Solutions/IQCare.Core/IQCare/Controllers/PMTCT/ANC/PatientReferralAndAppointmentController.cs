@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using IQCare.Common.BusinessProcess.Commands.Appointment;
 using IQCare.Common.BusinessProcess.Commands.Refferal;
 using IQCare.PMTCT.BusinessProcess.Commands;
+using IQCare.PMTCT.BusinessProcess.Commands.Appointment;
 using IQCare.PMTCT.Core.Models;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
@@ -42,7 +43,7 @@ namespace IQCare.Controllers.PMTCT.ANC
             return BadRequest(response);
         }
 
-        [HttpPut]
+        [HttpPost]
         public async Task<IActionResult> UpdatePatientNextAppointment([FromBody] EditAppointmentCommand editAppointmentCommand)
         {
             if (!ModelState.IsValid)
@@ -60,6 +61,19 @@ namespace IQCare.Controllers.PMTCT.ANC
                 return BadRequest(patientId);
             var response =
                 await _mediator.Send(new GetPatientAppointmentCommand{PatientId = patientId, PatientMasterVisitId = patientMasterVisitId},
+                    HttpContext.RequestAborted);
+            if (response.IsValid)
+                return Ok(response.Value);
+            return BadRequest(response.Value);
+        }
+        
+        [HttpGet("{patientId}/{patientMasterVisitId}")]
+        public async Task<IActionResult> GetAppointmentAnc(int patientId, int patientMasterVisitId)
+        {
+            if (patientId < 1 || patientMasterVisitId < 1)
+                return BadRequest(patientId);
+            var response =
+                await _mediator.Send(new GetAncAppointmentCommand{PatientId = patientId, PatientMasterVisitId = patientMasterVisitId},
                     HttpContext.RequestAborted);
             if (response.IsValid)
                 return Ok(response.Value);
@@ -93,7 +107,7 @@ namespace IQCare.Controllers.PMTCT.ANC
             return BadRequest(response);
         }
 
-        [HttpPut]
+        [HttpPost]
         public async Task<IActionResult> UpdatePatientReferralInfo([FromBody]EditRefferalCommand editRefferalCommand)
         {
             if (!ModelState.IsValid)

@@ -25,7 +25,8 @@
                     <mat-label>State of Mother</mat-label>
                     <mat-select formControlName="stateofmother" required>
                         <mat-option [value]=""></mat-option>
-                        <mat-option *ngFor="let motherstateOption of motherstateOptions" [value]="motherstateOption.itemId">
+                        <mat-option *ngFor="let motherstateOption of motherstateOptions"
+                            [value]="motherstateOption.itemId">
                             {{ motherstateOption.itemName }}
                         </mat-option>
                     </mat-select>
@@ -37,7 +38,8 @@
                     <mat-label>Primary Care Giver</mat-label>
                     <mat-select formControlName="primarycaregiver" required>
                         <mat-option [value]=""></mat-option>
-                        <mat-option *ngFor="let primarycaregiverOption of primarycaregiverOptions" [value]="primarycaregiverOption.itemId">
+                        <mat-option *ngFor="let primarycaregiverOption of primarycaregiverOptions"
+                            [value]="primarycaregiverOption.itemId">
                             {{ primarycaregiverOption.itemName }}
                         </mat-option>
                     </mat-select>
@@ -47,8 +49,8 @@
 
         <div class="row">
             <div class="col-lg-4 col-sm-4 col-xs-12">
-                <button mat-raised-button color="primary" type="button" class="col-lg-4 col-sm-4 col-xs-12" *ngIf="isMotherRegistered"
-                    (click)="openDialog()">
+                <button mat-raised-button color="primary" type="button" class="col-lg-4 col-sm-4 col-xs-12"
+                    *ngIf="isMotherRegistered" (click)="openDialog()">
                     Find Mother
                 </button>
             </div>
@@ -66,8 +68,8 @@
             <div class="col-lg-4 col-sm-4 col-xs-12">
                 <mat-form-field class="col-lg-12 col-sm-12 col-xs-12">
                     <mat-label>CCC No.</mat-label>
-                    <input matInput id="cccno" formControlName="cccno" name="cccno" autocomplete="off" [pattern]="cccPattern"
-                        required>
+                    <input matInput id="cccno" formControlName="cccno" name="cccno" autocomplete="off"
+                        [pattern]="cccPattern">
                     <div *ngIf="MaternalHistoryForm.controls.cccno.errors && (MaternalHistoryForm.controls.cccno.dirty || MaternalHistoryForm.controls.cccno.touched)"
                         class="alert alert-danger">
                         <div [hidden]="!MaternalHistoryForm.controls.cccno.errors.required">
@@ -87,7 +89,8 @@
                     <mat-label>Mother Received drugs for PMTCT</mat-label>
                     <mat-select formControlName="pmtctheimotherreceivedrugs" required>
                         <mat-option [value]=""></mat-option>
-                        <mat-option *ngFor="let motherreceivedrugsOption of motherreceivedrugsOptions" [value]="motherreceivedrugsOption.itemId"
+                        <mat-option *ngFor="let motherreceivedrugsOption of motherreceivedrugsOptions"
+                            [value]="motherreceivedrugsOption.itemId"
                             (onSelectionChange)="onMotherReceivedDrugsChange($event)">
                             {{ motherreceivedrugsOption.itemName }}
                         </mat-option>
@@ -100,7 +103,8 @@
                     <mat-label>Regimen</mat-label>
                     <mat-select formControlName="pmtctheimotherregimen" required>
                         <mat-option [value]=""></mat-option>
-                        <mat-option *ngFor="let heimotherregimenOption of heimotherregimenOptions" [value]="heimotherregimenOption.itemId">
+                        <mat-option *ngFor="let heimotherregimenOption of heimotherregimenOptions"
+                            [value]="heimotherregimenOption.itemId">
                             {{ heimotherregimenOption.itemName }}
                         </mat-option>
                     </mat-select>
@@ -110,8 +114,8 @@
             <div class="col-lg-4 col-sm-4 col-xs-12">
                 <mat-form-field class="col-lg-12 col-sm-12 col-xs-12">
                     <mat-label>Other Specify</mat-label>
-                    <input matInput id="otherspecify" formControlName="otherspecify" name="otherspecify" autocomplete="off"
-                        required>
+                    <input matInput id="otherspecify" formControlName="otherspecify" name="otherspecify"
+                        autocomplete="off" required>
                 </mat-form-field>
             </div>
         </div>
@@ -135,7 +139,8 @@
                     <mat-label>Regimen</mat-label>
                     <mat-select formControlName="pmtctheimotherdrugsatinfantenrollment" required>
                         <mat-option [value]=""></mat-option>
-                        <mat-option *ngFor="let motherdrugsatinfantenrollmentOption of motherdrugsatinfantenrollmentOptions"
+                        <mat-option
+                            *ngFor="let motherdrugsatinfantenrollmentOption of motherdrugsatinfantenrollmentOptions"
                             [value]="motherdrugsatinfantenrollmentOption.itemId">
                             {{ motherdrugsatinfantenrollmentOption.itemName }}
                         </mat-option>

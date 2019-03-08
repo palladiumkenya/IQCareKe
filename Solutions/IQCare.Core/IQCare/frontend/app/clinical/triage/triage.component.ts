@@ -12,9 +12,9 @@ export class TriageComponent implements OnInit {
     patientId: number;
     personId: number;
     constructor(private route: ActivatedRoute,
-        private dialog : MatDialog) {
-       
-        }
+        private dialog: MatDialog) {
+
+    }
 
     ngOnInit() {
         this.route.params.subscribe(
@@ -23,29 +23,29 @@ export class TriageComponent implements OnInit {
                 this.personId = params.personId;
                 localStorage.setItem('partnerId', this.personId.toString());
             }
-        );        
+        );
     }
 
- 
-  public AddTriageInfo() {
-    const resultsDialogConfig = new MatDialogConfig();
 
-    resultsDialogConfig.disableClose = false;
-    resultsDialogConfig.autoFocus = true;
-    
-    resultsDialogConfig.data =  {
-                           patientId : this.patientId,
-                           personId : this.personId
-                         };
-  
-    const dialogRef = this.dialog.open(AddTriageComponent, resultsDialogConfig);
-    dialogRef.afterClosed().subscribe(
-      data => 
-      {
-        if (!data)
-          return;
-          console.log(data);
-      });  
-  }
+    public AddTriageInfo() {
+        const resultsDialogConfig = new MatDialogConfig();
+
+        resultsDialogConfig.disableClose = false;
+        resultsDialogConfig.autoFocus = true;
+
+        resultsDialogConfig.data = {
+            patientId: this.patientId,
+            personId: this.personId
+        };
+
+        const dialogRef = this.dialog.open(AddTriageComponent, resultsDialogConfig);
+        dialogRef.afterClosed().subscribe(
+            data => {
+                if (!data) {
+                    return;
+                }
+                console.log(data);
+            });
+    }
 
 }

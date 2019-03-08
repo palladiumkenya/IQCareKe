@@ -17,7 +17,7 @@ export class HomeComponent implements OnInit {
     isPositive: boolean = false;
 
     displayedColumns = ['encounterDate', 'testType', 'provider', 'resultOne',
-        'resultTwo', 'finalResult', 'consent', 'partnerListingConsent', 'edit'];
+        'resultTwo', 'finalResult', 'consent', 'partnerListingConsent', 'serviceArea', 'edit'];
     dataSource = new EncountersDataSource(this.encounterService, this.patientId);
 
     constructor(private encounterService: EncounterService,

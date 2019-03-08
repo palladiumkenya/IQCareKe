@@ -6,7 +6,7 @@ using System.Text;
 
 namespace IQCare.Maternity.BusinessProcess.Queries.Maternity
 {
-    public class GetPatientDischargeInfoQuery : IRequest<Result<List<PatientDischargeInfoViewModel>>>
+    public class GetPatientDischargeInfoQuery : IRequest<Result<PatientDischargeInfoViewModel>>
     {
         public int PatientMasterVisitId { get; set; }
 
@@ -18,6 +18,7 @@ namespace IQCare.Maternity.BusinessProcess.Queries.Maternity
         public int Id { get; set; }
         public int? PatientMasterVisitId { get; set; }
         public string OutcomeStatus { get; set; }
+        public int OutcomeStatusId { get; set; }
         public DateTime? DateDischarged { get; set; }
         public string OutcomeDescription { get; set; }
         public int CreatedBy { get; set; }

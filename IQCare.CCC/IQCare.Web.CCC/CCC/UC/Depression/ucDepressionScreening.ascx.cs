@@ -108,7 +108,7 @@ namespace IQCare.Web.CCC.UC.Depression
             //depressionTotalTb.ID = LookupLogic.GetLookupItemId("DepressionTotal");
             depressionTotalTb.Enabled = false;
             PHDepressionTotal.Controls.Add(depressionTotalTb);
-            PHDepressionTotal.Controls.Add(new LiteralControl("<span class='input-group-addon'>/ 30</span>"));
+            PHDepressionTotal.Controls.Add(new LiteralControl("<span class='input-group-addon'>/ 27</span>"));
             PHDepressionTotal.Controls.Add(new LiteralControl("</div>"));
             //Depression Severity
             PHDepressionSeverity.Controls.Add(new LiteralControl("<div class='input-group'>"));
