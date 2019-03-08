@@ -48,6 +48,7 @@ export class ActiveFormReportComponent implements OnInit {
     resultvalue: string;
     ReportingFormId: number;
     existing: [];
+
     existingperiod: [];
     isEdit: boolean = false;
     reportingPeriodId: number;
@@ -144,9 +145,12 @@ export class ActiveFormReportComponent implements OnInit {
                         this.ItemValue = '';
 
                     }
+
+
                     let SubSectionName = this.FormItems['reportSections'][i]['reportSubSections'][t].name;
                     let Code = this.FormItems["reportSections"][i]['reportSubSections'][t]['indicators'][r].code
-                    this.ItemKey = SubSectionName + '_' + Code
+                    this.ItemKey = SubSectionName + '_' + Code;
+
                     let IndicatorQuestion = {
                         SubSectionId: this.FormItems['reportSections'][i]['reportSubSections'][t].id,
                         code: this.FormItems["reportSections"][i]['reportSubSections'][t]['indicators'][r].code,
@@ -184,6 +188,22 @@ export class ActiveFormReportComponent implements OnInit {
         else {
             this.formGroup.controls.Period.enable();
         }
+
+
+
+        console.log("Questions");
+
+
+        console.log(this.formGroup.controls['IndicatorQuestions']['controls'][0]);
+
+
+
+
+
+
+
+
+
 
     }
     GetFormData() {
@@ -296,6 +316,15 @@ export class ActiveFormReportComponent implements OnInit {
             }
             const elementexposedtotal = document.getElementById('Post-Exposure Prophylaxis(PEP)_HV05-03') as HTMLInputElement;
             elementexposedtotal.value = valuecalc.toString();
+            for (let i = 0; i < this.IndicatorQuestions.length; i++) {
+                const key = this.IndicatorQuestions[i].key.toString();
+                if (key === 'Post-Exposure Prophylaxis(PEP)_HV05-03') {
+                    this.IndicatorQuestions[i].value = this.total.toString();
+
+                    this.IndicatorQuestions[i].value = valuecalc.toString();
+                    this.formGroup.controls.IndicatorQuestions.value[i].value = valuecalc;
+                }
+            }
 
 
 
@@ -323,8 +352,8 @@ export class ActiveFormReportComponent implements OnInit {
                 const exposedoccupational = document.getElementById('Post-Exposure Prophylaxis(PEP)_HV05-01') as HTMLInputElement;
                 const exposedocctotal = exposedoccupational.valueAsNumber;
                 const pepoccupational = parseInt(this.IndicatorQuestions[index].value, 10);
-                const elementpeptotal = document.getElementById('Post-Exposure Prophylaxis(PEP)_HV05-06') as HTMLInputElement;
-                const finaltotal = parseInt(elementpeptotal.value.toString(), 10);
+                const elementexposedtotal = document.getElementById('Post-Exposure Prophylaxis(PEP)_HV05-03') as HTMLInputElement;
+                const finaltotal = parseInt(elementexposedtotal.value.toString(), 10);
                 if (exposedocctotal > 0) {
                     if (pepoccupational > exposedocctotal) {
                         let currentelement = document.getElementById(codeId);
@@ -360,8 +389,8 @@ export class ActiveFormReportComponent implements OnInit {
                 const exposedother = document.getElementById('Post-Exposure Prophylaxis(PEP)_HV05-02') as HTMLInputElement;
                 const exposedothertotal = exposedother.valueAsNumber;
                 const pepother = parseInt(this.IndicatorQuestions[index].value, 10);
-                const elementpeptotal = document.getElementById('Post-Exposure Prophylaxis(PEP)_HV05-06') as HTMLInputElement;
-                const finaltotal = elementpeptotal.valueAsNumber;
+                const elementexposedtotal = document.getElementById('Post-Exposure Prophylaxis(PEP)_HV05-03') as HTMLInputElement;
+                const finaltotal = elementexposedtotal.valueAsNumber;
                 if (exposedothertotal > 0) {
                     if (pepother > exposedothertotal) {
                         let currentelement = document.getElementById(codeId);
@@ -411,6 +440,16 @@ export class ActiveFormReportComponent implements OnInit {
                 else {
                     const elementpeptotal = document.getElementById('Post-Exposure Prophylaxis(PEP)_HV05-06') as HTMLInputElement;
                     elementpeptotal.value = valuecalc.toString();
+
+                    for (let i = 0; i < this.IndicatorQuestions.length; i++) {
+                        const key = this.IndicatorQuestions[i].key.toString();
+                        if (key === 'Post-Exposure Prophylaxis(PEP)_HV05-06') {
+                            this.IndicatorQuestions[i].value = this.total.toString();
+
+                            this.IndicatorQuestions[i].value = valuecalc.toString();
+                            this.formGroup.controls.IndicatorQuestions.value[i].value = valuecalc;
+                        }
+                    }
 
                 }
             }

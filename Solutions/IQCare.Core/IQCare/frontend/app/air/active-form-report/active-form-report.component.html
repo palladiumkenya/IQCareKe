@@ -10,10 +10,11 @@
             <div class='row'>
                 <div class="col-lg-3 col-md-3 col-sm-3">
                     <mat-form-field>
-                        <input [max]="maxDate" [min]="minDate" tabindex="5" matInput readonly [matDatepicker]="picker" placeholder="Choose a Reporting Period"
-                            [formControl]="date" formControlName="Period" required >
+                        <input [max]="maxDate" [min]="minDate" tabindex="5" matInput readonly [matDatepicker]="picker"
+                            placeholder="Choose a Reporting Period" [formControl]="date" formControlName="Period"
+                            required>
                         <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-                        <mat-datepicker #picker  startView="multi-year" (monthSelected)="monthSelected($event)">
+                        <mat-datepicker #picker startView="multi-year" (monthSelected)="monthSelected($event)">
                         </mat-datepicker>
                     </mat-form-field>
                 </div>
@@ -49,7 +50,7 @@
                         <div class="row" formArrayName="IndicatorQuestions"
                             *ngFor="let  indicatorquest of this.formGroup.controls.IndicatorQuestions.value| IndicatorFilter:subsection.SubSectionId  ;let i=index;"
                             [ngSwitch]="indicatorquest.Value">
-                          
+
 
                             <div class="col-lg-3 col-md-3 col-sm-3">
 
@@ -68,32 +69,33 @@
                             </div>
 
                             <div class="col-lg-3 col-md-3 col-sm-3">
-                                
+
                                 <mat-form-field>
                                     <input matInput id={{indicatorquest.key}} type={{indicatorquest.controlType}}
                                         name={{indicatorquest.SubSectionId}} value={{indicatorquest.value}}
-                                        (change)=(OnValueChange($event,indicatorquest.code))  (keypress)="(isNumberKey($event))" min="0"  required>
+                                        (change)=(OnValueChange($event,indicatorquest.code))
+                                        (keypress)="(isNumberKey($event))" min="0" required>
                                 </mat-form-field>
 
 
                             </div>
                             <div class="col-lg-3 col-md-3 col-sm-3" id={{indicatorquest.code}}>
-                                
+
                             </div>
 
                         </div>
 
                     </mat-card-content>
 
-               
+
 
                 </mat-card>
 
-               
-              
+
+
                 <mat-card>
-                        <div class="row">
-                       
+                    <div class="row">
+
                         <div class="col-lg-2 col-md-2 col-sm-2">
                             <button class="mat-raised-button mat-primary" (click)="submitResult()">Save</button>
                         </div>
@@ -103,12 +105,12 @@
                                 <span>Back</span>
                             </a>
                         </div>
-                        </div>
-                    </mat-card>
-                
+                    </div>
+                </mat-card>
+
             </div>
 
-       
+
         </div>
     </div>
 </form>
