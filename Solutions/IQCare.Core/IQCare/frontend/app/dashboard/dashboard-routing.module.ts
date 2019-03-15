@@ -4,6 +4,7 @@ import { PersonHomeComponent } from './person-home/person-home.component';
 import { NgModule, Component } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { PortalComponent } from './portal/portal.component';
+import { ReportsComponent } from './reports/reports.component';
 
 const routes: Routes = [
     {
@@ -26,6 +27,11 @@ const routes: Routes = [
                 component: EnrollmentServicesComponent
             }
         ]
+   
+    },
+    {
+        path : 'report',
+        component : ReportsComponent
     }
 
 ];
