@@ -171,6 +171,7 @@
     <None Remove="Scripts\2.0.1\01_IQCareFinalBuild.sql" />
     <None Remove="Scripts\2.0.1\02_IQCareFinalBuild.sql" />
     <None Remove="Scripts\2.0.1\03_VisitDetailsView.sql" />
+    <None Remove="Scripts\2.0.1\04_IQCareFinalBuild.sql" />
   </ItemGroup>
 
   <ItemGroup>
@@ -361,6 +362,7 @@
     <EmbeddedResource Include="Scripts\2.0.0\57_PHQQuestion.sql" />
     <EmbeddedResource Include="Scripts\2.0.1\01_IQCareFinalBuild.sql" />
     <EmbeddedResource Include="Scripts\2.0.1\02_IQCareFinalBuild.sql" />
+    <EmbeddedResource Include="Scripts\2.0.1\04_IQCareFinalBuild.sql" />
   </ItemGroup>
 
   <ItemGroup>
