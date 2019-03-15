@@ -78,9 +78,10 @@ echo "********** Building IQCare.Release **********" >> %log%
 )
 @echo "********** Completed building  devenv**********" >> %log%
 @echo ********** Completed building  devenv**********
-echo "********** Scripts **********" >> %log%
-XCOPY %BATDIR%\Scripts\* %BATDIR%\Release\Scripts /s /i >nul
-COPY %BATDIR%\batch.bat %BATDIR%\Release\batch.bat /Y > nul
+
+rem echo "********** Scripts **********" >> %log%
+rem COPY %BATDIR%\Scripts\* %BATDIR%\Release\Scripts /s /i >nul
+rem COPY %BATDIR%\batch.bat %BATDIR%\Release\batch.bat /Y > nul
 
 @echo ********** END OF BUILINDING & PACKAGING **********
 
