@@ -99,7 +99,7 @@
                                                 HAART | Prophylaxis
                                             </span>
                                         </ng-template>
-                                        <app-haart-prophylaxis [haartProphylaxisOptions]="haartProphylaxisOptions"
+                                        <app-haart-prophylaxis [visitDate]="visitDate" [haartProphylaxisOptions]="haartProphylaxisOptions"
                                             (notify)="onHaartProphylaxisNotify($event)" [isEdit]="isEdit"
                                             [patientId]="patientId" [patientMasterVisitId]="visitId">
                                         </app-haart-prophylaxis>

@@ -37,8 +37,10 @@ export class HaartProphylaxisComponent implements OnInit, OnDestroy {
     @Input() haartProphylaxisOptions: any[] = [];
     @Input('isEdit') isEdit: boolean;
     @Input('patientId') patientId: number;
+    @Input('visitDate') visitDate: Date;
     @Input('patientMasterVisitId') patientMasterVisitId: number;
     @Output() notify: EventEmitter<object> = new EventEmitter<object>();
+    
     public HaartProphylaxisData: HAARTProphylaxisEmitter;
     public chronicIllness: ChronicIllnessEmitter[] = [];
     public chronicIllnessEdit: ChronicIllnessEmitter[] = [];
@@ -52,7 +54,7 @@ export class HaartProphylaxisComponent implements OnInit, OnDestroy {
     public userId: number;
     public isDisabled: boolean = true;
 
-    public maxDate: Date = moment().toDate();
+    public maxDate: Date = this.visitDate;
 
     constructor(private route: ActivatedRoute,
         private _formBuilder: FormBuilder,
