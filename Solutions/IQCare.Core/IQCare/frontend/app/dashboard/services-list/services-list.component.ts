@@ -58,15 +58,35 @@ export class ServicesListComponent implements OnInit {
     }
 
     enrollToService(serviceId: number, serviceCode: string) {
+        if (!this.person.dateOfBirth || this.person.dateOfBirth == '') {
+            this.snotifyService.warning('Please update: ' + this.person.firstName + ' ' + this.person.midName + ' ' + this.person.lastName
+                + ', DOB before enrollment', 'Enrollment', this.notificationService.getConfig());
+            return;
+        }
+
         if (serviceId == 1) {
             this.snotifyService.error('Please Access CCC from the Greencard menu', 'Encounter History',
                 this.notificationService.getConfig());
             return;
         }
-        this.zone.run(() => {
-            this.router.navigate(['/dashboard/enrollment/' + this.personId + '/' + serviceId + '/' + serviceCode],
-                { relativeTo: this.route });
-        });
+        const selectedService = this.services.filter(obj => obj.id == serviceId);
+        if (selectedService && selectedService.length > 0) {
+            const service = selectedService[0]['code'];
+            switch (selectedService[0]['code']) {
+                case 'HTS':
+                    this.zone.run(() => {
+                        this.router.navigate(['/dashboard/enrollment/hts/' + this.personId + '/' + serviceId + '/' + serviceCode],
+                            { relativeTo: this.route });
+                    });
+                    break;
+                default:
+                    this.zone.run(() => {
+                        this.router.navigate(['/dashboard/enrollment/' + this.personId + '/' + serviceId + '/' + serviceCode],
+                            { relativeTo: this.route });
+                    });
+                    break;
+            }
+        }
     }
 
     newTriage() {

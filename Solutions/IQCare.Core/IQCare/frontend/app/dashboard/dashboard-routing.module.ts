@@ -4,7 +4,7 @@ import { PersonHomeComponent } from './person-home/person-home.component';
 import { NgModule, Component } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { PortalComponent } from './portal/portal.component';
-import { ReportsComponent } from './reports/reports.component';
+import { HtsComponent } from './enrollment/service-areas/hts/hts.component';
 
 const routes: Routes = [
     {
@@ -20,20 +20,18 @@ const routes: Routes = [
         }
     },
     {
-        path: 'enrollment/:id/:serviceId/:serviceCode',
+        path: 'enrollment',
         children: [
             {
-                path: '',
+                path: '/:id/:serviceId/:serviceCode',
                 component: EnrollmentServicesComponent
+            },
+            {
+                path: 'hts/:id/:serviceId/:serviceCode',
+                component: HtsComponent
             }
         ]
-   
-    },
-    {
-        path : 'report',
-        component : ReportsComponent
     }
-
 ];
 
 @NgModule({
