@@ -9,13 +9,13 @@
   </COMPONENT>
   <COMPONENT cid="caphyon.advinst.msicomp.UpdaterEditorComponent">
     <ROW Section="Update" Key="Name" Value="IQCare"/>
-    <ROW Section="Update" Key="ProductVersion" Value="2.0.2" ValueLocId="-"/>
+    <ROW Section="Update" Key="ProductVersion" Value="2.0.2.0" ValueLocId="-"/>
     <ROW Section="Update" Key="URL" Value="https://www.dropbox.com/s/0m75pz86a75y6vp/IQCare.Web.Setup.exe?dl=1" ValueLocId="-"/>
     <ROW Section="Update" Key="Size" Value="..\..\..\..\Release\IQCare.Web.Setup.exe" ValueLocId="-"/>
     <ROW Section="Update" Key="MD5" Value="..\..\..\..\Release\IQCare.Web.Setup.exe" ValueLocId="-"/>
     <ROW Section="Update" Key="ServerFileName" Value="IQCare.Web.Setup.exe" ValueLocId="-"/>
     <ROW Section="Update" Key="RegistryKey" Value="HKUD\Software\Palladium\IQCare\Version" ValueLocId="-"/>
-    <ROW Section="Update" Key="Version" Value="2.0.1" ValueLocId="-"/>
+    <ROW Section="Update" Key="Version" Value="2.0.2" ValueLocId="-"/>
     <ROW Section="Update" Key="Description" Value="version 2.0.2 is available"/>
     <ROW Section="Update" Key="Feature" Value="update feature"/>
     <ROW Section="Update" Key="Enhancement" Value="update enhancement"/>

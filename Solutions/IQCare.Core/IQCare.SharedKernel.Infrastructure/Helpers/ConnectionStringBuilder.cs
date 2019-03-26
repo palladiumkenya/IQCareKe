@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Text;
 using Microsoft.Extensions.Configuration;
+using Serilog;
 
 namespace IQCare.SharedKernel.Infrastructure.Helpers
 {
@@ -35,6 +36,7 @@ namespace IQCare.SharedKernel.Infrastructure.Helpers
                 _connectionString = conn.ToString();
             }
 
+            Log.Debug(_connectionString);
             return _connectionString;
         }
     }
