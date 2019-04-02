@@ -20,6 +20,5 @@ export class FormControlService {
                 new FormControl({ value: control.value || '', disabled: control.disabled }, Validators.pattern(control.pattern));
         });
         return new FormGroup(formGroup);
-
     }
 }

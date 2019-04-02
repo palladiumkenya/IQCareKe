@@ -165,11 +165,19 @@
     <DeleteFlag>false</DeleteFlag>
   </Mst_LabTest>
   <Mst_LabTest>
+    <LabTestId>97</LabTestId>
+    <LabName>Cryptococcus Antigen Test</LabName>
+    <LabDepartmentId>6</LabDepartmentId>
+    <LabTypeId>0</LabTypeId>
+    <Sequence>12</Sequence>
+    <DeleteFlag>false</DeleteFlag>
+  </Mst_LabTest>
+  <Mst_LabTest>
     <LabTestId>27</LabTestId>
     <LabName>CSF Biochemistry</LabName>
     <LabDepartmentId>2</LabDepartmentId>
     <LabTypeId>0</LabTypeId>
-    <Sequence>12</Sequence>
+    <Sequence>13</Sequence>
     <DeleteFlag>false</DeleteFlag>
   </Mst_LabTest>
   <Mst_LabTest>
@@ -177,7 +185,7 @@
     <LabName>CSF cryptococcal Ag</LabName>
     <LabDepartmentId>6</LabDepartmentId>
     <LabTypeId>0</LabTypeId>
-    <Sequence>13</Sequence>
+    <Sequence>14</Sequence>
     <DeleteFlag>false</DeleteFlag>
   </Mst_LabTest>
   <Mst_LabTest>
@@ -185,7 +193,7 @@
     <LabName>CSF Culture</LabName>
     <LabDepartmentId>6</LabDepartmentId>
     <LabTypeId>0</LabTypeId>
-    <Sequence>14</Sequence>
+    <Sequence>15</Sequence>
     <DeleteFlag>false</DeleteFlag>
   </Mst_LabTest>
   <Mst_LabTest>
@@ -193,7 +201,7 @@
     <LabName>CSF Gram Stain</LabName>
     <LabDepartmentId>6</LabDepartmentId>
     <LabTypeId>0</LabTypeId>
-    <Sequence>15</Sequence>
+    <Sequence>16</Sequence>
     <DeleteFlag>false</DeleteFlag>
   </Mst_LabTest>
   <Mst_LabTest>
@@ -201,7 +209,7 @@
     <LabName>CSF India Ink</LabName>
     <LabDepartmentId>6</LabDepartmentId>
     <LabTypeId>0</LabTypeId>
-    <Sequence>16</Sequence>
+    <Sequence>17</Sequence>
     <DeleteFlag>false</DeleteFlag>
   </Mst_LabTest>
   <Mst_LabTest>
@@ -209,7 +217,7 @@
     <LabName>Cytomegalovirus (CMV)</LabName>
     <LabDepartmentId>4</LabDepartmentId>
     <LabTypeId>0</LabTypeId>
-    <Sequence>17</Sequence>
+    <Sequence>18</Sequence>
     <DeleteFlag>false</DeleteFlag>
   </Mst_LabTest>
   <Mst_LabTest>
@@ -217,7 +225,7 @@
     <LabName>Epstein Barr Virus (EBV)</LabName>
     <LabDepartmentId>4</LabDepartmentId>
     <LabTypeId>0</LabTypeId>
-    <Sequence>18</Sequence>
+    <Sequence>19</Sequence>
     <DeleteFlag>false</DeleteFlag>
   </Mst_LabTest>
   <Mst_LabTest>
@@ -225,15 +233,15 @@
     <LabName>ESR</LabName>
     <LabDepartmentId>7</LabDepartmentId>
     <LabTypeId>0</LabTypeId>
-    <Sequence>19</Sequence>
+    <Sequence>20</Sequence>
     <DeleteFlag>false</DeleteFlag>
   </Mst_LabTest>
   <Mst_LabTest>
-    <LabTestId>95</LabTestId>
-    <LabName>GENEXPERT</LabName>
+    <LabTestId>99</LabTestId>
+    <LabName>GeneXpert</LabName>
     <LabDepartmentId>6</LabDepartmentId>
     <LabTypeId>0</LabTypeId>
-    <Sequence>20</Sequence>
+    <Sequence>21</Sequence>
     <DeleteFlag>false</DeleteFlag>
   </Mst_LabTest>
   <Mst_LabTest>
@@ -241,7 +249,7 @@
     <LabName>Glucose</LabName>
     <LabDepartmentId>2</LabDepartmentId>
     <LabTypeId>0</LabTypeId>
-    <Sequence>21</Sequence>
+    <Sequence>22</Sequence>
     <DeleteFlag>false</DeleteFlag>
   </Mst_LabTest>
   <Mst_LabTest>
@@ -249,31 +257,7 @@
     <LabName>Gonorrhea</LabName>
     <LabDepartmentId>6</LabDepartmentId>
     <LabTypeId>0</LabTypeId>
-    <Sequence>22</Sequence>
-    <DeleteFlag>false</DeleteFlag>
-  </Mst_LabTest>
-  <Mst_LabTest>
-    <LabTestId>96</LabTestId>
-    <LabName>Haemoglobin estimation</LabName>
-    <LabDepartmentId>7</LabDepartmentId>
-    <LabTypeId>0</LabTypeId>
     <Sequence>23</Sequence>
-    <DeleteFlag>true</DeleteFlag>
-  </Mst_LabTest>
-  <Mst_LabTest>
-    <LabTestId>97</LabTestId>
-    <LabName>Haemoglobin estimation g/dl</LabName>
-    <LabDepartmentId>7</LabDepartmentId>
-    <LabTypeId>0</LabTypeId>
-    <Sequence>24</Sequence>
-    <DeleteFlag>true</DeleteFlag>
-  </Mst_LabTest>
-  <Mst_LabTest>
-    <LabTestId>98</LabTestId>
-    <LabName>HB haemoglobin</LabName>
-    <LabDepartmentId>7</LabDepartmentId>
-    <LabTypeId>0</LabTypeId>
-    <Sequence>25</Sequence>
     <DeleteFlag>false</DeleteFlag>
   </Mst_LabTest>
   <Mst_LabTest>
@@ -281,7 +265,7 @@
     <LabName>HCT/Hb</LabName>
     <LabDepartmentId>7</LabDepartmentId>
     <LabTypeId>0</LabTypeId>
-    <Sequence>26</Sequence>
+    <Sequence>24</Sequence>
     <DeleteFlag>false</DeleteFlag>
   </Mst_LabTest>
   <Mst_LabTest>
@@ -289,7 +273,7 @@
     <LabName>HCT/Hb percent</LabName>
     <LabDepartmentId>7</LabDepartmentId>
     <LabTypeId>0</LabTypeId>
-    <Sequence>27</Sequence>
+    <Sequence>25</Sequence>
     <DeleteFlag>false</DeleteFlag>
   </Mst_LabTest>
   <Mst_LabTest>
@@ -297,7 +281,7 @@
     <LabName>HDL (mg/dL)</LabName>
     <LabDepartmentId>2</LabDepartmentId>
     <LabTypeId>0</LabTypeId>
-    <Sequence>28</Sequence>
+    <Sequence>26</Sequence>
     <DeleteFlag>false</DeleteFlag>
   </Mst_LabTest>
   <Mst_LabTest>
@@ -305,7 +289,7 @@
     <LabName>Hepatitis A Ab-IgM</LabName>
     <LabDepartmentId>4</LabDepartmentId>
     <LabTypeId>0</LabTypeId>
-    <Sequence>29</Sequence>
+    <Sequence>27</Sequence>
     <DeleteFlag>false</DeleteFlag>
   </Mst_LabTest>
   <Mst_LabTest>
@@ -313,7 +297,7 @@
     <LabName>Hepatitis A Ab-Total</LabName>
     <LabDepartmentId>4</LabDepartmentId>
     <LabTypeId>0</LabTypeId>
-    <Sequence>30</Sequence>
+    <Sequence>28</Sequence>
     <DeleteFlag>false</DeleteFlag>
   </Mst_LabTest>
   <Mst_LabTest>
@@ -321,7 +305,7 @@
     <LabName>Hepatitis B core - antibody IgM (HBsAb)</LabName>
     <LabDepartmentId>4</LabDepartmentId>
     <LabTypeId>0</LabTypeId>
-    <Sequence>31</Sequence>
+    <Sequence>29</Sequence>
     <DeleteFlag>false</DeleteFlag>
   </Mst_LabTest>
   <Mst_LabTest>
@@ -329,7 +313,7 @@
     <LabName>Hepatitis B core – antibody, total</LabName>
     <LabDepartmentId>4</LabDepartmentId>
     <LabTypeId>0</LabTypeId>
-    <Sequence>32</Sequence>
+    <Sequence>30</Sequence>
     <DeleteFlag>false</DeleteFlag>
   </Mst_LabTest>
   <Mst_LabTest>
@@ -337,7 +321,7 @@
     <LabName>Hepatitis B surface – antibody (HBsAb)</LabName>
     <LabDepartmentId>4</LabDepartmentId>
     <LabTypeId>0</LabTypeId>
-    <Sequence>33</Sequence>
+    <Sequence>31</Sequence>
     <DeleteFlag>false</DeleteFlag>
   </Mst_LabTest>
   <Mst_LabTest>
@@ -345,7 +329,7 @@
     <LabName>Hepatitis B surface – antigen (HBsAg)</LabName>
     <LabDepartmentId>4</LabDepartmentId>
     <LabTypeId>0</LabTypeId>
-    <Sequence>34</Sequence>
+    <Sequence>32</Sequence>
     <DeleteFlag>false</DeleteFlag>
   </Mst_LabTest>
   <Mst_LabTest>
@@ -353,7 +337,7 @@
     <LabName>Hepatitis C antibody</LabName>
     <LabDepartmentId>4</LabDepartmentId>
     <LabTypeId>0</LabTypeId>
-    <Sequence>35</Sequence>
+    <Sequence>33</Sequence>
     <DeleteFlag>false</DeleteFlag>
   </Mst_LabTest>
   <Mst_LabTest>
@@ -361,7 +345,7 @@
     <LabName>HIV Confirm</LabName>
     <LabDepartmentId>4</LabDepartmentId>
     <LabTypeId>0</LabTypeId>
-    <Sequence>36</Sequence>
+    <Sequence>34</Sequence>
     <DeleteFlag>true</DeleteFlag>
   </Mst_LabTest>
   <Mst_LabTest>
@@ -369,7 +353,7 @@
     <LabName>HIV Rapid Test</LabName>
     <LabDepartmentId>4</LabDepartmentId>
     <LabTypeId>0</LabTypeId>
-    <Sequence>37</Sequence>
+    <Sequence>35</Sequence>
     <DeleteFlag>false</DeleteFlag>
   </Mst_LabTest>
   <Mst_LabTest>
@@ -377,12 +361,28 @@
     <LabName>LDL (Mg/dL)</LabName>
     <LabDepartmentId>4</LabDepartmentId>
     <LabTypeId>0</LabTypeId>
-    <Sequence>38</Sequence>
+    <Sequence>36</Sequence>
+    <DeleteFlag>false</DeleteFlag>
+  </Mst_LabTest>
+  <Mst_LabTest>
+    <LabTestId>96</LabTestId>
+    <LabName>Malaria (Bs for MPS)</LabName>
+    <LabDepartmentId>6</LabDepartmentId>
+    <LabTypeId>0</LabTypeId>
+    <Sequence>37</Sequence>
     <DeleteFlag>false</DeleteFlag>
   </Mst_LabTest>
   <Mst_LabTest>
     <LabTestId>15</LabTestId>
     <LabName>Malaria parasite</LabName>
+    <LabDepartmentId>6</LabDepartmentId>
+    <LabTypeId>0</LabTypeId>
+    <Sequence>38</Sequence>
+    <DeleteFlag>false</DeleteFlag>
+  </Mst_LabTest>
+  <Mst_LabTest>
+    <LabTestId>95</LabTestId>
+    <LabName>Malaria Random Diagnostic Test</LabName>
     <LabDepartmentId>6</LabDepartmentId>
     <LabTypeId>0</LabTypeId>
     <Sequence>39</Sequence>
@@ -477,11 +477,19 @@
     <DeleteFlag>false</DeleteFlag>
   </Mst_LabTest>
   <Mst_LabTest>
+    <LabTestId>98</LabTestId>
+    <LabName>Sputum For AFB</LabName>
+    <LabDepartmentId>6</LabDepartmentId>
+    <LabTypeId>0</LabTypeId>
+    <Sequence>51</Sequence>
+    <DeleteFlag>false</DeleteFlag>
+  </Mst_LabTest>
+  <Mst_LabTest>
     <LabTestId>20</LabTestId>
     <LabName>Sputum Gram Stain</LabName>
     <LabDepartmentId>6</LabDepartmentId>
     <LabTypeId>0</LabTypeId>
-    <Sequence>51</Sequence>
+    <Sequence>52</Sequence>
     <DeleteFlag>false</DeleteFlag>
   </Mst_LabTest>
   <Mst_LabTest>
@@ -489,7 +497,7 @@
     <LabName>Stool O/P</LabName>
     <LabDepartmentId>6</LabDepartmentId>
     <LabTypeId>0</LabTypeId>
-    <Sequence>52</Sequence>
+    <Sequence>53</Sequence>
     <DeleteFlag>false</DeleteFlag>
   </Mst_LabTest>
   <Mst_LabTest>
@@ -497,7 +505,7 @@
     <LabName>Store Plasma</LabName>
     <LabDepartmentId>2</LabDepartmentId>
     <LabTypeId>0</LabTypeId>
-    <Sequence>53</Sequence>
+    <Sequence>54</Sequence>
     <DeleteFlag>false</DeleteFlag>
   </Mst_LabTest>
   <Mst_LabTest>
@@ -505,7 +513,7 @@
     <LabName>Syphilis (FTA)</LabName>
     <LabDepartmentId>4</LabDepartmentId>
     <LabTypeId>0</LabTypeId>
-    <Sequence>54</Sequence>
+    <Sequence>55</Sequence>
     <DeleteFlag>false</DeleteFlag>
   </Mst_LabTest>
   <Mst_LabTest>
@@ -513,7 +521,7 @@
     <LabName>Syphilis (RPR)</LabName>
     <LabDepartmentId>4</LabDepartmentId>
     <LabTypeId>0</LabTypeId>
-    <Sequence>55</Sequence>
+    <Sequence>56</Sequence>
     <DeleteFlag>false</DeleteFlag>
   </Mst_LabTest>
   <Mst_LabTest>
@@ -521,7 +529,7 @@
     <LabName>Total Cholesterol (mg/dL)</LabName>
     <LabDepartmentId>4</LabDepartmentId>
     <LabTypeId>0</LabTypeId>
-    <Sequence>56</Sequence>
+    <Sequence>57</Sequence>
     <DeleteFlag>false</DeleteFlag>
   </Mst_LabTest>
   <Mst_LabTest>
@@ -529,7 +537,7 @@
     <LabName>Toxoplasma IgG Antibody</LabName>
     <LabDepartmentId>4</LabDepartmentId>
     <LabTypeId>0</LabTypeId>
-    <Sequence>57</Sequence>
+    <Sequence>58</Sequence>
     <DeleteFlag>false</DeleteFlag>
   </Mst_LabTest>
   <Mst_LabTest>
@@ -537,7 +545,7 @@
     <LabName>Triglycerides (mg/dL)</LabName>
     <LabDepartmentId>4</LabDepartmentId>
     <LabTypeId>0</LabTypeId>
-    <Sequence>58</Sequence>
+    <Sequence>59</Sequence>
     <DeleteFlag>false</DeleteFlag>
   </Mst_LabTest>
   <Mst_LabTest>
@@ -545,7 +553,7 @@
     <LabName>Urinalysis</LabName>
     <LabDepartmentId>2</LabDepartmentId>
     <LabTypeId>0</LabTypeId>
-    <Sequence>59</Sequence>
+    <Sequence>60</Sequence>
     <DeleteFlag>false</DeleteFlag>
   </Mst_LabTest>
   <Mst_LabTest>
@@ -553,7 +561,7 @@
     <LabName>Urine Culture/Sensitivity</LabName>
     <LabDepartmentId>1</LabDepartmentId>
     <LabTypeId>0</LabTypeId>
-    <Sequence>60</Sequence>
+    <Sequence>61</Sequence>
     <DeleteFlag>false</DeleteFlag>
   </Mst_LabTest>
   <Mst_LabTest>
@@ -561,7 +569,7 @@
     <LabName>Vaginal Inspection with Acetic Acid (VIA)</LabName>
     <LabDepartmentId>4</LabDepartmentId>
     <LabTypeId>0</LabTypeId>
-    <Sequence>61</Sequence>
+    <Sequence>62</Sequence>
     <DeleteFlag>false</DeleteFlag>
   </Mst_LabTest>
   <Mst_LabTest>
@@ -569,7 +577,7 @@
     <LabName>Varicella (Chicken Pox)</LabName>
     <LabDepartmentId>4</LabDepartmentId>
     <LabTypeId>0</LabTypeId>
-    <Sequence>62</Sequence>
+    <Sequence>63</Sequence>
     <DeleteFlag>false</DeleteFlag>
   </Mst_LabTest>
   <Mst_LabTest>
@@ -577,7 +585,7 @@
     <LabName>Viral Load</LabName>
     <LabDepartmentId>4</LabDepartmentId>
     <LabTypeId>0</LabTypeId>
-    <Sequence>63</Sequence>
+    <Sequence>64</Sequence>
     <DeleteFlag>false</DeleteFlag>
   </Mst_LabTest>
   <Mst_LabTest>
@@ -585,7 +593,7 @@
     <LabName>WBC</LabName>
     <LabDepartmentId>7</LabDepartmentId>
     <LabTypeId>0</LabTypeId>
-    <Sequence>64</Sequence>
+    <Sequence>65</Sequence>
     <DeleteFlag>false</DeleteFlag>
   </Mst_LabTest>
   <Mst_LabTest>
@@ -593,7 +601,7 @@
     <LabName>WBC</LabName>
     <LabDepartmentId>2</LabDepartmentId>
     <LabTypeId>0</LabTypeId>
-    <Sequence>65</Sequence>
+    <Sequence>66</Sequence>
     <DeleteFlag>false</DeleteFlag>
   </Mst_LabTest>
   <Mst_LabTest>
@@ -601,20 +609,20 @@
     <LabName>WBC Diff</LabName>
     <LabDepartmentId>7</LabDepartmentId>
     <LabTypeId>0</LabTypeId>
-    <Sequence>66</Sequence>
+    <Sequence>67</Sequence>
     <DeleteFlag>false</DeleteFlag>
   </Mst_LabTest>
   <Lnk_TestParameter>
     <SubTestId>1</SubTestId>
-    <SubTestName>CD4</SubTestName>
+    <SubTestName>CD4 Count</SubTestName>
     <TestId>1</TestId>
     <DeleteFlag>false</DeleteFlag>
   </Lnk_TestParameter>
   <Lnk_TestParameter>
     <SubTestId>2</SubTestId>
     <SubTestName>CD4 Percent</SubTestName>
-    <TestId>1</TestId>
-    <DeleteFlag>true</DeleteFlag>
+    <TestId>2</TestId>
+    <DeleteFlag>false</DeleteFlag>
   </Lnk_TestParameter>
   <Lnk_TestParameter>
     <SubTestId>3</SubTestId>
@@ -1146,14 +1154,44 @@
   </Lnk_TestParameter>
   <Lnk_TestParameter>
     <SubTestId>115</SubTestId>
-    <SubTestName>GENEXPERT</SubTestName>
+    <SubTestName>RDT</SubTestName>
     <TestId>95</TestId>
     <DeleteFlag>false</DeleteFlag>
   </Lnk_TestParameter>
   <Lnk_TestParameter>
     <SubTestId>116</SubTestId>
-    <SubTestName>HB Haemoglobin</SubTestName>
+    <SubTestName>MPS</SubTestName>
+    <TestId>96</TestId>
+    <DeleteFlag>false</DeleteFlag>
+  </Lnk_TestParameter>
+  <Lnk_TestParameter>
+    <SubTestId>117</SubTestId>
+    <SubTestName>Species Report</SubTestName>
+    <TestId>96</TestId>
+    <DeleteFlag>false</DeleteFlag>
+  </Lnk_TestParameter>
+  <Lnk_TestParameter>
+    <SubTestId>118</SubTestId>
+    <SubTestName>Cryptococcus Antigen Test</SubTestName>
+    <TestId>96</TestId>
+    <DeleteFlag>false</DeleteFlag>
+  </Lnk_TestParameter>
+  <Lnk_TestParameter>
+    <SubTestId>119</SubTestId>
+    <SubTestName>Sputum For AFB</SubTestName>
     <TestId>98</TestId>
+    <DeleteFlag>false</DeleteFlag>
+  </Lnk_TestParameter>
+  <Lnk_TestParameter>
+    <SubTestId>120</SubTestId>
+    <SubTestName>Quantify Bacillary Load</SubTestName>
+    <TestId>98</TestId>
+    <DeleteFlag>false</DeleteFlag>
+  </Lnk_TestParameter>
+  <Lnk_TestParameter>
+    <SubTestId>121</SubTestId>
+    <SubTestName>GeneXpert</SubTestName>
+    <TestId>99</TestId>
     <DeleteFlag>false</DeleteFlag>
   </Lnk_TestParameter>
   <Lnk_LabValue>
@@ -1732,15 +1770,16 @@
     <UnitId>134</UnitId>
     <DeleteFlag>false</DeleteFlag>
   </Lnk_LabValue>
-  <Lnk_LabValue>
-    <SubTestId>116</SubTestId>
-    <MinNormalRange>12.00</MinNormalRange>
-    <MaxNormalRange>18.00</MaxNormalRange>
-    <TextNormalRange />
-    <DefaultUnit>true</DefaultUnit>
-    <UnitId>0</UnitId>
-    <DeleteFlag>false</DeleteFlag>
-  </Lnk_LabValue>
+  <Lnk_ParameterResult>
+    <ResultId>37</ResultId>
+    <ParameterId>14</ParameterId>
+    <Result>Negative</Result>
+  </Lnk_ParameterResult>
+  <Lnk_ParameterResult>
+    <ResultId>36</ResultId>
+    <ParameterId>14</ParameterId>
+    <Result>Positive</Result>
+  </Lnk_ParameterResult>
   <Lnk_ParameterResult>
     <ResultId>3</ResultId>
     <ParameterId>53</ParameterId>
@@ -1857,35 +1896,75 @@
     <Result>WBC</Result>
   </Lnk_ParameterResult>
   <Lnk_ParameterResult>
+    <ResultId>25</ResultId>
+    <ParameterId>115</ParameterId>
+    <Result>Negative</Result>
+  </Lnk_ParameterResult>
+  <Lnk_ParameterResult>
     <ResultId>24</ResultId>
     <ParameterId>115</ParameterId>
-    <Result>MTB Negative (MTB -ve)</Result>
+    <Result>Positive</Result>
   </Lnk_ParameterResult>
   <Lnk_ParameterResult>
     <ResultId>27</ResultId>
-    <ParameterId>115</ParameterId>
-    <Result>MTB Positive Rifampicin resistant (MTB+RR)</Result>
+    <ParameterId>116</ParameterId>
+    <Result>Negative</Result>
   </Lnk_ParameterResult>
   <Lnk_ParameterResult>
     <ResultId>26</ResultId>
-    <ParameterId>115</ParameterId>
-    <Result>MTB Positive Rifampicin sensitive (MTB+RS)</Result>
+    <ParameterId>116</ParameterId>
+    <Result>Positive</Result>
   </Lnk_ParameterResult>
   <Lnk_ParameterResult>
-    <ResultId>25</ResultId>
-    <ParameterId>115</ParameterId>
-    <Result>Not done (ND)</Result>
+    <ResultId>28</ResultId>
+    <ParameterId>118</ParameterId>
+    <Result>Negative</Result>
+  </Lnk_ParameterResult>
+  <Lnk_ParameterResult>
+    <ResultId>29</ResultId>
+    <ParameterId>118</ParameterId>
+    <Result>Positive</Result>
+  </Lnk_ParameterResult>
+  <Lnk_ParameterResult>
+    <ResultId>31</ResultId>
+    <ParameterId>119</ParameterId>
+    <Result>Negative</Result>
+  </Lnk_ParameterResult>
+  <Lnk_ParameterResult>
+    <ResultId>30</ResultId>
+    <ParameterId>119</ParameterId>
+    <Result>Positive</Result>
+  </Lnk_ParameterResult>
+  <Lnk_ParameterResult>
+    <ResultId>32</ResultId>
+    <ParameterId>121</ParameterId>
+    <Result>MTB+RR</Result>
+  </Lnk_ParameterResult>
+  <Lnk_ParameterResult>
+    <ResultId>33</ResultId>
+    <ParameterId>121</ParameterId>
+    <Result>MTB+RS</Result>
+  </Lnk_ParameterResult>
+  <Lnk_ParameterResult>
+    <ResultId>34</ResultId>
+    <ParameterId>121</ParameterId>
+    <Result>MTB-ve</Result>
+  </Lnk_ParameterResult>
+  <Lnk_ParameterResult>
+    <ResultId>35</ResultId>
+    <ParameterId>121</ParameterId>
+    <Result>ND</Result>
   </Lnk_ParameterResult>
   <LabTestOrder>
     <SubTestId>1</SubTestId>
-    <SubTestName>CD4</SubTestName>
+    <SubTestName>CD4 Count</SubTestName>
     <TestId>1</TestId>
     <DeleteFlag>false</DeleteFlag>
   </LabTestOrder>
   <LabTestOrder>
     <SubTestId>2</SubTestId>
     <SubTestName>CD4 Percent</SubTestName>
-    <TestId>1</TestId>
+    <TestId>2</TestId>
     <DeleteFlag>false</DeleteFlag>
   </LabTestOrder>
   <LabTestOrder>
@@ -2400,14 +2479,44 @@
   </LabTestOrder>
   <LabTestOrder>
     <SubTestId>115</SubTestId>
-    <SubTestName>GENEXPERT</SubTestName>
+    <SubTestName>RDT</SubTestName>
     <TestId>95</TestId>
     <DeleteFlag>false</DeleteFlag>
   </LabTestOrder>
   <LabTestOrder>
     <SubTestId>116</SubTestId>
-    <SubTestName>HB Haemoglobin</SubTestName>
+    <SubTestName>MPS</SubTestName>
+    <TestId>96</TestId>
+    <DeleteFlag>false</DeleteFlag>
+  </LabTestOrder>
+  <LabTestOrder>
+    <SubTestId>117</SubTestId>
+    <SubTestName>Species Report</SubTestName>
+    <TestId>96</TestId>
+    <DeleteFlag>false</DeleteFlag>
+  </LabTestOrder>
+  <LabTestOrder>
+    <SubTestId>118</SubTestId>
+    <SubTestName>Cryptococcus Antigen Test</SubTestName>
+    <TestId>96</TestId>
+    <DeleteFlag>false</DeleteFlag>
+  </LabTestOrder>
+  <LabTestOrder>
+    <SubTestId>119</SubTestId>
+    <SubTestName>Sputum For AFB</SubTestName>
     <TestId>98</TestId>
+    <DeleteFlag>false</DeleteFlag>
+  </LabTestOrder>
+  <LabTestOrder>
+    <SubTestId>120</SubTestId>
+    <SubTestName>Quantify Bacillary Load</SubTestName>
+    <TestId>98</TestId>
+    <DeleteFlag>false</DeleteFlag>
+  </LabTestOrder>
+  <LabTestOrder>
+    <SubTestId>121</SubTestId>
+    <SubTestName>GeneXpert</SubTestName>
+    <TestId>99</TestId>
     <DeleteFlag>false</DeleteFlag>
   </LabTestOrder>
   <Mst_PatientLabPeriod>

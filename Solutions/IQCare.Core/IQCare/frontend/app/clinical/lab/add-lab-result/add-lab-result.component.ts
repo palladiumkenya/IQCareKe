@@ -90,8 +90,7 @@ export class AddLabResultComponent implements OnInit {
             console.log(err, 'Submit Lab');
         }, () => {
             location.reload();
-
-        })
+        });
 
     }
     save() {

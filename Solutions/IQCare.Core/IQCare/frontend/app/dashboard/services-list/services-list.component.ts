@@ -42,7 +42,7 @@ export class ServicesListComponent implements OnInit {
     }
 
     ngOnInit() {
-        console.log(this.person);
+        // console.log(this.person);
         this.getPersonEnrolledServices(this.personId);
     }
 
@@ -64,11 +64,6 @@ export class ServicesListComponent implements OnInit {
             return;
         }
 
-        if (serviceId == 1) {
-            this.snotifyService.error('Please Access CCC from the Greencard menu', 'Encounter History',
-                this.notificationService.getConfig());
-            return;
-        }
         const selectedService = this.services.filter(obj => obj.id == serviceId);
         if (selectedService && selectedService.length > 0) {
             const service = selectedService[0]['code'];
@@ -76,6 +71,12 @@ export class ServicesListComponent implements OnInit {
                 case 'HTS':
                     this.zone.run(() => {
                         this.router.navigate(['/dashboard/enrollment/hts/' + this.personId + '/' + serviceId + '/' + serviceCode],
+                            { relativeTo: this.route });
+                    });
+                    break;
+                case 'CCC':
+                    this.zone.run(() => {
+                        this.router.navigate(['/dashboard/enrollment/ccc/' + this.personId + '/' + serviceId + '/' + serviceCode],
                             { relativeTo: this.route });
                     });
                     break;
@@ -87,6 +88,10 @@ export class ServicesListComponent implements OnInit {
                     break;
             }
         }
+    }
+
+    public editEnrollment() {
+        console.log(`edit`);
     }
 
     newTriage() {

@@ -206,38 +206,5 @@ export class HtsComponent implements OnInit {
                 );
             }
         );
-
-        /*this.registrationService.addPatient(this.personId, this.userId, EnrollmentDate, this.posId).subscribe(
-            (res) => {
-                this.patientId = res['patientId'];
-                enrollment.PatientId = this.patientId;
-                this.enrollmentService.enrollClient(enrollment).subscribe(
-                    (response) => {
-                        this.snotifyService.success('Successfully Enrolled ', 'Enrollment',
-                            this.notificationService.getConfig());
-
-                        localStorage.setItem('selectedService', this.serviceCode.toLowerCase());
-
-                        this.store.dispatch(new Consent.SelectedService(this.serviceCode.toLowerCase()));
-
-                        this.store.dispatch(new Consent.PatientId(this.patientId));
-                        this.appStateService.addAppState(AppEnum.PATIENTID, this.personId,
-                            this.patientId).subscribe();
-
-
-                        this.zone.run(() => {
-                            localStorage.setItem('personId', this.personId.toString());
-                            localStorage.setItem('patientId', this.patientId.toString());
-                            localStorage.setItem('serviceAreaId', this.serviceId.toString());
-                            this.router.navigate(['/registration/home/'], { relativeTo: this.route });
-                        });
-                    },
-                    (err) => {
-                        this.snotifyService.error('Error completing enrollment ' + err, 'Enrollment',
-                            this.notificationService.getConfig());
-                    }
-                );
-            }
-        );*/
     }
 }

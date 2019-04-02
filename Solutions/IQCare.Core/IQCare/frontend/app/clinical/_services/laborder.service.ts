@@ -22,6 +22,7 @@ const httpOptions = {
 })
 export class LaborderService {
     private LabOrder_ApiUrl = environment.API_LAB_URL;
+    resultDataType = new ResultDataType();
 
     private labResultFormGroupSubject = new BehaviorSubject<FormControlBase<any>[]>([]);
     labTestResultForm = this.labResultFormGroupSubject.asObservable();
@@ -53,14 +54,15 @@ export class LaborderService {
     }
 
     public completeLabOrder(completeLabOrderCommand: CompleteLabOrderCommand): Observable<any> {
-        return this.httpClient.post<CompleteLabOrderCommand>(this.LabOrder_ApiUrl + '/api/LabOrder/CompleteLabOrder', completeLabOrderCommand, httpOptions).pipe(
-            tap(lab => this.errorHandlerService.log('Complete lab order  request')),
-            catchError(this.errorHandlerService.handleError<any[]>('CompleteLabOrder'))
-        )
+        return this.httpClient.post<CompleteLabOrderCommand>(this.LabOrder_ApiUrl + '/api/LabOrder/CompleteLabOrder',
+            completeLabOrderCommand, httpOptions).pipe(
+                tap(lab => this.errorHandlerService.log('Complete lab order  request')),
+                catchError(this.errorHandlerService.handleError<any[]>('CompleteLabOrder'))
+            );
     }
 
     public getLabTestResults(patientId: number, status: string): Observable<any> {
-        var url = status == null ? this.LabOrder_ApiUrl + '/api/LabOrder/GetLabTestResults?patientId=' + patientId :
+        const url = status == null ? this.LabOrder_ApiUrl + '/api/LabOrder/GetLabTestResults?patientId=' + patientId :
             this.LabOrder_ApiUrl + '/api/LabOrder/GetLabTestResults?patientId=' + patientId + '&status=' + status;
 
         return this.httpClient.get<any>(url).pipe(
@@ -90,8 +92,6 @@ export class LaborderService {
                 catchError(this.errorHandlerService.handleError<any[]>('getLabOrderTestResults')))
     }
 
-    resultDataType = new ResultDataType();
-
     public getFormContolFromParam(parameter: any): FormControlBase<any> {
         switch (parameter.dataType) {
             case this.resultDataType.Text:
@@ -119,7 +119,7 @@ export class LaborderService {
                         required: true,
                         order: 2,
                         value: null,
-                        pattern: "^\\d*\\.?\\d+$"
+                        pattern: '^\\d*\\.?\\d+$'
                     });
             default:
                 break;

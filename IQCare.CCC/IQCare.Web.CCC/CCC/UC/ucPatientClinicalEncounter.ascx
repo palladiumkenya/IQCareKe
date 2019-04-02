@@ -3226,8 +3226,6 @@
             minDate: minDate
         });
 
-        $("#<%=AppointmentDate.ClientID%>").val(moment(NextAppointmentDate).format('DD-MMM-YYYY'));
-
 
 
         $("#AppointmentDate").change(function () {

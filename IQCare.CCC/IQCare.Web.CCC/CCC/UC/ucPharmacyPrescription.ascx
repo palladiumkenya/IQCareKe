@@ -1007,9 +1007,9 @@
             <%--$("#<%=ddlRegimen.ClientID%>").val("");--%>
         }
 
-        DrugPrescriptionTable
+        /*DrugPrescriptionTable
                     .clear()
-                    .draw();
+                    .draw();*/
 
         drugNameArr = [];
     }
