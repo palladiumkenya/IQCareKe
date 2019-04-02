@@ -29,8 +29,7 @@ import { PatientRelationshipsComponent } from './patient-relationships/patient-r
 import { PatientAllergiesComponent } from './patient-allergies/patient-allergies.component';
 import { PatientAppointmentComponent } from './patient-appointment/patient-appointment.component';
 import { SearchService } from '../registration/_services/search.service';
-import { ReportsComponent } from './reports/reports.component';
-import { AirModule } from '../air/air.module';
+import { HtsComponent } from './enrollment/service-areas/hts/hts.component';
 
 @NgModule({
     imports: [
@@ -43,7 +42,6 @@ import { AirModule } from '../air/air.module';
         MatFormFieldModule,
         MatInputModule,
         SharedModule,
-        AirModule,
 
         MatTableModule,
         MatPaginatorModule,
@@ -66,7 +64,7 @@ import { AirModule } from '../air/air.module';
         PatientRelationshipsComponent,
         PatientAllergiesComponent,
         PatientAppointmentComponent,
-        ReportsComponent
+        HtsComponent
     ],
     providers: [
         NotificationService,
