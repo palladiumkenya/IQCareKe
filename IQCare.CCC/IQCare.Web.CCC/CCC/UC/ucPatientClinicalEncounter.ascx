@@ -569,6 +569,26 @@
 	                                    <div class="col-md-12">
 		                                    <div class="panel panel-info">
 			                                    <div class="panel-body">
+                                                <div class="row">
+                                                <div class="col-md-12">
+                                                <div id="IPTHistoryTable" class="panel panel-primary">
+												<div class="panel-heading">IPT History</div>
+												<div style="min-height: 10px; max-height: 550px; overflow-y: auto; overflow-x: hidden;">
+													<table id="dtlIPTHistory" class="table table-bordered table-striped" style="width: 100%">
+														<thead>
+															<tr>
+                                                                <th><span class="text-primary">IPTStartDate</span></th>
+																<th><span class="text-primary">IPTOutCome</span></th>
+																<th><span class="text-primary">IPTOutcomeDate</span></th>
+																
+															</tr>
+														</thead>
+														<tbody></tbody>
+													</table>
+												</div>
+                                                </div>
+                                                </div>
+                                                </div>
                                                     <div class="row" id="IPTSection">
                                                         <div class="col-md-12 form-group">
                                                             <label class="control-label pull-left input-sm text-primary">IPT</label>
@@ -2759,6 +2779,7 @@
         //  $("#EverBeenOnIpt").prop("disabled", true);
         //showHideFPControls();
         loadPresentingComplaints();
+        LoadIPTHistory();
         loadAdverseEvents();
         loadAllergies();
         loadAllergyReactions();
@@ -5944,6 +5965,7 @@
 			}
 		});
     }
+    
     function addSexualHistory() {
         var arrHRB = [];
 
@@ -6183,7 +6205,29 @@
             toastr.success("Nutrition Assessment Saved");
         }
     }
-    
+    function LoadIPTHistory()
+    {
+   varIPTHistoryTable = $('#dtlIPTHistory').DataTable({
+            ajax: {
+                type: "POST",
+                url: "../WebService/PatientTbService.asmx/GetPatientIPTHistory",
+                dataSrc: 'd',
+                contentType: "application/json; charset=utf-8",
+                dataType: "json"
+            },
+            paging: false,
+            searching: false,
+            info: false,
+            ordering: false,
+            columnDefs: [
+                {
+                    "targets": [0],
+                    "visible": true,
+                    "searchable": false
+                }
+            ]
+        });
+    }
 
     function GetGBVScreeningStatus() {
         var patientId ="<%=PatientId%>";
