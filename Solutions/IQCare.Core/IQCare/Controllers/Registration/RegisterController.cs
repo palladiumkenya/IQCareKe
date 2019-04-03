@@ -50,6 +50,24 @@ namespace IQCare.Controllers.Registration
             return BadRequest(response);
         }
 
+        [HttpPost("postServiceEntryPoint")]
+        public async Task<IActionResult> PostServiceEntryPoint([FromBody]AddServiceEntryPointCommand serviceEntryPointCommand)
+        {
+            var response = await _mediator.Send(serviceEntryPointCommand, Request.HttpContext.RequestAborted);
+            if (response.IsValid)
+                return Ok(response.Value);
+            return BadRequest(response);
+        }
+
+        [HttpPost("postConfirmatoryTests")]
+        public async Task<IActionResult> PostConfirmatoryTests([FromBody]AddHivReConfirmatoryTestsCommand addHivReConfirmatoryTestsCommand)
+        {
+            var response = await _mediator.Send(addHivReConfirmatoryTestsCommand, Request.HttpContext.RequestAborted);
+            if (response.IsValid)
+                return Ok(response.Value);
+            return BadRequest(response);
+        }
+
         [HttpGet("GetPatientById/{patientId}")]
         public async Task<IActionResult> GetPatientById(int patientId)
         {

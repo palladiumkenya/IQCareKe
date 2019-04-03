@@ -1,3 +1,4 @@
+import { CccComponent } from './enrollment/service-areas/ccc/ccc.component';
 import { EnrollmentServicesComponent } from './enrollment/enrollment-services/enrollment-services.component';
 import { ServicesResolver } from './services/services.resolver';
 import { PersonHomeComponent } from './person-home/person-home.component';
@@ -29,6 +30,10 @@ const routes: Routes = [
             {
                 path: 'hts/:id/:serviceId/:serviceCode',
                 component: HtsComponent
+            },
+            {
+                path: 'ccc/:id/:serviceId/:serviceCode',
+                component: CccComponent
             }
         ]
     }

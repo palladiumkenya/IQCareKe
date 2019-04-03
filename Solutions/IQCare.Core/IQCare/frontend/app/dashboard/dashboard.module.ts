@@ -30,6 +30,7 @@ import { PatientAllergiesComponent } from './patient-allergies/patient-allergies
 import { PatientAppointmentComponent } from './patient-appointment/patient-appointment.component';
 import { SearchService } from '../registration/_services/search.service';
 import { HtsComponent } from './enrollment/service-areas/hts/hts.component';
+import { CccComponent } from './enrollment/service-areas/ccc/ccc.component';
 
 @NgModule({
     imports: [
@@ -64,7 +65,8 @@ import { HtsComponent } from './enrollment/service-areas/hts/hts.component';
         PatientRelationshipsComponent,
         PatientAllergiesComponent,
         PatientAppointmentComponent,
-        HtsComponent
+        HtsComponent,
+        CccComponent
     ],
     providers: [
         NotificationService,
