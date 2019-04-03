@@ -825,7 +825,7 @@
 
 
                 if (patientweight != "") {
-                    if (parseInt(patientweight) < 35 && parseInt(age) > 15) {
+                    if (parseInt(patientweight) < 35 && parseInt(age) < 15) {
                         toastr.error("This regimen is recommended for paeds who are  15 years old  or weight of 35 kg and above");
                         $("#<%=ddlRegimen.ClientID%>").val("");
                         return false;
