@@ -39,7 +39,7 @@ namespace IQCareRecords.Common.BusinessProcess.CommandHandlers
                     {
                         person = await registerPersonService.RegisterPerson(request.Person.FirstName, request.Person.MiddleName,
                             request.Person.LastName, request.Person.Sex, request.Person.CreatedBy, clientFacility.FacilityID, request.Person.DateOfBirth,
-                            request.Person.RegistrationDate,request.Person.NickName);
+                            request.Person.RegistrationDate,request.Person.NickName, request.Person.DobPrecision);
                     }
                     else
                     {
@@ -55,7 +55,7 @@ namespace IQCareRecords.Common.BusinessProcess.CommandHandlers
             catch (Exception e)
             {
                 Log.Error(e.Message + " " + e.InnerException);
-                return Result<PersonRegistrationResponse>.Invalid(e.Message);
+                return Result<PersonRegistrationResponse>.Invalid(e.Message + " " + e.InnerException);
             }
         }
     }

@@ -271,8 +271,8 @@ namespace IQCare.Web.UILogic
             Facility.Modules.Where(m => m.PublishFlag == true).OrderBy(n => n.Name).ToList().ForEach(
             s =>
             {
-                if (this.HasModuleRight(s.Id, s.Clinical))
-                {
+                //if (this.HasModuleRight(s.Id, s.Clinical))
+                //{
 
                     result.Add(new HomePageLandScape()
                     {
@@ -281,7 +281,7 @@ namespace IQCare.Web.UILogic
                         ClickAction = !s.ModuleFlag ? RedirectAction.FindAddPatient : RedirectAction.ModuleAction,
                         ServiceAreaName = s.Name
                     });
-                }
+                //}
             });
 
 

@@ -19,6 +19,7 @@ import { AppEnum } from '../../../../shared/reducers/app.enum';
 import { AppStateService } from '../../../../shared/_services/appstate.service';
 import { Enrollment } from '../../../../registration/_models/enrollment';
 import { SearchService } from '../../../../registration/_services/search.service';
+import { RecordsService } from '../../../../records/_services/records.service';
 
 @Component({
     selector: 'app-ccc',
@@ -59,7 +60,9 @@ export class CccComponent implements OnInit {
         private enrollmentService: EnrollmentService,
         private store: Store<AppState>,
         private appStateService: AppStateService,
-        private searchService: SearchService) {
+        private searchService: SearchService,
+        private recordsService: RecordsService) {
+        this.maxDate = new Date();
     }
 
     ngOnInit() {
@@ -157,6 +160,19 @@ export class CccComponent implements OnInit {
                     });
                 });
                 // console.log(serviceAreaIdentifiers);
+            }
+        );
+
+        this.recordsService.getPersonDetails(this.personId).subscribe(
+            (res) => {
+                // console.log(res);
+                const { dateOfBirth } = res[0];
+                if (dateOfBirth) {
+                    this.minDate = dateOfBirth;
+                } /*else {
+                    this.minDate = new Date();
+                }*/
+
             }
         );
     }
