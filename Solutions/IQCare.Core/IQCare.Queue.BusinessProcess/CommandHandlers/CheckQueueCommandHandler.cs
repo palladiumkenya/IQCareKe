@@ -14,26 +14,27 @@ using Microsoft.EntityFrameworkCore;
 
 namespace IQCare.Queue.BusinessProcess.CommandHandlers
 {
-    public class CheckRoomExistCommandHandler : IRequestHandler<CheckRoomExistCommand, Result<RoomExistResponse>>
+    public class CheckQueueCommandHandler : IRequestHandler<CheckQueueExistCommand, Result<CheckQueueResponse>>
     {
         private readonly IQueueUnitOfWork _queueUnitOfWork;
-        private readonly ILogger _logger = Log.ForContext<RoomExistResponse>();
+
+        private readonly ILogger _logger = Log.ForContext<AddQueueCommandHandler>();
         public string message;
         public Boolean exist;
 
-        public CheckRoomExistCommandHandler(IQueueUnitOfWork queueUnitOfWork)
+        public CheckQueueCommandHandler(IQueueUnitOfWork queueUnitOfWork)
         {
             _queueUnitOfWork = queueUnitOfWork ?? throw new ArgumentNullException(nameof(queueUnitOfWork));
         }
-        public async Task<Result<RoomExistResponse>> Handle(CheckRoomExistCommand request, CancellationToken cancellationToken)
+        public async Task<Result<CheckQueueResponse>> Handle(CheckQueueExistCommand request, CancellationToken cancellationToken)
         {
             using (_queueUnitOfWork)
             {
                 try
                 {
-                    var RoomExists = await _queueUnitOfWork.Repository<Rooms>().Get(x => x.RoomName.Trim().ToLower() == request.RoomName.Trim().ToLower()).ToListAsync();
+                    var QueueExists = await _queueUnitOfWork.Repository<QueueWaitingList>().Get(x => x.PatientId==request.PatientId  && x.DeleteFlag==false && x.Status==false).ToListAsync();
 
-                    if (RoomExists.Count > 0)
+                    if (QueueExists.Count > 0)
                     {
                         message += "The room  already exists ";
                         exist = true;
@@ -44,22 +45,22 @@ namespace IQCare.Queue.BusinessProcess.CommandHandlers
                         exist = false;
                     }
 
-                    return Result<RoomExistResponse>.Valid(new RoomExistResponse()
+                    return Result<CheckQueueResponse>.Valid(new CheckQueueResponse()
                     {
                         Message = message,
-                        Rooms = RoomExists,
                         Exists = exist
 
                     });
+
                 }
-                catch (Exception ex)
+                catch(Exception ex)
                 {
                     Log.Error(ex.Message);
-                    return Result<RoomExistResponse>.Invalid(ex.Message);
+                    return Result<CheckQueueResponse>.Invalid(ex.Message);
+
                 }
 
             }
-
         }
     }
 }

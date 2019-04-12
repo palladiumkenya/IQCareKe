@@ -5,7 +5,7 @@ import { SnotifyService } from 'ng-snotify';
 import { QueueDetailsService } from '../../services/queue.service';
 import { NotificationService } from '../../../shared/_services/notification.service';
 import { ActivatedRoute } from '@angular/router';
-import { InsertRoom } from '../../models/rooms';
+import { InsertRoom } from '../../models/model';
 import { MatTableDataSource, MatPaginator, MatSort } from '@angular/material';
 import { Store } from '@ngrx/store';
 import { NgxSpinnerService } from 'ngx-spinner';
@@ -72,7 +72,14 @@ export class AddRoomComponent implements OnInit {
 
     }
 
-    AddRoom() {
+AddRoom() {
+    
+        this.spinner.show();
+
+
+
+
+
         this.spinner.show();
         if (this.NewRoom.RoomName != '' && this.NewRoom.DisplayName != '') {
             this.queuedetailsservice.checkRoomExist(this.NewRoom.RoomName).subscribe((result) => {
@@ -97,7 +104,9 @@ export class AddRoomComponent implements OnInit {
                                 this.notificationService.getConfig());
                             this.Rooms = [];
                             this.GetRooms();
-
+                            this.NewRoom.Description = '';
+                            this.NewRoom.DisplayName = '';
+                            this.NewRoom.RoomName = ' ';
 
                         },
                             (error) => {
@@ -128,12 +137,64 @@ export class AddRoomComponent implements OnInit {
         else {
             this.snotifyService.error('Kindly note displayName and room name is required', 'Add',
                 this.notificationService.getConfig());
+   if (this.NewRoom.RoomName !== '' && this.NewRoom.DisplayName!== '') {   
+    this.snotifyService.error('Kindly note RoomName and DisplayName is required', 'Room',
+    this.notificationService.getConfig());
+this.spinner.hide();
+   }
+   else {   
+         this.spinner.show();
+       
+  
+        this.queuedetailsservice.checkRoomExist(this.NewRoom.RoomName
+            ).subscribe((result) => {
+                console.log(result);
+                this.exists = result['exists'];
+                if (this.exists == true) {
+                    this.snotifyService.error('Kindly note  the room name must be unique  ', 'Room',
+                        this.notificationService.getConfig());
 
-            this.spinner.hide();
-            return;
-        }
+                    this.spinner.hide();
+                    return;
 
+                } else {
+                    const createdby = parseInt(localStorage.getItem('appUserId'));
+                    this. queuedetailsservice.addRoom(this.NewRoom.RoomName,this.NewRoom.DisplayName,this.NewRoom.Description, false, createdby,true,moment(moment().toDate()).format('DD-MMM-YYYY')).subscribe((result) => {
+                            this.snotifyService.success(result['message'], 'Add Room',
+                                this.notificationService.getConfig());
+                                this.GetRooms();
+                                this.NewRoom = new InsertRoom();
 
+                        },
+                            (error) => {
+                                this.snotifyService.error('Error adding Room  ' + error, 'Room',
+                                    this.notificationService.getConfig());
+                                this.spinner.hide();
+                            },
+                            () => {
+                                this.spinner.hide();
+                             
+                                this.GetRooms();
+                            }
+                        );
+                }
+            },
+                (error) => {
+                    this.snotifyService.error('Error adding patient to the waiting list ' + error, 'WaitingList',
+                        this.notificationService.getConfig());
+                    this.spinner.hide();
+                },
+                () => {
+                    this.spinner.hide();
+                }
+            );
+        }     
     }
+    
+}
+        
+
 
 }
+    
+

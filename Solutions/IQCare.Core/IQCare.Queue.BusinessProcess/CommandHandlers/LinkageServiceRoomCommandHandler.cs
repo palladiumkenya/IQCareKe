@@ -35,31 +35,34 @@ namespace IQCare.Queue.BusinessProcess.CommandHandlers
                         {
                             foreach (var link in request.Linkagelist)
                             {
-                                var srvroom = await _queueUnitOfWork.Repository<ServiceRoom>().Get(x => x.ServiceAreaid == link.ServiceAreaId && x.ServicePointId == link.ServicePointId && x.RoomId == link.Roomid && x.DeleteFlag ==false).FirstOrDefaultAsync();
+                                var srvroom = await _queueUnitOfWork.Repository<ServiceRoom>().Get(x => x.ServiceAreaid == link.ServiceAreaId && x.ServicePointId == link.ServicePointId && x.RoomId == link.Roomid ).FirstOrDefaultAsync();
 
-                                if(srvroom !=null)
+                                if (srvroom != null)
                                 {
                                     srvroom.RoomId = link.Roomid;
                                     srvroom.ServiceAreaid = link.ServiceAreaId;
                                     srvroom.ServicePointId = link.ServicePointId;
-                                    srvroom.DeleteFlag = true;
+                                    srvroom.DeleteFlag = false;
                                     srvroom.UpdateDate = DateTime.Now;
                                     srvroom.UpdatedBy = link.UserId;
                                     _queueUnitOfWork.Repository<ServiceRoom>().Update(srvroom);
                                     await _queueUnitOfWork.SaveAsync();
 
                                 }
-                                       
-                                ServiceRoom rm = new ServiceRoom();
-                                rm.RoomId = link.Roomid;
-                                rm.ServiceAreaid = link.ServiceAreaId;
-                                rm.ServicePointId = link.ServicePointId;
-                                rm.Active = true;
-                                rm.CreateDate = DateTime.Now;
-                                rm.CreatedBy = link.UserId;
 
-                                await _queueUnitOfWork.Repository<ServiceRoom>().AddAsync(rm);
-                                await _queueUnitOfWork.SaveAsync();
+                                else
+                                {
+                                    ServiceRoom rm = new ServiceRoom();
+                                    rm.RoomId = link.Roomid;
+                                    rm.ServiceAreaid = link.ServiceAreaId;
+                                    rm.ServicePointId = link.ServicePointId;
+                                    rm.Active = true;
+                                    rm.CreateDate = DateTime.Now;
+                                    rm.CreatedBy = link.UserId;
+
+                                    await _queueUnitOfWork.Repository<ServiceRoom>().AddAsync(rm);
+                                    await _queueUnitOfWork.SaveAsync();
+                                }
 
                             }
                         }

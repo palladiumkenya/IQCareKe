@@ -31,32 +31,32 @@ namespace IQCare.Queue.BusinessProcess.CommandHandlers
         {
             try
             {
-                if(request.ServiceRoom !=null)
-                {
-                    var serviceroomresult = _queueUnitOfWork.Repository<ServiceRoom>().Get(x => x.Id == request.ServiceRoom.Id).FirstOrDefault();
+                
+                    var serviceroomresult = _queueUnitOfWork.Repository<ServiceRoom>().Get(x => x.Id == request.Id).FirstOrDefault();
 
                     if(serviceroomresult !=null)
                     {
-                        serviceroomresult.RoomId = request.ServiceRoom.RoomId;
-                        serviceroomresult.ServiceAreaid = request.ServiceRoom.ServiceAreaid;
-                        serviceroomresult.ServicePointId = request.ServiceRoom.ServicePointId;
-                        serviceroomresult.Active = request.ServiceRoom.Active;
-                        serviceroomresult.DeleteFlag = request.ServiceRoom.DeleteFlag;
-                        serviceroomresult.UpdateDate = request.ServiceRoom.UpdateDate;
-                        serviceroomresult.UpdatedBy = request.ServiceRoom.UpdatedBy;
-                        serviceroomresult.DeleteFlag = request.ServiceRoom.DeleteFlag;
+                        serviceroomresult.RoomId = request.RoomId;
+                        serviceroomresult.ServiceAreaid = request.ServiceAreaId;
+                        serviceroomresult.ServicePointId = request.ServicePointId;
+                        serviceroomresult.Active = request.Active;
+                        serviceroomresult.DeleteFlag = request.DeleteFlag;
+                        serviceroomresult.UpdateDate = DateTime.Now;
+                        serviceroomresult.UpdatedBy = request.UpdatedBy;
+                        serviceroomresult.DeleteFlag = request.DeleteFlag;
                         _queueUnitOfWork.Repository<ServiceRoom>().Update(serviceroomresult);
                        await  _queueUnitOfWork.SaveAsync();
                         id = serviceroomresult.Id;
                     }
 
 
-                }
+                
 
                 return Result<EditLinkageServiceRoomResponse>.Valid(new EditLinkageServiceRoomResponse()
                 {
                     Message = "The data has been updated successfully",
-                    Id=id
+                    Id = id,
+                    Updated = true
                 });
             }
             catch(Exception ex)

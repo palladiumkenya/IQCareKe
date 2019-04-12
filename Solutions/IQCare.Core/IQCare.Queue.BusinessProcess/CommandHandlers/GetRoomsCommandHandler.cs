@@ -34,7 +34,7 @@ namespace IQCare.Queue.BusinessProcess.CommandHandlers
 
                 try
                 {
-                    var Rooms = await _queueUnitOfWork.Repository<Rooms>().Get(x => x.DeleteFlag == false).ToListAsync();
+                    var Rooms = await _queueUnitOfWork.Repository<Rooms>().Get(x => x.DeleteFlag == false).OrderByDescending(x=>x.Id).ToListAsync();
                     return Result<GetRoomsResponse>.Valid(new GetRoomsResponse()
                     {
                         RoomsList = Rooms

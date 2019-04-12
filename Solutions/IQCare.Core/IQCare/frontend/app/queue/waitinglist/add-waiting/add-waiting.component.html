@@ -1,0 +1,130 @@
+<mat-dialog-content>
+<div class="row">
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        <div class="row">
+            <div class="col-lg-12 col-sm-12 col-xs-12">
+                <div class="widget">
+                    <div class="widget-header bordered-left">
+                        <span class="widget-caption">AddWaitingList</span>
+                    </div>
+                    <div class="widget-body bordered-left">
+                        <form [formGroup]="formGroup">
+                            <div class="row">
+                                <div class="col-lg-3 col-sm-3 col-xs-12">
+                                    <mat-form-field>
+                                        <mat-select placeholder="ServiceRoom" formControlName="ServiceRoom"
+                                            tabindex="5">
+                                            <mat-option></mat-option>
+                                            <mat-option *ngFor="let option of items" [value]="option.id">
+                                                {{option.name}}</mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-lg-3 col-sm-3 col-xs-12">
+                                    <mat-form-field>
+                                        <mat-select placeholder=" Priority" formControlName="Priority" tabindex="5">
+                                            <mat-option></mat-option>
+                                            <mat-option *ngFor="let option of Priorities" [value]="option.id">
+                                                {{option.name}}</mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-lg-3 col-md-3 col-xs-12">
+                                    <div class="form-group">
+                                        <button class="btn btn-primary m-t-n-xs" (click)="AddQueue()">
+                                            <strong>AddWaitingList</strong>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+
+
+                    </div>
+                    <div>
+                        &nbsp;
+                    </div>
+                    <div class="example-container mat-elevation-z8">
+                        <mat-table #table [dataSource]="dataSource">
+
+
+
+
+
+                            <ng-container matColumnDef="FirstName">
+                                <mat-header-cell *matHeaderCellDef><strong>First Name</strong></mat-header-cell>
+                                <mat-cell *matCellDef="let QueueList"> {{QueueList.FirstName}} </mat-cell>
+                            </ng-container>
+
+
+                            <ng-container matColumnDef="MiddleName">
+                                <mat-header-cell *matHeaderCellDef><strong> MiddleName</strong> </mat-header-cell>
+                                <mat-cell *matCellDef="let QueueList"> {{QueueList.MiddleName}} </mat-cell>
+                            </ng-container>
+
+
+                            <ng-container matColumnDef="LastName">
+                                <mat-header-cell *matHeaderCellDef><strong>LastName</strong></mat-header-cell>
+                                <mat-cell *matCellDef="let QueueList"> {{QueueList.LastName}} </mat-cell>
+                            </ng-container>
+                            <ng-container matColumnDef="ServiceArea">
+                                <mat-header-cell *matHeaderCellDef><strong>ServiceArea</strong></mat-header-cell>
+                                <mat-cell *matCellDef="let QueueList"> {{QueueList.ServiceAreaName}} </mat-cell>
+                            </ng-container>
+
+                            <ng-container matColumnDef="ServicePoint">
+                                <mat-header-cell *matHeaderCellDef><strong>ServicePoint</strong></mat-header-cell>
+                                <mat-cell *matCellDef="let QueueList"> {{QueueList.ServicePointName}} </mat-cell>
+                            </ng-container>
+
+                            <ng-container matColumnDef="RoomName">
+                                <mat-header-cell *matHeaderCellDef><strong>RoomName</strong></mat-header-cell>
+                                <mat-cell *matCellDef="let QueueList"> {{QueueList.RoomName}} </mat-cell>
+                            </ng-container>
+                            
+                            <ng-container matColumnDef="Priority">
+                                <mat-header-cell *matHeaderCellDef><strong>Priority</strong></mat-header-cell>
+                                <mat-cell *matCellDef="let QueueList"> {{QueueList.Priority}} </mat-cell>
+                            </ng-container>
+
+                            <ng-container matColumnDef="AddedBy">
+                                <mat-header-cell *matHeaderCellDef><strong>CreatedBy</strong></mat-header-cell>
+                                <mat-cell *matCellDef="let QueueList"> {{QueueList.CreatedBy}} </mat-cell>
+                            </ng-container>
+
+                            <ng-container matColumnDef="Action">
+                                <mat-header-cell *matHeaderCellDef><strong class="fa fa-cog"> Delete</strong>
+                                </mat-header-cell>
+                                <mat-cell *matCellDef="let QueueList">
+                                     <button mat-button class="mat-accent"> <span
+                                            class="fa fa-pencil" (click)="OnDelete(QueueList.Id)">
+                                            Delete </span> </button>
+                                </mat-cell>
+    
+                            </ng-container>
+
+                            <!-- Expanded Content Column - The detail row is made up of this one column -->
+
+
+                            <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                            <mat-row *matRowDef="let row; columns: displayedColumns">
+                            </mat-row>
+
+                            <!--<tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>-->
+
+                        </mat-table>
+
+                        <mat-paginator [pageSize]="10" [pageSizeOptions]="[3, 5, 10, 20, 50]"
+                            [showFirstLastButtons]="true">
+                        </mat-paginator>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+    <button class="mat-raised-button" (click)="close()">Close</button>
+</mat-dialog-actions>

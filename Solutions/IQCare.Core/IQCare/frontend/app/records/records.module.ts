@@ -4,6 +4,7 @@ import { CountyResolver } from './_services/county.resolver';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { QueueModule } from './../queue/queue.module';
 
 import {
     MatPaginatorModule, MatTableModule, MatSortModule,
@@ -53,7 +54,8 @@ import { CheckDuplicatesComponent } from './person/check-duplicates/check-duplic
         MatProgressBarModule, MatProgressSpinnerModule, MatRadioModule, MatRippleModule,
         MatSelectModule, MatSidenavModule, MatSliderModule, MatSlideToggleModule,
         MatSnackBarModule, MatStepperModule, MatTabsModule, MatToolbarModule, MatTooltipModule,
-        SharedModule
+        SharedModule,
+        QueueModule
     ],
     declarations: [SearchComponent, RegisterComponent,
         ViewComponent, PersoncontactsComponent,
@@ -76,7 +78,8 @@ import { CheckDuplicatesComponent } from './person/check-duplicates/check-duplic
     entryComponents: [
         PersoncontactsComponent,
         InlineSearchComponent,
-        CheckDuplicatesComponent
+        CheckDuplicatesComponent,
+
     ],
     exports: [
         InlineSearchComponent,

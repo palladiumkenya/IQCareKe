@@ -9,6 +9,7 @@ namespace IQCare.Queue.Core.Models
         public int Id { get; set; }
         public int ServicePointId { get; set; }
 
+        public string ServicePointName { get; set; }
         public int RoomId { get; set; }
 
         public string RoomName { get; set; }

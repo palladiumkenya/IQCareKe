@@ -4,29 +4,26 @@ using System.Text;
 using IQCare.Library;
 using IQCare.Queue.Core.Models;
 using MediatR;
+
 namespace IQCare.Queue.BusinessProcess.Command
 {
-   public  class AddQueueCommand :IRequest<Result<AddQueueResponse>>
+    public class EditQueueCommand :IRequest<Result<EditQueueResponse>>
     {
-        public int ServiceRoomId { get; set; }
-        public int PatientId { get; set; }
+        public int Id { get; set; }
 
-        public int Priority { get; set; }
 
         public Boolean DeleteFlag { get; set; }
 
         public Boolean Status { get; set; }
 
-        public int CreatedBy { get; set; }
-
-        
-
-     
+        public int UpdatedBy { get; set; }
     }
 
-    public class AddQueueResponse
+    public class EditQueueResponse
     {
-        public int PatientId { get; set; }
+        public int Id { get; set; }
         public string Message { get; set; }
+
+        public bool Updated { get; set; }
     }
 }

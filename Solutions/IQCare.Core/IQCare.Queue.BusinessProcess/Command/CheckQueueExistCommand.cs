@@ -4,29 +4,19 @@ using System.Text;
 using IQCare.Library;
 using IQCare.Queue.Core.Models;
 using MediatR;
+
 namespace IQCare.Queue.BusinessProcess.Command
 {
-   public  class AddQueueCommand :IRequest<Result<AddQueueResponse>>
+    public  class CheckQueueExistCommand : IRequest<Result<CheckQueueResponse>>
     {
         public int ServiceRoomId { get; set; }
         public int PatientId { get; set; }
 
-        public int Priority { get; set; }
-
-        public Boolean DeleteFlag { get; set; }
-
-        public Boolean Status { get; set; }
-
-        public int CreatedBy { get; set; }
-
-        
-
-     
     }
 
-    public class AddQueueResponse
+    public class CheckQueueResponse
     {
-        public int PatientId { get; set; }
         public string Message { get; set; }
+        public Boolean Exists { get; set; }
     }
 }

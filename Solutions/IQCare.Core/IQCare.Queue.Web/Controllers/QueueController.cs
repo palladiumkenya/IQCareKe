@@ -69,6 +69,26 @@ namespace IQCare.Queue.Web
 
         }
         [HttpGet]
+        public async Task<IActionResult> GetPriorityItems()
+        {
+            var response = await _mediator.Send(new GetPrioritiesListCommand(), HttpContext.RequestAborted);
+
+            if (!response.IsValid)
+                return BadRequest(response);
+            return Ok(response.Value);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> GetServiceAreas()
+        {
+            var response = await _mediator.Send(new GetServiceAreasCommand(), HttpContext.RequestAborted);
+
+            if (!response.IsValid)
+                return BadRequest(response);
+            return Ok(response.Value);
+        }
+
+        [HttpGet]
         public async Task<IActionResult> GetLookupItems()
         {
             var response = await _mediator.Send(new GetQueueLookupItemsCommand(), HttpContext.RequestAborted);
@@ -90,7 +110,20 @@ namespace IQCare.Queue.Web
 
             return Ok(response.Value);
         }
-        
+        [HttpGet]
+        public async Task<IActionResult> GetAllLinkedRooms()
+        {
+            
+
+
+            var response = await _mediator.Send(new GetLinkedRoomsCommand(), HttpContext.RequestAborted);
+
+            if (!response.IsValid)
+                return BadRequest(response);
+
+            return Ok(response.Value);
+
+        }
 
         [HttpPost]
         public async Task<IActionResult> AddLinkageServiceRoom([FromBody] LinkageServiceRoomCommand command)
@@ -115,6 +148,138 @@ namespace IQCare.Queue.Web
 
             return BadRequest(results);
         }
+
+
+        [HttpPost]
+
+        public async Task<IActionResult> CheckRoomLinkageExists([FromBody] CheckLinkageServiceExistsCommand command)
+        {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState.Values.Select(x => x.Errors));
+
+            var response = await _mediator.Send(command, HttpContext.RequestAborted);
+
+            if (!response.IsValid)
+                return BadRequest(response);
+
+            return Ok(response.Value);
+
+        }
+
+        [HttpPost]
+
+        public async Task<IActionResult> AddRoomLinkage([FromBody] LinkageServiceRoomCommand command)
+        {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState.Values.Select(x => x.Errors));
+
+            var response = await _mediator.Send(command, HttpContext.RequestAborted);
+
+            if (!response.IsValid)
+                return BadRequest(response);
+
+            return Ok(response.Value);
+
+        }
+
+
+        [HttpPost]
+
+        public async Task<IActionResult> EditRoomLinkage([FromBody] EditLinkageServiceRoomCommand command)
+        {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState.Values.Select(x => x.Errors));
+
+            var response = await _mediator.Send(command, HttpContext.RequestAborted);
+
+            if (!response.IsValid)
+                return BadRequest(response);
+
+            return Ok(response.Value);
+
+        }
+
+
+        [HttpPost]
+
+        public async Task<IActionResult> CheckQueueExists([FromBody] CheckQueueExistCommand command)
+        {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState.Values.Select(x => x.Errors));
+
+            var response = await _mediator.Send(command, HttpContext.RequestAborted);
+
+            if (!response.IsValid)
+                return BadRequest(response);
+
+            return Ok(response.Value);
+
+        }
+
+        [HttpPost]
+
+        public async Task<IActionResult> AddQueue([FromBody] AddQueueCommand command)
+        {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState.Values.Select(x => x.Errors));
+
+            var response = await _mediator.Send(command, HttpContext.RequestAborted);
+
+            if (!response.IsValid)
+                return BadRequest(response);
+
+            return Ok(response.Value);
+
+        }
+
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetQueueListByPatientId(int id)
+        {
+            var results = await _mediator.Send(new GetQueueListByPatientIdCommand { PatientId = id }, HttpContext.RequestAborted);
+            if (results.IsValid)
+                return Ok(results.Value);
+
+            return BadRequest(results);
+        }
+
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetQueueListByServiceAreaId(int id)
+        {
+            var results = await _mediator.Send(new GetQueueListByServiceAreaIdCommand {ServiceAreaId = id }, HttpContext.RequestAborted);
+            if (results.IsValid)
+                return Ok(results.Value);
+
+            return BadRequest(results);
+        }
+
+
+
+
+        [HttpPost]
+
+        public async Task<IActionResult> EditQueueList([FromBody] EditQueueCommand command)
+        {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState.Values.Select(x => x.Errors));
+
+            var response = await _mediator.Send(command, HttpContext.RequestAborted);
+
+            if (!response.IsValid)
+                return BadRequest(response);
+
+            return Ok(response.Value);
+
+        }
+        [HttpGet]
+        public async Task<IActionResult> GetQueueList()
+        {
+            var response = await _mediator.Send(new GetQueueListCommand(), HttpContext.RequestAborted);
+
+            if (!response.IsValid)
+                return BadRequest(response);
+            return Ok(response.Value);
+        }
+
 
         public IActionResult Index()
         {

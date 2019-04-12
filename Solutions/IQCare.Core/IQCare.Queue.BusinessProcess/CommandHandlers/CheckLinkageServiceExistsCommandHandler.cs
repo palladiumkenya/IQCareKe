@@ -33,7 +33,7 @@ namespace IQCare.Queue.BusinessProcess.CommandHandlers
                 try
                 {
                     var LinkageServiceArea = await _queueUnitOfWork.Repository<ServiceRoom>().Get(x => x.ServiceAreaid == request.ServiceAreaId && x.ServicePointId == request.ServicePointId && x.RoomId == request.RoomId && x.DeleteFlag == false).ToListAsync();
-                    if(LinkageServiceArea !=null)
+                    if(LinkageServiceArea.Count > 0)
                     {
                         servicerooms = LinkageServiceArea;
                         exist = true;
