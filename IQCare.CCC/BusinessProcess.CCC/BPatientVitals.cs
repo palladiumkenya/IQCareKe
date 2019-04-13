@@ -35,7 +35,7 @@ namespace BusinessProcess.CCC
             {
                 var vitals =
                             unitOfWork.PatientVitalsRepository.FindBy(x => x.PatientId == patientId)
-                                .OrderBy(x => x.Id)
+                                .OrderByDescending(x => x.Id)
                                 .FirstOrDefault();
                 unitOfWork.Dispose();
                 return vitals;
