@@ -7,6 +7,7 @@ import { PortalComponent } from './portal/portal.component';
 import { PersonHomeComponent } from './person-home/person-home.component';
 import { NotificationService } from '../shared/_services/notification.service';
 import { ServicesListComponent } from './services-list/services-list.component';
+import { AddWaitingComponent } from '../../queue/waitinglist/add-waiting/add-waiting.component';
 import {
     MatCardModule, MatDatepickerModule,
     MatNativeDateModule, MatFormFieldModule,

@@ -34,6 +34,7 @@ export class AddRoomComponent implements OnInit {
         this.NewRoom = new InsertRoom();
 
         this.roomslisting = [];
+        localStorage.setItem('appQueueMenu', 'Queue');
     }
 
     ngAfterViewInit() {
@@ -75,23 +76,16 @@ export class AddRoomComponent implements OnInit {
 AddRoom() {
     
         this.spinner.show();
-
-
-
-
-
-        this.spinner.show();
-        if (this.NewRoom.RoomName != '' && this.NewRoom.DisplayName != '') {
+     if (this.NewRoom.RoomName != '' && this.NewRoom.DisplayName != '') {
             this.queuedetailsservice.checkRoomExist(this.NewRoom.RoomName).subscribe((result) => {
-                console.log(result);
-                console.log(result['exists']);
+               
                 this.exists = result['exists'];
                 if (this.exists == true) {
                     this.snotifyService.error('Kindly ensure the roomName is unique since the room exists', 'Add',
                         this.notificationService.getConfig());
 
                     this.spinner.hide();
-                    return;
+                    return; 
 
                 } else {
                     const createdby = parseInt(localStorage.getItem('appUserId'));
@@ -133,65 +127,12 @@ AddRoom() {
                 }
             );
 
-        }
-        else {
+        } else {
             this.snotifyService.error('Kindly note displayName and room name is required', 'Add',
                 this.notificationService.getConfig());
-   if (this.NewRoom.RoomName !== '' && this.NewRoom.DisplayName!== '') {   
-    this.snotifyService.error('Kindly note RoomName and DisplayName is required', 'Room',
-    this.notificationService.getConfig());
-this.spinner.hide();
-   }
-   else {   
-         this.spinner.show();
-       
-  
-        this.queuedetailsservice.checkRoomExist(this.NewRoom.RoomName
-            ).subscribe((result) => {
-                console.log(result);
-                this.exists = result['exists'];
-                if (this.exists == true) {
-                    this.snotifyService.error('Kindly note  the room name must be unique  ', 'Room',
-                        this.notificationService.getConfig());
-
-                    this.spinner.hide();
-                    return;
-
-                } else {
-                    const createdby = parseInt(localStorage.getItem('appUserId'));
-                    this. queuedetailsservice.addRoom(this.NewRoom.RoomName,this.NewRoom.DisplayName,this.NewRoom.Description, false, createdby,true,moment(moment().toDate()).format('DD-MMM-YYYY')).subscribe((result) => {
-                            this.snotifyService.success(result['message'], 'Add Room',
-                                this.notificationService.getConfig());
-                                this.GetRooms();
-                                this.NewRoom = new InsertRoom();
-
-                        },
-                            (error) => {
-                                this.snotifyService.error('Error adding Room  ' + error, 'Room',
-                                    this.notificationService.getConfig());
-                                this.spinner.hide();
-                            },
-                            () => {
-                                this.spinner.hide();
-                             
-                                this.GetRooms();
-                            }
-                        );
-                }
-            },
-                (error) => {
-                    this.snotifyService.error('Error adding patient to the waiting list ' + error, 'WaitingList',
-                        this.notificationService.getConfig());
-                    this.spinner.hide();
-                },
-                () => {
-                    this.spinner.hide();
-                }
-            );
-        }     
+                this.spinner.hide();
+        }
     }
-    
-}
         
 
 

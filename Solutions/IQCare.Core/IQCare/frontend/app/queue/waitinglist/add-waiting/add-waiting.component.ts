@@ -41,6 +41,7 @@ export class AddWaitingComponent implements OnInit {
     personId: number;
     exists: boolean;
     updated: boolean;
+    configuration: boolean;
     @ViewChild(MatPaginator) paginator: MatPaginator;
     @ViewChild(MatSort) sort: MatSort;
     displayedColumns: any[] = ['FirstName', 'LastName', 'MiddleName', 'ServiceArea'
@@ -79,6 +80,23 @@ export class AddWaitingComponent implements OnInit {
             Priority: new FormControl(this.waitList.PriorityId, [Validators.required]),
             ServiceRoom: new FormControl(this.waitList.ServiceRoomId, [Validators.required])
         });
+    }
+    checkServiceRoomExist(): Boolean{
+        if (this.items.length < 1) {
+            this.configuration = true;
+        } else {
+            this.configuration = false;
+        }
+            return this.configuration;
+    }
+
+    AddServiceRoom() {
+        this.close();
+        this.zone.run(() => {
+            this.router.navigate(['/queue/link'],
+                { relativeTo: this.route });
+        });
+
     }
     getPriorityList() {
         this.queuedetailsservice.getPriorityList().subscribe((result) => {

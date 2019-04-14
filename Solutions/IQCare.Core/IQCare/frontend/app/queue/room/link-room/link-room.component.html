@@ -1,6 +1,6 @@
 <div class="row">
     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-        <div class="row">
+        <div class="row" *ngIf="!checkRooms()">
             <div class="col-lg-12 col-sm-12 col-md-12 col-xs-12">
                 <div class="widget">
                     <div class="widget-header bordered-left">
@@ -81,8 +81,8 @@
                             <mat-header-cell *matHeaderCellDef><strong class="fa fa-cog"> Delete</strong>
                             </mat-header-cell>
                             <mat-cell *matCellDef="let ServiceRoomLink">
-                                 <button mat-button class="mat-accent"> <span
-                                        class="fa fa-pencil" (click)="OnDelete(ServiceRoomLink.id)">
+                                <button mat-button class="mat-accent"> <span class="fa fa-pencil"
+                                        (click)="OnDelete(ServiceRoomLink.id)">
                                         Delete </span> </button>
                             </mat-cell>
 
@@ -98,6 +98,25 @@
                 </div>
                 <div>
                     &nbsp;
+                </div>
+            </div>
+        </div>
+        <div class="row" *ngIf="checkRooms()">
+            <div class="col-lg-12 col-sm-12 col-md-12 col-xs-12">
+                <div class="widget">
+                    <div class="widget-header bordered-left">
+                        <span class="widget-caption">Configurations</span>
+                    </div>
+                    <div class="widget-body bordered-left">
+                        <p>Kindly add the rooms in the settings in order to link the rooms to the service area.</p>
+                        <div class="form-group">
+                            <button class="btn btn-primary m-t-n-xs" (click)="AddRoom()">
+                                <strong>Room Configuration</strong>
+                            </button>
+                        </div>
+
+
+                    </div>
                 </div>
             </div>
         </div>

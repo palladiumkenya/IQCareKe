@@ -119,6 +119,21 @@ export class SearchComponent implements OnInit, AfterViewInit {
         const personId = row['id'];
         this.zone.run(() => { this.router.navigate(['/dashboard/personhome/' + personId], { relativeTo: this.route }); });
     }
+    checkQueue(): boolean {
+        let appQueue: number;
+        appQueue = parseInt(localStorage.getItem('appQueue'), 10);
+        if (appQueue == parseInt('1', 10)) {
+           
+
+            return true;
+
+        } else {
+            localStorage.removeItem('appQueueMenu');
+
+            return false;
+        }
+    }
+
     addWaitingList(row: any) {
         const PersonId = row['id'];
         const PatientId = row['patientId'];

@@ -33,6 +33,7 @@ export class LinkRoomComponent implements OnInit {
     exists: boolean;
     updated: boolean;
     formGroup: FormGroup;
+    configuration: boolean;
     @ViewChild(MatPaginator) paginator: MatPaginator;
     @ViewChild(MatSort) sort: MatSort;
     displayedColumns: any[] = ['serviceAreaName', 'servicePointName', 'roomName', 'Action'];
@@ -103,6 +104,14 @@ export class LinkRoomComponent implements OnInit {
         });
         this.getLinkedRooms();
     }
+    checkRooms(): Boolean {
+        if (this.rooms.length < 1) {
+            this.configuration = true;
+        } else {
+            this.configuration = false;
+        }
+            return this.configuration;
+    }  
 
     getLinkedRooms() {
         this.ServiceRoomLink = [];

@@ -29,7 +29,7 @@ namespace IQCare.Queue.BusinessProcess.CommandHandlers
             try
             {
                 var sql = "exec pr_OpenDecryptedSession;" +
-                              $"SELECT * FROM WaitingListView ; " +
+                              $"SELECT * FROM WaitingListView  order by PriorityRank asc; " +
                               $"exec [dbo].[pr_CloseDecryptedSession];";
 
                 var result = await _queueUnitOfWork.Repository<WaitingListView>().FromSql(sql);

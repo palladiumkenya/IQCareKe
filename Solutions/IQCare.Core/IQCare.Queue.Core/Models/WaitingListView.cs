@@ -21,6 +21,8 @@ namespace IQCare.Queue.Core.Models
 
         public int PersonId { get; set; }
 
+        public int PriorityRank { get; set; }
+
         public int ServiceRoomId { get; set; }
 
 

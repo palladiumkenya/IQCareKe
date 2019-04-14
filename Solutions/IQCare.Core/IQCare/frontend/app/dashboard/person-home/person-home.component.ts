@@ -2,11 +2,10 @@ import { Component, OnInit, NgZone } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { PersonHomeService } from '../services/person-home.service';
-
 import { NotificationService } from '../../shared/_services/notification.service';
 import { SnotifyService } from 'ng-snotify';
 import { PersonView } from '../../records/_models/personView';
-import { MatTableDataSource } from '@angular/material';
+import { MatTableDataSource, MatDialogConfig, MatDialog } from '@angular/material';
 import * as Consent from '../../shared/reducers/app.states';
 import { Store } from '@ngrx/store';
 
@@ -35,6 +34,7 @@ export class PersonHomeComponent implements OnInit {
         private notificationService: NotificationService,
         private router: Router,
         public zone: NgZone,
+        private dialog: MatDialog,
         private store: Store<AppState>) {
         this.person = new PersonView();
     }
@@ -102,4 +102,6 @@ export class PersonHomeComponent implements OnInit {
                 // console.log(this.personView$);
             });
     }
+
+   
 }

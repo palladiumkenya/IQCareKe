@@ -155,7 +155,7 @@
                             <ng-container matColumnDef="Queue">
                                 <mat-header-cell *matHeaderCellDef></mat-header-cell>
                                 <mat-cell *matCellDef="let element" >
-                                    <a *ngIf='element.patientId > 0' (click)="addWaitingList(element)" mat-button class="primary"> 
+                                    <a *ngIf='element.patientId > 0 && checkQueue()' (click)="addWaitingList(element)" mat-button class="primary"> 
                                         AddToWaitingList
                                          </a> </mat-cell>
 
