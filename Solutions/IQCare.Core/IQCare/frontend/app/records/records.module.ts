@@ -4,7 +4,7 @@ import { CountyResolver } from './_services/county.resolver';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { QueueModule } from './../queue/queue.module';
+
 
 import {
     MatPaginatorModule, MatTableModule, MatSortModule,
@@ -36,7 +36,7 @@ import { PersonIdentifiersResolver } from './_services/personidentifiers.resolve
 import { InlineSearchComponent } from './inline-search/inline-search.component';
 import { YesNoResolver } from '../pmtct/_services/yesno.resolver';
 import { CheckDuplicatesComponent } from './person/check-duplicates/check-duplicates.component';
-
+import {AddWaitingListComponent} from '../shared/add-waiting-list/add-waiting-list.component';
 @NgModule({
     imports: [
         CommonModule,
@@ -55,7 +55,7 @@ import { CheckDuplicatesComponent } from './person/check-duplicates/check-duplic
         MatSelectModule, MatSidenavModule, MatSliderModule, MatSlideToggleModule,
         MatSnackBarModule, MatStepperModule, MatTabsModule, MatToolbarModule, MatTooltipModule,
         SharedModule,
-        QueueModule
+       
     ],
     declarations: [SearchComponent, RegisterComponent,
         ViewComponent, PersoncontactsComponent,
@@ -79,6 +79,7 @@ import { CheckDuplicatesComponent } from './person/check-duplicates/check-duplic
         PersoncontactsComponent,
         InlineSearchComponent,
         CheckDuplicatesComponent,
+        AddWaitingListComponent
 
     ],
     exports: [

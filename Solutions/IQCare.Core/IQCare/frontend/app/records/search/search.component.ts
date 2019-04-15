@@ -11,7 +11,7 @@ import { animate, state, style, transition, trigger } from '@angular/animations'
 import { Store } from '@ngrx/store';
 import * as AppState from '../../shared/reducers/app.states';
 import { MatDialog, MatDialogConfig } from '@angular/material';
-import { AddWaitingComponent } from '../../queue/waitinglist/add-waiting/add-waiting.component';
+import {AddWaitingListComponent} from '../../shared/add-waiting-list/add-waiting-list.component'
 @Component({
     selector: 'app-search',
     templateUrl: './search.component.html',
@@ -153,7 +153,7 @@ export class SearchComponent implements OnInit, AfterViewInit {
             personId: PersonId
         };
 
-        const dialogRef = this.dialog.open(AddWaitingComponent, resultsDialogConfig);
+        const dialogRef = this.dialog.open(AddWaitingListComponent, resultsDialogConfig);
         dialogRef.afterClosed().subscribe(
             data => {
                 if (!data) {

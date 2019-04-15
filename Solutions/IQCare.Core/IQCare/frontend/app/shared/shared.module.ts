@@ -1,7 +1,8 @@
 import { MAT_MOMENT_DATE_FORMATS } from '@angular/material-moment-adapter';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
+import { WaitingListService } from './_services/waiting.service';
+import { DialogService } from './_services/dialog.service';
 import { SharedRoutingModule } from './shared-routing.module';
 import { LeftnavComponent } from './leftnav/leftnav.component';
 import { ClientbriefComponent } from './clientbrief/clientbrief.component';
@@ -17,7 +18,8 @@ import {
     MatSelectModule,
     MatFormFieldModule,
     MatInputModule,
-    MatButtonModule
+    MatButtonModule,
+    MatDialogModule
 } from '@angular/material';
 import { AppDateAdapter } from './dateadapter/momentDateAdapter';
 import { NotificationService } from './_services/notification.service';
@@ -27,6 +29,8 @@ import { ErrorHandlerService } from './_services/errorhandler.service';
 import { PatientEncounterComponent } from './patient-encounter/patient-encounter.component';
 import { CustomFormComponent } from './custom-form/custom-form.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { AddWaitingListComponent } from './add-waiting-list/add-waiting-list.component';
+import { MatconfirmdialogComponent } from './matconfirmdialog/matconfirmdialog.component';
 
 @NgModule({
     imports: [
@@ -40,7 +44,8 @@ import { ReactiveFormsModule } from '@angular/forms';
         MatSelectModule,
         MatFormFieldModule,
         MatInputModule,
-        MatButtonModule
+        MatButtonModule,
+        MatDialogModule
     ],
     declarations: [
         LeftnavComponent,
@@ -48,7 +53,9 @@ import { ReactiveFormsModule } from '@angular/forms';
         AlertComponent,
         PersonbriefComponent,
         PatientEncounterComponent,
-        CustomFormComponent
+        CustomFormComponent,
+        AddWaitingListComponent,
+        MatconfirmdialogComponent
     ],
     exports: [
         LeftnavComponent,
@@ -59,6 +66,8 @@ import { ReactiveFormsModule } from '@angular/forms';
         CustomFormComponent
     ],
     providers: [
+        WaitingListService,
+        DialogService,
         ClientService,
         NotificationService,
         PnstracingService,
@@ -68,6 +77,7 @@ import { ReactiveFormsModule } from '@angular/forms';
         { provide: MAT_DATE_LOCALE, useValue: 'en-GB' },
         { provide: MAT_DATE_FORMATS, useValue: MAT_MOMENT_DATE_FORMATS },
         { provide: DateAdapter, useClass: AppDateAdapter },
-    ]
+    ],
+    entryComponents: [MatconfirmdialogComponent]
 })
 export class SharedModule { }

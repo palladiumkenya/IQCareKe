@@ -8,7 +8,7 @@ import { PersonView } from '../../records/_models/personView';
 import { MatTableDataSource, MatDialogConfig, MatDialog } from '@angular/material';
 import * as Consent from '../../shared/reducers/app.states';
 import { Store } from '@ngrx/store';
-
+import {AddWaitingListComponent} from '../../shared/add-waiting-list/add-waiting-list.component';
 @Component({
     selector: 'app-person-home',
     templateUrl: './person-home.component.html',
@@ -101,6 +101,37 @@ export class PersonHomeComponent implements OnInit {
             () => {
                 // console.log(this.personView$);
             });
+    }
+
+    addWaitingList() {
+        const PersonId = this.person.personId;
+        const PatientId = this.person.patientId;
+      
+
+
+        const resultsDialogConfig = new MatDialogConfig();
+
+        resultsDialogConfig.disableClose = false;
+        resultsDialogConfig.autoFocus = true;
+        resultsDialogConfig.height = '100%';
+        resultsDialogConfig.width = '100%';
+
+
+        resultsDialogConfig.data = {
+            patientId: PatientId,
+            personId: PersonId
+        };
+
+        const dialogRef = this.dialog.open(AddWaitingListComponent, resultsDialogConfig);
+        dialogRef.afterClosed().subscribe(
+            data => {
+                if (!data) {
+                    return;
+                }
+                console.log(data);
+            });
+
+
     }
 
    

@@ -7,7 +7,7 @@ import { PortalComponent } from './portal/portal.component';
 import { PersonHomeComponent } from './person-home/person-home.component';
 import { NotificationService } from '../shared/_services/notification.service';
 import { ServicesListComponent } from './services-list/services-list.component';
-import { AddWaitingComponent } from '../../queue/waitinglist/add-waiting/add-waiting.component';
+
 import {
     MatCardModule, MatDatepickerModule,
     MatNativeDateModule, MatFormFieldModule,
@@ -32,6 +32,7 @@ import { PatientAppointmentComponent } from './patient-appointment/patient-appoi
 import { SearchService } from '../registration/_services/search.service';
 import { ReportsComponent } from './reports/reports.component';
 import { AirModule } from '../air/air.module';
+import {AddWaitingListComponent} from '../shared/add-waiting-list/add-waiting-list.component';
 
 @NgModule({
     imports: [
@@ -75,6 +76,9 @@ import { AirModule } from '../air/air.module';
         RegistrationService,
         EnrollmentService,
         SearchService
+    ],
+    entryComponents: [
+        AddWaitingListComponent
     ]
 })
 export class DashboardModule { }

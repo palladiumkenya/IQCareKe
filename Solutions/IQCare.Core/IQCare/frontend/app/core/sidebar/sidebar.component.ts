@@ -84,7 +84,7 @@ export class SidebarComponent implements OnInit {
 
     ngOnInit() {
     }
-
+   
     checkQueue(): boolean {
         let appQueue: string;
         appQueue = localStorage.getItem('appQueueMenu');
