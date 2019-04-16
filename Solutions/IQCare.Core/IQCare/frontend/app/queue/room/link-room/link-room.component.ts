@@ -110,8 +110,8 @@ export class LinkRoomComponent implements OnInit {
         } else {
             this.configuration = false;
         }
-            return this.configuration;
-    }  
+        return this.configuration;
+    }
 
     getLinkedRooms() {
         this.ServiceRoomLink = [];
@@ -146,8 +146,8 @@ export class LinkRoomComponent implements OnInit {
                     console.log(this.SpecificRoomLink['id']);
                     this.queuedetailsservice.editroomlinkage(this.SpecificRoomLink['id'], this.SpecificRoomLink['servicePointId'],
                         this.SpecificRoomLink['roomId'],
-                         this.SpecificRoomLink['serviceAreaId'],
-                          true, true, updatedby).subscribe((result) => {
+                        this.SpecificRoomLink['serviceAreaId'],
+                        true, true, updatedby).subscribe((result) => {
                             console.log(result);
                             this.updated = result['updated'];
                             if (this.updated == true) {
@@ -178,7 +178,12 @@ export class LinkRoomComponent implements OnInit {
             });
     }
 
-
+    AddRoom() {
+        this.zone.run(() => {
+            this.router.navigate(['/queue/'],
+                { relativeTo: this.route });
+        });
+    }
 
     AddLinkage() {
         if (this.formGroup.valid) {

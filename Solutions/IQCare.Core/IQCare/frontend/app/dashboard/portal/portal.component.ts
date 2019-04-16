@@ -12,6 +12,7 @@ export class PortalComponent implements OnInit {
     constructor(private store: Store<AppState>) {
         store.dispatch(new AppState.ClearState());
         localStorage.setItem('selectedService', '');
+        this.checkQueue();
     }
 
     ngOnInit() {
