@@ -14,6 +14,7 @@ IF NOT EXISTS
 	WHERE object_id = OBJECT_ID(N'[dbo].[Rooms]')
 		  AND type IN(N'U')
 )
+BEGIN
 
 CREATE TABLE [dbo].[Rooms](
 	[Id] [int] IDENTITY(1,1) NOT NULL,
@@ -31,15 +32,15 @@ CREATE TABLE [dbo].[Rooms](
 	[Id] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY] 
-GO
+
 
 ALTER TABLE [dbo].[Rooms] ADD  CONSTRAINT [DF_Rooms_DeleteFlag]  DEFAULT ((0)) FOR [DeleteFlag]
-GO
+
 
 ALTER TABLE [dbo].[Rooms] ADD  CONSTRAINT [DF_ROOMS_Active]  DEFAULT ((1)) FOR [Active]
-GO
 
 ALTER TABLE [dbo].[Rooms] ADD  CONSTRAINT [DF_Rooms_CreateDate]  DEFAULT (getdate()) FOR [CreateDate]
-GO
+
+END
 
 
