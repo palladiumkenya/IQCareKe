@@ -12,7 +12,7 @@ export class PortalComponent implements OnInit {
     constructor(private store: Store<AppState>) {
         store.dispatch(new AppState.ClearState());
         localStorage.setItem('selectedService', '');
-        this.checkQueue();
+
     }
 
     ngOnInit() {
@@ -22,7 +22,7 @@ export class PortalComponent implements OnInit {
         let appQueue: number;
         appQueue = parseInt(localStorage.getItem('appQueue'), 10);
         if (appQueue == parseInt('1', 10)) {
-           
+
 
             return true;
 
