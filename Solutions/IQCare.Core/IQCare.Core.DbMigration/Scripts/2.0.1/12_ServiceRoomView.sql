@@ -14,6 +14,6 @@ CREATE VIEW [dbo].[ServiceRoomView]
 AS
 
 select src.Id,src.ServicePointId,ltv.ItemName as ServicePointName,src.RoomId,r.RoomName as RoomName,r.DisplayName as RoomDisplayName, src.ServiceAreaId,sa.DisplayName as ServiceAreaName,src.DeleteFlag,src.Active,src.CreateDate,src.CreatedBy,src.UpdateDate,src.UpdatedBy
- from ServiceRoom src inner join Rooms r on r.Id=src.RoomId
+ from [dbo].[ServiceRoom] src inner join Rooms r on r.Id=src.RoomId
 inner join LookupItemView ltv on ltv.ItemId=src.ServicePointId
 inner join ServiceArea sa on sa.Id=src.ServiceAreaId;
