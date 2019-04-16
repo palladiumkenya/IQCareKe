@@ -33,6 +33,6 @@ CREATE TABLE [dbo].[ServiceRoom](
 ALTER TABLE [dbo].[ServiceRoom] ADD  CONSTRAINT [DF_ServiceRoom_DeleteFlag]  DEFAULT ((0)) FOR [DeleteFlag]
 ALTER TABLE [dbo].[ServiceRoom] ADD  CONSTRAINT [DF_ServiceRoom_Active]  DEFAULT ((1)) FOR [Active]
 ALTER TABLE [dbo].[ServiceRoom] ADD  CONSTRAINT [DF_ServiceRoom_CreateDate]  DEFAULT (getdate()) FOR [CreateDate]
-ALTER TABLE [dbo].[ServiceRooom] ADD  Constraint [FK_ServiceRoom_ServiceAreaId]
+ALTER TABLE [dbo].[ServiceRoom] ADD  Constraint [FK_ServiceRoom_ServiceAreaId]
 FOREIGN KEY  (ServiceAreaId) REFERENCES ServiceArea(Id)
 END

@@ -188,9 +188,9 @@
     <None Remove="Scripts\2.0.1\09_Rooms.sql" />
     <None Remove="Scripts\2.0.1\10_ServicePoint.sql" />
     <None Remove="Scripts\2.0.1\11_ServiceRoomTable.sql" />
-    <None Remove="Scripts\2.0.1\12_ServiceRoomView.sql" />
-    <None Remove="Scripts\2.0.1\13_WaitingListView.sql" />
-    <None Remove="Scripts\2.0.1\14_SystemQueue.sql" />
+    <None Remove="Scripts\2.0.1\12_SystemQueue.sql" />
+    <None Remove="Scripts\2.0.1\13_ServiceRoomView.sql" />
+    <None Remove="Scripts\2.0.1\14_WaitingListView.sql" />
     <None Remove="Scripts\2.0.1\15_InsertFacility.sql" />
     <None Remove="Scripts\2.0.1\16_pr_User_Login.sql" />
     <None Remove="Scripts\2.0.1\17_pr_Admin_GetFacilityList.sql" />
@@ -402,9 +402,9 @@
     <EmbeddedResource Include="Scripts\2.0.1\09_Rooms.sql" />
     <EmbeddedResource Include="Scripts\2.0.1\10_ServicePoint.sql" />
     <EmbeddedResource Include="Scripts\2.0.1\11_ServiceRoomTable.sql" />
-    <EmbeddedResource Include="Scripts\2.0.1\12_ServiceRoomView.sql" />
-    <EmbeddedResource Include="Scripts\2.0.1\13_WaitingListView.sql" />
-    <EmbeddedResource Include="Scripts\2.0.1\14_SystemQueue.sql" />
+    <EmbeddedResource Include="Scripts\2.0.1\13_ServiceRoomView.sql" />
+    <EmbeddedResource Include="Scripts\2.0.1\14_WaitingListView.sql" />
+    <EmbeddedResource Include="Scripts\2.0.1\12_SystemQueue.sql" />
     <EmbeddedResource Include="Scripts\2.0.1\15_InsertFacility.sql" />
     <EmbeddedResource Include="Scripts\2.0.1\16_pr_User_Login.sql" />
     <EmbeddedResource Include="Scripts\2.0.1\17_pr_Admin_GetFacilityList.sql" />
