@@ -17,7 +17,7 @@ namespace IQCare.Queue.BusinessProcess.CommandHandlers
     public class CheckRoomExistCommandHandler : IRequestHandler<CheckRoomExistCommand, Result<RoomExistResponse>>
     {
         private readonly IQueueUnitOfWork _queueUnitOfWork;
-        private readonly ILogger _logger = Log.ForContext<RoomExistResponse>();
+        private readonly ILogger _logger = Log.ForContext<CheckRoomExistCommandHandler>();
         public string message;
         public Boolean exist;
 

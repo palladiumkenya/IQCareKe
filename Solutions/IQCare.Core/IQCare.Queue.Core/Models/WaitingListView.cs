@@ -13,7 +13,7 @@ namespace IQCare.Queue.Core.Models
 
         public string LastName { get; set; }
 
-        
+        public int RoomId { get; set; }
 
         public string RoomName { get; set; }
 

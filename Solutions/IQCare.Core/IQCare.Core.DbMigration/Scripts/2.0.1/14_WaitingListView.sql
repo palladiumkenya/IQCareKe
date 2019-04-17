@@ -15,7 +15,7 @@ AS
 
 select qwl.Id,  CAST(DECRYPTBYKEY(p.[FirstName]) AS VARCHAR(50)) AS [FirstName], 
 	   CAST(DECRYPTBYKEY(p.[MidName]) AS VARCHAR(50)) AS [MiddleName],
-	   CAST(DECRYPTBYKEY(p.[LastName]) AS VARCHAR(50)) AS [LastName],r.RoomName,pv.PersonId as PersonId,Cast(lvw.OrdRank as int) as PriorityRank,qwl.PatientId,qwl.ServiceRoomId,sa.Id as ServiceAreaId
+	   CAST(DECRYPTBYKEY(p.[LastName]) AS VARCHAR(50)) AS [LastName],r.Id as RoomId,r.RoomName,pv.PersonId as PersonId,Cast(lvw.OrdRank as int) as PriorityRank,qwl.PatientId,qwl.ServiceRoomId,sa.Id as ServiceAreaId
 ,sa.DisplayName as ServiceAreaName,ltv.Itemid as ServicePointId, ltv.ItemDisplayName as ServicePointName,qwl.DeleteFlag
 ,lvw.ItemName as [Priority],qwl.[Status],qwl.CreatedBy,qwl.UpdateDate,qwl.UpdatedBy,qwl.CreateDate from QueueWaitingList qwl 
 left join Patient pv on pv.Id=qwl.PatientId 

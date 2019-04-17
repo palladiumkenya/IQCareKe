@@ -233,6 +233,17 @@ namespace IQCare.Queue.Web
         }
 
         [HttpGet("{id}")]
+        public async Task<IActionResult> GetQueueListByRoomId(int id)
+        {
+            var results = await _mediator.Send(new GetQueueListByRoomIdCommand {RoomId = id }, HttpContext.RequestAborted);
+            if (results.IsValid)
+                return Ok(results.Value);
+
+            return BadRequest(results);
+        }
+
+
+        [HttpGet("{id}")]
         public async Task<IActionResult> GetQueueListByPatientId(int id)
         {
             var results = await _mediator.Send(new GetQueueListByPatientIdCommand { PatientId = id }, HttpContext.RequestAborted);

@@ -18,7 +18,7 @@ namespace IQCare.Queue.BusinessProcess.CommandHandlers
     {
         private readonly IQueueUnitOfWork _queueUnitOfWork;
 
-        private readonly ILogger _logger = Log.ForContext<GetPrioritiesListCommandHandler>();
+        private readonly ILogger _logger = Log.ForContext<GetServiceAreasCommandHandler>();
 
         public GetServiceAreasCommandHandler(IQueueUnitOfWork queueUnitOfWork)
         {

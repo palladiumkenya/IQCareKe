@@ -25,6 +25,7 @@ import {
 
 import { getListeners } from '@angular/core/src/render3/discovery_utils';
 import { routerNgProbeToken } from '@angular/router/src/router_module';
+import { element } from '@angular/core/src/render3';
 @Component({
     selector: 'app-view-waitinglist',
     templateUrl: './view-waitinglist.component.html',
@@ -34,8 +35,10 @@ export class ViewWaitinglistComponent implements OnInit {
     serviceAreas: serviceAreas[] = [];
     firstserviceArea: serviceAreas;
     QueueList: PatientWaitingList[] = [];
+    roomitems: any[] = [];
     serviceAreaList: any[] = [];
     servicelistareas: ServiceList[] = [];
+    Rooms: Roomlist[] = [];
     formGroup: FormGroup;
     waitingList: any[] = [];
     updated: boolean;
@@ -50,7 +53,7 @@ export class ViewWaitinglistComponent implements OnInit {
     identifiers: any[] = [];
 
     hasItems: boolean = false;
-
+    configuration: boolean;
     dataSource = new MatTableDataSource(this.QueueList);
     constructor(private formBuilder: FormBuilder,
         private queuedetailsservice: QueueDetailsService,
@@ -71,11 +74,50 @@ export class ViewWaitinglistComponent implements OnInit {
     ngOnInit() {
         this.getServiceAreaList();
         this.getWaitingList();
-
-        this.firstserviceArea = new serviceAreas();
+        this.getRoomsList();
+        //this.firstserviceArea = new serviceAreas();
         this.formGroup = this.formBuilder.group({
-            ServiceArea: new FormControl('', [Validators.required])
+            RoomName: new FormControl('', [Validators.required])
         });
+    }
+    getWaitingListByRoomId(id: number) {
+        this.queuedetailsservice.getWaitingListByRoomId(id).subscribe
+            ((result) => {
+                this.waitingList = result['waitingListViews'];
+                console.log(result);
+                console.log(this.waitingList);
+                this.QueueList = [];
+                this.waitingList.forEach(x => {
+                    this.QueueList.push({
+                        FirstName: x.firstName,
+                        MiddleName: x.middleName,
+                        LastName: x.lastName,
+                        Id: x.id,
+                        ServiceAreaName: x.serviceAreaName,
+                        ServicePointName: x.servicePointName,
+                        RoomName: x.roomName,
+                        Priority: x.priority,
+                        CreatedBy: x.createdBy,
+                        CreateDate: x.createDate,
+                        PatientId: x.patientId,
+                        PersonId: x.personId,
+                        Status: x.status
+                    });
+
+
+
+                });
+                console.log(this.QueueList);
+                this.dataSource = new MatTableDataSource(this.QueueList);
+                this.dataSource.paginator = this.paginator;
+            },
+                (error) => {
+                    this.snotifyService.error('Error extracting the patient waiting list' + error, 'WaitingList',
+                        this.notificationService.getConfig());
+                },
+                () => {
+                });
+
     }
     getWaitingListbyServiceAreaId(id: number) {
         this.queuedetailsservice.getWaitingListByServiceAreaId(id).subscribe
@@ -153,6 +195,46 @@ export class ViewWaitinglistComponent implements OnInit {
                 () => {
                 });
     }
+    AddRoom() {
+        this.zone.run(() => {
+            this.router.navigate(['/queue/'],
+                { relativeTo: this.route });
+        });
+    }
+    checkRooms() {
+        if (this.Rooms.length < 1) {
+            this.configuration = true;
+        } else {
+            this.configuration = false;
+        }
+        return this.configuration;
+
+         }
+    getRoomsList() {
+        this.queuedetailsservice.getRooms().subscribe((result) => {
+            console.log(result);
+            this.roomitems = result['roomsList'];
+            this.roomitems.forEach(x => {
+                this.Rooms.push({
+                    id: x.id,
+                    displayName: x.roomName
+                });
+
+            });
+
+            console.log('//Rooms');
+            console.log(this.Rooms);
+
+        },
+
+            (error) => {
+                this.snotifyService.error('Error extractiong the room list' + error, 'List',
+                    this.notificationService.getConfig());
+            },
+            () => {
+            });
+
+    }
     getServiceAreaList() {
         this.queuedetailsservice.getServiceAreas().subscribe((result) => {
 
@@ -192,6 +274,16 @@ export class ViewWaitinglistComponent implements OnInit {
         }
 
     }
+
+    OnRoomChange() {
+        const area = this.formGroup.controls.RoomName.value;
+        if (area > 0) {
+            this.getWaitingListByRoomId(area);
+
+        } else {
+            this.getWaitingList();
+        }
+    }
     Serve(Id: number) {
 
         this.dialogService.openConfirmDialog('Kindly confirm you want to serve the patient?')
@@ -207,12 +299,12 @@ export class ViewWaitinglistComponent implements OnInit {
                                 this.snotifyService.success('Kindly note the item in the '
                                     + '  waiting has been updated', 'WaitingList',
                                     this.notificationService.getConfig());
-                                
+
                                 const selectedService = this.servicelistareas.find(obj => obj.displayName
                                     == queueIndividual.ServiceAreaName);
-                                
-                             this.isPersonServiceEnrolled(selectedService.id, queueIndividual.PersonId,selectedService.code);
-                               
+
+                                this.isPersonServiceEnrolled(selectedService.id, queueIndividual.PersonId, selectedService.code);
+
 
 
                             }
@@ -285,7 +377,7 @@ export class ViewWaitinglistComponent implements OnInit {
     }
 
     isPersonServiceEnrolled(serviceId: number, personid: number, code: string) {
-       
+
         this.enrolledService = [];
         this.patientIdentifiers = [];
         this.identifiers = [];
@@ -300,11 +392,11 @@ export class ViewWaitinglistComponent implements OnInit {
                 patientId = this.enrolledServices[0]['patientId'];
             }
             if (this.enrolledServices && this.enrolledServices.length > 0) {
-                
+
                 for (let i = 0; i < this.enrolledServices.length; i++) {
                     if (this.enrolledServices[i].serviceAreaId == serviceId) {
                         returnValue = true;
-                        
+
                     }
                 }
                 if (returnValue == true) {
@@ -314,26 +406,28 @@ export class ViewWaitinglistComponent implements OnInit {
                     let iseligible: Boolean;
                     iseligible = this.isServiceEligible(serviceId);
                     if (iseligible == true) {
-                        this.enrollToService(serviceId, code, personid );
+                        this.enrollToService(serviceId, code, personid);
                     } else {
                         this.zone.run(() => {
                             this.router.navigate(['/dashboard/personhome/' +
-                                personid ], { relativeTo: this.route });
+                                personid], { relativeTo: this.route });
                         });
                     }
                 }
             } else {
-                
+
                 this.zone.run(() => {
                     this.router.navigate(['/dashboard/personhome/' +
-                        personid ], { relativeTo: this.route });
+                        personid], { relativeTo: this.route });
                 });
 
-        }
-            
+            }
+
         });
-      
+
     }
+
+  
 
 
     isServiceEligible(serviceAreaId: number) {

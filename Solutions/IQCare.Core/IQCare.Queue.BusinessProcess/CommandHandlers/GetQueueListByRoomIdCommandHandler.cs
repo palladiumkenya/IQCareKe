@@ -10,32 +10,31 @@ using System.Threading.Tasks;
 using System.Threading;
 using System.Linq;
 using IQCare.Library;
-
 namespace IQCare.Queue.BusinessProcess.CommandHandlers
 {
-    public class GetQueueListByServiceAreaIdCommandHandler : IRequestHandler<GetQueueListByServiceAreaIdCommand, Result<GetQueueListByServiceAreaResponse>>
+    public class GetQueueListByRoomIdCommandHandler : IRequestHandler<GetQueueListByRoomIdCommand, Result<GetQueueListByRoomsResponse>>
     {
         private readonly IQueueUnitOfWork _queueUnitOfWork;
 
-        private readonly ILogger _logger = Log.ForContext<GetQueueListByServiceAreaIdCommandHandler>();
+        private readonly ILogger _logger = Log.ForContext<GetQueueListByRoomIdCommandHandler>();
 
-        public GetQueueListByServiceAreaIdCommandHandler(IQueueUnitOfWork queueUnitOfWork)
+        public GetQueueListByRoomIdCommandHandler(IQueueUnitOfWork queueUnitOfWork)
         {
             _queueUnitOfWork = queueUnitOfWork ?? throw new ArgumentNullException(nameof(queueUnitOfWork));
         }
 
-        public async Task<Result<GetQueueListByServiceAreaResponse>> Handle(GetQueueListByServiceAreaIdCommand request, CancellationToken cancellationToken)
+        public async Task<Result<GetQueueListByRoomsResponse>> Handle(GetQueueListByRoomIdCommand request, CancellationToken cancellationToken)
         {
             try
             {
                 var sql = "exec pr_OpenDecryptedSession;" +
-                              $"SELECT * FROM WaitingListView WHERE ServiceAreaId = {request.ServiceAreaId}  order by PriorityRank asc,CreateDate desc;" +
+                              $"SELECT * FROM WaitingListView WHERE RoomId = {request.RoomId} order by PriorityRank asc,CreateDate desc; " +
                               $"exec [dbo].[pr_CloseDecryptedSession];";
 
                 var result = await _queueUnitOfWork.Repository<WaitingListView>().FromSql(sql);
-                var finalresult = result.ToList().Where(x => x.DeleteFlag == false && x.Status==false).ToList();
+                var finalresult = result.ToList().Where(x => x.DeleteFlag == false && x.Status == false).ToList();
 
-                return Result<GetQueueListByServiceAreaResponse>.Valid(new GetQueueListByServiceAreaResponse()
+                return Result<GetQueueListByRoomsResponse>.Valid(new GetQueueListByRoomsResponse()
                 {
                     waitingListViews = finalresult
 
@@ -44,11 +43,12 @@ namespace IQCare.Queue.BusinessProcess.CommandHandlers
             catch (Exception ex)
             {
                 Log.Error(ex.Message);
-                return Result<GetQueueListByServiceAreaResponse>.Invalid(ex.Message);
+                return Result<GetQueueListByRoomsResponse>.Invalid(ex.Message);
             }
 
 
         }
+
     }
-   
+    
 }

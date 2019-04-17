@@ -228,6 +228,12 @@ export class QueueDetailsService {
         );
     }
 
+    getWaitingListByRoomId(id: number): Observable<any[]> {
+        return this.http.get<any[]>(this.API_QUEUE_URL + '/api/Queue/GetQueueListByRoomId/' + id).pipe(tap(
+            getWaitingListByRoomId => this.errorHandler.log(`fetched  WaitingList by RoomId`)),
+            catchError(this.errorHandler.handleError<any[]>(' getWaitingListByRoomId'))
+        );
+    }
     getWaitingListByServiceAreaId(id: number): Observable<any[]> {
         return this.http.get<any[]>(this.API_QUEUE_URL + '/api/Queue/GetQueueListByServiceAreaId/' + id).pipe(tap(
             getWaitingListByServiceAreaId => this.errorHandler.log(`fetched WaitingList by ServiceArea`)),
@@ -241,6 +247,6 @@ export class QueueDetailsService {
         );
     }
 
-   
+
 }
 

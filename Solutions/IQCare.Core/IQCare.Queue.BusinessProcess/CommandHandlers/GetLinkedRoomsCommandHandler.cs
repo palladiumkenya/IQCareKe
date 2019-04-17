@@ -17,7 +17,7 @@ namespace IQCare.Queue.BusinessProcess.CommandHandlers
    public  class GetLinkedRoomsCommandHandler : IRequestHandler<GetLinkedRoomsCommand, Result<GetLinkedRoomsResponse>>
     {
         private readonly IQueueUnitOfWork _queueUnitOfWork;
-        private readonly ILogger _logger = Log.ForContext<GetRoomsAndServicePointCommandHandler>();
+        private readonly ILogger _logger = Log.ForContext<GetLinkedRoomsCommandHandler>();
         public List<ServiceRoomView> sRoomView;
 
         public List<RoomServiceList> RoomServiceLists=new List<RoomServiceList>();
