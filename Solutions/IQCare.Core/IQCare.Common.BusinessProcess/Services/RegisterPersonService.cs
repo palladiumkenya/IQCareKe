@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -1563,7 +1565,7 @@ namespace IQCare.Common.BusinessProcess.Services
             }
         }
 
-        public async Task<Person> RegisterPerson(string firstName, string middleName, string lastName, int sex, int createdBy, int facilityId, DateTime? dateOfBirth, DateTime? registrationDate = null, string nickName="")
+        public async Task<Person> RegisterPerson(string firstName, string middleName, string lastName, int sex, int createdBy, int facilityId, DateTime? dateOfBirth, DateTime? registrationDate = null, string nickName="", bool dobPrecison = true)
         {
             try
             {
@@ -1581,18 +1583,31 @@ namespace IQCare.Common.BusinessProcess.Services
                     sql.Append("Insert Into Person(FirstName, MidName, LastName,NickName, " +
                                "Sex, DateOfBirth, DobPrecision, Active, DeleteFlag, CreateDate, " +
                                "CreatedBy, RegistrationDate, FacilityId)" +
-                               $"Values(ENCRYPTBYKEY(KEY_GUID('Key_CTC'), '{firstName}'), ENCRYPTBYKEY(KEY_GUID('Key_CTC'), '{middleName}')," +
-                               $"ENCRYPTBYKEY(KEY_GUID('Key_CTC'), '{lastName}'),ENCRYPTBYKEY(KEY_GUID('Key_CTC'), '{nickName}') , {sex}, '{dob}', 1," +
-                               $"1,0,GETDATE(), '{createdBy}', '{regDate}', '{facilityId}');");
+                               $"Values(ENCRYPTBYKEY(KEY_GUID('Key_CTC'), @firstName), ENCRYPTBYKEY(KEY_GUID('Key_CTC'), @middleName)," +
+                               $"ENCRYPTBYKEY(KEY_GUID('Key_CTC'), @lastName),ENCRYPTBYKEY(KEY_GUID('Key_CTC'), @nickName) , @sex, @dob, @dobPrecison," +
+                               $"1,0,GETDATE(), @createdBy, @regDate, @facilityId);");
+
+                    //sql.Append("Insert Into Person(FirstName, MidName, LastName,NickName, " +
+                    //           "Sex, DateOfBirth, DobPrecision, Active, DeleteFlag, CreateDate, " +
+                    //           "CreatedBy, RegistrationDate, FacilityId)" +
+                    //           $"Values(ENCRYPTBYKEY(KEY_GUID('Key_CTC'), '{firstName}'), ENCRYPTBYKEY(KEY_GUID('Key_CTC'), '{middleName}')," +
+                    //           $"ENCRYPTBYKEY(KEY_GUID('Key_CTC'), '{lastName}'),ENCRYPTBYKEY(KEY_GUID('Key_CTC'), '{nickName}') , {sex}, '{dob}', 1," +
+                    //           $"1,0,GETDATE(), '{createdBy}', '{regDate}', '{facilityId}');");
                 }
                 else
                 {
                     sql.Append("Insert Into Person(FirstName, MidName, LastName,NickName, " +
-                               "Sex, Active, DeleteFlag, CreateDate, " +
+                               "Sex,DateOfBirth, DobPrecision, Active, DeleteFlag, CreateDate, " +
                                "CreatedBy, RegistrationDate, FacilityId)" +
-                               $"Values(ENCRYPTBYKEY(KEY_GUID('Key_CTC'), '{firstName}'), ENCRYPTBYKEY(KEY_GUID('Key_CTC'), '{middleName}')," +
-                               $"ENCRYPTBYKEY(KEY_GUID('Key_CTC'), '{lastName}'),ENCRYPTBYKEY(KEY_GUID('Key_CTC'), '{nickName}') , {sex}," +
-                               $"1,0,GETDATE(), '{createdBy}', '{regDate}', '{facilityId}');");
+                               $"Values(ENCRYPTBYKEY(KEY_GUID('Key_CTC'), @firstName), ENCRYPTBYKEY(KEY_GUID('Key_CTC'), @middleName)," +
+                               $"ENCRYPTBYKEY(KEY_GUID('Key_CTC'), @lastName),ENCRYPTBYKEY(KEY_GUID('Key_CTC'), @nickName) , @sex," +
+                               $"@dob, @dobPrecison,1,0,GETDATE(), @createdBy, @regDate, @facilityId);");
+                    //sql.Append("Insert Into Person(FirstName, MidName, LastName,NickName, " +
+                    //           "Sex, Active, DeleteFlag, CreateDate, " +
+                    //           "CreatedBy, RegistrationDate, FacilityId)" +
+                    //           $"Values(ENCRYPTBYKEY(KEY_GUID('Key_CTC'), '{firstName}'), ENCRYPTBYKEY(KEY_GUID('Key_CTC'), '{middleName}')," +
+                    //           $"ENCRYPTBYKEY(KEY_GUID('Key_CTC'), '{lastName}'),ENCRYPTBYKEY(KEY_GUID('Key_CTC'), '{nickName}') , {sex}," +
+                    //           $"1,0,GETDATE(), '{createdBy}', '{regDate}', '{facilityId}');");
                 }
                 
                 sql.Append("SELECT [Id] , CAST(DECRYPTBYKEY(FirstName) AS VARCHAR(50)) [FirstName] ,CAST(DECRYPTBYKEY(MidName) AS VARCHAR(50)) MidName" +
@@ -1600,7 +1615,59 @@ namespace IQCare.Common.BusinessProcess.Services
                            ",[CreatedBy] ,[AuditData] ,[DateOfBirth] ,[DobPrecision], RegistrationDate, FacilityId FROM [dbo].[Person] WHERE Id = SCOPE_IDENTITY();" +
                            "exec [dbo].[pr_CloseDecryptedSession];");
 
-                var personInsert = await _unitOfWork.Repository<Person>().FromSql(sql.ToString());
+                var firstNameParameter = new SqlParameter();
+                firstNameParameter.SqlDbType = SqlDbType.VarChar;
+                firstNameParameter.ParameterName = "@firstName";
+                firstNameParameter.Size = -1;
+                firstNameParameter.Value = firstName;
+
+                var midNameParameter = new SqlParameter();
+                midNameParameter.SqlDbType = SqlDbType.VarChar;
+                midNameParameter.ParameterName = "@middleName";
+                midNameParameter.Size = -1;
+                midNameParameter.Value = middleName;
+
+                var lastNameParameter = new SqlParameter();
+                lastNameParameter.SqlDbType = SqlDbType.VarChar;
+                lastNameParameter.ParameterName = "@lastName";
+                lastNameParameter.Size = -1;
+                lastNameParameter.Value = lastName;
+
+                var nickNameParameter = new SqlParameter();
+                nickNameParameter.SqlDbType = SqlDbType.VarChar;
+                nickNameParameter.ParameterName = "@nickName";
+                nickNameParameter.Size = -1;
+                nickNameParameter.Value = nickName;
+
+                var sexParameter = new SqlParameter("@sex", sex);
+                var dobParameter = new SqlParameter();
+                dobParameter.ParameterName = "@dob";
+                dobParameter.IsNullable = true;
+                dobParameter.SqlDbType = SqlDbType.DateTime;
+                dobParameter.Value = string.IsNullOrWhiteSpace(dob) ? (object)DBNull.Value : dateOfBirth.Value;
+
+
+                //var dobParameter = string.IsNullOrWhiteSpace(dob)
+                //    ? new SqlParameter("@dob", null)
+                //    : new SqlParameter("@dob", dob);
+                var dobPrecisionParameter = new SqlParameter("@dobPrecison", dobPrecison);
+                var createdByParameter = new SqlParameter("@createdBy", createdBy);
+                var regDateParameter = new SqlParameter("@regDate", regDate);
+                var facilityIdParameter = new SqlParameter("@facilityId", facilityId);
+
+                var personInsert = await _unitOfWork.Repository<Person>().FromSql(sql.ToString(), parameters:new []
+                {
+                    firstNameParameter,
+                    midNameParameter,
+                    lastNameParameter,
+                    nickNameParameter,
+                    sexParameter,
+                    dobParameter,
+                    dobPrecisionParameter,
+                    createdByParameter,
+                    regDateParameter,
+                    facilityIdParameter
+                });
                 return personInsert.FirstOrDefault();
             }
             catch (Exception e)
