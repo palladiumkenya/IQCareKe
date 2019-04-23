@@ -790,7 +790,7 @@ namespace IQCare.Common.BusinessProcess.Services
                     gender = 17;
                 }
 
-                string dateOfBirth = dob.ToString("yyyy-MM-dd");
+                //string dateOfBirth = dob.ToString("yyyy-MM-dd");
 
                 StringBuilder sql = new StringBuilder();
                 sql.Append("exec pr_OpenDecryptedSession;");
@@ -854,7 +854,7 @@ namespace IQCare.Common.BusinessProcess.Services
                 var referralIdParameter = new SqlParameter("@referralId", referralId);
                 var dateOfEnrollmentParameter = new SqlParameter("@dateOfEnrollment", dateOfEnrollment);
                 var genderParameter = new SqlParameter("@gender", gender);
-                var dateOfBirthParameter = new SqlParameter("@dateOfBirth", dateOfBirth);
+                var dateOfBirthParameter = new SqlParameter("@dateOfBirth", dob);
                 var dobPrecisionParameter = new SqlParameter("@dobPrecision", dobPrecision);
                 var maritalStatusIdParameter = new SqlParameter("@maritalStatusId", maritalStatusId);
                 var createdByParameter = new SqlParameter("@createdBy", createdBy);
@@ -1252,7 +1252,7 @@ namespace IQCare.Common.BusinessProcess.Services
                                                  $"MiddleName = ENCRYPTBYKEY(KEY_GUID('Key_CTC'), @middleName)," +
                                                  $"LastName = ENCRYPTBYKEY(KEY_GUID('Key_CTC'), @lastName)," +
                                                  $"Sex = @gender," +
-                                                 $"DOB = @dateOfBirth" +
+                                                 $"DOB = @dateOfBirth " +
                                                  $"where Ptn_Pk = @ptn_pk;");
                             stringBuilder.Append("exec [dbo].[pr_CloseDecryptedSession];");
                             stringBuilder.Append($"SELECT Ptn_Pk, " +
@@ -1270,8 +1270,7 @@ namespace IQCare.Common.BusinessProcess.Services
                                 lastNameParameter,
                                 genderParameter,
                                 ptnpkParameter,
-                                dobParameter,
-                                genderParameter
+                                dobParameter
                             });
                         }
                     }
