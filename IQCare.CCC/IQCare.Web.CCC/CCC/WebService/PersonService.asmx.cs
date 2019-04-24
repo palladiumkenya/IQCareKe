@@ -1252,7 +1252,7 @@ namespace IQCare.Web.CCC.WebService
             }
         }
 
-        [WebMethod(EnableSession = true)]
+        [WebMethod(EnableSession = false)]
         public string SetSession(int personId)
         {
             if (personId > 0)
@@ -1291,6 +1291,29 @@ namespace IQCare.Web.CCC.WebService
             if (patientPk > 0)
             {
                 Session["PatientPK"] = patientPk;
+            }
+        }
+
+        [WebMethod(EnableSession = true)]
+        public bool SetPatientSessionFromUniversalRegistration(int patientPk, int personId)
+        {
+            try
+            {
+                if (patientPk > 0)
+                {
+                    Session["PatientPK"] = patientPk;
+                }
+
+                if (personId > 0)
+                {
+                    Session["PersonId"] = personId;
+                }
+
+                return true;
+            }
+            catch (Exception e)
+            {
+                return false;
             }
         }
 
