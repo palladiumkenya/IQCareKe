@@ -185,6 +185,7 @@
     <None Remove="Scripts\2.0.0\43_UpdateUIDIndicators.sql" />
     <None Remove="Scripts\2.0.1\07_AdditionalServiceAreaFields.sql" />
     <None Remove="Scripts\2.0.1\07_API_PatientsView.sql" />
+    <None Remove="Scripts\2.0.1\08_Update_ModeOfDelivery.sql" />
   </ItemGroup>
 
   <ItemGroup>
@@ -388,6 +389,7 @@
     <EmbeddedResource Include="Scripts\2.0.0\42DefaultConstraintsSection.sql" />
     <EmbeddedResource Include="Scripts\2.0.0\43_UpdateUIDIndicators.sql" />
     <EmbeddedResource Include="Scripts\2.0.1\07_API_PatientsView.sql" />
+    <EmbeddedResource Include="Scripts\2.0.1\08_Update_ModeOfDelivery.sql" />
   </ItemGroup>
 
   <ItemGroup>
