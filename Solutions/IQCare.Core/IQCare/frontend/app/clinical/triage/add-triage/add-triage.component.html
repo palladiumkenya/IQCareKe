@@ -75,13 +75,13 @@
       <div class="row">
           <div class="col-lg-3 col-xs-12">
               <mat-form-field class="col-md-12">
-                  <input matInput placeholder="Systolic BP(mmHg)" formControlName="bpSystolic" required>
+                  <input matInput placeholder="Systolic BP(mmHg)" [pattern]="VitalsValidation.NumberValidationPattern" min="VitalsValidation.min(0)" max="VitalsValidation.SystolicBP"  formControlName="bpSystolic" >
               </mat-form-field>
           </div>
           <div class="col-lg-3 col-xs-12">
               <mat-form-field class="col-md-12">
-                  <input matInput placeholder="Diastolic BP (mmHg)" formControlName="bpDiastolic"
-                      required>
+                  <input matInput placeholder="Diastolic BP (mmHg)" [pattern]="VitalsValidation.NumberValidationPattern" min="VitalsValidation.min(0)" max="VitalsValidation.DiastolicaBP" formControlName="bpDiastolic"
+                      >
               </mat-form-field>
           </div>
           <div class="col-lg-3 col-xs-12">
