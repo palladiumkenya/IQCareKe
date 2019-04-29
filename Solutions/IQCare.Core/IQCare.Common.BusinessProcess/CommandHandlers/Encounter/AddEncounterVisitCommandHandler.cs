@@ -7,13 +7,14 @@ using IQCare.Common.Infrastructure;
 using IQCare.Library;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
+using Serilog;
 
 namespace IQCare.Common.BusinessProcess.CommandHandlers.Encounter
 {
-    public class AddEncounterVisitCommandHand : IRequestHandler<AddEncounterVisitCommand, Result<AddEncounterVisitResponse>>
+    public class AddEncounterVisitCommandHandler : IRequestHandler<AddEncounterVisitCommand, Result<AddEncounterVisitResponse>>
     {
         private readonly ICommonUnitOfWork _unitOfWork;
-        public AddEncounterVisitCommandHand(ICommonUnitOfWork unitOfWork)
+        public AddEncounterVisitCommandHandler(ICommonUnitOfWork unitOfWork)
         {
             _unitOfWork = unitOfWork ?? throw new ArgumentNullException(nameof(unitOfWork));
         }
@@ -84,6 +85,7 @@ namespace IQCare.Common.BusinessProcess.CommandHandlers.Encounter
                 }
                 catch (Exception ex)
                 {
+                    Log.Error($"Error saving Encounter Visit for PatientId: {request.PatientId} ", ex.Message);
                     trans.Rollback();
                     return Result<AddEncounterVisitResponse>.Invalid(ex.Message);
                 }
