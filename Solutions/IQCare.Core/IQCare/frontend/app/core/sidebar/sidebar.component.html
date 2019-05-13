@@ -35,6 +35,34 @@
                 </a>
             </li>
         </ng-container>
+        <ng-container *ngIf=(checkQueue())>
+            <li>
+                <a routerLink="/queue">
+                    <i class="menu-icon glyphicon glyphicon-plus"></i>
+                        <span class="menu-text">ADD ROOM</span>
+                
+                </a>
+            </li>
+        </ng-container>
+        <ng-container *ngIf=(checkQueue())> 
+            <li>
+                <a routerLink="/queue/link">
+                    <i class="menu-icon glyphicon glyphicon-link"></i>
+                        <span class="menu-text">LINK ROOM TO SERVICE </span>
+                    
+                </a>
+            </li>
+        </ng-container>
+
+        <ng-container *ngIf=(checkQueue())>
+            <li>
+                <a routerLink="/queue/view">
+                    <i class="menu-icon glyphicon glyphicon-list"></i>
+                        <span class="menu-text">VIEW WAITINGLIST</span>
+                    
+                </a>
+            </li>
+        </ng-container>
 
         <ng-container *ngIf="patientId > 0">
             <li>

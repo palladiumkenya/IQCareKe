@@ -134,6 +134,9 @@ dotnet publish Solutions/IQCare.Core/IQCare/IQCare.csproj -o ../../../package/ap
 @echo ********** END OF BUILINDING IQCare API ********** >> %log%
 
 
+
+
+
 @echo "********** Building IQCare LAB **********" >> %log%
 @echo ********** Building IQCare LAB **********
 
@@ -160,6 +163,27 @@ dotnet publish Solutions/IQCare.Core/IQCare.Common.Web/IQCare.Common.Web.csproj 
 
 @echo ********** END OF BUILINDING IQCare COMMON WEB ********** >> %log%
 @echo ********** END OF BUILINDING IQCare COMMON WEB ********** >> %log%
+
+
+@echo "********** Building IQCare QUEUE **********" >> %log%
+@echo ********** Building IQCare QUEUE **********
+
+dotnet publish Solutions/IQCare.Core/IQCare.Queue.Web/IQCare.Queue.Web.csproj -o ../../../package/IQCareQueue
+
+@echo ********** END OF BUILDING IQCare QUEUE ********** >> %log%
+@echo ********** END OF BUILDING IQCare QUEUE ********** >> %log%
+
+
+@echo "********** Building IQCare AIR **********" >> %log%
+@echo ********** Building IQCare AIR **********
+
+dotnet publish Solutions/IQCare.Core/IQCare.AIR.Web/IQCare.AIR.Web.csproj -o ../../../package/IQCareAIR
+
+@echo ********** END OF BUILDING IQCare AIR ********** >> %log%
+@echo ********** END OF BUILDING IQCare AIR ********** >> %log%
+
+
+
 
 
 dotnet publish Solutions/IQCare.Core/IQCare.Core.DbMigration/IQCare.Core.DbMigration.csproj -o ../../../Release/DbMigration/win-x64 -r win-x64

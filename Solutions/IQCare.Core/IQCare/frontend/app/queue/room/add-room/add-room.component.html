@@ -1,0 +1,118 @@
+<div class="row">
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        <div class="row">
+            <div class="col-lg-12 col-sm-12 col-xs-12">
+                <div class="widget">
+                    <div class="widget-header bordered-left">
+                        <span class="widget-caption">Room</span>
+                    </div>
+                    <div class="widget-body bordered-left">
+                        <form class="form-group" role="form">
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <div class="form-group">
+
+                                        <label class="sr-only" for="RoomName">RoomName</label>
+                                        <input type="text" autocomplete="off" class="form-control" id="RoomName"
+                                            name="RoomName" placeholder="Room Name" tabindex="1"
+                                            [(ngModel)]="NewRoom.RoomName" #RoomName="ngModel">
+
+
+                                    </div>
+                                </div>
+                                <div class="col-lg-3 col-md-3">
+                                    <div class="form-group">
+                                        <label class="sr-only" for="DisplayName">Room DisplayName</label>
+                                        <input type="text" autocomplete="off" class="form-control" id="DisplayName"
+                                            name="DisplayName" placeholder="Room DisplayName" tabindex="2"
+                                            [(ngModel)]="NewRoom.DisplayName" #DisplayName="ngModel">
+
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div>&nbsp;</div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label class="sr-only" for="Description">Room Desciption</label>
+                                        <textarea autocomplete="off" class="form-control " id="Description"
+                                            name="Description" placeholder="Room Description" tabindex="3"
+                                            [(ngModel)]="NewRoom.Description" #Description="ngModel"></textarea>
+
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-3 col-md-3 col-sm-3">
+                                    <div class="form-group">
+                                        <button class="btn btn-primary m-t-n-xs" (click)="AddRoom()">
+                                            <strong>Add Room</strong>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div>
+                        &nbsp;
+                    </div>
+                    <div class="example-container mat-elevation-z8">
+                        <mat-table #table [dataSource]="dataSource">
+
+
+
+
+
+                            <ng-container matColumnDef="roomName">
+                                <mat-header-cell *matHeaderCellDef><strong>Room Name</strong></mat-header-cell>
+                                <mat-cell *matCellDef="let Rooms"> {{Rooms.roomName}} </mat-cell>
+                            </ng-container>
+
+
+                            <ng-container matColumnDef="displayName">
+                                <mat-header-cell *matHeaderCellDef><strong> Display Name</strong> </mat-header-cell>
+                                <mat-cell *matCellDef="let  Rooms"> {{Rooms.displayName}} </mat-cell>
+                            </ng-container>
+
+
+                            <ng-container matColumnDef="description">
+                                <mat-header-cell *matHeaderCellDef><strong>Description</strong></mat-header-cell>
+                                <mat-cell *matCellDef="let Rooms"> {{Rooms.description}} </mat-cell>
+                            </ng-container>
+
+                            <ng-container matColumnDef="edit">
+                                <mat-header-cell *matHeaderCellDef><strong class="fa fa-cog"> Edit</strong>
+                                </mat-header-cell>
+                                <mat-cell *matCellDef="let Rooms">
+                                    <a routerLink="rooms/edit/{{Rooms.id}}" mat-raised-button class="mat-accent"> <span
+                                            class="fa fa-pencil">
+                                            Edit </span> </a>
+                                </mat-cell>
+
+                            </ng-container>
+                            <!-- Expanded Content Column - The detail row is made up of this one column -->
+
+
+                            <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                            <mat-row *matRowDef="let row; columns: displayedColumns">
+                            </mat-row>
+
+                            <!--<tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>-->
+
+                        </mat-table>
+
+                        <mat-paginator [pageSize]="10" [pageSizeOptions]="[3, 5, 10, 20, 50]"
+                            [showFirstLastButtons]="true">
+                        </mat-paginator>
+
+                    </div>
+                    <div>
+                        &nbsp;
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
