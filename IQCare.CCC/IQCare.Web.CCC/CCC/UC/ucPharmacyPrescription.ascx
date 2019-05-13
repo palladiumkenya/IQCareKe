@@ -1368,6 +1368,12 @@ var batchNoArr = new Array();
                             "qtyDisp": DrugPrescriptionTable.row(i).data()[10],
                             "prophylaxis": DrugPrescriptionTable.row(i).data()[11]
                         }
+
+                        if (!allAbbr.toUpperCase().includes(DrugPrescriptionTable.row(i).data()[3].toUpperCase())) {
+                            if (DrugPrescriptionTable.row(i).data()[3] != "")
+                                allAbbr += DrugPrescriptionTable.row(i).data()[3] + "/";
+                        }
+
                     }
                     console.log(drugPrescriptionArray);
                 }
@@ -1390,15 +1396,20 @@ var batchNoArr = new Array();
                             "qtyDisp": DrugPrescriptionTable.row(i).data()[11],
                             "prophylaxis": DrugPrescriptionTable.row(i).data()[12]
                         }
+
+                        if (!allAbbr.toUpperCase().includes(DrugPrescriptionTable.row(i).data()[3].toUpperCase())) {
+                            if (DrugPrescriptionTable.row(i).data()[3] != "")
+                                allAbbr += DrugPrescriptionTable.row(i).data()[3] + "/";
+                        }
+
                     }
+
                 }
-                    if (!allAbbr.toUpperCase().includes(DrugPrescriptionTable.row(i).data()[2].toUpperCase())) {
-                        if (DrugPrescriptionTable.row(i).data()[2] != "")
-                            allAbbr += DrugPrescriptionTable.row(i).data()[2] + "/";
-                    }
-                }
+            }
             
-            catch (ex) { }
+            catch (ex) {
+                console.log(ex);
+            }
           
             //////////////////////////////////////////////////////////////////
             allAbbr = allAbbr.replace(/\/$/, "");
@@ -1430,7 +1441,7 @@ var batchNoArr = new Array();
 
             }
             catch (err) {
-                toastr.error("Error", "");
+                toastr.error("Error", err);
             }
 
             if (sumAllAbbr > 0) {
