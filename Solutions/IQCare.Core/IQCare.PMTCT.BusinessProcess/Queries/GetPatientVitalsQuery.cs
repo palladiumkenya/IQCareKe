@@ -28,7 +28,7 @@ namespace IQCare.PMTCT.BusinessProcess.Queries
         public decimal? Spo2 { get; set; }
         public decimal? Bmi { get; set; }
         public decimal? HeadCircumference { get; set; }
-        public decimal? BmiZ { get; set; }
+        public string BmiZ { get; set; }
         public string WeightForAge { get; set; }
         public string WeightForHeight { get; set; }
         public string HeightForAge { get; set; }
