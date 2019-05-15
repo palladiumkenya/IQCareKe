@@ -41,7 +41,7 @@ namespace IQCare.Web.CCC.UC.EnhanceAdherenceCounselling
         {
             PatientId = Convert.ToInt32(HttpContext.Current.Session["PatientPK"]);
             PatientMasterVisitId = Convert.ToInt32(Request.QueryString["visitId"] != null ? Request.QueryString["visitId"] : HttpContext.Current.Session["PatientMasterVisitId"]);
-            userId = Convert.ToInt32(Session["AppUserId"]);
+            userId = Convert.ToInt32(HttpContext.Current.Session["AppUserId"]);
             serviceAreaId = LookupLogic.GetLookupItemId("MoH 257 GREENCARD");
             reasonId = LookupLogic.GetLookupItemId("Follow Up");
             differentiatedCareId = LookupLogic.GetLookupItemId("Standard Care");
@@ -64,6 +64,7 @@ namespace IQCare.Web.CCC.UC.EnhanceAdherenceCounselling
         {
             LookupLogic lookUp = new LookupLogic();
             LookupItemView[] questionsList = lookUp.getQuestions("Session2MMAS4").ToArray();
+            //List<LookupItemView> questionsList = lookUp.getQuestions("Session2MMAS4").ToList();
             int i = 0;
             foreach (var value in questionsList)
             {
@@ -164,14 +165,15 @@ namespace IQCare.Web.CCC.UC.EnhanceAdherenceCounselling
         protected void populateNotesRadio(string screeningType, PlaceHolder typePlaceHolder)
         {
             LookupLogic lookUp = new LookupLogic();
-            if (Cache[screeningType] == null)
-            {
+            //if (Cache[screeningType] == null)
+            //{
 
-                List<LookupItemView> questionsCacheList = lookUp.getQuestions(screeningType);
-                HttpRuntime.Cache.Insert(screeningType, questionsCacheList, null, System.Web.Caching.Cache.NoAbsoluteExpiration, TimeSpan.Zero);
-            }
+            //    List<LookupItemView> questionsCacheList = lookUp.getQuestions(screeningType);
+            //    HttpRuntime.Cache.Insert(screeningType, questionsCacheList, null, System.Web.Caching.Cache.NoAbsoluteExpiration, TimeSpan.Zero);
+            //}
             int i = 0;
-            List<LookupItemView> questionsList = (List<LookupItemView>)Cache[screeningType];
+           // List<LookupItemView> questionsList = (List<LookupItemView>)Cache[screeningType];
+            List<LookupItemView> questionsList = lookUp.getQuestions(screeningType);
             foreach (var value in questionsList)
             {
                 i = i + 1;

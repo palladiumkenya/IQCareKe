@@ -41,7 +41,7 @@ namespace IQCare.Web.CCC.UC.EnhanceAdherenceCounselling
         {
             PatientId = Convert.ToInt32(HttpContext.Current.Session["PatientPK"]);
             PatientMasterVisitId = Convert.ToInt32(Request.QueryString["visitId"] != null ? Request.QueryString["visitId"] : HttpContext.Current.Session["PatientMasterVisitId"]);
-            userId = Convert.ToInt32(Session["AppUserId"]);
+            userId = Convert.ToInt32(HttpContext.Current.Session["AppUserId"]);
             serviceAreaId = LookupLogic.GetLookupItemId("MoH 257 GREENCARD");
             reasonId = LookupLogic.GetLookupItemId("Follow Up");
             differentiatedCareId = LookupLogic.GetLookupItemId("Standard Care");
