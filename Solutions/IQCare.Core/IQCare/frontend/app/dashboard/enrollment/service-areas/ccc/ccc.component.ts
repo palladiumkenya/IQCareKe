@@ -34,6 +34,7 @@ export class CccComponent implements OnInit {
     serviceCode: string;
     userId: number;
     posId: string;
+    isEdit: boolean = false;
 
     maxDate: Date;
     minDate: Date;
@@ -67,11 +68,15 @@ export class CccComponent implements OnInit {
 
     ngOnInit() {
         this.route.params.subscribe(params => {
-            const { id, serviceId, serviceCode } = params;
+            const { id, serviceId, serviceCode, edit } = params;
             this.personId = id;
             this.serviceId = serviceId;
             this.serviceCode = serviceCode;
             localStorage.setItem('partnerId', this.personId.toString());
+
+            if (edit == 1) {
+                this.isEdit = true;
+            }
         });
         this.userId = JSON.parse(localStorage.getItem('appUserId'));
         this.posId = localStorage.getItem('appPosID');
@@ -175,6 +180,31 @@ export class CccComponent implements OnInit {
 
             }
         );
+
+        if (this.isEdit) {
+            this.loadCCCEnrollmentData();
+        }
+    }
+
+    loadCCCEnrollmentData(): void {
+        this.form.controls.ReConfirmatoryTest.disable({ onlySelf: true });
+        this.form.controls.TypeOfTest.disable({ onlySelf: true });
+        this.form.controls.ReConfirmatoryTestResult.disable({ onlySelf: true });
+        this.form.controls.ReConfirmatoryTestDate.disable({ onlySelf: true });
+        this.form.controls.EnrollmentDate.enable({ onlySelf: false });
+        this.form.controls.EntryPoint.enable({ onlySelf: false });
+
+        // load patient type
+        this.loadPatient();
+        // load population type
+
+        // load entrypoint
+
+        // load identifiers
+    }
+
+    loadPatient(): void {
+
     }
 
     onPopulationTypeChange() {
@@ -347,8 +377,8 @@ export class CccComponent implements OnInit {
                         this.appStateService.addAppState(AppEnum.PATIENTID, this.personId,
                             this.patientId).subscribe();
 
-                        this.searchService.setSession(this.personId, this.patientId).subscribe((res) => {
-                            console.log(res);
+                        this.searchService.setSession(this.personId, this.patientId).subscribe((sessionres) => {
+                            console.log(sessionres);
                             window.location.href = location.protocol + '//' + window.location.hostname + ':' + window.location.port +
                                 '/IQCare/CCC/Patient/PatientHome.aspx';
                         });
