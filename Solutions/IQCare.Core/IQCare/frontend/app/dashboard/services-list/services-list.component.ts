@@ -229,6 +229,48 @@ export class ServicesListComponent implements OnInit {
         }
         return isEligible;
     }
+    getHTSEligibility() {
+        let isCCCEnrolled;
+        if (this.enrolledServices) {
+            isCCCEnrolled = this.enrolledServices.filter(obj => obj.serviceAreaId == 1);
+        }
+        let isEligible: boolean = false;
+        if (this.encounterDetail != undefined) {
+            if (this.encounterDetail.finalResult == undefined) {
+                isEligible = false;
+                this.EligibilityInformation.push('HTS not done');
+            } else if (this.encounterDetail.finalResult == 'Negative') {
+                isEligible = true;
+            } else if (this.encounterDetail.finalResult == 'Positive') {
+
+                isEligible = false;
+            } else {
+                isEligible = true;
+            }
+        } else {
+            if (isCCCEnrolled != undefined) {
+                if (isCCCEnrolled && isCCCEnrolled.length > 0) {
+                    isEligible = false;
+                } else {
+                    if (this.EligibilityInformation.length > 0) {
+                        if (this.EligibilityInformation.includes('HTS not done') == false) {
+                            this.EligibilityInformation.push('HTS not done');
+                        }
+                    }
+                    else {
+                        this.EligibilityInformation.push('HTS not done');
+                    }
+
+
+
+                }
+            }
+        }
+
+
+        return isEligible;
+
+    }
 
     getServiceEnrollmentDetails(service: any) {
         this.enrolledService = this.enrolledServices.filter(obj => obj.serviceAreaId == service.id);
