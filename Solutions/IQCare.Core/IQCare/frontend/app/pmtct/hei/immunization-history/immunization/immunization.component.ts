@@ -15,6 +15,7 @@ export class ImmunizationComponent implements OnInit {
     immunizationperiods: LookupItemView[] = [];
     yesnoOptions: LookupItemView[] = [];
     public maxDate: Date;
+    public minDate: Date;
 
     constructor(private _formBuilder: FormBuilder,
         private dialogRef: MatDialogRef<ImmunizationComponent>,

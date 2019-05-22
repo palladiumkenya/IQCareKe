@@ -660,19 +660,26 @@ namespace IQCare.Common.BusinessProcess.Services
                 if (serviceIdentifiersList.Any())
                 {
                     List<PatientIdentifier> patientIdentifierList = new List<PatientIdentifier>();
-                    serviceIdentifiersList.ForEach(x => patientIdentifierList.Add(new PatientIdentifier()
+                    foreach (var x in serviceIdentifiersList)
                     {
-                        PatientId = patientId,
-                        PatientEnrollmentId = patientEnrollment.Id,
-                        IdentifierTypeId = x.IdentifierId,
-                        IdentifierValue = x.IdentifierValue,
-                        DeleteFlag = false,
-                        CreatedBy = createdBy,
-                        CreateDate = DateTime.Now,
-                        Active = true
-                    }));
-                    await _unitOfWork.Repository<PatientIdentifier>().AddRangeAsync(patientIdentifierList);
-                    await _unitOfWork.SaveAsync();
+                        if (x.IdentifierValue != null)
+                        {
+                            patientIdentifierList.Add(new PatientIdentifier()
+                            {
+                                PatientId = patientId,
+                                PatientEnrollmentId = patientEnrollment.Id,
+                                IdentifierTypeId = x.IdentifierId,
+                                IdentifierValue = x.IdentifierValue,
+                                DeleteFlag = false,
+                                CreatedBy = createdBy,
+                                CreateDate = DateTime.Now,
+                                Active = true
+                            });
+                        }
+
+                        await _unitOfWork.Repository<PatientIdentifier>().AddRangeAsync(patientIdentifierList);
+                        await _unitOfWork.SaveAsync();
+                    }
                 }
             }
             catch (Exception e)
@@ -1305,13 +1312,6 @@ namespace IQCare.Common.BusinessProcess.Services
                                $"Values(ENCRYPTBYKEY(KEY_GUID('Key_CTC'), @firstName), ENCRYPTBYKEY(KEY_GUID('Key_CTC'), @middleName)," +
                                $"ENCRYPTBYKEY(KEY_GUID('Key_CTC'), @lastName),ENCRYPTBYKEY(KEY_GUID('Key_CTC'), @nickName) , @sex, @dob, @dobPrecison," +
                                $"1,0,GETDATE(), @createdBy, @regDate, @facilityId);");
-
-                    //sql.Append("Insert Into Person(FirstName, MidName, LastName,NickName, " +
-                    //           "Sex, DateOfBirth, DobPrecision, Active, DeleteFlag, CreateDate, " +
-                    //           "CreatedBy, RegistrationDate, FacilityId)" +
-                    //           $"Values(ENCRYPTBYKEY(KEY_GUID('Key_CTC'), '{firstName}'), ENCRYPTBYKEY(KEY_GUID('Key_CTC'), '{middleName}')," +
-                    //           $"ENCRYPTBYKEY(KEY_GUID('Key_CTC'), '{lastName}'),ENCRYPTBYKEY(KEY_GUID('Key_CTC'), '{nickName}') , {sex}, '{dob}', 1," +
-                    //           $"1,0,GETDATE(), '{createdBy}', '{regDate}', '{facilityId}');");
                 }
                 else
                 {
@@ -1321,12 +1321,6 @@ namespace IQCare.Common.BusinessProcess.Services
                                $"Values(ENCRYPTBYKEY(KEY_GUID('Key_CTC'), @firstName), ENCRYPTBYKEY(KEY_GUID('Key_CTC'), @middleName)," +
                                $"ENCRYPTBYKEY(KEY_GUID('Key_CTC'), @lastName),ENCRYPTBYKEY(KEY_GUID('Key_CTC'), @nickName) , @sex," +
                                $"@dob, @dobPrecison,1,0,GETDATE(), @createdBy, @regDate, @facilityId);");
-                    //sql.Append("Insert Into Person(FirstName, MidName, LastName,NickName, " +
-                    //           "Sex, Active, DeleteFlag, CreateDate, " +
-                    //           "CreatedBy, RegistrationDate, FacilityId)" +
-                    //           $"Values(ENCRYPTBYKEY(KEY_GUID('Key_CTC'), '{firstName}'), ENCRYPTBYKEY(KEY_GUID('Key_CTC'), '{middleName}')," +
-                    //           $"ENCRYPTBYKEY(KEY_GUID('Key_CTC'), '{lastName}'),ENCRYPTBYKEY(KEY_GUID('Key_CTC'), '{nickName}') , {sex}," +
-                    //           $"1,0,GETDATE(), '{createdBy}', '{regDate}', '{facilityId}');");
                 }
                 
                 sql.Append("SELECT [Id] , CAST(DECRYPTBYKEY(FirstName) AS VARCHAR(50)) [FirstName] ,CAST(DECRYPTBYKEY(MidName) AS VARCHAR(50)) MidName" +
@@ -1365,10 +1359,6 @@ namespace IQCare.Common.BusinessProcess.Services
                 dobParameter.SqlDbType = SqlDbType.DateTime;
                 dobParameter.Value = string.IsNullOrWhiteSpace(dob) ? (object)DBNull.Value : dateOfBirth.Value;
 
-
-                //var dobParameter = string.IsNullOrWhiteSpace(dob)
-                //    ? new SqlParameter("@dob", null)
-                //    : new SqlParameter("@dob", dob);
                 var dobPrecisionParameter = new SqlParameter("@dobPrecison", dobPrecison);
                 var createdByParameter = new SqlParameter("@createdBy", createdBy);
                 var regDateParameter = new SqlParameter();
@@ -1377,7 +1367,6 @@ namespace IQCare.Common.BusinessProcess.Services
                 regDateParameter.SqlDbType = SqlDbType.DateTime;
                 regDateParameter.Value = string.IsNullOrWhiteSpace(regDate) ? (object)DBNull.Value : registrationDate.Value;
 
-                //var regDateParameter = new SqlParameter("@regDate", registrationDate.Value);
                 var facilityIdParameter = new SqlParameter("@facilityId", facilityId);
 
                 var personInsert = await _unitOfWork.Repository<Person>().FromSql(sql.ToString(), parameters:new []

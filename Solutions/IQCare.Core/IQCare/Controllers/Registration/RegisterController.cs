@@ -1,8 +1,8 @@
 ﻿using IQCare.Common.BusinessProcess.Commands;
 using IQCare.Common.BusinessProcess.Commands.ClientLookup;
 using IQCare.Common.BusinessProcess.Commands.Enrollment;
-using IQCare.Common.BusinessProcess.Commands.Relationship;
 using IQCare.Common.BusinessProcess.Commands.PersonCommand;
+using IQCare.Common.BusinessProcess.Commands.Relationship;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -154,6 +154,19 @@ namespace IQCare.Controllers.Registration
         public async Task<IActionResult> Get(int personId)
         {
             var response = await _mediator.Send(new GetPersonDetailsCommand	() {PersonId = personId});
+            if (response.IsValid)
+                return Ok(response.Value);
+            return BadRequest(response);
+        }
+
+        [HttpGet("getPersonModel/{personId}")]
+        public async Task<IActionResult> GetPersonModel(int personId)
+        {
+            var response = await _mediator.Send(new GetPersonQueryCommand()
+            {
+                PersonId = personId
+            }, Request.HttpContext.RequestAborted);
+
             if (response.IsValid)
                 return Ok(response.Value);
             return BadRequest(response);

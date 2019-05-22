@@ -32,8 +32,17 @@ const routes: Routes = [
                 component: HtsComponent
             },
             {
-                path: 'ccc/:id/:serviceId/:serviceCode',
-                component: CccComponent
+                path: 'ccc',
+                children: [
+                    {
+                        path: ':id/:serviceId/:serviceCode',
+                        component: CccComponent
+                    },
+                    {
+                        path: 'update/:id/:serviceId/:serviceCode/:edit',
+                        component: CccComponent
+                    }
+                ]
             }
         ]
     }

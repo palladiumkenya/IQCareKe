@@ -186,6 +186,9 @@
     <None Remove="Scripts\2.0.1\07_AdditionalServiceAreaFields.sql" />
     <None Remove="Scripts\2.0.1\07_API_PatientsView.sql" />
     <None Remove="Scripts\2.0.1\08_Update_ModeOfDelivery.sql" />
+    <None Remove="Scripts\2.0.1\09_SP_Bluecard_ToGreenCard.sql" />
+    <None Remove="Scripts\2.0.1\10_PersonView.sql" />
+    <None Remove="Scripts\2.0.1\11_IQCareFinalBuild.sql" />
   </ItemGroup>
 
   <ItemGroup>
@@ -379,6 +382,7 @@
     <EmbeddedResource Include="Scripts\2.0.0\57_PHQQuestion.sql" />
     <EmbeddedResource Include="Scripts\2.0.1\01_IQCareFinalBuild.sql" />
     <EmbeddedResource Include="Scripts\2.0.1\02_IQCareFinalBuild.sql" />
+    <EmbeddedResource Include="Scripts\2.0.1\11_IQCareFinalBuild.sql" />
     <EmbeddedResource Include="Scripts\2.0.1\04_IQCareFinalBuild.sql" />
     <EmbeddedResource Include="Scripts\2.0.1\02_LO_ANCRegister.sql" />
     <EmbeddedResource Include="Scripts\2.0.1\03_LO_HEIRegister.sql" />
@@ -390,6 +394,8 @@
     <EmbeddedResource Include="Scripts\2.0.0\43_UpdateUIDIndicators.sql" />
     <EmbeddedResource Include="Scripts\2.0.1\07_API_PatientsView.sql" />
     <EmbeddedResource Include="Scripts\2.0.1\08_Update_ModeOfDelivery.sql" />
+    <EmbeddedResource Include="Scripts\2.0.1\09_SP_Bluecard_ToGreenCard.sql" />
+    <EmbeddedResource Include="Scripts\2.0.1\10_PersonView.sql" />
   </ItemGroup>
 
   <ItemGroup>
