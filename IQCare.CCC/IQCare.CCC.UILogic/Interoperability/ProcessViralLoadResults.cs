@@ -80,11 +80,11 @@ namespace IQCare.CCC.UILogic.Interoperability
                         if (labOrder == null)
                         {
                             var patientMasterVisitManager = new PatientMasterVisitManager();
-                            
+
                             //var visitType = flm.GetItemIdByGroupAndItemName("VisitType", "Enrollment")[0]
                             //    .ItemId;
-                            int patientMasterVisitId =
-                                patientMasterVisitManager.AddPatientMasterVisit(patient.Id, interopUserId, 316);
+                            var facility = flm.GetFacility();
+                            int patientMasterVisitId = patientMasterVisitManager.AddPatientMasterVisit(patient.Id, interopUserId, 316, facility.FacilityID);
                             var listOfTestsOrdered = new List<ListLabOrder>();
                             var order = new ListLabOrder()
                             {

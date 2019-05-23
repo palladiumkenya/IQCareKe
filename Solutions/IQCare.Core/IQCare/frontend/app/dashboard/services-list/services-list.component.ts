@@ -100,7 +100,8 @@ export class ServicesListComponent implements OnInit {
                 break;
             case 'HTS':
                 this.zone.run(() => {
-                    this.router.navigate(['/dashboard/enrollment/'], { relativeTo: this.route });
+                    this.router.navigate(['/dashboard/enrollment/hts/update/' + this.personId + '/' + serviceId + '/' + serviceCode + '/1'],
+                        { relativeTo: this.route });
                 });
                 break;
             default:

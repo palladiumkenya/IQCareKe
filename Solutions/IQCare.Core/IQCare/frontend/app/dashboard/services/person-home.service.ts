@@ -130,4 +130,11 @@ export class PersonHomeService {
                 catchError(this.errorHandler.handleError<any>('getPatientEnrollmentDateByServiceAreaId'))
             );
     }
+
+    public getPersonPriorityTypes(personId: number): Observable<any[]> {
+        return this.http.get<any[]>(this.API_URL + '/api/Registration/Person/GetPersonPriorityDetails/' + personId).pipe(
+            tap(getPersonPriorityTypes => this.errorHandler.log(`get person priority type for personId: ` + personId)),
+            catchError(this.errorHandler.handleError<any>('getPersonPriorityTypes'))
+        );
+    }
 }
