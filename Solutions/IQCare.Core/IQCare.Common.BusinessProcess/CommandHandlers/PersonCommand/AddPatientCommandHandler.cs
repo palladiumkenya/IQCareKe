@@ -61,9 +61,6 @@ namespace IQCare.Common.BusinessProcess.CommandHandlers.PersonCommand
                         patientId = patient.Id;
                     }
 
-                    
-
-
                     return Result<AddPatientResponse>.Valid(new AddPatientResponse()
                     {
                         PatientId = patientId

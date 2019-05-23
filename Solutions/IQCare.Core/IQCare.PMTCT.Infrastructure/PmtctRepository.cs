@@ -73,6 +73,11 @@ namespace IQCare.PMTCT.Infrastructure
             return _context.Set<TEntity>().FromSql(query, parameters).ToListAsync();
         }
 
+        public void UpdateRange(IEnumerable<TEntity> entities)
+        {
+            throw new NotImplementedException();
+        }
+
         public async Task<TEntity> FindByIdAsync(object id)
             => await _context.FindAsync<TEntity>(id);
     }

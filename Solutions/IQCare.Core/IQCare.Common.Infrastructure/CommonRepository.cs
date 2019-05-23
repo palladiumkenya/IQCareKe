@@ -19,6 +19,8 @@ namespace IQCare.Common.Infrastructure
             _context = dbContext ?? throw new ArgumentNullException(nameof(dbContext));
         }
 
+        public void UpdateRange(IEnumerable<TEntity> entities) => _context.UpdateRange(entities);
+
         public async Task AddAsync(TEntity entity)
             => await _context.AddAsync(entity);
 
