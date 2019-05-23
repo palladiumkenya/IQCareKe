@@ -32,6 +32,7 @@ export class HtsComponent implements OnInit {
     maxDate: Date;
     minDate: Date;
     serviceCode: string;
+    isEdit: boolean = false;
 
     priorityPops: LookupItemView[] = [];
     keyPops: LookupItemView[] = [];
@@ -59,10 +60,14 @@ export class HtsComponent implements OnInit {
 
         this.route.params.subscribe(
             (params) => {
-                const { serviceId, id, serviceCode } = params;
+                const { serviceId, id, serviceCode, edit } = params;
                 this.serviceId = serviceId;
                 this.personId = id;
                 this.serviceCode = serviceCode;
+
+                if (edit == 1) {
+                    this.isEdit = true;
+                }
             }
         );
         this.userId = JSON.parse(localStorage.getItem('appUserId'));
@@ -116,6 +121,100 @@ export class HtsComponent implements OnInit {
             (res) => {
                 const { identifiers, serviceAreaIdentifiers } = res;
                 this.serviceAreaIdentifiers = serviceAreaIdentifiers;
+            }
+        );
+
+        if (this.isEdit) {
+            this.loadPatient();
+        }
+    }
+
+    loadPatient(): void {
+        this.personHomeService.getPatientModelByPersonId(this.personId).subscribe(
+            (result) => {
+                // load enrollment Date
+                this.loadHtsEnrollmentDate(result.id);
+
+                // load population types
+                this.loadPopulationTypes(this.personId);
+
+                // load hts identifiers
+                this.loadIdentifiers(result.id);
+
+                // load priority population
+                this.loadPriorityPopulation(this.personId);
+            },
+            (error) => {
+                console.log(error);
+            }
+        );
+    }
+
+    loadPriorityPopulation(personId: number): void {
+        this.personHomeService.getPersonPriorityTypes(personId).subscribe(
+            (result) => {
+                // console.log(result);
+                if (result.length > 0) {
+                    this.form.controls.priorityPop.setValue(1);
+                    this.form.controls.priorityPopulation.enable({ onlySelf: false });
+                    const arrayValue = [];
+                    result.forEach(element => {
+                        arrayValue.push(element.priorityId);
+                    });
+                    this.form.controls.priorityPopulation.setValue(arrayValue);
+                } else {
+                    this.form.controls.priorityPop.setValue(2);
+                }
+            },
+            (error) => {
+                console.log(error);
+            }
+        );
+    }
+
+    loadIdentifiers(patientId: number): void {
+        this.recordsService.getPatientIdentifiersList(patientId).subscribe(
+            (result) => {
+                if (result.length > 0) {
+                    this.form.get('EnrollmentNumber').setValue(result[0].identifierValue);
+                }
+            },
+            (error) => {
+                console.log(error);
+            }
+        );
+    }
+
+    loadPopulationTypes(personId: number) {
+        this.personHomeService.getPersonPopulationType(personId).subscribe(
+            (result) => {
+                if (result.length > 0) {
+                    if (result[0].populationType == 'General Population') {
+                        this.form.controls.populationType.setValue(1);
+                    } else {
+                        this.form.controls.populationType.setValue(2);
+                        this.form.controls.KeyPopulation.enable({ onlySelf: false });
+                        const arrayValue = [];
+                        result.forEach(element => {
+                            arrayValue.push(element.populationCategory);
+                        });
+                        this.form.controls.KeyPopulation.setValue(arrayValue);
+                    }
+                }
+            },
+            (error) => {
+                console.log(error);
+            }
+        );
+    }
+
+    loadHtsEnrollmentDate(patientId: number): void {
+        this.personHomeService.getPatientEnrollmentDateByServiceAreaId(patientId, this.serviceId).subscribe(
+            (result) => {
+                this.form.controls.EnrollmentDate.setValue(result.enrollmentDate);
+            },
+            (error) => {
+                console.log(error);
             }
         );
     }

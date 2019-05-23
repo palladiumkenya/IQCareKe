@@ -28,8 +28,18 @@ const routes: Routes = [
                 component: EnrollmentServicesComponent
             },
             {
-                path: 'hts/:id/:serviceId/:serviceCode',
-                component: HtsComponent
+                path: 'hts',
+                children: [
+                    {
+                        path: ':id/:serviceId/:serviceCode',
+                        component: HtsComponent
+                    },
+                    {
+                        path: 'update/:id/:serviceId/:serviceCode/:edit',
+                        component: HtsComponent
+                    }
+                ]
+
             },
             {
                 path: 'ccc',

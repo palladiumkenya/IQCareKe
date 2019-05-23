@@ -273,7 +273,11 @@ export class CccComponent implements OnInit {
                     } else {
                         this.form.controls.populationType.setValue(2);
                         this.form.controls.KeyPopulation.enable({ onlySelf: false });
-                        this.form.controls.KeyPopulation.setValue(result[0].populationCategory);
+                        const arrayValue = [];
+                        result.forEach(element => {
+                            arrayValue.push(element.populationCategory);
+                        });
+                        this.form.controls.KeyPopulation.setValue(arrayValue);
                     }
                 }
             },

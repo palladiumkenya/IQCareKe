@@ -262,6 +262,7 @@ namespace IQCare.CCC.UILogic.Interoperability.Enrollment
                 PersonLocationManager locationManager = new PersonLocationManager();
                 PersonContactManager contactManager = new PersonContactManager();
                 var treatmentSupporterManager = new PatientTreatmentSupporterManager();
+                LookupLogic lookupLogic = new LookupLogic();
 
                 var personIdentifierManager = new PersonIdentifierManager();
                 //todo: fetch assigning facility from the message
@@ -302,7 +303,6 @@ namespace IQCare.CCC.UILogic.Interoperability.Enrollment
                             //Get Gender
                             string gender = kin.SEX == "F" ? "Female" : "Male";
                             //IQCare Sex
-                            LookupLogic lookupLogic = new LookupLogic();
                             int sexT = lookupLogic.GetItemIdByGroupAndItemName("Gender", gender)[0].ItemId;
 
                             int supporterId = personManager.AddPersonTreatmentSupporterUiLogic(kin.NOK_NAME.FIRST_NAME, kin.NOK_NAME.MIDDLE_NAME, kin.NOK_NAME.LAST_NAME, sexT, 1);
@@ -331,8 +331,9 @@ namespace IQCare.CCC.UILogic.Interoperability.Enrollment
 
                 int patientId = patientManager.AddPatient(patientEntity);
 
+                var facility = lookupLogic.GetFacility();
                 //Add enrollment visit
-                int patientMasterVisitId = patientMasterVisitManager.AddPatientMasterVisit(patientId, userId, visitType);
+                int patientMasterVisitId = patientMasterVisitManager.AddPatientMasterVisit(patientId, userId, visitType, facility.FacilityID);
                 //Enroll Patient to service
                 int patientEnrollmentId = patientEnrollmentManager.addPatientEnrollment(patientId, dateOfEnrollment.ToString(), userId);
                 //Add enrollment entry point
@@ -341,7 +342,6 @@ namespace IQCare.CCC.UILogic.Interoperability.Enrollment
                 if (deathDate.HasValue)
                 {
                     PatientCareEndingManager careEndingManager = new PatientCareEndingManager();
-                    LookupLogic lookupLogic = new LookupLogic();
                     int itemId = lookupLogic.GetItemIdByGroupAndItemName("CareEnded", "Death")[0].ItemId;
                     careEndingManager.AddPatientCareEndingDeath(patientId, patientMasterVisitId, patientEnrollmentId, itemId, deathDate.Value, deathDate.Value, "");
 
