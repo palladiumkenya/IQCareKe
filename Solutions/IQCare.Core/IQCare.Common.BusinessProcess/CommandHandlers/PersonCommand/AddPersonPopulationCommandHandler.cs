@@ -7,6 +7,7 @@ using IQCare.Common.Core.Models;
 using IQCare.Common.Infrastructure;
 using IQCare.Library;
 using MediatR;
+using Microsoft.EntityFrameworkCore;
 
 namespace IQCare.Common.BusinessProcess.CommandHandlers.PersonCommand
 {
@@ -24,35 +25,92 @@ namespace IQCare.Common.BusinessProcess.CommandHandlers.PersonCommand
             {
                 using (_unitOfWork)
                 {
-                    // Create Person Population
-                    List<PersonPopulation> personPopulations = new List<PersonPopulation>();
-                    request.Population.ForEach(t => personPopulations.Add(new PersonPopulation
+                    // Check if Person Population exists
+                    var existingPersonPopulations = await _unitOfWork.Repository<PersonPopulation>()
+                        .Get(x => x.PersonId == request.PersonId && x.DeleteFlag == false).ToListAsync();
+                    if (existingPersonPopulations.Count > 0)
                     {
-                        PersonId = request.PersonId,
-                        PopulationType = t.PopulationType,
-                        PopulationCategory = t.PopulationCategory,
-                        Active = true,
-                        DeleteFlag = false,
-                        CreatedBy = request.UserId,
-                        CreateDate = DateTime.Now
-                    }));
+                        existingPersonPopulations.ForEach(u => u.DeleteFlag = true);
 
-                    await _unitOfWork.Repository<PersonPopulation>().AddRangeAsync(personPopulations);
-                    await _unitOfWork.SaveAsync();
+                        _unitOfWork.Repository<PersonPopulation>().UpdateRange(existingPersonPopulations);
+                        await _unitOfWork.SaveAsync();
 
-                    // Create Person Priorities
-                    List<PersonPriority> personPriorities = new List<PersonPriority>();
-                    request.Priority.ForEach(x=>personPriorities.Add(new PersonPriority()
+                        // Create Person Population
+                        List<PersonPopulation> personPopulations = new List<PersonPopulation>();
+                        request.Population.ForEach(t => personPopulations.Add(new PersonPopulation
+                        {
+                            PersonId = request.PersonId,
+                            PopulationType = t.PopulationType,
+                            PopulationCategory = t.PopulationCategory,
+                            Active = true,
+                            DeleteFlag = false,
+                            CreatedBy = request.UserId,
+                            CreateDate = DateTime.Now
+                        }));
+
+
+                        await _unitOfWork.Repository<PersonPopulation>().AddRangeAsync(personPopulations);
+                        await _unitOfWork.SaveAsync();
+                    }
+                    else
                     {
-                        PersonId = request.PersonId,
-                        PriorityId = x.PriorityId,
-                        DeleteFlag = false,
-                        CreatedBy = request.UserId,
-                        CreateDate = DateTime.Now
-                    }));
+                        // Create Person Population
+                        List<PersonPopulation> personPopulations = new List<PersonPopulation>();
+                        request.Population.ForEach(t => personPopulations.Add(new PersonPopulation
+                        {
+                            PersonId = request.PersonId,
+                            PopulationType = t.PopulationType,
+                            PopulationCategory = t.PopulationCategory,
+                            Active = true,
+                            DeleteFlag = false,
+                            CreatedBy = request.UserId,
+                            CreateDate = DateTime.Now
+                        }));
 
-                    await _unitOfWork.Repository<PersonPriority>().AddRangeAsync(personPriorities);
-                    await _unitOfWork.SaveAsync();
+                        await _unitOfWork.Repository<PersonPopulation>().AddRangeAsync(personPopulations);
+                        await _unitOfWork.SaveAsync();
+                    }
+
+                    //Check if Person Priorities exists
+                    var existingPersonPriorities = await _unitOfWork.Repository<PersonPriority>()
+                        .Get(x => x.PersonId == request.PersonId && x.DeleteFlag == false).ToListAsync();
+                    if (existingPersonPriorities.Count > 0)
+                    {
+                        existingPersonPriorities.ForEach(u => u.DeleteFlag = true);
+
+                        _unitOfWork.Repository<PersonPriority>().UpdateRange(existingPersonPriorities);
+                        await _unitOfWork.SaveAsync();
+
+                        // Create Person Priorities
+                        List<PersonPriority> personPriorities = new List<PersonPriority>();
+                        request.Priority.ForEach(x => personPriorities.Add(new PersonPriority()
+                        {
+                            PersonId = request.PersonId,
+                            PriorityId = x.PriorityId,
+                            DeleteFlag = false,
+                            CreatedBy = request.UserId,
+                            CreateDate = DateTime.Now
+                        }));
+
+                        await _unitOfWork.Repository<PersonPriority>().AddRangeAsync(personPriorities);
+                        await _unitOfWork.SaveAsync();
+                    }
+                    else
+                    {
+                        // Create Person Priorities
+                        List<PersonPriority> personPriorities = new List<PersonPriority>();
+                        request.Priority.ForEach(x => personPriorities.Add(new PersonPriority()
+                        {
+                            PersonId = request.PersonId,
+                            PriorityId = x.PriorityId,
+                            DeleteFlag = false,
+                            CreatedBy = request.UserId,
+                            CreateDate = DateTime.Now
+                        }));
+
+                        await _unitOfWork.Repository<PersonPriority>().AddRangeAsync(personPriorities);
+                        await _unitOfWork.SaveAsync();
+                    }
 
                     _unitOfWork.Dispose();
 

@@ -609,7 +609,7 @@ namespace IQCare.Common.BusinessProcess.Services
                 {
                     var previouslyIdentifiers = await _unitOfWork.Repository<PatientIdentifier>().Get(y =>
                         y.IdentifierValue == serviceIdentifiersList[i].IdentifierValue &&
-                        y.IdentifierTypeId == serviceIdentifiersList[i].IdentifierId).ToListAsync();
+                        y.IdentifierTypeId == serviceIdentifiersList[i].IdentifierId && y.PatientId != patientId).ToListAsync();
 
                     if (previouslyIdentifiers.Count > 0)
                     {
@@ -621,64 +621,118 @@ namespace IQCare.Common.BusinessProcess.Services
 
                 var enrollmentVisitType = await _unitOfWork.Repository<LookupItemView>().Get(x => x.MasterName == "VisitType" && x.ItemName == "Enrollment").FirstOrDefaultAsync();
                 int? visitType = enrollmentVisitType != null ? enrollmentVisitType.ItemId : 0;
-                var patientMasterVisit = new PatientMasterVisit()
+
+                var enrollmentPatientMasterVisit = await _unitOfWork.Repository<PatientMasterVisit>().Get(x =>
+                    x.PatientId == patientId && x.ServiceId == serviceAreaId && x.VisitType == visitType).ToListAsync();
+
+                if (enrollmentPatientMasterVisit.Count == 0)
                 {
-                    PatientId = patientId,
-                    ServiceId = serviceAreaId,
-                    Start = DateTime.Now,
-                    End = null,
-                    Active = false,
-                    VisitDate = DateTime.Now,
-                    VisitType = visitType,
-                    Status = 1,
-                    CreateDate = DateTime.Now,
-                    DeleteFlag = false,
-                    CreatedBy = createdBy
-                };
-
-
-                await _unitOfWork.Repository<PatientMasterVisit>().AddAsync(patientMasterVisit);
-                await _unitOfWork.SaveAsync();
-
-                var patientEnrollment = new PatientEnrollment()
-                {
-                    PatientId = patientId,
-                    ServiceAreaId = serviceAreaId,
-                    EnrollmentDate = dateOfEnrollment,
-                    EnrollmentStatusId = 0,
-                    TransferIn = false,
-                    CareEnded = false,
-                    DeleteFlag = false,
-                    CreatedBy = createdBy,
-                    CreateDate = DateTime.Now
-                };
-
-
-                await _unitOfWork.Repository<PatientEnrollment>().AddAsync(patientEnrollment);
-                await _unitOfWork.SaveAsync();
-
-                if (serviceIdentifiersList.Any())
-                {
-                    List<PatientIdentifier> patientIdentifierList = new List<PatientIdentifier>();
-                    foreach (var x in serviceIdentifiersList)
+                    var patientMasterVisit = new PatientMasterVisit()
                     {
-                        if (x.IdentifierValue != null)
-                        {
-                            patientIdentifierList.Add(new PatientIdentifier()
-                            {
-                                PatientId = patientId,
-                                PatientEnrollmentId = patientEnrollment.Id,
-                                IdentifierTypeId = x.IdentifierId,
-                                IdentifierValue = x.IdentifierValue,
-                                DeleteFlag = false,
-                                CreatedBy = createdBy,
-                                CreateDate = DateTime.Now,
-                                Active = true
-                            });
-                        }
+                        PatientId = patientId,
+                        ServiceId = serviceAreaId,
+                        Start = DateTime.Now,
+                        End = null,
+                        Active = false,
+                        VisitDate = DateTime.Now,
+                        VisitType = visitType,
+                        Status = 1,
+                        CreateDate = DateTime.Now,
+                        DeleteFlag = false,
+                        CreatedBy = createdBy
+                    };
 
-                        await _unitOfWork.Repository<PatientIdentifier>().AddRangeAsync(patientIdentifierList);
-                        await _unitOfWork.SaveAsync();
+
+                    await _unitOfWork.Repository<PatientMasterVisit>().AddAsync(patientMasterVisit);
+                    await _unitOfWork.SaveAsync();
+                }
+
+
+                var previousPatientEnrollment = await _unitOfWork.Repository<PatientEnrollment>().Get(x =>
+                        x.PatientId == patientId && x.ServiceAreaId == serviceAreaId && x.DeleteFlag == false)
+                    .ToListAsync();
+                if (previousPatientEnrollment.Count == 0)
+                {
+                    var patientEnrollment = new PatientEnrollment()
+                    {
+                        PatientId = patientId,
+                        ServiceAreaId = serviceAreaId,
+                        EnrollmentDate = dateOfEnrollment,
+                        EnrollmentStatusId = 0,
+                        TransferIn = false,
+                        CareEnded = false,
+                        DeleteFlag = false,
+                        CreatedBy = createdBy,
+                        CreateDate = DateTime.Now
+                    };
+
+
+                    await _unitOfWork.Repository<PatientEnrollment>().AddAsync(patientEnrollment);
+                    await _unitOfWork.SaveAsync();
+
+                    if (serviceIdentifiersList.Any())
+                    {
+                        List<PatientIdentifier> patientIdentifierList = new List<PatientIdentifier>();
+                        foreach (var x in serviceIdentifiersList)
+                        {
+                            if (x.IdentifierValue != null)
+                            {
+                                patientIdentifierList.Add(new PatientIdentifier()
+                                {
+                                    PatientId = patientId,
+                                    PatientEnrollmentId = patientEnrollment.Id,
+                                    IdentifierTypeId = x.IdentifierId,
+                                    IdentifierValue = x.IdentifierValue,
+                                    DeleteFlag = false,
+                                    CreatedBy = createdBy,
+                                    CreateDate = DateTime.Now,
+                                    Active = true
+                                });
+                            }
+
+                            await _unitOfWork.Repository<PatientIdentifier>().AddRangeAsync(patientIdentifierList);
+                            await _unitOfWork.SaveAsync();
+                        }
+                    }
+                }
+                else
+                {
+                    if (serviceIdentifiersList.Any())
+                    {
+                        foreach (var x in serviceIdentifiersList)
+                        {
+                            if (x.IdentifierValue != null)
+                            {
+                                var patientIdentifiers = await _unitOfWork.Repository<PatientIdentifier>().Get(y =>
+                                    y.PatientId == patientId && y.IdentifierTypeId == x.IdentifierId &&
+                                    y.DeleteFlag == false).ToListAsync();
+
+                                if (patientIdentifiers.Count > 0)
+                                {
+                                    patientIdentifiers[0].IdentifierValue = x.IdentifierValue;
+
+                                    _unitOfWork.Repository<PatientIdentifier>().Update(patientIdentifiers[0]);
+                                    await _unitOfWork.SaveAsync();
+                                }
+                                else
+                                {
+                                    var patientIdentifier = new PatientIdentifier()
+                                    {
+                                        PatientId = patientId,
+                                        PatientEnrollmentId = previousPatientEnrollment[0].Id,
+                                        IdentifierTypeId = x.IdentifierId,
+                                        IdentifierValue = x.IdentifierValue,
+                                        DeleteFlag = false,
+                                        CreatedBy = createdBy,
+                                        CreateDate = DateTime.Now,
+                                        Active = true
+                                    };
+
+                                    await _unitOfWork.Repository<PatientIdentifier>().AddAsync(patientIdentifier);
+                                    await _unitOfWork.SaveAsync();
+                                }
+                            }
+                        }
                     }
                 }
             }

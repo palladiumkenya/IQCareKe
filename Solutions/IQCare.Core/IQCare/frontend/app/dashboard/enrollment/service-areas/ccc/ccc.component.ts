@@ -194,17 +194,93 @@ export class CccComponent implements OnInit {
         this.form.controls.EnrollmentDate.enable({ onlySelf: false });
         this.form.controls.EntryPoint.enable({ onlySelf: false });
 
-        // load patient type
+        // load patient
         this.loadPatient();
-        // load population type
-
-        // load entrypoint
-
-        // load identifiers
     }
 
     loadPatient(): void {
+        this.personHomeService.getPatientModelByPersonId(this.personId).subscribe(
+            (result) => {
+                console.log(result);
+                this.form.controls.PatientType.setValue(result.patientType);
+                // load population type
+                this.loadPopulationTypes(this.personId);
 
+                // load entrypoint
+                this.loadEntryPoints(result.id);
+
+                // load identifiers
+                this.loadIdentifiers(result.id);
+
+                // load enrollment Date
+                this.loadEnrollmentDate(result.id);
+            },
+            (error) => {
+                console.log(error);
+            }
+        );
+    }
+
+    loadEnrollmentDate(patientId: any): void {
+        this.personHomeService.getPatientEnrollmentDateByServiceAreaId(patientId, this.serviceId).subscribe(
+            (result) => {
+                // console.log(result);
+                this.form.controls.EnrollmentDate.setValue(result.enrollmentDate);
+            },
+            (error) => {
+                console.log(error);
+            }
+        );
+    }
+
+    loadIdentifiers(patientId: number): void {
+        this.recordsService.getPatientIdentifiersList(patientId).subscribe(
+            (result) => {
+                if (result.length > 0) {
+                    this.identifiers.forEach(element => {
+                        result.forEach(patientIdentifiers => {
+                            if (patientIdentifiers.identifierTypeId == element.id) {
+                                this.form.get(element.code).setValue(patientIdentifiers.identifierValue);
+                            }
+                        });
+                    });
+                }
+            },
+            (error) => {
+                console.log(error);
+            }
+        );
+    }
+
+    loadEntryPoints(patientId: number): void {
+        this.personHomeService.getPatientServiceAreaEntryPoints(this.serviceId, patientId).subscribe(
+            (result) => {
+                // console.log(result);
+                this.form.controls.EntryPoint.setValue(result.entryPointId);
+            },
+            (error) => {
+                console.log(error);
+            }
+        );
+    }
+
+    loadPopulationTypes(personId: number): void {
+        this.personHomeService.getPersonPopulationType(personId).subscribe(
+            (result) => {
+                if (result.length > 0) {
+                    if (result[0].populationType == 'General Population') {
+                        this.form.controls.populationType.setValue(1);
+                    } else {
+                        this.form.controls.populationType.setValue(2);
+                        this.form.controls.KeyPopulation.enable({ onlySelf: false });
+                        this.form.controls.KeyPopulation.setValue(result[0].populationCategory);
+                    }
+                }
+            },
+            (error) => {
+                console.log(error);
+            }
+        );
     }
 
     onPopulationTypeChange() {
@@ -294,6 +370,11 @@ export class CccComponent implements OnInit {
     }
 
     public enrollmentCheck(): any {
+        if (this.isEdit) {
+            this.save();
+            return;
+        }
+
         const isReconfirmatoryTestDone = this.yesNoOptions.filter(obj => obj.itemId == this.form.controls.ReConfirmatoryTest.value);
 
         if (isReconfirmatoryTestDone[0].itemName == 'No') {

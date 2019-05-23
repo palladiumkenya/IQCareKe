@@ -281,6 +281,9 @@ export class RegistrationService {
     }
 
     public addReConfirmatoryTest(hivReConfirmatoryTests: HivReConfirmatoryTestsCommand): Observable<any> {
+        if (!hivReConfirmatoryTests.TypeOfTest) {
+            return observableOf([]);
+        }
         return this.http.post<any>(this.API_URL + '/api/Register/postConfirmatoryTests',
             JSON.stringify(hivReConfirmatoryTests), httpOptions).pipe(
                 tap((addReConfirmatoryTest: any) => this.errorHandler.log(`added re-confirmatory test`)),
