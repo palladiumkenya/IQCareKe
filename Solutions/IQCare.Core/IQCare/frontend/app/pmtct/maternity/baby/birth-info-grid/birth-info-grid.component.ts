@@ -24,19 +24,15 @@ export class BirthInfoGridComponent implements OnInit {
  @Output() notify: EventEmitter<any[]> = new EventEmitter<any[]>();
 
  dataSource = new MatTableDataSource(this.babyData);
-  ngOnInit() 
-  {   
-    console.log(this.BabySectionOptions.length +' baby Section Options Init')
+  ngOnInit() {   
+    console.log(this.BabySectionOptions.length + ' baby Section Options Init');
 
-    if(this.isEdit)
-    {
-      this.getDeliveredBabyInfo(this.PatientMasterVisitId)
-    }else
-    {
+    if (this.isEdit) {
+      this.getDeliveredBabyInfo(this.PatientMasterVisitId);
+    } else {
       this.maternityService.currentBabyData.subscribe(
-        data=> 
-        {
-          this.babyData = data
+        data => {
+          this.babyData = data;
           this.dataSource = new MatTableDataSource(this.babyData);
           this.notify.emit(this.babyData);        
         });
@@ -45,8 +41,7 @@ export class BirthInfoGridComponent implements OnInit {
   constructor(private maternityService: MaternityService,
                 private notificationService: NotificationService,
                 private snotifyService: SnotifyService,
-                private dialog: MatDialog)
-               {
+                private dialog: MatDialog) {
                    
                }
 
@@ -59,6 +54,8 @@ export class BirthInfoGridComponent implements OnInit {
                 if (bInfo == null) {
                    return;
                 }
+                console.log('testing the data');
+                console.log(bInfo);
              bInfo.forEach(info => {
                 this.babyData.push({
                     sexStr: info.sex,
@@ -87,7 +84,7 @@ export class BirthInfoGridComponent implements OnInit {
             });
    }
 
-   public onEditBabyInfo(element : any){
+   public onEditBabyInfo(element: any) {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.disableClose = false;
     dialogConfig.autoFocus = true;
@@ -100,10 +97,10 @@ export class BirthInfoGridComponent implements OnInit {
   
     const dialogRef = this.dialog.open(AddBabyDialogComponent, dialogConfig);
     dialogRef.afterClosed().subscribe(
-      data => 
-      {
-        if (!data)
+      data => {
+        if (!data) {
           return;
+        }
           console.log(data);
       });
 

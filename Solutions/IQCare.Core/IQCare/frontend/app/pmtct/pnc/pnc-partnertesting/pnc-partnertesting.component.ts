@@ -68,8 +68,10 @@ export class PncPartnertestingComponent implements OnInit, AfterViewInit {
         const optionNa = this.yesNoNaOptions.filter(x => x.itemName == 'N/A');
         if (event.isUserInput && event.source.selected && event.source.viewValue != 'Yes') {
             this.PartnerTestingForm.get('finalPartnerHivResult').setValue(optionNa[0].itemId);
+            this.PartnerTestingForm.get('finalPartnerHivResult').disable({ onlySelf: true });
+        } else if (event.isUserInput && event.source.selected && event.source.viewValue == 'Yes') {
+            this.PartnerTestingForm.get('finalPartnerHivResult').setValue('');
+            this.PartnerTestingForm.get('finalPartnerHivResult').enable({ onlySelf: true });
         }
     }
-
-
 }
