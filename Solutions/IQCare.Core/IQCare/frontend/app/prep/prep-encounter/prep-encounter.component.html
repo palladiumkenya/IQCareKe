@@ -10,7 +10,7 @@
                         <div class="row">
                             <div class="col-lg-12 col-sm-6 col-xs-12">
                                 <mat-horizontal-stepper [linear]="isLinear" #stepper>
-                                    <mat-step [completed]="false" [stepControl]="visitDetailsFormGroup">
+                                    <mat-step [completed]="false" [stepControl]="STIScreeningFormGroup">
                                         <ng-template matStepLabel>
                                             <span matTooltip="Visit Details">STI Screening and Treatment</span>
                                         </ng-template>
@@ -23,13 +23,15 @@
                                         </div>
                                     </mat-step>
 
-                                    <mat-step [completed]="false" [stepControl]="deliveryMatFormGroup">
+                                    <mat-step [completed]="false" [stepControl]="CircumcisionStatusFormGroup">
                                         <ng-template matStepLabel>
                                             <span matTooltip="Delivery & Maternal History">
                                                 Circumcision Status( Male
                                                 Clients Only)
                                             </span>
                                         </ng-template>
+
+                                        <app-circumcision-status></app-circumcision-status>
 
                                         <div>
                                             <button mat-raised-button color="primary" matStepperPrevious
@@ -40,7 +42,7 @@
                                         </div>
                                     </mat-step>
 
-                                    <mat-step [completed]="false" [stepControl]="deliveryMatFormGroup">
+                                    <mat-step [completed]="false" [stepControl]="FertilityIntentionsFormGroup">
                                         <ng-template matStepLabel>
                                             <span matTooltip="Delivery & Maternal History">
                                                 Fertility Intentions
@@ -56,7 +58,7 @@
                                         </div>
                                     </mat-step>
 
-                                    <mat-step [completed]="false" [stepControl]="deliveryMatFormGroup">
+                                    <mat-step [completed]="false" [stepControl]="PregnancyOutcomeFormGroup">
                                         <ng-template matStepLabel>
                                             <span matTooltip="Delivery & Maternal History">
                                                 Pregnancy Outcome
