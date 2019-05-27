@@ -21,109 +21,108 @@ const httpOptions = {
     providedIn: 'root'
 })
 export class LaborderService {
-   private LabOrder_ApiUrl = environment.API_LAB_URL;
+    private LabOrder_ApiUrl = environment.API_LAB_URL;
+    resultDataType = new ResultDataType();
 
-   private labResultFormGroupSubject = new BehaviorSubject<FormControlBase<any>[]>([]);
-   labTestResultForm = this.labResultFormGroupSubject.asObservable();
+    private labResultFormGroupSubject = new BehaviorSubject<FormControlBase<any>[]>([]);
+    labTestResultForm = this.labResultFormGroupSubject.asObservable();
 
     constructor(private httpClient: HttpClient,
-        private errorHandlerService: ErrorHandlerService) 
-        {
+        private errorHandlerService: ErrorHandlerService) {
 
-        }
-
-
-
- public updateResultsForm(formControls : FormControlBase<any>[]) {
-   this.labResultFormGroupSubject.next(formControls);
- }
-
-  public addLabOrder(addLabOrderCommand : AddLabOrderCommand) : Observable<any> {
-    return this.httpClient.post<AddLabOrderCommand>(this.LabOrder_ApiUrl + '/api/LabOrder/AddLabOrder',addLabOrderCommand,httpOptions).pipe(
-      tap(lab=> this.errorHandlerService.log('Add Lab Order request')),
-      catchError(this.errorHandlerService.handleError<any[]>('addLabOrder'))
-    )
-  }
-
-  public getLabOrders(patientId: number,status:string) : Observable<any> {
-    return this.httpClient.get<any>(this.LabOrder_ApiUrl + '/api/LabOrder/GetLabOrdersByPatientId/' + patientId + '/' +status).pipe(
-        tap(getLabOrders => this.errorHandlerService.log('get patient lab orders')),
-        catchError(this.errorHandlerService.handleError<any[]>('getLabOrders'))
-    ); 
-    }
-
-  public completeLabOrder(completeLabOrderCommand : CompleteLabOrderCommand ) : Observable<any> {
-    return this.httpClient.post<CompleteLabOrderCommand>(this.LabOrder_ApiUrl + '/api/LabOrder/CompleteLabOrder',completeLabOrderCommand,httpOptions).pipe(
-      tap(lab=> this.errorHandlerService.log('Complete lab order  request')),
-      catchError(this.errorHandlerService.handleError<any[]>('CompleteLabOrder'))
-    )
-  }
-
-  public getLabTestResults(patientId: number,status:string) : Observable<any> {
-    var url = status == null ? this.LabOrder_ApiUrl + '/api/LabOrder/GetLabTestResults?patientId=' + patientId  : 
-    this.LabOrder_ApiUrl + '/api/LabOrder/GetLabTestResults?patientId=' + patientId + '&status=' + status;
-
-    return this.httpClient.get<any>(url).pipe(
-        tap(getLabTestResults => this.errorHandlerService.log('get lab order test results')),
-        catchError(this.errorHandlerService.handleError<any[]>('getLabOrderTestResults'))
-    );
-    }
-
-    public getConfiguredLabTests() : Observable<any> {
-      return this.httpClient.get<any>(this.LabOrder_ApiUrl + '/api/LabTests/GetAllLabTests').pipe(
-          tap(getConfiguredLabTests => this.errorHandlerService.log('get configured lab tests')),
-          catchError(this.errorHandlerService.handleError<any[]>('getConfiguredLabTests'))
-      );
-    }
-
-  
-    public getLabTestParameters(labTestId : number) : Observable<any> {
-      return this.httpClient.get<any>(this.LabOrder_ApiUrl + '/api/LabTests/GetLabTestPametersByLabTestId/' + labTestId)
-      .pipe(tap(param=> this.errorHandlerService.log('get Lab Test Parameters')),
-      catchError(this.errorHandlerService.handleError<any[]>('getLabTestParameters')))      
     }
 
 
-    public getLabOrderTestResults(labOrderTestId : number) : Observable<any> {
-      return this.httpClient.get<any>(this.LabOrder_ApiUrl + '/api/LabTests/GetTestResultsByLabOrderTestId/' + labOrderTestId)
-      .pipe(tap(param=> this.errorHandlerService.log('get lab order test results')),
-      catchError(this.errorHandlerService.handleError<any[]>('getLabOrderTestResults')))      
+
+    public updateResultsForm(formControls: FormControlBase<any>[]) {
+        this.labResultFormGroupSubject.next(formControls);
     }
 
-     resultDataType = new ResultDataType();
+    public addLabOrder(addLabOrderCommand: AddLabOrderCommand): Observable<any> {
+        return this.httpClient.post<AddLabOrderCommand>(this.LabOrder_ApiUrl + '/api/LabOrder/AddLabOrder',
+            addLabOrderCommand, httpOptions).pipe(
+                tap(lab => this.errorHandlerService.log('Add Lab Order request')),
+                catchError(this.errorHandlerService.handleError<any[]>('addLabOrder'))
+            );
+    }
 
-    public getFormContolFromParam(parameter : any) : FormControlBase<any>
-     {
+    public getLabOrders(patientId: number, status: string): Observable<any> {
+        return this.httpClient.get<any>(this.LabOrder_ApiUrl + '/api/LabOrder/GetLabOrdersByPatientId/' + patientId + '/' + status).pipe(
+            tap(getLabOrders => this.errorHandlerService.log('get patient lab orders')),
+            catchError(this.errorHandlerService.handleError<any[]>('getLabOrders'))
+        );
+    }
+
+    public completeLabOrder(completeLabOrderCommand: CompleteLabOrderCommand): Observable<any> {
+        return this.httpClient.post<CompleteLabOrderCommand>(this.LabOrder_ApiUrl + '/api/LabOrder/CompleteLabOrder',
+            completeLabOrderCommand, httpOptions).pipe(
+                tap(lab => this.errorHandlerService.log('Complete lab order  request')),
+                catchError(this.errorHandlerService.handleError<any[]>('CompleteLabOrder'))
+            );
+    }
+
+    public getLabTestResults(patientId: number, status: string): Observable<any> {
+        const url = status == null ? this.LabOrder_ApiUrl + '/api/LabOrder/GetLabTestResults?patientId=' + patientId :
+            this.LabOrder_ApiUrl + '/api/LabOrder/GetLabTestResults?patientId=' + patientId + '&status=' + status;
+
+        return this.httpClient.get<any>(url).pipe(
+            tap(getLabTestResults => this.errorHandlerService.log('get lab order test results')),
+            catchError(this.errorHandlerService.handleError<any[]>('getLabOrderTestResults'))
+        );
+    }
+
+    public getConfiguredLabTests(): Observable<any> {
+        return this.httpClient.get<any>(this.LabOrder_ApiUrl + '/api/LabTests/GetAllLabTests').pipe(
+            tap(getConfiguredLabTests => this.errorHandlerService.log('get configured lab tests')),
+            catchError(this.errorHandlerService.handleError<any[]>('getConfiguredLabTests'))
+        );
+    }
+
+
+    public getLabTestParameters(labTestId: number): Observable<any> {
+        return this.httpClient.get<any>(this.LabOrder_ApiUrl + '/api/LabTests/GetLabTestPametersByLabTestId/' + labTestId)
+            .pipe(tap(param => this.errorHandlerService.log('get Lab Test Parameters')),
+                catchError(this.errorHandlerService.handleError<any[]>('getLabTestParameters')))
+    }
+
+
+    public getLabOrderTestResults(labOrderTestId: number): Observable<any> {
+        return this.httpClient.get<any>(this.LabOrder_ApiUrl + '/api/LabTests/GetTestResultsByLabOrderTestId/' + labOrderTestId)
+            .pipe(tap(param => this.errorHandlerService.log('get lab order test results')),
+                catchError(this.errorHandlerService.handleError<any[]>('getLabOrderTestResults')))
+    }
+
+    public getFormContolFromParam(parameter: any): FormControlBase<any> {
         switch (parameter.dataType) {
-          case this.resultDataType.Text:  
-              return new TextboxFormControl(
-                {
-                  key:'ResultText_' + parameter.id,
-                  label: 'Result Text',
-                  required: true,
-                  value:null,
-                  order: 2
-                }); 
-            case this.resultDataType.Select:   
-              return new SelectlistFormControl(
-              {
-                key:'ResultOptionId_' + parameter.id,
-                label: 'Select Result',
-                options: parameter.resultOptions,
-                order: 2
-              });
-              case this.resultDataType.Numeric:  
-              return new TextboxFormControl(
-                {
-                  key:'ResultValue_' + parameter.id,
-                  label: 'Result Text',
-                  required: true,
-                  order: 2,
-                  value : null,
-                  pattern : "^\\d*\\.?\\d+$"
-                }); 
-          default:
-            break;
+            case this.resultDataType.Text:
+                return new TextboxFormControl(
+                    {
+                        key: 'ResultText_' + parameter.id,
+                        label: 'Result Text',
+                        required: true,
+                        value: null,
+                        order: 2
+                    });
+            case this.resultDataType.Select:
+                return new SelectlistFormControl(
+                    {
+                        key: 'ResultOptionId_' + parameter.id,
+                        label: 'Select Result',
+                        options: parameter.resultOptions,
+                        order: 2
+                    });
+            case this.resultDataType.Numeric:
+                return new TextboxFormControl(
+                    {
+                        key: 'ResultValue_' + parameter.id,
+                        label: 'Result Text',
+                        required: true,
+                        order: 2,
+                        value: null,
+                        pattern: '^\\d*\\.?\\d+$'
+                    });
+            default:
+                break;
+        }
     }
-}
 }

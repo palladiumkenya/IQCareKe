@@ -293,10 +293,14 @@ namespace IQCare.Web.CCC.WebService
                             visitType = visitTypes[0].ItemId;
                         }
 
+                        var facility = lookupLogic.GetFacility(Session["AppPosID"].ToString());
+                        if (facility == null)
+                        {
+                            facility = lookupLogic.GetFacility();
+                        }
+
                         //Add enrollment visit
-                       
-                        patientMasterVisitId =
-                            patientMasterVisitManager.AddPatientMasterVisit(patientId, userId, visitType);
+                        patientMasterVisitId = patientMasterVisitManager.AddPatientMasterVisit(patientId, userId, visitType, facility.FacilityID);
                         //Enroll Patient to service
                         patientEnrollmentId = patientEnrollmentManager.addPatientEnrollment(patientId, enrollmentDate, userId);
                         //Add enrollment entry point
@@ -481,7 +485,13 @@ namespace IQCare.Web.CCC.WebService
 
                         patientManager.UpdatePatient(updatePatient, patient.Id);
 
-                        int patientMasterVisitId = patientMasterVisitManager.PatientMasterVisitCheckin(patient.Id, userId);
+                        var currentfacility = lookupLogic.GetFacility(Session["AppPosID"].ToString());
+                        if (currentfacility == null)
+                        {
+                            currentfacility = lookupLogic.GetFacility();
+                        }
+
+                        int patientMasterVisitId = patientMasterVisitManager.PatientMasterVisitCheckin(patient.Id, userId, currentfacility.FacilityID);
                         Session["PatientMasterVisitId"] = patientMasterVisitId;
 
                         List<PatientEntryPoint> entryPoints = patientEntryPointManager.GetPatientEntryPoints(patient.Id);

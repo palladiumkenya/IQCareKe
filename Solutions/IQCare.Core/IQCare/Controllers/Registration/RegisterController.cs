@@ -1,8 +1,8 @@
 ﻿using IQCare.Common.BusinessProcess.Commands;
 using IQCare.Common.BusinessProcess.Commands.ClientLookup;
 using IQCare.Common.BusinessProcess.Commands.Enrollment;
-using IQCare.Common.BusinessProcess.Commands.Relationship;
 using IQCare.Common.BusinessProcess.Commands.PersonCommand;
+using IQCare.Common.BusinessProcess.Commands.Relationship;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -45,6 +45,38 @@ namespace IQCare.Controllers.Registration
         public async Task<IActionResult> Post([FromBody] AddPatientCommand addPatientCommand)
         {
             var response = await _mediator.Send(addPatientCommand, Request.HttpContext.RequestAborted);
+            if (response.IsValid)
+                return Ok(response.Value);
+            return BadRequest(response);
+        }
+
+        [HttpPost("postServiceEntryPoint")]
+        public async Task<IActionResult> PostServiceEntryPoint([FromBody]AddServiceEntryPointCommand serviceEntryPointCommand)
+        {
+            var response = await _mediator.Send(serviceEntryPointCommand, Request.HttpContext.RequestAborted);
+            if (response.IsValid)
+                return Ok(response.Value);
+            return BadRequest(response);
+        }
+
+        [HttpGet("getServiceEntryPoint/{serviceAreaId}/{patientId}")]
+        public async Task<IActionResult> GetServiceEntryPoint(int serviceAreaId, int patientId)
+        {
+            var response = await _mediator.Send(new GetServiceEntryPointCommand()
+            {
+                ServiceAreaId = serviceAreaId,
+                PatientId = patientId
+            }, Request.HttpContext.RequestAborted);
+
+            if (response.IsValid)
+                return Ok(response.Value);
+            return BadRequest(response);
+        }
+
+        [HttpPost("postConfirmatoryTests")]
+        public async Task<IActionResult> PostConfirmatoryTests([FromBody]AddHivReConfirmatoryTestsCommand addHivReConfirmatoryTestsCommand)
+        {
+            var response = await _mediator.Send(addHivReConfirmatoryTestsCommand, Request.HttpContext.RequestAborted);
             if (response.IsValid)
                 return Ok(response.Value);
             return BadRequest(response);
@@ -107,6 +139,20 @@ namespace IQCare.Controllers.Registration
             return BadRequest(response);
         }
 
+        [HttpGet("GetPatientEnrollmentByServiceAreaId/{patientId}/{serviceAreaId}")]
+        public async Task<IActionResult> GetPatientEnrollmentByServiceAreaId(int patientId, int serviceAreaId)
+        {
+            var response = await _mediator.Send(new GetPatientEnrollmentByServiceAreaIdCommand()
+            {
+                PatientId = patientId,
+                ServiceAreaId = serviceAreaId
+            }, Request.HttpContext.RequestAborted);
+
+            if (response.IsValid)
+                return Ok(response.Value);
+            return BadRequest(response);
+        }
+
         [HttpGet("search")]
         public async Task<IActionResult> Get(string identificationNumber, string firstName, string middleName, string lastName)
         {
@@ -136,6 +182,19 @@ namespace IQCare.Controllers.Registration
         public async Task<IActionResult> Get(int personId)
         {
             var response = await _mediator.Send(new GetPersonDetailsCommand	() {PersonId = personId});
+            if (response.IsValid)
+                return Ok(response.Value);
+            return BadRequest(response);
+        }
+
+        [HttpGet("getPersonModel/{personId}")]
+        public async Task<IActionResult> GetPersonModel(int personId)
+        {
+            var response = await _mediator.Send(new GetPersonQueryCommand()
+            {
+                PersonId = personId
+            }, Request.HttpContext.RequestAborted);
+
             if (response.IsValid)
                 return Ok(response.Value);
             return BadRequest(response);
@@ -194,6 +253,19 @@ namespace IQCare.Controllers.Registration
             var response = await _mediator.Send(new GetPatientIdentifiersCommand()
             {
                 PatientId = patientId
+            }, Request.HttpContext.RequestAborted);
+
+            if (response.IsValid)
+                return Ok(response.Value);
+            return BadRequest(response);
+        }
+
+        [HttpGet("GetPatientByPersonId/{personId}")]
+        public async Task<IActionResult> GetPatientByPersonId(int personId)
+        {
+            var response = await _mediator.Send(new GetPatientByPersonIdCommand()
+            {
+                PersonId = personId
             }, Request.HttpContext.RequestAborted);
 
             if (response.IsValid)

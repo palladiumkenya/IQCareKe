@@ -42,7 +42,7 @@ export class ServicesListComponent implements OnInit {
     }
 
     ngOnInit() {
-        console.log(this.person);
+        // console.log(this.person);
         this.getPersonEnrolledServices(this.personId);
     }
 
@@ -58,15 +58,56 @@ export class ServicesListComponent implements OnInit {
     }
 
     enrollToService(serviceId: number, serviceCode: string) {
-        if (serviceId == 1) {
-            this.snotifyService.error('Please Access CCC from the Greencard menu', 'Encounter History',
-                this.notificationService.getConfig());
+        if (!this.person.dateOfBirth || this.person.dateOfBirth == '') {
+            this.snotifyService.warning('Please update: ' + this.person.firstName + ' ' + this.person.midName + ' ' + this.person.lastName
+                + ', DOB before enrollment', 'Enrollment', this.notificationService.getConfig());
             return;
         }
-        this.zone.run(() => {
-            this.router.navigate(['/dashboard/enrollment/' + this.personId + '/' + serviceId + '/' + serviceCode],
-                { relativeTo: this.route });
-        });
+
+        const selectedService = this.services.filter(obj => obj.id == serviceId);
+        if (selectedService && selectedService.length > 0) {
+            const service = selectedService[0]['code'];
+            switch (selectedService[0]['code']) {
+                case 'HTS':
+                    this.zone.run(() => {
+                        this.router.navigate(['/dashboard/enrollment/hts/' + this.personId + '/' + serviceId + '/' + serviceCode],
+                            { relativeTo: this.route });
+                    });
+                    break;
+                case 'CCC':
+                    this.zone.run(() => {
+                        this.router.navigate(['/dashboard/enrollment/ccc/' + this.personId + '/' + serviceId + '/' + serviceCode],
+                            { relativeTo: this.route });
+                    });
+                    break;
+                default:
+                    this.zone.run(() => {
+                        this.router.navigate(['/dashboard/enrollment/' + this.personId + '/' + serviceId + '/' + serviceCode],
+                            { relativeTo: this.route });
+                    });
+                    break;
+            }
+        }
+    }
+
+    public editEnrollment(serviceId: number, serviceCode: string) {
+        switch (serviceCode) {
+            case 'CCC':
+                this.zone.run(() => {
+                    this.router.navigate(['/dashboard/enrollment/ccc/update/' + this.personId + '/' + serviceId + '/' + serviceCode + '/1'],
+                        { relativeTo: this.route });
+                });
+                break;
+            case 'HTS':
+                this.zone.run(() => {
+                    this.router.navigate(['/dashboard/enrollment/hts/update/' + this.personId + '/' + serviceId + '/' + serviceCode + '/1'],
+                        { relativeTo: this.route });
+                });
+                break;
+            default:
+                console.log('test default');
+                break;
+        }
     }
 
     newTriage() {

@@ -1,37 +1,36 @@
 <h2 mat-dialog-title>{{dialogTitle}}</h2>
 <mat-dialog-content>
-<form [formGroup]="labResultForm">
-  <div *ngFor = "let parameter of labTestParameters" class="row">
-      <div [className] = "parameter.formControls.length == 5 ? 'col-md-5ths col-xs-6' : 'col-lg-4 col-xs-12'"
-       *ngFor ="let control of parameter.formControls" >
-          <div [ngSwitch]="control.controlType">
-                <mat-form-field *ngSwitchCase="'textbox'" >
-                 <input matInput [placeholder]="control.label" [formControlName]="control.key"
-                  [id] ="control.key" [value] ="control.value">
-               </mat-form-field>
+    <form [formGroup]="labResultForm">
+        <div *ngFor="let parameter of labTestParameters" class="row">
+            <div [className]="parameter.formControls.length == 5 ? 'col-md-5ths col-xs-6' : 'col-lg-4 col-xs-12'"
+                *ngFor="let control of parameter.formControls">
+                <div [ngSwitch]="control.controlType">
+                    <mat-form-field *ngSwitchCase="'textbox'">
+                        <input matInput [placeholder]="control.label" [formControlName]="control.key" [id]="control.key"
+                            [value]="control.value">
+                    </mat-form-field>
 
-               <mat-checkbox (click)="OnChange($event, control.key)" 
-                 [(ngModel)]="disabled"
-                *ngSwitchCase="'checkbox'" 
-                [formControlName]="control.key"> {{control.label}}  </mat-checkbox>
+                    <mat-checkbox (click)="OnChange($event, control.key)" [(ngModel)]="disabled"
+                        *ngSwitchCase="'checkbox'" [formControlName]="control.key"> {{control.label}} </mat-checkbox>
 
-               <mat-form-field *ngSwitchCase="'selectlist'">
-                    <mat-label>{{ control.label }}</mat-label>
-                    <mat-select [formControlName]="control.key" [id]="control.key">
-                        <mat-option [value]="0">Select</mat-option>
-                        <mat-option *ngFor="let result of control.options" [value]="result.key">
-                            {{result.value}}
-                        </mat-option>
-                    </mat-select>
-                </mat-form-field>
-          </div>        
-      </div>
-    
-</div> 
-</form>
+                    <mat-form-field *ngSwitchCase="'selectlist'">
+                        <mat-label>{{ control.label }}</mat-label>
+                        <mat-select [formControlName]="control.key" [id]="control.key">
+                            <mat-option [value]="0">Select</mat-option>
+                            <mat-option *ngFor="let result of control.options" [value]="result.key">
+                                {{result.value}}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+            </div>
+
+        </div>
+    </form>
 </mat-dialog-content>
 
 <mat-dialog-actions align="end">
-        <button class="mat-raised-button" (click)="close()">Close</button>
-        <button class="mat-raised-button mat-primary" [disabled] ="!labResultForm.valid" (click)="submitLabResult()">Save</button>
+    <button class="mat-raised-button" (click)="close()">Close</button>
+    <button class="mat-raised-button mat-primary" [disabled]="!labResultForm.valid"
+        (click)="submitLabResult()">Save</button>
 </mat-dialog-actions>

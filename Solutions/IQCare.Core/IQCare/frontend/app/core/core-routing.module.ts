@@ -33,9 +33,13 @@ const routes: Routes = [
         loadChildren: '../clinical/clinical.module#ClinicalModule'
     },
     {
+        path:'air',
+        loadChildren:'../air/air.module#AirModule'
+    },
+    {
         path: '**',
         component: NotFoundComponent
-    }
+    }    
 ];
 
 @NgModule({

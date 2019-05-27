@@ -45,7 +45,7 @@ export class SearchComponent implements OnInit, AfterViewInit {
         store.dispatch(new AppState.ClearState());
         this.clientSearch = new Search();
 
-        //Reset Localstorage
+        // Reset Localstorage
         localStorage.removeItem('selectedService');
         localStorage.removeItem('personId');
         localStorage.removeItem('patientId');
@@ -100,7 +100,7 @@ export class SearchComponent implements OnInit, AfterViewInit {
                 // console.error(error);
                 this.snotifyService.error('Error searching person ' + error, 'SEARCH', this.notificationService.getConfig());
             },
-            ()=>{
+            () => {
 
             }
         );

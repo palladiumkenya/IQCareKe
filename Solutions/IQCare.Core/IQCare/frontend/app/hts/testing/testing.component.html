@@ -4,10 +4,6 @@
     </div>
     <div class="ibox-content">
         <div class="row">
-            <!--<div class="col-lg-2 col-md-2 col-sm-2">
-                <app-leftnav></app-leftnav>
-            </div>-->
-
             <div class="col-md-12 col-lg-12 col-sm-12 animated fadeIn">
                 <div class="panel panel-default">
                     <div class="panel-heading">HTS TESTING</div>
@@ -52,7 +48,8 @@
                                                         <td>{{ hivResult['lotNumber'] }}</td>
                                                         <td>{{ hivResult['expiryDate'] | date: 'dd-MMM-yyyy' }}</td>
                                                         <td>
-                                                            <i style="cursor: pointer;" class="material-icons" (click)="deleteTest(hivResult, 1, index, $event);">
+                                                            <i style="cursor: pointer;" class="material-icons"
+                                                                (click)="deleteTest(hivResult, 1, index, $event);">
                                                                 delete
                                                             </i>
                                                         </td>
@@ -88,7 +85,8 @@
                                                         <td>{{ hivResult['lotNumber'] }}</td>
                                                         <td>{{ hivResult['expiryDate'] | date: 'dd-MMM-yyyy' }}</td>
                                                         <td>
-                                                            <i style="cursor: pointer;" class="material-icons" (click)="deleteTest(hivResult, 2, index, $event);">
+                                                            <i style="cursor: pointer;" class="material-icons"
+                                                                (click)="deleteTest(hivResult, 2, index, $event);">
                                                                 delete
                                                             </i>
                                                         </td>
@@ -115,28 +113,33 @@
                                 <div class="row">
                                     <div class="col-lg-3 col-md-3 col-sm-3">
                                         <mat-form-field appNoneEvents>
-                                            <mat-select placeholder="Screening Test Result" name="finalResultHiv1" id="finalResultHiv1"
-                                                formControlName="finalResultHiv1">
-                                                <mat-option value=""></mat-option>
-                                                <mat-option *ngFor="let option of hivResultsOptions" [value]="option.itemId">{{option.itemName}}</mat-option>
+                                            <mat-select placeholder="Screening Test Result" name="finalResultHiv1"
+                                                id="finalResultHiv1" formControlName="finalResultHiv1">
+                                                <mat-option [value]=""></mat-option>
+                                                <mat-option *ngFor="let option of hivResultsOptions"
+                                                    [value]="option.itemId">{{option.itemName}}</mat-option>
                                             </mat-select>
                                         </mat-form-field>
 
                                         <mat-form-field>
-                                            <mat-select placeholder="Final Result Given?" name="finalResultGiven" id="finalResultGiven"
-                                                formControlName="finalResultGiven" (selectionChange)="onFinalResultsGivenChange()">
-                                                <mat-option value=""></mat-option>
-                                                <mat-option *ngFor="let option of yesNoOptions" [value]="option.itemId">{{option.itemName}}</mat-option>
+                                            <mat-select placeholder="Final Result Given?" name="finalResultGiven"
+                                                id="finalResultGiven" formControlName="finalResultGiven"
+                                                (selectionChange)="onFinalResultsGivenChange()">
+                                                <mat-option [value]=""></mat-option>
+                                                <mat-option *ngFor="let option of yesNoOptions" [value]="option.itemId">
+                                                    {{option.itemName}}</mat-option>
                                             </mat-select>
                                         </mat-form-field>
 
 
                                         <mat-form-field>
-                                            <mat-select placeholder="Accepted to partner listing" name="acceptedPartnerListing"
-                                                id="acceptedPartnerListing" (selectionChange)="onAcceptedPartnerListingChange()"
+                                            <mat-select placeholder="Accepted to partner listing"
+                                                name="acceptedPartnerListing" id="acceptedPartnerListing"
+                                                (selectionChange)="onAcceptedPartnerListingChange()"
                                                 formControlName="acceptedPartnerListing">
-                                                <mat-option value=""></mat-option>
-                                                <mat-option *ngFor="let option of yesNoNA" [value]="option.itemId">{{option.itemName}}</mat-option>
+                                                <mat-option [value]=""></mat-option>
+                                                <mat-option *ngFor="let option of yesNoNA" [value]="option.itemId">
+                                                    {{option.itemName}}</mat-option>
                                             </mat-select>
                                         </mat-form-field>
                                     </div>
@@ -145,24 +148,28 @@
                                         <mat-form-field appNoneEvents>
                                             <mat-select placeholder="Confirmatory Test Result" name="finalResultHiv2"
                                                 id="finalResultHiv2" formControlName="finalResultHiv2">
-                                                <mat-option value=""></mat-option>
-                                                <mat-option *ngFor="let option of hivResultsOptions" [value]="option.itemId">{{option.itemName}}</mat-option>
+                                                <mat-option [value]=""></mat-option>
+                                                <mat-option *ngFor="let option of hivResultsOptions"
+                                                    [value]="option.itemId">{{option.itemName}}</mat-option>
                                             </mat-select>
                                         </mat-form-field>
 
                                         <mat-form-field>
-                                            <mat-select placeholder="Couple Discordant" name="coupleDiscordant" id="coupleDiscordant"
-                                                formControlName="coupleDiscordant">
-                                                <mat-option value=""></mat-option>
-                                                <mat-option *ngFor="let option of yesNoNA" [value]="option.itemId">{{option.itemName}}</mat-option>
+                                            <mat-select placeholder="Couple Discordant" name="coupleDiscordant"
+                                                id="coupleDiscordant" formControlName="coupleDiscordant">
+                                                <mat-option [value]=""></mat-option>
+                                                <mat-option *ngFor="let option of yesNoNA" [value]="option.itemId">
+                                                    {{option.itemName}}</mat-option>
                                             </mat-select>
                                         </mat-form-field>
 
                                         <mat-form-field>
-                                            <mat-select placeholder="Reasons for decline to partner listing" name="reasonsDeclinePartnerListing"
-                                                id="reasonsDeclinePartnerListing" formControlName="reasonsDeclinePartnerListing">
-                                                <mat-option value=""></mat-option>
-                                                <mat-option *ngFor="let option of reasonsDeclined" [value]="option.itemId">{{option.itemName}}</mat-option>
+                                            <mat-select placeholder="Reasons for decline to partner listing"
+                                                name="reasonsDeclinePartnerListing" id="reasonsDeclinePartnerListing"
+                                                formControlName="reasonsDeclinePartnerListing">
+                                                <mat-option [value]=""></mat-option>
+                                                <mat-option *ngFor="let option of reasonsDeclined"
+                                                    [value]="option.itemId">{{option.itemName}}</mat-option>
                                             </mat-select>
                                         </mat-form-field>
                                     </div>
@@ -171,14 +178,16 @@
                                         <mat-form-field appNoneEvents>
                                             <mat-select placeholder="Final Result" name="finalResult" id="finalResult"
                                                 formControlName="finalResult">
-                                                <mat-option value=""></mat-option>
-                                                <mat-option *ngFor="let option of hivFinalResultsOptions" [value]="option.itemId">{{option.itemName}}</mat-option>
+                                                <mat-option [value]=""></mat-option>
+                                                <mat-option *ngFor="let option of hivFinalResultsOptions"
+                                                    [value]="option.itemId">{{option.itemName}}</mat-option>
                                             </mat-select>
                                         </mat-form-field>
 
                                         <mat-form-field>
-                                            <input matInput placeholder="Remarks" id="finalResultsRemarks" name="finalResultsRemarks"
-                                                rows="5" formControlName="finalResultsRemarks" />
+                                            <input matInput placeholder="Remarks" id="finalResultsRemarks"
+                                                name="finalResultsRemarks" rows="5"
+                                                formControlName="finalResultsRemarks" />
                                         </mat-form-field>
                                     </div>
                                 </div>

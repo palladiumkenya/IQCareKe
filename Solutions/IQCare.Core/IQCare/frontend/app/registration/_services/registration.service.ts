@@ -1,3 +1,4 @@
+import { HivReConfirmatoryTestsCommand } from './../../dashboard/_model/HivReConfirmatoryTestsCommand';
 
 import { of as observableOf, Observable } from 'rxjs';
 import { PersonDetails } from './../_models/persondetails';
@@ -11,6 +12,7 @@ import { Person } from '../_models/person';
 import { PersonPopulation } from '../_models/personPopulation';
 import { ErrorHandlerService } from '../../shared/_services/errorhandler.service';
 import { PersonPopulationDetails } from '../_models/personpopulationdetails';
+import { ServiceEntryPointCommand } from '../../dashboard/_model/ServiceEntryPointCommand';
 
 const httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -234,7 +236,7 @@ export class RegistrationService {
     }
 
     public addPersonPopulationType(personId: number, userId: number, populations: PersonPopulation): Observable<any> {
-        console.log(populations);
+        // console.log(populations);
         const pops = [];
         let priority = [];
         if (populations.populationType == 1) {
@@ -268,5 +270,24 @@ export class RegistrationService {
             tap((addPersonPopulationType: any) => this.errorHandler.log(`added person population type`)),
             catchError(this.errorHandler.handleError<any>('addPersonPopulationType'))
         );
+    }
+
+    public addServiceEntryPoint(serviceEntryPoint: ServiceEntryPointCommand): Observable<any> {
+        return this.http.post<any>(this.API_URL + '/api/Register/postServiceEntryPoint',
+            JSON.stringify(serviceEntryPoint), httpOptions).pipe(
+                tap((addServiceEntryPoint: any) => this.errorHandler.log(`added service entry point`)),
+                catchError(this.errorHandler.handleError<any>('addServiceEntryPoint'))
+            );
+    }
+
+    public addReConfirmatoryTest(hivReConfirmatoryTests: HivReConfirmatoryTestsCommand): Observable<any> {
+        if (!hivReConfirmatoryTests.TypeOfTest) {
+            return observableOf([]);
+        }
+        return this.http.post<any>(this.API_URL + '/api/Register/postConfirmatoryTests',
+            JSON.stringify(hivReConfirmatoryTests), httpOptions).pipe(
+                tap((addReConfirmatoryTest: any) => this.errorHandler.log(`added re-confirmatory test`)),
+                catchError(this.errorHandler.handleError<any>('addReConfirmatoryTest'))
+            );
     }
 }

@@ -65,6 +65,11 @@ namespace IQCare.HTS.Infrastructure
             return _context.Set<TEntity>().FromSql(query, parameters).ToListAsync();
         }
 
+        public void UpdateRange(IEnumerable<TEntity> entities)
+        {
+            throw new NotImplementedException();
+        }
+
         public async Task<IEnumerable<TEntity>> GetAllAsync()
             => await _context.Set<TEntity>().ToListAsync();
 

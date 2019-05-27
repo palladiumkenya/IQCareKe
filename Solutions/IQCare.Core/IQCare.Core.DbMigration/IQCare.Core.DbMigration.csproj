@@ -152,9 +152,12 @@
     <None Remove="Scripts\2.0.0\38_IPTOutcomeDate.sql" />
     <None Remove="Scripts\2.0.0\38_LO_HEI_Register.sql" />
     <None Remove="Scripts\2.0.0\37_HIVPositiveListView.sql" />
+    <None Remove="Scripts\2.0.0\39_IndicatorTables.sql" />
+    <None Remove="Scripts\2.0.0\40_IndicatorData.sql" />
     <None Remove="Scripts\2.0.0\42_LO_PNCRegister.sql" />
     <None Remove="Scripts\2.0.0\43_LO_MaternityRegister.sql" />
     <None Remove="Scripts\2.0.0\44_LO_IQCareViews.sql" />
+    <None Remove="Scripts\2.0.0\44_UpdateIndicatorTotalCode.sql" />
     <None Remove="Scripts\2.0.0\45_LO_ANCRegister.sql" />
     <None Remove="Scripts\2.0.0\46_SO_IQCare_Version.sql" />
     <None Remove="Scripts\2.0.0\46_LO_HEIRegister.sql" />
@@ -171,11 +174,21 @@
     <None Remove="Scripts\2.0.1\01_IQCareFinalBuild.sql" />
     <None Remove="Scripts\2.0.1\02_IQCareFinalBuild.sql" />
     <None Remove="Scripts\2.0.1\03_VisitDetailsView.sql" />
+    <None Remove="Scripts\2.0.1\04_IQCareFinalBuild.sql" />
     <None Remove="Scripts\2.0.1\02_LO_ANCRegister.sql" />
     <None Remove="Scripts\2.0.1\03_LO_HEIRegister.sql" />
     <None Remove="Scripts\2.0.1\04_LO_HTSLabRegister.sql" />
     <None Remove="Scripts\2.0.1\05_LO_MaternityRegister.sql" />
     <None Remove="Scripts\2.0.1\06_LO_PNCRegister.sql" />
+    <None Remove="Scripts\2.0.0\41_DO_Create_View_IndicatorResults.sql" />
+    <None Remove="Scripts\2.0.0\42DefaultConstraintsSection.sql" />
+    <None Remove="Scripts\2.0.0\43_UpdateUIDIndicators.sql" />
+    <None Remove="Scripts\2.0.1\07_AdditionalServiceAreaFields.sql" />
+    <None Remove="Scripts\2.0.1\07_API_PatientsView.sql" />
+    <None Remove="Scripts\2.0.1\08_Update_ModeOfDelivery.sql" />
+    <None Remove="Scripts\2.0.1\09_SP_Bluecard_ToGreenCard.sql" />
+    <None Remove="Scripts\2.0.1\10_PersonView.sql" />
+    <None Remove="Scripts\2.0.1\11_IQCareFinalBuild.sql" />
   </ItemGroup>
 
   <ItemGroup>
@@ -211,6 +224,9 @@
     <EmbeddedResource Include="Scripts\1.0.0.9\39_SO_vw_PatientEncounters.sql" />
     <EmbeddedResource Include="Scripts\1.0.0.9\32_DO_Insert_MaternalDrugAdmin_LookUp_Items.sql" />
     <None Remove="Scripts\2.0.0\56_SO_CreateViewPatientEncounterView.sql" />
+    <EmbeddedResource Include="Scripts\2.0.0\39_IndicatorTables.sql" />
+    <EmbeddedResource Include="Scripts\2.0.0\40_IndicatorData.sql" />
+    <EmbeddedResource Include="Scripts\2.0.0\44_UpdateIndicatorTotalCode.sql" />
     <EmbeddedResource Include="Scripts\2.0.0\56_SO_CreateViewPatientEncounterView.sql" />
     <None Remove="Scripts\2.0.0\09_DO_AlterTable_PatientDelivery_DropColumn_ProfileId.sql" />
     <None Remove="Scripts\2.0.0\10_DO_AlterTable_PatientDelivery_AddColumn_PregnancyId.sql" />
@@ -366,11 +382,20 @@
     <EmbeddedResource Include="Scripts\2.0.0\57_PHQQuestion.sql" />
     <EmbeddedResource Include="Scripts\2.0.1\01_IQCareFinalBuild.sql" />
     <EmbeddedResource Include="Scripts\2.0.1\02_IQCareFinalBuild.sql" />
+    <EmbeddedResource Include="Scripts\2.0.1\11_IQCareFinalBuild.sql" />
+    <EmbeddedResource Include="Scripts\2.0.1\04_IQCareFinalBuild.sql" />
     <EmbeddedResource Include="Scripts\2.0.1\02_LO_ANCRegister.sql" />
     <EmbeddedResource Include="Scripts\2.0.1\03_LO_HEIRegister.sql" />
     <EmbeddedResource Include="Scripts\2.0.1\04_LO_HTSLabRegister.sql" />
     <EmbeddedResource Include="Scripts\2.0.1\05_LO_MaternityRegister.sql" />
     <EmbeddedResource Include="Scripts\2.0.1\06_LO_PNCRegister.sql" />
+    <EmbeddedResource Include="Scripts\2.0.0\41_DO_Create_View_IndicatorResults.sql" />
+    <EmbeddedResource Include="Scripts\2.0.0\42DefaultConstraintsSection.sql" />
+    <EmbeddedResource Include="Scripts\2.0.0\43_UpdateUIDIndicators.sql" />
+    <EmbeddedResource Include="Scripts\2.0.1\07_API_PatientsView.sql" />
+    <EmbeddedResource Include="Scripts\2.0.1\08_Update_ModeOfDelivery.sql" />
+    <EmbeddedResource Include="Scripts\2.0.1\09_SP_Bluecard_ToGreenCard.sql" />
+    <EmbeddedResource Include="Scripts\2.0.1\10_PersonView.sql" />
   </ItemGroup>
 
   <ItemGroup>

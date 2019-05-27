@@ -189,6 +189,17 @@ namespace IQCare.Controllers.HTS
         public async Task<IActionResult> Update(int encounterId, int patientMasterVisitId, [FromBody] UpdateEncounterCommand updateEncounterCommand)
         {
             updateEncounterCommand.encounterId = encounterId;
+            var encounter = await _mediator.Send(new EditEncounterVisitCommand()
+            {
+                PatientMasterVisitId = patientMasterVisitId,
+                Id = updateEncounterCommand.Encounter.PatientEncounterID,
+                EncounterDate = updateEncounterCommand.Encounter.EncounterDate
+            }, Request.HttpContext.RequestAborted);
+
+            if (!encounter.IsValid)
+            {
+                return BadRequest(encounter);
+            }
 
             if (updateEncounterCommand.Encounter.TbScreening.HasValue)
             {

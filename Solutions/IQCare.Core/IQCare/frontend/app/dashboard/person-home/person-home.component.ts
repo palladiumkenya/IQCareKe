@@ -62,7 +62,7 @@ export class PersonHomeComponent implements OnInit {
     public getPatientDetailsById(personId: number) {
         this.personView$ = this.personService.getPatientByPersonId(personId).subscribe(
             p => {
-                console.log(p);
+                // console.log(p);
                 this.person = p;
 
                 localStorage.setItem('personId', this.person.personId.toString());
