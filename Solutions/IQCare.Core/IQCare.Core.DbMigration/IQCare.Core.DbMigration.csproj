@@ -189,6 +189,7 @@
     <None Remove="Scripts\2.0.1\09_SP_Bluecard_ToGreenCard.sql" />
     <None Remove="Scripts\2.0.1\10_PersonView.sql" />
     <None Remove="Scripts\2.0.1\11_IQCareFinalBuild.sql" />
+    <None Remove="Scripts\2.0.1\12_IE_ADD_NHIF_Identifier.sql" />
   </ItemGroup>
 
   <ItemGroup>
@@ -396,6 +397,7 @@
     <EmbeddedResource Include="Scripts\2.0.1\08_Update_ModeOfDelivery.sql" />
     <EmbeddedResource Include="Scripts\2.0.1\09_SP_Bluecard_ToGreenCard.sql" />
     <EmbeddedResource Include="Scripts\2.0.1\10_PersonView.sql" />
+    <EmbeddedResource Include="Scripts\2.0.1\12_IE_ADD_NHIF_Identifier.sql" />
   </ItemGroup>
 
   <ItemGroup>
