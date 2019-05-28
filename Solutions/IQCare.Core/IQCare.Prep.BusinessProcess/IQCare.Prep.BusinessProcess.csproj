@@ -1,7 +1,27 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netcoreapp2.2</TargetFramework>
+    <TargetFramework>netcoreapp2.1</TargetFramework>
   </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="7.0.1" />
+    <PackageReference Include="MediatR" Version="4.1.0" />
+    <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="4.1.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="CommandHandlers\" />
+    <Folder Include="Commands\" />
+    <Folder Include="MapperProfiles\" />
+    <Folder Include="QueryHandlers\" />
+    <Folder Include="Queries\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\IQCare.Library\IQCare.Library.csproj" />
+    <ProjectReference Include="..\IQCare.Prep.Core\IQCare.Prep.Core.csproj" />
+    <ProjectReference Include="..\IQCare.Prep.Infrastructure\IQCare.Prep.Infrastructure.csproj" />
+  </ItemGroup>
 
 </Project>
