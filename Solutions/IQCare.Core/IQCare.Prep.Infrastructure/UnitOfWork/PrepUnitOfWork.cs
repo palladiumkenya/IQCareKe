@@ -8,12 +8,12 @@ using System.Collections;
 
 namespace IQCare.Prep.Infrastructure.UnitOfWork
 {
-   public  class PrepUnitOfWork:GenericUnitOfWork,IPrepUnitOfWork
+    public class PrepUnitOfWork : GenericUnitOfWork, IPrepUnitOfWork
     {
         Hashtable repositories;
         PrepDbContext prepDbContext;
 
-        public PrepUnitOfWork(PrepDbContext _prepDbContext): base(_prepDbContext)
+        public PrepUnitOfWork(PrepDbContext _prepDbContext) : base(_prepDbContext)
         {
             prepDbContext = _prepDbContext;
         }
@@ -27,7 +27,7 @@ namespace IQCare.Prep.Infrastructure.UnitOfWork
             var type = typeof(T).Name;
 
 
-            if(!repositories.ContainsKey(type))
+            if (!repositories.ContainsKey(type))
             {
                 var repositoryType = typeof(PrepRepository<>);
                 var repositoryInstance = Activator.CreateInstance(repositoryType.MakeGenericType(typeof(T)), prepDbContext);
@@ -36,4 +36,5 @@ namespace IQCare.Prep.Infrastructure.UnitOfWork
 
             return (IRepository<T>)repositories[type];
         }
+    }
 }

@@ -15,7 +15,7 @@ namespace IQCare.Prep.Infrastructure.Installers
         {
             services.AddDbContext<PrepDbContext>(x => x.UseSqlServer(connectionString));
             services.AddScoped(typeof(IPrepRepository<>), typeof(PrepRepository<>));
-            services.AddScoped(typeof(IPrepUnitOfWork), typeof(IPrepUnitOfWork));
+            services.AddScoped(typeof(IPrepUnitOfWork), typeof(PrepUnitOfWork));
         }
     }
 }
