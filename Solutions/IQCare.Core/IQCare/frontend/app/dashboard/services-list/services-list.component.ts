@@ -9,6 +9,8 @@ import { SnotifyService } from 'ng-snotify';
 import { Store } from '@ngrx/store';
 import * as Consent from '../../shared/reducers/app.states';
 import { SearchService } from '../../registration/_services/search.service';
+import { EncounterDetails } from '../_model/HtsEncounterdetails';
+
 
 @Component({
     selector: 'app-services-list',
@@ -19,12 +21,20 @@ export class ServicesListComponent implements OnInit {
     @Input('personId') personId: number;
     @Input('services') services: any[];
     @Input('person') person: any;
-
+    @Input('encounterDetail') encounterDetail: EncounterDetails;
+    @Input('personVitalWeight') weight: number;
     enrolledServices: any[];
+    PatientCCCEnrolled: boolean = false;
     patientIdentifiers: any[];
     enrolledService: any[] = [];
     identifiers: any[] = [];
+    patientvitals: any[] = [];
+    vitalWeight: number = 0;
+    Vitaldone: boolean = true;
 
+    htseligibility: string = ' ';
+    EligibilityInformation: any[] = [];
+    HTSEligible: boolean = false;
     hasItems: boolean = false;
     public patientId: number;
     public Patient: PatientView = {};
@@ -38,13 +48,33 @@ export class ServicesListComponent implements OnInit {
         private notificationService: NotificationService,
         private store: Store<AppState>,
         private searchService: SearchService,
-        private appStateService: AppStateService) {
+        private appStateService: AppStateService,
+    ) {
     }
 
     ngOnInit() {
-        // console.log(this.person);
+        this.EligibilityInformation = [];
+        this.vitalWeight = this.weight;
+
         this.getPersonEnrolledServices(this.personId);
+
+        console.log(this.encounterDetail);
+
+
+
+        if (this.EligibilityInformation.length > 0) {
+            this.htseligibility = this.EligibilityInformation.join(' ,');
+            console.log(this.EligibilityInformation);
+            console.log(this.htseligibility);
+        }
+        console.log('HTSEligibility');
+        console.log(this.HTSEligible);
+        console.log(this.personId);
+
+
+
     }
+
 
     getPersonEnrolledServices(personId: number) {
         this.personhomeservice.getPersonEnrolledServices(personId).subscribe((res) => {
@@ -56,6 +86,7 @@ export class ServicesListComponent implements OnInit {
             this.identifiers = res['identifiers'];
         });
     }
+
 
     enrollToService(serviceId: number, serviceCode: string) {
         if (!this.person.dateOfBirth || this.person.dateOfBirth == '') {
@@ -174,8 +205,12 @@ export class ServicesListComponent implements OnInit {
             }
         }
     }
-
-    isPersonServiceEnrolled(service: any): boolean {
+    navigateToTriage() {
+        this.zone.run(() => {
+            this.router.navigate(['/clinical/triage/' + this.patientId + '/' + this.personId], { relativeTo: this.route});
+        });
+    }  
+     isPersonServiceEnrolled(service: any): boolean {
         if (this.enrolledServices && this.enrolledServices.length > 0) {
             let returnValue = false;
             for (let i = 0; i < this.enrolledServices.length; i++) {
@@ -192,8 +227,12 @@ export class ServicesListComponent implements OnInit {
     isServiceEligible(serviceAreaId: number) {
         let isCCCEnrolled;
 
+
         if (this.enrolledServices) {
             isCCCEnrolled = this.enrolledServices.filter(obj => obj.serviceAreaId == 1);
+            if (isCCCEnrolled && isCCCEnrolled.length > 0) {
+                this.PatientCCCEnrolled = true;
+            }
         }
 
         const selectedService = this.services.filter(obj => obj.id == serviceAreaId);
@@ -241,11 +280,166 @@ export class ServicesListComponent implements OnInit {
                 case 'CCC':
                     isEligible = true;
                     break;
+                case 'PREP':
+                    if (isCCCEnrolled && isCCCEnrolled.length > 0) {
+                        isEligible = false;
+
+
+                    } else {
+                        if (this.person.ageNumber < 15) {
+                            isEligible = false;
+                            if (this.EligibilityInformation.length > 0) {
+                                if (this.EligibilityInformation.includes('Age below 15') == false) {
+                                    this.EligibilityInformation.push('Age below 15');
+                                }
+                            }
+                            else {
+                                this.EligibilityInformation.push('Age below 15');
+                            }
+
+                            /*  if (this.EligibilityInformation.length > 0) {
+      
+                                 this.htseligibility = this.EligibilityInformation.join(', ');
+                             } */
+                        } else {
+                            this.HTSEligible = this.getHTSEligibility();
+                            isEligible = this.HTSEligible;
+                            if (isEligible == true) {
+                                if (this.vitalWeight > 0 && this.vitalWeight < 35) {
+                                    isEligible = false;
+                                    if (this.EligibilityInformation.length > 0) {
+                                        if (this.EligibilityInformation.includes('Weight less than 35') == false) {
+                                            this.EligibilityInformation.push('Weight less than 35');
+                                        }
+                                    } else {
+                                        this.EligibilityInformation.push('Weight less than 35');
+                                    }
+
+
+
+
+
+                                } else if (this.vitalWeight == 0) {
+                                    isEligible = false;
+                                    this.Vitaldone = false;
+                                    /*  if (this.EligibilityInformation.length > 0) {
+                                         if (this.EligibilityInformation.includes('Vitals not done') == false) {
+                                             this.EligibilityInformation.push('Vitals not done');
+                                         }
+                                     } else {
+                                         this.EligibilityInformation.push('Vitals not done');
+                                     } */
+
+
+                                }
+
+                            }
+
+                        }
+                    }
+                    console.log('*******Called after Break****');
+                    console.log(this.EligibilityInformation);
+                    break;
+
             }
         }
+
+        this.htseligibility = '';
+        this.htseligibility = this.EligibilityInformation.join(',');
         return isEligible;
     }
+    getHTSEligibility(): boolean {
+        let isCCCEnrolled;
+        if (this.enrolledServices) {
+            isCCCEnrolled = this.enrolledServices.filter(obj => obj.serviceAreaId == 1);
+        }
+        let isEligible: boolean = false;
+        console.log('gethtseligibility');
+        console.log(this.encounterDetail);
+        if (this.encounterDetail != undefined) {
+            if (this.encounterDetail.finalResult == undefined) {
+                isEligible = false;
+                this.EligibilityInformation.push('HTS not done');
+            } else if (this.encounterDetail.finalResult == 'Negative') {
+                isEligible = true;
+            } else if (this.encounterDetail.finalResult == 'Positive') {
 
+                isEligible = false;
+            } else {
+                isEligible = true;
+            }
+        } else {
+            if (isCCCEnrolled != undefined) {
+                if (isCCCEnrolled && isCCCEnrolled.length > 0) {
+                    isEligible = false;
+                } else {
+                    if (this.EligibilityInformation.length > 0) {
+                        if (this.EligibilityInformation.includes('HTS not done') == false) {
+                            this.EligibilityInformation.push('HTS not done');
+                        }
+                    } else {
+                        this.EligibilityInformation.push('HTS not done');
+                    }
+
+
+
+                }
+            } else {
+                if (this.EligibilityInformation.length > 0) {
+                    if (this.EligibilityInformation.includes('HTS not done') == false) {
+                        this.EligibilityInformation.push('HTS not done');
+                    }
+                }
+                else {
+                    this.EligibilityInformation.push('HTS not done');
+                }
+
+
+
+            }
+
+        }
+
+
+        return isEligible;
+
+    }
+    validationService(code: string, vital: Boolean): Boolean {
+        let visibility = true;
+        if (code == 'PREP') {
+            visibility = false;
+        } else {
+            visibility = true;
+        }
+        return visibility;
+    }
+    validationHTS(code: string, HTSEligible: Boolean): Boolean {
+        let visibility = false;
+        if (code == 'PREP') {
+            if (HTSEligible == false) {
+                visibility = true;
+            } else {
+                visibility = false;
+            }
+        } else {
+            visibility = false;
+        }
+        return visibility;
+    }
+    validationTriage(code: string, vital: Boolean): Boolean {
+        let visibility = false;
+        if (code == 'PREP') {
+            if (vital == false) {
+                visibility = true;
+            } else {
+                visibility = false;
+            }
+
+        } else {
+            visibility = false;
+        }
+        return visibility;
+    }
     getServiceEnrollmentDetails(service: any) {
         this.enrolledService = this.enrolledServices.filter(obj => obj.serviceAreaId == service.id);
         this.enrolledService['identifiers'] = [];

@@ -31,8 +31,9 @@ export class EncounterService {
             tap(getEncounters => this.errorHandler.log('fetched all client encounters')),
             catchError(this.errorHandler.handleError<any[]>('getEncounters', []))
         );
-    }
+    } 
 
+   
     public getEncounterDetails(encounterId: number): Observable<EncounterDetails[]> {
         return this.http.get<EncounterDetails[]>(this.API_URL + this._url + '/getEncounterDetails/' + encounterId).pipe(
             tap(getEncounterDetails => this.errorHandler.log('fetched a single client encounter')),
