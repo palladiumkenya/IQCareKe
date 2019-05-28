@@ -186,6 +186,10 @@
     <None Remove="Scripts\2.0.1\07_AdditionalServiceAreaFields.sql" />
     <None Remove="Scripts\2.0.1\07_API_PatientsView.sql" />
     <None Remove="Scripts\2.0.1\08_Update_ModeOfDelivery.sql" />
+    <None Remove="Scripts\2.0.1\PREP\1.Prep_ServiceArea.sql" />
+    <None Remove="Scripts\2.0.1\PREP\2.Prep Number.sql" />
+    <None Remove="Scripts\2.0.1\PREP\3.PrepServiceAreaIdentifiers.sql" />
+    <None Remove="Scripts\2.0.1\PREP\4.PersonVitalsView.sql" />
   </ItemGroup>
 
   <ItemGroup>
@@ -390,6 +394,10 @@
     <EmbeddedResource Include="Scripts\2.0.0\43_UpdateUIDIndicators.sql" />
     <EmbeddedResource Include="Scripts\2.0.1\07_API_PatientsView.sql" />
     <EmbeddedResource Include="Scripts\2.0.1\08_Update_ModeOfDelivery.sql" />
+    <EmbeddedResource Include="Scripts\2.0.1\PREP\1.Prep_ServiceArea.sql" />
+    <EmbeddedResource Include="Scripts\2.0.1\PREP\2.Prep Number.sql" />
+    <EmbeddedResource Include="Scripts\2.0.1\PREP\3.PrepServiceAreaIdentifiers.sql" />
+    <EmbeddedResource Include="Scripts\2.0.1\PREP\4.PersonVitalsView.sql" />
   </ItemGroup>
 
   <ItemGroup>

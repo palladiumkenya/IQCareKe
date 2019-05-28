@@ -118,12 +118,45 @@
                                                 </a>
                                             </ng-container>
                                             <ng-template #notEligibleTemplate>
-                                                <span class="label label-orange">Not Eligible</span>
+                                                <span class="label label-orange"
+                                                    *ngIf="validationService(service.code,this.Vitaldone);else informationtemplate">Not
+                                                    Eligible </span>
                                             </ng-template>
+
+                                            <ng-template #informationtemplate>
+                                                <div
+                                                    *ngIf="validationHTS(service.code,this.HTSEligible) ;else triagetemplate ">
+                                                    <span class="label label-orange"
+                                                        *ngFor="let infor of this.EligibilityInformation">
+                                                        {{infor}}
+                                                    </span>
+                                                </div>
+                                            </ng-template>
+                                            <ng-template #triagetemplate>
+                                                <div *ngIf="validationTriage(service.code,this.Vitaldone)">
+                                                    <a class="btn btn-sm btn-primary" (click)=" navigateToTriage()">
+                                                        Triage 
+                                                    </a>
+                                                    <span>
+                                                        &nbsp;
+                                                    </span>
+                                                    <span class="label label-orange">Vitals not done</span>
+                                                </div>
+                                            </ng-template>
+
+
+
+                                            <br />
+
+
                                         </span>
+
+
                                     </div>
+
                                 </ng-template>
                             </div>
+
                         </li>
                     </ul>
                 </div>
