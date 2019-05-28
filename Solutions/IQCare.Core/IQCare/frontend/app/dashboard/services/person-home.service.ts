@@ -70,6 +70,7 @@ export class PersonHomeService {
             catchError(this.errorHandler.handleError<any[]>('getPatientType'))
         );
     }
+
     public getPatientAllergies(patientId: number): Observable<any> {
         return this.http.get<any>(this.API_URL + '/api/PatientAllergy/GetPatientAllergy?patientId=' + patientId).pipe(
             tap(getPatientAllergies => this.errorHandler.log('get patient Allergy')),
@@ -83,6 +84,7 @@ export class PersonHomeService {
             catchError(this.errorHandler.handleError<any>('getChronicIllnessesByPatientId'))
         );
     }
+
     public getRelationshipsByPatientId(patientId: number): Observable<any> {
         return this.http.get<any>(this.API_URL + '/api/PatientServices/GetRelationshipsByPatientId/' + patientId).pipe(
             tap(getRelationshipsByPatientId => this.errorHandler.log(`get patient relationships`)),
@@ -102,12 +104,49 @@ export class PersonHomeService {
             catchError(this.errorHandler.handleError<any[]>('getPatientAllergies'))
         );
     }
+
     public getPatientById(patientId: number): Observable<any> {
         return this.http.get<any>(this.API_URL + '/api/Register/GetPatientById/' + patientId).pipe(
             tap(getPatientById => this.errorHandler.log(`get patient details`)),
             catchError(this.errorHandler.handleError<any>('getPatientById'))
-
         );
     }
 
+    public getPatientModelByPersonId(personId: number): Observable<any> {
+        return this.http.get<any>(this.API_URL + '/api/Register/GetPatientByPersonId/' + personId).pipe(
+            tap(getPatientModelByPersonId => this.errorHandler.log(`get patient model by personId ` + personId)),
+            catchError(this.errorHandler.handleError<any>('getPatientModelByPersonId'))
+        );
+    }
+
+    public getPersonPopulationType(personId: number): Observable<any[]> {
+        return this.http.get<any[]>(this.API_URL + '/api/Registration/Person/GetPersonPopulationDetails/' + personId).pipe(
+            tap(getPersonPopulationType => this.errorHandler.log(`get person population type ` + personId)),
+            catchError(this.errorHandler.handleError<any>('getPersonPopulationType'))
+        );
+    }
+
+    public getPatientServiceAreaEntryPoints(serviceAreaId: number, patientId: number): Observable<any> {
+        return this.http.get<any>(this.API_URL + '/api/Register/getServiceEntryPoint/' + serviceAreaId + '/' + patientId).pipe(
+            tap(getPatientServiceAreaEntryPoints => this.errorHandler.log(`get patient serviceentrypoints for patientId:  `
+                + patientId + ` and serviceAreaId: ` + serviceAreaId)),
+            catchError(this.errorHandler.handleError<any>('getPatientServiceAreaEntryPoints'))
+        );
+    }
+
+    public getPatientEnrollmentDateByServiceAreaId(patientId: number, serviceAreaId: number): Observable<any> {
+        return this.http.get<any>(this.API_URL + '/api/Register/GetPatientEnrollmentByServiceAreaId/'
+            + patientId + '/' + serviceAreaId).pipe(
+                tap(getPatientEnrollmentDateByServiceAreaId => this.errorHandler.log(`get patient enrollment date for patientId:  `
+                    + patientId + ` and serviceAreaId: ` + serviceAreaId)),
+                catchError(this.errorHandler.handleError<any>('getPatientEnrollmentDateByServiceAreaId'))
+            );
+    }
+
+    public getPersonPriorityTypes(personId: number): Observable<any[]> {
+        return this.http.get<any[]>(this.API_URL + '/api/Registration/Person/GetPersonPriorityDetails/' + personId).pipe(
+            tap(getPersonPriorityTypes => this.errorHandler.log(`get person priority type for personId: ` + personId)),
+            catchError(this.errorHandler.handleError<any>('getPersonPriorityTypes'))
+        );
+    }
 }

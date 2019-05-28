@@ -121,8 +121,24 @@ export class ServicesListComponent implements OnInit {
         }
     }
 
-    public editEnrollment() {
-        console.log(`edit`);
+    public editEnrollment(serviceId: number, serviceCode: string) {
+        switch (serviceCode) {
+            case 'CCC':
+                this.zone.run(() => {
+                    this.router.navigate(['/dashboard/enrollment/ccc/update/' + this.personId + '/' + serviceId + '/' + serviceCode + '/1'],
+                        { relativeTo: this.route });
+                });
+                break;
+            case 'HTS':
+                this.zone.run(() => {
+                    this.router.navigate(['/dashboard/enrollment/hts/update/' + this.personId + '/' + serviceId + '/' + serviceCode + '/1'],
+                        { relativeTo: this.route });
+                });
+                break;
+            default:
+                console.log('test default');
+                break;
+        }
     }
 
     newTriage() {

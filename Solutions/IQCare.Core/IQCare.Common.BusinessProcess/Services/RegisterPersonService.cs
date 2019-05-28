@@ -609,7 +609,7 @@ namespace IQCare.Common.BusinessProcess.Services
                 {
                     var previouslyIdentifiers = await _unitOfWork.Repository<PatientIdentifier>().Get(y =>
                         y.IdentifierValue == serviceIdentifiersList[i].IdentifierValue &&
-                        y.IdentifierTypeId == serviceIdentifiersList[i].IdentifierId).ToListAsync();
+                        y.IdentifierTypeId == serviceIdentifiersList[i].IdentifierId && y.PatientId != patientId).ToListAsync();
 
                     if (previouslyIdentifiers.Count > 0)
                     {
@@ -621,58 +621,119 @@ namespace IQCare.Common.BusinessProcess.Services
 
                 var enrollmentVisitType = await _unitOfWork.Repository<LookupItemView>().Get(x => x.MasterName == "VisitType" && x.ItemName == "Enrollment").FirstOrDefaultAsync();
                 int? visitType = enrollmentVisitType != null ? enrollmentVisitType.ItemId : 0;
-                var patientMasterVisit = new PatientMasterVisit()
+
+                var enrollmentPatientMasterVisit = await _unitOfWork.Repository<PatientMasterVisit>().Get(x =>
+                    x.PatientId == patientId && x.ServiceId == serviceAreaId && x.VisitType == visitType).ToListAsync();
+
+                if (enrollmentPatientMasterVisit.Count == 0)
                 {
-                    PatientId = patientId,
-                    ServiceId = serviceAreaId,
-                    Start = DateTime.Now,
-                    End = null,
-                    Active = false,
-                    VisitDate = DateTime.Now,
-                    VisitType = visitType,
-                    Status = 1,
-                    CreateDate = DateTime.Now,
-                    DeleteFlag = false,
-                    CreatedBy = createdBy
-                };
-
-
-                await _unitOfWork.Repository<PatientMasterVisit>().AddAsync(patientMasterVisit);
-                await _unitOfWork.SaveAsync();
-
-                var patientEnrollment = new PatientEnrollment()
-                {
-                    PatientId = patientId,
-                    ServiceAreaId = serviceAreaId,
-                    EnrollmentDate = dateOfEnrollment,
-                    EnrollmentStatusId = 0,
-                    TransferIn = false,
-                    CareEnded = false,
-                    DeleteFlag = false,
-                    CreatedBy = createdBy,
-                    CreateDate = DateTime.Now
-                };
-
-
-                await _unitOfWork.Repository<PatientEnrollment>().AddAsync(patientEnrollment);
-                await _unitOfWork.SaveAsync();
-
-                if (serviceIdentifiersList.Any())
-                {
-                    List<PatientIdentifier> patientIdentifierList = new List<PatientIdentifier>();
-                    serviceIdentifiersList.ForEach(x => patientIdentifierList.Add(new PatientIdentifier()
+                    var patientMasterVisit = new PatientMasterVisit()
                     {
                         PatientId = patientId,
-                        PatientEnrollmentId = patientEnrollment.Id,
-                        IdentifierTypeId = x.IdentifierId,
-                        IdentifierValue = x.IdentifierValue,
+                        ServiceId = serviceAreaId,
+                        Start = DateTime.Now,
+                        End = null,
+                        Active = false,
+                        VisitDate = DateTime.Now,
+                        VisitType = visitType,
+                        Status = 1,
+                        CreateDate = DateTime.Now,
+                        DeleteFlag = false,
+                        CreatedBy = createdBy
+                    };
+
+
+                    await _unitOfWork.Repository<PatientMasterVisit>().AddAsync(patientMasterVisit);
+                    await _unitOfWork.SaveAsync();
+                }
+
+
+                var previousPatientEnrollment = await _unitOfWork.Repository<PatientEnrollment>().Get(x =>
+                        x.PatientId == patientId && x.ServiceAreaId == serviceAreaId && x.DeleteFlag == false)
+                    .ToListAsync();
+                if (previousPatientEnrollment.Count == 0)
+                {
+                    var patientEnrollment = new PatientEnrollment()
+                    {
+                        PatientId = patientId,
+                        ServiceAreaId = serviceAreaId,
+                        EnrollmentDate = dateOfEnrollment,
+                        EnrollmentStatusId = 0,
+                        TransferIn = false,
+                        CareEnded = false,
                         DeleteFlag = false,
                         CreatedBy = createdBy,
-                        CreateDate = DateTime.Now,
-                        Active = true
-                    }));
-                    await _unitOfWork.Repository<PatientIdentifier>().AddRangeAsync(patientIdentifierList);
+                        CreateDate = DateTime.Now
+                    };
+
+
+                    await _unitOfWork.Repository<PatientEnrollment>().AddAsync(patientEnrollment);
                     await _unitOfWork.SaveAsync();
+
+                    if (serviceIdentifiersList.Any())
+                    {
+                        List<PatientIdentifier> patientIdentifierList = new List<PatientIdentifier>();
+                        foreach (var x in serviceIdentifiersList)
+                        {
+                            if (x.IdentifierValue != null)
+                            {
+                                patientIdentifierList.Add(new PatientIdentifier()
+                                {
+                                    PatientId = patientId,
+                                    PatientEnrollmentId = patientEnrollment.Id,
+                                    IdentifierTypeId = x.IdentifierId,
+                                    IdentifierValue = x.IdentifierValue,
+                                    DeleteFlag = false,
+                                    CreatedBy = createdBy,
+                                    CreateDate = DateTime.Now,
+                                    Active = true
+                                });
+                            }
+
+                            await _unitOfWork.Repository<PatientIdentifier>().AddRangeAsync(patientIdentifierList);
+                            await _unitOfWork.SaveAsync();
+                        }
+                    }
+                }
+                else
+                {
+                    if (serviceIdentifiersList.Any())
+                    {
+                        foreach (var x in serviceIdentifiersList)
+                        {
+                            if (x.IdentifierValue != null)
+                            {
+                                var patientIdentifiers = await _unitOfWork.Repository<PatientIdentifier>().Get(y =>
+                                    y.PatientId == patientId && y.IdentifierTypeId == x.IdentifierId &&
+                                    y.DeleteFlag == false).ToListAsync();
+
+                                if (patientIdentifiers.Count > 0)
+                                {
+                                    patientIdentifiers[0].IdentifierValue = x.IdentifierValue;
+
+                                    _unitOfWork.Repository<PatientIdentifier>().Update(patientIdentifiers[0]);
+                                    await _unitOfWork.SaveAsync();
+                                }
+                                else
+                                {
+                                    var patientIdentifier = new PatientIdentifier()
+                                    {
+                                        PatientId = patientId,
+                                        PatientEnrollmentId = previousPatientEnrollment[0].Id,
+                                        IdentifierTypeId = x.IdentifierId,
+                                        IdentifierValue = x.IdentifierValue,
+                                        DeleteFlag = false,
+                                        CreatedBy = createdBy,
+                                        CreateDate = DateTime.Now,
+                                        Active = true
+                                    };
+
+                                    await _unitOfWork.Repository<PatientIdentifier>().AddAsync(patientIdentifier);
+                                    await _unitOfWork.SaveAsync();
+                                }
+                            }
+                        }
+                    }
                 }
             }
             catch (Exception e)
@@ -1305,13 +1366,6 @@ namespace IQCare.Common.BusinessProcess.Services
                                $"Values(ENCRYPTBYKEY(KEY_GUID('Key_CTC'), @firstName), ENCRYPTBYKEY(KEY_GUID('Key_CTC'), @middleName)," +
                                $"ENCRYPTBYKEY(KEY_GUID('Key_CTC'), @lastName),ENCRYPTBYKEY(KEY_GUID('Key_CTC'), @nickName) , @sex, @dob, @dobPrecison," +
                                $"1,0,GETDATE(), @createdBy, @regDate, @facilityId);");
-
-                    //sql.Append("Insert Into Person(FirstName, MidName, LastName,NickName, " +
-                    //           "Sex, DateOfBirth, DobPrecision, Active, DeleteFlag, CreateDate, " +
-                    //           "CreatedBy, RegistrationDate, FacilityId)" +
-                    //           $"Values(ENCRYPTBYKEY(KEY_GUID('Key_CTC'), '{firstName}'), ENCRYPTBYKEY(KEY_GUID('Key_CTC'), '{middleName}')," +
-                    //           $"ENCRYPTBYKEY(KEY_GUID('Key_CTC'), '{lastName}'),ENCRYPTBYKEY(KEY_GUID('Key_CTC'), '{nickName}') , {sex}, '{dob}', 1," +
-                    //           $"1,0,GETDATE(), '{createdBy}', '{regDate}', '{facilityId}');");
                 }
                 else
                 {
@@ -1321,12 +1375,6 @@ namespace IQCare.Common.BusinessProcess.Services
                                $"Values(ENCRYPTBYKEY(KEY_GUID('Key_CTC'), @firstName), ENCRYPTBYKEY(KEY_GUID('Key_CTC'), @middleName)," +
                                $"ENCRYPTBYKEY(KEY_GUID('Key_CTC'), @lastName),ENCRYPTBYKEY(KEY_GUID('Key_CTC'), @nickName) , @sex," +
                                $"@dob, @dobPrecison,1,0,GETDATE(), @createdBy, @regDate, @facilityId);");
-                    //sql.Append("Insert Into Person(FirstName, MidName, LastName,NickName, " +
-                    //           "Sex, Active, DeleteFlag, CreateDate, " +
-                    //           "CreatedBy, RegistrationDate, FacilityId)" +
-                    //           $"Values(ENCRYPTBYKEY(KEY_GUID('Key_CTC'), '{firstName}'), ENCRYPTBYKEY(KEY_GUID('Key_CTC'), '{middleName}')," +
-                    //           $"ENCRYPTBYKEY(KEY_GUID('Key_CTC'), '{lastName}'),ENCRYPTBYKEY(KEY_GUID('Key_CTC'), '{nickName}') , {sex}," +
-                    //           $"1,0,GETDATE(), '{createdBy}', '{regDate}', '{facilityId}');");
                 }
                 
                 sql.Append("SELECT [Id] , CAST(DECRYPTBYKEY(FirstName) AS VARCHAR(50)) [FirstName] ,CAST(DECRYPTBYKEY(MidName) AS VARCHAR(50)) MidName" +
@@ -1365,10 +1413,6 @@ namespace IQCare.Common.BusinessProcess.Services
                 dobParameter.SqlDbType = SqlDbType.DateTime;
                 dobParameter.Value = string.IsNullOrWhiteSpace(dob) ? (object)DBNull.Value : dateOfBirth.Value;
 
-
-                //var dobParameter = string.IsNullOrWhiteSpace(dob)
-                //    ? new SqlParameter("@dob", null)
-                //    : new SqlParameter("@dob", dob);
                 var dobPrecisionParameter = new SqlParameter("@dobPrecison", dobPrecison);
                 var createdByParameter = new SqlParameter("@createdBy", createdBy);
                 var regDateParameter = new SqlParameter();
@@ -1377,7 +1421,6 @@ namespace IQCare.Common.BusinessProcess.Services
                 regDateParameter.SqlDbType = SqlDbType.DateTime;
                 regDateParameter.Value = string.IsNullOrWhiteSpace(regDate) ? (object)DBNull.Value : registrationDate.Value;
 
-                //var regDateParameter = new SqlParameter("@regDate", registrationDate.Value);
                 var facilityIdParameter = new SqlParameter("@facilityId", facilityId);
 
                 var personInsert = await _unitOfWork.Repository<Person>().FromSql(sql.ToString(), parameters:new []

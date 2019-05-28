@@ -34,6 +34,7 @@ export class CccComponent implements OnInit {
     serviceCode: string;
     userId: number;
     posId: string;
+    isEdit: boolean = false;
 
     maxDate: Date;
     minDate: Date;
@@ -67,11 +68,15 @@ export class CccComponent implements OnInit {
 
     ngOnInit() {
         this.route.params.subscribe(params => {
-            const { id, serviceId, serviceCode } = params;
+            const { id, serviceId, serviceCode, edit } = params;
             this.personId = id;
             this.serviceId = serviceId;
             this.serviceCode = serviceCode;
             localStorage.setItem('partnerId', this.personId.toString());
+
+            if (edit == 1) {
+                this.isEdit = true;
+            }
         });
         this.userId = JSON.parse(localStorage.getItem('appUserId'));
         this.posId = localStorage.getItem('appPosID');
@@ -175,6 +180,111 @@ export class CccComponent implements OnInit {
 
             }
         );
+
+        if (this.isEdit) {
+            this.loadCCCEnrollmentData();
+        }
+    }
+
+    loadCCCEnrollmentData(): void {
+        this.form.controls.ReConfirmatoryTest.disable({ onlySelf: true });
+        this.form.controls.TypeOfTest.disable({ onlySelf: true });
+        this.form.controls.ReConfirmatoryTestResult.disable({ onlySelf: true });
+        this.form.controls.ReConfirmatoryTestDate.disable({ onlySelf: true });
+        this.form.controls.EnrollmentDate.enable({ onlySelf: false });
+        this.form.controls.EntryPoint.enable({ onlySelf: false });
+
+        // load patient
+        this.loadPatient();
+    }
+
+    loadPatient(): void {
+        this.personHomeService.getPatientModelByPersonId(this.personId).subscribe(
+            (result) => {
+                console.log(result);
+                this.form.controls.PatientType.setValue(result.patientType);
+                // load population type
+                this.loadPopulationTypes(this.personId);
+
+                // load entrypoint
+                this.loadEntryPoints(result.id);
+
+                // load identifiers
+                this.loadIdentifiers(result.id);
+
+                // load enrollment Date
+                this.loadEnrollmentDate(result.id);
+            },
+            (error) => {
+                console.log(error);
+            }
+        );
+    }
+
+    loadEnrollmentDate(patientId: any): void {
+        this.personHomeService.getPatientEnrollmentDateByServiceAreaId(patientId, this.serviceId).subscribe(
+            (result) => {
+                // console.log(result);
+                this.form.controls.EnrollmentDate.setValue(result.enrollmentDate);
+            },
+            (error) => {
+                console.log(error);
+            }
+        );
+    }
+
+    loadIdentifiers(patientId: number): void {
+        this.recordsService.getPatientIdentifiersList(patientId).subscribe(
+            (result) => {
+                if (result.length > 0) {
+                    this.identifiers.forEach(element => {
+                        result.forEach(patientIdentifiers => {
+                            if (patientIdentifiers.identifierTypeId == element.id) {
+                                this.form.get(element.code).setValue(patientIdentifiers.identifierValue);
+                            }
+                        });
+                    });
+                }
+            },
+            (error) => {
+                console.log(error);
+            }
+        );
+    }
+
+    loadEntryPoints(patientId: number): void {
+        this.personHomeService.getPatientServiceAreaEntryPoints(this.serviceId, patientId).subscribe(
+            (result) => {
+                // console.log(result);
+                this.form.controls.EntryPoint.setValue(result.entryPointId);
+            },
+            (error) => {
+                console.log(error);
+            }
+        );
+    }
+
+    loadPopulationTypes(personId: number): void {
+        this.personHomeService.getPersonPopulationType(personId).subscribe(
+            (result) => {
+                if (result.length > 0) {
+                    if (result[0].populationType == 'General Population') {
+                        this.form.controls.populationType.setValue(1);
+                    } else {
+                        this.form.controls.populationType.setValue(2);
+                        this.form.controls.KeyPopulation.enable({ onlySelf: false });
+                        const arrayValue = [];
+                        result.forEach(element => {
+                            arrayValue.push(element.populationCategory);
+                        });
+                        this.form.controls.KeyPopulation.setValue(arrayValue);
+                    }
+                }
+            },
+            (error) => {
+                console.log(error);
+            }
+        );
     }
 
     onPopulationTypeChange() {
@@ -264,6 +374,11 @@ export class CccComponent implements OnInit {
     }
 
     public enrollmentCheck(): any {
+        if (this.isEdit) {
+            this.save();
+            return;
+        }
+
         const isReconfirmatoryTestDone = this.yesNoOptions.filter(obj => obj.itemId == this.form.controls.ReConfirmatoryTest.value);
 
         if (isReconfirmatoryTestDone[0].itemName == 'No') {
@@ -347,8 +462,8 @@ export class CccComponent implements OnInit {
                         this.appStateService.addAppState(AppEnum.PATIENTID, this.personId,
                             this.patientId).subscribe();
 
-                        this.searchService.setSession(this.personId, this.patientId).subscribe((res) => {
-                            console.log(res);
+                        this.searchService.setSession(this.personId, this.patientId).subscribe((sessionres) => {
+                            console.log(sessionres);
                             window.location.href = location.protocol + '//' + window.location.hostname + ':' + window.location.port +
                                 '/IQCare/CCC/Patient/PatientHome.aspx';
                         });

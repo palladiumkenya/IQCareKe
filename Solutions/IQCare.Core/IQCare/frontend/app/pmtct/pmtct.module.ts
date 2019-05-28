@@ -1,5 +1,4 @@
 import { RecordsService } from './../records/_services/records.service';
-///<reference path="maternity/maternity.component.ts"/>
 import { PncService } from './_services/pnc.service';
 import { CervicalCancerScreeningResultsResolver } from './_services/resolvers/cervical-cancer-screening-results.resolver';
 import { FamilyPlanningMethodResolver } from './_services/resolvers/family-planning-method.resolver';
@@ -123,7 +122,7 @@ import { FamilyPartnerControlsService } from '../hts/_services/family-partner-co
     imports: [
         CommonModule,
         PmtctRoutingModule,
-        CommonModule, HttpClientModule, MatDatepickerModule, MatFormFieldModule,
+        CommonModule, HttpClientModule, MatDatepickerModule,
         MatNativeDateModule, MatInputModule, MatFormFieldModule,
         MatTableModule, MatAutocompleteModule, MatButtonModule, MatButtonToggleModule, MatCardModule,
         MatCheckboxModule, MatChipsModule, MatDialogModule, MatDividerModule, MatExpansionModule,

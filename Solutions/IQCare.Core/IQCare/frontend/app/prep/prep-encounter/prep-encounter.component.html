@@ -1,0 +1,179 @@
+<div class="row">
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        <div class="row">
+            <div class="col-lg-12 col-sm-6 col-xs-12">
+                <div class="widget">
+                    <div class="widget-header bordered-bottom bordered-sky">
+                        <span class="widget-caption"> PREP | ENCOUNTER WORKFLOW </span>
+                    </div>
+                    <div class="widget-body">
+                        <div class="row">
+                            <div class="col-lg-12 col-sm-6 col-xs-12">
+                                <mat-horizontal-stepper [linear]="isLinear" #stepper>
+                                    <mat-step [completed]="false" [stepControl]="visitDetailsFormGroup">
+                                        <ng-template matStepLabel>
+                                            <span matTooltip="Visit Details">STI Screening and Treatment</span>
+                                        </ng-template>
+
+                                        <app-prep-sti-screening-treatment></app-prep-sti-screening-treatment>
+
+                                        <div>
+                                            <button mat-raised-button color="accent" matStepperNext
+                                                type="button">Next</button>
+                                        </div>
+                                    </mat-step>
+
+                                    <mat-step [completed]="false" [stepControl]="deliveryMatFormGroup">
+                                        <ng-template matStepLabel>
+                                            <span matTooltip="Delivery & Maternal History">
+                                                Circumcision Status( Male
+                                                Clients Only)
+                                            </span>
+                                        </ng-template>
+
+                                        <div>
+                                            <button mat-raised-button color="primary" matStepperPrevious
+                                                type="button">Previous</button>
+                                            &nbsp;&nbsp;
+                                            <button mat-raised-button color="accent" matStepperNext
+                                                type="button">Next</button>
+                                        </div>
+                                    </mat-step>
+
+                                    <mat-step [completed]="false" [stepControl]="deliveryMatFormGroup">
+                                        <ng-template matStepLabel>
+                                            <span matTooltip="Delivery & Maternal History">
+                                                Fertility Intentions
+                                            </span>
+                                        </ng-template>
+
+                                        <div>
+                                            <button mat-raised-button color="primary" matStepperPrevious
+                                                type="button">Previous</button>
+                                            &nbsp;&nbsp;
+                                            <button mat-raised-button color="accent" matStepperNext
+                                                type="button">Next</button>
+                                        </div>
+                                    </mat-step>
+
+                                    <mat-step [completed]="false" [stepControl]="deliveryMatFormGroup">
+                                        <ng-template matStepLabel>
+                                            <span matTooltip="Delivery & Maternal History">
+                                                Pregnancy Outcome
+                                            </span>
+                                        </ng-template>
+
+                                        <div>
+                                            <button mat-raised-button color="primary" matStepperPrevious
+                                                type="button">Previous</button>
+                                            &nbsp;&nbsp;
+                                            <button mat-raised-button color="accent" matStepperNext
+                                                type="button">Next</button>
+                                        </div>
+                                    </mat-step>
+
+                                    <mat-step [completed]="false" [stepControl]="deliveryMatFormGroup">
+                                        <ng-template matStepLabel>
+                                            <span matTooltip="Delivery & Maternal History">
+                                                Chronic Conditions and Comorbidities
+                                            </span>
+                                        </ng-template>
+
+                                        <div>
+                                            <button mat-raised-button color="primary" matStepperPrevious
+                                                type="button">Previous</button>
+                                            &nbsp;&nbsp;
+                                            <button mat-raised-button color="accent" matStepperNext
+                                                type="button">Next</button>
+                                        </div>
+                                    </mat-step>
+
+                                    <mat-step [completed]="false" [stepControl]="deliveryMatFormGroup">
+                                        <ng-template matStepLabel>
+                                            <span matTooltip="Delivery & Maternal History">
+                                                Adverse Events Assessment
+                                            </span>
+                                        </ng-template>
+
+                                        <div>
+                                            <button mat-raised-button color="primary" matStepperPrevious
+                                                type="button">Previous</button>
+                                            &nbsp;&nbsp;
+                                            <button mat-raised-button color="accent" matStepperNext
+                                                type="button">Next</button>
+                                        </div>
+                                    </mat-step>
+
+                                    <mat-step [completed]="false" [stepControl]="deliveryMatFormGroup">
+                                        <ng-template matStepLabel>
+                                            <span matTooltip="Delivery & Maternal History">
+                                                Chronic allergies
+                                            </span>
+                                        </ng-template>
+
+                                        <div>
+                                            <button mat-raised-button color="primary" matStepperPrevious
+                                                type="button">Previous</button>
+                                            &nbsp;&nbsp;
+                                            <button mat-raised-button color="accent" matStepperNext
+                                                type="button">Next</button>
+                                        </div>
+                                    </mat-step>
+
+
+                                    <mat-step [completed]="false" [stepControl]="deliveryMatFormGroup">
+                                        <ng-template matStepLabel>
+                                            <span matTooltip="Delivery & Maternal History">
+                                                LAB Investigations
+                                            </span>
+                                        </ng-template>
+
+                                        <div>
+                                            <button mat-raised-button color="primary" matStepperPrevious
+                                                type="button">Previous</button>
+                                            &nbsp;&nbsp;
+                                            <button mat-raised-button color="accent" matStepperNext
+                                                type="button">Next</button>
+                                        </div>
+                                    </mat-step>
+
+                                    <mat-step [completed]="false" [stepControl]="deliveryMatFormGroup">
+                                        <ng-template matStepLabel>
+                                            <span matTooltip="Delivery & Maternal History">
+                                                PrEP Status
+                                            </span>
+                                        </ng-template>
+
+                                        <div>
+                                            <button mat-raised-button color="primary" matStepperPrevious
+                                                type="button">Previous</button>
+                                            &nbsp;&nbsp;
+                                            <button mat-raised-button color="accent" matStepperNext
+                                                type="button">Next</button>
+                                        </div>
+                                    </mat-step>
+
+                                    <mat-step [completed]="false" [stepControl]="deliveryMatFormGroup">
+                                        <ng-template matStepLabel>
+                                            <span matTooltip="Delivery & Maternal History">
+                                                Appointment
+                                            </span>
+                                        </ng-template>
+
+                                        <div>
+                                            <button mat-raised-button color="primary" matStepperPrevious
+                                                type="button">Previous</button>
+                                            &nbsp;&nbsp;
+                                            <button mat-raised-button color="accent" matStepperNext
+                                                type="button">Next</button>
+                                        </div>
+                                    </mat-step>
+                                </mat-horizontal-stepper>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

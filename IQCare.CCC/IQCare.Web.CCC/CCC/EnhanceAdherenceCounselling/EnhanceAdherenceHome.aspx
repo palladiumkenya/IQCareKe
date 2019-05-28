@@ -1,5 +1,5 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true"  MasterPageFile="~/CCC/Greencard.Master"  CodeBehind="EnhanceAdherenceHome.aspx.cs" Inherits="IQCare.Web.CCC.UC.EnhanceAdherenceCounselling.EnhanceAdherenceHome" %>
-<%@ OutputCache duration="86400" varybyparam="none" %>
+
 <%@ Register TagPrefix="uc" TagName="tnSession1" Src="~/CCC/EnhanceAdherenceCounselling/ucSession1.ascx" %>
 <%@ Register TagPrefix="uc" TagName="tnSession2" Src="~/CCc/EnhanceAdherenceCounselling/ucSession2.ascx" %>
 <%@ Register TagPrefix="uc" TagName="tnSession3" Src="~/CCC/EnhanceAdherenceCounselling/ucSession3.ascx" %>

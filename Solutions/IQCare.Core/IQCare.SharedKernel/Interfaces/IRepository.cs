@@ -26,5 +26,6 @@ namespace IQCare.SharedKernel.Interfaces
 
         Task<List<TEntity>> FromSql(string query, params object[] parameters);
 
+        void UpdateRange(IEnumerable<TEntity> entities);
     }
 }
