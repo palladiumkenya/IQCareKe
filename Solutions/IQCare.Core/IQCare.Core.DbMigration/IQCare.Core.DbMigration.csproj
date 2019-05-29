@@ -194,6 +194,10 @@
     <None Remove="Scripts\2.0.1\PREP\2.Prep Number.sql" />
     <None Remove="Scripts\2.0.1\PREP\3.PrepServiceAreaIdentifiers.sql" />
     <None Remove="Scripts\2.0.1\PREP\4.PersonVitalsView.sql" />
+    <None Remove="Scripts\2.0.1\PREP\5.SexualPartnerHivProfile.sql" />
+    <None Remove="Scripts\2.0.1\PREP\6.ClientAssessment.sql" />
+    <None Remove="Scripts\2.0.1\PREP\7.WillingnessAssessment.sql" />
+    <None Remove="Scripts\2.0.1\PREP\8.Behaviour Risk Assessment.sql" />
   </ItemGroup>
 
   <ItemGroup>
@@ -406,6 +410,10 @@
     <EmbeddedResource Include="Scripts\2.0.1\PREP\2.Prep Number.sql" />
     <EmbeddedResource Include="Scripts\2.0.1\PREP\3.PrepServiceAreaIdentifiers.sql" />
     <EmbeddedResource Include="Scripts\2.0.1\PREP\4.PersonVitalsView.sql" />
+    <EmbeddedResource Include="Scripts\2.0.1\PREP\5.SexualPartnerHivProfile.sql" />
+    <EmbeddedResource Include="Scripts\2.0.1\PREP\6.ClientAssessment.sql" />
+    <EmbeddedResource Include="Scripts\2.0.1\PREP\7.WillingnessAssessment.sql" />
+    <EmbeddedResource Include="Scripts\2.0.1\PREP\8.Behaviour Risk Assessment.sql" />
   </ItemGroup>
 
   <ItemGroup>
