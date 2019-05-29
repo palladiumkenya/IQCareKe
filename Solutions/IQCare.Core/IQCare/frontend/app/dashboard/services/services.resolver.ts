@@ -18,3 +18,4 @@ export class ServicesResolver implements Resolve<Observable<any[]>> {
         return this.personhomeService.getAllServices();
     }
 }
+

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using IQCare.Common.BusinessProcess.Commands.Encounter;
 using IQCare.Common.BusinessProcess.Commands.PersonCommand;
+using IQCare.Common.BusinessProcess.Commands.PersonVitals;
 using IQCare.Common.BusinessProcess.Commands.Relationship;
 using IQCare.HTS.BusinessProcess.Commands;
 using MediatR;
@@ -107,6 +108,18 @@ namespace IQCare.Controllers.Shared
             if (response.IsValid)
                 return Ok(response.Value);
             return BadRequest(response);
+        }
+
+        [HttpGet("GetCurrentPersonVitals/{Id}")]
+        public async Task<Object> GetCurrentPersonVitals(int id)
+        {
+            var response = await _mediator.Send(new GetPersonVitalsCommand { PersonId = id }, HttpContext.RequestAborted);
+
+            if (response.IsValid)
+                return Ok(response.Value);
+
+            return BadRequest(response);
+
         }
 
         // POST: api/PatientServices
