@@ -17,7 +17,10 @@ import {
     MatSelectModule,
     MatFormFieldModule,
     MatInputModule,
-    MatButtonModule
+    MatButtonModule,
+    MatAutocompleteModule,
+    MatDatepickerModule,
+    MatNativeDateModule
 } from '@angular/material';
 import { AppDateAdapter } from './dateadapter/momentDateAdapter';
 import { NotificationService } from './_services/notification.service';
@@ -27,20 +30,19 @@ import { ErrorHandlerService } from './_services/errorhandler.service';
 import { PatientEncounterComponent } from './patient-encounter/patient-encounter.component';
 import { CustomFormComponent } from './custom-form/custom-form.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { AdverseEventsAssessmentComponent } from './common-components/adverse-events-assessment/adverse-events-assessment.component';
+import { PatientAllergiesComponent } from './common-components/patient-allergies/patient-allergies.component';
+import { PatientChronicIllnessesComponent } from './common-components/patient-chronic-illnesses/patient-chronic-illnesses.component';
 
 @NgModule({
     imports: [
-        CommonModule,
-        SharedRoutingModule,
-        MatCardModule,
-        MatTableModule,
-        MatIconModule,
-        MatPaginatorModule,
-        ReactiveFormsModule,
-        MatSelectModule,
-        MatFormFieldModule,
-        MatInputModule,
-        MatButtonModule
+        CommonModule, MatAutocompleteModule,
+        SharedRoutingModule, MatDatepickerModule,
+        MatNativeDateModule, MatCardModule,
+        MatTableModule, MatIconModule,
+        MatPaginatorModule, ReactiveFormsModule,
+        MatSelectModule, MatFormFieldModule,
+        MatInputModule, MatButtonModule
     ],
     declarations: [
         LeftnavComponent,
@@ -48,12 +50,15 @@ import { ReactiveFormsModule } from '@angular/forms';
         AlertComponent,
         PersonbriefComponent,
         PatientEncounterComponent,
-        CustomFormComponent
+        CustomFormComponent,
+        AdverseEventsAssessmentComponent,
+        PatientAllergiesComponent,
+        PatientChronicIllnessesComponent
     ],
     exports: [
-        LeftnavComponent,
-        ClientbriefComponent,
-        AlertComponent,
+        LeftnavComponent, AdverseEventsAssessmentComponent,
+        ClientbriefComponent, PatientAllergiesComponent,
+        AlertComponent, PatientChronicIllnessesComponent,
         PersonbriefComponent,
         PatientEncounterComponent,
         CustomFormComponent

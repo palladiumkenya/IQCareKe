@@ -15,7 +15,9 @@
                                             <span matTooltip="Visit Details">STI Screening and Treatment</span>
                                         </ng-template>
 
-                                        <app-prep-sti-screening-treatment></app-prep-sti-screening-treatment>
+                                        <app-prep-sti-screening-treatment
+                                            [STIScreeningAndTreatmentOptions]="STIScreeningAndTreatmentOptions">
+                                        </app-prep-sti-screening-treatment>
 
                                         <div>
                                             <button mat-raised-button color="accent" matStepperNext
@@ -49,6 +51,8 @@
                                             </span>
                                         </ng-template>
 
+                                        <app-fertility-intention></app-fertility-intention>
+
                                         <div>
                                             <button mat-raised-button color="primary" matStepperPrevious
                                                 type="button">Previous</button>
@@ -64,6 +68,8 @@
                                                 Pregnancy Outcome
                                             </span>
                                         </ng-template>
+
+                                        <app-pregnancy-outcome></app-pregnancy-outcome>
 
                                         <div>
                                             <button mat-raised-button color="primary" matStepperPrevious
@@ -81,6 +87,10 @@
                                             </span>
                                         </ng-template>
 
+                                        <app-patient-chronic-illnesses></app-patient-chronic-illnesses>
+
+                                        <app-patient-allergies></app-patient-allergies>
+
                                         <div>
                                             <button mat-raised-button color="primary" matStepperPrevious
                                                 type="button">Previous</button>
@@ -97,21 +107,7 @@
                                             </span>
                                         </ng-template>
 
-                                        <div>
-                                            <button mat-raised-button color="primary" matStepperPrevious
-                                                type="button">Previous</button>
-                                            &nbsp;&nbsp;
-                                            <button mat-raised-button color="accent" matStepperNext
-                                                type="button">Next</button>
-                                        </div>
-                                    </mat-step>
-
-                                    <mat-step [completed]="false" [stepControl]="deliveryMatFormGroup">
-                                        <ng-template matStepLabel>
-                                            <span matTooltip="Delivery & Maternal History">
-                                                Chronic allergies
-                                            </span>
-                                        </ng-template>
+                                        <app-adverse-events-assessment></app-adverse-events-assessment>
 
                                         <div>
                                             <button mat-raised-button color="primary" matStepperPrevious
@@ -121,7 +117,6 @@
                                                 type="button">Next</button>
                                         </div>
                                     </mat-step>
-
 
                                     <mat-step [completed]="false" [stepControl]="deliveryMatFormGroup">
                                         <ng-template matStepLabel>
@@ -145,6 +140,8 @@
                                                 PrEP Status
                                             </span>
                                         </ng-template>
+
+                                        <app-prep-status></app-prep-status>
 
                                         <div>
                                             <button mat-raised-button color="primary" matStepperPrevious

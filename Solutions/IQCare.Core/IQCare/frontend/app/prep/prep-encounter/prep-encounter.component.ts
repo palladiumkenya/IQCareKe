@@ -1,5 +1,7 @@
+import { LookupItemView } from './../../shared/_models/LookupItemView';
 import { Component, OnInit } from '@angular/core';
 import { FormArray } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
     selector: 'app-prep-encounter',
@@ -15,9 +17,24 @@ export class PrepEncounterComponent implements OnInit {
     FertilityIntentionsFormGroup: FormArray;
     PregnancyOutcomeFormGroup: FormArray;
 
-    constructor() { }
+    yesnoOptions: LookupItemView[];
+
+    STIScreeningAndTreatmentOptions: any[] = [];
+
+    constructor(private route: ActivatedRoute) { }
 
     ngOnInit() {
+        this.route.data.subscribe(
+            (res) => {
+                const { yesnoOptions } = res;
+                this.yesnoOptions = yesnoOptions['lookupItems'];
+            }
+        );
+
+
+        this.STIScreeningAndTreatmentOptions.push({
+            'yesnoOptions': this.yesnoOptions
+        });
     }
 
 }

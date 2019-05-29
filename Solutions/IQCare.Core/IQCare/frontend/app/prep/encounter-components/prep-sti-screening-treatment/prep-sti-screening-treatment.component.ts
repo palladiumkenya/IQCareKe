@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { LookupItemView } from './../../../shared/_models/LookupItemView';
+import { Component, OnInit, Input } from '@angular/core';
 import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
 
 @Component({
@@ -8,6 +9,11 @@ import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms'
 })
 export class PrepSTIScreeningTreatmentComponent implements OnInit {
     STIScreeningForm: FormGroup;
+
+    @Input() STIScreeningAndTreatmentOptions: any;
+
+    yesnoOptions: LookupItemView[] = [];
+
     constructor(private _formBuilder: FormBuilder) { }
 
     ngOnInit() {
@@ -17,6 +23,9 @@ export class PrepSTIScreeningTreatmentComponent implements OnInit {
             referForLab: new FormControl('', [Validators.required]),
             treatmentOffered: new FormControl('', [Validators.required])
         });
+
+        const { yesnoOptions } = this.STIScreeningAndTreatmentOptions[0];
+        this.yesnoOptions = yesnoOptions;
     }
 
 }

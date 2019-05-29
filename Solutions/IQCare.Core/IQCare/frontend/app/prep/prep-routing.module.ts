@@ -1,3 +1,4 @@
+import { YesNoResolver } from './../pmtct/_services/yesno.resolver';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { PrepEncounterHistoryComponent } from './prep-encounter-history/prep-encounter-history.component';
@@ -11,7 +12,10 @@ const routes: Routes = [
     },
     {
         path: 'encounter',
-        component: PrepEncounterComponent
+        component: PrepEncounterComponent,
+        resolve: {
+            yesNoOptions: YesNoResolver
+        }
     }
 ];
 
