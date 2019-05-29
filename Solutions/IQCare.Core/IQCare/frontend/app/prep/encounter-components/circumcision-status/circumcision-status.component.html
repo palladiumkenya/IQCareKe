@@ -15,6 +15,10 @@
                     <mat-select id="isClientCircumcised" name="isClientCircumcised"
                         formControlName="isClientCircumcised" required>
                         <mat-option [value]=""></mat-option>
+                        <mat-option *ngFor="let yesNoUnknownOption of yesNoUnknownOptions"
+                            [value]="yesNoUnknownOption.itemId">
+                            {{ yesNoUnknownOption.itemName }}
+                        </mat-option>
                     </mat-select>
                 </mat-form-field>
             </div>
@@ -24,6 +28,9 @@
                     <mat-label>If No, Referred to VMMC?</mat-label>
                     <mat-select id="referredToVMMC" name="referredToVMMC" formControlName="referredToVMMC">
                         <mat-option [value]=""></mat-option>
+                        <mat-option *ngFor="let yesnoOption of yesnoOptions" [value]="yesnoOption.itemId">
+                            {{ yesnoOption.itemName }}
+                        </mat-option>
                     </mat-select>
                 </mat-form-field>
             </div>

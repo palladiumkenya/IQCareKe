@@ -1,3 +1,4 @@
+import { STIScreeningTreatmentResolver } from './_services/STIScreeningTreatment.resolver';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { PrepEncounterHistoryComponent } from './prep-encounter-history/prep-encounter-history.component';
@@ -17,6 +18,8 @@ import { FertilityIntentionComponent } from './encounter-components/fertility-in
 import { PregnancyOutcomeComponent } from './encounter-components/pregnancy-outcome/pregnancy-outcome.component';
 import { SharedModule } from '../shared/shared.module';
 import { PrepStatusComponent } from './encounter-components/prep-status/prep-status.component';
+import { YesNoResolver } from '../pmtct/_services/yesno.resolver';
+import { YesNoUnknownResolver } from './_services/YesNoUnknown.resolver';
 
 @NgModule({
     declarations: [
@@ -34,6 +37,10 @@ import { PrepStatusComponent } from './encounter-components/prep-status/prep-sta
         MatButtonModule, MatFormFieldModule, MatSelectModule,
         MatInputModule, MatAutocompleteModule,
         PrepRoutingModule
+    ],
+    providers: [
+        YesNoResolver, YesNoUnknownResolver,
+        STIScreeningTreatmentResolver
     ]
 })
 export class PrepModule { }

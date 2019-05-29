@@ -3,6 +3,8 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { PrepEncounterHistoryComponent } from './prep-encounter-history/prep-encounter-history.component';
 import { PrepEncounterComponent } from './prep-encounter/prep-encounter.component';
+import { STIScreeningTreatmentResolver } from './_services/STIScreeningTreatment.resolver';
+import { YesNoUnknownResolver } from './_services/YesNoUnknown.resolver';
 
 const routes: Routes = [
     {
@@ -14,7 +16,9 @@ const routes: Routes = [
         path: 'encounter',
         component: PrepEncounterComponent,
         resolve: {
-            yesNoOptions: YesNoResolver
+            yesNoOptions: YesNoResolver,
+            stiScreeningTreatmentOptions: STIScreeningTreatmentResolver,
+            yesNoUnknownOptions: YesNoUnknownResolver
         }
     }
 ];

@@ -33,7 +33,9 @@
                                             </span>
                                         </ng-template>
 
-                                        <app-circumcision-status></app-circumcision-status>
+                                        <app-circumcision-status
+                                            [CircumcisionStatusOptions]="CircumcisionStatusOptions">
+                                        </app-circumcision-status>
 
                                         <div>
                                             <button mat-raised-button color="primary" matStepperPrevious
@@ -89,7 +91,7 @@
 
                                         <app-patient-chronic-illnesses></app-patient-chronic-illnesses>
 
-                                        <app-patient-allergies></app-patient-allergies>
+                                        <app-allergies></app-allergies>
 
                                         <div>
                                             <button mat-raised-button color="primary" matStepperPrevious

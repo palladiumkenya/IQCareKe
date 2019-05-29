@@ -18,22 +18,34 @@ export class PrepEncounterComponent implements OnInit {
     PregnancyOutcomeFormGroup: FormArray;
 
     yesnoOptions: LookupItemView[];
+    stiScreeningOptions: LookupItemView[];
+    yesNoUnknownOptions: LookupItemView[];
 
     STIScreeningAndTreatmentOptions: any[] = [];
+    CircumcisionStatusOptions: any[] = [];
+
 
     constructor(private route: ActivatedRoute) { }
 
     ngOnInit() {
         this.route.data.subscribe(
             (res) => {
-                const { yesnoOptions } = res;
-                this.yesnoOptions = yesnoOptions['lookupItems'];
+                const { yesNoOptions, stiScreeningTreatmentOptions, yesNoUnknownOptions } = res;
+                this.yesnoOptions = yesNoOptions['lookupItems'];
+                this.stiScreeningOptions = stiScreeningTreatmentOptions['lookupItems'];
+                this.yesNoUnknownOptions = yesNoUnknownOptions['lookupItems'];
             }
         );
 
 
         this.STIScreeningAndTreatmentOptions.push({
-            'yesnoOptions': this.yesnoOptions
+            'yesnoOptions': this.yesnoOptions,
+            'stiScreeningOptions': this.stiScreeningOptions
+        });
+
+        this.CircumcisionStatusOptions.push({
+            'yesNoUnknownOptions': this.yesNoUnknownOptions,
+            'yesnoOptions': this.yesnoOptions,
         });
     }
 
