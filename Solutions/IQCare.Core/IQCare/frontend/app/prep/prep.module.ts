@@ -20,6 +20,10 @@ import { SharedModule } from '../shared/shared.module';
 import { PrepStatusComponent } from './encounter-components/prep-status/prep-status.component';
 import { YesNoResolver } from '../pmtct/_services/yesno.resolver';
 import { YesNoUnknownResolver } from './_services/YesNoUnknown.resolver';
+import { FamilyPlanningMethodResolver } from '../pmtct/_services/resolvers/family-planning-method.resolver';
+import { PlanningPregnancyResolver } from './_services/planningPregnancy.resolver';
+import { YesNoDontKnowResolver } from './_services/YesNoDont-Know.resolver';
+import { PregnancyOutcomeResolver } from './_services/PregnancyOutcome.resolver';
 
 @NgModule({
     declarations: [
@@ -40,7 +44,8 @@ import { YesNoUnknownResolver } from './_services/YesNoUnknown.resolver';
     ],
     providers: [
         YesNoResolver, YesNoUnknownResolver,
-        STIScreeningTreatmentResolver
+        STIScreeningTreatmentResolver, FamilyPlanningMethodResolver,
+        PlanningPregnancyResolver, YesNoDontKnowResolver, PregnancyOutcomeResolver
     ]
 })
 export class PrepModule { }

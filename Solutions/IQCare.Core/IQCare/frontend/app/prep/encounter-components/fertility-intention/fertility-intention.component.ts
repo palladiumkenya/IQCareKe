@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { LookupItemView } from './../../../shared/_models/LookupItemView';
+import { Component, OnInit, Input } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 
 @Component({
@@ -8,6 +9,11 @@ import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms'
 })
 export class FertilityIntentionComponent implements OnInit {
     FertilityIntentionForm: FormGroup;
+    yesnoOptions: LookupItemView[] = [];
+    fpMethods: LookupItemView[] = [];
+    planningPregnancy: LookupItemView[] = [];
+
+    @Input() FertilityIntentionsOptions: any;
 
     constructor(private _formBuilder: FormBuilder) { }
 
@@ -21,6 +27,11 @@ export class FertilityIntentionComponent implements OnInit {
             familyPlanningMethods: new FormControl('', [Validators.required]),
             planningToGetPregnant: new FormControl('', [Validators.required])
         });
+
+        const { yesnoOptions, fpMethods, planningPregnancy } = this.FertilityIntentionsOptions[0];
+        this.yesnoOptions = yesnoOptions;
+        this.fpMethods = fpMethods;
+        this.planningPregnancy = planningPregnancy;
     }
 
 }

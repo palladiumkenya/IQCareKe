@@ -35,3 +35,49 @@ If Not Exists(Select 1 From LookupItem where Name='Unknown') Begin INSERT INTO L
 If Not Exists(Select 1 From LookupMasterItem where LookupMasterId=(SELECT TOP 1 Id FROM LookupMaster WHERE Name='YesNoUnknown') and LookupItemId=(SELECT TOP 1 Id FROM LookupItem WHERE Name='Yes')) Begin Insert Into LookupMasterItem(LookupMasterId ,LookupItemId,DisplayName, OrdRank)VALUES((SELECT TOP 1 Id FROM LookupMaster WHERE Name='YesNoUnknown'),(SELECT TOP 1 Id FROM LookupItem WHERE Name='Yes'),'Yes',1); end
 If Not Exists(Select 1 From LookupMasterItem where LookupMasterId=(SELECT TOP 1 Id FROM LookupMaster WHERE Name='YesNoUnknown') and LookupItemId=(SELECT TOP 1 Id FROM LookupItem WHERE Name='No')) Begin Insert Into LookupMasterItem(LookupMasterId ,LookupItemId,DisplayName, OrdRank)VALUES((SELECT TOP 1 Id FROM LookupMaster WHERE Name='YesNoUnknown'),(SELECT TOP 1 Id FROM LookupItem WHERE Name='No'),'No',2); end 
 If Not Exists(Select 1 From LookupMasterItem where LookupMasterId=(SELECT TOP 1 Id FROM LookupMaster WHERE Name='YesNoUnknown') and LookupItemId=(SELECT TOP 1 Id FROM LookupItem WHERE Name='Unknown')) Begin Insert Into LookupMasterItem(LookupMasterId ,LookupItemId,DisplayName, OrdRank)VALUES((SELECT TOP 1 Id FROM LookupMaster WHERE Name='YesNoUnknown'),(SELECT TOP 1 Id FROM LookupItem WHERE Name='Unknown'),'Unknown',3); end 
+
+
+------------Planning to get Pregnant
+-- master
+If Not Exists(Select 1 From LookupMaster where Name='PlanningPregnancy') Begin INSERT INTO LookupMaster (Name, DisplayName, DeleteFlag) VALUES ('PlanningPregnancy','PlanningPregnancy',0); End
+
+-- lookupitem
+If Not Exists(Select 1 From LookupItem where Name='Trying to Conceive') Begin INSERT INTO LookupItem (Name, DisplayName, DeleteFlag) VALUES ('Trying to Conceive','Trying to Conceive',0); End
+If Not Exists(Select 1 From LookupItem where Name='In Future') Begin INSERT INTO LookupItem (Name, DisplayName, DeleteFlag) VALUES ('In Future','In Future',0); End
+If Not Exists(Select 1 From LookupItem where Name='No') Begin INSERT INTO LookupItem (Name, DisplayName, DeleteFlag) VALUES ('No','No',0); End
+If Not Exists(Select 1 From LookupItem where Name='Dont Know') Begin INSERT INTO LookupItem (Name, DisplayName, DeleteFlag) VALUES ('Dont Know','Dont Know',0); End
+
+-- LookupMasterItem
+If Not Exists(Select 1 From LookupMasterItem where LookupMasterId=(SELECT TOP 1 Id FROM LookupMaster WHERE Name='PlanningPregnancy') and LookupItemId=(SELECT TOP 1 Id FROM LookupItem WHERE Name='Trying to Conceive')) Begin Insert Into LookupMasterItem(LookupMasterId ,LookupItemId,DisplayName, OrdRank)VALUES((SELECT TOP 1 Id FROM LookupMaster WHERE Name='PlanningPregnancy'),(SELECT TOP 1 Id FROM LookupItem WHERE Name='Trying to Conceive'),'Trying to Conceive',1); end
+If Not Exists(Select 1 From LookupMasterItem where LookupMasterId=(SELECT TOP 1 Id FROM LookupMaster WHERE Name='PlanningPregnancy') and LookupItemId=(SELECT TOP 1 Id FROM LookupItem WHERE Name='In Future')) Begin Insert Into LookupMasterItem(LookupMasterId ,LookupItemId,DisplayName, OrdRank)VALUES((SELECT TOP 1 Id FROM LookupMaster WHERE Name='PlanningPregnancy'),(SELECT TOP 1 Id FROM LookupItem WHERE Name='In Future'),'In Future',2); end 
+If Not Exists(Select 1 From LookupMasterItem where LookupMasterId=(SELECT TOP 1 Id FROM LookupMaster WHERE Name='PlanningPregnancy') and LookupItemId=(SELECT TOP 1 Id FROM LookupItem WHERE Name='No')) Begin Insert Into LookupMasterItem(LookupMasterId ,LookupItemId,DisplayName, OrdRank)VALUES((SELECT TOP 1 Id FROM LookupMaster WHERE Name='PlanningPregnancy'),(SELECT TOP 1 Id FROM LookupItem WHERE Name='No'),'No',3); end 
+If Not Exists(Select 1 From LookupMasterItem where LookupMasterId=(SELECT TOP 1 Id FROM LookupMaster WHERE Name='PlanningPregnancy') and LookupItemId=(SELECT TOP 1 Id FROM LookupItem WHERE Name='Dont Know')) Begin Insert Into LookupMasterItem(LookupMasterId ,LookupItemId,DisplayName, OrdRank)VALUES((SELECT TOP 1 Id FROM LookupMaster WHERE Name='PlanningPregnancy'),(SELECT TOP 1 Id FROM LookupItem WHERE Name='Dont Know'),'Dont Know',4); end 
+
+
+------------YesNoDont_Know
+-- master
+If Not Exists(Select 1 From LookupMaster where Name='YesNoDont_Know') Begin INSERT INTO LookupMaster (Name, DisplayName, DeleteFlag) VALUES ('YesNoDont_Know','YesNoDont_Know',0); End
+
+-- lookupitem
+If Not Exists(Select 1 From LookupItem where Name='Yes') Begin INSERT INTO LookupItem (Name, DisplayName, DeleteFlag) VALUES ('Yes','Yes',0); End
+If Not Exists(Select 1 From LookupItem where Name='No') Begin INSERT INTO LookupItem (Name, DisplayName, DeleteFlag) VALUES ('No','No',0); End
+If Not Exists(Select 1 From LookupItem where Name='Dont Know') Begin INSERT INTO LookupItem (Name, DisplayName, DeleteFlag) VALUES ('Dont Know','Dont Know',0); End
+
+-- LookupMasterItem
+If Not Exists(Select 1 From LookupMasterItem where LookupMasterId=(SELECT TOP 1 Id FROM LookupMaster WHERE Name='YesNoDont_Know') and LookupItemId=(SELECT TOP 1 Id FROM LookupItem WHERE Name='Yes')) Begin Insert Into LookupMasterItem(LookupMasterId ,LookupItemId,DisplayName, OrdRank)VALUES((SELECT TOP 1 Id FROM LookupMaster WHERE Name='YesNoDont_Know'),(SELECT TOP 1 Id FROM LookupItem WHERE Name='Yes'),'Yes',1); end
+If Not Exists(Select 1 From LookupMasterItem where LookupMasterId=(SELECT TOP 1 Id FROM LookupMaster WHERE Name='YesNoDont_Know') and LookupItemId=(SELECT TOP 1 Id FROM LookupItem WHERE Name='No')) Begin Insert Into LookupMasterItem(LookupMasterId ,LookupItemId,DisplayName, OrdRank)VALUES((SELECT TOP 1 Id FROM LookupMaster WHERE Name='YesNoDont_Know'),(SELECT TOP 1 Id FROM LookupItem WHERE Name='No'),'No',2); end 
+If Not Exists(Select 1 From LookupMasterItem where LookupMasterId=(SELECT TOP 1 Id FROM LookupMaster WHERE Name='YesNoDont_Know') and LookupItemId=(SELECT TOP 1 Id FROM LookupItem WHERE Name='Dont Know')) Begin Insert Into LookupMasterItem(LookupMasterId ,LookupItemId,DisplayName, OrdRank)VALUES((SELECT TOP 1 Id FROM LookupMaster WHERE Name='YesNoDont_Know'),(SELECT TOP 1 Id FROM LookupItem WHERE Name='Dont Know'),'Dont Know',3); end 
+
+------------Pregnancy Outcome
+-- master
+If Not Exists(Select 1 From LookupMaster where Name='PregnancyOutcome') Begin INSERT INTO LookupMaster (Name, DisplayName, DeleteFlag) VALUES ('YesNoDont_Know','YesNoDont_Know',0); End
+
+-- lookupitem
+If Not Exists(Select 1 From LookupItem where Name='Yes') Begin INSERT INTO LookupItem (Name, DisplayName, DeleteFlag) VALUES ('Yes','Yes',0); End
+If Not Exists(Select 1 From LookupItem where Name='No') Begin INSERT INTO LookupItem (Name, DisplayName, DeleteFlag) VALUES ('No','No',0); End
+If Not Exists(Select 1 From LookupItem where Name='Dont Know') Begin INSERT INTO LookupItem (Name, DisplayName, DeleteFlag) VALUES ('Dont Know','Dont Know',0); End
+
+-- LookupMasterItem
+If Not Exists(Select 1 From LookupMasterItem where LookupMasterId=(SELECT TOP 1 Id FROM LookupMaster WHERE Name='YesNoDont_Know') and LookupItemId=(SELECT TOP 1 Id FROM LookupItem WHERE Name='Yes')) Begin Insert Into LookupMasterItem(LookupMasterId ,LookupItemId,DisplayName, OrdRank)VALUES((SELECT TOP 1 Id FROM LookupMaster WHERE Name='YesNoDont_Know'),(SELECT TOP 1 Id FROM LookupItem WHERE Name='Yes'),'Yes',1); end
+If Not Exists(Select 1 From LookupMasterItem where LookupMasterId=(SELECT TOP 1 Id FROM LookupMaster WHERE Name='YesNoDont_Know') and LookupItemId=(SELECT TOP 1 Id FROM LookupItem WHERE Name='No')) Begin Insert Into LookupMasterItem(LookupMasterId ,LookupItemId,DisplayName, OrdRank)VALUES((SELECT TOP 1 Id FROM LookupMaster WHERE Name='YesNoDont_Know'),(SELECT TOP 1 Id FROM LookupItem WHERE Name='No'),'No',2); end 
+If Not Exists(Select 1 From LookupMasterItem where LookupMasterId=(SELECT TOP 1 Id FROM LookupMaster WHERE Name='YesNoDont_Know') and LookupItemId=(SELECT TOP 1 Id FROM LookupItem WHERE Name='Dont Know')) Begin Insert Into LookupMasterItem(LookupMasterId ,LookupItemId,DisplayName, OrdRank)VALUES((SELECT TOP 1 Id FROM LookupMaster WHERE Name='YesNoDont_Know'),(SELECT TOP 1 Id FROM LookupItem WHERE Name='Dont Know'),'Dont Know',3); end 

@@ -14,6 +14,9 @@
                     <mat-label>Ended Pregnancy since last visit?</mat-label>
                     <mat-select id="endedPregnancy" name="endedPregnancy" formControlName="endedPregnancy">
                         <mat-option [value]=""></mat-option>
+                        <mat-option *ngFor="let yesnoOption of yesnoOptions" [value]="yesnoOption.itemId">
+                            {{ yesnoOption.itemName }}
+                        </mat-option>
                     </mat-select>
                 </mat-form-field>
             </div>
@@ -33,6 +36,10 @@
                     <mat-label>Pregnancy Outcome</mat-label>
                     <mat-select id="pregnancyOutcome" name="pregnancyOutcome" formControlName="pregnancyOutcome">
                         <mat-option [value]=""></mat-option>
+                        <mat-option *ngFor="let pregnancyOutcomeOption of pregnancyOutcomeOptions"
+                            [value]="pregnancyOutcomeOption.itemId">
+                            {{ pregnancyOutcomeOption.itemName }}
+                        </mat-option>
                     </mat-select>
                 </mat-form-field>
             </div>
@@ -44,6 +51,10 @@
                     <mat-label>Birth Defects</mat-label>
                     <mat-select id="birthDefects" name="birthDefects" formControlName="birthDefects">
                         <mat-option [value]=""></mat-option>
+                        <mat-option *ngFor="let yesNoDontKnowOption of yesNoDontKnowOptions"
+                            [value]="yesNoDontKnowOption.itemId">
+                            {{ yesNoDontKnowOption.itemName }}
+                        </mat-option>
                     </mat-select>
                 </mat-form-field>
             </div>

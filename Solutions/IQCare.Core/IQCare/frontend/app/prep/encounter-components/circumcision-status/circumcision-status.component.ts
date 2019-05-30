@@ -12,7 +12,6 @@ export class CircumcisionStatusComponent implements OnInit {
     yesNoUnknownOptions: LookupItemView[] = [];
     yesnoOptions: LookupItemView[] = [];
 
-
     @Input() CircumcisionStatusOptions: any;
 
     constructor(private _formBuilder: FormBuilder) { }
@@ -23,9 +22,21 @@ export class CircumcisionStatusComponent implements OnInit {
             referredToVMMC: new FormControl('')
         });
 
+        // make referral to VMMC disabled by default
+        this.CircumcisionStatusForm.controls.referredToVMMC.disable({ onlySelf: true });
+
         const { yesNoUnknownOptions, yesnoOptions } = this.CircumcisionStatusOptions[0];
         this.yesNoUnknownOptions = yesNoUnknownOptions;
         this.yesnoOptions = yesnoOptions;
     }
 
+    onClientCircumcisedSelection(event) {
+        // disable referral to VMMC when client is already circumcised
+        if (event.isUserInput && event.source.selected && event.source.viewValue == 'Yes') {
+            this.CircumcisionStatusForm.controls.referredToVMMC.disable({ onlySelf: true });
+            this.CircumcisionStatusForm.controls.referredToVMMC.setValue('');
+        } else if (event.isUserInput && event.source.selected && event.source.viewValue == 'No') {
+            this.CircumcisionStatusForm.controls.referredToVMMC.enable({ onlySelf: true });
+        }
+    }
 }
