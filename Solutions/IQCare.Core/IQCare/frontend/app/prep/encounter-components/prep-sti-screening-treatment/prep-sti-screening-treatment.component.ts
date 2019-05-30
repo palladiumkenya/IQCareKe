@@ -13,6 +13,7 @@ export class PrepSTIScreeningTreatmentComponent implements OnInit {
     @Input() STIScreeningAndTreatmentOptions: any;
 
     yesnoOptions: LookupItemView[] = [];
+    stiScreeningOptions: LookupItemView[] = [];
 
     constructor(private _formBuilder: FormBuilder) { }
 
@@ -20,12 +21,11 @@ export class PrepSTIScreeningTreatmentComponent implements OnInit {
         this.STIScreeningForm = this._formBuilder.group({
             signsOrSymptomsOfSTI: new FormControl('', [Validators.required]),
             signsOfSTI: new FormControl('', [Validators.required]),
-            referForLab: new FormControl('', [Validators.required]),
-            treatmentOffered: new FormControl('', [Validators.required])
         });
 
-        const { yesnoOptions } = this.STIScreeningAndTreatmentOptions[0];
+        const { yesnoOptions, stiScreeningOptions } = this.STIScreeningAndTreatmentOptions[0];
         this.yesnoOptions = yesnoOptions;
+        this.stiScreeningOptions = stiScreeningOptions;
     }
 
 }

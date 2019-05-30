@@ -31,8 +31,8 @@ import { PatientEncounterComponent } from './patient-encounter/patient-encounter
 import { CustomFormComponent } from './custom-form/custom-form.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { AdverseEventsAssessmentComponent } from './common-components/adverse-events-assessment/adverse-events-assessment.component';
-import { PatientAllergiesComponent } from './common-components/patient-allergies/patient-allergies.component';
 import { PatientChronicIllnessesComponent } from './common-components/patient-chronic-illnesses/patient-chronic-illnesses.component';
+import { AllergiesComponent } from './common-components/allergies/allergies.component';
 
 @NgModule({
     imports: [
@@ -52,12 +52,12 @@ import { PatientChronicIllnessesComponent } from './common-components/patient-ch
         PatientEncounterComponent,
         CustomFormComponent,
         AdverseEventsAssessmentComponent,
-        PatientAllergiesComponent,
-        PatientChronicIllnessesComponent
+        PatientChronicIllnessesComponent,
+        AllergiesComponent
     ],
     exports: [
         LeftnavComponent, AdverseEventsAssessmentComponent,
-        ClientbriefComponent, PatientAllergiesComponent,
+        ClientbriefComponent, AllergiesComponent,
         AlertComponent, PatientChronicIllnessesComponent,
         PersonbriefComponent,
         PatientEncounterComponent,

@@ -1,17 +1,17 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
+import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
 import { Observable } from 'rxjs';
+import { LookupItemView } from '../../_models/LookupItemView';
 import { LookupItemService } from '../../_services/lookup-item.service';
 import { debounceTime } from 'rxjs/operators';
-import { LookupItemView } from '../../_models/LookupItemView';
 
 @Component({
-    selector: 'app-patient-allergies',
-    templateUrl: './patient-allergies.component.html',
-    styleUrls: ['./patient-allergies.component.css'],
+    selector: 'app-allergies',
+    templateUrl: './allergies.component.html',
+    styleUrls: ['./allergies.component.css'],
     providers: [LookupItemService]
 })
-export class PatientAllergiesComponent implements OnInit {
+export class AllergiesComponent implements OnInit {
     PatientAllergiesForm: FormGroup;
     myControl: FormControl = new FormControl();
     reactionControl: FormControl = new FormControl();

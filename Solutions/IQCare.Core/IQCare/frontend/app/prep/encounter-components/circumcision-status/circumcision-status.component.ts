@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { LookupItemView } from './../../../shared/_models/LookupItemView';
+import { Component, OnInit, Input } from '@angular/core';
 import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
 
 @Component({
@@ -8,6 +9,11 @@ import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms'
 })
 export class CircumcisionStatusComponent implements OnInit {
     CircumcisionStatusForm: FormGroup;
+    yesNoUnknownOptions: LookupItemView[] = [];
+    yesnoOptions: LookupItemView[] = [];
+
+
+    @Input() CircumcisionStatusOptions: any;
 
     constructor(private _formBuilder: FormBuilder) { }
 
@@ -16,6 +22,10 @@ export class CircumcisionStatusComponent implements OnInit {
             isClientCircumcised: new FormControl('', [Validators.required]),
             referredToVMMC: new FormControl('')
         });
+
+        const { yesNoUnknownOptions, yesnoOptions } = this.CircumcisionStatusOptions[0];
+        this.yesNoUnknownOptions = yesNoUnknownOptions;
+        this.yesnoOptions = yesnoOptions;
     }
 
 }
