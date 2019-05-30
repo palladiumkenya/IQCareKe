@@ -24,6 +24,9 @@
                     <mat-label>Pregnant?</mat-label>
                     <mat-select id="pregnant" name="pregnant" formControlName="pregnant" required>
                         <mat-option [value]=""></mat-option>
+                        <mat-option *ngFor="let yesnoOption of yesnoOptions" [value]="yesnoOption.itemId">
+                            {{ yesnoOption.itemName }}
+                        </mat-option>
                     </mat-select>
                 </mat-form-field>
             </div>
@@ -33,6 +36,9 @@
                     <mat-label>Was Pregnancy Planned?</mat-label>
                     <mat-select id="pregnancyPlanned" name="pregnancyPlanned" formControlName="pregnancyPlanned">
                         <mat-option [value]=""></mat-option>
+                        <mat-option *ngFor="let yesnoOption of yesnoOptions" [value]="yesnoOption.itemId">
+                            {{ yesnoOption.itemName }}
+                        </mat-option>
                     </mat-select>
                 </mat-form-field>
             </div>
@@ -42,6 +48,9 @@
                     <mat-label>Breastfeeding?</mat-label>
                     <mat-select id="breastFeeding" name="breastFeeding" formControlName="breastFeeding">
                         <mat-option [value]=""></mat-option>
+                        <mat-option *ngFor="let yesnoOption of yesnoOptions" [value]="yesnoOption.itemId">
+                            {{ yesnoOption.itemName }}
+                        </mat-option>
                     </mat-select>
                 </mat-form-field>
             </div>
@@ -53,6 +62,9 @@
                     <mat-label>On Family Planning?</mat-label>
                     <mat-select id="onFamilyPlanning" name="onFamilyPlanning" formControlName="onFamilyPlanning">
                         <mat-option [value]=""></mat-option>
+                        <mat-option *ngFor="let yesnoOption of yesnoOptions" [value]="yesnoOption.itemId">
+                            {{ yesnoOption.itemName }}
+                        </mat-option>
                     </mat-select>
                 </mat-form-field>
             </div>
@@ -63,6 +75,9 @@
                     <mat-select id="familyPlanningMethods" name="familyPlanningMethods"
                         formControlName="familyPlanningMethods">
                         <mat-option [value]=""></mat-option>
+                        <mat-option *ngFor="let fpMethod of fpMethods" [value]="fpMethod.itemId">
+                            {{ fpMethod.displayName }}
+                        </mat-option>
                     </mat-select>
                 </mat-form-field>
             </div>
@@ -73,6 +88,9 @@
                     <mat-select id="planningToGetPregnant" name="planningToGetPregnant"
                         formControlName="planningToGetPregnant">
                         <mat-option [value]=""></mat-option>
+                        <mat-option *ngFor="let pPregnancy of planningPregnancy" [value]="pPregnancy.itemId">
+                            {{ pPregnancy.displayName }}
+                        </mat-option>
                     </mat-select>
                 </mat-form-field>
             </div>

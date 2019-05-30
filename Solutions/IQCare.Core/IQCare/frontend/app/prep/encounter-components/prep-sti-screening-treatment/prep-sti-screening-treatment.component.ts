@@ -23,9 +23,19 @@ export class PrepSTIScreeningTreatmentComponent implements OnInit {
             signsOfSTI: new FormControl('', [Validators.required]),
         });
 
+        this.STIScreeningForm.controls.signsOfSTI.disable({ onlySelf: true });
+
         const { yesnoOptions, stiScreeningOptions } = this.STIScreeningAndTreatmentOptions[0];
         this.yesnoOptions = yesnoOptions;
         this.stiScreeningOptions = stiScreeningOptions;
     }
 
+    public onSignsOrSymptomsSelection(event) {
+        if (event.isUserInput && event.source.selected && event.source.viewValue == 'Yes') {
+            this.STIScreeningForm.controls.signsOfSTI.enable({ onlySelf: true });
+        } else if (event.isUserInput && event.source.selected && event.source.viewValue == 'No') {
+            this.STIScreeningForm.controls.signsOfSTI.setValue([]);
+            this.STIScreeningForm.controls.signsOfSTI.disable({ onlySelf: true });
+        }
+    }
 }

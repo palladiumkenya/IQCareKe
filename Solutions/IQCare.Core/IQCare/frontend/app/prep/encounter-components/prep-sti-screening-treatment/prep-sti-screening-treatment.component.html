@@ -13,7 +13,8 @@
                     <mat-select id="signsOrSymptomsOfSTI" name="signsOrSymptomsOfSTI"
                         formControlName="signsOrSymptomsOfSTI" required>
                         <mat-option [value]=""></mat-option>
-                        <mat-option *ngFor="let yesnoOption of yesnoOptions" [value]="yesnoOption.itemId">
+                        <mat-option *ngFor="let yesnoOption of yesnoOptions" [value]="yesnoOption.itemId"
+                            (onSelectionChange)="onSignsOrSymptomsSelection($event)">
                             {{ yesnoOption.itemName }}
                         </mat-option>
                     </mat-select>

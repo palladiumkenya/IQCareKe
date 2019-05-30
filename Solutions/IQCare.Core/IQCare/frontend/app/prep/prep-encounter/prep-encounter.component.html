@@ -53,25 +53,12 @@
                                             </span>
                                         </ng-template>
 
-                                        <app-fertility-intention></app-fertility-intention>
+                                        <app-fertility-intention
+                                            [FertilityIntentionsOptions]="FertilityIntentionsOptions">
+                                        </app-fertility-intention>
 
-                                        <div>
-                                            <button mat-raised-button color="primary" matStepperPrevious
-                                                type="button">Previous</button>
-                                            &nbsp;&nbsp;
-                                            <button mat-raised-button color="accent" matStepperNext
-                                                type="button">Next</button>
-                                        </div>
-                                    </mat-step>
-
-                                    <mat-step [completed]="false" [stepControl]="PregnancyOutcomeFormGroup">
-                                        <ng-template matStepLabel>
-                                            <span matTooltip="Delivery & Maternal History">
-                                                Pregnancy Outcome
-                                            </span>
-                                        </ng-template>
-
-                                        <app-pregnancy-outcome></app-pregnancy-outcome>
+                                        <app-pregnancy-outcome [PregnancyOutcomeOptions]="PregnancyOutcomeOptions">
+                                        </app-pregnancy-outcome>
 
                                         <div>
                                             <button mat-raised-button color="primary" matStepperPrevious
@@ -92,22 +79,6 @@
                                         <app-patient-chronic-illnesses></app-patient-chronic-illnesses>
 
                                         <app-allergies></app-allergies>
-
-                                        <div>
-                                            <button mat-raised-button color="primary" matStepperPrevious
-                                                type="button">Previous</button>
-                                            &nbsp;&nbsp;
-                                            <button mat-raised-button color="accent" matStepperNext
-                                                type="button">Next</button>
-                                        </div>
-                                    </mat-step>
-
-                                    <mat-step [completed]="false" [stepControl]="deliveryMatFormGroup">
-                                        <ng-template matStepLabel>
-                                            <span matTooltip="Delivery & Maternal History">
-                                                Adverse Events Assessment
-                                            </span>
-                                        </ng-template>
 
                                         <app-adverse-events-assessment></app-adverse-events-assessment>
 
