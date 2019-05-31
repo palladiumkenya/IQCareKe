@@ -36,6 +36,8 @@ using DataAccess.CCC.Interface.Adherence;
 using DataAccess.CCC.Repository.Adherence;
 using DataAccess.CCC.Interface.HIVEducation;
 using DataAccess.CCC.Repository.HIVEducation;
+using DataAccess.CCC.Repository.Reporting;
+using DataAccess.CCC.Interface.Reporting;
 
 namespace DataAccess.CCC.Repository
 {
@@ -201,6 +203,8 @@ namespace DataAccess.CCC.Repository
         //HIV Followup Education
         private IHIVEducationRepository _patientHIVEducationRepository;
 
+        //Reporting
+        private IReportingRepository _reportingrepository;
 
         public UnitOfWork(BaseContext context)
         {
@@ -991,6 +995,11 @@ namespace DataAccess.CCC.Repository
         public IHIVEducationRepository PatientHIVEducationFollowupRepository
         {
             get { return _patientHIVEducationRepository ?? (_patientHIVEducationRepository = new PatientHIVEducationFollowupRepository((GreencardContext)_context)); }
+        }
+
+        public IReportingRepository ReportingRepository
+        {
+            get { return _reportingrepository ?? (_reportingrepository = new ReportingRepository((GreencardContext)_context)); }
         }
 
         public ILookupItemRepository LookupItemRepository => _lookupItemRepository ?? (_lookupItemRepository = new LookupItemRepository((LookupContext)_context));

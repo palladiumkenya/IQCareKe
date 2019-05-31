@@ -45,7 +45,9 @@
         });
 
     </script>
-
+<style>
+    .extruder-content .text{height: 700px !important;}
+</style>
 <div class="wrapper">
   
     <div style="background-color:white; height:100%">

@@ -1,6 +1,15 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/CCC/Greencard.Master" AutoEventWireup="true" CodeBehind="Home.aspx.cs" Inherits="IQCare.Web.CCC.Home" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="IQCareContentPlaceHolder" runat="server">
+    <style type="text/css">
+        .reports-date-row{display: table;width: 100%;margin-bottom: 15px;}
+        .from-reports-date-row, .to-reports-date-row{display: table-cell;}
+        .table-report-results{display: table;width: 95%;margin: 20px;margin: 0px auto;}
+        .txcurr-col, .reporting-col, .defaults30-col, .defaults90-col, ltfu-col{display: table-cell;}
+        .txcurr-col, .defaults30-col, .defaults90-col, ltfu-col{width: 22%;}
+        .reporting-col{width: 4%;}
+        .reporting-head{background: #5bc0de;color: #fff;}
+    </style>
     <div class="col-md-12 col-xs-12 col-sm-12">
         <div class="col-md-8 col-xs-12 col-sm-12">
                 <div class="panel panel-default">
@@ -137,7 +146,71 @@
                  
                         </div> <!-- .col-md-12 -->
                         <div class="col-md-12">
-                           <div class="col-md-12"><h4 class="pull-left"><asp:Label runat="server" ID="lblcame"> 0</asp:Label></h4></div> 
+                            <div class="col-md-12"><h4 class="pull-left"><asp:Label runat="server" ID="lblcame"> 0</asp:Label></h4></div> 
+                            <div class="col-md-12"><hr/></div>
+                        </div>
+                        <hr/>
+                        <div class="col-md-12">
+                            <h5>More Reports</h5>
+                           <div class="reports-date-row">
+                               <div class="from-reports-date-row">
+                                    <div class="col-md-12">
+                                        <div class='input-group date' id='reportingfromdate'>
+                                            <span class="input-group-addon">
+                                                FROM <span class="glyphicon glyphicon-calendar"></span>
+                                            </span>
+                                            <asp:TextBox runat="server"  CssClass="form-control input-sm" ID="fromreportingdateinput" onblur="DateFormat(this,this.value,event,false,'3')" onkeyup="DateFormat(this,this.value,event,false,'3')" data-parsley-min-message="Input the appointment date"></asp:TextBox>
+                                        </div>
+                                    </div>
+                               </div>
+                               <div class="to-reports-date-row">
+                                   <div class="col-md-12">
+                                        <div class='input-group date' id='reportingtodate'>
+                                            <span class="input-group-addon">
+                                                TO <span class="glyphicon glyphicon-calendar"></span>
+                                            </span>
+                                            <asp:TextBox runat="server"  CssClass="form-control input-sm" ID="toreportingdateinput" onblur="DateFormat(this,this.value,event,false,'3')" onkeyup="DateFormat(this,this.value,event,false,'3')" data-parsley-min-message="Input the appointment date"></asp:TextBox>
+                                        </div>
+                                    </div>
+                               </div>
+                           </div>
+                            <div class="table-report-results">
+                                <div class="txcurr-col">
+                                    <div class="txcurr-head reporting-head">
+                                        TX Curr (30 Days)
+                                    </div>
+                                    <div class="txcurr-body reporting-body">
+                                        <a href="Patient/PatientLinelist.aspx"><i class="fa fa-users" aria-hidden="true"></i> <span id="txcurrspan">0</span></a>
+                                    </div>
+                                </div>
+                                <div class="reporting-col"></div>
+                                <div class="defaults30-col">
+                                    <div class="defaults30-head reporting-head">
+                                        Defaulters (1 - 30)
+                                    </div>
+                                    <div class="defaults30-body reporting-body">
+                                        <a href="Patient/PatientLinelist.aspx"><i class="fa fa-users" aria-hidden="true"></i> <span id="firststagedef">0</span></a>
+                                    </div>
+                                </div>
+                                <div class="reporting-col"></div>
+                                <div class="defaults90-col">
+                                    <div class="defaults90-head reporting-head">
+                                        Defaulters (31 - 90)
+                                    </div>
+                                    <div class="defaults90-body reporting-body">
+                                        <a href="Patient/PatientLinelist.aspx"><i class="fa fa-users" aria-hidden="true"></i> <span id="secondstagedef">0</span></a>
+                                    </div>
+                                </div>
+                                <div class="reporting-col"></div>
+                                <div class="ltfu-col">
+                                    <div class="ltfu-head reporting-head">
+                                        LTFU
+                                    </div>
+                                    <div class="ltfu-body reporting-body">
+                                        <a href="Patient/PatientLinelist.aspx"><i class="fa fa-users" aria-hidden="true"></i> <span id="ltfu">0</span></a>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
            
                     </div> <!-- .panel-body -->
@@ -530,7 +603,104 @@
             var unsuppressed = 0;
             var percentage_suppressed = 0;
             var percentage_unsuppressed = 0;
- 
+
+        $("#reportingfromdate").datetimepicker({
+            format: 'DD-MMM-YYYY',
+            allowInputToggle: true,
+            useCurrent: true,
+            defaultDate: new Date()
+        }).on("dp.change", function (selectedDate) {
+            var selectedday = $("#<%=toreportingdateinput.ClientID%>").val();
+            var fromselectedday = $("#<%=fromreportingdateinput.ClientID%>").val();
+            getltfu(fromselectedday, selectedday);
+        });
+
+        $("#reportingtodate").datetimepicker({
+            format: 'DD-MMM-YYYY',
+            allowInputToggle: true,
+            useCurrent: true,
+           defaultDate: new Date()
+        }).on("dp.change", function (selectedDate) {
+            //var selectedday = moment();
+            //alert(selectedday);
+            var selectedday = $("#<%=toreportingdateinput.ClientID%>").val();
+            var fromselectedday = $("#<%=fromreportingdateinput.ClientID%>").val();
+            gettxcurr(selectedday);
+            getfirststagedefaulters(selectedday);
+            getsecondstagedefaulters(selectedday);
+            getltfu(fromselectedday, selectedday);
+        });
+
+            var today = new Date();    
+            var month = today.getMonth()+1;
+            var day = today.getDate();
+            var reportingdate = today.getFullYear() + '/' +
+                        ((''+month).length<2 ? '0' : '') + month + '/' +
+                        ((''+day).length<2 ? '0' : '') + day;
+            var txcurrcount = gettxcurr(reportingdate);
+            var firststagedefaulters = getfirststagedefaulters(reportingdate);
+            var secondstagedefaulters = getsecondstagedefaulters(reportingdate);
+            var ltfu = getltfu(reportingdate, reportingdate);
+
+            //gettxcurr
+            function gettxcurr(reportingdate) { 
+                $.ajax({
+                    url: 'WebService/ReportingService.asmx/getNumberOfTxcurr',
+                    data: "{'reportingdate':'" + reportingdate + "'}",
+                    type: 'POST',
+                    dataType: 'json',
+                    contentType: "application/json; charset=utf-8",
+                    cache: false,
+                    success: function (response) {
+                        document.getElementById("txcurrspan").innerHTML= response.d;
+                    }
+                });
+            }
+
+            //get 1- 30 defaulters
+            function getfirststagedefaulters(reportingdate) {
+                $.ajax({
+                    url: 'WebService/ReportingService.asmx/getNumberOfDefaulters',
+                    data: "{'reportingdate':'" + reportingdate + "','mindays':'1','maxdays':'30'}",
+                    type: 'POST',
+                    dataType: 'json',
+                    contentType: "application/json; charset=utf-8",
+                    cache: false,
+                    success: function (response) {
+                        document.getElementById("firststagedef").innerHTML= response.d;
+                    }
+                });
+            }
+
+            //get 31  - 90 defaulters
+            function getsecondstagedefaulters(reportingdate) {
+                $.ajax({
+                    url: 'WebService/ReportingService.asmx/getNumberOfDefaulters',
+                    data: "{'reportingdate':'" + reportingdate + "','mindays':'31','maxdays':'90'}",
+                    type: 'POST',
+                    dataType: 'json',
+                    contentType: "application/json; charset=utf-8",
+                    cache: false,
+                    success: function (response) {
+                        document.getElementById("secondstagedef").innerHTML= response.d;
+                    }
+                });
+            }
+
+            //LTFU
+            function getltfu(fromdate, todate) {
+                $.ajax({
+                    url: 'WebService/ReportingService.asmx/getltfu',
+                    data: "{'fromdate':'" + fromdate + "','todate':'" + todate + "'}",
+                    type: 'POST',
+                    dataType: 'json',
+                    contentType: "application/json; charset=utf-8",
+                    cache: false,
+                    success: function (response) {
+                        document.getElementById("ltfu").innerHTML= response.d;
+                    }
+                });
+            }
       
         $(document).ready(function () {  
            
@@ -624,6 +794,8 @@
         });
 
        
+
+        
     </script>
   
 </asp:Content>

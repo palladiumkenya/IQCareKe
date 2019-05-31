@@ -86,6 +86,7 @@
     <Content Include="CCC\Patient\PatientCareEnded.aspx" />
     <Content Include="CCC\Patient\PatientConsent.aspx" />
     <Content Include="CCC\Patient\PatientDuplicateFinder.aspx" />
+    <Content Include="CCC\Patient\PatientLinelist.aspx" />
     <Content Include="CCC\Screening\AlcoholDrugAbuseScreening.aspx" />
     <Content Include="CCC\Screening\DepressionScreening.aspx" />
     <Content Include="CCC\Screening\GBVScreening.aspx" />
@@ -216,6 +217,7 @@
     <Content Include="CCC\WebService\PersonService.asmx" />
     <Content Include="CCC\WebService\LookupService.asmx" />
     <Content Include="CCC\WebService\FemaleVitalsWebservice.asmx" />
+    <Content Include="CCC\WebService\ReportingService.asmx" />
     <Content Include="Content\bootstrap-datepicker.css" />
     <Content Include="Content\bootstrap-datepicker.min.css" />
     <Content Include="Content\bootstrap-datepicker.standalone.css" />
@@ -740,6 +742,13 @@
     <Compile Include="CCC\Patient\PatientHome.aspx.designer.cs">
       <DependentUpon>PatientHome.aspx</DependentUpon>
     </Compile>
+    <Compile Include="CCC\Patient\PatientLinelist.aspx.cs">
+      <DependentUpon>PatientLinelist.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CCC\Patient\PatientLinelist.aspx.designer.cs">
+      <DependentUpon>PatientLinelist.aspx</DependentUpon>
+    </Compile>
     <Compile Include="CCC\Patient\PatientRegistration.aspx.cs">
       <DependentUpon>PatientRegistration.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -1150,6 +1159,10 @@
     </Compile>
     <Compile Include="CCC\WebService\FemaleVitalsWebservice.asmx.cs">
       <DependentUpon>FemaleVitalsWebservice.asmx</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="CCC\WebService\ReportingService.asmx.cs">
+      <DependentUpon>ReportingService.asmx</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="CCC\WebService\SocialHistoryService.asmx.cs">

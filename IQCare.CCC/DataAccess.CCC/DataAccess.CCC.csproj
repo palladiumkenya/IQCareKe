@@ -153,6 +153,7 @@
     <Compile Include="Interface\Pharmacy\IDrugRepository.cs" />
     <Compile Include="Interface\Pharmacy\IPatientPharmacyDispenseRepository.cs" />
     <Compile Include="Interface\Pharmacy\IPharmacyOrderRepository.cs" />
+    <Compile Include="Interface\Reporting\IReportingRepository.cs" />
     <Compile Include="Interface\Screening\IPatientScreeningRepository.cs" />
     <Compile Include="Interface\Lookup\ILookupCounty.cs" />
     <Compile Include="Interface\Lookup\ILookupFacility.cs" />
@@ -302,6 +303,7 @@
     <Compile Include="Repository\Pharmacy\DrugRepository.cs" />
     <Compile Include="Repository\Pharmacy\PatientPharmacyDispenseRepository.cs" />
     <Compile Include="Repository\Pharmacy\PharmacyOrderRepository.cs" />
+    <Compile Include="Repository\Reporting\ReportingRepository.cs" />
     <Compile Include="Repository\Screening\PatientScreeningRepository.cs" />
     <Compile Include="Repository\Tb\PatientTBRxRepository.cs" />
     <Compile Include="Repository\Triage\PatientAdverseEventOutcomeRepository.cs" />

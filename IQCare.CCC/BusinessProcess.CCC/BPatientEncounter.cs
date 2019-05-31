@@ -532,6 +532,7 @@ namespace BusinessProcess.CCC
             {
                 ClsObject PatientEncounter = new ClsObject();
                 ClsUtility.Init_Hashtable();
+                ClsUtility.theParams.Clear();
                 ClsUtility.AddParameters("@PatientMasterVisitID", SqlDbType.Int, PatientMasterVisitID);
                 ClsUtility.AddParameters("@PatientID", SqlDbType.Int, PatientID);
 
@@ -545,6 +546,7 @@ namespace BusinessProcess.CCC
             {
                 ClsObject PatientEncounter = new ClsObject();
                 ClsUtility.Init_Hashtable();
+                ClsUtility.theParams.Clear();
                 ClsUtility.AddParameters("@PatientMasterVisitID", SqlDbType.Int, PatientMasterVisitID);
                 ClsUtility.AddParameters("@PatientID", SqlDbType.Int, PatientID);
 
@@ -558,6 +560,7 @@ namespace BusinessProcess.CCC
             {
                 ClsObject PatientEncounter = new ClsObject();
                 ClsUtility.Init_Hashtable();
+                ClsUtility.theParams.Clear();
                 ClsUtility.AddParameters("@PatientMasterVisitID", SqlDbType.Int, PatientMasterVisitID);
                 ClsUtility.AddParameters("@PatientID", SqlDbType.Int, PatientID);
 

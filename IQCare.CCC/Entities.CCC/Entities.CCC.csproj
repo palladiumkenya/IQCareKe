@@ -188,6 +188,7 @@
     <Compile Include="PSmart\PatientProgramStart.cs" />
     <Compile Include="PSmart\SHR.cs" />
     <Compile Include="PSmart\SmartcardPatientList.cs" />
+    <Compile Include="Reports\sp_gettxcurr.cs" />
     <Compile Include="Screening\PatientScreening.cs" />
     <Compile Include="Sync\Sync.cs" />
     <Compile Include="Tanners\PatientTannersStaging.cs" />
