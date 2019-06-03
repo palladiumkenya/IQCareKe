@@ -1,27 +1,27 @@
 <form>
-  
-  <div class="row">
-      <div class="col-md-12">
-          <div class="form-title">
-              <span class="mat-accent">Complete Lab Order</span>
-          </div>
-      </div>
-  </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="form-title">
+                <span class="mat-accent">Complete Lab Order</span>
+            </div>
+        </div>
+    </div>
 
-  <app-personbrief>        
-  </app-personbrief>
+    <app-personbrief [personId]="personId"></app-personbrief>
     <br>
     <div class="row">
         <div class="col-lg-4 col-xs-12">
-            <button  mat-raised-button class="mat-primary" routerLink="/clinical/laborder/{{patientId}}/{{personId}}"  ><span class="fa fa-plus-circle"> Add Lab Order </span></button>
-        </div>      
+            <button mat-raised-button class="mat-primary"
+                routerLink="/clinical/laborder/{{patientId}}/{{personId}}"><span class="fa fa-plus-circle"> Add Lab
+                    Order </span></button>
+        </div>
     </div>
-  <div class="row">
-       <app-pending-labs-grid [PatientId]="patientId">           
-       </app-pending-labs-grid>
-  </div> 
-  <div class="row">
-      <app-completed-labs-grid  [PatientId]="patientId">
-      </app-completed-labs-grid>       
- </div>      
+    <div class="row">
+        <app-pending-labs-grid [PatientId]="patientId">
+        </app-pending-labs-grid>
+    </div>
+    <div class="row">
+        <app-completed-labs-grid [PatientId]="patientId">
+        </app-completed-labs-grid>
+    </div>
 </form>

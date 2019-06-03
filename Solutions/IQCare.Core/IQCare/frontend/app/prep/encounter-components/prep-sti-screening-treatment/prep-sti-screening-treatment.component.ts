@@ -9,13 +9,18 @@ import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms'
 })
 export class PrepSTIScreeningTreatmentComponent implements OnInit {
     STIScreeningForm: FormGroup;
-
-    @Input() STIScreeningAndTreatmentOptions: any;
-
     yesnoOptions: LookupItemView[] = [];
     stiScreeningOptions: LookupItemView[] = [];
 
-    constructor(private _formBuilder: FormBuilder) { }
+    patientId: number;
+    personId: number;
+
+    @Input() STIScreeningAndTreatmentOptions: any;
+
+    constructor(private _formBuilder: FormBuilder) {
+        this.patientId = 1;
+        this.personId = 1;
+    }
 
     ngOnInit() {
         this.STIScreeningForm = this._formBuilder.group({

@@ -46,6 +46,7 @@ import { PregnancyOutcomeResolver } from './_services/PregnancyOutcome.resolver'
         YesNoResolver, YesNoUnknownResolver,
         STIScreeningTreatmentResolver, FamilyPlanningMethodResolver,
         PlanningPregnancyResolver, YesNoDontKnowResolver, PregnancyOutcomeResolver
-    ]
+    ],
+    
 })
 export class PrepModule { }

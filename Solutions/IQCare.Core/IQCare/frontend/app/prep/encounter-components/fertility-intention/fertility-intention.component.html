@@ -12,7 +12,7 @@
             <div class="col-lg-3 col-sm-3 col-xs-12">
                 <mat-form-field class="col-md-12">
                     <mat-label>LMP</mat-label>
-                    <input formControlName="lmp" id="lmp" name="lmp" matInput (focus)="lmp.open()"
+                    <input formControlName="lmp" [max]="maxDate" id="lmp" name="lmp" matInput (focus)="lmp.open()"
                         [matDatepicker]="lmp">
                     <mat-datepicker-toggle matSuffix [for]="lmp"></mat-datepicker-toggle>
                     <mat-datepicker #lmp></mat-datepicker>
@@ -24,7 +24,8 @@
                     <mat-label>Pregnant?</mat-label>
                     <mat-select id="pregnant" name="pregnant" formControlName="pregnant" required>
                         <mat-option [value]=""></mat-option>
-                        <mat-option *ngFor="let yesnoOption of yesnoOptions" [value]="yesnoOption.itemId">
+                        <mat-option *ngFor="let yesnoOption of yesnoOptions" [value]="yesnoOption.itemId"
+                            (onSelectionChange)="onPregnancySelection($event)">
                             {{ yesnoOption.itemName }}
                         </mat-option>
                     </mat-select>
@@ -62,7 +63,8 @@
                     <mat-label>On Family Planning?</mat-label>
                     <mat-select id="onFamilyPlanning" name="onFamilyPlanning" formControlName="onFamilyPlanning">
                         <mat-option [value]=""></mat-option>
-                        <mat-option *ngFor="let yesnoOption of yesnoOptions" [value]="yesnoOption.itemId">
+                        <mat-option *ngFor="let yesnoOption of yesnoOptions" [value]="yesnoOption.itemId"
+                            (onSelectionChange)="onClientFPSelection($event)">
                             {{ yesnoOption.itemName }}
                         </mat-option>
                     </mat-select>
