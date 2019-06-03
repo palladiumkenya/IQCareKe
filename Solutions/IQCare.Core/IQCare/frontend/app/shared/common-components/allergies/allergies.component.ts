@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
 import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { LookupItemView } from '../../_models/LookupItemView';
 import { LookupItemService } from '../../_services/lookup-item.service';
 import { debounceTime } from 'rxjs/operators';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 
 @Component({
     selector: 'app-allergies',
@@ -22,7 +23,10 @@ export class AllergiesComponent implements OnInit {
     severityOptions: LookupItemView[] = [];
 
     constructor(private _formBuilder: FormBuilder,
-        private lookupItemService: LookupItemService) {
+        private lookupItemService: LookupItemService,
+        private dialogRef: MatDialogRef<AllergiesComponent>,
+        @Inject(MAT_DIALOG_DATA) dialogData) {
+
         // Filter Allergies
         this.myControl.valueChanges.pipe(
             debounceTime(400)

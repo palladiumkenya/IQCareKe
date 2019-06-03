@@ -12,10 +12,13 @@ export class FertilityIntentionComponent implements OnInit {
     yesnoOptions: LookupItemView[] = [];
     fpMethods: LookupItemView[] = [];
     planningPregnancy: LookupItemView[] = [];
+    maxDate: Date;
 
     @Input() FertilityIntentionsOptions: any;
 
-    constructor(private _formBuilder: FormBuilder) { }
+    constructor(private _formBuilder: FormBuilder) {
+        this.maxDate = new Date();
+    }
 
     ngOnInit() {
         this.FertilityIntentionForm = this._formBuilder.group({
@@ -28,10 +31,31 @@ export class FertilityIntentionComponent implements OnInit {
             planningToGetPregnant: new FormControl('', [Validators.required])
         });
 
+        // set default form state
+        this.FertilityIntentionForm.controls.familyPlanningMethods.disable({ onlySelf: true });
+        this.FertilityIntentionForm.controls.pregnancyPlanned.disable({ onlySelf: true });
+
         const { yesnoOptions, fpMethods, planningPregnancy } = this.FertilityIntentionsOptions[0];
         this.yesnoOptions = yesnoOptions;
         this.fpMethods = fpMethods;
         this.planningPregnancy = planningPregnancy;
     }
 
+    onClientFPSelection(event) {
+        if (event.isUserInput && event.source.selected && event.source.viewValue == 'Yes') {
+            this.FertilityIntentionForm.controls.familyPlanningMethods.enable({ onlySelf: true });
+        } else if (event.isUserInput && event.source.selected && event.source.viewValue == 'No') {
+            this.FertilityIntentionForm.controls.familyPlanningMethods.disable({ onlySelf: true });
+            this.FertilityIntentionForm.controls.familyPlanningMethods.setValue('');
+        }
+    }
+
+    onPregnancySelection(event) {
+        if (event.isUserInput && event.source.selected && event.source.viewValue == 'Yes') {
+            this.FertilityIntentionForm.controls.pregnancyPlanned.enable({ onlySelf: true });
+        } else if (event.isUserInput && event.source.selected && event.source.viewValue == 'No') {
+            this.FertilityIntentionForm.controls.pregnancyPlanned.disable({ onlySelf: true });
+            this.FertilityIntentionForm.controls.pregnancyPlanned.setValue('');
+        }
+    }
 }

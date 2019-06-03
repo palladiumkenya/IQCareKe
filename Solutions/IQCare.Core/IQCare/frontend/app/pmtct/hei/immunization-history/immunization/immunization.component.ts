@@ -45,7 +45,6 @@ export class ImmunizationComponent implements OnInit {
         } else {
             return;
         }
-
     }
 
     close() {
