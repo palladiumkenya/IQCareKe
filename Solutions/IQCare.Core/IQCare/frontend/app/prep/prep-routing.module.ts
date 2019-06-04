@@ -9,6 +9,8 @@ import { FamilyPlanningMethodResolver } from '../pmtct/_services/resolvers/famil
 import { PlanningPregnancyResolver } from './_services/planningPregnancy.resolver';
 import { YesNoDontKnowResolver } from './_services/YesNoDont-Know.resolver';
 import { PregnancyOutcomeResolver } from './_services/PregnancyOutcome.resolver';
+import { PrepStatusResolver } from './_services/prep-status.resolver';
+import { PrepContraindicationsResolver } from './_services/prep-contraindications.resolver';
 
 const routes: Routes = [
     {
@@ -26,7 +28,9 @@ const routes: Routes = [
             familyPlanningMethodsOptions: FamilyPlanningMethodResolver,
             planningPregnancyOptions: PlanningPregnancyResolver,
             yesNoDontKnowOptions: YesNoDontKnowResolver,
-            pregnancyOutcomeOptions: PregnancyOutcomeResolver
+            pregnancyOutcomeOptions: PregnancyOutcomeResolver,
+            prepStatusOptions: PrepStatusResolver,
+            prepContraindicationsOptions: PrepContraindicationsResolver
         }
     }
 ];

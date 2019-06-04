@@ -24,6 +24,8 @@ import { FamilyPlanningMethodResolver } from '../pmtct/_services/resolvers/famil
 import { PlanningPregnancyResolver } from './_services/planningPregnancy.resolver';
 import { YesNoDontKnowResolver } from './_services/YesNoDont-Know.resolver';
 import { PregnancyOutcomeResolver } from './_services/PregnancyOutcome.resolver';
+import { PrepContraindicationsResolver } from './_services/prep-contraindications.resolver';
+import { PrepStatusResolver } from './_services/prep-status.resolver';
 
 @NgModule({
     declarations: [
@@ -45,8 +47,9 @@ import { PregnancyOutcomeResolver } from './_services/PregnancyOutcome.resolver'
     providers: [
         YesNoResolver, YesNoUnknownResolver,
         STIScreeningTreatmentResolver, FamilyPlanningMethodResolver,
-        PlanningPregnancyResolver, YesNoDontKnowResolver, PregnancyOutcomeResolver
+        PlanningPregnancyResolver, YesNoDontKnowResolver, PregnancyOutcomeResolver,
+        PrepContraindicationsResolver, PrepStatusResolver
     ],
-    
+
 })
 export class PrepModule { }

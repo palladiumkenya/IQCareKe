@@ -1,5 +1,5 @@
 import { LookupItemView } from './../../../shared/_models/LookupItemView';
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
 
 @Component({
@@ -14,6 +14,7 @@ export class PregnancyOutcomeComponent implements OnInit {
     pregnancyOutcomeOptions: LookupItemView[] = [];
 
     @Input() PregnancyOutcomeOptions: any;
+    @Output() notify: EventEmitter<FormGroup> = new EventEmitter<FormGroup>();
 
     constructor(private _formBuilder: FormBuilder) { }
 
@@ -24,6 +25,9 @@ export class PregnancyOutcomeComponent implements OnInit {
             pregnancyOutcome: new FormControl('', [Validators.required]),
             birthDefects: new FormControl('', [Validators.required])
         });
+
+        // emit form to the stepper 
+        this.notify.emit(this.PregnancyOutcomeForm);
 
         const { yesnoOptions, yesNoDontKnowOptions, pregnancyOutcomeOptions } = this.PregnancyOutcomeOptions[0];
         this.yesnoOptions = yesnoOptions;

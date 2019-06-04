@@ -56,7 +56,17 @@ namespace IQCare.HTS.BusinessProcess.CommandHandlers
 
                         //add referral
                         int providerId = request.PLACER_DETAIL.PROVIDER_ID;
-                        DateTime dateToBeEnrolled = DateTime.ParseExact(request.REFERRAL.DATE_TO_BE_ENROLLED, "yyyyMMdd", null);
+                        DateTime dateToBeEnrolled = DateTime.Now;
+                        try
+                        {
+                            dateToBeEnrolled = DateTime.ParseExact(request.REFERRAL.DATE_TO_BE_ENROLLED, "yyyyMMdd", null);
+                        }
+                        catch (Exception e)
+                        {
+                            Log.Error($"Could not parse Referral DATE_TO_BE_ENROLLED: {request.REFERRAL.DATE_TO_BE_ENROLLED} as a valid date: Incorrect format, date should be in the following format yyyyMMdd");
+                            throw new Exception($"Could not parse Referral DATE_TO_BE_ENROLLED: {request.REFERRAL.DATE_TO_BE_ENROLLED} as a valid date: Incorrect format, date should be in the following format yyyyMMdd");
+                        }
+                        
                         string facilityReferred = request.REFERRAL.REFERRED_TO;
                         var referralReason = await _unitOfWork.Repository<LookupItemView>()
                             .Get(x => x.MasterName == "ReferralReason" &&

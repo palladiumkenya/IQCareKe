@@ -1,5 +1,5 @@
 import { LookupItemView } from './../../../shared/_models/LookupItemView';
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
 
 @Component({
@@ -13,6 +13,7 @@ export class CircumcisionStatusComponent implements OnInit {
     yesnoOptions: LookupItemView[] = [];
 
     @Input() CircumcisionStatusOptions: any;
+    @Output() notify: EventEmitter<FormGroup> = new EventEmitter<FormGroup>();
 
     constructor(private _formBuilder: FormBuilder) { }
 
@@ -21,6 +22,9 @@ export class CircumcisionStatusComponent implements OnInit {
             isClientCircumcised: new FormControl('', [Validators.required]),
             referredToVMMC: new FormControl('')
         });
+
+        // emit form to the stepper 
+        this.notify.emit(this.CircumcisionStatusForm);
 
         // make referral to VMMC disabled by default
         this.CircumcisionStatusForm.controls.referredToVMMC.disable({ onlySelf: true });
