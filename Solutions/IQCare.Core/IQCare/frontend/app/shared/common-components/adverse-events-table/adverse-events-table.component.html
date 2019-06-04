@@ -8,7 +8,7 @@
 
 <div class="row">
     <div class="col-lg-4 col-sm-4 col-xs-12">
-        <button mat-raised-button class="mat-primary" (click)="newAllergies()">
+        <button mat-raised-button class="mat-primary" (click)="newAdverseEvents()">
             <span class="fa fa-plus-circle">
                 Add Adverse Events
             </span>
@@ -23,53 +23,53 @@
             <mat-table #table [dataSource]="dataSource">
 
                 <!-- Position Column -->
-                <ng-container matColumnDef="allergy">
+                <ng-container matColumnDef="adverseEvent">
                     <mat-header-cell *matHeaderCellDef><strong>Adverse Events</strong> </mat-header-cell>
-                    <mat-cell *matCellDef="let AllergyTableData">
+                    <mat-cell *matCellDef="let AdverseEventsTableData">
                         {{
-                                AllergyTableData.allergy
-                            }}
-                    </mat-cell>
-                </ng-container>
-
-                <!-- Name Column -->
-                <ng-container matColumnDef="reactionType">
-                    <mat-header-cell *matHeaderCellDef><strong>Severity</strong></mat-header-cell>
-                    <mat-cell *matCellDef="let AllergyTableData">
-                        {{
-                                AllergyTableData.reactionType
-                            }}
+                            AdverseEventsTableData.adverseEvent.itemName
+                        }}
                     </mat-cell>
                 </ng-container>
 
                 <!-- Name Column -->
                 <ng-container matColumnDef="severity">
-                    <mat-header-cell *matHeaderCellDef><strong>Action</strong></mat-header-cell>
-                    <mat-cell *matCellDef="let AllergyTableData">
+                    <mat-header-cell *matHeaderCellDef><strong>Severity</strong></mat-header-cell>
+                    <mat-cell *matCellDef="let AdverseEventsTableData">
                         {{
-                                AllergyTableData.severity
-                            }}
+                            AdverseEventsTableData.severity.itemName
+                        }}
+                    </mat-cell>
+                </ng-container>
+
+                <!-- Name Column -->
+                <ng-container matColumnDef="medicine_causing">
+                    <mat-header-cell *matHeaderCellDef><strong>Medicine Causing A/E</strong></mat-header-cell>
+                    <mat-cell *matCellDef="let AdverseEventsTableData">
+                        {{
+                            AdverseEventsTableData.medicine_causing
+                        }}
                     </mat-cell>
                 </ng-container>
 
                 <!-- Weight Column -->
-                <ng-container matColumnDef="onsetDate">
-                    <mat-header-cell *matHeaderCellDef> <strong>Adverse Event Outcome</strong> </mat-header-cell>
-                    <mat-cell *matCellDef="let AllergyTableData">
+                <ng-container matColumnDef="adverseEventsAction">
+                    <mat-header-cell *matHeaderCellDef> <strong>Adverse Event Action</strong> </mat-header-cell>
+                    <mat-cell *matCellDef="let AdverseEventsTableData">
                         {{
-                                AllergyTableData.onsetDate | date: 'dd-MMM-yyyy'
-                            }}
+                            AdverseEventsTableData.adverseEventsAction.displayName
+                        }}
                     </mat-cell>
                 </ng-container>
 
                 <!-- Symbol Column -->
-                <ng-container matColumnDef="active">
-                    <mat-header-cell *matHeaderCellDef><strong>Active</strong> </mat-header-cell>
-                    <mat-cell *matCellDef="let AllergyTableData">
-                        <ng-container *ngIf="AllergyTableData.active">
+                <ng-container matColumnDef="outcome">
+                    <mat-header-cell *matHeaderCellDef><strong>Outcome</strong> </mat-header-cell>
+                    <mat-cell *matCellDef="let AdverseEventsTableData">
+                        <ng-container *ngIf="AdverseEventsTableData.outcome">
                             {{ 
-                                    AllergyTableData.active 
-                                }}
+                                AdverseEventsTableData.outcome 
+                            }}
                         </ng-container>
                     </mat-cell>
                 </ng-container>

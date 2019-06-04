@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
+import { LookupItemView } from '../../../shared/_models/LookupItemView';
 
 @Component({
     selector: 'app-prep-status',
@@ -8,6 +9,12 @@ import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms'
 })
 export class PrepStatusComponent implements OnInit {
     PrepStatusForm: FormGroup;
+    yesnoOptions: LookupItemView[] = [];
+    prepStatusOptions: LookupItemView[] = [];
+    prepContraindicationsOptions: LookupItemView[] = [];
+
+    @Input() PrepStatusOptions: any;
+    @Output() notify: EventEmitter<FormGroup> = new EventEmitter<FormGroup>();
 
     constructor(private _formBuilder: FormBuilder) { }
 
@@ -20,6 +27,14 @@ export class PrepStatusComponent implements OnInit {
             condomsIssued: new FormControl('', [Validators.required]),
             noCondomsIssued: new FormControl('', [Validators.required]),
         });
+
+        // emit form to the stepper 
+        this.notify.emit(this.PrepStatusForm);
+
+        const { yesnoOptions, prepStatusOptions, prepContraindicationsOptions } = this.PrepStatusOptions[0];
+        this.yesnoOptions = yesnoOptions;
+        this.prepStatusOptions = prepStatusOptions;
+        this.prepContraindicationsOptions = prepContraindicationsOptions;
     }
 
 }

@@ -20,7 +20,8 @@ import {
     MatButtonModule,
     MatAutocompleteModule,
     MatDatepickerModule,
-    MatNativeDateModule
+    MatNativeDateModule,
+    MatDialogModule
 } from '@angular/material';
 import { AppDateAdapter } from './dateadapter/momentDateAdapter';
 import { NotificationService } from './_services/notification.service';
@@ -45,7 +46,7 @@ import { AdverseEventsTableComponent } from './common-components/adverse-events-
         MatTableModule, MatIconModule,
         MatPaginatorModule, ReactiveFormsModule,
         MatSelectModule, MatFormFieldModule,
-        MatInputModule, MatButtonModule
+        MatInputModule, MatButtonModule, MatDialogModule
     ],
     declarations: [
         LeftnavComponent,

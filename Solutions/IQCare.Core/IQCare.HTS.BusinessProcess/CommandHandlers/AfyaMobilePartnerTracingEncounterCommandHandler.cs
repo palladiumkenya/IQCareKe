@@ -69,13 +69,32 @@ namespace IQCare.HTS.BusinessProcess.CommandHandlers
 
                             for (int j = 0; j < request.PARTNERTRACING.TRACING.Count; j++)
                             {
-                                DateTime tracingDate = DateTime.ParseExact(request.PARTNERTRACING.TRACING[j].TRACING_DATE, "yyyyMMdd", null);
+                                DateTime tracingDate = DateTime.Now;
+                                try
+                                {
+                                    tracingDate = DateTime.ParseExact(request.PARTNERTRACING.TRACING[j].TRACING_DATE, "yyyyMMdd", null);
+                                }
+                                catch (Exception e)
+                                {
+                                    Log.Error($"Could not parse partner tracing SCREENING_DATE: {request.PARTNERTRACING.TRACING[j].TRACING_DATE} as a valid date: Incorrect format, date should be in the following format yyyyMMdd");
+                                    throw new Exception($"Could not parse partner tracing SCREENING_DATE: {request.PARTNERTRACING.TRACING[j].TRACING_DATE} as a valid date: Incorrect format, date should be in the following format yyyyMMdd");
+                                }
                                 int mode = request.PARTNERTRACING.TRACING[j].TRACING_MODE;
                                 int outcome = request.PARTNERTRACING.TRACING[j].TRACING_OUTCOME;
                                 int consent = request.PARTNERTRACING.TRACING[j].CONSENT;
                                 DateTime? tracingBookingDate = null;
                                 if (!string.IsNullOrWhiteSpace(request.PARTNERTRACING.TRACING[j].BOOKING_DATE))
-                                    tracingBookingDate = DateTime.ParseExact(request.PARTNERTRACING.TRACING[j].BOOKING_DATE, "yyyyMMdd", null);
+                                {
+                                    try
+                                    {
+                                        tracingBookingDate = DateTime.ParseExact(request.PARTNERTRACING.TRACING[j].BOOKING_DATE, "yyyyMMdd", null);
+                                    }
+                                    catch (Exception e)
+                                    {
+                                        Log.Error($"Could not parse partner tracing BOOKING_DATE: {request.PARTNERTRACING.TRACING[j].BOOKING_DATE} as a valid date: Incorrect format, date should be in the following format yyyyMMdd");
+                                        throw new Exception($"Could not parse partner tracing BOOKING_DATE: {request.PARTNERTRACING.TRACING[j].BOOKING_DATE} as a valid date: Incorrect format, date should be in the following format yyyyMMdd");
+                                    }
+                                }
 
                                 var tracingOutcome = await encounterTestingService.addTracing(partnetPersonIdentifiers[0].PersonId, tracingType,
                                     tracingDate, mode, outcome, 1, null, consent, tracingBookingDate, null);

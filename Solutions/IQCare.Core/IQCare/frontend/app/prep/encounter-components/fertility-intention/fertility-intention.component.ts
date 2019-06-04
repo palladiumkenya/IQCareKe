@@ -1,5 +1,5 @@
 import { LookupItemView } from './../../../shared/_models/LookupItemView';
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 
 @Component({
@@ -15,6 +15,7 @@ export class FertilityIntentionComponent implements OnInit {
     maxDate: Date;
 
     @Input() FertilityIntentionsOptions: any;
+    @Output() notify: EventEmitter<FormGroup> = new EventEmitter<FormGroup>();
 
     constructor(private _formBuilder: FormBuilder) {
         this.maxDate = new Date();
@@ -30,6 +31,9 @@ export class FertilityIntentionComponent implements OnInit {
             familyPlanningMethods: new FormControl('', [Validators.required]),
             planningToGetPregnant: new FormControl('', [Validators.required])
         });
+
+        // emit form to the stepper 
+        this.notify.emit(this.FertilityIntentionForm);
 
         // set default form state
         this.FertilityIntentionForm.controls.familyPlanningMethods.disable({ onlySelf: true });

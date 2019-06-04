@@ -1,5 +1,5 @@
 import { LookupItemView } from './../../../shared/_models/LookupItemView';
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
 
 @Component({
@@ -16,6 +16,7 @@ export class PrepSTIScreeningTreatmentComponent implements OnInit {
     personId: number;
 
     @Input() STIScreeningAndTreatmentOptions: any;
+    @Output() notify: EventEmitter<FormGroup> = new EventEmitter<FormGroup>();
 
     constructor(private _formBuilder: FormBuilder) {
         this.patientId = 1;
@@ -27,6 +28,9 @@ export class PrepSTIScreeningTreatmentComponent implements OnInit {
             signsOrSymptomsOfSTI: new FormControl('', [Validators.required]),
             signsOfSTI: new FormControl('', [Validators.required]),
         });
+
+        // emit form to the stepper 
+        this.notify.emit(this.STIScreeningForm);
 
         this.STIScreeningForm.controls.signsOfSTI.disable({ onlySelf: true });
 
