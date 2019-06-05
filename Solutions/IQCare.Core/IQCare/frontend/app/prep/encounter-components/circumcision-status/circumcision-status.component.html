@@ -16,7 +16,8 @@
                         formControlName="isClientCircumcised" required>
                         <mat-option [value]=""></mat-option>
                         <mat-option *ngFor="let yesNoUnknownOption of yesNoUnknownOptions"
-                            [value]="yesNoUnknownOption.itemId">
+                            [value]="yesNoUnknownOption.itemId"
+                            (onSelectionChange)="onClientCircumcisedSelection($event)">
                             {{ yesNoUnknownOption.itemName }}
                         </mat-option>
                     </mat-select>

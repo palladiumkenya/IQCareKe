@@ -57,9 +57,32 @@ namespace IQCare.HTS.BusinessProcess.CommandHandlers
                         string lastName = request.CLIENTS[i].PATIENT_IDENTIFICATION.PATIENT_NAME.LAST_NAME;
                         string nickName = (request.CLIENTS[i].PATIENT_IDENTIFICATION.PATIENT_NAME.NICK_NAME == null) ? "" : request.CLIENTS[i].PATIENT_IDENTIFICATION.PATIENT_NAME.NICK_NAME.ToString();
                         int sex = request.CLIENTS[i].PATIENT_IDENTIFICATION.SEX;
-                        DateTime dateOfBirth = DateTime.ParseExact(request.CLIENTS[i].PATIENT_IDENTIFICATION.DATE_OF_BIRTH, "yyyyMMdd", null);
+
+                        //Try to parse dateOfBirth
+                        DateTime dateOfBirth = DateTime.Now;
+                        try
+                        {
+                            dateOfBirth = DateTime.ParseExact(request.CLIENTS[i].PATIENT_IDENTIFICATION.DATE_OF_BIRTH, "yyyyMMdd", null);
+                        }
+                        catch (Exception e)
+                        {
+                            Log.Error($"Could not parse DateOfBirth: {request.CLIENTS[i].PATIENT_IDENTIFICATION.DATE_OF_BIRTH} as a valid date. Incorrect format, date should be in the following format yyyyMMdd");
+                            throw new Exception($"Could not parse DateOfBirth: {request.CLIENTS[i].PATIENT_IDENTIFICATION.DATE_OF_BIRTH} as a valid date. Incorrect format, date should be in the following format yyyyMMdd");
+                        }
                         string dobPrecision = request.CLIENTS[i].PATIENT_IDENTIFICATION.DATE_OF_BIRTH_PRECISION;
-                        DateTime dateEnrollment = DateTime.ParseExact(request.CLIENTS[i].PATIENT_IDENTIFICATION.REGISTRATION_DATE, "yyyyMMdd", null);
+
+                        //Try to parse DateOfEnrollment
+                        DateTime dateEnrollment = DateTime.Now;
+                        try
+                        {
+                            dateEnrollment = DateTime.ParseExact(request.CLIENTS[i].PATIENT_IDENTIFICATION.REGISTRATION_DATE, "yyyyMMdd", null);
+                        }
+                        catch (Exception e)
+                        {
+                            Log.Error($"Could not parse DateOfEnrollment: {request.CLIENTS[i].PATIENT_IDENTIFICATION.REGISTRATION_DATE} as a valid date: Incorrect format, date should be in the following format yyyyMMdd");
+                            throw new Exception($"Could not parse DateOfEnrollment: {request.CLIENTS[i].PATIENT_IDENTIFICATION.REGISTRATION_DATE} as a valid date: Incorrect format, date should be in the following format yyyyMMdd");
+                        }
+
                         int maritalStatusId = request.CLIENTS[i].PATIENT_IDENTIFICATION.MARITAL_STATUS;
                         string landmark = request.CLIENTS[i].PATIENT_IDENTIFICATION.PATIENT_ADDRESS.PHYSICAL_ADDRESS
                             .LANDMARK;

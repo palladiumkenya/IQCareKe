@@ -1,7 +1,8 @@
 import { LookupItemService } from './../../_services/lookup-item.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
 import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
 import { LookupItemView } from '../../_models/LookupItemView';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 
 @Component({
     selector: 'app-patient-chronic-illnesses',
@@ -11,11 +12,16 @@ import { LookupItemView } from '../../_models/LookupItemView';
 })
 export class PatientChronicIllnessesComponent implements OnInit {
     ChronicIllnessesForm: FormGroup;
+    maxDate: Date;
 
     illnessesOptions: LookupItemView[] = [];
 
     constructor(private _formBuilder: FormBuilder,
-        private lookupItemService: LookupItemService) { }
+        private lookupItemService: LookupItemService,
+        private dialogRef: MatDialogRef<PatientChronicIllnessesComponent>,
+        @Inject(MAT_DIALOG_DATA) data) {
+        this.maxDate = new Date();
+    }
 
     ngOnInit() {
         this.ChronicIllnessesForm = this._formBuilder.group({
@@ -38,4 +44,15 @@ export class PatientChronicIllnessesComponent implements OnInit {
         );
     }
 
+    save() {
+        if (this.ChronicIllnessesForm.valid) {
+            this.dialogRef.close(this.ChronicIllnessesForm.value);
+        } else {
+            return;
+        }
+    }
+
+    close() {
+        this.dialogRef.close();
+    }
 }

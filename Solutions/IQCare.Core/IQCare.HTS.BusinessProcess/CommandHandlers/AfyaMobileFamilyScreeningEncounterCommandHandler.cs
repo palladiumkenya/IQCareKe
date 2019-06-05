@@ -64,10 +64,28 @@ namespace IQCare.HTS.BusinessProcess.CommandHandlers
                         var partnetPersonIdentifiers = await registerPersonService.getPersonIdentifiers(afyaMobileId, 10);
                         if (partnetPersonIdentifiers.Count > 0)
                         {
-                            DateTime screeningDate = DateTime.ParseExact(request.SCREENING_ENCOUNTER.FAMILY_SCREENING.SCREENING_DATE, "yyyyMMdd", null);
+                            DateTime screeningDate = DateTime.Now;
+                            try
+                            {
+                                screeningDate = DateTime.ParseExact(request.SCREENING_ENCOUNTER.FAMILY_SCREENING.SCREENING_DATE, "yyyyMMdd", null);
+                            }
+                            catch (Exception e)
+                            {
+                                Log.Error($"Could not parse family screening SCREENING_DATE: {request.SCREENING_ENCOUNTER.FAMILY_SCREENING.SCREENING_DATE} as a valid date: Incorrect format, date should be in the following format yyyyMMdd");
+                                throw new Exception($"Could not parse family screening SCREENING_DATE: {request.SCREENING_ENCOUNTER.FAMILY_SCREENING.SCREENING_DATE} as a valid date: Incorrect format, date should be in the following format yyyyMMdd");
+                            }
                             int hivStatus = request.SCREENING_ENCOUNTER.FAMILY_SCREENING.HIV_STATUS;
                             int eligible = request.SCREENING_ENCOUNTER.FAMILY_SCREENING.ELIGIBLE_FOR_HTS;
-                            DateTime bookingDate = DateTime.ParseExact(request.SCREENING_ENCOUNTER.FAMILY_SCREENING.BOOKING_DATE, "yyyyMMdd", null);
+                            DateTime bookingDate = DateTime.Now;
+                            try
+                            {
+                                bookingDate = DateTime.ParseExact(request.SCREENING_ENCOUNTER.FAMILY_SCREENING.BOOKING_DATE, "yyyyMMdd", null);
+                            }
+                            catch (Exception e)
+                            {
+                                Log.Error($"Could not parse family screening BOOKING_DATE: {request.SCREENING_ENCOUNTER.FAMILY_SCREENING.BOOKING_DATE} as a valid date: Incorrect format, date should be in the following format yyyyMMdd");
+                                throw new Exception($"Could not parse family screening BOOKING_DATE: {request.SCREENING_ENCOUNTER.FAMILY_SCREENING.BOOKING_DATE} as a valid date: Incorrect format, date should be in the following format yyyyMMdd");
+                            }
                             string remarks = request.SCREENING_ENCOUNTER.FAMILY_SCREENING.REMARKS;
 
                             var familyScreenings = await _unitOfWork.Repository<LookupItemView>().Get(x => x.MasterName == "FamilyScreening")

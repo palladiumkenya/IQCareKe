@@ -13,7 +13,8 @@
                     <mat-select id="signsOrSymptomsOfSTI" name="signsOrSymptomsOfSTI"
                         formControlName="signsOrSymptomsOfSTI" required>
                         <mat-option [value]=""></mat-option>
-                        <mat-option *ngFor="let yesnoOption of yesnoOptions" [value]="yesnoOption.itemId">
+                        <mat-option *ngFor="let yesnoOption of yesnoOptions" [value]="yesnoOption.itemId"
+                            (onSelectionChange)="onSignsOrSymptomsSelection($event)">
                             {{ yesnoOption.itemName }}
                         </mat-option>
                     </mat-select>
@@ -33,18 +34,23 @@
             </div>
         </div>
 
+        <div class="row">&nbsp;</div>
+
         <div class="row">
             <div class="col-lg-6 col-sm-6 col-xs-12">
                 <span class="col-lg-6 col-sm-6 col-xs-12">
                     <strong>Lab Investigation:</strong>
                 </span>
                 <span class="col-lg-6 col-sm-6 col-xs-12">
-                    <a href="#" target="_blank" style="text-decoration: underline;">
+                    <a href="/clinical/completeorder/{{ patientId }}/{{ personId }}" target=" _blank"
+                        style="text-decoration: underline;">
                         Lab Order Form
                     </a>
                 </span>
             </div>
         </div>
+
+        <div class="row">&nbsp;</div>
 
         <div class="row">
             <div class="col-lg-6 col-sm-6 col-xs-12">

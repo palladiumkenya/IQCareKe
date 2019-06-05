@@ -16,6 +16,7 @@
                                         </ng-template>
 
                                         <app-prep-sti-screening-treatment
+                                            (notify)="onPrepStiScreeningTreatmentNotify($event)"
                                             [STIScreeningAndTreatmentOptions]="STIScreeningAndTreatmentOptions">
                                         </app-prep-sti-screening-treatment>
 
@@ -33,7 +34,7 @@
                                             </span>
                                         </ng-template>
 
-                                        <app-circumcision-status
+                                        <app-circumcision-status (notify)="onCircumcisionStatusNotify($event)"
                                             [CircumcisionStatusOptions]="CircumcisionStatusOptions">
                                         </app-circumcision-status>
 
@@ -53,7 +54,13 @@
                                             </span>
                                         </ng-template>
 
-                                        <app-fertility-intention></app-fertility-intention>
+                                        <app-fertility-intention (notify)="onFertilityIntentionNotify($event)"
+                                            [FertilityIntentionsOptions]="FertilityIntentionsOptions">
+                                        </app-fertility-intention>
+
+                                        <app-pregnancy-outcome (notify)="onPregnancyOutcomeNotify($event)"
+                                            [PregnancyOutcomeOptions]="PregnancyOutcomeOptions">
+                                        </app-pregnancy-outcome>
 
                                         <div>
                                             <button mat-raised-button color="primary" matStepperPrevious
@@ -64,52 +71,27 @@
                                         </div>
                                     </mat-step>
 
-                                    <mat-step [completed]="false" [stepControl]="PregnancyOutcomeFormGroup">
-                                        <ng-template matStepLabel>
-                                            <span matTooltip="Delivery & Maternal History">
-                                                Pregnancy Outcome
-                                            </span>
-                                        </ng-template>
-
-                                        <app-pregnancy-outcome></app-pregnancy-outcome>
-
-                                        <div>
-                                            <button mat-raised-button color="primary" matStepperPrevious
-                                                type="button">Previous</button>
-                                            &nbsp;&nbsp;
-                                            <button mat-raised-button color="accent" matStepperNext
-                                                type="button">Next</button>
-                                        </div>
-                                    </mat-step>
-
-                                    <mat-step [completed]="false" [stepControl]="deliveryMatFormGroup">
+                                    <mat-step [completed]="false" [stepControl]="ChronicIllnessFormGroup">
                                         <ng-template matStepLabel>
                                             <span matTooltip="Delivery & Maternal History">
                                                 Chronic Conditions and Comorbidities
                                             </span>
                                         </ng-template>
 
-                                        <app-patient-chronic-illnesses></app-patient-chronic-illnesses>
+                                        <app-chronic-illnesses-table (notify)="onChroniIllnessNotify($event)">
+                                        </app-chronic-illnesses-table>
 
-                                        <app-allergies></app-allergies>
+                                        <div class="row">&nbsp;</div>
 
-                                        <div>
-                                            <button mat-raised-button color="primary" matStepperPrevious
-                                                type="button">Previous</button>
-                                            &nbsp;&nbsp;
-                                            <button mat-raised-button color="accent" matStepperNext
-                                                type="button">Next</button>
-                                        </div>
-                                    </mat-step>
+                                        <app-allergies-table (notify)="onAllergiesNotify($event)">
+                                        </app-allergies-table>
 
-                                    <mat-step [completed]="false" [stepControl]="deliveryMatFormGroup">
-                                        <ng-template matStepLabel>
-                                            <span matTooltip="Delivery & Maternal History">
-                                                Adverse Events Assessment
-                                            </span>
-                                        </ng-template>
+                                        <div class="row">&nbsp;</div>
 
-                                        <app-adverse-events-assessment></app-adverse-events-assessment>
+                                        <app-adverse-events-table (notify)="onAdverseEventsNotify($event)">
+                                        </app-adverse-events-table>
+
+                                        <div class="row">&nbsp;</div>
 
                                         <div>
                                             <button mat-raised-button color="primary" matStepperPrevious
@@ -120,7 +102,7 @@
                                         </div>
                                     </mat-step>
 
-                                    <mat-step [completed]="false" [stepControl]="deliveryMatFormGroup">
+                                    <!--<mat-step [completed]="false" [stepControl]="deliveryMatFormGroup">
                                         <ng-template matStepLabel>
                                             <span matTooltip="Delivery & Maternal History">
                                                 LAB Investigations
@@ -134,16 +116,17 @@
                                             <button mat-raised-button color="accent" matStepperNext
                                                 type="button">Next</button>
                                         </div>
-                                    </mat-step>
+                                    </mat-step>-->
 
-                                    <mat-step [completed]="false" [stepControl]="deliveryMatFormGroup">
+                                    <mat-step [completed]="false" [stepControl]="PrepStatusFormGroup">
                                         <ng-template matStepLabel>
                                             <span matTooltip="Delivery & Maternal History">
                                                 PrEP Status
                                             </span>
                                         </ng-template>
 
-                                        <app-prep-status></app-prep-status>
+                                        <app-prep-status (notify)="onPrepStatusNotify($event)"
+                                            [PrepStatusOptions]="PrepStatusOptions"></app-prep-status>
 
                                         <div>
                                             <button mat-raised-button color="primary" matStepperPrevious
@@ -154,7 +137,7 @@
                                         </div>
                                     </mat-step>
 
-                                    <mat-step [completed]="false" [stepControl]="deliveryMatFormGroup">
+                                    <mat-step [completed]="false" [stepControl]="AppointmentFormGroup">
                                         <ng-template matStepLabel>
                                             <span matTooltip="Delivery & Maternal History">
                                                 Appointment

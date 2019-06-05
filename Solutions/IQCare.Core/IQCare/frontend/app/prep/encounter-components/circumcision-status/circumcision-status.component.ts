@@ -1,5 +1,5 @@
 import { LookupItemView } from './../../../shared/_models/LookupItemView';
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
 
 @Component({
@@ -12,8 +12,8 @@ export class CircumcisionStatusComponent implements OnInit {
     yesNoUnknownOptions: LookupItemView[] = [];
     yesnoOptions: LookupItemView[] = [];
 
-
     @Input() CircumcisionStatusOptions: any;
+    @Output() notify: EventEmitter<FormGroup> = new EventEmitter<FormGroup>();
 
     constructor(private _formBuilder: FormBuilder) { }
 
@@ -23,9 +23,24 @@ export class CircumcisionStatusComponent implements OnInit {
             referredToVMMC: new FormControl('')
         });
 
+        // emit form to the stepper 
+        this.notify.emit(this.CircumcisionStatusForm);
+
+        // make referral to VMMC disabled by default
+        this.CircumcisionStatusForm.controls.referredToVMMC.disable({ onlySelf: true });
+
         const { yesNoUnknownOptions, yesnoOptions } = this.CircumcisionStatusOptions[0];
         this.yesNoUnknownOptions = yesNoUnknownOptions;
         this.yesnoOptions = yesnoOptions;
     }
 
+    onClientCircumcisedSelection(event) {
+        // disable referral to VMMC when client is already circumcised
+        if (event.isUserInput && event.source.selected && event.source.viewValue == 'Yes') {
+            this.CircumcisionStatusForm.controls.referredToVMMC.disable({ onlySelf: true });
+            this.CircumcisionStatusForm.controls.referredToVMMC.setValue('');
+        } else if (event.isUserInput && event.source.selected && event.source.viewValue == 'No') {
+            this.CircumcisionStatusForm.controls.referredToVMMC.enable({ onlySelf: true });
+        }
+    }
 }

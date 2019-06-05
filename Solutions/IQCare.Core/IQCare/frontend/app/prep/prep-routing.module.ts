@@ -5,6 +5,12 @@ import { PrepEncounterHistoryComponent } from './prep-encounter-history/prep-enc
 import { PrepEncounterComponent } from './prep-encounter/prep-encounter.component';
 import { STIScreeningTreatmentResolver } from './_services/STIScreeningTreatment.resolver';
 import { YesNoUnknownResolver } from './_services/YesNoUnknown.resolver';
+import { FamilyPlanningMethodResolver } from '../pmtct/_services/resolvers/family-planning-method.resolver';
+import { PlanningPregnancyResolver } from './_services/planningPregnancy.resolver';
+import { YesNoDontKnowResolver } from './_services/YesNoDont-Know.resolver';
+import { PregnancyOutcomeResolver } from './_services/PregnancyOutcome.resolver';
+import { PrepStatusResolver } from './_services/prep-status.resolver';
+import { PrepContraindicationsResolver } from './_services/prep-contraindications.resolver';
 import {
     AssessmentOutcomeResolver, ClientsBehaviourRiskResolver, SexualPartnetHivStatusProfileResolver,
     RiskReductionEducationResolver, ReferralPreventionServicesResolver, ClientWillingTakePrepResolver
@@ -24,7 +30,13 @@ const routes: Routes = [
         resolve: {
             yesNoOptions: YesNoResolver,
             stiScreeningTreatmentOptions: STIScreeningTreatmentResolver,
-            yesNoUnknownOptions: YesNoUnknownResolver
+            yesNoUnknownOptions: YesNoUnknownResolver,
+            familyPlanningMethodsOptions: FamilyPlanningMethodResolver,
+            planningPregnancyOptions: PlanningPregnancyResolver,
+            yesNoDontKnowOptions: YesNoDontKnowResolver,
+            pregnancyOutcomeOptions: PregnancyOutcomeResolver,
+            prepStatusOptions: PrepStatusResolver,
+            prepContraindicationsOptions: PrepContraindicationsResolver
         }
     },
     {  

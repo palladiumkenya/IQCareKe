@@ -1,5 +1,5 @@
 import { LookupItemView } from './../../../shared/_models/LookupItemView';
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
 
 @Component({
@@ -9,13 +9,19 @@ import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms'
 })
 export class PrepSTIScreeningTreatmentComponent implements OnInit {
     STIScreeningForm: FormGroup;
-
-    @Input() STIScreeningAndTreatmentOptions: any;
-
     yesnoOptions: LookupItemView[] = [];
     stiScreeningOptions: LookupItemView[] = [];
 
-    constructor(private _formBuilder: FormBuilder) { }
+    patientId: number;
+    personId: number;
+
+    @Input() STIScreeningAndTreatmentOptions: any;
+    @Output() notify: EventEmitter<FormGroup> = new EventEmitter<FormGroup>();
+
+    constructor(private _formBuilder: FormBuilder) {
+        this.patientId = 1;
+        this.personId = 1;
+    }
 
     ngOnInit() {
         this.STIScreeningForm = this._formBuilder.group({
@@ -23,9 +29,22 @@ export class PrepSTIScreeningTreatmentComponent implements OnInit {
             signsOfSTI: new FormControl('', [Validators.required]),
         });
 
+        // emit form to the stepper 
+        this.notify.emit(this.STIScreeningForm);
+
+        this.STIScreeningForm.controls.signsOfSTI.disable({ onlySelf: true });
+
         const { yesnoOptions, stiScreeningOptions } = this.STIScreeningAndTreatmentOptions[0];
         this.yesnoOptions = yesnoOptions;
         this.stiScreeningOptions = stiScreeningOptions;
     }
 
+    public onSignsOrSymptomsSelection(event) {
+        if (event.isUserInput && event.source.selected && event.source.viewValue == 'Yes') {
+            this.STIScreeningForm.controls.signsOfSTI.enable({ onlySelf: true });
+        } else if (event.isUserInput && event.source.selected && event.source.viewValue == 'No') {
+            this.STIScreeningForm.controls.signsOfSTI.setValue([]);
+            this.STIScreeningForm.controls.signsOfSTI.disable({ onlySelf: true });
+        }
+    }
 }

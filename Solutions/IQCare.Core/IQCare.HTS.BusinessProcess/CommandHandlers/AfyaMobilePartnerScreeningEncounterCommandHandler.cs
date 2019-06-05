@@ -57,7 +57,17 @@ namespace IQCare.HTS.BusinessProcess.CommandHandlers
                     var afyaMobileMessage = await registerPersonService.AddAfyaMobileInbox(DateTime.Now, request.MESSAGE_HEADER.MESSAGE_TYPE, afyaMobileId, JsonConvert.SerializeObject(request), false);
 
                     int pnsAccepted = request.SCREENING.PARTNER_SCREENING.PNS_ACCEPTED;
-                    DateTime screeningDate = DateTime.ParseExact(request.SCREENING.PARTNER_SCREENING.SCREENING_DATE, "yyyyMMdd", null);
+                    DateTime screeningDate = DateTime.Now;
+                    try
+                    {
+                        screeningDate = DateTime.ParseExact(request.SCREENING.PARTNER_SCREENING.SCREENING_DATE, "yyyyMMdd", null);
+                    }
+                    catch (Exception e)
+                    {
+                        Log.Error($"Could not parse partner screening SCREENING_DATE: {request.SCREENING.PARTNER_SCREENING.SCREENING_DATE} as a valid date: Incorrect format, date should be in the following format yyyyMMdd");
+                        throw new Exception($"Could not parse partner screening SCREENING_DATE: {request.SCREENING.PARTNER_SCREENING.SCREENING_DATE} as a valid date: Incorrect format, date should be in the following format yyyyMMdd");
+                    }
+                    
                     int ipvScreeningDone = request.SCREENING.PARTNER_SCREENING.IPV_SCREENING_DONE;
                     int hurtByPartner = request.SCREENING.PARTNER_SCREENING.HURT_BY_PARTNER;
                     int threatByPartner = request.SCREENING.PARTNER_SCREENING.THREAT_BY_PARTNER;
@@ -69,7 +79,17 @@ namespace IQCare.HTS.BusinessProcess.CommandHandlers
                     int hivStatus = request.SCREENING.PARTNER_SCREENING.HIV_STATUS;
                     int pnsApproach = request.SCREENING.PARTNER_SCREENING.PNS_APPROACH;
                     int eligibleForHts = request.SCREENING.PARTNER_SCREENING.ELIGIBLE_FOR_HTS;
-                    DateTime bookingDate = DateTime.ParseExact(request.SCREENING.PARTNER_SCREENING.BOOKING_DATE, "yyyyMMdd", null);
+                    DateTime bookingDate = DateTime.Now;
+                    try
+                    {
+                        bookingDate = DateTime.ParseExact(request.SCREENING.PARTNER_SCREENING.BOOKING_DATE, "yyyyMMdd", null);
+                    }
+                    catch (Exception e)
+                    {
+                        Log.Error($"Could not parse partner screening BOOKING_DATE: {request.SCREENING.PARTNER_SCREENING.BOOKING_DATE} as a valid date: Incorrect format, date should be in the following format yyyyMMdd");
+                        throw new Exception($"Could not parse partner screening BOOKING_DATE: {request.SCREENING.PARTNER_SCREENING.BOOKING_DATE} as a valid date: Incorrect format, date should be in the following format yyyyMMdd");
+                    }
+                    
                     var pnsScreeningOptions = await _unitOfWork.Repository<LookupItemView>().Get(x => x.MasterName == "PnsScreening").ToListAsync();
                     int providerId = 1;
 

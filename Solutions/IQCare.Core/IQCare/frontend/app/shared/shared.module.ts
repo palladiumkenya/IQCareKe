@@ -20,7 +20,8 @@ import {
     MatButtonModule,
     MatAutocompleteModule,
     MatDatepickerModule,
-    MatNativeDateModule
+    MatNativeDateModule,
+    MatDialogModule
 } from '@angular/material';
 import { AppDateAdapter } from './dateadapter/momentDateAdapter';
 import { NotificationService } from './_services/notification.service';
@@ -33,6 +34,9 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { AdverseEventsAssessmentComponent } from './common-components/adverse-events-assessment/adverse-events-assessment.component';
 import { PatientChronicIllnessesComponent } from './common-components/patient-chronic-illnesses/patient-chronic-illnesses.component';
 import { AllergiesComponent } from './common-components/allergies/allergies.component';
+import { ChronicIllnessesTableComponent } from './common-components/chronic-illnesses-table/chronic-illnesses-table.component';
+import { AllergiesTableComponent } from './common-components/allergies-table/allergies-table.component';
+import { AdverseEventsTableComponent } from './common-components/adverse-events-table/adverse-events-table.component';
 
 @NgModule({
     imports: [
@@ -42,7 +46,7 @@ import { AllergiesComponent } from './common-components/allergies/allergies.comp
         MatTableModule, MatIconModule,
         MatPaginatorModule, ReactiveFormsModule,
         MatSelectModule, MatFormFieldModule,
-        MatInputModule, MatButtonModule
+        MatInputModule, MatButtonModule, MatDialogModule
     ],
     declarations: [
         LeftnavComponent,
@@ -53,15 +57,18 @@ import { AllergiesComponent } from './common-components/allergies/allergies.comp
         CustomFormComponent,
         AdverseEventsAssessmentComponent,
         PatientChronicIllnessesComponent,
-        AllergiesComponent
+        AllergiesComponent,
+        ChronicIllnessesTableComponent,
+        AllergiesTableComponent,
+        AdverseEventsTableComponent
     ],
     exports: [
         LeftnavComponent, AdverseEventsAssessmentComponent,
         ClientbriefComponent, AllergiesComponent,
         AlertComponent, PatientChronicIllnessesComponent,
-        PersonbriefComponent,
-        PatientEncounterComponent,
-        CustomFormComponent
+        PersonbriefComponent, ChronicIllnessesTableComponent,
+        PatientEncounterComponent, AllergiesTableComponent,
+        CustomFormComponent, AdverseEventsTableComponent
     ],
     providers: [
         ClientService,
@@ -73,6 +80,10 @@ import { AllergiesComponent } from './common-components/allergies/allergies.comp
         { provide: MAT_DATE_LOCALE, useValue: 'en-GB' },
         { provide: MAT_DATE_FORMATS, useValue: MAT_MOMENT_DATE_FORMATS },
         { provide: DateAdapter, useClass: AppDateAdapter },
+    ],
+    entryComponents: [
+        AllergiesComponent, PatientChronicIllnessesComponent,
+        AdverseEventsAssessmentComponent
     ]
 })
 export class SharedModule { }

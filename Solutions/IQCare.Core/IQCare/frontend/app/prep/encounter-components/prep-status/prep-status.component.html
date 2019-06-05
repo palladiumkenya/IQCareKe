@@ -14,6 +14,9 @@
                     <mat-label>Signs/Symptoms of acute HIV?</mat-label>
                     <mat-select id="signsOrSymptomsHIV" name="signsOrSymptomsHIV" formControlName="signsOrSymptomsHIV">
                         <mat-option [value]=""></mat-option>
+                        <mat-option *ngFor="let yesnoOption of yesnoOptions" [value]="yesnoOption.itemId">
+                            {{ yesnoOption.itemName }}
+                        </mat-option>
                     </mat-select>
                 </mat-form-field>
             </div>
@@ -24,6 +27,10 @@
                     <mat-select id="contraindications_PrEP_Present" name="contraindications_PrEP_Present"
                         formControlName="contraindications_PrEP_Present">
                         <mat-option [value]=""></mat-option>
+                        <mat-option *ngFor="let prepContraindicationsOption of prepContraindicationsOptions"
+                            [value]="prepContraindicationsOption.itemId">
+                            {{ prepContraindicationsOption.itemName }}
+                        </mat-option>
                     </mat-select>
                 </mat-form-field>
             </div>
@@ -36,6 +43,9 @@
                     <mat-select id="adherenceCounselling" name="adherenceCounselling"
                         formControlName="adherenceCounselling">
                         <mat-option [value]=""></mat-option>
+                        <mat-option *ngFor="let yesnoOption of yesnoOptions" [value]="yesnoOption.itemId">
+                            {{ yesnoOption.itemName }}
+                        </mat-option>
                     </mat-select>
                 </mat-form-field>
             </div>
@@ -47,6 +57,10 @@
                     <mat-label>PrEP status today:</mat-label>
                     <mat-select id="PrEPStatusToday" name="PrEPStatusToday" formControlName="PrEPStatusToday">
                         <mat-option [value]=""></mat-option>
+                        <mat-option *ngFor="let prepStatusOption of prepStatusOptions"
+                            [value]="prepStatusOption.itemId">
+                            {{ prepStatusOption.itemName }}
+                        </mat-option>
                     </mat-select>
                 </mat-form-field>
             </div>
@@ -69,6 +83,10 @@
                     <mat-label>Condoms Issued?:</mat-label>
                     <mat-select id="condomsIssued" name="condomsIssued" formControlName="condomsIssued">
                         <mat-option [value]=""></mat-option>
+                        <mat-option *ngFor="let yesnoOption of yesnoOptions" [value]="yesnoOption.itemId"
+                            (onSelectionChange)="onClientCircumcisedSelection($event)">
+                            {{ yesnoOption.itemName }}
+                        </mat-option>
                     </mat-select>
                 </mat-form-field>
             </div>

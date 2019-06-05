@@ -20,6 +20,13 @@ import { SharedModule } from '../shared/shared.module';
 import { PrepStatusComponent } from './encounter-components/prep-status/prep-status.component';
 import { YesNoResolver } from '../pmtct/_services/yesno.resolver';
 import { YesNoUnknownResolver } from './_services/YesNoUnknown.resolver';
+import { FamilyPlanningMethodResolver } from '../pmtct/_services/resolvers/family-planning-method.resolver';
+import { PlanningPregnancyResolver } from './_services/planningPregnancy.resolver';
+import { YesNoDontKnowResolver } from './_services/YesNoDont-Know.resolver';
+import { PregnancyOutcomeResolver } from './_services/PregnancyOutcome.resolver';
+import { PrepContraindicationsResolver } from './_services/prep-contraindications.resolver';
+import { PrepStatusResolver } from './_services/prep-status.resolver';
+
 import {
     AssessmentOutcomeResolver, ClientsBehaviourRiskResolver, SexualPartnetHivStatusProfileResolver,
     RiskReductionEducationResolver, ReferralPreventionServicesResolver, ClientWillingTakePrepResolver
@@ -47,7 +54,9 @@ import {PrepService} from './_services/prep.services';
     ],
     providers: [
         YesNoResolver, YesNoUnknownResolver,
-        STIScreeningTreatmentResolver, AssessmentOutcomeResolver, ClientsBehaviourRiskResolver, SexualPartnetHivStatusProfileResolver,
+        STIScreeningTreatmentResolver, FamilyPlanningMethodResolver,
+        PlanningPregnancyResolver, YesNoDontKnowResolver, PregnancyOutcomeResolver,
+        PrepContraindicationsResolver, PrepStatusResolver, STIScreeningTreatmentResolver, AssessmentOutcomeResolver, ClientsBehaviourRiskResolver, SexualPartnetHivStatusProfileResolver,
         RiskReductionEducationResolver, ReferralPreventionServicesResolver, ClientWillingTakePrepResolver
         , RiskEducationResolver, BehaviourRiskAssessmentResolver, EncounterTypeResolver, PrepService
     ]

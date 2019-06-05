@@ -55,7 +55,17 @@ namespace IQCare.HTS.BusinessProcess.CommandHandlers
                         string middleName = request.PARTNERS[i].PATIENT_IDENTIFICATION.PATIENT_NAME.MIDDLE_NAME;
                         string lastName = request.PARTNERS[i].PATIENT_IDENTIFICATION.PATIENT_NAME.LAST_NAME;
                         int sex = request.PARTNERS[i].PATIENT_IDENTIFICATION.SEX;
-                        DateTime dateOfBirth = DateTime.ParseExact(request.PARTNERS[i].PATIENT_IDENTIFICATION.DATE_OF_BIRTH, "yyyyMMdd", null);
+                        DateTime dateOfBirth = DateTime.Now;
+                        try
+                        {
+                            dateOfBirth = DateTime.ParseExact(request.PARTNERS[i].PATIENT_IDENTIFICATION.DATE_OF_BIRTH, "yyyyMMdd", null);
+                        }
+                        catch (Exception e)
+                        {
+                            Log.Error($"Could not parse partner demographics DATE_OF_BIRTH: {request.PARTNERS[i].PATIENT_IDENTIFICATION.DATE_OF_BIRTH} as a valid date: Incorrect format, date should be in the following format yyyyMMdd");
+                            throw new Exception($"Could not parse partner demographics DATE_OF_BIRTH: {request.PARTNERS[i].PATIENT_IDENTIFICATION.DATE_OF_BIRTH} as a valid date: Incorrect format, date should be in the following format yyyyMMdd");
+                        }
+                        
                         int providerId = request.PARTNERS[i].PATIENT_IDENTIFICATION.USER_ID;
                         int maritalStatusId = request.PARTNERS[i].PATIENT_IDENTIFICATION.MARITAL_STATUS;
                         string mobileNumber = request.PARTNERS[i].PATIENT_IDENTIFICATION.PHONE_NUMBER;
