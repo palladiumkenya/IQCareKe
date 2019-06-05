@@ -6,8 +6,9 @@ import { NgModule, Component } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { PortalComponent } from './portal/portal.component';
 import { HtsComponent } from './enrollment/service-areas/hts/hts.component';
-import {HTSEncounterResolver } from './services/htsencounter.resolver';
-import { PersonCurrentVitalsResolver} from './services/personvitals.resolver'
+import { HTSEncounterResolver } from './services/htsencounter.resolver';
+import { PersonCurrentVitalsResolver } from './services/personvitals.resolver';
+import { RiskEncounterResolver} from './services/riskencounter.resolver';
 
 const routes: Routes = [
     {
@@ -20,8 +21,9 @@ const routes: Routes = [
         component: PersonHomeComponent,
         resolve: {
             servicesArray: ServicesResolver,
-            HTSEncounterArray:HTSEncounterResolver,
-            PersonVitalsArray:PersonCurrentVitalsResolver
+            HTSEncounterArray: HTSEncounterResolver,
+            PersonVitalsArray: PersonCurrentVitalsResolver,
+            RiskAssessmentArray: RiskEncounterResolver
         }
     },
     {

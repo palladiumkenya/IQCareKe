@@ -5,6 +5,12 @@ import { PrepEncounterHistoryComponent } from './prep-encounter-history/prep-enc
 import { PrepEncounterComponent } from './prep-encounter/prep-encounter.component';
 import { STIScreeningTreatmentResolver } from './_services/STIScreeningTreatment.resolver';
 import { YesNoUnknownResolver } from './_services/YesNoUnknown.resolver';
+import {
+    AssessmentOutcomeResolver, ClientsBehaviourRiskResolver, SexualPartnetHivStatusProfileResolver,
+    RiskReductionEducationResolver, ReferralPreventionServicesResolver, ClientWillingTakePrepResolver
+    , RiskEducationResolver, BehaviourRiskAssessmentResolver, EncounterTypeResolver
+} from './_services/resolvers/prepriskassessment.resolver';
+import { PrepRiskassessmentComponent } from './prep-riskassessment/prep-riskassessment.component';
 
 const routes: Routes = [
     {
@@ -20,7 +26,44 @@ const routes: Routes = [
             stiScreeningTreatmentOptions: STIScreeningTreatmentResolver,
             yesNoUnknownOptions: YesNoUnknownResolver
         }
+    },
+    {  
+        
+        path: 'riskassessment',
+        children: [
+        {
+        path: ':patientId/:personId/:serviceId',
+        component: PrepRiskassessmentComponent,
+        resolve: {
+            assessmentOutComeArray: AssessmentOutcomeResolver,
+            clientsBehaviourRiskArray: ClientsBehaviourRiskResolver,
+            sexualPartnerHivStatusArray: SexualPartnetHivStatusProfileResolver,
+            clientWillingTakePrepArray: ClientWillingTakePrepResolver,
+            riskEducationArray: RiskEducationResolver,
+            behaviourRiskAssessmentArray: BehaviourRiskAssessmentResolver,
+            ReferralPreventionArray: ReferralPreventionServicesResolver,
+            RiskReductionEducationArray: RiskReductionEducationResolver,
+            EncounterTypeArray: EncounterTypeResolver
+            }
+        },
+        {
+            path: ':patientId/:personId/:serviceId/:patientMasterVisitId',
+            component: PrepRiskassessmentComponent,
+            resolve: {
+                assessmentOutComeArray: AssessmentOutcomeResolver,
+                clientsBehaviourRiskArray: ClientsBehaviourRiskResolver,
+                sexualPartnerHivStatusArray: SexualPartnetHivStatusProfileResolver,
+                clientWillingTakePrepArray: ClientWillingTakePrepResolver,
+                riskEducationArray: RiskEducationResolver,
+                behaviourRiskAssessmentArray: BehaviourRiskAssessmentResolver,
+                ReferralPreventionArray: ReferralPreventionServicesResolver,
+                RiskReductionEducationArray: RiskReductionEducationResolver,
+                EncounterTypeArray: EncounterTypeResolver
+            },
+        }
+        ]
     }
+     
 ];
 
 @NgModule({

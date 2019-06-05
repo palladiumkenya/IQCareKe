@@ -15,6 +15,7 @@ using MediatR;
 using AutoMapper;
 using IQCare.SharedKernel.Infrastructure.Helpers;
 using IQCare.Prep.Infrastructure.Installers;
+using System.Reflection;
 
 namespace IQCare.Prep.WebApi
 {
@@ -35,7 +36,17 @@ namespace IQCare.Prep.WebApi
             services.AddMvc();
             services.AddCors();
             services.AddPrepDbContext(IQCareConnectionString);
-         //   services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+            services.AddMediatR();
+            var assemblyNames = Assembly.GetEntryAssembly().GetReferencedAssemblies();
+            List<Assembly> assemblies = new List<Assembly>();
+            foreach (var assemblyName in assemblyNames)
+            {
+                assemblies.Add(Assembly.Load(assemblyName));
+            }
+
+            services.AddMediatR(assemblies);
+            services.AddAutoMapper(assemblies);
+            //   services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

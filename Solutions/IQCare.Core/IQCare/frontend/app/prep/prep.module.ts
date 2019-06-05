@@ -20,7 +20,13 @@ import { SharedModule } from '../shared/shared.module';
 import { PrepStatusComponent } from './encounter-components/prep-status/prep-status.component';
 import { YesNoResolver } from '../pmtct/_services/yesno.resolver';
 import { YesNoUnknownResolver } from './_services/YesNoUnknown.resolver';
-
+import {
+    AssessmentOutcomeResolver, ClientsBehaviourRiskResolver, SexualPartnetHivStatusProfileResolver,
+    RiskReductionEducationResolver, ReferralPreventionServicesResolver, ClientWillingTakePrepResolver
+    , RiskEducationResolver, BehaviourRiskAssessmentResolver,EncounterTypeResolver
+} from './_services/resolvers/prepriskassessment.resolver';
+import { PrepRiskassessmentComponent } from './prep-riskassessment/prep-riskassessment.component';
+import {PrepService} from './_services/prep.services';
 @NgModule({
     declarations: [
         PrepEncounterHistoryComponent,
@@ -29,7 +35,8 @@ import { YesNoUnknownResolver } from './_services/YesNoUnknown.resolver';
         CircumcisionStatusComponent,
         FertilityIntentionComponent,
         PregnancyOutcomeComponent,
-        PrepStatusComponent
+        PrepStatusComponent,
+        PrepRiskassessmentComponent
     ],
     imports: [
         SharedModule, MatDatepickerModule, MatNativeDateModule,
@@ -40,7 +47,9 @@ import { YesNoUnknownResolver } from './_services/YesNoUnknown.resolver';
     ],
     providers: [
         YesNoResolver, YesNoUnknownResolver,
-        STIScreeningTreatmentResolver
+        STIScreeningTreatmentResolver, AssessmentOutcomeResolver, ClientsBehaviourRiskResolver, SexualPartnetHivStatusProfileResolver,
+        RiskReductionEducationResolver, ReferralPreventionServicesResolver, ClientWillingTakePrepResolver
+        , RiskEducationResolver, BehaviourRiskAssessmentResolver, EncounterTypeResolver, PrepService
     ]
 })
 export class PrepModule { }

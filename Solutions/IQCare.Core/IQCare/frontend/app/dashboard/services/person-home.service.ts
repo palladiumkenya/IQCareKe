@@ -16,6 +16,7 @@ const httpOptions = {
 })
 export class PersonHomeService {
     private API_URL = environment.API_URL;
+    private API_PREPURL= environment.API_PREP_URL;
     private _url = '/api/PatientServices/GetPatientByPersonId';
     private _htsurl = '/api/HtsEncounter';
     public person: PersonView;
@@ -147,6 +148,16 @@ export class PersonHomeService {
         return this.http.get<any[]>(this.API_URL + '/api/Registration/Person/GetPersonPriorityDetails/' + personId).pipe(
             tap(getPersonPriorityTypes => this.errorHandler.log(`get person priority type for personId: ` + personId)),
             catchError(this.errorHandler.handleError<any>('getPersonPriorityTypes'))
+        );
+    }
+
+    CheckPrepencounterExists(personId: number): Observable<any[]>{
+        const Indata = {
+            'PersonId': personId
+        };
+        return this.http.post<any>(this.API_PREPURL + '/api/BehaviourRisk/Encounterexists', JSON.stringify(Indata), httpOptions)
+        .pipe (tap (CheckencounterExists => this.errorHandler.log('checked if RiskAssessmentEncounter Exists' )),
+          catchError(this.errorHandler.handleError<any[]>('CheckencounterExists'))
         );
     }
 }

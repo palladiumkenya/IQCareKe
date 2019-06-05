@@ -34,6 +34,7 @@ import { SearchService } from '../registration/_services/search.service';
 import { HtsComponent } from './enrollment/service-areas/hts/hts.component';
 import { CccComponent } from './enrollment/service-areas/ccc/ccc.component';
 import { PersonHomeService } from './services/person-home.service';
+import { RiskEncounterResolver} from './services/riskencounter.resolver';
 
 @NgModule({
     imports: [
@@ -79,7 +80,8 @@ import { PersonHomeService } from './services/person-home.service';
         SearchService,
         PersonHomeService,
         HTSEncounterResolver,
-        PersonCurrentVitalsResolver
+        PersonCurrentVitalsResolver,
+        RiskEncounterResolver
        
     ]
 })

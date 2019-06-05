@@ -191,6 +191,8 @@
     <None Remove="Scripts\2.0.1\11_IQCareFinalBuild.sql" />
     <None Remove="Scripts\2.0.1\12_IE_ADD_NHIF_Identifier.sql" />
     <None Remove="Scripts\2.0.1\PREP\1.Prep_ServiceArea.sql" />
+    <None Remove="Scripts\2.0.1\PREP\10.PrepRiskAssessmentView.sql" />
+    <None Remove="Scripts\2.0.1\PREP\11.PopulationTypes.sql" />
     <None Remove="Scripts\2.0.1\PREP\2.Prep Number.sql" />
     <None Remove="Scripts\2.0.1\PREP\3.PrepServiceAreaIdentifiers.sql" />
     <None Remove="Scripts\2.0.1\PREP\4.PersonVitalsView.sql" />
@@ -199,6 +201,7 @@
     <None Remove="Scripts\2.0.1\PREP\7.WillingnessAssessment.sql" />
     <None Remove="Scripts\2.0.1\PREP\8.Behaviour Risk Assessment.sql" />
     <None Remove="Scripts\2.0.1\13_LO_PrEP_Lookup.sql" />
+    <None Remove="Scripts\2.0.1\PREP\9.RiskAssessment.sql" />
   </ItemGroup>
 
   <ItemGroup>
@@ -409,6 +412,8 @@
     <EmbeddedResource Include="Scripts\2.0.1\12_IE_ADD_NHIF_Identifier.sql" />
     <EmbeddedResource Include="Scripts\2.0.1\13_LO_PrEP_Lookup.sql" />
     <EmbeddedResource Include="Scripts\2.0.1\PREP\1.Prep_ServiceArea.sql" />
+    <EmbeddedResource Include="Scripts\2.0.1\PREP\10.PrepRiskAssessmentView.sql" />
+    <EmbeddedResource Include="Scripts\2.0.1\PREP\11.PopulationTypes.sql" />
     <EmbeddedResource Include="Scripts\2.0.1\PREP\2.Prep Number.sql" />
     <EmbeddedResource Include="Scripts\2.0.1\PREP\3.PrepServiceAreaIdentifiers.sql" />
     <EmbeddedResource Include="Scripts\2.0.1\PREP\4.PersonVitalsView.sql" />
@@ -416,6 +421,7 @@
     <EmbeddedResource Include="Scripts\2.0.1\PREP\6.ClientAssessment.sql" />
     <EmbeddedResource Include="Scripts\2.0.1\PREP\7.WillingnessAssessment.sql" />
     <EmbeddedResource Include="Scripts\2.0.1\PREP\8.Behaviour Risk Assessment.sql" />
+    <EmbeddedResource Include="Scripts\2.0.1\PREP\9.RiskAssessment.sql" />
   </ItemGroup>
 
   <ItemGroup>
