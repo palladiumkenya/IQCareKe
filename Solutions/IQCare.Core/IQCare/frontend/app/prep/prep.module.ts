@@ -30,10 +30,10 @@ import { PrepStatusResolver } from './_services/prep-status.resolver';
 import {
     AssessmentOutcomeResolver, ClientsBehaviourRiskResolver, SexualPartnetHivStatusProfileResolver,
     RiskReductionEducationResolver, ReferralPreventionServicesResolver, ClientWillingTakePrepResolver
-    , RiskEducationResolver, BehaviourRiskAssessmentResolver,EncounterTypeResolver
+    , RiskEducationResolver, BehaviourRiskAssessmentResolver, EncounterTypeResolver
 } from './_services/resolvers/prepriskassessment.resolver';
 import { PrepRiskassessmentComponent } from './prep-riskassessment/prep-riskassessment.component';
-import {PrepService} from './_services/prep.services';
+import { PrepService } from './_services/prep.services';
 @NgModule({
     declarations: [
         PrepEncounterHistoryComponent,
@@ -56,7 +56,8 @@ import {PrepService} from './_services/prep.services';
         YesNoResolver, YesNoUnknownResolver,
         STIScreeningTreatmentResolver, FamilyPlanningMethodResolver,
         PlanningPregnancyResolver, YesNoDontKnowResolver, PregnancyOutcomeResolver,
-        PrepContraindicationsResolver, PrepStatusResolver, STIScreeningTreatmentResolver, AssessmentOutcomeResolver, ClientsBehaviourRiskResolver, SexualPartnetHivStatusProfileResolver,
+        PrepContraindicationsResolver, PrepStatusResolver
+        , AssessmentOutcomeResolver, ClientsBehaviourRiskResolver, SexualPartnetHivStatusProfileResolver,
         RiskReductionEducationResolver, ReferralPreventionServicesResolver, ClientWillingTakePrepResolver
         , RiskEducationResolver, BehaviourRiskAssessmentResolver, EncounterTypeResolver, PrepService
     ]
