@@ -6,10 +6,10 @@ import { SnotifyService } from 'ng-snotify';
 import { ActivatedRoute, Router } from '@angular/router';
 import { LookupItemView } from './../../shared/_models/LookupItemView';
 import { select } from '@ngrx/store';
-import { PrepService } from '../_services/prep.services';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { LoadedRouterConfig } from '@angular/router/src/config';
 import { registerLocaleData } from '@angular/common';
+import { PrepService } from '../_services/prep.service';
 
 @Component({
     selector: 'app-prep-riskassessment',
@@ -17,8 +17,6 @@ import { registerLocaleData } from '@angular/common';
     styleUrls: ['./prep-riskassessment.component.css']
 })
 export class PrepRiskassessmentComponent implements OnInit {
-
-
     public PrepRiskAssessmentFormGroup: FormGroup;
     assessmentOutComeOptions: LookupItemView[] = [];
     clientsBehaviourRiskOptions: LookupItemView[] = [];

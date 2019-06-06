@@ -34,7 +34,7 @@ import {
     , RiskEducationResolver, BehaviourRiskAssessmentResolver, EncounterTypeResolver
 } from './_services/resolvers/prepriskassessment.resolver';
 import { PrepRiskassessmentComponent } from './prep-riskassessment/prep-riskassessment.component';
-import { PrepService } from './_services/prep.services';
+
 @NgModule({
     declarations: [
         PrepEncounterHistoryComponent,
