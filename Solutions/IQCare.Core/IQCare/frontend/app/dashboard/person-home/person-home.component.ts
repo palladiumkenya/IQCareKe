@@ -8,7 +8,7 @@ import { PersonView } from '../../records/_models/personView';
 import { MatTableDataSource } from '@angular/material';
 import * as Consent from '../../shared/reducers/app.states';
 import { Store } from '@ngrx/store';
-import {EncounterDetails} from '../_model/HtsEncounterdetails';
+import { EncounterDetails } from '../_model/HtsEncounterdetails';
 
 @Component({
     selector: 'app-person-home',
@@ -20,15 +20,17 @@ export class PersonHomeComponent implements OnInit {
     [x: string]: any;
 
     public personId = 0;
-    public personVitalWeight=0;
+    public personVitalWeight = 0;
     public person: PersonView;
     public personView$: Subscription;
     public personAllergies$: Subscription;
     public personAllergies: any;
-    encounterDetail :EncounterDetails;
+    encounterDetail: EncounterDetails;
     htsencounters: any[];
+    riskassessmentencounter: any[];
+    riskencounters: any[];
     services: any[];
-    personvitals:any[];
+    personvitals: any[];
     chronic_illness_data: any[] = [];
     dataSource = new MatTableDataSource(this.chronic_illness_data);
     chronic_illness_displaycolumns = ['illness', 'onsetdate', 'treatment', 'dose'];
@@ -40,7 +42,7 @@ export class PersonHomeComponent implements OnInit {
         public zone: NgZone,
         private store: Store<AppState>) {
         this.person = new PersonView();
-        this.encounterDetail=new EncounterDetails();
+        this.encounterDetail = new EncounterDetails();
     }
 
     ngOnInit() {
@@ -49,29 +51,31 @@ export class PersonHomeComponent implements OnInit {
         });
 
         this.route.data.subscribe(res => {
-           
+
             const { servicesArray } = res;
-            const {HTSEncounterArray} = res;
-            const { PersonVitalsArray}=res;
+            const { HTSEncounterArray } = res;
+            const { PersonVitalsArray } = res;
+            const { RiskAssessmentArray } = res;
             console.log(HTSEncounterArray);
             this.services = servicesArray;
-            this.htsencounters=HTSEncounterArray;
-            this.personvitals=PersonVitalsArray;
-
+            this.htsencounters = HTSEncounterArray;
+            this.personvitals = PersonVitalsArray;
+            this.riskassessmentencounter = RiskAssessmentArray;
             if (this.personvitals.length > 0) {
                 this.personVitalWeight = this.personvitals['0'].weight;
                 console.log(this.personVitalWeight + 'Correct Weight');
             }
-            //console.log(this.encounterDetail);
 
+          
+            this.riskencounters = this.riskassessmentencounter['encounters']
         });
 
-        this.encounterDetail=this.htsencounters[0];
+        this.encounterDetail = this.htsencounters[0];
         console.log("HTSEncounters");
         console.log(this.htsencounters[0]);
         console.log(this.encounterDetail);
-        
-    
+
+
         localStorage.removeItem('patientEncounterId');
         localStorage.removeItem('patientMasterVisitId');
         localStorage.removeItem('selectedService');
@@ -79,10 +83,10 @@ export class PersonHomeComponent implements OnInit {
 
         // console.log('personId' + this.personId);
         this.getPatientDetailsById(this.personId);
-       
-    
+
+
     }
-    
+
 
 
     public getPatientDetailsById(personId: number) {

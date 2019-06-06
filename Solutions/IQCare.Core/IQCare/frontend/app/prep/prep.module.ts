@@ -28,6 +28,13 @@ import { PregnancyOutcomeResolver } from './_services/PregnancyOutcome.resolver'
 import { PrepContraindicationsResolver } from './_services/prep-contraindications.resolver';
 import { PrepStatusResolver } from './_services/prep-status.resolver';
 
+import {
+    AssessmentOutcomeResolver, ClientsBehaviourRiskResolver, SexualPartnetHivStatusProfileResolver,
+    RiskReductionEducationResolver, ReferralPreventionServicesResolver, ClientWillingTakePrepResolver
+    , RiskEducationResolver, BehaviourRiskAssessmentResolver, EncounterTypeResolver
+} from './_services/resolvers/prepriskassessment.resolver';
+import { PrepRiskassessmentComponent } from './prep-riskassessment/prep-riskassessment.component';
+import { PrepService } from './_services/prep.services';
 @NgModule({
     declarations: [
         PrepEncounterHistoryComponent,
@@ -36,7 +43,8 @@ import { PrepStatusResolver } from './_services/prep-status.resolver';
         CircumcisionStatusComponent,
         FertilityIntentionComponent,
         PregnancyOutcomeComponent,
-        PrepStatusComponent
+        PrepStatusComponent,
+        PrepRiskassessmentComponent
     ],
     imports: [
         SharedModule, MatDatepickerModule, MatNativeDateModule,
@@ -49,8 +57,10 @@ import { PrepStatusResolver } from './_services/prep-status.resolver';
         YesNoResolver, YesNoUnknownResolver,
         STIScreeningTreatmentResolver, FamilyPlanningMethodResolver,
         PlanningPregnancyResolver, YesNoDontKnowResolver, PregnancyOutcomeResolver,
-        PrepContraindicationsResolver, PrepStatusResolver, PrepService
-    ],
-
+        PrepContraindicationsResolver, PrepStatusResolver
+        , AssessmentOutcomeResolver, ClientsBehaviourRiskResolver, SexualPartnetHivStatusProfileResolver,
+        RiskReductionEducationResolver, ReferralPreventionServicesResolver, ClientWillingTakePrepResolver
+        , RiskEducationResolver, BehaviourRiskAssessmentResolver, EncounterTypeResolver, PrepService
+    ]
 })
 export class PrepModule { }

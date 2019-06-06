@@ -1,0 +1,194 @@
+<div class="col-lg-12 col-sm-12 col-xs-12">
+    <div class='widget'>
+        <div class="widget-header bordered-bottom bordered-blue">
+            <span class="widget-caption">Behaviour Risk Assessment Form</span>
+        </div>
+        <div class="widget-body">
+            <form [formGroup]="PrepRiskAssessmentFormGroup">
+                <div class="row">
+                    <mat-form-field class="col-lg-6">
+                        <input matInput [matDatepicker]="picker" [max]="maxDate" (focus)="picker.open()"
+                            formControlName="visitDate" required placeholder="Choose Visit Date">
+                        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                        <mat-datepicker #picker></mat-datepicker>
+                    </mat-form-field>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-title">
+                            <span class="primary">
+                                Risk assessment Questions
+                            </span>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-4 col-xs-12 col-sm-12">
+                            <mat-form-field class="col-lg-12">
+                                <mat-select class="col-lg-12 col-xs-12 col-sm-6"
+                                    placeholder="Sex partner(s) is HIV+ and(select all that apply)"
+                                    formControlName="sexualPartnerHivStatus" disableRipple multiple required>
+                                    <mat-option *ngFor="let sexualoption of sexualPartnerHivStatusOptions"
+                                        [value]="sexualoption.itemId"
+                                        (onSelectionChange)="OnSexualPartnerSelection($event)">
+                                        {{sexualoption.itemDisplayName}}</mat-option>
+                                </mat-select>
+                            </mat-form-field>
+
+                        </div>
+
+                        <div class="col-md-4 col-xs-12 col-sm-12">
+                            <mat-form-field class="col-lg-12">
+                                <mat-select placeholder="Client Assessment(select all that apply)"
+                                    formControlName="clientsBehaviourRisks" disableRipple multiple required>
+                                    <mat-option *ngFor="let clientassessmentoption of clientsBehaviourRiskOptions"
+                                        [value]="clientassessmentoption.itemId"
+                                        (onSelectionChange)="OnClientAssessmentSelection($event)">
+                                        {{clientassessmentoption.itemDisplayName}}</mat-option>
+                                </mat-select>
+                            </mat-form-field>
+
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-4 col-xs-12 col-sm-12">
+                            <mat-form-field class="col-lg-12">
+                                <mat-select placeholder="AssessmentOutcome" formControlName="assessmentOutCome"
+                                    required>
+                                    <mat-option [value]=""></mat-option>
+                                    <mat-option *ngFor="let yesNoOption of assessmentOutComeOptions"
+                                        [value]="yesNoOption.itemId">
+                                        {{yesNoOption.itemDisplayName}}
+                                    </mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4 col-xs-12 col-sm-12">
+
+                            <mat-form-field class="col-lg-12">
+
+                                <mat-select placeholder="Risk Reduction Education Offered"
+                                    formControlName="RiskReductionEducation" required
+                                    [(ngModel)]="selectedRiskReductionEducation"
+                                    (ngModelChange)="OnRiskReductionEducationOffered()">
+                                    <mat-option [value]=""></mat-option>
+                                    <mat-option *ngFor="let yesNoOption of  RiskReductionEducationOptions"
+                                        [value]="yesNoOption.itemId">
+                                        {{yesNoOption.itemDisplayName}}
+                                    </mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
+
+                        <div class="col-md-12">
+                            <mat-form-field class="col-md-12">
+                                <textarea formControlName="SpecifyRiskReductionEducation" matInput
+                                    placeholder="Specify"></textarea>
+                            </mat-form-field>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4 col-xs-12 col-sm-12">
+
+                            <mat-form-field class="col-lg-12">
+
+                                <mat-select placeholder="Referral For Other Prevention Services"
+                                    formControlName="ReferralPreventions"
+                                    [(ngModel)]="selectedReferralPreventionOptions"
+                                    (ngModelChange)="OnReferralPreventionOffered()" required>
+                                    <mat-option [value]=""></mat-option>
+                                    <mat-option *ngFor="let Option of   ReferralPreventionOptions"
+                                        [value]="Option.itemId">
+                                        {{Option.itemDisplayName}}
+                                    </mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
+
+                        <div class="col-md-12">
+                            <mat-form-field class="col-md-12">
+                                <textarea formControlName="SpecifyPreventionReferalServices" matInput
+                                    placeholder="Specify"></textarea>
+                            </mat-form-field>
+                        </div>
+                    </div>
+
+
+                </div>
+
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-title">
+                            <span class="primary">
+                                Willingness assessment
+                            </span>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-4 col-xs-12 col-sm-12">
+
+                            <mat-form-field class="col-lg-12">
+
+                                <mat-select placeholder="Client willing to take PrEP?"
+                                    formControlName="ClientWillingTakePrep"
+                                    [(ngModel)]="selectedClientWillingTakingPrep"
+                                    (ngModelChange)="OnClientWillingTakingPrep()" required>
+                                    <mat-option [value]=""></mat-option>
+                                    <mat-option *ngFor="let Option of   clientWillingTakePrepOptions"
+                                        [value]="Option.itemId">
+                                        {{Option.itemDisplayName}}
+                                    </mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
+                        <div class="col-md-4 col-xs-12 col-sm-12">
+
+                            <mat-form-field class="col-lg-12">
+
+                                <mat-select placeholder="If No,Risk education Offered?" formControlName="RiskEducation"
+                                    [(ngModel)]="selectedRiskEducationOption"
+                                    (ngModelChange)=" OnRiskEducationOffered()" >
+                                    <mat-option [value]=""></mat-option>
+                                    <mat-option *ngFor="let Option of    riskEducationOptions" [value]="Option.itemId">
+                                        {{Option.itemDisplayName}}
+                                    </mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
+
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <mat-form-field class="col-md-12">
+                                <textarea formControlName="SpecifyRiskEducation" matInput
+                                    placeholder="Specify"></textarea>
+                            </mat-form-field>
+                        </div>
+                        <div class="col-md-12">
+                            <mat-form-field class="col-md-12">
+                                <textarea formControlName="ClinicalNotes" matInput
+                                    placeholder="Clinical Notes"></textarea>
+                            </mat-form-field>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="col-md-4 col-xs-12 col-sm-12">
+                            <button mat-raised-button class="mat-primary" (click)="submit()">Save
+                            </button>
+                        </div>
+
+                        <div class="col-md-4 col-xs-12 col-sm-12">
+                            <button mat-raised-button class="mat-warn">Cancel</button>
+
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

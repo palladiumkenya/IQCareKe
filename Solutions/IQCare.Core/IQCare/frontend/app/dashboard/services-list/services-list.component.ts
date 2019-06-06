@@ -23,6 +23,7 @@ export class ServicesListComponent implements OnInit {
     @Input('person') person: any;
     @Input('encounterDetail') encounterDetail: EncounterDetails;
     @Input('personVitalWeight') weight: number;
+    @Input('riskencounters') riskencounter: any[];
     enrolledServices: any[];
     PatientCCCEnrolled: boolean = false;
     patientIdentifiers: any[];
@@ -38,7 +39,7 @@ export class ServicesListComponent implements OnInit {
     hasItems: boolean = false;
     public patientId: number;
     public Patient: PatientView = {};
-
+    RiskDone: boolean = true;
     constructor(
         private personhomeservice: PersonHomeService,
         public zone: NgZone,
@@ -60,7 +61,8 @@ export class ServicesListComponent implements OnInit {
 
         console.log(this.encounterDetail);
 
-
+       console.log('RiskEncounter');
+        console.log(this.riskencounter)
 
         if (this.EligibilityInformation.length > 0) {
             this.htseligibility = this.EligibilityInformation.join(' ,');
@@ -205,12 +207,18 @@ export class ServicesListComponent implements OnInit {
             }
         }
     }
+    navigateToRiskAssessment(serviceId) {
+        this.zone.run(() => {
+            this.router.navigate(['/prep/riskassessment/' + this.patientId + '/' + this.personId 
+            + '/' + serviceId], { relativeTo: this.route });
+        });
+    }
     navigateToTriage() {
         this.zone.run(() => {
-            this.router.navigate(['/clinical/triage/' + this.patientId + '/' + this.personId], { relativeTo: this.route});
+            this.router.navigate(['/clinical/triage/' + this.patientId + '/' + this.personId], { relativeTo: this.route });
         });
-    }  
-     isPersonServiceEnrolled(service: any): boolean {
+    }
+    isPersonServiceEnrolled(service: any): boolean {
         if (this.enrolledServices && this.enrolledServices.length > 0) {
             let returnValue = false;
             for (let i = 0; i < this.enrolledServices.length; i++) {
@@ -332,6 +340,16 @@ export class ServicesListComponent implements OnInit {
 
 
                                 }
+                                else {
+                                    isEligible = true;
+                                    if (isEligible == true) {
+                                        if (this.riskencounter.length <= 0) {
+                                            isEligible = false;
+                                            this.RiskDone = false;
+                                        }
+                                    }
+
+                                }
 
                             }
 
@@ -430,6 +448,20 @@ export class ServicesListComponent implements OnInit {
         let visibility = false;
         if (code == 'PREP') {
             if (vital == false) {
+                visibility = true;
+            } else {
+                visibility = false;
+            }
+
+        } else {
+            visibility = false;
+        }
+        return visibility;
+    }
+    validationRiskAssessment(code: string , riskassessment: Boolean): Boolean {
+        let visibility = false;
+        if (code == 'PREP') {
+            if (riskassessment == false) {
                 visibility = true;
             } else {
                 visibility = false;

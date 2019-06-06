@@ -17,6 +17,7 @@ using IQCare.Prep.BusinessProcess.Commands;
 using IQCare.Prep.BusinessProcess.MapperProfiles;
 using IQCare.SharedKernel.Infrastructure.Helpers;
 using IQCare.Prep.Infrastructure.Installers;
+using System.Reflection;
 
 namespace IQCare.Prep.WebApi
 {

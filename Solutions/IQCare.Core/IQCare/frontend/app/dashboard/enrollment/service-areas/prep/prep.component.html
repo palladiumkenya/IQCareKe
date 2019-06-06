@@ -1,0 +1,91 @@
+<div class="row">
+    <div class="col-lg-12 col-sm-12 col-xs-12">
+        <app-personbrief>
+        </app-personbrief>
+    </div>
+</div>
+<div class="col-lg-12 col-sm-12 col-xs-12">
+    <div class="widget">
+        <div class="widget-header bordered-bottom bordered-blue">
+            <span class="widget-caption">PREP Enrollment</span>
+        </div>
+        <div class="widget-body">
+            <form [formGroup]="form">
+                <fieldset>
+                    <div class="row">
+                        <div class="col-lg-12 col-sm-12 col-xs-12">
+                        <div class="col-lg-3 col-sm-3 col-xs-12">
+                        <mat-form-field class="col-lg-12 col-sm-12 col-xs-12">
+                                <mat-label>IS Client Transfer In</mat-label>
+                                <mat-select formControlName="ClientTransferIn" required>
+                                    <mat-option [value]=""></mat-option>
+                                    <mat-option *ngFor="let clientType of  ClientTypes"
+                                        [value]="clientType.itemId">
+                                        {{clientType.itemDisplayName}}</mat-option>
+                                </mat-select>
+                           </mat-form-field>
+                        </div>
+                        <div class="col-lg-3 col-sm-3 col-xs-12">
+                                <mat-form-field class="col-lg-12 col-sm-12 col-xs-12">
+                                    <mat-label>Referred From</mat-label>
+                                    <mat-select formControlName="Referredfrom" required>
+                                        <mat-option [value]=""></mat-option>
+                                        <mat-option *ngFor="let entrypoint of entrypoints"
+                                            [value]="entrypoint.itemId">
+                                            {{entrypoint.itemName}}</mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                         </div>
+
+                        </div>
+                    </div>
+                    <div class="row">
+                            <div class="col-lg-12 col-sm-12 col-xs-12">
+                                    <div class="col-lg-3 col-sm-3 col-xs-12">
+                                        <mat-form-field class="col-lg-12 col-sm-12 col-xs-12">
+                                            <input placeholder="Enrollment Date" matInput [matDatepicker]="myDatepicker"
+                                                [max]="maxDate" [min]="minDate" (focus)="myDatepicker.open()"
+                                                formControlName="EnrollmentDate" required>
+                                            <mat-datepicker-toggle matSuffix [for]="myDatepicker"></mat-datepicker-toggle>
+                                            <mat-datepicker #myDatepicker name="EnrollmentDate" ngDefaultControl>
+                                            </mat-datepicker>
+                                        </mat-form-field>
+                                    </div>
+                             </div>
+                    </div>
+                    <div class="row">
+                            <div class="col-lg-12 col-sm-12 col-xs-12">
+                             
+                            <div class="col-lg-3 col-sm-3 col-xs-12">
+                                <mat-form-field>
+                                     <mat-label>MFLCode</mat-label> 
+                                     <input matInput id="MFLCode" formControlName="MFLCode" name="MFLCode" type="number" required>
+                                 </mat-form-field>    
+                                </div> 
+                            <div class="col-lg-3 col-sm-3 col-xs-12">
+                                    <mat-form-field class="col-lg-12 col-sm-12 col-xs-12">
+                                           
+                                                    <input matInput [matDatepicker]="dp" placeholder="Year" [formControlName]="Year">
+                                                    <mat-datepicker-toggle matSuffix [for]="dp"></mat-datepicker-toggle>
+                                                    <mat-datepicker #dp
+                                                                    startView="year"
+                                                                  
+                                                                 panelClass="example-month-picker">
+                                                    </mat-datepicker>
+                                        </mat-form-field>
+                            </div>
+                            <div class="col-lg-3 col-sm-3 col-xs-12"> 
+                                 <mat-form-field>
+                                        <mat-label>Prep Number</mat-label>
+                                        <input matInput id="PREP_EnrollmentNumber" formControlName="EnrollmentNumber"
+                                            name="PREP_EnrollmentNumber" type="number" required>
+                                 </mat-form-field>
+                                </div>
+                            </div>
+                    </div>
+                    
+                </fieldset>
+            </form>
+        </div>
+    </div>
+</div>

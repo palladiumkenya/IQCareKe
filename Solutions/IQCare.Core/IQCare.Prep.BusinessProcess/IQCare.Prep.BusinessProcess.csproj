@@ -11,6 +11,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="MapperProfiles\" />
     <Folder Include="QueryHandlers\" />
     <Folder Include="Queries\" />
   </ItemGroup>

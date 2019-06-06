@@ -134,8 +134,8 @@
                                                 </div>
                                             </ng-template>
                                             <ng-template #triagetemplate>
-                                                <div *ngIf="validationTriage(service.code,this.Vitaldone)">
-                                                    <a class="btn btn-sm btn-primary" (click)=" navigateToTriage()">
+                                                <div *ngIf="validationTriage(service.code,this.Vitaldone);else riskassessmenttemplate">
+                                                    <a class="btn btn-sm btn-primary" (click)="navigateToTriage()">
                                                         Triage 
                                                     </a>
                                                     <span>
@@ -145,7 +145,17 @@
                                                 </div>
                                             </ng-template>
 
-
+                                            <ng-template #riskassessmenttemplate>
+                                                <div *ngIf="validationRiskAssessment(service.code,this.RiskDone)">
+                                                    <a class="btn btn-sm btn-primary" (click)="  navigateToRiskAssessment(service.id)">
+                                                  RiskAssessment
+                                                    </a>
+                                                    <span>
+                                                        &nbsp;
+                                                    </span>
+                                                    <span class="label label-orange">RiskAssessment not done</span>
+                                                </div>
+                                            </ng-template>
 
                                             <br />
 
