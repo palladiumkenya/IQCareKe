@@ -84,7 +84,7 @@
                     <mat-select id="condomsIssued" name="condomsIssued" formControlName="condomsIssued">
                         <mat-option [value]=""></mat-option>
                         <mat-option *ngFor="let yesnoOption of yesnoOptions" [value]="yesnoOption.itemId"
-                            (onSelectionChange)="onClientCircumcisedSelection($event)">
+                            (onSelectionChange)="onCondomsIssuedSelection($event)">
                             {{ yesnoOption.itemName }}
                         </mat-option>
                     </mat-select>

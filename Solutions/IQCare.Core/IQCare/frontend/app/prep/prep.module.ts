@@ -1,3 +1,4 @@
+import { PrepService } from './_services/prep.service';
 import { STIScreeningTreatmentResolver } from './_services/STIScreeningTreatment.resolver';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -48,7 +49,7 @@ import { PrepStatusResolver } from './_services/prep-status.resolver';
         YesNoResolver, YesNoUnknownResolver,
         STIScreeningTreatmentResolver, FamilyPlanningMethodResolver,
         PlanningPregnancyResolver, YesNoDontKnowResolver, PregnancyOutcomeResolver,
-        PrepContraindicationsResolver, PrepStatusResolver
+        PrepContraindicationsResolver, PrepStatusResolver, PrepService
     ],
 
 })

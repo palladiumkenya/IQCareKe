@@ -1,7 +1,10 @@
+import { PrepService } from './../_services/prep.service';
 import { LookupItemView } from './../../shared/_models/LookupItemView';
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormGroup } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
+import { forkJoin } from 'rxjs';
+import { PrepStatusCommand } from '../_models/commands/PrepStatusCommand';
 
 @Component({
     selector: 'app-prep-encounter',
@@ -9,6 +12,10 @@ import { ActivatedRoute } from '@angular/router';
     styleUrls: ['./prep-encounter.component.css']
 })
 export class PrepEncounterComponent implements OnInit {
+    patientId: number;
+    personId: number;
+    userId: number;
+
     isLinear: boolean = true;
 
     // Form Groups
@@ -35,7 +42,8 @@ export class PrepEncounterComponent implements OnInit {
     PregnancyOutcomeOptions: any[] = [];
     PrepStatusOptions: any[] = [];
 
-    constructor(private route: ActivatedRoute) {
+    constructor(private route: ActivatedRoute,
+        private prepService: PrepService) {
         this.STIScreeningFormGroup = new FormArray([]);
         this.CircumcisionStatusFormGroup = new FormArray([]);
         this.FertilityIntentionsFormGroup = new FormArray([]);
@@ -45,6 +53,16 @@ export class PrepEncounterComponent implements OnInit {
     }
 
     ngOnInit() {
+        // Get PatientId and PersonId from query params
+        this.route.params.subscribe(
+            params => {
+                this.patientId = params.patientId;
+                this.personId = params.personId;
+            }
+        );
+        this.userId = JSON.parse(localStorage.getItem('appUserId'));
+
+        // Get data from route resolvers
         this.route.data.subscribe(
             (res) => {
                 const { yesNoOptions, stiScreeningTreatmentOptions, yesNoUnknownOptions,
@@ -123,5 +141,30 @@ export class PrepEncounterComponent implements OnInit {
 
     onPrepStatusNotify(formGroup: FormGroup): void {
         this.PrepStatusFormGroup.push(formGroup);
+    }
+
+    onSubmitForm() {
+        const prepStatusCommand: PrepStatusCommand = {
+            Id: 0,
+            PatientId: this.patientId,
+            PatientEncounterId: 0,
+            SignsOrSymptomsHIV: this.PrepStatusFormGroup.value[0]['signsOrSymptomsHIV'],
+            AdherenceCounsellingDone: this.PrepStatusFormGroup.value[0]['adherenceCounselling'],
+            ContraindicationsPrepPresent: this.PrepStatusFormGroup.value[0]['contraindications_PrEP_Present'],
+            PrepStatusToday: this.PrepStatusFormGroup.value[0]['PrEPStatusToday'],
+            CreatedBy: this.userId,
+        };
+
+        const prepStiScreeningTreatmentCommand = this.prepService.StiScreeningTreatment();
+        const prepStatusApiCommand = this.prepService.savePrepStatus(prepStatusCommand);
+
+        forkJoin([prepStatusApiCommand]).subscribe(
+            (result) => {
+                console.log(result);
+            },
+            (error) => {
+                console.log(error);
+            }
+        );
     }
 }
