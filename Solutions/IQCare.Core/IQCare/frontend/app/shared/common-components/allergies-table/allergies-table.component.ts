@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 import { MatTableDataSource, MatDialogConfig, MatDialog } from '@angular/material';
 import { AllergiesComponent } from '../allergies/allergies.component';
 import { SnotifyService } from 'ng-snotify';
@@ -11,15 +11,20 @@ import { NotificationService } from '../../_services/notification.service';
 })
 export class AllergiesTableComponent implements OnInit {
     public allergy_table_data: AllergyTableData[] = [];
+    public newAllergyData: AllergyTableData[] = [];
 
     displayedColumns = ['allergy', 'reactionType', 'severity', 'onsetDate', 'active', 'action'];
     dataSource = new MatTableDataSource(this.allergy_table_data);
+
+    @Output() notify: EventEmitter<AllergyTableData[]> = new EventEmitter<AllergyTableData[]>();
 
     constructor(private dialog: MatDialog,
         private snotifyService: SnotifyService,
         private notificationService: NotificationService) { }
 
     ngOnInit() {
+        // emit new allergies to stepper 
+        this.notify.emit(this.newAllergyData);
     }
 
     newAllergies() {
@@ -48,6 +53,13 @@ export class AllergiesTableComponent implements OnInit {
                         allergy: substanceAllergy,
                         reactionType: data.allergyReaction.itemName,
                         severity: data.severity.itemName,
+                        onsetDate: data.onSetDate
+                    });
+
+                    this.newAllergyData.push({
+                        allergy: data.substanceAllergy,
+                        reactionType: data.allergyReaction,
+                        severity: data.severity,
                         onsetDate: data.onSetDate
                     });
 

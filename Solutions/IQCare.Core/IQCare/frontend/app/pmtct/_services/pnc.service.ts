@@ -268,6 +268,10 @@ export class PncService {
     }
 
     public savePncFamilyPlanningMethod(familyPlanningMethodCommand: FamilyPlanningMethodCommand): Observable<any> {
+        if (!familyPlanningMethodCommand.FPMethodId || familyPlanningMethodCommand.FPMethodId == null) {
+            return of([]);
+        }
+        
         return this.http.post<any>(this.API_PMTCT_URL + '/api/FamilyPlanningMethods/AddFamilyPlanning',
             JSON.stringify(familyPlanningMethodCommand),
             httpOptions).pipe(

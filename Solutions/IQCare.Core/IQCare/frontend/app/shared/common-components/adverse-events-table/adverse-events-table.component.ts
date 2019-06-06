@@ -1,6 +1,6 @@
 import { LookupItemView } from './../../_models/LookupItemView';
 import { AdverseEventsAssessmentComponent } from './../adverse-events-assessment/adverse-events-assessment.component';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 import { MatTableDataSource, MatDialog, MatDialogConfig } from '@angular/material';
 import { NotificationService } from '../../_services/notification.service';
 import { SnotifyService } from 'ng-snotify';
@@ -12,15 +12,20 @@ import { SnotifyService } from 'ng-snotify';
 })
 export class AdverseEventsTableComponent implements OnInit {
     public adverse_events_table_data: AdverseEventsTableData[] = [];
+    public newAdverseEventsData: AdverseEventsTableData[] = [];
 
     displayedColumns = ['adverseEvent', 'severity', 'medicine_causing', 'adverseEventsAction', 'outcome', 'action'];
     dataSource = new MatTableDataSource(this.adverse_events_table_data);
+
+    @Output() notify: EventEmitter<AdverseEventsTableData[]> = new EventEmitter<AdverseEventsTableData[]>();
 
     constructor(private dialog: MatDialog,
         private snotifyService: SnotifyService,
         private notificationService: NotificationService) { }
 
     ngOnInit() {
+        // emit new adverse events to stepper 
+        this.notify.emit(this.newAdverseEventsData);
     }
 
     newAdverseEvents() {
@@ -46,6 +51,13 @@ export class AdverseEventsTableComponent implements OnInit {
                         'Adverse Events', this.notificationService.getConfig());
                 } else {
                     this.adverse_events_table_data.push({
+                        adverseEvent: data.adverseEvent,
+                        severity: data.severity,
+                        medicine_causing: data.medicine_causing,
+                        adverseEventsAction: data.adverseEventsAction
+                    });
+
+                    this.newAdverseEventsData.push({
                         adverseEvent: data.adverseEvent,
                         severity: data.severity,
                         medicine_causing: data.medicine_causing,
