@@ -7,6 +7,8 @@ using IQCare.Library;
 using MediatR;
 using Serilog;
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -27,18 +29,24 @@ namespace IQCare.Common.BusinessProcess.CommandHandlers.Allergies
         {
             try
             {
-                var allergies = _mapper.Map<PatientAllergy>(request);
-                await _commontUnitOfWork.Repository<PatientAllergy>().AddAsync(allergies);
-                await _commontUnitOfWork.SaveAsync();
+                if (request.PatientAllergies.Any())
+                {
+
+                    List<PatientAllergy> patientAllergies =
+                        _mapper.Map<List<PatientAllergy>>(request.PatientAllergies);
+
+                    await _commontUnitOfWork.Repository<PatientAllergy>().AddRangeAsync(patientAllergies);
+                    await _commontUnitOfWork.SaveAsync();
+                }
 
                 return Result<AddPatientAllergiesResponse>.Valid(new AddPatientAllergiesResponse
                 {
-                    PatientId = allergies.PatientId
+                    Message = "Successfully added patient allergies"
                 });
             }
             catch (Exception ex)
             {
-                Log.Error(ex, $"An error occured while adding patient Allergy information for patientId {request.PatientId}");
+                Log.Error(ex, $"An error occured while adding patient Allergy information");
                 return Result<AddPatientAllergiesResponse>.Invalid(ex.Message);
             }
         }

@@ -2,9 +2,11 @@ import { Injectable } from '@angular/core';
 import { HttpHeaders, HttpClient } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
 import { ErrorHandlerService } from '../../shared/_services/errorhandler.service';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { tap, catchError } from 'rxjs/operators';
 import { PrepStatusCommand } from '../_models/commands/PrepStatusCommand';
+import { AllergiesCommand } from '../_models/commands/AllergiesCommand';
+import { ClientCircumcisionStatusCommand } from '../_models/commands/ClientCircumcisionStatusCommand';
 
 const httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -81,5 +83,43 @@ export class PrepService {
                 catchError(this.errorHandler.handleError<any[]>('GetAssessmentDetails'))
             );
 
+    }
+
+    public savePatientAdverseEvents(adverseEventsCommand: any[]): Observable<any> {
+        if (adverseEventsCommand.length == 0) {
+            return of([]);
+        }
+
+        const Indata = {
+            'AdverseEvents': adverseEventsCommand
+        };
+
+        return this.http.post<any>(this.API_URL + '/api/AdverseEvents/AddAdverseEvents', JSON.stringify(Indata), httpOptions).pipe(
+            tap(savePatientAdverseEvents => this.errorHandler.log('Successfully saved adverse events')),
+            catchError(this.errorHandler.handleError<any>('Error in saving Patient Adverse Events'))
+        );
+    }
+
+    public savePatientAllergies(allergiesCommand: AllergiesCommand[]): Observable<any> {
+        if (allergiesCommand.length == 0) {
+            return of([]);
+        }
+
+        const Indata = {
+            'PatientAllergies': allergiesCommand
+        };
+
+        return this.http.post<any>(this.API_URL + '/api/PatientAllergy/AddAllergy', JSON.stringify(Indata), httpOptions).pipe(
+            tap(savePatientAllergies => this.errorHandler.log('Successfully saved patient allergies')),
+            catchError(this.errorHandler.handleError<any>('Error in saving Patient Allergies'))
+        );
+    }
+
+    public saveCircumcisionStatus(clientCircumcisionStatusCommand: ClientCircumcisionStatusCommand): Observable<any> {
+        return this.http.post<any>(this.PREP_API_URL + '/api/CircumcisionStatus/AddCircumcisionStatus',
+            JSON.stringify(clientCircumcisionStatusCommand), httpOptions).pipe(
+                tap(saveCircumcisionStatus => this.errorHandler.log('Successfully saved patient circumcision status')),
+                catchError(this.errorHandler.handleError<any>('Error in saving Patient circumcision status'))
+            );
     }
 }
