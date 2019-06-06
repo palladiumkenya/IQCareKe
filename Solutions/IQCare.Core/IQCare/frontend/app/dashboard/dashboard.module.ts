@@ -35,6 +35,7 @@ import { HtsComponent } from './enrollment/service-areas/hts/hts.component';
 import { CccComponent } from './enrollment/service-areas/ccc/ccc.component';
 import { PersonHomeService } from './services/person-home.service';
 import { RiskEncounterResolver} from './services/riskencounter.resolver';
+import { PrepComponent } from './enrollment/service-areas/prep/prep.component';
 
 @NgModule({
     imports: [
@@ -70,7 +71,8 @@ import { RiskEncounterResolver} from './services/riskencounter.resolver';
         PatientAllergiesComponent,
         PatientAppointmentComponent,
         HtsComponent,
-        CccComponent
+        CccComponent,
+        PrepComponent
     ],
     providers: [
         NotificationService,

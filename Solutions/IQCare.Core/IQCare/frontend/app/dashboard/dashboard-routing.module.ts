@@ -9,6 +9,7 @@ import { HtsComponent } from './enrollment/service-areas/hts/hts.component';
 import { HTSEncounterResolver } from './services/htsencounter.resolver';
 import { PersonCurrentVitalsResolver } from './services/personvitals.resolver';
 import { RiskEncounterResolver} from './services/riskencounter.resolver';
+import { PrepComponent } from './enrollment/service-areas/prep/prep.component';
 
 const routes: Routes = [
     {
@@ -57,6 +58,19 @@ const routes: Routes = [
                     {
                         path: 'update/:id/:serviceId/:serviceCode/:edit',
                         component: CccComponent
+                    }
+                ]
+            },
+            {
+                path: 'prep',
+                children: [
+                    {
+                        path: ':id/:serviceId/:serviceCode',
+                        component: PrepComponent
+                    },
+                    {
+                        path: 'update/:id/:serviceId/:serviceCode/:edit',
+                        component: PrepComponent
                     }
                 ]
             }
