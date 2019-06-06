@@ -6,6 +6,5 @@ export const environment = {
     API_LAB_URL: location.protocol + '//' + window.location.hostname + ':' + window.location.port + '/IQCareLab',
     API_PMTCT_URL: location.protocol + '//' + window.location.hostname + ':' + window.location.port + '/IQCarePMTCT',
     API_AIR_URL: location.protocol + '//' + window.location.hostname + ':' + window.location.port + '/IQCareAIR',
-    API_PREP_URL: location.protocol + '//' + window.location.hostname + ':' + window.location.port + '/IQCarePrep'
-
+    API_PREP_URL: location.protocol + '//' + window.location.hostname + ':' + window.location.port + '/IQCarePREP',
 };

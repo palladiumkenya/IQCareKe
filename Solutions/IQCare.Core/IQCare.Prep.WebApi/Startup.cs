@@ -13,6 +13,8 @@ using Microsoft.Extensions.Options;
 using static IQCare.SharedKernel.Infrastructure.Helpers.ConnectionStringBuilder;
 using MediatR;
 using AutoMapper;
+using IQCare.Prep.BusinessProcess.Commands;
+using IQCare.Prep.BusinessProcess.MapperProfiles;
 using IQCare.SharedKernel.Infrastructure.Helpers;
 using IQCare.Prep.Infrastructure.Installers;
 using System.Reflection;
@@ -36,16 +38,8 @@ namespace IQCare.Prep.WebApi
             services.AddMvc();
             services.AddCors();
             services.AddPrepDbContext(IQCareConnectionString);
-            services.AddMediatR();
-            var assemblyNames = Assembly.GetEntryAssembly().GetReferencedAssemblies();
-            List<Assembly> assemblies = new List<Assembly>();
-            foreach (var assemblyName in assemblyNames)
-            {
-                assemblies.Add(Assembly.Load(assemblyName));
-            }
-
-            services.AddMediatR(assemblies);
-            services.AddAutoMapper(assemblies);
+            services.AddMediatR(typeof(AddPrepStatusCommand).Assembly);
+            services.AddAutoMapper(typeof(PrepStatusMapperProfile).Assembly);
             //   services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
         }
 

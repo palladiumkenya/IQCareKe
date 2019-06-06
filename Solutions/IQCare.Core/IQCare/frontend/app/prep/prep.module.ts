@@ -1,3 +1,4 @@
+import { PrepService } from './_services/prep.service';
 import { STIScreeningTreatmentResolver } from './_services/STIScreeningTreatment.resolver';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';

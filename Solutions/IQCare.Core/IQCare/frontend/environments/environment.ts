@@ -10,4 +10,4 @@ export const environment = {
     API_PMTCT_URL: location.protocol + '//localhost:56486',
     API_AIR_URL: location.protocol + '//localhost:44398',
     API_PREP_URL: location.protocol + '//localhost:50501'
-}
+};

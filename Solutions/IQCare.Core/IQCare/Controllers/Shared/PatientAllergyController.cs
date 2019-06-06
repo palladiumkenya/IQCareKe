@@ -19,6 +19,7 @@ namespace IQCare.Controllers.Shared
         {
             _mediator = mediator ?? throw new ArgumentNullException(nameof(mediator));
         }
+
         [HttpPost("AddAllergy")]
         public async Task<IActionResult> AddAllergy([FromBody] AddAllergiesCommand addAllergyCommand)
         {
@@ -30,6 +31,7 @@ namespace IQCare.Controllers.Shared
             }
             return BadRequest(response);
         }
+
         [HttpGet("GetPatientAllergy")]
         public async Task<IActionResult> GetPatientAllergy(int patientId)
         {
