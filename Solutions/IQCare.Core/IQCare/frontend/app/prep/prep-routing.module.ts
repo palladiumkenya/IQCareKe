@@ -19,7 +19,7 @@ const routes: Routes = [
         pathMatch: 'full'
     },
     {
-        path: 'encounter',
+        path: 'encounter/:patientId/:personId',
         component: PrepEncounterComponent,
         resolve: {
             yesNoOptions: YesNoResolver,

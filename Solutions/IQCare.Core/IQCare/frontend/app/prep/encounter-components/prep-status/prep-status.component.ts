@@ -28,6 +28,9 @@ export class PrepStatusComponent implements OnInit {
             noCondomsIssued: new FormControl('', [Validators.required]),
         });
 
+        // Set initial form state
+        this.PrepStatusForm.controls.noCondomsIssued.disable({ onlySelf: true });
+
         // emit form to the stepper 
         this.notify.emit(this.PrepStatusForm);
 
@@ -35,6 +38,16 @@ export class PrepStatusComponent implements OnInit {
         this.yesnoOptions = yesnoOptions;
         this.prepStatusOptions = prepStatusOptions;
         this.prepContraindicationsOptions = prepContraindicationsOptions;
+    }
+
+    onCondomsIssuedSelection(event) {
+        // disable referral to VMMC when client is already circumcised
+        if (event.isUserInput && event.source.selected && event.source.viewValue == 'Yes') {
+            this.PrepStatusForm.controls.noCondomsIssued.enable({ onlySelf: true });
+        } else if (event.isUserInput && event.source.selected && event.source.viewValue == 'No') {
+            this.PrepStatusForm.controls.noCondomsIssued.disable({ onlySelf: true });
+            this.PrepStatusForm.controls.noCondomsIssued.setValue('');
+        }
     }
 
 }

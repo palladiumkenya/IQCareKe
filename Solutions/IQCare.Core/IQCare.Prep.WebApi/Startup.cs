@@ -13,6 +13,8 @@ using Microsoft.Extensions.Options;
 using static IQCare.SharedKernel.Infrastructure.Helpers.ConnectionStringBuilder;
 using MediatR;
 using AutoMapper;
+using IQCare.Prep.BusinessProcess.Commands;
+using IQCare.Prep.BusinessProcess.MapperProfiles;
 using IQCare.SharedKernel.Infrastructure.Helpers;
 using IQCare.Prep.Infrastructure.Installers;
 
@@ -35,7 +37,9 @@ namespace IQCare.Prep.WebApi
             services.AddMvc();
             services.AddCors();
             services.AddPrepDbContext(IQCareConnectionString);
-         //   services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+            services.AddMediatR(typeof(AddPrepStatusCommand).Assembly);
+            services.AddAutoMapper(typeof(PrepStatusMapperProfile).Assembly);
+            //   services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

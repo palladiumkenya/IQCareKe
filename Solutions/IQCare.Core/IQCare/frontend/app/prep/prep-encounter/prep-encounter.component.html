@@ -148,8 +148,10 @@
                                             <button mat-raised-button color="primary" matStepperPrevious
                                                 type="button">Previous</button>
                                             &nbsp;&nbsp;
-                                            <button mat-raised-button color="accent" matStepperNext
-                                                type="button">Next</button>
+                                            <button mat-raised-button color="accent" type="submit"
+                                                (click)="onSubmitForm()">
+                                                Complete PrEP Encounter
+                                            </button>
                                         </div>
                                     </mat-step>
                                 </mat-horizontal-stepper>

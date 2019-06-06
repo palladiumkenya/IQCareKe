@@ -190,6 +190,7 @@
     <None Remove="Scripts\2.0.1\10_PersonView.sql" />
     <None Remove="Scripts\2.0.1\11_IQCareFinalBuild.sql" />
     <None Remove="Scripts\2.0.1\12_IE_ADD_NHIF_Identifier.sql" />
+    <None Remove="Scripts\2.0.1\14_PR_PatientPrEPStatus.sql" />
     <None Remove="Scripts\2.0.1\PREP\1.Prep_ServiceArea.sql" />
     <None Remove="Scripts\2.0.1\PREP\2.Prep Number.sql" />
     <None Remove="Scripts\2.0.1\PREP\3.PrepServiceAreaIdentifiers.sql" />
@@ -408,6 +409,7 @@
     <EmbeddedResource Include="Scripts\2.0.1\10_PersonView.sql" />
     <EmbeddedResource Include="Scripts\2.0.1\12_IE_ADD_NHIF_Identifier.sql" />
     <EmbeddedResource Include="Scripts\2.0.1\13_LO_PrEP_Lookup.sql" />
+    <EmbeddedResource Include="Scripts\2.0.1\14_PR_PatientPrEPStatus.sql" />
     <EmbeddedResource Include="Scripts\2.0.1\PREP\1.Prep_ServiceArea.sql" />
     <EmbeddedResource Include="Scripts\2.0.1\PREP\2.Prep Number.sql" />
     <EmbeddedResource Include="Scripts\2.0.1\PREP\3.PrepServiceAreaIdentifiers.sql" />
