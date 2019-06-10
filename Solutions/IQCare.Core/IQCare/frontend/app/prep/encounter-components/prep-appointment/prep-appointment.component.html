@@ -1,0 +1,34 @@
+<form class="form-group" [formGroup]="PrepAppointmentForm">
+    <div class="row">
+        <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12">
+            <div class="form-title">
+                <span class="mat-accent">
+                    Next Appoitment
+                </span>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-3 col-sm-3 col-xs-12">
+                <mat-form-field class="col-lg-12 col-sm-12 col-xs-12">
+                    <mat-label>Client given next appointment?</mat-label>
+                    <mat-select id="nextAppoitmentGiven" name="nextAppoitmentGiven"
+                        formControlName="nextAppoitmentGiven" required>
+                        <mat-option [value]=""></mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+
+            <div class="col-lg-3 col-sm-3 col-xs-12">
+                <mat-form-field class="col-lg-12 col-sm-12 col-xs-12">
+                    <mat-label>If No, specify reason for not giving appointment?</mat-label>
+                    <mat-select id="reasonAppointmentNoGiven" name="reasonAppointmentNoGiven"
+                        formControlName="reasonAppointmentNoGiven">
+                        <mat-option [value]=""></mat-option>
+
+                    </mat-select>
+                </mat-form-field>
+            </div>
+        </div>
+    </div>
+</form>

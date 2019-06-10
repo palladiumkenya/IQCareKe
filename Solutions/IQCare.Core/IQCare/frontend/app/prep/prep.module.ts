@@ -34,6 +34,7 @@ import {
     , RiskEducationResolver, BehaviourRiskAssessmentResolver, EncounterTypeResolver
 } from './_services/resolvers/prepriskassessment.resolver';
 import { PrepRiskassessmentComponent } from './prep-riskassessment/prep-riskassessment.component';
+import { PrepAppointmentComponent } from './encounter-components/prep-appointment/prep-appointment.component';
 
 @NgModule({
     declarations: [
@@ -44,7 +45,8 @@ import { PrepRiskassessmentComponent } from './prep-riskassessment/prep-riskasse
         FertilityIntentionComponent,
         PregnancyOutcomeComponent,
         PrepStatusComponent,
-        PrepRiskassessmentComponent
+        PrepRiskassessmentComponent,
+        PrepAppointmentComponent
     ],
     imports: [
         SharedModule, MatDatepickerModule, MatNativeDateModule,

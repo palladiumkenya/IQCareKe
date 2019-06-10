@@ -28,7 +28,8 @@
 
                                     <mat-step [completed]="false" [stepControl]="CircumcisionStatusFormGroup">
                                         <ng-template matStepLabel>
-                                            <span matTooltip="Delivery & Maternal History">
+                                            <span matTooltip="Circumcision Status( Male
+                                            Clients Only)">
                                                 Circumcision Status( Male
                                                 Clients Only)
                                             </span>
@@ -49,7 +50,7 @@
 
                                     <mat-step [completed]="false" [stepControl]="FertilityIntentionsFormGroup">
                                         <ng-template matStepLabel>
-                                            <span matTooltip="Delivery & Maternal History">
+                                            <span matTooltip="Fertility Intentions && Pregnancy Outcome">
                                                 Fertility Intentions
                                             </span>
                                         </ng-template>
@@ -73,7 +74,7 @@
 
                                     <mat-step [completed]="false" [stepControl]="ChronicIllnessFormGroup">
                                         <ng-template matStepLabel>
-                                            <span matTooltip="Delivery & Maternal History">
+                                            <span matTooltip="Chronic Conditions, Allergies, Adverse Events">
                                                 Chronic Conditions and Comorbidities
                                             </span>
                                         </ng-template>
@@ -120,7 +121,7 @@
 
                                     <mat-step [completed]="false" [stepControl]="PrepStatusFormGroup">
                                         <ng-template matStepLabel>
-                                            <span matTooltip="Delivery & Maternal History">
+                                            <span matTooltip="PrEP Status">
                                                 PrEP Status
                                             </span>
                                         </ng-template>
@@ -139,10 +140,12 @@
 
                                     <mat-step [completed]="false" [stepControl]="AppointmentFormGroup">
                                         <ng-template matStepLabel>
-                                            <span matTooltip="Delivery & Maternal History">
+                                            <span matTooltip="Next Appointment">
                                                 Appointment
                                             </span>
                                         </ng-template>
+
+                                        <app-prep-appointment></app-prep-appointment>
 
                                         <div>
                                             <button mat-raised-button color="primary" matStepperPrevious
