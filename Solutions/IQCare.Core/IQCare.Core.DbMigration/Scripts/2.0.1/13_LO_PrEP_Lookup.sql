@@ -122,3 +122,14 @@ If Not Exists(Select 1 From LookupMasterItem where LookupMasterId=(SELECT TOP 1 
 If Not Exists(Select 1 From LookupMasterItem where LookupMasterId=(SELECT TOP 1 Id FROM LookupMaster WHERE Name='PrEP_Status') and LookupItemId=(SELECT TOP 1 Id FROM LookupItem WHERE Name='Defer')) Begin Insert Into LookupMasterItem(LookupMasterId ,LookupItemId,DisplayName, OrdRank)VALUES((SELECT TOP 1 Id FROM LookupMaster WHERE Name='PrEP_Status'),(SELECT TOP 1 Id FROM LookupItem WHERE Name='Defer'),'Defer',5); end  
 
 
+------------Reasons not to give PrEP Appointment 
+-- master
+If Not Exists(Select 1 From LookupMaster where Name='ReasonsPrEPAppointmentNotGiven') Begin INSERT INTO LookupMaster (Name, DisplayName, DeleteFlag) VALUES ('ReasonsPrEPAppointmentNotGiven','ReasonsPrEPAppointmentNotGiven',0); End
+
+-- lookupitem
+If Not Exists(Select 1 From LookupItem where Name='Risk will no longer exist') Begin INSERT INTO LookupItem (Name, DisplayName, DeleteFlag) VALUES ('Risk will no longer exist','Risk will no longer exist',0); End
+If Not Exists(Select 1 From LookupItem where Name='Intention to transfer out') Begin INSERT INTO LookupItem (Name, DisplayName, DeleteFlag) VALUES ('Intention to transfer out','Intention to transfer out',0); End
+
+-- LookupMasterItem
+If Not Exists(Select 1 From LookupMasterItem where LookupMasterId=(SELECT TOP 1 Id FROM LookupMaster WHERE Name='ReasonsPrEPAppointmentNotGiven') and LookupItemId=(SELECT TOP 1 Id FROM LookupItem WHERE Name='Risk will no longer exist')) Begin Insert Into LookupMasterItem(LookupMasterId ,LookupItemId,DisplayName, OrdRank)VALUES((SELECT TOP 1 Id FROM LookupMaster WHERE Name='ReasonsPrEPAppointmentNotGiven'),(SELECT TOP 1 Id FROM LookupItem WHERE Name='Risk will no longer exist'),'Risk will no longer exist',1); end
+If Not Exists(Select 1 From LookupMasterItem where LookupMasterId=(SELECT TOP 1 Id FROM LookupMaster WHERE Name='ReasonsPrEPAppointmentNotGiven') and LookupItemId=(SELECT TOP 1 Id FROM LookupItem WHERE Name='Intention to transfer out')) Begin Insert Into LookupMasterItem(LookupMasterId ,LookupItemId,DisplayName, OrdRank)VALUES((SELECT TOP 1 Id FROM LookupMaster WHERE Name='ReasonsPrEPAppointmentNotGiven'),(SELECT TOP 1 Id FROM LookupItem WHERE Name='Intention to transfer out'),'Intention to transfer out',2); end 

@@ -35,6 +35,7 @@ import {
 } from './_services/resolvers/prepriskassessment.resolver';
 import { PrepRiskassessmentComponent } from './prep-riskassessment/prep-riskassessment.component';
 import { PrepAppointmentComponent } from './encounter-components/prep-appointment/prep-appointment.component';
+import { ReasonsPrepAppointmentNotGivenResolver } from './_services/reasons-prep-appointment-notgiven.resolver';
 
 @NgModule({
     declarations: [
@@ -59,10 +60,11 @@ import { PrepAppointmentComponent } from './encounter-components/prep-appointmen
         YesNoResolver, YesNoUnknownResolver,
         STIScreeningTreatmentResolver, FamilyPlanningMethodResolver,
         PlanningPregnancyResolver, YesNoDontKnowResolver, PregnancyOutcomeResolver,
-        PrepContraindicationsResolver, PrepStatusResolver
-        , AssessmentOutcomeResolver, ClientsBehaviourRiskResolver, SexualPartnetHivStatusProfileResolver,
-        RiskReductionEducationResolver, ReferralPreventionServicesResolver, ClientWillingTakePrepResolver
-        , RiskEducationResolver, BehaviourRiskAssessmentResolver, EncounterTypeResolver, PrepService
+        PrepContraindicationsResolver, PrepStatusResolver, AssessmentOutcomeResolver,
+        ClientsBehaviourRiskResolver, SexualPartnetHivStatusProfileResolver,
+        RiskReductionEducationResolver, ReferralPreventionServicesResolver, ClientWillingTakePrepResolver,
+        RiskEducationResolver, BehaviourRiskAssessmentResolver, EncounterTypeResolver, PrepService,
+        ReasonsPrepAppointmentNotGivenResolver
     ]
 })
 export class PrepModule { }

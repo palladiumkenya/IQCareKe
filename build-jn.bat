@@ -154,6 +154,15 @@ dotnet publish Solutions/IQCare.Core/IQCare.Maternity.WebApi/IQCare.Maternity.We
 @echo ********** END OF BUILINDING IQCare MATERNITY ********** >> %log%
 
 
+@echo "********** Building IQCare PREP **********" >> %log%
+@echo ********** Building IQCare PREP **********
+
+dotnet publish Solutions/IQCare.Core/IQCare.Prep.WebApi/IQCare.Prep.WebApi.csproj -o ../../../package/prep
+
+@echo ********** END OF BUILINDING IQCare PREP ********** >> %log%
+@echo ********** END OF BUILINDING IQCare PREP ********** >> %log%
+
+
 @echo "********** Building IQCare COMMON WEB **********" >> %log%
 @echo ********** Building IQCare COMMON WEB **********
 
