@@ -1,5 +1,5 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="ucFollowupEducation.ascx.cs" Inherits="IQCare.Web.CCC.UC.ucFollowupEducation" %>
-<div class="box box-default box-solid" id="divFollowupEducation">
+<div class="box box-default box-solid" id="divFollowupEducation" data-parsley-validate="true">
  <div class="col-md-12 form-group">
 	<div class="col-md-12">
 		<div class="panel panel-info">
@@ -57,12 +57,36 @@
 </div>
 <script>
     $("#submitdata").click(function () {
-       
-       // var visitDate = <%=HIVEducationDate.Text%>;
-        var comment = document.getElementById('<%= txtComments.ClientID %>').text
-         alert(comment);
-       
-        
+        if ($("#divFollowupEducation").parsley().validate()) {
+            console.log('valid');
+
+            var comment = $("#<%=txtComments.ClientID%>").val();
+            var counsellingType = $("#<%=ddlCounsellingType.ClientID%>").val();
+            var counsellingTypeString = $("#<%=ddlCounsellingType.ClientID%>").find(":selected").text();
+            var counsellingTopic = $("#<%=ddlCounsellingTopic.ClientID%>").val();
+            var counsellingTopicString = $("#<%=ddlCounsellingTopic.ClientID%>").find(":selected").text();
+            var eduDate = $('#HIVEDUDate').datepicker('getDate');
+            var patientId = "<%=PatientId%>";
+
+            $.ajax({
+                type: "POST",
+                url: "../WebService/HIVEducationService.asmx/addHIVEDucation",
+                data: "{'patientId':'" + patientId + "','visitdate':'" + moment(eduDate).format('DD-MMM-YYYY') + "','councellingTypeId':'" + counsellingType + "','councellingType':'" + counsellingTypeString + "','councellingTopicId':'" + counsellingTopic + "', 'councellingTopic': '" + counsellingTopicString + "', 'comments':'" + comment + "', 'other':'null'}",
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (response) {
+                    window.location.href = '<%=ResolveClientUrl( "~/CCC/PatientHome.aspx")%>';
+                    toastr.success(response.d);
+                },
+                error: function (xhr, errorType, exception) {
+                    var jsonError = jQuery.parseJSON(xhr.responseText);
+                    toastr.error("" + xhr.status + "" + jsonError.Message + " ");
+                    return false;
+                }
+            });
+        } else {
+            return false;
+        }
     });
        
    
@@ -90,52 +114,11 @@
                contentType: "application/json; charset=utf-8",
                success: function (data) {
                    var serverData = data.d;
-                   alert(serverData);
                   $("#<%=ddlCounsellingTopic.ClientID%>").find('option').remove().end();
-			      $("#<%=ddlCounsellingTopic.ClientID%>").append('<option value="0">Select</option>');
                   for (var i = 0; i < serverData.length; i++) {
                      $("#<%=ddlCounsellingTopic.ClientID%>").append('<option value="' + serverData[i][0] + '">' + serverData[i][1] + '</option>');
                   }
                }
            });
     }
-
-   
-   <%-- $("#datastep1").on("actionclicked.fu.wizard", function (evt, data) {
-        var currentStep = data.step;
-        if (currentStep == 2) {
-            var error = 0;
-          
-                var categoryId = $(this).attr('id');
-                alert(categoryId);
-                var patientId = '7832';
-                var visitDate = <%=HIVEducationDate.Text%>;
-                var CouncellingTypeId = '';
-                var CouncellingType = '';
-                var CouncellingTopicId = '';
-                var CouncellingTopic= '';
-                var  CouncellingTopicOther = '';
-                var clinicalNotes = $(this).val();
-                var serviceAreaId = 203;
-                var comments = <%=txtComments.Text%>;
-                var other = "other";
-                $.ajax({
-                    type: "POST",
-                    url: "../WebService/PatientClinicalNotesService.asmx/addPatientClinicalNotes",
-                    data: "{'patientId': '" + patientId + "','visitDate': '" + visitDate + "','CouncellingTypeId':'" + serviceAreaId + "','CouncellingType':'" + categoryId + "','CouncellingTopicId':'" + clinicalNotes + "','CouncellingTopic':'" + userId + "','Comments':'" + userId + "','CouncellingTopicOther':'" + userId + "'}",
-                    contentType: "application/json; charset=utf-8",
-                    dataType: "json",
-                    success: function (response) {
-                        error = 0;
-                    },
-                    error: function (response) {
-                        error = 1;
-                    }
-                });
-            
-            if (error == 0) {
-                toastr.success("HIV Followup Education saved successfully");
-            }
-        }
-    });--%>
 </script>

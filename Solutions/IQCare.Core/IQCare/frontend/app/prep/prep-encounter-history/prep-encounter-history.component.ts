@@ -1,15 +1,18 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-prep-encounter-history',
-  templateUrl: './prep-encounter-history.component.html',
-  styleUrls: ['./prep-encounter-history.component.css']
+    selector: 'app-prep-encounter-history',
+    templateUrl: './prep-encounter-history.component.html',
+    styleUrls: ['./prep-encounter-history.component.css']
 })
 export class PrepEncounterHistoryComponent implements OnInit {
+    personId: number;
 
-  constructor() { }
+    constructor() {
+        this.personId = 1;
+    }
 
-  ngOnInit() {
-  }
+    ngOnInit() {
+    }
 
 }

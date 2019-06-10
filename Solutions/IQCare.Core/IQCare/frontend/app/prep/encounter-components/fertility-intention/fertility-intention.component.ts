@@ -38,6 +38,9 @@ export class FertilityIntentionComponent implements OnInit {
         // set default form state
         this.FertilityIntentionForm.controls.familyPlanningMethods.disable({ onlySelf: true });
         this.FertilityIntentionForm.controls.pregnancyPlanned.disable({ onlySelf: true });
+        this.FertilityIntentionForm.controls.onFamilyPlanning.disable({ onlySelf: true });
+        this.FertilityIntentionForm.controls.familyPlanningMethods.disable({ onlySelf: true });
+        this.FertilityIntentionForm.controls.planningToGetPregnant.disable({ onlySelf: true });
 
         const { yesnoOptions, fpMethods, planningPregnancy } = this.FertilityIntentionsOptions[0];
         this.yesnoOptions = yesnoOptions;
@@ -57,9 +60,24 @@ export class FertilityIntentionComponent implements OnInit {
     onPregnancySelection(event) {
         if (event.isUserInput && event.source.selected && event.source.viewValue == 'Yes') {
             this.FertilityIntentionForm.controls.pregnancyPlanned.enable({ onlySelf: true });
+
+            // disable
+            this.FertilityIntentionForm.controls.onFamilyPlanning.disable({ onlySelf: true });
+            this.FertilityIntentionForm.controls.familyPlanningMethods.disable({ onlySelf: true });
+            this.FertilityIntentionForm.controls.planningToGetPregnant.disable({ onlySelf: true });
+
+            // Reset values
+            this.FertilityIntentionForm.controls.onFamilyPlanning.setValue('');
+            this.FertilityIntentionForm.controls.familyPlanningMethods.setValue('');
+            this.FertilityIntentionForm.controls.planningToGetPregnant.setValue('');
         } else if (event.isUserInput && event.source.selected && event.source.viewValue == 'No') {
             this.FertilityIntentionForm.controls.pregnancyPlanned.disable({ onlySelf: true });
             this.FertilityIntentionForm.controls.pregnancyPlanned.setValue('');
+
+            // enable
+            this.FertilityIntentionForm.controls.onFamilyPlanning.enable({ onlySelf: true });
+            // this.FertilityIntentionForm.controls.familyPlanningMethods.enable({ onlySelf: true });
+            this.FertilityIntentionForm.controls.planningToGetPregnant.enable({ onlySelf: true });
         }
     }
 }

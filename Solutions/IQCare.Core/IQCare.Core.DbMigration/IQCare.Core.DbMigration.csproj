@@ -191,6 +191,8 @@
     <None Remove="Scripts\2.0.1\11_IQCareFinalBuild.sql" />
     <None Remove="Scripts\2.0.1\12_IE_ADD_NHIF_Identifier.sql" />
     <None Remove="Scripts\2.0.1\14_PR_PatientPrEPStatus.sql" />
+    <None Remove="Scripts\2.0.1\15_PM_PatientCircumcisionStatus.sql" />
+    <None Remove="Scripts\2.0.1\16_PR_SystemAdmin_Backup_Constella.sql" />
     <None Remove="Scripts\2.0.1\PREP\1.Prep_ServiceArea.sql" />
     <None Remove="Scripts\2.0.1\PREP\10.PrepRiskAssessmentView.sql" />
     <None Remove="Scripts\2.0.1\PREP\11.PopulationTypes.sql" />
@@ -416,6 +418,8 @@
     <EmbeddedResource Include="Scripts\2.0.1\12_IE_ADD_NHIF_Identifier.sql" />
     <EmbeddedResource Include="Scripts\2.0.1\13_LO_PrEP_Lookup.sql" />
     <EmbeddedResource Include="Scripts\2.0.1\14_PR_PatientPrEPStatus.sql" />
+    <EmbeddedResource Include="Scripts\2.0.1\15_PM_PatientCircumcisionStatus.sql" />
+    <EmbeddedResource Include="Scripts\2.0.1\16_PR_SystemAdmin_Backup_Constella.sql" />
     <EmbeddedResource Include="Scripts\2.0.1\PREP\1.Prep_ServiceArea.sql" />
     <EmbeddedResource Include="Scripts\2.0.1\PREP\10.PrepRiskAssessmentView.sql" />
     <EmbeddedResource Include="Scripts\2.0.1\PREP\11.PopulationTypes.sql" />

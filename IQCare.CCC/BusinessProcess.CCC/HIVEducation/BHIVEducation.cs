@@ -3,15 +3,11 @@ using DataAccess.CCC.Context;
 using DataAccess.CCC.Repository;
 using DataAccess.Common;
 using DataAccess.Entity;
+using Entities.CCC;
 using Interface.CCC.HIVEducation;
 using System;
-using System.Collections.Generic;
 using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Entities.CCC.HIVEducation;
-using DataAccess.CCC.Interface.HIVEducation;
+
 namespace BusinessProcess.CCC.HIVEducation
 
 {

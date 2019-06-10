@@ -10,6 +10,11 @@ namespace IQCare.Web.CCC.UC
 {
     public partial class ucFollowupEducation : System.Web.UI.UserControl
     {
+        public int PatientId
+        {
+            get { return Convert.ToInt32(Session["PatientPK"]); }
+        }
+
         protected void Page_Load(object sender, EventArgs e)
         {
             if (Request.QueryString["visitId"] != null)

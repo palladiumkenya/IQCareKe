@@ -36,6 +36,8 @@ import {
     HivPartnerResolver
 } from './_services/resolvers/prepriskassessment.resolver';
 import { PrepRiskassessmentComponent } from './prep-riskassessment/prep-riskassessment.component';
+import { PrepAppointmentComponent } from './encounter-components/prep-appointment/prep-appointment.component';
+import { ReasonsPrepAppointmentNotGivenResolver } from './_services/reasons-prep-appointment-notgiven.resolver';
 
 @NgModule({
     declarations: [
@@ -46,7 +48,8 @@ import { PrepRiskassessmentComponent } from './prep-riskassessment/prep-riskasse
         FertilityIntentionComponent,
         PregnancyOutcomeComponent,
         PrepStatusComponent,
-        PrepRiskassessmentComponent
+        PrepRiskassessmentComponent,
+        PrepAppointmentComponent
     ],
     imports: [
         SharedModule, MatDatepickerModule, MatNativeDateModule,
@@ -64,7 +67,7 @@ import { PrepRiskassessmentComponent } from './prep-riskassessment/prep-riskasse
         RiskReductionEducationResolver, ReferralPreventionServicesResolver, ClientWillingTakePrepResolver
         , RiskEducationResolver, BehaviourRiskAssessmentResolver, EncounterTypeResolver, PrepService,
         PartnerCCCEnrollmentResolver,PatientIdentifierResolver, ARTStartDateResolver,
-         PartnerHIVStatusResolver, DurationResolver, SexWithoutCondomResolver, HivPartnerResolver
+         PartnerHIVStatusResolver, DurationResolver, SexWithoutCondomResolver, HivPartnerResolver,ReasonsPrepAppointmentNotGivenResolver
     ]
 })
 export class PrepModule { }

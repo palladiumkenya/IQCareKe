@@ -1,5 +1,4 @@
 ﻿using Application.Presentation;
-using Entities.CCC.HIVEducation;
 using Interface.CCC.HIVEducation;
 using System;
 using System.Collections.Generic;
@@ -8,17 +7,17 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Web.Services;
+using Entities.CCC;
 
 namespace IQCare.CCC.UILogic.HIVEducation
 {
     public class HIVEducationLogic
     {
-        // private IHIVEducation _hivEducation = (IHIVEducation)ObjectFactory.CreateInstance("BusinessProcess.CCC.Encounters.BPatientClinicalNotes, BusinessProcess.CCC");
-        private IHIVEducation _hiveducation = (IHIVEducation)ObjectFactory.CreateInstance("BusinessProcess.CCC.HIVEducation.BHIVEducation, BusinessProcess.CCC.HIVEducation");
+        private IHIVEducation _hiveducation = (IHIVEducation)ObjectFactory.CreateInstance("BusinessProcess.CCC.HIVEducation.BHIVEducation, BusinessProcess.CCC");
 
         private string Msg { get; set; }
         private int Result { get; set; }
-        [WebMethod]
+
         public int AddPatientHIVEducation(int patientId, DateTime visitdate, int councellingTypeId, string councellingType , int councellingTopicId, string councellingTopic, string comments, string other)
         {
             try
@@ -26,7 +25,7 @@ namespace IQCare.CCC.UILogic.HIVEducation
                 
                     var PHEF = new HIVEducationFollowup()
                     {
-                        PatientId = patientId,
+                        Ptn_pk = patientId,
                         VisitDate = visitdate,
                         CouncellingTypeId = councellingTypeId,
                         CouncellingType = councellingType,
@@ -53,9 +52,9 @@ namespace IQCare.CCC.UILogic.HIVEducation
                 //    return _patientNotes.AddPatientClinicalNotes(PCN);
                 //}
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                throw;
+                throw ex;
             }
         }
 

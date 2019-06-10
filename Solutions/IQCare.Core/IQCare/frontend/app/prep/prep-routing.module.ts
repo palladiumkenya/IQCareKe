@@ -19,6 +19,7 @@ import {
     HivPartnerResolver
 } from './_services/resolvers/prepriskassessment.resolver';
 import { PrepRiskassessmentComponent } from './prep-riskassessment/prep-riskassessment.component';
+import { ReasonsPrepAppointmentNotGivenResolver } from './_services/reasons-prep-appointment-notgiven.resolver';
 
 const routes: Routes = [
     {
@@ -38,7 +39,8 @@ const routes: Routes = [
             yesNoDontKnowOptions: YesNoDontKnowResolver,
             pregnancyOutcomeOptions: PregnancyOutcomeResolver,
             prepStatusOptions: PrepStatusResolver,
-            prepContraindicationsOptions: PrepContraindicationsResolver
+            prepContraindicationsOptions: PrepContraindicationsResolver,
+            reasonsPrepAppointmentNotGivenOptions: ReasonsPrepAppointmentNotGivenResolver
         }
     },
     {
