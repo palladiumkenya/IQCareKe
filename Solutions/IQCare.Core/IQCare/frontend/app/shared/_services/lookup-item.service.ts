@@ -59,8 +59,8 @@ export class LookupItemService {
         );
     }
 
-    public getPatientEncounters(patientId: number, encounterTypeId: number): Observable<any[]> {
-        return this.http.get<any[]>(this.API_URL + '/api/PatientServices/GetEncounters/' + patientId + '/' + encounterTypeId).pipe(
+    public getPatientEncounters(patientId: number, patientmasterVisitId: number): Observable<any[]> {
+        return this.http.get<any[]>(this.API_URL + '/api/PatientServices/GetMasterVisits/' + patientId + '/' + patientmasterVisitId).pipe(
             tap(getPatientEncounters => this.errorHandler.log('get ')),
             catchError(this.errorHandler.handleError<any[]>('getPatientEncounters', []))
         );

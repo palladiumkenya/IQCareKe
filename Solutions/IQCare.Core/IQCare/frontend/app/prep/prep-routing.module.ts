@@ -14,7 +14,9 @@ import { PrepContraindicationsResolver } from './_services/prep-contraindication
 import {
     AssessmentOutcomeResolver, ClientsBehaviourRiskResolver, SexualPartnetHivStatusProfileResolver,
     RiskReductionEducationResolver, ReferralPreventionServicesResolver, ClientWillingTakePrepResolver
-    , RiskEducationResolver, BehaviourRiskAssessmentResolver, EncounterTypeResolver
+    , RiskEducationResolver, BehaviourRiskAssessmentResolver, EncounterTypeResolver, PartnerCCCEnrollmentResolver,
+    PatientIdentifierResolver, ARTStartDateResolver, PartnerHIVStatusResolver, DurationResolver, SexWithoutCondomResolver,
+    HivPartnerResolver
 } from './_services/resolvers/prepriskassessment.resolver';
 import { PrepRiskassessmentComponent } from './prep-riskassessment/prep-riskassessment.component';
 
@@ -39,43 +41,59 @@ const routes: Routes = [
             prepContraindicationsOptions: PrepContraindicationsResolver
         }
     },
-    {  
-        
+    {
+
         path: 'riskassessment',
         children: [
-        {
-        path: ':patientId/:personId/:serviceId',
-        component: PrepRiskassessmentComponent,
-        resolve: {
-            assessmentOutComeArray: AssessmentOutcomeResolver,
-            clientsBehaviourRiskArray: ClientsBehaviourRiskResolver,
-            sexualPartnerHivStatusArray: SexualPartnetHivStatusProfileResolver,
-            clientWillingTakePrepArray: ClientWillingTakePrepResolver,
-            riskEducationArray: RiskEducationResolver,
-            behaviourRiskAssessmentArray: BehaviourRiskAssessmentResolver,
-            ReferralPreventionArray: ReferralPreventionServicesResolver,
-            RiskReductionEducationArray: RiskReductionEducationResolver,
-            EncounterTypeArray: EncounterTypeResolver
-            }
-        },
-        {
-            path: ':patientId/:personId/:serviceId/:patientMasterVisitId',
-            component: PrepRiskassessmentComponent,
-            resolve: {
-                assessmentOutComeArray: AssessmentOutcomeResolver,
-                clientsBehaviourRiskArray: ClientsBehaviourRiskResolver,
-                sexualPartnerHivStatusArray: SexualPartnetHivStatusProfileResolver,
-                clientWillingTakePrepArray: ClientWillingTakePrepResolver,
-                riskEducationArray: RiskEducationResolver,
-                behaviourRiskAssessmentArray: BehaviourRiskAssessmentResolver,
-                ReferralPreventionArray: ReferralPreventionServicesResolver,
-                RiskReductionEducationArray: RiskReductionEducationResolver,
-                EncounterTypeArray: EncounterTypeResolver
+            {
+                path: ':patientId/:personId/:serviceId',
+                component: PrepRiskassessmentComponent,
+                resolve: {
+                    assessmentOutComeArray: AssessmentOutcomeResolver,
+                    clientsBehaviourRiskArray: ClientsBehaviourRiskResolver,
+                    sexualPartnerHivStatusArray: SexualPartnetHivStatusProfileResolver,
+                    clientWillingTakePrepArray: ClientWillingTakePrepResolver,
+                    riskEducationArray: RiskEducationResolver,
+                    behaviourRiskAssessmentArray: BehaviourRiskAssessmentResolver,
+                    ReferralPreventionArray: ReferralPreventionServicesResolver,
+                    RiskReductionEducationArray: RiskReductionEducationResolver,
+                    EncounterTypeArray: EncounterTypeResolver,
+                    PartnerCCCEnrollmentArray: PartnerCCCEnrollmentResolver,
+                    PatientIdentifierArray: PatientIdentifierResolver,
+                    ARTStartDateArray: ARTStartDateResolver,
+                    PartnerHIVStatusArray: PartnerHIVStatusResolver,
+                    DurationArray: DurationResolver,
+                    SexWithoutCondomArray: SexWithoutCondomResolver,
+                    HivPartnerArray: HivPartnerResolver
+
+
+                }
             },
-        }
+            {
+                path: ':patientId/:personId/:serviceId/:patientMasterVisitId',
+                component: PrepRiskassessmentComponent,
+                resolve: {
+                    assessmentOutComeArray: AssessmentOutcomeResolver,
+                    clientsBehaviourRiskArray: ClientsBehaviourRiskResolver,
+                    sexualPartnerHivStatusArray: SexualPartnetHivStatusProfileResolver,
+                    clientWillingTakePrepArray: ClientWillingTakePrepResolver,
+                    riskEducationArray: RiskEducationResolver,
+                    behaviourRiskAssessmentArray: BehaviourRiskAssessmentResolver,
+                    ReferralPreventionArray: ReferralPreventionServicesResolver,
+                    RiskReductionEducationArray: RiskReductionEducationResolver,
+                    EncounterTypeArray: EncounterTypeResolver,
+                    PartnerCCCEnrollmentArray: PartnerCCCEnrollmentResolver,
+                    PatientIdentifierArray: PatientIdentifierResolver,
+                    ARTStartDateArray: ARTStartDateResolver,
+                    PartnerHIVStatusArray: PartnerHIVStatusResolver,
+                    DurationArray: DurationResolver,
+                    SexWithoutCondomArray: SexWithoutCondomResolver,
+                    HivPartnerArray: HivPartnerResolver
+                },
+            }
         ]
     }
-     
+
 ];
 
 @NgModule({

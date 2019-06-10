@@ -194,6 +194,9 @@
     <None Remove="Scripts\2.0.1\PREP\1.Prep_ServiceArea.sql" />
     <None Remove="Scripts\2.0.1\PREP\10.PrepRiskAssessmentView.sql" />
     <None Remove="Scripts\2.0.1\PREP\11.PopulationTypes.sql" />
+    <None Remove="Scripts\2.0.1\PREP\12. PREP Regimen.sql" />
+    <None Remove="Scripts\2.0.1\PREP\13.RegimenUse.sql" />
+    <None Remove="Scripts\2.0.1\PREP\14 Constraint.sql" />
     <None Remove="Scripts\2.0.1\PREP\2.Prep Number.sql" />
     <None Remove="Scripts\2.0.1\PREP\3.PrepServiceAreaIdentifiers.sql" />
     <None Remove="Scripts\2.0.1\PREP\4.PersonVitalsView.sql" />
@@ -416,6 +419,8 @@
     <EmbeddedResource Include="Scripts\2.0.1\PREP\1.Prep_ServiceArea.sql" />
     <EmbeddedResource Include="Scripts\2.0.1\PREP\10.PrepRiskAssessmentView.sql" />
     <EmbeddedResource Include="Scripts\2.0.1\PREP\11.PopulationTypes.sql" />
+    <EmbeddedResource Include="Scripts\2.0.1\PREP\12. PREP Regimen.sql" />
+    <EmbeddedResource Include="Scripts\2.0.1\PREP\13.RegimenUse.sql" />
     <EmbeddedResource Include="Scripts\2.0.1\PREP\2.Prep Number.sql" />
     <EmbeddedResource Include="Scripts\2.0.1\PREP\3.PrepServiceAreaIdentifiers.sql" />
     <EmbeddedResource Include="Scripts\2.0.1\PREP\4.PersonVitalsView.sql" />
@@ -448,6 +453,7 @@
     <EmbeddedResource Include="Scripts\2.0.0\07_SO_SetPrefixTypeInIdentifiers.sql" />
     <None Remove="Scripts\1.0.0.9\37_BO_AddPhsicalExaminationView.sql" />
     <EmbeddedResource Include="Scripts\2.0.1\03_VisitDetailsView.sql" />
+    <EmbeddedResource Include="Scripts\2.0.1\PREP\14 Constraint.sql" />
     <Resource Include="Scripts\1.0.0.9\37_BO_AddPhsicalExaminationView.sql" />
   </ItemGroup>
 

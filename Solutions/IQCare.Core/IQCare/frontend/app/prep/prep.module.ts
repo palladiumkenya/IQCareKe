@@ -31,10 +31,12 @@ import { PrepStatusResolver } from './_services/prep-status.resolver';
 import {
     AssessmentOutcomeResolver, ClientsBehaviourRiskResolver, SexualPartnetHivStatusProfileResolver,
     RiskReductionEducationResolver, ReferralPreventionServicesResolver, ClientWillingTakePrepResolver
-    , RiskEducationResolver, BehaviourRiskAssessmentResolver, EncounterTypeResolver
+    , RiskEducationResolver, BehaviourRiskAssessmentResolver, EncounterTypeResolver , PartnerCCCEnrollmentResolver,
+    PatientIdentifierResolver, ARTStartDateResolver, PartnerHIVStatusResolver, DurationResolver, SexWithoutCondomResolver,
+    HivPartnerResolver
 } from './_services/resolvers/prepriskassessment.resolver';
 import { PrepRiskassessmentComponent } from './prep-riskassessment/prep-riskassessment.component';
-import { PrepService } from './_services/prep.services';
+
 @NgModule({
     declarations: [
         PrepEncounterHistoryComponent,
@@ -60,7 +62,9 @@ import { PrepService } from './_services/prep.services';
         PrepContraindicationsResolver, PrepStatusResolver
         , AssessmentOutcomeResolver, ClientsBehaviourRiskResolver, SexualPartnetHivStatusProfileResolver,
         RiskReductionEducationResolver, ReferralPreventionServicesResolver, ClientWillingTakePrepResolver
-        , RiskEducationResolver, BehaviourRiskAssessmentResolver, EncounterTypeResolver, PrepService
+        , RiskEducationResolver, BehaviourRiskAssessmentResolver, EncounterTypeResolver, PrepService,
+        PartnerCCCEnrollmentResolver,PatientIdentifierResolver, ARTStartDateResolver,
+         PartnerHIVStatusResolver, DurationResolver, SexWithoutCondomResolver, HivPartnerResolver
     ]
 })
 export class PrepModule { }
