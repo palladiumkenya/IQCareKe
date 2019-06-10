@@ -14,6 +14,7 @@ export class PrepSTIScreeningTreatmentComponent implements OnInit {
 
     patientId: number;
     personId: number;
+    maxDate: Date;
 
     @Input() STIScreeningAndTreatmentOptions: any;
     @Output() notify: EventEmitter<FormGroup> = new EventEmitter<FormGroup>();
@@ -21,10 +22,12 @@ export class PrepSTIScreeningTreatmentComponent implements OnInit {
     constructor(private _formBuilder: FormBuilder) {
         this.patientId = 1;
         this.personId = 1;
+        this.maxDate = new Date();
     }
 
     ngOnInit() {
         this.STIScreeningForm = this._formBuilder.group({
+            visitDate: new FormControl('', [Validators.required]),
             signsOrSymptomsOfSTI: new FormControl('', [Validators.required]),
             signsOfSTI: new FormControl('', [Validators.required]),
         });

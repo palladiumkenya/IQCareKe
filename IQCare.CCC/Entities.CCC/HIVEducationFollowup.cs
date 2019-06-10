@@ -1,21 +1,17 @@
-﻿using Entities.CCC.Enrollment;
-using Entities.Common;
-using System;
-using System.Collections.Generic;
+﻿using System;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Entities.Common;
 
-namespace Entities.CCC.HIVEducation
+namespace Entities.CCC
 {
     [Serializable]
     [Table("Rpt_FollowUpEducation")]
-    public class HIVEducationFollowup : BaseObject
+    public class HIVEducationFollowup
     {
-        public int PatientId { get; set; }
-        [ForeignKey("Ptn_pk")]
-        public virtual PatientEntity Patient { get; set; }
+        [Key]
+        public int Id { get; set; }
+        public int Ptn_pk { get; set; }
         public DateTime VisitDate { get; set; }
         public int? CouncellingTypeId { get; set; }
         public string CouncellingType { get; set; }

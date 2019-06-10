@@ -6,8 +6,11 @@ import { Component, OnInit } from '@angular/core';
     styleUrls: ['./prep-encounter-history.component.css']
 })
 export class PrepEncounterHistoryComponent implements OnInit {
+    personId: number;
 
-    constructor() { }
+    constructor() {
+        this.personId = 1;
+    }
 
     ngOnInit() {
     }

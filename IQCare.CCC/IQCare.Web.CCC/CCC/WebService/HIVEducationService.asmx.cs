@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.Script.Services;
 using System.Web.Services;
 using System.Web.UI.WebControls;
+using Entities.CCC.Enrollment;
 
 namespace IQCare.Web.CCC.WebService
 {
@@ -60,13 +61,18 @@ namespace IQCare.Web.CCC.WebService
         }
         private string Msg { get; set; }
         private int Result { get; set; }
-        [WebMethod]
-        public string addHIVEDucation(int patientId, DateTime visitdate, int councellingTypeId, string councellingType, int councellingTopicId, string councellingTopic, string comments, string other)
+
+        [WebMethod(EnableSession = true)]
+        public string addHIVEDucation(int patientId, string visitdate, int councellingTypeId, string councellingType, int councellingTopicId, string councellingTopic, string comments, string other)
         {
             try
             {
+                PatientManager patientManager = new PatientManager();
+                PatientEntity patient = patientManager.GetPatientEntity(patientId);
+                int ptn_pk = patient.ptn_pk.HasValue ? patient.ptn_pk.Value : 0;
+
                 var HEF = new HIVEducationLogic();
-                Result = HEF.AddPatientHIVEducation(patientId, visitdate, councellingTypeId, councellingType, councellingTopicId, councellingTopic, comments, other);
+                Result = HEF.AddPatientHIVEducation(ptn_pk, DateTime.Parse(visitdate), councellingTypeId, councellingType, councellingTopicId, councellingTopic, comments, other);
                 if (Result > 0)
                 {
                     Msg = "Notes Added";
