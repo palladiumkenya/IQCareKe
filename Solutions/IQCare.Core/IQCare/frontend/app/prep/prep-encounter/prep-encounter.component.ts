@@ -45,12 +45,14 @@ export class PrepEncounterComponent implements OnInit {
     pregnancyOutcomeOptions: LookupItemView[];
     prepContraindicationsOptions: LookupItemView[];
     prepStatusOptions: LookupItemView[];
+    reasonsPrepAppointmentNotGivenOptions: LookupItemView[];
 
     STIScreeningAndTreatmentOptions: any[] = [];
     CircumcisionStatusOptions: any[] = [];
     FertilityIntentionsOptions: any[] = [];
     PregnancyOutcomeOptions: any[] = [];
     PrepStatusOptions: any[] = [];
+    PrepAppointmentOptions: any[] = [];
 
     public chronic_illness_data: PatientChronicIllness[] = [];
     public adverseEvents_data: AdverseEventsCommand[] = [];
@@ -87,7 +89,7 @@ export class PrepEncounterComponent implements OnInit {
                 const { yesNoOptions, stiScreeningTreatmentOptions, yesNoUnknownOptions,
                     familyPlanningMethodsOptions, planningPregnancyOptions,
                     yesNoDontKnowOptions, pregnancyOutcomeOptions, prepContraindicationsOptions,
-                    prepStatusOptions } = res;
+                    prepStatusOptions, reasonsPrepAppointmentNotGivenOptions } = res;
                 this.yesnoOptions = yesNoOptions['lookupItems'];
                 this.stiScreeningOptions = stiScreeningTreatmentOptions['lookupItems'];
                 this.yesNoUnknownOptions = yesNoUnknownOptions['lookupItems'];
@@ -97,6 +99,7 @@ export class PrepEncounterComponent implements OnInit {
                 this.pregnancyOutcomeOptions = pregnancyOutcomeOptions['lookupItems'];
                 this.prepStatusOptions = prepStatusOptions['lookupItems'];
                 this.prepContraindicationsOptions = prepContraindicationsOptions['lookupItems'];
+                this.reasonsPrepAppointmentNotGivenOptions = reasonsPrepAppointmentNotGivenOptions['lookupItems'];
             }
         );
 
@@ -127,6 +130,11 @@ export class PrepEncounterComponent implements OnInit {
             'yesnoOptions': this.yesnoOptions,
             'prepStatusOptions': this.prepStatusOptions,
             'prepContraindicationsOptions': this.prepContraindicationsOptions
+        });
+
+        this.PrepAppointmentOptions.push({
+            'yesnoOptions': this.yesnoOptions,
+            'reasonsPrepAppointmentNotGivenOptions': this.reasonsPrepAppointmentNotGivenOptions
         });
     }
 
@@ -160,6 +168,10 @@ export class PrepEncounterComponent implements OnInit {
 
     onPrepStatusNotify(formGroup: FormGroup): void {
         this.PrepStatusFormGroup.push(formGroup);
+    }
+
+    onPrepAppointmentNotify(formGroup: FormGroup): void {
+        this.AppointmentFormGroup.push(formGroup);
     }
 
     onSubmitForm() {
