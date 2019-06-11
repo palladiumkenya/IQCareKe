@@ -9,7 +9,7 @@ import {
     MatStepperModule, MatButtonModule,
     MatFormFieldModule, MatSelectModule,
     MatNativeDateModule, MatDatepickerModule,
-    MatInputModule, MatAutocompleteModule
+    MatInputModule, MatAutocompleteModule, MatTableModule
 } from '@angular/material';
 import { ReactiveFormsModule } from '@angular/forms';
 // tslint:disable-next-line:max-line-length
@@ -55,7 +55,7 @@ import { ReasonsPrepAppointmentNotGivenResolver } from './_services/reasons-prep
         SharedModule, MatDatepickerModule, MatNativeDateModule,
         CommonModule, MatStepperModule, ReactiveFormsModule,
         MatButtonModule, MatFormFieldModule, MatSelectModule,
-        MatInputModule, MatAutocompleteModule,
+        MatInputModule, MatAutocompleteModule, MatTableModule,
         PrepRoutingModule
     ],
     providers: [
