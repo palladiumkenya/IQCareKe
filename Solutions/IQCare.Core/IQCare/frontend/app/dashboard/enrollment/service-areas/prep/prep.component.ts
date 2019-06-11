@@ -246,7 +246,7 @@ export class PrepComponent implements OnInit {
                     this.store.dispatch(new Consent.PatientId(this.person.patientId));
                     localStorage.setItem('patientId', this.person.patientId.toString());
                 }
-                if (parseInt(this.person.age, 10) < 15) {
+                if (parseInt(this.person.age, 10) <= 19) {
                     this.isSchoolVisible = true;
                 }
 
@@ -782,10 +782,10 @@ export class PrepComponent implements OnInit {
                             localStorage.setItem('serviceAreaId', this.serviceId.toString());
 
 
-                           // this.router.navigate(['/registration/home/'], { relativeTo: this.route });
+                            // this.router.navigate(['/registration/home/'], { relativeTo: this.route });
                             this.zone.run(() => {
                                 this.router.navigate(
-                                    ['/prep'] ,
+                                    ['/prep'],
                                     { relativeTo: this.route });
                             });
                         });

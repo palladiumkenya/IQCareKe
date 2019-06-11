@@ -10,12 +10,19 @@ import { NgxSpinnerService } from 'ngx-spinner';
 import { LoadedRouterConfig } from '@angular/router/src/config';
 import { registerLocaleData } from '@angular/common';
 import { PrepService } from '../_services/prep.service';
+import * as moment from 'moment';
 
 import { LookupItemService } from './../../shared/_services/lookup-item.service';
+import { EncounterService } from '../../shared/_services/encounter.service';
+import { PatientMasterVisitEncounter } from '../../pmtct/_models/PatientMasterVisitEncounter';
+
 @Component({
     selector: 'app-prep-riskassessment',
     templateUrl: './prep-riskassessment.component.html',
     styleUrls: ['./prep-riskassessment.component.css'],
+    providers: [
+        EncounterService
+    ]
 
 })
 export class PrepRiskassessmentComponent implements OnInit {
@@ -66,6 +73,7 @@ export class PrepRiskassessmentComponent implements OnInit {
         private notificationService: NotificationService,
         private _formBuilder: FormBuilder,
         private spinner: NgxSpinnerService,
+        private encounterservice: EncounterService
     ) {
         this.maxDate = new Date();
 
@@ -854,224 +862,224 @@ export class PrepRiskassessmentComponent implements OnInit {
 
         }
         if (partnerhivstatusdatedetail !== null && partnerhivstatusdatedetail !== '' && partnerhivstatusdatedetail !== undefined) {
-        let partnerhivstatusmasterid: number;
-        let partnerhivstatusvalueid: number;
-        let partnerhivstatuslist: any[] = [];
-        partnerhivstatusmasterid = this.partnerstatusOptions[0].masterId;
-        partnerhivstatusvalueid = this.partnerstatusOptions[0].itemId;
-        partnerhivstatuslist = this.RiskAssessmentList.filter(x => x.RiskAssessmentid == partnerhivstatusmasterid);
-        this.RiskAssessmentList.filter(x => x.RiskAssessmentid == partnerhivstatusmasterid)
-            .forEach(x => {
-                if (x.Value == partnerhivstatusvalueid) {
-                    x.DeleteFlag = false;
-                    x.Date = partnerhivstatusdatedetail;
-                } else {
-                    x.DeleteFlag = true;
-                }
-            });
-        if (partnerhivstatuslist.findIndex(t => t.Value == partnerhivstatusvalueid) == -1) {
+            let partnerhivstatusmasterid: number;
+            let partnerhivstatusvalueid: number;
+            let partnerhivstatuslist: any[] = [];
+            partnerhivstatusmasterid = this.partnerstatusOptions[0].masterId;
+            partnerhivstatusvalueid = this.partnerstatusOptions[0].itemId;
+            partnerhivstatuslist = this.RiskAssessmentList.filter(x => x.RiskAssessmentid == partnerhivstatusmasterid);
+            this.RiskAssessmentList.filter(x => x.RiskAssessmentid == partnerhivstatusmasterid)
+                .forEach(x => {
+                    if (x.Value == partnerhivstatusvalueid) {
+                        x.DeleteFlag = false;
+                        x.Date = partnerhivstatusdatedetail;
+                    } else {
+                        x.DeleteFlag = true;
+                    }
+                });
+            if (partnerhivstatuslist.findIndex(t => t.Value == partnerhivstatusvalueid) == -1) {
 
-            this.RiskAssessmentList.push({
-                'Id': 0,
-                'Comment': '',
-                'RiskAssessmentid': partnerhivstatusmasterid,
-                'Value': partnerhivstatusvalueid,
-                'DeleteFlag': false,
-                'Date': partnerhivstatusdatedetail
-            });
+                this.RiskAssessmentList.push({
+                    'Id': 0,
+                    'Comment': '',
+                    'RiskAssessmentid': partnerhivstatusmasterid,
+                    'Value': partnerhivstatusvalueid,
+                    'DeleteFlag': false,
+                    'Date': partnerhivstatusdatedetail
+                });
 
-        }
-
-    }
-
-    if (artstartdatepartner !== null && artstartdatepartner !== '' && artstartdatepartner !== undefined) {
-
-        let partnerartstartdatemasterid: number;
-        let partnerartstartdatevalueid: number;
-        let partnerartstartdatelist: any[] = [];
-        partnerartstartdatemasterid = this.partnerartstartdateoptions[0].masterId;
-        partnerartstartdatevalueid = this.partnerartstartdateoptions[0].itemId;
-        partnerartstartdatelist = this.RiskAssessmentList.filter(x => x.RiskAssessmentid == partnerartstartdatemasterid);
-        this.RiskAssessmentList.filter(x => x.RiskAssessmentid == partnerartstartdatemasterid)
-            .forEach(x => {
-                if (x.Value == partnerartstartdatevalueid) {
-                    x.DeleteFlag = false;
-                    x.Date = artstartdatepartner;
-                } else {
-                    x.DeleteFlag = true;
-                }
-            });
-        if (partnerartstartdatelist.findIndex(t => t.Value == partnerartstartdatevalueid) == -1) {
-
-            this.RiskAssessmentList.push({
-                'Id': 0,
-                'Comment': '',
-                'RiskAssessmentid': partnerartstartdatemasterid,
-                'Value': partnerartstartdatevalueid,
-                'DeleteFlag': false,
-                'Date': artstartdatepartner
-            });
+            }
 
         }
-    }
 
+        if (artstartdatepartner !== null && artstartdatepartner !== '' && artstartdatepartner !== undefined) {
 
-    if (partnercccenrollmentdetail[0] != null && partnercccenrollmentdetail[0] !== undefined) {
+            let partnerartstartdatemasterid: number;
+            let partnerartstartdatevalueid: number;
+            let partnerartstartdatelist: any[] = [];
+            partnerartstartdatemasterid = this.partnerartstartdateoptions[0].masterId;
+            partnerartstartdatevalueid = this.partnerartstartdateoptions[0].itemId;
+            partnerartstartdatelist = this.RiskAssessmentList.filter(x => x.RiskAssessmentid == partnerartstartdatemasterid);
+            this.RiskAssessmentList.filter(x => x.RiskAssessmentid == partnerartstartdatemasterid)
+                .forEach(x => {
+                    if (x.Value == partnerartstartdatevalueid) {
+                        x.DeleteFlag = false;
+                        x.Date = artstartdatepartner;
+                    } else {
+                        x.DeleteFlag = true;
+                    }
+                });
+            if (partnerartstartdatelist.findIndex(t => t.Value == partnerartstartdatevalueid) == -1) {
 
-        let partnercccenrollmentmasterid: number;
-        let partnercccenrollmentlist: any[] = [];
-        partnercccenrollmentmasterid = this.partnercccenrollmentoptions[0].masterId;
+                this.RiskAssessmentList.push({
+                    'Id': 0,
+                    'Comment': '',
+                    'RiskAssessmentid': partnerartstartdatemasterid,
+                    'Value': partnerartstartdatevalueid,
+                    'DeleteFlag': false,
+                    'Date': artstartdatepartner
+                });
 
-        partnercccenrollmentlist = this.RiskAssessmentList.filter(x => x.RiskAssessmentid == partnercccenrollmentmasterid);
-        this.RiskAssessmentList.filter(x => x.RiskAssessmentid == partnercccenrollmentmasterid)
-            .forEach(x => {
-                if (x.Value == partnercccenrollmentdetail) {
-                    x.DeleteFlag = false;
-
-                } else {
-                    x.DeleteFlag = true;
-                }
-            });
-        if (partnercccenrollmentlist.findIndex(t => t.Value == partnercccenrollmentdetail[0]) == -1) {
-
-            this.RiskAssessmentList.push({
-                'Id': 0,
-                'Comment': '',
-                'RiskAssessmentid': partnercccenrollmentmasterid,
-                'Value': partnercccenrollmentdetail,
-                'DeleteFlag': false,
-                'Date': ''
-            });
-
+            }
         }
-    }
 
 
-    if (partnersexwithoutcondoms[0] != null && partnersexwithoutcondoms[0] !== undefined) {
-        let partnersexcondomsmasterid: number;
-        let partnersexcondomslist: any[] = [];
-        partnersexcondomsmasterid = this.sexwithoutcondomoptions[0].masterId;
+        if (partnercccenrollmentdetail[0] != null && partnercccenrollmentdetail[0] !== undefined) {
 
-        partnersexcondomslist = this.RiskAssessmentList.filter(x => x.RiskAssessmentid == partnersexcondomsmasterid);
-        this.RiskAssessmentList.filter(x => x.RiskAssessmentid == partnersexcondomsmasterid)
-            .forEach(x => {
-                if (x.Value == partnersexwithoutcondoms[0]) {
-                    x.DeleteFlag = false;
+            let partnercccenrollmentmasterid: number;
+            let partnercccenrollmentlist: any[] = [];
+            partnercccenrollmentmasterid = this.partnercccenrollmentoptions[0].masterId;
 
-                } else {
-                    x.DeleteFlag = true;
-                }
-            });
-        if (partnersexcondomslist.findIndex(t => t.Value == partnersexwithoutcondoms[0]) == -1) {
+            partnercccenrollmentlist = this.RiskAssessmentList.filter(x => x.RiskAssessmentid == partnercccenrollmentmasterid);
+            this.RiskAssessmentList.filter(x => x.RiskAssessmentid == partnercccenrollmentmasterid)
+                .forEach(x => {
+                    if (x.Value == partnercccenrollmentdetail) {
+                        x.DeleteFlag = false;
 
-            this.RiskAssessmentList.push({
-                'Id': 0,
-                'Comment': '',
-                'RiskAssessmentid': partnersexcondomsmasterid,
-                'Value': partnersexwithoutcondoms[0],
-                'DeleteFlag': false,
-                'Date': ''
-            });
+                    } else {
+                        x.DeleteFlag = true;
+                    }
+                });
+            if (partnercccenrollmentlist.findIndex(t => t.Value == partnercccenrollmentdetail[0]) == -1) {
 
+                this.RiskAssessmentList.push({
+                    'Id': 0,
+                    'Comment': '',
+                    'RiskAssessmentid': partnercccenrollmentmasterid,
+                    'Value': partnercccenrollmentdetail,
+                    'DeleteFlag': false,
+                    'Date': ''
+                });
+
+            }
         }
-    }
 
 
-    if (CCCnumber != null && CCCnumber !== undefined && CCCnumber !== '') {
-        let cccnumbermasterid: number;
-        let cccnumbervalueid: number;
-        let cccnumberlist: any[] = [];
-        let findindex: number;
-        findindex = this.patientIdentifieroptions.findIndex(x => x.itemName == 'CCCNumber');
-        cccnumbermasterid = this.patientIdentifieroptions[findindex].masterId;
-        cccnumbervalueid = this.patientIdentifieroptions[findindex].itemId;
-        cccnumberlist = this.RiskAssessmentList.filter(x => x.RiskAssessmentid == cccnumbermasterid);
-        this.RiskAssessmentList.filter(x => x.RiskAssessmentid == cccnumbermasterid)
-            .forEach(x => {
-                if (x.Value == cccnumbervalueid) {
-                    x.DeleteFlag = false;
+        if (partnersexwithoutcondoms[0] != null && partnersexwithoutcondoms[0] !== undefined) {
+            let partnersexcondomsmasterid: number;
+            let partnersexcondomslist: any[] = [];
+            partnersexcondomsmasterid = this.sexwithoutcondomoptions[0].masterId;
 
-                } else {
-                    x.DeleteFlag = true;
-                }
-            });
-        if (cccnumberlist.findIndex(t => t.Value == cccnumbervalueid) == -1) {
+            partnersexcondomslist = this.RiskAssessmentList.filter(x => x.RiskAssessmentid == partnersexcondomsmasterid);
+            this.RiskAssessmentList.filter(x => x.RiskAssessmentid == partnersexcondomsmasterid)
+                .forEach(x => {
+                    if (x.Value == partnersexwithoutcondoms[0]) {
+                        x.DeleteFlag = false;
 
-            this.RiskAssessmentList.push({
-                'Id': 0,
-                'Comment': CCCnumber,
-                'RiskAssessmentid': cccnumbermasterid,
-                'Value': cccnumbervalueid,
-                'DeleteFlag': false,
-                'Date': ''
-            });
+                    } else {
+                        x.DeleteFlag = true;
+                    }
+                });
+            if (partnersexcondomslist.findIndex(t => t.Value == partnersexwithoutcondoms[0]) == -1) {
 
+                this.RiskAssessmentList.push({
+                    'Id': 0,
+                    'Comment': '',
+                    'RiskAssessmentid': partnersexcondomsmasterid,
+                    'Value': partnersexwithoutcondoms[0],
+                    'DeleteFlag': false,
+                    'Date': ''
+                });
+
+            }
         }
-    }
 
 
-    if (typeof Monthdetail != 'undefined' && Monthdetail) {
-        let hivsexdiscordantmasterid: number;
-        let hivsexdiscordantvalueid: number;
-        let hivsexdiscordantlist: any[] = [];
+        if (CCCnumber != null && CCCnumber !== undefined && CCCnumber !== '') {
+            let cccnumbermasterid: number;
+            let cccnumbervalueid: number;
+            let cccnumberlist: any[] = [];
+            let findindex: number;
+            findindex = this.patientIdentifieroptions.findIndex(x => x.itemName == 'CCCNumber');
+            cccnumbermasterid = this.patientIdentifieroptions[findindex].masterId;
+            cccnumbervalueid = this.patientIdentifieroptions[findindex].itemId;
+            cccnumberlist = this.RiskAssessmentList.filter(x => x.RiskAssessmentid == cccnumbermasterid);
+            this.RiskAssessmentList.filter(x => x.RiskAssessmentid == cccnumbermasterid)
+                .forEach(x => {
+                    if (x.Value == cccnumbervalueid) {
+                        x.DeleteFlag = false;
 
-        hivsexdiscordantmasterid = this.hivserodiscordantoptions[0].masterId;
-        hivsexdiscordantvalueid = this.hivserodiscordantoptions[0].itemId;
-        hivsexdiscordantlist = this.RiskAssessmentList.filter(x => x.RiskAssessmentid == hivsexdiscordantmasterid);
-        this.RiskAssessmentList.filter(x => x.RiskAssessmentid == hivsexdiscordantmasterid)
-            .forEach(x => {
-                if (x.Value == hivsexdiscordantvalueid) {
-                    x.DeleteFlag = false;
+                    } else {
+                        x.DeleteFlag = true;
+                    }
+                });
+            if (cccnumberlist.findIndex(t => t.Value == cccnumbervalueid) == -1) {
 
-                } else {
-                    x.DeleteFlag = true;
-                }
-            });
-        if (hivsexdiscordantlist.findIndex(t => t.Value == hivsexdiscordantvalueid) == -1) {
+                this.RiskAssessmentList.push({
+                    'Id': 0,
+                    'Comment': CCCnumber,
+                    'RiskAssessmentid': cccnumbermasterid,
+                    'Value': cccnumbervalueid,
+                    'DeleteFlag': false,
+                    'Date': ''
+                });
 
-            this.RiskAssessmentList.push({
-                'Id': 0,
-                'Comment': Monthdetail,
-                'RiskAssessmentid': hivsexdiscordantmasterid,
-                'Value': hivsexdiscordantvalueid,
-                'DeleteFlag': false,
-                'Date': ''
-            });
-
+            }
         }
-    }
 
 
-    if (typeof hivpartnerchildrendetail != 'undefined' && hivpartnerchildrendetail) {
-        let hivpartnerchildrenmasterid: number;
-        let hipartnerchildrenvalueid: number;
-        let hivpartnechildrenlist: any[] = [];
+        if (typeof Monthdetail != 'undefined' && Monthdetail) {
+            let hivsexdiscordantmasterid: number;
+            let hivsexdiscordantvalueid: number;
+            let hivsexdiscordantlist: any[] = [];
 
-        hivpartnerchildrenmasterid = this.partnerchildrenoptions[0].masterId;
-        hipartnerchildrenvalueid = this.partnerchildrenoptions[0].itemId;
-        hivpartnechildrenlist = this.RiskAssessmentList.filter(x => x.RiskAssessmentid == hivpartnerchildrenmasterid);
-        this.RiskAssessmentList.filter(x => x.RiskAssessmentid == hivpartnerchildrenmasterid)
-            .forEach(x => {
-                if (x.Value == hipartnerchildrenvalueid) {
-                    x.DeleteFlag = false;
+            hivsexdiscordantmasterid = this.hivserodiscordantoptions[0].masterId;
+            hivsexdiscordantvalueid = this.hivserodiscordantoptions[0].itemId;
+            hivsexdiscordantlist = this.RiskAssessmentList.filter(x => x.RiskAssessmentid == hivsexdiscordantmasterid);
+            this.RiskAssessmentList.filter(x => x.RiskAssessmentid == hivsexdiscordantmasterid)
+                .forEach(x => {
+                    if (x.Value == hivsexdiscordantvalueid) {
+                        x.DeleteFlag = false;
 
-                } else {
-                    x.DeleteFlag = true;
-                }
-            });
-        if (hivpartnechildrenlist.findIndex(t => t.Value == hipartnerchildrenvalueid) == -1) {
+                    } else {
+                        x.DeleteFlag = true;
+                    }
+                });
+            if (hivsexdiscordantlist.findIndex(t => t.Value == hivsexdiscordantvalueid) == -1) {
 
-            this.RiskAssessmentList.push({
-                'Id': 0,
-                'Comment': hivpartnerchildrendetail,
-                'RiskAssessmentid': hivpartnerchildrenmasterid,
-                'Value': hipartnerchildrenvalueid,
-                'DeleteFlag': false,
-                'Date': ''
-            });
+                this.RiskAssessmentList.push({
+                    'Id': 0,
+                    'Comment': Monthdetail,
+                    'RiskAssessmentid': hivsexdiscordantmasterid,
+                    'Value': hivsexdiscordantvalueid,
+                    'DeleteFlag': false,
+                    'Date': ''
+                });
 
+            }
         }
-    }
+
+
+        if (typeof hivpartnerchildrendetail != 'undefined' && hivpartnerchildrendetail) {
+            let hivpartnerchildrenmasterid: number;
+            let hipartnerchildrenvalueid: number;
+            let hivpartnechildrenlist: any[] = [];
+
+            hivpartnerchildrenmasterid = this.partnerchildrenoptions[0].masterId;
+            hipartnerchildrenvalueid = this.partnerchildrenoptions[0].itemId;
+            hivpartnechildrenlist = this.RiskAssessmentList.filter(x => x.RiskAssessmentid == hivpartnerchildrenmasterid);
+            this.RiskAssessmentList.filter(x => x.RiskAssessmentid == hivpartnerchildrenmasterid)
+                .forEach(x => {
+                    if (x.Value == hipartnerchildrenvalueid) {
+                        x.DeleteFlag = false;
+
+                    } else {
+                        x.DeleteFlag = true;
+                    }
+                });
+            if (hivpartnechildrenlist.findIndex(t => t.Value == hipartnerchildrenvalueid) == -1) {
+
+                this.RiskAssessmentList.push({
+                    'Id': 0,
+                    'Comment': hivpartnerchildrendetail,
+                    'RiskAssessmentid': hivpartnerchildrenmasterid,
+                    'Value': hipartnerchildrenvalueid,
+                    'DeleteFlag': false,
+                    'Date': ''
+                });
+
+            }
+        }
 
         console.log(this.RiskAssessmentList);
 
@@ -1081,7 +1089,7 @@ export class PrepRiskassessmentComponent implements OnInit {
                 (response) => {
                     this.PatientMasterVisitId = response['patientMasterVisitId'];
                     console.log(response);
-                    this.snotifyService.success(response.message, 'Submit RiskAssessment Form',
+                    this.snotifyService.success('Successfully submitted the form', 'Submit RiskAssessment Form',
                         this.notificationService.getConfig());
                     this.zone.run(() => {
                         this.router.navigate(
@@ -1203,16 +1211,18 @@ export class PrepRiskassessmentComponent implements OnInit {
         let riskreductionindex: number;
 
         riskreductionindex = this.RiskReductionEducationOptions.findIndex(x => x.itemId == riskreductioneducationstatus);
-        console.log(this.RiskReductionEducationOptions[riskreductionindex].masterId);
-        this.RiskAssessmentList.push({
-            'Id': 0,
-            'Comment': SpecifyRiskReductionEducationValue,
-            'RiskAssessmentid': this.RiskReductionEducationOptions[riskreductionindex].masterId,
-            'Value': this.RiskReductionEducationOptions[riskreductionindex].itemId,
-            'DeleteFlag': false,
-            'Date': ''
-        });
+        if (riskreductionindex !== -1) {
+            console.log(this.RiskReductionEducationOptions[riskreductionindex].masterId);
 
+            this.RiskAssessmentList.push({
+                'Id': 0,
+                'Comment': SpecifyRiskReductionEducationValue,
+                'RiskAssessmentid': this.RiskReductionEducationOptions[riskreductionindex].masterId,
+                'Value': this.RiskReductionEducationOptions[riskreductionindex].itemId,
+                'DeleteFlag': false,
+                'Date': ''
+            });
+        }
 
 
         let referralpreventionindex: number;
@@ -1248,16 +1258,17 @@ export class PrepRiskassessmentComponent implements OnInit {
         let riskeducationindex: number;
 
         riskeducationindex = this.riskEducationOptions.findIndex(x => x.itemId == riskeducationstatus);
-        console.log(this.riskEducationOptions[riskeducationindex].masterId);
-        this.RiskAssessmentList.push({
-            'Id': 0,
-            'Comment': SpecifyRiskEducationValue,
-            'RiskAssessmentid': this.riskEducationOptions[riskeducationindex].masterId,
-            'Value': this.riskEducationOptions[riskeducationindex].itemId,
-            'DeleteFlag': false,
-            'Date': ''
-        });
-
+        if (riskeducationindex !== -1) {
+            console.log(this.riskEducationOptions[riskeducationindex].masterId);
+            this.RiskAssessmentList.push({
+                'Id': 0,
+                'Comment': SpecifyRiskEducationValue,
+                'RiskAssessmentid': this.riskEducationOptions[riskeducationindex].masterId,
+                'Value': this.riskEducationOptions[riskeducationindex].itemId,
+                'DeleteFlag': false,
+                'Date': ''
+            });
+        }
         let partnerhivstatusmasterid: number;
         let partnerhivstatusvalueid: number;
 
@@ -1265,15 +1276,15 @@ export class PrepRiskassessmentComponent implements OnInit {
         partnerhivstatusvalueid = this.partnerstatusOptions[0].itemId;
         if (partnerhivstatusdatedetail !== null && partnerhivstatusdatedetail !== '' && partnerhivstatusdatedetail !== undefined) {
 
-        this.RiskAssessmentList.push({
-            'Id': 0,
-            'Comment': '',
-            'RiskAssessmentid': partnerhivstatusmasterid,
-            'Value': partnerhivstatusvalueid,
-            'DeleteFlag': false,
-            'Date': partnerhivstatusdatedetail
-        });
-    }
+            this.RiskAssessmentList.push({
+                'Id': 0,
+                'Comment': '',
+                'RiskAssessmentid': partnerhivstatusmasterid,
+                'Value': partnerhivstatusvalueid,
+                'DeleteFlag': false,
+                'Date': partnerhivstatusdatedetail
+            });
+        }
 
 
 
@@ -1413,19 +1424,27 @@ export class PrepRiskassessmentComponent implements OnInit {
 
 
 
-        this.prepservice.AddPatientEncounter(this.patientId, this.EncounterTypeId, this.serviceAreaId, this.UserId, date).subscribe(
+        const patientencounter: PatientMasterVisitEncounter = {
+            PatientId: this.patientId,
+            EncounterType: this.EncounterTypeId,
+            ServiceAreaId: this.serviceAreaId,
+            UserId: this.UserId,
+            EncounterDate: moment(date).toDate()
+
+        }
+        this.encounterservice.savePatientMasterVisit(patientencounter).subscribe(
             (result) => {
                 localStorage.setItem('patientEncounterId', result['patientEncounterId']);
                 localStorage.setItem('patientMasterVisitId', result['patientMasterVisitId']);
 
                 this.patientmastervisitid = result['patientMasterVisitId'];
-                this.snotifyService.success('Successfully Checked-In Patient', 'CheckIn', this.notificationService.getConfig());
+                // this.snotifyService.success('Successfully Checked-In Patient', 'CheckIn', this.notificationService.getConfig());
                 this.prepservice.AddEditBehaviourRisk(this.EncounterTypeId, this.UserId, this.patientId, this.patientmastervisitid, date,
                     this.serviceAreaId, this.RiskAssessmentList, this.ClinicalList).subscribe(
                         (response) => {
                             this.PatientMasterVisitId = response['patientMasterVisitId'];
                             console.log(response);
-                            this.snotifyService.success(response.message, 'Submit RiskAssessment Form',
+                            this.snotifyService.success('Successfully submitted the form', 'Submit RiskAssessment Form',
                                 this.notificationService.getConfig());
 
                             this.zone.run(() => {
