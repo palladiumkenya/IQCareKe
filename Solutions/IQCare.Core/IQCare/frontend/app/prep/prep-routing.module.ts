@@ -20,15 +20,19 @@ import {
 } from './_services/resolvers/prepriskassessment.resolver';
 import { PrepRiskassessmentComponent } from './prep-riskassessment/prep-riskassessment.component';
 import { ReasonsPrepAppointmentNotGivenResolver } from './_services/reasons-prep-appointment-notgiven.resolver';
+import { PrepEncounterTypeResolver } from './_services/prep-encounter-type.resolver';
 
 const routes: Routes = [
     {
         path: '',
         component: PrepEncounterHistoryComponent,
-        pathMatch: 'full'
+        pathMatch: 'full',
+        resolve: {
+            prepEncounterTypeOption: PrepEncounterTypeResolver
+        }
     },
     {
-        path: 'encounter/:patientId/:personId',
+        path: 'encounter/:patientId/:personId/:patientEncounterId/:patientMasterVisitId',
         component: PrepEncounterComponent,
         resolve: {
             yesNoOptions: YesNoResolver,

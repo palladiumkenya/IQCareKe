@@ -59,22 +59,19 @@ export class ServicesListComponent implements OnInit {
 
         this.getPersonEnrolledServices(this.personId);
 
-        console.log(this.encounterDetail);
+        /*console.log(this.encounterDetail);
 
         console.log('RiskEncounter');
-        console.log(this.riskencounter)
+        console.log(this.riskencounter);*/
 
         if (this.EligibilityInformation.length > 0) {
             this.htseligibility = this.EligibilityInformation.join(' ,');
-            console.log(this.EligibilityInformation);
-            console.log(this.htseligibility);
+            // console.log(this.EligibilityInformation);
+            // console.log(this.htseligibility);
         }
-        console.log('HTSEligibility');
+        /*console.log('HTSEligibility');
         console.log(this.HTSEligible);
-        console.log(this.personId);
-
-
-
+        console.log(this.personId);*/
     }
 
 
@@ -322,8 +319,7 @@ export class ServicesListComponent implements OnInit {
                                 if (this.EligibilityInformation.includes('Age below 15') == false) {
                                     this.EligibilityInformation.push('Age below 15');
                                 }
-                            }
-                            else {
+                            } else {
                                 this.EligibilityInformation.push('Age below 15');
                             }
 
@@ -344,11 +340,6 @@ export class ServicesListComponent implements OnInit {
                                     } else {
                                         this.EligibilityInformation.push('Weight less than 35');
                                     }
-
-
-
-
-
                                 } else if (this.vitalWeight == 0) {
                                     isEligible = false;
                                     this.Vitaldone = false;
@@ -361,8 +352,7 @@ export class ServicesListComponent implements OnInit {
                                      } */
 
 
-                                }
-                                else {
+                                } else {
                                     isEligible = true;
                                     if (isEligible == true) {
                                         if (this.riskencounter.length <= 0) {
@@ -377,8 +367,8 @@ export class ServicesListComponent implements OnInit {
 
                         }
                     }
-                    console.log('*******Called after Break****');
-                    console.log(this.EligibilityInformation);
+                    // console.log('*******Called after Break****');
+                    // console.log(this.EligibilityInformation);
                     break;
 
             }
@@ -394,8 +384,8 @@ export class ServicesListComponent implements OnInit {
             isCCCEnrolled = this.enrolledServices.filter(obj => obj.serviceAreaId == 1);
         }
         let isEligible: boolean = false;
-        console.log('gethtseligibility');
-        console.log(this.encounterDetail);
+        // console.log('gethtseligibility');
+        // console.log(this.encounterDetail);
         if (this.encounterDetail != undefined) {
             if (this.encounterDetail.finalResult == undefined) {
                 isEligible = false;
@@ -429,8 +419,7 @@ export class ServicesListComponent implements OnInit {
                     if (this.EligibilityInformation.includes('HTS not done') == false) {
                         this.EligibilityInformation.push('HTS not done');
                     }
-                }
-                else {
+                } else {
                     this.EligibilityInformation.push('HTS not done');
                 }
 

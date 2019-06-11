@@ -9,7 +9,7 @@ import {
     MatStepperModule, MatButtonModule,
     MatFormFieldModule, MatSelectModule,
     MatNativeDateModule, MatDatepickerModule,
-    MatInputModule, MatAutocompleteModule, MatTableModule
+    MatInputModule, MatAutocompleteModule, MatTableModule, MatDividerModule, MatDialogModule
 } from '@angular/material';
 import { ReactiveFormsModule } from '@angular/forms';
 // tslint:disable-next-line:max-line-length
@@ -31,13 +31,15 @@ import { PrepStatusResolver } from './_services/prep-status.resolver';
 import {
     AssessmentOutcomeResolver, ClientsBehaviourRiskResolver, SexualPartnetHivStatusProfileResolver,
     RiskReductionEducationResolver, ReferralPreventionServicesResolver, ClientWillingTakePrepResolver
-    , RiskEducationResolver, BehaviourRiskAssessmentResolver, EncounterTypeResolver , PartnerCCCEnrollmentResolver,
+    , RiskEducationResolver, BehaviourRiskAssessmentResolver, EncounterTypeResolver, PartnerCCCEnrollmentResolver,
     PatientIdentifierResolver, ARTStartDateResolver, PartnerHIVStatusResolver, DurationResolver, SexWithoutCondomResolver,
     HivPartnerResolver
 } from './_services/resolvers/prepriskassessment.resolver';
 import { PrepRiskassessmentComponent } from './prep-riskassessment/prep-riskassessment.component';
 import { PrepAppointmentComponent } from './encounter-components/prep-appointment/prep-appointment.component';
 import { ReasonsPrepAppointmentNotGivenResolver } from './_services/reasons-prep-appointment-notgiven.resolver';
+import { PrepCheckinComponent } from './prep-checkin/prep-checkin.component';
+import { PrepEncounterTypeResolver } from './_services/prep-encounter-type.resolver';
 
 @NgModule({
     declarations: [
@@ -49,25 +51,31 @@ import { ReasonsPrepAppointmentNotGivenResolver } from './_services/reasons-prep
         PregnancyOutcomeComponent,
         PrepStatusComponent,
         PrepRiskassessmentComponent,
-        PrepAppointmentComponent
+        PrepAppointmentComponent,
+        PrepCheckinComponent
     ],
     imports: [
         SharedModule, MatDatepickerModule, MatNativeDateModule,
         CommonModule, MatStepperModule, ReactiveFormsModule,
         MatButtonModule, MatFormFieldModule, MatSelectModule,
         MatInputModule, MatAutocompleteModule, MatTableModule,
-        PrepRoutingModule
+        PrepRoutingModule, MatDividerModule, MatDialogModule
     ],
     providers: [
         YesNoResolver, YesNoUnknownResolver,
         STIScreeningTreatmentResolver, FamilyPlanningMethodResolver,
         PlanningPregnancyResolver, YesNoDontKnowResolver, PregnancyOutcomeResolver,
-        PrepContraindicationsResolver, PrepStatusResolver
-        , AssessmentOutcomeResolver, ClientsBehaviourRiskResolver, SexualPartnetHivStatusProfileResolver,
-        RiskReductionEducationResolver, ReferralPreventionServicesResolver, ClientWillingTakePrepResolver
-        , RiskEducationResolver, BehaviourRiskAssessmentResolver, EncounterTypeResolver, PrepService,
-        PartnerCCCEnrollmentResolver, PatientIdentifierResolver, ARTStartDateResolver,
-         PartnerHIVStatusResolver, DurationResolver, SexWithoutCondomResolver, HivPartnerResolver,ReasonsPrepAppointmentNotGivenResolver
+        PrepContraindicationsResolver, PrepStatusResolver, AssessmentOutcomeResolver,
+        ClientsBehaviourRiskResolver, SexualPartnetHivStatusProfileResolver,
+        RiskReductionEducationResolver, ReferralPreventionServicesResolver,
+        ClientWillingTakePrepResolver, RiskEducationResolver, BehaviourRiskAssessmentResolver,
+        EncounterTypeResolver, PrepService, PartnerCCCEnrollmentResolver,
+        PatientIdentifierResolver, ARTStartDateResolver, PartnerHIVStatusResolver,
+        DurationResolver, SexWithoutCondomResolver, HivPartnerResolver,
+        ReasonsPrepAppointmentNotGivenResolver, PrepEncounterTypeResolver
+    ],
+    entryComponents: [
+        PrepCheckinComponent
     ]
 })
 export class PrepModule { }

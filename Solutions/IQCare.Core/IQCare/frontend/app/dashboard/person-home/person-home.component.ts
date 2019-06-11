@@ -66,14 +66,14 @@ export class PersonHomeComponent implements OnInit {
                 console.log(this.personVitalWeight + 'Correct Weight');
             }
 
-          
+
             this.riskencounters = this.riskassessmentencounter['encounters']
         });
 
         this.encounterDetail = this.htsencounters[0];
-        console.log("HTSEncounters");
+        /*console.log("HTSEncounters");
         console.log(this.htsencounters[0]);
-        console.log(this.encounterDetail);
+        console.log(this.encounterDetail);*/
 
 
         localStorage.removeItem('patientEncounterId');

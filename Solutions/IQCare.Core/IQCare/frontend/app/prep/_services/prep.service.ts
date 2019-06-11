@@ -39,7 +39,7 @@ export class PrepService {
             );
     }
 
-   
+
     public savePatientAdverseEvents(adverseEventsCommand: any[]): Observable<any> {
         if (adverseEventsCommand.length == 0) {
             return of([]);
@@ -77,6 +77,7 @@ export class PrepService {
                 catchError(this.errorHandler.handleError<any>('Error in saving Patient circumcision status'))
             );
     }
+
     AddEditBehaviourRisk(EncounterTypeId: number,
         createdby: number, patientid: number, patientmastervisitid: number, visitdate: string, serviceareaId:
             number, riskassessment: any[], clinicalnotes: any[]): Observable<any[]> {
@@ -133,4 +134,10 @@ export class PrepService {
         );
     }
 
+    public getPrepEncounterHistory(patientId: number, serviceAreaId: number): Observable<any[]> {
+        return this.http.get<any[]>(this.PREP_API_URL + '/api/PrepEncounter/GetPrepEncounters/' + patientId + '/' + serviceAreaId).pipe(
+            tap(getPrepEncounterHistory => this.errorHandler.log(`successfully fetched prep encounters`)),
+            catchError(this.errorHandler.handleError<any>('Error fetching prep encounters'))
+        );
+    }
 }
