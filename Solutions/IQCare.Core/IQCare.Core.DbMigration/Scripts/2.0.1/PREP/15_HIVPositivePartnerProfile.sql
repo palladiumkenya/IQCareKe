@@ -38,8 +38,10 @@ BEGIN
 insert into LookupItem(Name,DisplayName,DeleteFlag)
 values('PartnerARTStartDate','Partner ART StartDate','0')
 END
-go
-if  exists(select * from LookupItem where Name like 'ARTStartDate')
+
+
+
+if  exists(select * from LookupItem where Name like 'PartnerARTStartDate')
 BEGIN
 if not Exists (select * from LookupMasterItem  lmi inner join LookupMaster lm on lm.Id=lmi.LookupMasterId
 inner join LookupItem lit on lit.Id=lmi.LookupItemId where 

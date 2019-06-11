@@ -140,6 +140,13 @@ export class ServicesListComponent implements OnInit {
                         { relativeTo: this.route });
                 });
                 break;
+            case 'PREP':
+                this.zone.run(() => {
+                    this.router.navigate(['/dashboard/enrollment/prep/update/' + this.personId + '/' + serviceId + '/' + serviceCode + '/1'],
+                        { relativeTo: this.route });
+                });
+
+                break;
             default:
                 console.log('test default');
                 break;
@@ -199,6 +206,15 @@ export class ServicesListComponent implements OnInit {
                     /*this.snotifyService.error('Please Access CCC from the Greencard menu', 'Encounter History',
                         this.notificationService.getConfig());*/
                     break;
+                    case 'PREP':
+                    this.zone.run(() => {
+                        this.router.navigate(
+                            ['/prep'] ,
+                            { relativeTo: this.route });
+                    });
+                    break;
+
+
                 default:
                     this.zone.run(() => {
                         this.router.navigate(
