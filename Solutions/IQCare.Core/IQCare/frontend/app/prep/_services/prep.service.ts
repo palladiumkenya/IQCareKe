@@ -39,7 +39,7 @@ export class PrepService {
             );
     }
 
-   
+
     public savePatientAdverseEvents(adverseEventsCommand: any[]): Observable<any> {
         if (adverseEventsCommand.length == 0) {
             return of([]);
@@ -77,6 +77,7 @@ export class PrepService {
                 catchError(this.errorHandler.handleError<any>('Error in saving Patient circumcision status'))
             );
     }
+
     AddEditBehaviourRisk(EncounterTypeId: number,
         createdby: number, patientid: number, patientmastervisitid: number, visitdate: string, serviceareaId:
             number, riskassessment: any[], clinicalnotes: any[]) {
@@ -106,9 +107,9 @@ export class PrepService {
             'PatientId': patientid
         };
         return this.http.post<any>(this.API_URL + '/api/BehaviourRisk/Encounterexists', JSON.stringify(Indata), httpOptions)
-        .pipe (tap (CheckencounterExists => this.errorHandler.log('checked if RiskAssessmentEncounter Exists' )),
-          catchError(this.errorHandler.handleError<any[]>('CheckencounterExists'))
-        );
+            .pipe(tap(CheckencounterExists => this.errorHandler.log('checked if RiskAssessmentEncounter Exists')),
+                catchError(this.errorHandler.handleError<any[]>('CheckencounterExists'))
+            );
     }
 
     GetAssessmentDetails(patientid: number, patientmastervisitid: number): Observable<any[]> {
@@ -118,31 +119,29 @@ export class PrepService {
         };
 
         return this.http.post<any>(this.API_URL + '/api/BehaviourRisk/GetAssessmentFormDetails', JSON.stringify(Indata), httpOptions)
-        .pipe (tap (GetAssessmentDetails => this.errorHandler.log('GetAssessment Form Details ' )),
-          catchError(this.errorHandler.handleError<any[]>('GetAssessmentDetails'))
-        );
+            .pipe(tap(GetAssessmentDetails => this.errorHandler.log('GetAssessment Form Details ')),
+                catchError(this.errorHandler.handleError<any[]>('GetAssessmentDetails'))
+            );
 
     }
 
     public AddPatientEncounter(patientid: number, encountertype: number, serviceareaid: number,
         userid: number,
         encounterdate: string):
-     Observable<any> {
-         const Indata = {
+        Observable<any> {
+        const Indata = {
             'PatientId': patientid,
             'EncounterType': encountertype,
             'ServiceAreaId': serviceareaid,
             'UserId': userid,
             'EncounterDate': encounterdate
-         };
+        };
         return this.http.post<any>(this.API_URL + '/api/PatientMasterVisit/AddEncounterVisit',
             JSON.stringify(Indata), httpOptions).pipe(
                 tap(AddPatientEncounter => this.errorHandler.log(`successfully added the encounter`)),
                 catchError(this.errorHandler.handleError<any>('Error saving  patientencounter'))
             );
     }
-
-    
 
     public getPatientMasterVisits(patientId: number, patientmastervisitid: number): Observable<any[]> {
         return this.http.get<any[]>(this.API_URL + '/api/PatientServices/GetMasterVisits/' + patientId + '/' + patientmastervisitid).pipe(
@@ -151,4 +150,10 @@ export class PrepService {
         );
     }
 
+    public getPrepEncounterHistory(patientId: number, serviceAreaId: number): Observable<any[]> {
+        return this.http.get<any[]>(this.PREP_API_URL + '/api/PrepEncounter/GetPrepEncounters/' + patientId + '/' + serviceAreaId).pipe(
+            tap(getPrepEncounterHistory => this.errorHandler.log(`successfully fetched prep encounters`)),
+            catchError(this.errorHandler.handleError<any>('Error fetching prep encounters'))
+        );
+    }
 }

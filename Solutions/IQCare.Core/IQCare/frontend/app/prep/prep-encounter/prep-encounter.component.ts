@@ -25,6 +25,7 @@ export class PrepEncounterComponent implements OnInit {
     personId: number;
     userId: number;
     patientMasterVisitId: number;
+    patientEncounterId: number;
 
     isLinear: boolean = true;
 
@@ -78,7 +79,8 @@ export class PrepEncounterComponent implements OnInit {
             params => {
                 this.patientId = params.patientId;
                 this.personId = params.personId;
-                this.patientMasterVisitId = 1;
+                this.patientMasterVisitId = params.patientMasterVisitId;
+                this.patientEncounterId = params.patientEncounterId;
             }
         );
         this.userId = JSON.parse(localStorage.getItem('appUserId'));

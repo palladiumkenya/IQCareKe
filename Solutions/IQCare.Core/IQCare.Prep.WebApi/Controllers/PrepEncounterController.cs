@@ -20,7 +20,7 @@ namespace IQCare.Prep.WebApi.Controllers
             _mediator = mediator ?? throw new ArgumentNullException(nameof(mediator));
         }
 
-        [HttpGet]
+        [HttpGet("{patientId}/{serviceAreaId}")]
         public async Task<IActionResult> GetPrepEncounters(int patientId, int serviceAreaId)
         {
             var response = await _mediator.Send(new GetPrepEncountersCommand()
