@@ -169,6 +169,135 @@ export class EncounterTypeResolver implements Resolve<Observable<LookupItemView[
     }
 }
 
+@Injectable()
+export class PartnerCCCEnrollmentResolver implements Resolve<Observable<LookupItemView[]>> {
+    /**
+     *
+     */
+    constructor(private lookupItemService: LookupItemService) {
+
+    }
+
+    public resolve(
+        route: ActivatedRouteSnapshot,
+        state: RouterStateSnapshot
+    ): Observable<LookupItemView[]> {
+        return this.lookupItemService.getByGroupName('PartnerCCCEnrollment');
+    }
+}
+
+
+@Injectable()
+export class PatientIdentifierResolver implements Resolve<Observable<LookupItemView[]>> {
+    /**
+     *
+     */
+    constructor(private lookupItemService: LookupItemService) {
+
+    }
+
+    public resolve(
+        route: ActivatedRouteSnapshot,
+        state: RouterStateSnapshot
+    ): Observable<LookupItemView[]> {
+        return this.lookupItemService.getByGroupName('PatientIdentifier');
+    }
+}
+
+
+@Injectable()
+export class ARTStartDateResolver implements Resolve<Observable<LookupItemView[]>> {
+    /**
+     *
+     */
+    constructor(private lookupItemService: LookupItemService) {
+
+    }
+
+    public resolve(
+        route: ActivatedRouteSnapshot,
+        state: RouterStateSnapshot
+    ): Observable<LookupItemView[]> {
+        return this.lookupItemService.getByGroupName('ARTStartDate');
+    }
+}
+
+
+
+@Injectable()
+export class PartnerHIVStatusResolver implements Resolve<Observable<LookupItemView[]>> {
+    /**
+     *
+     */
+    constructor(private lookupItemService: LookupItemService) {
+
+    }
+
+    public resolve(
+        route: ActivatedRouteSnapshot,
+        state: RouterStateSnapshot
+    ): Observable<LookupItemView[]> {
+        return this.lookupItemService.getByGroupName('PartnerHIVStatus');
+    }
+}
+
+@Injectable()
+export class DurationResolver implements Resolve<Observable<LookupItemView[]>> {
+    /**
+     *
+     */
+    constructor(private lookupItemService: LookupItemService) {
+
+    }
+
+    public resolve(
+        route: ActivatedRouteSnapshot,
+        state: RouterStateSnapshot
+    ): Observable<LookupItemView[]> {
+        return this.lookupItemService.getByGroupName('Duration');
+    }
+}
+
+
+
+@Injectable()
+export class SexWithoutCondomResolver implements Resolve<Observable<LookupItemView[]>> {
+    /**
+     *
+     */
+    constructor(private lookupItemService: LookupItemService) {
+
+    }
+
+    public resolve(
+        route: ActivatedRouteSnapshot,
+        state: RouterStateSnapshot
+    ): Observable<LookupItemView[]> {
+        return this.lookupItemService.getByGroupName('SexWithoutCondom');
+    }
+}
+
+@Injectable()
+export class HivPartnerResolver implements Resolve<Observable<LookupItemView[]>> {
+    /**
+     *
+     */
+    constructor(private lookupItemService: LookupItemService) {
+
+    }
+
+    public resolve(
+        route: ActivatedRouteSnapshot,
+        state: RouterStateSnapshot
+    ): Observable<LookupItemView[]> {
+        return this.lookupItemService.getByGroupName('Children');
+    }
+}
+
+
+
+
+
 
 
 

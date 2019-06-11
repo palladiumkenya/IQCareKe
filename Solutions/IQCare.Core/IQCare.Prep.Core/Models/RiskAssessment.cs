@@ -17,6 +17,8 @@ namespace IQCare.Prep.Core.Models
     
         public int RiskAssessmentValue { get; set; }
 
+      
+
         public bool Active { get; set; }
 
         public string Comment { get; set; }
@@ -28,5 +30,7 @@ namespace IQCare.Prep.Core.Models
         public Boolean DeleteFlag { get; set; }
 
         public string AuditData { get; set; }
+
+        public DateTime? AssessmentDate { get; set; }
     }
 }

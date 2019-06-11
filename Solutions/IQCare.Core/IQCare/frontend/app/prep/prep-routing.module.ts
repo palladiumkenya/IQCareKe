@@ -14,7 +14,9 @@ import { PrepContraindicationsResolver } from './_services/prep-contraindication
 import {
     AssessmentOutcomeResolver, ClientsBehaviourRiskResolver, SexualPartnetHivStatusProfileResolver,
     RiskReductionEducationResolver, ReferralPreventionServicesResolver, ClientWillingTakePrepResolver
-    , RiskEducationResolver, BehaviourRiskAssessmentResolver, EncounterTypeResolver
+    , RiskEducationResolver, BehaviourRiskAssessmentResolver, EncounterTypeResolver, PartnerCCCEnrollmentResolver,
+    PatientIdentifierResolver, ARTStartDateResolver, PartnerHIVStatusResolver, DurationResolver, SexWithoutCondomResolver,
+    HivPartnerResolver
 } from './_services/resolvers/prepriskassessment.resolver';
 import { PrepRiskassessmentComponent } from './prep-riskassessment/prep-riskassessment.component';
 import { ReasonsPrepAppointmentNotGivenResolver } from './_services/reasons-prep-appointment-notgiven.resolver';
@@ -57,7 +59,16 @@ const routes: Routes = [
                     behaviourRiskAssessmentArray: BehaviourRiskAssessmentResolver,
                     ReferralPreventionArray: ReferralPreventionServicesResolver,
                     RiskReductionEducationArray: RiskReductionEducationResolver,
-                    EncounterTypeArray: EncounterTypeResolver
+                    EncounterTypeArray: EncounterTypeResolver,
+                    PartnerCCCEnrollmentArray: PartnerCCCEnrollmentResolver,
+                    PatientIdentifierArray: PatientIdentifierResolver,
+                    ARTStartDateArray: ARTStartDateResolver,
+                    PartnerHIVStatusArray: PartnerHIVStatusResolver,
+                    DurationArray: DurationResolver,
+                    SexWithoutCondomArray: SexWithoutCondomResolver,
+                    HivPartnerArray: HivPartnerResolver
+
+
                 }
             },
             {
@@ -72,7 +83,14 @@ const routes: Routes = [
                     behaviourRiskAssessmentArray: BehaviourRiskAssessmentResolver,
                     ReferralPreventionArray: ReferralPreventionServicesResolver,
                     RiskReductionEducationArray: RiskReductionEducationResolver,
-                    EncounterTypeArray: EncounterTypeResolver
+                    EncounterTypeArray: EncounterTypeResolver,
+                    PartnerCCCEnrollmentArray: PartnerCCCEnrollmentResolver,
+                    PatientIdentifierArray: PatientIdentifierResolver,
+                    ARTStartDateArray: ARTStartDateResolver,
+                    PartnerHIVStatusArray: PartnerHIVStatusResolver,
+                    DurationArray: DurationResolver,
+                    SexWithoutCondomArray: SexWithoutCondomResolver,
+                    HivPartnerArray: HivPartnerResolver
                 },
             }
         ]

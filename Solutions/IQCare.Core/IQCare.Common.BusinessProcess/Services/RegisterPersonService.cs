@@ -194,7 +194,155 @@ namespace IQCare.Common.BusinessProcess.Services
                 throw e;
             }
         }
+        public async Task<PatientARVHistory> GetPatientARVHistory(int patientId, int patientMasterId)
+        {
+            try
+            {
+                var result = await _unitOfWork.Repository<PatientARVHistory>().
+                    Get(x => x.PatientId == patientId && x.PatientMasterVisitId == x.PatientMasterVisitId).ToListAsync();
+                return result.FirstOrDefault();
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
+        public async Task<PatientARVHistory> AddPatientARVHistory(PatientARVHistory po)
+        {
+            try
+            {
 
+
+                await _unitOfWork.Repository<PatientARVHistory>().AddAsync(po);
+                await _unitOfWork.SaveAsync();
+
+                return po;
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+
+        }
+
+        public async Task<PatientARVHistory> UpdatePatientARVHistory(PatientARVHistory po)
+        {
+            try
+            {
+                _unitOfWork.Repository<PatientARVHistory>().Update(po);
+                await _unitOfWork.SaveAsync();
+
+                return po;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw e;
+            }
+
+        }
+
+
+
+
+        public async Task<PatientTransferIn> GetPatientTransferIn(int patientId, int patientMasterId)
+        {
+            try
+            {
+                var result = await _unitOfWork.Repository<PatientTransferIn>().
+                    Get(x => x.PatientId == patientId && x.PatientMasterVisitId == x.PatientMasterVisitId).ToListAsync();
+                return result.FirstOrDefault();
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
+        public async Task<PatientTransferIn> AddPatientTransferIn(PatientTransferIn po)
+        {
+            try
+            {
+
+
+                await _unitOfWork.Repository<PatientTransferIn>().AddAsync(po);
+                await _unitOfWork.SaveAsync();
+
+                return po;
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+
+        }
+
+        public async Task<PatientTransferIn> UpdatePatientTransferIn(PatientTransferIn po)
+        {
+            try
+            {
+                _unitOfWork.Repository<PatientTransferIn>().Update(po);
+                await _unitOfWork.SaveAsync();
+
+                return po;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw e;
+            }
+
+        }
+
+
+        public async Task<PatientOVCStatus> GetPatientOVCStatusByPersonId(int personId)
+        {
+            try
+            {
+                var result = await _unitOfWork.Repository<PatientOVCStatus>()
+                    .Get(x => x.PersonId == personId).ToListAsync();
+
+                return result.FirstOrDefault();
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
+
+        public async Task<PatientOVCStatus> AddPatientOVCStatus(PatientOVCStatus po)
+        {
+            try
+            {
+                
+
+                await _unitOfWork.Repository<PatientOVCStatus>().AddAsync(po);
+                await _unitOfWork.SaveAsync();
+
+                return po;
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+
+        }
+
+        public async Task<PatientOVCStatus> UpdatePatientOVCStauts(PatientOVCStatus po )
+        {
+            try
+            {
+                _unitOfWork.Repository<PatientOVCStatus>().Update(po);
+                await _unitOfWork.SaveAsync();
+
+                return po;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw e;
+            }
+
+        }
         public async Task<PersonRelationship> GetPersonRelationshipByPatientIdPersonId(int patientId, int personId)
         {
             try

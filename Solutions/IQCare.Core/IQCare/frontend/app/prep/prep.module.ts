@@ -31,7 +31,9 @@ import { PrepStatusResolver } from './_services/prep-status.resolver';
 import {
     AssessmentOutcomeResolver, ClientsBehaviourRiskResolver, SexualPartnetHivStatusProfileResolver,
     RiskReductionEducationResolver, ReferralPreventionServicesResolver, ClientWillingTakePrepResolver
-    , RiskEducationResolver, BehaviourRiskAssessmentResolver, EncounterTypeResolver
+    , RiskEducationResolver, BehaviourRiskAssessmentResolver, EncounterTypeResolver , PartnerCCCEnrollmentResolver,
+    PatientIdentifierResolver, ARTStartDateResolver, PartnerHIVStatusResolver, DurationResolver, SexWithoutCondomResolver,
+    HivPartnerResolver
 } from './_services/resolvers/prepriskassessment.resolver';
 import { PrepRiskassessmentComponent } from './prep-riskassessment/prep-riskassessment.component';
 import { PrepAppointmentComponent } from './encounter-components/prep-appointment/prep-appointment.component';
@@ -60,11 +62,12 @@ import { ReasonsPrepAppointmentNotGivenResolver } from './_services/reasons-prep
         YesNoResolver, YesNoUnknownResolver,
         STIScreeningTreatmentResolver, FamilyPlanningMethodResolver,
         PlanningPregnancyResolver, YesNoDontKnowResolver, PregnancyOutcomeResolver,
-        PrepContraindicationsResolver, PrepStatusResolver, AssessmentOutcomeResolver,
-        ClientsBehaviourRiskResolver, SexualPartnetHivStatusProfileResolver,
-        RiskReductionEducationResolver, ReferralPreventionServicesResolver, ClientWillingTakePrepResolver,
-        RiskEducationResolver, BehaviourRiskAssessmentResolver, EncounterTypeResolver, PrepService,
-        ReasonsPrepAppointmentNotGivenResolver
+        PrepContraindicationsResolver, PrepStatusResolver
+        , AssessmentOutcomeResolver, ClientsBehaviourRiskResolver, SexualPartnetHivStatusProfileResolver,
+        RiskReductionEducationResolver, ReferralPreventionServicesResolver, ClientWillingTakePrepResolver
+        , RiskEducationResolver, BehaviourRiskAssessmentResolver, EncounterTypeResolver, PrepService,
+        PartnerCCCEnrollmentResolver,PatientIdentifierResolver, ARTStartDateResolver,
+         PartnerHIVStatusResolver, DurationResolver, SexWithoutCondomResolver, HivPartnerResolver,ReasonsPrepAppointmentNotGivenResolver
     ]
 })
 export class PrepModule { }
