@@ -79,7 +79,7 @@ export class PrepService {
     }
     AddEditBehaviourRisk(EncounterTypeId: number,
         createdby: number, patientid: number, patientmastervisitid: number, visitdate: string, serviceareaId:
-            number, riskassessment: any[], clinicalnotes: any[]) {
+            number, riskassessment: any[], clinicalnotes: any[]): Observable<any[]> {
         const Indata = {
             'EncounterTypeId': EncounterTypeId,
             'UserId': createdby,
@@ -122,24 +122,6 @@ export class PrepService {
           catchError(this.errorHandler.handleError<any[]>('GetAssessmentDetails'))
         );
 
-    }
-
-    public AddPatientEncounter(patientid: number, encountertype: number, serviceareaid: number,
-        userid: number,
-        encounterdate: string):
-     Observable<any> {
-         const Indata = {
-            'PatientId': patientid,
-            'EncounterType': encountertype,
-            'ServiceAreaId': serviceareaid,
-            'UserId': userid,
-            'EncounterDate': encounterdate
-         };
-        return this.http.post<any>(this.API_URL + '/api/PatientMasterVisit/AddEncounterVisit',
-            JSON.stringify(Indata), httpOptions).pipe(
-                tap(AddPatientEncounter => this.errorHandler.log(`successfully added the encounter`)),
-                catchError(this.errorHandler.handleError<any>('Error saving  patientencounter'))
-            );
     }
 
     
