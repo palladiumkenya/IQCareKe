@@ -61,7 +61,7 @@ export class ServicesListComponent implements OnInit {
 
         console.log(this.encounterDetail);
 
-       console.log('RiskEncounter');
+        console.log('RiskEncounter');
         console.log(this.riskencounter)
 
         if (this.EligibilityInformation.length > 0) {
@@ -114,11 +114,11 @@ export class ServicesListComponent implements OnInit {
                     });
                     break;
                 case 'PREP':
-                  this.zone.run(() => {
-                    this.router.navigate(['/dashboard/enrollment/prep/' + this.personId + '/' + serviceId + '/' + serviceCode],
-                    { relativeTo: this.route });
-                  });
-                  break;
+                    this.zone.run(() => {
+                        this.router.navigate(['/dashboard/enrollment/prep/' + this.personId + '/' + serviceId + '/' + serviceCode],
+                            { relativeTo: this.route });
+                    });
+                    break;
                 default:
                     this.zone.run(() => {
                         this.router.navigate(['/dashboard/enrollment/' + this.personId + '/' + serviceId + '/' + serviceCode],
@@ -142,6 +142,13 @@ export class ServicesListComponent implements OnInit {
                     this.router.navigate(['/dashboard/enrollment/hts/update/' + this.personId + '/' + serviceId + '/' + serviceCode + '/1'],
                         { relativeTo: this.route });
                 });
+                break;
+            case 'PREP':
+                this.zone.run(() => {
+                    this.router.navigate(['/dashboard/enrollment/prep/update/' + this.personId + '/' + serviceId + '/' + serviceCode + '/1'],
+                        { relativeTo: this.route });
+                });
+
                 break;
             default:
                 console.log('test default');
@@ -202,6 +209,15 @@ export class ServicesListComponent implements OnInit {
                     /*this.snotifyService.error('Please Access CCC from the Greencard menu', 'Encounter History',
                         this.notificationService.getConfig());*/
                     break;
+                    case 'PREP':
+                    this.zone.run(() => {
+                        this.router.navigate(
+                            ['/prep'] ,
+                            { relativeTo: this.route });
+                    });
+                    break;
+
+
                 default:
                     this.zone.run(() => {
                         this.router.navigate(
@@ -215,8 +231,8 @@ export class ServicesListComponent implements OnInit {
     }
     navigateToRiskAssessment(serviceId) {
         this.zone.run(() => {
-            this.router.navigate(['/prep/riskassessment/' + this.patientId + '/' + this.personId 
-            + '/' + serviceId], { relativeTo: this.route });
+            this.router.navigate(['/prep/riskassessment/' + this.patientId + '/' + this.personId
+                + '/' + serviceId], { relativeTo: this.route });
         });
     }
     navigateToTriage() {
@@ -464,7 +480,7 @@ export class ServicesListComponent implements OnInit {
         }
         return visibility;
     }
-    validationRiskAssessment(code: string , riskassessment: Boolean): Boolean {
+    validationRiskAssessment(code: string, riskassessment: Boolean): Boolean {
         let visibility = false;
         if (code == 'PREP') {
             if (riskassessment == false) {
