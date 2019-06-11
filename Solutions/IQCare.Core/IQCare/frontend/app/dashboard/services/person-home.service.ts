@@ -135,6 +135,31 @@ export class PersonHomeService {
         );
     }
 
+    public getPatientTransferInDetails(serviceAreaId: number, personId: number): Observable<any> {
+        return this.http.get<any>(this.API_URL + '/api/Register/GetPatientTransferIn/' + serviceAreaId + '/' + personId).pipe(
+            tap(getPatientTransferInDetails => this.errorHandler.log(`get patient transefin details for personId:  `
+                + personId + ` and serviceAreaId: ` + serviceAreaId)),
+            catchError(this.errorHandler.handleError<any>('getPatientTransferInDetails'))
+        );
+    }
+   
+    public getPatientOVCStatusDetails(personId: number): Observable<any> {
+        return this.http.get<any>(this.API_URL + '/api/Register/GetPatientOVCStatus/'+ personId).pipe(
+            tap(getPatientOVCStatusDetails => this.errorHandler.log(`get patient OVC details for personId:  `
+                + personId)),
+            catchError(this.errorHandler.handleError<any>('getPatientOVCStatusDetails'))
+        );
+    }
+    public getPatientARVDetails(serviceAreaId: number, personId: number): Observable<any> {
+        return this.http.get<any>(this.API_URL + '/api/Register/GetPatientARVHistory/' + serviceAreaId + '/' + personId).pipe(
+            tap(getPatientARVDetails => this.errorHandler.log(`get patient ARV details for personId:  `
+                + personId + ` and serviceAreaId: ` + serviceAreaId)),
+            catchError(this.errorHandler.handleError<any>('getPatientARVDetails'))
+        );
+    }
+   
+
+    
     public getPatientEnrollmentDateByServiceAreaId(patientId: number, serviceAreaId: number): Observable<any> {
         return this.http.get<any>(this.API_URL + '/api/Register/GetPatientEnrollmentByServiceAreaId/'
             + patientId + '/' + serviceAreaId).pipe(

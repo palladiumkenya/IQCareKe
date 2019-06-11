@@ -22,6 +22,7 @@ CREATE TABLE [dbo].[RiskAssessment](
 	[RiskAssessmentValue] [int] NULL,
 	[Active] [bit] NOT NULL CONSTRAINT [DF_RiskAssessment_IsActive]  DEFAULT ((1)),
 	[Comment] [text] NULL,
+	[AssessmentDate] [DateTime] Null,
 	[CreatedBy] [int] NOT NULL,
 	[CreateDate] [datetime] NOT NULL,
 	[DeleteFlag] [bit] NOT NULL DEFAULT ((0)),

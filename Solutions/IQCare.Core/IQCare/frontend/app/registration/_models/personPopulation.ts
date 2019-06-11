@@ -3,4 +3,6 @@ export class PersonPopulation {
     priorityPopulation: any[];
     populationType: number;
     priorityPop: number;
+    DiscordantCouplePopulation:any[];
+    
 }

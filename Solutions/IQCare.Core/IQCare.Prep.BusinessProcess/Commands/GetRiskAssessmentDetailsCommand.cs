@@ -22,6 +22,7 @@ namespace IQCare.Prep.BusinessProcess.Commands
         public int RiskAssessmentid { get; set; }
 
         public int Value { get; set; }
+        public  DateTime? Date { get; set; }
 
         public bool DeleteFlag { get; set; }
 

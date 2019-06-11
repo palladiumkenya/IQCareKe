@@ -37,6 +37,8 @@ namespace IQCare.Prep.BusinessProcess.Commands
 
         public bool DeleteFlag { get; set; }
 
+        public DateTime? Date { get; set; }
+
 
     }
 

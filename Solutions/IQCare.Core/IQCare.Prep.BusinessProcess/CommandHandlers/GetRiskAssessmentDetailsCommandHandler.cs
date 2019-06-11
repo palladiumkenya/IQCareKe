@@ -35,12 +35,7 @@ namespace IQCare.Prep.BusinessProcess.CommandHandlers
 
             try
             {
-                var masterVisit = await _prepUnitOfWork.Repository<PatientMasterVisit>().Get(x => x.Id == request.PatientMasterVisitId && x.PatientId == request.PatientId && x.DeleteFlag ==false).OrderByDescending(x=>x.Id).ToListAsync();
-                if(masterVisit !=null && masterVisit.Count > 0)
-                {
-                    visitDate = masterVisit[0].VisitDate;
-                }
-                
+              
                 var RiskAssessmentList = await _prepUnitOfWork.Repository<RiskAssessment>().Get(x => x.PatientMasterVisitId == request.PatientMasterVisitId && x.PatientId == request.PatientId && x.DeleteFlag == false).ToListAsync();
                 if(RiskAssessmentList !=null && RiskAssessmentList.Count > 0)
                 {
@@ -52,7 +47,8 @@ namespace IQCare.Prep.BusinessProcess.CommandHandlers
                         rd.Value = x.RiskAssessmentValue;
                         rd.DeleteFlag = x.DeleteFlag;
                         rd.Comment = x.Comment;
-
+                        rd.Date = x.AssessmentDate;
+                        
                         rads.Add(rd);
 
                     });
