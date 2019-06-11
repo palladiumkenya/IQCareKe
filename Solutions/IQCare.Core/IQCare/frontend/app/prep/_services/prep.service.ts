@@ -18,7 +18,7 @@ const httpOptions = {
 export class PrepService {
     private API_URL = environment.API_URL;
     private PREP_API_URL = environment.API_PREP_URL;
-    private api = environment.API_URL;
+   
 
     constructor(private http: HttpClient,
         private errorHandler: ErrorHandlerService) {
@@ -91,9 +91,9 @@ export class PrepService {
             'ClinicalNotes': clinicalnotes
         };
 
+       console.log(Indata);
 
-
-        return this.http.post<any>(this.API_URL + '/api/BehaviourRisk/AddAssessmentVisitDetail', JSON.stringify(Indata)
+        return this.http.post<any>(this.PREP_API_URL + '/api/BehaviourRisk/AddAssessmentVisitDetail', JSON.stringify(Indata)
             , httpOptions).pipe(
                 tap((submitRiskAssessments: any) => this.errorHandler.log(`Submit RiskAssessment Results`)),
                 catchError(this.errorHandler.handleError<any>('submitRiskAssessmentResults'))
@@ -105,7 +105,7 @@ export class PrepService {
         const Indata = {
             'PatientId': patientid
         };
-        return this.http.post<any>(this.API_URL + '/api/BehaviourRisk/Encounterexists', JSON.stringify(Indata), httpOptions)
+        return this.http.post<any>(this.PREP_API_URL + '/api/BehaviourRisk/Encounterexists', JSON.stringify(Indata), httpOptions)
         .pipe (tap (CheckencounterExists => this.errorHandler.log('checked if RiskAssessmentEncounter Exists' )),
           catchError(this.errorHandler.handleError<any[]>('CheckencounterExists'))
         );
@@ -117,7 +117,7 @@ export class PrepService {
             'PatientMasterVisitId': patientmastervisitid
         };
 
-        return this.http.post<any>(this.API_URL + '/api/BehaviourRisk/GetAssessmentFormDetails', JSON.stringify(Indata), httpOptions)
+        return this.http.post<any>(this.PREP_API_URL + '/api/BehaviourRisk/GetAssessmentFormDetails', JSON.stringify(Indata), httpOptions)
         .pipe (tap (GetAssessmentDetails => this.errorHandler.log('GetAssessment Form Details ' )),
           catchError(this.errorHandler.handleError<any[]>('GetAssessmentDetails'))
         );

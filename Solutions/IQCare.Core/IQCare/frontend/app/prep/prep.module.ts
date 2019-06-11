@@ -66,7 +66,7 @@ import { ReasonsPrepAppointmentNotGivenResolver } from './_services/reasons-prep
         , AssessmentOutcomeResolver, ClientsBehaviourRiskResolver, SexualPartnetHivStatusProfileResolver,
         RiskReductionEducationResolver, ReferralPreventionServicesResolver, ClientWillingTakePrepResolver
         , RiskEducationResolver, BehaviourRiskAssessmentResolver, EncounterTypeResolver, PrepService,
-        PartnerCCCEnrollmentResolver,PatientIdentifierResolver, ARTStartDateResolver,
+        PartnerCCCEnrollmentResolver, PatientIdentifierResolver, ARTStartDateResolver,
          PartnerHIVStatusResolver, DurationResolver, SexWithoutCondomResolver, HivPartnerResolver,ReasonsPrepAppointmentNotGivenResolver
     ]
 })

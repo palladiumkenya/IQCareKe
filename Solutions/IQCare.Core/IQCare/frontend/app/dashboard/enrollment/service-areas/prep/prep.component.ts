@@ -782,7 +782,12 @@ export class PrepComponent implements OnInit {
                             localStorage.setItem('serviceAreaId', this.serviceId.toString());
 
 
-                            this.router.navigate(['/registration/home/'], { relativeTo: this.route });
+                           // this.router.navigate(['/registration/home/'], { relativeTo: this.route });
+                            this.zone.run(() => {
+                                this.router.navigate(
+                                    ['/prep'] ,
+                                    { relativeTo: this.route });
+                            });
                         });
 
 
