@@ -26,9 +26,10 @@
                             <div class="col-lg-3 col-sm-3 col-xs-12">
                                 <mat-form-field class="col-lg-12 col-sm-12 col-xs-12">
                                     <mat-label>IS Client Transfer In</mat-label>
-                                    <mat-select formControlName="ClientTransferIn" [(ngModel)]="selected"   >
+                                    <mat-select formControlName="ClientTransferIn">
                                         <mat-option [value]=""></mat-option>
-                                        <mat-option *ngFor="let clientType of  ClientTypes"   (onSelectionChange)="TransferIn($event)" [value]="clientType.itemId">
+                                        <mat-option *ngFor="let clientType of  ClientTypes"
+                                            (onSelectionChange)="TransferIn($event)" [value]="clientType.itemId">
                                             {{clientType.itemDisplayName}}</mat-option>
                                     </mat-select>
                                 </mat-form-field>
@@ -36,7 +37,7 @@
                             <div class="col-lg-3 col-sm-3 col-xs-12">
                                 <mat-form-field class="col-lg-12 col-sm-12 col-xs-12">
                                     <mat-label>Referred From</mat-label>
-                                    <mat-select formControlName="Referredfrom" >
+                                    <mat-select formControlName="Referredfrom">
                                         <mat-option [value]=""></mat-option>
                                         <mat-option *ngFor="let entrypoint of entrypoints" [value]="entrypoint.itemId">
                                             {{entrypoint.itemName}}</mat-option>
@@ -66,15 +67,14 @@
                             <div class="col-lg-3 col-sm-3 col-xs-12">
                                 <mat-form-field class="col-lg-12 col-sm-12 col-xs-12">
                                     <mat-label>MFLCode</mat-label>
-                                    <input matInput id="MFLCode" formControlName="MFLCode" name="MFLCode" type="number"
-                                      >
+                                    <input matInput id="MFLCode" formControlName="MFLCode" name="MFLCode" type="number">
                                 </mat-form-field>
                             </div>
                             <div class="col-lg-3 col-sm-3 col-xs-12">
                                 <mat-form-field class="col-lg-12 col-sm-12 col-xs-12">
 
                                     <mat-label>Year</mat-label>
-                                    <mat-select formControlName="Year" >
+                                    <mat-select formControlName="Year">
                                         <mat-option [value]=""></mat-option>
                                         <mat-option *ngFor="let yrs of  years" [value]="yrs">
                                             {{yrs}}</mat-option>
@@ -105,7 +105,7 @@
                                 <mat-form-field class="col-lg-12 col-sm-12 col-xs-12">
                                     <input placeholder="Transfer In Date" matInput [matDatepicker]="TransferDatepicker"
                                         [max]="maxDate" (focus)="TransferDatepicker.open()"
-                                        formControlName="TransferInDate" >
+                                        formControlName="TransferInDate">
                                     <mat-datepicker-toggle matSuffix [for]="TransferDatepicker"></mat-datepicker-toggle>
                                     <mat-datepicker #TransferDatepicker name="TransferInDate" ngDefaultControl>
                                     </mat-datepicker>
@@ -115,25 +115,27 @@
 
                             <div class="col-lg-3 col-sm-3 col-xs-12">
                                 <mat-form-field class="example-full-width">
-                                  
-                                    <input matInput placeholder="Search Filter" (change)="onTextChanged($event)" [formControl]="FacilitySelected">
+
+                                    <input matInput placeholder="Search Filter" (change)="onTextChanged($event)"
+                                        [formControl]="FacilitySelected">
                                     <br />
                                     <br />
                                     <mat-label>Referredfrom</mat-label>
-                                    <mat-select formControlName="FacilityListSelected"  (selectionChange)="change($event)">
+                                    <mat-select formControlName="FacilityListSelected"
+                                        (selectionChange)="change($event)">
                                         <mat-option *ngFor="let facility of filteredfacilities |async"
                                             [value]="facility.name">
                                             {{facility.name}}
                                         </mat-option>
                                     </mat-select>
-                                   
+
                                 </mat-form-field>
                             </div>
                             <div class="col-lg-3 col-sm-3 col-xs-12">
                                 <mat-form-field class="col-lg-12 col-sm-12 col-xs-12">
                                     <mat-label>MFLCode</mat-label>
                                     <input matInput id="TransferInMflCode" formControlName="TransferInMflCode"
-                                        name="TransferInMflCode" type="number" >
+                                        name="TransferInMflCode" type="number">
                                 </mat-form-field>
                             </div>
 
@@ -143,7 +145,7 @@
                         <div class="col-lg-3 col-sm-3 col-xs-12">
                             <mat-form-field class="col-lg-12 col-sm-12 col-xs-12">
                                 <mat-label>Current Regimen</mat-label>
-                                <mat-select formControlName="CurrentRegimen" >
+                                <mat-select formControlName="CurrentRegimen">
                                     <mat-option [value]=""></mat-option>
                                     <mat-option *ngFor="let regimen of PrepRegimen" [value]="regimen.itemId">
                                         {{regimen.itemDisplayName}}</mat-option>
@@ -168,11 +170,11 @@
                             </div>
                         </div>
                     </div>
-                    <div class="row" >
+                    <div class="row">
                         <div class="col-lg-3 col-sm-3 col-xs-12" *ngIf="isSchoolVisible">
                             <mat-form-field class="col-lg-12 col-sm-12 col-xs-12">
                                 <mat-label>Attends School</mat-label>
-                                <mat-select formControlName="IsSchool" >
+                                <mat-select formControlName="IsSchool">
                                     <mat-option [value]="1">Yes</mat-option>
                                     <mat-option [value]="0">No</mat-option>
 
@@ -199,7 +201,7 @@
                         <div class="col-lg-3 col-sm-3 col-xs-12">
                             <mat-form-field>
                                 <mat-select class="col-lg-12 col-sm-12 col-xs-12" placeholder="Key Population"
-                                    formControlName="KeyPopulation" disableRipple multiple >
+                                    formControlName="KeyPopulation" disableRipple multiple>
                                     <mat-option *ngFor="let keyPop of keyPops" [value]="keyPop.itemId">
                                         {{keyPop.itemDisplayName}}</mat-option>
                                 </mat-select>
@@ -209,7 +211,7 @@
                         <div class="col-lg-3 col-sm-3 col-xs-12">
                             <mat-form-field>
                                 <mat-select class="col-lg-12 col-sm-12 col-xs-12" placeholder="Discordant Couple"
-                                    formControlName="DiscordantCouple" disableRipple multiple >
+                                    formControlName="DiscordantCouple" disableRipple multiple>
                                     <mat-option *ngFor="let disPop of disPops" [value]="disPop.itemId">
                                         {{disPop.itemDisplayName}}</mat-option>
                                 </mat-select>
@@ -231,10 +233,9 @@
                         <div class="col-lg-3 col-sm-3 col-xs-12">
                             <mat-form-field class="col-lg-12 col-sm-12 col-xs-12">
                                 <mat-label>Previous Prep Use</mat-label>
-                                <mat-select formControlName="PrevPrepUse" [(ngModel)]="PrevPrepValueSelected" >
-                                    <mat-option (onSelectionChange)="changePrevUse($event)" [value]="1">Yes</mat-option>
-                                    <mat-option  (onSelectionChange)="changePrevUse($event)" [value]="0">No</mat-option>
-
+                                <mat-select formControlName="PrevPrepUse">
+                                    <mat-option (onSelectionChange)="changePrevUse()" [value]="1">Yes</mat-option>
+                                    <mat-option (onSelectionChange)="changePrevUse()" [value]="0">No</mat-option>
                                 </mat-select>
                             </mat-form-field>
                         </div>
@@ -243,7 +244,7 @@
 
                             <mat-form-field class="col-lg-12 col-sm-12 col-xs-12">
                                 <mat-label>Weeks</mat-label>
-                                <input matInput id="Weeks" formControlName="Weeks" name="Weeks" type="number" >
+                                <input matInput id="Weeks" formControlName="Weeks" name="Weeks" type="number">
                             </mat-form-field>
                         </div>
 
@@ -251,8 +252,7 @@
 
                             <mat-form-field class="col-lg-12 col-sm-12 col-xs-12">
                                 <mat-label>Months</mat-label>
-                                <input matInput id="Months" formControlName="Months" name="Months" type="number"
-                                  >
+                                <input matInput id="Months" formControlName="Months" name="Months" type="number">
                             </mat-form-field>
                         </div>
                     </div>

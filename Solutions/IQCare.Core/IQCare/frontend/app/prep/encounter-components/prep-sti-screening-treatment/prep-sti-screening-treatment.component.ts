@@ -1,6 +1,7 @@
 import { LookupItemView } from './../../../shared/_models/LookupItemView';
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
+import * as moment from 'moment';
 
 @Component({
     selector: 'app-prep-sti-screening-treatment',
@@ -30,7 +31,10 @@ export class PrepSTIScreeningTreatmentComponent implements OnInit {
             visitDate: new FormControl('', [Validators.required]),
             signsOrSymptomsOfSTI: new FormControl('', [Validators.required]),
             signsOfSTI: new FormControl('', [Validators.required]),
+            stiTreatmentOffered: new FormControl(''),
+            stiReferredLabInvestigation: new FormControl('')
         });
+        this.STIScreeningForm.controls.visitDate.setValue(new Date(localStorage.getItem('visitDate')));
 
         // emit form to the stepper 
         this.notify.emit(this.STIScreeningForm);

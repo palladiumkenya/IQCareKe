@@ -23,8 +23,8 @@ export class PrepEncounterHistoryComponent implements OnInit {
 
     prepEncounterType: LookupItemView[];
 
-    public prep_history_table_data: AdverseEventsTableData[] = [];
-    displayedColumns = ['adverseEvent', 'severity', 'medicine_causing', 'adverseEventsAction'];
+    public prep_history_table_data: PrepHistoryTableData[] = [];
+    displayedColumns = ['behaviourrisk', 'prep_status', 'next_appointment', 'provider'];
     dataSource = new MatTableDataSource(this.prep_history_table_data);
 
     constructor(private prepService: PrepService,
@@ -35,12 +35,18 @@ export class PrepEncounterHistoryComponent implements OnInit {
         private route: ActivatedRoute,
         public zone: NgZone,
         private router: Router) {
-        this.personId = 1;
-        this.patientId = 1;
-        this.serviceAreaId = 7;
     }
 
     ngOnInit() {
+        this.route.params.subscribe(
+            (params) => {
+                const { personId, patientId, serviceId } = params;
+                this.patientId = patientId;
+                this.personId = personId;
+                this.serviceAreaId = serviceId;
+            }
+        );
+
         this.route.data.subscribe(
             (res) => {
                 const { prepEncounterTypeOption } = res;
@@ -55,7 +61,10 @@ export class PrepEncounterHistoryComponent implements OnInit {
                 console.log(result);
                 result.forEach(arrayValue => {
                     this.prep_history_table_data.push({
-                        
+                        'behaviourrisk': 'Risk',
+                        prep_status: 'test',
+                        next_appointment: arrayValue.appointmentDate,
+                        provider: 'System Admin'
                     });
                 });
                 this.dataSource = new MatTableDataSource(this.prep_history_table_data);
@@ -91,8 +100,7 @@ export class PrepEncounterHistoryComponent implements OnInit {
 
                 this.encounterService.savePatientMasterVisit(patientMasterVisitEncounter).subscribe(
                     (result) => {
-                        localStorage.setItem('patientEncounterId', result['patientEncounterId']);
-                        localStorage.setItem('patientMasterVisitId', result['patientMasterVisitId']);
+                        localStorage.setItem('visitDate', data.visitdate);
 
                         this.snotifyService.success('Successfully Checked-In Patient', 'CheckIn', this.notificationService.getConfig());
                         this.zone.run(() => {
@@ -113,10 +121,9 @@ export class PrepEncounterHistoryComponent implements OnInit {
     }
 }
 
-export interface AdverseEventsTableData {
-    adverseEvent?: LookupItemView;
-    severity?: LookupItemView;
-    medicine_causing?: string;
-    adverseEventsAction?: LookupItemView;
-    outcome?: boolean;
+export interface PrepHistoryTableData {
+    behaviourrisk?: string;
+    prep_status?: string;
+    next_appointment?: Date;
+    provider?: string;
 }

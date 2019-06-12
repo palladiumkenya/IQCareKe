@@ -21,10 +21,11 @@ import {
 import { PrepRiskassessmentComponent } from './prep-riskassessment/prep-riskassessment.component';
 import { ReasonsPrepAppointmentNotGivenResolver } from './_services/reasons-prep-appointment-notgiven.resolver';
 import { PrepEncounterTypeResolver } from './_services/prep-encounter-type.resolver';
+import { PregnancyStatusResolver } from './_services/pregnancy-status.resolver';
 
 const routes: Routes = [
     {
-        path: '',
+        path: ':patientId/:personId/:serviceId',
         component: PrepEncounterHistoryComponent,
         pathMatch: 'full',
         resolve: {
@@ -44,7 +45,8 @@ const routes: Routes = [
             pregnancyOutcomeOptions: PregnancyOutcomeResolver,
             prepStatusOptions: PrepStatusResolver,
             prepContraindicationsOptions: PrepContraindicationsResolver,
-            reasonsPrepAppointmentNotGivenOptions: ReasonsPrepAppointmentNotGivenResolver
+            reasonsPrepAppointmentNotGivenOptions: ReasonsPrepAppointmentNotGivenResolver,
+            pregnancyStatusOptions: PregnancyStatusResolver
         }
     },
     {

@@ -14,6 +14,7 @@ import { PatientChronicIllness } from '../../pmtct/_models/PatientChronicIllness
 import * as moment from 'moment';
 import { AdverseEventsCommand } from '../_models/commands/AdverseEventsCommand';
 import { AllergiesCommand } from '../_models/commands/AllergiesCommand';
+import { PregnancyIndicatorCommand } from '../_models/commands/PregnancyIndicatorCommand';
 
 @Component({
     selector: 'app-prep-encounter',
@@ -47,6 +48,7 @@ export class PrepEncounterComponent implements OnInit {
     prepContraindicationsOptions: LookupItemView[];
     prepStatusOptions: LookupItemView[];
     reasonsPrepAppointmentNotGivenOptions: LookupItemView[];
+    pregnancyStatusOptions: LookupItemView[];
 
     STIScreeningAndTreatmentOptions: any[] = [];
     CircumcisionStatusOptions: any[] = [];
@@ -91,7 +93,8 @@ export class PrepEncounterComponent implements OnInit {
                 const { yesNoOptions, stiScreeningTreatmentOptions, yesNoUnknownOptions,
                     familyPlanningMethodsOptions, planningPregnancyOptions,
                     yesNoDontKnowOptions, pregnancyOutcomeOptions, prepContraindicationsOptions,
-                    prepStatusOptions, reasonsPrepAppointmentNotGivenOptions } = res;
+                    prepStatusOptions, reasonsPrepAppointmentNotGivenOptions,
+                    pregnancyStatusOptions } = res;
                 this.yesnoOptions = yesNoOptions['lookupItems'];
                 this.stiScreeningOptions = stiScreeningTreatmentOptions['lookupItems'];
                 this.yesNoUnknownOptions = yesNoUnknownOptions['lookupItems'];
@@ -102,6 +105,7 @@ export class PrepEncounterComponent implements OnInit {
                 this.prepStatusOptions = prepStatusOptions['lookupItems'];
                 this.prepContraindicationsOptions = prepContraindicationsOptions['lookupItems'];
                 this.reasonsPrepAppointmentNotGivenOptions = reasonsPrepAppointmentNotGivenOptions['lookupItems'];
+                this.pregnancyStatusOptions = pregnancyStatusOptions['lookupItems'];
             }
         );
 
@@ -273,6 +277,31 @@ export class PrepEncounterComponent implements OnInit {
             });
         }
 
+
+        let pregnancyOption = this.pregnancyStatusOptions.filter(obj => obj.displayName == 'Not Pregnant');
+        const isPregnant = this.yesnoOptions.filter(obj => obj.itemId == this.FertilityIntentionsFormGroup.value[0]['pregnant']);
+        if (isPregnant.length > 0) {
+            if (isPregnant[0].itemName == 'Yes') {
+                pregnancyOption = this.pregnancyStatusOptions.filter(obj => obj.displayName == 'Pregnant');
+            }
+        }
+
+        const pregnancyIndicatorCommand: PregnancyIndicatorCommand = {
+            PatientId: this.patientId,
+            PatientMasterVisitId: this.patientMasterVisitId,
+            LMP: this.FertilityIntentionsFormGroup.value[0]['lmp'],
+            EDD: null,
+            PregnancyStatusId: pregnancyOption[0].itemId,
+            ANCProfile: false,
+            ANCProfileDate: null,
+            Active: false,
+            DeleteFlag: false,
+            CreatedBy: this.userId,
+            CreateDate: new Date(),
+            AuditData: null,
+            VisitDate: this.STIScreeningFormGroup.value[0]['visitDate']
+        };
+
         const prepStiScreeningTreatmentCommand = this.prepService.StiScreeningTreatment();
         const prepStatusApiCommand = this.prepService.savePrepStatus(prepStatusCommand);
         const pncFamilyPlanning = this.pncService.savePncFamilyPlanning(familyPlanningCommand);
@@ -280,6 +309,7 @@ export class PrepEncounterComponent implements OnInit {
         const adverseEvents = this.prepService.savePatientAdverseEvents(this.adverseEvents_data);
         const allergies = this.prepService.savePatientAllergies(this.allergies_data);
         const circumcisionStatus = this.prepService.saveCircumcisionStatus(clientCircumcisionStatusCommand);
+        const pregnancyIndicator = this.prepService.savePregnancyIndicatorCommand(pregnancyIndicatorCommand);
 
         forkJoin([
             prepStatusApiCommand,
@@ -287,7 +317,8 @@ export class PrepEncounterComponent implements OnInit {
             chronicIllness,
             adverseEvents,
             allergies,
-            circumcisionStatus]).subscribe(
+            circumcisionStatus,
+            pregnancyIndicator]).subscribe(
                 (result) => {
                     console.log(result);
                     familyPlanningMethodCommand.PatientFPId = result[1]['patientId'];
@@ -299,7 +330,7 @@ export class PrepEncounterComponent implements OnInit {
                     );
 
                     this.zone.run(() => {
-                        this.router.navigate(['/prep'], { relativeTo: this.route });
+                        this.router.navigate(['/prep/' + this.patientId + '/' + this.personId + '/' + 7], { relativeTo: this.route });
                     });
                 },
                 (error) => {

@@ -7,6 +7,7 @@ import { tap, catchError } from 'rxjs/operators';
 import { PrepStatusCommand } from '../_models/commands/PrepStatusCommand';
 import { AllergiesCommand } from '../_models/commands/AllergiesCommand';
 import { ClientCircumcisionStatusCommand } from '../_models/commands/ClientCircumcisionStatusCommand';
+import { PregnancyIndicatorCommand } from '../_models/commands/PregnancyIndicatorCommand';
 
 const httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -18,7 +19,7 @@ const httpOptions = {
 export class PrepService {
     private API_URL = environment.API_URL;
     private PREP_API_URL = environment.API_PREP_URL;
-   
+    private MATERNITY_API_URL = environment.API_PMTCT_URL;
 
     constructor(private http: HttpClient,
         private errorHandler: ErrorHandlerService) {
@@ -78,6 +79,14 @@ export class PrepService {
             );
     }
 
+    public savePregnancyIndicatorCommand(pregnancyIndicatorCommand: PregnancyIndicatorCommand): Observable<any> {
+        return this.http.post<any>(this.MATERNITY_API_URL + '/api/PregnancyIndicator/AddPregnancyIndicator',
+            JSON.stringify(pregnancyIndicatorCommand), httpOptions).pipe(
+                tap(savePregnancyIndicatorCommand => this.errorHandler.log('Successfully saved patient pregnancy indicator status')),
+                catchError(this.errorHandler.handleError<any>('Error in saving Patient pregnancy indicator status'))
+            );
+    }
+
     AddEditBehaviourRisk(EncounterTypeId: number,
         createdby: number, patientid: number, patientmastervisitid: number, visitdate: string, serviceareaId:
             number, riskassessment: any[], clinicalnotes: any[]): Observable<any[]> {
@@ -92,7 +101,7 @@ export class PrepService {
             'ClinicalNotes': clinicalnotes
         };
 
-       console.log(Indata);
+        console.log(Indata);
 
         return this.http.post<any>(this.PREP_API_URL + '/api/BehaviourRisk/AddAssessmentVisitDetail', JSON.stringify(Indata)
             , httpOptions).pipe(
@@ -107,9 +116,9 @@ export class PrepService {
             'PatientId': patientid
         };
         return this.http.post<any>(this.PREP_API_URL + '/api/BehaviourRisk/Encounterexists', JSON.stringify(Indata), httpOptions)
-        .pipe (tap (CheckencounterExists => this.errorHandler.log('checked if RiskAssessmentEncounter Exists' )),
-          catchError(this.errorHandler.handleError<any[]>('CheckencounterExists'))
-        );
+            .pipe(tap(CheckencounterExists => this.errorHandler.log('checked if RiskAssessmentEncounter Exists')),
+                catchError(this.errorHandler.handleError<any[]>('CheckencounterExists'))
+            );
     }
 
     GetAssessmentDetails(patientid: number, patientmastervisitid: number): Observable<any[]> {
@@ -119,13 +128,13 @@ export class PrepService {
         };
 
         return this.http.post<any>(this.PREP_API_URL + '/api/BehaviourRisk/GetAssessmentFormDetails', JSON.stringify(Indata), httpOptions)
-        .pipe (tap (GetAssessmentDetails => this.errorHandler.log('GetAssessment Form Details ' )),
-          catchError(this.errorHandler.handleError<any[]>('GetAssessmentDetails'))
-        );
+            .pipe(tap(GetAssessmentDetails => this.errorHandler.log('GetAssessment Form Details ')),
+                catchError(this.errorHandler.handleError<any[]>('GetAssessmentDetails'))
+            );
 
     }
 
-    
+
 
     public getPatientMasterVisits(patientId: number, patientmastervisitid: number): Observable<any[]> {
         return this.http.get<any[]>(this.API_URL + '/api/PatientServices/GetMasterVisits/' + patientId + '/' + patientmastervisitid).pipe(

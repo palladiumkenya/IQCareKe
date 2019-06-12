@@ -115,7 +115,7 @@ export class PrepRiskassessmentComponent implements OnInit {
 
 
             } = res;
-            console.log(res);
+            console.log(ARTStartDateArray);
             console.log(assessmentOutComeArray);
             this.assessmentOutComeOptions = assessmentOutComeArray['lookupItems'];
             this.clientsBehaviourRiskOptions = clientsBehaviourRiskArray['lookupItems'];
@@ -1291,6 +1291,7 @@ export class PrepRiskassessmentComponent implements OnInit {
         let partnerartstartdatemasterid: number;
         let partnerartstartdatevalueid: number;
 
+        console.log(this.partnerartstartdateoptions);
         partnerartstartdatemasterid = this.partnerartstartdateoptions[0].masterId;
         partnerartstartdatevalueid = this.partnerartstartdateoptions[0].itemId;
         if (artstartdatepartner !== null && artstartdatepartner !== '' && artstartdatepartner !== undefined) {
