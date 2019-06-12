@@ -40,6 +40,7 @@ import { PrepAppointmentComponent } from './encounter-components/prep-appointmen
 import { ReasonsPrepAppointmentNotGivenResolver } from './_services/reasons-prep-appointment-notgiven.resolver';
 import { PrepCheckinComponent } from './prep-checkin/prep-checkin.component';
 import { PrepEncounterTypeResolver } from './_services/prep-encounter-type.resolver';
+import { PregnancyStatusResolver } from './_services/pregnancy-status.resolver';
 
 @NgModule({
     declarations: [
@@ -72,7 +73,8 @@ import { PrepEncounterTypeResolver } from './_services/prep-encounter-type.resol
         EncounterTypeResolver, PrepService, PartnerCCCEnrollmentResolver,
         PatientIdentifierResolver, ARTStartDateResolver, PartnerHIVStatusResolver,
         DurationResolver, SexWithoutCondomResolver, HivPartnerResolver,
-        ReasonsPrepAppointmentNotGivenResolver, PrepEncounterTypeResolver
+        ReasonsPrepAppointmentNotGivenResolver, PrepEncounterTypeResolver,
+        PregnancyStatusResolver
     ],
     entryComponents: [
         PrepCheckinComponent

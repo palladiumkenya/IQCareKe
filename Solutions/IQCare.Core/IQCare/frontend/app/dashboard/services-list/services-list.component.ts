@@ -199,22 +199,17 @@ export class ServicesListComponent implements OnInit {
                     break;
                 case 'CCC':
                     this.searchService.setSession(this.personId, this.patientId).subscribe((res) => {
-                        console.log(res);
                         window.location.href = location.protocol + '//' + window.location.hostname + ':' + window.location.port +
                             '/IQCare/CCC/Patient/PatientHome.aspx';
                     });
-                    /*this.snotifyService.error('Please Access CCC from the Greencard menu', 'Encounter History',
-                        this.notificationService.getConfig());*/
                     break;
-                    case 'PREP':
+                case 'PREP':
                     this.zone.run(() => {
                         this.router.navigate(
-                            ['/prep'] ,
+                            ['/prep/' + this.patientId + '/' + this.personId + '/' + serviceId],
                             { relativeTo: this.route });
                     });
                     break;
-
-
                 default:
                     this.zone.run(() => {
                         this.router.navigate(
@@ -310,8 +305,6 @@ export class ServicesListComponent implements OnInit {
                 case 'PREP':
                     if (isCCCEnrolled && isCCCEnrolled.length > 0) {
                         isEligible = false;
-
-
                     } else {
                         if (this.person.ageNumber < 15) {
                             isEligible = false;
@@ -322,11 +315,6 @@ export class ServicesListComponent implements OnInit {
                             } else {
                                 this.EligibilityInformation.push('Age below 15');
                             }
-
-                            /*  if (this.EligibilityInformation.length > 0) {
-      
-                                 this.htseligibility = this.EligibilityInformation.join(', ');
-                             } */
                         } else {
                             this.HTSEligible = this.getHTSEligibility();
                             isEligible = this.HTSEligible;
@@ -343,15 +331,6 @@ export class ServicesListComponent implements OnInit {
                                 } else if (this.vitalWeight == 0) {
                                     isEligible = false;
                                     this.Vitaldone = false;
-                                    /*  if (this.EligibilityInformation.length > 0) {
-                                         if (this.EligibilityInformation.includes('Vitals not done') == false) {
-                                             this.EligibilityInformation.push('Vitals not done');
-                                         }
-                                     } else {
-                                         this.EligibilityInformation.push('Vitals not done');
-                                     } */
-
-
                                 } else {
                                     isEligible = true;
                                     if (isEligible == true) {
@@ -360,17 +339,11 @@ export class ServicesListComponent implements OnInit {
                                             this.RiskDone = false;
                                         }
                                     }
-
                                 }
-
                             }
-
                         }
                     }
-                    // console.log('*******Called after Break****');
-                    // console.log(this.EligibilityInformation);
                     break;
-
             }
         }
 

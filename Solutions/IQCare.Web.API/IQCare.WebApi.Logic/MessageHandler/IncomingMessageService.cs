@@ -2,7 +2,6 @@
 using AutoMapper;
 using Entities.CCC.Enrollment;
 using Entity.WebApi;
-using Entity.WebApi.PSmart;
 using Interface.WebApi;
 using IQCare.CCC.UILogic;
 using IQCare.CCC.UILogic.Enrollment;
@@ -20,6 +19,7 @@ using IQCare.WebApi.Logic.PSmart;
 using System;
 using System.Collections.Generic;
 using System.Web.Script.Serialization;
+using Entity.WebApi.PSmart;
 
 namespace IQCare.WebApi.Logic.MessageHandler
 {

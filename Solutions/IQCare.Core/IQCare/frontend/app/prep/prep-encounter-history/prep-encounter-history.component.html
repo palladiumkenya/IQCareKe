@@ -20,45 +20,45 @@
                                     <mat-table #table [dataSource]="dataSource">
 
                                         <!-- Position Column -->
-                                        <ng-container matColumnDef="adverseEvent">
+                                        <ng-container matColumnDef="behaviourrisk">
                                             <mat-header-cell *matHeaderCellDef><strong>Behaviour Risk</strong>
                                             </mat-header-cell>
-                                            <mat-cell *matCellDef="let AdverseEventsTableData">
+                                            <mat-cell *matCellDef="let PrepHistoryTableData">
                                                 {{
-                                                    AdverseEventsTableData.adverseEvent.itemName
+                                                    PrepHistoryTableData.behaviourrisk
                                                 }}
                                             </mat-cell>
                                         </ng-container>
 
                                         <!-- Name Column -->
-                                        <ng-container matColumnDef="severity">
+                                        <ng-container matColumnDef="prep_status">
                                             <mat-header-cell *matHeaderCellDef><strong>Prep Status</strong>
                                             </mat-header-cell>
-                                            <mat-cell *matCellDef="let AdverseEventsTableData">
+                                            <mat-cell *matCellDef="let PrepHistoryTableData">
                                                 {{
-                                                    AdverseEventsTableData.severity.itemName
+                                                    PrepHistoryTableData.prep_status
                                                 }}
                                             </mat-cell>
                                         </ng-container>
 
                                         <!-- Name Column -->
-                                        <ng-container matColumnDef="medicine_causing">
+                                        <ng-container matColumnDef="next_appointment">
                                             <mat-header-cell *matHeaderCellDef><strong>Next Appointment</strong>
                                             </mat-header-cell>
-                                            <mat-cell *matCellDef="let AdverseEventsTableData">
+                                            <mat-cell *matCellDef="let PrepHistoryTableData">
                                                 {{
-                                                    AdverseEventsTableData.medicine_causing
+                                                    PrepHistoryTableData.next_appointment | date: 'dd-MMM-yyyy'
                                                 }}
                                             </mat-cell>
                                         </ng-container>
 
                                         <!-- Weight Column -->
-                                        <ng-container matColumnDef="adverseEventsAction">
+                                        <ng-container matColumnDef="provider">
                                             <mat-header-cell *matHeaderCellDef> <strong>Health Care Provider</strong>
                                             </mat-header-cell>
-                                            <mat-cell *matCellDef="let AdverseEventsTableData">
+                                            <mat-cell *matCellDef="let PrepHistoryTableData">
                                                 {{
-                                                    AdverseEventsTableData.adverseEventsAction.displayName
+                                                    PrepHistoryTableData.provider
                                                 }}
                                             </mat-cell>
                                         </ng-container>

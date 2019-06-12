@@ -53,7 +53,7 @@ where lm.Name='ARTStartDate' and lit.Name='PartnerARTStartDate'
 END
 END
 
-
+If Not Exists(Select 1 From LookupMasterItem where LookupMasterId=(SELECT TOP 1 Id FROM LookupMaster WHERE Name='ARTStartDate') and LookupItemId=(SELECT TOP 1 Id FROM LookupItem WHERE Name='PartnerARTStartDate')) Begin Insert Into LookupMasterItem(LookupMasterId ,LookupItemId,DisplayName, OrdRank)VALUES((SELECT TOP 1 Id FROM LookupMaster WHERE Name='ARTStartDate'),(SELECT TOP 1 Id FROM LookupItem WHERE Name='PartnerARTStartDate'),'Partner ART StartDate',1); end
 
 
 if not exists(select * from LookupMaster where Name like 'Duration')

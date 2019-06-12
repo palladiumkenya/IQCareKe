@@ -67,10 +67,6 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\References\Entities.Queue.dll</HintPath>
     </Reference>
-    <Reference Include="Entity.WebApi, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\References\Entity.WebApi.dll</HintPath>
-    </Reference>
     <Reference Include="EntityFramework">
       <HintPath>..\..\..\References\EntityFramework.dll</HintPath>
     </Reference>
@@ -193,6 +189,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Entity.WebApi\Entity.WebApi.csproj">
+      <Project>{062E43AE-C832-49DE-8ACC-4FFC9ABB4073}</Project>
+      <Name>Entity.WebApi</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Interface.WebApi\Interface.WebApi.csproj">
       <Project>{13CA40EB-1DB9-43C8-A1FA-CB6580D27DC3}</Project>
       <Name>Interface.WebApi</Name>

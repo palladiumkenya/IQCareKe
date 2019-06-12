@@ -23,21 +23,15 @@ import { AppStateService } from '../../../../shared/_services/appstate.service';
 import { Enrollment } from '../../../../registration/_models/enrollment';
 import { SearchService } from '../../../../registration/_services/search.service';
 import { RecordsService } from '../../../../records/_services/records.service';
-import { MomentDateAdapter } from '@angular/material-moment-adapter';
-import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material/core';
-import { MatDatepicker } from '@angular/material/datepicker';
-import { Facility } from '../../../../shared/_models/Facility';
 import * as moment from 'moment';
-import { takeUntil, take, startWith, map } from 'rxjs/operators';
+import { take } from 'rxjs/operators';
+
 @Component({
     selector: 'app-prep',
     templateUrl: './prep.component.html',
     styleUrls: ['./prep.component.css']
-
 })
 export class PrepComponent implements OnInit {
-
-
     public person: PersonView;
     public personView$: Subscription;
     form: FormGroup;
@@ -66,14 +60,13 @@ export class PrepComponent implements OnInit {
     currentDate: Date;
     facilities: any[] = [];
     isSchoolVisible: boolean = false;
-    PrevPrepValueSelected: number;
     public filteredfacilities: ReplaySubject<any[]> = new ReplaySubject<any[]>();
     public FacilitySelected: FormControl = new FormControl();
 
 
     facilityList: any[] = [];
     protected _onDestroy = new Subject<void>();
-    selected: string;
+
     constructor(private route: ActivatedRoute,
         private router: Router,
         public zone: NgZone,
@@ -100,10 +93,11 @@ export class PrepComponent implements OnInit {
             this.serviceId = serviceId;
             this.serviceCode = serviceCode;
 
-
             if (edit == 1) {
                 this.isEdit = true;
-            } this.userId = JSON.parse(localStorage.getItem('appUserId'));
+            }
+
+            this.userId = JSON.parse(localStorage.getItem('appUserId'));
             this.posId = localStorage.getItem('appPosID');
         });
         this.personPopulation = new PersonPopulation();
@@ -287,6 +281,7 @@ export class PrepComponent implements OnInit {
             }
         );
     }
+
     loadPrevTransferIn(): void {
         this.personHomeService.getPatientTransferInDetails(this.serviceId, this.personId).subscribe(
             (res) => {
@@ -328,6 +323,7 @@ export class PrepComponent implements OnInit {
             }
         );
     }
+
     loadPrevPrepUse(): void {
         this.personHomeService.getPatientARVDetails(this.serviceId, this.personId).subscribe(
             (res) => {
@@ -363,6 +359,7 @@ export class PrepComponent implements OnInit {
             }
         );
     }
+
     loadIdentifiers(pat: number): void {
         this.recordsService.getPatientIdentifiersList(pat).subscribe(
             (result) => {
@@ -409,6 +406,7 @@ export class PrepComponent implements OnInit {
             }
         );
     }
+
     LoadPrepEnrollmentDate(patientId: number): void {
         this.personHomeService.getPatientEnrollmentDateByServiceAreaId(patientId, this.serviceId).subscribe(
             (result) => {
@@ -438,8 +436,7 @@ export class PrepComponent implements OnInit {
                         });
                         this.form.controls.DiscordantCouple.setValue(arrayValue);
 
-                    }
-                    else {
+                    } else {
                         this.form.controls.populationType.setValue(2);
                         this.form.controls.KeyPopulation.enable({ onlySelf: false });
                         const arrayValue = [];
@@ -459,15 +456,9 @@ export class PrepComponent implements OnInit {
     }
 
     TransferIn(event) {
-        console.log(this.selected);
-        let value: string;
-        console.log(event);
-        console.log(event.source.viewValue);
         if (event.source.selected == true) {
-            if (event.source.viewValue === "Yes") {
+            if (event.source.viewValue === 'Yes') {
                 this.isVisible = true;
-
-
             } else {
                 this.isVisible = false;
                 this.form.controls.TransferInDate.setValue('');
@@ -479,9 +470,6 @@ export class PrepComponent implements OnInit {
         }
     }
 
-
-
-
     // tslint:disable-next-line: use-life-cycle-interface
     ngAfterViewInit() {
         this.setInitialValue();
@@ -492,6 +480,7 @@ export class PrepComponent implements OnInit {
         this._onDestroy.next();
         this._onDestroy.complete();
     }
+
     protected setInitialValue() {
         /**  this.filteredfacilities
               .pipe(take(1), takeUntil(this._onDestroy))
@@ -547,21 +536,12 @@ export class PrepComponent implements OnInit {
 
     }
 
-
-
     onTextChanged(event) {
-        console.log(event.target.value);
-        // this.FacilitySelected.valueChanges.pipe(
-        //  startWith(''),
-        // takeUntil(this._onDestroy)).
-        // subscribe(() => {
         this.filtercorrectfacilities(event.target.value);
-        //});
-
     }
-    changePrevUse() {
 
-        let val: number;
+    changePrevUse() {
+        /*let val: number;
         val = this.PrevPrepValueSelected;
         if (val === 1) {
             this.form.controls.Weeks.enable({ onlySelf: true });
@@ -570,8 +550,7 @@ export class PrepComponent implements OnInit {
         } else {
             this.form.controls.Weeks.disable({ onlySelf: true });
             this.form.controls.Months.disable({ onlySelf: true });
-        }
-
+        }*/
     }
 
     change(event) {
@@ -587,6 +566,7 @@ export class PrepComponent implements OnInit {
             console.log(this.form.controls.TransferInMflCode.value);
         }
     }
+
     onPopulationTypeChange() {
         const popType = this.form.controls.populationType.value;
         if (popType == 1) {
@@ -652,6 +632,7 @@ export class PrepComponent implements OnInit {
 
 
     }
+
     public Cancel() {
 
         this.zone.run(() => {
@@ -660,6 +641,7 @@ export class PrepComponent implements OnInit {
                 { relativeTo: this.route });
         });
     }
+
     public save() {
         const enrollment = new Enrollment();
         const { EnrollmentDate, KeyPopulation, populationType, DiscordantCouple, EnrollmentNumber, MFLCode, Year, ClientTransferIn
@@ -723,14 +705,15 @@ export class PrepComponent implements OnInit {
                                 , TransferInDate, InitiationDate,
                                 CurrentRegimen, FacilityListSelected
                                 , TransferInMflCode, '0', ClinicalNotes, this.userId, false)
-                                .subscribe((res) => {
-                                    let transferInId: number;
-                                    transferInId = res['transferInId'];
-                                    if (transferInId > 0) {
-                                        this.snotifyService.success('TransferIn details successfully saved', 'Transfer Status');
-                                    }
+                                .subscribe(
+                                    (res) => {
+                                        let transferInId: number;
+                                        transferInId = res['transferInId'];
+                                        if (transferInId > 0) {
+                                            this.snotifyService.success('TransferIn details successfully saved', 'Transfer Status');
+                                        }
 
-                                },
+                                    },
                                     (error) => {
                                         this.snotifyService.error('Error saving TransferIn Details ' + error, 'Transfer Status',
                                             this.notificationService.getConfig());
@@ -777,32 +760,21 @@ export class PrepComponent implements OnInit {
                         }
 
                         this.zone.run(() => {
-                            localStorage.setItem('personId', this.personId.toString());
-                            localStorage.setItem('patientId', this.patientId.toString());
-                            localStorage.setItem('serviceAreaId', this.serviceId.toString());
-
-
-                            // this.router.navigate(['/registration/home/'], { relativeTo: this.route });
                             this.zone.run(() => {
                                 this.router.navigate(
-                                    ['/prep'],
+                                    ['/prep/' + this.patientId + '/' + this.personId + '/' + this.serviceId],
                                     { relativeTo: this.route });
                             });
                         });
-
-
-
                     },
                     (err) => {
                         this.snotifyService.error('Error completing enrollment ' + err, 'Enrollment',
                             this.notificationService.getConfig());
                     }
-
                 );
             }
         );
     }
-
 }
 
 
