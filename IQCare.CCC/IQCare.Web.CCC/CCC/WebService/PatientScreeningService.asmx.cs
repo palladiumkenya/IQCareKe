@@ -11,6 +11,7 @@ using Entities.CCC.Encounter;
 using IQCare.CCC.UILogic.Visit;
 using Entities.CCC.Visit;
 using System.Collections;
+using System.Web;
 
 namespace IQCare.Web.CCC.WebService
 {
@@ -161,6 +162,7 @@ namespace IQCare.Web.CCC.WebService
         [WebMethod(EnableSession =true)]
         public string getScreeningByIdandMasterVisit(int PatientId, int PatientMasterVisitId)
         {
+            PatientId = int.Parse(HttpContext.Current.Session["PatientPK"].ToString());
             var PSM = new PatientScreeningManager();
             PatientScreening[] patientScreeningData = PSM.GetPatientScreeningByVisitId(PatientId,PatientMasterVisitId).ToArray();
             string jsonScreeningObject = "[]";
