@@ -54,4 +54,12 @@ export class PrepSTIScreeningTreatmentComponent implements OnInit {
             this.STIScreeningForm.controls.signsOfSTI.disable({ onlySelf: true });
         }
     }
+
+    onReferLabSelection(event) {
+
+    }
+
+    onSTITreatmentelection(event) {
+
+    }
 }

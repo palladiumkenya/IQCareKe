@@ -292,6 +292,8 @@ export class PrepEncounterComponent implements OnInit {
             LMP: this.FertilityIntentionsFormGroup.value[0]['lmp'],
             EDD: null,
             PregnancyStatusId: pregnancyOption[0].itemId,
+            PregnancyPlanned: this.FertilityIntentionsFormGroup.value[0]['pregnancyPlanned'],
+            PlanningToGetPregnant: this.FertilityIntentionsFormGroup.value[0]['planningToGetPregnant'],
             ANCProfile: false,
             ANCProfileDate: null,
             Active: false,

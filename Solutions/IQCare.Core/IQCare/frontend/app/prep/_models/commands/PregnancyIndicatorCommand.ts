@@ -4,6 +4,8 @@ export interface PregnancyIndicatorCommand {
     LMP?: Date;
     EDD?: Date;
     PregnancyStatusId?: number;
+    PregnancyPlanned?: number;
+    PlanningToGetPregnant?: number;
     ANCProfile: Boolean;
     ANCProfileDate?: Date;
     Active?: Boolean;
