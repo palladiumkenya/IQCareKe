@@ -24,7 +24,7 @@ export class PrepEncounterHistoryComponent implements OnInit {
     prepEncounterType: LookupItemView[];
 
     public prep_history_table_data: PrepHistoryTableData[] = [];
-    displayedColumns = ['behaviourrisk', 'prep_status', 'next_appointment', 'provider'];
+    displayedColumns = ['encounter_date', 'behaviourrisk', 'prep_status', 'next_appointment', 'provider'];
     dataSource = new MatTableDataSource(this.prep_history_table_data);
 
     constructor(private prepService: PrepService,

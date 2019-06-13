@@ -19,6 +19,16 @@
 
                                     <mat-table #table [dataSource]="dataSource">
 
+                                        <ng-container matColumnDef="encounter_date">
+                                            <mat-header-cell *matHeaderCellDef><strong>Encounter Date</strong>
+                                            </mat-header-cell>
+                                            <mat-cell *matCellDef="let PrepHistoryTableData">
+                                                {{
+                                                    PrepHistoryTableData.next_appointment | date: 'dd-MMM-yyyy'
+                                                }}
+                                            </mat-cell>
+                                        </ng-container>
+
                                         <!-- Position Column -->
                                         <ng-container matColumnDef="behaviourrisk">
                                             <mat-header-cell *matHeaderCellDef><strong>Behaviour Risk</strong>

@@ -41,6 +41,8 @@ namespace IQCare.Maternity.BusinessProcess.CommandHandlers
                         result[0].ANCProfile = request.ANCProfile;
                         result[0].ANCProfileDate = request.ANCProfileDate;
                         result[0].VisitDate = request.VisitDate;
+                        result[0].PregnancyPlanned = request.PregnancyPlanned;
+                        result[0].PlanningToGetPregnant = request.PlanningToGetPregnant;
 
                         _maternityUnitOfWork.Repository<PregnancyIndicator>().Update(result[0]);
                         await _maternityUnitOfWork.SaveAsync();
@@ -58,6 +60,8 @@ namespace IQCare.Maternity.BusinessProcess.CommandHandlers
                         LMP = request.LMP,
                         EDD = request.EDD,
                         PregnancyStatusId = request.PregnancyStatusId,
+                        PregnancyPlanned = request.PregnancyPlanned,
+                        PlanningToGetPregnant = request.PlanningToGetPregnant,
                         ANCProfile = request.ANCProfile,
                         ANCProfileDate = request.ANCProfileDate,
                         VisitDate = request.VisitDate,
