@@ -803,9 +803,9 @@ export class PncComponent implements OnInit {
             UserId: this.userId
         };
 
-        console.log(this.drugAdministration_PartnerTesting_FormGroup);
+        /*console.log(this.drugAdministration_PartnerTesting_FormGroup);
         console.log(this.drugAdministrationCategories);
-        console.log(this.administeredInfantDrugs);
+        console.log(this.administeredInfantDrugs);*/
 
         for (let i = 0; i < this.drugAdministrationCategories.length; i++) {
             let value;

@@ -24,6 +24,7 @@ namespace IQCare.Maternity.BusinessProcess.CommandHandlers
             _mapper = mapper;
             _maternityUnitOfWork = maternityUnitOfWork;
         }
+
         public async Task<Result<AddPatientScreeningResponse>> Handle(PatientScreeningCommand request, CancellationToken cancellationToken)
         {
             try

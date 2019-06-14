@@ -11,5 +11,8 @@ namespace IQCare.Prep.Core.Models
         public int EncounterTypeId { get; set; }
         public int? PrepStatusToday { get; set; }
         public DateTime? AppointmentDate { get; set; }
+        public DateTime? EncounterStartTime { get; set; }
+        public string PreStatus { get; set; }
+        public string ProviderName { get; set; }
     }
 }

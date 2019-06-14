@@ -13,6 +13,8 @@ CREATE TABLE [dbo].[PatientPrEPStatus](
 	[AdherenceCounsellingDone] [int] NOT NULL,
 	[ContraindicationsPrepPresent] [int] NOT NULL,
 	[PrepStatusToday] [int] NOT NULL,
+	[CondomsIssued] [int] NULL,
+	[NoOfCondoms] [int] NULL,
 	[DeleteFlag] [bit] NOT NULL,
 	[CreatedBy] [int] NOT NULL,
 	[CreateDate] [datetime] NOT NULL,

@@ -22,6 +22,7 @@ import { PrepRiskassessmentComponent } from './prep-riskassessment/prep-riskasse
 import { ReasonsPrepAppointmentNotGivenResolver } from './_services/reasons-prep-appointment-notgiven.resolver';
 import { PrepEncounterTypeResolver } from './_services/prep-encounter-type.resolver';
 import { PregnancyStatusResolver } from './_services/pregnancy-status.resolver';
+import { ScreenedForSTIResolver } from './_services/screened-sti.resolver';
 
 const routes: Routes = [
     {
@@ -46,7 +47,8 @@ const routes: Routes = [
             prepStatusOptions: PrepStatusResolver,
             prepContraindicationsOptions: PrepContraindicationsResolver,
             reasonsPrepAppointmentNotGivenOptions: ReasonsPrepAppointmentNotGivenResolver,
-            pregnancyStatusOptions: PregnancyStatusResolver
+            pregnancyStatusOptions: PregnancyStatusResolver,
+            screenedForSTIOptions: ScreenedForSTIResolver
         }
     },
     {
