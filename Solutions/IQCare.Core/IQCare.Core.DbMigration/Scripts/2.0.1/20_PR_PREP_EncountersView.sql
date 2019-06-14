@@ -10,6 +10,7 @@ AS
 SELECT 
 ISNULL(ROW_NUMBER() OVER(ORDER BY PE.Id ASC), -1) AS RowID,
 PE.Id, 
+PM.Id PatientMasterVisitId,
 PE.PatientId, 
 PE.ServiceAreaId, 
 PE.EncounterTypeId, 

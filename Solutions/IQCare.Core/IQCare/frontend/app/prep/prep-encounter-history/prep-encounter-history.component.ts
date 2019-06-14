@@ -24,7 +24,7 @@ export class PrepEncounterHistoryComponent implements OnInit {
     prepEncounterType: LookupItemView[];
 
     public prep_history_table_data: PrepHistoryTableData[] = [];
-    displayedColumns = ['encounter_date', 'behaviourrisk', 'prep_status', 'next_appointment', 'provider'];
+    displayedColumns = ['encounter_date', 'behaviourrisk', 'prep_status', 'next_appointment', 'provider', 'edit'];
     dataSource = new MatTableDataSource(this.prep_history_table_data);
 
     constructor(private prepService: PrepService,
@@ -58,14 +58,16 @@ export class PrepEncounterHistoryComponent implements OnInit {
         const prepEncounters = this.prepService.getPrepEncounterHistory(this.patientId, this.serviceAreaId);
         prepEncounters.subscribe(
             (result) => {
-                console.log(result);
+                // console.log(result);
                 result.forEach(arrayValue => {
                     this.prep_history_table_data.push({
                         'behaviourrisk': 'Risk',
                         prep_status: arrayValue.preStatus,
                         next_appointment: arrayValue.appointmentDate,
                         provider: arrayValue.providerName,
-                        encounterStartTime: arrayValue.encounterStartTime
+                        encounterStartTime: arrayValue.encounterStartTime,
+                        patientEncounterId: arrayValue.id,
+                        patientMasterVisitId: arrayValue.patientMasterVisitId
                     });
                 });
                 this.dataSource = new MatTableDataSource(this.prep_history_table_data);
@@ -120,6 +122,18 @@ export class PrepEncounterHistoryComponent implements OnInit {
             }
         );
     }
+
+    onEdit(element) {
+        this.zone.run(() => {
+            this.router.navigate(['/prep/encounter/' + '/' + this.patientId + '/' + this.personId + '/'
+                + element['patientEncounterId'] + '/' + element['patientMasterVisitId'] + '/1'],
+                { relativeTo: this.route });
+        });
+    }
+
+    onView(element) {
+        alert('to be done');
+    }
 }
 
 export interface PrepHistoryTableData {
@@ -128,4 +142,6 @@ export interface PrepHistoryTableData {
     next_appointment?: Date;
     provider?: string;
     encounterStartTime?: Date;
+    patientEncounterId?: number;
+    patientMasterVisitId?: number;
 }

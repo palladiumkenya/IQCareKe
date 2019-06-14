@@ -20,6 +20,7 @@ export class PrepSTIScreeningTreatmentComponent implements OnInit {
     @Input() STIScreeningAndTreatmentOptions: any;
     @Input() patientId: number;
     @Input() personId: number;
+    @Input() isEdit: number;
     @Output() notify: EventEmitter<FormGroup> = new EventEmitter<FormGroup>();
 
     constructor(private _formBuilder: FormBuilder,
@@ -45,6 +46,14 @@ export class PrepSTIScreeningTreatmentComponent implements OnInit {
         const { yesnoOptions, stiScreeningOptions } = this.STIScreeningAndTreatmentOptions[0];
         this.yesnoOptions = yesnoOptions;
         this.stiScreeningOptions = stiScreeningOptions;
+
+        if (this.isEdit == 1) {
+            this.loadSTIScreening();
+        }
+    }
+
+    loadSTIScreening(): void {
+        
     }
 
     public onSignsOrSymptomsSelection(event) {

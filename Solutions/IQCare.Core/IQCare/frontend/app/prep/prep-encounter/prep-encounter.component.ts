@@ -33,6 +33,7 @@ export class PrepEncounterComponent implements OnInit {
     patientMasterVisitId: number;
     patientEncounterId: number;
     personGender: string;
+    isEdit: number;
 
     isLinear: boolean = true;
 
@@ -98,6 +99,7 @@ export class PrepEncounterComponent implements OnInit {
                 this.personId = params.personId;
                 this.patientMasterVisitId = params.patientMasterVisitId;
                 this.patientEncounterId = params.patientEncounterId;
+                this.isEdit = params.edit;
             }
         );
         this.userId = JSON.parse(localStorage.getItem('appUserId'));
