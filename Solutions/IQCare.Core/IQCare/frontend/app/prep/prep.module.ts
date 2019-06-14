@@ -9,7 +9,7 @@ import {
     MatStepperModule, MatButtonModule,
     MatFormFieldModule, MatSelectModule,
     MatNativeDateModule, MatDatepickerModule,
-    MatInputModule, MatAutocompleteModule, MatTableModule, MatDividerModule, MatDialogModule
+    MatInputModule, MatAutocompleteModule, MatTableModule, MatDividerModule, MatDialogModule, MatIconModule
 } from '@angular/material';
 import { ReactiveFormsModule } from '@angular/forms';
 // tslint:disable-next-line:max-line-length
@@ -61,7 +61,8 @@ import { ScreenedForSTIResolver } from './_services/screened-sti.resolver';
         CommonModule, MatStepperModule, ReactiveFormsModule,
         MatButtonModule, MatFormFieldModule, MatSelectModule,
         MatInputModule, MatAutocompleteModule, MatTableModule,
-        PrepRoutingModule, MatDividerModule, MatDialogModule
+        PrepRoutingModule, MatDividerModule, MatDialogModule,
+        MatIconModule
     ],
     providers: [
         YesNoResolver, YesNoUnknownResolver,

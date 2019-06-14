@@ -34,22 +34,45 @@ const routes: Routes = [
         }
     },
     {
-        path: 'encounter/:patientId/:personId/:patientEncounterId/:patientMasterVisitId',
-        component: PrepEncounterComponent,
-        resolve: {
-            yesNoOptions: YesNoResolver,
-            stiScreeningTreatmentOptions: STIScreeningTreatmentResolver,
-            yesNoUnknownOptions: YesNoUnknownResolver,
-            familyPlanningMethodsOptions: FamilyPlanningMethodResolver,
-            planningPregnancyOptions: PlanningPregnancyResolver,
-            yesNoDontKnowOptions: YesNoDontKnowResolver,
-            pregnancyOutcomeOptions: PregnancyOutcomeResolver,
-            prepStatusOptions: PrepStatusResolver,
-            prepContraindicationsOptions: PrepContraindicationsResolver,
-            reasonsPrepAppointmentNotGivenOptions: ReasonsPrepAppointmentNotGivenResolver,
-            pregnancyStatusOptions: PregnancyStatusResolver,
-            screenedForSTIOptions: ScreenedForSTIResolver
-        }
+        path: 'encounter',
+        children: [
+            {
+                path: ':patientId/:personId/:patientEncounterId/:patientMasterVisitId',
+                component: PrepEncounterComponent,
+                resolve: {
+                    yesNoOptions: YesNoResolver,
+                    stiScreeningTreatmentOptions: STIScreeningTreatmentResolver,
+                    yesNoUnknownOptions: YesNoUnknownResolver,
+                    familyPlanningMethodsOptions: FamilyPlanningMethodResolver,
+                    planningPregnancyOptions: PlanningPregnancyResolver,
+                    yesNoDontKnowOptions: YesNoDontKnowResolver,
+                    pregnancyOutcomeOptions: PregnancyOutcomeResolver,
+                    prepStatusOptions: PrepStatusResolver,
+                    prepContraindicationsOptions: PrepContraindicationsResolver,
+                    reasonsPrepAppointmentNotGivenOptions: ReasonsPrepAppointmentNotGivenResolver,
+                    pregnancyStatusOptions: PregnancyStatusResolver,
+                    screenedForSTIOptions: ScreenedForSTIResolver
+                }
+            },
+            {
+                path: ':patientId/:personId/:patientEncounterId/:patientMasterVisitId/:edit',
+                component: PrepEncounterComponent,
+                resolve: {
+                    yesNoOptions: YesNoResolver,
+                    stiScreeningTreatmentOptions: STIScreeningTreatmentResolver,
+                    yesNoUnknownOptions: YesNoUnknownResolver,
+                    familyPlanningMethodsOptions: FamilyPlanningMethodResolver,
+                    planningPregnancyOptions: PlanningPregnancyResolver,
+                    yesNoDontKnowOptions: YesNoDontKnowResolver,
+                    pregnancyOutcomeOptions: PregnancyOutcomeResolver,
+                    prepStatusOptions: PrepStatusResolver,
+                    prepContraindicationsOptions: PrepContraindicationsResolver,
+                    reasonsPrepAppointmentNotGivenOptions: ReasonsPrepAppointmentNotGivenResolver,
+                    pregnancyStatusOptions: PregnancyStatusResolver,
+                    screenedForSTIOptions: ScreenedForSTIResolver
+                }
+            }
+        ]
     },
     {
 

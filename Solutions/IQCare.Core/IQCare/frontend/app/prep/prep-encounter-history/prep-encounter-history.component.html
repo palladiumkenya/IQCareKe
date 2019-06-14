@@ -73,6 +73,19 @@
                                             </mat-cell>
                                         </ng-container>
 
+                                        <ng-container matColumnDef="edit">
+                                            <mat-header-cell *matHeaderCellDef></mat-header-cell>
+                                            <mat-cell style="cursor: pointer;" *matCellDef="let element">
+                                                <mat-icon (click)="onEdit(element)"><i
+                                                        className="material-icons">mode_edit</i>
+                                                </mat-icon>
+                                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                <mat-icon (click)="onView(element)"><i
+                                                        className="material-icons">remove_red_eye</i>
+                                                </mat-icon>
+                                            </mat-cell>
+                                        </ng-container>
+
                                         <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
                                         <mat-row *matRowDef="let row; columns: displayedColumns">
                                         </mat-row>
