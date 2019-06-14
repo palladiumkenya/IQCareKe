@@ -26,10 +26,15 @@ export class PrepService {
 
     }
 
-    public StiScreeningTreatment(): Observable<any> {
-        return this.http.post<any>(this.API_URL + '', JSON.stringify(''), httpOptions).pipe(
-
-        );
+    public StiScreeningTreatment(STIScreeningCommand: any): Observable<any> {
+        if (STIScreeningCommand.Screenings.length == 0) {
+            return of([]);
+        }
+        return this.http.post<any>(this.MATERNITY_API_URL + '/api/PatientScreening/PostPatientScreenings',
+            JSON.stringify(STIScreeningCommand), httpOptions).pipe(
+                tap(StiScreeningTreatment => this.errorHandler.log(`successfully added sti screening details`)),
+                catchError(this.errorHandler.handleError<any>('Error adding sti screening details'))
+            );
     }
 
     public savePrepStatus(prepStatusCommand: PrepStatusCommand): Observable<any> {

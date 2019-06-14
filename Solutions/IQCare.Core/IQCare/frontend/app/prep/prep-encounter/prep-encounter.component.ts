@@ -15,11 +15,14 @@ import * as moment from 'moment';
 import { AdverseEventsCommand } from '../_models/commands/AdverseEventsCommand';
 import { AllergiesCommand } from '../_models/commands/AllergiesCommand';
 import { PregnancyIndicatorCommand } from '../_models/commands/PregnancyIndicatorCommand';
+import { NextAppointmentCommand } from '../../pmtct/maternity/commands/next-appointment-command';
+import { MaternityService } from '../../pmtct/_services/maternity.service';
 
 @Component({
     selector: 'app-prep-encounter',
     templateUrl: './prep-encounter.component.html',
-    styleUrls: ['./prep-encounter.component.css']
+    styleUrls: ['./prep-encounter.component.css'],
+    providers: [MaternityService]
 })
 export class PrepEncounterComponent implements OnInit {
     patientId: number;
@@ -49,6 +52,7 @@ export class PrepEncounterComponent implements OnInit {
     prepStatusOptions: LookupItemView[];
     reasonsPrepAppointmentNotGivenOptions: LookupItemView[];
     pregnancyStatusOptions: LookupItemView[];
+    screenedForSTIOptions: LookupItemView[];
 
     STIScreeningAndTreatmentOptions: any[] = [];
     CircumcisionStatusOptions: any[] = [];
@@ -65,6 +69,7 @@ export class PrepEncounterComponent implements OnInit {
         private prepService: PrepService,
         private pncService: PncService,
         private ancService: AncService,
+        private matService: MaternityService,
         public zone: NgZone,
         private router: Router) {
         this.STIScreeningFormGroup = new FormArray([]);
@@ -94,7 +99,7 @@ export class PrepEncounterComponent implements OnInit {
                     familyPlanningMethodsOptions, planningPregnancyOptions,
                     yesNoDontKnowOptions, pregnancyOutcomeOptions, prepContraindicationsOptions,
                     prepStatusOptions, reasonsPrepAppointmentNotGivenOptions,
-                    pregnancyStatusOptions } = res;
+                    pregnancyStatusOptions, screenedForSTIOptions } = res;
                 this.yesnoOptions = yesNoOptions['lookupItems'];
                 this.stiScreeningOptions = stiScreeningTreatmentOptions['lookupItems'];
                 this.yesNoUnknownOptions = yesNoUnknownOptions['lookupItems'];
@@ -106,6 +111,7 @@ export class PrepEncounterComponent implements OnInit {
                 this.prepContraindicationsOptions = prepContraindicationsOptions['lookupItems'];
                 this.reasonsPrepAppointmentNotGivenOptions = reasonsPrepAppointmentNotGivenOptions['lookupItems'];
                 this.pregnancyStatusOptions = pregnancyStatusOptions['lookupItems'];
+                this.screenedForSTIOptions = screenedForSTIOptions['lookupItems'];
             }
         );
 
@@ -142,6 +148,10 @@ export class PrepEncounterComponent implements OnInit {
             'yesnoOptions': this.yesnoOptions,
             'reasonsPrepAppointmentNotGivenOptions': this.reasonsPrepAppointmentNotGivenOptions
         });
+    }
+
+    public onVisitDetailsNext() {
+
     }
 
     onPrepStiScreeningTreatmentNotify(formGroup: FormGroup): void {
@@ -185,12 +195,14 @@ export class PrepEncounterComponent implements OnInit {
         const prepStatusCommand: PrepStatusCommand = {
             Id: 0,
             PatientId: this.patientId,
-            PatientEncounterId: 0,
+            PatientEncounterId: this.patientEncounterId,
             SignsOrSymptomsHIV: this.PrepStatusFormGroup.value[0]['signsOrSymptomsHIV'],
             AdherenceCounsellingDone: this.PrepStatusFormGroup.value[0]['adherenceCounselling'],
             ContraindicationsPrepPresent: this.PrepStatusFormGroup.value[0]['contraindications_PrEP_Present'],
             PrepStatusToday: this.PrepStatusFormGroup.value[0]['PrEPStatusToday'],
             CreatedBy: this.userId,
+            CondomsIssued: this.PrepStatusFormGroup.value[0]['condomsIssued'],
+            NoOfCondoms: this.PrepStatusFormGroup.value[0]['noCondomsIssued'],
         };
 
         // is client on family planning
@@ -304,7 +316,48 @@ export class PrepEncounterComponent implements OnInit {
             VisitDate: this.STIScreeningFormGroup.value[0]['visitDate']
         };
 
-        const prepStiScreeningTreatmentCommand = this.prepService.StiScreeningTreatment();
+        const nextAppointmentCommand: NextAppointmentCommand = {
+            PatientId: this.patientId,
+            PatientMasterVisitId: this.patientMasterVisitId,
+            ServiceAreaId: 7,
+            AppointmentDate: this.AppointmentFormGroup.value[0]['nextAppointmentDate']
+                ? moment(this.AppointmentFormGroup.value[0]['nextAppointmentDate']).toDate() : null,
+            Description: this.AppointmentFormGroup.value[0]['clinicalNotes'],
+            StatusDate: new Date(),
+            DifferentiatedCareId: 0,
+            AppointmentReason: 'Follow up',
+            CreatedBy: this.userId
+        };
+
+        const STIScreeningCommand: any = {
+            PatientId: this.patientId,
+            PatientMasterVisitId: this.patientMasterVisitId,
+            CreatedBy: this.userId,
+            ScreeningDate: this.STIScreeningFormGroup.value[0]['visitDate'],
+            VisitDate: this.STIScreeningFormGroup.value[0]['visitDate'],
+            Screenings: []
+        };
+
+        for (let i = 0; i < this.screenedForSTIOptions.length; i++) {
+            let value;
+            if (this.screenedForSTIOptions[i].itemName == 'STITreatmentOffered') {
+                value = this.STIScreeningFormGroup.value[0]['stiTreatmentOffered'];
+            } else if (this.screenedForSTIOptions[i].itemName == 'STILabInvestigationDone') {
+                value = this.STIScreeningFormGroup.value[0]['stiReferredLabInvestigation'];
+            } else if (this.screenedForSTIOptions[i].itemName == 'STISymptoms') {
+                value = this.STIScreeningFormGroup.value[0]['signsOfSTI'];
+            } else if (this.screenedForSTIOptions[i].itemName == 'STIScreeningDone') {
+                value = this.STIScreeningFormGroup.value[0]['signsOrSymptomsOfSTI'];
+            }
+
+            STIScreeningCommand.Screenings.push({
+                ScreeningTypeId: this.screenedForSTIOptions[i].masterId,
+                ScreeningCategoryId: this.screenedForSTIOptions[i].itemId,
+                ScreeningValueId: value
+            });
+        }
+
+        const prepStiScreeningTreatmentCommand = this.prepService.StiScreeningTreatment(STIScreeningCommand);
         const prepStatusApiCommand = this.prepService.savePrepStatus(prepStatusCommand);
         const pncFamilyPlanning = this.pncService.savePncFamilyPlanning(familyPlanningCommand);
         const chronicIllness = this.ancService.savePatientChronicIllness(this.chronic_illness_data);
@@ -312,6 +365,7 @@ export class PrepEncounterComponent implements OnInit {
         const allergies = this.prepService.savePatientAllergies(this.allergies_data);
         const circumcisionStatus = this.prepService.saveCircumcisionStatus(clientCircumcisionStatusCommand);
         const pregnancyIndicator = this.prepService.savePregnancyIndicatorCommand(pregnancyIndicatorCommand);
+        const matNextAppointment = this.matService.saveNextAppointment(nextAppointmentCommand);
 
         forkJoin([
             prepStatusApiCommand,
@@ -320,7 +374,9 @@ export class PrepEncounterComponent implements OnInit {
             adverseEvents,
             allergies,
             circumcisionStatus,
-            pregnancyIndicator]).subscribe(
+            pregnancyIndicator,
+            matNextAppointment,
+            prepStiScreeningTreatmentCommand]).subscribe(
                 (result) => {
                     console.log(result);
                     familyPlanningMethodCommand.PatientFPId = result[1]['patientId'];

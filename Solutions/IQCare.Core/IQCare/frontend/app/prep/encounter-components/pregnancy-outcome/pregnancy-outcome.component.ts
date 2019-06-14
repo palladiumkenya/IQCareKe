@@ -13,10 +13,14 @@ export class PregnancyOutcomeComponent implements OnInit {
     yesNoDontKnowOptions: LookupItemView[] = [];
     pregnancyOutcomeOptions: LookupItemView[] = [];
 
+    maxDate: Date;
+
     @Input() PregnancyOutcomeOptions: any;
     @Output() notify: EventEmitter<FormGroup> = new EventEmitter<FormGroup>();
 
-    constructor(private _formBuilder: FormBuilder) { }
+    constructor(private _formBuilder: FormBuilder) {
+        this.maxDate = new Date();
+    }
 
     ngOnInit() {
         this.PregnancyOutcomeForm = this._formBuilder.group({
