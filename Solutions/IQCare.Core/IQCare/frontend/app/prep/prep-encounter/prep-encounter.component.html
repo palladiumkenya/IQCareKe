@@ -17,16 +17,18 @@
 
                                         <app-prep-sti-screening-treatment
                                             (notify)="onPrepStiScreeningTreatmentNotify($event)"
-                                            [STIScreeningAndTreatmentOptions]="STIScreeningAndTreatmentOptions">
+                                            [STIScreeningAndTreatmentOptions]="STIScreeningAndTreatmentOptions"
+                                            [patientId]="patientId" [personId]="personId">
                                         </app-prep-sti-screening-treatment>
 
                                         <div>
-                                            <button mat-raised-button color="accent" matStepperNext
-                                                (click)="onVisitDetailsNext()" type="button">Next</button>
+                                            <button mat-raised-button color="accent" (click)="onVisitDetailsNext()"
+                                                type="button">Next</button>
                                         </div>
                                     </mat-step>
 
-                                    <mat-step [completed]="false" [stepControl]="CircumcisionStatusFormGroup">
+                                    <mat-step [completed]="false" [stepControl]="CircumcisionStatusFormGroup"
+                                        [optional]="isOptionalCircumcision">
                                         <ng-template matStepLabel>
                                             <span matTooltip="Circumcision Status( Male
                                             Clients Only)">
@@ -43,12 +45,13 @@
                                             <button mat-raised-button color="primary" matStepperPrevious
                                                 type="button">Previous</button>
                                             &nbsp;&nbsp;
-                                            <button mat-raised-button color="accent" matStepperNext
-                                                (click)="onVisitDetailsNext()" type="button">Next</button>
+                                            <button mat-raised-button color="accent" (click)="onCircumcisionNext()"
+                                                type="button">Next</button>
                                         </div>
                                     </mat-step>
 
-                                    <mat-step [completed]="false" [stepControl]="FertilityIntentionsFormGroup">
+                                    <mat-step [completed]="false" [stepControl]="FertilityIntentionsFormGroup"
+                                        [optional]="isOptionalObsGyn">
                                         <ng-template matStepLabel>
                                             <span matTooltip="Obs Gyn">
                                                 Obs Gyn
@@ -64,8 +67,8 @@
                                         </app-pregnancy-outcome>
 
                                         <div>
-                                            <button mat-raised-button color="primary" matStepperPrevious
-                                                (click)="onVisitDetailsNext()" type="button">Previous</button>
+                                            <button mat-raised-button color="primary" (click)="onObsGynPrevious()"
+                                                type="button">Previous</button>
                                             &nbsp;&nbsp;
                                             <button mat-raised-button color="accent" matStepperNext
                                                 type="button">Next</button>
