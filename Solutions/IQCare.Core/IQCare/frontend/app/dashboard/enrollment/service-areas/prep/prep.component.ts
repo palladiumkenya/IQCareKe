@@ -106,7 +106,10 @@ export class PrepComponent implements OnInit {
             ClientTransferIn: new FormControl('', [Validators.required]),
             Referredfrom: new FormControl('', [Validators.required]),
             EnrollmentDate: new FormControl('', [Validators.required]),
-            EnrollmentNumber: new FormControl('', [Validators.required]),
+            EnrollmentNumber: new FormControl('', Validators.compose([
+                Validators.required,
+                Validators.pattern(/^([0-9]{5})$/)
+            ])),
             MFLCode: new FormControl('', [Validators.required]),
             Year: new FormControl('', [Validators.required]),
             TransferInDate: new FormControl(''),
@@ -194,11 +197,13 @@ export class PrepComponent implements OnInit {
                 this.PrepRegimen = res['lookupItems'];
             }
         );
-
+        this.form.controls.Weeks.disable({ onlySelf: true });
+        this.form.controls.Months.disable({ onlySelf: true });
+        this.form.controls.InitiationDate.disable({ onlySelf: true });
 
         this.form.controls.MFLCode.setValue(this.posId);
 
-
+       
         this.form.controls.FacilityListSelected.setValue(this.facilities);
         this.filteredfacilities.next(this.facilities.slice(0, 10));
 
@@ -540,18 +545,25 @@ export class PrepComponent implements OnInit {
         this.filtercorrectfacilities(event.target.value);
     }
 
-    changePrevUse() {
-        /*let val: number;
-        val = this.PrevPrepValueSelected;
-        if (val === 1) {
-            this.form.controls.Weeks.enable({ onlySelf: true });
-            this.form.controls.Months.enable({ onlySelf: true });
+    changePrevUse(event) {
 
-        } else {
-            this.form.controls.Weeks.disable({ onlySelf: true });
-            this.form.controls.Months.disable({ onlySelf: true });
-        }*/
+        let selectedvalue: number;
+        selectedvalue = event.source.value;
+
+        if (event.source.selected == true) {
+            if (selectedvalue === 1) {
+                this.form.controls.Weeks.enable({ onlySelf: true });
+                this.form.controls.Months.enable({ onlySelf: true });
+                this.form.controls.InitiationDate.enable({ onlySelf: true });
+            } else {
+                this.form.controls.Weeks.disable({ onlySelf: true });
+                this.form.controls.Months.disable({ onlySelf: true });
+                this.form.controls.InitiationDate.disable({ onlySelf: true });
+            }
+        }
+
     }
+	
 
     change(event) {
         this.FacilitySelected.setValue('');
@@ -720,7 +732,7 @@ export class PrepComponent implements OnInit {
                                     });
                         }
 
-
+                        if (IsSchool !== null && IsSchool !== undefined && IsSchool.length > 1) {
                         this.registrationService.addPatientOvcStatus(this.personId, 0, IsSchool
                             , true, false, this.userId).subscribe((res) => {
 
@@ -738,6 +750,7 @@ export class PrepComponent implements OnInit {
                                     this.snotifyService.error('Error saving Attend School Details ' + error, 'Attend School',
                                         this.notificationService.getConfig());
                                 });
+                        }
                         if (PrevPrepUse == '1') {
                             this.registrationService.addPatientARVHistory(this.patientId,
                                 this.serviceId, 'ART', 'PrEP', '', this.userId, false,
