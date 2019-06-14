@@ -14,7 +14,8 @@
                     <mat-label>Ended Pregnancy since last visit?</mat-label>
                     <mat-select id="endedPregnancy" name="endedPregnancy" formControlName="endedPregnancy">
                         <mat-option [value]=""></mat-option>
-                        <mat-option *ngFor="let yesnoOption of yesnoOptions" [value]="yesnoOption.itemId">
+                        <mat-option *ngFor="let yesnoOption of yesnoOptions" [value]="yesnoOption.itemId"
+                            (onSelectionChange)="onPregnancyEndedSelection($event)">
                             {{ yesnoOption.itemName }}
                         </mat-option>
                     </mat-select>

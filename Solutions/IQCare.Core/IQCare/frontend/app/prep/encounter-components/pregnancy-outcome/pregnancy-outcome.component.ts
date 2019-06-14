@@ -39,4 +39,19 @@ export class PregnancyOutcomeComponent implements OnInit {
         this.pregnancyOutcomeOptions = pregnancyOutcomeOptions;
     }
 
+    onPregnancyEndedSelection(event) {
+        if (event.isUserInput && event.source.selected && event.source.viewValue == 'Yes') {
+            this.PregnancyOutcomeForm.controls.outcomeDate.enable({ onlySelf: true });
+            this.PregnancyOutcomeForm.controls.pregnancyOutcome.enable({ onlySelf: true });
+            this.PregnancyOutcomeForm.controls.birthDefects.enable({ onlySelf: true });
+        } else if (event.isUserInput && event.source.selected && event.source.viewValue == 'No') {
+            this.PregnancyOutcomeForm.controls.outcomeDate.disable({ onlySelf: true });
+            this.PregnancyOutcomeForm.controls.pregnancyOutcome.disable({ onlySelf: true });
+            this.PregnancyOutcomeForm.controls.birthDefects.disable({ onlySelf: true });
+            this.PregnancyOutcomeForm.controls.outcomeDate.setValue('');
+            this.PregnancyOutcomeForm.controls.pregnancyOutcome.setValue('');
+            this.PregnancyOutcomeForm.controls.birthDefects.setValue('');
+        }
+    }
+
 }

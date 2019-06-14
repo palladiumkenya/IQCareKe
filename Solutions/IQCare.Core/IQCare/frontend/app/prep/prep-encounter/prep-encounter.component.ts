@@ -1,9 +1,10 @@
+import { RecordsService } from './../../records/_services/records.service';
 import { ClientCircumcisionStatusCommand } from './../_models/commands/ClientCircumcisionStatusCommand';
 import { AncService } from './../../pmtct/_services/anc.service';
 import { PncService } from './../../pmtct/_services/pnc.service';
 import { PrepService } from './../_services/prep.service';
 import { LookupItemView } from './../../shared/_models/LookupItemView';
-import { Component, OnInit, NgZone } from '@angular/core';
+import { Component, OnInit, NgZone, ViewChild } from '@angular/core';
 import { FormArray, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { forkJoin } from 'rxjs';
@@ -17,12 +18,13 @@ import { AllergiesCommand } from '../_models/commands/AllergiesCommand';
 import { PregnancyIndicatorCommand } from '../_models/commands/PregnancyIndicatorCommand';
 import { NextAppointmentCommand } from '../../pmtct/maternity/commands/next-appointment-command';
 import { MaternityService } from '../../pmtct/_services/maternity.service';
+import { MatStepper } from '@angular/material';
 
 @Component({
     selector: 'app-prep-encounter',
     templateUrl: './prep-encounter.component.html',
     styleUrls: ['./prep-encounter.component.css'],
-    providers: [MaternityService]
+    providers: [MaternityService, RecordsService]
 })
 export class PrepEncounterComponent implements OnInit {
     patientId: number;
@@ -30,6 +32,7 @@ export class PrepEncounterComponent implements OnInit {
     userId: number;
     patientMasterVisitId: number;
     patientEncounterId: number;
+    personGender: string;
 
     isLinear: boolean = true;
 
@@ -65,13 +68,20 @@ export class PrepEncounterComponent implements OnInit {
     public adverseEvents_data: AdverseEventsCommand[] = [];
     public allergies_data: AllergiesCommand[] = [];
 
+    @ViewChild('stepper') stepper: MatStepper;
+
+    // optional depending on sex
+    isOptionalObsGyn: boolean = false;
+    isOptionalCircumcision: boolean = false;
+
     constructor(private route: ActivatedRoute,
         private prepService: PrepService,
         private pncService: PncService,
         private ancService: AncService,
         private matService: MaternityService,
         public zone: NgZone,
-        private router: Router) {
+        private router: Router,
+        private recordsService: RecordsService) {
         this.STIScreeningFormGroup = new FormArray([]);
         this.CircumcisionStatusFormGroup = new FormArray([]);
         this.FertilityIntentionsFormGroup = new FormArray([]);
@@ -148,10 +158,32 @@ export class PrepEncounterComponent implements OnInit {
             'yesnoOptions': this.yesnoOptions,
             'reasonsPrepAppointmentNotGivenOptions': this.reasonsPrepAppointmentNotGivenOptions
         });
+
+        this.recordsService.getPersonDetails(this.personId).subscribe(
+            (res) => {
+                if (res.length > 0) {
+                    this.personGender = res[0]['gender'];
+                }
+            }
+        );
     }
 
     public onVisitDetailsNext() {
+        if (this.personGender.toLowerCase() == 'male') {
+            this.stepper.selectedIndex = 1;
+        } else if (this.personGender.toLowerCase() == 'female') {
+            this.stepper.selectedIndex = 2;
+        }
+    }
 
+    public onCircumcisionNext() {
+        this.isOptionalObsGyn = true;
+        this.stepper.selectedIndex = 3;
+    }
+
+    public onObsGynPrevious() {
+        this.isOptionalCircumcision = true;
+        this.stepper.selectedIndex = 1;
     }
 
     onPrepStiScreeningTreatmentNotify(formGroup: FormGroup): void {

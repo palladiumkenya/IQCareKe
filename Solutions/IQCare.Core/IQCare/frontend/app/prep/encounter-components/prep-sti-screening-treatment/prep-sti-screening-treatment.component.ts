@@ -2,27 +2,28 @@ import { LookupItemView } from './../../../shared/_models/LookupItemView';
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
 import * as moment from 'moment';
+import { SearchService } from '../../../registration/_services/search.service';
 
 @Component({
     selector: 'app-prep-sti-screening-treatment',
     templateUrl: './prep-sti-screening-treatment.component.html',
-    styleUrls: ['./prep-sti-screening-treatment.component.css']
+    styleUrls: ['./prep-sti-screening-treatment.component.css'],
+    providers: [SearchService]
 })
 export class PrepSTIScreeningTreatmentComponent implements OnInit {
     STIScreeningForm: FormGroup;
     yesnoOptions: LookupItemView[] = [];
     stiScreeningOptions: LookupItemView[] = [];
 
-    patientId: number;
-    personId: number;
     maxDate: Date;
 
     @Input() STIScreeningAndTreatmentOptions: any;
+    @Input() patientId: number;
+    @Input() personId: number;
     @Output() notify: EventEmitter<FormGroup> = new EventEmitter<FormGroup>();
 
-    constructor(private _formBuilder: FormBuilder) {
-        this.patientId = 1;
-        this.personId = 1;
+    constructor(private _formBuilder: FormBuilder,
+        private searchService: SearchService) {
         this.maxDate = new Date();
     }
 
@@ -61,5 +62,14 @@ export class PrepSTIScreeningTreatmentComponent implements OnInit {
 
     onSTITreatmentelection(event) {
 
+    }
+
+    onPharmacyClick() {
+        this.searchService.setSession(this.personId, this.patientId).subscribe((sessionres) => {
+            const url = location.protocol + '//' + window.location.hostname + ':' + window.location.port +
+                '/IQCare/CCC/Patient/PatientHome.aspx';
+            const win = window.open(url, '_blank');
+            win.focus();
+        });
     }
 }
