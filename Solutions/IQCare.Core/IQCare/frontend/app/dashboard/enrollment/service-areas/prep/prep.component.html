@@ -7,7 +7,7 @@
 <div class="col-lg-12 col-sm-12 col-xs-12">
     <div class="widget">
         <div class="widget-header bordered-bottom bordered-blue">
-            <span class="widget-caption">PREP Enrollment</span>
+            <span class="widget-caption">PREP Initiation</span>
         </div>
         <div class="widget-body">
             <form [formGroup]="form">
@@ -86,6 +86,17 @@
                                     <mat-label>Prep Number</mat-label>
                                     <input matInput id="PREP_EnrollmentNumber" formControlName="EnrollmentNumber"
                                         name="PREP_EnrollmentNumber" type="number" required>
+                                    <span>
+                                        <div *ngIf="form.controls.EnrollmentNumber.errors && (form.controls.EnrollmentNumber.dirty || form.controls.EnrollmentNumber.touched)"
+                                            class="alert alert-danger">
+                                            <div [hidden]="!form.controls.EnrollmentNumber.errors.required">
+                                                Enrollment Number is required!
+                                            </div>
+                                            <div [hidden]="!form.controls.EnrollmentNumber.errors.pattern">
+                                                Enrollment number must be 5 digits!
+                                            </div>
+                                        </div>
+                                    </span>
                                 </mat-form-field>
                             </div>
                         </div>
@@ -120,7 +131,7 @@
                                         [formControl]="FacilitySelected">
                                     <br />
                                     <br />
-                                    <mat-label>Referredfrom</mat-label>
+                                    <mat-label>Transfered From</mat-label>
                                     <mat-select formControlName="FacilityListSelected"
                                         (selectionChange)="change($event)">
                                         <mat-option *ngFor="let facility of filteredfacilities |async"
@@ -234,8 +245,8 @@
                             <mat-form-field class="col-lg-12 col-sm-12 col-xs-12">
                                 <mat-label>Previous Prep Use</mat-label>
                                 <mat-select formControlName="PrevPrepUse">
-                                    <mat-option (onSelectionChange)="changePrevUse()" [value]="1">Yes</mat-option>
-                                    <mat-option (onSelectionChange)="changePrevUse()" [value]="0">No</mat-option>
+                                    <mat-option (onSelectionChange)="changePrevUse($event)" [value]="1">Yes</mat-option>
+                                    <mat-option (onSelectionChange)="changePrevUse($event)" [value]="0">No</mat-option>
                                 </mat-select>
                             </mat-form-field>
                         </div>

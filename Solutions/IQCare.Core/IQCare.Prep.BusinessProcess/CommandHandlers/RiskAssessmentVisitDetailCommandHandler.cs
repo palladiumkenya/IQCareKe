@@ -31,99 +31,99 @@ namespace IQCare.Prep.BusinessProcess.CommandHandlers
         {
             try
                 {
-                
 
-                    if (request.PatientMasterVisitId > 0)
+
+                if (request.PatientMasterVisitId > 0)
+                {
+                    int PatientMasterVisitId = request.PatientMasterVisitId;
+
+
+
+                    if (request.riskAssessments.Count > 0)
                     {
-                      int PatientMasterVisitId = request.PatientMasterVisitId;
-
-
-
-                        if (request.riskAssessments.Count > 0)
+                        foreach (var ra in request.riskAssessments)
                         {
-                            foreach(var ra  in request.riskAssessments)
+
+
+                            var RiskAssessments = await _prepUnitOfWork.Repository<RiskAssessment>().Get(x => x.PatientMasterVisitId == PatientMasterVisitId && x.PatientId == request.PatientId
+                              && x.Id == ra.Id).ToListAsync();
+
+
+                            if (RiskAssessments != null && RiskAssessments.Count > 0)
                             {
-
-                          
-                                var RiskAssessments = await _prepUnitOfWork.Repository<RiskAssessment>().Get(x => x.PatientMasterVisitId == PatientMasterVisitId && x.PatientId == request.PatientId
-                                  && x.Id == ra.Id).ToListAsync();
-
-                            
-                                if(RiskAssessments !=null && RiskAssessments.Count > 0)
+                                foreach (var rass in RiskAssessments)
                                 {
-                                   foreach(var rass in RiskAssessments)
-                                    {
-                                        rass.DeleteFlag = ra.DeleteFlag;
-                                        rass.RiskAssessmentId = ra.RiskAssessmentid;
-                                        rass.RiskAssessmentValue = ra.Value;
-                                        rass.AssessmentDate = ra.Date;
-                                        _prepUnitOfWork.Repository<RiskAssessment>().Update(rass);
+                                    rass.DeleteFlag = ra.DeleteFlag;
+                                    rass.RiskAssessmentId = ra.RiskAssessmentid;
+                                    rass.RiskAssessmentValue = ra.Value;
+                                    rass.AssessmentDate = ra.Date;
+                                    _prepUnitOfWork.Repository<RiskAssessment>().Update(rass);
 
-                                        await _prepUnitOfWork.SaveAsync();
-                                    }
-
-
-                                    
-                                }
-                                else
-                                {
-                                    RiskAssessment riskass = new RiskAssessment();
-                                    riskass.PatientMasterVisitId = PatientMasterVisitId;
-                                    riskass.PatientId = request.PatientId;
-                                    riskass.RiskAssessmentId = ra.RiskAssessmentid;
-                                    riskass.RiskAssessmentValue = ra.Value;
-                                    riskass.DeleteFlag = ra.DeleteFlag;
-                                    riskass.CreateDate =DateTime.Now;
-                                    riskass.Comment = ra.Comment;
-                                riskass.AssessmentDate = ra.Date;
-                                    await _prepUnitOfWork.Repository<RiskAssessment>().AddAsync(riskass);
                                     await _prepUnitOfWork.SaveAsync();
-
                                 }
+
+
 
                             }
+                            else
+                            {
+                                RiskAssessment riskass = new RiskAssessment();
+                                riskass.PatientMasterVisitId = PatientMasterVisitId;
+                                riskass.PatientId = request.PatientId;
+                                riskass.RiskAssessmentId = ra.RiskAssessmentid;
+                                riskass.RiskAssessmentValue = ra.Value;
+                                riskass.DeleteFlag = ra.DeleteFlag;
+                                riskass.CreateDate = DateTime.Now;
+                                riskass.Comment = ra.Comment;
+                                riskass.AssessmentDate = ra.Date;
+                                await _prepUnitOfWork.Repository<RiskAssessment>().AddAsync(riskass);
+                                await _prepUnitOfWork.SaveAsync();
+
+                            }
+
+                        }
                         _prepUnitOfWork.Save();
 
                         message += "The Risk Assessment Form Has Been Updated";
-                        }
-                        
-                        if(request.ClinicalNotes.Count > 0)
+                    }
+
+                    if (request.ClinicalNotes.Count > 0)
+                    {
+                        foreach (var clinicalnotes in request.ClinicalNotes)
                         {
-                            foreach (var clinicalnotes in request.ClinicalNotes)
+
+                            var clinicalNotes = await _prepUnitOfWork.Repository<PatientClinicalNotes>().Get(x => x.PatientMasterVisitId == PatientMasterVisitId && x.PatientId == request.PatientId
+                              && x.Id == clinicalnotes.Id).ToListAsync();
+                            if (clinicalNotes != null && clinicalNotes.Count > 0)
                             {
-
-                                var clinicalNotes = await _prepUnitOfWork.Repository<PatientClinicalNotes>().Get(x => x.PatientMasterVisitId == PatientMasterVisitId && x.PatientId == request.PatientId
-                                  && x.Id == clinicalnotes.Id).ToListAsync();
-                                if (clinicalNotes != null && clinicalNotes.Count > 0)
+                                foreach (var clinicaln in clinicalNotes)
                                 {
-                                    foreach (var clinicaln in clinicalNotes)
-                                    {
-                                    if (!string.IsNullOrEmpty(clinicaln.ClinicalNotes))
-                                    {
-                                        clinicaln.DeleteFlag = false;
-
-                                    }
-                                    else
-                                    {
-                                        clinicaln.ClinicalNotes = clinicalnotes.Comment;
-                                        clinicaln.CreatedBy = request.UserId;
-                                        clinicaln.CreateDate = DateTime.Now;
-                                        clinicaln.DeleteFlag = clinicalnotes.DeleteFlag;
-                                        clinicaln.ServiceAreaId = clinicaln.ServiceAreaId;
-                                        clinicaln.PatientId = request.PatientId;
-                                        clinicaln.PatientMasterVisitId = PatientMasterVisitId;
-                                    }
-
-
-                                        _prepUnitOfWork.Repository<PatientClinicalNotes>().Update(clinicaln);
-
-                                        await _prepUnitOfWork.SaveAsync();
-                                    }
 
 
 
+
+
+                                    clinicaln.ClinicalNotes = clinicalnotes.Comment;
+                                    clinicaln.CreatedBy = request.UserId;
+                                    clinicaln.CreateDate = DateTime.Now;
+                                    clinicaln.DeleteFlag = clinicalnotes.DeleteFlag;
+                                    clinicaln.ServiceAreaId = clinicaln.ServiceAreaId;
+                                    clinicaln.PatientId = request.PatientId;
+                                    clinicaln.PatientMasterVisitId = PatientMasterVisitId;
+
+
+
+                                    _prepUnitOfWork.Repository<PatientClinicalNotes>().Update(clinicaln);
+
+                                    await _prepUnitOfWork.SaveAsync();
                                 }
-                                else
+
+
+
+                            }
+                            else
+                            {
+                                if (!String.IsNullOrEmpty(clinicalnotes.Comment))
                                 {
                                     PatientClinicalNotes pcn = new PatientClinicalNotes();
                                     pcn.ClinicalNotes = clinicalnotes.Comment;
@@ -140,15 +140,17 @@ namespace IQCare.Prep.BusinessProcess.CommandHandlers
                                 }
 
                             }
-                        _prepUnitOfWork.Save();
-                        
-                    }
+                            _prepUnitOfWork.Save();
+
+
+
+
+                        }
 
 
                     }
 
-                   
-               
+                }
 
                     return Result<RiskAssessmentResponse>.Valid(new RiskAssessmentResponse
                     {

@@ -185,4 +185,12 @@ export class PersonHomeService {
           catchError(this.errorHandler.handleError<any[]>('CheckencounterExists'))
         );
     }
+
+    public filterFacilities(filterString: string) {
+        return this.http.get<any[]>(this.API_URL + '/api/Lookup/searchFacilityList?searchString=' + filterString).pipe(
+            tap(filterFacilities => this.errorHandler.log('fetched filtered facilities')),
+            catchError(this.errorHandler.handleError<any[]>('filterFacilities'))
+        );
+    }
+
 }
