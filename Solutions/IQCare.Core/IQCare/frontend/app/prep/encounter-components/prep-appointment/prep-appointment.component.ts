@@ -43,7 +43,14 @@ export class PrepAppointmentComponent implements OnInit {
     onAppointmentSelection(event) {
         if (event.isUserInput && event.source.selected && event.source.viewValue == 'No') {
             this.PrepAppointmentForm.controls.reasonAppointmentNoGiven.enable({ onlySelf: true });
+
+            // disable date 
+            this.PrepAppointmentForm.controls.nextAppointmentDate.disable({ onlySelf: true });
+            this.PrepAppointmentForm.controls.nextAppointmentDate.setValue('');
         } else if (event.isUserInput && event.source.selected && event.source.viewValue == 'Yes') {
+            // enable date 
+            this.PrepAppointmentForm.controls.nextAppointmentDate.enable({ onlySelf: true });
+
             this.PrepAppointmentForm.controls.reasonAppointmentNoGiven.disable({ onlySelf: true });
             this.PrepAppointmentForm.controls.reasonAppointmentNoGiven.setValue('');
         }

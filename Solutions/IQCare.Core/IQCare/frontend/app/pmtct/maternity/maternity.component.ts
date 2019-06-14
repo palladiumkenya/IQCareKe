@@ -100,8 +100,8 @@ export class MaternityComponent implements OnInit {
     dischargeOptions: any[] = [];
     partnerTestingOptions: any[] = [];
     patientEducationOptions: any[] = [];
-    counselledInfantFeedingOptions : any[] = [];
-    infantFeedingTopicId : number ;
+    counselledInfantFeedingOptions: any[] = [];
+    infantFeedingTopicId: number ;
 
     constructor(private route: ActivatedRoute,
         private matService: MaternityService,

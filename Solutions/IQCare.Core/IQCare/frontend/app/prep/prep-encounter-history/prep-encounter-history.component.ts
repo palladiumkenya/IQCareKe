@@ -24,7 +24,7 @@ export class PrepEncounterHistoryComponent implements OnInit {
     prepEncounterType: LookupItemView[];
 
     public prep_history_table_data: PrepHistoryTableData[] = [];
-    displayedColumns = ['behaviourrisk', 'prep_status', 'next_appointment', 'provider'];
+    displayedColumns = ['encounter_date', 'behaviourrisk', 'prep_status', 'next_appointment', 'provider'];
     dataSource = new MatTableDataSource(this.prep_history_table_data);
 
     constructor(private prepService: PrepService,
@@ -62,9 +62,10 @@ export class PrepEncounterHistoryComponent implements OnInit {
                 result.forEach(arrayValue => {
                     this.prep_history_table_data.push({
                         'behaviourrisk': 'Risk',
-                        prep_status: 'test',
+                        prep_status: arrayValue.preStatus,
                         next_appointment: arrayValue.appointmentDate,
-                        provider: 'System Admin'
+                        provider: arrayValue.providerName,
+                        encounterStartTime: arrayValue.encounterStartTime
                     });
                 });
                 this.dataSource = new MatTableDataSource(this.prep_history_table_data);
@@ -126,4 +127,5 @@ export interface PrepHistoryTableData {
     prep_status?: string;
     next_appointment?: Date;
     provider?: string;
+    encounterStartTime?: Date;
 }

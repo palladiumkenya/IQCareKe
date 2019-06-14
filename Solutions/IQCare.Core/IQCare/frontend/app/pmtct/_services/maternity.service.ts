@@ -98,8 +98,8 @@ export class MaternityService {
         );
     }
 
-  
-    public updateDiagnosis(diagnosis : any) : Observable<any> {
+
+    public updateDiagnosis(diagnosis: any): Observable<any> {
         return this.http.post(this.API_PMTCT_URL + '/api/PatientDiagnosis/UpdateDiagnosis', JSON.stringify(diagnosis), httpOptions).pipe(
             tap(diag => this.errorHandler.log(`successfully updated maternity diagnosis`)),
             catchError(this.errorHandler.handleError<any>('Error updating maternity diagnosis'))
@@ -114,13 +114,13 @@ export class MaternityService {
             );
     }
 
- 
+
     public updatePatientDeliveryInfo(deliveryInfo: any) {
         return this.http.post(this.API_PMTCT_URL + '/api/MaternityPatientDeliveryInfo/UpdatePatientDeliveryInfo', JSON.stringify(deliveryInfo),
-        httpOptions).pipe(
-            tap(del => this.errorHandler.log(`successfully updated maternity delivery info`)),
-            catchError(this.errorHandler.handleError<any>('Error updating maternity Delivery info'))
-        );
+            httpOptions).pipe(
+                tap(del => this.errorHandler.log(`successfully updated maternity delivery info`)),
+                catchError(this.errorHandler.handleError<any>('Error updating maternity Delivery info'))
+            );
     }
 
     public saveBabySection(babysection: any): Observable<any> {
@@ -165,7 +165,7 @@ export class MaternityService {
             );
     }
 
-    
+
     public getPatientAdministeredDrugs(patientId: any, masterVisitId: any) {
         return this.http.get<any[]>(this.API_PMTCT_URL +
             '/api/PatientDrugAdministration/GetByPatientIdAndPatientMasterVisitId/' + patientId + '/' + masterVisitId).pipe(
@@ -231,12 +231,12 @@ export class MaternityService {
             );
     }
 
-    public updateDischargeInfo(discharge:any): Observable<any>{
+    public updateDischargeInfo(discharge: any): Observable<any> {
         return this.http.post(this.API_PMTCT_URL + '/api/MaternityPatientDeliveryInfo/UpdatePatientDischargeInfo',
-        JSON.stringify(discharge), httpOptions).pipe(
-            tap(update => this.errorHandler.log(`successfully updated discharge details`)),
-            catchError(this.errorHandler.handleError<any>('Error updating patient discharge details'))
-        );
+            JSON.stringify(discharge), httpOptions).pipe(
+                tap(update => this.errorHandler.log(`successfully updated discharge details`)),
+                catchError(this.errorHandler.handleError<any>('Error updating patient discharge details'))
+            );
     }
 
     public getPatientDischargeInfo(mastervisitId: any) {
@@ -361,8 +361,10 @@ export class MaternityService {
     }
 
     public getMaternityLookUpOptionByName(lookUpOptions: any[], lookupName: string): any {
-        if(lookupName == null)
+        if (lookupName == null) {
             return null;
+        }
+
         for (let index = 0; index < lookUpOptions.length; index++) {
             if (lookUpOptions[index].itemName.toUpperCase() === lookupName.toUpperCase()) {
                 return lookUpOptions[index];
@@ -419,11 +421,9 @@ export class MaternityService {
             .subscribe(
                 p => {
                     const options = p['lookupItems'];
-                    console.log(options.length + ' OPtions Man');
                     for (let i = 0; i < options.length; i++) {
                         objOptions.push({ 'itemId': options[i]['itemId'], 'itemName': options[i]['itemName'] });
                     }
-                    console.log('New options Length ?? ' + objOptions.length);
                 });
     }
 

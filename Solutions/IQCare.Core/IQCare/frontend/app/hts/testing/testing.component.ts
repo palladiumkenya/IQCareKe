@@ -90,7 +90,7 @@ export class TestingComponent implements OnInit {
             finalResultsRemarks: new FormControl(this.finalTestingResults.finalResultsRemarks)
         });
 
-        this.htsEncounterDate = moment(localStorage.getItem('encounterDate')).toDate();
+        this.htsEncounterDate = moment(new Date(localStorage.getItem('encounterDate'))).toDate();
 
         this.encounterService.getCustomOptions().subscribe(data => {
             const options = data['lookupItems'];

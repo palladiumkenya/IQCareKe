@@ -11,6 +11,8 @@ namespace IQCare.Prep.Core.Models
         public int AdherenceCounsellingDone { get; set; }
         public int ContraindicationsPrepPresent { get; set; }
         public int PrepStatusToday { get; set; }
+        public int? CondomsIssued { get; set; }
+        public int? NoOfCondoms { get; set; }
         public bool DeleteFlag { get; set; }
         public int CreatedBy { get; set; }
         public DateTime CreateDate { get; set; }
