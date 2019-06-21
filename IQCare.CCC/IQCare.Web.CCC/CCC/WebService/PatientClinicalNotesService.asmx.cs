@@ -247,7 +247,7 @@ namespace IQCare.Web.CCC.WebService
         {
             var PCN = new PatientClinicalNotesLogic();
             //PatientClinicalNotes[] patientNotesData = (PatientClinicalNotes[])Session["patientNotesData"];
-            PatientClinicalNotes[] patientNotesData = PCN.getPatientClinicalNotesByVisitId(PatientId,PatientMasterVisitId).ToArray();
+            PatientClinicalNotes[] patientNotesData = PCN.getPatientClinicalNotesByVisitId(Convert.ToInt32(Session["PatientPK"]), PatientMasterVisitId).ToArray();
             string jsonNotesObject = "[]";
             jsonNotesObject = new JavaScriptSerializer().Serialize(patientNotesData);
             return jsonNotesObject;

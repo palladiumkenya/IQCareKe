@@ -298,8 +298,10 @@ namespace DataAccess.Entity
             //    theCmd.Parameters.AddWithValue(cmdpara,cmdvalue);//.Value = cmdvalue;
             //    i = i + 3;
             //}
-            for (int i = 1; i <= paramaters.Count;)
+           
+            for (int i = 1; i <= paramaters.Count;)//
             {
+                
                 theCmd.Parameters.Add((SqlParameter)paramaters[i]);
                
                 i++;
@@ -348,6 +350,7 @@ namespace DataAccess.Entity
                     DataTable theDT = new DataTable(); 
                     theAdpt.Fill(theDT);
                     theAdpt.Dispose();
+                    theCmd.Parameters.Clear();
                     return theDT;
                 }
 
@@ -376,7 +379,7 @@ namespace DataAccess.Entity
             }
             finally
             {
-
+                
                 if (null != cnn)
                     if (null == this.Connection)
                         DataMgr.ReleaseConnection(cnn);

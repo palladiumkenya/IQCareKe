@@ -338,7 +338,7 @@
     $(document).ready(function () {
           $('.session1loading').show();
         var PatientMasterVisitId = GetURLParameter('visitId');
-        var patientId = '<%=PatientId%>';
+        var patientId = GetURLParameter('pid');
         var SRNQuestion1='<%=SessionRefferal1ItemId%>';
         var SRNQuestion3 = '<%=SessionRefferal3ItemId%>';
         var SRNQuestion2='<%= SessionRefferal2ItemId%>'
@@ -382,10 +382,11 @@
         if (PatientMasterVisitId > 0
            // && pagehash != ""
         ) {
+            alert(patientId);
             $.ajax({
                 type: "POST",
                 url: "../WebService/PatientClinicalNotesService.asmx/getPatientNotesByVisitId",
-                data: "{'PatientId': '" + patientId + "','PatientMasterVisitId':'" + PatientMasterVisitId + "'}",
+                data: "{'PatientId': '" + GetURLParameter('pid') + "','PatientMasterVisitId':'" + PatientMasterVisitId + "'}",
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",
                 cache: false,

@@ -294,7 +294,7 @@
         $("#eahdatastep2 .mmrbList").each(function () {
             var screeningValue = 0;
             var screeningType = <%=screenTypeId%>;
-            var patientId = <%=PatientId%>;
+            var patientId = GetURLParameter('pid');
             var patientMasterVisitId = GetURLParameter('visitId');
             var userId = <%=userId%>;
             var screeningCategory = $(this).attr('id').replace('session2rb', '');

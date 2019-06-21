@@ -170,6 +170,6 @@ namespace DataAccess.CCC.Context
         public DbSet<Referrals> referrals { get; set; }
 
         //reporting
-        public DbSet<sp_gettxcurr> gettxcurr { get; set; }
+        public DbSet<PatientTracing> patienttracing { get; set; }
     }
 }

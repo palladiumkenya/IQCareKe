@@ -26,16 +26,29 @@ namespace BusinessProcess.CCC
                 return (DataTable)ReportingResults.ReturnObject(ClsUtility.theParams, "sp_gettxcurr", ClsUtility.ObjectEnum.DataTable);
             }
         }
-        public DataTable getdefaulters(DateTime reportingdate, int mindays, int maxdays)
+
+        public DataTable getfirstdefaulters(DateTime reportingdate, int mindays, int maxdays)
         {
             lock (this)
             {
                 ClsObject ReportingResults = new ClsObject();
                 ClsUtility.Init_Hashtable();
-                ClsUtility.AddParameters("@todate", SqlDbType.DateTime, reportingdate.ToString());
-                ClsUtility.AddParameters("@mindefault", SqlDbType.DateTime, mindays.ToString());
-                ClsUtility.AddParameters("@maxdefault", SqlDbType.DateTime, maxdays.ToString());
+                ClsUtility.AddParameters("@ftodate", SqlDbType.DateTime, reportingdate.ToString());
+                ClsUtility.AddParameters("@minfdefault", SqlDbType.DateTime, mindays.ToString());
+                ClsUtility.AddParameters("@maxfdefault", SqlDbType.DateTime, maxdays.ToString());
                 return (DataTable)ReportingResults.ReturnObject(ClsUtility.theParams, "sp_getdefaulters", ClsUtility.ObjectEnum.DataTable);
+            }
+        }
+        public DataTable getseconddefaulters(DateTime reportingdate, int mindays, int maxdays)
+        {
+            lock (this)
+            {
+                ClsObject ReportingResults = new ClsObject();
+                ClsUtility.Init_Hashtable();
+                ClsUtility.AddParameters("@stodate", SqlDbType.DateTime, reportingdate.ToString());
+                ClsUtility.AddParameters("@minsdefault", SqlDbType.DateTime, mindays.ToString());
+                ClsUtility.AddParameters("@maxsdefault", SqlDbType.DateTime, maxdays.ToString());
+                return (DataTable)ReportingResults.ReturnObject(ClsUtility.theParams, "sp_getSeconddefaulters", ClsUtility.ObjectEnum.DataTable);
             }
         }
         public DataTable getltfu(DateTime fromdate, DateTime todate)
@@ -45,8 +58,30 @@ namespace BusinessProcess.CCC
                 ClsObject ReportingResults = new ClsObject();
                 ClsUtility.Init_Hashtable();
                 ClsUtility.AddParameters("@fromdate", SqlDbType.DateTime, fromdate.ToString());
-                ClsUtility.AddParameters("@todate", SqlDbType.DateTime, todate.ToString());
+                ClsUtility.AddParameters("@ltodate", SqlDbType.DateTime, todate.ToString());
                 return (DataTable)ReportingResults.ReturnObject(ClsUtility.theParams, "sp_getltfu", ClsUtility.ObjectEnum.DataTable);
+            }
+        }
+
+        public int AddPatientTracing(PatientTracing PT)
+        {
+            using (UnitOfWork unitOfWork = new UnitOfWork(new GreencardContext()))
+            {
+                int Result = 0;
+                unitOfWork.ReportingRepository.Add(PT);
+                Result = unitOfWork.Complete();
+                unitOfWork.Dispose();
+                return Result;
+            }
+        }
+
+        public List<PatientTracing> GetPatientTracingData(int patientMasterVisitId)
+        {
+            using (UnitOfWork unitOfWork = new UnitOfWork(new GreencardContext()))
+            {
+                var tracingData = unitOfWork.ReportingRepository.FindBy(x => x.PatientMasterVisitId == patientMasterVisitId).ToList();
+                unitOfWork.Dispose();
+                return tracingData;
             }
         }
     }

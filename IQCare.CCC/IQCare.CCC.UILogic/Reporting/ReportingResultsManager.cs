@@ -16,20 +16,48 @@ namespace IQCare.CCC.UILogic.Reporting
 {
     public class ReportingResultsManager
     {
+
         public DataTable gettxcurr(DateTime reportingdate)
         {
             IReportingManager reportingResults = (IReportingManager)ObjectFactory.CreateInstance("BusinessProcess.CCC.BReportingManager, BusinessProcess.CCC");
             return reportingResults.gettxcurr(reportingdate);
         }
-        public DataTable getdefaulters(DateTime reportingdate, int mindays, int maxdays)
+        public DataTable getfirstdefaulters(DateTime reportingdate, int mindays, int maxdays)
         {
             IReportingManager reportingResults = (IReportingManager)ObjectFactory.CreateInstance("BusinessProcess.CCC.BReportingManager, BusinessProcess.CCC");
-            return reportingResults.getdefaulters(reportingdate, mindays, maxdays);
+            return reportingResults.getfirstdefaulters(reportingdate, mindays, maxdays);
+        }
+        public DataTable getseconddefaulters(DateTime reportingdate, int mindays, int maxdays)
+        {
+            IReportingManager reportingResults = (IReportingManager)ObjectFactory.CreateInstance("BusinessProcess.CCC.BReportingManager, BusinessProcess.CCC");
+            return reportingResults.getseconddefaulters(reportingdate, mindays, maxdays);
         }
         public DataTable getltfu(DateTime fromdate, DateTime todate)
         {
             IReportingManager reportingResults = (IReportingManager)ObjectFactory.CreateInstance("BusinessProcess.CCC.BReportingManager, BusinessProcess.CCC");
             return reportingResults.getltfu(fromdate, todate);
+        }
+
+        public int AddPatientTracing(PatientTracing PT)
+        {
+            IReportingManager reportingResults = (IReportingManager)ObjectFactory.CreateInstance("BusinessProcess.CCC.BReportingManager, BusinessProcess.CCC");
+            int result = 0;
+            result = reportingResults.AddPatientTracing(PT);
+            return result;
+        }
+
+        public List<PatientTracing> getTracingData(int patientMasterVisitId)
+        {
+            IReportingManager reportingResults = (IReportingManager)ObjectFactory.CreateInstance("BusinessProcess.CCC.BReportingManager, BusinessProcess.CCC");
+            try
+            {
+                return reportingResults.GetPatientTracingData(patientMasterVisitId);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
         }
     }
 }

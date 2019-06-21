@@ -180,7 +180,7 @@
                                         TX Curr (30 Days)
                                     </div>
                                     <div class="txcurr-body reporting-body">
-                                        <a href="Patient/PatientLinelist.aspx"><i class="fa fa-users" aria-hidden="true"></i> <span id="txcurrspan">0</span></a>
+                                        <a href="Patient/PatientLinelist.aspx" id="txcurrlink"><i class="fa fa-users" aria-hidden="true"></i> <span id="txcurrspan">Loading...</span></a>
                                     </div>
                                 </div>
                                 <div class="reporting-col"></div>
@@ -189,7 +189,7 @@
                                         Defaulters (1 - 30)
                                     </div>
                                     <div class="defaults30-body reporting-body">
-                                        <a href="Patient/PatientLinelist.aspx"><i class="fa fa-users" aria-hidden="true"></i> <span id="firststagedef">0</span></a>
+                                        <a href="Patient/PatientLinelist.aspx" id="firstdefaulterslink"><i class="fa fa-users" aria-hidden="true"></i> <span id="firststagedef">Loading...</span></a>
                                     </div>
                                 </div>
                                 <div class="reporting-col"></div>
@@ -198,7 +198,7 @@
                                         Defaulters (31 - 90)
                                     </div>
                                     <div class="defaults90-body reporting-body">
-                                        <a href="Patient/PatientLinelist.aspx"><i class="fa fa-users" aria-hidden="true"></i> <span id="secondstagedef">0</span></a>
+                                        <a href="Patient/PatientLinelist.aspx" id="seconddefaulterslink"><i class="fa fa-users" aria-hidden="true"></i> <span id="secondstagedef">Loading...</span></a>
                                     </div>
                                 </div>
                                 <div class="reporting-col"></div>
@@ -207,7 +207,7 @@
                                         LTFU
                                     </div>
                                     <div class="ltfu-body reporting-body">
-                                        <a href="Patient/PatientLinelist.aspx"><i class="fa fa-users" aria-hidden="true"></i> <span id="ltfu">0</span></a>
+                                        <a href="Patient/PatientLinelist.aspx" id="ltfulink"><i class="fa fa-users" aria-hidden="true"></i> <span id="ltfu">Loading...</span></a>
                                     </div>
                                 </div>
                             </div>
@@ -610,6 +610,7 @@
             useCurrent: true,
             defaultDate: new Date()
         }).on("dp.change", function (selectedDate) {
+            document.getElementById("ltfu").innerHTML = "Loading...";
             var selectedday = $("#<%=toreportingdateinput.ClientID%>").val();
             var fromselectedday = $("#<%=fromreportingdateinput.ClientID%>").val();
             getltfu(fromselectedday, selectedday);
@@ -623,12 +624,16 @@
         }).on("dp.change", function (selectedDate) {
             //var selectedday = moment();
             //alert(selectedday);
+            document.getElementById("txcurrspan").innerHTML = "Loading...";
+            document.getElementById("firststagedef").innerHTML = "Loading...";
+            document.getElementById("secondstagedef").innerHTML = "Loading...";
+            document.getElementById("ltfu").innerHTML = "Loading...";
             var selectedday = $("#<%=toreportingdateinput.ClientID%>").val();
             var fromselectedday = $("#<%=fromreportingdateinput.ClientID%>").val();
-            gettxcurr(selectedday);
-            getfirststagedefaulters(selectedday);
-            getsecondstagedefaulters(selectedday);
-            getltfu(fromselectedday, selectedday);
+            gettxcurr(fromselectedday, selectedday);
+            //getfirststagedefaulters(selectedday);
+            //getsecondstagedefaulters(selectedday);
+            //getltfu(fromselectedday, selectedday);
         });
 
             var today = new Date();    
@@ -636,14 +641,19 @@
             var day = today.getDate();
             var reportingdate = today.getFullYear() + '/' +
                         ((''+month).length<2 ? '0' : '') + month + '/' +
-                        ((''+day).length<2 ? '0' : '') + day;
-            var txcurrcount = gettxcurr(reportingdate);
-            var firststagedefaulters = getfirststagedefaulters(reportingdate);
-            var secondstagedefaulters = getsecondstagedefaulters(reportingdate);
-            var ltfu = getltfu(reportingdate, reportingdate);
+                (('' + day).length < 2 ? '0' : '') + day;
+           // var gettodaydata = getTodayData(reportingdate);
+            var txcurrcount = gettxcurr("1900-01-01", reportingdate);
+            //var firststagedefaulters = getfirststagedefaulters(reportingdate);
+            //var secondstagedefaulters = getsecondstagedefaulters(reportingdate);
+            //var ltfu = getltfu(reportingdate, reportingdate);
+
+            //function getTodayData(reportingdate) {
+
+            //}
 
             //gettxcurr
-            function gettxcurr(reportingdate) { 
+            function gettxcurr(fromselectedday, reportingdate) { 
                 $.ajax({
                     url: 'WebService/ReportingService.asmx/getNumberOfTxcurr',
                     data: "{'reportingdate':'" + reportingdate + "'}",
@@ -652,37 +662,64 @@
                     contentType: "application/json; charset=utf-8",
                     cache: false,
                     success: function (response) {
-                        document.getElementById("txcurrspan").innerHTML= response.d;
+                        document.getElementById("txcurrspan").innerHTML = response.d;
+                        if (response.d > 0) {
+                            $("#txcurrlink").attr("href", "Patient/PatientLinelist.aspx?q=txcurr&qfrom=" + fromselectedday + "&qto=" + reportingdate + "");
+                        }
+                        else {
+                            $("#txcurrlink").attr("href", "#");
+                        }   
+                        if (response.d != null) {
+                            getfirststagedefaulters(fromselectedday, reportingdate);
+                        }
                     }
                 });
             }
 
             //get 1- 30 defaulters
-            function getfirststagedefaulters(reportingdate) {
+            function getfirststagedefaulters(fromselectedday, reportingdate) {
                 $.ajax({
-                    url: 'WebService/ReportingService.asmx/getNumberOfDefaulters',
+                    url: 'WebService/ReportingService.asmx/getFirstStageDefaulters',
                     data: "{'reportingdate':'" + reportingdate + "','mindays':'1','maxdays':'30'}",
                     type: 'POST',
                     dataType: 'json',
                     contentType: "application/json; charset=utf-8",
                     cache: false,
                     success: function (response) {
-                        document.getElementById("firststagedef").innerHTML= response.d;
+                        document.getElementById("firststagedef").innerHTML = response.d;
+                        if (response.d > 0) {
+                            $("#firstdefaulterslink").attr("href", "Patient/PatientLinelist.aspx?q=firstdefaulters&qfrom=" + fromselectedday + "&qto=" + reportingdate + "");
+                        }
+                        else {
+                            $("#firstdefaulterslink").attr("href", "#");
+                        } 
+                        if (response.d != null) {
+                            getsecondstagedefaulters(fromselectedday, reportingdate);
+                        }
                     }
                 });
             }
 
             //get 31  - 90 defaulters
-            function getsecondstagedefaulters(reportingdate) {
+            function getsecondstagedefaulters(fromselectedday, reportingdate) {
                 $.ajax({
-                    url: 'WebService/ReportingService.asmx/getNumberOfDefaulters',
+                    url: 'WebService/ReportingService.asmx/getSecondStageDefaulters',
                     data: "{'reportingdate':'" + reportingdate + "','mindays':'31','maxdays':'90'}",
                     type: 'POST',
                     dataType: 'json',
                     contentType: "application/json; charset=utf-8",
                     cache: false,
                     success: function (response) {
-                        document.getElementById("secondstagedef").innerHTML= response.d;
+                        document.getElementById("secondstagedef").innerHTML = response.d;
+                        if (response.d > 0) {
+                            $("#seconddefaulterslink").attr("href", "Patient/PatientLinelist.aspx?q=seconddefaulters&qfrom=" + fromselectedday + "&qto=" + reportingdate + "");
+                        }
+                        else {
+                            $("#seconddefaulterslink").attr("href", "#");
+                        } 
+                        if (response.d != null) {
+                            getltfu(fromselectedday, reportingdate);
+                        }
                     }
                 });
             }
@@ -697,14 +734,18 @@
                     contentType: "application/json; charset=utf-8",
                     cache: false,
                     success: function (response) {
-                        document.getElementById("ltfu").innerHTML= response.d;
+                        document.getElementById("ltfu").innerHTML = response.d;
+                        if (response.d > 0) {
+                            $("#ltfulink").attr("href", "Patient/PatientLinelist.aspx?q=ltfu&qfrom=" + fromdate + "&qto=" + todate + "");
+                        }
+                        else {
+                            $("#ltfulink").attr("href", "#");
+                        } 
                     }
                 });
             }
       
         $(document).ready(function () {  
-           
-
             //console.log("get viral load  called");            
 
             $.ajax({

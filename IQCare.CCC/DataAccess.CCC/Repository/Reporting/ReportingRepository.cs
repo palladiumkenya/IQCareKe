@@ -5,7 +5,7 @@ using Entities.CCC.Reports;
 
 namespace DataAccess.CCC.Repository.Reporting
 {
-    public class ReportingRepository : BaseRepository<sp_gettxcurr>, IReportingRepository
+    public class ReportingRepository : BaseRepository<PatientTracing>, IReportingRepository
     {
         private readonly GreencardContext _context;
         public ReportingRepository() : base(new GreencardContext())

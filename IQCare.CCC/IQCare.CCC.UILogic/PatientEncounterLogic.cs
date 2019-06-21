@@ -503,6 +503,11 @@ namespace IQCare.CCC.UILogic
                             theFrmRoot.NavigateUrl = "../Adherence/AdherenceBarriers.aspx?visitId=" + theDR["visitID"].ToString();
                             theFrmRoot.ImageUrl = "~/images/15px-Yes_check.svg.png";
                         }
+                        if (theDR["VisitName"].ToString() == "Patient-Tracing")
+                        {
+                            theFrmRoot.NavigateUrl = "../Patient/PatientTracing.aspx?visitId=" + theDR["visitID"].ToString();
+                            theFrmRoot.ImageUrl = "~/images/15px-Yes_check.svg.png";
+                        }
                         if (theDR["VisitName"].ToString() == "Depression Screening")
                         {
                             theFrmRoot.NavigateUrl = "../Screening/DepressionScreening.aspx?visitId=" + theDR["visitID"].ToString();

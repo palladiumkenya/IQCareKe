@@ -87,6 +87,7 @@
     <Content Include="CCC\Patient\PatientConsent.aspx" />
     <Content Include="CCC\Patient\PatientDuplicateFinder.aspx" />
     <Content Include="CCC\Patient\PatientLinelist.aspx" />
+    <Content Include="CCC\Patient\PatientTracing.aspx" />
     <Content Include="CCC\Screening\AlcoholDrugAbuseScreening.aspx" />
     <Content Include="CCC\Screening\DepressionScreening.aspx" />
     <Content Include="CCC\Screening\GBVScreening.aspx" />
@@ -762,6 +763,13 @@
     </Compile>
     <Compile Include="CCC\Patient\PatientTest.aspx.designer.cs">
       <DependentUpon>PatientTest.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="CCC\Patient\PatientTracing.aspx.cs">
+      <DependentUpon>PatientTracing.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CCC\Patient\PatientTracing.aspx.designer.cs">
+      <DependentUpon>PatientTracing.aspx</DependentUpon>
     </Compile>
     <Compile Include="CCC\Patient\ServiceArea.aspx.cs">
       <DependentUpon>ServiceArea.aspx</DependentUpon>

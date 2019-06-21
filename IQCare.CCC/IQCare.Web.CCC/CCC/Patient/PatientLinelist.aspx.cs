@@ -11,7 +11,20 @@ namespace IQCare.Web.CCC.Patient
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            HttpContext.Current.Session["qtrace"] = Request.QueryString["q"].ToString();
+            string question = HttpContext.Current.Session["qtrace"].ToString();
+            HttpContext.Current.Session["qfrom"] = Request.QueryString["qfrom"].ToString();
+            HttpContext.Current.Session["qto"] = Request.QueryString["qto"].ToString();
+        }
 
+        [System.Web.Services.WebMethod(EnableSession = true)]
+        public static string SetSelectedPatient(int patientId, int personId)
+        {
+            HttpContext.Current.Session["PatientPK"] = patientId;
+            HttpContext.Current.Session["PersonId"] = personId;
+            HttpContext.Current.Session["PatientTrace"] = "yes";
+            HttpContext.Current.Session["PatientInformation"] = null;
+            return "success";
         }
     }
 }
