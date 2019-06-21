@@ -6,7 +6,7 @@ import { environment } from '../../../environments/environment';
 import { ErrorHandlerService } from '../../shared/_services/errorhandler.service';
 import { LookupItemView } from '../../shared/_models/LookupItemView';
 import { PersonView } from '../../records/_models/personView';
-import { EncounterDetails } from '../_model/Htsencounterdetails'
+import { EncounterDetails } from '../_model/HtsEncounterdetails'
 const httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
 };
@@ -142,7 +142,7 @@ export class PersonHomeService {
             catchError(this.errorHandler.handleError<any>('getPatientTransferInDetails'))
         );
     }
-   
+
     public getPatientOVCStatusDetails(personId: number): Observable<any> {
         return this.http.get<any>(this.API_URL + '/api/Register/GetPatientOVCStatus/'+ personId).pipe(
             tap(getPatientOVCStatusDetails => this.errorHandler.log(`get patient OVC details for personId:  `
@@ -157,9 +157,9 @@ export class PersonHomeService {
             catchError(this.errorHandler.handleError<any>('getPatientARVDetails'))
         );
     }
-   
 
-    
+
+
     public getPatientEnrollmentDateByServiceAreaId(patientId: number, serviceAreaId: number): Observable<any> {
         return this.http.get<any>(this.API_URL + '/api/Register/GetPatientEnrollmentByServiceAreaId/'
             + patientId + '/' + serviceAreaId).pipe(
