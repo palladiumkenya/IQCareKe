@@ -143,7 +143,7 @@ namespace IQCare.HTS.BusinessProcess.CommandHandlers
                             if (registeredPerson != null)
                             {
                                 var updatedPerson = await registerPersonService.UpdatePerson(identifiers[0].PersonId,
-                                    firstName, middleName, lastName, sex, dateOfBirth, clientFacility.FacilityID, NickName: nickName);
+                                    firstName, middleName, lastName, sex, dateOfBirth, clientFacility.FacilityID, registrationDate: dateEnrollment,  NickName: nickName);
                             }
                             else
                             {
