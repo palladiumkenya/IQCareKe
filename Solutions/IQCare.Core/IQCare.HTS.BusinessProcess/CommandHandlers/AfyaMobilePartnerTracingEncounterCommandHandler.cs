@@ -115,7 +115,7 @@ namespace IQCare.HTS.BusinessProcess.CommandHandlers
                     }
 
                     //update message has been processed
-                    await registerPersonService.UpdateAfyaMobileInbox(afyaMobileMessage.Id, afyaMobileId, true, DateTime.Now, $"Index clientid: {indexClientAfyaMobileId} for partnerid: {afyaMobileId} not found", true);
+                    await registerPersonService.UpdateAfyaMobileInbox(afyaMobileMessage.Id, afyaMobileId, true, DateTime.Now, $"Successfully synchronized partner tracing for clientid: {indexClientAfyaMobileId} and partnerid: {afyaMobileId}", true);
                     trans.Commit();
                     return Result<string>.Valid($"Successfully synchronized partner tracing for afyamobileid: {afyaMobileId}");
                 }

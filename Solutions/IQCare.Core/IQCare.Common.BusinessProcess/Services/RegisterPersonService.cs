@@ -1407,7 +1407,14 @@ namespace IQCare.Common.BusinessProcess.Services
 
                 var sexParameter = new SqlParameter("@sex", sex);
                 var dateOfBirthParameter = new SqlParameter("@dateOfBirth", dateOfBirth);
-                var registrationDateParameter = new SqlParameter("@registrationDate", registrationDate);
+                //var registrationDateParameter = new SqlParameter("@registrationDate", registrationDate);
+
+                var registrationDateParameter = new SqlParameter();
+                registrationDateParameter.ParameterName = "@registrationDate";
+                registrationDateParameter.IsNullable = true;
+                registrationDateParameter.SqlDbType = SqlDbType.DateTime;
+                registrationDateParameter.Value = !registrationDate.HasValue ? (object)DBNull.Value : registrationDate.Value;
+
                 var facilityIdParameter = new SqlParameter("@facilityId", facilityId);
                 var personIdParameter = new SqlParameter("@personId", personId);
                 var dobPrecisionParameter = new SqlParameter("@dobPrecision", dobPrecision);
