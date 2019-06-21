@@ -45,10 +45,7 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\References\DataAccess.Entity.dll</HintPath>
     </Reference>
-    <Reference Include="Entities.CCC, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\References\Entities.CCC.dll</HintPath>
-    </Reference>
+    <Reference Include="Entities.CCC, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" />
     <Reference Include="Entities.PSmart, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" />
     <Reference Include="System" />
     <Reference Include="System.Core" />

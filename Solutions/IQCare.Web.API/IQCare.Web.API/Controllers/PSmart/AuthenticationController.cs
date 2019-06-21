@@ -1,4 +1,3 @@
-using Entity.WebApi.PSmart;
 using IQCare.WebApi.Logic.PSmart;
 using System.Collections.Generic;
 using System.Web.Http;

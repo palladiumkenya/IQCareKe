@@ -37,8 +37,8 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<Reference Include="AutoMapper">
-		  <HintPath>..\..\..\Library\AutoMapper.dll</HintPath>
+		<Reference Include="Entity.WebApi">
+		  <HintPath>..\..\..\References\Entity.WebApi.dll</HintPath>
 		</Reference>
 		<Reference Include="EntityFramework">
 			<HintPath>..\..\..\References\EntityFramework.dll</HintPath>
@@ -50,10 +50,10 @@
 			<HintPath>..\..\..\References\IQCare.DTO.dll</HintPath>
 		</Reference>
 		<Reference Include="IQCare.Events">
-			<HintPath>..\..\..\References\IQCare.Events.dll</HintPath>
+		  <HintPath>..\..\..\References\IQCare.Events.dll</HintPath>
 		</Reference>
-		<Reference Include="IQCare.Web.UILogic">
-		  <HintPath>..\..\..\References\IQCare.Web.UILogic.dll</HintPath>
+		<Reference Include="IQCare.WebApi.Logic">
+		  <HintPath>..\..\..\References\IQCare.WebApi.Logic.dll</HintPath>
 		</Reference>
 		<Reference Include="log4net">
 		  <HintPath>..\..\..\References\log4net.dll</HintPath>
@@ -73,10 +73,6 @@
 	<ItemGroup>
 		<Folder Include="DependancyResolution\" />
 		<Folder Include="App_Start\" />
-	</ItemGroup>
-
-	<ItemGroup>
-	  <ProjectReference Include="..\IQCare.WebApi.Logic\IQCare.WebApi.Logic.csproj" />
 	</ItemGroup>
 
 <!--	<ItemGroup>
