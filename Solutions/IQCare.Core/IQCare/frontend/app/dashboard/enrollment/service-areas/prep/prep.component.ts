@@ -113,7 +113,7 @@ export class PrepComponent implements OnInit {
             MFLCode: new FormControl('', [Validators.required]),
             Year: new FormControl('', [Validators.required]),
             TransferInDate: new FormControl(''),
-            InitiationDate: new FormControl('', [Validators.required]),
+            InitiationDate: new FormControl(''),
             FacilityListSelected: new FormControl(''),
             TransferInMflCode: new FormControl(''),
             CurrentRegimen: new FormControl(''),
@@ -203,7 +203,7 @@ export class PrepComponent implements OnInit {
 
         this.form.controls.MFLCode.setValue(this.posId);
 
-       
+
         this.form.controls.FacilityListSelected.setValue(this.facilities);
         this.filteredfacilities.next(this.facilities.slice(0, 10));
 
@@ -563,7 +563,7 @@ export class PrepComponent implements OnInit {
         }
 
     }
-	
+
 
     change(event) {
         this.FacilitySelected.setValue('');
@@ -733,23 +733,23 @@ export class PrepComponent implements OnInit {
                         }
 
                         if (IsSchool !== null && IsSchool !== undefined && IsSchool.length > 1) {
-                        this.registrationService.addPatientOvcStatus(this.personId, 0, IsSchool
-                            , true, false, this.userId).subscribe((res) => {
+                            this.registrationService.addPatientOvcStatus(this.personId, 0, IsSchool
+                                , true, false, this.userId).subscribe((res) => {
 
-                                let OvcStatus
-                                    : Number;
-                                OvcStatus = res['oVCStatusId'];
-                                if (OvcStatus > 0) {
-                                    this.snotifyService.success('Successfully Saved Attending  School Details'
-                                        , 'Attend School',
-                                        this.notificationService.getConfig());
-                                }
+                                    let OvcStatus
+                                        : Number;
+                                    OvcStatus = res['oVCStatusId'];
+                                    if (OvcStatus > 0) {
+                                        this.snotifyService.success('Successfully Saved Attending  School Details'
+                                            , 'Attend School',
+                                            this.notificationService.getConfig());
+                                    }
 
-                            },
-                                (error) => {
-                                    this.snotifyService.error('Error saving Attend School Details ' + error, 'Attend School',
-                                        this.notificationService.getConfig());
-                                });
+                                },
+                                    (error) => {
+                                        this.snotifyService.error('Error saving Attend School Details ' + error, 'Attend School',
+                                            this.notificationService.getConfig());
+                                    });
                         }
                         if (PrevPrepUse == '1') {
                             this.registrationService.addPatientARVHistory(this.patientId,
