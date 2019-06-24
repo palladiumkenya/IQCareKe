@@ -28,4 +28,5 @@ export class PersonView {
     county: string;
     subCounty: string;
     ward: string;
+    ageInMonths: string;
 }

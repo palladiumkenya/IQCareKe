@@ -87,9 +87,9 @@ export class LinkageReferralComponent implements OnInit {
         const personId = JSON.parse(localStorage.getItem('personId'));
         this._linkageReferralService.getClientPreviousTracing(personId).subscribe(
             (res) => {
-                console.log(res);
+                // console.log(res);
                 for (let i = 0; i < res.length; i++) {
-                    console.log(res[i]);
+                    // console.log(res[i]);
                     this.tracing.tracingDate = res[i].tracingDate;
                     this.tracing.outcome = res[i].tracingOutcome;
                     this.tracing.mode = res[i].tracingMode;
@@ -198,12 +198,9 @@ export class LinkageReferralComponent implements OnInit {
     }
 
     onSubmitForm() {
-        console.log(this.myControl);
         if (!this.form.valid) {
             return;
         }
-
-        console.log('valid');
 
         if (!this.myControl.value || !this.myControl.value.hasOwnProperty('mflCode')) {
             this.snotifyService.error('Please select a valid facility', 'Referral', this.notificationService.getConfig());

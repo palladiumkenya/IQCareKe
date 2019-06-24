@@ -201,11 +201,20 @@ namespace IQCare.HTS.BusinessProcess.CommandHandlers
                             int patientMasterVisitId = patientMasterVisitEntity.OrderBy(x => x.Id).FirstOrDefault().Id;
 
 
-
                             var partnHtsScreenings = await encounterTestingService.AddPartnerScreening(
                                 partnetPersonIdentifiers[0].PersonId, indexClient.Id, patientMasterVisitId,
                                 partnerOccupation,
                                 screeningDate, bookingDate, newScreenings, providerId);
+
+                            var stringParnerObject = Newtonsoft.Json.JsonConvert.SerializeObject(new
+                            {
+                                partnerId = partnetPersonIdentifiers[0].PersonId,
+                                pnsScreened = true
+                            });
+
+                            var partnerScreeningDone =
+                                await registerPersonService.AddAppStateStore(indexClient.PersonId, indexClient.Id, 8,
+                                    null, null, stringParnerObject);
                         }
                         else
                         {
@@ -220,7 +229,7 @@ namespace IQCare.HTS.BusinessProcess.CommandHandlers
                         await registerPersonService.UpdateAfyaMobileInbox(afyaMobileMessage.Id, afyaMobileId, true, DateTime.Now, $"Index clientid: {indexClientAfyaMobileId} for partnerid: {afyaMobileId} not found", false);
                         return Result<string>.Invalid($"Index clientid: {indexClientAfyaMobileId} for partnerid: {afyaMobileId} not found");
                     }
-
+                    
                     //update message has been processed
                     await registerPersonService.UpdateAfyaMobileInbox(afyaMobileMessage.Id, afyaMobileId, true, DateTime.Now, $"Successfully synchronized partner screening for afyamobileid: {afyaMobileId}", true);
                     trans.Commit();

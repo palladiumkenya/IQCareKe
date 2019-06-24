@@ -249,7 +249,6 @@ export class ServicesListComponent implements OnInit {
     isServiceEligible(serviceAreaId: number) {
         let isCCCEnrolled;
 
-
         if (this.enrolledServices) {
             isCCCEnrolled = this.enrolledServices.filter(obj => obj.serviceAreaId == 1);
             if (isCCCEnrolled && isCCCEnrolled.length > 0) {
@@ -293,7 +292,7 @@ export class ServicesListComponent implements OnInit {
                     }
                     break;
                 case 'HTS':
-                    if (isCCCEnrolled && isCCCEnrolled.length > 0) {
+                    if ((isCCCEnrolled && isCCCEnrolled.length > 0) || this.person.ageInMonths < 18) {
                         isEligible = false;
                     } else {
                         isEligible = true;

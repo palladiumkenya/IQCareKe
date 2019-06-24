@@ -52,7 +52,7 @@ namespace IQCare.HTS.BusinessProcess.CommandHandlers
                     if (identifiers.Count > 0)
                     {
                         // var person = await registerPersonService.GetPerson(identifiers[0].PersonId);
-                        // var patient = await registerPersonService.GetPatientByPersonId(identifiers[0].PersonId);
+                        var patient = await registerPersonService.GetPatientByPersonId(identifiers[0].PersonId);
 
                         //add referral
                         int providerId = request.PLACER_DETAIL.PROVIDER_ID;
@@ -98,6 +98,10 @@ namespace IQCare.HTS.BusinessProcess.CommandHandlers
                                 }
                             }
                         }
+
+                        var clientHasBeenReferredState =
+                            await registerPersonService.AddAppStateStore(identifiers[0].PersonId, patient.Id, 5, null,
+                                null);
                     }
                     else
                     {

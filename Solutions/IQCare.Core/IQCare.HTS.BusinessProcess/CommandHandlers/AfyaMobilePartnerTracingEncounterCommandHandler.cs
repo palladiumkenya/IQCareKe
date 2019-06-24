@@ -99,6 +99,16 @@ namespace IQCare.HTS.BusinessProcess.CommandHandlers
                                 var tracingOutcome = await encounterTestingService.addTracing(partnetPersonIdentifiers[0].PersonId, tracingType,
                                     tracingDate, mode, outcome, 1, null, consent, tracingBookingDate, null);
                             }
+
+                            var stringParnerObject = Newtonsoft.Json.JsonConvert.SerializeObject(new
+                            {
+                                partnerId = partnetPersonIdentifiers[0].PersonId,
+                                pnsTraced = true
+                            });
+
+                            var partnerScreeningDone =
+                                await registerPersonService.AddAppStateStore(indexClient.PersonId, indexClient.Id, 9,
+                                    null, null, stringParnerObject);
                         }
                         else
                         {

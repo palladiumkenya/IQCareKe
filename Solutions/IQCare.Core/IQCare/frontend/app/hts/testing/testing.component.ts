@@ -336,10 +336,10 @@ export class TestingComponent implements OnInit {
             this.formTesting.controls.finalResultsRemarks.setValue('n/a');
         }
 
-        console.log(this.formTesting);
+        // console.log(this.formTesting);
         if (this.formTesting.valid) {
             this.finalTestingResults = { ...this.finalTestingResults, ...this.formTesting.value };
-            console.log(this.finalTestingResults);
+            // console.log(this.finalTestingResults);
 
             const htsEncounterId = JSON.parse(localStorage.getItem('htsEncounterId'));
             const patientId = JSON.parse(localStorage.getItem('patientId'));
