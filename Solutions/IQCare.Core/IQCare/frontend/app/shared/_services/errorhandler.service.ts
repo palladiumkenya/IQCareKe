@@ -25,6 +25,6 @@ export class ErrorHandlerService {
     /** Log a HeroService message with the MessageService */
     public log(message: string) {
         // tslint:disable-next-line:no-console
-        console.info(message);
+        // console.info(message);
     }
 }

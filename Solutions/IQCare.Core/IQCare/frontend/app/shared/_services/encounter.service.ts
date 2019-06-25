@@ -29,6 +29,14 @@ export class EncounterService {
             );
     }
 
+    public getPatientMasterVisit(patientId: number, patientMasterVisitId: number): Observable<any[]> {
+        return this.http.get<any[]>(this.API_URL + '/api/PatientServices/GetMasterVisits/' + patientId + '/' + patientMasterVisitId,
+            httpOptions).pipe(
+                tap(getPatientMasterVisit => this.errorHandler.log(`successfully fetched  patientmastervisit`)),
+                catchError(this.errorHandler.handleError<any>('Error fetching  patientmastervisit'))
+            );
+    }
+
     public savePatientOrdVisit(ordVisit: AddPatientOrdVisitCommand): Observable<any> {
         return this.http.post<AddPatientOrdVisitCommand>(this.API_URL + '/api/PatientMasterVisit/addOrdVisit',
             JSON.stringify(ordVisit), httpOptions).pipe(

@@ -18,7 +18,8 @@
                                         <app-prep-sti-screening-treatment
                                             (notify)="onPrepStiScreeningTreatmentNotify($event)"
                                             [STIScreeningAndTreatmentOptions]="STIScreeningAndTreatmentOptions"
-                                            [patientId]="patientId" [personId]="personId" [isEdit]="isEdit">
+                                            [patientId]="patientId" [personId]="personId" [isEdit]="isEdit"
+                                            [patientMasterVisitId]="patientMasterVisitId">
                                         </app-prep-sti-screening-treatment>
 
                                         <div>
@@ -38,7 +39,9 @@
                                         </ng-template>
 
                                         <app-circumcision-status (notify)="onCircumcisionStatusNotify($event)"
-                                            [CircumcisionStatusOptions]="CircumcisionStatusOptions">
+                                            [CircumcisionStatusOptions]="CircumcisionStatusOptions"
+                                            [patientId]="patientId" [personId]="personId" [isEdit]="isEdit"
+                                            [patientMasterVisitId]="patientMasterVisitId">
                                         </app-circumcision-status>
 
                                         <div>
@@ -59,7 +62,9 @@
                                         </ng-template>
 
                                         <app-fertility-intention (notify)="onFertilityIntentionNotify($event)"
-                                            [FertilityIntentionsOptions]="FertilityIntentionsOptions">
+                                            [FertilityIntentionsOptions]="FertilityIntentionsOptions"
+                                            [patientId]="patientId" [personId]="personId" [isEdit]="isEdit"
+                                            [patientMasterVisitId]="patientMasterVisitId">
                                         </app-fertility-intention>
 
                                         <app-pregnancy-outcome (notify)="onPregnancyOutcomeNotify($event)"

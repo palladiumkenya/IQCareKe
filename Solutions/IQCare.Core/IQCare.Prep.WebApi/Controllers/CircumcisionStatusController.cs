@@ -32,5 +32,17 @@ namespace IQCare.Prep.WebApi.Controllers
                 return Ok(response.Value);
             return BadRequest(response);
         }
+
+        [HttpGet("{patientId}")]
+        public async Task<IActionResult> GetCircumcisionStatus(int patientId)
+        {
+            var response = await _mediator.Send(new GetPatientCircumcisionStatusCommand()
+            {
+                PatientId = patientId
+            }, Request.HttpContext.RequestAborted);
+            if (response.IsValid)
+                return Ok(response.Value);
+            return BadRequest(response);
+        }
     }
 }

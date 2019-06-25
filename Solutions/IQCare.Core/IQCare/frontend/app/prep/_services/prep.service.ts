@@ -37,6 +37,13 @@ export class PrepService {
             );
     }
 
+    public getStiScreeningTreatment(patientId: number, patientMasterVisitId: number): Observable<any[]> {
+        return this.http.get<any[]>(this.MATERNITY_API_URL + '/api/PatientScreening/' + patientId + '/' + patientMasterVisitId).pipe(
+            tap(getStiScreeningTreatment => this.errorHandler.log(`successfully fetched sti screening details`)),
+            catchError(this.errorHandler.handleError<any>('Error fetching sti screening details'))
+        );
+    }
+
     public savePrepStatus(prepStatusCommand: PrepStatusCommand): Observable<any> {
         return this.http.post<any>(this.PREP_API_URL + '/api/PrepStatus/AddPrepStatus',
             JSON.stringify(prepStatusCommand), httpOptions).pipe(
@@ -82,6 +89,13 @@ export class PrepService {
                 tap(saveCircumcisionStatus => this.errorHandler.log('Successfully saved patient circumcision status')),
                 catchError(this.errorHandler.handleError<any>('Error in saving Patient circumcision status'))
             );
+    }
+
+    public getCircumcisionStatus(patientId: number): Observable<any> {
+        return this.http.get<any>(this.PREP_API_URL + '/api/CircumcisionStatus/GetCircumcisionStatus/' + patientId).pipe(
+            tap(getCircumcisionStatus => this.errorHandler.log('Successfully saved patient circumcision status')),
+            catchError(this.errorHandler.handleError<any>('Error in saving Patient circumcision status'))
+        );
     }
 
     public savePregnancyIndicatorCommand(pregnancyIndicatorCommand: PregnancyIndicatorCommand): Observable<any> {
