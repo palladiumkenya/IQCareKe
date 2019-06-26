@@ -104,7 +104,7 @@ namespace IQCare.HTS.BusinessProcess.CommandHandlers
                             MFLCode = Convert.ToInt32(searchFacility[0].MFLCode);
 
                             await encounterTestingService.AddReferral(identifiers[0].PersonId, facility[0].FacilityID,
-                                2, MFLCode, referralReason[0].ItemId, providerId, dateToBeEnrolled, "");
+                                2, MFLCode, referralReason[0].ItemId, providerId, dateToBeEnrolled, facilityReferred);
                         }
 
                         var clientHasBeenReferredState =
