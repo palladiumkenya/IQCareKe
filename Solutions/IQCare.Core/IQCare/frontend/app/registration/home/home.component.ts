@@ -6,15 +6,21 @@ import * as Consent from '../../shared/reducers/app.states';
 import { select, Store } from '@ngrx/store';
 import { AppStateService } from '../../shared/_services/appstate.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import { PersonHomeService } from '../../dashboard/services/person-home.service';
+import { NotificationService } from '../../shared/_services/notification.service';
+import { SnotifyService } from 'ng-snotify';
 
 @Component({
     selector: 'app-home',
     templateUrl: './home.component.html',
-    styleUrls: ['./home.component.css']
+    styleUrls: ['./home.component.css'],
+    providers: [PersonHomeService]
 })
 export class HomeComponent implements OnInit {
     patientId: number;
+    personId: number;
     isPositive: boolean = false;
+    ageInMonths: string;
 
     displayedColumns = ['encounterDate', 'testType', 'provider', 'resultOne',
         'resultTwo', 'finalResult', 'consent', 'partnerListingConsent', 'serviceArea', 'edit'];
@@ -25,7 +31,10 @@ export class HomeComponent implements OnInit {
         private appStateService: AppStateService,
         private router: Router,
         private route: ActivatedRoute,
-        public zone: NgZone) {
+        public zone: NgZone,
+        private personService: PersonHomeService,
+        private snotifyService: SnotifyService,
+        private notificationService: NotificationService) {
         store.pipe(select('app')).subscribe(res => {
             localStorage.setItem('store', JSON.stringify(res));
         });
@@ -41,6 +50,17 @@ export class HomeComponent implements OnInit {
         this.patientId = JSON.parse(localStorage.getItem('patientId'));
         this.dataSource = new EncountersDataSource(this.encounterService, this.patientId);
         this.getClientEncounters(this.patientId);
+
+        this.personId = JSON.parse(localStorage.getItem('personId'));
+        this.personService.getPatientByPersonId(this.personId).subscribe(
+            res => {
+                this.ageInMonths = res.ageInMonths;
+            },
+            error => {
+                this.snotifyService.error('Fetching person ' + error, 'HTS Encounter',
+                    this.notificationService.getConfig());
+            }
+        );
     }
 
 
@@ -48,7 +68,8 @@ export class HomeComponent implements OnInit {
         this.encounterService.getEncounters(patientId).subscribe(data => {
             this.appStateService.initializeAppState();
         }, err => {
-            console.log(err);
+            this.snotifyService.error('Fetching hts encounters ' + err, 'HTS Encounter',
+                this.notificationService.getConfig());
         });
     }
 

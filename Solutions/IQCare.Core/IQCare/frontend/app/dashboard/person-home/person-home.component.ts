@@ -56,14 +56,12 @@ export class PersonHomeComponent implements OnInit {
             const { HTSEncounterArray } = res;
             const { PersonVitalsArray } = res;
             const { RiskAssessmentArray } = res;
-            console.log(HTSEncounterArray);
             this.services = servicesArray;
             this.htsencounters = HTSEncounterArray;
             this.personvitals = PersonVitalsArray;
             this.riskassessmentencounter = RiskAssessmentArray;
             if (this.personvitals.length > 0) {
                 this.personVitalWeight = this.personvitals['0'].weight;
-                console.log(this.personVitalWeight + 'Correct Weight');
             }
 
 
@@ -83,8 +81,6 @@ export class PersonHomeComponent implements OnInit {
 
         // console.log('personId' + this.personId);
         this.getPatientDetailsById(this.personId);
-
-
     }
 
 
