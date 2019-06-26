@@ -171,8 +171,8 @@ namespace IQCare.HTS.BusinessProcess.CommandHandlers
                 catch (Exception ex)
                 {
                     trans.Rollback();
-                    Log.Error($"Failed to synchronize partner screening for clientId: {afyaMobileId} " + ex.Message + " " + ex.InnerException);
-                    return Result<string>.Invalid($"Failed to synchronize partner screening for clientId: {afyaMobileId} " + ex.Message + " " + ex.InnerException);
+                    Log.Error($"Failed to synchronize family screening for clientId: {afyaMobileId} " + ex.Message + " " + ex.InnerException);
+                    return Result<string>.Invalid($"Failed to synchronize family screening for clientId: {afyaMobileId} " + ex.Message + " " + ex.InnerException);
                 }
             }
         }

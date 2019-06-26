@@ -185,7 +185,7 @@ namespace IQCare.HTS.BusinessProcess.CommandHandlers
                 catch (Exception ex)
                 {
                     trans.Rollback();
-                    Log.Error(ex.Message);
+                    Log.Error($"Failed to synchronize Hts tests for clientid: {afyaMobileId} " + ex.Message + " " + ex.InnerException);
                     return Result<string>.Invalid($"Failed to synchronize Hts tests for clientid: {afyaMobileId} " + ex.Message + " " + ex.InnerException);
                 }
             }

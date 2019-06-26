@@ -73,6 +73,7 @@ namespace IQCare.HTS.BusinessProcess.CommandHandlers
                                       x.ItemName == "CCCEnrollment").ToListAsync();
                         var searchFacility = await encounterTestingService.SearchFacility(facilityReferred);
                         var previousReferrals = await encounterTestingService.GetReferralByPersonId(identifiers[0].PersonId);
+                        var facility = await encounterTestingService.GetCurrentFacility();
                         int MFLCode = 0;
                         if (searchFacility.Count > 0)
                         {
@@ -89,7 +90,6 @@ namespace IQCare.HTS.BusinessProcess.CommandHandlers
                             }
                             else
                             {
-                                var facility = await encounterTestingService.GetCurrentFacility();
                                 if (facility.Count > 0)
                                 {
                                     await encounterTestingService.AddReferral(identifiers[0].PersonId,
@@ -97,6 +97,14 @@ namespace IQCare.HTS.BusinessProcess.CommandHandlers
                                         referralReason[0].ItemId, providerId, dateToBeEnrolled, "");
                                 }
                             }
+                        }
+                        else
+                        {
+                            searchFacility = await encounterTestingService.SearchFacility("Other");
+                            MFLCode = Convert.ToInt32(searchFacility[0].MFLCode);
+
+                            await encounterTestingService.AddReferral(identifiers[0].PersonId, facility[0].FacilityID,
+                                2, MFLCode, referralReason[0].ItemId, providerId, dateToBeEnrolled, "");
                         }
 
                         var clientHasBeenReferredState =
@@ -118,7 +126,7 @@ namespace IQCare.HTS.BusinessProcess.CommandHandlers
                 catch (Exception ex)
                 {
                     trans.Rollback();
-                    Log.Error(ex.Message);
+                    Log.Error($"Failed to synchronize Hts Referral for clientid: {afyaMobileId} " + ex.Message + " " + ex.InnerException);
                     return Result<string>.Invalid($"Failed to synchronize Hts Referral for clientid: {afyaMobileId} " + ex.Message + " " + ex.InnerException);
                 }
             }
