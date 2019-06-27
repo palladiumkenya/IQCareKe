@@ -509,7 +509,7 @@
                     contentType: "application/json; charset=utf-8",
                     dataType: "json",
                     success: function (response) {
-                         window.location.href = '<%=ResolveClientUrl( "~/CCC/Home.aspx")%>';
+                         window.location.href = '<%=ResolveClientUrl( "~/CCC/Patient/PatientFinder.aspx")%>';
                         toastr.success(response.d);
                            <%-- window.location.href = '<%=ResolveClientUrl( "~/CCC/Patient/PatientHome.aspx")%>';--%>
                            
