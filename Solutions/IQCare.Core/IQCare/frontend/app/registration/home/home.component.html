@@ -89,7 +89,8 @@
                         &nbsp;
                     </div>
 
-                    <div class="button-row pull-right" *ngIf="ageInMonths>=18; else notEligibleTemplate">
+                    <div class="button-row pull-right"
+                        *ngIf="(ageInMonths && ageInMonths>=18); else notEligibleTemplate">
                         <a mat-raised-button color="accent" routerLink="/hts">
                             <i class="fa fa-plus"></i>
                             <span *ngIf="!isPositive">New HTS Encounter</span>

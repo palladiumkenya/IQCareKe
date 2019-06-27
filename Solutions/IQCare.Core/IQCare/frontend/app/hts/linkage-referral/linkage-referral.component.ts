@@ -56,9 +56,11 @@ export class LinkageReferralComponent implements OnInit {
         this.myControl.valueChanges.pipe(
             debounceTime(400)
         ).subscribe(data => {
-            this._linkageReferralService.filterFacilities(data).subscribe(res => {
-                this.filteredOptions = res['facilityList'];
-            });
+            if (data) {
+                this._linkageReferralService.filterFacilities(data).subscribe(res => {
+                    this.filteredOptions = res['facilityList'];
+                });
+            }
         });
     }
 

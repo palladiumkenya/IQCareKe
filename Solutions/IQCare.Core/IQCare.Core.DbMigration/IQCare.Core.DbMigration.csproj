@@ -204,6 +204,7 @@
     <None Remove="Scripts\2.0.1\25_CouncellingTypes.sql" />
     <None Remove="Scripts\2.0.1\26_GetCouncellingTopics.sql" />
     <None Remove="Scripts\2.0.1\27_GetLnkCouncellingTypeTopics.sql" />
+    <None Remove="Scripts\2.0.1\28_UAT_Patch.sql" />
     <None Remove="Scripts\2.0.1\PREP\10_PrepRiskAssessmentView.sql" />
     <None Remove="Scripts\2.0.1\PREP\11_PopulationTypes.sql" />
     <None Remove="Scripts\2.0.1\PREP\12_PREP Regimen.sql" />
@@ -443,6 +444,7 @@
     <EmbeddedResource Include="Scripts\2.0.1\25_CouncellingTypes.sql" />
     <EmbeddedResource Include="Scripts\2.0.1\26_GetCouncellingTopics.sql" />
     <EmbeddedResource Include="Scripts\2.0.1\27_GetLnkCouncellingTypeTopics.sql" />
+    <EmbeddedResource Include="Scripts\2.0.1\28_UAT_Patch.sql" />
     <EmbeddedResource Include="Scripts\2.0.1\PREP\1_Prep_ServiceArea.sql" />
     <EmbeddedResource Include="Scripts\2.0.1\PREP\10_PrepRiskAssessmentView.sql" />
     <EmbeddedResource Include="Scripts\2.0.1\PREP\11_PopulationTypes.sql" />

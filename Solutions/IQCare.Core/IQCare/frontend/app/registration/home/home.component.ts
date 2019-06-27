@@ -50,7 +50,10 @@ export class HomeComponent implements OnInit {
         this.patientId = JSON.parse(localStorage.getItem('patientId'));
         this.dataSource = new EncountersDataSource(this.encounterService, this.patientId);
         this.getClientEncounters(this.patientId);
-        this.ageInMonths = parseInt(localStorage.getItem('ageInMonths'), 10);
+        const monthsAge = localStorage.getItem('ageInMonths');
+        if (monthsAge) {
+            this.ageInMonths = parseInt(localStorage.getItem('ageInMonths'), 10);
+        }
     }
 
 
