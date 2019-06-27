@@ -1,6 +1,7 @@
 ﻿using Entities.CCC.Lookup;
 using Entities.CCC.Visit;
 using System.Collections.Generic;
+using System.Data;
 
 namespace Interface.CCC.Lookup
 {
@@ -52,9 +53,8 @@ namespace Interface.CCC.Lookup
         string GetLookupItemId(string lookupItemName);
         LookupCounty GetCountyDetailsByWardName(string wardName);
 
+        DataTable GetCouncellingTopics();
+        DataTable GetCouncellingTypes();
+        DataTable GetLnkCouncellingTypeTopic();
     }
-
-
-
-
 }

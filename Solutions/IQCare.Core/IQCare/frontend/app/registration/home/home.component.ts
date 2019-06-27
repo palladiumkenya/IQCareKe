@@ -20,7 +20,7 @@ export class HomeComponent implements OnInit {
     patientId: number;
     personId: number;
     isPositive: boolean = false;
-    ageInMonths: string;
+    ageInMonths: number;
 
     displayedColumns = ['encounterDate', 'testType', 'provider', 'resultOne',
         'resultTwo', 'finalResult', 'consent', 'partnerListingConsent', 'serviceArea', 'edit'];
@@ -50,17 +50,7 @@ export class HomeComponent implements OnInit {
         this.patientId = JSON.parse(localStorage.getItem('patientId'));
         this.dataSource = new EncountersDataSource(this.encounterService, this.patientId);
         this.getClientEncounters(this.patientId);
-
-        this.personId = JSON.parse(localStorage.getItem('personId'));
-        this.personService.getPatientByPersonId(this.personId).subscribe(
-            res => {
-                this.ageInMonths = res.ageInMonths;
-            },
-            error => {
-                this.snotifyService.error('Fetching person ' + error, 'HTS Encounter',
-                    this.notificationService.getConfig());
-            }
-        );
+        this.ageInMonths = parseInt(localStorage.getItem('ageInMonths'), 10);
     }
 
 

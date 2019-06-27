@@ -18,39 +18,24 @@ namespace IQCare.CCC.UILogic.HIVEducation
         private string Msg { get; set; }
         private int Result { get; set; }
 
-        public int AddPatientHIVEducation(int patientId, DateTime visitdate, int councellingTypeId, string councellingType , int councellingTopicId, string councellingTopic, string comments, string other)
+        public int AddPatientHIVEducation(int ptn_pk, int locationId, int userId, int visit_Pk, DateTime visitdate, int councellingTypeId, string councellingType , int councellingTopicId, string councellingTopic, string comments, string other)
         {
             try
             {
-                
-                    var PHEF = new HIVEducationFollowup()
-                    {
-                        Ptn_pk = patientId,
-                        VisitDate = visitdate,
-                        CouncellingTypeId = councellingTypeId,
-                        CouncellingType = councellingType,
-                        CouncellingTopicId = councellingTopicId,
-                        CouncellingTopic = councellingTopic,
-                        Comments = comments,
-                        CouncellingTopicOther = other
-                    };
-                    return _hiveducation.AddPatientHIVEducation(PHEF);
-               // }
-                //}
-                //else
-                //{
-                //    var PCN = new PatientClinicalNotes()
-                //    {
-                //        PatientId = patientId,
-                //        PatientMasterVisitId = patientMasterVisitId,
-                //        ServiceAreaId = serviceAreaId,
-                //        ClinicalNotes = clinicalNotes,
-                //        CreatedBy = userId,
-                //        //VersionStamp = DateTime.UtcNow,
-                //        NotesCategoryId = notesCategoryId
-                //    };
-                //    return _patientNotes.AddPatientClinicalNotes(PCN);
-                //}
+                return _hiveducation.AddPatientHIVEducation(0, ptn_pk, visit_Pk, locationId, councellingTypeId,
+                    councellingTopicId, visitdate, comments, null, userId, false, 203);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public DataTable GetPatientFollowupEducationData(int ptnPk)
+        {
+            try
+            {
+                return _hiveducation.GetPatientFollowupEducationData(ptnPk);
             }
             catch (Exception ex)
             {
@@ -59,10 +44,9 @@ namespace IQCare.CCC.UILogic.HIVEducation
         }
 
         public DataTable getCounsellingTopics(string counsellingtopics)
-    {
-        IHIVEducation hiveducation = (IHIVEducation)ObjectFactory.CreateInstance("BusinessProcess.CCC.HIVEducation.BHIVEducation, BusinessProcess.CCC.HIVEducation");
-        return hiveducation.getCounsellingTopics(counsellingtopics);
-
-    }
+        {
+            IHIVEducation hiveducation = (IHIVEducation)ObjectFactory.CreateInstance("BusinessProcess.CCC.HIVEducation.BHIVEducation, BusinessProcess.CCC.HIVEducation");
+            return hiveducation.getCounsellingTopics(counsellingtopics);
+        }
     }
 }

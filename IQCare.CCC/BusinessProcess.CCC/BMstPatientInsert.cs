@@ -46,8 +46,9 @@ namespace BusinessProcess.CCC
             return ptnPk;
         }
 
-        public void AddOrdVisit(int ptnPk, int locationId, DateTime visitDate, int visitType, int userId, DateTime createDate, int moduleId)
+        public int AddOrdVisit(int ptnPk, int locationId, DateTime visitDate, int visitType, int userId, DateTime createDate, int moduleId)
         {
+            int visit_Pk = 0;
             ClsObject obj = new ClsObject();
             ClsUtility.Init_Hashtable();
             ClsUtility.AddExtendedParameters("@Ptn_Pk", SqlDbType.Int, ptnPk);
@@ -59,6 +60,12 @@ namespace BusinessProcess.CCC
             ClsUtility.AddExtendedParameters("@ModuleId", SqlDbType.Int, moduleId);
 
             DataTable dt = (DataTable)obj.ReturnObject(ClsUtility.theParams, "Ord_Visit_Insert", ClsUtility.ObjectEnum.DataTable);
+            if (dt != null && dt.Rows.Count > 0)
+            {
+                visit_Pk = Convert.ToInt32(dt.Rows[0]["Id"]);
+            }
+
+            return visit_Pk;
         }
 
         public void UpdateBlueCardCCCNumber(int ptn_pk, string patientEnrollmentID)
