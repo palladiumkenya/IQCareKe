@@ -34,6 +34,7 @@ export class HtsComponent implements OnInit {
     serviceCode: string;
     isEdit: boolean = false;
     ageNumber: number;
+    ageInMonths: number;
 
     priorityPops: LookupItemView[] = [];
     keyPops: LookupItemView[] = [];
@@ -125,6 +126,12 @@ export class HtsComponent implements OnInit {
             (res) => {
                 const { identifiers, serviceAreaIdentifiers } = res;
                 this.serviceAreaIdentifiers = serviceAreaIdentifiers;
+            }
+        );
+
+        this.personHomeService.getPatientByPersonId(this.personId).subscribe(
+            (res) => {
+                this.ageInMonths = parseInt(res.ageInMonths, 10);
             }
         );
 
@@ -297,6 +304,7 @@ export class HtsComponent implements OnInit {
                             this.patientId).subscribe();
 
 
+                        localStorage.setItem('ageInMonths', this.ageInMonths.toString());
                         this.zone.run(() => {
                             localStorage.setItem('personId', this.personId.toString());
                             localStorage.setItem('patientId', this.patientId.toString());

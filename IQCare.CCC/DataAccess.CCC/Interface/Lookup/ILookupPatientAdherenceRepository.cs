@@ -5,7 +5,7 @@ namespace DataAccess.CCC.Interface.Lookup
 {
     public interface ILookupPatientAdherenceRepository :IRepository<LookupPatientAdherence>
     {
-        LookupPatientAdherence GetPatientAdherenceStatus(int patientId);
+        LookupPatientAdherence GetPatientAdherenceStatus(int patientId, int adherenceType);
 
     }
 }

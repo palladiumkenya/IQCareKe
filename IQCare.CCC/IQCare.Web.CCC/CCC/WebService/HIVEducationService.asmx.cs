@@ -5,6 +5,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Web;
 using System.Web.Script.Services;
 using System.Web.Services;
@@ -46,7 +47,7 @@ namespace IQCare.Web.CCC.WebService
                 arrayList.Add(new
                 {
                     Id = topicId,
-                    Value = topicName
+                    Value = topicName.Replace("\'","")
                 });
             }
             return arrayList;

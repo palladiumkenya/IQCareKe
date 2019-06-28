@@ -461,10 +461,10 @@ namespace BusinessProcess.CCC
             return lookupPatientRegimen.GetPatientRegimenList(patientId);
         }
 
-        public LookupPatientAdherence GetPatientAdherence(int patientId)
+        public LookupPatientAdherence GetPatientAdherence(int patientId, int adherenceType)
         {
             PatientLookupAdhereenceRepository patientLookupAdhereence=new PatientLookupAdhereenceRepository();
-            return patientLookupAdhereence.GetPatientAdherenceStatus(patientId);
+            return patientLookupAdhereence.GetPatientAdherenceStatus(patientId, adherenceType);
         }
 
         public List<LookupFacilityStatistics>  GetLookupFacilityStatistics()

@@ -241,8 +241,14 @@ namespace IQCare.Web.CCC.Patient
 
                 //Get Adherance Status
                 ILookupManager patientAdheLookupManager = (ILookupManager)ObjectFactory.CreateInstance("BusinessProcess.CCC.BLookupManager, BusinessProcess.CCC");
+                var adherenceList = LookupLogic.GetLookItemByGroup("ARVAdherence");
+                int adherenceType = 34;
+                if (adherenceList.Count > 0)
+                {
+                    adherenceType = adherenceList[0].ItemId;
+                }
 
-                var adheranceStatus = patientAdheLookupManager.GetPatientAdherence(PatientId);
+                var adheranceStatus = patientAdheLookupManager.GetPatientAdherence(PatientId, adherenceType);
 
                 if (adheranceStatus != null)
                 {
