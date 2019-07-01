@@ -16,7 +16,7 @@ const httpOptions = {
 })
 export class PersonHomeService {
     private API_URL = environment.API_URL;
-    private API_PREPURL= environment.API_PREP_URL;
+    private API_PREPURL = environment.API_PREP_URL;
     private _url = '/api/PatientServices/GetPatientByPersonId';
     private _htsurl = '/api/HtsEncounter';
     public person: PersonView;
@@ -73,7 +73,7 @@ export class PersonHomeService {
     }
 
     public getPatientAllergies(patientId: number): Observable<any> {
-        return this.http.get<any>(this.API_URL + '/api/PatientAllergy/GetPatientAllergy?patientId=' + patientId).pipe(
+        return this.http.get<any>(this.API_URL + '/api/PatientAllergy/GetPatientAllergy/' + patientId).pipe(
             tap(getPatientAllergies => this.errorHandler.log('get patient Allergy')),
             catchError(this.errorHandler.handleError<any[]>('getPatientAllergies'))
         );
@@ -144,7 +144,7 @@ export class PersonHomeService {
     }
 
     public getPatientOVCStatusDetails(personId: number): Observable<any> {
-        return this.http.get<any>(this.API_URL + '/api/Register/GetPatientOVCStatus/'+ personId).pipe(
+        return this.http.get<any>(this.API_URL + '/api/Register/GetPatientOVCStatus/' + personId).pipe(
             tap(getPatientOVCStatusDetails => this.errorHandler.log(`get patient OVC details for personId:  `
                 + personId)),
             catchError(this.errorHandler.handleError<any>('getPatientOVCStatusDetails'))
@@ -176,14 +176,14 @@ export class PersonHomeService {
         );
     }
 
-    CheckPrepencounterExists(personId: number): Observable<any[]>{
+    CheckPrepencounterExists(personId: number): Observable<any[]> {
         const Indata = {
             'PersonId': personId
         };
         return this.http.post<any>(this.API_PREPURL + '/api/BehaviourRisk/Encounterexists', JSON.stringify(Indata), httpOptions)
-        .pipe (tap (CheckencounterExists => this.errorHandler.log('checked if RiskAssessmentEncounter Exists' )),
-          catchError(this.errorHandler.handleError<any[]>('CheckencounterExists'))
-        );
+            .pipe(tap(CheckencounterExists => this.errorHandler.log('checked if RiskAssessmentEncounter Exists')),
+                catchError(this.errorHandler.handleError<any[]>('CheckencounterExists'))
+            );
     }
 
     public filterFacilities(filterString: string) {

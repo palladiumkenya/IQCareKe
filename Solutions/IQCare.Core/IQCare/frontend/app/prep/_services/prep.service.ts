@@ -52,6 +52,12 @@ export class PrepService {
             );
     }
 
+    public getPrepStatus(patientId: number, patientEncounterId: number): Observable<any[]> {
+        return this.http.get<any[]>(this.PREP_API_URL + '/api/PrepStatus/GetPrepStatus/' + patientId + '/' + patientEncounterId).pipe(
+            tap(getPrepStatus => this.errorHandler.log(`successfully fetched prep status details`)),
+            catchError(this.errorHandler.handleError<any>('Error fetching prep status'))
+        );
+    }
 
     public savePatientAdverseEvents(adverseEventsCommand: any[]): Observable<any> {
         if (adverseEventsCommand.length == 0) {
@@ -68,6 +74,13 @@ export class PrepService {
         );
     }
 
+    public getPatientAdverseEvents(patientId: number): Observable<any[]> {
+        return this.http.get<any[]>(this.API_URL + '/api/AdverseEvents/GetPatientAdverseEvents/' + patientId).pipe(
+            tap(getPatientAdverseEvents => this.errorHandler.log('Successfully fetched adverse events')),
+            catchError(this.errorHandler.handleError<any>('Error in fetching Patient Adverse Events'))
+        );
+    }
+
     public savePatientAllergies(allergiesCommand: AllergiesCommand[]): Observable<any> {
         if (allergiesCommand.length == 0) {
             return of([]);
@@ -80,6 +93,13 @@ export class PrepService {
         return this.http.post<any>(this.API_URL + '/api/PatientAllergy/AddAllergy', JSON.stringify(Indata), httpOptions).pipe(
             tap(savePatientAllergies => this.errorHandler.log('Successfully saved patient allergies')),
             catchError(this.errorHandler.handleError<any>('Error in saving Patient Allergies'))
+        );
+    }
+
+    public getPatientAllergies(patientId: number): Observable<any[]> {
+        return this.http.get<any[]>(this.API_URL + '/api/PatientAllergy/GetPatientAllergy/' + patientId).pipe(
+            tap(getPatientAllergies => this.errorHandler.log('Successfully fetched patient allergies')),
+            catchError(this.errorHandler.handleError<any>('Error in fetching Patient Allergies'))
         );
     }
 

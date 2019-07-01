@@ -31,5 +31,18 @@ namespace IQCare.Controllers.Shared
                 return Ok(response.Value);
             return BadRequest(response);
         }
+
+        [HttpGet("{patientId}")]
+        public async Task<IActionResult> GetPatientAdverseEvents(int patientId)
+        {
+            var response = await _mediator.Send(new GetAdverseEventsCommand()
+            {
+                PatientId = patientId
+            }, Request.HttpContext.RequestAborted);
+
+            if (response.IsValid)
+                return Ok(response.Value);
+            return BadRequest(response);
+        }
     }
 }

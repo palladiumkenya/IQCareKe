@@ -87,17 +87,20 @@
                                             </span>
                                         </ng-template>
 
-                                        <app-chronic-illnesses-table (notify)="onChroniIllnessNotify($event)">
+                                        <app-chronic-illnesses-table (notify)="onChroniIllnessNotify($event)"
+                                            [patientId]="patientId" [personId]="personId">
                                         </app-chronic-illnesses-table>
 
                                         <div class="row">&nbsp;</div>
 
-                                        <app-allergies-table (notify)="onAllergiesNotify($event)">
+                                        <app-allergies-table (notify)="onAllergiesNotify($event)"
+                                            [patientId]="patientId" [personId]="personId">
                                         </app-allergies-table>
 
                                         <div class="row">&nbsp;</div>
 
-                                        <app-adverse-events-table (notify)="onAdverseEventsNotify($event)">
+                                        <app-adverse-events-table (notify)="onAdverseEventsNotify($event)"
+                                            [patientId]="patientId" [personId]="personId">
                                         </app-adverse-events-table>
 
                                         <div class="row">&nbsp;</div>
@@ -135,7 +138,9 @@
                                         </ng-template>
 
                                         <app-prep-status (notify)="onPrepStatusNotify($event)"
-                                            [PrepStatusOptions]="PrepStatusOptions"></app-prep-status>
+                                            [PrepStatusOptions]="PrepStatusOptions" [patientId]="patientId"
+                                            [personId]="personId" [isEdit]="isEdit"
+                                            [patientEncounterId]="patientEncounterId"></app-prep-status>
 
                                         <div>
                                             <button mat-raised-button color="primary" matStepperPrevious
@@ -154,7 +159,9 @@
                                         </ng-template>
 
                                         <app-prep-appointment (notify)="onPrepAppointmentNotify($event)"
-                                            [PrepAppointmentOptions]="PrepAppointmentOptions">
+                                            [PrepAppointmentOptions]="PrepAppointmentOptions" [patientId]="patientId"
+                                            [personId]="personId" [isEdit]="isEdit"
+                                            [patientMasterVisitId]="patientMasterVisitId">
                                         </app-prep-appointment>
 
                                         <div>

@@ -1,3 +1,4 @@
+import { PrepService } from './../../_services/prep.service';
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
 import { LookupItemView } from '../../../shared/_models/LookupItemView';
@@ -5,7 +6,8 @@ import { LookupItemView } from '../../../shared/_models/LookupItemView';
 @Component({
     selector: 'app-prep-status',
     templateUrl: './prep-status.component.html',
-    styleUrls: ['./prep-status.component.css']
+    styleUrls: ['./prep-status.component.css'],
+    providers: [PrepService]
 })
 export class PrepStatusComponent implements OnInit {
     PrepStatusForm: FormGroup;
@@ -14,9 +16,14 @@ export class PrepStatusComponent implements OnInit {
     prepContraindicationsOptions: LookupItemView[] = [];
 
     @Input() PrepStatusOptions: any;
+    @Input() patientId: number;
+    @Input() personId: number;
+    @Input() patientEncounterId: number;
+    @Input() isEdit: number;
     @Output() notify: EventEmitter<FormGroup> = new EventEmitter<FormGroup>();
 
-    constructor(private _formBuilder: FormBuilder) { }
+    constructor(private _formBuilder: FormBuilder,
+        private prepservice: PrepService) { }
 
     ngOnInit() {
         this.PrepStatusForm = this._formBuilder.group({
@@ -38,6 +45,28 @@ export class PrepStatusComponent implements OnInit {
         this.yesnoOptions = yesnoOptions;
         this.prepStatusOptions = prepStatusOptions;
         this.prepContraindicationsOptions = prepContraindicationsOptions;
+
+        if (this.isEdit == 1) {
+            this.loadPrepStatus();
+        }
+    }
+
+    loadPrepStatus(): void {
+        this.prepservice.getPrepStatus(this.patientId, this.patientEncounterId).subscribe(
+            (res) => {
+                if (res.length > 0) {
+                    this.PrepStatusForm.controls.signsOrSymptomsHIV.setValue(res[0].signsOrSymptomsHIV);
+                    this.PrepStatusForm.controls.contraindications_PrEP_Present.setValue(res[0].contraindicationsPrepPresent);
+                    this.PrepStatusForm.controls.adherenceCounselling.setValue(res[0].adherenceCounsellingDone);
+                    this.PrepStatusForm.controls.PrEPStatusToday.setValue(res[0].prepStatusToday);
+                    this.PrepStatusForm.controls.condomsIssued.setValue(res[0].condomsIssued);
+                    this.PrepStatusForm.controls.noCondomsIssued.setValue(res[0].noOfCondoms);
+                }
+            },
+            (error) => {
+                console.log(error);
+            }
+        );
     }
 
     onCondomsIssuedSelection(event) {

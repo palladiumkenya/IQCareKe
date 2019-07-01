@@ -14,6 +14,10 @@ export class PrepAppointmentComponent implements OnInit {
     reasonsPrepAppointmentNotGivenOptions: LookupItemView[] = [];
 
     @Input() PrepAppointmentOptions: any;
+    @Input() patientId: number;
+    @Input() personId: number;
+    @Input() patientMasterVisitId: number;
+    @Input() isEdit: number;
     @Output() notify: EventEmitter<FormGroup> = new EventEmitter<FormGroup>();
 
     constructor(private _formBuilder: FormBuilder) {
@@ -38,6 +42,14 @@ export class PrepAppointmentComponent implements OnInit {
         const { yesnoOptions, reasonsPrepAppointmentNotGivenOptions } = this.PrepAppointmentOptions[0];
         this.yesnoOptions = yesnoOptions;
         this.reasonsPrepAppointmentNotGivenOptions = reasonsPrepAppointmentNotGivenOptions;
+
+        if (this.isEdit == 1) {
+            this.loadPrepAppointment();
+        }
+    }
+
+    loadPrepAppointment(): void {
+
     }
 
     onAppointmentSelection(event) {

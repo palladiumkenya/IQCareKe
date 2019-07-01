@@ -1,6 +1,7 @@
+import { PrepService } from './../../../prep/_services/prep.service';
 import { LookupItemView } from './../../_models/LookupItemView';
 import { AdverseEventsAssessmentComponent } from './../adverse-events-assessment/adverse-events-assessment.component';
-import { Component, OnInit, EventEmitter, Output } from '@angular/core';
+import { Component, OnInit, EventEmitter, Output, Input } from '@angular/core';
 import { MatTableDataSource, MatDialog, MatDialogConfig } from '@angular/material';
 import { NotificationService } from '../../_services/notification.service';
 import { SnotifyService } from 'ng-snotify';
@@ -8,7 +9,8 @@ import { SnotifyService } from 'ng-snotify';
 @Component({
     selector: 'app-adverse-events-table',
     templateUrl: './adverse-events-table.component.html',
-    styleUrls: ['./adverse-events-table.component.css']
+    styleUrls: ['./adverse-events-table.component.css'],
+    providers: [PrepService]
 })
 export class AdverseEventsTableComponent implements OnInit {
     public adverse_events_table_data: AdverseEventsTableData[] = [];
@@ -18,14 +20,35 @@ export class AdverseEventsTableComponent implements OnInit {
     dataSource = new MatTableDataSource(this.adverse_events_table_data);
 
     @Output() notify: EventEmitter<AdverseEventsTableData[]> = new EventEmitter<AdverseEventsTableData[]>();
+    @Input() patientId: number;
+    @Input() personId: number;
 
     constructor(private dialog: MatDialog,
         private snotifyService: SnotifyService,
-        private notificationService: NotificationService) { }
+        private notificationService: NotificationService,
+        private prepservice: PrepService) { }
 
     ngOnInit() {
         // emit new adverse events to stepper 
         this.notify.emit(this.newAdverseEventsData);
+
+        this.loadPatientAdverseEvents();
+    }
+
+    public loadPatientAdverseEvents(): void {
+        this.prepservice.getPatientAdverseEvents(this.patientId).subscribe(
+            (res) => {
+                console.log(res);
+                if (res.length > 0) {
+                    res.forEach(event => {
+
+                    });
+                }
+            },
+            (error) => {
+                console.log(error);
+            }
+        );
     }
 
     newAdverseEvents() {
@@ -42,8 +65,6 @@ export class AdverseEventsTableComponent implements OnInit {
                 if (!data) {
                     return;
                 }
-
-                console.log(data);
 
                 const adverseEvent = data.adverseEvent.itemName;
                 if (this.adverse_events_table_data.filter(x => x.adverseEvent.itemName === adverseEvent).length > 0) {
