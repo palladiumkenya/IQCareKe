@@ -204,6 +204,7 @@
     <None Remove="Scripts\2.0.1\PREP\13_RegimenUse.sql" />
     <None Remove="Scripts\2.0.1\PREP\14_Constraint.sql" />
     <None Remove="Scripts\2.0.1\PREP\15_HIVPositivePartnerProfile.sql" />
+    <None Remove="Scripts\2.0.1\PREP\16_PrepCareEnded.sql" />
     <None Remove="Scripts\2.0.1\PREP\1_Prep_ServiceArea.sql" />
     <None Remove="Scripts\2.0.1\PREP\2_Prep Number.sql" />
     <None Remove="Scripts\2.0.1\PREP\3_PrepServiceAreaIdentifiers.sql" />
@@ -214,6 +215,7 @@
     <None Remove="Scripts\2.0.1\13_LO_PrEP_Lookup.sql" />
     <None Remove="Scripts\2.0.1\PREP\8_Behaviour Risk Assessment.sql" />
     <None Remove="Scripts\2.0.1\PREP\9_RiskAssessment.sql" />
+    <None Remove="Scripts\2.0.1\PREP\EncounterHistorySolution.sql" />
   </ItemGroup>
 
   <ItemGroup>
@@ -431,6 +433,7 @@
     <EmbeddedResource Include="Scripts\2.0.1\19_PI_PregnancyIndicator_PregnancyPlanned.sql" />
     <EmbeddedResource Include="Scripts\2.0.1\20_PR_PREP_EncountersView.sql" />
     <EmbeddedResource Include="Scripts\2.0.1\21_LO_STIScreening.sql" />
+    <EmbeddedResource Include="Scripts\2.0.1\PREP\16_PrepCareEnded.sql" />
     <EmbeddedResource Include="Scripts\2.0.1\PREP\1_Prep_ServiceArea.sql" />
     <EmbeddedResource Include="Scripts\2.0.1\PREP\10_PrepRiskAssessmentView.sql" />
     <EmbeddedResource Include="Scripts\2.0.1\PREP\11_PopulationTypes.sql" />
@@ -445,6 +448,7 @@
     <EmbeddedResource Include="Scripts\2.0.1\PREP\7_WillingnessAssessment.sql" />
     <EmbeddedResource Include="Scripts\2.0.1\PREP\8_Behaviour Risk Assessment.sql" />
     <EmbeddedResource Include="Scripts\2.0.1\PREP\9_RiskAssessment.sql" />
+    <EmbeddedResource Include="Scripts\2.0.1\PREP\EncounterHistorySolution.sql" />
   </ItemGroup>
 
   <ItemGroup>
