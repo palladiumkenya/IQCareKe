@@ -154,4 +154,31 @@ export class PrepService {
             catchError(this.errorHandler.handleError<any>('Error fetching prep encounters'))
         );
     }
+
+    public getPatientCareEndDetails(patientmasterVisitId: number): Observable<any[]> {
+        return this.http.get<any[]>(this.API_URL + '/api/PatientServices/GetPatientCareEndedDetails/' + patientmasterVisitId).pipe(
+            tap(getPatientCareEndDetails => this.errorHandler.log(`successfully fetch careended details`)),
+            catchError(this.errorHandler.handleError<any>('Error fetching careend details'))
+        );
+    }
+
+    public careEndPatientdetails(patientId: number, serviceAreaId: number,
+        patientmasterVisitId: number, careEndDate: string, specify: string
+        , disclosurereason: number, deathdate: string, userId: number) {
+
+        const Indata = {
+            'PatientId': patientId,
+            'ServiceAreaId': serviceAreaId,
+            'PatientMasterVisitId': patientmasterVisitId,
+            'CareEndedDate': careEndDate,
+            'specify': specify,
+            'DisclosureReason': disclosurereason,
+            'DeathDate': deathdate,
+            'UserId': userId
+        };
+        return this.http.post<any>(this.API_URL + '/api/PatientServices/CareEndPatient', JSON.stringify(Indata), httpOptions)
+            .pipe(tap(careEndPatientdetails => this.errorHandler.log(`CareEnding the patient`)),
+                catchError(this.errorHandler.handleError<any[]>('careEndPatientdetails'))
+            );
+    }
 }

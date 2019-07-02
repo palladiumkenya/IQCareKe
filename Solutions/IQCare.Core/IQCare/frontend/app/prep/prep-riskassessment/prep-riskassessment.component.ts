@@ -194,7 +194,7 @@ export class PrepRiskassessmentComponent implements OnInit {
         NoRiskOutcome = assessmentoutcomerisk[0]['itemId'];
         this.PrepRiskAssessmentFormGroup.controls.assessmentOutCome.setValue(NoRiskOutcome);
         let prepriskencounter: any[] = [];
-        prepriskencounter = this.EncounterTypeOptions.filter(x => x.itemDisplayName == 'PrepRiskAssessment-encounter')
+        prepriskencounter = this.EncounterTypeOptions.filter(x => x.itemDisplayName == 'PrepRiskAssessment-encounter');
         this.EncounterTypeId = prepriskencounter[0]['itemId'];
 
     }
@@ -1527,7 +1527,7 @@ export class PrepRiskassessmentComponent implements OnInit {
             UserId: this.UserId,
             EncounterDate: moment(date).toDate()
 
-        }
+        };
         this.encounterservice.savePatientMasterVisit(patientencounter).subscribe(
             (result) => {
                 localStorage.setItem('patientEncounterId', result['patientEncounterId']);

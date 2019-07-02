@@ -18,11 +18,15 @@ import {
     PatientIdentifierResolver, ARTStartDateResolver, PartnerHIVStatusResolver, DurationResolver, SexWithoutCondomResolver,
     HivPartnerResolver
 } from './_services/resolvers/prepriskassessment.resolver';
+import {
+    PrepCareEndReasonResolver
+} from './_services/resolvers/prepcareendreason.resolver';
 import { PrepRiskassessmentComponent } from './prep-riskassessment/prep-riskassessment.component';
 import { ReasonsPrepAppointmentNotGivenResolver } from './_services/reasons-prep-appointment-notgiven.resolver';
 import { PrepEncounterTypeResolver } from './_services/prep-encounter-type.resolver';
 import { PregnancyStatusResolver } from './_services/pregnancy-status.resolver';
 import { ScreenedForSTIResolver } from './_services/screened-sti.resolver';
+import { PrepCareendComponent } from './prep-careend/prep-careend.component';
 
 const routes: Routes = [
     {
@@ -32,6 +36,34 @@ const routes: Routes = [
         resolve: {
             prepEncounterTypeOption: PrepEncounterTypeResolver
         }
+    },
+    {
+        path: 'prepcareend',
+        children: [
+            {
+                path: ':patientId/:personId/:serviceId',
+                component: PrepCareendComponent,
+                pathMatch: 'full',
+                resolve: {
+                    careendreasonoptions: PrepCareEndReasonResolver,
+                    EncounterTypeArray: EncounterTypeResolver
+                }
+            },
+            {
+                path: ':patientId/:personId/:serviceId/:patientMasterVisitId/:edit',
+                component: PrepCareendComponent,
+                pathMatch: 'full',
+                resolve: {
+                    careendreasonoptions: PrepCareEndReasonResolver,
+                    EncounterTypeArray: EncounterTypeResolver
+                }
+            }
+
+
+
+
+        ]
+
     },
     {
         path: 'encounter',

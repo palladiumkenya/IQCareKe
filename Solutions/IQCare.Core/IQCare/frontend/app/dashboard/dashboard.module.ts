@@ -1,7 +1,9 @@
 import { RegistrationService } from './../registration/_services/registration.service';
 import { ServicesResolver } from './services/services.resolver';
-import {HTSEncounterResolver } from './services/htsencounter.resolver';
-import {  PersonCurrentVitalsResolver} from './services/personvitals.resolver'
+import { HTSEncounterResolver } from './services/htsencounter.resolver';
+import { PersonCurrentVitalsResolver } from './services/personvitals.resolver';
+import { ExitReasonsResolver } from './services/exitreasons.resolver';
+import { CareendDetailsResolver } from './services/careendeddetails.resolver';
 import { DashboardRoutingModule } from './dashboard-routing.module';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -34,8 +36,9 @@ import { SearchService } from '../registration/_services/search.service';
 import { HtsComponent } from './enrollment/service-areas/hts/hts.component';
 import { CccComponent } from './enrollment/service-areas/ccc/ccc.component';
 import { PersonHomeService } from './services/person-home.service';
-import { RiskEncounterResolver} from './services/riskencounter.resolver';
+import { RiskEncounterResolver } from './services/riskencounter.resolver';
 import { PrepComponent } from './enrollment/service-areas/prep/prep.component';
+import { ReenrollmentComponent } from './reenrollment/reenrollment.component';
 
 @NgModule({
     imports: [
@@ -72,7 +75,8 @@ import { PrepComponent } from './enrollment/service-areas/prep/prep.component';
         PatientAppointmentComponent,
         HtsComponent,
         CccComponent,
-        PrepComponent
+        PrepComponent,
+        ReenrollmentComponent
     ],
     providers: [
         NotificationService,
@@ -83,8 +87,10 @@ import { PrepComponent } from './enrollment/service-areas/prep/prep.component';
         PersonHomeService,
         HTSEncounterResolver,
         PersonCurrentVitalsResolver,
-        RiskEncounterResolver
-       
+        RiskEncounterResolver,
+        ExitReasonsResolver,
+        CareendDetailsResolver
+
     ]
 })
 export class DashboardModule { }

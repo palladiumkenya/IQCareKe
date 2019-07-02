@@ -35,6 +35,9 @@ import {
     PatientIdentifierResolver, ARTStartDateResolver, PartnerHIVStatusResolver, DurationResolver, SexWithoutCondomResolver,
     HivPartnerResolver
 } from './_services/resolvers/prepriskassessment.resolver';
+import {
+    PrepCareEndReasonResolver
+} from './_services/resolvers/prepcareendreason.resolver';
 import { PrepRiskassessmentComponent } from './prep-riskassessment/prep-riskassessment.component';
 import { PrepAppointmentComponent } from './encounter-components/prep-appointment/prep-appointment.component';
 import { ReasonsPrepAppointmentNotGivenResolver } from './_services/reasons-prep-appointment-notgiven.resolver';
@@ -42,6 +45,7 @@ import { PrepCheckinComponent } from './prep-checkin/prep-checkin.component';
 import { PrepEncounterTypeResolver } from './_services/prep-encounter-type.resolver';
 import { PregnancyStatusResolver } from './_services/pregnancy-status.resolver';
 import { ScreenedForSTIResolver } from './_services/screened-sti.resolver';
+import { PrepCareendComponent } from './prep-careend/prep-careend.component';
 
 @NgModule({
     declarations: [
@@ -54,7 +58,8 @@ import { ScreenedForSTIResolver } from './_services/screened-sti.resolver';
         PrepStatusComponent,
         PrepRiskassessmentComponent,
         PrepAppointmentComponent,
-        PrepCheckinComponent
+        PrepCheckinComponent,
+        PrepCareendComponent
     ],
     imports: [
         SharedModule, MatDatepickerModule, MatNativeDateModule,
@@ -76,7 +81,8 @@ import { ScreenedForSTIResolver } from './_services/screened-sti.resolver';
         PatientIdentifierResolver, ARTStartDateResolver, PartnerHIVStatusResolver,
         DurationResolver, SexWithoutCondomResolver, HivPartnerResolver,
         ReasonsPrepAppointmentNotGivenResolver, PrepEncounterTypeResolver,
-        PregnancyStatusResolver, ScreenedForSTIResolver
+        PregnancyStatusResolver, ScreenedForSTIResolver,
+        PrepCareEndReasonResolver
     ],
     entryComponents: [
         PrepCheckinComponent

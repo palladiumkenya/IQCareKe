@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using IQCare.Common.BusinessProcess.Commands.Encounter;
+using IQCare.Common.BusinessProcess.Commands.Enrollment;
 using IQCare.Common.BusinessProcess.Commands.PersonCommand;
 using IQCare.Common.BusinessProcess.Commands.PersonVitals;
 using IQCare.Common.BusinessProcess.Commands.Relationship;
@@ -133,6 +134,38 @@ namespace IQCare.Controllers.Shared
 
         }
 
+        [HttpPost("CareEndPatient")]
+        public async Task<IActionResult> CareEndPatient([FromBody] AddPatientCareEndingCommand addPatientCareEndingCommand)
+        {
+            var response = await _mediator.Send(addPatientCareEndingCommand, Request.HttpContext.RequestAborted);
+            if (response.IsValid)
+            {
+                return Ok(response.Value);
+            }
+            return BadRequest(response);
+        }
+
+        [HttpGet("GetPatientCareEndedDetails/{patientMasterVisitId}")]
+        public async  Task<IActionResult> GetPatientCareEndedDetails(int patientMasterVisitId)
+        {
+            var response = await _mediator.Send(new GetPatientCareEndingCommand { PatientMasterVisitId = patientMasterVisitId }, HttpContext.RequestAborted);
+            if (response.IsValid)
+                return Ok(response.Value);
+            return BadRequest(response);
+
+        }
+
+        [HttpGet("GetLatestCareEndDetails/{patientId}")]
+
+        public async Task<IActionResult> GetLatestCareEndDetails(int patientId)
+        {
+            var response = await _mediator.Send(new GetLatestCareEndingDetailsCommand { PatientId = patientId }, HttpContext.RequestAborted);
+            if (response.IsValid)
+                return Ok(response.Value);
+            return BadRequest(response);
+        }
+
+       
         // POST: api/PatientServices
         [HttpPost]
         public void Post([FromBody]string value)

@@ -1,6 +1,7 @@
 import { AppEnum } from './../../shared/reducers/app.enum';
 import { AppStateService } from './../../shared/_services/appstate.service';
 import { NotificationService } from './../../shared/_services/notification.service';
+import { LookupItemService } from '../../shared/_services/lookup-item.service';
 import { Component, OnInit, Input, NgZone } from '@angular/core';
 import { PersonHomeService } from '../services/person-home.service';
 import { Router, ActivatedRoute } from '@angular/router';
@@ -10,6 +11,7 @@ import { Store } from '@ngrx/store';
 import * as Consent from '../../shared/reducers/app.states';
 import { SearchService } from '../../registration/_services/search.service';
 import { EncounterDetails } from '../_model/HtsEncounterdetails';
+import { LookupItemView } from '../../shared/_models/LookupItemView';
 
 
 @Component({
@@ -20,10 +22,13 @@ import { EncounterDetails } from '../_model/HtsEncounterdetails';
 export class ServicesListComponent implements OnInit {
     @Input('personId') personId: number;
     @Input('services') services: any[];
+    @Input('careendoptions') carendedreason: LookupItemView[];
     @Input('person') person: any;
     @Input('encounterDetail') encounterDetail: EncounterDetails;
     @Input('personVitalWeight') weight: number;
     @Input('riskencounters') riskencounter: any[];
+    @Input('carended') carended: boolean;
+    @Input('isdead') isdead: boolean;
     enrolledServices: any[];
     PatientCCCEnrolled: boolean = false;
     patientIdentifiers: any[];
@@ -32,6 +37,9 @@ export class ServicesListComponent implements OnInit {
     patientvitals: any[] = [];
     vitalWeight: number = 0;
     Vitaldone: boolean = true;
+
+    exitreason: number;
+
 
     htseligibility: string = ' ';
     EligibilityInformation: any[] = [];
@@ -50,6 +58,7 @@ export class ServicesListComponent implements OnInit {
         private store: Store<AppState>,
         private searchService: SearchService,
         private appStateService: AppStateService,
+        private lookupItemService: LookupItemService
     ) {
     }
 
@@ -57,7 +66,12 @@ export class ServicesListComponent implements OnInit {
         this.EligibilityInformation = [];
         this.vitalWeight = this.weight;
 
+
+
         this.getPersonEnrolledServices(this.personId);
+
+
+
 
         /*console.log(this.encounterDetail);
 
@@ -86,6 +100,20 @@ export class ServicesListComponent implements OnInit {
         });
     }
 
+
+    reenrollToService(serviceId: number, serviceCode: string) {
+        if (!this.person.dateOfBirth || this.person.dateOfBirth == '') {
+            this.snotifyService.warning('Please update: ' + this.person.firstName + ' ' + this.person.midName + ' ' + this.person.lastName
+                + ', DOB before reenrollment', 'Reenrollment', this.notificationService.getConfig());
+            return;
+
+        }
+        this.zone.run(() => {
+            this.router.navigate(['/dashboard/reenrollment/' + this.personId + '/' + serviceId + '/' + serviceCode],
+                { relativeTo: this.route });
+        });
+
+    }
 
     enrollToService(serviceId: number, serviceCode: string) {
         if (!this.person.dateOfBirth || this.person.dateOfBirth == '') {
@@ -237,7 +265,28 @@ export class ServicesListComponent implements OnInit {
             let returnValue = false;
             for (let i = 0; i < this.enrolledServices.length; i++) {
                 if (this.enrolledServices[i].serviceAreaId == service.id) {
-                    returnValue = true;
+
+                    const selectedService = this.services.filter(obj => obj.id == service.id);
+
+                    if (selectedService && selectedService.length > 0) {
+                        if (selectedService[0]['code'] == 'PREP') {
+                            if (this.carended == true && this.isdead == false) {
+                                returnValue = false;
+                            } else if (this.carended == true && this.isdead == true) {
+                                returnValue = false;
+                            } else if (this.isdead == true && this.carended == true) {
+                                returnValue = false;
+                            } else {
+                                returnValue = true;
+                            }
+                        } else {
+                            return true;
+                        }
+
+                    } else {
+                        return true;
+                    }
+
                 }
             }
             return returnValue;
@@ -246,6 +295,42 @@ export class ServicesListComponent implements OnInit {
         }
     }
 
+    isDeathEligibility(serviceAreaId: number) {
+        const selectedService = this.services.filter(obj => obj.id == serviceAreaId);
+        let isEligible: boolean = false;
+        if (selectedService && selectedService.length > 0) {
+            if (selectedService[0]['code'] == 'PREP') {
+                if (this.isdead == false) {
+                    isEligible = false;
+                } else {
+                    isEligible = true;
+                }
+
+            }
+        }
+
+        return isEligible;
+
+    }
+    isEligibleServiceReenrollment(serviceAreaId: number) {
+
+
+        const selectedService = this.services.filter(obj => obj.id == serviceAreaId);
+        let isEligible: boolean = false;
+        if (selectedService && selectedService.length > 0) {
+            if (selectedService[0]['code'] == 'PREP') {
+                if (this.carended == true) {
+                    isEligible = true;
+                }
+                else {
+                    isEligible = false;
+                }
+            }
+
+        }
+        return isEligible;
+
+    }
     isServiceEligible(serviceAreaId: number) {
         let isCCCEnrolled;
 
@@ -337,8 +422,14 @@ export class ServicesListComponent implements OnInit {
                                         if (this.riskencounter.length <= 0) {
                                             isEligible = false;
                                             this.RiskDone = false;
-                                        }
-                                    }
+                                        } else if (this.carended == true && this.isdead == false) {
+                                           isEligible = false;
+                                        } else if (this.carended == true && this.isdead == true) {
+                                            isEligible = false;
+                                        } else if (this.isdead == true && this.carended == true) {
+                                            isEligible = false;
+                                        }                                    }
+
                                 }
                             }
                         }

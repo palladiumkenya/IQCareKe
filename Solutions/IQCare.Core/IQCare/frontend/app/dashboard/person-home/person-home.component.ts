@@ -9,8 +9,11 @@ import { MatTableDataSource } from '@angular/material';
 import * as Consent from '../../shared/reducers/app.states';
 import { Store } from '@ngrx/store';
 import { EncounterDetails } from '../_model/HtsEncounterdetails';
+import { LookupItemView } from '../../shared/_models/LookupItemView';
+import { LookupItemService } from '../../shared/_services/lookup-item.service';
 
 @Component({
+
     selector: 'app-person-home',
     templateUrl: './person-home.component.html',
     styleUrls: ['./person-home.component.css']
@@ -18,7 +21,8 @@ import { EncounterDetails } from '../_model/HtsEncounterdetails';
 export class PersonHomeComponent implements OnInit {
 
     [x: string]: any;
-
+    public carended: boolean;
+    public isdead: boolean;
     public personId = 0;
     public personVitalWeight = 0;
     public person: PersonView;
@@ -29,13 +33,18 @@ export class PersonHomeComponent implements OnInit {
     htsencounters: any[];
     riskassessmentencounter: any[];
     riskencounters: any[];
-    services: any[];
+    services: any[]; 
+    exitreason: number;
+     patientId: number;
+     careenddetails: any[] = [];
     personvitals: any[];
+    careendoptions: LookupItemView[] = [];
     chronic_illness_data: any[] = [];
     dataSource = new MatTableDataSource(this.chronic_illness_data);
     chronic_illness_displaycolumns = ['illness', 'onsetdate', 'treatment', 'dose'];
     constructor(private route: ActivatedRoute,
         private personService: PersonHomeService,
+        private lookupItemService: LookupItemService,
         private snotifyService: SnotifyService,
         private notificationService: NotificationService,
         private router: Router,
@@ -56,18 +65,48 @@ export class PersonHomeComponent implements OnInit {
             const { HTSEncounterArray } = res;
             const { PersonVitalsArray } = res;
             const { RiskAssessmentArray } = res;
-            console.log(HTSEncounterArray);
+            const { ExitReasonsArray } = res;
+            const {CarendedArray } = res;
+
+            this.careenddetails = CarendedArray;
+            
+         
+            
             this.services = servicesArray;
             this.htsencounters = HTSEncounterArray;
             this.personvitals = PersonVitalsArray;
             this.riskassessmentencounter = RiskAssessmentArray;
+           this.careendoptions = ExitReasonsArray['lookupItems'];
+          
+
             if (this.personvitals.length > 0) {
                 this.personVitalWeight = this.personvitals['0'].weight;
                 console.log(this.personVitalWeight + 'Correct Weight');
             }
+            if (this.careenddetails != null) {
+                this.exitreason = this.careenddetails['exitReason'];
+               
+                let careendeddetails: string;
+                let val: number;
+
+                val = this.careendoptions.findIndex(x => x.itemId == this.exitreason);
+                careendeddetails = this.careendoptions[val].itemDisplayName;
+               
+                if (careendeddetails.toLowerCase() == 'death') {
+                    this.isdead = true;
+                    this.carended = true;
+                } else {
+                    this.carended = true;
+                    this.isdead = false;
+                }
+            } else  {
+                this.carended = false;
+                this.isdead = false;
+            }
 
 
-            this.riskencounters = this.riskassessmentencounter['encounters']
+
+            this.riskencounters = this.riskassessmentencounter['encounters'];
         });
 
         this.encounterDetail = this.htsencounters[0];
@@ -81,12 +120,15 @@ export class PersonHomeComponent implements OnInit {
         localStorage.removeItem('selectedService');
         this.store.dispatch(new Consent.ClearState());
 
-        // console.log('personId' + this.personId);
+        
         this.getPatientDetailsById(this.personId);
+       
+
 
 
     }
 
+    
 
 
     public getPatientDetailsById(personId: number) {
