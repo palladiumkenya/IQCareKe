@@ -298,7 +298,7 @@ export class ServicesListComponent implements OnInit {
     isDeathEligibility(serviceAreaId: number) {
         const selectedService = this.services.filter(obj => obj.id == serviceAreaId);
         let isEligible: boolean = false;
-        if (selectedService && selectedService.length > 0) {
+          if (selectedService && selectedService.length > 0) {
             if (selectedService[0]['code'] == 'PREP') {
                 if (this.isdead == false) {
                     isEligible = false;
@@ -466,6 +466,16 @@ export class ServicesListComponent implements OnInit {
             if (isCCCEnrolled != undefined) {
                 if (isCCCEnrolled && isCCCEnrolled.length > 0) {
                     isEligible = false;
+                   
+                    this.EligibilityInformation = [];
+                    if (this.EligibilityInformation.length > 0) {
+                        if (this.EligibilityInformation.includes('Not Eligible') == false) {
+                            this.EligibilityInformation.push('Not Eligible');
+                        }
+                    } else {
+                        this.EligibilityInformation.push('Not Eligible');
+                    }
+
                 } else {
                     if (this.EligibilityInformation.length > 0) {
                         if (this.EligibilityInformation.includes('HTS not done') == false) {
