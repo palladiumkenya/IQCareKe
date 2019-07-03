@@ -33,7 +33,15 @@ namespace IQCare.Common.BusinessProcess.CommandHandlers.PersonCommand
                     RegisterPersonService registerPersonService = new RegisterPersonService(_unitOfWork);
                     var enrollmentVisitType = await _unitOfWork.Repository<LookupItemView>().Get(x => x.MasterName == "VisitType" && x.ItemName == "Enrollment").FirstOrDefaultAsync();
                     int? visitType = enrollmentVisitType != null ? enrollmentVisitType.ItemId : 0;
-
+                    DateTime TreatmentStartDate;
+                    if(request.TreatmentStartDate  == null)
+                    {
+                        TreatmentStartDate = request.TransferInDate;
+                    }
+                    else
+                    {
+                        TreatmentStartDate = request.TreatmentStartDate;
+                    }
                     var enrollmentPatientMasterVisit =
                         await _unitOfWork.Repository<Core.Models.PatientMasterVisit>().Get(x =>
                         x.PatientId == request.PatientId && x.ServiceId == request.ServiceId && x.VisitType == visitType).ToListAsync();
@@ -59,12 +67,13 @@ namespace IQCare.Common.BusinessProcess.CommandHandlers.PersonCommand
                         {
                             transferin.TransferInDate = request.TransferInDate;
                             transferin.TransferInNotes = request.TransferInNotes;
-                            transferin.TreatmentStartDate = request.TreatmentStartDate;
+                            transferin.TreatmentStartDate = TreatmentStartDate;
                             transferin.CountyFrom = request.CountyFrom;
                             transferin.CurrentTreatment = request.CurrentTreatment;
                             transferin.ServiceAreaId = request.ServiceId;
                             transferin.MflCode = request.MflCode;
                             transferin.DeleteFlag = request.DeleteFlag;
+                            transferin.FacilityFrom = request.FacilityFrom;
 
                             var results = await registerPersonService.UpdatePatientTransferIn(transferin);
                             Id = results.Id;
@@ -75,7 +84,7 @@ namespace IQCare.Common.BusinessProcess.CommandHandlers.PersonCommand
 
                             pt.TransferInDate = request.TransferInDate;
                             pt.TransferInNotes = request.TransferInNotes;
-                            pt.TreatmentStartDate = request.TreatmentStartDate;
+                            pt.TreatmentStartDate = TreatmentStartDate;
                             pt.FacilityFrom = request.FacilityFrom;
                             pt.CountyFrom = request.CountyFrom;
                             pt.CurrentTreatment = request.CurrentTreatment;

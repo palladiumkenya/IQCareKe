@@ -193,6 +193,13 @@ export class PersonHomeService {
         );
     }
 
+    public getFacility(mflCode: string) {
+        return this.http.get<any>(this.API_URL + '/api/Lookup/getFacility/' + mflCode).pipe(
+            tap(getFacility => this.errorHandler.log('get Facility')),
+            catchError(this.errorHandler.handleError<any[]>('getFacility'))
+        );
+    }
+
 
     public getPatientCareEndedHistory(patientId: number): Observable<any[]> {
         return this.http.get<any[]>(this.API_URL + '/api/PatientServices/GetLatestCareEndDetails/' + patientId).pipe(

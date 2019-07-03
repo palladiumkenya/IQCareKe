@@ -390,6 +390,15 @@ export class ServicesListComponent implements OnInit {
                 case 'PREP':
                     if (isCCCEnrolled && isCCCEnrolled.length > 0) {
                         isEligible = false;
+                        this.EligibilityInformation = [] ;
+                        this.EligibilityInformation.push('Not Eligible');
+                        if (this.EligibilityInformation.length > 0) {
+                            if (this.EligibilityInformation.includes('Not Eligible') == false) {
+                                this.EligibilityInformation.push('Not Eligible');
+                            }
+                        } else {
+                            this.EligibilityInformation.push('Not Eligible');
+                        }
                     } else {
                         if (this.person.ageNumber < 15) {
                             isEligible = false;

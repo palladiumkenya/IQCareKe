@@ -12,6 +12,7 @@ import { RiskEncounterResolver } from './services/riskencounter.resolver';
 import { PrepComponent } from './enrollment/service-areas/prep/prep.component';
 import { ReenrollmentComponent } from './reenrollment/reenrollment.component';
 import { ExitReasonsResolver } from './services/exitreasons.resolver';
+
 import { CareendDetailsResolver } from './services/careendeddetails.resolver';
 
 const routes: Routes = [
@@ -80,11 +81,15 @@ const routes: Routes = [
                 children: [
                     {
                         path: ':id/:serviceId/:serviceCode',
-                        component: PrepComponent
+                        component: PrepComponent,
+
+
+
                     },
                     {
                         path: 'update/:id/:serviceId/:serviceCode/:edit',
-                        component: PrepComponent
+                        component: PrepComponent,
+
                     }
                 ]
             }
