@@ -8,6 +8,8 @@ import { FamilyPartnerControlsService } from '../../_services/family-partner-con
 import { Partner } from '../../../shared/_models/partner';
 import { RecordsService } from '../../../records/_services/records.service';
 import { RegistrationService } from '../../../registration/_services/registration.service';
+import { NotificationService } from '../../../shared/_services/notification.service';
+import { SnotifyService } from 'ng-snotify';
 
 @Component({
     selector: 'app-family-search',
@@ -27,6 +29,8 @@ export class FamilySearchComponent implements OnInit {
     displayedColumns = ['firstName', 'midName', 'lastName', 'dateOfBirth', 'gender'];
     dataSource = new MatTableDataSource();
     contactPersonId: number;
+    contactAge: number;
+    personId: number;
 
     constructor(private route: ActivatedRoute,
         private router: Router,
@@ -35,7 +39,9 @@ export class FamilySearchComponent implements OnInit {
         private dialog: MatDialog,
         private service: FamilyPartnerControlsService,
         private recordsService: RecordsService,
-        private registrationService: RegistrationService) { }
+        private registrationService: RegistrationService,
+        private snotifyService: SnotifyService,
+        private notificationService: NotificationService) { }
 
     ngOnInit() {
         this.formGroup = this._formBuilder.group({
@@ -43,6 +49,7 @@ export class FamilySearchComponent implements OnInit {
             relationship: new FormControl('', [Validators.required]),
         });
 
+        this.personId = JSON.parse(localStorage.getItem('personId'));
         this.partnerType = new Partner();
         this.route.data.subscribe(
             (res) => {
@@ -129,8 +136,15 @@ export class FamilySearchComponent implements OnInit {
                     return;
                 }
 
-                // console.log(data);
+                if (this.personId == data[0]['id']) {
+                    this.snotifyService.error('You are trying Client as their own contact', 'Encounter',
+                        this.notificationService.getConfig());
+                    return;
+                }
+
                 this.contactPersonId = data[0]['id'];
+                this.contactAge = data[0]['ageNumber'];
+
                 const newContact: [{}] = [{
                     'firstName': data[0]['firstName'],
                     'midName': data[0]['middleName'],
@@ -139,8 +153,6 @@ export class FamilySearchComponent implements OnInit {
                     'gender': data[0]['gender']
                 }];
                 this.dataSource.data = newContact;
-
-                console.log(this.dataSource.data);
             }
         );
     }
@@ -150,9 +162,24 @@ export class FamilySearchComponent implements OnInit {
     }
 
     saveRelationship() {
-        if (!this.formGroup.valid) {
+        if (!this.formGroup.valid || !this.contactPersonId) {
+            if (!this.contactPersonId) {
+                this.snotifyService.error('Select a contact to be listed', 'Encounter',
+                    this.notificationService.getConfig());
+            }
             return;
         }
+        const selectedOption = this.relationshipOptions.filter(obj => obj.itemId == this.formGroup.get('relationship').value);
+        if (this.contactAge < 15 && (selectedOption[0].itemName == 'Co-Wife'
+            || selectedOption[0].itemName == 'Mother'
+            || selectedOption[0].itemName == 'Father'
+            || selectedOption[0].itemName == 'Spouse'
+            || selectedOption[0].itemName == 'Partner')) {
+            this.snotifyService.error('Mother/Father/Spouse/Partners/Co-Wife should not be under 15 yrs', 'Encounter',
+                this.notificationService.getConfig());
+            return;
+        }
+
         const personRelation = {};
         personRelation['PersonId'] = this.contactPersonId;
         personRelation['PatientId'] = JSON.parse(localStorage.getItem('patientId'));

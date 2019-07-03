@@ -1,13 +1,15 @@
-import { Component, OnInit, EventEmitter, Output } from '@angular/core';
+import { Component, OnInit, EventEmitter, Output, Input } from '@angular/core';
 import { MatTableDataSource, MatDialogConfig, MatDialog } from '@angular/material';
 import { AllergiesComponent } from '../allergies/allergies.component';
 import { SnotifyService } from 'ng-snotify';
 import { NotificationService } from '../../_services/notification.service';
+import { PrepService } from '../../../prep/_services/prep.service';
 
 @Component({
     selector: 'app-allergies-table',
     templateUrl: './allergies-table.component.html',
-    styleUrls: ['./allergies-table.component.css']
+    styleUrls: ['./allergies-table.component.css'],
+    providers: [PrepService]
 })
 export class AllergiesTableComponent implements OnInit {
     public allergy_table_data: AllergyTableData[] = [];
@@ -17,14 +19,33 @@ export class AllergiesTableComponent implements OnInit {
     dataSource = new MatTableDataSource(this.allergy_table_data);
 
     @Output() notify: EventEmitter<AllergyTableData[]> = new EventEmitter<AllergyTableData[]>();
+    @Input() patientId: number;
+    @Input() personId: number;
 
     constructor(private dialog: MatDialog,
         private snotifyService: SnotifyService,
-        private notificationService: NotificationService) { }
+        private notificationService: NotificationService,
+        private prepservice: PrepService) { }
 
     ngOnInit() {
         // emit new allergies to stepper 
         this.notify.emit(this.newAllergyData);
+
+        this.loadPatientAllergies();
+    }
+
+    public loadPatientAllergies(): void {
+        this.prepservice.getPatientAllergies(this.patientId).subscribe(
+            (res) => {
+                console.log(res);
+                if (res.length > 0) {
+
+                }
+            },
+            (error) => {
+                console.log(error);
+            }
+        );
     }
 
     newAllergies() {

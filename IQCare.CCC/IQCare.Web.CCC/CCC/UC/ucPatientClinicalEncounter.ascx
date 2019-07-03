@@ -10,7 +10,7 @@
 <%@ Register Src="~/CCC/UC/ucICF.ascx" TagPrefix="uc" TagName="ucICF" %>
 
 <style>
-    #ICFScreeningSection, #TuberclosisTreatmentPanel, #IPTPanel, #tbScreeningOutcomePanel, #ICFActionTakenPanel{display: none;}
+    #ICFScreeningSection, #TuberclosisTreatmentPanel, #IPTPanel, #ICFActionTakenPanel{display: none;}
 </style>
 
 <div class="col-md-12" style="padding-top: 20px">
@@ -5090,16 +5090,15 @@
                 objectsToShow = ["tbScreeningOutcomePanel"];
                 objectsToHide = ['ICFScreeningSection', 'TubeclosisTreatmentPanel', 'IPTPanel', 'ICFActionTakenPanel'];
                 sectionsToReset = ['ICFScreeningSection', 'TubeclosisTreatmentPanel', 'IPTPanel', 'ICFActionTakenPanel'];
-                tbScreenScore = 3;
+                //tbScreenScore = 3;
             }
             else if (selectedIndex == 2) {
                 objectsToShow = ['ICFScreeningSection', 'IPTPanel'];
-                objectsToHide = ['tbScreeningOutcomePanel'];
                 sectionsToReset = ['tbScreeningOutcomePanel'];
             }
             else {
                 sectionsToReset = ['ICFScreeningSection', 'TubeclosisTreatmentPanel', 'IPTPanel', 'ICFActionTakenPanel', 'tbScreeningOutcomePanel'];
-                objectsToHide = ['ICFScreeningSection', 'TubeclosisTreatmentPanel', 'IPTPanel', 'ICFActionTakenPanel', 'tbScreeningOutcomePanel'];
+                objectsToHide = ['ICFScreeningSection', 'TubeclosisTreatmentPanel', 'IPTPanel', 'ICFActionTakenPanel'];
                 objectsToShow = [];
             }
             showHideCtrls(objectsToHide, objectsToShow);
@@ -5223,9 +5222,7 @@
                     tbScreenScore = 2;
                 }
             }
-            else {
-                tbScreenScore = 2;
-            }
+            
             getTBOutcome(tbScreenScore);
         }
 	});
@@ -5759,8 +5756,6 @@
 
     }
     function LoadDiagnosisList(Array) {
-
-        console.log(DiagnosisList);
         $("#Diagnosis").select2({
             placeholder: {
                 id: '0',
@@ -6265,6 +6260,7 @@
         allowInputToggle: true,
         useCurrent: false
     });
+
     function showHideCtrls(objectsToHide, objectsToShow) {
         $.each(objectsToHide, function (index, value) {
             $("#" + value).hide();
@@ -6273,6 +6269,7 @@
             $("#" + value).show();
         });
     }
+
     function sectionReset(sectionsToReset) {
         $.each(sectionsToReset, function (index, value) {
             $("#" + value + " select").each(function () {
@@ -6280,6 +6277,7 @@
             });
         });
     }
+
     function disableEnableCtrls(objectsToDisable, objectsToEnable) {
         $.each(objectsToDisable, function (index, value) {
             $("#" + value).prop('disabled', true);
@@ -6306,18 +6304,42 @@
         }
         else if (selectedIndex == 2) {
             objectsToShow = ['ICFScreeningSection', 'IPTPanel'];
-            objectsToHide = ['tbScreeningOutcomePanel'];
             sectionsToReset = ['tbScreeningOutcomePanel'];
         }
         else {
             sectionsToReset = ['ICFScreeningSection', 'TubeclosisTreatmentPanel', 'IPTPanel', 'ICFActionTakenPanel', 'tbScreeningOutcomePanel'];
-            objectsToHide = ['ICFScreeningSection', 'TubeclosisTreatmentPanel', 'IPTPanel', 'ICFActionTakenPanel', 'tbScreeningOutcomePanel'];
+            objectsToHide = ['ICFScreeningSection', 'TubeclosisTreatmentPanel', 'IPTPanel', 'ICFActionTakenPanel'];
             objectsToShow = [];
         }
+
         showHideCtrls(objectsToHide, objectsToShow);
         sectionReset(sectionsToReset);
         getTBOutcome(tbScreenScore);
     });
+
+    $("#ddlICFCough, #ddlICFFever, #ddlICFWeight, #ddlICFNightSweats").change(function () { 
+        var cough = $("#<%=ddlICFCough.ClientID%>").find(":selected").text();
+        var fever = $("#<%=ddlICFFever.ClientID%>").find(":selected").text();
+        var weightLoss = $("#<%=ddlICFWeight.ClientID%>").find(":selected").text();
+        var nightSweats = $("#<%=ddlICFNightSweats.ClientID%>").find(":selected").text();
+
+        cough = cough == "Select" ? "" : cough;
+        fever = fever == "Select" ? "" : fever;
+        weightLoss = weightLoss == "Select" ? "" : weightLoss;
+        nightSweats = nightSweats == "Select" ? "" : nightSweats;
+
+        tbScreeningOutcome(cough, fever, weightLoss, nightSweats);
+	});
+
+    function tbScreeningOutcome(cough, fever, weightLoss, nightSweats) {
+        getTBOutcome(0);
+        if (cough == "yes" || fever == "yes" || weightLoss == "yes" || nightSweats == "yes") {
+            getTBOutcome(2);
+        } else if(cough == "No" && fever == "No" && weightLoss == "No" && nightSweats == "No") {
+            getTBOutcome(1);
+        } 
+    }
+
     //ICF Screening selection change
     $("#ICFScreeningSection select").change(function (evt, data) {
         var totalIndex = 0;
@@ -6528,10 +6550,6 @@
     }
 
     function loadWhoStageOIS(WhoStage,id,title) {
-      
-        
-        
-
         $.ajax({
             type: "POST",
             url: "../WebService/LookupService.asmx/GetLookUpItemViewByMasterName",
@@ -6602,10 +6620,7 @@
             }
         });
 
-        }
-          
-            
-   
+    }
 
     function GetPatientOIList(dataTableName) {
 
@@ -6650,7 +6665,7 @@
 
         }
     }
-        function AssignTableData(dataTableName, obj) {
+    function AssignTableData(dataTableName, obj) {
             var dtData = obj;
             var rows = $("#" + dataTableName).dataTable().fnGetNodes();
             for (var i = 0; i < rows.length; i++) {
@@ -6675,8 +6690,7 @@
             }
         }
 
-
-        function CheckDatenAssign(dtVal, ctrl, IsDisableCheck) {
+    function CheckDatenAssign(dtVal, ctrl, IsDisableCheck) {
             var parsedDate;
             var jsDate;
             if (IsDisableCheck) {
@@ -6732,7 +6746,7 @@
                 }
             }
         }
-        function GetDatePicker() {
+    function GetDatePicker() {
 
 
             // console.log(event.target);

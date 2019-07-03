@@ -32,7 +32,11 @@ namespace IQCare.Common.BusinessProcess.CommandHandlers.PersonCommand
                     sql.Append("exec [dbo].[pr_CloseDecryptedSession];");
 
                     var result = await _unitOfWork.Repository<PatientLookupView>().FromSql(sql.ToString());
-                    result.ForEach(item => item.CalculateYourAge());
+                    result.ForEach(item =>
+                    {
+                        item.CalculateYourAge();
+                        item.CalculateAgeInMonths();
+                    });
 
                     return Result<PatientLookupView>.Valid(result.FirstOrDefault());
                 }

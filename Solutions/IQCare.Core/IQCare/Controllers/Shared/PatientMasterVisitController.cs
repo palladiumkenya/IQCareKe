@@ -29,7 +29,6 @@ namespace IQCare.Controllers.Shared
                 return Ok(encountervisit.Value);
             return BadRequest(encountervisit);
         }
-
         
         [HttpPost("addOrdVisit")]
         public async Task<IActionResult> AddOrdVisit([FromBody] AddPatientOrdVisitCommand addPatientOrdVisitCommand)

@@ -32,7 +32,7 @@ namespace IQCare.Controllers.Shared
             return BadRequest(response);
         }
 
-        [HttpGet("GetPatientAllergy")]
+        [HttpGet("GetPatientAllergy/{patientId}")]
         public async Task<IActionResult> GetPatientAllergy(int patientId)
         {
             var results = await _mediator.Send(new GetPatientAllergies() { PatientId = patientId }, HttpContext.RequestAborted);

@@ -59,19 +59,9 @@ export class ServicesListComponent implements OnInit {
 
         this.getPersonEnrolledServices(this.personId);
 
-        /*console.log(this.encounterDetail);
-
-        console.log('RiskEncounter');
-        console.log(this.riskencounter);*/
-
         if (this.EligibilityInformation.length > 0) {
             this.htseligibility = this.EligibilityInformation.join(' ,');
-            // console.log(this.EligibilityInformation);
-            // console.log(this.htseligibility);
         }
-        /*console.log('HTSEligibility');
-        console.log(this.HTSEligible);
-        console.log(this.personId);*/
     }
 
 
@@ -99,11 +89,13 @@ export class ServicesListComponent implements OnInit {
             const service = selectedService[0]['code'];
             switch (selectedService[0]['code']) {
                 case 'HTS':
+                    localStorage.setItem('ageNumber', this.person.ageNumber);
                     this.zone.run(() => {
                         this.router.navigate(['/dashboard/enrollment/hts/' + this.personId + '/' + serviceId + '/' + serviceCode],
                             { relativeTo: this.route });
                     });
                     break;
+                    localStorage.setItem('ageNumber', this.person.ageNumber);
                 case 'CCC':
                     this.zone.run(() => {
                         this.router.navigate(['/dashboard/enrollment/ccc/' + this.personId + '/' + serviceId + '/' + serviceCode],
@@ -129,12 +121,14 @@ export class ServicesListComponent implements OnInit {
     public editEnrollment(serviceId: number, serviceCode: string) {
         switch (serviceCode) {
             case 'CCC':
+                localStorage.setItem('ageNumber', this.person.ageNumber);
                 this.zone.run(() => {
                     this.router.navigate(['/dashboard/enrollment/ccc/update/' + this.personId + '/' + serviceId + '/' + serviceCode + '/1'],
                         { relativeTo: this.route });
                 });
                 break;
             case 'HTS':
+                localStorage.setItem('ageNumber', this.person.ageNumber);
                 this.zone.run(() => {
                     this.router.navigate(['/dashboard/enrollment/hts/update/' + this.personId + '/' + serviceId + '/' + serviceCode + '/1'],
                         { relativeTo: this.route });
@@ -142,8 +136,10 @@ export class ServicesListComponent implements OnInit {
                 break;
             case 'PREP':
                 this.zone.run(() => {
-                    this.router.navigate(['/dashboard/enrollment/prep/update/' + this.personId + '/' + serviceId + '/' + serviceCode + '/1'],
-                        { relativeTo: this.route });
+                    this.router.navigate(
+                        ['/dashboard/enrollment/prep/update/' + this.personId + '/' + serviceId + '/' + serviceCode + '/1'],
+                        { relativeTo: this.route }
+                    );
                 });
 
                 break;
@@ -180,6 +176,7 @@ export class ServicesListComponent implements OnInit {
                     localStorage.removeItem('patientMasterVisitId');
                     localStorage.removeItem('isPartner');
                     localStorage.removeItem('editEncounterId');
+                    localStorage.removeItem('ageInMonths');
 
                     this.searchService.lastHtsEncounter(this.personId).subscribe((res) => {
                         if (res['encounterId']) {
@@ -193,6 +190,7 @@ export class ServicesListComponent implements OnInit {
                             localStorage.setItem('personId', this.personId.toString());
                             localStorage.setItem('patientId', this.patientId.toString());
                             localStorage.setItem('serviceAreaId', serviceId.toString());
+                            localStorage.setItem('ageInMonths', this.person.ageInMonths);
                             this.router.navigate(['/registration/home/'], { relativeTo: this.route });
                         });
                     });
@@ -249,7 +247,6 @@ export class ServicesListComponent implements OnInit {
     isServiceEligible(serviceAreaId: number) {
         let isCCCEnrolled;
 
-
         if (this.enrolledServices) {
             isCCCEnrolled = this.enrolledServices.filter(obj => obj.serviceAreaId == 1);
             if (isCCCEnrolled && isCCCEnrolled.length > 0) {
@@ -293,7 +290,7 @@ export class ServicesListComponent implements OnInit {
                     }
                     break;
                 case 'HTS':
-                    if (isCCCEnrolled && isCCCEnrolled.length > 0) {
+                    if ((isCCCEnrolled && isCCCEnrolled.length > 0) || this.person.ageInMonths < 18) {
                         isEligible = false;
                     } else {
                         isEligible = true;

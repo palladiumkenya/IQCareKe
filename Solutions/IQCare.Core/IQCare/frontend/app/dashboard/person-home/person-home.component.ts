@@ -56,14 +56,12 @@ export class PersonHomeComponent implements OnInit {
             const { HTSEncounterArray } = res;
             const { PersonVitalsArray } = res;
             const { RiskAssessmentArray } = res;
-            console.log(HTSEncounterArray);
             this.services = servicesArray;
             this.htsencounters = HTSEncounterArray;
             this.personvitals = PersonVitalsArray;
             this.riskassessmentencounter = RiskAssessmentArray;
             if (this.personvitals.length > 0) {
                 this.personVitalWeight = this.personvitals['0'].weight;
-                console.log(this.personVitalWeight + 'Correct Weight');
             }
 
 
@@ -71,20 +69,13 @@ export class PersonHomeComponent implements OnInit {
         });
 
         this.encounterDetail = this.htsencounters[0];
-        /*console.log("HTSEncounters");
-        console.log(this.htsencounters[0]);
-        console.log(this.encounterDetail);*/
-
 
         localStorage.removeItem('patientEncounterId');
         localStorage.removeItem('patientMasterVisitId');
         localStorage.removeItem('selectedService');
         this.store.dispatch(new Consent.ClearState());
 
-        // console.log('personId' + this.personId);
         this.getPatientDetailsById(this.personId);
-
-
     }
 
 
@@ -92,7 +83,6 @@ export class PersonHomeComponent implements OnInit {
     public getPatientDetailsById(personId: number) {
         this.personView$ = this.personService.getPatientByPersonId(personId).subscribe(
             p => {
-                // console.log(p);
                 this.person = p;
 
                 localStorage.setItem('personId', this.person.personId.toString());

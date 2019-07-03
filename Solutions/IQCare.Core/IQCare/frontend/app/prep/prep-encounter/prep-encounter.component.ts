@@ -130,7 +130,8 @@ export class PrepEncounterComponent implements OnInit {
 
         this.STIScreeningAndTreatmentOptions.push({
             'yesnoOptions': this.yesnoOptions,
-            'stiScreeningOptions': this.stiScreeningOptions
+            'stiScreeningOptions': this.stiScreeningOptions,
+            'screenedForSTIOptions': this.screenedForSTIOptions
         });
 
         this.CircumcisionStatusOptions.push({

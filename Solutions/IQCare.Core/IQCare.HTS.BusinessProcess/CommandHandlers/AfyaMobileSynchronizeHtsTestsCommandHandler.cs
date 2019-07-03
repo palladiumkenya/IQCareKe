@@ -87,6 +87,18 @@ namespace IQCare.HTS.BusinessProcess.CommandHandlers
                                 getPatientConsents[0].DeclineReason = pnsDeclineReason;
 
                                 await encounterTestingService.UpdatePatientConsent(getPatientConsents[0]);
+
+
+                                var hasConsentedToListPartners = await _unitOfWork.Repository<LookupItemView>()
+                                    .Get(x => x.ItemId == pnsAccepted && x.MasterName == "YesNoNA").ToListAsync();
+                                if (hasConsentedToListPartners.Count > 0)
+                                {
+                                    if (hasConsentedToListPartners[0].ItemName == "Yes")
+                                    {
+                                        var listPartners = await registerPersonService.AddAppStateStore(person.Id, patient.Id, 3,
+                                            getPatientEncounter.PatientMasterVisitId, getPatientEncounter.Id, null);
+                                    }
+                                }
                             }
                             else
                             {
@@ -94,6 +106,17 @@ namespace IQCare.HTS.BusinessProcess.CommandHandlers
                                 var partnersConsent = await encounterTestingService.addPatientConsent(patient.Id,
                                     getPatientEncounter.PatientMasterVisitId, 2, pnsAccepted, consentListPartnersTypeId, getPatientEncounter.EncounterStartTime, providerId,
                                     pnsDeclineReason);
+
+                                var hasConsentedToListPartners = await _unitOfWork.Repository<LookupItemView>()
+                                    .Get(x => x.ItemId == pnsAccepted && x.MasterName == "YesNoNA").ToListAsync();
+                                if (hasConsentedToListPartners.Count > 0)
+                                {
+                                    if (hasConsentedToListPartners[0].ItemName == "Yes")
+                                    {
+                                        var listPartners = await registerPersonService.AddAppStateStore(person.Id, patient.Id, 3,
+                                            getPatientEncounter.PatientMasterVisitId, getPatientEncounter.Id, null);
+                                    }
+                                }
                             }
 
                             //Screening Tests
@@ -113,10 +136,31 @@ namespace IQCare.HTS.BusinessProcess.CommandHandlers
                                 getHtsEncounterResults[0].FinalResult = finalResult;
 
                                 var updatedHtsEncounterResult = await encounterTestingService.UpdateHtsEncounterResult(getHtsEncounterResults[0]);
+
+                                // add state for positive person
+                                var clientFinalResultsList = await _unitOfWork.Repository<LookupItemView>()
+                                    .Get(x => x.ItemId == finalResult && x.MasterName == "HIVFinalResults").ToListAsync();
+                                if (clientFinalResultsList.Count > 0 &&
+                                    clientFinalResultsList[0].ItemName == "Positive")
+                                {
+                                    var isClientPositiveState = await registerPersonService.AddAppStateStore(person.Id, patient.Id, 4,
+                                        getPatientEncounter.PatientMasterVisitId, getPatientEncounter.Id, null);
+                                }
                             }
                             else
                             {
                                 var htsEncounterResult = await encounterTestingService.addHtsEncounterResult(getHtsEncounter.Id, roundOneTestResult, roundTwoTestResult, finalResult);
+
+
+                                // add state for positive person
+                                var clientFinalResultsList = await _unitOfWork.Repository<LookupItemView>()
+                                    .Get(x => x.ItemId == finalResult && x.MasterName == "HIVFinalResults").ToListAsync();
+                                if (clientFinalResultsList.Count > 0 &&
+                                    clientFinalResultsList[0].ItemName == "Positive")
+                                {
+                                    var isClientPositiveState = await registerPersonService.AddAppStateStore(person.Id, patient.Id, 4,
+                                        getPatientEncounter.PatientMasterVisitId, getPatientEncounter.Id, null);
+                                }
                             }
                         }
                         else
@@ -141,7 +185,7 @@ namespace IQCare.HTS.BusinessProcess.CommandHandlers
                 catch (Exception ex)
                 {
                     trans.Rollback();
-                    Log.Error(ex.Message);
+                    Log.Error($"Failed to synchronize Hts tests for clientid: {afyaMobileId} " + ex.Message + " " + ex.InnerException);
                     return Result<string>.Invalid($"Failed to synchronize Hts tests for clientid: {afyaMobileId} " + ex.Message + " " + ex.InnerException);
                 }
             }

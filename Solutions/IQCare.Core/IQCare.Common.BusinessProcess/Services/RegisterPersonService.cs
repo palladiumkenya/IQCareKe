@@ -891,17 +891,30 @@ namespace IQCare.Common.BusinessProcess.Services
             }
         }
 
+        private static Random random = new Random();
+        public static string RandomString(int length)
+        {
+            const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+            return new string(Enumerable.Repeat(chars, length)
+                .Select(s => s[random.Next(s.Length)]).ToArray());
+        }
+
         public async Task<PatientIdentifier> EnrollPatient(string enrollmentNo, int patientId, int serviceAreaId, int createdBy, DateTime dateOfEnrollment)
         {
             try
             {
+                // generate a random alphabet prefix for hts
+                string originalEnrollmentNo = enrollmentNo;
+                if(serviceAreaId == 2)
+                    enrollmentNo = RandomString(6) + "-" + enrollmentNo;
+
                 var previouslyIdentifiers = await _unitOfWork.Repository<PatientIdentifier>().Get(y =>
                         y.IdentifierValue == enrollmentNo && y.IdentifierTypeId == 8)
                     .ToListAsync();
 
                 if (previouslyIdentifiers.Count > 0)
                 {
-                    var exception = new Exception("No: " + enrollmentNo + " already exists");
+                    var exception = new Exception("No: " + originalEnrollmentNo + " already exists");
                     throw exception;
                 }
 

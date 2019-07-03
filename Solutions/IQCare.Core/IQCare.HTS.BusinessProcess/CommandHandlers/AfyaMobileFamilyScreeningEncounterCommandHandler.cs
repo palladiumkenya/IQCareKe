@@ -123,6 +123,31 @@ namespace IQCare.HTS.BusinessProcess.CommandHandlers
 
                             var familyScreeningReturnValue = await encounterTestingService.AddPartnerScreening(partnetPersonIdentifiers[0].PersonId, indexClient.Id, patientMasterVisitId, null,
                                     screeningDate, bookingDate, familyScreeningList, 1);
+
+                            var stringParnerObject = Newtonsoft.Json.JsonConvert.SerializeObject(new
+                            {
+                                familyId = partnetPersonIdentifiers[0].PersonId,
+                                familyTraced = true
+                            });
+
+                            var partnerScreeningDone =
+                                await registerPersonService.AddAppStateStore(indexClient.PersonId, indexClient.Id, 10,
+                                    null, null, stringParnerObject);
+
+                            var familyHivStatus = await _unitOfWork.Repository<LookupItemView>()
+                                .Get(x => x.MasterName == "ScreeningHivStatus" && x.ItemId == hivStatus).ToListAsync();
+
+                            if (familyHivStatus.Count > 0 && familyHivStatus[0].ItemName == "Positive")
+                            {
+                                var stringFamilyScreenedPositiveObject = Newtonsoft.Json.JsonConvert.SerializeObject(new
+                                {
+                                    familyId = partnetPersonIdentifiers[0].PersonId,
+                                    familyTraced = true
+                                });
+
+                                var hasFamiyBeenScreenedPositive = await registerPersonService.AddAppStateStore(indexClient.PersonId, indexClient.Id, 14,
+                                        null, null, stringFamilyScreenedPositiveObject);
+                            }
                         }
                         else
                         {
@@ -146,8 +171,8 @@ namespace IQCare.HTS.BusinessProcess.CommandHandlers
                 catch (Exception ex)
                 {
                     trans.Rollback();
-                    Log.Error($"Failed to synchronize partner screening for clientId: {afyaMobileId} " + ex.Message + " " + ex.InnerException);
-                    return Result<string>.Invalid($"Failed to synchronize partner screening for clientId: {afyaMobileId} " + ex.Message + " " + ex.InnerException);
+                    Log.Error($"Failed to synchronize family screening for clientId: {afyaMobileId} " + ex.Message + " " + ex.InnerException);
+                    return Result<string>.Invalid($"Failed to synchronize family screening for clientId: {afyaMobileId} " + ex.Message + " " + ex.InnerException);
                 }
             }
         }

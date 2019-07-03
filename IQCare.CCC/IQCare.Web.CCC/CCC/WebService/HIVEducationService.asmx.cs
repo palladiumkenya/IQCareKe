@@ -3,7 +3,9 @@ using IQCare.CCC.UILogic.HIVEducation;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Web;
 using System.Web.Script.Services;
 using System.Web.Services;
@@ -25,39 +27,30 @@ namespace IQCare.Web.CCC.WebService
 
         [WebMethod]
         //[ScriptMethod(UseHttpGet = false, ResponseFormat = ResponseFormat.Json)]
-        public ArrayList GetCounsellingTopics(string counsellingtopics)
+        public ArrayList GetCounsellingTopics(int counsellingtopics)
         {
-            String TopicName = "";
-            if (counsellingtopics == "Progression,RX")
-            {
-                TopicName = "ProgressionRX";
-            }
-            else if (counsellingtopics == "BasicPreventionDisclosureEducation")
-            {
-                TopicName = "BasicPreventionDisclosureEducation";
+            LookupLogic lookupLogic = new LookupLogic();
+            var data = lookupLogic.GetLnkCouncellingTypeTopics();
+            var topics = lookupLogic.GetCouncellingTopics();
+            var drows= data.AsEnumerable().Where(r => r.Field<int>("CouncellingTypeId") == counsellingtopics);
 
-            }
-            else
+            ArrayList arrayList = new ArrayList();
+            foreach (var row in drows)
             {
-                TopicName = counsellingtopics.Replace(@",", "");
-            }
 
-            LookupLogic lookUp = new LookupLogic();
-            DropDownList dll = new DropDownList();
-            lookUp.populateDDL(dll, TopicName);
-            ArrayList rows = new ArrayList();
-            int x = dll.Items.Count;
-            if (x > 0)
-            {
-                for (int k = 0; k <= x - 1; k++)
+                var topic = topics.AsEnumerable()
+                    .SingleOrDefault(y => y.Field<int>("ID") == Convert.ToInt32(row["CouncellingTopicId"]));
+
+                string topicName = topic["Name"].ToString();
+                int topicId = Convert.ToInt32(topic["ID"].ToString());
+
+                arrayList.Add(new
                 {
-                    string[] i = new string[2] { dll.Items[k].Value.ToString(), dll.Items[k].Text.ToString() };
-                    rows.Add(i);
-                }
+                    Id = topicId,
+                    Value = topicName.Replace("\'","")
+                });
             }
-
-            return rows;
-
+            return arrayList;
         }
         private string Msg { get; set; }
         private int Result { get; set; }
@@ -68,11 +61,22 @@ namespace IQCare.Web.CCC.WebService
             try
             {
                 PatientManager patientManager = new PatientManager();
+                LookupLogic lookupLogic = new LookupLogic();
                 PatientEntity patient = patientManager.GetPatientEntity(patientId);
                 int ptn_pk = patient.ptn_pk.HasValue ? patient.ptn_pk.Value : 0;
+                int posID = Convert.ToInt32(Session["AppPosID"]);
+                var facility = lookupLogic.GetFacility(posID.ToString());
+                int facilityId = 0;
+                if (facility != null)
+                {
+                    facilityId = facility.FacilityID;
+                }
+                var mstPatientLogic = new MstPatientLogic();
+                int userId = Convert.ToInt32(Session["AppUserId"]);
 
+                int visit_Pk = mstPatientLogic.AddOrdVisit(ptn_pk, facilityId, DateTime.Parse(visitdate), 10, userId, DateTime.Now, 203);
                 var HEF = new HIVEducationLogic();
-                Result = HEF.AddPatientHIVEducation(ptn_pk, DateTime.Parse(visitdate), councellingTypeId, councellingType, councellingTopicId, councellingTopic, comments, other);
+                Result = HEF.AddPatientHIVEducation(ptn_pk, facilityId, userId, visit_Pk, DateTime.Parse(visitdate), councellingTypeId, councellingType, councellingTopicId, councellingTopic, comments, other);
                 if (Result > 0)
                 {
                     Msg = "Notes Added";
@@ -84,6 +88,51 @@ namespace IQCare.Web.CCC.WebService
             }
             return Msg;
         }
+
+        [WebMethod(EnableSession = true)]
+        public List<CounsellingData> GetPatientFollowupEducationData()
+        {
+            LookupLogic lookupLogic = new LookupLogic();
+            PatientManager patientManager = new PatientManager();
+            int patientId = Convert.ToInt32(Session["PatientPK"]);
+            PatientEntity patient = patientManager.GetPatientEntity(patientId);
+            int ptn_pk = patient.ptn_pk.HasValue ? patient.ptn_pk.Value : 0;
+
+            HIVEducationLogic hivEducationLogic = new HIVEducationLogic();
+            var types = lookupLogic.GetCouncellingTypes();
+            var topics = lookupLogic.GetCouncellingTopics();
+
+            var data = hivEducationLogic.GetPatientFollowupEducationData(ptn_pk);
+
+            List<CounsellingData> counsellingData = new List<CounsellingData>();
+            foreach (DataRow row  in data.Rows)
+            {
+                var councellingTypeId = Convert.ToInt32(row["CouncellingTypeId"].ToString());
+                var councellingTopicId = Convert.ToInt32(row["CouncellingTopicId"].ToString());
+                var visitDate = row["VisitDate"].ToString();
+                var comments = row["Comments"].ToString();
+
+                DataRow dr = types.AsEnumerable().SingleOrDefault(r => r.Field<int>("ID") == councellingTypeId);
+                DataRow dataRow = topics.AsEnumerable().SingleOrDefault(r => r.Field<int>("ID") == councellingTopicId);
+
+                counsellingData.Add(new CounsellingData()
+                {
+                    CouncellingType = dr["Name"].ToString(),
+                    CouncellingTopic = dataRow["Name"].ToString(),
+                    VisitDate = visitDate,
+                    Comments = comments
+                });
+            }
+
+            return counsellingData;
+        }
     }
 
+    public class CounsellingData
+    {
+        public string CouncellingType { get; set; }
+        public string CouncellingTopic { get; set; }
+        public string VisitDate { get; set; }
+        public string Comments { get; set; }
     }
+}

@@ -60,34 +60,6 @@
 
             $.ajax(
             {
-                //type: "POST",
-                //url: "../WebService/PatientService.asmx/GetPatientAppointments",
-                //data: "{'patientId':'" + patientId + "'}",
-                //contentType: "application/json; charset=utf-8",
-                //dataType: "json",
-                //cache: false,
-                //success: function (response) {
-                //    var itemList = response.d;
-                //    //console.log(itemList);
-                //    for (var i = 0, len = itemList.length; i < len; i++) {
-                //        //console.log(itemList[i]);
-                //        arrayAppointments.push(
-                //            [
-                //                i+1,
-                //                moment(itemList[i].AppointmentDate).format('DD-MMM-YYYY'),
-                //                itemList[i].ServiceArea,
-                //                itemList[i].Reason,
-                //                itemList[i].DifferentiatedCare,
-                //                itemList[i].Status,
-                //                itemList[i].EditAppointment,
-                //                itemList[i].DeleteAppointment,
-                //                itemList[i].AppointmentId
-                //            ]
-                //        );
-                //    }
-                //    initialiseDataTable(arrayAppointments);
-                //},
-                //{
                     type: "POST",
                     url: "../WebService/PatientService.asmx/GetPatientAppointments",
                     data: "{'patientId':'" + patientId + "'}",

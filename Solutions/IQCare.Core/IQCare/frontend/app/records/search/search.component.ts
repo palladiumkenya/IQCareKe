@@ -63,7 +63,8 @@ export class SearchComponent implements OnInit, AfterViewInit {
         localStorage.removeItem('serviceAreaId');
         localStorage.removeItem('onEdit');
         localStorage.removeItem('ageNumber');
-        localStorage.removeItem('');
+        localStorage.removeItem('encounterDate');
+        localStorage.removeItem('ageInMonths');
 
         this.store.dispatch(new AppState.ClearState());
     }

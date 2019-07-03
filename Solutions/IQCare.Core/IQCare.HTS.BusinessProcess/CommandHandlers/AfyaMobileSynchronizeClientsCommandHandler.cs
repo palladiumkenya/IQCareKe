@@ -248,15 +248,15 @@ namespace IQCare.HTS.BusinessProcess.CommandHandlers
                                 }
 
                                 //update message has been processed
-                                await registerPersonService.UpdateAfyaMobileInbox(afyaMobileMessage.Id, afyaMobileId, true, DateTime.Now, "success", true);
+                                await registerPersonService.UpdateAfyaMobileInbox(afyaMobileMessage.Id, afyaMobileId, true, DateTime.Now, $"Successfully synchronized demographics for afyamobileid: {afyaMobileId}", true);
                             }
                         }
                     }
 
                     //update message has been processed
-                    await registerPersonService.UpdateAfyaMobileInbox(afyaMobileMessage.Id, afyaMobileId, true, DateTime.Now, "success", true);
+                    await registerPersonService.UpdateAfyaMobileInbox(afyaMobileMessage.Id, afyaMobileId, true, DateTime.Now, $"Successfully synchronized demographics for afyamobileid: {afyaMobileId}", true);
                     trans.Commit();
-                    return Result<string>.Valid(afyaMobileId);
+                    return Result<string>.Valid($"Successfully synchronized demographics for afyamobileid: {afyaMobileId}");
                 }
                 catch (Exception ex)
                 {

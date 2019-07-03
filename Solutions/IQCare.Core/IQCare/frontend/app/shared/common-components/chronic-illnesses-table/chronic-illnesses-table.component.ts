@@ -1,4 +1,4 @@
-import { Component, OnInit, EventEmitter, Output } from '@angular/core';
+import { Component, OnInit, EventEmitter, Output, Input } from '@angular/core';
 import { MatTableDataSource, MatDialogConfig, MatDialog } from '@angular/material';
 import { PatientChronicIllnessesComponent } from '../patient-chronic-illnesses/patient-chronic-illnesses.component';
 import { NotificationService } from '../../_services/notification.service';
@@ -7,7 +7,8 @@ import { SnotifyService } from 'ng-snotify';
 @Component({
     selector: 'app-chronic-illnesses-table',
     templateUrl: './chronic-illnesses-table.component.html',
-    styleUrls: ['./chronic-illnesses-table.component.css']
+    styleUrls: ['./chronic-illnesses-table.component.css'],
+    providers: []
 })
 export class ChronicIllnessesTableComponent implements OnInit {
     public chronic_illness_table_data: ChronicIllnessTableData[] = [];
@@ -17,6 +18,8 @@ export class ChronicIllnessesTableComponent implements OnInit {
     dataSource = new MatTableDataSource(this.chronic_illness_table_data);
 
     @Output() notify: EventEmitter<ChronicIllnessTableData[]> = new EventEmitter<ChronicIllnessTableData[]>();
+    @Input() patientId: number;
+    @Input() personId: number;
 
     constructor(private dialog: MatDialog,
         private snotifyService: SnotifyService,
@@ -25,6 +28,12 @@ export class ChronicIllnessesTableComponent implements OnInit {
     ngOnInit() {
         // emit new chronic illnesses to stepper 
         this.notify.emit(this.newChronic_illnesses);
+
+        this.loadPatientChronicIllnesses();
+    }
+
+    public loadPatientChronicIllnesses() {
+
     }
 
     newChronicIllness() {
