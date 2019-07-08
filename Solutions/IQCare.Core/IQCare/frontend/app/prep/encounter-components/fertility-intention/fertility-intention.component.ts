@@ -1,3 +1,5 @@
+import { PrepService } from './../../_services/prep.service';
+import { PncService } from './../../../pmtct/_services/pnc.service';
 import { LookupItemView } from './../../../shared/_models/LookupItemView';
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
@@ -5,13 +7,15 @@ import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms'
 @Component({
     selector: 'app-fertility-intention',
     templateUrl: './fertility-intention.component.html',
-    styleUrls: ['./fertility-intention.component.css']
+    styleUrls: ['./fertility-intention.component.css'],
+    providers: [PncService]
 })
 export class FertilityIntentionComponent implements OnInit {
     FertilityIntentionForm: FormGroup;
     yesnoOptions: LookupItemView[] = [];
     fpMethods: LookupItemView[] = [];
     planningPregnancy: LookupItemView[] = [];
+    pregnancyStatusOptions: LookupItemView[] = [];
     maxDate: Date;
 
     @Input() FertilityIntentionsOptions: any;
@@ -21,7 +25,9 @@ export class FertilityIntentionComponent implements OnInit {
     @Input() isEdit: number;
     @Output() notify: EventEmitter<FormGroup> = new EventEmitter<FormGroup>();
 
-    constructor(private _formBuilder: FormBuilder) {
+    constructor(private _formBuilder: FormBuilder,
+        private pncservice: PncService,
+        private prepservice: PrepService) {
         this.maxDate = new Date();
     }
 
@@ -46,10 +52,79 @@ export class FertilityIntentionComponent implements OnInit {
         this.FertilityIntentionForm.controls.familyPlanningMethods.disable({ onlySelf: true });
         this.FertilityIntentionForm.controls.planningToGetPregnant.disable({ onlySelf: true });
 
-        const { yesnoOptions, fpMethods, planningPregnancy } = this.FertilityIntentionsOptions[0];
+        const { yesnoOptions, fpMethods, planningPregnancy, pregnancyStatusOptions } = this.FertilityIntentionsOptions[0];
         this.yesnoOptions = yesnoOptions;
         this.fpMethods = fpMethods;
         this.planningPregnancy = planningPregnancy;
+        this.pregnancyStatusOptions = pregnancyStatusOptions;
+
+        if (this.isEdit == 1) {
+            this.loadPregnancyIndicator();
+            this.loadPregnancyIntention();
+            this.loadFamilyPlanning();
+            this.loadFamilyPlanningMethod();
+        }
+    }
+
+    loadPregnancyIndicator(): void {
+        this.prepservice.getPregnancyIndicator(this.patientId, this.patientMasterVisitId).subscribe(
+            (res) => {
+                if (res) {
+                    this.FertilityIntentionForm.controls.lmp.setValue(res.lmp);
+                    this.FertilityIntentionForm.controls.pregnancyPlanned.setValue(res.pregnancyPlanned);
+                    this.FertilityIntentionForm.controls.planningToGetPregnant.setValue(res.planningToGetPregnant);
+
+                    // set pregnancy status
+                    const pregnancyStatus = this.pregnancyStatusOptions.filter(obj => obj.itemId == res.pregnancyStatusId);
+                    if (pregnancyStatus[0].displayName == 'Pregnant') {
+                        const yesOption = this.yesnoOptions.filter(obj => obj.itemName == 'Yes');
+                        this.FertilityIntentionForm.controls.pregnant.setValue(yesOption[0].itemId);
+                    } else {
+                        const noOption = this.yesnoOptions.filter(obj => obj.itemName == 'No');
+                        this.FertilityIntentionForm.controls.pregnant.setValue(noOption[0].itemId);
+                    }
+                }
+            },
+            (error) => {
+                console.log(error);
+            }
+        );
+    }
+
+    loadFamilyPlanningMethod(): void {
+        this.pncservice.getFamilyPlanningMethod(this.patientId).subscribe(
+            (res) => {
+                if (res.length > 0) {
+                    res.forEach(element => {
+                        this.FertilityIntentionForm.controls.familyPlanningMethods.setValue(element.fpMethodId);
+                    });
+                }
+            },
+            (error) => {
+                console.log(error);
+            }
+        );
+    }
+
+    loadFamilyPlanning(): void {
+        this.pncservice.getFamilyPlanning(this.patientId).subscribe(
+            (res) => {
+                if (res.length > 0) {
+                    res.forEach(element => {
+                        if (element.patientMasterVisitId == this.patientMasterVisitId) {
+                            this.FertilityIntentionForm.controls.onFamilyPlanning.setValue(element.familyPlanningStatusId);
+                        }
+                    });
+                }
+            },
+            (error) => {
+                console.log(error);
+            }
+        );
+    }
+
+    loadPregnancyIntention(): void {
+
     }
 
     onClientFPSelection(event) {

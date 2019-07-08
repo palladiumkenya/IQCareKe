@@ -5,6 +5,7 @@ using Entities.CCC.Appointment;
 using Interface.CCC;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace BusinessProcess.CCC
 {
@@ -108,6 +109,18 @@ namespace BusinessProcess.CCC
             {
                 List<PatientAppointment> appointments =
                         unitOfWork.PatientAppointmentRepository.GetByDateRange(startDate, endDate);
+                unitOfWork.Dispose();
+                return appointments;
+            }
+        }
+
+        public List<PatientAppointment> GetAppointmentByType(int patientId, int patientMasterVisitId, DateTime date, int appointmentType)
+        {
+            using (UnitOfWork unitOfWork = new UnitOfWork(new GreencardContext()))
+            {
+                List<PatientAppointment> appointments = unitOfWork.PatientAppointmentRepository.FindBy(x =>
+                    x.AppointmentDate == date && x.PatientId == patientId &&
+                    x.PatientMasterVisitId == patientMasterVisitId && x.ReasonId == appointmentType).ToList();
                 unitOfWork.Dispose();
                 return appointments;
             }

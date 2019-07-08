@@ -231,6 +231,7 @@
     <None Remove="Scripts\2.0.1\PREP\8_Behaviour Risk Assessment.sql" />
     <None Remove="Scripts\2.0.1\PREP\9_RiskAssessment.sql" />
     <None Remove="Scripts\2.1.0\01_IQCare_CHS_Final.sql" />
+    <None Remove="Scripts\2.1.0\02_PatientLabTracker_Delete_LabOrder.sql" />
   </ItemGroup>
 
   <ItemGroup>
@@ -479,6 +480,7 @@
     <EmbeddedResource Include="Scripts\2.0.1\PREP\8_Behaviour Risk Assessment.sql" />
     <EmbeddedResource Include="Scripts\2.0.1\PREP\9_RiskAssessment.sql" />
     <EmbeddedResource Include="Scripts\2.1.0\01_IQCare_CHS_Final.sql" />
+    <EmbeddedResource Include="Scripts\2.1.0\02_PatientLabTracker_Delete_LabOrder.sql" />
   </ItemGroup>
 
   <ItemGroup>

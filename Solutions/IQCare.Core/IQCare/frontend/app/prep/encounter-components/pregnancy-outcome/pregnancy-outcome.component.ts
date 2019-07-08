@@ -16,6 +16,10 @@ export class PregnancyOutcomeComponent implements OnInit {
     maxDate: Date;
 
     @Input() PregnancyOutcomeOptions: any;
+    @Input() patientId: number;
+    @Input() personId: number;
+    @Input() patientMasterVisitId: number;
+    @Input() isEdit: number;
     @Output() notify: EventEmitter<FormGroup> = new EventEmitter<FormGroup>();
 
     constructor(private _formBuilder: FormBuilder) {
@@ -37,6 +41,9 @@ export class PregnancyOutcomeComponent implements OnInit {
         this.yesnoOptions = yesnoOptions;
         this.yesNoDontKnowOptions = yesNoDontKnowOptions;
         this.pregnancyOutcomeOptions = pregnancyOutcomeOptions;
+
+        if (this.isEdit == 1) {
+        }
     }
 
     onPregnancyEndedSelection(event) {

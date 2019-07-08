@@ -7,7 +7,7 @@ import { LookupItemView } from './../../shared/_models/LookupItemView';
 import { Component, OnInit, NgZone, ViewChild } from '@angular/core';
 import { FormArray, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { forkJoin } from 'rxjs';
+import { forkJoin, of } from 'rxjs';
 import { PrepStatusCommand } from '../_models/commands/PrepStatusCommand';
 import { FamilyPlanningCommand } from '../../pmtct/_models/FamilyPlanningCommand';
 import { FamilyPlanningMethodCommand } from '../../pmtct/_models/FamilyPlanningMethodCommand';
@@ -142,7 +142,8 @@ export class PrepEncounterComponent implements OnInit {
         this.FertilityIntentionsOptions.push({
             'yesnoOptions': this.yesnoOptions,
             'fpMethods': this.familyPlanningMethodsOptions,
-            'planningPregnancy': this.planningPregnancyOptions
+            'planningPregnancy': this.planningPregnancyOptions,
+            'pregnancyStatusOptions': this.pregnancyStatusOptions
         });
 
         this.PregnancyOutcomeOptions.push({
@@ -174,8 +175,10 @@ export class PrepEncounterComponent implements OnInit {
     public onVisitDetailsNext() {
         if (this.personGender.toLowerCase() == 'male') {
             this.stepper.selectedIndex = 1;
+            this.isOptionalObsGyn = true;
         } else if (this.personGender.toLowerCase() == 'female') {
             this.stepper.selectedIndex = 2;
+            this.isOptionalCircumcision = true;
         }
     }
 
@@ -226,6 +229,14 @@ export class PrepEncounterComponent implements OnInit {
     }
 
     onSubmitForm() {
+        if (this.isEdit == 1) {
+            this.onPrepEncounterEdit();
+        } else {
+            this.onPrepNewEncounter();
+        }
+    }
+
+    onPrepNewEncounter() {
         // create prep status command
         const prepStatusCommand: PrepStatusCommand = {
             Id: 0,
@@ -394,12 +405,22 @@ export class PrepEncounterComponent implements OnInit {
 
         const prepStiScreeningTreatmentCommand = this.prepService.StiScreeningTreatment(STIScreeningCommand);
         const prepStatusApiCommand = this.prepService.savePrepStatus(prepStatusCommand);
-        const pncFamilyPlanning = this.pncService.savePncFamilyPlanning(familyPlanningCommand);
+
+        // add family planning for females
+        const pncFamilyPlanning = this.personGender.toLowerCase() == 'male' ? of([]) :
+            this.pncService.savePncFamilyPlanning(familyPlanningCommand);
+
         const chronicIllness = this.ancService.savePatientChronicIllness(this.chronic_illness_data);
         const adverseEvents = this.prepService.savePatientAdverseEvents(this.adverseEvents_data);
         const allergies = this.prepService.savePatientAllergies(this.allergies_data);
-        const circumcisionStatus = this.prepService.saveCircumcisionStatus(clientCircumcisionStatusCommand);
-        const pregnancyIndicator = this.prepService.savePregnancyIndicatorCommand(pregnancyIndicatorCommand);
+
+        // add circumcision for males
+        const circumcisionStatus = this.personGender.toLowerCase() == 'male' ?
+            this.prepService.saveCircumcisionStatus(clientCircumcisionStatusCommand) : of([]);
+
+        // add pregnancy for pregnancy indicator
+        const pregnancyIndicator = this.personGender.toLowerCase() == 'male' ? of([]) :
+            this.prepService.savePregnancyIndicatorCommand(pregnancyIndicatorCommand);
         const matNextAppointment = this.matService.saveNextAppointment(nextAppointmentCommand);
 
         forkJoin([
@@ -413,7 +434,6 @@ export class PrepEncounterComponent implements OnInit {
             matNextAppointment,
             prepStiScreeningTreatmentCommand]).subscribe(
                 (result) => {
-                    console.log(result);
                     familyPlanningMethodCommand.PatientFPId = result[1]['patientId'];
                     const pncFamilyPlanningMethod = this.pncService.savePncFamilyPlanningMethod(familyPlanningMethodCommand).subscribe(
                         (res) => {
@@ -430,5 +450,9 @@ export class PrepEncounterComponent implements OnInit {
                     console.log(error);
                 }
             );
+    }
+
+    onPrepEncounterEdit() {
+        console.log(`editing`);
     }
 }

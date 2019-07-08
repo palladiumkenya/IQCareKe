@@ -245,7 +245,7 @@ namespace IQCare.Web.CCC.Patient
                 int adherenceType = 34;
                 if (adherenceList.Count > 0)
                 {
-                    adherenceType = adherenceList[0].ItemId;
+                    adherenceType = adherenceList[0].MasterId;
                 }
 
                 var adheranceStatus = patientAdheLookupManager.GetPatientAdherence(PatientId, adherenceType);
