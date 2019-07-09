@@ -1,3 +1,4 @@
+import { AncService } from './../../../pmtct/_services/anc.service';
 import { Component, OnInit, EventEmitter, Output, Input } from '@angular/core';
 import { MatTableDataSource, MatDialogConfig, MatDialog } from '@angular/material';
 import { PatientChronicIllnessesComponent } from '../patient-chronic-illnesses/patient-chronic-illnesses.component';
@@ -8,7 +9,7 @@ import { SnotifyService } from 'ng-snotify';
     selector: 'app-chronic-illnesses-table',
     templateUrl: './chronic-illnesses-table.component.html',
     styleUrls: ['./chronic-illnesses-table.component.css'],
-    providers: []
+    providers: [AncService]
 })
 export class ChronicIllnessesTableComponent implements OnInit {
     public chronic_illness_table_data: ChronicIllnessTableData[] = [];
@@ -23,7 +24,8 @@ export class ChronicIllnessesTableComponent implements OnInit {
 
     constructor(private dialog: MatDialog,
         private snotifyService: SnotifyService,
-        private notificationService: NotificationService) { }
+        private notificationService: NotificationService,
+        private ancservice: AncService) { }
 
     ngOnInit() {
         // emit new chronic illnesses to stepper 
@@ -33,7 +35,22 @@ export class ChronicIllnessesTableComponent implements OnInit {
     }
 
     public loadPatientChronicIllnesses() {
+        this.ancservice.getPatientChronicIllnessInfo(this.patientId).subscribe(
+            (res) => {
+                res.forEach(chronicIllnessData => {
+                    this.chronic_illness_table_data.push({
+                        illness: chronicIllnessData.chronicIllness,
+                        currentTreatment: chronicIllnessData.treatment,
+                        onsetDate: chronicIllnessData.onsetDate
+                    });
+                });
 
+                this.dataSource = new MatTableDataSource(this.chronic_illness_table_data);
+            },
+            (error) => {
+                console.log(error);
+            }
+        );
     }
 
     newChronicIllness() {

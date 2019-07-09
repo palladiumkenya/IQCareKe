@@ -14,5 +14,7 @@ namespace IQCare.Prep.BusinessProcess.Commands
         public int ContraindicationsPrepPresent { get; set; }
         public int PrepStatusToday { get; set; }
         public int CreatedBy { get; set; }
+        public int? CondomsIssued { get; set; }
+        public int? NoOfCondoms { get; set; }
     }
 }

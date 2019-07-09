@@ -27,7 +27,7 @@
                     <mat-header-cell *matHeaderCellDef><strong>Adverse Events</strong> </mat-header-cell>
                     <mat-cell *matCellDef="let AdverseEventsTableData">
                         {{
-                            AdverseEventsTableData.adverseEvent.itemName
+                            AdverseEventsTableData.adverseEvent
                         }}
                     </mat-cell>
                 </ng-container>
@@ -37,7 +37,7 @@
                     <mat-header-cell *matHeaderCellDef><strong>Severity</strong></mat-header-cell>
                     <mat-cell *matCellDef="let AdverseEventsTableData">
                         {{
-                            AdverseEventsTableData.severity.itemName
+                            AdverseEventsTableData.severity
                         }}
                     </mat-cell>
                 </ng-container>
@@ -57,7 +57,7 @@
                     <mat-header-cell *matHeaderCellDef> <strong>Adverse Event Action</strong> </mat-header-cell>
                     <mat-cell *matCellDef="let AdverseEventsTableData">
                         {{
-                            AdverseEventsTableData.adverseEventsAction.displayName
+                            AdverseEventsTableData.adverseEventsAction
                         }}
                     </mat-cell>
                 </ng-container>

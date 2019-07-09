@@ -368,9 +368,7 @@ export class RegisterComponent implements OnInit {
 
             this.personRegistration.registerPerson(this.person).subscribe(
                 (response) => {
-                    console.log(response);
                     const { personId } = response;
-                    console.log(personId);
 
                     // Add Contact
                     const personContact = this.personRegistration.addPersonContact(personId, this.person.createdBy, this.clientContact);
@@ -396,7 +394,7 @@ export class RegisterComponent implements OnInit {
                         personEducationLevel, personOccupation, personEmergencyContact,
                         personIdentifiersAdd]).subscribe(
                             (forkRes) => {
-                                console.log(forkRes);
+                                // console.log(forkRes);
                             },
                             (forkError) => {
                                 this.snotifyService.error('Error creating person ' + forkError, 'Person Registration',

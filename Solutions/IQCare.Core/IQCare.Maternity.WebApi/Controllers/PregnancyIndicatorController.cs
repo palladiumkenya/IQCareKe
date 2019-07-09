@@ -28,5 +28,19 @@ namespace IQCare.Maternity.WebApi.Controllers
                 return Ok(result.Value);
             return BadRequest(result);
         }
+
+        [HttpGet("{patientId}/{patientMasterVisitId}")]
+        public async Task<IActionResult> GetPregnancyIndicator(int patientId, int patientMasterVisitId)
+        {
+            var result = await _mediator.Send(new GetPregnancyIndicatorCommand()
+            {
+                PatientId = patientId,
+                PatientMasterVisitId = patientMasterVisitId
+            }, Request.HttpContext.RequestAborted);
+
+            if (result.IsValid)
+                return Ok(result.Value);
+            return BadRequest(result);
+        }
     }
 }
