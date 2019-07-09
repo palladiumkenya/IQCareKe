@@ -33,6 +33,8 @@ export class HtsComponent implements OnInit {
     minDate: Date;
     serviceCode: string;
     isEdit: boolean = false;
+    ageNumber: number;
+    ageInMonths: number;
 
     priorityPops: LookupItemView[] = [];
     keyPops: LookupItemView[] = [];
@@ -72,6 +74,7 @@ export class HtsComponent implements OnInit {
         );
         this.userId = JSON.parse(localStorage.getItem('appUserId'));
         this.posId = localStorage.getItem('appPosID');
+        this.ageNumber = parseInt(JSON.parse(localStorage.getItem('ageNumber')), 10);
 
         this.form = this._formBuilder.group({
             EnrollmentDate: new FormControl('', [Validators.required]),
@@ -82,6 +85,10 @@ export class HtsComponent implements OnInit {
             priorityPopulation: new FormControl('', [Validators.required]),
         });
 
+        if (this.ageNumber < 15) {
+            this.form.controls.populationType.disable({ onlySelf: true });
+            this.form.controls.priorityPop.disable({ onlySelf: true });
+        }
         this.form.controls.KeyPopulation.disable({ onlySelf: true });
         this.form.controls.priorityPopulation.disable({ onlySelf: true });
 
@@ -106,14 +113,12 @@ export class HtsComponent implements OnInit {
 
         this.recordsService.getPersonDetails(this.personId).subscribe(
             (res) => {
-                // console.log(res);
                 const { registrationDate } = res[0];
                 if (registrationDate) {
                     this.minDate = registrationDate;
                 } else {
                     this.minDate = new Date();
                 }
-
             }
         );
 
@@ -121,6 +126,12 @@ export class HtsComponent implements OnInit {
             (res) => {
                 const { identifiers, serviceAreaIdentifiers } = res;
                 this.serviceAreaIdentifiers = serviceAreaIdentifiers;
+            }
+        );
+
+        this.personHomeService.getPatientByPersonId(this.personId).subscribe(
+            (res) => {
+                this.ageInMonths = parseInt(res.ageInMonths, 10);
             }
         );
 
@@ -192,13 +203,15 @@ export class HtsComponent implements OnInit {
                     if (result[0].populationType == 'General Population') {
                         this.form.controls.populationType.setValue(1);
                     } else {
-                        this.form.controls.populationType.setValue(2);
-                        this.form.controls.KeyPopulation.enable({ onlySelf: false });
-                        const arrayValue = [];
-                        result.forEach(element => {
-                            arrayValue.push(element.populationCategory);
-                        });
-                        this.form.controls.KeyPopulation.setValue(arrayValue);
+                        if (this.ageNumber >= 15) {
+                            this.form.controls.populationType.setValue(2);
+                            this.form.controls.KeyPopulation.enable({ onlySelf: false });
+                            const arrayValue = [];
+                            result.forEach(element => {
+                                arrayValue.push(element.populationCategory);
+                            });
+                            this.form.controls.KeyPopulation.setValue(arrayValue);
+                        }
                     }
                 }
             },
@@ -221,20 +234,20 @@ export class HtsComponent implements OnInit {
 
     public onPopulationTypeChange() {
         const popType = this.form.controls.populationType.value;
-        if (popType == 1) {
+        if (popType == 1 && this.ageNumber >= 15) {
             this.form.controls.KeyPopulation.disable({ onlySelf: true });
             this.form.controls.KeyPopulation.setValue([]);
-        } else if (popType == 2) {
+        } else if (popType == 2 && this.ageNumber >= 15) {
             this.form.controls.KeyPopulation.enable({ onlySelf: false });
         }
     }
 
     public onPriorityChange() {
         const priorityPop = this.form.controls.priorityPop.value;
-        if (priorityPop == 2) {
+        if (priorityPop == 2 && this.ageNumber >= 15) {
             this.form.controls.priorityPopulation.disable({ onlySelf: true });
             this.form.controls.priorityPopulation.setValue([]);
-        } else if (priorityPop == 1) {
+        } else if (priorityPop == 1 && this.ageNumber >= 15) {
             this.form.controls.priorityPopulation.enable({ onlySelf: false });
         }
     }
@@ -291,6 +304,7 @@ export class HtsComponent implements OnInit {
                             this.patientId).subscribe();
 
 
+                        localStorage.setItem('ageInMonths', this.ageInMonths.toString());
                         this.zone.run(() => {
                             localStorage.setItem('personId', this.personId.toString());
                             localStorage.setItem('patientId', this.patientId.toString());

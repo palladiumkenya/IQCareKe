@@ -162,7 +162,7 @@ namespace IQCare.HTS.BusinessProcess.CommandHandlers
                     }
 
                     //update message has been processed
-                    await registerPersonService.UpdateAfyaMobileInbox(afyaMobileMessage.Id, afyaMobileId, true, DateTime.Now, "success", true);
+                    await registerPersonService.UpdateAfyaMobileInbox(afyaMobileMessage.Id, afyaMobileId, true, DateTime.Now, $"Successfully synchronized HTS encounter for afyamobileid: {afyaMobileId}", true);
                     trans.Commit();
                     return Result<string>.Valid($"Successfully synchronized HTS encounter for afyamobileid: {afyaMobileId}");
                 }

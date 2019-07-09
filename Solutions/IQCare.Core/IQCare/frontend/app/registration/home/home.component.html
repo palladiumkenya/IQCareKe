@@ -89,14 +89,19 @@
                         &nbsp;
                     </div>
 
-                    <div class="button-row pull-right">
+                    <div class="button-row pull-right"
+                        *ngIf="(ageInMonths && ageInMonths>=18); else notEligibleTemplate">
                         <a mat-raised-button color="accent" routerLink="/hts">
                             <i class="fa fa-plus"></i>
                             <span *ngIf="!isPositive">New HTS Encounter</span>
-                            <span *ngIf="isPositive">Repeat Test</span>
+                            <span *ngIf="isPositive">Repeat/Retest Test</span>
                         </a>
                     </div>
-
+                    <ng-template #notEligibleTemplate>
+                        <span class="button-row pull-right label label-orange">
+                            Under 18 months(Not eligible for testing)
+                        </span>
+                    </ng-template>
                 </div>
             </div>
 

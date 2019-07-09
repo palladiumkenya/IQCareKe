@@ -1,11 +1,8 @@
-﻿using IQCare.WebApi.Logic.MessageHandler;
+﻿using Entity.WebApi.PSmart;
+using IQCare.WebApi.Logic.MessageHandler;
 using System;
 using System.Collections.Generic;
-using System.Net.Http;
-using System.Text;
 using System.Web.Http;
-using System.Web.Script.Serialization;
-using Entity.WebApi.PSmart;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 

@@ -69,8 +69,14 @@ namespace IQCare.Common.BusinessProcess.Services
             {
                 var result = await _unitOfWork.Repository<Decode>()
                     .Get(x => x.Name.ToLower().Contains(name.ToLower()) && x.CodeID == codeId).FirstOrDefaultAsync();
-
-                return result.ID;
+                if (result != null)
+                {
+                    return result.ID;
+                }
+                else
+                {
+                    return 0;
+                }
             }
             catch (Exception e)
             {

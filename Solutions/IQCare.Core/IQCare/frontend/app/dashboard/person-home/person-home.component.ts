@@ -81,7 +81,6 @@ export class PersonHomeComponent implements OnInit {
 
             if (this.personvitals.length > 0) {
                 this.personVitalWeight = this.personvitals['0'].weight;
-                console.log(this.personVitalWeight + 'Correct Weight');
             }
             if (this.careenddetails != null) {
                 this.exitreason = this.careenddetails['exitReason'];
@@ -110,10 +109,6 @@ export class PersonHomeComponent implements OnInit {
         });
 
         this.encounterDetail = this.htsencounters[0];
-        /*console.log("HTSEncounters");
-        console.log(this.htsencounters[0]);
-        console.log(this.encounterDetail);*/
-
 
         localStorage.removeItem('patientEncounterId');
         localStorage.removeItem('patientMasterVisitId');
@@ -134,7 +129,6 @@ export class PersonHomeComponent implements OnInit {
     public getPatientDetailsById(personId: number) {
         this.personView$ = this.personService.getPatientByPersonId(personId).subscribe(
             p => {
-                // console.log(p);
                 this.person = p;
 
                 localStorage.setItem('personId', this.person.personId.toString());

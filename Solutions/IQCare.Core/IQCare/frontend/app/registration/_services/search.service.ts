@@ -8,8 +8,13 @@ import { Search } from '../_models/search';
 import { ErrorHandlerService } from '../../shared/_services/errorhandler.service';
 
 const httpOptions = {
-    headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+    headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
 };
+
+httpOptions.headers.append('Access-Control-Allow-Origin', 'http://' + location.protocol + '//'
+    + window.location.hostname + ':' + window.location.port + '/frontend');
+httpOptions.headers.append('Access-Control-Allow-Origin', 'https://' + location.protocol + '//'
+    + window.location.hostname + ':' + window.location.port + '/frontend');
 
 @Injectable()
 export class SearchService {

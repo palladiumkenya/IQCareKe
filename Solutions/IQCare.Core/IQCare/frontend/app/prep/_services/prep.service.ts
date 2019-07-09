@@ -38,6 +38,13 @@ export class PrepService {
             );
     }
 
+    public getStiScreeningTreatment(patientId: number, patientMasterVisitId: number): Observable<any[]> {
+        return this.http.get<any[]>(this.MATERNITY_API_URL + '/api/PatientScreening/' + patientId + '/' + patientMasterVisitId).pipe(
+            tap(getStiScreeningTreatment => this.errorHandler.log(`successfully fetched sti screening details`)),
+            catchError(this.errorHandler.handleError<any>('Error fetching sti screening details'))
+        );
+    }
+
     public savePrepStatus(prepStatusCommand: PrepStatusCommand): Observable<any> {
         return this.http.post<any>(this.PREP_API_URL + '/api/PrepStatus/AddPrepStatus',
             JSON.stringify(prepStatusCommand), httpOptions).pipe(
@@ -46,6 +53,12 @@ export class PrepService {
             );
     }
 
+    public getPrepStatus(patientId: number, patientEncounterId: number): Observable<any[]> {
+        return this.http.get<any[]>(this.PREP_API_URL + '/api/PrepStatus/GetPrepStatus/' + patientId + '/' + patientEncounterId).pipe(
+            tap(getPrepStatus => this.errorHandler.log(`successfully fetched prep status details`)),
+            catchError(this.errorHandler.handleError<any>('Error fetching prep status'))
+        );
+    }
 
     public savePatientAdverseEvents(adverseEventsCommand: any[]): Observable<any> {
         if (adverseEventsCommand.length == 0) {
@@ -59,6 +72,13 @@ export class PrepService {
         return this.http.post<any>(this.API_URL + '/api/AdverseEvents/AddAdverseEvents', JSON.stringify(Indata), httpOptions).pipe(
             tap(savePatientAdverseEvents => this.errorHandler.log('Successfully saved adverse events')),
             catchError(this.errorHandler.handleError<any>('Error in saving Patient Adverse Events'))
+        );
+    }
+
+    public getPatientAdverseEvents(patientId: number): Observable<any[]> {
+        return this.http.get<any[]>(this.API_URL + '/api/AdverseEvents/GetPatientAdverseEvents/' + patientId).pipe(
+            tap(getPatientAdverseEvents => this.errorHandler.log('Successfully fetched adverse events')),
+            catchError(this.errorHandler.handleError<any>('Error in fetching Patient Adverse Events'))
         );
     }
 
@@ -77,12 +97,26 @@ export class PrepService {
         );
     }
 
+    public getPatientAllergies(patientId: number): Observable<any[]> {
+        return this.http.get<any[]>(this.API_URL + '/api/PatientAllergy/GetPatientAllergy/' + patientId).pipe(
+            tap(getPatientAllergies => this.errorHandler.log('Successfully fetched patient allergies')),
+            catchError(this.errorHandler.handleError<any>('Error in fetching Patient Allergies'))
+        );
+    }
+
     public saveCircumcisionStatus(clientCircumcisionStatusCommand: ClientCircumcisionStatusCommand): Observable<any> {
         return this.http.post<any>(this.PREP_API_URL + '/api/CircumcisionStatus/AddCircumcisionStatus',
             JSON.stringify(clientCircumcisionStatusCommand), httpOptions).pipe(
                 tap(saveCircumcisionStatus => this.errorHandler.log('Successfully saved patient circumcision status')),
                 catchError(this.errorHandler.handleError<any>('Error in saving Patient circumcision status'))
             );
+    }
+
+    public getCircumcisionStatus(patientId: number): Observable<any> {
+        return this.http.get<any>(this.PREP_API_URL + '/api/CircumcisionStatus/GetCircumcisionStatus/' + patientId).pipe(
+            tap(getCircumcisionStatus => this.errorHandler.log('Successfully saved patient circumcision status')),
+            catchError(this.errorHandler.handleError<any>('Error in saving Patient circumcision status'))
+        );
     }
 
     public savePregnancyIndicatorCommand(pregnancyIndicatorCommand: PregnancyIndicatorCommand): Observable<any> {

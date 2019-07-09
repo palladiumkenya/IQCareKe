@@ -15,7 +15,7 @@ FOR /F %%I IN ("%0") DO SET BATDIR=%%~dpI
 CD /D %BATDIR%
 @echo %BATDIR%
 
-Set config=Release
+Set config=debug
 set log=builder.log
 set msbuildpath=C:\Program Files (x86)\Microsoft Visual Studio\2017\Enterprise\MSBuild\15.0\Bin\MSBuild.exe
 set msbuildpatha=C:\Program Files (x86)\MSBuild\14.0\Bin\MSBuild.exe
@@ -170,6 +170,15 @@ dotnet publish Solutions/IQCare.Core/IQCare.Common.Web/IQCare.Common.Web.csproj 
 
 @echo ********** END OF BUILINDING IQCare COMMON WEB ********** >> %log%
 @echo ********** END OF BUILINDING IQCare COMMON WEB ********** >> %log%
+
+
+@echo "********** Building IQCare AIR WEB **********" >> %log%
+@echo ********** Building IQCare AIR WEB **********
+
+dotnet publish Solutions/IQCare.Core/IQCare.AIR.Web/IQCare.AIR.Web.csproj -o ../../../package/air
+
+@echo ********** END OF BUILINDING IQCare AIR WEB ********** >> %log%
+@echo ********** END OF BUILINDING IQCare AIR WEB ********** >> %log%
 
 
 dotnet publish Solutions/IQCare.Core/IQCare.Core.DbMigration/IQCare.Core.DbMigration.csproj -o ../../../Release/DbMigration/win-x64 -r win-x64

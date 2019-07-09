@@ -35,6 +35,7 @@ export class CccComponent implements OnInit {
     userId: number;
     posId: string;
     isEdit: boolean = false;
+    ageNumber: number;
 
     maxDate: Date;
     minDate: Date;
@@ -79,6 +80,7 @@ export class CccComponent implements OnInit {
             }
         });
         this.userId = JSON.parse(localStorage.getItem('appUserId'));
+        this.ageNumber = parseInt(JSON.parse(localStorage.getItem('ageNumber')), 10);
         this.posId = localStorage.getItem('appPosID');
         this.personPopulation = new PersonPopulation();
 
@@ -101,6 +103,10 @@ export class CccComponent implements OnInit {
         this.form.controls.ReConfirmatoryTestDate.disable({ onlySelf: true });
         this.form.controls.EnrollmentDate.disable({ onlySelf: true });
         this.form.controls.EntryPoint.disable({ onlySelf: true });
+
+        if (this.ageNumber < 15) {
+            this.form.controls.populationType.disable({ onlySelf: true });
+        }
 
         this._lookupItemService.getByGroupName('KeyPopulation').subscribe(
             (res) => {
@@ -271,13 +277,15 @@ export class CccComponent implements OnInit {
                     if (result[0].populationType == 'General Population') {
                         this.form.controls.populationType.setValue(1);
                     } else {
-                        this.form.controls.populationType.setValue(2);
-                        this.form.controls.KeyPopulation.enable({ onlySelf: false });
-                        const arrayValue = [];
-                        result.forEach(element => {
-                            arrayValue.push(element.populationCategory);
-                        });
-                        this.form.controls.KeyPopulation.setValue(arrayValue);
+                        if (this.ageNumber >= 15) {
+                            this.form.controls.populationType.setValue(2);
+                            this.form.controls.KeyPopulation.enable({ onlySelf: false });
+                            const arrayValue = [];
+                            result.forEach(element => {
+                                arrayValue.push(element.populationCategory);
+                            });
+                            this.form.controls.KeyPopulation.setValue(arrayValue);
+                        }
                     }
                 }
             },
@@ -292,7 +300,7 @@ export class CccComponent implements OnInit {
         if (popType == 1) {
             this.form.controls.KeyPopulation.disable({ onlySelf: true });
             this.form.controls.KeyPopulation.setValue([]);
-        } else if (popType == 2) {
+        } else if (popType == 2 && this.ageNumber >= 15) {
             this.form.controls.KeyPopulation.enable({ onlySelf: false });
         }
     }

@@ -98,8 +98,8 @@ namespace IQCare.HTS.BusinessProcess.CommandHandlers
                 catch (Exception ex)
                 {
                     trans.Rollback();
-                    Log.Error($"Failed to synchronize Hts Referral for clientid: {afyaMobileId} " + ex.Message + " " + ex.InnerException);
-                    return Result<string>.Invalid($"Failed to synchronize Hts Referral for clientid: {afyaMobileId} " + ex.Message + " " + ex.InnerException);
+                    Log.Error($"Failed to synchronize Hts Tracing for clientid: {afyaMobileId} " + ex.Message + " " + ex.InnerException);
+                    return Result<string>.Invalid($"Failed to synchronize Hts Tracing for clientid: {afyaMobileId} " + ex.Message + " " + ex.InnerException);
                 }
             }
         }

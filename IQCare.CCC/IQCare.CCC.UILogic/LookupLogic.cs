@@ -3,6 +3,7 @@ using Interface.CCC;
 using Interface.CCC.Lookup;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Web.Script.Serialization;
 using System.Web.UI.WebControls;
 using Application.Presentation;
@@ -579,6 +580,48 @@ namespace IQCare.CCC.UILogic
             catch (Exception e)
             {
                 throw new Exception(e.Message);
+            }
+        }
+
+        public DataTable GetCouncellingTypes()
+        {
+            try
+            {
+                ILookupManager lookupManager = (ILookupManager)ObjectFactory.CreateInstance("BusinessProcess.CCC.BLookupManager,BusinessProcess.CCC");
+
+                return lookupManager.GetCouncellingTypes();
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
+
+        public DataTable GetCouncellingTopics()
+        {
+            try
+            {
+                ILookupManager lookupManager = (ILookupManager)ObjectFactory.CreateInstance("BusinessProcess.CCC.BLookupManager,BusinessProcess.CCC");
+
+                return lookupManager.GetCouncellingTopics();
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
+
+        public DataTable GetLnkCouncellingTypeTopics()
+        {
+            try
+            {
+                ILookupManager lookupManager = (ILookupManager)ObjectFactory.CreateInstance("BusinessProcess.CCC.BLookupManager,BusinessProcess.CCC");
+
+                return lookupManager.GetLnkCouncellingTypeTopic();
+            }
+            catch (Exception e)
+            {
+                throw e;
             }
         }
     }

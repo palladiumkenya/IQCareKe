@@ -99,6 +99,16 @@ namespace IQCare.HTS.BusinessProcess.CommandHandlers
                                 var tracingOutcome = await encounterTestingService.addTracing(partnetPersonIdentifiers[0].PersonId, tracingType,
                                     tracingDate, mode, outcome, 1, null, consent, tracingBookingDate, null);
                             }
+
+                            var stringParnerObject = Newtonsoft.Json.JsonConvert.SerializeObject(new
+                            {
+                                partnerId = partnetPersonIdentifiers[0].PersonId,
+                                pnsTraced = true
+                            });
+
+                            var partnerScreeningDone =
+                                await registerPersonService.AddAppStateStore(indexClient.PersonId, indexClient.Id, 9,
+                                    null, null, stringParnerObject);
                         }
                         else
                         {
@@ -115,14 +125,14 @@ namespace IQCare.HTS.BusinessProcess.CommandHandlers
                     }
 
                     //update message has been processed
-                    await registerPersonService.UpdateAfyaMobileInbox(afyaMobileMessage.Id, afyaMobileId, true, DateTime.Now, $"Index clientid: {indexClientAfyaMobileId} for partnerid: {afyaMobileId} not found", true);
+                    await registerPersonService.UpdateAfyaMobileInbox(afyaMobileMessage.Id, afyaMobileId, true, DateTime.Now, $"Successfully synchronized partner tracing for clientid: {indexClientAfyaMobileId} and partnerid: {afyaMobileId}", true);
                     trans.Commit();
                     return Result<string>.Valid($"Successfully synchronized partner tracing for afyamobileid: {afyaMobileId}");
                 }
                 catch (Exception ex)
                 {
                     trans.Rollback();
-                    Log.Error(ex.Message);
+                    Log.Error($"Failed to synchronize partner tracing for clientId: {afyaMobileId} " + ex.Message + " " + ex.InnerException);
                     return Result<string>.Invalid($"Failed to synchronize partner tracing for clientId: {afyaMobileId} " + ex.Message + " " + ex.InnerException);
                 }
             }

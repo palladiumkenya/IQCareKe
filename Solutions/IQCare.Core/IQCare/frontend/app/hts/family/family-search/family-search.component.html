@@ -28,7 +28,8 @@
                                                 <mat-label>Is Client Registered in this Facility ? </mat-label>
                                                 <mat-select formControlName="isRegisteredInFacility" required>
                                                     <mat-option [value]=""></mat-option>
-                                                    <mat-option *ngFor="let yesnoOption of yesnoOptions" [value]="yesnoOption.itemId"
+                                                    <mat-option *ngFor="let yesnoOption of yesnoOptions"
+                                                        [value]="yesnoOption.itemId"
                                                         (onSelectionChange)="onRegisteredChange($event)">
                                                         {{yesnoOption.itemName}}
                                                     </mat-option>
@@ -37,10 +38,10 @@
                                         </div>
 
                                         <div class="col-lg-3 col-sm-3 col-xs-12">
-                                            <button mat-raised-button class="mat-primary" (click)="findFamilyOrPartner()"
-                                                *ngIf="findRegistered">
+                                            <button mat-raised-button class="mat-primary"
+                                                (click)="findFamilyOrPartner()" *ngIf="findRegistered">
                                                 <span class="fa fa-plus-circle">
-                                                    Find Family
+                                                    Find Contact
                                                 </span>
                                             </button>
 
@@ -115,7 +116,8 @@
                                                     <mat-cell *matCellDef="let element"> {{element.gender }} </mat-cell>
                                                 </ng-container>
 
-                                                <mat-header-row *matHeaderRowDef="displayedColumns" [style.background]="'#f5f5f5'"></mat-header-row>
+                                                <mat-header-row *matHeaderRowDef="displayedColumns"
+                                                    [style.background]="'#f5f5f5'"></mat-header-row>
                                                 <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
                                             </mat-table>
                                         </div>
@@ -128,7 +130,8 @@
                                     <div class="row">
                                         <div class="col-lg-3 col-sm-3 col-xs-12">
                                             <div class="form-group">
-                                                <button type="submit" mat-raised-button color="primary" (click)="saveRelationship()">
+                                                <button type="submit" mat-raised-button color="primary"
+                                                    (click)="saveRelationship()">
                                                     <strong>Save Changes</strong>
                                                 </button>
                                             </div>

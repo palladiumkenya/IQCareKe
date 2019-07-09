@@ -73,7 +73,7 @@ export class PersonHomeService {
     }
 
     public getPatientAllergies(patientId: number): Observable<any> {
-        return this.http.get<any>(this.API_URL + '/api/PatientAllergy/GetPatientAllergy?patientId=' + patientId).pipe(
+        return this.http.get<any>(this.API_URL + '/api/PatientAllergy/GetPatientAllergy/' + patientId).pipe(
             tap(getPatientAllergies => this.errorHandler.log('get patient Allergy')),
             catchError(this.errorHandler.handleError<any[]>('getPatientAllergies'))
         );

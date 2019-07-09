@@ -64,6 +64,7 @@ namespace IQCare.Controllers.Shared
 
             return BadRequest(results);
         }
+
         [HttpGet("GetMasterVisits/{PatientId}/{PatientMasterVisitId}")]
         public async Task<IActionResult> GetMasterVisits(int PatientId, int PatientMasterVisitId)
         {
@@ -76,7 +77,7 @@ namespace IQCare.Controllers.Shared
             return BadRequest(results);
         }
 
-[HttpGet("GetEncounters/{PatientId}/{encounterTypeId}")]
+        [HttpGet("GetEncounters/{PatientId}/{encounterTypeId}")]
         public async Task<IActionResult> GetEncounters(int PatientId,int encounterTypeId)
         {
             var results = await _mediator.Send(new GetPatientEncounterCommand { PatientId = PatientId, EncounterTypeId = encounterTypeId},

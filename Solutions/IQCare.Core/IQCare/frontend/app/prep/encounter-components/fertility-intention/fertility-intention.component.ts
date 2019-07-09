@@ -15,6 +15,10 @@ export class FertilityIntentionComponent implements OnInit {
     maxDate: Date;
 
     @Input() FertilityIntentionsOptions: any;
+    @Input() patientId: number;
+    @Input() personId: number;
+    @Input() patientMasterVisitId: number;
+    @Input() isEdit: number;
     @Output() notify: EventEmitter<FormGroup> = new EventEmitter<FormGroup>();
 
     constructor(private _formBuilder: FormBuilder) {

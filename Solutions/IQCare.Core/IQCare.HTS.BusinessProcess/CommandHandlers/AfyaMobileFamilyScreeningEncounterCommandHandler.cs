@@ -84,7 +84,7 @@ namespace IQCare.HTS.BusinessProcess.CommandHandlers
                             catch (Exception e)
                             {
                                 Log.Error($"Could not parse family screening BOOKING_DATE: {request.SCREENING_ENCOUNTER.FAMILY_SCREENING.BOOKING_DATE} as a valid date: Incorrect format, date should be in the following format yyyyMMdd");
-                                throw new Exception($"Could not parse family screening BOOKING_DATE: {request.SCREENING_ENCOUNTER.FAMILY_SCREENING.BOOKING_DATE} as a valid date: Incorrect format, date should be in the following format yyyyMMdd");
+                                throw new Exception($"Could not parse family screening BOOKING_DATE: {request.SCREENING_ENCOUNTER.FAMILY_SCREENING.BOOKING_DATE} as a valid date: Incorrect format, date should be in the following format yyyyMMdd. Exception: {e.Message}");
                             }
                             string remarks = request.SCREENING_ENCOUNTER.FAMILY_SCREENING.REMARKS;
 
@@ -123,6 +123,31 @@ namespace IQCare.HTS.BusinessProcess.CommandHandlers
 
                             var familyScreeningReturnValue = await encounterTestingService.AddPartnerScreening(partnetPersonIdentifiers[0].PersonId, indexClient.Id, patientMasterVisitId, null,
                                     screeningDate, bookingDate, familyScreeningList, 1);
+
+                            var stringParnerObject = Newtonsoft.Json.JsonConvert.SerializeObject(new
+                            {
+                                familyId = partnetPersonIdentifiers[0].PersonId,
+                                familyTraced = true
+                            });
+
+                            var partnerScreeningDone =
+                                await registerPersonService.AddAppStateStore(indexClient.PersonId, indexClient.Id, 10,
+                                    null, null, stringParnerObject);
+
+                            var familyHivStatus = await _unitOfWork.Repository<LookupItemView>()
+                                .Get(x => x.MasterName == "ScreeningHivStatus" && x.ItemId == hivStatus).ToListAsync();
+
+                            if (familyHivStatus.Count > 0 && familyHivStatus[0].ItemName == "Positive")
+                            {
+                                var stringFamilyScreenedPositiveObject = Newtonsoft.Json.JsonConvert.SerializeObject(new
+                                {
+                                    familyId = partnetPersonIdentifiers[0].PersonId,
+                                    familyTraced = true
+                                });
+
+                                var hasFamiyBeenScreenedPositive = await registerPersonService.AddAppStateStore(indexClient.PersonId, indexClient.Id, 14,
+                                        null, null, stringFamilyScreenedPositiveObject);
+                            }
                         }
                         else
                         {
@@ -139,15 +164,15 @@ namespace IQCare.HTS.BusinessProcess.CommandHandlers
                     }
 
                     //update message has been processed
-                    await registerPersonService.UpdateAfyaMobileInbox(afyaMobileMessage.Id, afyaMobileId, true, DateTime.Now, $"Index clientid: {indexClientAfyaMobileId} for partnerid: {afyaMobileId} not found", true);
+                    await registerPersonService.UpdateAfyaMobileInbox(afyaMobileMessage.Id, afyaMobileId, true, DateTime.Now, $"Successfully synchronized family screening for clientid: {indexClientAfyaMobileId} and  partnerid: {afyaMobileId}", true);
                     trans.Commit();
                     return Result<string>.Valid($"Successfully synchronized family screening for afyamobileId: {afyaMobileId}");
                 }
                 catch (Exception ex)
                 {
                     trans.Rollback();
-                    Log.Error($"Failed to synchronize partner screening for clientId: {afyaMobileId} " + ex.Message + " " + ex.InnerException);
-                    return Result<string>.Invalid($"Failed to synchronize partner screening for clientId: {afyaMobileId} " + ex.Message + " " + ex.InnerException);
+                    Log.Error($"Failed to synchronize family screening for clientId: {afyaMobileId} " + ex.Message + " " + ex.InnerException);
+                    return Result<string>.Invalid($"Failed to synchronize family screening for clientId: {afyaMobileId} " + ex.Message + " " + ex.InnerException);
                 }
             }
         }
