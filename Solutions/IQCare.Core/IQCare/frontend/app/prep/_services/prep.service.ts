@@ -8,6 +8,7 @@ import { PrepStatusCommand } from '../_models/commands/PrepStatusCommand';
 import { AllergiesCommand } from '../_models/commands/AllergiesCommand';
 import { ClientCircumcisionStatusCommand } from '../_models/commands/ClientCircumcisionStatusCommand';
 import { PregnancyIndicatorCommand } from '../_models/commands/PregnancyIndicatorCommand';
+import { EditAppointmentCommand } from '../_models/commands/nextAppointmentCommand';
 
 const httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -161,7 +162,33 @@ export class PrepService {
             catchError(this.errorHandler.handleError<any>('Error fetching careend details'))
         );
     }
+    public getMonthlyRefillDetails(patientmasterVisitId: number, patientId: number, serviceAreaId: number): Observable<any[]> {
+        return this.http.get<any[]>(this.PREP_API_URL + '/api/MonthlyRefill/GetMonthlyRefillDetails/'
+            + patientId + '/' + patientmasterVisitId + '/' + serviceAreaId).
+            pipe(tap(getMonthlyRefillDetails => this.errorHandler.log(`successfully fetch details`)),
+                catchError(this.errorHandler.handleError<any>('Error fetching details'))
+            );
+    }
 
+
+    public AddMonthlyRefill(patientId: number, PatientMasterVisitId: number, CreatedBy: number, serviceAreaId: number, VisitDate: Date,
+        adherence: any[], screeningdetail: any[], clinicalnotes: any[]) {
+        const Indata = {
+            'PatientId': patientId,
+            'PatientMasterVisitId': PatientMasterVisitId,
+            'CreatedBy': CreatedBy,
+            'ServiceAreaId': serviceAreaId,
+            'VisitDate': VisitDate,
+            'Adherence': adherence,
+            'screeningdetail': screeningdetail,
+            'clinicalNotes': clinicalnotes
+        };
+
+        return this.http.post<any>(this.PREP_API_URL + '/api/MonthlyRefill/AddMonthlyRefill', JSON.stringify(Indata), httpOptions).
+            pipe(tap(AddMonthlyRefill => this.errorHandler.log(`Added the monthlyrefilldetails`)),
+                catchError(this.errorHandler.handleError<any[]>('MonthlyRefillDetails')));
+
+    }
     public careEndPatientdetails(patientId: number, serviceAreaId: number,
         patientmasterVisitId: number, careEndDate: string, specify: string
         , disclosurereason: number, deathdate: string, userId: number) {
@@ -179,6 +206,44 @@ export class PrepService {
         return this.http.post<any>(this.API_URL + '/api/PatientServices/CareEndPatient', JSON.stringify(Indata), httpOptions)
             .pipe(tap(careEndPatientdetails => this.errorHandler.log(`CareEnding the patient`)),
                 catchError(this.errorHandler.handleError<any[]>('careEndPatientdetails'))
+            );
+    }
+
+
+    public saveNextAppointment(appointment: any): Observable<any> {
+        if (!appointment.AppointmentDate || appointment.AppointmentDate == null
+            || appointment.AppointmentDate == 'null') {
+            return of([]);
+        }
+
+        return this.http.post(this.API_URL + '/api/PatientReferralAndAppointment/AddPatientNextAppointment', JSON.stringify(appointment),
+            httpOptions).pipe(
+                tap(saveReferrals => this.errorHandler.log(`successfully added Referral details`)),
+                catchError(this.errorHandler.handleError<any>('Error saving Referral details'))
+            );
+    }
+
+
+    public getAppointments(patientId: number, patientMasterVisitId: number): Observable<any> {
+        return this.http.get(this.API_URL
+            + '/api/PatientReferralAndAppointment/GetAppointment/' + patientId + '/' + patientMasterVisitId).pipe(
+                tap(getAppointments => this.errorHandler.log(`successfully fetched appointment`)),
+                catchError(this.errorHandler.handleError<any>('Error fetching appointment'))
+            );
+    }
+
+    public updateAppointment(patientAppointmentEditCommand: EditAppointmentCommand): Observable<any> {
+        // console.log(patientAppointmentEditCommand);
+
+        if ((!patientAppointmentEditCommand.AppointmentDate || !patientAppointmentEditCommand.AppointmentId)
+            || (patientAppointmentEditCommand.AppointmentDate == null || patientAppointmentEditCommand.AppointmentId == null)) {
+            return of([]);
+        }
+
+        return this.http.post(this.API_URL + '/api/PatientReferralAndAppointment/UpdatePatientNextAppointment',
+            JSON.stringify(patientAppointmentEditCommand), httpOptions).pipe(
+                tap(updateAppointment => this.errorHandler.log(`successfully updated appointment`)),
+                catchError(this.errorHandler.handleError<any>('Error updating appointment'))
             );
     }
 }

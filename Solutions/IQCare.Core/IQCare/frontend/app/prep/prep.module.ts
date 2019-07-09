@@ -36,6 +36,10 @@ import {
     HivPartnerResolver
 } from './_services/resolvers/prepriskassessment.resolver';
 import {
+    PrepAdherenceResolver, AdherenceAssessmentReasonsResolver, RefillPrepStatusResolver,
+    PrepDiscontinueReasonResolver, AdherenceCounsellingResolver,AppointmentGivenResolver,PrepAppointmentReasonResolver
+} from './_services/resolvers/prepmonthlyrefillresolver';
+import {
     PrepCareEndReasonResolver
 } from './_services/resolvers/prepcareendreason.resolver';
 import { PrepRiskassessmentComponent } from './prep-riskassessment/prep-riskassessment.component';
@@ -46,6 +50,7 @@ import { PrepEncounterTypeResolver } from './_services/prep-encounter-type.resol
 import { PregnancyStatusResolver } from './_services/pregnancy-status.resolver';
 import { ScreenedForSTIResolver } from './_services/screened-sti.resolver';
 import { PrepCareendComponent } from './prep-careend/prep-careend.component';
+import { PrepMonthlyrefillComponent } from './prep-monthlyrefill/prep-monthlyrefill.component';
 
 @NgModule({
     declarations: [
@@ -59,7 +64,8 @@ import { PrepCareendComponent } from './prep-careend/prep-careend.component';
         PrepRiskassessmentComponent,
         PrepAppointmentComponent,
         PrepCheckinComponent,
-        PrepCareendComponent
+        PrepCareendComponent,
+        PrepMonthlyrefillComponent
     ],
     imports: [
         SharedModule, MatDatepickerModule, MatNativeDateModule,
@@ -82,7 +88,8 @@ import { PrepCareendComponent } from './prep-careend/prep-careend.component';
         DurationResolver, SexWithoutCondomResolver, HivPartnerResolver,
         ReasonsPrepAppointmentNotGivenResolver, PrepEncounterTypeResolver,
         PregnancyStatusResolver, ScreenedForSTIResolver,
-        PrepCareEndReasonResolver
+        PrepCareEndReasonResolver, PrepAdherenceResolver, AdherenceAssessmentReasonsResolver, RefillPrepStatusResolver,
+        PrepDiscontinueReasonResolver, AdherenceCounsellingResolver, AppointmentGivenResolver, PrepAppointmentReasonResolver
     ],
     entryComponents: [
         PrepCheckinComponent

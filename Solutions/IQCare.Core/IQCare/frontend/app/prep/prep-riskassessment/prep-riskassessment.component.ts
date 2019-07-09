@@ -141,6 +141,8 @@ export class PrepRiskassessmentComponent implements OnInit {
             console.log('HIVSTatus');
             console.log(this.partnerstatusOptions);
             console.log(this.PartnerHIVStatus);
+            console.log("Sex without condoms");
+            console.log(this.sexwithoutcondomoptions);
 
         });
 
@@ -366,10 +368,12 @@ export class PrepRiskassessmentComponent implements OnInit {
 
             this.prepservice.getPatientMasterVisits(this.patientId, this.PatientMasterVisitId).subscribe((res) => {
                 this.Encounters = res;
-                console.log(this.Encounters);
-                let visitDate: Date;
-                visitDate = this.Encounters[0]['visitDate'];
-                this.PrepRiskAssessmentFormGroup.controls.visitDate.setValue(visitDate);
+                if (this.Encounters != null && this.Encounters != undefined && this.Encounters.length > 0) {
+                    console.log(this.Encounters);
+                    let visitDate: Date;
+                    visitDate = this.Encounters[0]['visitDate'];
+                    this.PrepRiskAssessmentFormGroup.controls.visitDate.setValue(visitDate);
+                }
             });
 
 
@@ -1015,7 +1019,8 @@ export class PrepRiskassessmentComponent implements OnInit {
         }
 
 
-        if (partnercccenrollmentdetail != null && partnercccenrollmentdetail !== undefined) {
+        if (partnercccenrollmentdetail != null && partnercccenrollmentdetail !== undefined 
+            && partnercccenrollmentdetail[0] !== undefined) {
 
             let partnercccenrollmentmasterid: number;
             let partnercccenrollmentlist: any[] = [];
@@ -1046,7 +1051,8 @@ export class PrepRiskassessmentComponent implements OnInit {
         }
 
 
-        if (partnersexwithoutcondoms != null && partnersexwithoutcondoms !== undefined) {
+        if (partnersexwithoutcondoms != null && partnersexwithoutcondoms !== undefined
+             && partnersexwithoutcondoms[0] !== undefined) {
             let partnersexcondomsmasterid: number;
             let partnersexcondomslist: any[] = [];
             partnersexcondomsmasterid = this.sexwithoutcondomoptions[0].masterId;
@@ -1076,7 +1082,7 @@ export class PrepRiskassessmentComponent implements OnInit {
         }
 
 
-        if (CCCnumber != null && CCCnumber !== undefined) {
+        if (CCCnumber != null && CCCnumber !== undefined && CCCnumber[0] !== '' )  {
             let cccnumbermasterid: number;
             let cccnumbervalueid: number;
             let cccnumberlist: any[] = [];
@@ -1092,7 +1098,7 @@ export class PrepRiskassessmentComponent implements OnInit {
                             x.DeleteFlag = true;
                         } else {
                             x.DeleteFlag = false;
-                            x.Comment = CCCnumber;
+                            x.Comment = CCCnumber[0];
                         }
 
                     }
@@ -1101,7 +1107,7 @@ export class PrepRiskassessmentComponent implements OnInit {
                 if (CCCnumber.length > 0) {
                     this.RiskAssessmentList.push({
                         'Id': 0,
-                        'Comment': CCCnumber,
+                        'Comment': CCCnumber[0],
                         'RiskAssessmentid': cccnumbermasterid,
                         'Value': cccnumbervalueid,
                         'DeleteFlag': false,
@@ -1113,7 +1119,7 @@ export class PrepRiskassessmentComponent implements OnInit {
         }
 
 
-        if (typeof Monthdetail != 'undefined' && Monthdetail) {
+        if (typeof Monthdetail != 'undefined' && Monthdetail[0] !== undefined   && Monthdetail[0] !== '') {
             let hivsexdiscordantmasterid: number;
             let hivsexdiscordantvalueid: number;
             let hivsexdiscordantlist: any[] = [];
@@ -1410,7 +1416,8 @@ export class PrepRiskassessmentComponent implements OnInit {
         partnercccenrollmentmasterid = this.partnercccenrollmentoptions[0].masterId;
 
 
-        if (partnercccenrollmentdetail !== null && partnercccenrollmentdetail !== undefined) {
+        if (partnercccenrollmentdetail !== null && partnercccenrollmentdetail !== undefined  
+            && partnercccenrollmentdetail[0] !==undefined) {
             this.RiskAssessmentList.push({
                 'Id': 0,
                 'Comment': '',
@@ -1426,7 +1433,8 @@ export class PrepRiskassessmentComponent implements OnInit {
         let partnersexcondomsmasterid: number;
 
         partnersexcondomsmasterid = this.sexwithoutcondomoptions[0].masterId;
-        if (partnersexwithoutcondoms !== null && partnersexwithoutcondoms !== undefined) {
+        if (partnersexwithoutcondoms !== null && partnersexwithoutcondoms !== undefined
+             && partnersexwithoutcondoms[0] !== undefined) {
             this.RiskAssessmentList.push({
                 'Id': 0,
                 'Comment': '',
@@ -1446,10 +1454,10 @@ export class PrepRiskassessmentComponent implements OnInit {
         findindex = this.patientIdentifieroptions.findIndex(x => x.itemName == 'CCCNumber');
         cccnumbermasterid = this.patientIdentifieroptions[findindex].masterId;
         cccnumbervalueid = this.patientIdentifieroptions[findindex].itemId;
-        if (CCCnumber != null || CCCnumber !== undefined || CCCnumber !== '') {
+        if (CCCnumber != null || CCCnumber !== undefined || CCCnumber !== '' && CCCnumber[0] !== "") {
             this.RiskAssessmentList.push({
                 'Id': 0,
-                'Comment': CCCnumber,
+                'Comment': CCCnumber[0],
                 'RiskAssessmentid': cccnumbermasterid,
                 'Value': cccnumbervalueid,
                 'DeleteFlag': false,
@@ -1464,10 +1472,10 @@ export class PrepRiskassessmentComponent implements OnInit {
 
         hivsexdiscordantmasterid = this.hivserodiscordantoptions[0].masterId;
         hivsexdiscordantvalueid = this.hivserodiscordantoptions[0].itemId;
-        if (typeof Monthdetail != 'undefined' || Monthdetail) {
+        if (typeof Monthdetail != 'undefined' || Monthdetail  && Monthdetail[0] !== "") {
             this.RiskAssessmentList.push({
                 'Id': 0,
-                'Comment': Monthdetail,
+                'Comment': Monthdetail[0],
                 'RiskAssessmentid': hivsexdiscordantmasterid,
                 'Value': hivsexdiscordantvalueid,
                 'DeleteFlag': false,

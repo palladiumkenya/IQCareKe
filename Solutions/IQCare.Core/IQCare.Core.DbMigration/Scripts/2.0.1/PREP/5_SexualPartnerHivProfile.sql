@@ -109,3 +109,22 @@ where lm.Name='SexualPartnerHivStatusProfile' and lit.Name='CoupleConceive'
 END
 END
 
+if not exists(select * from LookupItem where Name like 'N/A')
+BEGIN
+insert into LookupItem(Name,DisplayName,DeleteFlag)
+values('N/A','N/A','0')
+END
+go
+if  exists(select * from LookupItem where Name like 'N/A')
+BEGIN
+if not Exists (select * from LookupMasterItem  lmi inner join LookupMaster lm on lm.Id=lmi.LookupMasterId
+inner join LookupItem lit on lit.Id=lmi.LookupItemId where 
+lit.Name='N/A' and lm.Name='SexualPartnerHivStatusProfile')
+BEGIN
+insert into LookupMasterItem 
+select lm.Id,lit.Id,lit.DisplayName,'1.00' as OrdRank from LookupMaster lm,LookupItem lit
+where lm.Name='SexualPartnerHivStatusProfile' and lit.Name='N/A'
+END
+END
+
+
