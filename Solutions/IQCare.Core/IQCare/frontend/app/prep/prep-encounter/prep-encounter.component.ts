@@ -453,6 +453,31 @@ export class PrepEncounterComponent implements OnInit {
     }
 
     onPrepEncounterEdit() {
-        console.log(`editing`);
+        // create prep status command
+        const prepStatusCommand: PrepStatusCommand = {
+            Id: this.PrepStatusFormGroup.value[0]['id'],
+            PatientId: this.patientId,
+            PatientEncounterId: this.patientEncounterId,
+            SignsOrSymptomsHIV: this.PrepStatusFormGroup.value[0]['signsOrSymptomsHIV'],
+            AdherenceCounsellingDone: this.PrepStatusFormGroup.value[0]['adherenceCounselling'],
+            ContraindicationsPrepPresent: this.PrepStatusFormGroup.value[0]['contraindications_PrEP_Present'],
+            PrepStatusToday: this.PrepStatusFormGroup.value[0]['PrEPStatusToday'],
+            CreatedBy: this.userId,
+            CondomsIssued: this.PrepStatusFormGroup.value[0]['condomsIssued'],
+            NoOfCondoms: this.PrepStatusFormGroup.value[0]['noCondomsIssued'],
+        };
+
+        const prepStatusApiCommand = this.prepService.savePrepStatus(prepStatusCommand);
+
+        forkJoin([
+            prepStatusApiCommand
+        ]).subscribe(
+            (result) => {
+                console.log(result);
+            },
+            (error) => {
+                console.log(error);
+            }
+        );
     }
 }

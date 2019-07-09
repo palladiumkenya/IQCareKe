@@ -37,10 +37,17 @@ export class AllergiesTableComponent implements OnInit {
     public loadPatientAllergies(): void {
         this.prepservice.getPatientAllergies(this.patientId).subscribe(
             (res) => {
-                console.log(res);
-                if (res.length > 0) {
+                res.forEach(allergyData => {
+                    this.allergy_table_data.push({
+                        allergy: allergyData.allergenName,
+                        reactionType: allergyData.reactionName,
+                        severity: allergyData.severityName,
+                        onsetDate: allergyData.onsetDate,
+                        active: ''
+                    });
+                });
 
-                }
+                this.dataSource = new MatTableDataSource(this.allergy_table_data);
             },
             (error) => {
                 console.log(error);

@@ -33,6 +33,7 @@ export class PrepStatusComponent implements OnInit {
             PrEPStatusToday: new FormControl('', [Validators.required]),
             condomsIssued: new FormControl('', [Validators.required]),
             noCondomsIssued: new FormControl('', [Validators.required]),
+            id: new FormControl()
         });
 
         // Set initial form state
@@ -54,6 +55,7 @@ export class PrepStatusComponent implements OnInit {
     loadPrepStatus(): void {
         this.prepservice.getPrepStatus(this.patientId, this.patientEncounterId).subscribe(
             (res) => {
+                // console.log(res);
                 if (res.length > 0) {
                     this.PrepStatusForm.controls.signsOrSymptomsHIV.setValue(res[0].signsOrSymptomsHIV);
                     this.PrepStatusForm.controls.contraindications_PrEP_Present.setValue(res[0].contraindicationsPrepPresent);
@@ -61,6 +63,7 @@ export class PrepStatusComponent implements OnInit {
                     this.PrepStatusForm.controls.PrEPStatusToday.setValue(res[0].prepStatusToday);
                     this.PrepStatusForm.controls.condomsIssued.setValue(res[0].condomsIssued);
                     this.PrepStatusForm.controls.noCondomsIssued.setValue(res[0].noOfCondoms);
+                    this.PrepStatusForm.controls.id.setValue(res[0].id);
                 }
             },
             (error) => {

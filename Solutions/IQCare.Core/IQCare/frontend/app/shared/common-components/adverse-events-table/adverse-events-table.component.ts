@@ -38,12 +38,17 @@ export class AdverseEventsTableComponent implements OnInit {
     public loadPatientAdverseEvents(): void {
         this.prepservice.getPatientAdverseEvents(this.patientId).subscribe(
             (res) => {
-                console.log(res);
-                if (res.length > 0) {
-                    res.forEach(event => {
-
+                // console.log(res);
+                res.forEach(adverseEvent => {
+                    this.adverse_events_table_data.push({
+                        adverseEvent: adverseEvent.eventName,
+                        severity: adverseEvent.severity,
+                        medicine_causing: adverseEvent.eventCause,
+                        adverseEventsAction: adverseEvent.action,
                     });
-                }
+                });
+
+                this.dataSource = new MatTableDataSource(this.adverse_events_table_data);
             },
             (error) => {
                 console.log(error);
@@ -67,15 +72,15 @@ export class AdverseEventsTableComponent implements OnInit {
                 }
 
                 const adverseEvent = data.adverseEvent.itemName;
-                if (this.adverse_events_table_data.filter(x => x.adverseEvent.itemName === adverseEvent).length > 0) {
+                if (this.adverse_events_table_data.filter(x => x.adverseEvent === adverseEvent).length > 0) {
                     this.snotifyService.warning('' + adverseEvent + ' exists',
                         'Adverse Events', this.notificationService.getConfig());
                 } else {
                     this.adverse_events_table_data.push({
-                        adverseEvent: data.adverseEvent,
-                        severity: data.severity,
+                        adverseEvent: data.adverseEvent.itemName,
+                        severity: data.severity.itemName,
                         medicine_causing: data.medicine_causing,
-                        adverseEventsAction: data.adverseEventsAction
+                        adverseEventsAction: data.adverseEventsAction.displayName
                     });
 
                     this.newAdverseEventsData.push({
@@ -93,10 +98,10 @@ export class AdverseEventsTableComponent implements OnInit {
 }
 
 export interface AdverseEventsTableData {
-    adverseEvent?: LookupItemView;
-    severity?: LookupItemView;
+    adverseEvent?: any;
+    severity?: any;
     medicine_causing?: string;
-    adverseEventsAction?: LookupItemView;
+    adverseEventsAction?: any;
     outcome?: boolean;
 }
 
