@@ -39,6 +39,8 @@ namespace IQCare.Prep.BusinessProcess.CommandHandlers
                             result.ContraindicationsPrepPresent = request.ContraindicationsPrepPresent;
                             result.PrepStatusToday = request.PrepStatusToday;
                             result.CreatedBy = request.CreatedBy;
+                            result.CondomsIssued = request.CondomsIssued;
+                            result.NoOfCondoms = request.NoOfCondoms;
 
                             _prepUnitOfWork.Repository<PatientPrEPStatus>().Update(result);
                             await _prepUnitOfWork.SaveAsync();
@@ -58,6 +60,8 @@ namespace IQCare.Prep.BusinessProcess.CommandHandlers
                                 DeleteFlag = false,
                                 CreatedBy = request.CreatedBy,
                                 CreateDate = DateTime.Now,
+                                CondomsIssued = request.CondomsIssued,
+                                NoOfCondoms = request.NoOfCondoms
                             };
 
                             await _prepUnitOfWork.Repository<PatientPrEPStatus>().AddAsync(patientPrEpStatus);

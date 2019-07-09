@@ -1,11 +1,15 @@
+import { PncService } from './../../../pmtct/_services/pnc.service';
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
 import { LookupItemView } from '../../../shared/_models/LookupItemView';
+import { SnotifyService } from 'ng-snotify';
+import { NotificationService } from '../../../shared/_services/notification.service';
 
 @Component({
     selector: 'app-prep-appointment',
     templateUrl: './prep-appointment.component.html',
-    styleUrls: ['./prep-appointment.component.css']
+    styleUrls: ['./prep-appointment.component.css'],
+    providers: [PncService]
 })
 export class PrepAppointmentComponent implements OnInit {
     PrepAppointmentForm: FormGroup;
@@ -20,7 +24,10 @@ export class PrepAppointmentComponent implements OnInit {
     @Input() isEdit: number;
     @Output() notify: EventEmitter<FormGroup> = new EventEmitter<FormGroup>();
 
-    constructor(private _formBuilder: FormBuilder) {
+    constructor(private _formBuilder: FormBuilder,
+        private pncservice: PncService,
+        private notificationService: NotificationService,
+        private snotifyService: SnotifyService) {
         this.minDate = new Date();
     }
 
@@ -49,7 +56,19 @@ export class PrepAppointmentComponent implements OnInit {
     }
 
     loadPrepAppointment(): void {
-
+        this.pncservice.getAppointments(this.patientId, this.patientMasterVisitId).subscribe(
+            (result) => {
+                if (result) {
+                    this.PrepAppointmentForm.get('nextAppointmentDate').setValue(result.appointmentDate);
+                    this.PrepAppointmentForm.get('clinicalNotes').setValue(result.description);
+                    // this.PrepAppointmentForm.get('id').setValue(result.id);
+                }
+            },
+            (error) => {
+                this.snotifyService.error('Fetching appointments ' + error, 'PNC Encounter',
+                    this.notificationService.getConfig());
+            }
+        );
     }
 
     onAppointmentSelection(event) {

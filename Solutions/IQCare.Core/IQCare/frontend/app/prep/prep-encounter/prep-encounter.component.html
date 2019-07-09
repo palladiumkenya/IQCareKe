@@ -68,7 +68,9 @@
                                         </app-fertility-intention>
 
                                         <app-pregnancy-outcome (notify)="onPregnancyOutcomeNotify($event)"
-                                            [PregnancyOutcomeOptions]="PregnancyOutcomeOptions">
+                                            [PregnancyOutcomeOptions]="PregnancyOutcomeOptions" [patientId]="patientId"
+                                            [personId]="personId" [isEdit]="isEdit"
+                                            [patientMasterVisitId]="patientMasterVisitId">
                                         </app-pregnancy-outcome>
 
                                         <div>

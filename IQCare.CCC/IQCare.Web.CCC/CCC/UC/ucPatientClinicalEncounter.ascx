@@ -3965,7 +3965,7 @@
             var anyComplaints = $("input[name$=anyComplaints]:checked").val();
             var adverseEvents = $("input[name$=adverseEvents]:checked").val();
             var complaints = $("#<%=complaints.ClientID%>").val();
-            var tbscreening = $("#<%=ddlICFTBScreeningOutcome.ClientID%>").find(":selected").val();
+            var tbscreening = $("#<%=ddlICFTBScreeningOutcome.ClientID%>").val();
             var nutritionscreening = $("#<%=nutritionscreeningstatus.ClientID%>").find(":selected").val();
 
 
@@ -5094,10 +5094,10 @@
             }
             else if (selectedIndex == 2) {
                 objectsToShow = ['ICFScreeningSection', 'IPTPanel'];
-                sectionsToReset = ['tbScreeningOutcomePanel'];
+                // sectionsToReset = ['tbScreeningOutcomePanel'];
             }
             else {
-                sectionsToReset = ['ICFScreeningSection', 'TubeclosisTreatmentPanel', 'IPTPanel', 'ICFActionTakenPanel', 'tbScreeningOutcomePanel'];
+                sectionsToReset = ['ICFScreeningSection', 'TubeclosisTreatmentPanel', 'IPTPanel', 'ICFActionTakenPanel'];
                 objectsToHide = ['ICFScreeningSection', 'TubeclosisTreatmentPanel', 'IPTPanel', 'ICFActionTakenPanel'];
                 objectsToShow = [];
             }
@@ -6286,9 +6286,11 @@
             $("#" + value).prop('disabled', false);
         });
     }
+
     function getTBOutcome(tbScreenScore) {
-        $("#ddlICFTBScreeningOutcome").prop('selectedIndex', tbScreenScore);
+        // $("#ddlICFTBScreeningOutcome").prop('selectedIndex', tbScreenScore);
     }
+
     //Currently on Anti-TB Drugs selection change
     $('#ddlOnAntiTBDrugs').change(function () {
         var selectedIndex = ($(this).prop('selectedIndex'));
@@ -6304,10 +6306,10 @@
         }
         else if (selectedIndex == 2) {
             objectsToShow = ['ICFScreeningSection', 'IPTPanel'];
-            sectionsToReset = ['tbScreeningOutcomePanel'];
+            // sectionsToReset = ['tbScreeningOutcomePanel'];
         }
         else {
-            sectionsToReset = ['ICFScreeningSection', 'TubeclosisTreatmentPanel', 'IPTPanel', 'ICFActionTakenPanel', 'tbScreeningOutcomePanel'];
+            sectionsToReset = ['ICFScreeningSection', 'TubeclosisTreatmentPanel', 'IPTPanel', 'ICFActionTakenPanel'];
             objectsToHide = ['ICFScreeningSection', 'TubeclosisTreatmentPanel', 'IPTPanel', 'ICFActionTakenPanel'];
             objectsToShow = [];
         }

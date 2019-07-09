@@ -127,6 +127,14 @@ export class PrepService {
             );
     }
 
+    public getPregnancyIndicator(patientId: number, patientMasterVisitId: number): Observable<any> {
+        return this.http.get<any>(this.MATERNITY_API_URL +
+            '/api/PregnancyIndicator/GetPregnancyIndicator/' + patientId + '/' + patientMasterVisitId).pipe(
+                tap(getPregnancyIndicator => this.errorHandler.log('Successfully fetched patient pregnancy indicator status')),
+                catchError(this.errorHandler.handleError<any>('Error in fetching Patient pregnancy indicator status'))
+            );
+    }
+
     AddEditBehaviourRisk(EncounterTypeId: number,
         createdby: number, patientid: number, patientmastervisitid: number, visitdate: string, serviceareaId:
             number, riskassessment: any[], clinicalnotes: any[]): Observable<any[]> {
