@@ -18,7 +18,7 @@ import { PatientMasterVisitEncounter } from '../../pmtct/_models/PatientMasterVi
     selector: 'app-prep-encounter-history',
     templateUrl: './prep-encounter-history.component.html',
     styleUrls: ['./prep-encounter-history.component.css'],
-    providers: [EncounterService, PersonHomeService,SearchService]
+    providers: [EncounterService, PersonHomeService, SearchService]
 })
 export class PrepEncounterHistoryComponent implements OnInit {
     personId: number;
@@ -34,7 +34,7 @@ export class PrepEncounterHistoryComponent implements OnInit {
     EligibilityInformation: any[] = [];
     iscareend: boolean;
     vitaldone: boolean;
-    HTSEligible:boolean;
+    HTSEligible: boolean;
     public prep_history_table_data: PrepHistoryTableData[] = [];
     displayedColumns = ['encounter_date', 'behaviourrisk', 'prep_status', 'next_appointment', 'provider', 'edit'];
     dataSource = new MatTableDataSource(this.prep_history_table_data);
@@ -47,7 +47,7 @@ export class PrepEncounterHistoryComponent implements OnInit {
     identifiers: any[] = [];
     enrolledService: any[] = [];
     riskdone: boolean = false;
-    services: any[] =[];
+    services: any[] = [];
 
     constructor(private prepService: PrepService,
         private dialog: MatDialog,
@@ -117,82 +117,82 @@ export class PrepEncounterHistoryComponent implements OnInit {
         this.getAllServices();
         this.getPatientDetailsById(this.personId);
         this.getPersonEnrolledServices(this.personId);
-       
-      
-       
+
+
+
 
 
     }
 
     getAllServices() {
-        this.personService.getAllServices().subscribe((res)=>{
+        this.personService.getAllServices().subscribe((res) => {
             this.services = res;
             console.log(this.services);
             console.log(this.services);
             let index: number;
-        index = this.services.findIndex(x => x.code == 'HTS');
-        console.log(index);
+            index = this.services.findIndex(x => x.code == 'HTS');
+            console.log(index);
         });
     }
 
-  isPersonServiceEnrolled(service: string) {
+    isPersonServiceEnrolled(service: string) {
         let index: number;
-        index = this.services.findIndex(x=> x.code == service);
-        
-        if (this.enrolledServices  && this.enrolledServices.length > 0) {
+        index = this.services.findIndex(x => x.code == service);
+
+        if (this.enrolledServices && this.enrolledServices.length > 0) {
             let returnValue = false;
-            
-            for (let i = 0 ; i < this.enrolledServices.length; i++) {
+
+            for (let i = 0; i < this.enrolledServices.length; i++) {
                 if (this.enrolledServices[i].serviceAreaId == this.services[index]['id']) {
-                  returnValue = true;
+                    returnValue = true;
                 }
 
             }
 
-            if(returnValue == false) {
+            if (returnValue == false) {
                 localStorage.setItem('ageNumber', this.person.ageNumber.toString());
                 this.zone.run(() => {
                     this.router.navigate(['/dashboard/enrollment/hts/' + this.personId + '/' + this.services[index]['id'] + '/'
-                     + this.services[index]['code']],
+                        + this.services[index]['code']],
                         { relativeTo: this.route });
                 });
-             }
-             else {
+            }
+            else {
 
                 localStorage.removeItem('personId');
-                    localStorage.removeItem('patientId');
-                    localStorage.removeItem('partnerId');
-                    localStorage.removeItem('htsEncounterId');
-                    localStorage.removeItem('patientMasterVisitId');
-                    localStorage.removeItem('isPartner');
-                    localStorage.removeItem('editEncounterId');
-                    localStorage.removeItem('ageInMonths');
+                localStorage.removeItem('patientId');
+                localStorage.removeItem('partnerId');
+                localStorage.removeItem('htsEncounterId');
+                localStorage.removeItem('patientMasterVisitId');
+                localStorage.removeItem('isPartner');
+                localStorage.removeItem('editEncounterId');
+                localStorage.removeItem('ageInMonths');
 
-                    this.searchService.lastHtsEncounter(this.personId).subscribe((res) => {
-                        if (res['encounterId']) {
-                            localStorage.setItem('htsEncounterId', res['encounterId']);
-                        }
-                        if (res['patientMasterVisitId'] > 0) {
-                            localStorage.setItem('patientMasterVisitId', res['patientMasterVisitId']);
-                        }
+                this.searchService.lastHtsEncounter(this.personId).subscribe((res) => {
+                    if (res['encounterId']) {
+                        localStorage.setItem('htsEncounterId', res['encounterId']);
+                    }
+                    if (res['patientMasterVisitId'] > 0) {
+                        localStorage.setItem('patientMasterVisitId', res['patientMasterVisitId']);
+                    }
 
-                        this.zone.run(() => {
-                            localStorage.setItem('personId', this.personId.toString());
-                            localStorage.setItem('patientId', this.patientId.toString());
-                            localStorage.setItem('serviceAreaId', this.services[index]['id'].toString());
-                            localStorage.setItem('ageInMonths', this.person.ageInMonths);
-                            this.router.navigate(['/registration/home/'], { relativeTo: this.route });
-                        });
+                    this.zone.run(() => {
+                        localStorage.setItem('personId', this.personId.toString());
+                        localStorage.setItem('patientId', this.patientId.toString());
+                        localStorage.setItem('serviceAreaId', this.services[index]['id'].toString());
+                        localStorage.setItem('ageInMonths', this.person.ageInMonths);
+                        this.router.navigate(['/registration/home/'], { relativeTo: this.route });
                     });
+                });
 
-             }
+            }
         }
-    }  
+    }
 
     isServiceEligible(): boolean {
         let isEligible: boolean = false;
         isEligible = this.getHTSEligibility();
-        this.HTSEligible =this.getHTSEligibility();
+        this.HTSEligible = this.getHTSEligibility();
         if (isEligible == true) {
             isEligible = this.getPatientVitals();
             if (isEligible == true) {
@@ -205,13 +205,13 @@ export class PrepEncounterHistoryComponent implements OnInit {
     navigateToRiskAssessment() {
         this.zone.run(() => {
             this.router.navigate(['/prep/riskassessment/' + this.patientId + '/' + this.personId
-                + '/' +  this.serviceAreaId], { relativeTo: this.route });
+                + '/' + this.serviceAreaId], { relativeTo: this.route });
         });
     }
     navigateToCareEnd() {
         this.zone.run(() => {
             this.router.navigate(['/prep/prepcareend/' + this.patientId + '/' + this.personId
-                + '/' +  this.serviceAreaId], { relativeTo: this.route });
+                + '/' + this.serviceAreaId], { relativeTo: this.route });
         });
     }
     navigateToTriage() {
@@ -221,67 +221,67 @@ export class PrepEncounterHistoryComponent implements OnInit {
     }
     getRiskDone(): boolean {
         let isEligible: boolean = false;
- 
-            if (this.riskencounters.length > 0) {
-                this.riskdone = true;
-                isEligible = true;
 
-            } else {
-                this.riskdone = false;
-                isEligible = false;
-                if (this.EligibilityInformation.length > 0) {
-                    if (this.EligibilityInformation.includes('RiskAssessment not done') == false) {
-                        this.EligibilityInformation.push('RiskAssessment not done');
-                    }
-                } else {
+        if (this.riskencounters.length > 0) {
+            this.riskdone = true;
+            isEligible = true;
+
+        } else {
+            this.riskdone = false;
+            isEligible = false;
+            if (this.EligibilityInformation.length > 0) {
+                if (this.EligibilityInformation.includes('RiskAssessment not done') == false) {
                     this.EligibilityInformation.push('RiskAssessment not done');
                 }
-
+            } else {
+                this.EligibilityInformation.push('RiskAssessment not done');
             }
-      
-            return isEligible;
+
+        }
+
+        return isEligible;
     }
     getPatientVitals(): boolean {
         let isEligible: boolean;
-       
-                if (this.personVitalWeight > 0 && this.personVitalWeight < 35) {
 
-                    isEligible = false;
-                    this.iscareend = true;
-                    if (this.EligibilityInformation.length > 0) {
-                        if (this.EligibilityInformation.includes('Weight less than 35') == false) {
-                            this.EligibilityInformation.push('Weight less than 35');
-                        }
-                    } else {
-                        this.EligibilityInformation.push('Weight less than 35');
-                    }
-                } else if (this.personVitalWeight == 0) {
-                    isEligible = false;
-                    this.vitaldone = false;
-                } else {
-                    isEligible = true;
-                    this.vitaldone = true;
+        if (this.personVitalWeight > 0 && this.personVitalWeight < 35) {
+
+            isEligible = false;
+            this.iscareend = true;
+            if (this.EligibilityInformation.length > 0) {
+                if (this.EligibilityInformation.includes('Weight less than 35') == false) {
+                    this.EligibilityInformation.push('Weight less than 35');
                 }
+            } else {
+                this.EligibilityInformation.push('Weight less than 35');
+            }
+        } else if (this.personVitalWeight == 0) {
+            isEligible = false;
+            this.vitaldone = false;
+        } else {
+            isEligible = true;
+            this.vitaldone = true;
+        }
 
 
-            
 
-    
+
+
         return isEligible;
     }
     getPersonEnrolledServices(personId: number) {
         this.personService.getPersonEnrolledServices(personId).subscribe((res) => {
-            
+
             this.enrolledServices = res['personEnrollmentList'];
             console.log(this.enrolledServices);
-        
+
             if (this.enrolledServices && this.enrolledServices.length > 0) {
                 this.patientId = this.enrolledServices[0]['patientId'];
             }
             this.patientIdentifiers = res['patientIdentifiers'];
             this.identifiers = res['identifiers'];
         });
-   
+
     }
     getHTSEligibility(): boolean {
         let isCCCEnrolled;
@@ -289,62 +289,62 @@ export class PrepEncounterHistoryComponent implements OnInit {
             isCCCEnrolled = this.enrolledServices.filter(obj => obj.serviceAreaId == 1);
         }
         let isEligible: boolean = false;
-       
-                    if (this.encounterDetail != undefined  ) {
-                        if (this.encounterDetail.finalResult == 'Negative') {
-                            isEligible = true;
-                            
-                        } else if (this.encounterDetail.finalResult == 'Positive') {
-                            this.iscareend = true;
-                            isEligible = false;
-                          
-                            if (this.EligibilityInformation.length > 0) {
-                                if (this.EligibilityInformation.includes('The HTS final Result is hiv positive') == false) {
-                                    this.EligibilityInformation.push('The HTS final Result is hiv positive');
-                                }
-                            } else {
-                                this.EligibilityInformation.push('The HTS final Result is hiv positive');
-                            }
-                        } else {
-                            isEligible = true;
+
+        if (this.encounterDetail != undefined) {
+            if (this.encounterDetail.finalResult == 'Negative') {
+                isEligible = true;
+
+            } else if (this.encounterDetail.finalResult == 'Positive') {
+                this.iscareend = true;
+                isEligible = false;
+
+                if (this.EligibilityInformation.length > 0) {
+                    if (this.EligibilityInformation.includes('The HTS final Result is hiv positive') == false) {
+                        this.EligibilityInformation.push('The HTS final Result is hiv positive');
+                    }
+                } else {
+                    this.EligibilityInformation.push('The HTS final Result is hiv positive');
+                }
+            } else {
+                isEligible = true;
+            }
+
+
+        } else {
+            if (isCCCEnrolled != undefined) {
+                if (isCCCEnrolled && isCCCEnrolled.length > 0) {
+                    this.iscareend = true;
+                    if (this.EligibilityInformation.length > 0) {
+                        if (this.EligibilityInformation.includes('Patient already Enrolled to CCC') == false) {
+                            this.EligibilityInformation.push('Patient already Enrolled to CCC');
                         }
-
-
                     } else {
-                        if (isCCCEnrolled != undefined) {
-                            if (isCCCEnrolled && isCCCEnrolled.length > 0) {
-                                this.iscareend = true;
-                                if (this.EligibilityInformation.length > 0) {
-                                    if (this.EligibilityInformation.includes('Patient already Enrolled to CCC') == false) {
-                                        this.EligibilityInformation.push('Patient already Enrolled to CCC');
-                                    }
-                                } else {
-                                    this.EligibilityInformation.push('Patient already Enrolled to CCC');
-                                }
-
-                                isEligible = false;
-                            } else {
-                                if (this.EligibilityInformation.length > 0) {
-                                    if (this.EligibilityInformation.includes('HTS not done') == false) {
-                                        this.EligibilityInformation.push('HTS not done');
-                                    }
-                                } else {
-                                    this.EligibilityInformation.push('HTS not done');
-                                }
-
-                            }
-                        }
-
+                        this.EligibilityInformation.push('Patient already Enrolled to CCC');
                     }
 
-                    return isEligible;
-                
+                    isEligible = false;
+                } else {
+                    if (this.EligibilityInformation.length > 0) {
+                        if (this.EligibilityInformation.includes('HTS not done') == false) {
+                            this.EligibilityInformation.push('HTS not done');
+                        }
+                    } else {
+                        this.EligibilityInformation.push('HTS not done');
+                    }
+
+                }
+            }
+
+        }
+
+        return isEligible;
+
 
     }
     validationHTS(HTSEligible: Boolean): Boolean {
 
         let visibility = false;
-        if (HTSEligible == false) {
+        if (HTSEligible == false && this.iscareend == false) {
             visibility = true;
         } else {
             visibility = false;
@@ -355,7 +355,7 @@ export class PrepEncounterHistoryComponent implements OnInit {
     validationTriage(vital: Boolean): Boolean {
         let visibility = false;
 
-        if (vital == false) {
+        if (vital == false && this.iscareend == false) {
             visibility = true;
         } else {
             visibility = false;
@@ -368,7 +368,7 @@ export class PrepEncounterHistoryComponent implements OnInit {
     validationRiskAssessment(riskassessment: Boolean): Boolean {
         let visibility = false;
 
-        if (riskassessment == false) {
+        if (riskassessment == false && this.iscareend == false) {
             visibility = true;
         } else {
             visibility = false;
