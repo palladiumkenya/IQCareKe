@@ -233,6 +233,7 @@
     <None Remove="Scripts\2.1.0\01_IQCare_CHS_Final.sql" />
     <None Remove="Scripts\2.1.0\02_PatientLabTracker_Delete_LabOrder.sql" />
     <None Remove="Scripts\2.1.0\03_PA_PatientAllergyView.sql" />
+    <None Remove="Scripts\2.1.0\04_PI_PregnancyIndicator_Add_BreastFeeding.sql" />
   </ItemGroup>
 
   <ItemGroup>
@@ -483,6 +484,7 @@
     <EmbeddedResource Include="Scripts\2.1.0\01_IQCare_CHS_Final.sql" />
     <EmbeddedResource Include="Scripts\2.1.0\02_PatientLabTracker_Delete_LabOrder.sql" />
     <EmbeddedResource Include="Scripts\2.1.0\03_PA_PatientAllergyView.sql" />
+    <EmbeddedResource Include="Scripts\2.1.0\04_PI_PregnancyIndicator_Add_BreastFeeding.sql" />
   </ItemGroup>
 
   <ItemGroup>

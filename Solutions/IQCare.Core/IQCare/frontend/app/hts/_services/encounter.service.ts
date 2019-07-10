@@ -31,9 +31,9 @@ export class EncounterService {
             tap(getEncounters => this.errorHandler.log('fetched all client encounters')),
             catchError(this.errorHandler.handleError<any[]>('getEncounters', []))
         );
-    } 
+    }
 
-   
+
     public getEncounterDetails(encounterId: number): Observable<EncounterDetails[]> {
         return this.http.get<EncounterDetails[]>(this.API_URL + this._url + '/getEncounterDetails/' + encounterId).pipe(
             tap(getEncounterDetails => this.errorHandler.log('fetched a single client encounter')),
@@ -69,8 +69,11 @@ export class EncounterService {
         patientMasterVisitId: number, serviceAreaId: number): Observable<any> {
         const finalResultsBody = finalTestingResults;
         const hivResultsBody = hivResults1;
+
         if (hivResults2.length > 0) {
-            hivResultsBody.push.apply(hivResults2);
+            hivResults2.forEach(element => {
+                hivResultsBody.push(element);
+            });
         }
 
         const Indata = {

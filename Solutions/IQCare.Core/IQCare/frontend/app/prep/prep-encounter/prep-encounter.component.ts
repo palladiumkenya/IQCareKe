@@ -352,6 +352,7 @@ export class PrepEncounterComponent implements OnInit {
             PregnancyStatusId: pregnancyOption[0].itemId,
             PregnancyPlanned: this.FertilityIntentionsFormGroup.value[0]['pregnancyPlanned'],
             PlanningToGetPregnant: this.FertilityIntentionsFormGroup.value[0]['planningToGetPregnant'],
+            BreastFeeding: this.FertilityIntentionsFormGroup.value[0]['breastFeeding'],
             ANCProfile: false,
             ANCProfileDate: null,
             Active: false,
@@ -467,13 +468,116 @@ export class PrepEncounterComponent implements OnInit {
             NoOfCondoms: this.PrepStatusFormGroup.value[0]['noCondomsIssued'],
         };
 
+        // circumcision 
+        const clientCircumcisionStatusCommand: ClientCircumcisionStatusCommand = {
+            Id: this.CircumcisionStatusFormGroup.value[0]['id'],
+            PatientId: this.patientId,
+            ClientCircumcised: this.CircumcisionStatusFormGroup.value[0]['isClientCircumcised'],
+            ReferredToVMMC: this.CircumcisionStatusFormGroup.value[0]['referredToVMMC'],
+            CreatedBy: this.userId,
+            CreateDate: new Date(),
+            DeleteFlag: false
+        };
+
+        const STIScreeningCommand: any = {
+            PatientId: this.patientId,
+            PatientMasterVisitId: this.patientMasterVisitId,
+            CreatedBy: this.userId,
+            ScreeningDate: this.STIScreeningFormGroup.value[0]['visitDate'],
+            VisitDate: this.STIScreeningFormGroup.value[0]['visitDate'],
+            Screenings: []
+        };
+
+        for (let i = 0; i < this.screenedForSTIOptions.length; i++) {
+            let value;
+            if (this.screenedForSTIOptions[i].itemName == 'STITreatmentOffered') {
+                value = this.STIScreeningFormGroup.value[0]['stiTreatmentOffered'];
+            } else if (this.screenedForSTIOptions[i].itemName == 'STILabInvestigationDone') {
+                value = this.STIScreeningFormGroup.value[0]['stiReferredLabInvestigation'];
+            } else if (this.screenedForSTIOptions[i].itemName == 'STISymptoms') {
+                value = this.STIScreeningFormGroup.value[0]['signsOfSTI'];
+            } else if (this.screenedForSTIOptions[i].itemName == 'STIScreeningDone') {
+                value = this.STIScreeningFormGroup.value[0]['signsOrSymptomsOfSTI'];
+            }
+
+            STIScreeningCommand.Screenings.push({
+                ScreeningTypeId: this.screenedForSTIOptions[i].masterId,
+                ScreeningCategoryId: this.screenedForSTIOptions[i].itemId,
+                ScreeningValueId: value
+            });
+        }
+
+        for (let i = 0; i < this.ChronicIllnessFormGroup[0].length; i++) {
+            this.chronic_illness_data.push({
+                Id: 0,
+                PatientId: this.patientId,
+                PatientMasterVisitId: this.patientMasterVisitId,
+                ChronicIllness: this.ChronicIllnessFormGroup[0][i]['illness']['itemId'],
+                Treatment: this.ChronicIllnessFormGroup[0][i]['currentTreatment'],
+                DeleteFlag: false,
+                OnsetDate: moment(this.ChronicIllnessFormGroup[0][i]['onsetDate']).toDate(),
+                Active: 0,
+                CreateBy: this.userId
+            });
+        }
+
+        for (let i = 0; i < this.ChronicIllnessFormGroup[1].length; i++) {
+            this.allergies_data.push({
+                Id: 0,
+                PatientId: this.patientId,
+                PatientMasterVisitId: this.patientMasterVisitId,
+                Allergen: '',
+                DeleteFlag: false,
+                CreateBy: this.userId,
+                CreateDate: new Date(),
+                AuditData: '',
+                Reaction: 0,
+                Severity: 0,
+                OnsetDate: new Date()
+            });
+        }
+
+        for (let i = 0; i < this.ChronicIllnessFormGroup[2].length; i++) {
+            this.adverseEvents_data.push({
+                Id: 0,
+                PatientId: this.patientId,
+                PatientMasterVisitId: this.patientMasterVisitId,
+                EventName: this.ChronicIllnessFormGroup[2][i]['adverseEvent']['displayName'],
+                EventCause: this.ChronicIllnessFormGroup[2][i]['medicine_causing'],
+                Severity: this.ChronicIllnessFormGroup[2][i]['severity']['itemId'],
+                Action: this.ChronicIllnessFormGroup[2][i]['adverseEventsAction']['displayName'],
+                DeleteFlag: false,
+                CreateBy: this.userId,
+                CreateDate: new Date(),
+                AuditData: '',
+                AdverseEventId: this.ChronicIllnessFormGroup[2][i]['adverseEvent']['itemId']
+            });
+        }
+
+        const prepStiScreeningTreatmentCommand = this.prepService.UpdateStiScreeningTreatment(STIScreeningCommand);
         const prepStatusApiCommand = this.prepService.savePrepStatus(prepStatusCommand);
+        // add circumcision for males
+        const circumcisionStatus = this.personGender.toLowerCase() == 'male' ?
+            this.prepService.saveCircumcisionStatus(clientCircumcisionStatusCommand) : of([]);
+        const chronicIllness = this.ancService.savePatientChronicIllness(this.chronic_illness_data);
+        const adverseEvents = this.prepService.savePatientAdverseEvents(this.adverseEvents_data);
+        const allergies = this.prepService.savePatientAllergies(this.allergies_data);
+
 
         forkJoin([
-            prepStatusApiCommand
+            prepStiScreeningTreatmentCommand,
+            prepStatusApiCommand,
+            circumcisionStatus,
+            chronicIllness,
+            adverseEvents,
+            allergies
         ]).subscribe(
             (result) => {
                 console.log(result);
+
+                this.zone.run(() => {
+                    this.router.navigate(['/prep/' + this.patientId + '/' + this.personId + '/' + 7], { relativeTo: this.route });
+                });
             },
             (error) => {
                 console.log(error);

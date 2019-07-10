@@ -29,9 +29,9 @@ namespace IQCare.Maternity.BusinessProcess.CommandHandlers
             {
                 try
                 {
-                    var result = await _maternityUnitOfWork.Repository<PregnancyIndicator>().Get(x =>
-                            x.PatientId == request.PatientId && x.PatientMasterVisitId == request.PatientMasterVisitId)
-                        .ToListAsync();
+                    var result = await _maternityUnitOfWork.Repository<PregnancyIndicator>().Get(x => x.PatientId == request.PatientId
+                             && x.PatientMasterVisitId == request.PatientMasterVisitId
+                             && x.DeleteFlag == false).ToListAsync();
 
                     if (result.Count > 0)
                     {
@@ -43,6 +43,8 @@ namespace IQCare.Maternity.BusinessProcess.CommandHandlers
                         result[0].VisitDate = request.VisitDate;
                         result[0].PregnancyPlanned = request.PregnancyPlanned;
                         result[0].PlanningToGetPregnant = request.PlanningToGetPregnant;
+                        result[0].BreastFeeding = request.BreastFeeding;
+
 
                         _maternityUnitOfWork.Repository<PregnancyIndicator>().Update(result[0]);
                         await _maternityUnitOfWork.SaveAsync();
@@ -69,7 +71,8 @@ namespace IQCare.Maternity.BusinessProcess.CommandHandlers
                         DeleteFlag = request.DeleteFlag,
                         CreateDate = request.CreateDate,
                         CreatedBy = request.CreatedBy,
-                        AuditData = request.AuditData
+                        AuditData = request.AuditData,
+                        BreastFeeding = request.BreastFeeding
                     };
 
                     await _maternityUnitOfWork.Repository<PregnancyIndicator>().AddAsync(pregnancyIndicator);

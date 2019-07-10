@@ -12,6 +12,7 @@ namespace IQCare.Maternity.Core.Domain.Maternity
         public int PregnancyStatusId { get; set; }
         public int? PregnancyPlanned { get; set; }
         public int? PlanningToGetPregnant { get; set; }
+        public int? BreastFeeding { get; set; }
         public bool ANCProfile { get; set; }
         public DateTime? ANCProfileDate { get; set; }
         public bool Active { get; set; }

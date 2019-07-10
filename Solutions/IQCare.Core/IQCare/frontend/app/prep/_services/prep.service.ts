@@ -30,10 +30,23 @@ export class PrepService {
         if (STIScreeningCommand.Screenings.length == 0) {
             return of([]);
         }
+
         return this.http.post<any>(this.MATERNITY_API_URL + '/api/PatientScreening/PostPatientScreenings',
             JSON.stringify(STIScreeningCommand), httpOptions).pipe(
                 tap(StiScreeningTreatment => this.errorHandler.log(`successfully added sti screening details`)),
                 catchError(this.errorHandler.handleError<any>('Error adding sti screening details'))
+            );
+    }
+
+    public UpdateStiScreeningTreatment(STIScreeningCommand: any): Observable<any> {
+        if (STIScreeningCommand.Screenings.length == 0) {
+            return of([]);
+        }
+
+        return this.http.post<any>(this.MATERNITY_API_URL + '/api/PatientScreening/UpdatePatientScreenings',
+            JSON.stringify(STIScreeningCommand), httpOptions).pipe(
+                tap(StiScreeningTreatment => this.errorHandler.log(`successfully updated sti screening details`)),
+                catchError(this.errorHandler.handleError<any>('Error updating sti screening details'))
             );
     }
 
