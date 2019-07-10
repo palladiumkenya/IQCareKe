@@ -32,14 +32,19 @@ import {
     PrepDiscontinueReasonResolver, AdherenceCounsellingResolver, AppointmentGivenResolver, PrepAppointmentReasonResolver
 } from './_services/resolvers/prepmonthlyrefillresolver';
 import { PrepMonthlyrefillComponent } from './prep-monthlyrefill/prep-monthlyrefill.component';
-
+import { HTSEncounterResolver } from './_services/resolvers/htsencounter.resolver';
+import { PersonCurrentVitalsResolver } from './_services/resolvers/personvitals.resolver';
+import {RiskEncounterResolver} from './_services/resolvers/riskencounter.resolver';
 const routes: Routes = [
     {
         path: ':patientId/:personId/:serviceId',
         component: PrepEncounterHistoryComponent,
         pathMatch: 'full',
         resolve: {
-            prepEncounterTypeOption: PrepEncounterTypeResolver
+            prepEncounterTypeOption: PrepEncounterTypeResolver,
+            HTSEncounterArray: HTSEncounterResolver,
+            PersonVitalsArray: PersonCurrentVitalsResolver,
+            RiskAssessmentArray: RiskEncounterResolver
         }
     },
     {

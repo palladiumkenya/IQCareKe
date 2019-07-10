@@ -27,7 +27,9 @@ import { YesNoDontKnowResolver } from './_services/YesNoDont-Know.resolver';
 import { PregnancyOutcomeResolver } from './_services/PregnancyOutcome.resolver';
 import { PrepContraindicationsResolver } from './_services/prep-contraindications.resolver';
 import { PrepStatusResolver } from './_services/prep-status.resolver';
-
+import { HTSEncounterResolver } from './_services/resolvers/htsencounter.resolver';
+import { PersonCurrentVitalsResolver } from './_services/resolvers/personvitals.resolver';
+import {RiskEncounterResolver} from './_services/resolvers/riskencounter.resolver';
 import {
     AssessmentOutcomeResolver, ClientsBehaviourRiskResolver, SexualPartnetHivStatusProfileResolver,
     RiskReductionEducationResolver, ReferralPreventionServicesResolver, ClientWillingTakePrepResolver
@@ -89,7 +91,8 @@ import { PrepMonthlyrefillComponent } from './prep-monthlyrefill/prep-monthlyref
         ReasonsPrepAppointmentNotGivenResolver, PrepEncounterTypeResolver,
         PregnancyStatusResolver, ScreenedForSTIResolver,
         PrepCareEndReasonResolver, PrepAdherenceResolver, AdherenceAssessmentReasonsResolver, RefillPrepStatusResolver,
-        PrepDiscontinueReasonResolver, AdherenceCounsellingResolver, AppointmentGivenResolver, PrepAppointmentReasonResolver
+        PrepDiscontinueReasonResolver, AdherenceCounsellingResolver, AppointmentGivenResolver, PrepAppointmentReasonResolver,
+        HTSEncounterResolver, PersonCurrentVitalsResolver, RiskEncounterResolver
     ],
     entryComponents: [
         PrepCheckinComponent

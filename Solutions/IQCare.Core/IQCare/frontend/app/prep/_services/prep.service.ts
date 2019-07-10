@@ -9,6 +9,7 @@ import { AllergiesCommand } from '../_models/commands/AllergiesCommand';
 import { ClientCircumcisionStatusCommand } from '../_models/commands/ClientCircumcisionStatusCommand';
 import { PregnancyIndicatorCommand } from '../_models/commands/PregnancyIndicatorCommand';
 import { EditAppointmentCommand } from '../_models/commands/nextAppointmentCommand';
+import { EncounterDetails } from '../../dashboard/_model/HtsEncounterdetails';
 
 const httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -21,6 +22,7 @@ export class PrepService {
     private API_URL = environment.API_URL;
     private PREP_API_URL = environment.API_PREP_URL;
     private MATERNITY_API_URL = environment.API_PMTCT_URL;
+    private _htsurl = '/api/HtsEncounter';
 
     constructor(private http: HttpClient,
         private errorHandler: ErrorHandlerService) {
@@ -35,6 +37,27 @@ export class PrepService {
             JSON.stringify(STIScreeningCommand), httpOptions).pipe(
                 tap(StiScreeningTreatment => this.errorHandler.log(`successfully added sti screening details`)),
                 catchError(this.errorHandler.handleError<any>('Error adding sti screening details'))
+            );
+    }
+    public getHTSEncounterDetailsBypersonId(personId: number): Observable<any[]> {
+        return this.http.get<EncounterDetails[]>(this.API_URL + this._htsurl + '/getEncounterDetailsByPersonId/' + personId).pipe(
+            tap(getHTSEncounterDetailsBypersonId => this.errorHandler.log('fetched a single client encounter details')),
+            catchError(this.errorHandler.handleError<any[]>('getHTSEncounterDetailsBypersonId', []))
+        );
+    }
+    public GetCurrentPatientVitalsInfo(personId: number): Observable<any> {
+        return this.http.get<any>(this.API_URL + '/api/PatientServices/GetCurrentPersonVitals/' + personId).pipe(
+            tap(GetCurrentPatientVitalsInfo => this.errorHandler.log('get patient vitals details')),
+            catchError(this.errorHandler.handleError<any>('GetCurrentPatientVitalsInfo'))
+        );
+    }
+    CheckPrepencounterExists(personId: number): Observable<any[]> {
+        const Indata = {
+            'PersonId': personId
+        };
+        return this.http.post<any>(this.PREP_API_URL + '/api/BehaviourRisk/Encounterexists', JSON.stringify(Indata), httpOptions)
+            .pipe(tap(CheckencounterExists => this.errorHandler.log('checked if RiskAssessmentEncounter Exists')),
+                catchError(this.errorHandler.handleError<any[]>('CheckencounterExists'))
             );
     }
 

@@ -6,7 +6,7 @@ import { environment } from '../../../environments/environment';
 import { ErrorHandlerService } from '../../shared/_services/errorhandler.service';
 import { LookupItemView } from '../../shared/_models/LookupItemView';
 import { PersonView } from '../../records/_models/personView';
-import { EncounterDetails } from '../_model/HtsEncounterdetails'
+import { EncounterDetails } from '../_model/HtsEncounterdetails';
 const httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
 };

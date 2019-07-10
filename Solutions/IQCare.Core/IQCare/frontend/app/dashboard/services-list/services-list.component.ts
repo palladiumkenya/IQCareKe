@@ -250,6 +250,7 @@ export class ServicesListComponent implements OnInit {
                 + '/' + serviceId], { relativeTo: this.route });
         });
     }
+
     navigateToTriage() {
         this.zone.run(() => {
             this.router.navigate(['/clinical/triage/' + this.patientId + '/' + this.personId], { relativeTo: this.route });
@@ -293,7 +294,7 @@ export class ServicesListComponent implements OnInit {
     isDeathEligibility(serviceAreaId: number) {
         const selectedService = this.services.filter(obj => obj.id == serviceAreaId);
         let isEligible: boolean = false;
-          if (selectedService && selectedService.length > 0) {
+        if (selectedService && selectedService.length > 0) {
             if (selectedService[0]['code'] == 'PREP') {
                 if (this.isdead == false) {
                     isEligible = false;
@@ -384,7 +385,7 @@ export class ServicesListComponent implements OnInit {
                 case 'PREP':
                     if (isCCCEnrolled && isCCCEnrolled.length > 0) {
                         isEligible = false;
-                        this.EligibilityInformation = [] ;
+                        this.EligibilityInformation = [];
                         this.EligibilityInformation.push('Not Eligible');
                         if (this.EligibilityInformation.length > 0) {
                             if (this.EligibilityInformation.includes('Not Eligible') == false) {
@@ -426,12 +427,13 @@ export class ServicesListComponent implements OnInit {
                                             isEligible = false;
                                             this.RiskDone = false;
                                         } else if (this.carended == true && this.isdead == false) {
-                                           isEligible = false;
+                                            isEligible = false;
                                         } else if (this.carended == true && this.isdead == true) {
                                             isEligible = false;
                                         } else if (this.isdead == true && this.carended == true) {
                                             isEligible = false;
-                                        }                                    }
+                                        }
+                                    }
 
                                 }
                             }
@@ -469,7 +471,7 @@ export class ServicesListComponent implements OnInit {
             if (isCCCEnrolled != undefined) {
                 if (isCCCEnrolled && isCCCEnrolled.length > 0) {
                     isEligible = false;
-                   
+
                     this.EligibilityInformation = [];
                     if (this.EligibilityInformation.length > 0) {
                         if (this.EligibilityInformation.includes('Not Eligible') == false) {
