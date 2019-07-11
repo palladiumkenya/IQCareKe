@@ -237,6 +237,8 @@
     <None Remove="Scripts\2.1.0\05_Migrate_StuckBlueCard_Guys.sql" />
     <None Remove="Scripts\2.1.0\06_Remove_Retired_ServiceAreas.sql" />
     <None Remove="Scripts\2.1.0\07_pr_Scheduler_UpdateAppointmentStatus.sql" />
+    <None Remove="Scripts\2.1.0\08_July_01_Release.sql" />
+    <None Remove="Scripts\2.1.0\09_Fix_Appointments.sql" />
   </ItemGroup>
 
   <ItemGroup>
@@ -490,6 +492,8 @@
     <EmbeddedResource Include="Scripts\2.1.0\04_PI_PregnancyIndicator_Add_BreastFeeding.sql" />
     <EmbeddedResource Include="Scripts\2.1.0\05_Migrate_StuckBlueCard_Guys.sql" />
     <EmbeddedResource Include="Scripts\2.1.0\06_Remove_Retired_ServiceAreas.sql" />
+    <EmbeddedResource Include="Scripts\2.1.0\08_July_01_Release.sql" />
+    <EmbeddedResource Include="Scripts\2.1.0\09_Fix_Appointments.sql" />
   </ItemGroup>
 
   <ItemGroup>
