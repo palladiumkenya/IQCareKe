@@ -30,12 +30,21 @@
                                         </ng-container>
 
                                         <!-- Position Column -->
-                                        <ng-container matColumnDef="behaviourrisk">
+                                        <!---<ng-container matColumnDef="behaviourrisk">
                                             <mat-header-cell *matHeaderCellDef><strong>Behaviour Risk</strong>
                                             </mat-header-cell>
                                             <mat-cell *matCellDef="let PrepHistoryTableData">
                                                 {{
                                                     PrepHistoryTableData.behaviourrisk
+                                                }}
+                                            </mat-cell>
+                                        </ng-container>-->
+                                        <ng-container matColumnDef="formType">
+                                            <mat-header-cell *matHeaderCellDef><strong>Form </strong>
+                                            </mat-header-cell>
+                                            <mat-cell *matCellDef="let PrepHistoryTableData">
+                                                {{
+                                                    PrepHistoryTableData.encounterType
                                                 }}
                                             </mat-cell>
                                         </ng-container>
@@ -129,10 +138,18 @@
 
                             <ng-template #riskassessmenttemplate>
                                 <div class="button-row pull-right"
-                                    *ngIf="validationRiskAssessment(this.riskdone); else riskassessmenttemplate">
+                                    *ngIf="validationRiskAssessment(this.riskdone); else preptemplate">
                                     <a mat-raised-button color="accent" (click)="navigateToRiskAssessment()">
                                         <i class="fa fa-plus"></i>
                                         <span>Risk Assessment</span>
+                                    </a>
+                                </div>
+                            </ng-template>
+                            <ng-template #preptemplate>
+                                <div class="button-row pull-right">
+                                    <a mat-raised-button color="accent" (click)="onPrepCheckIn()">
+                                        <i class="fa fa-plus"></i>
+                                        <span>New PREP Encounter</span>
                                     </a>
                                 </div>
                             </ng-template>

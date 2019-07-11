@@ -36,7 +36,7 @@ export class PrepEncounterHistoryComponent implements OnInit {
     vitaldone: boolean;
     HTSEligible: boolean;
     public prep_history_table_data: PrepHistoryTableData[] = [];
-    displayedColumns = ['encounter_date', 'behaviourrisk', 'prep_status', 'next_appointment', 'provider', 'edit'];
+    displayedColumns = ['encounter_date', 'formType', 'prep_status', 'next_appointment', 'provider', 'edit'];
     dataSource = new MatTableDataSource(this.prep_history_table_data);
     enrolledServices: any[] = [];
     riskencounters: any[];
@@ -100,6 +100,7 @@ export class PrepEncounterHistoryComponent implements OnInit {
                 result.forEach(arrayValue => {
                     this.prep_history_table_data.push({
                         'behaviourrisk': 'Risk',
+                        encounterType: arrayValue.encounterType,
                         prep_status: arrayValue.preStatus,
                         next_appointment: arrayValue.appointmentDate,
                         provider: arrayValue.providerName,
@@ -229,13 +230,7 @@ export class PrepEncounterHistoryComponent implements OnInit {
         } else {
             this.riskdone = false;
             isEligible = false;
-            if (this.EligibilityInformation.length > 0) {
-                if (this.EligibilityInformation.includes('RiskAssessment not done') == false) {
-                    this.EligibilityInformation.push('RiskAssessment not done');
-                }
-            } else {
-                this.EligibilityInformation.push('RiskAssessment not done');
-            }
+           
 
         }
 
@@ -298,13 +293,7 @@ export class PrepEncounterHistoryComponent implements OnInit {
                 this.iscareend = true;
                 isEligible = false;
 
-                if (this.EligibilityInformation.length > 0) {
-                    if (this.EligibilityInformation.includes('The HTS final Result is hiv positive') == false) {
-                        this.EligibilityInformation.push('The HTS final Result is hiv positive');
-                    }
-                } else {
-                    this.EligibilityInformation.push('The HTS final Result is hiv positive');
-                }
+               
             } else {
                 isEligible = true;
             }
@@ -314,23 +303,11 @@ export class PrepEncounterHistoryComponent implements OnInit {
             if (isCCCEnrolled != undefined) {
                 if (isCCCEnrolled && isCCCEnrolled.length > 0) {
                     this.iscareend = true;
-                    if (this.EligibilityInformation.length > 0) {
-                        if (this.EligibilityInformation.includes('Patient already Enrolled to CCC') == false) {
-                            this.EligibilityInformation.push('Patient already Enrolled to CCC');
-                        }
-                    } else {
-                        this.EligibilityInformation.push('Patient already Enrolled to CCC');
-                    }
+                   
 
                     isEligible = false;
                 } else {
-                    if (this.EligibilityInformation.length > 0) {
-                        if (this.EligibilityInformation.includes('HTS not done') == false) {
-                            this.EligibilityInformation.push('HTS not done');
-                        }
-                    } else {
-                        this.EligibilityInformation.push('HTS not done');
-                    }
+                   
 
                 }
             }
@@ -458,11 +435,32 @@ export class PrepEncounterHistoryComponent implements OnInit {
     }
 
     onEdit(element) {
-        this.zone.run(() => {
-            this.router.navigate(['/prep/encounter/' + '/' + this.patientId + '/' + this.personId + '/'
-                + element['patientEncounterId'] + '/' + element['patientMasterVisitId'] + '/1'],
-                { relativeTo: this.route });
-        });
+        if (element['encounterType'].toString() == 'prep') {
+            this.zone.run(() => {
+                this.router.navigate(['/prep/encounter/' + '/' + this.patientId + '/' + this.personId + '/'
+                    + element['patientEncounterId'] + '/' + element['patientMasterVisitId'] + '/1'],
+                    { relativeTo: this.route });
+            });
+        } else if (element['encounterType'].toString() === 'PrepRiskAssessment') {
+            this.zone.run(() => {
+                this.router.navigate(['/prep/riskassessment/' + '/' + this.patientId + '/' + this.personId + '/'
+                    + this.serviceAreaId + '/' + element['patientMasterVisitId']],
+                    { relativeTo: this.route });
+            });
+
+        } else if (element['encounterType'].toString() === 'MonthlyRefill') {
+            this.zone.run(() => {
+                this.router.navigate(['/prep/monthlyrefill/' + '/' + this.patientId + '/' + this.personId + '/'
+                    + this.serviceAreaId + '/' + element['patientMasterVisitId']],
+                    { relativeTo: this.route });
+            });
+        } else if (element['encounterType'].toString() === 'Care Ended') {
+            this.zone.run(() => {
+                this.router.navigate(['/prep/prepcareend/' + '/' + this.patientId + '/' + this.personId + '/'
+                    + this.serviceAreaId + '/' + element['patientMasterVisitId']],
+                    { relativeTo: this.route });
+            });
+        }
     }
 
     onView(element) {
@@ -472,6 +470,7 @@ export class PrepEncounterHistoryComponent implements OnInit {
 
 export interface PrepHistoryTableData {
     behaviourrisk?: string;
+    encounterType?: string;
     prep_status?: string;
     next_appointment?: Date;
     provider?: string;
