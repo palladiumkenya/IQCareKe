@@ -234,6 +234,9 @@
     <None Remove="Scripts\2.1.0\02_PatientLabTracker_Delete_LabOrder.sql" />
     <None Remove="Scripts\2.1.0\03_PA_PatientAllergyView.sql" />
     <None Remove="Scripts\2.1.0\04_PI_PregnancyIndicator_Add_BreastFeeding.sql" />
+    <None Remove="Scripts\2.1.0\05_Migrate_StuckBlueCard_Guys.sql" />
+    <None Remove="Scripts\2.1.0\06_Remove_Retired_ServiceAreas.sql" />
+    <None Remove="Scripts\2.1.0\07_pr_Scheduler_UpdateAppointmentStatus.sql" />
   </ItemGroup>
 
   <ItemGroup>
@@ -485,6 +488,8 @@
     <EmbeddedResource Include="Scripts\2.1.0\02_PatientLabTracker_Delete_LabOrder.sql" />
     <EmbeddedResource Include="Scripts\2.1.0\03_PA_PatientAllergyView.sql" />
     <EmbeddedResource Include="Scripts\2.1.0\04_PI_PregnancyIndicator_Add_BreastFeeding.sql" />
+    <EmbeddedResource Include="Scripts\2.1.0\05_Migrate_StuckBlueCard_Guys.sql" />
+    <EmbeddedResource Include="Scripts\2.1.0\06_Remove_Retired_ServiceAreas.sql" />
   </ItemGroup>
 
   <ItemGroup>
@@ -510,6 +515,7 @@
     <None Remove="Scripts\1.0.0.9\37_BO_AddPhsicalExaminationView.sql" />
     <EmbeddedResource Include="Scripts\2.0.1\03_VisitDetailsView.sql" />
     <EmbeddedResource Include="Scripts\2.0.1\PREP\14_Constraint.sql" />
+    <EmbeddedResource Include="Scripts\2.1.0\07_pr_Scheduler_UpdateAppointmentStatus.sql" />
     <Resource Include="Scripts\1.0.0.9\37_BO_AddPhsicalExaminationView.sql" />
   </ItemGroup>
 
