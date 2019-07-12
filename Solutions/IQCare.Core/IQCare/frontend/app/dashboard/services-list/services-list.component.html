@@ -76,14 +76,18 @@
                                         </a>-->
                                     </div>
 
+
                                     <div class="ticket-time  col-lg-2 col-sm-2 col-xs-12" style="height:100%;padding-left: 0px;
                                     padding-right: 0px;">
+
                                         <div class="divider hidden-md hidden-sm hidden-xs"></div>
+
                                         <span>
                                             <a class="btn btn-sm btn-success" (click)="newEncounter(service.id)">
                                                 Encounters
                                             </a>
                                         </span>
+
 
                                         <!--<span>&nbsp;&nbsp;</span>
                                         <br />
@@ -94,6 +98,7 @@
                                             </a>
                                         </span>-->
                                     </div>
+
                                 </ng-container>
                                 <ng-template #templateName>
                                     <div class="ticket-time  col-lg-4 col-sm-4 col-xs-12">
@@ -111,13 +116,18 @@
                                     <div class="ticket-time  col-lg-2 col-sm-2 col-xs-12">
                                         <div class="divider hidden-md hidden-sm hidden-xs"></div>
                                         <span>
-                                            <ng-container
-                                                *ngIf="isServiceEligible(service.id); else notEligibleTemplate">
-                                                <a class="btn btn-sm btn-primary"
-                                                    (click)="enrollToService(service.id, service.code)">
-                                                    Enroll
-                                                </a>
+                                            <ng-container *ngIf="isDeathEligibility(service.id); else eligibleTemplate">
+                                                <span class="label label-orange">Not Eligible</span>
                                             </ng-container>
+
+                                            <ng-template #eligibleTemplate>
+                                                <span *ngIf="isServiceEligible(service.id); else notEligibleTemplate">
+                                                    <a class="btn btn-sm btn-primary"
+                                                        (click)="enrollToService(service.id, service.code)">
+                                                        Enroll
+                                                    </a>
+                                                </span>
+                                            </ng-template>
                                             <ng-template #notEligibleTemplate>
                                                 <span class="label label-orange"
                                                     *ngIf="validationService(service.code,this.Vitaldone);else informationtemplate">Not
@@ -134,9 +144,10 @@
                                                 </div>
                                             </ng-template>
                                             <ng-template #triagetemplate>
-                                                <div *ngIf="validationTriage(service.code,this.Vitaldone);else riskassessmenttemplate">
+                                                <div
+                                                    *ngIf="validationTriage(service.code,this.Vitaldone);else riskassessmenttemplate">
                                                     <a class="btn btn-sm btn-primary" (click)="navigateToTriage()">
-                                                        Triage 
+                                                        Triage
                                                     </a>
                                                     <span>
                                                         &nbsp;
@@ -146,15 +157,28 @@
                                             </ng-template>
 
                                             <ng-template #riskassessmenttemplate>
-                                                <div *ngIf="validationRiskAssessment(service.code,this.RiskDone)">
-                                                    <a class="btn btn-sm btn-primary" (click)="  navigateToRiskAssessment(service.id)">
-                                                  RiskAssessment
+                                                <div
+                                                    *ngIf="validationRiskAssessment(service.code,this.RiskDone);else eligiblecareendtemplate">
+                                                    <a class="btn btn-sm btn-primary"
+                                                        (click)="  navigateToRiskAssessment(service.id)">
+                                                        RiskAssessment
                                                     </a>
                                                     <span>
                                                         &nbsp;
                                                     </span>
                                                     <span class="label label-orange">RiskAssessment not done</span>
                                                 </div>
+                                            </ng-template>
+                                            <ng-template #eligiblecareendtemplate>
+
+                                                <span *ngIf="isEligibleServiceReenrollment(service.id)">
+                                                    <a class="btn btn-sm btn-primary"
+                                                        (click)="reenrollToService(service.id,service.code)">
+                                                        Restart
+
+                                                    </a>
+                                                </span>
+
                                             </ng-template>
 
                                             <br />

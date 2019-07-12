@@ -220,7 +220,16 @@
     <None Remove="Scripts\2.0.1\PREP\13_RegimenUse.sql" />
     <None Remove="Scripts\2.0.1\PREP\14_Constraint.sql" />
     <None Remove="Scripts\2.0.1\PREP\15_HIVPositivePartnerProfile.sql" />
+    <None Remove="Scripts\2.0.1\PREP\16_PrepCareEnded.sql" />
+    <None Remove="Scripts\2.0.1\PREP\17_PrepAdherence.sql" />
+    <None Remove="Scripts\2.0.1\PREP\18_AdherenceAssessmentReasons.sql" />
+    <None Remove="Scripts\2.0.1\PREP\19_PrepStatus.sql" />
     <None Remove="Scripts\2.0.1\PREP\1_Prep_ServiceArea.sql" />
+    <None Remove="Scripts\2.0.1\PREP\20_PrEPDiscontinueReason.sql" />
+    <None Remove="Scripts\2.0.1\PREP\21_MonthlyRefillEncounter.sql" />
+    <None Remove="Scripts\2.0.1\PREP\22_AdherenceCounselling.sql" />
+    <None Remove="Scripts\2.0.1\PREP\23_PrepAppointment Reason.sql" />
+    <None Remove="Scripts\2.0.1\PREP\24_AppointmentGiven.sql" />
     <None Remove="Scripts\2.0.1\PREP\2_Prep Number.sql" />
     <None Remove="Scripts\2.0.1\PREP\3_PrepServiceAreaIdentifiers.sql" />
     <None Remove="Scripts\2.0.1\PREP\4_PersonVitalsView.sql" />
@@ -233,6 +242,7 @@
     <None Remove="Scripts\2.1.0\01_IQCare_CHS_Final.sql" />
     <None Remove="Scripts\2.1.0\02_PatientLabTracker_Delete_LabOrder.sql" />
     <None Remove="Scripts\2.1.0\03_PA_PatientAllergyView.sql" />
+    <None Remove="Scripts\2.0.1\PREP\EncounterHistorySolution.sql" />
   </ItemGroup>
 
   <ItemGroup>
@@ -466,12 +476,21 @@
     <EmbeddedResource Include="Scripts\2.0.1\35_vw_FamilyTestingRegister.sql" />
     <EmbeddedResource Include="Scripts\2.0.1\36_vw_HIVTesting_Services_Referral_Linkage_Register.sql" />
     <EmbeddedResource Include="Scripts\2.0.1\37_vw_PartnerNotificationRegister.sql" />
+    <EmbeddedResource Include="Scripts\2.0.1\PREP\16_PrepCareEnded.sql" />
+    <EmbeddedResource Include="Scripts\2.0.1\PREP\17_PrepAdherence.sql" />
+    <EmbeddedResource Include="Scripts\2.0.1\PREP\18_AdherenceAssessmentReasons.sql" />
+    <EmbeddedResource Include="Scripts\2.0.1\PREP\19_PrepStatus.sql" />
     <EmbeddedResource Include="Scripts\2.0.1\PREP\1_Prep_ServiceArea.sql" />
     <EmbeddedResource Include="Scripts\2.0.1\PREP\10_PrepRiskAssessmentView.sql" />
     <EmbeddedResource Include="Scripts\2.0.1\PREP\11_PopulationTypes.sql" />
     <EmbeddedResource Include="Scripts\2.0.1\PREP\12_PREP Regimen.sql" />
     <EmbeddedResource Include="Scripts\2.0.1\PREP\13_RegimenUse.sql" />
     <EmbeddedResource Include="Scripts\2.0.1\PREP\15_HIVPositivePartnerProfile.sql" />
+    <EmbeddedResource Include="Scripts\2.0.1\PREP\20_PrEPDiscontinueReason.sql" />
+    <EmbeddedResource Include="Scripts\2.0.1\PREP\21_MonthlyRefillEncounter.sql" />
+    <EmbeddedResource Include="Scripts\2.0.1\PREP\22_AdherenceCounselling.sql" />
+    <EmbeddedResource Include="Scripts\2.0.1\PREP\23_PrepAppointment Reason.sql" />
+    <EmbeddedResource Include="Scripts\2.0.1\PREP\24_AppointmentGiven.sql" />
     <EmbeddedResource Include="Scripts\2.0.1\PREP\2_Prep Number.sql" />
     <EmbeddedResource Include="Scripts\2.0.1\PREP\3_PrepServiceAreaIdentifiers.sql" />
     <EmbeddedResource Include="Scripts\2.0.1\PREP\4_PersonVitalsView.sql" />
@@ -483,6 +502,7 @@
     <EmbeddedResource Include="Scripts\2.1.0\01_IQCare_CHS_Final.sql" />
     <EmbeddedResource Include="Scripts\2.1.0\02_PatientLabTracker_Delete_LabOrder.sql" />
     <EmbeddedResource Include="Scripts\2.1.0\03_PA_PatientAllergyView.sql" />
+    <EmbeddedResource Include="Scripts\2.0.1\PREP\EncounterHistorySolution.sql" />
   </ItemGroup>
 
   <ItemGroup>
