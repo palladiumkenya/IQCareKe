@@ -8,6 +8,7 @@ import { PrepStatusCommand } from '../_models/commands/PrepStatusCommand';
 import { AllergiesCommand } from '../_models/commands/AllergiesCommand';
 import { ClientCircumcisionStatusCommand } from '../_models/commands/ClientCircumcisionStatusCommand';
 import { PregnancyIndicatorCommand } from '../_models/commands/PregnancyIndicatorCommand';
+import { PregnancyIndicatorLogCommand } from '../_models/commands/PregnancyIndicatorLogCommand';
 
 const httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -144,6 +145,22 @@ export class PrepService {
             '/api/PregnancyIndicator/GetPregnancyIndicator/' + patientId + '/' + patientMasterVisitId).pipe(
                 tap(getPregnancyIndicator => this.errorHandler.log('Successfully fetched patient pregnancy indicator status')),
                 catchError(this.errorHandler.handleError<any>('Error in fetching Patient pregnancy indicator status'))
+            );
+    }
+
+    public savePregnancyIndicatorLogCommand(pregnancyIndicatorLog: PregnancyIndicatorLogCommand): Observable<any> {
+        return this.http.post<any>(this.MATERNITY_API_URL + '/api/PregnancyIndicator/AddPregnancyOutcome',
+            JSON.stringify(pregnancyIndicatorLog), httpOptions).pipe(
+                tap(savePregnancyIndicatorLogCommand => this.errorHandler.log('Successfully saved patient pregnancy indicator log status')),
+                catchError(this.errorHandler.handleError<any>('Error in saving Patient pregnancy indicator log status'))
+            );
+    }
+
+    public getPregnancyIndicatorLog(patientId: number, patientMasterVisitId: number): Observable<any[]> {
+        return this.http.get<any[]>(this.MATERNITY_API_URL + '/api/PregnancyIndicator/GetPregnancyOutcome/' +
+            patientId + '/' + patientMasterVisitId).pipe(
+                tap(getPregnancyIndicatorLog => this.errorHandler.log('Successfully fetched patient pregnancy indicator log status')),
+                catchError(this.errorHandler.handleError<any>('Error in fetching Patient pregnancy indicator log status'))
             );
     }
 

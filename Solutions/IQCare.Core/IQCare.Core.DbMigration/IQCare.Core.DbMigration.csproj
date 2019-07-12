@@ -239,6 +239,9 @@
     <None Remove="Scripts\2.1.0\07_pr_Scheduler_UpdateAppointmentStatus.sql" />
     <None Remove="Scripts\2.1.0\08_July_01_Release.sql" />
     <None Remove="Scripts\2.1.0\09_Fix_Appointments.sql" />
+    <None Remove="Scripts\2.1.0\10_EH_EncounterHistorySolution.sql" />
+    <None Remove="Scripts\2.1.0\11_PV_PatientVitals.sql" />
+    <None Remove="Scripts\2.1.0\11_Update_Lnk_PatientProgramStart.sql" />
   </ItemGroup>
 
   <ItemGroup>
@@ -493,7 +496,9 @@
     <EmbeddedResource Include="Scripts\2.1.0\05_Migrate_StuckBlueCard_Guys.sql" />
     <EmbeddedResource Include="Scripts\2.1.0\06_Remove_Retired_ServiceAreas.sql" />
     <EmbeddedResource Include="Scripts\2.1.0\08_July_01_Release.sql" />
-    <EmbeddedResource Include="Scripts\2.1.0\09_Fix_Appointments.sql" />
+    <EmbeddedResource Include="Scripts\2.1.0\10_EH_EncounterHistorySolution.sql" />
+    <EmbeddedResource Include="Scripts\2.1.0\11_PV_PatientVitals.sql" />
+    <EmbeddedResource Include="Scripts\2.1.0\11_Update_Lnk_PatientProgramStart.sql" />
   </ItemGroup>
 
   <ItemGroup>

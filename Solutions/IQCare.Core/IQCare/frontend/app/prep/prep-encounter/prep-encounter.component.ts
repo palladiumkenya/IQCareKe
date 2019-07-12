@@ -19,6 +19,7 @@ import { PregnancyIndicatorCommand } from '../_models/commands/PregnancyIndicato
 import { NextAppointmentCommand } from '../../pmtct/maternity/commands/next-appointment-command';
 import { MaternityService } from '../../pmtct/_services/maternity.service';
 import { MatStepper } from '@angular/material';
+import { PregnancyIndicatorLogCommand } from '../_models/commands/PregnancyIndicatorLogCommand';
 
 @Component({
     selector: 'app-prep-encounter',
@@ -404,6 +405,17 @@ export class PrepEncounterComponent implements OnInit {
             });
         }
 
+        const pregnancyIndicatorLog: PregnancyIndicatorLogCommand = {
+            Id: 0,
+            PatientId: this.patientId,
+            PatientMasterVisitId: this.patientMasterVisitId,
+            LMP: this.FertilityIntentionsFormGroup.value[0]['lmp'],
+            EDD: moment(this.FertilityIntentionsFormGroup.value[0]['lmp'], 'DD-MM-YYYY').add(280, 'days').toDate(),
+            Outcome: this.FertilityIntentionsFormGroup.value[1]['pregnancyOutcome'],
+            DateOfOutcome: this.FertilityIntentionsFormGroup.value[1]['outcomeDate'],
+            CreatedBy: this.userId
+        };
+
         const prepStiScreeningTreatmentCommand = this.prepService.StiScreeningTreatment(STIScreeningCommand);
         const prepStatusApiCommand = this.prepService.savePrepStatus(prepStatusCommand);
 
@@ -423,6 +435,18 @@ export class PrepEncounterComponent implements OnInit {
         const pregnancyIndicator = this.personGender.toLowerCase() == 'male' ? of([]) :
             this.prepService.savePregnancyIndicatorCommand(pregnancyIndicatorCommand);
         const matNextAppointment = this.matService.saveNextAppointment(nextAppointmentCommand);
+        const hasPregnancyOutcome = this.yesnoOptions.filter(obj => obj.itemId ==
+            this.FertilityIntentionsFormGroup.value[1]['endedPregnancy']);
+
+        let pregnancyIndicatorLogCommand;
+        if (this.personGender.toLocaleLowerCase() == 'male') {
+            pregnancyIndicatorLogCommand = of([]);
+        } else if (hasPregnancyOutcome.length > 0 && hasPregnancyOutcome[0].itemName == 'No') {
+            pregnancyIndicatorLogCommand = of([]);
+        } else {
+            pregnancyIndicatorLogCommand = this.personGender.toLocaleLowerCase() == 'male' ? of([]) :
+                this.prepService.savePregnancyIndicatorLogCommand(pregnancyIndicatorLog);
+        }
 
         forkJoin([
             prepStatusApiCommand,
@@ -433,7 +457,8 @@ export class PrepEncounterComponent implements OnInit {
             circumcisionStatus,
             pregnancyIndicator,
             matNextAppointment,
-            prepStiScreeningTreatmentCommand]).subscribe(
+            prepStiScreeningTreatmentCommand,
+            pregnancyIndicatorLogCommand]).subscribe(
                 (result) => {
                     familyPlanningMethodCommand.PatientFPId = result[1]['patientId'];
                     const pncFamilyPlanningMethod = this.pncService.savePncFamilyPlanningMethod(familyPlanningMethodCommand).subscribe(

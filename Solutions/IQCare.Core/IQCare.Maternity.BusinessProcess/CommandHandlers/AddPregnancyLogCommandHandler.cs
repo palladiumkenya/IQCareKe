@@ -28,7 +28,7 @@ namespace IQCare.Maternity.BusinessProcess.CommandHandlers
             {
                 try
                 {
-                    if (request.Id.HasValue)
+                    if (request.Id.HasValue && request.Id.Value > 0)
                     {
                         var pregnancy = await _maternityUnitOfWork.Repository<PregnancyLog>().FindByIdAsync(request.Id.Value);
                         pregnancy.LMP = request.LMP;

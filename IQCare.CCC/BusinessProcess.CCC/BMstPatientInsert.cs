@@ -77,5 +77,15 @@ namespace BusinessProcess.CCC
 
             DataTable dt = (DataTable)obj.ReturnObject(ClsUtility.theParams, "mstPatient_Update", ClsUtility.ObjectEnum.DataTable);
         }
+
+        public void UpdateBlueCardEnrollmentDate(int ptn_pk, DateTime enrollmentDate)
+        {
+            ClsObject obj = new ClsObject();
+            ClsUtility.Init_Hashtable();
+            ClsUtility.AddExtendedParameters("@Ptn_Pk", SqlDbType.Int, ptn_pk);
+            ClsUtility.AddExtendedParameters("@DateOfEnrollment", SqlDbType.DateTime, enrollmentDate);
+
+            DataTable dt = (DataTable)obj.ReturnObject(ClsUtility.theParams, "sp_updatePatientProgramStart", ClsUtility.ObjectEnum.DataTable);
+        }
     }
 }

@@ -170,4 +170,4 @@ LEFT JOIN dtl_PatientHivPrevCareIE on dtl_PatientHivPrevCareIE.Ptn_pk = M.Ptn_Pk
 left join Patient P on M.Ptn_Pk = P.ptn_pk
 left join PatientIdentifier PI ON PI.PatientId = P.Id
 left join PatientEnrollment PE ON PE.PatientId = P.Id
-where PI.Id IS NULL AND P.Id IS NOT NULL AND LP.ModuleId in (2,203) AND PE.Id IS NOT NULL
+where PI.Id IS NULL AND P.Id IS NOT NULL AND LP.ModuleId in (2,203) AND PE.Id IS NOT NULL AND ISNULL(M.PatientEnrollmentID, '') != ''
