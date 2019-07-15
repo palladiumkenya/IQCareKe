@@ -605,8 +605,16 @@ export class PrepRiskassessmentComponent implements OnInit {
         this.RiskViewOptions[objIndex].checked = event.source.selected;
 
 
+        if (event.source.viewValue !== 'Not Applicable' && event.source.selected == true) {
+            for (let i = 0; i < event.source._parent.options.length; i++) {
+                if (event.source._parent.options._results[i].viewValue
+                    === 'Not Applicable')   {
+                    event.source._parent.options._results[i].deselect();
+                }
+            }
+        }
 
-        if (event.source.viewValue === 'Not Applicable') {
+        if (event.source.viewValue === 'Not Applicable' && event.source.selected == true) {
             for (let i = 0; i < event.source._parent.options.length; i++) {
                 if (event.source._parent.options._results[i].viewValue
                     !== event.source.viewValue) {
@@ -627,8 +635,15 @@ export class PrepRiskassessmentComponent implements OnInit {
         this.RiskViewOptions[objIndex].checked = event.source.selected;
 
 
-
-        if (event.source.viewValue === 'Not Applicable') {
+        if (event.source.viewValue !== 'Not Applicable' && event.source.selected == true) {
+            for (let i = 0; i < event.source._parent.options.length; i++) {
+                if (event.source._parent.options._results[i].viewValue
+                    === 'Not Applicable')   {
+                    event.source._parent.options._results[i].deselect();
+                }
+            }
+        }
+        if (event.source.viewValue === 'Not Applicable' && event.source.selected == true) {
             for (let i = 0; i < event.source._parent.options.length; i++) {
                 if (event.source._parent.options._results[i].viewValue
                     !== event.source.viewValue) {
