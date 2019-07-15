@@ -474,6 +474,10 @@ export class PrepEncounterComponent implements OnInit {
         ]).subscribe(
             (result) => {
                 console.log(result);
+
+                this.zone.run(() => {
+                    this.router.navigate(['/prep/' + this.patientId + '/' + this.personId + '/' + 7], { relativeTo: this.route });
+                });
             },
             (error) => {
                 console.log(error);

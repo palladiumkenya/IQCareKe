@@ -93,7 +93,7 @@ export class PrepRiskassessmentComponent implements OnInit {
 
             this.personId = params['personId'];
 
-            console.log(this.serviceAreaId);
+
         });
         this.route.data.subscribe((res) => {
             const { assessmentOutComeArray, clientsBehaviourRiskArray,
@@ -115,8 +115,7 @@ export class PrepRiskassessmentComponent implements OnInit {
 
 
             } = res;
-            console.log(ARTStartDateArray);
-            console.log(assessmentOutComeArray);
+
             this.assessmentOutComeOptions = assessmentOutComeArray['lookupItems'];
             this.clientsBehaviourRiskOptions = clientsBehaviourRiskArray['lookupItems'];
             this.sexualPartnerHivStatusOptions = sexualPartnerHivStatusArray['lookupItems'];
@@ -138,11 +137,7 @@ export class PrepRiskassessmentComponent implements OnInit {
 
 
             this.PartnerHIVStatus = this.partnerstatusOptions[0]['itemId'];
-            console.log('HIVSTatus');
-            console.log(this.partnerstatusOptions);
-            console.log(this.PartnerHIVStatus);
-            console.log("Sex without condoms");
-            console.log(this.sexwithoutcondomoptions);
+
 
         });
 
@@ -203,8 +198,7 @@ export class PrepRiskassessmentComponent implements OnInit {
 
     LoadDetails() {
         this.prepservice.GetAssessmentDetails(this.patientId, this.PatientMasterVisitId).subscribe((result) => {
-            console.log('existing results');
-            console.log(result);
+
             this.ExistingClinicalNotes = [];
             this.ExistingRiskAssessmentDetails = [];
             this.ExistingSexualPartnerList = [];
@@ -354,7 +348,7 @@ export class PrepRiskassessmentComponent implements OnInit {
             partnersexmasterid = this.sexwithoutcondomoptions[0].masterId;
             partnersexcondom = this.ExistingRiskAssessmentDetails.filter(x => x.riskAssessmentid == partnersexmasterid)
                 .map(o => {
-                    return o.Value;
+                    return o.value;
                 });
 
             let children: any[] = [];
@@ -369,7 +363,7 @@ export class PrepRiskassessmentComponent implements OnInit {
             this.prepservice.getPatientMasterVisits(this.patientId, this.PatientMasterVisitId).subscribe((res) => {
                 this.Encounters = res;
                 if (this.Encounters != null && this.Encounters != undefined && this.Encounters.length > 0) {
-                    console.log(this.Encounters);
+
                     let visitDate: Date;
                     visitDate = this.Encounters[0]['visitDate'];
                     this.PrepRiskAssessmentFormGroup.controls.visitDate.setValue(visitDate);
@@ -392,9 +386,9 @@ export class PrepRiskassessmentComponent implements OnInit {
             this.PrepRiskAssessmentFormGroup.controls.partnerHIVStatusDate.setValue(partnerhivstatusvalue[0]);
             this.PrepRiskAssessmentFormGroup.controls.partnercccenrollment.setValue(partnercccenrollmentvalue[0]);
             this.PrepRiskAssessmentFormGroup.controls.partnerARTStartDate.setValue(partnerartvalue[0]);
-            this.PrepRiskAssessmentFormGroup.controls.CCCNumber.setValue(partnercccvalue);
-            this.PrepRiskAssessmentFormGroup.controls.Months.setValue(partnermonth);
-            this.PrepRiskAssessmentFormGroup.controls.partnersexcondoms.setValue(partnersexcondom);
+            this.PrepRiskAssessmentFormGroup.controls.CCCNumber.setValue(partnercccvalue[0]);
+            this.PrepRiskAssessmentFormGroup.controls.Months.setValue(partnermonth[0]);
+            this.PrepRiskAssessmentFormGroup.controls.partnersexcondoms.setValue(partnersexcondom[0]);
             this.PrepRiskAssessmentFormGroup.controls.hivpartnerchildren.setValue(children[0]);
 
 
@@ -514,7 +508,9 @@ export class PrepRiskassessmentComponent implements OnInit {
         let count: number = 0;
         for (let i = 0; i < this.RiskViewOptions.length; i++) {
 
-            if (this.RiskViewOptions[i].checked == false) {
+            if ((this.RiskViewOptions[i].checked == false) ||
+                (this.RiskViewOptions[i].itemName === 'N/A'
+                    && this.RiskViewOptions[i].checked == true)) {
                 count = count + 1;
             }
             if (count == length) {
@@ -529,9 +525,12 @@ export class PrepRiskassessmentComponent implements OnInit {
             }
         }
 
+
         for (let i = 0; i < this.RiskViewOptions.length; i++) {
             let selected: boolean = false;
-            if (this.RiskViewOptions[i].checked == true) {
+
+            if (this.RiskViewOptions[i].checked == true &&
+                this.RiskViewOptions[i].itemName !== 'N/A') {
                 selected = true;
             }
 
@@ -605,6 +604,17 @@ export class PrepRiskassessmentComponent implements OnInit {
         const objIndex = this.RiskViewOptions.findIndex((obj => obj.itemId == value));
         this.RiskViewOptions[objIndex].checked = event.source.selected;
 
+
+
+        if (event.source.viewValue === 'Not Applicable') {
+            for (let i = 0; i < event.source._parent.options.length; i++) {
+                if (event.source._parent.options._results[i].viewValue
+                    !== event.source.viewValue) {
+                    event.source._parent.options._results[i].deselect();
+                }
+            }
+        }
+
         this.CheckRiskOptions();
 
 
@@ -616,7 +626,16 @@ export class PrepRiskassessmentComponent implements OnInit {
         const objIndex = this.RiskViewOptions.findIndex((obj => obj.itemId == value));
         this.RiskViewOptions[objIndex].checked = event.source.selected;
 
-        console.log(this.RiskViewOptions);
+
+
+        if (event.source.viewValue === 'Not Applicable') {
+            for (let i = 0; i < event.source._parent.options.length; i++) {
+                if (event.source._parent.options._results[i].viewValue
+                    !== event.source.viewValue) {
+                    event.source._parent.options._results[i].deselect();
+                }
+            }
+        }
 
         if (event.source.viewValue === 'Not on ART' && event.source.selected == true) {
             for (let i = 0; i < event.source._parent.options.length; i++) {
@@ -1019,8 +1038,8 @@ export class PrepRiskassessmentComponent implements OnInit {
         }
 
 
-        if (partnercccenrollmentdetail != null && partnercccenrollmentdetail !== undefined 
-            && partnercccenrollmentdetail[0] !== undefined) {
+        if (partnercccenrollmentdetail != null && partnercccenrollmentdetail !== undefined
+        ) {
 
             let partnercccenrollmentmasterid: number;
             let partnercccenrollmentlist: any[] = [];
@@ -1052,7 +1071,7 @@ export class PrepRiskassessmentComponent implements OnInit {
 
 
         if (partnersexwithoutcondoms != null && partnersexwithoutcondoms !== undefined
-             && partnersexwithoutcondoms[0] !== undefined) {
+        ) {
             let partnersexcondomsmasterid: number;
             let partnersexcondomslist: any[] = [];
             partnersexcondomsmasterid = this.sexwithoutcondomoptions[0].masterId;
@@ -1073,7 +1092,7 @@ export class PrepRiskassessmentComponent implements OnInit {
                     'Id': 0,
                     'Comment': '',
                     'RiskAssessmentid': partnersexcondomsmasterid,
-                    'Value': partnersexwithoutcondoms[0],
+                    'Value': partnersexwithoutcondoms,
                     'DeleteFlag': false,
                     'Date': ''
                 });
@@ -1082,7 +1101,7 @@ export class PrepRiskassessmentComponent implements OnInit {
         }
 
 
-        if (CCCnumber != null && CCCnumber !== undefined && CCCnumber[0] !== '' )  {
+        if (CCCnumber != null && CCCnumber !== undefined) {
             let cccnumbermasterid: number;
             let cccnumbervalueid: number;
             let cccnumberlist: any[] = [];
@@ -1098,7 +1117,7 @@ export class PrepRiskassessmentComponent implements OnInit {
                             x.DeleteFlag = true;
                         } else {
                             x.DeleteFlag = false;
-                            x.Comment = CCCnumber[0];
+                            x.Comment = CCCnumber;
                         }
 
                     }
@@ -1107,7 +1126,7 @@ export class PrepRiskassessmentComponent implements OnInit {
                 if (CCCnumber.length > 0) {
                     this.RiskAssessmentList.push({
                         'Id': 0,
-                        'Comment': CCCnumber[0],
+                        'Comment': CCCnumber.toString(),
                         'RiskAssessmentid': cccnumbermasterid,
                         'Value': cccnumbervalueid,
                         'DeleteFlag': false,
@@ -1119,7 +1138,7 @@ export class PrepRiskassessmentComponent implements OnInit {
         }
 
 
-        if (typeof Monthdetail != 'undefined' && Monthdetail[0] !== undefined   && Monthdetail[0] !== '') {
+        if (typeof Monthdetail != 'undefined' && Monthdetail !== undefined && Monthdetail) {
             let hivsexdiscordantmasterid: number;
             let hivsexdiscordantvalueid: number;
             let hivsexdiscordantlist: any[] = [];
@@ -1131,6 +1150,7 @@ export class PrepRiskassessmentComponent implements OnInit {
                 .forEach(x => {
                     if (x.Value == hivsexdiscordantvalueid) {
                         x.DeleteFlag = false;
+                        x.Comment = Monthdetail.toString();
 
                     } else {
                         x.DeleteFlag = true;
@@ -1140,7 +1160,7 @@ export class PrepRiskassessmentComponent implements OnInit {
 
                 this.RiskAssessmentList.push({
                     'Id': 0,
-                    'Comment': Monthdetail,
+                    'Comment': Monthdetail.toString(),
                     'RiskAssessmentid': hivsexdiscordantmasterid,
                     'Value': hivsexdiscordantvalueid,
                     'DeleteFlag': false,
@@ -1163,6 +1183,7 @@ export class PrepRiskassessmentComponent implements OnInit {
                 .forEach(x => {
                     if (x.Value == hipartnerchildrenvalueid) {
                         x.DeleteFlag = false;
+                        x.Comment = hivpartnerchildrendetail.toString();
 
                     } else {
                         x.DeleteFlag = true;
@@ -1172,7 +1193,7 @@ export class PrepRiskassessmentComponent implements OnInit {
 
                 this.RiskAssessmentList.push({
                     'Id': 0,
-                    'Comment': hivpartnerchildrendetail,
+                    'Comment': hivpartnerchildrendetail.toString(),
                     'RiskAssessmentid': hivpartnerchildrenmasterid,
                     'Value': hipartnerchildrenvalueid,
                     'DeleteFlag': false,
@@ -1182,14 +1203,14 @@ export class PrepRiskassessmentComponent implements OnInit {
             }
         }
 
-        console.log(this.RiskAssessmentList);
+
 
 
         this.prepservice.AddEditBehaviourRisk(this.EncounterTypeId, this.UserId, this.patientId, this.PatientMasterVisitId, date,
             this.serviceAreaId, this.RiskAssessmentList, this.ClinicalList).subscribe(
                 (response) => {
                     this.PatientMasterVisitId = response['patientMasterVisitId'];
-                    console.log(response);
+
                     this.snotifyService.success('Successfully submitted the form', 'Submit RiskAssessment Form',
                         this.notificationService.getConfig());
                     this.zone.run(() => {
@@ -1262,10 +1283,9 @@ export class PrepRiskassessmentComponent implements OnInit {
 
         for (let i = 0; i < partnerhivstatus.length; i++) {
             let index: number;
-            console.log(partnerhivstatus[i].value);
-            console.log(partnerhivstatus[i]);
+
             index = this.sexualPartnerHivStatusOptions.findIndex(x => x.itemId == partnerhivstatus[i]);
-            console.log(this.sexualPartnerHivStatusOptions[index].masterId);
+
             this.RiskAssessmentList.push({
                 'Id': 0,
                 'Comment': '',
@@ -1281,7 +1301,7 @@ export class PrepRiskassessmentComponent implements OnInit {
             let index: number;
 
             index = this.clientsBehaviourRiskOptions.findIndex(x => x.itemId == clientassessmentstatus[i]);
-            console.log(this.clientsBehaviourRiskOptions[index].masterId);
+
             this.RiskAssessmentList.push({
                 'Id': 0,
                 'Comment': '',
@@ -1297,7 +1317,7 @@ export class PrepRiskassessmentComponent implements OnInit {
         let assessmentindex: number;
 
         assessmentindex = this.assessmentOutComeOptions.findIndex(x => x.itemId == assessmentoutcomestatus);
-        console.log(this.assessmentOutComeOptions[assessmentindex].masterId);
+
         this.RiskAssessmentList.push({
             'Id': 0,
             'Comment': '',
@@ -1313,7 +1333,7 @@ export class PrepRiskassessmentComponent implements OnInit {
 
         riskreductionindex = this.RiskReductionEducationOptions.findIndex(x => x.itemId == riskreductioneducationstatus);
         if (riskreductionindex !== -1) {
-            console.log(this.RiskReductionEducationOptions[riskreductionindex].masterId);
+
 
             this.RiskAssessmentList.push({
                 'Id': 0,
@@ -1329,7 +1349,7 @@ export class PrepRiskassessmentComponent implements OnInit {
         let referralpreventionindex: number;
 
         referralpreventionindex = this.ReferralPreventionOptions.findIndex(x => x.itemId == referralpreventions);
-        console.log(this.ReferralPreventionOptions[referralpreventionindex].masterId);
+
         this.RiskAssessmentList.push({
             'Id': 0,
             'Comment': SpecifyPreventionReferalServicesValue,
@@ -1344,7 +1364,7 @@ export class PrepRiskassessmentComponent implements OnInit {
         let clientakeprepindex: number;
 
         clientakeprepindex = this.clientWillingTakePrepOptions.findIndex(x => x.itemId == ClientWillingTakePrepstatus);
-        console.log(this.clientWillingTakePrepOptions[clientakeprepindex].masterId);
+
         this.RiskAssessmentList.push({
             'Id': 0,
             'Comment': '',
@@ -1360,7 +1380,7 @@ export class PrepRiskassessmentComponent implements OnInit {
 
         riskeducationindex = this.riskEducationOptions.findIndex(x => x.itemId == riskeducationstatus);
         if (riskeducationindex !== -1) {
-            console.log(this.riskEducationOptions[riskeducationindex].masterId);
+
             this.RiskAssessmentList.push({
                 'Id': 0,
                 'Comment': SpecifyRiskEducationValue,
@@ -1392,7 +1412,7 @@ export class PrepRiskassessmentComponent implements OnInit {
         let partnerartstartdatemasterid: number;
         let partnerartstartdatevalueid: number;
 
-        console.log(this.partnerartstartdateoptions);
+
         partnerartstartdatemasterid = this.partnerartstartdateoptions[0].masterId;
         partnerartstartdatevalueid = this.partnerartstartdateoptions[0].itemId;
         if (artstartdatepartner !== null && artstartdatepartner !== '' && artstartdatepartner !== undefined) {
@@ -1416,13 +1436,13 @@ export class PrepRiskassessmentComponent implements OnInit {
         partnercccenrollmentmasterid = this.partnercccenrollmentoptions[0].masterId;
 
 
-        if (partnercccenrollmentdetail !== null && partnercccenrollmentdetail !== undefined  
-            && partnercccenrollmentdetail[0] !==undefined) {
+        if (partnercccenrollmentdetail !== null && partnercccenrollmentdetail !== undefined
+        ) {
             this.RiskAssessmentList.push({
                 'Id': 0,
                 'Comment': '',
                 'RiskAssessmentid': partnercccenrollmentmasterid,
-                'Value': partnercccenrollmentdetail[0],
+                'Value': partnercccenrollmentdetail,
                 'DeleteFlag': false,
                 'Date': ''
             });
@@ -1434,12 +1454,12 @@ export class PrepRiskassessmentComponent implements OnInit {
 
         partnersexcondomsmasterid = this.sexwithoutcondomoptions[0].masterId;
         if (partnersexwithoutcondoms !== null && partnersexwithoutcondoms !== undefined
-             && partnersexwithoutcondoms[0] !== undefined) {
+        ) {
             this.RiskAssessmentList.push({
                 'Id': 0,
                 'Comment': '',
                 'RiskAssessmentid': partnersexcondomsmasterid,
-                'Value': partnersexwithoutcondoms[0],
+                'Value': partnersexwithoutcondoms,
                 'DeleteFlag': false,
                 'Date': ''
             });
@@ -1454,10 +1474,10 @@ export class PrepRiskassessmentComponent implements OnInit {
         findindex = this.patientIdentifieroptions.findIndex(x => x.itemName == 'CCCNumber');
         cccnumbermasterid = this.patientIdentifieroptions[findindex].masterId;
         cccnumbervalueid = this.patientIdentifieroptions[findindex].itemId;
-        if (CCCnumber != null || CCCnumber !== undefined || CCCnumber !== '' && CCCnumber[0] !== "") {
+        if (CCCnumber != null || CCCnumber !== undefined || CCCnumber !== '') {
             this.RiskAssessmentList.push({
                 'Id': 0,
-                'Comment': CCCnumber[0],
+                'Comment': CCCnumber,
                 'RiskAssessmentid': cccnumbermasterid,
                 'Value': cccnumbervalueid,
                 'DeleteFlag': false,
@@ -1472,10 +1492,10 @@ export class PrepRiskassessmentComponent implements OnInit {
 
         hivsexdiscordantmasterid = this.hivserodiscordantoptions[0].masterId;
         hivsexdiscordantvalueid = this.hivserodiscordantoptions[0].itemId;
-        if (typeof Monthdetail != 'undefined' || Monthdetail  && Monthdetail[0] !== "") {
+        if (typeof Monthdetail != 'undefined' || Monthdetail) {
             this.RiskAssessmentList.push({
                 'Id': 0,
-                'Comment': Monthdetail[0],
+                'Comment': Monthdetail,
                 'RiskAssessmentid': hivsexdiscordantmasterid,
                 'Value': hivsexdiscordantvalueid,
                 'DeleteFlag': false,
@@ -1547,7 +1567,7 @@ export class PrepRiskassessmentComponent implements OnInit {
                     this.serviceAreaId, this.RiskAssessmentList, this.ClinicalList).subscribe(
                         (response) => {
                             this.PatientMasterVisitId = response['patientMasterVisitId'];
-                            console.log(response);
+
                             this.snotifyService.success('Successfully submitted the form', 'Submit RiskAssessment Form',
                                 this.notificationService.getConfig());
 

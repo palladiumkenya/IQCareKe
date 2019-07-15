@@ -56,7 +56,7 @@
                             <mat-form-field class="col-lg-12">
                                 <mat-select placeholder="AssessmentOutcome" formControlName="assessmentOutCome"
                                     required>
-                                    <mat-option [value]=""></mat-option>
+                                    
                                     <mat-option *ngFor="let yesNoOption of assessmentOutComeOptions"
                                         [value]="yesNoOption.itemId">
                                         {{yesNoOption.itemDisplayName}}
@@ -72,7 +72,7 @@
 
                                 <mat-select placeholder="Risk Reduction Education Offered"
                                     formControlName="RiskReductionEducation" required>
-                                    <mat-option [value]=""></mat-option>
+                                  
                                     <mat-option *ngFor="let yesNoOption of  RiskReductionEducationOptions"
                                         [value]="yesNoOption.itemId"  (onSelectionChange)="OnRiskReductionEducationOffered($event)">
                                         {{yesNoOption.itemDisplayName}}
@@ -96,7 +96,7 @@
                                 <mat-select placeholder="Referral For Other Prevention Services"
                                     formControlName="ReferralPreventions"
                                    required>
-                                    <mat-option [value]=""></mat-option>
+                                    
                                     <mat-option *ngFor="let Option of   ReferralPreventionOptions"
                                         [value]="Option.itemId"  (onSelectionChange)="OnReferralPreventionOffered($event)">
                                         {{Option.itemDisplayName}}
@@ -133,7 +133,7 @@
 
                                 <mat-select placeholder="Client willing to take PrEP?"
                                     formControlName="ClientWillingTakePrep" required>
-                                    <mat-option [value]=""></mat-option>
+                                    
                                     <mat-option *ngFor="let Option of   clientWillingTakePrepOptions"
                                         [value]="Option.itemId"     (onSelectionChange)="OnClientWillingTakingPrep($event)">
                                         {{Option.itemDisplayName}}
@@ -147,7 +147,7 @@
 
                                 <mat-select placeholder="If No,Risk education Offered?" formControlName="RiskEducation"
                                    >
-                                    <mat-option [value]=""></mat-option>
+                                 
                                     <mat-option *ngFor="let Option of    riskEducationOptions" [value]="Option.itemId" (onSelectionChange)=" OnRiskEducationOffered($event)">
                                         {{Option.itemDisplayName}}
                                     </mat-option>
@@ -202,7 +202,7 @@
                                 <mat-form-field class="col-lg-12">
                                     <mat-select placeholder="Partner CCC Enrollment" formControlName="partnercccenrollment"
                                         >
-                                        <mat-option [value]=""></mat-option>
+                                        
                                         <mat-option *ngFor="let yesNoOption of partnercccenrollmentoptions"
                                             [value]="yesNoOption.itemId"  (onSelectionChange)="OnPartnerenrollmentSelection($event)">
                                             {{yesNoOption.itemDisplayName}}
@@ -252,7 +252,7 @@
                                 <mat-form-field class="col-lg-12">
                                     <mat-select placeholder="Sex without Condoms with HIV+ Partner in past 30days" formControlName="partnersexcondoms"
                                         >
-                                        <mat-option [value]=""></mat-option>
+                                       
                                         <mat-option *ngFor="let yesNoOption of sexwithoutcondomoptions"
                                             [value]="yesNoOption.itemId">
                                             {{yesNoOption.itemDisplayName}}
