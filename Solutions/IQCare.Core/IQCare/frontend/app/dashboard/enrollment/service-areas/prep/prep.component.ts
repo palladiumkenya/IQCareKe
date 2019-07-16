@@ -211,7 +211,7 @@ export class PrepComponent implements OnInit {
         );
         this.form.controls.Weeks.disable({ onlySelf: true });
         this.form.controls.Months.disable({ onlySelf: true });
-        this.form.controls.InitiationDate.disable({ onlySelf: true });
+
 
         this.form.controls.MFLCode.setValue(this.posId);
 
@@ -276,17 +276,17 @@ export class PrepComponent implements OnInit {
         this.personHomeService.getPatientOVCStatusDetails(this.personId).subscribe(
             (result) => {
                 if (result != null) {
-                const arrayValue = [];
+                    const arrayValue = [];
 
-                arrayValue.push(result);
-              
-                if (arrayValue[0]['inSchool'] != null) {
-                    let inschool: string;
-                    inschool = arrayValue[0]['inSchool'].toString();
-                    this.form.controls.IsSchool.setValue(parseInt(inschool, 10));
+                    arrayValue.push(result);
 
+                    if (arrayValue[0]['inSchool'] != null) {
+                        let inschool: string;
+                        inschool = arrayValue[0]['inSchool'].toString();
+                        this.form.controls.IsSchool.setValue(parseInt(inschool, 10));
+
+                    }
                 }
-            }
 
             }
 
@@ -584,11 +584,11 @@ export class PrepComponent implements OnInit {
             if (selectedvalue === 1) {
                 this.form.controls.Weeks.enable({ onlySelf: true });
                 this.form.controls.Months.enable({ onlySelf: true });
-                this.form.controls.InitiationDate.enable({ onlySelf: true });
+                // this.form.controls.InitiationDate.enable({ onlySelf: true });
             } else {
                 this.form.controls.Weeks.disable({ onlySelf: true });
                 this.form.controls.Months.disable({ onlySelf: true });
-                this.form.controls.InitiationDate.disable({ onlySelf: true });
+                // this.form.controls.InitiationDate.disable({ onlySelf: true });
             }
         }
 
@@ -597,9 +597,6 @@ export class PrepComponent implements OnInit {
 
     change(event) {
 
-        console.log(event.option.value.name);
-
-        console.log(event.option.value.mflCode);
 
         this.form.controls.TransferInMflCode.setValue(event.option.value.mflCode);
         console.log(this.form.controls.TransferInMflCode.value);
@@ -774,7 +771,7 @@ export class PrepComponent implements OnInit {
                                     (error) => {
                                         this.snotifyService.error('Error saving TransferIn Details ' + error, 'Transfer Status',
                                             this.notificationService.getConfig());
-                            
+
                                     });
                         }
 
@@ -815,7 +812,7 @@ export class PrepComponent implements OnInit {
                                     (error) => {
                                         this.snotifyService.error('Error saving Previous Prep Details ' + error, 'Previous Prep Use',
                                             this.notificationService.getConfig());
-                                            
+
                                     });
                         }
 
@@ -827,11 +824,11 @@ export class PrepComponent implements OnInit {
                             });
                         });
                     },
-                    
+
                     (err) => {
                         this.snotifyService.error('Error completing enrollment ' + err, 'Enrollment',
                             this.notificationService.getConfig());
-                            this.spinner.hide();
+                        this.spinner.hide();
                     },
                     () => {
                         this.spinner.hide();

@@ -27,5 +27,6 @@ LEFT JOIN PatientPrEPStatus PS ON PS.PatientEncounterId = PE.Id
 LEFT JOIN PatientAppointment PA ON PA.PatientMasterVisitId = PM.Id
 LEFT JOIN LookupItemView ltv  on ltv.ItemId=PE.EncounterTypeId
 LEFT JOIN ServiceArea sa on sa.Id=PM.ServiceId
-where sa.Code='PREP'
+where sa.Code='PREP' and ltv.ItemName !='CareEnded'
+
 GO

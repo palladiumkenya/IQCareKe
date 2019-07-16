@@ -60,9 +60,10 @@ export class PrepCareendComponent implements OnInit {
     ngOnInit() {
         this.route.params.subscribe(params => {
             const {
-                patientId, patientMasterVisitId, serviceId, edit
+                patientId, personId, patientMasterVisitId, serviceId, edit
             } = params;
             this.patientId = params.patientId;
+            this.personId = params.personId;
 
             this.patientMasterVisitId = params.patientMasterVisitId;
             this.serviceAreaId = params.serviceId;
@@ -156,7 +157,14 @@ export class PrepCareendComponent implements OnInit {
         }
 
     }
-    Save() {
+    Cancel() {
+        this.zone.run(() => {
+            this.router.navigate(
+                ['/dashboard/personhome/' + this.personId],
+                { relativeTo: this.route });
+        });
+
+}    Save() {
         this.spinner.show();
         let CareEndReason: number;
         let Specify: string;
@@ -192,7 +200,11 @@ export class PrepCareendComponent implements OnInit {
 
                         this.snotifyService.success('Successfully careended the patient' + response['message'], 'Patient Termination Form',
                             this.notificationService.getConfig());
-
+                            this.zone.run(() => {
+                                this.router.navigate(
+                                    ['/dashboard/personhome/' + this.personId],
+                                    { relativeTo: this.route });
+                            });
 
 
 
@@ -226,7 +238,11 @@ export class PrepCareendComponent implements OnInit {
                     this.snotifyService.success('Successfully careended the patient' + response['message'], 'Patient Termination Form',
                         this.notificationService.getConfig());
 
-
+                        this.zone.run(() => {
+                            this.router.navigate(
+                                ['/dashboard/personhome/' + this.personId],
+                                { relativeTo: this.route });
+                        });
 
 
                 },

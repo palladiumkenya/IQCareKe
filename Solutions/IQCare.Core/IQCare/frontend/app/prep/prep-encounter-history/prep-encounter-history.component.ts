@@ -230,7 +230,7 @@ export class PrepEncounterHistoryComponent implements OnInit {
         } else {
             this.riskdone = false;
             isEligible = false;
-           
+
 
         }
 
@@ -293,7 +293,7 @@ export class PrepEncounterHistoryComponent implements OnInit {
                 this.iscareend = true;
                 isEligible = false;
 
-               
+
             } else {
                 isEligible = true;
             }
@@ -303,11 +303,11 @@ export class PrepEncounterHistoryComponent implements OnInit {
             if (isCCCEnrolled != undefined) {
                 if (isCCCEnrolled && isCCCEnrolled.length > 0) {
                     this.iscareend = true;
-                   
+
 
                     isEligible = false;
                 } else {
-                   
+
 
                 }
             }
@@ -457,7 +457,7 @@ export class PrepEncounterHistoryComponent implements OnInit {
         } else if (element['encounterType'].toString() === 'Care Ended') {
             this.zone.run(() => {
                 this.router.navigate(['/prep/prepcareend/' + '/' + this.patientId + '/' + this.personId + '/'
-                    + this.serviceAreaId + '/' + element['patientMasterVisitId']],
+                    + this.serviceAreaId + '/' + element['patientMasterVisitId'] + '/' + true],
                     { relativeTo: this.route });
             });
         }

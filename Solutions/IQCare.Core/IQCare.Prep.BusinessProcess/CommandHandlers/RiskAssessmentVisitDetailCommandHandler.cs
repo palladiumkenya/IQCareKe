@@ -57,6 +57,7 @@ namespace IQCare.Prep.BusinessProcess.CommandHandlers
                                     rass.RiskAssessmentId = ra.RiskAssessmentid;
                                     rass.RiskAssessmentValue = ra.Value;
                                     rass.AssessmentDate = ra.Date;
+                                    rass.Comment = ra.Comment;
                                     _prepUnitOfWork.Repository<RiskAssessment>().Update(rass);
 
                                     await _prepUnitOfWork.SaveAsync();
