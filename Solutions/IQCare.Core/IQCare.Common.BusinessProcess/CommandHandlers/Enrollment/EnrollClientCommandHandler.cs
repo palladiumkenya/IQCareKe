@@ -36,6 +36,17 @@ namespace IQCare.Common.BusinessProcess.CommandHandlers.Enrollment
                     request.ClientEnrollment.PatientId, request.ClientEnrollment.ServiceAreaId,
                     request.ClientEnrollment.CreatedBy, request.ClientEnrollment.DateOfEnrollment);*/
 
+                string cccNumber = String.Empty;
+                int moduleId = 283;
+                foreach (var item in request.ClientEnrollment.ServiceIdentifiersList)
+                {
+                    if (item.IdentifierId == 1)
+                    {
+                        cccNumber = item.IdentifierValue;
+                        moduleId = 203;
+                    }
+                }
+
                 GetPatientDetails patientDetails = new GetPatientDetails(_unitOfWork);
 
 
@@ -45,7 +56,7 @@ namespace IQCare.Common.BusinessProcess.CommandHandlers.Enrollment
                 {
                     var dobPrecision = "EXACT";
                     var dob = DateTime.Now;
-                    if(patientLookup[0].DobPrecision.HasValue)
+                    if (patientLookup[0].DobPrecision.HasValue)
                         dobPrecision = patientLookup[0].DobPrecision.Value ? "ESTIMATED" : "EXACT";
 
                     if (patientLookup[0].DateOfBirth.HasValue)
@@ -57,6 +68,8 @@ namespace IQCare.Common.BusinessProcess.CommandHandlers.Enrollment
                         patientLookup[0].LastName,
                         patientLookup[0].MidName,
                         request.ClientEnrollment.DateOfEnrollment,
+                        cccNumber,
+                        moduleId,
                         patientLookup[0].MaritalStatusName,
                         patientLookup[0].PhysicalAddress,
                         patientLookup[0].MobileNumber,
@@ -65,13 +78,17 @@ namespace IQCare.Common.BusinessProcess.CommandHandlers.Enrollment
                         dob,
                         request.ClientEnrollment.CreatedBy,
                         request.ClientEnrollment.PosId
-                        );
+                    );
 
                     if (response.Count > 0)
                     {
                         await registerPersonService.UpdatePatient(request.ClientEnrollment.PatientId,
                             request.ClientEnrollment.DateOfEnrollment, request.ClientEnrollment.PosId);
                     }
+                }
+                else
+                {
+                    await registerPersonService.UpdateBlueCard(patientLookup[0].ptn_pk, cccNumber, moduleId);
                 }
 
 
