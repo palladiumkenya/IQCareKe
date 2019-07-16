@@ -242,7 +242,6 @@
     <None Remove="Scripts\2.1.0\01_IQCare_CHS_Final.sql" />
     <None Remove="Scripts\2.1.0\02_PatientLabTracker_Delete_LabOrder.sql" />
     <None Remove="Scripts\2.1.0\03_PA_PatientAllergyView.sql" />
-    <None Remove="Scripts\2.0.1\PREP\EncounterHistorySolution.sql" />
     <None Remove="Scripts\2.1.0\04_PI_PregnancyIndicator_Add_BreastFeeding.sql" />
     <None Remove="Scripts\2.1.0\05_Migrate_StuckBlueCard_Guys.sql" />
     <None Remove="Scripts\2.1.0\06_Remove_Retired_ServiceAreas.sql" />
@@ -529,7 +528,6 @@
     <EmbeddedResource Include="Scripts\2.1.0\15_VW_PatientCareEnding.sql" />
     <EmbeddedResource Include="Scripts\2.1.0\16_PatientView.sql" />
     <EmbeddedResource Include="Scripts\2.1.0\17_PL_PregnancyLog_Add_BirthDefects.sql" />
-    <EmbeddedResource Include="Scripts\2.0.1\PREP\EncounterHistorySolution.sql" />
   </ItemGroup>
 
   <ItemGroup>
