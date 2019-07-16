@@ -6,7 +6,7 @@ import { environment } from '../../../environments/environment';
 import { ErrorHandlerService } from '../../shared/_services/errorhandler.service';
 import { LookupItemView } from '../../shared/_models/LookupItemView';
 import { PersonView } from '../../records/_models/personView';
-import { EncounterDetails } from '../_model/HtsEncounterdetails'
+import { EncounterDetails } from '../_model/HtsEncounterdetails';
 const httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
 };
@@ -193,4 +193,18 @@ export class PersonHomeService {
         );
     }
 
+    public getFacility(mflCode: string) {
+        return this.http.get<any>(this.API_URL + '/api/Lookup/getFacility/' + mflCode).pipe(
+            tap(getFacility => this.errorHandler.log('get Facility')),
+            catchError(this.errorHandler.handleError<any[]>('getFacility'))
+        );
+    }
+
+
+    public getPatientCareEndedHistory(patientId: number): Observable<any[]> {
+        return this.http.get<any[]>(this.API_URL + '/api/PatientServices/GetLatestCareEndDetails/' + patientId).pipe(
+            tap(getPatientCareEndedHistory => this.errorHandler.log(`get Patient CareEnded details` + patientId)),
+            catchError(this.errorHandler.handleError<any>('getPatientCareEndedHistory'))
+        );
+    }
 }

@@ -18,20 +18,62 @@ import {
     PatientIdentifierResolver, ARTStartDateResolver, PartnerHIVStatusResolver, DurationResolver, SexWithoutCondomResolver,
     HivPartnerResolver
 } from './_services/resolvers/prepriskassessment.resolver';
+import {
+    PrepCareEndReasonResolver
+} from './_services/resolvers/prepcareendreason.resolver';
 import { PrepRiskassessmentComponent } from './prep-riskassessment/prep-riskassessment.component';
 import { ReasonsPrepAppointmentNotGivenResolver } from './_services/reasons-prep-appointment-notgiven.resolver';
 import { PrepEncounterTypeResolver } from './_services/prep-encounter-type.resolver';
 import { PregnancyStatusResolver } from './_services/pregnancy-status.resolver';
 import { ScreenedForSTIResolver } from './_services/screened-sti.resolver';
-
+import { PrepCareendComponent } from './prep-careend/prep-careend.component';
+import {
+    PrepAdherenceResolver, AdherenceAssessmentReasonsResolver, RefillPrepStatusResolver,
+    PrepDiscontinueReasonResolver, AdherenceCounsellingResolver, AppointmentGivenResolver, PrepAppointmentReasonResolver
+} from './_services/resolvers/prepmonthlyrefillresolver';
+import { PrepMonthlyrefillComponent } from './prep-monthlyrefill/prep-monthlyrefill.component';
+import { HTSEncounterResolver } from './_services/resolvers/htsencounter.resolver';
+import { PersonCurrentVitalsResolver } from './_services/resolvers/personvitals.resolver';
+import {RiskEncounterResolver} from './_services/resolvers/riskencounter.resolver';
 const routes: Routes = [
     {
         path: ':patientId/:personId/:serviceId',
         component: PrepEncounterHistoryComponent,
         pathMatch: 'full',
         resolve: {
-            prepEncounterTypeOption: PrepEncounterTypeResolver
+            prepEncounterTypeOption: PrepEncounterTypeResolver,
+            HTSEncounterArray: HTSEncounterResolver,
+            PersonVitalsArray: PersonCurrentVitalsResolver,
+            RiskAssessmentArray: RiskEncounterResolver
         }
+    },
+    {
+        path: 'prepcareend',
+        children: [
+            {
+                path: ':patientId/:personId/:serviceId',
+                component: PrepCareendComponent,
+                pathMatch: 'full',
+                resolve: {
+                    careendreasonoptions: PrepCareEndReasonResolver,
+                    EncounterTypeArray: EncounterTypeResolver
+                }
+            },
+            {
+                path: ':patientId/:personId/:serviceId/:patientMasterVisitId/:edit',
+                component: PrepCareendComponent,
+                pathMatch: 'full',
+                resolve: {
+                    careendreasonoptions: PrepCareEndReasonResolver,
+                    EncounterTypeArray: EncounterTypeResolver
+                }
+            }
+
+
+
+
+        ]
+
     },
     {
         path: 'encounter',
@@ -70,6 +112,48 @@ const routes: Routes = [
                     reasonsPrepAppointmentNotGivenOptions: ReasonsPrepAppointmentNotGivenResolver,
                     pregnancyStatusOptions: PregnancyStatusResolver,
                     screenedForSTIOptions: ScreenedForSTIResolver
+                }
+            }
+        ]
+    },
+    {
+        path: 'monthlyrefill',
+        children: [
+            {
+                path: ':patientId/:personId/:serviceId',
+                component: PrepMonthlyrefillComponent,
+                resolve: {
+                    clientsBehaviourRiskArray: ClientsBehaviourRiskResolver,
+                    sexualPartnerHivStatusArray: SexualPartnetHivStatusProfileResolver,
+                    PrepAdherenceArray: PrepAdherenceResolver,
+                    AdherenceAssessmentReasonArray: AdherenceAssessmentReasonsResolver,
+                    RefillPrepStatusArray: RefillPrepStatusResolver,
+                    PrepDiscontinueReasonArray: PrepDiscontinueReasonResolver,
+                    EncounterTypeArray: EncounterTypeResolver,
+                    AdherenceCounsellingArray: AdherenceCounsellingResolver,
+                    yesNoOptions: YesNoResolver,
+                   AppointmentGivenArray: AppointmentGivenResolver,
+                  PrepAppointmentReasonArray: PrepAppointmentReasonResolver
+                }
+
+
+
+            },
+            {
+                path: ':patientId/:personId/:serviceId/:patientMasterVisitId',
+                component: PrepMonthlyrefillComponent,
+                resolve: {
+                    clientsBehaviourRiskArray: ClientsBehaviourRiskResolver,
+                    sexualPartnerHivStatusArray: SexualPartnetHivStatusProfileResolver,
+                    PrepAdherenceArray: PrepAdherenceResolver,
+                    AdherenceAssessmentReasonArray: AdherenceAssessmentReasonsResolver,
+                    RefillPrepStatusArray: RefillPrepStatusResolver,
+                    PrepDiscontinueReasonArray: PrepDiscontinueReasonResolver,
+                    EncounterTypeArray: EncounterTypeResolver,
+                    AdherenceCounsellingArray: AdherenceCounsellingResolver,
+                    yesNoOptions: YesNoResolver,
+                    AppointmentGivenArray: AppointmentGivenResolver,
+                    PrepAppointmentReasonArray: PrepAppointmentReasonResolver
                 }
             }
         ]

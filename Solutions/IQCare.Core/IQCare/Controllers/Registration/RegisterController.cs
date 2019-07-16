@@ -210,6 +210,16 @@ namespace IQCare.Controllers.Registration
             return BadRequest(response);
         }
 
+        [HttpPost("AddPatientReenrollment")]
+        public async Task<IActionResult> AddPatientReenollment([FromBody] AddPatientReenrollmentCommand addPatientReenrollmentCommand)
+        {
+            var encountervisit = await _mediator.Send(addPatientReenrollmentCommand, Request.HttpContext.RequestAborted);
+            if (encountervisit.IsValid)
+                return Ok(encountervisit.Value);
+            return BadRequest(encountervisit);
+        }
+
+
         [HttpGet("GetPatientEnrollmentByServiceAreaId/{patientId}/{serviceAreaId}")]
         public async Task<IActionResult> GetPatientEnrollmentByServiceAreaId(int patientId, int serviceAreaId)
         {
@@ -307,6 +317,9 @@ namespace IQCare.Controllers.Registration
                 return Ok(response.Value);
             return BadRequest(response);
         }
+
+
+       
 
         [HttpPost("AddPersonPopulationType")]
         public async Task<IActionResult> AddPersonPopulationType(

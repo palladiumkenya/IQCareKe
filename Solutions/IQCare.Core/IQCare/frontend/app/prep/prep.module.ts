@@ -27,7 +27,9 @@ import { YesNoDontKnowResolver } from './_services/YesNoDont-Know.resolver';
 import { PregnancyOutcomeResolver } from './_services/PregnancyOutcome.resolver';
 import { PrepContraindicationsResolver } from './_services/prep-contraindications.resolver';
 import { PrepStatusResolver } from './_services/prep-status.resolver';
-
+import { HTSEncounterResolver } from './_services/resolvers/htsencounter.resolver';
+import { PersonCurrentVitalsResolver } from './_services/resolvers/personvitals.resolver';
+import {RiskEncounterResolver} from './_services/resolvers/riskencounter.resolver';
 import {
     AssessmentOutcomeResolver, ClientsBehaviourRiskResolver, SexualPartnetHivStatusProfileResolver,
     RiskReductionEducationResolver, ReferralPreventionServicesResolver, ClientWillingTakePrepResolver
@@ -35,6 +37,13 @@ import {
     PatientIdentifierResolver, ARTStartDateResolver, PartnerHIVStatusResolver, DurationResolver, SexWithoutCondomResolver,
     HivPartnerResolver
 } from './_services/resolvers/prepriskassessment.resolver';
+import {
+    PrepAdherenceResolver, AdherenceAssessmentReasonsResolver, RefillPrepStatusResolver,
+    PrepDiscontinueReasonResolver, AdherenceCounsellingResolver,AppointmentGivenResolver,PrepAppointmentReasonResolver
+} from './_services/resolvers/prepmonthlyrefillresolver';
+import {
+    PrepCareEndReasonResolver
+} from './_services/resolvers/prepcareendreason.resolver';
 import { PrepRiskassessmentComponent } from './prep-riskassessment/prep-riskassessment.component';
 import { PrepAppointmentComponent } from './encounter-components/prep-appointment/prep-appointment.component';
 import { ReasonsPrepAppointmentNotGivenResolver } from './_services/reasons-prep-appointment-notgiven.resolver';
@@ -42,6 +51,8 @@ import { PrepCheckinComponent } from './prep-checkin/prep-checkin.component';
 import { PrepEncounterTypeResolver } from './_services/prep-encounter-type.resolver';
 import { PregnancyStatusResolver } from './_services/pregnancy-status.resolver';
 import { ScreenedForSTIResolver } from './_services/screened-sti.resolver';
+import { PrepCareendComponent } from './prep-careend/prep-careend.component';
+import { PrepMonthlyrefillComponent } from './prep-monthlyrefill/prep-monthlyrefill.component';
 
 @NgModule({
     declarations: [
@@ -54,7 +65,9 @@ import { ScreenedForSTIResolver } from './_services/screened-sti.resolver';
         PrepStatusComponent,
         PrepRiskassessmentComponent,
         PrepAppointmentComponent,
-        PrepCheckinComponent
+        PrepCheckinComponent,
+        PrepCareendComponent,
+        PrepMonthlyrefillComponent
     ],
     imports: [
         SharedModule, MatDatepickerModule, MatNativeDateModule,
@@ -76,7 +89,10 @@ import { ScreenedForSTIResolver } from './_services/screened-sti.resolver';
         PatientIdentifierResolver, ARTStartDateResolver, PartnerHIVStatusResolver,
         DurationResolver, SexWithoutCondomResolver, HivPartnerResolver,
         ReasonsPrepAppointmentNotGivenResolver, PrepEncounterTypeResolver,
-        PregnancyStatusResolver, ScreenedForSTIResolver
+        PregnancyStatusResolver, ScreenedForSTIResolver,
+        PrepCareEndReasonResolver, PrepAdherenceResolver, AdherenceAssessmentReasonsResolver, RefillPrepStatusResolver,
+        PrepDiscontinueReasonResolver, AdherenceCounsellingResolver, AppointmentGivenResolver, PrepAppointmentReasonResolver,
+        HTSEncounterResolver, PersonCurrentVitalsResolver, RiskEncounterResolver
     ],
     entryComponents: [
         PrepCheckinComponent

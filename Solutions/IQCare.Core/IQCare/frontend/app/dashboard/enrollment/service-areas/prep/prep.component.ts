@@ -11,6 +11,7 @@ import { NotificationService } from '../../../../shared/_services/notification.s
 import { PersonView } from '../../../_model/personView';
 import { SnotifyService } from 'ng-snotify';
 import { MatSelect } from '@angular/material';
+import { debounceTime } from 'rxjs/operators';
 import { forkJoin, ReplaySubject, Subject, Observable } from 'rxjs';
 import { RegistrationService } from '../../../../registration/_services/registration.service';
 import { PersonPopulation } from '../../../../registration/_models/personPopulation';
@@ -25,6 +26,7 @@ import { SearchService } from '../../../../registration/_services/search.service
 import { RecordsService } from '../../../../records/_services/records.service';
 import * as moment from 'moment';
 import { take } from 'rxjs/operators';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
     selector: 'app-prep',
@@ -60,7 +62,8 @@ export class PrepComponent implements OnInit {
     currentDate: Date;
     facilities: any[] = [];
     isSchoolVisible: boolean = false;
-    public filteredfacilities: ReplaySubject<any[]> = new ReplaySubject<any[]>();
+    // public filteredfacilities: ReplaySubject<any[]> = new ReplaySubject<any[]>();
+    public filteredfacilities: Observable<any[]>;
     public FacilitySelected: FormControl = new FormControl();
 
 
@@ -71,6 +74,7 @@ export class PrepComponent implements OnInit {
         private router: Router,
         public zone: NgZone,
         private _formBuilder: FormBuilder,
+        private spinner: NgxSpinnerService,
         private _lookupItemService: LookupItemService,
         private personHomeService: PersonHomeService,
         private snotifyService: SnotifyService,
@@ -83,6 +87,12 @@ export class PrepComponent implements OnInit {
         private recordsService: RecordsService) {
         this.maxDate = new Date();
         this.isVisible = false;
+        this.FacilitySelected.valueChanges.pipe(debounceTime(400)).subscribe(data => {
+            this.personHomeService.filterFacilities(data).subscribe(res => {
+
+                this.filteredfacilities = res['facilityList'];
+            });
+        });
     }
 
     ngOnInit() {
@@ -100,6 +110,7 @@ export class PrepComponent implements OnInit {
             this.userId = JSON.parse(localStorage.getItem('appUserId'));
             this.posId = localStorage.getItem('appPosID');
         });
+
         this.personPopulation = new PersonPopulation();
 
         this.form = this._formBuilder.group({
@@ -113,8 +124,7 @@ export class PrepComponent implements OnInit {
             MFLCode: new FormControl('', [Validators.required]),
             Year: new FormControl('', [Validators.required]),
             TransferInDate: new FormControl(''),
-            InitiationDate: new FormControl('', [Validators.required]),
-            FacilityListSelected: new FormControl(''),
+            InitiationDate: new FormControl(''),
             TransferInMflCode: new FormControl(''),
             CurrentRegimen: new FormControl(''),
             ClinicalNotes: new FormControl(''),
@@ -187,11 +197,13 @@ export class PrepComponent implements OnInit {
                 console.log(this.serviceAreaIdentifiers);
             }
         );
-        this._lookupItemService.getFacilityList().subscribe((res) => {
+        /*this._lookupItemService.getFacilityList().subscribe((res) => {
+            console.log('facilitylist');
+            console.log(res);
             this.facilityList = res['facilityList'];
             this.facilities = this.facilityList;
 
-        });
+        });*/
         this._lookupItemService.getByGroupName('PrEPRegimen').subscribe(
             (res) => {
                 this.PrepRegimen = res['lookupItems'];
@@ -203,9 +215,10 @@ export class PrepComponent implements OnInit {
 
         this.form.controls.MFLCode.setValue(this.posId);
 
-       
-        this.form.controls.FacilityListSelected.setValue(this.facilities);
-        this.filteredfacilities.next(this.facilities.slice(0, 10));
+
+        /*this.form.controls.FacilityListSelected.setValue(this.facilities);
+        this.filteredfacilities.next(this.facilities.slice(0, 10));*/
+
 
         if (this.isEdit) {
             this.loadPatient();
@@ -262,14 +275,18 @@ export class PrepComponent implements OnInit {
     loadPatientOVStatus(): void {
         this.personHomeService.getPatientOVCStatusDetails(this.personId).subscribe(
             (result) => {
+                if (result != null) {
                 const arrayValue = [];
+
                 arrayValue.push(result);
+              
                 if (arrayValue[0]['inSchool'] != null) {
                     let inschool: string;
                     inschool = arrayValue[0]['inSchool'].toString();
                     this.form.controls.IsSchool.setValue(parseInt(inschool, 10));
 
                 }
+            }
 
             }
 
@@ -305,10 +322,20 @@ export class PrepComponent implements OnInit {
                     this.form.controls.TransferInMflCode.setValue(arrayValue[0]['mflCode']);
                     console.log(this.form.controls.CurrentRegimen);
 
-                    this.form.controls.FacilityListSelected.setValue(arrayValue[0]['facilityFrom']);
-                    this.FacilitySelected.setValue(arrayValue[0]['facilityFrom']);
+                    //  this.form.controls.FacilityListSelected.setValue(arrayValue[0]['facilityFrom']);
+                    // this.FacilitySelected.setValue(arrayValue[0]['facilityFrom']);
 
-                    this.filtercorrectfacilities(arrayValue[0]['facilityFrom']);
+                    this.personHomeService.getFacility(arrayValue[0]['mflCode']).subscribe(
+                        (result) => {
+                            if (result.length > 0) {
+                                console.log(result);
+                                this.filteredfacilities = result;
+                                this.FacilitySelected.setValue(result[0]);
+                            }
+                        }
+                    );
+
+                    // this.filtercorrectfacilities(arrayValue[0]['facilityFrom']);
                     this.form.controls.ClinicalNotes.setValue(arrayValue[0]['transferInNotes']);
                     let currentTreatment: string;
                     currentTreatment = arrayValue[0]['currentTreatment'].toString();
@@ -464,6 +491,7 @@ export class PrepComponent implements OnInit {
         if (event.source.selected == true) {
             if (event.source.viewValue === 'Yes') {
                 this.isVisible = true;
+                this.form.controls.PrevPrepUse.setValue(1);
             } else {
                 this.isVisible = false;
                 this.form.controls.TransferInDate.setValue('');
@@ -476,36 +504,38 @@ export class PrepComponent implements OnInit {
     }
 
     // tslint:disable-next-line: use-life-cycle-interface
-    ngAfterViewInit() {
-        this.setInitialValue();
+    /* ngAfterViewInit() {
+         this.setInitialValue();
+     }
+ 
+     // tslint:disable-next-line: use-life-cycle-interface
+     ngOnDestroy() {
+         this._onDestroy.next();
+         this._onDestroy.complete();
+     } */
+
+    // protected setInitialValue() {
+    /**  this.filteredfacilities
+          .pipe(take(1), takeUntil(this._onDestroy))
+          .subscribe(() => {
+              // setting the compareWith property to a comparison function
+              // triggers initializing the selection according to the initial value of
+              // the form control (i.e. _initializeSelection())
+              // this needs to be done after the filteredBanks are loaded initially
+              // and after the mat-option elements are available
+              //  this.form.controls.FacilitySelected.compareWith = (a: Facility, b: Facility) => a && b && a.id === b.id;
+          });*/
+
+    // this.filteredfacilities.next(this.facilities.slice(0, 10));
+    /*  this.filteredfacilities.pipe(take(1)).subscribe(() => {
+
+      });
+} */
+    displayfn(facility?: any): string | undefined {
+        return facility ? facility.name : undefined;
     }
 
-    // tslint:disable-next-line: use-life-cycle-interface
-    ngOnDestroy() {
-        this._onDestroy.next();
-        this._onDestroy.complete();
-    }
-
-    protected setInitialValue() {
-        /**  this.filteredfacilities
-              .pipe(take(1), takeUntil(this._onDestroy))
-              .subscribe(() => {
-                  // setting the compareWith property to a comparison function
-                  // triggers initializing the selection according to the initial value of
-                  // the form control (i.e. _initializeSelection())
-                  // this needs to be done after the filteredBanks are loaded initially
-                  // and after the mat-option elements are available
-                  //  this.form.controls.FacilitySelected.compareWith = (a: Facility, b: Facility) => a && b && a.id === b.id;
-              });*/
-
-        // this.filteredfacilities.next(this.facilities.slice(0, 10));
-        this.filteredfacilities.pipe(take(1)).subscribe(() => {
-
-        });
-    }
-
-
-    protected filtercorrectfacilities(value) {
+    /*protected filtercorrectfacilities(value) {
         if (!this.facilities) {
             return;
         }
@@ -524,7 +554,7 @@ export class PrepComponent implements OnInit {
         );
 
 
-    }
+    } */
 
     getYears() {
         let year: number;
@@ -541,9 +571,9 @@ export class PrepComponent implements OnInit {
 
     }
 
-    onTextChanged(event) {
+    /*onTextChanged(event) {
         this.filtercorrectfacilities(event.target.value);
-    }
+    } */
 
     changePrevUse(event) {
 
@@ -563,20 +593,19 @@ export class PrepComponent implements OnInit {
         }
 
     }
-	
+
 
     change(event) {
-        this.FacilitySelected.setValue('');
-        console.log(event.value);
-        let index: number;
-        index = this.facilities.findIndex(x => x.name == event.value);
 
-        if (index > -1) {
-            let mflcode: number;
-            mflcode = this.facilities[index].mflCode;
-            this.form.controls.TransferInMflCode.setValue(mflcode);
-            console.log(this.form.controls.TransferInMflCode.value);
-        }
+        console.log(event.option.value.name);
+
+        console.log(event.option.value.mflCode);
+
+        this.form.controls.TransferInMflCode.setValue(event.option.value.mflCode);
+        console.log(this.form.controls.TransferInMflCode.value);
+        console.log('FacilitySelected Outcome');
+        console.log(this.FacilitySelected.value);
+
     }
 
     onPopulationTypeChange() {
@@ -600,11 +629,12 @@ export class PrepComponent implements OnInit {
     public SaveValues() {
 
         const { EnrollmentDate, KeyPopulation, populationType, DiscordantCouple, EnrollmentNumber, MFLCode, Year, ClientTransferIn,
-            FacilityListSelected,
+            FacilitySelected, PrevPrepUse, InitiationDate,
             TransferInDate, TransferInMflCode, CurrentRegimen, ClinicalNotes,
         } = this.form.value;
 
-
+        console.log('FacilitySelected list');
+        console.log(this.FacilitySelected.value);
 
 
         let itemdisplayname: any[] = [];
@@ -612,12 +642,20 @@ export class PrepComponent implements OnInit {
             return o.itemDisplayName.toString();
         });
 
+        if (PrevPrepUse == '1') {
+            if (InitiationDate == null || InitiationDate == '' || InitiationDate == undefined) {
+                this.snotifyService.error('Kindly note Initiation Date ' +
+                    ' is required', 'InitiationDate',
+                    this.notificationService.getConfig());
+                return;
+            }
+        }
 
         if (itemdisplayname[0] == 'Yes') {
             if ((TransferInMflCode == '' || TransferInMflCode == undefined) &&
                 (TransferInDate == '' || TransferInDate == undefined)
                 && (TransferInMflCode == '' || TransferInMflCode == undefined)
-                && (FacilityListSelected == '' || FacilityListSelected == undefined)
+                && (this.FacilitySelected.value == null)
                 && (CurrentRegimen == '' || CurrentRegimen == undefined)) {
                 this.snotifyService.error('Kindly note MFLCode,Transfer In facility,Transfer In Date and' +
                     'Current Regimen is' +
@@ -626,6 +664,11 @@ export class PrepComponent implements OnInit {
                 return;
 
 
+            } else if (InitiationDate == null || InitiationDate == '' || InitiationDate == undefined) {
+                this.snotifyService.error('Kindly note Initiation Date ' +
+                    ' is required', 'InitiationDate',
+                    this.notificationService.getConfig());
+                return;
             } else {
                 if (this.form.valid == true) {
                     this.save();
@@ -655,9 +698,10 @@ export class PrepComponent implements OnInit {
     }
 
     public save() {
+        this.spinner.show();
         const enrollment = new Enrollment();
         const { EnrollmentDate, KeyPopulation, populationType, DiscordantCouple, EnrollmentNumber, MFLCode, Year, ClientTransferIn
-            , TransferInDate, TransferInMflCode, CurrentRegimen, ClinicalNotes, InitiationDate, FacilityListSelected, IsSchool,
+            , TransferInDate, TransferInMflCode, CurrentRegimen, ClinicalNotes, InitiationDate, IsSchool,
             PrevPrepUse, Weeks, Months, Referredfrom
         } = this.form.value;
         this.personPopulation.KeyPopulation = KeyPopulation;
@@ -713,9 +757,10 @@ export class PrepComponent implements OnInit {
                             this.patientId).subscribe();
 
                         if (itemdisplayname[0] == 'Yes') {
+
                             this.registrationService.addPatientTransferIn(this.patientId, this.serviceId
                                 , TransferInDate, InitiationDate,
-                                CurrentRegimen, FacilityListSelected
+                                CurrentRegimen, this.FacilitySelected.value.name
                                 , TransferInMflCode, '0', ClinicalNotes, this.userId, false)
                                 .subscribe(
                                     (res) => {
@@ -729,27 +774,28 @@ export class PrepComponent implements OnInit {
                                     (error) => {
                                         this.snotifyService.error('Error saving TransferIn Details ' + error, 'Transfer Status',
                                             this.notificationService.getConfig());
+                            
                                     });
                         }
 
                         if (IsSchool !== null && IsSchool !== undefined && IsSchool.length > 1) {
-                        this.registrationService.addPatientOvcStatus(this.personId, 0, IsSchool
-                            , true, false, this.userId).subscribe((res) => {
+                            this.registrationService.addPatientOvcStatus(this.personId, 0, IsSchool
+                                , true, false, this.userId).subscribe((res) => {
 
-                                let OvcStatus
-                                    : Number;
-                                OvcStatus = res['oVCStatusId'];
-                                if (OvcStatus > 0) {
-                                    this.snotifyService.success('Successfully Saved Attending  School Details'
-                                        , 'Attend School',
-                                        this.notificationService.getConfig());
-                                }
+                                    let OvcStatus
+                                        : Number;
+                                    OvcStatus = res['oVCStatusId'];
+                                    if (OvcStatus > 0) {
+                                        this.snotifyService.success('Successfully Saved Attending  School Details'
+                                            , 'Attend School',
+                                            this.notificationService.getConfig());
+                                    }
 
-                            },
-                                (error) => {
-                                    this.snotifyService.error('Error saving Attend School Details ' + error, 'Attend School',
-                                        this.notificationService.getConfig());
-                                });
+                                },
+                                    (error) => {
+                                        this.snotifyService.error('Error saving Attend School Details ' + error, 'Attend School',
+                                            this.notificationService.getConfig());
+                                    });
                         }
                         if (PrevPrepUse == '1') {
                             this.registrationService.addPatientARVHistory(this.patientId,
@@ -769,6 +815,7 @@ export class PrepComponent implements OnInit {
                                     (error) => {
                                         this.snotifyService.error('Error saving Previous Prep Details ' + error, 'Previous Prep Use',
                                             this.notificationService.getConfig());
+                                            
                                     });
                         }
 
@@ -780,9 +827,14 @@ export class PrepComponent implements OnInit {
                             });
                         });
                     },
+                    
                     (err) => {
                         this.snotifyService.error('Error completing enrollment ' + err, 'Enrollment',
                             this.notificationService.getConfig());
+                            this.spinner.hide();
+                    },
+                    () => {
+                        this.spinner.hide();
                     }
                 );
             }

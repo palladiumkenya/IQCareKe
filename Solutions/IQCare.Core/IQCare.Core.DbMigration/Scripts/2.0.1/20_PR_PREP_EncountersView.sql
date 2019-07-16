@@ -14,6 +14,7 @@ PM.Id PatientMasterVisitId,
 PE.PatientId, 
 PE.ServiceAreaId, 
 PE.EncounterTypeId, 
+REPLACE(ltv.DisplayName,'-encounter','') as EncounterType,
 PS.PrepStatusToday, 
 PA.AppointmentDate,
 PE.EncounterStartTime,
@@ -24,6 +25,7 @@ FROM PatientMasterVisit PM
 INNER JOIN PatientEncounter PE ON PE.PatientMasterVisitId = PM.Id
 LEFT JOIN PatientPrEPStatus PS ON PS.PatientEncounterId = PE.Id
 LEFT JOIN PatientAppointment PA ON PA.PatientMasterVisitId = PM.Id
+LEFT JOIN LookupItemView ltv  on ltv.ItemId=PE.EncounterTypeId
+LEFT JOIN ServiceArea sa on sa.Id=PM.ServiceId
+where sa.Code='PREP'
 GO
-
-
