@@ -128,11 +128,11 @@ export class PrepEncounterHistoryComponent implements OnInit {
     getAllServices() {
         this.personService.getAllServices().subscribe((res) => {
             this.services = res;
-            console.log(this.services);
-            console.log(this.services);
+            /*console.log(this.services);
+            console.log(this.services);*/
             let index: number;
             index = this.services.findIndex(x => x.code == 'HTS');
-            console.log(index);
+            /*console.log(index);*/
         });
     }
 
@@ -268,7 +268,7 @@ export class PrepEncounterHistoryComponent implements OnInit {
         this.personService.getPersonEnrolledServices(personId).subscribe((res) => {
 
             this.enrolledServices = res['personEnrollmentList'];
-            console.log(this.enrolledServices);
+            // console.log(this.enrolledServices);
 
             if (this.enrolledServices && this.enrolledServices.length > 0) {
                 this.patientId = this.enrolledServices[0]['patientId'];
