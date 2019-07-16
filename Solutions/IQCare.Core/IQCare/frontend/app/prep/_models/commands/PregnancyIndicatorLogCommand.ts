@@ -7,4 +7,5 @@ export interface PregnancyIndicatorLogCommand {
     Outcome?: number;
     DateOfOutcome?: Date;
     CreatedBy?: number;
+    BirthDefects?: number;
 }

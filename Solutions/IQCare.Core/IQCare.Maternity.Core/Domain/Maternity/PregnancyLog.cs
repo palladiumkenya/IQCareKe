@@ -15,5 +15,6 @@ namespace IQCare.Maternity.Core.Domain.Maternity
         public int CreatedBy { get; set; }
         public int DeleteFlag { get; set; }
         public DateTime CreateDate { get; set; }
+        public int? BirthDefects { get; set; }
     }
 }

@@ -176,20 +176,24 @@ export class PrepEncounterComponent implements OnInit {
     public onVisitDetailsNext() {
         if (this.personGender.toLowerCase() == 'male') {
             this.stepper.selectedIndex = 1;
+            this.stepper._stateChanged();
             this.isOptionalObsGyn = true;
         } else if (this.personGender.toLowerCase() == 'female') {
             this.stepper.selectedIndex = 2;
+            this.stepper._stateChanged();
             this.isOptionalCircumcision = true;
         }
     }
 
     public onCircumcisionNext() {
         this.isOptionalObsGyn = true;
+        this.stepper._stateChanged();
         this.stepper.selectedIndex = 3;
     }
 
     public onObsGynPrevious() {
         this.isOptionalCircumcision = true;
+        this.stepper._stateChanged();
         this.stepper.selectedIndex = 1;
     }
 
@@ -377,6 +381,12 @@ export class PrepEncounterComponent implements OnInit {
             CreatedBy: this.userId
         };
 
+        const reasons: any = {
+            PatientId: this.patientId,
+            PatientMasterVisitId: this.patientMasterVisitId,
+            ReasonAppointmentNotGiven: this.AppointmentFormGroup.value[0]['reasonAppointmentNoGiven']
+        };
+
         const STIScreeningCommand: any = {
             PatientId: this.patientId,
             PatientMasterVisitId: this.patientMasterVisitId,
@@ -413,7 +423,8 @@ export class PrepEncounterComponent implements OnInit {
             EDD: moment(this.FertilityIntentionsFormGroup.value[0]['lmp'], 'DD-MM-YYYY').add(280, 'days').toDate(),
             Outcome: this.FertilityIntentionsFormGroup.value[1]['pregnancyOutcome'],
             DateOfOutcome: this.FertilityIntentionsFormGroup.value[1]['outcomeDate'],
-            CreatedBy: this.userId
+            CreatedBy: this.userId,
+            BirthDefects: this.FertilityIntentionsFormGroup.value[1]['birthDefects']
         };
 
         const prepStiScreeningTreatmentCommand = this.prepService.StiScreeningTreatment(STIScreeningCommand);
@@ -448,6 +459,14 @@ export class PrepEncounterComponent implements OnInit {
                 this.prepService.savePregnancyIndicatorLogCommand(pregnancyIndicatorLog);
         }
 
+        const reasonAppointmentHasValue = this.AppointmentFormGroup.value[0]['reasonAppointmentNoGiven'];
+        let reasonsCommand;
+        if (reasonAppointmentHasValue) {
+            reasonsCommand = this.matService.saveReasonNextAppointmentNotGiven(reasons);
+        } else {
+            reasonsCommand = of([]);
+        }
+
         forkJoin([
             prepStatusApiCommand,
             pncFamilyPlanning,
@@ -458,7 +477,8 @@ export class PrepEncounterComponent implements OnInit {
             pregnancyIndicator,
             matNextAppointment,
             prepStiScreeningTreatmentCommand,
-            pregnancyIndicatorLogCommand]).subscribe(
+            pregnancyIndicatorLogCommand,
+            reasonsCommand]).subscribe(
                 (result) => {
                     familyPlanningMethodCommand.PatientFPId = result[1]['patientId'];
                     const pncFamilyPlanningMethod = this.pncService.savePncFamilyPlanningMethod(familyPlanningMethodCommand).subscribe(
@@ -579,6 +599,50 @@ export class PrepEncounterComponent implements OnInit {
             });
         }
 
+        const pregnancyIndicatorLog: PregnancyIndicatorLogCommand = {
+            Id: 0,
+            PatientId: this.patientId,
+            PatientMasterVisitId: this.patientMasterVisitId,
+            LMP: this.FertilityIntentionsFormGroup.value[0]['lmp'],
+            EDD: moment(this.FertilityIntentionsFormGroup.value[0]['lmp'], 'DD-MM-YYYY').add(280, 'days').toDate(),
+            Outcome: this.FertilityIntentionsFormGroup.value[1]['pregnancyOutcome'],
+            DateOfOutcome: this.FertilityIntentionsFormGroup.value[1]['outcomeDate'],
+            CreatedBy: this.userId,
+            BirthDefects: this.FertilityIntentionsFormGroup.value[1]['birthDefects']
+        };
+
+        const hasPregnancyOutcome = this.yesnoOptions.filter(obj => obj.itemId ==
+            this.FertilityIntentionsFormGroup.value[1]['endedPregnancy']);
+        let pregnancyIndicatorLogCommand;
+        if (this.personGender.toLocaleLowerCase() == 'male') {
+            pregnancyIndicatorLogCommand = of([]);
+        } else if (hasPregnancyOutcome.length > 0 && hasPregnancyOutcome[0].itemName == 'No') {
+            pregnancyIndicatorLogCommand = of([]);
+        } else {
+            pregnancyIndicatorLogCommand = this.personGender.toLocaleLowerCase() == 'male' ? of([]) :
+                this.prepService.savePregnancyIndicatorLogCommand(pregnancyIndicatorLog);
+        }
+
+        const reasons: any = {
+            PatientId: this.patientId,
+            PatientMasterVisitId: this.patientMasterVisitId,
+            ReasonAppointmentNotGiven: this.AppointmentFormGroup.value[0]['reasonAppointmentNoGiven']
+        };
+
+        const reasonAppointmentHasValue = this.AppointmentFormGroup.value[0]['reasonAppointmentNoGiven'];
+        let reasonsCommand;
+        if (reasonAppointmentHasValue) {
+            reasonsCommand = this.matService.saveReasonNextAppointmentNotGiven(reasons);
+        } else {
+            reasonsCommand = of([]);
+        }
+
+        const updateNextAppointment = {
+            AppointmentId: this.AppointmentFormGroup.value[0]['id'],
+            AppointmentDate: this.AppointmentFormGroup.value[0]['nextAppointmentDate'],
+            Description: this.AppointmentFormGroup.value[0]['clinicalNotes']
+        };
+
         const prepStiScreeningTreatmentCommand = this.prepService.UpdateStiScreeningTreatment(STIScreeningCommand);
         const prepStatusApiCommand = this.prepService.savePrepStatus(prepStatusCommand);
         // add circumcision for males
@@ -587,6 +651,7 @@ export class PrepEncounterComponent implements OnInit {
         const chronicIllness = this.ancService.savePatientChronicIllness(this.chronic_illness_data);
         const adverseEvents = this.prepService.savePatientAdverseEvents(this.adverseEvents_data);
         const allergies = this.prepService.savePatientAllergies(this.allergies_data);
+        const updateAppointmentCommand = this.matService.updateNextAppointment(updateNextAppointment);
 
 
         forkJoin([
@@ -595,7 +660,10 @@ export class PrepEncounterComponent implements OnInit {
             circumcisionStatus,
             chronicIllness,
             adverseEvents,
-            allergies
+            allergies,
+            pregnancyIndicatorLogCommand,
+            reasonsCommand,
+            updateAppointmentCommand
         ]).subscribe(
             (result) => {
                 console.log(result);

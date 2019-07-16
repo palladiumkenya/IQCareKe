@@ -35,6 +35,7 @@ namespace IQCare.Maternity.BusinessProcess.CommandHandlers
                         pregnancy.EDD = request.EDD;
                         pregnancy.Outcome = request.Outcome;
                         pregnancy.DateOfOutcome = request.DateOfOutcome;
+                        pregnancy.BirthDefects = request.BirthDefects;
 
                         _maternityUnitOfWork.Repository<PregnancyLog>().Update(pregnancy);
                         await _maternityUnitOfWork.SaveAsync();
@@ -52,7 +53,8 @@ namespace IQCare.Maternity.BusinessProcess.CommandHandlers
                             CreatedBy = request.CreatedBy,
                             CreateDate = DateTime.Now,
                             DeleteFlag = 0,
-                            Active = true
+                            Active = true,
+                            BirthDefects = request.BirthDefects
                         };
 
                         await _maternityUnitOfWork.Repository<PregnancyLog>().AddAsync(pregnancyLog);

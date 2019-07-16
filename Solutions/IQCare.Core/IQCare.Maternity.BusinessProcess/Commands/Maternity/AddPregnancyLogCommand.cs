@@ -14,6 +14,7 @@ namespace IQCare.Maternity.BusinessProcess.Commands.Maternity
         public int Outcome { get; set; }
         public DateTime? DateOfOutcome { get; set; }
         public int CreatedBy { get; set; }
+        public int? BirthDefects { get; set; }
     }
 
     public class AddPregnancyLogResponse

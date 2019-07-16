@@ -34,7 +34,8 @@ export class PregnancyOutcomeComponent implements OnInit {
             endedPregnancy: new FormControl('', [Validators.required]),
             outcomeDate: new FormControl('', [Validators.required]),
             pregnancyOutcome: new FormControl('', [Validators.required]),
-            birthDefects: new FormControl('', [Validators.required])
+            birthDefects: new FormControl('', [Validators.required]),
+            id: new FormControl()
         });
 
         // emit form to the stepper 
@@ -54,13 +55,16 @@ export class PregnancyOutcomeComponent implements OnInit {
         this.prepservice.getPregnancyIndicatorLog(this.patientId, this.patientMasterVisitId).subscribe(
             (res) => {
                 if (res.length > 0) {
+                    // console.log(res);
                     const yesOption = this.yesnoOptions.filter(obj => obj.itemName == 'Yes');
+                    this.PregnancyOutcomeForm.controls.id.setValue(res[0].id);
                     this.PregnancyOutcomeForm.controls.endedPregnancy.setValue(yesOption[0].itemId);
                     this.PregnancyOutcomeForm.controls.outcomeDate.setValue(res[0].dateOfOutcome);
                     this.PregnancyOutcomeForm.controls.pregnancyOutcome.setValue(res[0].outcome);
-                    this.PregnancyOutcomeForm.controls.birthDefects.setValue('');
+                    this.PregnancyOutcomeForm.controls.birthDefects.setValue(res[0].birthDefects);
                 } else {
                     const noOption = this.yesnoOptions.filter(obj => obj.itemName == 'No');
+                    this.PregnancyOutcomeForm.controls.id.setValue(res[0].id);
                     this.PregnancyOutcomeForm.controls.endedPregnancy.setValue(noOption[0].itemId);
                     this.PregnancyOutcomeForm.controls.outcomeDate.setValue('');
                     this.PregnancyOutcomeForm.controls.pregnancyOutcome.setValue('');
