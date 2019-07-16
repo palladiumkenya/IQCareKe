@@ -10,9 +10,7 @@ namespace IQCare.CCC.UILogic
 {
     public class MstPatientLogic
     {
-        private IMst_PatientInsert _mgr =
-            (IMst_PatientInsert)
-            ObjectFactory.CreateInstance("BusinessProcess.CCC.BMstPatientInsert, BusinessProcess.CCC");
+        private IMst_PatientInsert _mgr = (IMst_PatientInsert)ObjectFactory.CreateInstance("BusinessProcess.CCC.BMstPatientInsert, BusinessProcess.CCC");
 
         public int InsertMstPatient(string firstName, string lastName, string middleName, int locationId, string patientEnrollmentId,
             int referredFrom, DateTime registrationDate, int sex, DateTime dob, int dobPrecision, int maritalStatus, string address,
@@ -31,6 +29,11 @@ namespace IQCare.CCC.UILogic
         public void UpdateBlueCardCCCNumber(int ptn_pk, string patientEnrollmentID)
         {
             _mgr.UpdateBlueCardCCCNumber(ptn_pk, patientEnrollmentID);
+        }
+
+        public void UpdateBlueCardEnrollmentDate(int ptn_pk, DateTime enrollmentDate)
+        {
+            _mgr.UpdateBlueCardEnrollmentDate(ptn_pk, enrollmentDate);
         }
     }
 }

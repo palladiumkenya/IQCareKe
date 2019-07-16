@@ -37,6 +37,7 @@ import { AllergiesComponent } from './common-components/allergies/allergies.comp
 import { ChronicIllnessesTableComponent } from './common-components/chronic-illnesses-table/chronic-illnesses-table.component';
 import { AllergiesTableComponent } from './common-components/allergies-table/allergies-table.component';
 import { AdverseEventsTableComponent } from './common-components/adverse-events-table/adverse-events-table.component';
+import { ClickNoneEventsDirectiveDirective } from './_directives/click-none-events-directive.directive';
 
 @NgModule({
     imports: [
@@ -60,7 +61,8 @@ import { AdverseEventsTableComponent } from './common-components/adverse-events-
         AllergiesComponent,
         ChronicIllnessesTableComponent,
         AllergiesTableComponent,
-        AdverseEventsTableComponent
+        AdverseEventsTableComponent,
+        ClickNoneEventsDirectiveDirective
     ],
     exports: [
         LeftnavComponent, AdverseEventsAssessmentComponent,

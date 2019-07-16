@@ -496,6 +496,8 @@ namespace IQCare.Web.CCC.WebService
 
                         List<PatientEntryPoint> entryPoints = patientEntryPointManager.GetPatientEntryPoints(patient.Id);
 
+                        mstPatientLogic.UpdateBlueCardEnrollmentDate(patient.ptn_pk.Value, DateTime.Parse(enrollmentDate));
+
                         if (entryPoints.Count > 0)
                         {
                             var entryPointAuditData = AuditDataUtility.Serializer(entryPoints);
@@ -530,8 +532,7 @@ namespace IQCare.Web.CCC.WebService
                                     var entityIdentifierAuditData = AuditDataUtility.Serializer(identifiersByPatientId);
                                     entityIdentifier.IdentifierValue = item.Value;
                                     entityIdentifier.AuditData = entityIdentifierAuditData;
-
-                                        patientIdentifierManager.UpdatePatientIdentifier(entityIdentifier, facilityId);
+                                    patientIdentifierManager.UpdatePatientIdentifier(entityIdentifier, facilityId);
                                 }
                             }
                             else

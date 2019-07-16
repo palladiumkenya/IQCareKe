@@ -6,6 +6,7 @@ export interface PregnancyIndicatorCommand {
     PregnancyStatusId?: number;
     PregnancyPlanned?: number;
     PlanningToGetPregnant?: number;
+    BreastFeeding?: number;
     ANCProfile: Boolean;
     ANCProfileDate?: Date;
     Active?: Boolean;

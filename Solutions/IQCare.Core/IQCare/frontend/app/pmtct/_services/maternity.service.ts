@@ -286,12 +286,32 @@ export class MaternityService {
 
         return this.http.post(this.API_URL + '/api/PatientReferralAndAppointment/AddPatientNextAppointment', JSON.stringify(appointment),
             httpOptions).pipe(
-                tap(saveReferrals => this.errorHandler.log(`successfully added Referral details`)),
-                catchError(this.errorHandler.handleError<any>('Error saving Referral details'))
+                tap(saveReferrals => this.errorHandler.log(`successfully added patient appointment details`)),
+                catchError(this.errorHandler.handleError<any>('Error saving appointment details'))
+            );
+    }
+
+    public saveReasonNextAppointmentNotGiven(reasons: any): Observable<any> {
+        return this.http.post<any>(this.API_URL + '/api/PatientReferralAndAppointment/AddReasonAppointmentNotGiven',
+            JSON.stringify(reasons), httpOptions).pipe(
+                tap(saveReasonNextAppointmentNotGiven => this.errorHandler.log(`successfully added appointment reasons details`)),
+                catchError(this.errorHandler.handleError<any>('Error saving appointment reasons details'))
             );
     }
 
     public updateNextAppointment(appointment: any): Observable<any> {
+        if (!appointment.AppointmentDate || appointment.AppointmentDate == null || appointment.AppointmentDate == 'null') {
+            if (appointment.AppointmentId) {
+                return this.http.delete(this.API_URL
+                    + '/api/PatientReferralAndAppointment/DeleteAppointment/' + appointment.AppointmentId).pipe(
+                        tap(update => this.errorHandler.log(`successfully updated appointment`)),
+                        catchError(this.errorHandler.handleError<any>('Error updating appointments'))
+                    );
+            } else {
+                return of([]);
+            }
+        }
+
         return this.http.post(this.API_URL + '/api/PatientReferralAndAppointment/UpdatePatientNextAppointment', JSON.stringify(appointment),
             httpOptions).pipe(tap(update => this.errorHandler.log(`successfully updated appointment`)),
                 catchError(this.errorHandler.handleError<any>('Error updating appointments'))

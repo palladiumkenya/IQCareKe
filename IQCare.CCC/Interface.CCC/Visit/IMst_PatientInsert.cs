@@ -14,5 +14,7 @@ namespace Interface.CCC
         int AddOrdVisit(int ptnPk, int locationID, DateTime visitDate, int visitType, int userID, DateTime createDate, int moduleId);
 
         void UpdateBlueCardCCCNumber(int ptn_pk, string patientEnrollmentID);
+
+        void UpdateBlueCardEnrollmentDate(int ptn_pk, DateTime enrollmentDate);
     }
 }

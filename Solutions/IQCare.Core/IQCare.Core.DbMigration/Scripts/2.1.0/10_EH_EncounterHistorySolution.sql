@@ -23,10 +23,6 @@ declare @date as datetime;
 SET @ExitDate= (select ExitDate from PatientCareending where PatientMasterVisitId =@PatientMasterVisitId)
 SET @VisitDate= (select VisitDate from PatientMasterVisit where Id=@PatientMasterVisitId)
 
-if(@ExitDate > @VisitDate)
-
-SET @date =@ExitDate;
-ELSE
 SET @date=@VisitDate;
 
 
