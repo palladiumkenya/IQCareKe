@@ -161,7 +161,7 @@ namespace IQCare.HTS.BusinessProcess.CommandHandlers
                             {
                                 //Add Person to mst_patient
                                 var mstResult = await registerPersonService.InsertIntoBlueCard(firstName, lastName,
-                                    middleName, dateEnrollment, maritalStatusName, physicalAddress, mobileNumber, gender, dobPrecision, dateOfBirth, userId, facilityId);
+                                    middleName, dateEnrollment," ", 283, maritalStatusName, physicalAddress, mobileNumber, gender, dobPrecision, dateOfBirth, userId, facilityId);
                                 if (mstResult.Count > 0)
                                 {
                                     patient = await registerPersonService.AddPatient(identifiers[0].PersonId, userId, facilityId);
@@ -648,7 +648,7 @@ namespace IQCare.HTS.BusinessProcess.CommandHandlers
                                 userId, clientFacility.FacilityID, dateOfBirth,nickName:nickName);
                             //Add Person to mst_patient
                             var mstResult = await registerPersonService.InsertIntoBlueCard(firstName, lastName,
-                                middleName, dateEnrollment, maritalStatusName, physicalAddress, mobileNumber, gender, dobPrecision, dateOfBirth, userId, facilityId);
+                                middleName, dateEnrollment, " ", 283, maritalStatusName, physicalAddress, mobileNumber, gender, dobPrecision, dateOfBirth, userId, facilityId);
                             if (mstResult.Count > 0)
                             {
                                 //Add PersonIdentifiers

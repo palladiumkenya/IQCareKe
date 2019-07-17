@@ -20,6 +20,8 @@ import { NextAppointmentCommand } from '../../pmtct/maternity/commands/next-appo
 import { MaternityService } from '../../pmtct/_services/maternity.service';
 import { MatStepper } from '@angular/material';
 import { PregnancyIndicatorLogCommand } from '../_models/commands/PregnancyIndicatorLogCommand';
+import { FamilyPlanningEditCommand } from '../../pmtct/_models/FamilyPlanningEditCommand';
+import { PatientFamilyPlanningMethodEditCommand } from '../../pmtct/_models/PatientFamilyPlanningMethodEditCommand';
 
 @Component({
     selector: 'app-prep-encounter',
@@ -643,6 +645,25 @@ export class PrepEncounterComponent implements OnInit {
             Description: this.AppointmentFormGroup.value[0]['clinicalNotes']
         };
 
+        const familyPlanningEditCommand: FamilyPlanningEditCommand = {
+            Id: this.FertilityIntentionsFormGroup.value[0]['id_familyPlanning'],
+            FamilyPlanningStatusId: this.FertilityIntentionsFormGroup.value[0]['onFamilyPlanning'],
+            ReasonNotOnFPId: 0
+        };
+
+        const fpMethodId = this.FertilityIntentionsFormGroup.value[0]['fpMethodId'];
+        const updateFamilyPlanningMethodCommand: PatientFamilyPlanningMethodEditCommand = {
+            Id: fpMethodId ? fpMethodId : 0,
+            FPMethodId: this.FertilityIntentionsFormGroup.value[0]['familyPlanningMethods'],
+            PatientId: this.patientId,
+            PatientFPId: this.FertilityIntentionsFormGroup.value[0]['id_familyPlanning'],
+            UserId: this.userId
+        };
+
+        // add family planning for females
+        const pncFamilyPlanning = this.personGender.toLowerCase() == 'male' ? of([]) :
+            this.pncService.updateFamilyPlanning(familyPlanningEditCommand);
+
         const prepStiScreeningTreatmentCommand = this.prepService.UpdateStiScreeningTreatment(STIScreeningCommand);
         const prepStatusApiCommand = this.prepService.savePrepStatus(prepStatusCommand);
         // add circumcision for males
@@ -652,7 +673,7 @@ export class PrepEncounterComponent implements OnInit {
         const adverseEvents = this.prepService.savePatientAdverseEvents(this.adverseEvents_data);
         const allergies = this.prepService.savePatientAllergies(this.allergies_data);
         const updateAppointmentCommand = this.matService.updateNextAppointment(updateNextAppointment);
-
+        const pncFamilyPlanningMethodEdit = this.pncService.updatePncFamilyPlanningMethod(updateFamilyPlanningMethodCommand);
 
         forkJoin([
             prepStiScreeningTreatmentCommand,
@@ -663,10 +684,12 @@ export class PrepEncounterComponent implements OnInit {
             allergies,
             pregnancyIndicatorLogCommand,
             reasonsCommand,
-            updateAppointmentCommand
+            updateAppointmentCommand,
+            pncFamilyPlanning,
+            pncFamilyPlanningMethodEdit
         ]).subscribe(
             (result) => {
-                console.log(result);
+                // console.log(result);
 
                 this.zone.run(() => {
                     this.router.navigate(['/prep/' + this.patientId + '/' + this.personId + '/' + 7], { relativeTo: this.route });

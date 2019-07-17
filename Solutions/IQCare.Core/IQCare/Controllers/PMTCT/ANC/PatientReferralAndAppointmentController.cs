@@ -56,6 +56,20 @@ namespace IQCare.Controllers.PMTCT.ANC
             return BadRequest(response);
         }
 
+        [HttpGet("{patientId}/{patientMasterVisitId}")]
+        public async Task<IActionResult> GetReasonAppointmentNotGiven(int patientId, int patientMasterVisitId)
+        {
+            var response = await _mediator.Send(new GetReasonAppointmentNotGivenCommand()
+            {
+                PatientId = patientId,
+                PatientMasterVisitId = patientMasterVisitId
+            }, Request.HttpContext.RequestAborted);
+
+            if (response.IsValid)
+                return Ok(response.Value);
+            return BadRequest(response);
+        }
+
         [HttpPost]
         public async Task<IActionResult> UpdatePatientNextAppointment([FromBody] EditAppointmentCommand editAppointmentCommand)
         {
