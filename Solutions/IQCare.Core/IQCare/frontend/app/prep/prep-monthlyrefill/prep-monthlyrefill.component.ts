@@ -12,15 +12,18 @@ import { registerLocaleData } from '@angular/common';
 import { PrepService } from '../_services/prep.service';
 import { LookupItemService } from './../../shared/_services/lookup-item.service';
 import { EncounterService } from '../../shared/_services/encounter.service';
+import { SearchService } from '../../../registration/_services/search.service';
 import { PatientMasterVisitEncounter } from '../../pmtct/_models/PatientMasterVisitEncounter';
 import * as moment from 'moment';
 import { PatientAppointmentEditCommand } from '../../pmtct/_models/PatientAppointmentEditCommand';
+import { Search } from '../../records/_models/search';
+import { SearchService } from '../../registration/_services/search.service';
 @Component({
     selector: 'app-prep-monthlyrefill',
     templateUrl: './prep-monthlyrefill.component.html',
     styleUrls: ['./prep-monthlyrefill.component.css'],
     providers: [
-        EncounterService
+        EncounterService, SearchService
     ]
 })
 export class PrepMonthlyrefillComponent implements OnInit {
@@ -56,6 +59,7 @@ export class PrepMonthlyrefillComponent implements OnInit {
         public zone: NgZone,
         private _lookupItemService: LookupItemService,
         private prepservice: PrepService,
+        private searchService: SearchService,
         private snotifyService: SnotifyService,
         private notificationService: NotificationService,
         private _formBuilder: FormBuilder,
@@ -462,6 +466,16 @@ export class PrepMonthlyrefillComponent implements OnInit {
 
         }
 
+    }
+    onPharmacyClick() {
+        this.searchService.setSession(this.personId, this.patientId).subscribe((sessionres) => {
+            this.searchService.setVisitSession(this.patientMasterVisitId, 20).subscribe((setVisitSession) => {
+                const url = location.protocol + '//' + window.location.hostname + ':' + window.location.port +
+                    '/IQCare/CCC/Patient/PatientHome.aspx';
+                const win = window.open(url, '_blank');
+                win.focus();
+            });
+        });
     }
 
     onAppointmentSelection(event) {
