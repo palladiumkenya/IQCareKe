@@ -83,6 +83,8 @@ namespace IQCare.Prep.BusinessProcess.CommandHandlers
                             DeleteFlag = false,
                             CreatedBy = request.CreatedBy,
                             CreateDate = DateTime.Now,
+                            CondomsIssued = request.CondomsIssued,
+                            NoOfCondoms = request.NoOfCondoms
                         };
 
                         await _prepUnitOfWork.Repository<PatientPrEPStatus>().AddAsync(patientPrEpStatus);

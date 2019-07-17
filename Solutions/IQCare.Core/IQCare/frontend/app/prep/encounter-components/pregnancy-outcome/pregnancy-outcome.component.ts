@@ -64,7 +64,7 @@ export class PregnancyOutcomeComponent implements OnInit {
                     this.PregnancyOutcomeForm.controls.birthDefects.setValue(res[0].birthDefects);
                 } else {
                     const noOption = this.yesnoOptions.filter(obj => obj.itemName == 'No');
-                    this.PregnancyOutcomeForm.controls.id.setValue(res[0].id);
+                    // this.PregnancyOutcomeForm.controls.id.setValue(res[0].id);
                     this.PregnancyOutcomeForm.controls.endedPregnancy.setValue(noOption[0].itemId);
                     this.PregnancyOutcomeForm.controls.outcomeDate.setValue('');
                     this.PregnancyOutcomeForm.controls.pregnancyOutcome.setValue('');

@@ -39,7 +39,9 @@ export class FertilityIntentionComponent implements OnInit {
             breastFeeding: new FormControl('', [Validators.required]),
             onFamilyPlanning: new FormControl('', [Validators.required]),
             familyPlanningMethods: new FormControl('', [Validators.required]),
-            planningToGetPregnant: new FormControl('', [Validators.required])
+            planningToGetPregnant: new FormControl('', [Validators.required]),
+            id_familyPlanning: new FormControl(),
+            fpMethodId: new FormControl()
         });
 
         // emit form to the stepper 
@@ -95,9 +97,11 @@ export class FertilityIntentionComponent implements OnInit {
     loadFamilyPlanningMethod(): void {
         this.pncservice.getFamilyPlanningMethod(this.patientId).subscribe(
             (res) => {
+                // console.log(res);
                 if (res.length > 0) {
                     res.forEach(element => {
                         this.FertilityIntentionForm.controls.familyPlanningMethods.setValue(element.fpMethodId);
+                        this.FertilityIntentionForm.controls.fpMethodId.setValue(element.id);
                     });
                 }
             },
@@ -108,12 +112,13 @@ export class FertilityIntentionComponent implements OnInit {
     }
 
     loadFamilyPlanning(): void {
-        this.pncservice.getFamilyPlanning(this.patientId).subscribe(
+        this.pncservice.getFamilyPlanning(this.patientId, this.patientMasterVisitId).subscribe(
             (res) => {
                 if (res.length > 0) {
                     res.forEach(element => {
                         if (element.patientMasterVisitId == this.patientMasterVisitId) {
                             this.FertilityIntentionForm.controls.onFamilyPlanning.setValue(element.familyPlanningStatusId);
+                            this.FertilityIntentionForm.controls.id_familyPlanning.setValue(element.id);
                         }
                     });
                 }

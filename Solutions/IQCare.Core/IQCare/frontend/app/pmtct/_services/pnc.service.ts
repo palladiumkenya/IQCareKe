@@ -254,8 +254,8 @@ export class PncService {
             );
     }
 
-    public getFamilyPlanning(patientId: number): Observable<any[]> {
-        return this.http.get<any[]>(this.API_PMTCT_URL + '/api/FamilyPlanning/' + patientId).pipe(
+    public getFamilyPlanning(patientId: number, patientMasterVisitId: number): Observable<any[]> {
+        return this.http.get<any[]>(this.API_PMTCT_URL + '/api/FamilyPlanning/' + patientId + '/' + patientMasterVisitId).pipe(
             tap(getFamilyPlanning => this.errorHandler.log(`successfully fetched family planning`)),
             catchError(this.errorHandler.handleError<any>('Error fetching family planning'))
         );

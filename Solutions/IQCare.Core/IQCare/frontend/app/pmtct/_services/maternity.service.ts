@@ -299,6 +299,14 @@ export class MaternityService {
             );
     }
 
+    public getReasonNextAppointmentNotGiven(patientId: number, patientMasterVisitId: number): Observable<any[]> {
+        return this.http.get<any[]>(this.API_URL
+            + '/api/PatientReferralAndAppointment/GetReasonAppointmentNotGiven/' + patientId + '/' + patientMasterVisitId).pipe(
+                tap(getReasonNextAppointmentNotGiven => this.errorHandler.log(`successfully fetched appointment reasons details`)),
+                catchError(this.errorHandler.handleError<any>('Error fetched appointment reasons details'))
+            );
+    }
+
     public updateNextAppointment(appointment: any): Observable<any> {
         if (!appointment.AppointmentDate || appointment.AppointmentDate == null || appointment.AppointmentDate == 'null') {
             if (appointment.AppointmentId) {

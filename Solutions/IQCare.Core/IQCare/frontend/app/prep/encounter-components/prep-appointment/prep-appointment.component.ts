@@ -1,3 +1,4 @@
+import { MaternityService } from './../../../pmtct/_services/maternity.service';
 import { PncService } from './../../../pmtct/_services/pnc.service';
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
@@ -9,7 +10,7 @@ import { NotificationService } from '../../../shared/_services/notification.serv
     selector: 'app-prep-appointment',
     templateUrl: './prep-appointment.component.html',
     styleUrls: ['./prep-appointment.component.css'],
-    providers: [PncService]
+    providers: [PncService, MaternityService]
 })
 export class PrepAppointmentComponent implements OnInit {
     PrepAppointmentForm: FormGroup;
@@ -27,7 +28,8 @@ export class PrepAppointmentComponent implements OnInit {
     constructor(private _formBuilder: FormBuilder,
         private pncservice: PncService,
         private notificationService: NotificationService,
-        private snotifyService: SnotifyService) {
+        private snotifyService: SnotifyService,
+        private maternityservice: MaternityService) {
         this.minDate = new Date();
     }
 
@@ -56,6 +58,20 @@ export class PrepAppointmentComponent implements OnInit {
         }
     }
 
+    loadAppointmentReasons(): void {
+        this.maternityservice.getReasonNextAppointmentNotGiven(this.patientId, this.patientMasterVisitId).subscribe(
+            (res) => {
+                // console.log(res);
+                if (res.length > 0) {
+                    this.PrepAppointmentForm.controls.reasonAppointmentNoGiven.setValue(res[0].reasonAppointmentNotGiven);
+                }
+            },
+            (error) => {
+                console.log(error);
+            }
+        );
+    }
+
     loadPrepAppointment(): void {
         this.pncservice.getAppointments(this.patientId, this.patientMasterVisitId).subscribe(
             (result) => {
@@ -68,6 +84,7 @@ export class PrepAppointmentComponent implements OnInit {
                 } else {
                     const noOption = this.yesnoOptions.filter(obj => obj.itemName == 'No');
                     this.PrepAppointmentForm.get('nextAppoitmentGiven').setValue(noOption[0].itemId);
+                    this.loadAppointmentReasons();
                 }
             },
             (error) => {
