@@ -22,6 +22,7 @@ export class PrepService {
     private API_URL = environment.API_URL;
     private PREP_API_URL = environment.API_PREP_URL;
     private MATERNITY_API_URL = environment.API_PMTCT_URL;
+    private LAB_URL = environment.API_LAB_URL;
     private _htsurl = '/api/HtsEncounter';
 
     constructor(private http: HttpClient,
@@ -273,6 +274,17 @@ export class PrepService {
                 catchError(this.errorHandler.handleError<any[]>('careEndPatientdetails'))
             );
     }
+
+    public getLabTestResults(patientId: number, status: string): Observable<any> {
+        const url = status == null ? this.LAB_URL + '/api/LabOrder/GetLabTestResults?patientId=' + patientId :
+            this.LAB_URL + '/api/LabOrder/GetLabTestResults?patientId=' + patientId + '&status=' + status;
+
+        return this.http.get<any>(url).pipe(
+            tap(getLabTestResults => this.errorHandler.log('get lab order test results')),
+            catchError(this.errorHandler.handleError<any[]>('getLabOrderTestResults'))
+        );
+    }
+
 
 
     public saveNextAppointment(appointment: any): Observable<any> {

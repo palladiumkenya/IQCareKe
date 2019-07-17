@@ -32,13 +32,43 @@ namespace IQCare.Common.BusinessProcess.CommandHandlers.Encounter
                     if (masterVisits.Count > 0)
                     {
                         var patientEncounters = await _unitOfWork.Repository<PatientEncounter>()
-                            .Get(x => x.PatientMasterVisitId == masterVisits[0].Id).ToListAsync();
+                            .Get(x => x.PatientMasterVisitId == masterVisits[0].Id  && x.EncounterTypeId == request.EncounterType).ToListAsync();
 
-                        return Result<AddEncounterVisitResponse>.Valid(new AddEncounterVisitResponse
+                        if (patientEncounters.Count > 0)
                         {
-                            PatientMasterVisitId = masterVisits[0].Id,
-                            PatientEncounterId = patientEncounters[0].Id
-                        });
+                            return Result<AddEncounterVisitResponse>.Valid(new AddEncounterVisitResponse
+                            {
+                                PatientMasterVisitId = masterVisits[0].Id,
+                                PatientEncounterId = patientEncounters[0].Id
+                            });
+                        } else
+                        {
+                            PatientEncounter patientEncount = new PatientEncounter()
+                            {
+                                PatientId = request.PatientId,
+                                EncounterTypeId = request.EncounterType,
+                                Status = 0,
+                                PatientMasterVisitId = masterVisits[0].Id,
+                                EncounterStartTime = request.EncounterDate,
+                                EncounterEndTime = request.EncounterDate,
+                                ServiceAreaId = request.ServiceAreaId,
+                                CreatedBy = request.UserId,
+                                CreateDate = DateTime.Now
+                            };
+
+                            await _unitOfWork.Repository<PatientEncounter>().AddAsync(patientEncount);
+                            await _unitOfWork.SaveAsync();
+
+                            trans.Commit();
+                            return Result<AddEncounterVisitResponse>.Valid(new AddEncounterVisitResponse
+                            {
+                                PatientMasterVisitId = masterVisits[0].Id,
+                                PatientEncounterId = patientEncount.Id
+                            });
+
+                 
+
+                        }
                     }
 
                     Core.Models.PatientMasterVisit patientMasterVisit = new Core.Models.PatientMasterVisit()

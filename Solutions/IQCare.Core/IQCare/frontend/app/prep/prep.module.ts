@@ -9,7 +9,8 @@ import {
     MatStepperModule, MatButtonModule,
     MatFormFieldModule, MatSelectModule,
     MatNativeDateModule, MatDatepickerModule,
-    MatInputModule, MatAutocompleteModule, MatTableModule, MatDividerModule, MatDialogModule, MatIconModule
+    MatInputModule, MatAutocompleteModule, MatTableModule, MatDividerModule, MatDialogModule, MatIconModule,
+    MatPaginatorModule
 } from '@angular/material';
 import { ReactiveFormsModule } from '@angular/forms';
 // tslint:disable-next-line:max-line-length
@@ -53,6 +54,7 @@ import { PregnancyStatusResolver } from './_services/pregnancy-status.resolver';
 import { ScreenedForSTIResolver } from './_services/screened-sti.resolver';
 import { PrepCareendComponent } from './prep-careend/prep-careend.component';
 import { PrepMonthlyrefillComponent } from './prep-monthlyrefill/prep-monthlyrefill.component';
+import { PrepLabsgridComponent } from './prep-labsgrid/prep-labsgrid.component';
 
 @NgModule({
     declarations: [
@@ -67,7 +69,8 @@ import { PrepMonthlyrefillComponent } from './prep-monthlyrefill/prep-monthlyref
         PrepAppointmentComponent,
         PrepCheckinComponent,
         PrepCareendComponent,
-        PrepMonthlyrefillComponent
+        PrepMonthlyrefillComponent,
+        PrepLabsgridComponent
     ],
     imports: [
         SharedModule, MatDatepickerModule, MatNativeDateModule,
@@ -75,6 +78,7 @@ import { PrepMonthlyrefillComponent } from './prep-monthlyrefill/prep-monthlyref
         MatButtonModule, MatFormFieldModule, MatSelectModule,
         MatInputModule, MatAutocompleteModule, MatTableModule,
         PrepRoutingModule, MatDividerModule, MatDialogModule,
+        MatPaginatorModule,
         MatIconModule
     ],
     providers: [

@@ -44,6 +44,7 @@ export class PrepEncounterComponent implements OnInit {
     ChronicIllnessFormGroup: Object[][];
     PrepStatusFormGroup: FormArray;
     AppointmentFormGroup: FormArray;
+    LabInvestigationsFormGroup:FormArray;
 
     yesnoOptions: LookupItemView[];
     stiScreeningOptions: LookupItemView[];
@@ -64,6 +65,7 @@ export class PrepEncounterComponent implements OnInit {
     PregnancyOutcomeOptions: any[] = [];
     PrepStatusOptions: any[] = [];
     PrepAppointmentOptions: any[] = [];
+
 
     public chronic_illness_data: PatientChronicIllness[] = [];
     public adverseEvents_data: AdverseEventsCommand[] = [];
@@ -89,6 +91,7 @@ export class PrepEncounterComponent implements OnInit {
         this.ChronicIllnessFormGroup = [];
         this.PrepStatusFormGroup = new FormArray([]);
         this.AppointmentFormGroup = new FormArray([]);
+        this.LabInvestigationsFormGroup = new FormArray([]);
     }
 
     ngOnInit() {
@@ -226,6 +229,9 @@ export class PrepEncounterComponent implements OnInit {
 
     onPrepAppointmentNotify(formGroup: FormGroup): void {
         this.AppointmentFormGroup.push(formGroup);
+    }
+    onLabInvestigations(formGroup: FormGroup): void {
+        this.LabInvestigationsFormGroup.push(formGroup);
     }
 
     onSubmitForm() {
