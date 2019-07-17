@@ -42,5 +42,30 @@ namespace IQCare.Maternity.WebApi.Controllers
                 return Ok(result.Value);
             return BadRequest(result);
         }
+
+        [HttpPost]
+        public async Task<IActionResult> AddPregnancyOutcome([FromBody]AddPregnancyLogCommand addPregnancyLogCommand)
+        {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+            var response = await _mediator.Send(addPregnancyLogCommand, Request.HttpContext.RequestAborted);
+            if (response.IsValid)
+                return Ok(response.Value);
+            return BadRequest(response);
+        }
+
+        [HttpGet("{patientId}/{patientMastervisitId}")]
+        public async Task<IActionResult> GetPregnancyOutcome(int patientId, int patientMastervisitId)
+        {
+            var response = await _mediator.Send(new GetPregnancyLogCommand()
+            {
+                PatientId = patientId,
+                PatientMasterVisitId = patientMastervisitId
+            }, Request.HttpContext.RequestAborted);
+            if (response.IsValid)
+                return Ok(response.Value);
+            return BadRequest(response);
+        }
     }
 }

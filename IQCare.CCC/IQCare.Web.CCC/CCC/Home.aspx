@@ -2,7 +2,7 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="IQCareContentPlaceHolder" runat="server">
     <div class="col-md-12 col-xs-12 col-sm-12">
-        <div class="col-md-8 col-xs-12 col-sm-12" style="display: none;">
+        <div class="col-md-8 col-xs-12 col-sm-12">
                 <div class="panel panel-default">
                     <div class="panel-body">
                         <div class="col-md-12">

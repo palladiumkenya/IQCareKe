@@ -37,6 +37,7 @@ export class PrepAppointmentComponent implements OnInit {
             reasonAppointmentNoGiven: new FormControl('', [Validators.required]),
             nextAppointmentDate: new FormControl('', [Validators.required]),
             clinicalNotes: new FormControl(''),
+            id: new FormControl()
         });
 
         // default form state
@@ -59,9 +60,14 @@ export class PrepAppointmentComponent implements OnInit {
         this.pncservice.getAppointments(this.patientId, this.patientMasterVisitId).subscribe(
             (result) => {
                 if (result) {
+                    const yesOption = this.yesnoOptions.filter(obj => obj.itemName == 'Yes');
                     this.PrepAppointmentForm.get('nextAppointmentDate').setValue(result.appointmentDate);
                     this.PrepAppointmentForm.get('clinicalNotes').setValue(result.description);
-                    // this.PrepAppointmentForm.get('id').setValue(result.id);
+                    this.PrepAppointmentForm.get('id').setValue(result.id);
+                    this.PrepAppointmentForm.get('nextAppoitmentGiven').setValue(yesOption[0].itemId);
+                } else {
+                    const noOption = this.yesnoOptions.filter(obj => obj.itemName == 'No');
+                    this.PrepAppointmentForm.get('nextAppoitmentGiven').setValue(noOption[0].itemId);
                 }
             },
             (error) => {

@@ -27,7 +27,8 @@ export class CircumcisionStatusComponent implements OnInit {
     ngOnInit() {
         this.CircumcisionStatusForm = this._formBuilder.group({
             isClientCircumcised: new FormControl('', [Validators.required]),
-            referredToVMMC: new FormControl('')
+            referredToVMMC: new FormControl(''),
+            id: new FormControl()
         });
 
         // emit form to the stepper 
@@ -51,6 +52,7 @@ export class CircumcisionStatusComponent implements OnInit {
                 if (res) {
                     this.CircumcisionStatusForm.controls.isClientCircumcised.setValue(res.clientCircumcised);
                     this.CircumcisionStatusForm.controls.referredToVMMC.setValue(res.referredToVMMC);
+                    this.CircumcisionStatusForm.controls.id.setValue(res.id);
                 }
             },
             (error) => {

@@ -73,6 +73,7 @@ export class FertilityIntentionComponent implements OnInit {
                     this.FertilityIntentionForm.controls.lmp.setValue(res.lmp);
                     this.FertilityIntentionForm.controls.pregnancyPlanned.setValue(res.pregnancyPlanned);
                     this.FertilityIntentionForm.controls.planningToGetPregnant.setValue(res.planningToGetPregnant);
+                    this.FertilityIntentionForm.controls.breastFeeding.setValue(res.breastFeeding);
 
                     // set pregnancy status
                     const pregnancyStatus = this.pregnancyStatusOptions.filter(obj => obj.itemId == res.pregnancyStatusId);

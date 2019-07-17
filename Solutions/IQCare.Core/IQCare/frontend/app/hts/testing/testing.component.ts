@@ -286,9 +286,6 @@ export class TestingComponent implements OnInit {
                 } else if (screeningType == 'Confirmatory Test') {
                     const firstTest = this.hivResults1.slice(-1)[0];
 
-                    console.log(firstTest);
-                    console.log(data);
-
                     if (firstTest.kitName['itemName'] == data.kitName['itemName']) {
                         console.log('test');
                         this.snotifyService.info('The same kitname has been used for screening and confirmatory test.' +

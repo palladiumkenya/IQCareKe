@@ -8,6 +8,7 @@ import { PrepStatusCommand } from '../_models/commands/PrepStatusCommand';
 import { AllergiesCommand } from '../_models/commands/AllergiesCommand';
 import { ClientCircumcisionStatusCommand } from '../_models/commands/ClientCircumcisionStatusCommand';
 import { PregnancyIndicatorCommand } from '../_models/commands/PregnancyIndicatorCommand';
+import { PregnancyIndicatorLogCommand } from '../_models/commands/PregnancyIndicatorLogCommand';
 import { EditAppointmentCommand } from '../_models/commands/nextAppointmentCommand';
 import { EncounterDetails } from '../../dashboard/_model/HtsEncounterdetails';
 
@@ -34,6 +35,7 @@ export class PrepService {
         if (STIScreeningCommand.Screenings.length == 0) {
             return of([]);
         }
+
         return this.http.post<any>(this.MATERNITY_API_URL + '/api/PatientScreening/PostPatientScreenings',
             JSON.stringify(STIScreeningCommand), httpOptions).pipe(
                 tap(StiScreeningTreatment => this.errorHandler.log(`successfully added sti screening details`)),
@@ -59,6 +61,18 @@ export class PrepService {
         return this.http.post<any>(this.PREP_API_URL + '/api/BehaviourRisk/Encounterexists', JSON.stringify(Indata), httpOptions)
             .pipe(tap(CheckencounterExists => this.errorHandler.log('checked if RiskAssessmentEncounter Exists')),
                 catchError(this.errorHandler.handleError<any[]>('CheckencounterExists'))
+            );
+    }
+
+    public UpdateStiScreeningTreatment(STIScreeningCommand: any): Observable<any> {
+        if (STIScreeningCommand.Screenings.length == 0) {
+            return of([]);
+        }
+
+        return this.http.post<any>(this.MATERNITY_API_URL + '/api/PatientScreening/UpdatePatientScreenings',
+            JSON.stringify(STIScreeningCommand), httpOptions).pipe(
+                tap(StiScreeningTreatment => this.errorHandler.log(`successfully updated sti screening details`)),
+                catchError(this.errorHandler.handleError<any>('Error updating sti screening details'))
             );
     }
 
@@ -156,6 +170,22 @@ export class PrepService {
             '/api/PregnancyIndicator/GetPregnancyIndicator/' + patientId + '/' + patientMasterVisitId).pipe(
                 tap(getPregnancyIndicator => this.errorHandler.log('Successfully fetched patient pregnancy indicator status')),
                 catchError(this.errorHandler.handleError<any>('Error in fetching Patient pregnancy indicator status'))
+            );
+    }
+
+    public savePregnancyIndicatorLogCommand(pregnancyIndicatorLog: PregnancyIndicatorLogCommand): Observable<any> {
+        return this.http.post<any>(this.MATERNITY_API_URL + '/api/PregnancyIndicator/AddPregnancyOutcome',
+            JSON.stringify(pregnancyIndicatorLog), httpOptions).pipe(
+                tap(savePregnancyIndicatorLogCommand => this.errorHandler.log('Successfully saved patient pregnancy indicator log status')),
+                catchError(this.errorHandler.handleError<any>('Error in saving Patient pregnancy indicator log status'))
+            );
+    }
+
+    public getPregnancyIndicatorLog(patientId: number, patientMasterVisitId: number): Observable<any[]> {
+        return this.http.get<any[]>(this.MATERNITY_API_URL + '/api/PregnancyIndicator/GetPregnancyOutcome/' +
+            patientId + '/' + patientMasterVisitId).pipe(
+                tap(getPregnancyIndicatorLog => this.errorHandler.log('Successfully fetched patient pregnancy indicator log status')),
+                catchError(this.errorHandler.handleError<any>('Error in fetching Patient pregnancy indicator log status'))
             );
     }
 
