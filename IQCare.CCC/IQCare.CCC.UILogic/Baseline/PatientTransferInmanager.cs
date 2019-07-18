@@ -31,26 +31,43 @@ namespace IQCare.CCC.UILogic.Baseline
                 CreatedBy = userId
             };
             _result = (Id > 0)? _patientTranfersIn.UpdatePatientTransferIn(patientTransferIn): _patientTranfersIn.AddPatientTranferIn(patientTransferIn);
-           // _result = _patientTranfersIn.AddPatientTranferIn(patientTransferIn);
+            PatientLookupManager patientLookupManager = new PatientLookupManager();
+            var patient = patientLookupManager.GetPatientDetailSummary(patientId);
+            if (patient != null)
+            {
+                var patientType = patientLookupManager.GetPatientTypeId(patientId);
+                if (patientType == "Transfer-In")
+                {
+                    _patientTranfersIn.UpdateBlueCardBaselineTransferInTreatment(patient.ptn_pk, transferinDate,
+                        treatmentStartDate, Convert.ToInt32(currentTreatment), facilityFrom, Convert.ToInt32(countyFrom));
+                }
+            }
             return _result;
         }
 
-        public int UpdatePatientTransferIn(int patientId, int patientMastervisitId, int serviceAreaId,
-            DateTime transferinDate,
-            DateTime treatmentStartDate, string currentTreatment, string facilityFrom, int mflCode, string countyFrom,
-            string transferInNotes,int userId)
-        {
-            PatientTransferIn patientTransferIn = new PatientTransferIn()
-            {
+        public int UpdatePatientTransferIn(int patientId, int patientMastervisitId, int serviceAreaId, DateTime transferinDate,
+            DateTime treatmentStartDate, string currentTreatment, string facilityFrom, int mflCode, string countyFrom,string transferInNotes,int userId) {
+            PatientTransferIn patientTransferIn = new PatientTransferIn(){
                 TransferInDate = transferinDate,
                 TreatmentStartDate = treatmentStartDate,
                 CurrentTreatment = currentTreatment,
                 FacilityFrom = facilityFrom,
                 MflCode = mflCode,
                 CountyFrom = countyFrom,
-                TransferInNotes = transferInNotes,
-        };
+                TransferInNotes = transferInNotes
+            };
 
+            PatientLookupManager patientLookupManager = new PatientLookupManager();
+            var patient = patientLookupManager.GetPatientDetailSummary(patientId);
+            if (patient != null)
+            {
+                var patientType = patientLookupManager.GetPatientTypeId(patientId);
+                if (patientType == "Transfer-In")
+                {
+                    _patientTranfersIn.UpdateBlueCardBaselineTransferInTreatment(patient.ptn_pk, transferinDate,
+                        treatmentStartDate, Convert.ToInt32(currentTreatment), facilityFrom, Convert.ToInt32(countyFrom));
+                }
+            }
             return _result = _patientTranfersIn.UpdatePatientTransferIn(patientTransferIn);
         }
 
@@ -69,5 +86,10 @@ namespace IQCare.CCC.UILogic.Baseline
             return _patientTranfersIn.CheckifPatientTransferExisits(patientId);
         }
 
+        public void UpdateBlueCardBaselineTransferInHistory(int? ptn_pk, DateTime? artStartDate,
+            DateTime? confirmHIVPosDate, DateTime? dateEnrolledInCare, int whostage)
+        {
+            _patientTranfersIn.UpdateBlueCardBaselineTransferInHistory(ptn_pk, confirmHIVPosDate, dateEnrolledInCare, whostage);
+        }
     }
 }

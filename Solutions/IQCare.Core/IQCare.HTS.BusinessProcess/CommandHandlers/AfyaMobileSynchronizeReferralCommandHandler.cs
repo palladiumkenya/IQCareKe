@@ -56,7 +56,7 @@ namespace IQCare.HTS.BusinessProcess.CommandHandlers
 
                         //add referral
                         int providerId = request.PLACER_DETAIL.PROVIDER_ID;
-                        DateTime dateToBeEnrolled = DateTime.Now;
+                        DateTime? dateToBeEnrolled = null;
                         try
                         {
                             dateToBeEnrolled = DateTime.ParseExact(request.REFERRAL.DATE_TO_BE_ENROLLED, "yyyyMMdd", null);
@@ -84,7 +84,7 @@ namespace IQCare.HTS.BusinessProcess.CommandHandlers
                                 previousReferrals[0].ToFacility =
                                     Convert.ToInt32(searchFacility[0].MFLCode);
                                 previousReferrals[0].OtherFacility = "";
-                                previousReferrals[0].ExpectedDate = dateToBeEnrolled;
+                                previousReferrals[0].ExpectedDate = dateToBeEnrolled.Value;
 
                                 await encounterTestingService.UpdateReferral(previousReferrals[0]);
                             }
@@ -94,7 +94,7 @@ namespace IQCare.HTS.BusinessProcess.CommandHandlers
                                 {
                                     await encounterTestingService.AddReferral(identifiers[0].PersonId,
                                         facility[0].FacilityID, 2, MFLCode,
-                                        referralReason[0].ItemId, providerId, dateToBeEnrolled, "");
+                                        referralReason[0].ItemId, providerId, dateToBeEnrolled.Value, "");
                                 }
                             }
                         }
@@ -104,7 +104,7 @@ namespace IQCare.HTS.BusinessProcess.CommandHandlers
                             MFLCode = Convert.ToInt32(searchFacility[0].MFLCode);
 
                             await encounterTestingService.AddReferral(identifiers[0].PersonId, facility[0].FacilityID,
-                                2, MFLCode, referralReason[0].ItemId, providerId, dateToBeEnrolled, facilityReferred);
+                                2, MFLCode, referralReason[0].ItemId, providerId, dateToBeEnrolled.Value, facilityReferred);
                         }
 
                         var clientHasBeenReferredState =

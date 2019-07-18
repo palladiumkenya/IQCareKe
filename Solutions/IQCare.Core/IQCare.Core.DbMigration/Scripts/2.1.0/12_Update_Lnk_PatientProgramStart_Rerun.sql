@@ -3,7 +3,7 @@
 -- Create date: <Create Date,,>
 -- Description:	<Description,,>
 -- =============================================
-CREATE PROCEDURE  sp_updatePatientProgramStart
+ALTER PROCEDURE  sp_updatePatientProgramStart
 	-- Add the parameters for the stored procedure here
 	@Ptn_Pk int,
 	@DateOfEnrollment datetime

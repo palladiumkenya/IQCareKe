@@ -3926,11 +3926,8 @@
                             //save patient management
                             $.when(savePatientPatientManagement()).then(function () {
                                 setTimeout(function () {
-                                    window.location
-                                        .href =
-                                        '<%=ResolveClientUrl( "~/CCC/Patient/PatientHome.aspx")%>';
-                                },
-                                    2000);
+                                    window.location.href = '<%=ResolveClientUrl( "~/CCC/Patient/PatientHome.aspx")%>';
+                                },2000);
                             });
 
                             //save appointment
@@ -5246,7 +5243,8 @@
 				dataType: "json",
 				async: false,
 				cache: false,
-				success: function (response) {
+                success: function (response) {
+                    console.log(response);
 					if (response.d != null) {
                         if (isEditAppointment == 'True') {
 
@@ -5256,11 +5254,11 @@
                         }
 
                     }
-                    if (isEditAppointment == 'True') {
-                        EditPatientAppointment();
-                    } else {
-                        addPatientAppointment();
-                    }
+                    //if (isEditAppointment == 'True') {
+                    //    EditPatientAppointment();
+                    //} else {
+                    //    addPatientAppointment();
+                    //}
 					
                     if (response.d != null) {
                         if (appointmentId = JSON.stringify(response.d.AppointmentId))

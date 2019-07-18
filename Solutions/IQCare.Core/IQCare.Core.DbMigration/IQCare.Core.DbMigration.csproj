@@ -242,21 +242,34 @@
     <None Remove="Scripts\2.1.0\01_IQCare_CHS_Final.sql" />
     <None Remove="Scripts\2.1.0\02_PatientLabTracker_Delete_LabOrder.sql" />
     <None Remove="Scripts\2.1.0\03_PA_PatientAllergyView.sql" />
+    <None Remove="Scripts\2.1.0\04_Person_Ptn_Pk_ForMigration.sql" />
     <None Remove="Scripts\2.1.0\04_PI_PregnancyIndicator_Add_BreastFeeding.sql" />
     <None Remove="Scripts\2.1.0\05_Migrate_StuckBlueCard_Guys.sql" />
+    <None Remove="Scripts\2.1.0\06_Migrate_StuckBlueCard_Guys_Rerun.sql" />
     <None Remove="Scripts\2.1.0\06_Remove_Retired_ServiceAreas.sql" />
     <None Remove="Scripts\2.1.0\07_pr_Scheduler_UpdateAppointmentStatus.sql" />
     <None Remove="Scripts\2.1.0\08_July_01_Release.sql" />
     <None Remove="Scripts\2.1.0\09_Fix_Appointments.sql" />
+    <None Remove="Scripts\2.1.0\09_fn_GetPatientVisitDate.sql" />
     <None Remove="Scripts\2.1.0\10_EH_EncounterHistorySolution.sql" />
+    <None Remove="Scripts\2.1.0\11_EH_EncounterHistorySolution_Rerun.sql" />
     <None Remove="Scripts\2.1.0\11_PV_PatientVitals.sql" />
     <None Remove="Scripts\2.1.0\11_Update_Lnk_PatientProgramStart.sql" />
     <None Remove="Scripts\2.1.0\12_pr_Scheduler_UpdateAppointmentStatus.sql" />
+    <None Remove="Scripts\2.1.0\12_Update_Lnk_PatientProgramStart_Rerun.sql" />
     <None Remove="Scripts\2.1.0\13_PP_PatientPopulationView.sql" />
     <None Remove="Scripts\2.1.0\14_HTS_LAB_Register.sql" />
+    <None Remove="Scripts\2.1.0\14_PP_PatientPopulationView_Rerun.sql" />
+    <None Remove="Scripts\2.1.0\15_HTS_LAB_Register_Rerun.sql" />
     <None Remove="Scripts\2.1.0\15_VW_PatientCareEnding.sql" />
     <None Remove="Scripts\2.1.0\16_PatientView.sql" />
+    <None Remove="Scripts\2.1.0\16_VW_PatientCareEnding_Rerun.sql" />
+    <None Remove="Scripts\2.1.0\17_PatientView_Rerun.sql" />
     <None Remove="Scripts\2.1.0\17_PL_PregnancyLog_Add_BirthDefects.sql" />
+    <None Remove="Scripts\2.1.0\18_PA_PatientAppointmentReasons.sql" />
+    <None Remove="Scripts\2.1.0\19_sp_UpdateBlueCardBaselineHistory.sql" />
+    <None Remove="Scripts\2.1.0\20_sp_UpdateBlueCardBaselineTransferInHistory.sql" />
+    <None Remove="Scripts\2.1.0\21_sp_UpdateBlueCardBaselineTransferInTreatment.sql" />
   </ItemGroup>
 
   <ItemGroup>
@@ -516,18 +529,31 @@
     <EmbeddedResource Include="Scripts\2.1.0\01_IQCare_CHS_Final.sql" />
     <EmbeddedResource Include="Scripts\2.1.0\02_PatientLabTracker_Delete_LabOrder.sql" />
     <EmbeddedResource Include="Scripts\2.1.0\03_PA_PatientAllergyView.sql" />
+    <EmbeddedResource Include="Scripts\2.1.0\04_Person_Ptn_Pk_ForMigration.sql" />
     <EmbeddedResource Include="Scripts\2.1.0\04_PI_PregnancyIndicator_Add_BreastFeeding.sql" />
     <EmbeddedResource Include="Scripts\2.1.0\05_Migrate_StuckBlueCard_Guys.sql" />
+    <EmbeddedResource Include="Scripts\2.1.0\06_Migrate_StuckBlueCard_Guys_Rerun.sql" />
     <EmbeddedResource Include="Scripts\2.1.0\06_Remove_Retired_ServiceAreas.sql" />
     <EmbeddedResource Include="Scripts\2.1.0\08_July_01_Release.sql" />
+    <EmbeddedResource Include="Scripts\2.1.0\09_fn_GetPatientVisitDate.sql" />
     <EmbeddedResource Include="Scripts\2.1.0\10_EH_EncounterHistorySolution.sql" />
+    <EmbeddedResource Include="Scripts\2.1.0\11_EH_EncounterHistorySolution_Rerun.sql" />
     <EmbeddedResource Include="Scripts\2.1.0\11_PV_PatientVitals.sql" />
     <EmbeddedResource Include="Scripts\2.1.0\11_Update_Lnk_PatientProgramStart.sql" />
     <EmbeddedResource Include="Scripts\2.1.0\12_pr_Scheduler_UpdateAppointmentStatus.sql" />
+    <EmbeddedResource Include="Scripts\2.1.0\12_Update_Lnk_PatientProgramStart_Rerun.sql" />
     <EmbeddedResource Include="Scripts\2.1.0\14_HTS_LAB_Register.sql" />
+    <EmbeddedResource Include="Scripts\2.1.0\14_PP_PatientPopulationView_Rerun.sql" />
+    <EmbeddedResource Include="Scripts\2.1.0\15_HTS_LAB_Register_Rerun.sql" />
     <EmbeddedResource Include="Scripts\2.1.0\15_VW_PatientCareEnding.sql" />
     <EmbeddedResource Include="Scripts\2.1.0\16_PatientView.sql" />
+    <EmbeddedResource Include="Scripts\2.1.0\16_VW_PatientCareEnding_Rerun.sql" />
+    <EmbeddedResource Include="Scripts\2.1.0\17_PatientView_Rerun.sql" />
     <EmbeddedResource Include="Scripts\2.1.0\17_PL_PregnancyLog_Add_BirthDefects.sql" />
+    <EmbeddedResource Include="Scripts\2.1.0\18_PA_PatientAppointmentReasons.sql" />
+    <EmbeddedResource Include="Scripts\2.1.0\19_sp_UpdateBlueCardBaselineHistory.sql" />
+    <EmbeddedResource Include="Scripts\2.1.0\20_sp_UpdateBlueCardBaselineTransferInHistory.sql" />
+    <EmbeddedResource Include="Scripts\2.1.0\21_sp_UpdateBlueCardBaselineTransferInTreatment.sql" />
   </ItemGroup>
 
   <ItemGroup>
