@@ -6286,7 +6286,7 @@
     }
 
     function getTBOutcome(tbScreenScore) {
-        // $("#ddlICFTBScreeningOutcome").prop('selectedIndex', tbScreenScore);
+        $("#ddlICFTBScreeningOutcome").prop('selectedIndex', tbScreenScore);
     }
 
     //Currently on Anti-TB Drugs selection change
