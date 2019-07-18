@@ -1,4 +1,13 @@
-﻿ALTER FUNCTION [dbo].[fn_GetPatientVisitDate]
+﻿IF EXISTS (SELECT *
+           FROM   sys.objects
+           WHERE  object_id = OBJECT_ID(N'[dbo].[fn_GetPatientVisitDate]')
+                  AND type IN ( N'FN', N'IF', N'TF', N'FS', N'FT' ))
+				  BEGIN
+  DROP FUNCTION [dbo].[fn_GetPatientVisitDate]
+  END
+  GO
+
+CREATE FUNCTION [dbo].[fn_GetPatientVisitDate]
 (
 @PatientId as int,
 @PatientMasterVisitId  as int
