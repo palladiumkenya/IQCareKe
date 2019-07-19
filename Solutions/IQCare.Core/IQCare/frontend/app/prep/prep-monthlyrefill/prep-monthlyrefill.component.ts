@@ -12,12 +12,11 @@ import { registerLocaleData } from '@angular/common';
 import { PrepService } from '../_services/prep.service';
 import { LookupItemService } from './../../shared/_services/lookup-item.service';
 import { EncounterService } from '../../shared/_services/encounter.service';
-import { SearchService } from '../../../registration/_services/search.service';
+import { SearchService } from '../../registration/_services/search.service';
 import { PatientMasterVisitEncounter } from '../../pmtct/_models/PatientMasterVisitEncounter';
 import * as moment from 'moment';
 import { PatientAppointmentEditCommand } from '../../pmtct/_models/PatientAppointmentEditCommand';
-import { Search } from '../../records/_models/search';
-import { SearchService } from '../../registration/_services/search.service';
+
 @Component({
     selector: 'app-prep-monthlyrefill',
     templateUrl: './prep-monthlyrefill.component.html',
@@ -426,7 +425,7 @@ export class PrepMonthlyrefillComponent implements OnInit {
 
     OnAdherenceReasonsSelected(event) {
 
-      
+
         let val: string;
         let index: number;
         let text: string;
@@ -438,7 +437,7 @@ export class PrepMonthlyrefillComponent implements OnInit {
                     text = this.AdherenceAssessmentReasonOptions[index].itemName;
                     if (text.toLowerCase() == 'other') {
 
-                       
+
                         this.PrepMonthlyRefillFormGroup.controls.SpecifyAssessmentReason.enable({ onlySelf: true });
 
                     } else {
@@ -724,11 +723,11 @@ export class PrepMonthlyrefillComponent implements OnInit {
                                     + response['message'], 'Submit Monthly Refill Form',
                                     this.notificationService.getConfig());
 
-                                    this.zone.run(() => {
-                                        this.router.navigate(['/prep/' + '/' + this.patientId + '/' + this.personId + '/'
-                                            + this.serviceAreaId],
-                                            { relativeTo: this.route });
-                                    });
+                                this.zone.run(() => {
+                                    this.router.navigate(['/prep/' + '/' + this.patientId + '/' + this.personId + '/'
+                                        + this.serviceAreaId],
+                                        { relativeTo: this.route });
+                                });
                             },
                             (error) => {
                                 this.snotifyService.error('Error submitting the form' + error, 'Submit Montly Refill Form',
@@ -812,11 +811,11 @@ export class PrepMonthlyrefillComponent implements OnInit {
                             + response['message'], 'Submit Monthly Refill Form',
                             this.notificationService.getConfig());
 
-                            this.zone.run(() => {
-                                this.router.navigate(['/prep/' + '/' + this.patientId + '/' + this.personId + '/'
-                                    + this.serviceAreaId],
-                                    { relativeTo: this.route });
-                            });
+                        this.zone.run(() => {
+                            this.router.navigate(['/prep/' + '/' + this.patientId + '/' + this.personId + '/'
+                                + this.serviceAreaId],
+                                { relativeTo: this.route });
+                        });
                     },
                     (error) => {
                         this.snotifyService.error('Error submitting and Editing the form' + error, 'Submit Montly Refill Form',
