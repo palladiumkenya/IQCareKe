@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Entities.CCC.Baseline;
 
 namespace Interface.CCC.Baseline
@@ -10,5 +11,7 @@ namespace Interface.CCC.Baseline
         int DeletePatientTransferIn(int id);
         List<PatientTransferIn> GetPatientTransferIns(int patientId);
         int CheckifPatientTransferExisits(int patientId);
+        void UpdateBlueCardBaselineTransferInHistory(int? ptn_pk, DateTime? confirmHIVPosDate, DateTime? dateEnrolledInCare, int whostage);
+        void UpdateBlueCardBaselineTransferInTreatment(int? ptn_pk, DateTime? transferInDate, DateTime? treatmentStartDate, int currentTreatment, string facilityFrom, int countyFrom);
     }
 }

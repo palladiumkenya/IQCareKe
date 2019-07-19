@@ -110,7 +110,7 @@ export class LinkageReferralComponent implements OnInit {
         this._linkageReferralService.getClientReferral(personId).subscribe(
             (res) => {
                 if (res.length > 0) {
-                    this.form.controls.dateToBeEnrolled.setValue(res[0]['referralDate']);
+                    this.form.controls.dateToBeEnrolled.setValue(res[0]['expectedDate']);
                     this.form.controls.otherFacility.setValue(res[0]['otherFacility']);
                     this._linkageReferralService.getFacility(res[0]['toFacility']).subscribe(
                         (result) => {
