@@ -116,12 +116,16 @@
                                         </div>
                                     </mat-step>
 
-                                    <!--<mat-step [completed]="false" [stepControl]="deliveryMatFormGroup">
+                                    <mat-step [completed]="false" [stepControl]="LabInvestigationsFormGroup">
                                         <ng-template matStepLabel>
-                                            <span matTooltip="Delivery & Maternal History">
+                                            <span matTooltip="Lab Investigations">
                                                 LAB Investigations
                                             </span>
                                         </ng-template>
+                                        <app-prep-labsgrid [patientId]="patientId"  (notify)="onLabInvestigations($event)">
+
+                                        </app-prep-labsgrid>
+                                        <div class="row">&nbsp;</div>
 
                                         <div>
                                             <button mat-raised-button color="primary" matStepperPrevious
@@ -130,7 +134,7 @@
                                             <button mat-raised-button color="accent" matStepperNext
                                                 type="button">Next</button>
                                         </div>
-                                    </mat-step>-->
+                                    </mat-step>
 
                                     <mat-step [completed]="false" [stepControl]="PrepStatusFormGroup">
                                         <ng-template matStepLabel>

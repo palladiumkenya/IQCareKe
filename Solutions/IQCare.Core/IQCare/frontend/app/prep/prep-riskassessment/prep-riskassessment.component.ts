@@ -608,7 +608,7 @@ export class PrepRiskassessmentComponent implements OnInit {
         if (event.source.viewValue !== 'Not Applicable' && event.source.selected == true) {
             for (let i = 0; i < event.source._parent.options.length; i++) {
                 if (event.source._parent.options._results[i].viewValue
-                    === 'Not Applicable')   {
+                    === 'Not Applicable') {
                     event.source._parent.options._results[i].deselect();
                 }
             }
@@ -638,7 +638,7 @@ export class PrepRiskassessmentComponent implements OnInit {
         if (event.source.viewValue !== 'Not Applicable' && event.source.selected == true) {
             for (let i = 0; i < event.source._parent.options.length; i++) {
                 if (event.source._parent.options._results[i].viewValue
-                    === 'Not Applicable')   {
+                    === 'Not Applicable') {
                     event.source._parent.options._results[i].deselect();
                 }
             }
@@ -1451,7 +1451,7 @@ export class PrepRiskassessmentComponent implements OnInit {
         partnercccenrollmentmasterid = this.partnercccenrollmentoptions[0].masterId;
 
 
-        if (partnercccenrollmentdetail !== null && partnercccenrollmentdetail !== undefined
+        if (partnercccenrollmentdetail !== null && partnercccenrollmentdetail !== undefined && partnercccenrollmentdetail
         ) {
             this.RiskAssessmentList.push({
                 'Id': 0,
@@ -1468,7 +1468,8 @@ export class PrepRiskassessmentComponent implements OnInit {
         let partnersexcondomsmasterid: number;
 
         partnersexcondomsmasterid = this.sexwithoutcondomoptions[0].masterId;
-        if (partnersexwithoutcondoms !== null && partnersexwithoutcondoms !== undefined
+        if (partnersexwithoutcondoms !== null && partnersexwithoutcondoms !== undefined &&
+            partnersexwithoutcondoms
         ) {
             this.RiskAssessmentList.push({
                 'Id': 0,
