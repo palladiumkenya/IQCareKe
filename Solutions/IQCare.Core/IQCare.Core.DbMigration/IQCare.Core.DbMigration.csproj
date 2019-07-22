@@ -231,6 +231,7 @@
     <None Remove="Scripts\2.0.1\PREP\23_PrepAppointment Reason.sql" />
     <None Remove="Scripts\2.0.1\PREP\24_AppointmentGiven.sql" />
     <None Remove="Scripts\2.0.1\PREP\25_Api_AppointmentsServiceAreaView.sql" />
+    <None Remove="Scripts\2.0.1\PREP\26_PrepRiskAssessmentView.sql" />
     <None Remove="Scripts\2.0.1\PREP\2_Prep Number.sql" />
     <None Remove="Scripts\2.0.1\PREP\3_PrepServiceAreaIdentifiers.sql" />
     <None Remove="Scripts\2.0.1\PREP\4_PersonVitalsView.sql" />
@@ -522,6 +523,7 @@
     <EmbeddedResource Include="Scripts\2.0.1\PREP\23_PrepAppointment Reason.sql" />
     <EmbeddedResource Include="Scripts\2.0.1\PREP\24_AppointmentGiven.sql" />
     <EmbeddedResource Include="Scripts\2.0.1\PREP\25_Api_AppointmentsServiceAreaView.sql" />
+    <EmbeddedResource Include="Scripts\2.0.1\PREP\26_PrepRiskAssessmentView.sql" />
     <EmbeddedResource Include="Scripts\2.0.1\PREP\2_Prep Number.sql" />
     <EmbeddedResource Include="Scripts\2.0.1\PREP\3_PrepServiceAreaIdentifiers.sql" />
     <EmbeddedResource Include="Scripts\2.0.1\PREP\4_PersonVitalsView.sql" />
