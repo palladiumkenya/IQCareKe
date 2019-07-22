@@ -47,7 +47,7 @@ export class PrepEncounterComponent implements OnInit {
     ChronicIllnessFormGroup: Object[][];
     PrepStatusFormGroup: FormArray;
     AppointmentFormGroup: FormArray;
-    LabInvestigationsFormGroup:FormArray;
+    LabInvestigationsFormGroup: FormArray;
 
     yesnoOptions: LookupItemView[];
     stiScreeningOptions: LookupItemView[];
@@ -199,7 +199,7 @@ export class PrepEncounterComponent implements OnInit {
     public onObsGynPrevious() {
         this.isOptionalCircumcision = true;
         this.stepper._stateChanged();
-        this.stepper.selectedIndex = 1;
+        this.stepper.selectedIndex = 0;
     }
 
     onPrepStiScreeningTreatmentNotify(formGroup: FormGroup): void {
