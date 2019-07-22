@@ -28,7 +28,8 @@ namespace IQCare.Maternity.BusinessProcess.QueryHandlers
     {
         try
         {
-            var patientFamilyPlanning = _maternityUnitOfWork.Repository<PatientFamilyPlanning>().Get(x => x.PatientId == request.PatientId);
+            var patientFamilyPlanning = _maternityUnitOfWork.Repository<PatientFamilyPlanning>().Get(x => x.PatientId == request.PatientId
+            && x.PatientMasterVisitId == request.PatientMasterVisitId && x.DeleteFlag == false);
             var familyPlanningViewModel = _mapper.Map<List<PatientFamilyPlanningViewModel>>(patientFamilyPlanning);
 
 

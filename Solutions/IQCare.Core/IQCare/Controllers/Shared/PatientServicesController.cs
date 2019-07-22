@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using IQCare.Common.BusinessProcess.Commands.Encounter;
+using IQCare.Common.BusinessProcess.Commands.Enrollment;
 using IQCare.Common.BusinessProcess.Commands.PersonCommand;
+using IQCare.Common.BusinessProcess.Commands.PersonVitals;
 using IQCare.Common.BusinessProcess.Commands.Relationship;
 using IQCare.HTS.BusinessProcess.Commands;
 using MediatR;
@@ -63,6 +65,18 @@ namespace IQCare.Controllers.Shared
             return BadRequest(results);
         }
 
+        [HttpGet("GetMasterVisits/{PatientId}/{PatientMasterVisitId}")]
+        public async Task<IActionResult> GetMasterVisits(int PatientId, int PatientMasterVisitId)
+        {
+         var results = await _mediator.Send(new GetPatientMasterVisitCommand { PatientId = PatientId, PatientMasterVisitId = PatientMasterVisitId },
+            HttpContext.RequestAborted);
+
+         if (results.IsValid)
+                return Ok(results.Value);
+
+            return BadRequest(results);
+        }
+
         [HttpGet("GetEncounters/{PatientId}/{encounterTypeId}")]
         public async Task<IActionResult> GetEncounters(int PatientId,int encounterTypeId)
         {
@@ -109,6 +123,50 @@ namespace IQCare.Controllers.Shared
             return BadRequest(response);
         }
 
+        [HttpGet("GetCurrentPersonVitals/{Id}")]
+        public async Task<Object> GetCurrentPersonVitals(int id)
+        {
+            var response = await _mediator.Send(new GetPersonVitalsCommand { PersonId = id }, HttpContext.RequestAborted);
+
+            if (response.IsValid)
+                return Ok(response.Value);
+
+            return BadRequest(response);
+
+        }
+
+        [HttpPost("CareEndPatient")]
+        public async Task<IActionResult> CareEndPatient([FromBody] AddPatientCareEndingCommand addPatientCareEndingCommand)
+        {
+            var response = await _mediator.Send(addPatientCareEndingCommand, Request.HttpContext.RequestAborted);
+            if (response.IsValid)
+            {
+                return Ok(response.Value);
+            }
+            return BadRequest(response);
+        }
+
+        [HttpGet("GetPatientCareEndedDetails/{patientMasterVisitId}")]
+        public async  Task<IActionResult> GetPatientCareEndedDetails(int patientMasterVisitId)
+        {
+            var response = await _mediator.Send(new GetPatientCareEndingCommand { PatientMasterVisitId = patientMasterVisitId }, HttpContext.RequestAborted);
+            if (response.IsValid)
+                return Ok(response.Value);
+            return BadRequest(response);
+
+        }
+
+        [HttpGet("GetLatestCareEndDetails/{patientId}")]
+
+        public async Task<IActionResult> GetLatestCareEndDetails(int patientId)
+        {
+            var response = await _mediator.Send(new GetLatestCareEndingDetailsCommand { PatientId = patientId }, HttpContext.RequestAborted);
+            if (response.IsValid)
+                return Ok(response.Value);
+            return BadRequest(response);
+        }
+
+       
         // POST: api/PatientServices
         [HttpPost]
         public void Post([FromBody]string value)

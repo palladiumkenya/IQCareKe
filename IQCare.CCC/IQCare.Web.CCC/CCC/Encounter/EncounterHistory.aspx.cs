@@ -8,7 +8,10 @@ namespace IQCare.Web.CCC.Encounter
         PatientEncounterLogic PEL = new PatientEncounterLogic();
         protected void Page_Load(object sender, EventArgs e)
         {
-            PEL.EncounterHistory(TreeViewEncounterHistory, Session["PatientPK"].ToString());
+            if (!IsPostBack)
+            {
+                PEL.EncounterHistory(TreeViewEncounterHistory, Session["PatientPK"].ToString());
+            }
         }
     }
 }

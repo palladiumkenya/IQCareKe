@@ -57,9 +57,32 @@ namespace IQCare.HTS.BusinessProcess.CommandHandlers
                         string lastName = request.CLIENTS[i].PATIENT_IDENTIFICATION.PATIENT_NAME.LAST_NAME;
                         string nickName = (request.CLIENTS[i].PATIENT_IDENTIFICATION.PATIENT_NAME.NICK_NAME == null) ? "" : request.CLIENTS[i].PATIENT_IDENTIFICATION.PATIENT_NAME.NICK_NAME.ToString();
                         int sex = request.CLIENTS[i].PATIENT_IDENTIFICATION.SEX;
-                        DateTime dateOfBirth = DateTime.ParseExact(request.CLIENTS[i].PATIENT_IDENTIFICATION.DATE_OF_BIRTH, "yyyyMMdd", null);
+
+                        //Try to parse dateOfBirth
+                        DateTime dateOfBirth = DateTime.Now;
+                        try
+                        {
+                            dateOfBirth = DateTime.ParseExact(request.CLIENTS[i].PATIENT_IDENTIFICATION.DATE_OF_BIRTH, "yyyyMMdd", null);
+                        }
+                        catch (Exception e)
+                        {
+                            Log.Error($"Could not parse DateOfBirth: {request.CLIENTS[i].PATIENT_IDENTIFICATION.DATE_OF_BIRTH} as a valid date. Incorrect format, date should be in the following format yyyyMMdd");
+                            throw new Exception($"Could not parse DateOfBirth: {request.CLIENTS[i].PATIENT_IDENTIFICATION.DATE_OF_BIRTH} as a valid date. Incorrect format, date should be in the following format yyyyMMdd");
+                        }
                         string dobPrecision = request.CLIENTS[i].PATIENT_IDENTIFICATION.DATE_OF_BIRTH_PRECISION;
-                        DateTime dateEnrollment = DateTime.ParseExact(request.CLIENTS[i].PATIENT_IDENTIFICATION.REGISTRATION_DATE, "yyyyMMdd", null);
+
+                        //Try to parse DateOfEnrollment
+                        DateTime dateEnrollment = DateTime.Now;
+                        try
+                        {
+                            dateEnrollment = DateTime.ParseExact(request.CLIENTS[i].PATIENT_IDENTIFICATION.REGISTRATION_DATE, "yyyyMMdd", null);
+                        }
+                        catch (Exception e)
+                        {
+                            Log.Error($"Could not parse DateOfEnrollment: {request.CLIENTS[i].PATIENT_IDENTIFICATION.REGISTRATION_DATE} as a valid date: Incorrect format, date should be in the following format yyyyMMdd");
+                            throw new Exception($"Could not parse DateOfEnrollment: {request.CLIENTS[i].PATIENT_IDENTIFICATION.REGISTRATION_DATE} as a valid date: Incorrect format, date should be in the following format yyyyMMdd");
+                        }
+
                         int maritalStatusId = request.CLIENTS[i].PATIENT_IDENTIFICATION.MARITAL_STATUS;
                         string landmark = request.CLIENTS[i].PATIENT_IDENTIFICATION.PATIENT_ADDRESS.PHYSICAL_ADDRESS
                             .LANDMARK;
@@ -120,7 +143,7 @@ namespace IQCare.HTS.BusinessProcess.CommandHandlers
                             if (registeredPerson != null)
                             {
                                 var updatedPerson = await registerPersonService.UpdatePerson(identifiers[0].PersonId,
-                                    firstName, middleName, lastName, sex, dateOfBirth, clientFacility.FacilityID, NickName: nickName);
+                                    firstName, middleName, lastName, sex, dateOfBirth, clientFacility.FacilityID, registrationDate: dateEnrollment,  NickName: nickName);
                             }
                             else
                             {
@@ -137,7 +160,7 @@ namespace IQCare.HTS.BusinessProcess.CommandHandlers
                             {
                                 //Add Person to mst_patient
                                 var mstResult = await registerPersonService.InsertIntoBlueCard(firstName, lastName,
-                                    middleName, dateEnrollment, maritalStatusName, physicalAddress, mobileNumber, gender, dobPrecision, dateOfBirth, userId, facilityId);
+                                    middleName, dateEnrollment," ", 283, maritalStatusName, physicalAddress, mobileNumber, gender, dobPrecision, dateOfBirth, userId, facilityId);
                                 if (mstResult.Count > 0)
                                 {
                                     patient = await registerPersonService.AddPatient(identifiers[0].PersonId, userId, facilityId);
@@ -185,7 +208,7 @@ namespace IQCare.HTS.BusinessProcess.CommandHandlers
                             var person = await registerPersonService.RegisterPerson(firstName, middleName, lastName, sex,
                                 userId, clientFacility.FacilityID, dateOfBirth, nickName: nickName);
                             //Add Person to mst_patient
-                            var mstResult = await registerPersonService.InsertIntoBlueCard(firstName, lastName, middleName, dateEnrollment, maritalStatusName, physicalAddress, mobileNumber, gender, dobPrecision, dateOfBirth, userId, facilityId);
+                            var mstResult = await registerPersonService.InsertIntoBlueCard(firstName, lastName, middleName, dateEnrollment, " ", 283, maritalStatusName, physicalAddress, mobileNumber, gender, dobPrecision, dateOfBirth, userId, facilityId);
                             if (mstResult.Count > 0)
                             {
                                 //Add PersonIdentifiers
@@ -225,15 +248,15 @@ namespace IQCare.HTS.BusinessProcess.CommandHandlers
                                 }
 
                                 //update message has been processed
-                                await registerPersonService.UpdateAfyaMobileInbox(afyaMobileMessage.Id, afyaMobileId, true, DateTime.Now, "success", true);
+                                await registerPersonService.UpdateAfyaMobileInbox(afyaMobileMessage.Id, afyaMobileId, true, DateTime.Now, $"Successfully synchronized demographics for afyamobileid: {afyaMobileId}", true);
                             }
                         }
                     }
 
                     //update message has been processed
-                    await registerPersonService.UpdateAfyaMobileInbox(afyaMobileMessage.Id, afyaMobileId, true, DateTime.Now, "success", true);
+                    await registerPersonService.UpdateAfyaMobileInbox(afyaMobileMessage.Id, afyaMobileId, true, DateTime.Now, $"Successfully synchronized demographics for afyamobileid: {afyaMobileId}", true);
                     trans.Commit();
-                    return Result<string>.Valid(afyaMobileId);
+                    return Result<string>.Valid($"Successfully synchronized demographics for afyamobileid: {afyaMobileId}");
                 }
                 catch (Exception ex)
                 {

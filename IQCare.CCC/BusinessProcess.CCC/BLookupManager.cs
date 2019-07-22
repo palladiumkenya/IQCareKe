@@ -1,11 +1,14 @@
 ﻿using DataAccess.Base;
 using Interface.CCC.Lookup;
 using System.Collections.Generic;
+using System.Data;
 using Entities.CCC.Lookup;
 using DataAccess.CCC.Repository.Lookup;
 using DataAccess.CCC.Repository;
 using DataAccess.CCC.Context;
 using System.Linq;
+using DataAccess.Common;
+using DataAccess.Entity;
 using Entities.CCC.Visit;
 
 namespace BusinessProcess.CCC
@@ -29,7 +32,6 @@ namespace BusinessProcess.CCC
             using (UnitOfWork unitOfWork = new UnitOfWork(new LookupContext()))
             {
                 var item = unitOfWork.LookupRepository.GetLookupItemViews(groupname);
-                ;
                 unitOfWork.Dispose();
                 return item;
             }
@@ -371,6 +373,34 @@ namespace BusinessProcess.CCC
             return lookupCountyRepository.GetCountyDetailsByWardName(wardName);
         }
 
+        public DataTable GetCouncellingTopics()
+        {
+            ClsObject obj = new ClsObject();
+            ClsUtility.Init_Hashtable();
+
+            DataTable dt = (DataTable)obj.ReturnObject(ClsUtility.theParams, "GetCouncellingTopics", ClsUtility.ObjectEnum.DataTable);
+
+            return dt;
+        }
+
+        public DataTable GetCouncellingTypes()
+        {
+            ClsObject obj = new ClsObject();
+            ClsUtility.Init_Hashtable();
+
+            DataTable dt = (DataTable)obj.ReturnObject(ClsUtility.theParams, "GetCouncellingTypes", ClsUtility.ObjectEnum.DataTable);
+            return dt;
+        }
+
+        public DataTable GetLnkCouncellingTypeTopic()
+        {
+            ClsObject obj = new ClsObject();
+            ClsUtility.Init_Hashtable();
+
+            DataTable dt = (DataTable)obj.ReturnObject(ClsUtility.theParams, "GetLnkCouncellingTypeTopics", ClsUtility.ObjectEnum.DataTable);
+            return dt;
+        }
+
         public List<PatientLabTracker> GetVlPendingCount(int facilityId)
         {
             using (UnitOfWork unitOfWork = new UnitOfWork(new GreencardContext()))
@@ -379,8 +409,6 @@ namespace BusinessProcess.CCC
                     unitOfWork.PatientLabTrackerRepository.GetVlPendingCount(facilityId);
                 unitOfWork.Dispose();
                 return facilityVlPending;
-
-
             }
         }
         public List<LookupFacilityViralLoad> GetFacilityVLSuppressed(int facilityId)
@@ -433,10 +461,10 @@ namespace BusinessProcess.CCC
             return lookupPatientRegimen.GetPatientRegimenList(patientId);
         }
 
-        public LookupPatientAdherence GetPatientAdherence(int patientId)
+        public LookupPatientAdherence GetPatientAdherence(int patientId, int adherenceType)
         {
             PatientLookupAdhereenceRepository patientLookupAdhereence=new PatientLookupAdhereenceRepository();
-            return patientLookupAdhereence.GetPatientAdherenceStatus(patientId);
+            return patientLookupAdhereence.GetPatientAdherenceStatus(patientId, adherenceType);
         }
 
         public List<LookupFacilityStatistics>  GetLookupFacilityStatistics()

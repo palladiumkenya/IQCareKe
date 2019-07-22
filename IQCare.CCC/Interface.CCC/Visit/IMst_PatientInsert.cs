@@ -11,8 +11,10 @@ namespace Interface.CCC
             int referredFrom, DateTime registrationDate, int sex, DateTime dob, int dobPrecision, int maritalStatus,
             string address, string phone, int userID, string posId, int moduleId, DateTime startDate, DateTime createDate);
 
-        void AddOrdVisit(int ptnPk, int locationID, DateTime visitDate, int visitType, int userID, DateTime createDate, int moduleId);
+        int AddOrdVisit(int ptnPk, int locationID, DateTime visitDate, int visitType, int userID, DateTime createDate, int moduleId);
 
         void UpdateBlueCardCCCNumber(int ptn_pk, string patientEnrollmentID);
+
+        void UpdateBlueCardEnrollmentDate(int ptn_pk, DateTime enrollmentDate);
     }
 }

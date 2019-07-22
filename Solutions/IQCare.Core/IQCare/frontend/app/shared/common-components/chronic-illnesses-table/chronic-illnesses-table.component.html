@@ -1,0 +1,88 @@
+<div class="row">
+    <div class="col-md-12">
+        <div class="form-title">
+            <span class="mat-accent"> Chronic Conditions </span>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-lg-4 col-sm-4 col-xs-12">
+        <button mat-raised-button class="mat-primary" (click)="newChronicIllness()">
+            <span class="fa fa-plus-circle">
+                Add Chronic Illness
+            </span>
+        </button>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-lg-12 col-xs-12">
+        <div class="example-container mat-elevation-z0">
+
+            <mat-table #table [dataSource]="dataSource">
+
+                <!-- Position Column -->
+                <ng-container matColumnDef="illness">
+                    <mat-header-cell *matHeaderCellDef><strong>Illness</strong> </mat-header-cell>
+                    <mat-cell *matCellDef="let ChronicIllnessTableData">
+                        {{
+                            ChronicIllnessTableData.illness
+                        }}
+                    </mat-cell>
+                </ng-container>
+
+                <!-- Name Column -->
+                <ng-container matColumnDef="currentTreatment">
+                    <mat-header-cell *matHeaderCellDef><strong>Current Treatment</strong></mat-header-cell>
+                    <mat-cell *matCellDef="let ChronicIllnessTableData">
+                        {{
+                            ChronicIllnessTableData.currentTreatment
+                        }}
+                    </mat-cell>
+                </ng-container>
+
+                <!-- Weight Column -->
+                <ng-container matColumnDef="onsetDate">
+                    <mat-header-cell *matHeaderCellDef> <strong>Onset Date</strong> </mat-header-cell>
+                    <mat-cell *matCellDef="let ChronicIllnessTableData">
+                        {{
+                            ChronicIllnessTableData.onsetDate | date: 'dd-MMM-yyyy'
+                        }}
+                    </mat-cell>
+                </ng-container>
+
+                <!-- Symbol Column -->
+                <ng-container matColumnDef="active">
+                    <mat-header-cell *matHeaderCellDef><strong>Active</strong> </mat-header-cell>
+                    <mat-cell *matCellDef="let ChronicIllnessTableData">
+                        <ng-container *ngIf="ChronicIllnessTableData.active">
+                            {{ 
+                                ChronicIllnessTableData.active 
+                            }}
+                        </ng-container>
+                    </mat-cell>
+                </ng-container>
+
+
+                <!-- actions -->
+                <ng-container matColumnDef="action">
+                    <mat-header-cell *matHeaderCellDef><strong class="fa fa-cog"> Action</strong></mat-header-cell>
+                    <mat-cell *matCellDef="let row">
+                        <button mat-raised-button class="mat-accent" (click)="onRowClicked(row)">
+                            <span class="fa fa-trash-o"> Delete</span>
+                        </button>
+                    </mat-cell>
+                </ng-container>
+
+
+                <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                <mat-row *matRowDef="let row; columns: displayedColumns">
+                </mat-row>
+            </mat-table>
+        </div>
+    </div>
+</div>
+<div>
+    &nbsp;
+</div>

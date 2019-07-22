@@ -124,7 +124,7 @@
                                         <mat-form-field>
                                             <mat-select placeholder="Final Result Given?" name="finalResultGiven"
                                                 id="finalResultGiven" formControlName="finalResultGiven"
-                                                (selectionChange)="onFinalResultsGivenChange()">
+                                                (selectionChange)="onFinalResultsGivenChange()" required>
                                                 <mat-option [value]=""></mat-option>
                                                 <mat-option *ngFor="let option of yesNoOptions" [value]="option.itemId">
                                                     {{option.itemName}}</mat-option>

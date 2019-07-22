@@ -27,8 +27,7 @@
     <div class="row">
         <div class="col-md-12 col-xs-12">
             <div class="form-title">
-                <span class="mat-accent"> Symptomatic Screening <span class="danger">Show if currently on AntiTB drugs
-                        is yes</span> </span>
+                <span class="mat-accent"> Symptomatic Screening </span>
             </div>
         </div>
 
@@ -188,7 +187,8 @@
                 <mat-label>TB Screaning Outcome</mat-label>
                 <mat-select formControlName="tbScreaningOutcome">
                     <mat-option [value]="">select</mat-option>
-                    <mat-option *ngFor="let tbScreeningOutcomeOption of tbScreeningOutcomeOptions" [value]="tbScreeningOutcomeOption.itemId">
+                    <mat-option *ngFor="let tbScreeningOutcomeOption of tbScreeningOutcomeOptions"
+                        [value]="tbScreeningOutcomeOption.itemId">
                         {{tbScreeningOutcomeOption.itemDisplayName}}
                     </mat-option>
                 </mat-select>
@@ -201,12 +201,14 @@
 
     <div class="row">
         <div class="col-lg-12 pull-left">
-            <button style="margin-right:5px " mat-raised-button class="mat-accent col-lg-2" [disabled]="iptClientWorkIsDisabled"
-                (click)="openIPTClientWorkupDialog()"> <span class="fa fa-plus-circle"> IPT Client Workup</span></button>
-            <button style="margin-right:5px" mat-raised-button class="mat-primary col-lg-2 " [disabled]="iptFollowupIsDisabled"
-                (click)="openIPTFollowUpDialog()"><span class=" fa fa-plus-circle">IPT Follow Up</span></button>
-            <button mat-raised-button class="mat-warn col-lg-2" [disabled]="iptOUtcomeIsDisabled" (click)="openIPTOutcomeDialog()"><span
-                    class=" fa fa-plus-circle"> IPT Outcome</span></button>
+            <button style="margin-right:5px " mat-raised-button class="mat-accent col-lg-2"
+                [disabled]="iptClientWorkIsDisabled" (click)="openIPTClientWorkupDialog()"> <span
+                    class="fa fa-plus-circle"> IPT Client Workup</span></button>
+            <button style="margin-right:5px" mat-raised-button class="mat-primary col-lg-2 "
+                [disabled]="iptFollowupIsDisabled" (click)="openIPTFollowUpDialog()"><span
+                    class=" fa fa-plus-circle">IPT Follow Up</span></button>
+            <button mat-raised-button class="mat-warn col-lg-2" [disabled]="iptOUtcomeIsDisabled"
+                (click)="openIPTOutcomeDialog()"><span class=" fa fa-plus-circle"> IPT Outcome</span></button>
             <div class="col-lg-3"></div>
         </div>
     </div>
