@@ -35,13 +35,13 @@ export class LinkageComponent implements OnInit {
         this.linkage.IsEdit = this.isEdit;
 
 
-        console.log(this.linkage);
+        // console.log(this.linkage);
         this.linkageService.addLinkage(this.linkage).subscribe(data => {
-            console.log(data);
+            // console.log(data);
             this.snotifyService.success('Successfully saved linkage', 'Linkage', this.notificationService.getConfig());
             this.zone.run(() => { this.router.navigate(['/registration/home'], { relativeTo: this.route }); });
         }, err => {
-            console.log(`error`);
+            // console.log(`error`);
             this.snotifyService.error('Error saving linkage', 'Referral', this.notificationService.getConfig());
         });
     }
@@ -51,7 +51,7 @@ export class LinkageComponent implements OnInit {
 
         this.linkageService.getPersonLinkage(personId).subscribe(
             (res) => {
-                console.log(res);
+                // console.log(res);
                 for (let i = 0; i < res.length; i++) {
                     this.linkage.carde = res[i].cadre;
                     this.linkage.cccNumber = res[i].cccNumber;

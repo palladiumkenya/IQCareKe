@@ -426,7 +426,7 @@ export class PrepMonthlyrefillComponent implements OnInit {
 
     OnAdherenceReasonsSelected(event) {
 
-      
+
         let val: string;
         let index: number;
         let text: string;
@@ -438,7 +438,7 @@ export class PrepMonthlyrefillComponent implements OnInit {
                     text = this.AdherenceAssessmentReasonOptions[index].itemName;
                     if (text.toLowerCase() == 'other') {
 
-                       
+
                         this.PrepMonthlyRefillFormGroup.controls.SpecifyAssessmentReason.enable({ onlySelf: true });
 
                     } else {
@@ -724,11 +724,11 @@ export class PrepMonthlyrefillComponent implements OnInit {
                                     + response['message'], 'Submit Monthly Refill Form',
                                     this.notificationService.getConfig());
 
-                                    this.zone.run(() => {
-                                        this.router.navigate(['/prep/' + '/' + this.patientId + '/' + this.personId + '/'
-                                            + this.serviceAreaId],
-                                            { relativeTo: this.route });
-                                    });
+                                this.zone.run(() => {
+                                    this.router.navigate(['/prep/' + '/' + this.patientId + '/' + this.personId + '/'
+                                        + this.serviceAreaId],
+                                        { relativeTo: this.route });
+                                });
                             },
                             (error) => {
                                 this.snotifyService.error('Error submitting the form' + error, 'Submit Montly Refill Form',
@@ -812,11 +812,11 @@ export class PrepMonthlyrefillComponent implements OnInit {
                             + response['message'], 'Submit Monthly Refill Form',
                             this.notificationService.getConfig());
 
-                            this.zone.run(() => {
-                                this.router.navigate(['/prep/' + '/' + this.patientId + '/' + this.personId + '/'
-                                    + this.serviceAreaId],
-                                    { relativeTo: this.route });
-                            });
+                        this.zone.run(() => {
+                            this.router.navigate(['/prep/' + '/' + this.patientId + '/' + this.personId + '/'
+                                + this.serviceAreaId],
+                                { relativeTo: this.route });
+                        });
                     },
                     (error) => {
                         this.snotifyService.error('Error submitting and Editing the form' + error, 'Submit Montly Refill Form',

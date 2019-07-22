@@ -88,7 +88,10 @@ namespace IQCare.Common.BusinessProcess.CommandHandlers.Enrollment
                 }
                 else
                 {
-                    await registerPersonService.UpdateBlueCard(patientLookup[0].ptn_pk, cccNumber, moduleId);
+                    if (moduleId == 203)
+                    {
+                        await registerPersonService.UpdateBlueCard(patientLookup[0].ptn_pk, cccNumber, moduleId);
+                    }
                 }
 
 

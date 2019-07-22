@@ -99,7 +99,6 @@ export class EnrollmentServicesComponent implements OnInit {
 
         this.recordsService.getPersonDetails(this.personId).subscribe(
             (res) => {
-                console.log(res);
                 const { registrationDate } = res[0];
                 if (registrationDate) {
                     this.minDate = registrationDate;
@@ -139,7 +138,7 @@ export class EnrollmentServicesComponent implements OnInit {
                     enrollment.PatientId = this.patientId;
                     this.enrollmentService.enrollClient(enrollment).subscribe(
                         (response) => {
-                            console.log(response);
+                            // console.log(response);
                             this.snotifyService.success('Successfully Enrolled ', 'Enrollment',
                                 this.notificationService.getConfig());
 

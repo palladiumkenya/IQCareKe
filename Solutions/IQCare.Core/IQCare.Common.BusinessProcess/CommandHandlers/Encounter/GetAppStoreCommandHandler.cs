@@ -55,7 +55,7 @@ namespace IQCare.Common.BusinessProcess.CommandHandlers.Encounter
                     //    expressionFinal = PredicateBuilder.And(expressionFinal, expressionEncounterId);
                     //}
 
-                    var result = await _unitOfWork.Repository<AppStateStore>().Get(expressionFinal).Include(b=>b.AppStateStoreObjects).ToListAsync();
+                    var result = await _unitOfWork.Repository<AppStateStore>().Get(expressionFinal).Include(b=>b.AppStateStoreObjects).AsNoTracking().ToListAsync();
 
                     _unitOfWork.Dispose();
 
