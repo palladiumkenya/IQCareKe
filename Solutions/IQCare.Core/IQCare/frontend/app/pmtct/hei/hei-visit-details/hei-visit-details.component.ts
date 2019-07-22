@@ -41,7 +41,7 @@ export class HeiVisitDetailsComponent implements OnInit {
         private _lookupItemService: LookupItemService,
         private snotifyService: SnotifyService,
         private notificationService: NotificationService,
-        private dataService : DataService,
+        private dataService: DataService,
         private heiService: HeiService) {
         this.maxDate = new Date();
     }
@@ -99,7 +99,6 @@ export class HeiVisitDetailsComponent implements OnInit {
     public calculateCohort(personId: number) {
         this.heiService.getPersonDetails(personId).subscribe(
             (res) => {
-                console.log(res);
                 if (res.length > 0) {
                     const dateOfBirth = res[0]['dateOfBirth'];
                     this.HeiVisitDetailsFormGroup.get('cohort').setValue(moment(dateOfBirth).format('MMM-YYYY'));
@@ -113,14 +112,11 @@ export class HeiVisitDetailsComponent implements OnInit {
             .subscribe(
                 p => {
                     const visit = p;
-                    console.log('visit data');
-                    console.log(p);
 
                     if (p.length) {
                         const Item = this.visitTypes.filter(x => x.itemName.includes('Follow Up'));
                         if (Item.length > 0) {
                             this.HeiVisitDetailsFormGroup.get('visitType').patchValue(Item[0].itemId);
-                            console.log('visitNumber' + visit[0].visitNumber);
                         }
 
                         // if (this.formtype == 'anc') {
@@ -131,7 +127,6 @@ export class HeiVisitDetailsComponent implements OnInit {
                         if (this.isEdit) {
                             const y = p.filter(obj =>
                                 obj.patientId == this.patientId && obj.patientMasterVisitId == this.patientMasterVisitId);
-                                console.log(y+ '   Yyyy')
                             if (y != null) {
                                 this.HeiVisitDetailsFormGroup.get('dayPostPartum').setValue(y[0].daysPostPartum);
                                 this.HeiVisitDetailsFormGroup.get('visitNumber').setValue(y[0].visitNumber);
@@ -145,7 +140,6 @@ export class HeiVisitDetailsComponent implements OnInit {
                     } else {
                         this.HeiVisitDetailsFormGroup.get('visitNumber').patchValue(1);
                         const Item = this.visitTypes.filter(x => x.itemName.includes('Initial'));
-                        // console.log(Item);
                         if (Item.length > 0) {
                             this.HeiVisitDetailsFormGroup.get('visitType').patchValue(Item[0].itemId);
                             this.visitType = Item[0];
@@ -171,18 +165,13 @@ export class HeiVisitDetailsComponent implements OnInit {
                     }
                 },
                 (err) => {
-                    console.log(err);
                     this.snotifyService.error('Error editing encounter ' + err, 'Encounter', this.notificationService.getConfig());
                 },
                 () => {
-                    // console.log(this.lookupItems$);
                 });
     }
 
-    public vistDateChange(event: MatDatepickerInputEvent<Date>)
-    {
-        console.log('Changed Date '+ event.value);
+    public vistDateChange(event: MatDatepickerInputEvent<Date>) {
         this.dataService.updateVisitDate(event.value);
     }
-
 }

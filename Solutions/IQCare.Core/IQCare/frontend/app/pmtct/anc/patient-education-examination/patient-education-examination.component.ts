@@ -73,7 +73,6 @@ export class PatientEducationExaminationComponent implements OnInit, OnDestroy {
     ngOnInit() {
         this.dataService.visitDate.subscribe(date => {
             this.visitDate = date;
-            // console.log('The visit Date Education' + this.visitDate);
         });
 
         this.PatientEducationFormGroup = this._formBuilder.group({
@@ -118,16 +117,12 @@ export class PatientEducationExaminationComponent implements OnInit, OnDestroy {
     }
 
     public moveNextStep() {
-        console.log(this.PatientEducationFormGroup.value);
 
         this.patientEducationEmitterData = {
             breastExamDone: parseInt(this.PatientEducationFormGroup.get('breastExamDone').value, 10),
             treatedSyphilis: parseInt(this.PatientEducationFormGroup.get('treatedSyphilis').value, 10),
             counsellingTopics: this.counselling_data
         };
-        console.log('breastexamDone' + this.patientEducationEmitterData.breastExamDone + 'from form ' +
-            this.PatientEducationFormGroup.get('breastExamDone').value.itemId);
-        console.log(this.patientEducationEmitterData);
         this.nextStep.emit(this.patientEducationEmitterData);
     }
 
@@ -144,7 +139,7 @@ export class PatientEducationExaminationComponent implements OnInit, OnDestroy {
         }
 
 
-        if (this.counselling_data.filter(x =>  x.counsellingTopic === topic )
+        if (this.counselling_data.filter(x => x.counsellingTopic === topic)
             .length > 0) {
             this.snotifyService.warning('' + topic + ' exists', 'Counselling', this.notificationService.getConfig());
         } else {
@@ -166,8 +161,6 @@ export class PatientEducationExaminationComponent implements OnInit, OnDestroy {
         this.patientCounseling$ = this.ancService.getPatientCounselingInfoAll(patientId)
             .subscribe(
                 p => {
-                    console.log('counseling data');
-                    console.log(p);
                     if (p) {
                         for (let i = 0; i < p.length; i++) {
                             this.counselling_data.push({
@@ -193,8 +186,6 @@ export class PatientEducationExaminationComponent implements OnInit, OnDestroy {
         this.patientCounseling$ = this.ancService.getPatientCounselingInfo(patientId, patientMasterVisitId)
             .subscribe(
                 p => {
-                    console.log('counseling data');
-                    console.log(p);
                     if (p) {
                         for (let i = 0; i < p.length; i++) {
                             this.counselling_data.push({
@@ -221,16 +212,11 @@ export class PatientEducationExaminationComponent implements OnInit, OnDestroy {
             .subscribe(
                 p => {
                     const baseline = p;
-
-                    console.log('baseline info');
-                    console.log(baseline);
-                    console.log(baseline['breastExamDone']);
                     if (baseline['id'] > 0) {
                         this.PatientEducationFormGroup.get('breastExamDone').setValue(baseline['breastExamDone']);
                         this.PatientEducationFormGroup.get('treatedSyphilis').setValue(baseline['treatedForSyphilis']);
                     }
-                }
-                ,
+                },
                 error1 => {
 
                 },
@@ -241,7 +227,7 @@ export class PatientEducationExaminationComponent implements OnInit, OnDestroy {
     }
 
     ngOnDestroy(): void {
-       // this.baseline$.unsubscribe();
+        // this.baseline$.unsubscribe();
         this.patientCounseling$.unsubscribe();
     }
 
