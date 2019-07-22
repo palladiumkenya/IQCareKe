@@ -434,6 +434,14 @@ export class PrepEncounterHistoryComponent implements OnInit {
         );
     }
 
+    accessEncounter() {
+        this.zone.run(() => {
+            this.router.navigate(['/prep/prepformslist/' + '/' + this.patientId + '/' + this.personId + '/'
+                + this.serviceAreaId],
+                { relativeTo: this.route });
+        });
+    }
+
     onEdit(element) {
         if (element['encounterType'].toString() == 'prep') {
             this.zone.run(() => {

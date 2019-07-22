@@ -1,0 +1,25 @@
+<div class="row">
+    <div class="col-md-12">
+        <div class="form-title">
+            <span class="mat-accent">Behaviour Risk Assessment Encounters</span>
+        </div>
+    </div>
+</div>
+<div class='row'>
+    <div class="example-container mat-elevation-z0">
+        <mat-table [dataSource]="DataSource">
+            <ng-container matColumnDef="VisitDate">
+                <mat-header-cell *matHeaderCellDef> <strong>VisitDate</strong> </mat-header-cell>
+                <mat-cell *matCellDef="let element"> {{element.VisitDate}} </mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="Clientwillingtakeprep">
+                <mat-header-cell *matHeaderCellDef><strong>Client Willing to Take Prep?</strong> </mat-header-cell>
+                <mat-cell *matCellDef="let element"> {{element.Clientwillingtakeprep }} </mat-cell>
+            </ng-container>
+
+
+            <mat-header-row *matHeaderRowDef="displayedcolumns"></mat-header-row>
+            <mat-row *matRowDef="let row; columns: displayedcolumns;"></mat-row>
+        </mat-table>
+        <mat-paginator id="completed-paginator" [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+    </div>

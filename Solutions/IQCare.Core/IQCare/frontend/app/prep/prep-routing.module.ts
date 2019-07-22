@@ -1,6 +1,7 @@
 import { YesNoResolver } from './../pmtct/_services/yesno.resolver';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { PrepEncounterformlistComponent } from './prep-encounterformlist/prep-encounterformlist.component';
 import { PrepEncounterHistoryComponent } from './prep-encounter-history/prep-encounter-history.component';
 import { PrepEncounterComponent } from './prep-encounter/prep-encounter.component';
 import { STIScreeningTreatmentResolver } from './_services/STIScreeningTreatment.resolver';
@@ -34,7 +35,7 @@ import {
 import { PrepMonthlyrefillComponent } from './prep-monthlyrefill/prep-monthlyrefill.component';
 import { HTSEncounterResolver } from './_services/resolvers/htsencounter.resolver';
 import { PersonCurrentVitalsResolver } from './_services/resolvers/personvitals.resolver';
-import {RiskEncounterResolver} from './_services/resolvers/riskencounter.resolver';
+import { RiskEncounterResolver } from './_services/resolvers/riskencounter.resolver';
 const routes: Routes = [
     {
         path: ':patientId/:personId/:serviceId',
@@ -46,6 +47,19 @@ const routes: Routes = [
             PersonVitalsArray: PersonCurrentVitalsResolver,
             RiskAssessmentArray: RiskEncounterResolver
         }
+    },
+
+    {
+        path: 'prepformslist',
+        children: [
+            {
+                path: ':patientId/:personId/:serviceId',
+                component: PrepEncounterformlistComponent,
+                resolve: {
+                    prepEncounterTypeOption: PrepEncounterTypeResolver
+                }
+            }
+        ]
     },
     {
         path: 'prepcareend',
@@ -132,8 +146,8 @@ const routes: Routes = [
                     EncounterTypeArray: EncounterTypeResolver,
                     AdherenceCounsellingArray: AdherenceCounsellingResolver,
                     yesNoOptions: YesNoResolver,
-                   AppointmentGivenArray: AppointmentGivenResolver,
-                  PrepAppointmentReasonArray: PrepAppointmentReasonResolver
+                    AppointmentGivenArray: AppointmentGivenResolver,
+                    PrepAppointmentReasonArray: PrepAppointmentReasonResolver
                 }
 
 

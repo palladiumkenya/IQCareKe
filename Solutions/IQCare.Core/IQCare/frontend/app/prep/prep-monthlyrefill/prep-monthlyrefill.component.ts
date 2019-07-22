@@ -12,12 +12,12 @@ import { registerLocaleData } from '@angular/common';
 import { PrepService } from '../_services/prep.service';
 import { LookupItemService } from './../../shared/_services/lookup-item.service';
 import { EncounterService } from '../../shared/_services/encounter.service';
-import { SearchService } from '../../../registration/_services/search.service';
+import { SearchService } from '../../registration/_services/search.service';
 import { PatientMasterVisitEncounter } from '../../pmtct/_models/PatientMasterVisitEncounter';
 import * as moment from 'moment';
 import { PatientAppointmentEditCommand } from '../../pmtct/_models/PatientAppointmentEditCommand';
 import { Search } from '../../records/_models/search';
-import { SearchService } from '../../registration/_services/search.service';
+
 @Component({
     selector: 'app-prep-monthlyrefill',
     templateUrl: './prep-monthlyrefill.component.html',

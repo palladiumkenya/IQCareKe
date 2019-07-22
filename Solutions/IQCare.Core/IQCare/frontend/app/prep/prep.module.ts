@@ -10,7 +10,7 @@ import {
     MatFormFieldModule, MatSelectModule,
     MatNativeDateModule, MatDatepickerModule,
     MatInputModule, MatAutocompleteModule, MatTableModule, MatDividerModule, MatDialogModule, MatIconModule,
-    MatPaginatorModule
+    MatPaginatorModule,MatRadioModule
 } from '@angular/material';
 import { ReactiveFormsModule } from '@angular/forms';
 // tslint:disable-next-line:max-line-length
@@ -55,6 +55,11 @@ import { ScreenedForSTIResolver } from './_services/screened-sti.resolver';
 import { PrepCareendComponent } from './prep-careend/prep-careend.component';
 import { PrepMonthlyrefillComponent } from './prep-monthlyrefill/prep-monthlyrefill.component';
 import { PrepLabsgridComponent } from './prep-labsgrid/prep-labsgrid.component';
+import { PrepAppointmentgridComponent } from './prep-appointmentgrid/prep-appointmentgrid.component';
+import { PrepHtsencountersgridComponent } from './prep-htsencountersgrid/prep-htsencountersgrid.component';
+import { PrepEncounterformlistComponent } from './prep-encounterformlist/prep-encounterformlist.component';
+import { PrepPatientvitalsinfoComponent } from './prep-patientvitalsinfo/prep-patientvitalsinfo.component';
+import { PrepRiskassessmentgriddetailsComponent } from './prep-riskassessmentgriddetails/prep-riskassessmentgriddetails.component';
 
 @NgModule({
     declarations: [
@@ -70,7 +75,12 @@ import { PrepLabsgridComponent } from './prep-labsgrid/prep-labsgrid.component';
         PrepCheckinComponent,
         PrepCareendComponent,
         PrepMonthlyrefillComponent,
-        PrepLabsgridComponent
+        PrepLabsgridComponent,
+        PrepAppointmentgridComponent,
+        PrepHtsencountersgridComponent,
+        PrepEncounterformlistComponent,
+        PrepPatientvitalsinfoComponent,
+        PrepRiskassessmentgriddetailsComponent
     ],
     imports: [
         SharedModule, MatDatepickerModule, MatNativeDateModule,
@@ -78,7 +88,7 @@ import { PrepLabsgridComponent } from './prep-labsgrid/prep-labsgrid.component';
         MatButtonModule, MatFormFieldModule, MatSelectModule,
         MatInputModule, MatAutocompleteModule, MatTableModule,
         PrepRoutingModule, MatDividerModule, MatDialogModule,
-        MatPaginatorModule,
+        MatPaginatorModule, MatRadioModule,
         MatIconModule
     ],
     providers: [

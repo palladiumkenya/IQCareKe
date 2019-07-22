@@ -10,6 +10,7 @@
                         <span class="widget-caption"> PREP | ENCOUNTER History </span>
                     </div>
                     <div class="widget-body">
+
                         <div class="row" style="margin: 5px;">
                             <app-personbrief [personId]="personId"></app-personbrief>
                         </div>
@@ -110,60 +111,16 @@
 
                         <div class="row">
 
-                            <ng-container >
+                            <ng-container>
                                 <div class="button-row pull-right">
-                                    <a mat-raised-button color="accent" (click)="onPrepCheckIn()">
+                                    <a mat-raised-button color="accent" (click)="accessEncounter()">
                                         <i class="fa fa-plus"></i>
-                                        <span>New PREP Encounter</span>
+                                        <span>Access Prep Forms</span>
                                     </a>
                                 </div>
                             </ng-container>
-                            <ng-template #HTSTemplate>
-                                <div class="button-row pull-right"
-                                    *ngIf="validationHTS(this.HTSEligible); else triagetemplate">
 
-                                    <a mat-raised-button color="accent" (click)=" isPersonServiceEnrolled('HTS')">
-                                        <i class="fa fa-plus"></i>
-                                        <span>HTS</span>
-                                    </a>
 
-                                </div>
-                            </ng-template>
-                            <ng-template #triagetemplate>
-                                <div class="button-row pull-right"
-                                    *ngIf="validationTriage(this.vitaldone); else riskassessmenttemplate">
-                                    <a mat-raised-button color="accent" (click)="navigateToTriage()">
-                                        <i class="fa fa-plus"></i>
-                                        <span>TRIAGE</span>
-                                    </a>
-                                </div>
-                            </ng-template>
-
-                            <ng-template #riskassessmenttemplate>
-                                <div class="button-row pull-right"
-                                    *ngIf="validationRiskAssessment(this.riskdone); else preptemplate">
-                                    <a mat-raised-button color="accent" (click)="navigateToRiskAssessment()">
-                                        <i class="fa fa-plus"></i>
-                                        <span>Risk Assessment</span>
-                                    </a>
-                                </div>
-                            </ng-template>
-                            <ng-template #preptemplate>
-                                <div class="button-row pull-right">
-                                    <a mat-raised-button color="accent" (click)="onPrepCheckIn()">
-                                        <i class="fa fa-plus"></i>
-                                        <span>New PREP Encounter</span>
-                                    </a>
-                                </div>
-                            </ng-template>
-                            <ng-template #careendedtemplate>
-                                <div class="button-row pull-right" *ngIf="validationCareEnded(this.iscareend)">
-                                    <a mat-raised-button color="accent" (click)="navigateToCareEnd()">
-                                        <i class="fa fa-plus"></i>
-                                        <span>CareEnded</span>
-                                    </a>
-                                </div>
-                            </ng-template>
 
 
 

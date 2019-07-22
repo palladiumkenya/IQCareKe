@@ -213,6 +213,12 @@ export class PrepService {
 
     }
 
+    GetRiskAssessmentDetails(personId: number): Observable<any[]> {
+        return this.http.get<any>(this.PREP_API_URL + '/api/BehaviourRisk/GetRiskAssessmentVisitsDetails/' + personId )
+        .pipe(tap(GetRiskAssessmentDetails => this.errorHandler.log('Get Risk details')),
+        catchError(this.errorHandler.handleError<any[]>('RiskAssessmentDetails'))
+        );
+    }
     CheckencounterExists(patientid: number): Observable<any[]> {
         const Indata = {
             'PatientId': patientid
@@ -265,6 +271,8 @@ export class PrepService {
                 catchError(this.errorHandler.handleError<any>('Error fetching details'))
             );
     }
+
+
 
 
     public AddMonthlyRefill(patientId: number, PatientMasterVisitId: number, CreatedBy: number, serviceAreaId: number, VisitDate: Date,
@@ -353,4 +361,20 @@ export class PrepService {
                 catchError(this.errorHandler.handleError<any>('Error updating appointment'))
             );
     }
+
+    public getPatientAppointmentsServiceArea(patientId: number, serviceAreaId: number): Observable<any> {
+        return this.http.get(this.API_URL
+            + '/api/PatientServices/GetPatientAppointmentServiceArea/' + patientId + '/' + serviceAreaId).pipe(
+                tap(getPatientAppointmentsServiceArea => this.errorHandler.log(`successfully fetched appointment`)),
+                catchError(this.errorHandler.handleError<any>('Error fetching appointment'))
+            );
+    }
+
+    public getAllHTSEncounterBypersonId(personId: number): Observable<any[]> {
+        return this.http.get<EncounterDetails[]>(this.API_URL + this._htsurl + '/getLatestEncounterDetails/' + personId).pipe(
+            tap(getHTSEncounterDetailsBypersonId => this.errorHandler.log('fetched a single client encounter details')),
+            catchError(this.errorHandler.handleError<any[]>('getHTSEncounterDetailsBypersonId', []))
+        );
+    }
+
 }
