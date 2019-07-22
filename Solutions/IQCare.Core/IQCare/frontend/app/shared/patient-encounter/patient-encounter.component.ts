@@ -129,7 +129,7 @@ export class PatientEncounterComponent implements OnInit {
     }
 
     public getPatientEncounters(patientId: number, encounterTypeId: number) {
-        this.patientEncounterTypes = this.lookupItemService.getPatientEncounters(patientId, encounterTypeId)
+        this.patientEncounterTypes = this.lookupItemService.getPatientEncountersByType(patientId, encounterTypeId)
             .subscribe(
                 p => {
                     // console.log('patient encounters');
