@@ -66,7 +66,6 @@ export class InlineSearchComponent implements OnInit, AfterViewInit {
 
     findPerson() {
         const clientSearch = new Search();
-        console.log(this.form.value);
 
         if (this.form.value.firstName && this.form.value.firstName != '') {
             clientSearch.firstName = this.form.value.firstName;

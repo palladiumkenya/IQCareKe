@@ -112,18 +112,18 @@ namespace IQCare.Controllers.Afyamobile
         }
 
         [HttpPost("partnerScreening")]
-        public async Task<IActionResult> PostPartnerScreening([FromBody]AfyaMobilePartnerScreeningEncounterCommand afyaMobilePartnerScreeningEncounterCommand)
+        public async Task<IActionResult> PostPartnerScreening([FromBody]AfyaMobilePartnerScreeningEncounterCommandDto afyaMobilePartnerScreeningEncounterCommand)
         {
-            var response = await _mediator.Send(afyaMobilePartnerScreeningEncounterCommand, Request.HttpContext.RequestAborted);
+            var response = await _mediator.Send(new AfyaMobilePartnerScreeningEncounterCommand(afyaMobilePartnerScreeningEncounterCommand), Request.HttpContext.RequestAborted);
             if (response.IsValid)
                 return Ok(response);
             return BadRequest(response);
         }
 
         [HttpPost("partnerTracing")]
-        public async Task<IActionResult> PostPartnerTracing([FromBody] AfyaMobilePartnerTracingEncounterCommand afyaMobilePartnerTracingEncounterCommand)
+        public async Task<IActionResult> PostPartnerTracing([FromBody] AfyaMobilePartnerTracingEncounterCommandDto afyaMobilePartnerTracingEncounterCommand)
         {
-            var response = await _mediator.Send(afyaMobilePartnerTracingEncounterCommand, Request.HttpContext.RequestAborted);
+            var response = await _mediator.Send(new AfyaMobilePartnerTracingEncounterCommand(afyaMobilePartnerTracingEncounterCommand), Request.HttpContext.RequestAborted);
             if (response.IsValid)
                 return Ok(response);
             return BadRequest(response);
@@ -140,9 +140,9 @@ namespace IQCare.Controllers.Afyamobile
         }
 
         [HttpPost("postFamilyScreening")]
-        public async Task<IActionResult> PostFamilyScreening([FromBody] AfyaMobileFamilyScreeningEncounterCommand afyaMobileFamilyScreeningEncounterCommand)
+        public async Task<IActionResult> PostFamilyScreening([FromBody] AfyaMobileFamilyScreeningEncounterCommandDto afyaMobileFamilyScreeningEncounterCommand)
         {
-            var response = await _mediator.Send(afyaMobileFamilyScreeningEncounterCommand, Request.HttpContext.RequestAborted);
+            var response = await _mediator.Send(new AfyaMobileFamilyScreeningEncounterCommand(afyaMobileFamilyScreeningEncounterCommand), Request.HttpContext.RequestAborted);
             if (response.IsValid)
                 return Ok(response);
             return BadRequest(response);
@@ -150,9 +150,9 @@ namespace IQCare.Controllers.Afyamobile
 
 
         [HttpPost("postFamilyTracing")]
-        public async Task<IActionResult> PostFamilyScreening([FromBody] AfyaMobileFamilyTracingEncounterCommand afyaMobileFamilyTracingEncounterCommand)
+        public async Task<IActionResult> PostFamilyScreening([FromBody] AfyaMobileFamilyTracingEncounterCommandDto afyaMobileFamilyTracingEncounterCommand)
         {
-            var response = await _mediator.Send(afyaMobileFamilyTracingEncounterCommand, Request.HttpContext.RequestAborted);
+            var response = await _mediator.Send(new AfyaMobileFamilyTracingEncounterCommand(afyaMobileFamilyTracingEncounterCommand), Request.HttpContext.RequestAborted);
             if (response.IsValid)
                 return Ok(response);
             return BadRequest(response);

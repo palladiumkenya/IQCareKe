@@ -10,6 +10,7 @@ using System;
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 
 namespace IQCare.Common.BusinessProcess.CommandHandlers.Allergies
 {
@@ -23,19 +24,20 @@ namespace IQCare.Common.BusinessProcess.CommandHandlers.Allergies
             _mapper = mapper;
             _commontUnitOfWork = commontUnitOfWork;
         }
-        public Task<Result<List<PatientAllergiesViewModel>>> Handle(GetPatientAllergies request, CancellationToken cancellationToken)
+        public async Task<Result<List<PatientAllergiesViewModel>>> Handle(GetPatientAllergies request, CancellationToken cancellationToken)
         {
             try
             {
-                var patientAllergies = _commontUnitOfWork.Repository<PatientAllergy>().Get(x => x.PatientId == request.PatientId);
+                var patientAllergies = await _commontUnitOfWork.Repository<PatientAllergyView>()
+                    .Get(x => x.PatientId == request.PatientId).ToListAsync();
                 var allergiesViewModel = _mapper.Map<List<PatientAllergiesViewModel>>(patientAllergies);
 
-                return Task.FromResult(Result<List<PatientAllergiesViewModel>>.Valid(allergiesViewModel));
+                return Result<List<PatientAllergiesViewModel>>.Valid(allergiesViewModel);
             }
             catch (Exception ex)
             {
                 logger.Error(ex, $"An error occured while getting patient allergies methods{ request.PatientId}");
-                return Task.FromResult(Result<List<PatientAllergiesViewModel>>.Invalid(ex.Message));
+                return Result<List<PatientAllergiesViewModel>>.Invalid(ex.Message);
             }
 
         }

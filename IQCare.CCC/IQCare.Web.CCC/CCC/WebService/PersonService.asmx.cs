@@ -1317,5 +1317,28 @@ namespace IQCare.Web.CCC.WebService
             }
         }
 
+        [WebMethod(EnableSession = true)]
+        public bool SetSessionFromUniversal(int patientMasterVisitId = 0, int Age = 0)
+        {
+            try
+            {
+                if (patientMasterVisitId > 0)
+                {
+                    Session["PatientMasterVisitId"] = patientMasterVisitId;
+                }
+
+                if (Age > 0)
+                {
+                    Session["Age"] = Age;
+                }
+
+                return true;
+            }
+            catch (Exception e)
+            {
+
+                return false;
+            }
+        }
     }
 }

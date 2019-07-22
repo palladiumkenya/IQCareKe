@@ -15,7 +15,7 @@ export class CompleteLabOrderComponent implements OnInit {
         this.route.params.subscribe(params => {
             this.patientId = params['patientId'];
             this.personId = params['personId'];
-            localStorage.setItem('partnerId', this.personId);
+            // localStorage.setItem('partnerId', this.personId);
         });
     }
 

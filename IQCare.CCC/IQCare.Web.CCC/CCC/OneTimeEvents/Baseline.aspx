@@ -190,7 +190,7 @@
 
 							<div class="col-md-4">
 								<div class="col-md-12">
-									<asp:Label runat="server" CssClass="control-label pull-left" ID="lblARTStartDate">ART Start Date</asp:Label></div>
+									<asp:Label runat="server" CssClass="control-label pull-left" ID="lblARTStartDate">ART Start Date(First Ever)</asp:Label></div>
 								<div class="col-md-12">
 									<div class="datepicker fuelux" id="TIARTStartDate">
 										<div class="input-group">
@@ -451,7 +451,7 @@
 								</div>
 								<div class="col-md-4">
 									<div class="col-md-12">
-										<asp:Label runat="server" CssClass="control-label pull-left" ID="lblDateOfEnrollment">Date of Enrollment</asp:Label></div>
+										<asp:Label runat="server" CssClass="control-label pull-left" ID="lblDateOfEnrollment">Date First Enrolled Into Care:</asp:Label></div>
 									<div class="col-md-12">
 										<div class="datepicker fuelux" id="DOE">
 											<div class="input-group">

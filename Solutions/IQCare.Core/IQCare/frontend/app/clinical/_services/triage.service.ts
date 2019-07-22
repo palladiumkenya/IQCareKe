@@ -21,7 +21,7 @@ export class TriageService {
     private API_URL = environment.API_URL;
 
     constructor(private httpClient: HttpClient, private errorHandlerService: ErrorHandlerService,
-        private personHomeService :PersonHomeService) {
+        private personHomeService: PersonHomeService) {
 
     }
 
@@ -44,19 +44,19 @@ export class TriageService {
 
 
 
-    public GetPatientVitalsInfo(patientId: number): Observable<any> {
+    public GetPatientVitalsInfo(patientId: number): Observable<any[]> {
         return this.httpClient.get<any>(this.API_URL + '/api/PatientVitals/GetByPatientId/' + patientId).pipe(
             tap(GetPatientVitalsInfo => this.errorHandlerService.log('get patient master visit details')),
             catchError(this.errorHandlerService.handleError<any>('GetPatientVitalsInfo'))
         );
     }
 
-    public calculateZscore(zscoreCommand : CalculateZscoreCommand) : any {
+    public calculateZscore(zscoreCommand: CalculateZscoreCommand): any {
         return this.httpClient.post<CalculateZscoreCommand>(this.API_URL + '/api/PatientVitals/CalculateZscore',
-        JSON.stringify(zscoreCommand), httpOptions).pipe(
-            tap(calculatePatientZscore => this.errorHandlerService.log(`successfully calculated patient zscores`)),
-            catchError(this.errorHandlerService.handleError<any>('Error calculating patient zscore'))
-        );
+            JSON.stringify(zscoreCommand), httpOptions).pipe(
+                tap(calculatePatientZscore => this.errorHandlerService.log(`successfully calculated patient zscores`)),
+                catchError(this.errorHandlerService.handleError<any>('Error calculating patient zscore'))
+            );
     }
 
     public calculateBmi(weight: number, heightInCm: number): any {
@@ -64,21 +64,21 @@ export class TriageService {
         return weight / (heightInMetres * heightInMetres);
     }
 
-   
-    public getPersonDetails(personId:number) : any {
-       var personDetails : PersonView = null;
-      this.personHomeService.getPatientByPersonId(personId).subscribe(person=>{
-          personDetails = person
-          return personDetails;
-      });
+
+    public getPersonDetails(personId: number): any {
+        var personDetails: PersonView = null;
+        this.personHomeService.getPatientByPersonId(personId).subscribe(person => {
+            personDetails = person
+            return personDetails;
+        });
     }
 
-    public qualifiesForZscoreCalculation(dateOfBirth:Date) : any{
-       var zscoreMinimumAgeQualification = 15;
+    public qualifiesForZscoreCalculation(dateOfBirth: Date): any {
+        var zscoreMinimumAgeQualification = 15;
 
         var dobMoment = moment(dateOfBirth);
         var currentDate = moment(Date());
-       
+
         var age = moment.duration(currentDate.diff(dobMoment)).asYears().toFixed(1);
         return parseInt(age) <= zscoreMinimumAgeQualification;
     }

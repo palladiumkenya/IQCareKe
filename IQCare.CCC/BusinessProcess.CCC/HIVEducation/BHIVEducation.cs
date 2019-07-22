@@ -3,15 +3,11 @@ using DataAccess.CCC.Context;
 using DataAccess.CCC.Repository;
 using DataAccess.Common;
 using DataAccess.Entity;
+using Entities.CCC;
 using Interface.CCC.HIVEducation;
 using System;
-using System.Collections.Generic;
 using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Entities.CCC.HIVEducation;
-using DataAccess.CCC.Interface.HIVEducation;
+
 namespace BusinessProcess.CCC.HIVEducation
 
 {
@@ -19,15 +15,36 @@ namespace BusinessProcess.CCC.HIVEducation
     {
        // private int result;
 
-        public int AddPatientHIVEducation(HIVEducationFollowup HEF)
+        public int AddPatientHIVEducation(int Id, int Ptn_Pk, int visitPk, int locationID, int? councellingTypeId = null, int? councellingTopicId = null, DateTime? visitDate = null, string comments = null, string otherDetail = null, int? userId = null, bool? deleteFlag = null, int? moduleId = null)
         {
-            using (UnitOfWork unitOfWork = new UnitOfWork(new GreencardContext()))
+            try
             {
-                unitOfWork.PatientHIVEducationFollowupRepository.Add(HEF);
-                unitOfWork.Complete();
-                unitOfWork.Dispose();
-                return HEF.Id;
+                ClsObject obj = new ClsObject();
+                ClsUtility.Init_Hashtable();
+                ClsUtility.AddExtendedParameters("@Id", SqlDbType.Int, -1);
+                ClsUtility.AddExtendedParameters("@Ptn_Pk", SqlDbType.Int, Ptn_Pk);
+                ClsUtility.AddExtendedParameters("@VisitPk", SqlDbType.Int, visitPk);
+                ClsUtility.AddExtendedParameters("@LocationID", SqlDbType.Int, locationID);
+                ClsUtility.AddExtendedParameters("@CouncellingTypeId", SqlDbType.Int, councellingTypeId);
+                ClsUtility.AddExtendedParameters("@CouncellingTopicId", SqlDbType.Int, councellingTopicId);
+                ClsUtility.AddExtendedParameters("@VisitDate", SqlDbType.DateTime, visitDate);
+                ClsUtility.AddExtendedParameters("@Comments", SqlDbType.VarChar, comments);
+                ClsUtility.AddExtendedParameters("@OtherDetail", SqlDbType.VarChar, null);
+                ClsUtility.AddExtendedParameters("@UserId", SqlDbType.Int, userId);
+                ClsUtility.AddExtendedParameters("@DeleteFlag", SqlDbType.Bit, deleteFlag);
+                ClsUtility.AddExtendedParameters("@ModuleId", SqlDbType.Int, moduleId);
+
+
+                DataTable dt = (DataTable)obj.ReturnObject(ClsUtility.theParams, "Pr_Clinical_SaveFollowupEducation_Constella", ClsUtility.ObjectEnum.DataTable);
+
+                return 0;
             }
+            catch (Exception e)
+            {
+                System.Console.WriteLine(e);
+                throw;
+            }
+            
         }
 
         public DataTable getCounsellingTopics(string counsellingtopics)
@@ -40,6 +57,24 @@ namespace BusinessProcess.CCC.HIVEducation
 
                 return (DataTable)PatientEncounter.ReturnObject(ClsUtility.theParams, "sp_getPharmacyRegimens", ClsUtility.ObjectEnum.DataTable);
 
+            }
+        }
+
+        public DataTable GetPatientFollowupEducationData(int ptnPk)
+        {
+            try
+            {
+                ClsObject obj = new ClsObject();
+                ClsUtility.Init_Hashtable();
+                ClsUtility.AddExtendedParameters("@Ptn_Pk", SqlDbType.Int, ptnPk);
+
+                DataTable dt = (DataTable)obj.ReturnObject(ClsUtility.theParams, "Pr_Clinical_GetFollowupEducation_Constella", ClsUtility.ObjectEnum.DataTable);
+                return dt;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
             }
         }
 

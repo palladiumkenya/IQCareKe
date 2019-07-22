@@ -290,9 +290,6 @@ export class AncComponent implements OnInit, OnDestroy {
     onPreventiveServiceNotify(formGroup: Object): void {
         this.PreventiveServiceMatFormGroup.push(formGroup['form']); // = formGroup;
         this.preventiServicesData = formGroup['preventive_service_data'];
-        console.log('preventive services');
-        console.log(this.preventiServicesData);
-
     }
 
     onReferralNotify(formGroup: FormGroup): void {
@@ -302,11 +299,8 @@ export class AncComponent implements OnInit, OnDestroy {
     validateHaartProphylaxisMatFormGroup(stepper: MatStepper) {
         this.dataservice.currentHivStatus.subscribe(hivStatus => {
             if (hivStatus !== '' && hivStatus != 'Positive') {
-                console.log('here');
-                console.log(this.HaartProphylaxisMatFormGroup);
                 stepper.next();
             } else {
-                console.log('there');
                 if (this.HaartProphylaxisMatFormGroup.valid) {
                     stepper.next();
                 } else {
@@ -324,17 +318,13 @@ export class AncComponent implements OnInit, OnDestroy {
                     this.pregnancy = p;
                     const pregnancy = p;
                     if (pregnancy) {
-
-                        console.log(pregnancy);
                         this.pregnancyId = pregnancy.id;
-                        console.log('pregancyId:' + this.pregnancyId);
                     }
                 },
                 (err) => {
                     this.snotifyService.error('Error fetching pregnancy' + err, 'Pregnancy Profile', this.notificationService.getConfig());
                 },
                 () => {
-                    console.log(this.pregnancy);
                 }
             );
     }
@@ -368,7 +358,6 @@ export class AncComponent implements OnInit, OnDestroy {
     }
 
     public checkPreventiveServicesAdded(stepper: MatStepper) {
-        console.log(this.preventiServicesData);
         if (!this.isEdit) {
             if (this.preventiServicesData.length < 1) {
                 this.snotifyService.error('Add preventive service data', 'ANC', this.notificationService.getConfig());
@@ -395,7 +384,6 @@ export class AncComponent implements OnInit, OnDestroy {
                     this.snotifyService.error('Error editing encounter ' + err, 'Encounter', this.notificationService.getConfig());
                 },
                 () => {
-                    console.log(this.lookupItems$);
                 });
     }
 
@@ -465,11 +453,8 @@ export class AncComponent implements OnInit, OnDestroy {
                 CounsellingDate: moment(this.counselling_data[i]['counsellingDate']).toDate(),
                 description: this.counselling_data[i]['description']
             });
-            // console.log(this.counselling_data[i]['counsellingTopic']);
         }
 
-        // console.log('patient education');
-        // console.log(this.PatientEducationMatFormGroup);
         const patientEducationCommand: PatientEducationCommand = {
             PatientId: this.patientId,
             PatientMasterVisitId: this.patientMasterVisitId,
@@ -599,9 +584,6 @@ export class AncComponent implements OnInit, OnDestroy {
             }
         );
 
-        // console.log('administered drugs');
-        // console.log(this.AdministredDrugs);
-
         const yesno = this.yesNoOptions.filter(x => x.itemName == 'Yes');
         const otherIllnessOption = this.HaartProphylaxisMatFormGroup.value[0]['otherIllness'];
 
@@ -674,8 +656,6 @@ export class AncComponent implements OnInit, OnDestroy {
 
         };
 
-        // console.log('refferalFormGroup');
-        // console.log(this.ReferralMatFormGroup);
         const referralCommand = {
             PatientId: this.patientId,
             PatientMasterVisitId: this.patientMasterVisitId,
@@ -734,9 +714,7 @@ export class AncComponent implements OnInit, OnDestroy {
         if (this.pregnancyId < 1) {
             const AncPregnancy = this.ancService.savePregnancy(pregnancyCommand).subscribe(
                 (res) => {
-                    console.log(`pregancyId new` + res);
                     this.pregnancyId = res.pregnancyId;
-                    console.log(res.pregnancyId);
 
                     const visitDetailsCommands = {
                         PatientId: parseInt(this.patientId.toString(), 10),
@@ -783,12 +761,11 @@ export class AncComponent implements OnInit, OnDestroy {
                                 hivTestsCommand.PatientMasterVisitId = result[3]['patientMasterVisitId'];
                                 const ancHivResultsCommand = this.ancService.saveHivResults(hivTestsCommand).subscribe(
                                     (testRes) => {
-                                        console.log(testRes);
+                                        // console.log(testRes);
                                     }
                                 );
 
                                 this.spinner.hide();
-                                // console.log(result);
                                 this.snotifyService.success('Successfully saved ANC encounter ', 'ANC',
                                     this.notificationService.getConfig());
                                 this.zone.run(() => {
@@ -796,10 +773,10 @@ export class AncComponent implements OnInit, OnDestroy {
                                 });
                             },
                             (error) => {
-                                console.log(`error ` + error);
+                                // console.log(`error ` + error);
                             },
                             () => {
-                                console.log(`complete`);
+                                // console.log(`complete`);
                             }
                         );
                 }
@@ -821,12 +798,11 @@ export class AncComponent implements OnInit, OnDestroy {
             ])
                 .subscribe(
                     (result) => {
-                        console.log(result);
                         hivTestsCommand.HtsEncounterId = result[3]['htsEncounterId'];
                         hivTestsCommand.PatientMasterVisitId = result[3]['patientMasterVisitId'];
                         const ancHivResultsCommand = this.ancService.saveHivResults(hivTestsCommand).subscribe(
                             (testRes) => {
-                                console.log(testRes);
+                                // console.log(testRes);
                             }
                         );
 
@@ -838,11 +814,11 @@ export class AncComponent implements OnInit, OnDestroy {
                         });
                     },
                     (error) => {
-                        console.log(`error ` + error);
+                        // console.log(`error ` + error);
                     },
                     () => {
                         // close spinner
-                        console.log(`complete`);
+                        // console.log(`complete`);
                     }
                 );
         }
@@ -902,11 +878,8 @@ export class AncComponent implements OnInit, OnDestroy {
                 CounsellingDate: moment(this.counselling_data[i]['counsellingDate']).toDate(),
                 description: this.counselling_data[i]['description']
             });
-            console.log(this.counselling_data[i]['counsellingTopic']);
         }
 
-        console.log('patient education');
-        console.log(this.PatientEducationMatFormGroup);
         const patientEducationCommand: PatientEducationCommand = {
             PatientId: this.patientId,
             PatientMasterVisitId: this.patientMasterVisitId,
@@ -1005,10 +978,6 @@ export class AncComponent implements OnInit, OnDestroy {
             appointment = pncAppointmentEdit;
         }
 
-        //   const clientMonitoringEditCommand = { clientMonitoringEditCommand: clientMonitoringCommandEdit }
-
-        console.log('client monitoring command edit');
-        console.log(clientMonitoringCommandEdit);
         const AncvisitDetailsEdit = this.ancService.EditANCVisitDetails(ancVisitDetailsCommandEdit);
         const visitDetailsEdit = this.ancService.EditVisitDetails(VisitDetails);
         const baselineEdit = this.ancService.EditBaselineProfile(baselineAncCommandEdit);
@@ -1030,7 +999,6 @@ export class AncComponent implements OnInit, OnDestroy {
         ]).subscribe(
             (result) => {
                 this.spinner.hide();
-                console.log(result);
                 this.snotifyService.success('Successfully Edited ANC encounter ', 'ANC',
                     this.notificationService.getConfig());
                 this.zone.run(() => {

@@ -1,20 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Net;
-using System.Runtime.Serialization.Json;
-using System.Threading.Tasks;
+﻿using IQCare.WebApi.Logic.MessageHandler;
+using System;
 using System.Web.Http;
 using System.Web.Script.Serialization;
-using Entity.WebApi.PSmart;
-using IQCare.WebApi.Logic.MessageHandler;
-using IQCare.WebApi.Logic.PSmart;
-using Microsoft.JScript;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace IQCare.Web.Api.Controllers.PSmart
 {
-    
+
 
     [RoutePrefix("api/psmart/{controller}/{Id}")]
     public class PushToEmrController : ApiController

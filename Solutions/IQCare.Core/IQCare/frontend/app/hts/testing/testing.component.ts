@@ -90,7 +90,7 @@ export class TestingComponent implements OnInit {
             finalResultsRemarks: new FormControl(this.finalTestingResults.finalResultsRemarks)
         });
 
-        this.htsEncounterDate = moment(localStorage.getItem('encounterDate')).toDate();
+        this.htsEncounterDate = moment(new Date(localStorage.getItem('encounterDate'))).toDate();
 
         this.encounterService.getCustomOptions().subscribe(data => {
             const options = data['lookupItems'];
@@ -286,9 +286,6 @@ export class TestingComponent implements OnInit {
                 } else if (screeningType == 'Confirmatory Test') {
                     const firstTest = this.hivResults1.slice(-1)[0];
 
-                    console.log(firstTest);
-                    console.log(data);
-
                     if (firstTest.kitName['itemName'] == data.kitName['itemName']) {
                         console.log('test');
                         this.snotifyService.info('The same kitname has been used for screening and confirmatory test.' +
@@ -336,10 +333,10 @@ export class TestingComponent implements OnInit {
             this.formTesting.controls.finalResultsRemarks.setValue('n/a');
         }
 
-        console.log(this.formTesting);
+        // console.log(this.formTesting);
         if (this.formTesting.valid) {
             this.finalTestingResults = { ...this.finalTestingResults, ...this.formTesting.value };
-            console.log(this.finalTestingResults);
+            // console.log(this.finalTestingResults);
 
             const htsEncounterId = JSON.parse(localStorage.getItem('htsEncounterId'));
             const patientId = JSON.parse(localStorage.getItem('patientId'));

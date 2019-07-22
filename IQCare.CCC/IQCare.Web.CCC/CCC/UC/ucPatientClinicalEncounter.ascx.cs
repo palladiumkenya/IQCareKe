@@ -412,7 +412,10 @@ namespace IQCare.Web.CCC.UC
             IptCw.StartDateIPT.Text = pce.IPTStartDate;
 
             //tb outcome
-            ddlICFTBScreeningOutcome.SelectedValue = pce.tbScreening;
+            ddlICFTBScreeningOutcome.ClearSelection();
+            if(pce.tbScreening != null)
+                ddlICFTBScreeningOutcome.Items.FindByValue(pce.tbScreening).Selected = true;
+            //ddlICFTBScreeningOutcome.SelectedValue = pce.tbScreening;
             nutritionscreeningstatus.SelectedValue = pce.nutritionStatus;
             txtWorkPlan.Text = pce.WorkPlan;
             foreach (ListItem item in cblGeneralExamination.Items)

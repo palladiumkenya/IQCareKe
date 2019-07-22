@@ -192,7 +192,6 @@ export class EncounterComponent implements OnInit {
 
     onSubmitForm() {
         if (localStorage['editEncounterId']) {
-            console.log('edit encounter');
             this.editEncounter(JSON.parse(localStorage['editEncounterId']), this.patientMasterVisitId);
         } else {
             this.addNewEncounter();

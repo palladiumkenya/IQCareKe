@@ -1,0 +1,69 @@
+<div class="row">
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        <div class="row">
+            <div class="col-lg-12 col=sm-6 col-xs-12">
+                <div class="widget">
+                    <div class="widget-header bordered-bottom bordered-sky">
+                        <span class="widget-caption">PREP Care Termination Form</span>
+                    </div>
+                </div>
+                <div class="widget-body">
+                    <form [formGroup]="PrepCareEndFormGroup">
+                        <div class="row">
+                            <div class='col-md-4 col-xs-12 col-sm-12'>
+                                <mat-form-field class="col-lg-12">
+                                    <input matInput [matDatepicker]="picker" [max]="maxDate" (focus)="picker.open()"
+                                        formControlName="careEndedDate" required placeholder="Care end Date">
+                                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                                    <mat-datepicker #picker></mat-datepicker>
+                                </mat-form-field>
+                            </div>
+                            <div class='col-md-4 col-xs-12 col-sm-12'>
+                                <mat-form-field class="col-lg-12">
+                                    <mat-select placeholder="Discontinue Reason" formControlName="discontinueReason"
+                                        required>
+                                        <mat-option [value]=""></mat-option>
+                                        <mat-option *ngFor="let Option of careendreasonarray" [value]="Option.itemId"
+                                            (onSelectionChange)="OnSelectDiscontinue($event)">
+                                            {{Option.itemDisplayName}}
+                                        </mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class='col-md-4 col-xs-12 col-sm-12'>
+                                <mat-form-field class="col-lg-12">
+                                    <input matInput [matDatepicker]="Deathpicker" [max]="maxDate" (focus)="Deathpicker.open()"
+                                        formControlName="DeathDate" required placeholder="DeathDate">
+                                    <mat-datepicker-toggle matSuffix [for]="Deathpicker"></mat-datepicker-toggle>
+                                    <mat-datepicker #Deathpicker></mat-datepicker>
+                                </mat-form-field>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <mat-form-field class="col-md-12">
+                                    <textarea formControlName="Specify" matInput placeholder="Specify"></textarea>
+                                </mat-form-field>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-4 col-xs-12 col-sm-12">
+                                <button mat-raised-button class="mat-primary" (click)="Submit()">Save
+                                </button>
+                            </div>
+
+                            <div class="col-md-4 col-xs-12 col-sm-12">
+                                <button mat-raised-button class="mat-warn" click="Cancel()">Cancel</button>
+
+                            </div>
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -6,7 +6,7 @@ import { environment } from '../../../environments/environment';
 import { ErrorHandlerService } from '../../shared/_services/errorhandler.service';
 import { LookupItemView } from '../../shared/_models/LookupItemView';
 import { PersonView } from '../../records/_models/personView';
-
+import { EncounterDetails } from '../_model/HtsEncounterdetails';
 const httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
 };
@@ -16,7 +16,9 @@ const httpOptions = {
 })
 export class PersonHomeService {
     private API_URL = environment.API_URL;
+    private API_PREPURL = environment.API_PREP_URL;
     private _url = '/api/PatientServices/GetPatientByPersonId';
+    private _htsurl = '/api/HtsEncounter';
     public person: PersonView;
     constructor(private http: HttpClient,
         private errorHandler: ErrorHandlerService) { }
@@ -25,6 +27,12 @@ export class PersonHomeService {
         return this.http.get<PersonView>(this.API_URL + '' + this._url + '/' + personId).pipe(
             tap(getPatientByPersonId => this.errorHandler.log('get ' + personId + 'options by Name')),
             catchError(this.errorHandler.handleError<PersonView>('getPatientByPersonId'))
+        );
+    }
+    public getHTSEncounterDetailsBypersonId(personId: number): Observable<any[]> {
+        return this.http.get<EncounterDetails[]>(this.API_URL + this._htsurl + '/getEncounterDetailsByPersonId/' + personId).pipe(
+            tap(getHTSEncounterDetailsBypersonId => this.errorHandler.log('fetched a single client encounter details')),
+            catchError(this.errorHandler.handleError<any[]>('getHTSEncounterDetailsBypersonId', []))
         );
     }
 
@@ -65,7 +73,7 @@ export class PersonHomeService {
     }
 
     public getPatientAllergies(patientId: number): Observable<any> {
-        return this.http.get<any>(this.API_URL + '/api/PatientAllergy/GetPatientAllergy?patientId=' + patientId).pipe(
+        return this.http.get<any>(this.API_URL + '/api/PatientAllergy/GetPatientAllergy/' + patientId).pipe(
             tap(getPatientAllergies => this.errorHandler.log('get patient Allergy')),
             catchError(this.errorHandler.handleError<any[]>('getPatientAllergies'))
         );
@@ -84,7 +92,12 @@ export class PersonHomeService {
             catchError(this.errorHandler.handleError<any>('getRelationshipsByPatientId'))
         );
     }
-
+    public GetCurrentPatientVitalsInfo(personId: number): Observable<any> {
+        return this.http.get<any>(this.API_URL + '/api/PatientServices/GetCurrentPersonVitals/' + personId).pipe(
+            tap(GetCurrentPatientVitalsInfo => this.errorHandler.log('get patient vitals details')),
+            catchError(this.errorHandler.handleError<any>('GetCurrentPatientVitalsInfo'))
+        );
+    }
 
     public GetPatientAppoitment(patientId: number): Observable<any> {
         return this.http.get<any>(this.API_URL + '/api/PatientReferralAndAppointment/GetPatientAppoitment/' + patientId).pipe(
@@ -122,6 +135,31 @@ export class PersonHomeService {
         );
     }
 
+    public getPatientTransferInDetails(serviceAreaId: number, personId: number): Observable<any> {
+        return this.http.get<any>(this.API_URL + '/api/Register/GetPatientTransferIn/' + serviceAreaId + '/' + personId).pipe(
+            tap(getPatientTransferInDetails => this.errorHandler.log(`get patient transefin details for personId:  `
+                + personId + ` and serviceAreaId: ` + serviceAreaId)),
+            catchError(this.errorHandler.handleError<any>('getPatientTransferInDetails'))
+        );
+    }
+
+    public getPatientOVCStatusDetails(personId: number): Observable<any> {
+        return this.http.get<any>(this.API_URL + '/api/Register/GetPatientOVCStatus/' + personId).pipe(
+            tap(getPatientOVCStatusDetails => this.errorHandler.log(`get patient OVC details for personId:  `
+                + personId)),
+            catchError(this.errorHandler.handleError<any>('getPatientOVCStatusDetails'))
+        );
+    }
+    public getPatientARVDetails(serviceAreaId: number, personId: number): Observable<any> {
+        return this.http.get<any>(this.API_URL + '/api/Register/GetPatientARVHistory/' + serviceAreaId + '/' + personId).pipe(
+            tap(getPatientARVDetails => this.errorHandler.log(`get patient ARV details for personId:  `
+                + personId + ` and serviceAreaId: ` + serviceAreaId)),
+            catchError(this.errorHandler.handleError<any>('getPatientARVDetails'))
+        );
+    }
+
+
+
     public getPatientEnrollmentDateByServiceAreaId(patientId: number, serviceAreaId: number): Observable<any> {
         return this.http.get<any>(this.API_URL + '/api/Register/GetPatientEnrollmentByServiceAreaId/'
             + patientId + '/' + serviceAreaId).pipe(
@@ -135,6 +173,38 @@ export class PersonHomeService {
         return this.http.get<any[]>(this.API_URL + '/api/Registration/Person/GetPersonPriorityDetails/' + personId).pipe(
             tap(getPersonPriorityTypes => this.errorHandler.log(`get person priority type for personId: ` + personId)),
             catchError(this.errorHandler.handleError<any>('getPersonPriorityTypes'))
+        );
+    }
+
+    CheckPrepencounterExists(personId: number): Observable<any[]> {
+        const Indata = {
+            'PersonId': personId
+        };
+        return this.http.post<any>(this.API_PREPURL + '/api/BehaviourRisk/Encounterexists', JSON.stringify(Indata), httpOptions)
+            .pipe(tap(CheckencounterExists => this.errorHandler.log('checked if RiskAssessmentEncounter Exists')),
+                catchError(this.errorHandler.handleError<any[]>('CheckencounterExists'))
+            );
+    }
+
+    public filterFacilities(filterString: string) {
+        return this.http.get<any[]>(this.API_URL + '/api/Lookup/searchFacilityList?searchString=' + filterString).pipe(
+            tap(filterFacilities => this.errorHandler.log('fetched filtered facilities')),
+            catchError(this.errorHandler.handleError<any[]>('filterFacilities'))
+        );
+    }
+
+    public getFacility(mflCode: string) {
+        return this.http.get<any>(this.API_URL + '/api/Lookup/getFacility/' + mflCode).pipe(
+            tap(getFacility => this.errorHandler.log('get Facility')),
+            catchError(this.errorHandler.handleError<any[]>('getFacility'))
+        );
+    }
+
+
+    public getPatientCareEndedHistory(patientId: number): Observable<any[]> {
+        return this.http.get<any[]>(this.API_URL + '/api/PatientServices/GetLatestCareEndDetails/' + patientId).pipe(
+            tap(getPatientCareEndedHistory => this.errorHandler.log(`get Patient CareEnded details` + patientId)),
+            catchError(this.errorHandler.handleError<any>('getPatientCareEndedHistory'))
         );
     }
 }

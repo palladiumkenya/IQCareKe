@@ -146,7 +146,6 @@ export class AncService {
     }
 
     public savePatientChronicIllness(chronicIllnessCommand: any[]): Observable<any> {
-         console.log(chronicIllnessCommand);
         if (chronicIllnessCommand.length == 0) {
             return of([]);
         }
@@ -352,9 +351,9 @@ export class AncService {
     public getPatientAppointmentAnc(patientId: number, patientMasterVisitId: number) {
         return this.http.get<any[]>(this.API_URL + '/api/PatientReferralAndAppointment/GetAppointmentAnc/' +
             patientId + '/' + patientMasterVisitId).pipe(
-            tap(getPatientAppointment => this.errorHandler.log('get patientappointment data')),
-            catchError(this.errorHandler.handleError<any[]>('getPatientAppointment'))
-        );
+                tap(getPatientAppointment => this.errorHandler.log('get patientappointment data')),
+                catchError(this.errorHandler.handleError<any[]>('getPatientAppointment'))
+            );
     }
 
 

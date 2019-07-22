@@ -17,5 +17,6 @@ namespace IQCare.Common.Core.Models
         public DateTime CreateDate { get; set; }
         [XmlIgnore]
         public string AuditData { get; set; }
+        public bool DeleteFlag { get; set; }
     }
 }

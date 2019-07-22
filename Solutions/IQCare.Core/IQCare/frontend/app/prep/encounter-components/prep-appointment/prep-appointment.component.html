@@ -1,0 +1,63 @@
+<form class="form-group" [formGroup]="PrepAppointmentForm">
+    <div class="row">
+        <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12">
+            <div class="form-title">
+                <span class="mat-accent">
+                    Next Appoitment
+                </span>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-6 col-sm-6 col-xs-12">
+                <mat-form-field class="col-lg-12 col-sm-12 col-xs-12">
+                    <mat-label>Client given next appointment?</mat-label>
+                    <mat-select id="nextAppoitmentGiven" name="nextAppoitmentGiven"
+                        formControlName="nextAppoitmentGiven" required>
+                        <mat-option [value]=""></mat-option>
+                        <mat-option *ngFor="let yesnoOption of yesnoOptions" [value]="yesnoOption.itemId"
+                            (onSelectionChange)="onAppointmentSelection($event)">
+                            {{ yesnoOption.itemName }}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+
+            <div class="col-lg-6 col-sm-6 col-xs-12">
+                <mat-form-field class="col-lg-12 col-sm-12 col-xs-12">
+                    <mat-label>If No, specify reason for not giving appointment?</mat-label>
+                    <mat-select id="reasonAppointmentNoGiven" name="reasonAppointmentNoGiven"
+                        formControlName="reasonAppointmentNoGiven">
+                        <mat-option [value]=""></mat-option>
+                        <mat-option
+                            *ngFor="let reasonsPrepAppointmentNotGivenOption of reasonsPrepAppointmentNotGivenOptions"
+                            [value]="reasonsPrepAppointmentNotGivenOption.itemId">
+                            {{ reasonsPrepAppointmentNotGivenOption.itemName }}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-6 col-sm-6 col-xs-12">
+                <mat-form-field class="col-lg-12 col-sm-12 col-xs-12">
+                    <mat-label>Next appointment date:</mat-label>
+                    <input formControlName="nextAppointmentDate" [min]="minDate" id="nextAppointmentDate"
+                        name="nextAppointmentDate" matInput (focus)="nextAppointmentDate.open()"
+                        [matDatepicker]="nextAppointmentDate">
+                    <mat-datepicker-toggle matSuffix [for]="nextAppointmentDate"></mat-datepicker-toggle>
+                    <mat-datepicker #nextAppointmentDate></mat-datepicker>
+                </mat-form-field>
+            </div>
+
+            <div class="col-lg-6 col-sm-6 col-xs-12">
+                <mat-form-field class="col-lg-12 col-sm-12 col-xs-12">
+                    <mat-label>Clinical notes:</mat-label>
+                    <textarea matInput id="clinicalNotes" name="clinicalNotes"
+                        formControlName="clinicalNotes"></textarea>
+                </mat-form-field>
+            </div>
+        </div>
+    </div>
+</form>
