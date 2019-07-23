@@ -16,18 +16,19 @@ import * as moment from 'moment';
 import { AdverseEventsCommand } from '../_models/commands/AdverseEventsCommand';
 import { AllergiesCommand } from '../_models/commands/AllergiesCommand';
 import { PregnancyIndicatorCommand } from '../_models/commands/PregnancyIndicatorCommand';
-import { NextAppointmentCommand } from '../../pmtct/maternity/commands/next-appointment-command';
+import { NextAppointmentCommand, EditAppointmentCommand } from '../../pmtct/maternity/commands/next-appointment-command';
 import { MaternityService } from '../../pmtct/_services/maternity.service';
 import { MatStepper } from '@angular/material';
 import { PregnancyIndicatorLogCommand } from '../_models/commands/PregnancyIndicatorLogCommand';
 import { FamilyPlanningEditCommand } from '../../pmtct/_models/FamilyPlanningEditCommand';
 import { PatientFamilyPlanningMethodEditCommand } from '../../pmtct/_models/PatientFamilyPlanningMethodEditCommand';
+import { LookupItemService } from '../../shared/_services/lookup-item.service';
 
 @Component({
     selector: 'app-prep-encounter',
     templateUrl: './prep-encounter.component.html',
     styleUrls: ['./prep-encounter.component.css'],
-    providers: [MaternityService, RecordsService]
+    providers: [MaternityService, RecordsService, LookupItemService]
 })
 export class PrepEncounterComponent implements OnInit {
     patientId: number;
@@ -39,6 +40,9 @@ export class PrepEncounterComponent implements OnInit {
     isEdit: number;
 
     isLinear: boolean = true;
+
+    appointmentStatusId: number;
+    appointmentReasonId: number;
 
     // Form Groups
     STIScreeningFormGroup: FormArray;
@@ -87,7 +91,8 @@ export class PrepEncounterComponent implements OnInit {
         private matService: MaternityService,
         public zone: NgZone,
         private router: Router,
-        private recordsService: RecordsService) {
+        private recordsService: RecordsService,
+        private lookupitemservice: LookupItemService) {
         this.STIScreeningFormGroup = new FormArray([]);
         this.CircumcisionStatusFormGroup = new FormArray([]);
         this.FertilityIntentionsFormGroup = new FormArray([]);
@@ -174,6 +179,18 @@ export class PrepEncounterComponent implements OnInit {
                 if (res.length > 0) {
                     this.personGender = res[0]['gender'];
                 }
+            }
+        );
+
+        this.lookupitemservice.getByGroupNameAndItemName('AppointmentStatus', 'Pending').subscribe(
+            (res) => {
+                this.appointmentStatusId = res['itemId'];
+            }
+        );
+
+        this.lookupitemservice.getByGroupNameAndItemName('AppointmentReason', 'Follow Up').subscribe(
+            (res) => {
+                this.appointmentReasonId = res['itemId'];
             }
         );
     }
@@ -645,10 +662,17 @@ export class PrepEncounterComponent implements OnInit {
             reasonsCommand = of([]);
         }
 
-        const updateNextAppointment = {
+        const updateNextAppointment: EditAppointmentCommand = {
             AppointmentId: this.AppointmentFormGroup.value[0]['id'],
             AppointmentDate: this.AppointmentFormGroup.value[0]['nextAppointmentDate'],
-            Description: this.AppointmentFormGroup.value[0]['clinicalNotes']
+            Description: this.AppointmentFormGroup.value[0]['clinicalNotes'],
+            UserId: this.userId,
+            PatientId: this.patientId,
+            PatientMasterVisitId: this.patientMasterVisitId,
+            DifferentiatedCareId: null,
+            ReasonId: this.appointmentReasonId,
+            ServiceAreaId: 7,
+            StatusId: this.appointmentStatusId
         };
 
         const familyPlanningEditCommand: FamilyPlanningEditCommand = {

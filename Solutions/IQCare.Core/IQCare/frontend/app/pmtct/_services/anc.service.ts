@@ -182,7 +182,7 @@ export class AncService {
 
     public EditReferral(referralCommand: ReferralAppointmentCommandService): Observable<ReferralAppointmentCommandService> {
 
-        return this.http.put<any>(this.API_URL + '' + this._url_ref_edit, JSON.stringify(referralCommand), httpOptions).pipe(
+        return this.http.post<any>(this.API_URL + this._url_ref_edit, JSON.stringify(referralCommand), httpOptions).pipe(
             tap(saveReferralAppointment => this.errorHandler.log('Successfully Edit Patient Referral')),
             catchError(this.errorHandler.handleError<any>('Error in Editing Patient Referral'))
         );
