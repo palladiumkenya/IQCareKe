@@ -60,6 +60,8 @@ export class MaternityComponent implements OnInit {
     hiv_status_table_data: any[] = [];
     hivTestEntryPoint: number;
     htsEncounterId: number;
+    appointmentStatusId: number;
+    appointmentReasonId: number;
 
 
     patientId: number;
@@ -73,7 +75,7 @@ export class MaternityComponent implements OnInit {
     pregnancyId: number = 0;
     deliveryId: number;
 
-    addedBabyDetails : any[] = [];
+    addedBabyDetails: any[] = [];
 
     deliveryModeOptions: LookupItemView[] = [];
     bloodLossOptions: LookupItemView[] = [];
@@ -101,7 +103,9 @@ export class MaternityComponent implements OnInit {
     partnerTestingOptions: any[] = [];
     patientEducationOptions: any[] = [];
     counselledInfantFeedingOptions: any[] = [];
-    infantFeedingTopicId: number ;
+    infantFeedingTopicId: number;
+
+    babyDetailsValid: boolean = true;
 
     constructor(private route: ActivatedRoute,
         private matService: MaternityService,
@@ -134,13 +138,24 @@ export class MaternityComponent implements OnInit {
             }
         );
 
-        this.matService.currentBabyData.subscribe(data=>{
+        this.lookupitemservice.getByGroupNameAndItemName('AppointmentStatus', 'Pending').subscribe(
+            (res) => {
+                this.appointmentStatusId = res['itemId'];
+            }
+        );
+
+        this.lookupitemservice.getByGroupNameAndItemName('AppointmentReason', 'Follow Up').subscribe(
+            (res) => {
+                this.appointmentReasonId = res['itemId'];
+            }
+        );
+
+        this.matService.currentBabyData.subscribe(data => {
             this.addedBabyDetails = data;
-        })
+        });
 
         this.route.params.subscribe(
             (params) => {
-                console.log(params);
                 const { patientId, personId, serviceAreaId, patientMasterVisitId } = params;
                 this.patientId = parseInt(patientId, 10);
                 this.personId = personId;
@@ -149,7 +164,6 @@ export class MaternityComponent implements OnInit {
                 this.patientEncounterId = params.patientEncounterId;
 
                 if (!this.patientMasterVisitId) {
-                    console.log('test here');
                     this.patientMasterVisitId = JSON.parse(localStorage.getItem('patientMasterVisitId'));
                     this.patientEncounterId = JSON.parse(localStorage.getItem('patientEncounterId'));
                 } else {
@@ -209,9 +223,6 @@ export class MaternityComponent implements OnInit {
             'hivFinalResultsOptions': this.hivFinalResultsOptions
         });
 
-        // console.log('hiv test');
-        // console.log(this.pncHivOptions);
-
         this.babySectionOptions.push({
             'gender': this.genderOptions,
             'deliveryOutcomes': this.deliveryOutcomeOptions,
@@ -247,14 +258,9 @@ export class MaternityComponent implements OnInit {
         });
         this.patientEducationOptions.push({
             'yesnoOptions': this.yesNoOptions,
-            'infantFeedingTopicId' : this.infantFeedingTopicId
+            'infantFeedingTopicId': this.infantFeedingTopicId
         });
 
-    }
-
-
-    log() {
-        console.log(this.visitDetailsFormGroup);
     }
 
     onVisitDetailsNotify(formGroup: FormGroup): void {
@@ -354,8 +360,8 @@ export class MaternityComponent implements OnInit {
             );
     }
 
-    private buildMaternalDeliveryCommand() : MaternityDeliveryCommand {
-        var isMotherConditionDead = this.diagnosisFormGroup.value[1]['deliveryCondition'].itemName == 'Dead';
+    private buildMaternalDeliveryCommand(): MaternityDeliveryCommand {
+        const isMotherConditionDead = this.diagnosisFormGroup.value[1]['deliveryCondition'].itemName == 'Dead';
 
         const maternityDeliveryCommand: MaternityDeliveryCommand = {
             PatientMasterVisitId: this.patientMasterVisitId,
@@ -369,7 +375,7 @@ export class MaternityComponent implements OnInit {
             BloodLossClassification: this.diagnosisFormGroup.value[1]['bloodLoss'].itemId,
             MotherCondition: this.diagnosisFormGroup.value[1]['deliveryCondition'].itemId,
             MaternalDeathAudited: isMotherConditionDead ? this.diagnosisFormGroup.value[1]['maternalDeathsAudited'].itemId : null,
-            MaternalDeathAuditDate:isMotherConditionDead ? moment(this.diagnosisFormGroup.value[1]['auditDate']).toDate() : null,
+            MaternalDeathAuditDate: isMotherConditionDead ? moment(this.diagnosisFormGroup.value[1]['auditDate']).toDate() : null,
             DeliveryComplicationsExperienced: this.diagnosisFormGroup.value[1]['deliveryComplications'].itemId,
             DeliveryComplicationNotes: this.diagnosisFormGroup.value[1]['deliveryComplicationNotes'],
             DeliveryConductedBy: this.diagnosisFormGroup.value[1]['deliveryConductedBy'],
@@ -378,7 +384,7 @@ export class MaternityComponent implements OnInit {
         return maternityDeliveryCommand;
     }
 
-    private buildDiagnosisCommandModel() : DiagnosisCommand {
+    private buildDiagnosisCommandModel(): DiagnosisCommand {
         const diagnosisCommand: DiagnosisCommand = {
             Id: this.diagnosisFormGroup.value[0]['diagnosisId'],
             PatientId: this.patientId,
@@ -390,7 +396,7 @@ export class MaternityComponent implements OnInit {
         return diagnosisCommand;
     }
 
-    private buildDrugAdministrationModel(){
+    private buildDrugAdministrationModel() {
         const vitaminA = this.drugAdminOptions.filter(x => x.itemName == 'Vitamin A Supplementation');
         const haartAnc = this.drugAdminOptions.filter(x => x.itemName == 'Started HAART in ANC');
         const maternityArv = this.drugAdminOptions.filter(x => x.itemName == 'ARVs Started in Maternity');
@@ -421,14 +427,12 @@ export class MaternityComponent implements OnInit {
         );
 
     }
-    
-    completeEncounter(){
-        if(this.isEdit)
-        {
-            this.onEdit()
-             return
-        }
 
+    completeEncounter() {
+        if (this.isEdit) {
+            this.onEdit();
+            return;
+        }
         this.onSubmit();
     }
 
@@ -445,7 +449,6 @@ export class MaternityComponent implements OnInit {
             UserId: this.userId
         } as VisitDetailsCommand;
 
-        console.log(this.visitDetailsFormGroup);
         const pregnancyCommand: PregnancyCommand = {
             Id: 0,
             PatientId: this.patientId,
@@ -470,9 +473,6 @@ export class MaternityComponent implements OnInit {
         const apgarscoreOne = this.apgarOptions.filter(x => x.itemName == 'Apgar Score 1 min');
         const apgarscoreTwo = this.apgarOptions.filter(x => x.itemName == 'Apgar Score 5 min');
         const apgarscoreThree = this.apgarOptions.filter(x => x.itemName == 'Apgar Score 10 min');
-
-        console.log('baby data' + this.babyNotifyData.length);
-        console.log(this.babyNotifyData);
 
         for (let i = 0; i < this.babyNotifyData.length; i++) {
             for (let j = 0; j < this.babyNotifyData[i].length; j++) {
@@ -512,7 +512,7 @@ export class MaternityComponent implements OnInit {
             DeliveredBabyBirthInfoCollection: this.DeliveredBabyBirthInfoCollection
         };
 
-         this.buildDrugAdministrationModel();
+        this.buildDrugAdministrationModel();
 
         const drugAdministrationCommand: DrugAdministrationCommand = {
             Id: 0,
@@ -537,7 +537,7 @@ export class MaternityComponent implements OnInit {
         const patiendEducationCommand: MaternityCounsellingCommand = {
             PatientId: this.patientId,
             PatientMasterVisitId: this.patientMasterVisitId,
-            CounsellingTopicId:this.infantFeedingTopicId,
+            CounsellingTopicId: this.infantFeedingTopicId,
             IsCounsellingDone: this.maternalDrugAdministrationForGroup.value[2]['counselledInfantFeeding'],
             CounsellingDate: new Date(),
             Description: null,
@@ -643,7 +643,6 @@ export class MaternityComponent implements OnInit {
         };
 
         for (let i = 0; i < this.hiv_status_table_data.length; i++) {
-            console.log(this.hiv_status_table_data);
             for (let j = 0; j < this.hiv_status_table_data[i].length; j++) {
                 hivTestsCommand.Testing.push({
                     KitId: this.hiv_status_table_data[i][j]['kitname']['itemId'],
@@ -739,121 +738,120 @@ export class MaternityComponent implements OnInit {
             );
 
     }
-   
-    public onEdit(){
-        const editMotherDeliveryInfoCommand : UpdateMaternalPatientDeliveryCommand = {
-            PatientDeliveryInfoId :this.diagnosisFormGroup.value[1]['deliveryId'],
-            MaternalPatientDeliveryInfoCommand : this.buildMaternalDeliveryCommand()
-        }
 
-        console.log(editMotherDeliveryInfoCommand.PatientDeliveryInfoId + ' edit MotherDelivery InfoCommand')
+    public onEdit() {
+        const editMotherDeliveryInfoCommand: UpdateMaternalPatientDeliveryCommand = {
+            PatientDeliveryInfoId: this.diagnosisFormGroup.value[1]['deliveryId'],
+            MaternalPatientDeliveryInfoCommand: this.buildMaternalDeliveryCommand()
+        };
 
-        const editDiagnosisCommad : UpdatePatientDiagnosisCommand = {
-             DiagnosisId : this.diagnosisFormGroup.value[0]['diagnosisId'],
-             DiagnosisCommand : this.buildDiagnosisCommandModel()
-        }
+        // console.log(editMotherDeliveryInfoCommand.PatientDeliveryInfoId + ' edit MotherDelivery InfoCommand')
 
-          this.buildDrugAdministrationModel();
-          
-        const editDrugAdminCommand : UpdateDrugAdministrationCommand = {
-            PatientMasterVisitId : this.patientMasterVisitId,
-            AdministeredDrugs : this.AdministeredDrugs
-        }
+        const editDiagnosisCommad: UpdatePatientDiagnosisCommand = {
+            DiagnosisId: this.diagnosisFormGroup.value[0]['diagnosisId'],
+            DiagnosisCommand: this.buildDiagnosisCommandModel()
+        };
+
+        this.buildDrugAdministrationModel();
+
+        const editDrugAdminCommand: UpdateDrugAdministrationCommand = {
+            PatientMasterVisitId: this.patientMasterVisitId,
+            AdministeredDrugs: this.AdministeredDrugs
+        };
 
 
-        const editPartnerTestingCommand : UpdatePatientPartnerTestingCommand ={
-            Id : this.maternalDrugAdministrationForGroup.value[1]['id'],
+        const editPartnerTestingCommand: UpdatePatientPartnerTestingCommand = {
+            Id: this.maternalDrugAdministrationForGroup.value[1]['id'],
             PartnerTested: this.maternalDrugAdministrationForGroup.value[1]['partnerHivTestDone'],
             PartnerHIVResult: this.maternalDrugAdministrationForGroup.value[1]['finalPartnerHivResult'],
-        }
+        };
 
 
-        const editCounsellingCommand : EditMaternityCounsellingCommand ={
-            Id :  this.maternalDrugAdministrationForGroup.value[2]['id'],
+        const editCounsellingCommand: EditMaternityCounsellingCommand = {
+            Id: this.maternalDrugAdministrationForGroup.value[2]['id'],
             CounsellingTopicId: this.infantFeedingTopicId,
             IsCounsellingDone: this.maternalDrugAdministrationForGroup.value[2]['counselledInfantFeeding'],
-        }
-        
+        };
 
-        const editPatientDischarge : UpdatePatientDischargeCommand ={
-            Id : this.dischargeFormGroup.value[0]['id'],
+
+        const editPatientDischarge: UpdatePatientDischargeCommand = {
+            Id: this.dischargeFormGroup.value[0]['id'],
             OutcomeStatus: this.dischargeFormGroup.value[0]['babyStatus'],
             DateDischarged: moment(this.dischargeFormGroup.value[0]['dischargeDate']).toDate(),
-            OutcomeDescription : 'na'
-        }
-        
+            OutcomeDescription: 'na'
+        };
 
-        const editRefferalCommand : EditReferalCommand ={
-            Id :  this.dischargeFormGroup.value[1]['id'],
-            ReferralDate : new Date(),
+
+        const editRefferalCommand: EditReferalCommand = {
+            Id: this.dischargeFormGroup.value[1]['id'],
+            ReferralDate: new Date(),
             ReferredFrom: this.dischargeFormGroup.value[1]['referredFrom'],
             ReferredTo: this.dischargeFormGroup.value[1]['referredTo'],
-            ReferralReason : 'Referral',
-            ReferredBy : this.userId
-        }
+            ReferralReason: 'Referral',
+            ReferredBy: this.userId
+        };
 
 
-        const editAppointment : EditAppointmentCommand ={
-            AppointmentId : this.dischargeFormGroup.value[2]['id'],
+        const editAppointment: EditAppointmentCommand = {
+            AppointmentId: this.dischargeFormGroup.value[2]['id'],
             AppointmentDate: this.dischargeFormGroup.value[2]['nextAppointmentDate']
-            ? moment(this.dischargeFormGroup.value[2]['nextAppointmentDate']).toDate() : null,
+                ? moment(this.dischargeFormGroup.value[2]['nextAppointmentDate']).toDate() : null,
             Description: this.dischargeFormGroup.value[2]['remarks'],
-        }
+            UserId: this.userId,
+            PatientId: this.patientId,
+            PatientMasterVisitId: this.patientMasterVisitId,
+            DifferentiatedCareId: null,
+            ReasonId: this.appointmentReasonId,
+            ServiceAreaId: this.serviceAreaId,
+            StatusId: this.appointmentStatusId
+        };
 
-      const updatePartnerTesting = this.matService.updatePartnerTesting(editPartnerTestingCommand);
-       const updatePatientDelivery = this.matService.updatePatientDeliveryInfo(editMotherDeliveryInfoCommand);
-       const updateAppointment = this.matService.updateNextAppointment(editAppointment);
-       const updateDiagnosis = this.matService.updateDiagnosis(editDiagnosisCommad);
-       const updateDrugInfo = this.matService.updateDrugAdministration(editDrugAdminCommand);
-       const patientCounselling = this.matService.updatePatientEducation(editCounsellingCommand)
-       const updateDischarge = this.matService.updateDischargeInfo(editPatientDischarge);
-       const updateRefferal =   this.matService.updatePatientReferral(editRefferalCommand);
+        const updatePartnerTesting = this.matService.updatePartnerTesting(editPartnerTestingCommand);
+        const updatePatientDelivery = this.matService.updatePatientDeliveryInfo(editMotherDeliveryInfoCommand);
+        const updateAppointment = this.matService.updateNextAppointment(editAppointment);
+        const updateDiagnosis = this.matService.updateDiagnosis(editDiagnosisCommad);
+        const updateDrugInfo = this.matService.updateDrugAdministration(editDrugAdminCommand);
+        const patientCounselling = this.matService.updatePatientEducation(editCounsellingCommand)
+        const updateDischarge = this.matService.updateDischargeInfo(editPatientDischarge);
+        const updateRefferal = this.matService.updatePatientReferral(editRefferalCommand);
 
-       forkJoin([
-        updateAppointment,
-        updateRefferal,
-        updateDrugInfo,
-        updateDischarge,
-        updatePatientDelivery,
-        updateDiagnosis,
-        patientCounselling,
-        updatePartnerTesting
-    ])
-        .subscribe(
-        (result) => {
-           console.log(`success `);
-           console.log(result);    
-           this.snotifyService.success('Maternity details updated sucessfully', 'Maternity', this.notificationService.getConfig());
+        forkJoin([
+            updateAppointment,
+            updateRefferal,
+            updateDrugInfo,
+            updateDischarge,
+            updatePatientDelivery,
+            updateDiagnosis,
+            patientCounselling,
+            updatePartnerTesting
+        ])
+            .subscribe(
+                (result) => {
+                    this.snotifyService.success('Maternity details updated sucessfully', 'Maternity', this.notificationService.getConfig());
 
-           this.zone.run(() => {
-            this.router.navigate(['/dashboard/personhome/' + this.personId], { relativeTo: this.route });
-        });
-        },(err)=>{
-            this.snotifyService.error('Error occured updating maternity details ', 'Maternity', this.notificationService.getConfig());
-             console.log(err +' Error occured updating maternity details') 
-        },()=>{
+                    this.zone.run(() => {
+                        this.router.navigate(['/dashboard/personhome/' + this.personId], { relativeTo: this.route });
+                    });
+                }, (err) => {
+                    this.snotifyService.error('Error occured updating maternity details ', 'Maternity',
+                        this.notificationService.getConfig());
+                }, () => {
 
-        })
-}
+                });
+    }
 
     private sendPatientDeliveryInfoRequest(deliveryCommand: MaternityDeliveryCommand, babyConditionInfo: any) {
         this.matService.savePatientDelivery(deliveryCommand).subscribe(
             (res) => {
 
                 this.deliveryId = res['patientDeliveryId'];
-                console.log('patient DeliveryID:' + this.deliveryId);
                 for (let i = 0; i < babyConditionInfo.DeliveredBabyBirthInfoCollection.length; i++) {
                     babyConditionInfo.DeliveredBabyBirthInfoCollection[i].PatientDeliveryInformationId = this.deliveryId;
                 }
-                console.log(`result`, res);
-                console.log(babyConditionInfo);
                 const matBabyCondition = this.matService.saveBabySection(babyConditionInfo).subscribe(
                     (re) => {
-                        console.log(`Baby Delivery Information`);
-                        console.log(res);
                     },
                     (er) => {
-                        console.log(`error ` + er);
                     },
                     () => {
                         this.snotifyService.success('Successfully saved Maternity encounter ', 'Maternity',
@@ -869,31 +867,26 @@ export class MaternityComponent implements OnInit {
 
     private sendVisitDetailsRequest(visitDetailsCommand: VisitDetailsCommand) {
         this.matService.saveVisitDetails(visitDetailsCommand).subscribe((result) => {
-            console.log('Patient visit details added succesfully');
         },
             (err) => {
-                console.log('An error occured while adding patient visit details', err);
-
             }, () => {
 
             });
     }
 
-
-    babyDetailsValid : boolean = true;
-    public validateBabyDetails(stepper : MatStepper)
-    {
-        if(!this.isEdit && this.addedBabyDetails.length == 0)
-           this.babyDetailsValid = false;
-         else
+    public validateBabyDetails(stepper: MatStepper) {
+        if (!this.isEdit && this.addedBabyDetails.length == 0) {
+            this.babyDetailsValid = false;
+        } else {
             this.babyDetailsValid = true;
+        }
 
-        if(this.babyDetailsValid)
-         stepper.next()
-         else
-         this.snotifyService.error('Please fill in the baby section before proceeding','Baby Section',this.notificationService.getConfig());
-
-        console.log("MAt stpper clicked " + this.babyDetailsValid)
+        if (this.babyDetailsValid) {
+            stepper.next();
+        } else {
+            this.snotifyService.error('Please fill in the baby section before proceeding',
+                'Baby Section', this.notificationService.getConfig());
+        }
     }
 
 

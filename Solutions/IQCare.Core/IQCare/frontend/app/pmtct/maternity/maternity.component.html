@@ -21,8 +21,8 @@
                                         <app-mother-profile [patientId]="patientId" [visitDate]="visitDate"
                                             (notify)="OnMotherProfileNotify($event)"></app-mother-profile>
                                         <div>
-                                            <button mat-raised-button color="accent" matStepperNext type="button"
-                                                (click)="log()">Next</button>
+                                            <button mat-raised-button color="accent" matStepperNext
+                                                type="button">Next</button>
                                         </div>
                                     </mat-step>
                                     <mat-step [completed]="false" [stepControl]="diagnosisFormGroup">
@@ -72,8 +72,8 @@
                                             <button mat-raised-button color="primary" matStepperPrevious
                                                 type="button">Previous</button>
                                             &nbsp;&nbsp;
-                                            <button mat-raised-button color="accent" (click) ="validateBabyDetails(stepper)"
-                                                type="button">Next</button>
+                                            <button mat-raised-button color="accent"
+                                                (click)="validateBabyDetails(stepper)" type="button">Next</button>
                                         </div>
                                     </mat-step>
 

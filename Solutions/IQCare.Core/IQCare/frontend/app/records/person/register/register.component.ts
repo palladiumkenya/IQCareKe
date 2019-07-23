@@ -274,6 +274,22 @@ export class RegisterComponent implements OnInit {
         if (setDobPrecision) {
             this.formArray['controls'][0]['controls']['DobPrecision'].setValue(1);
         }
+
+        this.validateRegistrationDate();
+    }
+
+    validateRegistrationDate(): void {
+        const regDate = this.formArray['controls'][0]['controls']['registrationDate'].value;
+        const dob = this.formArray['controls'][0]['controls']['DateOfBirth'].value;
+        if (regDate && dob) {
+            const isBefore = moment(regDate).isBefore(dob);
+            if (isBefore) {
+                this.formArray['controls'][0]['controls']['registrationDate'].setValue('');
+                this.snotifyService.error('Registration Date should not be before the date of Birth',
+                    'Registration', this.notificationService.getConfig());
+                return;
+            }
+        }
     }
 
     estimateDob() {
@@ -332,6 +348,8 @@ export class RegisterComponent implements OnInit {
 
         this.formArray['controls'][0]['controls']['DateOfBirth'].setValue(moment(dob).toDate());
         this.formArray['controls'][0]['controls']['DobPrecision'].setValue(0);
+
+        this.validateRegistrationDate();
     }
 
     onCountyChange() {
@@ -612,7 +630,6 @@ export class RegisterComponent implements OnInit {
                                     return;
                                 }
 
-                                console.log(data);
                                 this.zone.run(() => {
                                     this.router.navigate(['/dashboard/personhome/' + data[0]['id']], { relativeTo: this.route });
                                 });

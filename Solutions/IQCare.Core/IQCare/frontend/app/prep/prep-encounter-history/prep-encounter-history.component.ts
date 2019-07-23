@@ -157,8 +157,7 @@ export class PrepEncounterHistoryComponent implements OnInit {
                         + this.services[index]['code']],
                         { relativeTo: this.route });
                 });
-            }
-            else {
+            } else {
 
                 localStorage.removeItem('personId');
                 localStorage.removeItem('patientId');
