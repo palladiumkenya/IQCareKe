@@ -2,6 +2,7 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="IQCareContentPlaceHolder" runat="server">
     <div class="linelistwrap">
+        <asp:Button ID="btnExcel" CssClass="btn btn-warning" runat="server" Font-Bold="true" OnClick="btnExcel_Click" Text="Export to Excel" />
         <div class="col-md-12 col-sm-12 col-xs-12 form-group" id="PatientSearch" style="border: 1px solid #808080;overflow-x:scroll;">
             <table id="dtlPatientLineList" class="display" style="cursor: pointer;width: 100%;">
                 <thead>

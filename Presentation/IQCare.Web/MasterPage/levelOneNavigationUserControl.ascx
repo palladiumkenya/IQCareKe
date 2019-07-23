@@ -31,7 +31,7 @@
     {
         color: #777;
     }
-
+    .navbar-default{background-image: none;box-shadow: none;background-color:#FCFCFC;border: 0px;background-image:none;}
 </style>
 <!-- .start menu building here -->
 <%-- <div class="row bg-primary">--%>
@@ -44,7 +44,7 @@
                 <span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span><span
                     class="icon-bar"></span><span class="icon-bar"></span>
             </button>
-            <div class="navbar-brand" href="#" style="text-decoration: none">
+            <div class="navbar-brand" href="#" style="text-decoration: none;margin-top: -15px;">
                 <span class="fa-stack fa-lg"><i class="fa fa-circle fa-stack-1x"></i><i class="fa fa-code-fork fa-stack-1x fa-inverse">
                 </i></span><span class="text-muted small">IQCARE KE-HMIS</span>
             </div>

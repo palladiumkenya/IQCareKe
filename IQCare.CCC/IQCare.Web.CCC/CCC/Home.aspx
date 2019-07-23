@@ -195,7 +195,7 @@
                                 <div class="reporting-col"></div>
                                 <div class="defaults90-col">
                                     <div class="defaults90-head reporting-head">
-                                        Defaulters (31 - 90)
+                                        LTFU (31 - 90)
                                     </div>
                                     <div class="defaults90-body reporting-body">
                                         <a href="Patient/PatientLinelist.aspx" id="seconddefaulterslink"><i class="fa fa-users" aria-hidden="true"></i> <span id="secondstagedef">Loading...</span></a>
@@ -204,7 +204,7 @@
                                 <div class="reporting-col"></div>
                                 <div class="ltfu-col">
                                     <div class="ltfu-head reporting-head">
-                                        LTFU
+                                        LTFU (Above 90)
                                     </div>
                                     <div class="ltfu-body reporting-body">
                                         <a href="Patient/PatientLinelist.aspx" id="ltfulink"><i class="fa fa-users" aria-hidden="true"></i> <span id="ltfu">Loading...</span></a>

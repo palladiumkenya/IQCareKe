@@ -56,7 +56,7 @@ namespace IQCare.Web.CCC.WebService
             foreach (DataRow items in theDT.Rows)
             {
                 n = n + 1;
-                string[] i = new string[13] { n.ToString(), items["IdentifierValue"].ToString(), items["FirstName"].ToString(), items["MidName"].ToString(), items["LastName"].ToString(), items["MobileNumber"].ToString(), Convert.ToDateTime(items["DispensedByDate"]).ToString("dd-MMM-yyyy"), items["Abbreviation"].ToString(), Convert.ToDateTime(items["ExpectedReturn"]).ToString("dd-MMM-yyyy"), items["Due"].ToString(), items["TracingStatus"].ToString(), items["PID"].ToString(), items["personid"].ToString() };
+                string[] i = new string[13] { n.ToString(), items["CCCNumber"].ToString(), items["FirstName"].ToString(), items["MiddleName"].ToString(), items["LastName"].ToString(), items["MobileNumber"].ToString(), Convert.ToDateTime(items["DispenseDate"]).ToString("dd-MMM-yyyy"), items["Drug"].ToString(), Convert.ToDateTime(items["ExpectedReturn"]).ToString("dd-MMM-yyyy"), items["DaysOverDue"].ToString(), items["Traced"].ToString(), items["PID"].ToString(), items["personid"].ToString() };
                 rows.Add(i);
             }
             return rows;
@@ -83,7 +83,7 @@ namespace IQCare.Web.CCC.WebService
             foreach (DataRow items in theDT.Rows)
             {
                 n = n + 1;
-                string[] i = new string[13] { n.ToString(), items["IdentifierValue"].ToString(), items["FirstName"].ToString(), items["MidName"].ToString(), items["LastName"].ToString(), items["MobileNumber"].ToString(), Convert.ToDateTime(items["DispensedByDate"]).ToString("dd-MMM-yyyy"), items["Abbreviation"].ToString(), Convert.ToDateTime(items["ExpectedReturn"]).ToString("dd-MMM-yyyy"), items["Due"].ToString(), items["TracingStatus"].ToString(), items["PID"].ToString(), items["personid"].ToString() };
+                string[] i = new string[13] { n.ToString(), items["CCCNumber"].ToString(), items["FirstName"].ToString(), items["MiddleName"].ToString(), items["LastName"].ToString(), items["MobileNumber"].ToString(), Convert.ToDateTime(items["DispenseDate"]).ToString("dd-MMM-yyyy"), items["Drug"].ToString(), Convert.ToDateTime(items["ExpectedReturn"]).ToString("dd-MMM-yyyy"), items["DaysOverDue"].ToString(), items["Traced"].ToString(), items["PID"].ToString(), items["personid"].ToString() };
                 rows.Add(i);
             }
             return rows;
@@ -104,13 +104,13 @@ namespace IQCare.Web.CCC.WebService
         public ArrayList getseconddefaultersll(string reportingdate, int mindays, int maxdays)
         {
             ReportingResultsManager reportingLogic = new ReportingResultsManager();
-            DataTable theDT = reportingLogic.getfirstdefaulters(Convert.ToDateTime(reportingdate), mindays, maxdays);
+            DataTable theDT = reportingLogic.getseconddefaulters(Convert.ToDateTime(reportingdate), mindays, maxdays);
             ArrayList rows = new ArrayList();
             int n = 0;
             foreach (DataRow items in theDT.Rows)
             {
                 n = n + 1;
-                string[] i = new string[13] { n.ToString(), items["IdentifierValue"].ToString(), items["FirstName"].ToString(), items["MidName"].ToString(), items["LastName"].ToString(), items["MobileNumber"].ToString(), Convert.ToDateTime(items["DispensedByDate"]).ToString("dd-MMM-yyyy"), items["Abbreviation"].ToString(), Convert.ToDateTime(items["ExpectedReturn"]).ToString("dd-MMM-yyyy"), items["Due"].ToString(), items["TracingStatus"].ToString(), items["PID"].ToString(), items["personid"].ToString() };
+                string[] i = new string[13] { n.ToString(), items["CCCNumber"].ToString(), items["FirstName"].ToString(), items["MiddleName"].ToString(), items["LastName"].ToString(), items["MobileNumber"].ToString(), Convert.ToDateTime(items["DispenseDate"]).ToString("dd-MMM-yyyy"), items["Drug"].ToString(), Convert.ToDateTime(items["ExpectedReturn"]).ToString("dd-MMM-yyyy"), items["DaysOverDue"].ToString(), items["Traced"].ToString(), items["PID"].ToString(), items["personid"].ToString() };
                 rows.Add(i);
             }
             return rows;
@@ -137,7 +137,7 @@ namespace IQCare.Web.CCC.WebService
             int n = 0;
             foreach (DataRow items in theDT.Rows)
             {
-                string[] i = new string[13] { n.ToString(), items["IdentifierValue"].ToString(), items["FirstName"].ToString(), items["MidName"].ToString(), items["LastName"].ToString(), items["MobileNumber"].ToString(), Convert.ToDateTime(items["DispensedByDate"]).ToString("dd-MMM-yyyy"), items["Abbreviation"].ToString(), Convert.ToDateTime(items["ExpectedReturn"]).ToString("dd-MMM-yyyy"), items["Due"].ToString(), items["TracingStatus"].ToString(), items["PID"].ToString(), items["personid"].ToString() };
+                string[] i = new string[13] { n.ToString(), items["CCCNumber"].ToString(), items["FirstName"].ToString(), items["MiddleName"].ToString(), items["LastName"].ToString(), items["MobileNumber"].ToString(), Convert.ToDateTime(items["DispenseDate"]).ToString("dd-MMM-yyyy"), items["Drug"].ToString(), Convert.ToDateTime(items["ExpectedReturn"]).ToString("dd-MMM-yyyy"), items["DaysOverDue"].ToString(), items["Traced"].ToString(), items["PID"].ToString(), items["personid"].ToString() };
                 rows.Add(i);
             }
             return rows;

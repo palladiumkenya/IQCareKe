@@ -508,7 +508,7 @@
     }
     $(document).ready(function () {
         var PatientMasterVisitId = GetURLParameter('visitId');
-        var patientId = '<%=PatientId%>';
+        var patientId = GetURLParameter('pid');
 
   var SRNQuestion1='<%=Session2Refferal1ItemId%>';
         var SRNQuestion3 = '<%=Session2Refferal3ItemId%>';

@@ -43,7 +43,9 @@
                         </asp:MenuItem>
                         <asp:MenuItem Text="IQTools Reports" Value="IQTools Reports" NavigateUrl="~/IQTools/frmTemplateReport.aspx">
                         </asp:MenuItem>
-                        <asp:MenuItem Text="Clinical Indicators" Value="Clinical Indicators" NavigateUrl="~/IQTools/frmLinearReport.aspx">
+                        <asp:MenuItem Text="Clinical Indicatorss" Value="Clinical Indicators" NavigateUrl="~/IQTools/frmLinearReport.aspx">
+                        </asp:MenuItem>
+                        <asp:MenuItem Text="IQCare Indicator Reports" Value="IQCare Indicator Reports" NavigateUrl="~/CCC/IQCareReports/IQCareReportsHome.aspx">
                         </asp:MenuItem>
                     </asp:MenuItem>
                     <asp:MenuItem Text="<i class='fa fa-calendar fa-1x text-muted' aria-hidden='true'></i> <span class='fa-1x text-muted'> <strong>Scheduler</strong></span>"

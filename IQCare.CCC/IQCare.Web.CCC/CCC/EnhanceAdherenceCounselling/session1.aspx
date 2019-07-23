@@ -1,5 +1,4 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="True" CodeBehind="session1.aspx.cs" Inherits="IQCare.Web.CCC.UC.EnhanceAdherenceCounselling.session1" %>
-<!--<%@ OutputCache duration="86400" varybyparam="none" %>-->
 <style>
     .disabled {
     color: darkgray;
@@ -21,7 +20,7 @@
 		    <div class="panel panel-info">
 			    <div class="panel-body">
 				    <div class="col-md-12 form-group">
-					    <label class="control-label pull-left"><span class="text-primary">Pill Adherence</span></label>
+					    <label class="control-label pull-left"><span class="text-primary">Pill -Adherence</span></label>
 				    </div>
                     <div class="col-md-12 form-group" id="pillcount">
                         <asp:PlaceHolder ID="PHPreviousCount" runat="server"></asp:PlaceHolder>
@@ -382,7 +381,6 @@
         if (PatientMasterVisitId > 0
            // && pagehash != ""
         ) {
-            alert(patientId);
             $.ajax({
                 type: "POST",
                 url: "../WebService/PatientClinicalNotesService.asmx/getPatientNotesByVisitId",
