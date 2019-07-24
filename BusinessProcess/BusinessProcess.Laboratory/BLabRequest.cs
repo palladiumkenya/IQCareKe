@@ -410,6 +410,12 @@ namespace BusinessProcess.Laboratory
             order.DeletedBy = userId;
             order.DeleteReason = deleteReason;
             repo.Delete(order);
+
+            ClsObject obj = new ClsObject();
+            ClsUtility.Init_Hashtable();
+            ClsUtility.AddExtendedParameters("@LabOrderId", SqlDbType.Int, labOrderId);
+
+            int rowCount = (int)obj.ReturnObject(ClsUtility.theParams, "PatientLabTracker_Delete_LabOrder", ClsUtility.ObjectEnum.ExecuteNonQuery);
         }
     }
 }

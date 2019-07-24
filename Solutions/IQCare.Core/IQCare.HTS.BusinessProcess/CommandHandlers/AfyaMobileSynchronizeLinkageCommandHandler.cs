@@ -50,7 +50,16 @@ namespace IQCare.HTS.BusinessProcess.CommandHandlers
                     var identifiers = await registerPersonService.getPersonIdentifiers(afyaMobileId, 10);
                     if (identifiers.Count > 0)
                     {
-                        DateTime dateLinkageEnrolled = DateTime.ParseExact(request.LINKAGE.DATE_ENROLLED, "yyyyMMdd", null);
+                        DateTime dateLinkageEnrolled = DateTime.Now;
+                        try
+                        {
+                            dateLinkageEnrolled = DateTime.ParseExact(request.LINKAGE.DATE_ENROLLED, "yyyyMMdd", null);
+                        }
+                        catch (Exception e)
+                        {
+                            Log.Error($"Could not parse linkage DATE_ENROLLED: {request.LINKAGE.DATE_ENROLLED} as a valid date: Incorrect format, date should be in the following format yyyyMMdd");
+                            throw new Exception($"Could not parse linkage DATE_ENROLLED: {request.LINKAGE.DATE_ENROLLED} as a valid date: Incorrect format, date should be in the following format yyyyMMdd");
+                        }
                         string linkageCCCNumber = request.LINKAGE.CCC_NUMBER;
                         string linkageFacility = request.LINKAGE.FACILITY;
                         string healthWorker = request.LINKAGE.HEALTH_WORKER;
@@ -61,7 +70,15 @@ namespace IQCare.HTS.BusinessProcess.CommandHandlers
                         DateTime? artstartDate = null;
                         if (!string.IsNullOrWhiteSpace(ARTStartDate))
                         {
-                            artstartDate = DateTime.ParseExact(ARTStartDate, "yyyyMMdd", null);
+                            try
+                            {
+                                artstartDate = DateTime.ParseExact(ARTStartDate, "yyyyMMdd", null);
+                            }
+                            catch (Exception e)
+                            {
+                                Log.Error($"Could not parse linkage ARTStartDate: {request.LINKAGE.ARTStartDate} as a valid date: Incorrect format, date should be in the following format yyyyMMdd");
+                                throw new Exception($"Could not parse linkage ARTStartDate: {request.LINKAGE.ARTStartDate} as a valid date: Incorrect format, date should be in the following format yyyyMMdd");
+                            }
                         }
 
                         var previousLinkage = await encounterTestingService.GetPersonLinkage(identifiers[0].PersonId);

@@ -21,6 +21,7 @@ namespace IQCare.Web.CCC.WebService
     [System.Web.Script.Services.ScriptService]
     public class PatientClinicalNotesService : System.Web.Services.WebService
     {
+        
 
         private string Msg { get; set; }
         private int Result { get; set; }
@@ -246,6 +247,7 @@ namespace IQCare.Web.CCC.WebService
         public string getPatientNotesByVisitId(int PatientId, int PatientMasterVisitId)
         {
             var PCN = new PatientClinicalNotesLogic();
+            PatientId = int.Parse(HttpContext.Current.Session["PatientPK"].ToString());
             //PatientClinicalNotes[] patientNotesData = (PatientClinicalNotes[])Session["patientNotesData"];
             PatientClinicalNotes[] patientNotesData = PCN.getPatientClinicalNotesByVisitId(Convert.ToInt32(Session["PatientPK"]), PatientMasterVisitId).ToArray();
             string jsonNotesObject = "[]";

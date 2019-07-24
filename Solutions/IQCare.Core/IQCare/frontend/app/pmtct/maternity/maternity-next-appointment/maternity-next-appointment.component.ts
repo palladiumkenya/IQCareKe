@@ -26,7 +26,7 @@ export class MaternityNextAppointmentComponent implements OnInit {
     constructor(private formBuilder: FormBuilder,
         private notificationService: NotificationService,
         private snotifyService: SnotifyService,
-        private dataService : DataService,
+        private dataService: DataService,
         private pncservice: PncService) {
     }
 
@@ -37,10 +37,10 @@ export class MaternityNextAppointmentComponent implements OnInit {
             id: new FormControl('')
         });
 
-         this.dataService.visitDate.subscribe(date=>{
-             this.minDate = date;
-             console.log(date + ' Miiin Date')
-         });
+        this.dataService.visitDate.subscribe(date => {
+            this.minDate = date;
+            console.log(date + ' Miiin Date')
+        });
 
         this.notify.emit(this.nextAppointmentFormGroup);
 

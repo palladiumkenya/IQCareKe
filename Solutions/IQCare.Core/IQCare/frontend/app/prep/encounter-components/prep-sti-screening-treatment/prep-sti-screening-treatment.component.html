@@ -1,0 +1,99 @@
+<form class="form-group" [formGroup]="STIScreeningForm">
+    <div class="row">
+        <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12">
+            <div class="form-title">
+                <span class="mat-accent"> STI Screening and Treatment </span>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-3 col-sm-3 col-xs-12">
+                <mat-form-field class="col-md-12">
+                    <mat-label>Visit Date</mat-label>
+                    <input formControlName="visitDate" [max]="maxDate" id="visitDate" name="visitDate" matInput
+                        (focus)="visitDate.open()" [matDatepicker]="visitDate">
+                    <mat-datepicker-toggle matSuffix [for]="visitDate"></mat-datepicker-toggle>
+                    <mat-datepicker #visitDate></mat-datepicker>
+                </mat-form-field>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-3 col-sm-3 col-xs-12">
+                <mat-form-field class="col-lg-12 col-sm-12 col-xs-12">
+                    <mat-label>Client has signs/symptioms of STI?</mat-label>
+                    <mat-select id="signsOrSymptomsOfSTI" name="signsOrSymptomsOfSTI"
+                        formControlName="signsOrSymptomsOfSTI" required>
+                        <mat-option [value]=""></mat-option>
+                        <mat-option *ngFor="let yesnoOption of yesnoOptions" [value]="yesnoOption.itemId"
+                            (onSelectionChange)="onSignsOrSymptomsSelection($event)">
+                            {{ yesnoOption.itemName }}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+
+            <div class="col-lg-3 col-sm-3 col-xs-12">
+                <mat-form-field class="col-lg-12 col-sm-12 col-xs-12">
+                    <mat-label>Select</mat-label>
+                    <mat-select formControlName="signsOfSTI" id="signsOfSTI" name="signsOfSTI">
+                        <mat-option *ngFor="let stiScreeningOption of stiScreeningOptions"
+                            [value]="stiScreeningOption.itemId">
+                            {{stiScreeningOption.itemDisplayName}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+        </div>
+
+        <div class="row">&nbsp;</div>
+
+        <div class="row">
+            <div class="col-lg-3 col-sm-3 col-xs-12">
+                <mat-form-field class="col-lg-12 col-sm-12 col-xs-12">
+                    <mat-label>Refer for Lab Investigation?</mat-label>
+                    <mat-select id="stiReferredLabInvestigation" name="stiReferredLabInvestigation"
+                        formControlName="stiReferredLabInvestigation" required>
+                        <mat-option [value]=""></mat-option>
+                        <mat-option *ngFor="let yesnoOption of yesnoOptions" [value]="yesnoOption.itemId"
+                            (onSelectionChange)="onReferLabSelection($event)">
+                            {{ yesnoOption.itemName }}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+
+            <div class="col-lg-6 col-sm-6 col-xs-12">
+                <span class="col-lg-6 col-sm-6 col-xs-12" *ngIf="hasLabBeenOrdered">
+                    <a href="/frontend/clinical/completeorder/{{ patientId }}/{{ personId }}" target=" _blank"
+                        style="text-decoration: underline;">
+                        Lab Order Form
+                    </a>
+                </span>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-3 col-sm-3 col-xs-12">
+                <mat-form-field class="col-lg-12 col-sm-12 col-xs-12">
+                    <mat-label>STI Treatment offered?</mat-label>
+                    <mat-select id="stiTreatmentOffered" name="stiTreatmentOffered"
+                        formControlName="stiTreatmentOffered" required>
+                        <mat-option [value]=""></mat-option>
+                        <mat-option *ngFor="let yesnoOption of yesnoOptions" [value]="yesnoOption.itemId"
+                            (onSelectionChange)="onSTITreatmentelection($event)">
+                            {{ yesnoOption.itemName }}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+            <div class="col-lg-6 col-sm-6 col-xs-12">
+                <span class="col-lg-6 col-sm-6 col-xs-12" *ngIf="hasPharmacyBeenOrdered">
+                    <a (click)="onPharmacyClick()" style="text-decoration: underline;">
+                        Pharmacy Order Form
+                    </a>
+                </span>
+            </div>
+        </div>
+    </div>
+</form>

@@ -1,0 +1,45 @@
+<div class="row">
+    <div class="col-lg-12 col-sm-12 col-xs-12">
+        <div class="widget">
+            <div class="widget-header bordered-bottom bordered-blue">
+                <span class="widget-caption">Re-Enrollment</span>
+            </div>
+            <div class="widget-body">
+                <div>
+                    <form [formGroup]="formGroup">
+                        <fieldset>
+                            <div class="row">
+                                <div class="col-lg-3 col-sm-3 col-xs-12">
+                                    <mat-form-field>
+                                        <input placeholder="ReEnrollment Date" matInput [matDatepicker]="myDatepicker"
+                                            [max]="maxDate" [min]="minDate" (focus)="myDatepicker.open()"
+                                            formControlName="ReEnrollmentDate" required>
+                                        <mat-datepicker-toggle matSuffix [for]="myDatepicker"></mat-datepicker-toggle>
+                                        <mat-datepicker #myDatepicker name="ReEnrollmentDate" ngDefaultControl>
+                                        </mat-datepicker>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+
+
+                            <div class="row">
+                                &nbsp;&nbsp;
+                            </div>
+
+                            <div class="row"> 
+                                <div class="col-md-4 col-xs-12 col-sm-12">
+                                    <button mat-raised-button color="primary" type="submit"
+                                        (click)="submitReEnrollment()">Submit</button>
+                                </div>
+                                <div class="col-md-4 col-xs-12 col-sm-12">
+                                    <button mat-raised-button class="mat-warn" type="submit"
+                                        (click)="cancel()">Cancel</button>
+                                </div>
+                            </div>
+                        </fieldset>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

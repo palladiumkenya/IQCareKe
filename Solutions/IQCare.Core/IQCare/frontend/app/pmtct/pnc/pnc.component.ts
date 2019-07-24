@@ -4,7 +4,6 @@ import { PatientDiagnosisCommand } from './../_models/PatientDiagnosisCommand';
 import { HivTestsCommand } from './../_models/HivTestsCommand';
 import { LookupItemService } from './../../shared/_services/lookup-item.service';
 import { HivStatusCommand } from './../_models/HivStatusCommand';
-import { PncVisitDetailsCommand } from './../_models/PncVisitDetailsCommand';
 import { PncService } from './../_services/pnc.service';
 import { LookupItemView } from './../../shared/_models/LookupItemView';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -803,9 +802,9 @@ export class PncComponent implements OnInit {
             UserId: this.userId
         };
 
-        console.log(this.drugAdministration_PartnerTesting_FormGroup);
+        /*console.log(this.drugAdministration_PartnerTesting_FormGroup);
         console.log(this.drugAdministrationCategories);
-        console.log(this.administeredInfantDrugs);
+        console.log(this.administeredInfantDrugs);*/
 
         for (let i = 0; i < this.drugAdministrationCategories.length; i++) {
             let value;

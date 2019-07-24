@@ -1,0 +1,309 @@
+<div class="row">
+    <div class="col-lg-12 col-sm-12 col-xs-12">
+        <!--<app-personbrief>
+        </app-personbrief>-->
+    </div>
+</div>
+<div class="col-lg-12 col-sm-12 col-xs-12">
+    <div class="widget">
+        <div class="widget-header bordered-bottom bordered-blue">
+            <span class="widget-caption">PREP Initiation</span>
+        </div>
+        <div class="widget-body">
+            <form [formGroup]="form">
+                <fieldset>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-title">
+                                <span class="primary">
+                                    Initiation Details
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-12 col-sm-12 col-xs-12">
+                            <div class="col-lg-3 col-sm-3 col-xs-12">
+                                <mat-form-field class="col-lg-12 col-sm-12 col-xs-12">
+                                    <mat-label>IS Client Transfer In</mat-label>
+                                    <mat-select formControlName="ClientTransferIn">
+                                        <mat-option [value]=""></mat-option>
+                                        <mat-option *ngFor="let clientType of  ClientTypes"
+                                            (onSelectionChange)="TransferIn($event)" [value]="clientType.itemId">
+                                            {{clientType.itemDisplayName}}</mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                            </div>
+                            <div class="col-lg-3 col-sm-3 col-xs-12">
+                                <mat-form-field class="col-lg-12 col-sm-12 col-xs-12">
+                                    <mat-label>Referred From</mat-label>
+                                    <mat-select formControlName="Referredfrom">
+                                        <mat-option [value]=""></mat-option>
+                                        <mat-option *ngFor="let entrypoint of entrypoints" [value]="entrypoint.itemId">
+                                            {{entrypoint.itemName}}</mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-12 col-sm-12 col-xs-12">
+                            <div class="col-lg-3 col-sm-3 col-xs-12">
+                                <mat-form-field class="col-lg-12 col-sm-12 col-xs-12">
+                                    <input placeholder="Enrollment Date" matInput [matDatepicker]="myDatepicker"
+                                        [max]="maxDate" [min]="minDate" (focus)="myDatepicker.open()"
+                                        formControlName="EnrollmentDate" required>
+                                    <mat-datepicker-toggle matSuffix [for]="myDatepicker"></mat-datepicker-toggle>
+                                    <mat-datepicker #myDatepicker name="EnrollmentDate" ngDefaultControl>
+                                    </mat-datepicker>
+                                </mat-form-field>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-12 col-sm-12 col-xs-12">
+
+                            <div class="col-lg-3 col-sm-3 col-xs-12">
+                                <mat-form-field class="col-lg-12 col-sm-12 col-xs-12">
+                                    <mat-label>MFLCode</mat-label>
+                                    <input matInput id="MFLCode" formControlName="MFLCode" name="MFLCode" type="number">
+                                </mat-form-field>
+                            </div>
+                            <div class="col-lg-3 col-sm-3 col-xs-12">
+                                <mat-form-field class="col-lg-12 col-sm-12 col-xs-12">
+
+                                    <mat-label>Year</mat-label>
+                                    <mat-select formControlName="Year">
+                                        <mat-option [value]=""></mat-option>
+                                        <mat-option *ngFor="let yrs of  years" [value]="yrs">
+                                            {{yrs}}</mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                            </div>
+                            <div class="col-lg-3 col-sm-3 col-xs-12">
+                                <mat-form-field class="col-lg-12 col-sm-12 col-xs-12">
+                                    <mat-label>Prep Number</mat-label>
+                                    <input matInput id="PREP_EnrollmentNumber" formControlName="EnrollmentNumber"
+                                        name="PREP_EnrollmentNumber" type="number" required>
+                                    <span>
+                                        <div *ngIf="form.controls.EnrollmentNumber.errors && (form.controls.EnrollmentNumber.dirty || form.controls.EnrollmentNumber.touched)"
+                                            class="alert alert-danger">
+                                            <div [hidden]="!form.controls.EnrollmentNumber.errors.required">
+                                                Enrollment Number is required!
+                                            </div>
+                                            <div [hidden]="!form.controls.EnrollmentNumber.errors.pattern">
+                                                Enrollment number must be 5 digits!
+                                            </div>
+                                        </div>
+                                    </span>
+                                </mat-form-field>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row" *ngIf="isVisible">
+                        <div class="col-md-12">
+                            <div class="form-title">
+                                <span class="primary">
+                                    Transfer Status(Active only if transfer in is yes)
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row" *ngIf="isVisible">
+                        <div class="col-lg-12 col-sm-12 col-xs-12">
+                            <div class="col-lg-3 col-sm-3 col-xs-12">
+                                <mat-form-field class="col-lg-12 col-sm-12 col-xs-12">
+                                    <input placeholder="Transfer In Date" matInput [matDatepicker]="TransferDatepicker"
+                                        [max]="maxDate" (focus)="TransferDatepicker.open()"
+                                        formControlName="TransferInDate">
+                                    <mat-datepicker-toggle matSuffix [for]="TransferDatepicker"></mat-datepicker-toggle>
+                                    <mat-datepicker #TransferDatepicker name="TransferInDate" ngDefaultControl>
+                                    </mat-datepicker>
+                                </mat-form-field>
+                            </div>
+
+
+                            <div class="col-lg-4 col-sm-4 col-xs-12">
+                                <mat-form-field class="col-lg-12 col-sm-12 col-xs-12">
+                                    <input type="text" matInput placeholder="Search Filter"
+                                        [formControl]="FacilitySelected" [matAutocomplete]="auto"
+                                        >
+
+                                    <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayfn" (optionSelected)="change($event)">
+                                         
+                                        <mat-option *ngFor="let facility of filteredfacilities"
+                                             [value]=" facility" >
+                                            {{facility.name}}
+                                        </mat-option>
+                                      
+                                    </mat-autocomplete>
+
+                                    <!-- <input matInput placeholder="Search Filter" (change)="onTextChanged($event)"
+                                        [formControl]="FacilitySelected">
+                                    <br />
+                                    <br />
+                                    <mat-label>Transfered From</mat-label>
+                                    <mat-select formControlName="FacilityListSelected"
+                                        (selectionChange)="change($event)">
+                                        <mat-option *ngFor="let facility of filteredfacilities |async"
+                                            [value]="facility.name">
+                                            {{facility.name}}
+                                        </mat-option>
+                                    </mat-select>-->
+
+                                </mat-form-field>
+                            </div>
+                            <div class="col-lg-3 col-sm-3 col-xs-12">
+                                <mat-form-field class="col-lg-12 col-sm-12 col-xs-12">
+                                    <mat-label>MFLCode</mat-label>
+                                    <input matInput id="TransferInMflCode" formControlName="TransferInMflCode"
+                                        name="TransferInMflCode" type="number">
+                                </mat-form-field>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="row" *ngIf="isVisible">
+                        <div class="col-lg-3 col-sm-3 col-xs-12">
+                            <mat-form-field class="col-lg-12 col-sm-12 col-xs-12">
+                                <mat-label>Current Regimen</mat-label>
+                                <mat-select formControlName="CurrentRegimen">
+                                    <mat-option [value]=""></mat-option>
+                                    <mat-option *ngFor="let regimen of PrepRegimen" [value]="regimen.itemId">
+                                        {{regimen.itemDisplayName}}</mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
+                    </div>
+                    <div class="row" *ngIf="isVisible">
+                        <div class="col-lg-3 col-sm-3 col-xs-12">
+                            <mat-form-field class="col-md-12">
+                                <textarea formControlName="ClinicalNotes" matInput
+                                    placeholder="Clinical Notes"></textarea>
+                            </mat-form-field>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-title">
+                                <span class="primary">
+                                    Client Social Status
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-3 col-sm-3 col-xs-12" *ngIf="isSchoolVisible">
+                            <mat-form-field class="col-lg-12 col-sm-12 col-xs-12">
+                                <mat-label>Attends School</mat-label>
+                                <mat-select formControlName="IsSchool">
+                                    <mat-option [value]="1">Yes</mat-option>
+                                    <mat-option [value]="0">No</mat-option>
+
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
+
+                        <div class="col-lg-3 col-sm-3 col-xs-12">
+                            <label>Select Population type</label>
+                            <div>
+                                <mat-radio-group class="col-lg-12 col-sm-12 col-xs-12" formControlName="populationType"
+                                    [required]="true" (change)="onPopulationTypeChange()">
+                                    <mat-radio-button [value]="1" required>General Population</mat-radio-button>
+                                    <mat-radio-button [value]="2" required>Key Population</mat-radio-button>
+                                    <mat-radio-button [value]="3" required>Discordant Couple</mat-radio-button>
+                                </mat-radio-group>
+                                <mat-error *ngIf="!form.controls.populationType.valid">
+                                    Please select Population Type
+                                </mat-error>
+                            </div>
+                        </div>
+
+
+                        <div class="col-lg-3 col-sm-3 col-xs-12">
+                            <mat-form-field>
+                                <mat-select class="col-lg-12 col-sm-12 col-xs-12" placeholder="Key Population"
+                                    formControlName="KeyPopulation" disableRipple multiple>
+                                    <mat-option *ngFor="let keyPop of keyPops" [value]="keyPop.itemId">
+                                        {{keyPop.itemDisplayName}}</mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
+
+                        <div class="col-lg-3 col-sm-3 col-xs-12">
+                            <mat-form-field>
+                                <mat-select class="col-lg-12 col-sm-12 col-xs-12" placeholder="Discordant Couple"
+                                    formControlName="DiscordantCouple" disableRipple multiple>
+                                    <mat-option *ngFor="let disPop of disPops" [value]="disPop.itemId">
+                                        {{disPop.itemDisplayName}}</mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
+
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-title">
+                                <span class="primary">
+                                    Historic Prep Information
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-lg-3 col-sm-3 col-xs-12">
+                            <mat-form-field class="col-lg-12 col-sm-12 col-xs-12">
+                                <mat-label>Previous Prep Use</mat-label>
+                                <mat-select formControlName="PrevPrepUse">
+                                    <mat-option (onSelectionChange)="changePrevUse($event)" [value]="1">Yes</mat-option>
+                                    <mat-option (onSelectionChange)="changePrevUse($event)" [value]="0">No</mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
+
+                        <div class="col-lg-3 col-sm-3 col-xs-12">
+
+                            <mat-form-field class="col-lg-12 col-sm-12 col-xs-12">
+                                <mat-label>Weeks</mat-label>
+                                <input matInput id="Weeks" formControlName="Weeks" name="Weeks" type="number">
+                            </mat-form-field>
+                        </div>
+
+                        <div class="col-lg-3 col-sm-3 col-xs-12">
+
+                            <mat-form-field class="col-lg-12 col-sm-12 col-xs-12">
+                                <mat-label>Months</mat-label>
+                                <input matInput id="Months" formControlName="Months" name="Months" type="number">
+                            </mat-form-field>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-3 col-sm-3 col-xs-12">
+                            <mat-form-field class="col-lg-12 col-sm-12 col-xs-12">
+                                <input placeholder="Initiation Date" matInput [matDatepicker]="inDatepicker"
+                                    [max]="maxDate" (focus)="inDatepicker.open()" formControlName="InitiationDate">
+                                <mat-datepicker-toggle matSuffix [for]="inDatepicker"></mat-datepicker-toggle>
+                                <mat-datepicker #inDatepicker name="InitiationDate" ngDefaultControl>
+                                </mat-datepicker>
+                            </mat-form-field>
+
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-3 col-sm-3 col-xs-12">
+                            <button mat-raised-button color="primary" type="submit" (click)="SaveValues()">
+                                Submit</button>
+                        </div>
+
+                        <div class="col-lg-3 col-sm-3 col-xs-12">
+                            <button mat-raised-button color="primary" type="submit" (click)="Cancel()">
+                                Cancel</button>
+                        </div>
+                    </div>
+                </fieldset>
+            </form>
+        </div>
+    </div>
+</div>

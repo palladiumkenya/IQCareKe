@@ -8,7 +8,6 @@ using IQCare.PMTCT.BusinessProcess.Commands.PreventiveServices;
 using IQCare.PMTCT.Services;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.CodeAnalysis.Semantics;
 using Serilog;
 using PatientPreventiveServiceCommand = IQCare.PMTCT.BusinessProcess.Commands.PatientPreventiveServiceCommand;
 

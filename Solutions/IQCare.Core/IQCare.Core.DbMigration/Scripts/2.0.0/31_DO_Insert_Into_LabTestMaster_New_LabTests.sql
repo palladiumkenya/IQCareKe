@@ -25,7 +25,7 @@ BEGIN
 INSERT INTO [dbo].[mst_LabTestMaster] ([ReferenceId],[Name] ,[IsGroup],[DepartmentId] ,[Active] ,[CreateDate] ,[DeleteFlag])
      VALUES  ('SPUTUM_AFB' ,'Sputum For AFB',0,6 ,1,GETDATE(),0)
 END
-IF NOT EXISTS (select * from Mst_LabTestMaster where ReferenceId='GENEXPERT' and Name ='GeneXpert' )
+IF NOT EXISTS (select * from Mst_LabTestMaster where ReferenceId='GENEXPERT' and (Name ='GeneXpert' OR Name = 'Gene Xpert'))
 BEGIN 
 INSERT INTO [dbo].[mst_LabTestMaster] ([ReferenceId],[Name] ,[IsGroup],[DepartmentId] ,[Active] ,[CreateDate] ,[DeleteFlag])
      VALUES 

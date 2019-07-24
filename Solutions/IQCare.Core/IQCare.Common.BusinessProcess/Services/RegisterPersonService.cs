@@ -194,7 +194,155 @@ namespace IQCare.Common.BusinessProcess.Services
                 throw e;
             }
         }
+        public async Task<PatientARVHistory> GetPatientARVHistory(int patientId, int patientMasterId)
+        {
+            try
+            {
+                var result = await _unitOfWork.Repository<PatientARVHistory>().
+                    Get(x => x.PatientId == patientId && x.PatientMasterVisitId == x.PatientMasterVisitId).ToListAsync();
+                return result.FirstOrDefault();
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
+        public async Task<PatientARVHistory> AddPatientARVHistory(PatientARVHistory po)
+        {
+            try
+            {
 
+
+                await _unitOfWork.Repository<PatientARVHistory>().AddAsync(po);
+                await _unitOfWork.SaveAsync();
+
+                return po;
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+
+        }
+
+        public async Task<PatientARVHistory> UpdatePatientARVHistory(PatientARVHistory po)
+        {
+            try
+            {
+                _unitOfWork.Repository<PatientARVHistory>().Update(po);
+                await _unitOfWork.SaveAsync();
+
+                return po;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw e;
+            }
+
+        }
+
+
+
+
+        public async Task<PatientTransferIn> GetPatientTransferIn(int patientId, int patientMasterId)
+        {
+            try
+            {
+                var result = await _unitOfWork.Repository<PatientTransferIn>().
+                    Get(x => x.PatientId == patientId && x.PatientMasterVisitId == x.PatientMasterVisitId).ToListAsync();
+                return result.FirstOrDefault();
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
+        public async Task<PatientTransferIn> AddPatientTransferIn(PatientTransferIn po)
+        {
+            try
+            {
+
+
+                await _unitOfWork.Repository<PatientTransferIn>().AddAsync(po);
+                await _unitOfWork.SaveAsync();
+
+                return po;
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+
+        }
+
+        public async Task<PatientTransferIn> UpdatePatientTransferIn(PatientTransferIn po)
+        {
+            try
+            {
+                _unitOfWork.Repository<PatientTransferIn>().Update(po);
+                await _unitOfWork.SaveAsync();
+
+                return po;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw e;
+            }
+
+        }
+
+
+        public async Task<PatientOVCStatus> GetPatientOVCStatusByPersonId(int personId)
+        {
+            try
+            {
+                var result = await _unitOfWork.Repository<PatientOVCStatus>()
+                    .Get(x => x.PersonId == personId).ToListAsync();
+
+                return result.FirstOrDefault();
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
+
+        public async Task<PatientOVCStatus> AddPatientOVCStatus(PatientOVCStatus po)
+        {
+            try
+            {
+                
+
+                await _unitOfWork.Repository<PatientOVCStatus>().AddAsync(po);
+                await _unitOfWork.SaveAsync();
+
+                return po;
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+
+        }
+
+        public async Task<PatientOVCStatus> UpdatePatientOVCStauts(PatientOVCStatus po )
+        {
+            try
+            {
+                _unitOfWork.Repository<PatientOVCStatus>().Update(po);
+                await _unitOfWork.SaveAsync();
+
+                return po;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw e;
+            }
+
+        }
         public async Task<PersonRelationship> GetPersonRelationshipByPatientIdPersonId(int patientId, int personId)
         {
             try
@@ -743,17 +891,30 @@ namespace IQCare.Common.BusinessProcess.Services
             }
         }
 
+        private static Random random = new Random();
+        public static string RandomString(int length)
+        {
+            const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+            return new string(Enumerable.Repeat(chars, length)
+                .Select(s => s[random.Next(s.Length)]).ToArray());
+        }
+
         public async Task<PatientIdentifier> EnrollPatient(string enrollmentNo, int patientId, int serviceAreaId, int createdBy, DateTime dateOfEnrollment)
         {
             try
             {
+                // generate a random alphabet prefix for hts
+                string originalEnrollmentNo = enrollmentNo;
+                if(serviceAreaId == 2)
+                    enrollmentNo = RandomString(6) + "-" + enrollmentNo;
+
                 var previouslyIdentifiers = await _unitOfWork.Repository<PatientIdentifier>().Get(y =>
                         y.IdentifierValue == enrollmentNo && y.IdentifierTypeId == 8)
                     .ToListAsync();
 
                 if (previouslyIdentifiers.Count > 0)
                 {
-                    var exception = new Exception("No: " + enrollmentNo + " already exists");
+                    var exception = new Exception("No: " + originalEnrollmentNo + " already exists");
                     throw exception;
                 }
 
@@ -818,7 +979,7 @@ namespace IQCare.Common.BusinessProcess.Services
         }
 
 
-        public async Task<List<MstPatient>> InsertIntoBlueCard(string firstName, string lastName, string midName, DateTime dateOfEnrollment, 
+        public async Task<List<MstPatient>> InsertIntoBlueCard(string firstName, string lastName, string midName, DateTime dateOfEnrollment, string patientEnrollmentID, int moduleId,
             string maritalStatusName, string physicalAddress, string mobileNumber, string sex, string isDobPrecision, DateTime dob, int createdBy, string posId)
         {
             try
@@ -861,7 +1022,7 @@ namespace IQCare.Common.BusinessProcess.Services
                 sql.Append($"ENCRYPTBYKEY(KEY_GUID('Key_CTC'), @lastName),");
                 sql.Append($"ENCRYPTBYKEY(KEY_GUID('Key_CTC'), @midName),");
                 sql.Append($"@FacilityID,");
-                sql.Append("' ',");
+                sql.Append($"@patientEnrollmentID,");
                 sql.Append($"@referralId,");
                 sql.Append($"@dateOfEnrollment,");
                 sql.Append($"@gender,");
@@ -914,12 +1075,14 @@ namespace IQCare.Common.BusinessProcess.Services
                 var facilityIDParameter = new SqlParameter("@FacilityID", facility.FacilityID);
                 var referralIdParameter = new SqlParameter("@referralId", referralId);
                 var dateOfEnrollmentParameter = new SqlParameter("@dateOfEnrollment", dateOfEnrollment);
+                var patientEnrollmentIdParameter = new SqlParameter("@patientEnrollmentID", patientEnrollmentID);
                 var genderParameter = new SqlParameter("@gender", gender);
                 var dateOfBirthParameter = new SqlParameter("@dateOfBirth", dob);
                 var dobPrecisionParameter = new SqlParameter("@dobPrecision", dobPrecision);
                 var maritalStatusIdParameter = new SqlParameter("@maritalStatusId", maritalStatusId);
                 var createdByParameter = new SqlParameter("@createdBy", createdBy);
                 var posIdParameter = new SqlParameter("@PosID", facility.PosID);
+                var moduleIdParameter = new SqlParameter("@moduleId", moduleId);
 
                 var result = await _unitOfWork.Repository<MstPatient>().FromSql(sql.ToString(), parameters:new []
                 {
@@ -928,6 +1091,7 @@ namespace IQCare.Common.BusinessProcess.Services
                     midNameParameter,
                     facilityIDParameter,
                     referralIdParameter,
+                    patientEnrollmentIdParameter,
                     dateOfEnrollmentParameter,
                     genderParameter,
                     dateOfBirthParameter,
@@ -943,7 +1107,7 @@ namespace IQCare.Common.BusinessProcess.Services
                 sqlBuilder.Append("Insert Into Lnk_PatientProgramStart(Ptn_pk, ModuleId, StartDate, UserID, CreateDate)");
                 sqlBuilder.Append("Values(");
                 sqlBuilder.Append($"@ptn_pk,");
-                sqlBuilder.Append("283,");
+                sqlBuilder.Append($"@moduleId,");
                 sqlBuilder.Append($"@dateOfEnrollment,");
                 sqlBuilder.Append($"@createdBy,");
                 sqlBuilder.Append($"@dateOfEnrollment");
@@ -954,6 +1118,7 @@ namespace IQCare.Common.BusinessProcess.Services
                 var insertResult = await _unitOfWork.Context.Database.ExecuteSqlCommandAsync(sqlBuilder.ToString(), parameters:new []
                 {
                     ptn_pkParameter,
+                    moduleIdParameter,
                     dateOfEnrollmentParameter,
                     createdByParameter
                 });
@@ -965,6 +1130,30 @@ namespace IQCare.Common.BusinessProcess.Services
                 Log.Error(e.Message);
                 Log.Error(e.InnerException.ToString());
                 throw e;
+            }
+        }
+
+
+
+        public async Task<List<MstPatient>> UpdateBlueCard(int? ptn_pk, string patientEnrollmentID, int moduleId)
+        {
+            try
+            {
+                StringBuilder sql = new StringBuilder();
+                sql.Append("exec pr_OpenDecryptedSession;");
+                sql.Append($"UPDATE mst_Patient SET PatientEnrollmentID = {patientEnrollmentID} WHERE Ptn_Pk = {ptn_pk};");
+                sql.Append($"UPDATE Lnk_PatientProgramStart SET ModuleId = {moduleId} WHERE Ptn_Pk = {ptn_pk};");
+
+                sql.Append($"SELECT Ptn_Pk, CAST(DECRYPTBYKEY([FirstName]) AS VARCHAR(50)) AS FirstName, CAST(DECRYPTBYKEY([LastName]) AS VARCHAR(50)) AS LastName, LocationID FROM [dbo].[mst_Patient] WHERE [Ptn_Pk] = {ptn_pk};");
+                sql.Append("exec [dbo].[pr_CloseDecryptedSession];");
+
+                var patientUpdate = await _unitOfWork.Repository<MstPatient>().FromSql(sql.ToString());
+
+                return patientUpdate;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
             }
         }
 
@@ -1259,7 +1448,14 @@ namespace IQCare.Common.BusinessProcess.Services
 
                 var sexParameter = new SqlParameter("@sex", sex);
                 var dateOfBirthParameter = new SqlParameter("@dateOfBirth", dateOfBirth);
-                var registrationDateParameter = new SqlParameter("@registrationDate", registrationDate);
+                //var registrationDateParameter = new SqlParameter("@registrationDate", registrationDate);
+
+                var registrationDateParameter = new SqlParameter();
+                registrationDateParameter.ParameterName = "@registrationDate";
+                registrationDateParameter.IsNullable = true;
+                registrationDateParameter.SqlDbType = SqlDbType.DateTime;
+                registrationDateParameter.Value = !registrationDate.HasValue ? (object)DBNull.Value : registrationDate.Value;
+
                 var facilityIdParameter = new SqlParameter("@facilityId", facilityId);
                 var personIdParameter = new SqlParameter("@personId", personId);
                 var dobPrecisionParameter = new SqlParameter("@dobPrecision", dobPrecision);

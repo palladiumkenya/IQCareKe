@@ -52,16 +52,11 @@
         </div>
         <div class="col-md-4 col-xs-12 col-sm-6">
             <mat-form-field class="col-md-12">
-                <mat-select formControlName="nvpForBaby" placeholder="NVP for the baby dispensed ">
+                <mat-select formControlName="nvpForBaby" placeholder="NVP for the baby dispensed">
                     <mat-option *ngFor="let yesnonaOption of yesnonaOptions" [value]="yesnonaOption.itemId">
                         {{yesnonaOption.itemName}}
                     </mat-option>
                 </mat-select>
-            </mat-form-field>
-        </div>
-        <div class="col-md-4 col-xs-12 col-sm-6">
-            <mat-form-field class="col-lg-1 col-xs-1" appNoneEvents>
-                <input matInput formControlName="placeholder">
             </mat-form-field>
         </div>
     </div>

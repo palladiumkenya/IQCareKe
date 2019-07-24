@@ -7,6 +7,7 @@ using IQCare.Common.BusinessProcess.Commands.Setup;
 using IQCare.Common.Infrastructure;
 using IQCare.Library;
 using MediatR;
+using Microsoft.EntityFrameworkCore;
 using Serilog;
 using ServiceArea = IQCare.Common.Core.Models.ServiceArea;
 
@@ -26,7 +27,8 @@ namespace IQCare.Common.BusinessProcess.CommandHandlers.Setup
             {
                 try
                 {
-                    var result = await _unitOfWork.Repository<ServiceArea>().GetAllAsync();
+                    var result = await _unitOfWork.Repository<ServiceArea>().Get(x => x.DeleteFlag == false)
+                        .ToListAsync();
                     return Result<List<ServiceArea>>.Valid(result.ToList());
                 }
                 catch (Exception e)

@@ -9,6 +9,7 @@ using Entities.CCC.Screening;
 using Entities.CCC.Triage;
 using Entities.CCC.Visit;
 using DataAccess.Context;
+using Entities.CCC;
 using Entities.CCC.Appointment;
 using Entities.CCC.Tb;
 using Entities.PatientCore;
@@ -118,6 +119,7 @@ namespace DataAccess.CCC.Context
         public DbSet<PatientSexualHistory> PatientSexualHistories { get; set; }
 
         public DbSet<PatientPartner> PatientPartners { get; set; }
+        public DbSet<HIVEducationFollowup> HivEducationFollowups { get; set; }
         //Appointment and Labs
         public DbSet<PatientAppointment> PatientAppointments { get; set; }
         public DbSet<AppointmentSummary> AppointmentSummary { get; set; }

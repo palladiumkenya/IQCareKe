@@ -6,6 +6,14 @@ import { NgModule, Component } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { PortalComponent } from './portal/portal.component';
 import { HtsComponent } from './enrollment/service-areas/hts/hts.component';
+import { HTSEncounterResolver } from './services/htsencounter.resolver';
+import { PersonCurrentVitalsResolver } from './services/personvitals.resolver';
+import { RiskEncounterResolver } from './services/riskencounter.resolver';
+import { PrepComponent } from './enrollment/service-areas/prep/prep.component';
+import { ReenrollmentComponent } from './reenrollment/reenrollment.component';
+import { ExitReasonsResolver } from './services/exitreasons.resolver';
+
+import { CareendDetailsResolver } from './services/careendeddetails.resolver';
 
 const routes: Routes = [
     {
@@ -17,8 +25,22 @@ const routes: Routes = [
         path: 'personhome/:id',
         component: PersonHomeComponent,
         resolve: {
-            servicesArray: ServicesResolver
+            servicesArray: ServicesResolver,
+            HTSEncounterArray: HTSEncounterResolver,
+            PersonVitalsArray: PersonCurrentVitalsResolver,
+            RiskAssessmentArray: RiskEncounterResolver,
+            ExitReasonsArray: ExitReasonsResolver,
+            CarendedArray: CareendDetailsResolver
         }
+    },
+    {
+        path: 'reenrollment',
+        children: [
+            {
+                path: ':id/:serviceId/:serviceCode',
+                component: ReenrollmentComponent
+            }
+        ]
     },
     {
         path: 'enrollment',
@@ -51,6 +73,23 @@ const routes: Routes = [
                     {
                         path: 'update/:id/:serviceId/:serviceCode/:edit',
                         component: CccComponent
+                    }
+                ]
+            },
+            {
+                path: 'prep',
+                children: [
+                    {
+                        path: ':id/:serviceId/:serviceCode',
+                        component: PrepComponent,
+
+
+
+                    },
+                    {
+                        path: 'update/:id/:serviceId/:serviceCode/:edit',
+                        component: PrepComponent,
+
                     }
                 ]
             }

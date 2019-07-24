@@ -174,8 +174,10 @@ export class PncService {
     }
 
     public savePncReferral(pncReferralCommand: PatientReferralCommand): Observable<any> {
-        if ((pncReferralCommand.ReferredFrom == null || pncReferralCommand.ReferredFrom == undefined || pncReferralCommand.ReferredFrom.toString() == '')
-            || (pncReferralCommand.ReferredTo == null || pncReferralCommand.ReferredTo == undefined || pncReferralCommand.ReferredTo.toString() == '')) {
+        if ((pncReferralCommand.ReferredFrom == null || pncReferralCommand.ReferredFrom == undefined
+            || pncReferralCommand.ReferredFrom.toString() == '')
+            || (pncReferralCommand.ReferredTo == null || pncReferralCommand.ReferredTo == undefined
+                || pncReferralCommand.ReferredTo.toString() == '')) {
             return of([]);
         }
 
@@ -252,8 +254,8 @@ export class PncService {
             );
     }
 
-    public getFamilyPlanning(patientId: number): Observable<any[]> {
-        return this.http.get<any[]>(this.API_PMTCT_URL + '/api/FamilyPlanning/' + patientId).pipe(
+    public getFamilyPlanning(patientId: number, patientMasterVisitId: number): Observable<any[]> {
+        return this.http.get<any[]>(this.API_PMTCT_URL + '/api/FamilyPlanning/' + patientId + '/' + patientMasterVisitId).pipe(
             tap(getFamilyPlanning => this.errorHandler.log(`successfully fetched family planning`)),
             catchError(this.errorHandler.handleError<any>('Error fetching family planning'))
         );
@@ -268,6 +270,10 @@ export class PncService {
     }
 
     public savePncFamilyPlanningMethod(familyPlanningMethodCommand: FamilyPlanningMethodCommand): Observable<any> {
+        if (!familyPlanningMethodCommand.FPMethodId || familyPlanningMethodCommand.FPMethodId == null) {
+            return of([]);
+        }
+
         return this.http.post<any>(this.API_PMTCT_URL + '/api/FamilyPlanningMethods/AddFamilyPlanning',
             JSON.stringify(familyPlanningMethodCommand),
             httpOptions).pipe(

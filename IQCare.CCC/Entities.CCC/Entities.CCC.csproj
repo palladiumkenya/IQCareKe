@@ -107,7 +107,7 @@
     <Compile Include="Encounter\PatientHighRisk.cs" />
     <Compile Include="Encounter\PatientPartner.cs" />
     <Compile Include="Encounter\PatientSexualHistory.cs" />
-    <Compile Include="HIVEducation\HIVEducationFollowup.cs" />
+    <Compile Include="HIVEducationFollowup.cs" />
     <Compile Include="IL\ILMessageStats.cs" />
     <Compile Include="IL\ILMessageViewer.cs" />
     <Compile Include="Encounter\PatientNeonatalHistory.cs" />

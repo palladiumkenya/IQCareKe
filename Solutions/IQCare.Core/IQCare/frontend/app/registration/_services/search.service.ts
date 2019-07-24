@@ -8,8 +8,16 @@ import { Search } from '../_models/search';
 import { ErrorHandlerService } from '../../shared/_services/errorhandler.service';
 
 const httpOptions = {
-    headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+    headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
 };
+
+httpOptions.headers.append('Access-Control-Allow-Origin', 'http://' + location.protocol + '//'
+    + window.location.hostname + ':' + window.location.port + '/frontend');
+httpOptions.headers.append('Access-Control-Allow-Origin', 'https://' + location.protocol + '//'
+    + window.location.hostname + ':' + window.location.port + '/frontend');
+httpOptions.headers.append('Access-Control-Allow-Headers', 'Content-Type');
+httpOptions.headers.append('Access-Control-Allow-Methods', 'POST');
+
 
 @Injectable()
 export class SearchService {
@@ -40,11 +48,24 @@ export class SearchService {
             'personId': personId,
             'patientPk': patientPk
         };
-        return this.http.post(location.protocol + '//' + window.location.hostname
+        return this.http.post(location.protocol + '//' + window.location.hostname + ':' + window.location.port
             + '/IQCare/CCC/WebService/PersonService.asmx/SetPatientSessionFromUniversalRegistration',
             JSON.stringify(Indata), httpOptions).pipe(
                 tap((setSession: any) => this.errorHandler.log(`setSession`)),
                 catchError(this.errorHandler.handleError<any>('setSession'))
+            );
+    }
+
+    public setVisitSession(patientMasterVisitId: number, Age: number): Observable<any> {
+        const Indata = {
+            'patientMasterVisitId': patientMasterVisitId,
+            'Age': Age
+        };
+
+        return this.http.post(location.protocol + '//' + window.location.hostname + ':' + window.location.port
+            + '/IQCare/CCC/WebService/PersonService.asmx/SetSessionFromUniversal', JSON.stringify(Indata), httpOptions).pipe(
+                tap((setVisitSession: any) => this.errorHandler.log(`setVisitSession`)),
+                catchError(this.errorHandler.handleError<any>('setVisitSession'))
             );
     }
 }

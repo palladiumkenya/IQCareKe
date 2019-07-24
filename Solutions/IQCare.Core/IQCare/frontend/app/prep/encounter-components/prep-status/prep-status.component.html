@@ -1,0 +1,103 @@
+<form class="form-group" [formGroup]="PrepStatusForm">
+    <div class="row">
+        <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12">
+            <div class="form-title">
+                <span class="mat-accent">
+                    Prep Status
+                </span>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-3 col-sm-3 col-xs-12">
+                <mat-form-field class="col-lg-12 col-sm-12 col-xs-12">
+                    <mat-label>Signs/Symptoms of acute HIV?</mat-label>
+                    <mat-select id="signsOrSymptomsHIV" name="signsOrSymptomsHIV" formControlName="signsOrSymptomsHIV">
+                        <mat-option [value]=""></mat-option>
+                        <mat-option *ngFor="let yesnoOption of yesnoOptions" [value]="yesnoOption.itemId">
+                            {{ yesnoOption.itemName }}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+
+            <div class="col-lg-3 col-sm-3 col-xs-12">
+                <mat-form-field class="col-lg-12 col-sm-12 col-xs-12">
+                    <mat-label>Contraindications for PrEP Present?</mat-label>
+                    <mat-select id="contraindications_PrEP_Present" name="contraindications_PrEP_Present"
+                        formControlName="contraindications_PrEP_Present">
+                        <mat-option [value]=""></mat-option>
+                        <mat-option *ngFor="let prepContraindicationsOption of prepContraindicationsOptions"
+                            [value]="prepContraindicationsOption.itemId">
+                            {{ prepContraindicationsOption.itemName }}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-3 col-sm-3 col-xs-12">
+                <mat-form-field class="col-lg-12 col-sm-12 col-xs-12">
+                    <mat-label>Adherence counselling done?</mat-label>
+                    <mat-select id="adherenceCounselling" name="adherenceCounselling"
+                        formControlName="adherenceCounselling">
+                        <mat-option [value]=""></mat-option>
+                        <mat-option *ngFor="let yesnoOption of yesnoOptions" [value]="yesnoOption.itemId">
+                            {{ yesnoOption.itemName }}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-3 col-sm-3 col-xs-12">
+                <mat-form-field class="col-lg-12 col-sm-12 col-xs-12">
+                    <mat-label>PrEP status today:</mat-label>
+                    <mat-select id="PrEPStatusToday" name="PrEPStatusToday" formControlName="PrEPStatusToday">
+                        <mat-option [value]=""></mat-option>
+                        <mat-option *ngFor="let prepStatusOption of prepStatusOptions"
+                            [value]="prepStatusOption.itemId">
+                            {{ prepStatusOption.itemName }}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-3 col-sm-3 col-xs-12" style="padding-top:18px;">
+                <span class="col-lg-6 col-sm-6 col-xs-12">
+                    <strong>Prescribe Regimen:</strong>
+                </span>
+                <span class="col-lg-6 col-sm-6 col-xs-12">
+                    <a href="#" target="_blank" style="text-decoration: underline;">
+                        Pharmacy Order
+                    </a>
+                </span>
+            </div>
+
+            <div class="col-lg-3 col-sm-3 col-xs-12">
+                <mat-form-field class="col-lg-12 col-sm-12 col-xs-12">
+                    <mat-label>Condoms Issued?:</mat-label>
+                    <mat-select id="condomsIssued" name="condomsIssued" formControlName="condomsIssued">
+                        <mat-option [value]=""></mat-option>
+                        <mat-option *ngFor="let yesnoOption of yesnoOptions" [value]="yesnoOption.itemId"
+                            (onSelectionChange)="onCondomsIssuedSelection($event)">
+                            {{ yesnoOption.itemName }}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+
+            <div class="col-lg-3 col-sm-3 col-xs-12">
+                <mat-form-field class="col-lg-12 col-sm-12 col-xs-12">
+                    <mat-label>No of condoms issued in units:</mat-label>
+                    <input matInput id="noCondomsIssued" formControlName="noCondomsIssued" name="noCondomsIssued"
+                        type="number">
+                </mat-form-field>
+            </div>
+        </div>
+    </div>
+</form>

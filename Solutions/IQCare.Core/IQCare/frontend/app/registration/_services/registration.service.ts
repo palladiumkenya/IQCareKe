@@ -235,6 +235,73 @@ export class RegistrationService {
             );
     }
 
+    public addPatientARVHistory(patientId: number, serviceId: number, treatmentType: string,
+        purpose: string, regimen: string, createdby: number, deleteflag: boolean
+        , weeks: number, months: number, initiationDate?: Date, regimenUse?: number) {
+        const Indata = {
+            PatientId: patientId,
+            ServiceId: serviceId,
+            TreatmentType: treatmentType,
+            Purpose: purpose,
+            Regimen: regimen,
+            DeleteFlag: deleteflag,
+            CreatedBy: createdby,
+            Weeks: weeks,
+            Months: months,
+            InitiationDate: initiationDate,
+            RegimenUse: regimenUse
+        }
+        return this.http.post<any>(this.API_URL + this._url + '/addPatientARVHistory', JSON.stringify(Indata), httpOptions).pipe(
+            tap((addPatientARVHistory: any) => this.errorHandler.log(`added patient ARV history w/ id`)),
+            catchError(this.errorHandler.handleError<any>('addPatientARVHistory'))
+        );
+
+    }
+
+    public addPatientTransferIn(patientId: number, serviceId: number, transferInDate: Date,
+        treatmentstartdate: Date, currenttreatment: string, facilityfrom: string
+        , mflcode: number, countyfrom: string, transferinnotes: string, createdby: number, deleteflag: boolean) {
+        const Indata = {
+            PatientId: patientId,
+            ServiceId: serviceId,
+            TransferInDate: transferInDate,
+            TreatmentStartDate: treatmentstartdate,
+            CurrentTreatment: currenttreatment,
+            FacilityFrom: facilityfrom,
+            MflCode: mflcode,
+            CountyFrom: countyfrom,
+            TransferInNotes: transferinnotes,
+            CreatedBy: createdby,
+            DeleteFlag: deleteflag
+        }
+        return this.http.post<any>(this.API_URL + this._url + '/addPatientTransferIn', JSON.stringify(Indata), httpOptions).pipe(
+            tap((addPatientTransferIn: any) => this.errorHandler.log(`added patient transfer in details w/ id`)),
+            catchError(this.errorHandler.handleError<any>('addPatientTransferIn'))
+        );
+
+    }
+
+    public addPatientOvcStatus(personId: number, orphan: number, inschool: number,
+        active: boolean, deleteflag: boolean, createdby: number) {
+
+        const Indata = {
+            PersonId: personId,
+            Orphan: orphan,
+            InSchool: inschool,
+            Active: active,
+            Deleteflag: deleteflag,
+            CreatedBy: createdby
+        }
+        return this.http.post<any>(this.API_URL + this._url + '/addPatientOVCStatus', JSON.stringify(Indata), httpOptions).pipe(
+            tap((addPatientOVCStatus: any) => this.errorHandler.log(`added patient OVC status in details w/ id`)),
+            catchError(this.errorHandler.handleError<any>('addPatientOVCStatus'))
+        );
+
+
+    }
+
+
+
     public addPersonPopulationType(personId: number, userId: number, populations: PersonPopulation): Observable<any> {
         // console.log(populations);
         const pops = [];
@@ -245,7 +312,8 @@ export class RegistrationService {
                 PopulationCategory: 0
             };
             pops.push(item);
-        } else {
+        }
+        if (populations.populationType == 2) {
             for (let i = 0; i < populations.KeyPopulation.length; i++) {
                 const item = {
                     PopulationType: 'Key Population',
@@ -254,6 +322,17 @@ export class RegistrationService {
                 pops.push(item);
             }
         }
+
+        if (populations.populationType == 3) {
+            for (let i = 0; i < populations.DiscordantCouplePopulation.length; i++) {
+                const item = {
+                    PopulationType: 'Discordant Couple',
+                    PopulationCategory: populations.DiscordantCouplePopulation[i]
+                };
+                pops.push(item);
+            }
+        }
+
 
         if (populations.priorityPop === 1) {
             priority = populations.priorityPopulation.map(priorityId => ({ priorityId }));
@@ -279,6 +358,8 @@ export class RegistrationService {
                 catchError(this.errorHandler.handleError<any>('addServiceEntryPoint'))
             );
     }
+
+
 
     public addReConfirmatoryTest(hivReConfirmatoryTests: HivReConfirmatoryTestsCommand): Observable<any> {
         if (!hivReConfirmatoryTests.TypeOfTest) {

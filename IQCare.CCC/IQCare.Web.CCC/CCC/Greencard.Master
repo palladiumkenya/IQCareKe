@@ -519,7 +519,7 @@
 					    //encounterStopped();
 					    //$("#menuStartEncounter").show();
 					   // checkOut();
-						window.location.href = "<%=ResolveClientUrl("~/CCC/Home.aspx")%>";
+						window.location.href = "<%=ResolveClientUrl("~/CCC/Patient/PatientFinder.aspx")%>";
 					    $('#<%=lblRegistration.ClientID%>').text("Register Patient");
 					    toastr.info("Patient Service Checkedout successfully!");
 					},

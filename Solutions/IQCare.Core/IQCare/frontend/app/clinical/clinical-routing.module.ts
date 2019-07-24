@@ -12,18 +12,18 @@ const routes: Routes = [
         component: TriageComponent
     },
     {
-        path:'laborder/:patientId/:personId',
-        component : LabOrderComponent ,
+        path: 'laborder/:patientId/:personId',
+        component: LabOrderComponent,
         pathMatch: 'full',
-        resolve :{
-            labTestReasonOptions : LabTestReasonsResolver ,
-            configuredLabTests : LabTestsResolver
+        resolve: {
+            labTestReasonOptions: LabTestReasonsResolver,
+            configuredLabTests: LabTestsResolver
         }
     },
     {
-      path:'completeorder/:patientId/:personId',
-      component : CompleteLabOrderComponent,
-      pathMatch : 'full'
+        path: 'completeorder/:patientId/:personId',
+        component: CompleteLabOrderComponent,
+        pathMatch: 'full'
     }
 ];
 

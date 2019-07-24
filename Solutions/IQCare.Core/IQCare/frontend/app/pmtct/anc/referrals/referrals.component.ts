@@ -66,8 +66,6 @@ export class ReferralsComponent implements OnInit {
             .subscribe(
                 p => {
                     const appointment = p;
-                    console.log('appointment details');
-                    console.log(appointment);
                     if (appointment.length > 0) {
                         const yesno = this.yesnoOptions.filter(x => x.itemName == 'Yes');
                         this.ReferralFormGroup.get('nextAppointmentDate').setValue(appointment['appointmentDate']);
@@ -79,12 +77,10 @@ export class ReferralsComponent implements OnInit {
                     }
                 },
                 (err) => {
-                    console.log(err);
                     this.snotifyService.error('Error fetching patient appointment' + err, 'ANC',
                         this.notificationService.getConfig());
                 },
                 () => {
-                    console.log(this.LookupItems$);
                 });
     }
 
@@ -93,8 +89,6 @@ export class ReferralsComponent implements OnInit {
             .subscribe(
                 p => {
                     const referral = p;
-                    console.log('referral details');
-                    console.log(referral);
                     if (referral) {
                         this.ReferralFormGroup.get('referralid').setValue(referral['id']);
                         this.ReferralFormGroup.get('referredFrom').setValue(referral['referredFrom']);
@@ -104,18 +98,14 @@ export class ReferralsComponent implements OnInit {
 
                 },
                 (err) => {
-                    console.log(err);
                     this.snotifyService.error('Error fetching patient Referral' + err, 'ANC',
                         this.notificationService.getConfig());
                 },
                 () => {
-                    console.log(this.LookupItems$);
                 });
     }
 
     public moveNextStep() {
-        console.log(this.ReferralFormGroup.value);
-
         this.referralData = {
             referredFrom: parseInt(this.ReferralFormGroup.controls['referredFrom'].value, 10),
             referredTo: parseInt(this.ReferralFormGroup.controls['referredTo'].value, 10),
@@ -125,7 +115,6 @@ export class ReferralsComponent implements OnInit {
 
 
         };
-        console.log(this.referralData);
         this.nextStep.emit(this.referralData);
     }
 
