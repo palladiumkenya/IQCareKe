@@ -53,6 +53,9 @@ export class PrepMonthlyrefillComponent implements OnInit {
     outcomelist: any[] = [];
     remarklist: any[] = [];
     Encounters: any[] = [];
+    appointmentStatusId: number;
+    appointmentReasonId: number;
+
     constructor(private router: Router,
         private route: ActivatedRoute,
         public zone: NgZone,
@@ -80,6 +83,19 @@ export class PrepMonthlyrefillComponent implements OnInit {
 
 
         });
+
+        this._lookupItemService.getByGroupNameAndItemName('AppointmentStatus', 'Pending').subscribe(
+            (res) => {
+                this.appointmentStatusId = res['itemId'];
+            }
+        );
+
+        this._lookupItemService.getByGroupNameAndItemName('AppointmentReason', 'Follow Up').subscribe(
+            (res) => {
+                this.appointmentReasonId = res['itemId'];
+            }
+        );
+
         this.route.data.subscribe((res) => {
             const { sexualPartnerHivStatusArray, clientsBehaviourRiskArray,
                 PrepAdherenceArray, AdherenceAssessmentReasonArray,
@@ -783,8 +799,14 @@ export class PrepMonthlyrefillComponent implements OnInit {
                     const patientAppointmentEditCommand: PatientAppointmentEditCommand = {
                         AppointmentId: this.nextappointmentid,
                         AppointmentDate: nextAppointmentDate,
-                        Description: ''
-
+                        Description: '',
+                        UserId: this.UserId,
+                        PatientId: this.patientId,
+                        PatientMasterVisitId: this.patientMasterVisitId,
+                        DifferentiatedCareId: null,
+                        ReasonId: this.appointmentReasonId,
+                        ServiceAreaId: this.serviceAreaId,
+                        StatusId: this.appointmentStatusId
                     };
 
                     const matUpdateAppointment = this.prepservice.updateAppointment(patientAppointmentEditCommand).subscribe((result) => {

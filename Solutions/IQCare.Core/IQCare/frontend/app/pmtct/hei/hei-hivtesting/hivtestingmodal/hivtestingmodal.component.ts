@@ -29,10 +29,10 @@ export class HivtestingmodalComponent implements OnInit {
         this.HivTestingForm = this._formBuilder.group({
             testtype: new FormControl('', [Validators.required]),
             dateofsamplecollection: new FormControl('', [Validators.required]),
-            result: new FormControl('', [Validators.required]),
-            dateresultscollected: new FormControl('', [Validators.required]),
+            result: new FormControl(''),
+            dateresultscollected: new FormControl(''),
             comments: new FormControl(''),
-            resultText: new FormControl('', [Validators.required])
+            resultText: new FormControl('')
         });
 
         this.HivTestingForm.get('resultText').disable({ onlySelf: true });

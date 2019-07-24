@@ -20,7 +20,7 @@ export class HeiHivtestingComponent implements OnInit {
 
     public hiv_testing_table_data: HivTestingTableData[] = [];
     public hiv_testing_history_data: HivTestingTableData[] = [];
-    displayedColumns = ['testtype', 'dateofsamplecollection', 'result', 'dateresultscollected', 'action'];
+    displayedColumns = ['testtype', 'dateofsamplecollection', 'result', 'dateresultscollected', 'status', 'action'];
     dataSource = new MatTableDataSource(this.hiv_testing_table_data);
 
     @Input('heiHivTestingOptions') heiHivTestingOptions: any;
@@ -52,7 +52,6 @@ export class HeiHivtestingComponent implements OnInit {
     loadHeiHivTests(): void {
         this.heiservice.getLabOrderTestResults(this.patientId).subscribe(
             (res) => {
-                console.log(res);
                 for (let i = 0; i < res.length; i++) {
                     const testType = this.hivTestType.filter(obj => obj.itemName.includes(res[i].labTestName));
                     const testResultHistorical = this.testResults.filter(obj => obj.itemName.includes(res[i].result));
@@ -114,7 +113,8 @@ export class HeiHivtestingComponent implements OnInit {
                     testtype: data.testtype,
                     dateofsamplecollection: moment(data.dateofsamplecollection).toDate(),
                     result: data.result,
-                    dateresultscollected: moment(data.dateresultscollected).toDate(),
+                    dateresultscollected: data.dateresultscollected ?
+                        moment(moment(data.dateresultscollected).toDate(), 'dd-MMM-yyyy').toString() : '',
                     comments: data.comments,
                     resultText: data.resultText
                 });
@@ -123,7 +123,8 @@ export class HeiHivtestingComponent implements OnInit {
                     testtype: data.testtype,
                     dateofsamplecollection: moment(data.dateofsamplecollection).toDate(),
                     result: data.result,
-                    dateresultscollected: moment(data.dateresultscollected).toDate(),
+                    dateresultscollected: data.dateresultscollected ?
+                        moment(moment(data.dateresultscollected).toDate(), 'dd-MMM-yyyy').toString() : '',
                     comments: data.comments,
                     resultText: data.resultText
                 });
@@ -148,7 +149,7 @@ export interface HivTestingTableData {
     testtype?: LookupItemView;
     dateofsamplecollection?: Date;
     result?: LookupItemView;
-    dateresultscollected?: Date;
+    dateresultscollected?: string;
     comments?: string;
     resultText: string;
 }

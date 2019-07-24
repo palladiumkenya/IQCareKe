@@ -230,9 +230,13 @@ export class HeiService {
     }
 
     public saveCompleteHeiLabOrder(completeLabOrderCommand: CompleteLabOrderCommand): Observable<any> {
-        if (!completeLabOrderCommand.LabOrderId || completeLabOrderCommand.LabOrderId == 0) {
+        if (!completeLabOrderCommand.LabOrderId || completeLabOrderCommand.LabOrderId == 0
+            || completeLabOrderCommand.LabTestResults.length == 0) {
             return of([]);
         }
+
+        console.log(completeLabOrderCommand);
+        return;
 
         return this.http.post(this.API_LAB_URL + '/api/LabOrder/CompleteLabOrder', JSON.stringify(completeLabOrderCommand),
             httpOptions).pipe(

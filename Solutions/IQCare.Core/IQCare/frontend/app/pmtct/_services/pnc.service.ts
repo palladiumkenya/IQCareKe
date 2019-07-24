@@ -239,7 +239,7 @@ export class PncService {
             return of([]);
         }
 
-        return this.http.put(this.API_URL + '/api/PatientReferralAndAppointment/UpdatePatientNextAppointment',
+        return this.http.post(this.API_URL + '/api/PatientReferralAndAppointment/UpdatePatientNextAppointment',
             JSON.stringify(patientAppointmentEditCommand), httpOptions).pipe(
                 tap(updateAppointment => this.errorHandler.log(`successfully updated appointment`)),
                 catchError(this.errorHandler.handleError<any>('Error updating appointment'))

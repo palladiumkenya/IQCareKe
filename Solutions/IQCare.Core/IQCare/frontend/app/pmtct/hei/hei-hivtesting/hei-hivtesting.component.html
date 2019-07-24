@@ -54,6 +54,14 @@
             </ng-container>
 
 
+            <!-- Symbol Column -->
+            <ng-container matColumnDef="status">
+                <mat-header-cell *matHeaderCellDef><strong>Status</strong> </mat-header-cell>
+                <mat-cell *matCellDef="let HivTestingTableData">
+                    status
+                </mat-cell>
+            </ng-container>
+
             <!-- actions -->
             <ng-container matColumnDef="action">
                 <mat-header-cell *matHeaderCellDef><strong class="fa fa-cog"> Action</strong></mat-header-cell>
