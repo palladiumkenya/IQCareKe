@@ -508,9 +508,9 @@
                              
                             
                         var value = response[0];
-                            
-                    
-                     
+
+                        alert(JSON.stringify(value));
+                        alert(value.PatientId);
                         this.PatientMasterVisitId = value.PatientMasterVisitId;
                         if (this.PatientMasterVisitId > 0) {
                             $("#sessiononedata .loading").show();
@@ -519,7 +519,7 @@
                            // window.location.href = window.location.href + "?visitId=" + this.PatientMasterVisitId;
 
 
-                            window.location.replace("EnhanceAdherenceHome.aspx?visitId=" + this.PatientMasterVisitId);
+                            window.location.replace("EnhanceAdherenceHome.aspx?pid=" + value.PatientId + "&visitId=" + this.PatientMasterVisitId);
                                toastr.info("Please wait, redirecting to ongoing Enhance Adherence Councelling");
                             $("#sessiononedata .loading").show();
                             ///CCC/EnhanceAdherenceCounselling/EnhanceAdherenceHome.aspx
