@@ -38,7 +38,7 @@ namespace IQCare.CCC.UILogic.Reporting
             return reportingResults.getltfu(fromdate, todate);
         }
 
-        public int AddPatientTracing(PatientTracing PT)
+        public int AddPatientTracing(Tracing PT)
         {
             IReportingManager reportingResults = (IReportingManager)ObjectFactory.CreateInstance("BusinessProcess.CCC.BReportingManager, BusinessProcess.CCC");
             int result = 0;
@@ -46,7 +46,7 @@ namespace IQCare.CCC.UILogic.Reporting
             return result;
         }
 
-        public List<PatientTracing> getTracingData(int patientMasterVisitId)
+        public List<Tracing> getTracingData(int patientMasterVisitId)
         {
             IReportingManager reportingResults = (IReportingManager)ObjectFactory.CreateInstance("BusinessProcess.CCC.BReportingManager, BusinessProcess.CCC");
             try

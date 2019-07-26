@@ -20,12 +20,14 @@ namespace IQCare.Web.CCC.Patient
     public partial class PatientTracing : System.Web.UI.Page
     {
         public int PatientId;
+        public int PersonId;
         protected void Page_Load(object sender, EventArgs e)
         {
             PatientId = Convert.ToInt32(HttpContext.Current.Session["PatientPK"]);
+            PersonId = Convert.ToInt32(HttpContext.Current.Session["PersonId"]);
             ILookupManager mgr = (ILookupManager)ObjectFactory.CreateInstance("BusinessProcess.CCC.BLookupManager, BusinessProcess.CCC");
             //tracing method
-            List<LookupItemView> tracingmethods = mgr.GetLookItemByGroup("TracingMethod");
+            List<LookupItemView> tracingmethods = mgr.GetLookItemByGroup("DefaulterTracingMethod");
             if (tracingmethods != null && tracingmethods.Count > 0)
             {
                 tracingmethod.Items.Add(new ListItem("select", "0"));
@@ -37,7 +39,7 @@ namespace IQCare.Web.CCC.Patient
             }
 
             //tracing outcome
-            List<LookupItemView> tracingOutcomes = mgr.GetLookItemByGroup("TracingOutcome");
+            List<LookupItemView> tracingOutcomes = mgr.GetLookItemByGroup("DefaulterTracingOutcome");
             if (tracingOutcomes != null && tracingOutcomes.Count > 0)
             {
                 tracingoutcome.Items.Add(new ListItem("select", "0"));

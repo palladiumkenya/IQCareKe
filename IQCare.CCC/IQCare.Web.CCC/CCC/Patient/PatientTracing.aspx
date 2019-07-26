@@ -210,7 +210,8 @@
         });
 
         $("#btnSavePatientTracing").click(function () {
-            var PatientId= '<%=PatientId%>';
+            var PatientId = '<%=PatientId%>';
+            var PersonId= '<%=PersonId%>';
             var tracingoutcometext = $("#tracingoutcome option:selected").text();
             var tracingdate = $("#tracingdateholder").val();
             var tracingmethod = $("#tracingmethod").val();
@@ -248,7 +249,7 @@
                     $.ajax({
                         type: "POST",
                         url: "../WebService/ReportingService.asmx/saveTracingData",
-                        data: "{'PatientId':'" + PatientId + "','tracingdate':'" + tracingdate + "','tracingmethod':'" + tracingmethod + "','tracingoutcome':'" + tracingoutcome + "','othertracingoutcome':'" + othertracingoutcome + "'," +
+                        data: "{'PatientId':'" + PatientId + "','PersonId':'" + PersonId + "','tracingdate':'" + tracingdate + "','tracingmethod':'" + tracingmethod + "','tracingoutcome':'" + tracingoutcome + "','othertracingoutcome':'" + othertracingoutcome + "'," +
                             "'tracingdateofdeath': '" + tracingdateofdeath + "','tracingdateoftransfer':'" + tracingdateoftransfer + "','transferfacility':'" + transferfacility + "','tracingnotes':'" + tracingnotes + "','tracingstatus':'"+tracingStatus+"'}",
                         contentType: "application/json; charset=utf-8",
                         dataType: "json",

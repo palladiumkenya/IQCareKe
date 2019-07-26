@@ -13,6 +13,9 @@ using System.Web.Script.Services;
 using Entities.CCC.Reports;
 using IQCare.CCC.UILogic;
 using IQCare.CCC.UILogic.Visit;
+using Interface.CCC.Lookup;
+using Entities.CCC.Lookup;
+using Application.Presentation;
 
 
 namespace IQCare.Web.CCC.WebService
@@ -143,7 +146,7 @@ namespace IQCare.Web.CCC.WebService
             return rows;
         }
         [WebMethod(EnableSession = true)]
-        public string saveTracingData(int PatientId, string tracingdate, int tracingmethod, int tracingoutcome, string othertracingoutcome, string tracingdateofdeath, string tracingdateoftransfer, string transferfacility, string tracingnotes, string tracingstatus)
+        public string saveTracingData(int PatientId,int PersonId, string tracingdate, int tracingmethod, int tracingoutcome, string othertracingoutcome, string tracingdateofdeath, string tracingdateoftransfer, string transferfacility, string tracingnotes, string tracingstatus)
         {
             int userId = Convert.ToInt32(Session["AppUserId"]);
             int patientmastervisitresult = 0;
@@ -188,23 +191,22 @@ namespace IQCare.Web.CCC.WebService
                 PatientEncounterManager patientEncounterManager = new PatientEncounterManager();
                 EncounterResult = patientEncounterManager.AddpatientEncounterTracing(Convert.ToInt32(PatientId), Convert.ToInt32(patientmastervisitresult),
                         patientEncounterManager.GetPatientEncounterId("EncounterType", "Patient-Tracing"), 203, userId, Convert.ToDateTime(tracingdate), Convert.ToDateTime(tracingdate));
-
+                ILookupManager mgr = (ILookupManager)ObjectFactory.CreateInstance("BusinessProcess.CCC.BLookupManager, BusinessProcess.CCC");
                 //save tracing data
-                PatientTracing patientTracing = new PatientTracing()
+                Tracing patientTracing = new Tracing()
                 {
-                    PatientId = PatientId,
+                    PersonID = PersonId,
+                    TracingType = Convert.ToInt32(mgr.GetLookupItemId("DefaulterTracing")),
                     PatientMasterVisitId = patientmastervisitresult,
-                    TracingDate = Convert.ToDateTime(tracingdate),
-                    TracingMethod = tracingmethod,
-                    TracingOutcome = tracingoutcome,
-                    TracingOutcomeOther = othertracingoutcome,
+                    DateTracingDone = Convert.ToDateTime(tracingdate),
+                    Mode = tracingmethod,
+                    Outcome = tracingoutcome,
                     TracingDateOfDeath = deathTracingDate,
                     TracingTransferFacility = transferfacility,
-                    TracingTransferDate = transferTracingDate,
-                    TracingNotes = tracingnotes,
-                    TracingStatus = Convert.ToInt32(tracingstatus),
+                    TracingTransferDate = Convert.ToDateTime(tracingdateoftransfer),
+                    Remarks = tracingnotes,
                     CreateDate = DateTime.Now,
-                    CraetedBy = Convert.ToInt32(Session["AppUserId"])
+                    CreatedBy = Convert.ToInt32(Session["AppUserId"])
                 };
 
                 var tracing = new ReportingResultsManager();
@@ -235,7 +237,7 @@ namespace IQCare.Web.CCC.WebService
         public string gettracingdata(string visitid)
         {
             var RRM = new ReportingResultsManager();
-            PatientTracing[] patientTracingData = RRM.getTracingData(Convert.ToInt32(visitid)).ToArray();
+            Tracing[] patientTracingData = RRM.getTracingData(Convert.ToInt32(visitid)).ToArray();
             string jsonScreeningObject = "[]";
             jsonScreeningObject = new JavaScriptSerializer().Serialize(patientTracingData);
             return jsonScreeningObject;

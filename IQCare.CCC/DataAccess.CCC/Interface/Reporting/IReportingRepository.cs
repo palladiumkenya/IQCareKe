@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace DataAccess.CCC.Interface.Reporting
 {
-    public interface IReportingRepository : IRepository<PatientTracing>
+    public interface IReportingRepository : IRepository<Tracing>
     {
     }
 }

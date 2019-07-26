@@ -14,10 +14,11 @@ namespace Entities.CCC.Reports
 {
     [Serializable]
     [Table("Tracing")]
-    public class PatientTracing
+    public class Tracing
     {
         public int Id { get; set; }
         public int PersonID { get; set; }
+        public int PatientMasterVisitId { get; set; }
         public int TracingType { get; set; }
         public DateTime DateTracingDone { get; set; }
         public int Mode { get; set; }

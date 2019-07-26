@@ -172,6 +172,6 @@ namespace DataAccess.CCC.Context
         public DbSet<Referrals> referrals { get; set; }
 
         //reporting
-        public DbSet<PatientTracing> patienttracing { get; set; }
+        public DbSet<Tracing> patienttracing { get; set; }
     }
 }

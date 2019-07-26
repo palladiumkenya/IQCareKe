@@ -63,7 +63,7 @@ namespace BusinessProcess.CCC
             }
         }
 
-        public int AddPatientTracing(PatientTracing PT)
+        public int AddPatientTracing(Tracing PT)
         {
             using (UnitOfWork unitOfWork = new UnitOfWork(new GreencardContext()))
             {
@@ -75,7 +75,7 @@ namespace BusinessProcess.CCC
             }
         }
 
-        public List<PatientTracing> GetPatientTracingData(int patientMasterVisitId)
+        public List<Tracing> GetPatientTracingData(int patientMasterVisitId)
         {
             using (UnitOfWork unitOfWork = new UnitOfWork(new GreencardContext()))
             {

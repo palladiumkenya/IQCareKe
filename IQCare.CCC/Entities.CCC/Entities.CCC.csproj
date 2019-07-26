@@ -190,6 +190,7 @@
     <Compile Include="PSmart\SmartcardPatientList.cs" />
     <Compile Include="Reports\PatientTracing.cs" />
     <Compile Include="Reports\sp_gettxcurr.cs" />
+    <Compile Include="Reports\Tracing.cs" />
     <Compile Include="Reports\TracingData.cs" />
     <Compile Include="Screening\PatientScreening.cs" />
     <Compile Include="Sync\Sync.cs" />
