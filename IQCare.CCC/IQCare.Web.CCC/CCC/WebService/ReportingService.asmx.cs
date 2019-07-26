@@ -192,22 +192,25 @@ namespace IQCare.Web.CCC.WebService
                 EncounterResult = patientEncounterManager.AddpatientEncounterTracing(Convert.ToInt32(PatientId), Convert.ToInt32(patientmastervisitresult),
                         patientEncounterManager.GetPatientEncounterId("EncounterType", "Patient-Tracing"), 203, userId, Convert.ToDateTime(tracingdate), Convert.ToDateTime(tracingdate));
                 ILookupManager mgr = (ILookupManager)ObjectFactory.CreateInstance("BusinessProcess.CCC.BLookupManager, BusinessProcess.CCC");
+                int tracingType = Convert.ToInt32(mgr.GetLookupItemId("DefaulterTracing"));
                 //save tracing data
                 Tracing patientTracing = new Tracing()
                 {
                     PersonID = PersonId,
-                    TracingType = Convert.ToInt32(mgr.GetLookupItemId("DefaulterTracing")),
+                    TracingType = tracingType,
                     PatientMasterVisitId = patientmastervisitresult,
                     DateTracingDone = Convert.ToDateTime(tracingdate),
                     Mode = tracingmethod,
                     Outcome = tracingoutcome,
                     TracingDateOfDeath = deathTracingDate,
                     TracingTransferFacility = transferfacility,
-                    TracingTransferDate = Convert.ToDateTime(tracingdateoftransfer),
+                    TracingTransferDate = transferTracingDate,
                     Remarks = tracingnotes,
                     CreateDate = DateTime.Now,
                     CreatedBy = Convert.ToInt32(Session["AppUserId"])
                 };
+
+                Tracing pt = patientTracing;
 
                 var tracing = new ReportingResultsManager();
                 Result = tracing.AddPatientTracing(patientTracing);

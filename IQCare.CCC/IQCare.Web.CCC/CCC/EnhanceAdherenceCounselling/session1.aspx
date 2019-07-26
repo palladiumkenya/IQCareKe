@@ -508,9 +508,6 @@
                              
                             
                         var value = response[0];
-
-                        alert(JSON.stringify(value));
-                        alert(value.PatientId);
                         this.PatientMasterVisitId = value.PatientMasterVisitId;
                         if (this.PatientMasterVisitId > 0) {
                             $("#sessiononedata .loading").show();

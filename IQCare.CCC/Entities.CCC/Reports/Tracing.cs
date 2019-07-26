@@ -35,6 +35,6 @@ namespace Entities.CCC.Reports
         public DateTime? DateBookedTesting { get; set; }
         public DateTime? TracingDateOfDeath { get; set; }
         public string TracingTransferFacility { get; set; }
-        public DateTime TracingTransferDate { get; set; }
+        public DateTime? TracingTransferDate { get; set; }
     }
 }
