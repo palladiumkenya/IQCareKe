@@ -71,7 +71,7 @@ export class PrepLabsgridComponent implements OnInit {
 
 
         labtests = ['Hepatitis B core - antibody IgM (HBsAb)', 'Hepatitis B core – antibody, total',
-            'Hepatitis B surface – antibody (HBsAb)', 'Hepatitis B surface – antigen (HBsAg)'];
+            'Hepatitis B surface – antibody (HBsAb)', 'Hepatitis B surface – antigen (HBsAg)','Hepatitis C antibody'];
 
 
 

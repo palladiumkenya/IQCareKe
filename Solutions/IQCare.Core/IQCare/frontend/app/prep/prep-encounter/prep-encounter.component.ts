@@ -7,7 +7,8 @@ import { LookupItemView } from './../../shared/_models/LookupItemView';
 import { Component, OnInit, NgZone, ViewChild } from '@angular/core';
 import { FormArray, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { forkJoin, of } from 'rxjs';
+import { forkJoin, of, Subscription } from 'rxjs';
+import { PersonHomeService } from '../../dashboard/services/person-home.service';
 import { PrepStatusCommand } from '../_models/commands/PrepStatusCommand';
 import { FamilyPlanningCommand } from '../../pmtct/_models/FamilyPlanningCommand';
 import { FamilyPlanningMethodCommand } from '../../pmtct/_models/FamilyPlanningMethodCommand';
@@ -22,12 +23,14 @@ import { MatStepper } from '@angular/material';
 import { PregnancyIndicatorLogCommand } from '../_models/commands/PregnancyIndicatorLogCommand';
 import { FamilyPlanningEditCommand } from '../../pmtct/_models/FamilyPlanningEditCommand';
 import { PatientFamilyPlanningMethodEditCommand } from '../../pmtct/_models/PatientFamilyPlanningMethodEditCommand';
-
+import { PersonView } from '../../dashboard/_model/personView';
+import { NotificationService } from '../../shared/_services/notification.service';
+import { SnotifyService } from 'ng-snotify';
 @Component({
     selector: 'app-prep-encounter',
     templateUrl: './prep-encounter.component.html',
     styleUrls: ['./prep-encounter.component.css'],
-    providers: [MaternityService, RecordsService]
+    providers: [MaternityService, RecordsService, PersonHomeService]
 })
 export class PrepEncounterComponent implements OnInit {
     patientId: number;
@@ -68,7 +71,7 @@ export class PrepEncounterComponent implements OnInit {
     PregnancyOutcomeOptions: any[] = [];
     PrepStatusOptions: any[] = [];
     PrepAppointmentOptions: any[] = [];
-
+    minDate: Date;
 
     public chronic_illness_data: PatientChronicIllness[] = [];
     public adverseEvents_data: AdverseEventsCommand[] = [];
@@ -79,6 +82,8 @@ export class PrepEncounterComponent implements OnInit {
     // optional depending on sex
     isOptionalObsGyn: boolean = false;
     isOptionalCircumcision: boolean = false;
+    public person: PersonView;
+    public personView$: Subscription;
 
     constructor(private route: ActivatedRoute,
         private prepService: PrepService,
@@ -87,6 +92,9 @@ export class PrepEncounterComponent implements OnInit {
         private matService: MaternityService,
         public zone: NgZone,
         private router: Router,
+        private snotifyService: SnotifyService,
+        private notificationService: NotificationService,
+        private personHomeService: PersonHomeService,
         private recordsService: RecordsService) {
         this.STIScreeningFormGroup = new FormArray([]);
         this.CircumcisionStatusFormGroup = new FormArray([]);
@@ -176,6 +184,29 @@ export class PrepEncounterComponent implements OnInit {
                 }
             }
         );
+    }
+
+
+    public getPatientDetailsById(personId: number) {
+        this.personView$ = this.personHomeService.getPatientByPersonId(personId).subscribe(
+            p => {
+                // console.log(p);
+                this.person = p;
+                if (this.person != null) {
+               
+                if (this.person.dateOfBirth  != null && this.person.dateOfBirth != undefined) {
+                    this.minDate = this.person.dateOfBirth;
+                }
+            }
+
+            },
+            (err) => {
+                this.snotifyService.error('Error retrieving the patient details ' + err, 'person detail service',
+                    this.notificationService.getConfig());
+            },
+            () => {
+                // console.log(this.personView$);
+            });
     }
 
     public onVisitDetailsNext() {

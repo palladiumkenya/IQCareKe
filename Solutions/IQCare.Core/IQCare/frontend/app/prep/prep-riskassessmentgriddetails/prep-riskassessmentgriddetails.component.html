@@ -16,6 +16,10 @@
                 <mat-header-cell *matHeaderCellDef><strong>Client Willing to Take Prep?</strong> </mat-header-cell>
                 <mat-cell *matCellDef="let element"> {{element.Clientwillingtakeprep }} </mat-cell>
             </ng-container>
+            <ng-container matColumnDef="AssessmentOutcome">
+                <mat-header-cell *matHeaderCellDef><strong>AssessmentOutcome</strong> </mat-header-cell>
+                <mat-cell *matCellDef="let element"> {{element.AssessmentOutcome}} </mat-cell>
+            </ng-container>
 
 
             <mat-header-row *matHeaderRowDef="displayedcolumns"></mat-header-row>

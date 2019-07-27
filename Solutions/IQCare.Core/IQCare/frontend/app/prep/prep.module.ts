@@ -36,7 +36,7 @@ import {
     RiskReductionEducationResolver, ReferralPreventionServicesResolver, ClientWillingTakePrepResolver
     , RiskEducationResolver, BehaviourRiskAssessmentResolver, EncounterTypeResolver, PartnerCCCEnrollmentResolver,
     PatientIdentifierResolver, ARTStartDateResolver, PartnerHIVStatusResolver, DurationResolver, SexWithoutCondomResolver,
-    HivPartnerResolver
+    HivPartnerResolver,PrepDeclineResolver
 } from './_services/resolvers/prepriskassessment.resolver';
 import {
     PrepAdherenceResolver, AdherenceAssessmentReasonsResolver, RefillPrepStatusResolver,
@@ -106,7 +106,7 @@ import { PrepRiskassessmentgriddetailsComponent } from './prep-riskassessmentgri
         PregnancyStatusResolver, ScreenedForSTIResolver,
         PrepCareEndReasonResolver, PrepAdherenceResolver, AdherenceAssessmentReasonsResolver, RefillPrepStatusResolver,
         PrepDiscontinueReasonResolver, AdherenceCounsellingResolver, AppointmentGivenResolver, PrepAppointmentReasonResolver,
-        HTSEncounterResolver, PersonCurrentVitalsResolver, RiskEncounterResolver
+        HTSEncounterResolver, PersonCurrentVitalsResolver, RiskEncounterResolver,PrepDeclineResolver
     ],
     entryComponents: [
         PrepCheckinComponent

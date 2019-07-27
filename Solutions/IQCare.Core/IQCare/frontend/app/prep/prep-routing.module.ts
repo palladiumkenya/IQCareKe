@@ -17,7 +17,7 @@ import {
     RiskReductionEducationResolver, ReferralPreventionServicesResolver, ClientWillingTakePrepResolver
     , RiskEducationResolver, BehaviourRiskAssessmentResolver, EncounterTypeResolver, PartnerCCCEnrollmentResolver,
     PatientIdentifierResolver, ARTStartDateResolver, PartnerHIVStatusResolver, DurationResolver, SexWithoutCondomResolver,
-    HivPartnerResolver
+    HivPartnerResolver, PrepDeclineResolver
 } from './_services/resolvers/prepriskassessment.resolver';
 import {
     PrepCareEndReasonResolver
@@ -181,6 +181,7 @@ const routes: Routes = [
                 component: PrepRiskassessmentComponent,
                 resolve: {
                     assessmentOutComeArray: AssessmentOutcomeResolver,
+                    careendreasonoptions: PrepDeclineResolver,
                     clientsBehaviourRiskArray: ClientsBehaviourRiskResolver,
                     sexualPartnerHivStatusArray: SexualPartnetHivStatusProfileResolver,
                     clientWillingTakePrepArray: ClientWillingTakePrepResolver,
@@ -205,6 +206,7 @@ const routes: Routes = [
                 component: PrepRiskassessmentComponent,
                 resolve: {
                     assessmentOutComeArray: AssessmentOutcomeResolver,
+                    careendreasonoptions: PrepDeclineResolver,
                     clientsBehaviourRiskArray: ClientsBehaviourRiskResolver,
                     sexualPartnerHivStatusArray: SexualPartnetHivStatusProfileResolver,
                     clientWillingTakePrepArray: ClientWillingTakePrepResolver,

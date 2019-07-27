@@ -15,7 +15,7 @@ import * as moment from 'moment';
 export class PrepRiskassessmentgriddetailsComponent implements OnInit {
     @Input('personId') personId: number;
     riskassessmentdetails: any[] = [];
-    displayedcolumns: any[] = ['VisitDate', 'Clientwillingtakeprep'];
+    displayedcolumns: any[] = ['VisitDate', 'Clientwillingtakeprep', 'AssessmentOutcome'];
     @ViewChild(MatPaginator) paginator: MatPaginator;
     DataSource = new MatTableDataSource(this.riskassessmentdetails);
     constructor(private prepService: PrepService) { }
@@ -35,17 +35,19 @@ export class PrepRiskassessmentgriddetailsComponent implements OnInit {
                     patientId: test.patientId,
                     patientMasterVisitId: test.patientMasterVisitId,
                     VisitDate: moment(test.visitDate).format('DD-MMM-YYYY'),
-                    Clientwillingtakeprep: test.clientWillingTakingPrep
+                    Clientwillingtakeprep: test.clientWillingTakingPrep,
+                    AssessmentOutcome: test.assessmentOutCome
                 });
+                this.DataSource = new MatTableDataSource(this.riskassessmentdetails);
+                this.DataSource.paginator = this.paginator;
+
+            }, (error) => {
+                console.log(error + 'An error occurred loading risk assessment details');
             });
-            this.DataSource = new MatTableDataSource(this.riskassessmentdetails);
-            this.DataSource.paginator = this.paginator;
 
-        }, (error) => {
-            console.log(error + 'An error occurred loading risk assessment details');
+
+
         });
-
-
 
     }
 

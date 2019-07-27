@@ -54,6 +54,7 @@ export class AddTriageComponent implements OnInit {
             (result) => {
                 if (result) {
                     this.encounterTypeId = result['itemId'];
+
                 }
             },
             (error) => {

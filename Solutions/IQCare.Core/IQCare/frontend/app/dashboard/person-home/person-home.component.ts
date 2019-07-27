@@ -37,6 +37,7 @@ export class PersonHomeComponent implements OnInit {
     exitreason: number;
      patientId: number;
      careenddetails: any[] = [];
+     htshistory: any[] = [];
     personvitals: any[];
     careendoptions: LookupItemView[] = [];
     chronic_illness_data: any[] = [];
@@ -67,10 +68,13 @@ export class PersonHomeComponent implements OnInit {
             const { RiskAssessmentArray } = res;
             const { ExitReasonsArray } = res;
             const {CarendedArray } = res;
+            const {  HTSEncounterHistoryArray} = res;
 
             this.careenddetails = CarendedArray;
             
-         
+            this.htshistory = HTSEncounterHistoryArray;
+            console.log('htshistory');
+            console.log(this.htshistory);
             
             this.services = servicesArray;
             this.htsencounters = HTSEncounterArray;
