@@ -214,6 +214,8 @@
     <None Remove="Scripts\2.0.1\35_vw_FamilyTestingRegister.sql" />
     <None Remove="Scripts\2.0.1\36_vw_HIVTesting_Services_Referral_Linkage_Register.sql" />
     <None Remove="Scripts\2.0.1\37_vw_PartnerNotificationRegister.sql" />
+    <None Remove="Scripts\2.0.1\38_PrepEncounterView.sql" />
+    <None Remove="Scripts\2.0.1\39_PrepStatusColumnsNotExists.sql" />
     <None Remove="Scripts\2.0.1\PREP\01_Prep_ServiceArea.sql" />
     <None Remove="Scripts\2.0.1\PREP\02_Prep Number.sql" />
     <None Remove="Scripts\2.0.1\PREP\03_PrepServiceAreaIdentifiers.sql" />
@@ -510,6 +512,8 @@
     <EmbeddedResource Include="Scripts\2.0.1\35_vw_FamilyTestingRegister.sql" />
     <EmbeddedResource Include="Scripts\2.0.1\36_vw_HIVTesting_Services_Referral_Linkage_Register.sql" />
     <EmbeddedResource Include="Scripts\2.0.1\37_vw_PartnerNotificationRegister.sql" />
+    <EmbeddedResource Include="Scripts\2.0.1\38_PrepEncounterView.sql" />
+    <EmbeddedResource Include="Scripts\2.0.1\39_PrepStatusColumnsNotExists.sql" />
     <EmbeddedResource Include="Scripts\2.0.1\PREP\16_PrepCareEnded.sql" />
     <EmbeddedResource Include="Scripts\2.0.1\PREP\17_PrepAdherence.sql" />
     <EmbeddedResource Include="Scripts\2.0.1\PREP\18_AdherenceAssessmentReasons.sql" />
