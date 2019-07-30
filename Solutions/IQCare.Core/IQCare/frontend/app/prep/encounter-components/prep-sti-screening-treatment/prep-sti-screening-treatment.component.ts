@@ -74,11 +74,11 @@ export class PrepSTIScreeningTreatmentComponent implements OnInit {
             this.STIScreeningForm.controls.Specify.enable({ onlySelf: true });
         }
         if (othersItem[0].itemDisplayName == 'Others (O)' && event.source.selected == false) {
-           
+
             this.STIScreeningForm.controls.Specify.setValue('');
             this.STIScreeningForm.controls.Specify.disable({ onlySelf: true });
         }
-        
+
 
     }
 
@@ -163,9 +163,9 @@ export class PrepSTIScreeningTreatmentComponent implements OnInit {
 
     onPharmacyClick() {
         this.searchService.setSession(this.personId, this.patientId).subscribe((sessionres) => {
-            this.searchService.setVisitSession(this.patientMasterVisitId, 20).subscribe((setVisitSession) => {
+            this.searchService.setVisitSession(this.patientMasterVisitId, 20, 261).subscribe((setVisitSession) => {
                 const url = location.protocol + '//' + window.location.hostname + ':' + window.location.port +
-                    '/IQCare/CCC/Patient/PatientHome.aspx';
+                    '/IQCare/CCC/Encounter/PharmacyPrescription.aspx';
                 const win = window.open(url, '_blank');
                 win.focus();
             });

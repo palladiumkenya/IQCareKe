@@ -498,9 +498,9 @@ export class PrepMonthlyrefillComponent implements OnInit {
     }
     onPharmacyClick() {
         this.searchService.setSession(this.personId, this.patientId).subscribe((sessionres) => {
-            this.searchService.setVisitSession(this.patientMasterVisitId, 20).subscribe((setVisitSession) => {
+            this.searchService.setVisitSession(this.patientMasterVisitId, 20, 261).subscribe((setVisitSession) => {
                 const url = location.protocol + '//' + window.location.hostname + ':' + window.location.port +
-                    '/IQCare/CCC/Patient/PatientHome.aspx';
+                    '/IQCare/CCC/Encounter/PharmacyPrescription.aspx';
                 const win = window.open(url, '_blank');
                 win.focus();
             });

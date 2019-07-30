@@ -56,10 +56,11 @@ export class SearchService {
             );
     }
 
-    public setVisitSession(patientMasterVisitId: number, Age: number): Observable<any> {
+    public setVisitSession(patientMasterVisitId: number, Age: number, patientType: number): Observable<any> {
         const Indata = {
             'patientMasterVisitId': patientMasterVisitId,
-            'Age': Age
+            'Age': Age,
+            'patientType': patientType
         };
 
         return this.http.post(location.protocol + '//' + window.location.hostname + ':' + window.location.port
