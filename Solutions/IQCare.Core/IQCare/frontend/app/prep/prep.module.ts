@@ -1,6 +1,7 @@
 import { PrepService } from './_services/prep.service';
 import { STIScreeningTreatmentResolver } from './_services/STIScreeningTreatment.resolver';
 import { NgModule } from '@angular/core';
+import { FormsModule} from '@angular/forms'; 
 import { CommonModule } from '@angular/common';
 import { PrepEncounterHistoryComponent } from './prep-encounter-history/prep-encounter-history.component';
 import { PrepRoutingModule } from './prep-routing.module';
@@ -89,7 +90,7 @@ import { PrepRiskassessmentgriddetailsComponent } from './prep-riskassessmentgri
         MatInputModule, MatAutocompleteModule, MatTableModule,
         PrepRoutingModule, MatDividerModule, MatDialogModule,
         MatPaginatorModule, MatRadioModule,
-        MatIconModule
+        MatIconModule, ReactiveFormsModule, FormsModule
     ],
     providers: [
         YesNoResolver, YesNoUnknownResolver,

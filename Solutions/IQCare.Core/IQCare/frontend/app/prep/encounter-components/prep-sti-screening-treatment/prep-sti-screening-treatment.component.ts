@@ -39,12 +39,13 @@ export class PrepSTIScreeningTreatmentComponent implements OnInit {
     ngOnInit() {
         this.STIScreeningForm = this._formBuilder.group({
             visitDate: new FormControl('', [Validators.required]),
+            Specify: new FormControl(''),
             signsOrSymptomsOfSTI: new FormControl('', [Validators.required]),
             signsOfSTI: new FormControl('', [Validators.required]),
             stiTreatmentOffered: new FormControl(''),
             stiReferredLabInvestigation: new FormControl('')
         });
-
+        this.STIScreeningForm.controls.Specify.disable({ onlySelf: true })
         // set the date for only new encounters
         if (!this.isEdit) {
             this.STIScreeningForm.controls.visitDate.setValue(new Date(localStorage.getItem('visitDate')));
@@ -66,6 +67,21 @@ export class PrepSTIScreeningTreatmentComponent implements OnInit {
         }
     }
 
+    OnSTISelection(event) {
+        const value = event.source.value;
+        const othersItem = this.stiScreeningOptions.filter(obj => obj.itemId == value);
+        if (othersItem[0].itemDisplayName == 'Others (O)' && event.source.selected == true) {
+            this.STIScreeningForm.controls.Specify.enable({ onlySelf: true });
+        }
+        if (othersItem[0].itemDisplayName == 'Others (O)' && event.source.selected == false) {
+           
+            this.STIScreeningForm.controls.Specify.setValue('');
+            this.STIScreeningForm.controls.Specify.disable({ onlySelf: true });
+        }
+        
+
+    }
+
     loadPatientMasterVisit() {
         this.encounterService.getPatientMasterVisit(this.patientId, this.patientMasterVisitId).subscribe(
             (res) => {
@@ -82,18 +98,26 @@ export class PrepSTIScreeningTreatmentComponent implements OnInit {
     loadSTIScreening(): void {
         this.prepService.getStiScreeningTreatment(this.patientId, this.patientMasterVisitId).subscribe(
             (res) => {
+                let STISymptoms = [];
                 const stiScreeningObject = this.screenedForSTIOptions.filter(obj => obj.itemName == 'STIScreeningDone');
                 const stiSignsAndSymptomsObject = this.screenedForSTIOptions.filter(obj => obj.itemName == 'STISymptoms');
                 const stiLabInvestigationDoneObject = this.screenedForSTIOptions.filter(obj => obj.itemName == 'STILabInvestigationDone');
                 const stiTreatmentOfferedObject = this.screenedForSTIOptions.filter(obj => obj.itemName == 'STITreatmentOffered');
+                const othersItem = this.stiScreeningOptions.filter(obj => obj.itemName == 'Others (O)');
 
                 if (res.length > 0) {
+                    console.log('STIScreening');
+                    console.log(res);
                     res.forEach(element => {
                         if (element.screeningTypeName == 'ScreenedForSTI' && element.screeningCategoryId == stiScreeningObject[0].itemId) {
                             this.STIScreeningForm.controls.signsOrSymptomsOfSTI.setValue(element.screeningValueId);
                         } else if (element.screeningTypeName == 'ScreenedForSTI'
                             && element.screeningCategoryId == stiSignsAndSymptomsObject[0].itemId) {
-                            this.STIScreeningForm.controls.signsOfSTI.setValue(element.screeningValueId);
+                            STISymptoms.push(element.screeningValueId);
+                            if (element.screeningValueId == othersItem[0].itemId) {
+                                this.STIScreeningForm.controls.Specify.setValue(element.comment);
+                            }
+
                         } else if (element.screeningTypeName == 'ScreenedForSTI'
                             && element.screeningCategoryId == stiLabInvestigationDoneObject[0].itemId) {
                             this.STIScreeningForm.controls.stiReferredLabInvestigation.setValue(element.screeningValueId);
@@ -102,6 +126,8 @@ export class PrepSTIScreeningTreatmentComponent implements OnInit {
                             this.STIScreeningForm.controls.stiTreatmentOffered.setValue(element.screeningValueId);
                         }
                     });
+
+                    this.STIScreeningForm.controls.signsOfSTI.setValue(STISymptoms);
                 }
             },
             (error) => {

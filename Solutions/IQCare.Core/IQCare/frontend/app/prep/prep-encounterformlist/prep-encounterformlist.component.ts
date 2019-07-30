@@ -77,9 +77,9 @@ export class PrepEncounterformlistComponent implements OnInit {
         this.Encounterformlistgroup = this._formBuilder.group({
             encounterforms: new FormControl('', [Validators.required]),
         });
-        
 
-          console.log(this.EncounterFormList);
+
+        console.log(this.EncounterFormList);
 
     }
 
@@ -165,13 +165,13 @@ export class PrepEncounterformlistComponent implements OnInit {
                             }
                         });
                     }
-    
-    
+
+
                 }
-    
+
                 if (this.riskassessmentvisits[0].AssessmentOutCome != null) {
                     let assessmentoutcome: string;
-    
+
                     assessmentoutcome = this.riskassessmentvisits[0].AssessmentOutCome;
                     if (assessmentoutcome.toString().toLowerCase() == 'norisk') {
                         this.EncounterFormList.forEach(x => {
@@ -180,10 +180,10 @@ export class PrepEncounterformlistComponent implements OnInit {
                             }
                         });
                     }
-    
+
                 }
             }
-    
+
 
 
         }, (error) => {
@@ -320,12 +320,12 @@ export class PrepEncounterformlistComponent implements OnInit {
                     this.encounterService.savePatientMasterVisit(patientMasterVisitEncounter).subscribe(
                         (result) => {
                             localStorage.setItem('visitDate', data.visitdate);
-                          // localStorage.setItem('visitType', JSON.stringify(data.visitType));
+                            // localStorage.setItem('visitType', JSON.stringify(data.visitType));
 
                             this.snotifyService.success('Successfully Checked-In Patient', 'CheckIn', this.notificationService.getConfig());
                             this.zone.run(() => {
                                 this.router.navigate(['/prep/encounter/' + '/' + this.patientId + '/' + this.personId + '/'
-                                    + result['patientEncounterId'] + '/' + result['patientMasterVisitId']],
+                                    + result['patientEncounterId'] + '/' + result['patientMasterVisitId'] + '/' + this.serviceAreaId],
                                     { relativeTo: this.route });
                             });
                         },

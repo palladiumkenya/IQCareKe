@@ -214,10 +214,10 @@ export class PrepService {
     }
 
     GetRiskAssessmentDetails(personId: number): Observable<any[]> {
-        return this.http.get<any>(this.PREP_API_URL + '/api/BehaviourRisk/GetRiskAssessmentVisitsDetails/' + personId )
-        .pipe(tap(GetRiskAssessmentDetails => this.errorHandler.log('Get Risk details')),
-        catchError(this.errorHandler.handleError<any[]>('RiskAssessmentDetails'))
-        );
+        return this.http.get<any>(this.PREP_API_URL + '/api/BehaviourRisk/GetRiskAssessmentVisitsDetails/' + personId)
+            .pipe(tap(GetRiskAssessmentDetails => this.errorHandler.log('Get Risk details')),
+                catchError(this.errorHandler.handleError<any[]>('RiskAssessmentDetails'))
+            );
     }
     CheckencounterExists(patientid: number): Observable<any[]> {
         const Indata = {
@@ -251,11 +251,20 @@ export class PrepService {
         );
     }
 
-    public getPrepEncounterHistory(patientId: number, serviceAreaId: number): Observable<any[]> {
-        return this.http.get<any[]>(this.PREP_API_URL + '/api/PrepEncounter/GetPrepEncounters/' + patientId + '/' + serviceAreaId).pipe(
-            tap(getPrepEncounterHistory => this.errorHandler.log(`successfully fetched prep encounters`)),
-            catchError(this.errorHandler.handleError<any>('Error fetching prep encounters'))
-        );
+    public getPrepEncounterHistory(patientId: number, serviceAreaId: number,
+        fromDate: Date = null, toDate: Date = null): Observable<any[]> {
+        const Indata = {
+            'PatientId': patientId,
+            'ServiceAreaId': serviceAreaId,
+            'fromDate': fromDate,
+            'toDate': toDate
+        };
+
+        return this.http.post<any[]>(this.PREP_API_URL + '/api/PrepEncounter/GetPrepEncounters', JSON.stringify(Indata)
+            , httpOptions).pipe(
+                tap(getPrepEncounterHistory => this.errorHandler.log(`successfully fetched prep encounters`)),
+                catchError(this.errorHandler.handleError<any>('Error fetching prep encounters'))
+            );
     }
 
     public getPatientCareEndDetails(patientmasterVisitId: number): Observable<any[]> {

@@ -15,6 +15,7 @@ namespace IQCare.Maternity.BusinessProcess.CommandHandlers
     public class AddPatientScreeningsCommandHandler : IRequestHandler<AddPatientScreeningsCommand, Result<PatientScreeningsResponse>>
     {
         IMaternityUnitOfWork _maternityUnitOfWork;
+        public string comment;
         public AddPatientScreeningsCommandHandler(IMaternityUnitOfWork maternityUnitOfWork)
         {
             _maternityUnitOfWork = maternityUnitOfWork;
@@ -31,12 +32,13 @@ namespace IQCare.Maternity.BusinessProcess.CommandHandlers
                         List<PatientScreening> clientScreenings = new List<PatientScreening>();
                         request.Screenings.ForEach(x => clientScreenings.Add(new PatientScreening
                         {
+                            
                             PatientId = request.PatientId,
                             PatientMasterVisitId = request.PatientMasterVisitId,
                             DeleteFlag = false,
                             CreateDate = DateTime.Now,
                             CreatedBy = request.CreatedBy,
-                            Comment = "",
+                            Comment = (x.Comment == null) ? "" : x.Comment ,
                             Active = false,
                             ScreeningCategoryId = x.ScreeningCategoryId,
                             ScreeningDate = request.VisitDate,

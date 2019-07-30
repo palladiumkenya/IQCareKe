@@ -93,7 +93,7 @@ const routes: Routes = [
         path: 'encounter',
         children: [
             {
-                path: ':patientId/:personId/:patientEncounterId/:patientMasterVisitId',
+                path: ':patientId/:personId/:patientEncounterId/:patientMasterVisitId/:serviceId',
                 component: PrepEncounterComponent,
                 resolve: {
                     yesNoOptions: YesNoResolver,
@@ -111,7 +111,7 @@ const routes: Routes = [
                 }
             },
             {
-                path: ':patientId/:personId/:patientEncounterId/:patientMasterVisitId/:edit',
+                path: ':patientId/:personId/:patientEncounterId/:patientMasterVisitId/:serviceId/:edit',
                 component: PrepEncounterComponent,
                 resolve: {
                     yesNoOptions: YesNoResolver,
