@@ -17,11 +17,8 @@
                         <div class="row">
                             <div class="col-md-4">
                                 <mat-form-field class="col-lg-12 col-md-12 col-xs-12">
-                                    <input matInput 
-                                      [matDatepicker]="fromDate" 
-                                      placeholder="From Date"
-                                      id="fromDate" 
-                                      [(ngModel)]="search.fromDate" #fromDate="ngModel">
+                                    <input matInput [matDatepicker]="fromDate" placeholder="From Date" id="fromDate"
+                                        [(ngModel)]="search.fromDate" #fromDate="ngModel">
                                     <mat-datepicker-toggle matSuffix [for]="fromDate"></mat-datepicker-toggle>
                                     <mat-datepicker #fromDate></mat-datepicker>
                                 </mat-form-field>
@@ -29,14 +26,11 @@
 
                             <div class="col-md-4">
                                 <mat-form-field class="col-lg-12 col-md-12 col-xs-12">
-                                    <input matInput 
-                                      [matDatepicker]="toDate" 
-                                      placeholder="To Date" 
-                                      id="toDate"
-                              [(ngModel)]="search.toDate" #toDate="ngModel">
+                                    <input matInput [matDatepicker]="toDate" placeholder="To Date" id="toDate"
+                                        [(ngModel)]="search.toDate" #toDate="ngModel">
                                     <mat-datepicker-toggle matSuffix [for]="toDate"></mat-datepicker-toggle>
                                     <mat-datepicker #toDate></mat-datepicker>
-                                  </mat-form-field>
+                                </mat-form-field>
                             </div>
                             <div class="col-md-3">
                                 <button class="btn btn-primary m-t-n-xs" (click)="doSearch()">
@@ -122,10 +116,10 @@
                                                 <mat-icon (click)="onEdit(element)"><i
                                                         className="material-icons">mode_edit</i>
                                                 </mat-icon>
-                                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                                <mat-icon (click)="onView(element)"><i
+
+                                                <!--<mat-icon (click)="onView(element)"><i
                                                         className="material-icons">remove_red_eye</i>
-                                                </mat-icon>
+                                                </mat-icon>-->
                                             </mat-cell>
                                         </ng-container>
 
