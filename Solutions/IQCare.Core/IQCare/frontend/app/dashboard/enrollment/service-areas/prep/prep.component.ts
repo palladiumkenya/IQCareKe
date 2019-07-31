@@ -86,6 +86,7 @@ export class PrepComponent implements OnInit {
         private searchService: SearchService,
         private recordsService: RecordsService) {
         this.maxDate = new Date();
+
         this.isVisible = false;
         this.FacilitySelected.valueChanges.pipe(debounceTime(400)).subscribe(data => {
             this.personHomeService.filterFacilities(data).subscribe(res => {
@@ -110,6 +111,7 @@ export class PrepComponent implements OnInit {
             this.userId = JSON.parse(localStorage.getItem('appUserId'));
             this.posId = localStorage.getItem('appPosID');
         });
+        this.getPatientDetailsById(this.personId);
 
         this.personPopulation = new PersonPopulation();
 
@@ -250,6 +252,12 @@ export class PrepComponent implements OnInit {
             p => {
                 // console.log(p);
                 this.person = p;
+                if (this.person != null) {
+                
+                    if (this.person.dateOfBirth != null && this.person.dateOfBirth != undefined) {
+                        this.minDate = this.person.dateOfBirth;
+                    }
+                }
 
                 localStorage.setItem('personId', this.person.personId.toString());
                 this.store.dispatch(new Consent.PersonId(this.person.personId));

@@ -207,4 +207,11 @@ export class PersonHomeService {
             catchError(this.errorHandler.handleError<any>('getPatientCareEndedHistory'))
         );
     }
+
+    public getAllHTSEncounterBypersonId(personId: number): Observable<any[]> {
+        return this.http.get<EncounterDetails[]>(this.API_URL + this._htsurl + '/getLatestEncounterDetails/' + personId).pipe(
+            tap(getHTSEncounterDetailsBypersonId => this.errorHandler.log('fetched a single client encounter details')),
+            catchError(this.errorHandler.handleError<any[]>('getHTSEncounterDetailsBypersonId', []))
+        );
+    }
 }

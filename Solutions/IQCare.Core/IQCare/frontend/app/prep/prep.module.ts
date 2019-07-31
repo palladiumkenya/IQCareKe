@@ -1,6 +1,7 @@
 import { PrepService } from './_services/prep.service';
 import { STIScreeningTreatmentResolver } from './_services/STIScreeningTreatment.resolver';
 import { NgModule } from '@angular/core';
+import { FormsModule} from '@angular/forms'; 
 import { CommonModule } from '@angular/common';
 import { PrepEncounterHistoryComponent } from './prep-encounter-history/prep-encounter-history.component';
 import { PrepRoutingModule } from './prep-routing.module';
@@ -10,7 +11,7 @@ import {
     MatFormFieldModule, MatSelectModule,
     MatNativeDateModule, MatDatepickerModule,
     MatInputModule, MatAutocompleteModule, MatTableModule, MatDividerModule, MatDialogModule, MatIconModule,
-    MatPaginatorModule
+    MatPaginatorModule,MatRadioModule
 } from '@angular/material';
 import { ReactiveFormsModule } from '@angular/forms';
 // tslint:disable-next-line:max-line-length
@@ -36,7 +37,7 @@ import {
     RiskReductionEducationResolver, ReferralPreventionServicesResolver, ClientWillingTakePrepResolver
     , RiskEducationResolver, BehaviourRiskAssessmentResolver, EncounterTypeResolver, PartnerCCCEnrollmentResolver,
     PatientIdentifierResolver, ARTStartDateResolver, PartnerHIVStatusResolver, DurationResolver, SexWithoutCondomResolver,
-    HivPartnerResolver
+    HivPartnerResolver,PrepDeclineResolver
 } from './_services/resolvers/prepriskassessment.resolver';
 import {
     PrepAdherenceResolver, AdherenceAssessmentReasonsResolver, RefillPrepStatusResolver,
@@ -55,6 +56,11 @@ import { ScreenedForSTIResolver } from './_services/screened-sti.resolver';
 import { PrepCareendComponent } from './prep-careend/prep-careend.component';
 import { PrepMonthlyrefillComponent } from './prep-monthlyrefill/prep-monthlyrefill.component';
 import { PrepLabsgridComponent } from './prep-labsgrid/prep-labsgrid.component';
+import { PrepAppointmentgridComponent } from './prep-appointmentgrid/prep-appointmentgrid.component';
+import { PrepHtsencountersgridComponent } from './prep-htsencountersgrid/prep-htsencountersgrid.component';
+import { PrepEncounterformlistComponent } from './prep-encounterformlist/prep-encounterformlist.component';
+import { PrepPatientvitalsinfoComponent } from './prep-patientvitalsinfo/prep-patientvitalsinfo.component';
+import { PrepRiskassessmentgriddetailsComponent } from './prep-riskassessmentgriddetails/prep-riskassessmentgriddetails.component';
 
 @NgModule({
     declarations: [
@@ -70,7 +76,12 @@ import { PrepLabsgridComponent } from './prep-labsgrid/prep-labsgrid.component';
         PrepCheckinComponent,
         PrepCareendComponent,
         PrepMonthlyrefillComponent,
-        PrepLabsgridComponent
+        PrepLabsgridComponent,
+        PrepAppointmentgridComponent,
+        PrepHtsencountersgridComponent,
+        PrepEncounterformlistComponent,
+        PrepPatientvitalsinfoComponent,
+        PrepRiskassessmentgriddetailsComponent
     ],
     imports: [
         SharedModule, MatDatepickerModule, MatNativeDateModule,
@@ -78,8 +89,8 @@ import { PrepLabsgridComponent } from './prep-labsgrid/prep-labsgrid.component';
         MatButtonModule, MatFormFieldModule, MatSelectModule,
         MatInputModule, MatAutocompleteModule, MatTableModule,
         PrepRoutingModule, MatDividerModule, MatDialogModule,
-        MatPaginatorModule,
-        MatIconModule
+        MatPaginatorModule, MatRadioModule,
+        MatIconModule, ReactiveFormsModule, FormsModule
     ],
     providers: [
         YesNoResolver, YesNoUnknownResolver,
@@ -96,7 +107,7 @@ import { PrepLabsgridComponent } from './prep-labsgrid/prep-labsgrid.component';
         PregnancyStatusResolver, ScreenedForSTIResolver,
         PrepCareEndReasonResolver, PrepAdherenceResolver, AdherenceAssessmentReasonsResolver, RefillPrepStatusResolver,
         PrepDiscontinueReasonResolver, AdherenceCounsellingResolver, AppointmentGivenResolver, PrepAppointmentReasonResolver,
-        HTSEncounterResolver, PersonCurrentVitalsResolver, RiskEncounterResolver
+        HTSEncounterResolver, PersonCurrentVitalsResolver, RiskEncounterResolver,PrepDeclineResolver
     ],
     entryComponents: [
         PrepCheckinComponent

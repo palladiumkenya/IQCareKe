@@ -12,6 +12,7 @@ import { RiskEncounterResolver } from './services/riskencounter.resolver';
 import { PrepComponent } from './enrollment/service-areas/prep/prep.component';
 import { ReenrollmentComponent } from './reenrollment/reenrollment.component';
 import { ExitReasonsResolver } from './services/exitreasons.resolver';
+import { HTSEncounterHistoryResolver } from './services/getlatesthtsencounterhistory.resolver';
 
 import { CareendDetailsResolver } from './services/careendeddetails.resolver';
 
@@ -30,7 +31,8 @@ const routes: Routes = [
             PersonVitalsArray: PersonCurrentVitalsResolver,
             RiskAssessmentArray: RiskEncounterResolver,
             ExitReasonsArray: ExitReasonsResolver,
-            CarendedArray: CareendDetailsResolver
+            CarendedArray: CareendDetailsResolver,
+            HTSEncounterHistoryArray: HTSEncounterHistoryResolver
         }
     },
     {

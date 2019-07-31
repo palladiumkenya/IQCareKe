@@ -10,7 +10,7 @@
         <form [formGroup]="PrepMonthlyRefillFormGroup">
             <div class="row">
                 <mat-form-field class='col-lg-6'>
-                    <input matInput [matDatepicker]="picker" [max]="maxDate" (focus)="picker.open()"
+                    <input matInput [matDatepicker]="picker" [min]="minDate" [max]="maxDate" (focus)="picker.open()"
                         formControlName="visitDate" required placeholder="Choose Visit Date">
                     <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                     <mat-datepicker #picker></mat-datepicker>

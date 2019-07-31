@@ -1318,7 +1318,7 @@ namespace IQCare.Web.CCC.WebService
         }
 
         [WebMethod(EnableSession = true)]
-        public bool SetSessionFromUniversal(int patientMasterVisitId = 0, int Age = 0)
+        public bool SetSessionFromUniversal(int patientMasterVisitId = 0, int Age = 0, int patientType = 0)
         {
             try
             {
@@ -1330,6 +1330,11 @@ namespace IQCare.Web.CCC.WebService
                 if (Age > 0)
                 {
                     Session["Age"] = Age;
+                }
+
+                if (patientType > 0)
+                {
+                    Session["PatientType"] = patientType;
                 }
 
                 return true;

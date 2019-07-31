@@ -296,6 +296,25 @@ export class HivPartnerResolver implements Resolve<Observable<LookupItemView[]>>
 
 
 
+@Injectable()
+export class PrepDeclineResolver implements Resolve<Observable<LookupItemView[]>> {
+    /**
+     *
+     */
+    constructor(private lookupItemService: LookupItemService) {
+
+    }
+
+    public resolve(
+        route: ActivatedRouteSnapshot,
+        state: RouterStateSnapshot
+    ): Observable<LookupItemView[]> {
+        return this.lookupItemService.getByGroupName('PrepDeclineReason');
+    }
+}
+
+
+
 
 
 

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Runtime.InteropServices;
 using IQCare.Library;
 using MediatR;
 
@@ -20,6 +21,9 @@ namespace IQCare.Maternity.BusinessProcess.Commands.PNC
         public int ScreeningTypeId { get; set; }
         public int ScreeningCategoryId { get; set; }
         public int ScreeningValueId { get; set; }
+
+      
+        public string Comment { get; set; }
     }
     public class PatientScreeningsResponse
     {

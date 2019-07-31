@@ -1,30 +1,10 @@
 if not Exists(select * from LookupMaster where Name like '%ClientsBehaviourRiskAssessment%')
+BEGIN
 insert into LookupMaster (Name,DisplayName,DeleteFlag)
 values('ClientsBehaviourRiskAssessment','Clients Behaviour Risk Assessment','0')
-
-
-
-
-
-if not exists(select * from LookupItem where Name like 'SexualPartnersHivRisk%')
-BEGIN
-insert into LookupItem(Name,DisplayName,DeleteFlag)
-values('SexualPartnersHivRisk','Sex partner(s) at high risk for HIV & HIV status unknown','0')
-END
-go
-if  exists(select * from LookupItem where Name like 'SexualPartnersHivRisk%')
-BEGIN
-if not Exists (select * from LookupMasterItem  lmi inner join LookupMaster lm on lm.Id=lmi.LookupMasterId
-inner join LookupItem lit on lit.Id=lmi.LookupItemId where 
-lit.Name='SexualPartnersHivRisk' and lm.Name='ClientsBehaviourRiskAssessment')
-BEGIN
-insert into LookupMasterItem 
-select lm.Id,lit.Id,lit.DisplayName,'1.00' as OrdRank from LookupMaster lm,LookupItem lit
-where lm.Name='ClientsBehaviourRiskAssessment' and lit.Name='SexualPartnersHivRisk'
-END
 END
 
-go
+
 if not exists(select * from LookupItem where Name like 'SexMoreThan1Partner%')
 BEGIN
 insert into LookupItem(Name,DisplayName,DeleteFlag)

@@ -11,6 +11,7 @@ import { PrepService } from '../_services/prep.service';
 import { EncounterService } from '../../shared/_services/encounter.service';
 import { NotificationService } from '../../shared/_services/notification.service';
 import { SnotifyService } from 'ng-snotify';
+import { EncounterDateSearch } from '../_models/EncounterDateSearch';
 import { ActivatedRoute, Router } from '@angular/router';
 import { PatientMasterVisitEncounter } from '../../pmtct/_models/PatientMasterVisitEncounter';
 
@@ -29,6 +30,7 @@ export class PrepEncounterHistoryComponent implements OnInit {
     public personView$: Subscription;
     public personVitalWeight = 0;
     htsencounters: any[];
+    search: EncounterDateSearch;
     prepEncounterType: LookupItemView[];
     encounterDetail: EncounterDetails;
     EligibilityInformation: any[] = [];
@@ -59,6 +61,7 @@ export class PrepEncounterHistoryComponent implements OnInit {
         private route: ActivatedRoute,
         public zone: NgZone,
         private router: Router) {
+        this.search = new EncounterDateSearch();
     }
 
     ngOnInit() {
@@ -433,15 +436,49 @@ export class PrepEncounterHistoryComponent implements OnInit {
             }
         );
     }
+    doSearch() {
+        this.prep_history_table_data = [];
+
+        const prepEncounters = this.prepService.getPrepEncounterHistory(this.patientId, this.serviceAreaId
+            , this.search.fromDate, this.search.toDate);
+        prepEncounters.subscribe(
+            (result) => {
+                // console.log(result);
+                result.forEach(arrayValue => {
+                    this.prep_history_table_data.push({
+                        'behaviourrisk': 'Risk',
+                        encounterType: arrayValue.encounterType,
+                        prep_status: arrayValue.preStatus,
+                        next_appointment: arrayValue.appointmentDate,
+                        provider: arrayValue.providerName,
+                        encounterStartTime: arrayValue.encounterStartTime,
+                        patientEncounterId: arrayValue.id,
+                        patientMasterVisitId: arrayValue.patientMasterVisitId
+                    });
+                });
+                this.dataSource = new MatTableDataSource(this.prep_history_table_data);
+            },
+            (error) => {
+                console.log(error);
+            }
+        );
+    }
+    accessEncounter() {
+        this.zone.run(() => {
+            this.router.navigate(['/prep/prepformslist/' + '/' + this.patientId + '/' + this.personId + '/'
+                + this.serviceAreaId],
+                { relativeTo: this.route });
+        });
+    }
 
     onEdit(element) {
-        if (element['encounterType'].toString() == 'prep') {
+        if (element['encounterType'].toString() == 'PrEP Encounter') {
             this.zone.run(() => {
                 this.router.navigate(['/prep/encounter/' + '/' + this.patientId + '/' + this.personId + '/'
-                    + element['patientEncounterId'] + '/' + element['patientMasterVisitId'] + '/1'],
+                    + element['patientEncounterId'] + '/' + element['patientMasterVisitId'] + '/' + this.serviceAreaId + '/1'],
                     { relativeTo: this.route });
             });
-        } else if (element['encounterType'].toString() === 'PrepRiskAssessment') {
+        } else if (element['encounterType'].toString() === 'Behaviour Risk Assessment') {
             this.zone.run(() => {
                 this.router.navigate(['/prep/riskassessment/' + '/' + this.patientId + '/' + this.personId + '/'
                     + this.serviceAreaId + '/' + element['patientMasterVisitId']],
