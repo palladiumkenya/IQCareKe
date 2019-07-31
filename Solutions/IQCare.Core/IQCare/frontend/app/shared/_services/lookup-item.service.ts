@@ -66,4 +66,11 @@ export class LookupItemService {
         );
     }
 
+    public getPatientEncountersByType(patientId: number, encounterTypeId: number): Observable<any[]> {
+        return this.http.get<any[]>(this.API_URL + '/api/PatientServices/GetEncounters/' + patientId + '/' + encounterTypeId).pipe(
+            tap(getPatientEncounters => this.errorHandler.log('get ')),
+            catchError(this.errorHandler.handleError<any[]>('getPatientEncounters', []))
+        );
+    }
+
 }

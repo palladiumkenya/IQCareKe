@@ -24,7 +24,7 @@ export class EncounterService {
     public savePatientMasterVisit(patientMasterVisitEncounter: PatientMasterVisitEncounter): Observable<any> {
         return this.http.post<PatientMasterVisitEncounter>(this.API_URL + '/api/PatientMasterVisit',
             JSON.stringify(patientMasterVisitEncounter), httpOptions).pipe(
-                tap(saveMaternityMasterVisit => this.errorHandler.log(`successfully added  patientmastervisit`)),
+                tap(savePatientMasterVisit => this.errorHandler.log(`successfully added  patientmastervisit`)),
                 catchError(this.errorHandler.handleError<any>('Error saving  patientmastervisit'))
             );
     }
