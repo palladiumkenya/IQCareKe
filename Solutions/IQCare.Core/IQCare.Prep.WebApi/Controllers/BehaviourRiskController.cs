@@ -22,6 +22,21 @@ namespace IQCare.Prep.WebApi.Controllers
         {
             _mediator = mediator;
         }
+        [HttpGet("{personId}")]
+        public async Task<IActionResult> GetRiskAssessmentVisitsDetails(int personId)
+        {
+            var response = await _mediator.Send(new RiskAssessmentVisitQuery()
+            {
+                PersonId= personId
+              
+            }, Request.HttpContext.RequestAborted);
+
+            if (response.IsValid)
+                return Ok(response.Value);
+            return BadRequest(response);
+        }
+
+
         [HttpPost]
         public async Task<IActionResult> AddAssessmentVisitDetail([FromBody] RiskAssessmentVisitDetailCommand command)
         {
@@ -35,6 +50,7 @@ namespace IQCare.Prep.WebApi.Controllers
 
             return Ok(response.Value);
         }
+
 
         [HttpPost]
         public async Task<IActionResult> GetAssessmentFormDetails([FromBody] GetRiskAssessmentDetailsCommand command)

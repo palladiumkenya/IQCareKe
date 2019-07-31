@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using IQCare.Common.BusinessProcess.Commands.Appointment;
 using IQCare.Common.BusinessProcess.Commands.Encounter;
 using IQCare.Common.BusinessProcess.Commands.Enrollment;
 using IQCare.Common.BusinessProcess.Commands.PersonCommand;
@@ -165,8 +166,16 @@ namespace IQCare.Controllers.Shared
                 return Ok(response.Value);
             return BadRequest(response);
         }
+        [HttpGet("GetPatientAppointmentServiceArea/{patientId}/{serviceArea}")]
+        public async Task<object> GetPatientAppointmentServiceArea(int patientId,int serviceArea)
+        {
+            var results = await _mediator.Send(new GetPatientAppointmentByServiceAreaCommand() { PatientId = patientId, ServiceArea=serviceArea}, HttpContext.RequestAborted);
+            if (results.IsValid)
+                return Ok(results.Value);
+            return BadRequest(results);
+        }
 
-       
+
         // POST: api/PatientServices
         [HttpPost]
         public void Post([FromBody]string value)

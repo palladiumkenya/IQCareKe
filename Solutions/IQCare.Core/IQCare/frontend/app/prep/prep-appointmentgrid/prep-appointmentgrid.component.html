@@ -1,0 +1,37 @@
+<div class="row">
+    <div class="col-md-12">
+        <div class="form-title">
+            <span class="mat-accent"> PatientAppointments</span>
+        </div>
+    </div>
+</div>
+<div class='row'>
+     <div class="example-container mat-elevation-z0">
+        <mat-table [dataSource]="dataSource">
+            <ng-container matColumnDef="appointmentReason">
+                <mat-header-cell *matHeaderCellDef> <strong>Reason</strong> </mat-header-cell>
+                <mat-cell *matCellDef="let patient_appointment_data"> {{patient_appointment_data.appointmentReason}} </mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="appointmentDate">
+                <mat-header-cell *matHeaderCellDef><strong>Date</strong> </mat-header-cell>
+                <mat-cell *matCellDef="let patient_appointment_data"> {{patient_appointment_data.appointmentDate  | date: 'dd-MMM-yyyy' }}  </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="appointmentStatus">
+                <mat-header-cell *matHeaderCellDef> <strong> Status </strong> </mat-header-cell>
+                <mat-cell *matCellDef="let patient_appointment_data"> {{patient_appointment_data.appointmentStatus}} </mat-cell>
+            </ng-container>
+            <ng-container matColumnDef="appointmentType">
+                <mat-header-cell *matHeaderCellDef> <strong> Type </strong>  </mat-header-cell>
+                <mat-cell *matCellDef="let patient_appointment_data"> {{patient_appointment_data.appointmentType}} </mat-cell>
+              </ng-container>
+              <ng-container matColumnDef="description">
+                <mat-header-cell *matHeaderCellDef> <strong> Description </strong>  </mat-header-cell>
+                <mat-cell *matCellDef="let patient_appointment_data"> {{patient_appointment_data.description}} </mat-cell>
+              </ng-container>
+            
+            <mat-header-row *matHeaderRowDef="patient_appointment_displaycolumns"></mat-header-row>
+            <mat-row *matRowDef="let row; columns: patient_appointment_displaycolumns;"></mat-row>
+        </mat-table>
+        <mat-paginator id="completed-paginator" [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+</div>

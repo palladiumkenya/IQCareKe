@@ -1,0 +1,91 @@
+<div class="row">
+    <div class="col-md-12">
+        <div class="form-title">
+            <span class="mat-accent">PatientVitals</span>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="example-container mat-elevation-z0">
+        <mat-table #table [dataSource]="dataSource">
+            <!-- Symbol Column -->
+            <ng-container matColumnDef="visitdate">
+                <mat-header-cell *matHeaderCellDef><strong>Visit Date</strong>
+                </mat-header-cell>
+                <mat-cell *matCellDef="let vitalsDataTable"> {{vitalsDataTable.visitDate |
+                            date:'dd-MMM-yyyy'}}
+                </mat-cell>
+            </ng-container>
+
+            <!-- Position Column -->
+            <ng-container matColumnDef="height">
+                <mat-header-cell *matHeaderCellDef><strong>Height(cm)</strong>
+                </mat-header-cell>
+                <mat-cell *matCellDef="let vitalsDataTable"> {{vitalsDataTable.height}}
+                </mat-cell>
+            </ng-container>
+
+            <!-- Name Column -->
+            <ng-container matColumnDef="weight">
+                <mat-header-cell *matHeaderCellDef> Weight (kg) </mat-header-cell>
+                <mat-cell *matCellDef="let vitalsDataTable"> {{vitalsDataTable.weight }}
+                </mat-cell>
+            </ng-container>
+
+            <!-- Weight Column -->
+            <ng-container matColumnDef="bmi">
+                <mat-header-cell *matHeaderCellDef> <strong>BMI</strong> </mat-header-cell>
+                <mat-cell *matCellDef="let vitalsDataTable"> {{vitalsDataTable.bmi}} </mat-cell>
+            </ng-container>
+            <!-- Symbol Column -->
+            <ng-container matColumnDef="diastolic">
+                <mat-header-cell *matHeaderCellDef><strong>BP (Diastolic)</strong>
+                </mat-header-cell>
+                <mat-cell *matCellDef="let vitalsDataTable"> {{vitalsDataTable.diastolic}}
+                </mat-cell>
+            </ng-container>
+
+            <!-- Symbol Column -->
+            <ng-container matColumnDef="systolic">
+                <mat-header-cell *matHeaderCellDef><strong>BP (Systolic)</strong>
+                </mat-header-cell>
+                <mat-cell *matCellDef="let vitalsDataTable"> {{vitalsDataTable.systolic}}
+                </mat-cell>
+            </ng-container>
+
+            <!-- Symbol Column -->
+            <ng-container matColumnDef="temperature">
+                <mat-header-cell *matHeaderCellDef><strong>Temperature (℃)</strong>
+                </mat-header-cell>
+                <mat-cell *matCellDef="let vitalsDataTable"> {{vitalsDataTable.temperature}}
+                </mat-cell>
+            </ng-container>
+
+            <!-- Symbol Column -->
+            <ng-container matColumnDef="respiratoryrate">
+                <mat-header-cell *matHeaderCellDef><strong>Respiratory Rate (bpm)</strong>
+                </mat-header-cell>
+                <mat-cell *matCellDef="let vitalsDataTable">
+                    {{vitalsDataTable.respiratoryRate}} </mat-cell>
+            </ng-container>
+
+            <!-- Symbol Column -->
+            <ng-container matColumnDef="heartrate">
+                <mat-header-cell *matHeaderCellDef><strong>Heart Rate</strong>
+                </mat-header-cell>
+                <mat-cell *matCellDef="let vitalsDataTable"> {{vitalsDataTable.heartRate}}
+                </mat-cell>
+            </ng-container>
+
+
+
+
+
+            <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+            <mat-row *matRowDef="let row; columns: displayedColumns">
+            </mat-row>
+        </mat-table>
+        <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+    </div>
+
+</div>

@@ -16,6 +16,10 @@ import { SearchService } from '../../registration/_services/search.service';
 import { PatientMasterVisitEncounter } from '../../pmtct/_models/PatientMasterVisitEncounter';
 import * as moment from 'moment';
 import { PatientAppointmentEditCommand } from '../../pmtct/_models/PatientAppointmentEditCommand';
+import { Search } from '../../records/_models/search';
+import { PersonView } from '../../dashboard/_model/personView';
+import { Subscription } from 'rxjs';
+import { PersonHomeService } from '../../dashboard/services/person-home.service';
 
 @Component({
     selector: 'app-prep-monthlyrefill',
@@ -39,6 +43,7 @@ export class PrepMonthlyrefillComponent implements OnInit {
     AppointmentGivenOptions: LookupItemView[] = [];
     PrepAppointmentReasonOptions: LookupItemView[] = [];
     maxDate: Date;
+    minDate: Date;
     personId: number;
     nextappointmentid: number;
     serviceAreaId: number;
@@ -53,6 +58,8 @@ export class PrepMonthlyrefillComponent implements OnInit {
     outcomelist: any[] = [];
     remarklist: any[] = [];
     Encounters: any[] = [];
+    public person: PersonView;
+    public personView$: Subscription;
     constructor(private router: Router,
         private route: ActivatedRoute,
         public zone: NgZone,
@@ -61,6 +68,7 @@ export class PrepMonthlyrefillComponent implements OnInit {
         private searchService: SearchService,
         private snotifyService: SnotifyService,
         private notificationService: NotificationService,
+        private personHomeService: PersonHomeService,
         private _formBuilder: FormBuilder,
         private spinner: NgxSpinnerService,
         private encounterservice: EncounterService) {
@@ -77,7 +85,7 @@ export class PrepMonthlyrefillComponent implements OnInit {
             this.serviceAreaId = serviceId;
             this.patientId = patientId;
             this.patientMasterVisitId = patientMasterVisitId;
-
+            this.getPatientDetailsById(this.personId);
 
         });
         this.route.data.subscribe((res) => {
@@ -133,6 +141,28 @@ export class PrepMonthlyrefillComponent implements OnInit {
         this.LoadAppointments();
 
     }
+    public getPatientDetailsById(personId: number) {
+        this.personView$ = this.personHomeService.getPatientByPersonId(personId).subscribe(
+            p => {
+                // console.log(p);
+                this.person = p;
+                if (this.person != null) {
+                    console.log(this.person);
+                    if (this.person.dateOfBirth != null && this.person.dateOfBirth != undefined) {
+                        this.minDate = this.person.dateOfBirth;
+                    }
+                }
+
+            },
+            (err) => {
+                this.snotifyService.error('Error loading patient details' + err, 'person detail service',
+                    this.notificationService.getConfig());
+            },
+            () => {
+                // console.log(this.personView$);
+            });
+    }
+
     LoadAppointments() {
         if (this.patientMasterVisitId > 0) {
 
@@ -468,9 +498,9 @@ export class PrepMonthlyrefillComponent implements OnInit {
     }
     onPharmacyClick() {
         this.searchService.setSession(this.personId, this.patientId).subscribe((sessionres) => {
-            this.searchService.setVisitSession(this.patientMasterVisitId, 20).subscribe((setVisitSession) => {
+            this.searchService.setVisitSession(this.patientMasterVisitId, 20, 261).subscribe((setVisitSession) => {
                 const url = location.protocol + '//' + window.location.hostname + ':' + window.location.port +
-                    '/IQCare/CCC/Patient/PatientHome.aspx';
+                    '/IQCare/CCC/Encounter/PharmacyPrescription.aspx';
                 const win = window.open(url, '_blank');
                 win.focus();
             });
