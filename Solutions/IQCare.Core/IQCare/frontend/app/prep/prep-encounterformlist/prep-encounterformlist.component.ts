@@ -83,26 +83,19 @@ export class PrepEncounterformlistComponent implements OnInit {
 
     }
 
+    Back() {
+        this.zone.run(() => {
+            this.zone.run(() => {
+                this.router.navigate(
+                    ['/prep/' + this.patientId + '/' + this.personId + '/' + this.serviceAreaId],
+                    { relativeTo: this.route });
+            });
+        });
+    }
     InitEncounterFormsList() {
-
         this.EncounterFormList.push({
-            value: 'monthlyrefill',
-            displayname: 'MONTHLY REFILL',
-            disabled: false
-        });
-        this.EncounterFormList.push({
-            value: 'preptermination',
-            displayname: 'PREP CARE TERMINATION FORM',
-            disabled: false
-        });
-        this.EncounterFormList.push({
-            value: 'prepencounter',
-            displayname: 'PREP ENCOUNTER',
-            disabled: false
-        });
-        this.EncounterFormList.push({
-            value: 'riskassessment',
-            displayname: 'RISK ASSESSMENT FORM',
+            value: 'vitals',
+            displayname: 'VITALS',
             disabled: false
         });
 
@@ -111,11 +104,34 @@ export class PrepEncounterformlistComponent implements OnInit {
             displayname: 'HTS',
             disabled: false
         });
+
         this.EncounterFormList.push({
-            value: 'vitals',
-            displayname: 'VITALS',
+            value: 'riskassessment',
+            displayname: 'RISK ASSESSMENT FORM',
             disabled: false
         });
+
+        this.EncounterFormList.push({
+            value: 'prepencounter',
+            displayname: 'PREP ENCOUNTER',
+            disabled: false
+        });
+
+
+        this.EncounterFormList.push({
+            value: 'monthlyrefill',
+            displayname: 'MONTHLY REFILL',
+            disabled: false
+        });
+        this.EncounterFormList.push({
+            value: 'preptermination',
+            displayname: 'PREP DISCONTINUATION FORM',
+            disabled: false
+        });
+
+
+
+
 
     }
 
