@@ -79,7 +79,7 @@ export class PrepEncounterformlistComponent implements OnInit {
         });
 
 
-        console.log(this.EncounterFormList);
+       
 
     }
 
