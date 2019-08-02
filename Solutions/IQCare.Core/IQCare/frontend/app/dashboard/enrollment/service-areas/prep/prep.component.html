@@ -85,16 +85,17 @@
                                 <mat-form-field class="col-lg-12 col-sm-12 col-xs-12">
                                     <mat-label>Prep Number</mat-label>
                                     <input matInput id="PREP_EnrollmentNumber" formControlName="EnrollmentNumber"
-                                        name="PREP_EnrollmentNumber" type="number" required>
+                                        name="PREP_EnrollmentNumber" type="text" required>
                                     <span>
                                         <div *ngIf="form.controls.EnrollmentNumber.errors && (form.controls.EnrollmentNumber.dirty || form.controls.EnrollmentNumber.touched)"
                                             class="alert alert-danger">
                                             <div [hidden]="!form.controls.EnrollmentNumber.errors.required">
-                                                Enrollment Number is required!
+                                                Prep Number is required!
                                             </div>
                                             <div [hidden]="!form.controls.EnrollmentNumber.errors.pattern">
-                                                Enrollment number must be 5 digits!
+                                                Prep number must be 5 digits and should be a number!
                                             </div>
+
                                         </div>
                                     </span>
                                 </mat-form-field>
@@ -127,16 +128,15 @@
                             <div class="col-lg-4 col-sm-4 col-xs-12">
                                 <mat-form-field class="col-lg-12 col-sm-12 col-xs-12">
                                     <input type="text" matInput placeholder="Search Filter"
-                                        [formControl]="FacilitySelected" [matAutocomplete]="auto"
-                                        >
+                                        [formControl]="FacilitySelected" [matAutocomplete]="auto">
 
-                                    <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayfn" (optionSelected)="change($event)">
-                                         
-                                        <mat-option *ngFor="let facility of filteredfacilities"
-                                             [value]=" facility" >
+                                    <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayfn"
+                                        (optionSelected)="change($event)">
+
+                                        <mat-option *ngFor="let facility of filteredfacilities" [value]=" facility">
                                             {{facility.name}}
                                         </mat-option>
-                                      
+
                                     </mat-autocomplete>
 
                                     <!-- <input matInput placeholder="Search Filter" (change)="onTextChanged($event)"
@@ -157,8 +157,16 @@
                             <div class="col-lg-3 col-sm-3 col-xs-12">
                                 <mat-form-field class="col-lg-12 col-sm-12 col-xs-12">
                                     <mat-label>MFLCode</mat-label>
-                                    <input matInput id="TransferInMflCode" formControlName="TransferInMflCode"
-                                        name="TransferInMflCode" type="number">
+                                    <input matInput id="TransferInMflCode" formControlName="TransferInMflCode" 
+                                        name="TransferInMflCode" type="number"  [matAutocomplete]="mflauto">
+                                    <mat-autocomplete #mflauto="matAutocomplete"  [displayWith]="displaymflcode"
+                                        (optionSelected)="changemflcode($event)">
+
+                                        <mat-option *ngFor="let facility of filteredfacilities" [value]="facility.mflCode">
+                                            {{facility.mflCode}} -{{facility.name}}
+                                        </mat-option>
+
+                                    </mat-autocomplete>
                                 </mat-form-field>
                             </div>
 
@@ -283,7 +291,8 @@
                         <div class="col-lg-3 col-sm-3 col-xs-12">
                             <mat-form-field class="col-lg-12 col-sm-12 col-xs-12">
                                 <input placeholder="Initiation Date" matInput [matDatepicker]="inDatepicker"
-                                    [max]="maxDate" [min]="minDate" (focus)="inDatepicker.open()" formControlName="InitiationDate">
+                                    [max]="maxDate" [min]="minDate" (focus)="inDatepicker.open()"
+                                    formControlName="InitiationDate">
                                 <mat-datepicker-toggle matSuffix [for]="inDatepicker"></mat-datepicker-toggle>
                                 <mat-datepicker #inDatepicker name="InitiationDate" ngDefaultControl>
                                 </mat-datepicker>

@@ -134,7 +134,7 @@
                                                         *ngFor="let infor of this.EligibilityInformation">
                                                         {{infor}}
                                                     </span>
-                                                    </div>
+                                                </div>
                                             </ng-template>
                                             <ng-template #notEligibleTemplate>
                                                 <span class="label label-orange"
@@ -143,12 +143,12 @@
                                             </ng-template>
 
                                             <ng-template #htsnotdonetemplate>
-                                                    <div *ngIf="nohtshistory;else hivstatustemplate">
+                                                <div *ngIf="nohtshistory;else hivstatustemplate">
                                                     <span class="label label-orange"
                                                         *ngFor="let infor of this.EligibilityInformation">
                                                         {{infor}}
                                                     </span>
-                                                    </div>
+                                                </div>
                                             </ng-template>
                                             <ng-template #hivstatustemplate>
                                                 <div *ngIf="hivstatus;else triagetemplate">
@@ -156,7 +156,7 @@
                                                         *ngFor="let infor of this.EligibilityInformation">
                                                         {{infor}}
                                                     </span>
-                                                    </div>
+                                                </div>
                                             </ng-template>
                                             <!--<ng-template #informationtemplate>
                                                 <div
@@ -187,7 +187,7 @@
                                                         *ngFor="let infor of this.EligibilityInformation">
                                                         {{infor}}
                                                     </span>
-                                                    </div>
+                                                </div>
                                             </ng-template>
 
                                             <ng-template #riskassessmenttemplate>
@@ -205,11 +205,18 @@
                                             </ng-template>
                                             <ng-template #riskoutcometemplate>
                                                 <div *ngIf="preprisk;else eligiblecareendtemplate">
+                                                    <span>
+                                                        <a class="btn btn-sm btn-primary"
+                                                            (click)="editRiskAssessment(service.id,service.code)">
+                                                            EditRiskAssessment
+
+                                                        </a>
+                                                    </span>
                                                     <span class="label label-orange"
                                                         *ngFor="let infor of this.EligibilityInformation">
                                                         {{infor}}
                                                     </span>
-                                                    </div>
+                                                </div>
                                             </ng-template>
                                             <ng-template #eligiblecareendtemplate>
 

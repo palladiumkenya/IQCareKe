@@ -205,7 +205,7 @@ export class PrepCareendComponent implements OnInit {
         DeathDate = this.PrepCareEndFormGroup.controls.DeathDate.value;
 
         this.UserId = JSON.parse(localStorage.getItem('appUserId'));
-        if (this.patientMasterVisitId <= 0) {
+        if (this.patientMasterVisitId <= 0   || this.patientMasterVisitId == undefined) {
             const patientencounter: PatientMasterVisitEncounter = {
                 PatientId: this.patientId,
                 EncounterType: this.EncounterTypeId,
@@ -219,6 +219,8 @@ export class PrepCareendComponent implements OnInit {
                 localStorage.setItem('patientMasterVisitId', result['patientMasterVisitId']);
 
                 this.patientmastervisitid = result['patientMasterVisitId'];
+                console.log(result);
+                console.log(this.patientmastervisitid);
 
                 this.prepservice.careEndPatientdetails(this.patientId, this.serviceAreaId,
                     this.patientmastervisitid, CareEndDate, Specify, CareEndReason, DeathDate, this.UserId).subscribe((response) => {

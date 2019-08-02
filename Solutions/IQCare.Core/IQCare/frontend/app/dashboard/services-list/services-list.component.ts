@@ -35,6 +35,7 @@ export class ServicesListComponent implements OnInit {
     enrolledServices: any[];
     PatientCCCEnrolled: boolean = false;
     patientIdentifiers: any[];
+    riskassessmentPatientMasterVisitId: number;
     enrolledService: any[] = [];
     identifiers: any[] = [];
     patientvitals: any[] = [];
@@ -179,7 +180,23 @@ export class ServicesListComponent implements OnInit {
                 break;
         }
     }
+      editRiskAssessment(serviceId: number,serviceCode: string)
 
+      {
+        if (this.riskencounter.length >  0) {
+            //console.log(this.riskencounter);
+            this.riskassessmentPatientMasterVisitId = this.riskencounter[0].patientMasterVisitId;
+            
+
+             this.zone.run(() => {
+                this.router.navigate(['/prep/riskassessment/' + '/' + this.patientId + '/' + this.personId + '/'
+                    + serviceId + '/' + this.riskassessmentPatientMasterVisitId ],
+                    { relativeTo: this.route });
+            });
+       
+        }
+
+      }
     newTriage() {
         localStorage.setItem('selectedService', 'triage');
         this.store.dispatch(new Consent.SelectedService('triage'));
@@ -269,7 +286,7 @@ export class ServicesListComponent implements OnInit {
                     if (!data) {
                         return;
                     }
-                    console.log(data);
+                   
                 });
         } else {
             this.zone.run(() => {
@@ -459,7 +476,7 @@ export class ServicesListComponent implements OnInit {
                                 isEligible = true;
                                 if (isEligible == true) {
                                     
-                                    console.log(this.riskencounter);
+                                   
                                     if (this.riskencounter.length <= 0) {
                                         isEligible = false;
                                         this.RiskDone = false;
@@ -472,6 +489,7 @@ export class ServicesListComponent implements OnInit {
                                     } 
 
                                     if (this.riskencounter.length >  0) {
+                                       
                                         if (this.riskencounter[0].assessmentOutCome !== null) {
                                         if (this.riskencounter[0].assessmentOutCome.toString().toLowerCase() == 'norisk') {
                                             isEligible = false;

@@ -192,14 +192,20 @@ export class PersonHomeService {
             catchError(this.errorHandler.handleError<any[]>('filterFacilities'))
         );
     }
-
+    
+    public filtermflcode(filterString: string) {
+        return this.http.get<any[]>(this.API_URL + '/api/Lookup/searchFacilityMflCodeList?searchString=' + filterString).pipe(
+            tap(filterFacilities => this.errorHandler.log('fetched filtered facilities')),
+            catchError(this.errorHandler.handleError<any[]>('filterFacilities'))
+        );
+    }
     public getFacility(mflCode: string) {
         return this.http.get<any>(this.API_URL + '/api/Lookup/getFacility/' + mflCode).pipe(
             tap(getFacility => this.errorHandler.log('get Facility')),
             catchError(this.errorHandler.handleError<any[]>('getFacility'))
         );
     }
-
+      
 
     public getPatientCareEndedHistory(patientId: number): Observable<any[]> {
         return this.http.get<any[]>(this.API_URL + '/api/PatientServices/GetLatestCareEndDetails/' + patientId).pipe(
