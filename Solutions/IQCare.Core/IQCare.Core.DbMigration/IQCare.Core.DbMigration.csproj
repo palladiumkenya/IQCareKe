@@ -279,6 +279,7 @@
     <None Remove="Scripts\2.1.0\22_sp_UpdateBlueCardBaselineTransferInStartedART.sql" />
     <None Remove="Scripts\2.1.0\23_sp_updatePatientProgramStart.sql" />
     <None Remove="Scripts\2.1.0\24_HTS_LAB_Register.sql" />
+    <None Remove="Scripts\2.1.0\25_sp_getAllViralLoads.sql" />
   </ItemGroup>
 
   <ItemGroup>
@@ -571,6 +572,7 @@
     <EmbeddedResource Include="Scripts\2.1.0\22_sp_UpdateBlueCardBaselineTransferInStartedART.sql" />
     <EmbeddedResource Include="Scripts\2.1.0\23_sp_updatePatientProgramStart.sql" />
     <EmbeddedResource Include="Scripts\2.1.0\24_HTS_LAB_Register.sql" />
+    <EmbeddedResource Include="Scripts\2.1.0\25_sp_getAllViralLoads.sql" />
   </ItemGroup>
 
   <ItemGroup>

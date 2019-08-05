@@ -1588,7 +1588,7 @@
 	            });
 
 	        $("#DateOfARTInitiation").prop("disabled", true);
-	        $("#DARTI").addClass("noneevents");
+	        //$("#DARTI").addClass("noneevents");
 
 	        /* limit future dates viralload baseline date*/
 	        $("#BaselineViralloadDate").on('changed.fu.datepicker dateClicked.fu.datepicker',

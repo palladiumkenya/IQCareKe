@@ -172,7 +172,14 @@ namespace BusinessProcess.CCC.visit
                 for (int i = 0; i < theDT.Rows.Count; i++)
                 {
                     PatientLabTracker vl = new PatientLabTracker();
-                    vl.ResultValues = Convert.ToDecimal(theDT.Rows[i]["resultvalue"]);
+                    if (theDT.Rows[i]["resultvalue"] == null || theDT.Rows[i]["resultvalue"] == DBNull.Value)
+                    {
+                        vl.ResultValues = null;
+                    }
+                    else
+                    {
+                        vl.ResultValues = Convert.ToDecimal(theDT.Rows[i]["resultvalue"]);
+                    }
                     vl.CreateDate = Convert.ToDateTime(theDT.Rows[i]["resultdate"]);
 
                     list.Add(vl);
@@ -196,7 +203,14 @@ namespace BusinessProcess.CCC.visit
 
                 if (theDT.Rows.Count > 0)
                 {
-                    lastVL.ResultValues = Convert.ToDecimal(theDT.Rows[0]["resultvalue"]);
+                    if (theDT.Rows[0]["resultvalue"] == null || theDT.Rows[0]["resultvalue"] == DBNull.Value)
+                    {
+                        lastVL.ResultValues = null;
+                    }
+                    else
+                    {
+                        lastVL.ResultValues = Convert.ToDecimal(theDT.Rows[0]["resultvalue"]);
+                    }
                     lastVL.CreateDate = Convert.ToDateTime(theDT.Rows[0]["resultdate"]);
                     lastVL.Results = theDT.Rows[0]["orderstatus"].ToString();
                     lastVL.SampleDate = Convert.ToDateTime(theDT.Rows[0]["orderdate"]);
