@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using System;
 using IQCare.Common.Core;
 using AutoMapper;
 using IQCare.Common.Core.Models;

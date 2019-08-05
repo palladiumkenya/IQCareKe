@@ -41,7 +41,6 @@ import { DataService } from '../_services/data.service';
     styleUrls: ['./anc.component.css']
 })
 export class AncComponent implements OnInit, OnDestroy {
-
     formType: string;
     visitType: number;
     isLinear: boolean = true;
@@ -55,6 +54,9 @@ export class AncComponent implements OnInit, OnDestroy {
     chronicIllnessData: any[] = [];
     lookupItems$: Subscription;
     drugOptions: LookupItemView[] = [];
+
+    appointmentReasonId: number;
+    appointmentStatusId: number;
 
     /* Edit parameters */
     public visitDetailsId: number;
@@ -153,6 +155,18 @@ export class AncComponent implements OnInit, OnDestroy {
                     this.isEdit = true;
                     // this.isLinear = false;
                 }
+            }
+        );
+
+        this.lookupItemService.getByGroupNameAndItemName('AppointmentStatus', 'Pending').subscribe(
+            (res) => {
+                this.appointmentStatusId = res['itemId'];
+            }
+        );
+
+        this.lookupItemService.getByGroupNameAndItemName('AppointmentReason', 'Follow Up').subscribe(
+            (res) => {
+                this.appointmentReasonId = res['itemId'];
             }
         );
 
@@ -911,7 +925,14 @@ export class AncComponent implements OnInit, OnDestroy {
         const patientAppointmentEditCommand: PatientAppointmentEditCommand = {
             AppointmentId: this.ReferralMatFormGroup.value[0]['appointmentid'],
             AppointmentDate: moment(this.ReferralMatFormGroup.value[0]['nextAppointmentDate']).toDate(),
-            Description: this.ReferralMatFormGroup.value[0]['serviceRemarks']
+            Description: this.ReferralMatFormGroup.value[0]['serviceRemarks'],
+            UserId: this.userId,
+            PatientId: this.patientId,
+            PatientMasterVisitId: this.patientMasterVisitId,
+            DifferentiatedCareId: null,
+            ReasonId: this.appointmentReasonId,
+            ServiceAreaId: this.serviceAreaId,
+            StatusId: this.appointmentStatusId
         };
 
         const pncNextAppointmentCommand: PatientAppointment = {

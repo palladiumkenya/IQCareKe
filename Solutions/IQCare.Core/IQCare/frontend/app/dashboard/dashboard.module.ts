@@ -12,6 +12,7 @@ import { PortalComponent } from './portal/portal.component';
 import { PersonHomeComponent } from './person-home/person-home.component';
 import { NotificationService } from '../shared/_services/notification.service';
 import { ServicesListComponent } from './services-list/services-list.component';
+import { HTSEncounterHistoryResolver } from './services/getlatesthtsencounterhistory.resolver';
 import {
     MatCardModule, MatDatepickerModule,
     MatNativeDateModule, MatFormFieldModule,
@@ -40,6 +41,7 @@ import { PersonHomeService } from './services/person-home.service';
 import { RiskEncounterResolver } from './services/riskencounter.resolver';
 import { PrepComponent } from './enrollment/service-areas/prep/prep.component';
 import { ReenrollmentComponent } from './reenrollment/reenrollment.component';
+import { PatientHtsComponent } from './patient-hts/patient-hts.component';
 
 @NgModule({
     imports: [
@@ -77,7 +79,8 @@ import { ReenrollmentComponent } from './reenrollment/reenrollment.component';
         HtsComponent,
         CccComponent,
         PrepComponent,
-        ReenrollmentComponent
+        ReenrollmentComponent,
+        PatientHtsComponent
     ],
     providers: [
         NotificationService,
@@ -91,8 +94,14 @@ import { ReenrollmentComponent } from './reenrollment/reenrollment.component';
         RiskEncounterResolver,
         ExitReasonsResolver,
         CareendDetailsResolver,
-      
+        HTSEncounterHistoryResolver
 
+
+    ],
+
+    entryComponents: [
+        PatientHtsComponent
     ]
+
 })
 export class DashboardModule { }

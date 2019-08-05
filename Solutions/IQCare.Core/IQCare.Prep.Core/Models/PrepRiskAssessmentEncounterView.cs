@@ -25,7 +25,13 @@ namespace IQCare.Prep.Core.Models
        
        
         public Boolean DeleteFlag { get; set; }
-       
-        
+
+
+        public string ClientWillingTakingPrep { get; set; }
+
+        public string AssessmentOutCome { get; set; }
+
+
+
     }
 }

@@ -11,7 +11,7 @@ namespace IQCare.Lab.Core.Models
         }
 
         public LabOrderTestResult(int labOrderId, int labOrderTestId, int labTestId,int parameterId, decimal ? resultValue,string resultText, 
-            int ? resultOptionId,string resultOption,string resultUnit,int? resultUnitId,int userId,bool undetectedTable,decimal ? detectionLimit)
+            int ? resultOptionId,string resultOption,string resultUnit,int? resultUnitId,int userId,bool undetectedTable, DateTime statusDate, decimal ? detectionLimit)
         {
             LabOrderId = labOrderId;
             LabOrderTestId = labOrderTestId;
@@ -26,7 +26,7 @@ namespace IQCare.Lab.Core.Models
             UserId = userId;
             CreatedBy = userId;
             CreateDate = DateTime.Now;
-            StatusDate = DateTime.Now;
+            StatusDate = statusDate;
             Undetectable = undetectedTable;
             DetectionLimit = detectionLimit;
         }
