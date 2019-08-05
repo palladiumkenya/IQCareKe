@@ -96,6 +96,7 @@
     <Compile Include="HIVEducation\IHIVEducation.cs" />
     <Compile Include="Lookup\ILookupICDCodesManager.cs" />
     <Compile Include="Lookup\IPatientLookupLabManager.cs" />
+    <Compile Include="Reporting\IReportingManager.cs" />
     <Compile Include="Tb\IPatientTBRx.cs" />
     <Compile Include="Visit\IMst_PatientInsert.cs" />
     <Compile Include="Interoperability\IDrugPrescriptionManager.cs" />

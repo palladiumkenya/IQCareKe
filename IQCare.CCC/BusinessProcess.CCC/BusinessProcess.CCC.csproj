@@ -122,6 +122,7 @@
     <Compile Include="BPersonManager.cs" />
     <Compile Include="BPersonContactManager.cs" />
     <Compile Include="BPersonRelationshipManager.cs" />
+    <Compile Include="BReportingManager.cs" />
     <Compile Include="BTannersStaging.cs" />
     <Compile Include="ClinicalSummary\BClinicalSummary.cs" />
     <Compile Include="ClinicalSummary\BPharmacyHistoryDrugSubstitutionsSwitches.cs" />

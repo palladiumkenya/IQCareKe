@@ -164,7 +164,7 @@ namespace IQCare.Web.CCC.WebService
         {
             PatientId = int.Parse(HttpContext.Current.Session["PatientPK"].ToString());
             var PSM = new PatientScreeningManager();
-            PatientScreening[] patientScreeningData = PSM.GetPatientScreeningByVisitId(PatientId,PatientMasterVisitId).ToArray();
+            PatientScreening[] patientScreeningData = PSM.GetPatientScreeningByVisitId(Convert.ToInt32(Session["PatientPK"]), PatientMasterVisitId).ToArray();
             string jsonScreeningObject = "[]";
             jsonScreeningObject = new JavaScriptSerializer().Serialize(patientScreeningData);
             return jsonScreeningObject;

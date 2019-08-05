@@ -41,6 +41,7 @@ namespace IQCare.Web.CCC.Patient
         {
                       HttpContext.Current.Session["PatientPK"] = patientId;
             HttpContext.Current.Session["PersonId"] = personId;
+            HttpContext.Current.Session["PatientTrace"] = "no";
             HttpContext.Current.Session["PatientInformation"] = null;
             return "success";
         }

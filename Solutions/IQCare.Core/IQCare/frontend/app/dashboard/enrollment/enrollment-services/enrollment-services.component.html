@@ -12,7 +12,7 @@
                                 <div class="col-lg-3 col-sm-3 col-xs-12">
                                     <mat-form-field>
                                         <input placeholder="Enrollment Date" matInput [matDatepicker]="myDatepicker"
-                                            [max]="maxDate" [min]="minDate" (focus)="myDatepicker.open()"
+                                            [max]="maxDate" (focus)="myDatepicker.open()"
                                             formControlName="EnrollmentDate" required>
                                         <mat-datepicker-toggle matSuffix [for]="myDatepicker"></mat-datepicker-toggle>
                                         <mat-datepicker #myDatepicker name="EnrollmentDate" ngDefaultControl>

@@ -20,6 +20,7 @@ using Entities.CCC.pharmacy;
 using Entities.CCC.Neonatal;
 using Entities.CCC.Tanners;
 using Entities.CCC.Adherence;
+using Entities.CCC.Reports;
 
 namespace DataAccess.CCC.Context
 {
@@ -169,5 +170,8 @@ namespace DataAccess.CCC.Context
         public DbSet<PsychosocialCircumstances> PC { get; set; }
         public DbSet<AdherenceScreening> screening { get; set; }
         public DbSet<Referrals> referrals { get; set; }
+
+        //reporting
+        public DbSet<Tracing> patienttracing { get; set; }
     }
 }

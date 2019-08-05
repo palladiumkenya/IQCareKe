@@ -12,7 +12,7 @@ namespace IQCare.Web.CCC.UC
     public partial class ucPatientBrief : System.Web.UI.UserControl
     {
         Utility _utility = new Utility();
-
+        public string PatientTrace;
         //readonly ILookupManager _lookupManager = (ILookupManager)ObjectFactory.CreateInstance("BusinessProcess.CCC.BLookupManager, BusinessProcess.CCC");
 
         protected IPatientMaritalStatusManager PatientMaritalStatusManager = (IPatientMaritalStatusManager)ObjectFactory.CreateInstance("BusinessProcess.CCC.PatientMaritalStatusManager, BusinessProcess.CCC");
@@ -26,7 +26,8 @@ namespace IQCare.Web.CCC.UC
 
             int patientId = Convert.ToInt32(HttpContext.Current.Session["PatientPK"]);
             int personId = Convert.ToInt32(HttpContext.Current.Session["personId"]);
-            
+            PatientTrace = HttpContext.Current.Session["PatientTrace"].ToString(); 
+
             //if (Request.QueryString["patient"] != null)
             //{
             //    patientId = Convert.ToInt32(Request.QueryString["patient"]);

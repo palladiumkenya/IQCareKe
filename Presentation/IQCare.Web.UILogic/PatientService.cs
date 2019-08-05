@@ -402,7 +402,7 @@ namespace IQCare.Web.UILogic
             IModule moduleMgr = (IModule)ObjectFactory.CreateInstance("BusinessProcess.FormBuilder.BModule, BusinessProcess.FormBuilder");
 
             List<ServiceRule> rules = moduleMgr.GetBusinessRule(null);
-            List<ServiceArea> list = dt.Where(r => r.EnrolFlag == true).ToList();
+            List<ServiceArea> list = dt.ToList();
             list.RemoveAll(item =>
             {
                 int moduleId = item.Id;
@@ -411,37 +411,37 @@ namespace IQCare.Web.UILogic
                 List<ServiceRule> setOneMale = rules.Where(r => r.RuleSet == 1 && r.RuleReferenceId == "ACTIVE_MALE" && r.ServiceAreaId == moduleId).ToList();
                 bool setOneFlag = true;
                 bool setTwoFlag = false;
-                if (setOneAge != null)
-                {
-                    if (setOneAge.MinValue != "0" || setOneAge.MaxValue != "0")
-                    {
-                        if (patientAge >= Convert.ToDouble(setOneAge.MinValue) && patientAge <= Convert.ToDouble(setOneAge.MaxValue))
-                        {
+                //if (setOneAge != null)
+                //{
+                //    if (setOneAge.MinValue != "0" || setOneAge.MaxValue != "0")
+                //    {
+                //        if (patientAge >= Convert.ToDouble(setOneAge.MinValue) && patientAge <= Convert.ToDouble(setOneAge.MaxValue))
+                //        {
 
-                        }
-                        else
-                        {
-                            setOneFlag = false;
-                        }
+                //        }
+                //        else
+                //        {
+                //            setOneFlag = false;
+                //        }
 
-                    }
-                }
-                if (setOneFemale != null && setOneFemale.Count > 0 && setOneMale != null && setOneMale.Count > 0)
-                {
+                //    }
+                //}
+                //if (setOneFemale != null && setOneFemale.Count > 0 && setOneMale != null && setOneMale.Count > 0)
+                //{
 
-                }
-                else
-                {
+                //}
+                //else
+                //{
 
-                    if (setOneFemale.Count > 0 && patientSex == "Male")
-                    {
-                        setOneFlag = false;
-                    }
-                    else if (setOneMale.Count > 0 && patientSex == "Female")
-                    {
-                        setOneFlag = false;
-                    }
-                }
+                //    if (setOneFemale.Count > 0 && patientSex == "Male")
+                //    {
+                //        setOneFlag = false;
+                //    }
+                //    else if (setOneMale.Count > 0 && patientSex == "Female")
+                //    {
+                //        setOneFlag = false;
+                //    }
+                //}
 
                 ServiceRule set2Age = rules.Where(r => r.RuleSet == 2 && r.RuleReferenceId == "ACTIVE_AGE_RANGE_YEARS" && r.ServiceAreaId == moduleId).FirstOrDefault();
                 List<ServiceRule> set2Female = rules.Where(r => r.RuleSet == 2 && r.RuleReferenceId == "ACTIVE_FEMALE" && r.ServiceAreaId == moduleId).ToList();

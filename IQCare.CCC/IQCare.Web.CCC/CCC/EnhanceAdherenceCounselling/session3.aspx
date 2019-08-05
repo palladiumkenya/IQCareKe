@@ -295,7 +295,7 @@
         }
     }
     function checkExistingS3Appointment() {
-        var patientId = "<%=PatientId%>";
+        var patientId = GetURLParameter('pid');
         var appointmentDate = $("#<%=appointmentDateTb.ClientID%>").val();
         var serviceArea = 203;
         var reason = <%=reasonId%>;
@@ -330,7 +330,7 @@
         var status = <%=followupStatusId%>;
         var differentiatedCareId = <%=differentiatedCareId%>;
         var appointmentDate = $("#<%=appointmentDateTb.ClientID%>").val();
-        var patientId = <%=PatientId%>;
+        var patientId = GetURLParameter('pid');
         var patientMasterVisitId = GetURLParameter('visitId');
         var userId = <%=userId%>;
         var appointmentid = $("#<%=S3AppointmentId.ClientID%>").val();
@@ -356,7 +356,7 @@
         var status = <%=followupStatusId%>;
         var differentiatedCareId = <%=differentiatedCareId%>;
         var appointmentDate = $("#<%=appointmentDateTb.ClientID%>").val();
-        var patientId = <%=PatientId%>;
+        var patientId = GetURLParameter('pid');
         var patientMasterVisitId =  GetURLParameter('visitId');
         var userId = <%=userId%>;
         $.ajax({
@@ -378,7 +378,7 @@
         $("#eahdatastep3 .mmrbList").each(function () {
             var screeningValue = 0;
             var screeningType = <%=screenTypeId%>;
-            var patientId = <%=PatientId%>;
+            var patientId = GetURLParameter('pid');
             var patientMasterVisitId =  GetURLParameter('visitId');
             var userId = <%=userId%>;
             var screeningCategory = $(this).attr('id').replace('session3rb', '');
@@ -403,7 +403,7 @@
         });
         $("#eahdatastep3 input[type=text]").each(function () {
             var categoryId = ($(this).attr('id')).replace('session3tb', '');
-            var patientId = <%=PatientId%>;
+            var patientId = GetURLParameter('pid');
             var patientMasterVisitId =  GetURLParameter('visitId');
             var clinicalNotes = $(this).val();
             var serviceAreaId = 203;
@@ -426,7 +426,7 @@
         });
         $("#eahdatastep3 textarea").each(function () {
             var categoryId = ($(this).attr('id')).replace('session3tb', '');
-            var patientId = <%=PatientId%>;
+            var patientId = GetURLParameter('pid');
             var patientMasterVisitId = GetURLParameter('visitId');
             var clinicalNotes = $(this).val();
             var serviceAreaId = 203;
@@ -453,7 +453,7 @@
     }
     $(document).ready(function () {
         var PatientMasterVisitId = GetURLParameter('visitId');
-        var patientId = '<%=PatientId%>';
+        var patientId = GetURLParameter('pid');
 
         
       var SRNQuestion1='<%=Session3Refferal1ItemId%>';

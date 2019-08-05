@@ -79,6 +79,12 @@
         {
             width: 800px !important;
         }
+        .masterfooter .row{margin-right:0px !important;margin-left: 0px !important;}
+        .row{margin-right:0px !important;margin-left: 0px !important;}
+        .navbar-brand{margin-top: -20px;}
+        .container-fluid .navbar-brand{margin-top: -20px;}
+        .navbar-default{background-image: none;box-shadow: none;background-color:#fff;border: 0px;background-image:none;}
+        .navbartitle{margin-top: 20px !important;border: 1px solid red;}
     </style>
 </head>
 <body style="padding-bottom: 60px">
@@ -95,7 +101,7 @@
                         <span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span><span
                             class="icon-bar"></span><span class="icon-bar"></span>
                     </button>
-                    <div class="navbar-brand">
+                    <div class="navbar-brand" style="margin-top: 5px;">
                         <div id="facilityName" align="right" runat="server">
                             <asp:Label ID="lblLocation" ForeColor="ActiveCaption" CssClass="fa fa-h-square text-uppercase "
                                 runat="server" Text=" Nsambya Hospital and Medical Center"></asp:Label>
@@ -229,9 +235,8 @@
         </div>
         <nav role="navigation" class="navbar navbar-default navbar-fixed-bottom" style="navigation">
 
-                  <div class="container-fluid">
-               
-              <div class="row" style="padding-top:3px">
+                  <div class="container-fluid masterfooter">
+              <div class="row" style="padding-top:3px;margin-right: 0px;margin-left: 0px;">
                       <div class="col-md-1">
                            <img src="<%= Page.ResolveClientUrl("~/Images/FGI.jpg") %>" class="img-responsive img-rounded"  alt="Palladium Group"/>
                       </div> 
