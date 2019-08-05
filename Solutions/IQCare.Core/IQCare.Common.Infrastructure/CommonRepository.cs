@@ -66,7 +66,7 @@ namespace IQCare.Common.Infrastructure
 
         public async Task<List<TEntity>> FromSql(string query, params object[] parameters)
         {
-            return await _context.Set<TEntity>().FromSql(query, parameters).ToListAsync();
+            return await _context.Set<TEntity>().FromSql(query, parameters).AsNoTracking().ToListAsync();
         }
 
         public async Task<IEnumerable<TEntity>> GetAllAsync()

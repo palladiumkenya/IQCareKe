@@ -235,14 +235,25 @@ export class HeiService {
             return of([]);
         }
 
-        console.log(completeLabOrderCommand);
-        return;
-
         return this.http.post(this.API_LAB_URL + '/api/LabOrder/CompleteLabOrder', JSON.stringify(completeLabOrderCommand),
             httpOptions).pipe(
                 tap(saveCompleteHeiLabOrder => this.errorHandler.log(`successfully completed hei laborder`)),
                 catchError(this.errorHandler.handleError<any>('Error completing hei laborder'))
             );
+    }
+
+    public saveHeiLabTestsTypes(heiLabTests: any): Observable<any> {
+        return this.http.post(this.API_LAB_URL + '/api/LabOrder/SaveHeiLabTests', JSON.stringify(heiLabTests), httpOptions).pipe(
+            tap(saveHeiLabTestsTypes => this.errorHandler.log(`successfully completed hei labTests`)),
+            catchError(this.errorHandler.handleError<any>('Error completing hei labTests'))
+        );
+    }
+
+    public getPatientHeiLabTestsTypes(patientId: number): Observable<any[]> {
+        return this.http.get(this.API_LAB_URL + '/api/LabOrder/GetHeiLabTests/' + patientId).pipe(
+            tap(getPatientHeiLabTestsTypes => this.errorHandler.log(`successfully fetched hei labTests`)),
+            catchError(this.errorHandler.handleError<any>('Error fetching hei labTests'))
+        );
     }
 
     public getPatientById(patientId: number): Observable<any> {
