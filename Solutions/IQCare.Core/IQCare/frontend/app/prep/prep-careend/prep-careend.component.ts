@@ -11,7 +11,9 @@ import { registerLocaleData } from '@angular/common';
 import { PrepService } from '../_services/prep.service';
 import { EncounterService } from '../../shared/_services/encounter.service';
 import { PatientMasterVisitEncounter } from '../../pmtct/_models/PatientMasterVisitEncounter';
-
+import { Subscription } from 'rxjs';
+import { PersonView } from '../../dashboard/_model/personView';
+import { PersonHomeService } from '../../dashboard/services/person-home.service';
 import * as moment from 'moment';
 
 import { LookupItemService } from './../../shared/_services/lookup-item.service';
@@ -20,7 +22,7 @@ import { LookupItemService } from './../../shared/_services/lookup-item.service'
     templateUrl: './prep-careend.component.html',
     styleUrls: ['./prep-careend.component.css'],
     providers: [
-        EncounterService
+        EncounterService, PersonHomeService
     ]
 
 })
@@ -28,6 +30,7 @@ export class PrepCareendComponent implements OnInit {
     public PrepCareEndFormGroup: FormGroup;
     patientmastervisitid: number;
     maxDate: Date;
+    minDate: Date;
     personId: number;
     serviceAreaId: number;
     patientId: number;
@@ -39,6 +42,8 @@ export class PrepCareendComponent implements OnInit {
     encountertypeoptions: LookupItemView[] = [];
     encounterlist: LookupItemView[] = [];
     PatientCareEndList: any[] = [];
+    public person: PersonView;
+    public personView$: Subscription;
 
     constructor(private router: Router,
         private route: ActivatedRoute,
@@ -49,6 +54,7 @@ export class PrepCareendComponent implements OnInit {
         private encounterservice: EncounterService,
         private prepservice: PrepService,
         private snotifyService: SnotifyService,
+        private personHomeService: PersonHomeService,
         private notificationService: NotificationService
 
 
@@ -68,6 +74,7 @@ export class PrepCareendComponent implements OnInit {
             this.patientMasterVisitId = params.patientMasterVisitId;
             this.serviceAreaId = params.serviceId;
             this.Isedit = edit;
+            this.getPatientDetailsById(this.personId);
 
 
 
@@ -99,21 +106,42 @@ export class PrepCareendComponent implements OnInit {
 
 
     }
+    public getPatientDetailsById(personId: number) {
+        this.personView$ = this.personHomeService.getPatientByPersonId(personId).subscribe(
+            p => {
+                // console.log(p);
+                this.person = p;
+                if (this.person != null) {
+                    console.log(this.person);
+                    if (this.person.dateOfBirth != null && this.person.dateOfBirth != undefined) {
+                        this.minDate = this.person.dateOfBirth;
+                    }
+                }
+
+            },
+            (err) => {
+                this.snotifyService.error('Error editing encounter ' + err, 'person detail service',
+                    this.notificationService.getConfig());
+            },
+            () => {
+                // console.log(this.personView$);
+            });
+    }
     LoadDetails() {
 
         if (this.patientMasterVisitId > 0) {
             this.prepservice.getPatientCareEndDetails(this.patientMasterVisitId).subscribe((res) => {
                 this.PatientCareEndList = res;
-               
 
-                
+
+
                 if (this.PatientCareEndList != undefined) {
                     this.PrepCareEndFormGroup.controls.careEndedDate.setValue(this.PatientCareEndList['exitDate']);
                     this.PrepCareEndFormGroup.controls.DeathDate.setValue(this.PatientCareEndList['dateOfDeath']);
                     this.PrepCareEndFormGroup.controls.Specify.setValue(this.PatientCareEndList['careEndingNotes']);
                     this.PrepCareEndFormGroup.controls.discontinueReason.setValue(this.PatientCareEndList['exitReason'])
                 }
-               
+
 
 
             });
@@ -164,7 +192,7 @@ export class PrepCareendComponent implements OnInit {
                 { relativeTo: this.route });
         });
 
-}    Save() {
+    } Save() {
         this.spinner.show();
         let CareEndReason: number;
         let Specify: string;
@@ -175,11 +203,9 @@ export class PrepCareendComponent implements OnInit {
         Specify = this.PrepCareEndFormGroup.controls.Specify.value;
         CareEndReason = this.PrepCareEndFormGroup.controls.discontinueReason.value;
         DeathDate = this.PrepCareEndFormGroup.controls.DeathDate.value;
-        console.log(CareEndDate);
-        console.log(Specify);
-        console.log(CareEndReason);
+
         this.UserId = JSON.parse(localStorage.getItem('appUserId'));
-        if (this.patientMasterVisitId <= 0) {
+        if (this.patientMasterVisitId <= 0   || this.patientMasterVisitId == undefined) {
             const patientencounter: PatientMasterVisitEncounter = {
                 PatientId: this.patientId,
                 EncounterType: this.EncounterTypeId,
@@ -193,6 +219,8 @@ export class PrepCareendComponent implements OnInit {
                 localStorage.setItem('patientMasterVisitId', result['patientMasterVisitId']);
 
                 this.patientmastervisitid = result['patientMasterVisitId'];
+                console.log(result);
+                console.log(this.patientmastervisitid);
 
                 this.prepservice.careEndPatientdetails(this.patientId, this.serviceAreaId,
                     this.patientmastervisitid, CareEndDate, Specify, CareEndReason, DeathDate, this.UserId).subscribe((response) => {
@@ -200,11 +228,11 @@ export class PrepCareendComponent implements OnInit {
 
                         this.snotifyService.success('Successfully careended the patient' + response['message'], 'Patient Termination Form',
                             this.notificationService.getConfig());
-                            this.zone.run(() => {
-                                this.router.navigate(
-                                    ['/dashboard/personhome/' + this.personId],
-                                    { relativeTo: this.route });
-                            });
+                        this.zone.run(() => {
+                            this.router.navigate(
+                                ['/dashboard/personhome/' + this.personId],
+                                { relativeTo: this.route });
+                        });
 
 
 
@@ -238,11 +266,11 @@ export class PrepCareendComponent implements OnInit {
                     this.snotifyService.success('Successfully careended the patient' + response['message'], 'Patient Termination Form',
                         this.notificationService.getConfig());
 
-                        this.zone.run(() => {
-                            this.router.navigate(
-                                ['/dashboard/personhome/' + this.personId],
-                                { relativeTo: this.route });
-                        });
+                    this.zone.run(() => {
+                        this.router.navigate(
+                            ['/dashboard/personhome/' + this.personId],
+                            { relativeTo: this.route });
+                    });
 
 
                 },

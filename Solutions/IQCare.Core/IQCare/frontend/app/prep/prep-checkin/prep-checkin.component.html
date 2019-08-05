@@ -5,6 +5,13 @@
 
 <form [formGroup]="form">
     <mat-dialog-content>
+    <!--    <mat-form-field>
+            <mat-select placeholder="Visit Type" formControlName="visitType" required>
+                <mat-option value=""></mat-option>
+                <mat-option *ngFor="let option of visitTypes" [value]="option">{{option.itemName}}</mat-option>
+            </mat-select>
+            <mat-error *ngIf="!form.controls['visitType'].valid">Please select Visit Type</mat-error>
+        </mat-form-field>-->
         <mat-form-field>
             <input matInput [min]="prepEncounterDate" placeholder="Visit Date" required
                 [matDatepicker]="visitdatepicker" (click)="visitdatepicker.open()" id="visitdatepicker"

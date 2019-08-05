@@ -47,6 +47,7 @@ export class PrepComponent implements OnInit {
     isVisible: boolean = false;
     maxDate: Date;
     minDate: Date;
+    facilityselected: any[] = [];
     personPopulation: PersonPopulation;
     ClientTypes: any[] = [];
     entrypoints: LookupItemView[] = [];
@@ -86,6 +87,7 @@ export class PrepComponent implements OnInit {
         private searchService: SearchService,
         private recordsService: RecordsService) {
         this.maxDate = new Date();
+
         this.isVisible = false;
         this.FacilitySelected.valueChanges.pipe(debounceTime(400)).subscribe(data => {
             this.personHomeService.filterFacilities(data).subscribe(res => {
@@ -93,6 +95,7 @@ export class PrepComponent implements OnInit {
                 this.filteredfacilities = res['facilityList'];
             });
         });
+
     }
 
     ngOnInit() {
@@ -110,6 +113,7 @@ export class PrepComponent implements OnInit {
             this.userId = JSON.parse(localStorage.getItem('appUserId'));
             this.posId = localStorage.getItem('appPosID');
         });
+        this.getPatientDetailsById(this.personId);
 
         this.personPopulation = new PersonPopulation();
 
@@ -119,7 +123,8 @@ export class PrepComponent implements OnInit {
             EnrollmentDate: new FormControl('', [Validators.required]),
             EnrollmentNumber: new FormControl('', Validators.compose([
                 Validators.required,
-                Validators.pattern(/^([0-9]{5})$/)
+                Validators.pattern(/^[\d]{5}$/),
+                // Validators.maxLength(5)
             ])),
             MFLCode: new FormControl('', [Validators.required]),
             Year: new FormControl('', [Validators.required]),
@@ -146,6 +151,12 @@ export class PrepComponent implements OnInit {
                 this.keyPops = res['lookupItems'];
             }
         );
+        this.form.controls.TransferInMflCode.valueChanges.pipe(debounceTime(400)).subscribe(data => {
+            this.personHomeService.filtermflcode(data).subscribe(res => {
+               
+                this.filteredfacilities = res['facilityList'];
+            });
+        });
 
 
         this._lookupItemService.getByGroupName('DiscordantCouple').subscribe(
@@ -197,13 +208,11 @@ export class PrepComponent implements OnInit {
                 console.log(this.serviceAreaIdentifiers);
             }
         );
-        /*this._lookupItemService.getFacilityList().subscribe((res) => {
-            console.log('facilitylist');
-            console.log(res);
-            this.facilityList = res['facilityList'];
-            this.facilities = this.facilityList;
+        this._lookupItemService.getFacilityList().subscribe((res) => {
 
-        });*/
+            this.facilities = res['facilityList'];
+
+        });
         this._lookupItemService.getByGroupName('PrEPRegimen').subscribe(
             (res) => {
                 this.PrepRegimen = res['lookupItems'];
@@ -250,6 +259,12 @@ export class PrepComponent implements OnInit {
             p => {
                 // console.log(p);
                 this.person = p;
+                if (this.person != null) {
+
+                    if (this.person.dateOfBirth != null && this.person.dateOfBirth != undefined) {
+                        this.minDate = this.person.dateOfBirth;
+                    }
+                }
 
                 localStorage.setItem('personId', this.person.personId.toString());
                 this.store.dispatch(new Consent.PersonId(this.person.personId));
@@ -347,8 +362,7 @@ export class PrepComponent implements OnInit {
                     this.form.controls.PrevPrepUse.setValue(itemid);
 
                 }
-                console.log('prevprepuse');
-                console.log(res);
+
             },
             (error) => {
                 console.log(error);
@@ -535,6 +549,10 @@ export class PrepComponent implements OnInit {
         return facility ? facility.name : undefined;
     }
 
+
+    displaymflcode(mflCode?: any): string | undefined {
+        return mflCode ? mflCode : undefined;
+    }
     /*protected filtercorrectfacilities(value) {
         if (!this.facilities) {
             return;
@@ -594,7 +612,32 @@ export class PrepComponent implements OnInit {
 
     }
 
+    changemflcode(event) {
+        console.log(event);
+        let value: string;
+        value = event.option.viewValue.toString();
 
+        let arr: string[] = [];
+        arr = value.split('-');
+
+        this.personHomeService.getFacility(arr[0].toString()).subscribe(
+            (result) => {
+                if (result.length > 0) {
+                    console.log(result);
+                    this.filteredfacilities = result;
+                    this.FacilitySelected.setValue(result[0]);
+                }
+            }
+        );
+
+
+
+
+    }
+    changecode(event) {
+       
+        this.FacilitySelected.setValue('');
+    }
     change(event) {
 
 
