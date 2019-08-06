@@ -1,6 +1,11 @@
 import { LookupItemView } from './../../../../shared/_models/LookupItemView';
 import { Component, OnInit, Inject } from '@angular/core';
-import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
+import {
+    FormBuilder,
+    FormGroup,
+    Validators,
+    FormControl
+} from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 
 @Component({
@@ -16,10 +21,13 @@ export class HeiCompletelaborderComponent implements OnInit {
     labTestId: number;
     selectedTesttype: LookupItemView[];
     testResults: LookupItemView[];
+    maxDate: Date;
 
-    constructor(private _formBuilder: FormBuilder,
+    constructor(
+        private _formBuilder: FormBuilder,
         private dialogRef: MatDialogRef<HeiCompletelaborderComponent>,
-        @Inject(MAT_DIALOG_DATA) data) {
+        @Inject(MAT_DIALOG_DATA) data
+    ) {
         this.title = 'Hei Complete(HIV Testing)';
 
         this.labOrderId = data.labOrderId;
@@ -27,6 +35,7 @@ export class HeiCompletelaborderComponent implements OnInit {
         this.labTestId = data.labTestId;
         this.selectedTesttype = data.testtype;
         this.testResults = data.testResults;
+        this.maxDate = new Date();
     }
 
     ngOnInit() {
@@ -37,9 +46,13 @@ export class HeiCompletelaborderComponent implements OnInit {
             resultText: new FormControl('', [Validators.required])
         });
 
-        this.HeiCompleteHivTestsForm.get('testType').setValue(this.selectedTesttype);
+        this.HeiCompleteHivTestsForm.get('testType').setValue(
+            this.selectedTesttype
+        );
 
-        if (this.selectedTesttype['itemName'] == 'Baseline Viral Load (for +ve)') {
+        if (
+            this.selectedTesttype['itemName'] == 'Baseline Viral Load (for +ve)'
+        ) {
             this.HeiCompleteHivTestsForm.get('result').disable();
             this.HeiCompleteHivTestsForm.get('resultText').enable();
         } else {

@@ -1055,6 +1055,25 @@ export class HeiComponent implements OnInit {
             );
         }
 
+        const heiTbOutcomeCommand: any = {
+            Id: 0,
+            PatientId: this.patientId,
+        PatientMasterVisitId: this.patientMasterVisitId,
+        ScreeningTypeId:0,
+        ScreeningDone:true,
+        ScreeningDate:new Date(),
+        ScreeningCategoryId:0,
+        ScreeningValueId:0,
+        Comment:'',
+        Active:0,
+        DeleteFlag:false,
+        CreatedBy:this.userId,
+        /*public DateTime CreateDate { get; set; }
+        public string AuditData { get; set; }
+        public DateTime? VisitDate*/
+        
+        };
+
         const heiVisitDetails = this.heiService.saveHeiVisitDetails(visitDetailsData);
         const heiDelivery = this.heiService.saveHieDelivery(this.patientId, this.patientMasterVisitId, this.userId,
             isMotherRegistered, this.deliveryMatFormGroup.value[0], this.deliveryMatFormGroup.value[1]);
@@ -1064,6 +1083,7 @@ export class HeiComponent implements OnInit {
         const heiOrdVisit = this.heiService.saveOrdVisit(ordVisitCommand, laborder);
         const heiFeeding = this.heiService.saveHeiInfantFeeding(patientFeedingCommand);
         const heiAppoinment = this.pncService.savePncNextAppointment(heiAppointment);
+        const heiTbOutcome = this.heiService.saveHeiTbOutcome(heiTbOutcomeCommand);
 
         forkJoin([
             heiOrdVisit,
@@ -1073,7 +1093,8 @@ export class HeiComponent implements OnInit {
             heiDelivery,
             heiFeeding,
             heiAppoinment,
-            heitbAssessment
+            heitbAssessment,
+            heiTbOutcome
         ]).subscribe(
             (result) => {
                 laborder.VisitId = result[0]['visit_Id'];

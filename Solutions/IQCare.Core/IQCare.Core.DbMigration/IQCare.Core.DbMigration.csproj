@@ -280,6 +280,15 @@
     <None Remove="Scripts\2.1.0\23_sp_updatePatientProgramStart.sql" />
     <None Remove="Scripts\2.1.0\24_HTS_LAB_Register.sql" />
     <None Remove="Scripts\2.1.0\25_sp_getAllViralLoads.sql" />
+    <None Remove="Scripts\2.2.0\01_alterTracingTable.sql" />
+    <None Remove="Scripts\2.2.0\02_DefaulterTracingLookup.sql" />
+    <None Remove="Scripts\2.2.0\03_PatientTracingLookup.sql" />
+    <None Remove="Scripts\2.2.0\04_TracingMethods.sql" />
+    <None Remove="Scripts\2.2.0\05_TracingOutcomes.sql" />
+    <None Remove="Scripts\2.2.0\06_sp_gettxcurr.sql" />
+    <None Remove="Scripts\2.2.0\07_sp_getfirstdefaulters.sql" />
+    <None Remove="Scripts\2.2.0\08_sp_getseconddefaulters.sql" />
+    <None Remove="Scripts\2.2.0\09_sp_getltfu.sql" />
   </ItemGroup>
 
   <ItemGroup>
@@ -573,6 +582,15 @@
     <EmbeddedResource Include="Scripts\2.1.0\23_sp_updatePatientProgramStart.sql" />
     <EmbeddedResource Include="Scripts\2.1.0\24_HTS_LAB_Register.sql" />
     <EmbeddedResource Include="Scripts\2.1.0\25_sp_getAllViralLoads.sql" />
+    <EmbeddedResource Include="Scripts\2.2.0\01_alterTracingTable.sql" />
+    <EmbeddedResource Include="Scripts\2.2.0\02_DefaulterTracingLookup.sql" />
+    <EmbeddedResource Include="Scripts\2.2.0\03_PatientTracingLookup.sql" />
+    <EmbeddedResource Include="Scripts\2.2.0\04_TracingMethods.sql" />
+    <EmbeddedResource Include="Scripts\2.2.0\05_TracingOutcomes.sql" />
+    <EmbeddedResource Include="Scripts\2.2.0\06_sp_gettxcurr.sql" />
+    <EmbeddedResource Include="Scripts\2.2.0\07_sp_getfirstdefaulters.sql" />
+    <EmbeddedResource Include="Scripts\2.2.0\08_sp_getseconddefaulters.sql" />
+    <EmbeddedResource Include="Scripts\2.2.0\09_sp_getltfu.sql" />
   </ItemGroup>
 
   <ItemGroup>

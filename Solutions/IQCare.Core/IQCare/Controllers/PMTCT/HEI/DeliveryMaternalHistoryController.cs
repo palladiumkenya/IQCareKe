@@ -48,13 +48,12 @@ namespace IQCare.Controllers.PMTCT.HEI
             return BadRequest(response);
         }
 
-        [HttpGet("{patientId}/{patientMasterVisitId}")]
-        public async Task<IActionResult> Get(int patientId, int patientMasterVisitId)
+        [HttpGet("{patientId}")]
+        public async Task<IActionResult> Get(int patientId)
         {
             var response = await _mediator.Send(new GetHeiDeliveryCommand()
             {
-                PatientId = patientId,
-                PatientMasterVisitId = patientMasterVisitId
+                PatientId = patientId
             }, Request.HttpContext.RequestAborted);
 
             if (response.IsValid)

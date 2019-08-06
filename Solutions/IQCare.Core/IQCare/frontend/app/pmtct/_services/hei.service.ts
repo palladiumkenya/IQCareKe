@@ -123,8 +123,8 @@ export class HeiService {
         );
     }
 
-    public getHeiDelivery(patientId: number, patientMasterVisitId: number): Observable<any[]> {
-        return this.http.get<any[]>(this.API_URL + '/api/DeliveryMaternalHistory/' + patientId + '/' + patientMasterVisitId).pipe(
+    public getHeiDelivery(patientId: number): Observable<any[]> {
+        return this.http.get<any[]>(this.API_URL + '/api/DeliveryMaternalHistory/' + patientId).pipe(
             tap(getHeiDelivery => this.errorHandler.log(`successfully fetched hei delivery`)),
             catchError(this.errorHandler.handleError<any>('Error fetching hei delivery'))
         );
@@ -159,6 +159,13 @@ export class HeiService {
                 catchError(this.errorHandler.handleError<any>('Error saving hei patient icf'))
             );
         return forkJoin([Icf, IcfAction]);
+    }
+
+    public saveHeiTbOutcome(heiTbOutcomeCommand: any): Observable<any> {
+        return this.http.post<any>(this.API_URL + '/', JSON.stringify(''), httpOptions).pipe(
+            tap(saveTbAssessmentIcfAction => this.errorHandler.log(`successfully added hei patient icf Action`)),
+            catchError(this.errorHandler.handleError<any>('Error saving hei patient icf'))
+        );
     }
 
     public saveIptWorkup(patientIptWorkup: PatientIptWorkup): Observable<PatientIptWorkup> {
