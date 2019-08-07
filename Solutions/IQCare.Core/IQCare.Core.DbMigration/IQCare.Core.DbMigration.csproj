@@ -289,6 +289,7 @@
     <None Remove="Scripts\2.2.0\07_sp_getfirstdefaulters.sql" />
     <None Remove="Scripts\2.2.0\08_sp_getseconddefaulters.sql" />
     <None Remove="Scripts\2.2.0\09_sp_getltfu.sql" />
+    <None Remove="Scripts\2.2.0\10_TracingReasonNotContactedPhone.sql" />
   </ItemGroup>
 
   <ItemGroup>
@@ -591,6 +592,7 @@
     <EmbeddedResource Include="Scripts\2.2.0\07_sp_getfirstdefaulters.sql" />
     <EmbeddedResource Include="Scripts\2.2.0\08_sp_getseconddefaulters.sql" />
     <EmbeddedResource Include="Scripts\2.2.0\09_sp_getltfu.sql" />
+    <EmbeddedResource Include="Scripts\2.2.0\10_TracingReasonNotContactedPhone.sql" />
   </ItemGroup>
 
   <ItemGroup>

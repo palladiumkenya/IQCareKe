@@ -90,7 +90,8 @@ export class LinkageReferralService {
                 TracingDate: tracing[i].tracingDate,
                 Mode: mode,
                 Outcome: outcome,
-                TracingType: tracingType
+                TracingType: tracingType,
+
             });
         }
 

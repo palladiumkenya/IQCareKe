@@ -86,6 +86,8 @@
                                             <th scope="col">Tracing Date</th>
                                             <th scope="col">Mode</th>
                                             <th scope="col">Outcome</th>
+                                            <th scope="col">Reason Not Contacted</th>
+                                            <th scope="col">Other - Specify</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -94,6 +96,8 @@
                                             <td>{{ trace.tracingDate | date: 'dd-MMM-yyyy' }}</td>
                                             <td>{{ trace.mode }}</td>
                                             <td>{{ trace.outcome }}</td>
+                                            <td>{{ trace.reasonNotContacted }}</td>
+                                            <td>{{ trace.otherReasonSpecify }}</td>
                                         </tr>
                                     </tbody>
                                 </table>

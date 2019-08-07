@@ -73,8 +73,6 @@ export class PersonHomeComponent implements OnInit {
             this.careenddetails = CarendedArray;
             
             this.htshistory = HTSEncounterHistoryArray;
-            console.log('htshistory');
-            console.log(this.htshistory);
             
             this.services = servicesArray;
             this.htsencounters = HTSEncounterArray;
