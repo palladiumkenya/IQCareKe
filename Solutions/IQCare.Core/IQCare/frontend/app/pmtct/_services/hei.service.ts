@@ -30,6 +30,7 @@ const httpOptions = {
 export class HeiService {
     private API_URL = environment.API_URL;
     private API_LAB_URL = environment.API_LAB_URL;
+    private API_PMTCT_URL = environment.API_PMTCT_URL;
 
     constructor(private http: HttpClient, private errorHandler: ErrorHandlerService) { }
 
@@ -162,9 +163,9 @@ export class HeiService {
     }
 
     public saveHeiTbOutcome(heiTbOutcomeCommand: any): Observable<any> {
-        return this.http.post<any>(this.API_URL + '/', JSON.stringify(''), httpOptions).pipe(
-            tap(saveTbAssessmentIcfAction => this.errorHandler.log(`successfully added hei patient icf Action`)),
-            catchError(this.errorHandler.handleError<any>('Error saving hei patient icf'))
+        return this.http.post<any>(this.API_PMTCT_URL + '/api/PatientScreening', JSON.stringify(heiTbOutcomeCommand), httpOptions).pipe(
+            tap(saveHeiTbOutcome => this.errorHandler.log(`successfully added hei tb assessment`)),
+            catchError(this.errorHandler.handleError<any>('Error saving hei tb assessment'))
         );
     }
 
@@ -212,6 +213,13 @@ export class HeiService {
         return this.http.get<any[]>(this.API_URL + '/api/tbAssessment/patientIcfAction/' + patientId).pipe(
             tap(getPatientIcfAction => this.errorHandler.log(`successfully fetched PatientICFAction`)),
             catchError(this.errorHandler.handleError<any>('Error fetching PatientICFAction'))
+        );
+    }
+
+    public getHeiTbAssessment(patientId: number, patientMasterVisitId: number): Observable<any[]> {
+        return this.http.get<any[]>(this.API_PMTCT_URL + '/api/PatientScreening/' + patientId + '/' + patientMasterVisitId).pipe(
+            tap(getHeiTbAssessment => this.errorHandler.log(`successfully fetched tb assessment`)),
+            catchError(this.errorHandler.handleError<any>('Error fetching tb assessment'))
         );
     }
 

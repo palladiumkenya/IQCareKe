@@ -133,8 +133,6 @@ export class TbAssessmentComponent implements OnInit, OnChanges {
     loadTBAssessment(): void {
         this.heiservice.getTBAssessment(this.patientId).subscribe(
             result => {
-                console.log('tbassessment', result);
-
                 for (let i = 0; i < result.length; i++) {
                     // On TB drugs
                     const onAntiTbDrugs = result[i].onAntiTbDrugs
@@ -227,7 +225,6 @@ export class TbAssessmentComponent implements OnInit, OnChanges {
 
         this.heiservice.getPatientIcfAction(this.patientId).subscribe(
             result => {
-                console.log(result);
                 for (let i = 0; i < result.length; i++) {
                     // ICF Action
                     this.TbAssessmentFormGroup.get('sputumSmear').setValue(
@@ -248,6 +245,20 @@ export class TbAssessmentComponent implements OnInit, OnChanges {
                 console.log(error);
             },
             () => {}
+        );
+
+        this.heiservice.getHeiTbAssessment(this.patientId, this.patientMasterVisitId).subscribe(
+            (res) => {
+                for (let i = 0; i < res.length; i++) {
+                    if (res[i]['screeningDisplayName'] == 'TbScreeningOutcome') {
+                        const selectedTbOption = this.tbScreeningOutcomeOptions.filter(obj => obj['itemId'] == res[i].screeningValueId);
+                        this.TbAssessmentFormGroup.get('tbScreaningOutcome').patchValue(selectedTbOption[0]['itemId']);
+                    }
+                }
+            },
+            (error) => {
+                console.log(error);
+            }
         );
     }
 
@@ -357,7 +368,6 @@ export class TbAssessmentComponent implements OnInit, OnChanges {
             this.TbAssessmentFormGroup.get('contactTB').enable({
                 onlySelf: true
             });
-            this.TbAssessmentFormGroup.get('tbScreaningOutcome').patchValue(0);
         } else if (
             event.isUserInput &&
             event.source.selected &&

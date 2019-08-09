@@ -284,12 +284,15 @@
     <None Remove="Scripts\2.2.0\02_DefaulterTracingLookup.sql" />
     <None Remove="Scripts\2.2.0\03_PatientTracingLookup.sql" />
     <None Remove="Scripts\2.2.0\04_TracingMethods.sql" />
-    <None Remove="Scripts\2.2.0\05_TracingOutcomes.sql" />
     <None Remove="Scripts\2.2.0\06_sp_gettxcurr.sql" />
     <None Remove="Scripts\2.2.0\07_sp_getfirstdefaulters.sql" />
     <None Remove="Scripts\2.2.0\08_sp_getseconddefaulters.sql" />
     <None Remove="Scripts\2.2.0\09_sp_getltfu.sql" />
     <None Remove="Scripts\2.2.0\10_TracingReasonNotContactedPhone.sql" />
+    <None Remove="Scripts\2.2.0\11_ServiceArea_PREP.sql" />
+    <None Remove="Scripts\2.2.0\12_Tracing_Add_ReasonNotContacted.sql" />
+    <None Remove="Scripts\2.2.0\13_HeiLabTests.sql" />
+    <None Remove="Scripts\2.2.0\14_PersonTracingView.sql" />
   </ItemGroup>
 
   <ItemGroup>
@@ -587,12 +590,15 @@
     <EmbeddedResource Include="Scripts\2.2.0\02_DefaulterTracingLookup.sql" />
     <EmbeddedResource Include="Scripts\2.2.0\03_PatientTracingLookup.sql" />
     <EmbeddedResource Include="Scripts\2.2.0\04_TracingMethods.sql" />
-    <EmbeddedResource Include="Scripts\2.2.0\05_TracingOutcomes.sql" />
     <EmbeddedResource Include="Scripts\2.2.0\06_sp_gettxcurr.sql" />
     <EmbeddedResource Include="Scripts\2.2.0\07_sp_getfirstdefaulters.sql" />
     <EmbeddedResource Include="Scripts\2.2.0\08_sp_getseconddefaulters.sql" />
     <EmbeddedResource Include="Scripts\2.2.0\09_sp_getltfu.sql" />
     <EmbeddedResource Include="Scripts\2.2.0\10_TracingReasonNotContactedPhone.sql" />
+    <EmbeddedResource Include="Scripts\2.2.0\11_ServiceArea_PREP.sql" />
+    <EmbeddedResource Include="Scripts\2.2.0\12_Tracing_Add_ReasonNotContacted.sql" />
+    <EmbeddedResource Include="Scripts\2.2.0\13_HeiLabTests.sql" />
+    <EmbeddedResource Include="Scripts\2.2.0\14_PersonTracingView.sql" />
   </ItemGroup>
 
   <ItemGroup>

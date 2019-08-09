@@ -93,12 +93,12 @@ export class LinkageReferralComponent implements OnInit {
         const personId = JSON.parse(localStorage.getItem('personId'));
         this._linkageReferralService.getClientPreviousTracing(personId).subscribe(
             (res) => {
-                // console.log(res);
                 for (let i = 0; i < res.length; i++) {
-                    // console.log(res[i]);
                     this.tracing.tracingDate = res[i].tracingDate;
                     this.tracing.outcome = res[i].tracingOutcome;
                     this.tracing.mode = res[i].tracingMode;
+                    this.tracing.reasonNotContacted = res[i].reasonNotContacted;
+                    this.tracing.otherReasonSpecify = res[i].otherReasonSpecify;
                     this.tracingMergeArray.push(this.tracing);
                     this.tracing = new Tracing();
                 }
