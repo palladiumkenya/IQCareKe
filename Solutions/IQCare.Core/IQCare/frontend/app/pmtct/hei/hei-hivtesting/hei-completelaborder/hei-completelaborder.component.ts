@@ -19,7 +19,7 @@ export class HeiCompletelaborderComponent implements OnInit {
     labOrderId: number;
     labOrderTestId: number;
     labTestId: number;
-    selectedTesttype: LookupItemView[];
+    selectedTesttype: LookupItemView;
     testResults: LookupItemView[];
     maxDate: Date;
 

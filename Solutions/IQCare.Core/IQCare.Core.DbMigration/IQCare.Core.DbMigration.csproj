@@ -289,10 +289,13 @@
     <None Remove="Scripts\2.2.0\08_sp_getseconddefaulters.sql" />
     <None Remove="Scripts\2.2.0\09_sp_getltfu.sql" />
     <None Remove="Scripts\2.2.0\10_TracingReasonNotContactedPhone.sql" />
+    <None Remove="Scripts\2.2.0\11_ServiceAreaPREP.sql" />
     <None Remove="Scripts\2.2.0\11_ServiceArea_PREP.sql" />
+    <None Remove="Scripts\2.2.0\12_TracingAddReasonNotContacted.sql" />
     <None Remove="Scripts\2.2.0\12_Tracing_Add_ReasonNotContacted.sql" />
     <None Remove="Scripts\2.2.0\13_HeiLabTests.sql" />
     <None Remove="Scripts\2.2.0\14_PersonTracingView.sql" />
+    <None Remove="Scripts\2.2.0\15_qaversion.sql" />
   </ItemGroup>
 
   <ItemGroup>
@@ -595,8 +598,8 @@
     <EmbeddedResource Include="Scripts\2.2.0\08_sp_getseconddefaulters.sql" />
     <EmbeddedResource Include="Scripts\2.2.0\09_sp_getltfu.sql" />
     <EmbeddedResource Include="Scripts\2.2.0\10_TracingReasonNotContactedPhone.sql" />
-    <EmbeddedResource Include="Scripts\2.2.0\11_ServiceArea_PREP.sql" />
-    <EmbeddedResource Include="Scripts\2.2.0\12_Tracing_Add_ReasonNotContacted.sql" />
+    <EmbeddedResource Include="Scripts\2.2.0\11_ServiceAreaPREP.sql" />
+    <EmbeddedResource Include="Scripts\2.2.0\12_TracingAddReasonNotContacted.sql" />
     <EmbeddedResource Include="Scripts\2.2.0\13_HeiLabTests.sql" />
     <EmbeddedResource Include="Scripts\2.2.0\14_PersonTracingView.sql" />
   </ItemGroup>
@@ -626,6 +629,7 @@
     <EmbeddedResource Include="Scripts\2.0.1\PREP\14_Constraint.sql" />
     <EmbeddedResource Include="Scripts\2.1.0\07_pr_Scheduler_UpdateAppointmentStatus.sql" />
     <EmbeddedResource Include="Scripts\2.1.0\13_PP_PatientPopulationView.sql" />
+    <EmbeddedResource Include="Scripts\2.2.0\15_qaversion.sql" />
     <Resource Include="Scripts\1.0.0.9\37_BO_AddPhsicalExaminationView.sql" />
   </ItemGroup>
 
