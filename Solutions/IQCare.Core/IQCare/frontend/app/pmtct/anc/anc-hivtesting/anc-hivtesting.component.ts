@@ -69,10 +69,11 @@ export class AncHivtestingComponent implements OnInit {
             hivStatusBeforeFirstVisit: new FormControl('', [Validators.required]),
             hivTestingDone: new FormControl('', [Validators.required]),
             testType: new FormControl('', [Validators.required]),
+            finalResultScreening: new FormControl('', [Validators.required]),
+            finalResultConfirmatory: new FormControl('', [Validators.required]),
             finalTestResult: new FormControl('', [Validators.required])
         });
 
-        // console.log(this.serviceAreaId);
         if (this.serviceAreaId == 3) {
             this.serviceAreaName = 'ANC';
         } else if (this.serviceAreaId == 4) {
@@ -180,7 +181,52 @@ export class AncHivtestingComponent implements OnInit {
                     return;
                 }
 
-                // console.log(data);
+                if (data.hivTest.itemName == 'HIV Test-2' && !this.HivTestingForm.get('finalResultScreening').value) {
+                    this.snotifyService.info('The screening test should be done first', 'HIV TESTS',
+                        this.notificationService.getConfig());
+                    return;
+                }
+
+                // ensure only one screening test is done
+                if (this.HivTestingForm.get('finalResultScreening').value && data.hivTest.itemName == 'HIV Test-1') {
+                    this.snotifyService.info(data.hivTest.itemName + ' has already been done', 'HIV TESTS',
+                        this.notificationService.getConfig());
+                    return;
+                }
+
+                // ensure only one confirmatory test is done
+                if (this.HivTestingForm.get('finalResultConfirmatory').value && data.hivTest.itemName == 'HIV Test-2') {
+                    this.snotifyService.info(data.hivTest.itemName + ' has already been done', 'HIV TESTS',
+                        this.notificationService.getConfig());
+                    return;
+                }
+
+                // screening algorithm
+                if (data.hivTest.itemName == 'HIV Test-1' && data.testResult.itemName == 'Negative') {
+                    this.HivTestingForm.get('finalResultScreening').setValue(
+                        this.testResults.filter(obj => obj.itemName == 'Negative')[0].itemId);
+
+                    // set final result and disable screening test
+                    this.HivTestingForm.get('finalTestResult').setValue(
+                        this.hivFinalResultsOptions.filter(obj => obj.itemName == 'Negative')[0].itemId);
+                    this.HivTestingForm.get('finalResultConfirmatory').disable({onlySelf: true });
+                } else if (data.hivTest.itemName == 'HIV Test-1' && data.testResult.itemName == 'Positive') {
+                    this.HivTestingForm.get('finalResultScreening').setValue(
+                        this.testResults.filter(obj => obj.itemName == 'Positive')[0].itemId);
+                }
+
+                // confirmatory algorithm
+                if (data.hivTest.itemName == 'HIV Test-2' && data.testResult.itemName == 'Negative') {
+                    this.HivTestingForm.get('finalResultConfirmatory').setValue(
+                        this.testResults.filter(obj => obj.itemName == 'Negative')[0].itemId);
+
+                    // set final result
+                    this.HivTestingForm.get('finalTestResult').setValue(
+                        this.hivFinalResultsOptions.filter(obj => obj.itemName == 'Negative')[0].itemId);
+                } else if (data.hivTest.itemName == 'HIV Test-2' && data.testResult.itemName == 'Positive') {
+                    this.HivTestingForm.get('finalResultConfirmatory').setValue(
+                        this.testResults.filter(obj => obj.itemName == 'Positive')[0].itemId);
+                }
 
                 this.hiv_testing_table_data.push({
                     testdate: new Date(),

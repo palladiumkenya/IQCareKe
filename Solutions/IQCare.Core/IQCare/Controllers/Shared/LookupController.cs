@@ -204,7 +204,7 @@ namespace IQCare.Controllers.Common
         [HttpGet("htsTracingOptions")]
         public async Task<IActionResult> GetTracingOptions()
         {
-            string[] options = new string[] { "TracingMode", "TracingOutcome", "TracingType" };
+            string[] options = new string[] { "TracingMode", "TracingOutcome", "TracingType", "TracingReasonNotContactedPhone", "TracingReasonNotContactedPhysical" };
             var results = await _mediator.Send(new GetRegistrationOptionsCommand {RegistrationOptions = options},
                 HttpContext.RequestAborted);
 

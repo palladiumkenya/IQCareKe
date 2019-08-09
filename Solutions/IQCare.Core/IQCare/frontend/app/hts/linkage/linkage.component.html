@@ -32,7 +32,7 @@
                                             <label>Health Worker *</label>
                                             <input id="healthWorker" name="healthWorker" type="text"
                                                 class="form-control required" [(ngModel)]="linkage.healthworker"
-                                                #healthworker="ngModel">
+                                                #healthworker="ngModel" required>
                                             <div *ngIf="healthworker.errors && (healthworker.dirty || healthworker.touched)"
                                                 class="alert alert-danger">
                                                 <div [hidden]="!healthworker.errors.required">
@@ -44,7 +44,7 @@
                                         <div class="form-group">
                                             <label>Carde *</label>
                                             <input id="carde" name="carde" type="text" class="form-control required"
-                                                [(ngModel)]="linkage.carde" #carde="ngModel">
+                                                [(ngModel)]="linkage.carde" #carde="ngModel" required>
                                             <div *ngIf="carde.errors && (carde.dirty || carde.touched)"
                                                 class="alert alert-danger">
                                                 <div [hidden]="!healthworker.errors.required">
@@ -62,7 +62,7 @@
                                                     <input matInput [max]="maxDate" [matDatepicker]="myDatepicker"
                                                         (click)="myDatepicker.open()" id="dateEnrolled"
                                                         name="dateEnrolled" [(ngModel)]="linkage.dateEnrolled"
-                                                        #dateEnrolled="ngModel">
+                                                        #dateEnrolled="ngModel" required>
                                                     <mat-datepicker-toggle matSuffix [for]="myDatepicker">
                                                     </mat-datepicker-toggle>
                                                     <mat-datepicker #myDatepicker></mat-datepicker>
@@ -81,7 +81,7 @@
                                             <label>CCC Number *</label>
                                             <input id="cccNumber" name="cccNumber" type="text"
                                                 class="form-control required" [pattern]="cccPattern"
-                                                [(ngModel)]="linkage.cccNumber" #cccNumber="ngModel">
+                                                [(ngModel)]="linkage.cccNumber" #cccNumber="ngModel" required>
                                             <div *ngIf="cccNumber.errors && (cccNumber.dirty || cccNumber.touched)"
                                                 class="alert alert-danger">
                                                 <div [hidden]="!cccNumber.errors.required">
@@ -94,7 +94,7 @@
                                         </div>
 
                                         <div class="form-group">
-                                            <label>ART Start Date *</label>
+                                            <label>ART Start Date</label>
                                             <div>
                                                 <mat-form-field>
                                                     <input matInput [max]="maxDate" [matDatepicker]="artstartdatepicker"
@@ -116,7 +116,7 @@
                                         </div>
 
                                         <div class="form-group">
-                                            <label>Remarks *</label>
+                                            <label>Remarks</label>
                                             <textarea class="form-control m-b" id="remarks" name="remarks" rows="3"
                                                 [(ngModel)]="linkage.remarks" #remarks="ngModel"></textarea>
                                         </div>

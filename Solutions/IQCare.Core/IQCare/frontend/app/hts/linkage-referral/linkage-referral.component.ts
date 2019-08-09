@@ -15,6 +15,7 @@ import { NotificationService } from '../../shared/_services/notification.service
 import { AppStateService } from '../../shared/_services/appstate.service';
 import { AppEnum } from '../../shared/reducers/app.enum';
 import { TracingComponent } from '../tracing/tracing.component';
+import {LookupItemView} from '../../shared/_models/LookupItemView';
 
 @Component({
     selector: 'app-linkage-referral',
@@ -32,6 +33,9 @@ export class LinkageReferralComponent implements OnInit {
     tracingModeOptions: any[];
     tracingOutcomeOptions: any[];
     tracingTypeOptions: any[];
+    tracingReasonNotContactedPhysical: LookupItemView[];
+    tracingReasonNotContactedPhone: LookupItemView[];
+
     facilities: any[];
     filteredOptions: Observable<any[]>;
     myControl: FormControl = new FormControl();
@@ -89,12 +93,12 @@ export class LinkageReferralComponent implements OnInit {
         const personId = JSON.parse(localStorage.getItem('personId'));
         this._linkageReferralService.getClientPreviousTracing(personId).subscribe(
             (res) => {
-                // console.log(res);
                 for (let i = 0; i < res.length; i++) {
-                    // console.log(res[i]);
                     this.tracing.tracingDate = res[i].tracingDate;
                     this.tracing.outcome = res[i].tracingOutcome;
                     this.tracing.mode = res[i].tracingMode;
+                    this.tracing.reasonNotContacted = res[i].reasonNotContacted;
+                    this.tracing.otherReasonSpecify = res[i].otherReasonSpecify;
                     this.tracingMergeArray.push(this.tracing);
                     this.tracing = new Tracing();
                 }
@@ -115,7 +119,6 @@ export class LinkageReferralComponent implements OnInit {
                     this._linkageReferralService.getFacility(res[0]['toFacility']).subscribe(
                         (result) => {
                             if (result.length > 0) {
-                                console.log(result);
                                 this.filteredOptions = result;
                                 this.myControl.setValue(result[0]);
                             }
@@ -141,7 +144,9 @@ export class LinkageReferralComponent implements OnInit {
 
         dialogConfig.data = {
             tracingMode: this.tracingModeOptions,
-            tracingOutcome: this.tracingOutcomeOptions
+            tracingOutcome: this.tracingOutcomeOptions,
+            tracingReasonNotContactedPhone: this.tracingReasonNotContactedPhone,
+            tracingReasonNotContactedPhysical: this.tracingReasonNotContactedPhysical
         };
 
         const dialogRef = this.dialog.open(TracingComponent, dialogConfig);
@@ -155,12 +160,17 @@ export class LinkageReferralComponent implements OnInit {
                 this.tracing.tracingDate = data.tracingDate;
                 this.tracing.outcome = data.outcome;
                 this.tracing.mode = data.mode;
+                this.tracing.reasonNotContacted = data.reasonNotContacted;
+                this.tracing.otherReasonSpecify = data.otherReasonSpecify;
 
                 this.tracingArray.push(this.tracing);
                 const newValue = new Tracing();
                 newValue.mode = data.mode.displayName;
                 newValue.tracingDate = data.tracingDate;
                 newValue.outcome = data.outcome.displayName;
+                newValue.reasonNotContacted = data.reasonNotContacted.displayName;
+                newValue.otherReasonSpecify = data.otherReasonSpecify;
+
                 this.tracingMergeArray.push(newValue);
                 this.tracing = new Tracing();
             }
@@ -169,7 +179,6 @@ export class LinkageReferralComponent implements OnInit {
 
     getReferralReasons() {
         this._linkageReferralService.getReferralReasons().subscribe(res => {
-            console.log(res);
             this.referralReasons = res['lookupItems'][0]['value'];
         }, err => {
 
@@ -191,6 +200,10 @@ export class LinkageReferralComponent implements OnInit {
                     this.tracingOutcomeOptions = options[i].value;
                 } else if (options[i].key == 'TracingType') {
                     this.tracingTypeOptions = options[i].value;
+                } else if (options[i].key == 'TracingReasonNotContactedPhone') {
+                    this.tracingReasonNotContactedPhone = options[i].value;
+                } else if (options[i].key == 'TracingReasonNotContactedPhysical') {
+                    this.tracingReasonNotContactedPhysical = options[i].value;
                 }
             }
 

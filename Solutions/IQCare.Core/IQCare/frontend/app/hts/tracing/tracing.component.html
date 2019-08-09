@@ -17,7 +17,7 @@
         <mat-form-field>
             <mat-select placeholder="Mode" formControlName="mode" required>
                 <mat-option value=""></mat-option>
-                <mat-option *ngFor="let option of tracingModeOptions" [value]="option">{{option.itemName}}</mat-option>
+                <mat-option *ngFor="let option of tracingModeOptions" [value]="option" (onSelectionChange)="onTracingModeChanged($event)">{{option.itemName}}</mat-option>
             </mat-select>
             <mat-error *ngIf="!form.controls['mode'].valid">Please select Tracing Mode</mat-error>
         </mat-form-field>
@@ -25,10 +25,28 @@
         <mat-form-field>
             <mat-select placeholder="Outcome" formControlName="outcome" required>
                 <mat-option value=""></mat-option>
-                <mat-option *ngFor="let option of tracingOutcomeOptions" [value]="option">{{option.itemName}}</mat-option>
+                <mat-option *ngFor="let option of tracingOutcomeOptions" [value]="option" (onSelectionChange)="onOutcomeChanged($event)">{{option.itemName}}</mat-option>
             </mat-select>
             <mat-error *ngIf="!form.controls['outcome'].valid">Please select Tracing Outcome</mat-error>
         </mat-form-field>
+
+        <div class="row">&nbsp;</div>
+
+        <div class="row">
+            <mat-form-field class="col-lg-3 col-sm-3">
+                <mat-select placeholder="Reason Not Contacted" formControlName="reasonNotContacted">
+                    <mat-option value=""></mat-option>
+                    <mat-option *ngFor="let option of reasonsOptions" [value]="option" (onSelectionChange)="reasonNotContactedChanged($event)">{{option.itemName}}</mat-option>
+                </mat-select>
+                <mat-error *ngIf="!form.controls['reasonNotContacted'].valid">Please select the reason client not contacted</mat-error>
+            </mat-form-field>
+
+            <mat-form-field class="col-lg-3 col-sm-3">
+                <input matInput placeholder="Other Reason Specify" id="otherReasonSpecify"
+                       formControlName="otherReasonSpecify" name="otherReasonSpecify" required>
+                <mat-error *ngIf="!form.controls['otherReasonSpecify'].valid">Please specify other reason client was not contacted</mat-error>
+            </mat-form-field>
+        </div>
     </mat-dialog-content>
 
     <mat-dialog-actions>
