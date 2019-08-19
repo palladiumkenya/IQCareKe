@@ -234,7 +234,9 @@ export class TbAssessmentComponent implements OnInit, OnChanges {
                 for (let i = 0; i < res.length; i++) {
                     if (res[i]['screeningDisplayName'] == 'TbScreeningOutcome') {
                         const selectedTbOption = this.tbScreeningOutcomeOptions.filter(obj => obj['itemId'] == res[i].screeningValueId);
-                        this.TbAssessmentFormGroup.get('tbScreeningOutcome').patchValue(selectedTbOption[0]['itemId']);
+                        if (selectedTbOption.length > 0) {
+                            this.TbAssessmentFormGroup.get('tbScreeningOutcome').patchValue(selectedTbOption[0]['itemId']);
+                        }
                     }
                 }
             },
