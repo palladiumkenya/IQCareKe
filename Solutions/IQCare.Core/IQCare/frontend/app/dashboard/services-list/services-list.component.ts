@@ -456,7 +456,7 @@ export class ServicesListComponent implements OnInit {
                             this.HTSEligible = this.getHTSEligibility();
                             isEligible = this.HTSEligible;
 
-                            //if (isEligible == true) {
+                            // if (isEligible == true) {
                                 
                             if (this.vitalWeight > 0 && this.vitalWeight < 35) {
                                 isEligible = false;
@@ -536,6 +536,7 @@ export class ServicesListComponent implements OnInit {
         this.htseligibility = this.EligibilityInformation.join(',');
         return isEligible;
     }
+
     getHTSEligibility(): boolean {
         let isCCCEnrolled;
         if (this.enrolledServices) {

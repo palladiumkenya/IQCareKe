@@ -19,5 +19,9 @@
         <div class="col-lg-3 col-sm-3 col-xs-12" *ngIf="isPCR_Positive">
             <span class="label label-orange">ART INITIATION SHOULD BE DONE</span>
         </div>
+
+        <div class="col-lg-3 col-sm-3 col-xs-12">
+            <span class="label label-info" [innerHTML]="maternalLastViralLoad"></span>
+        </div>
     </div>
 </mat-card>

@@ -17,6 +17,7 @@ export class HeiMessagesComponent implements OnInit {
     isPCR_Positive: boolean = false;
     isBaselineVLDone: boolean = false;
     heiResultsString: string = '';
+    maternalLastViralLoad: string = '';
 
     @Input() patientId: any;
     @Input() heiHivTestingOptions: LookupItemView[];
@@ -28,12 +29,17 @@ export class HeiMessagesComponent implements OnInit {
         private dataservice: DataService) {
     }
 
-    ngOnInit() {
+    async ngOnInit() {
         this.loadPatientCompletedTestTypes();
+        const newVar = await this.loadMaternalLastViralLoad();
 
         this.dataservice.labDone.subscribe(labDone => {
             this.loadPatientCompletedTestTypes();
         });
+    }
+
+    async loadMaternalLastViralLoad() {
+        const toPromise = this.heiservice.getMaternalViralLoad().toPromise();
     }
 
     loadPatientCompletedTestTypes(): void {

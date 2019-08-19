@@ -15,6 +15,11 @@ namespace IQCare.Web.CCC
         private string strPathAndQuery;
         private string strUrl;
 
+        public string PatientTrace
+        {
+            get { return Session["PatientTrace"].ToString(); }
+        }
+
         public ScriptManager PageScriptManager
         {
             get
