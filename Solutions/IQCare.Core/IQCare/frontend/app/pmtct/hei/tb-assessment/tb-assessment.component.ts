@@ -76,38 +76,20 @@ export class TbAssessmentComponent implements OnInit, OnChanges {
             geneXpert: new FormControl('', [Validators.required]),
             chestXray: new FormControl('', [Validators.required]),
             invitationContacts: new FormControl('', [Validators.required]),
-            tbScreaningOutcome: new FormControl('', [Validators.required]),
+            tbScreeningOutcome: new FormControl('', [Validators.required]),
             onIPT: new FormControl('', [Validators.required]),
             startIPT: new FormControl('', [Validators.required])
         });
-        this.TbAssessmentFormGroup.controls['sputumSmear'].disable({
-            onlySelf: true
-        });
-        this.TbAssessmentFormGroup.controls['geneXpert'].disable({
-            onlySelf: true
-        });
-        this.TbAssessmentFormGroup.controls['chestXray'].disable({
-            onlySelf: true
-        });
-        this.TbAssessmentFormGroup.controls['invitationContacts'].disable({
-            onlySelf: true
-        });
+        this.TbAssessmentFormGroup.controls['sputumSmear'].disable({ onlySelf: true });
+        this.TbAssessmentFormGroup.controls['geneXpert'].disable({ onlySelf: true });
+        this.TbAssessmentFormGroup.controls['chestXray'].disable({ onlySelf: true });
+        this.TbAssessmentFormGroup.controls['invitationContacts'].disable({ onlySelf: true });
+        this.TbAssessmentFormGroup.controls['coughAnyDuration'].disable({ onlySelf: true });
+        this.TbAssessmentFormGroup.controls['fever'].disable({ onlySelf: true });
+        this.TbAssessmentFormGroup.controls['weightLoss'].disable({ onlySelf: true });
+        this.TbAssessmentFormGroup.controls['contactTB'].disable({ onlySelf: true });
+        this.TbAssessmentFormGroup.controls['startIPT'].disable({ onlySelf: true });
 
-        this.TbAssessmentFormGroup.controls['coughAnyDuration'].disable({
-            onlySelf: true
-        });
-        this.TbAssessmentFormGroup.controls['fever'].disable({
-            onlySelf: true
-        });
-        this.TbAssessmentFormGroup.controls['weightLoss'].disable({
-            onlySelf: true
-        });
-        this.TbAssessmentFormGroup.controls['contactTB'].disable({
-            onlySelf: true
-        });
-        this.TbAssessmentFormGroup.controls['startIPT'].disable({
-            onlySelf: true
-        });
         const {
             yesnoOption,
             sputumSmear,
@@ -252,7 +234,7 @@ export class TbAssessmentComponent implements OnInit, OnChanges {
                 for (let i = 0; i < res.length; i++) {
                     if (res[i]['screeningDisplayName'] == 'TbScreeningOutcome') {
                         const selectedTbOption = this.tbScreeningOutcomeOptions.filter(obj => obj['itemId'] == res[i].screeningValueId);
-                        this.TbAssessmentFormGroup.get('tbScreaningOutcome').patchValue(selectedTbOption[0]['itemId']);
+                        this.TbAssessmentFormGroup.get('tbScreeningOutcome').patchValue(selectedTbOption[0]['itemId']);
                     }
                 }
             },
@@ -368,6 +350,7 @@ export class TbAssessmentComponent implements OnInit, OnChanges {
             this.TbAssessmentFormGroup.get('contactTB').enable({
                 onlySelf: true
             });
+            this.TbAssessmentFormGroup.get('tbScreeningOutcome').setValue('');
         } else if (
             event.isUserInput &&
             event.source.selected &&
@@ -377,20 +360,12 @@ export class TbAssessmentComponent implements OnInit, OnChanges {
                 x => x.itemName == 'TBRx'
             );
 
-            this.TbAssessmentFormGroup.get('coughAnyDuration').disable({
-                onlySelf: true
-            });
+            this.TbAssessmentFormGroup.get('coughAnyDuration').disable({ onlySelf: true });
             this.TbAssessmentFormGroup.get('fever').disable({ onlySelf: true });
-            this.TbAssessmentFormGroup.get('weightLoss').disable({
-                onlySelf: true
-            });
-            this.TbAssessmentFormGroup.get('contactTB').disable({
-                onlySelf: true
-            });
+            this.TbAssessmentFormGroup.get('weightLoss').disable({ onlySelf: true });
+            this.TbAssessmentFormGroup.get('contactTB').disable({ onlySelf: true });
 
-            this.TbAssessmentFormGroup.get('tbScreaningOutcome').patchValue(
-                TbOptions[0]['itemId']
-            );
+            this.TbAssessmentFormGroup.get('tbScreeningOutcome').patchValue(TbOptions[0]['itemId']);
         }
     }
 
@@ -403,9 +378,6 @@ export class TbAssessmentComponent implements OnInit, OnChanges {
             switch (screening) {
                 case 'cough':
                     this.cough = 'Yes';
-                    this.TbAssessmentFormGroup.controls['sputumSmear'].disable({
-                        onlySelf: false
-                    });
                     break;
                 case 'fever':
                     this.fever = 'Yes';
@@ -419,7 +391,6 @@ export class TbAssessmentComponent implements OnInit, OnChanges {
                 default:
             }
             this.enableDisableIcfAction();
-            // this.iptClientWorkIsDisabled = false;
         } else if (
             event.isUserInput &&
             event.source.selected &&
@@ -428,7 +399,6 @@ export class TbAssessmentComponent implements OnInit, OnChanges {
             switch (screening) {
                 case 'cough':
                     this.cough = 'No';
-
                     break;
                 case 'fever':
                     this.fever = 'No';
@@ -496,36 +466,26 @@ export class TbAssessmentComponent implements OnInit, OnChanges {
             this.weightLoss == 'Yes' ||
             this.contactWithTb == 'Yes'
         ) {
-            this.TbAssessmentFormGroup.get('sputumSmear').enable({
-                onlySelf: false
-            });
-            this.TbAssessmentFormGroup.controls['geneXpert'].enable({
-                onlySelf: false
-            });
-            this.TbAssessmentFormGroup.controls['chestXray'].enable({
-                onlySelf: false
-            });
-            this.TbAssessmentFormGroup.controls['invitationContacts'].enable({
-                onlySelf: false
-            });
+            this.TbAssessmentFormGroup.get('sputumSmear').enable({ onlySelf: false });
+            this.TbAssessmentFormGroup.controls['geneXpert'].enable({ onlySelf: false });
+            this.TbAssessmentFormGroup.controls['chestXray'].enable({ onlySelf: false });
+            this.TbAssessmentFormGroup.controls['invitationContacts'].enable({ onlySelf: false });
+            // set tb assessment outcome
+            const negativeTbScreening = this.tbScreeningOutcomeOptions.filter(obj => obj.itemName == 'PrTB');
+            this.TbAssessmentFormGroup.get('tbScreeningOutcome').setValue(negativeTbScreening[0].itemId);
         } else if (
-            this.cough == 'No' ||
-            this.fever == 'Yes' ||
-            this.weightLoss == 'No' ||
+            this.cough == 'No' &&
+            this.fever == 'No' &&
+            this.weightLoss == 'No' &&
             this.contactWithTb == 'No'
         ) {
-            this.TbAssessmentFormGroup.controls['sputumSmear'].disable({
-                onlySelf: true
-            });
-            this.TbAssessmentFormGroup.controls['geneXpert'].disable({
-                onlySelf: true
-            });
-            this.TbAssessmentFormGroup.controls['chestXray'].disable({
-                onlySelf: true
-            });
-            this.TbAssessmentFormGroup.controls['invitationContacts'].disable({
-                onlySelf: true
-            });
+            this.TbAssessmentFormGroup.controls['sputumSmear'].disable({ onlySelf: true });
+            this.TbAssessmentFormGroup.controls['geneXpert'].disable({ onlySelf: true });
+            this.TbAssessmentFormGroup.controls['chestXray'].disable({ onlySelf: true });
+            this.TbAssessmentFormGroup.controls['invitationContacts'].disable({ onlySelf: true });
+            // set tb assessment outcome
+            const negativeTbScreening = this.tbScreeningOutcomeOptions.filter(obj => obj.itemName == 'No TB');
+            this.TbAssessmentFormGroup.get('tbScreeningOutcome').setValue(negativeTbScreening[0].itemId);
         }
     }
 }
