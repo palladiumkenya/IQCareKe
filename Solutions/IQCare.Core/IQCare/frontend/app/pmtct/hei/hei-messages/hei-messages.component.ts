@@ -4,6 +4,7 @@ import { HeiService } from './../../_services/hei.service';
 import { Component, OnInit, Input } from '@angular/core';
 import { NotificationService } from '../../../shared/_services/notification.service';
 import { SnotifyService } from 'ng-snotify';
+import {DataService} from '../../_services/data.service';
 
 @Component({
     selector: 'app-hei-messages',
@@ -16,6 +17,7 @@ export class HeiMessagesComponent implements OnInit {
     isPCR_Positive: boolean = false;
     isBaselineVLDone: boolean = false;
     heiResultsString: string = '';
+    maternalLastViralLoad: string = '';
 
     @Input() patientId: any;
     @Input() heiHivTestingOptions: LookupItemView[];
@@ -23,11 +25,21 @@ export class HeiMessagesComponent implements OnInit {
 
     constructor(private heiservice: HeiService,
         private snotifyService: SnotifyService,
-        private notificationService: NotificationService) {
+        private notificationService: NotificationService,
+        private dataservice: DataService) {
     }
 
-    ngOnInit() {
+    async ngOnInit() {
         this.loadPatientCompletedTestTypes();
+        const newVar = await this.loadMaternalLastViralLoad();
+
+        this.dataservice.labDone.subscribe(labDone => {
+            this.loadPatientCompletedTestTypes();
+        });
+    }
+
+    async loadMaternalLastViralLoad() {
+        const toPromise = this.heiservice.getMaternalViralLoad().toPromise();
     }
 
     loadPatientCompletedTestTypes(): void {
@@ -45,6 +57,7 @@ export class HeiMessagesComponent implements OnInit {
     loadHeiHivTests(heiLabTests: any[]): void {
         this.heiservice.getLabOrderTestResults(this.patientId).subscribe(
             (res) => {
+                this.heiResultsString = '';
                 for (let i = 0; i < res.length; i++) {
                     const savedHeiLabTests = heiLabTests.filter(obj => obj.labOrderId == res[i].labOrderId);
                     let testType;

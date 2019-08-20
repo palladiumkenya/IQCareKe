@@ -365,4 +365,11 @@ export class HeiService {
             catchError(this.errorHandler.handleError<any[]>('getPersonDetails'))
         );
     }
+
+    public getMaternalViralLoad(): Observable<any> {
+        return this.http.get(this.API_PMTCT_URL + '').pipe(
+            tap(getMaternalViralLoad => this.errorHandler.log('successfully fetched maternal viral load')),
+            catchError(this.errorHandler.handleError<any[]>('error fetching maternal viral load'))
+        );
+    }
 }

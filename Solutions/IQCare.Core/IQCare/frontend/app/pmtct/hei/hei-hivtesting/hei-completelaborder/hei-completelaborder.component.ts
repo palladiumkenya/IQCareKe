@@ -46,13 +46,9 @@ export class HeiCompletelaborderComponent implements OnInit {
             resultText: new FormControl('', [Validators.required])
         });
 
-        this.HeiCompleteHivTestsForm.get('testType').setValue(
-            this.selectedTesttype
-        );
+        this.HeiCompleteHivTestsForm.get('testType').setValue(this.selectedTesttype);
 
-        if (
-            this.selectedTesttype['itemName'] == 'Baseline Viral Load (for +ve)'
-        ) {
+        if (this.selectedTesttype['itemName'] == 'Baseline Viral Load (for +ve)') {
             this.HeiCompleteHivTestsForm.get('result').disable();
             this.HeiCompleteHivTestsForm.get('resultText').enable();
         } else {

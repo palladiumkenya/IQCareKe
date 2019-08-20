@@ -46,7 +46,7 @@ export class HivtestingmodalComponent implements OnInit {
         if (event.isUserInput && event.source.selected && event.source.viewValue == 'Baseline Viral Load (for +ve)') {
             this.HivTestingForm.get('resultText').enable({ onlySelf: true });
             this.HivTestingForm.get('result').disable({ onlySelf: true });
-        } else if (event.isUserInput && event.source.selected) {
+        } else if (event.isUserInput && event.source.selected && event.source.viewValue != 'Baseline Viral Load (for +ve)') {
             this.HivTestingForm.get('resultText').disable({ onlySelf: true });
             this.HivTestingForm.get('result').enable({ onlySelf: true });
         }
@@ -58,7 +58,6 @@ export class HivtestingmodalComponent implements OnInit {
         } else {
             return;
         }
-
     }
 
     close() {
@@ -75,7 +74,6 @@ export class HivtestingmodalComponent implements OnInit {
             } else if (selectedType.itemName == 'Baseline Viral Load (for +ve)') {
                 this.HivTestingForm.get('result').disable({ onlySelf: true });
             }
-            // this.HivTestingForm.get('result').enable({ onlySelf: true });
             this.HivTestingForm.get('dateresultscollected').enable({ onlySelf: true });
         } else if (event.isUserInput && event.source.selected && event.source.viewValue == 'No') {
             this.HivTestingForm.get('resultText').disable({ onlySelf: true });

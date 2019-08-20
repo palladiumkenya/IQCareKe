@@ -82,21 +82,12 @@ export class DeliveryComponent implements OnInit {
         this.heiservice.getHeiDelivery(this.patientId).subscribe(
             result => {
                 for (let i = 0; i < result.length; i++) {
-                    this.DeliveryForm.get('placeofdelivery').setValue(
-                        result[i].placeOfDeliveryId
-                    );
-                    this.DeliveryForm.get('modeofdelivery').setValue(
-                        result[i].modeOfDeliveryId
-                    );
+                    this.DeliveryForm.get('placeofdelivery').setValue(result[i].placeOfDeliveryId);
+                    this.DeliveryForm.get('modeofdelivery').setValue(result[i].modeOfDeliveryId);
                     this.DeliveryForm.get('birthweight').setValue(
-                        result[i].birthWeight
-                    );
-                    this.DeliveryForm.get('arvprophylaxisreceived').setValue(
-                        result[i].arvProphylaxisId
-                    );
-                    this.DeliveryForm.get('arvprophylaxisother').setValue(
-                        result[i].arvProphylaxisOther
-                    );
+                        parseFloat(String(Math.round(result[i].birthWeight * 100) / 100)).toFixed(3));
+                    this.DeliveryForm.get('arvprophylaxisreceived').setValue(result[i].arvProphylaxisId);
+                    this.DeliveryForm.get('arvprophylaxisother').setValue(result[i].arvProphylaxisOther);
                 }
             },
             error => {},

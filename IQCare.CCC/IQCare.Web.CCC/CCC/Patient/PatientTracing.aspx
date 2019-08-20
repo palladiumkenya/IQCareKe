@@ -175,9 +175,13 @@
                     success: function (response) {
                         $.each(JSON.parse(response.d), function (index, value) {
                             //var tracingDate = new Date(this.TracingDate);
-                            $("#tracingmethod").val(this.TracingMethod);
-                            $("#tracingoutcome").val(this.TracingOutcome);
-                            $("#tracingnotes").val(this.TracingNotes);
+                            console.log(value);
+                            console.log(index);
+                            // DateTracingDone
+                            $("#tracingdate").val(moment(value.DateTracingDone).format('DD-MMM-YYYY'));
+                            $("#tracingmethod").val(value.Mode);
+                            $("#tracingoutcome").val(value.Outcome);
+                            $("#tracingnotes").val(value.Remarks);
                         });
                     }
                 });
