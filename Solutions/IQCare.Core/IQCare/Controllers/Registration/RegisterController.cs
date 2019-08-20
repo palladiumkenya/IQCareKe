@@ -58,6 +58,7 @@ namespace IQCare.Controllers.Registration
                 return Ok(response.Value);
             return BadRequest(response);
         }
+
         [HttpGet("GetPatientARVHistory/{serviceAreaId}/{personId}")]
         public async Task<IActionResult> GetPatientARVHistory(int serviceAreaId, int personId)
         {
@@ -121,6 +122,7 @@ namespace IQCare.Controllers.Registration
                 return Ok(response.Value);
             return BadRequest(response);
         }
+
         [HttpPost("postServiceEntryPoint")]
         public async Task<IActionResult> PostServiceEntryPoint([FromBody]AddServiceEntryPointCommand serviceEntryPointCommand)
         {
