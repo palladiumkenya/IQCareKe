@@ -16,6 +16,7 @@ namespace Interface.CCC.Reporting
         DataTable getseconddefaulters(DateTime reportingdate, int mindays, int maxdays);
         DataTable getltfu(DateTime fromdate, DateTime todate);
         int AddPatientTracing(Tracing PT);
+        int UpdatePatientTracing(Tracing tracing);
         List<Tracing> GetPatientTracingData(int patientMasterVisitId);
     }
 }

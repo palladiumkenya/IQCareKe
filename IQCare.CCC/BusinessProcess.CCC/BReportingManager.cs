@@ -75,6 +75,17 @@ namespace BusinessProcess.CCC
             }
         }
 
+        public int UpdatePatientTracing(Tracing tracing)
+        {
+            using (UnitOfWork unitOfWork = new UnitOfWork(new GreencardContext()))
+            {
+                unitOfWork.ReportingRepository.Update(tracing);
+                var result = unitOfWork.Complete();
+                unitOfWork.Dispose();
+                return result;
+            }
+        }
+
         public List<Tracing> GetPatientTracingData(int patientMasterVisitId)
         {
             using (UnitOfWork unitOfWork = new UnitOfWork(new GreencardContext()))
