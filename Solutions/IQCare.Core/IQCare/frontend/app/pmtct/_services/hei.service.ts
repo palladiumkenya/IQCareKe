@@ -366,10 +366,17 @@ export class HeiService {
         );
     }
 
-    public getMaternalViralLoad(): Observable<any> {
-        return this.http.get(this.API_PMTCT_URL + '').pipe(
+    public getMaternalViralLoad(patientId: number): Observable<any[]> {
+        return this.http.get<any[]>(this.API_URL + '/api/DeliveryMaternalHistory/GetPatientViralLoads/' + patientId).pipe(
             tap(getMaternalViralLoad => this.errorHandler.log('successfully fetched maternal viral load')),
             catchError(this.errorHandler.handleError<any[]>('error fetching maternal viral load'))
+        );
+    }
+
+    public getMotherPatientId(personId: number): Observable<any> {
+        return this.http.get(this.API_URL + '/api/Register/GetPatientByPersonId/' + personId).pipe(
+            tap(getMotherPatientId => this.errorHandler.log('successfully fetched mother patient model')),
+            catchError(this.errorHandler.handleError<any[]>('error fetching mother patient model'))
         );
     }
 }

@@ -12,6 +12,7 @@ import { SnotifyService } from 'ng-snotify';
 import { MatDialogConfig, MatDialog } from '@angular/material';
 import { InlineSearchComponent } from '../../../records/inline-search/inline-search.component';
 import { RecordsService } from '../../../records/_services/records.service';
+import {DataService} from '../../_services/data.service';
 
 @Component({
     selector: 'app-maternalhistory',
@@ -45,7 +46,8 @@ export class MaternalhistoryComponent implements OnInit {
         private snotifyService: SnotifyService,
         private dialog: MatDialog,
         private heiservice: HeiService,
-        private recordsService: RecordsService
+        private recordsService: RecordsService,
+        private dataservice: DataService
     ) {}
 
     ngOnInit() {
@@ -114,9 +116,8 @@ export class MaternalhistoryComponent implements OnInit {
                     this.MaternalHistoryForm.get('nameofmother').setValue(
                         result[i].motherName
                     );
-                    this.MaternalHistoryForm.get('motherpersonid').setValue(
-                        result[i].motherPersonId
-                    );
+                    this.dataservice.motherHasBeenSet(result[i].motherPersonId);
+                    this.MaternalHistoryForm.get('motherpersonid').setValue(result[i].motherPersonId);
                     this.MaternalHistoryForm.get('cccno').setValue(
                         result[i].motherCCCNumber
                     );
@@ -226,7 +227,6 @@ export class MaternalhistoryComponent implements OnInit {
                 return;
             }
 
-            console.log(data);
             const firstName = data[0]['firstName'] ? data[0]['firstName'] : '';
             const middleName = data[0]['middleName']
                 ? data[0]['middleName']
@@ -241,11 +241,11 @@ export class MaternalhistoryComponent implements OnInit {
             this.MaternalHistoryForm.controls.motherpersonid.setValue(
                 data[0]['id']
             );
+            this.dataservice.motherHasBeenSet(data[0]['id']);
             if (data[0]['patientId']) {
                 this.recordsService
                     .getPatientIdentifiersList(data[0]['patientId'])
                     .subscribe(res => {
-                        console.log(res);
                         if (res.length > 0) {
                             for (let i = 0; i < res.length; i++) {
                                 if (res[i]['identifierTypeId'] == 1) {

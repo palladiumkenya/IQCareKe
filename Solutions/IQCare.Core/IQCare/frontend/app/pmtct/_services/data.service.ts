@@ -11,6 +11,9 @@ export class DataService {
     private labDoneObservable = new BehaviorSubject<boolean>(false);
     labDone = this.labDoneObservable.asObservable();
 
+    private motherIdObservable = new BehaviorSubject<number>(0);
+    motherId = this.motherIdObservable.asObservable();
+
     constructor() { }
 
     public changeHivStatus(newHivStatus: string) {
@@ -19,5 +22,9 @@ export class DataService {
 
     public labHasBeenCompleted(labDone: boolean) {
         this.labDoneObservable.next(labDone);
+    }
+
+    public motherHasBeenSet(motherId: number) {
+        this.motherIdObservable.next(motherId);
     }
 }
