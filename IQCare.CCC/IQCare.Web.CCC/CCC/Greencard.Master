@@ -184,7 +184,7 @@
 						           <span class=""></span> Patient Tracing<span class="badge"></span>
 						        </a>
                              
-						        <a href='<%=ResolveClientUrl("~/CCC/Patient/PatientTracing.aspx") %>' class="list-group-item" id="patientTracing">
+						        <a href='<%=ResolveClientUrl("~/CCC/Patient/PatientTracing.aspx") %>' class="list-group-item" id="patientTracingLink">
 						            <span class="fa-2x pull-left text-danger"></span> <strong class="tracing-link text-danger">Patient Tracing</strong>
 						        </a>
 
@@ -376,9 +376,11 @@
 		    console.log(PatientTracing);
 		    if (PatientTracing == "yes") {
                 $("#patientTracing").show();
+                $("#patientTracingLink").show();
 		    }
 		    else {
 		        $("#patientTracing").hide();
+		        $("#patientTracingLink").hide();
 		    }
 			var startEncounter=0; /* starts encounter flags starts at false */
 			var stopEncounter=0; /* starts encounter flags starts at false */
