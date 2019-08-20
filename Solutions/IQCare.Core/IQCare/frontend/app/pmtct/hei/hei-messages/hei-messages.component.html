@@ -1,4 +1,4 @@
-<mat-card>
+<mat-card style="height: 80px;">
     <div class="row">
         <div class="col-lg-3 col-sm-3 col-xs-12" *ngIf="!isPCRDone">
             <span class="label label-orange">PCR NOT DONE</span>
@@ -19,9 +19,12 @@
         <div class="col-lg-3 col-sm-3 col-xs-12" *ngIf="isPCR_Positive">
             <span class="label label-orange">ART INITIATION SHOULD BE DONE</span>
         </div>
+    </div>
 
-        <div class="col-lg-3 col-sm-3 col-xs-12">
-            <span class="label label-info" [innerHTML]="maternalLastViralLoad"></span>
-        </div>
+    <div class="row">
+        &nbsp;
+    </div>
+    <div class="col-lg-3 col-sm-3 col-xs-12">
+        <span class="label label-info" [innerHTML]="maternalLastViralLoad"></span>
     </div>
 </mat-card>

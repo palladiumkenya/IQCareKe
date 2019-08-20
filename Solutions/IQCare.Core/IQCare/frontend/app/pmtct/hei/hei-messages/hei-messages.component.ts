@@ -48,10 +48,11 @@ export class HeiMessagesComponent implements OnInit {
         const patient = await this.heiservice.getMotherPatientId(motherId).toPromise();
         if (patient) {
             const viralLoads = await this.heiservice.getMaternalViralLoad(patient.id).toPromise();
+            this.maternalLastViralLoad = '';
             if (viralLoads['patientViralLoad'].length > 0) {
                 for (let i = 0; i < viralLoads['patientViralLoad'].length; i++) {
                     if (viralLoads['patientViralLoad'][i]['orderstatus'] == 'Complete') {
-                        this.maternalLastViralLoad += '<span class="text-info">MATERNAL VIRAL LOAD:</span> Complete | Results : '
+                        this.maternalLastViralLoad = 'MATERNAL VIRAL LOAD => Complete | Results : '
                             + viralLoads['patientViralLoad'][i]['resultvalue']
                             + ' copies/ml. ResultDate: ' + moment(viralLoads['patientViralLoad'][i]['resultDate']).format('DD-MMM-YYYY');
                         break;
