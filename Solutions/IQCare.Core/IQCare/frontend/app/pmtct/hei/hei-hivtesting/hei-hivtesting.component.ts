@@ -18,6 +18,7 @@ import { HivtestingmodalComponent } from './hivtestingmodal/hivtestingmodal.comp
 import * as moment from 'moment';
 import { HeiCompletelaborderComponent } from './hei-completelaborder/hei-completelaborder.component';
 import { CompleteLabOrderCommand } from '../../_models/hei/CompleteLabOrderCommand';
+import {DataService} from '../../_services/data.service';
 
 @Component({
     selector: 'app-hei-hivtesting',
@@ -61,7 +62,8 @@ export class HeiHivtestingComponent implements OnInit {
         private snotifyService: SnotifyService,
         private notificationService: NotificationService,
         private dialog: MatDialog,
-        private heiservice: HeiService
+        private heiservice: HeiService,
+        private dataservice: DataService
     ) {
         this.maxDate = new Date();
     }
@@ -355,8 +357,7 @@ export class HeiHivtestingComponent implements OnInit {
                 });
             }
 
-            this.heiservice
-                .saveCompleteHeiLabOrder(completeLabOrderCommand)
+            this.heiservice.saveCompleteHeiLabOrder(completeLabOrderCommand)
                 .subscribe(
                     res => {
                         this.hiv_testing_history_data = [];
@@ -366,6 +367,7 @@ export class HeiHivtestingComponent implements OnInit {
                             this.notificationService.getConfig()
                         );
                         this.loadPatientCompletedTestTypes();
+                        this.dataservice.labHasBeenCompleted(true);
                     },
                     error => {
                         this.snotifyService.error(

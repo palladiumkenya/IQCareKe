@@ -1,8 +1,4 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="ucPatientBrief.ascx.cs" Inherits="IQCare.Web.CCC.UC.ucPatientBrief" %>
-<style>
-    .tracing-link{background: red;color: #FFFFFF;padding: 10px 15px;border-radius: 5px;display: none;}
-    .tracing-link>a{color: #fff;}
-</style>
 <div class="ui-user col-md-12 col-xs-12 col-sm-12" style="padding-top: 0%;margin-top: 0%">
 					<!-- Image -->
 					<div class="col-md-1 col-xs-1 col-sm-1" style="padding-right: 0%">
@@ -66,22 +62,5 @@
                           </div>
 
                     </div>
-                    
-					<!-- Name -->
-					
 				</div>
-            <div class="col-md-4 col-xs-4 col-sm-4 pull-right" style="margin-top: -30px;">
-                <a href="PatientTracing.aspx" class="tracing-link">Patient Tracing</a>
-            </div>
 <div class="col-md-12"><hr/></div>
-<script>
-    $(document).ready(function () {
-        var PatientTracing = '<%=PatientTrace%>';
-        if (PatientTracing == "yes") {
-            $(".tracing-link").show();
-        }
-        else {
-            $(".tracing-link").hide();
-        }
-    });
-</script>

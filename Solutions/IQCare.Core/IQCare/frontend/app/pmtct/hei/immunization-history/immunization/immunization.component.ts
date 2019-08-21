@@ -2,6 +2,9 @@ import { LookupItemView } from './../../../../shared/_models/LookupItemView';
 import { Component, OnInit, Inject } from '@angular/core';
 import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+import * as moment from 'moment';
+import {SnotifyService} from 'ng-snotify';
+import {NotificationService} from '../../../../shared/_services/notification.service';
 
 @Component({
     selector: 'app-immunization',
@@ -15,11 +18,12 @@ export class ImmunizationComponent implements OnInit {
     immunizationperiods: LookupItemView[] = [];
     yesnoOptions: LookupItemView[] = [];
     public maxDate: Date;
-    public minDate: Date;
 
     constructor(private _formBuilder: FormBuilder,
         private dialogRef: MatDialogRef<ImmunizationComponent>,
-        @Inject(MAT_DIALOG_DATA) data) {
+        @Inject(MAT_DIALOG_DATA) data,
+        private snotifyService: SnotifyService,
+        private notificationService: NotificationService) {
 
 
         this.immunizationperiods = data.immunizationperiods;
@@ -37,6 +41,16 @@ export class ImmunizationComponent implements OnInit {
             dateImmunized: new FormControl('', [Validators.required]),
             nextSchedule: new FormControl('')
         });
+    }
+
+    OnNextScheduleDateChange(event) {
+        const momentA = moment(event.value.toDate(), 'DD/MM/YYYY');
+        const momentB = moment(this.ImmunizationHistoryFormGroup.get('dateImmunized').value, 'DD/MM/YYYY');
+        if (momentA < momentB) {
+            this.ImmunizationHistoryFormGroup.get('nextSchedule').setValue('');
+            this.snotifyService.info('Next Schedule date should not be before Date of Immunization',
+                'Immunization', this.notificationService.getConfig());
+        }
     }
 
     save() {

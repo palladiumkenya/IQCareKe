@@ -146,8 +146,11 @@ namespace IQCare.Web.CCC.WebService
             return rows;
         }
         [WebMethod(EnableSession = true)]
-        public string saveTracingData(int PatientId,int PersonId, string tracingdate, int tracingmethod, int tracingoutcome, string othertracingoutcome, string tracingdateofdeath, string tracingdateoftransfer, string transferfacility, string tracingnotes, string tracingstatus)
+        public string saveTracingData(int PatientId,int PersonId, string tracingdate, int tracingmethod, int tracingoutcome, string othertracingoutcome, string tracingdateofdeath, 
+            string tracingdateoftransfer, string transferfacility, string tracingnotes, string tracingstatus, int? visitid)
         {
+            ILookupManager mgr = (ILookupManager)ObjectFactory.CreateInstance("BusinessProcess.CCC.BLookupManager, BusinessProcess.CCC");
+            var tracing = new ReportingResultsManager();
             int userId = Convert.ToInt32(Session["AppUserId"]);
             int patientmastervisitresult = 0;
             int EncounterResult = 0;
@@ -185,47 +188,65 @@ namespace IQCare.Web.CCC.WebService
                 {
                     currentfacility = lookupLogic.GetFacility();
                 }
-                patientmastervisitresult = patientMasterVisit.PatientMasterVisitCheckin(PatientId, userId, currentfacility.FacilityID);
 
-                //create encounter
-                PatientEncounterManager patientEncounterManager = new PatientEncounterManager();
-                EncounterResult = patientEncounterManager.AddpatientEncounterTracing(Convert.ToInt32(PatientId), Convert.ToInt32(patientmastervisitresult),
-                        patientEncounterManager.GetPatientEncounterId("EncounterType", "Patient-Tracing"), 203, userId, Convert.ToDateTime(tracingdate), Convert.ToDateTime(tracingdate));
-                ILookupManager mgr = (ILookupManager)ObjectFactory.CreateInstance("BusinessProcess.CCC.BLookupManager, BusinessProcess.CCC");
-                int tracingType = Convert.ToInt32(mgr.GetLookupItemId("DefaulterTracing"));
-                //save tracing data
-                Tracing patientTracing = new Tracing()
+                if (visitid.HasValue && visitid.Value > 0)
                 {
-                    PersonID = PersonId,
-                    TracingType = tracingType,
-                    PatientMasterVisitId = patientmastervisitresult,
-                    DateTracingDone = Convert.ToDateTime(tracingdate),
-                    Mode = tracingmethod,
-                    Outcome = tracingoutcome,
-                    TracingDateOfDeath = deathTracingDate,
-                    TracingTransferFacility = transferfacility,
-                    TracingTransferDate = transferTracingDate,
-                    Remarks = tracingnotes,
-                    CreateDate = DateTime.Now,
-                    CreatedBy = Convert.ToInt32(Session["AppUserId"])
-                };
+                    Tracing[] patientTracingData = tracing.getTracingData(visitid.Value).ToArray();
+                    if (patientTracingData.Length > 0)
+                    {
+                        patientTracingData[0].Mode = tracingmethod;
+                        patientTracingData[0].Outcome = tracingoutcome;
+                        patientTracingData[0].DateTracingDone = Convert.ToDateTime(tracingdate);
+                        patientTracingData[0].TracingDateOfDeath = deathTracingDate;
+                        patientTracingData[0].TracingTransferFacility = transferfacility;
+                        patientTracingData[0].TracingTransferDate = transferTracingDate;
+                        patientTracingData[0].Remarks = tracingnotes;
 
-                Tracing pt = patientTracing;
-
-                var tracing = new ReportingResultsManager();
-                Result = tracing.AddPatientTracing(patientTracing);
-
-                //checkout patient master visit
-                PatientMasterVisitManager patientMasterVisitcheckout = new PatientMasterVisitManager();
-                CheckoutResult = patientMasterVisit.PatientMasterVisitCheckout(patientmastervisitresult, PatientId, 0, 0, 0, Convert.ToDateTime(tracingdate));
-
-                Session["EncounterStatusId"] = 0;
-                Session["PatientEditId"] = 0;
-                Session["PatientPK"] = 0;
-
-                if (Result > 0 && CheckoutResult>0)
+                        tracing.UpdatePatientTracing(patientTracingData[0]);
+                        Session["PatientTrace"] = "";
+                    }
+                }
+                else
                 {
-                    Msg = "Patient appointment Added Successfully!";
+                    patientmastervisitresult = patientMasterVisit.PatientMasterVisitCheckin(PatientId, userId, currentfacility.FacilityID);
+
+                    //create encounter
+                    PatientEncounterManager patientEncounterManager = new PatientEncounterManager();
+                    EncounterResult = patientEncounterManager.AddpatientEncounterTracing(Convert.ToInt32(PatientId), Convert.ToInt32(patientmastervisitresult),
+                            patientEncounterManager.GetPatientEncounterId("EncounterType", "Patient-Tracing"), 203, userId, Convert.ToDateTime(tracingdate), Convert.ToDateTime(tracingdate));
+                    int tracingType = Convert.ToInt32(mgr.GetLookupItemId("DefaulterTracing"));
+                    //save tracing data
+                    Tracing patientTracing = new Tracing()
+                    {
+                        PersonID = PersonId,
+                        TracingType = tracingType,
+                        PatientMasterVisitId = patientmastervisitresult,
+                        DateTracingDone = Convert.ToDateTime(tracingdate),
+                        Mode = tracingmethod,
+                        Outcome = tracingoutcome,
+                        TracingDateOfDeath = deathTracingDate,
+                        TracingTransferFacility = transferfacility,
+                        TracingTransferDate = transferTracingDate,
+                        Remarks = tracingnotes,
+                        CreateDate = DateTime.Now,
+                        CreatedBy = Convert.ToInt32(Session["AppUserId"])
+                    };
+
+                    Result = tracing.AddPatientTracing(patientTracing);
+
+                    //checkout patient master visit
+                    PatientMasterVisitManager patientMasterVisitcheckout = new PatientMasterVisitManager();
+                    CheckoutResult = patientMasterVisit.PatientMasterVisitCheckout(patientmastervisitresult, PatientId, 0, 0, 0, Convert.ToDateTime(tracingdate));
+
+                    Session["EncounterStatusId"] = 0;
+                    Session["PatientEditId"] = 0;
+                    Session["PatientPK"] = 0;
+                    Session["PatientTrace"] = "";
+
+                    if (Result > 0 && CheckoutResult > 0)
+                    {
+                        Msg = "Patient appointment Added Successfully!";
+                    }
                 }
             }
             catch (Exception e)

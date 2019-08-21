@@ -46,6 +46,12 @@ namespace IQCare.CCC.UILogic.Reporting
             return result;
         }
 
+        public int UpdatePatientTracing(Tracing tracing)
+        {
+            IReportingManager reportingResults = (IReportingManager)ObjectFactory.CreateInstance("BusinessProcess.CCC.BReportingManager, BusinessProcess.CCC");
+            return reportingResults.UpdatePatientTracing(tracing);
+        }
+
         public List<Tracing> getTracingData(int patientMasterVisitId)
         {
             IReportingManager reportingResults = (IReportingManager)ObjectFactory.CreateInstance("BusinessProcess.CCC.BReportingManager, BusinessProcess.CCC");

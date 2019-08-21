@@ -174,10 +174,14 @@
                     dataType: "json",
                     success: function (response) {
                         $.each(JSON.parse(response.d), function (index, value) {
-                            //var tracingDate = new Date(this.TracingDate);
-                            $("#tracingmethod").val(this.TracingMethod);
-                            $("#tracingoutcome").val(this.TracingOutcome);
-                            $("#tracingnotes").val(this.TracingNotes);
+                            $("#tracingdate").val(moment(value.DateTracingDone).format('DD-MMM-YYYY'));
+                            $("#tracingdateofdeath").val(moment(value.TracingDateOfDeath).format('DD-MMM-YYYY'));
+                            $("#tracingdateoftransfer").val(moment(value.TracingTransferDate).format('DD-MMM-YYYY'));
+                            $("#othertracingoutcome").val('');
+                            $("#transferfacility").val(value.TracingTransferFacility);
+                            $("#tracingmethod").val(value.Mode);
+                            $("#tracingoutcome").val(value.Outcome);
+                            $("#tracingnotes").val(value.Remarks);
                         });
                     }
                 });
@@ -239,6 +243,10 @@
                     toastr.error("Please input transfer facility.");
                 }
                 else {
+                    var visitid = GetURLParameter('visitId');
+                    if (visitid === undefined) {
+                        visitid = 0;
+                    }
                     var tracingStatus = "";
                     if (tracingoutcometext.includes("Did not attempt to trace patient")) {
                         tracingStatus = 0;
@@ -250,7 +258,7 @@
                         type: "POST",
                         url: "../WebService/ReportingService.asmx/saveTracingData",
                         data: "{'PatientId':'" + PatientId + "','PersonId':'" + PersonId + "','tracingdate':'" + tracingdate + "','tracingmethod':'" + tracingmethod + "','tracingoutcome':'" + tracingoutcome + "','othertracingoutcome':'" + othertracingoutcome + "'," +
-                            "'tracingdateofdeath': '" + tracingdateofdeath + "','tracingdateoftransfer':'" + tracingdateoftransfer + "','transferfacility':'" + transferfacility + "','tracingnotes':'" + tracingnotes + "','tracingstatus':'"+tracingStatus+"'}",
+                            "'tracingdateofdeath': '" + tracingdateofdeath + "','tracingdateoftransfer':'" + tracingdateoftransfer + "','transferfacility':'" + transferfacility + "','tracingnotes':'" + tracingnotes + "','tracingstatus':'"+tracingStatus+"', 'visitid': '"+ visitid +"'}",
                         contentType: "application/json; charset=utf-8",
                         dataType: "json",
                         cache: false,

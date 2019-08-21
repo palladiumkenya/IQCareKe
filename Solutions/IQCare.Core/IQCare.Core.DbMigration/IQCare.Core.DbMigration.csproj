@@ -300,6 +300,8 @@
     <None Remove="Scripts\2.2.0\13_HeiLabTests.sql" />
     <None Remove="Scripts\2.2.0\14_PersonTracingView.sql" />
     <None Remove="Scripts\2.2.0\15_qaversion.sql" />
+    <None Remove="Scripts\2.2.0\16_sp_getAllViralLoads.sql" />
+    <None Remove="Scripts\2.2.0\17_FPPNC.sql" />
   </ItemGroup>
 
   <ItemGroup>
@@ -610,6 +612,8 @@
     <EmbeddedResource Include="Scripts\2.2.0\12_TracingAddReasonNotContacted.sql" />
     <EmbeddedResource Include="Scripts\2.2.0\13_HeiLabTests.sql" />
     <EmbeddedResource Include="Scripts\2.2.0\14_PersonTracingView.sql" />
+    <EmbeddedResource Include="Scripts\2.2.0\16_sp_getAllViralLoads.sql" />
+    <EmbeddedResource Include="Scripts\2.2.0\17_FPPNC.sql" />
   </ItemGroup>
 
   <ItemGroup>
