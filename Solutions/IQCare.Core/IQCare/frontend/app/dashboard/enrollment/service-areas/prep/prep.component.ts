@@ -175,7 +175,7 @@ export class PrepComponent implements OnInit {
             IsSchool: new FormControl(''),
             KeyPopulation: new FormControl(''),
             populationType: new FormControl('', [Validators.required]),
-            DiscordantCouple: new FormControl(''),
+            //  DiscordantCouple: new FormControl(''),
             PrevPrepUse: new FormControl(''),
             Months: new FormControl(''),
             partnercccenrollment: new FormControl(''),
@@ -271,7 +271,7 @@ export class PrepComponent implements OnInit {
             }
         );
         this.form.controls.KeyPopulation.disable({ onlySelf: true });
-        this.form.controls.DiscordantCouple.disable({ onlySelf: true });
+        // this.form.controls.DiscordantCouple.disable({ onlySelf: true });
 
         this.loadPopulationTypes(this.personId);
 
@@ -834,12 +834,12 @@ export class PrepComponent implements OnInit {
                         this.form.controls.populationType.setValue(1);
                     } else if (result[0].populationType == 'Discordant Couple') {
                         this.form.controls.populationType.setValue(3);
-                        this.form.controls.DiscordantCouple.enable({ onlySelf: false });
-                        const arrayValue = [];
-                        result.forEach(element => {
-                            arrayValue.push(element.populationCategory);
-                        });
-                        this.form.controls.DiscordantCouple.setValue(arrayValue);
+                        /* this.form.controls.DiscordantCouple.enable({ onlySelf: false });
+                         const arrayValue = [];
+                         result.forEach(element => {
+                             arrayValue.push(element.populationCategory);
+                         });
+                         this.form.controls.DiscordantCouple.setValue(arrayValue); */
 
                     } else {
                         this.form.controls.populationType.setValue(2);
@@ -1043,15 +1043,15 @@ export class PrepComponent implements OnInit {
         const popType = this.form.controls.populationType.value;
         if (popType == 1) {
             this.form.controls.KeyPopulation.disable({ onlySelf: true });
-            this.form.controls.DiscordantCouple.disable({ onlySelf: false });
+            // this.form.controls.DiscordantCouple.disable({ onlySelf: false });
             this.form.controls.KeyPopulation.setValue([]);
-            this.form.controls.DiscordantCouple.setValue([]);
+            // this.form.controls.DiscordantCouple.setValue([]);
         } else if (popType == 2) {
             this.form.controls.KeyPopulation.enable({ onlySelf: false });
-            this.form.controls.DiscordantCouple.disable({ onlySelf: false });
-            this.form.controls.DiscordantCouple.setValue([]);
+            //  this.form.controls.DiscordantCouple.disable({ onlySelf: false });
+            //  this.form.controls.DiscordantCouple.setValue([]);
         } else if (popType == 3) {
-            this.form.controls.DiscordantCouple.enable({ onlySelf: false });
+            //  this.form.controls.DiscordantCouple.enable({ onlySelf: false });
             this.form.controls.KeyPopulation.disable({ onlySelf: true });
             this.form.controls.KeyPopulation.setValue([]);
         }
@@ -1144,7 +1144,7 @@ export class PrepComponent implements OnInit {
         this.spinner.show();
         const enrollment = new Enrollment();
 
-        const { EnrollmentDate, KeyPopulation, populationType, DiscordantCouple, EnrollmentNumber, MFLCode, Year, ClientTransferIn
+        const { EnrollmentDate, KeyPopulation, populationType, EnrollmentNumber, MFLCode, Year, ClientTransferIn
             , TransferInDate, TransferInMflCode, CurrentRegimen, ClinicalNotes, InitiationDate, IsSchool,
             Months, Referredfrom, isClientCircumcised, lmp, pregnant,
             pregnancyPlanned, breastFeeding, onFamilyPlanning, DateLastUsed,
@@ -1152,7 +1152,7 @@ export class PrepComponent implements OnInit {
         } = this.form.value;
         this.personPopulation.KeyPopulation = KeyPopulation;
         this.personPopulation.populationType = populationType;
-        this.personPopulation.DiscordantCouplePopulation = DiscordantCouple;
+        // this.personPopulation.DiscordantCouplePopulation = DiscordantCouple;
 
         let itemdisplayname: any[] = [];
         itemdisplayname = this.ClientTypes.filter(x => x.itemId == ClientTransferIn).map(o => {
@@ -1340,11 +1340,11 @@ export class PrepComponent implements OnInit {
                                                 VisitDate: EnrollmentDate
                                             };
 
-                                            const pregnancyIndicator = this.personHomeService.savePregnancyIndicatorCommand(pregnancyIndicatorCommand).subscribe((res)=>{
-                                                    console.log(res);
+                                            const pregnancyIndicator = this.personHomeService.savePregnancyIndicatorCommand(pregnancyIndicatorCommand).subscribe((res) => {
+                                                console.log(res);
 
                                             }, (error) => {
-                                                            console.log(error);
+                                                console.log(error);
                                             });
                                             const familyPlanningCommand: FamilyPlanningCommand = {
                                                 Id: 0,

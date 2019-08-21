@@ -327,7 +327,7 @@ export class RegistrationService {
             for (let i = 0; i < populations.DiscordantCouplePopulation.length; i++) {
                 const item = {
                     PopulationType: 'Discordant Couple',
-                    PopulationCategory: populations.DiscordantCouplePopulation[i]
+                    PopulationCategory: 0
                 };
                 pops.push(item);
             }
