@@ -51,6 +51,7 @@ export class PrepMonthlyrefillComponent implements OnInit {
     patientMasterVisitId: number = 0;
     EncounterTypeId: number;
     UserId: number;
+    Age: number = 20;
     ExistingData: any[] = [];
     ExistingClinicalNotes: any[] = [];
     Visible: boolean = false;
@@ -166,6 +167,11 @@ export class PrepMonthlyrefillComponent implements OnInit {
                     console.log(this.person);
                     if (this.person.dateOfBirth != null && this.person.dateOfBirth != undefined) {
                         this.minDate = this.person.dateOfBirth;
+                    }
+                    if (this.person.ageNumber != null && this.person.ageNumber != undefined) {
+                        this.Age = this.person.ageNumber;
+                    } else {
+                        this.Age = 20;
                     }
                 }
 
@@ -513,14 +519,61 @@ export class PrepMonthlyrefillComponent implements OnInit {
 
     }
     onPharmacyClick() {
-        this.searchService.setSession(this.personId, this.patientId).subscribe((sessionres) => {
-            this.searchService.setVisitSession(this.patientMasterVisitId, 20, 261).subscribe((setVisitSession) => {
-                const url = location.protocol + '//' + window.location.hostname + ':' + window.location.port +
-                    '/IQCare/CCC/Encounter/PharmacyPrescription.aspx';
-                const win = window.open(url, '_blank');
-                win.focus();
-            });
-        });
+        const { visitDate } = this.PrepMonthlyRefillFormGroup.value;
+
+        if (visitDate != null && visitDate != undefined) {
+            if (this.patientMasterVisitId > 0) {
+                this.searchService.setSession(this.personId, this.patientId).subscribe((sessionres) => {
+                    this.searchService.setVisitSession(this.patientMasterVisitId, 20, 261).subscribe((setVisitSession) => {
+                        const url = location.protocol + '//' + window.location.hostname + ':' + window.location.port +
+                            '/IQCare/CCC/Encounter/PharmacyPrescription.aspx';
+                        const win = window.open(url, '_blank');
+                        win.focus();
+                    });
+                });
+
+            } else {
+
+                const patientencounter: PatientMasterVisitEncounter = {
+                    PatientId: this.patientId,
+                    EncounterType: this.EncounterTypeId,
+                    ServiceAreaId: this.serviceAreaId,
+                    UserId: this.UserId,
+                    EncounterDate: moment(visitDate).toDate()
+                };
+
+                if (this.patientMasterVisitId <= 0 || this.patientMasterVisitId == undefined) {
+
+                    
+                    this.encounterservice.savePatientMasterVisit(patientencounter).subscribe(
+                        (result) => {
+                            localStorage.setItem('patientEncounterId', result['patientEncounterId']);
+                            localStorage.setItem('patientMasterVisitId', result['patientMasterVisitId']);
+
+                            this.patientMasterVisitId = result['patientMasterVisitId'];
+                            this.searchService.setSession(this.personId, this.patientId).subscribe((sessionres) => {
+                                this.searchService.setVisitSession(this.patientMasterVisitId, this.Age, 261).subscribe((setVisitSession) => {
+                                    const url = location.protocol + '//' + window.location.hostname + ':' + window.location.port +
+                                        '/IQCare/CCC/Encounter/PharmacyPrescription.aspx';
+                                    const win = window.open(url, '_blank');
+                                    win.focus();
+                                });
+                            });
+                        }, (error) => {
+                            this.snotifyService.error('Error Accessing the Pharmacy Link' + error, 'Pharmacy Link',
+                            this.notificationService.getConfig());
+                        });
+                }
+
+            }
+        }
+         else {
+
+            this.snotifyService.error('Record the visitDate first' , 'VisitDate',
+                            this.notificationService.getConfig());
+                            //this.PrepMonthlyRefillFormGroup.controls.visitDate
+                        return;
+         }
     }
 
     onAppointmentSelection(event) {

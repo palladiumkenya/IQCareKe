@@ -771,6 +771,7 @@ export class AncComponent implements OnInit, OnDestroy {
                     ])
                         .subscribe(
                             (result) => {
+                                console.log(result);
                                 hivTestsCommand.HtsEncounterId = result[3]['htsEncounterId'];
                                 hivTestsCommand.PatientMasterVisitId = result[3]['patientMasterVisitId'];
                                 const ancHivResultsCommand = this.ancService.saveHivResults(hivTestsCommand).subscribe(
@@ -812,11 +813,30 @@ export class AncComponent implements OnInit, OnDestroy {
             ])
                 .subscribe(
                     (result) => {
+                        console.log(result);
+                        const ancVisitDetailsCommand: any = {
+                            PatientId: parseInt(this.patientId.toString(), 10),
+                            PatientMasterVisitId: this.patientMasterVisitId,
+                            ServiceAreaId: parseInt(this.serviceAreaId.toString(), 10),
+                            VisitDate: moment(this.visitDetailsFormGroup.value[0]['visitDate']).toDate(),
+                            VisitNumber: parseInt(this.visitDetailsFormGroup.value[0]['visitNumber'], 10),
+                            VisitType: this.visitDetailsFormGroup.value[0]['visitType'],
+                            Lmp: new Date(this.visitDetailsFormGroup.value[1]['dateLMP']),
+                            Edd: this.visitDetailsFormGroup.value[1]['dateEDD'],
+                            Gestation: this.visitDetailsFormGroup.value[1]['gestation'],
+                            AgeAtMenarche: this.visitDetailsFormGroup.value[1]['ageAtMenarche'],
+                            ParityOne: this.visitDetailsFormGroup.value[1]['parityOne'],
+                            ParityTwo: this.visitDetailsFormGroup.value[1]['parityTwo'],
+                            Gravidae: this.visitDetailsFormGroup.value[1]['gravidae'],
+                            UserId: this.userId,
+                            DaysPostPartum: 0
+                        };
                         hivTestsCommand.HtsEncounterId = result[3]['htsEncounterId'];
                         hivTestsCommand.PatientMasterVisitId = result[3]['patientMasterVisitId'];
                         const ancHivResultsCommand = this.ancService.saveHivResults(hivTestsCommand).subscribe(
                             (testRes) => {
-                                // console.log(testRes);
+                                console.log('ancHivtestresults');
+                                console.log(testRes);
                             }
                         );
 

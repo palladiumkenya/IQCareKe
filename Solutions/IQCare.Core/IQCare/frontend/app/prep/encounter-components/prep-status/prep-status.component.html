@@ -25,10 +25,11 @@
                 <mat-form-field class="col-lg-12 col-sm-12 col-xs-12">
                     <mat-label>Contraindications for PrEP Present?</mat-label>
                     <mat-select id="contraindications_PrEP_Present" name="contraindications_PrEP_Present"
-                        formControlName="contraindications_PrEP_Present">
-                        <mat-option [value]=""></mat-option>
+                        formControlName="contraindications_PrEP_Present" disableRipple multiple required>
+
                         <mat-option *ngFor="let prepContraindicationsOption of prepContraindicationsOptions"
-                            [value]="prepContraindicationsOption.itemId">
+                            [value]="prepContraindicationsOption.itemId"
+                            (onSelectionChange)="Oncontraindications($event)">
                             {{ prepContraindicationsOption.itemName }}
                         </mat-option>
                     </mat-select>

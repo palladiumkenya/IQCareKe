@@ -1,0 +1,10 @@
+.labeldiscontinue {
+    font-size: 20px;
+    padding: 4px 6px 4px 6px;
+    -webkit-border-radius: 2px !important;
+    -webkit-background-clip: padding-box !important;
+    -moz-border-radius: 2px !important;
+    -moz-background-clip: padding !important;
+    border-radius: 2px !important;
+    background-clip: padding-box !important;
+}

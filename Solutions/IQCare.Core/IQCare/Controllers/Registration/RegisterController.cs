@@ -64,7 +64,7 @@ namespace IQCare.Controllers.Registration
             var response = await _mediator.Send(new GetPatientARVHistoryCommand()
             {
                 PersonId = personId,
-                ServiceId=serviceAreaId
+                ServiceId = serviceAreaId
             }, Request.HttpContext.RequestAborted);
 
             if (response.IsValid)
@@ -83,12 +83,12 @@ namespace IQCare.Controllers.Registration
 
 
         [HttpGet("GetPatientTransferIn/{serviceAreaId}/{personId}")]
-        public async Task<IActionResult> GetPatientTransfer(int serviceAreaId,int personId)
+        public async Task<IActionResult> GetPatientTransfer(int serviceAreaId, int personId)
         {
             var response = await _mediator.Send(new GetPatientTransferInCommand()
             {
                 PersonId = personId,
-                ServiceId= serviceAreaId
+                ServiceId = serviceAreaId
 
             }, Request.HttpContext.RequestAborted);
 
@@ -114,7 +114,7 @@ namespace IQCare.Controllers.Registration
             var response = await _mediator.Send(new GetPatientOVCStatusCommand()
             {
                 PersonId = personId
-                
+
             }, Request.HttpContext.RequestAborted);
 
             if (response.IsValid)
@@ -205,7 +205,7 @@ namespace IQCare.Controllers.Registration
         public async Task<IActionResult> Post([FromBody] EnrollClientCommand enrollClientCommand)
         {
             var response = await _mediator.Send(enrollClientCommand, Request.HttpContext.RequestAborted);
-            if(response.IsValid)
+            if (response.IsValid)
                 return Ok(response.Value);
             return BadRequest(response);
         }
@@ -253,7 +253,16 @@ namespace IQCare.Controllers.Registration
         [HttpGet]
         public async Task<IActionResult> Get(int patientId, int serviceAreaId)
         {
-            var response = await _mediator.Send(new GetClientDetailsCommand{ PatientId = patientId, ServiceAreaId = serviceAreaId }, Request.HttpContext.RequestAborted);
+            var response = await _mediator.Send(new GetClientDetailsCommand { PatientId = patientId, ServiceAreaId = serviceAreaId }, Request.HttpContext.RequestAborted);
+            if (response.IsValid)
+                return Ok(response.Value);
+            return BadRequest(response);
+        }
+
+        [HttpGet("getEnrollmentMasterVisitId/{patientId}/{serviceAreaId}")]
+        public async Task<IActionResult> GetEnrollmentMasterVisitId(int patientId,int serviceAreaId)
+        {
+            var response = await _mediator.Send(new GetEnrollmentMasterVisitCommand { PatientId = patientId, ServiceAreaId = serviceAreaId }, Request.HttpContext.RequestAborted);
             if (response.IsValid)
                 return Ok(response.Value);
             return BadRequest(response);

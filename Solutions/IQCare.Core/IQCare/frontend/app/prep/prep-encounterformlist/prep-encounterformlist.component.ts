@@ -75,7 +75,7 @@ export class PrepEncounterformlistComponent implements OnInit {
         console.log(this.riskassessmentvisits);
 
         this.Encounterformlistgroup = this._formBuilder.group({
-            encounterforms: new FormControl('', [Validators.required]),
+           // encounterforms: new FormControl('', [Validators.required]),
         });
 
 
@@ -291,95 +291,23 @@ export class PrepEncounterformlistComponent implements OnInit {
         }
     }
     clickEncounter() {
-        const { encounterforms } = this.Encounterformlistgroup.value;
-        console.log(encounterforms);
-
-        if (encounterforms == 'monthlyrefill') {
+        this.zone.run(() => {
             this.zone.run(() => {
-                this.router.navigate(['/prep/monthlyrefill/' + '/' + this.patientId + '/' + this.personId + '/'
-                    + this.serviceAreaId],
+                this.router.navigate(
+                    ['/prep/prepfollowupworkflow/' + this.patientId + '/' + this.personId + '/' + this.serviceAreaId],
                     { relativeTo: this.route });
             });
+        });
 
-        } else if (encounterforms == 'preptermination') {
+    }
+    monthlyrefillencounter(){
+        this.zone.run(() => {
             this.zone.run(() => {
-                this.router.navigate(['/prep/prepcareend/' + '/' + this.patientId + '/' + this.personId + '/'
-                    + this.serviceAreaId],
+                this.router.navigate(
+                    ['/prep/prepmonthlyrefillworkflow/' + this.patientId + '/' + this.personId + '/' + this.serviceAreaId],
                     { relativeTo: this.route });
             });
-
-
-        } else if (encounterforms == 'prepencounter') {
-
-            const dialogConfig = new MatDialogConfig();
-            dialogConfig.disableClose = true;
-            dialogConfig.autoFocus = true;
-
-            dialogConfig.data = {
-            };
-
-            const dialogRef = this.dialog.open(PrepCheckinComponent, dialogConfig);
-            dialogRef.afterClosed().subscribe(
-                data => {
-                    if (!data) {
-                        return;
-                    }
-
-                    const patientMasterVisitEncounter: PatientMasterVisitEncounter = {
-                        EncounterDate: data.visitdate,
-                        PatientId: this.patientId,
-                        EncounterType: this.prepEncounterType[0].itemId,
-                        ServiceAreaId: this.serviceAreaId,
-                        UserId: this.userId
-                    };
-
-                    this.encounterService.savePatientMasterVisit(patientMasterVisitEncounter).subscribe(
-                        (result) => {
-                            localStorage.setItem('visitDate', data.visitdate);
-                            // localStorage.setItem('visitType', JSON.stringify(data.visitType));
-
-                            this.snotifyService.success('Successfully Checked-In Patient', 'CheckIn', this.notificationService.getConfig());
-                            this.zone.run(() => {
-                                this.router.navigate(['/prep/encounter/' + '/' + this.patientId + '/' + this.personId + '/'
-                                    + result['patientEncounterId'] + '/' + result['patientMasterVisitId'] + '/' + this.serviceAreaId],
-                                    { relativeTo: this.route });
-                            });
-                        },
-                        (error) => {
-                            this.snotifyService.error('Error checking in ' + error, 'CheckIn', this.notificationService.getConfig());
-                        },
-                        () => {
-
-                        }
-                    );
-                }
-            );
-
-
-        } else if (encounterforms == 'riskassessment') {
-
-            this.zone.run(() => {
-                this.router.navigate(['/prep/riskassessment/' + '/' + this.patientId + '/' + this.personId + '/'
-                    + this.serviceAreaId],
-                    { relativeTo: this.route });
-            });
-
-
-        } else if (encounterforms == 'hts') {
-            this.isPersonServiceEnrolled('HTS');
-
-        } else if (encounterforms == 'vitals') {
-            this.zone.run(() => {
-                this.router.navigate(['/clinical/triage/' + this.patientId + '/' + this.personId], { relativeTo: this.route });
-            });
-        } else {
-
-
-        }
-
-
-
-
+        });
     }
 
 }

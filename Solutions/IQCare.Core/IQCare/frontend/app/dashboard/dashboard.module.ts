@@ -4,7 +4,7 @@ import { HTSEncounterResolver } from './services/htsencounter.resolver';
 import { PersonCurrentVitalsResolver } from './services/personvitals.resolver';
 import { ExitReasonsResolver } from './services/exitreasons.resolver';
 import { CareendDetailsResolver } from './services/careendeddetails.resolver';
-
+import { PartnerCCCEnrollmentResolver, SexWithoutCondomResolver,PatientIdentifierResolver} from './services/hivpartnerdetails.resolver';
 import { DashboardRoutingModule } from './dashboard-routing.module';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -94,7 +94,10 @@ import { PatientHtsComponent } from './patient-hts/patient-hts.component';
         RiskEncounterResolver,
         ExitReasonsResolver,
         CareendDetailsResolver,
-        HTSEncounterHistoryResolver
+        HTSEncounterHistoryResolver,
+        PartnerCCCEnrollmentResolver, 
+        SexWithoutCondomResolver,
+        PatientIdentifierResolver
 
 
     ],

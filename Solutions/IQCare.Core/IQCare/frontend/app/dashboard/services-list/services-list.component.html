@@ -122,10 +122,25 @@
 
                                             <ng-template #eligibleTemplate>
                                                 <span *ngIf="isServiceEligible(service.id); else agerisktemplate">
-                                                    <a class="btn btn-sm btn-primary"
-                                                        (click)="enrollToService(service.id, service.code)">
-                                                        Enroll
-                                                    </a>
+                                                    <ng-container *ngIf="enrollservicename; then enrolltemplate; else PrepServicetemplate">
+                                                      </ng-container>
+                                                    <ng-template #enrolltemplate>
+                                                        <a class="btn btn-sm btn-primary"
+                                                            (click)="enrollToService(service.id, service.code)">
+                                                            Enroll
+                                                        </a>
+                                                    </ng-template>
+
+                                                    <ng-template #PrepServicetemplate>
+                                                        <a class="btn btn-sm btn-primary"
+                                                            (click)="enrollToService(service.id, service.code)">
+                                                            PrEP Initiation
+                                                        </a>
+                                                    </ng-template>
+
+
+
+
                                                 </span>
                                             </ng-template>
                                             <ng-template #agerisktemplate>
@@ -143,7 +158,15 @@
                                             </ng-template>
 
                                             <ng-template #htsnotdonetemplate>
-                                                <div *ngIf="nohtshistory;else hivstatustemplate">
+                                                <div *ngIf="nohtshistory;else htsdatetemplate">
+                                                    <span class="label label-orange"
+                                                        *ngFor="let infor of this.EligibilityInformation">
+                                                        {{infor}}
+                                                    </span>
+                                                </div>
+                                            </ng-template>
+                                            <ng-template #htsdatetemplate>
+                                                <div *ngIf="htsmustbedone;else hivstatustemplate">
                                                     <span class="label label-orange"
                                                         *ngFor="let infor of this.EligibilityInformation">
                                                         {{infor}}
