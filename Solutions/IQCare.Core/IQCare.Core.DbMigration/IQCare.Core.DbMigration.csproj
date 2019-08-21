@@ -304,6 +304,7 @@
     <None Remove="Scripts\2.2.0\16_sp_getAllViralLoads.sql" />
     <None Remove="Scripts\2.2.0\17_FPPNC.sql" />
     <None Remove="Scripts\2.2.0\18_qaversion.sql" />
+    <None Remove="Scripts\2.2.0\19_GetPatientRelationships.sql" />
   </ItemGroup>
 
   <ItemGroup>
@@ -618,6 +619,7 @@
     <EmbeddedResource Include="Scripts\2.2.0\16_sp_getAllViralLoads.sql" />
     <EmbeddedResource Include="Scripts\2.2.0\17_FPPNC.sql" />
     <EmbeddedResource Include="Scripts\2.2.0\18_qaversion.sql" />
+    <EmbeddedResource Include="Scripts\2.2.0\19_GetPatientRelationships.sql" />
   </ItemGroup>
 
   <ItemGroup>

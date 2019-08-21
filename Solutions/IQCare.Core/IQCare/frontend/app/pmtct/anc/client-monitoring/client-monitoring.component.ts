@@ -131,23 +131,6 @@ export class ClientMonitoringComponent implements OnInit, OnDestroy {
                 });
     }
 
-    public moveNextStep() {
-        console.log(this.clientMonitoringFormGroup.value);
-
-        this.clientMonitoringData = {
-            WhoStage: parseInt(this.clientMonitoringFormGroup.controls['WhoStage'].value, 10),
-            viralLoadSampleTaken: parseInt(this.clientMonitoringFormGroup.controls['viralLoadSampleTaken'].value, 10),
-            screenedForTB: parseInt(this.clientMonitoringFormGroup.controls['screenedForTB'].value, 10),
-            cacxScreeningDone: parseInt(this.clientMonitoringFormGroup.controls['cacxScreeningDone'].value, 10),
-            cacxMethod: parseInt(this.clientMonitoringFormGroup.controls['cacxMethod'].value, 10),
-            cacxResult: parseInt(this.clientMonitoringFormGroup.controls['cacxResult'].value, 10),
-            cacxComments: this.clientMonitoringFormGroup.controls['cacxComments'].value,
-        };
-        console.log(this.clientMonitoringData);
-        this.nextStep.emit(this.clientMonitoringData);
-        this.notify.emit(this.clientMonitoringFormGroup);
-    }
-
     public oncacxScreeningChange(event) {
 
         if (event.isUserInput && event.source.selected && event.source.viewValue == 'Yes') {

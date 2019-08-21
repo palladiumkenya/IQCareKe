@@ -8,7 +8,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using IQCare.Common.Infrastructure;
 
 namespace IQCare.Common.BusinessProcess.Commands.Relationship
 {
@@ -26,7 +25,9 @@ namespace IQCare.Common.BusinessProcess.Commands.Relationship
         public string RelativeSex { get; set; }
         public int RelativePersonId { get; set; }
         public int? RelativePatientId { get; set; }
-
+        public string PatientSex { get; set; }
+        public string PatientName { get; set; }
+        public int PatientPersonId { get; set; }
     }
 
 
@@ -46,11 +47,14 @@ namespace IQCare.Common.BusinessProcess.Commands.Relationship
                 var relationshipsViewModel = patientRelationships.Select(x => new PatientRelationshipViewModel
                 {
                     PatientId = x.PatientId,
+                    PatientPersonId = x.PatientPersonId,
                     Relationship = x.Relationship,
                     RelativeName = $"{x.RelativeFirstName} {x.RelativeLastName}",
                     RelativePersonId = x.RelativePersonId,
                     RelativeSex = x.RelativeSex,
-                    RelativePatientId = x.RelativePatientId
+                    RelativePatientId = x.RelativePatientId,
+                    PatientName = $"{x.PatientFirstName} {x.PatientMiddleName} {x.PatientLastName}",
+                    PatientSex = x.PatientSex
                 }).ToList();
 
                 return Result<List<PatientRelationshipViewModel>>.Valid(relationshipsViewModel);

@@ -45,8 +45,6 @@ export class DiagnosisComponent implements OnInit {
                     if (diag != null) {
                         this.PatientdiagnosisFormGroup.controls['diagnosis'].setValue(diag.diagnosis);
                         this.PatientdiagnosisFormGroup.controls['diagnosisId'].setValue(diag.id);
-
-
                     }
                 },
                 (err) => {

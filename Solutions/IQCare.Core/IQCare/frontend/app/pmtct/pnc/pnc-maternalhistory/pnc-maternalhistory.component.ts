@@ -2,6 +2,8 @@ import { MaternityService } from './../../_services/maternity.service';
 import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
 import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 import { LookupItemView } from '../../../shared/_models/LookupItemView';
+import * as moment from 'moment';
+import {HeiService} from '../../_services/hei.service';
 
 @Component({
     selector: 'app-pnc-maternalhistory',
@@ -16,13 +18,15 @@ export class PncMaternalhistoryComponent implements OnInit {
     @Input('patientId') patientId: number;
     @Input('isEdit') isEdit: boolean;
     @Input('patientMasterVisitId') patientMasterVisitId: number;
+    @Input() serviceAreaId: number;
 
     @Output() notify: EventEmitter<FormGroup> = new EventEmitter<FormGroup>();
 
     maxDate: Date;
 
     constructor(private _formBuilder: FormBuilder,
-        private maternityService: MaternityService) {
+        private maternityService: MaternityService,
+        private heiService: HeiService) {
         this.maxDate = new Date();
     }
 
@@ -30,17 +34,20 @@ export class PncMaternalhistoryComponent implements OnInit {
         this.MaternalHistoryForm = this._formBuilder.group({
             dateofdelivery: new FormControl('', [Validators.required]),
             modeofdelivery: new FormControl('', [Validators.required]),
+            dayPostPartum: new FormControl('', [Validators.required]),
             deliveryid: new FormControl('')
         });
+
+        this.notify.emit(this.MaternalHistoryForm);
 
         const { deliveryModeOptions } = this.matHistoryOptions[0];
         this.deliveryModeOptions = deliveryModeOptions;
 
         this.maternityService.getPatientPregnancy(this.patientId).subscribe(
-            (res) => {
+            res => {
                 if (res && res.id) {
                     this.maternityService.getPatientDeliveryInfoByPregnancyId(res.id).subscribe(
-                        (result) => {
+                        result => {
                             if (result.length > 0) {
                                 this.MaternalHistoryForm.get('dateofdelivery').setValue(result[0].dateOfDelivery);
                                 if (result[0].modeOfDelivery) {
@@ -51,7 +58,7 @@ export class PncMaternalhistoryComponent implements OnInit {
                                 this.MaternalHistoryForm.get('deliveryid').setValue(result[0].id);
                             } else {
                                 this.maternityService.GetPatientDeliveryInfo(this.patientMasterVisitId).subscribe(
-                                    (deliveryRes) => {
+                                    deliveryRes => {
                                         if (deliveryRes) {
                                             if (deliveryRes.dateOfDelivery) {
                                                 this.MaternalHistoryForm.get('dateofdelivery').setValue(deliveryRes.dateOfDelivery);
@@ -72,8 +79,13 @@ export class PncMaternalhistoryComponent implements OnInit {
             }
         );
 
-
-        this.notify.emit(this.MaternalHistoryForm);
+        this.heiService.getPatientVisitDetails(this.patientId, this.serviceAreaId).subscribe(
+            visitDetails => {
+                if (visitDetails.length > 0) {
+                    this.MaternalHistoryForm.get('dayPostPartum').setValue(visitDetails[0]['daysPostPartum']);
+                }
+            }
+        );
 
         if (this.isEdit) {
             this.loadPncMaternalHistory();
@@ -82,5 +94,13 @@ export class PncMaternalhistoryComponent implements OnInit {
 
     public loadPncMaternalHistory(): void {
 
+    }
+
+    public calculateDaysPostPartum() {
+        const dateOfDelivery = this.MaternalHistoryForm.get('dateofdelivery').value;
+        const a = moment(dateOfDelivery);
+        const b = moment(new Date());
+        const difference = b.diff(a, 'days');
+        this.MaternalHistoryForm.get('dayPostPartum').setValue(difference);
     }
 }

@@ -351,7 +351,7 @@ export class HeiService {
             );
     }
 
-    public getPatientVisitDetails(patientId: number, serviceAreaId: number): Observable<any> {
+    public getPatientVisitDetails(patientId: number, serviceAreaId: number): Observable<any[]> {
         return this.http.get<any[]>(this.API_URL + '/api/AncVisitDetails/GetVisitDetailsByVisitType/' +
             patientId + '/' + serviceAreaId).pipe(
                 tap(getPatientVisitDetails => this.errorHandler.log('get patient visit details data')),

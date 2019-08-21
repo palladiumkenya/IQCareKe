@@ -40,6 +40,8 @@ export class PncPostnatalexamComponent implements OnInit {
             fistula_screening: new FormControl('', [Validators.required])
         });
 
+        this.notify.emit(this.PostNatalForm);
+
         const { breastOptions, uterusOptions,
             lochiaOptions, postpartumhaemorrhageOptions,
             episiotomyOptions, cSectionSiteOptions,
@@ -54,15 +56,12 @@ export class PncPostnatalexamComponent implements OnInit {
         this.fistulaScreeningOptions = fistulaScreeningOptions;
         this.motherExaminationOptions = motherExaminationOptions;
 
-        this.notify.emit(this.PostNatalForm);
-
         if (this.isEdit) {
             this.getPncPostNatalExam();
         }
     }
 
     public getPncPostNatalExam(): void {
-        console.log(`edit`);
         this.pncService.getPncPostNatalExamBabyExaminationHistory(this.patientId, this.patientMasterVisitId).subscribe(
             (result) => {
                 const breastValue = result.filter(obj =>
