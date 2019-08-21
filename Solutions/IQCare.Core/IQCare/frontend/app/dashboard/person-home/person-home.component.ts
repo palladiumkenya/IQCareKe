@@ -33,11 +33,11 @@ export class PersonHomeComponent implements OnInit {
     htsencounters: any[];
     riskassessmentencounter: any[];
     riskencounters: any[];
-    services: any[]; 
+    services: any[];
     exitreason: number;
-     patientId: number;
-     careenddetails: any[] = [];
-     htshistory: any[] = [];
+    patientId: number;
+    careenddetails: any[] = [];
+    htshistory: any[] = [];
     personvitals: any[];
     careendoptions: LookupItemView[] = [];
     chronic_illness_data: any[] = [];
@@ -67,32 +67,32 @@ export class PersonHomeComponent implements OnInit {
             const { PersonVitalsArray } = res;
             const { RiskAssessmentArray } = res;
             const { ExitReasonsArray } = res;
-            const {CarendedArray } = res;
-            const {  HTSEncounterHistoryArray} = res;
+            const { CarendedArray } = res;
+            const { HTSEncounterHistoryArray } = res;
 
             this.careenddetails = CarendedArray;
-            
+
             this.htshistory = HTSEncounterHistoryArray;
-            
+
             this.services = servicesArray;
             this.htsencounters = HTSEncounterArray;
             this.personvitals = PersonVitalsArray;
             this.riskassessmentencounter = RiskAssessmentArray;
-           this.careendoptions = ExitReasonsArray['lookupItems'];
-          
+            this.careendoptions = ExitReasonsArray['lookupItems'];
+
 
             if (this.personvitals.length > 0) {
                 this.personVitalWeight = this.personvitals['0'].weight;
             }
             if (this.careenddetails != null) {
                 this.exitreason = this.careenddetails['exitReason'];
-               
+
                 let careendeddetails: string;
                 let val: number;
 
                 val = this.careendoptions.findIndex(x => x.itemId == this.exitreason);
                 careendeddetails = this.careendoptions[val].itemDisplayName;
-               
+
                 if (careendeddetails.toLowerCase() == 'death') {
                     this.isdead = true;
                     this.carended = true;
@@ -100,7 +100,7 @@ export class PersonHomeComponent implements OnInit {
                     this.carended = true;
                     this.isdead = false;
                 }
-            } else  {
+            } else {
                 this.carended = false;
                 this.isdead = false;
             }
@@ -108,6 +108,7 @@ export class PersonHomeComponent implements OnInit {
 
 
             this.riskencounters = this.riskassessmentencounter['encounters'];
+            console.log(this.riskencounters);
         });
 
         this.encounterDetail = this.htsencounters[0];
@@ -117,15 +118,15 @@ export class PersonHomeComponent implements OnInit {
         localStorage.removeItem('selectedService');
         this.store.dispatch(new Consent.ClearState());
 
-        
+
         this.getPatientDetailsById(this.personId);
-       
+
 
 
 
     }
 
-    
+
 
 
     public getPatientDetailsById(personId: number) {

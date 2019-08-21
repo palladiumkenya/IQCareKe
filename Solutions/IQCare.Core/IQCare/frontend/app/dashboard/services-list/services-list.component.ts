@@ -77,9 +77,7 @@ export class ServicesListComponent implements OnInit {
     ngOnInit() {
         this.EligibilityInformation = [];
         this.vitalWeight = this.weight;
-
-
-
+        console.log(this.riskencounter);
 
         this.getPersonEnrolledServices(this.personId);
 
@@ -132,7 +130,7 @@ export class ServicesListComponent implements OnInit {
                         this.router.navigate(['/dashboard/enrollment/hts/' + this.personId + '/' + serviceId + '/' + serviceCode],
                             { relativeTo: this.route });
                     });
-                   
+
                     break;
                     localStorage.setItem('ageNumber', this.person.ageNumber);
                 case 'CCC':
@@ -140,14 +138,14 @@ export class ServicesListComponent implements OnInit {
                         this.router.navigate(['/dashboard/enrollment/ccc/' + this.personId + '/' + serviceId + '/' + serviceCode],
                             { relativeTo: this.route });
                     });
-                    
+
                     break;
                 case 'PREP':
                     this.zone.run(() => {
                         this.router.navigate(['/dashboard/enrollment/prep/' + this.personId + '/' + serviceId + '/' + serviceCode],
                             { relativeTo: this.route });
                     });
-                    
+
                     //  this.enrollPrepServicename = true;
                     break;
                 default:
@@ -155,7 +153,7 @@ export class ServicesListComponent implements OnInit {
                         this.router.navigate(['/dashboard/enrollment/' + this.personId + '/' + serviceId + '/' + serviceCode],
                             { relativeTo: this.route });
                     });
-                   
+
                     break;
             }
         }
@@ -384,6 +382,7 @@ export class ServicesListComponent implements OnInit {
     }
     isServiceEligible(serviceAreaId: number) {
         let isCCCEnrolled;
+        this.agerisk = false;
 
         if (this.enrolledServices) {
             isCCCEnrolled = this.enrolledServices.filter(obj => obj.serviceAreaId == 1);
@@ -444,107 +443,8 @@ export class ServicesListComponent implements OnInit {
                     this.enrollservicename = true;
                     break;
                 case 'PREP':
-                        this.enrollservicename = false;
-                    if (isCCCEnrolled && isCCCEnrolled.length > 0) {
+                    isEligible = this.getPrepEligibility();
 
-                        isEligible = false;
-                        this.EligibilityInformation = [];
-                        this.EligibilityInformation.push('Not Eligible');
-                        if (this.EligibilityInformation.length > 0) {
-                            if (this.EligibilityInformation.includes('Not Eligible') == false) {
-                                this.EligibilityInformation.push('Not Eligible');
-                            }
-                        } else {
-                            this.EligibilityInformation.push('Not Eligible');
-                        }
-                    } else {
-                        if (this.person.ageNumber < 15) {
-                            this.agerisk = true;
-                            isEligible = false;
-                            this.EligibilityInformation = [];
-                            if (this.EligibilityInformation.length > 0) {
-                                if (this.EligibilityInformation.includes('Age below 15') == false) {
-                                    this.EligibilityInformation.push('Age below 15');
-                                }
-                            } else {
-                                this.EligibilityInformation.push('Age below 15');
-                            }
-                        } else {
-                            this.HTSEligible = this.getHTSEligibility();
-                            isEligible = this.HTSEligible;
-
-                            // if (isEligible == true) {
-                                
-                            if (this.vitalWeight > 0 && this.vitalWeight < 35) {
-                                isEligible = false;
-                                this.vitalrisk = true;
-                                this.EligibilityInformation = [];
-                                if (this.EligibilityInformation.length > 0) {
-                                    if (this.EligibilityInformation.includes('Weight less than 35') == false) {
-                                        this.EligibilityInformation.push('Weight less than 35');
-                                    }
-                                } else {
-                                    this.EligibilityInformation.push('Weight less than 35');
-                                }
-                            } else if (this.vitalWeight == 0) {
-                                isEligible = false;
-                                this.Vitaldone = false;
-                            } else {
-                                isEligible = true;
-                                if (isEligible == true) {
-
-
-                                    if (this.riskencounter.length <= 0) {
-                                        isEligible = false;
-                                        this.RiskDone = false;
-                                    } else if (this.carended == true && this.isdead == false) {
-                                        isEligible = false;
-                                    } else if (this.carended == true && this.isdead == true) {
-                                        isEligible = false;
-                                    } else if (this.isdead == true && this.carended == true) {
-                                        isEligible = false;
-                                    }
-
-                                    if (this.riskencounter.length > 0) {
-
-                                        if (this.riskencounter[0].assessmentOutCome !== null) {
-                                            if (this.riskencounter[0].assessmentOutCome.toString().toLowerCase() == 'norisk') {
-                                                isEligible = false;
-                                                this.preprisk = true;
-                                                this.EligibilityInformation = [];
-                                                if (this.EligibilityInformation.length > 0) {
-                                                    if (this.EligibilityInformation.includes('AssessmentOutcome is  no risk') == false) {
-                                                        this.EligibilityInformation.push('AssessmentOutcome is  no risk');
-                                                    }
-                                                } else {
-                                                    this.EligibilityInformation.push('AssessmentOutcome is  no risk');
-                                                }
-                                            }
-                                        }
-
-                                        if (this.riskencounter[0].clientWillingTakingPrep !== null) {
-                                            if (this.riskencounter[0].clientWillingTakingPrep.toString().toLowerCase() == 'no') {
-                                                isEligible = false;
-                                                this.preprisk = true;
-                                                this.EligibilityInformation = [];
-                                                if (this.EligibilityInformation.length > 0) {
-                                                    if (this.EligibilityInformation.includes('Client Not willing to take prep') == false) {
-                                                        this.EligibilityInformation.push('Client Not willing to take prep');
-                                                    }
-                                                } else {
-                                                    this.EligibilityInformation.push('Client Not willing to take prep');
-                                                }
-                                            }
-                                        }
-
-                                    }
-
-                                }
-
-                            }
-                            // }
-                        }
-                    }
                     break;
             }
         }
@@ -552,6 +452,119 @@ export class ServicesListComponent implements OnInit {
         this.htseligibility = '';
         this.htseligibility = this.EligibilityInformation.join(',');
         return isEligible;
+    }
+
+    getPrepEligibility(): boolean {
+        this.enrollservicename = false;
+        let isEligible: boolean = false;
+        let isCCCEnrolled;
+        if (this.enrolledServices) {
+            isCCCEnrolled = this.enrolledServices.filter(obj => obj.serviceAreaId == 1);
+        }
+        if (isCCCEnrolled && isCCCEnrolled.length > 0) {
+
+            isEligible = false;
+            this.EligibilityInformation = [];
+            this.EligibilityInformation.push('Not Eligible');
+            if (this.EligibilityInformation.length > 0) {
+                if (this.EligibilityInformation.includes('Not Eligible') == false) {
+                    this.EligibilityInformation.push('Not Eligible');
+                }
+            } else {
+                this.EligibilityInformation.push('Not Eligible');
+            }
+        } else {
+            if (this.person.ageNumber < 15) {
+                this.agerisk = true;
+                isEligible = false;
+                this.EligibilityInformation = [];
+                if (this.EligibilityInformation.length > 0) {
+                    if (this.EligibilityInformation.includes('Age below 15') == false) {
+                        this.EligibilityInformation.push('Age below 15');
+                    }
+                } else {
+                    this.EligibilityInformation.push('Age below 15');
+                }
+            } else {
+                this.HTSEligible = this.getHTSEligibility();
+                isEligible = this.HTSEligible;
+
+                // if (isEligible == true) {
+
+                if (this.vitalWeight > 0 && this.vitalWeight < 35) {
+                    isEligible = false;
+                    this.vitalrisk = true;
+                    this.EligibilityInformation = [];
+                    if (this.EligibilityInformation.length > 0) {
+                        if (this.EligibilityInformation.includes('Weight less than 35') == false) {
+                            this.EligibilityInformation.push('Weight less than 35');
+                        }
+                    } else {
+                        this.EligibilityInformation.push('Weight less than 35');
+                    }
+                } else if (this.vitalWeight == 0) {
+                    isEligible = false;
+                    this.Vitaldone = false;
+                } else {
+                    isEligible = true;
+                    if (isEligible == true) {
+
+
+                        if (this.riskencounter.length <= 0) {
+                            isEligible = false;
+                            this.RiskDone = false;
+                        } else if (this.carended == true && this.isdead == false) {
+                            isEligible = false;
+                        } else if (this.carended == true && this.isdead == true) {
+                            isEligible = false;
+                        } else if (this.isdead == true && this.carended == true) {
+                            isEligible = false;
+                        }
+
+                        if (this.riskencounter.length > 0) {
+
+                            if (this.riskencounter[0].assessmentOutCome !== null) {
+                                if (this.riskencounter[0].assessmentOutCome.toString().toLowerCase() == 'norisk') {
+                                    isEligible = false;
+                                    this.preprisk = true;
+                                    this.EligibilityInformation = [];
+                                    if (this.EligibilityInformation.length > 0) {
+                                        if (this.EligibilityInformation.includes('AssessmentOutcome is  no risk') == false) {
+                                            this.EligibilityInformation.push('AssessmentOutcome is  no risk');
+                                        }
+                                    } else {
+                                        this.EligibilityInformation.push('AssessmentOutcome is  no risk');
+                                    }
+                                }
+                            }
+
+                            if (this.riskencounter[0].clientWillingTakingPrep !== null) {
+                                if (this.riskencounter[0].clientWillingTakingPrep.toString().toLowerCase() == 'no') {
+                                    isEligible = false;
+                                    this.preprisk = true;
+                                    this.EligibilityInformation = [];
+                                    if (this.EligibilityInformation.length > 0) {
+                                        if (this.EligibilityInformation.includes('Client Not willing to take prep') == false) {
+                                            this.EligibilityInformation.push('Client Not willing to take prep');
+                                        }
+                                    } else {
+                                        this.EligibilityInformation.push('Client Not willing to take prep');
+                                    }
+                                }
+                            }
+
+                        }
+
+                    }
+
+                }
+                // }
+            }
+        }
+
+
+        return isEligible;
+
     }
 
     getHTSEligibility(): boolean {

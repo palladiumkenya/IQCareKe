@@ -220,6 +220,7 @@
     <None Remove="Scripts\2.0.1\41_RemovePrepWeeksRow.sql" />
     <None Remove="Scripts\2.0.1\42_PatientPartnerProfile.sql" />
     <None Remove="Scripts\2.0.1\43_RemovePrepRegimenUse.sql" />
+    <None Remove="Scripts\2.0.1\44_RemovePrepStatusType.sql" />
     <None Remove="Scripts\2.0.1\PREP\01_Prep_ServiceArea.sql" />
     <None Remove="Scripts\2.0.1\PREP\02_Prep Number.sql" />
     <None Remove="Scripts\2.0.1\PREP\03_PrepServiceAreaIdentifiers.sql" />
@@ -541,6 +542,7 @@
     <EmbeddedResource Include="Scripts\2.0.1\41_RemovePrepWeeksRow.sql" />
     <EmbeddedResource Include="Scripts\2.0.1\42_PatientPartnerProfile.sql" />
     <EmbeddedResource Include="Scripts\2.0.1\43_RemovePrepRegimenUse.sql" />
+    <EmbeddedResource Include="Scripts\2.0.1\44_RemovePrepStatusType.sql" />
     <EmbeddedResource Include="Scripts\2.0.1\PREP\16_PrepCareEnded.sql" />
     <EmbeddedResource Include="Scripts\2.0.1\PREP\17_PrepAdherence.sql" />
     <EmbeddedResource Include="Scripts\2.0.1\PREP\18_AdherenceAssessmentReasons.sql" />
