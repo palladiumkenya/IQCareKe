@@ -88,6 +88,8 @@ export class AncHivtestingComponent implements OnInit {
 
         this.HivTestingForm.controls['testType'].disable({ onlySelf: true });
         this.HivTestingForm.controls['finalTestResult'].disable({ onlySelf: true });
+        this.HivTestingForm.controls['finalResultConfirmatory'].disable({ onlySelf: true });
+        this.HivTestingForm.controls['finalResultScreening'].disable({ onlySelf: true });
 
         const { ancHivStatusInitialVisitOptions, yesnoOptions, hivFinalResultsOptions } = this.hivTestingOptions[0];
         this.ancHivStatusInitialVisitOptions = ancHivStatusInitialVisitOptions;
@@ -114,7 +116,6 @@ export class AncHivtestingComponent implements OnInit {
     loadHivTests(): void {
         this.pncService.getHivTests(this.PatientMasterVisitId, this.patientEncounterId).subscribe(
             (result) => {
-                // console.log(result);
                 if (result && result['encounter'] && result['encounter'].length > 0) {
                     const tests = result['testing'];
                     if (tests.length > 0) {
@@ -138,12 +139,20 @@ export class AncHivtestingComponent implements OnInit {
                                 nexthivtest: null,
                                 testpoint: this.serviceAreaName
                             });
-                            // console.log(this.historical_hiv_testing_data);
                         }
                     }
 
                     if (result['encounterResults'].length > 0) {
+                        const yesOption = this.yesnoOptions.filter(obj => obj.itemName == 'Yes');
+                        this.HivTestingForm.get('hivTestingDone').setValue(yesOption[0].itemId);
                         this.HivTestingForm.controls.testType.setValue(result['encounter'][0]['encounterType']);
+                        this.HivTestingForm.get('finalResultScreening').setValue(result['encounterResults'][0]['roundOneTestResult']);
+                        if (result['encounterResults'][0]['roundTwoTestResult']) {
+                            this.HivTestingForm.get('finalResultConfirmatory').setValue(
+                                result['encounterResults'][0]['roundTwoTestResult']);
+                        } else {
+                            this.HivTestingForm.get('finalResultConfirmatory').disable({onlySelf: true });
+                        }
                         const finalTestResult = this.hivFinalResultsOptions.find(
                             obj => obj.itemId == result['encounterResults'][0]['finalResult']);
                         if (finalTestResult) {
@@ -260,25 +269,34 @@ export class AncHivtestingComponent implements OnInit {
             this.isHivTestingDone = true;
             this.HivTestingForm.controls['testType'].enable({ onlySelf: true });
             this.HivTestingForm.controls['finalTestResult'].enable({ onlySelf: true });
+            this.HivTestingForm.controls['finalResultConfirmatory'].enable({ onlySelf: true });
+            this.HivTestingForm.controls['finalResultScreening'].enable({ onlySelf: true });
         } else if (event.isUserInput && event.source.selected && event.source.viewValue == 'No') {
             this.isHivTestingDone = false;
             this.HivTestingForm.controls['testType'].disable({ onlySelf: true });
             this.HivTestingForm.controls['finalTestResult'].disable({ onlySelf: true });
+            this.HivTestingForm.controls['finalResultConfirmatory'].disable({ onlySelf: true });
+            this.HivTestingForm.controls['finalResultScreening'].disable({ onlySelf: true });
 
             // set default value to null
             this.HivTestingForm.controls['testType'].setValue('');
             this.HivTestingForm.controls['finalTestResult'].setValue('');
+            this.HivTestingForm.controls['finalResultConfirmatory'].setValue('');
+            this.HivTestingForm.controls['finalResultScreening'].setValue('');
         }
     }
 
     onHivStatusBeforeFirstVisitChange(event) {
-        // console.log(event);
         if (event.isUserInput && event.source.selected && event.source.viewValue == 'Known Positive') {
             this.HivTestingForm.controls['hivTestingDone'].disable({ onlySelf: true });
             this.HivTestingForm.controls['testType'].disable({ onlySelf: true });
             this.HivTestingForm.controls['finalTestResult'].disable({ onlySelf: true });
+            // set hiv_status
+            this.dataservice.changeHivStatus('Positive');
         } else if (event.isUserInput && event.source.selected) {
             this.HivTestingForm.controls['hivTestingDone'].enable();
+            // set hiv_status
+            this.dataservice.changeHivStatus('Negative');
         }
     }
 

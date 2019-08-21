@@ -35,7 +35,7 @@
                       <mat-select formControlName="screenedForTB"  placeholder="*Screened for TB" >
                           <mat-option value="">Select</mat-option>
                           <mat-option  *ngFor="let TBScreeningOption of TBScreeningOptions" [value]="TBScreeningOption.itemId" >
-                              {{TBScreeningOption.itemName}}
+                              {{TBScreeningOption.displayName}}
                           </mat-option>
                       </mat-select>
                   </mat-form-field>

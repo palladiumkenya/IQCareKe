@@ -203,9 +203,8 @@ export class ClientMonitoringComponent implements OnInit, OnDestroy {
         this.patientScreening$ = this.ancService.getPatientScreeningInfoByPatientId(patientId)
             .subscribe(
                 p => {
-                    // console.log('patientscreening');
-                    // console.log(p);
                     const screening = p;
+                    console.log(p);
                     if (p) {
                         const cacx = screening.filter(obj => obj.screeningType == 'CaCxScreening');
                         const tb = screening.filter(obj => obj.screeningType == 'TBScreeningPMTCT');
@@ -223,8 +222,10 @@ export class ClientMonitoringComponent implements OnInit, OnDestroy {
                             this.clientMonitoringFormGroup.get('cacxMethod').setValue(cacx[0]['screeningCategoryId']);
                             this.clientMonitoringFormGroup.get('cacxResult').setValue(cacx[0]['screeningValueId']);
                             this.clientMonitoringFormGroup.get('cacxComments').setValue(cacx[0]['comment']);
+                        } else {
+                            const noOption = this.YesNoOptions.filter(obj => obj.itemName == 'No');
+                            this.clientMonitoringFormGroup.get('cacxScreeningDone').setValue(noOption[0].itemId);
                         }
-
                     }
                 },
                 (err) => {

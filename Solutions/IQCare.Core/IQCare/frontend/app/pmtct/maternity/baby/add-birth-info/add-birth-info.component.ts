@@ -62,10 +62,10 @@ export class AddBirthInfoComponent implements OnInit {
   }
 
   public AddBaby() {
+        if (this.babyFormGroup.invalid) {
+            return;
+        }
 
-    if (this.babyFormGroup.invalid) { 
-          return;
-    }
         this.babyData.push({
             sex: this.babyFormGroup.get('babySex').value.itemId,
             sexStr: this.babyFormGroup.get('babySex').value.itemName,
@@ -89,7 +89,6 @@ export class AddBirthInfoComponent implements OnInit {
             comment: this.babyFormGroup.get('comment').value,
             notificationNo: this.babyFormGroup.get('notificationNumber').value
         });
-    console.log(this.babyData);
         this.maternityService.updateBabyDataInfo(this.babyData);
 }
 
@@ -115,10 +114,7 @@ public getApgarScoreValue(apgarScore: string, scoreType: string): any {
 public onBabyOutcome(event) {
 
     const noOption = this.yesnoOptions.filter(obj => obj.itemName == 'No');
-    console.log('yesNoOptions');
-    console.log(noOption);
     const noId = noOption[0]['itemId'];
-    console.log('NoId' + noId);
 
     if (event.isUserInput && event.source.selected && event.source.viewValue == 'Live Birth') {
 
@@ -131,9 +127,6 @@ public onBabyOutcome(event) {
     if (event.isUserInput && event.source.selected && event.source.viewValue == 'Macerated Still Birth') {
 
         this.babyFormGroup.get('resuscitationDone').setValue(105);
-      //  this.babyFormGroup.get('deformity').setValue(noId);
-      //  this.babyFormGroup.get('teoGiven').setValue(noId);
-      //  this.babyFormGroup.get('breastFed').setValue(noId);
         this.babyFormGroup.get('agparScore1min').setValue(0);
         this.babyFormGroup.get('agparScore5min').setValue(0);
         this.babyFormGroup.get('agparScore10min').setValue(0);

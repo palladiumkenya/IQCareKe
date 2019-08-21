@@ -334,4 +334,11 @@ export class PncService {
             catchError(this.errorHandler.handleError<any>('Error fetching current person hiv status'))
         );
     }
+
+    public getPatientHtsEncounters(patientId: number): Observable<any[]> {
+        return this.http.get<any[]>(this.API_URL + '/api/HtsEncounter/' + patientId).pipe(
+            tap(getPatientHtsEncounters => this.errorHandler.log(`successfully fetched patient hts encounters`)),
+            catchError(this.errorHandler.handleError<any>('Error fetching patient hts encounters'))
+        );
+    }
 }

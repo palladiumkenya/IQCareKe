@@ -32,7 +32,6 @@ export class DiagnosisComponent implements OnInit {
         });
 
         this.notify.emit(this.PatientdiagnosisFormGroup);
-        console.log('Master Visit Id ' + this.PatientMasterVisitId);
         if (this.isEdit) {
             this.getPatientDiagnosisInfo(this.PatientMasterVisitId);
         }
