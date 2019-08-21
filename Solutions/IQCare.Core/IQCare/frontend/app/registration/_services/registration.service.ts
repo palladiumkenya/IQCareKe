@@ -324,13 +324,13 @@ export class RegistrationService {
         }
 
         if (populations.populationType == 3) {
-            for (let i = 0; i < populations.DiscordantCouplePopulation.length; i++) {
+            
                 const item = {
                     PopulationType: 'Discordant Couple',
                     PopulationCategory: 0
                 };
                 pops.push(item);
-            }
+            
         }
 
 
