@@ -287,7 +287,6 @@ export class TestingComponent implements OnInit {
                     const firstTest = this.hivResults1.slice(-1)[0];
 
                     if (firstTest.kitName['itemName'] == data.kitName['itemName']) {
-                        console.log('test');
                         this.snotifyService.info('The same kitname has been used for screening and confirmatory test.' +
                             'Please select another kitname.', 'Testing', this.notificationService.getConfig());
                         return;

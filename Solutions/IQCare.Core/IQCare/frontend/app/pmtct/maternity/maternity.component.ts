@@ -348,7 +348,6 @@ export class MaternityComponent implements OnInit {
                 pregnancy => {
                     if (pregnancy != null) {
                         this.pregnancyId = pregnancy.id;
-                        console.log('pregancyId:' + this.pregnancyId);
                     }
                 },
                 (err) => {

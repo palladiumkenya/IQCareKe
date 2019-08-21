@@ -19,8 +19,6 @@ export class PncHivtestingComponent implements OnInit, AfterViewInit {
     HivTestingForm: FormGroup;
     yesnoOptions: LookupItemView[] = [];
     hivFinalResultsOptions: LookupItemView[] = [];
-
-    lookupItemView$: Subscription;
     LookupItems$: Subscription;
 
     public testVisits: LookupItemView[] = [];
@@ -62,10 +60,14 @@ export class PncHivtestingComponent implements OnInit, AfterViewInit {
         this.HivTestingForm = this._formBuilder.group({
             hivTestingDone: new FormControl('', [Validators.required]),
             testType: new FormControl('', [Validators.required]),
-            finalTestResult: new FormControl('', [Validators.required])
+            finalTestResult: new FormControl('', [Validators.required]),
+            screeningTestResult: new FormControl('', [Validators.required]),
+            confirmatoryTestResult: new FormControl('', [Validators.required]),
         });
 
         this.HivTestingForm.controls['testType'].disable({ onlySelf: true });
+        this.HivTestingForm.controls['screeningTestResult'].disable({ onlySelf: true });
+        this.HivTestingForm.controls['confirmatoryTestResult'].disable({ onlySelf: true });
         this.HivTestingForm.controls['finalTestResult'].disable({ onlySelf: true });
 
         const { yesnoOptions, hivFinalResultsOptions } = this.pncHivOptions[0];
@@ -114,12 +116,8 @@ export class PncHivtestingComponent implements OnInit, AfterViewInit {
     }
 
     loadHivTests(): void {
-        // console.log(this.patientEncounterId);
-        // console.log(this.patientMasterVisitId);
-
         this.pncService.getHivTests(this.patientMasterVisitId, this.patientEncounterId).subscribe(
             (result) => {
-                console.log(result);
                 if (result && result['encounter'] && result['encounter'].length > 0) {
                     const tests = result['testing'];
                     if (tests.length > 0) {
@@ -130,7 +128,6 @@ export class PncHivtestingComponent implements OnInit, AfterViewInit {
                             const lotnumber = tests[i].kitLotNumber;
                             const expirydate = tests[i].expiryDate;
                             const outcome = this.testResults.find(obj => obj.itemId == tests[i].outcome);
-                            const testEntryPoint = result['encounter'];
 
 
                             this.historical_hiv_testing_data.push({
@@ -143,12 +140,21 @@ export class PncHivtestingComponent implements OnInit, AfterViewInit {
                                 nexthivtest: null,
                                 testpoint: this.serviceAreaName
                             });
-                            // console.log(this.historical_hiv_testing_data);
                         }
                     }
 
                     if (result['encounterResults'].length > 0) {
+                        const yesOption = this.yesnoOptions.filter(obj => obj.itemName == 'Yes');
+                        this.HivTestingForm.get('hivTestingDone').setValue(yesOption[0].itemId);
                         this.HivTestingForm.controls.testType.setValue(result['encounter'][0]['encounterType']);
+                        this.HivTestingForm.get('screeningTestResult').setValue(result['encounterResults'][0]['roundOneTestResult']);
+                        if (result['encounterResults'][0]['roundTwoTestResult']) {
+                            this.HivTestingForm.get('confirmatoryTestResult').setValue(
+                                result['encounterResults'][0]['roundTwoTestResult']);
+                        } else {
+                            this.HivTestingForm.get('confirmatoryTestResult').disable({onlySelf: true });
+                        }
+
                         const finalTestResult = this.hivFinalResultsOptions.find(obj =>
                             obj.itemId == result['encounterResults'][0]['finalResult']);
                         if (finalTestResult != null || finalTestResult != undefined) {
@@ -158,8 +164,10 @@ export class PncHivtestingComponent implements OnInit, AfterViewInit {
                             }
                         }
 
+                    } else {
+                        const noOption = this.yesnoOptions.filter(obj => obj.itemName == 'No');
+                        this.HivTestingForm.get('hivTestingDone').setValue(noOption[0].itemId);
                     }
-                    // console.log(this.historical_hiv_testing_data, 'datasource');
                     this.dataSource = new MatTableDataSource(this.historical_hiv_testing_data);
                 }
             },
@@ -186,7 +194,85 @@ export class PncHivtestingComponent implements OnInit, AfterViewInit {
                     return;
                 }
 
-                console.log(data);
+                if (data.hivTest.itemName == 'HIV Test-2' && !this.HivTestingForm.get('screeningTestResult').value) {
+                    this.snotifyService.info('The screening test should be done first', 'HIV TESTS',
+                        this.notificationService.getConfig());
+                    return;
+                }
+
+                // ensure only one screening test is done
+                if (this.HivTestingForm.get('screeningTestResult').value && data.hivTest.itemName == 'HIV Test-1') {
+                    this.snotifyService.info(data.hivTest.itemName + ' has already been done', 'HIV TESTS',
+                        this.notificationService.getConfig());
+                    return;
+                }
+
+                // ensure only one confirmatory test is done
+                if (this.HivTestingForm.get('confirmatoryTestResult').value && data.hivTest.itemName == 'HIV Test-2') {
+                    this.snotifyService.info(data.hivTest.itemName + ' has already been done', 'HIV TESTS',
+                        this.notificationService.getConfig());
+                    return;
+                }
+
+                // ensure screening and confirmatory test use different kits
+                const firstTest = this.hiv_testing_table_data.filter(obj => obj.testtype.itemName == 'HIV Test-1');
+                if (data.hivTest.itemName == 'HIV Test-2' && firstTest[0].kitname['itemName'] == data.kitName['itemName']) {
+                    this.snotifyService.info('The same kitname has been used for screening and confirmatory test.' +
+                        'Please select another kitname.', 'Testing', this.notificationService.getConfig());
+                    return;
+                }
+
+                // screening algorithm
+                if (data.hivTest.itemName == 'HIV Test-1' && data.testResult.itemName == 'Negative') {
+                    this.HivTestingForm.get('screeningTestResult').setValue(
+                        this.testResults.filter(obj => obj.itemName == 'Negative')[0].itemId);
+
+                    // set final result and disable screening test
+                    this.HivTestingForm.get('finalTestResult').setValue(
+                        this.hivFinalResultsOptions.filter(obj => obj.itemName == 'Negative')[0].itemId);
+                    this.HivTestingForm.get('confirmatoryTestResult').disable({onlySelf: true });
+                } else if (data.hivTest.itemName == 'HIV Test-1' && data.testResult.itemName == 'Positive') {
+                    this.HivTestingForm.get('screeningTestResult').setValue(
+                        this.testResults.filter(obj => obj.itemName == 'Positive')[0].itemId);
+                }
+
+                const screeningValue = this.HivTestingForm.get('screeningTestResult').value;
+                const screeningText = this.testResults.filter(obj => obj.itemId == screeningValue);
+
+                // confirmatory algorithm
+                if (data.hivTest.itemName == 'HIV Test-2' && data.testResult.itemName == 'Negative'
+                    && screeningText[0].itemName == 'Negative') {
+                    this.HivTestingForm.get('confirmatoryTestResult').setValue(
+                        this.testResults.filter(obj => obj.itemName == 'Negative')[0].itemId);
+
+                    // set final result
+                    this.HivTestingForm.get('finalTestResult').setValue(
+                        this.hivFinalResultsOptions.filter(obj => obj.itemName == 'Negative')[0].itemId);
+                } else if (data.hivTest.itemName == 'HIV Test-2' && data.testResult.itemName == 'Positive'
+                    && screeningText[0].itemName == 'Positive') {
+                    this.HivTestingForm.get('confirmatoryTestResult').setValue(
+                        this.testResults.filter(obj => obj.itemName == 'Positive')[0].itemId);
+
+                    // set final result
+                    this.HivTestingForm.get('finalTestResult').setValue(
+                        this.hivFinalResultsOptions.filter(obj => obj.itemName == 'Positive')[0].itemId);
+                } else if (data.hivTest.itemName == 'HIV Test-2' && data.testResult.itemName == 'Positive'
+                    && screeningText[0].itemName == 'Negative') {
+                    this.HivTestingForm.get('confirmatoryTestResult').setValue(
+                        this.testResults.filter(obj => obj.itemName == 'Positive')[0].itemId);
+
+                    // set final result
+                    this.HivTestingForm.get('finalTestResult').setValue(
+                        this.hivFinalResultsOptions.filter(obj => obj.itemName == 'Inconclusive')[0].itemId);
+                } else if (data.hivTest.itemName == 'HIV Test-2' && data.testResult.itemName == 'Negative'
+                    && screeningText[0].itemName == 'Positive') {
+                    this.HivTestingForm.get('confirmatoryTestResult').setValue(
+                        this.testResults.filter(obj => obj.itemName == 'Negative')[0].itemId);
+
+                    // set final result
+                    this.HivTestingForm.get('finalTestResult').setValue(
+                        this.hivFinalResultsOptions.filter(obj => obj.itemName == 'Inconclusive')[0].itemId);
+                }
 
                 this.hiv_testing_table_data.push({
                     testdate: new Date(),
@@ -196,7 +282,7 @@ export class PncHivtestingComponent implements OnInit, AfterViewInit {
                     expirydate: data.expiryDate,
                     testresult: data.testResult,
                     nexthivtest: data.nextAppointmentDate,
-                    testpoint: 'PNC'
+                    testpoint: this.serviceAreaName
                 });
 
                 this.historical_hiv_testing_data.push({
@@ -207,11 +293,10 @@ export class PncHivtestingComponent implements OnInit, AfterViewInit {
                     expirydate: data.expiryDate,
                     testresult: data.testResult,
                     nexthivtest: data.nextAppointmentDate,
-                    testpoint: 'PNC'
+                    testpoint: this.serviceAreaName
                 });
 
                 this.dataSource = new MatTableDataSource(this.historical_hiv_testing_data);
-                // this.dataSource = new MatTableDataSource(this.hiv_testing_table_data);
             }
         );
     }
@@ -220,6 +305,9 @@ export class PncHivtestingComponent implements OnInit, AfterViewInit {
         const index = this.historical_hiv_testing_data.indexOf(row.lotnumber);
         this.historical_hiv_testing_data.splice(index, 1);
         this.hiv_testing_table_data.splice(index, 1);
+        this.HivTestingForm.controls['screeningTestResult'].setValue('');
+        this.HivTestingForm.controls['confirmatoryTestResult'].setValue('');
+        this.HivTestingForm.controls['finalTestResult'].setValue('');
         this.dataSource = new MatTableDataSource(this.historical_hiv_testing_data);
     }
 
@@ -227,10 +315,14 @@ export class PncHivtestingComponent implements OnInit, AfterViewInit {
         if (event.isUserInput && event.source.selected && event.source.viewValue == 'Yes') {
             this.isHivTestingDone = true;
             this.HivTestingForm.controls['testType'].enable({ onlySelf: true });
+            this.HivTestingForm.controls['screeningTestResult'].enable({ onlySelf: true });
+            this.HivTestingForm.controls['confirmatoryTestResult'].enable({ onlySelf: true });
             this.HivTestingForm.controls['finalTestResult'].enable({ onlySelf: true });
         } else if (event.source.selected) {
             this.isHivTestingDone = false;
             this.HivTestingForm.controls['testType'].disable({ onlySelf: true });
+            this.HivTestingForm.controls['screeningTestResult'].disable({ onlySelf: true });
+            this.HivTestingForm.controls['confirmatoryTestResult'].disable({ onlySelf: true });
             this.HivTestingForm.controls['finalTestResult'].disable({ onlySelf: true });
         }
     }

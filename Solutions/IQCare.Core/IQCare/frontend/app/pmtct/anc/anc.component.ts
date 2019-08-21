@@ -444,6 +444,7 @@ export class AncComponent implements OnInit, OnDestroy {
             Gravidae: this.visitDetailsFormGroup.value[1]['gravidae'],
             Parity: this.visitDetailsFormGroup.value[1]['parityOne'],
             Parity2: this.visitDetailsFormGroup.value[1]['parityTwo'],
+            AgeAtMenarche: this.visitDetailsFormGroup.value[1]['ageAtMenarche'],
             CreatedBy: this.userId
         } as PregnancyAncCommand;
 
