@@ -216,7 +216,6 @@
     <None Remove="Scripts\2.0.1\37_vw_PartnerNotificationRegister.sql" />
     <None Remove="Scripts\2.0.1\38_PrepEncounterView.sql" />
     <None Remove="Scripts\2.0.1\39_PrepStatusColumnsNotExists.sql" />
-    <None Remove="Scripts\2.0.1\40_PrepContraIndicationsPrepPresentColumn.sql" />
     <None Remove="Scripts\2.0.1\41_RemovePrepWeeksRow.sql" />
     <None Remove="Scripts\2.0.1\42_PatientPartnerProfile.sql" />
     <None Remove="Scripts\2.0.1\43_RemovePrepRegimenUse.sql" />
@@ -538,7 +537,6 @@
     <EmbeddedResource Include="Scripts\2.0.1\37_vw_PartnerNotificationRegister.sql" />
     <EmbeddedResource Include="Scripts\2.0.1\38_PrepEncounterView.sql" />
     <EmbeddedResource Include="Scripts\2.0.1\39_PrepStatusColumnsNotExists.sql" />
-    <EmbeddedResource Include="Scripts\2.0.1\40_PrepContraIndicationsPrepPresentColumn.sql" />
     <EmbeddedResource Include="Scripts\2.0.1\41_RemovePrepWeeksRow.sql" />
     <EmbeddedResource Include="Scripts\2.0.1\42_PatientPartnerProfile.sql" />
     <EmbeddedResource Include="Scripts\2.0.1\43_RemovePrepRegimenUse.sql" />
