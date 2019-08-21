@@ -161,8 +161,10 @@ export class AncHivtestingComponent implements OnInit {
                                 this.HivTestingForm.get('hivTestingDone').disable({ onlySelf: false });
                             }
                         }
+                    } else {
+                        const noOption = this.yesnoOptions.filter(obj => obj.itemName == 'No');
+                        this.HivTestingForm.get('hivTestingDone').setValue(noOption[0].itemId);
                     }
-                    // console.log(this.historical_hiv_testing_data, 'datasource');
                     this.dataSource = new MatTableDataSource(this.historical_hiv_testing_data);
                 }
             },

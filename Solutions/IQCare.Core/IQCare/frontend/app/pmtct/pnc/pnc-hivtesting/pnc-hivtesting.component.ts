@@ -164,6 +164,9 @@ export class PncHivtestingComponent implements OnInit, AfterViewInit {
                             }
                         }
 
+                    } else {
+                        const noOption = this.yesnoOptions.filter(obj => obj.itemName == 'No');
+                        this.HivTestingForm.get('hivTestingDone').setValue(noOption[0].itemId);
                     }
                     this.dataSource = new MatTableDataSource(this.historical_hiv_testing_data);
                 }
