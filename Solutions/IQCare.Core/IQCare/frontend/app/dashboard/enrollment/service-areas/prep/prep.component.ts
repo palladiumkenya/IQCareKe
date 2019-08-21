@@ -1059,7 +1059,7 @@ export class PrepComponent implements OnInit {
 
     public SaveValues() {
 
-        const { EnrollmentDate, KeyPopulation, populationType, DiscordantCouple, EnrollmentNumber, MFLCode, Year, ClientTransferIn,
+        const { EnrollmentDate, KeyPopulation, populationType, EnrollmentNumber, MFLCode, Year, ClientTransferIn,
             FacilitySelected, InitiationDate,
             TransferInDate, TransferInMflCode, CurrentRegimen, ClinicalNotes
             , isClientCircumcised, lmp, pregnant, DateLastUsed,
@@ -1362,6 +1362,7 @@ export class PrepComponent implements OnInit {
 
                                             if (this.isEdit == false) {
                                                 // family planning method
+
                                                 const familyPlanningMethodCommand: FamilyPlanningMethodCommand = {
                                                     Id: 0,
                                                     PatientId: this.patientId,
@@ -1376,13 +1377,16 @@ export class PrepComponent implements OnInit {
 
                                                 this.personHomeService.savePncFamilyPlanning(familyPlanningCommand).subscribe((res) => {
                                                     familyPlanningMethodCommand.PatientFPId = res['patientId'];
-                                                    const pncFamilyPlanningMethod = this.personHomeService.savePncFamilyPlanningMethod(familyPlanningMethodCommand).subscribe(
-                                                        (res) => {
-                                                            console.log(`family planning method`);
-                                                            console.log(res);
-                                                        }, (error) => {
-                                                            console.log(error);
-                                                        });
+                                                    if (familyPlanningMethods !== undefined) {
+                                                        const pncFamilyPlanningMethod = this.personHomeService.savePncFamilyPlanningMethod
+                                                        (familyPlanningMethodCommand).subscribe(
+                                                            (res) => {
+                                                                console.log(`family planning method`);
+                                                                console.log(res);
+                                                            }, (error) => {
+                                                                console.log(error);
+                                                            });
+                                                    }
                                                 });
                                             }
                                             if (this.isEdit == true) {
