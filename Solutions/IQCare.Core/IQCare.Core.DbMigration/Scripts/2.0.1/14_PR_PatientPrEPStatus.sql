@@ -11,7 +11,7 @@ CREATE TABLE [dbo].[PatientPrEPStatus](
 	[PatientEncounterId] [int] NOT NULL,
 	[SignsOrSymptomsHIV] [int] NOT NULL,
 	[AdherenceCounsellingDone] [int] NOT NULL,
-	[ContraindicationsPrepPresent] [int] NOT NULL,
+	--[ContraindicationsPrepPresent] [int] NOT NULL,
 	[PrepStatusToday] [int] NOT NULL,
 	[CondomsIssued] [int] NULL,
 	[NoOfCondoms] [int] NULL,

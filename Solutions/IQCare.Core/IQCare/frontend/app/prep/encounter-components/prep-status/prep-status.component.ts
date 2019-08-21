@@ -22,6 +22,7 @@ export class PrepStatusComponent implements OnInit {
     @Input() patientMasterVisitId: number;
     @Input() patientEncounterId: number;
     @Input() isEdit: number;
+    @Input() Age: number;
     @Output() notify: EventEmitter<FormGroup> = new EventEmitter<FormGroup>();
 
     constructor(private _formBuilder: FormBuilder,
@@ -52,16 +53,59 @@ export class PrepStatusComponent implements OnInit {
 
         if (this.isEdit == 1) {
             this.loadPrepStatus();
+            this.loadcontraIndications();
         }
     }
 
+    loadcontraIndications(): void {
+        this.prepservice.getStiScreeningTreatment(this.patientId, this.patientMasterVisitId).subscribe(
+            (res) => {
+                if (res.length > 0) {
+                    const contraindications = [];
+                    res.forEach(element => {
+                        if (element.screeningTypeName == 'ContraindicationsPrEP') {
+                            contraindications.push(element.screeningValueId);
+                        }
+                    });
+
+                    this.PrepStatusForm.controls.contraindications_PrEP_Present.setValue(contraindications);
+
+                }
+            },
+            (error) => {
+                console.log(error);
+            }
+        );
+    }
+    Oncontraindications(event) {
+        const value = event.source.value;
+
+
+        if (event.source.viewValue !== 'None' && event.source.selected == true) {
+            for (let i = 0; i < event.source._parent.options.length; i++) {
+                if (event.source._parent.options._results[i].viewValue
+                    === 'None') {
+                    event.source._parent.options._results[i].deselect();
+                }
+            }
+        }
+
+        if (event.source.viewValue === 'None' && event.source.selected == true) {
+            for (let i = 0; i < event.source._parent.options.length; i++) {
+                if (event.source._parent.options._results[i].viewValue
+                    !== event.source.viewValue) {
+                    event.source._parent.options._results[i].deselect();
+                }
+            }
+        }
+    }
     loadPrepStatus(): void {
         this.prepservice.getPrepStatus(this.patientId, this.patientEncounterId).subscribe(
             (res) => {
                 // console.log(res);
                 if (res.length > 0) {
                     this.PrepStatusForm.controls.signsOrSymptomsHIV.setValue(res[0].signsOrSymptomsHIV);
-                    this.PrepStatusForm.controls.contraindications_PrEP_Present.setValue(res[0].contraindicationsPrepPresent);
+                    //  this.PrepStatusForm.controls.contraindications_PrEP_Present.setValue(res[0].contraindicationsPrepPresent);
                     this.PrepStatusForm.controls.adherenceCounselling.setValue(res[0].adherenceCounsellingDone);
                     this.PrepStatusForm.controls.PrEPStatusToday.setValue(res[0].prepStatusToday);
                     this.PrepStatusForm.controls.condomsIssued.setValue(res[0].condomsIssued);
@@ -75,6 +119,7 @@ export class PrepStatusComponent implements OnInit {
         );
     }
 
+
     onCondomsIssuedSelection(event) {
         // disable referral to VMMC when client is already circumcised
         if (event.isUserInput && event.source.selected && event.source.viewValue == 'Yes') {
@@ -87,7 +132,7 @@ export class PrepStatusComponent implements OnInit {
 
     onPharmacyClick() {
         this.searchService.setSession(this.personId, this.patientId).subscribe((sessionres) => {
-            this.searchService.setVisitSession(this.patientMasterVisitId, 20, 261).subscribe((setVisitSession) => {
+            this.searchService.setVisitSession(this.patientMasterVisitId, this.Age, 261).subscribe((setVisitSession) => {
                 const url = location.protocol + '//' + window.location.hostname + ':' + window.location.port +
                     '/IQCare/CCC/Encounter/PharmacyPrescription.aspx';
                 const win = window.open(url, '_blank');

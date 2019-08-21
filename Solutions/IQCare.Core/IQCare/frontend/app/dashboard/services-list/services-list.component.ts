@@ -8,6 +8,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { PatientView } from '../_model/PatientView';
 import { SnotifyService } from 'ng-snotify';
 import { Store } from '@ngrx/store';
+import * as moment from 'moment';
 import * as Consent from '../../shared/reducers/app.states';
 import { SearchService } from '../../registration/_services/search.service';
 import { EncounterDetails } from '../_model/HtsEncounterdetails';
@@ -38,15 +39,19 @@ export class ServicesListComponent implements OnInit {
     riskassessmentPatientMasterVisitId: number;
     enrolledService: any[] = [];
     identifiers: any[] = [];
+    enrollservicename: boolean = true;
+    enrollPrepServicename: boolean = false;
     patientvitals: any[] = [];
     vitalWeight: number = 0;
     Vitaldone: boolean = true;
-    nohtshistory : boolean= false;
+    htsmustbedone: boolean = false;
+    nohtshistory: boolean = false;
     exitreason: number;
-    preprisk: boolean =false;
-    vitalrisk: boolean =false;
-    agerisk:boolean =false;
+    preprisk: boolean = false;
+    vitalrisk: boolean = false;
+    agerisk: boolean = false;
     htseligibility: string = ' ';
+
     EligibilityInformation: any[] = [];
     HTSEligible: boolean = false;
     hasItems: boolean = false;
@@ -72,6 +77,7 @@ export class ServicesListComponent implements OnInit {
     ngOnInit() {
         this.EligibilityInformation = [];
         this.vitalWeight = this.weight;
+
 
 
 
@@ -126,6 +132,7 @@ export class ServicesListComponent implements OnInit {
                         this.router.navigate(['/dashboard/enrollment/hts/' + this.personId + '/' + serviceId + '/' + serviceCode],
                             { relativeTo: this.route });
                     });
+                   
                     break;
                     localStorage.setItem('ageNumber', this.person.ageNumber);
                 case 'CCC':
@@ -133,18 +140,22 @@ export class ServicesListComponent implements OnInit {
                         this.router.navigate(['/dashboard/enrollment/ccc/' + this.personId + '/' + serviceId + '/' + serviceCode],
                             { relativeTo: this.route });
                     });
+                    
                     break;
                 case 'PREP':
                     this.zone.run(() => {
                         this.router.navigate(['/dashboard/enrollment/prep/' + this.personId + '/' + serviceId + '/' + serviceCode],
                             { relativeTo: this.route });
                     });
+                    
+                    //  this.enrollPrepServicename = true;
                     break;
                 default:
                     this.zone.run(() => {
                         this.router.navigate(['/dashboard/enrollment/' + this.personId + '/' + serviceId + '/' + serviceCode],
                             { relativeTo: this.route });
                     });
+                   
                     break;
             }
         }
@@ -180,23 +191,21 @@ export class ServicesListComponent implements OnInit {
                 break;
         }
     }
-      editRiskAssessment(serviceId: number,serviceCode: string)
-
-      {
-        if (this.riskencounter.length >  0) {
+    editRiskAssessment(serviceId: number, serviceCode: string) {
+        if (this.riskencounter.length > 0) {
             //console.log(this.riskencounter);
             this.riskassessmentPatientMasterVisitId = this.riskencounter[0].patientMasterVisitId;
-            
 
-             this.zone.run(() => {
+
+            this.zone.run(() => {
                 this.router.navigate(['/prep/riskassessment/' + '/' + this.patientId + '/' + this.personId + '/'
-                    + serviceId + '/' + this.riskassessmentPatientMasterVisitId ],
+                    + serviceId + '/' + this.riskassessmentPatientMasterVisitId],
                     { relativeTo: this.route });
             });
-       
+
         }
 
-      }
+    }
     newTriage() {
         localStorage.setItem('selectedService', 'triage');
         this.store.dispatch(new Consent.SelectedService('triage'));
@@ -271,7 +280,7 @@ export class ServicesListComponent implements OnInit {
         if (this.HTSEligible == false) {
             const resultsDialogConfig = new MatDialogConfig();
             resultsDialogConfig.disableClose = false;
-        
+
             resultsDialogConfig.autoFocus = true;
             resultsDialogConfig.data = {
                 personId: this.personId,
@@ -286,7 +295,7 @@ export class ServicesListComponent implements OnInit {
                     if (!data) {
                         return;
                     }
-                   
+
                 });
         } else {
             this.zone.run(() => {
@@ -391,6 +400,7 @@ export class ServicesListComponent implements OnInit {
                     if (this.person.gender == 'Female'
                         && ((this.person.dateOfBirth) && this.person.ageNumber >= 9 && this.person.ageNumber <= 49)) {
                         isEligible = true;
+                        this.enrollservicename = true;
                     } else {
                         isEligible = false;
                     }
@@ -399,6 +409,7 @@ export class ServicesListComponent implements OnInit {
                     if (this.person.gender == 'Female'
                         && ((this.person.dateOfBirth) && this.person.ageNumber >= 9 && this.person.ageNumber <= 49)) {
                         isEligible = true;
+                        this.enrollservicename = true;
                     } else {
                         isEligible = false;
                     }
@@ -407,6 +418,7 @@ export class ServicesListComponent implements OnInit {
                     if (this.person.gender == 'Female'
                         && ((this.person.dateOfBirth) && this.person.ageNumber >= 9 && this.person.ageNumber <= 49)) {
                         isEligible = true;
+                        this.enrollservicename = true;
                     } else {
                         isEligible = false;
                     }
@@ -414,6 +426,7 @@ export class ServicesListComponent implements OnInit {
                 case 'HEI':
                     if (this.person.dateOfBirth && this.person.ageNumber <= 2) {
                         isEligible = true;
+                        this.enrollservicename = true;
                     } else {
                         isEligible = false;
                     }
@@ -421,15 +434,19 @@ export class ServicesListComponent implements OnInit {
                 case 'HTS':
                     if ((isCCCEnrolled && isCCCEnrolled.length > 0) || this.person.ageInMonths < 18) {
                         isEligible = false;
+                        this.enrollservicename = true;
                     } else {
                         isEligible = true;
                     }
                     break;
                 case 'CCC':
                     isEligible = true;
+                    this.enrollservicename = true;
                     break;
                 case 'PREP':
+                        this.enrollservicename = false;
                     if (isCCCEnrolled && isCCCEnrolled.length > 0) {
+
                         isEligible = false;
                         this.EligibilityInformation = [];
                         this.EligibilityInformation.push('Not Eligible');
@@ -460,8 +477,8 @@ export class ServicesListComponent implements OnInit {
                                 
                             if (this.vitalWeight > 0 && this.vitalWeight < 35) {
                                 isEligible = false;
-                                this.vitalrisk =true;
-                                this.EligibilityInformation=[];
+                                this.vitalrisk = true;
+                                this.EligibilityInformation = [];
                                 if (this.EligibilityInformation.length > 0) {
                                     if (this.EligibilityInformation.includes('Weight less than 35') == false) {
                                         this.EligibilityInformation.push('Weight less than 35');
@@ -475,8 +492,8 @@ export class ServicesListComponent implements OnInit {
                             } else {
                                 isEligible = true;
                                 if (isEligible == true) {
-                                    
-                                   
+
+
                                     if (this.riskencounter.length <= 0) {
                                         isEligible = false;
                                         this.RiskDone = false;
@@ -486,23 +503,23 @@ export class ServicesListComponent implements OnInit {
                                         isEligible = false;
                                     } else if (this.isdead == true && this.carended == true) {
                                         isEligible = false;
-                                    } 
+                                    }
 
-                                    if (this.riskencounter.length >  0) {
-                                       
+                                    if (this.riskencounter.length > 0) {
+
                                         if (this.riskencounter[0].assessmentOutCome !== null) {
-                                        if (this.riskencounter[0].assessmentOutCome.toString().toLowerCase() == 'norisk') {
-                                            isEligible = false;
-                                           this.preprisk =true;
-                                            this.EligibilityInformation = [];
-                                            if (this.EligibilityInformation.length > 0) {
-                                                if (this.EligibilityInformation.includes('AssessmentOutcome is  no risk') == false) {
+                                            if (this.riskencounter[0].assessmentOutCome.toString().toLowerCase() == 'norisk') {
+                                                isEligible = false;
+                                                this.preprisk = true;
+                                                this.EligibilityInformation = [];
+                                                if (this.EligibilityInformation.length > 0) {
+                                                    if (this.EligibilityInformation.includes('AssessmentOutcome is  no risk') == false) {
+                                                        this.EligibilityInformation.push('AssessmentOutcome is  no risk');
+                                                    }
+                                                } else {
                                                     this.EligibilityInformation.push('AssessmentOutcome is  no risk');
                                                 }
-                                            } else {
-                                                this.EligibilityInformation.push('AssessmentOutcome is  no risk');
                                             }
-                                        }
                                         }
 
                                         if (this.riskencounter[0].clientWillingTakingPrep !== null) {
@@ -510,13 +527,13 @@ export class ServicesListComponent implements OnInit {
                                                 isEligible = false;
                                                 this.preprisk = true;
                                                 this.EligibilityInformation = [];
-                                            if (this.EligibilityInformation.length > 0) {
-                                                if (this.EligibilityInformation.includes('Client Not willing to take prep') == false) {
+                                                if (this.EligibilityInformation.length > 0) {
+                                                    if (this.EligibilityInformation.includes('Client Not willing to take prep') == false) {
+                                                        this.EligibilityInformation.push('Client Not willing to take prep');
+                                                    }
+                                                } else {
                                                     this.EligibilityInformation.push('Client Not willing to take prep');
                                                 }
-                                            } else {
-                                                this.EligibilityInformation.push('Client Not willing to take prep');
-                                            }
                                             }
                                         }
 
@@ -552,7 +569,7 @@ export class ServicesListComponent implements OnInit {
             } else if (this.encounterDetail.finalResult == 'Negative') {
                 isEligible = true;
             } else if (this.encounterDetail.finalResult == 'Positive') {
-                this.hivstatus =true;
+                this.hivstatus = true;
                 this.EligibilityInformation = [];
                 if (this.EligibilityInformation.length > 0) {
                     if (this.EligibilityInformation.includes('Not Eligible') == false) {
@@ -593,6 +610,28 @@ export class ServicesListComponent implements OnInit {
                 }
 
             }
+            let htsdate: Date;
+
+            htsdate = moment(this.htshistory[0].encounterDate).toDate();
+            if (htsdate != null && htsdate != undefined) {
+                let diffc: number;
+
+                diffc = moment(new Date()).diff(htsdate, 'days') + 1;
+
+                if (diffc > 3) {
+                    isEligible = false;
+                    this.htsmustbedone = true;
+                    this.EligibilityInformation = [];
+                    if (this.EligibilityInformation.length > 0) {
+                        if (this.EligibilityInformation.includes('HTS not done') == false) {
+                            this.EligibilityInformation.push('HTS not done');
+                        }
+                    } else {
+                        this.EligibilityInformation.push('HTS not done');
+                    }
+                }
+            }
+
         }
 
         else {

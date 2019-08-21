@@ -1,12 +1,18 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
 import { environment } from '../../../environments/environment';
 import { ErrorHandlerService } from '../../shared/_services/errorhandler.service';
+import { CircumcisionCommand } from '../_model/ClientCircumcisionStatusCommand';
 import { LookupItemView } from '../../shared/_models/LookupItemView';
 import { PersonView } from '../../records/_models/personView';
 import { EncounterDetails } from '../_model/HtsEncounterdetails';
+import { PregnancyIndicatorCommand } from '../_model/PregnancyIndicatorCommand';
+import { FamilyPlanningCommand } from '../../pmtct/_models/FamilyPlanningCommand';
+import { FamilyPlanningMethodCommand } from '../../pmtct/_models/FamilyPlanningMethodCommand';
+import { FamilyPlanningEditCommand } from '../../pmtct/_models/FamilyPlanningEditCommand';
+import { PatientFamilyPlanningMethodEditCommand } from '../../pmtct/_models/PatientFamilyPlanningMethodEditCommand';
 const httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
 };
@@ -17,6 +23,9 @@ const httpOptions = {
 export class PersonHomeService {
     private API_URL = environment.API_URL;
     private API_PREPURL = environment.API_PREP_URL;
+    private MATERNITY_API_URL = environment.API_PMTCT_URL;
+    private API_PMTCT_URL = environment.API_PMTCT_URL;
+
     private _url = '/api/PatientServices/GetPatientByPersonId';
     private _htsurl = '/api/HtsEncounter';
     public person: PersonView;
@@ -53,6 +62,20 @@ export class PersonHomeService {
         return this.http.get<any>(this.API_URL + '/api/ServiceArea/GetServiceArea?name=' + name).pipe(
             tap(getServiceArea => this.errorHandler.log(`get service area`)),
             catchError(this.errorHandler.handleError<any>('getServiceArea'))
+        );
+    }
+    public saveCircumcisionStatus(clientCircumcisionStatusCommand: CircumcisionCommand): Observable<any> {
+        return this.http.post<any>(this.API_PREPURL + '/api/CircumcisionStatus/AddCircumcisionStatus',
+            JSON.stringify(clientCircumcisionStatusCommand), httpOptions).pipe(
+                tap(saveCircumcisionStatus => this.errorHandler.log('Successfully saved patient circumcision status')),
+                catchError(this.errorHandler.handleError<any>('Error in saving Patient circumcision status'))
+            );
+    }
+
+    public getCircumcisionStatus(patientId: number): Observable<any> {
+        return this.http.get<any>(this.API_PREPURL + '/api/CircumcisionStatus/GetCircumcisionStatus/' + patientId).pipe(
+            tap(getCircumcisionStatus => this.errorHandler.log('Successfully saved patient circumcision status')),
+            catchError(this.errorHandler.handleError<any>('Error in saving Patient circumcision status'))
         );
     }
 
@@ -160,6 +183,15 @@ export class PersonHomeService {
 
 
 
+    public getPatientEnrollmentMasterVisitByServiceAreaId(patientId: number, serviceAreaId: number): Observable<any> {
+        return this.http.get<any>(this.API_URL + '/api/Register/getEnrollmentMasterVisitId/'
+            + patientId + '/' + serviceAreaId).pipe(
+                tap(getPatientEnrollmentDateByServiceAreaId => this.errorHandler.log(`get patient enrollment mastervisitid for patientId:  `
+                    + patientId + ` and serviceAreaId: ` + serviceAreaId)),
+                catchError(this.errorHandler.handleError<any>('getPatientEnrollmentMasterVisitByServiceAreaId'))
+            );
+    }
+
     public getPatientEnrollmentDateByServiceAreaId(patientId: number, serviceAreaId: number): Observable<any> {
         return this.http.get<any>(this.API_URL + '/api/Register/GetPatientEnrollmentByServiceAreaId/'
             + patientId + '/' + serviceAreaId).pipe(
@@ -192,7 +224,7 @@ export class PersonHomeService {
             catchError(this.errorHandler.handleError<any[]>('filterFacilities'))
         );
     }
-    
+
     public filtermflcode(filterString: string) {
         return this.http.get<any[]>(this.API_URL + '/api/Lookup/searchFacilityMflCodeList?searchString=' + filterString).pipe(
             tap(filterFacilities => this.errorHandler.log('fetched filtered facilities')),
@@ -205,7 +237,7 @@ export class PersonHomeService {
             catchError(this.errorHandler.handleError<any[]>('getFacility'))
         );
     }
-      
+
 
     public getPatientCareEndedHistory(patientId: number): Observable<any[]> {
         return this.http.get<any[]>(this.API_URL + '/api/PatientServices/GetLatestCareEndDetails/' + patientId).pipe(
@@ -220,4 +252,145 @@ export class PersonHomeService {
             catchError(this.errorHandler.handleError<any[]>('getHTSEncounterDetailsBypersonId', []))
         );
     }
+
+
+    public getPregnancyIndicator(patientId: number, patientMasterVisitId: number): Observable<any> {
+        return this.http.get<any>(this.MATERNITY_API_URL +
+            '/api/PregnancyIndicator/GetPregnancyIndicator/' + patientId + '/' + patientMasterVisitId).pipe(
+                tap(getPregnancyIndicator => this.errorHandler.log('Successfully fetched patient pregnancy indicator status')),
+                catchError(this.errorHandler.handleError<any>('Error in fetching Patient pregnancy indicator status'))
+            );
+    }
+
+    public savePregnancyIndicatorCommand(pregnancyIndicatorCommand: PregnancyIndicatorCommand): Observable<any> {
+        return this.http.post<any>(this.MATERNITY_API_URL + '/api/PregnancyIndicator/AddPregnancyIndicator',
+            JSON.stringify(pregnancyIndicatorCommand), httpOptions).pipe(
+                tap(savePregnancyIndicatorCommand => this.errorHandler.log('Successfully saved patient pregnancy indicator status')),
+                catchError(this.errorHandler.handleError<any>('Error in saving Patient pregnancy indicator status'))
+            );
+    }
+
+
+    public getFamilyPlanning(patientId: number, patientMasterVisitId: number): Observable<any[]> {
+        return this.http.get<any[]>(this.API_PMTCT_URL + '/api/FamilyPlanning/' + patientId + '/' + patientMasterVisitId).pipe(
+            tap(getFamilyPlanning => this.errorHandler.log(`successfully fetched family planning`)),
+            catchError(this.errorHandler.handleError<any>('Error fetching family planning'))
+        );
+    }
+
+    public getFamilyPlanningMethod(patientId: number): Observable<any[]> {
+        return this.http.get<any[]>(this.API_PMTCT_URL + '/api/FamilyPlanningMethods/GetFamilyPlanningInfo/' + patientId).pipe(
+            tap(getFamilyPlanningMethod => this.errorHandler.log(`successfully fetched family planning method`)),
+            catchError(this.errorHandler.handleError<any>('Error fetching family planning method'))
+        );
+    }
+
+
+
+    public savePncFamilyPlanning(familyPlanningCommand: FamilyPlanningCommand): Observable<any> {
+        return this.http.post<any>(this.API_PMTCT_URL + '/api/FamilyPlanning', JSON.stringify(familyPlanningCommand),
+            httpOptions).pipe(
+                tap(savePncFamilyPlanning => this.errorHandler.log(`successfully saved pnc family planning`)),
+                catchError(this.errorHandler.handleError<any>('Error saving pnc family planning'))
+            );
+    }
+
+    public updateFamilyPlanning(familyPlanningEditCommand: FamilyPlanningEditCommand): Observable<any> {
+        return this.http.post(this.API_PMTCT_URL + '/api/FamilyPlanning/UpdateFamilyPlanning',
+            JSON.stringify(familyPlanningEditCommand), httpOptions).pipe(
+                tap(updateFamilyPlanning => this.errorHandler.log(`successfully updated family planning`)),
+                catchError(this.errorHandler.handleError<any>('Error updating family planning'))
+            );
+    }
+
+
+    public updateNextAppointment(appointment: any): Observable<any> {
+        if (!appointment.AppointmentDate || appointment.AppointmentDate == null || appointment.AppointmentDate == 'null') {
+            if (appointment.AppointmentId) {
+                return this.http.delete(this.API_URL
+                    + '/api/PatientReferralAndAppointment/DeleteAppointment/' + appointment.AppointmentId).pipe(
+                        tap(update => this.errorHandler.log(`successfully updated appointment`)),
+                        catchError(this.errorHandler.handleError<any>('Error updating appointments'))
+                    );
+            } else {
+                return of([]);
+            }
+        }
+
+        return this.http.post(this.API_URL + '/api/PatientReferralAndAppointment/UpdatePatientNextAppointment', JSON.stringify(appointment),
+            httpOptions).pipe(tap(update => this.errorHandler.log(`successfully updated appointment`)),
+                catchError(this.errorHandler.handleError<any>('Error updating appointments'))
+            );
+    }
+
+    public AddHivPartnerProfile(PatientId: number, hivpartnerprofiles: any[]): Observable<any> {
+        if (hivpartnerprofiles.length == 0) {
+            return of([]);
+        }
+
+        const Indata = {
+            'PatientId': PatientId,
+            'patientPartnerProfiles': hivpartnerprofiles
+        };
+
+        return this.http.post<any>(this.API_PREPURL + 
+            '/api/HivPartnerProfile/AddHivPartnerProfile', JSON.stringify(Indata), httpOptions).pipe(
+            tap(saveHivPartnerProfile => this.errorHandler.log('Successfully saved hiv profile')),
+            catchError(this.errorHandler.handleError<any>('Error in saving Patient Partner Hiv Profiles'))
+        );
+    }
+
+    public getHivPartnerProfile(patientId: number): Observable<any> {
+        return this.http.get(this.API_PREPURL
+            + '/api/HivPartnerProfile/GetHivPartnerProfile/' + patientId).pipe(
+                tap(getAppointments => this.errorHandler.log(`successfully fetched hivprofiles`)),
+                catchError(this.errorHandler.handleError<any>('Error fetching profiles'))
+            );
+
+    }
+
+    public saveNextAppointment(appointment: any): Observable<any> {
+        if (!appointment.AppointmentDate || appointment.AppointmentDate == null
+            || appointment.AppointmentDate == 'null') {
+            return of([]);
+        }
+
+        return this.http.post(this.API_URL + '/api/PatientReferralAndAppointment/AddPatientNextAppointment', JSON.stringify(appointment),
+            httpOptions).pipe(
+                tap(saveReferrals => this.errorHandler.log(`successfully added patient appointment details`)),
+                catchError(this.errorHandler.handleError<any>('Error saving appointment details'))
+            );
+    }
+    public getAppointments(patientId: number, patientMasterVisitId: number): Observable<any> {
+        return this.http.get(this.API_URL
+            + '/api/PatientReferralAndAppointment/GetAppointment/' + patientId + '/' + patientMasterVisitId).pipe(
+                tap(getAppointments => this.errorHandler.log(`successfully fetched appointment`)),
+                catchError(this.errorHandler.handleError<any>('Error fetching appointment'))
+            );
+    }
+
+
+
+    public updatePncFamilyPlanningMethod(updateFamilyPlanningMethodCommand: PatientFamilyPlanningMethodEditCommand): Observable<any> {
+        return this.http.post(this.API_PMTCT_URL + '/api/FamilyPlanningMethods/UpdateFamilyPlanningMethod',
+            JSON.stringify(updateFamilyPlanningMethodCommand), httpOptions).pipe(
+                tap(updatePncFamilyPlanningMethod => this.errorHandler.log(`successfully updated family planning method`)),
+                catchError(this.errorHandler.handleError<any>('Error updating family planning method'))
+            );
+    }
+
+    public savePncFamilyPlanningMethod(familyPlanningMethodCommand: FamilyPlanningMethodCommand): Observable<any> {
+        if (!familyPlanningMethodCommand.FPMethodId || familyPlanningMethodCommand.FPMethodId == null) {
+            return of([]);
+        }
+
+        return this.http.post<any>(this.API_PMTCT_URL + '/api/FamilyPlanningMethods/AddFamilyPlanning',
+            JSON.stringify(familyPlanningMethodCommand),
+            httpOptions).pipe(
+                tap(savePncFamilyPlanningMethod => this.errorHandler.log(`successfully saved pnc family planning method`)),
+                catchError(this.errorHandler.handleError<any>('Error saving pnc family planning method'))
+            );
+    }
+
+
 }

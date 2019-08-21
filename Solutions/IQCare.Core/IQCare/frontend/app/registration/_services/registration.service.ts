@@ -237,7 +237,7 @@ export class RegistrationService {
 
     public addPatientARVHistory(patientId: number, serviceId: number, treatmentType: string,
         purpose: string, regimen: string, createdby: number, deleteflag: boolean
-        , weeks: number, months: number, initiationDate?: Date, regimenUse?: number) {
+        , months: number, initiationDate?: Date, datelastused?: Date) {
         const Indata = {
             PatientId: patientId,
             ServiceId: serviceId,
@@ -246,10 +246,10 @@ export class RegistrationService {
             Regimen: regimen,
             DeleteFlag: deleteflag,
             CreatedBy: createdby,
-            Weeks: weeks,
             Months: months,
             InitiationDate: initiationDate,
-            RegimenUse: regimenUse
+            DateLastUsed: datelastused
+
         }
         return this.http.post<any>(this.API_URL + this._url + '/addPatientARVHistory', JSON.stringify(Indata), httpOptions).pipe(
             tap((addPatientARVHistory: any) => this.errorHandler.log(`added patient ARV history w/ id`)),
@@ -327,7 +327,7 @@ export class RegistrationService {
             for (let i = 0; i < populations.DiscordantCouplePopulation.length; i++) {
                 const item = {
                     PopulationType: 'Discordant Couple',
-                    PopulationCategory: populations.DiscordantCouplePopulation[i]
+                    PopulationCategory: 0
                 };
                 pops.push(item);
             }

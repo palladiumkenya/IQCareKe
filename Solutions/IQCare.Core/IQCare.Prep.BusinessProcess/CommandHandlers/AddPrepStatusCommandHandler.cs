@@ -36,7 +36,7 @@ namespace IQCare.Prep.BusinessProcess.CommandHandlers
                         {
                             result.AdherenceCounsellingDone = request.AdherenceCounsellingDone;
                             result.SignsOrSymptomsHIV = request.SignsOrSymptomsHIV;
-                            result.ContraindicationsPrepPresent = request.ContraindicationsPrepPresent;
+                          //  result.ContraindicationsPrepPresent = request.ContraindicationsPrepPresent;
                             result.PrepStatusToday = request.PrepStatusToday;
                             result.CreatedBy = request.CreatedBy;
                             result.CondomsIssued = request.CondomsIssued;
@@ -55,7 +55,7 @@ namespace IQCare.Prep.BusinessProcess.CommandHandlers
                                 PatientEncounterId = request.PatientEncounterId,
                                 SignsOrSymptomsHIV = request.SignsOrSymptomsHIV,
                                 AdherenceCounsellingDone = request.AdherenceCounsellingDone,
-                                ContraindicationsPrepPresent = request.ContraindicationsPrepPresent,
+                                //ContraindicationsPrepPresent = request.ContraindicationsPrepPresent,
                                 PrepStatusToday = request.PrepStatusToday,
                                 DeleteFlag = false,
                                 CreatedBy = request.CreatedBy,
@@ -78,7 +78,7 @@ namespace IQCare.Prep.BusinessProcess.CommandHandlers
                             PatientEncounterId = request.PatientEncounterId,
                             SignsOrSymptomsHIV = request.SignsOrSymptomsHIV,
                             AdherenceCounsellingDone = request.AdherenceCounsellingDone,
-                            ContraindicationsPrepPresent = request.ContraindicationsPrepPresent,
+                            //ContraindicationsPrepPresent = request.ContraindicationsPrepPresent,
                             PrepStatusToday = request.PrepStatusToday,
                             DeleteFlag = false,
                             CreatedBy = request.CreatedBy,

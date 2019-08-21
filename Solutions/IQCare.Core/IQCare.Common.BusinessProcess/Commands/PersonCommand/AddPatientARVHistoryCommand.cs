@@ -23,13 +23,15 @@ namespace IQCare.Common.BusinessProcess.Commands.PersonCommand
 
       
 
-        public int? Weeks { get; set; }
+      //  public int? Weeks { get; set; }
 
         public int? Months { get; set; }
 
         public DateTime? InitiationDate { get; set; }
 
-        public int? RegimenUse { get; set; }
+        public DateTime? DateLastUsed { get; set; }
+
+        
 
     }
 

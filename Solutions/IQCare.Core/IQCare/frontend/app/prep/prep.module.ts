@@ -20,6 +20,7 @@ import { CircumcisionStatusComponent } from './encounter-components/circumcision
 import { FertilityIntentionComponent } from './encounter-components/fertility-intention/fertility-intention.component';
 import { PregnancyOutcomeComponent } from './encounter-components/pregnancy-outcome/pregnancy-outcome.component';
 import { SharedModule } from '../shared/shared.module';
+import { HTSEncounterHistoryResolver} from './_services/resolvers/getlatesthtsencounterhistory.resolver';
 import { PrepStatusComponent } from './encounter-components/prep-status/prep-status.component';
 import { YesNoResolver } from '../pmtct/_services/yesno.resolver';
 import { YesNoUnknownResolver } from './_services/YesNoUnknown.resolver';
@@ -61,6 +62,8 @@ import { PrepHtsencountersgridComponent } from './prep-htsencountersgrid/prep-ht
 import { PrepEncounterformlistComponent } from './prep-encounterformlist/prep-encounterformlist.component';
 import { PrepPatientvitalsinfoComponent } from './prep-patientvitalsinfo/prep-patientvitalsinfo.component';
 import { PrepRiskassessmentgriddetailsComponent } from './prep-riskassessmentgriddetails/prep-riskassessmentgriddetails.component';
+import { PrepFollowupworkflowComponent } from './prep-followupworkflow/prep-followupworkflow.component';
+import { PrepMonthlyrefillworkflowComponent } from './prep-monthlyrefillworkflow/prep-monthlyrefillworkflow.component';
 
 @NgModule({
     declarations: [
@@ -81,7 +84,9 @@ import { PrepRiskassessmentgriddetailsComponent } from './prep-riskassessmentgri
         PrepHtsencountersgridComponent,
         PrepEncounterformlistComponent,
         PrepPatientvitalsinfoComponent,
-        PrepRiskassessmentgriddetailsComponent
+        PrepRiskassessmentgriddetailsComponent,
+        PrepFollowupworkflowComponent,
+        PrepMonthlyrefillworkflowComponent
     ],
     imports: [
         SharedModule, MatDatepickerModule, MatNativeDateModule,
@@ -107,7 +112,8 @@ import { PrepRiskassessmentgriddetailsComponent } from './prep-riskassessmentgri
         PregnancyStatusResolver, ScreenedForSTIResolver,
         PrepCareEndReasonResolver, PrepAdherenceResolver, AdherenceAssessmentReasonsResolver, RefillPrepStatusResolver,
         PrepDiscontinueReasonResolver, AdherenceCounsellingResolver, AppointmentGivenResolver, PrepAppointmentReasonResolver,
-        HTSEncounterResolver, PersonCurrentVitalsResolver, RiskEncounterResolver,PrepDeclineResolver
+        HTSEncounterResolver, PersonCurrentVitalsResolver, RiskEncounterResolver, PrepDeclineResolver ,
+        HTSEncounterHistoryResolver
     ],
     entryComponents: [
         PrepCheckinComponent

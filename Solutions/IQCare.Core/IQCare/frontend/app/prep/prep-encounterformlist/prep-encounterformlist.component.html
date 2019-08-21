@@ -17,14 +17,7 @@
                 <form [formGroup]="Encounterformlistgroup">
                     <div class="row" style="margin:5px">
 
-                        <mat-form-field class="col-lg-6">
-                            <mat-select placeholder="SELECT ONE OF THE ENCOUNTER" formControlName="encounterforms" required>
-                                <mat-option></mat-option>
-                                <mat-option *ngFor="let options of EncounterFormList" [value]=options.value [disabled]=options.disabled>
-                                    {{options.displayname}}
-                                </mat-option>
-                            </mat-select>
-                        </mat-form-field>
+                        
                         <div class="button-row pull-right">
                                 <a mat-raised-button class="mat-primary"  (click)="Back()">
                                         <i class="fa fa-plus"></i>
@@ -35,9 +28,15 @@
                         <div class="button-row pull-right">
                                 <a mat-raised-button color="accent" (click)="clickEncounter()">
                                     <i class="fa fa-plus"></i>
-                                    <span>New Encounter</span>
+                                    <span>New Prep Follow up</span>
                                 </a>
                         </div>
+                        <div class="button-row pull-right">
+                            <a mat-raised-button color="accent" (click)="monthlyrefillencounter()">
+                                <i class="fa fa-plus"></i>
+                                <span>New Prep Monthly Refill</span>
+                            </a>
+                    </div>
 
                         
 
