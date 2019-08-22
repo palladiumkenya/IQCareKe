@@ -124,6 +124,19 @@ namespace IQCare.Controllers.Shared
             return BadRequest(response);
         }
 
+        [HttpGet("GetPersonSecondaryRelationships/{personId}")]
+        public async Task<IActionResult> GetPersonSecondaryRelationships(int personId)
+        {
+            var response = await _mediator.Send(new GetPersonSecondaryRelationshipCommand()
+            {
+                PersonId = personId
+            }, Request.HttpContext.RequestAborted);
+
+            if (response.IsValid)
+                return Ok(response.Value);
+            return BadRequest(response);
+        }
+
         [HttpGet("GetCurrentPersonVitals/{Id}")]
         public async Task<Object> GetCurrentPersonVitals(int id)
         {

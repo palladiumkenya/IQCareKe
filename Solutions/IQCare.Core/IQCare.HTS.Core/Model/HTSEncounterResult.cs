@@ -12,5 +12,6 @@ namespace IQCare.HTS.Core.Model
         public int? RoundTwoTestResult { get; set; }
         public int? FinalResult { get; set; }
         public string EncounterResultRemarks { get; set; }
+        public int? SyphilisResult { get; set; }
     }
 }

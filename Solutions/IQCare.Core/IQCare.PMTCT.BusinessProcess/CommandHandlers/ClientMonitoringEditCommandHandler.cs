@@ -98,7 +98,21 @@ namespace IQCare.PMTCT.BusinessProcess.CommandHandlers
                 }
                 else
                 {
-                    tbScreeingId = 0;
+                    //TB Screening
+                    PatientScreening patientScreeningTb = new PatientScreening()
+                    {
+                        PatientId = request.PatientId,
+                        PatientMasterVisitId = request.PatientMasterVisitId,
+                        ScreeningTypeId = tbscreeningTypeId,
+                        ScreeningValueId = request.screenedTB,
+                        ScreeningDone = true,
+                        ScreeningDate = DateTime.Now,
+                        ScreeningCategoryId = tbScreeningcaegoryId,
+                        CreateDate = DateTime.Now,
+                        CreatedBy = request.CreatedBy
+                    };
+
+                    await clientMonitoringService.AddPatientScreening(patientScreeningTb);
                 }
 
                 if(tbScreeingId>0 & pmtctScreeningId>0 & vlSampleTypeId>0)

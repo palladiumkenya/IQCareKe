@@ -143,7 +143,7 @@ export class PncHivtestingComponent implements OnInit, AfterViewInit {
                         }
                     }
 
-                    if (result['encounterResults'].length > 0) {
+                    if (result['encounterResults'].length > 0 && result['encounterResults']['finalResult'] > 0) {
                         const yesOption = this.yesnoOptions.filter(obj => obj.itemName == 'Yes');
                         this.HivTestingForm.get('hivTestingDone').setValue(yesOption[0].itemId);
                         this.HivTestingForm.controls.testType.setValue(result['encounter'][0]['encounterType']);

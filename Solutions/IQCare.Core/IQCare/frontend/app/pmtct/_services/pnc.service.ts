@@ -204,7 +204,7 @@ export class PncService {
             return of([]);
         }
 
-        return this.http.put(this.API_URL
+        return this.http.post(this.API_URL
             + '/api/PatientReferralAndAppointment/UpdatePatientReferralInfo', JSON.stringify(patientReferralEditCommand), httpOptions).pipe(
                 tap(updateReferral => this.errorHandler.log(`successfully updated referral`)),
                 catchError(this.errorHandler.handleError<any>('Error updating referral'))

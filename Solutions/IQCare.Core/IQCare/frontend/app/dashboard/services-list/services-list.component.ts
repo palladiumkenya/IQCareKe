@@ -77,7 +77,6 @@ export class ServicesListComponent implements OnInit {
     ngOnInit() {
         this.EligibilityInformation = [];
         this.vitalWeight = this.weight;
-        console.log(this.riskencounter);
 
         this.getPersonEnrolledServices(this.personId);
 

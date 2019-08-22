@@ -7,6 +7,7 @@ export class Testing {
     Outcome: number;
     TestRound: number;
     HtsEncounterId: number;
+    SyphilisResult?: number;
 }
 
 export class FinalTestingResults {

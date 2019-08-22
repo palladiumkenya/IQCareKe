@@ -104,11 +104,7 @@ export class PersonHomeComponent implements OnInit {
                 this.carended = false;
                 this.isdead = false;
             }
-
-
-
             this.riskencounters = this.riskassessmentencounter['encounters'];
-            console.log(this.riskencounters);
         });
 
         this.encounterDetail = this.htsencounters[0];
@@ -117,17 +113,8 @@ export class PersonHomeComponent implements OnInit {
         localStorage.removeItem('patientMasterVisitId');
         localStorage.removeItem('selectedService');
         this.store.dispatch(new Consent.ClearState());
-
-
         this.getPatientDetailsById(this.personId);
-
-
-
-
     }
-
-
-
 
     public getPatientDetailsById(personId: number) {
         this.personView$ = this.personService.getPatientByPersonId(personId).subscribe(
