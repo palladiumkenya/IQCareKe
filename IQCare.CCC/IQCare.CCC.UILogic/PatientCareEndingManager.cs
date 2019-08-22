@@ -12,7 +12,7 @@ namespace IQCare.CCC.UILogic
             (IPatientCareEnding)
             ObjectFactory.CreateInstance("BusinessProcess.CCC.BPatientCareEnding, BusinessProcess.CCC");
 
-        public int AddPatientCareEndingDeath(int patientId, int patientMasterVisitId, int patientEnrollmentId, int exitReason, DateTime exitDate, DateTime? dateOfDeath, string careEndingNotes)
+        public int AddPatientCareEndingDeath(int patientId, int patientMasterVisitId, int patientEnrollmentId, int exitReason, DateTime exitDate, DateTime? dateOfDeath, string careEndingNotes, int? reasonsForDeath, int? specificCausesOfDeath)
         {
             PatientCareEnding patientCareEnding = new PatientCareEnding()
             {
@@ -21,15 +21,16 @@ namespace IQCare.CCC.UILogic
                 PatientEnrollmentId = patientEnrollmentId,
                 ExitReason = exitReason,
                 ExitDate = exitDate,
-                //TransferOutFacility = transferOutFacility,
                 DateOfDeath = dateOfDeath,
-                CareEndingNotes = careEndingNotes
+                CareEndingNotes = careEndingNotes,
+                ReasonsForDeath = reasonsForDeath,
+                SpecificCausesOfDeath = specificCausesOfDeath
             };
 
             return mgr.AddPatientCareEnding(patientCareEnding);
         }
 
-        public int AddPatientCareEndingOther(int patientId, int patientMasterVisitId, int patientEnrollmentId, int exitReason, DateTime exitDate, string careEndingNotes)
+        public int AddPatientCareEndingOther(int patientId, int patientMasterVisitId, int patientEnrollmentId, int exitReason, DateTime exitDate, string careEndingNotes, int? tracingOutome, int? reasonLostToFollowup)
         {
             PatientCareEnding patientCareEnding = new PatientCareEnding()
             {
@@ -38,15 +39,15 @@ namespace IQCare.CCC.UILogic
                 PatientEnrollmentId = patientEnrollmentId,
                 ExitReason = exitReason,
                 ExitDate = exitDate,
-                //TransferOutFacility = transferOutFacility,
-                //DateOfDeath = dateOfDeath,
-                CareEndingNotes = careEndingNotes
+                CareEndingNotes = careEndingNotes,
+                TracingOutome = tracingOutome,
+                ReasonLostToFollowup = reasonLostToFollowup
             };
 
             return mgr.AddPatientCareEnding(patientCareEnding);
         }
 
-        public int AddPatientCareEndingTransferOut(int patientId, int patientMasterVisitId, int patientEnrollmentId, int exitReason, DateTime exitDate, string transferOutFacility, string careEndingNotes)
+        public int AddPatientCareEndingTransferOut(int patientId, int patientMasterVisitId, int patientEnrollmentId, int exitReason, DateTime exitDate, string transferOutFacility, string careEndingNotes, string reasonForTransferOut, DateTime? dateExpectedToReport)
         {
             PatientCareEnding patientCareEnding = new PatientCareEnding()
             {
@@ -56,8 +57,9 @@ namespace IQCare.CCC.UILogic
                 ExitReason = exitReason,
                 ExitDate = exitDate,
                 TransferOutFacility = transferOutFacility,
-                //DateOfDeath = dateOfDeath,
-                CareEndingNotes = careEndingNotes
+                CareEndingNotes = careEndingNotes,
+                ReasonForTransferOut = reasonForTransferOut,
+                DateExpectedToReport = dateExpectedToReport
             };
 
             return mgr.AddPatientCareEnding(patientCareEnding);

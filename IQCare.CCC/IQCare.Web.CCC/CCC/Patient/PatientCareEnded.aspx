@@ -20,22 +20,6 @@
          <div class="panel-body">
               <div class="col-md-12 col-xs-12"><label class="control-label text-primary pull-left">Patient Care Ending.</label></div>
               <div class="col-md-12 col-xs-12"><hr/></div>
-              <div class="col-md-12 col-xs-12" id="PatientCareEndGrid   ">
-                 <table class="table table-condensed table-striped table-hover" id="tblCareEnded" clientidmode="Static" runat="server">
-                    <thead>
-                        <tr class="active">
-                            <th><span class="text-primary" aria-hidden="true">#</span></th>
-                            <th><span class="text-primary" aria-hidden="true">Exit Date</span> </th>
-                            <th><span class="text-primary" aria-hidden="true">Exit Reason</span> </th>
-                            <th><span class="text-primary" aria-hidden="true">Status</span> </th>
-                           
-                        </tr>
-                    </thead>
-                    <tbody>
-                    </tbody>
-                 </table>
-              </div>
-
               <div class="col-md-12 col-xs-12 form-group" id="CareEndedForm" data-parsley-validate="true">           
       
                    <div class="col-md-12 col-xs-12 form-group " >
@@ -189,7 +173,7 @@
                            </div>
                                
                            <div class="col-md-4" id="ReasonForTransfer">
-                               <div class="col-md-12"><label class="control-lable pull-left">Tranfer Out Facility:</label></div>
+                               <div class="col-md-12"><label class="control-lable pull-left">Reason For Transfer:</label></div>
                                <div class="col-md-12">
                                    <asp:TextBox runat="server" CssClass="form-control input-sm" ID="ReasonForTransferOut" ClientIDMode="Static"></asp:TextBox>
                                </div>
@@ -319,7 +303,7 @@
                                <label for="reason" class="control-label pull-left">Reason for death</label>
                            </div>
                            <div class="col-md-12">
-                               <asp:DropDownList runat="server" ID="DropDownList1" CssClass="form-control input-sm" ClientIDMode="Static" required="true" data-parsley-min="1" />
+                               <asp:DropDownList runat="server" ID="reasonsForDeath" CssClass="form-control input-sm" ClientIDMode="Static" required="true" data-parsley-min="1" />
                            </div>
                        </div>
                        
@@ -328,7 +312,7 @@
                                <label for="reason" class="control-label pull-left">Specific Cause of death</label>
                            </div>
                            <div class="col-md-12">
-                               <asp:DropDownList runat="server" ID="DropDownList2" CssClass="form-control input-sm" ClientIDMode="Static" required="true" data-parsley-min="1" />
+                               <asp:DropDownList runat="server" ID="specificCausesOfDeath" CssClass="form-control input-sm" ClientIDMode="Static" required="true" data-parsley-min="1" />
                            </div>
                        </div>
                    </div>
@@ -399,6 +383,13 @@
                 $('.CareendDetails').css('visibility', 'hidden');
             }
             $("#Facility").prop("disabled", true);
+            $("#TracingOutcome").prop("disabled", true);
+            $("#ReasonLostToFollowup").prop("disabled", true);
+            $("#ReasonForTransferOut").prop("disabled", true);
+            $("#DateExpectedToReport").prop("disabled", true);
+            $("#reasonsForDeath").prop("disabled", true);
+            $("#specificCausesOfDeath").prop("disabled", true);
+
             var today = new Date();
             var futuredate;
             
@@ -473,44 +464,75 @@
                 }
          });
 
-         //$('#DateOfDeath').on('changed.fu.datepicker dateClicked.fu.datepicker',function(evt, date) {
-
-         //       var exitDate = $("#CareEndDate").datepicker('getDate');
-         //       var dateofDeath = $('#DateOfDeath').datepicker('getDate');
-
-         //       futuredate= moment(dateofDeath).isAfter(today);
-         //       if (futuredate) {
-         //           $('#DateOfDeath').val('');
-         //           toastr.error("Future Dates NOT allowed for Date of Death!");
-         //           return false;
-         //       }
-         //       futuredate= moment(exitDate).isBefore(dateofDeath);
-         //       if (futuredate) {
-         //           toastr.error("Exit Date CANNOT be before date of death");
-         //           return false;
-         //       }
-         //   });
-
             /*careenging reason */
             $("#<%=Reason.ClientID%>").change(
                 function() {
                     var reason = $(this).find(":selected").text();
-                    if (reason === 'Transfer Out') {
+                    if (reason === 'LostToFollowUp') {
+                        $("#lostToFollowUp").show();
+                        $("#TracingOutcome").prop("disabled", false);
+                        $("#ReasonLostToFollowup").prop("disabled", false);
+
+                        //disable the others
+                        $("#documentedTransferOut").hide();
+                        $("#Facility").prop("disabled", true);
+                        $("#Facility").val('');
+                        $("#ReasonForTransferOut").prop("disabled", true);
+                        $("#ReasonForTransferOut").val('');
+                        $("#DateExpectedToReport").val('');
+                        $("#DateExpectedToReport").prop("disabled", true);
+
+                        $("#death").hide();
                         $("#DeathDates").val('');
                         $("#DateOfDeath").datepicker('disable');
-                        $("#Facility").val('');
+                        $("#reasonsForDeath").prop("disabled", true);
+                        $("#reasonsForDeath").val('');
+                        $("#specificCausesOfDeath").prop("disabled", true);
+                        $("#specificCausesOfDeath").val('');
+
+                    } else if (reason === 'Transfer Out') {
+                        $("#documentedTransferOut").show();
                         $("#Facility").prop("disabled", false);
-                    }
-                    else if (reason === 'Death') {
+                        $("#ReasonForTransferOut").prop("disabled", false);
+                        $("#DateExpectedToReport").val('');
+                        $("#DateExpectedToReport").prop("disabled", false);
+
+                        //disable the others
+                        $("#death").hide();
+                        $("#DeathDates").val('');
+                        $("#DateOfDeath").datepicker('disable');
+                        $("#reasonsForDeath").prop("disabled", true);
+                        $("#reasonsForDeath").val('');
+                        $("#specificCausesOfDeath").prop("disabled", true);
+                        $("#specificCausesOfDeath").val('');
+
+                        $("#lostToFollowUp").hide();
+                        $("#TracingOutcome").prop("disabled", true);
+                        $("#TracingOutcome").val('');
+                        $("#ReasonLostToFollowup").prop("disabled", true);
+                        $("#ReasonLostToFollowup").val('');
+
+                    } else if (reason === 'Death') {
+                        $("#death").show();
                         $("#DeathDates").val('');
                         $("#DateOfDeath").datepicker('enable');
-                        $("#Facility").val('');
+                        $("#reasonsForDeath").prop("disabled", false);
+                        $("#specificCausesOfDeath").prop("disabled", false);
+
+                        //disable the others
+                        $("#documentedTransferOut").hide();
                         $("#Facility").prop("disabled", true);
-                    } else {
-                        $("#DeathDates").val('');
-                        $("#DateOfDeath").datepicker('disable');
                         $("#Facility").val('');
-                        $("#Facility").prop("disabled", true);
+                        $("#ReasonForTransferOut").prop("disabled", true);
+                        $("#ReasonForTransferOut").val('');
+                        $("#DateExpectedToReport").val('');
+                        $("#DateExpectedToReport").prop("disabled", true);
+
+                        $("#lostToFollowUp").hide();
+                        $("#TracingOutcome").prop("disabled", true);
+                        $("#TracingOutcome").val('');
+                        $("#ReasonLostToFollowup").prop("disabled", true);
+                        $("#ReasonLostToFollowup").val('');
                     }
                 });
 
@@ -518,6 +540,11 @@
 
 
             $("#EndCare").click(function () {
+                $('#CareEndedForm').parsley().destroy();
+                $('#CareEndedForm').parsley({
+                    excluded:
+                        "input[type=button], input[type=submit], input[type=reset], input[type=hidden], [disabled], :hidden"
+                });
                 if ($("#CareEndedForm").parsley().validate()) {
                     var careEndedDate = $('#CareEndDate').datepicker('getDate');
                 var reason = $("#<%=Reason.ClientID%>").val();
@@ -549,17 +576,28 @@
 
 
 
-            getCareEnded();
+            // getCareEnded();
 
             function endCare() {
                 var careEndedDate = $('#CareEndDate').datepicker('getDate');
                 var reason = $("#<%=Reason.ClientID%>").val();
                 var careEndingNotes = escape($("#<%=txtCareEndingNotes.ClientID%>").val());
                 var transferOutFacility = $("#<%=Facility.ClientID%>").val();
+                var tracingOutome = $("#TracingOutcome").val();
+                var reasonLostToFollowup = $("#ReasonLostToFollowup").val();
+                var reasonForTransferOut = $("#ReasonForTransferOut").val();
+                var dateExpectedToReport = $('#DateExpectedToReport').val();
+                var reasonsForDeath = $('#reasonsForDeath').val();
+                var specificCausesOfDeath = $('#specificCausesOfDeath').val();
+
+                tracingOutome = tracingOutome == '' ? 0 : tracingOutome;
+                reasonLostToFollowup = reasonLostToFollowup == '' ? 0 : reasonLostToFollowup;
+                reasonsForDeath = reasonsForDeath == '' ? 0 : reasonsForDeath;
+                specificCausesOfDeath = specificCausesOfDeath == '' ? 0 : specificCausesOfDeath;
+
                 var dateOfDeath = $('#DateOfDeath').datepicker('getDate');
                 if (careEndedDate == "Invalid Date") {
                     careEndedDate = "";
-                    
                     return false;
                 }
                 if (dateOfDeath == "Invalid Date" && reason === 'Death') {
@@ -577,7 +615,7 @@
                 $.ajax({
                     type: "POST",
                     url: "../WebService/EnrollmentService.asmx/EndPatientCare",
-                    data: "{'exitDate':'" + moment(careEndedDate).format('DD-MMM-YYYY') + "','exitReason':'" + reason + "','careEndingNotes':'" + careEndingNotes + "','facilityOutTransfer':'" + transferOutFacility + "','dateOfDeath':'" + dateOfDeath + "'}",
+                    data: "{'exitDate':'" + moment(careEndedDate).format('DD-MMM-YYYY') + "','exitReason':'" + reason + "','careEndingNotes':'" + careEndingNotes + "','facilityOutTransfer':'" + transferOutFacility + "','dateOfDeath':'" + dateOfDeath + "', 'tracingOutome': '" + tracingOutome +"', 'reasonLostToFollowup': '" + reasonLostToFollowup +"', 'reasonForTransferOut':'" + reasonForTransferOut + "', 'dateExpectedToReport':'" + dateExpectedToReport +"', 'reasonsForDeath':'" +reasonsForDeath +"','specificCausesOfDeath':'"+specificCausesOfDeath+"'}",
                     contentType: "application/json; charset=utf-8",
                     dataType: "json",
                     success: function (response) {
@@ -604,13 +642,8 @@
                             dataType: "json",
                             cache: false,
                             success: function (response) {
-                                //$("#tblCareEnded > tbody").empty();
-                                $('#tblCareEnded tr:not(:first)').remove();
                                 console.log(response.d);
                                 var itemList = response.d;
-                                var table = '';
-
-                               
 
                                 if (itemList != null) {
                                     //console.log(itemList);
@@ -618,27 +651,60 @@
                                     if (itemList.ExitDate != null || itemList.ExitDate != undefined) {
                                         $('#CareEndDate').datepicker("setDate", moment(itemList.ExitDate).format('DD-MMM-YYYY').toString());
                                     }
+
                                     if (itemList.ExitReason != null || itemList.ExitReason!= undefined) {
                                         $("#<%=Reason.ClientID%>").val(itemList.ExitReason.toString());
                                     }
+
                                     if (itemList.CareEndingNotes != null || itemList.CareEndingNotes != undefined) {
                                         $("#<%=txtCareEndingNotes.ClientID%>").val(itemList.CareEndingNotes.toString());
-                                     }
-                                         if (itemList.TransferOutFacility != null || itemList.TransferOutFacility != undefined) {
-                                             $("#<%=Facility.ClientID%>").val(itemList.TransferOutFacility.toString());
-                                            }
-                         if (itemList.DateOfDeath != null || itemList.DateOfDeath != undefined) {
-                                 $('#DateOfDeath').datepicker("setDate", moment(itemList.DateOfDeath).format('DD-MMM-YYYY').toString())
-                                 }
-                                  }
-                        
-                                //itemList.forEach(function (item, i) {
-                                //    n = i + 1;
-                                //    table += '<tr><td style="text-align: left">' + n + '</td><td style="text-align: left">' + moment(item.ExitDate).format('DD-MMM-YYYY') + '</td><td style="text-align:left">' + item.ExitReason + '</td><td style="text-align: left">' + moment(item.dateOfDeath).format('DD-MMM-YYYY') + '</td><td style="text-align:left">' + item.transferOutFacility + '</td><td style="text-align:left">' + item.dateofDeath + '</td><td style="text-align:left">' + item.careEndingNotes + '</td></tr>';
-                                //});
+                                    }
 
-                                //$('#tblCareEnded').append(table);
-                            
+                                    if (itemList.TransferOutFacility != null || itemList.TransferOutFacility != undefined) {
+                                        $("#<%=Facility.ClientID%>").val(itemList.TransferOutFacility.toString());
+                                    }
+
+                                    if (itemList.DateOfDeath != null || itemList.DateOfDeath != undefined) {
+                                        $('#DateOfDeath').datepicker("setDate", moment(itemList.DateOfDeath).format('DD-MMM-YYYY').toString());
+                                    }
+
+                                    if (itemList.DateExpectedToReport != null || itemList.DateExpectedToReport != undefined) {
+                                        $('#DateExpectedToReport').val(moment(itemList.DateExpectedToReport).format('DD-MMM-YYYY').toString());
+                                        $('#DateExpectedToReport').prop("disabled", false);
+                                    }
+
+                                    if (itemList.ReasonForTransferOut != null || itemList.ReasonForTransferOut != undefined) {
+                                        $('#ReasonForTransferOut').val(itemList.ReasonForTransferOut);
+                                        $('#ReasonForTransferOut').prop("disabled", false);
+                                    }
+
+                                    if (itemList.ReasonLostToFollowup != null || itemList.ReasonLostToFollowup != undefined) {
+                                        $('#ReasonLostToFollowup').val(itemList.ReasonLostToFollowup);
+                                        $('#ReasonLostToFollowup').prop("disabled", false);
+                                    }
+
+                                    if (itemList.ReasonsForDeath != null || itemList.ReasonsForDeath != undefined) {
+                                        $('#reasonsForDeath').val(itemList.ReasonsForDeath);
+                                        $('#reasonsForDeath').prop("disabled", false);
+                                        var valSelected = $("#<%=reasonsForDeath.ClientID%> option:selected").text();
+                                        loadSpecificReasonsOfDeath(valSelected);
+
+                                        if (itemList.SpecificCausesOfDeath != null || itemList.SpecificCausesOfDeath != undefined) {
+                                            setTimeout(function () { $('#specificCausesOfDeath').val(itemList.SpecificCausesOfDeath); },10000);
+                                            $('#specificCausesOfDeath').prop("disabled", false);
+                                        }
+                                    }
+
+                                    if (itemList.TracingOutome != null || itemList.TracingOutome != undefined) {
+                                        $('#TracingOutcome').val(itemList.TracingOutome);
+                                        $('#TracingOutcome').prop("disabled", false);
+                                    }
+
+                                    if (itemList.TransferOutFacility != null || itemList.TransferOutFacility != undefined) {
+                                        $('#Facility').val(itemList.TransferOutFacility);
+                                        $('#Facility').prop("disabled", false);
+                                    }
+                                }
                             },
 
                             error: function (xhr, errorType, exception) {
@@ -652,7 +718,7 @@
 
             
             
-            function getCareEnded() {
+            /*function getCareEnded() {
                 $.ajax(
                 {
                     type: "POST",
@@ -679,6 +745,30 @@
                         var jsonError = jQuery.parseJSON(xhr.responseText);
                         toastr.error("" + xhr.status + "" + jsonError.Message + " ");
                         return false;
+                    }
+                });
+            }*/
+
+
+            $("#reasonsForDeath").change(function () {
+                var valSelected = $("#<%=reasonsForDeath.ClientID%> option:selected").text();
+                loadSpecificReasonsOfDeath(valSelected);
+            });
+
+            function loadSpecificReasonsOfDeath(valSelected) {
+                $.ajax({
+                    url: "../WebService/EnrollmentService.asmx/GetSpecifiCauseOfDeath",
+                    type: "POST",
+                    dataType: "json",
+                    data: "{causeOfDeath:'"+ valSelected +"'}",
+                    contentType: "application/json; charset=utf-8",
+                    success: function (data) {
+                        var serverData = data.d;
+                        $("#<%=specificCausesOfDeath.ClientID%>").find('option').remove().end();
+                        $("#<%=specificCausesOfDeath.ClientID%>").append('<option value="">Select</option>');
+                        for (var i = 0; i < serverData.length; i++) {
+                            $("#<%=specificCausesOfDeath.ClientID%>").append('<option value="' + serverData[i]["ItemId"] + '">' + serverData[i]["ItemName"] + '</option>');
+                        }
                     }
                 });
             }
