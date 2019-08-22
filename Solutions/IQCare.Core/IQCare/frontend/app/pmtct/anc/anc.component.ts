@@ -772,7 +772,6 @@ export class AncComponent implements OnInit, OnDestroy {
                     ])
                         .subscribe(
                             (result) => {
-                                console.log(result);
                                 hivTestsCommand.HtsEncounterId = result[3]['htsEncounterId'];
                                 hivTestsCommand.PatientMasterVisitId = result[3]['patientMasterVisitId'];
                                 const ancHivResultsCommand = this.ancService.saveHivResults(hivTestsCommand).subscribe(
