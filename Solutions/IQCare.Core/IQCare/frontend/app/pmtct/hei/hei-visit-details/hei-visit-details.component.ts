@@ -18,7 +18,6 @@ import { DataService } from '../../../shared/_services/data.service';
 })
 export class HeiVisitDetailsComponent implements OnInit {
     isVisitNumberShown: boolean = false;
-    isdayPostPartumShown: boolean = false;
     isCohortShown: boolean = true;
     maxDate: Date;
     visitDetails: any;
@@ -53,7 +52,6 @@ export class HeiVisitDetailsComponent implements OnInit {
             visitDate: new FormControl('', [Validators.required]),
             cohort: new FormControl(''),
             visitNumber: new FormControl('', [Validators.min(0), Validators.max(40), Validators.required]),
-            dayPostPartum: new FormControl('', [Validators.required]),
             id: new FormControl('')
         });
 
@@ -62,7 +60,6 @@ export class HeiVisitDetailsComponent implements OnInit {
             this.HeiVisitDetailsFormGroup.get('visitType').setValue(this.visitType['itemId']);
         }
         this.HeiVisitDetailsFormGroup.get('visitNumber').disable({ onlySelf: true });
-        this.HeiVisitDetailsFormGroup.get('dayPostPartum').disable({ onlySelf: true });
 
         switch (this.formtype) {
             case 'hei':
@@ -77,9 +74,7 @@ export class HeiVisitDetailsComponent implements OnInit {
                 this.getLookupItems('PNCVisitType', this.visitTypes);
                 this.HeiVisitDetailsFormGroup.get('cohort').disable({ onlySelf: true });
                 this.HeiVisitDetailsFormGroup.get('visitNumber').enable({ onlySelf: true });
-                this.HeiVisitDetailsFormGroup.get('dayPostPartum').enable({ onlySelf: true });
                 this.isVisitNumberShown = true;
-                this.isdayPostPartumShown = true;
                 this.isCohortShown = false;
                 break;
             case 'anc':
@@ -128,7 +123,6 @@ export class HeiVisitDetailsComponent implements OnInit {
                             const y = p.filter(obj =>
                                 obj.patientId == this.patientId && obj.patientMasterVisitId == this.patientMasterVisitId);
                             if (y != null) {
-                                this.HeiVisitDetailsFormGroup.get('dayPostPartum').setValue(y[0].daysPostPartum);
                                 this.HeiVisitDetailsFormGroup.get('visitNumber').setValue(y[0].visitNumber);
                                 this.HeiVisitDetailsFormGroup.get('id').setValue(y[0].id);
 

@@ -24,9 +24,7 @@ export class BirthInfoGridComponent implements OnInit {
  @Output() notify: EventEmitter<any[]> = new EventEmitter<any[]>();
 
  dataSource = new MatTableDataSource(this.babyData);
-  ngOnInit() {   
-    console.log(this.BabySectionOptions.length + ' baby Section Options Init');
-
+  ngOnInit() {
     if (this.isEdit) {
       this.getDeliveredBabyInfo(this.PatientMasterVisitId);
     } else {
@@ -54,8 +52,6 @@ export class BirthInfoGridComponent implements OnInit {
                 if (bInfo == null) {
                    return;
                 }
-                console.log('testing the data');
-                console.log(bInfo);
              bInfo.forEach(info => {
                 this.babyData.push({
                     sexStr: info.sex,

@@ -370,7 +370,7 @@ export class PncComponent implements OnInit {
             PatientMasterVisitId: this.patientMasterVisitId,
             VisitDate: moment(this.visitDetailsFormGroup.value[0]['visitDate']).toDate(),
             VisitNumber: parseInt(this.visitDetailsFormGroup.value[0]['visitNumber'], 10),
-            DaysPostPartum: this.visitDetailsFormGroup.value[0]['dayPostPartum'],
+            DaysPostPartum: this.matHistory_PostNatalExam_FormGroup.value[0]['dayPostPartum'],
             VisitType: this.visitDetailsFormGroup.value[0]['visitType'],
             UserId: this.userId
         } as VisitDetailsCommand;
@@ -467,7 +467,7 @@ export class PncComponent implements OnInit {
             AppointmentReason: 'Follow Up'
         };
 
-        const pncPostNatalExamCommand: PostNatalExamCommand = {
+        const pncPostNatalExamCommandNew: PostNatalExamCommand = {
             Id: 0,
             PatientId: this.patientId,
             PatientMasterVisitId: this.patientMasterVisitId,
@@ -478,7 +478,7 @@ export class PncComponent implements OnInit {
         };
 
         for (let i = 0; i < this.motherExaminationOptions.length; i++) {
-            pncPostNatalExamCommand.PostNatalExamResults.push({
+            pncPostNatalExamCommandNew.PostNatalExamResults.push({
                 ExamId: this.motherExaminationOptions[i].itemId,
                 FindingId: this.matHistory_PostNatalExam_FormGroup.value[1][this.motherExaminationOptions[i].itemName.toLowerCase()],
                 FindingsNotes: ''
@@ -631,7 +631,7 @@ export class PncComponent implements OnInit {
 
         const pncMaternalDeliveryInfo = this.maternityService.savePatientDelivery(patientMaternalDeliveryInfo);
         const pncVisitDetails = this.pncService.savePncVisitDetails(visitDetailsCommand);
-        const pncPostNatalExam = this.pncService.savePncPostNatalExam(pncPostNatalExamCommand);
+        const pncPostNatalExam = this.pncService.savePncPostNatalExam(pncPostNatalExamCommandNew);
         const pncBabyExam = this.pncService.savePncPostNatalExam(pncBabyExaminationCommand);
         const pncHivStatus = this.pncService.savePncHivStatus(hivStatusCommand, this.hiv_status_table_data);
         const pncDiagnosis = this.pncService.saveDiagnosis(pncPatientDiagnosis);
@@ -697,14 +697,20 @@ export class PncComponent implements OnInit {
             Id: this.visitDetailsFormGroup.value[0]['id'],
             VisitNumber: parseInt(this.visitDetailsFormGroup.value[0]['visitNumber'], 10),
             VisitType: this.visitDetailsFormGroup.value[0]['visitType'],
-            DaysPostPartum: this.visitDetailsFormGroup.value[0]['dayPostPartum'],
+            DaysPostPartum: this.matHistory_PostNatalExam_FormGroup.value[0]['dayPostPartum'],
         };
 
         const patientDiagnosisEdit = {
             PatientMasterVisitId: this.patientMasterVisitId,
             PatientId: this.patientId,
             Diagnosis: this.diagnosisReferralAppointmentFormGroup.value[0]['diagnosis'],
-            ManagementPlan: ''
+            ManagementPlan: '',
+            CreatedBy: this.userId
+        };
+
+        const UpdatePatientDiagnosisCommand: any = {
+            DiagnosisId: this.diagnosisReferralAppointmentFormGroup.value[0]['diagnosisId'],
+            DiagnosisCommand: patientDiagnosisEdit
         };
 
         const pncPostNatalExamCommand: PostNatalExamCommand = {
@@ -823,10 +829,6 @@ export class PncComponent implements OnInit {
             UserId: this.userId
         };
 
-        /*console.log(this.drugAdministration_PartnerTesting_FormGroup);
-        console.log(this.drugAdministrationCategories);
-        console.log(this.administeredInfantDrugs);*/
-
         for (let i = 0; i < this.drugAdministrationCategories.length; i++) {
             let value;
             let id;
@@ -836,13 +838,7 @@ export class PncComponent implements OnInit {
             } else if (this.drugAdministrationCategories[i].itemName == 'Haematinics given') {
                 value = this.drugAdministration_PartnerTesting_FormGroup.value[0]['haematinics_given'];
                 id = this.drugAdministration_PartnerTesting_FormGroup.value[0]['id_haematinics'];
-            } /*else if (this.drugAdministrationCategories[i].itemName == 'Infant_Drug') {
-                value = this.drugAdministration_PartnerTesting_FormGroup.value[0]['infant_drug'];
-                id = this.drugAdministration_PartnerTesting_FormGroup.value[0]['id_infantdrug'];
-            } else if (this.drugAdministrationCategories[i].itemName == 'Infant_Start_Continue') {
-                value = this.drugAdministration_PartnerTesting_FormGroup.value[0]['infant_start'];
-                id = this.drugAdministration_PartnerTesting_FormGroup.value[0]['id_infantstart'];
-            }*/
+            }
 
             if (value && id) {
                 const updateDrugAdministrationCommand: UpdateDrugAdministrationCommand = {
@@ -910,7 +906,7 @@ export class PncComponent implements OnInit {
 
 
         const pncVisitDetailsEdit = this.pncService.editPncVisitDetails(visitDetailsEditCommand);
-        const pncPatientDiagnosisEdit = this.pncService.updatePatientDiagnosis(patientDiagnosisEdit);
+        const pncPatientDiagnosisEdit = this.pncService.updatePatientDiagnosis(UpdatePatientDiagnosisCommand);
         const pncPostnatalexamEdit = this.pncService.updatePncPostNatalExam(pncPostNatalExamCommand);
         const pncbabyexamEdit = this.pncService.updatePncPostNatalExam(pncBabyExaminationCommand);
         const pncHivStatus = this.pncService.savePncHivStatus(hivStatusCommand, this.hiv_status_table_data);
@@ -925,8 +921,6 @@ export class PncComponent implements OnInit {
             pncReferralEdit, appointment, pncFamilyPlanningEdit,
             pncFamilyPlanningMethodEdit, pncPartnerTestingEdit, pncPatientPncExercisesSave]).subscribe(
                 (result) => {
-                    console.log(result);
-
                     this.spinner.hide();
                     this.snotifyService.success('Successfully updated PNC encounter ', 'PNC', this.notificationService.getConfig());
                     this.zone.run(() => {

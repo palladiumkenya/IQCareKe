@@ -208,7 +208,7 @@ export class MaternityComponent implements OnInit {
             this.hivFinalResultOptions = hivFinalResultOptions['lookupItems'];
             this.hivFinalResultsOptions = hivFinalResultsOptions['lookupItems'];
             this.hivStatusOptions = hivStatusOptions['lookupItems'];
-            this.infantFeedingTopicId = counselledInfantFeedingOptions['itemId']
+            this.infantFeedingTopicId = counselledInfantFeedingOptions['itemId'];
         });
 
         this.diagnosisOptions.push({
@@ -348,7 +348,6 @@ export class MaternityComponent implements OnInit {
                 pregnancy => {
                     if (pregnancy != null) {
                         this.pregnancyId = pregnancy.id;
-                        console.log('pregancyId:' + this.pregnancyId);
                     }
                 },
                 (err) => {
@@ -811,7 +810,7 @@ export class MaternityComponent implements OnInit {
         const updateAppointment = this.matService.updateNextAppointment(editAppointment);
         const updateDiagnosis = this.matService.updateDiagnosis(editDiagnosisCommad);
         const updateDrugInfo = this.matService.updateDrugAdministration(editDrugAdminCommand);
-        const patientCounselling = this.matService.updatePatientEducation(editCounsellingCommand)
+        const patientCounselling = this.matService.updatePatientEducation(editCounsellingCommand);
         const updateDischarge = this.matService.updateDischargeInfo(editPatientDischarge);
         const updateRefferal = this.matService.updatePatientReferral(editRefferalCommand);
 

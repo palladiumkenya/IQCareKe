@@ -444,6 +444,7 @@ export class AncComponent implements OnInit, OnDestroy {
             Gravidae: this.visitDetailsFormGroup.value[1]['gravidae'],
             Parity: this.visitDetailsFormGroup.value[1]['parityOne'],
             Parity2: this.visitDetailsFormGroup.value[1]['parityTwo'],
+            AgeAtMenarche: this.visitDetailsFormGroup.value[1]['ageAtMenarche'],
             CreatedBy: this.userId
         } as PregnancyAncCommand;
 
@@ -560,7 +561,7 @@ export class AncComponent implements OnInit, OnDestroy {
             ScreeningTypeId: 0,
             ScreeningDone: (yesOption[0].itemId == screeningDone) ? true : false,
             ScreeningDate: new Date(),
-            ViralLoadSampleTaken: viralLoadSampleTaken, // (yesOption[0].itemId == viralLoadSampleTaken) ? true : false,
+            ViralLoadSampleTaken: viralLoadSampleTaken,
             ScreenedTB: this.ClientMonitoringMatFormGroup.value[0]['screenedForTB'],
             CaCxMethod: (yesOption[0].itemId == screeningDone) ? this.ClientMonitoringMatFormGroup.value[0]['cacxMethod'] : 0,
             CaCxResult: (yesOption[0].itemId == screeningDone) ? this.ClientMonitoringMatFormGroup.value[0]['cacxResult'] : 0,
@@ -771,7 +772,6 @@ export class AncComponent implements OnInit, OnDestroy {
                     ])
                         .subscribe(
                             (result) => {
-                                console.log(result);
                                 hivTestsCommand.HtsEncounterId = result[3]['htsEncounterId'];
                                 hivTestsCommand.PatientMasterVisitId = result[3]['patientMasterVisitId'];
                                 const ancHivResultsCommand = this.ancService.saveHivResults(hivTestsCommand).subscribe(
@@ -813,30 +813,10 @@ export class AncComponent implements OnInit, OnDestroy {
             ])
                 .subscribe(
                     (result) => {
-                        console.log(result);
-                        const ancVisitDetailsCommand: any = {
-                            PatientId: parseInt(this.patientId.toString(), 10),
-                            PatientMasterVisitId: this.patientMasterVisitId,
-                            ServiceAreaId: parseInt(this.serviceAreaId.toString(), 10),
-                            VisitDate: moment(this.visitDetailsFormGroup.value[0]['visitDate']).toDate(),
-                            VisitNumber: parseInt(this.visitDetailsFormGroup.value[0]['visitNumber'], 10),
-                            VisitType: this.visitDetailsFormGroup.value[0]['visitType'],
-                            Lmp: new Date(this.visitDetailsFormGroup.value[1]['dateLMP']),
-                            Edd: this.visitDetailsFormGroup.value[1]['dateEDD'],
-                            Gestation: this.visitDetailsFormGroup.value[1]['gestation'],
-                            AgeAtMenarche: this.visitDetailsFormGroup.value[1]['ageAtMenarche'],
-                            ParityOne: this.visitDetailsFormGroup.value[1]['parityOne'],
-                            ParityTwo: this.visitDetailsFormGroup.value[1]['parityTwo'],
-                            Gravidae: this.visitDetailsFormGroup.value[1]['gravidae'],
-                            UserId: this.userId,
-                            DaysPostPartum: 0
-                        };
                         hivTestsCommand.HtsEncounterId = result[3]['htsEncounterId'];
                         hivTestsCommand.PatientMasterVisitId = result[3]['patientMasterVisitId'];
                         const ancHivResultsCommand = this.ancService.saveHivResults(hivTestsCommand).subscribe(
                             (testRes) => {
-                                console.log('ancHivtestresults');
-                                console.log(testRes);
                             }
                         );
 
@@ -905,7 +885,6 @@ export class AncComponent implements OnInit, OnDestroy {
         } as BaselineAncProfileCommand;
 
         for (let i = 0; i < this.counselling_data.length; i++) {
-
             this.counselling_data_form.push({
                 CounsellingTopic: this.counselling_data[i]['counsellingTopic'],
                 CounsellingTopicId: this.counselling_data[i]['counsellingTopicId'],

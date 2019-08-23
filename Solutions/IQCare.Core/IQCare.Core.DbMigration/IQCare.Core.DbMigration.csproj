@@ -302,6 +302,13 @@
     <None Remove="Scripts\2.2.0\15_qaversion.sql" />
     <None Remove="Scripts\2.2.0\16_sp_getAllViralLoads.sql" />
     <None Remove="Scripts\2.2.0\17_FPPNC.sql" />
+    <None Remove="Scripts\2.2.0\18_qaversion.sql" />
+    <None Remove="Scripts\2.2.0\19_GetPatientRelationships.sql" />
+    <None Remove="Scripts\2.2.0\20_DualKits.sql" />
+    <None Remove="Scripts\2.2.0\21_AddSyphilisResult.sql" />
+    <None Remove="Scripts\2.2.0\22_HTS_EncountersDetailView.sql" />
+    <None Remove="Scripts\2.2.0\23_CareEndIO.sql" />
+    <None Remove="Scripts\2.2.0\24_PatientCareEnding.sql" />
   </ItemGroup>
 
   <ItemGroup>
@@ -614,6 +621,13 @@
     <EmbeddedResource Include="Scripts\2.2.0\14_PersonTracingView.sql" />
     <EmbeddedResource Include="Scripts\2.2.0\16_sp_getAllViralLoads.sql" />
     <EmbeddedResource Include="Scripts\2.2.0\17_FPPNC.sql" />
+    <EmbeddedResource Include="Scripts\2.2.0\18_qaversion.sql" />
+    <EmbeddedResource Include="Scripts\2.2.0\19_GetPatientRelationships.sql" />
+    <EmbeddedResource Include="Scripts\2.2.0\20_DualKits.sql" />
+    <EmbeddedResource Include="Scripts\2.2.0\21_AddSyphilisResult.sql" />
+    <EmbeddedResource Include="Scripts\2.2.0\22_HTS_EncountersDetailView.sql" />
+    <EmbeddedResource Include="Scripts\2.2.0\23_CareEndIO.sql" />
+    <EmbeddedResource Include="Scripts\2.2.0\24_PatientCareEnding.sql" />
   </ItemGroup>
 
   <ItemGroup>

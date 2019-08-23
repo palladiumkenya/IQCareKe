@@ -21,6 +21,7 @@ using Interface.CCC.Baseline;
 using IQCare.Events;
 using Convert = System.Convert;
 using Entities.CCC.Encounter;
+using Interface.CCC.Lookup;
 
 namespace IQCare.Web.CCC.WebService
 {
@@ -707,11 +708,16 @@ namespace IQCare.Web.CCC.WebService
         }
 
         [WebMethod(EnableSession = true)]
-        public string EndPatientCare(string exitDate, int exitReason,string facilityOutTransfer,string dateOfDeath, string careEndingNotes)
+        public string EndPatientCare(string exitDate, int exitReason,string facilityOutTransfer,string dateOfDeath, string careEndingNotes, int? tracingOutome, int? reasonLostToFollowup, string reasonForTransferOut, string dateExpectedToReport, int? reasonsForDeath, int? specificCausesOfDeath)
         {
             try
             {
                 DateTime? emptyDateOfDeath = null;
+                DateTime? transferReportingDate = null;
+                if (!string.IsNullOrEmpty(dateExpectedToReport))
+                {
+                    transferReportingDate = DateTime.Parse(dateExpectedToReport);
+                }
 
                 PatientCareEndingManager careEndingManager = new PatientCareEndingManager();
                 PatientEnrollmentManager enrollmentManager = new PatientEnrollmentManager();
@@ -733,27 +739,21 @@ namespace IQCare.Web.CCC.WebService
                 {
                     if (!String.IsNullOrWhiteSpace(facilityOutTransfer))
                     {
-                        careEndingManager.AddPatientCareEndingTransferOut(patientId, patientMasterVisitId,
-                            patientEnrollmentId,
-                            exitReason, DateTime.Parse(exitDate), GlobalObject.unescape(facilityOutTransfer),
-                            GlobalObject.unescape(careEndingNotes));
+                        careEndingManager.AddPatientCareEndingTransferOut(patientId, patientMasterVisitId, patientEnrollmentId, exitReason, DateTime.Parse(exitDate), GlobalObject.unescape(facilityOutTransfer), GlobalObject.unescape(careEndingNotes), GlobalObject.unescape(reasonForTransferOut), transferReportingDate);
                     }
                     else if (String.IsNullOrWhiteSpace(facilityOutTransfer) && String.IsNullOrWhiteSpace(dateOfDeath))
                     {
                         careEndingManager.AddPatientCareEndingOther(patientId, patientMasterVisitId,
-                            patientEnrollmentId,
-                            exitReason, DateTime.Parse(exitDate), GlobalObject.unescape(careEndingNotes));
+                            patientEnrollmentId, exitReason, DateTime.Parse(exitDate),
+                            GlobalObject.unescape(careEndingNotes), tracingOutome, reasonLostToFollowup);
                     }
                     else
-                        
-
+                    {
                         careEndingManager.AddPatientCareEndingDeath(patientId, patientMasterVisitId, patientEnrollmentId,
-                        exitReason, DateTime.Parse(exitDate), (string.IsNullOrEmpty(dateOfDeath))?DateTime.Parse(dateOfDeath):emptyDateOfDeath ,  GlobalObject.unescape(careEndingNotes));
+                            exitReason, DateTime.Parse(exitDate), (string.IsNullOrEmpty(dateOfDeath)) ? emptyDateOfDeath : DateTime.Parse(dateOfDeath), GlobalObject.unescape(careEndingNotes), reasonsForDeath, specificCausesOfDeath);
+                    }
 
-
-
-                    PatientEntityEnrollment entityEnrollment =
-                        enrollmentManager.GetPatientEntityEnrollment(patientEnrollmentId);
+                    PatientEntityEnrollment entityEnrollment = enrollmentManager.GetPatientEntityEnrollment(patientEnrollmentId);
                     entityEnrollment.CareEnded = true;
                     enrollmentManager.updatePatientEnrollment(entityEnrollment);
                     Session["EncounterStatusId"] = 0;
@@ -1051,6 +1051,43 @@ namespace IQCare.Web.CCC.WebService
                 Console.WriteLine(e);
                 throw;
             }
+        }
+
+        [WebMethod(EnableSession = true)]
+        public List<LookupItemView> GetSpecifiCauseOfDeath(string causeOfDeath)
+        {
+            List<LookupItemView> specificCause = new List<LookupItemView>();
+            ILookupManager mgr = (ILookupManager)ObjectFactory.CreateInstance("BusinessProcess.CCC.BLookupManager, BusinessProcess.CCC");
+            if (causeOfDeath == "HIV disease resulting in TB")
+            {
+                specificCause = mgr.GetLookItemByGroup("SpecificDeathTBCareEnded");
+            }
+            else if (causeOfDeath == "HIV disease resulting in cancer")
+            {
+                specificCause = mgr.GetLookItemByGroup("SpecificDeathHIVCareEnded");
+            }
+            else if (causeOfDeath == "HIV disease resulting in other infectious and parasitic diseases")
+            {
+                specificCause = mgr.GetLookItemByGroup("SpecificDeathInfectiousCareEnded");
+            }
+            else if (causeOfDeath == "Other HIV disease resulting in other diseases or conditions leading to death")
+            {
+                specificCause = mgr.GetLookItemByGroup("SpecificDeathOtherHivCareEnded");
+            }
+            else if (causeOfDeath == "Other natural causes not directly related to HIV")
+            {
+                specificCause = mgr.GetLookItemByGroup("SpecificDeathOtherNaturalCareEnded");
+            }
+            else if (causeOfDeath == "Non-natural causes (e.g, trauma, accident, suicide, war, etc)")
+            {
+                specificCause = mgr.GetLookItemByGroup("SpecificDeathOtherNonNaturalCareEnded");
+            }
+            else if (causeOfDeath == "Unknown cause")
+            {
+                specificCause = mgr.GetLookItemByGroup("SpecificDeathUnknownCareEnded");
+            }
+
+            return specificCause;
         }
     }
 }

@@ -203,7 +203,7 @@ namespace IQCare.CCC.UILogic.Interoperability.Enrollment
                             LookupLogic lookupLogic = new LookupLogic();
                             int itemId = lookupLogic.GetItemIdByGroupAndItemName("CareEnded", "Death")[0].ItemId;
                             int patientMasterVisitId = masterVisitManager.GetLastPatientVisit(patientId).Id;
-                            careEndingManager.AddPatientCareEndingDeath(patientId, patientMasterVisitId, enrollmentId, itemId, deathDate.Value, deathDate.Value, "");
+                            careEndingManager.AddPatientCareEndingDeath(patientId, patientMasterVisitId, enrollmentId, itemId, deathDate.Value, deathDate.Value, "", null, null);
 
                             PatientEntityEnrollment entityEnrollmentCareEnded = patientEnrollmentManager.GetPatientEntityEnrollment(enrollmentId);
                             entityEnrollmentCareEnded.CareEnded = true;
@@ -225,7 +225,7 @@ namespace IQCare.CCC.UILogic.Interoperability.Enrollment
                         LookupLogic lookupLogic = new LookupLogic();
                         int itemId = lookupLogic.GetItemIdByGroupAndItemName("CareEnded", "Death")[0].ItemId;
                         int patientMasterVisitId = masterVisitManager.GetLastPatientVisit(patientId).Id;
-                        careEndingManager.AddPatientCareEndingDeath(patientId, patientMasterVisitId, patientEnrollmentId, itemId, deathDate.Value, deathDate.Value, "");
+                        careEndingManager.AddPatientCareEndingDeath(patientId, patientMasterVisitId, patientEnrollmentId, itemId, deathDate.Value, deathDate.Value, "", null, null);
 
                         PatientEntityEnrollment entityEnrollmentCareEnded = patientEnrollmentManager.GetPatientEntityEnrollment(patientEnrollmentId);
                         entityEnrollmentCareEnded.CareEnded = true;
@@ -343,7 +343,7 @@ namespace IQCare.CCC.UILogic.Interoperability.Enrollment
                 {
                     PatientCareEndingManager careEndingManager = new PatientCareEndingManager();
                     int itemId = lookupLogic.GetItemIdByGroupAndItemName("CareEnded", "Death")[0].ItemId;
-                    careEndingManager.AddPatientCareEndingDeath(patientId, patientMasterVisitId, patientEnrollmentId, itemId, deathDate.Value, deathDate.Value, "");
+                    careEndingManager.AddPatientCareEndingDeath(patientId, patientMasterVisitId, patientEnrollmentId, itemId, deathDate.Value, deathDate.Value, "", null, null);
 
                     PatientEntityEnrollment entityEnrollment = patientEnrollmentManager.GetPatientEntityEnrollment(patientEnrollmentId);
                     entityEnrollment.CareEnded = true;

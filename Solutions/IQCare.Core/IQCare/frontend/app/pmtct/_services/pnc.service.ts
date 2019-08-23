@@ -204,7 +204,7 @@ export class PncService {
             return of([]);
         }
 
-        return this.http.put(this.API_URL
+        return this.http.post(this.API_URL
             + '/api/PatientReferralAndAppointment/UpdatePatientReferralInfo', JSON.stringify(patientReferralEditCommand), httpOptions).pipe(
                 tap(updateReferral => this.errorHandler.log(`successfully updated referral`)),
                 catchError(this.errorHandler.handleError<any>('Error updating referral'))
@@ -332,6 +332,13 @@ export class PncService {
         return this.http.get<any[]>(this.API_URL + '/api/HtsEncounter/GetIsPersonInPositiveList/' + personId).pipe(
             tap(getPersonCurrentHivStatus => this.errorHandler.log(`successfully current person hiv status`)),
             catchError(this.errorHandler.handleError<any>('Error fetching current person hiv status'))
+        );
+    }
+
+    public getPatientHtsEncounters(patientId: number): Observable<any[]> {
+        return this.http.get<any[]>(this.API_URL + '/api/HtsEncounter/' + patientId).pipe(
+            tap(getPatientHtsEncounters => this.errorHandler.log(`successfully fetched patient hts encounters`)),
+            catchError(this.errorHandler.handleError<any>('Error fetching patient hts encounters'))
         );
     }
 }

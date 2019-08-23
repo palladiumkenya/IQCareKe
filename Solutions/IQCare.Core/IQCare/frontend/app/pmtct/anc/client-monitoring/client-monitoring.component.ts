@@ -131,23 +131,6 @@ export class ClientMonitoringComponent implements OnInit, OnDestroy {
                 });
     }
 
-    public moveNextStep() {
-        console.log(this.clientMonitoringFormGroup.value);
-
-        this.clientMonitoringData = {
-            WhoStage: parseInt(this.clientMonitoringFormGroup.controls['WhoStage'].value, 10),
-            viralLoadSampleTaken: parseInt(this.clientMonitoringFormGroup.controls['viralLoadSampleTaken'].value, 10),
-            screenedForTB: parseInt(this.clientMonitoringFormGroup.controls['screenedForTB'].value, 10),
-            cacxScreeningDone: parseInt(this.clientMonitoringFormGroup.controls['cacxScreeningDone'].value, 10),
-            cacxMethod: parseInt(this.clientMonitoringFormGroup.controls['cacxMethod'].value, 10),
-            cacxResult: parseInt(this.clientMonitoringFormGroup.controls['cacxResult'].value, 10),
-            cacxComments: this.clientMonitoringFormGroup.controls['cacxComments'].value,
-        };
-        console.log(this.clientMonitoringData);
-        this.nextStep.emit(this.clientMonitoringData);
-        this.notify.emit(this.clientMonitoringFormGroup);
-    }
-
     public oncacxScreeningChange(event) {
 
         if (event.isUserInput && event.source.selected && event.source.viewValue == 'Yes') {
@@ -203,9 +186,8 @@ export class ClientMonitoringComponent implements OnInit, OnDestroy {
         this.patientScreening$ = this.ancService.getPatientScreeningInfoByPatientId(patientId)
             .subscribe(
                 p => {
-                    // console.log('patientscreening');
-                    // console.log(p);
                     const screening = p;
+                    console.log(p);
                     if (p) {
                         const cacx = screening.filter(obj => obj.screeningType == 'CaCxScreening');
                         const tb = screening.filter(obj => obj.screeningType == 'TBScreeningPMTCT');
@@ -223,8 +205,10 @@ export class ClientMonitoringComponent implements OnInit, OnDestroy {
                             this.clientMonitoringFormGroup.get('cacxMethod').setValue(cacx[0]['screeningCategoryId']);
                             this.clientMonitoringFormGroup.get('cacxResult').setValue(cacx[0]['screeningValueId']);
                             this.clientMonitoringFormGroup.get('cacxComments').setValue(cacx[0]['comment']);
+                        } else {
+                            const noOption = this.YesNoOptions.filter(obj => obj.itemName == 'No');
+                            this.clientMonitoringFormGroup.get('cacxScreeningDone').setValue(noOption[0].itemId);
                         }
-
                     }
                 },
                 (err) => {

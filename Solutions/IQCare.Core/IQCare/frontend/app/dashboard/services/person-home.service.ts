@@ -392,5 +392,10 @@ export class PersonHomeService {
             );
     }
 
-
+    public getSecondaryRelationships(personId: number): Observable<any[]> {
+        return this.http.get<any[]>(this.API_URL + '/api/PatientServices/GetPersonSecondaryRelationships/' + personId).pipe(
+            tap(getSecondaryRelationships => this.errorHandler.log(`successfully fetched person secondary relationships`)),
+            catchError(this.errorHandler.handleError<any>('Error fetching person secondary relationships'))
+        );
+    }
 }

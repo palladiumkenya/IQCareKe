@@ -80,15 +80,10 @@ export class MotherProfileComponent implements OnInit {
         const eddDate = new Date(moment(this.dateLMP).add(7, 'days').add(9, 'months').format(''));
         this.motherProfileFormGroup.controls['dateEDD'].setValue(eddDate);
 
-        console.log(this.motherProfileFormGroup.controls['dateEDD'].value);
-
         this.gestation = parseInt(moment.duration(moment(this.visitDate).diff(this.dateLMP)).asWeeks().toFixed(1), 10);
         if (this.gestation > 42) { this.gestation = 42; }
         if (this.gestation < 1) { this.gestation = 0; }
         this.motherProfileFormGroup.controls['gestation'].setValue(this.gestation);
-
-        // this.motherProfileFormGroup.controls['dateEDD'].disable({ onlySelf: false });
-        console.log(moment(this.motherProfileFormGroup.controls['dateLMP'].value, 'DD-MM-YYYY').add(280, 'days'));
     }
 
     public onParityTwoChange() {
@@ -109,16 +104,11 @@ export class MotherProfileComponent implements OnInit {
                     this.motherProfileFormGroup.controls['parityOne'].setValue(p.parity);
                     this.motherProfileFormGroup.controls['parityTwo'].setValue(p.parity2);
                     this.motherProfileFormGroup.controls['gravidae'].setValue(p.gravidae);
-                    // console.log('pregnancy details');
-                    // console.log(p);
+                    this.motherProfileFormGroup.controls['ageAtMenarche'].setValue(p.ageAtMenarche);
                 },
                 (err) => {
-                    // console.log(err);
                     this.snotifyService.error('Error fetching previous pregnacy Profile' + err,
                         'Encounter', this.notificationService.getConfig());
-                },
-                () => {
-                    // console.log(this.motherProfile);
                 });
     }
 
