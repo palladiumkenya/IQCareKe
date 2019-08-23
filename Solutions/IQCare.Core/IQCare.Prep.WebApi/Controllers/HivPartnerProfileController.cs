@@ -45,6 +45,13 @@ namespace IQCare.Prep.WebApi.Controllers
                 return BadRequest(ModelState);
 
             var response = await _mediator.Send(addhivpartnerprofilecommand, Request.HttpContext.RequestAborted);
+
+
+
+
+
+
+
             if (response.IsValid)
                 return Ok(response.Value);
             return BadRequest(response);

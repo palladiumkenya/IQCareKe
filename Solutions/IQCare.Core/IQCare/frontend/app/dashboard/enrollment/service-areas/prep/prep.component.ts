@@ -36,6 +36,9 @@ import { PatientFamilyPlanningMethodEditCommand } from '../../../../pmtct/_model
 import { FamilyPlanningEditCommand } from '../../../../pmtct/_models/FamilyPlanningEditCommand';
 import { NextAppointmentCommand } from '../../../../prep/_models/commands/nextAppointmentCommand';
 
+
+
+
 @Component({
     selector: 'app-prep',
     templateUrl: './prep.component.html',
@@ -112,7 +115,7 @@ export class PrepComponent implements OnInit {
         private searchService: SearchService,
         private recordsService: RecordsService) {
         this.maxDate = new Date();
-
+        this.clientCircumcisionStatusCommand =new CircumcisionCommand();
         this.isVisible = false;
         this.FacilitySelected.valueChanges.pipe(debounceTime(400)).subscribe(data => {
             this.personHomeService.filterFacilities(data).subscribe(res => {
@@ -550,6 +553,14 @@ export class PrepComponent implements OnInit {
 
 
                 });
+
+                this.form.controls.partnercccenrollment.setValue('');
+                this.form.controls.partnerHivStatusDate.setValue('');
+                this.form.controls.partnerARTStartDate.setValue('');
+                this.form.controls.HivSerodiscordantduration.setValue('');
+                this.form.controls.partnersexcondoms.setValue('');
+                this.form.controls.hivpartnerchildren.setValue('');
+                this.form.controls.CCCNumber.setValue('');
             } else {
                 this.snotifyService.error('Kindly note  Partner CCC Enrollment' +
                     ' is' +
@@ -1172,29 +1183,7 @@ export class PrepComponent implements OnInit {
         enrollment.RegistrationDate = EnrollmentDate;
         enrollment.PosId = this.posId;
 
-        if (isClientCircumcised && this.isEdit == false) {
-            this.clientCircumcisionStatusCommand.Id = 0;
-            this.clientCircumcisionStatusCommand.PatientId = this.patientId;
-            this.clientCircumcisionStatusCommand.ClientCircumcised = parseInt(isClientCircumcised, 10);
-            this.clientCircumcisionStatusCommand.ReferredToVMMC = 0;
-            this.clientCircumcisionStatusCommand.CreatedBy = this.userId;
-            this.clientCircumcisionStatusCommand.CreateDate = new Date();
-            this.clientCircumcisionStatusCommand.DeleteFlag = false;
-
-
-        }
-        else if (isClientCircumcised && this.isEdit == true) {
-
-            this.clientCircumcisionStatusCommand.Id = this.circumcisedId;
-            this.clientCircumcisionStatusCommand.PatientId = this.patientId;
-            this.clientCircumcisionStatusCommand.ClientCircumcised = parseInt(isClientCircumcised, 10);
-            this.clientCircumcisionStatusCommand.ReferredToVMMC = 0;
-            this.clientCircumcisionStatusCommand.CreatedBy = this.userId;
-            this.clientCircumcisionStatusCommand.CreateDate = new Date();
-            this.clientCircumcisionStatusCommand.DeleteFlag = false;
-        }
-
-
+        
 
         const populationTypes = this.registrationService.addPersonPopulationType(this.personId,
             this.userId, this.personPopulation);
@@ -1304,16 +1293,37 @@ export class PrepComponent implements OnInit {
 
 
                             if (this.person.gender.toLowerCase() == 'male') {
-                                const circumcisionStatus = this.personHomeService.saveCircumcisionStatus(this.clientCircumcisionStatusCommand);
-                            }
-                            if (this.person.gender.toLowerCase() == 'female') {
-                                this.pregnancyOption = this.pregnancyStatusOptions.filter(obj => obj.displayName == 'Not Pregnant');
-                                const isPregnant = this.yesnoOptions.filter(obj => obj.itemId == pregnant);
-                                if (isPregnant.length > 0) {
-                                    if (isPregnant[0].itemName == 'Yes') {
-                                        this.pregnancyOption = this.pregnancyStatusOptions.filter(obj => obj.displayName == 'Pregnant');
-                                    }
+                                if (isClientCircumcised && this.isEdit == false) {
+                                    this.clientCircumcisionStatusCommand.Id = 0;
+                                    this.clientCircumcisionStatusCommand.PatientId = this.patientId;
+                                    this.clientCircumcisionStatusCommand.ClientCircumcised = parseInt(isClientCircumcised, 10);
+                                    this.clientCircumcisionStatusCommand.ReferredToVMMC = 0;
+                                    this.clientCircumcisionStatusCommand.CreatedBy = this.userId;
+                                    this.clientCircumcisionStatusCommand.CreateDate = new Date();
+                                    this.clientCircumcisionStatusCommand.DeleteFlag = false;
+                        
+                        
                                 }
+                                else if (isClientCircumcised && this.isEdit == true) {
+                        
+                                    this.clientCircumcisionStatusCommand.Id = this.circumcisedId;
+                                    this.clientCircumcisionStatusCommand.PatientId = this.patientId;
+                                    this.clientCircumcisionStatusCommand.ClientCircumcised = parseInt(isClientCircumcised, 10);
+                                    this.clientCircumcisionStatusCommand.ReferredToVMMC = 0;
+                                    this.clientCircumcisionStatusCommand.CreatedBy = this.userId;
+                                    this.clientCircumcisionStatusCommand.CreateDate = new Date();
+                                    this.clientCircumcisionStatusCommand.DeleteFlag = false;
+                                }
+                        
+                        
+                                const circumcisionStatus = this.personHomeService.saveCircumcisionStatus(this.clientCircumcisionStatusCommand).subscribe((res) => {
+                                    console.log(res);
+
+                                }, (error) => {
+                                    console.log(error);
+                                });
+                            }
+                            
                                 this.personHomeService.getPatientEnrollmentMasterVisitByServiceAreaId(this.patientId, this.serviceId).subscribe(
                                     (result) => {
                                         this.patientMasterVisitId = result[0]['id'];
@@ -1321,6 +1331,14 @@ export class PrepComponent implements OnInit {
                                         console.log(result);
                                         console.log(this.patientMasterVisitId)
                                         if (this.patientMasterVisitId != null && this.patientMasterVisitId > 0) {
+                                            if (this.person.gender.toLowerCase() == 'female') {
+                                                this.pregnancyOption = this.pregnancyStatusOptions.filter(obj => obj.displayName == 'Not Pregnant');
+                                                const isPregnant = this.yesnoOptions.filter(obj => obj.itemId == pregnant);
+                                                if (isPregnant.length > 0) {
+                                                    if (isPregnant[0].itemName == 'Yes') {
+                                                        this.pregnancyOption = this.pregnancyStatusOptions.filter(obj => obj.displayName == 'Pregnant');
+                                                    }
+                                                }
                                             const pregnancyIndicatorCommand: PregnancyIndicatorCommand = {
                                                 PatientId: this.patientId,
                                                 PatientMasterVisitId: this.patientMasterVisitId,
@@ -1379,13 +1397,13 @@ export class PrepComponent implements OnInit {
                                                     familyPlanningMethodCommand.PatientFPId = res['patientId'];
                                                     if (familyPlanningMethods !== undefined) {
                                                         const pncFamilyPlanningMethod = this.personHomeService.savePncFamilyPlanningMethod
-                                                        (familyPlanningMethodCommand).subscribe(
-                                                            (res) => {
-                                                                console.log(`family planning method`);
-                                                                console.log(res);
-                                                            }, (error) => {
-                                                                console.log(error);
-                                                            });
+                                                            (familyPlanningMethodCommand).subscribe(
+                                                                (res) => {
+                                                                    console.log(`family planning method`);
+                                                                    console.log(res);
+                                                                }, (error) => {
+                                                                    console.log(error);
+                                                                });
                                                     }
                                                 });
                                             }
@@ -1419,6 +1437,28 @@ export class PrepComponent implements OnInit {
                                                     }
                                                 );
                                             }
+                                        }
+
+                                            if (this.isEdit == false) {
+                                                const nextAppointmentCommand: NextAppointmentCommand = {
+                                                    PatientId: this.patientId,
+                                                    PatientMasterVisitId: this.patientMasterVisitId,
+                                                    ServiceAreaId: this.serviceId,
+                                                    AppointmentDate: nextAppointmentDate
+                                                        ? moment(nextAppointmentDate).toDate() : null,
+                                                    Description: '',
+                                                    StatusDate: new Date(),
+                                                    DifferentiatedCareId: 0,
+                                                    AppointmentReason: 'Follow up',
+                                                    CreatedBy: this.userId
+                                                };
+                                                const matNextAppointment = this.personHomeService.saveNextAppointment(nextAppointmentCommand).subscribe((res) => {
+                                                    console.log(res);
+
+                                                }, (error) => {
+                                                    console.log(error);
+                                                });
+                                            }
 
                                         }
 
@@ -1429,30 +1469,21 @@ export class PrepComponent implements OnInit {
                                 );
 
 
-                            }
-                            if (this.isEdit == false) {
-                                const nextAppointmentCommand: NextAppointmentCommand = {
-                                    PatientId: this.patientId,
-                                    PatientMasterVisitId: this.patientMasterVisitId,
-                                    ServiceAreaId: this.serviceId,
-                                    AppointmentDate: nextAppointmentDate
-                                        ? moment(nextAppointmentDate).toDate() : null,
-                                    Description: '',
-                                    StatusDate: new Date(),
-                                    DifferentiatedCareId: 0,
-                                    AppointmentReason: 'Follow up',
-                                    CreatedBy: this.userId
-                                };
-                                const matNextAppointment = this.personHomeService.saveNextAppointment(nextAppointmentCommand);
-                            }
-                            else {
+                            
+
+                            if (this.isEdit == true) {
                                 const updateNextAppointment = {
                                     AppointmentId: Appointmentid,
                                     AppointmentDate: nextAppointmentDate,
                                     Description: ''
                                 };
 
-                                const updateAppointmentCommand = this.personHomeService.updateNextAppointment(updateNextAppointment);
+                                const updateAppointmentCommand = this.personHomeService.updateNextAppointment(updateNextAppointment).subscribe((res) => {
+                                    console.log(res);
+
+                                }, (error) => {
+                                    console.log(error);
+                                });
                             }
                             const PatientProfile = this.personHomeService.AddHivPartnerProfile
                                 (this.patientId, this.hivsavedprofileOptions).subscribe((res) => {

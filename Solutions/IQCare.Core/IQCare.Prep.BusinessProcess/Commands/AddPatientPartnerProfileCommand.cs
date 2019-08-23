@@ -27,11 +27,11 @@ namespace IQCare.Prep.BusinessProcess.Commands
 
         public string HivPositiveStatusDate { get; set; }
 
-        public int CCCEnrollment { get; set; }
+        public string CCCEnrollment { get; set; }
         public DateTime? PartnerARTStartDate { get; set; }
         public string HIVSeroDiscordantDuration { get; set; }
 
-        public int SexWithoutCondoms { get; set; }
+        public string SexWithoutCondoms { get; set; }
         public string NumberofChildren { get; set; }
 
         public string CCCNumber { get; set; }
