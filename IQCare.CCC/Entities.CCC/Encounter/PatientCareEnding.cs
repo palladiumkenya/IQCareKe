@@ -26,5 +26,11 @@ namespace Entities.CCC.Encounter
         public DateTime? DateOfDeath { get; set; }
         public string CareEndingNotes { get; set; }
         public bool Active { get; set; }
+        public int? TracingOutome { get; set; }
+        public int? ReasonLostToFollowup { get; set; }
+        public string ReasonForTransferOut { get; set; }
+        public DateTime? DateExpectedToReport { get; set; }
+        public int? ReasonsForDeath { get; set; }
+        public int? SpecificCausesOfDeath { get; set; }
     }
 }
