@@ -17,16 +17,17 @@ namespace IQCare.Web.CCC.Patient
         {
             get { return Convert.ToInt32(Request.QueryString["visitId"] != null ? Request.QueryString["visitId"] : "0"); }
         }
+
         protected void Page_Load(object sender, EventArgs e)
         {
-            PatientCareEndingManager careEndingManager = new PatientCareEndingManager();
-
             if (!IsPostBack)
             {
-                ILookupManager mgr =
-                (ILookupManager)
-                ObjectFactory.CreateInstance("BusinessProcess.CCC.BLookupManager, BusinessProcess.CCC");
+                ILookupManager mgr = (ILookupManager)ObjectFactory.CreateInstance("BusinessProcess.CCC.BLookupManager, BusinessProcess.CCC");
                 List<LookupItemView> vw = mgr.GetLookItemByGroup("CareEnded");
+                List<LookupItemView> tracingOutcomeOptions = mgr.GetLookItemByGroup("TracingOutcomeCareEnded");
+                List<LookupItemView> reasonLostToFollowupOptions = mgr.GetLookItemByGroup("ReasonLostToFollowupCareEnded");
+                List<LookupItemView> reasonForDeathOptions = mgr.GetLookItemByGroup("ReasonForDeathCareEnded");
+                
 
                 if (vw != null && vw.Count > 0)
                 {
@@ -34,18 +35,39 @@ namespace IQCare.Web.CCC.Patient
 
                     foreach (var item in vw)
                     {
-                        Reason.Items.Add(new ListItem(item.ItemName, item.ItemId.ToString()));
+                        if(item.ItemName != "HIV Negative" && item.ItemName != "Confirmed HIV Negative")
+                            Reason.Items.Add(new ListItem(item.ItemName, item.ItemId.ToString()));
                     }
                 }
-                int patientId = int.Parse(Session["PatientPK"].ToString());
-                //if (PmVisitId > 0)
-                //{
-                //    var careEnded = careEndingManager.GetPatientCareEndingByVisitId(patientId, PmVisitId);
-                //    if(careEnded.Count > 0)
-                //    {
-                //        careEnded[0].
-                //    }
-                //}
+
+                if (tracingOutcomeOptions != null && tracingOutcomeOptions.Count > 0)
+                {
+                    TracingOutcome.Items.Add(new ListItem("select", ""));
+                    foreach (var item in tracingOutcomeOptions)
+                    {
+                        TracingOutcome.Items.Add(new ListItem(item.ItemName, item.ItemId.ToString()));
+                    }
+                }
+
+
+                if (reasonLostToFollowupOptions != null && reasonLostToFollowupOptions.Count > 0)
+                {
+                    ReasonLostToFollowup.Items.Add(new ListItem("select", ""));
+                    foreach (var item in reasonLostToFollowupOptions)
+                    {
+                        ReasonLostToFollowup.Items.Add(new ListItem(item.ItemName, item.ItemId.ToString()));
+                    }
+                }
+
+
+                if (reasonForDeathOptions != null && reasonForDeathOptions.Count > 0)
+                {
+                    reasonsForDeath.Items.Add(new ListItem("select", ""));
+                    foreach (var item in reasonForDeathOptions)
+                    {
+                        reasonsForDeath.Items.Add(new ListItem(item.ItemName, item.ItemId.ToString()));
+                    }
+                }
             }
 
         }

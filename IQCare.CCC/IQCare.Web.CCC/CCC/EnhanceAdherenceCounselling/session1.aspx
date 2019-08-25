@@ -1,5 +1,4 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="True" CodeBehind="session1.aspx.cs" Inherits="IQCare.Web.CCC.UC.EnhanceAdherenceCounselling.session1" %>
-<!--<%@ OutputCache duration="86400" varybyparam="none" %>-->
 <style>
     .disabled {
     color: darkgray;
@@ -21,7 +20,7 @@
 		    <div class="panel panel-info">
 			    <div class="panel-body">
 				    <div class="col-md-12 form-group">
-					    <label class="control-label pull-left"><span class="text-primary">Pill Adherence</span></label>
+					    <label class="control-label pull-left"><span class="text-primary">Pill -Adherence</span></label>
 				    </div>
                     <div class="col-md-12 form-group" id="pillcount">
                         <asp:PlaceHolder ID="PHPreviousCount" runat="server"></asp:PlaceHolder>
@@ -338,7 +337,7 @@
     $(document).ready(function () {
           $('.session1loading').show();
         var PatientMasterVisitId = GetURLParameter('visitId');
-        var patientId = '<%=PatientId%>';
+        var patientId = GetURLParameter('pid');
         var SRNQuestion1='<%=SessionRefferal1ItemId%>';
         var SRNQuestion3 = '<%=SessionRefferal3ItemId%>';
         var SRNQuestion2='<%= SessionRefferal2ItemId%>'
@@ -385,7 +384,7 @@
             $.ajax({
                 type: "POST",
                 url: "../WebService/PatientClinicalNotesService.asmx/getPatientNotesByVisitId",
-                data: "{'PatientId': '" + patientId + "','PatientMasterVisitId':'" + PatientMasterVisitId + "'}",
+                data: "{'PatientId': '" + GetURLParameter('pid') + "','PatientMasterVisitId':'" + PatientMasterVisitId + "'}",
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",
                 cache: false,
@@ -509,9 +508,6 @@
                              
                             
                         var value = response[0];
-                            
-                    
-                     
                         this.PatientMasterVisitId = value.PatientMasterVisitId;
                         if (this.PatientMasterVisitId > 0) {
                             $("#sessiononedata .loading").show();
@@ -520,7 +516,7 @@
                            // window.location.href = window.location.href + "?visitId=" + this.PatientMasterVisitId;
 
 
-                            window.location.replace("EnhanceAdherenceHome.aspx?visitId=" + this.PatientMasterVisitId);
+                            window.location.replace("EnhanceAdherenceHome.aspx?pid=" + value.PatientId + "&visitId=" + this.PatientMasterVisitId);
                                toastr.info("Please wait, redirecting to ongoing Enhance Adherence Councelling");
                             $("#sessiononedata .loading").show();
                             ///CCC/EnhanceAdherenceCounselling/EnhanceAdherenceHome.aspx

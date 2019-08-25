@@ -28,7 +28,13 @@ namespace IQCare.Web.CCC.WebService
                 int patientId = Convert.ToInt32(Session["PatientPK"]);
                 int userId = Convert.ToInt32(Session["AppUserId"]);
                 PatientMasterVisitManager patientMasterVisit = new PatientMasterVisitManager();
-                result = patientMasterVisit.PatientMasterVisitCheckin(patientId,userId);
+                LookupLogic lookupLogic = new LookupLogic();
+                var currentfacility = lookupLogic.GetFacility(Session["AppPosID"].ToString());
+                if (currentfacility == null)
+                {
+                    currentfacility = lookupLogic.GetFacility();
+                }
+                result = patientMasterVisit.PatientMasterVisitCheckin(patientId,userId, currentfacility.FacilityID);
 
                 /* Assign to patientMsterVisitId session*/
                 Session["EncounterStatusId"] = 1;

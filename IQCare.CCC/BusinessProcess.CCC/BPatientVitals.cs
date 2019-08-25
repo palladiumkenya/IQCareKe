@@ -14,7 +14,7 @@ namespace BusinessProcess.CCC
 {
     public class BPatientVitals : ProcessBase, IPatientVitals
     {
-       // private readonly UnitOfWork _unitOfWork = new UnitOfWork(new GreencardContext());
+        // private readonly UnitOfWork _unitOfWork = new UnitOfWork(new GreencardContext());
         private int _result;
         public int AddPatientVitals(PatientVital p)
         {
@@ -26,7 +26,7 @@ namespace BusinessProcess.CCC
                 unitOfWork.Dispose();
                 return p.Id;
             }
-     
+
         }
 
         public PatientVital GetPatientVitals(int patientId)
@@ -34,9 +34,13 @@ namespace BusinessProcess.CCC
             using (UnitOfWork unitOfWork = new UnitOfWork(new GreencardContext()))
             {
                 var vitals =
-                            unitOfWork.PatientVitalsRepository.FindBy(x => x.PatientId == patientId)
-                                .OrderBy(x => x.Id)
-                                .FirstOrDefault();
+                          unitOfWork.PatientVitalsRepository.FindBy(x => x.PatientId == patientId && x.Id >= x.Id)
+                               .OrderByDescending(x => x.Id)
+                             .FirstOrDefault();
+                //var vitals = unitOfWork.PatientVitalsRepository.GetAll().Where(x => x.PatientId == patientId && x.Id == unitOfWork.PatientVitalsRepository.GetAll().Max(i=>i.Id));
+                //       .DefaultIfEmpty(0)
+                //       .Max();
+                // var vitals = unitOfWork.PatientVitalsRepository
                 unitOfWork.Dispose();
                 return vitals;
             }
@@ -52,7 +56,7 @@ namespace BusinessProcess.CCC
                 unitOfWork.Complete();
                 unitOfWork.Dispose();
             }
-    
+
         }
 
         public int UpdatePatientVitals(PatientVital p)
@@ -143,7 +147,7 @@ namespace BusinessProcess.CCC
                     pv.Weight = Convert.ToDecimal(theDT.Rows[i]["weight"]);
                     pv.BMI = Convert.ToDecimal(theDT.Rows[i]["bmi"]);
                     pv.CreateDate = Convert.ToDateTime(theDT.Rows[i]["createdate"]);
-                    
+
                     list.Add(pv);
                 }
 

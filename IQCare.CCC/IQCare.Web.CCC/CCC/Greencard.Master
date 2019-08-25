@@ -13,7 +13,6 @@
     
 	 <meta http-equiv="X-UA-Compatible" content="IE=11,chrome=1" />
 	<title id="lblTitle" runat="server">International Quality Care Patient Management and Monitoring System</title>
-	
 	<link href="<%# ResolveUrl("~/Content/css/bootstrap.css") %>" rel="stylesheet" type="text/css" />
    <%--  <link href="<%# ResolveUrl("~/CCC/Scripts/css/bootstrap.css") %>" rel="stylesheet" type="text/css" />--%>
 	<link href="<%# ResolveUrl("~/Content/css/bootstrap-theme.css") %>" rel="stylesheet"  type="text/css" />
@@ -88,7 +87,10 @@
     <script src="<%# ResolveUrl("Scripts/js/sweetalert2.js") %>" type="text/javascript"></script>
     <script src="<%# ResolveUrl("Scripts/js/lobipanel.js") %>" type="text/javascript"></script>
     <script src="<%# ResolveUrl("Scripts/js/jquery.onoff.js") %>" type="text/javascript"></script>
-
+    <style type="text/css">
+        .masterfooter .row{margin-right:0px !important;margin-left: 0px !important;}
+        .row{margin-right:0px !important;margin-left: 0px !important;}
+    </style>
    
 </head>
 
@@ -160,24 +162,31 @@
 										 
 					 <div class="col-md-2 col-xs-12 col-sm-12" style="padding-top:0%">
 						 <div class="list-group">
-							   
-						 <%--      <i a href="#" class='list-group-item'>
-									<asp:HyperLink ID="Link1" runat="server"  CssClass="ui-icon-link  text-muted"  NavigateUrl="~/CCC/Patient/PatientFinder.aspx" Text="Add Vendor" />
-								</i>--%>
 							  <a href="#" class="list-group-item active" id="FindAddPatienta">
 									<span class=""></span> Find /Add Patients<span class="badge"></span>
 								</a>
 
 								<a href='<%=ResolveClientUrl("~/CCC/Patient/PatientFinder.aspx") %>' class="list-group-item">
-									<span class="fa fa-search fa-2x pull-left text-warning"></span> <strong>Find Patients</strong> <span class="badge">
-										<asp:Label ID="lblPatientCount" runat="server">0</asp:Label></span>
-							   
+									<span class="fa fa-search fa-2x pull-left text-warning">
+									</span>
+                                        <strong>Find Patients</strong>
+                                        <span class="badge">
+										    <asp:Label ID="lblPatientCount" runat="server">0</asp:Label>
+                                        </span>
 								</a>
 								
 								<a  href='<%=ResolveClientUrl("~/CCC/Patient/PatientRegistration.aspx") %>' class="list-group-item">
 									<span class="fa fa-user-plus fa-2x pull-left text-warning"></span><strong class="text-info">
                                         <asp:Label ID="lblRegistration" runat="server" Text="Label"></asp:Label></strong> 
 								</a>
+                             
+						        <a href="#" class="list-group-item active" id="patientTracing">
+						           <span class=""></span> Patient Tracing<span class="badge"></span>
+						        </a>
+                             
+						        <a href='<%=ResolveClientUrl("~/CCC/Patient/PatientTracing.aspx") %>' class="list-group-item" id="patientTracingLink">
+						            <span class="fa-2x pull-left text-danger"></span> <strong class="tracing-link text-danger">Patient Tracing</strong>
+						        </a>
 
 								<a href="#" class="list-group-item active" id="titlePatientBaseline">
 									<span class=""></span> Patient Baseline<span class="badge"></span>
@@ -328,8 +337,8 @@
 
 
 	<nav role="navigation" class="navbar navbar-default navbar-fixed-bottom">
-		 <div class="container-fluid">              
-			  <div class="row" style="padding-top:3px">
+		 <div class="container-fluid masterfooter">              
+			  <div class="row" style="padding-top:3px;margin-right: 0px !important;margin-left: 0px !important;">
 					  
                     <div class="col-md-1 pull-left">
                         <img src="<%= Page.ResolveClientUrl("~/Images/kenya_small.png") %>" />
@@ -363,7 +372,16 @@
 
 	<script type="text/javascript">
 		$(document).ready(function() {
-			
+            var PatientTracing = '<%=PatientTrace%>';
+		    console.log(PatientTracing);
+		    if (PatientTracing == "yes") {
+                $("#patientTracing").show();
+                $("#patientTracingLink").show();
+		    }
+		    else {
+		        $("#patientTracing").hide();
+		        $("#patientTracingLink").hide();
+		    }
 			var startEncounter=0; /* starts encounter flags starts at false */
 			var stopEncounter=0; /* starts encounter flags starts at false */
 
@@ -516,7 +534,7 @@
 					    //encounterStopped();
 					    //$("#menuStartEncounter").show();
 					   // checkOut();
-						window.location.href = "<%=ResolveClientUrl("~/CCC/Home.aspx")%>";
+						window.location.href = "<%=ResolveClientUrl("~/CCC/Patient/PatientFinder.aspx")%>";
 					    $('#<%=lblRegistration.ClientID%>').text("Register Patient");
 					    toastr.info("Patient Service Checkedout successfully!");
 					},

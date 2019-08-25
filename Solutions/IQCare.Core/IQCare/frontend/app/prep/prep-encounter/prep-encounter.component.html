@@ -1,0 +1,193 @@
+<div class="row">
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        <div class="row">
+            <div class="col-lg-12 col-sm-6 col-xs-12">
+                <div class="widget">
+                    <div class="widget-header bordered-bottom bordered-sky">
+                        <span class="widget-caption"> PREP | FOLLOWUP VISIT </span>
+                    </div>
+                    <div class="widget-body">
+                        <div class="row">
+                            <div class="col-lg-12 col-sm-6 col-xs-12">
+                                <mat-horizontal-stepper [linear]="isLinear" #stepper>
+                                    <mat-step [completed]="false" [stepControl]="STIScreeningFormGroup">
+                                        <ng-template matStepLabel>
+                                            <span matTooltip="Visit Details">STI Screening and Treatment</span>
+                                        </ng-template>
+
+                                        <app-prep-sti-screening-treatment
+                                            (notify)="onPrepStiScreeningTreatmentNotify($event)"
+                                            [STIScreeningAndTreatmentOptions]="STIScreeningAndTreatmentOptions"
+                                            [patientId]="patientId" [personId]="personId" [isEdit]="isEdit"
+                                            [patientMasterVisitId]="patientMasterVisitId">
+                                        </app-prep-sti-screening-treatment>
+
+                                        <div>
+                                            <button mat-raised-button color="accent" (click)="onVisitDetailsNext()"
+                                                type="button">Next</button>
+                                        </div>
+                                    </mat-step>
+
+                                    <mat-step [completed]="false" [stepControl]="CircumcisionStatusFormGroup"
+                                        [optional]="isOptionalCircumcision">
+                                        <ng-template matStepLabel>
+                                            <span matTooltip="Circumcision Status( Male
+                                            Clients Only)">
+                                                Circumcision Status( Male
+                                                Clients Only)
+                                            </span>
+                                        </ng-template>
+
+                                        <app-circumcision-status (notify)="onCircumcisionStatusNotify($event)"
+                                            [CircumcisionStatusOptions]="CircumcisionStatusOptions"
+                                            [patientId]="patientId" [personId]="personId" [isEdit]="isEdit"
+                                            [patientMasterVisitId]="patientMasterVisitId">
+                                        </app-circumcision-status>
+
+                                        <div>
+                                            <button mat-raised-button color="primary" matStepperPrevious
+                                                type="button">Previous</button>
+                                            &nbsp;&nbsp;
+                                            <button mat-raised-button color="accent" (click)="onCircumcisionNext()"
+                                                type="button">Next</button>
+                                        </div>
+                                    </mat-step>
+
+                                    <mat-step [completed]="false" [stepControl]="FertilityIntentionsFormGroup"
+                                        [optional]="isOptionalObsGyn">
+                                        <ng-template matStepLabel>
+                                            <span matTooltip="Obs Gyn">
+                                                Obs Gyn
+                                            </span>
+                                        </ng-template>
+
+                                        <app-fertility-intention (notify)="onFertilityIntentionNotify($event)"
+                                            [FertilityIntentionsOptions]="FertilityIntentionsOptions"
+                                            [patientId]="patientId" [personId]="personId" [isEdit]="isEdit"
+                                            [patientMasterVisitId]="patientMasterVisitId">
+                                        </app-fertility-intention>
+
+                                        <app-pregnancy-outcome (notify)="onPregnancyOutcomeNotify($event)"
+                                            [PregnancyOutcomeOptions]="PregnancyOutcomeOptions" [patientId]="patientId"
+                                            [personId]="personId" [isEdit]="isEdit"
+                                            [patientMasterVisitId]="patientMasterVisitId">
+                                        </app-pregnancy-outcome>
+
+                                        <div>
+                                            <button mat-raised-button color="primary" (click)="onObsGynPrevious()"
+                                                type="button">Previous</button>
+                                            &nbsp;&nbsp;
+                                            <button mat-raised-button color="accent" matStepperNext
+                                                type="button">Next</button>
+                                        </div>
+                                    </mat-step>
+
+                                    <mat-step [completed]="false" [stepControl]="ChronicIllnessFormGroup">
+                                        <ng-template matStepLabel>
+                                            <span matTooltip="Chronic Conditions, Allergies, Adverse Events">
+                                                Chronic Conditions and Comorbidities
+                                            </span>
+                                        </ng-template>
+
+                                        <app-chronic-illnesses-table (notify)="onChroniIllnessNotify($event)"
+                                            [patientId]="patientId" [personId]="personId">
+                                        </app-chronic-illnesses-table>
+
+                                        <div class="row">&nbsp;</div>
+
+                                        <app-allergies-table (notify)="onAllergiesNotify($event)"
+                                            [patientId]="patientId" [personId]="personId">
+                                        </app-allergies-table>
+
+                                        <div class="row">&nbsp;</div>
+
+                                        <app-adverse-events-table (notify)="onAdverseEventsNotify($event)"
+                                            [patientId]="patientId" [personId]="personId">
+                                        </app-adverse-events-table>
+
+                                        <div class="row">&nbsp;</div>
+
+                                        <div>
+                                            <button mat-raised-button color="primary" matStepperPrevious
+                                                (click)="onVisitDetailsNext()" type="button">Previous</button>
+                                            &nbsp;&nbsp;
+                                            <button mat-raised-button color="accent" matStepperNext
+                                                type="button">Next</button>
+                                        </div>
+                                    </mat-step>
+
+                                    <mat-step [completed]="false" [stepControl]="LabInvestigationsFormGroup">
+                                        <ng-template matStepLabel>
+                                            <span matTooltip="Lab Investigations">
+                                                LAB Investigations
+                                            </span>
+                                        </ng-template>
+                                        <app-prep-labsgrid [patientId]="patientId"
+                                            (notify)="onLabInvestigations($event)">
+
+                                        </app-prep-labsgrid>
+                                        <div class="row">&nbsp;</div>
+
+                                        <div>
+                                            <button mat-raised-button color="primary" matStepperPrevious
+                                                type="button">Previous</button>
+                                            &nbsp;&nbsp;
+                                            <button mat-raised-button color="accent" matStepperNext
+                                                type="button">Next</button>
+                                        </div>
+                                    </mat-step>
+
+                                    <mat-step [completed]="false" [stepControl]="PrepStatusFormGroup">
+                                        <ng-template matStepLabel>
+                                            <span matTooltip="PrEP Status">
+                                                PrEP Status
+                                            </span>
+                                        </ng-template>
+
+                                        <app-prep-status (notify)="onPrepStatusNotify($event)"
+                                            [PrepStatusOptions]="PrepStatusOptions" [patientId]="patientId"
+                                            [personId]="personId" [isEdit]="isEdit" [Age]="Age"
+                                            [patientEncounterId]="patientEncounterId"
+                                            [patientMasterVisitId]="patientMasterVisitId"></app-prep-status>
+
+                                        <div>
+                                            <button mat-raised-button color="primary" matStepperPrevious
+                                                type="button">Previous</button>
+                                            &nbsp;&nbsp;
+                                            <button mat-raised-button color="accent" matStepperNext
+                                                type="button">Next</button>
+                                        </div>
+                                    </mat-step>
+
+                                    <mat-step [completed]="false" [stepControl]="AppointmentFormGroup">
+                                        <ng-template matStepLabel>
+                                            <span matTooltip="Next Appointment">
+                                                Appointment
+                                            </span>
+                                        </ng-template>
+
+                                        <app-prep-appointment (notify)="onPrepAppointmentNotify($event)"
+                                            [PrepAppointmentOptions]="PrepAppointmentOptions" [patientId]="patientId"
+                                            [personId]="personId" [isEdit]="isEdit"
+                                            [patientMasterVisitId]="patientMasterVisitId">
+                                        </app-prep-appointment>
+
+                                        <div>
+                                            <button mat-raised-button color="primary" matStepperPrevious
+                                                type="button">Previous</button>
+                                            &nbsp;&nbsp;
+                                            <button mat-raised-button color="accent" type="submit"
+                                                (click)="onSubmitForm()">
+                                                Complete PrEP FollowUp Visit
+                                            </button>
+                                        </div>
+                                    </mat-step>
+                                </mat-horizontal-stepper>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

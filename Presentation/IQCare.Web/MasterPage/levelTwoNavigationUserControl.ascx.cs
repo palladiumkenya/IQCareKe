@@ -352,6 +352,7 @@ namespace IQCare.Web.MasterPage
                 if (item.Value == value)
                 {
                     rmvMenuItem.Add(item);
+                    
                 }
             }
 

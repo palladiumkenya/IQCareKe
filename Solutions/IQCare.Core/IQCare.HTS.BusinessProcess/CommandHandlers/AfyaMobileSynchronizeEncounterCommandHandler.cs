@@ -51,7 +51,16 @@ namespace IQCare.HTS.BusinessProcess.CommandHandlers
                     //check if person already exists
                     var identifiers = await registerPersonService.getPersonIdentifiers(afyaMobileId, 10);
                     //Encounter
-                    DateTime encounterDate = DateTime.ParseExact(request.PRE_TEST.ENCOUNTER_DATE, "yyyyMMdd", null);
+                    DateTime encounterDate = DateTime.Now;
+                    try
+                    {
+                        encounterDate = DateTime.ParseExact(request.PRE_TEST.ENCOUNTER_DATE, "yyyyMMdd", null);
+                    }
+                    catch (Exception e)
+                    {
+                        Log.Error($"Could not parse HTS_EncounterDate: {request.PRE_TEST.ENCOUNTER_DATE} as a valid date: Incorrect format, date should be in the following format yyyyMMdd");
+                        throw new Exception($"Could not parse HTS_EncounterDate: {request.PRE_TEST.ENCOUNTER_DATE} as a valid date: Incorrect format, date should be in the following format yyyyMMdd");
+                    }
                     string htsEncounterRemarks = request.PRE_TEST.REMARKS;
                     int clientEverTested = request.PRE_TEST.EVER_TESTED;
                     int clientEverSelfTested = request.PRE_TEST.SELF_TEST_12_MONTHS;
@@ -153,7 +162,7 @@ namespace IQCare.HTS.BusinessProcess.CommandHandlers
                     }
 
                     //update message has been processed
-                    await registerPersonService.UpdateAfyaMobileInbox(afyaMobileMessage.Id, afyaMobileId, true, DateTime.Now, "success", true);
+                    await registerPersonService.UpdateAfyaMobileInbox(afyaMobileMessage.Id, afyaMobileId, true, DateTime.Now, $"Successfully synchronized HTS encounter for afyamobileid: {afyaMobileId}", true);
                     trans.Commit();
                     return Result<string>.Valid($"Successfully synchronized HTS encounter for afyamobileid: {afyaMobileId}");
                 }

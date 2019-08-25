@@ -1,12 +1,18 @@
 import { LookupItemView } from './../../../shared/_models/LookupItemView';
 import { HeiService } from './../../_services/hei.service';
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
+import {
+    FormBuilder,
+    FormGroup,
+    FormControl,
+    Validators
+} from '@angular/forms';
 import { NotificationService } from '../../../shared/_services/notification.service';
 import { SnotifyService } from 'ng-snotify';
 import { MatDialogConfig, MatDialog } from '@angular/material';
 import { InlineSearchComponent } from '../../../records/inline-search/inline-search.component';
 import { RecordsService } from '../../../records/_services/records.service';
+import {DataService} from '../../_services/data.service';
 
 @Component({
     selector: 'app-maternalhistory',
@@ -23,7 +29,6 @@ export class MaternalhistoryComponent implements OnInit {
     motherdrugsatinfantenrollmentOptions: any[] = [];
     primarycaregiverOptions: any[] = [];
 
-
     isMotherRegistered: boolean = false;
 
     @Input('maternalhistoryOptions') maternalhistoryOptions: any;
@@ -35,26 +40,37 @@ export class MaternalhistoryComponent implements OnInit {
 
     public cccPattern = /^((?!(0))[0-9]{10})$/;
 
-    constructor(private _formBuilder: FormBuilder,
+    constructor(
+        private _formBuilder: FormBuilder,
         private notificationService: NotificationService,
         private snotifyService: SnotifyService,
         private dialog: MatDialog,
         private heiservice: HeiService,
-        private recordsService: RecordsService) { }
+        private recordsService: RecordsService,
+        private dataservice: DataService
+    ) {}
 
     ngOnInit() {
         this.MaternalHistoryForm = this._formBuilder.group({
-            motherregisteredinclinic: new FormControl('', [Validators.required]),
+            motherregisteredinclinic: new FormControl('', [
+                Validators.required
+            ]),
             stateofmother: new FormControl('', [Validators.required]),
             primarycaregiver: new FormControl('', [Validators.required]),
             nameofmother: new FormControl('', [Validators.required]),
             motherpersonid: new FormControl('0'),
             cccno: new FormControl(''),
-            pmtctheimotherreceivedrugs: new FormControl('', [Validators.required]),
+            pmtctheimotherreceivedrugs: new FormControl('', [
+                Validators.required
+            ]),
             pmtctheimotherregimen: new FormControl('', [Validators.required]),
             otherspecify: new FormControl('', [Validators.required]),
-            motheronartatinfantenrollment: new FormControl('', [Validators.required]),
-            pmtctheimotherdrugsatinfantenrollment: new FormControl('', [Validators.required]),
+            motheronartatinfantenrollment: new FormControl('', [
+                Validators.required
+            ]),
+            pmtctheimotherdrugsatinfantenrollment: new FormControl('', [
+                Validators.required
+            ]),
             id: new FormControl('')
         });
 
@@ -64,7 +80,8 @@ export class MaternalhistoryComponent implements OnInit {
             heimotherregimenOptions,
             yesnoOptions,
             motherdrugsatinfantenrollmentOptions,
-            primarycaregiverOptions } = this.maternalhistoryOptions[0];
+            primarycaregiverOptions
+        } = this.maternalhistoryOptions[0];
         this.motherstateOptions = motherstateOptions;
         this.motherreceivedrugsOptions = motherreceivedrugsOptions;
         this.heimotherregimenOptions = heimotherregimenOptions;
@@ -74,63 +91,118 @@ export class MaternalhistoryComponent implements OnInit {
 
         this.notify.emit(this.MaternalHistoryForm);
 
-        if (this.isEdit) {
-            this.loadMaternalHistory();
-        }
+        this.loadMaternalHistory();
     }
 
     loadMaternalHistory(): void {
-        this.heiservice.getHeiDelivery(this.patientId, this.patientMasterVisitId).subscribe(
-            (result) => {
+        this.heiservice.getHeiDelivery(this.patientId).subscribe(
+            result => {
                 for (let i = 0; i < result.length; i++) {
-                    const isMotherRegistered = result[i].motherRegisteredId ? 'Yes' : 'No';
-                    const yesNoOption = this.yesnoOptions.filter(obj => obj.itemName == isMotherRegistered);
-                    this.MaternalHistoryForm.get('motherregisteredinclinic').setValue(yesNoOption[0].itemId);
-                    this.MaternalHistoryForm.get('stateofmother').setValue(result[i].motherStatusId);
-                    this.MaternalHistoryForm.get('primarycaregiver').setValue(result[i].primaryCareGiverID);
-                    this.MaternalHistoryForm.get('nameofmother').setValue(result[i].motherName);
+                    const isMotherRegistered = result[i].motherRegisteredId
+                        ? 'Yes'
+                        : 'No';
+                    const yesNoOption = this.yesnoOptions.filter(
+                        obj => obj.itemName == isMotherRegistered
+                    );
+                    this.MaternalHistoryForm.get(
+                        'motherregisteredinclinic'
+                    ).setValue(yesNoOption[0].itemId);
+                    this.MaternalHistoryForm.get('stateofmother').setValue(
+                        result[i].motherStatusId
+                    );
+                    this.MaternalHistoryForm.get('primarycaregiver').setValue(
+                        result[i].primaryCareGiverID
+                    );
+                    this.MaternalHistoryForm.get('nameofmother').setValue(
+                        result[i].motherName
+                    );
+                    this.dataservice.motherHasBeenSet(result[i].motherPersonId);
                     this.MaternalHistoryForm.get('motherpersonid').setValue(result[i].motherPersonId);
-                    this.MaternalHistoryForm.get('cccno').setValue(result[i].motherCCCNumber);
-                    this.MaternalHistoryForm.get('pmtctheimotherreceivedrugs').setValue(result[i].motherPMTCTDrugsId);
-                    this.MaternalHistoryForm.get('pmtctheimotherregimen').setValue(result[i].motherPMTCTRegimenId);
-                    this.MaternalHistoryForm.get('otherspecify').setValue(result[i].motherPMTCTRegimenOther);
-                    this.MaternalHistoryForm.get('motheronartatinfantenrollment').setValue(result[i].motherArtInfantEnrolId);
-                    this.MaternalHistoryForm.get('pmtctheimotherdrugsatinfantenrollment').setValue(result[i].motherArtInfantEnrolRegimenId);
+                    this.MaternalHistoryForm.get('cccno').setValue(
+                        result[i].motherCCCNumber
+                    );
+                    this.MaternalHistoryForm.get(
+                        'pmtctheimotherreceivedrugs'
+                    ).setValue(result[i].motherPMTCTDrugsId);
+                    this.MaternalHistoryForm.get(
+                        'pmtctheimotherregimen'
+                    ).setValue(result[i].motherPMTCTRegimenId);
+                    this.MaternalHistoryForm.get('otherspecify').setValue(
+                        result[i].motherPMTCTRegimenOther
+                    );
+                    this.MaternalHistoryForm.get(
+                        'motheronartatinfantenrollment'
+                    ).setValue(result[i].motherArtInfantEnrolId);
+                    this.MaternalHistoryForm.get(
+                        'pmtctheimotherdrugsatinfantenrollment'
+                    ).setValue(result[i].motherArtInfantEnrolRegimenId);
                     this.MaternalHistoryForm.get('id').setValue(result[i].id);
                 }
             },
-            (error) => { },
-            () => { }
+            error => {},
+            () => {}
         );
     }
 
     onMotherReceivedDrugsChange(event) {
-        if (event.isUserInput && event.source.selected && event.source.viewValue == 'Other') {
-            this.MaternalHistoryForm.controls['otherspecify'].enable({ onlySelf: false });
+        if (
+            event.isUserInput &&
+            event.source.selected &&
+            event.source.viewValue == 'Other'
+        ) {
+            this.MaternalHistoryForm.controls['otherspecify'].enable({
+                onlySelf: false
+            });
         } else if (event.source.selected) {
-            this.MaternalHistoryForm.controls['otherspecify'].disable({ onlySelf: true });
+            this.MaternalHistoryForm.controls['otherspecify'].disable({
+                onlySelf: true
+            });
         }
 
-        if (event.isUserInput && event.source.selected && event.source.viewValue == 'HAART') {
-            this.MaternalHistoryForm.controls['pmtctheimotherregimen'].enable({ onlySelf: false });
+        if (
+            event.isUserInput &&
+            event.source.selected &&
+            event.source.viewValue == 'HAART'
+        ) {
+            this.MaternalHistoryForm.controls['pmtctheimotherregimen'].enable({
+                onlySelf: false
+            });
         } else if (event.source.selected) {
-            this.MaternalHistoryForm.controls['pmtctheimotherregimen'].disable();
+            this.MaternalHistoryForm.controls[
+                'pmtctheimotherregimen'
+            ].disable();
         }
     }
 
     onMotherOnArtAtInfantEnrollmentChange(event) {
-        if (event.isUserInput && event.source.selected && event.source.viewValue == 'Yes') {
-            this.MaternalHistoryForm.controls['pmtctheimotherdrugsatinfantenrollment'].enable({ onlySelf: false });
+        if (
+            event.isUserInput &&
+            event.source.selected &&
+            event.source.viewValue == 'Yes'
+        ) {
+            this.MaternalHistoryForm.controls[
+                'pmtctheimotherdrugsatinfantenrollment'
+            ].enable({ onlySelf: false });
         } else if (event.source.selected) {
-            this.MaternalHistoryForm.controls['pmtctheimotherdrugsatinfantenrollment'].disable();
+            this.MaternalHistoryForm.controls[
+                'pmtctheimotherdrugsatinfantenrollment'
+            ].disable();
         }
     }
 
     onMotherRegisteredInClinicChange(event) {
-        if (event.isUserInput && event.source.selected && event.source.viewValue == 'Yes') {
+        if (
+            event.isUserInput &&
+            event.source.selected &&
+            event.source.viewValue == 'Yes'
+        ) {
             this.isMotherRegistered = true;
             // this.MaternalHistoryForm.controls.nameofmother.disable({ onlySelf: true });
-        } else if (event.isUserInput && event.source.selected && event.source.viewValue == 'No') {
+        } else if (
+            event.isUserInput &&
+            event.source.selected &&
+            event.source.viewValue == 'No'
+        ) {
             // this.MaternalHistoryForm.controls.nameofmother.enable({ onlySelf: false });
             this.isMotherRegistered = false;
         }
@@ -148,40 +220,43 @@ export class MaternalhistoryComponent implements OnInit {
             gender: 'female'
         };
 
-
         const dialogRef = this.dialog.open(InlineSearchComponent, dialogConfig);
 
+        dialogRef.afterClosed().subscribe(data => {
+            if (!data) {
+                return;
+            }
 
-        dialogRef.afterClosed().subscribe(
-            data => {
-                if (!data) {
-                    return;
-                }
+            const firstName = data[0]['firstName'] ? data[0]['firstName'] : '';
+            const middleName = data[0]['middleName']
+                ? data[0]['middleName']
+                : '';
+            const lastName = data[0]['lastName'] ? data[0]['lastName'] : '';
 
-                console.log(data);
-                const firstName = data[0]['firstName'] ? data[0]['firstName'] : '';
-                const middleName = data[0]['middleName'] ? data[0]['middleName'] : '';
-                const lastName = data[0]['lastName'] ? data[0]['lastName'] : '';
-
-                const mothernames = firstName + ' ' + middleName + ' ' + lastName;
-                this.isMotherRegistered = false;
-                this.MaternalHistoryForm.controls.nameofmother.setValue(mothernames);
-                this.MaternalHistoryForm.controls.motherpersonid.setValue(data[0]['id']);
-                if (data[0]['patientId']) {
-                    this.recordsService.getPatientIdentifiersList(data[0]['patientId']).subscribe(
-                        (res) => {
-                            console.log(res);
-                            if (res.length > 0) {
-                                for (let i = 0; i < res.length; i++) {
-                                    if (res[i]['identifierTypeId'] == 1) {
-                                        this.MaternalHistoryForm.controls.cccno.setValue(res[i]['identifierValue']);
-                                    }
+            const mothernames = firstName + ' ' + middleName + ' ' + lastName;
+            this.isMotherRegistered = false;
+            this.MaternalHistoryForm.controls.nameofmother.setValue(
+                mothernames
+            );
+            this.MaternalHistoryForm.controls.motherpersonid.setValue(
+                data[0]['id']
+            );
+            this.dataservice.motherHasBeenSet(data[0]['id']);
+            if (data[0]['patientId']) {
+                this.recordsService
+                    .getPatientIdentifiersList(data[0]['patientId'])
+                    .subscribe(res => {
+                        if (res.length > 0) {
+                            for (let i = 0; i < res.length; i++) {
+                                if (res[i]['identifierTypeId'] == 1) {
+                                    this.MaternalHistoryForm.controls.cccno.setValue(
+                                        res[i]['identifierValue']
+                                    );
                                 }
                             }
                         }
-                    );
-                }
+                    });
             }
-        );
+        });
     }
 }

@@ -1,3 +1,4 @@
+import { HivReConfirmatoryTestsCommand } from './../../dashboard/_model/HivReConfirmatoryTestsCommand';
 
 import { of as observableOf, Observable } from 'rxjs';
 import { PersonDetails } from './../_models/persondetails';
@@ -11,6 +12,7 @@ import { Person } from '../_models/person';
 import { PersonPopulation } from '../_models/personPopulation';
 import { ErrorHandlerService } from '../../shared/_services/errorhandler.service';
 import { PersonPopulationDetails } from '../_models/personpopulationdetails';
+import { ServiceEntryPointCommand } from '../../dashboard/_model/ServiceEntryPointCommand';
 
 const httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -233,8 +235,75 @@ export class RegistrationService {
             );
     }
 
+    public addPatientARVHistory(patientId: number, serviceId: number, treatmentType: string,
+        purpose: string, regimen: string, createdby: number, deleteflag: boolean
+        , months: number, initiationDate?: Date, datelastused?: Date) {
+        const Indata = {
+            PatientId: patientId,
+            ServiceId: serviceId,
+            TreatmentType: treatmentType,
+            Purpose: purpose,
+            Regimen: regimen,
+            DeleteFlag: deleteflag,
+            CreatedBy: createdby,
+            Months: months,
+            InitiationDate: initiationDate,
+            DateLastUsed: datelastused
+
+        }
+        return this.http.post<any>(this.API_URL + this._url + '/addPatientARVHistory', JSON.stringify(Indata), httpOptions).pipe(
+            tap((addPatientARVHistory: any) => this.errorHandler.log(`added patient ARV history w/ id`)),
+            catchError(this.errorHandler.handleError<any>('addPatientARVHistory'))
+        );
+
+    }
+
+    public addPatientTransferIn(patientId: number, serviceId: number, transferInDate: Date,
+        treatmentstartdate: Date, currenttreatment: string, facilityfrom: string
+        , mflcode: number, countyfrom: string, transferinnotes: string, createdby: number, deleteflag: boolean) {
+        const Indata = {
+            PatientId: patientId,
+            ServiceId: serviceId,
+            TransferInDate: transferInDate,
+            TreatmentStartDate: treatmentstartdate,
+            CurrentTreatment: currenttreatment,
+            FacilityFrom: facilityfrom,
+            MflCode: mflcode,
+            CountyFrom: countyfrom,
+            TransferInNotes: transferinnotes,
+            CreatedBy: createdby,
+            DeleteFlag: deleteflag
+        }
+        return this.http.post<any>(this.API_URL + this._url + '/addPatientTransferIn', JSON.stringify(Indata), httpOptions).pipe(
+            tap((addPatientTransferIn: any) => this.errorHandler.log(`added patient transfer in details w/ id`)),
+            catchError(this.errorHandler.handleError<any>('addPatientTransferIn'))
+        );
+
+    }
+
+    public addPatientOvcStatus(personId: number, orphan: number, inschool: number,
+        active: boolean, deleteflag: boolean, createdby: number) {
+
+        const Indata = {
+            PersonId: personId,
+            Orphan: orphan,
+            InSchool: inschool,
+            Active: active,
+            Deleteflag: deleteflag,
+            CreatedBy: createdby
+        }
+        return this.http.post<any>(this.API_URL + this._url + '/addPatientOVCStatus', JSON.stringify(Indata), httpOptions).pipe(
+            tap((addPatientOVCStatus: any) => this.errorHandler.log(`added patient OVC status in details w/ id`)),
+            catchError(this.errorHandler.handleError<any>('addPatientOVCStatus'))
+        );
+
+
+    }
+
+
+
     public addPersonPopulationType(personId: number, userId: number, populations: PersonPopulation): Observable<any> {
-        console.log(populations);
+        // console.log(populations);
         const pops = [];
         let priority = [];
         if (populations.populationType == 1) {
@@ -243,7 +312,8 @@ export class RegistrationService {
                 PopulationCategory: 0
             };
             pops.push(item);
-        } else {
+        }
+        if (populations.populationType == 2) {
             for (let i = 0; i < populations.KeyPopulation.length; i++) {
                 const item = {
                     PopulationType: 'Key Population',
@@ -252,6 +322,17 @@ export class RegistrationService {
                 pops.push(item);
             }
         }
+
+        if (populations.populationType == 3) {
+            
+                const item = {
+                    PopulationType: 'Discordant Couple',
+                    PopulationCategory: 0
+                };
+                pops.push(item);
+            
+        }
+
 
         if (populations.priorityPop === 1) {
             priority = populations.priorityPopulation.map(priorityId => ({ priorityId }));
@@ -268,5 +349,26 @@ export class RegistrationService {
             tap((addPersonPopulationType: any) => this.errorHandler.log(`added person population type`)),
             catchError(this.errorHandler.handleError<any>('addPersonPopulationType'))
         );
+    }
+
+    public addServiceEntryPoint(serviceEntryPoint: ServiceEntryPointCommand): Observable<any> {
+        return this.http.post<any>(this.API_URL + '/api/Register/postServiceEntryPoint',
+            JSON.stringify(serviceEntryPoint), httpOptions).pipe(
+                tap((addServiceEntryPoint: any) => this.errorHandler.log(`added service entry point`)),
+                catchError(this.errorHandler.handleError<any>('addServiceEntryPoint'))
+            );
+    }
+
+
+
+    public addReConfirmatoryTest(hivReConfirmatoryTests: HivReConfirmatoryTestsCommand): Observable<any> {
+        if (!hivReConfirmatoryTests.TypeOfTest) {
+            return observableOf([]);
+        }
+        return this.http.post<any>(this.API_URL + '/api/Register/postConfirmatoryTests',
+            JSON.stringify(hivReConfirmatoryTests), httpOptions).pipe(
+                tap((addReConfirmatoryTest: any) => this.errorHandler.log(`added re-confirmatory test`)),
+                catchError(this.errorHandler.handleError<any>('addReConfirmatoryTest'))
+            );
     }
 }

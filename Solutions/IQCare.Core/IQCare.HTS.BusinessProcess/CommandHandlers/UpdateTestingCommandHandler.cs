@@ -48,6 +48,19 @@ namespace IQCare.HTS.BusinessProcess.CommandHandlers
                             _unitOfWork.Repository<HtsEncounterResult>().Update(htsEncounterResults[0]);
                             await _unitOfWork.SaveAsync();
                         }
+                        else
+                        {
+                            HtsEncounterResult htsEncounterResult = new HtsEncounterResult()
+                            {
+                                EncounterResultRemarks = request.FinalResultsRemarks,
+                                FinalResult = request.FinalResult,
+                                HtsEncounterId = request.HtsEncounterId,
+                                RoundOneTestResult = request.RoundOneTestResult,
+                                RoundTwoTestResult = request.RoundTwoTestResult
+                            };
+                            await _unitOfWork.Repository<HtsEncounterResult>().AddAsync(htsEncounterResult);
+                            await _unitOfWork.SaveAsync();
+                        }
 
                         return Result<UpdateTestingResponse>.Valid(new UpdateTestingResponse()
                         {

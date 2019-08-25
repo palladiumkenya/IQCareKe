@@ -27,6 +27,8 @@ namespace IQCare.HTS.BusinessProcess.Commands
         public int Mode { get; set; }
         public int Outcome { get; set; }
         public int TracingType { get; set; }
+        public int ReasonNotContacted { get; set; }
+        public string OtherReasonSpecify { get; set; }
     }
 
     public class ReferPatientResponse

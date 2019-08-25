@@ -36,6 +36,13 @@
             <mat-error *ngIf="!form.controls['hivResult'].valid">Please select Hiv Result</mat-error>
         </mat-form-field>
 
+        <mat-form-field>
+            <mat-select placeholder="Syphilis Result" formControlName="syphilis" required>
+                <mat-option value=""></mat-option>
+                <mat-option *ngFor="let option of syphilisResults" [value]="option">{{option.itemName}}</mat-option>
+            </mat-select>
+        </mat-form-field>
+
     </mat-dialog-content>
 
     <mat-dialog-actions>

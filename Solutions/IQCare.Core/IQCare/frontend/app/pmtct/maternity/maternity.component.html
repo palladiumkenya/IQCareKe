@@ -1,4 +1,12 @@
 <div class="row">
+    <app-personbrief [personId]="personId"></app-personbrief>
+</div>
+
+<div class="row">
+    &nbsp;
+</div>
+
+<div class="row">
     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
         <div class="row">
             <div class="col-lg-12 col-sm-6 col-xs-12">
@@ -21,8 +29,8 @@
                                         <app-mother-profile [patientId]="patientId" [visitDate]="visitDate"
                                             (notify)="OnMotherProfileNotify($event)"></app-mother-profile>
                                         <div>
-                                            <button mat-raised-button color="accent" matStepperNext type="button"
-                                                (click)="log()">Next</button>
+                                            <button mat-raised-button color="accent" matStepperNext
+                                                type="button">Next</button>
                                         </div>
                                     </mat-step>
                                     <mat-step [completed]="false" [stepControl]="diagnosisFormGroup">
@@ -72,8 +80,8 @@
                                             <button mat-raised-button color="primary" matStepperPrevious
                                                 type="button">Previous</button>
                                             &nbsp;&nbsp;
-                                            <button mat-raised-button color="accent" (click) ="validateBabyDetails(stepper)"
-                                                type="button">Next</button>
+                                            <button mat-raised-button color="accent"
+                                                (click)="validateBabyDetails(stepper)" type="button">Next</button>
                                         </div>
                                     </mat-step>
 
@@ -82,7 +90,8 @@
                                             <span matTooltip="Maternity Tests">Maternity Tests</span>
                                         </ng-template>
                                         <app-mternity-tests [maternityTestOptions]="maternityTestOptions"
-                                            [personId]="personId" (notify)="onMaternityTests($event)">
+                                            [personId]="personId" [patientId]="patientId" [patientEncounterId]="patientEncounterId"
+                                            [patientMasterVisitId]="patientMasterVisitId" (notify)="onMaternityTests($event)">
                                         </app-mternity-tests>
 
                                         <div>

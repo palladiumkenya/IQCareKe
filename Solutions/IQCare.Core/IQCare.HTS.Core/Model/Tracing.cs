@@ -21,5 +21,8 @@ namespace IQCare.HTS.Core.Model
         public int? Consent { get; set; }
         public DateTime? ReminderDate { get; set; }
         public DateTime? DateBookedTesting { get; set; }
+
+        public int? ReasonNotContacted { get; set; }
+        public string OtherReasonSpecify { get; set; }
     }
 }

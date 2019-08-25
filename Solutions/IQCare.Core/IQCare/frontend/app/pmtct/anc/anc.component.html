@@ -1,4 +1,12 @@
 <div class="row">
+    <app-personbrief [personId]="personId"></app-personbrief>
+</div>
+
+<div class="row">
+    &nbsp;
+</div>
+
+<div class="row">
     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
         <div class="row">
             <div class="col-lg-12 col-sm-6 col-xs-12">
@@ -99,7 +107,7 @@
                                                 HAART | Prophylaxis
                                             </span>
                                         </ng-template>
-                                        <app-haart-prophylaxis [visitDate]="visitDate" [haartProphylaxisOptions]="haartProphylaxisOptions"
+                                        <app-haart-prophylaxis [haartProphylaxisOptions]="haartProphylaxisOptions"
                                             (notify)="onHaartProphylaxisNotify($event)" [isEdit]="isEdit"
                                             [patientId]="patientId" [patientMasterVisitId]="visitId">
                                         </app-haart-prophylaxis>

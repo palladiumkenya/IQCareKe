@@ -26,14 +26,14 @@ namespace IQCare.PMTCT.BusinessProcess.CommandHandlers.HeiDeliveryMaternalHistor
                 try
                 {
                     var result = await _unitOfWork.Repository<HEIEncounter>().Get(x =>
-                        x.PatientId == request.PatientId && x.PatientMasterVisitId == request.PatientMasterVisitId &&
+                        x.PatientId == request.PatientId &&
                         x.DeleteFlag == false).ToListAsync();
 
                     return Result<List<HEIEncounter>>.Valid(result);
                 }
                 catch (Exception e)
                 {
-                    Log.Error($"Error fetching HeiEncounter for PatientId: {request.PatientId} and PatientMasterVisitId: {request.PatientMasterVisitId}");
+                    Log.Error($"Error fetching HeiEncounter for PatientId: {request.PatientId}");
                     return Result<List<HEIEncounter>>.Invalid(e.Message);
                 }
             }

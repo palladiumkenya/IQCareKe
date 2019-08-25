@@ -1,0 +1,8 @@
+If Not Exists(Select 1 From LookupMaster where Name='PREPVisitType') Begin INSERT INTO LookupMaster (Name, DisplayName, DeleteFlag) VALUES ('PREPVisitType','PREPVisitType',0); End
+
+-- lookupitem
+If Not Exists(Select 1 From LookupItem where Name='InitialPREPVisit') Begin INSERT INTO LookupItem (Name, DisplayName, DeleteFlag) VALUES ('InitialPREPVisit','Initial  Visit',0); End
+If Not Exists(Select 1 From LookupItem where Name='FollowUpPREPVisit') Begin INSERT INTO LookupItem (Name, DisplayName, DeleteFlag) VALUES ('FollowUpPREPVisit','Follow Up Visit',0); End
+-- LookupMasterItem
+If Not Exists(Select 1 From LookupMasterItem where LookupMasterId=(SELECT TOP 1 Id FROM LookupMaster WHERE Name='PREPVisitType') and LookupItemId=(SELECT TOP 1 Id FROM LookupItem WHERE Name='InitialPREPVisit')) Begin Insert Into LookupMasterItem(LookupMasterId ,LookupItemId,DisplayName, OrdRank)VALUES((SELECT TOP 1 Id FROM LookupMaster WHERE Name='PREPVisitType'),(SELECT TOP 1 Id FROM LookupItem WHERE Name='InitialPREPVisit'),'Initial  Visit',1); end
+If Not Exists(Select 1 From LookupMasterItem where LookupMasterId=(SELECT TOP 1 Id FROM LookupMaster WHERE Name='PREPVisitType') and LookupItemId=(SELECT TOP 1 Id FROM LookupItem WHERE Name='FollowUpPREPVisit')) Begin Insert Into LookupMasterItem(LookupMasterId ,LookupItemId,DisplayName, OrdRank)VALUES((SELECT TOP 1 Id FROM LookupMaster WHERE Name='PREPVisitType'),(SELECT TOP 1 Id FROM LookupItem WHERE Name='FollowUpPREPVisit'),'Follow Up Visit',2); end 

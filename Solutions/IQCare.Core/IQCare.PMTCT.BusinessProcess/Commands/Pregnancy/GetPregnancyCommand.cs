@@ -20,6 +20,7 @@ namespace IQCare.PMTCT.BusinessProcess.Commands.Pregnancy
         public int? Parity2 { get; set; }
         public int? Outcome { get; set; }
         public DateTime? DateOfOutcome { get; set; }
+        public decimal? AgeAtMenarche { get; set; }
     }
 
     public class GetPregnancyCommand: IRequest<Result<PregnancyViewModel>>

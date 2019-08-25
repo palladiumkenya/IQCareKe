@@ -64,7 +64,7 @@ export class TestingEditComponent implements OnInit {
             finalResultsRemarks: new FormControl()
         });
 
-        // this.form.get('finalResult').disable({ onlySelf: false });
+        // this.form.controls.finalResult.disable({ onlySelf: true });
 
         this._encounterService.getCustomOptions().subscribe(data => {
             const options = data['lookupItems'];
@@ -104,8 +104,11 @@ export class TestingEditComponent implements OnInit {
                     // testedAs
                     if (this.isCoupleDiscordantDisabled) {
                         this.form.get('coupleDiscordant').disable({ onlySelf: true });
+                        this.form.get('coupleDiscordant').clearValidators();
+                        this.form.get('coupleDiscordant').updateValueAndValidity();
+                    } else {
+                        this.form.get('coupleDiscordant').setValue(htsResults[0].coupleDiscordant);
                     }
-                    this.form.get('coupleDiscordant').setValue(htsResults[0].coupleDiscordant);
                 }
 
                 if (consentToListPartners.length > 0) {
@@ -117,7 +120,9 @@ export class TestingEditComponent implements OnInit {
     }
 
     onSubmit() {
-        // console.log(this.form.value);
+        if (!this.form.valid) {
+            return false;
+        }
         const coupleDiscordant = this.form.value['coupleDiscordant'] != undefined ? this.form.value['coupleDiscordant'] : '';
         const finalResultGiven = this.form.value['finalResultGiven'] != undefined ? this.form.value['finalResultGiven'] : '';
         const finalResultHiv1 = this.form.value['finalResultHiv1'] != undefined ? this.form.value['finalResultHiv1'] : '';
@@ -165,6 +170,8 @@ export class TestingEditComponent implements OnInit {
     onAcceptedToListPartnersChange(event) {
         if (event.isUserInput && event.source.selected && (event.source.viewValue == 'Yes' || event.source.viewValue == 'N/A')) {
             this.form.get('reasonsDeclinePartnerListing').disable({ onlySelf: false });
+            this.form.get('reasonsDeclinePartnerListing').clearValidators();
+            this.form.get('reasonsDeclinePartnerListing').updateValueAndValidity();
         } else if (event.isUserInput && event.source.selected && event.source.viewValue == 'No') {
             this.form.get('reasonsDeclinePartnerListing').enable({ onlySelf: false });
             this.form.get('reasonsDeclinePartnerListing').setValue('');
@@ -172,18 +179,70 @@ export class TestingEditComponent implements OnInit {
     }
 
     onHivResultsChange(event) {
+        const positiveClient = this.hivFinalResultsOptions.filter(obj => obj.itemName == 'Positive');
+        const negativeClient = this.hivFinalResultsOptions.filter(obj => obj.itemName == 'Negative');
+        const inconclusiveClient = this.hivFinalResultsOptions.filter(obj => obj.itemName == 'Inconclusive');
+
         if (event.isUserInput && event.source.selected) {
             const resultVal = this.hivResultsOptions.filter(obj => obj.itemId == event.source.value);
             if (resultVal.length > 0) {
-                // console.log(finalResultHiv1);
                 if (resultVal[0].itemName == 'Invalid') {
+                    this.form.controls.finalResultHiv1.setValue('');
                     this.snotifyService.info('You should not update a final result to Invalid.', 'Testing',
                         this.notificationService.getConfig());
                     return;
+                } else {
+                    const finalResultHiv2 = this.form.controls.finalResultHiv2.value;
+                    const selectedFinalResult2 = this.hivResultsOptions.filter(obj => obj.itemId == finalResultHiv2);
+                    if (selectedFinalResult2.length > 0) {
+                        if (selectedFinalResult2[0].itemName == 'Positive' && event.source.viewValue == 'Positive') {
+                            this.form.controls.finalResult.setValue(positiveClient[0].itemId);
+                        } else if (selectedFinalResult2[0].itemName == 'Positive' && event.source.viewValue == 'Negative') {
+                            this.form.controls.finalResult.setValue(inconclusiveClient[0].itemId);
+                        } else if (selectedFinalResult2[0].itemName == 'Negative' && event.source.viewValue == 'Positive') {
+                            this.form.controls.finalResult.setValue(inconclusiveClient[0].itemId);
+                        } else if (selectedFinalResult2[0].itemName == 'Positive' && event.source.viewValue == 'Positive') {
+                            this.form.controls.finalResult.setValue(positiveClient[0].itemId);
+                        } else if (selectedFinalResult2[0].itemName == 'Negative' && event.source.viewValue == 'Negative') {
+                            this.form.controls.finalResult.setValue(negativeClient[0].itemId);
+                        }
+                    }
                 }
             }
-            // console.log(this.form.get('finalResultHiv1').value);
-            // console.log(this.form.get('finalResultHiv2').value);
+        }
+    }
+
+    onHivResults2Change(event) {
+        const positiveClient = this.hivFinalResultsOptions.filter(obj => obj.itemName == 'Positive');
+        const negativeClient = this.hivFinalResultsOptions.filter(obj => obj.itemName == 'Negative');
+        const inconclusiveClient = this.hivFinalResultsOptions.filter(obj => obj.itemName == 'Inconclusive');
+
+        if (event.isUserInput && event.source.selected) {
+            const resultVal = this.hivResultsOptions.filter(obj => obj.itemId == event.source.value);
+            if (resultVal.length > 0) {
+                if (resultVal[0].itemName == 'Invalid') {
+                    this.form.controls.finalResultHiv2.setValue('');
+                    this.snotifyService.info('You should not update a final result to Invalid.', 'Testing',
+                        this.notificationService.getConfig());
+                    return;
+                } else {
+                    const finalResultHiv2 = this.form.controls.finalResultHiv1.value;
+                    const selectedFinalResult2 = this.hivResultsOptions.filter(obj => obj.itemId == finalResultHiv2);
+                    if (selectedFinalResult2.length > 0) {
+                        if (selectedFinalResult2[0].itemName == 'Positive' && event.source.viewValue == 'Positive') {
+                            this.form.controls.finalResult.setValue(positiveClient[0].itemId);
+                        } else if (selectedFinalResult2[0].itemName == 'Positive' && event.source.viewValue == 'Negative') {
+                            this.form.controls.finalResult.setValue(inconclusiveClient[0].itemId);
+                        } else if (selectedFinalResult2[0].itemName == 'Negative' && event.source.viewValue == 'Positive') {
+                            this.form.controls.finalResult.setValue(inconclusiveClient[0].itemId);
+                        } else if (selectedFinalResult2[0].itemName == 'Positive' && event.source.viewValue == 'Positive') {
+                            this.form.controls.finalResult.setValue(positiveClient[0].itemId);
+                        } else if (selectedFinalResult2[0].itemName == 'Negative' && event.source.viewValue == 'Negative') {
+                            this.form.controls.finalResult.setValue(negativeClient[0].itemId);
+                        }
+                    }
+                }
+            }
         }
     }
 }

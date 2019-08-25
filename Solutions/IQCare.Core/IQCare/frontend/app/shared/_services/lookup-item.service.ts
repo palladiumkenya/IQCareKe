@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
 import { environment } from '../../../environments/environment';
 import { ErrorHandlerService } from './errorhandler.service';
@@ -35,7 +35,11 @@ export class LookupItemService {
     }
 
     public getByGroupNameAndItemName(groupName: string, itemName: string): Observable<any> {
-        return this.http.get<any>(this.API_URL + '/api/Lookup/optionsByGroupandItemName/' + groupName + '/' + itemName).pipe(
+        if (itemName.length == 0) {
+            return of([]);
+        }
+
+        return this.http.get<any>(this.API_URL + '/api/Lookup/optionsByGroupandItemNameFilter/' + groupName + '/' + itemName).pipe(
             tap(getByGroupNameAndItemName => this.errorHandler.log('get ' + groupName + 'options by Name ' + itemName)),
             catchError(this.errorHandler.handleError<LookupItemView[]>('getByGroupNameAndItemName', []))
         );
@@ -55,7 +59,14 @@ export class LookupItemService {
         );
     }
 
-    public getPatientEncounters(patientId: number, encounterTypeId: number): Observable<any[]> {
+    public getPatientEncounters(patientId: number, patientmasterVisitId: number): Observable<any[]> {
+        return this.http.get<any[]>(this.API_URL + '/api/PatientServices/GetMasterVisits/' + patientId + '/' + patientmasterVisitId).pipe(
+            tap(getPatientEncounters => this.errorHandler.log('get ')),
+            catchError(this.errorHandler.handleError<any[]>('getPatientEncounters', []))
+        );
+    }
+
+    public getPatientEncountersByType(patientId: number, encounterTypeId: number): Observable<any[]> {
         return this.http.get<any[]>(this.API_URL + '/api/PatientServices/GetEncounters/' + patientId + '/' + encounterTypeId).pipe(
             tap(getPatientEncounters => this.errorHandler.log('get ')),
             catchError(this.errorHandler.handleError<any[]>('getPatientEncounters', []))

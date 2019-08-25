@@ -5,7 +5,6 @@ using Entities.CCC.Enrollment;
 using Entities.CCC.Lookup;
 using Entities.CCC.PSmart;
 using Entities.PSmart;
-using Entities.Queue;
 using Interface.Clinical;
 using Interface.FormBuilder;
 using Interface.PatientCore;

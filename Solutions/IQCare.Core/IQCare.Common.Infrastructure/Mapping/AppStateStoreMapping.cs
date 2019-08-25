@@ -9,6 +9,7 @@ namespace IQCare.Common.Infrastructure.Mapping
         public void Configure(EntityTypeBuilder<AppStateStore> builder)
         {
             builder.ToTable("AppStateStore").HasKey(c => c.Id);
+            builder.HasMany(b => b.AppStateStoreObjects).WithOne(e => e.AppStateStore);
         }
     }
 }

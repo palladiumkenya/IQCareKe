@@ -172,7 +172,7 @@
                     </asp:MenuItem>
                     <asp:MenuItem Text="<i class='fa fa-folder-open text-muted fa-lg' aria-hidden='true'></i> <span class='text-muted'>Existing Forms<span>"
                         Value="mnuExistingForms"></asp:MenuItem>
-                    <asp:MenuItem Text="<i class='fa fa-file-text-o fa-lg text-muted' aria-hidden='true'></i> <span class='text-muted'>Create New Form</span>"
+                    <asp:MenuItem Text="<i class='fa fa-file-text-o fa-lg text-muted' aria-hidden='true'></i> <span class='text-muted'>Create New Forms</span>"
                         Selectable="False" Value="mnuCreateNewForm">
                     </asp:MenuItem>
                     <asp:MenuItem Text="<i class='fa fa-trash text-muted fa-lg' aria-hidden='true'></i> <span class='text-muted'>Delete Form</span>"

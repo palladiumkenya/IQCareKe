@@ -47,6 +47,30 @@ namespace IQCare.CCC.UILogic.Visit
            
         }
 
+        public int AddpatientEncounterTracing(int patientId, int patientMasterVisitId, int encounterTypeId, int serviceId, int userId, DateTime encounterStartTime, DateTime encounterEndTime)
+        {
+            try
+            {
+                PatientEncounter patientVisitEncounter = new PatientEncounter()
+                {
+                    PatientId = patientId,
+                    EncounterStartTime = encounterStartTime,
+                    EncounterEndTime = encounterEndTime,
+                    ServiceAreaId = serviceId,
+                    EncounterTypeId = encounterTypeId,
+                    PatientMasterVisitId = patientMasterVisitId,
+                    CreatedBy = userId
+
+                };
+                return _patientEncounterManager.AddpatientEncounter(patientVisitEncounter);
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+
+        }
+
         public int UpdatePatientEncounter(PatientEncounter patientEncounter)
         {
             try

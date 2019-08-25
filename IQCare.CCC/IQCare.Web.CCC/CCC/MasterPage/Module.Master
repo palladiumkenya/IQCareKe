@@ -230,8 +230,8 @@
         <nav role="navigation" class="navbar navbar-default navbar-fixed-bottom" style="navigation">
 
                   <div class="container-fluid">
-               
-              <div class="row" style="padding-top:3px">
+               Check Four
+              <div class="container-fluid" style="padding-top:3px;margin-right: 0px !important;margin-left: 0px !important;">
                       <div class="col-md-1">
                            <img src="<%= Page.ResolveClientUrl("~/Images/FGI.jpg") %>" class="img-responsive img-rounded"  alt="Palladium Group"/>
                       </div> 

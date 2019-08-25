@@ -49,6 +49,8 @@ namespace IQCare.Common.Core.Models
 
         public string Age;
 
+        public int AgeInMonths;
+
         public int AgeNumber;
 
         public string IsHtsEnrolled;
@@ -97,6 +99,23 @@ namespace IQCare.Common.Core.Models
                         this.AgeNumber = Years + 1;
                     else
                         this.AgeNumber = Years;
+                }
+            }
+        }
+
+        public void CalculateAgeInMonths()
+        {
+            if (this.DateOfBirth.HasValue)
+            {
+                DateTime DateOfBirth = this.DateOfBirth.Value;
+
+                int result = DateTime.Compare(DateOfBirth, DateTime.Now);
+                if (result > 0)
+                {
+                }
+                else
+                {
+                    this.AgeInMonths = ((DateTime.Now.Year - DateOfBirth.Year) * 12) + DateTime.Now.Month - DateOfBirth.Month;
                 }
             }
         }

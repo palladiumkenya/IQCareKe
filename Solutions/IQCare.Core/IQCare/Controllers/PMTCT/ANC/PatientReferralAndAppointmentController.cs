@@ -44,6 +44,33 @@ namespace IQCare.Controllers.PMTCT.ANC
         }
 
         [HttpPost]
+        public async Task<IActionResult> AddReasonAppointmentNotGiven(
+            [FromBody] AddReasonAppoinmentNotGivenCommand addReasonAppoinmentNotGivenCommand)
+        {
+            if (!ModelState.IsValid)
+                return BadRequest(addReasonAppoinmentNotGivenCommand);
+            var response = await _mediator.Send(addReasonAppoinmentNotGivenCommand, HttpContext.RequestAborted);
+
+            if (response.IsValid)
+                return Ok(response.Value);
+            return BadRequest(response);
+        }
+
+        [HttpGet("{patientId}/{patientMasterVisitId}")]
+        public async Task<IActionResult> GetReasonAppointmentNotGiven(int patientId, int patientMasterVisitId)
+        {
+            var response = await _mediator.Send(new GetReasonAppointmentNotGivenCommand()
+            {
+                PatientId = patientId,
+                PatientMasterVisitId = patientMasterVisitId
+            }, Request.HttpContext.RequestAborted);
+
+            if (response.IsValid)
+                return Ok(response.Value);
+            return BadRequest(response);
+        }
+
+        [HttpPost]
         public async Task<IActionResult> UpdatePatientNextAppointment([FromBody] EditAppointmentCommand editAppointmentCommand)
         {
             if (!ModelState.IsValid)
@@ -128,5 +155,16 @@ namespace IQCare.Controllers.PMTCT.ANC
             return BadRequest(results);
         }
 
+        [HttpDelete]
+        public async Task<IActionResult> DeleteAppointment(int AppointmentId)
+        {
+            var response = await _mediator.Send(new DeleteAppointmentCommand()
+            {
+                AppointmentId = AppointmentId
+            }, Request.HttpContext.RequestAborted);
+            if (response.IsValid)
+                return Ok(response.Value);
+            return BadRequest(response);
+        }
     }
 }

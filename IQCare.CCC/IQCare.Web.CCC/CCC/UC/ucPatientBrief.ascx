@@ -1,5 +1,4 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="ucPatientBrief.ascx.cs" Inherits="IQCare.Web.CCC.UC.ucPatientBrief" %>
-			
 <div class="ui-user col-md-12 col-xs-12 col-sm-12" style="padding-top: 0%;margin-top: 0%">
 					<!-- Image -->
 					<div class="col-md-1 col-xs-1 col-sm-1" style="padding-right: 0%">
@@ -63,7 +62,5 @@
                           </div>
 
                     </div>
-					<!-- Name -->
-					
 				</div>
 <div class="col-md-12"><hr/></div>

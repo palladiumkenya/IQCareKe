@@ -32,8 +32,6 @@ export class AppStateService {
             AppStateObject: appStateObject
         };
 
-        console.log(Indata);
-
         return this.http.post<any>(this.API_URL + this.url, JSON.stringify(Indata), httpOptions).pipe(
             tap(addAppState => this.errorHandler.log('added observable to store')),
             catchError(this.errorHandler.handleError<any[]>('addAppState', []))

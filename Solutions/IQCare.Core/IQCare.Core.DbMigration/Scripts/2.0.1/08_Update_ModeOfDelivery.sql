@@ -1,0 +1,1 @@
+update LookupItem set Name = 'SVD', DisplayName = 'SVD' where Name = 'Normal Delivery';

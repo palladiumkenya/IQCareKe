@@ -598,13 +598,15 @@
                     toastr.error("You have not added any lab order");
                  
                     return false;
-                } if (isBeforeEnrollmentDate) {
-                   
-                    toastr.error("You cannot make a lab order before enrollment. Kindly enroll to IQCare first");
-
-                    return false;
                 }
-                else {
+
+                //if (isBeforeEnrollmentDate) {
+                   
+                //    toastr.error("You cannot make a lab order before enrollment. Kindly enroll to IQCare first");
+
+                //    return false;
+                //}
+                //else {
                   
                     addLabOrder(_fp,labOrderDate,orderNotes);       
                   
@@ -634,7 +636,7 @@
 
                         
                     }); 
-                }
+                //}
 
               
                // $("#tblAddLabs tr:gt(0)").remove();

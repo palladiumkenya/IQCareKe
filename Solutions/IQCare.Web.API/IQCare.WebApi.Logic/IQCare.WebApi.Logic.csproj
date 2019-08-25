@@ -23,6 +23,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <PlatformTarget>x86</PlatformTarget>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -33,11 +34,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="ADODB, Version=7.0.3300.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-      <SpecificVersion>False</SpecificVersion>
-      <EmbedInteropTypes>True</EmbedInteropTypes>
-      <HintPath>..\..\..\References\ADODB.dll</HintPath>
-    </Reference>
     <Reference Include="Application.Common, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\References\Application.Common.dll</HintPath>
@@ -45,7 +41,8 @@
     <Reference Include="Application.Presentation">
       <HintPath>..\..\..\References\Application.Presentation.dll</HintPath>
     </Reference>
-    <Reference Include="AutoMapper">
+    <Reference Include="AutoMapper, Version=6.1.1.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\Library\AutoMapper.dll</HintPath>
     </Reference>
     <Reference Include="Entities.Administration, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
@@ -54,27 +51,9 @@
     </Reference>
     <Reference Include="Entities.CCC, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" />
     <Reference Include="Entities.Common, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" />
-    <Reference Include="Entities.PatientCore, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\References\Entities.PatientCore.dll</HintPath>
-    </Reference>
     <Reference Include="Entities.PSmart, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\References\Entities.PSmart.dll</HintPath>
-    </Reference>
-    <Reference Include="Entities.Queue, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\References\Entities.Queue.dll</HintPath>
-    </Reference>
-    <Reference Include="Entity.WebApi, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\References\Entity.WebApi.dll</HintPath>
-    </Reference>
-    <Reference Include="EntityFramework">
-      <HintPath>..\..\..\References\EntityFramework.dll</HintPath>
-    </Reference>
-    <Reference Include="EntityFramework.SqlServer">
-      <HintPath>..\..\..\References\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
     <Reference Include="Interface.Clinical, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -100,14 +79,7 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\References\IQCare.Events.dll</HintPath>
     </Reference>
-    <Reference Include="IQCare.Web.UILogic, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\References\IQCare.Web.UILogic.dll</HintPath>
-    </Reference>
     <Reference Include="System">
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="System.ComponentModel.DataAnnotations">
       <Private>True</Private>
     </Reference>
     <Reference Include="System.Configuration">
@@ -119,22 +91,10 @@
     <Reference Include="System.Web.Extensions">
       <Private>True</Private>
     </Reference>
-    <Reference Include="System.Xml.Linq">
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="System.Data.DataSetExtensions">
-      <Private>True</Private>
-    </Reference>
     <Reference Include="Microsoft.CSharp">
       <Private>True</Private>
     </Reference>
-    <Reference Include="System.Data">
-      <Private>True</Private>
-    </Reference>
     <Reference Include="System.Net.Http">
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="System.Xml">
       <Private>True</Private>
     </Reference>
   </ItemGroup>
@@ -189,9 +149,10 @@
     <Compile Include="PSmart\SmartcardPatientListManager.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
+    <ProjectReference Include="..\Entity.WebApi\Entity.WebApi.csproj">
+      <Project>{062E43AE-C832-49DE-8ACC-4FFC9ABB4073}</Project>
+      <Name>Entity.WebApi</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Interface.WebApi\Interface.WebApi.csproj">
       <Project>{13CA40EB-1DB9-43C8-A1FA-CB6580D27DC3}</Project>
       <Name>Interface.WebApi</Name>

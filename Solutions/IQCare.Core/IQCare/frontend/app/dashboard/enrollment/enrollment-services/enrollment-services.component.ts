@@ -1,3 +1,4 @@
+import { FormControlService } from './../../../shared/_services/form-control.service';
 import { RecordsService } from './../../../records/_services/records.service';
 import { PersonHomeService } from './../../services/person-home.service';
 import { Component, OnInit, NgZone } from '@angular/core';
@@ -42,7 +43,8 @@ export class EnrollmentServicesComponent implements OnInit {
         private notificationService: NotificationService,
         private store: Store<AppState>,
         private appStateService: AppStateService,
-        private recordsService: RecordsService) {
+        private recordsService: RecordsService,
+        private formControlService: FormControlService) {
         this.userId = JSON.parse(localStorage.getItem('appUserId'));
         this.posId = localStorage.getItem('appPosID');
         this.maxDate = new Date();
@@ -64,6 +66,8 @@ export class EnrollmentServicesComponent implements OnInit {
             // Status: new FormControl([Validators.required]),
             identifiers: new FormArray([])
         });
+
+        // this.formGroup.addControl
 
         this.personHomeService.getServiceAreaIdentifiers(this.serviceId).subscribe(
             (res) => {
@@ -95,7 +99,6 @@ export class EnrollmentServicesComponent implements OnInit {
 
         this.recordsService.getPersonDetails(this.personId).subscribe(
             (res) => {
-                console.log(res);
                 const { registrationDate } = res[0];
                 if (registrationDate) {
                     this.minDate = registrationDate;
@@ -135,7 +138,7 @@ export class EnrollmentServicesComponent implements OnInit {
                     enrollment.PatientId = this.patientId;
                     this.enrollmentService.enrollClient(enrollment).subscribe(
                         (response) => {
-                            console.log(response);
+                            // console.log(response);
                             this.snotifyService.success('Successfully Enrolled ', 'Enrollment',
                                 this.notificationService.getConfig());
 
