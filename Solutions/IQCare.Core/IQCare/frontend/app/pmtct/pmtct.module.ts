@@ -1,4 +1,4 @@
-///<reference path="maternity/maternity.component.ts"/>
+import { RecordsService } from './../records/_services/records.service';
 import { PncService } from './_services/pnc.service';
 import { CervicalCancerScreeningResultsResolver } from './_services/resolvers/cervical-cancer-screening-results.resolver';
 import { FamilyPlanningMethodResolver } from './_services/resolvers/family-planning-method.resolver';
@@ -106,7 +106,6 @@ import { ANCHivStatusInitialVisitResolver } from './_services/resolvers/anc-hiv-
 import { MotherExaminationResolver } from './_services/resolvers/motherexamination.resolver';
 import { BabyExaminationResolver } from './_services/resolvers/baby-examination.resolver';
 import { HeiMedicationComponent } from './hei/hei-medication/hei-medication.component';
-import { AncClientMonitoringComponent } from './anc/anc-client-monitoring/anc-client-monitoring.component';
 import { BirthOutcomeResolver } from './_services/resolvers/BirthOutcomeResolver';
 import { CounselledInfantFeedingResolver } from './_services/resolvers/counselled-infant-feeding.resolver';
 import { ImmunizationComponent } from './hei/immunization-history/immunization/immunization.component';
@@ -114,12 +113,18 @@ import { BirthInfoGridComponent } from './maternity/baby/birth-info-grid/birth-i
 import { AddBirthInfoComponent } from './maternity/baby/add-birth-info/add-birth-info.component';
 import { AddBabyDialogComponent } from './maternity/baby/add-baby-dialog/add-baby-dialog.component';
 import { MilestonesFormComponent } from './hei/milestones/milestones-form/milestones-form.component';
+import { DataService } from '../shared/_services/data.service';
+import { PriorHivStatusComponent } from './pnc/prior-hiv-status/prior-hiv-status.component';
+import { RegistrationService } from '../registration/_services/registration.service';
+import { FamilyPartnerControlsService } from '../hts/_services/family-partner-controls.service';
+import { HeiCompletelaborderComponent } from './hei/hei-hivtesting/hei-completelaborder/hei-completelaborder.component';
+import { HeiMessagesComponent } from './hei/hei-messages/hei-messages.component';
 
 @NgModule({
     imports: [
         CommonModule,
         PmtctRoutingModule,
-        CommonModule, HttpClientModule, MatDatepickerModule, MatFormFieldModule,
+        CommonModule, HttpClientModule, MatDatepickerModule,
         MatNativeDateModule, MatInputModule, MatFormFieldModule,
         MatTableModule, MatAutocompleteModule, MatButtonModule, MatButtonToggleModule, MatCardModule,
         MatCheckboxModule, MatChipsModule, MatDialogModule, MatDividerModule, MatExpansionModule,
@@ -181,12 +186,14 @@ import { MilestonesFormComponent } from './hei/milestones/milestones-form/milest
         MaternityEncounterComponent,
         AncHivtestingComponent,
         HeiMedicationComponent,
-        AncClientMonitoringComponent,
         ImmunizationComponent,
         BirthInfoGridComponent,
         AddBirthInfoComponent,
         AddBabyDialogComponent,
-        MilestonesFormComponent
+        MilestonesFormComponent,
+        PriorHivStatusComponent,
+        HeiCompletelaborderComponent,
+        HeiMessagesComponent
     ],
     providers: [
         PlaceOfDeliveryResolver,
@@ -229,9 +236,12 @@ import { MilestonesFormComponent } from './hei/milestones/milestones-form/milest
         ANCHivStatusInitialVisitResolver,
         MotherExaminationResolver,
         BabyExaminationResolver,
-        AncClientMonitoringComponent,
         BirthOutcomeResolver,
-        CounselledInfantFeedingResolver
+        CounselledInfantFeedingResolver,
+        DataService,
+        RecordsService,
+        RegistrationService,
+        FamilyPartnerControlsService
     ],
     entryComponents: [
         IptClientWorkupComponent,
@@ -242,7 +252,8 @@ import { MilestonesFormComponent } from './hei/milestones/milestones-form/milest
         CheckinComponent,
         ImmunizationComponent,
         AddBabyDialogComponent,
-        MilestonesFormComponent
+        MilestonesFormComponent,
+        HeiCompletelaborderComponent
     ],
     exports: [
         IptClientWorkupComponent,

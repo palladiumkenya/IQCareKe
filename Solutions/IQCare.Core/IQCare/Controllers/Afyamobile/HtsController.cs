@@ -17,6 +17,7 @@ namespace IQCare.Controllers.Afyamobile
             _mediator = mediator ?? throw new ArgumentNullException(nameof(mediator));
         }
 
+        [ObsoleteAttribute("This api will soon be deprecated")]
         [HttpPost("indexclient")]
         public async Task<IActionResult> Post([FromBody] SynchronizeClientsCommand synchronizeClientsCommand)
         {
@@ -82,6 +83,7 @@ namespace IQCare.Controllers.Afyamobile
             return BadRequest(response);
         }
 
+        [ObsoleteAttribute("This api will soon be deprecated")]
         [HttpPost("partner")]
         public async Task<IActionResult> PostPartner([FromBody] SynchronizePartnersCommand synchronizePartnersCommand)
         {
@@ -91,10 +93,66 @@ namespace IQCare.Controllers.Afyamobile
             return BadRequest(response);
         }
 
+        [HttpPost("partnerdemographics")]
+        public async Task<IActionResult> PostPartnerDemographics([FromBody]AfyaMobilePartnersDemographicsCommand partnersDemographicsCommand)
+        {
+            var response = await _mediator.Send(partnersDemographicsCommand, Request.HttpContext.RequestAborted);
+            if (response.IsValid)
+                return Ok(response);
+            return BadRequest(response);
+        }
+
+        [HttpPost("familydemographics")]
+        public async Task<IActionResult> PostFamilyDemographics([FromBody] AfyaMobileFamilyDemographicsCommand afyaMobileFamilyDemographicsCommand)
+        {
+            var response = await _mediator.Send(afyaMobileFamilyDemographicsCommand, Request.HttpContext.RequestAborted);
+            if (response.IsValid)
+                return Ok(response);
+            return BadRequest(response);
+        }
+
+        [HttpPost("partnerScreening")]
+        public async Task<IActionResult> PostPartnerScreening([FromBody]AfyaMobilePartnerScreeningEncounterCommandDto afyaMobilePartnerScreeningEncounterCommand)
+        {
+            var response = await _mediator.Send(new AfyaMobilePartnerScreeningEncounterCommand(afyaMobilePartnerScreeningEncounterCommand), Request.HttpContext.RequestAborted);
+            if (response.IsValid)
+                return Ok(response);
+            return BadRequest(response);
+        }
+
+        [HttpPost("partnerTracing")]
+        public async Task<IActionResult> PostPartnerTracing([FromBody] AfyaMobilePartnerTracingEncounterCommandDto afyaMobilePartnerTracingEncounterCommand)
+        {
+            var response = await _mediator.Send(new AfyaMobilePartnerTracingEncounterCommand(afyaMobilePartnerTracingEncounterCommand), Request.HttpContext.RequestAborted);
+            if (response.IsValid)
+                return Ok(response);
+            return BadRequest(response);
+        }
+
+        [ObsoleteAttribute("This api will soon be deprecated")]
         [HttpPost("family")]
         public async Task<IActionResult> PostFamily([FromBody]SynchronizeFamilyCommand synchronizeFamilyCommand)
         {
             var response = await _mediator.Send(synchronizeFamilyCommand, Request.HttpContext.RequestAborted);
+            if (response.IsValid)
+                return Ok(response);
+            return BadRequest(response);
+        }
+
+        [HttpPost("postFamilyScreening")]
+        public async Task<IActionResult> PostFamilyScreening([FromBody] AfyaMobileFamilyScreeningEncounterCommandDto afyaMobileFamilyScreeningEncounterCommand)
+        {
+            var response = await _mediator.Send(new AfyaMobileFamilyScreeningEncounterCommand(afyaMobileFamilyScreeningEncounterCommand), Request.HttpContext.RequestAborted);
+            if (response.IsValid)
+                return Ok(response);
+            return BadRequest(response);
+        }
+
+
+        [HttpPost("postFamilyTracing")]
+        public async Task<IActionResult> PostFamilyScreening([FromBody] AfyaMobileFamilyTracingEncounterCommandDto afyaMobileFamilyTracingEncounterCommand)
+        {
+            var response = await _mediator.Send(new AfyaMobileFamilyTracingEncounterCommand(afyaMobileFamilyTracingEncounterCommand), Request.HttpContext.RequestAborted);
             if (response.IsValid)
                 return Ok(response);
             return BadRequest(response);

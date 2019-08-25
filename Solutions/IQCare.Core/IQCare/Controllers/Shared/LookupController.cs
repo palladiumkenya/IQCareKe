@@ -77,6 +77,20 @@ namespace IQCare.Controllers.Common
             return BadRequest(results);
         }
 
+        [HttpGet("optionsByGroupandItemNameFilter/{groupName}/{itemName}")]
+        public async Task<IActionResult> OptionsFilter(string groupName, string itemName)
+        {
+            var results = await _mediator.Send(new GetOptionsByGroupAndItemNameFilterCommand()
+            {
+                GroupName = groupName,
+                ItemName = itemName
+            });
+
+            if (results.IsValid)
+                return Ok(results.Value);
+            return BadRequest(results);
+        }
+
         [HttpGet("getIdentifyerTypes")]
         public async Task<IActionResult> GetIdentifierType()
         {
@@ -139,6 +153,8 @@ namespace IQCare.Controllers.Common
                 return Ok(results.Value);
             return BadRequest(results);
         }
+
+
         [HttpGet("getContactType")]
         public async Task<IActionResult> GetContactType()
         {
@@ -148,7 +164,8 @@ namespace IQCare.Controllers.Common
                 return Ok(results.Value);
             return BadRequest(results);
         }
-        //}
+
+
         [HttpGet("getRelOptions")]
         public async Task<IActionResult> GetRelationshipOptions()
         {
@@ -187,7 +204,7 @@ namespace IQCare.Controllers.Common
         [HttpGet("htsTracingOptions")]
         public async Task<IActionResult> GetTracingOptions()
         {
-            string[] options = new string[] { "TracingMode", "TracingOutcome", "TracingType" };
+            string[] options = new string[] { "TracingMode", "TracingOutcome", "TracingType", "TracingReasonNotContactedPhone", "TracingReasonNotContactedPhysical" };
             var results = await _mediator.Send(new GetRegistrationOptionsCommand {RegistrationOptions = options},
                 HttpContext.RequestAborted);
 
@@ -225,6 +242,17 @@ namespace IQCare.Controllers.Common
             return BadRequest(results);
         }
 
+        [HttpGet("searchFacilityMflCodeList")]
+        public async Task<IActionResult> SearchFacilityMflCodeList(string searchString)
+        {
+            var results = await _mediator.Send(new GetFilteredFacilityListByMflCodeCommand() { searchString = searchString }, HttpContext.RequestAborted);
+            if (results.IsValid)
+                return Ok(results.Value);
+            return BadRequest(results);
+        }
+
+
+
         [HttpGet("searchFacilityList")]
         public async Task<IActionResult> SearchFacilityList(string searchString)
         {
@@ -233,46 +261,6 @@ namespace IQCare.Controllers.Common
                 return Ok(results.Value);
             return BadRequest(results);
         }
-
-
-        //[HttpGet("getConsentType")]
-        //public async Task<IActionResult> GetConsentOptions()
-        //{
-        //    var results = await _mediator.Send(new GetConsentTypeCommand() { ItemName = "ConsentToSendSMS" }, HttpContext.RequestAborted);
-        //    if (results.IsValid)
-        //        return Ok(results.Value);
-        //    return BadRequest(results);
-        //}
-
-        //[HttpGet("getCountylist")]
-        //public async Task<IActionResult> GetCountyList(string countyid,string subcountyid)
-        //{
-        //    var results = await _mediator.Send(new GetCountiesCommand() { CountyId = countyid, SubcountyId = subcountyid }, HttpContext.RequestAborted);
-        //    if (results.IsValid)
-        //        return Ok(results.Value);
-        //    return BadRequest(results);
-
-        //}
-
-
-        //[HttpGet("getSubCountylist")]
-        //public async Task<IActionResult> GetSubCountyList(string countyid, string subcountyid)
-        //{
-        //    var results = await _mediator.Send(new GetSubCountiesCommand() { CountyId = countyid, SubcountyId = subcountyid }, HttpContext.RequestAborted);
-        //    if (results.IsValid)
-        //        return Ok(results.Value);
-        //    return BadRequest(results);
-
-        //}
-
-
-        //[HttpGet("getWardlist")]
-        //public async Task<IActionResult> GetWardList(string countyid, string subcountyid)
-        //{
-        //    var results = await _mediator.Send(new GetWardCommand() { CountyId = countyid, SubcountyId = subcountyid }, HttpContext.RequestAborted);
-        //    if (results.IsValid)
-        //        return Ok(results.Value);
-        //    return BadRequest(results);
 
         [HttpGet("GetServiceAreaIdentifiers/{serviceAreaId}")]
         public async Task<IActionResult> Get(int serviceAreaId)

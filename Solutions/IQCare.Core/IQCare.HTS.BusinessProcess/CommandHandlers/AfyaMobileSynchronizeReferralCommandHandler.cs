@@ -10,6 +10,7 @@ using IQCare.HTS.Infrastructure;
 using IQCare.Library;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
+using Newtonsoft.Json;
 using Serilog;
 
 namespace IQCare.HTS.BusinessProcess.CommandHandlers
@@ -28,7 +29,6 @@ namespace IQCare.HTS.BusinessProcess.CommandHandlers
         public async Task<Result<string>> Handle(AfyaMobileSynchronizeReferralCommand request, CancellationToken cancellationToken)
         {
             string afyaMobileId = String.Empty;
-            string enrollmentNo = string.Empty;
 
             using (var trans = _htsUnitOfWork.Context.Database.BeginTransaction())
             {
@@ -37,48 +37,43 @@ namespace IQCare.HTS.BusinessProcess.CommandHandlers
 
                 try
                 {
-                    var facilityId = request.MESSAGE_HEADER.SENDING_FACILITY;
                     //Person Identifier
                     for (int j = 0; j < request.INTERNAL_PATIENT_ID.Count; j++)
                     {
-                        if (request.INTERNAL_PATIENT_ID[j].ASSIGNING_AUTHORITY ==
-                            "HTS" && request.INTERNAL_PATIENT_ID[j]
-                                .IDENTIFIER_TYPE == "HTS_SERIAL")
-                        {
-                            enrollmentNo = request.INTERNAL_PATIENT_ID[j].ID;
-                        }
-
-                        if (request.INTERNAL_PATIENT_ID[j].IDENTIFIER_TYPE ==
-                            "AFYA_MOBILE_ID" &&
-                            request.INTERNAL_PATIENT_ID[j].ASSIGNING_AUTHORITY ==
-                            "AFYAMOBILE")
+                        if (request.INTERNAL_PATIENT_ID[j].IDENTIFIER_TYPE == "AFYA_MOBILE_ID" && request.INTERNAL_PATIENT_ID[j].ASSIGNING_AUTHORITY == "AFYAMOBILE")
                         {
                             afyaMobileId = request.INTERNAL_PATIENT_ID[j].ID;
                         }
                     }
-
-                    //Facility clientFacility = await _unitOfWork.Repository<Facility>().Get(x => x.PosID == facilityId).FirstOrDefaultAsync();
-                    //if (clientFacility == null)
-                    //{
-                    //    clientFacility = await _unitOfWork.Repository<Facility>().Get(x => x.DeleteFlag == 0).FirstOrDefaultAsync();
-                    //}
+                    var afyaMobileMessage = await registerPersonService.AddAfyaMobileInbox(DateTime.Now, request.MESSAGE_HEADER.MESSAGE_TYPE, afyaMobileId, JsonConvert.SerializeObject(request), false);
 
                     //check if person already exists
                     var identifiers = await registerPersonService.getPersonIdentifiers(afyaMobileId, 10);
                     if (identifiers.Count > 0)
                     {
                         // var person = await registerPersonService.GetPerson(identifiers[0].PersonId);
-                        // var patient = await registerPersonService.GetPatientByPersonId(identifiers[0].PersonId);
+                        var patient = await registerPersonService.GetPatientByPersonId(identifiers[0].PersonId);
 
                         //add referral
                         int providerId = request.PLACER_DETAIL.PROVIDER_ID;
-                        DateTime dateToBeEnrolled = DateTime.ParseExact(request.REFERRAL.DATE_TO_BE_ENROLLED, "yyyyMMdd", null);
+                        DateTime? dateToBeEnrolled = null;
+                        try
+                        {
+                            dateToBeEnrolled = DateTime.ParseExact(request.REFERRAL.DATE_TO_BE_ENROLLED, "yyyyMMdd", null);
+                        }
+                        catch (Exception e)
+                        {
+                            Log.Error($"Could not parse Referral DATE_TO_BE_ENROLLED: {request.REFERRAL.DATE_TO_BE_ENROLLED} as a valid date: Incorrect format, date should be in the following format yyyyMMdd");
+                            throw new Exception($"Could not parse Referral DATE_TO_BE_ENROLLED: {request.REFERRAL.DATE_TO_BE_ENROLLED} as a valid date: Incorrect format, date should be in the following format yyyyMMdd");
+                        }
+                        
                         string facilityReferred = request.REFERRAL.REFERRED_TO;
                         var referralReason = await _unitOfWork.Repository<LookupItemView>()
                             .Get(x => x.MasterName == "ReferralReason" &&
                                       x.ItemName == "CCCEnrollment").ToListAsync();
                         var searchFacility = await encounterTestingService.SearchFacility(facilityReferred);
                         var previousReferrals = await encounterTestingService.GetReferralByPersonId(identifiers[0].PersonId);
+                        var facility = await encounterTestingService.GetCurrentFacility();
                         int MFLCode = 0;
                         if (searchFacility.Count > 0)
                         {
@@ -89,34 +84,49 @@ namespace IQCare.HTS.BusinessProcess.CommandHandlers
                                 previousReferrals[0].ToFacility =
                                     Convert.ToInt32(searchFacility[0].MFLCode);
                                 previousReferrals[0].OtherFacility = "";
-                                previousReferrals[0].ExpectedDate = dateToBeEnrolled;
+                                previousReferrals[0].ExpectedDate = dateToBeEnrolled.Value;
 
                                 await encounterTestingService.UpdateReferral(previousReferrals[0]);
                             }
                             else
                             {
-                                var facility = await encounterTestingService.GetCurrentFacility();
                                 if (facility.Count > 0)
                                 {
                                     await encounterTestingService.AddReferral(identifiers[0].PersonId,
                                         facility[0].FacilityID, 2, MFLCode,
-                                        referralReason[0].ItemId, providerId, dateToBeEnrolled, "");
+                                        referralReason[0].ItemId, providerId, dateToBeEnrolled.Value, "");
                                 }
                             }
                         }
+                        else
+                        {
+                            searchFacility = await encounterTestingService.SearchFacility("Other");
+                            MFLCode = Convert.ToInt32(searchFacility[0].MFLCode);
+
+                            await encounterTestingService.AddReferral(identifiers[0].PersonId, facility[0].FacilityID,
+                                2, MFLCode, referralReason[0].ItemId, providerId, dateToBeEnrolled.Value, facilityReferred);
+                        }
+
+                        var clientHasBeenReferredState =
+                            await registerPersonService.AddAppStateStore(identifiers[0].PersonId, patient.Id, 5, null,
+                                null);
                     }
                     else
                     {
+                        //update message has been processed
+                        await registerPersonService.UpdateAfyaMobileInbox(afyaMobileMessage.Id, afyaMobileId, true, DateTime.Now, $"Person with afyaMobileId: {afyaMobileId} could not be found", false);
                         return Result<string>.Invalid($"Person with afyaMobileId: {afyaMobileId} could not be found");
                     }
 
+                    //update message has been processed
+                    await registerPersonService.UpdateAfyaMobileInbox(afyaMobileMessage.Id, afyaMobileId, true, DateTime.Now, $"Successfully synchronized HTS Referral for afyamobileid: {afyaMobileId}", true);
                     trans.Commit();
-                    return Result<string>.Valid("Successfully synchronized HTS Referral");
+                    return Result<string>.Valid($"Successfully synchronized HTS Referral for afyamobileid: {afyaMobileId}");
                 }
                 catch (Exception ex)
                 {
                     trans.Rollback();
-                    Log.Error(ex.Message);
+                    Log.Error($"Failed to synchronize Hts Referral for clientid: {afyaMobileId} " + ex.Message + " " + ex.InnerException);
                     return Result<string>.Invalid($"Failed to synchronize Hts Referral for clientid: {afyaMobileId} " + ex.Message + " " + ex.InnerException);
                 }
             }

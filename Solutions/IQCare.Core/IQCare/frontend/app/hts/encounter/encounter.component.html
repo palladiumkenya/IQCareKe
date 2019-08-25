@@ -40,8 +40,7 @@
                                     </mat-form-field>
 
                                     <mat-form-field>
-                                        <mat-select placeholder="Ever Tested?" name="everTested" id="everTested"
-                                            required formControlName="EverTested" (selectionChange)="everTestedChanged()"
+                                        <mat-select placeholder="Ever Tested?" name="everTested" id="everTested" formControlName="EverTested" (selectionChange)="everTestedChanged()"
                                             required>
                                             <mat-option value=""></mat-option>
                                             <mat-option *ngFor="let entryPoint of yesNoOptions" [value]="entryPoint.itemId">{{entryPoint.itemName}}</mat-option>

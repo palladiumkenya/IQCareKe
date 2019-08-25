@@ -27,11 +27,11 @@ export class DiagnosisComponent implements OnInit {
 
     ngOnInit() {
         this.PatientdiagnosisFormGroup = this._formBuilder.group({
-            diagnosis: new FormControl('', [Validators.required])
+            diagnosis: new FormControl('', [Validators.required]),
+            diagnosisId : new FormControl('')
         });
 
         this.notify.emit(this.PatientdiagnosisFormGroup);
-        console.log('Master Visit Id ' + this.PatientMasterVisitId);
         if (this.isEdit) {
             this.getPatientDiagnosisInfo(this.PatientMasterVisitId);
         }
@@ -44,7 +44,7 @@ export class DiagnosisComponent implements OnInit {
                 diag => {
                     if (diag != null) {
                         this.PatientdiagnosisFormGroup.controls['diagnosis'].setValue(diag.diagnosis);
-
+                        this.PatientdiagnosisFormGroup.controls['diagnosisId'].setValue(diag.id);
                     }
                 },
                 (err) => {

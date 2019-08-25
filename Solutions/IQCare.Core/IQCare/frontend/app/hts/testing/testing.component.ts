@@ -33,6 +33,8 @@ export class TestingComponent implements OnInit {
     yesNoOptions: any[];
     yesNoNA: any[];
     reasonsDeclined: any[];
+    screeningHIVTestKits: LookupItemView[];
+    syphilisResults: LookupItemView[];
 
     testing: Testing;
     hivResults1: Testing[];
@@ -49,6 +51,9 @@ export class TestingComponent implements OnInit {
     // first response
     firstResponseLotNumber: string;
     firstResponseKitexpiryDate: Date;
+    // duo kit
+    duoKitLotNumber: string;
+    duoKitexpiryDate: Date;
 
     finalTestingResults: FinalTestingResults;
     htsEncounterDate: Date;
@@ -90,7 +95,7 @@ export class TestingComponent implements OnInit {
             finalResultsRemarks: new FormControl(this.finalTestingResults.finalResultsRemarks)
         });
 
-        this.htsEncounterDate = moment(localStorage.getItem('encounterDate')).toDate();
+        this.htsEncounterDate = moment(new Date(localStorage.getItem('encounterDate'))).toDate();
 
         this.encounterService.getCustomOptions().subscribe(data => {
             const options = data['lookupItems'];
@@ -108,6 +113,10 @@ export class TestingComponent implements OnInit {
                     this.yesNoNA = options[i].value;
                 } else if (options[i].key == 'ReasonsPartner') {
                     this.reasonsDeclined = options[i].value;
+                } else if (options[i].key == 'ScreeningHIVTestKits') {
+                    this.screeningHIVTestKits = options[i].value;
+                } else if (options[i].key == 'SyphilisResults') {
+                    this.syphilisResults = options[i].value;
                 }
             }
 
@@ -126,13 +135,27 @@ export class TestingComponent implements OnInit {
             const otherKit = this.hivTestKits.filter(obj => obj.itemName == 'Other');
             const determineKit = this.hivTestKits.filter(obj => obj.itemName == 'Determine');
             const firstResponseKit = this.hivTestKits.filter(obj => obj.itemName == 'First Response');
+            const DuoKit = this.screeningHIVTestKits.filter(obj => obj.itemName == 'HIV/Syphilis Duo');
 
             this.getFirstResponseLastUsed(firstResponseKit[0].itemId);
 
             this.getDetermineLastUsed(determineKit[0].itemId);
 
             this.getOtherKitLastUsed(otherKit[0].itemId);
+
+            this.getDuoKitLastUsed(DuoKit[0].itemId);
         });
+    }
+
+    getDuoKitLastUsed(kitId: number) {
+        this.encounterService.getLastUsedKit(kitId).subscribe(
+            (res) => {
+                if (res) {
+                    this.duoKitLotNumber = res.kitLotNumber;
+                    this.duoKitexpiryDate = res.expiryDate;
+                }
+            }
+        );
     }
 
     getOtherKitLastUsed(kitId: number) {
@@ -195,11 +218,16 @@ export class TestingComponent implements OnInit {
             otherLotNumber: this.otherLotNumber,
             determineLotNumber: this.determineLotNumber,
             firstResponseLotNumber: this.firstResponseLotNumber,
+            duoKitLotNumber: this.duoKitLotNumber,
 
+            duoKitexpiryDate: this.duoKitexpiryDate,
             otherKitexpiryDate: this.otherKitexpiryDate,
             determineKitexpiryDate: this.determineKitexpiryDate,
             firstResponseKitexpiryDate: this.firstResponseKitexpiryDate,
-            htsEncounterDate: this.htsEncounterDate
+            htsEncounterDate: this.htsEncounterDate,
+
+            screeningHIVTestKits: this.screeningHIVTestKits,
+            syphilisResults: this.syphilisResults
         };
 
         const dialogRef = this.dialog.open(TestDialogComponent, dialogConfig);
@@ -230,6 +258,7 @@ export class TestingComponent implements OnInit {
                     test.KitId = this.testing.KitId;
                     test.Outcome = this.testing.Outcome;
                     test.TestRound = this.testing.TestRound;
+                    test.SyphilisResult = data['syphilis']['itemId'];
 
                     this.hivResults1.push(this.testing);
                     this.hiv1.push(test);
@@ -286,11 +315,14 @@ export class TestingComponent implements OnInit {
                 } else if (screeningType == 'Confirmatory Test') {
                     const firstTest = this.hivResults1.slice(-1)[0];
 
-                    console.log(firstTest);
-                    console.log(data);
+                    if (firstTest.kitName['itemName'] == 'HIV/Syphilis Duo' && data.kitName['itemName'] == 'Determine') {
+                        this.snotifyService.info('Determine should not be used as a confirmatory ' +
+                            'test if duo kit was used as a screening test ' +
+                            'Please select another kitname.', 'Testing', this.notificationService.getConfig());
+                        return;
+                    }
 
                     if (firstTest.kitName['itemName'] == data.kitName['itemName']) {
-                        console.log('test');
                         this.snotifyService.info('The same kitname has been used for screening and confirmatory test.' +
                             'Please select another kitname.', 'Testing', this.notificationService.getConfig());
                         return;
@@ -336,10 +368,10 @@ export class TestingComponent implements OnInit {
             this.formTesting.controls.finalResultsRemarks.setValue('n/a');
         }
 
-        console.log(this.formTesting);
+        // console.log(this.formTesting);
         if (this.formTesting.valid) {
             this.finalTestingResults = { ...this.finalTestingResults, ...this.formTesting.value };
-            console.log(this.finalTestingResults);
+            // console.log(this.finalTestingResults);
 
             const htsEncounterId = JSON.parse(localStorage.getItem('htsEncounterId'));
             const patientId = JSON.parse(localStorage.getItem('patientId'));

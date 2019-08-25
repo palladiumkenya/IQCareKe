@@ -1,9 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using DataAccess.Base;
 using DataAccess.CCC.Context;
 using DataAccess.CCC.Repository;
+using DataAccess.Common;
+using DataAccess.Entity;
 using Entities.CCC.Baseline;
 using Interface.CCC.Baseline;
 
@@ -81,6 +84,17 @@ namespace BusinessProcess.CCC.Baseline
                 _unitOfWork.Dispose();
                 return Convert.ToInt32(recordExists);
             }
+        }
+
+        public void UpdateBlueCardBaselineTransferInStartedART(int? ptn_pk, DateTime? firstLineRegStDate, int? firstLineReg)
+        {
+            ClsObject obj = new ClsObject();
+            ClsUtility.Init_Hashtable();
+            ClsUtility.AddExtendedParameters("@ptn_pk", SqlDbType.Int, ptn_pk);
+            ClsUtility.AddExtendedParameters("@FirstLineRegStDate", SqlDbType.DateTime, firstLineRegStDate);
+            ClsUtility.AddExtendedParameters("@FirstLineReg", SqlDbType.Int, firstLineReg);
+
+            DataTable dt = (DataTable)obj.ReturnObject(ClsUtility.theParams, "sp_UpdateBlueCardBaselineTransferInStartedART", ClsUtility.ObjectEnum.DataTable);
         }
     }
 }

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<DOCUMENT Type="Advanced Installer" CreateVersion="14.5.2" version="14.5.2" Modules="update" RootPath="." Language="en" Id="{5B452A42-375B-47ED-93C8-397C3B9F8E8E}">
+  <COMPONENT cid="caphyon.advinst.msicomp.ProjectOptionsComponent">
+    <ROW Name="HiddenItems" Value="TilesComponent"/>
+  </COMPONENT>
+  <COMPONENT cid="caphyon.advinst.msicomp.DictionaryComponent">
+    <ROW Path="&lt;AI_DICTS&gt;aiu-ue.ail"/>
+    <ROW Path="&lt;AI_DICTS&gt;aiu-ue_en.ail"/>
+  </COMPONENT>
+  <COMPONENT cid="caphyon.advinst.msicomp.UpdaterEditorComponent">
+    <ROW Section="Update" Key="Name" Value="IQCare"/>
+    <ROW Section="Update" Key="ProductVersion" Value="2.0.2.0" ValueLocId="-"/>
+    <ROW Section="Update" Key="URL" Value="https://www.dropbox.com/s/0m75pz86a75y6vp/IQCare.Web.Setup.exe?dl=1" ValueLocId="-"/>
+    <ROW Section="Update" Key="Size" Value="..\..\..\..\Release\IQCare.Web.Setup.exe" ValueLocId="-"/>
+    <ROW Section="Update" Key="MD5" Value="..\..\..\..\Release\IQCare.Web.Setup.exe" ValueLocId="-"/>
+    <ROW Section="Update" Key="ServerFileName" Value="IQCare.Web.Setup.exe" ValueLocId="-"/>
+    <ROW Section="Update" Key="RegistryKey" Value="HKUD\Software\Palladium\IQCare\Version" ValueLocId="-"/>
+    <ROW Section="Update" Key="Version" Value="2.0.2" ValueLocId="-"/>
+    <ROW Section="Update" Key="Description" Value="version 2.0.2 is available"/>
+    <ROW Section="Update" Key="Feature" Value="update feature"/>
+    <ROW Section="Update" Key="Enhancement" Value="update enhancement"/>
+    <ROW Section="Update" Key="BugFix" Value="no bugs fixed"/>
+    <ATTRIBUTE name="OutputFileName" value=".txt"/>
+  </COMPONENT>
+</DOCUMENT>

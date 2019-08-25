@@ -184,8 +184,8 @@ export class PersonRegistrationService {
         );
     }
 
-    getPersonIdentifiers(id: number): Observable<any> {
-        return this.http.get<any>(this.API_URL + '/records/api/Register/GetPersonIdentifiers/' + id).pipe(
+    getPersonIdentifiers(id: number): Observable<any[]> {
+        return this.http.get<any[]>(this.API_URL + '/records/api/Register/GetPersonIdentifiers/' + id).pipe(
             tap(getPersonIdentifiers => this.errorHandler.log(`get person identifiers`)),
             catchError(this.errorHandler.handleError<any[]>('getPersonIdentifiers'))
         );

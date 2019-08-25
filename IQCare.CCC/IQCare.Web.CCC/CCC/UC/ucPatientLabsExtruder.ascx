@@ -1,6 +1,6 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="ucPatientLabsExtruder.ascx.cs" Inherits="IQCare.Web.CCC.UC.ucPatientLabsExtruder" %>
 
-  <div class="col-md-12 bs-callout bs-callout-danger">
+  <div class="col-md-12 bs-callout bs-callout-danger" style="width: 330px;overflow-x: scroll;">
     <h4 class="pull-left"> <strong>Pending Labs:</strong> </h4>                             
     <table class="table table-striped table-condensed" id="xtblPendingLabs" clientidmode="Static" runat="server">
         <thead>
@@ -18,7 +18,7 @@
 </div>
 
 
- <div class="col-md-12 bs-callout bs-callout-info">
+ <div class="col-md-12 bs-callout bs-callout-info" style="width: 330px;overflow-x: scroll;">
                          <h4 class="pull-left"> <strong>Latest Labs Results:</strong> </h4>             
     <table class="table table-striped table-condensed" id="xtblCompleteLabs" clientidmode="Static" runat="server">
         <thead>

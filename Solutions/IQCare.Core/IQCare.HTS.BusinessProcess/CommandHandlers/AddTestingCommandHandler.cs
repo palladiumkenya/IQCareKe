@@ -49,7 +49,7 @@ namespace IQCare.HTS.BusinessProcess.CommandHandlers
                     await _unitOfWork.Repository<Core.Model.Testing>().AddRangeAsync(testings);
                     await _unitOfWork.SaveAsync();
 
-
+                    int? syphilisResult = request.Testing.Find(x => x.TestRound == 1).SyphilisResult;
                     // Create HtsEncounterResult instance
                     HtsEncounterResult hTSEncounterResult = new HtsEncounterResult
                     {
@@ -57,7 +57,8 @@ namespace IQCare.HTS.BusinessProcess.CommandHandlers
                         HtsEncounterId = request.HtsEncounterId,
                         RoundOneTestResult = request.FinalTestingResult.FinalResultHiv1,
                         RoundTwoTestResult = request.FinalTestingResult.FinalResultHiv2,
-                        EncounterResultRemarks = request.FinalTestingResult.FinalResultsRemarks
+                        EncounterResultRemarks = request.FinalTestingResult.FinalResultsRemarks,
+                        SyphilisResult = syphilisResult
                     };
 
                     await _unitOfWork.Repository<HtsEncounterResult>().AddAsync(hTSEncounterResult);

@@ -28,6 +28,7 @@ namespace IQCare.HTS.BusinessProcess.Commands
         public DateTime ExpiryDate { get; set; }
         public int Outcome { get; set; }
         public int TestRound { get; set; }
+        public int? SyphilisResult { get; set; }
     }
 
     public class FinalTestingResult

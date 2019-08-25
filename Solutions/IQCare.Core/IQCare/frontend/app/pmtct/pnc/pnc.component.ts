@@ -4,7 +4,6 @@ import { PatientDiagnosisCommand } from './../_models/PatientDiagnosisCommand';
 import { HivTestsCommand } from './../_models/HivTestsCommand';
 import { LookupItemService } from './../../shared/_services/lookup-item.service';
 import { HivStatusCommand } from './../_models/HivStatusCommand';
-import { PncVisitDetailsCommand } from './../_models/PncVisitDetailsCommand';
 import { PncService } from './../_services/pnc.service';
 import { LookupItemView } from './../../shared/_models/LookupItemView';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -31,6 +30,7 @@ import { PatientFamilyPlanningMethodEditCommand } from '../_models/PatientFamily
 import { UpdateDrugAdministrationCommand } from '../_models/UpdateDrugAdministrationCommand';
 import { PartnerTestingEditCommand } from '../_models/PartnerTestingEditCommand';
 import { PatientPncExercisesCommand } from '../_models/PatientPncExercisesCommand';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
     selector: 'app-pnc',
@@ -46,6 +46,8 @@ export class PncComponent implements OnInit {
     patientEncounterId: number;
     visitDate: Date;
     visitType: number;
+    appointmentReasonId: number;
+    appointmentStatusId: number;
 
     isLinear: boolean = true;
     formType: string;
@@ -73,7 +75,8 @@ export class PncComponent implements OnInit {
     motherExaminationOptions: LookupItemView[] = [];
     babyExaminationControls: LookupItemView[] = [];
     drugAdministrationCategories: LookupItemView[] = [];
-    administeredInfantDrugs : any[] = [];
+    hivStatusOptions: LookupItemView[] = [];
+    administeredInfantDrugs: any[] = [];
 
     pncHivOptions: any[] = [];
     matHistoryOptions: any[] = [];
@@ -85,6 +88,7 @@ export class PncComponent implements OnInit {
     cervicalCancerScreeningOptions: any[] = [];
     contraceptiveHistoryExercise: any[] = [];
     referralOptions: any[] = [];
+    priorHivOptions: any[] = [];
 
     hiv_status_table_data: any[] = [];
     hivTestEntryPoint: number;
@@ -106,7 +110,8 @@ export class PncComponent implements OnInit {
         private router: Router,
         private pncService: PncService,
         private lookupitemservice: LookupItemService,
-        private maternityService: MaternityService) {
+        private maternityService: MaternityService,
+        private spinner: NgxSpinnerService) {
         this.visitDetailsFormGroup = new FormArray([]);
         this.matHistory_PostNatalExam_FormGroup = new FormArray([]);
         this.drugAdministration_PartnerTesting_FormGroup = new FormArray([]);
@@ -138,6 +143,18 @@ export class PncComponent implements OnInit {
         this.userId = JSON.parse(localStorage.getItem('appUserId'));
         this.visitDate = new Date(localStorage.getItem('visitDate'));
         this.visitType = JSON.parse(localStorage.getItem('visitType'));
+
+        this.lookupitemservice.getByGroupNameAndItemName('AppointmentStatus', 'Pending').subscribe(
+            (res) => {
+                this.appointmentStatusId = res['itemId'];
+            }
+        );
+
+        this.lookupitemservice.getByGroupNameAndItemName('AppointmentReason', 'Follow Up').subscribe(
+            (res) => {
+                this.appointmentReasonId = res['itemId'];
+            }
+        );
 
         this.lookupitemservice.getByGroupNameAndItemName('HTSEntryPoints', 'PMTCT').subscribe(
             (res) => {
@@ -174,7 +191,8 @@ export class PncComponent implements OnInit {
                 referralFromOptions,
                 motherExaminationOptions,
                 babyExaminationControls,
-                counselledInfantFeedingOptions } = res;
+                counselledInfantFeedingOptions,
+                hivStatusOptions } = res;
             this.yesnoOptions = yesnoOptions['lookupItems'];
             this.hivFinalResultsOptions = hivFinalResultsOptions['lookupItems'];
             this.deliveryModeOptions = deliveryModeOptions['lookupItems'];
@@ -197,11 +215,18 @@ export class PncComponent implements OnInit {
             this.motherExaminationOptions = motherExaminationOptions['lookupItems'];
             this.babyExaminationControls = babyExaminationControls['lookupItems'];
             this.infantFeedingTopicId = counselledInfantFeedingOptions['itemId'];
+            this.hivStatusOptions = hivStatusOptions['lookupItems'];
         });
+
+        // console.log(this.finalPartnerHivResultOptions);
 
         this.pncHivOptions.push({
             'yesnoOptions': this.yesnoOptions,
             'hivFinalResultsOptions': this.hivFinalResultsOptions
+        });
+
+        this.priorHivOptions.push({
+            'hivStatusOptions': this.hivStatusOptions
         });
 
         this.matHistoryOptions.push({
@@ -311,8 +336,8 @@ export class PncComponent implements OnInit {
         this.diagnosisReferralAppointmentFormGroup.push(formGroup);
     }
 
-    onInfantDrugsNotify(infantDrugs: any[]){
-      this.administeredInfantDrugs = infantDrugs;
+    onInfantDrugsNotify(infantDrugs: any[]) {
+        this.administeredInfantDrugs = infantDrugs;
     }
 
     onSubmitForm() {
@@ -322,6 +347,7 @@ export class PncComponent implements OnInit {
             return;
         }
 
+
         if (this.isEdit) {
             this.submitOnEdit();
         } else {
@@ -330,6 +356,7 @@ export class PncComponent implements OnInit {
     }
 
     submitOnAddNew(): void {
+        this.spinner.show();
         const yesOption = this.yesnoOptions.filter(obj => obj.itemName == 'Yes');
         const noOption = this.yesnoOptions.filter(obj => obj.itemName == 'No');
         const naOption = this.yesNoNaOptions.filter(obj => obj.itemName == 'N/A');
@@ -343,7 +370,7 @@ export class PncComponent implements OnInit {
             PatientMasterVisitId: this.patientMasterVisitId,
             VisitDate: moment(this.visitDetailsFormGroup.value[0]['visitDate']).toDate(),
             VisitNumber: parseInt(this.visitDetailsFormGroup.value[0]['visitNumber'], 10),
-            DaysPostPartum: this.visitDetailsFormGroup.value[0]['dayPostPartum'],
+            DaysPostPartum: this.matHistory_PostNatalExam_FormGroup.value[0]['dayPostPartum'],
             VisitType: this.visitDetailsFormGroup.value[0]['visitType'],
             UserId: this.userId
         } as VisitDetailsCommand;
@@ -431,7 +458,8 @@ export class PncComponent implements OnInit {
             PatientId: this.patientId,
             PatientMasterVisitId: this.patientMasterVisitId,
             ServiceAreaId: this.serviceAreaId,
-            AppointmentDate: moment(this.diagnosisReferralAppointmentFormGroup.value[2]['nextAppointmentDate']).toDate(),
+            AppointmentDate: this.diagnosisReferralAppointmentFormGroup.value[2]['nextAppointmentDate']
+                ? moment(this.diagnosisReferralAppointmentFormGroup.value[2]['nextAppointmentDate']).toDate() : null,
             Description: this.diagnosisReferralAppointmentFormGroup.value[2]['remarks'],
             StatusDate: null,
             DifferentiatedCareId: 0,
@@ -439,7 +467,7 @@ export class PncComponent implements OnInit {
             AppointmentReason: 'Follow Up'
         };
 
-        const pncPostNatalExamCommand: PostNatalExamCommand = {
+        const pncPostNatalExamCommandNew: PostNatalExamCommand = {
             Id: 0,
             PatientId: this.patientId,
             PatientMasterVisitId: this.patientMasterVisitId,
@@ -450,7 +478,7 @@ export class PncComponent implements OnInit {
         };
 
         for (let i = 0; i < this.motherExaminationOptions.length; i++) {
-            pncPostNatalExamCommand.PostNatalExamResults.push({
+            pncPostNatalExamCommandNew.PostNatalExamResults.push({
                 ExamId: this.motherExaminationOptions[i].itemId,
                 FindingId: this.matHistory_PostNatalExam_FormGroup.value[1][this.motherExaminationOptions[i].itemName.toLowerCase()],
                 FindingsNotes: ''
@@ -524,25 +552,24 @@ export class PncComponent implements OnInit {
                 value = this.drugAdministration_PartnerTesting_FormGroup.value[0]['startedARTPncVisit'];
             } else if (this.drugAdministrationCategories[i].itemName == 'Haematinics given') {
                 value = this.drugAdministration_PartnerTesting_FormGroup.value[0]['haematinics_given'];
-            } 
-            if(value != 0)
-            {
+            }
+            if (value != 0) {
                 drugAdministrationCommand.AdministeredDrugs.push({
                     Id: this.drugAdministrationCategories[i].itemId,
                     Value: value,
                     Description: this.drugAdministrationCategories[i].itemName
                 });
             }
-           
+
         }
 
-        this.administeredInfantDrugs.forEach(drug=>{
+        this.administeredInfantDrugs.forEach(drug => {
             drugAdministrationCommand.AdministeredDrugs.push({
                 Id: drug.drugId,
                 Value: drug.statusId,
                 Description: drug.drugName
             });
-        })
+        });
 
         const partnerTestingCommand: PartnerTestingCommand = {
             PatientId: this.patientId,
@@ -595,8 +622,16 @@ export class PncComponent implements OnInit {
             VisitDate: moment(this.visitDetailsFormGroup.value[0]['visitDate']).toDate()
         };
 
+        const patientMaternalDeliveryInfo: any = {
+            PatientMasterVisitId: this.patientMasterVisitId,
+            DateOfDelivery: this.matHistory_PostNatalExam_FormGroup.value[0]['dateofdelivery'],
+            ModeOfDelivery: this.matHistory_PostNatalExam_FormGroup.value[0]['modeofdelivery'],
+            CreatedBy: this.userId
+        };
+
+        const pncMaternalDeliveryInfo = this.maternityService.savePatientDelivery(patientMaternalDeliveryInfo);
         const pncVisitDetails = this.pncService.savePncVisitDetails(visitDetailsCommand);
-        const pncPostNatalExam = this.pncService.savePncPostNatalExam(pncPostNatalExamCommand);
+        const pncPostNatalExam = this.pncService.savePncPostNatalExam(pncPostNatalExamCommandNew);
         const pncBabyExam = this.pncService.savePncPostNatalExam(pncBabyExaminationCommand);
         const pncHivStatus = this.pncService.savePncHivStatus(hivStatusCommand, this.hiv_status_table_data);
         const pncDiagnosis = this.pncService.saveDiagnosis(pncPatientDiagnosis);
@@ -614,7 +649,7 @@ export class PncComponent implements OnInit {
             pncNextAppointment, pncVisitDetails,
             pncPostNatalExam, pncBabyExam, pncFamilyPlanning,
             pncPartnerTesting, pncPatientEducation, pncDrugAdministration,
-            pncPatientScreening, pncPatientPncExercisesSave])
+            pncPatientScreening, pncPatientPncExercisesSave, pncMaternalDeliveryInfo])
             .subscribe(
                 (result) => {
                     console.log(result);
@@ -638,6 +673,7 @@ export class PncComponent implements OnInit {
                         }
                     );
 
+                    this.spinner.hide();
                     this.snotifyService.success('Successfully saved PNC encounter ', 'PNC', this.notificationService.getConfig());
                     this.zone.run(() => {
                         this.router.navigate(['/dashboard/personhome/' + this.personId], { relativeTo: this.route });
@@ -653,6 +689,7 @@ export class PncComponent implements OnInit {
     }
 
     submitOnEdit(): void {
+        this.spinner.show();
         const yesOption = this.yesnoOptions.filter(obj => obj.itemName == 'Yes');
         const noOption = this.yesnoOptions.filter(obj => obj.itemName == 'No');
 
@@ -660,14 +697,20 @@ export class PncComponent implements OnInit {
             Id: this.visitDetailsFormGroup.value[0]['id'],
             VisitNumber: parseInt(this.visitDetailsFormGroup.value[0]['visitNumber'], 10),
             VisitType: this.visitDetailsFormGroup.value[0]['visitType'],
-            DaysPostPartum: this.visitDetailsFormGroup.value[0]['dayPostPartum'],
+            DaysPostPartum: this.matHistory_PostNatalExam_FormGroup.value[0]['dayPostPartum'],
         };
 
         const patientDiagnosisEdit = {
             PatientMasterVisitId: this.patientMasterVisitId,
             PatientId: this.patientId,
             Diagnosis: this.diagnosisReferralAppointmentFormGroup.value[0]['diagnosis'],
-            ManagementPlan: ''
+            ManagementPlan: '',
+            CreatedBy: this.userId
+        };
+
+        const UpdatePatientDiagnosisCommand: any = {
+            DiagnosisId: this.diagnosisReferralAppointmentFormGroup.value[0]['diagnosisId'],
+            DiagnosisCommand: patientDiagnosisEdit
         };
 
         const pncPostNatalExamCommand: PostNatalExamCommand = {
@@ -748,7 +791,27 @@ export class PncComponent implements OnInit {
         const patientAppointmentEditCommand: PatientAppointmentEditCommand = {
             AppointmentId: this.diagnosisReferralAppointmentFormGroup.value[2]['id'],
             AppointmentDate: moment(this.diagnosisReferralAppointmentFormGroup.value[2]['nextAppointmentDate']).toDate(),
-            Description: this.diagnosisReferralAppointmentFormGroup.value[2]['remarks']
+            Description: this.diagnosisReferralAppointmentFormGroup.value[2]['remarks'],
+            UserId: this.userId,
+            PatientId: this.patientId,
+            PatientMasterVisitId: this.patientMasterVisitId,
+            DifferentiatedCareId: null,
+            ReasonId: this.appointmentReasonId,
+            ServiceAreaId: this.serviceAreaId,
+            StatusId: this.appointmentStatusId
+        };
+
+        const pncNextAppointmentCommand: PatientAppointment = {
+            PatientId: this.patientId,
+            PatientMasterVisitId: this.patientMasterVisitId,
+            ServiceAreaId: this.serviceAreaId,
+            AppointmentDate: this.diagnosisReferralAppointmentFormGroup.value[2]['nextAppointmentDate'] ?
+                moment(this.diagnosisReferralAppointmentFormGroup.value[2]['nextAppointmentDate']).toDate() : null,
+            Description: this.diagnosisReferralAppointmentFormGroup.value[2]['remarks'],
+            StatusDate: null,
+            DifferentiatedCareId: 0,
+            CreatedBy: this.userId,
+            AppointmentReason: 'Follow Up'
         };
 
         const familyPlanningEditCommand: FamilyPlanningEditCommand = {
@@ -775,29 +838,44 @@ export class PncComponent implements OnInit {
             } else if (this.drugAdministrationCategories[i].itemName == 'Haematinics given') {
                 value = this.drugAdministration_PartnerTesting_FormGroup.value[0]['haematinics_given'];
                 id = this.drugAdministration_PartnerTesting_FormGroup.value[0]['id_haematinics'];
-            } else if (this.drugAdministrationCategories[i].itemName == 'Infant_Drug') {
-                value = this.drugAdministration_PartnerTesting_FormGroup.value[0]['infant_drug'];
-                id = this.drugAdministration_PartnerTesting_FormGroup.value[0]['id_infantdrug'];
-            } else if (this.drugAdministrationCategories[i].itemName == 'Infant_Start_Continue') {
-                value = this.drugAdministration_PartnerTesting_FormGroup.value[0]['infant_start'];
-                id = this.drugAdministration_PartnerTesting_FormGroup.value[0]['id_infantstart'];
             }
 
-            const updateDrugAdministrationCommand: UpdateDrugAdministrationCommand = {
-                Id: id,
-                DrugAdministered: this.drugAdministrationCategories[i].itemId,
-                Value: value,
-                Description: this.drugAdministrationCategories[i].itemName
-            };
+            if (value && id) {
+                const updateDrugAdministrationCommand: UpdateDrugAdministrationCommand = {
+                    Id: id,
+                    DrugAdministered: this.drugAdministrationCategories[i].itemId,
+                    Value: value,
+                    Description: this.drugAdministrationCategories[i].itemName
+                };
 
-            const pncDrugAdministrationEdit = this.pncService.updateDrugAdministration(updateDrugAdministrationCommand).subscribe(
-                (result) => {
-                    console.log(result);
-                },
-                (error) => {
-                    console.log(error);
-                }
-            );
+                const pncDrugAdministrationEdit = this.pncService.updateDrugAdministration(updateDrugAdministrationCommand).subscribe(
+                    (result) => {
+                        console.log(result);
+                    },
+                    (error) => {
+                        console.log(error);
+                    }
+                );
+            } else {
+                const drugAdministrationCommand: DrugAdministrationCommand = {
+                    Id: 0,
+                    PatientId: this.patientId,
+                    PatientMasterVisitId: this.patientMasterVisitId,
+                    CreatedBy: this.userId,
+                    AdministeredDrugs: []
+                };
+
+                this.administeredInfantDrugs.forEach(drug => {
+                    drugAdministrationCommand.AdministeredDrugs.push({
+                        Id: drug.drugId,
+                        Value: drug.statusId,
+                        Description: drug.drugName
+                    });
+                });
+
+
+                const pncDrugAdministration = this.pncService.savePncDrugAdministration(drugAdministrationCommand).subscribe();
+            }
         }
 
         const partnerTestingEditCommand: PartnerTestingEditCommand = {
@@ -816,13 +894,23 @@ export class PncComponent implements OnInit {
             UserId: this.userId,
         };
 
+        const pncNextAppointment = this.pncService.savePncNextAppointment(pncNextAppointmentCommand);
+        const pncAppointmentEdit = this.pncService.updateAppointment(patientAppointmentEditCommand);
+
+        let appointment;
+        if (!patientAppointmentEditCommand.AppointmentId || patientAppointmentEditCommand.AppointmentId == null) {
+            appointment = pncNextAppointment;
+        } else {
+            appointment = pncAppointmentEdit;
+        }
+
+
         const pncVisitDetailsEdit = this.pncService.editPncVisitDetails(visitDetailsEditCommand);
-        const pncPatientDiagnosisEdit = this.pncService.updatePatientDiagnosis(patientDiagnosisEdit);
+        const pncPatientDiagnosisEdit = this.pncService.updatePatientDiagnosis(UpdatePatientDiagnosisCommand);
         const pncPostnatalexamEdit = this.pncService.updatePncPostNatalExam(pncPostNatalExamCommand);
         const pncbabyexamEdit = this.pncService.updatePncPostNatalExam(pncBabyExaminationCommand);
         const pncHivStatus = this.pncService.savePncHivStatus(hivStatusCommand, this.hiv_status_table_data);
         const pncReferralEdit = this.pncService.updateReferral(patientReferralEditCommand);
-        const pncAppointmentEdit = this.pncService.updateAppointment(patientAppointmentEditCommand);
         const pncFamilyPlanningEdit = this.pncService.updateFamilyPlanning(familyPlanningEditCommand);
         const pncFamilyPlanningMethodEdit = this.pncService.updatePncFamilyPlanningMethod(updateFamilyPlanningMethodCommand);
         const pncPartnerTestingEdit = this.pncService.updatePartnerTesting(partnerTestingEditCommand);
@@ -830,11 +918,10 @@ export class PncComponent implements OnInit {
 
         forkJoin([pncVisitDetailsEdit, pncPatientDiagnosisEdit,
             pncPostnatalexamEdit, pncbabyexamEdit, pncHivStatus,
-            pncReferralEdit, pncAppointmentEdit, pncFamilyPlanningEdit,
+            pncReferralEdit, appointment, pncFamilyPlanningEdit,
             pncFamilyPlanningMethodEdit, pncPartnerTestingEdit, pncPatientPncExercisesSave]).subscribe(
                 (result) => {
-                    console.log(result);
-
+                    this.spinner.hide();
                     this.snotifyService.success('Successfully updated PNC encounter ', 'PNC', this.notificationService.getConfig());
                     this.zone.run(() => {
                         this.zone.run(() => {

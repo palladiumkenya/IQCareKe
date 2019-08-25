@@ -241,8 +241,14 @@ namespace IQCare.Web.CCC.Patient
 
                 //Get Adherance Status
                 ILookupManager patientAdheLookupManager = (ILookupManager)ObjectFactory.CreateInstance("BusinessProcess.CCC.BLookupManager, BusinessProcess.CCC");
+                var adherenceList = LookupLogic.GetLookItemByGroup("ARVAdherence");
+                int adherenceType = 34;
+                if (adherenceList.Count > 0)
+                {
+                    adherenceType = adherenceList[0].MasterId;
+                }
 
-                var adheranceStatus = patientAdheLookupManager.GetPatientAdherence(PatientId);
+                var adheranceStatus = patientAdheLookupManager.GetPatientAdherence(PatientId, adherenceType);
 
                 if (adheranceStatus != null)
                 {
@@ -539,7 +545,9 @@ namespace IQCare.Web.CCC.Patient
                         tableRow.Controls.Add(cell);
 
                         HtmlTableCell cell2 = new HtmlTableCell();
-                        cell2.InnerHtml = pharmacyDrugsSubstitutionsSwitchesData[p].DispensedByDate.ToString("dd-MMM-yyyy");
+                        cell2.InnerHtml = pharmacyDrugsSubstitutionsSwitchesData[p].DispensedByDate.HasValue
+                            ? pharmacyDrugsSubstitutionsSwitchesData[p].DispensedByDate.Value.ToString("dd-MMM-yyyy")
+                            : "not dispensed";
                         tableRow.Controls.Add(cell2);
 
                         tblPharmacyHistory.Rows.Add(tableRow);

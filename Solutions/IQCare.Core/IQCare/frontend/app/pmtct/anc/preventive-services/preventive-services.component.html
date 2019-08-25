@@ -11,9 +11,9 @@
     <div class="row">
         <div class="col-md-4 col-xs-12 col-sm-6">
             <mat-form-field class="col-md-12">
-                <mat-select formControlName="preventiveServices" placeholder="Preventive Service">
+                <mat-select formControlName="preventiveServices" placeholder="Preventive Service" >
                     <mat-option value=""> Select</mat-option>
-                    <mat-option *ngFor="let preventiveServicesOption of preventiveServicesOptions" [value]="preventiveServicesOption" required minlength="0">
+                    <mat-option *ngFor="let preventiveServicesOption of preventiveServicesOptions" [value]="preventiveServicesOption" required minlength="0" >
                         {{preventiveServicesOption.itemName}}
                     </mat-option>
                 </mat-select>

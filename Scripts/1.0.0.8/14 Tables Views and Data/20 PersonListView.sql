@@ -15,6 +15,7 @@ AS
 
 SELECT
 P.Id,
+PT.Id PatientId,
 CAST(DECRYPTBYKEY(P.FirstName) AS VARCHAR(50)) AS FirstName, 
 CAST(DECRYPTBYKEY(P.MidName) AS VARCHAR(50)) AS MiddleName,
 CAST(DECRYPTBYKEY(P.LastName) AS VARCHAR(50)) AS LastName,
@@ -28,7 +29,13 @@ CAST(DECRYPTBYKEY(PC.MobileNumber) AS VARCHAR(50)) AS MobileNumber
 
 FROM Person P
 LEFT JOIN Patient PT ON PT.PersonId = P.Id
-LEFT JOIN PersonContact PC ON PC.PersonId = P.Id 
+OUTER APPLY
+    (
+		SELECT TOP 1 * 
+		FROM PersonContact PC
+		WHERE PC.PersonId = P.Id 
+    ) PC
+--LEFT JOIN (SELECT DISTINCT PersonId, MobileNumber FROM PersonContact) PC ON PC.PersonId = P.Id 
 LEFT JOIN (SELECT Main.PatientId, LEFT(Main.IdentifierValue,Len(Main.IdentifierValue)-1) As "IdentifierValue"
 FROM
     (

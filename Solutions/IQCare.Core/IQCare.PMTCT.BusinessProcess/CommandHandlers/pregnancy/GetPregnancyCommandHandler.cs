@@ -27,7 +27,7 @@ namespace IQCare.PMTCT.BusinessProcess.CommandHandlers.pregnancy
             {
                 try
                 {
-                    PatientPregnancy result = await _unitOfWork.Repository<PatientPregnancy>().Get(x => x.PatientId == request.PatientId  && !x.Outcome.HasValue).OrderByDescending(x=>x.Id) .FirstOrDefaultAsync();
+                    PatientPregnancy result = await _unitOfWork.Repository<PatientPregnancy>().Get(x => x.PatientId == request.PatientId).OrderByDescending(x=>x.Id) .FirstOrDefaultAsync();
                     PregnancyViewModel pregnancyView = new PregnancyViewModel();;
                     if (result != null)
                     {
@@ -41,7 +41,8 @@ namespace IQCare.PMTCT.BusinessProcess.CommandHandlers.pregnancy
                         pregnancyView.Parity = result.Parity;
                         pregnancyView.Parity2 = result.Parity2;
                         pregnancyView.Outcome = result.Outcome;
-                        pregnancyView.DateOfOutcome = result.DateOfOutcome;                                          
+                        pregnancyView.DateOfOutcome = result.DateOfOutcome;
+                        pregnancyView.AgeAtMenarche = result.AgeAtMenarche;
                     }
 
                    return   Result<PregnancyViewModel>.Valid(pregnancyView);

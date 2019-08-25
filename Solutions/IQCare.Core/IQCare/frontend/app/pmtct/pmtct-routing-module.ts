@@ -14,10 +14,6 @@ import { BreastResolver } from './_services/resolvers/breast.resolver';
 import { PncComponent } from './pnc/pnc.component';
 import { PrimaryCareGiverResolver } from './_services/primarycaregiver.resolver';
 import { HeiComponent } from './hei/hei.component';
-import { PreventiveServicesComponent } from './anc/preventive-services/preventive-services.component';
-import { HaartProphylaxisComponent } from './anc/haart-prophylaxis/haart-prophylaxis.component';
-import { ClientMonitoringComponent } from './anc/client-monitoring/client-monitoring.component';
-import { PatientEducationExaminationComponent } from './anc/patient-education-examination/patient-education-examination.component';
 import { AncComponent } from './anc/anc.component';
 import { NgModule, Component } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
@@ -67,7 +63,7 @@ import { TbScreeningResolver } from './_services/resolvers/tb-screening.resolver
 import { MaternityEncounterComponent } from './maternity/maternity-encounter/maternity-encounter.component';
 import { MotherExaminationResolver } from './_services/resolvers/motherexamination.resolver';
 import { BabyExaminationResolver } from './_services/resolvers/baby-examination.resolver';
-import {BirthOutcomeResolver} from './_services/resolvers/BirthOutcomeResolver';
+import { BirthOutcomeResolver } from './_services/resolvers/BirthOutcomeResolver';
 import { CounselledInfantFeedingResolver } from './_services/resolvers/counselled-infant-feeding.resolver';
 
 
@@ -233,7 +229,8 @@ const routes: Routes = [
                     referralFromOptions: ReferralResolver,
                     motherExaminationOptions: MotherExaminationResolver,
                     babyExaminationControls: BabyExaminationResolver,
-                    counselledInfantFeedingOptions: CounselledInfantFeedingResolver
+                    counselledInfantFeedingOptions: CounselledInfantFeedingResolver,
+                    hivStatusOptions: HivStatusResolver
                 }
             },
             {
@@ -261,7 +258,8 @@ const routes: Routes = [
                     referralFromOptions: ReferralResolver,
                     motherExaminationOptions: MotherExaminationResolver,
                     babyExaminationControls: BabyExaminationResolver,
-                    counselledInfantFeedingOptions: CounselledInfantFeedingResolver
+                    counselledInfantFeedingOptions: CounselledInfantFeedingResolver,
+                    hivStatusOptions: HivStatusResolver
                 }
             }
         ]
@@ -284,11 +282,13 @@ const routes: Routes = [
                     yesNoNaOptions: YesNoNaResolver,
                     referralOptions: ReferralResolver,
                     hivFinalResultOptions: FinalPartnerHivResultResolver,
-                    hivTestOptions: PmtctTestTypeResolver,
-                    kitNameOptions: TestKitNameResolver,
-                    hivTestResultOptions: HivTestResultResolver,
-                    finalPartnerHivResultOptions: FinalPartnerHivResultResolver,
+                    // hivTestOptions: PmtctTestTypeResolver,
+                    // kitNameOptions: TestKitNameResolver,
+                    // hivTestResultOptions: HivTestResultResolver,
+                    // finalPartnerHivResultOptions: FinalPartnerHivResultResolver,
                     hivFinalResultsOptions: HivFinalResultsResolver,
+                    hivStatusOptions: HivStatusResolver,
+                    counselledInfantFeedingOptions: CounselledInfantFeedingResolver,
                 }
             },
             {
@@ -306,11 +306,14 @@ const routes: Routes = [
                     yesNoNaOptions: YesNoNaResolver,
                     referralOptions: ReferralResolver,
                     hivFinalResultOptions: FinalPartnerHivResultResolver,
-                    hivTestOptions: PmtctTestTypeResolver,
-                    kitNameOptions: TestKitNameResolver,
-                    hivTestResultOptions: HivTestResultResolver,
-                    finalPartnerHivResultOptions: FinalPartnerHivResultResolver,
+                    // hivTestOptions: PmtctTestTypeResolver,
+                    // kitNameOptions: TestKitNameResolver,
+                    // hivTestResultOptions: HivTestResultResolver,
+                    // finalPartnerHivResultOptions: FinalPartnerHivResultResolver,
                     hivFinalResultsOptions: HivFinalResultsResolver,
+                    hivStatusOptions: HivStatusResolver,             
+                    counselledInfantFeedingOptions: CounselledInfantFeedingResolver
+
                 }
             }
         ]

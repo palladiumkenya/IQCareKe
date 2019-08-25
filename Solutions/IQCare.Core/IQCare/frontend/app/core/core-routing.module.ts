@@ -33,6 +33,14 @@ const routes: Routes = [
         loadChildren: '../clinical/clinical.module#ClinicalModule'
     },
     {
+        path: 'air',
+        loadChildren: '../air/air.module#AirModule'
+    },
+    {
+        path: 'prep',
+        loadChildren: '../prep/prep.module#PrepModule'
+    },
+    {
         path: '**',
         component: NotFoundComponent
     }

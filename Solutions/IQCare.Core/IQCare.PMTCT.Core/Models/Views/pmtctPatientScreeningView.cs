@@ -10,7 +10,7 @@ namespace IQCare.PMTCT.Core.Models.Views
         public string ScreeningType { get; set; }
         public int PatientMasterVisitId { get; set; }
         public int ScreeningDone { get; set; }
-        public DateTime ScreeningDate { get; set; }
+        public DateTime? ScreeningDate { get; set; }
         public int ScreeningCategoryId { get; set; }
         public string ScreeningCategory { get; set; }
         public int ScreeningValueId { get; set; }

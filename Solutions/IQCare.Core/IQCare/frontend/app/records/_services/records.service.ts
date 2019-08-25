@@ -53,8 +53,8 @@ export class RecordsService {
         );
     }
 
-    public getPersonDetails(personId: number): Observable<any> {
-        return this.http.get<any>(this.API_URL + '/records/api/Register/GetPersonDetails/' + personId).pipe(
+    public getPersonDetails(personId: number): Observable<any[]> {
+        return this.http.get<any[]>(this.API_URL + '/records/api/Register/GetPersonDetails/' + personId).pipe(
             tap(getPersonDetails => this.errorHandler.log('get person details')),
             catchError(this.errorHandler.handleError<any[]>('getPersonDetails'))
         );
@@ -80,5 +80,18 @@ export class RecordsService {
             catchError(this.errorHandler.handleError<any[]>('getPersonIdentifiers'))
         );
     }
-    
+
+    public getPatientIdentifiersList(patientId: number): Observable<any[]> {
+        return this.http.get<any[]>(this.API_URL + '/api/Register/GetPatientIdentifiers/' + patientId).pipe(
+            tap(getPatientIdentifiersList => this.errorHandler.log('get patient identifiers list')),
+            catchError(this.errorHandler.handleError<any[]>('getPatientIdentifiersList'))
+        );
+    }
+
+    public personEnrollmentDetails(patientId: number, serviceAreaId: number): Observable<any> {
+        return this.http.get<any[]>(this.API_URL + '/api/Register?patientId=' + patientId + '&serviceAreaId=' + serviceAreaId).pipe(
+            tap(personEnrollmentDetails => this.errorHandler.log('get person enrollment details list')),
+            catchError(this.errorHandler.handleError<any[]>('personEnrollmentDetails'))
+        );
+    }
 }

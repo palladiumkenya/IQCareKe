@@ -41,10 +41,6 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\IQCare.Web.CCC\Bin\DataAccess.Context.dll</HintPath>
     </Reference>
-    <Reference Include="Entities.CCC, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\References\Entities.CCC.dll</HintPath>
-    </Reference>
     <Reference Include="Entities.Common, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\References\Entities.Common.dll</HintPath>
@@ -153,6 +149,7 @@
     <Compile Include="Interface\Pharmacy\IDrugRepository.cs" />
     <Compile Include="Interface\Pharmacy\IPatientPharmacyDispenseRepository.cs" />
     <Compile Include="Interface\Pharmacy\IPharmacyOrderRepository.cs" />
+    <Compile Include="Interface\Reporting\IReportingRepository.cs" />
     <Compile Include="Interface\Screening\IPatientScreeningRepository.cs" />
     <Compile Include="Interface\Lookup\ILookupCounty.cs" />
     <Compile Include="Interface\Lookup\ILookupFacility.cs" />
@@ -302,6 +299,7 @@
     <Compile Include="Repository\Pharmacy\DrugRepository.cs" />
     <Compile Include="Repository\Pharmacy\PatientPharmacyDispenseRepository.cs" />
     <Compile Include="Repository\Pharmacy\PharmacyOrderRepository.cs" />
+    <Compile Include="Repository\Reporting\ReportingRepository.cs" />
     <Compile Include="Repository\Screening\PatientScreeningRepository.cs" />
     <Compile Include="Repository\Tb\PatientTBRxRepository.cs" />
     <Compile Include="Repository\Triage\PatientAdverseEventOutcomeRepository.cs" />
@@ -322,7 +320,12 @@
     <Compile Include="Repository\visit\PatientMasterVisitRepository.cs" />
     <Compile Include="Repository\visit\PatientVisitRepository.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\Entities.CCC\Entities.CCC.csproj">
+      <Project>{BBCC4817-4E69-4722-A560-8988A795CE50}</Project>
+      <Name>Entities.CCC</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

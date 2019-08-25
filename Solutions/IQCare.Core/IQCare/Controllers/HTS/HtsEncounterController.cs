@@ -189,6 +189,17 @@ namespace IQCare.Controllers.HTS
         public async Task<IActionResult> Update(int encounterId, int patientMasterVisitId, [FromBody] UpdateEncounterCommand updateEncounterCommand)
         {
             updateEncounterCommand.encounterId = encounterId;
+            var encounter = await _mediator.Send(new EditEncounterVisitCommand()
+            {
+                PatientMasterVisitId = patientMasterVisitId,
+                Id = updateEncounterCommand.Encounter.PatientEncounterID,
+                EncounterDate = updateEncounterCommand.Encounter.EncounterDate
+            }, Request.HttpContext.RequestAborted);
+
+            if (!encounter.IsValid)
+            {
+                return BadRequest(encounter);
+            }
 
             if (updateEncounterCommand.Encounter.TbScreening.HasValue)
             {
@@ -274,6 +285,30 @@ namespace IQCare.Controllers.HTS
                 return Ok(response.Value);
             return BadRequest(response);
         }
+        [HttpGet("getLatestEncounterDetails/{personId}")]
+        public async Task<IActionResult> GetCurrentEncounterDetailsByPersonId(int personId)
+        {
+            var response = await _mediator.Send(new EncounterDetailsByPersonIdCommand()
+            {
+                personId = personId
+            }, Request.HttpContext.RequestAborted);
+            if (response.IsValid)
+                return Ok(response.Value);
+            return BadRequest(response);
+        }
+
+
+        [HttpGet("getEncounterDetailsByPersonId/{personId}")]
+        public async Task<IActionResult> GetEncounterDetailsByPersonId(int personId)
+        {
+            var response = await _mediator.Send(new GetHtsEncounterDetailsViewByPersonIdCommand()
+            {
+                personId = personId
+            }, Request.HttpContext.RequestAborted);
+            if (response.IsValid)
+                return Ok(response.Value);
+            return BadRequest(response);
+        }
 
         [HttpGet("getEncounterDetails/{encounterId}")]
         public async Task<IActionResult> GetEncounterDetails(int encounterId)
@@ -306,6 +341,19 @@ namespace IQCare.Controllers.HTS
             var response = await _mediator.Send(new GetLastLotNumberByKitIdCommand()
             {
                 KitId = kitId
+            }, Request.HttpContext.RequestAborted);
+
+            if (response.IsValid)
+                return Ok(response.Value);
+            return BadRequest(response);
+        }
+
+        [HttpGet("GetIsPersonInPositiveList/{personId}")]
+        public async Task<IActionResult> GetIsPersonInPositiveList(int personId)
+        {
+            var response = await _mediator.Send(new GetHivPositiveListCommand()
+            {
+                PersonId = personId
             }, Request.HttpContext.RequestAborted);
 
             if (response.IsValid)

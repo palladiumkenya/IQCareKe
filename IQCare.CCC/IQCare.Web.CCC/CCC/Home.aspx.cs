@@ -20,6 +20,7 @@ namespace IQCare.Web.CCC
         {
             AppLocationId = Convert.ToInt32(HttpContext.Current.Session["AppLocationId"]);
             Session["PatientPK"] = 0;
+            Session["PatientTrace"] = "";
             
             if (!IsPostBack)
             {

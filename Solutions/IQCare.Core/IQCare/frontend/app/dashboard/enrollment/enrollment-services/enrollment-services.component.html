@@ -9,31 +9,31 @@
                     <form [formGroup]="formGroup">
                         <fieldset>
                             <div class="row">
-                                <div class="col-lg-6 col-sm-6 col-xs-12">
+                                <div class="col-lg-3 col-sm-3 col-xs-12">
                                     <mat-form-field>
                                         <input placeholder="Enrollment Date" matInput [matDatepicker]="myDatepicker"
-                                            [max]="maxDate" (focus)="myDatepicker.open()" formControlName="EnrollmentDate"
-                                            required>
+                                            [max]="maxDate" (focus)="myDatepicker.open()"
+                                            formControlName="EnrollmentDate" required>
                                         <mat-datepicker-toggle matSuffix [for]="myDatepicker"></mat-datepicker-toggle>
-                                        <mat-datepicker #myDatepicker name="EnrollmentDate" ngDefaultControl></mat-datepicker>
+                                        <mat-datepicker #myDatepicker name="EnrollmentDate" ngDefaultControl>
+                                        </mat-datepicker>
                                     </mat-form-field>
                                 </div>
-                                <!--<div class="col-lg-6 col-sm-6 col-xs-12">
-                                    <mat-form-field>
-                                        <mat-select placeholder="Status" formControlName="Status">
-                                            <mat-option></mat-option>
-                                            <mat-option *ngFor="let option of patientTypeOptions" [value]="option.itemId">{{option.itemName}}</mat-option>
-                                        </mat-select>
-                                    </mat-form-field>
-                                </div>-->
                             </div>
 
-                            <div class="row" formArrayName="identifiers" *ngFor="let item of formGroup.get('identifiers')['controls']; let i = index;">
-                                <div class="col-lg-6 col-sm-6 col-xs-12" [formGroupName]="i">
+                            <div class="row">
+                                <div class="col-lg-3 col-sm-3 col-xs-12">
                                     <mat-form-field>
-                                        <input matInput placeholder="{{formGroup.controls.identifiers.controls[i].controls.displayName.value}}"
-                                            id="{{formGroup.controls.identifiers.controls[i].controls.identifierId.value}}"
-                                            formControlName="name">
+                                        <div formArrayName="identifiers"
+                                            *ngFor="let item of formGroup.get('identifiers')['controls']; let i = index;">
+                                            <div [formGroupName]="i">
+                                                <mat-label>
+                                                    {{formGroup.controls.identifiers.controls[i].controls.displayName.value}}
+                                                </mat-label>
+                                            </div>
+                                        </div>
+                                        <input matInput id="enrollmentNo" name="enrollmentNo"
+                                            formControlName="EnrollmentNumber">
                                     </mat-form-field>
                                 </div>
                             </div>
@@ -43,7 +43,8 @@
                             </div>
 
                             <div class="row">
-                                <button mat-raised-button color="primary" type="submit" (click)="submitEnrollment()">Submit</button>
+                                <button mat-raised-button color="primary" type="submit"
+                                    (click)="submitEnrollment()">Submit</button>
                             </div>
                         </fieldset>
                     </form>

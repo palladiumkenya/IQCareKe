@@ -503,13 +503,18 @@ namespace IQCare.CCC.UILogic
                             theFrmRoot.NavigateUrl = "../Adherence/AdherenceBarriers.aspx?visitId=" + theDR["visitID"].ToString();
                             theFrmRoot.ImageUrl = "~/images/15px-Yes_check.svg.png";
                         }
+                        if (theDR["VisitName"].ToString() == "Patient-Tracing")
+                        {
+                            theFrmRoot.NavigateUrl = "../Patient/PatientTracing.aspx?visitId=" + theDR["visitID"].ToString();
+                            theFrmRoot.ImageUrl = "~/images/15px-Yes_check.svg.png";
+                        }
                         if (theDR["VisitName"].ToString() == "Depression Screening")
                         {
                             theFrmRoot.NavigateUrl = "../Screening/DepressionScreening.aspx?visitId=" + theDR["visitID"].ToString();
                             theFrmRoot.ImageUrl = "~/images/15px-Yes_check.svg.png";
                         }
 
-                        if(theDR["VisitName"].ToString()== "Case Summary")
+                        if (theDR["VisitName"].ToString() == "Case Summary")
                         {
                             theFrmRoot.NavigateUrl = "../CaseSummary/CaseSummary.aspx?visitId=" + theDR["visitID"].ToString();
                             theFrmRoot.ImageUrl = "~/images/15px-Yes_check.svg.png";
@@ -541,7 +546,7 @@ namespace IQCare.CCC.UILogic
                         if (theDR["VisitName"].ToString() == "Enhance Adherence Counselling")
                         {
 
-                            theFrmRoot.NavigateUrl = "../EnhanceAdherenceCounselling/EnhanceAdherenceHome.aspx?visitId=" + theDR["visitID"].ToString();
+                            theFrmRoot.NavigateUrl = "../EnhanceAdherenceCounselling/EnhanceAdherenceHome.aspx?pid=" + patientID + "&visitId=" + theDR["visitID"].ToString();
                             theFrmRoot.ImageUrl = "~/images/15px-Yes_check.svg.png";
                         }
                         if (theDR["VisitName"].ToString() == "Triage")
@@ -774,8 +779,8 @@ namespace IQCare.CCC.UILogic
             return (result > 0) ? result : val;
         }
 
-        public int SavePatientPreviousEncounter(int patientID, int patientMasterVisitID, string EncounterType, int ServiceAreaId, int userId,DateTime visitDate)
-            {
+        public int SavePatientPreviousEncounter(int patientID, int patientMasterVisitID, string EncounterType, int ServiceAreaId, int userId, DateTime visitDate)
+        {
 
             int val = 0;
             IPatientEncounter patientEncounter = (IPatientEncounter)ObjectFactory.CreateInstance("BusinessProcess.CCC.BPatientEncounter, BusinessProcess.CCC");
@@ -790,7 +795,7 @@ namespace IQCare.CCC.UILogic
             {
 
 
-                 Entities.CCC.Visit.PatientEncounter patientVisitEncounter = new Entities.CCC.Visit.PatientEncounter()
+                Entities.CCC.Visit.PatientEncounter patientVisitEncounter = new Entities.CCC.Visit.PatientEncounter()
                 {
                     PatientId = Convert.ToInt32(patientID),
                     EncounterStartTime = visitDate,

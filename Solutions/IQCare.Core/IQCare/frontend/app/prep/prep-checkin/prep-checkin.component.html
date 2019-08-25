@@ -1,0 +1,29 @@
+<h2 mat-dialog-title>{{title}}</h2>
+
+<mat-divider></mat-divider>
+<br>
+
+<form [formGroup]="form">
+    <mat-dialog-content>
+    <!--    <mat-form-field>
+            <mat-select placeholder="Visit Type" formControlName="visitType" required>
+                <mat-option value=""></mat-option>
+                <mat-option *ngFor="let option of visitTypes" [value]="option">{{option.itemName}}</mat-option>
+            </mat-select>
+            <mat-error *ngIf="!form.controls['visitType'].valid">Please select Visit Type</mat-error>
+        </mat-form-field>-->
+        <mat-form-field>
+            <input matInput [min]="prepEncounterDate" placeholder="Visit Date" required
+                [matDatepicker]="visitdatepicker" (click)="visitdatepicker.open()" id="visitdatepicker"
+                name="visitdatepicker" autocomplete="off" formControlName="visitdate" required>
+            <mat-datepicker-toggle matSuffix [for]="visitdatepicker"></mat-datepicker-toggle>
+            <mat-datepicker #visitdatepicker></mat-datepicker>
+            <mat-error *ngIf="!form.controls['visitdate'].valid">Please select an Visit Date</mat-error>
+        </mat-form-field>
+    </mat-dialog-content>
+
+    <mat-dialog-actions>
+        <button class="mat-raised-button" (click)="close()">Close</button>
+        <button class="mat-raised-button mat-primary" (click)="save()">Save</button>
+    </mat-dialog-actions>
+</form>

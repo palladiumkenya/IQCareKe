@@ -12,8 +12,9 @@ export class HeaderComponent implements OnInit {
     constructor() { }
 
     ngOnInit() {
-        if (!localStorage.getItem('appLocation')) {
-            window.location.href = 'http://' + window.location.hostname + '/IQCare/frmlogin.aspx';
+       if (!localStorage.getItem('appLocation')) {
+            window.location.href = location.protocol +
+                '//' + window.location.hostname + ':' + window.location.port + '/IQCare/frmlogin.aspx';
         }
         this.facilityName = localStorage.getItem('appLocation');
         this.username = localStorage.getItem('appUserName');

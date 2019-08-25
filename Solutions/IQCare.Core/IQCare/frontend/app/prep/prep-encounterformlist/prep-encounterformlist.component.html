@@ -1,0 +1,70 @@
+<div class="row">
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        <div class='row'>
+            <app-clientbrief>
+
+            </app-clientbrief>
+        </div>
+        <div class="row">
+            <div class="col-lg-12 col-sm-6 col-xs-12">
+                <div class="widget">
+                    <div class="widget-header bordered-bottom bordered-sky">
+                        <span class="widget-caption">PREP | PREP FORMS</span>
+                    </div>
+
+                </div>
+                <div class="widget-body">
+                <form [formGroup]="Encounterformlistgroup">
+                    <div class="row" style="margin:5px">
+
+                        
+                        <div class="button-row pull-right">
+                                <a mat-raised-button class="mat-primary"  (click)="Back()">
+                                        <i class="fa fa-plus"></i>
+                                        <span>Back</span>
+                                    </a>
+                         </div>
+                         <span>&nbsp;</span>
+                        <div class="button-row pull-right">
+                                <a mat-raised-button color="accent" (click)="clickEncounter()">
+                                    <i class="fa fa-plus"></i>
+                                    <span>New Prep Follow up</span>
+                                </a>
+                        </div>
+                        <div class="button-row pull-right">
+                            <a mat-raised-button color="accent" (click)="monthlyrefillencounter()">
+                                <i class="fa fa-plus"></i>
+                                <span>New Prep Monthly Refill</span>
+                            </a>
+                    </div>
+
+                        
+
+
+                    </div>
+                    <div class="row" style="margin:5px;">
+                        <app-prep-patientvitalsinfo [patientId]="patientId"></app-prep-patientvitalsinfo>
+                    </div>
+                    <div class="row">&nbsp;</div>
+                    <div class="row" style="margin:5px;">
+                        <app-prep-riskassessmentgriddetails [personId]="personId"></app-prep-riskassessmentgriddetails>
+                    </div>
+                    <div class="row" style="margin:5px;">
+                        <app-prep-htsencountersgrid [personId]="personId"></app-prep-htsencountersgrid>
+                    </div>
+                    <div class="row" style="margin:5px;">
+                        <app-prep-labsgrid [patientId]="patientId"></app-prep-labsgrid>
+                    </div>
+                    <div class="row" style="margin:5px">
+                        <app-prep-appointmentgrid [patientId]="patientId" [ServiceAreaId]="serviceAreaId">
+
+                        </app-prep-appointmentgrid>
+                    </div>
+
+                
+               </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

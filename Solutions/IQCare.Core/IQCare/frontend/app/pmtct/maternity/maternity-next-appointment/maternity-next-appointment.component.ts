@@ -4,6 +4,7 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 import { NotificationService } from '../../../shared/_services/notification.service';
 import { SnotifyService } from 'ng-snotify';
 import * as moment from 'moment';
+import { DataService } from '../../../shared/_services/data.service';
 
 @Component({
     selector: 'app-maternity-next-appointment',
@@ -25,14 +26,19 @@ export class MaternityNextAppointmentComponent implements OnInit {
     constructor(private formBuilder: FormBuilder,
         private notificationService: NotificationService,
         private snotifyService: SnotifyService,
+        private dataService: DataService,
         private pncservice: PncService) {
     }
 
     ngOnInit() {
         this.nextAppointmentFormGroup = this.formBuilder.group({
-            nextAppointmentDate: new FormControl('', [Validators.required]),
+            nextAppointmentDate: new FormControl(''),
             remarks: new FormControl(''),
             id: new FormControl('')
+        });
+
+        this.dataService.visitDate.subscribe(date => {
+            this.minDate = date;
         });
 
         this.notify.emit(this.nextAppointmentFormGroup);

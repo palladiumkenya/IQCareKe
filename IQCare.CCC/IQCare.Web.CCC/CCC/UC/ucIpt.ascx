@@ -336,7 +336,8 @@
         }
     }
     function AdheranceMeasurementChange() {
-        if (($("#adheranceMeasurement :selected").text() === "Good(Missed<3/month)") || ($("#adheranceMeasurement :selected").text() === "Fair(Missed4-8/month)")) {
+       // || ($("#adheranceMeasurement :selected").text() === "Fair(Missed4-8/month)"))
+        if (($("#adheranceMeasurement :selected").text() === "Good(Missed<3/month)")) {
             $("#<%=adheranceAction.ClientID%>").prop('disabled', true);
         } else {
             $("#<%=adheranceAction.ClientID%>").prop('disabled', false);

@@ -62,6 +62,13 @@ namespace IQCare.CCC.UILogic.Baseline
 
             _result = (_id > 0)
                 ? _patientTreatmentInitiation.UpdatePatientTreatmentInitiation(patientTreatmentInitiationInsert): _patientTreatmentInitiation.AddPatientTreatmentInitiation(patientTreatmentInitiationInsert);
+            PatientLookupManager patientLookupManager = new PatientLookupManager();
+            var patient = patientLookupManager.GetPatientDetailSummary(patientId);
+            if (patient != null)
+            {
+                _patientTreatmentInitiation.UpdateBlueCardBaselineTransferInStartedART(patient.ptn_pk,
+                    dateStartedOnFirstLine, regimen);
+            }
             return _result;
         }
 

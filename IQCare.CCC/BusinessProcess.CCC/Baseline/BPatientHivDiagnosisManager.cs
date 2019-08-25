@@ -1,8 +1,12 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using DataAccess.Base;
 using DataAccess.CCC.Context;
 using DataAccess.CCC.Repository;
+using DataAccess.Common;
+using DataAccess.Entity;
 using Entities.CCC.Baseline;
 using Interface.CCC.Baseline;
 
@@ -46,6 +50,20 @@ namespace BusinessProcess.CCC.Baseline
                 unitOfWork.Dispose();
                 return Result;
             }
+        }
+
+        public void UpdateBlueCardBaseline(int? ptn_pk, DateTime dateOfHivDiagnosis, DateTime? artInitiationDate, DateTime? dateOfEnrollment, int locationId, int whostage)
+        {
+            ClsObject obj = new ClsObject();
+            ClsUtility.Init_Hashtable();
+            ClsUtility.AddExtendedParameters("@ptn_pk", SqlDbType.Int, ptn_pk);
+            ClsUtility.AddExtendedParameters("@DateOfHivDiagnosis", SqlDbType.DateTime, dateOfHivDiagnosis);
+            ClsUtility.AddExtendedParameters("@ArtInitiationDate", SqlDbType.DateTime, artInitiationDate);
+            ClsUtility.AddExtendedParameters("@DateOfEnrollment", SqlDbType.DateTime, dateOfEnrollment);
+            ClsUtility.AddExtendedParameters("@locationId", SqlDbType.Int, locationId);
+            ClsUtility.AddExtendedParameters("@WHOStage", SqlDbType.Int, whostage);
+
+            DataTable dt = (DataTable)obj.ReturnObject(ClsUtility.theParams, "sp_UpdateBlueCardBaselineHistory", ClsUtility.ObjectEnum.DataTable);
         }
 
         public int DeletePatientHivDiagnosis(int id)

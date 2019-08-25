@@ -12,6 +12,7 @@ using IQCare.HTS.Infrastructure;
 using IQCare.Library;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
+using Newtonsoft.Json;
 using Serilog;
 
 namespace IQCare.HTS.BusinessProcess.CommandHandlers
@@ -30,7 +31,6 @@ namespace IQCare.HTS.BusinessProcess.CommandHandlers
         public async Task<Result<string>> Handle(AfyaMobileSynchronizeHtsTestsCommand request, CancellationToken cancellationToken)
         {
             string afyaMobileId = String.Empty;
-            string enrollmentNo = string.Empty;
 
             using (var trans = _htsUnitOfWork.Context.Database.BeginTransaction())
             {
@@ -42,22 +42,13 @@ namespace IQCare.HTS.BusinessProcess.CommandHandlers
                     //Person Identifier
                     for (int j = 0; j < request.INTERNAL_PATIENT_ID.Count; j++)
                     {
-                        if (request.INTERNAL_PATIENT_ID[j].ASSIGNING_AUTHORITY ==
-                            "HTS" && request.INTERNAL_PATIENT_ID[j]
-                                .IDENTIFIER_TYPE == "HTS_SERIAL")
-                        {
-                            enrollmentNo = request.INTERNAL_PATIENT_ID[j].ID;
-                        }
-
-                        if (request.INTERNAL_PATIENT_ID[j].IDENTIFIER_TYPE ==
-                            "AFYA_MOBILE_ID" &&
-                            request.INTERNAL_PATIENT_ID[j].ASSIGNING_AUTHORITY ==
-                            "AFYAMOBILE")
+                        if (request.INTERNAL_PATIENT_ID[j].IDENTIFIER_TYPE == "AFYA_MOBILE_ID" && request.INTERNAL_PATIENT_ID[j].ASSIGNING_AUTHORITY == "AFYAMOBILE")
                         {
                             afyaMobileId = request.INTERNAL_PATIENT_ID[j].ID;
                         }
                     }
-
+                    var afyaMobileMessage = await registerPersonService.AddAfyaMobileInbox(DateTime.Now, request.MESSAGE_HEADER.MESSAGE_TYPE, afyaMobileId, JsonConvert.SerializeObject(request), false);
+                    
                     //check if person already exists
                     var identifiers = await registerPersonService.getPersonIdentifiers(afyaMobileId, 10);
                     if (identifiers.Count > 0)
@@ -96,6 +87,18 @@ namespace IQCare.HTS.BusinessProcess.CommandHandlers
                                 getPatientConsents[0].DeclineReason = pnsDeclineReason;
 
                                 await encounterTestingService.UpdatePatientConsent(getPatientConsents[0]);
+
+
+                                var hasConsentedToListPartners = await _unitOfWork.Repository<LookupItemView>()
+                                    .Get(x => x.ItemId == pnsAccepted && x.MasterName == "YesNoNA").ToListAsync();
+                                if (hasConsentedToListPartners.Count > 0)
+                                {
+                                    if (hasConsentedToListPartners[0].ItemName == "Yes")
+                                    {
+                                        var listPartners = await registerPersonService.AddAppStateStore(person.Id, patient.Id, 3,
+                                            getPatientEncounter.PatientMasterVisitId, getPatientEncounter.Id, null);
+                                    }
+                                }
                             }
                             else
                             {
@@ -103,6 +106,17 @@ namespace IQCare.HTS.BusinessProcess.CommandHandlers
                                 var partnersConsent = await encounterTestingService.addPatientConsent(patient.Id,
                                     getPatientEncounter.PatientMasterVisitId, 2, pnsAccepted, consentListPartnersTypeId, getPatientEncounter.EncounterStartTime, providerId,
                                     pnsDeclineReason);
+
+                                var hasConsentedToListPartners = await _unitOfWork.Repository<LookupItemView>()
+                                    .Get(x => x.ItemId == pnsAccepted && x.MasterName == "YesNoNA").ToListAsync();
+                                if (hasConsentedToListPartners.Count > 0)
+                                {
+                                    if (hasConsentedToListPartners[0].ItemName == "Yes")
+                                    {
+                                        var listPartners = await registerPersonService.AddAppStateStore(person.Id, patient.Id, 3,
+                                            getPatientEncounter.PatientMasterVisitId, getPatientEncounter.Id, null);
+                                    }
+                                }
                             }
 
                             //Screening Tests
@@ -122,30 +136,56 @@ namespace IQCare.HTS.BusinessProcess.CommandHandlers
                                 getHtsEncounterResults[0].FinalResult = finalResult;
 
                                 var updatedHtsEncounterResult = await encounterTestingService.UpdateHtsEncounterResult(getHtsEncounterResults[0]);
+
+                                // add state for positive person
+                                var clientFinalResultsList = await _unitOfWork.Repository<LookupItemView>()
+                                    .Get(x => x.ItemId == finalResult && x.MasterName == "HIVFinalResults").ToListAsync();
+                                if (clientFinalResultsList.Count > 0 &&
+                                    clientFinalResultsList[0].ItemName == "Positive")
+                                {
+                                    var isClientPositiveState = await registerPersonService.AddAppStateStore(person.Id, patient.Id, 4,
+                                        getPatientEncounter.PatientMasterVisitId, getPatientEncounter.Id, null);
+                                }
                             }
                             else
                             {
                                 var htsEncounterResult = await encounterTestingService.addHtsEncounterResult(getHtsEncounter.Id, roundOneTestResult, roundTwoTestResult, finalResult);
+
+
+                                // add state for positive person
+                                var clientFinalResultsList = await _unitOfWork.Repository<LookupItemView>()
+                                    .Get(x => x.ItemId == finalResult && x.MasterName == "HIVFinalResults").ToListAsync();
+                                if (clientFinalResultsList.Count > 0 &&
+                                    clientFinalResultsList[0].ItemName == "Positive")
+                                {
+                                    var isClientPositiveState = await registerPersonService.AddAppStateStore(person.Id, patient.Id, 4,
+                                        getPatientEncounter.PatientMasterVisitId, getPatientEncounter.Id, null);
+                                }
                             }
                         }
                         else
                         {
-                            Result<string>.Invalid(
-                                $"HTS PRE-TEST with encounter number: {encounterNumber} could not be found");
+                            //update message has been processed
+                            await registerPersonService.UpdateAfyaMobileInbox(afyaMobileMessage.Id, afyaMobileId, true, DateTime.Now, $"HTS PRE-TEST with encounter number: {encounterNumber} could not be found", false);
+                            Result<string>.Invalid($"HTS PRE-TEST with encounter number: {encounterNumber} could not be found");
                         }
                     }
                     else
                     {
+                        //update message has been processed
+                        await registerPersonService.UpdateAfyaMobileInbox(afyaMobileMessage.Id, afyaMobileId, true, DateTime.Now, $"Person with afyaMobileId: {afyaMobileId} could not be found", false);
                         return Result<string>.Invalid($"Person with afyaMobileId: {afyaMobileId} could not be found");
                     }
 
+                    //update message has been processed
+                    await registerPersonService.UpdateAfyaMobileInbox(afyaMobileMessage.Id, afyaMobileId, true, DateTime.Now, $"Successfully synchronized HTS tests for afyamobileid: {afyaMobileId}", true);
                     trans.Commit();
-                    return Result<string>.Valid("Successfully synchronized HTS tests");
+                    return Result<string>.Valid($"Successfully synchronized HTS tests for afyamobileid: {afyaMobileId}");
                 }
                 catch (Exception ex)
                 {
                     trans.Rollback();
-                    Log.Error(ex.Message);
+                    Log.Error($"Failed to synchronize Hts tests for clientid: {afyaMobileId} " + ex.Message + " " + ex.InnerException);
                     return Result<string>.Invalid($"Failed to synchronize Hts tests for clientid: {afyaMobileId} " + ex.Message + " " + ex.InnerException);
                 }
             }

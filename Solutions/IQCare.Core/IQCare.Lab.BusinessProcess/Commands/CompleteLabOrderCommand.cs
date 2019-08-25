@@ -13,6 +13,7 @@ namespace IQCare.Lab.BusinessProcess.Commands
         public int LabTestId { get; set; }
         public int UserId { get; set; }
         public string StrLabTestResults { get; set; }
+        public DateTime? DateResultsCollected { get; set; }
         public List<AddLabTestResultCommand> LabTestResults { get; set; }
     }
 

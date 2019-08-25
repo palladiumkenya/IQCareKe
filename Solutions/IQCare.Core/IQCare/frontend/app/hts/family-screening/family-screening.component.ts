@@ -103,12 +103,12 @@ export class FamilyScreeningComponent implements OnInit {
 
                 const hivStatusSelected = this.hivStatusOptions.filter(obj => obj.itemId == this.familyScreening.hivStatus);
                 if (hivStatusSelected.length > 0 && hivStatusSelected[0].itemName == 'Positive') {
-                    const partnerPnsTraced = {
+                    const familyScreenedPositive = {
                         'familyId': this.familyScreening.personId,
                         'familyScreenedPositive': true
                     };
 
-                    this.store.dispatch(new Consent.FamilyScreenedPositive(JSON.stringify(partnerPnsTraced)));
+                    this.store.dispatch(new Consent.FamilyScreenedPositive(JSON.stringify(familyScreenedPositive)));
                     this.appStateService.addAppState(AppEnum.FAMILY_SCREENED_POSITIVE, JSON.parse(localStorage.getItem('personId')),
                         JSON.parse(localStorage.getItem('patientId')), null, null, JSON.stringify({
                             'familyId': this.familyScreening.personId,

@@ -44,8 +44,6 @@ export class ImmunizationHistoryComponent implements OnInit {
     }
 
     ngOnInit() {
-
-
         const {
             immunizationPeriod,
             immunizationGiven,
@@ -58,6 +56,7 @@ export class ImmunizationHistoryComponent implements OnInit {
         this.notify.emit({ 'data': this.immunization_history });
 
         this.loadImmunizationHistory();
+        this.getPatientDateOfBirth(this.patientId);
     }
 
     public loadImmunizationHistory(): void {
@@ -79,6 +78,10 @@ export class ImmunizationHistoryComponent implements OnInit {
             (error) => { },
             () => { }
         );
+    }
+
+    public getPatientDateOfBirth(patientId: number) {
+
     }
 
     public NewImmunization() {
@@ -133,42 +136,6 @@ export class ImmunizationHistoryComponent implements OnInit {
             }
         );
     }
-
-    /*public AddImmunization() {
-        if (this.ImmunizationHistoryFormGroup.invalid) {
-            this.snotifyService.warning('Please complete all fields before add', 'Immunization History',
-                this.notificationService.getConfig());
-            return;
-        }
-
-        const period = this.ImmunizationHistoryFormGroup.get('period').value.itemName;
-        if (this.immunization_history_table_data.filter(x => x.immunizationPeriod === period).length > 0) {
-            this.snotifyService.warning('' + period + ' exists', 'Immunization History', this.notificationService.getConfig());
-        } else {
-
-            let nextScheduleDate;
-            if (this.ImmunizationHistoryFormGroup.controls['nextSchedule'].value) {
-                nextScheduleDate = new Date(this.ImmunizationHistoryFormGroup.controls['nextSchedule'].value);
-            }
-
-            this.immunization_history_table_data.push({
-                immunizationPeriod: period,
-                given: this.ImmunizationHistoryFormGroup.controls['immunizationGiven'].value.itemName,
-                dateImmunized: new Date(this.ImmunizationHistoryFormGroup.controls['dateImmunized'].value),
-                nextSchedule: nextScheduleDate
-            });
-
-            this.immunization_history.push({
-                immunizationPeriodId: this.ImmunizationHistoryFormGroup.get('period').value.itemId,
-                immunizationGivenId: this.ImmunizationHistoryFormGroup.controls['immunizationGiven'].value.itemId,
-                dateImmunized: new Date(this.ImmunizationHistoryFormGroup.controls['dateImmunized'].value),
-                nextScheduled: nextScheduleDate
-            });
-
-            console.log(this.immunization_history_table_data);
-            this.dataSource = new MatTableDataSource(this.immunization_history_table_data);
-        }
-    }*/
 
     public onRowClicked(row) {
         console.log('row clicked:', row);

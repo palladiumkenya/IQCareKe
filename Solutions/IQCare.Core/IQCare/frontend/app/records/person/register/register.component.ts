@@ -25,7 +25,6 @@ import { Search } from '../../_models/search';
 import { Store } from '@ngrx/store';
 import * as AppState from '../../../shared/reducers/app.states';
 import { Partner } from '../../../shared/_models/partner';
-import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
     selector: 'app-register',
@@ -82,8 +81,7 @@ export class RegisterComponent implements OnInit {
         public zone: NgZone,
         private router: Router,
         private searchService: SearchService,
-        private store: Store<AppState>,
-        private spinner: NgxSpinnerService) {
+        private store: Store<AppState>) {
         this.maxDate = new Date();
         this.clientSearch = new Search();
     }
@@ -114,7 +112,8 @@ export class RegisterComponent implements OnInit {
                     EducationLevel: new FormControl(this.person.EducationLevel),
                     Occupation: new FormControl(this.person.Occupation),
                     IdentifierType: new FormControl(this.person.IdentifierType),
-                    IdentifierNumber: new FormControl(this.person.IdentifierNumber, [Validators.required])
+                    IdentifierNumber: new FormControl(this.person.IdentifierNumber,
+                        Validators.compose([Validators.required, Validators.maxLength(50)]))
                 }),
                 this._formBuilder.group({
                     County: new FormControl(this.clientAddress.County, [Validators.required]),
@@ -275,6 +274,22 @@ export class RegisterComponent implements OnInit {
         if (setDobPrecision) {
             this.formArray['controls'][0]['controls']['DobPrecision'].setValue(1);
         }
+
+        this.validateRegistrationDate();
+    }
+
+    validateRegistrationDate(): void {
+        const regDate = this.formArray['controls'][0]['controls']['registrationDate'].value;
+        const dob = this.formArray['controls'][0]['controls']['DateOfBirth'].value;
+        if (regDate && dob) {
+            const isBefore = moment(regDate).isBefore(dob);
+            if (isBefore) {
+                this.formArray['controls'][0]['controls']['registrationDate'].setValue('');
+                this.snotifyService.error('Registration Date should not be before the date of Birth',
+                    'Registration', this.notificationService.getConfig());
+                return;
+            }
+        }
     }
 
     estimateDob() {
@@ -317,16 +332,24 @@ export class RegisterComponent implements OnInit {
 
         const today = new Date();
         today.setDate(15);
-        today.setMonth(5);
+        if (ageYears > 0) {
+            today.setMonth(5);
+        }
+
+        if (ageYears == 0 && (!ageMonths || ageMonths == 0)) {
+            today.setDate(new Date().getDate());
+        }
 
         const estDob = moment(today.toISOString());
         let dob = estDob.add((ageYears * -1), 'years');
         if (ageMonths) {
-            dob = estDob.add(ageMonths, 'months');
+            dob = estDob.add(ageMonths * -1, 'months');
         }
 
         this.formArray['controls'][0]['controls']['DateOfBirth'].setValue(moment(dob).toDate());
         this.formArray['controls'][0]['controls']['DobPrecision'].setValue(0);
+
+        this.validateRegistrationDate();
     }
 
     onCountyChange() {
@@ -346,7 +369,6 @@ export class RegisterComponent implements OnInit {
 
     onSubmitForm(tabIndex: number) {
         if (this.formGroup.valid) {
-            this.spinner.show();
             this.person = { ...this.formArray.value[0] };
             this.clientAddress = { ...this.formArray.value[1] };
             this.clientContact = { ...this.formArray.value[2] };
@@ -364,9 +386,7 @@ export class RegisterComponent implements OnInit {
 
             this.personRegistration.registerPerson(this.person).subscribe(
                 (response) => {
-                    console.log(response);
                     const { personId } = response;
-                    console.log(personId);
 
                     // Add Contact
                     const personContact = this.personRegistration.addPersonContact(personId, this.person.createdBy, this.clientContact);
@@ -392,7 +412,7 @@ export class RegisterComponent implements OnInit {
                         personEducationLevel, personOccupation, personEmergencyContact,
                         personIdentifiersAdd]).subscribe(
                             (forkRes) => {
-                                console.log(forkRes);
+                                // console.log(forkRes);
                             },
                             (forkError) => {
                                 this.snotifyService.error('Error creating person ' + forkError, 'Person Registration',
@@ -439,7 +459,6 @@ export class RegisterComponent implements OnInit {
                         this.notificationService.getConfig());
                 },
                 () => {
-                    this.spinner.hide();
                 }
             );
         } else {
@@ -561,9 +580,12 @@ export class RegisterComponent implements OnInit {
         const ageInYears = this.formArray['controls'][0]['controls']['AgeYears'].value;
         if (ageInYears < 10) {
             this.formArray['controls'][0]['controls']['MaritalStatus'].disable({ onlySelf: true });
+            this.formArray['controls'][0]['controls']['MaritalStatus'].setValidators('');
+            this.formArray['controls'][0]['controls']['MaritalStatus'].updateValueAndValidity();
             this.formArray['controls'][0]['controls']['EducationLevel'].disable({ onlySelf: true });
             this.formArray['controls'][0]['controls']['Occupation'].disable({ onlySelf: true });
         } else {
+            this.formArray['controls'][0]['controls']['MaritalStatus'].setValidators([Validators.required]);
             this.formArray['controls'][0]['controls']['MaritalStatus'].enable();
             this.formArray['controls'][0]['controls']['EducationLevel'].enable();
             this.formArray['controls'][0]['controls']['Occupation'].enable();
@@ -608,7 +630,6 @@ export class RegisterComponent implements OnInit {
                                     return;
                                 }
 
-                                console.log(data);
                                 this.zone.run(() => {
                                     this.router.navigate(['/dashboard/personhome/' + data[0]['id']], { relativeTo: this.route });
                                 });

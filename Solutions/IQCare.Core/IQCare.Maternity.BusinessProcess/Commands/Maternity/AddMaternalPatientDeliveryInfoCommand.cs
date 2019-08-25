@@ -20,7 +20,7 @@ namespace IQCare.Maternity.BusinessProcess.Commands.Maternity
         public int? MotherCondition { get;  set; }
         public int ? MaternalDeathAudited { get;  set; }
         public DateTime? MaternalDeathAuditDate { get;  set; }
-        public bool DeliveryComplicationsExperienced { get;  set; }
+        public int ? DeliveryComplicationsExperienced { get;  set; }
         public string DeliveryComplicationNotes { get;  set; }
         public string DeliveryConductedBy { get;  set; }
         public int CreatedBy { get;  set; }
@@ -31,5 +31,20 @@ namespace IQCare.Maternity.BusinessProcess.Commands.Maternity
         public int PatientDeliveryId { get; set; }
         public int PatientMasterVisitId { get; set; }
         public int ? PregnancyId { get; set; }       
+    }
+
+    public class UpdateMaternalPatientDeliveryInfoCommand : IRequest<Result<UpdatePatientDeliveryInfoResponse>>
+    {
+        public int PatientDeliveryInfoId { get; set; }
+        public AddMaternalPatientDeliveryInfoCommand MaternalPatientDeliveryInfoCommand { get; set; }
+
+    }
+
+    public class UpdatePatientDeliveryInfoResponse
+    {
+        public int PatientDeliveryId { get; set; }
+        public int PatientMasterVisitId { get; set; }
+        public string Message { get; set; }
+
     }
 }

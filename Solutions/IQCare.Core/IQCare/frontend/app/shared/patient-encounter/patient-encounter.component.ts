@@ -1,3 +1,4 @@
+import { RecordsService } from './../../records/_services/records.service';
 import { Component, NgZone, OnInit, ViewChild } from '@angular/core';
 import { MatDialog, MatDialogConfig, MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
 import { Subscription } from 'rxjs/index';
@@ -36,6 +37,8 @@ export class PatientEncounterComponent implements OnInit {
     displayedColumns = ['Id', 'PatientId', 'visitNumber', 'EncounterStartTime', 'EncounterEndTime', 'Encounter', 'edit'];
     dataSource = new MatTableDataSource(this.encounterDataTable);
 
+    enrollmentDate: Date;
+
     constructor(private dialog: MatDialog,
         private route: ActivatedRoute,
         public zone: NgZone,
@@ -43,7 +46,8 @@ export class PatientEncounterComponent implements OnInit {
         private snotifyService: SnotifyService,
         private notificationService: NotificationService,
         private lookupItemService: LookupItemService,
-        private encounterService: EncounterService) {
+        private encounterService: EncounterService,
+        private recordsService: RecordsService) {
 
     }
 
@@ -59,6 +63,15 @@ export class PatientEncounterComponent implements OnInit {
 
         const encounterName = this.serviceName.toLowerCase() + '-encounter';
         this.getLookupItems('EncounterType', this.encounterTypes, '' + encounterName + '');
+
+        this.recordsService.personEnrollmentDetails(this.personId, this.serviceAreaId).subscribe(
+            (res) => {
+                const patientLookup = res['patientLookup'];
+                if (patientLookup.length > 0) {
+                    this.enrollmentDate = patientLookup[0]['enrollmentDate'];
+                }
+            }
+        );
     }
 
     matCheckIn() {
@@ -67,8 +80,8 @@ export class PatientEncounterComponent implements OnInit {
         dialogConfig.autoFocus = true;
 
         dialogConfig.data = {
-            section: '' + this.serviceName.toLowerCase() + ''
-
+            section: '' + this.serviceName.toLowerCase() + '',
+            'enrollmentDate': this.enrollmentDate
         };
         const dialogRef = this.dialog.open(CheckinComponent, dialogConfig);
 
@@ -116,13 +129,13 @@ export class PatientEncounterComponent implements OnInit {
     }
 
     public getPatientEncounters(patientId: number, encounterTypeId: number) {
-        this.patientEncounterTypes = this.lookupItemService.getPatientEncounters(patientId, encounterTypeId)
+        this.patientEncounterTypes = this.lookupItemService.getPatientEncountersByType(patientId, encounterTypeId)
             .subscribe(
                 p => {
                     // console.log('patient encounters');
                     // console.log(p);
                     if (p.length == 0) { return; }
-
+                    this.encounterDataTable = [];
                     for (let i = 0; i < p.length; i++) {
                         this.encounterDataTable.push({
                             Id: p[i].id,
@@ -172,12 +185,7 @@ export class PatientEncounterComponent implements OnInit {
     }
 
     public onEdit(selectedElement: object, serviceArea: number) {
-        /*localStorage.setItem('onEdit', '1');
-        localStorage.setItem('patientMasterVisitId', selectedElement['PatientMasterVisitId']);
-        localStorage.setItem('encounterTypeId', selectedElement['EncounterTypeId']);*/
-
         localStorage.setItem('visitDate', selectedElement['EncounterStartTime']);
-        // console.log(selectedElement);
 
         this.zone.run(() => {
             this.router.navigate(['/pmtct/' + this.serviceName.toLowerCase() + '/update'

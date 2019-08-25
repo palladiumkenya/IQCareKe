@@ -33,6 +33,7 @@ export class EncounterService {
         );
     }
 
+
     public getEncounterDetails(encounterId: number): Observable<EncounterDetails[]> {
         return this.http.get<EncounterDetails[]>(this.API_URL + this._url + '/getEncounterDetails/' + encounterId).pipe(
             tap(getEncounterDetails => this.errorHandler.log('fetched a single client encounter')),
@@ -55,7 +56,8 @@ export class EncounterService {
     }
 
     public getCustomOptions(): Observable<any[]> {
-        const options = JSON.stringify(['HIVTestKits', 'HIVResults', 'HIVFinalResults', 'YesNo', 'YesNoNA', 'ReasonsPartner']);
+        const options = JSON.stringify(['HIVTestKits', 'HIVResults', 'HIVFinalResults',
+            'YesNo', 'YesNoNA', 'ReasonsPartner', 'ScreeningHIVTestKits', 'SyphilisResults']);
 
         return this.http.post<any[]>(this.API_URL + this.lookup, options, httpOptions).pipe(
             tap(getCustomOptions => this.errorHandler.log('fetched all custom options')),
@@ -68,8 +70,11 @@ export class EncounterService {
         patientMasterVisitId: number, serviceAreaId: number): Observable<any> {
         const finalResultsBody = finalTestingResults;
         const hivResultsBody = hivResults1;
+
         if (hivResults2.length > 0) {
-            hivResultsBody.push.apply(hivResults2);
+            hivResults2.forEach(element => {
+                hivResultsBody.push(element);
+            });
         }
 
         const Indata = {

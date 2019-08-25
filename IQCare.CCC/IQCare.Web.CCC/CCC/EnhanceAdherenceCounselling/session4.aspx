@@ -293,7 +293,7 @@
         }
     }
     function checkExistingS4Appointment() {
-        var patientId = "<%=PatientId%>";
+        var patientId = GetURLParameter('pid');
         var appointmentDate = $("#<%=appointmentDateTb.ClientID%>").val();
         var serviceArea = 203;
         var reason = <%=reasonId%>;
@@ -328,7 +328,7 @@
         var status = <%=followupStatusId%>;
         var differentiatedCareId = <%=differentiatedCareId%>;
         var appointmentDate = $("#<%=appointmentDateTb.ClientID%>").val();
-        var patientId = <%=PatientId%>;
+        var patientId = GetURLParameter('pid');
         var patientMasterVisitId =  GetURLParameter('visitId');
         var userId = <%=userId%>;
         var appointmentid = $("#<%=S4AppointmentId.ClientID%>").val();
@@ -354,7 +354,7 @@
         var status = <%=followupStatusId%>;
         var differentiatedCareId = <%=differentiatedCareId%>;
         var appointmentDate = $("#<%=appointmentDateTb.ClientID%>").val();
-        var patientId = <%=PatientId%>;
+        var patientId = GetURLParameter('pid');
         var patientMasterVisitId =  GetURLParameter('visitId');
         var userId = <%=userId%>;
         $.ajax({
@@ -402,7 +402,7 @@
         });
         $("#eahdatastep4 input[type=text]").each(function () {
             var categoryId = ($(this).attr('id')).replace('session4tb', '');
-            var patientId = <%=PatientId%>;
+            var patientId = GetURLParameter('pid');
             var patientMasterVisitId =  GetURLParameter('visitId');
             var clinicalNotes = $(this).val();
             var serviceAreaId = 203;
@@ -426,7 +426,7 @@
         });
         $("#eahdatastep4 textarea").each(function () {
             var categoryId = ($(this).attr('id')).replace('session4tb', '');
-            var patientId = <%=PatientId%>;
+            var patientId = GetURLParameter('pid');
             var patientMasterVisitId =  GetURLParameter('visitId');
             var clinicalNotes = $(this).val();
             var serviceAreaId = 203;
@@ -455,7 +455,7 @@
         $('.session4loading').show();
  
          var PatientMasterVisitId = GetURLParameter('visitId');
-        var patientId = '<%=PatientId%>';
+        var patientId = GetURLParameter('pid');
         var SRNQuestion1='<%=Session4Refferal1ItemId%>';
         var SRNQuestion3 = '<%=Session4Refferal3ItemId%>';
         var SRNQuestion2 = '<%=Session4Refferal2ItemId%>';

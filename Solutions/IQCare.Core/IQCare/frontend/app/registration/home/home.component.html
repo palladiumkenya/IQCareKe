@@ -64,12 +64,19 @@
                                 <mat-cell *matCellDef="let element"> {{element.partnerListingConsent }} </mat-cell>
                             </ng-container>
 
+                            <ng-container matColumnDef="serviceArea">
+                                <mat-header-cell *matHeaderCellDef> ServiceArea </mat-header-cell>
+                                <mat-cell *matCellDef="let element"> {{element.serviceArea }} </mat-cell>
+                            </ng-container>
+
                             <ng-container matColumnDef="edit">
                                 <mat-header-cell *matHeaderCellDef></mat-header-cell>
                                 <mat-cell style="cursor: pointer;" *matCellDef="let element">
-                                    <mat-icon (click)="onEdit(element)"><i className="material-icons">mode_edit</i></mat-icon>
+                                    <mat-icon (click)="onEdit(element)"><i className="material-icons">mode_edit</i>
+                                    </mat-icon>
                                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                    <mat-icon (click)="onView(element)"><i className="material-icons">remove_red_eye</i></mat-icon>
+                                    <mat-icon (click)="onView(element)"><i className="material-icons">remove_red_eye</i>
+                                    </mat-icon>
                                 </mat-cell>
                             </ng-container>
 
@@ -82,14 +89,19 @@
                         &nbsp;
                     </div>
 
-                    <div class="button-row pull-right">
+                    <div class="button-row pull-right"
+                        *ngIf="(ageInMonths && ageInMonths>=18); else notEligibleTemplate">
                         <a mat-raised-button color="accent" routerLink="/hts">
                             <i class="fa fa-plus"></i>
                             <span *ngIf="!isPositive">New HTS Encounter</span>
-                            <span *ngIf="isPositive">Repeat Test</span>
+                            <span *ngIf="isPositive">Repeat/Retest Test</span>
                         </a>
                     </div>
-
+                    <ng-template #notEligibleTemplate>
+                        <span class="button-row pull-right label label-orange">
+                            Under 18 months(Not eligible for testing)
+                        </span>
+                    </ng-template>
                 </div>
             </div>
 

@@ -18,6 +18,7 @@ CD /D %BATDIR%
 Set config=debug
 set log=builder.log
 set msbuildpath=C:\Program Files (x86)\Microsoft Visual Studio\2017\Enterprise\MSBuild\15.0\Bin\MSBuild.exe
+set msbuildpatha=C:\Program Files (x86)\MSBuild\14.0\Bin\MSBuild.exe
 @Echo Cleaning references folder
 rmdir %BATDIR%\References /S /Q
 mkdir References
@@ -68,7 +69,7 @@ echo "********** Building IQCare.CCC **********" >> %log%
 if /I %config%== release (
 echo "********** Building IQCare Service **********" >> %log%
 @echo ********** Building IQCare Service **********
-"%msbuildpath%" "%BATDIR%\Solutions\IQCareService\IQCareService.sln" /t:rebuild /p:Configuration=%config%  >> %log%
+"%msbuildpatha%" "%BATDIR%\Solutions\IQCareService\IQCareService.sln" /t:rebuild /p:Configuration=%config%  >> %log%
 echo "********** Building IQCare Management **********" >> %log%
 @echo ********** Building IQCare Management **********
 "%msbuildpath%" "%BATDIR%\Solutions\IQCare Management\IQCare Management.sln" /t:rebuild /p:Configuration=%config%  >> %log%
@@ -78,9 +79,10 @@ echo "********** Building IQCare.Release **********" >> %log%
 )
 @echo "********** Completed building  devenv**********" >> %log%
 @echo ********** Completed building  devenv**********
-echo "********** Scripts **********" >> %log%
-XCOPY %BATDIR%\Scripts\* %BATDIR%\Release\Scripts /s /i >nul
-COPY %BATDIR%\batch.bat %BATDIR%\Release\batch.bat /Y > nul
+
+rem echo "********** Scripts **********" >> %log%
+rem COPY %BATDIR%\Scripts\* %BATDIR%\Release\Scripts /s /i >nul
+rem COPY %BATDIR%\batch.bat %BATDIR%\Release\batch.bat /Y > nul
 
 @echo ********** END OF BUILINDING & PACKAGING **********
 
@@ -151,9 +153,41 @@ dotnet publish Solutions/IQCare.Core/IQCare.Maternity.WebApi/IQCare.Maternity.We
 @echo ********** END OF BUILINDING IQCare MATERNITY ********** >> %log%
 @echo ********** END OF BUILINDING IQCare MATERNITY ********** >> %log%
 
+
+@echo "********** Building IQCare PREP **********" >> %log%
+@echo ********** Building IQCare PREP **********
+
+dotnet publish Solutions/IQCare.Core/IQCare.Prep.WebApi/IQCare.Prep.WebApi.csproj -o ../../../package/prep
+
+@echo ********** END OF BUILINDING IQCare PREP ********** >> %log%
+@echo ********** END OF BUILINDING IQCare PREP ********** >> %log%
+
+
+@echo "********** Building IQCare COMMON WEB **********" >> %log%
+@echo ********** Building IQCare COMMON WEB **********
+
+dotnet publish Solutions/IQCare.Core/IQCare.Common.Web/IQCare.Common.Web.csproj -o ../../../package/common
+
+@echo ********** END OF BUILINDING IQCare COMMON WEB ********** >> %log%
+@echo ********** END OF BUILINDING IQCare COMMON WEB ********** >> %log%
+
+
+@echo "********** Building IQCare AIR WEB **********" >> %log%
+@echo ********** Building IQCare AIR WEB **********
+
+dotnet publish Solutions/IQCare.Core/IQCare.AIR.Web/IQCare.AIR.Web.csproj -o ../../../package/air
+
+@echo ********** END OF BUILINDING IQCare AIR WEB ********** >> %log%
+@echo ********** END OF BUILINDING IQCare AIR WEB ********** >> %log%
+
+
+dotnet publish Solutions/IQCare.Core/IQCare.Core.DbMigration/IQCare.Core.DbMigration.csproj -o ../../../Release/DbMigration/win-x64 -r win-x64
+dotnet publish Solutions/IQCare.Core/IQCare.Core.DbMigration/IQCare.Core.DbMigration.csproj -o ../../../Release/DbMigration/win-x86 -r win-x86
+
+
 cd Solutions/IQCare.Core/IQCare
 
-ng build --base-href "/frontend/" --prod
+ng build --base-href "/frontend/" --prod --aot --output-hashing=all
 
 pause
 

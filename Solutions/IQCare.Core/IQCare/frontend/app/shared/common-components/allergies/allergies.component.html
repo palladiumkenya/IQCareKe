@@ -1,0 +1,68 @@
+<form class="form-group" [formGroup]="PatientAllergiesForm">
+    <mat-dialog-content>
+        <div class="row">
+            <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12">
+                <div class="form-title">
+                    <span class="mat-accent">
+                        Chronic Allergies
+                    </span>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-lg-3 col-sm-3 col-xs-12">
+                    <mat-form-field class="col-lg-12 col-sm-12 col-xs-12">
+                        <mat-label>Substance Causing Allergy</mat-label>
+                        <input type="text" matInput required formControlName="substanceAllergy"
+                            [matAutocomplete]="auto">
+                        <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
+                            <mat-option *ngFor="let allergy of filteredOptions" [value]="allergy">
+                                {{ allergy.itemName }}
+                            </mat-option>
+                        </mat-autocomplete>
+
+                    </mat-form-field>
+                </div>
+
+                <div class="col-lg-3 col-sm-3 col-xs-12">
+                    <mat-form-field class="col-lg-12 col-sm-12 col-xs-12">
+                        <mat-label>Type of reaction</mat-label>
+                        <input type="text" matInput formControlName="allergyReaction" [matAutocomplete]="autoReaction"
+                            required>
+                        <mat-autocomplete #autoReaction="matAutocomplete" [displayWith]="displayReactionFn">
+                            <mat-option *ngFor="let allergyReaction of reactionOptions" [value]="allergyReaction">
+                                {{ allergyReaction.itemName }}
+                            </mat-option>
+                        </mat-autocomplete>
+                    </mat-form-field>
+                </div>
+
+                <div class="col-lg-3 col-sm-3 col-xs-12">
+                    <mat-form-field class="col-lg-12 col-sm-12 col-xs-12">
+                        <mat-label>Severity</mat-label>
+                        <mat-select id="severity" name="severity" formControlName="severity" required>
+                            <mat-option [value]=""></mat-option>
+                            <mat-option *ngFor="let severityOption of severityOptions" [value]="severityOption">
+                                {{ severityOption.itemName }}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+
+                <div class="col-lg-3 col-sm-3 col-xs-12">
+                    <mat-form-field class="col-lg-12 col-sm-12 col-xs-12">
+                        <mat-label>Onset Date</mat-label>
+                        <input [max]="maxDate" formControlName="onSetDate" id="onSetDate" name="onSetDate" matInput
+                            (focus)="onSetDate.open()" [matDatepicker]="onSetDate">
+                        <mat-datepicker-toggle matSuffix [for]="onSetDate"></mat-datepicker-toggle>
+                        <mat-datepicker #onSetDate></mat-datepicker>
+                    </mat-form-field>
+                </div>
+            </div>
+        </div>
+    </mat-dialog-content>
+    <mat-dialog-actions>
+        <button class="mat-raised-button" (click)="close()">Close</button>
+        <button class="mat-raised-button mat-primary" (click)="save()">Save</button>
+    </mat-dialog-actions>
+</form>

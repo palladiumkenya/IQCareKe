@@ -47,5 +47,6 @@ namespace IQCare.HTS.Core.Model
         public string TestingStrategy { get; set; }
         public string TBScreening { get; set; }
         public string PartnerListingConsentDeclineReason { get; set; }
+        public string SyphilisResult { get; set; }
     }
 }

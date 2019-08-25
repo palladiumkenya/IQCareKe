@@ -9,6 +9,7 @@ namespace IQCare.CCC.UILogic.Baseline
     public class PatientHivDiagnosisManager
     {
         private readonly IPatientHivDiagnosisManager _patientHivDiagnosisManager = (IPatientHivDiagnosisManager)ObjectFactory.CreateInstance("BusinessProcess.CCC.Baseline.BPatientHivDiagnosisManager, BusinessProcess.CCC");
+        private readonly IPatientTranfersInManager _patientTranfersIn = (IPatientTranfersInManager)ObjectFactory.CreateInstance("BusinessProcess.CCC.Baseline.BPatientTransferInManager, BusinessProcess.CCC");
         private int _recordId=0;
         private int _result = 0;
 
@@ -39,16 +40,29 @@ namespace IQCare.CCC.UILogic.Baseline
                 HistoryARTUse = historyARTUse
             };
 
-            //if (artDate.HasValue) patienHivDiagnosisInsert.ArtInitiationDate = artDate.Value;
-            //DateTime temp;
-
-            //if (DateTime.TryParse(artInitiationDate.ToString("yy-mm-dd"), out temp) == true)
-            //{
-            //    patienHivDiagnosisInsert.ArtInitiationDate = temp;
-            //}
-  
-           
+            
+            
             _result =(_recordId>0)? _patientHivDiagnosisManager.UpdatePatientHivDiagnosis(patienHivDiagnosisInsert) : _patientHivDiagnosisManager.AddPatientHivDiagnosis(patienHivDiagnosisInsert);
+
+            PatientLookupManager patientLookupManager = new PatientLookupManager();
+            FacilityListManager facilityListManager = new FacilityListManager();
+            
+            var patient = patientLookupManager.GetPatientDetailSummary(patientId);
+            if (patient != null)
+            {
+                var patientType = patientLookupManager.GetPatientTypeId(patientId);
+                var locationId = facilityListManager.GetSelectedFacility(patient.FacilityId.ToString());
+                if (patientType == "Transfer-In")
+                {
+                    _patientTranfersIn.UpdateBlueCardBaselineTransferInHistory(patient.ptn_pk, hivDiagnosisDate, enrollmentDate, enrollmentWhoStage);
+                }
+                else
+                {
+                    this.UpdateBlueCardBaseline(patient.ptn_pk, hivDiagnosisDate, artDate, enrollmentDate,
+                        locationId.Id, enrollmentWhoStage);
+                }
+            }
+            
             return _result;
         }
 
@@ -62,7 +76,24 @@ namespace IQCare.CCC.UILogic.Baseline
                 EnrollmentWhoStage = enrollmentWhoStage,
                 ArtInitiationDate = artInitiationDate
             };
+            PatientLookupManager patientLookupManager = new PatientLookupManager();
+            FacilityListManager facilityListManager = new FacilityListManager();
 
+            var patient = patientLookupManager.GetPatientDetailSummary(patientId);
+            if (patient != null)
+            {
+                var patientType = patientLookupManager.GetPatientTypeId(patientId);
+                var locationId = facilityListManager.GetSelectedFacility(patient.FacilityId.ToString());
+                if (patientType == "Transfer-In")
+                {
+                    _patientTranfersIn.UpdateBlueCardBaselineTransferInHistory(patient.ptn_pk, hivDiagnosisDate, enrollmentDate, enrollmentWhoStage);
+                }
+                else
+                {
+                    this.UpdateBlueCardBaseline(patient.ptn_pk, hivDiagnosisDate, artInitiationDate, enrollmentDate,
+                        locationId.Id, enrollmentWhoStage);
+                }
+            }
             return _patientHivDiagnosisManager.UpdatePatientHivDiagnosis(patientHivDiagnosisUpdate);
         }
 
@@ -74,6 +105,13 @@ namespace IQCare.CCC.UILogic.Baseline
         public List<PatientHivDiagnosis> GetPatientHivDiagnosisList(int patientId)
         {
             return _patientHivDiagnosisManager.GetPatientHivDiagnosis(patientId);
+        }
+
+        public void UpdateBlueCardBaseline(int? ptn_pk, DateTime dateOfHivDiagnosis, DateTime? artInitiationDate, DateTime? dateOfEnrollment,
+            int locationId, int whostage)
+        {
+            _patientHivDiagnosisManager.UpdateBlueCardBaseline(ptn_pk, dateOfHivDiagnosis, artInitiationDate, dateOfEnrollment,
+                locationId, whostage);
         }
     }
 }

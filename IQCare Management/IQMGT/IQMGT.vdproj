@@ -2215,11 +2215,6 @@
             "AssemblyAsmDisplayName" = "8:Sand.Security.Cryptography, Version=1.0.1958.25137, Culture=neutral, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
-                    "_02EA08BBF27D60992CAC3061553817A8"
-                    {
-                    "Name" = "8:Sand.Security.Cryptography.dll"
-                    "Attributes" = "3:512"
-                    }
                 }
             "SourcePath" = "8:Sand.Security.Cryptography.dll"
             "TargetName" = "8:"
@@ -2277,11 +2272,6 @@
             "AssemblyAsmDisplayName" = "8:ActiveDatabaseSoftware.ActiveQueryBuilder2, Version=2.4.8.589, Culture=neutral, PublicKeyToken=3cbcbcc9bf57ecde, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
-                    "_0AEBDFD5305045C1656B335441FBC67D"
-                    {
-                    "Name" = "8:ActiveDatabaseSoftware.ActiveQueryBuilder2.dll"
-                    "Attributes" = "3:512"
-                    }
                 }
             "SourcePath" = "8:ActiveDatabaseSoftware.ActiveQueryBuilder2.dll"
             "TargetName" = "8:"
@@ -2328,11 +2318,6 @@
             "AssemblyAsmDisplayName" = "8:Entities.FormBuilder, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
-                    "_0C59716751CBC9E5AA3EDF69CA6DA0DD"
-                    {
-                    "Name" = "8:Entities.FormBuilder.dll"
-                    "Attributes" = "3:512"
-                    }
                 }
             "SourcePath" = "8:Entities.FormBuilder.dll"
             "TargetName" = "8:"
@@ -2390,11 +2375,6 @@
             "AssemblyAsmDisplayName" = "8:Microsoft.VisualBasic.PowerPacks.Vs, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
-                    "_0E14650D1641D1BFB980980F2249FD7A"
-                    {
-                    "Name" = "8:Microsoft.VisualBasic.PowerPacks.Vs.dll"
-                    "Attributes" = "3:512"
-                    }
                 }
             "SourcePath" = "8:Microsoft.VisualBasic.PowerPacks.Vs.dll"
             "TargetName" = "8:"
@@ -2441,11 +2421,6 @@
             "AssemblyAsmDisplayName" = "8:ActiveDatabaseSoftware.MSSQLMetadataProvider2, Version=2.4.8.589, Culture=neutral, PublicKeyToken=3cbcbcc9bf57ecde, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
-                    "_11A74EA3AC74882BF07839D0FCF0B631"
-                    {
-                    "Name" = "8:ActiveDatabaseSoftware.MSSQLMetadataProvider2.dll"
-                    "Attributes" = "3:512"
-                    }
                 }
             "SourcePath" = "8:ActiveDatabaseSoftware.MSSQLMetadataProvider2.dll"
             "TargetName" = "8:"
@@ -2565,11 +2540,6 @@
             "AssemblyAsmDisplayName" = "8:Interface.Billing, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
-                    "_18A2F9295F9B08C92881A8168DF6D9ED"
-                    {
-                    "Name" = "8:Interface.Billing.dll"
-                    "Attributes" = "3:512"
-                    }
                 }
             "SourcePath" = "8:Interface.Billing.dll"
             "TargetName" = "8:"
@@ -2789,11 +2759,6 @@
             "AssemblyAsmDisplayName" = "8:itextsharp, Version=4.1.2.0, Culture=neutral, PublicKeyToken=8354ae6d2174ddca"
                 "ScatterAssemblies"
                 {
-                    "_2DB422CA6FF2A53FFD377063D168D2B2"
-                    {
-                    "Name" = "8:itextsharp.dll"
-                    "Attributes" = "3:512"
-                    }
                 }
             "SourcePath" = "8:itextsharp.dll"
             "TargetName" = "8:"
@@ -2840,11 +2805,6 @@
             "AssemblyAsmDisplayName" = "8:Application.Presentation, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
-                    "_2F0AB3A0D0E5DE24399F9AE537E5F54C"
-                    {
-                    "Name" = "8:Application.Presentation.dll"
-                    "Attributes" = "3:512"
-                    }
                 }
             "SourcePath" = "8:Application.Presentation.dll"
             "TargetName" = "8:"
@@ -2871,11 +2831,6 @@
             "AssemblyAsmDisplayName" = "8:Application.Common, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
-                    "_36BADED8F8D210B95FB8076C09C7780E"
-                    {
-                    "Name" = "8:Application.Common.dll"
-                    "Attributes" = "3:512"
-                    }
                 }
             "SourcePath" = "8:Application.Common.dll"
             "TargetName" = "8:"
@@ -2902,11 +2857,6 @@
             "AssemblyAsmDisplayName" = "8:Interface.Pharmacy, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
-                    "_37023C8002E6ED8D049570A84B33D311"
-                    {
-                    "Name" = "8:Interface.Pharmacy.dll"
-                    "Attributes" = "3:512"
-                    }
                 }
             "SourcePath" = "8:Interface.Pharmacy.dll"
             "TargetName" = "8:"
@@ -3053,11 +3003,6 @@
             "AssemblyAsmDisplayName" = "8:Entities.Administration, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
-                    "_44B137325176C84EE7397BA31628885C"
-                    {
-                    "Name" = "8:Entities.Administration.dll"
-                    "Attributes" = "3:512"
-                    }
                 }
             "SourcePath" = "8:Entities.Administration.dll"
             "TargetName" = "8:"
@@ -3144,11 +3089,6 @@
             "AssemblyAsmDisplayName" = "8:Interface.Administration, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
-                    "_4913C5D513E2C95D1FED9CA6D7DF73C8"
-                    {
-                    "Name" = "8:Interface.Administration.dll"
-                    "Attributes" = "3:512"
-                    }
                 }
             "SourcePath" = "8:Interface.Administration.dll"
             "TargetName" = "8:"
@@ -3255,11 +3195,6 @@
             "AssemblyAsmDisplayName" = "8:Interface.SCM, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
-                    "_563ECD4601BCEEF5D6D40DA22E4ED28B"
-                    {
-                    "Name" = "8:Interface.SCM.dll"
-                    "Attributes" = "3:512"
-                    }
                 }
             "SourcePath" = "8:Interface.SCM.dll"
             "TargetName" = "8:"
@@ -3377,11 +3312,6 @@
             "AssemblyAsmDisplayName" = "8:EnvDTE, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
                 "ScatterAssemblies"
                 {
-                    "_5C0F5BBBA469872FF920CC7DBB8802AF"
-                    {
-                    "Name" = "8:EnvDTE.dll"
-                    "Attributes" = "3:512"
-                    }
                 }
             "SourcePath" = "8:EnvDTE.dll"
             "TargetName" = "8:"
@@ -3408,11 +3338,6 @@
             "AssemblyAsmDisplayName" = "8:CrystalDecisions.CrystalReports.Design, Version=10.5.3700.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
-                    "_5C9E2819B1DC061AB7DB5568FA0091DA"
-                    {
-                    "Name" = "8:CrystalDecisions.CrystalReports.Design.dll"
-                    "Attributes" = "3:512"
-                    }
                 }
             "SourcePath" = "8:CrystalDecisions.CrystalReports.Design.dll"
             "TargetName" = "8:"
@@ -3610,11 +3535,6 @@
             "AssemblyAsmDisplayName" = "8:Entities.Queue, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
-                    "_6D2DE8EC2A75C7A8B5F3565DAE731B0B"
-                    {
-                    "Name" = "8:Entities.Queue.dll"
-                    "Attributes" = "3:512"
-                    }
                 }
             "SourcePath" = "8:Entities.Queue.dll"
             "TargetName" = "8:"
@@ -3712,11 +3632,6 @@
             "AssemblyAsmDisplayName" = "8:Interface.FormBuilder, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
-                    "_7C8C2E125627FB3A219DC00FAEF91B84"
-                    {
-                    "Name" = "8:Interface.FormBuilder.dll"
-                    "Attributes" = "3:512"
-                    }
                 }
             "SourcePath" = "8:Interface.FormBuilder.dll"
             "TargetName" = "8:"
@@ -3783,11 +3698,6 @@
             "AssemblyAsmDisplayName" = "8:stdole, Version=7.0.3300.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
                 "ScatterAssemblies"
                 {
-                    "_85AA5585D44FA0F4738F033C396C58E9"
-                    {
-                    "Name" = "8:stdole.dll"
-                    "Attributes" = "3:512"
-                    }
                 }
             "SourcePath" = "8:stdole.dll"
             "TargetName" = "8:"
@@ -3885,11 +3795,6 @@
             "AssemblyAsmDisplayName" = "8:ActiveDatabaseSoftware.UniversalMetadataProvider2, Version=2.4.8.589, Culture=neutral, PublicKeyToken=3cbcbcc9bf57ecde, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
-                    "_8ABD765408D2D247637B04AE0FEB0FBD"
-                    {
-                    "Name" = "8:ActiveDatabaseSoftware.UniversalMetadataProvider2.dll"
-                    "Attributes" = "3:512"
-                    }
                 }
             "SourcePath" = "8:ActiveDatabaseSoftware.UniversalMetadataProvider2.dll"
             "TargetName" = "8:"
@@ -4058,11 +3963,6 @@
             "AssemblyAsmDisplayName" = "8:Interface.Security, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
-                    "_9A1ACCE1AE868B4BFE79479C5ACC9AB9"
-                    {
-                    "Name" = "8:Interface.Security.dll"
-                    "Attributes" = "3:512"
-                    }
                 }
             "SourcePath" = "8:Interface.Security.dll"
             "TargetName" = "8:"
@@ -4191,11 +4091,6 @@
             "AssemblyAsmDisplayName" = "8:Entities.Pharmacy, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
-                    "_9F627283818396BE80921FA3A020724E"
-                    {
-                    "Name" = "8:Entities.Pharmacy.dll"
-                    "Attributes" = "3:512"
-                    }
                 }
             "SourcePath" = "8:Entities.Pharmacy.dll"
             "TargetName" = "8:"
@@ -4262,11 +4157,6 @@
             "AssemblyAsmDisplayName" = "8:Sand.Security.Cryptography, Version=1.0.1958.25137, Culture=neutral, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
-                    "_AC72581E49E094166B5580C368F4DEFB"
-                    {
-                    "Name" = "8:Sand.Security.Cryptography.dll"
-                    "Attributes" = "3:512"
-                    }
                 }
             "SourcePath" = "8:Sand.Security.Cryptography.dll"
             "TargetName" = "8:"
@@ -4313,11 +4203,6 @@
             "AssemblyAsmDisplayName" = "8:ActiveDatabaseSoftware.ExpressionEditor2, Version=2.4.8.589, Culture=neutral, PublicKeyToken=3cbcbcc9bf57ecde, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
-                    "_AEC0E54B8F2620416721477308B032B4"
-                    {
-                    "Name" = "8:ActiveDatabaseSoftware.ExpressionEditor2.dll"
-                    "Attributes" = "3:512"
-                    }
                 }
             "SourcePath" = "8:ActiveDatabaseSoftware.ExpressionEditor2.dll"
             "TargetName" = "8:"
@@ -4344,11 +4229,6 @@
             "AssemblyAsmDisplayName" = "8:Entities.Clinical, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
-                    "_B012CFDF878E4B6121670D2C046EF82C"
-                    {
-                    "Name" = "8:Entities.Clinical.dll"
-                    "Attributes" = "3:512"
-                    }
                 }
             "SourcePath" = "8:Entities.Clinical.dll"
             "TargetName" = "8:"
@@ -4466,11 +4346,6 @@
             "AssemblyAsmDisplayName" = "8:Interface.Clinical, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
-                    "_BAF75349862B09E655B11F57D4EEC528"
-                    {
-                    "Name" = "8:Interface.Clinical.dll"
-                    "Attributes" = "3:512"
-                    }
                 }
             "SourcePath" = "8:Interface.Clinical.dll"
             "TargetName" = "8:"
@@ -4588,11 +4463,6 @@
             "AssemblyAsmDisplayName" = "8:Entities.PatientCore, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
-                    "_C0511384A6CAA21333BAA571AD11F4F1"
-                    {
-                    "Name" = "8:Entities.PatientCore.dll"
-                    "Attributes" = "3:512"
-                    }
                 }
             "SourcePath" = "8:Entities.PatientCore.dll"
             "TargetName" = "8:"
@@ -4650,11 +4520,6 @@
             "AssemblyAsmDisplayName" = "8:Entities.Billing, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
-                    "_C709A472CBE0050BDD0E35A23BB9D54C"
-                    {
-                    "Name" = "8:Entities.Billing.dll"
-                    "Attributes" = "3:512"
-                    }
                 }
             "SourcePath" = "8:Entities.Billing.dll"
             "TargetName" = "8:"
@@ -4681,11 +4546,6 @@
             "AssemblyAsmDisplayName" = "8:ActiveDatabaseSoftware.EventMetadataProvider2, Version=2.4.8.589, Culture=neutral, PublicKeyToken=3cbcbcc9bf57ecde, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
-                    "_C9D5017B5A28B455D33B6ACA9258718A"
-                    {
-                    "Name" = "8:ActiveDatabaseSoftware.EventMetadataProvider2.dll"
-                    "Attributes" = "3:512"
-                    }
                 }
             "SourcePath" = "8:ActiveDatabaseSoftware.EventMetadataProvider2.dll"
             "TargetName" = "8:"
@@ -4743,11 +4603,6 @@
             "AssemblyAsmDisplayName" = "8:AjaxControlToolkit, Version=3.0.30512.20315, Culture=neutral, PublicKeyToken=28f01b0e84b6d53e, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
-                    "_CE79919547274EFDA6AC76314802D830"
-                    {
-                    "Name" = "8:AjaxControlToolkit.dll"
-                    "Attributes" = "3:512"
-                    }
                 }
             "SourcePath" = "8:AjaxControlToolkit.dll"
             "TargetName" = "8:"
@@ -5118,11 +4973,6 @@
             "AssemblyAsmDisplayName" = "8:Entities.Common, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
-                    "_F61D89481BB988091FAB97ECF02A7E59"
-                    {
-                    "Name" = "8:Entities.Common.dll"
-                    "Attributes" = "3:512"
-                    }
                 }
             "SourcePath" = "8:Entities.Common.dll"
             "TargetName" = "8:"
@@ -5220,11 +5070,6 @@
             "AssemblyAsmDisplayName" = "8:ActiveDatabaseSoftware.OLEDBMetadataProvider2, Version=2.4.8.589, Culture=neutral, PublicKeyToken=3cbcbcc9bf57ecde, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
-                    "_FD8E5AE136A2FBB374BB25292A2DB279"
-                    {
-                    "Name" = "8:ActiveDatabaseSoftware.OLEDBMetadataProvider2.dll"
-                    "Attributes" = "3:512"
-                    }
                 }
             "SourcePath" = "8:ActiveDatabaseSoftware.OLEDBMetadataProvider2.dll"
             "TargetName" = "8:"
@@ -5271,11 +5116,6 @@
             "AssemblyAsmDisplayName" = "8:Application.Interface, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
-                    "_FF615740E4F7261CDF84D51E48D90A4F"
-                    {
-                    "Name" = "8:Application.Interface.dll"
-                    "Attributes" = "3:512"
-                    }
                 }
             "SourcePath" = "8:Application.Interface.dll"
             "TargetName" = "8:"
@@ -5417,15 +5257,15 @@
         {
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:IQCare Manangement"
-        "ProductCode" = "8:{0EEEC916-F2C4-42D3-A3DC-251E1B8B45D0}"
-        "PackageCode" = "8:{FD6F125C-99E5-48C5-9F52-B73CF6F7F94A}"
+        "ProductCode" = "8:{BD5CB3A3-44C5-41C0-BE21-190A9F21ED7A}"
+        "PackageCode" = "8:{B453BE1B-3E98-4057-ADC7-D01D1194C619}"
         "UpgradeCode" = "8:{CB5741EF-00A6-4783-BD39-9EA0E3F22CCD}"
         "AspNetVersion" = "8:4.0.30319.0"
         "RestartWWWService" = "11:FALSE"
         "RemovePreviousVersions" = "11:TRUE"
         "DetectNewerInstalledVersion" = "11:TRUE"
         "InstallAllUsers" = "11:FALSE"
-        "ProductVersion" = "8:1.0.06"
+        "ProductVersion" = "8:2.0.1"
         "Manufacturer" = "8:Palladium"
         "ARPHELPTELEPHONE" = "8:"
         "ARPHELPLINK" = "8:"
@@ -6503,7 +6343,7 @@
             }
             "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_976CEF4FCC5142D7957B293579E3EFE7"
             {
-            "SourcePath" = "8:..\\obj\\Debug\\IQCare Management.exe"
+            "SourcePath" = "8:..\\obj\\Release\\IQCare Management.exe"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_01B3E69BDD7B4A9A8AB85477FB7905DB"

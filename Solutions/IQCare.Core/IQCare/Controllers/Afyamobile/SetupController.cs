@@ -47,12 +47,22 @@ namespace IQCare.Controllers.Afyamobile
                 "Gender", "HTSMaritalStatus", "TracingOutcome", "TracingMode", "HIVTestKits", "HIVResults", "YesNo",
                 "Strategy", "Disabilities", "TestedAs", "TbScreening", "HTSEntryPoints", "HIVFinalResults", "YesNoNA",
                 "HTSKeyPopulation", "Relationship", "HivStatus", "HivCareStatus", "ScreeningHivStatus",
-                "PnsTracingOutcome", "IpvOutcome", "PNSRelationship", "ReasonsPartner", "YesNoDeclined", "PnsApproach"
+                "PnsTracingOutcome", "IpvOutcome", "PNSRelationship", "ReasonsPartner", "YesNoDeclined", "PnsApproach",
+                "TracingReasonNotContactedPhysical", "TracingReasonNotContactedPhone"
             };
             var response = await _mediator.Send(new GetAfyaMobileLookupsCommand()
             {
                 options = options
             }, Request.HttpContext.RequestAborted);
+            if (response.IsValid)
+                return Ok(response.Value);
+            return BadRequest(response);
+        }
+
+        [HttpGet("iqcareversion")]
+        public async Task<IActionResult> IqCareVersion()
+        {
+            var response = await _mediator.Send(new GetIqcareVersionCommand(), Request.HttpContext.RequestAborted);
             if (response.IsValid)
                 return Ok(response.Value);
             return BadRequest(response);

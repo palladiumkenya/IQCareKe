@@ -22,6 +22,15 @@ namespace IQCare.Web.CCC.UC {
         protected global::System.Web.UI.WebControls.DropDownList iptEvent;
         
         /// <summary>
+        /// IPTDate control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox IPTDate;
+        
+        /// <summary>
         /// discontinuation control.
         /// </summary>
         /// <remarks>

@@ -66,7 +66,7 @@ export class PncContraceptivehistoryComponent implements OnInit {
     }
 
     loadPncContraceptiviveHistory(): void {
-        this.pncservice.getFamilyPlanning(this.patientId).subscribe(
+        this.pncservice.getFamilyPlanning(this.patientId, this.patientMasterVisitId).subscribe(
             (result) => {
                 for (let i = 0; i < result.length; i++) {
                     if (result[i].patientMasterVisitId == this.patientMasterVisitId) {

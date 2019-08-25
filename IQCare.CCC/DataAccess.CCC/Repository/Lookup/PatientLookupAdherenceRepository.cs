@@ -20,10 +20,10 @@ namespace DataAccess.CCC.Repository.Lookup
             _context = context;
         }
 
-        public LookupPatientAdherence GetPatientAdherenceStatus(int patientId)
+        public LookupPatientAdherence GetPatientAdherenceStatus(int patientId, int adherenceType)
         {
             PatientLookupAdhereenceRepository patientAdheranceLookup = new PatientLookupAdhereenceRepository();
-           var adherence= patientAdheranceLookup.FindBy(x => x.PatientId == patientId).OrderByDescending(x=>x.Id).FirstOrDefault();
+           var adherence= patientAdheranceLookup.FindBy(x => x.PatientId == patientId && x.AdherenceType == adherenceType).OrderByDescending(x=>x.Id).FirstOrDefault();
            return adherence;
         }
     }

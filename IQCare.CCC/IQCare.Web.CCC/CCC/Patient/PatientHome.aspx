@@ -2600,7 +2600,7 @@
                         setTimeout(function () { window.location.reload(); },3000);
                         return false;
                     } else {
-                        toastr.success(data.d, "Re-Enrollment");
+                        toastr.success(response.d, "Re-Enrollment");
 
                         setTimeout(function () { window.location.reload(); },3000);
                     }

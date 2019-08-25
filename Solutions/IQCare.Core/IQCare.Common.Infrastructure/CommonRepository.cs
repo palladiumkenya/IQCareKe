@@ -19,6 +19,8 @@ namespace IQCare.Common.Infrastructure
             _context = dbContext ?? throw new ArgumentNullException(nameof(dbContext));
         }
 
+        public void UpdateRange(IEnumerable<TEntity> entities) => _context.UpdateRange(entities);
+
         public async Task AddAsync(TEntity entity)
             => await _context.AddAsync(entity);
 
@@ -64,7 +66,7 @@ namespace IQCare.Common.Infrastructure
 
         public async Task<List<TEntity>> FromSql(string query, params object[] parameters)
         {
-            return await _context.Set<TEntity>().FromSql(query, parameters).ToListAsync();
+            return await _context.Set<TEntity>().FromSql(query, parameters).AsNoTracking().ToListAsync();
         }
 
         public async Task<IEnumerable<TEntity>> GetAllAsync()

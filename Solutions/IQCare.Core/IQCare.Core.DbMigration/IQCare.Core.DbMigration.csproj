@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
@@ -109,8 +109,12 @@
     <None Remove="Scripts\2.0.0\01_SO_IQCare_Version.sql" />
     <None Remove="Scripts\2.0.0\02_DO_AlterView_PatientDeliveryInfo.sql" />
     <None Remove="Scripts\2.0.0\03 pr_Security_UserLogin_Constella.sql" />
+    <None Remove="Scripts\2.0.0\08_DO_AlterTable_PatientDelivery_DropFK_ProfileId.sql" />
     <None Remove="Scripts\2.0.0\08_PatientConsent.sql" />
+    <None Remove="Scripts\2.0.0\09_DO_AlterTable_PatientDelivery_DropColumn_ProfileId.sql" />
     <None Remove="Scripts\2.0.0\09_PersonKinContactsView.sql" />
+    <None Remove="Scripts\2.0.0\10_DO_AlterTable_PatientDelivery_AddColumn_PregnancyId.sql" />
+    <None Remove="Scripts\2.0.0\11_DO_AlterView_PatientDeliveryInfo.sql" />
     <None Remove="Scripts\2.0.0\12_DO_Insert_Clinical_Service_Area.sql" />
     <None Remove="Scripts\2.0.0\12_SO_CreateView_PmtctRefferealView.sql" />
     <None Remove="Scripts\2.0.0\13_SO_CreateView_lnk_FacilityModule.sql" />
@@ -144,6 +148,167 @@
     <None Remove="Scripts\2.0.0\34_Person_Update_Alter.sql" />
     <None Remove="Scripts\2.0.0\35_Pharmacy_History.sql" />
     <None Remove="Scripts\2.0.0\36_LO_HtsPnsReferral.sql" />
+    <None Remove="Scripts\2.0.0\37_UpdatePaediatricRegimen.sql" />
+    <None Remove="Scripts\2.0.0\38_IPTOutcomeDate.sql" />
+    <None Remove="Scripts\2.0.0\38_LO_HEI_Register.sql" />
+    <None Remove="Scripts\2.0.0\37_HIVPositiveListView.sql" />
+    <None Remove="Scripts\2.0.0\39_IndicatorTables.sql" />
+    <None Remove="Scripts\2.0.0\40_IndicatorData.sql" />
+    <None Remove="Scripts\2.0.0\42_LO_PNCRegister.sql" />
+    <None Remove="Scripts\2.0.0\43_LO_MaternityRegister.sql" />
+    <None Remove="Scripts\2.0.0\44_LO_IQCareViews.sql" />
+    <None Remove="Scripts\2.0.0\44_UpdateIndicatorTotalCode.sql" />
+    <None Remove="Scripts\2.0.0\45_LO_ANCRegister.sql" />
+    <None Remove="Scripts\2.0.0\46_SO_IQCare_Version.sql" />
+    <None Remove="Scripts\2.0.0\46_LO_HEIRegister.sql" />
+	<None Remove="Scripts\2.0.0\47_SO_IQCare_Version.sql" />
+    <None Remove="Scripts\2.0.0\48_SO_CreateVIew_PmtctPatientScreeningView.sql" />
+    <None Remove="Scripts\2.0.0\49_SO_Add_Identifiers_BirthNotification.sql" />
+    <None Remove="Scripts\2.0.0\50_SO_ChangeIQCareVersion2Name.sql" />
+    <None Remove="Scripts\2.0.0\51_SO_AddCacxMethod_VIAVILI.sql" />
+    <None Remove="Scripts\2.0.0\52_DO_AlterView_PatientDeliveryInfo.sql" />
+    <None Remove="Scripts\2.0.0\52_PersonListView.sql" />
+    <None Remove="Scripts\2.0.0\51_SO_AddPMTCTMotherRegimensLookups.sql" />
+    <None Remove="Scripts\2.0.0\53_DO_AlterViewPatientDeliveryInfo.sql" />
+    <None Remove="Scripts\2.0.0\57_PHQQuestion.sql" />
+    <None Remove="Scripts\2.0.1\01_IQCareFinalBuild.sql" />
+    <None Remove="Scripts\2.0.1\02_IQCareFinalBuild.sql" />
+    <None Remove="Scripts\2.0.1\03_VisitDetailsView.sql" />
+    <None Remove="Scripts\2.0.1\04_IQCareFinalBuild.sql" />
+    <None Remove="Scripts\2.0.1\02_LO_ANCRegister.sql" />
+    <None Remove="Scripts\2.0.1\03_LO_HEIRegister.sql" />
+    <None Remove="Scripts\2.0.1\04_LO_HTSLabRegister.sql" />
+    <None Remove="Scripts\2.0.1\05_LO_MaternityRegister.sql" />
+    <None Remove="Scripts\2.0.1\06_LO_PNCRegister.sql" />
+    <None Remove="Scripts\2.0.0\41_DO_Create_View_IndicatorResults.sql" />
+    <None Remove="Scripts\2.0.0\42DefaultConstraintsSection.sql" />
+    <None Remove="Scripts\2.0.0\43_UpdateUIDIndicators.sql" />
+    <None Remove="Scripts\2.0.1\07_AdditionalServiceAreaFields.sql" />
+    <None Remove="Scripts\2.0.1\07_API_PatientsView.sql" />
+    <None Remove="Scripts\2.0.1\08_Update_ModeOfDelivery.sql" />
+    <None Remove="Scripts\2.0.1\09_SP_Bluecard_ToGreenCard.sql" />
+    <None Remove="Scripts\2.0.1\10_PersonView.sql" />
+    <None Remove="Scripts\2.0.1\11_IQCareFinalBuild.sql" />
+    <None Remove="Scripts\2.0.1\12_IE_ADD_NHIF_Identifier.sql" />
+    <None Remove="Scripts\2.0.1\14_PR_PatientPrEPStatus.sql" />
+    <None Remove="Scripts\2.0.1\15_PM_PatientCircumcisionStatus.sql" />
+    <None Remove="Scripts\2.0.1\16_PR_SystemAdmin_Backup_Constella.sql" />
+    <None Remove="Scripts\2.0.1\17_PR_PREP_EncountersView.sql" />
+    <None Remove="Scripts\2.0.1\18_PI_PregnancyIndicator_PlanningToGetPregnant.sql" />
+    <None Remove="Scripts\2.0.1\19_PI_PregnancyIndicator_PregnancyPlanned.sql" />
+    <None Remove="Scripts\2.0.1\20_PR_PREP_EncountersView.sql" />
+    <None Remove="Scripts\2.0.1\21_LO_STIScreening.sql" />
+    <None Remove="Scripts\2.0.1\22_IQCare_PatchRelease.sql" />
+    <None Remove="Scripts\2.0.1\23_pr_SCM_SaveUpdateHivTreatementPharmacyField_Futures.sql" />
+    <None Remove="Scripts\2.0.1\24_Ord_Visit_Insert.sql" />
+    <None Remove="Scripts\2.0.1\25_CouncellingTypes.sql" />
+    <None Remove="Scripts\2.0.1\26_GetCouncellingTopics.sql" />
+    <None Remove="Scripts\2.0.1\27_GetLnkCouncellingTypeTopics.sql" />
+    <None Remove="Scripts\2.0.1\28_UAT_Patch.sql" />
+    <None Remove="Scripts\2.0.1\29_Api_PatientsView.sql" />
+    <None Remove="Scripts\2.0.1\30_ANC Register.sql" />
+    <None Remove="Scripts\2.0.1\31_HEI Register.sql" />
+    <None Remove="Scripts\2.0.1\32_HTS_LAB_Register.sql" />
+    <None Remove="Scripts\2.0.1\33_Maternity Register.sql" />
+    <None Remove="Scripts\2.0.1\34_PNC Register.sql" />
+    <None Remove="Scripts\2.0.1\35_vw_FamilyTestingRegister.sql" />
+    <None Remove="Scripts\2.0.1\36_vw_HIVTesting_Services_Referral_Linkage_Register.sql" />
+    <None Remove="Scripts\2.0.1\37_vw_PartnerNotificationRegister.sql" />
+    <None Remove="Scripts\2.0.1\38_PrepEncounterView.sql" />
+    <None Remove="Scripts\2.0.1\39_PrepStatusColumnsNotExists.sql" />
+    <None Remove="Scripts\2.0.1\41_RemovePrepWeeksRow.sql" />
+    <None Remove="Scripts\2.0.1\42_PatientPartnerProfile.sql" />
+    <None Remove="Scripts\2.0.1\43_RemovePrepRegimenUse.sql" />
+    <None Remove="Scripts\2.0.1\44_RemovePrepStatusType.sql" />
+    <None Remove="Scripts\2.0.1\PREP\01_Prep_ServiceArea.sql" />
+    <None Remove="Scripts\2.0.1\PREP\02_Prep Number.sql" />
+    <None Remove="Scripts\2.0.1\PREP\03_PrepServiceAreaIdentifiers.sql" />
+    <None Remove="Scripts\2.0.1\PREP\04_PersonVitalsView.sql" />
+    <None Remove="Scripts\2.0.1\PREP\05_SexualPartnerHivProfile.sql" />
+    <None Remove="Scripts\2.0.1\PREP\06_ClientAssessment.sql" />
+    <None Remove="Scripts\2.0.1\PREP\07_WillingnessAssessment.sql" />
+    <None Remove="Scripts\2.0.1\PREP\08_Behaviour Risk Assessment.sql" />
+    <None Remove="Scripts\2.0.1\PREP\09_RiskAssessment.sql" />
+    <None Remove="Scripts\2.0.1\PREP\10_PrepRiskAssessmentView.sql" />
+    <None Remove="Scripts\2.0.1\PREP\11_PopulationTypes.sql" />
+    <None Remove="Scripts\2.0.1\PREP\12_PREP Regimen.sql" />
+    <None Remove="Scripts\2.0.1\PREP\13_RegimenUse.sql" />
+    <None Remove="Scripts\2.0.1\PREP\14_Constraint.sql" />
+    <None Remove="Scripts\2.0.1\PREP\15_HIVPositivePartnerProfile.sql" />
+    <None Remove="Scripts\2.0.1\PREP\16_PrepCareEnded.sql" />
+    <None Remove="Scripts\2.0.1\PREP\17_PrepAdherence.sql" />
+    <None Remove="Scripts\2.0.1\PREP\18_AdherenceAssessmentReasons.sql" />
+    <None Remove="Scripts\2.0.1\PREP\19_PrepStatus.sql" />
+    <None Remove="Scripts\2.0.1\PREP\20_PrEPDiscontinueReason.sql" />
+    <None Remove="Scripts\2.0.1\PREP\21_MonthlyRefillEncounter.sql" />
+    <None Remove="Scripts\2.0.1\PREP\22_AdherenceCounselling.sql" />
+    <None Remove="Scripts\2.0.1\PREP\23_PrepAppointment Reason.sql" />
+    <None Remove="Scripts\2.0.1\PREP\24_AppointmentGiven.sql" />
+    <None Remove="Scripts\2.0.1\PREP\25_Api_AppointmentsServiceAreaView.sql" />
+    <None Remove="Scripts\2.0.1\PREP\26_PrepRiskAssessmentView.sql" />
+    <None Remove="Scripts\2.0.1\PREP\28_DeleteSexualPartnerHivRiskLinkage.sql" />
+    <None Remove="Scripts\2.0.1\PREP\29_PrepDeclineReason.sql" />
+    <None Remove="Scripts\2.0.1\13_LO_PrEP_Lookup.sql" />
+    <None Remove="Scripts\2.0.1\PREP\30_PrepVisitTypes.sql" />
+    <None Remove="Scripts\2.1.0\01_IQCare_CHS_Final.sql" />
+    <None Remove="Scripts\2.1.0\02_PatientLabTracker_Delete_LabOrder.sql" />
+    <None Remove="Scripts\2.1.0\03_PA_PatientAllergyView.sql" />
+    <None Remove="Scripts\2.1.0\04_Person_Ptn_Pk_ForMigration.sql" />
+    <None Remove="Scripts\2.1.0\04_PI_PregnancyIndicator_Add_BreastFeeding.sql" />
+    <None Remove="Scripts\2.1.0\06_Migrate_StuckBlueCard_Guys_Rerun.sql" />
+    <None Remove="Scripts\2.1.0\06_Remove_Retired_ServiceAreas.sql" />
+    <None Remove="Scripts\2.1.0\07_pr_Scheduler_UpdateAppointmentStatus.sql" />
+    <None Remove="Scripts\2.1.0\08_July_01_Release.sql" />
+    <None Remove="Scripts\2.1.0\09_Fix_Appointments.sql" />
+    <None Remove="Scripts\2.1.0\09_fn_GetPatientVisitDate.sql" />
+    <None Remove="Scripts\2.1.0\10_EH_EncounterHistorySolution.sql" />
+    <None Remove="Scripts\2.1.0\11_EH_EncounterHistorySolution_Rerun.sql" />
+    <None Remove="Scripts\2.1.0\11_PV_PatientVitals.sql" />
+    <None Remove="Scripts\2.1.0\11_Update_Lnk_PatientProgramStart.sql" />
+    <None Remove="Scripts\2.1.0\12_pr_Scheduler_UpdateAppointmentStatus.sql" />
+    <None Remove="Scripts\2.1.0\12_Update_Lnk_PatientProgramStart_Rerun.sql" />
+    <None Remove="Scripts\2.1.0\13_PP_PatientPopulationView.sql" />
+    <None Remove="Scripts\2.1.0\14_HTS_LAB_Register.sql" />
+    <None Remove="Scripts\2.1.0\14_PP_PatientPopulationView_Rerun.sql" />
+    <None Remove="Scripts\2.1.0\15_HTS_LAB_Register_Rerun.sql" />
+    <None Remove="Scripts\2.1.0\15_VW_PatientCareEnding.sql" />
+    <None Remove="Scripts\2.1.0\16_PatientView.sql" />
+    <None Remove="Scripts\2.1.0\16_VW_PatientCareEnding_Rerun.sql" />
+    <None Remove="Scripts\2.1.0\17_PatientView_Rerun.sql" />
+    <None Remove="Scripts\2.1.0\17_PL_PregnancyLog_Add_BirthDefects.sql" />
+    <None Remove="Scripts\2.1.0\18_PA_PatientAppointmentReasons.sql" />
+    <None Remove="Scripts\2.1.0\19_sp_UpdateBlueCardBaselineHistory.sql" />
+    <None Remove="Scripts\2.1.0\20_sp_UpdateBlueCardBaselineTransferInHistory.sql" />
+    <None Remove="Scripts\2.1.0\21_sp_UpdateBlueCardBaselineTransferInTreatment.sql" />
+    <None Remove="Scripts\2.1.0\22_sp_UpdateBlueCardBaselineTransferInStartedART.sql" />
+    <None Remove="Scripts\2.1.0\23_sp_updatePatientProgramStart.sql" />
+    <None Remove="Scripts\2.1.0\24_HTS_LAB_Register.sql" />
+    <None Remove="Scripts\2.1.0\25_sp_getAllViralLoads.sql" />
+    <None Remove="Scripts\2.2.0\01_alterTracingTable.sql" />
+    <None Remove="Scripts\2.2.0\02_DefaulterTracingLookup.sql" />
+    <None Remove="Scripts\2.2.0\03_PatientTracingLookup.sql" />
+    <None Remove="Scripts\2.2.0\04_TracingMethods.sql" />
+    <None Remove="Scripts\2.2.0\06_sp_gettxcurr.sql" />
+    <None Remove="Scripts\2.2.0\07_sp_getfirstdefaulters.sql" />
+    <None Remove="Scripts\2.2.0\08_sp_getseconddefaulters.sql" />
+    <None Remove="Scripts\2.2.0\09_sp_getltfu.sql" />
+    <None Remove="Scripts\2.2.0\10_TracingReasonNotContactedPhone.sql" />
+    <None Remove="Scripts\2.2.0\11_ServiceAreaPREP.sql" />
+    <None Remove="Scripts\2.2.0\11_ServiceArea_PREP.sql" />
+    <None Remove="Scripts\2.2.0\12_TracingAddReasonNotContacted.sql" />
+    <None Remove="Scripts\2.2.0\12_Tracing_Add_ReasonNotContacted.sql" />
+    <None Remove="Scripts\2.2.0\13_HeiLabTests.sql" />
+    <None Remove="Scripts\2.2.0\14_PersonTracingView.sql" />
+    <None Remove="Scripts\2.2.0\15_qaversion.sql" />
+    <None Remove="Scripts\2.2.0\16_sp_getAllViralLoads.sql" />
+    <None Remove="Scripts\2.2.0\17_FPPNC.sql" />
+    <None Remove="Scripts\2.2.0\18_qaversion.sql" />
+    <None Remove="Scripts\2.2.0\19_GetPatientRelationships.sql" />
+    <None Remove="Scripts\2.2.0\20_DualKits.sql" />
+    <None Remove="Scripts\2.2.0\21_AddSyphilisResult.sql" />
+    <None Remove="Scripts\2.2.0\22_HTS_EncountersDetailView.sql" />
+    <None Remove="Scripts\2.2.0\23_CareEndIO.sql" />
+    <None Remove="Scripts\2.2.0\24_PatientCareEnding.sql" />
   </ItemGroup>
 
   <ItemGroup>
@@ -157,7 +322,6 @@
     <EmbeddedResource Include="Scripts\1.0.0.8\HEI\07_SO_Lookups.sql" />
     <EmbeddedResource Include="Scripts\1.0.0.8\HEI\08_SO_PatientMilestone.sql" />
     <EmbeddedResource Include="Scripts\1.0.0.8\MATERNITY\12_SO_Insert_MaternityEncounter.sql" />
-    <EmbeddedResource Include="Scripts\1.0.0.8\MATERNITY\13_SO_Insert_Baby_Birth_Outcome_Lookup.sql" />
     <EmbeddedResource Include="Scripts\1.0.0.8\MATERNITY\14_SO_Insert_Drug_Administration_Lookup.sql" />
     <EmbeddedResource Include="Scripts\1.0.0.8\PMTCT\01_Insert_PNC_LookUp_Data.sql" />
     <EmbeddedResource Include="Scripts\1.0.0.8\PMTCT\02_Create_Table_PatientCounselling.sql" />
@@ -179,6 +343,37 @@
     <EmbeddedResource Include="Scripts\1.0.0.9\38_BO_PatientScreeningView.sql" />
     <EmbeddedResource Include="Scripts\1.0.0.9\39_SO_vw_PatientEncounters.sql" />
     <EmbeddedResource Include="Scripts\1.0.0.9\32_DO_Insert_MaternalDrugAdmin_LookUp_Items.sql" />
+    <None Remove="Scripts\2.0.0\56_SO_CreateViewPatientEncounterView.sql" />
+    <EmbeddedResource Include="Scripts\2.0.0\39_IndicatorTables.sql" />
+    <EmbeddedResource Include="Scripts\2.0.0\40_IndicatorData.sql" />
+    <EmbeddedResource Include="Scripts\2.0.0\44_UpdateIndicatorTotalCode.sql" />
+    <EmbeddedResource Include="Scripts\2.0.0\56_SO_CreateViewPatientEncounterView.sql" />
+    <None Remove="Scripts\2.0.0\09_DO_AlterTable_PatientDelivery_DropColumn_ProfileId.sql" />
+    <None Remove="Scripts\2.0.0\10_DO_AlterTable_PatientDelivery_AddColumn_PregnancyId.sql" />
+    <None Remove="Scripts\2.0.0\11_DO_AlterView_PatientDeliveryInfo.sql" />
+    <None Remove="Scripts\2.0.0\08_DO_AlterTable_PatientDelivery_DropFK_ProfileId.sql" />
+    <None Remove="Scripts\2.0.0\03_DO_CreateSproc_Get_WeightFor_Age_Zscore.sql" />
+    <EmbeddedResource Include="Scripts\2.0.0\03_DO_CreateSproc_Get_WeightFor_Age_Zscore.sql" />
+    <None Remove="Scripts\2.0.0\04_DO_CreateSproc_GetWeightForHeight_Zscore_Sproc.sql" />
+    <EmbeddedResource Include="Scripts\2.0.0\04_DO_CreateSproc_GetWeightForHeight_Zscore_Sproc.sql" />
+    <None Remove="Scripts\2.0.0\05_DO_CreateSproc_GetBmiZscore_Constants.sql" />
+    <EmbeddedResource Include="Scripts\2.0.0\05_DO_CreateSproc_GetBmiZscore_Constants.sql" />
+    <None Remove="Scripts\2.0.0\06_DO_CreateSproc_GetHeightForAge_Zscore.sql" />
+    <EmbeddedResource Include="Scripts\2.0.0\06_DO_CreateSproc_GetHeightForAge_Zscore.sql" />
+    <None Remove="Scripts\2.0.0\07_DO_AlterTable_Pregnancy_AddColumn_AgeAtMenarch.sql" />
+    <EmbeddedResource Include="Scripts\2.0.0\07_DO_AlterTable_Pregnancy_AddColumn_AgeAtMenarch.sql" />
+    <None Remove="Scripts\1.0.0.9\01_SO_IQCare_Version.sql" />
+    <EmbeddedResource Include="Scripts\1.0.0.9\01_SO_IQCare_Version.sql" />
+    <None Remove="Scripts\1.0.0.9\30_BO_PosNatalExaminationItemLookUp.sql" />
+    <EmbeddedResource Include="Scripts\1.0.0.9\30_BO_PosNatalExaminationItemLookUp.sql" />
+    <None Remove="Scripts\1.0.0.9\57_SO_AlterTablePatientMIlestone.sql" />
+    <EmbeddedResource Include="Scripts\1.0.0.9\57_SO_AlterTablePatientMIlestone.sql" />
+    <None Remove="Scripts\2.0.0\53_PersonListView.sql" />
+    <EmbeddedResource Include="Scripts\2.0.0\53_PersonListView.sql" />
+    <None Remove="Scripts\2.0.0\37_SO_IQCare_Version.sql" />
+    <EmbeddedResource Include="Scripts\2.0.0\37_SO_IQCare_Version.sql" />
+    <None Remove="Scripts\2.0.0\23_Nairobi_Missing_Subcounties_Wards.sql" />
+    <EmbeddedResource Include="Scripts\2.0.0\23_Nairobi_Missing_Subcounties_Wards.sql" />
   </ItemGroup>
 
   <ItemGroup>
@@ -245,13 +440,16 @@
     <EmbeddedResource Include="Scripts\1.0.0.9\54_SO_CreateView_pmtctPatientScreeningView.sql" />
     <EmbeddedResource Include="Scripts\1.0.0.9\55_SO_CreateVIew_PatientPreventiveServiceView.sql" />
     <EmbeddedResource Include="Scripts\1.0.0.9\56_SO_CreateView_VisitDetailsView.sql" />
-    <EmbeddedResource Include="Scripts\2.0.0\37_SO_IQCare_Version.sql" />
     <EmbeddedResource Include="Scripts\1.0.0.9\58_Add_Lookups_ReviewOfSystems.sql" />
     <EmbeddedResource Include="Scripts\2.0.0\02_DO_AlterView_PatientDeliveryInfo.sql" />
     <EmbeddedResource Include="Scripts\2.0.0\03 pr_Security_UserLogin_Constella.sql" />
+    <EmbeddedResource Include="Scripts\2.0.0\08_DO_AlterTable_PatientDelivery_DropFK_ProfileId.sql" />
+    <EmbeddedResource Include="Scripts\2.0.0\09_DO_AlterTable_PatientDelivery_DropColumn_ProfileId.sql" />
+    <EmbeddedResource Include="Scripts\2.0.0\09_PersonKinContactsView.sql" />
+    <EmbeddedResource Include="Scripts\2.0.0\10_DO_AlterTable_PatientDelivery_AddColumn_PregnancyId.sql" />
+    <EmbeddedResource Include="Scripts\2.0.0\11_DO_AlterView_PatientDeliveryInfo.sql" />
     <EmbeddedResource Include="Scripts\2.0.0\22_SO_Add_Lookups_ViralLoadSample.sql" />
     <EmbeddedResource Include="Scripts\2.0.0\08_PatientConsent.sql" />
-    <EmbeddedResource Include="Scripts\2.0.0\09_PersonKinContactsView.sql" />
     <EmbeddedResource Include="Scripts\2.0.0\12_DO_Insert_Clinical_Service_Area.sql" />
     <EmbeddedResource Include="Scripts\2.0.0\12_SO_CreateView_PmtctRefferealView.sql" />
     <EmbeddedResource Include="Scripts\2.0.0\13_SO_CreateView_lnk_FacilityModule.sql" />
@@ -283,23 +481,163 @@
     <EmbeddedResource Include="Scripts\2.0.0\34_Person_Update_Alter.sql" />
     <EmbeddedResource Include="Scripts\2.0.0\35_Pharmacy_History.sql" />
     <EmbeddedResource Include="Scripts\2.0.0\36_LO_HtsPnsReferral.sql" />
+    <EmbeddedResource Include="Scripts\2.0.0\37_UpdatePaediatricRegimen.sql" />
+    <EmbeddedResource Include="Scripts\2.0.0\38_IPTOutcomeDate.sql" />
+    <EmbeddedResource Include="Scripts\2.0.0\38_LO_HEI_Register.sql" />
+    <EmbeddedResource Include="Scripts\2.0.0\37_HIVPositiveListView.sql" />
+    <EmbeddedResource Include="Scripts\2.0.0\42_LO_PNCRegister.sql" />
+    <EmbeddedResource Include="Scripts\2.0.0\43_LO_MaternityRegister.sql" />
+    <EmbeddedResource Include="Scripts\2.0.0\44_LO_IQCareViews.sql" />
+    <EmbeddedResource Include="Scripts\2.0.0\45_LO_ANCRegister.sql" />
+    <EmbeddedResource Include="Scripts\2.0.0\46_LO_HEIRegister.sql" />
+	<EmbeddedResource Include="Scripts\2.0.0\47_SO_IQCare_Version.sql" />
+    <EmbeddedResource Include="Scripts\2.0.0\48_SO_CreateVIew_PmtctPatientScreeningView.sql" />
+    <EmbeddedResource Include="Scripts\2.0.0\49_SO_Add_Identifiers_BirthNotification.sql" />
+    <EmbeddedResource Include="Scripts\2.0.0\50_SO_ChangeIQCareVersion2Name.sql" />
+    <EmbeddedResource Include="Scripts\2.0.0\51_SO_AddCacxMethod_VIAVILI.sql" />
+    <EmbeddedResource Include="Scripts\2.0.0\52_DO_AlterView_PatientDeliveryInfo.sql" />
+    <EmbeddedResource Include="Scripts\2.0.0\52_PersonListView.sql" />
+    <EmbeddedResource Include="Scripts\2.0.0\51_SO_AddPMTCTMotherRegimensLookups.sql" />
+    <EmbeddedResource Include="Scripts\2.0.0\53_DO_AlterViewPatientDeliveryInfo.sql" />
+    <EmbeddedResource Include="Scripts\2.0.0\57_PHQQuestion.sql" />
+    <EmbeddedResource Include="Scripts\2.0.1\01_IQCareFinalBuild.sql" />
+    <EmbeddedResource Include="Scripts\2.0.1\02_IQCareFinalBuild.sql" />
+    <EmbeddedResource Include="Scripts\2.0.1\11_IQCareFinalBuild.sql" />
+    <EmbeddedResource Include="Scripts\2.0.1\04_IQCareFinalBuild.sql" />
+    <EmbeddedResource Include="Scripts\2.0.1\02_LO_ANCRegister.sql" />
+    <EmbeddedResource Include="Scripts\2.0.1\03_LO_HEIRegister.sql" />
+    <EmbeddedResource Include="Scripts\2.0.1\04_LO_HTSLabRegister.sql" />
+    <EmbeddedResource Include="Scripts\2.0.1\05_LO_MaternityRegister.sql" />
+    <EmbeddedResource Include="Scripts\2.0.1\06_LO_PNCRegister.sql" />
+    <EmbeddedResource Include="Scripts\2.0.0\41_DO_Create_View_IndicatorResults.sql" />
+    <EmbeddedResource Include="Scripts\2.0.0\42DefaultConstraintsSection.sql" />
+    <EmbeddedResource Include="Scripts\2.0.0\43_UpdateUIDIndicators.sql" />
+    <EmbeddedResource Include="Scripts\2.0.1\07_API_PatientsView.sql" />
+    <EmbeddedResource Include="Scripts\2.0.1\08_Update_ModeOfDelivery.sql" />
+    <EmbeddedResource Include="Scripts\2.0.1\09_SP_Bluecard_ToGreenCard.sql" />
+    <EmbeddedResource Include="Scripts\2.0.1\10_PersonView.sql" />
+    <EmbeddedResource Include="Scripts\2.0.1\12_IE_ADD_NHIF_Identifier.sql" />
+    <EmbeddedResource Include="Scripts\2.0.1\13_LO_PrEP_Lookup.sql" />
+    <EmbeddedResource Include="Scripts\2.0.1\14_PR_PatientPrEPStatus.sql" />
+    <EmbeddedResource Include="Scripts\2.0.1\15_PM_PatientCircumcisionStatus.sql" />
+    <EmbeddedResource Include="Scripts\2.0.1\16_PR_SystemAdmin_Backup_Constella.sql" />
+    <EmbeddedResource Include="Scripts\2.0.1\17_PR_PREP_EncountersView.sql" />
+    <EmbeddedResource Include="Scripts\2.0.1\18_PI_PregnancyIndicator_PlanningToGetPregnant.sql" />
+    <EmbeddedResource Include="Scripts\2.0.1\19_PI_PregnancyIndicator_PregnancyPlanned.sql" />
+    <EmbeddedResource Include="Scripts\2.0.1\20_PR_PREP_EncountersView.sql" />
+    <EmbeddedResource Include="Scripts\2.0.1\21_LO_STIScreening.sql" />
+    <EmbeddedResource Include="Scripts\2.0.1\22_IQCare_PatchRelease.sql" />
+    <EmbeddedResource Include="Scripts\2.0.1\23_pr_SCM_SaveUpdateHivTreatementPharmacyField_Futures.sql" />
+    <EmbeddedResource Include="Scripts\2.0.1\24_Ord_Visit_Insert.sql" />
+    <EmbeddedResource Include="Scripts\2.0.1\25_CouncellingTypes.sql" />
+    <EmbeddedResource Include="Scripts\2.0.1\26_GetCouncellingTopics.sql" />
+    <EmbeddedResource Include="Scripts\2.0.1\27_GetLnkCouncellingTypeTopics.sql" />
+    <EmbeddedResource Include="Scripts\2.0.1\28_UAT_Patch.sql" />
+    <EmbeddedResource Include="Scripts\2.0.1\29_Api_PatientsView.sql" />
+    <EmbeddedResource Include="Scripts\2.0.1\30_ANC Register.sql" />
+    <EmbeddedResource Include="Scripts\2.0.1\31_HEI Register.sql" />
+    <EmbeddedResource Include="Scripts\2.0.1\32_HTS_LAB_Register.sql" />
+    <EmbeddedResource Include="Scripts\2.0.1\33_Maternity Register.sql" />
+    <EmbeddedResource Include="Scripts\2.0.1\34_PNC Register.sql" />
+    <EmbeddedResource Include="Scripts\2.0.1\35_vw_FamilyTestingRegister.sql" />
+    <EmbeddedResource Include="Scripts\2.0.1\36_vw_HIVTesting_Services_Referral_Linkage_Register.sql" />
+    <EmbeddedResource Include="Scripts\2.0.1\37_vw_PartnerNotificationRegister.sql" />
+    <EmbeddedResource Include="Scripts\2.0.1\38_PrepEncounterView.sql" />
+    <EmbeddedResource Include="Scripts\2.0.1\39_PrepStatusColumnsNotExists.sql" />
+    <EmbeddedResource Include="Scripts\2.0.1\41_RemovePrepWeeksRow.sql" />
+    <EmbeddedResource Include="Scripts\2.0.1\42_PatientPartnerProfile.sql" />
+    <EmbeddedResource Include="Scripts\2.0.1\43_RemovePrepRegimenUse.sql" />
+    <EmbeddedResource Include="Scripts\2.0.1\44_RemovePrepStatusType.sql" />
+    <EmbeddedResource Include="Scripts\2.0.1\PREP\16_PrepCareEnded.sql" />
+    <EmbeddedResource Include="Scripts\2.0.1\PREP\17_PrepAdherence.sql" />
+    <EmbeddedResource Include="Scripts\2.0.1\PREP\18_AdherenceAssessmentReasons.sql" />
+    <EmbeddedResource Include="Scripts\2.0.1\PREP\19_PrepStatus.sql" />
+    <EmbeddedResource Include="Scripts\2.0.1\PREP\01_Prep_ServiceArea.sql" />
+    <EmbeddedResource Include="Scripts\2.0.1\PREP\10_PrepRiskAssessmentView.sql" />
+    <EmbeddedResource Include="Scripts\2.0.1\PREP\11_PopulationTypes.sql" />
+    <EmbeddedResource Include="Scripts\2.0.1\PREP\12_PREP Regimen.sql" />
+    <EmbeddedResource Include="Scripts\2.0.1\PREP\13_RegimenUse.sql" />
+    <EmbeddedResource Include="Scripts\2.0.1\PREP\15_HIVPositivePartnerProfile.sql" />
+    <EmbeddedResource Include="Scripts\2.0.1\PREP\20_PrEPDiscontinueReason.sql" />
+    <EmbeddedResource Include="Scripts\2.0.1\PREP\21_MonthlyRefillEncounter.sql" />
+    <EmbeddedResource Include="Scripts\2.0.1\PREP\22_AdherenceCounselling.sql" />
+    <EmbeddedResource Include="Scripts\2.0.1\PREP\23_PrepAppointment Reason.sql" />
+    <EmbeddedResource Include="Scripts\2.0.1\PREP\24_AppointmentGiven.sql" />
+    <EmbeddedResource Include="Scripts\2.0.1\PREP\25_Api_AppointmentsServiceAreaView.sql" />
+    <EmbeddedResource Include="Scripts\2.0.1\PREP\26_PrepRiskAssessmentView.sql" />
+    <EmbeddedResource Include="Scripts\2.0.1\PREP\28_DeleteSexualPartnerHivRiskLinkage.sql" />
+    <EmbeddedResource Include="Scripts\2.0.1\PREP\29_PrepDeclineReason.sql" />
+    <EmbeddedResource Include="Scripts\2.0.1\PREP\02_Prep Number.sql" />
+    <EmbeddedResource Include="Scripts\2.0.1\PREP\03_PrepServiceAreaIdentifiers.sql" />
+    <EmbeddedResource Include="Scripts\2.0.1\PREP\04_PersonVitalsView.sql" />
+    <EmbeddedResource Include="Scripts\2.0.1\PREP\05_SexualPartnerHivProfile.sql" />
+    <EmbeddedResource Include="Scripts\2.0.1\PREP\06_ClientAssessment.sql" />
+    <EmbeddedResource Include="Scripts\2.0.1\PREP\07_WillingnessAssessment.sql" />
+    <EmbeddedResource Include="Scripts\2.0.1\PREP\08_Behaviour Risk Assessment.sql" />
+    <EmbeddedResource Include="Scripts\2.0.1\PREP\09_RiskAssessment.sql" />
+    <EmbeddedResource Include="Scripts\2.0.1\PREP\30_PrepVisitTypes.sql" />
+    <EmbeddedResource Include="Scripts\2.1.0\01_IQCare_CHS_Final.sql" />
+    <EmbeddedResource Include="Scripts\2.1.0\02_PatientLabTracker_Delete_LabOrder.sql" />
+    <EmbeddedResource Include="Scripts\2.1.0\03_PA_PatientAllergyView.sql" />
+    <EmbeddedResource Include="Scripts\2.1.0\04_Person_Ptn_Pk_ForMigration.sql" />
+    <EmbeddedResource Include="Scripts\2.1.0\04_PI_PregnancyIndicator_Add_BreastFeeding.sql" />
+    <EmbeddedResource Include="Scripts\2.1.0\06_Remove_Retired_ServiceAreas.sql" />
+    <EmbeddedResource Include="Scripts\2.1.0\08_July_01_Release.sql" />
+    <EmbeddedResource Include="Scripts\2.1.0\09_fn_GetPatientVisitDate.sql" />
+    <EmbeddedResource Include="Scripts\2.1.0\10_EH_EncounterHistorySolution.sql" />
+    <EmbeddedResource Include="Scripts\2.1.0\11_EH_EncounterHistorySolution_Rerun.sql" />
+    <EmbeddedResource Include="Scripts\2.1.0\11_PV_PatientVitals.sql" />
+    <EmbeddedResource Include="Scripts\2.1.0\11_Update_Lnk_PatientProgramStart.sql" />
+    <EmbeddedResource Include="Scripts\2.1.0\12_pr_Scheduler_UpdateAppointmentStatus.sql" />
+    <EmbeddedResource Include="Scripts\2.1.0\12_Update_Lnk_PatientProgramStart_Rerun.sql" />
+    <EmbeddedResource Include="Scripts\2.1.0\14_HTS_LAB_Register.sql" />
+    <EmbeddedResource Include="Scripts\2.1.0\14_PP_PatientPopulationView_Rerun.sql" />
+    <EmbeddedResource Include="Scripts\2.1.0\15_HTS_LAB_Register_Rerun.sql" />
+    <EmbeddedResource Include="Scripts\2.1.0\15_VW_PatientCareEnding.sql" />
+    <EmbeddedResource Include="Scripts\2.1.0\16_PatientView.sql" />
+    <EmbeddedResource Include="Scripts\2.1.0\16_VW_PatientCareEnding_Rerun.sql" />
+    <EmbeddedResource Include="Scripts\2.1.0\17_PatientView_Rerun.sql" />
+    <EmbeddedResource Include="Scripts\2.1.0\17_PL_PregnancyLog_Add_BirthDefects.sql" />
+    <EmbeddedResource Include="Scripts\2.1.0\18_PA_PatientAppointmentReasons.sql" />
+    <EmbeddedResource Include="Scripts\2.1.0\19_sp_UpdateBlueCardBaselineHistory.sql" />
+    <EmbeddedResource Include="Scripts\2.1.0\20_sp_UpdateBlueCardBaselineTransferInHistory.sql" />
+    <EmbeddedResource Include="Scripts\2.1.0\21_sp_UpdateBlueCardBaselineTransferInTreatment.sql" />
+    <EmbeddedResource Include="Scripts\2.1.0\22_sp_UpdateBlueCardBaselineTransferInStartedART.sql" />
+    <EmbeddedResource Include="Scripts\2.1.0\23_sp_updatePatientProgramStart.sql" />
+    <EmbeddedResource Include="Scripts\2.1.0\24_HTS_LAB_Register.sql" />
+    <EmbeddedResource Include="Scripts\2.1.0\25_sp_getAllViralLoads.sql" />
+    <EmbeddedResource Include="Scripts\2.2.0\01_alterTracingTable.sql" />
+    <EmbeddedResource Include="Scripts\2.2.0\02_DefaulterTracingLookup.sql" />
+    <EmbeddedResource Include="Scripts\2.2.0\03_PatientTracingLookup.sql" />
+    <EmbeddedResource Include="Scripts\2.2.0\04_TracingMethods.sql" />
+    <EmbeddedResource Include="Scripts\2.2.0\06_sp_gettxcurr.sql" />
+    <EmbeddedResource Include="Scripts\2.2.0\07_sp_getfirstdefaulters.sql" />
+    <EmbeddedResource Include="Scripts\2.2.0\08_sp_getseconddefaulters.sql" />
+    <EmbeddedResource Include="Scripts\2.2.0\09_sp_getltfu.sql" />
+    <EmbeddedResource Include="Scripts\2.2.0\10_TracingReasonNotContactedPhone.sql" />
+    <EmbeddedResource Include="Scripts\2.2.0\11_ServiceAreaPREP.sql" />
+    <EmbeddedResource Include="Scripts\2.2.0\12_TracingAddReasonNotContacted.sql" />
+    <EmbeddedResource Include="Scripts\2.2.0\13_HeiLabTests.sql" />
+    <EmbeddedResource Include="Scripts\2.2.0\14_PersonTracingView.sql" />
+    <EmbeddedResource Include="Scripts\2.2.0\16_sp_getAllViralLoads.sql" />
+    <EmbeddedResource Include="Scripts\2.2.0\17_FPPNC.sql" />
+    <EmbeddedResource Include="Scripts\2.2.0\18_qaversion.sql" />
+    <EmbeddedResource Include="Scripts\2.2.0\19_GetPatientRelationships.sql" />
+    <EmbeddedResource Include="Scripts\2.2.0\20_DualKits.sql" />
+    <EmbeddedResource Include="Scripts\2.2.0\21_AddSyphilisResult.sql" />
+    <EmbeddedResource Include="Scripts\2.2.0\22_HTS_EncountersDetailView.sql" />
+    <EmbeddedResource Include="Scripts\2.2.0\23_CareEndIO.sql" />
+    <EmbeddedResource Include="Scripts\2.2.0\24_PatientCareEnding.sql" />
   </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="dbup" Version="4.1.0" />
     <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="2.1.1" />
+    <PackageReference Include="Microsoft.Extensions.Configuration" Version="2.1.1" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="2.1.1" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Reference Include="Microsoft.Extensions.Configuration">
-      <HintPath>..\..\..\..\..\..\..\..\Program Files\dotnet\sdk\NuGetFallbackFolder\microsoft.extensions.configuration\2.1.1\lib\netstandard2.0\Microsoft.Extensions.Configuration.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.Extensions.Configuration.Abstractions">
-      <HintPath>..\..\..\..\..\..\..\..\Program Files\dotnet\sdk\NuGetFallbackFolder\microsoft.extensions.configuration.abstractions\2.1.1\lib\netstandard2.0\Microsoft.Extensions.Configuration.Abstractions.dll</HintPath>
-    </Reference>
-  </ItemGroup>
-
-  <ItemGroup>
+ <ItemGroup>
     <ProjectReference Include="..\IQCare.SharedKernel.Infrastructure\IQCare.SharedKernel.Infrastructure.csproj" />
   </ItemGroup>
 
@@ -307,6 +645,18 @@
     <None Update="appsettings.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="Scripts\2.0.0\07_SO_SetPrefixTypeInIdentifiers.sql" />
+    <EmbeddedResource Include="Scripts\2.0.0\07_SO_SetPrefixTypeInIdentifiers.sql" />
+    <None Remove="Scripts\1.0.0.9\37_BO_AddPhsicalExaminationView.sql" />
+    <EmbeddedResource Include="Scripts\2.0.1\03_VisitDetailsView.sql" />
+    <EmbeddedResource Include="Scripts\2.0.1\PREP\14_Constraint.sql" />
+    <EmbeddedResource Include="Scripts\2.1.0\07_pr_Scheduler_UpdateAppointmentStatus.sql" />
+    <EmbeddedResource Include="Scripts\2.1.0\13_PP_PatientPopulationView.sql" />
+    <EmbeddedResource Include="Scripts\2.2.0\15_qaversion.sql" />
+    <Resource Include="Scripts\1.0.0.9\37_BO_AddPhsicalExaminationView.sql" />
   </ItemGroup>
 
 </Project>

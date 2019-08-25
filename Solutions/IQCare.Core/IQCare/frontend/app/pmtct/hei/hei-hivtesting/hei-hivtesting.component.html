@@ -54,15 +54,53 @@
             </ng-container>
 
 
+            <!-- Symbol Column -->
+            <ng-container matColumnDef="status">
+                <mat-header-cell *matHeaderCellDef><strong>Status</strong> </mat-header-cell>
+                <mat-cell *matCellDef="let HivTestingTableData">
+                    <div *ngIf="HivTestingTableData.status == 'update';else heiLabOrdertemplate">
+                        <a class="btn btn-sm btn-primary" (click)="completeLabOrder(HivTestingTableData)">
+                            Add Results
+                        </a>
+                    </div>
+                    <ng-template #heiLabOrdertemplate>
+                        <div *ngIf="HivTestingTableData.status == 'complete';">
+                            <span class="label label-green">Complete</span>
+                        </div>
+                        <div *ngIf="HivTestingTableData.status == 'pending';">
+                            <span class="label label-orange">Pending</span>
+                        </div>
+                    </ng-template>
+                </mat-cell>
+            </ng-container>
+
             <!-- actions -->
             <ng-container matColumnDef="action">
                 <mat-header-cell *matHeaderCellDef><strong class="fa fa-cog"> Action</strong></mat-header-cell>
-                <mat-cell *matCellDef="let row">
-                    <button mat-raised-button class="mat-accent" (click)="onRowClicked(row)">
-                        <span class="fa fa-trash-o">
-                            Delete
-                        </span>
-                    </button>
+                <mat-cell *matCellDef="let HivTestingTableData">
+                    <div *ngIf="HivTestingTableData.status == 'update';else heiLabOrdertemplate">
+                        <button mat-raised-button class="mat-accent" style="pointer-events: none;opacity: 0.6;">
+                            <span class="fa fa-trash-o">
+                                Delete
+                            </span>
+                        </button>
+                    </div>
+                    <ng-template #heiLabOrdertemplate>
+                        <div *ngIf="HivTestingTableData.status == 'complete';">
+                            <button mat-raised-button class="mat-accent" style="pointer-events: none;opacity: 0.6;">
+                                <span class="fa fa-trash-o">
+                                    Delete
+                                </span>
+                            </button>
+                        </div>
+                        <div *ngIf="HivTestingTableData.status == 'pending';">
+                            <button mat-raised-button class="mat-accent" (click)="onRowClicked(row)">
+                                <span class="fa fa-trash-o">
+                                    Delete
+                                </span>
+                            </button>
+                        </div>
+                    </ng-template>
                 </mat-cell>
             </ng-container>
 

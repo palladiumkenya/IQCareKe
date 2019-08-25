@@ -20,31 +20,30 @@ export class AddBirthInfoComponent implements OnInit {
     deliveryOutcomeOptions: any[] = [];
     yesnoOptions: any[] = [];
     birthOutcomes: any[] = [];
-    babyInfo : any ;
+    babyInfo: any ;
  
 
     @Input() PatientId: number;
     @Input() isEdit: boolean;
     @Input() PatientMasterVisitId: number;
     constructor(private formBuilder: FormBuilder,
-    private maternityService: MaternityService) 
-    {
+    private maternityService: MaternityService) {
         
     }
 
   ngOnInit() {
     this.babyFormGroup = this.formBuilder.group({
       babySex: new FormControl('', [Validators.required]),
-      birthWeight: new FormControl('', [Validators.required]),
+      birthWeight: new FormControl('', [Validators.required, Validators.min(0), Validators.max(5)]),
       outcome: new FormControl('', [Validators.required]),
       resuscitationDone: new FormControl('', [Validators.required]),
       deformity: new FormControl('', [Validators.required]),
       teoGiven: new FormControl('', [Validators.required]),
       breastFed: new FormControl('', [Validators.required]),
 
-      agparScore1min: new FormControl('', [Validators.required, Validators.max(10)]),
-      agparScore5min: new FormControl('', [Validators.required, Validators.max(10)]),
-      agparScore10min: new FormControl('', [Validators.required, Validators.max(10)]),
+      agparScore1min: new FormControl('', [Validators.required, Validators.min(0), Validators.max(10)]),
+      agparScore5min: new FormControl('', [Validators.required, Validators.min(0),  Validators.max(10)]),
+      agparScore10min: new FormControl('', [Validators.required, Validators.min(0),  Validators.max(10)]),
       notificationNumber: new FormControl('', [Validators.required]),
       comment: new FormControl('na', [])
   });
@@ -63,10 +62,9 @@ export class AddBirthInfoComponent implements OnInit {
   }
 
   public AddBaby() {
-
-    if (this.babyFormGroup.invalid) { 
-          return;
-    }
+        if (this.babyFormGroup.invalid) {
+            return;
+        }
 
         this.babyData.push({
             sex: this.babyFormGroup.get('babySex').value.itemId,
@@ -80,6 +78,7 @@ export class AddBirthInfoComponent implements OnInit {
             apgarScoreOne: this.babyFormGroup.get('agparScore1min').value,
             apgarScoreFive: this.babyFormGroup.get('agparScore5min').value,
             apgarScoreTen: this.babyFormGroup.get('agparScore10min').value,
+            resuscitateStr: this.babyFormGroup.get('resuscitationDone').value.itemName,
             resuscitate: (this.babyFormGroup.get('resuscitationDone').value.itemName == 'Yes') ? true : false,
             deformityStr:  this.babyFormGroup.get('deformity').value.itemName,
             deformity:  (this.babyFormGroup.get('deformity').value.itemName == 'Yes') ? true : false,
@@ -115,10 +114,7 @@ public getApgarScoreValue(apgarScore: string, scoreType: string): any {
 public onBabyOutcome(event) {
 
     const noOption = this.yesnoOptions.filter(obj => obj.itemName == 'No');
-    console.log('yesNoOptions');
-    console.log(noOption);
     const noId = noOption[0]['itemId'];
-    console.log('NoId' + noId);
 
     if (event.isUserInput && event.source.selected && event.source.viewValue == 'Live Birth') {
 
@@ -131,9 +127,6 @@ public onBabyOutcome(event) {
     if (event.isUserInput && event.source.selected && event.source.viewValue == 'Macerated Still Birth') {
 
         this.babyFormGroup.get('resuscitationDone').setValue(105);
-      //  this.babyFormGroup.get('deformity').setValue(noId);
-      //  this.babyFormGroup.get('teoGiven').setValue(noId);
-      //  this.babyFormGroup.get('breastFed').setValue(noId);
         this.babyFormGroup.get('agparScore1min').setValue(0);
         this.babyFormGroup.get('agparScore5min').setValue(0);
         this.babyFormGroup.get('agparScore10min').setValue(0);

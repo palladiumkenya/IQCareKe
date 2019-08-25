@@ -13,8 +13,6 @@ namespace IQCare.Common.BusinessProcess.Commands.Refferal
         public int ReferredBy { get; set; }
         public int ReferredFrom { get; set; }
         public int ReferredTo { get; set; }
-        public int PatientId { get; set; }
-        public int PatientMasterVisitId { get; set; }
     }
 
     public class EditRefferalCommandResponse

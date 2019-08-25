@@ -17,7 +17,7 @@ namespace IQCare.HTS.BusinessProcess.Commands
         public int UserId { get; set; }
         public bool IsEdit { get; set; } = false;
         public int? Id { get; set; }
-        public DateTime Artstartdate { get; set; }
+        public DateTime? Artstartdate { get; set; }
     }
 
     public class AddLinkageResponse
