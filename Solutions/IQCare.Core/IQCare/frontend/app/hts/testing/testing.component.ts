@@ -258,7 +258,9 @@ export class TestingComponent implements OnInit {
                     test.KitId = this.testing.KitId;
                     test.Outcome = this.testing.Outcome;
                     test.TestRound = this.testing.TestRound;
-                    test.SyphilisResult = data['syphilis']['itemId'];
+                    if (data['syphilis']) {
+                        test.SyphilisResult = data['syphilis']['itemId'];
+                    }
 
                     this.hivResults1.push(this.testing);
                     this.hiv1.push(test);
