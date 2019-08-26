@@ -310,6 +310,7 @@
     <None Remove="Scripts\2.2.0\23_CareEndIO.sql" />
     <None Remove="Scripts\2.2.0\24_PatientCareEnding.sql" />
     <None Remove="Scripts\2.2.0\25_gcPatientView.sql" />
+    <None Remove="Scripts\2.2.0\26_MaternityVisitType.sql" />
     <None Remove="Scripts\2.2.0\IQTools\01_PatientPopulationView.sql" />
     <None Remove="Scripts\2.2.0\IQTools\02_HTS_LABRegisternewer.sql" />
     <None Remove="Scripts\2.2.0\IQTools\03_ANCRegister.sql" />
@@ -642,6 +643,7 @@
     <EmbeddedResource Include="Scripts\2.2.0\23_CareEndIO.sql" />
     <EmbeddedResource Include="Scripts\2.2.0\24_PatientCareEnding.sql" />
     <EmbeddedResource Include="Scripts\2.2.0\25_gcPatientView.sql" />
+    <EmbeddedResource Include="Scripts\2.2.0\26_MaternityVisitType.sql" />
     <EmbeddedResource Include="Scripts\2.2.0\IQTools\01_PatientPopulationView.sql" />
     <EmbeddedResource Include="Scripts\2.2.0\IQTools\02_HTS_LABRegisternewer.sql" />
     <EmbeddedResource Include="Scripts\2.2.0\IQTools\03_ANCRegister.sql" />
