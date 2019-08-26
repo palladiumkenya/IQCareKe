@@ -309,6 +309,19 @@
     <None Remove="Scripts\2.2.0\22_HTS_EncountersDetailView.sql" />
     <None Remove="Scripts\2.2.0\23_CareEndIO.sql" />
     <None Remove="Scripts\2.2.0\24_PatientCareEnding.sql" />
+    <None Remove="Scripts\2.2.0\25_gcPatientView.sql" />
+    <None Remove="Scripts\2.2.0\IQTools\01_PatientPopulationView.sql" />
+    <None Remove="Scripts\2.2.0\IQTools\02_HTS_LABRegisternewer.sql" />
+    <None Remove="Scripts\2.2.0\IQTools\03_ANCRegister.sql" />
+    <None Remove="Scripts\2.2.0\IQTools\04_HEIRegister.sql" />
+    <None Remove="Scripts\2.2.0\IQTools\05_MaternityRegister.sql" />
+    <None Remove="Scripts\2.2.0\IQTools\06_PNCRegister.sql" />
+    <None Remove="Scripts\2.2.0\IQTools\07_PrEpDiscountinuations.sql" />
+    <None Remove="Scripts\2.2.0\IQTools\08_PREPRegisterView.sql" />
+    <None Remove="Scripts\2.2.0\IQTools\09_vw_FamilyTestingRegister.sql" />
+    <None Remove="Scripts\2.2.0\IQTools\10_vw_HIVTesting_Services_Referral_Linkage_Register.sql" />
+    <None Remove="Scripts\2.2.0\IQTools\11_vw_PartnerNotificationRegisternew.sql" />
+    <None Remove="Scripts\2.2.0\IQTools\12_VW_PatientCareEnding.sql" />
   </ItemGroup>
 
   <ItemGroup>
@@ -628,6 +641,19 @@
     <EmbeddedResource Include="Scripts\2.2.0\22_HTS_EncountersDetailView.sql" />
     <EmbeddedResource Include="Scripts\2.2.0\23_CareEndIO.sql" />
     <EmbeddedResource Include="Scripts\2.2.0\24_PatientCareEnding.sql" />
+    <EmbeddedResource Include="Scripts\2.2.0\25_gcPatientView.sql" />
+    <EmbeddedResource Include="Scripts\2.2.0\IQTools\01_PatientPopulationView.sql" />
+    <EmbeddedResource Include="Scripts\2.2.0\IQTools\02_HTS_LABRegisternewer.sql" />
+    <EmbeddedResource Include="Scripts\2.2.0\IQTools\03_ANCRegister.sql" />
+    <EmbeddedResource Include="Scripts\2.2.0\IQTools\04_HEIRegister.sql" />
+    <EmbeddedResource Include="Scripts\2.2.0\IQTools\05_MaternityRegister.sql" />
+    <EmbeddedResource Include="Scripts\2.2.0\IQTools\06_PNCRegister.sql" />
+    <EmbeddedResource Include="Scripts\2.2.0\IQTools\07_PrEpDiscountinuations.sql" />
+    <EmbeddedResource Include="Scripts\2.2.0\IQTools\08_PREPRegisterView.sql" />
+    <EmbeddedResource Include="Scripts\2.2.0\IQTools\09_vw_FamilyTestingRegister.sql" />
+    <EmbeddedResource Include="Scripts\2.2.0\IQTools\10_vw_HIVTesting_Services_Referral_Linkage_Register.sql" />
+    <EmbeddedResource Include="Scripts\2.2.0\IQTools\11_vw_PartnerNotificationRegisternew.sql" />
+    <EmbeddedResource Include="Scripts\2.2.0\IQTools\12_VW_PatientCareEnding.sql" />
   </ItemGroup>
 
   <ItemGroup>
