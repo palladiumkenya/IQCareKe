@@ -187,7 +187,6 @@ export class ClientMonitoringComponent implements OnInit, OnDestroy {
             .subscribe(
                 p => {
                     const screening = p;
-                    console.log(p);
                     if (p) {
                         const cacx = screening.filter(obj => obj.screeningType == 'CaCxScreening');
                         const tb = screening.filter(obj => obj.screeningType == 'TBScreeningPMTCT');

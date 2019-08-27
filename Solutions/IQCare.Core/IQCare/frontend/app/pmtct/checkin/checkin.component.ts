@@ -39,7 +39,7 @@ export class CheckinComponent implements OnInit {
                 this.getLookupItems('HEIVisitType', this.visitTypes);
                 break;
             case 'maternity':
-                this.getLookupItems('HEIVisitType', this.visitTypes);
+                this.getLookupItems('MaternityVisitType', this.visitTypes);
                 break;
             case 'pnc':
                 this.getLookupItems('PNCVisitType', this.visitTypes);

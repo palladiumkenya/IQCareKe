@@ -45,7 +45,7 @@
                                                     <tr *ngFor="let hivResult of hivResults1; let index = index">
                                                         <td>{{ index }}</td>
                                                         <td>{{ hivResult['hivResult']['itemName'] }}</td>
-                                                        <td>{{ hivResult['syphilis']['itemName'] }}</td>
+                                                        <td>{{ hivResult['syphilis'] ? hivResult['syphilis']['itemName'] : '' }}</td>
                                                         <td>{{ hivResult.kitName.itemName }}</td>
                                                         <td>{{ hivResult['lotNumber'] }}</td>
                                                         <td>{{ hivResult['expiryDate'] | date: 'dd-MMM-yyyy' }}</td>

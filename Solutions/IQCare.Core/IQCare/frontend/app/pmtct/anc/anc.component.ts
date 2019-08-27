@@ -545,6 +545,8 @@ export class AncComponent implements OnInit, OnDestroy {
                     ExpiryDate: this.hiv_status_table_data[i][j]['expirydate'],
                     Outcome: this.hiv_status_table_data[i][j]['testresult']['itemId'],
                     TestRound: this.hiv_status_table_data[i][j]['testtype']['itemName'] == 'HIV Test-1' ? 1 : 2,
+                    SyphilisResult: this.hiv_status_table_data[i][j]['SyphilisResult'] ?
+                        this.hiv_status_table_data[i][j]['SyphilisResult']['itemId'] : null
                 });
             }
         }
