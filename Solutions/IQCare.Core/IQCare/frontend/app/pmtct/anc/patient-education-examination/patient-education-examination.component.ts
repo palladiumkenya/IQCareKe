@@ -11,7 +11,8 @@ import { NotificationService } from '../../../shared/_services/notification.serv
 import * as moment from 'moment';
 import { AncService } from '../../_services/anc.service';
 import { DataService } from '../../../shared/_services/data.service';
-
+import { MatDialogConfig, MatDialog } from '@angular/material';
+import { PatientCounsellingComponent } from '../patient-counselling/patient-counselling.component'
 
 export interface PeriodicElement {
     topicId: number;
@@ -64,6 +65,7 @@ export class PatientEducationExaminationComponent implements OnInit, OnDestroy {
     visitDate: Date;
 
     constructor(private _formBuilder: FormBuilder, private _lookupItemService: LookupItemService,
+        private dialog: MatDialog,
         private snotifyService: SnotifyService,
         private notificationService: NotificationService,
         private dataService: DataService,
@@ -77,8 +79,8 @@ export class PatientEducationExaminationComponent implements OnInit, OnDestroy {
 
         this.PatientEducationFormGroup = this._formBuilder.group({
             breastExamDone: ['', Validators.required],
-            counsellingDate: ['', (this.isEdit) ? [] : Validators.required],
-            counselledOn: ['', (this.isEdit) ? [] : Validators.required],
+            //  counsellingDate: ['', (this.isEdit) ? [] : Validators.required],
+            //counselledOn: ['', (this.isEdit) ? [] : Validators.required],
             treatedSyphilis: ['', Validators.required]
             // testResult: new FormControl(['', Validators.required])
         });
@@ -105,8 +107,8 @@ export class PatientEducationExaminationComponent implements OnInit, OnDestroy {
 
         if (this.isEdit) {
 
-            this.PatientEducationFormGroup.get('counsellingDate').clearValidators();
-            this.PatientEducationFormGroup.get('counselledOn').clearValidators();
+         //   this.PatientEducationFormGroup.get('counsellingDate').clearValidators();
+           // this.PatientEducationFormGroup.get('counselledOn').clearValidators();
 
             // this.getPatientCounselingData(this.PatientId, this.PatientMasterVisitId);
             this.getPatientCounselingDataAll(this.PatientId);
@@ -128,29 +130,62 @@ export class PatientEducationExaminationComponent implements OnInit, OnDestroy {
 
     public addTopics() {
 
-        const topic = this.PatientEducationFormGroup.controls['counselledOn'].value.itemName;
-        const topicId = this.PatientEducationFormGroup.controls['counselledOn'].value.itemId;
-        const counsellingDates = this.PatientEducationFormGroup.controls['counsellingDate'].value;
+        //  const topic = this.PatientEducationFormGroup.controls['counselledOn'].value.itemName;
+        // const topicId = this.PatientEducationFormGroup.controls['counselledOn'].value.itemId;
+
+        const resultsDialogConfig = new MatDialogConfig();
+
+        resultsDialogConfig.disableClose = false;
+        resultsDialogConfig.autoFocus = true;
+        resultsDialogConfig.width = '600px';
+        resultsDialogConfig.height = '300px';
+
+        resultsDialogConfig.data = {
+            isEdit: this.isEdit,
+            counsellingOptions: this.counsellingOptions,
+
+        };
+
+        const dialogRef = this.dialog.open(PatientCounsellingComponent, resultsDialogConfig);
+
+        dialogRef.afterClosed().subscribe(
+            data => {
+                if (!data) {
+                    return;
+                }
+                // const topic = this.PatientEducationFormGroup.controls['counselledOn'].value.itemName;
+                // const topicId = this.PatientEducationFormGroup.controls['counselledOn'].value.itemId;
+                const topic = data.counselledOn.itemName;
+                const topicId = data.counselledOn.itemId;
+                console.log(data.counsellingDate);
+                const counsellingDates = data.counsellingDate;
+
+                //const counsellingDates = this.PatientEducationFormGroup.controls['counsellingDate'].value;
 
 
-        if (topic === '' || this.PatientEducationFormGroup.controls['counsellingDate'].value === '') {
-            this.snotifyService.warning('counselling topic, counselling date required', this.notificationService.getConfig());
-            return false;
-        }
+                if (topic === '' || //this.PatientEducationFormGroup.controls['counsellingDate'].value 
+                    counsellingDates === '') {
+                    this.snotifyService.warning('counselling topic, counselling date required', this.notificationService.getConfig());
+                    return false;
+                }
 
 
-        if (this.counselling_data.filter(x => x.counsellingTopic === topic)
-            .length > 0) {
-            this.snotifyService.warning('' + topic + ' exists', 'Counselling', this.notificationService.getConfig());
-        } else {
-            this.counselling_data.push({
-                counselledOn: parseInt(topicId, 10),
-                counsellingTopic: topic,
-                counsellingTopicId: topicId,
-                description: 'n/a',
-                CounsellingDate: this.PatientEducationFormGroup.controls['counsellingDate'].value
+                if (this.counselling_data.filter(x => x.counsellingTopic === topic  && moment(x.CounsellingDate).format('DD-MM-YYYY') === moment(counsellingDates).format('DD-MM-YYYY'))
+                    .length > 0) {
+                    this.snotifyService.warning('' + topic + ' exists at the same day', 'Counselling', this.notificationService.getConfig());
+                } else {
+                    this.counselling_data.push({
+                        counselledOn: parseInt(topicId, 10),
+                        counsellingTopic: topic,
+                        counsellingTopicId: topicId,
+                        description: 'n/a',
+                        CounsellingDate: counsellingDates
+                        // CounsellingDate: this.PatientEducationFormGroup.controls['counsellingDate'].value
+                    });
+                }
+
             });
-        }
+
     }
 
     public removeRow(idx) {
