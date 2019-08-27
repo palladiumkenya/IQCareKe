@@ -344,12 +344,13 @@ export class AncComponent implements OnInit, OnDestroy {
     }
 
     public checkEducationFilled(stepper: MatStepper) {
-        if (this.counselling_data.length < 1) {
+        /*if (this.counselling_data.length < 1) {
             this.snotifyService.error('Add Counselling data', 'ANC', this.notificationService.getConfig());
 
         } else {
             stepper.next();
-        }
+        } */
+        stepper.next();
     }
 
     public checkChroniIllnessAdded(stepper: MatStepper) {
