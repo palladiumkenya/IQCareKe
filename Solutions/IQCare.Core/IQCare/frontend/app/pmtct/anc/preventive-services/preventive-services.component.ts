@@ -10,6 +10,9 @@ import { LookupItemService } from '../../../shared/_services/lookup-item.service
 import { NotificationService } from '../../../shared/_services/notification.service';
 import * as moment from 'moment';
 import { AncService } from '../../_services/anc.service';
+import { MatDialogConfig, MatDialog } from '@angular/material';
+import { DataService } from '../../../shared/_services/data.service';
+import { PatientPreventiveServiceComponent } from '../patient-preventive-service/patient-preventive-service.component'
 
 export interface Options {
     value: string;
@@ -28,7 +31,7 @@ export class PreventiveServicesComponent implements OnInit, OnDestroy {
     public YesNoOptions: any[] = [];
     public YesNoNaOptions: any[] = [];
     public FinalResultOptions: any[] = [];
-    public maxDate: Date = moment().toDate();
+    public maxDate: Date;
     public minDate: Date;
     public preventiveService$: Subscription;
     public partnerTesting$: Subscription;
@@ -47,16 +50,18 @@ export class PreventiveServicesComponent implements OnInit, OnDestroy {
 
     constructor(private _formBuilder: FormBuilder, private _lookupItemService: LookupItemService,
         private snotifyService: SnotifyService,
+        private dialog: MatDialog,
+        private dataService: DataService,
         private notificationService: NotificationService,
         private ancService: AncService) {
     }
 
     ngOnInit() {
         this.PreventiveServicesFormGroup = this._formBuilder.group({
-            preventiveServices: ['', (this.isEdit) ? [] : Validators.required],
-            dateGiven: ['', (this.isEdit) ? [] : Validators.required],
-            comments: ['', []],
-            nextSchedule: ['', []],
+            // preventiveServices: ['', (this.isEdit) ? [] : Validators.required],
+            //dateGiven: ['', (this.isEdit) ? [] : Validators.required],
+            //comments: ['', []],
+            //nextSchedule: ['', []],
             insecticideTreatedNet: ['', Validators.required],
             insecticideTreatedNetGivenDate: ['', Validators.required],
             antenatalExercise: ['', Validators.required],
@@ -65,6 +70,11 @@ export class PreventiveServicesComponent implements OnInit, OnDestroy {
             finalHIVResult: ['', Validators.required]
         });
 
+        this.dataService.visitDate.subscribe(date => {
+
+            this.maxDate = date;
+            this.minDate = date;
+        });
         this.PreventiveServicesFormGroup.get('insecticideTreatedNetGivenDate').disable({ onlySelf: true });
 
         const {
@@ -86,10 +96,10 @@ export class PreventiveServicesComponent implements OnInit, OnDestroy {
         if (this.isEdit) {
             // this.getPatientPreventiveServiceInfo(this.patientId, this.patientMasterVisitId);
 
-            this.PreventiveServicesFormGroup.get('preventiveServices').clearValidators();
+            /*this.PreventiveServicesFormGroup.get('preventiveServices').clearValidators();
             this.PreventiveServicesFormGroup.get('dateGiven').clearValidators();
             this.PreventiveServicesFormGroup.get('comments').clearValidators();
-            this.PreventiveServicesFormGroup.get('nextSchedule').clearValidators();
+            this.PreventiveServicesFormGroup.get('nextSchedule').clearValidators(); */
 
             this.getPatientPartnerTestingInfo(this.patientId, this.patientMasterVisitId);
             this.getPatientPreventiveServiceInfoAll(this.patientId);
@@ -118,43 +128,67 @@ export class PreventiveServicesComponent implements OnInit, OnDestroy {
 
     public addTopics() {
 
-        const service = this.PreventiveServicesFormGroup.controls['preventiveServices'].value.itemName;
-        const serviceId = this.PreventiveServicesFormGroup.controls['preventiveServices'].value.itemId;
-        const dateGivens = moment(this.PreventiveServicesFormGroup.controls['nextSchedule'].value).toDate();
 
-        if (service === '' || this.PreventiveServicesFormGroup.controls['dateGiven'].value === ''
-        ) {
-            this.snotifyService.warning('Please provide service,date given', 'preventive Service',
-                this.notificationService.getConfig());
-            return false;
-        }
+        const resultsDialogConfig = new MatDialogConfig();
 
-        if (this.isEdit) {
-            if (this.serviceDataEdit.filter(x => x.preventiveService === service).length > 0) {
-                this.snotifyService.warning('' + service + ' exists', 'preventive Service', this.notificationService.getConfig());
-            } else {
-                this.serviceDataEdit.push({
-                    preventiveService: service,
-                    preventiveServiceId: serviceId,
-                    dateGiven: this.PreventiveServicesFormGroup.controls['dateGiven'].value,
-                    comments: this.PreventiveServicesFormGroup.controls['comments'].value,
-                    nextSchedule: (this.PreventiveServicesFormGroup.controls['nextSchedule'].value === '') ?
-                        '1900-01-01T00:00:00' : this.PreventiveServicesFormGroup.controls['nextSchedule'].value
-                });
-            }
-        } else {
-            if (this.serviceData.filter(x => x.preventiveService === service).length > 0) {
-                this.snotifyService.warning('' + service + ' exists', 'preventive Service', this.notificationService.getConfig());
-            } else {
-                this.serviceData.push({
-                    preventiveService: service,
-                    preventiveServiceId: serviceId,
-                    dateGiven: this.PreventiveServicesFormGroup.controls['dateGiven'].value,
-                    comments: this.PreventiveServicesFormGroup.controls['comments'].value,
-                    nextSchedule: this.PreventiveServicesFormGroup.controls['nextSchedule'].value
-                });
-            }
-        }
+        resultsDialogConfig.disableClose = false;
+        resultsDialogConfig.autoFocus = true;
+        resultsDialogConfig.width = '700px';
+        resultsDialogConfig.height = '300px';
+
+        resultsDialogConfig.data = {
+            isEdit: this.isEdit,
+            preventiveServicesOptions: this.preventiveServicesOptions,
+            maxDate:  this.maxDate
+
+        };
+
+        const dialogRef = this.dialog.open(PatientPreventiveServiceComponent, resultsDialogConfig);
+
+        dialogRef.afterClosed().subscribe(
+            data => {
+                if (!data) {
+                    return;
+                }
+
+                const service = data.preventiveServices.itemName;
+                const serviceId = data.preventiveServices.itemId;
+                const dateGivens = moment(data.nextSchedule).toDate();
+
+                if (service === '' || data.dateGiven === ''
+                ) {
+                    this.snotifyService.warning('Please provide service,date given', 'preventive Service',
+                        this.notificationService.getConfig());
+                    return false;
+                }
+
+                if (this.isEdit) {
+                    if (this.serviceDataEdit.filter(x => x.preventiveService === service).length > 0) {
+                        this.snotifyService.warning('' + service + ' exists', 'preventive Service', this.notificationService.getConfig());
+                    } else {
+                        this.serviceDataEdit.push({
+                            preventiveService: service,
+                            preventiveServiceId: serviceId,
+                            dateGiven: dateGivens,
+                            comments: data.comments,
+                            nextSchedule: (data.nextSchedule === '') ?
+                                '1900-01-01T00:00:00' : data.nextSchedule
+                        });
+                    }
+                } else {
+                    if (this.serviceData.filter(x => x.preventiveService === service).length > 0) {
+                        this.snotifyService.warning('' + service + ' exists', 'preventive Service', this.notificationService.getConfig());
+                    } else {
+                        this.serviceData.push({
+                            preventiveService: service,
+                            preventiveServiceId: serviceId,
+                            dateGiven: dateGivens,
+                            comments: data.comments,
+                            nextSchedule: data.nextSchedule
+                        });
+                    }
+                }
+            });
     }
 
     public onPartnerTestingChange(event) {

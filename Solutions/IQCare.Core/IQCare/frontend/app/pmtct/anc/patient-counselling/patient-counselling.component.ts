@@ -16,7 +16,7 @@ export class PatientCounsellingComponent implements OnInit {
     PatientCounsellingForm: FormGroup;
     public counsellingOptions: any[] = [];
     isEdit: boolean = false;
-    public maxDate: Date = moment().toDate();
+    public maxDate: Date;
     @Output() notify: EventEmitter<FormGroup> = new EventEmitter<FormGroup>();
     visitDate: Date;
     
@@ -25,6 +25,9 @@ export class PatientCounsellingComponent implements OnInit {
         @Inject(MAT_DIALOG_DATA) public data: any) {
         this.isEdit = data.isEdit;
         this.counsellingOptions = data.counsellingOptions;
+        this.maxDate = data.maxDate;
+       
+
     }
 
     ngOnInit() {
