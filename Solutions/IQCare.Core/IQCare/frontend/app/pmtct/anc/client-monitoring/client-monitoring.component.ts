@@ -132,12 +132,11 @@ export class ClientMonitoringComponent implements OnInit, OnDestroy {
     }
 
     public oncacxScreeningChange(event) {
-
         if (event.isUserInput && event.source.selected && event.source.viewValue == 'Yes') {
             this.clientMonitoringFormGroup.controls['cacxMethod'].enable({ onlySelf: true });
             this.clientMonitoringFormGroup.controls['cacxResult'].enable({ onlySelf: true });
             this.clientMonitoringFormGroup.controls['cacxComments'].enable({ onlySelf: true });
-        } else {
+        } else if (event.isUserInput && event.source.selected && event.source.viewValue != 'Yes') {
             this.clientMonitoringFormGroup.controls['cacxMethod'].disable({ onlySelf: true });
             this.clientMonitoringFormGroup.controls['cacxResult'].disable({ onlySelf: true });
             this.clientMonitoringFormGroup.controls['cacxComments'].disable({ onlySelf: true });
@@ -148,8 +147,6 @@ export class ClientMonitoringComponent implements OnInit, OnDestroy {
         this.patientwhoStage$ = this.ancService.getPatientWhoStageInfoCurrent(patientId)
             .subscribe(
                 p => {
-                    // console.log('patientwho');
-                    // console.log(p);
                     const whostage = p;
                     if (whostage) {
                         this.clientMonitoringFormGroup.get('WhoStage').setValue(whostage['whoStage']);

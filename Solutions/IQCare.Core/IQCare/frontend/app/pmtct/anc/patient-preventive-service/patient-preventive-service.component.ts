@@ -20,7 +20,7 @@ export class PatientPreventiveServiceComponent implements OnInit {
     preventiveServicesOptions: any[] = [];
     isEdit: boolean;
     public minDate: Date;
-    public maxDate:Date;
+    public maxDate: Date;
     @Output() notify: EventEmitter<FormGroup> = new EventEmitter<FormGroup>();
     constructor(private _formBuilder: FormBuilder,
          private dataService: DataService, 

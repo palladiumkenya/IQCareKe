@@ -67,10 +67,16 @@ export class ReferralsComponent implements OnInit {
                 p => {
                     const appointment = p;
                     if (appointment.length > 0) {
-                        const yesno = this.yesnoOptions.filter(x => x.itemName == 'Yes');
-                        this.ReferralFormGroup.get('nextAppointmentDate').setValue(appointment['appointmentDate']);
-                        this.ReferralFormGroup.get('scheduledAppointment').setValue(yesno[0]['itemId']);
-                        this.ReferralFormGroup.get('serviceRemarks').setValue(appointment['description']);
+                        const ancAppoinment = appointment.filter(obj => obj.description != 'ANC Preventive Services Schedule');
+                        if (ancAppoinment.length > 0) {
+                            const yesno = this.yesnoOptions.filter(x => x.itemName == 'Yes');
+                            this.ReferralFormGroup.get('nextAppointmentDate').setValue(ancAppoinment[0]['appointmentDate']);
+                            this.ReferralFormGroup.get('scheduledAppointment').setValue(yesno[0]['itemId']);
+                            this.ReferralFormGroup.get('serviceRemarks').setValue(ancAppoinment[0]['description']);
+                        } else {
+                            const yesno = this.yesnoOptions.filter(x => x.itemName == 'No');
+                            this.ReferralFormGroup.get('scheduledAppointment').setValue(yesno[0]['itemId']);
+                        }                    
                     } else {
                         const yesno = this.yesnoOptions.filter(x => x.itemName == 'No');
                         this.ReferralFormGroup.get('scheduledAppointment').setValue(yesno[0]['itemId']);

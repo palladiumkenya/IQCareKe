@@ -58,10 +58,6 @@ export class PreventiveServicesComponent implements OnInit, OnDestroy {
 
     ngOnInit() {
         this.PreventiveServicesFormGroup = this._formBuilder.group({
-            // preventiveServices: ['', (this.isEdit) ? [] : Validators.required],
-            //dateGiven: ['', (this.isEdit) ? [] : Validators.required],
-            //comments: ['', []],
-            //nextSchedule: ['', []],
             insecticideTreatedNet: ['', Validators.required],
             insecticideTreatedNetGivenDate: ['', Validators.required],
             antenatalExercise: ['', Validators.required],
@@ -94,13 +90,6 @@ export class PreventiveServicesComponent implements OnInit, OnDestroy {
         });
 
         if (this.isEdit) {
-            // this.getPatientPreventiveServiceInfo(this.patientId, this.patientMasterVisitId);
-
-            /*this.PreventiveServicesFormGroup.get('preventiveServices').clearValidators();
-            this.PreventiveServicesFormGroup.get('dateGiven').clearValidators();
-            this.PreventiveServicesFormGroup.get('comments').clearValidators();
-            this.PreventiveServicesFormGroup.get('nextSchedule').clearValidators(); */
-
             this.getPatientPartnerTestingInfo(this.patientId, this.patientMasterVisitId);
             this.getPatientPreventiveServiceInfoAll(this.patientId);
         } else {
@@ -108,42 +97,22 @@ export class PreventiveServicesComponent implements OnInit, OnDestroy {
         }
     }
 
-    public moveNextStep() {
-        const insectedTreatedNet = this.PreventiveServicesFormGroup.controls['insecticideTreatedNet'].value.itemName;
-
-        this.preventiveServicesData = {
-            preventiveService: this.serviceData,
-            insecticideTreatedNet: parseInt(this.PreventiveServicesFormGroup.controls['insecticideTreatedNet'].value, 10),
-            insecticideTreatedNetGivenDate: (insectedTreatedNet === 'No') ?
-                this.PreventiveServicesFormGroup.controls['insecticideTreatedNetGivenDate'].value : this.maxDate,
-            antenatalExercise: parseInt(this.PreventiveServicesFormGroup.controls['antenatalExercise'].value, 10),
-            //  insecticideGivenDate: this.PreventiveServicesFormGroup.controls['insecticideGivenDate'].value,
-            PartnerTestingVisit: parseInt(this.PreventiveServicesFormGroup.controls['PartnerTestingVisit'].value, 10),
-            finalHIVResult: parseInt(this.PreventiveServicesFormGroup.controls['finalHIVResult'].value, 10),
-
-        };
-        this.nextStep.emit(this.preventiveServicesData);
-        this.notify.emit(this.PreventiveServicesFormGroup);
-    }
-
     public addTopics() {
 
 
-        const resultsDialogConfig = new MatDialogConfig();
+        const preventiveServiceConfig = new MatDialogConfig();
 
-        resultsDialogConfig.disableClose = false;
-        resultsDialogConfig.autoFocus = true;
-        resultsDialogConfig.width = '700px';
-        resultsDialogConfig.height = '300px';
+        preventiveServiceConfig.disableClose = false;
+        preventiveServiceConfig.autoFocus = true;
 
-        resultsDialogConfig.data = {
+        preventiveServiceConfig.data = {
             isEdit: this.isEdit,
             preventiveServicesOptions: this.preventiveServicesOptions,
             maxDate:  this.maxDate
 
         };
 
-        const dialogRef = this.dialog.open(PatientPreventiveServiceComponent, resultsDialogConfig);
+        const dialogRef = this.dialog.open(PatientPreventiveServiceComponent, preventiveServiceConfig);
 
         dialogRef.afterClosed().subscribe(
             data => {

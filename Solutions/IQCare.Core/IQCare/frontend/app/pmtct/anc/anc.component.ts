@@ -310,21 +310,6 @@ export class AncComponent implements OnInit, OnDestroy {
         this.ReferralMatFormGroup.push(formGroup);
     }
 
-    validateHaartProphylaxisMatFormGroup(stepper: MatStepper) {
-        this.dataservice.currentHivStatus.subscribe(hivStatus => {
-            if (hivStatus !== '' && hivStatus != 'Positive') {
-                stepper.next();
-            } else {
-                if (this.HaartProphylaxisMatFormGroup.valid) {
-                    stepper.next();
-                } else {
-                    return;
-                }
-            }
-        });
-
-    }
-
     public getPatientPregnancy(patientId: number) {
         this.getPatientPregnancy$ = this.visitDetailsService.getPregnancyProfile(patientId)
             .subscribe(
@@ -376,7 +361,6 @@ export class AncComponent implements OnInit, OnDestroy {
         if (!this.isEdit) {
             if (this.preventiServicesData.length < 1) {
                 this.snotifyService.error('Add preventive service data', 'ANC', this.notificationService.getConfig());
-
             } else {
                 stepper.next();
             }
@@ -719,10 +703,7 @@ export class AncComponent implements OnInit, OnDestroy {
                 AppointmentReason: 'None'
             } as PatientAppointment;
         }
-
-
-        // const AncPregnancy = this.ancService.savePregnancy(pregnancyCommand);
-        // const ancVisitDetails = this.ancService.saveANCVisitDetails(ancVisitDetailsCommand);
+        
         const visitDetails = this.ancService.saveVisitDetails(visitDetailsCommand);
         const baseline = this.ancService.SaveBaselineProfile(baselineAncCommand);
         const ancEducation = this.ancService.savePatientEducation(patientEducationCommand);
