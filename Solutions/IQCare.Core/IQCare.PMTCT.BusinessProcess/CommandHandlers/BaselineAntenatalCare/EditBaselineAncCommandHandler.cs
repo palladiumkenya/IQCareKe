@@ -36,6 +36,9 @@ namespace IQCare.PMTCT.BusinessProcess.CommandHandlers.BaselineAntenatalCare
                         baselineAntenatalCare.TreatedForSyphilis = request.TreatedForSyphilis;
                         baselineAntenatalCare.HivStatusBeforeAnc = request.HivStatusBeforeAnc;
                         baselineAntenatalCare.PregnancyId = request.PregnancyId;
+                        baselineAntenatalCare.TestedForSyphilis = request.TestedForSyphilis;
+                        baselineAntenatalCare.SyphilisTestUsed = request.SyphilisTestUsed;
+                        baselineAntenatalCare.SyphilisResults = request.SyphilisResults;
                     }
                     
                     _unitOfWork.Repository<Core.Models.BaselineAntenatalCare>().Update(baselineAntenatalCare);
