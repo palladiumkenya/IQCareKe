@@ -120,6 +120,8 @@ import { FamilyPartnerControlsService } from '../hts/_services/family-partner-co
 import { HeiCompletelaborderComponent } from './hei/hei-hivtesting/hei-completelaborder/hei-completelaborder.component';
 import { HeiMessagesComponent } from './hei/hei-messages/hei-messages.component';
 import { PatientCounsellingComponent } from './anc/patient-counselling/patient-counselling.component';
+import { PatientChronicillnessComponent } from './anc/patient-chronicillness/patient-chronicillness.component';
+import { PatientPreventiveServiceComponent } from './anc/patient-preventive-service/patient-preventive-service.component';
 
 @NgModule({
     imports: [
@@ -195,7 +197,9 @@ import { PatientCounsellingComponent } from './anc/patient-counselling/patient-c
         PriorHivStatusComponent,
         HeiCompletelaborderComponent,
         HeiMessagesComponent,
-        PatientCounsellingComponent
+        PatientCounsellingComponent,
+        PatientChronicillnessComponent,
+        PatientPreventiveServiceComponent
     ],
     providers: [
         PlaceOfDeliveryResolver,
@@ -256,7 +260,9 @@ import { PatientCounsellingComponent } from './anc/patient-counselling/patient-c
         AddBabyDialogComponent,
         MilestonesFormComponent,
         HeiCompletelaborderComponent,
-        PatientCounsellingComponent
+        PatientCounsellingComponent,
+        PatientChronicillnessComponent,
+        PatientPreventiveServiceComponent
     ],
     exports: [
         IptClientWorkupComponent,

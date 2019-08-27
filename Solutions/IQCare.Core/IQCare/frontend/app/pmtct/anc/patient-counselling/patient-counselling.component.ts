@@ -16,14 +16,15 @@ export class PatientCounsellingComponent implements OnInit {
     PatientCounsellingForm: FormGroup;
     public counsellingOptions: any[] = [];
     isEdit: boolean = false;
-    public maxDate: Date = moment().toDate();
+    public maxDate: Date;
     @Output() notify: EventEmitter<FormGroup> = new EventEmitter<FormGroup>();
     constructor(private _formBuilder: FormBuilder,
         private dialogRef: MatDialogRef<PatientCounsellingComponent>,
         @Inject(MAT_DIALOG_DATA) public data: any) {
         this.isEdit = data.isEdit;
-        console.log(this.isEdit);
+       // console.log(this.isEdit);
         this.counsellingOptions = data.counsellingOptions;
+        this.maxDate = data.maxDate;
        
 
     }
