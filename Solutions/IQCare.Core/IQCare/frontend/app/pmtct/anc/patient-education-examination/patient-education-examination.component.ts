@@ -39,7 +39,7 @@ export class PatientEducationExaminationComponent implements OnInit, OnDestroy {
     public yesnos: any[] = [];
     public testResults: any[] = [];
     public userId: number;
-    public maxDate: Date = moment().toDate();
+    public maxDate: Date ;
 
     public patientCounseling$: Subscription;
     public physicalExam$: Subscription;
@@ -59,6 +59,7 @@ export class PatientEducationExaminationComponent implements OnInit, OnDestroy {
     @Input('isEdit') isEdit: boolean;
     @Input('PatientId') PatientId: number;
     @Input('PatientMasterVisitId') PatientMasterVisitId: number;
+   
 
     displayedColumns: string[] = ['topicId', 'topic', 'onSetDate'];
     dataSource = ELEMENT_DATA;
@@ -75,6 +76,7 @@ export class PatientEducationExaminationComponent implements OnInit, OnDestroy {
     ngOnInit() {
         this.dataService.visitDate.subscribe(date => {
             this.visitDate = date;
+            this.maxDate = date;
         });
 
         this.PatientEducationFormGroup = this._formBuilder.group({
@@ -143,7 +145,7 @@ export class PatientEducationExaminationComponent implements OnInit, OnDestroy {
         resultsDialogConfig.data = {
             isEdit: this.isEdit,
             counsellingOptions: this.counsellingOptions,
-
+            maxDate:this.maxDate
         };
 
         const dialogRef = this.dialog.open(PatientCounsellingComponent, resultsDialogConfig);
@@ -157,7 +159,7 @@ export class PatientEducationExaminationComponent implements OnInit, OnDestroy {
                 // const topicId = this.PatientEducationFormGroup.controls['counselledOn'].value.itemId;
                 const topic = data.counselledOn.itemName;
                 const topicId = data.counselledOn.itemId;
-                console.log(data.counsellingDate);
+                
                 const counsellingDates = data.counsellingDate;
 
                 //const counsellingDates = this.PatientEducationFormGroup.controls['counsellingDate'].value;
