@@ -314,6 +314,7 @@
     <None Remove="Scripts\2.2.0\27_APIPatientsView.sql" />
     <None Remove="Scripts\2.2.0\28_Syphilis.sql" />
     <None Remove="Scripts\2.2.0\29_syphilisOptions.sql" />
+    <None Remove="Scripts\2.2.0\30_infantart.sql" />
     <None Remove="Scripts\2.2.0\IQTools\01_PatientPopulationView.sql" />
     <None Remove="Scripts\2.2.0\IQTools\02_HTS_LABRegisternewer.sql" />
     <None Remove="Scripts\2.2.0\IQTools\03_ANCRegister.sql" />
@@ -650,6 +651,7 @@
     <EmbeddedResource Include="Scripts\2.2.0\27_APIPatientsView.sql" />
     <EmbeddedResource Include="Scripts\2.2.0\28_Syphilis.sql" />
     <EmbeddedResource Include="Scripts\2.2.0\29_syphilisOptions.sql" />
+    <EmbeddedResource Include="Scripts\2.2.0\30_infantart.sql" />
     <EmbeddedResource Include="Scripts\2.2.0\IQTools\01_PatientPopulationView.sql" />
     <EmbeddedResource Include="Scripts\2.2.0\IQTools\02_HTS_LABRegisternewer.sql" />
     <EmbeddedResource Include="Scripts\2.2.0\IQTools\03_ANCRegister.sql" />
