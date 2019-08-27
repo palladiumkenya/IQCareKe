@@ -26,7 +26,7 @@ export class ReferralsComponent implements OnInit {
     @Input() referralFormOptions: any[] = [];
     @Input('isEdit') isEdit: boolean;
     @Input('PatientId') PatientId: number;
-    @Input('visitDate') visitDate: Date;
+    @Input() visitDate: Date;
     @Input('PatientMasterVisitId') PatientMasterVisitId: number;
     public referralData: ReferralsEmitter;
 
@@ -105,24 +105,11 @@ export class ReferralsComponent implements OnInit {
                 });
     }
 
-    public moveNextStep() {
-        this.referralData = {
-            referredFrom: parseInt(this.ReferralFormGroup.controls['referredFrom'].value, 10),
-            referredTo: parseInt(this.ReferralFormGroup.controls['referredTo'].value, 10),
-            nextAppointmentDate: this.ReferralFormGroup.controls['nextAppointmentDate'].value,
-            scheduledAppointment: parseInt(this.ReferralFormGroup.controls['scheduledAppointment'].value, 10),
-            serviceRemarks: this.ReferralFormGroup.controls['serviceRemarks'].value,
-
-
-        };
-        this.nextStep.emit(this.referralData);
-    }
-
     public onScheduleAppointmentChange(event) {
         if (event.isUserInput && event.source.selected && event.source.viewValue == 'Yes') {
             this.ReferralFormGroup.controls['serviceRemarks'].enable({ onlySelf: true });
             this.ReferralFormGroup.controls['nextAppointmentDate'].enable({ onlySelf: true });
-        } else {
+        } else if (event.isUserInput && event.source.selected && event.source.viewValue != 'Yes') {
             this.ReferralFormGroup.controls['serviceRemarks'].setValue('');
             this.ReferralFormGroup.controls['serviceRemarks'].disable({ onlySelf: true });
             this.ReferralFormGroup.controls['nextAppointmentDate'].disable({ onlySelf: true });

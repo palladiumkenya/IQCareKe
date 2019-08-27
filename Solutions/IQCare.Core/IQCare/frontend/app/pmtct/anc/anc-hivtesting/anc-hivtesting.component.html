@@ -157,6 +157,14 @@
                 </mat-cell>
             </ng-container>
 
+
+            <ng-container matColumnDef="syphilis">
+                <mat-header-cell *matHeaderCellDef><strong>Syphilis Result </strong> </mat-header-cell>
+                <mat-cell *matCellDef="let HivTestingTableData">
+                    {{ HivTestingTableData.SyphilisResult ? HivTestingTableData.SyphilisResult.itemName : '' }}
+                </mat-cell>
+            </ng-container>
+
             <!-- Symbol Column -->
             <ng-container matColumnDef="nexthivtest">
                 <mat-header-cell *matHeaderCellDef><strong> Next HIV Test </strong> </mat-header-cell>
