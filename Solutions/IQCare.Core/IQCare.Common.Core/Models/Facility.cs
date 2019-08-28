@@ -9,6 +9,6 @@
         public int DeleteFlag { get; set; }
 
 
-        public int DosageFrequency { get; set; }
+        public int Frequency { get; set; }
     }
 }
