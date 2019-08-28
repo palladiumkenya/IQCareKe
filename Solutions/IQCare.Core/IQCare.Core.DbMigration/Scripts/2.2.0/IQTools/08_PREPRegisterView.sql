@@ -7,7 +7,9 @@ GO
 SET QUOTED_IDENTIFIER ON
 GO
 
-
+IF OBJECT_ID('[dbo].[PREP_RegisterView]', 'V') IS NOT NULL
+    DROP VIEW [dbo].[PREP_RegisterView]
+GO
 
 
 Create VIEW [dbo].[PREP_RegisterView]

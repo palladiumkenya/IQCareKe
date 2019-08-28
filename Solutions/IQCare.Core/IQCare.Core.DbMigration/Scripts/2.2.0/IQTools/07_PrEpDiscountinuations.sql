@@ -7,6 +7,11 @@ GO
 SET QUOTED_IDENTIFIER ON
 GO
 
+
+IF OBJECT_ID('[dbo].[PrEp_Discountinuations]', 'V') IS NOT NULL
+    DROP VIEW [dbo].[PrEp_Discountinuations]
+GO
+
 CREATE VIEW [dbo].[PrEp_Discountinuations]
 AS
 SELECT        a.PatientId, d.ptn_pk, a.PatientMasterVisitId,

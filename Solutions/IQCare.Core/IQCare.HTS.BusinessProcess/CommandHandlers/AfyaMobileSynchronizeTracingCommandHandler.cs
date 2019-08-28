@@ -76,11 +76,13 @@ namespace IQCare.HTS.BusinessProcess.CommandHandlers
                             }
                             int mode = request.TRACING[j].TRACING_MODE;
                             int outcome = request.TRACING[j].TRACING_OUTCOME;
+                            int? reasonnotcontacted = request.TRACING[j].REASONNOTCONTACTED;
+                            string reasonnotcontactedother = request.TRACING[j].REASONNOTCONTACTEDOTHER;
 
                             //add Client Tracing
                             var clientTracing = await encounterTestingService.addTracing(person.Id, tracingType,
                                 tracingDate, mode, outcome,
-                                providerId, tracingRemarks, null, null, null);
+                                providerId, tracingRemarks, null, null, null,reasonnotcontacted,reasonnotcontactedother);
                         }
                     }
                     else

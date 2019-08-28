@@ -88,8 +88,10 @@ namespace IQCare.HTS.BusinessProcess.CommandHandlers
                                     tracingBookingDate = DateTime.ParseExact(request.TRACING_ENCOUNTER.TRACING[j].BOOKING_DATE, "yyyyMMdd", null);
                                 int consent = request.TRACING_ENCOUNTER.TRACING[j].CONSENT;
 
+                                int? reasonnotcontacted = request.TRACING_ENCOUNTER.TRACING[j].REASONNOTCONTACTED;
+                                string reasonnotcontactedother = request.TRACING_ENCOUNTER.TRACING[j].REASONNOTCONTACTEDOTHER;
                                 var trace = await encounterTestingService.addTracing(partnetPersonIdentifiers[0].PersonId, tracingType, tracingDate, mode, outcome,
-                                    1, null, consent, tracingBookingDate, reminderDate);
+                                    1, null, consent, tracingBookingDate, reminderDate,reasonnotcontacted,reasonnotcontactedother);
                             }
                         }
                         else

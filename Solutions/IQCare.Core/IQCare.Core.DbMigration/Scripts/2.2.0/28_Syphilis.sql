@@ -1,6 +1,6 @@
-IF NOT EXISTS (SELECT * FROM sys.columns WHERE Name = N'DosageFrequency' AND Object_ID = OBJECT_ID(N'mst_Facility'))
+IF NOT EXISTS (SELECT * FROM sys.columns WHERE Name = N'Frequency' AND Object_ID = OBJECT_ID(N'mst_Facility'))
 BEGIN
-	ALTER TABLE mst_Facility ADD DosageFrequency int NULL DEFAULT(1);
+	ALTER TABLE mst_Facility ADD Frequency int NULL DEFAULT(1);
 END
 
 
