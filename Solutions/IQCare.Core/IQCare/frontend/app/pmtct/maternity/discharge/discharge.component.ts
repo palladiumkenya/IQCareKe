@@ -5,6 +5,7 @@ import {SnotifyService} from 'ng-snotify';
 import * as moment from 'moment';
 import { MaternityService } from '../../_services/maternity.service';
 import { DataService } from '../../../shared/_services/data.service';
+import { DataService as PmtctDataService } from '../../_services/data.service';
 
 @Component({
     selector: 'app-discharge',
@@ -24,13 +25,17 @@ export class DischargeComponent implements OnInit {
     public referralOptions: any[] = [];
     public yesnoOptions: any[] = [];
     public maxDate: Date = moment().toDate();
-    public minDate : Date;
+    public minDate: Date;
+    dateOfDelivery: Date;
+    today: Date;
 
     constructor(private formBuilder: FormBuilder,
-        private maternityService : MaternityService,
-                private dataService : DataService,
+        private maternityService: MaternityService,
+                private dataService: DataService,
+                private pmtctDataService: PmtctDataService,
                 private notificationService: NotificationService,
                 private snotifyService: SnotifyService) {
+        this.today = new Date();
     }
 
     ngOnInit() {
@@ -49,23 +54,25 @@ export class DischargeComponent implements OnInit {
         this.referralOptions = referrals;
 
         this.notify.emit(this.dischargeFormGroup);
-        this.dataService.visitDate.subscribe(date=>{
-            this.minDate = date
-        })
-        if(this.isEdit)
-         this.getPatientDischargeInfo(this.patientMasterVisitId)
-
+        this.dataService.visitDate.subscribe(date => {
+            this.minDate = date;
+        });
         
+        this.pmtctDataService.dateOfDelivery.subscribe(res => {
+            this.dateOfDelivery = res;
+        });
+        
+        if (this.isEdit) {
+            this.getPatientDischargeInfo(this.patientMasterVisitId);
+        }
     }
 
 
-    private getPatientDischargeInfo(masterVisitId : any){
-        this.maternityService.getPatientDischargeInfo(masterVisitId).subscribe(res=>{
-             this.dischargeFormGroup.get('id').setValue(res.id)
-             this.dischargeFormGroup.get('dischargeDate').setValue(res.dateDischarged)
-             this.dischargeFormGroup.get('babyStatus').setValue(res.outcomeStatusId)
-        })
+    private getPatientDischargeInfo(masterVisitId: any) {
+        this.maternityService.getPatientDischargeInfo(masterVisitId).subscribe(res => {
+             this.dischargeFormGroup.get('id').setValue(res.id);
+             this.dischargeFormGroup.get('dischargeDate').setValue(res.dateDischarged);
+             this.dischargeFormGroup.get('babyStatus').setValue(res.outcomeStatusId);
+        });
     }
-
-
 }

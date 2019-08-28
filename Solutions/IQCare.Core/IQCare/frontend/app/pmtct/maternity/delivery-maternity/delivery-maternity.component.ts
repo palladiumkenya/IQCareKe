@@ -6,6 +6,7 @@ import { LookupItemService } from '../../../shared/_services/lookup-item.service
 import * as moment from 'moment';
 import { MaternityService } from '../../_services/maternity.service';
 import { Subscription } from 'rxjs/index';
+import {DataService} from '../../_services/data.service';
 
 @Component({
     selector: 'app-delivery-maternity',
@@ -35,7 +36,8 @@ export class DeliveryMaternityComponent implements OnInit {
     constructor(private formBuilder: FormBuilder, private _lookupItemService: LookupItemService,
         private snotifyService: SnotifyService,
         private notificationService: NotificationService,
-        private _matService: MaternityService) {
+        private _matService: MaternityService,
+        private dataservice: DataService) {
 
     }
 
@@ -66,9 +68,6 @@ export class DeliveryMaternityComponent implements OnInit {
         this.deliveryFormGroup.get('auditDate').disable({ onlySelf: true });
         this.deliveryFormGroup.get('deliveryComplicationNotes').disable({ onlySelf: true });
 
-
-
-
         const {
             deliveryModes,
             bloodLoss,
@@ -90,7 +89,7 @@ export class DeliveryMaternityComponent implements OnInit {
 
     public onDeliveryDateChange() {
         this.deliveryDate = this.deliveryFormGroup.controls['deliveryDate'].value;
-
+        this.dataservice.setDateOfDelivery(this.deliveryDate);
         const gestation = this.calculateGestation(this.deliveryDate, this.dateLMP);
         this.deliveryFormGroup.controls['gestationAtBirth'].setValue(gestation);
         this.deliveryFormGroup.controls['gestationAtBirth'].disable({ onlySelf: true });
@@ -182,6 +181,7 @@ export class DeliveryMaternityComponent implements OnInit {
                         this.dateLMP));
                     this.deliveryFormGroup.controls['gestationAtBirth'].disable({ onlySelf: true });
                     this.deliveryFormGroup.controls['deliveryDate'].setValue(del.dateOfDelivery);
+                    this.dataservice.setDateOfDelivery(del.dateOfDelivery);
                     this.deliveryFormGroup.controls['deliveryTime'].setValue(del.timeOfDelivery);
                     this.deliveryFormGroup.controls['labourDuration'].setValue(del.durationOfLabour);
                     this.deliveryFormGroup.controls['deliveryMode'].setValue(

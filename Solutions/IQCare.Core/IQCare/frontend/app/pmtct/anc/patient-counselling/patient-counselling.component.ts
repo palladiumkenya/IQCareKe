@@ -32,7 +32,7 @@ export class PatientCounsellingComponent implements OnInit {
 
     ngOnInit() {
         this.PatientCounsellingForm = this._formBuilder.group({
-            counsellingDate: ['', (this.isEdit) ? [] : Validators.required],
+            counsellingDate: [this.maxDate, (this.isEdit) ? [] : Validators.required],
             counselledOn: ['', (this.isEdit) ? [] : Validators.required]
         });
 

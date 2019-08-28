@@ -56,6 +56,7 @@ export class PncMaternalhistoryComponent implements OnInit {
                                     this.MaternalHistoryForm.get('modeofdelivery').setValue(delivery[0].itemId);
                                 }
                                 this.MaternalHistoryForm.get('deliveryid').setValue(result[0].id);
+                                this.calculateDaysPostPartum();
                             } else {
                                 this.maternityService.GetPatientDeliveryInfo(this.patientMasterVisitId).subscribe(
                                     deliveryRes => {
@@ -63,6 +64,7 @@ export class PncMaternalhistoryComponent implements OnInit {
                                             if (deliveryRes.dateOfDelivery) {
                                                 this.MaternalHistoryForm.get('dateofdelivery').setValue(deliveryRes.dateOfDelivery);
                                                 this.MaternalHistoryForm.get('deliveryid').setValue(deliveryRes.id);
+                                                this.calculateDaysPostPartum();
                                             }
                                             if (deliveryRes.modeOfDelivery) {
                                                 const delivery = this.deliveryModeOptions.filter(obj =>

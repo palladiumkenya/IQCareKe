@@ -40,6 +40,8 @@ export class PncContraceptivehistoryComponent implements OnInit {
         const { yesnoOptions, familyPlanningMethodOptions } = this.contraceptiveHistoryExercise[0];
         this.yesnoOptions = yesnoOptions;
         this.familyPlanningMethodOptions = familyPlanningMethodOptions;
+        
+        this.familyPlanningMethodOptions = this.familyPlanningMethodOptions.filter(obj => obj.itemName != 'UND');
 
         this.notify.emit(this.ContraceptiveHistoryForm);
 

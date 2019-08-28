@@ -48,11 +48,13 @@ export class PriorHivStatusComponent implements OnInit {
             if (finalResult == 'Positive') {
                 const hivPositiveResult = this.hivStatusOptions.filter(obj => obj.itemName == 'Positive');
                 this.priorHivStatusFormGroup.get('priorHivStatus').setValue(hivPositiveResult[0].itemId);
+                this.priorHivStatusFormGroup.get('priorHivStatus').disable({ onlySelf: true });
                 this.dataservice.changeHivStatus('Positive');
             } else if (finalResult == 'Negative') {
                 const hivNegativeResult = this.hivStatusOptions.filter(obj => obj.itemName == 'Negative');
                 if (hivNegativeResult.length > 0) {
                     this.priorHivStatusFormGroup.get('priorHivStatus').setValue(hivNegativeResult[0].itemId);
+                    this.priorHivStatusFormGroup.get('priorHivStatus').disable({ onlySelf: true });
                 }
                 this.dataservice.changeHivStatus('Negative');
             }
@@ -64,6 +66,7 @@ export class PriorHivStatusComponent implements OnInit {
                 const hivPositiveResult = this.hivStatusOptions.filter(obj => obj.itemName == 'Positive');
                 if (hivPositiveResult.length > 0) {
                     this.priorHivStatusFormGroup.get('priorHivStatus').setValue(hivPositiveResult[0].itemId);
+                    this.priorHivStatusFormGroup.get('priorHivStatus').disable({ onlySelf: true });
                     this.dataservice.changeHivStatus('Positive');
                 }
             }

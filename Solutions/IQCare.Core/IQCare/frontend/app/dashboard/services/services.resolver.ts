@@ -14,7 +14,7 @@ export class ServicesResolver implements Resolve<Observable<any[]>> {
     public resolve(
         route: ActivatedRouteSnapshot,
         state: RouterStateSnapshot
-    ): Observable<any[]> {
+    ): Observable<any[]> {        
         return this.personhomeService.getAllServices();
     }
 }
