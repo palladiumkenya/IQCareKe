@@ -40,6 +40,7 @@ export class PreventiveServicesComponent implements OnInit, OnDestroy {
     @Input() preventiveServices: PreventiveServiceEmitter;
     @Input() serviceFormOptions: any[] = [];
     @Input('isEdit') isEdit: boolean;
+    @Input('visitDate')VisitDate: Date;
     @Input('patientId') patientId: number;
     @Input('patientMasterVisitId') patientMasterVisitId: number;
     @Output() notify: EventEmitter<Object> = new EventEmitter<Object>();
@@ -70,11 +71,13 @@ export class PreventiveServicesComponent implements OnInit, OnDestroy {
             finalHIVResult: ['', Validators.required]
         });
 
-        this.dataService.visitDate.subscribe(date => {
+        this.maxDate= moment(this.VisitDate).toDate();
+        this.minDate=moment(this.VisitDate).toDate();
+        /*this.dataService.visitDate.subscribe(date => {
 
             this.maxDate = date;
             this.minDate = date;
-        });
+        });*/
         this.PreventiveServicesFormGroup.get('insecticideTreatedNetGivenDate').disable({ onlySelf: true });
 
         const {
@@ -139,8 +142,8 @@ export class PreventiveServicesComponent implements OnInit, OnDestroy {
         resultsDialogConfig.data = {
             isEdit: this.isEdit,
             preventiveServicesOptions: this.preventiveServicesOptions,
-            maxDate:  this.maxDate
-
+            maxDate:  this.maxDate,
+            minDate:this.minDate
         };
 
         const dialogRef = this.dialog.open(PatientPreventiveServiceComponent, resultsDialogConfig);

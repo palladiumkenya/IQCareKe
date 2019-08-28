@@ -113,6 +113,7 @@ export class AncHivtestingComponent implements OnInit {
 
         this.loadHivTests();
         this.personCurrentHivStatus();
+        
     }
 
     loadHivTests(): void {

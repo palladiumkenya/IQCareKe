@@ -20,25 +20,26 @@ export class PatientPreventiveServiceComponent implements OnInit {
     preventiveServicesOptions: any[] = [];
     isEdit: boolean;
     public minDate: Date;
-    public maxDate:Date;
+    public maxDate: Date;
     @Output() notify: EventEmitter<FormGroup> = new EventEmitter<FormGroup>();
     constructor(private _formBuilder: FormBuilder,
-         private dataService: DataService, 
-         private dialogRef: MatDialogRef<PatientPreventiveServiceComponent>,
+        private dataService: DataService,
+        private dialogRef: MatDialogRef<PatientPreventiveServiceComponent>,
         @Inject(MAT_DIALOG_DATA) public data: any) {
 
         this.preventiveServicesOptions = data.preventiveServicesOptions;
         this.isEdit = data.isEdit;
-        
+        this.maxDate = data.maxDate;
+        this.minDate = data.minDate;
+
     }
 
     ngOnInit() {
 
-
-        this.dataService.visitDate.subscribe(date => {
-            this.minDate = date;
-            this.maxDate = date;
-        });
+        /* this.dataService.visitDate.subscribe(date => {
+             this.minDate = date;
+             this.maxDate = date;
+         }); */
 
         this.PatientPreventiveServicesForm = this._formBuilder.group({
             preventiveServices: ['', (this.isEdit) ? [] : Validators.required],
