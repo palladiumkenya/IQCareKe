@@ -470,7 +470,7 @@ export class CccComponent implements OnInit {
                         this.appStateService.addAppState(AppEnum.PATIENTID, this.personId,
                             this.patientId).subscribe();
 
-                        this.searchService.setSession(this.personId, this.patientId).subscribe((sessionres) => {
+                        this.searchService.setSession(this.personId, this.patientId, this.userId).subscribe((sessionres) => {
                             window.location.href = location.protocol + '//' + window.location.hostname + ':' + window.location.port +
                                 '/IQCare/CCC/Patient/PatientHome.aspx';
                         });
