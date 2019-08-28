@@ -1,3 +1,6 @@
+
+
+
 -- Client Called
 IF not Exists(select * from LookupMaster where Name = 'TracingMethod')
 	insert into LookupMaster (Name,DisplayName,DeleteFlag)values('TracingMethod','TracingMethod','0')

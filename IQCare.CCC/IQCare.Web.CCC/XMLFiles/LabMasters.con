@@ -2603,4 +2603,32 @@
     <DeleteFlag>0</DeleteFlag>
     <SystemID>2</SystemID>
   </Mst_PatientLabPeriod>
+  <Mst_PatientLabPeriod>
+    <Id>1</Id>
+    <Name>During Pregnancy</Name>
+    <UpdateFlag>0</UpdateFlag>
+    <DeleteFlag>0</DeleteFlag>
+    <SystemID>2</SystemID>
+  </Mst_PatientLabPeriod>
+  <Mst_PatientLabPeriod>
+    <Id>2</Id>
+    <Name>During Labour</Name>
+    <UpdateFlag>0</UpdateFlag>
+    <DeleteFlag>0</DeleteFlag>
+    <SystemID>2</SystemID>
+  </Mst_PatientLabPeriod>
+  <Mst_PatientLabPeriod>
+    <Id>3</Id>
+    <Name>At Birth</Name>
+    <UpdateFlag>0</UpdateFlag>
+    <DeleteFlag>0</DeleteFlag>
+    <SystemID>2</SystemID>
+  </Mst_PatientLabPeriod>
+  <Mst_PatientLabPeriod>
+    <Id>4</Id>
+    <Name>Post Natal</Name>
+    <UpdateFlag>0</UpdateFlag>
+    <DeleteFlag>0</DeleteFlag>
+    <SystemID>2</SystemID>
+  </Mst_PatientLabPeriod>
 </NewDataSet>

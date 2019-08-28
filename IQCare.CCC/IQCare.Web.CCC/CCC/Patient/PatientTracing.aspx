@@ -257,7 +257,7 @@
                         success: function (response) {
                             alert(JSON.stringify(response));
                             toastr.success("Tracing Data Saved");
-                            //setTimeout(function () { window.location.href = "../patient/PatientLinelist.aspx?q=<%=HttpContext.Current.Session["qtrace"]%>&qfrom=<%=HttpContext.Current.Session["qfrom"]%>&qto=<%=HttpContext.Current.Session["qto"]%>" }, 500);
+                            setTimeout(function () { window.location.href = "../patient/PatientLinelist.aspx?q=<%=HttpContext.Current.Session["qtrace"]%>&qfrom=<%=HttpContext.Current.Session["qfrom"]%>&qto=<%=HttpContext.Current.Session["qto"]%>" }, 500);
                         },
                         error: function (response) {
                             toastr.error("Error saving tracing data");
