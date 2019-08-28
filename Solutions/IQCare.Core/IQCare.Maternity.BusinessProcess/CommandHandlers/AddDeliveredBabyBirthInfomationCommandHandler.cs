@@ -91,10 +91,32 @@ namespace IQCare.Maternity.BusinessProcess.CommandHandlers
                         Message = $"Delivered baby info not found for Id {request.DeliveredBabyBirthInformation.Id}"
                     }));
 
-                deliveredBabyInfo.Update(request.DeliveredBabyBirthInformation);
-                _maternityUnitOfWork.Repository<DeliveredBabyBirthInformation>().Update(deliveredBabyInfo);
+                // deliveredBabyInfo.Update(request.DeliveredBabyBirthInformation);
+                deliveredBabyInfo.BirthDeformity = request.DeliveredBabyBirthInformation.BirthDeformity;
+                deliveredBabyInfo.BirthNotificationNumber = request.DeliveredBabyBirthInformation.BirthNotificationNumber;
+                deliveredBabyInfo.BirthWeight = request.DeliveredBabyBirthInformation.BirthWeight;
+                deliveredBabyInfo.BreastFedWithinHour = request.DeliveredBabyBirthInformation.BreastFedWithinHour;
+                deliveredBabyInfo.Comment = request.DeliveredBabyBirthInformation.Comment;
+                deliveredBabyInfo.DeliveryOutcome = request.DeliveredBabyBirthInformation.DeliveryOutcome;
+                deliveredBabyInfo.ResuscitationDone = request.DeliveredBabyBirthInformation.ResuscitationDone;
+                deliveredBabyInfo.Sex = request.DeliveredBabyBirthInformation.Sex;
+                deliveredBabyInfo.TeoGiven = request.DeliveredBabyBirthInformation.TeoGiven;
 
+                _maternityUnitOfWork.Repository<DeliveredBabyBirthInformation>().Update(deliveredBabyInfo);
                 _maternityUnitOfWork.Save();
+
+                for (var i = 0; i < request.DeliveredBabyBirthInformation.ApgarScores.Count; i++)
+                {
+                    var score = _maternityUnitOfWork.Repository<DeliveredBabyApgarScore>().Get(x => x.DeliveredBabyBirthInformationId == request.DeliveredBabyBirthInformation.Id 
+                    && x.ApgarScoreId == request.DeliveredBabyBirthInformation.ApgarScores[i].ApgarScoreId).ToList();
+
+                    if(score.Count > 0)
+                    {
+                        score[0].Score = request.DeliveredBabyBirthInformation.ApgarScores[i].Score;
+                        _maternityUnitOfWork.Repository<DeliveredBabyApgarScore>().Update(score[0]);
+                        _maternityUnitOfWork.Save();
+                    }
+                }                    
 
                 return Task.FromResult(Result<object>.Valid(new
                 {

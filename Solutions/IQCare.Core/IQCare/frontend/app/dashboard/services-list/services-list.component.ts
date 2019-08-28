@@ -442,7 +442,6 @@ export class ServicesListComponent implements OnInit {
                     break;
                 case 'PREP':
                     isEligible = this.getPrepEligibility();
-
                     break;
             }
         }

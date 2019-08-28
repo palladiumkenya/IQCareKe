@@ -290,6 +290,7 @@ export class AncComponent implements OnInit, OnDestroy {
     onHivStatusNotify(formGroup: Object): void {
         this.HivStatusMatFormGroup.push(formGroup['form']); // = formGroup['form'];
         this.hiv_status_table_data.push(formGroup['table_data']);
+        console.log(this.hiv_status_table_data);
     }
 
     onClientMonitoringNotify(formGroup: FormGroup): void {
@@ -484,6 +485,7 @@ export class AncComponent implements OnInit, OnDestroy {
         const noOption = this.yesNoOptions.filter(obj => obj.itemName == 'No');
         const naOption = this.yesNoNaOptions.filter(obj => obj.itemName == 'N/A');
 
+        console.log(this.hiv_status_table_data);
         const hivStatusCommand: HivStatusCommand = {
             PersonId: this.personId,
             ProviderId: this.userId,
@@ -506,7 +508,8 @@ export class AncComponent implements OnInit, OnDestroy {
             ServiceAreaId: this.serviceAreaId,
             EncounterTypeId: 1,
             EncounterDate: this.visitDetailsFormGroup.value[0]['visitDate'],
-            EncounterType: this.HivStatusMatFormGroup.value[0]['testType']
+            EncounterType: this.HivStatusMatFormGroup.value[0]['testType'],
+            HivCounsellingDone: yesOption[0].itemId
         };
 
         const hivTestsCommand: HivTestsCommand = {

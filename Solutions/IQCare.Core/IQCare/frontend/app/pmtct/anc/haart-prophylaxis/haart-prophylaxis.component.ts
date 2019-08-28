@@ -296,17 +296,9 @@ export class HaartProphylaxisComponent implements OnInit, OnDestroy {
                                 dose: chronic[i]['dose']
                             });
                         }
-
-                        const treatetNet = chronic.filter(x => x.description == 'Insecticide treated nets given');
-
                         const yesno = this.yesnonaOptions.filter(x => x.itemName == 'Yes');
                         this.HaartProphylaxisFormGroup.get('otherIllness').setValue(yesno[0]['itemId']);
-                    } else {
-                        const yesnot = this.yesnonaOptions.filter(x => x.itemName == 'No');
-
-                        this.HaartProphylaxisFormGroup.get('otherIllness').setValue(yesnot[0]['itemId']);
                     }
-
                 },
                 (err) => {
 

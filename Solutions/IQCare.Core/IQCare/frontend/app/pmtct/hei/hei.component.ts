@@ -288,7 +288,7 @@ export class HeiComponent implements OnInit {
 
         this.heiService.getPatientById(this.patientId).subscribe(
             (result) => {
-                const { ptn_pk } = result;
+                const { ptn_pk, dateOfBirth } = result;
                 this.ptn_pk = ptn_pk;
             }
         );

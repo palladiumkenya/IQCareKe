@@ -84,36 +84,7 @@
             <div class="col-lg-8 col-xs-12 col-sm-6"></div>
         </div>
 
-        <div class="row">
-          <!--  <div class="col-md-4 col-xs-12 col-sm-6">
-                <mat-form-field class="col-md-12">
-                    <mat-select formControlName="illness" placeholder="Select Illness">
-                        <mat-option value=""> Select</mat-option>
-                        <mat-option *ngFor="let chronicIllnessOption of chronicIllnessOptions"
-                            [value]="chronicIllnessOption">
-                            {{chronicIllnessOption.itemName}}
-                        </mat-option>
-                    </mat-select>
-                </mat-form-field>
-            </div>
-            <div class="col-md-2 col-xs-12 col-sm-6">
-                <mat-form-field class="col-md-12">
-                    <input [max]="maxDate" formControlName="onSetDate" matInput [matDatepicker]="onsetDate"
-                        placeholder="Onset Date" (focus)="onsetDate.open()">
-                    <mat-datepicker-toggle matSuffix [for]="onsetDate"></mat-datepicker-toggle>
-                    <mat-datepicker #onsetDate></mat-datepicker>
-                </mat-form-field>
-            </div>
-            <div class="col-md-4 col-xs-12 col-sm-6">
-                <mat-form-field class=" col-lg-12 col-xs-12">
-                    <input matInput formControlName="currentTreatment" placeholder="Current Treatment">
-                </mat-form-field>
-            </div>-->
-            <!-- <div class="col-md-2 col-xs-12 col-sm-6">
-                <mat-form-field class=" col-lg-12 col-xs-12">
-                    <input type="number" matInput formControlName="dose"  placeholder="Dose" required="true">
-                </mat-form-field>
-            </div> -->
+        <div class="row">          
             <div class="col-md-2 col-xs-12 col-sm-6">
                 <button [disabled]="isDisabled" mat-raised-button class="mat-primary" (click)="AddOtherIllness()"> Add
                     Illness</button>

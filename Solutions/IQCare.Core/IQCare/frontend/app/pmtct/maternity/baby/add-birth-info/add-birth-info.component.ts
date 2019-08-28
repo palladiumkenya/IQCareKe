@@ -90,6 +90,9 @@ export class AddBirthInfoComponent implements OnInit {
             notificationNo: this.babyFormGroup.get('notificationNumber').value
         });
         this.maternityService.updateBabyDataInfo(this.babyData);
+        this.babyFormGroup.reset();
+        this.babyFormGroup.clearValidators();
+        this.babyFormGroup.updateValueAndValidity();
 }
 
 public getApgarScoreValue(apgarScore: string, scoreType: string): any {

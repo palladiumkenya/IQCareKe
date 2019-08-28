@@ -73,6 +73,15 @@ export class PncDrugadministrationComponent implements OnInit, AfterViewInit {
                 this.DrugAdministrationForm.get('haematinics_given').disable({ onlySelf: true });
                 this.DrugAdministrationForm.get('infant_drug').disable({ onlySelf: true });
                 this.DrugAdministrationForm.get('infant_start').disable({ onlySelf: true });
+
+                this.DrugAdministrationForm.get('startedARTPncVisit').clearValidators();
+                this.DrugAdministrationForm.get('startedARTPncVisit').updateValueAndValidity();
+                this.DrugAdministrationForm.get('haematinics_given').clearValidators();
+                this.DrugAdministrationForm.get('haematinics_given').updateValueAndValidity();
+                this.DrugAdministrationForm.get('infant_drug').clearValidators();
+                this.DrugAdministrationForm.get('infant_drug').updateValueAndValidity();
+                this.DrugAdministrationForm.get('infant_start').clearValidators();
+                this.DrugAdministrationForm.get('infant_start').updateValueAndValidity();
             } else {
                 this.DrugAdministrationForm.get('startedARTPncVisit').enable({ onlySelf: false });
                 this.DrugAdministrationForm.get('haematinics_given').enable({ onlySelf: false });
