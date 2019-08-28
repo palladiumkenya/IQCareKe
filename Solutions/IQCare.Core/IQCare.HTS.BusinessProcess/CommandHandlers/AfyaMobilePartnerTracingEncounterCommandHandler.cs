@@ -95,9 +95,10 @@ namespace IQCare.HTS.BusinessProcess.CommandHandlers
                                         throw new Exception($"Could not parse partner tracing BOOKING_DATE: {request.PARTNERTRACING.TRACING[j].BOOKING_DATE} as a valid date: Incorrect format, date should be in the following format yyyyMMdd");
                                     }
                                 }
-
+                                int? reasonnotcontacted = request.PARTNERTRACING.TRACING[j].REASONNOTCONTACTED;
+                                string reasonnotcontactedother = request.PARTNERTRACING.TRACING[j].REASONNOTCONTACTEDOTHER;
                                 var tracingOutcome = await encounterTestingService.addTracing(partnetPersonIdentifiers[0].PersonId, tracingType,
-                                    tracingDate, mode, outcome, 1, null, consent, tracingBookingDate, null);
+                                    tracingDate, mode, outcome, 1, null, consent, tracingBookingDate, null,reasonnotcontacted,reasonnotcontactedother);
                             }
 
                             var stringParnerObject = Newtonsoft.Json.JsonConvert.SerializeObject(new

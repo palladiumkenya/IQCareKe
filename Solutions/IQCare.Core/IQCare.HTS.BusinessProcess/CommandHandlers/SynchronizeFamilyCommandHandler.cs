@@ -201,9 +201,11 @@ namespace IQCare.HTS.BusinessProcess.CommandHandlers
                                         if (!string.IsNullOrWhiteSpace(request.FAMILY[i].ENCOUNTER.TRACING[j].BOOKING_DATE))
                                             tracingBookingDate = DateTime.ParseExact(request.FAMILY[i].ENCOUNTER.TRACING[j].BOOKING_DATE, "yyyyMMdd", null);
                                         int consent = request.FAMILY[i].ENCOUNTER.TRACING[j].CONSENT;
+                                        int? ReasonNotContacted = request.FAMILY[i].ENCOUNTER.TRACING[j].REASONNOTCONTACTED;
+                                        string reasonnotcontactedOther = request.FAMILY[i].ENCOUNTER.TRACING[j].REASONNOTCONTACTEDOTHER;
 
                                         var trace = await encounterTestingService.addTracing(partnetPersonIdentifiers[0].PersonId, tracingType, tracingDate, mode, outcome,
-                                            providerId, null, consent, tracingBookingDate, reminderDate);
+                                            providerId, null, consent, tracingBookingDate, reminderDate,ReasonNotContacted, reasonnotcontactedOther);
                                     }
                                 }
                             }
@@ -310,9 +312,11 @@ namespace IQCare.HTS.BusinessProcess.CommandHandlers
                                         if (!string.IsNullOrWhiteSpace(request.FAMILY[i].ENCOUNTER.TRACING[j].BOOKING_DATE))
                                             tracingBookingDate = DateTime.ParseExact(request.FAMILY[i].ENCOUNTER.TRACING[j].BOOKING_DATE, "yyyyMMdd", null);
                                         int consent = request.FAMILY[i].ENCOUNTER.TRACING[j].CONSENT;
+                                        int? reasonnotcontacted = request.FAMILY[i].ENCOUNTER.TRACING[j].REASONNOTCONTACTED;
+                                        string reasonnotcontactedother = request.FAMILY[i].ENCOUNTER.TRACING[j].REASONNOTCONTACTEDOTHER;
 
                                         var trace = await encounterTestingService.addTracing(person.Id, tracingType, tracingDate, mode, outcome,
-                                            providerId, null, consent, tracingBookingDate, reminderDate);
+                                            providerId, null, consent, tracingBookingDate, reminderDate,reasonnotcontacted,reasonnotcontactedother);
                                     }
                                 }
                             }
