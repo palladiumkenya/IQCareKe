@@ -46,7 +46,7 @@
                                     <div class="col-lg-3 col-sm-3 col-xs-12">
                                         <mat-form-field>
                                             <input matInput placeholder="Last Name" formControlName="LastName"
-                                                id="lastName" name="lastName" (change)="checkDuplicates()" tabindex="4">
+                                                id="lastName" name="lastName" (change)="checkDuplicates()" tabindex="4" required>
                                         </mat-form-field>
                                     </div>
 
@@ -63,7 +63,7 @@
                                     <div class="col-lg-3 col-sm-3 col-xs-12">
                                         <mat-form-field>
                                             <mat-select placeholder="Gender" formControlName="Sex" tabindex="5"
-                                                (change)="checkDuplicates()">
+                                                (change)="checkDuplicates()" required>
                                                 <mat-option></mat-option>
                                                 <mat-option *ngFor="let option of gender" [value]="option.itemId">
                                                     {{option.itemName}}</mat-option>
@@ -119,7 +119,7 @@
                                     <div class="col-lg-3 col-sm-3 col-xs-12">
                                         <mat-form-field>
                                             <mat-select placeholder="Marital Status" formControlName="MaritalStatus"
-                                                tabindex="7">
+                                                tabindex="7" required>
                                                 <mat-option></mat-option>
                                                 <mat-option *ngFor="let option of maritalStatus"
                                                     [value]="option.itemId">{{option.itemName}}</mat-option>
@@ -183,7 +183,7 @@
                                     <div class="col-lg-3 col-sm-3 col-xs-12">
                                         <mat-form-field>
                                             <mat-select placeholder="County" formControlName="County"
-                                                (selectionChange)="onCountyChange()">
+                                                (selectionChange)="onCountyChange()" required>
                                                 <mat-option></mat-option>
                                                 <mat-option *ngFor="let option of counties" [value]="option.countyId">
                                                     {{option.countyName}}</mat-option>
@@ -194,7 +194,7 @@
                                     <div class="col-lg-3 col-sm-3 col-xs-12">
                                         <mat-form-field>
                                             <mat-select placeholder="Sub County" formControlName="SubCounty"
-                                                (selectionChange)="onSubCountyChange()">
+                                                (selectionChange)="onSubCountyChange()" required>
                                                 <mat-option></mat-option>
                                                 <mat-option *ngFor="let option of subCounties"
                                                     [value]="option.subCountyId">{{option.subCountyName}}</mat-option>
@@ -204,7 +204,7 @@
 
                                     <div class="col-lg-3 col-sm-3 col-xs-12">
                                         <mat-form-field>
-                                            <mat-select placeholder="Ward" formControlName="Ward">
+                                            <mat-select placeholder="Ward" formControlName="Ward" required>
                                                 <mat-option></mat-option>
                                                 <mat-option *ngFor="let option of wards" [value]="option.wardId">
                                                     {{option.wardName}}</mat-option>
@@ -216,7 +216,7 @@
                                         <mat-form-field>
                                             <input matInput placeholder="Nearest Health Facility"
                                                 formControlName="NearestHealthCenter" id="nearestHealthCenter"
-                                                name="nearestHealthCenter">
+                                                name="nearestHealthCenter" required>
                                         </mat-form-field>
                                     </div>
                                 </div>
@@ -225,7 +225,7 @@
                                     <div class="col-lg-3 col-sm-3 col-xs-12">
                                         <mat-form-field>
                                             <textarea matInput placeholder="Landmark/Village/Locator Information"
-                                                formControlName="Landmark" id="landmark" name="landmark"></textarea>
+                                                formControlName="Landmark" id="landmark" name="landmark" required></textarea>
                                         </mat-form-field>
                                     </div>
                                 </div>

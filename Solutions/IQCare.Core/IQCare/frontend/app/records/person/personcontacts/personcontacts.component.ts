@@ -72,7 +72,11 @@ export class PersoncontactsComponent implements OnInit {
     }
 
     onConsentChange() {
-        if (this.form.controls.kinConsentToSMS.value.itemName != 'Granted') {
+        if ((this.form.controls.kinConsentToSMS.value.itemName != 'Granted' ) &&
+            (this.form.controls.kinConsentToSMS.value.itemName != 'ConsentPending' ) &&
+            (this.form.controls.kinConsentToSMS.value.itemName != 'Concentnotsought' ) &&
+            (this.form.controls.kinConsentToSMS.value.itemName != 'LimitedConsent' )
+        ) {
             this.form.controls.consentDeclineReason.enable({ onlySelf: false });
         } else {
             this.form.controls.consentDeclineReason.disable({ onlySelf: true });

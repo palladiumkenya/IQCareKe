@@ -59,6 +59,8 @@ export class ServicesListComponent implements OnInit {
     public patientId: number;
     public Patient: PatientView = {};
     RiskDone: boolean = true;
+    userId: number;
+    
     constructor(
         private personhomeservice: PersonHomeService,
         public zone: NgZone,
@@ -78,6 +80,7 @@ export class ServicesListComponent implements OnInit {
         this.EligibilityInformation = [];
         this.vitalWeight = this.weight;
 
+        this.userId = JSON.parse(localStorage.getItem('appUserId'));
         this.getPersonEnrolledServices(this.personId);
 
         if (this.EligibilityInformation.length > 0) {
@@ -190,10 +193,7 @@ export class ServicesListComponent implements OnInit {
     }
     editRiskAssessment(serviceId: number, serviceCode: string) {
         if (this.riskencounter.length > 0) {
-            //console.log(this.riskencounter);
             this.riskassessmentPatientMasterVisitId = this.riskencounter[0].patientMasterVisitId;
-
-
             this.zone.run(() => {
                 this.router.navigate(['/prep/riskassessment/' + '/' + this.patientId + '/' + this.personId + '/'
                     + serviceId + '/' + this.riskassessmentPatientMasterVisitId],
@@ -250,7 +250,7 @@ export class ServicesListComponent implements OnInit {
                     });
                     break;
                 case 'CCC':
-                    this.searchService.setSession(this.personId, this.patientId).subscribe((res) => {
+                    this.searchService.setSession(this.personId, this.patientId, ).subscribe((res) => {
                         window.location.href = location.protocol + '//' + window.location.hostname + ':' + window.location.port +
                             '/IQCare/CCC/Patient/PatientHome.aspx';
                     });
@@ -369,8 +369,7 @@ export class ServicesListComponent implements OnInit {
             if (selectedService[0]['code'] == 'PREP') {
                 if (this.carended == true) {
                     isEligible = true;
-                }
-                else {
+                } else {
                     isEligible = false;
                 }
             }
@@ -443,7 +442,6 @@ export class ServicesListComponent implements OnInit {
                     break;
                 case 'PREP':
                     isEligible = this.getPrepEligibility();
-
                     break;
             }
         }
@@ -644,9 +642,7 @@ export class ServicesListComponent implements OnInit {
                 }
             }
 
-        }
-
-        else {
+        } else {
             if (isCCCEnrolled != undefined) {
                 if (isCCCEnrolled && isCCCEnrolled.length > 0) {
                     isEligible = false;

@@ -61,6 +61,7 @@ export class PrepMonthlyrefillComponent implements OnInit {
     Encounters: any[] = [];
     appointmentStatusId: number;
     appointmentReasonId: number;
+    userId: number;
 
     public person: PersonView;
     public personView$: Subscription;
@@ -93,6 +94,7 @@ export class PrepMonthlyrefillComponent implements OnInit {
 
         });
 
+        this.userId = JSON.parse(localStorage.getItem('appUserId'));
         this._lookupItemService.getByGroupNameAndItemName('AppointmentStatus', 'Pending').subscribe(
             (res) => {
                 this.appointmentStatusId = res['itemId'];
@@ -476,8 +478,6 @@ export class PrepMonthlyrefillComponent implements OnInit {
     }
 
     OnAdherenceReasonsSelected(event) {
-
-
         let val: string;
         let index: number;
         let text: string;
@@ -523,7 +523,7 @@ export class PrepMonthlyrefillComponent implements OnInit {
 
         if (visitDate != null && visitDate != undefined) {
             if (this.patientMasterVisitId > 0) {
-                this.searchService.setSession(this.personId, this.patientId).subscribe((sessionres) => {
+                this.searchService.setSession(this.personId, this.patientId, this.userId).subscribe((sessionres) => {
                     this.searchService.setVisitSession(this.patientMasterVisitId, 20, 261).subscribe((setVisitSession) => {
                         const url = location.protocol + '//' + window.location.hostname + ':' + window.location.port +
                             '/IQCare/CCC/Encounter/PharmacyPrescription.aspx';
@@ -551,8 +551,10 @@ export class PrepMonthlyrefillComponent implements OnInit {
                             localStorage.setItem('patientMasterVisitId', result['patientMasterVisitId']);
 
                             this.patientMasterVisitId = result['patientMasterVisitId'];
-                            this.searchService.setSession(this.personId, this.patientId).subscribe((sessionres) => {
-                                this.searchService.setVisitSession(this.patientMasterVisitId, this.Age, 261).subscribe((setVisitSession) => {
+                            this.searchService.setSession(this.personId, this.patientId, this.userId)
+                                .subscribe((sessionres) => {
+                                this.searchService.setVisitSession(this.patientMasterVisitId, this.Age, 261)
+                                    .subscribe((setVisitSession) => {
                                     const url = location.protocol + '//' + window.location.hostname + ':' + window.location.port +
                                         '/IQCare/CCC/Encounter/PharmacyPrescription.aspx';
                                     const win = window.open(url, '_blank');
@@ -566,12 +568,10 @@ export class PrepMonthlyrefillComponent implements OnInit {
                 }
 
             }
-        }
-         else {
+        } else {
 
             this.snotifyService.error('Record the visitDate first' , 'VisitDate',
                             this.notificationService.getConfig());
-                            //this.PrepMonthlyRefillFormGroup.controls.visitDate
                         return;
          }
     }

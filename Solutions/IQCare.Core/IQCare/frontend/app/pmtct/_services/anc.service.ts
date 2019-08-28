@@ -219,7 +219,7 @@ export class AncService {
     }
 
     public saveAncHivStatus(hivStatusCommand: HivStatusCommand, anyTests: any[]): Observable<any> {
-        if (anyTests.length == 0) {
+        if (anyTests.length == 0 && anyTests[0].length > 0) {
             return of([]);
         }
 
@@ -234,7 +234,10 @@ export class AncService {
     }
 
     public saveHivResults(hivTestsCommand: HivTestsCommand): Observable<any> {
-        if (!hivTestsCommand.HtsEncounterId || hivTestsCommand.HtsEncounterId == null || hivTestsCommand.HtsEncounterId == 0) {
+        if (!hivTestsCommand.HtsEncounterId 
+            || hivTestsCommand.HtsEncounterId == null 
+            || hivTestsCommand.HtsEncounterId == 0
+            || hivTestsCommand.Testing.length == 0) {
             return of([]);
         }
 

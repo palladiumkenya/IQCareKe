@@ -28,7 +28,7 @@ export class AncHivtestingComponent implements OnInit {
     public historical_hiv_testing_data: HivTestingTableData[] = [];
 
     displayedColumns = ['testdate', 'testtype', 'kitname', 'lotnumber',
-        'expirydate', 'testresult', 'nexthivtest', 'testpoint', 'action'];
+        'expirydate', 'testresult', 'syphilis', 'nexthivtest', 'testpoint', 'action'];
     dataSource = new MatTableDataSource(this.hiv_testing_table_data);
 
     HivTestingForm: FormGroup;
@@ -49,6 +49,7 @@ export class AncHivtestingComponent implements OnInit {
     public kits: LookupItemView[] = [];
     public tests: LookupItemView[] = [];
     public testResults: LookupItemView[] = [];
+    public syphillisResultsOptions: LookupItemView[] = [];
 
     serviceAreaName: string;
 
@@ -97,20 +98,22 @@ export class AncHivtestingComponent implements OnInit {
         this.hivFinalResultsOptions = hivFinalResultsOptions;
 
         this.getLookupOptions('PMTCTHIVTestVisit', this.testVisits);
-        this.getLookupOptions('HIVTestKits', this.kits);
+        this.getLookupOptions('ScreeningHIVTestKits', this.kits);
         this.getLookupOptions('PMTCTHIVTests', this.tests);
         this.getLookupOptions('HIVResults', this.testResults);
+        this.getLookupOptions('SyphilisResults', this.syphillisResultsOptions);
 
         this.notify.emit({ 'form': this.HivTestingForm, 'table_data': this.hiv_testing_table_data });
 
         if (this.isEdit) {
             this.getBaselineAncProfile(this.PatientId);
-            this.loadHivTests();
         } else {
             this.getBaselineAncProfile(this.PatientId);
         }
 
+        this.loadHivTests();
         this.personCurrentHivStatus();
+        
     }
 
     loadHivTests(): void {
@@ -126,6 +129,11 @@ export class AncHivtestingComponent implements OnInit {
                             const lotnumber = tests[i].kitLotNumber;
                             const expirydate = tests[i].expiryDate;
                             const outcome = this.testResults.find(obj => obj.itemId == tests[i].outcome);
+                            let syphilis = null;
+                            if (result['encounterResults'].length > 0) {
+                                syphilis = this.syphillisResultsOptions.find(obj => obj.itemId ==
+                                    result['encounterResults'][0]['syphilisResult']);
+                            }
                             const testEntryPoint = result['encounter'];
 
 
@@ -137,12 +145,13 @@ export class AncHivtestingComponent implements OnInit {
                                 expirydate: expirydate,
                                 testresult: outcome,
                                 nexthivtest: null,
-                                testpoint: this.serviceAreaName
+                                testpoint: this.serviceAreaName,
+                                SyphilisResult: syphilis
                             });
                         }
                     }
 
-                    if (result['encounterResults'].length > 0 && result['encounterResults']['finalResult'] > 0) {
+                    if (result['encounterResults'].length > 0 && result['encounterResults'][0]['finalResult'] > 0) {
                         const yesOption = this.yesnoOptions.filter(obj => obj.itemName == 'Yes');
                         this.HivTestingForm.get('hivTestingDone').setValue(yesOption[0].itemId);
                         this.HivTestingForm.controls.testType.setValue(result['encounter'][0]['encounterType']);
@@ -192,6 +201,12 @@ export class AncHivtestingComponent implements OnInit {
                     return;
                 }
 
+                if (data.hivTest.itemName == 'HIV Test-2' && data.kitName['itemName'] == 'HIV/Syphilis Duo') {
+                    this.snotifyService.info('HIV/Syphilis Duo should not be used as a confirmatory test', 'HIV TESTS',
+                        this.notificationService.getConfig());
+                    return;
+                }
+
                 if (data.hivTest.itemName == 'HIV Test-2' && !this.HivTestingForm.get('finalResultScreening').value) {
                     this.snotifyService.info('The screening test should be done first', 'HIV TESTS',
                         this.notificationService.getConfig());
@@ -226,17 +241,34 @@ export class AncHivtestingComponent implements OnInit {
                         this.testResults.filter(obj => obj.itemName == 'Positive')[0].itemId);
                 }
 
+                const screeningTestResult = this.hivFinalResultsOptions.filter(obj => obj.itemId ==
+                    this.HivTestingForm.get('finalResultScreening').value);
+
                 // confirmatory algorithm
                 if (data.hivTest.itemName == 'HIV Test-2' && data.testResult.itemName == 'Negative') {
                     this.HivTestingForm.get('finalResultConfirmatory').setValue(
                         this.testResults.filter(obj => obj.itemName == 'Negative')[0].itemId);
 
-                    // set final result
-                    this.HivTestingForm.get('finalTestResult').setValue(
-                        this.hivFinalResultsOptions.filter(obj => obj.itemName == 'Negative')[0].itemId);
+                    if (screeningTestResult.length > 0  && screeningTestResult[0]['itemName'] == 'Positive') {
+                        this.HivTestingForm.get('finalTestResult').setValue(
+                            this.hivFinalResultsOptions.filter(obj => obj.itemName == 'Inconclusive')[0].itemId);
+                    } else if (screeningTestResult.length > 0 && screeningTestResult[0]['itemName'] == 'Negative') {
+                        // set final result
+                        this.HivTestingForm.get('finalTestResult').setValue(
+                            this.hivFinalResultsOptions.filter(obj => obj.itemName == 'Negative')[0].itemId);
+                    }
                 } else if (data.hivTest.itemName == 'HIV Test-2' && data.testResult.itemName == 'Positive') {
                     this.HivTestingForm.get('finalResultConfirmatory').setValue(
                         this.testResults.filter(obj => obj.itemName == 'Positive')[0].itemId);
+
+                    if (screeningTestResult.length > 0 && screeningTestResult[0]['itemName'] == 'Positive') {
+                        this.HivTestingForm.get('finalTestResult').setValue(
+                            this.hivFinalResultsOptions.filter(obj => obj.itemName == 'Positive')[0].itemId);
+                    } else if (screeningTestResult.length > 0 && screeningTestResult[0]['itemName'] == 'Negative') {
+                        // set final result
+                        this.HivTestingForm.get('finalTestResult').setValue(
+                            this.hivFinalResultsOptions.filter(obj => obj.itemName == 'Inconclusive')[0].itemId);
+                    }
                 }
 
                 this.hiv_testing_table_data.push({
@@ -247,7 +279,8 @@ export class AncHivtestingComponent implements OnInit {
                     expirydate: data.expiryDate,
                     testresult: data.testResult,
                     nexthivtest: data.nextAppointmentDate,
-                    testpoint: this.serviceAreaName
+                    testpoint: this.serviceAreaName,
+                    SyphilisResult: data.SyphilisResult
                 });
 
                 this.historical_hiv_testing_data.push({
@@ -258,7 +291,8 @@ export class AncHivtestingComponent implements OnInit {
                     expirydate: data.expiryDate,
                     testresult: data.testResult,
                     nexthivtest: data.nextAppointmentDate,
-                    testpoint: this.serviceAreaName
+                    testpoint: this.serviceAreaName,
+                    SyphilisResult: data.SyphilisResult
                 });
 
                 this.dataSource = new MatTableDataSource(this.historical_hiv_testing_data);
@@ -328,6 +362,7 @@ export class AncHivtestingComponent implements OnInit {
                     const hivPositiveResult = this.ancHivStatusInitialVisitOptions.filter(obj => obj.itemName == 'Known Positive');
                     if (hivPositiveResult.length > 0) {
                         this.HivTestingForm.get('hivStatusBeforeFirstVisit').setValue(hivPositiveResult[0].itemId);
+                        this.HivTestingForm.get('hivStatusBeforeFirstVisit').disable( { onlySelf: true });
 
                         // set hiv_status
                         this.dataservice.changeHivStatus('Positive');
@@ -348,7 +383,9 @@ export class AncHivtestingComponent implements OnInit {
     }
 
     public onHivTestFinalResultChange(event) {
-        if (event.isUserInput && event.source.selected && event.source.viewValue == 'Positive') {
+        if (event.isUserInput
+            && event.source.selected
+            && event.source.viewValue == 'Positive') {
             this.dataservice.changeHivStatus('Positive');
         } else if (event.isUserInput && event.source.selected && event.source.viewValue == 'Negative') {
             this.dataservice.changeHivStatus('Negative');
@@ -385,4 +422,5 @@ export interface HivTestingTableData {
     testresult?: any;
     nexthivtest?: Date;
     testpoint?: string;
+    SyphilisResult?: any;
 }

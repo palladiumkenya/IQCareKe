@@ -13,6 +13,7 @@ import * as Consent from '../../../shared/reducers/app.states';
 import { Store } from '@ngrx/store';
 import { AppStateService } from '../../../shared/_services/appstate.service';
 import { AppEnum } from '../../../shared/reducers/app.enum';
+import {NgxSpinnerService} from 'ngx-spinner';
 
 @Component({
     selector: 'app-enrollment-services',
@@ -44,7 +45,8 @@ export class EnrollmentServicesComponent implements OnInit {
         private store: Store<AppState>,
         private appStateService: AppStateService,
         private recordsService: RecordsService,
-        private formControlService: FormControlService) {
+        private formControlService: FormControlService,
+        private spinner: NgxSpinnerService) {
         this.userId = JSON.parse(localStorage.getItem('appUserId'));
         this.posId = localStorage.getItem('appPosID');
         this.maxDate = new Date();
@@ -112,6 +114,7 @@ export class EnrollmentServicesComponent implements OnInit {
 
     submitEnrollment() {
         if (this.formGroup.valid) {
+            this.spinner.show();
             const { EnrollmentDate, Status, identifiers, EnrollmentNumber } = this.formGroup.value;
 
             const enrollment = new Enrollment();
@@ -138,7 +141,7 @@ export class EnrollmentServicesComponent implements OnInit {
                     enrollment.PatientId = this.patientId;
                     this.enrollmentService.enrollClient(enrollment).subscribe(
                         (response) => {
-                            // console.log(response);
+                            this.spinner.hide();
                             this.snotifyService.success('Successfully Enrolled ', 'Enrollment',
                                 this.notificationService.getConfig());
 

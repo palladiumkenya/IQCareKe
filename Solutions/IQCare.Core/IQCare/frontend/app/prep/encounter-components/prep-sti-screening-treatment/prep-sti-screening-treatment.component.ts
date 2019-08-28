@@ -162,7 +162,8 @@ export class PrepSTIScreeningTreatmentComponent implements OnInit {
     }
 
     onPharmacyClick() {
-        this.searchService.setSession(this.personId, this.patientId).subscribe((sessionres) => {
+     
+        this.searchService.setSession(this.personId, this.patientId, JSON.parse(localStorage.getItem("appUserId"))).subscribe((sessionres) => {
             this.searchService.setVisitSession(this.patientMasterVisitId, 20, 261).subscribe((setVisitSession) => {
                 const url = location.protocol + '//' + window.location.hostname + ':' + window.location.port +
                     '/IQCare/CCC/Encounter/PharmacyPrescription.aspx';

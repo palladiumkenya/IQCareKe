@@ -24,6 +24,7 @@ export class PrepStatusComponent implements OnInit {
     @Input() isEdit: number;
     @Input() Age: number;
     @Output() notify: EventEmitter<FormGroup> = new EventEmitter<FormGroup>();
+    userId: number;
 
     constructor(private _formBuilder: FormBuilder,
         private searchService: SearchService,
@@ -40,6 +41,7 @@ export class PrepStatusComponent implements OnInit {
             id: new FormControl()
         });
 
+        this.userId = JSON.parse(localStorage.getItem('appUserId'));
         // Set initial form state
         this.PrepStatusForm.controls.noCondomsIssued.disable({ onlySelf: true });
 
@@ -131,7 +133,7 @@ export class PrepStatusComponent implements OnInit {
     }
 
     onPharmacyClick() {
-        this.searchService.setSession(this.personId, this.patientId).subscribe((sessionres) => {
+        this.searchService.setSession(this.personId, this.patientId, this.userId).subscribe((sessionres) => {
             this.searchService.setVisitSession(this.patientMasterVisitId, this.Age, 261).subscribe((setVisitSession) => {
                 const url = location.protocol + '//' + window.location.hostname + ':' + window.location.port +
                     '/IQCare/CCC/Encounter/PharmacyPrescription.aspx';

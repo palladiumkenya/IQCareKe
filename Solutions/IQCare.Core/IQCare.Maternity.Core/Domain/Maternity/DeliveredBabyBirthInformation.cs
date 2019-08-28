@@ -33,22 +33,22 @@ namespace IQCare.Maternity.Core.Domain.Maternity
         }
 
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int Id { get; private set; }
-        public int PatientDeliveryInformationId { get; private set; }
-        public int PatientMasterVisitId { get; private set; }
-        public decimal ? BirthWeight { get; private set; }
-        public int ? Sex { get; private set; }
-        public int ? DeliveryOutcome { get; private set; }
-        public bool ResuscitationDone { get; private set; }
-        public bool BirthDeformity { get; private set; }
-        public bool TeoGiven { get; private set; }
-        public bool BreastFedWithinHour { get; private set; }
-        public string BirthNotificationNumber { get; private set; }
-        public string Comment { get; private set; }
-        public int CreatedBy { get; private set; }
-        public DateTime CreateDate { get; private set; }
-        public string AuditData { get; private set; }
-        public bool DeleteFlag { get; private set; }
+        public int Id { get;  set; }
+        public int PatientDeliveryInformationId { get;  set; }
+        public int PatientMasterVisitId { get;  set; }
+        public decimal ? BirthWeight { get;  set; }
+        public int ? Sex { get;  set; }
+        public int ? DeliveryOutcome { get;  set; }
+        public bool ResuscitationDone { get;  set; }
+        public bool BirthDeformity { get;  set; }
+        public bool TeoGiven { get;  set; }
+        public bool BreastFedWithinHour { get;  set; }
+        public string BirthNotificationNumber { get;  set; }
+        public string Comment { get;  set; }
+        public int CreatedBy { get;  set; }
+        public DateTime CreateDate { get;  set; }
+        public string AuditData { get;  set; }
+        public bool DeleteFlag { get;  set; }
 
         public void Update(dynamic babyInfo)
         {

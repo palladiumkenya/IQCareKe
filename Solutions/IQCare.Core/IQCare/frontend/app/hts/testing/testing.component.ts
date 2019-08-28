@@ -92,7 +92,8 @@ export class TestingComponent implements OnInit {
             coupleDiscordant: new FormControl(this.finalTestingResults.coupleDiscordant, [Validators.required]),
             acceptedPartnerListing: new FormControl(this.finalTestingResults.acceptedPartnerListing, [Validators.required]),
             reasonsDeclinePartnerListing: new FormControl(this.finalTestingResults.reasonsDeclinePartnerListing, [Validators.required]),
-            finalResultsRemarks: new FormControl(this.finalTestingResults.finalResultsRemarks)
+            finalResultsRemarks: new FormControl(this.finalTestingResults.finalResultsRemarks),
+            SyphilisResult: new FormControl('')
         });
 
         this.htsEncounterDate = moment(new Date(localStorage.getItem('encounterDate'))).toDate();
@@ -258,7 +259,9 @@ export class TestingComponent implements OnInit {
                     test.KitId = this.testing.KitId;
                     test.Outcome = this.testing.Outcome;
                     test.TestRound = this.testing.TestRound;
-                    test.SyphilisResult = data['syphilis']['itemId'];
+                    if (data['syphilis']) {
+                        test.SyphilisResult = data['syphilis']['itemId'];
+                    }
 
                     this.hivResults1.push(this.testing);
                     this.hiv1.push(test);
