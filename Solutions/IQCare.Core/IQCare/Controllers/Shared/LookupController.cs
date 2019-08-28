@@ -242,6 +242,17 @@ namespace IQCare.Controllers.Common
             return BadRequest(results);
         }
 
+        [HttpGet("searchFacilityMflCodeList")]
+        public async Task<IActionResult> SearchFacilityMflCodeList(string searchString)
+        {
+            var results = await _mediator.Send(new GetFilteredFacilityListByMflCodeCommand() { searchString = searchString }, HttpContext.RequestAborted);
+            if (results.IsValid)
+                return Ok(results.Value);
+            return BadRequest(results);
+        }
+
+
+
         [HttpGet("searchFacilityList")]
         public async Task<IActionResult> SearchFacilityList(string searchString)
         {

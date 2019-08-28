@@ -29,6 +29,10 @@ namespace IQCare.Lab.BusinessProcess.CommandHandlers
             {
                 try
                 {
+                    DateTime resultDate = request.DateResultsCollected.HasValue
+                        ? request.DateResultsCollected.Value
+                        : DateTime.Now;
+
                     request.LabTestResults = string.IsNullOrEmpty(request.StrLabTestResults)
                         ? request.LabTestResults
                         : BuildLabTestResultCommandCollection(request.StrLabTestResults);
@@ -56,7 +60,7 @@ namespace IQCare.Lab.BusinessProcess.CommandHandlers
                         var labOrderTestResult = new LabOrderTestResult(request.LabOrderId, request.LabOrderTestId,
                             request.LabTestId, labTestResult.ParameterId, labTestResult.ResultValue,labTestResult.ResultText,
                             labTestResult.ResultOptionId, resultOption, resultUnit?.UnitName, resultUnit?.UnitId,
-                            request.UserId, labTestResult.Undetectable, labTestResult.DetectionLimit);
+                            request.UserId, labTestResult.Undetectable, resultDate, labTestResult.DetectionLimit);
 
                         labOrderTestResults.Add(labOrderTestResult);
                     }
@@ -72,7 +76,7 @@ namespace IQCare.Lab.BusinessProcess.CommandHandlers
 
                     UpdatePatientLabTestTracker(labTestParameters[0].Id, request.LabOrderId, totalLabTestParameterCount,
                         request.LabOrderTestId, labOrderTestResults.FirstOrDefault());
-                    submittedLabOrderTest.ReceiveResult(request.UserId, DateTime.Now);
+                    submittedLabOrderTest.ReceiveResult(request.UserId, resultDate);
                      submittedLabOrderTest.MarkAsReceived();
 
                     _labUnitOfwork.Repository<LabOrderTest>().Update(submittedLabOrderTest);

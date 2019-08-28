@@ -14,6 +14,7 @@ namespace IQCare.Maternity.BusinessProcess.CommandHandlers
     public class UpdatePatientScreeningsCommandHandler : IRequestHandler<UpdatePatientScreeningsCommand, Result<UpdatePatientScreeningsResult>>
     {
         IMaternityUnitOfWork _maternityUnitOfWork;
+        public string comment;
 
         public UpdatePatientScreeningsCommandHandler(IMaternityUnitOfWork maternityUnitOfWork)
         {
@@ -26,40 +27,67 @@ namespace IQCare.Maternity.BusinessProcess.CommandHandlers
             {
                 try
                 {
-                    for (int i = 0; i < request.Screenings.Count; i++)
+                   
+
+                    if (request.Screenings.Count > 0)
                     {
-                        var screenings = await _maternityUnitOfWork.Repository<PatientScreening>().Get(x =>
-                            x.PatientId == request.PatientId && x.PatientMasterVisitId == request.PatientMasterVisitId &&
-                            x.DeleteFlag == false && x.ScreeningCategoryId == request.Screenings[i].ScreeningCategoryId && 
-                            x.ScreeningTypeId == request.Screenings[i].ScreeningTypeId).ToListAsync();
-
-                        if (screenings.Count > 0)
+                       
+                        var Visitscreenings = await _maternityUnitOfWork.Repository<PatientScreening>().Get(x => x.PatientId == request.PatientId &&
+                        x.PatientMasterVisitId == request.PatientMasterVisitId).ToListAsync();
+                        if (Visitscreenings.Count > 0)
                         {
-                            screenings[0].ScreeningValueId = request.Screenings[i].ScreeningValueId;
-
-                            _maternityUnitOfWork.Repository<PatientScreening>().Update(screenings[0]);
-                            await _maternityUnitOfWork.SaveAsync();
-                        }
-                        else
-                        {
-                            var screening = new PatientScreening
+                            foreach (var x in Visitscreenings)
                             {
-                                PatientId = request.PatientId,
-                                PatientMasterVisitId = request.PatientMasterVisitId,
-                                DeleteFlag = false,
-                                CreateDate = DateTime.Now,
-                                CreatedBy = request.CreatedBy,
-                                Comment = "",
-                                Active = false,
-                                ScreeningCategoryId = request.Screenings[i].ScreeningCategoryId,
-                                ScreeningDate = request.VisitDate,
-                                ScreeningDone = true,
-                                ScreeningTypeId = request.Screenings[i].ScreeningTypeId,
-                                ScreeningValueId = request.Screenings[i].ScreeningValueId,
-                                VisitDate = request.VisitDate
-                            };
-                            await _maternityUnitOfWork.Repository<PatientScreening>().AddAsync(screening);
-                            await _maternityUnitOfWork.SaveAsync();
+                                x.DeleteFlag = true;
+                                _maternityUnitOfWork.Repository<PatientScreening>().Update(x);
+                                await _maternityUnitOfWork.SaveAsync();
+                            }
+                        }
+                            for (int i = 0; i < request.Screenings.Count; i++)
+                        {
+                            var screenings = await _maternityUnitOfWork.Repository<PatientScreening>().Get(x =>
+                                x.PatientId == request.PatientId && x.PatientMasterVisitId == request.PatientMasterVisitId &&
+                                x.ScreeningCategoryId == request.Screenings[i].ScreeningCategoryId &&
+                                x.ScreeningTypeId == request.Screenings[i].ScreeningTypeId && x.ScreeningValueId == request.Screenings[i].ScreeningValueId).FirstOrDefaultAsync();
+                         
+                            if (request.Screenings[i].Comment != null)
+                            {
+                                comment = request.Screenings[i].Comment;
+                            }
+                            else
+                            {
+                                comment = "";
+                            }
+                                if (screenings != null)
+                            {
+                                screenings.ScreeningValueId = request.Screenings[i].ScreeningValueId;
+                                screenings.DeleteFlag = false;
+                                screenings.Comment = comment;
+
+                                _maternityUnitOfWork.Repository<PatientScreening>().Update(screenings);
+                                await _maternityUnitOfWork.SaveAsync();
+                            }
+                            else
+                            {
+                                var screening = new PatientScreening
+                                {
+                                    PatientId = request.PatientId,
+                                    PatientMasterVisitId = request.PatientMasterVisitId,
+                                    DeleteFlag = false,
+                                    CreateDate = DateTime.Now,
+                                    CreatedBy = request.CreatedBy,
+                                    Comment = comment,
+                                    Active = false,
+                                    ScreeningCategoryId = request.Screenings[i].ScreeningCategoryId,
+                                    ScreeningDate = request.VisitDate,
+                                    ScreeningDone = true,
+                                    ScreeningTypeId = request.Screenings[i].ScreeningTypeId,
+                                    ScreeningValueId = request.Screenings[i].ScreeningValueId,
+                                    VisitDate = request.VisitDate
+                                };
+                                await _maternityUnitOfWork.Repository<PatientScreening>().AddAsync(screening);
+                                await _maternityUnitOfWork.SaveAsync();
+                            }
                         }
                     }
 

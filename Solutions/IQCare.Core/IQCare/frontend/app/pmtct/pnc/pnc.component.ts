@@ -46,6 +46,8 @@ export class PncComponent implements OnInit {
     patientEncounterId: number;
     visitDate: Date;
     visitType: number;
+    appointmentReasonId: number;
+    appointmentStatusId: number;
 
     isLinear: boolean = true;
     formType: string;
@@ -141,6 +143,18 @@ export class PncComponent implements OnInit {
         this.userId = JSON.parse(localStorage.getItem('appUserId'));
         this.visitDate = new Date(localStorage.getItem('visitDate'));
         this.visitType = JSON.parse(localStorage.getItem('visitType'));
+
+        this.lookupitemservice.getByGroupNameAndItemName('AppointmentStatus', 'Pending').subscribe(
+            (res) => {
+                this.appointmentStatusId = res['itemId'];
+            }
+        );
+
+        this.lookupitemservice.getByGroupNameAndItemName('AppointmentReason', 'Follow Up').subscribe(
+            (res) => {
+                this.appointmentReasonId = res['itemId'];
+            }
+        );
 
         this.lookupitemservice.getByGroupNameAndItemName('HTSEntryPoints', 'PMTCT').subscribe(
             (res) => {
@@ -771,7 +785,14 @@ export class PncComponent implements OnInit {
         const patientAppointmentEditCommand: PatientAppointmentEditCommand = {
             AppointmentId: this.diagnosisReferralAppointmentFormGroup.value[2]['id'],
             AppointmentDate: moment(this.diagnosisReferralAppointmentFormGroup.value[2]['nextAppointmentDate']).toDate(),
-            Description: this.diagnosisReferralAppointmentFormGroup.value[2]['remarks']
+            Description: this.diagnosisReferralAppointmentFormGroup.value[2]['remarks'],
+            UserId: this.userId,
+            PatientId: this.patientId,
+            PatientMasterVisitId: this.patientMasterVisitId,
+            DifferentiatedCareId: null,
+            ReasonId: this.appointmentReasonId,
+            ServiceAreaId: this.serviceAreaId,
+            StatusId: this.appointmentStatusId
         };
 
         const pncNextAppointmentCommand: PatientAppointment = {

@@ -135,7 +135,6 @@ export class PatientEncounterComponent implements OnInit {
                     // console.log('patient encounters');
                     // console.log(p);
                     if (p.length == 0) { return; }
-                    console.log(p);
                     this.encounterDataTable = [];
                     for (let i = 0; i < p.length; i++) {
                         this.encounterDataTable.push({
@@ -186,12 +185,7 @@ export class PatientEncounterComponent implements OnInit {
     }
 
     public onEdit(selectedElement: object, serviceArea: number) {
-        /*localStorage.setItem('onEdit', '1');
-        localStorage.setItem('patientMasterVisitId', selectedElement['PatientMasterVisitId']);
-        localStorage.setItem('encounterTypeId', selectedElement['EncounterTypeId']);*/
-
         localStorage.setItem('visitDate', selectedElement['EncounterStartTime']);
-        console.log(selectedElement);
 
         this.zone.run(() => {
             this.router.navigate(['/pmtct/' + this.serviceName.toLowerCase() + '/update'

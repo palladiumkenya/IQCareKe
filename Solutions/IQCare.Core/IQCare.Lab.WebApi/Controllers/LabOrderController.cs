@@ -75,5 +75,26 @@ namespace IQCare.Lab.WebApi.Controllers
                 return Ok(labOrderResponse.Value);
             return BadRequest(labOrderResponse);
         }
+
+        [HttpPost]
+        public async Task<IActionResult> SaveHeiLabTests([FromBody]AddHeiLabTestsDoneCommand addHeiLabTestsDoneCommand)
+        {
+            var heiLabTestsResponse = await _mediator.Send(addHeiLabTestsDoneCommand).ConfigureAwait(false);
+            if (heiLabTestsResponse.IsValid)
+                return Ok(heiLabTestsResponse.Value);
+            return BadRequest(heiLabTestsResponse);
+        }
+
+        [HttpGet("{patientId}")]
+        public async Task<IActionResult> GetHeiLabTests(int patientId)
+        {
+            var response = await _mediator.Send(new GetPatientHeiLabTestTypesQuery()
+            {
+                PatientId = patientId
+            }, Request.HttpContext.RequestAborted);
+            if (response.IsValid)
+                return Ok(response.Value);
+            return BadRequest(response);
+        }
     }
 }

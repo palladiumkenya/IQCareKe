@@ -2,12 +2,13 @@ import { PrepService } from './../../_services/prep.service';
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
 import { LookupItemView } from '../../../shared/_models/LookupItemView';
+import { SearchService } from '../../../registration/_services/search.service';
 
 @Component({
     selector: 'app-prep-status',
     templateUrl: './prep-status.component.html',
     styleUrls: ['./prep-status.component.css'],
-    providers: [PrepService]
+    providers: [PrepService, SearchService]
 })
 export class PrepStatusComponent implements OnInit {
     PrepStatusForm: FormGroup;
@@ -18,11 +19,13 @@ export class PrepStatusComponent implements OnInit {
     @Input() PrepStatusOptions: any;
     @Input() patientId: number;
     @Input() personId: number;
+    @Input() patientMasterVisitId: number;
     @Input() patientEncounterId: number;
     @Input() isEdit: number;
     @Output() notify: EventEmitter<FormGroup> = new EventEmitter<FormGroup>();
 
     constructor(private _formBuilder: FormBuilder,
+        private searchService: SearchService,
         private prepservice: PrepService) { }
 
     ngOnInit() {
@@ -80,6 +83,17 @@ export class PrepStatusComponent implements OnInit {
             this.PrepStatusForm.controls.noCondomsIssued.disable({ onlySelf: true });
             this.PrepStatusForm.controls.noCondomsIssued.setValue('');
         }
+    }
+
+    onPharmacyClick() {
+        this.searchService.setSession(this.personId, this.patientId).subscribe((sessionres) => {
+            this.searchService.setVisitSession(this.patientMasterVisitId, 20, 261).subscribe((setVisitSession) => {
+                const url = location.protocol + '//' + window.location.hostname + ':' + window.location.port +
+                    '/IQCare/CCC/Encounter/PharmacyPrescription.aspx';
+                const win = window.open(url, '_blank');
+                win.focus();
+            });
+        });
     }
 
 }

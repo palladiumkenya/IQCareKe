@@ -7,7 +7,8 @@ import { LookupItemView } from './../../shared/_models/LookupItemView';
 import { Component, OnInit, NgZone, ViewChild } from '@angular/core';
 import { FormArray, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { forkJoin, of } from 'rxjs';
+import { forkJoin, of, Subscription } from 'rxjs';
+import { PersonHomeService } from '../../dashboard/services/person-home.service';
 import { PrepStatusCommand } from '../_models/commands/PrepStatusCommand';
 import { FamilyPlanningCommand } from '../../pmtct/_models/FamilyPlanningCommand';
 import { FamilyPlanningMethodCommand } from '../../pmtct/_models/FamilyPlanningMethodCommand';
@@ -16,19 +17,20 @@ import * as moment from 'moment';
 import { AdverseEventsCommand } from '../_models/commands/AdverseEventsCommand';
 import { AllergiesCommand } from '../_models/commands/AllergiesCommand';
 import { PregnancyIndicatorCommand } from '../_models/commands/PregnancyIndicatorCommand';
-import { NextAppointmentCommand, EditAppointmentCommand } from '../../pmtct/maternity/commands/next-appointment-command';
+import { NextAppointmentCommand } from '../../pmtct/maternity/commands/next-appointment-command';
 import { MaternityService } from '../../pmtct/_services/maternity.service';
 import { MatStepper } from '@angular/material';
 import { PregnancyIndicatorLogCommand } from '../_models/commands/PregnancyIndicatorLogCommand';
 import { FamilyPlanningEditCommand } from '../../pmtct/_models/FamilyPlanningEditCommand';
 import { PatientFamilyPlanningMethodEditCommand } from '../../pmtct/_models/PatientFamilyPlanningMethodEditCommand';
-import { LookupItemService } from '../../shared/_services/lookup-item.service';
-
+import { PersonView } from '../../dashboard/_model/personView';
+import { NotificationService } from '../../shared/_services/notification.service';
+import { SnotifyService } from 'ng-snotify';
 @Component({
     selector: 'app-prep-encounter',
     templateUrl: './prep-encounter.component.html',
     styleUrls: ['./prep-encounter.component.css'],
-    providers: [MaternityService, RecordsService, LookupItemService]
+    providers: [MaternityService, RecordsService, PersonHomeService]
 })
 export class PrepEncounterComponent implements OnInit {
     patientId: number;
@@ -40,9 +42,6 @@ export class PrepEncounterComponent implements OnInit {
     isEdit: number;
 
     isLinear: boolean = true;
-
-    appointmentStatusId: number;
-    appointmentReasonId: number;
 
     // Form Groups
     STIScreeningFormGroup: FormArray;
@@ -72,8 +71,8 @@ export class PrepEncounterComponent implements OnInit {
     PregnancyOutcomeOptions: any[] = [];
     PrepStatusOptions: any[] = [];
     PrepAppointmentOptions: any[] = [];
-
-
+    minDate: Date;
+    serviceId: number;
     public chronic_illness_data: PatientChronicIllness[] = [];
     public adverseEvents_data: AdverseEventsCommand[] = [];
     public allergies_data: AllergiesCommand[] = [];
@@ -83,6 +82,8 @@ export class PrepEncounterComponent implements OnInit {
     // optional depending on sex
     isOptionalObsGyn: boolean = false;
     isOptionalCircumcision: boolean = false;
+    public person: PersonView;
+    public personView$: Subscription;
 
     constructor(private route: ActivatedRoute,
         private prepService: PrepService,
@@ -91,8 +92,10 @@ export class PrepEncounterComponent implements OnInit {
         private matService: MaternityService,
         public zone: NgZone,
         private router: Router,
-        private recordsService: RecordsService,
-        private lookupitemservice: LookupItemService) {
+        private snotifyService: SnotifyService,
+        private notificationService: NotificationService,
+        private personHomeService: PersonHomeService,
+        private recordsService: RecordsService) {
         this.STIScreeningFormGroup = new FormArray([]);
         this.CircumcisionStatusFormGroup = new FormArray([]);
         this.FertilityIntentionsFormGroup = new FormArray([]);
@@ -111,6 +114,7 @@ export class PrepEncounterComponent implements OnInit {
                 this.patientMasterVisitId = params.patientMasterVisitId;
                 this.patientEncounterId = params.patientEncounterId;
                 this.isEdit = params.edit;
+                this.serviceId = params.serviceId;
             }
         );
         this.userId = JSON.parse(localStorage.getItem('appUserId'));
@@ -181,18 +185,29 @@ export class PrepEncounterComponent implements OnInit {
                 }
             }
         );
+    }
 
-        this.lookupitemservice.getByGroupNameAndItemName('AppointmentStatus', 'Pending').subscribe(
-            (res) => {
-                this.appointmentStatusId = res['itemId'];
-            }
-        );
 
-        this.lookupitemservice.getByGroupNameAndItemName('AppointmentReason', 'Follow Up').subscribe(
-            (res) => {
-                this.appointmentReasonId = res['itemId'];
-            }
-        );
+    public getPatientDetailsById(personId: number) {
+        this.personView$ = this.personHomeService.getPatientByPersonId(personId).subscribe(
+            p => {
+                // console.log(p);
+                this.person = p;
+                if (this.person != null) {
+
+                    if (this.person.dateOfBirth != null && this.person.dateOfBirth != undefined) {
+                        this.minDate = this.person.dateOfBirth;
+                    }
+                }
+
+            },
+            (err) => {
+                this.snotifyService.error('Error retrieving the patient details ' + err, 'person detail service',
+                    this.notificationService.getConfig());
+            },
+            () => {
+                // console.log(this.personView$);
+            });
     }
 
     public onVisitDetailsNext() {
@@ -214,9 +229,11 @@ export class PrepEncounterComponent implements OnInit {
     }
 
     public onObsGynPrevious() {
-        this.isOptionalCircumcision = true;
-        this.stepper._stateChanged();
-        this.stepper.selectedIndex = 0;
+        if (this.isOptionalCircumcision == true) {
+            this.stepper._stateChanged();
+            this.stepper.selectedIndex = 0;
+        }
+
     }
 
     onPrepStiScreeningTreatmentNotify(formGroup: FormGroup): void {
@@ -396,7 +413,7 @@ export class PrepEncounterComponent implements OnInit {
         const nextAppointmentCommand: NextAppointmentCommand = {
             PatientId: this.patientId,
             PatientMasterVisitId: this.patientMasterVisitId,
-            ServiceAreaId: 7,
+            ServiceAreaId: this.serviceId,
             AppointmentDate: this.AppointmentFormGroup.value[0]['nextAppointmentDate']
                 ? moment(this.AppointmentFormGroup.value[0]['nextAppointmentDate']).toDate() : null,
             Description: this.AppointmentFormGroup.value[0]['clinicalNotes'],
@@ -423,22 +440,51 @@ export class PrepEncounterComponent implements OnInit {
 
         for (let i = 0; i < this.screenedForSTIOptions.length; i++) {
             let value;
+
             if (this.screenedForSTIOptions[i].itemName == 'STITreatmentOffered') {
                 value = this.STIScreeningFormGroup.value[0]['stiTreatmentOffered'];
             } else if (this.screenedForSTIOptions[i].itemName == 'STILabInvestigationDone') {
                 value = this.STIScreeningFormGroup.value[0]['stiReferredLabInvestigation'];
-            } else if (this.screenedForSTIOptions[i].itemName == 'STISymptoms') {
-                value = this.STIScreeningFormGroup.value[0]['signsOfSTI'];
             } else if (this.screenedForSTIOptions[i].itemName == 'STIScreeningDone') {
                 value = this.STIScreeningFormGroup.value[0]['signsOrSymptomsOfSTI'];
             }
 
-            STIScreeningCommand.Screenings.push({
-                ScreeningTypeId: this.screenedForSTIOptions[i].masterId,
-                ScreeningCategoryId: this.screenedForSTIOptions[i].itemId,
-                ScreeningValueId: value
-            });
+            if (this.screenedForSTIOptions[i].itemName !== 'STISymptoms') {
+                STIScreeningCommand.Screenings.push({
+                    ScreeningTypeId: this.screenedForSTIOptions[i].masterId,
+                    ScreeningCategoryId: this.screenedForSTIOptions[i].itemId,
+                    ScreeningValueId: value
+                });
+
+            }
+
         }
+
+        let stioptions = [];
+        stioptions = this.screenedForSTIOptions.filter(x => x.itemName == 'STISymptoms');
+
+        if (this.STIScreeningFormGroup.value[0].signsOfSTI.length > 0) {
+            for (let t = 0; t < this.STIScreeningFormGroup.value[0].signsOfSTI.length; t++) {
+                let arraystis: LookupItemView[];
+                let comment: string;
+                arraystis = this.stiScreeningOptions.filter(x => x.itemId == this.STIScreeningFormGroup.value[0].signsOfSTI[t]);
+                if (arraystis[0].itemDisplayName == 'Others (O)') {
+                    comment = this.STIScreeningFormGroup.value[0].Specify;
+                } else {
+                    comment = '';
+                }
+
+                STIScreeningCommand.Screenings.push({
+                    ScreeningTypeId: stioptions[0].masterId,
+                    ScreeningCategoryId: stioptions[0].itemId,
+                    ScreeningValueId: this.STIScreeningFormGroup.value[0].signsOfSTI[t],
+                    Comment: comment
+                });
+
+
+            }
+        }
+
 
         const pregnancyIndicatorLog: PregnancyIndicatorLogCommand = {
             Id: 0,
@@ -514,7 +560,8 @@ export class PrepEncounterComponent implements OnInit {
                     );
 
                     this.zone.run(() => {
-                        this.router.navigate(['/prep/' + this.patientId + '/' + this.personId + '/' + 7], { relativeTo: this.route });
+                        this.router.navigate(['/prep/' + this.patientId + '/' + this.personId + '/'
+                            + this.serviceId], { relativeTo: this.route });
                     });
                 },
                 (error) => {
@@ -560,21 +607,51 @@ export class PrepEncounterComponent implements OnInit {
 
         for (let i = 0; i < this.screenedForSTIOptions.length; i++) {
             let value;
+
             if (this.screenedForSTIOptions[i].itemName == 'STITreatmentOffered') {
                 value = this.STIScreeningFormGroup.value[0]['stiTreatmentOffered'];
             } else if (this.screenedForSTIOptions[i].itemName == 'STILabInvestigationDone') {
                 value = this.STIScreeningFormGroup.value[0]['stiReferredLabInvestigation'];
-            } else if (this.screenedForSTIOptions[i].itemName == 'STISymptoms') {
-                value = this.STIScreeningFormGroup.value[0]['signsOfSTI'];
             } else if (this.screenedForSTIOptions[i].itemName == 'STIScreeningDone') {
                 value = this.STIScreeningFormGroup.value[0]['signsOrSymptomsOfSTI'];
             }
 
-            STIScreeningCommand.Screenings.push({
-                ScreeningTypeId: this.screenedForSTIOptions[i].masterId,
-                ScreeningCategoryId: this.screenedForSTIOptions[i].itemId,
-                ScreeningValueId: value
-            });
+            if (this.screenedForSTIOptions[i].itemName !== 'STISymptoms') {
+                STIScreeningCommand.Screenings.push({
+                    ScreeningTypeId: this.screenedForSTIOptions[i].masterId,
+                    ScreeningCategoryId: this.screenedForSTIOptions[i].itemId,
+                    ScreeningValueId: value
+                });
+
+            }
+
+        }
+
+        let stioptions = [];
+        stioptions = this.screenedForSTIOptions.filter(x => x.itemName == 'STISymptoms');
+
+        if (this.STIScreeningFormGroup.value[0].signsOfSTI.length > 0) {
+            for (let t = 0; t < this.STIScreeningFormGroup.value[0].signsOfSTI.length; t++) {
+
+                let arraystis: LookupItemView[];
+                let comment: string;
+                arraystis = this.stiScreeningOptions.filter(x => x.itemId == this.STIScreeningFormGroup.value[0].signsOfSTI[t]);
+                if (arraystis[0].itemDisplayName == 'Others (O)') {
+                    comment = this.STIScreeningFormGroup.value[0].Specify;
+                } else {
+                    comment = '';
+                }
+
+                console.log(this.STIScreeningFormGroup.value[0].signsOfSTI[t]);
+                STIScreeningCommand.Screenings.push({
+                    ScreeningTypeId: stioptions[0].masterId,
+                    ScreeningCategoryId: stioptions[0].itemId,
+                    ScreeningValueId: this.STIScreeningFormGroup.value[0].signsOfSTI[t],
+                    Comment: comment
+                });
+
+
+            }
         }
 
         for (let i = 0; i < this.ChronicIllnessFormGroup[0].length; i++) {
@@ -662,17 +739,10 @@ export class PrepEncounterComponent implements OnInit {
             reasonsCommand = of([]);
         }
 
-        const updateNextAppointment: EditAppointmentCommand = {
+        const updateNextAppointment = {
             AppointmentId: this.AppointmentFormGroup.value[0]['id'],
             AppointmentDate: this.AppointmentFormGroup.value[0]['nextAppointmentDate'],
-            Description: this.AppointmentFormGroup.value[0]['clinicalNotes'],
-            UserId: this.userId,
-            PatientId: this.patientId,
-            PatientMasterVisitId: this.patientMasterVisitId,
-            DifferentiatedCareId: null,
-            ReasonId: this.appointmentReasonId,
-            ServiceAreaId: 7,
-            StatusId: this.appointmentStatusId
+            Description: this.AppointmentFormGroup.value[0]['clinicalNotes']
         };
 
         const familyPlanningEditCommand: FamilyPlanningEditCommand = {
@@ -722,7 +792,8 @@ export class PrepEncounterComponent implements OnInit {
                 // console.log(result);
 
                 this.zone.run(() => {
-                    this.router.navigate(['/prep/' + this.patientId + '/' + this.personId + '/' + 7], { relativeTo: this.route });
+                    this.router.navigate(['/prep/' + this.patientId + '/' + this.personId + '/'
+                        + this.serviceId], { relativeTo: this.route });
                 });
             },
             (error) => {
