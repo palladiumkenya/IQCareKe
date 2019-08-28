@@ -476,6 +476,9 @@ export class AncComponent implements OnInit, OnDestroy {
             PatientMasterVisitId: this.patientMasterVisitId,
             BreastExamDone: this.PatientEducationMatFormGroup.value['breastExamDone'],
             TreatedSyphilis: this.PatientEducationMatFormGroup.value['treatedSyphilis'],
+            TestedForSyphilis: this.PatientEducationMatFormGroup.value['testedSyphilis'],
+            SyphilisTestUsed: this.PatientEducationMatFormGroup.value['SyphilisTestUsed'],
+            SyphilisResults: this.PatientEducationMatFormGroup.value['SyphilisResults'],
             CreateBy: this.userId,
             CounsellingTopics: this.counselling_data
         };
@@ -486,6 +489,9 @@ export class AncComponent implements OnInit, OnDestroy {
             PregnancyId: this.pregnancyId,
             HivStatusBeforeAnc: this.HivStatusMatFormGroup.value[0]['hivStatusBeforeFirstVisit'],
             TreatedForSyphilis: this.PatientEducationMatFormGroup.value['treatedSyphilis'],
+            TestedForSyphilis: this.PatientEducationMatFormGroup.value['testedSyphilis'],
+            SyphilisTestUsed: this.PatientEducationMatFormGroup.value['SyphilisTestUsed'],
+            SyphilisResults: this.PatientEducationMatFormGroup.value['SyphilisResults'],            
             BreastExamDone: this.PatientEducationMatFormGroup.value['breastExamDone'],
             CreatedBy: this.userId
         } as BaselineAncProfileCommand;
@@ -546,6 +552,8 @@ export class AncComponent implements OnInit, OnDestroy {
                     ExpiryDate: this.hiv_status_table_data[i][j]['expirydate'],
                     Outcome: this.hiv_status_table_data[i][j]['testresult']['itemId'],
                     TestRound: this.hiv_status_table_data[i][j]['testtype']['itemName'] == 'HIV Test-1' ? 1 : 2,
+                    SyphilisResult: this.hiv_status_table_data[i][j]['SyphilisResult'] ?
+                        this.hiv_status_table_data[i][j]['SyphilisResult']['itemId'] : null
                 });
             }
         }
@@ -752,6 +760,9 @@ export class AncComponent implements OnInit, OnDestroy {
                         HivStatusBeforeAnc: this.HivStatusMatFormGroup.value[0]['hivStatusBeforeFirstVisit'],
                         TreatedForSyphilis: this.PatientEducationMatFormGroup.value['treatedSyphilis'],
                         BreastExamDone: this.PatientEducationMatFormGroup.value['breastExamDone'],
+                        TestedForSyphilis: this.PatientEducationMatFormGroup.value['testedSyphilis'],
+                        SyphilisTestUsed: this.PatientEducationMatFormGroup.value['SyphilisTestUsed'],
+                        SyphilisResults: this.PatientEducationMatFormGroup.value['SyphilisResults'],
                         CreatedBy: this.userId
                     } as BaselineAncProfileCommand;
 
@@ -881,7 +892,10 @@ export class AncComponent implements OnInit, OnDestroy {
             PregnancyId: this.pregnancyId,
             HivStatusBeforeAnc: this.HivStatusMatFormGroup.value[0]['hivStatusBeforeFirstVisit'],
             TreatedForSyphilis: this.PatientEducationMatFormGroup.value['treatedSyphilis'],
+            TestedForSyphilis: this.PatientEducationMatFormGroup.value['testedSyphilis'],
             BreastExamDone: this.PatientEducationMatFormGroup.value['breastExamDone'],
+            SyphilisTestUsed: this.PatientEducationMatFormGroup.value['SyphilisTestUsed'],
+            SyphilisResults: this.PatientEducationMatFormGroup.value['SyphilisResults'],
             CreatedBy: this.userId
         } as BaselineAncProfileCommand;
 
@@ -899,6 +913,9 @@ export class AncComponent implements OnInit, OnDestroy {
             PatientMasterVisitId: this.patientMasterVisitId,
             BreastExamDone: this.PatientEducationMatFormGroup.value['breastExamDone'],
             TreatedSyphilis: this.PatientEducationMatFormGroup.value['treatedSyphilis'],
+            TestedForSyphilis: this.PatientEducationMatFormGroup.value['testedSyphilis'],
+            SyphilisTestUsed: this.PatientEducationMatFormGroup.value['SyphilisTestUsed'],
+            SyphilisResults: this.PatientEducationMatFormGroup.value['SyphilisResults'],
             CreateBy: this.userId,
             CounsellingTopics: this.counselling_data
         };

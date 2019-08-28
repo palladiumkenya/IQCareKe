@@ -36,7 +36,10 @@ namespace IQCare.PMTCT.BusinessProcess.CommandHandlers.BaselineAntenatalCare
                         CreateDate = DateTime.Now,
                         CreatedBy = request.CreatedBy,
                         DeleteFlag = false,
-                        HivStatusBeforeAnc = request.HivStatusBeforeAnc
+                        HivStatusBeforeAnc = request.HivStatusBeforeAnc,
+                        TestedForSyphilis = request.TestedForSyphilis,
+                        SyphilisTestUsed = request.SyphilisTestUsed,
+                        SyphilisResults = request.SyphilisResults
                     };
 
                     await _unitOfWork.Repository<Core.Models.BaselineAntenatalCare>().AddAsync(baselineAntenatalCare);

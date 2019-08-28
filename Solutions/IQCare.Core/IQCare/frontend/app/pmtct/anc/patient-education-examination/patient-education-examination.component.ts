@@ -13,6 +13,7 @@ import { AncService } from '../../_services/anc.service';
 import { DataService } from '../../../shared/_services/data.service';
 import { MatDialogConfig, MatDialog } from '@angular/material';
 import { PatientCounsellingComponent } from '../patient-counselling/patient-counselling.component'
+import {LookupItemView} from '../../../shared/_models/LookupItemView';
 
 export interface PeriodicElement {
     topicId: number;
@@ -42,13 +43,14 @@ export class PatientEducationExaminationComponent implements OnInit, OnDestroy {
     public maxDate: Date ;
 
     public patientCounseling$: Subscription;
-    public physicalExam$: Subscription;
     public baseline$: Subscription;
 
     public patientEducationEmitterData: PatientEducationEmitter;
     public counsellingOptions: any[] = [];
     public yesNoOptions: any[] = [];
     public hivStatusOptions: any[] = [];
+    public syphilisResultsOptions: LookupItemView[] = [];
+    public syphilisTestTypes: LookupItemView[] = [];
 
     public counselling_data: CounsellingTopicsEmitters[] = [];
     public counseling_db_data: CounsellingTopicsEmitters[] = [];
@@ -70,7 +72,8 @@ export class PatientEducationExaminationComponent implements OnInit, OnDestroy {
         private snotifyService: SnotifyService,
         private notificationService: NotificationService,
         private dataService: DataService,
-        private ancService: AncService) {
+        private ancService: AncService,
+        private lookupservice: LookupItemService) {
     }
 
     ngOnInit() {
@@ -81,18 +84,13 @@ export class PatientEducationExaminationComponent implements OnInit, OnDestroy {
 
         this.PatientEducationFormGroup = this._formBuilder.group({
             breastExamDone: ['', Validators.required],
-            //  counsellingDate: ['', (this.isEdit) ? [] : Validators.required],
-            //counselledOn: ['', (this.isEdit) ? [] : Validators.required],
-            treatedSyphilis: ['', Validators.required]
-            // testResult: new FormControl(['', Validators.required])
+            treatedSyphilis: ['', Validators.required],
+            testedSyphilis: ['', Validators.required],
+            SyphilisTestUsed: ['', Validators.required],
+            SyphilisResults: ['', Validators.required]
         });
-
-
-
+        
         this.userId = JSON.parse(localStorage.getItem('appUserId'));
-        //  this.getLookupOptions('counselledOn', this.topics);
-        //  this.getLookupOptions('yesno', this.yesnos);
-        //  this.getLookupOptions('HivTestingResult', this.testResults);
 
         const {
             yesnoOptions,
@@ -108,33 +106,57 @@ export class PatientEducationExaminationComponent implements OnInit, OnDestroy {
         this.notify.emit({ 'form': this.PatientEducationFormGroup, 'counselling_data': this.counselling_data });
 
         if (this.isEdit) {
-
-         //   this.PatientEducationFormGroup.get('counsellingDate').clearValidators();
-           // this.PatientEducationFormGroup.get('counselledOn').clearValidators();
-
-            // this.getPatientCounselingData(this.PatientId, this.PatientMasterVisitId);
             this.getPatientCounselingDataAll(this.PatientId);
             this.getBaselineAncProfile(this.PatientId);
         } else {
             this.getPatientCounselingDataAll(this.PatientId);
         }
+        
+        this.lookupservice.getByGroupName('SyphilisResults').subscribe(
+            res => {
+                this.syphilisResultsOptions = res['lookupItems'];
+            },
+            error => {
+                
+            }
+        );
+        this.lookupservice.getByGroupName('SyphilisTestType').subscribe(
+            res => {
+                this.syphilisTestTypes = res['lookupItems'];
+            },
+            error => {
+                
+            }
+        );
+    }
+    
+    public onTestedForSyphilisSelection(event) {
+        if (event.isUserInput && event.source.selected && event.source.viewValue == 'Yes') {
+            this.PatientEducationFormGroup.get('SyphilisTestUsed').enable({ onlySelf: true });
+            this.PatientEducationFormGroup.get('SyphilisResults').enable({ onlySelf: true });
+            this.PatientEducationFormGroup.get('treatedSyphilis').enable({ onlySelf: true });
+        } else if (event.isUserInput && event.source.selected && event.source.viewValue == 'No') {
+            this.PatientEducationFormGroup.get('SyphilisTestUsed').setValue('');
+            this.PatientEducationFormGroup.get('SyphilisTestUsed').disable({ onlySelf: true });
+
+            this.PatientEducationFormGroup.get('SyphilisResults').setValue('');
+            this.PatientEducationFormGroup.get('SyphilisResults').disable({ onlySelf: true });
+
+            this.PatientEducationFormGroup.get('treatedSyphilis').setValue('');
+            this.PatientEducationFormGroup.get('treatedSyphilis').disable({ onlySelf: true });
+        }
     }
 
-    public moveNextStep() {
-
-        this.patientEducationEmitterData = {
-            breastExamDone: parseInt(this.PatientEducationFormGroup.get('breastExamDone').value, 10),
-            treatedSyphilis: parseInt(this.PatientEducationFormGroup.get('treatedSyphilis').value, 10),
-            counsellingTopics: this.counselling_data
-        };
-        this.nextStep.emit(this.patientEducationEmitterData);
+    public onSyphilisResultsSelection(event) {
+        if (event.isUserInput && event.source.selected && event.source.viewValue == 'Positive') {
+            this.PatientEducationFormGroup.get('treatedSyphilis').enable({ onlySelf: true });
+        } else if (event.isUserInput && event.source.selected && event.source.viewValue == 'Negative') {
+            this.PatientEducationFormGroup.get('treatedSyphilis').setValue('');
+            this.PatientEducationFormGroup.get('treatedSyphilis').disable({ onlySelf: true });
+        }
     }
 
     public addTopics() {
-
-        //  const topic = this.PatientEducationFormGroup.controls['counselledOn'].value.itemName;
-        // const topicId = this.PatientEducationFormGroup.controls['counselledOn'].value.itemId;
-
         const resultsDialogConfig = new MatDialogConfig();
 
         resultsDialogConfig.disableClose = false;
@@ -155,26 +177,23 @@ export class PatientEducationExaminationComponent implements OnInit, OnDestroy {
                 if (!data) {
                     return;
                 }
-                // const topic = this.PatientEducationFormGroup.controls['counselledOn'].value.itemName;
-                // const topicId = this.PatientEducationFormGroup.controls['counselledOn'].value.itemId;
                 const topic = data.counselledOn.itemName;
                 const topicId = data.counselledOn.itemId;
                 
                 const counsellingDates = data.counsellingDate;
 
-                //const counsellingDates = this.PatientEducationFormGroup.controls['counsellingDate'].value;
-
-
-                if (topic === '' || //this.PatientEducationFormGroup.controls['counsellingDate'].value 
+                if (topic === '' ||
                     counsellingDates === '') {
                     this.snotifyService.warning('counselling topic, counselling date required', this.notificationService.getConfig());
                     return false;
                 }
 
 
-                if (this.counselling_data.filter(x => x.counsellingTopic === topic  && moment(x.CounsellingDate).format('DD-MM-YYYY') === moment(counsellingDates).format('DD-MM-YYYY'))
+                if (this.counselling_data.filter(x => x.counsellingTopic === topic 
+                    && moment(x.CounsellingDate).format('DD-MM-YYYY') === moment(counsellingDates).format('DD-MM-YYYY'))
                     .length > 0) {
-                    this.snotifyService.warning('' + topic + ' exists at the same day', 'Counselling', this.notificationService.getConfig());
+                    this.snotifyService.warning('' + topic + ' exists at the same day', 'Counselling', 
+                        this.notificationService.getConfig());
                 } else {
                     this.counselling_data.push({
                         counselledOn: parseInt(topicId, 10),
@@ -182,7 +201,6 @@ export class PatientEducationExaminationComponent implements OnInit, OnDestroy {
                         counsellingTopicId: topicId,
                         description: 'n/a',
                         CounsellingDate: counsellingDates
-                        // CounsellingDate: this.PatientEducationFormGroup.controls['counsellingDate'].value
                     });
                 }
 
@@ -252,6 +270,9 @@ export class PatientEducationExaminationComponent implements OnInit, OnDestroy {
                     if (baseline['id'] > 0) {
                         this.PatientEducationFormGroup.get('breastExamDone').setValue(baseline['breastExamDone']);
                         this.PatientEducationFormGroup.get('treatedSyphilis').setValue(baseline['treatedForSyphilis']);
+                        this.PatientEducationFormGroup.get('SyphilisTestUsed').setValue(baseline['syphilisTestUsed']);
+                        this.PatientEducationFormGroup.get('SyphilisResults').setValue(baseline['syphilisResults']);
+                        this.PatientEducationFormGroup.get('testedSyphilis').setValue(baseline['testedForSyphilis']);
                     }
                 },
                 error1 => {
@@ -264,7 +285,6 @@ export class PatientEducationExaminationComponent implements OnInit, OnDestroy {
     }
 
     ngOnDestroy(): void {
-        // this.baseline$.unsubscribe();
         this.patientCounseling$.unsubscribe();
     }
 

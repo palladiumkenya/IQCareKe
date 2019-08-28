@@ -24,7 +24,7 @@
                         <mat-form-field class="col-md-12">
                             <mat-select placeholder="Select Kit used" name="kitName" id="kitName" formControlName="kitName"
                                 required>
-                                <mat-option *ngFor="let kitOption of kits" [value]="kitOption">
+                                <mat-option *ngFor="let kitOption of kits" [value]="kitOption" (onSelectionChange)="onKitTypeSelection($event)">
                                     {{kitOption.itemName}}
                                 </mat-option>
                             </mat-select>
@@ -69,6 +69,17 @@
                             <mat-datepicker #nextAppointmentDate></mat-datepicker>
                         </mat-form-field>
                     </div>
+                </div>
+
+                <div class="col-md-12">
+                    <mat-form-field class="col-md-4">
+                        <mat-select placeholder="Syphilis Result" name="SyphilisResult" id="SyphilisResult" formControlName="SyphilisResult"
+                                    required>
+                            <mat-option *ngFor="let syphillisResultsOption of syphillisResultsOptions" [value]="syphillisResultsOption">
+                                {{syphillisResultsOption.itemName}}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
                 </div>
 
                 <div class="col-md-12">

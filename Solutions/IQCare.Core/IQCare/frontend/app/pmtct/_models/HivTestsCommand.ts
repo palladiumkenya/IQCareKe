@@ -18,6 +18,7 @@ export interface Testing {
     ExpiryDate: Date;
     Outcome: number;
     TestRound: number;
+    SyphilisResult?: number;
 }
 
 export interface FinalTestingResult {
