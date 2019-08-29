@@ -95,7 +95,9 @@ namespace IQCare.Web.CCC.WebService
                     BMIZ = bmiz,
                     WeightForAge = weightForAge,
                     WeightForHeight = weightForHeight,
-                    CreatedBy = createdBy
+                    CreatedBy = createdBy,
+                    AgeforZ = ageforZ,
+                    NursesComments = nursesComments
                 };
                 var vital = new PatientVitalsManager();
                 Result = vital.AddPatientVitals(patientVital, facilityId);

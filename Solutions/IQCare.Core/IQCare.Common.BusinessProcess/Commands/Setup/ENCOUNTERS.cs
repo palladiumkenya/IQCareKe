@@ -30,6 +30,8 @@ namespace IQCare.Common.BusinessProcess.Commands.Setup
         public string TRACING_DATE { get; set; }
         public int TRACING_MODE { get; set; }
         public int TRACING_OUTCOME { get; set; }
+        public int? REASONNOTCONTACTED { get; set; }
+        public string REASONNOTCONTACTEDOTHER { get; set; }
     }
 
     public class NewReferral
@@ -120,6 +122,8 @@ namespace IQCare.Common.BusinessProcess.Commands.Setup
         public int CONSENT { get; set; }
 
         public string BOOKING_DATE { get; set; }
+        public int? REASONNOTCONTACTED { get; set; }
+        public string REASONNOTCONTACTEDOTHER { get; set; }
     }
 
     public class PARTNER_SCREENING
@@ -180,6 +184,8 @@ namespace IQCare.Common.BusinessProcess.Commands.Setup
         public int TRACING_OUTCOME { get; set; }
         public int CONSENT { get; set; }
         public string BOOKING_DATE { get; set; }
+        public int? REASONNOTCONTACTED { get; set; }
+        public string REASONNOTCONTACTEDOTHER { get; set; }
     }
 
     public class FAMILY_SCREENING
