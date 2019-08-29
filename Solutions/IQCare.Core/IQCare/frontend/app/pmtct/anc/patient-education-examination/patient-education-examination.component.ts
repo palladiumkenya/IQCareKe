@@ -66,7 +66,6 @@ export class PatientEducationExaminationComponent implements OnInit, OnDestroy {
 
     displayedColumns: string[] = ['topicId', 'topic', 'onSetDate'];
     dataSource = ELEMENT_DATA;
-    visitDate: Date;
 
     constructor(private _formBuilder: FormBuilder, private _lookupItemService: LookupItemService,
         private dialog: MatDialog,
@@ -78,10 +77,7 @@ export class PatientEducationExaminationComponent implements OnInit, OnDestroy {
     }
 
     ngOnInit() {
-        this.dataService.visitDate.subscribe(date => {
-            this.visitDate = date;
-            this.maxDate = date;
-        });
+        this.maxDate = this.visitDate;
 
         this.PatientEducationFormGroup = this._formBuilder.group({
             breastExamDone: ['', Validators.required],

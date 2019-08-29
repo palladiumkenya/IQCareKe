@@ -202,6 +202,8 @@ namespace IQCare.Web.CCC.UC
                      lblRespiratoryRate.Text = notTaken;
                 else
                     lblRespiratoryRate.Text = "<span class='label label-info'>" + patientTriage.RespiratoryRate + " breaths/min</span>";
+
+                lblNurseComments.Text = "<span class='label label-info'>" + patientTriage.NursesComments + "</span>";
             }
             else
             {

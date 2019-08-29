@@ -7,6 +7,7 @@ import * as moment from 'moment';
 import { MaternityService } from '../../_services/maternity.service';
 import { Input } from '@angular/core';
 import { Subscription } from 'rxjs/index';
+import {DataService} from '../../_services/data.service';
 
 @Component({
     selector: 'app-mother-profile',
@@ -35,7 +36,8 @@ export class MotherProfileComponent implements OnInit {
         private _lookupItemService: LookupItemService,
         private snotifyService: SnotifyService,
         private notificationService: NotificationService,
-        private _matServices: MaternityService) {
+        private _matServices: MaternityService,
+        private dataservice: DataService) {
     }
 
     ngOnInit() {
@@ -58,6 +60,7 @@ export class MotherProfileComponent implements OnInit {
 
     public onLMPDateChange() {
         this.dateLMP = this.motherProfileFormGroup.controls['dateLMP'].value;
+        this.dataservice.setDateLmp(this.dateLMP);
         this.minLMpDate = moment(moment(this.visitDate).subtract(42, 'weeks').format('')).toDate();
 
         if (moment(this.dateLMP).isBefore(this.minLMpDate)) {
@@ -102,6 +105,7 @@ export class MotherProfileComponent implements OnInit {
                 p => {
                     this.motherProfileFormGroup.controls['gestation'].setValue(p.gestation);
                     this.motherProfileFormGroup.controls['dateLMP'].setValue(p.lmp);
+                    this.dataservice.setDateLmp(p.lmp);
                     this.motherProfileFormGroup.controls['dateEDD'].setValue(p.edd);
                     this.motherProfileFormGroup.controls['parityOne'].setValue(p.parity);
                     this.motherProfileFormGroup.controls['parityTwo'].setValue(p.parity2);

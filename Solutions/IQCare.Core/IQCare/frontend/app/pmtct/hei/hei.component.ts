@@ -288,7 +288,7 @@ export class HeiComponent implements OnInit {
 
         this.heiService.getPatientById(this.patientId).subscribe(
             (result) => {
-                const { ptn_pk } = result;
+                const { ptn_pk, dateOfBirth } = result;
                 this.ptn_pk = ptn_pk;
             }
         );
@@ -590,7 +590,7 @@ export class HeiComponent implements OnInit {
             LabTestId: 0,
             UserId: this.userId,
             LabTestResults: [],
-            DateResultsCollected: new Date()
+            DateResultsCollected: moment(new Date()).utc(true).toDate()
         };
 
         const heiLabTestsTypes: any = {
@@ -693,8 +693,8 @@ export class HeiComponent implements OnInit {
 
                         for (let i = 0; i < this.hivTestingFormGroup.length; i++) {
                             for (let j = 0; j < this.hivTestingFormGroup[i].length; j++) {
-                                completeLabOrderCommand.DateResultsCollected =
-                                    this.hivTestingFormGroup[i][j]['dateresultscollected'];
+                                completeLabOrderCommand.DateResultsCollected = 
+                                    moment(this.hivTestingFormGroup[i][j]['dateresultscollected']).utc(true).toDate();
                                 if (
                                     this.hivTestingFormGroup[i][j]['testtype']['itemName'] == '1st DNA PCR'
                                     || this.hivTestingFormGroup[i][j]['testtype']['itemName'] == '2nd DNA PCR'

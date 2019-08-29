@@ -8,7 +8,7 @@ namespace IQCare.Pharm.Infrastructure.Repository
     public class PharmRepository<TEntity>: GenericRepository<TEntity>,IPharmRepository<TEntity> where TEntity: class
     {
 
-        public PharmRepository(PharmDbContext pharmDbContext)
+        public PharmRepository(PharmDbContext pharmDbContext) : base(pharmDbContext)
         {
 
         }

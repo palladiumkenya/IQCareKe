@@ -23,8 +23,7 @@
                 <div class="col-md-4 col-xs-12 col-sm-6">
                     <mat-form-field class="col-md-12">
                         <input [max]="maxDate" formControlName="dateGiven" id="dateGiven" matInput
-                            [matDatepicker]="dateGiven" placeholder="Date Given"
-                            (dateChange)="onGivenDateChange($event)">
+                            [matDatepicker]="dateGiven" placeholder="Date Given">
                         <mat-datepicker-toggle matSuffix [for]="dateGiven"></mat-datepicker-toggle>
                         <mat-datepicker #dateGiven></mat-datepicker>
                     </mat-form-field>

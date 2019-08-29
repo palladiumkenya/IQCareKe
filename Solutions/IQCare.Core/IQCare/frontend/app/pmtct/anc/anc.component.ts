@@ -290,6 +290,7 @@ export class AncComponent implements OnInit, OnDestroy {
     onHivStatusNotify(formGroup: Object): void {
         this.HivStatusMatFormGroup.push(formGroup['form']); // = formGroup['form'];
         this.hiv_status_table_data.push(formGroup['table_data']);
+        console.log(this.hiv_status_table_data);
     }
 
     onClientMonitoringNotify(formGroup: FormGroup): void {
@@ -308,21 +309,6 @@ export class AncComponent implements OnInit, OnDestroy {
 
     onReferralNotify(formGroup: FormGroup): void {
         this.ReferralMatFormGroup.push(formGroup);
-    }
-
-    validateHaartProphylaxisMatFormGroup(stepper: MatStepper) {
-        this.dataservice.currentHivStatus.subscribe(hivStatus => {
-            if (hivStatus !== '' && hivStatus != 'Positive') {
-                stepper.next();
-            } else {
-                if (this.HaartProphylaxisMatFormGroup.valid) {
-                    stepper.next();
-                } else {
-                    return;
-                }
-            }
-        });
-
     }
 
     public getPatientPregnancy(patientId: number) {
@@ -376,7 +362,6 @@ export class AncComponent implements OnInit, OnDestroy {
         if (!this.isEdit) {
             if (this.preventiServicesData.length < 1) {
                 this.snotifyService.error('Add preventive service data', 'ANC', this.notificationService.getConfig());
-
             } else {
                 stepper.next();
             }
@@ -500,6 +485,7 @@ export class AncComponent implements OnInit, OnDestroy {
         const noOption = this.yesNoOptions.filter(obj => obj.itemName == 'No');
         const naOption = this.yesNoNaOptions.filter(obj => obj.itemName == 'N/A');
 
+        console.log(this.hiv_status_table_data);
         const hivStatusCommand: HivStatusCommand = {
             PersonId: this.personId,
             ProviderId: this.userId,
@@ -522,7 +508,8 @@ export class AncComponent implements OnInit, OnDestroy {
             ServiceAreaId: this.serviceAreaId,
             EncounterTypeId: 1,
             EncounterDate: this.visitDetailsFormGroup.value[0]['visitDate'],
-            EncounterType: this.HivStatusMatFormGroup.value[0]['testType']
+            EncounterType: this.HivStatusMatFormGroup.value[0]['testType'],
+            HivCounsellingDone: yesOption[0].itemId
         };
 
         const hivTestsCommand: HivTestsCommand = {
@@ -719,10 +706,7 @@ export class AncComponent implements OnInit, OnDestroy {
                 AppointmentReason: 'None'
             } as PatientAppointment;
         }
-
-
-        // const AncPregnancy = this.ancService.savePregnancy(pregnancyCommand);
-        // const ancVisitDetails = this.ancService.saveANCVisitDetails(ancVisitDetailsCommand);
+        
         const visitDetails = this.ancService.saveVisitDetails(visitDetailsCommand);
         const baseline = this.ancService.SaveBaselineProfile(baselineAncCommand);
         const ancEducation = this.ancService.savePatientEducation(patientEducationCommand);

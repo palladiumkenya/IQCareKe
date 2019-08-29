@@ -97,11 +97,14 @@ export class BirthInfoGridComponent implements OnInit {
         if (!data) {
           return;
         }
-          console.log(data);
+        
+        this.getDeliveredBabyInfo(this.PatientMasterVisitId);
       });
 
    }
-
-  
-
+   
+   public deleteBaby(element) {
+      this.babyData = this.babyData.filter(obj => obj['notificationNo'] != element['notificationNo']);
+       this.dataSource = new MatTableDataSource(this.babyData);
+   }
 }

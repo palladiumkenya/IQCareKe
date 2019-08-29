@@ -398,7 +398,8 @@ export class PncComponent implements OnInit {
             ServiceAreaId: this.serviceAreaId,
             EncounterTypeId: 1,
             EncounterDate: moment(this.visitDetailsFormGroup.value[0]['visitDate']).toDate(),
-            EncounterType: this.hivStatusFormGroup.value[0]['testType']
+            EncounterType: this.hivStatusFormGroup.value[0]['testType'],
+            HivCounsellingDone: yesOption[0].itemId
         };
 
         const hivTestsCommand: HivTestsCommand = {
@@ -771,7 +772,8 @@ export class PncComponent implements OnInit {
             ServiceAreaId: this.serviceAreaId,
             EncounterTypeId: 1,
             EncounterDate: moment(this.visitDetailsFormGroup.value[0]['visitDate']).toDate(),
-            EncounterType: this.hivStatusFormGroup.value[0]['testType']
+            EncounterType: this.hivStatusFormGroup.value[0]['testType'],
+            HivCounsellingDone: yesOption[0].itemId
         };
 
         const patientReferralEditCommand: PatientReferralEditCommand = {

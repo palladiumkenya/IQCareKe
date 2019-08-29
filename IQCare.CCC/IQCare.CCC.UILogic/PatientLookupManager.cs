@@ -4,6 +4,7 @@ using Entities.CCC.Lookup;
 using Interface.CCC.Lookup;
 using System;
 using System.Collections.Generic;
+using System.Data;
 
 namespace IQCare.CCC.UILogic
 {
@@ -212,6 +213,11 @@ namespace IQCare.CCC.UILogic
         public System.Data.DataTable GetDuplicatePatientRecords(bool matchFirstName, bool matchLastName, bool matchMiddleName, bool matchSex, bool matchEnrollmentNumber, bool matchDob, bool matchEnrollmentDate, bool matchARTStartDate, bool matchHIVDiagnosisDate)
         {
             return _patientLookupmanager.GetDuplicatePatientRecords(matchFirstName, matchLastName, matchMiddleName, matchSex, matchEnrollmentNumber, matchDob, matchEnrollmentDate, matchARTStartDate, matchHIVDiagnosisDate);
+        }
+
+        public DataTable GetPatientStatus(int ptn_pk)
+        {
+            return _patientLookupmanager.GetPatientStatus(ptn_pk);
         }
     }
 }
