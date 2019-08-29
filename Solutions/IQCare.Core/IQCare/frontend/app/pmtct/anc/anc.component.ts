@@ -904,6 +904,32 @@ export class AncComponent implements OnInit, OnDestroy {
             CounsellingTopics: this.counselling_data
         };
 
+        const yesno = this.yesNoOptions.filter(x => x.itemName == 'Yes');
+        const otherIllnessOption = this.HaartProphylaxisMatFormGroup.value[0]['otherIllness'];
+
+        if (otherIllnessOption == yesno[0]['itemId']) {
+            for (let z = 0; z < this.chronicIllnessData.length; z++) {
+
+                this.chronic_illness_data.push({
+                    Id: 0,
+                    PatientId: this.patientId,
+                    PatientMasterVisitId: this.patientMasterVisitId,
+                    ChronicIllness: this.chronicIllnessData[z]['chronicIllnessId'],
+                    Treatment: this.chronicIllnessData[z]['currentTreatment'],
+                    // Dose: this.chronicIllnessData[i]['dose'],
+                    Dose: 0,
+                    Duration: 0,
+                    DeleteFlag: false,
+                    OnsetDate: moment(this.chronicIllnessData[z]['onSetDate']).toDate(),
+                    Active: 0,
+                    CreateBy: this.userId
+                });
+            }
+        } else {
+            this.chronic_illness_data = [];
+        }
+
+
         const clientMonitoringCommandEdit: any = {
             PatientId: this.patientId,
             PatientMasterVisitId: this.patientMasterVisitId,

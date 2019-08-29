@@ -22,6 +22,7 @@ export class MotherProfileComponent implements OnInit {
     gestation: number;
     motherProfile: Subscription;
     visitDetails: Subscription;
+   
     @Input() patientId: number;
     @Input() visitDate: Date;
     @Output() notify: EventEmitter<FormGroup> = new EventEmitter<FormGroup>();
@@ -52,6 +53,7 @@ export class MotherProfileComponent implements OnInit {
 
         this.getPregnancyDetails(this.patientId);
         // this.getCurrentVisitDetails(this.patientId, 'ANC');
+
 
         this.notify.emit(this.motherProfileFormGroup);
     }

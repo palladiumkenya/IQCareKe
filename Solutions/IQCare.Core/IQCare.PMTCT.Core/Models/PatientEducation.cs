@@ -21,6 +21,7 @@ namespace IQCare.PMTCT.Core.Models
             Description = counsellingDone ? "N/A" : "Counselling not done";
             CreatedBy = createdBy;
             CreateDate = DateTime.Now;
+            
         }
 
         [Key]
@@ -31,6 +32,8 @@ namespace IQCare.PMTCT.Core.Models
         public DateTime ? CounsellingDate { get; set; }
         public string Description { get; set; }
         public int CreatedBy { get; set; }
+
+        public Boolean? DeleteFlag { get; set; }
         public DateTime CreateDate { get; set; }
         public virtual PatientMasterVisit PatientMasterVisit { get; set; }
         public virtual Patient Patient { get; set; }

@@ -33,6 +33,7 @@ export class HaartProphylaxisComponent implements OnInit, OnDestroy {
     public chronicIllnessOptions: any[] = [];
     public YesNoOptions: any[] = [];
 
+    chronicIllnessEditList: any[] = [];
     lookupItemView$: Subscription;
     drugAdministration$: Subscription;
     @Output() nextStep = new EventEmitter<HAARTProphylaxisEmitter>();
@@ -202,6 +203,14 @@ export class HaartProphylaxisComponent implements OnInit, OnDestroy {
                             currentTreatment: currentTreatment // ,
                             // dose: parseInt(this.HaartProphylaxisFormGroup.controls['dose'].value.toString(), 10)
                         });
+
+                        this.chronicIllnessEditList.push({
+                            chronicIllness: illness,
+                            chronicIllnessId: illnessId,
+                            onSetDate: onsetDates,
+                            currentTreatment: currentTreatment,
+                            Id: 0
+                        });
                     }
                 } else {
                     if (this.chronicIllness.filter(x => x.chronicIllness === illness).length > 0) {
@@ -212,6 +221,13 @@ export class HaartProphylaxisComponent implements OnInit, OnDestroy {
                             chronicIllnessId: illnessId,
                             onSetDate: onsetDates,
                             currentTreatment: currentTreatment
+                        });
+                        this.chronicIllnessEditList.push({
+                            chronicIllness: illness,
+                            chronicIllnessId: illnessId,
+                            onSetDate: onsetDates,
+                            currentTreatment: currentTreatment,
+                            Id: 0
                         });
                     }
                 }
@@ -229,7 +245,51 @@ export class HaartProphylaxisComponent implements OnInit, OnDestroy {
 
 
     public removeRow(idx) {
-        this.chronicIllness.splice(idx, 1);
+        //  this.chronicIllness.splice(idx, 1);
+
+        let Id: number;
+        if (this.chronicIllnessEditList.length > 0) {
+            Id = parseInt(this.chronicIllnessEditList[idx].Id, 10);
+            if (Id > 0) {
+                this.ancService.deletePatientChronicIllness(Id).subscribe(x => {
+                    if (x) {
+
+                        this.snotifyService.success('Successfully removed the patient chronic illness  ' + x['preventiveServiceId'],
+                            'Patient Chronic Illness', this.notificationService.getConfig());
+                        if (this.isEdit) {
+                            this.chronicIllnessEdit.splice(idx, 1);
+                        } else {
+                            this.chronicIllness.splice(idx, 1);
+                        }
+                        this.chronicIllnessEditList.splice(idx, 1);
+
+                    }
+                },
+                    (err) => {
+                        this.snotifyService.success('Error removing the patient chronic illness  ' + err,
+                            'Patient Chronic Illness', this.notificationService.getConfig());
+                    });
+
+            } else {
+                if (this.isEdit) {
+                    this.chronicIllnessEdit.splice(idx, 1);
+                } else {
+                    this.chronicIllness.splice(idx, 1);
+                }
+                this.chronicIllnessEditList.splice(idx, 1);
+            }
+
+        } else {
+            if (this.isEdit) {
+                this.chronicIllnessEdit.splice(idx, 1);
+            } else {
+                this.chronicIllness.splice(idx, 1);
+            }
+        }
+        // this.counselling_data.splice(idx, 1);
+
+
+
     }
 
     public onARVBeforeFirstANC(event) {
@@ -294,6 +354,15 @@ export class HaartProphylaxisComponent implements OnInit, OnDestroy {
                                 onSetDate: chronic[i]['onsetDate'],
                                 currentTreatment: chronic[i]['treatment'],
                                 dose: chronic[i]['dose']
+                            });
+
+                            this.chronicIllnessEditList.push({
+                                chronicIllness: chronic[i]['chronicIllness'],
+                                chronicIllnessId: chronic[i]['chronicIllnessId'],
+                                onSetDate: chronic[i]['onsetDate'],
+                                currentTreatment: chronic[i]['treatment'],
+                                dose: chronic[i]['dose'],
+                                Id: chronic[i]['id']
                             });
                         }
                         const yesno = this.yesnonaOptions.filter(x => x.itemName == 'Yes');

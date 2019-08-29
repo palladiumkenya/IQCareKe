@@ -322,6 +322,9 @@
     <None Remove="Scripts\2.2.0\33_MaternityRegister.sql" />
     <None Remove="Scripts\2.2.0\34_vwPartnerNotificationRegister.sql" />
     <None Remove="Scripts\2.2.0\35_PatientVitals.sql" />
+    <None Remove="Scripts\2.2.0\31_PatientCounsellingView.sql" />
+    <None Remove="Scripts\2.2.0\32_PatientPreventiveServiceView.sql" />
+    <None Remove="Scripts\2.2.0\33_PatientChronicillnessView.sql" />
     <None Remove="Scripts\2.2.0\IQTools\01_PatientPopulationView.sql" />
     <None Remove="Scripts\2.2.0\IQTools\02_HTS_LABRegisternewer.sql" />
     <None Remove="Scripts\2.2.0\IQTools\03_ANCRegister.sql" />
@@ -667,6 +670,9 @@
     <EmbeddedResource Include="Scripts\2.2.0\33_MaternityRegister.sql" />
     <EmbeddedResource Include="Scripts\2.2.0\34_vwPartnerNotificationRegister.sql" />
     <EmbeddedResource Include="Scripts\2.2.0\35_PatientVitals.sql" />
+    <EmbeddedResource Include="Scripts\2.2.0\31_PatientCounsellingView.sql" />
+    <EmbeddedResource Include="Scripts\2.2.0\32_PatientPreventiveServiceView.sql" />
+    <EmbeddedResource Include="Scripts\2.2.0\33_PatientChronicillnessView.sql" />
     <EmbeddedResource Include="Scripts\2.2.0\IQTools\01_PatientPopulationView.sql" />
     <EmbeddedResource Include="Scripts\2.2.0\IQTools\02_HTS_LABRegisternewer.sql" />
     <EmbeddedResource Include="Scripts\2.2.0\IQTools\03_ANCRegister.sql" />

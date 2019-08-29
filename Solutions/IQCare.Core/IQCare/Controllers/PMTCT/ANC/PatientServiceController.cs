@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -43,7 +43,24 @@ namespace IQCare.Controllers.PMTCT.ANC
             if (response.IsValid)
                 return Ok(response.Value);
             return BadRequest(response.Value);
+           
         }
+
+
+        [HttpPost]
+        public async Task<IActionResult> DeletePatientPreventiveService([FromBody] IQCare.PMTCT.BusinessProcess.Commands.PreventiveServices.DeletePatientPreventiveServiceCommand deletePatientPreventiveServiceCommand)
+        {
+            if (!ModelState.IsValid)
+                return BadRequest(deletePatientPreventiveServiceCommand);
+
+            var response = await _mediator.Send(deletePatientPreventiveServiceCommand, Request.HttpContext.RequestAborted);
+            if (response.IsValid)
+                return Ok(response.Value);
+            return BadRequest(response);
+
+        }
+
+
 
         // POST api/<controller>
         [HttpPost]
@@ -65,6 +82,9 @@ namespace IQCare.Controllers.PMTCT.ANC
             }
             return BadRequest(response);
         }
+
+        
+
 
 
         // PUT api/<controller>/5

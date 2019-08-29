@@ -8,8 +8,8 @@ namespace IQCare.PMTCT.BusinessProcess.Commands.PreventiveServices
 {
     public class DeletePatientPreventiveServiceCommand:IRequest<Result<DeletePreventiveServiceCommandResult>>
     {
-        public int PatientId { get; set; }
-        public int PreventiveSericeId { get; set; }
+        public int Id { get; set; }
+ 
     }
     public class DeletePreventiveServiceCommandResult
     {
