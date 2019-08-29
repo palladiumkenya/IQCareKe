@@ -1026,6 +1026,23 @@ export class AncComponent implements OnInit, OnDestroy {
             appointment = pncAppointmentEdit;
         }
 
+        for (let z = 0; z < this.chronicIllnessData.length; z++) {
+            this.chronic_illness_data.push({
+                Id: 0,
+                PatientId: this.patientId,
+                PatientMasterVisitId: this.patientMasterVisitId,
+                ChronicIllness: this.chronicIllnessData[z]['chronicIllnessId'],
+                Treatment: this.chronicIllnessData[z]['currentTreatment'],
+                Dose: 0,
+                Duration: 0,
+                DeleteFlag: false,
+                OnsetDate: moment(this.chronicIllnessData[z]['onSetDate']).toDate(),
+                Active: 0,
+                CreateBy: this.userId
+            });
+        }
+
+        const chronicIllness = this.ancService.savePatientChronicIllness(this.chronic_illness_data);
         const AncvisitDetailsEdit = this.ancService.EditANCVisitDetails(ancVisitDetailsCommandEdit);
         const visitDetailsEdit = this.ancService.EditVisitDetails(VisitDetails);
         const baselineEdit = this.ancService.EditBaselineProfile(baselineAncCommandEdit);
@@ -1042,8 +1059,8 @@ export class AncComponent implements OnInit, OnDestroy {
             ancEducation,
             ancClientMonitoringEdit,
             appointment,
-            referralEdit
-
+            referralEdit,
+            chronicIllness
         ]).subscribe(
             (result) => {
                 this.spinner.hide();

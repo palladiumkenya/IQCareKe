@@ -66,6 +66,12 @@ export class ClientMonitoringComponent implements OnInit, OnDestroy {
             if (this.hiv_status !== '' && this.hiv_status !== 'Positive') {
                 this.clientMonitoringFormGroup.get('WhoStage').disable({ onlySelf: true });
                 this.clientMonitoringFormGroup.get('viralLoadSampleTaken').disable({ onlySelf: true });
+
+                this.clientMonitoringFormGroup.get('WhoStage').clearValidators();
+                this.clientMonitoringFormGroup.get('WhoStage').updateValueAndValidity();
+
+                this.clientMonitoringFormGroup.get('viralLoadSampleTaken').clearValidators();
+                this.clientMonitoringFormGroup.get('viralLoadSampleTaken').updateValueAndValidity();
             } else {
                 this.clientMonitoringFormGroup.get('WhoStage').enable({ onlySelf: false });
                 this.clientMonitoringFormGroup.get('viralLoadSampleTaken').enable({ onlySelf: false });

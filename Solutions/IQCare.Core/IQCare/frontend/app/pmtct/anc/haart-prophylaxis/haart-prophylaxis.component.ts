@@ -115,6 +115,22 @@ export class HaartProphylaxisComponent implements OnInit, OnDestroy {
                 this.HaartProphylaxisFormGroup.get('cotrimoxazole').disable({ onlySelf: true });
                 this.HaartProphylaxisFormGroup.get('aztFortheBaby').disable({ onlySelf: true });
                 this.HaartProphylaxisFormGroup.get('nvpForBaby').disable({ onlySelf: true });
+
+                this.HaartProphylaxisFormGroup.get('onArvBeforeANCVisit').clearValidators();
+                this.HaartProphylaxisFormGroup.get('onArvBeforeANCVisit').updateValueAndValidity();
+
+                this.HaartProphylaxisFormGroup.get('startedHaartANC').clearValidators();
+                this.HaartProphylaxisFormGroup.get('startedHaartANC').updateValueAndValidity();
+
+                this.HaartProphylaxisFormGroup.get('cotrimoxazole').clearValidators();
+                this.HaartProphylaxisFormGroup.get('cotrimoxazole').updateValueAndValidity();
+
+                this.HaartProphylaxisFormGroup.get('aztFortheBaby').clearValidators();
+                this.HaartProphylaxisFormGroup.get('aztFortheBaby').updateValueAndValidity();
+
+                this.HaartProphylaxisFormGroup.get('nvpForBaby').clearValidators();
+                this.HaartProphylaxisFormGroup.get('nvpForBaby').updateValueAndValidity();
+                
             } else if (this.hiv_status == 'Positive') {
                 this.HaartProphylaxisFormGroup.get('onArvBeforeANCVisit').enable({ onlySelf: true });
                 this.HaartProphylaxisFormGroup.get('startedHaartANC').enable({ onlySelf: true });
