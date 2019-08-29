@@ -122,6 +122,19 @@ export class AncService {
             );
     }
 
+    public deletePatientCounselling(id: number): Observable<any> {
+
+        const Indata = {
+            'Id': id
+        };
+        return this.http.post<any>(this.API_URL + '/api/PatientEducationExamination/DeletePatientCounselling', JSON.stringify(Indata),
+            httpOptions).pipe(
+                tap(deletePatientCounselling => this.errorHandler.log('Successfully deleted patient education')),
+                catchError(this.errorHandler.handleError<any>('Error in delete Patient Education'))
+            );
+
+    }
+
 
     public saveClientMonitoring(clientMonitoringCommand: ClientMonitoringCommand): Observable<ClientMonitoringCommand> {
         return this.http.post<any>(this.API_URL + '' + this._url_cm, JSON.stringify(clientMonitoringCommand), httpOptions).pipe(
@@ -143,6 +156,18 @@ export class AncService {
             tap(saveHaartProphylaxis => this.errorHandler.log('Successfully saved Haart Prophylaxis')),
             catchError(this.errorHandler.handleError<any>('Error in saving Haart Prophylaxis'))
         );
+    }
+
+    public deletePatientChronicIllness(id: number): Observable<any> {
+        const Indata = {
+            'Id': id
+        };
+
+        return this.http.post<any>(this.API_URL + '/api/PatientChronicIllness/Delete', JSON.stringify(Indata), httpOptions).pipe(
+            tap(deletePatientChronicIllness => this.errorHandler.log('Successfully deleted chronic illness')),
+            catchError(this.errorHandler.handleError<any>('Error in deleting Patient Chronic Illness'))
+        );
+
     }
 
     public savePatientChronicIllness(chronicIllnessCommand: any[]): Observable<any> {
@@ -218,6 +243,20 @@ export class AncService {
         );
     }
 
+
+
+    public deletePreventiveServices(id: number): Observable<any> {
+        const Indata = {
+            'Id': id
+        };
+
+        return this.http.post<any>(this.API_URL + '/api/PatientService/DeletePatientPreventiveService'
+            , JSON.stringify(Indata), httpOptions).pipe(
+                tap(deletePreventiveServices => this.errorHandler.log('Successfully delete Preventive Services')),
+                catchError(this.errorHandler.handleError<any>('Error in deleting Preventive Services'))
+            );
+    }
+
     public saveAncHivStatus(hivStatusCommand: HivStatusCommand, anyTests: any[]): Observable<any> {
         if (anyTests.length == 0) {
             return of([]);
@@ -259,6 +298,8 @@ export class AncService {
                 catchError(this.errorHandler.handleError<any[]>('getPatientCounselingInfoAll'))
             );
     }
+
+
 
     public getPatientPhysicalExaminationInfo(patientId: number, patientMasterVisitId: number) {
         return this.http.get<any[]>(this.API_URL + '/api/PhysicalExamination/GetPhysicalExam/' +

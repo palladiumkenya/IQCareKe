@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -26,7 +26,7 @@ namespace IQCare.Controllers.PMTCT.ANC
         [HttpGet("{patientId}")]
         public async Task<ActionResult> GetPatientCounsellingAll(int patientId)
         {
-            var response = await _mediator.Send(new GetPatientCounsellingAllCommand {PatientId = patientId});
+            var response = await _mediator.Send(new GetPatientCounsellingAllCommand { PatientId = patientId });
             if (response.IsValid)
                 return Ok(response.Value);
             return BadRequest(response);
@@ -35,7 +35,7 @@ namespace IQCare.Controllers.PMTCT.ANC
         [HttpGet("{patientId}/{patientMasterVisitId}")]
         public async Task<IActionResult> GetPatientEducation(int patientId, int patientMasterVisitId)
         {
-            var response= await _mediator.Send(new GetPatientEducationCommand { PatientMasterVisitId = patientMasterVisitId, PatientId = patientId }, HttpContext.RequestAborted);
+            var response = await _mediator.Send(new GetPatientEducationCommand { PatientMasterVisitId = patientMasterVisitId, PatientId = patientId }, HttpContext.RequestAborted);
             if (response.IsValid)
                 return Ok(response.Value);
             return BadRequest(response);
@@ -45,7 +45,7 @@ namespace IQCare.Controllers.PMTCT.ANC
         public async Task<IActionResult> GetPatientCounseling(int patientId, int patientMasterVisitId)
         {
             var response =
-                await _mediator.Send(new GetPatientCounselingViewCommand { PatientId = patientId, PatientMasterVisitId = patientMasterVisitId},
+                await _mediator.Send(new GetPatientCounselingViewCommand { PatientId = patientId, PatientMasterVisitId = patientMasterVisitId },
                     HttpContext.RequestAborted);
             if (response.IsValid)
                 return Ok(response.Value);
@@ -67,7 +67,7 @@ namespace IQCare.Controllers.PMTCT.ANC
 
 
         [HttpPost]
-        public  async Task<object> AddPatientCounsellingInfo([FromBody] AddPatientEducationCommand command)
+        public async Task<object> AddPatientCounsellingInfo([FromBody] AddPatientEducationCommand command)
         {
             if (!ModelState.IsValid)
                 return BadRequest(command);
@@ -90,5 +90,20 @@ namespace IQCare.Controllers.PMTCT.ANC
                 return Ok(response.Value);
             return BadRequest(response);
         }
+
+
+        [HttpPost]
+        public async Task<IActionResult> DeletePatientCounselling([FromBody] DeletePatientEducationCommand deletePatientEducationCommand)
+        {
+            if (!ModelState.IsValid)
+                return BadRequest(deletePatientEducationCommand);
+
+            var response = await _mediator.Send(deletePatientEducationCommand, Request.HttpContext.RequestAborted);
+            if (response.IsValid)
+                return Ok(response.Value);
+            return BadRequest(response);
+
+        }
     }
+
 }

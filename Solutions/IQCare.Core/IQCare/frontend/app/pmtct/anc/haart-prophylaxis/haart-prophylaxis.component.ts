@@ -33,6 +33,7 @@ export class HaartProphylaxisComponent implements OnInit, OnDestroy {
     public chronicIllnessOptions: any[] = [];
     public YesNoOptions: any[] = [];
 
+    chronicIllnessEditList: any[] = [];
     lookupItemView$: Subscription;
     drugAdministration$: Subscription;
     @Output() nextStep = new EventEmitter<HAARTProphylaxisEmitter>();
@@ -153,23 +154,25 @@ export class HaartProphylaxisComponent implements OnInit, OnDestroy {
 
 
     public moveNextStep() {
-        for (let i = 0; i < this.chronicIllness.length; i++) {
-            this.patientchronicIllnessData.push(
-                {
-                    Id: 0,
-                    PatientId: parseInt(this.patientId.toString(), 10),
-                    PatientMasterVisitId: parseInt(this.patientMasterVisitId.toString(), 10),
-                    ChronicIllness: this.chronicIllness[i]['chronicIllnessId'],
-                    Treatment: this.chronicIllness[i]['currentTreatment'],
-                    //  Dose: parseInt(this.chronicIllness[i]['dose'].toString(), 10),
-                    DeleteFlag: false,
-                    OnsetDate: this.chronicIllness[i]['onSetDate'],
-                    Active: 0,
-                    CreateBy: this.userId
-                });
-        }
+      
+            for (let i = 0; i < this.chronicIllness.length; i++) {
+                this.patientchronicIllnessData.push(
+                    {
+                        Id: 0,
+                        PatientId: parseInt(this.patientId.toString(), 10),
+                        PatientMasterVisitId: parseInt(this.patientMasterVisitId.toString(), 10),
+                        ChronicIllness: this.chronicIllness[i]['chronicIllnessId'],
+                        Treatment: this.chronicIllness[i]['currentTreatment'],
+                        //  Dose: parseInt(this.chronicIllness[i]['dose'].toString(), 10),
+                        DeleteFlag: false,
+                        OnsetDate: this.chronicIllness[i]['onSetDate'],
+                        Active: 0,
+                        CreateBy: this.userId
+                    });
+            }
+        
 
-
+        
         this.HaartProphylaxisData = {
             onArvBeforeANCVisit: parseInt(this.HaartProphylaxisFormGroup.controls['onArvBeforeANCVisit'].value, 10),
             startedHaartANC: parseInt(this.HaartProphylaxisFormGroup.controls['startedHaartANC'].value, 10),
@@ -235,6 +238,14 @@ export class HaartProphylaxisComponent implements OnInit, OnDestroy {
                             currentTreatment: currentTreatment // ,
                             // dose: parseInt(this.HaartProphylaxisFormGroup.controls['dose'].value.toString(), 10)
                         });
+
+                        this.chronicIllnessEditList.push({
+                            chronicIllness: illness,
+                            chronicIllnessId: illnessId,
+                            onSetDate: onsetDates,
+                            currentTreatment: currentTreatment,
+                            Id: 0
+                        });
                     }
                 } else {
                     if (this.chronicIllness.filter(x => x.chronicIllness === illness).length > 0) {
@@ -248,6 +259,13 @@ export class HaartProphylaxisComponent implements OnInit, OnDestroy {
                             // onSetDate: this.HaartProphylaxisFormGroup.controls['onSetDate'].value,
                             //currentTreatment: this.HaartProphylaxisFormGroup.controls['currentTreatment'].value // ,
                             // dose: parseInt(this.HaartProphylaxisFormGroup.controls['dose'].value.toString(), 10)
+                        });
+                        this.chronicIllnessEditList.push({
+                            chronicIllness: illness,
+                            chronicIllnessId: illnessId,
+                            onSetDate: onsetDates,
+                            currentTreatment: currentTreatment,
+                            Id: 0
                         });
                     }
                 }
@@ -277,7 +295,51 @@ export class HaartProphylaxisComponent implements OnInit, OnDestroy {
 
 
     public removeRow(idx) {
-        this.chronicIllness.splice(idx, 1);
+        //  this.chronicIllness.splice(idx, 1);
+
+        let Id: number;
+        if (this.chronicIllnessEditList.length > 0) {
+            Id = parseInt(this.chronicIllnessEditList[idx].Id, 10);
+            if (Id > 0) {
+                this.ancService.deletePatientChronicIllness(Id).subscribe(x => {
+                    if (x) {
+
+                        this.snotifyService.success('Successfully removed the patient chronic illness  ' + x['preventiveServiceId'],
+                            'Patient Chronic Illness', this.notificationService.getConfig());
+                        if (this.isEdit) {
+                            this.chronicIllnessEdit.splice(idx, 1);
+                        } else {
+                            this.chronicIllness.splice(idx, 1);
+                        }
+                        this.chronicIllnessEditList.splice(idx, 1);
+
+                    }
+                },
+                    (err) => {
+                        this.snotifyService.success('Error removing the patient chronic illness  ' + err,
+                            'Patient Chronic Illness', this.notificationService.getConfig());
+                    });
+
+            } else {
+                if (this.isEdit) {
+                    this.chronicIllnessEdit.splice(idx, 1);
+                } else {
+                    this.chronicIllness.splice(idx, 1);
+                }
+                this.chronicIllnessEditList.splice(idx, 1);
+            }
+
+        } else {
+            if (this.isEdit) {
+                this.chronicIllnessEdit.splice(idx, 1);
+            } else {
+                this.chronicIllness.splice(idx, 1);
+            }
+        }
+        // this.counselling_data.splice(idx, 1);
+
+
+
     }
 
     public onARVBeforeFirstANC(event) {
@@ -342,6 +404,15 @@ export class HaartProphylaxisComponent implements OnInit, OnDestroy {
                                 onSetDate: chronic[i]['onsetDate'],
                                 currentTreatment: chronic[i]['treatment'],
                                 dose: chronic[i]['dose']
+                            });
+
+                            this.chronicIllnessEditList.push({
+                                chronicIllness: chronic[i]['chronicIllness'],
+                                chronicIllnessId: chronic[i]['chronicIllnessId'],
+                                onSetDate: chronic[i]['onsetDate'],
+                                currentTreatment: chronic[i]['treatment'],
+                                dose: chronic[i]['dose'],
+                                Id: chronic[i]['id']
                             });
                         }
 

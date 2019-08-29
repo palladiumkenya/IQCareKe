@@ -19,4 +19,3 @@ FROM
 	  where (DeleteFlag is null or DeleteFlag = 0)
 GO
 
-

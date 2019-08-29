@@ -20,5 +20,3 @@ SELECT
 FROM    dbo.PatientPreventiveServices p
 WHERE DeleteFlag  <> 1
 GO
-
-

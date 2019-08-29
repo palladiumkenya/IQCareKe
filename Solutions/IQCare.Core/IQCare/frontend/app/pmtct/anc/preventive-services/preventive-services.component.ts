@@ -28,6 +28,7 @@ export class PreventiveServicesComponent implements OnInit, OnDestroy {
     public PreventiveServicesFormGroup: FormGroup;
     lookupItemView$: Subscription;
     preventiveServicesOptions: any[] = [];
+    ServicesDataEditList: any[] = [];
     public YesNoOptions: any[] = [];
     public YesNoNaOptions: any[] = [];
     public FinalResultOptions: any[] = [];
@@ -40,7 +41,7 @@ export class PreventiveServicesComponent implements OnInit, OnDestroy {
     @Input() preventiveServices: PreventiveServiceEmitter;
     @Input() serviceFormOptions: any[] = [];
     @Input('isEdit') isEdit: boolean;
-    @Input('visitDate')VisitDate: Date;
+    @Input('visitDate') VisitDate: Date;
     @Input('patientId') patientId: number;
     @Input('patientMasterVisitId') patientMasterVisitId: number;
     @Output() notify: EventEmitter<Object> = new EventEmitter<Object>();
@@ -71,8 +72,8 @@ export class PreventiveServicesComponent implements OnInit, OnDestroy {
             finalHIVResult: ['', Validators.required]
         });
 
-        this.maxDate= moment(this.VisitDate).toDate();
-        this.minDate=moment(this.VisitDate).toDate();
+        this.maxDate = moment(this.VisitDate).toDate();
+        this.minDate = moment(this.VisitDate).toDate();
         /*this.dataService.visitDate.subscribe(date => {
 
             this.maxDate = date;
@@ -142,8 +143,8 @@ export class PreventiveServicesComponent implements OnInit, OnDestroy {
         resultsDialogConfig.data = {
             isEdit: this.isEdit,
             preventiveServicesOptions: this.preventiveServicesOptions,
-            maxDate:  this.maxDate,
-            minDate:this.minDate
+            maxDate: this.maxDate,
+            minDate: this.minDate
         };
 
         const dialogRef = this.dialog.open(PatientPreventiveServiceComponent, resultsDialogConfig);
@@ -177,6 +178,15 @@ export class PreventiveServicesComponent implements OnInit, OnDestroy {
                             nextSchedule: (data.nextSchedule === '') ?
                                 '1900-01-01T00:00:00' : data.nextSchedule
                         });
+
+                        this.ServicesDataEditList.push({
+                            preventiveService: service,
+                            preventiveServiceId: serviceId,
+                            dateGiven: dateGivens,
+                            comments: data.comments,
+                            nextSchedule: data.nextSchedule,
+                            Id: 0
+                        });
                     }
                 } else {
                     if (this.serviceData.filter(x => x.preventiveService === service).length > 0) {
@@ -188,6 +198,15 @@ export class PreventiveServicesComponent implements OnInit, OnDestroy {
                             dateGiven: dateGivens,
                             comments: data.comments,
                             nextSchedule: data.nextSchedule
+                        });
+
+                        this.ServicesDataEditList.push({
+                            preventiveService: service,
+                            preventiveServiceId: serviceId,
+                            dateGiven: dateGivens,
+                            comments: data.comments,
+                            nextSchedule: data.nextSchedule,
+                            Id: 0
                         });
                     }
                 }
@@ -219,14 +238,63 @@ export class PreventiveServicesComponent implements OnInit, OnDestroy {
     }
 
     public removeRow(idx) {
-        this.serviceData.splice(idx, 1);
+
+        let Id: number;
+        if(this.ServicesDataEditList.length > 0) 
+        {
+        Id = parseInt(this.ServicesDataEditList[idx].Id, 10);
+        if (Id > 0) {
+            this.ancService.deletePreventiveServices(Id).subscribe(x => {
+                if (x) {
+
+                    this.snotifyService.success('Successfully removed the preventive services  ' + x['preventiveServiceId']  ,
+                        'Patient Preventive Services', this.notificationService.getConfig());
+                    if (this.isEdit) {
+                        this.serviceDataEdit.splice(idx,1);
+                    } else {
+                    this.serviceData.splice(idx, 1);
+                    }
+                    this.ServicesDataEditList.splice(idx, 1);
+                }
+            },
+                (err) => {
+                    this.snotifyService.success('Error removing the preventive services  ' + err,
+                        'Patient Preventive Services', this.notificationService.getConfig());
+                });
+
+        } else {
+            if (this.isEdit) {
+                this.serviceDataEdit.splice(idx,1);
+            } else {
+            this.serviceData.splice(idx, 1);
+            }
+            this.ServicesDataEditList.splice(idx, 1);
+        }
+
     }
+     else {
+        if (this.isEdit) {
+            this.serviceDataEdit.splice(idx,1);
+        } else {
+        this.serviceData.splice(idx, 1);
+        }
+     }
+        // this.counselling_data.splice(idx, 1);
+
+
+        // this.serviceData.splice(idx, 1);
+        //this.ServicesDataEdit.splice(idx,1);
+
+    }
+
+
 
     public getPatientPreventiveServiceInfoAll(patientId: number) {
         this.preventiveService$ = this.ancService.getPatientPreventiveServiceInfo(patientId)
             .subscribe(
                 p => {
 
+                    this.ServicesDataEditList = [];
                     const service = p;
                     if (service.length > 0) {
                         for (let i = 0; i < service.length; i++) {
@@ -236,6 +304,15 @@ export class PreventiveServicesComponent implements OnInit, OnDestroy {
                                 dateGiven: service[i]['preventiveServiceDate'],
                                 comments: service[i]['description'],
                                 nextSchedule: service[i]['nextSchedule'],
+                            });
+
+                            this.ServicesDataEditList.push({
+                                preventiveService: service[i]['preventiveService'],
+                                preventiveServiceId: service[i]['preventiveServiceId'],
+                                dateGiven: service[i]['preventiveServiceDate'],
+                                comments: service[i]['description'],
+                                nextSchedule: service[i]['nextSchedule'],
+                                Id: service[i]['id']
                             });
                         }
                     }

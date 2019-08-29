@@ -13,7 +13,7 @@ import { AncService } from '../../_services/anc.service';
 import { DataService } from '../../../shared/_services/data.service';
 import { MatDialogConfig, MatDialog } from '@angular/material';
 import { PatientCounsellingComponent } from '../patient-counselling/patient-counselling.component'
-import {LookupItemView} from '../../../shared/_models/LookupItemView';
+import { LookupItemView } from '../../../shared/_models/LookupItemView';
 
 export interface PeriodicElement {
     topicId: number;
@@ -40,7 +40,7 @@ export class PatientEducationExaminationComponent implements OnInit, OnDestroy {
     public yesnos: any[] = [];
     public testResults: any[] = [];
     public userId: number;
-    public maxDate: Date ;
+    public maxDate: Date;
 
     public patientCounseling$: Subscription;
     public baseline$: Subscription;
@@ -52,6 +52,7 @@ export class PatientEducationExaminationComponent implements OnInit, OnDestroy {
     public syphilisResultsOptions: LookupItemView[] = [];
     public syphilisTestTypes: LookupItemView[] = [];
 
+    public counselling_editlist: any[] = [];
     public counselling_data: CounsellingTopicsEmitters[] = [];
     public counseling_db_data: CounsellingTopicsEmitters[] = [];
     @Output() nextStep = new EventEmitter<PatientEducationEmitter>();
@@ -61,7 +62,7 @@ export class PatientEducationExaminationComponent implements OnInit, OnDestroy {
     @Input('isEdit') isEdit: boolean;
     @Input('PatientId') PatientId: number;
     @Input('PatientMasterVisitId') PatientMasterVisitId: number;
-   
+
 
     displayedColumns: string[] = ['topicId', 'topic', 'onSetDate'];
     dataSource = ELEMENT_DATA;
@@ -89,7 +90,7 @@ export class PatientEducationExaminationComponent implements OnInit, OnDestroy {
             SyphilisTestUsed: ['', Validators.required],
             SyphilisResults: ['', Validators.required]
         });
-        
+
         this.userId = JSON.parse(localStorage.getItem('appUserId'));
 
         const {
@@ -111,13 +112,13 @@ export class PatientEducationExaminationComponent implements OnInit, OnDestroy {
         } else {
             this.getPatientCounselingDataAll(this.PatientId);
         }
-        
+
         this.lookupservice.getByGroupName('SyphilisResults').subscribe(
             res => {
                 this.syphilisResultsOptions = res['lookupItems'];
             },
             error => {
-                
+
             }
         );
         this.lookupservice.getByGroupName('SyphilisTestType').subscribe(
@@ -125,11 +126,11 @@ export class PatientEducationExaminationComponent implements OnInit, OnDestroy {
                 this.syphilisTestTypes = res['lookupItems'];
             },
             error => {
-                
+
             }
         );
     }
-    
+
     public onTestedForSyphilisSelection(event) {
         if (event.isUserInput && event.source.selected && event.source.viewValue == 'Yes') {
             this.PatientEducationFormGroup.get('SyphilisTestUsed').enable({ onlySelf: true });
@@ -167,7 +168,7 @@ export class PatientEducationExaminationComponent implements OnInit, OnDestroy {
         resultsDialogConfig.data = {
             isEdit: this.isEdit,
             counsellingOptions: this.counsellingOptions,
-            maxDate:this.maxDate
+            maxDate: this.maxDate
         };
 
         const dialogRef = this.dialog.open(PatientCounsellingComponent, resultsDialogConfig);
@@ -179,7 +180,7 @@ export class PatientEducationExaminationComponent implements OnInit, OnDestroy {
                 }
                 const topic = data.counselledOn.itemName;
                 const topicId = data.counselledOn.itemId;
-                
+
                 const counsellingDates = data.counsellingDate;
 
                 if (topic === '' ||
@@ -189,10 +190,10 @@ export class PatientEducationExaminationComponent implements OnInit, OnDestroy {
                 }
 
 
-                if (this.counselling_data.filter(x => x.counsellingTopic === topic 
+                if (this.counselling_data.filter(x => x.counsellingTopic === topic
                     && moment(x.CounsellingDate).format('DD-MM-YYYY') === moment(counsellingDates).format('DD-MM-YYYY'))
                     .length > 0) {
-                    this.snotifyService.warning('' + topic + ' exists at the same day', 'Counselling', 
+                    this.snotifyService.warning('' + topic + ' exists at the same day', 'Counselling',
                         this.notificationService.getConfig());
                 } else {
                     this.counselling_data.push({
@@ -201,6 +202,15 @@ export class PatientEducationExaminationComponent implements OnInit, OnDestroy {
                         counsellingTopicId: topicId,
                         description: 'n/a',
                         CounsellingDate: counsellingDates
+
+                    });
+                    this.counselling_editlist.push({
+                        counselledOn: parseInt(topicId, 10),
+                        counsellingTopic: topic,
+                        counsellingTopicId: topicId,
+                        description: 'n/a',
+                        CounsellingDate: counsellingDates,
+                        Id: 0
                     });
                 }
 
@@ -209,7 +219,42 @@ export class PatientEducationExaminationComponent implements OnInit, OnDestroy {
     }
 
     public removeRow(idx) {
-        this.counselling_data.splice(idx, 1);
+
+
+        let Id: number;
+        
+       if (this.counselling_editlist.length > 0){
+            Id = parseInt(this.counselling_editlist[idx].Id, 10);
+
+
+            if (Id > 0) {
+                this.ancService.deletePatientCounselling(Id).subscribe(x => {
+                    if (x) {
+                        console.log(x);
+                        console.log(x['patientCounsellingId']);
+                        this.snotifyService.success('Successfully removed the counselled topic ',
+                            'Patient Counselled Topic', this.notificationService.getConfig());
+                        this.counselling_data.splice(idx, 1);
+                        this.counselling_editlist.splice(idx, 1);
+                    }
+                },
+                    (err) => {
+                        this.snotifyService.success('Error removing the counselled topic' + err,
+                            'Patient Counselled Topic', this.notificationService.getConfig());
+                    });
+
+            } else {
+                this.counselling_data.splice(idx, 1);
+                this.counselling_editlist.splice(idx, 1);
+            }
+        } else {
+            this.counselling_data.splice(idx, 1);
+        }
+
+        // this.counselling_data.splice(idx, 1);
+        console.log(this.counselling_editlist);
+        console.log (this.counselling_data);
+
     }
 
     public getPatientCounselingDataAll(patientId: number): void {
@@ -224,6 +269,15 @@ export class PatientEducationExaminationComponent implements OnInit, OnDestroy {
                                 counsellingTopicId: p['counsellingTopicId'],
                                 description: p[i]['description'],
                                 CounsellingDate: p[i]['counsellingDate']
+                            });
+
+                            this.counselling_editlist.push({
+                                counselledOn: p[i]['counsellingTopicId'],
+                                counsellingTopic: p[i]['counsellingTopic'],
+                                counsellingTopicId: p['counsellingTopicId'],
+                                description: p[i]['description'],
+                                CounsellingDate: p[i]['counsellingDate'],
+                                Id: p[i]['id']
                             });
                         }
                     }
