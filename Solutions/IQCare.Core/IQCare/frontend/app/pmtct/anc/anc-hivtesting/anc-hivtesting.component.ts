@@ -10,11 +10,13 @@ import { PncService } from '../../_services/pnc.service';
 import { NotificationService } from '../../../shared/_services/notification.service';
 import { DataService } from '../../_services/data.service';
 import { LookupItemService } from '../../../shared/_services/lookup-item.service';
+import {EncounterService} from '../../../hts/_services/encounter.service';
 
 @Component({
     selector: 'app-anc-hivtesting',
     templateUrl: './anc-hivtesting.component.html',
-    styleUrls: ['./anc-hivtesting.component.css']
+    styleUrls: ['./anc-hivtesting.component.css'],
+    providers: [EncounterService]
 })
 export class AncHivtestingComponent implements OnInit {
     ancHivStatusInitialVisitOptions: LookupItemView[];
@@ -45,6 +47,18 @@ export class AncHivtestingComponent implements OnInit {
     lookupItemView$: Subscription;
     LookupItems$: Subscription;
 
+    duoKitLotNumber: string;
+    duoKitexpiryDate: Date;
+
+    firstResponseKitLotNumber: string;
+    firstResponseKitexpiryDate: Date;
+
+    determineKitLotNumber: string;
+    determineKitexpiryDate: Date;
+
+    otherKitLotNumber: string;
+    otherKitexpiryDate: Date;
+
     public testVisits: LookupItemView[] = [];
     public kits: LookupItemView[] = [];
     public tests: LookupItemView[] = [];
@@ -61,7 +75,8 @@ export class AncHivtestingComponent implements OnInit {
         private notificationService: NotificationService,
         private snotifyService: SnotifyService,
         private dataservice: DataService,
-        private _lookupItemService: LookupItemService) {
+        private _lookupItemService: LookupItemService,
+        private encounterService: EncounterService) {
 
     }
 
@@ -114,6 +129,72 @@ export class AncHivtestingComponent implements OnInit {
         this.loadHivTests();
         this.personCurrentHivStatus();
         
+        setTimeout(() => {
+            const otherKit = this.kits.filter(obj => obj.itemName == 'Other');
+            const determineKit = this.kits.filter(obj => obj.itemName == 'Determine');
+            const firstResponseKit = this.kits.filter(obj => obj.itemName == 'First Response');
+            const DuoKit = this.kits.filter(obj => obj.itemName == 'HIV/Syphilis Duo');
+
+            if (DuoKit.length > 0) {
+                this.getLastUsedDuoKit(DuoKit[0].itemId);
+            }
+
+            if (firstResponseKit.length > 0) {
+                this.getLastUsedFirstResponseKit(firstResponseKit[0].itemId);
+            }
+
+            if (otherKit.length > 0) {
+                this.getLastUsedOtherKit(otherKit[0].itemId);
+            }
+
+            if (determineKit.length > 0) {
+                this.getLastUsedDetermineKit(determineKit[0].itemId);
+            }
+        }, 4000);    
+    }
+
+    private getLastUsedOtherKit(kitId: number) {
+        this.encounterService.getLastUsedKit(kitId).subscribe(
+            (res) => {
+                if (res) {
+                    this.otherKitLotNumber = res.kitLotNumber;
+                    this.otherKitexpiryDate = res.expiryDate;
+                }
+            }
+        );
+    }
+
+    private getLastUsedDetermineKit(kitId: number) {
+        this.encounterService.getLastUsedKit(kitId).subscribe(
+            (res) => {
+                if (res) {
+                    this.determineKitLotNumber = res.kitLotNumber;
+                    this.determineKitexpiryDate = res.expiryDate;
+                }
+            }
+        );
+    }
+
+    private getLastUsedFirstResponseKit(kitId: number) {
+        this.encounterService.getLastUsedKit(kitId).subscribe(
+            (res) => {
+                if (res) {
+                    this.firstResponseKitLotNumber = res.kitLotNumber;
+                    this.firstResponseKitexpiryDate = res.expiryDate;
+                }
+            }
+        );
+    }
+
+    public getLastUsedDuoKit(kitId: number) {
+        this.encounterService.getLastUsedKit(kitId).subscribe(
+            (res) => {
+                if (res) {
+                    this.duoKitLotNumber = res.kitLotNumber;
+                    this.duoKitexpiryDate = res.expiryDate;
+                }
+            }
+        );
     }
 
     loadHivTests(): void {
@@ -189,7 +270,15 @@ export class AncHivtestingComponent implements OnInit {
         dialogConfig.autoFocus = true;
 
         dialogConfig.data = {
-            'visitDate': this.visitDate
+            'visitDate': this.visitDate,
+            'duoKitLotNumber': this.duoKitLotNumber,
+            'duoKitexpiryDate': this.duoKitexpiryDate,
+            'firstResponseKitLotNumber': this.firstResponseKitLotNumber,
+            'firstResponseKitexpiryDate': this.firstResponseKitexpiryDate,
+            'determineKitLotNumber': this.determineKitLotNumber,
+            'determineKitexpiryDate': this.determineKitexpiryDate,
+            'otherKitLotNumber': this.otherKitLotNumber,
+            'otherKitexpiryDate': this.otherKitexpiryDate
         };
 
         // console.log(this.serviceAreaName);

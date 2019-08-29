@@ -130,9 +130,18 @@ export class PncHivtestingComponent implements OnInit, AfterViewInit {
 
             if (DuoKit.length > 0) {
                 this.getLastUsedDuoKit(DuoKit[0].itemId);
+            }
+            
+            if (firstResponseKit.length > 0) {
                 this.getLastUsedFirstResponseKit(firstResponseKit[0].itemId);
-                this.getLastUsedDetermineKit(determineKit[0].itemId);
+            }
+            
+            if (otherKit.length > 0) {
                 this.getLastUsedOtherKit(otherKit[0].itemId);
+            }
+            
+            if (determineKit.length > 0) {
+                this.getLastUsedDetermineKit(determineKit[0].itemId);
             }            
         }, 4000);        
     }
