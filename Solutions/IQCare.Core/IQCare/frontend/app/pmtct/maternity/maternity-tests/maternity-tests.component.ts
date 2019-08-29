@@ -93,6 +93,9 @@ export class MaternityTestsComponent implements OnInit {
 
             this.maternityTestsFormGroup.get('treatedSyphilis').setValue('');
             this.maternityTestsFormGroup.get('treatedSyphilis').disable({ onlySelf: true });
+            
+            
+            
         }
     }
 
@@ -102,6 +105,9 @@ export class MaternityTestsComponent implements OnInit {
         } else if (event.isUserInput && event.source.selected && event.source.viewValue == 'Negative') {
             this.maternityTestsFormGroup.get('treatedSyphilis').setValue('');
             this.maternityTestsFormGroup.get('treatedSyphilis').disable({ onlySelf: true });
+
+            this.maternityTestsFormGroup.get('treatedSyphilis').clearValidators();
+            this.maternityTestsFormGroup.get('treatedSyphilis').updateValueAndValidity();
         }
     }
 

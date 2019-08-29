@@ -150,6 +150,8 @@ export class PatientEducationExaminationComponent implements OnInit, OnDestroy {
         } else if (event.isUserInput && event.source.selected && event.source.viewValue == 'Negative') {
             this.PatientEducationFormGroup.get('treatedSyphilis').setValue('');
             this.PatientEducationFormGroup.get('treatedSyphilis').disable({ onlySelf: true });
+            this.PatientEducationFormGroup.get('treatedSyphilis').clearValidators();
+            this.PatientEducationFormGroup.get('treatedSyphilis').updateValueAndValidity();
         }
     }
 
