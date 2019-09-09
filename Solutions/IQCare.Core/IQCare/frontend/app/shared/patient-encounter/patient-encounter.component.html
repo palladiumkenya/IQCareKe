@@ -90,12 +90,25 @@
                                 &nbsp;
                             </div>
                             <div class="col-lg-12">
-                                <div class="button-row pull-right">
-                                    <button mat-raised-button color="accent" (click)="matCheckIn()">
-                                        <i class="fa fa-plus-circle"></i>
-                                        <span> CheckIn New Encounter</span>
-                                    </button>
+                                <div class="col-lg-3 col-sm-3 col-xs-12">&nbsp;</div>
+                                <div class="col-lg-3 col-sm-3 col-xs-12">&nbsp;</div>
+                                <div class="col-lg-3 col-sm-3 col-xs-12">
+                                    <div class="button-row pull-right" *ngIf="patientInCCC && hasmchRecord">
+                                        <button mat-raised-button color="primary" (click)="onPharmacyClick()">
+                                            <i class="fa fa-plus-circle"></i>
+                                            <span> Pharmacy Dispense</span>
+                                        </button>
+                                    </div>
                                 </div>
+
+                                <div class="col-lg-3 col-sm-3 col-xs-12">
+                                    <div class="button-row pull-right">
+                                        <button mat-raised-button color="accent" (click)="matCheckIn()">
+                                            <i class="fa fa-plus-circle"></i>
+                                            <span> CheckIn New Encounter</span>
+                                        </button>
+                                    </div>
+                                </div>                                
                             </div>
                         </div>
                     </div>

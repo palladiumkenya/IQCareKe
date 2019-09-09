@@ -177,7 +177,9 @@ export class AncComponent implements OnInit, OnDestroy {
         this.getLookupItems('DrugAdministrationANC', this.drugOptions);
         this.lookupItemService.getByGroupNameAndItemName('HTSEntryPoints', 'PMTCT').subscribe(
             (res) => {
-                this.hivTestEntryPoint = res['itemId'];
+                if (res.length > 0) {
+                    this.hivTestEntryPoint = res[0]['itemId'];
+                }                
             }
         );
 
@@ -509,7 +511,8 @@ export class AncComponent implements OnInit, OnDestroy {
             EncounterTypeId: 1,
             EncounterDate: this.visitDetailsFormGroup.value[0]['visitDate'],
             EncounterType: this.HivStatusMatFormGroup.value[0]['testType'],
-            HivCounsellingDone: yesOption[0].itemId
+            HivCounsellingDone: yesOption[0].itemId,
+            OtherDisability: ''
         };
 
         const hivTestsCommand: HivTestsCommand = {
@@ -1048,8 +1051,6 @@ export class AncComponent implements OnInit, OnDestroy {
         const baselineEdit = this.ancService.EditBaselineProfile(baselineAncCommandEdit);
         const ancEducation = this.ancService.savePatientEducation(patientEducationCommand);
         const ancClientMonitoringEdit = this.ancService.EditClientMonitoring(clientMonitoringCommandEdit);
-
-        // const PatientAppointmentEdit = this.ancService.EditAppointment(this.appointmentCommand);
         const referralEdit = this.ancService.EditReferral(referralEditCommand);
 
         forkJoin([

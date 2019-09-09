@@ -88,7 +88,7 @@ export class RecordsService {
         );
     }
 
-    public personEnrollmentDetails(patientId: number, serviceAreaId: number): Observable<any> {
+    public personEnrollmentDetails(patientId: number, serviceAreaId: number): Observable<any[]> {
         return this.http.get<any[]>(this.API_URL + '/api/Register?patientId=' + patientId + '&serviceAreaId=' + serviceAreaId).pipe(
             tap(personEnrollmentDetails => this.errorHandler.log('get person enrollment details list')),
             catchError(this.errorHandler.handleError<any[]>('personEnrollmentDetails'))

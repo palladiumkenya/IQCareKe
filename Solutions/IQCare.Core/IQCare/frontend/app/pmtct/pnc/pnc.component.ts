@@ -94,6 +94,7 @@ export class PncComponent implements OnInit {
     hivTestEntryPoint: number;
     htsEncounterId: number;
     infantFeedingTopicId: number;
+    diagnosisPlaceholder: string;
 
     visitDetailsFormGroup: FormArray;
     matHistory_PostNatalExam_FormGroup: FormArray;
@@ -120,6 +121,7 @@ export class PncComponent implements OnInit {
         this.diagnosisReferralAppointmentFormGroup = new FormArray([]);
 
         this.formType = 'pnc';
+        this.diagnosisPlaceholder = 'Mother baby pair clinical notes';
     }
 
     ngOnInit() {
@@ -158,7 +160,9 @@ export class PncComponent implements OnInit {
 
         this.lookupitemservice.getByGroupNameAndItemName('HTSEntryPoints', 'PMTCT').subscribe(
             (res) => {
-                this.hivTestEntryPoint = res['itemId'];
+                if (res.length > 0) {
+                    this.hivTestEntryPoint = res[0]['itemId'];
+                }
             }
         );
 
@@ -399,7 +403,8 @@ export class PncComponent implements OnInit {
             EncounterTypeId: 1,
             EncounterDate: moment(this.visitDetailsFormGroup.value[0]['visitDate']).toDate(),
             EncounterType: this.hivStatusFormGroup.value[0]['testType'],
-            HivCounsellingDone: yesOption[0].itemId
+            HivCounsellingDone: yesOption[0].itemId,
+            OtherDisability: ''
         };
 
         const hivTestsCommand: HivTestsCommand = {
@@ -773,7 +778,8 @@ export class PncComponent implements OnInit {
             EncounterTypeId: 1,
             EncounterDate: moment(this.visitDetailsFormGroup.value[0]['visitDate']).toDate(),
             EncounterType: this.hivStatusFormGroup.value[0]['testType'],
-            HivCounsellingDone: yesOption[0].itemId
+            HivCounsellingDone: yesOption[0].itemId,
+            OtherDisability: ''
         };
 
         const patientReferralEditCommand: PatientReferralEditCommand = {

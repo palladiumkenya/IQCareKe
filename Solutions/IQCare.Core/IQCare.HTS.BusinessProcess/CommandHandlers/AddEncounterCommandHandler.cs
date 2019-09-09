@@ -45,7 +45,8 @@ namespace IQCare.HTS.BusinessProcess.CommandHandlers
                         TestEntryPoint = request.Encounter.TestEntryPoint,
                         TestingStrategy = request.Encounter.TestingStrategy,
                         EncounterType = request.Encounter.EncounterType,
-                        HivCounsellingDone = request.Encounter.HivCounsellingDone
+                        HivCounsellingDone = request.Encounter.HivCounsellingDone,
+                        OtherDisability = request.Encounter.OtherDisability
                     };
 
                     await _unitOfWork.Repository<HtsEncounter>().AddAsync(htsEncounter);

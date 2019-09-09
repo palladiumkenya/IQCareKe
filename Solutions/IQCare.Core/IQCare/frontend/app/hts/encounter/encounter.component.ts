@@ -77,8 +77,13 @@ export class EncounterComponent implements OnInit {
             TbScreening: new FormControl(this.encounter.TbScreening, [Validators.required]),
             EncounterRemarks: new FormControl(this.encounter.EncounterRemarks),
             Disabilities: new FormControl(this.encounter.Disabilities, [Validators.required]),
-            HivCounsellingDone: new FormControl('', [Validators.required])
+            HivCounsellingDone: new FormControl(this.encounter.HivCounsellingDone, [Validators.required]),
+            OtherDisability: new FormControl(this.encounter.OtherDisability, Validators.required)
         });
+        
+        this.form.get('OtherDisability').disable({ onlySelf: true });
+        this.form.get('OtherDisability').clearValidators();
+        this.form.get('OtherDisability').updateValueAndValidity();
     }
 
     setEncounterValuesForUpdate() {
@@ -132,7 +137,8 @@ export class EncounterComponent implements OnInit {
                         TbScreening: tbScreening,
                         EncounterRemarks: encounterValue.encounterRemarks,
                         Disabilities: disabilities,
-                        HivCounsellingDone: encounterValue.hivCounsellingDone
+                        HivCounsellingDone: encounterValue.hivCounsellingDone,
+                        OtherDisability: encounterValue.otherDisability
                     });
 
                     this.encounter.PersonId = encounterValue['personId'];
@@ -306,6 +312,12 @@ export class EncounterComponent implements OnInit {
         } else {
             this.form.controls.TestedAs.enable({ onlySelf: false });
             this.form.controls.TestingStrategy.enable({ onlySelf: false });
+        }
+    }
+
+    onDisabilitySelection(event) {
+        if (event.isUserInput && event.source.selected && event.source.viewValue == 'Other') {
+            this.form.get('OtherDisability').enable({ onlySelf: true });
         }
     }
 }

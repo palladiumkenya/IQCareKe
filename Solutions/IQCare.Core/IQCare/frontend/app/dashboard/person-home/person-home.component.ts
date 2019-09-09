@@ -90,9 +90,10 @@ export class PersonHomeComponent implements OnInit {
                 let val: number;
 
                 val = this.careendoptions.findIndex(x => x.itemId == this.exitreason);
+                if (this.careendoptions[val])
                 careendeddetails = this.careendoptions[val].itemDisplayName;
 
-                if (careendeddetails.toLowerCase() == 'death') {
+                if (careendeddetails && careendeddetails.toLowerCase() == 'death') {
                     this.isdead = true;
                     this.carended = true;
                 } else {

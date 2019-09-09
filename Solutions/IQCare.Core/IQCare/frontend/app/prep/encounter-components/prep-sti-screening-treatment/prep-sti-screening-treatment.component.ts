@@ -98,7 +98,7 @@ export class PrepSTIScreeningTreatmentComponent implements OnInit {
     loadSTIScreening(): void {
         this.prepService.getStiScreeningTreatment(this.patientId, this.patientMasterVisitId).subscribe(
             (res) => {
-                let STISymptoms = [];
+                const STISymptoms = [];
                 const stiScreeningObject = this.screenedForSTIOptions.filter(obj => obj.itemName == 'STIScreeningDone');
                 const stiSignsAndSymptomsObject = this.screenedForSTIOptions.filter(obj => obj.itemName == 'STISymptoms');
                 const stiLabInvestigationDoneObject = this.screenedForSTIOptions.filter(obj => obj.itemName == 'STILabInvestigationDone');
@@ -161,9 +161,9 @@ export class PrepSTIScreeningTreatmentComponent implements OnInit {
         }
     }
 
-    onPharmacyClick() {
-     
-        this.searchService.setSession(this.personId, this.patientId, JSON.parse(localStorage.getItem("appUserId"))).subscribe((sessionres) => {
+    onPharmacyClick() {     
+        this.searchService.setSession(this.personId, this.patientId, JSON.parse(localStorage.getItem('appUserId')))
+            .subscribe((sessionres) => {
             this.searchService.setVisitSession(this.patientMasterVisitId, 20, 261).subscribe((setVisitSession) => {
                 const url = location.protocol + '//' + window.location.hostname + ':' + window.location.port +
                     '/IQCare/CCC/Encounter/PharmacyPrescription.aspx';

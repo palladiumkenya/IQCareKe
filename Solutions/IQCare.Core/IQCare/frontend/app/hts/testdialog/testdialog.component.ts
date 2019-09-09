@@ -2,6 +2,8 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
 import {LookupItemView} from '../../shared/_models/LookupItemView';
+import {SnotifyService} from 'ng-snotify';
+import {NotificationService} from '../../shared/_services/notification.service';
 
 @Component({
     selector: 'app-testdialog',
@@ -32,12 +34,15 @@ export class TestDialogComponent implements OnInit {
     determineKitexpiryDate: Date;
     firstResponseKitexpiryDate: Date;
     htsEncounterDate: Date;
+    clientGender: string;
 
     minDate: any;
 
     constructor(private fb: FormBuilder,
         private dialogRef: MatDialogRef<TestDialogComponent>,
-        @Inject(MAT_DIALOG_DATA) data) {
+        @Inject(MAT_DIALOG_DATA) data,
+        private snotifyService: SnotifyService,
+        private notificationService: NotificationService) {
         this.title = data.screeningType;
         this.hivTestKits = data.hivTestKits;
         this.hivResultsOptions = data.hivResultsOptions;
@@ -55,6 +60,7 @@ export class TestDialogComponent implements OnInit {
         this.duoKitexpiryDate = data.duoKitexpiryDate;
 
         this.htsEncounterDate = data.htsEncounterDate;
+        this.clientGender = data.clientGender;
 
         this.screeningHIVTestKits = data.screeningHIVTestKits;
         this.syphilisResults = data.syphilisResults;
@@ -75,18 +81,26 @@ export class TestDialogComponent implements OnInit {
         this.form.get('syphilis').disable({onlySelf: true});
     }
 
-    onTestKitChange(event) {
-        this.form.get('syphilis').disable({onlySelf: true});
+    onTestKitChange(event) {        
         if (event.isUserInput && event.source.selected && event.source.viewValue == 'Other') {
             this.form.get('lotNumber').setValue(this.otherLotNumber);
             this.form.get('expiryDate').setValue(this.otherKitexpiryDate);
+            this.form.get('syphilis').disable({onlySelf: true});
         } else if (event.isUserInput && event.source.selected && event.source.viewValue == 'Determine') {
             this.form.get('lotNumber').setValue(this.determineLotNumber);
             this.form.get('expiryDate').setValue(this.determineKitexpiryDate);
+            this.form.get('syphilis').disable({onlySelf: true});
         } else if (event.isUserInput && event.source.selected && event.source.viewValue == 'First Response') {
             this.form.get('lotNumber').setValue(this.firstResponseLotNumber);
             this.form.get('expiryDate').setValue(this.firstResponseKitexpiryDate);
+            this.form.get('syphilis').disable({onlySelf: true});
         } else if (event.isUserInput && event.source.selected && event.source.viewValue == 'HIV/Syphilis Duo') {
+            if (this.clientGender != 'Female') {
+                this.snotifyService.info('HIV/Syphilis Duo should be used for female clients only', 
+                    'Testing', this.notificationService.getConfig());
+                this.form.get('kitName').setValue('');
+                return;
+            }
             this.form.get('syphilis').enable({onlySelf: true});
             this.form.get('lotNumber').setValue(this.duoKitLotNumber);
             this.form.get('expiryDate').setValue(this.duoKitexpiryDate);
