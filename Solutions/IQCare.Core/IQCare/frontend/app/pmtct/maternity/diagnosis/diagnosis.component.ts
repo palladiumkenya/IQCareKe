@@ -17,6 +17,7 @@ export class DiagnosisComponent implements OnInit {
     @Input('isEdit') isEdit: boolean;
     @Input('PatientId') PatientId: number;
     @Input('PatientMasterVisitId') PatientMasterVisitId: number;
+    @Input() diagnosisPlaceholder: string;
 
     constructor(private _formBuilder: FormBuilder,
         private _lookupItemService: LookupItemService,

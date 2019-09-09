@@ -40,6 +40,14 @@ export class PriorHivStatusComponent implements OnInit {
 
         await this.personCurrentHivStatus();
     }
+    
+    public priorHivStatusChange(event) {
+        if (event.isUserInput && event.source.selected && event.source.viewValue == 'Positive') {
+            this.dataservice.changeHivStatus('Positive');
+        } else if (event.isUserInput && event.source.selected && event.source.viewValue != 'Positive') {
+            this.dataservice.changeHivStatus('Negative');
+        }
+    }
 
     public async personCurrentHivStatus() {
         const previousHtsEncounters = await this.pncService.getPatientHtsEncounters(this.patientId).toPromise();

@@ -108,6 +108,7 @@ export class MaternityComponent implements OnInit {
     infantFeedingTopicId: number;
 
     babyDetailsValid: boolean = true;
+    diagnosisPlaceholder: string;
 
     constructor(private route: ActivatedRoute,
         private matService: MaternityService,
@@ -128,6 +129,7 @@ export class MaternityComponent implements OnInit {
         this.babyFormGroup = new FormArray([]);
         this.maternityTestsFormGroup = new FormArray([]);
         this.formType = 'maternity';
+        this.diagnosisPlaceholder = 'Maternity Admission History';
     }
 
     ngOnInit() {
@@ -136,7 +138,9 @@ export class MaternityComponent implements OnInit {
 
         this.lookupitemservice.getByGroupNameAndItemName('HTSEntryPoints', 'PMTCT').subscribe(
             (res) => {
-                this.hivTestEntryPoint = res['itemId'];
+                if (res.length > 0) {
+                    this.hivTestEntryPoint = res[0]['itemId'];
+                }
             }
         );
 
@@ -632,7 +636,8 @@ export class MaternityComponent implements OnInit {
             EncounterTypeId: 1,
             EncounterDate: moment(this.visitDetailsFormGroup.value[0]['visitDate']).toDate(),
             EncounterType: this.maternityTestsFormGroup.value[1]['testType'],
-            HivCounsellingDone: yesOption[0].itemId
+            HivCounsellingDone: yesOption[0].itemId,
+            OtherDisability: ''
         };
 
         const hivTestsCommand: HivTestsCommand = {
