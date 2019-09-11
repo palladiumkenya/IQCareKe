@@ -11,3 +11,6 @@ export const environment = {
     API_AIR_URL: location.protocol + '//localhost:44398',
     API_PREP_URL: location.protocol + '//localhost:50666'
 };
+    API_AIR_URL:location.protocol + '//localhost:44398',
+    API_QUEUE_URL:location.protocol + '//localhost:53679'
+}

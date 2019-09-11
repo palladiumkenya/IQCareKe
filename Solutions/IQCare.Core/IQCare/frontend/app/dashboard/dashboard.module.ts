@@ -42,6 +42,9 @@ import { RiskEncounterResolver } from './services/riskencounter.resolver';
 import { PrepComponent } from './enrollment/service-areas/prep/prep.component';
 import { ReenrollmentComponent } from './reenrollment/reenrollment.component';
 import { PatientHtsComponent } from './patient-hts/patient-hts.component';
+import { ReportsComponent } from './reports/reports.component';
+import { AirModule } from '../air/air.module';
+import {AddWaitingListComponent} from '../shared/add-waiting-list/add-waiting-list.component';
 
 @NgModule({
     imports: [
@@ -104,6 +107,10 @@ import { PatientHtsComponent } from './patient-hts/patient-hts.component';
 
     entryComponents: [
         PatientHtsComponent
+        SearchService
+    ],
+    entryComponents: [
+        AddWaitingListComponent
     ]
 
 })

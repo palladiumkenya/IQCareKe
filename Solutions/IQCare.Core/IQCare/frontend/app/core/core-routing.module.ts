@@ -39,6 +39,12 @@ const routes: Routes = [
     {
         path: 'prep',
         loadChildren: '../prep/prep.module#PrepModule'
+        path: 'air',
+        loadChildren: '../air/air.module#AirModule'
+    },
+    {
+        path: 'queue',
+        loadChildren: '../queue/queue.module#QueueModule'
     },
     {
         path: '**',
