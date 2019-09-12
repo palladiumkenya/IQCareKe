@@ -74,5 +74,9 @@ namespace IQCare.Queue.Infrastructure.Repository
         public async Task<TEntity> FindByIdAsync(object id)
             => await _context.FindAsync<TEntity>(id);
 
+        public void UpdateRange(IEnumerable<TEntity> entities)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

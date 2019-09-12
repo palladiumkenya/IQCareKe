@@ -18,13 +18,11 @@ import {
     MatSelectModule,
     MatFormFieldModule,
     MatInputModule,
-    MatButtonModule,
     MatAutocompleteModule,
     MatDatepickerModule,
     MatNativeDateModule,
-    MatDialogModule
-    MatButtonModule,
-    MatDialogModule
+    MatDialogModule,
+    MatButtonModule
 } from '@angular/material';
 import { AppDateAdapter } from './dateadapter/momentDateAdapter';
 import { NotificationService } from './_services/notification.service';
@@ -52,7 +50,7 @@ import { MatconfirmdialogComponent } from './matconfirmdialog/matconfirmdialog.c
         MatTableModule, MatIconModule,
         MatPaginatorModule, ReactiveFormsModule,
         MatSelectModule, MatFormFieldModule,
-        MatInputModule, MatButtonModule, MatDialogModule
+        MatInputModule, MatButtonModule, MatDialogModule,
         CommonModule,
         SharedRoutingModule,
         MatCardModule,
@@ -79,7 +77,7 @@ import { MatconfirmdialogComponent } from './matconfirmdialog/matconfirmdialog.c
         ChronicIllnessesTableComponent,
         AllergiesTableComponent,
         AdverseEventsTableComponent,
-        ClickNoneEventsDirectiveDirective
+        ClickNoneEventsDirectiveDirective,
         CustomFormComponent,
         AddWaitingListComponent,
         MatconfirmdialogComponent
@@ -107,9 +105,7 @@ import { MatconfirmdialogComponent } from './matconfirmdialog/matconfirmdialog.c
     ],
     entryComponents: [
         AllergiesComponent, PatientChronicIllnessesComponent,
-        AdverseEventsAssessmentComponent
+        AdverseEventsAssessmentComponent, MatconfirmdialogComponent
     ]
-    ],
-    entryComponents: [MatconfirmdialogComponent]
 })
 export class SharedModule { }

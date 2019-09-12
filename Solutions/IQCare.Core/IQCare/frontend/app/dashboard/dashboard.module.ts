@@ -4,7 +4,7 @@ import { HTSEncounterResolver } from './services/htsencounter.resolver';
 import { PersonCurrentVitalsResolver } from './services/personvitals.resolver';
 import { ExitReasonsResolver } from './services/exitreasons.resolver';
 import { CareendDetailsResolver } from './services/careendeddetails.resolver';
-import { PartnerCCCEnrollmentResolver, SexWithoutCondomResolver,PatientIdentifierResolver} from './services/hivpartnerdetails.resolver';
+import { PartnerCCCEnrollmentResolver, SexWithoutCondomResolver, PatientIdentifierResolver } from './services/hivpartnerdetails.resolver';
 import { DashboardRoutingModule } from './dashboard-routing.module';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -42,8 +42,6 @@ import { RiskEncounterResolver } from './services/riskencounter.resolver';
 import { PrepComponent } from './enrollment/service-areas/prep/prep.component';
 import { ReenrollmentComponent } from './reenrollment/reenrollment.component';
 import { PatientHtsComponent } from './patient-hts/patient-hts.component';
-import { ReportsComponent } from './reports/reports.component';
-import { AirModule } from '../air/air.module';
 import {AddWaitingListComponent} from '../shared/add-waiting-list/add-waiting-list.component';
 
 @NgModule({
@@ -104,14 +102,8 @@ import {AddWaitingListComponent} from '../shared/add-waiting-list/add-waiting-li
 
 
     ],
-
     entryComponents: [
-        PatientHtsComponent
-        SearchService
+        PatientHtsComponent, AddWaitingListComponent
     ],
-    entryComponents: [
-        AddWaitingListComponent
-    ]
-
 })
 export class DashboardModule { }

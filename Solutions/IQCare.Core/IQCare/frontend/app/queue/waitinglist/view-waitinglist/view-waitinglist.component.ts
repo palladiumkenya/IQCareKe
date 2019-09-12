@@ -1,12 +1,10 @@
 import { Validators } from '@angular/forms';
 import { FormControl } from '@angular/forms';
-import { Subscription } from 'rxjs';
-import { MatDialog, MatDialogConfig, MatDialogRef, MAT_DIALOG_DATA } from "@angular/material";
-import { Component, OnInit, NgZone, EventEmitter, Inject, AfterViewInit, ViewChild } from '@angular/core';
+import { Component, OnInit, NgZone, ViewChild } from '@angular/core';
 import { QueueDetailsService } from '../../services/queue.service';
 import { SearchService } from '../../../registration/_services/search.service';
 import { DialogService } from '../../services/dialog.service';
-import { FormGroup, FormBuilder, AbstractControl } from '@angular/forms';
+import { FormGroup, FormBuilder } from '@angular/forms';
 import { AppEnum } from './../../../shared/reducers/app.enum';
 import { AppStateService } from './../../../shared/_services/appstate.service';
 import { Store } from '@ngrx/store';
@@ -22,10 +20,6 @@ import {
     Priority, WaitingList, ServiceRoomList, ServiceList, Person,
     serviceRoom, Roomlist, serviceAreas, servicePoint, PatientList, SpecificRoomLinkage, PatientWaitingList
 } from '../../models/model';
-
-import { getListeners } from '@angular/core/src/render3/discovery_utils';
-import { routerNgProbeToken } from '@angular/router/src/router_module';
-import { element } from '@angular/core/src/render3';
 @Component({
     selector: 'app-view-waitinglist',
     templateUrl: './view-waitinglist.component.html',
@@ -51,6 +45,7 @@ export class ViewWaitinglistComponent implements OnInit {
     patientIdentifiers: any[];
     enrolledService: any[] = [];
     identifiers: any[] = [];
+    userId: number;
 
     hasItems: boolean = false;
     configuration: boolean;
@@ -75,10 +70,11 @@ export class ViewWaitinglistComponent implements OnInit {
         this.getServiceAreaList();
         this.getWaitingList();
         this.getRoomsList();
-        //this.firstserviceArea = new serviceAreas();
         this.formGroup = this.formBuilder.group({
             RoomName: new FormControl('', [Validators.required])
         });
+
+        this.userId = JSON.parse(localStorage.getItem('appUserId'));
     }
     getWaitingListByRoomId(id: number) {
         this.queuedetailsservice.getWaitingListByRoomId(id).subscribe
@@ -289,7 +285,7 @@ export class ViewWaitinglistComponent implements OnInit {
         this.dialogService.openConfirmDialog('Kindly confirm you want to serve the patient?')
             .afterClosed().subscribe(res => {
                 if (res) {
-                    const updatedby = parseInt(localStorage.getItem('appUserId'));
+                    const updatedby = parseInt(localStorage.getItem('appUserId'), 10);
                     const queueIndividual = this.QueueList.find(x => x.Id == Id);
 
                     this.queuedetailsservice.editQueue(queueIndividual.Id, false
@@ -524,13 +520,10 @@ export class ViewWaitinglistComponent implements OnInit {
                     });
                     break;
                 case 'CCC':
-                    this.searchService.setSession(personId, patientid).subscribe((res) => {
-                        console.log(res);
+                    this.searchService.setSession(personId, patientid, this.userId).subscribe((res) => {
                         window.location.href = location.protocol + '//' + window.location.hostname + ':' + window.location.port +
                             '/IQCare/CCC/Patient/PatientHome.aspx';
                     });
-                    /*this.snotifyService.error('Please Access CCC from the Greencard menu', 'Encounter History',
-                        this.notificationService.getConfig());*/
                     break;
                 default:
                     this.zone.run(() => {
