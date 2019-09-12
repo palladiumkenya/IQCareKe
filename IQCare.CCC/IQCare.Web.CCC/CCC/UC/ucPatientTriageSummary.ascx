@@ -38,6 +38,13 @@
                             <td>Oxygen Saturation:</td>
                             <td><asp:Label runat="server" ID="lblOxygenSaturation" CssClass="text-info pull-left"> 0 %</asp:Label></td>
                         </tr>
+
+                        <tr>
+                            <td>Nurse Comments:</td>
+                            <td colspan="5">
+                                <asp:Label runat="server" ID="lblNurseComments" CssClass="text-info pull-left"></asp:Label>
+                            </td>
+                        </tr>
                     </tbody>
                 </table>
             </div>

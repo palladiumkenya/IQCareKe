@@ -14,7 +14,7 @@
                 <mat-label>Prior HIV Status</mat-label>
                 <mat-select formControlName="priorHivStatus">
                     <mat-option [value]="">select</mat-option>
-                    <mat-option *ngFor="let hivStatusOption of hivStatusOptions" [value]="hivStatusOption.itemId">
+                    <mat-option *ngFor="let hivStatusOption of hivStatusOptions" [value]="hivStatusOption.itemId" (onSelectionChange)="priorHivStatusChange($event)">
                         {{hivStatusOption.itemName}}
                     </mat-option>
                 </mat-select>

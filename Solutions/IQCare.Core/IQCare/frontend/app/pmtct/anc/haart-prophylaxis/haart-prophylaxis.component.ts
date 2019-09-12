@@ -13,6 +13,9 @@ import * as moment from 'moment';
 import { AncService } from '../../_services/anc.service';
 import { DataService } from '../../_services/data.service';
 
+import { MatDialogConfig, MatDialog } from '@angular/material';
+import { PatientChronicillnessComponent } from '../patient-chronicillness/patient-chronicillness.component';
+
 export interface Options {
     value: string;
     viewValue: string;
@@ -30,6 +33,7 @@ export class HaartProphylaxisComponent implements OnInit, OnDestroy {
     public chronicIllnessOptions: any[] = [];
     public YesNoOptions: any[] = [];
 
+    chronicIllnessEditList: any[] = [];
     lookupItemView$: Subscription;
     drugAdministration$: Subscription;
     @Output() nextStep = new EventEmitter<HAARTProphylaxisEmitter>();
@@ -38,6 +42,7 @@ export class HaartProphylaxisComponent implements OnInit, OnDestroy {
     @Input('isEdit') isEdit: boolean;
     @Input('patientId') patientId: number;
     @Input('patientMasterVisitId') patientMasterVisitId: number;
+
     @Output() notify: EventEmitter<object> = new EventEmitter<object>();
     public HaartProphylaxisData: HAARTProphylaxisEmitter;
     public chronicIllness: ChronicIllnessEmitter[] = [];
@@ -56,6 +61,7 @@ export class HaartProphylaxisComponent implements OnInit, OnDestroy {
 
     constructor(private route: ActivatedRoute,
         private _formBuilder: FormBuilder,
+        private dialog: MatDialog,
         private _lookupItemService: LookupItemService,
         private snotifyService: SnotifyService,
         private notificationService: NotificationService,
@@ -64,6 +70,7 @@ export class HaartProphylaxisComponent implements OnInit, OnDestroy {
     }
 
     ngOnInit() {
+
 
         this.route.params.subscribe(params => {
             this.personId = params['personId'];
@@ -80,17 +87,15 @@ export class HaartProphylaxisComponent implements OnInit, OnDestroy {
         this.userId = this.userId = JSON.parse(localStorage.getItem('appUserId'));
 
 
+
+
         this.HaartProphylaxisFormGroup = this._formBuilder.group({
             onArvBeforeANCVisit: ['', Validators.required],
             startedHaartANC: ['', Validators.required],
             cotrimoxazole: ['', Validators.required],
             aztFortheBaby: ['', Validators.required],
             nvpForBaby: ['', Validators.required],
-            illness: ['', (this.isEdit) ? [] : Validators.required],
-            otherIllness: ['', (this.isEdit) ? [] : Validators.required],
-            onSetDate: ['', (this.isEdit) ? [] : Validators.required],
-            currentTreatment: ['', (this.isEdit) ? [] : Validators.required] // ,
-            // dose: ['', Validators.required]
+            otherIllness: ['', (this.isEdit) ? [] : Validators.required]
         });
 
         const {
@@ -104,13 +109,34 @@ export class HaartProphylaxisComponent implements OnInit, OnDestroy {
 
         this.dataservice.currentHivStatus.subscribe(hivStatus => {
             this.hiv_status = hivStatus;
-
             if (this.hiv_status !== '' && this.hiv_status != 'Positive') {
                 this.HaartProphylaxisFormGroup.get('onArvBeforeANCVisit').disable({ onlySelf: true });
                 this.HaartProphylaxisFormGroup.get('startedHaartANC').disable({ onlySelf: true });
                 this.HaartProphylaxisFormGroup.get('cotrimoxazole').disable({ onlySelf: true });
                 this.HaartProphylaxisFormGroup.get('aztFortheBaby').disable({ onlySelf: true });
                 this.HaartProphylaxisFormGroup.get('nvpForBaby').disable({ onlySelf: true });
+
+                this.HaartProphylaxisFormGroup.get('onArvBeforeANCVisit').clearValidators();
+                this.HaartProphylaxisFormGroup.get('onArvBeforeANCVisit').updateValueAndValidity();
+
+                this.HaartProphylaxisFormGroup.get('startedHaartANC').clearValidators();
+                this.HaartProphylaxisFormGroup.get('startedHaartANC').updateValueAndValidity();
+
+                this.HaartProphylaxisFormGroup.get('cotrimoxazole').clearValidators();
+                this.HaartProphylaxisFormGroup.get('cotrimoxazole').updateValueAndValidity();
+
+                this.HaartProphylaxisFormGroup.get('aztFortheBaby').clearValidators();
+                this.HaartProphylaxisFormGroup.get('aztFortheBaby').updateValueAndValidity();
+
+                this.HaartProphylaxisFormGroup.get('nvpForBaby').clearValidators();
+                this.HaartProphylaxisFormGroup.get('nvpForBaby').updateValueAndValidity();
+                
+            } else if (this.hiv_status == 'Positive') {
+                this.HaartProphylaxisFormGroup.get('onArvBeforeANCVisit').enable({ onlySelf: true });
+                this.HaartProphylaxisFormGroup.get('startedHaartANC').enable({ onlySelf: true });
+                this.HaartProphylaxisFormGroup.get('cotrimoxazole').enable({ onlySelf: true });
+                this.HaartProphylaxisFormGroup.get('aztFortheBaby').enable({ onlySelf: true });
+                this.HaartProphylaxisFormGroup.get('nvpForBaby').enable({ onlySelf: true });
             }
         });
 
@@ -141,95 +167,93 @@ export class HaartProphylaxisComponent implements OnInit, OnDestroy {
                 },
                 () => {
                 });
-    }
-
-
-    public moveNextStep() {
-        for (let i = 0; i < this.chronicIllness.length; i++) {
-            this.patientchronicIllnessData.push(
-                {
-                    Id: 0,
-                    PatientId: parseInt(this.patientId.toString(), 10),
-                    PatientMasterVisitId: parseInt(this.patientMasterVisitId.toString(), 10),
-                    ChronicIllness: this.chronicIllness[i]['chronicIllnessId'],
-                    Treatment: this.chronicIllness[i]['currentTreatment'],
-                    //  Dose: parseInt(this.chronicIllness[i]['dose'].toString(), 10),
-                    DeleteFlag: false,
-                    OnsetDate: this.chronicIllness[i]['onSetDate'],
-                    Active: 0,
-                    CreateBy: this.userId
-                });
-        }
-
-
-        this.HaartProphylaxisData = {
-            onArvBeforeANCVisit: parseInt(this.HaartProphylaxisFormGroup.controls['onArvBeforeANCVisit'].value, 10),
-            startedHaartANC: parseInt(this.HaartProphylaxisFormGroup.controls['startedHaartANC'].value, 10),
-            cotrimoxazole: parseInt(this.HaartProphylaxisFormGroup.controls['cotrimoxazole'].value, 10),
-            aztFortheBaby: parseInt(this.HaartProphylaxisFormGroup.controls['aztFortheBaby'].value, 10),
-            nvpForBaby: parseInt(this.HaartProphylaxisFormGroup.controls['nvpForBaby'].value, 10),
-            illness: parseInt(this.HaartProphylaxisFormGroup.controls['illness'].value, 10),
-            otherIllness: parseInt(this.HaartProphylaxisFormGroup.controls['otherIllness'].value, 10),
-            chronicIllness: this.patientchronicIllnessData
-        };
-        this.nextStep.emit(this.HaartProphylaxisData);
-        this.notify.emit(this.HaartProphylaxisFormGroup);
-    }
+    }    
 
     public AddOtherIllness() {
-        const illness = this.HaartProphylaxisFormGroup.controls['illness'].value.itemName;
-        const illnessId = parseInt(this.HaartProphylaxisFormGroup.controls['illness'].value.itemId, 10);
-        const onsetDates = moment(this.HaartProphylaxisFormGroup.controls['onSetDate'].value).toDate();
+        const resultsDialogConfig = new MatDialogConfig();
 
-        if (illness === '' || this.HaartProphylaxisFormGroup.controls['onSetDate'].value === '' ||
-            this.HaartProphylaxisFormGroup.controls['currentTreatment'].value === '') {
-            this.snotifyService.warning('illness,onsetDate and current Treatment is required', this.notificationService.getConfig());
-            return false;
-        }
+        resultsDialogConfig.disableClose = false;
+        resultsDialogConfig.autoFocus = true;
+        resultsDialogConfig.width = '600px';
+        resultsDialogConfig.height = '300px';
 
-        if (this.isEdit) {
-            if (this.chronicIllnessEdit.filter(x => x.onSetDate === onsetDates && x.chronicIllness === illness).length > 0) {
-                this.snotifyService.warning('' + illness + ' exists', 'Counselling', this.notificationService.getConfig());
-            } else {
-                this.chronicIllnessEdit.push({
-                    chronicIllness: illness,
-                    chronicIllnessId: illnessId,
-                    onSetDate: this.HaartProphylaxisFormGroup.controls['onSetDate'].value,
-                    currentTreatment: this.HaartProphylaxisFormGroup.controls['currentTreatment'].value // ,
-                    // dose: parseInt(this.HaartProphylaxisFormGroup.controls['dose'].value.toString(), 10)
-                });
-            }
-        } else {
-            if (this.chronicIllness.filter(x => x.chronicIllness === illness).length > 0) {
-                this.snotifyService.warning('' + illness + ' exists', 'Counselling', this.notificationService.getConfig());
-            } else {
-                this.chronicIllness.push({
-                    chronicIllness: illness,
-                    chronicIllnessId: illnessId,
-                    onSetDate: this.HaartProphylaxisFormGroup.controls['onSetDate'].value,
-                    currentTreatment: this.HaartProphylaxisFormGroup.controls['currentTreatment'].value // ,
-                    // dose: parseInt(this.HaartProphylaxisFormGroup.controls['dose'].value.toString(), 10)
-                });
-            }
-        }
+        resultsDialogConfig.data = {
+            isEdit: this.isEdit,
+            chronicIllnessOptions: this.chronicIllnessOptions,
+
+
+        };
+
+        const dialogRef = this.dialog.open(PatientChronicillnessComponent, resultsDialogConfig);
+
+        dialogRef.afterClosed().subscribe(
+            data => {
+                if (!data) {
+                    return;
+                }
+
+                /* const illness = this.HaartProphylaxisFormGroup.controls['illness'].value.itemName;
+                 const illnessId = parseInt(this.HaartProphylaxisFormGroup.controls['illness'].value.itemId, 10);
+                 const onsetDates = moment(this.HaartProphylaxisFormGroup.controls['onSetDate'].value).toDate();*/
+
+                const illness = data.illness.itemName;
+                const illnessId = parseInt(data.illness.itemId, 10);
+                const onsetDates = moment(data.onSetDate).toDate();
+                const currentTreatment = data.currentTreatment;
+
+                if (illness === '' || data.onSetDate === '' ||
+                    data.currentTreatment === '') {
+                    this.snotifyService.warning('illness,onsetDate and current Treatment is required', 
+                        this.notificationService.getConfig());
+                    return false;
+                }
+
+                if (this.isEdit) {
+                    if (this.chronicIllnessEdit.filter(x => x.onSetDate === onsetDates && x.chronicIllness === illness).length > 0) {
+                        this.snotifyService.warning('' + illness + ' exists', 'Counselling', this.notificationService.getConfig());
+                    } else {
+                        this.chronicIllnessEdit.push({
+                            chronicIllness: illness,
+                            chronicIllnessId: illnessId,
+                            onSetDate: onsetDates,
+                            currentTreatment: currentTreatment // ,
+                            // dose: parseInt(this.HaartProphylaxisFormGroup.controls['dose'].value.toString(), 10)
+                        });
+
+                        this.chronicIllnessEditList.push({
+                            chronicIllness: illness,
+                            chronicIllnessId: illnessId,
+                            onSetDate: onsetDates,
+                            currentTreatment: currentTreatment,
+                            Id: 0
+                        });
+                    }
+                } else {
+                    if (this.chronicIllness.filter(x => x.chronicIllness === illness).length > 0) {
+                        this.snotifyService.warning('' + illness + ' exists', 'Counselling', this.notificationService.getConfig());
+                    } else {
+                        this.chronicIllness.push({
+                            chronicIllness: illness,
+                            chronicIllnessId: illnessId,
+                            onSetDate: onsetDates,
+                            currentTreatment: currentTreatment
+                        });
+                        this.chronicIllnessEditList.push({
+                            chronicIllness: illness,
+                            chronicIllnessId: illnessId,
+                            onSetDate: onsetDates,
+                            currentTreatment: currentTreatment,
+                            Id: 0
+                        });
+                    }
+                }
+            });
     }
 
     public onChangeOtherIllness(event) {
         if (event.isUserInput && event.source.selected && event.source.viewValue === 'Yes') {
-
-            this.HaartProphylaxisFormGroup.controls['illness'].enable({ onlySelf: true });
-            this.HaartProphylaxisFormGroup.controls['currentTreatment'].enable({ onlySelf: true });
-            // this.HaartProphylaxisFormGroup.controls['dose'].enable({ onlySelf: true });
-            this.HaartProphylaxisFormGroup.controls['illness'].enable({ onlySelf: true });
-            this.HaartProphylaxisFormGroup.controls['onSetDate'].enable({ onlySelf: true });
             this.isDisabled = false;
         } else if (event.isUserInput && event.source.selected) {
-
-            this.HaartProphylaxisFormGroup.controls['illness'].disable({ onlySelf: true });
-            this.HaartProphylaxisFormGroup.controls['currentTreatment'].disable({ onlySelf: true });
-            //  this.HaartProphylaxisFormGroup.controls['dose'].disable({ onlySelf: true });
-            this.HaartProphylaxisFormGroup.controls['illness'].disable({ onlySelf: true });
-            this.HaartProphylaxisFormGroup.controls['onSetDate'].disable({ onlySelf: true });
             this.isDisabled = true;
         }
     }
@@ -237,7 +261,51 @@ export class HaartProphylaxisComponent implements OnInit, OnDestroy {
 
 
     public removeRow(idx) {
-        this.chronicIllness.splice(idx, 1);
+        //  this.chronicIllness.splice(idx, 1);
+
+        let Id: number;
+        if (this.chronicIllnessEditList.length > 0) {
+            Id = parseInt(this.chronicIllnessEditList[idx].Id, 10);
+            if (Id > 0) {
+                this.ancService.deletePatientChronicIllness(Id).subscribe(x => {
+                    if (x) {
+
+                        this.snotifyService.success('Successfully removed the patient chronic illness  ' + x['preventiveServiceId'],
+                            'Patient Chronic Illness', this.notificationService.getConfig());
+                        if (this.isEdit) {
+                            this.chronicIllnessEdit.splice(idx, 1);
+                        } else {
+                            this.chronicIllness.splice(idx, 1);
+                        }
+                        this.chronicIllnessEditList.splice(idx, 1);
+
+                    }
+                },
+                    (err) => {
+                        this.snotifyService.success('Error removing the patient chronic illness  ' + err,
+                            'Patient Chronic Illness', this.notificationService.getConfig());
+                    });
+
+            } else {
+                if (this.isEdit) {
+                    this.chronicIllnessEdit.splice(idx, 1);
+                } else {
+                    this.chronicIllness.splice(idx, 1);
+                }
+                this.chronicIllnessEditList.splice(idx, 1);
+            }
+
+        } else {
+            if (this.isEdit) {
+                this.chronicIllnessEdit.splice(idx, 1);
+            } else {
+                this.chronicIllness.splice(idx, 1);
+            }
+        }
+        // this.counselling_data.splice(idx, 1);
+
+
+
     }
 
     public onARVBeforeFirstANC(event) {
@@ -303,18 +371,19 @@ export class HaartProphylaxisComponent implements OnInit, OnDestroy {
                                 currentTreatment: chronic[i]['treatment'],
                                 dose: chronic[i]['dose']
                             });
+
+                            this.chronicIllnessEditList.push({
+                                chronicIllness: chronic[i]['chronicIllness'],
+                                chronicIllnessId: chronic[i]['chronicIllnessId'],
+                                onSetDate: chronic[i]['onsetDate'],
+                                currentTreatment: chronic[i]['treatment'],
+                                dose: chronic[i]['dose'],
+                                Id: chronic[i]['id']
+                            });
                         }
-
-                        const treatetNet = chronic.filter(x => x.description == 'Insecticide treated nets given');
-
                         const yesno = this.yesnonaOptions.filter(x => x.itemName == 'Yes');
                         this.HaartProphylaxisFormGroup.get('otherIllness').setValue(yesno[0]['itemId']);
-                    } else {
-                        const yesnot = this.yesnonaOptions.filter(x => x.itemName == 'No');
-
-                        this.HaartProphylaxisFormGroup.get('otherIllness').setValue(yesnot[0]['itemId']);
                     }
-
                 },
                 (err) => {
 

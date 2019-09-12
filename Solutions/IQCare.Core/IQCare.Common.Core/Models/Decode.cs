@@ -7,5 +7,8 @@
         public string Name { get; set; }
 
         public int CodeID { get; set; }
+
+
+        public int DeleteFlag { get; set; }
     }
 }

@@ -66,6 +66,12 @@ export class ClientMonitoringComponent implements OnInit, OnDestroy {
             if (this.hiv_status !== '' && this.hiv_status !== 'Positive') {
                 this.clientMonitoringFormGroup.get('WhoStage').disable({ onlySelf: true });
                 this.clientMonitoringFormGroup.get('viralLoadSampleTaken').disable({ onlySelf: true });
+
+                this.clientMonitoringFormGroup.get('WhoStage').clearValidators();
+                this.clientMonitoringFormGroup.get('WhoStage').updateValueAndValidity();
+
+                this.clientMonitoringFormGroup.get('viralLoadSampleTaken').clearValidators();
+                this.clientMonitoringFormGroup.get('viralLoadSampleTaken').updateValueAndValidity();
             } else {
                 this.clientMonitoringFormGroup.get('WhoStage').enable({ onlySelf: false });
                 this.clientMonitoringFormGroup.get('viralLoadSampleTaken').enable({ onlySelf: false });
@@ -132,12 +138,11 @@ export class ClientMonitoringComponent implements OnInit, OnDestroy {
     }
 
     public oncacxScreeningChange(event) {
-
         if (event.isUserInput && event.source.selected && event.source.viewValue == 'Yes') {
             this.clientMonitoringFormGroup.controls['cacxMethod'].enable({ onlySelf: true });
             this.clientMonitoringFormGroup.controls['cacxResult'].enable({ onlySelf: true });
             this.clientMonitoringFormGroup.controls['cacxComments'].enable({ onlySelf: true });
-        } else {
+        } else if (event.isUserInput && event.source.selected && event.source.viewValue != 'Yes') {
             this.clientMonitoringFormGroup.controls['cacxMethod'].disable({ onlySelf: true });
             this.clientMonitoringFormGroup.controls['cacxResult'].disable({ onlySelf: true });
             this.clientMonitoringFormGroup.controls['cacxComments'].disable({ onlySelf: true });
@@ -148,8 +153,6 @@ export class ClientMonitoringComponent implements OnInit, OnDestroy {
         this.patientwhoStage$ = this.ancService.getPatientWhoStageInfoCurrent(patientId)
             .subscribe(
                 p => {
-                    // console.log('patientwho');
-                    // console.log(p);
                     const whostage = p;
                     if (whostage) {
                         this.clientMonitoringFormGroup.get('WhoStage').setValue(whostage['whoStage']);
@@ -187,7 +190,6 @@ export class ClientMonitoringComponent implements OnInit, OnDestroy {
             .subscribe(
                 p => {
                     const screening = p;
-                    console.log(p);
                     if (p) {
                         const cacx = screening.filter(obj => obj.screeningType == 'CaCxScreening');
                         const tb = screening.filter(obj => obj.screeningType == 'TBScreeningPMTCT');

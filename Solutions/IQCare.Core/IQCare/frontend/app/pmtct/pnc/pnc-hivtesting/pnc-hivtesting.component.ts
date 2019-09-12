@@ -9,11 +9,13 @@ import { Subscription } from 'rxjs';
 import { NotificationService } from '../../../shared/_services/notification.service';
 import { LookupItemService } from '../../../shared/_services/lookup-item.service';
 import { DataService } from '../../_services/data.service';
+import {EncounterService} from '../../../hts/_services/encounter.service';
 
 @Component({
     selector: 'app-pnc-hivtesting',
     templateUrl: './pnc-hivtesting.component.html',
-    styleUrls: ['./pnc-hivtesting.component.css']
+    styleUrls: ['./pnc-hivtesting.component.css'],
+    providers: [ EncounterService ]
 })
 export class PncHivtestingComponent implements OnInit, AfterViewInit {
     HivTestingForm: FormGroup;
@@ -43,9 +45,20 @@ export class PncHivtestingComponent implements OnInit, AfterViewInit {
 
     public hiv_testing_table_data: HivTestingTableData[] = [];
     public historical_hiv_testing_data: HivTestingTableData[] = [];
+    duoKitLotNumber: string;
+    duoKitexpiryDate: Date;
+
+    firstResponseKitLotNumber: string;
+    firstResponseKitexpiryDate: Date;
+
+    determineKitLotNumber: string;
+    determineKitexpiryDate: Date;
+
+    otherKitLotNumber: string;
+    otherKitexpiryDate: Date;
 
     displayedColumns = ['testdate', 'testtype', 'kitname', 'lotnumber',
-        'expirydate', 'testresult', 'nexthivtest', 'testpoint', 'action'];
+        'expirydate', 'testresult', 'syphilis', 'nexthivtest', 'testpoint', 'action'];
     dataSource = new MatTableDataSource(this.hiv_testing_table_data);
 
     constructor(private dialog: MatDialog,
@@ -54,7 +67,8 @@ export class PncHivtestingComponent implements OnInit, AfterViewInit {
         private notificationService: NotificationService,
         private snotifyService: SnotifyService,
         private _lookupItemService: LookupItemService,
-        private dataservice: DataService) { }
+        private dataservice: DataService,
+        private encounterService: EncounterService) { }
 
     ngOnInit() {
         this.HivTestingForm = this._formBuilder.group({
@@ -89,7 +103,7 @@ export class PncHivtestingComponent implements OnInit, AfterViewInit {
         this.notify.emit({ 'form': this.HivTestingForm, 'table_data': this.hiv_testing_table_data });
 
         this.getLookupOptions('PMTCTHIVTestVisit', this.testVisits);
-        this.getLookupOptions('HIVTestKits', this.kits);
+        this.getLookupOptions('ScreeningHIVTestKits', this.kits);
         this.getLookupOptions('PMTCTHIVTests', this.tests);
         this.getLookupOptions('HIVResults', this.testResults);
 
@@ -107,6 +121,73 @@ export class PncHivtestingComponent implements OnInit, AfterViewInit {
                 this.message = '';
             }
         });
+
+        setTimeout(() => {
+            const otherKit = this.kits.filter(obj => obj.itemName == 'Other');
+            const determineKit = this.kits.filter(obj => obj.itemName == 'Determine');
+            const firstResponseKit = this.kits.filter(obj => obj.itemName == 'First Response');
+            const DuoKit = this.kits.filter(obj => obj.itemName == 'HIV/Syphilis Duo');
+
+            if (DuoKit.length > 0) {
+                this.getLastUsedDuoKit(DuoKit[0].itemId);
+            }
+            
+            if (firstResponseKit.length > 0) {
+                this.getLastUsedFirstResponseKit(firstResponseKit[0].itemId);
+            }
+            
+            if (otherKit.length > 0) {
+                this.getLastUsedOtherKit(otherKit[0].itemId);
+            }
+            
+            if (determineKit.length > 0) {
+                this.getLastUsedDetermineKit(determineKit[0].itemId);
+            }            
+        }, 4000);        
+    }
+
+    private getLastUsedOtherKit(kitId: number) {
+        this.encounterService.getLastUsedKit(kitId).subscribe(
+            (res) => {
+                if (res) {
+                    this.otherKitLotNumber = res.kitLotNumber;
+                    this.otherKitexpiryDate = res.expiryDate;
+                }
+            }
+        );
+    }
+
+    private getLastUsedDetermineKit(kitId: number) {
+        this.encounterService.getLastUsedKit(kitId).subscribe(
+            (res) => {
+                if (res) {
+                    this.determineKitLotNumber = res.kitLotNumber;
+                    this.determineKitexpiryDate = res.expiryDate;
+                }
+            }
+        );
+    }
+
+    private getLastUsedFirstResponseKit(kitId: number) {
+        this.encounterService.getLastUsedKit(kitId).subscribe(
+            (res) => {
+                if (res) {
+                    this.firstResponseKitLotNumber = res.kitLotNumber;
+                    this.firstResponseKitexpiryDate = res.expiryDate;
+                }
+            }
+        );
+    }
+    
+    public getLastUsedDuoKit(kitId: number) {
+        this.encounterService.getLastUsedKit(kitId).subscribe(
+            (res) => {
+                if (res) {
+                    this.duoKitLotNumber = res.kitLotNumber;
+                    this.duoKitexpiryDate = res.expiryDate;
+                }
+            }
+        );
     }
 
     ngAfterViewInit() {
@@ -143,7 +224,8 @@ export class PncHivtestingComponent implements OnInit, AfterViewInit {
                         }
                     }
 
-                    if (result['encounterResults'].length > 0 && result['encounterResults']['finalResult'] > 0) {
+                    console.log(result['encounterResults']);
+                    if (result['encounterResults'].length > 0 && result['encounterResults'][0]['finalResult'] > 0) {
                         const yesOption = this.yesnoOptions.filter(obj => obj.itemName == 'Yes');
                         this.HivTestingForm.get('hivTestingDone').setValue(yesOption[0].itemId);
                         this.HivTestingForm.controls.testType.setValue(result['encounter'][0]['encounterType']);
@@ -183,7 +265,15 @@ export class PncHivtestingComponent implements OnInit, AfterViewInit {
         dialogConfig.autoFocus = true;
 
         dialogConfig.data = {
-            'visitDate': this.visitDate
+            'visitDate': this.visitDate,
+            'duoKitLotNumber': this.duoKitLotNumber,
+            'duoKitexpiryDate': this.duoKitexpiryDate,
+            'firstResponseKitLotNumber': this.firstResponseKitLotNumber,
+            'firstResponseKitexpiryDate': this.firstResponseKitexpiryDate,
+            'determineKitLotNumber': this.determineKitLotNumber,
+            'determineKitexpiryDate': this.determineKitexpiryDate,
+            'otherKitLotNumber': this.otherKitLotNumber,
+            'otherKitexpiryDate': this.otherKitexpiryDate
         };
 
         const dialogRef = this.dialog.open(HivStatusComponent, dialogConfig);
@@ -191,6 +281,12 @@ export class PncHivtestingComponent implements OnInit, AfterViewInit {
         dialogRef.afterClosed().subscribe(
             data => {
                 if (!data) {
+                    return;
+                }
+
+                if (data.hivTest.itemName == 'HIV Test-2' && data.kitName['itemName'] == 'HIV/Syphilis Duo') {
+                    this.snotifyService.info('HIV/Syphilis Duo should not be used as a confirmatory test', 'HIV TESTS',
+                        this.notificationService.getConfig());
                     return;
                 }
 
@@ -242,12 +338,10 @@ export class PncHivtestingComponent implements OnInit, AfterViewInit {
                 // confirmatory algorithm
                 if (data.hivTest.itemName == 'HIV Test-2' && data.testResult.itemName == 'Negative'
                     && screeningText[0].itemName == 'Negative') {
-                    this.HivTestingForm.get('confirmatoryTestResult').setValue(
-                        this.testResults.filter(obj => obj.itemName == 'Negative')[0].itemId);
-
-                    // set final result
-                    this.HivTestingForm.get('finalTestResult').setValue(
-                        this.hivFinalResultsOptions.filter(obj => obj.itemName == 'Negative')[0].itemId);
+                    this.snotifyService.info('The client has already tested negative please' +
+                        ' dont add more tests to avoid wastage of kits', 'HIV TESTS',
+                        this.notificationService.getConfig());
+                    return;
                 } else if (data.hivTest.itemName == 'HIV Test-2' && data.testResult.itemName == 'Positive'
                     && screeningText[0].itemName == 'Positive') {
                     this.HivTestingForm.get('confirmatoryTestResult').setValue(
@@ -282,7 +376,8 @@ export class PncHivtestingComponent implements OnInit, AfterViewInit {
                     expirydate: data.expiryDate,
                     testresult: data.testResult,
                     nexthivtest: data.nextAppointmentDate,
-                    testpoint: this.serviceAreaName
+                    testpoint: this.serviceAreaName,
+                    SyphilisResult: data.SyphilisResult
                 });
 
                 this.historical_hiv_testing_data.push({
@@ -293,7 +388,8 @@ export class PncHivtestingComponent implements OnInit, AfterViewInit {
                     expirydate: data.expiryDate,
                     testresult: data.testResult,
                     nexthivtest: data.nextAppointmentDate,
-                    testpoint: this.serviceAreaName
+                    testpoint: this.serviceAreaName,
+                    SyphilisResult: data.SyphilisResult
                 });
 
                 this.dataSource = new MatTableDataSource(this.historical_hiv_testing_data);
@@ -353,7 +449,7 @@ export class PncHivtestingComponent implements OnInit, AfterViewInit {
         } else if (event.isUserInput && event.source.selected && event.source.viewValue == 'Inconclusive') {
             this.dataservice.changeHivStatus('Inconclusive');
         }
-    }
+    }    
 }
 
 
@@ -366,4 +462,5 @@ export interface HivTestingTableData {
     testresult?: any;
     nexthivtest?: Date;
     testpoint?: string;
+    SyphilisResult?: any;
 }

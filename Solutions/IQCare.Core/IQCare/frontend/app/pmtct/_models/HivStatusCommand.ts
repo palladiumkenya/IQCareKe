@@ -22,4 +22,6 @@ export interface HivStatusCommand {
     EncounterTypeId: number;
     EncounterDate?: Date;
     EncounterType: number;
+    HivCounsellingDone: number;
+    OtherDisability: string;
 }

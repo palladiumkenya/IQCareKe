@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 using IQCare.Library;
@@ -11,7 +12,7 @@ using Serilog;
 
 namespace IQCare.PMTCT.BusinessProcess.CommandHandlers
 {
-    public class GetPatientAncAppointmentCommandHandler: IRequestHandler<GetAncAppointmentCommand, Library.Result<PatientAppointment>>
+    public class GetPatientAncAppointmentCommandHandler: IRequestHandler<GetAncAppointmentCommand, Result<List<PatientAppointment>>>
     {
         private readonly IPmtctUnitOfWork _unitOfWork;
 
@@ -20,22 +21,21 @@ namespace IQCare.PMTCT.BusinessProcess.CommandHandlers
             _unitOfWork = unitOfWork;
         }
 
-        public async Task<Result<PatientAppointment>> Handle(GetAncAppointmentCommand request, CancellationToken cancellationToken)
+        public async Task<Result<List<PatientAppointment>>> Handle(GetAncAppointmentCommand request, CancellationToken cancellationToken)
         {
             using (_unitOfWork)
             {
                 try
                 {
-                    PatientAppointment patientAppointment = await _unitOfWork.Repository<PatientAppointment>()
-                        .Get(x => x.PatientId == request.PatientId && x.PatientMasterVisitId==request.PatientMasterVisitId
-                                  && x.Description=="ANC Follow-up"
-                                  && x.PatientMasterVisitId>0).FirstOrDefaultAsync();
-                    return Result<PatientAppointment>.Valid(new PatientAppointment());
+                    var patientAppointment = await _unitOfWork.Repository<PatientAppointment>()
+                        .Get(x => x.PatientId == request.PatientId && x.PatientMasterVisitId == request.PatientMasterVisitId
+                                  && x.PatientMasterVisitId > 0).ToListAsync();
+                    return Result<List<PatientAppointment>>.Valid(patientAppointment);
                 }
                 catch (Exception e)
                 {
                     Log.Error(e.Message + " " + e.InnerException);
-                                        return Library.Result<PatientAppointment>.Invalid(e.Message);
+                    return Result<List<PatientAppointment>>.Invalid(e.Message);
                 }
             }
         }

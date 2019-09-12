@@ -89,7 +89,7 @@ namespace IQCare.PMTCT.BusinessProcess.CommandHandlers
                                 ScreeningDone=request.ScreeningDone,
                                 ScreeningDate=DateTime.Now,
                                 ScreeningCategoryId= request.cacxMethod,
-                                Comment = request.Comments,
+                                Comment = request.ClinicalNotes,
                                 CreateDate = DateTime.Now,
                                 CreatedBy = request.CreatedBy
                             };

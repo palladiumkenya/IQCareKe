@@ -255,9 +255,11 @@ namespace IQCare.HTS.BusinessProcess.CommandHandlers
                                         DateTime? tracingBookingDate = null;
                                         if (!string.IsNullOrWhiteSpace(request.PARTNERS[i].ENCOUNTER.TRACING[j].BOOKING_DATE))
                                             tracingBookingDate = DateTime.ParseExact(request.PARTNERS[i].ENCOUNTER.TRACING[j].BOOKING_DATE, "yyyyMMdd", null);
+                                        int? reasonnotcontacted = request.PARTNERS[i].ENCOUNTER.TRACING[j].REASONNOTCONTACTED;
+                                        string reasonnotcontactedother = request.PARTNERS[i].ENCOUNTER.TRACING[j].REASONNOTCONTACTEDOTHER;
 
                                         var tracingOutcome = await encounterTestingService.addTracing(partnetPersonIdentifiers[0].PersonId, tracingType,
-                                            tracingDate, mode, outcome, providerId, null, consent, tracingBookingDate, null);
+                                            tracingDate, mode, outcome, providerId, null, consent, tracingBookingDate, null,reasonnotcontacted,reasonnotcontactedother);
                                     }
                                 }
 
@@ -434,9 +436,10 @@ namespace IQCare.HTS.BusinessProcess.CommandHandlers
                                         DateTime? tracingBookingDate = null;
                                         if (!string.IsNullOrWhiteSpace(request.PARTNERS[i].ENCOUNTER.TRACING[j].BOOKING_DATE))
                                             tracingBookingDate = DateTime.ParseExact(request.PARTNERS[i].ENCOUNTER.TRACING[j].BOOKING_DATE, "yyyyMMdd", null);
-
+                                        int? reasonnotContacted = request.PARTNERS[i].ENCOUNTER.TRACING[j].REASONNOTCONTACTED;
+                                        string reasonnotContactedOther = request.PARTNERS[i].ENCOUNTER.TRACING[j].REASONNOTCONTACTEDOTHER;
                                         var tracingOutcome = await encounterTestingService.addTracing(person.Id, tracingType,
-                                            tracingDate, mode, outcome, providerId, null, consent, tracingBookingDate, null);
+                                            tracingDate, mode, outcome, providerId, null, consent, tracingBookingDate, null,reasonnotContacted,reasonnotContactedOther);
                                     }
                                 }
                             }

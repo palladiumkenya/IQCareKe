@@ -73,8 +73,7 @@ export class PersonHomeComponent implements OnInit {
             this.careenddetails = CarendedArray;
 
             this.htshistory = HTSEncounterHistoryArray;
-
-            this.services = servicesArray;
+            this.services = servicesArray;            
             this.htsencounters = HTSEncounterArray;
             this.personvitals = PersonVitalsArray;
             this.riskassessmentencounter = RiskAssessmentArray;
@@ -91,9 +90,10 @@ export class PersonHomeComponent implements OnInit {
                 let val: number;
 
                 val = this.careendoptions.findIndex(x => x.itemId == this.exitreason);
+                if (this.careendoptions[val])
                 careendeddetails = this.careendoptions[val].itemDisplayName;
 
-                if (careendeddetails.toLowerCase() == 'death') {
+                if (careendeddetails && careendeddetails.toLowerCase() == 'death') {
                     this.isdead = true;
                     this.carended = true;
                 } else {
@@ -109,11 +109,32 @@ export class PersonHomeComponent implements OnInit {
 
         this.encounterDetail = this.htsencounters[0];
 
+        const servicesRightOrder = [ 2, 1, 3, 5, 4, 6, 7 ];
+        const ordered_array = this.mapOrder(this.services, servicesRightOrder, 'id');   
+        this.services = ordered_array;
+        
         localStorage.removeItem('patientEncounterId');
         localStorage.removeItem('patientMasterVisitId');
         localStorage.removeItem('selectedService');
         this.store.dispatch(new Consent.ClearState());
         this.getPatientDetailsById(this.personId);
+    }
+
+    mapOrder (array, order, key) {
+
+        array.sort( function (a, b) {
+            const A = a[key];
+            const B = b[key];
+
+            if (order.indexOf(A) > order.indexOf(B)) {
+                return 1;
+            } else {
+                return -1;
+            }
+
+        });
+
+        return array;
     }
 
     public getPatientDetailsById(personId: number) {

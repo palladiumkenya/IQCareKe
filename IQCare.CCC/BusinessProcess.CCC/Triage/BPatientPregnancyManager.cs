@@ -66,9 +66,7 @@ namespace BusinessProcess.CCC.Triage
         {
             using (UnitOfWork _unitOfWork = new UnitOfWork(new GreencardContext()))
             {
-                PatientPreganancy pregnancy =_unitOfWork.PatientPregnancyRepository.FindBy(x => x.PatientId == patientId & !x.DeleteFlag & x.Outcome==0)
-                     // .Select(x => x.Id)
-                      .FirstOrDefault();
+                PatientPreganancy pregnancy =_unitOfWork.PatientPregnancyRepository.FindBy(x => x.PatientId == patientId && !x.DeleteFlag && (x.Outcome == 0 || x.Outcome == null)).FirstOrDefault();
                 _unitOfWork.Dispose();
                 if (pregnancy != null)
                     return pregnancy.Id;

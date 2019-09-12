@@ -1979,9 +1979,9 @@ namespace IQCare.Web.CCC.WebService
 
             foreach (DataRow row in theDT.Rows)
             {
-                string[] i = new string[10] { row["VisitDate"].ToString(), row["Height"].ToString(), row["Weight"].ToString(), row["Muac"].ToString(),
+                string[] i = new string[11] { row["VisitDate"].ToString(), row["Height"].ToString(), row["Weight"].ToString(), row["Muac"].ToString(),
                 row["BPSystolic"].ToString(),row["BPDiastolic"].ToString(),row["Temperature"].ToString(),row["HeartRate"].ToString(),row["RespiratoryRate"].ToString(),
-                row["SpO2"].ToString()};
+                row["SpO2"].ToString(), row["NursesComments"].ToString()};
                 rows.Add(i);
             }
             return rows;

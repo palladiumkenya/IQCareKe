@@ -1,5 +1,5 @@
-export interface CircumcisionCommand {
-    Id?: number;
+export class CircumcisionCommand {
+    Id ?: number;
     PatientId: number;
     ClientCircumcised: number;
     ReferredToVMMC: number;
