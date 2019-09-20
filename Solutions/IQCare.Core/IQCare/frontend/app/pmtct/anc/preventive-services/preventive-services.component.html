@@ -70,7 +70,7 @@
                             <td>{{ item_data.preventiveService}}</td>
                             <td>{{ item_data.dateGiven | date: 'dd-MMM-yyyy' }}</td>
                             <td>{{ item_data.comments}}</td>
-                            <td>{{ item_data.nextSchedule | date: 'dd-MMM-yyyy'}}</td>
+                            <td>{{ item_data.nextSchedule ? (item_data.nextSchedule | date: 'dd-MMM-yyyy' ): '' }}</td>
                             <td>
                                 <i style="cursor: pointer;" class="danger material-icons" (click)="removeRow(index)">
                                     delete

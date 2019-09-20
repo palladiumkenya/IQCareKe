@@ -103,7 +103,7 @@ export class PrepSTIScreeningTreatmentComponent implements OnInit {
     loadSTIScreening(): void {
         this.prepService.getStiScreeningTreatment(this.patientId, this.patientMasterVisitId).subscribe(
             (res) => {
-                let STISymptoms = [];
+                const STISymptoms = [];
                 const stiScreeningObject = this.screenedForSTIOptions.filter(obj => obj.itemName == 'STIScreeningDone');
                 const stiSignsAndSymptomsObject = this.screenedForSTIOptions.filter(obj => obj.itemName == 'STISymptoms');
                 const stiLabInvestigationDoneObject = this.screenedForSTIOptions.filter(obj => obj.itemName == 'STILabInvestigationDone');

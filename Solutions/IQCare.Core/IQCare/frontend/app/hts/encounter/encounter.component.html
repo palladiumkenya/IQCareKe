@@ -83,7 +83,9 @@
                                         <mat-select placeholder="Disability" id="disability" required name="disability"
                                             formControlName="Disabilities" multiple="multiple" required>
                                             <mat-option value=""></mat-option>
-                                            <mat-option *ngFor="let option of disabilities" [value]="option.itemId">{{option.itemName}}</mat-option>
+                                            <mat-option *ngFor="let option of disabilities" [value]="option.itemId" (onSelectionChange)="onDisabilitySelection($event)">
+                                                {{option.itemName}}
+                                            </mat-option>
                                         </mat-select>
                                     </mat-form-field>
                                 </div>
@@ -111,6 +113,10 @@
                                             <mat-option value=""></mat-option>
                                             <mat-option *ngFor="let option of strategyOptions" [value]="option.itemId">{{option.itemName}}</mat-option>
                                         </mat-select>
+                                    </mat-form-field>
+
+                                    <mat-form-field>
+                                        <input matInput placeholder="Other Disability" id="OtherDisability" name="OtherDisability" formControlName="OtherDisability">                                      
                                     </mat-form-field>
                                 </div>
 

@@ -23,4 +23,5 @@ export class Encounter {
     GeoLocation?: string;
     EncounterType: number;
     HivCounsellingDone: number;
+    OtherDisability: string;
 }

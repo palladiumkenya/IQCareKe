@@ -57,6 +57,8 @@ export class TestingComponent implements OnInit {
 
     finalTestingResults: FinalTestingResults;
     htsEncounterDate: Date;
+    
+    clientGender: string;
 
     constructor(private dialog: MatDialog,
         private encounterService: EncounterService,
@@ -126,6 +128,7 @@ export class TestingComponent implements OnInit {
             });
 
             this.clientService.getClientDetails(JSON.parse(localStorage.getItem('patientId')), 2).subscribe(res => {
+                this.clientGender = res['patientLookup'][0]['gender'];
                 if (this.getAge(res['patientLookup'][0]['dateOfBirth']) < 15) {
                     this.formTesting.controls.acceptedPartnerListing.disable({ onlySelf: true });
                     this.formTesting.controls.acceptedPartnerListing.setValue(optionSelected[0]['itemId']);
@@ -228,7 +231,8 @@ export class TestingComponent implements OnInit {
             htsEncounterDate: this.htsEncounterDate,
 
             screeningHIVTestKits: this.screeningHIVTestKits,
-            syphilisResults: this.syphilisResults
+            syphilisResults: this.syphilisResults,
+            clientGender: this.clientGender
         };
 
         const dialogRef = this.dialog.open(TestDialogComponent, dialogConfig);

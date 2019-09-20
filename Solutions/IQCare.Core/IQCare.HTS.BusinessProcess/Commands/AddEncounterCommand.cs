@@ -38,6 +38,7 @@ namespace IQCare.HTS.BusinessProcess.Commands
         public DateTime EncounterDate { get; set; }
         public int EncounterType { get; set; }
         public int HivCounsellingDone { get; set; }
+        public string OtherDisability { get; set; }
     }
 
     public class AddEncounterResponse

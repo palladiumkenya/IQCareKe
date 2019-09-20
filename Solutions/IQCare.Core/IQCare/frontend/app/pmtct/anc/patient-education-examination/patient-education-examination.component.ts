@@ -12,7 +12,7 @@ import * as moment from 'moment';
 import { AncService } from '../../_services/anc.service';
 import { DataService } from '../../../shared/_services/data.service';
 import { MatDialogConfig, MatDialog } from '@angular/material';
-import { PatientCounsellingComponent } from '../patient-counselling/patient-counselling.component'
+import { PatientCounsellingComponent } from '../patient-counselling/patient-counselling.component';
 import { LookupItemView } from '../../../shared/_models/LookupItemView';
 
 export interface PeriodicElement {
@@ -62,7 +62,8 @@ export class PatientEducationExaminationComponent implements OnInit, OnDestroy {
     @Input('isEdit') isEdit: boolean;
     @Input('PatientId') PatientId: number;
     @Input('PatientMasterVisitId') PatientMasterVisitId: number;
-    @Input('visitDate')visitDate: Date;
+    @Input() visitDate: Date;
+
 
     displayedColumns: string[] = ['topicId', 'topic', 'onSetDate'];
     dataSource = ELEMENT_DATA;
@@ -221,10 +222,8 @@ export class PatientEducationExaminationComponent implements OnInit, OnDestroy {
 
         let Id: number;
         
-       if (this.counselling_editlist.length > 0){
+       if (this.counselling_editlist.length > 0) {
             Id = parseInt(this.counselling_editlist[idx].Id, 10);
-
-
             if (Id > 0) {
                 this.ancService.deletePatientCounselling(Id).subscribe(x => {
                     if (x) {
@@ -248,11 +247,6 @@ export class PatientEducationExaminationComponent implements OnInit, OnDestroy {
         } else {
             this.counselling_data.splice(idx, 1);
         }
-
-        // this.counselling_data.splice(idx, 1);
-        console.log(this.counselling_editlist);
-        console.log (this.counselling_data);
-
     }
 
     public getPatientCounselingDataAll(patientId: number): void {
