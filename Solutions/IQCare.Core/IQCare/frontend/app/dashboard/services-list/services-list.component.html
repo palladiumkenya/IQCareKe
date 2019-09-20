@@ -106,9 +106,17 @@
                                     <div class="ticket-time  col-lg-2 col-sm-2 col-xs-12">
                                         <div class="divider hidden-md hidden-sm hidden-xs"></div>
                                         <span>
-                                            <ng-container *ngIf="isDeathEligibility(service.id); else eligibleTemplate">
+                                            <ng-container *ngIf="isDeathEligibility(service.id); else serviceTemplate">
                                                 <span class="label label-orange">Not Eligible</span>
                                             </ng-container>
+                                            <ng-template #serviceTemplate>
+                                                <span *ngIf="checkService(service.id); else eligibleTemplate">
+                                                    <a class="btn btn-sm btn-primary"
+                                                        (click)="enrollToService(service.id, service.code)">
+                                                        Enroll
+                                                    </a>
+                                                </span>
+                                            </ng-template>
 
                                             <ng-template #eligibleTemplate>
                                                 <span *ngIf="isServiceEligible(service.id); else agerisktemplate">

@@ -7,6 +7,7 @@ import { catchError, tap } from 'rxjs/operators';
 import { environment } from '../../../environments/environment';
 import { ErrorHandlerService } from './errorhandler.service';
 import { LookupItemView } from '../_models/LookupItemView';
+import { Decode } from '../_models/Decode';
 import { Facility } from '../_models/Facility';
 
 const httpOptions = {
@@ -32,6 +33,14 @@ export class LookupItemService {
             tap(getByGroupName => this.errorHandler.log('get ' + groupName + 'options by Name')),
             catchError(this.errorHandler.handleError<LookupItemView[]>('getbyGroupName', []))
         );
+    }
+
+
+    public getDecodeByCodeId(codeid: number): Observable<Decode[]> {
+        return this.http.get<Decode[]>(this.API_URL + '/api/Lookup/GetDecodeByCodeId/' + codeid).pipe(
+            tap(getDecodeByCodeId => this.errorHandler.log('get options by CodeId '),
+                catchError(this.errorHandler.handleError<Decode[]>('getDecodeByCodeId', []))));
+
     }
 
     public getByGroupNameAndItemName(groupName: string, itemName: string): Observable<any> {

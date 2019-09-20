@@ -25,7 +25,7 @@ namespace IQCare.Prep.BusinessProcess.Commands
 
 
 
-        public string HivPositiveStatusDate { get; set; }
+        public DateTime? HivPositiveStatusDate { get; set; }
 
         public string CCCEnrollment { get; set; }
         public DateTime? PartnerARTStartDate { get; set; }

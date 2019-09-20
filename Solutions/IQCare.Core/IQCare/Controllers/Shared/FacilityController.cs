@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -41,6 +41,7 @@ namespace IQCare.Controllers.Shared
             return BadRequest(response);
         }
 
+       
 
        
     }

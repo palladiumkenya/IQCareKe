@@ -1,4 +1,4 @@
-<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="ucPharmacyPrescription.ascx.cs" Inherits="IQCare.Web.CCC.UC.ucPharmacyPrescription" %>
+ <%@ Control Language="C#" AutoEventWireup="true" CodeBehind="ucPharmacyPrescription.ascx.cs" Inherits="IQCare.Web.CCC.UC.ucPharmacyPrescription" %>
 
 <asp:HiddenField ID="drugID" runat="server" ClientIDMode="Static" />
 <asp:HiddenField ID="drugAbbr" runat="server" ClientIDMode="Static" />

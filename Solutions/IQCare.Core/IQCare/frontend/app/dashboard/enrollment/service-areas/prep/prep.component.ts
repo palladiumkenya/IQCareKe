@@ -59,6 +59,7 @@ export class PrepComponent implements OnInit {
     isVisible: boolean = false;
     maxDate: Date;
     minDate: Date;
+    Appointmentid: number;
     facilityselected: any[] = [];
     personPopulation: PersonPopulation;
     ClientTypes: any[] = [];
@@ -77,6 +78,7 @@ export class PrepComponent implements OnInit {
     currentDate: Date;
     facilities: any[] = [];
     isSchoolVisible: boolean = false;
+    isPopulationTypeVisible: boolean = false;
     isMale: boolean = true;
     isFemale: boolean = false;
     patientMasterVisitId: number;
@@ -94,7 +96,7 @@ export class PrepComponent implements OnInit {
     planningPregnancy: LookupItemView[] = [];
     pregnancyStatusOptions: LookupItemView[] = [];
     yesNoUnknownOptions: LookupItemView[] = [];
-
+    populationtype: any[] = [];
 
     facilityList: any[] = [];
     protected _onDestroy = new Subject<void>();
@@ -115,7 +117,7 @@ export class PrepComponent implements OnInit {
         private searchService: SearchService,
         private recordsService: RecordsService) {
         this.maxDate = new Date();
-        this.clientCircumcisionStatusCommand =new CircumcisionCommand();
+        this.clientCircumcisionStatusCommand = new CircumcisionCommand();
         this.isVisible = false;
         this.FacilitySelected.valueChanges.pipe(debounceTime(400)).subscribe(data => {
             this.personHomeService.filterFacilities(data).subscribe(res => {
@@ -135,7 +137,7 @@ export class PrepComponent implements OnInit {
             this.serviceCode = serviceCode;
 
 
-            console.log(this.serviceId);
+
             if (edit == 1) {
                 this.isEdit = true;
             }
@@ -145,7 +147,7 @@ export class PrepComponent implements OnInit {
         });
         this.route.data.subscribe((res) => {
 
-            console.log(res);
+
             const { PartnerCCCEnrollmentArray,
                 PatientIdentifierArray
                 , SexWithoutCondomArray
@@ -176,8 +178,8 @@ export class PrepComponent implements OnInit {
             CurrentRegimen: new FormControl(''),
             ClinicalNotes: new FormControl(''),
             IsSchool: new FormControl(''),
-            KeyPopulation: new FormControl(''),
-            populationType: new FormControl('', [Validators.required]),
+            //  KeyPopulation: new FormControl(''),
+            // populationType: new FormControl('', [Validators.required]),
             //  DiscordantCouple: new FormControl(''),
             PrevPrepUse: new FormControl(''),
             Months: new FormControl(''),
@@ -268,15 +270,20 @@ export class PrepComponent implements OnInit {
                         });
                     }
                 });
-                console.log(this.ClientTypes);
-                console.log(this.patientTypes);
+
 
             }
         );
-        this.form.controls.KeyPopulation.disable({ onlySelf: true });
+        //  this.form.controls.KeyPopulation.disable({ onlySelf: true });
         // this.form.controls.DiscordantCouple.disable({ onlySelf: true });
 
-        this.loadPopulationTypes(this.personId);
+        this.form.controls.HivSerodiscordantduration.disable({ onlySelf: true });
+        this.LoadPopulationTypes(this.personId);
+        this.loadPriorityPopulation(this.personId);
+
+        console.log('Population');
+        console.log(this.populationtype);
+     
 
         this._lookupItemService.getByGroupName('Entrypoint').subscribe(
             (res) => {
@@ -322,9 +329,10 @@ export class PrepComponent implements OnInit {
 
         if (this.isEdit) {
             this.loadPatient();
-            this.loadFamilyPlanningMethod();
-            this.loadFamilyPlanning();
-            this.loadCircumcisionStatus();
+
+
+
+
         }
 
 
@@ -346,19 +354,75 @@ export class PrepComponent implements OnInit {
 
 
     }
-    loadhivprofiles() {
-        /*  this.personHomeService.getHivPartnerProfile(this.patientId).subscribe((result) => {
-                      this.hivpositiveprofileOptions
-          });*/
+    loadhivprofiles(patientid: number) {
+        this.personHomeService.getHivPartnerProfile(patientid).subscribe((result) => {
+
+            if (result != null) {
+                let outcome: any[] = [];
+                outcome = result['patientProfiles'];
+
+                if (outcome.length > 0) {
+                    outcome.forEach(r => {
+                        let sexwithouttext: string[];
+                        sexwithouttext = this.sexwithoutcondomoptions
+                            .filter(x => x.itemId == parseInt(r['sexWithoutCondoms'].toString(), 10))
+                            .map(t => t.displayName);
+                        let CCCEnrollmentText: string[];
+                        CCCEnrollmentText = this.partnercccenrollmentoptions.
+                            filter(x => x.itemId == r['cccEnrollment'])
+                            .map(x => x.displayName);
+
+                        this.hivpositiveprofileOptions.push({
+                            HivPositiveStatusDate: r['hivPositiveStatusDate'],
+                            CCCEnrollment: r['cccEnrollment'],
+                            CCCEnrollmentText: CCCEnrollmentText,
+                            partnerARTStartDate: r['partnerARTStartDate'],
+                            HivSerodiscordantduration: r['hivSeroDiscordantDuration'],
+                            SexWithoutCondoms: sexwithouttext,
+                            NumberofChildren: r['numberofChildren'],
+                            CCCNumber: r['cccNumber'],
+                            DeleteFlag: false,
+                            Id: r['id']
+
+
+
+
+                        });
+                        this.hivsavedprofileOptions.push({
+                            Id: r['id'],
+                            PatientId: this.patientId,
+                            HivPositiveStatusDate: r['hivPositiveStatusDate'],
+                            CCCEnrollment: r['cccEnrollment'],
+                            PartnerARTStartDate: r['partnerARTStartDate'],
+                            HivSerodiscordantduration: r['hivSeroDiscordantDuration'],
+                            SexWithoutCondoms: r['sexWithoutCondoms'],
+                            NumberofChildren: r['numberofChildren'],
+                            CCCNumber: r['cccNumber'],
+                            CreatedBy: r['createdBy'],
+                            DeleteFlag: false
+
+
+                        });
+
+
+
+
+                    });
+                }
+            }
+        });
     }
-    loadAppointments() {
-        this.personHomeService.getAppointments(this.patientId, this.patientMasterVisitId).subscribe(
+
+    loadAppointments(patientid: number, patientmastervisitid: number) {
+        this.personHomeService.getAppointments(patientid, patientmastervisitid).subscribe(
             (result) => {
                 if (result) {
+
                     const yesOption = this.yesnoOptions.filter(obj => obj.itemName == 'Yes');
                     this.form.get('nextAppointmentDate').setValue(result.appointmentDate);
 
-                    this.form.get('Appointmentid').setValue(result.id);
+                    this.Appointmentid = result.id;
+                    //this.form.get('Appointmentid').setValue(result.id);
                     this.form.get('nextAppointmentGiven').setValue(yesOption[0].itemId);
                 } else {
                     const noOption = this.yesnoOptions.filter(obj => obj.itemName == 'No');
@@ -393,7 +457,9 @@ export class PrepComponent implements OnInit {
             (result) => {
 
                 this.patientMasterVisitId = result[0]['id'];
-                this.loadPregnancyIndicator(this.patientMasterVisitId);
+                this.loadPregnancyIndicator(this.patientMasterVisitId, patientId);
+                this.loadAppointments(patientId, this.patientMasterVisitId);
+                this.loadFamilyPlanning(patientId, this.patientMasterVisitId);
             },
             (error) => {
                 console.log(error);
@@ -401,12 +467,11 @@ export class PrepComponent implements OnInit {
         );
     }
 
-    loadPregnancyIndicator(patientMasterVisitId: number): void {
-        this.personHomeService.getPregnancyIndicator(this.patientId, patientMasterVisitId).subscribe(
+    loadPregnancyIndicator(patientMasterVisitId: number, patientid: number): void {
+        this.personHomeService.getPregnancyIndicator(patientid, patientMasterVisitId).subscribe(
             (res) => {
                 if (res) {
                     this.form.controls.lmp.setValue(res.lmp);
-                    this.form.controls.pregnancyPlanned.setValue(res.pregnancyPlanned);
                     this.form.controls.planningToGetPregnant.setValue(res.planningToGetPregnant);
                     this.form.controls.breastFeeding.setValue(res.breastFeeding);
 
@@ -427,10 +492,10 @@ export class PrepComponent implements OnInit {
         );
     }
 
-    loadFamilyPlanningMethod(): void {
-        this.personHomeService.getFamilyPlanningMethod(this.patientId).subscribe(
+    loadFamilyPlanningMethod(patientid): void {
+        this.personHomeService.getFamilyPlanningMethod(patientid).subscribe(
             (res) => {
-                // console.log(res);
+
                 if (res.length > 0) {
                     res.forEach(element => {
                         this.form.controls.familyPlanningMethods.setValue(element.fpMethodId);
@@ -444,8 +509,8 @@ export class PrepComponent implements OnInit {
         );
     }
 
-    loadFamilyPlanning(): void {
-        this.personHomeService.getFamilyPlanning(this.patientId, this.patientMasterVisitId).subscribe(
+    loadFamilyPlanning(patientid: number, patientmastervisitid: number): void {
+        this.personHomeService.getFamilyPlanning(patientid, patientmastervisitid).subscribe(
             (res) => {
                 if (res.length > 0) {
                     res.forEach(element => {
@@ -462,8 +527,8 @@ export class PrepComponent implements OnInit {
         );
     }
 
-    loadCircumcisionStatus() {
-        this.personHomeService.getCircumcisionStatus(this.patientId).subscribe(
+    loadCircumcisionStatus(patientid: number) {
+        this.personHomeService.getCircumcisionStatus(patientid).subscribe(
             (res) => {
                 if (res) {
                     this.form.controls.isClientCircumcised.setValue(res.clientCircumcised);
@@ -598,9 +663,9 @@ export class PrepComponent implements OnInit {
     public getPatientDetailsById(personId: number) {
         this.personView$ = this.personHomeService.getPatientByPersonId(personId).subscribe(
             p => {
-                // console.log(p);
+
                 this.person = p;
-                console.log(this.person);
+
                 if (this.person != null) {
 
                     if (this.person.dateOfBirth != null && this.person.dateOfBirth != undefined) {
@@ -636,7 +701,7 @@ export class PrepComponent implements OnInit {
                     this.notificationService.getConfig());
             },
             () => {
-                // console.log(this.personView$);
+
             });
     }
 
@@ -671,7 +736,7 @@ export class PrepComponent implements OnInit {
     loadEntryPoints(pat: number): void {
         this.personHomeService.getPatientServiceAreaEntryPoints(this.serviceId, pat).subscribe(
             (result) => {
-                // console.log(result);
+
                 this.form.controls.Referredfrom.setValue(result.entryPointId);
             },
             (error) => {
@@ -686,7 +751,7 @@ export class PrepComponent implements OnInit {
 
                 const arrayValue = [];
                 arrayValue.push(res);
-                console.log(arrayValue);
+
                 let itemid: number;
                 itemid = this.ClientTypes.findIndex(x => x.itemDisplayName == 'Yes');
 
@@ -694,28 +759,40 @@ export class PrepComponent implements OnInit {
 
                     this.form.controls.ClientTransferIn.setValue(this.ClientTypes[itemid]['itemId']);
                     this.isVisible = true;
-                    this.form.controls.TransferInDate.setValue(arrayValue[0]['transferInDate']);
-                    this.form.controls.TransferInMflCode.setValue(arrayValue[0]['mflCode']);
-                    console.log(this.form.controls.CurrentRegimen);
-
-                    //  this.form.controls.FacilityListSelected.setValue(arrayValue[0]['facilityFrom']);
-                    // this.FacilitySelected.setValue(arrayValue[0]['facilityFrom']);
-
-                    this.personHomeService.getFacility(arrayValue[0]['mflCode']).subscribe(
-                        (result) => {
-                            if (result.length > 0) {
-                                console.log(result);
-                                this.filteredfacilities = result;
-                                this.FacilitySelected.setValue(result[0]);
-                            }
+                    console.log(arrayValue);
+                    if (arrayValue[0] != null) {
+                        if (arrayValue[0]['transferInDate'] != null) {
+                            this.form.controls.TransferInDate.setValue(arrayValue[0]['transferInDate']);
                         }
-                    );
+                        if (arrayValue[0]['mflCode'] != null) {
+                            this.form.controls.TransferInMflCode.setValue(arrayValue[0]['mflCode']);
 
-                    // this.filtercorrectfacilities(arrayValue[0]['facilityFrom']);
-                    this.form.controls.ClinicalNotes.setValue(arrayValue[0]['transferInNotes']);
-                    let currentTreatment: string;
-                    currentTreatment = arrayValue[0]['currentTreatment'].toString();
-                    this.form.controls.CurrentRegimen.setValue(parseInt(currentTreatment, 10));
+
+
+                            //  this.form.controls.FacilityListSelected.setValue(arrayValue[0]['facilityFrom']);
+                            // this.FacilitySelected.setValue(arrayValue[0]['facilityFrom']);
+
+                            this.personHomeService.getFacility(arrayValue[0]['mflCode']).subscribe(
+                                (result) => {
+                                    if (result.length > 0) {
+
+                                        this.filteredfacilities = result;
+                                        this.FacilitySelected.setValue(result[0]);
+                                    }
+                                }
+                            );
+                        }
+
+                        // this.filtercorrectfacilities(arrayValue[0]['facilityFrom']);
+                        if (arrayValue[0]['transferInNotes'] != null) {
+                            this.form.controls.ClinicalNotes.setValue(arrayValue[0]['transferInNotes']);
+                        }
+                        if (arrayValue[0]['currentTreatment'] != null) {
+                            let currentTreatment: string;
+                            currentTreatment = arrayValue[0]['currentTreatment'].toString();
+                            this.form.controls.CurrentRegimen.setValue(parseInt(currentTreatment, 10));
+                        }
+                    }
 
                 } else {
                     itemid = this.ClientTypes.findIndex(x => x.itemDisplayName == 'No');
@@ -737,36 +814,38 @@ export class PrepComponent implements OnInit {
 
                 const arrayValue = [];
                 arrayValue.push(res);
-                console.log(arrayValue);
+
                 if (arrayValue.length > 0) {
                     //   this.form.controls.PrevPrepUse.setValue(1);
 
-                    //  this.form.controls.Weeks.enable({ onlySelf: true });
-                    this.form.controls.Months.enable({ onlySelf: true });
-                    this.form.controls.InitiationDate.enable({ onlySelf: true });
-                    this.form.controls.DateLastUsed.enable({ onlySelf: true });
+                    if (arrayValue[0] != null) {
+
+                        //  this.form.controls.Weeks.enable({ onlySelf: true });
+                        this.form.controls.Months.enable({ onlySelf: true });
+                        this.form.controls.InitiationDate.enable({ onlySelf: true });
+                        this.form.controls.DateLastUsed.enable({ onlySelf: true });
 
 
 
+                        if (arrayValue[0]['months'] != null) {
+                            this.form.controls.Months.setValue(arrayValue[0]['months']);
+                        }
+                        if (arrayValue[0]['initiationDate'] != null) {
+                            this.form.controls.InitiationDate.setValue(moment(arrayValue[0]['initiationDate'].toString()).toDate());
+                        }
 
-                    // this.form.controls.Weeks.setValue(arrayValue[0]['weeks']);
-                    this.form.controls.Months.setValue(arrayValue[0]['months']);
-                    if (arrayValue[0]['initiationDate'] != null) {
-                        this.form.controls.InitiationDate.setValue(moment(arrayValue[0]['initiationDate'].toString()).toDate());
-                    }
-
-                    if (arrayValue[0]['dateLastUsed'] != null) {
-                        this.form.controls.DateLastUsed.setValue(moment(arrayValue[0]['dateLastUsed'].toString()).toDate());
+                        if (arrayValue[0]['dateLastUsed'] != null) {
+                            this.form.controls.DateLastUsed.setValue(moment(arrayValue[0]['dateLastUsed'].toString()).toDate());
+                        }
                     }
                 } else {
-                    //this.form.controls.PrevPrepUse.setValue(0);
-                    // this.form.controls.Weeks.disable({ onlySelf: true });
+
                     this.form.controls.Months.disable({ onlySelf: true });
                     this.form.controls.DateLastUsed.disable({ onlySelf: true });
                     this.form.controls.InitiationDate.disable({ onlySelf: true });
                 }
-                console.log('prevprepuse');
-                console.log(res);
+
+
             },
             (error) => {
                 console.log(error);
@@ -778,25 +857,38 @@ export class PrepComponent implements OnInit {
         this.recordsService.getPatientIdentifiersList(pat).subscribe(
             (result) => {
                 if (result.length > 0) {
-                    console.log(result);
+
                     let t: number;
                     const array: any[] = [];
-
+                    let arrayreplace: string;
+                    let arraynumber: string;
+                    let mflcodenumber: string;
+                    let arrayreplace2: string;
 
                     let id: number;
                     let value: string;
                     id = this.serviceAreaIdentifiers[0]['identifierId'];
                     array.push(result);
-                    console.log(array);
+
                     t = array[0].findIndex(x => x.identifierTypeId === id);
-                    console.log(t);
+
                     value = array[0][t].identifierValue.toString();
-                    this.arraysplit = value.split('/');
-                    this.form.get('EnrollmentNumber').setValue(this.arraysplit[2]);
+                    arraynumber = value.replace(/\//g, "");
+                    console.log(arraynumber);
+                    mflcodenumber = arraynumber.substring(0, 5);
+                    arrayreplace = arraynumber.split(mflcodenumber).pop();
+
+                    let stringvalue: string;
+                    stringvalue = arrayreplace.substring(0, 4);
+
+                    arrayreplace2 = arrayreplace.split(stringvalue).pop();
+                    this.form.get('MFLCode').setValue(mflcodenumber);
+
+                    this.form.get('EnrollmentNumber').setValue(arrayreplace2);
                     let years: string;
-                    years = this.arraysplit[1].toString();
+                    years = stringvalue;
                     this.form.get('Year').setValue(parseInt(years, 10));
-                    console.log(this.form.controls.Year);
+
                 }
             },
             (error) => {
@@ -810,12 +902,17 @@ export class PrepComponent implements OnInit {
             (result) => {
                 this.LoadPrepEnrollmentDate(result.id);
                 this.loadEntryPoints(result.id);
-                this.loadPopulationTypes(this.personId);
+                // this.loadPopulationTypes(this.personId);
                 this.loadEnrollmentPatientMasterVisitId(result.id);
+                this.loadCircumcisionStatus(result.id);
+                this.loadhivprofiles(result.id);
+                this.loadFamilyPlanningMethod(result.id);
+
 
 
                 // load hts identifiers
                 this.loadIdentifiers(result.id);
+
                 this.loadPrevPrepUse();
                 this.loadPrevTransferIn();
                 this.loadPatientOVStatus();
@@ -835,34 +932,42 @@ export class PrepComponent implements OnInit {
     }
 
 
-    loadPopulationTypes(personId: number): void {
+    LoadPopulationTypes(personId: number): void {
         this.personHomeService.getPersonPopulationType(personId).subscribe(
             (result) => {
-                console.log('populationtype');
-                console.log(result);
+
+
                 if (result.length > 0) {
-                    if (result[0].populationType == 'General Population') {
-                        this.form.controls.populationType.setValue(1);
-                    } else if (result[0].populationType == 'Discordant Couple') {
-                        this.form.controls.populationType.setValue(3);
-                        /* this.form.controls.DiscordantCouple.enable({ onlySelf: false });
-                         const arrayValue = [];
-                         result.forEach(element => {
-                             arrayValue.push(element.populationCategory);
-                         });
-                         this.form.controls.DiscordantCouple.setValue(arrayValue); */
 
-                    } else {
-                        this.form.controls.populationType.setValue(2);
-                        this.form.controls.KeyPopulation.enable({ onlySelf: false });
-                        const arrayValue = [];
-                        result.forEach(element => {
-                            arrayValue.push(element.populationCategory);
-                        });
-                        this.form.controls.KeyPopulation.setValue(arrayValue);
-                    }
+                    console.log(result);
+                    this.isPopulationTypeVisible =true;
+                    result.forEach(element => {
+                        if (element.populationType == 'General Population') {
+                            this.populationtype.push('General Population');
 
+                        } else if (element.populationType == 'Discordant Couple') {
+                            this.form.controls.HivSerodiscordantduration.enable({ onlySelf: true });
+                            this.populationtype.push('Discordant Couple');
 
+                        }
+
+                    });
+                    console.log(this.populationtype);
+                }
+            },
+            (error) => {
+                console.log(error);
+            }
+        );
+    }
+
+    loadPriorityPopulation(personId: number): void {
+        this.personHomeService.getPersonPriorityTypes(personId).subscribe(
+            (result) => {
+                // console.log(result);
+                if (result.length > 0) {
+                    this.isPopulationTypeVisible =true;
+                    this.populationtype.push('PriorityPopulation');
                 }
             },
             (error) => {
@@ -900,7 +1005,7 @@ export class PrepComponent implements OnInit {
     /* ngAfterViewInit() {
          this.setInitialValue();
      }
- 
+     
      // tslint:disable-next-line: use-life-cycle-interface
      ngOnDestroy() {
          this._onDestroy.next();
@@ -921,9 +1026,9 @@ export class PrepComponent implements OnInit {
 
     // this.filteredfacilities.next(this.facilities.slice(0, 10));
     /*  this.filteredfacilities.pipe(take(1)).subscribe(() => {
-
+    
       });
-} */
+    } */
     displayfn(facility?: any): string | undefined {
         return facility ? facility.name : undefined;
     }
@@ -936,10 +1041,10 @@ export class PrepComponent implements OnInit {
         if (!this.facilities) {
             return;
         }
-
-
+    
+    
         let search = value;
-
+    
         if (!search) {
             this.filteredfacilities.next(this.facilities.slice(0, 10));
             return;
@@ -949,8 +1054,8 @@ export class PrepComponent implements OnInit {
         this.filteredfacilities.next(
             this.facilities.filter(f => f.name.toLowerCase().indexOf(search) > -1).slice(0, 10)
         );
-
-
+    
+    
     } */
 
     getYears() {
@@ -973,10 +1078,10 @@ export class PrepComponent implements OnInit {
     } */
 
     /*   changePrevUse(event) {
-   
+     
            let selectedvalue: number;
            selectedvalue = event.source.value;
-   
+     
            if (event.source.selected == true) {
                if (selectedvalue === 1) {
                    //  this.form.controls.Weeks.enable({ onlySelf: true });
@@ -988,11 +1093,11 @@ export class PrepComponent implements OnInit {
                    this.form.controls.InitiationDate.disable({ onlySelf: true });
                }
            }
-   
+     
        }*/
 
     changemflcode(event) {
-        console.log(event);
+
         let value: string;
         value = event.option.viewValue.toString();
 
@@ -1002,7 +1107,7 @@ export class PrepComponent implements OnInit {
         this.personHomeService.getFacility(arr[0].toString()).subscribe(
             (result) => {
                 if (result.length > 0) {
-                    console.log(result);
+
                     this.filteredfacilities = result;
                     this.FacilitySelected.setValue(result[0]);
                 }
@@ -1021,9 +1126,7 @@ export class PrepComponent implements OnInit {
 
 
         this.form.controls.TransferInMflCode.setValue(event.option.value.mflCode);
-        console.log(this.form.controls.TransferInMflCode.value);
-        console.log('FacilitySelected Outcome');
-        console.log(this.FacilitySelected.value);
+
 
     }
     onPregnancySelection(event) {
@@ -1070,7 +1173,8 @@ export class PrepComponent implements OnInit {
 
     public SaveValues() {
 
-        const { EnrollmentDate, KeyPopulation, populationType, EnrollmentNumber, MFLCode, Year, ClientTransferIn,
+        const { EnrollmentDate
+            , EnrollmentNumber, MFLCode, Year, ClientTransferIn,
             FacilitySelected, InitiationDate,
             TransferInDate, TransferInMflCode, CurrentRegimen, ClinicalNotes
             , isClientCircumcised, lmp, pregnant, DateLastUsed,
@@ -1131,7 +1235,7 @@ export class PrepComponent implements OnInit {
             }
 
         }
-        console.log(this.form);
+
         if (this.form.valid == true) {
             this.save();
         } else {
@@ -1155,14 +1259,16 @@ export class PrepComponent implements OnInit {
         this.spinner.show();
         const enrollment = new Enrollment();
 
-        const { EnrollmentDate, KeyPopulation, populationType, EnrollmentNumber, MFLCode, Year, ClientTransferIn
+        const { EnrollmentDate //KeyPopulation, populationType
+            , EnrollmentNumber, MFLCode, Year, ClientTransferIn
             , TransferInDate, TransferInMflCode, CurrentRegimen, ClinicalNotes, InitiationDate, IsSchool,
             Months, Referredfrom, isClientCircumcised, lmp, pregnant,
             pregnancyPlanned, breastFeeding, onFamilyPlanning, DateLastUsed,
-            familyPlanningMethods, planningToGetPregnant, id_familyPlanning, fpMethodId, nextAppointmentDate, nextAppointmentGiven, Appointmentid
+            familyPlanningMethods, planningToGetPregnant,
+            id_familyPlanning, fpMethodId, nextAppointmentDate, nextAppointmentGiven, Appointmentid
         } = this.form.value;
-        this.personPopulation.KeyPopulation = KeyPopulation;
-        this.personPopulation.populationType = populationType;
+        // this.personPopulation.KeyPopulation = KeyPopulation;
+        //this.personPopulation.populationType = populationType;
         // this.personPopulation.DiscordantCouplePopulation = DiscordantCouple;
 
         let itemdisplayname: any[] = [];
@@ -1171,7 +1277,7 @@ export class PrepComponent implements OnInit {
         });
 
         let idnumber: string;
-        idnumber = MFLCode + '/' + Year + '/' + EnrollmentNumber;
+        idnumber = MFLCode + + Year + EnrollmentNumber;
         enrollment.ServiceIdentifiersList.push({
             'IdentifierId': this.serviceAreaIdentifiers[0]['identifierId'],
             'IdentifierValue': idnumber
@@ -1183,13 +1289,13 @@ export class PrepComponent implements OnInit {
         enrollment.RegistrationDate = EnrollmentDate;
         enrollment.PosId = this.posId;
 
-        
 
-        const populationTypes = this.registrationService.addPersonPopulationType(this.personId,
-            this.userId, this.personPopulation);
+
+        //const populationTypes = this.registrationService.addPersonPopulationType(this.personId,
+        //    this.userId, this.personPopulation);
         const addPatient = this.registrationService.addPatient(this.personId, this.userId, EnrollmentDate, this.posId);
 
-        forkJoin([addPatient, populationTypes]).subscribe(
+        forkJoin([addPatient]).subscribe(
             results => {
                 this.patientId = results[0]['patientId'];
                 enrollment.PatientId = this.patientId;
@@ -1301,11 +1407,11 @@ export class PrepComponent implements OnInit {
                                     this.clientCircumcisionStatusCommand.CreatedBy = this.userId;
                                     this.clientCircumcisionStatusCommand.CreateDate = new Date();
                                     this.clientCircumcisionStatusCommand.DeleteFlag = false;
-                        
-                        
+
+
                                 }
                                 else if (isClientCircumcised && this.isEdit == true) {
-                        
+
                                     this.clientCircumcisionStatusCommand.Id = this.circumcisedId;
                                     this.clientCircumcisionStatusCommand.PatientId = this.patientId;
                                     this.clientCircumcisionStatusCommand.ClientCircumcised = parseInt(isClientCircumcised, 10);
@@ -1314,31 +1420,29 @@ export class PrepComponent implements OnInit {
                                     this.clientCircumcisionStatusCommand.CreateDate = new Date();
                                     this.clientCircumcisionStatusCommand.DeleteFlag = false;
                                 }
-                        
-                        
+
+
                                 const circumcisionStatus = this.personHomeService.saveCircumcisionStatus(this.clientCircumcisionStatusCommand).subscribe((res) => {
-                                    console.log(res);
+
 
                                 }, (error) => {
                                     console.log(error);
                                 });
                             }
-                            
-                                this.personHomeService.getPatientEnrollmentMasterVisitByServiceAreaId(this.patientId, this.serviceId).subscribe(
-                                    (result) => {
-                                        this.patientMasterVisitId = result[0]['id'];
-                                        console.log('results for mastervisitid');
-                                        console.log(result);
-                                        console.log(this.patientMasterVisitId)
-                                        if (this.patientMasterVisitId != null && this.patientMasterVisitId > 0) {
-                                            if (this.person.gender.toLowerCase() == 'female') {
-                                                this.pregnancyOption = this.pregnancyStatusOptions.filter(obj => obj.displayName == 'Not Pregnant');
-                                                const isPregnant = this.yesnoOptions.filter(obj => obj.itemId == pregnant);
-                                                if (isPregnant.length > 0) {
-                                                    if (isPregnant[0].itemName == 'Yes') {
-                                                        this.pregnancyOption = this.pregnancyStatusOptions.filter(obj => obj.displayName == 'Pregnant');
-                                                    }
+
+                            this.personHomeService.getPatientEnrollmentMasterVisitByServiceAreaId(this.patientId, this.serviceId).subscribe(
+                                (result) => {
+                                    this.patientMasterVisitId = result[0]['id'];
+
+                                    if (this.patientMasterVisitId != null && this.patientMasterVisitId > 0) {
+                                        if (this.person.gender.toLowerCase() == 'female') {
+                                            this.pregnancyOption = this.pregnancyStatusOptions.filter(obj => obj.displayName == 'Not Pregnant');
+                                            const isPregnant = this.yesnoOptions.filter(obj => obj.itemId == pregnant);
+                                            if (isPregnant.length > 0) {
+                                                if (isPregnant[0].itemName == 'Yes') {
+                                                    this.pregnancyOption = this.pregnancyStatusOptions.filter(obj => obj.displayName == 'Pregnant');
                                                 }
+                                            }
                                             const pregnancyIndicatorCommand: PregnancyIndicatorCommand = {
                                                 PatientId: this.patientId,
                                                 PatientMasterVisitId: this.patientMasterVisitId,
@@ -1359,7 +1463,7 @@ export class PrepComponent implements OnInit {
                                             };
 
                                             const pregnancyIndicator = this.personHomeService.savePregnancyIndicatorCommand(pregnancyIndicatorCommand).subscribe((res) => {
-                                                console.log(res);
+
 
                                             }, (error) => {
                                                 console.log(error);
@@ -1439,41 +1543,41 @@ export class PrepComponent implements OnInit {
                                             }
                                         }
 
-                                            if (this.isEdit == false) {
-                                                const nextAppointmentCommand: NextAppointmentCommand = {
-                                                    PatientId: this.patientId,
-                                                    PatientMasterVisitId: this.patientMasterVisitId,
-                                                    ServiceAreaId: this.serviceId,
-                                                    AppointmentDate: nextAppointmentDate
-                                                        ? moment(nextAppointmentDate).toDate() : null,
-                                                    Description: '',
-                                                    StatusDate: new Date(),
-                                                    DifferentiatedCareId: 0,
-                                                    AppointmentReason: 'Follow up',
-                                                    CreatedBy: this.userId
-                                                };
-                                                const matNextAppointment = this.personHomeService.saveNextAppointment(nextAppointmentCommand).subscribe((res) => {
-                                                    console.log(res);
+                                        if (this.isEdit == false) {
+                                            const nextAppointmentCommand: NextAppointmentCommand = {
+                                                PatientId: this.patientId,
+                                                PatientMasterVisitId: this.patientMasterVisitId,
+                                                ServiceAreaId: this.serviceId,
+                                                AppointmentDate: nextAppointmentDate
+                                                    ? moment(nextAppointmentDate).toDate() : null,
+                                                Description: '',
+                                                StatusDate: new Date(),
+                                                DifferentiatedCareId: 0,
+                                                AppointmentReason: 'Follow up',
+                                                CreatedBy: this.userId
+                                            };
+                                            const matNextAppointment = this.personHomeService.saveNextAppointment(nextAppointmentCommand).subscribe((res) => {
+                                                console.log(res);
 
-                                                }, (error) => {
-                                                    console.log(error);
-                                                });
-                                            }
-
+                                            }, (error) => {
+                                                console.log(error);
+                                            });
                                         }
 
-                                    },
-                                    (error) => {
-                                        console.log(error);
                                     }
-                                );
+
+                                },
+                                (error) => {
+                                    console.log(error);
+                                }
+                            );
 
 
-                            
+
 
                             if (this.isEdit == true) {
                                 const updateNextAppointment = {
-                                    AppointmentId: Appointmentid,
+                                    AppointmentId: this.Appointmentid,
                                     AppointmentDate: nextAppointmentDate,
                                     Description: ''
                                 };

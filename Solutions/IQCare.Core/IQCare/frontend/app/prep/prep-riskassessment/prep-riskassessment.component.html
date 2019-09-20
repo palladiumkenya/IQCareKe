@@ -83,10 +83,19 @@
                             </mat-form-field>
                         </div>
 
-                        <div class="col-md-12">
+                        <div class="col-md-4 col-xs-12 col-sm-12">
                             <mat-form-field class="col-md-12">
-                                <textarea formControlName="SpecifyRiskReductionEducation" matInput
-                                    placeholder="Specify"></textarea>
+                                <!-- <textarea formControlName="SpecifyRiskReductionEducation" matInput
+                                    placeholder="Specify"></textarea>-->
+                                <mat-select placeholder="Specify" formControlName="SpecifyRiskReductionEducation"
+                                    required disableRipple multiple required>
+
+
+                                    <mat-option *ngFor="let Option of  SpecifyRiskReductionEdOptions"
+                                        [value]="Option.itemId">
+                                        {{Option.itemDisplayName}}
+                                    </mat-option>
+                                </mat-select>
                             </mat-form-field>
                         </div>
                     </div>
@@ -109,9 +118,19 @@
                         </div>
 
                         <div class="col-md-12">
-                            <mat-form-field class="col-md-12">
-                                <textarea formControlName="SpecifyPreventionReferalServices" matInput
-                                    placeholder="Specify"></textarea>
+                            <mat-form-field class="col-md-4 col-xs-12 col-sm-12">
+                                <!--<textarea formControlName="SpecifyPreventionReferalServices" matInput
+                                    placeholder="Specify"></textarea>-->
+
+
+                                <mat-select placeholder="Specify" formControlName="SpecifyPreventionReferalServices"
+                                    required disableRipple multiple required>
+
+
+                                    <mat-option *ngFor="let Option of  SpecifyReferralOptions" [value]="Option.itemId">
+                                        {{Option.itemDisplayName}}
+                                    </mat-option>
+                                </mat-select>
                             </mat-form-field>
                         </div>
                     </div>
@@ -162,9 +181,9 @@
 
                         <div class='col-md-4 col-xs-12 col-sm-12'>
                             <mat-form-field class="col-lg-12">
-                                <mat-select placeholder="Reason not willing to take prep" formControlName="discontinueReason"
-                                    required>
-                                    <mat-option [value]=""></mat-option>
+                                <mat-select placeholder="Reason not willing to take prep"
+                                    formControlName="discontinueReason" disableRipple multiple required>
+
                                     <mat-option *ngFor="let Option of careendreasonarray" [value]="Option.itemId">
                                         {{Option.itemDisplayName}}
                                     </mat-option>
@@ -175,9 +194,18 @@
                     </div>
                     <div class="row">
                         <div class="col-md-12">
-                            <mat-form-field class="col-md-12">
-                                <textarea formControlName="SpecifyRiskEducation" matInput
-                                    placeholder="Specify"></textarea>
+                            <mat-form-field class="col-md-4 col-xs-12 col-sm-12">
+                                <!--<textarea formControlName="SpecifyRiskEducation" matInput
+                                    placeholder="Specify"></textarea>-->
+
+                                <mat-select placeholder="Specify" formControlName="SpecifyRiskEducation" disableRipple
+                                    multiple>
+
+
+                                    <mat-option *ngFor="let Option of  SpecifyRiskEducOptions" [value]="Option.itemId">
+                                        {{Option.itemDisplayName}}
+                                    </mat-option>
+                                </mat-select>
                             </mat-form-field>
                         </div>
                         <div class="col-md-12">
@@ -191,7 +219,7 @@
 
 
                 </div>
-              
+
 
 
 

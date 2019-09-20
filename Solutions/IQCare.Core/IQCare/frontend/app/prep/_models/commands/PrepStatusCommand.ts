@@ -9,4 +9,5 @@ export interface PrepStatusCommand {
     CreatedBy: number;
     CondomsIssued?: number;
     NoOfCondoms?: number;
+    DateField?: Date;
 }

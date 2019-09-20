@@ -1,8 +1,9 @@
 import { PrepService } from './../../_services/prep.service';
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, NgZone } from '@angular/core';
 import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
 import { LookupItemView } from '../../../shared/_models/LookupItemView';
 import { SearchService } from '../../../registration/_services/search.service';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
     selector: 'app-prep-status',
@@ -15,7 +16,9 @@ export class PrepStatusComponent implements OnInit {
     yesnoOptions: LookupItemView[] = [];
     prepStatusOptions: LookupItemView[] = [];
     prepContraindicationsOptions: LookupItemView[] = [];
-
+    Daterestartedvisible: boolean = false;
+    DateInitiatedvisible: boolean = false;
+    maxDate: Date;
     @Input() PrepStatusOptions: any;
     @Input() patientId: number;
     @Input() personId: number;
@@ -28,7 +31,12 @@ export class PrepStatusComponent implements OnInit {
 
     constructor(private _formBuilder: FormBuilder,
         private searchService: SearchService,
-        private prepservice: PrepService) { }
+        private prepservice: PrepService,
+        private router: Router,
+        private route: ActivatedRoute,
+        public zone: NgZone) {
+        this.maxDate = new Date();
+    }
 
     ngOnInit() {
         this.PrepStatusForm = this._formBuilder.group({
@@ -38,6 +46,8 @@ export class PrepStatusComponent implements OnInit {
             PrEPStatusToday: new FormControl('', [Validators.required]),
             condomsIssued: new FormControl('', [Validators.required]),
             noCondomsIssued: new FormControl('', [Validators.required]),
+            DateRestarted: new FormControl(''),
+            DateInitiated: new FormControl(''),
             id: new FormControl()
         });
 
@@ -78,6 +88,24 @@ export class PrepStatusComponent implements OnInit {
                 console.log(error);
             }
         );
+    }
+    onPrepStatusChange(event) {
+        const value = event.source.value;
+        if (event.source.viewValue === 'Start' && event.source.selected == true) {
+            this.DateInitiatedvisible = true;
+            this.Daterestartedvisible = false;
+        } else if (event.source.viewValue === 'Restart' && event.source.selected == true) {
+            this.DateInitiatedvisible = false;
+            this.Daterestartedvisible = true;
+        } else if (event.source.viewValue !== 'Restart' && event.source.selected == true) {
+            this.DateInitiatedvisible = false;
+            this.Daterestartedvisible = false;
+        } else if (event.source.viewValue !== 'Start' && event.source.selected == true) {
+            this.DateInitiatedvisible = false;
+            this.Daterestartedvisible = false;
+        }
+
+
     }
     Oncontraindications(event) {
         const value = event.source.value;
@@ -133,14 +161,18 @@ export class PrepStatusComponent implements OnInit {
     }
 
     onPharmacyClick() {
-        this.searchService.setSession(this.personId, this.patientId, this.userId).subscribe((sessionres) => {
+        this.zone.run(() => {
+            this.router.navigate(['/pharm/' + this.patientId + '/' + this.personId],
+                { relativeTo: this.route });
+        });
+     /*  this.searchService.setSession(this.personId, this.patientId).subscribe((sessionres) => {
             this.searchService.setVisitSession(this.patientMasterVisitId, this.Age, 261).subscribe((setVisitSession) => {
-                const url = location.protocol + '//' + window.location.hostname + ':' + window.location.port +
+           const url = location.protocol + '//' + window.location.hostname + ':' + window.location.port +
                     '/IQCare/CCC/Encounter/PharmacyPrescription.aspx';
                 const win = window.open(url, '_blank');
                 win.focus();
             });
-        });
+        });*/
     }
 
 }

@@ -1,10 +1,12 @@
 import { PrepService } from './../../_services/prep.service';
 import { LookupItemView } from './../../../shared/_models/LookupItemView';
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, NgZone } from '@angular/core';
 import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
 import * as moment from 'moment';
 import { SearchService } from '../../../registration/_services/search.service';
 import { EncounterService } from '../../../shared/_services/encounter.service';
+import { Router, ActivatedRoute } from '@angular/router';
+import { APP_BASE_HREF } from '@angular/common';
 
 @Component({
     selector: 'app-prep-sti-screening-treatment',
@@ -32,6 +34,9 @@ export class PrepSTIScreeningTreatmentComponent implements OnInit {
     constructor(private _formBuilder: FormBuilder,
         private searchService: SearchService,
         private prepService: PrepService,
+        private router: Router,
+        private route: ActivatedRoute,
+        public zone: NgZone,
         private encounterService: EncounterService) {
         this.maxDate = new Date();
     }
@@ -162,14 +167,19 @@ export class PrepSTIScreeningTreatmentComponent implements OnInit {
     }
 
     onPharmacyClick() {
-     
-        this.searchService.setSession(this.personId, this.patientId, JSON.parse(localStorage.getItem("appUserId"))).subscribe((sessionres) => {
+
+
+        this.zone.run(() => {
+            this.router.navigate(['/pharm/' + this.patientId + '/' + this.personId],
+                { relativeTo: this.route });
+        });
+        /*this.searchService.setSession(this.personId, this.patientId).subscribe((sessionres) => {
             this.searchService.setVisitSession(this.patientMasterVisitId, 20, 261).subscribe((setVisitSession) => {
                 const url = location.protocol + '//' + window.location.hostname + ':' + window.location.port +
                     '/IQCare/CCC/Encounter/PharmacyPrescription.aspx';
                 const win = window.open(url, '_blank');
                 win.focus();
             });
-        });
+        });*/
     }
 }

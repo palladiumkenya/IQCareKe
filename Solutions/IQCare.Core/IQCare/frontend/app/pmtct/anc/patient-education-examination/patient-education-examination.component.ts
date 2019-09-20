@@ -62,7 +62,7 @@ export class PatientEducationExaminationComponent implements OnInit, OnDestroy {
     @Input('isEdit') isEdit: boolean;
     @Input('PatientId') PatientId: number;
     @Input('PatientMasterVisitId') PatientMasterVisitId: number;
-
+    @Input('visitDate')visitDate: Date;
 
     displayedColumns: string[] = ['topicId', 'topic', 'onSetDate'];
     dataSource = ELEMENT_DATA;

@@ -324,15 +324,23 @@ export class RegistrationService {
         }
 
         if (populations.populationType == 3) {
-            
-                const item = {
-                    PopulationType: 'Discordant Couple',
-                    PopulationCategory: 0
-                };
-                pops.push(item);
-            
+
+            const item = {
+                PopulationType: 'Discordant Couple',
+                PopulationCategory: 0
+            };
+            pops.push(item);
+
         }
 
+        if (populations.DiscordantCouplePopulation == 1) {
+            const item = {
+                PopulationType: 'Discordant Couple',
+                PopulationCategory: 0
+            };
+            pops.push(item);
+
+        }
 
         if (populations.priorityPop === 1) {
             priority = populations.priorityPopulation.map(priorityId => ({ priorityId }));

@@ -46,5 +46,21 @@ namespace IQCare.Prep.WebApi.Controllers
                 return Ok(response.Value);
             return BadRequest(response);
         }
+
+
+
+        [HttpGet("{patientId}/{startitemId}")]
+        public async Task<IActionResult> GetPrepStartEventStatus(int patientId, int startitemId)
+        {
+            var response = await _mediator.Send(new GetPrepStatusDateEventCommand()
+            {
+                PatientId = patientId,
+                startitemId =startitemId    
+            }, Request.HttpContext.RequestAborted);
+
+            if (response.IsValid)
+                return Ok(response.Value);
+            return BadRequest(response);
+        }
     }
 }

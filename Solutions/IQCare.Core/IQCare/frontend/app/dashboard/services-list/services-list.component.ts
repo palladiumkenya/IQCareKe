@@ -60,7 +60,7 @@ export class ServicesListComponent implements OnInit {
     public Patient: PatientView = {};
     RiskDone: boolean = true;
     userId: number;
-    
+
     constructor(
         private personhomeservice: PersonHomeService,
         public zone: NgZone,
@@ -250,7 +250,7 @@ export class ServicesListComponent implements OnInit {
                     });
                     break;
                 case 'CCC':
-                    this.searchService.setSession(this.personId, this.patientId, this.userId).subscribe((res) => {
+                    this.searchService.setSession(this.personId, this.patientId).subscribe((res) => {
                         window.location.href = location.protocol + '//' + window.location.hostname + ':' + window.location.port +
                             '/IQCare/CCC/Patient/PatientHome.aspx';
                     });
@@ -376,6 +376,24 @@ export class ServicesListComponent implements OnInit {
 
         }
         return isEligible;
+
+    }
+    checkService(serviceAreaId: number): boolean {
+
+        let isEligible: boolean = true;
+        const selectedService = this.services.filter(obj => obj.id == serviceAreaId);
+
+        if (selectedService && selectedService.length > 0) {
+            if (selectedService[0]['code'] == 'PREP') {
+                isEligible = false;
+
+            } else {
+                isEligible = true;
+            }
+        }
+
+        return isEligible;
+
 
     }
     isServiceEligible(serviceAreaId: number) {
