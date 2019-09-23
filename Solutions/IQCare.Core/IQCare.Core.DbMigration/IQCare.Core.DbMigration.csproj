@@ -327,6 +327,8 @@
     <None Remove="Scripts\2.2.0\32_PatientPreventiveServiceView.sql" />
     <None Remove="Scripts\2.2.0\33_PatientChronicillnessView.sql" />
     <None Remove="Scripts\2.2.0\36_DataNewARVDrugs.sql" />
+    <None Remove="Scripts\2.2.0\37_htslabels.sql" />
+    <None Remove="Scripts\2.2.0\38_labconfig.sql" />
     <None Remove="Scripts\2.2.0\IQTools\01_PatientPopulationView.sql" />
     <None Remove="Scripts\2.2.0\IQTools\02_HTS_LABRegisternewer.sql" />
     <None Remove="Scripts\2.2.0\IQTools\03_ANCRegister.sql" />
@@ -677,6 +679,8 @@
     <EmbeddedResource Include="Scripts\2.2.0\31_PatientCounsellingView.sql" />
     <EmbeddedResource Include="Scripts\2.2.0\35_HtsEncounter.sql" />
     <EmbeddedResource Include="Scripts\2.2.0\36_DataNewARVDrugs.sql" />
+    <EmbeddedResource Include="Scripts\2.2.0\37_htslabels.sql" />
+    <EmbeddedResource Include="Scripts\2.2.0\38_labconfig.sql" />
     <EmbeddedResource Include="Scripts\2.2.0\IQTools\01_PatientPopulationView.sql" />
     <EmbeddedResource Include="Scripts\2.2.0\IQTools\02_HTS_LABRegisternewer.sql" />
     <EmbeddedResource Include="Scripts\2.2.0\IQTools\03_ANCRegister.sql" />
