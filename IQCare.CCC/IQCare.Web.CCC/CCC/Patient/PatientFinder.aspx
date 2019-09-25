@@ -57,10 +57,14 @@
                         <asp:DropDownList runat="server" ID="Facility" ClientIDMode="Static" CssClass="form-control" />
                     </div>
                 </div>
+                <div class="col-md-3">
+                    &nbsp;
+                </div>
 
                 <div class="col-md-3">
+                    &nbsp;
                 </div>
-                <div class="col-md-1"></div>
+                <div class="col-md-1">&nbsp;</div>
                 <div class="col-md-2">
                     <div class="col-md-12 col-xs-12 col-sm-12">
                         <label><span class="fa fa-search-plus"></span> Duplicate finder</label>
