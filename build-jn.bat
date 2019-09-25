@@ -124,6 +124,14 @@ xcopy /d %BATDIR%\Library\Telerik.Web.UI.dll %BATDIR%\package\web\bin
 xcopy /d %BATDIR%\Library\EntityFramework.dll %BATDIR%\package\web\bin
 xcopy /d %BATDIR%\Library\EntityFramework.SqlServer.dll %BATDIR%\package\web\bin
 
+
+xcopy /d %BATDIR%\Library\ClosedXML.dll %BATDIR%\package\web\bin
+xcopy /d %BATDIR%\Library\DocumentFormat.OpenXml.dll %BATDIR%\package\web\bin
+xcopy /d %BATDIR%\Library\ExcelNumberFormat.dll %BATDIR%\package\web\bin
+xcopy /d %BATDIR%\Library\FastMember.dll %BATDIR%\package\web\bin
+xcopy /d %BATDIR%\Library\FastMember.Signed.dll %BATDIR%\package\web\bin
+
+
 @echo ********** END OF COPYING DLLS **********
 
 @echo "********** Building IQCare API **********" >> %log%
