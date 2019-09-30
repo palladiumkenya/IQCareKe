@@ -14,7 +14,7 @@ WHEN REPLACE(ltv.DisplayName,'-encounter','') = 'PrepRiskAssessment' then 'Behav
 WHEN REPLACE(ltv.DisplayName,'-encounter','') = 'MonthlyRefill' then 'MonthlyRefill'
  END as  EncounterType,
 PS.PrepStatusToday, 
-(Select top 1 PA.AppointmentDate from PatientAppointment pa where pa.PatientMasterVisitId=PM.Id),
+PA.AppointmentDate,
 PE.EncounterStartTime,
 PreStatus = (SELECT TOP 1 ItemName FROM LookupItemView WHERE ItemId = PS.PrepStatusToday AND MasterName = 'PrEP_Status'),
 ProviderName = (SELECT TOP 1 (UserFirstName + ' ' + UserLastName) FROM [dbo].[mst_User] WHERE UserID = PM.CreatedBy)
