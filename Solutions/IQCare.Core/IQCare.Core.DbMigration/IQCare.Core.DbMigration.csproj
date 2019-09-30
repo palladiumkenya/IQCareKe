@@ -220,6 +220,8 @@
     <None Remove="Scripts\2.0.1\42_PatientPartnerProfile.sql" />
     <None Remove="Scripts\2.0.1\43_RemovePrepRegimenUse.sql" />
     <None Remove="Scripts\2.0.1\44_RemovePrepStatusType.sql" />
+    <None Remove="Scripts\2.0.1\45_PrepRegimen.sql" />
+    <None Remove="Scripts\2.0.1\46_PrepEncounterView.sql" />
     <None Remove="Scripts\2.0.1\PREP\01_Prep_ServiceArea.sql" />
     <None Remove="Scripts\2.0.1\PREP\02_Prep Number.sql" />
     <None Remove="Scripts\2.0.1\PREP\03_PrepServiceAreaIdentifiers.sql" />
@@ -330,6 +332,10 @@
     <None Remove="Scripts\2.2.0\36_RiskAssessmentMultiSelect.sql" />
     <None Remove="Scripts\2.2.0\37_DateFieldPatientPrepStatus.sql" />
     <None Remove="Scripts\2.2.0\38_SaveUpdatePharmacy.sql" />
+    <None Remove="Scripts\2.2.0\39_AdherenceView.sql" />
+    <None Remove="Scripts\2.2.0\40_PharmacyVisitDetailsView.sql" />
+    <None Remove="Scripts\2.2.0\41_PharmacyDrugVisitDetailsView.sql" />
+    <None Remove="Scripts\2.2.0\42_sp_getPatientPharmacyPrescription.sql" />
     <None Remove="Scripts\2.2.0\IQTools\01_PatientPopulationView.sql" />
     <None Remove="Scripts\2.2.0\IQTools\02_HTS_LABRegisternewer.sql" />
     <None Remove="Scripts\2.2.0\IQTools\03_ANCRegister.sql" />
@@ -588,6 +594,8 @@
     <EmbeddedResource Include="Scripts\2.0.1\42_PatientPartnerProfile.sql" />
     <EmbeddedResource Include="Scripts\2.0.1\43_RemovePrepRegimenUse.sql" />
     <EmbeddedResource Include="Scripts\2.0.1\44_RemovePrepStatusType.sql" />
+    <EmbeddedResource Include="Scripts\2.0.1\45_PrepRegimen.sql" />
+    <EmbeddedResource Include="Scripts\2.0.1\46_PrepEncounterView.sql" />
     <EmbeddedResource Include="Scripts\2.0.1\PREP\16_PrepCareEnded.sql" />
     <EmbeddedResource Include="Scripts\2.0.1\PREP\17_PrepAdherence.sql" />
     <EmbeddedResource Include="Scripts\2.0.1\PREP\18_AdherenceAssessmentReasons.sql" />
@@ -685,6 +693,10 @@
     <EmbeddedResource Include="Scripts\2.2.0\36_RiskAssessmentMultiSelect.sql" />
     <EmbeddedResource Include="Scripts\2.2.0\37_DateFieldPatientPrepStatus.sql" />
     <EmbeddedResource Include="Scripts\2.2.0\38_SaveUpdatePharmacy.sql" />
+    <EmbeddedResource Include="Scripts\2.2.0\39_AdherenceView.sql" />
+    <EmbeddedResource Include="Scripts\2.2.0\40_PharmacyVisitDetailsView.sql" />
+    <EmbeddedResource Include="Scripts\2.2.0\41_PharmacyDrugVisitDetailsView.sql" />
+    <EmbeddedResource Include="Scripts\2.2.0\42_sp_getPatientPharmacyPrescription.sql" />
     <EmbeddedResource Include="Scripts\2.2.0\IQTools\01_PatientPopulationView.sql" />
     <EmbeddedResource Include="Scripts\2.2.0\IQTools\02_HTS_LABRegisternewer.sql" />
     <EmbeddedResource Include="Scripts\2.2.0\IQTools\03_ANCRegister.sql" />
