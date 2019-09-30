@@ -336,6 +336,9 @@
     <None Remove="Scripts\2.2.0\40_PharmacyVisitDetailsView.sql" />
     <None Remove="Scripts\2.2.0\41_PharmacyDrugVisitDetailsView.sql" />
     <None Remove="Scripts\2.2.0\42_sp_getPatientPharmacyPrescription.sql" />
+    <None Remove="Scripts\2.2.0\37_htslabels.sql" />
+    <None Remove="Scripts\2.2.0\38_labconfig.sql" />
+    <None Remove="Scripts\2.2.0\39_ApiPatientCareEndingView.sql" />
     <None Remove="Scripts\2.2.0\IQTools\01_PatientPopulationView.sql" />
     <None Remove="Scripts\2.2.0\IQTools\02_HTS_LABRegisternewer.sql" />
     <None Remove="Scripts\2.2.0\IQTools\03_ANCRegister.sql" />
@@ -697,6 +700,9 @@
     <EmbeddedResource Include="Scripts\2.2.0\40_PharmacyVisitDetailsView.sql" />
     <EmbeddedResource Include="Scripts\2.2.0\41_PharmacyDrugVisitDetailsView.sql" />
     <EmbeddedResource Include="Scripts\2.2.0\42_sp_getPatientPharmacyPrescription.sql" />
+    <EmbeddedResource Include="Scripts\2.2.0\37_htslabels.sql" />
+    <EmbeddedResource Include="Scripts\2.2.0\38_labconfig.sql" />
+    <EmbeddedResource Include="Scripts\2.2.0\39_ApiPatientCareEndingView.sql" />
     <EmbeddedResource Include="Scripts\2.2.0\IQTools\01_PatientPopulationView.sql" />
     <EmbeddedResource Include="Scripts\2.2.0\IQTools\02_HTS_LABRegisternewer.sql" />
     <EmbeddedResource Include="Scripts\2.2.0\IQTools\03_ANCRegister.sql" />

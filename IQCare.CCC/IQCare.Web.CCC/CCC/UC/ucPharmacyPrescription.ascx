@@ -676,78 +676,45 @@
         });
     });
 
-    //$(function () {
-    //    //var regExp = /[a-z]/i;
-    //    alert();
-    //    $('#txtDuration').on('keydown keyup', function (e) {
-    //        var value = String.fromCharCode(e.which) || e.key;
-    //        alert(value);
+    $(function () {
+        var regExp = /[a-z]/i;
+        $('#txtDuration').on('keydown keyup', function (e) {
+            var value = String.fromCharCode(e.which) || e.key;
 
-    //        // No letters
-    //        if (regExp.test(value)) {
-    //            e.preventDefault();
-    //            return false;
-    //        }
-    //    });
-    //});
-
-    //$(function () {
-    //    var regExp = /[a-z]/i;
-    //    $('#txtQuantityPres').on('keydown keyup', function (e) {
-    //        var value = String.fromCharCode(e.which) || e.key;
-
-    //        // No letters
-    //        if (regExp.test(value)) {
-    //            e.preventDefault();
-    //            return false;
-    //        }
-    //    });
-    //});
-
-    //$(function () {
-    //    var regExp = /[a-z]/i;
-    //    $('#txtQuantityDisp').on('keydown keyup', function (e) {
-    //        var value = String.fromCharCode(e.which) || e.key;
-
-    //        // No letters
-    //        if (regExp.test(value)) {
-    //            e.preventDefault();
-    //            return false;
-    //        }
-    //    });
-    //});
-
-    $('#txtQuantityDisp').on('keydown keyup', function (e) {
-        var code = e.keyCode || e.which;
-        if (code >= 65 && code <= 90) {
-            e.preventDefault();
-            return false;
-        }
+            // No letters
+            if (regExp.test(value)) {
+                e.preventDefault();
+                return false;
+            }
+        });
     });
 
-    $('#txtQuantityPres').on('keydown keyup', function (e) {
-        var code = e.keyCode || e.which;
-        if (code >= 65 && code <= 90) {
-            e.preventDefault();
-            return false;
-        }
+    $(function () {
+        var regExp = /[a-z]/i;
+        $('#txtQuantityPres').on('keydown keyup', function (e) {
+            var value = String.fromCharCode(e.which) || e.key;
+
+            // No letters
+            if (regExp.test(value)) {
+                e.preventDefault();
+                return false;
+            }
+        });
     });
 
-    $('#txtDuration').on('keydown keyup', function (e) {
-        var code = e.keyCode || e.which;
-        if (code >= 65 && code <= 90) {
-            e.preventDefault();
-            return false;
-        }
+    $(function () {
+        var regExp = /[a-z]/i;
+        $('#txtQuantityDisp').on('keydown keyup', function (e) {
+            var value = String.fromCharCode(e.which) || e.key;
+
+            // No letters
+            if (regExp.test(value)) {
+                e.preventDefault();
+                return false;
+            }
+        });
     });
 
-    $('#txtDose').on('keydown keyup', function (e) {
-        var code = e.keyCode || e.which;
-        if (code >= 65 && code <= 90) {
-            e.preventDefault();
-            return false;
-        }
-    });
 
     if (DosageFrequency.toString() == "1") {
        DrugPrescriptionTable = $('#dtlDrugPrescriptionFrequency').DataTable({
@@ -1018,8 +985,8 @@
          if (regimen == "AF2E(TDF + 3TC + DTG)") {
 
 
-             if (patientweight != "") {
-                    if (parseInt(patientweight) < 35 && parseInt(age) > 15) {
+                if (patientweight != "") {
+                    if (parseInt(patientweight) < 35 && parseInt(age) < 15) {
                         toastr.error("This regimen is recommended for paeds who are  15 years old  or weight of 35 kg and above");
                         $("#<%=ddlRegimen.ClientID%>").val("");
                         return false;
@@ -1202,9 +1169,9 @@
             <%--$("#<%=ddlRegimen.ClientID%>").val("");--%>
         }
 
-        DrugPrescriptionTable
+        /*DrugPrescriptionTable
                     .clear()
-                    .draw();
+                    .draw();*/
 
         drugNameArr = [];
       
@@ -1859,7 +1826,9 @@
                     }*/
                 }
             
-            catch (ex) { }
+            catch (ex) {
+                console.log(ex);
+            }
           
             //////////////////////////////////////////////////////////////////
          /*   allAbbr = allAbbr.replace(/\/$/, "");
@@ -1891,7 +1860,7 @@
 
             }
             catch (err) {
-                toastr.error("Error", "");
+                toastr.error("Error", err);
             }
 
             if (sumAllAbbr > 0) {
