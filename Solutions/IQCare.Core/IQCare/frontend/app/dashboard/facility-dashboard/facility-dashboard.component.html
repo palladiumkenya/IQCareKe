@@ -1,0 +1,110 @@
+<div class="row">
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        <div class="row">
+            <div class="col-lg-12 col-sm-12 col-xs-12">
+                <div class="widget">
+                    <div class="widget-header bordered-bottom bordered-sky">
+                        <span class="widget-caption"> Facility Dashboard </span>
+                    </div>
+
+                    <div class="widget-body">
+                        <div class="row">
+                            <div class="col-lg-6 col-sm-6 col-xs-12">
+                                <div class="form-title">
+                                    <span class="mat-accent"> Visit Schedule </span>
+                                </div>
+                                
+                                <div class="">
+                                    <mat-form-field>
+                                        <input matInput [matDatepicker]="picker" placeholder="Choose a date" [formControl]="date" (dateChange)="addEvent($event)">
+                                        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                                        <mat-datepicker #picker></mat-datepicker>
+                                    </mat-form-field>
+                                </div>
+                                
+                                <canvas baseChart
+                                        [datasets]="appointmentSummaryData"
+                                        [labels]="appointmentSummaryLabels"
+                                        [options]="appointmentSummaryOptions"
+                                        [legend]="appointmentSummaryLegend"
+                                        [chartType]="appointmentSummaryType">
+                                </canvas>
+                            </div>
+                            
+                            <div class="col-lg-6 col-sm-6 col-xs-12">
+                                <div class="form-title">
+                                    <span class="mat-accent"> Facility Viral Load Order/Results Tracker </span>
+                                </div>
+                                <canvas baseChart
+                                        [data]="pieChartData"
+                                        [labels]="pieChartLabels"
+                                        [chartType]="pieChartType">                                    
+                                </canvas>
+                            </div>
+                        </div>
+                        
+                        <div class="row">
+                            <div class="col-lg-6 col-sm-6 col-xs-12">
+                                <div class="form-title">
+                                    <span class="mat-accent"> Care Ending Summary </span>
+                                </div>
+                                <canvas baseChart
+                                        [data]="careEndingSummaryData"
+                                        [labels]="careEndingSummaryLabels"
+                                        [chartType]="careEndingSummaryType"></canvas>
+                            </div>
+
+                            <div class="col-lg-6 col-sm-6 col-xs-12">
+                                <div class="form-title">
+                                    <span class="mat-accent"> Family/Partner Testing </span>
+                                </div>
+                                <canvas baseChart
+                                        [data]="doughnutChartData"
+                                        [labels]="doughnutChartLabels"
+                                        [chartType]="doughnutChartType"></canvas>
+                            </div>                            
+                        </div>
+                        
+                        <div class="row">
+                            <div class="col-lg-6 col-sm-6 col-xs-12">
+                                <div class="form-title">
+                                    <span class="mat-accent"> Differentiated Care model Statistics </span>
+                                </div>
+                                <canvas baseChart
+                                        [data]="doughnutChartData"
+                                        [labels]="doughnutChartLabels"
+                                        [chartType]="doughnutChartType"></canvas>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-lg-6 col-sm-6 col-xs-12">
+                                <div class="form-title">
+                                    <span class="mat-accent">  Interoperability Layer Statistics </span>
+                                </div>
+                                <canvas baseChart
+                                        [data]="ilStatisticsData"
+                                        [labels]="ilStatisticsLabels"
+                                        [chartType]="ilStatisticsType">
+                                </canvas>
+                            </div>
+
+                            <div class="col-lg-6 col-sm-6 col-xs-12">
+                                <div class="form-title">
+                                    <span class="mat-accent"> Interoperability Layer Stats </span>
+                                </div>
+                                <canvas baseChart
+                                        [datasets]="barChartData"
+                                        [labels]="barChartLabels"
+                                        [options]="barChartOptions"
+                                        [legend]="barChartLegend"
+                                        [chartType]="barChartType">
+                                </canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
