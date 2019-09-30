@@ -181,6 +181,17 @@ dotnet publish Solutions/IQCare.Core/IQCare.AIR.Web/IQCare.AIR.Web.csproj -o ../
 @echo ********** END OF BUILINDING IQCare AIR WEB ********** >> %log%
 
 
+
+@echo "********** Building IQCare PHARM **********" >> %log%
+@echo ********** Building IQCare PHARM **********
+
+dotnet publish Solutions/IQCare.Core/IQCare.Pharm.WebApi/IQCare.Pharm.WebApi.csproj -o ../../../package/pharm
+
+@echo ********** END OF BUILINDING IQCare PHARM ********** >> %log%
+@echo ********** END OF BUILINDING IQCare PHARM ********** >> %log%
+
+
+
 dotnet publish Solutions/IQCare.Core/IQCare.Core.DbMigration/IQCare.Core.DbMigration.csproj -o ../../../Release/DbMigration/win-x64 -r win-x64
 dotnet publish Solutions/IQCare.Core/IQCare.Core.DbMigration/IQCare.Core.DbMigration.csproj -o ../../../Release/DbMigration/win-x86 -r win-x86
 

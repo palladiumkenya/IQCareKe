@@ -93,7 +93,7 @@ export class PharmacyService {
 
         };
 
-        console.log(Indata);
+
 
         return this.http.post<any>(this.API_PHARM_URL + '/api/PatientPharmacy/saveUpdatePharmacy', JSON.stringify(Indata)
             , httpOptions).pipe(
@@ -116,4 +116,21 @@ export class PharmacyService {
         );
     }
 
+    public getPharmacyVisit(patientId: number): Observable<any[]> {
+        return this.http.get<any[]>(this.API_PHARM_URL + '/api/PatientPharmacy/getPharmacyVisit/' + patientId).pipe(
+            tap(getPharmacyVisit => this.errorHandler.log('get Pharmacy Visit ')),
+            catchError(this.errorHandler.handleError<any[]>('get Pharmacy Visit'))
+        );
+    }
+
+    public getPharmacyVisitDetails(patientId: number, PatientMasterVisitId: number): Observable<any[]> {
+        return this.http.get<any[]>(this.API_PHARM_URL + '/api/PatientPharmacy/getPharmacyVisitDrugDetails/'
+            + patientId + '/' + PatientMasterVisitId).pipe(
+                tap(getPharmacyVisitDetails => this.errorHandler.log('get Pharmacy Visit details')),
+                catchError(this.errorHandler.handleError<any[]>('get Pharmacy Visit details '))
+            );
+
+
+
+    }
 }

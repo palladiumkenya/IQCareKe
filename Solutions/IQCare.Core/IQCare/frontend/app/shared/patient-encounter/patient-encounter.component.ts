@@ -10,14 +10,14 @@ import { NotificationService } from '../_services/notification.service';
 import { LookupItemService } from '../_services/lookup-item.service';
 import { PatientEncounter } from '../_models/patient-encounter';
 import { EncounterService } from '../_services/encounter.service';
-import {SearchService} from '../../registration/_services/search.service';
+import { SearchService } from '../../registration/_services/search.service';
 
 
 @Component({
     selector: 'app-patient-encounter',
     templateUrl: './patient-encounter.component.html',
     styleUrls: ['./patient-encounter.component.css'],
-    providers: [ SearchService ]
+    providers: [SearchService]
 })
 export class PatientEncounterComponent implements OnInit {
     ageNumber: number;
@@ -220,7 +220,12 @@ export class PatientEncounterComponent implements OnInit {
     public onView(patient: number, patientMasterVisitId: number) { }
 
     onPharmacyClick() {
-        this.searchService.setSession(this.personId, this.patientId, JSON.parse(localStorage.getItem('appUserId')))
+
+        this.zone.run(() => {
+            this.router.navigate(['/pharm/' + this.patientId + '/' + this.personId],
+                { relativeTo: this.route });
+        });
+       /* this.searchService.setSession(this.personId, this.patientId)
             .subscribe((sessionres) => {
                 this.searchService.setVisitSession(this.lastPatientMasterVisitId, this.ageNumber, 261).subscribe((setVisitSession) => {
                     const url = location.protocol + '//' + window.location.hostname + ':' + window.location.port +
@@ -228,6 +233,6 @@ export class PatientEncounterComponent implements OnInit {
                     const win = window.open(url, '_blank');
                     win.focus();
                 });
-            });
+            });*/
     }
 }

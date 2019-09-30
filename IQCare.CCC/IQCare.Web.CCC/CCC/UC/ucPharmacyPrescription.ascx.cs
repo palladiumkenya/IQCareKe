@@ -106,7 +106,8 @@ namespace IQCare.Web.CCC.UC
             PatientEncounterLogic encounterLogic = new PatientEncounterLogic();
 
             List<Entities.CCC.Encounter.PatientEncounter.PharmacyFields> lst = encounterLogic.getPharmacyFields(Session["ExistingRecordPatientMasterVisitID"].ToString() == "0" ? Session["PatientMasterVisitID"].ToString() : Session["ExistingRecordPatientMasterVisitID"].ToString());
-            if (lst.Count > 0)
+            
+                if (lst.Count > 0)
             {
                 ddlTreatmentProgram.SelectedValue = lst[0].TreatmentProgram;
                 ddlPeriodTaken.SelectedValue = lst[0].PeriodTaken;

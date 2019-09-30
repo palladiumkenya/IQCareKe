@@ -40,7 +40,7 @@ export class PharmOrderformComponent implements OnInit {
     public personVitalWeight = 0;
     public person: PersonView;
     public personView$: Subscription;
-
+    edit: number;
     patientMasterVisitId: number;
     treatmentprogramOptions: Decode[];
     periodTakenOptions: LookupItemView[];
@@ -76,6 +76,7 @@ export class PharmOrderformComponent implements OnInit {
     visibleMorningEvening: boolean = true;
     DrugArray: any[] = [];
     DrugId: string;
+    Disabled: boolean = true;
     DrugAbbr: string;
     EncounterTypeId: number;
     @ViewChild('frmDrug') nameinput: MatInput;
@@ -105,6 +106,9 @@ export class PharmOrderformComponent implements OnInit {
         this.route.params.subscribe(params => {
             this.personId = params['personId'];
             this.patientId = params['patientId'];
+            this.patientMasterVisitId = params['patientMasterVisitId'];
+            this.edit = params['edit'];
+
 
 
         });
@@ -215,6 +219,9 @@ export class PharmOrderformComponent implements OnInit {
 
         this.getDrugList(0, null, null);
         this.getFilteredDrugList(0, null, null);
+        if (this.edit == 1) {
+            this.loadExistingRecords();
+        }
         this.pharmFormGroup.controls.frmDrug.valueChanges.pipe(
             debounceTime(400)
         ).subscribe(data => {
@@ -242,6 +249,75 @@ export class PharmOrderformComponent implements OnInit {
 
     }
 
+    loadExistingRecords() {
+        this.pharmacyservice.getPharmacyVisitDetails(this.patientId, this.patientMasterVisitId).subscribe((res) => {
+            if (res != null) {
+                let array: any[] = [];
+                array = res['drugDetails'];
+                let VisitDate: Date;
+                let Ordereddate: Date;
+                let DispensedDate: Date;
+                if (res['visitDate'] != null) {
+                    VisitDate = res['visitDate'];
+                    this.pharmFormGroup.controls.visitDate.setValue(VisitDate);
+                }
+                if (res['orderedByDate'] != null) {
+                    Ordereddate = res['orderedByDate'];
+                    this.pharmFormGroup.controls.frmDatePrescibed.setValue(Ordereddate);
+                }
+                if (res['dispensedDate'] != null) {
+                    DispensedDate = res['dispensedDate'];
+                    this.pharmFormGroup.controls.frmDateDispensed.setValue(DispensedDate);
+                }
+
+                console.log(array);
+                if (array.length > 0) {
+                    this.DrugArray = [];
+                    array.forEach(x => {
+                        this.DrugArray.push({
+                            DrugName: x.drugName,
+                            DrugId: x.drugId,
+                            DrugAbb: x.drugAbb,
+                            batchId: x.batchId,
+                            batchText: x.batchText,
+                            Dose: x.dose,
+                            Freq: x.freq,
+                            FreqText: x.freqText,
+                            Duration: x.duration,
+                            QuantityPres: x.quantityPres,
+                            QUantityDisp: x.qUantityDisp,
+                            Reason: x.reason,
+                            ReasonText: x.reasontext,
+                            Regimen: x.regimen,
+                            Regimentext: x.regimentext,
+                            Regimenline: x.regimenline,
+                            Regimenlinetext: x.regimenlinetext,
+                            TreatmentPlan: x.treatmentPlan,
+                            TreatmentPlantext: x.treatmentPlantext,
+                            TreatmentProgram: x.treatmentProgram,
+                            TreatmentProgramText: x.treatmentProgramText,
+                            Morning: x.morning,
+                            Midday: x.midday,
+                            Evening: x.evening,
+                            Night: x.night,
+                            Period: x.period,
+                            PeriodTakenText: x.periodTakentext,
+                            Prophylaxis: x.prophylaxis,
+                            Disabled: x.qUantityDisp.toString == '0' || x.qUantityDisp.toString == '' || x.qUantityDisp == null ? false : true
+                        });
+
+
+
+                    });
+
+                }
+            }
+
+        }, (err) => {
+            this.snotifyService.error('Error getting drug details ' + err, 'Drug Prescribed',
+                this.notificationService.getConfig());
+        });
+    }
     displaydrug(drug?: any): string | undefined {
         return drug ? drug.drugName : undefined;
     }
@@ -827,7 +903,8 @@ export class PharmOrderformComponent implements OnInit {
                     Night: night,
                     Period: Periodtaken,
                     PeriodTakenText: Periodtakentext,
-                    Prophylaxis: chkProphylaxis
+                    Prophylaxis: chkProphylaxis,
+                    Disabled: false
 
                 });
             }
@@ -862,7 +939,8 @@ export class PharmOrderformComponent implements OnInit {
                 Midday: midday,
                 Evening: evening,
                 Night: night,
-                Prophylaxis: Prophylaxis
+                Prophylaxis: Prophylaxis,
+                Disabled: false
 
             });
         }
@@ -992,10 +1070,9 @@ export class PharmOrderformComponent implements OnInit {
 
 
         this.zone.run(() => {
-            this.router.navigate(['/dashboard/personhome' + '/' + this.personId],
-                { relativeTo: this.route });
+            this.router.navigate(['/pharm/mainpage/' + this.patientId + '/' + this.personId
+            ], { relativeTo: this.route });
         });
-
 
     }
     SavePharmacyData() {
@@ -1029,65 +1106,97 @@ export class PharmOrderformComponent implements OnInit {
         }
         this.userId = JSON.parse(localStorage.getItem('appUserId'));
 
-
-        if (visitDate != null && visitDate !== undefined) {
-            const patientencounter: PatientMasterVisitEncounter = {
-                PatientId: this.patientId,
-                EncounterType: this.EncounterTypeId,
-                ServiceAreaId: 1,
-                UserId: this.userId,
-                EncounterDate: moment(visitDate).toDate()
-            };
-
-            this.spinner.show();
-            this.encounterservice.savePatientMasterVisit(patientencounter).subscribe(
-                (result) => {
-                    localStorage.setItem('patientEncounterId', result['patientEncounterId']);
-                    localStorage.setItem('patientMasterVisitId', result['patientMasterVisitId']);
-
-                    this.patientMasterVisitId = result['patientMasterVisitId'];
-                    if (this.patientMasterVisitId > 0) {
-                        let locationId: number;
-                        locationId = JSON.parse(localStorage.getItem('appLocationId'));
-                        this.pharmacyservice.AddSaveUpdatePharmacyRecord(this.person.ptn_pk, this.patientMasterVisitId, 
-                            this.patientId, locationId, this.userId,
-                            frmDatePrescibed, this.PrescribedBy,
-                            frmDateDispensed, this.pmscmFlag, this.DrugArray,
-                            moment(visitDate).toDate(), this.DispensedBy ).subscribe((res) => {
-                                this.snotifyService.success('Saved the pharmacy record' + res['ptn_Pharmacy_Pk']
-                                    , 'Pharmacy Form', this.notificationService.getConfig());
+        if (this.patientMasterVisitId > 0) {
+            let locationId: number;
+            locationId = JSON.parse(localStorage.getItem('appLocationId'));
+            this.pharmacyservice.AddSaveUpdatePharmacyRecord(this.person.ptn_pk, this.patientMasterVisitId,
+                this.patientId, locationId, this.userId,
+                frmDatePrescibed, this.PrescribedBy,
+                frmDateDispensed, this.pmscmFlag, this.DrugArray,
+                moment(visitDate).toDate(), this.DispensedBy).subscribe((res) => {
+                    this.snotifyService.success('Saved the pharmacy record' + res['ptn_Pharmacy_Pk']
+                        , 'Pharmacy Form', this.notificationService.getConfig());
 
 
-                                this.zone.run(() => {
-                                    this.router.navigate(['/dashboard/personhome' + '/' + this.personId],
-                                        { relativeTo: this.route });
-                                });
+                        this.zone.run(() => {
+                            this.router.navigate(['/pharm/mainpage/' + this.patientId + '/' + this.personId
+                            ], { relativeTo: this.route });
+                        });
 
-                            }, (error) => {
-                                this.snotifyService.error('Error saving and updating pharmacy record' + error
-                                    , 'Pharmacy Form', this.notificationService.getConfig());
-                                this.spinner.hide();
-                            },
-                                () => {
-                                    this.spinner.hide();
-                                });
-                    }
-                },
-                (error) => {
-                    this.snotifyService.error('Error checking in ' + error, 'CheckIn', this.notificationService.getConfig());
+                }, (error) => {
+                    this.snotifyService.error('Error saving and updating pharmacy record' + error
+                        , 'Pharmacy Form', this.notificationService.getConfig());
                     this.spinner.hide();
                 },
-                () => {
-                    this.spinner.hide();
-                }
-            );
-
+                    () => {
+                        this.spinner.hide();
+                    });
         } else {
 
-            this.snotifyService.error('VisitDate is required'
-                , 'VisitDate', this.notificationService.getConfig());
-            this.spinner.hide();
-            return;
+
+
+
+            if (visitDate != null && visitDate !== undefined && visitDate !== "") {
+                const patientencounter: PatientMasterVisitEncounter = {
+                    PatientId: this.patientId,
+                    EncounterType: this.EncounterTypeId,
+                    ServiceAreaId: 1,
+                    UserId: this.userId,
+                    EncounterDate: moment(visitDate).toDate()
+                };
+
+                this.spinner.show();
+                this.encounterservice.savePatientMasterVisit(patientencounter).subscribe(
+                    (result) => {
+                        localStorage.setItem('patientEncounterId', result['patientEncounterId']);
+                        localStorage.setItem('patientMasterVisitId', result['patientMasterVisitId']);
+
+                        this.patientMasterVisitId = result['patientMasterVisitId'];
+                        if (this.patientMasterVisitId > 0) {
+                            let locationId: number;
+                            locationId = JSON.parse(localStorage.getItem('appLocationId'));
+                            this.pharmacyservice.AddSaveUpdatePharmacyRecord(this.person.ptn_pk, this.patientMasterVisitId,
+                                this.patientId, locationId, this.userId,
+                                frmDatePrescibed, this.PrescribedBy,
+                                frmDateDispensed, this.pmscmFlag, this.DrugArray,
+                                moment(visitDate).toDate(), this.DispensedBy).subscribe((res) => {
+                                    this.snotifyService.success('Saved the pharmacy record' + res['ptn_Pharmacy_Pk']
+                                        , 'Pharmacy Form', this.notificationService.getConfig());
+
+
+                                        this.zone.run(() => {
+                                            this.router.navigate(['/pharm/mainpage/' + this.patientId + '/' + this.personId
+                                            ], { relativeTo: this.route });
+                                        });
+
+                                }, (error) => {
+                                    this.snotifyService.error('Error saving and updating pharmacy record' + error
+                                        , 'Pharmacy Form', this.notificationService.getConfig());
+                                    this.spinner.hide();
+                                },
+                                    () => {
+                                        this.spinner.hide();
+                                    });
+                        }
+                    },
+                    (error) => {
+                        this.snotifyService.error('Error checking in ' + error, 'CheckIn', this.notificationService.getConfig());
+                        this.spinner.hide();
+                    },
+                    () => {
+                        this.spinner.hide();
+                    }
+                );
+            }
+
+            else {
+
+                this.snotifyService.error('VisitDate is required'
+                    , 'VisitDate', this.notificationService.getConfig());
+                this.spinner.hide();
+                return;
+            }
+
         }
 
 

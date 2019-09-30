@@ -1147,7 +1147,11 @@ namespace IQCare.Web.CCC.WebService
 
                 if (DosageFrequency == 1)
                 {
-                    string[] i = new string[13] { row["Drug_Pk"].ToString(), row["batchId"].ToString(),
+                    string[] i = new string[23] {row["ProgID"].ToString(),row["TreatmentProgram"].ToString(),
+                        row["TreatmentPlan"].ToString(),row["TreatmentPlanText"].ToString(),
+                        row["TreatmentPlanReason"].ToString(),row["TreatmentPlanReasonId"].ToString(),
+                        row["RegimenLine"].ToString(),row["RegimenLineId"].ToString(),row["Regimen"].ToString(),
+                        row["RegimenId"].ToString() , row["Drug_Pk"].ToString(), row["batchId"].ToString(),
                     row["FrequencyID"].ToString(),row["abbr"].ToString(),row["DrugName"].ToString(),
                     row["batchName"].ToString(),row["dose"].ToString(),row["freq"].ToString(),
                     row["duration"].ToString(),row["OrderedQuantity"].ToString(),row["DispensedQuantity"].ToString(),
@@ -1158,7 +1162,11 @@ namespace IQCare.Web.CCC.WebService
                 }
                 else
                 {
-                    string[] i = new string[14] { row["Drug_Pk"].ToString(), row["batchId"].ToString(),
+                    string[] i = new string[24] { row["ProgID"].ToString(),row["TreatmentProgram"].ToString(),
+                        row["TreatmentPlan"].ToString(),row["TreatmentPlanText"].ToString(),
+                        row["TreatmentPlanReason"].ToString(),row["TreatmentPlanReasonId"].ToString(),
+                        row["RegimenLine"].ToString(),row["RegimenLineId"].ToString(),row["Regimen"].ToString(),
+                        row["RegimenId"].ToString() ,row["Drug_Pk"].ToString(), row["batchId"].ToString(),
                     //row["FrequencyID"].ToString(),
                     row["abbr"].ToString(),row["DrugName"].ToString(),
                     row["batchName"].ToString(),row["MorningDose"].ToString(),row["MiddayDose"].ToString(),

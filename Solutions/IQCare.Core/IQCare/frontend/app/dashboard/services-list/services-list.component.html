@@ -221,7 +221,7 @@
                                                 </div>
                                             </ng-template>
                                             <ng-template #riskoutcometemplate>
-                                                <div *ngIf="preprisk;else eligiblecareendtemplate">
+                                                <div *ngIf="preprisk;else eligiblecreatininetemplate">
                                                     <span>
                                                         <a class="btn btn-sm btn-primary"
                                                             (click)="editRiskAssessment(service.id,service.code)">
@@ -234,6 +234,15 @@
                                                         {{infor}}
                                                     </span>
                                                 </div>
+                                            </ng-template>
+                                            <ng-template #eligiblecreatininetemplate>
+                                                <span  class="label label-orange" *ngIf="creatininetestresult; else eligiblecareendtemplate">
+                                                    Creatinine Test Results is
+                                                      {{this.creatininelabtests[0].result}} 
+                                                      <br />
+                                                    Test was ordered on {{this.creatininelabtests[0].orderDate}}
+                                                
+                                                </span>
                                             </ng-template>
                                             <ng-template #eligiblecareendtemplate>
 

@@ -3,38 +3,40 @@ using System.Collections.Generic;
 using System.Text;
 using MediatR;
 using IQCare.Library;
+using IQCare.Pharm.BusinessProcess.Commands.PatientPharmacy;
 
 namespace IQCare.Pharm.BusinessProcess.Commands.PatientPharmacy
 {
-    public class SaveUpdatePatientPharmacyCommand :IRequest<Result<SaveUpdatePharmacyResponse>>
+   public  class GetPatientPharmacyDetailsCommand :IRequest<Result<GetPatientPharmacyResponse>>
     {
-        public int PatientMasterVisitId { get; set; }
 
-        public int Ptn_Pk { get; set; }
         public int PatientId { get; set; }
 
-        public int LocationId { get; set; }
+        public int PatientMasterVisitId { get; set; }
 
-        public int UserId { get; set; }
-
-        public string PrescriptionDate { get; set; }
-
-        public int PrescribedBy { get; set; }
-
-        public int DispensedBy { get; set; }
-
-        public string DispensedDate { get; set; }
-
-        public DateTime VisitDate { get; set; }
-
-        public int pmscm { get; set; }
-        public List<PrescriptionDetails> PrescriptionDetails { get; set; }
         
     }
 
-    public class PrescriptionDetails
+public class GetPatientPharmacyResponse
+{
+    public int? PatientId { get; set; }
+
+    public int? PatientMasterVisitId { get; set; }
+    
+    public int ptn_pk { get; set; }
+     public DateTime? VisitDate { get; set; }
+        public DateTime? OrderedByDate { get; set; }
+
+        public DateTime? DispensedDate { get; set; }
+
+        public List<DrugDetails> DrugDetails { get; set; }
+}
+
+
+    public class DrugDetails
     {
-      public   string DrugName { get; set; }
+        public int ptn_pharmacy_pk { get; set; }
+        public string DrugName { get; set; }
         public string DrugId { get; set; }
         public string DrugAbb { get; set; }
         public string batchId { get; set; }
@@ -44,7 +46,7 @@ namespace IQCare.Pharm.BusinessProcess.Commands.PatientPharmacy
         public string FreqText { get; set; }
         public string Duration { get; set; }
         public string QuantityPres { get; set; }
-        public  string QUantityDisp { get; set; }
+        public string QUantityDisp { get; set; }
         public string Reason { get; set; }
         public string ReasonText { get; set; }
         public string Regimen { get; set; }
@@ -65,11 +67,9 @@ namespace IQCare.Pharm.BusinessProcess.Commands.PatientPharmacy
         public string PeriodTakentext { get; set; }
         public string Prophylaxis { get; set; }
 
-        public bool Disabled { get; set; }
+        
     }
 
-    public class SaveUpdatePharmacyResponse
-    {
-        public int Ptn_Pharmacy_Pk { get; set; }
-    }
+
+
 }

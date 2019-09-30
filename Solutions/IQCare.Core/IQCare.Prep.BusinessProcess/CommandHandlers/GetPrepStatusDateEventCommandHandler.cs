@@ -36,10 +36,15 @@ namespace IQCare.Prep.BusinessProcess.CommandHandlers
                      x.DeleteFlag == false && x.PrepStatusToday == request.startitemId).OrderByDescending(x=>x.PatientEncounterId ).ToListAsync();
 
                     PatientPrEPEvents pts = new PatientPrEPEvents();
-                    pts.PatientEncounterId = prepevents[0].PatientEncounterId;
-                    pts.PatientId = prepevents[0].PatientId;
-                    pts.Id = prepevents[0].Id;
-                    pts.DateRestarted = prepevents[0].DateField;
+                    if (prepevents.Count > 0)
+                    {
+                        pts.PatientEncounterId = prepevents[0].PatientEncounterId;
+                        pts.PatientId = prepevents[0].PatientId;
+                        pts.Id = prepevents[0].Id;
+                        pts.DateStarted = prepevents[0].DateField;
+                    }
+                  
+                 
 
                     return Result<PatientPrEPEvents>.Valid(pts);
                     

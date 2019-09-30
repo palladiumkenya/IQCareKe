@@ -50,7 +50,7 @@ export class PrepSTIScreeningTreatmentComponent implements OnInit {
             stiTreatmentOffered: new FormControl(''),
             stiReferredLabInvestigation: new FormControl('')
         });
-        this.STIScreeningForm.controls.Specify.disable({ onlySelf: true })
+        this.STIScreeningForm.controls.Specify.disable({ onlySelf: true });
         // set the date for only new encounters
         if (!this.isEdit) {
             this.STIScreeningForm.controls.visitDate.setValue(new Date(localStorage.getItem('visitDate')));
@@ -173,13 +173,6 @@ export class PrepSTIScreeningTreatmentComponent implements OnInit {
             this.router.navigate(['/pharm/' + this.patientId + '/' + this.personId],
                 { relativeTo: this.route });
         });
-        /*this.searchService.setSession(this.personId, this.patientId).subscribe((sessionres) => {
-            this.searchService.setVisitSession(this.patientMasterVisitId, 20, 261).subscribe((setVisitSession) => {
-                const url = location.protocol + '//' + window.location.hostname + ':' + window.location.port +
-                    '/IQCare/CCC/Encounter/PharmacyPrescription.aspx';
-                const win = window.open(url, '_blank');
-                win.focus();
-            });
-        });*/
+       
     }
 }

@@ -33,12 +33,14 @@ export class ServicesListComponent implements OnInit {
     @Input('riskencounters') riskencounter: any[];
     @Input('carended') carended: boolean;
     @Input('isdead') isdead: boolean;
+    @Input('creatininelabtests') creatininelabtests: any[];
     enrolledServices: any[];
     PatientCCCEnrolled: boolean = false;
     patientIdentifiers: any[];
     riskassessmentPatientMasterVisitId: number;
     enrolledService: any[] = [];
     identifiers: any[] = [];
+    creatininetestresult: boolean = false;;
     enrollservicename: boolean = true;
     enrollPrepServicename: boolean = false;
     patientvitals: any[] = [];
@@ -569,6 +571,21 @@ export class ServicesListComponent implements OnInit {
                             }
 
                         }
+                        if (this.creatininelabtests.length > 0) {
+                            if (this.creatininelabtests[0].result !== 'N/A') {
+                                let result: string;
+                                result = this.creatininelabtests[0].result;
+                                if (parseInt(result, 10) <= 50) {
+                                    isEligible = false;
+                                    this.creatininetestresult = true;
+                                }
+                                else {
+                                    isEligible = true;
+                                    this.creatininetestresult = false;
+                                }
+                            }
+                        }
+
 
                     }
 

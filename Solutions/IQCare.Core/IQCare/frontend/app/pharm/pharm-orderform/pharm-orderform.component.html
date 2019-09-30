@@ -250,6 +250,7 @@
                                         style="width:100%">
                                         <thead>
                                             <tr>
+                                                
                                                 <th><span class="text-primary">TreatmentProgram</span></th>
                                                 <th><span class="text-primary">Regimen</span> </th>
                                                 <th><span class="text-primary">RegimenLine</span></th>
@@ -294,8 +295,9 @@
                                                 <td>{{item_data.QuantityPres}}</td>
                                                 <td>{{item_data.QuantityDisp}}</td>
                                                 <td>{{item_data.Prophylaxis}}</td>
-                                                <td>
-                                                    <i style="cursor: pointer;" class="danger material-icons" (click)="removeRow(index)">
+                                                <td *ngIf="item_data.disabled">
+                                                    <i style="cursor: pointer;" class="danger material-icons"
+                                                        (click)="removeRow(index)">
                                                         delete
                                                     </i>
                                                 </td>
@@ -335,13 +337,13 @@
                 </div>
                 <div class="row">
                     <div class="col-md-4 col-xs-12 col-sm-12">
-                        <button mat-raised-button class="mat-primary" ><span
-                                class="fa fa-plus-circle" (click)="SavePharmacyData()"> SavePrescription</span></button>
+                        <button mat-raised-button class="mat-primary"><span class="fa fa-plus-circle"
+                                (click)="SavePharmacyData()"> SavePrescription</span></button>
                     </div>
-                   
+
                     <div class="col-md-4 col-xs-12 col-sm-12">
-                        <button mat-raised-button class="mat-primary" ><span
-                                class="fa fa-plus-circle" (click) = "Close()"> Close Prescription</span></button>
+                        <button mat-raised-button class="mat-primary"><span class="fa fa-plus-circle" (click)="Close()">
+                                Close Prescription</span></button>
                     </div>
                 </div>
 

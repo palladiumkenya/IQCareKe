@@ -10,7 +10,7 @@ namespace IQCare.Prep.Core.Models
         public int PatientId { get; set; }
         public int PatientEncounterId { get; set; }
 
-        public DateTime? DateRestarted { get; set; }
+        public DateTime? DateStarted { get; set; }
 
         
     }

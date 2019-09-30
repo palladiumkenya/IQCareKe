@@ -19,10 +19,11 @@ import { ActiveModulesResolver } from './services/activemodules.resolver';
 import { TreatmentStartedResolver } from './services/TreatmentStarted.resolver';
 import {PersonCurrentVitalsResolver } from './services/Vitals.resolver';
 import {NumberDirective} from './OnlyNumberDirective';
+import { PharmMainpageComponent } from './pharm-mainpage/pharm-mainpage.component';
 
 @NgModule({
     declarations: [
-        PharmOrderformComponent, NumberDirective],
+        PharmOrderformComponent, NumberDirective, PharmMainpageComponent],
     imports: [
         SharedModule, MatDatepickerModule, MatNativeDateModule, PharmRoutingModule,
         CommonModule, MatStepperModule, ReactiveFormsModule,

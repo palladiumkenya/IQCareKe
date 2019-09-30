@@ -4,6 +4,10 @@
 <asp:HiddenField ID="drugAbbr" runat="server" ClientIDMode="Static" />
 <style>
 
+    .notVisible {
+        visibility:hidden;
+        display:none;
+    }
     .VisibleFrequency{
          visibility: hidden;
          display: none;
@@ -117,6 +121,17 @@
                                                 <table id="dtlDrugPrescriptionFrequency" class="table table-bordered table-striped" style="width:100%">
                                                     <thead>
                                                         <tr>
+                                                            <th><span class="text-primary notVisible">ProgID</span></th>
+                                                            <th><span class="text-primary ">TreatmentProgram</span></th>
+                                                            <th><span class="text-primary  notVisible">TreatmentPlanValue</span></th>
+                                                            <th><span class="text-primary ">TreatmentPlan</span></th>
+                                                            <th><span class="text-primary">Reason</span></th>
+
+                                                            <th><span class="text-primary  notVisible">TreatmentPlanReasonId</span></th>
+                                                            <th><span class="text-primary">RegimenLine</span></th>
+                                                            <th><span class="text-primary  notVisible">RegimenLineId</span></th>
+                                                            <th><span class="text-primary">Regimen</span></th>
+                                                            <th><span class="text-primary  notVisible">RegimenId</span></th>
                                                             <th><span class="text-primary">DrugId</span></th>
                                                             <th><span class="text-primary">BatchId</span></th>
                                                             <th> <span class="text-primary">FreqId</span></th>
@@ -142,6 +157,18 @@
                                                 <table id="dtlDrugPrescription" class="table table-bordered table-striped" style="width:100%">
                                                     <thead>
                                                         <tr>
+                                                           <th><span class="text-primary notVisible">ProgID</span></th>
+                                                            <th><span class="text-primary ">TreatmentProgram</span></th>
+                                                            <th><span class="text-primary  notVisible">TreatmentPlanValue</span></th>
+                                                            <th><span class="text-primary ">TreatmentPlan</span></th>
+                                                            <th><span class="text-primary">Reason</span></th>
+
+                                                            <th><span class="text-primary  notVisible">ReasonValue</span></th>
+                                                            <th><span class="text-primary">RegimenLine</span></th>
+                                                            <th><span class="text-primary  notVisible">RegimenLineId</span></th>
+                                                            <th><span class="text-primary">Regimen</span></th>
+                                                            <th><span class="text-primary  notVisible">RegimenId</span></th>
+                                                            
                                                             <th><span class="text-primary">DrugId</span></th>
                                                             <th><span class="text-primary">BatchId</span></th>
                                                             <th><span class="text-primary">DrugAbbr</span></th>
@@ -176,7 +203,8 @@
                             <div class="col-md-6">
                                 <div class="datepicker fuelux form-group pull-left" id="PrescriptionDate">
                                     <div class="input-group pull-left">
-                                        <asp:TextBox runat="server" ClientIDMode="Static" CssClass="form-control input-sm pull-left" ID="txtPrescriptionDate" onBlur="checkEnrolmentPrescriptionDates();ValidatePrescriptionDate();DateFormat(this,this.value,event,false,'3');" data-parsley-required="true" onkeyup="DateFormat(this,this.value,event,false,'3')"></asp:TextBox>
+                                        <asp:TextBox runat="server" ClientIDMode="Static" CssClass="form-control input-sm pull-left" ID="txtPrescriptionDate" 
+                                            onBlur="checkEnrolmentPrescriptionDates();ValidatePrescriptionDate();DateFormat(this,this.value,event,false,'3');"  onkeyup="DateFormat(this,this.value,event,false,'3')"></asp:TextBox>
                                         <div class="input-group-btn">
                                             <button type="button" class="btn btn-default dropdown-toggle input-sm" data-toggle="dropdown">
                                                 <span class="glyphicon glyphicon-calendar"></span>
@@ -407,6 +435,7 @@
     var age = "<%=Session["Age"]%>";
     var DosageFrequency = "<%= this.DosageFrequency %>";
     var DrugPrescriptionTable;
+    var DrugTableArray=new Array();
     //Date processing
     var today = new Date();
     var tomorrow = new Date();
@@ -725,27 +754,96 @@
             ajax: {
                 type: "POST",
                 url: "../WebService/PatientEncounterService.asmx/GetPharmacyPrescriptionDetails",
-                dataSrc: 'd',
+                dataSrc: function (json) {
+                    console.log('pharmacyprescriptions');
+                    console.log(json.d);
+                   
+                    var data = json.d;
+                    if (data.length > 0) {
+                        for (var i = 0; i < data.length; i++) {
+                            DrugTableArray.push({
+                                "ProgID": data[i][0],
+                                "TreatmentProgram": data[i][1],
+                                "TreatmentPlan": data[i][2],
+                                "TreatmentPlanText": data[i][3],
+                                "TreatmentPlanReason": data[i][4],
+                                "TreatmentPlanReasonId": data[i][5],
+                                "RegimenLine": data[i][6],
+                                "RegimenLineId": data[i][7],
+                                "Regimen": data[i][8],
+                                "RegimenId": data[i][9],
+
+                                "DrugId": data[i][10],
+                                "BatchId": data[i][11],
+                                "FreqId": data[i][12],
+
+                                "DrugAbbr": data[i][13],
+                                "DrugName": data[i][14],
+                                "batchName": data[i][15],
+                                "Dose": data[i][16],
+                                "Freqtext": data[i][17],
+                                "freq": data[i][12],
+                                // "Morning": DrugPrescriptionTable.row(i).data()[5],
+                                // "Midday": DrugPrescriptionTable.row(i).data()[6],
+                                // "Evening": DrugPrescriptionTable.row(i).data()[7],
+                                // "Night": DrugPrescriptionTable.row(i).data()[8],
+
+                                "Duration": data[i][18],
+                                "qtyPres": data[i][19],
+                                "qtyDisp": data[i][20],
+                                "prophylaxis": data[i][21]
+                            });
+                        }
+                    }
+                    return json.d;
+                 },
                 contentType: "application/json; charset=utf-8",
-                dataType: "json"
+                dataType:"json"
+                
             },
             paging: false,
             searching: false,
             info: false,
-            ordering: false,
-            columnDefs: [
-                {
+           ordering: false,
+            
+           columnDefs: [
+                 {
                     "targets": [0],
                     "visible": false,
                     "searchable": false
+               },
+                 {
+                    "targets": [2],
+                    "visible": false,
+                    "searchable": false
+               },
+                 {
+                    "targets": [5],
+                    "visible": false,
+                    "searchable": false
+               },
+                 {
+                    "targets": [7],
+                    "visible": false,
+                    "searchable": false
+               },
+                 {
+                    "targets": [9],
+                    "visible": false,
+                    "searchable": false
                 },
-                {
-                    "targets": [1],
+               {
+                    "targets": [10],
                     "visible": false,
                     "searchable": false
                 },
                 {
-                    "targets": [2],
+                    "targets": [11],
+                    "visible": false,
+                    "searchable": false
+                },
+                {
+                    "targets": [12],
                     "visible": false,
                     "searchable": false
                 }
@@ -763,27 +861,69 @@
             ajax: {
                 type: "POST",
                 url: "../WebService/PatientEncounterService.asmx/GetPharmacyPrescriptionDetails",
-                dataSrc: 'd',
+                //dataSrc: 'd',
+                dataSrc: function (json) {
+                    console.log('pharmacyprescriptions');
+                    if (data.length > 0) {
+                        for (var i = 0; i < data.length; i++) {
+                            DrugTableArray.push({
+                                "ProgID": data[i][0],
+                                "TreatmentProgram": data[i][1],
+                                "TreatmentPlan": data[i][2],
+                                "TreatmentPlanText": data[i][3],
+                                "TreatmentPlanReason": data[i][4],
+                                "TreatmentPlanReasonId": data[i][5],
+                                "RegimenLine": data[i][6],
+                                "RegimenLineId": data[i][7],
+                                "Regimen": data[i][8],
+                                "RegimenId": data[i][9],
+
+                                "DrugId": data[i][10],
+                                "BatchId": data[i][11],
+                               
+
+                                "DrugAbbr": data[i][12],
+                                "DrugName": data[i][13],
+                                "batchName": data[i][14],
+                                
+                                 "Morning": data[i][15],
+                                 "Midday": data[i][16],
+                                 "Evening": data[i][17],
+                                 "Night":data[i][18],
+
+                                "Duration": data[i][19],
+                                "qtyPres": data[i][20],
+                                "qtyDisp": data[i][21],
+                                "prophylaxis": data[i][22]
+                            });
+                        }
+                    }
+                    return json.d;
+                   
+                },
                 contentType: "application/json; charset=utf-8",
                 dataType: "json"
+                
             },
             paging: false,
             searching: false,
             info: false,
-            ordering: false,
-            columnDefs: [
+             ordering: false,
+            targets:10,
+             columnDefs: [
+              { "bVisible": false, "aTargets": [0,9] },
                 {
-                    "targets": [0],
+                    "targets": [10],
                     "visible": false,
                     "searchable": false
                 },
                 {
-                    "targets": [1],
+                    "targets": [11],
                     "visible": false,
                     "searchable": false
                 },
                 {
-                    "targets": [2],
+                    "targets": [12],
                     "visible": false,
                     "searchable": false
                 }
@@ -804,39 +944,57 @@
                     .remove()
                     .draw();
 
-                var index = drugNameArr.indexOf($(this).parents('tr').find('td:eq(0)').text());
+                console.log($(this).parents('tr').find('td:eq(6)').text().toString());
+                console.log(drugNameArr);
+
+                var index = drugNameArr.indexOf($(this).parents('tr').find('td:eq(6)').text());
                 if (index > -1) {
                     drugNameArr.splice(index, 1);
+                    DrugTableArray.splice(index, 1);
+                    arrDrugPrescriptionUI.splice(index, 1);
+                    
                 }
 
-                var index1 = batchNoArr.indexOf($(this).parents('tr').find('td:eq(1)').text());
+                var index1 = batchNoArr.indexOf($(this).parents('tr').find('td:eq(7)').text());
+
+                 console.log($(this).parents('tr').find('td:eq(7)').text().toString());
+                console.log(drugNameArr);
                 if (index1 > -1) {
                     batchNoArr.splice(index1, 1);
+                  
                 }
+
+                  console.log('Delete Drug');
+                console.log(DrugTableArray);
             });
     $("#dtlDrugPrescriptionFrequency").on('click', '.btnDelete',
         function () {
 
-            var res = $(this).parents('tr').find('td:eq(0)').text();
-            var res2 = $(this).parents('tr').find('td:eq(1)').text();
-            var res3= $(this).parents('tr').find('td:eq(2)').text();
+            var res = $(this).parents('tr').find('td:eq(6)').text();
+            var res2 = $(this).parents('tr').find('td:eq(5)').text();
+            var res3 = $(this).parents('tr').find('td:eq(4)').text();
+            console.log('the text values');
             console.log(res);
             console.log(res2);
             console.log(res3);
             console.log(drugNameArr);
             console.log(batchNoArr);
-                var index = drugNameArr.indexOf($(this).parents('tr').find('td:eq(1)').text()); 
+                var index = drugNameArr.indexOf($(this).parents('tr').find('td:eq(6)').text()); 
                 console.log(index);
 
                 if (index > -1) {
 
                     drugNameArr.splice(index, 1);
+                    DrugTableArray.splice(index, 1);
+                       arrDrugPrescriptionUI.splice(index, 1);
                 }
 
-                var index1 = batchNoArr.indexOf($(this).parents('tr').find('td:eq(2)').text());
+                var index1 = batchNoArr.indexOf($(this).parents('tr').find('td:eq(7)').text());
                 console.log(index1);
                 if (index1 > -1) {
                     batchNoArr.splice(index1, 1);
+
+
                 }
 
                  DrugPrescriptionTable
@@ -846,6 +1004,9 @@
 
              console.log(drugNameArr);
             console.log(batchNoArr);
+             
+                  console.log('Delete Drug');
+                console.log(DrugTableArray);console.log(DrugTableArray);
             });
 
     function SelectRegimenLine() {
@@ -949,10 +1110,11 @@
                     .clear()
                     .draw();
         drugNameArr = [];
+        DrugTableArray = [];
     }
 
-       function getBatches(drugPk)
-       {
+    function getBatches(drugPk) {
+       
            $.ajax({
                url: '../WebService/PatientEncounterService.asmx/GetDrugBatches',
                type: 'POST',
@@ -1045,6 +1207,8 @@
                     .draw();
 
         drugNameArr = [];
+      
+       
     }
 
        function drugSwitchInterruptionReason()
@@ -1088,10 +1252,126 @@
 }
 
     var drugNameArr = new Array();
-var batchNoArr = new Array();
+    var batchNoArr = new Array();
+   var arrDrugPrescriptionUI = [];
     function AddCorrectDrugPrescription() {
         console.log(DosageFrequency.toString());
+        $('#PharmacySection').parsley().destroy();
+        $('#PharmacySection').parsley({
+            excluded:
+            "input[type=button], input[type=submit], input[type=reset], input[type=hidden], [disabled], :hidden"
+        });
+
+        if ($('#PharmacySection').parsley().validate()) {
+
+            var treatmentProgram = $("#<%=ddlTreatmentProgram.ClientID%>").find(":selected").val();
+            var treatmentProgramName = $("#<%=ddlTreatmentProgram.ClientID%>").find(":selected").text();
+            var periodTaken = $("#<%=ddlPeriodTaken.ClientID%>").find(":selected").val();
+            var treatmentPlan = $("#<%=ddlTreatmentPlan.ClientID%>").find(":selected").val();
+            var treatmentPlanName = $("#<%=ddlTreatmentPlan.ClientID%>").find(":selected").text();
+            var treatmentPlanReason = $("#<%=ddlSwitchInterruptionReason.ClientID%>").find(":selected").val();
+            var regimenLine = $("#<%=regimenLine.ClientID%>").find(":selected").val();
+            var regimen = $("#<%=ddlRegimen.ClientID%>").find(":selected").val();
+            var regimenText = $("#<%=ddlRegimen.ClientID%>").find(":selected").text();
+            var datePrescribed = $("#txtPrescriptionDate").val();
+            var dateDispensed = $("#txtDateDispensed").val();
+              var drugAbbr = $("#drugAbbr").val();
+
+
+            if (regimen === undefined)
+                regimen = '0';
+            if (treatmentPlanReason == typeof undefined || treatmentPlanReason === treatmentPlanReason) {
+                treatmentPlanReason = 0;
+            }
+
+
+            var allAbbr = "";
+            ///////////////////////////////////////////////////////////////////
+
+            var drugPrescriptionArray = new Array();
+            try {
+
+
+
+           
+                if (!allAbbr.toUpperCase().includes(drugAbbr.toUpperCase())) {
+                    if (drugAbbr  != "")
+                        allAbbr += drugAbbr + "/";
+                }
+            }
+
+            catch (ex) { }
+
+            //////////////////////////////////////////////////////////////////
+            allAbbr = allAbbr.replace(/\/$/, "");
+
+            console.log(allAbbr);
+
+            var sumAllAbbr = 0;
+            var sumSelectedRegimen = 0;
+            try {
+                for (var i = 0; i < allAbbr.length; i++) {
+                    sumAllAbbr += allAbbr.charCodeAt(i);
+                }
+            }
+            catch (err) { }
+
+            try {
+                //var regExp = /\(([^)]+)\)/;
+                var regimenText = regimenText.match(/\(([^)]+)\)/)[1];
+                //var matches = regExp.exec(regimenText);
+                var selectedRegimen = regimenText.replace(/\+/g, '/').replace(/ /g, '');
+                //alert(rmv);
+                //alert(matches);
+                //var selectedRegimen = matches[1].replace(/ /g, '').replace(/\+/g, '/');
+                //alert(selectedRegimen);
+                for (var i = 0; i < selectedRegimen.length; i++) {
+                    sumSelectedRegimen += selectedRegimen.charCodeAt(i);
+                }
+
+
+            }
+            catch (err) {
+                toastr.error("Error", "");
+            }
+
+            if (sumAllAbbr > 0) {
+                if (treatmentProgramName === 'ART' || treatmentProgramName === 'PMTCT') {
+                    if (regimenLine === "0") {
+                        toastr.error("Error", "Please select the Regimen Line");
+                        return;
+                    }
+                }
+
+            ///   if (sumAllAbbr !== sumSelectedRegimen && (treatmentProgramName === 'ART' || treatmentProgramName === 'PMTCT') && sumSelectedRegimen < 1500) {
+               ///     toastr.error("Error", "Selected Regimen is not equal to Prescribed Regimen!");
+                  ///  return;
+               // } 
+
+
+            }
+               
+
+        }
+        else {
+            toastr.error('fill Missing fields');
+        }
+         
         if (DosageFrequency.toString() == "1") {
+           // arrDrugPrescriptionUI = [];
+            var treatmentProgram = $("#<%=ddlTreatmentProgram.ClientID%>").find(":selected").val();
+            var treatmentProgramName = $("#<%=ddlTreatmentProgram.ClientID%>").find(":selected").text();
+            var periodTaken = $("#<%=ddlPeriodTaken.ClientID%>").find(":selected").val();
+            var treatmentPlan = $("#<%=ddlTreatmentPlan.ClientID%>").find(":selected").val();
+            var treatmentPlanName = $("#<%=ddlTreatmentPlan.ClientID%>").find(":selected").text();
+            var treatmentPlanReason = $("#<%=ddlSwitchInterruptionReason.ClientID%>").find(":selected").val();
+            var treatmentPlanReasonName = $("#<%=ddlSwitchInterruptionReason.ClientID%>").find(":selected").text();
+            var regimenLine = $("#<%=regimenLine.ClientID%>").find(":selected").val();
+            var regimenLineName=$("#<%=regimenLine.ClientID%>").find(":selected").text();
+            var regimen = $("#<%=ddlRegimen.ClientID%>").find(":selected").val();
+            var regimenText = $("#<%=ddlRegimen.ClientID%>").find(":selected").text();
+            var datePrescribed = $("#txtPrescriptionDate").val();
+            var dateDispensed = $("#txtDateDispensed").val();
              var drugId = $("#drugID").val();
             var drugAbbr = $("#drugAbbr").val();
             var drugName = $("#txtDrugs").val();
@@ -1106,7 +1386,7 @@ var batchNoArr = new Array();
             //var night = $("#txtNight").val();
 
             var duration = $("#txtDuration").val();
-            var quantityPres = $("#txtQuantityPres").val();
+          var quantityPres = $("#txtQuantityPres").val();
             var quantityDisp = $("#txtQuantityDisp").val();
             batchText = batchText.substring(0, batchText.indexOf('~'));
 
@@ -1167,9 +1447,45 @@ var batchNoArr = new Array();
                 drugNameArr.push("" + drugName + "");
                 batchNoArr.push("" + batchText + "");
 
-                arrDrugPrescriptionUI = [];
+               
 
-                arrDrugPrescriptionUI.push([
+                  DrugTableArray.push({
+                                "ProgID": treatmentProgram,
+                                "TreatmentProgram":treatmentProgramName,
+                                "TreatmentPlan": treatmentPlan,
+                                "TreatmentPlanText":treatmentPlanName,
+                                "TreatmentPlanReason": treatmentPlanReasonName,
+                                "TreatmentPlanReasonId": treatmentPlanReason,
+                                "RegimenLine": regimenLineName,
+                                "RegimenLineId": regimenLine,
+                                "Regimen": regimenText,
+                                "RegimenId": regimen,
+
+                                "DrugId": drugId,
+                                "BatchId": batchId,
+                                "FreqId": freqId,
+
+                                "DrugAbbr": drugAbbr,
+                                "DrugName": drugName,
+                                "batchName": batchText,
+                                "Dose": dose,
+                                "Freqtext": freqTxt,
+                                "freq": freqId,
+                                "Duration": duration,
+                                "qtyPres": quantityPres,
+                                "qtyDisp": quantityDisp,
+                                "prophylaxis": prophylaxis
+                            });
+                arrDrugPrescriptionUI.push([ treatmentProgram,
+                                treatmentProgramName,
+                                 treatmentPlan,
+                                treatmentPlanName,
+                                 treatmentPlanReason,
+                                 treatmentPlanReasonName,
+                                 regimenLine,
+                          regimenLineName,
+                                regimenText,
+                                 regimen,
                     drugId, batchId, freqId, drugAbbr, drugName, batchText, dose, freqTxt, duration, quantityPres, quantityDisp,
                     prophylaxis,
                     "<button type='button' class='btnDelete btn btn-danger fa fa-minus-circle btn-fill' > Remove</button>"
@@ -1181,9 +1497,10 @@ var batchNoArr = new Array();
                 //    "<button type='button' class='btnDelete btn btn-danger fa fa-minus-circle btn-fill' > Remove</button>"
                 //]);
 
-                DrawDataTable("dtlDrugPrescriptionFrequency", arrDrugPrescriptionUI);
+                DrawDataTable("dtlDrugPrescriptionFrequency",arrDrugPrescriptionUI);
                 console.log(arrDrugPrescriptionUI);
-
+                console.log('Add Drug');
+                console.log(DrugTableArray);
 
                 
         $("#txtDrugs").val("");
@@ -1199,6 +1516,19 @@ var batchNoArr = new Array();
 
         }
         else {
+            var treatmentProgram = $("#<%=ddlTreatmentProgram.ClientID%>").find(":selected").val();
+            var treatmentProgramName = $("#<%=ddlTreatmentProgram.ClientID%>").find(":selected").text();
+            var periodTaken = $("#<%=ddlPeriodTaken.ClientID%>").find(":selected").val();
+            var treatmentPlan = $("#<%=ddlTreatmentPlan.ClientID%>").find(":selected").val();
+            var treatmentPlanName = $("#<%=ddlTreatmentPlan.ClientID%>").find(":selected").text();
+            var treatmentPlanReason = $("#<%=ddlSwitchInterruptionReason.ClientID%>").find(":selected").val();
+             var treatmentPlanReasonName = $("#<%=ddlSwitchInterruptionReason.ClientID%>").find(":selected").text();
+            var regimenLine = $("#<%=regimenLine.ClientID%>").find(":selected").val();
+              var regimenLineName=$("#<%=regimenLine.ClientID%>").find(":selected").text();
+            var regimen = $("#<%=ddlRegimen.ClientID%>").find(":selected").val();
+            var regimenText = $("#<%=ddlRegimen.ClientID%>").find(":selected").text();
+            var datePrescribed = $("#txtPrescriptionDate").val();
+            var dateDispensed = $("#txtDateDispensed").val();
             var drugId = $("#drugID").val();
             var drugAbbr = $("#drugAbbr").val();
             var drugName = $("#txtDrugs").val();
@@ -1274,7 +1604,38 @@ var batchNoArr = new Array();
                 drugNameArr.push("" + drugName + "");
                 batchNoArr.push("" + batchText + "");
 
-                arrDrugPrescriptionUI = [];
+    //arrDrugPrescriptionUI = [];
+
+                 DrugTableArray.push({
+                                "ProgID": treatmentProgram,
+                                "TreatmentProgram": treatmentProgramName,
+                                "TreatmentPlan": treatmentPlan,
+                                "TreatmentPlanText": treatmentPlanName,
+                                "TreatmentPlanReason": treatmentPlanReason,
+                                "TreatmentPlanReasonId": treatmentPlanReasonName,
+                                "RegimenLine": regimenLine,
+                                "RegimenLineId": regimenLineName,
+                                "Regimen": regimenName,
+                                "RegimenId":regimen,
+
+                                "DrugId": drugId,
+                                "BatchId":batchId,
+                               
+
+                                "DrugAbbr": drugAbbr,
+                                "DrugName":drugName,
+                                "batchName": batchText,
+                                
+                                 "Morning": morning,
+                                 "Midday": midday,
+                                 "Evening": evening,
+                                 "Night":night,
+
+                                "Duration": duration,
+                               "qtyPres": quantityPresc,
+                                "qtyDisp":quantityDisp,
+                                "prophylaxis": prophylaxis
+                            });
 
                 //arrDrugPrescriptionUI.push([
                 //    drugId, batchId, freqId, drugAbbr, drugName, batchText, dose, freqTxt, duration, quantityPres, quantityDisp,
@@ -1282,14 +1643,24 @@ var batchNoArr = new Array();
                 //    "<button type='button' class='btnDelete btn btn-danger fa fa-minus-circle btn-fill' > Remove</button>"
                 //]);
 
-                arrDrugPrescriptionUI.push([
+                arrDrugPrescriptionUI.push([ treatmentProgram,
+                                     treatmentProgramName,        
+                                 treatmentPlan,
+                                treatmentPlanName,
+                                 treatmentPlanReason,
+                                 treatmentPlanReasonName,
+                                 regimenLine,
+                          regimenLineName,
+                                regimenText,
+                                 regimen,
                     drugId, batchId, drugAbbr, drugName, batchText, morning, midday, evening, night, duration, quantityPres, quantityDisp,
                     prophylaxis,
                     "<button type='button' class='btnDelete btn btn-danger fa fa-minus-circle btn-fill' > Remove</button>"
                 ]);
 
                 DrawDataTable("dtlDrugPrescription", arrDrugPrescriptionUI);
-
+                console.log('Add Drug');
+                console.log(DrugTableArray);
                 $("#txtDrugs").val("");
                 $("#ddlBatch").val("");
                 $("#txtMorning").val("0");
@@ -1302,7 +1673,7 @@ var batchNoArr = new Array();
                 $('#chkProphylaxis').attr('checked', false);
             }
         } 
-}
+    }
        function selectRegimens(regimenLine)
        {
            var valSelected = $("#<%=regimenLine.ClientID%>").find(":selected").text();
@@ -1360,11 +1731,11 @@ var batchNoArr = new Array();
             //console.log(dateDispensed);
             //return false;
 
-            if (!DrugPrescriptionTable.data().any()) {
+           /* if (!DrugPrescriptionTable.data().any()) {
                 toastr.error("Drug Prescription Error", "Add drugs to prescribe.");
                 //evt.preventDefault();
                 return false;
-            }
+            }*/
 
             if (regimen === undefined)
                 regimen = '0';
@@ -1376,65 +1747,122 @@ var batchNoArr = new Array();
             var allAbbr = "";
             ///////////////////////////////////////////////////////////////////
          
-            var drugPrescriptionArray = new Array();
+            
             try {
                 
               
                    
                 if (DosageFrequency.toString() == "1") {
-                    var rowCount = $('#dtlDrugPrescriptionFrequency tbody tr').length;
+                    var rowCount = DrugTableArray.length;
                     console.log(DrugPrescriptionTable);
+
+                   
                     for (var i = 0; i < rowCount; i++) {
-                        drugPrescriptionArray[i] = {
-                            "DrugId": DrugPrescriptionTable.row(i).data()[0],
-                            "BatchId": DrugPrescriptionTable.row(i).data()[1],
-                            "FreqId": DrugPrescriptionTable.row(i).data()[2],
-                            "DrugAbbr": DrugPrescriptionTable.row(i).data()[3],
-                            "Dose": DrugPrescriptionTable.row(i).data()[6],
+                        var drugPrescriptionArray = new Array();
+                        drugPrescriptionArray.push({
+                            "DrugId": DrugTableArray[i]['Drug_Id'],
+                            "BatchId": DrugTableArray[i]['BatchId'],
+                            "FreqId": DrugTableArray[i]['FreqId'],
+                            "DrugAbbr": DrugTableArray[i]['DrugAbbr'],
+                            "Dose": DrugTableArray[i]['Dose'],
                             // "Morning": DrugPrescriptionTable.row(i).data()[5],
                             // "Midday": DrugPrescriptionTable.row(i).data()[6],
                             // "Evening": DrugPrescriptionTable.row(i).data()[7],
                             // "Night": DrugPrescriptionTable.row(i).data()[8],
 
-                            "Duration": DrugPrescriptionTable.row(i).data()[8],
-                            "qtyPres": DrugPrescriptionTable.row(i).data()[9],
-                            "qtyDisp": DrugPrescriptionTable.row(i).data()[10],
-                            "prophylaxis": DrugPrescriptionTable.row(i).data()[11]
+                            "Duration": DrugTableArray[i]['Duration'],
+                            "qtyPres": DrugTableArray[i]['qtyPres'],
+                            "qtyDisp": DrugTableArray[i]['qtyDisp'],
+                            "prophylaxis": DrugTableArray[i]['prophylaxis']
+                        });
+
+
+                         $("#btnSavePrescription").attr("disabled", true);
+                    $.ajax({
+                        url: '../WebService/PatientEncounterService.asmx/savePatientPharmacy',
+                        type: 'POST',
+                        dataType: 'json',
+                        data: "{'TreatmentProgram':'" + DrugTableArray[i]['TreatmentProgram'].toString() + "','PeriodTaken':'" + periodTaken.toString() + "','TreatmentPlan':'" +
+                            DrugTableArray[i]['TreatmentPlan'].toString() + "','TreatmentPlanReason':'" + DrugTableArray[i]['TreatmentPlanReasonId'].toString() + "','RegimenLine':'" +
+                            DrugTableArray[i]['RegimenLineId'].toString() + "','Regimen':'" +   DrugTableArray[i]['RegimenId'].toString() + "','pmscm':'" + pmscmFlag + "','PrescriptionDate':'" +
+                            datePrescribed + "','DispensedDate':'" + dateDispensed + "', 'drugPrescription':'" +
+                            JSON.stringify(drugPrescriptionArray) + "', 'regimenText':'" + DrugTableArray[i]['RegimenId'].toString()  + "'}",
+                        contentType: "application/json; charset=utf-8",
+                        success: function (data) {
+                            $("#btnSavePrescription").attr("disabled", true);
+                            toastr.success(data.d, "Saved successfully");
+                            //$('#pharmacyModal').modal('hide');
+
+                        },
+                        error: function (data) {
+                            $("#btnSavePrescription").removeAttr("disabled");
+                            toastr.error(data.d, "Error");
                         }
+                    });
+
+
                     }
                     console.log(drugPrescriptionArray);
+
                 }
                 else {
-                    var rowCount = $('#dtlDrugPrescription tbody tr').length;
+                    var rowCount = DrugTableArray.length;
                     for (var i = 0; i < rowCount; i++) {
-                        drugPrescriptionArray[i] = {
-                            "DrugId": DrugPrescriptionTable.row(i).data()[0],
-                            "BatchId": DrugPrescriptionTable.row(i).data()[1],
+                        var drugPrescriptionArray = new Array();
+                            
+                        drugPrescriptionArray.push({
+                            "DrugId": DrugTableArray[i]['Drug_Id'],
+                            "BatchId": DrugTableArray[i]['BatchId'],
                             //"FreqId": DrugPrescriptionTable.row(i).data()[2],
-                            "DrugAbbr": DrugPrescriptionTable.row(i).data()[2],
-                            //"Dose": DrugPrescriptionTable.row(i).data()[6],
-                            "Morning": DrugPrescriptionTable.row(i).data()[5],
-                            "Midday": DrugPrescriptionTable.row(i).data()[6],
-                            "Evening": DrugPrescriptionTable.row(i).data()[7],
-                            "Night": DrugPrescriptionTable.row(i).data()[8],
+                            "DrugAbbr": DrugTableArray[i]['DrugAbbr'],
 
-                            "Duration": DrugPrescriptionTable.row(i).data()[9],
-                            "qtyPres": DrugPrescriptionTable.row(i).data()[10],
-                            "qtyDisp": DrugPrescriptionTable.row(i).data()[11],
-                            "prophylaxis": DrugPrescriptionTable.row(i).data()[12]
+                            //"Dose": DrugPrescriptionTable.row(i).data()[6],
+                            "Morning": DrugTableArray[i]['Morning'],
+                            "Midday": DrugTableArray[i]['Midday'],
+                            "Evening": DrugTableArray[i]['Evening'],
+                            "Night": DrugTableArray[i]['Night'],
+
+                            "Duration": DrugTableArray[i]['Duration'],
+                            "qtyPres": DrugTableArray[i]['qtyPres'],
+                            "qtyDisp": DrugTableArray[i]['qtyDisp'],
+                            "prophylaxis": DrugTableArray[i]['prophylaxis']
+                        });
+
+
+                         $("#btnSavePrescription").attr("disabled", true);
+                    $.ajax({
+                        url: '../WebService/PatientEncounterService.asmx/savePatientPharmacy',
+                        type: 'POST',
+                        dataType: 'json',
+                        data: "{'TreatmentProgram':'" + DrugTableArray[i]['TreatmentProgram'].toString() + "','PeriodTaken':'" + periodTaken.toString() + "','TreatmentPlan':'" +
+                            DrugTableArray[i]['TreatmentPlan'].toString() + "','TreatmentPlanReason':'" + DrugTableArray[i]['TreatmentPlanReasonId'].toString() + "','RegimenLine':'" +
+                            DrugTableArray[i]['RegimenLineId'].toString() + "','Regimen':'" +   DrugTableArray[i]['RegimenId'].toString() + "','pmscm':'" + pmscmFlag + "','PrescriptionDate':'" +
+                            datePrescribed + "','DispensedDate':'" + dateDispensed + "', 'drugPrescription':'" +
+                            JSON.stringify(drugPrescriptionArray) + "', 'regimenText':'" + DrugTableArray[i]['RegimenId'].toString()  + "'}",
+                        contentType: "application/json; charset=utf-8",
+                        success: function (data) {
+                            $("#btnSavePrescription").attr("disabled", true);
+                            toastr.success(data.d, "Saved successfully");
+                            //$('#pharmacyModal').modal('hide');
+
+                        },
+                        error: function (data) {
+                            $("#btnSavePrescription").removeAttr("disabled");
+                            toastr.error(data.d, "Error");
                         }
+                    });
                     }
                 }
-                    if (!allAbbr.toUpperCase().includes(DrugPrescriptionTable.row(i).data()[2].toUpperCase())) {
+                  /*  if (!allAbbr.toUpperCase().includes(DrugPrescriptionTable.row(i).data()[2].toUpperCase())) {
                         if (DrugPrescriptionTable.row(i).data()[2] != "")
                             allAbbr += DrugPrescriptionTable.row(i).data()[2] + "/";
-                    }
+                    }*/
                 }
             
             catch (ex) { }
           
             //////////////////////////////////////////////////////////////////
-            allAbbr = allAbbr.replace(/\/$/, "");
+         /*   allAbbr = allAbbr.replace(/\/$/, "");
 
             console.log(allAbbr);
 
@@ -1523,7 +1951,7 @@ var batchNoArr = new Array();
                         toastr.error(data.d, "Error");
                     }
                 });
-            }
+            } */
 
         }
         else {

@@ -47,6 +47,26 @@ namespace IQCare.Pharm.WebApi.Controllers
             return Ok(response.Value);
         }
 
+        [HttpGet("getPharmacyVisitDrugDetails/{patientId}/{patientMasterVisitId}")]
+        public async Task<IActionResult> GetPharmacyVisitDrugDetails(int patientId,int patientMasterVisitId)
+        {
+            var response = await _mediator.Send(new GetPatientPharmacyDetailsCommand { PatientId = patientId,PatientMasterVisitId=patientMasterVisitId }, HttpContext.RequestAborted);
+            if (!response.IsValid)
+                return BadRequest(response);
+
+            return Ok(response.Value);
+        }
+
+        [HttpGet("getPharmacyVisit/{patientId}")]
+        public async Task<IActionResult> GetPharmacyVisit(int patientId)
+        {
+            var response =await _mediator.Send(new GetPatientPharmacyVisitCommand{ PatientId =patientId},HttpContext.RequestAborted);
+            if (!response.IsValid)
+                return BadRequest(response);
+
+            return Ok(response.Value);
+        }
+
         [HttpGet("getPharmacyRegimens/{regimenline}")]
         public async Task<IActionResult> GetPharmacyRegimens(string regimenline)
         {

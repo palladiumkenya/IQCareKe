@@ -5,12 +5,32 @@ import { AdultRegimenClassificationResolver, PaedsClassificationResolver } from 
 import { FrequencyTypeResolver } from './services/frequencytype.resolver';
 import { ActiveModulesResolver } from './services/activemodules.resolver';
 import { TreatmentStartedResolver } from './services/TreatmentStarted.resolver';
-import {PersonCurrentVitalsResolver } from './services/Vitals.resolver';
+import { PersonCurrentVitalsResolver } from './services/Vitals.resolver';
+import { PharmMainpageComponent } from './pharm-mainpage/pharm-mainpage.component'
 
 
 const routes: Routes = [
     {
+        path: 'mainpage/:patientId/:personId',
+        component: PharmMainpageComponent
+    },
+    {
+
         path: ':patientId/:personId',
+        pathMatch: 'full',
+        component: PharmOrderformComponent,
+        resolve: {
+            AdultArray: AdultRegimenClassificationResolver,
+            PaedsArray: PaedsClassificationResolver,
+            FrequencyArray: FrequencyTypeResolver,
+            ActiveModulesArray: ActiveModulesResolver,
+            TreatmentStartArray: TreatmentStartedResolver,
+            PersonVitalsArray: PersonCurrentVitalsResolver
+        }
+    },
+    {
+
+        path: ':patientId/:personId/:patientMasterVisitId/:edit',
         pathMatch: 'full',
         component: PharmOrderformComponent,
         resolve: {

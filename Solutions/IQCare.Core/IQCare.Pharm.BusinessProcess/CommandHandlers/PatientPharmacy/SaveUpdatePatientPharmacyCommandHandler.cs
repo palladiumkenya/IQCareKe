@@ -56,6 +56,22 @@ namespace IQCare.Pharm.BusinessProcess.CommandHandlers.PatientPharmacy
 
                             List<DrugPrescription> prs = new List<DrugPrescription>();
                             prs.Add(dr);
+                            if(String.IsNullOrEmpty(det.Reason) == true)
+                            {
+                                det.Reason = "0";
+                            }
+                            if(String.IsNullOrEmpty(det.Regimenline)== true)
+                            {
+                                det.Regimenline = "0";
+                            }
+                            if(String.IsNullOrEmpty(det.TreatmentPlan)== true)
+                            {
+                                det.TreatmentPlan = "0";
+                            }
+                            if(String.IsNullOrEmpty(det.Regimen)== true)
+                            {
+                                det.Regimen = "0";
+                            }
                             var pk = await phar.SaveUpdatePharmacy(Convert.ToInt32(request.Ptn_Pk),Convert.ToInt32(request.PatientMasterVisitId)
                                   , Convert.ToInt32(request.PatientId), Convert.ToInt32(request.LocationId),
                                    request.PrescribedBy, Convert.ToInt32(request.UserId), det.Regimentext, request.DispensedBy,

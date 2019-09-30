@@ -80,7 +80,7 @@ namespace IQCare.Pharm.BusinessProcess.Services
                     PharmacyPk = PatientPharmacy.ptn_pharmacy_pk;
                     PatientPk = PatientPharmacy.Ptn_pk;
                     VisitPk = PatientPharmacy.VisitId;
-                    var ArvTreatmentTracker = await _unitOfWork.Repository<ARVTreatmentTracker>().Get(x => x.PatientId == PatientId && x.PatientMasterVisitId == x.PatientMasterVisitId && x.DeleteFlag == false).OrderByDescending(x => x.Id).FirstOrDefaultAsync();
+                    var ArvTreatmentTracker = await _unitOfWork.Repository<ARVTreatmentTracker>().Get(x => x.PatientId == PatientId && x.PatientMasterVisitId ==PatientMasterVisitID && x.DeleteFlag == false).OrderByDescending(x => x.Id).FirstOrDefaultAsync();
                     if (ArvTreatmentTracker != null)
                     {
                         ArvTreatmentTracker.RegimenId = Regimen;
@@ -216,7 +216,7 @@ namespace IQCare.Pharm.BusinessProcess.Services
                     PharmacyPk = pho.ptn_pharmacy_pk;
                     PatientPk = pho.Ptn_pk;
                     VisitPk = pho.VisitId;
-                    var ArvTreatmentTracker = await _unitOfWork.Repository<ARVTreatmentTracker>().Get(x => x.PatientId == PatientId && x.PatientMasterVisitId == x.PatientMasterVisitId && x.DeleteFlag == false).OrderByDescending(x => x.Id).FirstOrDefaultAsync();
+                    var ArvTreatmentTracker = await _unitOfWork.Repository<ARVTreatmentTracker>().Get(x => x.PatientId == PatientId && x.PatientMasterVisitId ==PatientMasterVisitID && x.DeleteFlag == false).OrderByDescending(x => x.Id).FirstOrDefaultAsync();
                     if (ArvTreatmentTracker != null)
                     {
                         ArvTreatmentTracker.RegimenId = Regimen;
@@ -368,7 +368,7 @@ namespace IQCare.Pharm.BusinessProcess.Services
                         dose.SqlDbType = SqlDbType.Int;
                         dose.ParameterName = "@Dose";
                         dose.Size = -1;
-                        dose.Value = Convert.ToInt32(drg.Dose);
+                        dose.Value = decimal.ToInt32(Convert.ToDecimal(drg.Dose.ToString()));
 
 
                         // var morning = new SqlParameter("@Morning",  drg.Morning == "" ? "0" : drg.Morning);
@@ -377,7 +377,7 @@ namespace IQCare.Pharm.BusinessProcess.Services
                         morning.SqlDbType = SqlDbType.Int;
                         morning.ParameterName = "@Morning";
                         morning.Size = -1;
-                        morning.Value = Convert.ToInt32(drg.Morning);
+                        morning.Value = decimal.ToInt32(Convert.ToDecimal(drg.Morning.ToString()));
 
 
                         //var  midday = new SqlParameter("@Midday",  drg.Midday == "" ? "0" : drg.Midday);
@@ -386,7 +386,7 @@ namespace IQCare.Pharm.BusinessProcess.Services
                         midday.SqlDbType = SqlDbType.Int;
                         midday.ParameterName = "@Midday";
                         midday.Size = -1;
-                        midday.Value = Convert.ToInt32(drg.Midday);
+                        midday.Value = decimal.ToInt32(Convert.ToDecimal(drg.Midday.ToString()));
 
                         // var  evening = new SqlParameter("@Evening",  drg.Evening == "" ? "0" : drg.Evening);
 
@@ -395,7 +395,7 @@ namespace IQCare.Pharm.BusinessProcess.Services
                         evening.SqlDbType = SqlDbType.Int;
                         evening.ParameterName = "@Evening";
                         evening.Size = -1;
-                        evening.Value = Convert.ToInt32(drg.Evening);
+                        evening.Value = decimal.ToInt32(Convert.ToDecimal(drg.Evening.ToString()));
 
 
                         // var   night=new SqlParameter("@Night",  drg.Night == "" ? "0" : drg.Night);
@@ -406,7 +406,7 @@ namespace IQCare.Pharm.BusinessProcess.Services
                         night.SqlDbType = SqlDbType.Int;
                         night.ParameterName = "@Night";
                         night.Size = -1;
-                        night.Value = Convert.ToInt32(drg.Night);
+                        night.Value = decimal.ToInt32(Convert.ToDecimal(drg.Night.ToString()));
 
 
                         // var duration = new SqlParameter("@Duration", drg.Duration);
@@ -414,7 +414,7 @@ namespace IQCare.Pharm.BusinessProcess.Services
                         duration.SqlDbType = SqlDbType.Int;
                         duration.ParameterName = "@Duration";
                         duration.Size = -1;
-                        duration.Value = Convert.ToInt32(drg.Duration);
+                        duration.Value = decimal.ToInt32(Convert.ToDecimal(drg.Duration.ToString()));
 
                         // var qtypres = new SqlParameter("@qtyPres", drg.qtyPres);
 
@@ -423,7 +423,7 @@ namespace IQCare.Pharm.BusinessProcess.Services
                         qtypres.SqlDbType = SqlDbType.Int;
                         qtypres.ParameterName = "@qtyPres";
                         qtypres.Size = -1;
-                        qtypres.Value = Convert.ToInt32(drg.qtyPres);
+                        qtypres.Value = decimal.ToInt32(Convert.ToDecimal(drg.qtyPres.ToString()));
 
 
                         // var qtydisp = new SqlParameter("@qtyDisp",  drg.qtyDisp);
@@ -432,27 +432,27 @@ namespace IQCare.Pharm.BusinessProcess.Services
                         qtydisp.SqlDbType = SqlDbType.Int;
                         qtydisp.ParameterName = "@qtyDisp";
                         qtydisp.Size = -1;
-                        qtydisp.Value = Convert.ToInt32(drg.qtyDisp);
+                        qtydisp.Value = decimal.ToInt32(Convert.ToDecimal(drg.qtyDisp.ToString()));
                         // var prophylaxis = new SqlParameter("@prophylaxis", drg.prophylaxis);
 
                         var prophylaxis = new SqlParameter();
                         prophylaxis.SqlDbType = SqlDbType.Int;
                         prophylaxis.ParameterName = "@prophylaxis";
                         prophylaxis.Size = -1;
-                        prophylaxis.Value =(drg.prophylaxis== "")? 0: Convert.ToInt32(drg.prophylaxis);
+                        prophylaxis.Value =(drg.prophylaxis== "")? 0: Convert.ToInt32(drg.prophylaxis.ToString());
                         //var pmscmflag= new SqlParameter("@pmscm",  pmscmFlag);
                         var pmscmflag = new SqlParameter();
                         pmscmflag.SqlDbType = SqlDbType.Int;
                         pmscmflag.ParameterName = "@pmscm";
                         pmscmflag.Size = -1;
-                        pmscmflag.Value = Convert.ToInt32(pmscmFlag);
+                        pmscmflag.Value = Convert.ToInt32(pmscmFlag.ToString());
                         //var userid =new SqlParameter("@UserID",UserID);
 
                         var userid = new SqlParameter();
                         userid.SqlDbType = SqlDbType.Int;
                         userid.ParameterName = "@UserID";
                         userid.Size = -1;
-                        userid.Value = Convert.ToInt32(UserID);
+                        userid.Value = Convert.ToInt32(UserID.ToString());
 
                         var presc = await _unitOfWork.Context.Database.ExecuteSqlCommandAsync(sqlprescph.ToString(), parameters: new[] {
                     ptnpharmacy,

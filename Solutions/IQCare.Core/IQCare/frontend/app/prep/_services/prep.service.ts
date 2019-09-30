@@ -241,7 +241,22 @@ export class PrepService {
             );
 
     }
+    public getPatientStartEncounterEventDate(patientId: number, startitemId: number): Observable<any[]> {
 
+        return this.http.get<any[]>(this.PREP_API_URL + '/api/PrepStatus/GetPrepStartEventStatus/' +
+            patientId + '/' + startitemId).pipe(
+                tap(getPatientStartEncounterEventDate => this.errorHandler.log('Successfully fetched patient start date status')),
+                catchError(this.errorHandler.handleError<any>('Error in fetching P patient start date event status'))
+            );
+    }
+
+    public getPatientAdherenceOutcome(patientId: number) {
+        return this.http.get<any[]>(this.PREP_API_URL + '/api/PrepStatus/GetPatientAdherenceStatus/' +
+            patientId).pipe(
+                tap(getPatientStartEncounterEventDate => this.errorHandler.log('Successfully fetched patient adherence status')),
+                catchError(this.errorHandler.handleError<any>('Error in fetching Patient adherence status'))
+            );
+    }
 
 
     public getPatientMasterVisits(patientId: number, patientmastervisitid: number): Observable<any[]> {
