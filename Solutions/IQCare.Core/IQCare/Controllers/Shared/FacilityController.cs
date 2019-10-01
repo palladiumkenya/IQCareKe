@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using IQCare.Common.BusinessProcess.Commands.Appointment;
 using IQCare.Common.BusinessProcess.Commands.Lookup;
 using IQCare.Common.BusinessProcess.Commands.Matrix;
+using IQCare.HTS.BusinessProcess.Commands;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
@@ -81,6 +82,33 @@ namespace IQCare.Controllers.Shared
         public async Task<IActionResult> GetFacilityCareEndingSummary()
         {
             var response = await _mediatR.Send(new GetFacilityCareEndingCommand(), Request.HttpContext.RequestAborted);
+            if (response.IsValid)
+                return Ok(response.Value);
+            return BadRequest(response);
+        }
+
+        [HttpGet("GetFamilyTestingStatistics")]
+        public async Task<IActionResult> GetFamilyTestingStatistics()
+        {
+            var response = await _mediatR.Send(new TestingSummaryStatisticsQuery(), Request.HttpContext.RequestAborted);
+            if (response.IsValid)
+                return Ok(response.Value);
+            return BadRequest(response);
+        }
+
+        [HttpGet("GetPatientStabilitySummary")]
+        public async Task<IActionResult> GetPatientStabilitySummary()
+        {
+            var response = await _mediatR.Send(new GetPatientStabilitySummaryCommand(), Request.HttpContext.RequestAborted);
+            if (response.IsValid)
+                return Ok(response.Value);
+            return BadRequest(response);
+        }
+
+        [HttpGet("GetILMessageStats")]
+        public async Task<IActionResult> GetILMessageStats()
+        {
+            var response = await _mediatR.Send(new GetILMessageStatsCommand(), Request.HttpContext.RequestAborted);
             if (response.IsValid)
                 return Ok(response.Value);
             return BadRequest(response);

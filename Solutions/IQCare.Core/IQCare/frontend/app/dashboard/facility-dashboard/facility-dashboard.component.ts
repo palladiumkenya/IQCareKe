@@ -10,27 +10,7 @@ import {MatDatepickerInputEvent} from '@angular/material/datepicker';
     styleUrls: ['./facility-dashboard.component.css'],
     providers: [ FacilityService ]
 })
-export class FacilityDashboardComponent implements OnInit {
-    public doughnutChartLabels = ['Scheduled', 'Seen', 'Missed', 'Unscheduled'];
-    public doughnutChartData = [120, 150, 180, 90];
-    public doughnutChartType = 'doughnut';
-
-    public pieChartLabels = ['Pending VL Tests', 'Complete VL Tests', 'Total Suppressed', 'Total Unsuppressed'];
-    public pieChartData = [120, 150, 180, 90];
-    public pieChartType = 'pie';
-
-    public barChartOptions = {
-        scaleShowVerticalLines: false,
-        responsive: true
-    };
-    public barChartLabels = ['2006', '2007', '2008', '2009', '2010', '2011', '2012'];
-    public barChartType = 'bar';
-    public barChartLegend = true;
-    public barChartData = [
-        {data: [65, 59, 80, 81, 56, 55, 40], label: 'Series A'},
-        {data: [28, 48, 40, 19, 86, 27, 90], label: 'Series B'}
-    ];
-    
+export class FacilityDashboardComponent implements OnInit {    
     public appointmentSummaryData = [
         {data: [], label: 'Visit Schedule'}
     ];
@@ -51,6 +31,18 @@ export class FacilityDashboardComponent implements OnInit {
     public careEndingSummaryLabels = ['Total Dead', 'Total Transfer Out', 'Total Documented LTFU'];
     public careEndingSummaryData = [0, 0, 0];
     public careEndingSummaryType = 'doughnut';
+
+    public viralLoadOrderLabels = ['Pending VL Tests', 'Complete VL Tests'];
+    public viralLoadOrderData = [0, 0];
+    public viralLoadOrderType = 'pie';
+
+    public viralLoadResultsLabels = ['Total Suppressed', 'Total Unsuppressed'];
+    public viralLoadResultsData = [0, 0];
+    public viralLoadResultsType = 'pie';
+    
+    public familyTestingStatistics: any[] = [];
+    public differentiatedCareStatistics: any[] = [];
+    public ilStats: any[] = [];
     
     constructor(private facilityService: FacilityService) { }
     
@@ -60,6 +52,11 @@ export class FacilityDashboardComponent implements OnInit {
         this.getFacilityAllCCCVisitCountSummary(summaryDate);
         this.getIlStatistics();
         this.getCareEndingSummary();
+        this.getViralLoadOrderSummary();
+        this.getAllViralLoads();
+        this.getFamilyTestingStatistics();
+        this.getFacilityDiffentiatedCareModelStatistics();
+        this.getILMessageStats();
     }
 
     getFacilityAllCCCVisitCountSummary(summaryDate: string) {
@@ -116,6 +113,66 @@ export class FacilityDashboardComponent implements OnInit {
                     this.careEndingSummaryData[1] = res['totalPatientsTransferedOut'];
                     this.careEndingSummaryData[2] = res['lostToFollowUp'];
                 }
+            }
+        );
+    }
+
+    private getViralLoadOrderSummary() {
+        this.facilityService.getViralLoadOrderSummary().subscribe(
+            (res) => {
+                this.viralLoadOrderData = [];
+                let pending = 0;
+                let complete = 0;
+                for (let i = 0; i < res.length; i ++) {
+                    if (res[i]['metric'] == 'Complete') {
+                        complete = res[i]['count'];
+                    }
+
+                    if (res[i]['metric'] == 'pending') {
+                        pending = res[i]['count'];
+                    }
+                }
+
+                this.viralLoadOrderData[0] = pending;
+                this.viralLoadOrderData[1] = complete;
+            }
+        );
+    }
+
+    private getAllViralLoads() {
+        this.facilityService.getAllViralLoads().subscribe(
+            (res) => {
+                this.viralLoadResultsData = [];
+                const unsuppressed = res.filter(i => i.resultValues >= 1000 && i.results == 'Complete').length;
+                const suppressed = res.filter(i => i.resultValues < 1000 && i.results == 'Complete').length;
+                
+                this.viralLoadResultsData[0] = suppressed;
+                this.viralLoadResultsData[1] = unsuppressed;
+            }
+        );
+    }
+
+    private getFamilyTestingStatistics() {
+        this.facilityService.getFamilyTestingStatistics().subscribe(
+            (res) => {
+                this.familyTestingStatistics = res;
+            }
+        );
+    }
+
+    private getFacilityDiffentiatedCareModelStatistics() {
+        this.facilityService.getFacilityDiffentiatedCareModelStatistics().subscribe(
+            (res) => {
+                this.differentiatedCareStatistics = res;
+            }
+        );
+    }
+
+    private getILMessageStats() {
+        this.facilityService.getILMessageStats().subscribe(
+            (res) => {
+                this.ilStats = res;
+                console.log(this.ilStats);
             }
         );
     }

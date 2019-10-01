@@ -11,6 +11,7 @@ import {PersonView} from '../../records/_models/personView';
 })
 export class FacilityService {
     private API_URL = environment.API_URL;
+    private API_LAB = environment.API_LAB_URL;
     
     constructor(private http: HttpClient,
                 private errorHandler: ErrorHandlerService) { }
@@ -40,6 +41,41 @@ export class FacilityService {
         return this.http.get(this.API_URL + '/api/Facility/GetFacilityCareEndingSummary').pipe(
             tap(getCareEndingSummary => this.errorHandler.log('successfully fetched care ending summary')),
             catchError(this.errorHandler.handleError<any>('error fetching care ending summary'))
+        );
+    }
+
+    getViralLoadOrderSummary(): Observable<any[]> {
+        return this.http.get<any[]>(this.API_LAB + '/api/LabOrder/GetVlStatusCountQuery').pipe(
+            tap(getViralLoadOrderSummary => this.errorHandler.log('successfully fetched viral load order summary')),
+            catchError(this.errorHandler.handleError<any>('error fetching viral load order summary'))
+        );
+    }
+
+    getAllViralLoads(): Observable<any[]> {
+        return this.http.get<any[]>(this.API_LAB + '/api/LabOrder/GetAllViralLoads').pipe(
+            tap(getAllViralLoads => this.errorHandler.log('successfully fetched all viral loads')),
+            catchError(this.errorHandler.handleError<any>('error fetching viral all viral loads'))
+        );
+    }
+
+    getFamilyTestingStatistics(): Observable<any[]> {
+        return this.http.get<any[]>(this.API_URL + '/api/Facility/GetFamilyTestingStatistics').pipe(
+            tap(getFamilyTestingStatistics => this.errorHandler.log('successfully fetched family testing statistics')),
+            catchError(this.errorHandler.handleError<any>('error fetching family testing statistics'))
+        );
+    }
+
+    getFacilityDiffentiatedCareModelStatistics(): Observable<any[]> {
+        return this.http.get<any[]>(this.API_URL + '/api/Facility/GetPatientStabilitySummary').pipe(
+            tap(getFacilityDiffentiatedCareModelStatistics => this.errorHandler.log('successfully fetched differentiated care statistics')),
+            catchError(this.errorHandler.handleError<any>('error fetching differentiated care statistics'))
+        );
+    }
+
+    getILMessageStats(): Observable<any[]> {
+        return this.http.get<any[]>(this.API_URL + '/api/Facility/GetILMessageStats').pipe(
+            tap(getILMessageStats => this.errorHandler.log('successfully fetched IL message stats')),
+            catchError(this.errorHandler.handleError<any>('error fetching IL message stats'))
         );
     }
 }
