@@ -121,7 +121,7 @@ namespace IQCare.Web.Home
                     }
                     else if (folderName == "CCC")
                     {
-                        row["ResourceUrl"] = string.Format("../frontend/dashboard/facilityDashboard");
+                        row["ResourceUrl"] = string.Format("/frontend/dashboard/facilityDashboard");
                     }
                     else if(System.IO.File.Exists(Server.MapPath(string.Format("~/{0}/frmPharmacy_Dashboard.aspx", folderName))))
                     {

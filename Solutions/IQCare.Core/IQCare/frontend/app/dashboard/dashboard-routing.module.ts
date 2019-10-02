@@ -13,7 +13,7 @@ import { PrepComponent } from './enrollment/service-areas/prep/prep.component';
 import { ReenrollmentComponent } from './reenrollment/reenrollment.component';
 import { ExitReasonsResolver } from './services/exitreasons.resolver';
 import { HTSEncounterHistoryResolver } from './services/getlatesthtsencounterhistory.resolver';
-import { PartnerCCCEnrollmentResolver, SexWithoutCondomResolver,PatientIdentifierResolver} from './services/hivpartnerdetails.resolver';
+import { PartnerCCCEnrollmentResolver, SexWithoutCondomResolver, PatientIdentifierResolver} from './services/hivpartnerdetails.resolver';
 import { CareendDetailsResolver } from './services/careendeddetails.resolver';
 import {FacilityDashboardComponent} from './facility-dashboard/facility-dashboard.component';
 
