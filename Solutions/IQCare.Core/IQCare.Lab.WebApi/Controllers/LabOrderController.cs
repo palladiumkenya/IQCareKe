@@ -96,5 +96,24 @@ namespace IQCare.Lab.WebApi.Controllers
                 return Ok(response.Value);
             return BadRequest(response);
         }
+
+
+        [HttpGet]
+        public async Task<IActionResult> GetVlStatusCountQuery()
+        {
+            var response = await _mediator.Send(new GetVlStatusCountQuery(), Request.HttpContext.RequestAborted);
+            if (response.IsValid)
+                return Ok(response.Value);
+            return BadRequest(response);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> GetAllViralLoads()
+        {
+            var response = await _mediator.Send(new GetAllViralLoadsQuery(), Request.HttpContext.RequestAborted);
+            if (response.IsValid)
+                return Ok(response.Value);
+            return BadRequest(response);
+        }
     }
 }

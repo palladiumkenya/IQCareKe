@@ -119,6 +119,8 @@
     <Compile Include="MappingEntities\PatientAppointmentEntity.cs" />
     <Compile Include="MappingEntities\PharmacyDispenseEntity.cs" />
     <Compile Include="MappingEntities\PSmart\ClientShr.cs" />
+    <Compile Include="MessageHandler\FacilityDashboardService.cs" />
+    <Compile Include="MessageHandler\IFacilityDashboardService.cs" />
     <Compile Include="MessageHandler\IIncomingMessageService.cs" />
     <Compile Include="MessageHandler\IncomingMessageService.cs" />
     <Compile Include="MessageHandler\IOutgoingMessageService.cs" />

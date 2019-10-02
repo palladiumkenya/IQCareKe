@@ -42,6 +42,8 @@ import { RiskEncounterResolver } from './services/riskencounter.resolver';
 import { PrepComponent } from './enrollment/service-areas/prep/prep.component';
 import { ReenrollmentComponent } from './reenrollment/reenrollment.component';
 import { PatientHtsComponent } from './patient-hts/patient-hts.component';
+import { FacilityDashboardComponent } from './facility-dashboard/facility-dashboard.component';
+import {ChartsModule} from 'ng2-charts';
 
 @NgModule({
     imports: [
@@ -66,6 +68,7 @@ import { PatientHtsComponent } from './patient-hts/patient-hts.component';
         MatProgressBarModule, MatProgressSpinnerModule, MatRadioModule, MatRippleModule,
         MatSelectModule, MatSidenavModule, MatSliderModule, MatSlideToggleModule,
         MatSnackBarModule, MatStepperModule, MatTabsModule, MatToolbarModule, MatTooltipModule,
+        ChartsModule
     ],
     declarations: [
         PortalComponent,
@@ -80,7 +83,8 @@ import { PatientHtsComponent } from './patient-hts/patient-hts.component';
         CccComponent,
         PrepComponent,
         ReenrollmentComponent,
-        PatientHtsComponent
+        PatientHtsComponent,
+        FacilityDashboardComponent
     ],
     providers: [
         NotificationService,

@@ -26,7 +26,6 @@ namespace IQCare.Common.Web.Controllers
 
         [HttpGet]
         public async Task<IActionResult> GetMatrix()
-
         {
             var response = await _mediator.Send(new MatrixCommand(), HttpContext.RequestAborted);
             if (response.IsValid)

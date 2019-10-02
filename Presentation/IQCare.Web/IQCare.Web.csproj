@@ -30,8 +30,7 @@
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
     <IISExpressUseClassicPipelineMode />
-    <UseGlobalApplicationHostFile />
-    <NuGetPackageImportStamp>
+    <UseGlobalApplicationHostFile />    <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
     <DockerComposeProjectPath>..\..\Solutions\Presentation\docker-compose.dcproj</DockerComposeProjectPath>
     <OldToolsVersion>12.0</OldToolsVersion>
