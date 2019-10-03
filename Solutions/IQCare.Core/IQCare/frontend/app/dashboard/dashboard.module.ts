@@ -43,6 +43,8 @@ import { PrepComponent } from './enrollment/service-areas/prep/prep.component';
 import { ReenrollmentComponent } from './reenrollment/reenrollment.component';
 import { PatientHtsComponent } from './patient-hts/patient-hts.component';
 import {AddWaitingListComponent} from '../shared/add-waiting-list/add-waiting-list.component';
+import { FacilityDashboardComponent } from './facility-dashboard/facility-dashboard.component';
+import {ChartsModule} from 'ng2-charts';
 
 @NgModule({
     imports: [
@@ -67,6 +69,7 @@ import {AddWaitingListComponent} from '../shared/add-waiting-list/add-waiting-li
         MatProgressBarModule, MatProgressSpinnerModule, MatRadioModule, MatRippleModule,
         MatSelectModule, MatSidenavModule, MatSliderModule, MatSlideToggleModule,
         MatSnackBarModule, MatStepperModule, MatTabsModule, MatToolbarModule, MatTooltipModule,
+        ChartsModule
     ],
     declarations: [
         PortalComponent,
@@ -81,7 +84,8 @@ import {AddWaitingListComponent} from '../shared/add-waiting-list/add-waiting-li
         CccComponent,
         PrepComponent,
         ReenrollmentComponent,
-        PatientHtsComponent
+        PatientHtsComponent,
+        FacilityDashboardComponent
     ],
     providers: [
         NotificationService,

@@ -12,10 +12,13 @@ import { Store } from '@ngrx/store';
 import * as AppState from '../../shared/reducers/app.states';
 import { MatDialog, MatDialogConfig } from '@angular/material';
 import {AddWaitingListComponent} from '../../shared/add-waiting-list/add-waiting-list.component'
+import {PersonHomeService} from '../../dashboard/services/person-home.service';
+
 @Component({
     selector: 'app-search',
     templateUrl: './search.component.html',
     styleUrls: ['./search.component.css'],
+    providers: [ PersonHomeService ],
     animations: [
         trigger('detailExpand', [
             state('collapsed', style({ height: '0px', minHeight: '0', visibility: 'hidden' })),
@@ -26,6 +29,7 @@ import {AddWaitingListComponent} from '../../shared/add-waiting-list/add-waiting
 })
 export class SearchComponent implements OnInit, AfterViewInit {
     genderOptions: LookupItemView[] = [];
+    servicesList: any[] = [];
     afterSearch: boolean = false;
     @ViewChild(MatPaginator) paginator: MatPaginator;
     @ViewChild(MatSort) sort: MatSort;
@@ -44,6 +48,8 @@ export class SearchComponent implements OnInit, AfterViewInit {
         private store: Store<AppState>,
         private dialog: MatDialog,
         private lookupitemservice: LookupItemService) {
+        private lookupitemservice: LookupItemService,
+        private personhomeService: PersonHomeService) {
         store.dispatch(new AppState.ClearState());
         this.clientSearch = new Search();
 
@@ -83,13 +89,13 @@ export class SearchComponent implements OnInit, AfterViewInit {
                 this.genderOptions = result['lookupItems'];
             }
         );
-    }
 
-    /*OnKeyUp(event) {
-        if (event.target.value.length > 2) {
-            this.doSearch();
-        }
-    }*/
+        this.personhomeService.getAllServices().subscribe(
+            (res) => {
+                this.servicesList = res;
+            } 
+        );
+    }
 
     doSearch() {
         this.searchService.searchClient(this.clientSearch).subscribe(
@@ -106,7 +112,6 @@ export class SearchComponent implements OnInit, AfterViewInit {
                 console.log(this.dataSource.data);
             },
             (error) => {
-                // console.error(error);
                 this.snotifyService.error('Error searching person ' + error, 'SEARCH', this.notificationService.getConfig());
             },
             () => {
@@ -116,7 +121,6 @@ export class SearchComponent implements OnInit, AfterViewInit {
     }
 
     getSelectedRow(row: any) {
-        // console.log(row);
         const personId = row['id'];
         this.zone.run(() => { this.router.navigate(['/dashboard/personhome/' + personId], { relativeTo: this.route }); });
     }
