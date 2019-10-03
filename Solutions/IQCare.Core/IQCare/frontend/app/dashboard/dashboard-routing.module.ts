@@ -16,6 +16,7 @@ import { HTSEncounterHistoryResolver } from './services/getlatesthtsencounterhis
 import { PartnerCCCEnrollmentResolver, SexWithoutCondomResolver, PatientIdentifierResolver} from './services/hivpartnerdetails.resolver';
 import { CareendDetailsResolver } from './services/careendeddetails.resolver';
 import {FacilityDashboardComponent} from './facility-dashboard/facility-dashboard.component';
+import {HtsDashboardComponent} from './hts-dashboard/hts-dashboard.component';
 
 const routes: Routes = [
     {
@@ -39,7 +40,11 @@ const routes: Routes = [
     {
         path: 'facilityDashboard',
         component: FacilityDashboardComponent
-    },    
+    },
+    {
+        path: 'HtsDashboard',
+        component: HtsDashboardComponent
+    },
     {
         path: 'reenrollment',
         children: [

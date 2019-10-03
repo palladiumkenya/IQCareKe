@@ -45,6 +45,7 @@ import { PatientHtsComponent } from './patient-hts/patient-hts.component';
 import {AddWaitingListComponent} from '../shared/add-waiting-list/add-waiting-list.component';
 import { FacilityDashboardComponent } from './facility-dashboard/facility-dashboard.component';
 import {ChartsModule} from 'ng2-charts';
+import { HtsDashboardComponent } from './hts-dashboard/hts-dashboard.component';
 
 @NgModule({
     imports: [
@@ -85,7 +86,8 @@ import {ChartsModule} from 'ng2-charts';
         PrepComponent,
         ReenrollmentComponent,
         PatientHtsComponent,
-        FacilityDashboardComponent
+        FacilityDashboardComponent,
+        HtsDashboardComponent
     ],
     providers: [
         NotificationService,

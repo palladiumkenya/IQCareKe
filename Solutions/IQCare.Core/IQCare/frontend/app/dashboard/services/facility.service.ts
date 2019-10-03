@@ -78,4 +78,11 @@ export class FacilityService {
             catchError(this.errorHandler.handleError<any>('error fetching IL message stats'))
         );
     }
+    
+    getHtsFacilityStatistics(): Observable<any[]> {
+        return this.http.get<any[]>(this.API_URL + '/api/Facility/GetHtsFacilityStatistics').pipe(
+            tap(getHtsFacilityStatistics => this.errorHandler.log('successfully fetched HTS facility statistics')),
+            catchError(this.errorHandler.handleError<any>('error fetching HTS facility statistics'))
+        );
+    }
 }

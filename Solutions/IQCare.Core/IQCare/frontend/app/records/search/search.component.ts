@@ -47,7 +47,6 @@ export class SearchComponent implements OnInit, AfterViewInit {
         private notificationService: NotificationService,
         private store: Store<AppState>,
         private dialog: MatDialog,
-        private lookupitemservice: LookupItemService) {
         private lookupitemservice: LookupItemService,
         private personhomeService: PersonHomeService) {
         store.dispatch(new AppState.ClearState());
