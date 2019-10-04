@@ -91,6 +91,7 @@
     <style type="text/css">
         .masterfooter .row{margin-right:0px !important;margin-left: 0px !important;}
         .row{margin-right:0px !important;margin-left: 0px !important;}
+        btn-shadow {box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);}
     </style>
    
 </head>
@@ -330,7 +331,7 @@
 	 </div><!-- .container-fluid -->
 
 
-	<nav role="navigation" class="navbar navbar-default navbar-fixed-bottom">
+	<nav role="navigation" class="navbar navbar-default">
 		 <div class="container-fluid masterfooter">              
 			  <div class="row" style="padding-top:3px;margin-right: 0px !important;margin-left: 0px !important;">
 					  

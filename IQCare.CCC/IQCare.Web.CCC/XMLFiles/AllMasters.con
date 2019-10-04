@@ -7510,70 +7510,110 @@
   <Mst_Employee>
     <EmployeeId>1074</EmployeeId>
     <Id>1074</Id>
-    <FirstName>Sr. Evelyne</FirstName>
-    <LastName>Omollo                                            </LastName>
-    <Name>Sr. Evelyne Omollo                                            </Name>
-    <EmployeeName>Sr. Evelyne Omollo                                            </EmployeeName>
+    <FirstName>HS4J7JOP5BC</FirstName>
+    <LastName>YVHRNBU54QP</LastName>
+    <Name>HS4J7JOP5BC YVHRNBU54QP</Name>
+    <EmployeeName>HS4J7JOP5BC YVHRNBU54QP</EmployeeName>
     <DesignationId>9</DesignationId>
     <DeleteFlag>0</DeleteFlag>
   </Mst_Employee>
   <Mst_Employee>
     <EmployeeId>1070</EmployeeId>
     <Id>1070</Id>
-    <FirstName>Cavin</FirstName>
-    <LastName>Otieno                                            </LastName>
-    <Name>Cavin Otieno                                            </Name>
-    <EmployeeName>Cavin Otieno                                            </EmployeeName>
+    <FirstName>85RCGPRP9E0</FirstName>
+    <LastName>F4AFU4PB2JN</LastName>
+    <Name>85RCGPRP9E0 F4AFU4PB2JN</Name>
+    <EmployeeName>85RCGPRP9E0 F4AFU4PB2JN</EmployeeName>
     <DesignationId>3</DesignationId>
     <DeleteFlag>0</DeleteFlag>
   </Mst_Employee>
   <Mst_Employee>
     <EmployeeId>3075</EmployeeId>
     <Id>3075</Id>
-    <FirstName>Steven</FirstName>
-    <LastName>Owino                                             </LastName>
-    <Name>Steven Owino                                             </Name>
-    <EmployeeName>Steven Owino                                             </EmployeeName>
+    <FirstName>L20SZRW35ZM</FirstName>
+    <LastName>Z5XWM07CA4O</LastName>
+    <Name>L20SZRW35ZM Z5XWM07CA4O</Name>
+    <EmployeeName>L20SZRW35ZM Z5XWM07CA4O</EmployeeName>
     <DesignationId>8</DesignationId>
     <DeleteFlag>0</DeleteFlag>
   </Mst_Employee>
   <Mst_Employee>
     <EmployeeId>3078</EmployeeId>
     <Id>3078</Id>
-    <FirstName>Amos</FirstName>
-    <LastName>Mbewa                                             </LastName>
-    <Name>Amos Mbewa                                             </Name>
-    <EmployeeName>Amos Mbewa                                             </EmployeeName>
+    <FirstName>HAHOAEXANUT</FirstName>
+    <LastName>XOSX4OALOTP</LastName>
+    <Name>HAHOAEXANUT XOSX4OALOTP</Name>
+    <EmployeeName>HAHOAEXANUT XOSX4OALOTP</EmployeeName>
     <DesignationId>2</DesignationId>
     <DeleteFlag>0</DeleteFlag>
   </Mst_Employee>
   <Mst_Employee>
     <EmployeeId>3079</EmployeeId>
     <Id>3079</Id>
-    <FirstName>Luka</FirstName>
-    <LastName>Watibini                                          </LastName>
-    <Name>Luka Watibini                                          </Name>
-    <EmployeeName>Luka Watibini                                          </EmployeeName>
+    <FirstName>829FNZK5XV5</FirstName>
+    <LastName>7YOW4GV903D</LastName>
+    <Name>829FNZK5XV5 7YOW4GV903D</Name>
+    <EmployeeName>829FNZK5XV5 7YOW4GV903D</EmployeeName>
     <DesignationId>1</DesignationId>
     <DeleteFlag>0</DeleteFlag>
   </Mst_Employee>
   <Mst_Employee>
     <EmployeeId>3080</EmployeeId>
     <Id>3080</Id>
-    <FirstName>Philister</FirstName>
-    <LastName>Akinyi                                            </LastName>
-    <Name>Philister Akinyi                                            </Name>
-    <EmployeeName>Philister Akinyi                                            </EmployeeName>
+    <FirstName>UBH74O30VMF</FirstName>
+    <LastName>MGN5U2FHE8R</LastName>
+    <Name>UBH74O30VMF MGN5U2FHE8R</Name>
+    <EmployeeName>UBH74O30VMF MGN5U2FHE8R</EmployeeName>
     <DesignationId>6</DesignationId>
+    <DeleteFlag>0</DeleteFlag>
+  </Mst_Employee>
+  <Mst_Employee>
+    <EmployeeId>3081</EmployeeId>
+    <Id>3081</Id>
+    <FirstName>JMLQRZPV127</FirstName>
+    <LastName>MZZC6K4IPKO</LastName>
+    <Name>JMLQRZPV127 MZZC6K4IPKO</Name>
+    <EmployeeName>JMLQRZPV127 MZZC6K4IPKO</EmployeeName>
+    <DesignationId>4</DesignationId>
+    <DeleteFlag>0</DeleteFlag>
+  </Mst_Employee>
+  <Mst_Employee>
+    <EmployeeId>3082</EmployeeId>
+    <Id>3082</Id>
+    <FirstName>JFW2UY4W2NM</FirstName>
+    <LastName>5IOAXGNHK9K</LastName>
+    <Name>JFW2UY4W2NM 5IOAXGNHK9K</Name>
+    <EmployeeName>JFW2UY4W2NM 5IOAXGNHK9K</EmployeeName>
+    <DesignationId>3</DesignationId>
+    <DeleteFlag>1</DeleteFlag>
+  </Mst_Employee>
+  <Mst_Employee>
+    <EmployeeId>3083</EmployeeId>
+    <Id>3083</Id>
+    <FirstName>shem</FirstName>
+    <LastName>ngiti                                             </LastName>
+    <Name>shem ngiti                                             </Name>
+    <EmployeeName>shem ngiti                                             </EmployeeName>
+    <DesignationId>3</DesignationId>
+    <DeleteFlag>0</DeleteFlag>
+  </Mst_Employee>
+  <Mst_Employee>
+    <EmployeeId>3084</EmployeeId>
+    <Id>3084</Id>
+    <FirstName>ALBERT</FirstName>
+    <LastName>KHAMALA                                           </LastName>
+    <Name>ALBERT KHAMALA                                           </Name>
+    <EmployeeName>ALBERT KHAMALA                                           </EmployeeName>
+    <DesignationId>7</DesignationId>
     <DeleteFlag>0</DeleteFlag>
   </Mst_Employee>
   <Mst_Employee>
     <EmployeeId>54</EmployeeId>
     <Id>54</Id>
-    <FirstName>Monica</FirstName>
-    <LastName>Oganga                                            </LastName>
-    <Name>Monica Oganga                                            </Name>
-    <EmployeeName>Monica Oganga                                            </EmployeeName>
+    <FirstName>YNHLMBKN2Q</FirstName>
+    <LastName>HADHW0VAPL</LastName>
+    <Name>YNHLMBKN2Q HADHW0VAPL</Name>
+    <EmployeeName>YNHLMBKN2Q HADHW0VAPL</EmployeeName>
     <DesignationId>3</DesignationId>
     <SRNO>9999</SRNO>
     <DeleteFlag>0</DeleteFlag>
@@ -7581,10 +7621,10 @@
   <Mst_Employee>
     <EmployeeId>3076</EmployeeId>
     <Id>3076</Id>
-    <FirstName>onyango</FirstName>
-    <LastName>Steve     </LastName>
-    <Name>onyango Steve     </Name>
-    <EmployeeName>onyango Steve     </EmployeeName>
+    <FirstName>APUCDAZVCUI</FirstName>
+    <LastName>WMSSTGOABN5</LastName>
+    <Name>APUCDAZVCUI WMSSTGOABN5</Name>
+    <EmployeeName>APUCDAZVCUI WMSSTGOABN5</EmployeeName>
     <DesignationId>1</DesignationId>
     <SRNO>9999</SRNO>
     <DeleteFlag>1</DeleteFlag>
@@ -7592,10 +7632,10 @@
   <Mst_Employee>
     <EmployeeId>3077</EmployeeId>
     <Id>3077</Id>
-    <FirstName>Samwel</FirstName>
-    <LastName>Odhiambo</LastName>
-    <Name>Samwel Odhiambo</Name>
-    <EmployeeName>Samwel Odhiambo</EmployeeName>
+    <FirstName>DJ8NYPSMRJ</FirstName>
+    <LastName>MYJ2XHE8TYX</LastName>
+    <Name>DJ8NYPSMRJ MYJ2XHE8TYX</Name>
+    <EmployeeName>DJ8NYPSMRJ MYJ2XHE8TYX</EmployeeName>
     <DesignationId>2</DesignationId>
     <SRNO>9999</SRNO>
     <DeleteFlag>0</DeleteFlag>
@@ -7603,10 +7643,10 @@
   <Mst_Employee>
     <EmployeeId>1072</EmployeeId>
     <Id>1072</Id>
-    <FirstName>Susan </FirstName>
-    <LastName>Sang                                              </LastName>
-    <Name>Susan  Sang                                              </Name>
-    <EmployeeName>Susan  Sang                                              </EmployeeName>
+    <FirstName>T1UQZFWTKR6</FirstName>
+    <LastName>D5SAVGDCCKG</LastName>
+    <Name>T1UQZFWTKR6 D5SAVGDCCKG</Name>
+    <EmployeeName>T1UQZFWTKR6 D5SAVGDCCKG</EmployeeName>
     <DesignationId>6</DesignationId>
     <SRNO>9999</SRNO>
     <DeleteFlag>0</DeleteFlag>
@@ -7614,10 +7654,10 @@
   <Mst_Employee>
     <EmployeeId>1073</EmployeeId>
     <Id>1073</Id>
-    <FirstName>Catherine</FirstName>
-    <LastName>Awere     </LastName>
-    <Name>Catherine Awere     </Name>
-    <EmployeeName>Catherine Awere     </EmployeeName>
+    <FirstName>6OMLA5GU61S</FirstName>
+    <LastName>XO5TE3R9EPE</LastName>
+    <Name>6OMLA5GU61S XO5TE3R9EPE</Name>
+    <EmployeeName>6OMLA5GU61S XO5TE3R9EPE</EmployeeName>
     <DesignationId>6</DesignationId>
     <SRNO>9999</SRNO>
     <DeleteFlag>1</DeleteFlag>
@@ -7625,10 +7665,10 @@
   <Mst_Employee>
     <EmployeeId>1075</EmployeeId>
     <Id>1075</Id>
-    <FirstName>Faith </FirstName>
-    <LastName>Oliech    </LastName>
-    <Name>Faith  Oliech    </Name>
-    <EmployeeName>Faith  Oliech    </EmployeeName>
+    <FirstName>90RHMIT1XMJ</FirstName>
+    <LastName>93AV9T29ENY</LastName>
+    <Name>90RHMIT1XMJ 93AV9T29ENY</Name>
+    <EmployeeName>90RHMIT1XMJ 93AV9T29ENY</EmployeeName>
     <DesignationId>1</DesignationId>
     <SRNO>9999</SRNO>
     <DeleteFlag>0</DeleteFlag>
@@ -7636,10 +7676,10 @@
   <Mst_Employee>
     <EmployeeId>2075</EmployeeId>
     <Id>2075</Id>
-    <FirstName>Sr. Lydia </FirstName>
-    <LastName>Mbuya                                             </LastName>
-    <Name>Sr. Lydia  Mbuya                                             </Name>
-    <EmployeeName>Sr. Lydia  Mbuya                                             </EmployeeName>
+    <FirstName>AOZCG428P1K</FirstName>
+    <LastName>4XKE3A6XD9L</LastName>
+    <Name>AOZCG428P1K 4XKE3A6XD9L</Name>
+    <EmployeeName>AOZCG428P1K 4XKE3A6XD9L</EmployeeName>
     <DesignationId>2</DesignationId>
     <SRNO>9999</SRNO>
     <DeleteFlag>0</DeleteFlag>
@@ -7647,10 +7687,10 @@
   <Mst_Employee>
     <EmployeeId>2076</EmployeeId>
     <Id>2076</Id>
-    <FirstName>Sr. Caroline</FirstName>
-    <LastName>Ogongo                                            </LastName>
-    <Name>Sr. Caroline Ogongo                                            </Name>
-    <EmployeeName>Sr. Caroline Ogongo                                            </EmployeeName>
+    <FirstName>7WQALPFFA72</FirstName>
+    <LastName>R2FNBLEZZ32</LastName>
+    <Name>7WQALPFFA72 R2FNBLEZZ32</Name>
+    <EmployeeName>7WQALPFFA72 R2FNBLEZZ32</EmployeeName>
     <DesignationId>9</DesignationId>
     <SRNO>9999</SRNO>
     <DeleteFlag>0</DeleteFlag>
@@ -109631,11 +109671,11 @@
     <StrongPassFlag>0</StrongPassFlag>
   </Mst_Facility>
   <Mst_Facility>
-    <FacilityName>Nyangoma Mission Health Centre</FacilityName>
+    <FacilityName>KARP HOSPITAL</FacilityName>
     <FacilityID>756</FacilityID>
-    <PosID>148</PosID>
+    <PosID>12345</PosID>
     <DeleteFlag>0</DeleteFlag>
-    <SatelliteID>13929</SatelliteID>
+    <SatelliteID>0</SatelliteID>
     <SystemID>1</SystemID>
     <FacilityAddress>P.O Box 29-40601 Bondo</FacilityAddress>
     <FacilityTel>+254712101680</FacilityTel>
@@ -109645,7 +109685,7 @@
     <FacilityURL />
     <FacilityFooter />
     <FacilityTemplate>0</FacilityTemplate>
-    <FacilityLogo>Nyangoma Mission Health Centre.jpg</FacilityLogo>
+    <FacilityLogo>KARP HOSPITAL.jpg</FacilityLogo>
     <StrongPassFlag>0</StrongPassFlag>
   </Mst_Facility>
   <Mst_Facility>
@@ -124287,285 +124327,211 @@
     <CreateDate>2017-10-11T09:39:37.723+03:00</CreateDate>
   </mst_RegimenLine>
   <Users>
-    <UserId>1016</UserId>
-    <Name>Adrian Onyango   </Name>
+    <UserId>1011</UserId>
+    <Name>0CPT3VLR9IX 765BGHIZWTD</Name>
+    <UserDeleteFlag>1</UserDeleteFlag>
+    <EmployeeDeleteFlag>0</EmployeeDeleteFlag>
+  </Users>
+  <Users>
+    <UserId>1060</UserId>
+    <SystemUserName>susan</SystemUserName>
+    <Name>0E9E4WMZ23 MSP7G29FU6L</Name>
+    <UserDeleteFlag>0</UserDeleteFlag>
+    <EmployeeDeleteFlag>0</EmployeeDeleteFlag>
+  </Users>
+  <Users>
+    <UserId>1058</UserId>
+    <Name>0HIYCMHAN76 K292IQQLVHG</Name>
+    <UserDeleteFlag>1</UserDeleteFlag>
+    <EmployeeDeleteFlag>0</EmployeeDeleteFlag>
+  </Users>
+  <Users>
+    <UserId>1013</UserId>
+    <Name>0MWDSKMO2U 4ENIKZ2OWP7</Name>
     <UserDeleteFlag>1</UserDeleteFlag>
     <EmployeeDeleteFlag>0</EmployeeDeleteFlag>
   </Users>
   <Users>
     <UserId>1071</UserId>
     <SystemUserName>amos</SystemUserName>
-    <Name>Amos Mbewa</Name>
+    <Name>0WQ3THAT4QZ CWTDKEO1ZA0</Name>
     <UserDeleteFlag>0</UserDeleteFlag>
     <EmployeeDeleteFlag>0</EmployeeDeleteFlag>
   </Users>
   <Users>
-    <UserId>1053</UserId>
-    <Name>Andrew Steve  Ouma      </Name>
+    <UserId>1024</UserId>
+    <Name>1ENKD6DAKBD NDKB4ET8I</Name>
     <UserDeleteFlag>1</UserDeleteFlag>
     <EmployeeDeleteFlag>0</EmployeeDeleteFlag>
   </Users>
   <Users>
-    <UserId>1054</UserId>
-    <Name>Angela Ogutu     </Name>
-    <UserDeleteFlag>1</UserDeleteFlag>
-    <EmployeeDeleteFlag>0</EmployeeDeleteFlag>
-  </Users>
-  <Users>
-    <UserId>1008</UserId>
-    <SystemUserName>Beldine</SystemUserName>
-    <Name>Aoko Beldine</Name>
+    <UserId>1</UserId>
+    <SystemUserName>Admin</SystemUserName>
+    <Name>1FPJJNBGTAN 6ROMEN44165</Name>
     <UserDeleteFlag>0</UserDeleteFlag>
     <EmployeeDeleteFlag>0</EmployeeDeleteFlag>
   </Users>
   <Users>
-    <UserId>1037</UserId>
-    <Name>Ben Oyugi Obol</Name>
+    <UserId>1070</UserId>
+    <SystemUserName>Woduor</SystemUserName>
+    <Name>1MLFA0GY1W 810RKPPD8VM</Name>
     <UserDeleteFlag>1</UserDeleteFlag>
     <EmployeeDeleteFlag>0</EmployeeDeleteFlag>
   </Users>
   <Users>
-    <UserId>1017</UserId>
-    <Name>Bentar Aluoch    </Name>
-    <UserDeleteFlag>1</UserDeleteFlag>
-    <EmployeeDeleteFlag>0</EmployeeDeleteFlag>
-  </Users>
-  <Users>
-    <UserId>1059</UserId>
-    <Name>Boniface  Ngaira    </Name>
-    <UserDeleteFlag>1</UserDeleteFlag>
-    <EmployeeDeleteFlag>0</EmployeeDeleteFlag>
-  </Users>
-  <Users>
-    <UserId>1018</UserId>
-    <Name>Carolyne  Juma      </Name>
-    <UserDeleteFlag>1</UserDeleteFlag>
-    <EmployeeDeleteFlag>0</EmployeeDeleteFlag>
-  </Users>
-  <Users>
-    <UserId>1061</UserId>
-    <SystemUserName>CAwere</SystemUserName>
-    <Name>Catherine Awere                                             </Name>
-    <UserDeleteFlag>1</UserDeleteFlag>
-    <EmployeeDeleteFlag>0</EmployeeDeleteFlag>
-  </Users>
-  <Users>
-    <UserId>8</UserId>
-    <SystemUserName>chris</SystemUserName>
-    <Name>Chris Wendo</Name>
-    <UserDeleteFlag>1</UserDeleteFlag>
-    <EmployeeDeleteFlag>0</EmployeeDeleteFlag>
-  </Users>
-  <Users>
-    <UserId>1039</UserId>
-    <Name>Chrispine Amollo    </Name>
-    <UserDeleteFlag>1</UserDeleteFlag>
-    <EmployeeDeleteFlag>0</EmployeeDeleteFlag>
-  </Users>
-  <Users>
-    <UserId>1023</UserId>
-    <Name>Christine Awuor     </Name>
-    <UserDeleteFlag>1</UserDeleteFlag>
-    <EmployeeDeleteFlag>0</EmployeeDeleteFlag>
-  </Users>
-  <Users>
-    <UserId>1030</UserId>
-    <Name>Collins Makana    </Name>
-    <UserDeleteFlag>1</UserDeleteFlag>
-    <EmployeeDeleteFlag>0</EmployeeDeleteFlag>
-  </Users>
-  <Users>
-    <UserId>1009</UserId>
-    <Name>Danstan Ochieng   </Name>
-    <UserDeleteFlag>1</UserDeleteFlag>
-    <EmployeeDeleteFlag>0</EmployeeDeleteFlag>
-  </Users>
-  <Users>
-    <UserId>1056</UserId>
-    <Name>Eliakim Agono     </Name>
-    <UserDeleteFlag>1</UserDeleteFlag>
-    <EmployeeDeleteFlag>0</EmployeeDeleteFlag>
-  </Users>
-  <Users>
-    <UserId>1019</UserId>
-    <Name>Elijah  Odiwa     </Name>
-    <UserDeleteFlag>1</UserDeleteFlag>
-    <EmployeeDeleteFlag>0</EmployeeDeleteFlag>
-  </Users>
-  <Users>
-    <UserId>1050</UserId>
-    <Name>Esther  Muthoni   </Name>
-    <UserDeleteFlag>1</UserDeleteFlag>
-    <EmployeeDeleteFlag>0</EmployeeDeleteFlag>
-  </Users>
-  <Users>
-    <UserId>1020</UserId>
-    <Name>Eunice Adhiambo  </Name>
-    <UserDeleteFlag>1</UserDeleteFlag>
-    <EmployeeDeleteFlag>0</EmployeeDeleteFlag>
-  </Users>
-  <Users>
-    <UserId>1034</UserId>
-    <Name>Ezra Muga      </Name>
-    <UserDeleteFlag>1</UserDeleteFlag>
-    <EmployeeDeleteFlag>0</EmployeeDeleteFlag>
-  </Users>
-  <Users>
-    <UserId>1062</UserId>
-    <SystemUserName>faith</SystemUserName>
-    <Name>Faith  Oliech                                            </Name>
-    <UserDeleteFlag>0</UserDeleteFlag>
-    <EmployeeDeleteFlag>0</EmployeeDeleteFlag>
-  </Users>
-  <Users>
-    <UserId>1040</UserId>
-    <Name>Felix Mugambi   </Name>
+    <UserId>1046</UserId>
+    <Name>1O2F026UOH 465920LMR3V</Name>
     <UserDeleteFlag>1</UserDeleteFlag>
     <EmployeeDeleteFlag>0</EmployeeDeleteFlag>
   </Users>
   <Users>
     <UserId>4210</UserId>
     <SystemUserName>four2One</SystemUserName>
-    <Name>Four TwoOne</Name>
+    <Name>21J6NNBUKRQ Q1IYELM6RCG</Name>
     <UserDeleteFlag>0</UserDeleteFlag>
     <EmployeeDeleteFlag>0</EmployeeDeleteFlag>
   </Users>
   <Users>
-    <UserId>1028</UserId>
-    <Name>Francis Kogada    </Name>
+    <UserId>1035</UserId>
+    <Name>343N12A5U6V IR7K3P31ICF</Name>
     <UserDeleteFlag>1</UserDeleteFlag>
     <EmployeeDeleteFlag>0</EmployeeDeleteFlag>
   </Users>
   <Users>
-    <UserId>4</UserId>
-    <SystemUserName>Fred</SystemUserName>
-    <Name>Fredrick Omino</Name>
+    <UserId>1020</UserId>
+    <Name>3R356ABGKFD 0CCXBF5R3</Name>
     <UserDeleteFlag>1</UserDeleteFlag>
     <EmployeeDeleteFlag>0</EmployeeDeleteFlag>
   </Users>
   <Users>
-    <UserId>1012</UserId>
-    <Name>Haron Shilaho   </Name>
-    <UserDeleteFlag>1</UserDeleteFlag>
-    <EmployeeDeleteFlag>0</EmployeeDeleteFlag>
-  </Users>
-  <Users>
-    <UserId>1044</UserId>
-    <Name>Hezekiah Odongo    </Name>
-    <UserDeleteFlag>1</UserDeleteFlag>
-    <EmployeeDeleteFlag>0</EmployeeDeleteFlag>
-  </Users>
-  <Users>
-    <UserId>1010</UserId>
-    <Name>Hilda Oduor     </Name>
-    <UserDeleteFlag>1</UserDeleteFlag>
-    <EmployeeDeleteFlag>0</EmployeeDeleteFlag>
-  </Users>
-  <Users>
-    <UserId>4211</UserId>
-    <SystemUserName>interop</SystemUserName>
-    <Name>Interop System</Name>
-    <UserDeleteFlag>0</UserDeleteFlag>
-    <EmployeeDeleteFlag>0</EmployeeDeleteFlag>
-  </Users>
-  <Users>
-    <UserId>1041</UserId>
-    <Name>Isaac Omollo    </Name>
-    <UserDeleteFlag>1</UserDeleteFlag>
-    <EmployeeDeleteFlag>0</EmployeeDeleteFlag>
-  </Users>
-  <Users>
-    <UserId>3</UserId>
-    <SystemUserName>James</SystemUserName>
-    <Name>James Butichi</Name>
-    <UserDeleteFlag>1</UserDeleteFlag>
-    <EmployeeDeleteFlag>0</EmployeeDeleteFlag>
-  </Users>
-  <Users>
-    <UserId>5</UserId>
-    <SystemUserName>Owino</SystemUserName>
-    <Name>James Owino</Name>
-    <UserDeleteFlag>1</UserDeleteFlag>
-    <EmployeeDeleteFlag>0</EmployeeDeleteFlag>
-  </Users>
-  <Users>
-    <UserId>1057</UserId>
-    <Name>Jesca oyuweri   </Name>
-    <UserDeleteFlag>1</UserDeleteFlag>
-    <EmployeeDeleteFlag>0</EmployeeDeleteFlag>
-  </Users>
-  <Users>
-    <UserId>1015</UserId>
-    <Name>Jessica Auma      </Name>
-    <UserDeleteFlag>1</UserDeleteFlag>
-    <EmployeeDeleteFlag>0</EmployeeDeleteFlag>
-  </Users>
-  <Users>
-    <UserId>1026</UserId>
-    <Name>John  Paul      </Name>
-    <UserDeleteFlag>1</UserDeleteFlag>
-    <EmployeeDeleteFlag>0</EmployeeDeleteFlag>
-  </Users>
-  <Users>
-    <UserId>1031</UserId>
-    <Name>Joseph Koggai    </Name>
+    <UserId>1009</UserId>
+    <Name>5JK2GWADDOG 4UQI6Q733L</Name>
     <UserDeleteFlag>1</UserDeleteFlag>
     <EmployeeDeleteFlag>0</EmployeeDeleteFlag>
   </Users>
   <Users>
     <UserId>1033</UserId>
-    <Name>Ken Radeny    </Name>
+    <Name>5LTBUOPUGCD 8U6KUW9W504</Name>
     <UserDeleteFlag>1</UserDeleteFlag>
     <EmployeeDeleteFlag>0</EmployeeDeleteFlag>
   </Users>
   <Users>
-    <UserId>6</UserId>
-    <SystemUserName>chacha</SystemUserName>
-    <Name>Kennedy Otieno</Name>
+    <UserId>7</UserId>
+    <SystemUserName>Gregory</SystemUserName>
+    <Name>5WQLDE4VRF0 4XM2EL2ZFAF</Name>
+    <UserDeleteFlag>1</UserDeleteFlag>
+    <EmployeeDeleteFlag>0</EmployeeDeleteFlag>
+  </Users>
+  <Users>
+    <UserId>1072</UserId>
+    <SystemUserName>Luka</SystemUserName>
+    <Name>6GBXXPPISSM BABVYSP10J5</Name>
     <UserDeleteFlag>0</UserDeleteFlag>
     <EmployeeDeleteFlag>0</EmployeeDeleteFlag>
   </Users>
   <Users>
-    <UserId>1024</UserId>
-    <Name>Kenneth Okello    </Name>
-    <UserDeleteFlag>1</UserDeleteFlag>
-    <EmployeeDeleteFlag>0</EmployeeDeleteFlag>
-  </Users>
-  <Users>
-    <UserId>1042</UserId>
-    <Name>Lawrence Ochieng Ju</Name>
-    <UserDeleteFlag>1</UserDeleteFlag>
-    <EmployeeDeleteFlag>0</EmployeeDeleteFlag>
-  </Users>
-  <Users>
-    <UserId>1013</UserId>
-    <Name>Lilian Chasaya   </Name>
+    <UserId>1048</UserId>
+    <Name>6NGI1ID852U RT27VP05WDE</Name>
     <UserDeleteFlag>1</UserDeleteFlag>
     <EmployeeDeleteFlag>0</EmployeeDeleteFlag>
   </Users>
   <Users>
     <UserId>1051</UserId>
-    <Name>Linus Rotich    </Name>
+    <Name>6WH42TEZOO XOZITJRHOGZ</Name>
     <UserDeleteFlag>1</UserDeleteFlag>
     <EmployeeDeleteFlag>0</EmployeeDeleteFlag>
   </Users>
   <Users>
     <UserId>1045</UserId>
-    <Name>Lynda Wafula Nan</Name>
+    <Name>7CZWYLUODD9 QDCHEHYGP2G</Name>
     <UserDeleteFlag>1</UserDeleteFlag>
     <EmployeeDeleteFlag>0</EmployeeDeleteFlag>
   </Users>
   <Users>
-    <UserId>1049</UserId>
-    <Name>Monica Oganga                                            </Name>
+    <UserId>1015</UserId>
+    <Name>7MQX68YYRBK NSXZRO2370N</Name>
+    <UserDeleteFlag>1</UserDeleteFlag>
+    <EmployeeDeleteFlag>0</EmployeeDeleteFlag>
+  </Users>
+  <Users>
+    <UserId>1055</UserId>
+    <Name>7UD0SJGW9FH W96RISTH8CS</Name>
+    <UserDeleteFlag>1</UserDeleteFlag>
+    <EmployeeDeleteFlag>0</EmployeeDeleteFlag>
+  </Users>
+  <Users>
+    <UserId>1021</UserId>
+    <Name>8N538YP1Y3D 416AUC5P77</Name>
+    <UserDeleteFlag>1</UserDeleteFlag>
+    <EmployeeDeleteFlag>0</EmployeeDeleteFlag>
+  </Users>
+  <Users>
+    <UserId>1038</UserId>
+    <Name>8S913SD34B V8E6HPKG4SP</Name>
+    <UserDeleteFlag>1</UserDeleteFlag>
+    <EmployeeDeleteFlag>0</EmployeeDeleteFlag>
+  </Users>
+  <Users>
+    <UserId>1022</UserId>
+    <Name>9A8ZMMDCXTP 1JCYBSZ4CCS</Name>
+    <UserDeleteFlag>1</UserDeleteFlag>
+    <EmployeeDeleteFlag>0</EmployeeDeleteFlag>
+  </Users>
+  <Users>
+    <UserId>1017</UserId>
+    <Name>9KIZ0VLJ3NO TK5ADR35UUR</Name>
+    <UserDeleteFlag>1</UserDeleteFlag>
+    <EmployeeDeleteFlag>0</EmployeeDeleteFlag>
+  </Users>
+  <Users>
+    <UserId>1037</UserId>
+    <Name>9OBJF504RY4 IKWWX37Z5P</Name>
+    <UserDeleteFlag>1</UserDeleteFlag>
+    <EmployeeDeleteFlag>0</EmployeeDeleteFlag>
+  </Users>
+  <Users>
+    <UserId>1059</UserId>
+    <Name>9WVQ097G1L 7QK8EGN0X27</Name>
+    <UserDeleteFlag>1</UserDeleteFlag>
+    <EmployeeDeleteFlag>0</EmployeeDeleteFlag>
+  </Users>
+  <Users>
+    <UserId>1068</UserId>
+    <SystemUserName>sr.everlyn</SystemUserName>
+    <Name>9YYGH6GRD2I NF6OM2WN641</Name>
+    <UserDeleteFlag>0</UserDeleteFlag>
+    <EmployeeDeleteFlag>0</EmployeeDeleteFlag>
+  </Users>
+  <Users>
+    <UserId>1056</UserId>
+    <Name>AJAY75O7RWK EP4JBK7TI8</Name>
+    <UserDeleteFlag>1</UserDeleteFlag>
+    <EmployeeDeleteFlag>0</EmployeeDeleteFlag>
+  </Users>
+  <Users>
+    <UserId>1067</UserId>
+    <SystemUserName>opapo</SystemUserName>
+    <Name>ASX8847O1TT XGALTUFYTK</Name>
+    <UserDeleteFlag>0</UserDeleteFlag>
+    <EmployeeDeleteFlag>0</EmployeeDeleteFlag>
+  </Users>
+  <Users>
+    <UserId>1053</UserId>
+    <Name>AW8GH4RPLLH 586GBXEC53</Name>
+    <UserDeleteFlag>1</UserDeleteFlag>
+    <EmployeeDeleteFlag>0</EmployeeDeleteFlag>
+  </Users>
+  <Users>
+    <UserId>1034</UserId>
+    <Name>BGVU7O26QX Y2LZHGVXIMG</Name>
     <UserDeleteFlag>1</UserDeleteFlag>
     <EmployeeDeleteFlag>0</EmployeeDeleteFlag>
   </Users>
   <Users>
     <UserId>1069</UserId>
     <SystemUserName>monica</SystemUserName>
-    <Name>Monica Oganga</Name>
-    <EmployeeName>Monica Oganga                                            </EmployeeName>
+    <Name>BIC5EBIC4IZ HDKO7ZYDHA1</Name>
+    <EmployeeName>YNHLMBKN2Q HADHW0VAPL</EmployeeName>
     <UserDeleteFlag>0</UserDeleteFlag>
     <EmployeeId>54</EmployeeId>
     <DesignationId>3</DesignationId>
@@ -124573,56 +124539,28 @@
     <EmployeeDeleteFlag>0</EmployeeDeleteFlag>
   </Users>
   <Users>
-    <UserId>2</UserId>
-    <SystemUserName>Moses</SystemUserName>
-    <Name>Moses Keya</Name>
+    <UserId>1057</UserId>
+    <Name>BYYS9TAWJU0 XIMJNJSEPBY</Name>
     <UserDeleteFlag>1</UserDeleteFlag>
     <EmployeeDeleteFlag>0</EmployeeDeleteFlag>
   </Users>
   <Users>
     <UserId>1025</UserId>
-    <Name>Nicholas Luya      </Name>
+    <Name>C12AXLGNJE2 294TOIOSO</Name>
     <UserDeleteFlag>1</UserDeleteFlag>
     <EmployeeDeleteFlag>0</EmployeeDeleteFlag>
   </Users>
   <Users>
-    <UserId>7</UserId>
-    <SystemUserName>Gregory</SystemUserName>
-    <Name>odhiambo Gregory</Name>
-    <UserDeleteFlag>1</UserDeleteFlag>
-    <EmployeeDeleteFlag>0</EmployeeDeleteFlag>
-  </Users>
-  <Users>
-    <UserId>1070</UserId>
-    <SystemUserName>Woduor</SystemUserName>
-    <Name>Oduor Wycliffe</Name>
-    <UserDeleteFlag>1</UserDeleteFlag>
-    <EmployeeDeleteFlag>0</EmployeeDeleteFlag>
-  </Users>
-  <Users>
-    <UserId>1066</UserId>
-    <SystemUserName>steve</SystemUserName>
-    <Name>onyango Steve                                             </Name>
-    <UserDeleteFlag>0</UserDeleteFlag>
-    <EmployeeDeleteFlag>0</EmployeeDeleteFlag>
-  </Users>
-  <Users>
-    <UserId>1027</UserId>
-    <Name>Oscar Mito      </Name>
-    <UserDeleteFlag>1</UserDeleteFlag>
-    <EmployeeDeleteFlag>0</EmployeeDeleteFlag>
-  </Users>
-  <Users>
-    <UserId>1048</UserId>
-    <Name>Otieno Calvin    </Name>
+    <UserId>1031</UserId>
+    <Name>CD8X6Z2XOI 7833O29TCS1</Name>
     <UserDeleteFlag>1</UserDeleteFlag>
     <EmployeeDeleteFlag>0</EmployeeDeleteFlag>
   </Users>
   <Users>
     <UserId>4212</UserId>
     <SystemUserName>Philister</SystemUserName>
-    <Name>Philister Akinyi</Name>
-    <EmployeeName>Philister Akinyi                                            </EmployeeName>
+    <Name>CJAHG8W6OUD VHR3PWS4P7</Name>
+    <EmployeeName>UBH74O30VMF MGN5U2FHE8R</EmployeeName>
     <UserDeleteFlag>0</UserDeleteFlag>
     <EmployeeId>3080</EmployeeId>
     <DesignationId>6</DesignationId>
@@ -124630,149 +124568,295 @@
     <EmployeeDeleteFlag>0</EmployeeDeleteFlag>
   </Users>
   <Users>
-    <UserId>1038</UserId>
-    <Name>Phoebe Wakio     </Name>
+    <UserId>1029</UserId>
+    <Name>CR20Y3DGRWV B6BYESMBEJ6</Name>
     <UserDeleteFlag>1</UserDeleteFlag>
     <EmployeeDeleteFlag>0</EmployeeDeleteFlag>
   </Users>
   <Users>
-    <UserId>1022</UserId>
-    <Name>Rashid Asman     </Name>
+    <UserId>1019</UserId>
+    <Name>EJA258ARTUY QJZYRQVKIHG</Name>
     <UserDeleteFlag>1</UserDeleteFlag>
     <EmployeeDeleteFlag>0</EmployeeDeleteFlag>
   </Users>
   <Users>
-    <UserId>1021</UserId>
-    <Name>Reuben Njiri     </Name>
+    <UserId>1043</UserId>
+    <Name>F4WBUXT2FCL 9ARY2SY0RZB</Name>
+    <UserDeleteFlag>1</UserDeleteFlag>
+    <EmployeeDeleteFlag>0</EmployeeDeleteFlag>
+  </Users>
+  <Users>
+    <UserId>1066</UserId>
+    <SystemUserName>steve</SystemUserName>
+    <Name>G49MQM5D09S PIAKZ3HZLOF</Name>
+    <UserDeleteFlag>0</UserDeleteFlag>
+    <EmployeeDeleteFlag>0</EmployeeDeleteFlag>
+  </Users>
+  <Users>
+    <UserId>1026</UserId>
+    <Name>HTVHSCDPSKM PWU7G7WZHDH</Name>
+    <UserDeleteFlag>1</UserDeleteFlag>
+    <EmployeeDeleteFlag>0</EmployeeDeleteFlag>
+  </Users>
+  <Users>
+    <UserId>1030</UserId>
+    <Name>I3LA4KCX61K Z521TRYPM6G</Name>
+    <UserDeleteFlag>1</UserDeleteFlag>
+    <EmployeeDeleteFlag>0</EmployeeDeleteFlag>
+  </Users>
+  <Users>
+    <UserId>1012</UserId>
+    <Name>IBBFALFPP7C 0SWJ2XH9LQH</Name>
+    <UserDeleteFlag>1</UserDeleteFlag>
+    <EmployeeDeleteFlag>0</EmployeeDeleteFlag>
+  </Users>
+  <Users>
+    <UserId>1042</UserId>
+    <Name>ISPYQONMG28 03SJBD1OYK</Name>
+    <UserDeleteFlag>1</UserDeleteFlag>
+    <EmployeeDeleteFlag>0</EmployeeDeleteFlag>
+  </Users>
+  <Users>
+    <UserId>4211</UserId>
+    <SystemUserName>interop</SystemUserName>
+    <Name>JK9KL86BN9X BKF2H1GYSSK</Name>
+    <UserDeleteFlag>0</UserDeleteFlag>
+    <EmployeeDeleteFlag>0</EmployeeDeleteFlag>
+  </Users>
+  <Users>
+    <UserId>4214</UserId>
+    <SystemUserName>tony</SystemUserName>
+    <Name>KEI609Z9A2 X7DFYI09BDI</Name>
+    <EmployeeName>JFW2UY4W2NM 5IOAXGNHK9K</EmployeeName>
+    <UserDeleteFlag>1</UserDeleteFlag>
+    <EmployeeId>3082</EmployeeId>
+    <DesignationId>3</DesignationId>
+    <Designation>Lab Technician</Designation>
+    <EmployeeDeleteFlag>1</EmployeeDeleteFlag>
+  </Users>
+  <Users>
+    <UserId>4216</UserId>
+    <SystemUserName>ALBERT</SystemUserName>
+    <Name>KHAMALA ALBERT</Name>
+    <EmployeeName>ALBERT KHAMALA                                           </EmployeeName>
+    <UserDeleteFlag>0</UserDeleteFlag>
+    <EmployeeId>3084</EmployeeId>
+    <DesignationId>7</DesignationId>
+    <Designation>Community Health Worker</Designation>
+    <EmployeeDeleteFlag>0</EmployeeDeleteFlag>
+  </Users>
+  <Users>
+    <UserId>1050</UserId>
+    <Name>KM5B8Q4NNFK SHZ8V5V103U</Name>
+    <UserDeleteFlag>1</UserDeleteFlag>
+    <EmployeeDeleteFlag>0</EmployeeDeleteFlag>
+  </Users>
+  <Users>
+    <UserId>1047</UserId>
+    <Name>M0NL80IHFG2 KRUVDIZJW3Q</Name>
+    <UserDeleteFlag>1</UserDeleteFlag>
+    <EmployeeDeleteFlag>0</EmployeeDeleteFlag>
+  </Users>
+  <Users>
+    <UserId>6</UserId>
+    <SystemUserName>chacha</SystemUserName>
+    <Name>M5EROWHY5PD DIX1LIQXJ57</Name>
+    <UserDeleteFlag>0</UserDeleteFlag>
+    <EmployeeDeleteFlag>0</EmployeeDeleteFlag>
+  </Users>
+  <Users>
+    <UserId>3</UserId>
+    <SystemUserName>James</SystemUserName>
+    <Name>M9JOYGNAHWZ C1FIDSZNR82</Name>
+    <UserDeleteFlag>1</UserDeleteFlag>
+    <EmployeeDeleteFlag>0</EmployeeDeleteFlag>
+  </Users>
+  <Users>
+    <UserId>1044</UserId>
+    <Name>MDXVM16UH63 X98K9FXZBVK</Name>
+    <UserDeleteFlag>1</UserDeleteFlag>
+    <EmployeeDeleteFlag>0</EmployeeDeleteFlag>
+  </Users>
+  <Users>
+    <UserId>1039</UserId>
+    <Name>N3MN2OOKZB TX760MC21CI</Name>
+    <UserDeleteFlag>1</UserDeleteFlag>
+    <EmployeeDeleteFlag>0</EmployeeDeleteFlag>
+  </Users>
+  <Users>
+    <UserId>1041</UserId>
+    <Name>N96XM7CIWZJ UJSPGR59UY1</Name>
+    <UserDeleteFlag>1</UserDeleteFlag>
+    <EmployeeDeleteFlag>0</EmployeeDeleteFlag>
+  </Users>
+  <Users>
+    <UserId>2</UserId>
+    <SystemUserName>Moses</SystemUserName>
+    <Name>NNM7Z7JAIC6 TLNQA6J4FH</Name>
+    <UserDeleteFlag>1</UserDeleteFlag>
+    <EmployeeDeleteFlag>0</EmployeeDeleteFlag>
+  </Users>
+  <Users>
+    <UserId>1063</UserId>
+    <SystemUserName>sr.lydia</SystemUserName>
+    <Name>NQ8753XCE FFFJXFRM18</Name>
+    <UserDeleteFlag>0</UserDeleteFlag>
+    <EmployeeDeleteFlag>0</EmployeeDeleteFlag>
+  </Users>
+  <Users>
+    <UserId>1040</UserId>
+    <Name>OG7YM7QICI1 HMYWW48H37J</Name>
+    <UserDeleteFlag>1</UserDeleteFlag>
+    <EmployeeDeleteFlag>0</EmployeeDeleteFlag>
+  </Users>
+  <Users>
+    <UserId>1016</UserId>
+    <Name>ONAS3AO56WC B3FQTN56WLD</Name>
+    <UserDeleteFlag>1</UserDeleteFlag>
+    <EmployeeDeleteFlag>0</EmployeeDeleteFlag>
+  </Users>
+  <Users>
+    <UserId>1010</UserId>
+    <Name>PA68MEEMK0Y MVBXOLZSI</Name>
+    <UserDeleteFlag>1</UserDeleteFlag>
+    <EmployeeDeleteFlag>0</EmployeeDeleteFlag>
+  </Users>
+  <Users>
+    <UserId>4</UserId>
+    <SystemUserName>Fred</SystemUserName>
+    <Name>R90T7H004TW PM6QNPHJ313</Name>
+    <UserDeleteFlag>1</UserDeleteFlag>
+    <EmployeeDeleteFlag>0</EmployeeDeleteFlag>
+  </Users>
+  <Users>
+    <UserId>4215</UserId>
+    <SystemUserName>shem</SystemUserName>
+    <Name>shem ngiti</Name>
+    <EmployeeName>shem ngiti                                             </EmployeeName>
+    <UserDeleteFlag>0</UserDeleteFlag>
+    <EmployeeId>3083</EmployeeId>
+    <DesignationId>3</DesignationId>
+    <Designation>Lab Technician</Designation>
+    <EmployeeDeleteFlag>0</EmployeeDeleteFlag>
+  </Users>
+  <Users>
+    <UserId>1049</UserId>
+    <Name>SN1UH3HPAB W7S7N41RK7S</Name>
+    <UserDeleteFlag>1</UserDeleteFlag>
+    <EmployeeDeleteFlag>0</EmployeeDeleteFlag>
+  </Users>
+  <Users>
+    <UserId>1036</UserId>
+    <Name>SNW1493BILQ P7QMWSSVOYX</Name>
+    <UserDeleteFlag>1</UserDeleteFlag>
+    <EmployeeDeleteFlag>0</EmployeeDeleteFlag>
+  </Users>
+  <Users>
+    <UserId>8</UserId>
+    <SystemUserName>chris</SystemUserName>
+    <Name>T2HTKIZXC6A KY69DKSWWW</Name>
+    <UserDeleteFlag>1</UserDeleteFlag>
+    <EmployeeDeleteFlag>0</EmployeeDeleteFlag>
+  </Users>
+  <Users>
+    <UserId>1062</UserId>
+    <SystemUserName>faith</SystemUserName>
+    <Name>TCTFGI5BOP0 GH0JDVO874</Name>
+    <UserDeleteFlag>0</UserDeleteFlag>
+    <EmployeeDeleteFlag>0</EmployeeDeleteFlag>
+  </Users>
+  <Users>
+    <UserId>4213</UserId>
+    <SystemUserName>damaka</SystemUserName>
+    <Name>TF0KLC8WEY6 MOCUA4JP4RM</Name>
+    <EmployeeName>JMLQRZPV127 MZZC6K4IPKO</EmployeeName>
+    <UserDeleteFlag>0</UserDeleteFlag>
+    <EmployeeId>3081</EmployeeId>
+    <DesignationId>4</DesignationId>
+    <Designation>M&amp;E</Designation>
+    <EmployeeDeleteFlag>0</EmployeeDeleteFlag>
+  </Users>
+  <Users>
+    <UserId>1032</UserId>
+    <Name>TOK0G6CD0TR HBVNBWTPT3</Name>
+    <UserDeleteFlag>1</UserDeleteFlag>
+    <EmployeeDeleteFlag>0</EmployeeDeleteFlag>
+  </Users>
+  <Users>
+    <UserId>5</UserId>
+    <SystemUserName>Owino</SystemUserName>
+    <Name>TTKUJ3XCAM1 LV21KNB0M2X</Name>
+    <UserDeleteFlag>1</UserDeleteFlag>
+    <EmployeeDeleteFlag>0</EmployeeDeleteFlag>
+  </Users>
+  <Users>
+    <UserId>1061</UserId>
+    <SystemUserName>CAwere</SystemUserName>
+    <Name>VDIN1I1XV4 FG84F601MD</Name>
+    <UserDeleteFlag>1</UserDeleteFlag>
+    <EmployeeDeleteFlag>0</EmployeeDeleteFlag>
+  </Users>
+  <Users>
+    <UserId>1018</UserId>
+    <Name>W7AGMT4P2JI FDGAEPFCPZZ</Name>
+    <UserDeleteFlag>1</UserDeleteFlag>
+    <EmployeeDeleteFlag>0</EmployeeDeleteFlag>
+  </Users>
+  <Users>
+    <UserId>1014</UserId>
+    <Name>WDA3NQJV1I2 I5WK94M0BCJ</Name>
+    <UserDeleteFlag>1</UserDeleteFlag>
+    <EmployeeDeleteFlag>0</EmployeeDeleteFlag>
+  </Users>
+  <Users>
+    <UserId>1054</UserId>
+    <Name>WZ6UYDQZ787 CZZDLZPCL9</Name>
+    <UserDeleteFlag>1</UserDeleteFlag>
+    <EmployeeDeleteFlag>0</EmployeeDeleteFlag>
+  </Users>
+  <Users>
+    <UserId>1028</UserId>
+    <Name>X49A9K64FB5 THKVO4MT98U</Name>
+    <UserDeleteFlag>1</UserDeleteFlag>
+    <EmployeeDeleteFlag>0</EmployeeDeleteFlag>
+  </Users>
+  <Users>
+    <UserId>1008</UserId>
+    <SystemUserName>Beldine</SystemUserName>
+    <Name>X7G7ZL62ZM3 LZFS9S1U0GS</Name>
+    <UserDeleteFlag>0</UserDeleteFlag>
+    <EmployeeDeleteFlag>0</EmployeeDeleteFlag>
+  </Users>
+  <Users>
+    <UserId>1052</UserId>
+    <Name>XB9AIUQWT3W PAYD0SB8V7F</Name>
+    <UserDeleteFlag>1</UserDeleteFlag>
+    <EmployeeDeleteFlag>0</EmployeeDeleteFlag>
+  </Users>
+  <Users>
+    <UserId>1023</UserId>
+    <Name>XVBVUMEDBQU 725RRE2ISD2</Name>
+    <UserDeleteFlag>1</UserDeleteFlag>
+    <EmployeeDeleteFlag>0</EmployeeDeleteFlag>
+  </Users>
+  <Users>
+    <UserId>1064</UserId>
+    <SystemUserName>sr.caroline</SystemUserName>
+    <Name>Y45O6HBC8EX NS1O82DKE6A</Name>
+    <UserDeleteFlag>0</UserDeleteFlag>
+    <EmployeeDeleteFlag>0</EmployeeDeleteFlag>
+  </Users>
+  <Users>
+    <UserId>1027</UserId>
+    <Name>YGQYXTMPKHQ 3MDI6WEO766</Name>
     <UserDeleteFlag>1</UserDeleteFlag>
     <EmployeeDeleteFlag>0</EmployeeDeleteFlag>
   </Users>
   <Users>
     <UserId>1065</UserId>
     <SystemUserName>samuel</SystemUserName>
-    <Name>Samwel Odhiambo                                          </Name>
+    <Name>ZLY4PZXOZHN 8T9P7PANS31</Name>
     <UserDeleteFlag>0</UserDeleteFlag>
-    <EmployeeDeleteFlag>0</EmployeeDeleteFlag>
-  </Users>
-  <Users>
-    <UserId>1055</UserId>
-    <Name>Sarah  Waruingi </Name>
-    <UserDeleteFlag>1</UserDeleteFlag>
-    <EmployeeDeleteFlag>0</EmployeeDeleteFlag>
-  </Users>
-  <Users>
-    <UserId>1047</UserId>
-    <Name>Shem Kafuna    </Name>
-    <UserDeleteFlag>1</UserDeleteFlag>
-    <EmployeeDeleteFlag>0</EmployeeDeleteFlag>
-  </Users>
-  <Users>
-    <UserId>1046</UserId>
-    <Name>sheth obiero    </Name>
-    <UserDeleteFlag>1</UserDeleteFlag>
-    <EmployeeDeleteFlag>0</EmployeeDeleteFlag>
-  </Users>
-  <Users>
-    <UserId>1032</UserId>
-    <Name>Sospeter Olingo    </Name>
-    <UserDeleteFlag>1</UserDeleteFlag>
-    <EmployeeDeleteFlag>0</EmployeeDeleteFlag>
-  </Users>
-  <Users>
-    <UserId>1068</UserId>
-    <SystemUserName>sr.everlyn</SystemUserName>
-    <Name>Sr Everlyn Omolo</Name>
-    <UserDeleteFlag>0</UserDeleteFlag>
-    <EmployeeDeleteFlag>0</EmployeeDeleteFlag>
-  </Users>
-  <Users>
-    <UserId>1064</UserId>
-    <SystemUserName>sr.caroline</SystemUserName>
-    <Name>Sr. Caroline Ogongo                                            </Name>
-    <UserDeleteFlag>0</UserDeleteFlag>
-    <EmployeeDeleteFlag>0</EmployeeDeleteFlag>
-  </Users>
-  <Users>
-    <UserId>1063</UserId>
-    <SystemUserName>sr.lydia</SystemUserName>
-    <Name>Sr. Lydia  Mbuya                                             </Name>
-    <UserDeleteFlag>0</UserDeleteFlag>
-    <EmployeeDeleteFlag>0</EmployeeDeleteFlag>
-  </Users>
-  <Users>
-    <UserId>1011</UserId>
-    <Name>Sr. Mary  Nafula    </Name>
-    <UserDeleteFlag>1</UserDeleteFlag>
-    <EmployeeDeleteFlag>0</EmployeeDeleteFlag>
-  </Users>
-  <Users>
-    <UserId>1035</UserId>
-    <Name>Sr. Millicent Oloo      </Name>
-    <UserDeleteFlag>1</UserDeleteFlag>
-    <EmployeeDeleteFlag>0</EmployeeDeleteFlag>
-  </Users>
-  <Users>
-    <UserId>1014</UserId>
-    <Name>Sr.Getrude Atieno    </Name>
-    <UserDeleteFlag>1</UserDeleteFlag>
-    <EmployeeDeleteFlag>0</EmployeeDeleteFlag>
-  </Users>
-  <Users>
-    <UserId>1058</UserId>
-    <Name>sr.Maureen oketch    </Name>
-    <UserDeleteFlag>1</UserDeleteFlag>
-    <EmployeeDeleteFlag>0</EmployeeDeleteFlag>
-  </Users>
-  <Users>
-    <UserId>1067</UserId>
-    <SystemUserName>opapo</SystemUserName>
-    <Name>Steve Owino</Name>
-    <UserDeleteFlag>0</UserDeleteFlag>
-    <EmployeeDeleteFlag>0</EmployeeDeleteFlag>
-  </Users>
-  <Users>
-    <UserId>1060</UserId>
-    <SystemUserName>susan</SystemUserName>
-    <Name>Susan  Sang                                              </Name>
-    <UserDeleteFlag>0</UserDeleteFlag>
-    <EmployeeDeleteFlag>0</EmployeeDeleteFlag>
-  </Users>
-  <Users>
-    <UserId>1</UserId>
-    <SystemUserName>Admin</SystemUserName>
-    <Name>System Admin</Name>
-    <UserDeleteFlag>0</UserDeleteFlag>
-    <EmployeeDeleteFlag>0</EmployeeDeleteFlag>
-  </Users>
-  <Users>
-    <UserId>1036</UserId>
-    <Name>Victor Oundo     </Name>
-    <UserDeleteFlag>1</UserDeleteFlag>
-    <EmployeeDeleteFlag>0</EmployeeDeleteFlag>
-  </Users>
-  <Users>
-    <UserId>1072</UserId>
-    <SystemUserName>Luka</SystemUserName>
-    <Name>Watibini Luka</Name>
-    <UserDeleteFlag>0</UserDeleteFlag>
-    <EmployeeDeleteFlag>0</EmployeeDeleteFlag>
-  </Users>
-  <Users>
-    <UserId>1043</UserId>
-    <Name>Wellington Mabinda Et</Name>
-    <UserDeleteFlag>1</UserDeleteFlag>
-    <EmployeeDeleteFlag>0</EmployeeDeleteFlag>
-  </Users>
-  <Users>
-    <UserId>1052</UserId>
-    <Name>Willis Jobando   </Name>
-    <UserDeleteFlag>1</UserDeleteFlag>
-    <EmployeeDeleteFlag>0</EmployeeDeleteFlag>
-  </Users>
-  <Users>
-    <UserId>1029</UserId>
-    <Name>Zachary Wamukoya  </Name>
-    <UserDeleteFlag>1</UserDeleteFlag>
     <EmployeeDeleteFlag>0</EmployeeDeleteFlag>
   </Users>
 </NewDataSet>

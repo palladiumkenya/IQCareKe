@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using IQCare.SharedKernel.Infrastructure;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,14 +9,14 @@ using System.Threading.Tasks;
 
 namespace IQCare.Queue.Infrastructure.Repository
 {
-   public class QueueRepository<TEntity>:IQueueRepository<TEntity>  where TEntity:class
+   public class QueueRepository<TEntity>:GenericRepository<TEntity>, IQueueRepository<TEntity>  where TEntity:class
     {
         private readonly QueueDbContext _context;
-        public QueueRepository (QueueDbContext queueDbContext)
+        public QueueRepository (QueueDbContext queueDbContext):base(queueDbContext)
         {
-            _context= queueDbContext ?? throw new ArgumentNullException(nameof(queueDbContext));
+          //  _context= queueDbContext ?? throw new ArgumentNullException(nameof(queueDbContext));
         }
-        public TEntity FindById(object id)
+       /* public TEntity FindById(object id)
            => _context.Find<TEntity>(id);
 
         public async Task<TEntity> FindByIdAsync(Expression<Func<TEntity, bool>> predicate)
@@ -72,7 +73,7 @@ namespace IQCare.Queue.Infrastructure.Repository
         }
 
         public async Task<TEntity> FindByIdAsync(object id)
-            => await _context.FindAsync<TEntity>(id);
+            => await _context.FindAsync<TEntity>(id); */
 
     }
 }

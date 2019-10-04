@@ -10080,6 +10080,12 @@
     <DrugName>Darunavir/Ritonavir-800mg/100mg</DrugName>
     <DeleteFlag>false</DeleteFlag>
   </Mst_Drug>
+  <Mst_Drug>
+    <Drug_PK>2267</Drug_PK>
+    <DrugId>0</DrugId>
+    <DrugName>Abacavir/Lamivudine-600mg/300mg</DrugName>
+    <DeleteFlag>false</DeleteFlag>
+  </Mst_Drug>
   <Mst_Generic>
     <GenericId>1</GenericId>
     <GenericName>Abacavir</GenericName>
@@ -13403,6 +13409,11 @@
     <GenericId>1835</GenericId>
     <GenericName>Darunavir/Ritonavir-800mg/100mg</GenericName>
     <GenericAbbrevation>DRV/r</GenericAbbrevation>
+  </Mst_Generic>
+  <Mst_Generic>
+    <GenericId>1836</GenericId>
+    <GenericName>Abacavir/Lamivudine-600mg/300mg</GenericName>
+    <GenericAbbrevation>ABC/3TC</GenericAbbrevation>
   </Mst_Generic>
   <Mst_DrugType>
     <DrugTypeId>1</DrugTypeId>
