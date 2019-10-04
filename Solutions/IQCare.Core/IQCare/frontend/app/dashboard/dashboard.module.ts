@@ -1,10 +1,5 @@
 import { RegistrationService } from './../registration/_services/registration.service';
 import { ServicesResolver } from './services/services.resolver';
-import { HTSEncounterResolver } from './services/htsencounter.resolver';
-import { PersonCurrentVitalsResolver } from './services/personvitals.resolver';
-import { ExitReasonsResolver } from './services/exitreasons.resolver';
-import { CareendDetailsResolver } from './services/careendeddetails.resolver';
-
 import { DashboardRoutingModule } from './dashboard-routing.module';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -12,7 +7,7 @@ import { PortalComponent } from './portal/portal.component';
 import { PersonHomeComponent } from './person-home/person-home.component';
 import { NotificationService } from '../shared/_services/notification.service';
 import { ServicesListComponent } from './services-list/services-list.component';
-import { HTSEncounterHistoryResolver } from './services/getlatesthtsencounterhistory.resolver';
+
 import {
     MatCardModule, MatDatepickerModule,
     MatNativeDateModule, MatFormFieldModule,
@@ -35,13 +30,9 @@ import { PatientRelationshipsComponent } from './patient-relationships/patient-r
 import { PatientAllergiesComponent } from './patient-allergies/patient-allergies.component';
 import { PatientAppointmentComponent } from './patient-appointment/patient-appointment.component';
 import { SearchService } from '../registration/_services/search.service';
-import { HtsComponent } from './enrollment/service-areas/hts/hts.component';
-import { CccComponent } from './enrollment/service-areas/ccc/ccc.component';
-import { PersonHomeService } from './services/person-home.service';
-import { RiskEncounterResolver } from './services/riskencounter.resolver';
-import { PrepComponent } from './enrollment/service-areas/prep/prep.component';
-import { ReenrollmentComponent } from './reenrollment/reenrollment.component';
-import { PatientHtsComponent } from './patient-hts/patient-hts.component';
+import { ReportsComponent } from './reports/reports.component';
+import { AirModule } from '../air/air.module';
+import {AddWaitingListComponent} from '../shared/add-waiting-list/add-waiting-list.component';
 
 @NgModule({
     imports: [
@@ -54,6 +45,7 @@ import { PatientHtsComponent } from './patient-hts/patient-hts.component';
         MatFormFieldModule,
         MatInputModule,
         SharedModule,
+        AirModule,
 
         MatTableModule,
         MatPaginatorModule,
@@ -76,32 +68,17 @@ import { PatientHtsComponent } from './patient-hts/patient-hts.component';
         PatientRelationshipsComponent,
         PatientAllergiesComponent,
         PatientAppointmentComponent,
-        HtsComponent,
-        CccComponent,
-        PrepComponent,
-        ReenrollmentComponent,
-        PatientHtsComponent
+        ReportsComponent
     ],
     providers: [
         NotificationService,
         ServicesResolver,
         RegistrationService,
         EnrollmentService,
-        SearchService,
-        PersonHomeService,
-        HTSEncounterResolver,
-        PersonCurrentVitalsResolver,
-        RiskEncounterResolver,
-        ExitReasonsResolver,
-        CareendDetailsResolver,
-        HTSEncounterHistoryResolver
-
-
+        SearchService
     ],
-
     entryComponents: [
-        PatientHtsComponent
+        AddWaitingListComponent
     ]
-
 })
 export class DashboardModule { }

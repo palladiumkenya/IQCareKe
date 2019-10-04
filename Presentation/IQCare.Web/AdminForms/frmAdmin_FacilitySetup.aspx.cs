@@ -18,6 +18,8 @@ namespace IQCare.Web.Admin
         private int Preferred;
 
         private int DosageFrequency;
+
+        private int Queue;
         //int FacilityId;
         private DataSet theFacilityDS;
 
@@ -228,6 +230,20 @@ namespace IQCare.Web.Admin
                     chkPaperlessclinic.Checked = false;
                     ViewState["Paperless"] = "0";
                 }
+                if (theDV[0]["SystemQueue"].ToString() == "1")
+                {
+                    chkQueue.Checked = true;
+                    Session["SystemQueue"] = "1";
+
+                }
+                else
+                {
+
+                    chkQueue.Checked = false;
+                    Session["SystemQueue"] = "0";
+
+                }
+
 
                 if (theDV[0]["Frequency"].ToString() == "1")
                 {
@@ -324,7 +340,7 @@ namespace IQCare.Web.Admin
             txtNationalId.Attributes.Add("onKeyup", "chkNumeric('" + txtNationalId.ClientID + "')");
 
             txtfacilityname.Text = "";
-            // txtcountryno.Text = "";
+           // txtcountryno.Text = "";
             txtLPTF.Text = "";
             txtSatelliteID.Text = "";
             txtGrace.Text = "";
@@ -395,6 +411,7 @@ namespace IQCare.Web.Admin
             int DosageFrequency = this.chkDosagefrequency.Checked == true ? 1 : 0;
             int Paperlessclinic = this.chkPaperlessclinic.Checked == true ? 1 : 0;
             int Preferred = this.chkPreferred.Checked == true ? 1 : 0;
+            int SystemQueue = this.chkQueue.Checked == true ? 1 : 0;
             DataTable dtModule = AddModule();
             //int PMTCTclinic = this.chkPMTCT.Checked == true ? 1 : 0;
             IFacilitySetup FacilityMgr;
@@ -425,7 +442,7 @@ namespace IQCare.Web.Admin
             {
                 thePepFarDate = theUtils.MakeDate(txtPEPFAR_Fund.Text);
                 FacilityMgr = (IFacilitySetup)ObjectFactory.CreateInstance("BusinessProcess.Administration.BFacility, BusinessProcess.Administration");
-                int Rows = FacilityMgr.UpdateFacility(Convert.ToInt32(ViewState["FacilityId"]), txtfacilityname.Text, txtcountryno.Text, txtLPTF.Text, txtSatelliteID.Text, txtNationalId.Text, Convert.ToInt32(ddlprovince.SelectedValue), Convert.ToInt32(ddldistrict.SelectedValue), theFName, Convert.ToInt32(cmbCurrency.SelectedValue), Convert.ToInt32(txtGrace.Text), "dd-MMM-yyyy", Convert.ToDateTime(thePepFarDate), Convert.ToInt32(ddStatus.SelectedValue), Convert.ToInt32(Session["SystemId"]), Preferred, Paperlessclinic, Convert.ToInt32(Session["AppUserId"]), DosageFrequency, dtModule, htFacilityParameters);
+                int Rows = FacilityMgr.UpdateFacility(Convert.ToInt32(ViewState["FacilityId"]), txtfacilityname.Text, txtcountryno.Text, txtLPTF.Text, txtSatelliteID.Text, txtNationalId.Text, Convert.ToInt32(ddlprovince.SelectedValue), Convert.ToInt32(ddldistrict.SelectedValue), theFName, Convert.ToInt32(cmbCurrency.SelectedValue), Convert.ToInt32(txtGrace.Text), "dd-MMM-yyyy", Convert.ToDateTime(thePepFarDate), Convert.ToInt32(ddStatus.SelectedValue), Convert.ToInt32(Session["SystemId"]), Preferred, Paperlessclinic, Convert.ToInt32(Session["AppUserId"]),DosageFrequency, SystemQueue, dtModule, htFacilityParameters);
                 Response.Redirect(".././frmLogin.aspx");
             }
             catch (Exception err)
@@ -474,7 +491,18 @@ namespace IQCare.Web.Admin
                     Preferred = 1;
                 else
                     Preferred = 0;
-                if (chkDosagefrequency.Checked == true)
+                if (chkQueue.Checked == true)
+                {
+                    Queue = 1;
+                    Session["SystemQueue"] = 1;
+                }
+                else
+                {
+                    Queue = 0;
+                    Session["SystemQueue"] = 0;
+                }
+                  
+                if(chkDosagefrequency.Checked==true)
                 {
                     DosageFrequency = 1;
                     Session["DosageFrequency"] = "1";
@@ -516,7 +544,7 @@ namespace IQCare.Web.Admin
                 {
                     FacilityManager = (IFacilitySetup)ObjectFactory.CreateInstance("BusinessProcess.Administration.BFacility, BusinessProcess.Administration");
 
-                    int Rows = FacilityManager.SaveNewFacility(txtfacilityname.Text, txtcountryno.Text, txtLPTF.Text, txtSatelliteID.Text, txtNationalId.Text, Convert.ToInt32(ddlprovince.SelectedValue), Convert.ToInt32(ddldistrict.SelectedValue), theFName, Convert.ToInt32(cmbCurrency.SelectedValue), Convert.ToInt32(txtGrace.Text), "dd-MMM-yyyy", Convert.ToDateTime(thePepFarDate), Convert.ToInt32(Session["SystemId"]), Preferred, Paperless, Convert.ToInt32(Session["AppUserId"]), DosageFrequency, dtModule, htFacilityParameters);
+                    int Rows = FacilityManager.SaveNewFacility(txtfacilityname.Text, txtcountryno.Text, txtLPTF.Text, txtSatelliteID.Text, txtNationalId.Text, Convert.ToInt32(ddlprovince.SelectedValue), Convert.ToInt32(ddldistrict.SelectedValue), theFName, Convert.ToInt32(cmbCurrency.SelectedValue), Convert.ToInt32(txtGrace.Text), "dd-MMM-yyyy", Convert.ToDateTime(thePepFarDate), Convert.ToInt32(Session["SystemId"]), Preferred, Paperless, Convert.ToInt32(Session["AppUserId"]),DosageFrequency, Queue, dtModule, htFacilityParameters);
                     if (Rows > 0)
                     {
                         IQCareMsgBox.Show("FacilityMasterSave", this);
@@ -544,7 +572,7 @@ namespace IQCare.Web.Admin
                     else if (Convert.ToInt32(ViewState["Paperless"]) == Paperlessclinic)
                     {
                         FacilityManager = (IFacilitySetup)ObjectFactory.CreateInstance("BusinessProcess.Administration.BFacility, BusinessProcess.Administration");
-                        int Rows = FacilityManager.UpdateFacility(Convert.ToInt32(ViewState["FacilityId"]), txtfacilityname.Text, txtcountryno.Text, txtLPTF.Text, txtSatelliteID.Text, txtNationalId.Text, Convert.ToInt32(ddlprovince.SelectedValue), Convert.ToInt32(ddldistrict.SelectedValue), theFName, Convert.ToInt32(cmbCurrency.SelectedValue), Convert.ToInt32(txtGrace.Text), "dd-MMM-yyyy", Convert.ToDateTime(thePepFarDate), Convert.ToInt32(ddStatus.SelectedValue), Convert.ToInt32(Session["SystemId"]), Preferred, Paperless, Convert.ToInt32(Session["AppUserId"]), DosageFrequency, dtModule, htFacilityParameters);
+                        int Rows = FacilityManager.UpdateFacility(Convert.ToInt32(ViewState["FacilityId"]), txtfacilityname.Text, txtcountryno.Text, txtLPTF.Text, txtSatelliteID.Text, txtNationalId.Text, Convert.ToInt32(ddlprovince.SelectedValue), Convert.ToInt32(ddldistrict.SelectedValue), theFName, Convert.ToInt32(cmbCurrency.SelectedValue), Convert.ToInt32(txtGrace.Text), "dd-MMM-yyyy", Convert.ToDateTime(thePepFarDate), Convert.ToInt32(ddStatus.SelectedValue), Convert.ToInt32(Session["SystemId"]), Preferred, Paperless, Convert.ToInt32(Session["AppUserId"]),DosageFrequency, Queue, dtModule, htFacilityParameters);
                         if (Rows > 0)
                         {
                             IQCareMsgBox.Show("FacilityMasterUpdate", this);

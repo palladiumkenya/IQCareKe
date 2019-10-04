@@ -37,8 +37,8 @@ const routes: Routes = [
         loadChildren: '../air/air.module#AirModule'
     },
     {
-        path: 'prep',
-        loadChildren: '../prep/prep.module#PrepModule'
+        path: 'queue',
+        loadChildren: '../queue/queue.module#QueueModule'
     },
     {
         path: '**',

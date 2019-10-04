@@ -5,15 +5,11 @@ import { PersonHomeService } from '../services/person-home.service';
 import { NotificationService } from '../../shared/_services/notification.service';
 import { SnotifyService } from 'ng-snotify';
 import { PersonView } from '../../records/_models/personView';
-import { MatTableDataSource } from '@angular/material';
+import { MatTableDataSource, MatDialogConfig, MatDialog } from '@angular/material';
 import * as Consent from '../../shared/reducers/app.states';
 import { Store } from '@ngrx/store';
-import { EncounterDetails } from '../_model/HtsEncounterdetails';
-import { LookupItemView } from '../../shared/_models/LookupItemView';
-import { LookupItemService } from '../../shared/_services/lookup-item.service';
-
+import {AddWaitingListComponent} from '../../shared/add-waiting-list/add-waiting-list.component';
 @Component({
-
     selector: 'app-person-home',
     templateUrl: './person-home.component.html',
     styleUrls: ['./person-home.component.css']
@@ -21,38 +17,26 @@ import { LookupItemService } from '../../shared/_services/lookup-item.service';
 export class PersonHomeComponent implements OnInit {
 
     [x: string]: any;
-    public carended: boolean;
-    public isdead: boolean;
+
     public personId = 0;
-    public personVitalWeight = 0;
     public person: PersonView;
     public personView$: Subscription;
     public personAllergies$: Subscription;
     public personAllergies: any;
-    encounterDetail: EncounterDetails;
-    htsencounters: any[];
-    riskassessmentencounter: any[];
-    riskencounters: any[];
-    services: any[]; 
-    exitreason: number;
-     patientId: number;
-     careenddetails: any[] = [];
-     htshistory: any[] = [];
-    personvitals: any[];
-    careendoptions: LookupItemView[] = [];
+
+    services: any[];
     chronic_illness_data: any[] = [];
     dataSource = new MatTableDataSource(this.chronic_illness_data);
     chronic_illness_displaycolumns = ['illness', 'onsetdate', 'treatment', 'dose'];
     constructor(private route: ActivatedRoute,
         private personService: PersonHomeService,
-        private lookupItemService: LookupItemService,
         private snotifyService: SnotifyService,
         private notificationService: NotificationService,
         private router: Router,
         public zone: NgZone,
+        private dialog: MatDialog,
         private store: Store<AppState>) {
         this.person = new PersonView();
-        this.encounterDetail = new EncounterDetails();
     }
 
     ngOnInit() {
@@ -61,78 +45,24 @@ export class PersonHomeComponent implements OnInit {
         });
 
         this.route.data.subscribe(res => {
-
             const { servicesArray } = res;
-            const { HTSEncounterArray } = res;
-            const { PersonVitalsArray } = res;
-            const { RiskAssessmentArray } = res;
-            const { ExitReasonsArray } = res;
-            const {CarendedArray } = res;
-            const {  HTSEncounterHistoryArray} = res;
 
-            this.careenddetails = CarendedArray;
-            
-            this.htshistory = HTSEncounterHistoryArray;
-            console.log('htshistory');
-            console.log(this.htshistory);
-            
             this.services = servicesArray;
-            this.htsencounters = HTSEncounterArray;
-            this.personvitals = PersonVitalsArray;
-            this.riskassessmentencounter = RiskAssessmentArray;
-           this.careendoptions = ExitReasonsArray['lookupItems'];
-          
-
-            if (this.personvitals.length > 0) {
-                this.personVitalWeight = this.personvitals['0'].weight;
-            }
-            if (this.careenddetails != null) {
-                this.exitreason = this.careenddetails['exitReason'];
-               
-                let careendeddetails: string;
-                let val: number;
-
-                val = this.careendoptions.findIndex(x => x.itemId == this.exitreason);
-                careendeddetails = this.careendoptions[val].itemDisplayName;
-               
-                if (careendeddetails.toLowerCase() == 'death') {
-                    this.isdead = true;
-                    this.carended = true;
-                } else {
-                    this.carended = true;
-                    this.isdead = false;
-                }
-            } else  {
-                this.carended = false;
-                this.isdead = false;
-            }
-
-
-
-            this.riskencounters = this.riskassessmentencounter['encounters'];
         });
-
-        this.encounterDetail = this.htsencounters[0];
 
         localStorage.removeItem('patientEncounterId');
         localStorage.removeItem('patientMasterVisitId');
         localStorage.removeItem('selectedService');
         this.store.dispatch(new Consent.ClearState());
 
-        
+        // console.log('personId' + this.personId);
         this.getPatientDetailsById(this.personId);
-       
-
-
-
     }
-
-    
-
 
     public getPatientDetailsById(personId: number) {
         this.personView$ = this.personService.getPatientByPersonId(personId).subscribe(
             p => {
+                console.log(p);
                 this.person = p;
 
                 localStorage.setItem('personId', this.person.personId.toString());
@@ -172,4 +102,37 @@ export class PersonHomeComponent implements OnInit {
                 // console.log(this.personView$);
             });
     }
+
+    addWaitingList() {
+        const PersonId = this.person.personId;
+        const PatientId = this.person.patientId;
+      
+
+
+        const resultsDialogConfig = new MatDialogConfig();
+
+        resultsDialogConfig.disableClose = false;
+        resultsDialogConfig.autoFocus = true;
+        resultsDialogConfig.height = '100%';
+        resultsDialogConfig.width = '100%';
+
+
+        resultsDialogConfig.data = {
+            patientId: PatientId,
+            personId: PersonId
+        };
+
+        const dialogRef = this.dialog.open(AddWaitingListComponent, resultsDialogConfig);
+        dialogRef.afterClosed().subscribe(
+            data => {
+                if (!data) {
+                    return;
+                }
+                console.log(data);
+            });
+
+
+    }
+
+   
 }

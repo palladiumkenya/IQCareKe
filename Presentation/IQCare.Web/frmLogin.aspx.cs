@@ -57,6 +57,7 @@ namespace IQCare.Web
             Session.Add("CustomfrmDrug", "");
             Session.Add("CustomfrmLab", "");
             Session.Add("DosageFrequency", "");
+            Session.Add("SystemQueue", "");
             //Session.Add("PatientMasterVisitID", "0");
 
             Session.Add("PersonId", "0");
@@ -351,6 +352,7 @@ namespace IQCare.Web
                     Session["AppCurrency"] = theDT.Rows[0]["Currency"].ToString();
                     Session["AppUserEmployeeId"] = theDS.Tables[0].Rows[0]["EmployeeId"].ToString();
                     Session["DosageFrequency"] = theDT.Rows[0]["Frequency"].ToString();
+                    Session["SystemQueue"] = theDT.Rows[0]["SystemQueue"].ToString();
 
                     //Session["AppSystemId"] = theDT.Rows[0]["SystemId"].ToString();
 

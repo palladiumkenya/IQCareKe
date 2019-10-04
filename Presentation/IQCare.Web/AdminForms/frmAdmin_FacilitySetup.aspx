@@ -357,6 +357,20 @@
                         <table width="100%">
                             <tr>
                                 <td width="50%" align="right">
+                                    <div class="center whitebg" id="QueueManagement" runat="server">
+                                        <label class="center">
+                                            QueueManagement:
+                                            </label>
+                                    </div>
+                                </td>
+                                <td width="50%" align="left">
+                                   <input type="checkbox" id="chkQueue" runat="server" />
+                                </td>
+                            </tr>
+                        </table>
+                        <table width="100%">
+                            <tr>
+                                <td width="50%" align="right">
                                     <div class="center whitebg" id="Dosage" runat="server">
                                         <label class="center">
                                             Dosage Frequency:
