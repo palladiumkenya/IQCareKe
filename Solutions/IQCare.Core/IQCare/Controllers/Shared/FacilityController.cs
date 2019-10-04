@@ -113,5 +113,14 @@ namespace IQCare.Controllers.Shared
                 return Ok(response.Value);
             return BadRequest(response);
         }
+
+        [HttpGet("GetHtsFacilityStatistics")]
+        public async Task<IActionResult> GetHtsFacilityStatistics()
+        {
+            var response = await _mediatR.Send(new GetHtsFacilityStatisticsCommand(), Request.HttpContext.RequestAborted);
+            if (response.IsValid)
+                return Ok(response.Value);
+            return BadRequest(response);
+        }
     }
 }

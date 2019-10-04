@@ -4,7 +4,7 @@ import { HTSEncounterResolver } from './services/htsencounter.resolver';
 import { PersonCurrentVitalsResolver } from './services/personvitals.resolver';
 import { ExitReasonsResolver } from './services/exitreasons.resolver';
 import { CareendDetailsResolver } from './services/careendeddetails.resolver';
-import { PartnerCCCEnrollmentResolver, SexWithoutCondomResolver,PatientIdentifierResolver} from './services/hivpartnerdetails.resolver';
+import { PartnerCCCEnrollmentResolver, SexWithoutCondomResolver, PatientIdentifierResolver } from './services/hivpartnerdetails.resolver';
 import { DashboardRoutingModule } from './dashboard-routing.module';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -42,8 +42,10 @@ import { RiskEncounterResolver } from './services/riskencounter.resolver';
 import { PrepComponent } from './enrollment/service-areas/prep/prep.component';
 import { ReenrollmentComponent } from './reenrollment/reenrollment.component';
 import { PatientHtsComponent } from './patient-hts/patient-hts.component';
+import {AddWaitingListComponent} from '../shared/add-waiting-list/add-waiting-list.component';
 import { FacilityDashboardComponent } from './facility-dashboard/facility-dashboard.component';
 import {ChartsModule} from 'ng2-charts';
+import { HtsDashboardComponent } from './hts-dashboard/hts-dashboard.component';
 
 @NgModule({
     imports: [
@@ -84,7 +86,8 @@ import {ChartsModule} from 'ng2-charts';
         PrepComponent,
         ReenrollmentComponent,
         PatientHtsComponent,
-        FacilityDashboardComponent
+        FacilityDashboardComponent,
+        HtsDashboardComponent
     ],
     providers: [
         NotificationService,
@@ -105,10 +108,8 @@ import {ChartsModule} from 'ng2-charts';
 
 
     ],
-
     entryComponents: [
-        PatientHtsComponent
-    ]
-
+        PatientHtsComponent, AddWaitingListComponent
+    ],
 })
 export class DashboardModule { }

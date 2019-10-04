@@ -5,13 +5,14 @@ import { PersonHomeService } from '../services/person-home.service';
 import { NotificationService } from '../../shared/_services/notification.service';
 import { SnotifyService } from 'ng-snotify';
 import { PersonView } from '../../records/_models/personView';
-import { MatTableDataSource } from '@angular/material';
+import { MatTableDataSource, MatDialogConfig, MatDialog } from '@angular/material';
 import * as Consent from '../../shared/reducers/app.states';
 import { Store } from '@ngrx/store';
 import { EncounterDetails } from '../_model/HtsEncounterdetails';
 import { LookupItemView } from '../../shared/_models/LookupItemView';
 import { LookupItemService } from '../../shared/_services/lookup-item.service';
 
+import {AddWaitingListComponent} from '../../shared/add-waiting-list/add-waiting-list.component';
 @Component({
 
     selector: 'app-person-home',
@@ -50,6 +51,7 @@ export class PersonHomeComponent implements OnInit {
         private notificationService: NotificationService,
         private router: Router,
         public zone: NgZone,
+        private dialog: MatDialog,
         private store: Store<AppState>) {
         this.person = new PersonView();
         this.encounterDetail = new EncounterDetails();
@@ -179,4 +181,37 @@ export class PersonHomeComponent implements OnInit {
                 // console.log(this.personView$);
             });
     }
+
+    addWaitingList() {
+        const PersonId = this.person.personId;
+        const PatientId = this.person.patientId;
+      
+
+
+        const resultsDialogConfig = new MatDialogConfig();
+
+        resultsDialogConfig.disableClose = false;
+        resultsDialogConfig.autoFocus = true;
+        resultsDialogConfig.height = '100%';
+        resultsDialogConfig.width = '100%';
+
+
+        resultsDialogConfig.data = {
+            patientId: PatientId,
+            personId: PersonId
+        };
+
+        const dialogRef = this.dialog.open(AddWaitingListComponent, resultsDialogConfig);
+        dialogRef.afterClosed().subscribe(
+            data => {
+                if (!data) {
+                    return;
+                }
+                console.log(data);
+            });
+
+
+    }
+
+   
 }

@@ -5,6 +5,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
+
 import {
     MatPaginatorModule, MatTableModule, MatSortModule,
     MatAutocompleteModule, MatButtonModule, MatButtonToggleModule,
@@ -35,7 +36,7 @@ import { PersonIdentifiersResolver } from './_services/personidentifiers.resolve
 import { InlineSearchComponent } from './inline-search/inline-search.component';
 import { YesNoResolver } from '../pmtct/_services/yesno.resolver';
 import { CheckDuplicatesComponent } from './person/check-duplicates/check-duplicates.component';
-
+import {AddWaitingListComponent} from '../shared/add-waiting-list/add-waiting-list.component';
 @NgModule({
     imports: [
         CommonModule,
@@ -53,7 +54,8 @@ import { CheckDuplicatesComponent } from './person/check-duplicates/check-duplic
         MatProgressBarModule, MatProgressSpinnerModule, MatRadioModule, MatRippleModule,
         MatSelectModule, MatSidenavModule, MatSliderModule, MatSlideToggleModule,
         MatSnackBarModule, MatStepperModule, MatTabsModule, MatToolbarModule, MatTooltipModule,
-        SharedModule
+        SharedModule,
+       
     ],
     declarations: [SearchComponent, RegisterComponent,
         ViewComponent, PersoncontactsComponent,
@@ -76,7 +78,9 @@ import { CheckDuplicatesComponent } from './person/check-duplicates/check-duplic
     entryComponents: [
         PersoncontactsComponent,
         InlineSearchComponent,
-        CheckDuplicatesComponent
+        CheckDuplicatesComponent,
+        AddWaitingListComponent
+
     ],
     exports: [
         InlineSearchComponent,

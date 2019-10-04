@@ -10,6 +10,8 @@ import { NotificationService } from '../../shared/_services/notification.service
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import { Store } from '@ngrx/store';
 import * as AppState from '../../shared/reducers/app.states';
+import { MatDialog, MatDialogConfig } from '@angular/material';
+import {AddWaitingListComponent} from '../../shared/add-waiting-list/add-waiting-list.component'
 import {PersonHomeService} from '../../dashboard/services/person-home.service';
 
 @Component({
@@ -31,7 +33,7 @@ export class SearchComponent implements OnInit, AfterViewInit {
     afterSearch: boolean = false;
     @ViewChild(MatPaginator) paginator: MatPaginator;
     @ViewChild(MatSort) sort: MatSort;
-    displayedColumns = ['id', 'firstName', 'middleName', 'lastName', 'dateOfBirth', 'ageNumber', 'gender', 'fullName'];
+    displayedColumns = ['id', 'firstName', 'middleName', 'lastName', 'dateOfBirth', 'ageNumber', 'gender', 'fullName', 'Queue'];
     dataSource = new MatTableDataSource();
     clientSearch: Search;
     expandedElement: any;
@@ -44,6 +46,7 @@ export class SearchComponent implements OnInit, AfterViewInit {
         private snotifyService: SnotifyService,
         private notificationService: NotificationService,
         private store: Store<AppState>,
+        private dialog: MatDialog,
         private lookupitemservice: LookupItemService,
         private personhomeService: PersonHomeService) {
         store.dispatch(new AppState.ClearState());
@@ -97,9 +100,15 @@ export class SearchComponent implements OnInit, AfterViewInit {
         this.searchService.searchClient(this.clientSearch).subscribe(
             (res) => {
                 const rows = [];
-                res['personSearch'].forEach(element => rows.push(element, { detailRow: true, element }));
+                res['personSearch'].forEach(element =>
+                    rows.push(element, { detailRow: true, element }));
+                console.log(res);
+                console.log(rows);
                 this.dataSource.data = rows;
+
                 this.afterSearch = true;
+                console.log('Element is :');
+                console.log(this.dataSource.data);
             },
             (error) => {
                 this.snotifyService.error('Error searching person ' + error, 'SEARCH', this.notificationService.getConfig());
@@ -114,4 +123,52 @@ export class SearchComponent implements OnInit, AfterViewInit {
         const personId = row['id'];
         this.zone.run(() => { this.router.navigate(['/dashboard/personhome/' + personId], { relativeTo: this.route }); });
     }
+    checkQueue(): boolean {
+        let appQueue: number;
+        appQueue = parseInt(localStorage.getItem('appQueue'), 10);
+        if (appQueue == parseInt('1', 10)) {
+           
+
+            return true;
+
+        } else {
+            localStorage.removeItem('appQueueMenu');
+
+            return false;
+        }
+    }
+
+    addWaitingList(row: any) {
+        const PersonId = row['id'];
+        const PatientId = row['patientId'];
+        // this.zone.run(() => { this.router.navigate(['/queue/addWaitingList/' + patientId + '/' + personId], { relativeTo: this.route }); });
+
+
+        const resultsDialogConfig = new MatDialogConfig();
+
+        resultsDialogConfig.disableClose = false;
+        resultsDialogConfig.autoFocus = true;
+        resultsDialogConfig.height = '100%';
+        resultsDialogConfig.width = '100%';
+
+
+        resultsDialogConfig.data = {
+            patientId: PatientId,
+            personId: PersonId
+        };
+
+        const dialogRef = this.dialog.open(AddWaitingListComponent, resultsDialogConfig);
+        dialogRef.afterClosed().subscribe(
+            data => {
+                if (!data) {
+                    return;
+                }
+                console.log(data);
+            });
+
+
+    }
+
+
+
 }
