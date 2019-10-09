@@ -25,6 +25,7 @@ export class PersonHomeService {
     private API_PREPURL = environment.API_PREP_URL;
     private MATERNITY_API_URL = environment.API_PMTCT_URL;
     private API_PMTCT_URL = environment.API_PMTCT_URL;
+    private LAB_URL = environment.API_LAB_URL;
 
     private _url = '/api/PatientServices/GetPatientByPersonId';
     private _htsurl = '/api/HtsEncounter';
@@ -51,6 +52,15 @@ export class PersonHomeService {
             catchError(this.errorHandler.handleError<PersonView>('getAllServices'))
         );
     }
+
+    public getPatientAdherenceOutcome(patientId: number) {
+        return this.http.get<any[]>(this.API_PREPURL + '/api/PrepStatus/GetPatientAdherenceStatus/' +
+            patientId).pipe(
+                tap(getPatientStartEncounterEventDate => this.errorHandler.log('Successfully fetched patient adherence status')),
+                catchError(this.errorHandler.handleError<any>('Error in fetching Patient adherence status'))
+            );
+    }
+
 
     public getPersonEnrolledServices(personId: number): Observable<any> {
         return this.http.get<any>(this.API_URL + '/api/PatientServices/GetEnrolledServicesByPersonId/' + personId).pipe(
@@ -192,6 +202,17 @@ export class PersonHomeService {
             );
     }
 
+
+    public getLabTestResults(patientId: number, status: string): Observable<any> {
+        const url = status == null ? this.LAB_URL + '/api/LabOrder/GetLabTestResults?patientId=' + patientId :
+            this.LAB_URL + '/api/LabOrder/GetLabTestResults?patientId=' + patientId + '&status=' + status;
+
+        return this.http.get<any>(url).pipe(
+            tap(getLabTestResults => this.errorHandler.log('get lab order test results')),
+            catchError(this.errorHandler.handleError<any[]>('getLabOrderTestResults'))
+        );
+    }
+
     public getPatientEnrollmentDateByServiceAreaId(patientId: number, serviceAreaId: number): Observable<any> {
         return this.http.get<any>(this.API_URL + '/api/Register/GetPatientEnrollmentByServiceAreaId/'
             + patientId + '/' + serviceAreaId).pipe(
@@ -323,21 +344,23 @@ export class PersonHomeService {
             );
     }
 
-    public AddHivPartnerProfile(PatientId: number, hivpartnerprofiles: any[]): Observable<any> {
-        if (hivpartnerprofiles.length == 0) {
-            return of([]);
-        }
+    public AddHivPartnerProfile(PatientId: number, hivpartnerprofiles: any[], createdby: number): Observable<any> {
+        //  if (hivpartnerprofiles.length == 0) {
+        //    return of([]);
+        //}
 
         const Indata = {
             'PatientId': PatientId,
+            'CreatedBy': createdby,
             'patientPartnerProfiles': hivpartnerprofiles
+
         };
 
-        return this.http.post<any>(this.API_PREPURL + 
+        return this.http.post<any>(this.API_PREPURL +
             '/api/HivPartnerProfile/AddHivPartnerProfile', JSON.stringify(Indata), httpOptions).pipe(
-            tap(saveHivPartnerProfile => this.errorHandler.log('Successfully saved hiv profile')),
-            catchError(this.errorHandler.handleError<any>('Error in saving Patient Partner Hiv Profiles'))
-        );
+                tap(saveHivPartnerProfile => this.errorHandler.log('Successfully saved hiv profile')),
+                catchError(this.errorHandler.handleError<any>('Error in saving Patient Partner Hiv Profiles'))
+            );
     }
 
     public getHivPartnerProfile(patientId: number): Observable<any> {

@@ -13,6 +13,7 @@ import { LookupItemView } from '../../shared/_models/LookupItemView';
 import { LookupItemService } from '../../shared/_services/lookup-item.service';
 
 import {AddWaitingListComponent} from '../../shared/add-waiting-list/add-waiting-list.component';
+import * as moment from 'moment';
 @Component({
 
     selector: 'app-person-home',
@@ -36,10 +37,14 @@ export class PersonHomeComponent implements OnInit {
     riskencounters: any[];
     services: any[];
     exitreason: number;
+    creatinineLabTests: any[] = [];
     patientId: number;
     careenddetails: any[] = [];
     htshistory: any[] = [];
     personvitals: any[];
+    adherencearray: any[] = [];
+    strengthenadherence: boolean = false;
+    adherenceavailable: boolean = false;
     careendoptions: LookupItemView[] = [];
     chronic_illness_data: any[] = [];
     dataSource = new MatTableDataSource(this.chronic_illness_data);
@@ -75,7 +80,7 @@ export class PersonHomeComponent implements OnInit {
             this.careenddetails = CarendedArray;
 
             this.htshistory = HTSEncounterHistoryArray;
-            this.services = servicesArray;            
+            this.services = servicesArray;
             this.htsencounters = HTSEncounterArray;
             this.personvitals = PersonVitalsArray;
             this.riskassessmentencounter = RiskAssessmentArray;
@@ -93,7 +98,7 @@ export class PersonHomeComponent implements OnInit {
 
                 val = this.careendoptions.findIndex(x => x.itemId == this.exitreason);
                 if (this.careendoptions[val])
-                careendeddetails = this.careendoptions[val].itemDisplayName;
+                    careendeddetails = this.careendoptions[val].itemDisplayName;
 
                 if (careendeddetails && careendeddetails.toLowerCase() == 'death') {
                     this.isdead = true;
@@ -111,10 +116,10 @@ export class PersonHomeComponent implements OnInit {
 
         this.encounterDetail = this.htsencounters[0];
 
-        const servicesRightOrder = [ 2, 1, 3, 5, 4, 6, 7 ];
-        const ordered_array = this.mapOrder(this.services, servicesRightOrder, 'id');   
+        const servicesRightOrder = [2, 1, 3, 5, 4, 6, 7];
+        const ordered_array = this.mapOrder(this.services, servicesRightOrder, 'id');
         this.services = ordered_array;
-        
+
         localStorage.removeItem('patientEncounterId');
         localStorage.removeItem('patientMasterVisitId');
         localStorage.removeItem('selectedService');
@@ -122,9 +127,9 @@ export class PersonHomeComponent implements OnInit {
         this.getPatientDetailsById(this.personId);
     }
 
-    mapOrder (array, order, key) {
+    mapOrder(array, order, key) {
 
-        array.sort( function (a, b) {
+        array.sort(function (a, b) {
             const A = a[key];
             const B = b[key];
 
@@ -139,6 +144,40 @@ export class PersonHomeComponent implements OnInit {
         return array;
     }
 
+    public getCompletedCreatinineLabs(patientId: number) {
+        let creatinine: string[];
+
+        creatinine = ['Creatinine'];
+
+        this.personService.getLabTestResults(patientId, 'Complete').subscribe(res => {
+            if (res.length == 0)
+                return;
+
+            res.forEach(test => {
+                if (test.labTestName == 'Creatinine') {
+                    this.creatinineLabTests.push({
+                        labOrderTestId: test.labOrderTestId,
+                        labOrderId: test.labOrderId,
+                        test: test.labTestName,
+                        orderDate: test.orderDate,
+                        orderReason: test.orderReason == null || test.orderReason == '' ? 'N/A' : test.orderReason,
+                        labTestId: test.labTestId,
+                        resultDate: test.resultDate,
+                        result: test.result,
+                        status: test.resultStatus
+                    });
+
+                }
+            });
+
+
+        }, (error) => {
+            console.log(error + "An error occured while getting completed labs");
+        });
+
+
+    }
+
     public getPatientDetailsById(personId: number) {
         this.personView$ = this.personService.getPatientByPersonId(personId).subscribe(
             p => {
@@ -150,6 +189,46 @@ export class PersonHomeComponent implements OnInit {
                 if (this.person.patientId && this.person.patientId > 0) {
                     this.store.dispatch(new Consent.PatientId(this.person.patientId));
                     localStorage.setItem('patientId', this.person.patientId.toString());
+
+                    this.personService.getPatientAdherenceOutcome(this.person.patientId).subscribe((res) => {
+                        console.log('AdherenceOutcome');
+                        console.log(res);
+                        if (res != null) {
+                            if (res.length > 0) {
+                                this.adherenceavailable = true;
+
+                                res.forEach(element => {
+                                    this.adherencearray.push({
+                                        Score: element['scoreName'],
+                                        VisitDate: moment(element['visitDate']).format('DD-MMM-YYYY')
+                                    });
+                                });
+
+                                if (this.adherencearray.length > 1) {
+                                    if (this.adherencearray[0].Score.toString().toLowerCase() == 'fair'
+                                        && this.adherencearray[1].Score.toString().toLowerCase() == 'fair') {
+                                        this.strengthenadherence = true;
+                                    } else if (this.adherencearray[0].Score.toString().toLowerCase() == 'bad'
+                                        && this.adherencearray[1].Score.toString().toLowerCase() == 'bad') {
+                                        this.strengthenadherence = true;
+                                    }
+                                } else if (this.adherencearray.length == 1) {
+                                    if (this.adherencearray[0].Score.toString().toLowerCase() == 'fair') {
+                                        this.strengthenadherence = true;
+                                    }
+                                    if (this.adherencearray[0].Score.toString().toLowerCase() == 'bad') {
+                                        this.strengthenadherence = true;
+                                    }
+                                }
+                            }
+                        }
+
+                    });
+
+                    this.getCompletedCreatinineLabs(this.person.patientId);
+
+
+
                 }
             },
             (err) => {

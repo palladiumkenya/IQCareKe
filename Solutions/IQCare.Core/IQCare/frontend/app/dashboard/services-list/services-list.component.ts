@@ -33,12 +33,14 @@ export class ServicesListComponent implements OnInit {
     @Input('riskencounters') riskencounter: any[];
     @Input('carended') carended: boolean;
     @Input('isdead') isdead: boolean;
+    @Input('creatininelabtests') creatininelabtests: any[];
     enrolledServices: any[];
     PatientCCCEnrolled: boolean = false;
     patientIdentifiers: any[];
     riskassessmentPatientMasterVisitId: number;
     enrolledService: any[] = [];
     identifiers: any[] = [];
+    creatininetestresult: boolean = false;;
     enrollservicename: boolean = true;
     enrollPrepServicename: boolean = false;
     patientvitals: any[] = [];
@@ -60,7 +62,7 @@ export class ServicesListComponent implements OnInit {
     public Patient: PatientView = {};
     RiskDone: boolean = true;
     userId: number;
-    
+
     constructor(
         private personhomeservice: PersonHomeService,
         public zone: NgZone,
@@ -252,7 +254,7 @@ export class ServicesListComponent implements OnInit {
                     });
                     break;
                 case 'CCC':
-                    this.searchService.setSession(this.personId, this.patientId, this.userId).subscribe((res) => {
+                    this.searchService.setSession(this.personId, this.patientId).subscribe((res) => {
                         window.location.href = location.protocol + '//' + window.location.hostname + ':' + window.location.port +
                             '/IQCare/CCC/Patient/PatientHome.aspx';
                     });
@@ -378,6 +380,24 @@ export class ServicesListComponent implements OnInit {
 
         }
         return isEligible;
+
+    }
+    checkService(serviceAreaId: number): boolean {
+
+        let isEligible: boolean = true;
+        const selectedService = this.services.filter(obj => obj.id == serviceAreaId);
+
+        if (selectedService && selectedService.length > 0) {
+            if (selectedService[0]['code'] == 'PREP') {
+                isEligible = false;
+
+            } else {
+                isEligible = true;
+            }
+        }
+
+        return isEligible;
+
 
     }
     isServiceEligible(serviceAreaId: number) {
@@ -553,6 +573,21 @@ export class ServicesListComponent implements OnInit {
                             }
 
                         }
+                        if (this.creatininelabtests.length > 0) {
+                            if (this.creatininelabtests[0].result !== 'N/A') {
+                                let result: string;
+                                result = this.creatininelabtests[0].result;
+                                if (parseInt(result, 10) <= 50) {
+                                    isEligible = false;
+                                    this.creatininetestresult = true;
+                                }
+                                else {
+                                    isEligible = true;
+                                    this.creatininetestresult = false;
+                                }
+                            }
+                        }
+
 
                     }
 

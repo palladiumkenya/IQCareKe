@@ -17,6 +17,7 @@ import { PartnerCCCEnrollmentResolver, SexWithoutCondomResolver, PatientIdentifi
 import { CareendDetailsResolver } from './services/careendeddetails.resolver';
 import {FacilityDashboardComponent} from './facility-dashboard/facility-dashboard.component';
 import {HtsDashboardComponent} from './hts-dashboard/hts-dashboard.component';
+import { GetpatientIdResolver } from './services/getpatientId.resolver';
 
 const routes: Routes = [
     {
@@ -97,7 +98,8 @@ const routes: Routes = [
                         resolve: {
                             PartnerCCCEnrollmentArray: PartnerCCCEnrollmentResolver,
                             SexWithoutCondomArray: SexWithoutCondomResolver,
-                            PatientIdentifierArray: PatientIdentifierResolver
+                            PatientIdentifierArray: PatientIdentifierResolver,
+                            PatientIdArray: GetpatientIdResolver
                             
                         }
 
@@ -110,7 +112,8 @@ const routes: Routes = [
                         resolve: {
                             PartnerCCCEnrollmentArray: PartnerCCCEnrollmentResolver,
                             SexWithoutCondomArray: SexWithoutCondomResolver,
-                            PatientIdentifierArray: PatientIdentifierResolver
+                            PatientIdentifierArray: PatientIdentifierResolver,
+                            PatientIdArray:GetpatientIdResolver
                         }
 
                     }

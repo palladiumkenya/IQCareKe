@@ -36,7 +36,7 @@ namespace IQCare.Lab.BusinessProcess.QueryHandlers
                         : _labUnitOfWork.Repository<PatientLabTracker>().Get(x => x.PatientId == request.PatientId)
                             .ToList();
                         
-                    var labTestModel = _mapper.Map<List<LabTestResultViewModel>>(labTestResults.OrderByDescending(x=>x.CreateDate));
+                    var labTestModel = _mapper.Map<List<LabTestResultViewModel>>(labTestResults.OrderByDescending(x=>x.CreateDate ).OrderByDescending(x=>x.PatientMasterVisitId));
 
                     return Task.FromResult(Result<List<LabTestResultViewModel>>.Valid(labTestModel));
                 }

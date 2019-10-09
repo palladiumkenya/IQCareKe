@@ -15,6 +15,7 @@ import * as moment from 'moment';
 export class PrepCheckinComponent implements OnInit {
     form: FormGroup;
     title: string;
+    maxDate: Date;
     prepEncounterDate: Date;
     public visitTypes: any[] = [];
     public lookupItems$: Subscription;
@@ -26,6 +27,7 @@ export class PrepCheckinComponent implements OnInit {
         private dialogRef: MatDialogRef<PrepCheckinComponent>,
         @Inject(MAT_DIALOG_DATA) data) {
         this.title = 'PrEP Check-in';
+        this.maxDate = new Date();
     }
 
     ngOnInit() {

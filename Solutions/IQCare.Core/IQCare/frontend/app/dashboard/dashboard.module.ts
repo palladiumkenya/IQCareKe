@@ -46,6 +46,7 @@ import {AddWaitingListComponent} from '../shared/add-waiting-list/add-waiting-li
 import { FacilityDashboardComponent } from './facility-dashboard/facility-dashboard.component';
 import {ChartsModule} from 'ng2-charts';
 import { HtsDashboardComponent } from './hts-dashboard/hts-dashboard.component';
+import { GetpatientIdResolver } from './services/getpatientId.resolver';
 
 @NgModule({
     imports: [
@@ -102,10 +103,10 @@ import { HtsDashboardComponent } from './hts-dashboard/hts-dashboard.component';
         ExitReasonsResolver,
         CareendDetailsResolver,
         HTSEncounterHistoryResolver,
-        PartnerCCCEnrollmentResolver, 
+        PartnerCCCEnrollmentResolver,
         SexWithoutCondomResolver,
-        PatientIdentifierResolver
-
+        PatientIdentifierResolver,
+        GetpatientIdResolver
 
     ],
     entryComponents: [

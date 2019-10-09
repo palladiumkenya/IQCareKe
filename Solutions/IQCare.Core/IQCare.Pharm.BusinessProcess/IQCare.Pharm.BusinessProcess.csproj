@@ -5,17 +5,19 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="CommandHandlers\" />
-    <Folder Include="Commands\" />
     <Folder Include="MapperProfiles\" />
-    <Folder Include="QueryHandler\" />
-    <Folder Include="Queries\" />
   </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="AutoMapper" Version="7.0.1" />
     <PackageReference Include="MediatR" Version="4.1.0" />
     <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="4.1.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\IQCare.Library\IQCare.Library.csproj" />
+    <ProjectReference Include="..\IQCare.Pharm.Core\IQCare.Pharm.Core.csproj" />
+    <ProjectReference Include="..\IQCare.Pharm.Infrastructure\IQCare.Pharm.Infrastructure.csproj" />
   </ItemGroup>
 
 </Project>

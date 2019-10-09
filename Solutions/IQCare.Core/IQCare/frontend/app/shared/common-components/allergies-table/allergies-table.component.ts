@@ -35,10 +35,12 @@ export class AllergiesTableComponent implements OnInit {
     }
 
     public loadPatientAllergies(): void {
+        this.allergy_table_data = [];
         this.prepservice.getPatientAllergies(this.patientId).subscribe(
             (res) => {
                 res.forEach(allergyData => {
                     this.allergy_table_data.push({
+                        id: allergyData.id,
                         allergy: allergyData.allergenName,
                         reactionType: allergyData.reactionName,
                         severity: allergyData.severityName,
@@ -55,6 +57,40 @@ export class AllergiesTableComponent implements OnInit {
         );
     }
 
+
+    onRowClicked(row) {
+        let id: any;
+        console.log(row);
+
+
+        id = row.id;
+        if (parseInt(id, 10) > 0) {
+            this.prepservice.DeleteAllergy(id).subscribe((res) => {
+
+                this.snotifyService.success(res['message'].toString(), 'Delete Allergy ', this.notificationService.getConfig());
+            },
+                (error) => {
+                    this.snotifyService.error('Error deleting Allergy ' + error, 'Delete Allergy',
+                        this.notificationService.getConfig());
+
+                });
+
+
+            this.loadPatientAllergies();
+           
+
+        } else {
+            var idx = this.allergy_table_data.indexOf(row);
+            this.allergy_table_data.splice(idx);
+            this.dataSource = new MatTableDataSource(this.allergy_table_data);
+
+
+
+        }
+
+
+
+    }
     newAllergies() {
         const dialogConfig = new MatDialogConfig();
         dialogConfig.disableClose = true;
@@ -77,18 +113,21 @@ export class AllergiesTableComponent implements OnInit {
                     this.snotifyService.warning('' + substanceAllergy + ' exists',
                         'Allergies', this.notificationService.getConfig());
                 } else {
+
                     this.allergy_table_data.push({
                         allergy: substanceAllergy,
                         reactionType: data.allergyReaction.itemName,
                         severity: data.severity.itemName,
-                        onsetDate: data.onSetDate
+                        onsetDate: data.onSetDate,
+                        id: 0
                     });
 
                     this.newAllergyData.push({
                         allergy: data.substanceAllergy,
                         reactionType: data.allergyReaction,
                         severity: data.severity,
-                        onsetDate: data.onSetDate
+                        onsetDate: data.onSetDate,
+                        id: 0
                     });
 
                     this.dataSource = new MatTableDataSource(this.allergy_table_data);
@@ -99,10 +138,12 @@ export class AllergiesTableComponent implements OnInit {
 
 }
 
+
 export interface AllergyTableData {
     allergy?: string;
     reactionType?: string;
     severity?: string;
     onsetDate?: Date;
     active?: string;
+    id: any;
 }
