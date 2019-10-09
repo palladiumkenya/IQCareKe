@@ -449,7 +449,7 @@ export class PharmOrderformComponent implements OnInit {
             this.drugSwitchInterruptionReason();
             this.getCurrentRegimen();
             //   || value == 'HBV' || value == 'Hepatitis B'
-        } else if (value === 'Non-ART') {
+        } else if (value === 'Non-ART' || value == 'Treatment' || value == 'prophylaxis') {
             this.pharmFormGroup.controls.frmPeriodTaken.setValue('');
             this.pharmFormGroup.controls.frmPeriodTaken.disable({ onlySelf: true });
             this.pharmFormGroup.controls.frmTreatmentPlan.setValue('');
@@ -599,6 +599,15 @@ export class PharmOrderformComponent implements OnInit {
 
             this.pharmFormGroup.controls.txtQuantityPres.setValue(result);
         }
+    }
+    removeDups(names) {
+        let unique = {};
+        names.forEach(function (i) {
+            if (!unique[i]) {
+                unique[i] = true;
+            }
+        });
+        return Object.keys(unique);
     }
 
     AddCorrectDrugPrescription() {
@@ -785,7 +794,8 @@ export class PharmOrderformComponent implements OnInit {
             }
         }
         //   || value == 'HBV' || value == 'Hepatitis B'
-        if (treatmentprogramtext !== 'Non-ART') {
+        if (treatmentprogramtext !== 'Non-ART' && treatmentprogramtext !== 'Treatment'
+            && treatmentprogramtext !== 'prophylaxis') {
             if (frmRegimen === null || frmRegimen === '' || frmRegimen === undefined) {
                 this.snotifyService.error('Regimen is required ' +
                     ' Regimen  Details',
@@ -850,7 +860,53 @@ export class PharmOrderformComponent implements OnInit {
             Prophylaxis = '0';
         }
 
+        if (treatmentprogramtext !== 'Treatment' && treatmentprogramtext !== 'prophylaxis' && treatmentprogramtext !== 'Non-ART') {
+            if (this.DrugArray.length > 0) {
+                let ExistingProgramvalue = new Array();
+                ExistingProgramvalue = [];
+                let ExistingRegimenLine = new Array();
+                let valuesprogram = new Array();
+                valuesprogram = [];
+                ExistingProgramvalue = this.DrugArray.filter(x => x.TreatmentProgramText.toString() !== treatmentprogramtext.toString()
+                    && x.TreatmentProgramText.toString() !== 'Treatment'
+                    && x.TreatmentProgramText.toString() !== 'prophylaxis'
+                    && x.TreatmentProgramText.toString() !== 'Non-ART');
 
+                if (ExistingProgramvalue.length > 0) {
+
+                    valuesprogram = this.removeDups(ExistingProgramvalue);
+
+                    {
+                        this.snotifyService.error('Kindly one can only add one treatment ' +
+                            'program and either Non-ART , Treatment or prophylaxis program only ' +
+                            'Kindly clear the drugs for ' + valuesprogram.toString() +
+                            'treatment program in order to add drugs for  the current program ' +
+                            ' TreatmentProgram',
+                            this.notificationService.getConfig());
+                        return;
+
+
+                    }
+
+                };
+
+                if (regimen > 0) {
+                    ExistingRegimenLine = this.DrugArray.filter(x => x.Regimen.toString() !== regimen.toString())
+                    if (ExistingRegimenLine.length > 0) {
+
+                        this.snotifyService.error('Kindly one cannot have different regimen ' +
+                            'at the same time. Kindly prescibe the correct regimen',
+                            'Regimen', this.notificationService.getConfig());
+
+                        return;
+                    }
+
+
+                }
+
+
+            }
+        }
 
 
 
@@ -1076,12 +1132,77 @@ export class PharmOrderformComponent implements OnInit {
 
     }
     SavePharmacyData() {
+
+
         if (this.DrugArray.length <= 0) {
 
             this.snotifyService.error('Kindly add Drugs to prescribe'
                 , 'Drug Prescription Error', this.notificationService.getConfig());
             return;
         }
+        var allAbbr = '';
+        if (this.DrugArray.length > 0) {
+            this.DrugArray.forEach(x => {
+                if (!allAbbr.toUpperCase().includes(x.DrugAbb)) {
+                    if (x.DrugAbb !== '' &&  x.DrugAbb !== null) {
+                        allAbbr += x.DrugAbb + '/';
+                    }
+                }
+            });
+        }
+        allAbbr = allAbbr.replace(/\/$/, '');
+        
+        console.log(allAbbr);
+
+        let sumAllAbbr = 0;
+        let sumSelectedRegimen = 0;
+        try {
+            for (let i = 0; i < allAbbr.length; i++) {
+                sumAllAbbr += allAbbr.charCodeAt(i);
+            }
+        } catch (err) { }
+
+        try {
+
+            let regimenText: string;
+            let selectedRegimen: string;
+            const DrugArray = this.DrugArray.filter
+                (x => x.TreatmentProgramText.toString() !== 'Treatment' && x.TreatmentProgramText.toString() !== 'prophylaxis'
+                    && x.TreatmentProgramText.toString() !== 'Non-ART' && x.Prophylaxis !== '1').map(x => x.Regimentext);
+            regimenText = DrugArray[0].toString();
+            regimenText = regimenText.match(/\(([^)]+)\)/)[1];
+
+            selectedRegimen = regimenText.replace(/\+/g, '/').replace(/ /g, '');
+
+            for (let i = 0; i < selectedRegimen.length; i++) {
+                sumSelectedRegimen += selectedRegimen.charCodeAt(i);
+            }
+
+
+        } catch (err) {
+
+            this.snotifyService.error('Error'
+                , 'Error', this.notificationService.getConfig());
+        }
+
+        if (sumAllAbbr > 0) {
+            /*  if (treatmentProgramName === 'ART' || treatmentProgramName === 'PMTCT') {
+                  if (regimenLine === "0") {
+                      toastr.error("Error", "Please select the Regimen Line");
+                      return;
+                  }
+              }  */
+            var DrugTreatment = this.DrugArray.filter(x => x.TreatmentProgramText.toString() !== "Treatment" &&
+                x.TreatmentProgramText.toString() !== "prophylaxis" && x.TreatmentProgramText.toString() !== "Non-ART").map(x => { return x.TreatmentProgramText });
+            if (sumAllAbbr !== sumSelectedRegimen && (DrugTreatment[0] === 'ART'
+                || DrugTreatment[0] === 'PMTCT') && sumSelectedRegimen < 1500) {
+                this.snotifyService.error('Selected Regimen is not equal to Prescribed Regimen!'
+                    , 'Error', this.notificationService.getConfig());
+
+                return;
+            }
+        }
+
 
         const { visitDate, frmDateDispensed, frmDatePrescibed } = this.pharmFormGroup.value;
         if (frmDateDispensed !== null && frmDateDispensed !== '' && frmDateDispensed !== undefined) {
@@ -1118,10 +1239,10 @@ export class PharmOrderformComponent implements OnInit {
                         , 'Pharmacy Form', this.notificationService.getConfig());
 
 
-                        this.zone.run(() => {
-                            this.router.navigate(['/pharm/mainpage/' + this.patientId + '/' + this.personId
-                            ], { relativeTo: this.route });
-                        });
+                    this.zone.run(() => {
+                        this.router.navigate(['/pharm/mainpage/' + this.patientId + '/' + this.personId
+                        ], { relativeTo: this.route });
+                    });
 
                 }, (error) => {
                     this.snotifyService.error('Error saving and updating pharmacy record' + error
@@ -1164,10 +1285,10 @@ export class PharmOrderformComponent implements OnInit {
                                         , 'Pharmacy Form', this.notificationService.getConfig());
 
 
-                                        this.zone.run(() => {
-                                            this.router.navigate(['/pharm/mainpage/' + this.patientId + '/' + this.personId
-                                            ], { relativeTo: this.route });
-                                        });
+                                    this.zone.run(() => {
+                                        this.router.navigate(['/pharm/mainpage/' + this.patientId + '/' + this.personId
+                                        ], { relativeTo: this.route });
+                                    });
 
                                 }, (error) => {
                                     this.snotifyService.error('Error saving and updating pharmacy record' + error

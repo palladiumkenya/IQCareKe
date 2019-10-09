@@ -39,13 +39,14 @@ namespace IQCare.Prep.BusinessProcess.CommandHandlers
 
                             if (patientprofile.Id > 0)
                             {
+                               
                                 var result = await _prepUnitOfWork.Repository<PatientPartnerProfile>()
                                 .FindByIdAsync(patientprofile.Id);
                                 if (result != null)
                                 {
                                     
                                     result.PatientId = request.PatientId;
-                                  
+                                    result.PartnerHivStatus = patientprofile.PartnerHivStatus;
                                     result.NumberofChildren = patientprofile.NumberofChildren;
                                     result.PartnerARTStartDate = patientprofile.PartnerARTStartDate;
                                     if(!String.IsNullOrEmpty(patientprofile.SexWithoutCondoms)== true)
@@ -76,6 +77,7 @@ namespace IQCare.Prep.BusinessProcess.CommandHandlers
                                    
                                     plf.NumberofChildren = patientprofile.NumberofChildren;
                                     plf.PartnerARTStartDate = patientprofile.PartnerARTStartDate;
+                                    plf.PartnerHivStatus = patientprofile.PartnerHivStatus ; 
                                     if (!String.IsNullOrEmpty(patientprofile.SexWithoutCondoms) == true)
                                     {
                                         plf.SexWithoutCondoms = Convert.ToInt32(patientprofile.SexWithoutCondoms);
@@ -101,31 +103,38 @@ namespace IQCare.Prep.BusinessProcess.CommandHandlers
                             }
                             else
                             {
-                                PatientPartnerProfile plf = new PatientPartnerProfile();
-                                plf.PatientId = request.PatientId;
-                               
-                                plf.NumberofChildren = patientprofile.NumberofChildren;
-                                plf.PartnerARTStartDate = patientprofile.PartnerARTStartDate;
-                                if (!String.IsNullOrEmpty(patientprofile.SexWithoutCondoms) == true)
-                                {
-                                    plf.SexWithoutCondoms = Convert.ToInt32(patientprofile.SexWithoutCondoms);
 
+                             
+                                    PatientPartnerProfile plf = new PatientPartnerProfile();
+                                    plf.PatientId = request.PatientId;
+
+                                    plf.NumberofChildren = patientprofile.NumberofChildren;
+                                     plf.PartnerHivStatus = patientprofile.PartnerHivStatus;
+                                    plf.PartnerARTStartDate = patientprofile.PartnerARTStartDate;
+                                    if (!String.IsNullOrEmpty(patientprofile.SexWithoutCondoms) == true)
+                                    {
+                                        plf.SexWithoutCondoms = Convert.ToInt32(patientprofile.SexWithoutCondoms);
+
+                                    }
+                                    
+                                   
+                                    plf.HIVSeroDiscordantDuration = patientprofile.HIVSeroDiscordantDuration;
+                                    plf.HivPositiveStatusDate = patientprofile.HivPositiveStatusDate;
+                                    if (!String.IsNullOrEmpty(patientprofile.CCCEnrollment) == true)
+                                    {
+                                        plf.CCCEnrollment = Convert.ToInt32(patientprofile.CCCEnrollment);
+                                    }
+                                    
+                                    plf.CCCNumber = patientprofile.CCCNumber;
+                                    plf.DeleteFlag = patientprofile.DeleteFlag;
+                                    plf.CreatedBy = patientprofile.CreatedBy;
+                                    plf.CreateDate = DateTime.Now;
+
+                                    await _prepUnitOfWork.Repository<PatientPartnerProfile>().AddAsync(plf);
+                                    await _prepUnitOfWork.SaveAsync();
                                 }
-                                plf.HIVSeroDiscordantDuration = patientprofile.HIVSeroDiscordantDuration;
-                                plf.HivPositiveStatusDate = patientprofile.HivPositiveStatusDate;
-                                if (!String.IsNullOrEmpty(patientprofile.CCCEnrollment) == true)
-                                {
-                                    plf.CCCEnrollment = Convert.ToInt32(patientprofile.CCCEnrollment);
-                                }
-                                plf.CCCNumber = patientprofile.CCCNumber;
-                                plf.DeleteFlag = patientprofile.DeleteFlag;
-                                plf.CreatedBy = patientprofile.CreatedBy;
-                                plf.CreateDate = DateTime.Now;
 
-                                await _prepUnitOfWork.Repository<PatientPartnerProfile>().AddAsync(plf);
-                                await _prepUnitOfWork.SaveAsync();
-
-                            }
+                            
                         }
 
                         Msg += "The hiv status partner profile has been saved successfully";
@@ -134,7 +143,8 @@ namespace IQCare.Prep.BusinessProcess.CommandHandlers
                     }
 
 
-                    return Result<PatientProfileResponse>.Valid(new PatientProfileResponse()
+                   
+                        return Result<PatientProfileResponse>.Valid(new PatientProfileResponse()
                     {
                         Message = Msg
                     });

@@ -49,7 +49,7 @@ import { AncService } from '../../../../pmtct/_services/anc.service';
     selector: 'app-prep',
     templateUrl: './prep.component.html',
     styleUrls: ['./prep.component.css'],
-    providers: [PrepService,AncService]
+    providers: [PrepService, AncService]
 })
 export class PrepComponent implements OnInit {
     public person: PersonView;
@@ -95,6 +95,7 @@ export class PrepComponent implements OnInit {
     patientMasterVisitId: number;
     public hivpositiveprofileOptions: any[] = [];
     public hivsavedprofileOptions: any[] = [];
+    patientIdValue: any[] = [];
     // public filteredfacilities: ReplaySubject<any[]> = new ReplaySubject<any[]>();
     public filteredfacilities: Observable<any[]>;
     public FacilitySelected: FormControl = new FormControl();
@@ -108,7 +109,9 @@ export class PrepComponent implements OnInit {
     pregnancyStatusOptions: LookupItemView[] = [];
     yesNoUnknownOptions: LookupItemView[] = [];
     populationtype: any[] = [];
+    partnerhivstatusOptions: LookupItemView[] = [];
     stiScreeningOptions: LookupItemView[] = [];
+    stiOptions: LookupItemView[] = [];
     screenedForSTIOptions: LookupItemView[] = [];
     prepstatusOptions: LookupItemView[] = [];
     prepStatusOptions: LookupItemView[] = [];
@@ -176,10 +179,17 @@ export class PrepComponent implements OnInit {
             const { PartnerCCCEnrollmentArray,
                 PatientIdentifierArray
                 , SexWithoutCondomArray
+                , PatientIdArray
             } = res;
+            console.log(res);
             this.sexwithoutcondomoptions = SexWithoutCondomArray['lookupItems'];
             this.patientIdentifieroptions = PatientIdentifierArray['lookupItems'];
             this.partnercccenrollmentoptions = PartnerCCCEnrollmentArray['lookupItems'];
+            this.patientIdValue = PatientIdArray;
+            if (this.patientIdValue['id'] != null || this.patientIdValue['id'] != undefined) {
+                this.patientId = parseInt(this.patientIdValue['id'].toString(), 10);
+                console.log('PatientId Resolver' + this.patientId);
+            }
         });
         this.getPatientDetailsById(this.personId);
 
@@ -203,10 +213,11 @@ export class PrepComponent implements OnInit {
             CurrentRegimen: new FormControl(''),
             ClinicalNotes: new FormControl(''),
             IsSchool: new FormControl(''),
+            PartnerHivStatus: new FormControl(''),
             //  KeyPopulation: new FormControl(''),
             // populationType: new FormControl('', [Validators.required]),
             //  DiscordantCouple: new FormControl(''),
-            PrevPrepUse: new FormControl(''),
+            //  PrevPrepUse: new FormControl(''),
             Months: new FormControl(''),
             partnercccenrollment: new FormControl(''),
             CCCNumber: new FormControl('', Validators.pattern(/^((?!(0))[0-9]{10})$/)),
@@ -251,11 +262,18 @@ export class PrepComponent implements OnInit {
         this.getYears();
         this.isVisible = false;
 
+        this.form.controls.partnerHivStatusDate.disable({ onlySelf: true });
+        this.form.controls.partnercccenrollment.disable({ onlySelf: true });
+        this.form.controls.CCCNumber.disable({ onlySelf: true });
+        this.form.controls.partnerARTStartDate.disable({ onlySelf: true });
+        this.form.controls.HivSerodiscordantduration.disable({ onlySelf: true });
+        this.form.controls.partnersexcondoms.disable({ onlySelf: true });
+        this.form.controls.Months.disable({ onlySelf: true });
 
 
         this.personHomeService.getPatientModelByPersonId(this.personId).subscribe(
             (result) => {
-                this.patientId=result.id;
+                this.patientId = result.id;
 
             }
         );
@@ -266,6 +284,9 @@ export class PrepComponent implements OnInit {
         );
         this._lookupItemService.getByGroupName('FPMethod').subscribe((res) => {
             this.fpMethods = res['lookupItems'];
+        });
+        this._lookupItemService.getByGroupName('HivStatus').subscribe((res) => {
+            this.partnerhivstatusOptions = res['lookupItems'];
         });
         this._lookupItemService.getByGroupName('YesNoDont_Know').subscribe((res) => {
             this.yesNoDontKnowOptions = res['lookupItems'];
@@ -288,9 +309,7 @@ export class PrepComponent implements OnInit {
         this._lookupItemService.getByGroupName('ScreenedForSTI').subscribe((res) => {
             this.screenedForSTIOptions = res['lookupItems'];
         });
-        this._lookupItemService.getByGroupName('STIScreeningTreatment').subscribe((res) => {
-            this.stiScreeningOptions = res['lookupItems'];
-        });
+
         this._lookupItemService.getByGroupName('PrEP_Status').subscribe((res) => {
             this.prepstatusOptions = res['lookupItems'];
             this.prepStatusOptions = res['lookupItems'];
@@ -298,6 +317,7 @@ export class PrepComponent implements OnInit {
         this._lookupItemService.getByGroupName('ContraindicationsPrEP').subscribe((res) => {
             this.prepContraindicationsOptions = res['lookupItems'];
         });
+
 
 
         this.form.controls.TransferInMflCode.valueChanges.pipe(debounceTime(400)).subscribe(data => {
@@ -373,7 +393,7 @@ export class PrepComponent implements OnInit {
             }
         );
 
-      
+
         // this.form.controls.Weeks.disable({ onlySelf: true });
         this.form.controls.Months.disable({ onlySelf: true });
         this.form.controls.InitiationDate.disable({ onlySelf: true });
@@ -491,6 +511,7 @@ export class PrepComponent implements OnInit {
 
         if (event.source.viewValue !== 'None' && event.source.selected == true) {
             for (let i = 0; i < event.source._parent.options.length; i++) {
+
                 if (event.source._parent.options._results[i].viewValue
                     === 'None') {
                     event.source._parent.options._results[i].deselect();
@@ -693,9 +714,10 @@ export class PrepComponent implements OnInit {
                         CCCEnrollmentText = this.partnercccenrollmentoptions.
                             filter(x => x.itemId == r['cccEnrollment'])
                             .map(x => x.displayName);
-
+                        let PartnerHivStatusText = this.partnerhivstatusOptions.filter(x => x.itemId == r['partnerHivStatus']).map(x => x.displayName);
                         this.hivpositiveprofileOptions.push({
                             HivPositiveStatusDate: r['hivPositiveStatusDate'],
+                            PartnerHivStatus: PartnerHivStatusText,
                             CCCEnrollment: r['cccEnrollment'],
                             CCCEnrollmentText: CCCEnrollmentText,
                             partnerARTStartDate: r['partnerARTStartDate'],
@@ -709,10 +731,12 @@ export class PrepComponent implements OnInit {
 
 
 
+
                         });
                         this.hivsavedprofileOptions.push({
                             Id: r['id'],
                             PatientId: this.patientId,
+                            PartnerHivStatus: r['partnerHivStatus'],
                             HivPositiveStatusDate: r['hivPositiveStatusDate'],
                             CCCEnrollment: r['cccEnrollment'],
                             PartnerARTStartDate: r['partnerARTStartDate'],
@@ -866,6 +890,47 @@ export class PrepComponent implements OnInit {
             }
         );
     }
+    OnPartnerHivSelection(event) {
+        let selectedvalue: string;
+        selectedvalue = event.source.viewValue;
+        selectedvalue = selectedvalue.toString().toLowerCase();
+        if (event.source.selected == true) {
+            if (selectedvalue.toLowerCase() === 'positive') {
+                this.form.controls.partnerHivStatusDate.enable({ onlySelf: true });
+                this.form.controls.partnercccenrollment.enable({ onlySelf: true });
+                this.form.controls.CCCNumber.enable({ onlySelf: true });
+                this.form.controls.partnerARTStartDate.enable({ onlySelf: true });
+                this.form.controls.HivSerodiscordantduration.enable({ onlySelf: true });
+                this.form.controls.partnersexcondoms.enable({ onlySelf: true });
+                this.form.controls.Months.enable({ onlySelf: true });
+
+            }
+            else {
+
+                this.form.controls.partnercccenrollment.setValue('');
+                this.form.controls.partnerHivStatusDate.setValue('');
+                this.form.controls.partnerARTStartDate.setValue('');
+                this.form.controls.HivSerodiscordantduration.setValue('');
+                this.form.controls.partnersexcondoms.setValue('');
+                this.form.controls.hivpartnerchildren.setValue('');
+                this.form.controls.CCCNumber.setValue('');
+
+                this.form.controls.partnerHivStatusDate.disable({ onlySelf: true });
+                this.form.controls.partnercccenrollment.disable({ onlySelf: true });
+                this.form.controls.CCCNumber.disable({ onlySelf: true });
+                this.form.controls.partnerARTStartDate.disable({ onlySelf: true });
+                this.form.controls.HivSerodiscordantduration.disable({ onlySelf: true });
+                this.form.controls.partnersexcondoms.disable({ onlySelf: true });
+                this.form.controls.Months.disable({ onlySelf: true });
+
+               
+
+
+            }
+
+        }
+
+    }
     OnPartnerenrollmentSelection(event) {
 
         let selectedvalue: string;
@@ -906,65 +971,124 @@ export class PrepComponent implements OnInit {
         const { partnercccenrollment,
             partnerHivStatusDate,
             partnerARTStartDate,
-            HivSerodiscordantduration, partnersexcondoms, hivpartnerchildren, CCCNumber } = this.form.value;
-        if (partnercccenrollment !== undefined && partnercccenrollment !== null) {
-            if (parseInt(partnercccenrollment, 10) > 0) {
-
-                let CCCEnrollmentText = this.partnercccenrollmentoptions.filter(x => x.itemId == partnercccenrollment).map(x => x.displayName);
-                let sexwithouttext = this.sexwithoutcondomoptions.filter(x => x.itemId == partnersexcondoms).map(x => x.displayName);
-                this.hivpositiveprofileOptions.push({
-                    HivPositiveStatusDate: partnerHivStatusDate,
-                    CCCEnrollment: partnercccenrollment,
-                    CCCEnrollmentText: CCCEnrollmentText,
-                    partnerARTStartDate: partnerARTStartDate,
-                    HivSerodiscordantduration: HivSerodiscordantduration,
-                    SexWithoutCondoms: sexwithouttext,
-                    NumberofChildren: hivpartnerchildren,
-                    CCCNumber: CCCNumber,
-                    DeleteFlag: false,
-                    Id: 0
-
-
-
-
-                });
-                this.hivsavedprofileOptions.push({
-                    Id: 0,
-                    PatientId: this.patientId,
-                    HivPositiveStatusDate: partnerHivStatusDate,
-                    CCCEnrollment: partnercccenrollment,
-                    PartnerARTStartDate: partnerARTStartDate,
-                    HivSerodiscordantduration: HivSerodiscordantduration,
-                    SexWithoutCondoms: partnersexcondoms,
-                    NumberofChildren: hivpartnerchildren,
-                    CCCNumber: CCCNumber,
-                    CreatedBy: this.userId,
-                    DeleteFlag: false
-
-
-                });
-
-                this.form.controls.partnercccenrollment.setValue('');
-                this.form.controls.partnerHivStatusDate.setValue('');
-                this.form.controls.partnerARTStartDate.setValue('');
-                this.form.controls.HivSerodiscordantduration.setValue('');
-                this.form.controls.partnersexcondoms.setValue('');
-                this.form.controls.hivpartnerchildren.setValue('');
-                this.form.controls.CCCNumber.setValue('');
-            } else {
-                this.snotifyService.error('Kindly note  Partner CCC Enrollment' +
-                    ' is' +
-                    'required for Hiv Partner Profile', 'Hiv Positive Partner Profile',
-                    this.notificationService.getConfig());
-                return;
-            }
-        } else {
-            this.snotifyService.error('Kindly note partnercccenrollment' +
+            HivSerodiscordantduration, partnersexcondoms, hivpartnerchildren, CCCNumber, PartnerHivStatus } = this.form.value;
+        if (PartnerHivStatus === null || PartnerHivStatus === undefined) {
+            this.snotifyService.error('Kindly note PartnerHiVStatus ' +
                 ' is' +
                 'required for Hiv Partner Profile', 'Hiv Positive Partner Profile',
                 this.notificationService.getConfig());
             return;
+
         }
+        if (PartnerHivStatus) {
+            const PartnerArray = this.partnerhivstatusOptions.filter(x => x.itemId == PartnerHivStatus);
+            if (PartnerArray.length > 0) {
+                if (PartnerArray[0].itemDisplayName.toLowerCase() === "positive") {
+                    if (partnercccenrollment !== undefined && partnercccenrollment !== null) {
+                        if (parseInt(partnercccenrollment, 10) > 0) {
+
+                            let CCCEnrollmentText = this.partnercccenrollmentoptions.filter(x => x.itemId == partnercccenrollment).map(x => x.displayName);
+                            let sexwithouttext = this.sexwithoutcondomoptions.filter(x => x.itemId == partnersexcondoms).map(x => x.displayName);
+                            this.hivpositiveprofileOptions.push({
+                                HivPositiveStatusDate: partnerHivStatusDate,
+                                PartnerHivStatus: PartnerArray[0].itemDisplayName,
+                                CCCEnrollment: partnercccenrollment,
+                                CCCEnrollmentText: CCCEnrollmentText,
+                                partnerARTStartDate: partnerARTStartDate,
+                                HivSerodiscordantduration: HivSerodiscordantduration,
+                                SexWithoutCondoms: sexwithouttext,
+                                NumberofChildren: hivpartnerchildren,
+                                CCCNumber: CCCNumber,
+                                DeleteFlag: false,
+                                Id: 0
+
+
+
+
+                            });
+                            this.hivsavedprofileOptions.push({
+                                Id: 0,
+                                PatientId: this.patientId,
+                                HivPositiveStatusDate: partnerHivStatusDate,
+                                PartnerHivStatus: PartnerHivStatus,
+                                CCCEnrollment: partnercccenrollment,
+                                PartnerARTStartDate: partnerARTStartDate,
+                                HivSerodiscordantduration: HivSerodiscordantduration,
+                                SexWithoutCondoms: partnersexcondoms,
+                                NumberofChildren: hivpartnerchildren,
+                                CCCNumber: CCCNumber,
+                                CreatedBy: this.userId,
+                                DeleteFlag: false
+
+
+                            });
+
+                            this.form.controls.partnercccenrollment.setValue('');
+                            this.form.controls.partnerHivStatusDate.setValue('');
+                            this.form.controls.partnerARTStartDate.setValue('');
+                            this.form.controls.HivSerodiscordantduration.setValue('');
+                            this.form.controls.partnersexcondoms.setValue('');
+                            this.form.controls.hivpartnerchildren.setValue('');
+                            this.form.controls.CCCNumber.setValue('');
+                        } else {
+                            this.snotifyService.error('Kindly note  Partner CCC Enrollment' +
+                                ' is' +
+                                'required for Hiv Partner Profile', 'Hiv Positive Partner Profile',
+                                this.notificationService.getConfig());
+                            return;
+                        }
+                    } else {
+                        this.snotifyService.error('Kindly note partnercccenrollment' +
+                            ' is' +
+                            'required for Hiv Partner Profile', 'Hiv Positive Partner Profile',
+                            this.notificationService.getConfig());
+                        return;
+                    }
+                }
+                else {
+
+
+                    this.hivpositiveprofileOptions.push({
+                        HivPositiveStatusDate: '',
+                        PartnerHivStatus: PartnerArray[0].itemDisplayName,
+                        CCCEnrollment: '',
+                        CCCEnrollmentText: '',
+                        partnerARTStartDate: '',
+                        HivSerodiscordantduration: '',
+                        SexWithoutCondoms: '',
+                        NumberofChildren: '',
+                        CCCNumber: '',
+                        DeleteFlag: false,
+                        Id: 0
+
+
+
+
+                    });
+                    this.hivsavedprofileOptions.push({
+                        Id: 0,
+                        PatientId: this.patientId,
+                        HivPositiveStatusDate: partnerHivStatusDate,
+                        PartnerHivStatus: PartnerHivStatus,
+                        CCCEnrollment: partnercccenrollment,
+                        PartnerARTStartDate: partnerARTStartDate,
+                        HivSerodiscordantduration: HivSerodiscordantduration,
+                        SexWithoutCondoms: partnersexcondoms,
+                        NumberofChildren: hivpartnerchildren,
+                        CCCNumber: CCCNumber,
+                        CreatedBy: this.userId,
+                        DeleteFlag: false
+
+
+                    });
+
+
+
+                }
+            }
+        }
+
+
 
     }
     removeRow(index) {
@@ -1001,9 +1125,22 @@ export class PrepComponent implements OnInit {
                         if (this.person.gender.toLowerCase() == 'male') {
                             this.isMale = true;
                             this.isFemale = false;
+                            this._lookupItemService.getByGroupName('STIScreeningTreatment').subscribe((res) => {
+                                this.stiScreeningOptions = res['lookupItems'];
+                                this.stiOptions = this.stiScreeningOptions.filter(x => x.itemName !== 'Cervicitis and/or Cervical discharge'
+                                    && x.itemName !== 'Vaginitis or Vaginal discharge (VG)'
+                                    && x.itemName !== 'Pelvic Inflammatory Disease (PID)');
+
+                            });
+
                         } else if (this.person.gender.toLowerCase() == 'female') {
                             this.isFemale = true;
                             this.isMale = false;
+                            this._lookupItemService.getByGroupName('STIScreeningTreatment').subscribe((res) => {
+                                this.stiScreeningOptions = res['lookupItems'];
+                                this.stiOptions = this.stiScreeningOptions;
+
+                            });
                         }
                     }
 
@@ -1074,59 +1211,72 @@ export class PrepComponent implements OnInit {
         this.personHomeService.getPatientTransferInDetails(this.serviceId, this.personId).subscribe(
             (res) => {
 
-                const arrayValue = [];
-                arrayValue.push(res);
+                if (res != null) {
+                    const arrayValue = [];
+                    arrayValue.push(res);
 
-                let itemid: number;
-                itemid = this.ClientTypes.findIndex(x => x.itemDisplayName == 'Yes');
+                    let itemid: number;
+                    itemid = this.ClientTypes.findIndex(x => x.itemDisplayName == 'Yes');
 
-                if (arrayValue.length > 0) {
+                    if (arrayValue.length > 0) {
 
-                    this.form.controls.ClientTransferIn.setValue(this.ClientTypes[itemid]['itemId']);
-                    this.isVisible = true;
-                    console.log(arrayValue);
-                    if (arrayValue[0] != null) {
-                        if (arrayValue[0]['transferInDate'] != null) {
-                            this.form.controls.TransferInDate.setValue(arrayValue[0]['transferInDate']);
-                        }
-                        if (arrayValue[0]['mflCode'] != null) {
-                            this.form.controls.TransferInMflCode.setValue(arrayValue[0]['mflCode']);
+                        this.form.controls.ClientTransferIn.setValue(this.ClientTypes[itemid]['itemId']);
+                        this.isVisible = true;
+                        console.log(arrayValue);
+                        if (arrayValue[0] != null) {
+                            if (arrayValue[0]['transferInDate'] != null) {
+                                this.form.controls.TransferInDate.setValue(arrayValue[0]['transferInDate']);
+                            }
+                            if (arrayValue[0]['mflCode'] != null) {
+                                this.form.controls.TransferInMflCode.setValue(arrayValue[0]['mflCode']);
 
 
 
-                            //  this.form.controls.FacilityListSelected.setValue(arrayValue[0]['facilityFrom']);
-                            // this.FacilitySelected.setValue(arrayValue[0]['facilityFrom']);
+                                //  this.form.controls.FacilityListSelected.setValue(arrayValue[0]['facilityFrom']);
+                                // this.FacilitySelected.setValue(arrayValue[0]['facilityFrom']);
 
-                            this.personHomeService.getFacility(arrayValue[0]['mflCode']).subscribe(
-                                (result) => {
-                                    if (result.length > 0) {
+                                this.personHomeService.getFacility(arrayValue[0]['mflCode']).subscribe(
+                                    (result) => {
+                                        if (result.length > 0) {
 
-                                        this.filteredfacilities = result;
-                                        this.FacilitySelected.setValue(result[0]);
+                                            this.filteredfacilities = result;
+                                            this.FacilitySelected.setValue(result[0]);
+                                        }
                                     }
-                                }
-                            );
+                                );
+                            }
+
+                            // this.filtercorrectfacilities(arrayValue[0]['facilityFrom']);
+                            if (arrayValue[0]['transferInNotes'] != null) {
+                                this.form.controls.ClinicalNotes.setValue(arrayValue[0]['transferInNotes']);
+                            }
+                            if (arrayValue[0]['currentTreatment'] != null) {
+                                let currentTreatment: string;
+                                currentTreatment = arrayValue[0]['currentTreatment'].toString();
+                                this.form.controls.CurrentRegimen.setValue(parseInt(currentTreatment, 10));
+                            }
                         }
 
-                        // this.filtercorrectfacilities(arrayValue[0]['facilityFrom']);
-                        if (arrayValue[0]['transferInNotes'] != null) {
-                            this.form.controls.ClinicalNotes.setValue(arrayValue[0]['transferInNotes']);
-                        }
-                        if (arrayValue[0]['currentTreatment'] != null) {
-                            let currentTreatment: string;
-                            currentTreatment = arrayValue[0]['currentTreatment'].toString();
-                            this.form.controls.CurrentRegimen.setValue(parseInt(currentTreatment, 10));
-                        }
+                    } else {
+
+                        itemid = this.ClientTypes.findIndex(x => x.itemDisplayName == 'No');
+
+                        this.form.controls.ClientTransferIn.setValue(itemid);
+
                     }
 
                 } else {
+                    let itemid: number;
                     itemid = this.ClientTypes.findIndex(x => x.itemDisplayName == 'No');
 
-                    this.form.controls.PrevPrepUse.setValue(itemid);
+                    this.form.controls.ClientTransferIn.setValue(this.ClientTypes[itemid]['itemId']);
+                    // this.form.controls.PrevPrepUse.setValue(itemid);
+
 
                 }
 
-            },
+            }
+            ,
             (error) => {
                 console.log(error);
             }
@@ -1313,7 +1463,7 @@ export class PrepComponent implements OnInit {
             } else {
                 this.isVisible = false;
                 this.form.controls.TransferInDate.setValue('');
-                this.form.controls.FacilityListSelected.setValue('');
+                // this.form.controls.FacilityListSelected.setValue('');
                 this.form.controls.CurrentRegimen.setValue('');
                 this.form.controls.ClinicalNotes.setValue('');
                 this.form.controls.TransferInMflCode.setValue('');
@@ -1590,7 +1740,7 @@ export class PrepComponent implements OnInit {
             Months, Referredfrom, isClientCircumcised, lmp, pregnant,
             pregnancyPlanned, breastFeeding, onFamilyPlanning, DateLastUsed,
             familyPlanningMethods, planningToGetPregnant,
-            id_familyPlanning, fpMethodId, nextAppointmentDate, nextAppointmentGiven, Appointmentid
+            id_familyPlanning, fpMethodId, nextAppointmentDate, nextAppointmentGiven, Appointmentid, PartnerHivStatus
         } = this.form.value;
         // this.personPopulation.KeyPopulation = KeyPopulation;
         //this.personPopulation.populationType = populationType;
@@ -1833,23 +1983,23 @@ export class PrepComponent implements OnInit {
                                                 CreateBy: this.userId
                                             });
                                         }
-                                
+
                                         for (let i = 0; i < this.ChronicIllnessFormGroup[1].length; i++) {
                                             this.allergies_data.push({
                                                 Id: 0,
                                                 PatientId: this.patientId,
                                                 PatientMasterVisitId: this.patientMasterVisitId,
-                                                Allergen: '',
+                                                Allergen: this.ChronicIllnessFormGroup[1][i]['allergy']['itemId'],
                                                 DeleteFlag: false,
                                                 CreateBy: this.userId,
                                                 CreateDate: new Date(),
                                                 AuditData: '',
-                                                Reaction: 0,
-                                                Severity: 0,
+                                                Reaction: this.ChronicIllnessFormGroup[1][i]['reactionType']['itemId'],
+                                                Severity: this.ChronicIllnessFormGroup[1][i]['severity']['itemId'],
                                                 OnsetDate: new Date()
                                             });
                                         }
-                                
+
                                         for (let i = 0; i < this.ChronicIllnessFormGroup[2].length; i++) {
                                             this.adverseEvents_data.push({
                                                 Id: 0,
@@ -1881,7 +2031,7 @@ export class PrepComponent implements OnInit {
                                         }, (error) => {
                                             console.log(error);
                                         });
-                                
+
                                         let stioptions = [];
                                         stioptions = this.screenedForSTIOptions.filter(x => x.itemName == 'STISymptoms');
 
@@ -1908,16 +2058,16 @@ export class PrepComponent implements OnInit {
 
                                             if (this.form.controls.contraindications_PrEP_Present.value.length > 0) {
                                                 for (let t = 0; t < this.form.controls.contraindications_PrEP_Present.value.length; t++) {
-                                    
-                                    
+
+
                                                     STIScreeningCommand.Screenings.push({
                                                         ScreeningTypeId: this.prepContraindicationsOptions[0].masterId,
                                                         ScreeningCategoryId: this.prepContraindicationsOptions[0].masterId,
                                                         ScreeningValueId: this.form.controls.contraindications_PrEP_Present.value[t],
                                                         Comment: ''
                                                     });
-                                    
-                                    
+
+
                                                 }
                                             }
                                         }
@@ -2155,8 +2305,10 @@ export class PrepComponent implements OnInit {
                                     });
                                 }
                             }
+
+
                             const PatientProfile = this.personHomeService.AddHivPartnerProfile
-                                (this.patientId, this.hivsavedprofileOptions).subscribe((res) => {
+                                (this.patientId, this.hivsavedprofileOptions, this.userId).subscribe((res) => {
 
                                 }, (error) => {
                                     this.snotifyService.error('Error saving hiv partner profile ' + error, 'HIV Status Partner Profile',

@@ -1,7 +1,8 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using IQCare.Common.BusinessProcess.CommandHandlers.Allergies;
 using IQCare.Common.BusinessProcess.Commands.Allergies;
 using MediatR;
 using Microsoft.AspNetCore.Http;
@@ -24,6 +25,21 @@ namespace IQCare.Controllers.Shared
         public async Task<IActionResult> AddAllergy([FromBody] AddAllergiesCommand addAllergyCommand)
         {
             var response = await _mediator.Send(addAllergyCommand, Request.HttpContext.RequestAborted);
+
+            if (response.IsValid)
+            {
+                return Ok(response.Value);
+            }
+            return BadRequest(response);
+        }
+
+
+
+
+        [HttpPost("DeleteAllergy")]
+        public async Task<IActionResult> DeleteAllergy([FromBody] DeleteAllergiesCommand delAllergyCommand)
+        {
+            var response = await _mediator.Send(delAllergyCommand, Request.HttpContext.RequestAborted);
 
             if (response.IsValid)
             {

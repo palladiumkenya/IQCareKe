@@ -14,7 +14,7 @@ namespace IQCare.Pharm.Core.Models
 
         public int Visit_pk { get; set; }
 
-        public Int64 Drug_Pk { get; set; }
+        public Int64? Drug_Pk { get; set; }
 
         public string RegimenType { get; set; }
 
@@ -29,6 +29,6 @@ namespace IQCare.Pharm.Core.Models
         public DateTime? UpdateDate { get; set; }
 
 
-        public int RegimenId { get; set; }
+        public int? RegimenId { get; set; }
     }
 }

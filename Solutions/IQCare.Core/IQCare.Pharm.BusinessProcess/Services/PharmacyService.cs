@@ -83,31 +83,37 @@ namespace IQCare.Pharm.BusinessProcess.Services
                     var ArvTreatmentTracker = await _unitOfWork.Repository<ARVTreatmentTracker>().Get(x => x.PatientId == PatientId && x.PatientMasterVisitId ==PatientMasterVisitID && x.DeleteFlag == false).OrderByDescending(x => x.Id).FirstOrDefaultAsync();
                     if (ArvTreatmentTracker != null)
                     {
-                        ArvTreatmentTracker.RegimenId = Regimen;
-                        ArvTreatmentTracker.RegimenLineId = RegimenLine;
-                        ArvTreatmentTracker.TreatmentStatusId = TreatmentPlan;
-                        ArvTreatmentTracker.TreatmentStatusReasonId = TreatmentPlanReason;
+                        if (RegimenLine > 0)
+                        {
+                            ArvTreatmentTracker.RegimenId = Regimen;
+                            ArvTreatmentTracker.RegimenLineId = RegimenLine;
+                            ArvTreatmentTracker.TreatmentStatusId = TreatmentPlan;
+                            ArvTreatmentTracker.TreatmentStatusReasonId = TreatmentPlanReason;
 
-                        _unitOfWork.Repository<ARVTreatmentTracker>().Update(ArvTreatmentTracker);
-                        await _unitOfWork.SaveAsync();
+                            _unitOfWork.Repository<ARVTreatmentTracker>().Update(ArvTreatmentTracker);
+                            await _unitOfWork.SaveAsync();
+                        }
                     }
                     else
                     {
-                        ARVTreatmentTracker arv = new ARVTreatmentTracker();
+                        if (RegimenLine > 0)
+                        {
+                            ARVTreatmentTracker arv = new ARVTreatmentTracker();
 
 
-                        arv.PatientId = PatientId;
-                        arv.PatientMasterVisitId = PatientMasterVisitID;
-                        arv.RegimenId = Regimen;
-                        arv.RegimenLineId = RegimenLine;
-                        arv.TreatmentStatusId = TreatmentPlan;
-                        arv.TreatmentStatusReasonId = TreatmentPlanReason;
-                        arv.DeleteFlag = false;
-                        arv.CreateBy = UserID;
-                        arv.CreateDate = DateTime.Now;
+                            arv.PatientId = PatientId;
+                            arv.PatientMasterVisitId = PatientMasterVisitID;
+                            arv.RegimenId = Regimen;
+                            arv.RegimenLineId = RegimenLine;
+                            arv.TreatmentStatusId = TreatmentPlan;
+                            arv.TreatmentStatusReasonId = TreatmentPlanReason;
+                            arv.DeleteFlag = false;
+                            arv.CreateBy = UserID;
+                            arv.CreateDate = DateTime.Now;
 
-                        await _unitOfWork.Repository<ARVTreatmentTracker>().AddAsync(arv);
-                        await _unitOfWork.SaveAsync();
+                            await _unitOfWork.Repository<ARVTreatmentTracker>().AddAsync(arv);
+                            await _unitOfWork.SaveAsync();
+                        }
 
                     }
 

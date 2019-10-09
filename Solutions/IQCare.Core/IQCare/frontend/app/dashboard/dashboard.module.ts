@@ -4,7 +4,7 @@ import { HTSEncounterResolver } from './services/htsencounter.resolver';
 import { PersonCurrentVitalsResolver } from './services/personvitals.resolver';
 import { ExitReasonsResolver } from './services/exitreasons.resolver';
 import { CareendDetailsResolver } from './services/careendeddetails.resolver';
-import { PartnerCCCEnrollmentResolver, SexWithoutCondomResolver,PatientIdentifierResolver} from './services/hivpartnerdetails.resolver';
+import { PartnerCCCEnrollmentResolver, SexWithoutCondomResolver, PatientIdentifierResolver } from './services/hivpartnerdetails.resolver';
 import { DashboardRoutingModule } from './dashboard-routing.module';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -42,6 +42,7 @@ import { RiskEncounterResolver } from './services/riskencounter.resolver';
 import { PrepComponent } from './enrollment/service-areas/prep/prep.component';
 import { ReenrollmentComponent } from './reenrollment/reenrollment.component';
 import { PatientHtsComponent } from './patient-hts/patient-hts.component';
+import { GetpatientIdResolver } from './services/getpatientId.resolver';
 
 @NgModule({
     imports: [
@@ -95,10 +96,10 @@ import { PatientHtsComponent } from './patient-hts/patient-hts.component';
         ExitReasonsResolver,
         CareendDetailsResolver,
         HTSEncounterHistoryResolver,
-        PartnerCCCEnrollmentResolver, 
+        PartnerCCCEnrollmentResolver,
         SexWithoutCondomResolver,
-        PatientIdentifierResolver
-
+        PatientIdentifierResolver,
+        GetpatientIdResolver
 
     ],
 

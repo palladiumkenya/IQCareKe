@@ -11,7 +11,10 @@ namespace IQCare.Prep.BusinessProcess.Commands
     {
 
         public int PatientId { get; set; }
+
         public List<PatientPartnerProfileList> patientPartnerProfiles { get; set; }
+
+     
 
     }
 
@@ -23,7 +26,7 @@ namespace IQCare.Prep.BusinessProcess.Commands
 
      
 
-
+     
 
         public DateTime? HivPositiveStatusDate { get; set; }
 
@@ -31,6 +34,7 @@ namespace IQCare.Prep.BusinessProcess.Commands
         public DateTime? PartnerARTStartDate { get; set; }
         public string HIVSeroDiscordantDuration { get; set; }
 
+        public int? PartnerHivStatus { get; set; }
         public string SexWithoutCondoms { get; set; }
         public string NumberofChildren { get; set; }
 

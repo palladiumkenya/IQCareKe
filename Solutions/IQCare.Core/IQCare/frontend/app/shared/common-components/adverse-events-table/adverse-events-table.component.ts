@@ -36,11 +36,13 @@ export class AdverseEventsTableComponent implements OnInit {
     }
 
     public loadPatientAdverseEvents(): void {
+        this.adverse_events_table_data = [];
         this.prepservice.getPatientAdverseEvents(this.patientId).subscribe(
             (res) => {
                 // console.log(res);
                 res.forEach(adverseEvent => {
                     this.adverse_events_table_data.push({
+                        id: adverseEvent.id,
                         adverseEvent: adverseEvent.eventName,
                         severity: adverseEvent.severity,
                         medicine_causing: adverseEvent.eventCause,
@@ -55,7 +57,32 @@ export class AdverseEventsTableComponent implements OnInit {
             }
         );
     }
+    onRowClicked(row) {
+        let id: any;
 
+        id = row.id;
+        if (parseInt(id, 10) > 0) {
+            this.prepservice.DeleteAdverseEvents(id).subscribe((res) => {
+
+                this.snotifyService.success(res['message'].toString(), 'Delete AdverseEvents', this.notificationService.getConfig());
+            },
+                (error) => {
+                    this.snotifyService.error('Error deleting Adverse Events ' + error, 'Delete Adverse Events',
+                        this.notificationService.getConfig());
+
+                });
+
+            this.loadPatientAdverseEvents();
+           
+        }
+
+        else {
+            let idx = this.adverse_events_table_data.indexOf(row);
+            this.adverse_events_table_data.splice(idx);
+            this.dataSource = new MatTableDataSource(this.adverse_events_table_data);
+        }
+
+    }
     newAdverseEvents() {
         const dialogConfig = new MatDialogConfig();
         dialogConfig.disableClose = true;
@@ -77,17 +104,20 @@ export class AdverseEventsTableComponent implements OnInit {
                         'Adverse Events', this.notificationService.getConfig());
                 } else {
                     this.adverse_events_table_data.push({
+
                         adverseEvent: data.adverseEvent.itemName,
                         severity: data.severity.itemName,
                         medicine_causing: data.medicine_causing,
-                        adverseEventsAction: data.adverseEventsAction.displayName
+                        adverseEventsAction: data.adverseEventsAction.displayName,
+                        id: 0
                     });
 
                     this.newAdverseEventsData.push({
                         adverseEvent: data.adverseEvent,
                         severity: data.severity,
                         medicine_causing: data.medicine_causing,
-                        adverseEventsAction: data.adverseEventsAction
+                        adverseEventsAction: data.adverseEventsAction,
+                        id: 0
                     });
 
                     this.dataSource = new MatTableDataSource(this.adverse_events_table_data);
@@ -103,5 +133,6 @@ export interface AdverseEventsTableData {
     medicine_causing?: string;
     adverseEventsAction?: any;
     outcome?: boolean;
+    id: any;
 }
 

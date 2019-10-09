@@ -194,8 +194,8 @@
                         </div>
                     </div>
 
-                    
-                 <div class="row" *ngIf="isSchoolVisible">
+
+                    <div class="row" *ngIf="isSchoolVisible">
                         <div class="col-md-12">
                             <div class="form-title">
                                 <span class="primary">
@@ -203,9 +203,9 @@
                                 </span>
                             </div>
                         </div>
-                 </div>
-                   
-                  
+                    </div>
+
+
                     <div class="row">
                         <div class="col-lg-3 col-sm-3 col-xs-12" *ngIf="isSchoolVisible">
                             <mat-form-field class="col-lg-12 col-sm-12 col-xs-12">
@@ -221,7 +221,7 @@
                         <div class="col-lg-3 col -sm-3 col-xs-12">
 
                         </div>
-                       <!-- <div class="col-lg-3 col-sm-3 col-xs-12">
+                        <!-- <div class="col-lg-3 col-sm-3 col-xs-12">
                             <label>Select Population type</label>
                             <div>
                                 <mat-radio-group class="col-lg-12 col-sm-12 col-xs-12" formControlName="populationType"
@@ -250,7 +250,7 @@
 
 
                     </div>
-                
+
                     <div class="row">
                         <div class="col-md-12">
                             <div class="form-title">
@@ -261,6 +261,22 @@
                         </div>
 
                     </div>
+                     <div class='row'>
+                        <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+                            <mat-form-field class="col-lg-12">
+                                <mat-select placeholder="Partner HIV Status before this visit?" formControlName="PartnerHivStatus" >
+                                    <mat-option [value]=-1></mat-option>
+                                    <mat-option *ngFor="let Option of partnerhivstatusOptions"
+                                        [value]="Option.itemId"
+                                        (onSelectionChange)="OnPartnerHivSelection($event)">
+                                        {{Option.itemDisplayName}}
+                                    </mat-option>
+                                </mat-select>
+                            </mat-form-field>
+
+
+                        </div>
+                     </div>
                     <div class="row">
                         <div class="col-lg-4 col-md-3 col-sm-6 col-xs-12">
                             <mat-form-field class="col-lg-12">
@@ -356,12 +372,14 @@
 
                     <div class="row">
                         <div class="col-md-12">
-                            <div class="example-container mat-elevation-z1">
+                            <div class="example-container mat-elevation-z1" style="min-height: 10px; max-height: 550px; overflow-y: auto; overflow-x: auto;">
                                 <table class="table">
                                     <thead>
                                         <tr>
                                             <th scope="col"># Count</th>
+                                            <th scope="col">PartnerHivStatus</th>
                                             <th scope="col">PartnerHivPositiveStatusDate</th>
+                                            
                                             <th scope="col">CCCEnrollment</th>
                                             <th scope="col">CCCNumber</th>
                                             <th scope="col">HivPartnerARTStartDate</th>
@@ -373,6 +391,7 @@
                                     <tbody>
                                         <tr *ngFor="let item_data of hivpositiveprofileOptions; let index = index">
                                             <td>{{ index+1 }}</td>
+                                            <td>{{item_data.PartnerHivStatus}}</td>
                                             <td>{{ item_data.HivPositiveStatusDate| date: 'dd-MMM-yyyy' }}</td>
                                             <td> {{ item_data.CCCEnrollmentText}}</td>
                                             <td>{{item_data.CCCNumber}}</td>
@@ -538,7 +557,8 @@
                         <div class="col-lg-4 col-sm-3 col-xs-12">
                             <mat-form-field class="col-lg-12 col-sm-12 col-xs-12">
                                 <mat-label>Signs/Symptoms of acute HIV?</mat-label>
-                                <mat-select id="signsOrSymptomsHIV" name="signsOrSymptomsHIV" formControlName="signsOrSymptomsHIV">
+                                <mat-select id="signsOrSymptomsHIV" name="signsOrSymptomsHIV"
+                                    formControlName="signsOrSymptomsHIV">
                                     <mat-option [value]=""></mat-option>
                                     <mat-option *ngFor="let yesnoOption of yesnoOptions" [value]="yesnoOption.itemId">
                                         {{ yesnoOption.itemName }}
@@ -546,13 +566,13 @@
                                 </mat-select>
                             </mat-form-field>
                         </div>
-            
+
                         <div class="col-lg-4 col-sm-3 col-xs-12">
                             <mat-form-field class="col-lg-12 col-sm-12 col-xs-12">
                                 <mat-label>Contraindications for PrEP Present?</mat-label>
                                 <mat-select id="contraindications_PrEP_Present" name="contraindications_PrEP_Present"
                                     formControlName="contraindications_PrEP_Present" disableRipple multiple required>
-            
+
                                     <mat-option *ngFor="let prepContraindicationsOption of prepContraindicationsOptions"
                                         [value]="prepContraindicationsOption.itemId"
                                         (onSelectionChange)="Oncontraindications($event)">
@@ -562,7 +582,7 @@
                             </mat-form-field>
                         </div>
                     </div>
-            
+
                     <div class="row">
                         <div class="col-lg-4 col-sm-3 col-xs-12">
                             <mat-form-field class="col-lg-12 col-sm-12 col-xs-12">
@@ -577,46 +597,50 @@
                             </mat-form-field>
                         </div>
                     </div>
-            
+
                     <div class="row">
                         <div class="col-lg-4 col-sm-3 col-xs-12">
                             <mat-form-field class="col-lg-12 col-sm-12 col-xs-12">
                                 <mat-label>PrEP status today:</mat-label>
-                                <mat-select id="PrEPStatusToday" name="PrEPStatusToday" formControlName="PrEPStatusToday">
+                                <mat-select id="PrEPStatusToday" name="PrEPStatusToday"
+                                    formControlName="PrEPStatusToday">
                                     <mat-option [value]=""></mat-option>
-                                    <mat-option *ngFor="let prepStatusOption of prepStatusOptions" [value]="prepStatusOption.itemId"
+                                    <mat-option *ngFor="let prepStatusOption of prepStatusOptions"
+                                        [value]="prepStatusOption.itemId"
                                         (onSelectionChange)="onPrepStatusChange($event)">
                                         {{ prepStatusOption.itemName }}
                                     </mat-option>
                                 </mat-select>
                             </mat-form-field>
                         </div>
-                        <div class="col-lg-4 col-sm-4 col-xs-12" *ngIf="Daterestartedvisible"> 
+                        <div class="col-lg-4 col-sm-4 col-xs-12" *ngIf="Daterestartedvisible">
                             <mat-form-field>
-                                <input matInput [max]="maxDate" placeholder="Prep Restart Date"  [matDatepicker]="daterestartedpicker"
-                                    (click)="daterestartedpicker.open()" id="daterestartedpicker" name="daterestartedpicker"
-                                    autocomplete="off" formControlName="DateRestarted" >
+                                <input matInput [max]="maxDate" placeholder="Prep Restart Date"
+                                    [matDatepicker]="daterestartedpicker" (click)="daterestartedpicker.open()"
+                                    id="daterestartedpicker" name="daterestartedpicker" autocomplete="off"
+                                    formControlName="DateRestarted">
                                 <mat-datepicker-toggle matSuffix [for]="daterestartedpicker"></mat-datepicker-toggle>
                                 <mat-datepicker #daterestartedpicker></mat-datepicker>
-            
+
                             </mat-form-field>
-            
+
                         </div>
                         <div class="col-lg-4 col-sm-4 col-xs-12" *ngIf="DateInitiatedvisible">
                             <mat-form-field>
-                                <input matInput [max]="maxDate" placeholder="Prep Start Date" [matDatepicker]="dateinitiatedpicker"
-                                    (click)="dateinitiatedpicker.open()" id="dateinitiatedpicker" name="dateinitiatedpicker"
-                                    autocomplete="off" formControlName="DateInitiated" >
+                                <input matInput [max]="maxDate" placeholder="Prep Start Date"
+                                    [matDatepicker]="dateinitiatedpicker" (click)="dateinitiatedpicker.open()"
+                                    id="dateinitiatedpicker" name="dateinitiatedpicker" autocomplete="off"
+                                    formControlName="DateInitiated">
                                 <mat-datepicker-toggle matSuffix [for]="dateinitiatedpicker"></mat-datepicker-toggle>
                                 <mat-datepicker #dateinitiatedpicker></mat-datepicker>
-            
+
                             </mat-form-field>
-            
-                            
+
+
                         </div>
                     </div>
-            
-            
+
+
                     <div class="row">
                         <div class="col-lg-4 col-sm-3 col-xs-12" style="padding-top:18px;">
                             <span class="col-lg-6 col-sm-6 col-xs-12">
@@ -628,7 +652,7 @@
                                 </a>
                             </span>
                         </div>
-            
+
                         <div class="col-lg-4 col-sm-3 col-xs-12">
                             <mat-form-field class="col-lg-12 col-sm-12 col-xs-12">
                                 <mat-label>Condoms Issued?:</mat-label>
@@ -641,12 +665,12 @@
                                 </mat-select>
                             </mat-form-field>
                         </div>
-            
+
                         <div class="col-lg-4 col-sm-3 col-xs-12">
                             <mat-form-field class="col-lg-12 col-sm-12 col-xs-12">
                                 <mat-label>No of condoms issued in units:</mat-label>
-                                <input matInput id="noCondomsIssued" formControlName="noCondomsIssued" name="noCondomsIssued"
-                                    type="number">
+                                <input matInput id="noCondomsIssued" formControlName="noCondomsIssued"
+                                    name="noCondomsIssued" type="number">
                             </mat-form-field>
                         </div>
                     </div>
@@ -664,28 +688,30 @@
                                 </mat-select>
                             </mat-form-field>
                         </div>
-            
+
                         <div class="col-lg-4 col-sm-3 col-xs-12">
                             <mat-form-field class="col-lg-12 col-sm-12 col-xs-12">
                                 <mat-label>Select</mat-label>
-                                <mat-select formControlName="signsOfSTI" id="signsOfSTI" name="signsOfSTI"   disableRipple multiple required>
-                                    <mat-option *ngFor="let stiScreeningOption of stiScreeningOptions"
-                                        [value]="stiScreeningOption.itemId" (onSelectionChange)="OnSTISelection($event)">
+                                <mat-select formControlName="signsOfSTI" id="signsOfSTI" name="signsOfSTI" disableRipple
+                                    multiple required>
+                                    <mat-option *ngFor="let stiScreeningOption of stiOptions"
+                                        [value]="stiScreeningOption.itemId"
+                                        (onSelectionChange)="OnSTISelection($event)">
                                         {{stiScreeningOption.itemDisplayName}}
                                     </mat-option>
                                 </mat-select>
                             </mat-form-field>
                         </div>
-                        
+
                         <div class="col-lg-6 col-sm-6 col-xs=12">
                             <mat-form-field class="col-lg-12 col-sm-12 col-xs-12">
                                 <textarea formControlName="Specify" matInput placeholder="Specify"></textarea>
                             </mat-form-field>
                         </div>
                     </div>
-            
+
                     <div class="row">&nbsp;</div>
-            
+
                     <div class="row">
                         <div class="col-lg-4 col-sm-3 col-xs-12">
                             <mat-form-field class="col-lg-12 col-sm-12 col-xs-12">
@@ -700,17 +726,21 @@
                                 </mat-select>
                             </mat-form-field>
                         </div>
-            
+
                         <div class="col-lg-6 col-sm-6 col-xs-12">
                             <span class="col-lg-6 col-sm-6 col-xs-12" *ngIf="hasLabBeenOrdered">
-                                <a  (click)="onLabClick()"  target=" _blank"
+                                <a routerLink="/clinical/completeorder/{{ patientId }}/{{ personId }}" target=" _blank"
                                     style="text-decoration: underline;">
                                     Lab Order Form
                                 </a>
+                                <!--<a  (click)="onLabClick()"  target=" _blank"
+                                    style="text-decoration: underline;">
+                                    Lab Order Form
+                                </a>-->
                             </span>
                         </div>
                     </div>
-            
+
                     <div class="row">
                         <div class="col-lg-4 col-sm-3 col-xs-12">
                             <mat-form-field class="col-lg-12 col-sm-12 col-xs-12">
@@ -727,9 +757,13 @@
                         </div>
                         <div class="col-lg-6 col-sm-6 col-xs-12">
                             <span class="col-lg-6 col-sm-6 col-xs-12" *ngIf="hasPharmacyBeenOrdered">
-                                <a (click)="onPharmacyClick()" style="text-decoration: underline;">
+                                <a routerLink="/pharm/{{ patientId }}/{{ personId }}" target=" _blank"
+                                    style="text-decoration: underline;">
                                     Pharmacy Order Form
                                 </a>
+                                <!--<a (click)="onPharmacyClick()" style="text-decoration: underline;">
+                                    Pharmacy Order Form
+                                </a>-->
                             </span>
                         </div>
                     </div>
@@ -748,20 +782,20 @@
                         </span>
                     </ng-template>
 
-                    <app-chronic-illnesses-table (notify)="onChroniIllnessNotify($event)"
-                        [patientId]="patientId" [personId]="personId">
+                    <app-chronic-illnesses-table (notify)="onChroniIllnessNotify($event)" [patientId]="patientId"
+                        [personId]="personId">
                     </app-chronic-illnesses-table>
 
                     <div class="row">&nbsp;</div>
 
-                    <app-allergies-table (notify)="onAllergiesNotify($event)"
-                        [patientId]="patientId" [personId]="personId">
+                    <app-allergies-table (notify)="onAllergiesNotify($event)" [patientId]="patientId"
+                        [personId]="personId">
                     </app-allergies-table>
 
                     <div class="row">&nbsp;</div>
 
-                    <app-adverse-events-table (notify)="onAdverseEventsNotify($event)"
-                        [patientId]="patientId" [personId]="personId">
+                    <app-adverse-events-table (notify)="onAdverseEventsNotify($event)" [patientId]="patientId"
+                        [personId]="personId">
                     </app-adverse-events-table>
 
                     <div class="row">&nbsp;</div>

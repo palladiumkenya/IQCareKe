@@ -339,6 +339,12 @@
     <None Remove="Scripts\2.2.0\37_htslabels.sql" />
     <None Remove="Scripts\2.2.0\38_labconfig.sql" />
     <None Remove="Scripts\2.2.0\39_ApiPatientCareEndingView.sql" />
+    <None Remove="Scripts\2.2.0\43_CorrectView.sql" />
+    <None Remove="Scripts\2.2.0\44_PREP_LookupItemsChanges.sql" />
+    <None Remove="Scripts\2.2.0\45_TreatmentProgram.sql" />
+    <None Remove="Scripts\2.2.0\46_UpdatePrepStatus.sql" />
+    <None Remove="Scripts\2.2.0\47_Add_PartnerHivStatusRow.sql" />
+    <None Remove="Scripts\2.2.0\48_AllergyView.sql" />
     <None Remove="Scripts\2.2.0\IQTools\01_PatientPopulationView.sql" />
     <None Remove="Scripts\2.2.0\IQTools\02_HTS_LABRegisternewer.sql" />
     <None Remove="Scripts\2.2.0\IQTools\03_ANCRegister.sql" />
@@ -703,6 +709,12 @@
     <EmbeddedResource Include="Scripts\2.2.0\37_htslabels.sql" />
     <EmbeddedResource Include="Scripts\2.2.0\38_labconfig.sql" />
     <EmbeddedResource Include="Scripts\2.2.0\39_ApiPatientCareEndingView.sql" />
+    <EmbeddedResource Include="Scripts\2.2.0\43_CorrectView.sql" />
+    <EmbeddedResource Include="Scripts\2.2.0\44_PREP_LookupItemsChanges.sql" />
+    <EmbeddedResource Include="Scripts\2.2.0\45_TreatmentProgram.sql" />
+    <EmbeddedResource Include="Scripts\2.2.0\46_UpdatePrepStatus.sql" />
+    <EmbeddedResource Include="Scripts\2.2.0\47_Add_PartnerHivStatusRow.sql" />
+    <EmbeddedResource Include="Scripts\2.2.0\48_AllergyView.sql" />
     <EmbeddedResource Include="Scripts\2.2.0\IQTools\01_PatientPopulationView.sql" />
     <EmbeddedResource Include="Scripts\2.2.0\IQTools\02_HTS_LABRegisternewer.sql" />
     <EmbeddedResource Include="Scripts\2.2.0\IQTools\03_ANCRegister.sql" />

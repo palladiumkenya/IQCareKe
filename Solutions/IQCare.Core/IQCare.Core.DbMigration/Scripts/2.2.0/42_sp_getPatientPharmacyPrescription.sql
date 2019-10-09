@@ -9,7 +9,7 @@ GO
 
 
 
-CREATE PROCEDURE [dbo].[sp_getPatientPharmacyPrescription]
+ALTER PROCEDURE [dbo].[sp_getPatientPharmacyPrescription]
 
 	@PatientMasterVisitID int = null
 

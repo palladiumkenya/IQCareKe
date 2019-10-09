@@ -15,6 +15,7 @@ import { ExitReasonsResolver } from './services/exitreasons.resolver';
 import { HTSEncounterHistoryResolver } from './services/getlatesthtsencounterhistory.resolver';
 import { PartnerCCCEnrollmentResolver, SexWithoutCondomResolver,PatientIdentifierResolver} from './services/hivpartnerdetails.resolver';
 import { CareendDetailsResolver } from './services/careendeddetails.resolver';
+import { GetpatientIdResolver } from './services/getpatientId.resolver';
 
 const routes: Routes = [
     {
@@ -87,7 +88,8 @@ const routes: Routes = [
                         resolve: {
                             PartnerCCCEnrollmentArray: PartnerCCCEnrollmentResolver,
                             SexWithoutCondomArray: SexWithoutCondomResolver,
-                            PatientIdentifierArray: PatientIdentifierResolver
+                            PatientIdentifierArray: PatientIdentifierResolver,
+                            PatientIdArray: GetpatientIdResolver
                             
                         }
 
@@ -100,7 +102,8 @@ const routes: Routes = [
                         resolve: {
                             PartnerCCCEnrollmentArray: PartnerCCCEnrollmentResolver,
                             SexWithoutCondomArray: SexWithoutCondomResolver,
-                            PatientIdentifierArray: PatientIdentifierResolver
+                            PatientIdentifierArray: PatientIdentifierResolver,
+                            PatientIdArray:GetpatientIdResolver
                         }
 
                     }

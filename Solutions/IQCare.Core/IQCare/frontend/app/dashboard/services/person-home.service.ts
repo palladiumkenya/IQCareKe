@@ -25,7 +25,7 @@ export class PersonHomeService {
     private API_PREPURL = environment.API_PREP_URL;
     private MATERNITY_API_URL = environment.API_PMTCT_URL;
     private API_PMTCT_URL = environment.API_PMTCT_URL;
-    private LAB_URL =environment.API_LAB_URL;
+    private LAB_URL = environment.API_LAB_URL;
 
     private _url = '/api/PatientServices/GetPatientByPersonId';
     private _htsurl = '/api/HtsEncounter';
@@ -52,7 +52,7 @@ export class PersonHomeService {
             catchError(this.errorHandler.handleError<PersonView>('getAllServices'))
         );
     }
-    
+
     public getPatientAdherenceOutcome(patientId: number) {
         return this.http.get<any[]>(this.API_PREPURL + '/api/PrepStatus/GetPatientAdherenceStatus/' +
             patientId).pipe(
@@ -201,7 +201,7 @@ export class PersonHomeService {
                 catchError(this.errorHandler.handleError<any>('getPatientEnrollmentMasterVisitByServiceAreaId'))
             );
     }
-   
+
 
     public getLabTestResults(patientId: number, status: string): Observable<any> {
         const url = status == null ? this.LAB_URL + '/api/LabOrder/GetLabTestResults?patientId=' + patientId :
@@ -344,21 +344,23 @@ export class PersonHomeService {
             );
     }
 
-    public AddHivPartnerProfile(PatientId: number, hivpartnerprofiles: any[]): Observable<any> {
-        if (hivpartnerprofiles.length == 0) {
-            return of([]);
-        }
+    public AddHivPartnerProfile(PatientId: number, hivpartnerprofiles: any[], createdby: number): Observable<any> {
+        //  if (hivpartnerprofiles.length == 0) {
+        //    return of([]);
+        //}
 
         const Indata = {
             'PatientId': PatientId,
+            'CreatedBy': createdby,
             'patientPartnerProfiles': hivpartnerprofiles
+
         };
 
-        return this.http.post<any>(this.API_PREPURL + 
+        return this.http.post<any>(this.API_PREPURL +
             '/api/HivPartnerProfile/AddHivPartnerProfile', JSON.stringify(Indata), httpOptions).pipe(
-            tap(saveHivPartnerProfile => this.errorHandler.log('Successfully saved hiv profile')),
-            catchError(this.errorHandler.handleError<any>('Error in saving Patient Partner Hiv Profiles'))
-        );
+                tap(saveHivPartnerProfile => this.errorHandler.log('Successfully saved hiv profile')),
+                catchError(this.errorHandler.handleError<any>('Error in saving Patient Partner Hiv Profiles'))
+            );
     }
 
     public getHivPartnerProfile(patientId: number): Observable<any> {

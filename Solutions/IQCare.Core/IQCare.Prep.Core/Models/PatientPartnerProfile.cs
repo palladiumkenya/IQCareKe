@@ -11,7 +11,7 @@ namespace IQCare.Prep.Core.Models
         public int PatientId { get; set; }
 
        
-
+        public int? PartnerHivStatus { get; set; }
 
 
          public DateTime?   HivPositiveStatusDate { get; set; }

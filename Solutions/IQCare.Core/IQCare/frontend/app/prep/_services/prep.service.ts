@@ -113,6 +113,18 @@ export class PrepService {
         );
     }
 
+    public DeleteAdverseEvents(id: any): Observable<any> {
+        const Indata = {
+            'Id': id
+        };
+        return this.http.post<any>(this.API_URL + '/api/AdverseEvents/DeleteAdverseEvents', JSON.stringify(Indata), httpOptions).pipe(
+            tap(deleteAdverseEvents => this.errorHandler.log('Successfully deleted adverse events')),
+            catchError(this.errorHandler.handleError<any>('Error in deleting Patient Adverse Events'))
+        );
+
+
+    }
+
     public getPatientAdverseEvents(patientId: number): Observable<any[]> {
         return this.http.get<any[]>(this.API_URL + '/api/AdverseEvents/GetPatientAdverseEvents/' + patientId).pipe(
             tap(getPatientAdverseEvents => this.errorHandler.log('Successfully fetched adverse events')),
@@ -134,6 +146,19 @@ export class PrepService {
             catchError(this.errorHandler.handleError<any>('Error in saving Patient Allergies'))
         );
     }
+    public DeleteAllergy(id: any): Observable<any> {
+        const Indata = {
+            'Id': id
+        };
+        return this.http.post<any>(this.API_URL + '/api/PatientAllergy/DeleteAllergy', JSON.stringify(Indata), httpOptions).pipe(
+            tap(deleteAllergy => this.errorHandler.log('Successfully deleted allergies')),
+            catchError(this.errorHandler.handleError<any>('Error in deleting Patient Allergies'))
+        );
+
+
+    }
+
+
 
     public getPatientAllergies(patientId: number): Observable<any[]> {
         return this.http.get<any[]>(this.API_URL + '/api/PatientAllergy/GetPatientAllergy/' + patientId).pipe(

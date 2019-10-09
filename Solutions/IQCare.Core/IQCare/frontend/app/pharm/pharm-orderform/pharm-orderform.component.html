@@ -250,7 +250,7 @@
                                         style="width:100%">
                                         <thead>
                                             <tr>
-                                                
+
                                                 <th><span class="text-primary">TreatmentProgram</span></th>
                                                 <th><span class="text-primary">Regimen</span> </th>
                                                 <th><span class="text-primary">RegimenLine</span></th>
@@ -293,9 +293,9 @@
                                                 <td *ngIf="visibleMorningEvening">{{item_data.Night}}</td>
                                                 <td>{{item_data.Duration}}</td>
                                                 <td>{{item_data.QuantityPres}}</td>
-                                                <td>{{item_data.QuantityDisp}}</td>
+                                                <td>{{item_data.QUantityDisp}}</td>
                                                 <td>{{item_data.Prophylaxis}}</td>
-                                                <td *ngIf="item_data.disabled">
+                                                <td *ngIf="!item_data.disabled">
                                                     <i style="cursor: pointer;" class="danger material-icons"
                                                         (click)="removeRow(index)">
                                                         delete

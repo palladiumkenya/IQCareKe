@@ -4526,6 +4526,28 @@
     <ListName>ARV Eligibility</ListName>
   </Mst_Decode>
   <Mst_Decode>
+    <ID>346</ID>
+    <Name>Cashier</Name>
+    <CodeID>214</CodeID>
+    <SRNo>1.00</SRNo>
+    <DeleteFlag>0</DeleteFlag>
+    <SystemId>0</SystemId>
+    <Code>6</Code>
+    <DisplayName>6 = Cashier</DisplayName>
+    <ListName>Waiting List</ListName>
+  </Mst_Decode>
+  <Mst_Decode>
+    <ID>333</ID>
+    <Name>Enrollment</Name>
+    <CodeID>1008</CodeID>
+    <SRNo>1.00</SRNo>
+    <DeleteFlag>0</DeleteFlag>
+    <SystemId>0</SystemId>
+    <Code>ENROLLMENT</Code>
+    <DisplayName>ENROLLMENT = Enrollment</DisplayName>
+    <ListName>Form Category</ListName>
+  </Mst_Decode>
+  <Mst_Decode>
     <ID>337</ID>
     <Name>Clinical Form</Name>
     <CodeID>1009</CodeID>
@@ -4610,17 +4632,6 @@
     <DeleteFlag>0</DeleteFlag>
     <SystemId>0</SystemId>
     <ListName>ServiceRegisteredForAtPharmacy</ListName>
-  </Mst_Decode>
-  <Mst_Decode>
-    <ID>333</ID>
-    <Name>Enrollment</Name>
-    <CodeID>1008</CodeID>
-    <SRNo>1.00</SRNo>
-    <DeleteFlag>0</DeleteFlag>
-    <SystemId>0</SystemId>
-    <Code>ENROLLMENT</Code>
-    <DisplayName>ENROLLMENT = Enrollment</DisplayName>
-    <ListName>Form Category</ListName>
   </Mst_Decode>
   <Mst_Decode>
     <ID>409</ID>
@@ -4709,6 +4720,15 @@
     <ListName>PharmacyUnit</ListName>
   </Mst_Decode>
   <Mst_Decode>
+    <ID>222</ID>
+    <Name>ART</Name>
+    <CodeID>33</CodeID>
+    <SRNo>1.00</SRNo>
+    <DeleteFlag>0</DeleteFlag>
+    <SystemId>0</SystemId>
+    <ListName>Treatment Program</ListName>
+  </Mst_Decode>
+  <Mst_Decode>
     <ID>235</ID>
     <Name>Self Discontinued</Name>
     <CodeID>34</CodeID>
@@ -4737,15 +4757,6 @@
     <DeleteFlag>0</DeleteFlag>
     <SystemId>0</SystemId>
     <ListName>ART Ended Reason</ListName>
-  </Mst_Decode>
-  <Mst_Decode>
-    <ID>222</ID>
-    <Name>ART</Name>
-    <CodeID>33</CodeID>
-    <SRNo>1.00</SRNo>
-    <DeleteFlag>0</DeleteFlag>
-    <SystemId>0</SystemId>
-    <ListName>Treatment Program</ListName>
   </Mst_Decode>
   <Mst_Decode>
     <ID>295</ID>
@@ -4778,17 +4789,6 @@
     <ListName>Laboratory Test Location</ListName>
   </Mst_Decode>
   <Mst_Decode>
-    <ID>346</ID>
-    <Name>Cashier</Name>
-    <CodeID>214</CodeID>
-    <SRNo>1.00</SRNo>
-    <DeleteFlag>0</DeleteFlag>
-    <SystemId>0</SystemId>
-    <Code>6</Code>
-    <DisplayName>6 = Cashier</DisplayName>
-    <ListName>Waiting List</ListName>
-  </Mst_Decode>
-  <Mst_Decode>
     <ID>303</ID>
     <Name>Outsourced-Government</Name>
     <CodeID>203</CodeID>
@@ -4819,15 +4819,6 @@
     <ListName>Cost Allocation Category</ListName>
   </Mst_Decode>
   <Mst_Decode>
-    <ID>223</ID>
-    <Name>PMTCT</Name>
-    <CodeID>33</CodeID>
-    <SRNo>2.00</SRNo>
-    <DeleteFlag>0</DeleteFlag>
-    <SystemId>0</SystemId>
-    <ListName>Treatment Program</ListName>
-  </Mst_Decode>
-  <Mst_Decode>
     <ID>145</ID>
     <Name>Treatment Failure-Virologic</Name>
     <CodeID>34</CodeID>
@@ -4836,6 +4827,15 @@
     <DeleteFlag>0</DeleteFlag>
     <SystemId>0</SystemId>
     <ListName>ART Ended Reason</ListName>
+  </Mst_Decode>
+  <Mst_Decode>
+    <ID>223</ID>
+    <Name>PMTCT</Name>
+    <CodeID>33</CodeID>
+    <SRNo>2.00</SRNo>
+    <DeleteFlag>0</DeleteFlag>
+    <SystemId>0</SystemId>
+    <ListName>Treatment Program</ListName>
   </Mst_Decode>
   <Mst_Decode>
     <ID>213</ID>
@@ -4874,17 +4874,6 @@
     <ListName>Patient Classification</ListName>
   </Mst_Decode>
   <Mst_Decode>
-    <ID>334</ID>
-    <Name>Consultation</Name>
-    <CodeID>1008</CodeID>
-    <SRNo>2.00</SRNo>
-    <DeleteFlag>0</DeleteFlag>
-    <SystemId>0</SystemId>
-    <Code>CONSULTATION</Code>
-    <DisplayName>CONSULTATION = Consultation</DisplayName>
-    <ListName>Form Category</ListName>
-  </Mst_Decode>
-  <Mst_Decode>
     <ID>395</ID>
     <Name>PEP</Name>
     <CodeID>1012</CodeID>
@@ -4904,6 +4893,17 @@
     <Code>FACILITY_REPORT</Code>
     <DisplayName>FACILITY_REPORT = Facility Report</DisplayName>
     <ListName>Feature Type</ListName>
+  </Mst_Decode>
+  <Mst_Decode>
+    <ID>334</ID>
+    <Name>Consultation</Name>
+    <CodeID>1008</CodeID>
+    <SRNo>2.00</SRNo>
+    <DeleteFlag>0</DeleteFlag>
+    <SystemId>0</SystemId>
+    <Code>CONSULTATION</Code>
+    <DisplayName>CONSULTATION = Consultation</DisplayName>
+    <ListName>Form Category</ListName>
   </Mst_Decode>
   <Mst_Decode>
     <ID>329</ID>
@@ -5101,6 +5101,17 @@
     <ListName>ARV Eligibility</ListName>
   </Mst_Decode>
   <Mst_Decode>
+    <ID>335</ID>
+    <Name>Care Termination</Name>
+    <CodeID>1008</CodeID>
+    <SRNo>3.00</SRNo>
+    <DeleteFlag>0</DeleteFlag>
+    <SystemId>0</SystemId>
+    <Code>CARE_END</Code>
+    <DisplayName>CARE_END = Care Termination</DisplayName>
+    <ListName>Form Category</ListName>
+  </Mst_Decode>
+  <Mst_Decode>
     <ID>339</ID>
     <Name>Patient Report</Name>
     <CodeID>1009</CodeID>
@@ -5120,17 +5131,6 @@
     <DeleteFlag>0</DeleteFlag>
     <SystemId>0</SystemId>
     <ListName>ServiceRegisteredForAtPharmacy</ListName>
-  </Mst_Decode>
-  <Mst_Decode>
-    <ID>335</ID>
-    <Name>Care Termination</Name>
-    <CodeID>1008</CodeID>
-    <SRNo>3.00</SRNo>
-    <DeleteFlag>0</DeleteFlag>
-    <SystemId>0</SystemId>
-    <Code>CARE_END</Code>
-    <DisplayName>CARE_END = Care Termination</DisplayName>
-    <ListName>Form Category</ListName>
   </Mst_Decode>
   <Mst_Decode>
     <ID>411</ID>
@@ -5170,6 +5170,15 @@
     <ListName>PharmacyUnit</ListName>
   </Mst_Decode>
   <Mst_Decode>
+    <ID>224</ID>
+    <Name>PEP</Name>
+    <CodeID>33</CodeID>
+    <SRNo>3.00</SRNo>
+    <DeleteFlag>0</DeleteFlag>
+    <SystemId>0</SystemId>
+    <ListName>Treatment Program</ListName>
+  </Mst_Decode>
+  <Mst_Decode>
     <ID>146</ID>
     <Name>Treatment Failure-Immunologic</Name>
     <CodeID>34</CodeID>
@@ -5178,15 +5187,6 @@
     <DeleteFlag>0</DeleteFlag>
     <SystemId>0</SystemId>
     <ListName>ART Ended Reason</ListName>
-  </Mst_Decode>
-  <Mst_Decode>
-    <ID>224</ID>
-    <Name>PEP</Name>
-    <CodeID>33</CodeID>
-    <SRNo>3.00</SRNo>
-    <DeleteFlag>0</DeleteFlag>
-    <SystemId>0</SystemId>
-    <ListName>Treatment Program</ListName>
   </Mst_Decode>
   <Mst_Decode>
     <ID>297</ID>
@@ -5229,15 +5229,20 @@
     <ListName>Laboratory Test Location</ListName>
   </Mst_Decode>
   <Mst_Decode>
-    <ID>347</ID>
-    <Name>Consultation</Name>
-    <CodeID>214</CodeID>
+    <ID>355</ID>
+    <Name>VisitType</Name>
+    <CodeID>202</CodeID>
     <SRNo>4.00</SRNo>
     <DeleteFlag>0</DeleteFlag>
-    <SystemId>0</SystemId>
-    <Code>1</Code>
-    <DisplayName>1 = Consultation</DisplayName>
-    <ListName>Waiting List</ListName>
+    <ListName>Item Type</ListName>
+  </Mst_Decode>
+  <Mst_Decode>
+    <ID>358</ID>
+    <Name>Lab Tests</Name>
+    <CodeID>202</CodeID>
+    <SRNo>4.00</SRNo>
+    <DeleteFlag>0</DeleteFlag>
+    <ListName>Item Type</ListName>
   </Mst_Decode>
   <Mst_Decode>
     <ID>308</ID>
@@ -5247,14 +5252,6 @@
     <UpdateFlag>0</UpdateFlag>
     <DeleteFlag>1</DeleteFlag>
     <SystemId>0</SystemId>
-    <ListName>Item Type</ListName>
-  </Mst_Decode>
-  <Mst_Decode>
-    <ID>355</ID>
-    <Name>VisitType</Name>
-    <CodeID>202</CodeID>
-    <SRNo>4.00</SRNo>
-    <DeleteFlag>0</DeleteFlag>
     <ListName>Item Type</ListName>
   </Mst_Decode>
   <Mst_Decode>
@@ -5268,15 +5265,6 @@
     <ListName>Cost Allocation Category</ListName>
   </Mst_Decode>
   <Mst_Decode>
-    <ID>225</ID>
-    <Name>Non-ART</Name>
-    <CodeID>33</CodeID>
-    <SRNo>4.00</SRNo>
-    <DeleteFlag>0</DeleteFlag>
-    <SystemId>0</SystemId>
-    <ListName>Treatment Program</ListName>
-  </Mst_Decode>
-  <Mst_Decode>
     <ID>147</ID>
     <Name>Treatment Failure-Clinical</Name>
     <CodeID>34</CodeID>
@@ -5285,6 +5273,15 @@
     <DeleteFlag>0</DeleteFlag>
     <SystemId>0</SystemId>
     <ListName>ART Ended Reason</ListName>
+  </Mst_Decode>
+  <Mst_Decode>
+    <ID>225</ID>
+    <Name>Non-ART</Name>
+    <CodeID>33</CodeID>
+    <SRNo>4.00</SRNo>
+    <DeleteFlag>0</DeleteFlag>
+    <SystemId>0</SystemId>
+    <ListName>Treatment Program</ListName>
   </Mst_Decode>
   <Mst_Decode>
     <ID>215</ID>
@@ -5323,6 +5320,17 @@
     <ListName>Patient Classification</ListName>
   </Mst_Decode>
   <Mst_Decode>
+    <ID>340</ID>
+    <Name>List</Name>
+    <CodeID>1009</CodeID>
+    <SRNo>4.00</SRNo>
+    <DeleteFlag>0</DeleteFlag>
+    <SystemId>0</SystemId>
+    <Code>LIST</Code>
+    <DisplayName>LIST = List</DisplayName>
+    <ListName>Feature Type</ListName>
+  </Mst_Decode>
+  <Mst_Decode>
     <ID>336</ID>
     <Name>Registration</Name>
     <CodeID>1008</CodeID>
@@ -5334,23 +5342,15 @@
     <ListName>Form Category</ListName>
   </Mst_Decode>
   <Mst_Decode>
-    <ID>358</ID>
-    <Name>Lab Tests</Name>
-    <CodeID>202</CodeID>
-    <SRNo>4.00</SRNo>
-    <DeleteFlag>0</DeleteFlag>
-    <ListName>Item Type</ListName>
-  </Mst_Decode>
-  <Mst_Decode>
-    <ID>340</ID>
-    <Name>List</Name>
-    <CodeID>1009</CodeID>
+    <ID>347</ID>
+    <Name>Consultation</Name>
+    <CodeID>214</CodeID>
     <SRNo>4.00</SRNo>
     <DeleteFlag>0</DeleteFlag>
     <SystemId>0</SystemId>
-    <Code>LIST</Code>
-    <DisplayName>LIST = List</DisplayName>
-    <ListName>Feature Type</ListName>
+    <Code>1</Code>
+    <DisplayName>1 = Consultation</DisplayName>
+    <ListName>Waiting List</ListName>
   </Mst_Decode>
   <Mst_Decode>
     <ID>368</ID>
@@ -5563,6 +5563,15 @@
     <ListName>PharmacyUnit</ListName>
   </Mst_Decode>
   <Mst_Decode>
+    <ID>379</ID>
+    <Name>PREP</Name>
+    <CodeID>33</CodeID>
+    <SRNo>5.00</SRNo>
+    <DeleteFlag>0</DeleteFlag>
+    <SystemId>1</SystemId>
+    <ListName>Treatment Program</ListName>
+  </Mst_Decode>
+  <Mst_Decode>
     <ID>148</ID>
     <Name>Non-adherence</Name>
     <CodeID>34</CodeID>
@@ -5573,15 +5582,6 @@
     <ListName>ART Ended Reason</ListName>
   </Mst_Decode>
   <Mst_Decode>
-    <ID>379</ID>
-    <Name>PREP</Name>
-    <CodeID>33</CodeID>
-    <SRNo>5.00</SRNo>
-    <DeleteFlag>0</DeleteFlag>
-    <SystemId>1</SystemId>
-    <ListName>Treatment Program</ListName>
-  </Mst_Decode>
-  <Mst_Decode>
     <ID>331</ID>
     <Name>Non-Pharmaceuticals</Name>
     <CodeID>202</CodeID>
@@ -5590,15 +5590,6 @@
     <DeleteFlag>0</DeleteFlag>
     <SystemId>0</SystemId>
     <ListName>Item Type</ListName>
-  </Mst_Decode>
-  <Mst_Decode>
-    <ID>380</ID>
-    <Name>HBV</Name>
-    <CodeID>33</CodeID>
-    <SRNo>6.00</SRNo>
-    <DeleteFlag>0</DeleteFlag>
-    <SystemId>1</SystemId>
-    <ListName>Treatment Program</ListName>
   </Mst_Decode>
   <Mst_Decode>
     <ID>356</ID>
@@ -5627,6 +5618,15 @@
     <DeleteFlag>0</DeleteFlag>
     <SystemId>0</SystemId>
     <ListName>ART Ended Reason</ListName>
+  </Mst_Decode>
+  <Mst_Decode>
+    <ID>380</ID>
+    <Name>HBV</Name>
+    <CodeID>33</CodeID>
+    <SRNo>6.00</SRNo>
+    <DeleteFlag>0</DeleteFlag>
+    <SystemId>1</SystemId>
+    <ListName>Treatment Program</ListName>
   </Mst_Decode>
   <Mst_Decode>
     <ID>387</ID>
@@ -5834,6 +5834,15 @@
     <ListName>PharmacyUnit</ListName>
   </Mst_Decode>
   <Mst_Decode>
+    <ID>413</ID>
+    <Name>Treatment</Name>
+    <CodeID>33</CodeID>
+    <SRNo>7.00</SRNo>
+    <DeleteFlag>0</DeleteFlag>
+    <SystemId>0</SystemId>
+    <ListName>Treatment Program</ListName>
+  </Mst_Decode>
+  <Mst_Decode>
     <ID>150</ID>
     <Name>Pregnancy</Name>
     <CodeID>34</CodeID>
@@ -5852,6 +5861,14 @@
     <ListName>Item Type</ListName>
   </Mst_Decode>
   <Mst_Decode>
+    <ID>359</ID>
+    <Name>Ward Admission</Name>
+    <CodeID>202</CodeID>
+    <SRNo>8.00</SRNo>
+    <DeleteFlag>0</DeleteFlag>
+    <ListName>Item Type</ListName>
+  </Mst_Decode>
+  <Mst_Decode>
     <ID>151</ID>
     <Name>Patient Preference</Name>
     <CodeID>34</CodeID>
@@ -5860,6 +5877,15 @@
     <DeleteFlag>0</DeleteFlag>
     <SystemId>0</SystemId>
     <ListName>ART Ended Reason</ListName>
+  </Mst_Decode>
+  <Mst_Decode>
+    <ID>414</ID>
+    <Name>prophylaxis</Name>
+    <CodeID>33</CodeID>
+    <SRNo>8.00</SRNo>
+    <DeleteFlag>0</DeleteFlag>
+    <SystemId>0</SystemId>
+    <ListName>Treatment Program</ListName>
   </Mst_Decode>
   <Mst_Decode>
     <ID>219</ID>
@@ -5889,14 +5915,6 @@
     <Code>MODULE_REPORT</Code>
     <DisplayName>MODULE_REPORT = Module Report</DisplayName>
     <ListName>Feature Type</ListName>
-  </Mst_Decode>
-  <Mst_Decode>
-    <ID>359</ID>
-    <Name>Ward Admission</Name>
-    <CodeID>202</CodeID>
-    <SRNo>8.00</SRNo>
-    <DeleteFlag>0</DeleteFlag>
-    <ListName>Item Type</ListName>
   </Mst_Decode>
   <Mst_Decode>
     <ID>372</ID>
