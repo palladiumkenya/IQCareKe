@@ -45,6 +45,10 @@ const routes: Routes = [
         loadChildren: '../prep/prep.module#PrepModule'
     },
     {
+        path: 'queue',
+        loadChildren: '../queue/queue.module#QueueModule'
+    },
+    {
         path: '**',
         component: NotFoundComponent
     }

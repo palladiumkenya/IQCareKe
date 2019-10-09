@@ -21,27 +21,27 @@
                                 <div class="col-md-3">
                                     <div class="form-group">
                                         <label class="sr-only" for="firstName">First Name</label>
-                                        <input type="text" autocomplete="off" class="form-control" id="firstName" name="firstName"
-                                            placeholder="First Name" tabindex="2" [(ngModel)]="clientSearch.firstName"
-                                            #firstName="ngModel">
+                                        <input type="text" autocomplete="off" class="form-control" id="firstName"
+                                            name="firstName" placeholder="First Name" tabindex="2"
+                                            [(ngModel)]="clientSearch.firstName" #firstName="ngModel">
                                     </div>
                                 </div>
 
                                 <div class="col-md-3">
                                     <div class="form-group">
                                         <label class="sr-only" for="middleName">Middle Name</label>
-                                        <input type="text" autocomplete="off" class="form-control" id="middleName" name="middleName"
-                                            placeholder="Middle Name" tabindex="3" [(ngModel)]="clientSearch.middleName"
-                                            #middleName="ngModel">
+                                        <input type="text" autocomplete="off" class="form-control" id="middleName"
+                                            name="middleName" placeholder="Middle Name" tabindex="3"
+                                            [(ngModel)]="clientSearch.middleName" #middleName="ngModel">
                                     </div>
                                 </div>
 
                                 <div class="col-md-3">
                                     <div class="form-group">
                                         <label class="sr-only" for="lastName">Last Name</label>
-                                        <input type="text" autocomplete="off" class="form-control" id="lastName" name="lastName"
-                                            placeholder="Last Name" tabindex="4" [(ngModel)]="clientSearch.lastName"
-                                            #lastName="ngModel">
+                                        <input type="text" autocomplete="off" class="form-control" id="lastName"
+                                            name="lastName" placeholder="Last Name" tabindex="4"
+                                            [(ngModel)]="clientSearch.lastName" #lastName="ngModel">
                                     </div>
                                 </div>
                             </div>
@@ -53,18 +53,19 @@
                                     <label class="sr-only" for="mobileNumber">Mobile Number</label>
                                     <div class="form-group">
                                         <input type="text" autocomplete="off" class="form-control" id="mobileNumber"
-                                            name="mobileNumber" placeholder="Mobile Number" tabindex="5" [(ngModel)]="clientSearch.mobileNumber"
-                                            #mobileNumber="ngModel">
+                                            name="mobileNumber" placeholder="Mobile Number" tabindex="5"
+                                            [(ngModel)]="clientSearch.mobileNumber" #mobileNumber="ngModel">
                                     </div>
                                 </div>
 
                                 <div class="col-md-3">
                                     <label class="sr-only" for="gender">Gender</label>
                                     <div class="form-group">
-                                        <select class="form-control" id="gender" tabindex="6" [(ngModel)]="clientSearch.sex"
-                                            name="gender">
+                                        <select class="form-control" id="gender" tabindex="6"
+                                            [(ngModel)]="clientSearch.sex" name="gender">
                                             <option [ngValue]="undefined" disabled selected>Gender</option>
-                                            <option *ngFor="let genderOption of genderOptions" [value]="genderOption.itemId">{{genderOption.itemName}}</option>
+                                            <option *ngFor="let genderOption of genderOptions"
+                                                [value]="genderOption.itemId">{{genderOption.itemName}}</option>
                                         </select>
                                     </div>
                                 </div>
@@ -73,10 +74,38 @@
                                     <label class="sr-only" for="age">Age</label>
                                     <div class="form-group">
                                         <input type="text" autocomplete="off" class="form-control" id="age" name="age"
-                                            placeholder="Age" tabindex="7" [(ngModel)]="clientSearch.age" #age="ngModel">
+                                            placeholder="Age" tabindex="7" [(ngModel)]="clientSearch.age"
+                                            #age="ngModel">
                                     </div>
                                 </div>
-
+                                
+                                <div class="col-md-3">
+                                    <label class="sr-only" for="gender">ServiceArea</label>
+                                    <div class="form-group">
+                                        <select class="form-control" id="serviceArea" [(ngModel)]="clientSearch.serviceArea" name="serviceArea">
+                                            <option [ngValue]="undefined" disabled selected>Service Area</option>
+                                            <option *ngFor="let serviceList of servicesList" [value]="serviceList.id">{{serviceList.name}}</option>
+                                        </select>
+                                    </div>
+                                </div>                                
+                            </div>
+                            
+                            <div class="row">
+                                &nbsp;
+                            </div>
+                            
+                            <div class="row">
+                                <div class="col-lg-3 col-md-3 col-sm-3">
+                                    &nbsp;
+                                </div>
+                                
+                                <div class="col-lg-3 col-md-3 col-sm-3">
+                                    &nbsp;
+                                </div>
+                                
+                                <div class="col-lg-3 col-md-3 col-sm-3">
+                                    &nbsp;
+                                </div>
                                 <div class="col-lg-3 col-md-3 col-sm-3">
                                     <div class="form-group">
                                         <button class="btn btn-primary m-t-n-xs" (click)="doSearch()">
@@ -148,7 +177,18 @@
                                         Person Home
                                     </a>
                                 </mat-cell>
+
                             </ng-container>
+                            <ng-container matColumnDef="Queue">
+                                <mat-header-cell *matHeaderCellDef></mat-header-cell>
+                                <mat-cell *matCellDef="let element" >
+                                    <a *ngIf='element.patientId > 0 && checkQueue()' (click)="addWaitingList(element)" mat-button class="primary"> 
+                                        AddToWaitingList
+                                         </a> </mat-cell>
+
+                            </ng-container>
+
+
 
                             <!-- Expanded Content Column - The detail row is made up of this one column -->
                             <ng-container matColumnDef="expandedDetail">
@@ -163,7 +203,8 @@
                             <mat-row *matRowDef="let row; columns: displayedColumns;" matRipple class="element-row"
                                 [class.expanded]="expandedElement == row" (click)="expandedElement = row"></mat-row>
                             <mat-row *matRowDef="let row; columns: ['expandedDetail']; when: isExpansionDetailRow"
-                                [@detailExpand]="row.element == expandedElement ? 'expanded' : 'collapsed'" style="overflow: hidden">
+                                [@detailExpand]="row.element == expandedElement ? 'expanded' : 'collapsed'"
+                                style="overflow: hidden">
                             </mat-row>
                         </mat-table>
 
@@ -172,7 +213,8 @@
                             [showFirstLastButtons]="true">
                         </mat-paginator>
 
-                        <div *ngIf="dataSource.data.length === 0 && afterSearch" style="background-color: #FFC200; width: 100%;">
+                        <div *ngIf="dataSource.data.length === 0 && afterSearch"
+                            style="background-color: #FFC200; width: 100%;">
                             <span style="font-size:16px; color: white;">
                                 No records found
                             </span>

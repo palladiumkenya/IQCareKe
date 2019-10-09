@@ -49,17 +49,16 @@ export class FormDetailsService {
 
        public getConfiguredReportingForms() {
         return this.http.get<any[]>(this.API_AIR_URL + '/api/ReportingForm/GetConfiguredReportingForms')
-        .subscribe(res=> 
-         {
-            this.activeConfiguredReportingForms.next(res)
-        })
+        .subscribe(res => {
+            this.activeConfiguredReportingForms.next(res);
+        });
        }
 
         public submitIndicatorResults(reportingdate: string, reportingformId: number
              , createdby: number , indicatorresults: any[]): Observable<any>{
          
             const IR = [];
-            if(indicatorresults.length == 0){
+            if (indicatorresults.length == 0){
                 return of([]);
             }
             

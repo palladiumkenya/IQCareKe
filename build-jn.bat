@@ -200,6 +200,15 @@ dotnet publish Solutions/IQCare.Core/IQCare.Pharm.WebApi/IQCare.Pharm.WebApi.csp
 
 
 
+@echo "********** Building IQCare Queue WEB **********" >> %log%
+@echo ********** Building IQCare Queue WEB **********
+
+dotnet publish Solutions/IQCare.Core/IQCare.Queue.Web/IQCare.Queue.Web.csproj -o ../../../package/queue
+
+@echo ********** END OF BUILINDING IQCare Queue WEB ********** >> %log%
+@echo ********** END OF BUILINDING IQCare Queue WEB ********** >> %log%
+
+
 dotnet publish Solutions/IQCare.Core/IQCare.Core.DbMigration/IQCare.Core.DbMigration.csproj -o ../../../Release/DbMigration/win-x64 -r win-x64
 dotnet publish Solutions/IQCare.Core/IQCare.Core.DbMigration/IQCare.Core.DbMigration.csproj -o ../../../Release/DbMigration/win-x86 -r win-x86
 

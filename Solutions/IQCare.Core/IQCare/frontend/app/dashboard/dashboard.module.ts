@@ -42,6 +42,10 @@ import { RiskEncounterResolver } from './services/riskencounter.resolver';
 import { PrepComponent } from './enrollment/service-areas/prep/prep.component';
 import { ReenrollmentComponent } from './reenrollment/reenrollment.component';
 import { PatientHtsComponent } from './patient-hts/patient-hts.component';
+import {AddWaitingListComponent} from '../shared/add-waiting-list/add-waiting-list.component';
+import { FacilityDashboardComponent } from './facility-dashboard/facility-dashboard.component';
+import {ChartsModule} from 'ng2-charts';
+import { HtsDashboardComponent } from './hts-dashboard/hts-dashboard.component';
 import { GetpatientIdResolver } from './services/getpatientId.resolver';
 
 @NgModule({
@@ -67,6 +71,7 @@ import { GetpatientIdResolver } from './services/getpatientId.resolver';
         MatProgressBarModule, MatProgressSpinnerModule, MatRadioModule, MatRippleModule,
         MatSelectModule, MatSidenavModule, MatSliderModule, MatSlideToggleModule,
         MatSnackBarModule, MatStepperModule, MatTabsModule, MatToolbarModule, MatTooltipModule,
+        ChartsModule
     ],
     declarations: [
         PortalComponent,
@@ -81,7 +86,9 @@ import { GetpatientIdResolver } from './services/getpatientId.resolver';
         CccComponent,
         PrepComponent,
         ReenrollmentComponent,
-        PatientHtsComponent
+        PatientHtsComponent,
+        FacilityDashboardComponent,
+        HtsDashboardComponent
     ],
     providers: [
         NotificationService,
@@ -102,10 +109,8 @@ import { GetpatientIdResolver } from './services/getpatientId.resolver';
         GetpatientIdResolver
 
     ],
-
     entryComponents: [
-        PatientHtsComponent
-    ]
-
+        PatientHtsComponent, AddWaitingListComponent
+    ],
 })
 export class DashboardModule { }
