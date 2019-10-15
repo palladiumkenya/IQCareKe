@@ -41,7 +41,8 @@ namespace IQCare.PMTCT.BusinessProcess.CommandHandlers.pregnancy
                         pregnancyView.Parity = result.Parity;
                         pregnancyView.Parity2 = result.Parity2;
                         pregnancyView.Outcome = result.Outcome;
-                        pregnancyView.DateOfOutcome = result.DateOfOutcome;                                          
+                        pregnancyView.DateOfOutcome = result.DateOfOutcome;
+                        pregnancyView.AgeAtMenarche = result.AgeAtMenarche;
                     }
 
                    return   Result<PregnancyViewModel>.Valid(pregnancyView);

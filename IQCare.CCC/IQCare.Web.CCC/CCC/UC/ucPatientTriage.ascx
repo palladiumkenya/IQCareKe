@@ -226,6 +226,7 @@
 						            <th><span class="text-primary">Pulse Rate</span></th>
                                     <th><span class="text-primary">Respiration Rate</span></th>
 						            <th><span class="text-primary">SPOC (%)</span></th>
+                                    <th><span class="text-primary">Nurses Comments</span></th>
 					            </tr>
 				            </thead>
 				            <tbody></tbody>

@@ -17,6 +17,7 @@ export class DiagnosisComponent implements OnInit {
     @Input('isEdit') isEdit: boolean;
     @Input('PatientId') PatientId: number;
     @Input('PatientMasterVisitId') PatientMasterVisitId: number;
+    @Input() diagnosisPlaceholder: string;
 
     constructor(private _formBuilder: FormBuilder,
         private _lookupItemService: LookupItemService,
@@ -32,7 +33,6 @@ export class DiagnosisComponent implements OnInit {
         });
 
         this.notify.emit(this.PatientdiagnosisFormGroup);
-        console.log('Master Visit Id ' + this.PatientMasterVisitId);
         if (this.isEdit) {
             this.getPatientDiagnosisInfo(this.PatientMasterVisitId);
         }
@@ -46,8 +46,6 @@ export class DiagnosisComponent implements OnInit {
                     if (diag != null) {
                         this.PatientdiagnosisFormGroup.controls['diagnosis'].setValue(diag.diagnosis);
                         this.PatientdiagnosisFormGroup.controls['diagnosisId'].setValue(diag.id);
-
-
                     }
                 },
                 (err) => {

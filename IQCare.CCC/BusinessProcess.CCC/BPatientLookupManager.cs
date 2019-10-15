@@ -459,5 +459,16 @@ namespace BusinessProcess.CCC
             }
 
         }
+
+        public DataTable GetPatientStatus(int ptn_pk)
+        {
+            ClsObject obj = new ClsObject();
+            ClsUtility.Init_Hashtable();
+            ClsUtility.AddExtendedParameters("@ptn_pk", SqlDbType.Int, ptn_pk);
+
+
+            DataTable dt = (DataTable)obj.ReturnObject(ClsUtility.theParams, "GetPatientPharmacyStatus", ClsUtility.ObjectEnum.DataTable);
+            return dt;
+        }
     }
 }

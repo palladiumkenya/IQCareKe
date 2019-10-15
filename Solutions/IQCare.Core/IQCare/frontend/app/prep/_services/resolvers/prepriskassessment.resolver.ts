@@ -315,6 +315,64 @@ export class PrepDeclineResolver implements Resolve<Observable<LookupItemView[]>
 
 
 
+@Injectable()
+export class SpecifyRiskEducationResolver implements Resolve<Observable<LookupItemView[]>> {
+    /**
+     *
+     */
+    constructor(private lookupItemService: LookupItemService) {
+
+    }
+
+    public resolve(
+        route: ActivatedRouteSnapshot,
+        state: RouterStateSnapshot
+    ): Observable<LookupItemView[]> {
+        return this.lookupItemService.getByGroupName('SpecifyRiskEducation');
+    }
+}
+
+
+@Injectable()
+export class SpecifyRiskReductionEducationResolver implements Resolve<Observable<LookupItemView[]>> {
+    /**
+     *
+     */
+    constructor(private lookupItemService: LookupItemService) {
+
+    }
+
+    public resolve(
+        route: ActivatedRouteSnapshot,
+        state: RouterStateSnapshot
+    ): Observable<LookupItemView[]> {
+        return this.lookupItemService.getByGroupName('SpecifyRiskReductionEducation');
+    }
+}
+
+
+
+
+@Injectable()
+export class SpecifyReferralPreventionServicesResolver implements Resolve<Observable<LookupItemView[]>> {
+    /**
+     *
+     */
+    constructor(private lookupItemService: LookupItemService) {
+
+    }
+
+    public resolve(
+        route: ActivatedRouteSnapshot,
+        state: RouterStateSnapshot
+    ): Observable<LookupItemView[]> {
+        return this.lookupItemService.getByGroupName('SpecifyReferralPreventionServices');
+    }
+}
+
+
+
+
 
 
 

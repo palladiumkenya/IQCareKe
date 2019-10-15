@@ -177,7 +177,9 @@ export class AncComponent implements OnInit, OnDestroy {
         this.getLookupItems('DrugAdministrationANC', this.drugOptions);
         this.lookupItemService.getByGroupNameAndItemName('HTSEntryPoints', 'PMTCT').subscribe(
             (res) => {
-                this.hivTestEntryPoint = res['itemId'];
+                if (res.length > 0) {
+                    this.hivTestEntryPoint = res[0]['itemId'];
+                }                
             }
         );
 
@@ -290,6 +292,7 @@ export class AncComponent implements OnInit, OnDestroy {
     onHivStatusNotify(formGroup: Object): void {
         this.HivStatusMatFormGroup.push(formGroup['form']); // = formGroup['form'];
         this.hiv_status_table_data.push(formGroup['table_data']);
+        console.log(this.hiv_status_table_data);
     }
 
     onClientMonitoringNotify(formGroup: FormGroup): void {
@@ -308,21 +311,6 @@ export class AncComponent implements OnInit, OnDestroy {
 
     onReferralNotify(formGroup: FormGroup): void {
         this.ReferralMatFormGroup.push(formGroup);
-    }
-
-    validateHaartProphylaxisMatFormGroup(stepper: MatStepper) {
-        this.dataservice.currentHivStatus.subscribe(hivStatus => {
-            if (hivStatus !== '' && hivStatus != 'Positive') {
-                stepper.next();
-            } else {
-                if (this.HaartProphylaxisMatFormGroup.valid) {
-                    stepper.next();
-                } else {
-                    return;
-                }
-            }
-        });
-
     }
 
     public getPatientPregnancy(patientId: number) {
@@ -344,12 +332,13 @@ export class AncComponent implements OnInit, OnDestroy {
     }
 
     public checkEducationFilled(stepper: MatStepper) {
-        if (this.counselling_data.length < 1) {
+        /*if (this.counselling_data.length < 1) {
             this.snotifyService.error('Add Counselling data', 'ANC', this.notificationService.getConfig());
 
         } else {
             stepper.next();
-        }
+        } */
+        stepper.next();
     }
 
     public checkChroniIllnessAdded(stepper: MatStepper) {
@@ -375,7 +364,6 @@ export class AncComponent implements OnInit, OnDestroy {
         if (!this.isEdit) {
             if (this.preventiServicesData.length < 1) {
                 this.snotifyService.error('Add preventive service data', 'ANC', this.notificationService.getConfig());
-
             } else {
                 stepper.next();
             }
@@ -444,6 +432,7 @@ export class AncComponent implements OnInit, OnDestroy {
             Gravidae: this.visitDetailsFormGroup.value[1]['gravidae'],
             Parity: this.visitDetailsFormGroup.value[1]['parityOne'],
             Parity2: this.visitDetailsFormGroup.value[1]['parityTwo'],
+            AgeAtMenarche: this.visitDetailsFormGroup.value[1]['ageAtMenarche'],
             CreatedBy: this.userId
         } as PregnancyAncCommand;
 
@@ -474,6 +463,9 @@ export class AncComponent implements OnInit, OnDestroy {
             PatientMasterVisitId: this.patientMasterVisitId,
             BreastExamDone: this.PatientEducationMatFormGroup.value['breastExamDone'],
             TreatedSyphilis: this.PatientEducationMatFormGroup.value['treatedSyphilis'],
+            TestedForSyphilis: this.PatientEducationMatFormGroup.value['testedSyphilis'],
+            SyphilisTestUsed: this.PatientEducationMatFormGroup.value['SyphilisTestUsed'],
+            SyphilisResults: this.PatientEducationMatFormGroup.value['SyphilisResults'],
             CreateBy: this.userId,
             CounsellingTopics: this.counselling_data
         };
@@ -484,6 +476,9 @@ export class AncComponent implements OnInit, OnDestroy {
             PregnancyId: this.pregnancyId,
             HivStatusBeforeAnc: this.HivStatusMatFormGroup.value[0]['hivStatusBeforeFirstVisit'],
             TreatedForSyphilis: this.PatientEducationMatFormGroup.value['treatedSyphilis'],
+            TestedForSyphilis: this.PatientEducationMatFormGroup.value['testedSyphilis'],
+            SyphilisTestUsed: this.PatientEducationMatFormGroup.value['SyphilisTestUsed'],
+            SyphilisResults: this.PatientEducationMatFormGroup.value['SyphilisResults'],            
             BreastExamDone: this.PatientEducationMatFormGroup.value['breastExamDone'],
             CreatedBy: this.userId
         } as BaselineAncProfileCommand;
@@ -492,6 +487,7 @@ export class AncComponent implements OnInit, OnDestroy {
         const noOption = this.yesNoOptions.filter(obj => obj.itemName == 'No');
         const naOption = this.yesNoNaOptions.filter(obj => obj.itemName == 'N/A');
 
+        console.log(this.hiv_status_table_data);
         const hivStatusCommand: HivStatusCommand = {
             PersonId: this.personId,
             ProviderId: this.userId,
@@ -514,7 +510,9 @@ export class AncComponent implements OnInit, OnDestroy {
             ServiceAreaId: this.serviceAreaId,
             EncounterTypeId: 1,
             EncounterDate: this.visitDetailsFormGroup.value[0]['visitDate'],
-            EncounterType: this.HivStatusMatFormGroup.value[0]['testType']
+            EncounterType: this.HivStatusMatFormGroup.value[0]['testType'],
+            HivCounsellingDone: yesOption[0].itemId,
+            OtherDisability: ''
         };
 
         const hivTestsCommand: HivTestsCommand = {
@@ -544,6 +542,8 @@ export class AncComponent implements OnInit, OnDestroy {
                     ExpiryDate: this.hiv_status_table_data[i][j]['expirydate'],
                     Outcome: this.hiv_status_table_data[i][j]['testresult']['itemId'],
                     TestRound: this.hiv_status_table_data[i][j]['testtype']['itemName'] == 'HIV Test-1' ? 1 : 2,
+                    SyphilisResult: this.hiv_status_table_data[i][j]['SyphilisResult'] ?
+                        this.hiv_status_table_data[i][j]['SyphilisResult']['itemId'] : null
                 });
             }
         }
@@ -560,7 +560,7 @@ export class AncComponent implements OnInit, OnDestroy {
             ScreeningTypeId: 0,
             ScreeningDone: (yesOption[0].itemId == screeningDone) ? true : false,
             ScreeningDate: new Date(),
-            ViralLoadSampleTaken: viralLoadSampleTaken, // (yesOption[0].itemId == viralLoadSampleTaken) ? true : false,
+            ViralLoadSampleTaken: viralLoadSampleTaken,
             ScreenedTB: this.ClientMonitoringMatFormGroup.value[0]['screenedForTB'],
             CaCxMethod: (yesOption[0].itemId == screeningDone) ? this.ClientMonitoringMatFormGroup.value[0]['cacxMethod'] : 0,
             CaCxResult: (yesOption[0].itemId == screeningDone) ? this.ClientMonitoringMatFormGroup.value[0]['cacxResult'] : 0,
@@ -709,10 +709,7 @@ export class AncComponent implements OnInit, OnDestroy {
                 AppointmentReason: 'None'
             } as PatientAppointment;
         }
-
-
-        // const AncPregnancy = this.ancService.savePregnancy(pregnancyCommand);
-        // const ancVisitDetails = this.ancService.saveANCVisitDetails(ancVisitDetailsCommand);
+        
         const visitDetails = this.ancService.saveVisitDetails(visitDetailsCommand);
         const baseline = this.ancService.SaveBaselineProfile(baselineAncCommand);
         const ancEducation = this.ancService.savePatientEducation(patientEducationCommand);
@@ -750,6 +747,9 @@ export class AncComponent implements OnInit, OnDestroy {
                         HivStatusBeforeAnc: this.HivStatusMatFormGroup.value[0]['hivStatusBeforeFirstVisit'],
                         TreatedForSyphilis: this.PatientEducationMatFormGroup.value['treatedSyphilis'],
                         BreastExamDone: this.PatientEducationMatFormGroup.value['breastExamDone'],
+                        TestedForSyphilis: this.PatientEducationMatFormGroup.value['testedSyphilis'],
+                        SyphilisTestUsed: this.PatientEducationMatFormGroup.value['SyphilisTestUsed'],
+                        SyphilisResults: this.PatientEducationMatFormGroup.value['SyphilisResults'],
                         CreatedBy: this.userId
                     } as BaselineAncProfileCommand;
 
@@ -816,7 +816,6 @@ export class AncComponent implements OnInit, OnDestroy {
                         hivTestsCommand.PatientMasterVisitId = result[3]['patientMasterVisitId'];
                         const ancHivResultsCommand = this.ancService.saveHivResults(hivTestsCommand).subscribe(
                             (testRes) => {
-                                // console.log(testRes);
                             }
                         );
 
@@ -880,12 +879,14 @@ export class AncComponent implements OnInit, OnDestroy {
             PregnancyId: this.pregnancyId,
             HivStatusBeforeAnc: this.HivStatusMatFormGroup.value[0]['hivStatusBeforeFirstVisit'],
             TreatedForSyphilis: this.PatientEducationMatFormGroup.value['treatedSyphilis'],
+            TestedForSyphilis: this.PatientEducationMatFormGroup.value['testedSyphilis'],
             BreastExamDone: this.PatientEducationMatFormGroup.value['breastExamDone'],
+            SyphilisTestUsed: this.PatientEducationMatFormGroup.value['SyphilisTestUsed'],
+            SyphilisResults: this.PatientEducationMatFormGroup.value['SyphilisResults'],
             CreatedBy: this.userId
         } as BaselineAncProfileCommand;
 
         for (let i = 0; i < this.counselling_data.length; i++) {
-
             this.counselling_data_form.push({
                 CounsellingTopic: this.counselling_data[i]['counsellingTopic'],
                 CounsellingTopicId: this.counselling_data[i]['counsellingTopicId'],
@@ -899,9 +900,38 @@ export class AncComponent implements OnInit, OnDestroy {
             PatientMasterVisitId: this.patientMasterVisitId,
             BreastExamDone: this.PatientEducationMatFormGroup.value['breastExamDone'],
             TreatedSyphilis: this.PatientEducationMatFormGroup.value['treatedSyphilis'],
+            TestedForSyphilis: this.PatientEducationMatFormGroup.value['testedSyphilis'],
+            SyphilisTestUsed: this.PatientEducationMatFormGroup.value['SyphilisTestUsed'],
+            SyphilisResults: this.PatientEducationMatFormGroup.value['SyphilisResults'],
             CreateBy: this.userId,
             CounsellingTopics: this.counselling_data
         };
+
+        const yesno = this.yesNoOptions.filter(x => x.itemName == 'Yes');
+        const otherIllnessOption = this.HaartProphylaxisMatFormGroup.value[0]['otherIllness'];
+
+        if (otherIllnessOption == yesno[0]['itemId']) {
+            for (let z = 0; z < this.chronicIllnessData.length; z++) {
+
+                this.chronic_illness_data.push({
+                    Id: 0,
+                    PatientId: this.patientId,
+                    PatientMasterVisitId: this.patientMasterVisitId,
+                    ChronicIllness: this.chronicIllnessData[z]['chronicIllnessId'],
+                    Treatment: this.chronicIllnessData[z]['currentTreatment'],
+                    // Dose: this.chronicIllnessData[i]['dose'],
+                    Dose: 0,
+                    Duration: 0,
+                    DeleteFlag: false,
+                    OnsetDate: moment(this.chronicIllnessData[z]['onSetDate']).toDate(),
+                    Active: 0,
+                    CreateBy: this.userId
+                });
+            }
+        } else {
+            this.chronic_illness_data = [];
+        }
+
 
         const clientMonitoringCommandEdit: any = {
             PatientId: this.patientId,
@@ -999,13 +1029,28 @@ export class AncComponent implements OnInit, OnDestroy {
             appointment = pncAppointmentEdit;
         }
 
+        for (let z = 0; z < this.chronicIllnessData.length; z++) {
+            this.chronic_illness_data.push({
+                Id: 0,
+                PatientId: this.patientId,
+                PatientMasterVisitId: this.patientMasterVisitId,
+                ChronicIllness: this.chronicIllnessData[z]['chronicIllnessId'],
+                Treatment: this.chronicIllnessData[z]['currentTreatment'],
+                Dose: 0,
+                Duration: 0,
+                DeleteFlag: false,
+                OnsetDate: moment(this.chronicIllnessData[z]['onSetDate']).toDate(),
+                Active: 0,
+                CreateBy: this.userId
+            });
+        }
+
+        const chronicIllness = this.ancService.savePatientChronicIllness(this.chronic_illness_data);
         const AncvisitDetailsEdit = this.ancService.EditANCVisitDetails(ancVisitDetailsCommandEdit);
         const visitDetailsEdit = this.ancService.EditVisitDetails(VisitDetails);
         const baselineEdit = this.ancService.EditBaselineProfile(baselineAncCommandEdit);
         const ancEducation = this.ancService.savePatientEducation(patientEducationCommand);
         const ancClientMonitoringEdit = this.ancService.EditClientMonitoring(clientMonitoringCommandEdit);
-
-        // const PatientAppointmentEdit = this.ancService.EditAppointment(this.appointmentCommand);
         const referralEdit = this.ancService.EditReferral(referralEditCommand);
 
         forkJoin([
@@ -1015,8 +1060,8 @@ export class AncComponent implements OnInit, OnDestroy {
             ancEducation,
             ancClientMonitoringEdit,
             appointment,
-            referralEdit
-
+            referralEdit,
+            chronicIllness
         ]).subscribe(
             (result) => {
                 this.spinner.hide();

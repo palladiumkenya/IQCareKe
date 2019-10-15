@@ -24,13 +24,12 @@ namespace IQCare.Common.Core.Models
 
             public DateTime CreateDate { get; set; }
 
-            public int? Weeks { get; set; }
+           // public int? Weeks { get; set; }
 
             public int? Months { get; set; }
 
             public DateTime? InitiationDate { get; set; }
 
-           public int? RegimenUse { get; set; }
            
          
         }

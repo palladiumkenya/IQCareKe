@@ -63,6 +63,21 @@ export class MaternalDrugAdministrationComponent implements OnInit {
                 this.maternalDrugAdministrationFormGroup.get('Cotrimoxazole').disable({ onlySelf: true });
                 this.maternalDrugAdministrationFormGroup.get('InfantProvidedWithARVprophylaxis').disable({ onlySelf: true });
                 this.maternalDrugAdministrationFormGroup.get('id').setValue('0');
+
+                this.maternalDrugAdministrationFormGroup.get('VitaminASupplementation').clearValidators();
+                this.maternalDrugAdministrationFormGroup.get('VitaminASupplementation').updateValueAndValidity();
+
+                this.maternalDrugAdministrationFormGroup.get('StartedHAARTinANC').clearValidators();
+                this.maternalDrugAdministrationFormGroup.get('StartedHAARTinANC').updateValueAndValidity();
+
+                this.maternalDrugAdministrationFormGroup.get('ARVsStartedinMaternity').clearValidators();
+                this.maternalDrugAdministrationFormGroup.get('ARVsStartedinMaternity').updateValueAndValidity();
+
+                this.maternalDrugAdministrationFormGroup.get('Cotrimoxazole').clearValidators();
+                this.maternalDrugAdministrationFormGroup.get('Cotrimoxazole').updateValueAndValidity();
+
+                this.maternalDrugAdministrationFormGroup.get('InfantProvidedWithARVprophylaxis').clearValidators();
+                this.maternalDrugAdministrationFormGroup.get('InfantProvidedWithARVprophylaxis').updateValueAndValidity();
             } else {
                 this.maternalDrugAdministrationFormGroup.get('VitaminASupplementation').enable({ onlySelf: false });
                 this.maternalDrugAdministrationFormGroup.get('StartedHAARTinANC').enable({ onlySelf: false });

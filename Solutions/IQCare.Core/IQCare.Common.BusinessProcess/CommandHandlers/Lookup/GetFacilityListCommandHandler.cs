@@ -60,7 +60,8 @@ namespace IQCare.Common.BusinessProcess.CommandHandlers.Lookup
                        {
                            Id = x.FacilityID,
                            Name = x.FacilityName,
-                           PositionId = x.PosID
+                           PositionId = x.PosID,
+                           Frequency=x.Frequency
                        }).SingleOrDefault();
 
                 return Task.FromResult(Result<FacilityViewModel>.Valid(activeFacility));

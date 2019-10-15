@@ -73,7 +73,7 @@
                             <div class="col-lg-3 col-sm-3 col-xs-12">
                                 <mat-form-field class="col-lg-12 col-sm-12 col-xs-12">
 
-                                    <mat-label>Year</mat-label>
+                                    <mat-label>Enrollment Year</mat-label>
                                     <mat-select formControlName="Year">
                                         <mat-option [value]=""></mat-option>
                                         <mat-option *ngFor="let yrs of  years" [value]="yrs">
@@ -157,12 +157,13 @@
                             <div class="col-lg-3 col-sm-3 col-xs-12">
                                 <mat-form-field class="col-lg-12 col-sm-12 col-xs-12">
                                     <mat-label>MFLCode</mat-label>
-                                    <input matInput id="TransferInMflCode" formControlName="TransferInMflCode" 
-                                        name="TransferInMflCode" type="number"  [matAutocomplete]="mflauto">
-                                    <mat-autocomplete #mflauto="matAutocomplete"  [displayWith]="displaymflcode"
+                                    <input matInput id="TransferInMflCode" formControlName="TransferInMflCode"
+                                        name="TransferInMflCode" type="number" [matAutocomplete]="mflauto">
+                                    <mat-autocomplete #mflauto="matAutocomplete" [displayWith]="displaymflcode"
                                         (optionSelected)="changemflcode($event)">
 
-                                        <mat-option *ngFor="let facility of filteredfacilities" [value]="facility.mflCode">
+                                        <mat-option *ngFor="let facility of filteredfacilities"
+                                            [value]="facility.mflCode">
                                             {{facility.mflCode}} -{{facility.name}}
                                         </mat-option>
 
@@ -192,7 +193,9 @@
                             </mat-form-field>
                         </div>
                     </div>
-                    <div class="row">
+
+
+                    <div class="row" *ngIf="isSchoolVisible">
                         <div class="col-md-12">
                             <div class="form-title">
                                 <span class="primary">
@@ -201,6 +204,8 @@
                             </div>
                         </div>
                     </div>
+
+
                     <div class="row">
                         <div class="col-lg-3 col-sm-3 col-xs-12" *ngIf="isSchoolVisible">
                             <mat-form-field class="col-lg-12 col-sm-12 col-xs-12">
@@ -213,7 +218,10 @@
                             </mat-form-field>
                         </div>
 
-                        <div class="col-lg-3 col-sm-3 col-xs-12">
+                        <div class="col-lg-3 col -sm-3 col-xs-12">
+
+                        </div>
+                        <!-- <div class="col-lg-3 col-sm-3 col-xs-12">
                             <label>Select Population type</label>
                             <div>
                                 <mat-radio-group class="col-lg-12 col-sm-12 col-xs-12" formControlName="populationType"
@@ -237,19 +245,561 @@
                                         {{keyPop.itemDisplayName}}</mat-option>
                                 </mat-select>
                             </mat-form-field>
+                        </div>-->
+
+
+
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-title">
+                                <span class="primary">
+                                    HIV Positive Partner Profile
+                                </span>
+                            </div>
                         </div>
 
-                        <div class="col-lg-3 col-sm-3 col-xs-12">
-                            <mat-form-field>
-                                <mat-select class="col-lg-12 col-sm-12 col-xs-12" placeholder="Discordant Couple"
-                                    formControlName="DiscordantCouple" disableRipple multiple>
-                                    <mat-option *ngFor="let disPop of disPops" [value]="disPop.itemId">
-                                        {{disPop.itemDisplayName}}</mat-option>
+                    </div>
+                     <div class='row'>
+                        <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+                            <mat-form-field class="col-lg-12">
+                                <mat-select placeholder="Partner HIV Status before this visit?" formControlName="PartnerHivStatus" >
+                                    <mat-option [value]=-1></mat-option>
+                                    <mat-option *ngFor="let Option of partnerhivstatusOptions"
+                                        [value]="Option.itemId"
+                                        (onSelectionChange)="OnPartnerHivSelection($event)">
+                                        {{Option.itemDisplayName}}
+                                    </mat-option>
                                 </mat-select>
+                            </mat-form-field>
+
+
+                        </div>
+                     </div>
+                    <div class="row">
+                        <div class="col-lg-4 col-md-3 col-sm-6 col-xs-12">
+                            <mat-form-field class="col-lg-12">
+                                <input matInput [matDatepicker]="partnerpicker" [max]="maxDate"
+                                    (focus)="partnerpicker.open()" formControlName="partnerHivStatusDate"
+                                    placeholder="When did you establish your partner HIV Positive Status?">
+                                <mat-datepicker-toggle matSuffix [for]="partnerpicker"></mat-datepicker-toggle>
+                                <mat-datepicker #partnerpicker></mat-datepicker>
+                            </mat-form-field>
+                        </div>
+
+                        <div class="col-lg-4 col-md-3 col-sm-6 col-xs-12">
+                            <mat-form-field class="col-lg-12">
+                                <mat-select placeholder="Partner CCC Enrollment" formControlName="partnercccenrollment">
+                                    <mat-option [value]=-1></mat-option>
+                                    <mat-option *ngFor="let yesNoOption of partnercccenrollmentoptions"
+                                        [value]="yesNoOption.itemId"
+                                        (onSelectionChange)="OnPartnerenrollmentSelection($event)">
+                                        {{yesNoOption.itemDisplayName}}
+                                    </mat-option>
+                                </mat-select>
+                            </mat-form-field>
+
+
+                        </div>
+
+                        <div class="col-lg-4 col-md-3 col-sm-6 col-xs-12">
+                            <mat-form-field class="col-lg-12">
+                                <input type="text" matInput placeholder="CCCNumber" formControlName="CCCNumber" />
+                                <span>
+                                    <div *ngIf="form.controls.CCCNumber.errors && (form.controls.CCCNumber.dirty || form.controls.CCCNumber.touched)"
+                                        class="alert alert-danger">
+                                        <div [hidden]="!form.controls.CCCNumber.errors.pattern">
+                                            CCC must be 10 digits and must only be numbers
+                                        </div>
+                                    </div>
+                                </span>
                             </mat-form-field>
                         </div>
 
                     </div>
+                    <div class="row">
+                        <div class="col-lg-4 col-md-3 col-sm-6 col-xs-12">
+                            <mat-form-field class="col-lg-12">
+                                <input matInput [matDatepicker]="hivpartnerartpicker" [max]="maxDate"
+                                    (focus)="hivpartnerartpicker.open()" formControlName="partnerARTStartDate"
+                                    placeholder="HIV Partner ART Start Date">
+                                <mat-datepicker-toggle matSuffix [for]="hivpartnerartpicker"></mat-datepicker-toggle>
+                                <mat-datepicker #hivpartnerartpicker></mat-datepicker>
+                            </mat-form-field>
+                        </div>
+
+                        <div class="col-lg-4 col-md-3 col-sm-6 col-xs-12">
+
+                            <mat-form-field class="col-lg-12 col-sm-12 col-xs-12">
+                                <mat-label>Duration in months known to be HIV-serodiscordant </mat-label>
+                                <input matInput id="Months" formControlName="HivSerodiscordantduration"
+                                    name="HivSerodiscordantduration" type="number">
+                            </mat-form-field>
+                        </div>
+
+                        <div class="col-lg-4 col-md-3 col-sm-6 col-xs-12">
+                            <mat-form-field class="col-lg-12">
+                                <mat-select placeholder="Sex without Condoms with HIV+ Partner in past 30days"
+                                    formControlName="partnersexcondoms">
+                                    <mat-option [value]=""></mat-option>
+                                    <mat-option *ngFor="let yesNoOption of sexwithoutcondomoptions"
+                                        [value]="yesNoOption.itemId">
+                                        {{yesNoOption.itemDisplayName}}
+                                    </mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-4 col-md-3 col-sm-6 col-xs-12">
+
+                            <mat-form-field class="col-lg-12 col-sm-12 col-xs-12">
+                                <mat-label>Number of living children with HIV+ partner</mat-label>
+                                <input matInput id="Months" formControlName="hivpartnerchildren"
+                                    name="hivpartnerchildren" type="number">
+                            </mat-form-field>
+                        </div>
+                        <div class="col-lg-2 col-md-3 col-sm-6 col-xs-12">
+                            <button mat-raised-button color="primary" (click)="addHivPartner()"><span
+                                    class="fa fa-plus-circle"> Add HivPartner Profile</span>
+                            </button>
+                        </div>
+                    </div>
+
+
+
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="example-container mat-elevation-z1" style="min-height: 10px; max-height: 550px; overflow-y: auto; overflow-x: auto;">
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col"># Count</th>
+                                            <th scope="col">PartnerHivStatus</th>
+                                            <th scope="col">PartnerHivPositiveStatusDate</th>
+                                            
+                                            <th scope="col">CCCEnrollment</th>
+                                            <th scope="col">CCCNumber</th>
+                                            <th scope="col">HivPartnerARTStartDate</th>
+                                            <th scope="col">HivSerodiscordantduration</th>
+                                            <th scope="col">SexWithoutCondoms</th>
+                                            <th scope="col">Children</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr *ngFor="let item_data of hivpositiveprofileOptions; let index = index">
+                                            <td>{{ index+1 }}</td>
+                                            <td>{{item_data.PartnerHivStatus}}</td>
+                                            <td>{{ item_data.HivPositiveStatusDate| date: 'dd-MMM-yyyy' }}</td>
+                                            <td> {{ item_data.CCCEnrollmentText}}</td>
+                                            <td>{{item_data.CCCNumber}}</td>
+                                            <td>{{item_data.partnerARTStartDate| date: 'dd-MMM-yyyy' }}</td>
+                                            <td> {{item_data.HivSerodiscordantduration}}</td>
+                                            <td>{{item_data.SexWithoutCondoms}}</td>
+                                            <td>{{item_data.NumberofChildren}}</td>
+                                            <td>
+                                                <i style="cursor: pointer;" class="danger material-icons"
+                                                    (click)="removeRow(index)">
+                                                    delete
+                                                </i>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div class="row" *ngIf="isMale">
+                        <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12">
+                            <div class="form-title">
+                                <span class="mat-accent">
+                                    Circumcision Status( Male Clients Only)
+                                </span>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-lg-3 col-sm-3 col-xs-12">
+                                <mat-form-field class="col-lg-12 col-sm-12 col-xs-12">
+                                    <mat-label>Is Client Circumcised?</mat-label>
+                                    <mat-select id="isClientCircumcised" name="isClientCircumcised"
+                                        formControlName="isClientCircumcised">
+                                        <mat-option [value]=""></mat-option>
+                                        <mat-option *ngFor="let yesNoUnknownOption of yesNoUnknownOptions"
+                                            [value]="yesNoUnknownOption.itemId">
+                                            {{ yesNoUnknownOption.itemName }}
+                                        </mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row" *ngIf="isFemale">
+                        <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12">
+                            <div class="form-title">
+                                <span class="mat-accent">
+                                    Female Only
+                                </span>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-lg-3 col-sm-3 col-xs-12">
+                                <mat-form-field class="col-md-12">
+                                    <mat-label>LMP</mat-label>
+                                    <input formControlName="lmp" [max]="maxDate" id="lmp" name="lmp" matInput
+                                        (focus)="lmp.open()" [matDatepicker]="lmp">
+                                    <mat-datepicker-toggle matSuffix [for]="lmp"></mat-datepicker-toggle>
+                                    <mat-datepicker #lmp></mat-datepicker>
+                                </mat-form-field>
+                            </div>
+
+                            <div class="col-lg-3 col-sm-3 col-xs-12">
+                                <mat-form-field class="col-lg-12 col-sm-12 col-xs-12">
+                                    <mat-label>Pregnant?</mat-label>
+                                    <mat-select id="pregnant" name="pregnant" formControlName="pregnant" required>
+                                        <mat-option [value]=""></mat-option>
+                                        <mat-option *ngFor="let yesnoOption of yesnoOptions"
+                                            [value]="yesnoOption.itemId"
+                                            (onSelectionChange)="onPregnancySelection($event)">
+                                            {{ yesnoOption.itemName }}
+                                        </mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                            </div>
+
+                            <div class="col-lg-3 col-sm-3 col-xs-12">
+                                <mat-form-field class="col-md-12">
+                                    <mat-label>Was Pregnancy Planned?</mat-label>
+                                    <mat-select id="pregnancyPlanned" name="pregnancyPlanned"
+                                        formControlName="pregnancyPlanned">
+                                        <mat-option [value]=""></mat-option>
+                                        <mat-option *ngFor="let yesnoOption of yesnoOptions"
+                                            [value]="yesnoOption.itemId">
+                                            {{ yesnoOption.itemName }}
+                                        </mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                            </div>
+
+                            <div class="col-lg-3 col-sm-3 col-xs-12">
+                                <mat-form-field class="col-md-12">
+                                    <mat-label>Breastfeeding?</mat-label>
+                                    <mat-select id="breastFeeding" name="breastFeeding" formControlName="breastFeeding">
+                                        <mat-option [value]=""></mat-option>
+                                        <mat-option *ngFor="let yesnoOption of yesnoOptions"
+                                            [value]="yesnoOption.itemId">
+                                            {{ yesnoOption.itemName }}
+                                        </mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-lg-3 col-sm-3 col-xs-12">
+                                <mat-form-field class="col-md-12">
+                                    <mat-label>On Family Planning?</mat-label>
+                                    <mat-select id="onFamilyPlanning" name="onFamilyPlanning"
+                                        formControlName="onFamilyPlanning">
+                                        <mat-option [value]=""></mat-option>
+                                        <mat-option *ngFor="let yesnoOption of yesnoOptions"
+                                            [value]="yesnoOption.itemId"
+                                            (onSelectionChange)="onClientFPSelection($event)">
+                                            {{ yesnoOption.itemName }}
+                                        </mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                            </div>
+
+                            <div class="col-lg-3 col-sm-3 col-xs-12">
+                                <mat-form-field class="col-md-12">
+                                    <mat-label>Family Planning Methods</mat-label>
+                                    <mat-select id="familyPlanningMethods" name="familyPlanningMethods"
+                                        formControlName="familyPlanningMethods">
+                                        <mat-option [value]=""></mat-option>
+                                        <mat-option *ngFor="let fpMethod of fpMethods" [value]="fpMethod.itemId">
+                                            {{ fpMethod.displayName }}
+                                        </mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                            </div>
+
+                            <div class="col-lg-3 col-sm-3 col-xs-12">
+                                <mat-form-field class="col-md-12">
+                                    <mat-label>Planning To Get Pregnant</mat-label>
+                                    <mat-select id="planningToGetPregnant" name="planningToGetPregnant"
+                                        formControlName="planningToGetPregnant">
+                                        <mat-option [value]=""></mat-option>
+                                        <mat-option *ngFor="let pPregnancy of planningPregnancy"
+                                            [value]="pPregnancy.itemId">
+                                            {{ pPregnancy.displayName }}
+                                        </mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-title">
+                                <span class="primary">
+                                    PREP Status
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-4 col-sm-3 col-xs-12">
+                            <mat-form-field class="col-lg-12 col-sm-12 col-xs-12">
+                                <mat-label>Signs/Symptoms of acute HIV?</mat-label>
+                                <mat-select id="signsOrSymptomsHIV" name="signsOrSymptomsHIV"
+                                    formControlName="signsOrSymptomsHIV">
+                                    <mat-option [value]=""></mat-option>
+                                    <mat-option *ngFor="let yesnoOption of yesnoOptions" [value]="yesnoOption.itemId">
+                                        {{ yesnoOption.itemName }}
+                                    </mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
+
+                        <div class="col-lg-4 col-sm-3 col-xs-12">
+                            <mat-form-field class="col-lg-12 col-sm-12 col-xs-12">
+                                <mat-label>Contraindications for PrEP Present?</mat-label>
+                                <mat-select id="contraindications_PrEP_Present" name="contraindications_PrEP_Present"
+                                    formControlName="contraindications_PrEP_Present" disableRipple multiple required>
+
+                                    <mat-option *ngFor="let prepContraindicationsOption of prepContraindicationsOptions"
+                                        [value]="prepContraindicationsOption.itemId"
+                                        (onSelectionChange)="Oncontraindications($event)">
+                                        {{ prepContraindicationsOption.itemName }}
+                                    </mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-lg-4 col-sm-3 col-xs-12">
+                            <mat-form-field class="col-lg-12 col-sm-12 col-xs-12">
+                                <mat-label>Adherence counselling done?</mat-label>
+                                <mat-select id="adherenceCounselling" name="adherenceCounselling"
+                                    formControlName="adherenceCounselling">
+                                    <mat-option [value]=""></mat-option>
+                                    <mat-option *ngFor="let yesnoOption of yesnoOptions" [value]="yesnoOption.itemId">
+                                        {{ yesnoOption.itemName }}
+                                    </mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-lg-4 col-sm-3 col-xs-12">
+                            <mat-form-field class="col-lg-12 col-sm-12 col-xs-12">
+                                <mat-label>PrEP status today:</mat-label>
+                                <mat-select id="PrEPStatusToday" name="PrEPStatusToday"
+                                    formControlName="PrEPStatusToday">
+                                    <mat-option [value]=""></mat-option>
+                                    <mat-option *ngFor="let prepStatusOption of prepStatusOptions"
+                                        [value]="prepStatusOption.itemId"
+                                        (onSelectionChange)="onPrepStatusChange($event)">
+                                        {{ prepStatusOption.itemName }}
+                                    </mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
+                        <div class="col-lg-4 col-sm-4 col-xs-12" *ngIf="Daterestartedvisible">
+                            <mat-form-field>
+                                <input matInput [max]="maxDate" placeholder="Prep Restart Date"
+                                    [matDatepicker]="daterestartedpicker" (click)="daterestartedpicker.open()"
+                                    id="daterestartedpicker" name="daterestartedpicker" autocomplete="off"
+                                    formControlName="DateRestarted">
+                                <mat-datepicker-toggle matSuffix [for]="daterestartedpicker"></mat-datepicker-toggle>
+                                <mat-datepicker #daterestartedpicker></mat-datepicker>
+
+                            </mat-form-field>
+
+                        </div>
+                        <div class="col-lg-4 col-sm-4 col-xs-12" *ngIf="DateInitiatedvisible">
+                            <mat-form-field>
+                                <input matInput [max]="maxDate" placeholder="Prep Start Date"
+                                    [matDatepicker]="dateinitiatedpicker" (click)="dateinitiatedpicker.open()"
+                                    id="dateinitiatedpicker" name="dateinitiatedpicker" autocomplete="off"
+                                    formControlName="DateInitiated">
+                                <mat-datepicker-toggle matSuffix [for]="dateinitiatedpicker"></mat-datepicker-toggle>
+                                <mat-datepicker #dateinitiatedpicker></mat-datepicker>
+
+                            </mat-form-field>
+
+
+                        </div>
+                    </div>
+
+
+                    <div class="row">
+                        <div class="col-lg-4 col-sm-3 col-xs-12" style="padding-top:18px;">
+                            <span class="col-lg-6 col-sm-6 col-xs-12">
+                                <strong>Prescribe Regimen:</strong>
+                            </span>
+                            <span class="col-lg-6 col-sm-6 col-xs-12">
+                                <a (click)="onPharmacyClick()" style="text-decoration: underline;">
+                                    Pharmacy Order
+                                </a>
+                            </span>
+                        </div>
+
+                        <div class="col-lg-4 col-sm-3 col-xs-12">
+                            <mat-form-field class="col-lg-12 col-sm-12 col-xs-12">
+                                <mat-label>Condoms Issued?:</mat-label>
+                                <mat-select id="condomsIssued" name="condomsIssued" formControlName="condomsIssued">
+                                    <mat-option [value]=""></mat-option>
+                                    <mat-option *ngFor="let yesnoOption of yesnoOptions" [value]="yesnoOption.itemId"
+                                        (onSelectionChange)="onCondomsIssuedSelection($event)">
+                                        {{ yesnoOption.itemName }}
+                                    </mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
+
+                        <div class="col-lg-4 col-sm-3 col-xs-12">
+                            <mat-form-field class="col-lg-12 col-sm-12 col-xs-12">
+                                <mat-label>No of condoms issued in units:</mat-label>
+                                <input matInput id="noCondomsIssued" formControlName="noCondomsIssued"
+                                    name="noCondomsIssued" type="number">
+                            </mat-form-field>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-4 col-sm-3 col-xs-12">
+                            <mat-form-field class="col-lg-12 col-sm-12 col-xs-12">
+                                <mat-label>Client has signs/symptioms of STI?</mat-label>
+                                <mat-select id="signsOrSymptomsOfSTI" name="signsOrSymptomsOfSTI"
+                                    formControlName="signsOrSymptomsOfSTI" required>
+                                    <mat-option [value]=""></mat-option>
+                                    <mat-option *ngFor="let yesnoOption of yesnoOptions" [value]="yesnoOption.itemId"
+                                        (onSelectionChange)="onSignsOrSymptomsSelection($event)">
+                                        {{ yesnoOption.itemName }}
+                                    </mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
+
+                        <div class="col-lg-4 col-sm-3 col-xs-12">
+                            <mat-form-field class="col-lg-12 col-sm-12 col-xs-12">
+                                <mat-label>Select</mat-label>
+                                <mat-select formControlName="signsOfSTI" id="signsOfSTI" name="signsOfSTI" disableRipple
+                                    multiple required>
+                                    <mat-option *ngFor="let stiScreeningOption of stiOptions"
+                                        [value]="stiScreeningOption.itemId"
+                                        (onSelectionChange)="OnSTISelection($event)">
+                                        {{stiScreeningOption.itemDisplayName}}
+                                    </mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
+
+                        <div class="col-lg-6 col-sm-6 col-xs=12">
+                            <mat-form-field class="col-lg-12 col-sm-12 col-xs-12">
+                                <textarea formControlName="Specify" matInput placeholder="Specify"></textarea>
+                            </mat-form-field>
+                        </div>
+                    </div>
+
+                    <div class="row">&nbsp;</div>
+
+                    <div class="row">
+                        <div class="col-lg-4 col-sm-3 col-xs-12">
+                            <mat-form-field class="col-lg-12 col-sm-12 col-xs-12">
+                                <mat-label>Refer for Lab Investigation?</mat-label>
+                                <mat-select id="stiReferredLabInvestigation" name="stiReferredLabInvestigation"
+                                    formControlName="stiReferredLabInvestigation" required>
+                                    <mat-option [value]=""></mat-option>
+                                    <mat-option *ngFor="let yesnoOption of yesnoOptions" [value]="yesnoOption.itemId"
+                                        (onSelectionChange)="onReferLabSelection($event)">
+                                        {{ yesnoOption.itemName }}
+                                    </mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
+
+                        <div class="col-lg-6 col-sm-6 col-xs-12">
+                            <span class="col-lg-6 col-sm-6 col-xs-12" *ngIf="hasLabBeenOrdered">
+                                <a routerLink="/clinical/completeorder/{{ patientId }}/{{ personId }}" target=" _blank"
+                                    style="text-decoration: underline;">
+                                    Lab Order Form
+                                </a>
+                                <!--<a  (click)="onLabClick()"  target=" _blank"
+                                    style="text-decoration: underline;">
+                                    Lab Order Form
+                                </a>-->
+                            </span>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-lg-4 col-sm-3 col-xs-12">
+                            <mat-form-field class="col-lg-12 col-sm-12 col-xs-12">
+                                <mat-label>STI Treatment offered?</mat-label>
+                                <mat-select id="stiTreatmentOffered" name="stiTreatmentOffered"
+                                    formControlName="stiTreatmentOffered" required>
+                                    <mat-option [value]=""></mat-option>
+                                    <mat-option *ngFor="let yesnoOption of yesnoOptions" [value]="yesnoOption.itemId"
+                                        (onSelectionChange)="onSTITreatmentelection($event)">
+                                        {{ yesnoOption.itemName }}
+                                    </mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
+                        <div class="col-lg-6 col-sm-6 col-xs-12">
+                            <span class="col-lg-6 col-sm-6 col-xs-12" *ngIf="hasPharmacyBeenOrdered">
+                                <a routerLink="/pharm/{{ patientId }}/{{ personId }}" target=" _blank"
+                                    style="text-decoration: underline;">
+                                    Pharmacy Order Form
+                                </a>
+                                <!--<a (click)="onPharmacyClick()" style="text-decoration: underline;">
+                                    Pharmacy Order Form
+                                </a>-->
+                            </span>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-title">
+                                <span class="primary">
+                                    Chronic Illness
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <ng-template matStepLabel>
+                        <span matTooltip="Chronic Conditions, Allergies, Adverse Events">
+                            Chronic Conditions and Comorbidities
+                        </span>
+                    </ng-template>
+
+                    <app-chronic-illnesses-table (notify)="onChroniIllnessNotify($event)" [patientId]="patientId"
+                        [personId]="personId">
+                    </app-chronic-illnesses-table>
+
+                    <div class="row">&nbsp;</div>
+
+                    <app-allergies-table (notify)="onAllergiesNotify($event)" [patientId]="patientId"
+                        [personId]="personId">
+                    </app-allergies-table>
+
+                    <div class="row">&nbsp;</div>
+
+                    <app-adverse-events-table (notify)="onAdverseEventsNotify($event)" [patientId]="patientId"
+                        [personId]="personId">
+                    </app-adverse-events-table>
+
+                    <div class="row">&nbsp;</div>
+
                     <div class="row">
                         <div class="col-md-12">
                             <div class="form-title">
@@ -263,21 +813,16 @@
                     <div class="row">
                         <div class="col-lg-3 col-sm-3 col-xs-12">
                             <mat-form-field class="col-lg-12 col-sm-12 col-xs-12">
-                                <mat-label>Previous Prep Use</mat-label>
-                                <mat-select formControlName="PrevPrepUse">
-                                    <mat-option (onSelectionChange)="changePrevUse($event)" [value]="1">Yes</mat-option>
-                                    <mat-option (onSelectionChange)="changePrevUse($event)" [value]="0">No</mat-option>
-                                </mat-select>
+                                <input placeholder="Date Last Used" matInput [matDatepicker]="datelastusedDatepicker"
+                                    [max]="maxDate" [min]="minDate" (focus)="datelastusedDatepicker.open()"
+                                    formControlName="DateLastUsed">
+                                <mat-datepicker-toggle matSuffix [for]="datelastusedDatepicker"></mat-datepicker-toggle>
+                                <mat-datepicker #datelastusedDatepicker name="DateLastUsed" ngDefaultControl>
+                                </mat-datepicker>
                             </mat-form-field>
+
                         </div>
 
-                        <div class="col-lg-3 col-sm-3 col-xs-12">
-
-                            <mat-form-field class="col-lg-12 col-sm-12 col-xs-12">
-                                <mat-label>Weeks</mat-label>
-                                <input matInput id="Weeks" formControlName="Weeks" name="Weeks" type="number">
-                            </mat-form-field>
-                        </div>
 
                         <div class="col-lg-3 col-sm-3 col-xs-12">
 
@@ -286,17 +831,61 @@
                                 <input matInput id="Months" formControlName="Months" name="Months" type="number">
                             </mat-form-field>
                         </div>
-                    </div>
-                    <div class="row">
+
                         <div class="col-lg-3 col-sm-3 col-xs-12">
                             <mat-form-field class="col-lg-12 col-sm-12 col-xs-12">
-                                <input placeholder="Initiation Date" matInput [matDatepicker]="inDatepicker"
+                                <input placeholder="Date of Initiation" matInput [matDatepicker]="inDatepicker"
                                     [max]="maxDate" [min]="minDate" (focus)="inDatepicker.open()"
                                     formControlName="InitiationDate">
                                 <mat-datepicker-toggle matSuffix [for]="inDatepicker"></mat-datepicker-toggle>
                                 <mat-datepicker #inDatepicker name="InitiationDate" ngDefaultControl>
                                 </mat-datepicker>
                             </mat-form-field>
+
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12">
+                            <div class="form-title">
+                                <span class="mat-accent">
+                                    Next Appointment
+                                </span>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-lg-6 col-sm-6 col-xs-12">
+                                <mat-form-field class="col-lg-12 col-sm-12 col-xs-12">
+                                    <mat-label>Client given next appointment?</mat-label>
+                                    <mat-select id="nextAppointmentGiven" name="nextAppointmentGiven"
+                                        formControlName="nextAppointmentGiven" required>
+                                        <mat-option [value]=""></mat-option>
+                                        <mat-option *ngFor="let yesnoOption of yesnoOptions"
+                                            [value]="yesnoOption.itemId"
+                                            (onSelectionChange)="onAppointmentSelection($event)">
+                                            {{ yesnoOption.itemName }}
+                                        </mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                            </div>
+
+
+                        </div>
+
+                        <div class="row">
+                            <div class="col-lg-6 col-sm-6 col-xs-12">
+                                <mat-form-field class="col-lg-12 col-sm-12 col-xs-12">
+                                    <mat-label>Next appointment date:</mat-label>
+                                    <input formControlName="nextAppointmentDate" [min]="minDate"
+                                        id="nextAppointmentDate" name="nextAppointmentDate" matInput
+                                        (focus)="nextAppointmentDate.open()" [matDatepicker]="nextAppointmentDate">
+                                    <mat-datepicker-toggle matSuffix [for]="nextAppointmentDate">
+                                    </mat-datepicker-toggle>
+                                    <mat-datepicker #nextAppointmentDate></mat-datepicker>
+                                </mat-form-field>
+                            </div>
+
 
                         </div>
                     </div>

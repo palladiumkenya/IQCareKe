@@ -64,7 +64,7 @@
                         <i className="material-icons">mode_edit</i>
                     </mat-icon>
                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    <mat-icon *ngIf="!isEdit"><i className="material-icons">delete</i>
+                    <mat-icon *ngIf="!isEdit" (click)="deleteBaby(element)"><i className="material-icons">delete</i>
                     </mat-icon>
                 </mat-cell>
               </ng-container>

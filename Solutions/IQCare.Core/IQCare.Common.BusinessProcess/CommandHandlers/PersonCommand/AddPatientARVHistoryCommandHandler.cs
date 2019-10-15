@@ -53,10 +53,11 @@ namespace IQCare.Common.BusinessProcess.CommandHandlers.PersonCommand
                             {
                                 PatientARVHistory.Purpose = request.Purpose;
                                 PatientARVHistory.Regimen = request.Regimen;
-                                PatientARVHistory.Months = request.Months;
+                               // PatientARVHistory.Months = request.Months;
                                 PatientARVHistory.InitiationDate = request.InitiationDate;
                                 PatientARVHistory.TreatmentType = request.TreatmentType;
-                                PatientARVHistory.Weeks = request.Weeks;
+                                PatientARVHistory.DateLastUsed = request.DateLastUsed;
+                                //PatientARVHistory.Weeks = request.Weeks;
                                 PatientARVHistory.Months = request.Months;
 
 
@@ -73,11 +74,12 @@ namespace IQCare.Common.BusinessProcess.CommandHandlers.PersonCommand
                                 part.DeleteFlag = request.DeleteFlag;
                                 part.Months = request.Months;
                                 part.InitiationDate = request.InitiationDate;
-                                part.Weeks = request.Weeks;
+                               // part.Weeks = request.Weeks;
                                 part.Purpose = request.Purpose;
                                 part.Regimen = request.Regimen;
                                 part.TreatmentType = request.TreatmentType;
-                                part.RegimenUse = request.RegimenUse;
+                                part.DateLastUsed = request.DateLastUsed;
+                                
                                 part.PatientId = request.PatientId;
                                 part.PatientMasterVisitId = PatientMasterVisitId;
 

@@ -1,0 +1,23 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Folder Include="MapperProfiles\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="7.0.1" />
+    <PackageReference Include="MediatR" Version="4.1.0" />
+    <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="4.1.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\IQCare.Library\IQCare.Library.csproj" />
+    <ProjectReference Include="..\IQCare.Pharm.Core\IQCare.Pharm.Core.csproj" />
+    <ProjectReference Include="..\IQCare.Pharm.Infrastructure\IQCare.Pharm.Infrastructure.csproj" />
+  </ItemGroup>
+
+</Project>

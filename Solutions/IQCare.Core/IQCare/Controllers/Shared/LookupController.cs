@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -178,6 +178,20 @@ namespace IQCare.Controllers.Common
             return BadRequest(results);
         }
 
+        [HttpGet("GetDecodeByCodeId/{codeId}")]
+        public async Task<IActionResult> GetDecodeByCodeId(int codeId)
+        {
+            var result = await _mediator.Send(new GetDecodeByCodeIdCommand
+            {
+                CodeId = codeId
+            }, HttpContext.RequestAborted);
+
+            if (result.IsValid)
+                return Ok(result.Value);
+            return BadRequest(result);
+
+        }
+
         [HttpGet("GetOptionsByMasterName/{masterName}")]
         public async Task<IActionResult> GetOptionsByMasterName(string masterName)
         {
@@ -204,7 +218,7 @@ namespace IQCare.Controllers.Common
         [HttpGet("htsTracingOptions")]
         public async Task<IActionResult> GetTracingOptions()
         {
-            string[] options = new string[] { "TracingMode", "TracingOutcome", "TracingType" };
+            string[] options = new string[] { "TracingMode", "TracingOutcome", "TracingType", "TracingReasonNotContactedPhone", "TracingReasonNotContactedPhysical" };
             var results = await _mediator.Send(new GetRegistrationOptionsCommand {RegistrationOptions = options},
                 HttpContext.RequestAborted);
 

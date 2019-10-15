@@ -9,7 +9,7 @@
     </div>
 
     <div class="row">
-        <div class="col-md-4 col-xs-12 col-sm-6">
+        <!-- <div class="col-md-4 col-xs-12 col-sm-6">
             <mat-form-field class="col-md-12">
                 <mat-select formControlName="preventiveServices" placeholder="Preventive Service" >
                     <mat-option value=""> Select</mat-option>
@@ -39,10 +39,10 @@
                 <mat-datepicker-toggle matSuffix [for]="nextSchedule"></mat-datepicker-toggle>
                 <mat-datepicker #nextSchedule></mat-datepicker>
             </mat-form-field>
-        </div>
+        </div>-->
         <div class="col-md-2 col-xs-12 col-sm-6">
-            <button mat-raised-button color="primary" (click)="addTopics()"><span
-                    class="fa fa-plus-circle"> Add Service </span></button>
+            <button mat-raised-button color="primary" (click)="addTopics()"><span class="fa fa-plus-circle"> Add Service
+                </span></button>
         </div>
     </div>
     <div class="row">
@@ -55,28 +55,28 @@
 
                 <table class="table">
                     <thead>
-                    <tr>
-                        <th scope="col"># Count</th>
-                        <th scope="col">Preventive Service</th>
-                        <th scope="col">Date Given</th>
-                        <th scope="col">Comments</th>
-                        <th scope="col">Next Schedule</th>
-                        <th scope="col">Action</th>
-                    </tr>
+                        <tr>
+                            <th scope="col"># Count</th>
+                            <th scope="col">Preventive Service</th>
+                            <th scope="col">Date Given</th>
+                            <th scope="col">Comments</th>
+                            <th scope="col">Next Schedule</th>
+                            <th scope="col">Action</th>
+                        </tr>
                     </thead>
                     <tbody>
-                    <tr *ngFor="let item_data of serviceData; let index = index">
-                        <td>{{ index+1 }}</td>
-                        <td>{{ item_data.preventiveService}}</td>
-                        <td>{{ item_data.dateGiven | date: 'dd-MMM-yyyy' }}</td>
-                        <td>{{ item_data.comments}}</td>
-                        <td>{{ item_data.nextSchedule | date: 'dd-MMM-yyyy'}}</td>
-                        <td>
-                            <i style="cursor: pointer;" class="danger material-icons" (click)="removeRow(index)">
-                                delete
-                            </i>
-                        </td>
-                    </tr>
+                        <tr *ngFor="let item_data of serviceData; let index = index">
+                            <td>{{ index+1 }}</td>
+                            <td>{{ item_data.preventiveService}}</td>
+                            <td>{{ item_data.dateGiven | date: 'dd-MMM-yyyy' }}</td>
+                            <td>{{ item_data.comments}}</td>
+                            <td>{{ item_data.nextSchedule ? (item_data.nextSchedule | date: 'dd-MMM-yyyy' ): '' }}</td>
+                            <td>
+                                <i style="cursor: pointer;" class="danger material-icons" (click)="removeRow(index)">
+                                    delete
+                                </i>
+                            </td>
+                        </tr>
                     </tbody>
                 </table>
 
@@ -93,7 +93,8 @@
             <mat-form-field class="col-md-12">
                 <mat-select formControlName="insecticideTreatedNet" placeholder="Insecticide Treated Net given">
                     <mat-option value=""> Select</mat-option>
-                    <mat-option *ngFor="let yesnoOption of YesNoOptions" [value]="yesnoOption.itemId" required minlength="0" (onSelectionChange)="onInsecticideTreatedNetGivenChange($event)">
+                    <mat-option *ngFor="let yesnoOption of YesNoOptions" [value]="yesnoOption.itemId" required
+                        minlength="0" (onSelectionChange)="onInsecticideTreatedNetGivenChange($event)">
                         {{yesnoOption.itemName}}
                     </mat-option>
                 </mat-select>
@@ -102,7 +103,7 @@
         <div class="col-lg-4 col-sm-6 col-xs-12">
             <mat-form-field class="col-md-12">
                 <input [max]="maxDate" formControlName="insecticideTreatedNetGivenDate" matInput
-                       [matDatepicker]="insecticideGivenDate" placeholder="Date Insecticide Treated Net Given">
+                    [matDatepicker]="insecticideGivenDate" placeholder="Date Insecticide Treated Net Given">
                 <mat-datepicker-toggle matSuffix [for]="insecticideGivenDate"></mat-datepicker-toggle>
                 <mat-datepicker #insecticideGivenDate></mat-datepicker>
             </mat-form-field>
@@ -110,7 +111,7 @@
         <div class="col-lg-4 col-sm-6 col-xs-12">
             <mat-form-field class="col-md-12">
                 <mat-select formControlName="antenatalExercise"
-                            placeholder="Underwent antenatal exercise on this visit">
+                    placeholder="Underwent antenatal exercise on this visit">
                     <mat-option value=""> Select</mat-option>
                     <mat-option *ngFor="let yesnoOption of YesNoOptions" [value]="yesnoOption.itemId" minlength="0">
                         {{yesnoOption.itemName}}
@@ -132,7 +133,8 @@
         <div class="col-md-4">
             <mat-form-field class="col-md-12">
                 <mat-select formControlName="PartnerTestingVisit" placeholder="Partner Tested during this visit">
-                    <mat-option *ngFor="let YesNoNaOption of YesNoNaOptions" [value]="YesNoNaOption.itemId" (onSelectionChange)="onPartnerTestingChange($event)">
+                    <mat-option *ngFor="let YesNoNaOption of YesNoNaOptions" [value]="YesNoNaOption.itemId"
+                        (onSelectionChange)="onPartnerTestingChange($event)">
                         {{YesNoNaOption.itemName}}
                     </mat-option>
                 </mat-select>

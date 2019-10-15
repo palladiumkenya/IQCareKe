@@ -4,9 +4,10 @@ export interface PrepStatusCommand {
     PatientEncounterId: number;
     SignsOrSymptomsHIV: number;
     AdherenceCounsellingDone: number;
-    ContraindicationsPrepPresent: number;
+    // ContraindicationsPrepPresent: number;
     PrepStatusToday: number;
     CreatedBy: number;
     CondomsIssued?: number;
     NoOfCondoms?: number;
+    DateField?: Date;
 }

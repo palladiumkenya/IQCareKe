@@ -1,0 +1,76 @@
+<div class="row">
+    <div class="col-lg-12 col-sm-12 col-xs-12">
+        <div class="widget">
+            <div class="widget-header bordered-bottom bordered-blue">
+                <span class="widget-caption">Pharmacy</span>
+            </div>
+            <div class="widget-body">
+                <app-personbrief [personId]="personId" >
+
+                </app-personbrief>
+                <br />
+                <div class='row'>
+                    <div class="col-lg-4 col-xs-12">
+                        <button mat-raised-button class="mat-primary" (click)="AddPharmacy()"><span
+                                class="fa fa-plus-circle"> Add Pharmacy</span></button>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-lg-12 col-xs-12">
+                        <div class="example-container mat-elevation-z0">
+                            <mat-table #table [dataSource]="dataSource">
+                                <!-- Symbol Column -->
+                                <ng-container matColumnDef="visitDate">
+                                    <mat-header-cell *matHeaderCellDef><strong>Visit Date</strong>
+                                    </mat-header-cell>
+                                    <mat-cell *matCellDef="let  pharmacyvisittable"> {{pharmacyvisittable.visitDate |
+                            date:'dd-MMM-yyyy'}}
+                                    </mat-cell>
+                                </ng-container>
+                                <ng-container matColumnDef="Status">
+                                    <mat-header-cell *matHeaderCellDef><strong>Status</strong>
+                                    </mat-header-cell>
+                                    <mat-cell *matCellDef="let  pharmacyvisittable"> {{pharmacyvisittable.statustext
+                                }}
+                                    </mat-cell>
+                                </ng-container >
+                                <ng-container matColumnDef="action">
+                                    <mat-header-cell *matHeaderCellDef><strong class="fa fa-cog"> Action</strong>
+                                    </mat-header-cell>
+                                    <mat-cell *matCellDef="let row">
+                                        <button (click)="editPharmacyForm(row)" mat-raised-button class="mat-accent"><span
+                                                class="fa fa-pencil">
+                                                Edit </span>
+                                        </button>
+                                    </mat-cell>
+                                </ng-container>
+
+
+                                <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                                <mat-row *matRowDef="let row; columns: displayedColumns">
+                                </mat-row>
+                            </mat-table>
+                            <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="3"></div>
+                        <div class="3"></div>
+                        <div class="3"></div>
+                        <div class="3">
+                            <a routerLink="/dashboard/personhome/{{ personId }}">
+                                <i class="menu-icon glyphicon glyphicon-home"></i>
+                                <span class="menu-text"> PERSON HOME </span>
+                            </a>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </div>

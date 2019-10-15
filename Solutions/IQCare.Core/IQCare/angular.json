@@ -24,7 +24,9 @@
                         "styles": [
                             "frontend/styles.css"
                         ],
-                        "scripts": []
+                        "scripts": [
+                            "./node_modules/chart.js/dist/Chart.min.js"
+                        ]
                     },
                     "configurations": {
                         "production": {

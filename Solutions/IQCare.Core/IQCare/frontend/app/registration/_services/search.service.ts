@@ -46,7 +46,8 @@ export class SearchService {
     public setSession(personId: number, patientPk: number): Observable<any> {
         const Indata = {
             'personId': personId,
-            'patientPk': patientPk
+            'patientPk': patientPk,
+
         };
         return this.http.post(location.protocol + '//' + window.location.hostname + ':' + window.location.port
             + '/IQCare/CCC/WebService/PersonService.asmx/SetPatientSessionFromUniversalRegistration',

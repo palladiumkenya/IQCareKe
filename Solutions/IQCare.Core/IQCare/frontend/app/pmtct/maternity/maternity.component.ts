@@ -31,6 +31,8 @@ import { MatDialogConfig, MatDialog, MatStepper } from '@angular/material';
 import { AddBirthInfoComponent } from './baby/add-birth-info/add-birth-info.component';
 import { AddBabyDialogComponent } from './baby/add-baby-dialog/add-baby-dialog.component';
 import { NgxSpinnerService } from 'ngx-spinner';
+import {PatientEducationCommand} from '../_models/PatientEducationCommand';
+import {PatientEducation} from '../_models/PatientEducation';
 
 @Component({
     selector: 'app-maternity',
@@ -106,6 +108,7 @@ export class MaternityComponent implements OnInit {
     infantFeedingTopicId: number;
 
     babyDetailsValid: boolean = true;
+    diagnosisPlaceholder: string;
 
     constructor(private route: ActivatedRoute,
         private matService: MaternityService,
@@ -126,6 +129,7 @@ export class MaternityComponent implements OnInit {
         this.babyFormGroup = new FormArray([]);
         this.maternityTestsFormGroup = new FormArray([]);
         this.formType = 'maternity';
+        this.diagnosisPlaceholder = 'Maternity Admission History';
     }
 
     ngOnInit() {
@@ -134,7 +138,9 @@ export class MaternityComponent implements OnInit {
 
         this.lookupitemservice.getByGroupNameAndItemName('HTSEntryPoints', 'PMTCT').subscribe(
             (res) => {
-                this.hivTestEntryPoint = res['itemId'];
+                if (res.length > 0) {
+                    this.hivTestEntryPoint = res[0]['itemId'];
+                }
             }
         );
 
@@ -208,7 +214,7 @@ export class MaternityComponent implements OnInit {
             this.hivFinalResultOptions = hivFinalResultOptions['lookupItems'];
             this.hivFinalResultsOptions = hivFinalResultsOptions['lookupItems'];
             this.hivStatusOptions = hivStatusOptions['lookupItems'];
-            this.infantFeedingTopicId = counselledInfantFeedingOptions['itemId']
+            this.infantFeedingTopicId = counselledInfantFeedingOptions['itemId'];
         });
 
         this.diagnosisOptions.push({
@@ -295,7 +301,6 @@ export class MaternityComponent implements OnInit {
 
     onHivStatusNotify(formGroup: Object): void {
         this.maternityTestsFormGroup.push(formGroup['form']);
-        // console.log(formGroup);
         this.hiv_status_table_data.push(formGroup['table_data']);
     }
 
@@ -348,7 +353,6 @@ export class MaternityComponent implements OnInit {
                 pregnancy => {
                     if (pregnancy != null) {
                         this.pregnancyId = pregnancy.id;
-                        console.log('pregancyId:' + this.pregnancyId);
                     }
                 },
                 (err) => {
@@ -596,7 +600,18 @@ export class MaternityComponent implements OnInit {
         const yesOption = this.yesnoOptions.filter(obj => obj.itemName == 'Yes');
         const noOption = this.yesnoOptions.filter(obj => obj.itemName == 'No');
         const naOption = this.yesNoNaOptions.filter(obj => obj.itemName == 'N/A');
-
+        
+        const maternityTestsCommand: PatientEducationCommand = {
+            SyphilisResults: this.maternityTestsFormGroup.value[0]['SyphilisResults'],
+            SyphilisTestUsed: this.maternityTestsFormGroup.value[0]['SyphilisTestUsed'],
+            PatientId: this.patientId,
+            PatientMasterVisitId: this.patientMasterVisitId,
+            BreastExamDone: 0,
+            TreatedSyphilis: this.maternityTestsFormGroup.value[0]['treatedSyphilis'],
+            TestedForSyphilis: this.maternityTestsFormGroup.value[0]['testedSyphilis'],
+            CreateBy: this.userId,
+            CounsellingTopics: []
+        };
 
         const hivStatusCommand: HivStatusCommand = {
             PersonId: this.personId,
@@ -620,7 +635,9 @@ export class MaternityComponent implements OnInit {
             ServiceAreaId: this.serviceAreaId,
             EncounterTypeId: 1,
             EncounterDate: moment(this.visitDetailsFormGroup.value[0]['visitDate']).toDate(),
-            EncounterType: this.maternityTestsFormGroup.value[0]['testType']
+            EncounterType: this.maternityTestsFormGroup.value[1]['testType'],
+            HivCounsellingDone: yesOption[0].itemId,
+            OtherDisability: ''
         };
 
         const hivTestsCommand: HivTestsCommand = {
@@ -631,9 +648,9 @@ export class MaternityComponent implements OnInit {
             ServiceAreaId: this.serviceAreaId,
             Testing: [],
             FinalTestingResult: {
-                FinalResultHiv1: this.maternityTestsFormGroup.value[0]['finalTestResult'],
-                FinalResultHiv2: null,
-                FinalResult: this.maternityTestsFormGroup.value[0]['finalTestResult'],
+                FinalResultHiv1: this.maternityTestsFormGroup.value[1]['screeningTestResult'],
+                FinalResultHiv2: this.maternityTestsFormGroup.value[1]['confirmatoryTestResult'],
+                FinalResult: this.maternityTestsFormGroup.value[1]['finalTestResult'],
                 FinalResultGiven: yesOption[0].itemId,
                 CoupleDiscordant: naOption[0].itemId,
                 FinalResultsRemarks: 'n/a',
@@ -666,6 +683,7 @@ export class MaternityComponent implements OnInit {
         const matNextAppointment = this.matService.saveNextAppointment(nextAppointmentCommand);
         const matPartnerTesting = this.matService.savePartnerTesting(partnerTestingCommand);
         const matHivStatus = this.matService.savePncHivStatus(hivStatusCommand, this.hiv_status_table_data);
+        const maternitySphilisTesting = this.ancservice.savePatientEducation(maternityTestsCommand); 
 
         forkJoin([
             matDiagnosis,
@@ -675,13 +693,11 @@ export class MaternityComponent implements OnInit {
             matPartnerTesting,
             matDischarge,
             matReferral,
-            matNextAppointment
+            matNextAppointment,
+            maternitySphilisTesting
         ])
             .subscribe(
                 (result) => {
-                    console.log(`success `);
-                    console.log(result);
-
                     hivTestsCommand.HtsEncounterId = result[1]['htsEncounterId'];
                     hivTestsCommand.PatientMasterVisitId = result[1]['patientMasterVisitId'];
                     const ancHivResultsCommand = this.ancservice.saveHivResults(hivTestsCommand).subscribe(
@@ -728,12 +744,6 @@ export class MaternityComponent implements OnInit {
                 },
                 (error) => {
                     console.log(`error ` + error);
-                },
-                () => {
-                    console.log(`complete`);
-                    // this.zone.run(() => {
-                    //     this.router.navigate(['/dashboard/personhome/' + this.personId], {relativeTo: this.route});
-                    // });
                 }
             );
 
@@ -811,7 +821,7 @@ export class MaternityComponent implements OnInit {
         const updateAppointment = this.matService.updateNextAppointment(editAppointment);
         const updateDiagnosis = this.matService.updateDiagnosis(editDiagnosisCommad);
         const updateDrugInfo = this.matService.updateDrugAdministration(editDrugAdminCommand);
-        const patientCounselling = this.matService.updatePatientEducation(editCounsellingCommand)
+        const patientCounselling = this.matService.updatePatientEducation(editCounsellingCommand);
         const updateDischarge = this.matService.updateDischargeInfo(editPatientDischarge);
         const updateRefferal = this.matService.updatePatientReferral(editRefferalCommand);
 

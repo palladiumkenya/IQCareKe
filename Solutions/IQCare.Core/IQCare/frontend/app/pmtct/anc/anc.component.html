@@ -1,4 +1,12 @@
 <div class="row">
+    <app-personbrief [personId]="personId"></app-personbrief>
+</div>
+
+<div class="row">
+    &nbsp;
+</div>
+
+<div class="row">
     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
         <div class="row">
             <div class="col-lg-12 col-sm-6 col-xs-12">
@@ -38,14 +46,14 @@
                                         <app-patient-education-examination
                                             [patientEducationFormOptions]="patientEducationFormOptions"
                                             (notify)="onPatientEducationNotify($event)" [isEdit]="isEdit"
-                                            [PatientId]="patientId" [PatientMasterVisitId]="visitId">
+                                            [PatientId]="patientId" [PatientMasterVisitId]="visitId" [visitDate]="visitDate" >
                                         </app-patient-education-examination>
                                         <div>
                                             <button mat-raised-button color="primary" matStepperPrevious
                                                 type="button">Previous</button>
                                             &nbsp;&nbsp;
-                                            <button mat-raised-button color="accent"
-                                                type="button" (click)="checkEducationFilled(stepper)">Next</button>
+                                            <button mat-raised-button color="accent" type="button"
+                                                (click)="checkEducationFilled(stepper)">Next</button>
                                         </div>
                                     </mat-step>
 
@@ -68,7 +76,7 @@
                                                 type="button">Previous</button>
                                             &nbsp;&nbsp;
                                             <button mat-raised-button color="accent" matStepperNext
-                                                type="button" >Next</button>
+                                                type="button">Next</button>
                                         </div>
 
                                     </mat-step>
@@ -103,12 +111,13 @@
                                             (notify)="onHaartProphylaxisNotify($event)" [isEdit]="isEdit"
                                             [patientId]="patientId" [patientMasterVisitId]="visitId">
                                         </app-haart-prophylaxis>
+                                        
                                         <div>
                                             <button mat-raised-button color="primary" matStepperPrevious
                                                 type="button">Previous</button>
                                             &nbsp;&nbsp;
-                                            <button mat-raised-button color="accent"
-                                                type="button" (click)="checkChroniIllnessAdded(stepper)">Next</button>
+                                            <button mat-raised-button color="accent" type="button"
+                                                (click)="checkChroniIllnessAdded(stepper)">Next</button>
                                         </div>
                                     </mat-step>
                                     <mat-step [completed]="false" [stepControl]="PreventiveServiceMatFormGroup">
@@ -118,15 +127,16 @@
                                             </span> </ng-template>
                                         <app-preventive-services [serviceFormOptions]="serviceFormOptions"
                                             (notify)="onPreventiveServiceNotify($event)" [isEdit]="isEdit"
-                                            [patientId]="patientId" [patientMasterVisitId]="visitId">
+                                            [patientId]="patientId" [patientMasterVisitId]="visitId"
+                                            [visitDate]="visitDate">
 
                                         </app-preventive-services>
                                         <div>
                                             <button mat-raised-button color="primary" matStepperPrevious
                                                 type="button">Previous</button>
                                             &nbsp;&nbsp;
-                                            <button mat-raised-button color="accent"
-                                                type="button" (click)="checkPreventiveServicesAdded(stepper)">Next</button>
+                                            <button mat-raised-button color="accent" type="button"
+                                                (click)="checkPreventiveServicesAdded(stepper)">Next</button>
                                         </div>
                                     </mat-step>
 
@@ -137,7 +147,7 @@
                                         <app-referrals [referralFormOptions]="referralFormOptions"
                                             (notify)="onReferralNotify($event)" [isEdit]="isEdit"
                                             [visitDate]="visitDate" [PatientId]="patientId"
-                                            [PatientMasterVisitId]="visitId"></app-referrals>
+                                            [PatientMasterVisitId]="patientMasterVisitId"></app-referrals>
 
                                         <div>
                                             <button mat-raised-button color="primary" matStepperPrevious

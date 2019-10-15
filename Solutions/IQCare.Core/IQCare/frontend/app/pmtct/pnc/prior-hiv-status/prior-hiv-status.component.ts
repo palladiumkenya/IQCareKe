@@ -30,40 +30,54 @@ export class PriorHivStatusComponent implements OnInit {
         private snotifyService: SnotifyService,
         private dataservice: DataService) { }
 
-    ngOnInit() {
+    async ngOnInit() {
         this.priorHivStatusFormGroup = this._formBuilder.group({
             priorHivStatus: new FormControl('', [Validators.required])
         });
 
         const { hivStatusOptions } = this.priorHivOptions[0];
         this.hivStatusOptions = hivStatusOptions;
-        // console.log(this.priorHivOptions);
 
-        this.personCurrentHivStatus();
+        await this.personCurrentHivStatus();
+    }
+    
+    public priorHivStatusChange(event) {
+        if (event.isUserInput && event.source.selected && event.source.viewValue == 'Positive') {
+            this.dataservice.changeHivStatus('Positive');
+        } else if (event.isUserInput && event.source.selected && event.source.viewValue != 'Positive') {
+            this.dataservice.changeHivStatus('Negative');
+        }
     }
 
-    public personCurrentHivStatus() {
-        this.pncService.getPersonCurrentHivStatus(this.personId).subscribe(
-            (res) => {
-                console.log(res);
-                if (res.length > 0) {
-                    const hivPositiveResult = this.hivStatusOptions.filter(obj => obj.itemName == 'Positive');
-                    if (hivPositiveResult.length > 0) {
-                        this.priorHivStatusFormGroup.get('priorHivStatus').setValue(hivPositiveResult[0].itemId);
-                        this.dataservice.changeHivStatus('Positive');
-                    }
-                } else {
-                    const hivNegativeResult = this.hivStatusOptions.filter(obj => obj.itemName == 'Negative');
-                    if (hivNegativeResult.length > 0) {
-                        this.priorHivStatusFormGroup.get('priorHivStatus').setValue(hivNegativeResult[0].itemId);
-                    }
-                    // this.dataservice.changeHivStatus('Negative');
+    public async personCurrentHivStatus() {
+        const previousHtsEncounters = await this.pncService.getPatientHtsEncounters(this.patientId).toPromise();
+        for (let i = 0; i < previousHtsEncounters.length; i++) {
+            const finalResult = previousHtsEncounters[i]['finalResult'];
+            if (finalResult == 'Positive') {
+                const hivPositiveResult = this.hivStatusOptions.filter(obj => obj.itemName == 'Positive');
+                this.priorHivStatusFormGroup.get('priorHivStatus').setValue(hivPositiveResult[0].itemId);
+                this.priorHivStatusFormGroup.get('priorHivStatus').disable({ onlySelf: true });
+                this.dataservice.changeHivStatus('Positive');
+            } else if (finalResult == 'Negative') {
+                const hivNegativeResult = this.hivStatusOptions.filter(obj => obj.itemName == 'Negative');
+                if (hivNegativeResult.length > 0) {
+                    this.priorHivStatusFormGroup.get('priorHivStatus').setValue(hivNegativeResult[0].itemId);
+                    this.priorHivStatusFormGroup.get('priorHivStatus').disable({ onlySelf: true });
                 }
-            },
-            (error) => {
-                this.snotifyService.error('Error loading previous hiv status ', 'Maternity',
-                    this.notificationService.getConfig());
+                this.dataservice.changeHivStatus('Negative');
             }
-        );
+        }
+
+        if (previousHtsEncounters.length == 0) {
+            const confirmedPositive = await this.pncService.getPersonCurrentHivStatus(this.personId).toPromise();
+            if (confirmedPositive.length > 0) {
+                const hivPositiveResult = this.hivStatusOptions.filter(obj => obj.itemName == 'Positive');
+                if (hivPositiveResult.length > 0) {
+                    this.priorHivStatusFormGroup.get('priorHivStatus').setValue(hivPositiveResult[0].itemId);
+                    this.priorHivStatusFormGroup.get('priorHivStatus').disable({ onlySelf: true });
+                    this.dataservice.changeHivStatus('Positive');
+                }
+            }
+        }
     }
 }

@@ -12,5 +12,7 @@ namespace IQCare.Common.Core.Models
         public DateTime? DateBookedTesting { get; set; }
         public string Consent { get; set; }
         public bool DeleteFlag { get; set; }
+        public string ReasonNotContacted { get; set; }
+        public string OtherReasonSpecify { get; set; }
     }
 }

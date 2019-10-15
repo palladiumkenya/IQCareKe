@@ -7,6 +7,7 @@ import * as moment from 'moment';
 import { MaternityService } from '../../_services/maternity.service';
 import { Input } from '@angular/core';
 import { Subscription } from 'rxjs/index';
+import {DataService} from '../../_services/data.service';
 
 @Component({
     selector: 'app-mother-profile',
@@ -21,6 +22,7 @@ export class MotherProfileComponent implements OnInit {
     gestation: number;
     motherProfile: Subscription;
     visitDetails: Subscription;
+   
     @Input() patientId: number;
     @Input() visitDate: Date;
     @Output() notify: EventEmitter<FormGroup> = new EventEmitter<FormGroup>();
@@ -34,7 +36,8 @@ export class MotherProfileComponent implements OnInit {
         private _lookupItemService: LookupItemService,
         private snotifyService: SnotifyService,
         private notificationService: NotificationService,
-        private _matServices: MaternityService) {
+        private _matServices: MaternityService,
+        private dataservice: DataService) {
     }
 
     ngOnInit() {
@@ -51,11 +54,13 @@ export class MotherProfileComponent implements OnInit {
         this.getPregnancyDetails(this.patientId);
         // this.getCurrentVisitDetails(this.patientId, 'ANC');
 
+
         this.notify.emit(this.motherProfileFormGroup);
     }
 
     public onLMPDateChange() {
         this.dateLMP = this.motherProfileFormGroup.controls['dateLMP'].value;
+        this.dataservice.setDateLmp(this.dateLMP);
         this.minLMpDate = moment(moment(this.visitDate).subtract(42, 'weeks').format('')).toDate();
 
         if (moment(this.dateLMP).isBefore(this.minLMpDate)) {
@@ -80,15 +85,10 @@ export class MotherProfileComponent implements OnInit {
         const eddDate = new Date(moment(this.dateLMP).add(7, 'days').add(9, 'months').format(''));
         this.motherProfileFormGroup.controls['dateEDD'].setValue(eddDate);
 
-        console.log(this.motherProfileFormGroup.controls['dateEDD'].value);
-
         this.gestation = parseInt(moment.duration(moment(this.visitDate).diff(this.dateLMP)).asWeeks().toFixed(1), 10);
         if (this.gestation > 42) { this.gestation = 42; }
         if (this.gestation < 1) { this.gestation = 0; }
         this.motherProfileFormGroup.controls['gestation'].setValue(this.gestation);
-
-        // this.motherProfileFormGroup.controls['dateEDD'].disable({ onlySelf: false });
-        console.log(moment(this.motherProfileFormGroup.controls['dateLMP'].value, 'DD-MM-YYYY').add(280, 'days'));
     }
 
     public onParityTwoChange() {
@@ -105,20 +105,16 @@ export class MotherProfileComponent implements OnInit {
                 p => {
                     this.motherProfileFormGroup.controls['gestation'].setValue(p.gestation);
                     this.motherProfileFormGroup.controls['dateLMP'].setValue(p.lmp);
+                    this.dataservice.setDateLmp(p.lmp);
                     this.motherProfileFormGroup.controls['dateEDD'].setValue(p.edd);
                     this.motherProfileFormGroup.controls['parityOne'].setValue(p.parity);
                     this.motherProfileFormGroup.controls['parityTwo'].setValue(p.parity2);
                     this.motherProfileFormGroup.controls['gravidae'].setValue(p.gravidae);
-                    // console.log('pregnancy details');
-                    // console.log(p);
+                    this.motherProfileFormGroup.controls['ageAtMenarche'].setValue(p.ageAtMenarche);
                 },
                 (err) => {
-                    // console.log(err);
                     this.snotifyService.error('Error fetching previous pregnacy Profile' + err,
                         'Encounter', this.notificationService.getConfig());
-                },
-                () => {
-                    // console.log(this.motherProfile);
                 });
     }
 

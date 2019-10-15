@@ -1,4 +1,12 @@
 <div class="row">
+    <app-personbrief [personId]="personId"></app-personbrief>
+</div>
+
+<div class="row">
+    &nbsp;
+</div>
+
+<div class="row">
     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
         <div class="row">
             <div class="col-lg-12 col-sm-6 col-xs-12">
@@ -37,7 +45,8 @@
                                         <!-- add Maternity History Component to Stepper -->
                                         <app-pnc-maternalhistory (notify)="onMaternalHistoryNotify($event)"
                                             [matHistoryOptions]="matHistoryOptions" [patientId]="patientId"
-                                            [isEdit]="isEdit" [patientMasterVisitId]="patientMasterVisitId">
+                                            [isEdit]="isEdit" [patientMasterVisitId]="patientMasterVisitId"
+                                             [serviceAreaId]="serviceAreaId">
                                         </app-pnc-maternalhistory>
 
                                         <!-- add PostNatal Examination Component to Stepper -->
@@ -172,7 +181,7 @@
                                         </ng-template>
 
                                         <app-diagnosis (notify)="onDiagnosisNotify($event)" [PatientId]="patientId"
-                                            [isEdit]="isEdit" [PatientMasterVisitId]="patientMasterVisitId">
+                                            [isEdit]="isEdit" [PatientMasterVisitId]="patientMasterVisitId" [diagnosisPlaceholder]="diagnosisPlaceholder">
                                         </app-diagnosis>
 
                                         <app-maternity-referral (notify)="onReferralNotify($event)"

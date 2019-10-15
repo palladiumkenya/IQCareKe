@@ -9,6 +9,7 @@ import { LookupItemService } from '../../../shared/_services/lookup-item.service
 import { MatTableDataSource, MatDialogConfig, MatDialog } from '@angular/material';
 import { MilestoneTableData } from '../../_models/hei/MilestoneTableData';
 import { MilestoneData } from '../../_models/hei/MilestoneData';
+import * as moment from 'moment';
 
 @Component({
     selector: 'app-milestones',
@@ -31,6 +32,7 @@ export class MilestonesComponent implements OnInit {
     milestonestatuses: LookupItemView[] = [];
     yesnoOptions: LookupItemView[] = [];
     milestone_table_data: MilestoneTableData[] = [];
+    ageInmonths?: number;
 
 
     displayedColumns = ['Milestone', 'Date Assessed', 'Achieved', 'status', 'Comment', 'action'];
@@ -64,6 +66,12 @@ export class MilestonesComponent implements OnInit {
         this.notify.emit({ /*'form': this.milestonesFormGroup,*/ 'data': this.milestone_data });
 
         this.loadMilestones();
+        this.heiservice.getPatientById(this.patientId).subscribe(
+            (result) => {
+                const { dateOfBirth } = result;
+                this.ageInmonths = moment(new Date()).diff(dateOfBirth, 'months', false);
+            }
+        );        
     }
 
     loadMilestones(): any {

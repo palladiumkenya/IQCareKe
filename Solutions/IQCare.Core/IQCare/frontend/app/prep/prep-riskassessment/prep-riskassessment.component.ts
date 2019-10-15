@@ -38,11 +38,20 @@ export class PrepRiskassessmentComponent implements OnInit {
     ReferralPreventionOptions: LookupItemView[] = [];
     RiskReductionEducationOptions: LookupItemView[] = [];
     EncounterTypeOptions: LookupItemView[] = [];
+    SpecifyReferralPreventionOptions: LookupItemView[] = [];
+    SpecifyRiskEducationOptions: LookupItemView[] = [];
+    SpecifyRiskReductionEducationOptions: LookupItemView[] = [];
+    SpecifyReferralOptions: LookupItemView[] = [];
+    SpecifyRiskReductionEdOptions: LookupItemView[] = [];
+    SpecifyRiskEducOptions: LookupItemView[] = [];
     ExistingClinicalNotes: any[] = [];
     ExistingRiskAssessmentDetails: any[] = [];
     ExistingSexualPartnerList: any[] = [];
     careendreasonarray: LookupItemView[] = [];
     ExistingClientBehaviourRiskList: any[] = [];
+    ExistingRiskReductionSpecifyList: any[] = [];
+    ExistingRiskEducationSpecifyList: any[] = [];
+    ExistingReferralPreventionList: any[] = [];
     maxDate: Date;
     personId: number;
     minDate: Date;
@@ -82,8 +91,8 @@ export class PrepRiskassessmentComponent implements OnInit {
         private encounterservice: EncounterService
     ) {
         this.maxDate = new Date();
-       
-      
+
+
         // this.PrepRiskAssessmentFormGroup = new FormControl();
     }
 
@@ -100,7 +109,7 @@ export class PrepRiskassessmentComponent implements OnInit {
 
             this.personId = params['personId'];
             this.getPatientDetailsById(this.personId);
-     
+
 
         });
         this.route.data.subscribe((res) => {
@@ -118,6 +127,9 @@ export class PrepRiskassessmentComponent implements OnInit {
                 PartnerHIVStatusArray,
                 DurationArray,
                 SexWithoutCondomArray,
+                SpecifyReferralPreventionArray,
+                SpecifyRiskEducationArray,
+                SpecifyRiskReductionEducationArray,
                 careendreasonoptions,
                 HivPartnerArray
 
@@ -125,6 +137,7 @@ export class PrepRiskassessmentComponent implements OnInit {
 
             } = res;
 
+            console.log(res);
             this.assessmentOutComeOptions = assessmentOutComeArray['lookupItems'];
             this.careendreasonarray = careendreasonoptions['lookupItems'];
             this.clientsBehaviourRiskOptions = clientsBehaviourRiskArray['lookupItems'];
@@ -142,17 +155,19 @@ export class PrepRiskassessmentComponent implements OnInit {
             this.sexwithoutcondomoptions = SexWithoutCondomArray['lookupItems'];
             this.partnerstatusOptions = PartnerHIVStatusArray['lookupItems'];
             this.partnercccenrollmentoptions = PartnerCCCEnrollmentArray['lookupItems'];
-
+            this.SpecifyReferralPreventionOptions = SpecifyReferralPreventionArray['lookupItems'];
+            this.SpecifyRiskEducationOptions = SpecifyRiskEducationArray['lookupItems'];
+            this.SpecifyRiskReductionEducationOptions = SpecifyRiskReductionEducationArray['lookupItems'];
 
 
 
             this.PartnerHIVStatus = this.partnerstatusOptions[0]['itemId'];
-            
+
 
 
         });
 
-   
+
 
 
         this.PrepRiskAssessmentFormGroup = this._formBuilder.group({
@@ -164,19 +179,17 @@ export class PrepRiskassessmentComponent implements OnInit {
             ReferralPreventions: new FormControl('', [Validators.required]),
             RiskReductionEducation: new FormControl('', [Validators.required]),
             SpecifyPreventionReferalServices: new FormControl(''),
-            partnerHIVStatusDate: new FormControl(''),
             ClientWillingTakePrep: new FormControl('', [Validators.required]),
             RiskEducation: new FormControl(''),
             discontinueReason: new FormControl(''),
             SpecifyRiskEducation: new FormControl(''),
             ClinicalNotes: new FormControl(''),
-            partnercccenrollment: new FormControl(''),
-            partnerARTStartDate: new FormControl(''),
-            Months: new FormControl(''),
-            partnersexcondoms: new FormControl(''),
-            hivpartnerchildren: new FormControl(''),
-            CCCNumber: new FormControl('', Validators.pattern(/^((?!(0))[0-9]{10})$/))
+
         });
+
+
+        //console.log(this.person);
+
         this.RiskViewOptions = this.clientsBehaviourRiskOptions.concat(this.sexualPartnerHivStatusOptions);
         this.RiskViewOptions.forEach(function (e) {
             if (typeof e === 'object') {
@@ -187,18 +200,11 @@ export class PrepRiskassessmentComponent implements OnInit {
         this.PrepRiskAssessmentFormGroup.controls.SpecifyPreventionReferalServices.disable({ onlySelf: true });
         this.PrepRiskAssessmentFormGroup.controls.RiskEducation.disable({ onlySelf: true });
         this.PrepRiskAssessmentFormGroup.controls.SpecifyRiskEducation.disable({ onlySelf: true });
-        this.PrepRiskAssessmentFormGroup.controls.partnerHIVStatusDate.disable({ onlySelf: true });
-        this.PrepRiskAssessmentFormGroup.controls.partnercccenrollment.disable({ onlySelf: true });
+
         this.PrepRiskAssessmentFormGroup.controls.discontinueReason.disable({ onlySelf: true });
-        this.PrepRiskAssessmentFormGroup.controls.CCCNumber.disable({ onlySelf: true });
 
-        this.PrepRiskAssessmentFormGroup.controls.partnerARTStartDate.disable({ onlySelf: true });
 
-        this.PrepRiskAssessmentFormGroup.controls.partnersexcondoms.disable({ onlySelf: true });
 
-        this.PrepRiskAssessmentFormGroup.controls.Months.disable({ onlySelf: true });
-
-        this.PrepRiskAssessmentFormGroup.controls.hivpartnerchildren.disable({ onlySelf: true });
 
 
 
@@ -223,14 +229,27 @@ export class PrepRiskassessmentComponent implements OnInit {
             p => {
                 // console.log(p);
                 this.person = p;
-                if(this.person !=null)
-                {
-                console.log(this.person);
-                if (this.person.dateOfBirth  != null && this.person.dateOfBirth != undefined)
-                {
-                    this.minDate = this.person.dateOfBirth;
+                if (this.person != null) {
+                    console.log(this.person);
+                    if (this.person.dateOfBirth != null && this.person.dateOfBirth != undefined) {
+                        this.minDate = this.person.dateOfBirth;
+                    }
+
+                    if (this.person.gender.toLowerCase() == 'female') {
+
+                        this.SpecifyReferralOptions = this.SpecifyReferralPreventionOptions.filter(x => x.itemName !== 'VMMC');
+                        this.SpecifyRiskEducOptions = this.SpecifyRiskEducationOptions.filter(x => x.itemName !== 'VMMC');
+                        this.SpecifyRiskReductionEdOptions = this.SpecifyRiskReductionEducationOptions.filter(x => x.itemName !== 'VMMC');
+
+
+
+                    } else {
+                        this.SpecifyReferralOptions = this.SpecifyReferralPreventionOptions;
+                        this.SpecifyRiskEducOptions = this.SpecifyRiskEducationOptions;
+                        this.SpecifyRiskReductionEdOptions = this.SpecifyRiskReductionEducationOptions;
+                    }
+
                 }
-            }
 
             },
             (err) => {
@@ -283,6 +302,9 @@ export class PrepRiskassessmentComponent implements OnInit {
             this.ExistingRiskAssessmentDetails = [];
             this.ExistingSexualPartnerList = [];
             this.ExistingClientBehaviourRiskList = [];
+            this.ExistingRiskReductionSpecifyList = [];
+            this.ExistingRiskEducationSpecifyList = [];
+            this.ExistingReferralPreventionList = [];
 
             this.ExistingClinicalNotes = result['clinicalNotes'];
             this.ExistingRiskAssessmentDetails = result['riskAssessmentDetails'];
@@ -333,28 +355,36 @@ export class PrepRiskassessmentComponent implements OnInit {
             let riskreductionmasterid: number;
             riskreductionmasterid = this.RiskReductionEducationOptions[0].masterId;
             let riskreductiondetailvalue: any[] = [];
-            let riskreductiondetailspecify: any[] = [];
+
             riskreductiondetailvalue = this.ExistingRiskAssessmentDetails
                 .filter(x => x.riskAssessmentid == riskreductionmasterid).map(o => {
                     return o.value;
                 });
-            riskreductiondetailspecify = this.ExistingRiskAssessmentDetails
-                .filter(x => x.riskAssessmentid == riskreductionmasterid).map(o => {
-                    return o.comment;
+
+            let riskreductiondetailspecifymasterid: number;
+            riskreductiondetailspecifymasterid = this.SpecifyRiskReductionEducationOptions[0].masterId;
+
+            this.ExistingRiskReductionSpecifyList = this.ExistingRiskAssessmentDetails
+                .filter(x => x.riskAssessmentid == riskreductiondetailspecifymasterid).map(o => {
+                    return o.value;
                 });
 
 
             let referralpreventionmasterid: number;
             referralpreventionmasterid = this.ReferralPreventionOptions[0].masterId;
             let referralpreventiondetailvalue: any[] = [];
-            let referralpreventiondetailspecify: any[] = [];
+
             referralpreventiondetailvalue = this.ExistingRiskAssessmentDetails
                 .filter(x => x.riskAssessmentid == referralpreventionmasterid).map(o => {
                     return o.value;
                 });
-            referralpreventiondetailspecify = this.ExistingRiskAssessmentDetails
-                .filter(x => x.riskAssessmentid == referralpreventionmasterid).map(o => {
-                    return o.comment;
+
+            let referralpreventionservicesspecifymasterid: number;
+            referralpreventionservicesspecifymasterid = this.SpecifyReferralPreventionOptions[0].masterId;
+
+            this.ExistingReferralPreventionList = this.ExistingRiskAssessmentDetails
+                .filter(x => x.riskAssessmentid == referralpreventionservicesspecifymasterid).map(o => {
+                    return o.value;
                 });
 
 
@@ -376,14 +406,17 @@ export class PrepRiskassessmentComponent implements OnInit {
             let riskeducationmasterid: number;
             riskeducationmasterid = this.riskEducationOptions[0].masterId;
             let riskeducationdetailvalue: any[] = [];
-            let riskeducationdetailspecify: any[] = [];
+
             riskeducationdetailvalue = this.ExistingRiskAssessmentDetails
                 .filter(x => x.riskAssessmentid == riskeducationmasterid).map(o => {
                     return o.value;
                 });
-            riskeducationdetailspecify = this.ExistingRiskAssessmentDetails
-                .filter(x => x.riskAssessmentid == riskeducationmasterid).map(o => {
-                    return o.comment;
+
+            let riskeducationspecifymasterid: number;
+            riskeducationspecifymasterid = this.SpecifyRiskEducationOptions[0].masterId;
+            this.ExistingRiskEducationSpecifyList = this.ExistingRiskAssessmentDetails
+                .filter(x => x.riskAssessmentid == riskeducationspecifymasterid).map(o => {
+                    return o.value;
                 });
 
             let clinicalnotesvalue: any[] = [];
@@ -391,60 +424,6 @@ export class PrepRiskassessmentComponent implements OnInit {
                 return o.comment;
             });
 
-            let partnerhivstatusvalue: any[] = [];
-            let partnerhivstatusmasterid: number;
-            partnerhivstatusmasterid = this.partnerstatusOptions[0].masterId;
-            partnerhivstatusvalue = this.ExistingRiskAssessmentDetails.filter(x => x.riskAssessmentid == partnerhivstatusmasterid)
-                .map(o => {
-                    return o.date;
-                });
-
-            let partnerartvalue: any[] = [];
-            let partnerartmasterid: number;
-            partnerartmasterid = this.partnerartstartdateoptions[0].masterId;
-            partnerartvalue = this.ExistingRiskAssessmentDetails.filter(x => x.riskAssessmentid == partnerartmasterid)
-                .map(o => {
-                    return o.date;
-                });
-
-            let partnercccenrollmentvalue: any[] = [];
-            let partnercccenrollmentmasterid: number;
-            partnercccenrollmentmasterid = this.partnercccenrollmentoptions[0].masterId;
-            partnercccenrollmentvalue = this.ExistingRiskAssessmentDetails.filter(x => x.riskAssessmentid == partnercccenrollmentmasterid)
-                .map(o => {
-                    return o.value;
-                });
-
-            let partnercccvalue: any[] = [];
-            let partnercccmasterid: number;
-            partnercccmasterid = this.patientIdentifieroptions[0].masterId;
-            partnercccvalue = this.ExistingRiskAssessmentDetails.filter(x => x.riskAssessmentid == partnercccmasterid)
-                .map(o => {
-                    return o.comment;
-                });
-
-            let partnermonth: any[] = [];
-            let partnermonthmasterid: number;
-            partnermonthmasterid = this.hivserodiscordantoptions[0].masterId;
-            partnermonth = this.ExistingRiskAssessmentDetails.filter(x => x.riskAssessmentid == partnermonthmasterid)
-                .map(o => {
-                    return o.comment;
-                });
-            let partnersexcondom: any[] = [];
-            let partnersexmasterid: number;
-            partnersexmasterid = this.sexwithoutcondomoptions[0].masterId;
-            partnersexcondom = this.ExistingRiskAssessmentDetails.filter(x => x.riskAssessmentid == partnersexmasterid)
-                .map(o => {
-                    return o.value;
-                });
-
-            let children: any[] = [];
-            let childrenmasterid: number;
-            childrenmasterid = this.partnerchildrenoptions[0].masterId;
-            children = this.ExistingRiskAssessmentDetails.filter(x => x.riskAssessmentid == childrenmasterid)
-                .map(o => {
-                    return o.comment;
-                });
 
 
             this.prepservice.getPatientMasterVisits(this.patientId, this.PatientMasterVisitId).subscribe((res) => {
@@ -463,21 +442,15 @@ export class PrepRiskassessmentComponent implements OnInit {
             this.PrepRiskAssessmentFormGroup.controls.clientsBehaviourRisks.setValue(this.ExistingClientBehaviourRiskList);
             this.PrepRiskAssessmentFormGroup.controls.assessmentOutCome.setValue(assessmentoutcomedetail[0]);
             this.PrepRiskAssessmentFormGroup.controls.RiskReductionEducation.setValue(riskreductiondetailvalue[0]);
-            this.PrepRiskAssessmentFormGroup.controls.SpecifyRiskReductionEducation.setValue(riskreductiondetailspecify[0]);
+            this.PrepRiskAssessmentFormGroup.controls.SpecifyRiskReductionEducation.setValue(this.ExistingRiskReductionSpecifyList);
             this.PrepRiskAssessmentFormGroup.controls.ReferralPreventions.setValue(referralpreventiondetailvalue[0]);
-            this.PrepRiskAssessmentFormGroup.controls.SpecifyPreventionReferalServices.setValue(referralpreventiondetailspecify[0]);
+            this.PrepRiskAssessmentFormGroup.controls.SpecifyPreventionReferalServices.setValue(this.ExistingReferralPreventionList);
             this.PrepRiskAssessmentFormGroup.controls.ClientWillingTakePrep.setValue(clientwillingprepdetail[0]);
             this.PrepRiskAssessmentFormGroup.controls.RiskEducation.setValue(riskeducationdetailvalue[0]);
-            this.PrepRiskAssessmentFormGroup.controls.SpecifyRiskEducation.setValue(riskeducationdetailspecify[0]);
+            this.PrepRiskAssessmentFormGroup.controls.SpecifyRiskEducation.setValue(this.ExistingRiskEducationSpecifyList);
             this.PrepRiskAssessmentFormGroup.controls.ClinicalNotes.setValue(clinicalnotesvalue[0]);
-            this.PrepRiskAssessmentFormGroup.controls.partnerHIVStatusDate.setValue(partnerhivstatusvalue[0]);
-            this.PrepRiskAssessmentFormGroup.controls.partnercccenrollment.setValue(partnercccenrollmentvalue[0]);
-            this.PrepRiskAssessmentFormGroup.controls.partnerARTStartDate.setValue(partnerartvalue[0]);
-            this.PrepRiskAssessmentFormGroup.controls.CCCNumber.setValue(partnercccvalue[0]);
-            this.PrepRiskAssessmentFormGroup.controls.Months.setValue(partnermonth[0]);
-            this.PrepRiskAssessmentFormGroup.controls.partnersexcondoms.setValue(partnersexcondom[0]);
-            this.PrepRiskAssessmentFormGroup.controls.hivpartnerchildren.setValue(children[0]);
-            this.PrepRiskAssessmentFormGroup.controls.discontinueReason.setValue(prepdeclinelist[0]);
+
+            this.PrepRiskAssessmentFormGroup.controls.discontinueReason.setValue(prepdeclinelist);
 
 
 
@@ -676,40 +649,7 @@ export class PrepRiskassessmentComponent implements OnInit {
 
 
     }
-    OnPartnerenrollmentSelection(event) {
 
-        let selectedvalue: string;
-        selectedvalue = event.source.viewValue;
-        selectedvalue = selectedvalue.toString().toLowerCase();
-        if (event.source.selected == true) {
-            if (selectedvalue === 'yes') {
-                this.PrepRiskAssessmentFormGroup.controls.CCCNumber.enable({ onlySelf: true });
-
-
-
-            } else if (selectedvalue === 'no') {
-                this.PrepRiskAssessmentFormGroup.controls.CCCNumber.disable({ onlySelf: true });
-                this.PrepRiskAssessmentFormGroup.controls.CCCNumber.setValue('');
-
-
-            } else if (selectedvalue === 'unknown') {
-                this.PrepRiskAssessmentFormGroup.controls.CCCNumber.disable({ onlySelf: true });
-                this.PrepRiskAssessmentFormGroup.controls.CCCNumber.setValue('');
-
-            }
-            else {
-                this.PrepRiskAssessmentFormGroup.controls.CCCNumber.disable({ onlySelf: true });
-                this.PrepRiskAssessmentFormGroup.controls.CCCNumber.setValue('');
-
-            }
-        }
-        else {
-            this.PrepRiskAssessmentFormGroup.controls.CCCNumber.disable({ onlySelf: true });
-            this.PrepRiskAssessmentFormGroup.controls.CCCNumber.setValue('');
-
-        }
-
-    }
 
     OnClientAssessmentSelection(event) {
 
@@ -758,19 +698,6 @@ export class PrepRiskassessmentComponent implements OnInit {
                 }
             }
 
-            this.PrepRiskAssessmentFormGroup.controls.partnerHIVStatusDate.enable({ onlySelf: true });
-
-            this.PrepRiskAssessmentFormGroup.controls.partnercccenrollment.enable({ onlySelf: true });
-
-            // this.PrepRiskAssessmentFormGroup.controls.CCCNumber.enable({ onlySelf: true });
-
-            this.PrepRiskAssessmentFormGroup.controls.partnerARTStartDate.enable({ onlySelf: true });
-            this.PrepRiskAssessmentFormGroup.controls.partnerARTStartDate.setValue('');
-            this.PrepRiskAssessmentFormGroup.controls.partnersexcondoms.enable({ onlySelf: true });
-
-            this.PrepRiskAssessmentFormGroup.controls.Months.enable({ onlySelf: true });
-
-            this.PrepRiskAssessmentFormGroup.controls.hivpartnerchildren.enable({ onlySelf: true });
 
 
         }
@@ -783,27 +710,13 @@ export class PrepRiskassessmentComponent implements OnInit {
             }
 
 
-            this.PrepRiskAssessmentFormGroup.controls.partnerHIVStatusDate.disable({ onlySelf: true });
-            this.PrepRiskAssessmentFormGroup.controls.partnerHIVStatusDate.setValue('');
-            this.PrepRiskAssessmentFormGroup.controls.partnercccenrollment.disable({ onlySelf: true });
-            this.PrepRiskAssessmentFormGroup.controls.partnercccenrollment.setValue('');
-            this.PrepRiskAssessmentFormGroup.controls.CCCNumber.disable({ onlySelf: true });
-            this.PrepRiskAssessmentFormGroup.controls.CCCNumber.setValue('');
-            this.PrepRiskAssessmentFormGroup.controls.partnerARTStartDate.disable({ onlySelf: true });
-            this.PrepRiskAssessmentFormGroup.controls.partnerARTStartDate.setValue('');
-            this.PrepRiskAssessmentFormGroup.controls.partnersexcondoms.disable({ onlySelf: true });
-            this.PrepRiskAssessmentFormGroup.controls.partnersexcondoms.setValue('');
-            this.PrepRiskAssessmentFormGroup.controls.Months.disable({ onlySelf: true });
-            this.PrepRiskAssessmentFormGroup.controls.Months.setValue('');
-            this.PrepRiskAssessmentFormGroup.controls.hivpartnerchildren.disable({ onlySelf: true });
-            this.PrepRiskAssessmentFormGroup.controls.hivpartnerchildren.setValue('');
         }
 
         if (event.source.viewValue === 'Not on ART' && event.source.selected == true) {
             for (let i = 0; i < event.source._parent.options.length; i++) {
 
                 if ((event.source._parent.options._results[i].viewValue !== 'Couple is trying to conceive') &&
-                    (event.source._parent.options._results[i].viewValue !== event.source.viewValue) 
+                    (event.source._parent.options._results[i].viewValue !== event.source.viewValue)
                     && (event.source._parent.options._results[i].viewValue !== 'Not Applicable')) {
 
                     event.source._parent.options._results[i].deselect();
@@ -815,7 +728,7 @@ export class PrepRiskassessmentComponent implements OnInit {
             for (let i = 0; i < event.source._parent.options.length; i++) {
 
                 if ((event.source._parent.options._results[i].viewValue !== 'Couple is trying to conceive') &&
-                    (event.source._parent.options._results[i].viewValue !== event.source.viewValue)  
+                    (event.source._parent.options._results[i].viewValue !== event.source.viewValue)
                     && (event.source._parent.options._results[i].viewValue !== 'Not Applicable')) {
 
 
@@ -855,22 +768,22 @@ export class PrepRiskassessmentComponent implements OnInit {
         let ClientWillingTakePrepstatus: number;
         let riskeducationstatus: number;
 
-        let SpecifyRiskEducationValue: string;
-        let SpecifyPreventionReferalServicesValue: string;
-        let SpecifyRiskReductionEducationValue: string;
+        let SpecifyRiskEducationValue: any[] = [];
+        let SpecifyPreventionReferalServicesValue: any[] = [];
+        let SpecifyRiskReductionEducationValue: any[] = [];
         let clinicalnotesvalue: string;
-        let partnerhivstatusdatedetail: string;
+        /*let partnerhivstatusdatedetail: string;
         let partnercccenrollmentdetail: number;
         let CCCnumber: string;
         let Monthdetail: number;
         let artstartdatepartner: string;
         let partnersexwithoutcondoms: number;
-        let hivpartnerchildrendetail: number;
-        let prepdeclinereason: number;
+        let hivpartnerchildrendetail: number;*/
+        let prepdeclinereason: any[] = [];
 
         SpecifyRiskReductionEducationValue = this.PrepRiskAssessmentFormGroup.controls.SpecifyRiskReductionEducation.value;
         SpecifyPreventionReferalServicesValue = this.PrepRiskAssessmentFormGroup.controls.SpecifyPreventionReferalServices.value;
-        SpecifyRiskEducationValue = this.PrepRiskAssessmentFormGroup.controls.SpecifyRiskReductionEducation.value;
+        SpecifyRiskEducationValue = this.PrepRiskAssessmentFormGroup.controls.SpecifyRiskEducation.value;
         clinicalnotesvalue = this.PrepRiskAssessmentFormGroup.controls.ClinicalNotes.value;
         prepdeclinereason = this.PrepRiskAssessmentFormGroup.controls.discontinueReason.value
         partnerhivstatus = this.PrepRiskAssessmentFormGroup.controls.sexualPartnerHivStatus.value;
@@ -880,13 +793,13 @@ export class PrepRiskassessmentComponent implements OnInit {
         referralpreventions = this.PrepRiskAssessmentFormGroup.controls.ReferralPreventions.value;
         ClientWillingTakePrepstatus = this.PrepRiskAssessmentFormGroup.controls.ClientWillingTakePrep.value;
         riskeducationstatus = this.PrepRiskAssessmentFormGroup.controls.RiskEducation.value;
-        partnerhivstatusdatedetail = this.PrepRiskAssessmentFormGroup.controls.partnerHIVStatusDate.value;
+        /*partnerhivstatusdatedetail = this.PrepRiskAssessmentFormGroup.controls.partnerHIVStatusDate.value;
         partnercccenrollmentdetail = this.PrepRiskAssessmentFormGroup.controls.partnercccenrollment.value;
         CCCnumber = this.PrepRiskAssessmentFormGroup.controls.CCCNumber.value;
         artstartdatepartner = this.PrepRiskAssessmentFormGroup.controls.partnerARTStartDate.value;
         partnersexwithoutcondoms = this.PrepRiskAssessmentFormGroup.controls.partnersexcondoms.value;
         hivpartnerchildrendetail = this.PrepRiskAssessmentFormGroup.controls.hivpartnerchildren.value;
-        Monthdetail = this.PrepRiskAssessmentFormGroup.controls.Months.value;
+        Monthdetail = this.PrepRiskAssessmentFormGroup.controls.Months.value; */
 
 
 
@@ -995,7 +908,7 @@ export class PrepRiskassessmentComponent implements OnInit {
             .forEach(x => {
                 if (x.Value == riskreductioneducationstatus) {
                     x.DeleteFlag = false;
-                    x.Comment = SpecifyRiskReductionEducationValue;
+
                 } else {
                     x.DeleteFlag = true;
                 }
@@ -1005,7 +918,7 @@ export class PrepRiskassessmentComponent implements OnInit {
 
                 this.RiskAssessmentList.push({
                     'Id': 0,
-                    'Comment': SpecifyRiskReductionEducationValue,
+                    'Comment': '',
                     'RiskAssessmentid': riskreductioneducationmasterid,
                     'Value': riskreductioneducationstatus,
                     'DeleteFlag': false,
@@ -1015,6 +928,59 @@ export class PrepRiskassessmentComponent implements OnInit {
             }
         }
 
+
+        let specifyriskreductionmasterid: number;
+        let specifyriskreductionlist: any[] = [];
+        specifyriskreductionmasterid = this.SpecifyRiskReductionEducationOptions[0].masterId;
+        specifyriskreductionlist = this.RiskAssessmentList.filter(x => x.RiskAssessmentid == specifyriskreductionmasterid);
+        this.RiskAssessmentList.filter(x => x.RiskAssessmentid == specifyriskreductionmasterid)
+            .forEach(x => {
+                let status: any[] = [];
+                status = SpecifyRiskReductionEducationValue.filter(t => t == x.Value);
+                if (x.Value == status) {
+                    x.DeleteFlag = false;
+
+                } else {
+                    x.DeleteFlag = true;
+                }
+            });
+
+
+        let specifyriskreductionnotexists: any[] = [];
+
+        specifyriskreductionnotexists = SpecifyRiskReductionEducationValue.filter(r => {
+            if (specifyriskreductionlist.findIndex(t => t.Value == r) == -1) {
+
+                this.RiskAssessmentList.push({
+                    'Id': 0,
+                    'Comment': '',
+                    'RiskAssessmentid': specifyriskreductionmasterid,
+                    'Value': r,
+                    'DeleteFlag': false,
+                    'Date': ''
+                });
+                return r;
+
+            }
+        });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         let referralpreventionmasterid: number;
         let referralpreventionlist: any[] = [];
         referralpreventionmasterid = this.ReferralPreventionOptions[0].masterId;
@@ -1023,7 +989,7 @@ export class PrepRiskassessmentComponent implements OnInit {
             .forEach(x => {
                 if (x.Value == referralpreventions) {
                     x.DeleteFlag = false;
-                    x.Comment = SpecifyPreventionReferalServicesValue;
+
                 } else {
                     x.DeleteFlag = true;
                 }
@@ -1033,7 +999,7 @@ export class PrepRiskassessmentComponent implements OnInit {
 
                 this.RiskAssessmentList.push({
                     'Id': 0,
-                    'Comment': SpecifyPreventionReferalServicesValue,
+                    'Comment': '',
                     'RiskAssessmentid': referralpreventionmasterid,
                     'Value': referralpreventions,
                     'DeleteFlag': false,
@@ -1042,6 +1008,47 @@ export class PrepRiskassessmentComponent implements OnInit {
 
             }
         }
+
+
+        let specifypreventionservicesmasterid: number;
+        let specifypreventionserviceslist: any[] = [];
+        specifypreventionservicesmasterid = this.SpecifyReferralPreventionOptions[0].masterId;
+        specifypreventionserviceslist = this.RiskAssessmentList.filter(x => x.RiskAssessmentid == specifypreventionservicesmasterid);
+        this.RiskAssessmentList.filter(x => x.RiskAssessmentid == specifypreventionservicesmasterid)
+            .forEach(x => {
+                let status: any[] = [];
+                status = SpecifyPreventionReferalServicesValue.filter(t => t == x.Value);
+                if (x.Value == status) {
+                    x.DeleteFlag = false;
+
+                } else {
+                    x.DeleteFlag = true;
+                }
+            });
+
+
+        let specifypreventionservicesnotexists: any[] = [];
+
+        specifypreventionservicesnotexists = SpecifyPreventionReferalServicesValue.filter(r => {
+            if (specifypreventionserviceslist.findIndex(t => t.Value == r) == -1) {
+
+                this.RiskAssessmentList.push({
+                    'Id': 0,
+                    'Comment': '',
+                    'RiskAssessmentid': specifypreventionservicesmasterid,
+                    'Value': r,
+                    'DeleteFlag': false,
+                    'Date': ''
+                });
+                return r;
+
+            }
+        });
+
+
+
+
+
 
 
         let clientwillingprepmasterid: number;
@@ -1079,7 +1086,9 @@ export class PrepRiskassessmentComponent implements OnInit {
         prepdeclinepreplist = this.RiskAssessmentList.filter(x => x.RiskAssessmentid == prepdeclinemasterid);
         this.RiskAssessmentList.filter(x => x.RiskAssessmentid == prepdeclinemasterid)
             .forEach(x => {
-                if (x.Value == prepdeclinereason) {
+                let status: any[] = [];
+                status = prepdeclinereason.filter(t => t == x.Value);
+                if (x.Value == status) {
                     x.DeleteFlag = false;
 
                 } else {
@@ -1088,20 +1097,24 @@ export class PrepRiskassessmentComponent implements OnInit {
             });
 
 
-        if (prepdeclinereason > 0) {
-            if (prepdeclinepreplist.findIndex(t => t.Value == prepdeclinereason) == -1) {
+        let declinereasonnotexists: any[] = [];
+
+        declinereasonnotexists = prepdeclinereason.filter(r => {
+            if (prepdeclinepreplist.findIndex(t => t.Value == r) == -1) {
 
                 this.RiskAssessmentList.push({
                     'Id': 0,
                     'Comment': '',
                     'RiskAssessmentid': prepdeclinemasterid,
-                    'Value': prepdeclinereason,
+                    'Value': r,
                     'DeleteFlag': false,
                     'Date': ''
                 });
+                return r;
 
             }
-        }
+        });
+
 
         let riskeducationmasterid: number;
         let riskeducationlist: any[] = [];
@@ -1111,17 +1124,17 @@ export class PrepRiskassessmentComponent implements OnInit {
             .forEach(x => {
                 if (x.Value == riskeducationstatus) {
                     x.DeleteFlag = false;
-                    x.Comment = SpecifyRiskEducationValue;
+
                 } else {
                     x.DeleteFlag = true;
                 }
             });
         if (riskeducationstatus > 0) {
-            if (riskreductioneducationlist.findIndex(t => t.Value == riskeducationstatus) == -1) {
+            if (riskeducationlist.findIndex(t => t.Value == riskeducationstatus) == -1) {
 
                 this.RiskAssessmentList.push({
                     'Id': 0,
-                    'Comment': SpecifyRiskEducationValue,
+                    'Comment': '',
                     'RiskAssessmentid': riskeducationmasterid,
                     'Value': riskeducationstatus,
                     'DeleteFlag': false,
@@ -1130,6 +1143,46 @@ export class PrepRiskassessmentComponent implements OnInit {
 
             }
         }
+
+        let specifyriskeducationmasterid: number;
+        let specifyriskeducationlist: any[] = [];
+        specifyriskeducationmasterid = this.SpecifyRiskEducationOptions[0].masterId;
+        specifyriskeducationlist = this.RiskAssessmentList.filter(x => x.RiskAssessmentid == specifyriskeducationmasterid);
+        this.RiskAssessmentList.filter(x => x.RiskAssessmentid == specifyriskeducationmasterid)
+            .forEach(x => {
+                let status: any[] = [];
+                status = SpecifyRiskEducationValue.filter(t => t == x.Value);
+                if (x.Value == status) {
+                    x.DeleteFlag = false;
+
+                } else {
+                    x.DeleteFlag = true;
+                }
+            });
+
+
+        let specifyriskeducationnotexists: any[] = [];
+
+        specifyriskeducationnotexists = SpecifyRiskEducationValue.filter(r => {
+            if (specifyriskeducationlist.findIndex(t => t.Value == r) == -1) {
+
+                this.RiskAssessmentList.push({
+                    'Id': 0,
+                    'Comment': '',
+                    'RiskAssessmentid': specifyriskeducationmasterid,
+                    'Value': r,
+                    'DeleteFlag': false,
+                    'Date': ''
+                });
+                return r;
+
+            }
+        });
+
+
+
+
+
 
         if (clinicalnotesvalue !== null && clinicalnotesvalue !== undefined) {
             if (clinicalnotesvalue.length < 1) {
@@ -1171,247 +1224,6 @@ export class PrepRiskassessmentComponent implements OnInit {
             });
         }
 
-        if (partnerhivstatusdatedetail !== null && partnerhivstatusdatedetail !== undefined) {
-            let partnerhivstatusmasterid: number;
-            let partnerhivstatusvalueid: number;
-            let partnerhivstatuslist: any[] = [];
-            partnerhivstatusmasterid = this.partnerstatusOptions[0].masterId;
-            partnerhivstatusvalueid = this.partnerstatusOptions[0].itemId;
-            partnerhivstatuslist = this.RiskAssessmentList.filter(x => x.RiskAssessmentid == partnerhivstatusmasterid);
-            this.RiskAssessmentList.filter(x => x.RiskAssessmentid == partnerhivstatusmasterid)
-                .forEach(x => {
-                    if (x.Value == partnerhivstatusvalueid) {
-                        if (partnerhivstatusdatedetail.length < 1) {
-                            x.DeleteFlag = true;
-
-                        } else {
-                            x.DeleteFlag = false;
-                            x.Date = partnerhivstatusdatedetail;
-                        }
-                    }
-                });
-            if (partnerhivstatuslist.findIndex(t => t.Value == partnerhivstatusvalueid) == -1) {
-                if (partnerhivstatusdatedetail !== '') {
-                    this.RiskAssessmentList.push({
-                        'Id': 0,
-                        'Comment': '',
-                        'RiskAssessmentid': partnerhivstatusmasterid,
-                        'Value': partnerhivstatusvalueid,
-                        'DeleteFlag': false,
-                        'Date': partnerhivstatusdatedetail
-                    });
-                }
-
-            }
-
-        }
-
-        if (artstartdatepartner !== null && artstartdatepartner !== undefined) {
-
-            let partnerartstartdatemasterid: number;
-            let partnerartstartdatevalueid: number;
-            let partnerartstartdatelist: any[] = [];
-            partnerartstartdatemasterid = this.partnerartstartdateoptions[0].masterId;
-            partnerartstartdatevalueid = this.partnerartstartdateoptions[0].itemId;
-            partnerartstartdatelist = this.RiskAssessmentList.filter(x => x.RiskAssessmentid == partnerartstartdatemasterid);
-            this.RiskAssessmentList.filter(x => x.RiskAssessmentid == partnerartstartdatemasterid)
-                .forEach(x => {
-                    if (x.Value == partnerartstartdatevalueid) {
-                        if (artstartdatepartner.length < 1) {
-                            x.DeleteFlag = true;
-
-
-                        } else {
-                            x.DeleteFlag = false;
-                            x.Date = artstartdatepartner;
-                        }
-
-                    }
-                });
-            if (partnerartstartdatelist.findIndex(t => t.Value == partnerartstartdatevalueid) == -1) {
-                if (artstartdatepartner != '') {
-                    this.RiskAssessmentList.push({
-                        'Id': 0,
-                        'Comment': '',
-                        'RiskAssessmentid': partnerartstartdatemasterid,
-                        'Value': partnerartstartdatevalueid,
-                        'DeleteFlag': false,
-                        'Date': artstartdatepartner
-                    });
-                }
-
-            }
-        }
-
-
-        if (partnercccenrollmentdetail != null && partnercccenrollmentdetail !== undefined
-        ) {
-
-            let partnercccenrollmentmasterid: number;
-            let partnercccenrollmentlist: any[] = [];
-            partnercccenrollmentmasterid = this.partnercccenrollmentoptions[0].masterId;
-
-            partnercccenrollmentlist = this.RiskAssessmentList.filter(x => x.RiskAssessmentid == partnercccenrollmentmasterid);
-            this.RiskAssessmentList.filter(x => x.RiskAssessmentid == partnercccenrollmentmasterid)
-                .forEach(x => {
-                    if (x.Value == partnercccenrollmentdetail) {
-                        x.DeleteFlag = false;
-
-                    } else {
-                        x.DeleteFlag = true;
-                    }
-                });
-            if (partnercccenrollmentdetail.toString() !== '') {
-                if (partnercccenrollmentlist.findIndex(t => t.Value == partnercccenrollmentdetail) == -1) {
-
-                    this.RiskAssessmentList.push({
-                        'Id': 0,
-                        'Comment': '',
-                        'RiskAssessmentid': partnercccenrollmentmasterid,
-                        'Value': partnercccenrollmentdetail,
-                        'DeleteFlag': false,
-                        'Date': ''
-                    });
-
-                }
-            }
-        }
-
-
-        if (partnersexwithoutcondoms != null && partnersexwithoutcondoms !== undefined
-        ) {
-            let partnersexcondomsmasterid: number;
-            let partnersexcondomslist: any[] = [];
-            partnersexcondomsmasterid = this.sexwithoutcondomoptions[0].masterId;
-
-            partnersexcondomslist = this.RiskAssessmentList.filter(x => x.RiskAssessmentid == partnersexcondomsmasterid);
-            this.RiskAssessmentList.filter(x => x.RiskAssessmentid == partnersexcondomsmasterid)
-                .forEach(x => {
-                    if (x.Value == partnersexwithoutcondoms) {
-                        x.DeleteFlag = false;
-
-                    } else {
-                        x.DeleteFlag = true;
-                    }
-                });
-            if (partnersexwithoutcondoms.toString() !== '') {
-                if (partnersexcondomslist.findIndex(t => t.Value == partnersexwithoutcondoms) == -1) {
-
-                    this.RiskAssessmentList.push({
-                        'Id': 0,
-                        'Comment': '',
-                        'RiskAssessmentid': partnersexcondomsmasterid,
-                        'Value': partnersexwithoutcondoms,
-                        'DeleteFlag': false,
-                        'Date': ''
-                    });
-
-                }
-            }
-        }
-
-
-        if (CCCnumber != null && CCCnumber !== undefined) {
-            let cccnumbermasterid: number;
-            let cccnumbervalueid: number;
-            let cccnumberlist: any[] = [];
-            let findindex: number;
-            findindex = this.patientIdentifieroptions.findIndex(x => x.itemName == 'CCCNumber');
-            cccnumbermasterid = this.patientIdentifieroptions[findindex].masterId;
-            cccnumbervalueid = this.patientIdentifieroptions[findindex].itemId;
-            cccnumberlist = this.RiskAssessmentList.filter(x => x.RiskAssessmentid == cccnumbermasterid);
-            this.RiskAssessmentList.filter(x => x.RiskAssessmentid == cccnumbermasterid)
-                .forEach(x => {
-                    if (x.Value == cccnumbervalueid) {
-                        if (CCCnumber.length < 1) {
-                            x.DeleteFlag = true;
-                        } else {
-                            x.DeleteFlag = false;
-                            x.Comment = CCCnumber;
-                        }
-
-                    }
-                });
-            if (cccnumberlist.findIndex(t => t.Value == cccnumbervalueid) == -1) {
-                if (CCCnumber.length > 0) {
-                    this.RiskAssessmentList.push({
-                        'Id': 0,
-                        'Comment': CCCnumber.toString(),
-                        'RiskAssessmentid': cccnumbermasterid,
-                        'Value': cccnumbervalueid,
-                        'DeleteFlag': false,
-                        'Date': ''
-                    });
-                }
-
-            }
-        }
-
-
-        if (typeof Monthdetail != 'undefined' && Monthdetail !== undefined && Monthdetail) {
-            let hivsexdiscordantmasterid: number;
-            let hivsexdiscordantvalueid: number;
-            let hivsexdiscordantlist: any[] = [];
-
-            hivsexdiscordantmasterid = this.hivserodiscordantoptions[0].masterId;
-            hivsexdiscordantvalueid = this.hivserodiscordantoptions[0].itemId;
-            hivsexdiscordantlist = this.RiskAssessmentList.filter(x => x.RiskAssessmentid == hivsexdiscordantmasterid);
-            this.RiskAssessmentList.filter(x => x.RiskAssessmentid == hivsexdiscordantmasterid)
-                .forEach(x => {
-                    if (x.Value == hivsexdiscordantvalueid) {
-                        x.DeleteFlag = false;
-                        x.Comment = Monthdetail.toString();
-
-                    } else {
-                        x.DeleteFlag = true;
-                    }
-                });
-            if (hivsexdiscordantlist.findIndex(t => t.Value == hivsexdiscordantvalueid) == -1) {
-
-                this.RiskAssessmentList.push({
-                    'Id': 0,
-                    'Comment': Monthdetail.toString(),
-                    'RiskAssessmentid': hivsexdiscordantmasterid,
-                    'Value': hivsexdiscordantvalueid,
-                    'DeleteFlag': false,
-                    'Date': ''
-                });
-
-            }
-        }
-
-
-        if (typeof hivpartnerchildrendetail != 'undefined' && hivpartnerchildrendetail) {
-            let hivpartnerchildrenmasterid: number;
-            let hipartnerchildrenvalueid: number;
-            let hivpartnechildrenlist: any[] = [];
-
-            hivpartnerchildrenmasterid = this.partnerchildrenoptions[0].masterId;
-            hipartnerchildrenvalueid = this.partnerchildrenoptions[0].itemId;
-            hivpartnechildrenlist = this.RiskAssessmentList.filter(x => x.RiskAssessmentid == hivpartnerchildrenmasterid);
-            this.RiskAssessmentList.filter(x => x.RiskAssessmentid == hivpartnerchildrenmasterid)
-                .forEach(x => {
-                    if (x.Value == hipartnerchildrenvalueid) {
-                        x.DeleteFlag = false;
-                        x.Comment = hivpartnerchildrendetail.toString();
-
-                    } else {
-                        x.DeleteFlag = true;
-                    }
-                });
-            if (hivpartnechildrenlist.findIndex(t => t.Value == hipartnerchildrenvalueid) == -1) {
-
-                this.RiskAssessmentList.push({
-                    'Id': 0,
-                    'Comment': hivpartnerchildrendetail.toString(),
-                    'RiskAssessmentid': hivpartnerchildrenmasterid,
-                    'Value': hipartnerchildrenvalueid,
-                    'DeleteFlag': false,
-                    'Date': ''
-                });
-
-            }
-        }
 
 
 
@@ -1456,18 +1268,18 @@ export class PrepRiskassessmentComponent implements OnInit {
         let riskeducationstatus: number;
         this.RiskAssessmentList = [];
         this.ClinicalList = [];
-        let partnerhivstatusdatedetail: string;
-        let partnercccenrollmentdetail: number;
-        let CCCnumber: string;
-        let Monthdetail: number;
-        let artstartdatepartner: string;
-        let partnersexwithoutcondoms: number;
-        let hivpartnerchildrendetail: number;
-        let SpecifyRiskEducationValue: string;
-        let SpecifyPreventionReferalServicesValue: string;
-        let SpecifyRiskReductionEducationValue: string;
+        /*  let partnerhivstatusdatedetail: string;
+          let partnercccenrollmentdetail: number;
+          let CCCnumber: string;
+          let Monthdetail: number;
+          let artstartdatepartner: string;
+          let partnersexwithoutcondoms: number;
+          let hivpartnerchildrendetail: number;*/
+        let SpecifyRiskEducationValue: any[] = [];
+        let SpecifyPreventionReferalServicesValue: any[] = [];
+        let SpecifyRiskReductionEducationValue: any[] = [];
         let clinicalnotesvalue: string;
-        let prepdeclinereason: number;
+        let prepdeclinereason: any[] = [];
         SpecifyRiskReductionEducationValue = this.PrepRiskAssessmentFormGroup.controls.SpecifyRiskReductionEducation.value;
         SpecifyPreventionReferalServicesValue = this.PrepRiskAssessmentFormGroup.controls.SpecifyPreventionReferalServices.value;
         SpecifyRiskEducationValue = this.PrepRiskAssessmentFormGroup.controls.SpecifyRiskReductionEducation.value;
@@ -1480,13 +1292,13 @@ export class PrepRiskassessmentComponent implements OnInit {
         referralpreventions = this.PrepRiskAssessmentFormGroup.controls.ReferralPreventions.value;
         ClientWillingTakePrepstatus = this.PrepRiskAssessmentFormGroup.controls.ClientWillingTakePrep.value;
         riskeducationstatus = this.PrepRiskAssessmentFormGroup.controls.RiskEducation.value;
-        partnerhivstatusdatedetail = this.PrepRiskAssessmentFormGroup.controls.partnerHIVStatusDate.value;
-        partnercccenrollmentdetail = this.PrepRiskAssessmentFormGroup.controls.partnercccenrollment.value;
-        CCCnumber = this.PrepRiskAssessmentFormGroup.controls.CCCNumber.value;
-        artstartdatepartner = this.PrepRiskAssessmentFormGroup.controls.partnerARTStartDate.value;
-        partnersexwithoutcondoms = this.PrepRiskAssessmentFormGroup.controls.partnersexcondoms.value;
-        hivpartnerchildrendetail = this.PrepRiskAssessmentFormGroup.controls.hivpartnerchildren.value;
-        Monthdetail = this.PrepRiskAssessmentFormGroup.controls.Months.value;
+        /* partnerhivstatusdatedetail = this.PrepRiskAssessmentFormGroup.controls.partnerHIVStatusDate.value;
+         partnercccenrollmentdetail = this.PrepRiskAssessmentFormGroup.controls.partnercccenrollment.value;
+         CCCnumber = this.PrepRiskAssessmentFormGroup.controls.CCCNumber.value;
+         artstartdatepartner = this.PrepRiskAssessmentFormGroup.controls.partnerARTStartDate.value;
+         partnersexwithoutcondoms = this.PrepRiskAssessmentFormGroup.controls.partnersexcondoms.value;
+         hivpartnerchildrendetail = this.PrepRiskAssessmentFormGroup.controls.hivpartnerchildren.value;
+         Monthdetail = this.PrepRiskAssessmentFormGroup.controls.Months.value;*/
         prepdeclinereason = this.PrepRiskAssessmentFormGroup.controls.discontinueReason.value;
 
 
@@ -1547,13 +1359,32 @@ export class PrepRiskassessmentComponent implements OnInit {
 
             this.RiskAssessmentList.push({
                 'Id': 0,
-                'Comment': SpecifyRiskReductionEducationValue,
+                'Comment': '',
                 'RiskAssessmentid': this.RiskReductionEducationOptions[riskreductionindex].masterId,
                 'Value': this.RiskReductionEducationOptions[riskreductionindex].itemId,
                 'DeleteFlag': false,
                 'Date': ''
             });
         }
+        for (let i = 0; i < SpecifyRiskReductionEducationValue.length; i++) {
+            let index: number;
+
+            index = this.SpecifyRiskReductionEducationOptions.findIndex(x => x.itemId == SpecifyRiskReductionEducationValue[i]);
+
+            if (index !== -1) {
+                this.RiskAssessmentList.push({
+                    'Id': 0,
+                    'Comment': '',
+                    'RiskAssessmentid': this.SpecifyRiskReductionEducationOptions[index].masterId,
+                    'Value': this.SpecifyRiskReductionEducationOptions[index].itemId,
+                    'DeleteFlag': false,
+                    'Date': ''
+                });
+            }
+
+        }
+
+
 
 
         let referralpreventionindex: number;
@@ -1562,12 +1393,31 @@ export class PrepRiskassessmentComponent implements OnInit {
 
         this.RiskAssessmentList.push({
             'Id': 0,
-            'Comment': SpecifyPreventionReferalServicesValue,
+            'Comment': '',
             'RiskAssessmentid': this.ReferralPreventionOptions[referralpreventionindex].masterId,
             'Value': this.ReferralPreventionOptions[referralpreventionindex].itemId,
             'DeleteFlag': false,
             'Date': ''
         });
+
+
+        for (let i = 0; i < SpecifyPreventionReferalServicesValue.length; i++) {
+            let index: number;
+
+            index = this.SpecifyReferralPreventionOptions.findIndex(x => x.itemId == SpecifyPreventionReferalServicesValue[i]);
+
+            if (index !== -1) {
+                this.RiskAssessmentList.push({
+                    'Id': 0,
+                    'Comment': '',
+                    'RiskAssessmentid': this.SpecifyReferralPreventionOptions[index].masterId,
+                    'Value': this.SpecifyReferralPreventionOptions[index].itemId,
+                    'DeleteFlag': false,
+                    'Date': ''
+                });
+            }
+
+        }
 
 
 
@@ -1576,33 +1426,36 @@ export class PrepRiskassessmentComponent implements OnInit {
         clientakeprepindex = this.clientWillingTakePrepOptions.findIndex(x => x.itemId == ClientWillingTakePrepstatus);
 
         if (clientakeprepindex !== -1) {
-        this.RiskAssessmentList.push({
-            'Id': 0,
-            'Comment': '',
-            'RiskAssessmentid': this.clientWillingTakePrepOptions[clientakeprepindex].masterId,
-            'Value': this.clientWillingTakePrepOptions[clientakeprepindex].itemId,
-            'DeleteFlag': false,
-            'Date': ''
-        });
-    }
-
-
-        let prepdeclinereasonindex: number;
-        prepdeclinereasonindex = this.careendreasonarray.findIndex(x => x.itemId == prepdeclinereason);
-
-   
-        if (prepdeclinereason) {
             this.RiskAssessmentList.push({
                 'Id': 0,
                 'Comment': '',
-                'RiskAssessmentid': this.careendreasonarray[prepdeclinereasonindex].masterId,
-                'Value': this.careendreasonarray[prepdeclinereasonindex].itemId,
+                'RiskAssessmentid': this.clientWillingTakePrepOptions[clientakeprepindex].masterId,
+                'Value': this.clientWillingTakePrepOptions[clientakeprepindex].itemId,
                 'DeleteFlag': false,
                 'Date': ''
             });
         }
 
 
+
+        for (let i = 0; i < prepdeclinereason.length; i++) {
+            let prepdeclinereasonindex: number;
+            prepdeclinereasonindex = this.careendreasonarray.findIndex(x => x.itemId == prepdeclinereason[i]);
+
+
+
+            if (prepdeclinereasonindex !== -1) {
+                this.RiskAssessmentList.push({
+                    'Id': 0,
+                    'Comment': '',
+                    'RiskAssessmentid': this.careendreasonarray[prepdeclinereasonindex].masterId,
+                    'Value': this.careendreasonarray[prepdeclinereasonindex].itemId,
+                    'DeleteFlag': false,
+                    'Date': ''
+                });
+            }
+
+        }
 
 
         let riskeducationindex: number;
@@ -1612,145 +1465,31 @@ export class PrepRiskassessmentComponent implements OnInit {
 
             this.RiskAssessmentList.push({
                 'Id': 0,
-                'Comment': SpecifyRiskEducationValue,
+                'Comment': '',
                 'RiskAssessmentid': this.riskEducationOptions[riskeducationindex].masterId,
                 'Value': this.riskEducationOptions[riskeducationindex].itemId,
                 'DeleteFlag': false,
                 'Date': ''
             });
         }
-        let partnerhivstatusmasterid: number;
-        let partnerhivstatusvalueid: number;
-
-        partnerhivstatusmasterid = this.partnerstatusOptions[0].masterId;
-        partnerhivstatusvalueid = this.partnerstatusOptions[0].itemId;
-        if (partnerhivstatusdatedetail !== null && partnerhivstatusdatedetail !== '' && partnerhivstatusdatedetail !== undefined) {
-
-            this.RiskAssessmentList.push({
-                'Id': 0,
-                'Comment': '',
-                'RiskAssessmentid': partnerhivstatusmasterid,
-                'Value': partnerhivstatusvalueid,
-                'DeleteFlag': false,
-                'Date': partnerhivstatusdatedetail
-            });
-        }
-
-
-
-        let partnerartstartdatemasterid: number;
-        let partnerartstartdatevalueid: number;
-
-
-        partnerartstartdatemasterid = this.partnerartstartdateoptions[0].masterId;
-        partnerartstartdatevalueid = this.partnerartstartdateoptions[0].itemId;
-        if (artstartdatepartner !== null && artstartdatepartner !== '' && artstartdatepartner !== undefined) {
-            this.RiskAssessmentList.push({
-                'Id': 0,
-                'Comment': '',
-                'RiskAssessmentid': partnerartstartdatemasterid,
-                'Value': partnerartstartdatevalueid,
-                'DeleteFlag': false,
-                'Date': artstartdatepartner
-            });
-
-
-        }
 
 
 
 
-        let partnercccenrollmentmasterid: number;
+        for (let i = 0; i < SpecifyRiskEducationValue.length; i++) {
+            let index: number;
 
-        partnercccenrollmentmasterid = this.partnercccenrollmentoptions[0].masterId;
-
-
-        if (partnercccenrollmentdetail !== null && partnercccenrollmentdetail !== undefined && partnercccenrollmentdetail
-        ) {
-            this.RiskAssessmentList.push({
-                'Id': 0,
-                'Comment': '',
-                'RiskAssessmentid': partnercccenrollmentmasterid,
-                'Value': partnercccenrollmentdetail,
-                'DeleteFlag': false,
-                'Date': ''
-            });
-
-        }
-
-
-        let partnersexcondomsmasterid: number;
-
-        partnersexcondomsmasterid = this.sexwithoutcondomoptions[0].masterId;
-        if (partnersexwithoutcondoms !== null && partnersexwithoutcondoms !== undefined &&
-            partnersexwithoutcondoms
-        ) {
-            this.RiskAssessmentList.push({
-                'Id': 0,
-                'Comment': '',
-                'RiskAssessmentid': partnersexcondomsmasterid,
-                'Value': partnersexwithoutcondoms,
-                'DeleteFlag': false,
-                'Date': ''
-            });
-
-        }
-
-
-        let cccnumbermasterid: number;
-        let cccnumbervalueid: number;
-
-        let findindex: number;
-        findindex = this.patientIdentifieroptions.findIndex(x => x.itemName == 'CCCNumber');
-        cccnumbermasterid = this.patientIdentifieroptions[findindex].masterId;
-        cccnumbervalueid = this.patientIdentifieroptions[findindex].itemId;
-        if (CCCnumber != null || CCCnumber !== undefined || CCCnumber !== '') {
-            this.RiskAssessmentList.push({
-                'Id': 0,
-                'Comment': CCCnumber,
-                'RiskAssessmentid': cccnumbermasterid,
-                'Value': cccnumbervalueid,
-                'DeleteFlag': false,
-                'Date': ''
-            });
-        }
-
-
-        let hivsexdiscordantmasterid: number;
-        let hivsexdiscordantvalueid: number;
-
-
-        hivsexdiscordantmasterid = this.hivserodiscordantoptions[0].masterId;
-        hivsexdiscordantvalueid = this.hivserodiscordantoptions[0].itemId;
-        if (typeof Monthdetail != 'undefined' || Monthdetail) {
-            this.RiskAssessmentList.push({
-                'Id': 0,
-                'Comment': Monthdetail,
-                'RiskAssessmentid': hivsexdiscordantmasterid,
-                'Value': hivsexdiscordantvalueid,
-                'DeleteFlag': false,
-                'Date': ''
-            });
-        }
-
-
-        let hivpartnerchildrenmasterid: number;
-        let hipartnerchildrenvalueid: number;
-
-        hivpartnerchildrenmasterid = this.partnerchildrenoptions[0].masterId;
-        hipartnerchildrenvalueid = this.partnerchildrenoptions[0].itemId;
-
-        if (typeof hivpartnerchildrendetail != 'undefined' && hivpartnerchildrendetail) {
-
-            this.RiskAssessmentList.push({
-                'Id': 0,
-                'Comment': hivpartnerchildrendetail,
-                'RiskAssessmentid': hivpartnerchildrenmasterid,
-                'Value': hipartnerchildrenvalueid,
-                'DeleteFlag': false,
-                'Date': ''
-            });
-
+            index = this.SpecifyRiskEducationOptions.findIndex(x => x.itemId == SpecifyRiskEducationValue[i]);
+            if (index !== -1) {
+                this.RiskAssessmentList.push({
+                    'Id': 0,
+                    'Comment': '',
+                    'RiskAssessmentid': this.SpecifyRiskEducationOptions[index].masterId,
+                    'Value': this.SpecifyRiskEducationOptions[index].itemId,
+                    'DeleteFlag': false,
+                    'Date': ''
+                });
+            }
         }
 
 

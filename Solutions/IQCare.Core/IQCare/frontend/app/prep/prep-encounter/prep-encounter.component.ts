@@ -40,7 +40,7 @@ export class PrepEncounterComponent implements OnInit {
     patientEncounterId: number;
     personGender: string;
     isEdit: number;
-
+    Age: number = 20;
     isLinear: boolean = true;
 
     // Form Groups
@@ -64,7 +64,7 @@ export class PrepEncounterComponent implements OnInit {
     reasonsPrepAppointmentNotGivenOptions: LookupItemView[];
     pregnancyStatusOptions: LookupItemView[];
     screenedForSTIOptions: LookupItemView[];
-
+    DateStatus?: Date;
     STIScreeningAndTreatmentOptions: any[] = [];
     CircumcisionStatusOptions: any[] = [];
     FertilityIntentionsOptions: any[] = [];
@@ -182,9 +182,12 @@ export class PrepEncounterComponent implements OnInit {
             (res) => {
                 if (res.length > 0) {
                     this.personGender = res[0]['gender'];
+
                 }
             }
         );
+
+        this.getPatientDetailsById(this.personId);
     }
 
 
@@ -197,6 +200,11 @@ export class PrepEncounterComponent implements OnInit {
 
                     if (this.person.dateOfBirth != null && this.person.dateOfBirth != undefined) {
                         this.minDate = this.person.dateOfBirth;
+                    }
+                    if (this.person.ageNumber != null && this.person.ageNumber != undefined) {
+                        this.Age = this.person.ageNumber;
+                    } else {
+                        this.Age = 20;
                     }
                 }
 
@@ -227,7 +235,6 @@ export class PrepEncounterComponent implements OnInit {
         this.stepper._stateChanged();
         this.stepper.selectedIndex = 3;
     }
-
     public onObsGynPrevious() {
         if (this.isOptionalCircumcision == true) {
             this.stepper._stateChanged();
@@ -265,10 +272,12 @@ export class PrepEncounterComponent implements OnInit {
     }
 
     onPrepStatusNotify(formGroup: FormGroup): void {
+        console.log(this.PrepStatusFormGroup);
         this.PrepStatusFormGroup.push(formGroup);
     }
 
     onPrepAppointmentNotify(formGroup: FormGroup): void {
+
         this.AppointmentFormGroup.push(formGroup);
     }
     onLabInvestigations(formGroup: FormGroup): void {
@@ -284,6 +293,32 @@ export class PrepEncounterComponent implements OnInit {
     }
 
     onPrepNewEncounter() {
+
+        const PrepStatusToday = this.PrepStatusFormGroup.value[0]['PrEPStatusToday'];
+        if (PrepStatusToday) {
+            const statusname = this.prepStatusOptions.filter(x => x.itemId == parseInt(PrepStatusToday.toString(), 10));
+            if (statusname.length > 0) {
+                if (statusname[0].itemName == 'Restart') {
+                    const daterestart = this.PrepStatusFormGroup.value[0]['DateRestarted'];
+                    if (daterestart !== '' && daterestart != null) {
+                        this.DateStatus = moment(daterestart).toDate();
+                    }
+                }
+                else if (statusname[0].itemName == 'Start') {
+                    const datestart = this.PrepStatusFormGroup.value[0]['DateInitiated'];
+                    if (datestart !== '' && datestart != null) {
+                        this.DateStatus = moment(datestart).toDate();
+                    }
+                }
+                else {
+                    this.DateStatus = null;
+                }
+            }
+            else {
+                this.DateStatus = null;
+            }
+
+        }
         // create prep status command
         const prepStatusCommand: PrepStatusCommand = {
             Id: 0,
@@ -291,12 +326,17 @@ export class PrepEncounterComponent implements OnInit {
             PatientEncounterId: this.patientEncounterId,
             SignsOrSymptomsHIV: this.PrepStatusFormGroup.value[0]['signsOrSymptomsHIV'],
             AdherenceCounsellingDone: this.PrepStatusFormGroup.value[0]['adherenceCounselling'],
-            ContraindicationsPrepPresent: this.PrepStatusFormGroup.value[0]['contraindications_PrEP_Present'],
+            //   ContraindicationsPrepPresent: this.PrepStatusFormGroup.value[0]['contraindications_PrEP_Present'],
             PrepStatusToday: this.PrepStatusFormGroup.value[0]['PrEPStatusToday'],
             CreatedBy: this.userId,
             CondomsIssued: this.PrepStatusFormGroup.value[0]['condomsIssued'],
             NoOfCondoms: this.PrepStatusFormGroup.value[0]['noCondomsIssued'],
+            DateField: this.DateStatus
         };
+
+
+
+
 
         // is client on family planning
         const familyPlanningCommand: FamilyPlanningCommand = {
@@ -460,6 +500,21 @@ export class PrepEncounterComponent implements OnInit {
 
         }
 
+        if (this.PrepStatusFormGroup.value[0].contraindications_PrEP_Present.length > 0) {
+            for (let t = 0; t < this.PrepStatusFormGroup.value[0].contraindications_PrEP_Present.length; t++) {
+
+
+                STIScreeningCommand.Screenings.push({
+                    ScreeningTypeId: this.prepContraindicationsOptions[0].masterId,
+                    ScreeningCategoryId: this.prepContraindicationsOptions[0].masterId,
+                    ScreeningValueId: this.PrepStatusFormGroup.value[0].contraindications_PrEP_Present[t],
+                    Comment: ''
+                });
+
+
+            }
+        }
+
         let stioptions = [];
         stioptions = this.screenedForSTIOptions.filter(x => x.itemName == 'STISymptoms');
 
@@ -571,6 +626,32 @@ export class PrepEncounterComponent implements OnInit {
     }
 
     onPrepEncounterEdit() {
+
+        const PrepStatusToday = this.PrepStatusFormGroup.value[0]['PrEPStatusToday'];
+        if (PrepStatusToday) {
+            const statusname = this.prepStatusOptions.filter(x => x.itemId == parseInt(PrepStatusToday.toString(), 10));
+            if (statusname.length > 0) {
+                if (statusname[0].itemName == 'Restart') {
+                    const daterestart = this.PrepStatusFormGroup.value[0]['DateRestarted'];
+                    if (daterestart !== '' && daterestart != null) {
+                        this.DateStatus = moment(daterestart).toDate();
+                    }
+                }
+                else if (statusname[0].itemName == 'Start') {
+                    const datestart = this.PrepStatusFormGroup.value[0]['DateInitiated'];
+                    if (datestart !== '' && datestart != null) {
+                        this.DateStatus = moment(datestart).toDate();
+                    }
+                }
+                else {
+                    this.DateStatus = null;
+                }
+            }
+            else {
+                this.DateStatus = null;
+            }
+
+        }
         // create prep status command
         const prepStatusCommand: PrepStatusCommand = {
             Id: this.PrepStatusFormGroup.value[0]['id'],
@@ -578,11 +659,12 @@ export class PrepEncounterComponent implements OnInit {
             PatientEncounterId: this.patientEncounterId,
             SignsOrSymptomsHIV: this.PrepStatusFormGroup.value[0]['signsOrSymptomsHIV'],
             AdherenceCounsellingDone: this.PrepStatusFormGroup.value[0]['adherenceCounselling'],
-            ContraindicationsPrepPresent: this.PrepStatusFormGroup.value[0]['contraindications_PrEP_Present'],
+            //  ContraindicationsPrepPresent: this.PrepStatusFormGroup.value[0]['contraindications_PrEP_Present'],
             PrepStatusToday: this.PrepStatusFormGroup.value[0]['PrEPStatusToday'],
             CreatedBy: this.userId,
             CondomsIssued: this.PrepStatusFormGroup.value[0]['condomsIssued'],
             NoOfCondoms: this.PrepStatusFormGroup.value[0]['noCondomsIssued'],
+            DateField: this.DateStatus
         };
 
         // circumcision 
@@ -648,6 +730,21 @@ export class PrepEncounterComponent implements OnInit {
                     ScreeningCategoryId: stioptions[0].itemId,
                     ScreeningValueId: this.STIScreeningFormGroup.value[0].signsOfSTI[t],
                     Comment: comment
+                });
+
+
+            }
+        }
+
+        if (this.PrepStatusFormGroup.value[0].contraindications_PrEP_Present.length > 0) {
+            for (let t = 0; t < this.PrepStatusFormGroup.value[0].contraindications_PrEP_Present.length; t++) {
+
+
+                STIScreeningCommand.Screenings.push({
+                    ScreeningTypeId: this.prepContraindicationsOptions[0].masterId,
+                    ScreeningCategoryId: this.prepContraindicationsOptions[0].masterId,
+                    ScreeningValueId: this.PrepStatusFormGroup.value[0].contraindications_PrEP_Present[t],
+                    Comment: ''
                 });
 
 

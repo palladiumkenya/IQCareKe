@@ -36,7 +36,8 @@ namespace IQCare.Prep.BusinessProcess.CommandHandlers
                         {
                             result.AdherenceCounsellingDone = request.AdherenceCounsellingDone;
                             result.SignsOrSymptomsHIV = request.SignsOrSymptomsHIV;
-                            result.ContraindicationsPrepPresent = request.ContraindicationsPrepPresent;
+                            result.DateField = request.DateField;
+                          //  result.ContraindicationsPrepPresent = request.ContraindicationsPrepPresent;
                             result.PrepStatusToday = request.PrepStatusToday;
                             result.CreatedBy = request.CreatedBy;
                             result.CondomsIssued = request.CondomsIssued;
@@ -55,8 +56,9 @@ namespace IQCare.Prep.BusinessProcess.CommandHandlers
                                 PatientEncounterId = request.PatientEncounterId,
                                 SignsOrSymptomsHIV = request.SignsOrSymptomsHIV,
                                 AdherenceCounsellingDone = request.AdherenceCounsellingDone,
-                                ContraindicationsPrepPresent = request.ContraindicationsPrepPresent,
-                                PrepStatusToday = request.PrepStatusToday,
+                                DateField = request.DateField,
+                            //ContraindicationsPrepPresent = request.ContraindicationsPrepPresent,
+                            PrepStatusToday = request.PrepStatusToday,
                                 DeleteFlag = false,
                                 CreatedBy = request.CreatedBy,
                                 CreateDate = DateTime.Now,
@@ -78,7 +80,8 @@ namespace IQCare.Prep.BusinessProcess.CommandHandlers
                             PatientEncounterId = request.PatientEncounterId,
                             SignsOrSymptomsHIV = request.SignsOrSymptomsHIV,
                             AdherenceCounsellingDone = request.AdherenceCounsellingDone,
-                            ContraindicationsPrepPresent = request.ContraindicationsPrepPresent,
+                            DateField =request.DateField,
+                            //ContraindicationsPrepPresent = request.ContraindicationsPrepPresent,
                             PrepStatusToday = request.PrepStatusToday,
                             DeleteFlag = false,
                             CreatedBy = request.CreatedBy,

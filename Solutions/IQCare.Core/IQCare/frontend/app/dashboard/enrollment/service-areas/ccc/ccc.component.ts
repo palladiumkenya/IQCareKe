@@ -471,7 +471,6 @@ export class CccComponent implements OnInit {
                             this.patientId).subscribe();
 
                         this.searchService.setSession(this.personId, this.patientId).subscribe((sessionres) => {
-                            console.log(sessionres);
                             window.location.href = location.protocol + '//' + window.location.hostname + ':' + window.location.port +
                                 '/IQCare/CCC/Patient/PatientHome.aspx';
                         });

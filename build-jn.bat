@@ -18,6 +18,7 @@ CD /D %BATDIR%
 Set config=debug
 set log=builder.log
 set msbuildpath=C:\Program Files (x86)\Microsoft Visual Studio\2017\Enterprise\MSBuild\15.0\Bin\MSBuild.exe
+set msbuildpatha=C:\Program Files (x86)\MSBuild\14.0\Bin\MSBuild.exe
 @Echo Cleaning references folder
 rmdir %BATDIR%\References /S /Q
 mkdir References
@@ -68,7 +69,7 @@ echo "********** Building IQCare.CCC **********" >> %log%
 if /I %config%== release (
 echo "********** Building IQCare Service **********" >> %log%
 @echo ********** Building IQCare Service **********
-"%msbuildpath%" "%BATDIR%\Solutions\IQCareService\IQCareService.sln" /t:rebuild /p:Configuration=%config%  >> %log%
+"%msbuildpatha%" "%BATDIR%\Solutions\IQCareService\IQCareService.sln" /t:rebuild /p:Configuration=%config%  >> %log%
 echo "********** Building IQCare Management **********" >> %log%
 @echo ********** Building IQCare Management **********
 "%msbuildpath%" "%BATDIR%\Solutions\IQCare Management\IQCare Management.sln" /t:rebuild /p:Configuration=%config%  >> %log%
@@ -123,6 +124,14 @@ xcopy /d %BATDIR%\Library\Telerik.Web.UI.dll %BATDIR%\package\web\bin
 xcopy /d %BATDIR%\Library\EntityFramework.dll %BATDIR%\package\web\bin
 xcopy /d %BATDIR%\Library\EntityFramework.SqlServer.dll %BATDIR%\package\web\bin
 
+
+xcopy /d %BATDIR%\Library\ClosedXML.dll %BATDIR%\package\web\bin
+xcopy /d %BATDIR%\Library\DocumentFormat.OpenXml.dll %BATDIR%\package\web\bin
+xcopy /d %BATDIR%\Library\ExcelNumberFormat.dll %BATDIR%\package\web\bin
+xcopy /d %BATDIR%\Library\FastMember.dll %BATDIR%\package\web\bin
+xcopy /d %BATDIR%\Library\FastMember.Signed.dll %BATDIR%\package\web\bin
+
+
 @echo ********** END OF COPYING DLLS **********
 
 @echo "********** Building IQCare API **********" >> %log%
@@ -132,9 +141,6 @@ dotnet publish Solutions/IQCare.Core/IQCare/IQCare.csproj -o ../../../package/ap
 
 @echo ********** END OF BUILINDING IQCare API ********** >> %log%
 @echo ********** END OF BUILINDING IQCare API ********** >> %log%
-
-
-
 
 
 @echo "********** Building IQCare LAB **********" >> %log%
@@ -156,6 +162,15 @@ dotnet publish Solutions/IQCare.Core/IQCare.Maternity.WebApi/IQCare.Maternity.We
 @echo ********** END OF BUILINDING IQCare MATERNITY ********** >> %log%
 
 
+@echo "********** Building IQCare PREP **********" >> %log%
+@echo ********** Building IQCare PREP **********
+
+dotnet publish Solutions/IQCare.Core/IQCare.Prep.WebApi/IQCare.Prep.WebApi.csproj -o ../../../package/prep
+
+@echo ********** END OF BUILINDING IQCare PREP ********** >> %log%
+@echo ********** END OF BUILINDING IQCare PREP ********** >> %log%
+
+
 @echo "********** Building IQCare COMMON WEB **********" >> %log%
 @echo ********** Building IQCare COMMON WEB **********
 
@@ -165,25 +180,33 @@ dotnet publish Solutions/IQCare.Core/IQCare.Common.Web/IQCare.Common.Web.csproj 
 @echo ********** END OF BUILINDING IQCare COMMON WEB ********** >> %log%
 
 
-@echo "********** Building IQCare QUEUE **********" >> %log%
-@echo ********** Building IQCare QUEUE **********
+@echo "********** Building IQCare AIR WEB **********" >> %log%
+@echo ********** Building IQCare AIR WEB **********
 
-dotnet publish Solutions/IQCare.Core/IQCare.Queue.Web/IQCare.Queue.Web.csproj -o ../../../package/IQCareQueue
+dotnet publish Solutions/IQCare.Core/IQCare.AIR.Web/IQCare.AIR.Web.csproj -o ../../../package/air
 
-@echo ********** END OF BUILDING IQCare QUEUE ********** >> %log%
-@echo ********** END OF BUILDING IQCare QUEUE ********** >> %log%
-
-
-@echo "********** Building IQCare AIR **********" >> %log%
-@echo ********** Building IQCare AIR **********
-
-dotnet publish Solutions/IQCare.Core/IQCare.AIR.Web/IQCare.AIR.Web.csproj -o ../../../package/IQCareAIR
-
-@echo ********** END OF BUILDING IQCare AIR ********** >> %log%
-@echo ********** END OF BUILDING IQCare AIR ********** >> %log%
+@echo ********** END OF BUILINDING IQCare AIR WEB ********** >> %log%
+@echo ********** END OF BUILINDING IQCare AIR WEB ********** >> %log%
 
 
 
+@echo "********** Building IQCare PHARM **********" >> %log%
+@echo ********** Building IQCare PHARM **********
+
+dotnet publish Solutions/IQCare.Core/IQCare.Pharm.WebApi/IQCare.Pharm.WebApi.csproj -o ../../../package/pharm
+
+@echo ********** END OF BUILINDING IQCare PHARM ********** >> %log%
+@echo ********** END OF BUILINDING IQCare PHARM ********** >> %log%
+
+
+
+@echo "********** Building IQCare Queue WEB **********" >> %log%
+@echo ********** Building IQCare Queue WEB **********
+
+dotnet publish Solutions/IQCare.Core/IQCare.Queue.Web/IQCare.Queue.Web.csproj -o ../../../package/queue
+
+@echo ********** END OF BUILINDING IQCare Queue WEB ********** >> %log%
+@echo ********** END OF BUILINDING IQCare Queue WEB ********** >> %log%
 
 
 dotnet publish Solutions/IQCare.Core/IQCare.Core.DbMigration/IQCare.Core.DbMigration.csproj -o ../../../Release/DbMigration/win-x64 -r win-x64

@@ -1,6 +1,7 @@
 ﻿using IQCare.Library;
 using IQCare.Prep.Core.Models;
 using MediatR;
+using System;
 
 namespace IQCare.Prep.BusinessProcess.Commands
 {
@@ -11,10 +12,12 @@ namespace IQCare.Prep.BusinessProcess.Commands
         public int PatientEncounterId { get; set; }
         public int SignsOrSymptomsHIV { get; set; }
         public int AdherenceCounsellingDone { get; set; }
-        public int ContraindicationsPrepPresent { get; set; }
+       // public int ContraindicationsPrepPresent { get; set; }
         public int PrepStatusToday { get; set; }
         public int CreatedBy { get; set; }
         public int? CondomsIssued { get; set; }
         public int? NoOfCondoms { get; set; }
+
+        public DateTime? DateField { get; set; }
     }
 }

@@ -112,6 +112,15 @@ namespace IQCare.Web.CCC.UC {
         protected global::System.Web.UI.WebControls.Label lblOxygenSaturation;
         
         /// <summary>
+        /// lblNurseComments control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblNurseComments;
+        
+        /// <summary>
         /// lblappointmentDate control.
         /// </summary>
         /// <remarks>

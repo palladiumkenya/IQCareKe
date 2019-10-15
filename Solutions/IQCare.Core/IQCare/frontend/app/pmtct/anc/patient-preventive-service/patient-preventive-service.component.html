@@ -1,0 +1,54 @@
+<form class="form-group" [formGroup]="PatientPreventiveServicesForm">
+    <div class="row">
+        <mat-dialog-content>
+            <div class="col-md-12 col-lg-12 col-sm-12 col-xs-12">
+                <div class="form-title">
+                    <span class="mat-accent">
+                        Patient Preventive Services
+                    </span>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4 col-xs-12 col-sm-6">
+                    <mat-form-field class="col-md-12">
+                        <mat-select formControlName="preventiveServices" placeholder="Preventive Service">
+                            <mat-option value=""> Select</mat-option>
+                            <mat-option *ngFor="let preventiveServicesOption of preventiveServicesOptions"
+                                [value]="preventiveServicesOption" required minlength="0">
+                                {{preventiveServicesOption.itemName}}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+                <div class="col-md-4 col-xs-12 col-sm-6">
+                    <mat-form-field class="col-md-12">
+                        <input [max]="maxDate" formControlName="dateGiven" id="dateGiven" matInput
+                            [matDatepicker]="dateGiven" placeholder="Date Given">
+                        <mat-datepicker-toggle matSuffix [for]="dateGiven"></mat-datepicker-toggle>
+                        <mat-datepicker #dateGiven></mat-datepicker>
+                    </mat-form-field>
+                </div>
+                <div class="col-md-4 col-xs-12 col-sm-6">
+                    <mat-form-field class="col-md-12">
+                        <input formControlName="comments" matInput placeholder="Comments">
+                    </mat-form-field>
+                </div>
+                <div class="col-md-4 col-xs-12 col-sm-6">
+                    <mat-form-field class="col-md-12">
+                        <input [min]="minDate" formControlName="nextSchedule" id="nextSchedule" matInput
+                            [matDatepicker]="nextSchedule" placeholder="Next Schedule">
+                        <mat-datepicker-toggle matSuffix [for]="nextSchedule"></mat-datepicker-toggle>
+                        <mat-datepicker #nextSchedule></mat-datepicker>
+                    </mat-form-field>
+                </div>
+
+            </div>
+
+
+        </mat-dialog-content>
+        <mat-dialog-actions>
+            <button class="mat-raised-button" (click)="close()">Close</button>
+            <button class="mat-raised-button mat-primary" (click)="save()">Save</button>
+        </mat-dialog-actions>
+    </div>
+</form>

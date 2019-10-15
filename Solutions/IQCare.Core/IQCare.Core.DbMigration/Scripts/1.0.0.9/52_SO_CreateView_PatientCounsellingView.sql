@@ -16,6 +16,7 @@ SELECT
   c.CreateDate
 FROM           
 	 dbo.PatientCounselling c
+	  where (DeleteFlag is null or DeleteFlag = 0)
 GO
 
 

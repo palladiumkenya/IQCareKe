@@ -9,7 +9,7 @@ SELECT
   PatientId,
   PatientMasterVisitId,
   PreventiveServiceId,
-  (SELECT top 1 l.ItemName FROM LookupItemView l WHERE l.ItemId = p.PreventiveServiceId) PreventiveService,
+  (SELECT TOP 1 l.ItemName FROM LookupItemView l WHERE l.ItemId = p.PreventiveServiceId) PreventiveService,
   PreventiveServiceDate,
 	  Description,
 	   DeleteFlag, 
@@ -18,6 +18,7 @@ SELECT
 	    AuditData,
 		 NextSchedule
 FROM    dbo.PatientPreventiveServices p
+WHERE DeleteFlag  <> 1
 GO
 
 

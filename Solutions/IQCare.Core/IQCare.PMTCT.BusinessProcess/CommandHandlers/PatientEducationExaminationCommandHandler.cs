@@ -52,18 +52,37 @@ namespace IQCare.PMTCT.BusinessProcess.CommandHandlers
 
                     int breastExamResult = await _service.AddPatientPhysicalExamination(breastExam);
 
-                    var syphillisExamId = await _commonUnitOfWork.Repository<LookupItem>().Get(x => x.Name == "Treated Syphilis").Select(x => x.Id).FirstOrDefaultAsync();
-                    Core.Models.PhysicalExamination syphillisExam = new Core.Models.PhysicalExamination()
+                    if(request.TreatedSyphilis.HasValue)
                     {
-                        PatientId = request.PatientId,
-                        PatientMasterVisitId = request.PatientMasterVisitId,
-                        ExamId = syphillisExamId,
-                        ExaminationTypeId = examinationTypeId,
-                        FindingId = request.TreatedSyphilis,
-                        CreateDate = DateTime.Now
-                    };
+                        var syphillisExamId = await _commonUnitOfWork.Repository<LookupItem>().Get(x => x.Name == "Treated Syphilis").Select(x => x.Id).FirstOrDefaultAsync();
+                        Core.Models.PhysicalExamination syphillisExam = new Core.Models.PhysicalExamination()
+                        {
+                            PatientId = request.PatientId,
+                            PatientMasterVisitId = request.PatientMasterVisitId,
+                            ExamId = syphillisExamId,
+                            ExaminationTypeId = examinationTypeId,
+                            FindingId = request.TreatedSyphilis.Value,
+                            CreateDate = DateTime.Now
+                        };
 
-                    int syphillisResultId = await _service.AddPatientPhysicalExamination(syphillisExam);
+                        int syphillisResultId = await _service.AddPatientPhysicalExamination(syphillisExam);
+                    }
+
+                    if (request.TestedForSyphilis.HasValue)
+                    {
+                        var syphillisExamId = await _commonUnitOfWork.Repository<LookupItem>().Get(x => x.Name == "Treated For Syphilis").Select(x => x.Id).FirstOrDefaultAsync();
+                        Core.Models.PhysicalExamination syphillisExam = new Core.Models.PhysicalExamination()
+                        {
+                            PatientId = request.PatientId,
+                            PatientMasterVisitId = request.PatientMasterVisitId,
+                            ExamId = syphillisExamId,
+                            ExaminationTypeId = examinationTypeId,
+                            FindingId = request.TestedForSyphilis.Value,
+                            CreateDate = DateTime.Now
+                        };
+
+                        int syphillisResultId = await _service.AddPatientPhysicalExamination(syphillisExam);
+                    }
 
                     List<PatientEducation> patientCounselling = new List<PatientEducation>();
                     List<PatientEducation> patientEducationExists = _unitOfWork.Repository<PatientEducation>()
@@ -102,7 +121,7 @@ namespace IQCare.PMTCT.BusinessProcess.CommandHandlers
                     }
 
 
-                    if (breastExamResult > 0 & syphillisResultId > 0 & patientEducationResultId > 0)
+                    if (breastExamResult > 0 & patientEducationResultId > 0)
                     {
                         result = 1;
                     }

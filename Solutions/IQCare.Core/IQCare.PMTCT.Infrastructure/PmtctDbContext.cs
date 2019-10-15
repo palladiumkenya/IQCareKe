@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using IQCare.PMTCT.Core.Models;
 using IQCare.SharedKernel.Infrastructure;
 using Microsoft.EntityFrameworkCore;
 
@@ -15,9 +16,9 @@ namespace IQCare.PMTCT.Infrastructure
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            //modelBuilder.Entity<LookupItemView>().ToTable("LookupItemView").HasKey(x => x.RowID);
             base.OnModelCreating(modelBuilder);
             modelBuilder.ApplyEntityTypeConfigsFromAssembly();
+            modelBuilder.Query<PatientViralLoadPoco>();
         }
     }
 

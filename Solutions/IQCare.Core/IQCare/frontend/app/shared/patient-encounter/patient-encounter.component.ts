@@ -10,20 +10,25 @@ import { NotificationService } from '../_services/notification.service';
 import { LookupItemService } from '../_services/lookup-item.service';
 import { PatientEncounter } from '../_models/patient-encounter';
 import { EncounterService } from '../_services/encounter.service';
+import { SearchService } from '../../registration/_services/search.service';
 
 
 @Component({
     selector: 'app-patient-encounter',
     templateUrl: './patient-encounter.component.html',
-    styleUrls: ['./patient-encounter.component.css']
+    styleUrls: ['./patient-encounter.component.css'],
+    providers: [SearchService]
 })
 export class PatientEncounterComponent implements OnInit {
-
+    ageNumber: number;
     patientId: number;
     personId: number;
     serviceAreaId: number;
     serviceName: string;
     userId: number;
+    patientInCCC: boolean = false;
+    hasmchRecord: boolean = false;
+    lastPatientMasterVisitId: number;
 
     public lookupItems$: Subscription;
     public patientEncounterTypes: Subscription;
@@ -47,7 +52,8 @@ export class PatientEncounterComponent implements OnInit {
         private notificationService: NotificationService,
         private lookupItemService: LookupItemService,
         private encounterService: EncounterService,
-        private recordsService: RecordsService) {
+        private recordsService: RecordsService,
+        private searchService: SearchService) {
 
     }
 
@@ -69,6 +75,17 @@ export class PatientEncounterComponent implements OnInit {
                 const patientLookup = res['patientLookup'];
                 if (patientLookup.length > 0) {
                     this.enrollmentDate = patientLookup[0]['enrollmentDate'];
+                }
+            }
+        );
+
+        this.recordsService.personEnrollmentDetails(this.personId, 1).subscribe(
+            (res) => {
+                const patientLookup = res['patientLookup'];
+                if (patientLookup.length > 0) {
+                    console.log(patientLookup);
+                    this.ageNumber = patientLookup[0]['ageNumber'];
+                    this.patientInCCC = true;
                 }
             }
         );
@@ -148,6 +165,8 @@ export class PatientEncounterComponent implements OnInit {
                             EncounterTypeId: p[i].encounterTypeId,
                             PatientEncounterId: p[i].patientEncounterId,
                         });
+                        this.lastPatientMasterVisitId = p[i].patientMasterVisitId;
+                        this.hasmchRecord = true;
                     }
                     // console.log(this.encounterDataTable);
                     this.dataSource = new MatTableDataSource(this.encounterDataTable);
@@ -199,4 +218,21 @@ export class PatientEncounterComponent implements OnInit {
     }
 
     public onView(patient: number, patientMasterVisitId: number) { }
+
+    onPharmacyClick() {
+
+        this.zone.run(() => {
+            this.router.navigate(['/pharm/' + this.patientId + '/' + this.personId],
+                { relativeTo: this.route });
+        });
+       /* this.searchService.setSession(this.personId, this.patientId)
+            .subscribe((sessionres) => {
+                this.searchService.setVisitSession(this.lastPatientMasterVisitId, this.ageNumber, 261).subscribe((setVisitSession) => {
+                    const url = location.protocol + '//' + window.location.hostname + ':' + window.location.port +
+                        '/IQCare/CCC/Encounter/PharmacyPrescription.aspx';
+                    const win = window.open(url, '_blank');
+                    win.focus();
+                });
+            });*/
+    }
 }

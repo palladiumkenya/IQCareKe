@@ -1,22 +1,33 @@
 import { PrepService } from './../../_services/prep.service';
 import { LookupItemView } from './../../../shared/_models/LookupItemView';
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, NgZone } from '@angular/core';
 import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
 import * as moment from 'moment';
 import { SearchService } from '../../../registration/_services/search.service';
 import { EncounterService } from '../../../shared/_services/encounter.service';
+import { Router, ActivatedRoute } from '@angular/router';
+import { APP_BASE_HREF } from '@angular/common';
+import { LookupItemService } from './../../../shared/_services/lookup-item.service';
+import { Subscription } from 'rxjs';
+import { SnotifyService } from 'ng-snotify';
+import { NotificationService } from './../../../shared/_services/notification.service';
+import { PersonHomeService } from '../../../dashboard/services/person-home.service';
+import { PersonView } from '../../../dashboard/_model/personView';
 
 @Component({
     selector: 'app-prep-sti-screening-treatment',
     templateUrl: './prep-sti-screening-treatment.component.html',
     styleUrls: ['./prep-sti-screening-treatment.component.css'],
-    providers: [SearchService, EncounterService]
+    providers: [SearchService, EncounterService, PersonHomeService]
 })
 export class PrepSTIScreeningTreatmentComponent implements OnInit {
+    public person: PersonView;
+    public personView$: Subscription;
     STIScreeningForm: FormGroup;
     yesnoOptions: LookupItemView[] = [];
     stiScreeningOptions: LookupItemView[] = [];
     screenedForSTIOptions: LookupItemView[] = [];
+    stiOptions: LookupItemView[] = [];
 
     maxDate: Date;
     hasLabBeenOrdered: boolean = false;
@@ -30,8 +41,15 @@ export class PrepSTIScreeningTreatmentComponent implements OnInit {
     @Output() notify: EventEmitter<FormGroup> = new EventEmitter<FormGroup>();
 
     constructor(private _formBuilder: FormBuilder,
+        private personHomeService: PersonHomeService,
         private searchService: SearchService,
         private prepService: PrepService,
+        private snotifyService: SnotifyService,
+        private _lookupItemService: LookupItemService,
+        private notificationService: NotificationService,
+        private router: Router,
+        private route: ActivatedRoute,
+        public zone: NgZone,
         private encounterService: EncounterService) {
         this.maxDate = new Date();
     }
@@ -45,7 +63,7 @@ export class PrepSTIScreeningTreatmentComponent implements OnInit {
             stiTreatmentOffered: new FormControl(''),
             stiReferredLabInvestigation: new FormControl('')
         });
-        this.STIScreeningForm.controls.Specify.disable({ onlySelf: true })
+        this.STIScreeningForm.controls.Specify.disable({ onlySelf: true });
         // set the date for only new encounters
         if (!this.isEdit) {
             this.STIScreeningForm.controls.visitDate.setValue(new Date(localStorage.getItem('visitDate')));
@@ -60,11 +78,54 @@ export class PrepSTIScreeningTreatmentComponent implements OnInit {
         this.yesnoOptions = yesnoOptions;
         this.stiScreeningOptions = stiScreeningOptions;
         this.screenedForSTIOptions = screenedForSTIOptions;
-
+        this.getPatientDetailsById(this.personId);
         if (this.isEdit == 1) {
             this.loadSTIScreening();
             this.loadPatientMasterVisit();
         }
+    }
+
+    public getPatientDetailsById(personId: number) {
+        this.personView$ = this.personHomeService.getPatientByPersonId(personId).subscribe(
+            p => {
+
+                this.person = p;
+
+                if (this.person != null) {
+
+
+                    if (this.person.gender != null && this.person.gender != undefined) {
+                        if (this.person.gender.toLowerCase() == 'male') {
+
+                            this._lookupItemService.getByGroupName('STIScreeningTreatment').subscribe((res) => {
+                                this.stiScreeningOptions = res['lookupItems'];
+                                this.stiOptions = this.stiScreeningOptions.filter(x => x.itemName !== 'Cervicitis and/or Cervical discharge'
+                                    && x.itemName !== 'Vaginitis or Vaginal discharge (VG)'
+                                    && x.itemName !== 'Pelvic Inflammatory Disease (PID)');
+
+                            });
+
+                        } else if (this.person.gender.toLowerCase() == 'female') {
+
+                            this._lookupItemService.getByGroupName('STIScreeningTreatment').subscribe((res) => {
+                                this.stiScreeningOptions = res['lookupItems'];
+                                this.stiOptions = this.stiScreeningOptions;
+
+                            });
+                        }
+                    }
+
+                }
+
+
+            },
+            (err) => {
+                this.snotifyService.error('Error editing encounter ' + err, 'person detail service',
+                    this.notificationService.getConfig());
+            },
+            () => {
+
+            });
     }
 
     OnSTISelection(event) {
@@ -98,7 +159,7 @@ export class PrepSTIScreeningTreatmentComponent implements OnInit {
     loadSTIScreening(): void {
         this.prepService.getStiScreeningTreatment(this.patientId, this.patientMasterVisitId).subscribe(
             (res) => {
-                let STISymptoms = [];
+                const STISymptoms = [];
                 const stiScreeningObject = this.screenedForSTIOptions.filter(obj => obj.itemName == 'STIScreeningDone');
                 const stiSignsAndSymptomsObject = this.screenedForSTIOptions.filter(obj => obj.itemName == 'STISymptoms');
                 const stiLabInvestigationDoneObject = this.screenedForSTIOptions.filter(obj => obj.itemName == 'STILabInvestigationDone');
@@ -162,13 +223,12 @@ export class PrepSTIScreeningTreatmentComponent implements OnInit {
     }
 
     onPharmacyClick() {
-        this.searchService.setSession(this.personId, this.patientId).subscribe((sessionres) => {
-            this.searchService.setVisitSession(this.patientMasterVisitId, 20, 261).subscribe((setVisitSession) => {
-                const url = location.protocol + '//' + window.location.hostname + ':' + window.location.port +
-                    '/IQCare/CCC/Encounter/PharmacyPrescription.aspx';
-                const win = window.open(url, '_blank');
-                win.focus();
-            });
+
+
+        this.zone.run(() => {
+            this.router.navigate(['/pharm/' + this.patientId + '/' + this.personId],
+                { relativeTo: this.route });
         });
+
     }
 }

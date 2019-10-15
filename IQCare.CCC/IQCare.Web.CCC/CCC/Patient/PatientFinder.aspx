@@ -57,25 +57,14 @@
                         <asp:DropDownList runat="server" ID="Facility" ClientIDMode="Static" CssClass="form-control" />
                     </div>
                 </div>
-
-                <div class="col-md-3 col-xs-12">
-                    <div class="col-md-12">
-                        <label class="control-label pull-left"></label>
-                    </div>
-                    <div class="col-md-12" style="margin-top: 25px">
-                        <strong>
-                            <label class="checkbox-custom checkbox-inline pull-left" data-initialize="checkbox" id="lblNotEnrolled">
-                                <input class="sr-only input-lg" type="checkbox" id="notEnrolled" value="true">
-                                <span class="checkbox-label"><b>Not Enrolled Clients</b></span>
-                            </label>
-                        </strong>
-                    </div>
-
+                <div class="col-md-3">
+                    &nbsp;
                 </div>
 
                 <div class="col-md-3">
+                    &nbsp;
                 </div>
-                <div class="col-md-1"></div>
+                <div class="col-md-1">&nbsp;</div>
                 <div class="col-md-2">
                     <div class="col-md-12 col-xs-12 col-sm-12">
                         <label><span class="fa fa-search-plus"></span> Duplicate finder</label>

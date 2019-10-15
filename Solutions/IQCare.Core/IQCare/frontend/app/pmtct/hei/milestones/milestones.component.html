@@ -7,13 +7,18 @@
 </div>
 
 <div class="row">
-    <div class="col-lg-4 col-sm-4 col-xs-12">
+    <div class="col-lg-4 col-sm-4 col-xs-12" *ngIf="ageInmonths >= 3 else templateName">
         <button mat-raised-button class="mat-primary" (click)="NewMilestone()">
             <span class="fa fa-plus-circle">
                 Add Milestone
             </span>
         </button>
     </div>
+    <ng-template #templateName>
+        <div class="col-lg-4 col-sm-4 col-xs-12">
+            <span class="label label-yellow">Child less than 3 months</span>
+        </div>
+    </ng-template>
 </div>
 
 <div class="row">

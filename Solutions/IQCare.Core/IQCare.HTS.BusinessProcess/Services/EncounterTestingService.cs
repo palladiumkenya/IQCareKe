@@ -149,7 +149,7 @@ namespace IQCare.HTS.BusinessProcess.Services
             }
         }
 
-        public async Task<Tracing> addTracing(int personId, int tracingType, DateTime tracingDate, int mode, int outcome, int userId, string remarks, int? consent, DateTime? dateBookedTesting, DateTime? reminderDate)
+        public async Task<Tracing> addTracing(int personId, int tracingType, DateTime tracingDate, int mode, int outcome, int userId, string remarks, int? consent, DateTime? dateBookedTesting, DateTime? reminderDate,int? reasonNotContacted,string ReasonNotContactedOther)
         {
             try
             {
@@ -166,7 +166,10 @@ namespace IQCare.HTS.BusinessProcess.Services
                     CreateDate = DateTime.Now,
                     Consent = consent,
                     DateBookedTesting = dateBookedTesting,
-                    ReminderDate = reminderDate
+                    ReminderDate = reminderDate,
+                    ReasonNotContacted=reasonNotContacted,
+                    OtherReasonSpecify=ReasonNotContactedOther
+                   
                 };
 
                 await _htsunitOfWork.Repository<Tracing>().AddAsync(pnstrace);
