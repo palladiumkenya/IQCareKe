@@ -327,8 +327,7 @@ namespace IQCare.Pharm.BusinessProcess.Services
                             drg.qtyDisp = "0";
 
                         StringBuilder sqlprescph = new StringBuilder();
-                        sqlprescph.Append("sp_SaveUpdatePharmacyPrescription_GreenCard @ptn_pharmacy_pk,@DrugId,@BatchId,@FreqId,@Dose,@Morning," +
-                            "@Midday,@Evening,@Night,@Duration,@qtyPres,@qtyDisp,@prophylaxis,@pmscm,@UserID");
+                       
 
                         // var ptnpharmacy = new SqlParameter("@ptn_pharmacy_pk", ptn_pharmacy_pk);
 
@@ -443,7 +442,7 @@ namespace IQCare.Pharm.BusinessProcess.Services
 
                         var prophylaxis = new SqlParameter();
                         prophylaxis.SqlDbType = SqlDbType.Int;
-                        prophylaxis.ParameterName = "@prophylaxis";
+                        prophylaxis.ParameterName = "@Prophylaxis";
                         prophylaxis.Size = -1;
                         prophylaxis.Value =(drg.prophylaxis== "")? 0: Convert.ToInt32(drg.prophylaxis.ToString());
                         //var pmscmflag= new SqlParameter("@pmscm",  pmscmFlag);
@@ -460,7 +459,12 @@ namespace IQCare.Pharm.BusinessProcess.Services
                         userid.Size = -1;
                         userid.Value = Convert.ToInt32(UserID.ToString());
 
-                        var presc = await _unitOfWork.Context.Database.ExecuteSqlCommandAsync(sqlprescph.ToString(), parameters: new[] {
+                        sqlprescph.Append($"exec sp_SaveUpdatePharmacyPrescription_GreenCard @ptn_pharmacy_pk={ptnpharmacy.Value},@DrugId={drugid.Value},@BatchId={batchid.Value},@FreqId={freqid.Value},@Dose={dose.Value},@Morning={morning.Value},@Midday={midday.Value},@Evening={evening.Value},@Night={night.Value},@Duration={duration.Value}" +
+                            $",@qtyPres={qtypres.Value},@qtyDisp={qtydisp.Value},@Prophylaxis={prophylaxis.Value},@pmscm={pmscmflag.Value},@UserID={userid.Value}");
+
+                        var presc = _unitOfWork.Context.Database.ExecuteSqlCommand(sqlprescph.ToString());
+
+                     /*   var presc = await _unitOfWork.Context.Database.ExecuteSqlCommand(sqlprescph.ToString(), parameters: new[] {
                     ptnpharmacy,
                     drugid,
                     batchid,
@@ -470,13 +474,14 @@ namespace IQCare.Pharm.BusinessProcess.Services
                     midday,
                     evening,
                     night,
-                    duration,qtypres,
+                    duration,
+                    qtypres,
                     qtydisp,
                     prophylaxis,
                     pmscmflag,
                     userid
 
-            });
+            }); */
 
 
 

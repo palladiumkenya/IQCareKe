@@ -158,6 +158,41 @@ export class PrepStatusComponent implements OnInit {
                 }
             }
         }
+
+
+
+
+        for (let i = 0; i < event.source._parent.options.length; i++) {
+
+            if (event.source._parent.options._results[i].viewValue
+                !== 'None' && event.source._parent.options._results[i].selected == true) {
+
+                let itemid: number;
+                let itemarray: any[] = [];
+                itemarray = this.prepStatusOptions.filter(x => x.itemDisplayName == 'DisContinue');
+                if (itemarray.length > 0) {
+                    this.PrepStatusForm.controls.PrEPStatusToday.setValue(itemarray[0].itemId);
+                }
+
+
+            }
+
+            if (event.source._parent.options._results[i].viewValue
+                === 'None' && event.source._parent.options._results[i].selected == true) {
+
+
+              //  this.PrepStatusForm.controls.PrEPStatusToday.setValue('');
+
+
+
+            }
+
+
+
+
+
+
+        }
     }
     loadPrepStatus(): void {
         this.prepservice.getPrepStatus(this.patientId, this.patientEncounterId).subscribe(

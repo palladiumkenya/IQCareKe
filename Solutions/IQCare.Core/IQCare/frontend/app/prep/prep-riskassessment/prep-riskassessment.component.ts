@@ -1099,21 +1099,24 @@ export class PrepRiskassessmentComponent implements OnInit {
 
         let declinereasonnotexists: any[] = [];
 
-        declinereasonnotexists = prepdeclinereason.filter(r => {
-            if (prepdeclinepreplist.findIndex(t => t.Value == r) == -1) {
+        console.log(prepdeclinereason);
+        if (prepdeclinereason) {
+            declinereasonnotexists = prepdeclinereason.filter(r => {
+                if (prepdeclinepreplist.findIndex(t => t.Value == r) == -1) {
 
-                this.RiskAssessmentList.push({
-                    'Id': 0,
-                    'Comment': '',
-                    'RiskAssessmentid': prepdeclinemasterid,
-                    'Value': r,
-                    'DeleteFlag': false,
-                    'Date': ''
-                });
-                return r;
+                    this.RiskAssessmentList.push({
+                        'Id': 0,
+                        'Comment': '',
+                        'RiskAssessmentid': prepdeclinemasterid,
+                        'Value': r,
+                        'DeleteFlag': false,
+                        'Date': ''
+                    });
+                    return r;
 
-            }
-        });
+                }
+            });
+        }
 
 
         let riskeducationmasterid: number;
@@ -1144,41 +1147,48 @@ export class PrepRiskassessmentComponent implements OnInit {
             }
         }
 
-        let specifyriskeducationmasterid: number;
-        let specifyriskeducationlist: any[] = [];
-        specifyriskeducationmasterid = this.SpecifyRiskEducationOptions[0].masterId;
-        specifyriskeducationlist = this.RiskAssessmentList.filter(x => x.RiskAssessmentid == specifyriskeducationmasterid);
-        this.RiskAssessmentList.filter(x => x.RiskAssessmentid == specifyriskeducationmasterid)
-            .forEach(x => {
-                let status: any[] = [];
-                status = SpecifyRiskEducationValue.filter(t => t == x.Value);
-                if (x.Value == status) {
-                    x.DeleteFlag = false;
+        if (SpecifyRiskEducationValue.length > 0) {
+            let specifyriskeducationmasterid: number;
+            let specifyriskeducationlist: any[] = [];
+            specifyriskeducationmasterid = this.SpecifyRiskEducationOptions[0].masterId;
+            specifyriskeducationlist = this.RiskAssessmentList.filter(x => x.RiskAssessmentid == specifyriskeducationmasterid);
+            this.RiskAssessmentList.filter(x => x.RiskAssessmentid == specifyriskeducationmasterid)
+                .forEach(x => {
+                    let status: any[] = [];
 
-                } else {
-                    x.DeleteFlag = true;
+
+
+                    status = SpecifyRiskEducationValue.filter(t => t == x.Value);
+                    if (x.Value == status) {
+                        x.DeleteFlag = false;
+
+                    } else {
+                        x.DeleteFlag = true;
+                    }
+
+                });
+
+
+            let specifyriskeducationnotexists: any[] = [];
+
+
+            specifyriskeducationnotexists = SpecifyRiskEducationValue.filter(r => {
+                if (specifyriskeducationlist.findIndex(t => t.Value == r) == -1) {
+
+                    this.RiskAssessmentList.push({
+                        'Id': 0,
+                        'Comment': '',
+                        'RiskAssessmentid': specifyriskeducationmasterid,
+                        'Value': r,
+                        'DeleteFlag': false,
+                        'Date': ''
+                    });
+                    return r;
+
                 }
             });
 
-
-        let specifyriskeducationnotexists: any[] = [];
-
-        specifyriskeducationnotexists = SpecifyRiskEducationValue.filter(r => {
-            if (specifyriskeducationlist.findIndex(t => t.Value == r) == -1) {
-
-                this.RiskAssessmentList.push({
-                    'Id': 0,
-                    'Comment': '',
-                    'RiskAssessmentid': specifyriskeducationmasterid,
-                    'Value': r,
-                    'DeleteFlag': false,
-                    'Date': ''
-                });
-                return r;
-
-            }
-        });
-
+        }
 
 
 

@@ -62,7 +62,7 @@
                                         </ng-template>
 
                                         <app-fertility-intention (notify)="onFertilityIntentionNotify($event)"
-                                            [FertilityIntentionsOptions]="FertilityIntentionsOptions"
+                                            [FertilityIntentionsOptions]="FertilityIntentionsOptions"  [visitDate]="visitDate"
                                             [patientId]="patientId" [personId]="personId" [isEdit]="isEdit"
                                             [patientMasterVisitId]="patientMasterVisitId">
                                         </app-fertility-intention>

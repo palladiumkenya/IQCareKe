@@ -65,7 +65,7 @@ export class MotherProfileComponent implements OnInit {
 
         if (moment(this.dateLMP).isBefore(this.minLMpDate)) {
 
-            this.snotifyService.error('Current LMP Date CANNOT be More than 9 months after the VisitDate', 'Mother Profile',
+            this.snotifyService.error('Current LMP Date CANNOT be More than 9 months before the VisitDate', 'Mother Profile',
                 this.notificationService.getConfig());
             this.motherProfileFormGroup.get('dateLMP').setValue('');
             return false;

@@ -15,6 +15,7 @@ import { EncounterDetails } from '../_model/HtsEncounterdetails';
 import { LookupItemView } from '../../shared/_models/LookupItemView';
 import { MatDialog, MatDialogConfig } from '@angular/material';
 import { PatientHtsComponent } from '../patient-hts/patient-hts.component';
+import { PatientHtsPositiveComponent } from '../patient-htspositive/patient-htspositive.component';
 
 
 @Component({
@@ -53,7 +54,8 @@ export class ServicesListComponent implements OnInit {
     vitalrisk: boolean = false;
     agerisk: boolean = false;
     htseligibility: string = ' ';
-
+    proceedvitals: boolean = false;
+    visibleproceed: boolean = true;
     EligibilityInformation: any[] = [];
     HTSEligible: boolean = false;
     hasItems: boolean = false;
@@ -207,6 +209,8 @@ export class ServicesListComponent implements OnInit {
         }
 
     }
+
+
     newTriage() {
         localStorage.setItem('selectedService', 'triage');
         this.store.dispatch(new Consent.SelectedService('triage'));
@@ -276,6 +280,53 @@ export class ServicesListComponent implements OnInit {
                     break;
             }
         }
+    }
+
+    validationhivstatus(code: string) {
+
+        let visibility = false;
+        if (code == 'PREP') {
+
+            if (this.visibleproceed == true) {
+                visibility = true;
+            } else {
+                visibility = false;
+            }
+            
+        } else {
+            visibility = false;
+        }
+        return visibility;
+
+
+    }
+    navigateWarning(serviceId) {
+        const resultsDialogConfig = new MatDialogConfig();
+        resultsDialogConfig.disableClose = false;
+
+        resultsDialogConfig.autoFocus = true;
+        resultsDialogConfig.data = {
+            personId: this.personId,
+            serviceId: serviceId,
+            patientId: this.patientId,
+            ageNumber: this.person.ageNumber,
+            ageInMonths: this.person.ageInMonths
+        };
+        const dialogRef = this.dialog.open(PatientHtsPositiveComponent, resultsDialogConfig);
+        dialogRef.afterClosed().subscribe(
+            data => {
+                if (!data) {
+                    this.proceedvitals = data;
+                    this.visibleproceed = true;
+                   
+                    return;
+                } else {
+                    this.proceedvitals = data;
+                    this.visibleproceed = false;
+                  
+                }
+
+            });
     }
     navigateToRiskAssessment(serviceId) {
         if (this.HTSEligible == false) {
@@ -609,7 +660,7 @@ export class ServicesListComponent implements OnInit {
         let isEligible: boolean = false;
         // console.log('gethtseligibility');
         // console.log(this.encounterDetail);
-        if (this.encounterDetail != undefined) {
+        /* (this.encounterDetail != undefined) {
             if (this.encounterDetail.finalResult == undefined) {
                 isEligible = false;
                 this.EligibilityInformation.push('HTS not done');
@@ -629,7 +680,8 @@ export class ServicesListComponent implements OnInit {
             } else {
                 isEligible = true;
             }
-        } else if (this.htshistory.length <= 0) {
+        }  */
+        if (this.htshistory.length <= 0) {
             isEligible = false;
             this.nohtshistory = true;
             this.EligibilityInformation = [];
@@ -657,27 +709,27 @@ export class ServicesListComponent implements OnInit {
                 }
 
             }
-            let htsdate: Date;
-
-            htsdate = moment(this.htshistory[0].encounterDate).toDate();
-            if (htsdate != null && htsdate != undefined) {
-                let diffc: number;
-
-                diffc = moment(new Date()).diff(htsdate, 'days') + 1;
-
-                if (diffc > 3) {
-                    isEligible = false;
-                    this.htsmustbedone = true;
-                    this.EligibilityInformation = [];
-                    if (this.EligibilityInformation.length > 0) {
-                        if (this.EligibilityInformation.includes('HTS not done') == false) {
-                            this.EligibilityInformation.push('HTS not done');
-                        }
-                    } else {
-                        this.EligibilityInformation.push('HTS not done');
-                    }
-                }
-            }
+            /*let htsdate: Date;
+ 
+             htsdate = moment(this.htshistory[0].encounterDate).toDate();
+             if (htsdate != null && htsdate != undefined) {
+                 let diffc: number;
+ 
+                 diffc = moment(new Date()).diff(htsdate, 'days') + 1;
+ 
+                 if (diffc > 3) {
+                     isEligible = false;
+                     this.htsmustbedone = true;
+                     this.EligibilityInformation = [];
+                     if (this.EligibilityInformation.length > 0) {
+                         if (this.EligibilityInformation.includes('HTS not done') == false) {
+                             this.EligibilityInformation.push('HTS not done');
+                         }
+                     } else {
+                         this.EligibilityInformation.push('HTS not done');
+                     }
+                 }
+             }  */
 
         } else {
             if (isCCCEnrolled != undefined) {
@@ -749,6 +801,10 @@ export class ServicesListComponent implements OnInit {
         }
         return visibility;
     }
+
+
+
+
     validationTriage(code: string, vital: Boolean): Boolean {
         let visibility = false;
         if (code == 'PREP') {

@@ -205,7 +205,7 @@ export class ViewWaitinglistComponent implements OnInit {
         }
         return this.configuration;
 
-         }
+    }
     getRoomsList() {
         this.queuedetailsservice.getRooms().subscribe((result) => {
             console.log(result);
@@ -423,7 +423,7 @@ export class ViewWaitinglistComponent implements OnInit {
 
     }
 
-  
+
 
 
     isServiceEligible(serviceAreaId: number) {
@@ -520,7 +520,7 @@ export class ViewWaitinglistComponent implements OnInit {
                     });
                     break;
                 case 'CCC':
-                    this.searchService.setSession(personId, patientid, this.userId).subscribe((res) => {
+                    this.searchService.setSession(personId, patientid).subscribe((res) => {
                         window.location.href = location.protocol + '//' + window.location.hostname + ':' + window.location.port +
                             '/IQCare/CCC/Patient/PatientHome.aspx';
                     });

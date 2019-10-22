@@ -117,7 +117,7 @@ namespace IQCare.Web.Home
                     string folderName = landScape.ServiceAreaName.Replace(" ", string.Empty).Replace("/", string.Empty);
                     if(folderName == "HTS")
                     {
-                        row["ResourceUrl"] = string.Format("../frontend");
+                        row["ResourceUrl"] = string.Format("/frontend");
                     }
                     else if (folderName == "CCC")
                     {
