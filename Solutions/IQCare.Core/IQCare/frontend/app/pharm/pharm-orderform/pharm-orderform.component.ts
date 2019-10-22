@@ -394,12 +394,12 @@ export class PharmOrderformComponent implements OnInit {
         }
         if (value === 'PMTCT') {
 
-            if (this.person.gender.toLowerCase() == 'male' && this.person.ageNumber >= 9) {
-                this.snotifyService.error('PMTCT is for female patients only who ' +
-                    'are older than 9 years', 'Error',
-                    this.notificationService.getConfig());
-                this.pharmFormGroup.controls.frmTreatmentProgram.setValue('');
-            }
+            /* if (this.person.gender.toLowerCase() == 'male' && this.person.ageNumber >= 9) {
+                 this.snotifyService.error('PMTCT is for female patients only who ' +
+                     'are older than 9 years', 'Error',
+                     this.notificationService.getConfig());
+                 this.pharmFormGroup.controls.frmTreatmentProgram.setValue('');
+             } */
             this.pharmFormGroup.controls.frmPeriodTaken.enable({ onlySelf: true });
             this.pharmFormGroup.controls.frmTreatmentPlan.enable({ onlySelf: true });
             this.pharmFormGroup.controls.frmTreatmentPlan.setValue('');
@@ -888,7 +888,7 @@ export class PharmOrderformComponent implements OnInit {
 
                     }
 
-                };
+                }
 
                 if (regimen > 0) {
                     ExistingRegimenLine = this.DrugArray.filter(x => x.Regimen.toString() !== regimen.toString())
@@ -1144,14 +1144,14 @@ export class PharmOrderformComponent implements OnInit {
         if (this.DrugArray.length > 0) {
             this.DrugArray.forEach(x => {
                 if (!allAbbr.toUpperCase().includes(x.DrugAbb)) {
-                    if (x.DrugAbb !== '' &&  x.DrugAbb !== null) {
+                    if (x.DrugAbb !== '' && x.DrugAbb !== null) {
                         allAbbr += x.DrugAbb + '/';
                     }
                 }
             });
         }
         allAbbr = allAbbr.replace(/\/$/, '');
-        
+
         console.log(allAbbr);
 
         let sumAllAbbr = 0;
@@ -1169,15 +1169,16 @@ export class PharmOrderformComponent implements OnInit {
             const DrugArray = this.DrugArray.filter
                 (x => x.TreatmentProgramText.toString() !== 'Treatment' && x.TreatmentProgramText.toString() !== 'prophylaxis'
                     && x.TreatmentProgramText.toString() !== 'Non-ART' && x.Prophylaxis !== '1').map(x => x.Regimentext);
-            regimenText = DrugArray[0].toString();
-            regimenText = regimenText.match(/\(([^)]+)\)/)[1];
+            if (DrugArray.length > 0) {
+                regimenText = DrugArray[0].toString();
+                regimenText = regimenText.match(/\(([^)]+)\)/)[1];
 
-            selectedRegimen = regimenText.replace(/\+/g, '/').replace(/ /g, '');
+                selectedRegimen = regimenText.replace(/\+/g, '/').replace(/ /g, '');
 
-            for (let i = 0; i < selectedRegimen.length; i++) {
-                sumSelectedRegimen += selectedRegimen.charCodeAt(i);
+                for (let i = 0; i < selectedRegimen.length; i++) {
+                    sumSelectedRegimen += selectedRegimen.charCodeAt(i);
+                }
             }
-
 
         } catch (err) {
 

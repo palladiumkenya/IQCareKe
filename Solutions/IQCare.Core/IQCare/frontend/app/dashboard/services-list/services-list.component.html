@@ -152,29 +152,39 @@
                                             </ng-template>
 
                                             <ng-template #htsnotdonetemplate>
-                                                <div *ngIf="nohtshistory;else htsdatetemplate">
+                                                <div *ngIf="nohtshistory;else hivstatustemplate">
                                                     <span class="label label-orange"
                                                         *ngFor="let infor of this.EligibilityInformation">
                                                         {{infor}}
                                                     </span>
                                                 </div>
                                             </ng-template>
-                                            <ng-template #htsdatetemplate>
+                                         <!--  <ng-template #htsdatetemplate>
                                                 <div *ngIf="htsmustbedone;else hivstatustemplate">
                                                     <span class="label label-orange"
                                                         *ngFor="let infor of this.EligibilityInformation">
                                                         {{infor}}
                                                     </span>
                                                 </div>
-                                            </ng-template>
+                                            </ng-template>-->
                                             <ng-template #hivstatustemplate>
-                                                <div *ngIf="hivstatus;else triagetemplate">
-                                                    <span class="label label-orange"
-                                                        *ngFor="let infor of this.EligibilityInformation">
-                                                        {{infor}}
-                                                    </span>
+                                                <div  *ngIf="validationhivstatus(service.code);else triagetemplate">
+                                                   <div *ngIf="hivstatus;else triagetemplate">
+                                                  <a class="btn btn-sm btn-primary" (click)="navigateWarning(service.id)">
+                                                      Proceed 
+                                                </a>
+                                                <span>
+                                                        &nbsp;
+                                                </span>
+                                                <span class="label label-orange">
+                                               Client Tested Hiv Positive?
+                                               </span>
                                                 </div>
+                                                </div>
+
                                             </ng-template>
+                                           
+                                            
                                             <!--<ng-template #informationtemplate>
                                                 <div
                                                     *ngIf="validationHTS(service.code,this.HTSEligible) ;else triagetemplate ">
@@ -186,7 +196,7 @@
                                             </ng-template>-->
 
 
-                                            <ng-template #triagetemplate>
+                                            <ng-template #triagetemplate  >
                                                 <div
                                                     *ngIf="validationTriage(service.code,this.Vitaldone);else vitalrisktemplate">
                                                     <a class="btn btn-sm btn-primary" (click)="navigateToTriage()">

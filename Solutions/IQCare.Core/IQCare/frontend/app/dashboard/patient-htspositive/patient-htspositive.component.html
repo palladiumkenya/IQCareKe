@@ -1,0 +1,84 @@
+<h2 mat-dialog-title>HTS</h2>
+<mat-dialog-content>
+    <div class="row">
+        <span class="red" style="font-size:30px" >Are you sure you want to give Prep to a Hiv Positive Client?
+        </span>  
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="form-title">
+                <span class="mat-accent"> HTS Last Encounters</span>
+            </div>
+        </div>
+    </div>
+    <div class='row'>
+        <div class="example-container mat-elevation-z0">
+            <mat-table [dataSource]="HTSEncounterDataSource">
+                <ng-container matColumnDef="encounterDate">
+                    <mat-header-cell *matHeaderCellDef> Encounter Date </mat-header-cell>
+                    <mat-cell *matCellDef="let element"> {{element.encounterDate | date: 'dd-MMM-yyyy' }}
+                    </mat-cell>
+                </ng-container>
+
+                <ng-container matColumnDef="testType">
+                    <mat-header-cell *matHeaderCellDef> Test Type </mat-header-cell>
+                    <mat-cell *matCellDef="let element"> {{element.testType }} </mat-cell>
+                </ng-container>
+
+                <!-- Provider Column -->
+                <ng-container matColumnDef="provider">
+                    <mat-header-cell *matHeaderCellDef> Provider </mat-header-cell>
+                    <mat-cell *matCellDef="let element"> {{element.provider}} </mat-cell>
+                </ng-container>
+
+                <!-- Screening Test Column -->
+                <ng-container matColumnDef="resultOne">
+                    <mat-header-cell *matHeaderCellDef> Screening Test </mat-header-cell>
+                    <mat-cell *matCellDef="let element"> {{element.resultOne}} </mat-cell>
+                </ng-container>
+
+                <!-- Confirmatory Test Column -->
+                <ng-container matColumnDef="resultTwo">
+                    <mat-header-cell *matHeaderCellDef> Confirmatory Test </mat-header-cell>
+                    <mat-cell *matCellDef="let element"> {{element.resultTwo}} </mat-cell>
+                </ng-container>
+
+                <!-- Final Result Column -->
+                <ng-container matColumnDef="finalResult">
+                    <mat-header-cell *matHeaderCellDef> Final Result </mat-header-cell>
+                    <mat-cell *matCellDef="let element"> {{element.finalResult }} </mat-cell>
+                </ng-container>
+
+                <!-- Consent To Testing Column -->
+                <ng-container matColumnDef="consent">
+                    <mat-header-cell *matHeaderCellDef> Consent To Testing </mat-header-cell>
+                    <mat-cell *matCellDef="let element"> {{element.consent }} </mat-cell>
+                </ng-container>
+
+                <!-- Partner Listing Consent Column -->
+                <ng-container matColumnDef="partnerListingConsent">
+                    <mat-header-cell *matHeaderCellDef> Partner Listing Consent </mat-header-cell>
+                    <mat-cell *matCellDef="let element"> {{element.partnerListingConsent }} </mat-cell>
+                </ng-container>
+
+                <ng-container matColumnDef="serviceArea">
+                    <mat-header-cell *matHeaderCellDef> ServiceArea </mat-header-cell>
+                    <mat-cell *matCellDef="let element"> {{element.serviceArea }} </mat-cell>
+                </ng-container>
+                <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+            </mat-table>
+            <mat-paginator id="completed-paginator" [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons>
+            </mat-paginator>
+        </div>
+
+    </div>  
+
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+    <button class="mat-raised-button" (click)="Close()">Close</button>
+<button class="mat-raised-button" (click)="Continue()">Continue </button>
+
+
+</mat-dialog-actions>

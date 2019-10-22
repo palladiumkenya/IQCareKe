@@ -347,6 +347,8 @@
     <None Remove="Scripts\2.2.0\48_AllergyView.sql" />
     <None Remove="Scripts\2.2.0\40_HTSEncountersView.sql" />
     <None Remove="Scripts\2.2.0\41_HtsFacilityDashboard.sql" />
+    <None Remove="Scripts\2.2.0\49_PrepStatus.sql" />
+    <None Remove="Scripts\2.2.0\50_PREP_RegisterView.sql" />
     <None Remove="Scripts\2.2.0\IQTools\01_PatientPopulationView.sql" />
     <None Remove="Scripts\2.2.0\IQTools\02_HTS_LABRegisternewer.sql" />
     <None Remove="Scripts\2.2.0\IQTools\03_ANCRegister.sql" />
@@ -731,6 +733,7 @@
     <EmbeddedResource Include="Scripts\2.2.0\48_AllergyView.sql" />
     <EmbeddedResource Include="Scripts\2.2.0\40_HTSEncountersView.sql" />
     <EmbeddedResource Include="Scripts\2.2.0\41_HtsFacilityDashboard.sql" />
+    <EmbeddedResource Include="Scripts\2.2.0\49_PrepStatus.sql" />
     <EmbeddedResource Include="Scripts\2.2.0\IQTools\01_PatientPopulationView.sql" />
     <EmbeddedResource Include="Scripts\2.2.0\IQTools\02_HTS_LABRegisternewer.sql" />
     <EmbeddedResource Include="Scripts\2.2.0\IQTools\03_ANCRegister.sql" />
@@ -762,6 +765,7 @@
     <EmbeddedResource Include="Scripts\2.0.1\16_pr_User_Login.sql" />
     <EmbeddedResource Include="Scripts\2.0.1\17_pr_Admin_GetFacilityList.sql" />
     <EmbeddedResource Include="Scripts\2.0.1\18_UpdateFacility.sql" />
+    <EmbeddedResource Include="Scripts\2.2.0\50_PREP_RegisterView.sql" />
   </ItemGroup>
 
   <ItemGroup>

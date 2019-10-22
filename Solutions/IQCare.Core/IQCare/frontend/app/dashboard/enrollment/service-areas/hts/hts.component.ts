@@ -16,6 +16,7 @@ import * as Consent from '../../../../shared/reducers/app.states';
 import { AppEnum } from '../../../../shared/reducers/app.enum';
 import { forkJoin } from 'rxjs';
 import { PersonPopulation } from '../../../../registration/_models/personPopulation';
+import { NumberValueAccessor } from '@angular/forms/src/directives';
 @Component({
     selector: 'app-hts',
     templateUrl: './hts.component.html',
@@ -133,6 +134,39 @@ export class HtsComponent implements OnInit {
         this.personHomeService.getPatientByPersonId(this.personId).subscribe(
             (res) => {
                 this.ageInMonths = parseInt(res.ageInMonths, 10);
+                if (res != null) {
+                    if (res.gender != null) {
+                        if (res.gender.toLowerCase() == 'female') {
+
+                            if (this.keyPops.length > 0) {
+                                let index: number;
+                                index = this.keyPops.findIndex(x => x.itemName == 'MSM');
+                                if (index > -1) {
+                                    this.keyPops.splice(index, 1);
+                                }
+                            }
+
+                            if (this.priorityPops.length > 0) {
+                                let indexm: number;
+                                indexm = this.priorityPops.findIndex(x => x.itemName == 'MSW')
+                                if (indexm > -1) {
+                                    this.priorityPops.splice(indexm, 1);
+                                }
+                            }
+                        }
+
+                        if (res.gender.toLowerCase() == 'male') {
+                            if (this.priorityPops.length > 0) {
+                            let index: number;
+                            index = this.priorityPops.findIndex(x => x.itemName == 'Adolescent Girls and Young Women')
+                            if (index > -1) {
+                                this.priorityPops.splice(index, 1);
+                            }
+                        }
+                        }
+
+                    }
+                }
             }
         );
 
@@ -203,31 +237,34 @@ export class HtsComponent implements OnInit {
             (result) => {
                 if (result.length > 0) {
                     console.log(result);
-                   
+
                     result.forEach(element => {
                         if (element.populationType == 'General Population') {
                             this.form.controls.populationType.setValue(1);
                         } else if (element.populationType == 'Discordant Couple') {
                             this.form.controls.discordantPopulation.setValue(1);
 
+                        } else if (element.populationType == 'Key Population') {
+
+                            this.form.controls.populationType.setValue(2);
+
+                            this.form.controls.KeyPopulation.enable({ onlySelf: false });
+                            const arrayValue = [];
+
+                            arrayValue.push(element.populationCategory);
+
+                            this.form.controls.KeyPopulation.setValue(arrayValue);
+
+
                         }
-                         
+
+
+
                     });
 
                 }
 
-                else {
-                    if (this.ageNumber >= 15) {
-                        this.form.controls.populationType.setValue(2);
-                        
-                        this.form.controls.KeyPopulation.enable({ onlySelf: false });
-                        const arrayValue = [];
-                        result.forEach(element => {
-                            arrayValue.push(element.populationCategory);
-                        });
-                        this.form.controls.KeyPopulation.setValue(arrayValue);
-                    }
-                }
+
 
 
             },
