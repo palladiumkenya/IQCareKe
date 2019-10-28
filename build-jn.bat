@@ -189,6 +189,17 @@ dotnet publish Solutions/IQCare.Core/IQCare.AIR.Web/IQCare.AIR.Web.csproj -o ../
 @echo ********** END OF BUILINDING IQCare AIR WEB ********** >> %log%
 
 
+
+@echo "********** Building IQCare PHARM **********" >> %log%
+@echo ********** Building IQCare PHARM **********
+
+dotnet publish Solutions/IQCare.Core/IQCare.Pharm.WebApi/IQCare.Pharm.WebApi.csproj -o ../../../package/pharm
+
+@echo ********** END OF BUILINDING IQCare PHARM ********** >> %log%
+@echo ********** END OF BUILINDING IQCare PHARM ********** >> %log%
+
+
+
 @echo "********** Building IQCare Queue WEB **********" >> %log%
 @echo ********** Building IQCare Queue WEB **********
 

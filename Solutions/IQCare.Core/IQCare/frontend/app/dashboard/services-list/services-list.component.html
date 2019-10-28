@@ -106,9 +106,17 @@
                                     <div class="ticket-time  col-lg-2 col-sm-2 col-xs-12">
                                         <div class="divider hidden-md hidden-sm hidden-xs"></div>
                                         <span>
-                                            <ng-container *ngIf="isDeathEligibility(service.id); else eligibleTemplate">
+                                            <ng-container *ngIf="isDeathEligibility(service.id); else serviceTemplate">
                                                 <span class="label label-orange">Not Eligible</span>
                                             </ng-container>
+                                            <ng-template #serviceTemplate>
+                                                <span *ngIf="checkService(service.id); else eligibleTemplate">
+                                                    <a class="btn btn-sm btn-primary"
+                                                        (click)="enrollToService(service.id, service.code)">
+                                                        Enroll
+                                                    </a>
+                                                </span>
+                                            </ng-template>
 
                                             <ng-template #eligibleTemplate>
                                                 <span *ngIf="isServiceEligible(service.id); else agerisktemplate">
@@ -144,29 +152,39 @@
                                             </ng-template>
 
                                             <ng-template #htsnotdonetemplate>
-                                                <div *ngIf="nohtshistory;else htsdatetemplate">
+                                                <div *ngIf="nohtshistory;else hivstatustemplate">
                                                     <span class="label label-orange"
                                                         *ngFor="let infor of this.EligibilityInformation">
                                                         {{infor}}
                                                     </span>
                                                 </div>
                                             </ng-template>
-                                            <ng-template #htsdatetemplate>
+                                         <!--  <ng-template #htsdatetemplate>
                                                 <div *ngIf="htsmustbedone;else hivstatustemplate">
                                                     <span class="label label-orange"
                                                         *ngFor="let infor of this.EligibilityInformation">
                                                         {{infor}}
                                                     </span>
                                                 </div>
-                                            </ng-template>
+                                            </ng-template>-->
                                             <ng-template #hivstatustemplate>
-                                                <div *ngIf="hivstatus;else triagetemplate">
-                                                    <span class="label label-orange"
-                                                        *ngFor="let infor of this.EligibilityInformation">
-                                                        {{infor}}
-                                                    </span>
+                                                <div  *ngIf="validationhivstatus(service.code);else triagetemplate">
+                                                   <div *ngIf="hivstatus;else triagetemplate">
+                                                  <a class="btn btn-sm btn-primary" (click)="navigateWarning(service.id)">
+                                                      Proceed 
+                                                </a>
+                                                <span>
+                                                        &nbsp;
+                                                </span>
+                                                <span class="label label-orange">
+                                               Client Tested Hiv Positive?
+                                               </span>
                                                 </div>
+                                                </div>
+
                                             </ng-template>
+                                           
+                                            
                                             <!--<ng-template #informationtemplate>
                                                 <div
                                                     *ngIf="validationHTS(service.code,this.HTSEligible) ;else triagetemplate ">
@@ -178,7 +196,7 @@
                                             </ng-template>-->
 
 
-                                            <ng-template #triagetemplate>
+                                            <ng-template #triagetemplate  >
                                                 <div
                                                     *ngIf="validationTriage(service.code,this.Vitaldone);else vitalrisktemplate">
                                                     <a class="btn btn-sm btn-primary" (click)="navigateToTriage()">
@@ -213,7 +231,7 @@
                                                 </div>
                                             </ng-template>
                                             <ng-template #riskoutcometemplate>
-                                                <div *ngIf="preprisk;else eligiblecareendtemplate">
+                                                <div *ngIf="preprisk;else eligiblecreatininetemplate">
                                                     <span>
                                                         <a class="btn btn-sm btn-primary"
                                                             (click)="editRiskAssessment(service.id,service.code)">
@@ -226,6 +244,15 @@
                                                         {{infor}}
                                                     </span>
                                                 </div>
+                                            </ng-template>
+                                            <ng-template #eligiblecreatininetemplate>
+                                                <span  class="label label-orange" *ngIf="creatininetestresult; else eligiblecareendtemplate">
+                                                    Creatinine Test Results is
+                                                      {{this.creatininelabtests[0].result}} 
+                                                      <br />
+                                                    Test was ordered on {{this.creatininelabtests[0].orderDate}}
+                                                
+                                                </span>
                                             </ng-template>
                                             <ng-template #eligiblecareendtemplate>
 

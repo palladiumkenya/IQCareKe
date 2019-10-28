@@ -42,10 +42,12 @@ import { RiskEncounterResolver } from './services/riskencounter.resolver';
 import { PrepComponent } from './enrollment/service-areas/prep/prep.component';
 import { ReenrollmentComponent } from './reenrollment/reenrollment.component';
 import { PatientHtsComponent } from './patient-hts/patient-hts.component';
-import {AddWaitingListComponent} from '../shared/add-waiting-list/add-waiting-list.component';
+import { PatientHtsPositiveComponent } from './patient-htspositive/patient-htspositive.component';
+import { AddWaitingListComponent } from '../shared/add-waiting-list/add-waiting-list.component';
 import { FacilityDashboardComponent } from './facility-dashboard/facility-dashboard.component';
-import {ChartsModule} from 'ng2-charts';
+import { ChartsModule } from 'ng2-charts';
 import { HtsDashboardComponent } from './hts-dashboard/hts-dashboard.component';
+import { GetpatientIdResolver } from './services/getpatientId.resolver';
 
 @NgModule({
     imports: [
@@ -87,7 +89,8 @@ import { HtsDashboardComponent } from './hts-dashboard/hts-dashboard.component';
         ReenrollmentComponent,
         PatientHtsComponent,
         FacilityDashboardComponent,
-        HtsDashboardComponent
+        HtsDashboardComponent,
+        PatientHtsPositiveComponent
     ],
     providers: [
         NotificationService,
@@ -102,14 +105,14 @@ import { HtsDashboardComponent } from './hts-dashboard/hts-dashboard.component';
         ExitReasonsResolver,
         CareendDetailsResolver,
         HTSEncounterHistoryResolver,
-        PartnerCCCEnrollmentResolver, 
+        PartnerCCCEnrollmentResolver,
         SexWithoutCondomResolver,
-        PatientIdentifierResolver
-
+        PatientIdentifierResolver,
+        GetpatientIdResolver
 
     ],
     entryComponents: [
-        PatientHtsComponent, AddWaitingListComponent
+        PatientHtsComponent, AddWaitingListComponent,PatientHtsPositiveComponent 
     ],
 })
 export class DashboardModule { }

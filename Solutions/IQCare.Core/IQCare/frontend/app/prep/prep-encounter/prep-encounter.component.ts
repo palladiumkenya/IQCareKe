@@ -42,6 +42,7 @@ export class PrepEncounterComponent implements OnInit {
     isEdit: number;
     Age: number = 20;
     isLinear: boolean = true;
+    visitDate: Date;
 
     // Form Groups
     STIScreeningFormGroup: FormArray;
@@ -64,7 +65,7 @@ export class PrepEncounterComponent implements OnInit {
     reasonsPrepAppointmentNotGivenOptions: LookupItemView[];
     pregnancyStatusOptions: LookupItemView[];
     screenedForSTIOptions: LookupItemView[];
-
+    DateStatus?: Date;
     STIScreeningAndTreatmentOptions: any[] = [];
     CircumcisionStatusOptions: any[] = [];
     FertilityIntentionsOptions: any[] = [];
@@ -103,6 +104,7 @@ export class PrepEncounterComponent implements OnInit {
         this.PrepStatusFormGroup = new FormArray([]);
         this.AppointmentFormGroup = new FormArray([]);
         this.LabInvestigationsFormGroup = new FormArray([]);
+
     }
 
     ngOnInit() {
@@ -118,6 +120,7 @@ export class PrepEncounterComponent implements OnInit {
             }
         );
         this.userId = JSON.parse(localStorage.getItem('appUserId'));
+        // this.visitDate = new Date(localStorage.getItem('visitDate'));
 
         // Get data from route resolvers
         this.route.data.subscribe(
@@ -159,6 +162,7 @@ export class PrepEncounterComponent implements OnInit {
             'fpMethods': this.familyPlanningMethodsOptions,
             'planningPregnancy': this.planningPregnancyOptions,
             'pregnancyStatusOptions': this.pregnancyStatusOptions
+
         });
 
         this.PregnancyOutcomeOptions.push({
@@ -227,6 +231,9 @@ export class PrepEncounterComponent implements OnInit {
             this.stepper.selectedIndex = 2;
             this.stepper._stateChanged();
             this.isOptionalCircumcision = true;
+            localStorage.setItem('visitDate', this.STIScreeningFormGroup.value[0]['visitDate']);
+
+
         }
     }
 
@@ -272,10 +279,12 @@ export class PrepEncounterComponent implements OnInit {
     }
 
     onPrepStatusNotify(formGroup: FormGroup): void {
+        console.log(this.PrepStatusFormGroup);
         this.PrepStatusFormGroup.push(formGroup);
     }
 
     onPrepAppointmentNotify(formGroup: FormGroup): void {
+
         this.AppointmentFormGroup.push(formGroup);
     }
     onLabInvestigations(formGroup: FormGroup): void {
@@ -291,6 +300,32 @@ export class PrepEncounterComponent implements OnInit {
     }
 
     onPrepNewEncounter() {
+
+        const PrepStatusToday = this.PrepStatusFormGroup.value[0]['PrEPStatusToday'];
+        if (PrepStatusToday) {
+            const statusname = this.prepStatusOptions.filter(x => x.itemId == parseInt(PrepStatusToday.toString(), 10));
+            if (statusname.length > 0) {
+                if (statusname[0].itemName == 'Restart') {
+                    const daterestart = this.PrepStatusFormGroup.value[0]['DateRestarted'];
+                    if (daterestart !== '' && daterestart != null) {
+                        this.DateStatus = moment(daterestart).toDate();
+                    }
+                }
+                else if (statusname[0].itemName == 'Start') {
+                    const datestart = this.PrepStatusFormGroup.value[0]['DateInitiated'];
+                    if (datestart !== '' && datestart != null) {
+                        this.DateStatus = moment(datestart).toDate();
+                    }
+                }
+                else {
+                    this.DateStatus = null;
+                }
+            }
+            else {
+                this.DateStatus = null;
+            }
+
+        }
         // create prep status command
         const prepStatusCommand: PrepStatusCommand = {
             Id: 0,
@@ -303,6 +338,7 @@ export class PrepEncounterComponent implements OnInit {
             CreatedBy: this.userId,
             CondomsIssued: this.PrepStatusFormGroup.value[0]['condomsIssued'],
             NoOfCondoms: this.PrepStatusFormGroup.value[0]['noCondomsIssued'],
+            DateField: this.DateStatus
         };
 
 
@@ -488,7 +524,7 @@ export class PrepEncounterComponent implements OnInit {
 
         let stioptions = [];
         stioptions = this.screenedForSTIOptions.filter(x => x.itemName == 'STISymptoms');
-
+        if (this.STIScreeningFormGroup.value[0].signsOfSTI !== undefined) {
         if (this.STIScreeningFormGroup.value[0].signsOfSTI.length > 0) {
             for (let t = 0; t < this.STIScreeningFormGroup.value[0].signsOfSTI.length; t++) {
                 let arraystis: LookupItemView[];
@@ -510,7 +546,7 @@ export class PrepEncounterComponent implements OnInit {
 
             }
         }
-
+    }
 
         const pregnancyIndicatorLog: PregnancyIndicatorLogCommand = {
             Id: 0,
@@ -597,18 +633,49 @@ export class PrepEncounterComponent implements OnInit {
     }
 
     onPrepEncounterEdit() {
+
+        const PrepStatusToday = this.PrepStatusFormGroup.value[0]['PrEPStatusToday'];
+        if (PrepStatusToday) {
+            const statusname = this.prepStatusOptions.filter(x => x.itemId == parseInt(PrepStatusToday.toString(), 10));
+            if (statusname.length > 0) {
+                if (statusname[0].itemName == 'Restart') {
+                    const daterestart = this.PrepStatusFormGroup.value[0]['DateRestarted'];
+                    if (daterestart !== '' && daterestart != null) {
+                        this.DateStatus = moment(daterestart).toDate();
+                    }
+                }
+                else if (statusname[0].itemName == 'Start') {
+                    const datestart = this.PrepStatusFormGroup.value[0]['DateInitiated'];
+                    if (datestart !== '' && datestart != null) {
+                        this.DateStatus = moment(datestart).toDate();
+                    }
+                }
+                else {
+                    this.DateStatus = null;
+                }
+            }
+            else {
+                this.DateStatus = null;
+            }
+
+        }
         // create prep status command
         const prepStatusCommand: PrepStatusCommand = {
             Id: this.PrepStatusFormGroup.value[0]['id'],
             PatientId: this.patientId,
             PatientEncounterId: this.patientEncounterId,
             SignsOrSymptomsHIV: this.PrepStatusFormGroup.value[0]['signsOrSymptomsHIV'],
-            AdherenceCounsellingDone: this.PrepStatusFormGroup.value[0]['adherenceCounselling'],
+            AdherenceCounsellingDone: this.PrepStatusFormGroup.value[0]['adherenceCounselling'] == '' ?
+                0 : this.PrepStatusFormGroup.value[0]['adherenceCounselling'],
             //  ContraindicationsPrepPresent: this.PrepStatusFormGroup.value[0]['contraindications_PrEP_Present'],
-            PrepStatusToday: this.PrepStatusFormGroup.value[0]['PrEPStatusToday'],
+            PrepStatusToday: this.PrepStatusFormGroup.value[0]['PrEPStatusToday'] == '' ? 0
+                : this.PrepStatusFormGroup.value[0]['PrEPStatusToday'],
             CreatedBy: this.userId,
-            CondomsIssued: this.PrepStatusFormGroup.value[0]['condomsIssued'],
-            NoOfCondoms: this.PrepStatusFormGroup.value[0]['noCondomsIssued'],
+            CondomsIssued: this.PrepStatusFormGroup.value[0]['condomsIssued'] == '' ? 0
+                : this.PrepStatusFormGroup.value[0]['condomsIssued'],
+            NoOfCondoms: this.PrepStatusFormGroup.value[0]['noCondomsIssued'] == '' ? 0
+                : this.PrepStatusFormGroup.value[0]['noCondomsIssued'],
+            DateField: this.DateStatus
         };
 
         // circumcision 
@@ -656,27 +723,29 @@ export class PrepEncounterComponent implements OnInit {
         let stioptions = [];
         stioptions = this.screenedForSTIOptions.filter(x => x.itemName == 'STISymptoms');
 
-        if (this.STIScreeningFormGroup.value[0].signsOfSTI.length > 0) {
-            for (let t = 0; t < this.STIScreeningFormGroup.value[0].signsOfSTI.length; t++) {
+        if (this.STIScreeningFormGroup.value[0].signsOfSTI !== undefined) {
+            if (this.STIScreeningFormGroup.value[0].signsOfSTI.length > 0) {
+                for (let t = 0; t < this.STIScreeningFormGroup.value[0].signsOfSTI.length; t++) {
 
-                let arraystis: LookupItemView[];
-                let comment: string;
-                arraystis = this.stiScreeningOptions.filter(x => x.itemId == this.STIScreeningFormGroup.value[0].signsOfSTI[t]);
-                if (arraystis[0].itemDisplayName == 'Others (O)') {
-                    comment = this.STIScreeningFormGroup.value[0].Specify;
-                } else {
-                    comment = '';
+                    let arraystis: LookupItemView[];
+                    let comment: string;
+                    arraystis = this.stiScreeningOptions.filter(x => x.itemId == this.STIScreeningFormGroup.value[0].signsOfSTI[t]);
+                    if (arraystis[0].itemDisplayName == 'Others (O)') {
+                        comment = this.STIScreeningFormGroup.value[0].Specify;
+                    } else {
+                        comment = '';
+                    }
+
+                    console.log(this.STIScreeningFormGroup.value[0].signsOfSTI[t]);
+                    STIScreeningCommand.Screenings.push({
+                        ScreeningTypeId: stioptions[0].masterId,
+                        ScreeningCategoryId: stioptions[0].itemId,
+                        ScreeningValueId: this.STIScreeningFormGroup.value[0].signsOfSTI[t],
+                        Comment: comment
+                    });
+
+
                 }
-
-                console.log(this.STIScreeningFormGroup.value[0].signsOfSTI[t]);
-                STIScreeningCommand.Screenings.push({
-                    ScreeningTypeId: stioptions[0].masterId,
-                    ScreeningCategoryId: stioptions[0].itemId,
-                    ScreeningValueId: this.STIScreeningFormGroup.value[0].signsOfSTI[t],
-                    Comment: comment
-                });
-
-
             }
         }
 
@@ -793,11 +862,14 @@ export class PrepEncounterComponent implements OnInit {
         };
 
         const fpMethodId = this.FertilityIntentionsFormGroup.value[0]['fpMethodId'];
+       
+
         const updateFamilyPlanningMethodCommand: PatientFamilyPlanningMethodEditCommand = {
-            Id: fpMethodId ? fpMethodId : 0,
+            Id: (fpMethodId === undefined || fpMethodId === ''  || fpMethodId === null) ? 0 : fpMethodId ,
             FPMethodId: this.FertilityIntentionsFormGroup.value[0]['familyPlanningMethods'],
             PatientId: this.patientId,
-            PatientFPId: this.FertilityIntentionsFormGroup.value[0]['id_familyPlanning'],
+            PatientFPId: (this.FertilityIntentionsFormGroup.value[0]['id_familyPlanning'] === null)
+            ? 0 : this.FertilityIntentionsFormGroup.value[0]['id_familyPlanning'],
             UserId: this.userId
         };
 

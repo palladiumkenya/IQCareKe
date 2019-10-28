@@ -163,7 +163,7 @@ export class AncService {
             'Id': id
         };
 
-        return this.http.post<any>(this.API_URL + '/api/PatientChronicIllness/Delete', JSON.stringify(Indata), httpOptions).pipe(
+        return this.http.delete<any>(this.API_URL + '/api/PatientChronicIllness/Delete/' + id ).pipe(
             tap(deletePatientChronicIllness => this.errorHandler.log('Successfully deleted chronic illness')),
             catchError(this.errorHandler.handleError<any>('Error in deleting Patient Chronic Illness'))
         );
@@ -352,7 +352,8 @@ export class AncService {
             );
     }
 
-    public getPatientChronicIllnessInfo(patientId: number) {
+
+  public getPatientChronicIllnessInfo(patientId: number) {
         return this.http.get<any[]>(this.API_URL + '/api/PatientChronicIllness/GetByPatientId/' +
             patientId).pipe(
                 tap(getPatientChronicIllnessInfo => this.errorHandler.log('get chronic info Data')),

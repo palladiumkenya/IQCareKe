@@ -6,8 +6,6 @@
 
   <ItemGroup>
     <Folder Include="Interface\" />
-    <Folder Include="Mapping\" />
-    <Folder Include="Installers\" />
   </ItemGroup>
 
   <ItemGroup>
@@ -17,6 +15,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\IQCare.Pharm.Core\IQCare.Pharm.Core.csproj" />
     <ProjectReference Include="..\IQCare.SharedKernel.Infrastructure\IQCare.SharedKernel.Infrastructure.csproj" />
   </ItemGroup>
 

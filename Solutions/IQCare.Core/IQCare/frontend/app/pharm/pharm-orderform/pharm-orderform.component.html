@@ -1,0 +1,352 @@
+<div class="col-md-12 col-sm-12 col-xs-12">
+    <div class="widget">
+        <div class="widget-header bordered-bottom bordered-blue">
+            <span class="widget-caption">Pharmacy Form</span>
+        </div>
+        <div class="widget-body">
+            <form [formGroup]="pharmFormGroup">
+                <div class="row">
+                    <div class="col-md-6 col-xs-12 col-sm-12">
+                        <mat-form-field class="col-lg-6">
+                            <input matInput [matDatepicker]="picker" [max]="maxDate" (focus)="picker.open()"
+                                formControlName="visitDate" required placeholder="Choose Visit Date">
+                            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                            <mat-datepicker #picker></mat-datepicker>
+                        </mat-form-field>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-3 col-xs-12 col-sm-12">
+                        <mat-form-field class="col-lg-12">
+                            <mat-select placeholder="TreatmentProgram" formControlName="frmTreatmentProgram" required
+                                (selectionChange)="TreatmentProgram($event)">
+                                <mat-option [value]=""></mat-option>
+                                <mat-option *ngFor="let Option of treatmentprogramOptions" [value]="Option.name">
+                                    <!--(onSelectionChange)=OnAdherenceOutcome($event)-->
+
+
+                                    {{Option.name}}
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+
+                    <div class="col-md-3 col-xs-12 col-sm-12">
+                        <mat-form-field class="col-lg-12">
+                            <mat-select placeholder="Period Taken" formControlName="frmPeriodTaken" required>
+                                <mat-option [value]=""></mat-option>
+                                <mat-option *ngFor="let Option of periodTakenOptions" [value]="Option.itemId">
+                                    <!--(onSelectionChange)=OnAdherenceOutcome($event)-->
+
+
+                                    {{Option.itemDisplayName}}
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+                    <div class="col-md-3 col-xs-12 col-sm-12">
+                        <mat-form-field class="col-lg-12">
+                            <mat-select placeholder="Treatment Plan" formControlName="frmTreatmentPlan"
+                                (selectionChange)="drugSwitchInterruptionReason();getCurrentRegimen()" required>
+                                <mat-option [value]=""></mat-option>
+                                <mat-option *ngFor="let Option of TreatmentplanOptions" [value]="Option.itemId">
+                                    <!--(onSelectionChange)=OnAdherenceOutcome($event)-->
+
+
+                                    {{Option.itemDisplayName}}
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+                    <div class="col-md-3 col-xs-12 col-sm-12">
+                        <mat-form-field class="col-lg-12">
+                            <mat-select placeholder="Reason" formControlName="frmReason" required>
+                                <mat-option [value]=""></mat-option>
+                                <mat-option *ngFor="let Option of SwitchReasonOptions" [value]="Option.itemId">
+                                    <!--(onSelectionChange)=OnAdherenceOutcome($event)-->
+
+
+                                    {{Option.itemDisplayName}}
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+
+                </div>
+                <div class="row">
+                    <div class="col-md-3 col-xs-12 col-sm-12">
+                        <mat-form-field class="col-lg-12">
+                            <mat-select placeholder="Regimen Line" formControlName="frmRegimenLine"
+                                (selectionChange)="selectRegimens($event)" required>
+                                <mat-option [value]=""></mat-option>
+                                <mat-option *ngFor="let Option of regimenlineOptions" [value]="Option.itemId">
+                                    <!--(onSelectionChange)=OnAdherenceOutcome($event)-->
+
+
+                                    {{Option.itemDisplayName}}
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+                    <div class="col-md-3 col-xs-12 col-sm-12">
+                        <mat-form-field class="col-lg-12">
+                            <mat-select placeholder="Regimen" formControlName="frmRegimen" required
+                                (selectionChange)="selectRegimenLine($event)">
+                                <mat-option [value]=""></mat-option>
+                                <mat-option *ngFor="let Option of regimenOptions" [value]="Option.lookupItemId">
+                                    <!--(onSelectionChange)=OnAdherenceOutcome($event)-->
+
+
+                                    {{Option.displayName}}
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12 col-xs-12 col-sm-12">
+                        <mat-form-field class="col-lg-12 col-sm-12 col-xs-12">
+                            <mat-label>Drug</mat-label>
+                            <input matInput id="frmDrug" formControlName="frmDrug" name="frmDrug" type="text"
+                                [matAutocomplete]="drugauto">
+                            <mat-autocomplete #drugauto="matAutocomplete" [displayWith]="displaydrug"
+                                (optionSelected)="change($event)">
+                                <mat-option *ngFor="let dru of filteredDrugList " [value]="dru">
+                                    {{dru.drugName}}
+                                </mat-option>
+                                <!-- <mat-option *ngFor="let facility of filtereddrug"
+                                        [value]="facility.mflCode">
+                                        {{facility.mflCode}} -{{facility.name}}
+                                    </mat-option>-->
+
+                            </mat-autocomplete>
+                        </mat-form-field>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-12" style="padding-top:10px">
+                        <div class="row">
+                            <div class="col-md-12 panel-body">
+                                <div class="col-md-2">
+                                    <!--<asp:DropDownList ID="ddlBatch" runat="server" CssClass="form-control input-sm" ClientIDMode="Static"></asp:DropDownList>-->
+                                    <mat-form-field class="col-lg-12">
+                                        <mat-select placeholder="batch" formControlName="frmBatchlist" required>
+                                            <mat-option [value]=""></mat-option>
+                                            <mat-option *ngFor="let Option of batchlistOptions" [value]="Option.id">
+                                                <!--(onSelectionChange)=OnAdherenceOutcome($event)-->
+
+
+                                                {{Option.name}}
+                                            </mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-md-2 VisibleFrequency" *ngIf="visibleFrequency">
+                                    <!--<input type="text" class="form-control input-sm " runat="server" id="txtDose" ClientIDMode="Static" onkeyup="CalculateQtyPrescribed();" />'-->
+                                    <mat-form-field class="col-lg-12">
+                                        <mat-label>Dose</mat-label>
+                                        <input matInput id="txtDose" formControlName="txtDose" name="txtDose"
+                                            type="text" numbersOnly (keyup)="CalculateQtyPrescribed();">
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-md-2 VisibleFrequency" *ngIf="visibleFrequency">
+                                    <mat-form-field class="col-lg-12">
+                                        <mat-select placeholder="Frequency" formControlName="frmFreq" required>
+
+
+                                            <mat-option [value]="" (onSelectionChange)="changefreq($event)">
+                                            </mat-option>
+                                            <mat-option *ngFor="let Option of freqoptions" [value]="Option.multiplier"
+                                                (onSelectionChange)="changefreq($event)">
+                                                <!--(onSelectionChange)=OnAdherenceOutcome($event)-->
+
+
+                                                {{Option.name}}
+                                            </mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+                                    <!-- <asp:DropDownList ID="ddlFreq" runat="server" CssClass="form-control input-sm " ClientIDMode="Static" onchange="CalculateQtyPrescribed();"></asp:DropDownList>-->
+                                </div>
+                                <div class="col-md-2 VisibleMorningEvening" *ngIf="visibleMorningEvening">
+                                    <!--<input type="text" class="form-control input-sm" runat="server" id="txtMorning"  ClientIDMode="Static" onkeyup="CalculateQtyPrescribed();" /> -->
+                                    <mat-form-field class="col-lg-12">
+                                        <mat-label>Morning</mat-label>
+                                        <input matInput id="txtMorning" formControlName="txtMorning" name="txtMorning"
+                                            type="text" numbersOnly (keyup)="CalculateQtyPrescribed();">
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-md-2 VisibleMorningEvening" *ngIf="visibleMorningEvening">
+                                    <!--<input type="text" class="form-control input-sm " runat="server" id="txtMidday" ClientIDMode="Static" onkeyup="CalculateQtyPrescribed();" /> -->
+                                    <mat-form-field class="col-lg-12">
+                                        <mat-label>Midday</mat-label>
+                                        <input matInput id="txtMidday" formControlName="txtMidday" name="txtMidday"
+                                            type="text" numbersOnly (keyup)="CalculateQtyPrescribed();">
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-md-2 VisibleMorningEvening" *ngIf="visibleMorningEvening">
+                                    <!-- <input type="text" class="form-control input-sm " runat="server" id="txtEvening" ClientIDMode="Static" onkeyup="CalculateQtyPrescribed();" />-->
+                                    <mat-form-field class="col-lg-12">
+                                        <mat-label>Evening</mat-label>
+                                        <input matInput id="txtEvening" formControlName="txtEvening" name="txtEvening"
+                                            type="text" numbersOnly (keyup)="CalculateQtyPrescribed();">
+                                    </mat-form-field>
+
+
+                                </div>
+                                <div class="col-md-2 VisibleMorningEvening" *ngIf="visibleMorningEvening">
+                                    <!--<input type="text" class="form-control input-sm" runat="server" id="txtNight" ClientIDMode="Static" onkeyup="CalculateQtyPrescribed();" />-->
+                                    <mat-form-field class="col-lg-12">
+                                        <mat-label>Night</mat-label>
+                                        <input matInput id="txtNight" formControlName="txtNight" name="txtNight"
+                                            type="text" numbersOnly (keyup)="CalculateQtyPrescribed();">
+                                    </mat-form-field>
+                                </div>
+
+                                <div class="col-md-2">
+                                    <!--<input type="text" class="form-control input-sm" runat="server" id="txtDuration" ClientIDMode="Static"formControlName="txtDuration" onkeyup="CalculateQtyPrescribed();" />-->
+                                    <mat-form-field class="col-lg-12">
+                                        <mat-label>Duration</mat-label>
+                                        <input matInput id="txtDuration" formControlName="txtDuration"
+                                            name="txtDuration" type="text" numbersOnly
+                                            (keyup)="CalculateQtyPrescribed();">
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-md-2">
+                                    <!-- <input type="text" class="form-control input-sm" runat="server" id="txtQuantityPres" ClientIDMode="Static" />-->
+                                    <mat-form-field class="col-lg-12">
+                                        <mat-label>QuantityPrescription</mat-label>
+                                        <input matInput id="txtQuantityPres" formControlName="txtQuantityPres"
+                                            name="txtQuantityPres" type="text" numbersOnly
+                                            (keyup)="CalculateQtyPrescribed();">
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-md-2">
+                                    <!-- <input type="text" class="form-control input-sm" runat="server" id="txtQuantityDisp" ClientIDMode="Static" onblur="ChkQtyDispensed();" /> -->
+
+                                    <mat-form-field class="col-lg-12">
+                                        <mat-label>QuantityDispensed</mat-label>
+                                        <input matInput id="txtQuantityDisp" formControlName="txtQuantityDisp"
+                                            name="txtQuantityDisp" type="text" numbersOnly
+                                            (keyup)="CalculateQtyPrescribed();">
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-md-2">
+                                    <!-- <input type="checkbox" runat="server" id="chkProphylaxis" ClientIDMode="Static" />-->
+                                    <mat-label>Prophylaxis</mat-label>
+                                    <mat-checkbox id="chkProphylaxis" formControlName="chkProphylaxis"
+                                        name="chkProphylaxis" (keyup)="CalculateQtyPrescribed();"> </mat-checkbox>
+
+
+                                </div>
+                                <div class="col-md-1 pull-left">
+                                    <button type="button" Class="btn btn-info btn-lg fa fa-plus-circle" id="btnAddDrugs"
+                                        (click)="AddCorrectDrugPrescription();">Add</button>
+                                </div>
+                            </div>
+                            <div class="col-md-12 VisibleFrequency">
+                                <div style="min-height: 10px; max-height: 550px; overflow-y: auto; overflow-x: auto;">
+                                    <table id="dtlDrugPrescriptionFrequency" class="table table-bordered table-striped"
+                                        style="width:100%">
+                                        <thead>
+                                            <tr>
+
+                                                <th><span class="text-primary">TreatmentProgram</span></th>
+                                                <th><span class="text-primary">Regimen</span> </th>
+                                                <th><span class="text-primary">RegimenLine</span></th>
+
+                                                <th><span class="text-primary">DrugAbbr</span></th>
+                                                <th><span class="text-primary">Drug</span></th>
+                                                <th><span class="text-primary">Batch</span></th>
+                                                <th *ngIf="visibleFrequency"><span class="text-primary">Dose</span></th>
+                                                <th *ngIf="visibleFrequency"><span class="text-primary">Frequency</span>
+                                                </th>
+                                                <th *ngIf="visibleMorningEvening"><span
+                                                        class="text-primary">Morning</span></th>
+                                                <th *ngIf="visibleMorningEvening"><span
+                                                        class="text-primary">Midday</span></th>
+                                                <th *ngIf="visibleMorningEvening"><span
+                                                        class="text-primary">Evening</span></th>
+                                                <th *ngIf="visibleMorningEvening"><span
+                                                        class="text-primary">Night</span></th>
+                                                <th><span class="text-primary">Duration</span></th>
+                                                <th><span class="text-primary">Qty Prescribed</span></th>
+                                                <th><span class="text-primary">Qty Dispensed</span></th>
+                                                <th><span class="text-primary">Prophylaxis</span></th>
+                                                <th><span class="text-primary"></span></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr *ngFor="let item_data of DrugArray; let i = index">
+
+                                                <td>{{item_data.TreatmentProgramText}}</td>
+                                                <td>{{item_data.Regimentext}}</td>
+                                                <td>{{item_data.Regimenlinetext}}</td>
+                                                <td>{{item_data.DrugAbb}}</td>
+                                                <td>{{item_data.DrugName}}</td>
+                                                <td>{{item_data.batchitem}}</td>
+                                                <td *ngIf="visibleFrequency">{{item_data.Dose}}</td>
+                                                <td *ngIf="visibleFrequency">{{item_data.FreqText}}</td>
+                                                <td *ngIf="visibleMorningEvening">{{item_data.Morning}}</td>
+                                                <td *ngIf="visibleMorningEvening">{{item_data.Midday}}</td>
+                                                <td *ngIf="visibleMorningEvening">{{item_data.Evening}}</td>
+                                                <td *ngIf="visibleMorningEvening">{{item_data.Night}}</td>
+                                                <td>{{item_data.Duration}}</td>
+                                                <td>{{item_data.QuantityPres}}</td>
+                                                <td>{{item_data.QUantityDisp}}</td>
+                                                <td>{{item_data.Prophylaxis}}</td>
+                                                <td *ngIf="!item_data.disabled">
+                                                    <i style="cursor: pointer;" class="danger material-icons"
+                                                        (click)="removeRow(index)">
+                                                        delete
+                                                    </i>
+                                                </td>
+
+                                            </tr>
+
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+
+
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6 col-xs-12 col-sm-12">
+
+                        <mat-form-field class="col-lg-6">
+                            <input matInput [matDatepicker]="dateprescribedpicker" [max]="maxDate"
+                                (focus)="dateprescribedpicker.open()" formControlName="frmDatePrescibed" required
+                                placeholder="Choose Date Prescribed">
+                            <mat-datepicker-toggle matSuffix [for]="dateprescribedpicker"></mat-datepicker-toggle>
+                            <mat-datepicker #dateprescribedpicker></mat-datepicker>
+                        </mat-form-field>
+
+                    </div>
+                    <div class="col-md-6 col-xs-12 col-sm-12">
+                        <mat-form-field class="col-lg-6">
+                            <input matInput [matDatepicker]="datedispensedpicker" [max]="maxDate"
+                                (focus)="datedispensedpicker.open()" formControlName="frmDateDispensed" required
+                                placeholder="Choose Date Dispensed">
+                            <mat-datepicker-toggle matSuffix [for]="datedispensedpicker"></mat-datepicker-toggle>
+                            <mat-datepicker #datedispensedpicker></mat-datepicker>
+                        </mat-form-field>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4 col-xs-12 col-sm-12">
+                        <button mat-raised-button class="mat-primary"><span class="fa fa-plus-circle"
+                                (click)="SavePharmacyData()"> SavePrescription</span></button>
+                    </div>
+
+                    <div class="col-md-4 col-xs-12 col-sm-12">
+                        <button mat-raised-button class="mat-primary"><span class="fa fa-plus-circle" (click)="Close()">
+                                Close Prescription</span></button>
+                    </div>
+                </div>
+
+            </form>
+        </div>
+    </div>

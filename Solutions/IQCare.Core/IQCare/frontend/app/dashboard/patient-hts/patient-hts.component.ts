@@ -5,7 +5,7 @@ import { ActivatedRoute, Router, } from '@angular/router';
 import { SnotifyService } from 'ng-snotify';
 import { NotificationService } from '../../shared/_services/notification.service';
 import { SearchService } from '../../registration/_services/search.service';
-
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
     selector: 'app-patient-hts',
@@ -35,6 +35,7 @@ export class PatientHtsComponent implements OnInit {
         private route: ActivatedRoute,
         private router: Router,
         private dialogRef: MatDialogRef<PatientHtsComponent>,
+        private spinner: NgxSpinnerService,
         @Inject(MAT_DIALOG_DATA) public data: any) {
         this.personId = data.personId;
         this.serviceId = data.serviceId;
@@ -140,6 +141,7 @@ export class PatientHtsComponent implements OnInit {
         this.isPersonServiceEnrolled('HTS');
     }
     public getHtsEncounters() {
+       
         this.personHomeService.getAllHTSEncounterBypersonId(this.personId).subscribe(res => {
             if (res.length == 0)
                 return;
@@ -161,9 +163,15 @@ export class PatientHtsComponent implements OnInit {
             console.log(this.HtsEncountersList);
             this.HTSEncounterDataSource = new MatTableDataSource(this.HtsEncountersList);
             this.HTSEncounterDataSource.paginator = this.paginator;
+    
+
 
         }, (error) => {
             console.log(error + "An error occurred while loading the hts details");
+          
+
+        }, () => {
+          
         });
 
 

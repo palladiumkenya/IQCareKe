@@ -38,11 +38,20 @@ export class PrepRiskassessmentComponent implements OnInit {
     ReferralPreventionOptions: LookupItemView[] = [];
     RiskReductionEducationOptions: LookupItemView[] = [];
     EncounterTypeOptions: LookupItemView[] = [];
+    SpecifyReferralPreventionOptions: LookupItemView[] = [];
+    SpecifyRiskEducationOptions: LookupItemView[] = [];
+    SpecifyRiskReductionEducationOptions: LookupItemView[] = [];
+    SpecifyReferralOptions: LookupItemView[] = [];
+    SpecifyRiskReductionEdOptions: LookupItemView[] = [];
+    SpecifyRiskEducOptions: LookupItemView[] = [];
     ExistingClinicalNotes: any[] = [];
     ExistingRiskAssessmentDetails: any[] = [];
     ExistingSexualPartnerList: any[] = [];
     careendreasonarray: LookupItemView[] = [];
     ExistingClientBehaviourRiskList: any[] = [];
+    ExistingRiskReductionSpecifyList: any[] = [];
+    ExistingRiskEducationSpecifyList: any[] = [];
+    ExistingReferralPreventionList: any[] = [];
     maxDate: Date;
     personId: number;
     minDate: Date;
@@ -118,6 +127,9 @@ export class PrepRiskassessmentComponent implements OnInit {
                 PartnerHIVStatusArray,
                 DurationArray,
                 SexWithoutCondomArray,
+                SpecifyReferralPreventionArray,
+                SpecifyRiskEducationArray,
+                SpecifyRiskReductionEducationArray,
                 careendreasonoptions,
                 HivPartnerArray
 
@@ -125,6 +137,7 @@ export class PrepRiskassessmentComponent implements OnInit {
 
             } = res;
 
+            console.log(res);
             this.assessmentOutComeOptions = assessmentOutComeArray['lookupItems'];
             this.careendreasonarray = careendreasonoptions['lookupItems'];
             this.clientsBehaviourRiskOptions = clientsBehaviourRiskArray['lookupItems'];
@@ -142,7 +155,9 @@ export class PrepRiskassessmentComponent implements OnInit {
             this.sexwithoutcondomoptions = SexWithoutCondomArray['lookupItems'];
             this.partnerstatusOptions = PartnerHIVStatusArray['lookupItems'];
             this.partnercccenrollmentoptions = PartnerCCCEnrollmentArray['lookupItems'];
-
+            this.SpecifyReferralPreventionOptions = SpecifyReferralPreventionArray['lookupItems'];
+            this.SpecifyRiskEducationOptions = SpecifyRiskEducationArray['lookupItems'];
+            this.SpecifyRiskReductionEducationOptions = SpecifyRiskReductionEducationArray['lookupItems'];
 
 
 
@@ -171,6 +186,10 @@ export class PrepRiskassessmentComponent implements OnInit {
             ClinicalNotes: new FormControl(''),
 
         });
+
+
+        //console.log(this.person);
+
         this.RiskViewOptions = this.clientsBehaviourRiskOptions.concat(this.sexualPartnerHivStatusOptions);
         this.RiskViewOptions.forEach(function (e) {
             if (typeof e === 'object') {
@@ -181,11 +200,11 @@ export class PrepRiskassessmentComponent implements OnInit {
         this.PrepRiskAssessmentFormGroup.controls.SpecifyPreventionReferalServices.disable({ onlySelf: true });
         this.PrepRiskAssessmentFormGroup.controls.RiskEducation.disable({ onlySelf: true });
         this.PrepRiskAssessmentFormGroup.controls.SpecifyRiskEducation.disable({ onlySelf: true });
-       
-        this.PrepRiskAssessmentFormGroup.controls.discontinueReason.disable({ onlySelf: true });
-       
 
-      
+        this.PrepRiskAssessmentFormGroup.controls.discontinueReason.disable({ onlySelf: true });
+
+
+
 
 
 
@@ -215,6 +234,21 @@ export class PrepRiskassessmentComponent implements OnInit {
                     if (this.person.dateOfBirth != null && this.person.dateOfBirth != undefined) {
                         this.minDate = this.person.dateOfBirth;
                     }
+
+                    if (this.person.gender.toLowerCase() == 'female') {
+
+                        this.SpecifyReferralOptions = this.SpecifyReferralPreventionOptions.filter(x => x.itemName !== 'VMMC');
+                        this.SpecifyRiskEducOptions = this.SpecifyRiskEducationOptions.filter(x => x.itemName !== 'VMMC');
+                        this.SpecifyRiskReductionEdOptions = this.SpecifyRiskReductionEducationOptions.filter(x => x.itemName !== 'VMMC');
+
+
+
+                    } else {
+                        this.SpecifyReferralOptions = this.SpecifyReferralPreventionOptions;
+                        this.SpecifyRiskEducOptions = this.SpecifyRiskEducationOptions;
+                        this.SpecifyRiskReductionEdOptions = this.SpecifyRiskReductionEducationOptions;
+                    }
+
                 }
 
             },
@@ -268,6 +302,9 @@ export class PrepRiskassessmentComponent implements OnInit {
             this.ExistingRiskAssessmentDetails = [];
             this.ExistingSexualPartnerList = [];
             this.ExistingClientBehaviourRiskList = [];
+            this.ExistingRiskReductionSpecifyList = [];
+            this.ExistingRiskEducationSpecifyList = [];
+            this.ExistingReferralPreventionList = [];
 
             this.ExistingClinicalNotes = result['clinicalNotes'];
             this.ExistingRiskAssessmentDetails = result['riskAssessmentDetails'];
@@ -318,28 +355,36 @@ export class PrepRiskassessmentComponent implements OnInit {
             let riskreductionmasterid: number;
             riskreductionmasterid = this.RiskReductionEducationOptions[0].masterId;
             let riskreductiondetailvalue: any[] = [];
-            let riskreductiondetailspecify: any[] = [];
+
             riskreductiondetailvalue = this.ExistingRiskAssessmentDetails
                 .filter(x => x.riskAssessmentid == riskreductionmasterid).map(o => {
                     return o.value;
                 });
-            riskreductiondetailspecify = this.ExistingRiskAssessmentDetails
-                .filter(x => x.riskAssessmentid == riskreductionmasterid).map(o => {
-                    return o.comment;
+
+            let riskreductiondetailspecifymasterid: number;
+            riskreductiondetailspecifymasterid = this.SpecifyRiskReductionEducationOptions[0].masterId;
+
+            this.ExistingRiskReductionSpecifyList = this.ExistingRiskAssessmentDetails
+                .filter(x => x.riskAssessmentid == riskreductiondetailspecifymasterid).map(o => {
+                    return o.value;
                 });
 
 
             let referralpreventionmasterid: number;
             referralpreventionmasterid = this.ReferralPreventionOptions[0].masterId;
             let referralpreventiondetailvalue: any[] = [];
-            let referralpreventiondetailspecify: any[] = [];
+
             referralpreventiondetailvalue = this.ExistingRiskAssessmentDetails
                 .filter(x => x.riskAssessmentid == referralpreventionmasterid).map(o => {
                     return o.value;
                 });
-            referralpreventiondetailspecify = this.ExistingRiskAssessmentDetails
-                .filter(x => x.riskAssessmentid == referralpreventionmasterid).map(o => {
-                    return o.comment;
+
+            let referralpreventionservicesspecifymasterid: number;
+            referralpreventionservicesspecifymasterid = this.SpecifyReferralPreventionOptions[0].masterId;
+
+            this.ExistingReferralPreventionList = this.ExistingRiskAssessmentDetails
+                .filter(x => x.riskAssessmentid == referralpreventionservicesspecifymasterid).map(o => {
+                    return o.value;
                 });
 
 
@@ -361,14 +406,17 @@ export class PrepRiskassessmentComponent implements OnInit {
             let riskeducationmasterid: number;
             riskeducationmasterid = this.riskEducationOptions[0].masterId;
             let riskeducationdetailvalue: any[] = [];
-            let riskeducationdetailspecify: any[] = [];
+
             riskeducationdetailvalue = this.ExistingRiskAssessmentDetails
                 .filter(x => x.riskAssessmentid == riskeducationmasterid).map(o => {
                     return o.value;
                 });
-            riskeducationdetailspecify = this.ExistingRiskAssessmentDetails
-                .filter(x => x.riskAssessmentid == riskeducationmasterid).map(o => {
-                    return o.comment;
+
+            let riskeducationspecifymasterid: number;
+            riskeducationspecifymasterid = this.SpecifyRiskEducationOptions[0].masterId;
+            this.ExistingRiskEducationSpecifyList = this.ExistingRiskAssessmentDetails
+                .filter(x => x.riskAssessmentid == riskeducationspecifymasterid).map(o => {
+                    return o.value;
                 });
 
             let clinicalnotesvalue: any[] = [];
@@ -376,7 +424,7 @@ export class PrepRiskassessmentComponent implements OnInit {
                 return o.comment;
             });
 
-            
+
 
             this.prepservice.getPatientMasterVisits(this.patientId, this.PatientMasterVisitId).subscribe((res) => {
                 this.Encounters = res;
@@ -394,15 +442,15 @@ export class PrepRiskassessmentComponent implements OnInit {
             this.PrepRiskAssessmentFormGroup.controls.clientsBehaviourRisks.setValue(this.ExistingClientBehaviourRiskList);
             this.PrepRiskAssessmentFormGroup.controls.assessmentOutCome.setValue(assessmentoutcomedetail[0]);
             this.PrepRiskAssessmentFormGroup.controls.RiskReductionEducation.setValue(riskreductiondetailvalue[0]);
-            this.PrepRiskAssessmentFormGroup.controls.SpecifyRiskReductionEducation.setValue(riskreductiondetailspecify[0]);
+            this.PrepRiskAssessmentFormGroup.controls.SpecifyRiskReductionEducation.setValue(this.ExistingRiskReductionSpecifyList);
             this.PrepRiskAssessmentFormGroup.controls.ReferralPreventions.setValue(referralpreventiondetailvalue[0]);
-            this.PrepRiskAssessmentFormGroup.controls.SpecifyPreventionReferalServices.setValue(referralpreventiondetailspecify[0]);
+            this.PrepRiskAssessmentFormGroup.controls.SpecifyPreventionReferalServices.setValue(this.ExistingReferralPreventionList);
             this.PrepRiskAssessmentFormGroup.controls.ClientWillingTakePrep.setValue(clientwillingprepdetail[0]);
             this.PrepRiskAssessmentFormGroup.controls.RiskEducation.setValue(riskeducationdetailvalue[0]);
-            this.PrepRiskAssessmentFormGroup.controls.SpecifyRiskEducation.setValue(riskeducationdetailspecify[0]);
+            this.PrepRiskAssessmentFormGroup.controls.SpecifyRiskEducation.setValue(this.ExistingRiskEducationSpecifyList);
             this.PrepRiskAssessmentFormGroup.controls.ClinicalNotes.setValue(clinicalnotesvalue[0]);
-     
-            this.PrepRiskAssessmentFormGroup.controls.discontinueReason.setValue(prepdeclinelist[0]);
+
+            this.PrepRiskAssessmentFormGroup.controls.discontinueReason.setValue(prepdeclinelist);
 
 
 
@@ -601,7 +649,7 @@ export class PrepRiskassessmentComponent implements OnInit {
 
 
     }
-  
+
 
     OnClientAssessmentSelection(event) {
 
@@ -720,9 +768,9 @@ export class PrepRiskassessmentComponent implements OnInit {
         let ClientWillingTakePrepstatus: number;
         let riskeducationstatus: number;
 
-        let SpecifyRiskEducationValue: string;
-        let SpecifyPreventionReferalServicesValue: string;
-        let SpecifyRiskReductionEducationValue: string;
+        let SpecifyRiskEducationValue: any[] = [];
+        let SpecifyPreventionReferalServicesValue: any[] = [];
+        let SpecifyRiskReductionEducationValue: any[] = [];
         let clinicalnotesvalue: string;
         /*let partnerhivstatusdatedetail: string;
         let partnercccenrollmentdetail: number;
@@ -731,11 +779,11 @@ export class PrepRiskassessmentComponent implements OnInit {
         let artstartdatepartner: string;
         let partnersexwithoutcondoms: number;
         let hivpartnerchildrendetail: number;*/
-        let prepdeclinereason: number;
+        let prepdeclinereason: any[] = [];
 
         SpecifyRiskReductionEducationValue = this.PrepRiskAssessmentFormGroup.controls.SpecifyRiskReductionEducation.value;
         SpecifyPreventionReferalServicesValue = this.PrepRiskAssessmentFormGroup.controls.SpecifyPreventionReferalServices.value;
-        SpecifyRiskEducationValue = this.PrepRiskAssessmentFormGroup.controls.SpecifyRiskReductionEducation.value;
+        SpecifyRiskEducationValue = this.PrepRiskAssessmentFormGroup.controls.SpecifyRiskEducation.value;
         clinicalnotesvalue = this.PrepRiskAssessmentFormGroup.controls.ClinicalNotes.value;
         prepdeclinereason = this.PrepRiskAssessmentFormGroup.controls.discontinueReason.value
         partnerhivstatus = this.PrepRiskAssessmentFormGroup.controls.sexualPartnerHivStatus.value;
@@ -860,7 +908,7 @@ export class PrepRiskassessmentComponent implements OnInit {
             .forEach(x => {
                 if (x.Value == riskreductioneducationstatus) {
                     x.DeleteFlag = false;
-                    x.Comment = SpecifyRiskReductionEducationValue;
+
                 } else {
                     x.DeleteFlag = true;
                 }
@@ -870,7 +918,7 @@ export class PrepRiskassessmentComponent implements OnInit {
 
                 this.RiskAssessmentList.push({
                     'Id': 0,
-                    'Comment': SpecifyRiskReductionEducationValue,
+                    'Comment': '',
                     'RiskAssessmentid': riskreductioneducationmasterid,
                     'Value': riskreductioneducationstatus,
                     'DeleteFlag': false,
@@ -880,6 +928,59 @@ export class PrepRiskassessmentComponent implements OnInit {
             }
         }
 
+
+        let specifyriskreductionmasterid: number;
+        let specifyriskreductionlist: any[] = [];
+        specifyriskreductionmasterid = this.SpecifyRiskReductionEducationOptions[0].masterId;
+        specifyriskreductionlist = this.RiskAssessmentList.filter(x => x.RiskAssessmentid == specifyriskreductionmasterid);
+        this.RiskAssessmentList.filter(x => x.RiskAssessmentid == specifyriskreductionmasterid)
+            .forEach(x => {
+                let status: any[] = [];
+                status = SpecifyRiskReductionEducationValue.filter(t => t == x.Value);
+                if (x.Value == status) {
+                    x.DeleteFlag = false;
+
+                } else {
+                    x.DeleteFlag = true;
+                }
+            });
+
+
+        let specifyriskreductionnotexists: any[] = [];
+
+        specifyriskreductionnotexists = SpecifyRiskReductionEducationValue.filter(r => {
+            if (specifyriskreductionlist.findIndex(t => t.Value == r) == -1) {
+
+                this.RiskAssessmentList.push({
+                    'Id': 0,
+                    'Comment': '',
+                    'RiskAssessmentid': specifyriskreductionmasterid,
+                    'Value': r,
+                    'DeleteFlag': false,
+                    'Date': ''
+                });
+                return r;
+
+            }
+        });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         let referralpreventionmasterid: number;
         let referralpreventionlist: any[] = [];
         referralpreventionmasterid = this.ReferralPreventionOptions[0].masterId;
@@ -888,7 +989,7 @@ export class PrepRiskassessmentComponent implements OnInit {
             .forEach(x => {
                 if (x.Value == referralpreventions) {
                     x.DeleteFlag = false;
-                    x.Comment = SpecifyPreventionReferalServicesValue;
+
                 } else {
                     x.DeleteFlag = true;
                 }
@@ -898,7 +999,7 @@ export class PrepRiskassessmentComponent implements OnInit {
 
                 this.RiskAssessmentList.push({
                     'Id': 0,
-                    'Comment': SpecifyPreventionReferalServicesValue,
+                    'Comment': '',
                     'RiskAssessmentid': referralpreventionmasterid,
                     'Value': referralpreventions,
                     'DeleteFlag': false,
@@ -907,6 +1008,47 @@ export class PrepRiskassessmentComponent implements OnInit {
 
             }
         }
+
+
+        let specifypreventionservicesmasterid: number;
+        let specifypreventionserviceslist: any[] = [];
+        specifypreventionservicesmasterid = this.SpecifyReferralPreventionOptions[0].masterId;
+        specifypreventionserviceslist = this.RiskAssessmentList.filter(x => x.RiskAssessmentid == specifypreventionservicesmasterid);
+        this.RiskAssessmentList.filter(x => x.RiskAssessmentid == specifypreventionservicesmasterid)
+            .forEach(x => {
+                let status: any[] = [];
+                status = SpecifyPreventionReferalServicesValue.filter(t => t == x.Value);
+                if (x.Value == status) {
+                    x.DeleteFlag = false;
+
+                } else {
+                    x.DeleteFlag = true;
+                }
+            });
+
+
+        let specifypreventionservicesnotexists: any[] = [];
+
+        specifypreventionservicesnotexists = SpecifyPreventionReferalServicesValue.filter(r => {
+            if (specifypreventionserviceslist.findIndex(t => t.Value == r) == -1) {
+
+                this.RiskAssessmentList.push({
+                    'Id': 0,
+                    'Comment': '',
+                    'RiskAssessmentid': specifypreventionservicesmasterid,
+                    'Value': r,
+                    'DeleteFlag': false,
+                    'Date': ''
+                });
+                return r;
+
+            }
+        });
+
+
+
+
+
 
 
         let clientwillingprepmasterid: number;
@@ -944,7 +1086,9 @@ export class PrepRiskassessmentComponent implements OnInit {
         prepdeclinepreplist = this.RiskAssessmentList.filter(x => x.RiskAssessmentid == prepdeclinemasterid);
         this.RiskAssessmentList.filter(x => x.RiskAssessmentid == prepdeclinemasterid)
             .forEach(x => {
-                if (x.Value == prepdeclinereason) {
+                let status: any[] = [];
+                status = prepdeclinereason.filter(t => t == x.Value);
+                if (x.Value == status) {
                     x.DeleteFlag = false;
 
                 } else {
@@ -953,20 +1097,27 @@ export class PrepRiskassessmentComponent implements OnInit {
             });
 
 
-        if (prepdeclinereason > 0) {
-            if (prepdeclinepreplist.findIndex(t => t.Value == prepdeclinereason) == -1) {
+        let declinereasonnotexists: any[] = [];
 
-                this.RiskAssessmentList.push({
-                    'Id': 0,
-                    'Comment': '',
-                    'RiskAssessmentid': prepdeclinemasterid,
-                    'Value': prepdeclinereason,
-                    'DeleteFlag': false,
-                    'Date': ''
-                });
+        console.log(prepdeclinereason);
+        if (prepdeclinereason) {
+            declinereasonnotexists = prepdeclinereason.filter(r => {
+                if (prepdeclinepreplist.findIndex(t => t.Value == r) == -1) {
 
-            }
+                    this.RiskAssessmentList.push({
+                        'Id': 0,
+                        'Comment': '',
+                        'RiskAssessmentid': prepdeclinemasterid,
+                        'Value': r,
+                        'DeleteFlag': false,
+                        'Date': ''
+                    });
+                    return r;
+
+                }
+            });
         }
+
 
         let riskeducationmasterid: number;
         let riskeducationlist: any[] = [];
@@ -976,17 +1127,17 @@ export class PrepRiskassessmentComponent implements OnInit {
             .forEach(x => {
                 if (x.Value == riskeducationstatus) {
                     x.DeleteFlag = false;
-                    x.Comment = SpecifyRiskEducationValue;
+
                 } else {
                     x.DeleteFlag = true;
                 }
             });
         if (riskeducationstatus > 0) {
-            if (riskreductioneducationlist.findIndex(t => t.Value == riskeducationstatus) == -1) {
+            if (riskeducationlist.findIndex(t => t.Value == riskeducationstatus) == -1) {
 
                 this.RiskAssessmentList.push({
                     'Id': 0,
-                    'Comment': SpecifyRiskEducationValue,
+                    'Comment': '',
                     'RiskAssessmentid': riskeducationmasterid,
                     'Value': riskeducationstatus,
                     'DeleteFlag': false,
@@ -995,6 +1146,53 @@ export class PrepRiskassessmentComponent implements OnInit {
 
             }
         }
+
+        if (SpecifyRiskEducationValue.length > 0) {
+            let specifyriskeducationmasterid: number;
+            let specifyriskeducationlist: any[] = [];
+            specifyriskeducationmasterid = this.SpecifyRiskEducationOptions[0].masterId;
+            specifyriskeducationlist = this.RiskAssessmentList.filter(x => x.RiskAssessmentid == specifyriskeducationmasterid);
+            this.RiskAssessmentList.filter(x => x.RiskAssessmentid == specifyriskeducationmasterid)
+                .forEach(x => {
+                    let status: any[] = [];
+
+
+
+                    status = SpecifyRiskEducationValue.filter(t => t == x.Value);
+                    if (x.Value == status) {
+                        x.DeleteFlag = false;
+
+                    } else {
+                        x.DeleteFlag = true;
+                    }
+
+                });
+
+
+            let specifyriskeducationnotexists: any[] = [];
+
+
+            specifyriskeducationnotexists = SpecifyRiskEducationValue.filter(r => {
+                if (specifyriskeducationlist.findIndex(t => t.Value == r) == -1) {
+
+                    this.RiskAssessmentList.push({
+                        'Id': 0,
+                        'Comment': '',
+                        'RiskAssessmentid': specifyriskeducationmasterid,
+                        'Value': r,
+                        'DeleteFlag': false,
+                        'Date': ''
+                    });
+                    return r;
+
+                }
+            });
+
+        }
+
+
+
+
 
         if (clinicalnotesvalue !== null && clinicalnotesvalue !== undefined) {
             if (clinicalnotesvalue.length < 1) {
@@ -1036,7 +1234,7 @@ export class PrepRiskassessmentComponent implements OnInit {
             });
         }
 
-       
+
 
 
 
@@ -1080,18 +1278,18 @@ export class PrepRiskassessmentComponent implements OnInit {
         let riskeducationstatus: number;
         this.RiskAssessmentList = [];
         this.ClinicalList = [];
-      /*  let partnerhivstatusdatedetail: string;
-        let partnercccenrollmentdetail: number;
-        let CCCnumber: string;
-        let Monthdetail: number;
-        let artstartdatepartner: string;
-        let partnersexwithoutcondoms: number;
-        let hivpartnerchildrendetail: number;*/
-        let SpecifyRiskEducationValue: string;
-        let SpecifyPreventionReferalServicesValue: string;
-        let SpecifyRiskReductionEducationValue: string;
-        let clinicalnotesvalue: string; 
-        let prepdeclinereason: number;
+        /*  let partnerhivstatusdatedetail: string;
+          let partnercccenrollmentdetail: number;
+          let CCCnumber: string;
+          let Monthdetail: number;
+          let artstartdatepartner: string;
+          let partnersexwithoutcondoms: number;
+          let hivpartnerchildrendetail: number;*/
+        let SpecifyRiskEducationValue: any[] = [];
+        let SpecifyPreventionReferalServicesValue: any[] = [];
+        let SpecifyRiskReductionEducationValue: any[] = [];
+        let clinicalnotesvalue: string;
+        let prepdeclinereason: any[] = [];
         SpecifyRiskReductionEducationValue = this.PrepRiskAssessmentFormGroup.controls.SpecifyRiskReductionEducation.value;
         SpecifyPreventionReferalServicesValue = this.PrepRiskAssessmentFormGroup.controls.SpecifyPreventionReferalServices.value;
         SpecifyRiskEducationValue = this.PrepRiskAssessmentFormGroup.controls.SpecifyRiskReductionEducation.value;
@@ -1104,13 +1302,13 @@ export class PrepRiskassessmentComponent implements OnInit {
         referralpreventions = this.PrepRiskAssessmentFormGroup.controls.ReferralPreventions.value;
         ClientWillingTakePrepstatus = this.PrepRiskAssessmentFormGroup.controls.ClientWillingTakePrep.value;
         riskeducationstatus = this.PrepRiskAssessmentFormGroup.controls.RiskEducation.value;
-       /* partnerhivstatusdatedetail = this.PrepRiskAssessmentFormGroup.controls.partnerHIVStatusDate.value;
-        partnercccenrollmentdetail = this.PrepRiskAssessmentFormGroup.controls.partnercccenrollment.value;
-        CCCnumber = this.PrepRiskAssessmentFormGroup.controls.CCCNumber.value;
-        artstartdatepartner = this.PrepRiskAssessmentFormGroup.controls.partnerARTStartDate.value;
-        partnersexwithoutcondoms = this.PrepRiskAssessmentFormGroup.controls.partnersexcondoms.value;
-        hivpartnerchildrendetail = this.PrepRiskAssessmentFormGroup.controls.hivpartnerchildren.value;
-        Monthdetail = this.PrepRiskAssessmentFormGroup.controls.Months.value;*/
+        /* partnerhivstatusdatedetail = this.PrepRiskAssessmentFormGroup.controls.partnerHIVStatusDate.value;
+         partnercccenrollmentdetail = this.PrepRiskAssessmentFormGroup.controls.partnercccenrollment.value;
+         CCCnumber = this.PrepRiskAssessmentFormGroup.controls.CCCNumber.value;
+         artstartdatepartner = this.PrepRiskAssessmentFormGroup.controls.partnerARTStartDate.value;
+         partnersexwithoutcondoms = this.PrepRiskAssessmentFormGroup.controls.partnersexcondoms.value;
+         hivpartnerchildrendetail = this.PrepRiskAssessmentFormGroup.controls.hivpartnerchildren.value;
+         Monthdetail = this.PrepRiskAssessmentFormGroup.controls.Months.value;*/
         prepdeclinereason = this.PrepRiskAssessmentFormGroup.controls.discontinueReason.value;
 
 
@@ -1171,13 +1369,32 @@ export class PrepRiskassessmentComponent implements OnInit {
 
             this.RiskAssessmentList.push({
                 'Id': 0,
-                'Comment': SpecifyRiskReductionEducationValue,
+                'Comment': '',
                 'RiskAssessmentid': this.RiskReductionEducationOptions[riskreductionindex].masterId,
                 'Value': this.RiskReductionEducationOptions[riskreductionindex].itemId,
                 'DeleteFlag': false,
                 'Date': ''
             });
         }
+        for (let i = 0; i < SpecifyRiskReductionEducationValue.length; i++) {
+            let index: number;
+
+            index = this.SpecifyRiskReductionEducationOptions.findIndex(x => x.itemId == SpecifyRiskReductionEducationValue[i]);
+
+            if (index !== -1) {
+                this.RiskAssessmentList.push({
+                    'Id': 0,
+                    'Comment': '',
+                    'RiskAssessmentid': this.SpecifyRiskReductionEducationOptions[index].masterId,
+                    'Value': this.SpecifyRiskReductionEducationOptions[index].itemId,
+                    'DeleteFlag': false,
+                    'Date': ''
+                });
+            }
+
+        }
+
+
 
 
         let referralpreventionindex: number;
@@ -1186,12 +1403,31 @@ export class PrepRiskassessmentComponent implements OnInit {
 
         this.RiskAssessmentList.push({
             'Id': 0,
-            'Comment': SpecifyPreventionReferalServicesValue,
+            'Comment': '',
             'RiskAssessmentid': this.ReferralPreventionOptions[referralpreventionindex].masterId,
             'Value': this.ReferralPreventionOptions[referralpreventionindex].itemId,
             'DeleteFlag': false,
             'Date': ''
         });
+
+
+        for (let i = 0; i < SpecifyPreventionReferalServicesValue.length; i++) {
+            let index: number;
+
+            index = this.SpecifyReferralPreventionOptions.findIndex(x => x.itemId == SpecifyPreventionReferalServicesValue[i]);
+
+            if (index !== -1) {
+                this.RiskAssessmentList.push({
+                    'Id': 0,
+                    'Comment': '',
+                    'RiskAssessmentid': this.SpecifyReferralPreventionOptions[index].masterId,
+                    'Value': this.SpecifyReferralPreventionOptions[index].itemId,
+                    'DeleteFlag': false,
+                    'Date': ''
+                });
+            }
+
+        }
 
 
 
@@ -1211,22 +1447,25 @@ export class PrepRiskassessmentComponent implements OnInit {
         }
 
 
-        let prepdeclinereasonindex: number;
-        prepdeclinereasonindex = this.careendreasonarray.findIndex(x => x.itemId == prepdeclinereason);
+
+        for (let i = 0; i < prepdeclinereason.length; i++) {
+            let prepdeclinereasonindex: number;
+            prepdeclinereasonindex = this.careendreasonarray.findIndex(x => x.itemId == prepdeclinereason[i]);
 
 
-        if (prepdeclinereason) {
-            this.RiskAssessmentList.push({
-                'Id': 0,
-                'Comment': '',
-                'RiskAssessmentid': this.careendreasonarray[prepdeclinereasonindex].masterId,
-                'Value': this.careendreasonarray[prepdeclinereasonindex].itemId,
-                'DeleteFlag': false,
-                'Date': ''
-            });
+
+            if (prepdeclinereasonindex !== -1) {
+                this.RiskAssessmentList.push({
+                    'Id': 0,
+                    'Comment': '',
+                    'RiskAssessmentid': this.careendreasonarray[prepdeclinereasonindex].masterId,
+                    'Value': this.careendreasonarray[prepdeclinereasonindex].itemId,
+                    'DeleteFlag': false,
+                    'Date': ''
+                });
+            }
+
         }
-
-
 
 
         let riskeducationindex: number;
@@ -1236,14 +1475,33 @@ export class PrepRiskassessmentComponent implements OnInit {
 
             this.RiskAssessmentList.push({
                 'Id': 0,
-                'Comment': SpecifyRiskEducationValue,
+                'Comment': '',
                 'RiskAssessmentid': this.riskEducationOptions[riskeducationindex].masterId,
                 'Value': this.riskEducationOptions[riskeducationindex].itemId,
                 'DeleteFlag': false,
                 'Date': ''
             });
         }
-       
+
+
+
+
+        for (let i = 0; i < SpecifyRiskEducationValue.length; i++) {
+            let index: number;
+
+            index = this.SpecifyRiskEducationOptions.findIndex(x => x.itemId == SpecifyRiskEducationValue[i]);
+            if (index !== -1) {
+                this.RiskAssessmentList.push({
+                    'Id': 0,
+                    'Comment': '',
+                    'RiskAssessmentid': this.SpecifyRiskEducationOptions[index].masterId,
+                    'Value': this.SpecifyRiskEducationOptions[index].itemId,
+                    'DeleteFlag': false,
+                    'Date': ''
+                });
+            }
+        }
+
 
 
         let clinicalnoteId: number;
