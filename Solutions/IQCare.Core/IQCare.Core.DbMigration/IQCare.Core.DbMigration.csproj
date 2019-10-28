@@ -347,6 +347,24 @@
     <None Remove="Scripts\2.2.0\48_AllergyView.sql" />
     <None Remove="Scripts\2.2.0\40_HTSEncountersView.sql" />
     <None Remove="Scripts\2.2.0\41_HtsFacilityDashboard.sql" />
+    <None Remove="Scripts\2.2.0\42_Release.sql" />
+    <None Remove="Scripts\2.2.0\43_Urinalysis.sql" />
+    <None Remove="Scripts\2.2.0\44_CREATININE.sql" />
+    <None Remove="Scripts\2.2.0\45_MPS.sql" />
+    <None Remove="Scripts\2.2.0\46_MALARIAPARASITE.sql" />
+    <None Remove="Scripts\2.2.0\47_Varicella.sql" />
+    <None Remove="Scripts\2.2.0\48_Toxoplasma.sql" />
+    <None Remove="Scripts\2.2.0\49_Syphilis.sql" />
+    <None Remove="Scripts\2.2.0\50_SputumGramStain.sql" />
+    <None Remove="Scripts\2.2.0\51_SputumAFB3.sql" />
+    <None Remove="Scripts\2.2.0\52_SputumAFB2.sql" />
+    <None Remove="Scripts\2.2.0\53_SputumAFB1.sql" />
+    <None Remove="Scripts\2.2.0\54_SerumCrypto.sql" />
+    <None Remove="Scripts\2.2.0\55_Gonorrhea.sql" />
+    <None Remove="Scripts\2.2.0\56_EpsteinBarrVirus%28EBV%29.sql" />
+    <None Remove="Scripts\2.2.0\57_Cytomegalovirus.sql" />
+    <None Remove="Scripts\2.2.0\58_CSFCrypto.sql" />
+    <None Remove="Scripts\2.2.0\59_Chlamydia.sql" />
     <None Remove="Scripts\2.2.0\49_PrepStatus.sql" />
     <None Remove="Scripts\2.2.0\50_PREP_RegisterView.sql" />
     <None Remove="Scripts\2.2.0\IQTools\01_PatientPopulationView.sql" />
@@ -734,6 +752,23 @@
     <EmbeddedResource Include="Scripts\2.2.0\40_HTSEncountersView.sql" />
     <EmbeddedResource Include="Scripts\2.2.0\41_HtsFacilityDashboard.sql" />
     <EmbeddedResource Include="Scripts\2.2.0\49_PrepStatus.sql" />
+    <EmbeddedResource Include="Scripts\2.2.0\42_Release.sql" />
+    <EmbeddedResource Include="Scripts\2.2.0\43_Urinalysis.sql" />
+    <EmbeddedResource Include="Scripts\2.2.0\44_CREATININE.sql" />
+    <EmbeddedResource Include="Scripts\2.2.0\45_MPS.sql" />
+    <EmbeddedResource Include="Scripts\2.2.0\46_MALARIAPARASITE.sql" />
+    <EmbeddedResource Include="Scripts\2.2.0\47_Varicella.sql" />
+    <EmbeddedResource Include="Scripts\2.2.0\49_Syphilis.sql" />
+    <EmbeddedResource Include="Scripts\2.2.0\50_SputumGramStain.sql" />
+    <EmbeddedResource Include="Scripts\2.2.0\51_SputumAFB3.sql" />
+    <EmbeddedResource Include="Scripts\2.2.0\52_SputumAFB2.sql" />
+    <EmbeddedResource Include="Scripts\2.2.0\53_SputumAFB1.sql" />
+    <EmbeddedResource Include="Scripts\2.2.0\54_SerumCrypto.sql" />
+    <EmbeddedResource Include="Scripts\2.2.0\55_Gonorrhea.sql" />
+    <EmbeddedResource Include="Scripts\2.2.0\56_EpsteinBarrVirus(EBV).sql" />
+    <EmbeddedResource Include="Scripts\2.2.0\57_Cytomegalovirus.sql" />
+    <EmbeddedResource Include="Scripts\2.2.0\58_CSFCrypto.sql" />
+    <EmbeddedResource Include="Scripts\2.2.0\59_Chlamydia.sql" />
     <EmbeddedResource Include="Scripts\2.2.0\IQTools\01_PatientPopulationView.sql" />
     <EmbeddedResource Include="Scripts\2.2.0\IQTools\02_HTS_LABRegisternewer.sql" />
     <EmbeddedResource Include="Scripts\2.2.0\IQTools\03_ANCRegister.sql" />
@@ -794,6 +829,7 @@
     <EmbeddedResource Include="Scripts\2.1.0\07_pr_Scheduler_UpdateAppointmentStatus.sql" />
     <EmbeddedResource Include="Scripts\2.1.0\13_PP_PatientPopulationView.sql" />
     <EmbeddedResource Include="Scripts\2.2.0\15_qaversion.sql" />
+    <EmbeddedResource Include="Scripts\2.2.0\48_Toxoplasma.sql" />
     <Resource Include="Scripts\1.0.0.9\37_BO_AddPhsicalExaminationView.sql" />
   </ItemGroup>
 
