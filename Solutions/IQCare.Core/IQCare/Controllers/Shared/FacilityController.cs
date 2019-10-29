@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using IQCare.Common.BusinessProcess.Commands.Appointment;
 using IQCare.Common.BusinessProcess.Commands.Lookup;
 using IQCare.Common.BusinessProcess.Commands.Matrix;
+using IQCare.Common.BusinessProcess.Commands.PersonCommand;
 using IQCare.HTS.BusinessProcess.Commands;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
@@ -118,6 +119,15 @@ namespace IQCare.Controllers.Shared
         public async Task<IActionResult> GetHtsFacilityStatistics()
         {
             var response = await _mediatR.Send(new GetHtsFacilityStatisticsCommand(), Request.HttpContext.RequestAborted);
+            if (response.IsValid)
+                return Ok(response.Value);
+            return BadRequest(response);
+        }
+
+        [HttpGet("GetDuplicatePersons")]
+        public async Task<IActionResult> GetDuplicatePersons()
+        {
+            var response = await _mediatR.Send(new GetDuplicatePersonsCommand(), Request.HttpContext.RequestAborted);
             if (response.IsValid)
                 return Ok(response.Value);
             return BadRequest(response);

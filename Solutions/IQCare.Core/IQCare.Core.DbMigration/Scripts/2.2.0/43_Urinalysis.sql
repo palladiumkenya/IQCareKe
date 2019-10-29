@@ -1,0 +1,2 @@
+UPDATE [dbo].[Mst_LabTestParameter] SET DeleteFlag = 1  where ReferenceId = 'STOOLSTATUS' AND DeleteFlag = 0 AND LabTestId = (select top 1 Id from [dbo].[mst_LabTestMaster] where ReferenceId = 'URINALYSIS');
+UPDATE [dbo].[Mst_LabTestParameter] SET DeleteFlag = 1  where ReferenceId = 'STOOL' AND DeleteFlag = 0 AND LabTestId = (select top 1 Id from [dbo].[mst_LabTestMaster] where ReferenceId = 'URINALYSIS');
