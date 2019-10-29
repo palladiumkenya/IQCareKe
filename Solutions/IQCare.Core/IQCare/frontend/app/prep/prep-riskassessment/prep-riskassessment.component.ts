@@ -213,7 +213,7 @@ export class PrepRiskassessmentComponent implements OnInit {
         }
         let assessmentoutcomerisk: any[] = [];
         let NoRiskOutcome: number;
-        assessmentoutcomerisk = this.assessmentOutComeOptions.filter(x => x.itemDisplayName == 'No Risk');
+        assessmentoutcomerisk = this.assessmentOutComeOptions.filter(x => x.itemDisplayName == 'Low Risk');
         NoRiskOutcome = assessmentoutcomerisk[0]['itemId'];
         this.PrepRiskAssessmentFormGroup.controls.assessmentOutCome.setValue(NoRiskOutcome);
         let prepriskencounter: any[] = [];
@@ -276,7 +276,7 @@ export class PrepRiskassessmentComponent implements OnInit {
                     if (text.toLowerCase() === 'risk') {
                         this.PrepRiskAssessmentFormGroup.controls.ClientWillingTakePrep.enable({ onlySelf: true });
 
-                    } else if (text.toLowerCase() === 'no risk') {
+                    } else if (text.toLowerCase() === 'low risk') {
                         this.PrepRiskAssessmentFormGroup.controls.ClientWillingTakePrep.disable({ onlySelf: true });
                         this.PrepRiskAssessmentFormGroup.controls.ClientWillingTakePrep.setValue('');
                         this.PrepRiskAssessmentFormGroup.controls.RiskEducation.setValue('');
@@ -620,7 +620,7 @@ export class PrepRiskassessmentComponent implements OnInit {
             if (notselected == false) {
                 let assessmentOutCome: any[] = [];
                 let itemId: number;
-                assessmentOutCome = this.assessmentOutComeOptions.filter(x => x.itemDisplayName == 'No Risk');
+                assessmentOutCome = this.assessmentOutComeOptions.filter(x => x.itemDisplayName == 'Low Risk');
                 itemId = assessmentOutCome[0]['itemId'];
                 this.PrepRiskAssessmentFormGroup.controls.assessmentOutCome.setValue(itemId);
             }

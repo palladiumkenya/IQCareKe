@@ -349,6 +349,7 @@
     <None Remove="Scripts\2.2.0\41_HtsFacilityDashboard.sql" />
     <None Remove="Scripts\2.2.0\49_PrepStatus.sql" />
     <None Remove="Scripts\2.2.0\50_PREP_RegisterView.sql" />
+    <None Remove="Scripts\2.2.0\51_HEIRegimen.sql" />
     <None Remove="Scripts\2.2.0\IQTools\01_PatientPopulationView.sql" />
     <None Remove="Scripts\2.2.0\IQTools\02_HTS_LABRegisternewer.sql" />
     <None Remove="Scripts\2.2.0\IQTools\03_ANCRegister.sql" />
@@ -734,6 +735,7 @@
     <EmbeddedResource Include="Scripts\2.2.0\40_HTSEncountersView.sql" />
     <EmbeddedResource Include="Scripts\2.2.0\41_HtsFacilityDashboard.sql" />
     <EmbeddedResource Include="Scripts\2.2.0\49_PrepStatus.sql" />
+    <EmbeddedResource Include="Scripts\2.2.0\51_HEIRegimen.sql" />
     <EmbeddedResource Include="Scripts\2.2.0\IQTools\01_PatientPopulationView.sql" />
     <EmbeddedResource Include="Scripts\2.2.0\IQTools\02_HTS_LABRegisternewer.sql" />
     <EmbeddedResource Include="Scripts\2.2.0\IQTools\03_ANCRegister.sql" />
