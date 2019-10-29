@@ -1,14 +1,18 @@
 
+
+
+
 /****** Object:  View [dbo].[PREP_RegisterView]    Script Date: 10/16/2019 13:58:52 ******/
-SET ANSI_NULLS ON
+
+
+IF OBJECT_ID('dbo.PREP_RegisterView', 'V') IS NOT NULL
+    DROP VIEW [dbo].[PREP_RegisterView]
 GO
 
-SET QUOTED_IDENTIFIER ON
-GO
 
-
-ALTER VIEW [dbo].[PREP_RegisterView]
+CREATE VIEW  [dbo].[PREP_RegisterView]
 AS
+
 SELECT distinct a.[PatientId]
 	  ,p.Ptn_Pk
       ,a.[PatientEncounterId]
