@@ -164,7 +164,7 @@ export class PrepComponent implements OnInit {
     ngOnInit() {
 
         this.route.params.subscribe(params => {
-            const { id, serviceId, serviceCode, edit } = params;
+            const { id, serviceId, serviceCode, edit } = params
             this.personId = id;
             this.serviceId = serviceId;
             this.serviceCode = serviceCode;

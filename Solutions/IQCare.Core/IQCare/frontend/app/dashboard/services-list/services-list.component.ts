@@ -594,16 +594,16 @@ export class ServicesListComponent implements OnInit {
                         if (this.riskencounter.length > 0) {
 
                             if (this.riskencounter[0].assessmentOutCome !== null) {
-                                if (this.riskencounter[0].assessmentOutCome.toString().toLowerCase() == 'norisk') {
+                                if (this.riskencounter[0].assessmentOutCome.toString().toLowerCase() == 'lowrisk') {
                                     isEligible = false;
                                     this.preprisk = true;
                                     this.EligibilityInformation = [];
                                     if (this.EligibilityInformation.length > 0) {
-                                        if (this.EligibilityInformation.includes('AssessmentOutcome is  no risk') == false) {
-                                            this.EligibilityInformation.push('AssessmentOutcome is  no risk');
+                                        if (this.EligibilityInformation.includes('AssessmentOutcome is  low risk') == false) {
+                                            this.EligibilityInformation.push('AssessmentOutcome is  low risk');
                                         }
                                     } else {
-                                        this.EligibilityInformation.push('AssessmentOutcome is  no risk');
+                                        this.EligibilityInformation.push('AssessmentOutcome is  low risk');
                                     }
                                 }
                             }
