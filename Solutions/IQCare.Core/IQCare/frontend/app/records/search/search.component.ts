@@ -102,13 +102,9 @@ export class SearchComponent implements OnInit, AfterViewInit {
                 const rows = [];
                 res['personSearch'].forEach(element =>
                     rows.push(element, { detailRow: true, element }));
-                console.log(res);
-                console.log(rows);
                 this.dataSource.data = rows;
 
                 this.afterSearch = true;
-                console.log('Element is :');
-                console.log(this.dataSource.data);
             },
             (error) => {
                 this.snotifyService.error('Error searching person ' + error, 'SEARCH', this.notificationService.getConfig());
@@ -163,7 +159,6 @@ export class SearchComponent implements OnInit, AfterViewInit {
                 if (!data) {
                     return;
                 }
-                console.log(data);
             });
 
 
