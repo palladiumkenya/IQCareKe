@@ -1559,23 +1559,25 @@ export class PrepComponent implements OnInit {
                 this.form.controls.DateLastUsed.enable({ onlySelf: true });
              
 
-            } else {
+            } 
+            if (event.source.viewValue === 'No') {
                 this.isVisible = false;
                 this.form.controls.TransferInDate.setValue('');
-                this.form.controls.FacilitySelected.setValue('');
+                //.form.controls.FacilitySelected.setValue('');
                 this.form.controls.CurrentRegimen.setValue('');
                 this.form.controls.ClinicalNotes.setValue('');
                 this.form.controls.TransferInMflCode.setValue('');
-                this.form.controls.DateLastUsed.disable({ onlySelf: true });
-                //this.form.controls.PrevPrepUse.setValue('');
-                this.form.controls.Months.disable({ onlySelf: true });
-                this.form.controls.InitiationDate.disable({ onlySelf: true });
+                this.FacilitySelected.setValue('');
                 this.form.controls.Months.setValue('');
                 this.form.controls.InitiationDate.setValue('');
                 this.form.controls.DateLastUsed.setValue('');
+                this.form.controls.Months.disable({ onlySelf: true });
+                this.form.controls.DateLastUsed.disable({ onlySelf: true });
+                this.form.controls.InitiationDate.disable({ onlySelf: true });
 
             }
         }
+        
     }
 
     // tslint:disable-next-line: use-life-cycle-interface
