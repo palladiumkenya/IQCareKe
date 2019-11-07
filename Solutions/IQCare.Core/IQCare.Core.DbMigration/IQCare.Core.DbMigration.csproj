@@ -370,6 +370,7 @@
     <None Remove="Scripts\2.2.0\60_VWPatientCareEnding.sql" />
     <None Remove="Scripts\2.2.0\61_PatientView.sql" />
     <None Remove="Scripts\2.2.0\51_HEIRegimen.sql" />
+    <None Remove="Scripts\2.2.0\62_HTSLABRegister.sql" />
     <None Remove="Scripts\2.2.0\IQTools\01_PatientPopulationView.sql" />
     <None Remove="Scripts\2.2.0\IQTools\02_HTS_LABRegisternewer.sql" />
     <None Remove="Scripts\2.2.0\IQTools\03_ANCRegister.sql" />
@@ -775,6 +776,7 @@
     <EmbeddedResource Include="Scripts\2.2.0\60_VWPatientCareEnding.sql" />
     <EmbeddedResource Include="Scripts\2.2.0\61_PatientView.sql" />
     <EmbeddedResource Include="Scripts\2.2.0\51_HEIRegimen.sql" />
+    <EmbeddedResource Include="Scripts\2.2.0\62_HTSLABRegister.sql" />
     <EmbeddedResource Include="Scripts\2.2.0\IQTools\01_PatientPopulationView.sql" />
     <EmbeddedResource Include="Scripts\2.2.0\IQTools\02_HTS_LABRegisternewer.sql" />
     <EmbeddedResource Include="Scripts\2.2.0\IQTools\03_ANCRegister.sql" />

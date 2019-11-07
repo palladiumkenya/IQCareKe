@@ -1410,7 +1410,7 @@
                 var treatmentProgram = $("#<%=ddlTreatmentProgram.ClientID%>").find(":selected").val();
                 var treatmentProgramName = $("#<%=ddlTreatmentProgram.ClientID%>").find(":selected").text();
                 var periodTaken = $("#<%=ddlPeriodTaken.ClientID%>").find(":selected").val();
-                var periodTakenText = $("#<%=ddlPeriodTaken.ClientID%>").find(":selected").Text();
+                var periodTakenText = $("#<%=ddlPeriodTaken.ClientID%>").find(":selected").text();
                 var treatmentPlan = $("#<%=ddlTreatmentPlan.ClientID%>").find(":selected").val();
                 var treatmentPlanName = $("#<%=ddlTreatmentPlan.ClientID%>").find(":selected").text();
                 var treatmentPlanReason = $("#<%=ddlSwitchInterruptionReason.ClientID%>").find(":selected").val();
@@ -1483,7 +1483,7 @@
                     toastr.error("Error", "Please enter the quantity prescribed");
                     return false;
                 }
-                if (treatmentProgramName !== "Treatment" && treatmentProgramName !== "prophylaxis" && TreatmentProgramName !== "Non-ART") {
+                if (treatmentProgramName !== "Treatment" && treatmentProgramName !== "prophylaxis" && treatmentProgramName !== "Non-ART") {
                     if (DrugTableArray.length > 0) {
                         ExistingProgramvalue = new Array();
                         ExistingProgramvalue = [];
@@ -1491,7 +1491,7 @@
                         valuesprogram = new Array();
                         valuesprogram = [];
                         ExistingProgramvalue = DrugTableArray.filter(x => x.TreatmentProgram.toString() != treatmentProgramName.toString()
-                            && x.TreatmentProgram.toString() !== "Treatment" && x.TreatmentProgram.toString() !== "prophylaxis" &&  TreatmentProgramName !== "Non-ART")
+                            && x.TreatmentProgram.toString() !== "Treatment" && x.TreatmentProgram.toString() !== "prophylaxis" &&  treatmentProgramName !== "Non-ART")
 
                         if (ExistingProgramvalue.length > 0) {
 
@@ -1506,7 +1506,10 @@
                         };
 
                         if (regimen > 0) {
-                            ExistingRegimenLine = DrugTableArray.filter(x => x.Regimen.toString() !== regimen.toString())
+                            console.log("DrugTableArray", DrugTableArray);
+                            ExistingRegimenLine = DrugTableArray.filter(x => x.RegimenId.toString() !== regimen.toString());
+                            console.log("ExistingRegimenLine", ExistingRegimenLine);
+                            console.log("regimen", regimen);
                             if (ExistingRegimenLine.length > 0) {
                                  toastr.error("Regimen", "Kindly one cannot have different regimen at the same time. Kindly prescibe the correct regimen" 
                                    );
@@ -1697,7 +1700,7 @@
                     toastr.error("Error", drugName + " and/or batch no. " + batchText + " already exists in the List");
                     return false; // message box herer
                 }
-                  if (treatmentProgramName !== "Treatment" && treatmentProgramName !== "prophylaxis" && TreatmentProgramName !== "Non-ART") {
+                  if (treatmentProgramName !== "Treatment" && treatmentProgramName !== "prophylaxis" && treatmentProgramName !== "Non-ART") {
                     if (DrugTableArray.length > 0) {
                         ExistingProgramvalue = new Array();
                         ExistingProgramvalue = [];
@@ -1705,7 +1708,7 @@
                         valuesprogram = new Array();
                         valuesprogram = [];
                         ExistingProgramvalue = DrugTableArray.filter(x => x.TreatmentProgram.toString() != treatmentProgramName.toString()
-                            && x.TreatmentProgram.toString() !== "Treatment" && x.TreatmentProgram.toString() !== "prophylaxis" &&  TreatmentProgramName !== "Non-ART")
+                            && x.TreatmentProgram.toString() !== "Treatment" && x.TreatmentProgram.toString() !== "prophylaxis" &&  treatmentProgramName !== "Non-ART")
 
                         if (ExistingProgramvalue.length > 0) {
 
@@ -1720,7 +1723,9 @@
                         };
 
                         if (regimen > 0) {
-                            ExistingRegimenLine = DrugTableArray.filter(x => x.Regimen.toString() !== regimen.toString())
+                            console.log('DrugTableArray', DrugTableArray);
+                            ExistingRegimenLine = DrugTableArray.filter(x => x.RegimenId.toString() !== regimen.toString());
+                            console.log('ExistingRegimenLine', ExistingRegimenLine);
                             if (ExistingRegimenLine.length > 0) {
                                  toastr.error("Regimen", "Kindly one cannot have different regimen at the same time. Kindly prescibe the correct regimen" 
                                    );
