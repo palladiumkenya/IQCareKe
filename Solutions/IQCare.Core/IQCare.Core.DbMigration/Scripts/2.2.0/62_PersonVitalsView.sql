@@ -3,6 +3,7 @@ IF OBJECT_ID('dbo.PersonVitalsView', 'V') IS NOT NULL
 GO
 
 
+
 CREATE VIEW [dbo].[PersonVitalsView]
 AS
 SELECT dbo.PatientVitals.id,per.Id as PersonId,
@@ -14,8 +15,6 @@ SELECT dbo.PatientVitals.id,per.Id as PersonId,
 From  Person per
 left join Patient pat on pat.PersonId=per.Id
 inner join dbo.PatientVitals  on dbo.PatientVitals.PatientId=pat.Id
-
-
 GO
 
 

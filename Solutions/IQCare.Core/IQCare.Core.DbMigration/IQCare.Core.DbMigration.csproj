@@ -354,6 +354,7 @@
     <None Remove="Scripts\2.2.0\46_MALARIAPARASITE.sql" />
     <None Remove="Scripts\2.2.0\47_Varicella.sql" />
     <None Remove="Scripts\2.2.0\48_Toxoplasma.sql" />
+    <None Remove="Scripts\2.2.0\49_PrepRegisterView.sql" />
     <None Remove="Scripts\2.2.0\49_Syphilis.sql" />
     <None Remove="Scripts\2.2.0\50_SputumGramStain.sql" />
     <None Remove="Scripts\2.2.0\51_SputumAFB3.sql" />
@@ -371,6 +372,11 @@
     <None Remove="Scripts\2.2.0\61_PatientView.sql" />
     <None Remove="Scripts\2.2.0\51_HEIRegimen.sql" />
     <None Remove="Scripts\2.2.0\60_UpdatePrepLookupItemChanges.sql" />
+    <None Remove="Scripts\2.2.0\62_PersonVitalsView.sql" />
+    <None Remove="Scripts\2.2.0\63_UpdateServiceArea.sql" />
+    <None Remove="Scripts\2.2.0\64_UpdateSelfTestReferral.sql" />
+    <None Remove="Scripts\2.2.0\65_UpdateHeiRegimenDisplayName.sql" />
+    <None Remove="Scripts\2.2.0\66_DeleteFpMethodUndecided.sql" />
     <None Remove="Scripts\2.2.0\IQTools\01_PatientPopulationView.sql" />
     <None Remove="Scripts\2.2.0\IQTools\02_HTS_LABRegisternewer.sql" />
     <None Remove="Scripts\2.2.0\IQTools\03_ANCRegister.sql" />
@@ -755,6 +761,7 @@
     <EmbeddedResource Include="Scripts\2.2.0\48_AllergyView.sql" />
     <EmbeddedResource Include="Scripts\2.2.0\40_HTSEncountersView.sql" />
     <EmbeddedResource Include="Scripts\2.2.0\41_HtsFacilityDashboard.sql" />
+    <EmbeddedResource Include="Scripts\2.2.0\49_PrepRegisterView.sql" />
     <EmbeddedResource Include="Scripts\2.2.0\49_PrepStatus.sql" />
     <EmbeddedResource Include="Scripts\2.2.0\42_Release.sql" />
     <EmbeddedResource Include="Scripts\2.2.0\43_Urinalysis.sql" />
@@ -777,6 +784,11 @@
     <EmbeddedResource Include="Scripts\2.2.0\61_PatientView.sql" />
     <EmbeddedResource Include="Scripts\2.2.0\51_HEIRegimen.sql" />
     <EmbeddedResource Include="Scripts\2.2.0\60_UpdatePrepLookupItemChanges.sql" />
+    <EmbeddedResource Include="Scripts\2.2.0\62_PersonVitalsView.sql" />
+    <EmbeddedResource Include="Scripts\2.2.0\63_UpdateServiceArea.sql" />
+    <EmbeddedResource Include="Scripts\2.2.0\64_UpdateSelfTestReferral.sql" />
+    <EmbeddedResource Include="Scripts\2.2.0\65_UpdateHeiRegimenDisplayName.sql" />
+    <EmbeddedResource Include="Scripts\2.2.0\66_DeleteFpMethodUndecided.sql" />
     <EmbeddedResource Include="Scripts\2.2.0\IQTools\01_PatientPopulationView.sql" />
     <EmbeddedResource Include="Scripts\2.2.0\IQTools\02_HTS_LABRegisternewer.sql" />
     <EmbeddedResource Include="Scripts\2.2.0\IQTools\03_ANCRegister.sql" />
@@ -838,6 +850,9 @@
     <EmbeddedResource Include="Scripts\2.1.0\13_PP_PatientPopulationView.sql" />
     <EmbeddedResource Include="Scripts\2.2.0\15_qaversion.sql" />
     <EmbeddedResource Include="Scripts\2.2.0\48_Toxoplasma.sql" />
+    <Reference Include="System">
+      <HintPath>System</HintPath>
+    </Reference>
     <Resource Include="Scripts\1.0.0.9\37_BO_AddPhsicalExaminationView.sql" />
   </ItemGroup>
 

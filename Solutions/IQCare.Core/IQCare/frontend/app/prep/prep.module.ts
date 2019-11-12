@@ -1,4 +1,5 @@
 import { PrepService } from './_services/prep.service';
+import { PersonHomeService} from '../dashboard/services/person-home.service';
 import { STIScreeningTreatmentResolver } from './_services/STIScreeningTreatment.resolver';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
@@ -66,6 +67,7 @@ import { PrepPatientvitalsinfoComponent } from './prep-patientvitalsinfo/prep-pa
 import { PrepRiskassessmentgriddetailsComponent } from './prep-riskassessmentgriddetails/prep-riskassessmentgriddetails.component';
 import { PrepFollowupworkflowComponent } from './prep-followupworkflow/prep-followupworkflow.component';
 import { PrepMonthlyrefillworkflowComponent } from './prep-monthlyrefillworkflow/prep-monthlyrefillworkflow.component';
+import { PrepVisitcheckinComponent } from './prep-visitcheckin/prep-visitcheckin.component';
 
 @NgModule({
     declarations: [
@@ -88,7 +90,8 @@ import { PrepMonthlyrefillworkflowComponent } from './prep-monthlyrefillworkflow
         PrepPatientvitalsinfoComponent,
         PrepRiskassessmentgriddetailsComponent,
         PrepFollowupworkflowComponent,
-        PrepMonthlyrefillworkflowComponent
+        PrepMonthlyrefillworkflowComponent,
+        PrepVisitcheckinComponent
     ],
     imports: [
         SharedModule, MatDatepickerModule, MatNativeDateModule,
@@ -100,7 +103,7 @@ import { PrepMonthlyrefillworkflowComponent } from './prep-monthlyrefillworkflow
         MatIconModule, ReactiveFormsModule, FormsModule
     ],
     providers: [
-        YesNoResolver, YesNoUnknownResolver,
+        YesNoResolver, YesNoUnknownResolver,PersonHomeService,
         STIScreeningTreatmentResolver, FamilyPlanningMethodResolver,
         PlanningPregnancyResolver, YesNoDontKnowResolver, PregnancyOutcomeResolver,
         PrepContraindicationsResolver, PrepStatusResolver, AssessmentOutcomeResolver,

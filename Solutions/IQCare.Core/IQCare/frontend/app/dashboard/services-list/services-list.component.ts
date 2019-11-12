@@ -292,7 +292,7 @@ export class ServicesListComponent implements OnInit {
             } else {
                 visibility = false;
             }
-            
+
         } else {
             visibility = false;
         }
@@ -318,12 +318,12 @@ export class ServicesListComponent implements OnInit {
                 if (!data) {
                     this.proceedvitals = data;
                     this.visibleproceed = true;
-                   
+
                     return;
                 } else {
                     this.proceedvitals = data;
                     this.visibleproceed = false;
-                  
+
                 }
 
             });
@@ -695,6 +695,7 @@ export class ServicesListComponent implements OnInit {
 
 
         } else if (this.htshistory.length > 0) {
+            isEligible = true;
             this.nohtshistory = false;
             if (this.htshistory[0].finalResult == 'Positive') {
                 isEligible = false;

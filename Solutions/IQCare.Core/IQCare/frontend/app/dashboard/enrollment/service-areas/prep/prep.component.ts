@@ -119,10 +119,11 @@ export class PrepComponent implements OnInit {
     Daterestartedvisible: boolean = false;
     DateInitiatedvisible: boolean = false;
 
-    
+
     dateLMP: Date;
     minLMpDate: Date;
     visitDate: Date;
+    minNextDate: Date;
 
     public chronic_illness_data: PatientChronicIllness[] = [];
     public adverseEvents_data: AdverseEventsCommand[] = [];
@@ -149,6 +150,7 @@ export class PrepComponent implements OnInit {
         private recordsService: RecordsService) {
         this.ChronicIllnessFormGroup = [];
         this.maxDate = new Date();
+        this.minNextDate = new Date();
         this.clientCircumcisionStatusCommand = new CircumcisionCommand();
         this.isVisible = false;
         this.FacilitySelected.valueChanges.pipe(debounceTime(400)).subscribe(data => {
@@ -158,6 +160,8 @@ export class PrepComponent implements OnInit {
             });
         });
 
+       
+       
 
     }
 
@@ -333,7 +337,7 @@ export class PrepComponent implements OnInit {
                 this.filteredfacilities = res['facilityList'];
             });
         });
-
+       
 
         this.form.controls.Specify.disable({ onlySelf: true });
         this._lookupItemService.getByGroupName('DiscordantCouple').subscribe(
@@ -366,6 +370,8 @@ export class PrepComponent implements OnInit {
         // this.form.controls.DiscordantCouple.disable({ onlySelf: true });
 
         this.form.controls.HivSerodiscordantduration.disable({ onlySelf: true });
+        this.form.controls.stiTreatmentOffered.disable({ onlySelf: true });
+        this.form.controls.signsOfSTI.disable({ onlySelf: true });
         this.LoadPopulationTypes(this.personId);
         this.loadPriorityPopulation(this.personId);
 
@@ -411,8 +417,16 @@ export class PrepComponent implements OnInit {
 
         this.form.controls.MFLCode.setValue(this.posId);
 
+        let EnrollDate: Date;
+        EnrollDate = this.form.controls.EnrollmentDate.value;
+        if (EnrollDate !== undefined && EnrollDate !== null && EnrollDate.toString() !== '') {
+            this.minNextDate = EnrollDate;
 
-
+        }
+        else {
+            this.minNextDate = new Date();
+        }
+        this.form.controls.nextAppointmentDate.disable({ onlySelf: true });
         /*this.form.controls.FacilityListSelected.setValue(this.facilities);
         this.filteredfacilities.next(this.facilities.slice(0, 10));*/
         // this.loadPrepStartEventPatient();
@@ -485,6 +499,8 @@ export class PrepComponent implements OnInit {
         );
     }
     onPrepStatusChange(event) {
+        this.DateInitiatedvisible = false;
+        this.Daterestartedvisible = false;
         const value = event.source.value;
         if (event.source.viewValue === 'Start' && event.source.selected == true) {
 
@@ -511,6 +527,18 @@ export class PrepComponent implements OnInit {
         }
 
 
+    }
+    OnEnrollmentChange(event) {
+       
+        let EnrollDate: Date;
+       EnrollDate = this.form.controls.EnrollmentDate.value;
+       if (EnrollDate !== undefined && EnrollDate !== null && EnrollDate.toString() !== '') {
+           this.minNextDate = EnrollDate;
+
+       }
+       else {
+           this.minNextDate = new Date();
+       }
     }
     Oncontraindications(event) {
         const value = event.source.value;
@@ -719,9 +747,20 @@ export class PrepComponent implements OnInit {
 
 
     }
+    public onSTISignsOrSymptomsSelection(event) {
+        if (event.isUserInput && event.source.selected && event.source.viewValue == 'Yes') {
+            this.form.controls.signsOfSTI.enable({ onlySelf: true });
+            this.form.controls.stiTreatmentOffered.enable({ onlySelf: true });
+        } else if (event.isUserInput && event.source.selected && event.source.viewValue == 'No') {
+            this.form.controls.signsOfSTI.setValue([]);
+            this.form.controls.stiTreatmentOffered.setValue('');
+            this.form.controls.stiTreatmentOffered.disable({ onlySelf: true });
+            this.form.controls.signsOfSTI.disable({ onlySelf: true });
+        }
+    }
     public onSignsOrSymptomsSelection(event) {
-        
-            this.form.controls.contraindications_PrEP_Present.enable({onlySelf: true});
+
+        this.form.controls.contraindications_PrEP_Present.enable({ onlySelf: true });
         if (event.source.selected == true && event.source.viewValue == 'Yes') {
             this.form.controls.adherenceCounselling.setValue('');
             this.form.controls.adherenceCounselling.disable({ onlySelf: true });
@@ -732,21 +771,21 @@ export class PrepComponent implements OnInit {
             this.form.controls.DateInitiated.setValue('');
             this.form.controls.DateInitiated.disable({ onlySelf: true });
             this.form.controls.contraindications_PrEP_Present.setValue('');
-            this.form.controls.contraindications_PrEP_Present.disable({onlySelf:true});
-           
+            this.form.controls.contraindications_PrEP_Present.disable({ onlySelf: true });
 
-        }  
-        if ( event.source.selected == true && event.source.viewValue == 'No') { 
-           
+
+        }
+        if (event.source.selected == true && event.source.viewValue == 'No') {
+
             this.form.controls.adherenceCounselling.enable({ onlySelf: true });
-           
+
             this.form.controls.PrEPStatusToday.enable({ onlySelf: true });
-           
+
             this.form.controls.DateRestarted.enable({ onlySelf: true });
-        
+
             this.form.controls.DateInitiated.enable({ onlySelf: true });
-            this.form.controls.contraindications_PrEP_Present.enable({onlySelf: true});
-           
+            this.form.controls.contraindications_PrEP_Present.enable({ onlySelf: true });
+
         }
     }
 
@@ -883,6 +922,8 @@ export class PrepComponent implements OnInit {
 
 
     onAppointmentSelection(event) {
+        this.form.controls.nextAppointmentDate.disable({ onlySelf: true });
+         this.form.controls.nextAppointmentDate.setValue('');
         if (event.isUserInput && event.source.selected && event.source.viewValue == 'No') {
 
 
@@ -891,7 +932,19 @@ export class PrepComponent implements OnInit {
             this.form.controls.nextAppointmentDate.setValue('');
         } else if (event.isUserInput && event.source.selected && event.source.viewValue == 'Yes') {
             // enable date 
-            this.form.controls.nextAppointmentDate.enable({ onlySelf: true });
+          
+            this.form.controls.nextAppointmentDate.enable({ onlySelf: true }); 
+             let EnrollDate: Date;
+            EnrollDate = this.form.controls.EnrollmentDate.value;
+            if (EnrollDate !== undefined && EnrollDate !== null && EnrollDate.toString() !== '') {
+                this.minNextDate = EnrollDate;
+    
+            }
+            else {
+                this.minNextDate = new Date();
+            }
+    
+
 
 
         }
@@ -1557,9 +1610,9 @@ export class PrepComponent implements OnInit {
                 this.form.controls.Months.enable({ onlySelf: true });
                 this.form.controls.InitiationDate.enable({ onlySelf: true });
                 this.form.controls.DateLastUsed.enable({ onlySelf: true });
-             
 
-            } 
+
+            }
             if (event.source.viewValue === 'No') {
                 this.isVisible = false;
                 this.form.controls.TransferInDate.setValue('');
@@ -1577,7 +1630,7 @@ export class PrepComponent implements OnInit {
 
             }
         }
-        
+
     }
 
     // tslint:disable-next-line: use-life-cycle-interface
@@ -2191,7 +2244,7 @@ export class PrepComponent implements OnInit {
                                         }
                                         if (this.isEdit == true) {
 
-                                           
+
 
                                             const prepStatusCommand: PrepStatusCommand = {
                                                 Id: this.form.controls.idprep.value == null ? 0 : this.form.controls.idprep.value,

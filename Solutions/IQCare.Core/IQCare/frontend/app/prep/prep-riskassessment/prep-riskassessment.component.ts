@@ -1527,55 +1527,58 @@ export class PrepRiskassessmentComponent implements OnInit {
 
 
 
-        const patientencounter: PatientMasterVisitEncounter = {
-            PatientId: this.patientId,
-            EncounterType: this.EncounterTypeId,
-            ServiceAreaId: this.serviceAreaId,
-            UserId: this.UserId,
-            EncounterDate: moment(date).toDate()
+        if (this.EncounterTypeId > 0) {
+            const patientencounter: PatientMasterVisitEncounter = {
+                PatientId: this.patientId,
+                EncounterType: this.EncounterTypeId,
+                ServiceAreaId: this.serviceAreaId,
+                UserId: this.UserId,
+                EncounterDate: moment(date).toDate()
 
-        };
-        this.encounterservice.savePatientMasterVisit(patientencounter).subscribe(
-            (result) => {
-                localStorage.setItem('patientEncounterId', result['patientEncounterId']);
-                localStorage.setItem('patientMasterVisitId', result['patientMasterVisitId']);
+            };
+            this.encounterservice.savePatientMasterVisit(patientencounter).subscribe(
+                (result) => {
+                    localStorage.setItem('patientEncounterId', result['patientEncounterId']);
+                    localStorage.setItem('patientMasterVisitId', result['patientMasterVisitId']);
 
-                this.patientmastervisitid = result['patientMasterVisitId'];
-                // this.snotifyService.success('Successfully Checked-In Patient', 'CheckIn', this.notificationService.getConfig());
-                this.prepservice.AddEditBehaviourRisk(this.EncounterTypeId, this.UserId, this.patientId, this.patientmastervisitid, date,
-                    this.serviceAreaId, this.RiskAssessmentList, this.ClinicalList).subscribe(
-                        (response) => {
-                            this.PatientMasterVisitId = response['patientMasterVisitId'];
+                    this.patientmastervisitid = result['patientMasterVisitId'];
+                    // this.snotifyService.success('Successfully Checked-In Patient', 'CheckIn', this.notificationService.getConfig());
+                    this.prepservice.AddEditBehaviourRisk(this.EncounterTypeId, this.UserId, this.patientId, this.patientmastervisitid, date,
+                        this.serviceAreaId, this.RiskAssessmentList, this.ClinicalList).subscribe(
+                            (response) => {
+                                this.PatientMasterVisitId = response['patientMasterVisitId'];
 
-                            this.snotifyService.success('Successfully submitted the form', 'Submit RiskAssessment Form',
-                                this.notificationService.getConfig());
+                                this.snotifyService.success('Successfully submitted the form', 'Submit RiskAssessment Form',
+                                    this.notificationService.getConfig());
 
-                            this.zone.run(() => {
-                                this.router.navigate(
-                                    ['/dashboard/personhome/' + this.personId],
-                                    { relativeTo: this.route });
-                            });
-                        },
-                        (error) => {
-                            this.snotifyService.error('Error submitting the form' + error, 'Submit RiskAssessment Form',
-                                this.notificationService.getConfig());
-                            this.spinner.hide();
+                                this.zone.run(() => {
+                                    this.router.navigate(
+                                        ['/dashboard/personhome/' + this.personId],
+                                        { relativeTo: this.route });
+                                });
+                            },
+                            (error) => {
+                                this.snotifyService.error('Error submitting the form' + error, 'Submit RiskAssessment Form',
+                                    this.notificationService.getConfig());
+                                this.spinner.hide();
 
-                        },
-                        () => {
-                            this.spinner.hide();
-                        }
-                    );
+                            },
+                            () => {
+                                this.spinner.hide();
+                            }
+                        );
 
-            },
-            (error) => {
-                this.snotifyService.error('Error checking in ' + error, 'CheckIn', this.notificationService.getConfig());
-            },
-            () => {
+                },
+                (error) => {
+                    this.snotifyService.error('Error checking in ' + error, 'CheckIn', this.notificationService.getConfig());
+                },
+                () => {
 
-            }
-        );
-
+                }
+            );
+        } else {
+            this.snotifyService.error('Error saving the details', this.notificationService.getConfig());
+        }
 
 
 

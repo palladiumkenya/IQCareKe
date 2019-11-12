@@ -290,6 +290,16 @@ export class PrepEncounterformlistComponent implements OnInit {
             }
         }
     }
+
+    patientCheckin() {
+        this.zone.run(() => {
+            this.zone.run(() => {
+                this.router.navigate(
+                    ['/prep/prepvisitcheckin/' + this.patientId + '/' + this.personId + '/' + this.serviceAreaId],
+                    { relativeTo: this.route });
+            });
+        });
+    }
     clickEncounter() {
         this.zone.run(() => {
             this.zone.run(() => {

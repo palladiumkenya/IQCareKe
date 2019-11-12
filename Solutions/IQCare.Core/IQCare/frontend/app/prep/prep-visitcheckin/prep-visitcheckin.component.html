@@ -1,0 +1,52 @@
+<div class="row">
+    <div class='col-lg-12 col-md-12 col-sm-12 col-xs-12'>
+        <div class="row">
+            <div class="col-lg-12 col-sm-6 col-xs-12">
+                <div class="widget">
+                    <div class="widget-header bordered-bottom bordered-sky">
+                        <span class="widget-caption">
+                            PREP | Patient Checkin  Visit
+                        </span>
+                    </div>
+                    <div class="widget-body">
+                        <div class="row">
+                            <div class="col-lg-12 col-sm-6 col-xs-12">
+                                <form [formGroup]="formGroup">
+                                <mat-horizontal-stepper [linear]="isLinear" #stepper="matHorizontalStepper" formArrayName="formArray"> 
+                                    <mat-step [completed]="false" formGroupName='0' [stepControl]="formArray.get([0])">
+                                        <ng-template matStepLabel>Check In</ng-template>
+                                        <div class="row">
+                                            <div class='col-lg-3 col-md-3 col-sm-3'>
+                                                <mat-form-field>
+                                                    <input tabIndex="5"  matInput placeholder="Checkin Date" 
+                                                    [matDatepicker]="myDatepicker" [max]="maxDate" 
+                                                    formControlName="PatientCheckinStartTime" required>
+                                                    <mat-datepicker-toggle matSuffix [for]="myDatepicker">
+
+                                                    </mat-datepicker-toggle>
+                                                    <mat-datepicker #myDatepicker name="PatientCheckinStartTime" ngDefaultControl
+                                                    ></mat-datepicker>
+                                                </mat-form-field>
+                                            </div>
+
+                                        </div>
+                                        <div>
+                                            <button tabindex="8" mat-button matStepperNext type="button" >
+                                                Next
+                                            </button>
+                                        </div>
+                                    </mat-step formGroupName="2" [stepControl="formArray.get([2])"]>
+                                    <ng-template matStepLabel></ng-template>
+                                    <mat-step>
+
+                                    </mat-step>
+                                </mat-horizontal-stepper>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
