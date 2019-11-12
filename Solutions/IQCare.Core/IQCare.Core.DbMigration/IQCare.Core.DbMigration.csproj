@@ -377,6 +377,7 @@
     <None Remove="Scripts\2.2.0\64_UpdateSelfTestReferral.sql" />
     <None Remove="Scripts\2.2.0\65_UpdateHeiRegimenDisplayName.sql" />
     <None Remove="Scripts\2.2.0\66_DeleteFpMethodUndecided.sql" />
+    <None Remove="Scripts\2.2.0\62_HTSLABRegister.sql" />
     <None Remove="Scripts\2.2.0\IQTools\01_PatientPopulationView.sql" />
     <None Remove="Scripts\2.2.0\IQTools\02_HTS_LABRegisternewer.sql" />
     <None Remove="Scripts\2.2.0\IQTools\03_ANCRegister.sql" />
@@ -789,6 +790,7 @@
     <EmbeddedResource Include="Scripts\2.2.0\64_UpdateSelfTestReferral.sql" />
     <EmbeddedResource Include="Scripts\2.2.0\65_UpdateHeiRegimenDisplayName.sql" />
     <EmbeddedResource Include="Scripts\2.2.0\66_DeleteFpMethodUndecided.sql" />
+    <EmbeddedResource Include="Scripts\2.2.0\62_HTSLABRegister.sql" />
     <EmbeddedResource Include="Scripts\2.2.0\IQTools\01_PatientPopulationView.sql" />
     <EmbeddedResource Include="Scripts\2.2.0\IQTools\02_HTS_LABRegisternewer.sql" />
     <EmbeddedResource Include="Scripts\2.2.0\IQTools\03_ANCRegister.sql" />

@@ -1506,7 +1506,10 @@
                         };
 
                         if (regimen > 0) {
-                            ExistingRegimenLine = DrugTableArray.filter(x => x.Regimen.toString() !== regimen.toString())
+                            console.log("DrugTableArray", DrugTableArray);
+                            ExistingRegimenLine = DrugTableArray.filter(x => x.RegimenId.toString() !== regimen.toString());
+                            console.log("ExistingRegimenLine", ExistingRegimenLine);
+                            console.log("regimen", regimen);
                             if (ExistingRegimenLine.length > 0) {
                                  toastr.error("Regimen", "Kindly one cannot have different regimen at the same time. Kindly prescibe the correct regimen" 
                                    );
@@ -1720,7 +1723,9 @@
                         };
 
                         if (regimen > 0) {
-                            ExistingRegimenLine = DrugTableArray.filter(x => x.Regimen.toString() !== regimen.toString())
+                            console.log('DrugTableArray', DrugTableArray);
+                            ExistingRegimenLine = DrugTableArray.filter(x => x.RegimenId.toString() !== regimen.toString());
+                            console.log('ExistingRegimenLine', ExistingRegimenLine);
                             if (ExistingRegimenLine.length > 0) {
                                  toastr.error("Regimen", "Kindly one cannot have different regimen at the same time. Kindly prescibe the correct regimen" 
                                    );
