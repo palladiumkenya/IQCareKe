@@ -45,6 +45,10 @@ const routes: Routes = [
         loadChildren: '../prep/prep.module#PrepModule'
     },
     {
+        path: 'ccc',
+        loadChildren: '../ccc/ccc.module#CccModule'
+    },
+    {
         path: 'queue',
         loadChildren: '../queue/queue.module#QueueModule'
     },

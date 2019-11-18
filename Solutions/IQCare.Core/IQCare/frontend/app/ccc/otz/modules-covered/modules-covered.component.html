@@ -1,0 +1,46 @@
+<h2 mat-dialog-title>{{title}}</h2>
+
+<mat-divider></mat-divider>
+<br>
+
+<form class="form-group" novalidate [formGroup]="form">
+    <div class="row">
+        <div class="col-md-6 col-xs-12">
+            <mat-form-field class="col-md-12">
+                <mat-select formControlName="topic" placeholder="Topic" required>
+                    <mat-option value="">Select</mat-option>
+                    <mat-option *ngFor="let topic of topics" [value]="topic">
+                        {{ topic.itemName }}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+
+        <div class="col-md-6 col-xs-12">
+            <mat-form-field class="col-md-12">
+                <input formControlName="dateCompleted" id="dateCompleted" name="dateCompleted" matInput (focus)="dateCompleted.open()"
+                       [matDatepicker]="dateCompleted" placeholder="Date Completed">
+                <mat-datepicker-toggle matSuffix [for]="dateCompleted"></mat-datepicker-toggle>
+                <mat-datepicker #dateCompleted></mat-datepicker>
+            </mat-form-field>
+        </div>
+    </div>
+    
+    <div class="row">
+        <div class="col-md-2 col-xs-12">
+            <button mat-raised-button class="mat-primary" (click)="Save()">
+                <span class="fa fa-plus-circle">
+                    Add
+                </span>
+            </button>
+        </div>
+
+        <div class="col-md-2 col-xs-12">
+            <button mat-raised-button class="mat-warn" (click)="Close()">
+                <span class="fa fa-plus-circle">
+                    Close
+                </span>
+            </button>
+        </div>
+    </div>
+</form>

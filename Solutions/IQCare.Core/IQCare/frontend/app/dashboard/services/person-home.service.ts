@@ -39,6 +39,7 @@ export class PersonHomeService {
             catchError(this.errorHandler.handleError<PersonView>('getPatientByPersonId'))
         );
     }
+    
     public getHTSEncounterDetailsBypersonId(personId: number): Observable<any[]> {
         return this.http.get<EncounterDetails[]>(this.API_URL + this._htsurl + '/getEncounterDetailsByPersonId/' + personId).pipe(
             tap(getHTSEncounterDetailsBypersonId => this.errorHandler.log('fetched a single client encounter details')),

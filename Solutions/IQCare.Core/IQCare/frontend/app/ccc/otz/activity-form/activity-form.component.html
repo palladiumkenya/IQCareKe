@@ -1,0 +1,155 @@
+<div class="row">
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        <div class="row">
+            <div class="col-lg-12 col-sm-6 col-xs-12">
+                <div class="widget">
+                    <div class="widget-header bordered-bottom bordered-sky">
+                        <span class="widget-caption"> OTZ | ACTIVITY FORM </span>
+                    </div>
+                    <div class="widget-body">
+                        <form [formGroup]="OtzActivityForm">
+                            <div class="row">
+                                <div class="col-lg-3 col-sm-3 col-xs-12">
+                                    <mat-form-field class="col-md-12">
+                                        <mat-label>Visit Date:</mat-label>
+                                        <input formControlName="visitDate" [max]="maxDate" id="visitDate" name="visitDate" matInput (focus)="visitDate.open()"
+                                               [matDatepicker]="visitDate" >
+                                        <mat-datepicker-toggle matSuffix [for]="visitDate"></mat-datepicker-toggle>
+                                        <mat-datepicker #visitDate></mat-datepicker>
+                                    </mat-form-field>
+                                </div>
+                                
+                                <div class="col-lg-3 col-sm-3 col-xs-12">
+                                    <mat-form-field class="col-md-12">
+                                        <mat-label>Date enrolled to OTZ:</mat-label>
+                                        <input formControlName="otzEnrollmentDate" [max]="maxDate" id="otzEnrollmentDate" name="otzEnrollmentDate" matInput (focus)="otzEnrollmentDate.open()"
+                                               [matDatepicker]="otzEnrollmentDate" >
+                                        <mat-datepicker-toggle matSuffix [for]="otzEnrollmentDate"></mat-datepicker-toggle>
+                                        <mat-datepicker #otzEnrollmentDate></mat-datepicker>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                            
+                            <mat-divider></mat-divider>
+                            
+                            <div class="row">
+                                &nbsp;&nbsp;
+                            </div>
+                            
+                            <div class="row">
+                                <div class="col-lg-12 col-xs-12">
+                                    <div class="example-container mat-elevation-z0">
+                                        <mat-table #table [dataSource]="dataSource">
+                                            
+                                            <ng-container matColumnDef="module">
+                                                <mat-header-cell *matHeaderCellDef> OTZ Module </mat-header-cell>
+                                                <mat-cell *matCellDef="let element"> {{ element.moduleCompleted.itemName }} </mat-cell>
+                                            </ng-container>
+
+                                            <ng-container matColumnDef="dateCovered">
+                                                <mat-header-cell *matHeaderCellDef> Date Covered </mat-header-cell>
+                                                <mat-cell *matCellDef="let element"> {{element.dateCompleted | date: 'dd-MMM-yyyy' }} </mat-cell>
+                                            </ng-container>
+                                            
+                                            <ng-container matColumnDef="action">
+                                                <mat-header-cell *matHeaderCellDef></mat-header-cell>
+                                                <mat-cell *matCellDef="let row">
+                                                    <button mat-raised-button class="mat-accent" (click)="onRowClicked(row)">
+                                                        <span class="fa fa-trash-o">Delete</span>
+                                                    </button>
+                                                </mat-cell>
+                                            </ng-container>
+
+                                            <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                                            <mat-row *matRowDef="let row; columns: displayedColumns">
+                                            </mat-row>
+                                        </mat-table>                                        
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                &nbsp;&nbsp;
+                            </div>
+
+                            <div class="row">
+                                <div class="col-lg-2 col-md-2 col-sm-2">
+                                    <div class="form-group">
+                                        <button mat-raised-button class="mat-primary" (click)="NewTopicCovered()">
+                                            <span class="fa fa-plus-circle">
+                                                Topics Covered
+                                            </span>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="row">
+                                &nbsp;&nbsp;
+                            </div>
+
+                            <mat-divider></mat-divider>
+                            
+                            <div class="row">
+                                <div class="col-lg-3 col-sm-3 col-xs-12">
+                                    <mat-form-field class="col-md-12">
+                                        <mat-select placeholder="Attended support Group?" name="attendedSupportGroup" id="attendedSupportGroup"
+                                                    formControlName="attendedSupportGroup">
+                                            <mat-option [value]=""></mat-option>
+                                            <mat-option *ngFor="let option of yesNoOptions" [value]="option">
+                                                {{ option.itemName }}
+                                            </mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                &nbsp;
+                            </div>
+                            
+                            <div class="row">
+                                <div class="col-lg-3 col-sm-3 col-xs-12">
+                                    <mat-form-field class="col-md-12">
+                                        <mat-select placeholder="Provider" name="provider" id="provider"
+                                                    formControlName="provider">
+                                            <mat-option [value]=""></mat-option>
+                                            <mat-option *ngFor="let provider of providers" [value]="provider">
+                                                {{ provider.userFirstName + ' ' + provider.userLastName }}
+                                            </mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+                                </div>
+                                
+                                <div class="col-lg-3 col-sm-3 col-xs-12">
+                                    <mat-form-field class="col-md-12">
+                                        <input matInput placeholder="Remarks" id="remarks"
+                                               formControlName="remarks" name="remarks">
+                                    </mat-form-field>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-lg-2 col-md-2 col-sm-2">
+                                    <div class="form-group pull-right">
+                                        <button type="submit" mat-raised-button color="warn">
+                                            <strong>Close</strong>
+                                        </button>
+                                    </div>
+                                </div>
+                                
+                                <div class="col-lg-2 col-md-2 col-sm-2">
+                                    <div class="form-group pull-right">
+                                        <button type="submit" mat-raised-button color="primary" (click)="validate()">
+                                            <strong>Save Changes</strong>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

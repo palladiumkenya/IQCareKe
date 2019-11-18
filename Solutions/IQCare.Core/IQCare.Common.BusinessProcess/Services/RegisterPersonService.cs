@@ -749,7 +749,7 @@ namespace IQCare.Common.BusinessProcess.Services
             }
         }
 
-        public async Task DynamicEnrollment(int patientId, int serviceAreaId, int createdBy, DateTime dateOfEnrollment, List<ServiceIdentifiersList> serviceIdentifiersList)
+        public async Task DynamicEnrollment(int patientId, int serviceAreaId, int createdBy, DateTime dateOfEnrollment, List<ServiceIdentifiersList> serviceIdentifiersList, bool transferIn)
         {
             try
             {
