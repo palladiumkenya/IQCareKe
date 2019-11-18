@@ -17,5 +17,7 @@ namespace IQCare.Prep.Core.Models
         public DateTime? EncounterStartTime { get; set; }
         public string PreStatus { get; set; }
         public string ProviderName { get; set; }
+
+        public DateTime? VisitDate { get; set; }
     }
 }

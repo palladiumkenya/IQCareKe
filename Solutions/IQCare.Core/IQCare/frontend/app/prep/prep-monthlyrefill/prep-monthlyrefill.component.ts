@@ -153,6 +153,11 @@ export class PrepMonthlyrefillComponent implements OnInit {
             Remarks: new FormControl('')
         });
 
+
+        if (localStorage.getItem('PrepVisitDate') != null && localStorage.getItem('PrepVisitDate') != undefined) {
+            this.PrepMonthlyRefillFormGroup.controls.visitDate.setValue(moment(localStorage.getItem('PrepVisitDate')).toDate());
+        }
+
         this.PrepMonthlyRefillFormGroup.controls.adherenceassessmentreasons.disable({ onlySelf: true });
         this.PrepMonthlyRefillFormGroup.controls.SpecifyAssessmentReason.setValue('');
         this.PrepMonthlyRefillFormGroup.controls.SpecifyAssessmentReason.disable({ onlySelf: true });
@@ -644,9 +649,11 @@ export class PrepMonthlyrefillComponent implements OnInit {
     }
     public Cancel() {
         this.zone.run(() => {
-            this.router.navigate(['/prep/' + '/' + this.patientId + '/' + this.personId + '/'
-                + this.serviceAreaId],
-                { relativeTo: this.route });
+            this.zone.run(() => {
+                this.router.navigate(
+                    ['/prep/prepfollowupworkflow/' + this.patientId + '/' + this.personId + '/' + this.serviceAreaId],
+                    { relativeTo: this.route });
+            });
         });
     }
     public Save() {
@@ -877,9 +884,12 @@ export class PrepMonthlyrefillComponent implements OnInit {
                                     this.notificationService.getConfig());
 
                                 this.zone.run(() => {
-                                    this.router.navigate(['/prep/' + '/' + this.patientId + '/' + this.personId + '/'
-                                        + this.serviceAreaId],
-                                        { relativeTo: this.route });
+                                    this.zone.run(() => {
+                                        this.router.navigate(
+                                            ['/prep/prepfollowupworkflow/' + this.patientId + '/' +
+                                                this.personId + '/' + this.serviceAreaId],
+                                            { relativeTo: this.route });
+                                    });
                                 });
                             },
                             (error) => {

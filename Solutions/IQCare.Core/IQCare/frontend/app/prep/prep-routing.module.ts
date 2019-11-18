@@ -13,6 +13,7 @@ import { PregnancyOutcomeResolver } from './_services/PregnancyOutcome.resolver'
 import { PrepStatusResolver } from './_services/prep-status.resolver';
 import { PrepContraindicationsResolver } from './_services/prep-contraindications.resolver';
 import { PrepVisitcheckinComponent } from './prep-visitcheckin/prep-visitcheckin.component';
+import {FormSettingsResolver} from './_services/resolvers/CurrentFormSettings.resolver';
 import {
     AssessmentOutcomeResolver, ClientsBehaviourRiskResolver, SexualPartnetHivStatusProfileResolver,
     RiskReductionEducationResolver, ReferralPreventionServicesResolver, ClientWillingTakePrepResolver
@@ -92,6 +93,7 @@ const routes: Routes = [
                     PersonVitalsArray: PersonCurrentVitalsResolver,
                     RiskAssessmentArray: RiskEncounterResolver,
                     HTSEncounterHistoryArray: HTSEncounterHistoryResolver,
+                    FormSettingsArray: FormSettingsResolver
 
                 }
 

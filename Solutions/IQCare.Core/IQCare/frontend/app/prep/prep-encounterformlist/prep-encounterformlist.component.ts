@@ -16,6 +16,7 @@ import { MatTableDataSource, MatDialog, MatDialogConfig } from '@angular/materia
 import { LookupItemView } from '../../shared/_models/LookupItemView';
 import { PersonHomeService } from '../../dashboard/services/person-home.service';
 import * as moment from 'moment';
+import { PrepVisitcheckinComponent } from '../prep-visitcheckin/prep-visitcheckin.component';
 @Component({
     selector: 'app-prep-encounterformlist',
     templateUrl: './prep-encounterformlist.component.html',
@@ -37,6 +38,12 @@ export class PrepEncounterformlistComponent implements OnInit {
     patientIdentifiers: any[];
     identifiers: any[] = [];
     services: any[] = [];
+    VisitCheckinDate: Date;
+    VisitCheckinPatientId: number;
+    CurrentDate: Date;
+    CheckinVisible: boolean = true;
+    CheckOutVisible: boolean = false;
+
     constructor(
         private notificationService: NotificationService,
         private dialog: MatDialog,
@@ -72,14 +79,97 @@ export class PrepEncounterformlistComponent implements OnInit {
         this.getAllServices();
         this.getPersonEnrolledServices(this.personId);
         this.GetPrepRiskassessmentVisits();
-        console.log(this.riskassessmentvisits);
+
+
+
+
+
 
         this.Encounterformlistgroup = this._formBuilder.group({
-           // encounterforms: new FormControl('', [Validators.required]),
+            // encounterforms: new FormControl('', [Validators.required]),
         });
 
 
-       
+
+        if (localStorage.getItem('PrepDateRecorded') != null && localStorage.getItem('PrepDateRecorded') != undefined) {
+
+            this.CurrentDate = moment(localStorage.getItem('PrepDateRecorded')).toDate();
+            const today = new Date();
+
+            
+            if (today.getFullYear() !== this.CurrentDate.getFullYear() &&
+                today.getMonth() !== this.CurrentDate.getMonth()
+                && today.getDay() !== this.CurrentDate.getDay() ) {
+                 this.CheckOut();
+            }
+        }
+
+
+
+        if (localStorage.getItem('PrepVisitDate') != null && localStorage.getItem('PrepVisitDate') != undefined) {
+            this.VisitCheckinDate = moment(localStorage.getItem('PrepVisitDate')).toDate();
+        }
+        if (localStorage.getItem('prepCheckinPatientId') != null && localStorage.getItem('prepCheckinPatientId') != undefined) {
+            this.VisitCheckinPatientId = parseInt(localStorage.getItem('prepCheckinPatientId').toString(), 10);
+        }
+        if (this.VisitCheckinPatientId !== null && this.VisitCheckinPatientId !== undefined) {
+
+            if (this.VisitCheckinPatientId == this.patientId) {
+                this.CheckinVisible = false;
+                this.CheckOutVisible = true;
+
+                if (this.VisitCheckinDate !== null && this.VisitCheckinDate !== undefined) {
+                    this.CheckinVisible = false;
+                    this.CheckOutVisible = true;
+
+                }
+            }
+            else {
+                this.CheckinVisible = true;
+                this.CheckOutVisible = false;
+            }
+
+
+
+        }
+
+
+
+
+
+    }
+
+    CheckOut() {
+
+        let servicecheckoutid: number;
+                let emrmode: number;
+                servicecheckoutid = parseInt(localStorage.getItem('PrepCheckInId').toString(), 10);
+                this.VisitCheckinDate = moment(localStorage.getItem('PrepVisitDate')).toDate();
+
+                emrmode = parseInt(localStorage.getItem('PrepCheckinEmrModenumber').toString(), 10);
+                this.prepService.PatientCheckout(this.patientId, servicecheckoutid, this.serviceAreaId, this.userId
+                    , this.VisitCheckinDate, emrmode,
+                    2, false).subscribe((res) => {
+                        let servicecheckId: number;
+                        if (res['id'] != null) {
+                            servicecheckId = parseInt(res['id'], 10);
+                            if (servicecheckId > 0) {
+                                console.log(res['message'].toString());
+                               
+
+                                localStorage.removeItem('PrepCheckinEmrMode');
+                                localStorage.removeItem('PrepCheckInId');
+                                localStorage.removeItem('PrepCheckinEmrMode');
+                                localStorage.removeItem('PrepVisitDate');
+                                localStorage.removeItem('prepCheckinPatientId');
+                                localStorage.removeItem('PrepCheckinEmrModenumber');
+                                localStorage.removeItem('PrepDateRecorded');
+
+
+                               
+                            }
+                        }
+                    });
 
     }
 
@@ -292,13 +382,33 @@ export class PrepEncounterformlistComponent implements OnInit {
     }
 
     patientCheckin() {
-        this.zone.run(() => {
-            this.zone.run(() => {
-                this.router.navigate(
-                    ['/prep/prepvisitcheckin/' + this.patientId + '/' + this.personId + '/' + this.serviceAreaId],
-                    { relativeTo: this.route });
+        const resultsDialogConfig = new MatDialogConfig();
+
+        resultsDialogConfig.disableClose = false;
+        resultsDialogConfig.autoFocus = true;
+
+        resultsDialogConfig.data = {
+            patientId: this.patientId,
+            personId: this.personId,
+            serviceId: this.serviceAreaId
+
+        };
+
+        const dialogRef = this.dialog.open(PrepVisitcheckinComponent, resultsDialogConfig);
+        dialogRef.afterClosed().subscribe(
+            data => {
+                if (!data) {
+                    return;
+                }
+                console.log(data);
             });
-        });
+        /*  this.zone.run(() => {
+              this.zone.run(() => {
+                  this.router.navigate(
+                      ['/prep/prepvisitcheckin/' + this.patientId + '/' + this.personId + '/' + this.serviceAreaId],
+                      { relativeTo: this.route });
+              });
+          });*/
     }
     clickEncounter() {
         this.zone.run(() => {
@@ -310,7 +420,7 @@ export class PrepEncounterformlistComponent implements OnInit {
         });
 
     }
-    monthlyrefillencounter(){
+    monthlyrefillencounter() {
         this.zone.run(() => {
             this.zone.run(() => {
                 this.router.navigate(

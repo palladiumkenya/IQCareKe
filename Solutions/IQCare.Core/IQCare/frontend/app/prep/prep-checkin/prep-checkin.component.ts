@@ -36,6 +36,12 @@ export class PrepCheckinComponent implements OnInit {
             //  visitType: new FormControl('', [Validators.required]),
             visitdate: new FormControl('', [Validators.required])
         });
+
+
+
+        if (localStorage.getItem('PrepVisitDate') != null && localStorage.getItem('PrepVisitDate') != undefined) {
+            this.form.controls.visitdate.setValue(moment(localStorage.getItem('PrepVisitDate')).toDate());
+        }
     }
 
     save() {

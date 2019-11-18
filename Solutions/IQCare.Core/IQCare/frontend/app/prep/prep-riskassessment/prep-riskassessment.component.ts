@@ -203,7 +203,9 @@ export class PrepRiskassessmentComponent implements OnInit {
 
         this.PrepRiskAssessmentFormGroup.controls.discontinueReason.disable({ onlySelf: true });
 
-
+        if (localStorage.getItem('PrepVisitDate') != null && localStorage.getItem('PrepVisitDate') != undefined) {
+            this.PrepRiskAssessmentFormGroup.controls.visitDate.setValue(moment(localStorage.getItem('PrepVisitDate')).toDate());
+        }
 
 
 
@@ -1551,11 +1553,25 @@ export class PrepRiskassessmentComponent implements OnInit {
                                 this.snotifyService.success('Successfully submitted the form', 'Submit RiskAssessment Form',
                                     this.notificationService.getConfig());
 
-                                this.zone.run(() => {
-                                    this.router.navigate(
-                                        ['/dashboard/personhome/' + this.personId],
-                                        { relativeTo: this.route });
-                                });
+
+                                if (localStorage.getItem('PrepVisitDate') != null &&
+                                    localStorage.getItem('PrepVisitDate') != undefined) {
+                                    this.zone.run(() => {
+                                        this.zone.run(() => {
+                                            this.router.navigate(
+                                                ['/prep/prepfollowupworkflow/' + this.patientId + '/' +
+                                                    this.personId + '/' + this.serviceAreaId],
+                                                { relativeTo: this.route });
+                                        });
+                                    });
+                                } else {
+
+                                    this.zone.run(() => {
+                                        this.router.navigate(
+                                            ['/dashboard/personhome/' + this.personId],
+                                            { relativeTo: this.route });
+                                    });
+                                }
                             },
                             (error) => {
                                 this.snotifyService.error('Error submitting the form' + error, 'Submit RiskAssessment Form',
@@ -1586,10 +1602,35 @@ export class PrepRiskassessmentComponent implements OnInit {
 
     public Cancel() {
 
-        this.zone.run(() => {
-            this.router.navigate(
-                ['/dashboard/personhome/' + this.personId],
-                { relativeTo: this.route });
-        });
+        if (this.PatientMasterVisitId > 0) {
+            this.zone.run(() => {
+                this.router.navigate(
+                    ['/dashboard/personhome/' + this.personId],
+                    { relativeTo: this.route });
+            });
+
+        } else {
+
+            if (localStorage.getItem('PrepVisitDate') != null &&
+                localStorage.getItem('PrepVisitDate') != undefined) {
+                this.zone.run(() => {
+                    this.zone.run(() => {
+                        this.router.navigate(
+                            ['/prep/prepfollowupworkflow/' + this.patientId + '/' +
+                                this.personId + '/' + this.serviceAreaId],
+                            { relativeTo: this.route });
+                    });
+                });
+            } else {
+
+                this.zone.run(() => {
+                    this.router.navigate(
+                        ['/dashboard/personhome/' + this.personId],
+                        { relativeTo: this.route });
+                });
+            }
+
+        }
+
     }
 }

@@ -75,6 +75,7 @@ export class PrepComponent implements OnInit {
     ClientTypes: any[] = [];
     entrypoints: LookupItemView[] = [];
     PrepRegimen: LookupItemView[] = [];
+    PatientEncounterId: number;
     ChronicIllnessFormGroup: Object[][];
     keyPops: LookupItemView[] = [];
     disPops: LookupItemView[] = [];
@@ -160,8 +161,8 @@ export class PrepComponent implements OnInit {
             });
         });
 
-       
-       
+
+
 
     }
 
@@ -337,7 +338,7 @@ export class PrepComponent implements OnInit {
                 this.filteredfacilities = res['facilityList'];
             });
         });
-       
+
 
         this.form.controls.Specify.disable({ onlySelf: true });
         this._lookupItemService.getByGroupName('DiscordantCouple').subscribe(
@@ -529,16 +530,16 @@ export class PrepComponent implements OnInit {
 
     }
     OnEnrollmentChange(event) {
-       
-        let EnrollDate: Date;
-       EnrollDate = this.form.controls.EnrollmentDate.value;
-       if (EnrollDate !== undefined && EnrollDate !== null && EnrollDate.toString() !== '') {
-           this.minNextDate = EnrollDate;
 
-       }
-       else {
-           this.minNextDate = new Date();
-       }
+        let EnrollDate: Date;
+        EnrollDate = this.form.controls.EnrollmentDate.value;
+        if (EnrollDate !== undefined && EnrollDate !== null && EnrollDate.toString() !== '') {
+            this.minNextDate = EnrollDate;
+
+        }
+        else {
+            this.minNextDate = new Date();
+        }
     }
     Oncontraindications(event) {
         const value = event.source.value;
@@ -610,8 +611,8 @@ export class PrepComponent implements OnInit {
         console.log(this.form.controls.adherenceCounselling.value);
 
     }
-    loadPrepStatus(patientid: number, patientmastervisitid: number): void {
-        this.prepService.getPrepStatus(patientid, patientmastervisitid).subscribe(
+    loadPrepStatus(patientid: number, patientencounterId: number): void {
+        this.prepService.getPrepStatus(patientid, patientencounterId).subscribe(
             (res) => {
                 console.log('PrepStatus');
                 console.log(res);
@@ -703,6 +704,7 @@ export class PrepComponent implements OnInit {
                 const stiTreatmentOfferedObject = this.screenedForSTIOptions.filter(obj => obj.itemName == 'STITreatmentOffered');
                 const othersItem = this.stiScreeningOptions.filter(obj => obj.itemName == 'Others (O)');
 
+
                 if (res.length > 0) {
                     console.log('STIScreening');
                     console.log(res);
@@ -712,8 +714,10 @@ export class PrepComponent implements OnInit {
                         } else if (element.screeningTypeName == 'ScreenedForSTI'
                             && element.screeningCategoryId == stiSignsAndSymptomsObject[0].itemId) {
                             STISymptoms.push(element.screeningValueId);
-                            if (element.screeningValueId == othersItem[0].itemId) {
-                                this.form.controls.Specify.setValue(element.comment);
+                            if (othersItem.length > 0 && othersItem !== null && othersItem !== undefined) {
+                                if (element.screeningValueId == othersItem[0].itemId) {
+                                    this.form.controls.Specify.setValue(element.comment);
+                                }
                             }
 
                         } else if (element.screeningTypeName == 'ScreenedForSTI'
@@ -902,11 +906,12 @@ export class PrepComponent implements OnInit {
                 if (result) {
 
                     const yesOption = this.yesnoOptions.filter(obj => obj.itemName == 'Yes');
-                    this.form.get('nextAppointmentDate').setValue(result.appointmentDate);
+
 
                     this.Appointmentid = result.id;
                     //this.form.get('Appointmentid').setValue(result.id);
                     this.form.get('nextAppointmentGiven').setValue(yesOption[0].itemId);
+                    this.form.get('nextAppointmentDate').setValue(result.appointmentDate);
                 } else {
                     const noOption = this.yesnoOptions.filter(obj => obj.itemName == 'No');
                     this.form.get('nextAppointmentGiven').setValue(noOption[0].itemId);
@@ -923,7 +928,7 @@ export class PrepComponent implements OnInit {
 
     onAppointmentSelection(event) {
         this.form.controls.nextAppointmentDate.disable({ onlySelf: true });
-         this.form.controls.nextAppointmentDate.setValue('');
+        this.form.controls.nextAppointmentDate.setValue('');
         if (event.isUserInput && event.source.selected && event.source.viewValue == 'No') {
 
 
@@ -932,18 +937,18 @@ export class PrepComponent implements OnInit {
             this.form.controls.nextAppointmentDate.setValue('');
         } else if (event.isUserInput && event.source.selected && event.source.viewValue == 'Yes') {
             // enable date 
-          
-            this.form.controls.nextAppointmentDate.enable({ onlySelf: true }); 
-             let EnrollDate: Date;
+
+            this.form.controls.nextAppointmentDate.enable({ onlySelf: true });
+            let EnrollDate: Date;
             EnrollDate = this.form.controls.EnrollmentDate.value;
             if (EnrollDate !== undefined && EnrollDate !== null && EnrollDate.toString() !== '') {
                 this.minNextDate = EnrollDate;
-    
+
             }
             else {
                 this.minNextDate = new Date();
             }
-    
+
 
 
 
@@ -953,6 +958,9 @@ export class PrepComponent implements OnInit {
         this.personHomeService.getPatientEnrollmentMasterVisitByServiceAreaId(patientId, this.serviceId).subscribe(
             (result) => {
 
+                console.log('load enrollemtPatientMasterVisitId');
+                console.log('loadPatientEncounter');
+                console.log(result);
                 this.patientMasterVisitId = result[0]['id'];
                 this.loadPregnancyIndicator(this.patientMasterVisitId, patientId);
                 this.loadAppointments(patientId, this.patientMasterVisitId);
@@ -1911,7 +1919,7 @@ export class PrepComponent implements OnInit {
             Months, Referredfrom, isClientCircumcised, lmp, pregnant,
             pregnancyPlanned, breastFeeding, onFamilyPlanning, DateLastUsed,
             familyPlanningMethods, planningToGetPregnant,
-            id_familyPlanning, fpMethodId, nextAppointmentDate, nextAppointmentGiven, Appointmentid, PartnerHivStatus
+            id_familyPlanning, fpMethodId, nextAppointmentDate, nextAppointmentGiven, Appointmentid, PartnerHivStatus, PrEPStatusToday,adherenceCounselling,condomsIssued,noCondomsIssued
         } = this.form.value;
         // this.personPopulation.KeyPopulation = KeyPopulation;
         //this.personPopulation.populationType = populationType;
@@ -2083,7 +2091,7 @@ export class PrepComponent implements OnInit {
                                     if (this.patientMasterVisitId != null && this.patientMasterVisitId > 0) {
                                         const yes = this.yesnoOptions.filter(x => x.itemName.toLowerCase() == 'yes');
 
-                                        const PrepStatusToday = this.form.controls.PrEPStatusToday.value;
+                                        const PrepStatusToday = PrEPStatusToday
                                         if (PrepStatusToday) {
                                             const statusname = this.prepStatusOptions.filter(x => x.itemId == parseInt(PrepStatusToday.toString(), 10));
                                             if (statusname.length > 0) {
@@ -2251,11 +2259,11 @@ export class PrepComponent implements OnInit {
                                                 PatientId: this.patientId,
                                                 PatientEncounterId: this.patientMasterVisitId,
                                                 SignsOrSymptomsHIV: this.form.controls.signsOrSymptomsHIV.value,
-                                                AdherenceCounsellingDone: this.form.controls.adherenceCounselling.value == "" ? 0 : this.form.controls.adherenceCounselling.value,
-                                                PrepStatusToday: this.form.controls.PrEPStatusToday.value == "" ? 0 : this.form.controls.PrEPStatusToday.value,
+                                                AdherenceCounsellingDone: adherenceCounselling == ""  ? 0 : adherenceCounselling,
+                                                PrepStatusToday: PrEPStatusToday == ""  ? 0 : PrEPStatusToday,
                                                 CreatedBy: this.userId,
-                                                CondomsIssued: this.form.controls.condomsIssued.value == "" ? 0 : this.form.controls.condomsIssued.value,
-                                                NoOfCondoms: this.form.controls.noCondomsIssued.value == "" ? 0 : this.form.controls.noCondomsIssued.value,
+                                                CondomsIssued:condomsIssued == ""  ? 0 : condomsIssued,
+                                                NoOfCondoms: noCondomsIssued == "" ? 0 : noCondomsIssued,
                                                 DateField: EnrollmentDate
                                             };
 
@@ -2276,11 +2284,11 @@ export class PrepComponent implements OnInit {
                                                 PatientId: this.patientId,
                                                 PatientEncounterId: this.patientMasterVisitId,
                                                 SignsOrSymptomsHIV: this.form.controls.signsOrSymptomsHIV.value,
-                                                AdherenceCounsellingDone: this.form.controls.adherenceCounselling.value == "" ? 0 : this.form.controls.adherenceCounselling.value,
-                                                PrepStatusToday: this.form.controls.PrEPStatusToday.value == "" ? 0 : this.form.controls.PrEPStatusToday.value,
+                                                AdherenceCounsellingDone:adherenceCounselling== ""  ? 0 : adherenceCounselling,
+                                                PrepStatusToday: PrEPStatusToday== "" ? 0 : PrEPStatusToday,
                                                 CreatedBy: this.userId,
-                                                CondomsIssued: this.form.controls.condomsIssued.value == "" ? 0 : this.form.controls.condomsIssued.value,
-                                                NoOfCondoms: this.form.controls.noCondomsIssued.value == "" ? 0 : this.form.controls.noCondomsIssued.value,
+                                                CondomsIssued: condomsIssued == "" ? 0 : condomsIssued,
+                                                NoOfCondoms: noCondomsIssued == "" ? 0 : noCondomsIssued,
                                                 DateField: EnrollmentDate
                                             };
 

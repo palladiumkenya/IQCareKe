@@ -7,6 +7,8 @@ import { CommonModule } from '@angular/common';
 import { PrepEncounterHistoryComponent } from './prep-encounter-history/prep-encounter-history.component';
 import { PrepRoutingModule } from './prep-routing.module';
 import { PrepEncounterComponent } from './prep-encounter/prep-encounter.component';
+import { PrepConfirmationDialogComponent} from './prep-confirmationdialog/prep-confirmationdialog';
+import {FormSettingsResolver} from './_services/resolvers/CurrentFormSettings.resolver';
 import {
     MatStepperModule, MatButtonModule,
     MatFormFieldModule, MatSelectModule,
@@ -91,7 +93,8 @@ import { PrepVisitcheckinComponent } from './prep-visitcheckin/prep-visitcheckin
         PrepRiskassessmentgriddetailsComponent,
         PrepFollowupworkflowComponent,
         PrepMonthlyrefillworkflowComponent,
-        PrepVisitcheckinComponent
+        PrepVisitcheckinComponent,
+        PrepConfirmationDialogComponent
     ],
     imports: [
         SharedModule, MatDatepickerModule, MatNativeDateModule,
@@ -114,7 +117,7 @@ import { PrepVisitcheckinComponent } from './prep-visitcheckin/prep-visitcheckin
         PatientIdentifierResolver, ARTStartDateResolver, PartnerHIVStatusResolver,
         DurationResolver, SexWithoutCondomResolver, HivPartnerResolver,
         ReasonsPrepAppointmentNotGivenResolver, PrepEncounterTypeResolver,
-        PregnancyStatusResolver, ScreenedForSTIResolver,
+        PregnancyStatusResolver, ScreenedForSTIResolver,FormSettingsResolver,
         PrepCareEndReasonResolver, PrepAdherenceResolver, AdherenceAssessmentReasonsResolver, RefillPrepStatusResolver,
         PrepDiscontinueReasonResolver, AdherenceCounsellingResolver, AppointmentGivenResolver, PrepAppointmentReasonResolver,
         HTSEncounterResolver, PersonCurrentVitalsResolver, RiskEncounterResolver, PrepDeclineResolver,
@@ -122,7 +125,10 @@ import { PrepVisitcheckinComponent } from './prep-visitcheckin/prep-visitcheckin
         , SpecifyRiskEducationResolver, SpecifyRiskReductionEducationResolver, RiskAssessmentDoneResolver
     ],
     entryComponents: [
-        PrepCheckinComponent
+        PrepCheckinComponent,
+        PrepVisitcheckinComponent,
+        PrepConfirmationDialogComponent
+
     ]
 })
 export class PrepModule { }

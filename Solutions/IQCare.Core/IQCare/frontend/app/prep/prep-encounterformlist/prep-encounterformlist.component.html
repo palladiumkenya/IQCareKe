@@ -25,24 +25,19 @@
                                     </a>
                          </div>
                          <span>&nbsp;</span>
-                         <div class="button-row pull-right">
+                         <div class="button-row pull-right" *ngIf="CheckinVisible ">
                             <a mat-raised-button color="accent" (click)="patientCheckin()">
                                 <i class="fa fa-plus"></i>
                                 <span>Patient Checkin</span>
                             </a>
                     </div>
-                        <div class="button-row pull-right">
+                        <div class="button-row pull-right" *ngIf="CheckOutVisible ">
                                 <a mat-raised-button color="accent" (click)="clickEncounter()">
                                     <i class="fa fa-plus"></i>
-                                    <span>New PrEP Follow up</span>
+                                    <span>PREP FORMS</span>
                                 </a>
                         </div>
-                        <div class="button-row pull-right">
-                            <a mat-raised-button color="accent" (click)="monthlyrefillencounter()">
-                                <i class="fa fa-plus"></i>
-                                <span>New PrEP Monthly Refill</span>
-                            </a>
-                    </div>
+                        
                     </div>
                     <div class="row" style="margin:5px;">
                         <app-prep-patientvitalsinfo [patientId]="patientId"></app-prep-patientvitalsinfo>
