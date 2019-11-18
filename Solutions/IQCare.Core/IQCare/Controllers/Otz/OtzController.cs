@@ -29,5 +29,18 @@ namespace IQCare.Controllers.Otz
                 return Ok(response.Value);
             return BadRequest(response);
         }
+
+        [HttpGet("{patientId}")]
+        public async Task<IActionResult> GetActivityForms(int patientId)
+        {
+            var response = await _mediator.Send(new GetActivityFormsCommand()
+            {
+                PatientId = patientId
+            }, Request.HttpContext.RequestAborted);
+
+            if (response.IsValid)
+                return Ok(response.Value);
+            return BadRequest(response);
+        }
     }
 }

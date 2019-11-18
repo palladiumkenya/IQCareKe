@@ -1,7 +1,7 @@
 import {Component, NgZone, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {MatTableDataSource} from '@angular/material/table';
-import {TopicsTableData} from '../activity-form/activity-form.component';
+import {OtzService} from '../../_services/otz.service';
 
 @Component({
   selector: 'app-encounter-history',
@@ -13,13 +13,14 @@ export class EncounterHistoryComponent implements OnInit {
     serviceId: number;
     personId: number;
 
-    displayedColumns = ['module', 'dateCovered', 'action'];
-    topics_table_data: TopicsTableData[] = [];
+    displayedColumns = ['visitDate', 'attendedSupportGroup', 'provider', 'modulesDone', 'action'];
+    topics_table_data: any[] = [];
     dataSource = new MatTableDataSource(this.topics_table_data);
     
     constructor(private route: ActivatedRoute,
                 public zone: NgZone,
-                private router: Router) { }
+                private router: Router,
+                private otzService: OtzService) { }
     
     async ngOnInit() {
         this.route.params.subscribe(
@@ -30,6 +31,14 @@ export class EncounterHistoryComponent implements OnInit {
                 this.serviceId = serviceId;
             }
         );
+        
+        try {
+            const activityForms = await this.otzService.getActivityForms(this.patientId).toPromise();
+            this.topics_table_data = activityForms;
+            this.dataSource = new MatTableDataSource(this.topics_table_data);
+        } catch (e) {
+            console.log(e);
+        }
     }
 
     onNewOtzClick() {

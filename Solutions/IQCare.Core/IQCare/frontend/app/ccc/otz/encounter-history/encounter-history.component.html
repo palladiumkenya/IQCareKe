@@ -12,14 +12,24 @@
                                 <div class="example-container mat-elevation-z0">
                                     <mat-table #table [dataSource]="dataSource">
 
-                                        <ng-container matColumnDef="module">
-                                            <mat-header-cell *matHeaderCellDef> OTZ Module </mat-header-cell>
-                                            <mat-cell *matCellDef="let element"> {{element.moduleCompleted.Name}} </mat-cell>
+                                        <ng-container matColumnDef="visitDate">
+                                            <mat-header-cell *matHeaderCellDef> Visit Date </mat-header-cell>
+                                            <mat-cell *matCellDef="let element"> {{ element.visitDate | date: 'dd-MMM-yyyy' }} </mat-cell>
                                         </ng-container>
 
-                                        <ng-container matColumnDef="dateCovered">
-                                            <mat-header-cell *matHeaderCellDef> Date Covered </mat-header-cell>
-                                            <mat-cell *matCellDef="let element"> {{element.dateCompleted | date: 'dd-MMM-yyyy' }} </mat-cell>
+                                        <ng-container matColumnDef="attendedSupportGroup">
+                                            <mat-header-cell *matHeaderCellDef> Attended Support Group </mat-header-cell>
+                                            <mat-cell *matCellDef="let element"> {{element.attendedSupportGroup }} </mat-cell>
+                                        </ng-container>
+
+                                        <ng-container matColumnDef="provider">
+                                            <mat-header-cell *matHeaderCellDef> Provider </mat-header-cell>
+                                            <mat-cell *matCellDef="let element"> {{element.provider }} </mat-cell>
+                                        </ng-container>
+
+                                        <ng-container matColumnDef="modulesDone">
+                                            <mat-header-cell *matHeaderCellDef> No Modules Done </mat-header-cell>
+                                            <mat-cell *matCellDef="let element"> {{element.modulesDone }} </mat-cell>
                                         </ng-container>
 
                                         <ng-container matColumnDef="action">

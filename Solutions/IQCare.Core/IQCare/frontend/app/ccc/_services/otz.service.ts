@@ -40,4 +40,11 @@ export class OtzService {
             catchError(this.errorHandler.handleError<LookupItemView[]>('saveOtzEnrollment', []))
         );
     }
+    
+    public getActivityForms(patientId: number): Observable<any> {
+        return this.http.get<any>(this.API_URL + '/api/Otz/GetActivityForms/' + patientId).pipe(
+            tap(getActivityForms => this.errorHandler.log('successfully fetched otz activity forms')),
+            catchError(this.errorHandler.handleError<any>('getActivityForms', []))
+        );
+    }
 }

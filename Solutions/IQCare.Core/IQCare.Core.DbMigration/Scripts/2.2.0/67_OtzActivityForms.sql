@@ -12,6 +12,8 @@ CREATE VIEW
  [dbo].[OtzActivityForms]
 AS
 SELECT 
+ OTZ.Id,
+ PM.PatientId,
  PM.VisitDate,
  AttendedSupportGroup = (SELECT ItemName FROM LookupItemView WHERE ItemId = OTZ.AttendedSupportGroup AND MasterName = 'YesNo'),
  OTZ.Remarks,
