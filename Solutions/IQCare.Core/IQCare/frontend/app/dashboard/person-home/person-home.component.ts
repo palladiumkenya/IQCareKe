@@ -12,7 +12,7 @@ import { EncounterDetails } from '../_model/HtsEncounterdetails';
 import { LookupItemView } from '../../shared/_models/LookupItemView';
 import { LookupItemService } from '../../shared/_services/lookup-item.service';
 
-import {AddWaitingListComponent} from '../../shared/add-waiting-list/add-waiting-list.component';
+import { AddWaitingListComponent } from '../../shared/add-waiting-list/add-waiting-list.component';
 import * as moment from 'moment';
 @Component({
 
@@ -76,7 +76,8 @@ export class PersonHomeComponent implements OnInit {
             const { ExitReasonsArray } = res;
             const { CarendedArray } = res;
             const { HTSEncounterHistoryArray } = res;
-
+            console.log('Resource loaded');
+            console.log(RiskAssessmentArray);
             this.careenddetails = CarendedArray;
 
             this.htshistory = HTSEncounterHistoryArray;
@@ -274,5 +275,5 @@ export class PersonHomeComponent implements OnInit {
 
     }
 
-   
+
 }

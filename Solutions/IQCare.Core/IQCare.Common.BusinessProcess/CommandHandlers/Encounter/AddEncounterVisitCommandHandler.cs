@@ -43,6 +43,8 @@ namespace IQCare.Common.BusinessProcess.CommandHandlers.Encounter
                             });
                         } else
                         {
+                         
+
                             PatientEncounter patientEncount = new PatientEncounter()
                             {
                                 PatientId = request.PatientId,

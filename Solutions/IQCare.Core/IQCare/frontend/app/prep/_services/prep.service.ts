@@ -42,6 +42,22 @@ export class PrepService {
                 catchError(this.errorHandler.handleError<any>('Error adding sti screening details'))
             );
     }
+
+
+    public getHtsEncounterDetailsBypersonIdVisitDate(personId: number, VisitDate: Date): Observable<any> {
+        const Indata = {
+            'personId': personId,
+            'VisitDate': VisitDate
+        };
+
+
+        return this.http.post<any>(this.API_URL + this._htsurl + '/EncounterDetailsByPersonIdByVisitDate'
+            , JSON.stringify(Indata), httpOptions)
+            .pipe(tap(getHtsEncounterDetailsBypersonIdVisitDate => this.errorHandler.log('fetch encounter details by VisitDate')),
+                catchError(this.errorHandler.handleError<any[]>('getHtsEncounterDetailsBypersonIdVisitDate'))
+            );
+
+    }
     public getHTSEncounterDetailsBypersonId(personId: number): Observable<any[]> {
         return this.http.get<EncounterDetails[]>(this.API_URL + this._htsurl + '/getEncounterDetailsByPersonId/' + personId).pipe(
             tap(getHTSEncounterDetailsBypersonId => this.errorHandler.log('fetched a single client encounter details')),
@@ -291,6 +307,35 @@ export class PrepService {
         );
     }
 
+    public getCorrectDisplayForm(patientId: number, visitDate: Date, emrType: string): Observable<any[]> {
+        const Indata = {
+            'PatientId': patientId,
+            'VisitDate': visitDate,
+            'EmrMode': emrType,
+
+        };
+
+        return this.http.post<any[]>(this.PREP_API_URL + '/api/PrepEncounter/GetCorrectDisplayForm', JSON.stringify(Indata)
+            , httpOptions).pipe(
+                tap(getCorrectDisplayForm => this.errorHandler.log(`successfully fetched prep display form`)),
+                catchError(this.errorHandler.handleError<any>('Error fetching prep display form'))
+            );
+    }
+
+    public getPrepEncounterbyVisitDate(patientId: number,serviceAreaId : number,VisitDate:Date = null): Observable<any[]> {
+        const Indata = {
+            'PatientId': patientId,
+            'ServiceAreaId': serviceAreaId,
+            'visitDate':VisitDate
+           
+        };
+
+        return this.http.post<any[]>(this.PREP_API_URL + '/api/PrepEncounter/GetPrepEncountersByVisitDate', JSON.stringify(Indata)
+            , httpOptions).pipe(
+                tap(getPrepEncounterbyVisitDate => this.errorHandler.log(`successfully fetched prep encounters by visitdate`)),
+                catchError(this.errorHandler.handleError<any>('Error fetching prep encounters by visitdate'))
+            );
+    }
     public getPrepEncounterHistory(patientId: number, serviceAreaId: number,
         fromDate: Date = null, toDate: Date = null): Observable<any[]> {
         const Indata = {
@@ -322,6 +367,42 @@ export class PrepService {
     }
 
 
+    public PatientCheckin(patientId: number, ServiceId: number, CreatedBy: number
+        , VisitDate: Date, EmrType: number, Status: number, DeleteFlag: boolean) {
+        const Indata = {
+            'PatientId': patientId,
+            'ServiceId': ServiceId,
+            'UserId': CreatedBy,
+            'EmrType': EmrType,
+            'VisitDate': VisitDate,
+            'Status': Status,
+            'DeleteFlag': DeleteFlag
+        };
+
+        return this.http.post<any>(this.PREP_API_URL + '/api/PrepStatus/PatientCheckin', JSON.stringify(Indata), httpOptions).
+            pipe(tap(PatientCheckin => this.errorHandler.log(`Patient Checked in Successfully`)),
+                catchError(this.errorHandler.handleError<any[]>('PatientCheckIn')));
+    }
+
+
+
+
+    public PatientCheckout(patientId: number, Id: number, ServiceId: number, CreatedBy: number
+        , VisitDate: Date, EmrType: number, Status: number, DeleteFlag: boolean) {
+        const Indata = {
+            'PatientId': patientId,
+            'Id': Id,
+            'ServiceId': ServiceId,
+            'UserId': CreatedBy,
+            'VisitDate': VisitDate,
+            'Status': Status,
+            'DeleteFlag': DeleteFlag
+        };
+
+        return this.http.post<any>(this.PREP_API_URL + '/api/PrepStatus/PatientCheckout', JSON.stringify(Indata), httpOptions).
+            pipe(tap(PatientCheckout => this.errorHandler.log(`Patient Checked out Successfully`)),
+                catchError(this.errorHandler.handleError<any[]>('PatientCheckout')));
+    }
 
 
     public AddMonthlyRefill(patientId: number, PatientMasterVisitId: number, CreatedBy: number, serviceAreaId: number, VisitDate: Date,

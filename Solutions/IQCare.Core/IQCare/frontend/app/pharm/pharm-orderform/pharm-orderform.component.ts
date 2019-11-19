@@ -1108,17 +1108,19 @@ export class PharmOrderformComponent implements OnInit {
         let value: number;
 
         value = event.source.value;
-        console.log(event.source.selected);
-        if (event.source.selected.selected == true) {
-            if (value != undefined) {
+     
+        if (event.soruce.selected != undefined) {
+            if (event.source.selected.selected == true) {
+                if (value != undefined) {
 
-                const regimens = this.regimenlineOptions.filter(x => x.itemId == value);
-                this.pharmacyservice.getPharmacyRegimens(regimens[0].itemDisplayName.toString().replace(/\s/g, '')).subscribe((res) => {
-                    console.log(res);
-                    if (res != null) {
-                        this.regimenOptions = res['regimens'];
-                    }
-                });
+                    const regimens = this.regimenlineOptions.filter(x => x.itemId == value);
+                    this.pharmacyservice.getPharmacyRegimens(regimens[0].itemDisplayName.toString().replace(/\s/g, '')).subscribe((res) => {
+                        console.log(res);
+                        if (res != null) {
+                            this.regimenOptions = res['regimens'];
+                        }
+                    });
+                }
             }
         }
     }

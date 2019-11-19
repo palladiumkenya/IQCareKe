@@ -97,7 +97,7 @@
                                         </ng-template>
                                         <app-milestones (notify)="onMilestonesNotify($event)"
                                             [milestoneOptions]="milestoneOptions" [patientId]="patientId"
-                                            [isEdit]="isEdit" [patientMasterVisitId]="patientMasterVisitId">
+                                            [isEdit]="isEdit" [patientMasterVisitId]="patientMasterVisitId" >
                                         </app-milestones>
                                         <div>
                                             <button mat-raised-button color="primary" matStepperPrevious
@@ -116,7 +116,7 @@
 
                                         <app-hei-hivtesting (notify)="onHivTestingNotify($event)"
                                             [heiHivTestingOptions]="hivtestingOptions" [patientId]="patientId"
-                                            [isEdit]="isEdit" [patientMasterVisitId]="patientMasterVisitId">
+                                            [isEdit]="isEdit" [patientMasterVisitId]="patientMasterVisitId" [ptn_pk]="ptn_pk">
                                         </app-hei-hivtesting>
 
                                         <div>
