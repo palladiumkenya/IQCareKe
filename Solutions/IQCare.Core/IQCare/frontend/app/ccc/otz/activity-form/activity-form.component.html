@@ -31,9 +31,17 @@
                             </div>
                             
                             <mat-divider></mat-divider>
+
+                            <div class="row">
+                                <div class="col-lg-3 col-sm-3 col-xs-12">
+                                    &nbsp;
+                                </div>
+                            </div>
                             
                             <div class="row">
-                                &nbsp;&nbsp;
+                                <div class="col-lg-3 col-sm-3 col-xs-12">
+                                    <strong>New Modules</strong>
+                                </div>
                             </div>
                             
                             <div class="row">
@@ -89,6 +97,51 @@
                             </div>
 
                             <mat-divider></mat-divider>
+
+                            <div class="row">
+                                <div class="col-lg-3 col-sm-3 col-xs-12">
+                                    &nbsp;
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-lg-3 col-sm-3 col-xs-12">
+                                    <strong>All Modules Completed</strong>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-lg-12 col-xs-12">
+                                    <div class="example-container mat-elevation-z0">
+                                        <mat-table #table [dataSource]="allModulesDataSource">
+
+                                            <ng-container matColumnDef="topic">
+                                                <mat-header-cell *matHeaderCellDef> Topic </mat-header-cell>
+                                                <mat-cell *matCellDef="let element"> {{ element.topic }} </mat-cell>
+                                            </ng-container>
+
+                                            <ng-container matColumnDef="dateCompleted">
+                                                <mat-header-cell *matHeaderCellDef> Date Completed </mat-header-cell>
+                                                <mat-cell *matCellDef="let element"> {{element.dateCompleted | date: 'dd-MMM-yyyy' }} </mat-cell>
+                                            </ng-container>
+
+                                            <mat-header-row *matHeaderRowDef="allModulesDisplayedColumns"></mat-header-row>
+                                            <mat-row *matRowDef="let row; columns: allModulesDisplayedColumns">
+                                            </mat-row>
+                                        </mat-table>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                &nbsp;&nbsp;
+                            </div>
+
+                            <mat-divider></mat-divider>
+
+                            <div class="row">
+                                &nbsp;&nbsp;
+                            </div>
                             
                             <div class="row">
                                 <div class="col-lg-3 col-sm-3 col-xs-12">
@@ -132,7 +185,7 @@
                             <div class="row">
                                 <div class="col-lg-2 col-md-2 col-sm-2">
                                     <div class="form-group pull-right">
-                                        <button type="submit" mat-raised-button color="warn">
+                                        <button type="submit" mat-raised-button color="warn" (click)="close()">
                                             <strong>Close</strong>
                                         </button>
                                     </div>

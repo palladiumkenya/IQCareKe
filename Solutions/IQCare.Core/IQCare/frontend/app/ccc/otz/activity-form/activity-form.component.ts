@@ -25,10 +25,15 @@ export class ActivityFormComponent implements OnInit {
     patientId: number;
     serviceId: number;
     personId: number;
+    id: number;
 
     displayedColumns = ['module', 'dateCovered', 'action'];    
     topics_table_data: TopicsTableData[] = [];
     dataSource = new MatTableDataSource(this.topics_table_data);
+
+    allModulesDisplayedColumns = ['topic', 'dateCompleted'];
+    allModulesTableData: any[] = [];
+    allModulesDataSource = new MatTableDataSource(this.allModulesTableData);
     
     constructor(private _formBuilder: FormBuilder,
                 private dialog: MatDialog,
@@ -66,12 +71,39 @@ export class ActivityFormComponent implements OnInit {
 
         this.route.params.subscribe(
             p => {
-                const { patientId, personId, serviceId } = p;
+                const { patientId, personId, serviceId, id } = p;
                 this.patientId = patientId;
                 this.personId = personId;
                 this.serviceId = serviceId;
+                this.id = id;
             }
         );
+        
+        if (this.id) {
+            const result = await this.otzService.getOtzActivityForm(this.id).toPromise();
+            this.OtzActivityForm.get('visitDate').setValue(result.visitDate);
+            this.OtzActivityForm.get('remarks').setValue(result.remarks);
+            const  attendedSupportGroup = this.yesNoOptions.filter(obj => obj.itemName == result.attendedSupportGroup);
+            this.OtzActivityForm.get('attendedSupportGroup').setValue(attendedSupportGroup[0]);
+            const  provider = this.providers.filter(obj => obj.userFirstName + ' ' + obj.userLastName == result.provider);
+            this.OtzActivityForm.get('provider').setValue(provider[0]);
+            
+            const otzEnrollment = await this.otzService.getOtzEnrollment(result.patientId, this.serviceId).toPromise();
+            if (otzEnrollment) {
+                this.OtzActivityForm.get('otzEnrollmentDate').setValue(otzEnrollment.enrollmentDate);
+                this.OtzActivityForm.get('otzEnrollmentDate').disable({onlySelf: true});
+            }
+
+            const completedOtzModules = await this.otzService.getOtzCompletedModules(result.patientId).toPromise();
+            this.allModulesTableData = completedOtzModules;
+            this.allModulesDataSource = new MatTableDataSource(this.allModulesTableData);
+        } else {
+            const otzEnrollment = await this.otzService.getOtzEnrollment(this.patientId, this.serviceId).toPromise();
+            if (otzEnrollment) {
+                this.OtzActivityForm.get('otzEnrollmentDate').setValue(otzEnrollment.enrollmentDate);
+                this.OtzActivityForm.get('otzEnrollmentDate').disable({onlySelf: true});
+            }
+        }
     }
 
     async validate() {
@@ -92,9 +124,7 @@ export class ActivityFormComponent implements OnInit {
                 });
             }
             try {
-                const result = await this.otzService.saveOtzEnrollment(saveCommand).toPromise();
-                
-                console.log(result);
+                const result = await this.otzService.saveOtzActivityForm(saveCommand).toPromise();
                 this.zone.run(() => {
                     this.router.navigate(['/ccc/encounterHistory/' + this.patientId + '/' + this.personId + '/' + this.serviceId],
                         { relativeTo: this.route });
@@ -143,6 +173,13 @@ export class ActivityFormComponent implements OnInit {
     onRowClicked(row) {
         this.topics_table_data = this.topics_table_data.filter(obj => obj != row);
         this.dataSource = new MatTableDataSource(this.topics_table_data);
+    }
+
+    close() {
+        this.zone.run(() => {
+            this.router.navigate(['/ccc/encounterHistory/' + this.patientId + '/' + this.personId + '/' + this.serviceId],
+                { relativeTo: this.route });
+        });
     }
 }
 

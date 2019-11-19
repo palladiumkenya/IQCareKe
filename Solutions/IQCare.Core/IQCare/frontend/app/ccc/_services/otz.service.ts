@@ -34,11 +34,23 @@ export class OtzService {
         );
     }
     
-    public saveOtzEnrollment(saveCommand: OtzActivityFormCommand): Observable<any> {
+    public getOtzEnrollment(patientId: number, serviceAreaId: number): Observable<any> {
+        return this.http.get<any>(this.API_URL 
+            + '/api/Register/GetPatientEnrollmentByServiceAreaId/' + patientId + '/' + serviceAreaId).pipe(
+            tap(getOtzEnrollment => this.errorHandler.log('successfully fetched otz enrollment')),
+            catchError(this.errorHandler.handleError<any>('getOtzEnrollment', []))
+        );
+    }
+    
+    public saveOtzActivityForm(saveCommand: OtzActivityFormCommand): Observable<any> {
         return this.http.post(this.API_URL + '/api/Otz/SaveOtzActivityForm', JSON.stringify(saveCommand), httpOptions).pipe(
             tap(saveOtzEnrollment => this.errorHandler.log('save Otz Enrollment')),
             catchError(this.errorHandler.handleError<LookupItemView[]>('saveOtzEnrollment', []))
         );
+    }
+    
+    public getOtzActivityForm(Id: number): Observable<any> {
+        return this.http.get(this.API_URL + '/api/Otz/GetActivityForm/' + Id).pipe();
     }
     
     public getActivityForms(patientId: number): Observable<any> {
@@ -46,5 +58,9 @@ export class OtzService {
             tap(getActivityForms => this.errorHandler.log('successfully fetched otz activity forms')),
             catchError(this.errorHandler.handleError<any>('getActivityForms', []))
         );
+    }
+    
+    public getOtzCompletedModules(patientId: number): Observable<any> {
+        return this.http.get<any>(this.API_URL + '/api/Otz/GetOtzCompletedModules/' + patientId).pipe();
     }
 }

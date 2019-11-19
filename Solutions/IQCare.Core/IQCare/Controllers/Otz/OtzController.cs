@@ -42,5 +42,31 @@ namespace IQCare.Controllers.Otz
                 return Ok(response.Value);
             return BadRequest(response);
         }
+
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetActivityForm(int Id)
+        {
+            var response = await _mediator.Send(new GetActivityFormCommand()
+            {
+                Id = Id
+            }, Request.HttpContext.RequestAborted);
+
+            if (response.IsValid)
+                return Ok(response.Value);
+            return BadRequest(response);
+        }
+
+        [HttpGet("{patientId}")]
+        public async Task<IActionResult> GetOtzCompletedModules(int patientId)
+        {
+            var response = await _mediator.Send(new GetOtzCompletedModulesCommand()
+            {
+                PatientId = patientId
+            }, Request.HttpContext.RequestAborted);
+
+            if (response.IsValid)
+                return Ok(response.Value);
+            return BadRequest(response);
+        }
     }
 }

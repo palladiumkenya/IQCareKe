@@ -20,9 +20,10 @@ import {MatIconModule} from '@angular/material/icon';
 import { ModulesCoveredComponent } from './otz/modules-covered/modules-covered.component';
 import { OtzEnrollmentComponent } from './otz/otz-enrollment/otz-enrollment.component';
 import { EncounterHistoryComponent } from './otz/encounter-history/encounter-history.component';
+import { ViewOtzFormComponent } from './otz/view-otz-form/view-otz-form.component';
 
 @NgModule({
-    declarations: [ActivityFormComponent, ModulesCoveredComponent, OtzEnrollmentComponent, EncounterHistoryComponent],
+    declarations: [ActivityFormComponent, ModulesCoveredComponent, OtzEnrollmentComponent, EncounterHistoryComponent, ViewOtzFormComponent],
     imports: [
         CommonModule, ReactiveFormsModule, SharedModule, MatSelectModule,
         CccRoutingModule, MatFormFieldModule, MatDatepickerModule, MatNativeDateModule,

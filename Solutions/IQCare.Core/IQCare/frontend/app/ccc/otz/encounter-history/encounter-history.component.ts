@@ -2,6 +2,7 @@ import {Component, NgZone, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {MatTableDataSource} from '@angular/material/table';
 import {OtzService} from '../../_services/otz.service';
+import {el} from '@angular/platform-browser/testing/src/browser_util';
 
 @Component({
   selector: 'app-encounter-history',
@@ -44,6 +45,21 @@ export class EncounterHistoryComponent implements OnInit {
     onNewOtzClick() {
         this.zone.run(() => {
             this.router.navigate(['/ccc/activityForm/' + this.patientId + '/' + this.personId + '/' + this.serviceId],
+                { relativeTo: this.route });
+        });
+    }
+
+    onEdit(element: any) {
+        this.zone.run(() => {
+            this.router.navigate(['/ccc/activityForm/update/' 
+                + this.patientId + '/' + this.personId + '/' + this.serviceId + '/' + element.id],
+                { relativeTo: this.route });
+        });
+    }
+
+    onView(element: any) {
+        this.zone.run(() => {
+            this.router.navigate(['/ccc/viewActivityForm/' + element.id + '/' + element.patientId],
                 { relativeTo: this.route });
         });
     }

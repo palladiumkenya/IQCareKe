@@ -1,0 +1,77 @@
+<div class="row">
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        <div class="row">
+            <div class="col-lg-12 col-sm-6 col-xs-12">
+                <div class="widget">
+                    <div class="widget-header bordered-bottom bordered-sky">
+                        <span class="widget-caption"> OTZ | VIEW OTZ FORM </span>
+                    </div>
+                    <div class="widget-body">
+                        <div class="row">
+                            <div class="col-md-2">
+                                Visit Date: 
+                            </div>
+
+                            <div class="col-md-2">
+                                {{ visitDate | date: 'dd-MMM-yyyy' }}
+                            </div>
+
+                            <div class="col-md-2">
+                                Date Enrolled:
+                            </div>
+
+                            <div class="col-md-2">
+                                {{ enrollmentDate | date: 'dd-MMM-yyyy' }}
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-2">
+                                Attended Support Group:
+                            </div>
+
+                            <div class="col-md-2">
+                                {{ attendedSupportGroup }}
+                            </div>
+
+                            <div class="col-md-2">
+                                Provider:
+                            </div>
+
+                            <div class="col-md-2">
+                                {{ provider }}
+                            </div>
+                        </div>
+                        
+                        <div class="row">
+                            &nbsp;
+                        </div>
+
+                        <div class="row">
+                            <div class="col-lg-12 col-xs-12">
+                                <div class="example-container mat-elevation-z0">
+                                    <mat-table #table [dataSource]="dataSource">
+
+                                        <ng-container matColumnDef="topic">
+                                            <mat-header-cell *matHeaderCellDef> Topic </mat-header-cell>
+                                            <mat-cell *matCellDef="let element"> {{ element.topic }} </mat-cell>
+                                        </ng-container>
+
+                                        <ng-container matColumnDef="dateCompleted">
+                                            <mat-header-cell *matHeaderCellDef> Date Completed </mat-header-cell>
+                                            <mat-cell *matCellDef="let element"> {{element.dateCompleted | date: 'dd-MMM-yyyy' }} </mat-cell>
+                                        </ng-container>
+
+                                        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                                        <mat-row *matRowDef="let row; columns: displayedColumns">
+                                        </mat-row>
+                                    </mat-table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

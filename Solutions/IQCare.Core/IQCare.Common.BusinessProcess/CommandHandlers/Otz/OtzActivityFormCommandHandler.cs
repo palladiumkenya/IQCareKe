@@ -29,68 +29,68 @@ namespace IQCare.Common.BusinessProcess.CommandHandlers.Otz
             {
                 try
                 {
-                    if(request.OtzActivity.Any())
+                    int patientMasterVisitId = 0;
+                    var visit = await _unitOfWork.Repository<Core.Models.PatientMasterVisit>().Get(x => x.VisitDate == request.VisitDate).ToListAsync();
+                    if (visit.Count == 0)
                     {
-                        int patientMasterVisitId = 0;
-                        var visit = await _unitOfWork.Repository<Core.Models.PatientMasterVisit>().Get(x => x.VisitDate == request.VisitDate).ToListAsync();
-                        if(visit.Count == 0)
+                        var patientMasterVisit = new Core.Models.PatientMasterVisit()
                         {
-                            var patientMasterVisit = new Core.Models.PatientMasterVisit()
-                            {
-                                PatientId = request.PatientId,
-                                ServiceId = request.ServiceId,
-                                Start = request.VisitDate,
-                                DeleteFlag = false,
-                                CreatedBy = request.UserId,
-                                CreateDate = DateTime.Now,
-                                Active = true,
-                                End = request.VisitDate,
-                                Status = null,
-                                VisitBy = null,
-                                VisitDate = request.VisitDate,
-                                VisitScheduled = null,
-                                VisitType = null
-                            };
-                            await _unitOfWork.Repository<Core.Models.PatientMasterVisit>().AddAsync(patientMasterVisit);
-                            await _unitOfWork.SaveAsync();
+                            PatientId = request.PatientId,
+                            ServiceId = request.ServiceId,
+                            Start = request.VisitDate,
+                            DeleteFlag = false,
+                            CreatedBy = request.UserId,
+                            CreateDate = DateTime.Now,
+                            Active = true,
+                            End = request.VisitDate,
+                            Status = null,
+                            VisitBy = null,
+                            VisitDate = request.VisitDate,
+                            VisitScheduled = null,
+                            VisitType = null
+                        };
+                        await _unitOfWork.Repository<Core.Models.PatientMasterVisit>().AddAsync(patientMasterVisit);
+                        await _unitOfWork.SaveAsync();
 
-                            patientMasterVisitId = patientMasterVisit.Id;
-                        }
-                        else
+                        patientMasterVisitId = patientMasterVisit.Id;
+                    }
+                    else
+                    {
+                        patientMasterVisitId = visit[0].Id;
+                    }
+
+                    var activityFormId = 0;
+                    var otzActivities = await _unitOfWork.Repository<OtzActivityForm>().Get(x => x.PatientMasterVisitId == patientMasterVisitId).ToListAsync();
+                    if (otzActivities.Count == 0)
+                    {
+                        var otzActivityForm = new OtzActivityForm()
                         {
-                            patientMasterVisitId = visit[0].Id;
-                        }
+                            AttendedSupportGroup = request.AttendedSupportGroup,
+                            DeleteFlag = false,
+                            PatientMasterVisitId = patientMasterVisitId,
+                            Remarks = request.Remarks,
+                            UserId = request.UserId
+                        };
 
-                        var activityFormId = 0;
-                        var otzActivities = await _unitOfWork.Repository<OtzActivityForm>().Get(x => x.PatientMasterVisitId == patientMasterVisitId).ToListAsync();
-                        if(otzActivities.Count == 0)
-                        {
-                            var otzActivityForm = new OtzActivityForm()
-                            {
-                                AttendedSupportGroup = request.AttendedSupportGroup,
-                                DeleteFlag = false,
-                                PatientMasterVisitId = patientMasterVisitId,
-                                Remarks = request.Remarks,
-                                UserId = request.UserId
-                            };
+                        await _unitOfWork.Repository<OtzActivityForm>().AddAsync(otzActivityForm);
+                        await _unitOfWork.SaveAsync();
 
-                            await _unitOfWork.Repository<OtzActivityForm>().AddAsync(otzActivityForm);
-                            await _unitOfWork.SaveAsync();
+                        activityFormId = otzActivityForm.Id;
+                    }
+                    else
+                    {
+                        otzActivities[0].AttendedSupportGroup = request.AttendedSupportGroup;
+                        otzActivities[0].Remarks = request.Remarks;
+                        otzActivities[0].UserId = request.UserId;
 
-                            activityFormId = otzActivityForm.Id;
-                        } 
-                        else
-                        {
-                            otzActivities[0].AttendedSupportGroup = request.AttendedSupportGroup;
-                            otzActivities[0].Remarks = request.Remarks;
-                            otzActivities[0].UserId = request.UserId;
+                        _unitOfWork.Repository<OtzActivityForm>().Update(otzActivities[0]);
+                        await _unitOfWork.SaveAsync();
 
-                            _unitOfWork.Repository<OtzActivityForm>().Update(otzActivities[0]);
-                            await _unitOfWork.SaveAsync();
-                            
-                            activityFormId = otzActivities[0].Id;
-                        }
+                        activityFormId = otzActivities[0].Id;
+                    }
 
+                    if (request.OtzActivity.Any())
+                    {                       
                         List<OtzActivityTopics> otzActivityTopics = new List<OtzActivityTopics>();
                         request.OtzActivity.ForEach(x => otzActivityTopics.Add(new OtzActivityTopics
                         {
