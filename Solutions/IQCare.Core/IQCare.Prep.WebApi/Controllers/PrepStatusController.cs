@@ -33,6 +33,33 @@ namespace IQCare.Prep.WebApi.Controllers
             return BadRequest(response);
         }
 
+
+        [HttpPost]
+        public async Task<IActionResult> PatientCheckin([FromBody]PatientCheckinCommand checkinCommand)
+        {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+            var response = await _mediator.Send(checkinCommand, Request.HttpContext.RequestAborted);
+            if (response.IsValid)
+                return Ok(response.Value);
+            return BadRequest(response);
+        }
+
+
+        [HttpPost]
+        public async Task<IActionResult> PatientCheckout([FromBody]PatientCheckOutCommand checkoutCommand)
+        {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+            var response = await _mediator.Send(checkoutCommand, Request.HttpContext.RequestAborted);
+            if (response.IsValid)
+                return Ok(response.Value);
+            return BadRequest(response);
+        }
+
+
         [HttpGet("{patientId}/{patientEncounterId}")]
         public async Task<IActionResult> GetPrepStatus(int patientId, int patientEncounterId)
         {
@@ -75,6 +102,8 @@ namespace IQCare.Prep.WebApi.Controllers
                 return Ok(response.Value);
             return BadRequest(response);
         }
+
+        
 
     }
 }

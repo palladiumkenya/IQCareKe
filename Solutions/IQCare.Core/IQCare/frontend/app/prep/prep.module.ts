@@ -1,4 +1,5 @@
 import { PrepService } from './_services/prep.service';
+import { PersonHomeService} from '../dashboard/services/person-home.service';
 import { STIScreeningTreatmentResolver } from './_services/STIScreeningTreatment.resolver';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
@@ -6,6 +7,8 @@ import { CommonModule } from '@angular/common';
 import { PrepEncounterHistoryComponent } from './prep-encounter-history/prep-encounter-history.component';
 import { PrepRoutingModule } from './prep-routing.module';
 import { PrepEncounterComponent } from './prep-encounter/prep-encounter.component';
+import { PrepConfirmationDialogComponent} from './prep-confirmationdialog/prep-confirmationdialog';
+import {FormSettingsResolver} from './_services/resolvers/CurrentFormSettings.resolver';
 import {
     MatStepperModule, MatButtonModule,
     MatFormFieldModule, MatSelectModule,
@@ -66,6 +69,7 @@ import { PrepPatientvitalsinfoComponent } from './prep-patientvitalsinfo/prep-pa
 import { PrepRiskassessmentgriddetailsComponent } from './prep-riskassessmentgriddetails/prep-riskassessmentgriddetails.component';
 import { PrepFollowupworkflowComponent } from './prep-followupworkflow/prep-followupworkflow.component';
 import { PrepMonthlyrefillworkflowComponent } from './prep-monthlyrefillworkflow/prep-monthlyrefillworkflow.component';
+import { PrepVisitcheckinComponent } from './prep-visitcheckin/prep-visitcheckin.component';
 
 @NgModule({
     declarations: [
@@ -88,7 +92,9 @@ import { PrepMonthlyrefillworkflowComponent } from './prep-monthlyrefillworkflow
         PrepPatientvitalsinfoComponent,
         PrepRiskassessmentgriddetailsComponent,
         PrepFollowupworkflowComponent,
-        PrepMonthlyrefillworkflowComponent
+        PrepMonthlyrefillworkflowComponent,
+        PrepVisitcheckinComponent,
+        PrepConfirmationDialogComponent
     ],
     imports: [
         SharedModule, MatDatepickerModule, MatNativeDateModule,
@@ -100,7 +106,7 @@ import { PrepMonthlyrefillworkflowComponent } from './prep-monthlyrefillworkflow
         MatIconModule, ReactiveFormsModule, FormsModule
     ],
     providers: [
-        YesNoResolver, YesNoUnknownResolver,
+        YesNoResolver, YesNoUnknownResolver,PersonHomeService,
         STIScreeningTreatmentResolver, FamilyPlanningMethodResolver,
         PlanningPregnancyResolver, YesNoDontKnowResolver, PregnancyOutcomeResolver,
         PrepContraindicationsResolver, PrepStatusResolver, AssessmentOutcomeResolver,
@@ -111,7 +117,7 @@ import { PrepMonthlyrefillworkflowComponent } from './prep-monthlyrefillworkflow
         PatientIdentifierResolver, ARTStartDateResolver, PartnerHIVStatusResolver,
         DurationResolver, SexWithoutCondomResolver, HivPartnerResolver,
         ReasonsPrepAppointmentNotGivenResolver, PrepEncounterTypeResolver,
-        PregnancyStatusResolver, ScreenedForSTIResolver,
+        PregnancyStatusResolver, ScreenedForSTIResolver,FormSettingsResolver,
         PrepCareEndReasonResolver, PrepAdherenceResolver, AdherenceAssessmentReasonsResolver, RefillPrepStatusResolver,
         PrepDiscontinueReasonResolver, AdherenceCounsellingResolver, AppointmentGivenResolver, PrepAppointmentReasonResolver,
         HTSEncounterResolver, PersonCurrentVitalsResolver, RiskEncounterResolver, PrepDeclineResolver,
@@ -119,7 +125,10 @@ import { PrepMonthlyrefillworkflowComponent } from './prep-monthlyrefillworkflow
         , SpecifyRiskEducationResolver, SpecifyRiskReductionEducationResolver, RiskAssessmentDoneResolver
     ],
     entryComponents: [
-        PrepCheckinComponent
+        PrepCheckinComponent,
+        PrepVisitcheckinComponent,
+        PrepConfirmationDialogComponent
+
     ]
 })
 export class PrepModule { }

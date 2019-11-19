@@ -13,7 +13,7 @@ SELECT dbo.PatientVitals.id,per.Id as PersonId,
 	,dbo.PatientVitals.CreateDate
 From  Person per
 left join Patient pat on pat.PersonId=per.Id
-left join dbo.PatientVitals  on dbo.PatientVitals.PatientId=pat.Id
+inner join dbo.PatientVitals  on dbo.PatientVitals.PatientId=pat.Id
 
 
 GO

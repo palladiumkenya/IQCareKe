@@ -12,6 +12,8 @@ import { YesNoDontKnowResolver } from './_services/YesNoDont-Know.resolver';
 import { PregnancyOutcomeResolver } from './_services/PregnancyOutcome.resolver';
 import { PrepStatusResolver } from './_services/prep-status.resolver';
 import { PrepContraindicationsResolver } from './_services/prep-contraindications.resolver';
+import { PrepVisitcheckinComponent } from './prep-visitcheckin/prep-visitcheckin.component';
+import {FormSettingsResolver} from './_services/resolvers/CurrentFormSettings.resolver';
 import {
     AssessmentOutcomeResolver, ClientsBehaviourRiskResolver, SexualPartnetHivStatusProfileResolver,
     RiskReductionEducationResolver, ReferralPreventionServicesResolver, ClientWillingTakePrepResolver
@@ -41,6 +43,7 @@ import { HTSEncounterResolver } from './_services/resolvers/htsencounter.resolve
 import { PersonCurrentVitalsResolver } from './_services/resolvers/personvitals.resolver';
 import { RiskEncounterResolver } from './_services/resolvers/riskencounter.resolver';
 import { PrepMonthlyrefillworkflowComponent } from './prep-monthlyrefillworkflow/prep-monthlyrefillworkflow.component';
+
 const routes: Routes = [
     {
         path: ':patientId/:personId/:serviceId',
@@ -52,6 +55,18 @@ const routes: Routes = [
             PersonVitalsArray: PersonCurrentVitalsResolver,
             RiskAssessmentArray: RiskEncounterResolver
         }
+    },
+    {
+        path: 'prepvisitcheckin',
+        children: [
+            {
+                path: ':patientId/:personId/:serviceId',
+                component: PrepVisitcheckinComponent
+            }
+        ]
+
+
+
     },
 
     {
@@ -78,6 +93,7 @@ const routes: Routes = [
                     PersonVitalsArray: PersonCurrentVitalsResolver,
                     RiskAssessmentArray: RiskEncounterResolver,
                     HTSEncounterHistoryArray: HTSEncounterHistoryResolver,
+                    FormSettingsArray: FormSettingsResolver
 
                 }
 
@@ -181,7 +197,7 @@ const routes: Routes = [
                     yesNoOptions: YesNoResolver,
                     AppointmentGivenArray: AppointmentGivenResolver,
                     PrepAppointmentReasonArray: PrepAppointmentReasonResolver,
-                     RiskAssessmentDoneArray: RiskAssessmentDoneResolver
+                    RiskAssessmentDoneArray: RiskAssessmentDoneResolver
                 }
 
 

@@ -29,6 +29,28 @@ namespace IQCare.Prep.WebApi.Controllers
                 return Ok(response.Value);
             return BadRequest(response);
         }
+
+
+
+        [HttpPost]
+        public async Task<IActionResult> GetPrepEncountersByVisitDate([FromBody] GetPrepEncountersByVisitDateCommand getPrepEncountersbyVisitDateCommand)
+        {
+            var response = await _mediator.Send(getPrepEncountersbyVisitDateCommand, Request.HttpContext.RequestAborted);
+
+            if (response.IsValid)
+                return Ok(response.Value);
+            return BadRequest(response);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> GetCorrectDisplayForm([FromBody] GetEncounterToFillCommand getEncounterToFillCommand)
+        {
+            var response = await _mediator.Send(getEncounterToFillCommand, Request.HttpContext.RequestAborted);
+
+            if (response.IsValid)
+                return Ok(response.Value);
+            return BadRequest(response);
+        }
      
     }
 }

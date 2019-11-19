@@ -138,6 +138,15 @@ export class HtsComponent implements OnInit {
                     if (res.gender != null) {
                         if (res.gender.toLowerCase() == 'female') {
 
+                            if (res.ageNumber < 15 && res.ageNumber > 24) {
+                                if (this.priorityPops.length > 0) {
+                                    let index: number;
+                                    index = this.priorityPops.findIndex(x => x.itemName == 'Adolescent Girls and Young Women')
+                                    if (index > -1) {
+                                        this.priorityPops.splice(index, 1);
+                                    }
+                                }
+                         }
                             if (this.keyPops.length > 0) {
                                 let index: number;
                                 index = this.keyPops.findIndex(x => x.itemName == 'MSM');
@@ -157,12 +166,12 @@ export class HtsComponent implements OnInit {
 
                         if (res.gender.toLowerCase() == 'male') {
                             if (this.priorityPops.length > 0) {
-                            let index: number;
-                            index = this.priorityPops.findIndex(x => x.itemName == 'Adolescent Girls and Young Women')
-                            if (index > -1) {
-                                this.priorityPops.splice(index, 1);
+                                let index: number;
+                                index = this.priorityPops.findIndex(x => x.itemName == 'Adolescent Girls and Young Women')
+                                if (index > -1) {
+                                    this.priorityPops.splice(index, 1);
+                                }
                             }
-                        }
                         }
 
                     }
