@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, NgZone, OnInit} from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {MatTableDataSource} from '@angular/material/table';
 import {LookupItemView} from '../../../shared/_models/LookupItemView';
@@ -8,7 +8,7 @@ import {ModulesCoveredComponent} from '../modules-covered/modules-covered.compon
 import * as moment from 'moment';
 import {NotificationService} from '../../../shared/_services/notification.service';
 import {SnotifyService} from 'ng-snotify';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {EnrollmentService} from '../../../registration/_services/enrollment.service';
 import {Enrollment} from '../../../registration/_models/enrollment';
 
@@ -26,6 +26,7 @@ export class OtzEnrollmentComponent implements OnInit {
     serviceCode: string;
     serviceId: number;
     userId: number;
+    maxDate: Date;
 
     displayedColumns = ['module', 'dateCovered', 'action'];
     topics_table_data: TopicsTableData[] = [];
@@ -37,7 +38,9 @@ export class OtzEnrollmentComponent implements OnInit {
                 private notificationService: NotificationService,
                 private snotifyService: SnotifyService,
                 private route: ActivatedRoute,
-                private enrollmentService: EnrollmentService) { }
+                private enrollmentService: EnrollmentService,
+                public zone: NgZone,
+                private router: Router) { }
     
     async ngOnInit() {
         this.OtzEnrollmentForm = this._formBuilder.group({
@@ -133,6 +136,11 @@ export class OtzEnrollmentComponent implements OnInit {
             
             try {
                 const result = await this.enrollmentService.enrollClient(enrollment).toPromise();
+
+                this.zone.run(() => {
+                    this.router.navigate(['/ccc/encounterHistory/' + this.patientId + '/' + this.personId + '/' + this.serviceId],
+                        { relativeTo: this.route });
+                });
             } catch (e) {
                 console.log(e);
             }            

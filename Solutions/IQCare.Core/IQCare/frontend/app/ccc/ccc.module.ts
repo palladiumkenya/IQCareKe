@@ -21,9 +21,10 @@ import { ModulesCoveredComponent } from './otz/modules-covered/modules-covered.c
 import { OtzEnrollmentComponent } from './otz/otz-enrollment/otz-enrollment.component';
 import { EncounterHistoryComponent } from './otz/encounter-history/encounter-history.component';
 import { ViewOtzFormComponent } from './otz/view-otz-form/view-otz-form.component';
+import { OtzCareendingComponent } from './otz/otz-careending/otz-careending.component';
 
 @NgModule({
-    declarations: [ActivityFormComponent, ModulesCoveredComponent, OtzEnrollmentComponent, EncounterHistoryComponent, ViewOtzFormComponent],
+    declarations: [ActivityFormComponent, ModulesCoveredComponent, OtzEnrollmentComponent, EncounterHistoryComponent, ViewOtzFormComponent, OtzCareendingComponent],
     imports: [
         CommonModule, ReactiveFormsModule, SharedModule, MatSelectModule,
         CccRoutingModule, MatFormFieldModule, MatDatepickerModule, MatNativeDateModule,

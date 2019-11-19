@@ -49,6 +49,13 @@ export class EncounterHistoryComponent implements OnInit {
         });
     }
 
+    onCareEndClick() {
+        this.zone.run(() => {
+            this.router.navigate(['/ccc/careEnding/' + this.patientId + '/' + this.personId + '/' + this.serviceId],
+                { relativeTo: this.route });
+        });
+    }
+
     onEdit(element: any) {
         this.zone.run(() => {
             this.router.navigate(['/ccc/activityForm/update/' 
