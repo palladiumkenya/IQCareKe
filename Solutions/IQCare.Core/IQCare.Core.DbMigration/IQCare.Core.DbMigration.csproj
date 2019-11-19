@@ -378,6 +378,11 @@
     <None Remove="Scripts\2.2.0\65_UpdateHeiRegimenDisplayName.sql" />
     <None Remove="Scripts\2.2.0\66_DeleteFpMethodUndecided.sql" />
     <None Remove="Scripts\2.2.0\62_HTSLABRegister.sql" />
+    <None Remove="Scripts\2.2.0\63_NewPaedRegimens.sql" />
+    <None Remove="Scripts\2.2.0\64_OTZActivityForm.sql" />
+    <None Remove="Scripts\2.2.0\65_OTZModules.sql" />
+    <None Remove="Scripts\2.2.0\66_OtzCompletedModules.sql" />
+    <None Remove="Scripts\2.2.0\67_OtzActivityForms.sql" />
     <None Remove="Scripts\2.2.0\67_EmrImplemention.sql" />
     <None Remove="Scripts\2.2.0\68_ServiceCheckinTable.sql" />
     <None Remove="Scripts\2.2.0\69_PrepEncountersView.sql" />
@@ -796,6 +801,11 @@
     <EmbeddedResource Include="Scripts\2.2.0\65_UpdateHeiRegimenDisplayName.sql" />
     <EmbeddedResource Include="Scripts\2.2.0\66_DeleteFpMethodUndecided.sql" />
     <EmbeddedResource Include="Scripts\2.2.0\62_HTSLABRegister.sql" />
+    <EmbeddedResource Include="Scripts\2.2.0\63_NewPaedRegimens.sql" />
+    <EmbeddedResource Include="Scripts\2.2.0\64_OTZActivityForm.sql" />
+    <EmbeddedResource Include="Scripts\2.2.0\65_OTZModules.sql" />
+    <EmbeddedResource Include="Scripts\2.2.0\66_OtzCompletedModules.sql" />
+    <EmbeddedResource Include="Scripts\2.2.0\67_OtzActivityForms.sql" />
     <EmbeddedResource Include="Scripts\2.2.0\67_EmrImplemention.sql" />
     <EmbeddedResource Include="Scripts\2.2.0\68_ServiceCheckinTable.sql" />
     <EmbeddedResource Include="Scripts\2.2.0\69_PrepEncountersView.sql" />

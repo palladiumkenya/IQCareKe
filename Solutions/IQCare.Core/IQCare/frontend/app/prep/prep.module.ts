@@ -98,7 +98,7 @@ import { PrepVisitcheckinComponent } from './prep-visitcheckin/prep-visitcheckin
     ],
     imports: [
         SharedModule, MatDatepickerModule, MatNativeDateModule,
-        CommonModule, MatStepperModule, ReactiveFormsModule,
+        CommonModule, MatStepperModule,
         MatButtonModule, MatFormFieldModule, MatSelectModule,
         MatInputModule, MatAutocompleteModule, MatTableModule,
         PrepRoutingModule, MatDividerModule, MatDialogModule,

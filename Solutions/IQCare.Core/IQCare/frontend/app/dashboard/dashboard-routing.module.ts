@@ -30,7 +30,7 @@ const routes: Routes = [
         component: PersonHomeComponent,
         resolve: {
             servicesArray: ServicesResolver,
-            HTSEncounterArray: HTSEncounterResolver,
+            // HTSEncounterArray: HTSEncounterResolver,
             PersonVitalsArray: PersonCurrentVitalsResolver,
             RiskAssessmentArray: RiskEncounterResolver,
             ExitReasonsArray: ExitReasonsResolver,

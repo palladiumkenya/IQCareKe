@@ -29,7 +29,7 @@ export class ServicesListComponent implements OnInit {
     @Input('services') services: any[];
     @Input('careendoptions') carendedreason: LookupItemView[];
     @Input('person') person: any;
-    @Input('encounterDetail') encounterDetail: EncounterDetails;
+    // @Input('encounterDetail') encounterDetail: EncounterDetails;
     @Input('personVitalWeight') weight: number;
     @Input('riskencounters') riskencounter: any[];
     @Input('carended') carended: boolean;
@@ -41,7 +41,7 @@ export class ServicesListComponent implements OnInit {
     riskassessmentPatientMasterVisitId: number;
     enrolledService: any[] = [];
     identifiers: any[] = [];
-    creatininetestresult: boolean = false;;
+    creatininetestresult: boolean = false;
     enrollservicename: boolean = true;
     enrollPrepServicename: boolean = false;
     patientvitals: any[] = [];
@@ -96,8 +96,6 @@ export class ServicesListComponent implements OnInit {
     getPersonEnrolledServices(personId: number) {
         this.personhomeservice.getPersonEnrolledServices(personId).subscribe((res) => {
             this.enrolledServices = res['personEnrollmentList'];
-            console.log('EnrolledServices');
-            console.log(this.enrolledServices);
             if (this.enrolledServices && this.enrolledServices.length > 0) {
                 this.patientId = this.enrolledServices[0]['patientId'];
             }
@@ -153,8 +151,13 @@ export class ServicesListComponent implements OnInit {
                         this.router.navigate(['/dashboard/enrollment/prep/' + this.personId + '/' + serviceId + '/' + serviceCode],
                             { relativeTo: this.route });
                     });
-
-                    //  this.enrollPrepServicename = true;
+                    break;
+                case 'OTZ':
+                    this.zone.run(() => {
+                        this.router.navigate(['/ccc/otzEnrollment/' + this.personId + '/' 
+                            + this.person.patientId + '/' + serviceId + '/' + serviceCode],
+                            { relativeTo: this.route });
+                    });
                     break;
                 default:
                     this.zone.run(() => {
@@ -190,7 +193,12 @@ export class ServicesListComponent implements OnInit {
                         { relativeTo: this.route }
                     );
                 });
-
+                break;
+            case 'OTZ':
+                this.zone.run(() => {
+                    this.router.navigate(['/ccc/otzEnrollment/' + this.personId + '/' + serviceId + '/' + serviceCode],
+                        { relativeTo: this.route });
+                });
                 break;
             default:
                 console.log('test default');
@@ -267,6 +275,13 @@ export class ServicesListComponent implements OnInit {
                     this.zone.run(() => {
                         this.router.navigate(
                             ['/prep/' + this.patientId + '/' + this.personId + '/' + serviceId],
+                            { relativeTo: this.route });
+                    });
+                    break;
+                case 'OTZ':
+                    this.zone.run(() => {
+                        this.router.navigate(
+                            ['/ccc/encounterHistory/' + this.patientId + '/' + this.personId + '/' + serviceId],
                             { relativeTo: this.route });
                     });
                     break;
@@ -434,27 +449,22 @@ export class ServicesListComponent implements OnInit {
 
     }
     checkService(serviceAreaId: number): boolean {
-
         let isEligible: boolean = true;
         const selectedService = this.services.filter(obj => obj.id == serviceAreaId);
 
         if (selectedService && selectedService.length > 0) {
             if (selectedService[0]['code'] == 'PREP') {
                 isEligible = false;
-
             } else {
-                isEligible = true;
+                isEligible = this.isServiceEligible(serviceAreaId);
             }
         }
 
         return isEligible;
-
-
     }
     isServiceEligible(serviceAreaId: number) {
         let isCCCEnrolled;
         this.agerisk = false;
-
         if (this.enrolledServices) {
             isCCCEnrolled = this.enrolledServices.filter(obj => obj.serviceAreaId == 1);
             if (isCCCEnrolled && isCCCEnrolled.length > 0) {
@@ -512,6 +522,13 @@ export class ServicesListComponent implements OnInit {
                 case 'CCC':
                     isEligible = true;
                     this.enrollservicename = true;
+                    break;
+                case 'OTZ':
+                    if (isCCCEnrolled && isCCCEnrolled.length > 0) {
+                        if (this.person && this.person.ageNumber >= 10 && this.person.ageNumber <= 18) {
+                            isEligible = true;
+                        }                        
+                    }
                     break;
                 case 'PREP':
                     isEligible = this.getPrepEligibility();

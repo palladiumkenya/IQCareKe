@@ -70,7 +70,7 @@ export class PersonHomeComponent implements OnInit {
         this.route.data.subscribe(res => {
 
             const { servicesArray } = res;
-            const { HTSEncounterArray } = res;
+            // const { HTSEncounterArray } = res;
             const { PersonVitalsArray } = res;
             const { RiskAssessmentArray } = res;
             const { ExitReasonsArray } = res;
@@ -82,7 +82,7 @@ export class PersonHomeComponent implements OnInit {
 
             this.htshistory = HTSEncounterHistoryArray;
             this.services = servicesArray;
-            this.htsencounters = HTSEncounterArray;
+            // this.htsencounters = HTSEncounterArray;
             this.personvitals = PersonVitalsArray;
             this.riskassessmentencounter = RiskAssessmentArray;
             this.careendoptions = ExitReasonsArray['lookupItems'];
@@ -115,9 +115,9 @@ export class PersonHomeComponent implements OnInit {
             this.riskencounters = this.riskassessmentencounter['encounters'];
         });
 
-        this.encounterDetail = this.htsencounters[0];
+        // this.encounterDetail = this.htsencounters[0];
 
-        const servicesRightOrder = [2, 1, 3, 5, 4, 6, 7];
+        const servicesRightOrder = [2, 1, 3, 5, 4, 6, 7, 8];
         const ordered_array = this.mapOrder(this.services, servicesRightOrder, 'id');
         this.services = ordered_array;
 
@@ -192,8 +192,6 @@ export class PersonHomeComponent implements OnInit {
                     localStorage.setItem('patientId', this.person.patientId.toString());
 
                     this.personService.getPatientAdherenceOutcome(this.person.patientId).subscribe((res) => {
-                        console.log('AdherenceOutcome');
-                        console.log(res);
                         if (res != null) {
                             if (res.length > 0) {
                                 this.adherenceavailable = true;
@@ -247,26 +245,10 @@ export class PersonHomeComponent implements OnInit {
             this.router.navigate(['/record/person/update/' + this.personId], { relativeTo: this.route });
         });
     }
-    getUserAllergies(patientId: number) {
-        this.personAllergies$ = this.personService.getPatientAllergies(patientId).subscribe(
-            personAllergies => {
-                console.log(personAllergies);
-                this.personAllergies = personAllergies;
-            },
-            (err) => {
-                this.snotifyService.error('Error retreaving person allergies...',
-                    this.notificationService.getConfig());
-            },
-            () => {
-                // console.log(this.personView$);
-            });
-    }
 
     addWaitingList() {
         const PersonId = this.person.personId;
         const PatientId = this.person.patientId;
-
-
 
         const resultsDialogConfig = new MatDialogConfig();
 
