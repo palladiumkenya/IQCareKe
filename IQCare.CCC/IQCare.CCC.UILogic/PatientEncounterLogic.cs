@@ -830,5 +830,13 @@ namespace IQCare.CCC.UILogic
 
 
         }
+
+        public int saveDispensing(int quantitydispensed, int rowid, DateTime DispenseDate)
+        {
+            int dispensingid;
+            IPatientPharmacy patientEncounter = (IPatientPharmacy)ObjectFactory.CreateInstance("BusinessProcess.CCC.BPatientPharmacy, BusinessProcess.CCC");
+            dispensingid = patientEncounter.saveDispensing(quantitydispensed, rowid, DispenseDate);
+            return dispensingid;
+        }
     }
 }
