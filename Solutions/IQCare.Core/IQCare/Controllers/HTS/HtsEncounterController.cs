@@ -298,17 +298,17 @@ namespace IQCare.Controllers.HTS
         }
 
 
-        //[HttpGet("getEncounterDetailsByPersonId/{personId}")]
-        //public async Task<IActionResult> GetEncounterDetailsByPersonId(int personId)
-        //{
-        //    var response = await _mediator.Send(new GetHtsEncounterDetailsViewByPersonIdCommand()
-        //    {
-        //        personId = personId
-        //    }, Request.HttpContext.RequestAborted);
-        //    if (response.IsValid)
-        //        return Ok(response.Value);
-        //    return BadRequest(response);
-        //}
+        [HttpGet("getEncounterDetailsByPersonId/{personId}")]
+        public async Task<IActionResult> GetEncounterDetailsByPersonId(int personId)
+        {
+            var response = await _mediator.Send(new GetHtsEncounterDetailsViewByPersonIdCommand()
+            {
+                personId = personId
+            }, Request.HttpContext.RequestAborted);
+            if (response.IsValid)
+                return Ok(response.Value);
+            return BadRequest(response);
+        }
 
 
         [HttpPost("EncounterDetailsByPersonIdByVisitDate")]
