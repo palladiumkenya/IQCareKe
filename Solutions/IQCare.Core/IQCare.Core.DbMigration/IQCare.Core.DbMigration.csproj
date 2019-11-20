@@ -390,6 +390,7 @@
     <None Remove="Scripts\2.2.0\71_Prep_FormsView.sql" />
     <None Remove="Scripts\2.2.0\72_OTZNumber.sql" />
     <None Remove="Scripts\2.2.0\73_OTZCareEndedOptions.sql" />
+    <None Remove="Scripts\2.2.0\74_build.sql" />
     <None Remove="Scripts\2.2.0\IQTools\01_PatientPopulationView.sql" />
     <None Remove="Scripts\2.2.0\IQTools\02_HTS_LABRegisternewer.sql" />
     <None Remove="Scripts\2.2.0\IQTools\03_ANCRegister.sql" />
@@ -815,6 +816,7 @@
     <EmbeddedResource Include="Scripts\2.2.0\71_Prep_FormsView.sql" />
     <EmbeddedResource Include="Scripts\2.2.0\72_OTZNumber.sql" />
     <EmbeddedResource Include="Scripts\2.2.0\73_OTZCareEndedOptions.sql" />
+    <EmbeddedResource Include="Scripts\2.2.0\74_build.sql" />
     <EmbeddedResource Include="Scripts\2.2.0\IQTools\01_PatientPopulationView.sql" />
     <EmbeddedResource Include="Scripts\2.2.0\IQTools\02_HTS_LABRegisternewer.sql" />
     <EmbeddedResource Include="Scripts\2.2.0\IQTools\03_ANCRegister.sql" />
