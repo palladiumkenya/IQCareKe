@@ -119,6 +119,11 @@ export class PrepComponent implements OnInit {
     Daterestartedvisible: boolean = false;
     DateInitiatedvisible: boolean = false;
 
+    
+    dateLMP: Date;
+    minLMpDate: Date;
+    visitDate: Date;
+
     public chronic_illness_data: PatientChronicIllness[] = [];
     public adverseEvents_data: AdverseEventsCommand[] = [];
     public allergies_data: AllergiesCommand[] = [];
@@ -159,7 +164,7 @@ export class PrepComponent implements OnInit {
     ngOnInit() {
 
         this.route.params.subscribe(params => {
-            const { id, serviceId, serviceCode, edit } = params;
+            const { id, serviceId, serviceCode, edit } = params
             this.personId = id;
             this.serviceId = serviceId;
             this.serviceCode = serviceCode;
@@ -228,6 +233,7 @@ export class PrepComponent implements OnInit {
             hivpartnerchildren: new FormControl(''),
             isClientCircumcised: new FormControl(''),
             lmp: new FormControl(''),
+            EDD: new FormControl(''),
             pregnant: new FormControl(''),
             pregnancyPlanned: new FormControl(''),
             breastFeeding: new FormControl(''),
@@ -246,7 +252,7 @@ export class PrepComponent implements OnInit {
             stiTreatmentOffered: new FormControl(''),
             stiReferredLabInvestigation: new FormControl(''),
             signsOrSymptomsHIV: new FormControl('', [Validators.required]),
-            contraindications_PrEP_Present: new FormControl('', [Validators.required]),
+            contraindications_PrEP_Present: new FormControl(''),
             adherenceCounselling: new FormControl('', [Validators.required]),
             PrEPStatusToday: new FormControl('', [Validators.required]),
             condomsIssued: new FormControl('', [Validators.required]),
@@ -261,6 +267,7 @@ export class PrepComponent implements OnInit {
 
         this.getYears();
         this.isVisible = false;
+        this.form.controls.EDD.disable({ onlySelf: true });
 
         this.form.controls.partnerHivStatusDate.disable({ onlySelf: true });
         this.form.controls.partnercccenrollment.disable({ onlySelf: true });
@@ -509,7 +516,12 @@ export class PrepComponent implements OnInit {
         const value = event.source.value;
 
 
+
         if (event.source.viewValue !== 'None' && event.source.selected == true) {
+
+
+
+
             for (let i = 0; i < event.source._parent.options.length; i++) {
 
                 if (event.source._parent.options._results[i].viewValue
@@ -520,6 +532,9 @@ export class PrepComponent implements OnInit {
         }
 
         if (event.source.viewValue === 'None' && event.source.selected == true) {
+
+
+
             for (let i = 0; i < event.source._parent.options.length; i++) {
                 if (event.source._parent.options._results[i].viewValue
                     !== event.source.viewValue) {
@@ -527,6 +542,45 @@ export class PrepComponent implements OnInit {
                 }
             }
         }
+
+
+        for (let i = 0; i < event.source._parent.options.length; i++) {
+
+            if (event.source._parent.options._results[i].viewValue
+                !== 'None' && event.source._parent.options._results[i].selected == true) {
+
+                this.form.controls.adherenceCounselling.setValue('');
+                this.form.controls.adherenceCounselling.disable({ onlySelf: true });
+                this.form.controls.PrEPStatusToday.setValue('');
+                this.form.controls.PrEPStatusToday.disable({ onlySelf: true });
+                this.form.controls.DateRestarted.setValue('');
+                this.form.controls.DateRestarted.disable({ onlySelf: true });
+                this.form.controls.DateInitiated.setValue('');
+                this.form.controls.DateInitiated.disable({ onlySelf: true });
+            }
+
+
+
+            if (event.source._parent.options._results[i].viewValue
+                === 'None' && event.source._parent.options._results[i].selected == true) {
+                this.form.controls.adherenceCounselling.enable({ onlySelf: true });
+
+                this.form.controls.PrEPStatusToday.enable({ onlySelf: true });
+
+                this.form.controls.DateRestarted.enable({ onlySelf: true });
+
+                this.form.controls.DateInitiated.enable({ onlySelf: true });
+
+            }
+
+
+
+
+        }
+
+        console.log(this.form.controls.PrEPStatusToday.value);
+        console.log(this.form.controls.adherenceCounselling.value);
+
     }
     loadPrepStatus(patientid: number, patientmastervisitid: number): void {
         this.prepService.getPrepStatus(patientid, patientmastervisitid).subscribe(
@@ -559,6 +613,28 @@ export class PrepComponent implements OnInit {
             }
         );
     }
+
+    public onLMPDateChange() {
+        this.dateLMP = this.form.controls.lmp.value;
+
+        this.visitDate = this.form.controls.EnrollmentDate.value;
+        if (this.visitDate !== undefined && this.visitDate !== null) {
+            this.minLMpDate = moment(moment(this.visitDate).subtract(42, 'weeks').format('')).toDate();
+
+            if (moment(this.dateLMP).isBefore(this.minLMpDate)) {
+
+                this.snotifyService.error('Current LMP Date CANNOT be More than 9 months before the VisitDate', 'Mother Profile',
+                    this.notificationService.getConfig());
+                this.form.controls.lmp.setValue('');
+                return false;
+            }
+
+
+        }
+
+
+    }
+
 
 
     onCondomsIssuedSelection(event) {
@@ -644,11 +720,33 @@ export class PrepComponent implements OnInit {
 
     }
     public onSignsOrSymptomsSelection(event) {
-        if (event.isUserInput && event.source.selected && event.source.viewValue == 'Yes') {
-            this.form.controls.signsOfSTI.enable({ onlySelf: true });
-        } else if (event.isUserInput && event.source.selected && event.source.viewValue == 'No') {
-            this.form.controls.signsOfSTI.setValue([]);
-            this.form.controls.signsOfSTI.disable({ onlySelf: true });
+        
+            this.form.controls.contraindications_PrEP_Present.enable({onlySelf: true});
+        if (event.source.selected == true && event.source.viewValue == 'Yes') {
+            this.form.controls.adherenceCounselling.setValue('');
+            this.form.controls.adherenceCounselling.disable({ onlySelf: true });
+            this.form.controls.PrEPStatusToday.setValue('');
+            this.form.controls.PrEPStatusToday.disable({ onlySelf: true });
+            this.form.controls.DateRestarted.setValue('');
+            this.form.controls.DateRestarted.disable({ onlySelf: true });
+            this.form.controls.DateInitiated.setValue('');
+            this.form.controls.DateInitiated.disable({ onlySelf: true });
+            this.form.controls.contraindications_PrEP_Present.setValue('');
+            this.form.controls.contraindications_PrEP_Present.disable({onlySelf:true});
+           
+
+        }  
+        if ( event.source.selected == true && event.source.viewValue == 'No') { 
+           
+            this.form.controls.adherenceCounselling.enable({ onlySelf: true });
+           
+            this.form.controls.PrEPStatusToday.enable({ onlySelf: true });
+           
+            this.form.controls.DateRestarted.enable({ onlySelf: true });
+        
+            this.form.controls.DateInitiated.enable({ onlySelf: true });
+            this.form.controls.contraindications_PrEP_Present.enable({onlySelf: true});
+           
         }
     }
 
@@ -923,7 +1021,7 @@ export class PrepComponent implements OnInit {
                 this.form.controls.partnersexcondoms.disable({ onlySelf: true });
                 this.form.controls.Months.disable({ onlySelf: true });
 
-               
+
 
 
             }
@@ -1459,11 +1557,12 @@ export class PrepComponent implements OnInit {
                 this.form.controls.Months.enable({ onlySelf: true });
                 this.form.controls.InitiationDate.enable({ onlySelf: true });
                 this.form.controls.DateLastUsed.enable({ onlySelf: true });
+             
 
             } else {
                 this.isVisible = false;
                 this.form.controls.TransferInDate.setValue('');
-                // this.form.controls.FacilityListSelected.setValue('');
+                this.form.controls.FacilitySelected.setValue('');
                 this.form.controls.CurrentRegimen.setValue('');
                 this.form.controls.ClinicalNotes.setValue('');
                 this.form.controls.TransferInMflCode.setValue('');
@@ -1471,6 +1570,9 @@ export class PrepComponent implements OnInit {
                 //this.form.controls.PrevPrepUse.setValue('');
                 this.form.controls.Months.disable({ onlySelf: true });
                 this.form.controls.InitiationDate.disable({ onlySelf: true });
+                this.form.controls.Months.setValue('');
+                this.form.controls.InitiationDate.setValue('');
+                this.form.controls.DateLastUsed.setValue('');
 
             }
         }
@@ -1613,6 +1715,15 @@ export class PrepComponent implements OnInit {
             this.form.controls.familyPlanningMethods.disable({ onlySelf: true });
             this.form.controls.planningToGetPregnant.disable({ onlySelf: true });
 
+
+            if (this.form.controls.lmp.value !== null &&
+                this.form.controls.lmp.value !== undefined &&
+                this.form.controls.lmp.value !== '') {
+                this.form.controls.EDD.setValue(
+                    moment(this.form.controls.lmp.value
+                        , 'DD-MM-YYYY').add(280, 'days').toDate());
+
+            }
             // Reset values
             this.form.controls.onFamilyPlanning.setValue('');
             this.form.controls.familyPlanningMethods.setValue('');
@@ -1620,11 +1731,16 @@ export class PrepComponent implements OnInit {
         } else if (event.isUserInput && event.source.selected && event.source.viewValue == 'No') {
             this.form.controls.pregnancyPlanned.disable({ onlySelf: true });
             this.form.controls.pregnancyPlanned.setValue('');
+            this.form.controls.EDD.disable({ onlySelf: true });
+            this.form.controls.EDD.setValue('');
 
             // enable
             this.form.controls.onFamilyPlanning.enable({ onlySelf: true });
             // this.FertilityIntentionForm.controls.familyPlanningMethods.enable({ onlySelf: true });
             this.form.controls.planningToGetPregnant.enable({ onlySelf: true });
+        } else {
+            this.form.controls.EDD.disable({ onlySelf: true });
+            this.form.controls.EDD.setValue('');
         }
     }
 
@@ -2073,15 +2189,17 @@ export class PrepComponent implements OnInit {
                                         }
                                         if (this.isEdit == true) {
 
+                                           
+
                                             const prepStatusCommand: PrepStatusCommand = {
                                                 Id: this.form.controls.idprep.value == null ? 0 : this.form.controls.idprep.value,
                                                 PatientId: this.patientId,
                                                 PatientEncounterId: this.patientMasterVisitId,
                                                 SignsOrSymptomsHIV: this.form.controls.signsOrSymptomsHIV.value,
-                                                AdherenceCounsellingDone: this.form.controls.adherenceCounselling.value,
-                                                PrepStatusToday: this.form.controls.PrEPStatusToday.value,
+                                                AdherenceCounsellingDone: this.form.controls.adherenceCounselling.value == "" ? 0 : this.form.controls.adherenceCounselling.value,
+                                                PrepStatusToday: this.form.controls.PrEPStatusToday.value == "" ? 0 : this.form.controls.PrEPStatusToday.value,
                                                 CreatedBy: this.userId,
-                                                CondomsIssued: this.form.controls.condomsIssued.value,
+                                                CondomsIssued: this.form.controls.condomsIssued.value == "" ? 0 : this.form.controls.condomsIssued.value,
                                                 NoOfCondoms: this.form.controls.noCondomsIssued.value == "" ? 0 : this.form.controls.noCondomsIssued.value,
                                                 DateField: EnrollmentDate
                                             };
@@ -2103,11 +2221,11 @@ export class PrepComponent implements OnInit {
                                                 PatientId: this.patientId,
                                                 PatientEncounterId: this.patientMasterVisitId,
                                                 SignsOrSymptomsHIV: this.form.controls.signsOrSymptomsHIV.value,
-                                                AdherenceCounsellingDone: this.form.controls.adherenceCounselling.value,
-                                                PrepStatusToday: this.form.controls.PrEPStatusToday.value,
+                                                AdherenceCounsellingDone: this.form.controls.adherenceCounselling.value == "" ? 0 : this.form.controls.adherenceCounselling.value,
+                                                PrepStatusToday: this.form.controls.PrEPStatusToday.value == "" ? 0 : this.form.controls.PrEPStatusToday.value,
                                                 CreatedBy: this.userId,
-                                                CondomsIssued: 0,
-                                                NoOfCondoms: 0,
+                                                CondomsIssued: this.form.controls.condomsIssued.value == "" ? 0 : this.form.controls.condomsIssued.value,
+                                                NoOfCondoms: this.form.controls.noCondomsIssued.value == "" ? 0 : this.form.controls.noCondomsIssued.value,
                                                 DateField: EnrollmentDate
                                             };
 

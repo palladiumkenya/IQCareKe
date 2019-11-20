@@ -25,6 +25,7 @@ import { SharedModule } from '../shared/shared.module';
 import { CountyService } from './_services/county.service';
 import { RecordsService } from './_services/records.service';
 import { GenderResolver } from './_services/gender.resolver';
+import {PersonNHIFIdentifiersResolver} from './_services/personnhifidentifiers.resolver';
 import { MaritalStatusResolver } from './_services/maritalstatus.resolver';
 import { EducationLevelResolver } from './_services/educationallevel.resolver';
 import { RelationshipResolver } from './_services/relationship.resolver';
@@ -73,6 +74,7 @@ import {AddWaitingListComponent} from '../shared/add-waiting-list/add-waiting-li
         ConsentSmsResolver,
         ContactCategoryResolver,
         PersonIdentifiersResolver,
+        PersonNHIFIdentifiersResolver,
         YesNoResolver
     ],
     entryComponents: [

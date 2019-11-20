@@ -1,0 +1,1 @@
+UPDATE [dbo].[Mst_LabTestParameter] SET DeleteFlag = 1 where ReferenceId = 'CAS' AND LabTestId = (select top 1 Id from [dbo].[mst_LabTestMaster] where ReferenceId = 'MALARIA_MPS');

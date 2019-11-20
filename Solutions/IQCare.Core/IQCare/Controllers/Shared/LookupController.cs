@@ -102,6 +102,16 @@ namespace IQCare.Controllers.Common
 
         }
 
+        [HttpGet("getNHIFIdentifyerTypes")]
+        public async Task<IActionResult> GetNHIFIdentifyerType()
+        {
+            var results = await _mediator.Send(new GetPersonIdentificationCommand { CodeName = "NHIFNO" }, HttpContext.RequestAborted);
+
+            if (results.IsValid)
+                return Ok(results.Value);
+            return BadRequest(results);
+        }
+
         [HttpGet("getocc")]
         public async Task<IActionResult>  GetOccupations()
         {

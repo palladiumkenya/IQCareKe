@@ -78,16 +78,6 @@
                                             #age="ngModel">
                                     </div>
                                 </div>
-                                
-                                <div class="col-md-3">
-                                    <label class="sr-only" for="gender">ServiceArea</label>
-                                    <div class="form-group">
-                                        <select class="form-control" id="serviceArea" [(ngModel)]="clientSearch.serviceArea" name="serviceArea">
-                                            <option [ngValue]="undefined" disabled selected>Service Area</option>
-                                            <option *ngFor="let serviceList of servicesList" [value]="serviceList.id">{{serviceList.name}}</option>
-                                        </select>
-                                    </div>
-                                </div>                                
                             </div>
                             
                             <div class="row">
