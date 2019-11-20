@@ -6,6 +6,7 @@ import {catchError, tap} from 'rxjs/operators';
 import {Observable} from 'rxjs';
 import {LookupItemView} from '../../shared/_models/LookupItemView';
 import {OtzActivityFormCommand} from '../otz/activity-form/activity-form.component';
+import {PatientCareEndingInterface} from '../otz/otz-careending/otz-careending.component';
 
 const httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -62,5 +63,10 @@ export class OtzService {
     
     public getOtzCompletedModules(patientId: number): Observable<any> {
         return this.http.get<any>(this.API_URL + '/api/Otz/GetOtzCompletedModules/' + patientId).pipe();
+    }
+    
+    public careEndOtz(otzCareEndingCommand: PatientCareEndingInterface): Observable<any> {
+        return this.http.post<any>(this.API_URL + '/api/PatientServices/CareEndPatient', 
+            JSON.stringify(otzCareEndingCommand), httpOptions).pipe();
     }
 }

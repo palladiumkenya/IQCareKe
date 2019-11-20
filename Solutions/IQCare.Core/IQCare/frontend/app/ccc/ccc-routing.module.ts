@@ -4,6 +4,7 @@ import {ActivityFormComponent} from './otz/activity-form/activity-form.component
 import {OtzEnrollmentComponent} from './otz/otz-enrollment/otz-enrollment.component';
 import {EncounterHistoryComponent} from './otz/encounter-history/encounter-history.component';
 import {ViewOtzFormComponent} from './otz/view-otz-form/view-otz-form.component';
+import {OtzCareendingComponent} from './otz/otz-careending/otz-careending.component';
 
 const routes: Routes = [
     {
@@ -29,6 +30,11 @@ const routes: Routes = [
     {
         path: 'activityForm/update/:patientId/:personId/:serviceId/:id',
         component: ActivityFormComponent,
+        pathMatch: 'full'
+    },
+    {
+        path: 'careEnding/:patientId/:personId/:serviceId',
+        component: OtzCareendingComponent,
         pathMatch: 'full'
     }
 ];

@@ -1,4 +1,4 @@
-﻿using IQCare.Common.BusinessProcess.Commands;
+using IQCare.Common.BusinessProcess.Commands;
 using IQCare.Common.BusinessProcess.Commands.ClientLookup;
 using IQCare.Common.BusinessProcess.Commands.Enrollment;
 using IQCare.Common.BusinessProcess.Commands.PersonCommand;
@@ -220,7 +220,6 @@ namespace IQCare.Controllers.Registration
                 return Ok(encountervisit.Value);
             return BadRequest(encountervisit);
         }
-
 
         [HttpGet("GetPatientEnrollmentByServiceAreaId/{patientId}/{serviceAreaId}")]
         public async Task<IActionResult> GetPatientEnrollmentByServiceAreaId(int patientId, int serviceAreaId)

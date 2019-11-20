@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, NgZone, OnInit} from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {MatTableDataSource} from '@angular/material/table';
 import {LookupItemView} from '../../../shared/_models/LookupItemView';
@@ -8,9 +8,10 @@ import {ModulesCoveredComponent} from '../modules-covered/modules-covered.compon
 import * as moment from 'moment';
 import {NotificationService} from '../../../shared/_services/notification.service';
 import {SnotifyService} from 'ng-snotify';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {EnrollmentService} from '../../../registration/_services/enrollment.service';
 import {Enrollment} from '../../../registration/_models/enrollment';
+import {OtzActivityFormCommand} from '../activity-form/activity-form.component';
 
 @Component({
     selector: 'app-otz-enrollment',
@@ -26,6 +27,7 @@ export class OtzEnrollmentComponent implements OnInit {
     serviceCode: string;
     serviceId: number;
     userId: number;
+    maxDate: Date;
 
     displayedColumns = ['module', 'dateCovered', 'action'];
     topics_table_data: TopicsTableData[] = [];
@@ -37,7 +39,9 @@ export class OtzEnrollmentComponent implements OnInit {
                 private notificationService: NotificationService,
                 private snotifyService: SnotifyService,
                 private route: ActivatedRoute,
-                private enrollmentService: EnrollmentService) { }
+                private enrollmentService: EnrollmentService,
+                public zone: NgZone,
+                private router: Router) { }
     
     async ngOnInit() {
         this.OtzEnrollmentForm = this._formBuilder.group({
@@ -87,10 +91,10 @@ export class OtzEnrollmentComponent implements OnInit {
                     return;
                 }
 
-                const topicData = this.topics_table_data.filter(obj => obj.moduleCompleted.Name == data.topic.Name
+                const topicData = this.topics_table_data.filter(obj => obj.moduleCompleted.itemName == data.topic.itemName
                     && moment(obj.dateCompleted).format('YYYY-MM-DD') == moment(data.dateCompleted).format('YYYY-MM-DD'));
                 if (topicData.length > 0) {
-                    this.snotifyService.info(data.topic.Name + ' already exists for date '
+                    this.snotifyService.info(data.topic.itemName + ' already exists for date '
                         + moment(data.dateCompleted).format('YYYY-MM-DD'), 'OTZ Topics',
                         this.notificationService.getConfig());
                     return;
@@ -113,8 +117,28 @@ export class OtzEnrollmentComponent implements OnInit {
 
     async validate() {
         if (this.OtzEnrollmentForm.valid) {
-            console.log(this.OtzEnrollmentForm.value);
-            return ;
+            const noOption = this.yesNoOptions.filter(obj => obj.itemName == 'No');
+            
+            const saveCommand: OtzActivityFormCommand = {
+                UserId: this.userId,
+                PatientId: this.patientId,
+                ServiceId: this.serviceId,
+                OtzActivity: [],
+                AttendedSupportGroup: noOption[0].itemId,
+                Remarks: null,
+                VisitDate: this.OtzEnrollmentForm.value['enrollmentDate']
+            };
+            for (let i = 0; i < this.topics_table_data.length; i++) {
+                saveCommand.OtzActivity.push({
+                    TopicId: this.topics_table_data[i].moduleCompleted.itemId,
+                    DateCompleted: this.topics_table_data[i].dateCompleted
+                });
+            }
+            
+            if (saveCommand.OtzActivity.length > 0) {
+                const otzResult = await this.otzService.saveOtzActivityForm(saveCommand).toPromise();
+            }            
+            
             const enrollment = new Enrollment();
             const enrollmentNo = Math.random().toString(36).slice(5);
             enrollment.CreatedBy = this.userId;
@@ -133,10 +157,14 @@ export class OtzEnrollmentComponent implements OnInit {
             
             try {
                 const result = await this.enrollmentService.enrollClient(enrollment).toPromise();
+
+                this.zone.run(() => {
+                    this.router.navigate(['/ccc/encounterHistory/' + this.patientId + '/' + this.personId + '/' + this.serviceId],
+                        { relativeTo: this.route });
+                });
             } catch (e) {
                 console.log(e);
-            }            
-            // const result = await this.otzService.saveOtzEnrollment().toPromise();
+            }
         }
     }
 }
