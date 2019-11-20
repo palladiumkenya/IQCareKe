@@ -47,6 +47,14 @@
                             </div>
 
                             <mat-divider></mat-divider>
+                            
+                            <div class="row">
+                                &nbsp;
+                            </div>
+                            
+                            <div class="row">
+                                <strong class="col-lg-3 col-sm-3 col-xs-12">Modules previously covered before enrollment</strong>
+                            </div>
 
                             <div class="row">
                                 &nbsp;
@@ -59,12 +67,12 @@
 
                                             <ng-container matColumnDef="module">
                                                 <mat-header-cell *matHeaderCellDef> OTZ Module </mat-header-cell>
-                                                <mat-cell *matCellDef="let element"> {{element.moduleCompleted.Name}} </mat-cell>
+                                                <mat-cell *matCellDef="let element"> {{ element.moduleCompleted.itemName }} </mat-cell>
                                             </ng-container>
 
                                             <ng-container matColumnDef="dateCovered">
                                                 <mat-header-cell *matHeaderCellDef> Date Covered </mat-header-cell>
-                                                <mat-cell *matCellDef="let element"> {{element.dateCompleted | date: 'dd-MMM-yyyy' }} </mat-cell>
+                                                <mat-cell *matCellDef="let element"> {{ element.dateCompleted | date: 'dd-MMM-yyyy' }} </mat-cell>
                                             </ng-container>
 
                                             <ng-container matColumnDef="action">
