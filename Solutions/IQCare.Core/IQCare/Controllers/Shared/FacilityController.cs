@@ -124,10 +124,10 @@ namespace IQCare.Controllers.Shared
             return BadRequest(response);
         }
 
-        [HttpGet("GetDuplicatePersons")]
-        public async Task<IActionResult> GetDuplicatePersons()
+        [HttpPost("GetDuplicatePersons")]
+        public async Task<IActionResult> GetDuplicatePersons([FromBody]GetDuplicatePersonsCommand getDuplicatePersonsCommand)
         {
-            var response = await _mediatR.Send(new GetDuplicatePersonsCommand(), Request.HttpContext.RequestAborted);
+            var response = await _mediatR.Send(getDuplicatePersonsCommand, Request.HttpContext.RequestAborted);
             if (response.IsValid)
                 return Ok(response.Value);
             return BadRequest(response);
