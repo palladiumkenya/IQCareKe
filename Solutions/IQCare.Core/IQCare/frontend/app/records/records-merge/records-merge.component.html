@@ -5,6 +5,276 @@
                 <span class="widget-caption">Merge Records</span>
             </div>
             <div class="widget-body">
+                <div class="row">
+                    <div class="col-lg-6 col-sm-6 col-xs-12">
+                        <div class="col-lg-12 col-sm-12 col-xs-12">
+                            <div class="form-title">
+                                <span class="mat-accent"> Demographics </span>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-12 col-sm-12 col-xs-12">
+                            <div class="col-lg-6 col-sm-6 col-xs-12">
+                                <span>First Name: </span>
+                            </div>
+                            <div class="col-lg-6 col-sm-6 col-xs-12">
+                                <span> <strong> {{ preferredPerson.firstName }} </strong></span>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-12 col-sm-12 col-xs-12">
+                            <div class="col-lg-6 col-sm-6 col-xs-12">
+                                <span>Middle Name: </span>
+                            </div>
+                            <div class="col-lg-6 col-sm-6 col-xs-12">
+                                <span> <strong> {{ preferredPerson.middleName }} </strong> </span>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-12 col-sm-12 col-xs-12">
+                            <div class="col-lg-6 col-sm-6 col-xs-12">
+                                <span>Last Name: </span>
+                            </div>
+                            <div class="col-lg-6 col-sm-6 col-xs-12">
+                                <span> <strong> {{ preferredPerson.lastName }} </strong> </span>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-12 col-sm-12 col-xs-12">
+                            <div class="col-lg-6 col-sm-6 col-xs-12">
+                                <span>Date of Birth: </span>
+                            </div>
+                            <div class="col-lg-6 col-sm-6 col-xs-12">
+                                <span> <strong> {{ preferredPerson.dateOfBirth | date: 'dd-MMM-yyyy' }} </strong> </span>
+                            </div>
+                        </div>
+                        
+                        <div class="row">
+                            &nbsp;
+                        </div>
+
+                        <div class="col-lg-12 col-sm-12 col-xs-12">
+                            <div class="form-title">
+                                <span class="mat-accent"> Identifiers </span>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-12 col-sm-12 col-xs-12">
+                            <span *ngFor="let identifier of preferredPatientIdentifiers;">
+                                <div class="col-lg-6 col-sm-6 col-xs-12">
+                                <span> {{ getServiceName(identifier.identifierTypeId) }} : </span>
+                            </div>
+                            <div class="col-lg-6 col-sm-6 col-xs-12">
+                                <span> <strong> {{ identifier.identifierValue }} </strong> </span>
+                            </div>
+                            </span>
+                        </div>
+
+
+                        <div class="col-lg-12 col-sm-12 col-xs-12">
+                            <div class="form-title">
+                                <span class="mat-accent"> Contact && Relationships/Guardians/Next of Kin </span>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-12 col-sm-12 col-xs-12" *ngIf="preferredPatientContact && preferredPatientContact.mobileNumber">
+                            <div class="col-lg-6 col-sm-6 col-xs-12">
+                                <span>Mobile Number: </span>
+                            </div>
+                            
+                            <div class="col-lg-6 col-sm-6 col-xs-12">
+                                <span> <strong> {{ preferredPatientContact.mobileNumber }} </strong> </span>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-12 col-sm-12 col-xs-12" *ngIf="preferredPatientContact && preferredPatientContact.alternativeNumber">
+                            <div class="col-lg-6 col-sm-6 col-xs-12">
+                                <span>Alternative Mobile Number: </span>
+                            </div>
+                            <div class="col-lg-6 col-sm-6 col-xs-12">
+                                <span> <strong> {{ preferredPatientContact.alternativeNumber }} </strong> </span>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-12 col-sm-12 col-xs-12" *ngIf="preferredPatientContact && preferredPatientContact.emailAddress">
+                            <div class="col-lg-6 col-sm-6 col-xs-12">
+                                <span>Email Address: </span>
+                            </div>
+                            <div class="col-lg-6 col-sm-6 col-xs-12">
+                                <span> <strong> {{ preferredPatientContact.emailAddress }} </strong> </span>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            &nbsp;
+                        </div>
+
+                        <div class="col-lg-12 col-sm-12 col-xs-12">
+                            <div class="form-title">
+                                <span class="mat-accent"> Encounters </span>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-12 col-sm-12 col-xs-12">
+                            <span *ngFor="let encounters of preferredPatientEncounters;">
+                                <div class="col-lg-6 col-sm-6 col-xs-12">
+                                <span> {{ encounters.encounterType }} : </span>
+                            </div>
+                            <div class="col-lg-6 col-sm-6 col-xs-12">
+                                <span> <strong> {{ encounters.encounterStartTime | date: 'dd-MMM-yyyy' }} </strong> </span>
+                            </div>
+                            </span>
+                        </div>
+                        
+                    </div>
+
+                    <div class="col-lg-6 col-sm-6 col-xs-12">
+                        <div class="col-lg-12 col-sm-12 col-xs-12">
+                            <div class="form-title">
+                                <span class="mat-accent"> Demographics </span>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-12 col-sm-12 col-xs-12">
+                            <div class="col-lg-6 col-sm-6 col-xs-12">
+                                <span>First Name: </span>
+                            </div>
+                            <div class="col-lg-6 col-sm-6 col-xs-12">
+                                <span> <strong> {{ unPreferredPerson.firstName }} </strong> </span>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-12 col-sm-12 col-xs-12">
+                            <div class="col-lg-6 col-sm-6 col-xs-12">
+                                <span>Middle Name: </span>
+                            </div>
+                            <div class="col-lg-6 col-sm-6 col-xs-12">
+                                <span> <strong> {{ unPreferredPerson.middleName }} </strong>  </span>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-12 col-sm-12 col-xs-12">
+                            <div class="col-lg-6 col-sm-6 col-xs-12">
+                                <span>Last Name: </span>
+                            </div>
+                            <div class="col-lg-6 col-sm-6 col-xs-12">
+                                <span> <strong> {{ unPreferredPerson.lastName }} </strong> </span>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-12 col-sm-12 col-xs-12">
+                            <div class="col-lg-6 col-sm-6 col-xs-12">
+                                <span>Date of Birth: </span>
+                            </div>
+                            <div class="col-lg-6 col-sm-6 col-xs-12">
+                                <span> <strong> {{ unPreferredPerson.dateOfBirth | date: 'dd-MMM-yyyy' }} </strong> </span>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-12 col-sm-12 col-xs-12">
+                            <div class="form-title">
+                                <span class="mat-accent"> Identifiers </span>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-12 col-sm-12 col-xs-12">
+                            <span *ngFor="let identifier of unPreferredPatientIdentifiers;">
+                                <div class="col-lg-6 col-sm-6 col-xs-12">
+                                <span> {{ getServiceName(identifier.identifierTypeId) }} : </span>
+                            </div>
+                            <div class="col-lg-6 col-sm-6 col-xs-12">
+                                <span> <strong>  {{ identifier.identifierValue }}  </strong></span>
+                            </div>
+                            </span>
+                        </div>
+
+
+                        <div class="col-lg-12 col-sm-12 col-xs-12">
+                            <div class="form-title">
+                                <span class="mat-accent"> Contact && Relationships/Guardians/Next of Kin </span>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-12 col-sm-12 col-xs-12" *ngIf="unPreferredPatientContact && unPreferredPatientContact.mobileNumber">
+                            <div class="col-lg-6 col-sm-6 col-xs-12">
+                                <span>Mobile Number: </span>
+                            </div>
+
+                            <div class="col-lg-6 col-sm-6 col-xs-12">
+                                <span> <strong> {{ unPreferredPatientContact.mobileNumber }} </strong> </span>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-12 col-sm-12 col-xs-12" *ngIf="unPreferredPatientContact && unPreferredPatientContact.alternativeNumber">
+                            <div class="col-lg-6 col-sm-6 col-xs-12">
+                                <span>Alternative Mobile Number: </span>
+                            </div>
+                            <div class="col-lg-6 col-sm-6 col-xs-12">
+                                <span> <strong> {{ unPreferredPatientContact.alternativeNumber }} </strong>  </span>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-12 col-sm-12 col-xs-12" *ngIf="unPreferredPatientContact && unPreferredPatientContact.emailAddress">
+                            <div class="col-lg-6 col-sm-6 col-xs-12">
+                                <span>Email Address: </span>
+                            </div>
+                            <div class="col-lg-6 col-sm-6 col-xs-12">
+                                <span> <strong> {{ unPreferredPatientContact.emailAddress }} </strong>  </span>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            &nbsp;
+                        </div>
+
+                        <div class="col-lg-12 col-sm-12 col-xs-12">
+                            <div class="form-title">
+                                <span class="mat-accent"> Encounters </span>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-12 col-sm-12 col-xs-12">
+                            <span *ngFor="let encounters of unPreferredPatientEncounters;">
+                                <div class="col-lg-6 col-sm-6 col-xs-12">
+                                <span> {{ encounters.encounterType }} : </span>
+                            </div>
+                            <div class="col-lg-6 col-sm-6 col-xs-12">
+                                <span> <strong> {{ encounters.encounterStartTime | date: 'dd-MMM-yyyy' }} </strong> </span>
+                            </div>
+                            </span>
+                        </div>
+                        
+                    </div>
+                </div>
+                
+                <div class="row">
+                    &nbsp;
+                </div>
+                
+                <form [formGroup]="MergePreferredForm">
+                    <div class="row">
+                        <div class="col-lg-12 col-sm-12 col-xs-12">
+                            <mat-radio-group class="col-lg-12 col-sm-12 col-xs-12" formControlName="preferred" aria-label="Select an option">
+                                <mat-radio-button class="col-lg-6 col-sm-6 col-xs-12"  value="1">Preferred?</mat-radio-button>
+                                <mat-radio-button class="col-lg-6 col-sm-6 col-xs-12"  value="2">Preferred?</mat-radio-button>
+                            </mat-radio-group>
+                        </div>
+                    </div>
+    
+                    <div class="row">
+                        &nbsp;
+                    </div>
+                
+                    <div class="row">
+                        <button mat-raised-button color="primary" type="button" (click)="mergePerson()">
+                            Merge as Preferred
+                        </button>
+                        &nbsp;&nbsp;&nbsp;
+                        <button mat-raised-button color="accent" type="button" (click)="close()">
+                            Close
+                        </button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>

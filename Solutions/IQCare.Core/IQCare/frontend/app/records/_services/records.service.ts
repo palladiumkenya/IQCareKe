@@ -109,4 +109,12 @@ export class RecordsService {
         return this.http.post<any>(this.API_URL + '/api/Facility/GetDuplicatePersons', 
             JSON.stringify(matchDuplicatePerson), httpOptions).pipe();
     }
+    
+    public getAllIdentifiers(): Observable<any[]> {
+        return this.http.get<any[]>(this.API_URL + '/api/ServiceArea/GetAllIdentifiers').pipe();
+    }
+    
+    public getPersonContacts(personId: number): Observable<any> {
+        return this.http.get(this.API_URL + '/api/PatientServices/GetContactByPersonId/' + personId).pipe();
+    }
 }

@@ -63,7 +63,7 @@ export class MergeComponent implements OnInit {
             this.snotifyService.success('Found possible duplicates ',
                 'Registration', this.notificationService.getConfig());
         } catch (e) {
-            this.snotifyService.error('An error occurred while trying to find duplicates ' + e.error.errors[0].message,
+            this.snotifyService.error(e.error.errors[0].message,
                 'Registration', this.notificationService.getConfig());
             this.spinner.hide();
         }        

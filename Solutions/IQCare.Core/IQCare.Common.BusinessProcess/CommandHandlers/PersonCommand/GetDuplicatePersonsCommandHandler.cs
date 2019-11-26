@@ -79,8 +79,9 @@ namespace IQCare.Common.BusinessProcess.CommandHandlers.PersonCommand
                     matchHIVDiagnosisDate.SqlDbType = SqlDbType.Bit;
                     matchHIVDiagnosisDate.ParameterName = "@matchHIVDiagnosisDate";
                     matchHIVDiagnosisDate.Value = 0;
-                    
 
+
+                    _unitOfWork.Context.Database.SetCommandTimeout(3600);
                     var duplicatePersons = await _unitOfWork.Context.Query<DuplicatePersonsPoco>().FromSql(sql.ToString(), parameters: new []
                     {
                         matchFirstName,
@@ -93,7 +94,7 @@ namespace IQCare.Common.BusinessProcess.CommandHandlers.PersonCommand
                         matchARTStartDate,
                         matchHIVDiagnosisDate
 
-                    }).ToListAsync();
+                    }).AsNoTracking().ToListAsync();
 
                     return Result<List<DuplicatePersonsPoco>>.Valid(duplicatePersons);
                 }

@@ -346,10 +346,6 @@ export class PersonHomeService {
     }
 
     public AddHivPartnerProfile(PatientId: number, hivpartnerprofiles: any[], createdby: number): Observable<any> {
-        //  if (hivpartnerprofiles.length == 0) {
-        //    return of([]);
-        //}
-
         const Indata = {
             'PatientId': PatientId,
             'CreatedBy': createdby,
@@ -421,5 +417,9 @@ export class PersonHomeService {
             tap(getSecondaryRelationships => this.errorHandler.log(`successfully fetched person secondary relationships`)),
             catchError(this.errorHandler.handleError<any>('Error fetching person secondary relationships'))
         );
+    }
+    
+    public getPatientEncountersCompleted(patientId: number): Observable<any[]> {
+        return this.http.get<any[]>(this.API_URL + '/api/PatientServices/GetPatientEncountersCompletedCommand/' + patientId).pipe();
     }
 }
