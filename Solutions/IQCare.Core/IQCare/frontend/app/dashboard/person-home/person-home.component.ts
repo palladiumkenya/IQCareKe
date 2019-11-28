@@ -76,8 +76,6 @@ export class PersonHomeComponent implements OnInit {
             const { ExitReasonsArray } = res;
             const { CarendedArray } = res;
             const { HTSEncounterHistoryArray } = res;
-            console.log('Resource loaded');
-            console.log(RiskAssessmentArray);
             this.careenddetails = CarendedArray;
 
             this.htshistory = HTSEncounterHistoryArray;

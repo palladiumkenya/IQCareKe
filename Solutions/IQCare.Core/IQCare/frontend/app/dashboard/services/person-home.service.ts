@@ -126,6 +126,7 @@ export class PersonHomeService {
             catchError(this.errorHandler.handleError<any>('getRelationshipsByPatientId'))
         );
     }
+    
     public GetCurrentPatientVitalsInfo(personId: number): Observable<any> {
         return this.http.get<any>(this.API_URL + '/api/PatientServices/GetCurrentPersonVitals/' + personId).pipe(
             tap(GetCurrentPatientVitalsInfo => this.errorHandler.log('get patient vitals details')),

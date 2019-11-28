@@ -13,12 +13,16 @@ export class ModulesCoveredComponent implements OnInit {
     title: string;
     form: FormGroup;
     topics: LookupItemView[];
+    otzEnrollmentDate: Date;
+    maxDate: Date;
     
     constructor(private fb: FormBuilder,
                 private dialogRef: MatDialogRef<ModulesCoveredComponent>,
                 @Inject(MAT_DIALOG_DATA) data,
                 private otzService: OtzService) {
         this.title = 'Topics Covered';
+        this.otzEnrollmentDate = data.otzEnrollmentDate;
+        this.maxDate = new Date();
     }
     
     async ngOnInit() {
