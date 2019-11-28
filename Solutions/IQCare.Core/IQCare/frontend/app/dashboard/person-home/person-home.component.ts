@@ -14,6 +14,7 @@ import { LookupItemService } from '../../shared/_services/lookup-item.service';
 
 import { AddWaitingListComponent } from '../../shared/add-waiting-list/add-waiting-list.component';
 import * as moment from 'moment';
+import { mergeMap } from 'rxjs/operators';
 @Component({
 
     selector: 'app-person-home',
@@ -62,21 +63,26 @@ export class PersonHomeComponent implements OnInit {
         this.encounterDetail = new EncounterDetails();
     }
 
-    ngOnInit() {
+    async  ngOnInit() {
         this.route.params.subscribe(params => {
             this.personId = params['id'];
         });
 
-        this.route.data.subscribe(res => {
+        this.route.data.subscribe(async res => {
 
             const { servicesArray } = res;
             // const { HTSEncounterArray } = res;
             const { PersonVitalsArray } = res;
             const { RiskAssessmentArray } = res;
             const { ExitReasonsArray } = res;
-            const { CarendedArray } = res;
+
             const { HTSEncounterHistoryArray } = res;
-            this.careenddetails = CarendedArray;
+            console.log('Resource loaded');
+            console.log(RiskAssessmentArray);
+            this.careenddetails = await this.personService.getPatientByPersonId(this.personId).pipe(mergeMap(
+                res => this.personService.getPatientCareEndedHistory(res['patientId'])
+
+            )).toPromise();
 
             this.htshistory = HTSEncounterHistoryArray;
             this.services = servicesArray;
@@ -116,8 +122,10 @@ export class PersonHomeComponent implements OnInit {
         // this.encounterDetail = this.htsencounters[0];
 
         const servicesRightOrder = [2, 1, 3, 5, 4, 6, 7, 8];
-        const ordered_array = this.mapOrder(this.services, servicesRightOrder, 'id');
-        this.services = ordered_array;
+        if (this.services != undefined) {
+            const ordered_array = this.mapOrder(this.services, servicesRightOrder, 'id');
+            this.services = ordered_array;
+        }
 
         localStorage.removeItem('patientEncounterId');
         localStorage.removeItem('patientMasterVisitId');
