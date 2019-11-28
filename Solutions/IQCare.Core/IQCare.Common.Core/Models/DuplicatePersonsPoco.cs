@@ -25,7 +25,8 @@ namespace IQCare.Common.Core.Models
         public int PatientId { get; set; }
 
         public int PersonId { get; set; }
+        public string Sex { get; set; }
 
-        public Int64 GroupingFilter { get; set; }
+        public int GroupingFilter { get; set; }
     }
 }

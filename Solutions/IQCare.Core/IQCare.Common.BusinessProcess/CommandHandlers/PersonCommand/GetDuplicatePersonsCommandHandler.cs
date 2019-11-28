@@ -30,27 +30,27 @@ namespace IQCare.Common.BusinessProcess.CommandHandlers.PersonCommand
                 try
                 {
                     StringBuilder sql = new StringBuilder();
-                    sql.Append("sp_GetDuplicatePatientRecords @matchFirstName, @matchMiddleName, @matchLastname, @matchSex, @matchEnrollmentNumber, @matchDOB, @matchEnrollmentDate, @matchARTStartDate, @matchHIVDiagnosisDate");
+                    sql.Append("sp_GetPossibleDuplicates @matchFirstName, @matchMiddleName, @matchLastname, @matchSex, @matchEnrollmentNumber, @matchDOB, @matchEnrollmentDate, @matchARTStartDate, @matchHIVDiagnosisDate");
 
                     var matchFirstName = new SqlParameter();
                     matchFirstName.SqlDbType = SqlDbType.Bit;
                     matchFirstName.ParameterName = "@matchFirstName";
-                    matchFirstName.Value = 1;
+                    matchFirstName.Value = request.matchFirstName;
 
                     var matchMiddleName = new SqlParameter();
                     matchMiddleName.SqlDbType = SqlDbType.Bit;
                     matchMiddleName.ParameterName = "@matchMiddleName";
-                    matchMiddleName.Value = 1;
+                    matchMiddleName.Value = request.matchMiddleName;
 
                     var matchLastname = new SqlParameter();
                     matchLastname.SqlDbType = SqlDbType.Bit;
                     matchLastname.ParameterName = "@matchLastname";
-                    matchLastname.Value = 1;
+                    matchLastname.Value = request.matchLastname;
 
                     var matchSex = new SqlParameter();
                     matchSex.SqlDbType = SqlDbType.Bit;
                     matchSex.ParameterName = "@matchSex";
-                    matchSex.Value = 1;
+                    matchSex.Value = request.matchSex;
 
 
                     var matchEnrollmentNumber = new SqlParameter();
@@ -61,7 +61,7 @@ namespace IQCare.Common.BusinessProcess.CommandHandlers.PersonCommand
                     var matchDOB = new SqlParameter();
                     matchDOB.SqlDbType = SqlDbType.Bit;
                     matchDOB.ParameterName = "@matchDOB";
-                    matchDOB.Value = 0;
+                    matchDOB.Value = request.matchDOB;
 
 
                     var matchEnrollmentDate = new SqlParameter();
@@ -79,8 +79,9 @@ namespace IQCare.Common.BusinessProcess.CommandHandlers.PersonCommand
                     matchHIVDiagnosisDate.SqlDbType = SqlDbType.Bit;
                     matchHIVDiagnosisDate.ParameterName = "@matchHIVDiagnosisDate";
                     matchHIVDiagnosisDate.Value = 0;
-                    
 
+
+                    _unitOfWork.Context.Database.SetCommandTimeout(3600);
                     var duplicatePersons = await _unitOfWork.Context.Query<DuplicatePersonsPoco>().FromSql(sql.ToString(), parameters: new []
                     {
                         matchFirstName,
@@ -93,14 +94,14 @@ namespace IQCare.Common.BusinessProcess.CommandHandlers.PersonCommand
                         matchARTStartDate,
                         matchHIVDiagnosisDate
 
-                    }).ToListAsync();
+                    }).AsNoTracking().ToListAsync();
 
                     return Result<List<DuplicatePersonsPoco>>.Valid(duplicatePersons);
                 }
                 catch (Exception e)
                 {
-                    Log.Error(e,$"Could not fetch duplicate persons");
-                    return Result<List<DuplicatePersonsPoco>>.Invalid($"Could not fetch duplicate persons");
+                    Log.Error(e, $"Could not fetch duplicate persons");
+                    return Result<List<DuplicatePersonsPoco>>.Invalid($"Could not fetch duplicate persons. Message: {e.Message}");
                 }
             }
         }
