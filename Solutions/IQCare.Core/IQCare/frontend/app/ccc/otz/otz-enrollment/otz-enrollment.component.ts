@@ -12,12 +12,14 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {EnrollmentService} from '../../../registration/_services/enrollment.service';
 import {Enrollment} from '../../../registration/_models/enrollment';
 import {OtzActivityFormCommand} from '../activity-form/activity-form.component';
+import {RecordsService} from '../../../records/_services/records.service';
+import {PersonHomeService} from '../../../dashboard/services/person-home.service';
 
 @Component({
     selector: 'app-otz-enrollment',
     templateUrl: './otz-enrollment.component.html',
     styleUrls: ['./otz-enrollment.component.css'],
-    providers: [EnrollmentService]
+    providers: [EnrollmentService, PersonHomeService]
 })
 export class OtzEnrollmentComponent implements OnInit {
     OtzEnrollmentForm: FormGroup;
@@ -28,6 +30,8 @@ export class OtzEnrollmentComponent implements OnInit {
     serviceId: number;
     userId: number;
     maxDate: Date;
+    cccEnrollmentDate: Date;
+    serviceAreaIdentifiers: any;
 
     displayedColumns = ['module', 'dateCovered', 'action'];
     topics_table_data: TopicsTableData[] = [];
@@ -41,7 +45,9 @@ export class OtzEnrollmentComponent implements OnInit {
                 private route: ActivatedRoute,
                 private enrollmentService: EnrollmentService,
                 public zone: NgZone,
-                private router: Router) { }
+                private router: Router,
+                private recordsService: RecordsService,
+                private personHomeService: PersonHomeService) { }
     
     async ngOnInit() {
         this.OtzEnrollmentForm = this._formBuilder.group({
@@ -63,6 +69,12 @@ export class OtzEnrollmentComponent implements OnInit {
                 this.patientId = patientId;
             }
         );
+
+
+        const result = await this.personHomeService.getPatientEnrollmentDateByServiceAreaId(this.patientId, 1).toPromise();
+        this.cccEnrollmentDate = result.enrollmentDate;
+
+        this.serviceAreaIdentifiers = await this.personHomeService.getServiceAreaIdentifiers(this.serviceId).toPromise();
     }
 
     onClientTransferInChange(event) {
@@ -76,11 +88,13 @@ export class OtzEnrollmentComponent implements OnInit {
     }
 
     NewTopicCovered() {
+        const otzEnrollmentDate = this.OtzEnrollmentForm.get('enrollmentDate').value;
         const dialogConfig = new MatDialogConfig();
         dialogConfig.disableClose = true;
         dialogConfig.autoFocus = true;
 
         dialogConfig.data = {
+            otzEnrollmentDate: otzEnrollmentDate
         };
 
         const dialogRef = this.dialog.open(ModulesCoveredComponent, dialogConfig);
@@ -151,7 +165,7 @@ export class OtzEnrollmentComponent implements OnInit {
             enrollment.ServiceAreaId = this.serviceId;
             enrollment.transferIn = true;
             enrollment.ServiceIdentifiersList.push({
-                'IdentifierId': 27,
+                'IdentifierId': this.serviceAreaIdentifiers['serviceAreaIdentifiers'][0]['identifierId'],
                 'IdentifierValue': enrollmentNo
             });
             

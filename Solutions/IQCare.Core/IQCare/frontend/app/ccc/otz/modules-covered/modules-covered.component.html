@@ -18,7 +18,7 @@
 
         <div class="col-md-6 col-xs-12">
             <mat-form-field class="col-md-12">
-                <input formControlName="dateCompleted" id="dateCompleted" name="dateCompleted" matInput (focus)="dateCompleted.open()"
+                <input formControlName="dateCompleted" [min]="otzEnrollmentDate" [max]="maxDate" id="dateCompleted" name="dateCompleted" matInput (focus)="dateCompleted.open()"
                        [matDatepicker]="dateCompleted" placeholder="Date Completed">
                 <mat-datepicker-toggle matSuffix [for]="dateCompleted"></mat-datepicker-toggle>
                 <mat-datepicker #dateCompleted></mat-datepicker>
