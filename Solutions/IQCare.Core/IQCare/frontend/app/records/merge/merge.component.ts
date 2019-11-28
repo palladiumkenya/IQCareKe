@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, NgZone, OnInit} from '@angular/core';
 import {FormBuilder, FormControl, FormGroup} from '@angular/forms';
 import {RecordsService} from '../_services/records.service';
 import {MatchDuplicatePerson} from '../_models/matchduplicate';
@@ -10,6 +10,7 @@ import {SelectionModel} from '@angular/cdk/collections';
 import {MatDialog, MatDialogConfig} from '@angular/material/dialog';
 import {PersoncontactsComponent} from '../person/personcontacts/personcontacts.component';
 import {RecordsMergeComponent} from '../records-merge/records-merge.component';
+import {ActivatedRoute, Router} from '@angular/router';
 
 @Component({
   selector: 'app-merge',
@@ -18,6 +19,9 @@ import {RecordsMergeComponent} from '../records-merge/records-merge.component';
 })
 export class MergeComponent implements OnInit {
     MergeForm: FormGroup;
+    preferredPersonId: number;
+    unPreferredPersonId: number;
+    userId: number;
     
     displayedColumns = ['select', 'firstName', 'middleName', 'lastName', 'dateOfBirth', 
         'patientEnrollmentId', 'enrollmentDate', 'mobileNumber', 'ptn_Pk', 'patientId', 'personId', 'sex', 'groupingFilter'];
@@ -30,7 +34,10 @@ export class MergeComponent implements OnInit {
                 private spinner: NgxSpinnerService,
                 private snotifyService: SnotifyService,
                 private notificationService: NotificationService,
-                private dialog: MatDialog) {
+                private dialog: MatDialog,
+                public zone: NgZone,
+                private router: Router,
+                private route: ActivatedRoute) {
         const initialSelection = [];
         const allowMultiSelect = true;
         this.selection = new SelectionModel<any>(allowMultiSelect, initialSelection);
@@ -45,6 +52,8 @@ export class MergeComponent implements OnInit {
             dob: new FormControl(true),
             identifier: new FormControl(''),
         });
+        
+        this.userId = JSON.parse(localStorage.getItem('appUserId'));
     }
     
     async search() {
@@ -103,5 +112,35 @@ export class MergeComponent implements OnInit {
         };
 
         const dialogRef = this.dialog.open(RecordsMergeComponent, dialogConfig);
+        dialogRef.afterClosed().subscribe(
+             async data => {
+                if (!data) {
+                    return;
+                }
+                
+                const preferred = data.preferred;
+                
+                if (preferred == 1) {
+                    this.preferredPersonId = this.selection.selected[0]['personId'];
+                    this.unPreferredPersonId = this.selection.selected[1]['personId'];
+                } else if (preferred == 2) {
+                    this.preferredPersonId = this.selection.selected[1]['personId'];
+                    this.unPreferredPersonId = this.selection.selected[0]['personId'];
+                }
+                
+                try {
+                    const result = await this.recordsService.mergeRecords(this.preferredPersonId, this.unPreferredPersonId, 
+                        this.userId).toPromise();
+                    this.snotifyService.success('Successfully merged patient records',
+                        'Merge', this.notificationService.getConfig());
+                    this.zone.run(() => {
+                        this.router.navigate(['/record/merge'],                             { relativeTo: this.route });
+                    });
+                } catch (e) {
+                    this.snotifyService.error('An error occured while trying to merge patient records',
+                        'Merge', this.notificationService.getConfig());
+                }
+            }
+        );
     }
 }

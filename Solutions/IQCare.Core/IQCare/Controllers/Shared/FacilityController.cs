@@ -132,5 +132,19 @@ namespace IQCare.Controllers.Shared
                 return Ok(response.Value);
             return BadRequest(response);
         }
+
+        [HttpGet("MergeRecords/{preferredPersonId}/{unPreferredPersonId}/{userId}")]
+        public async Task<IActionResult> MergeRecords(int preferredPersonId, int unPreferredPersonId, int userId)
+        {
+            var response = await _mediatR.Send(new MergeDuplicateRecordsCommand() {
+                preferredPersonId = preferredPersonId,
+                unPreferredPersonId = unPreferredPersonId,
+                userid = userId
+            }, Request.HttpContext.RequestAborted);
+
+            if (response.IsValid)
+                return Ok(response.Value);
+            return BadRequest(response);
+        }
     }
 }

@@ -258,6 +258,9 @@
                                 <mat-radio-button class="col-lg-6 col-sm-6 col-xs-12"  value="1">Preferred?</mat-radio-button>
                                 <mat-radio-button class="col-lg-6 col-sm-6 col-xs-12"  value="2">Preferred?</mat-radio-button>
                             </mat-radio-group>
+                            <mat-error *ngIf="!MergePreferredForm.controls.preferred.valid">Please
+                                select Preferred Person
+                            </mat-error>
                         </div>
                     </div>
     

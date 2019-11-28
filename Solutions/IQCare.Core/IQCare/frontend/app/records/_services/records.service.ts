@@ -117,4 +117,9 @@ export class RecordsService {
     public getPersonContacts(personId: number): Observable<any> {
         return this.http.get(this.API_URL + '/api/PatientServices/GetContactByPersonId/' + personId).pipe();
     }
+    
+    public mergeRecords(preferredPersonId: number, unPreferredPersonId: number, userId: number): Observable<any> {
+        return this.http.get<any>(this.API_URL 
+            + '/api/Facility/MergeRecords/' + preferredPersonId + '/' + unPreferredPersonId + '/' + userId).pipe();
+    }
 }

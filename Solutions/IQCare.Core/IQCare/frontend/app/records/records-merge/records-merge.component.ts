@@ -3,6 +3,8 @@ import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 import {RecordsService} from '../_services/records.service';
 import {PersonHomeService} from '../../dashboard/services/person-home.service';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
+import {SnotifyPosition, SnotifyService} from 'ng-snotify';
+import {NotificationService} from '../../shared/_services/notification.service';
 
 @Component({
     selector: 'app-records-merge',
@@ -29,7 +31,9 @@ export class RecordsMergeComponent implements OnInit {
                 @Inject(MAT_DIALOG_DATA) data,
                 private recordsService: RecordsService,
                 private personHomeService: PersonHomeService,
-                private _formBuilder: FormBuilder) {
+                private _formBuilder: FormBuilder,
+                private snotifyService: SnotifyService,
+                private notificationService: NotificationService) {
         const selectedRecords = data.selectedRecords;
         this.preferredPerson = selectedRecords[0];
         this.unPreferredPerson = selectedRecords[1];
@@ -73,6 +77,22 @@ export class RecordsMergeComponent implements OnInit {
     }
 
     mergePerson() {
-        this.dialogRef.close();
+        if (this.MergePreferredForm.valid) {
+            this.snotifyService.confirm('The operation that you are about to perform cannot be undone. ' +
+                'Proceed with extreme caution. Are you sure you want to proceed?', 'Merge', {
+                closeOnClick: true,
+                position: SnotifyPosition.centerCenter,
+                buttons: [
+                    {
+                        text: 'Yes', action: () => {
+                            this.dialogRef.close(this.MergePreferredForm.value);
+                        }, bold: false
+                    },
+                    { text: 'No', action: () => this.dialogRef.close() }
+                ]
+            });            
+        } else {
+            return;
+        }
     }
 }
