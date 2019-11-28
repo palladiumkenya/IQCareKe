@@ -12,8 +12,8 @@
                                 <div class="col-lg-3 col-sm-3 col-xs-12">
                                     <mat-form-field class="col-md-12">
                                         <mat-label>Visit Date:</mat-label>
-                                        <input formControlName="visitDate" [max]="maxDate" id="visitDate" name="visitDate" matInput (focus)="visitDate.open()"
-                                               [matDatepicker]="visitDate" >
+                                        <input formControlName="visitDate" [max]="maxDate" [min]="EnrollmentDate" id="visitDate" name="visitDate" matInput (focus)="visitDate.open()"
+                                               [matDatepicker]="visitDate">
                                         <mat-datepicker-toggle matSuffix [for]="visitDate"></mat-datepicker-toggle>
                                         <mat-datepicker #visitDate></mat-datepicker>
                                     </mat-form-field>

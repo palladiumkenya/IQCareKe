@@ -26,6 +26,7 @@ export class ActivityFormComponent implements OnInit {
     serviceId: number;
     personId: number;
     id: number;
+    EnrollmentDate: Date;
 
     displayedColumns = ['module', 'dateCovered', 'action'];    
     topics_table_data: TopicsTableData[] = [];
@@ -42,7 +43,9 @@ export class ActivityFormComponent implements OnInit {
                 private otzService: OtzService,
                 private route: ActivatedRoute,
                 public zone: NgZone,
-                private router: Router) { }
+                private router: Router) {
+        this.maxDate = new Date();
+    }
     
     async ngOnInit() {
         this.OtzActivityForm = this._formBuilder.group({
@@ -92,6 +95,7 @@ export class ActivityFormComponent implements OnInit {
             if (otzEnrollment) {
                 this.OtzActivityForm.get('otzEnrollmentDate').setValue(otzEnrollment.enrollmentDate);
                 this.OtzActivityForm.get('otzEnrollmentDate').disable({onlySelf: true});
+                this.EnrollmentDate = otzEnrollment.enrollmentDate;
             }
 
             const completedOtzModules = await this.otzService.getOtzCompletedModules(result.patientId).toPromise();
@@ -102,6 +106,7 @@ export class ActivityFormComponent implements OnInit {
             if (otzEnrollment) {
                 this.OtzActivityForm.get('otzEnrollmentDate').setValue(otzEnrollment.enrollmentDate);
                 this.OtzActivityForm.get('otzEnrollmentDate').disable({onlySelf: true});
+                this.EnrollmentDate = otzEnrollment.enrollmentDate;
             }
         }
     }
@@ -141,6 +146,7 @@ export class ActivityFormComponent implements OnInit {
         dialogConfig.autoFocus = true;
 
         dialogConfig.data = {
+            otzEnrollmentDate: this.EnrollmentDate
         };
 
         const dialogRef = this.dialog.open(ModulesCoveredComponent, dialogConfig);
