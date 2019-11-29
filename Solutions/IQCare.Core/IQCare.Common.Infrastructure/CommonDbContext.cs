@@ -22,6 +22,8 @@ namespace IQCare.Common.Infrastructure
             base.OnModelCreating(modelBuilder);
             modelBuilder.ApplyEntityTypeConfigsFromAssembly();
             modelBuilder.Query<DuplicatePersonsPoco>();
+            modelBuilder.Query<PatientEncountersCompletedPoco>();
+            modelBuilder.Query<MergePersonsPoco>();
         }
     }
 

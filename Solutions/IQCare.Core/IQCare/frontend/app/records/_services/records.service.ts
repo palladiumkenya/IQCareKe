@@ -5,6 +5,7 @@ import { environment } from '../../../environments/environment';
 import { ErrorHandlerService } from '../../shared/_services/errorhandler.service';
 import { tap, catchError } from 'rxjs/operators';
 import { LookupItemView } from '../../shared/_models/LookupItemView';
+import {MatchDuplicatePerson} from '../_models/matchduplicate';
 
 const httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -102,5 +103,23 @@ export class RecordsService {
             tap(personEnrollmentDetails => this.errorHandler.log('get person enrollment details list')),
             catchError(this.errorHandler.handleError<any[]>('personEnrollmentDetails'))
         );
+    }
+    
+    public getDuplicatePersons(matchDuplicatePerson: MatchDuplicatePerson): Observable<any[]> {
+        return this.http.post<any>(this.API_URL + '/api/Facility/GetDuplicatePersons', 
+            JSON.stringify(matchDuplicatePerson), httpOptions).pipe();
+    }
+    
+    public getAllIdentifiers(): Observable<any[]> {
+        return this.http.get<any[]>(this.API_URL + '/api/ServiceArea/GetAllIdentifiers').pipe();
+    }
+    
+    public getPersonContacts(personId: number): Observable<any> {
+        return this.http.get(this.API_URL + '/api/PatientServices/GetContactByPersonId/' + personId).pipe();
+    }
+    
+    public mergeRecords(preferredPersonId: number, unPreferredPersonId: number, userId: number): Observable<any> {
+        return this.http.get<any>(this.API_URL 
+            + '/api/Facility/MergeRecords/' + preferredPersonId + '/' + unPreferredPersonId + '/' + userId).pipe();
     }
 }

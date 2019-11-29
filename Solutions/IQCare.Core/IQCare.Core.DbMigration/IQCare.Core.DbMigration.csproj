@@ -390,6 +390,9 @@
     <None Remove="Scripts\2.2.0\71_Prep_FormsView.sql" />
     <None Remove="Scripts\2.2.0\72_OTZNumber.sql" />
     <None Remove="Scripts\2.2.0\73_OTZCareEndedOptions.sql" />
+    <None Remove="Scripts\2.2.0\74_build.sql" />
+    <None Remove="Scripts\2.2.0\75_GetPossibleDuplicates.sql" />
+    <None Remove="Scripts\2.2.0\76_MergePatientData.sql" />
     <None Remove="Scripts\2.2.0\74_CaregiveView.sql" />
     <None Remove="Scripts\2.2.0\75_OVCCareEndedOptions.sql" />
     <None Remove="Scripts\2.2.0\76_OvcEnrollmentForm.sql" />
@@ -820,6 +823,9 @@
     <EmbeddedResource Include="Scripts\2.2.0\71_Prep_FormsView.sql" />
     <EmbeddedResource Include="Scripts\2.2.0\72_OTZNumber.sql" />
     <EmbeddedResource Include="Scripts\2.2.0\73_OTZCareEndedOptions.sql" />
+    <EmbeddedResource Include="Scripts\2.2.0\74_build.sql" />
+    <EmbeddedResource Include="Scripts\2.2.0\75_GetPossibleDuplicates.sql" />
+    <EmbeddedResource Include="Scripts\2.2.0\76_MergePatientData.sql" />
     <EmbeddedResource Include="Scripts\2.2.0\74_CaregiveView.sql" />
     <EmbeddedResource Include="Scripts\2.2.0\75_OVCCareEndedOptions.sql" />
     <EmbeddedResource Include="Scripts\2.2.0\76_OvcEnrollmentForm.sql" />

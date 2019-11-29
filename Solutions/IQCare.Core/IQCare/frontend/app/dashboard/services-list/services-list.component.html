@@ -59,12 +59,13 @@
                                         <span class="identifierNumbers label label-palegreen">
                                             <a style="cursor:pointer;"
                                                 (click)="editEnrollment(service.id, service.code)">
-                                                <span style="font-size:15px;"
-                                                    *ngFor="let identifier of getServiceEnrollmentDetails(service)['identifiers'][0]">
-                                                    {{
-                                                        identifier['identifierTypeId'] + ': ' + identifier['identifierValue']
-                                                    }}
-                                                    <br />
+                                                <span style="font-size:15px;" *ngFor="let identifier of getServiceEnrollmentDetails(service)['identifiers'][0]">
+                                                    <span *ngIf="service.code != 'OTZ'">
+                                                        {{
+                                                            identifier['identifierTypeId'] + ': ' + identifier['identifierValue']
+                                                        }}
+                                                        <br />
+                                                    </span>
                                                 </span>
                                             </a>
                                         </span>
