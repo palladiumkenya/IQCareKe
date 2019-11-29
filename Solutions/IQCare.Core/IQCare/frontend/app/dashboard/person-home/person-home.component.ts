@@ -79,12 +79,7 @@ export class PersonHomeComponent implements OnInit {
             const { ExitReasonsArray } = res;
 
             const { HTSEncounterHistoryArray } = res;
-            console.log('Resource loaded');
-            console.log(RiskAssessmentArray);
 
-            this.careenddetails = await this.personService.getPatientByPersonId(this.personId).pipe(mergeMap(
-                response => this.personService.getPatientCareEndedHistory(response['patientId'])
-            )).toPromise();
 
             this.htshistory = HTSEncounterHistoryArray;
             this.services = servicesArray;
