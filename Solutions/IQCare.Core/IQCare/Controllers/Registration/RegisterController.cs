@@ -3,6 +3,7 @@ using IQCare.Common.BusinessProcess.Commands.ClientLookup;
 using IQCare.Common.BusinessProcess.Commands.Enrollment;
 using IQCare.Common.BusinessProcess.Commands.PersonCommand;
 using IQCare.Common.BusinessProcess.Commands.Relationship;
+using IQCare.Common.BusinessProcess.Commands.Ovc;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -31,6 +32,18 @@ namespace IQCare.Controllers.Registration
             }
             return BadRequest(response);
         }
+
+        [HttpPost("AddBasicPerson")]
+        public async Task<IActionResult> Post([FromBody] AddBasicPersonCommand basicPersonCommand)
+        {
+            var response = await _mediator.Send(basicPersonCommand, Request.HttpContext.RequestAborted);
+            if (response.IsValid)
+            {
+                return Ok(response.Value);
+            }
+            return BadRequest(response);
+        }
+
 
         [HttpPost("UpdatePerson")]
         public async Task<IActionResult> UpdatePerson([FromBody] UpdatePersonCommand updatePersonCommand)
@@ -203,6 +216,27 @@ namespace IQCare.Controllers.Registration
             return BadRequest(response);
         }
 
+
+        [HttpPost("ovcEnrollment")]
+        public async Task<IActionResult> Post([FromBody] AddOvcEnrollmentCommand enrollovcCommand)
+        {
+            var response = await _mediator.Send(enrollovcCommand, Request.HttpContext.RequestAborted);
+            if (response.IsValid)
+                return Ok(response.Value);
+            return BadRequest(response);
+        }
+
+        [HttpGet("GetOvcEnrollmentDetails/{personId}")]
+
+        public async Task<IActionResult> GetOvcDetails(int personId)
+        {
+            var response = await _mediator.Send(new GetOvcEnrollmentCommand{ PersonId = personId }, Request.HttpContext.RequestAborted);
+            if (response.IsValid)
+                return Ok(response.Value);
+            return BadRequest(response);
+        }
+
+
         [HttpPost("enrollment")]
         public async Task<IActionResult> Post([FromBody] EnrollClientCommand enrollClientCommand)
         {
@@ -286,6 +320,15 @@ namespace IQCare.Controllers.Registration
                 PersonId = personId
             }, Request.HttpContext.RequestAborted);
 
+            if (response.IsValid)
+                return Ok(response.Value);
+            return BadRequest(response);
+        }
+
+        [HttpGet("getCaregiver/{patientId}")]
+        public async Task<IActionResult> GetCaregiver(int patientId)
+        {
+            var response = await _mediator.Send(new GetCaregiverViewCommmand { PatientId = patientId}, Request.HttpContext.RequestAborted);
             if (response.IsValid)
                 return Ok(response.Value);
             return BadRequest(response);

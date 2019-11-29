@@ -1109,7 +1109,7 @@ export class PharmOrderformComponent implements OnInit {
 
         value = event.source.value;
      
-        if (event.soruce.selected != undefined) {
+        if (event.source.selected != undefined) {
             if (event.source.selected.selected == true) {
                 if (value != undefined) {
 

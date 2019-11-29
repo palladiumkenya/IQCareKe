@@ -154,8 +154,16 @@ export class ServicesListComponent implements OnInit {
                     break;
                 case 'OTZ':
                     this.zone.run(() => {
-                        this.router.navigate(['/ccc/otzEnrollment/' + this.personId + '/' 
+                        this.router.navigate(['/ccc/otzEnrollment/' + this.personId + '/'
                             + this.person.patientId + '/' + serviceId + '/' + serviceCode],
+                            { relativeTo: this.route });
+                    });
+                    break;
+                case 'OVC':
+                    this.zone.run(() => {
+                        this.router.navigate(
+                            ['/ccc/ovcEnrollment/' + this.personId + '/'
+                                + this.person.patientId + '/' + serviceId + '/' + serviceCode],
                             { relativeTo: this.route });
                     });
                     break;
@@ -200,6 +208,18 @@ export class ServicesListComponent implements OnInit {
                         { relativeTo: this.route });
                 });
                 break;
+
+            case 'OVC':
+                this.zone.run(() => {
+                    this.router.navigate(
+                        ['/ccc/ovcEnrollment/' + this.personId + '/'
+                            + this.person.patientId + '/' + serviceId + '/' + serviceCode + '/1'],
+                        { relativeTo: this.route });
+                });
+                break;
+
+
+
             default:
                 console.log('test default');
                 break;
@@ -285,6 +305,16 @@ export class ServicesListComponent implements OnInit {
                             { relativeTo: this.route });
                     });
                     break;
+                case 'OVC':
+                    this.zone.run(() => {
+                        this.router.navigate(
+                            ['/ccc/ovcFormList/' + this.personId + '/'
+                                + this.person.patientId + '/' + serviceId],
+                            { relativeTo: this.route });
+                    });
+                    break;
+
+
                 default:
                     this.zone.run(() => {
                         this.router.navigate(
@@ -464,12 +494,17 @@ export class ServicesListComponent implements OnInit {
     }
     isServiceEligible(serviceAreaId: number) {
         let isCCCEnrolled;
+        let isHEIEnrolled;
         this.agerisk = false;
         if (this.enrolledServices) {
             isCCCEnrolled = this.enrolledServices.filter(obj => obj.serviceAreaId == 1);
             if (isCCCEnrolled && isCCCEnrolled.length > 0) {
                 this.PatientCCCEnrolled = true;
             }
+            const selectedService = this.services.filter(obj => obj.code.toString() == 'HEI');
+            isHEIEnrolled = this.enrolledServices.filter(obj =>
+                obj.serviceAreaId.toString() == selectedService['0'].id.toString());
+
         }
 
         const selectedService = this.services.filter(obj => obj.id == serviceAreaId);
@@ -527,9 +562,17 @@ export class ServicesListComponent implements OnInit {
                     if (isCCCEnrolled && isCCCEnrolled.length > 0) {
                         if (this.person && this.person.ageNumber >= 10 && this.person.ageNumber <= 18) {
                             isEligible = true;
-                        }                        
+                        }
                     }
                     break;
+                case 'OVC':
+                    if ((isCCCEnrolled && isCCCEnrolled.length > 0) || (isHEIEnrolled && isHEIEnrolled.length > 0)) {
+                        if (this.person && this.person.ageNumber >= 0 && this.person.ageNumber < 18) {
+                            isEligible = true;
+                        }
+                    }
+                    break;
+
                 case 'PREP':
                     isEligible = this.getPrepEligibility();
                     break;

@@ -32,6 +32,7 @@ export class PersonHomeComponent implements OnInit {
     public personView$: Subscription;
     public personAllergies$: Subscription;
     public personAllergies: any;
+    public patientId = 0;
     encounterDetail: EncounterDetails;
     htsencounters: any[];
     riskassessmentencounter: any[];
@@ -39,7 +40,6 @@ export class PersonHomeComponent implements OnInit {
     services: any[];
     exitreason: number;
     creatinineLabTests: any[] = [];
-    patientId: number;
     careenddetails: any[] = [];
     htshistory: any[] = [];
     personvitals: any[];
@@ -66,9 +66,11 @@ export class PersonHomeComponent implements OnInit {
     async  ngOnInit() {
         this.route.params.subscribe(params => {
             this.personId = params['id'];
+
+
         });
 
-        this.route.data.subscribe(async res => {
+        this.route.data.subscribe(res => {
 
             const { servicesArray } = res;
             // const { HTSEncounterArray } = res;
@@ -79,10 +81,7 @@ export class PersonHomeComponent implements OnInit {
             const { HTSEncounterHistoryArray } = res;
             console.log('Resource loaded');
             console.log(RiskAssessmentArray);
-            this.careenddetails = await this.personService.getPatientByPersonId(this.personId).pipe(mergeMap(
-                res => this.personService.getPatientCareEndedHistory(res['patientId'])
 
-            )).toPromise();
 
             this.htshistory = HTSEncounterHistoryArray;
             this.services = servicesArray;
@@ -95,29 +94,39 @@ export class PersonHomeComponent implements OnInit {
             if (this.personvitals.length > 0) {
                 this.personVitalWeight = this.personvitals['0'].weight;
             }
-            if (this.careenddetails != null) {
-                this.exitreason = this.careenddetails['exitReason'];
 
-                let careendeddetails: string;
-                let val: number;
-
-                val = this.careendoptions.findIndex(x => x.itemId == this.exitreason);
-                if (this.careendoptions[val])
-                    careendeddetails = this.careendoptions[val].itemDisplayName;
-
-                if (careendeddetails && careendeddetails.toLowerCase() == 'death') {
-                    this.isdead = true;
-                    this.carended = true;
-                } else {
-                    this.carended = true;
-                    this.isdead = false;
-                }
-            } else {
-                this.carended = false;
-                this.isdead = false;
-            }
             this.riskencounters = this.riskassessmentencounter['encounters'];
         });
+
+
+        this.careenddetails = await this.personService.getPatientByPersonId(this.personId).pipe(mergeMap(
+            res => this.personService.getPatientCareEndedHistory((res['patientId'] == null) ? 0 : res['patientId'])
+
+        )).toPromise();
+
+
+        if (this.careenddetails != null && this.careenddetails.length > 0) {
+            this.exitreason = this.careenddetails['exitReason'];
+
+            let careendeddetails: string;
+            let val: number;
+
+            val = this.careendoptions.findIndex(x => x.itemId == this.exitreason);
+            if (this.careendoptions[val]) {
+                careendeddetails = this.careendoptions[val].itemDisplayName;
+            }
+
+            if (careendeddetails && careendeddetails.toLowerCase() == 'death') {
+                this.isdead = true;
+                this.carended = true;
+            } else {
+                this.carended = true;
+                this.isdead = false;
+            }
+        } else {
+            this.carended = false;
+            this.isdead = false;
+        }
 
         // this.encounterDetail = this.htsencounters[0];
 
@@ -132,6 +141,8 @@ export class PersonHomeComponent implements OnInit {
         localStorage.removeItem('selectedService');
         this.store.dispatch(new Consent.ClearState());
         this.getPatientDetailsById(this.personId);
+
+
     }
 
     mapOrder(array, order, key) {
@@ -157,8 +168,9 @@ export class PersonHomeComponent implements OnInit {
         creatinine = ['Creatinine'];
 
         this.personService.getLabTestResults(patientId, 'Complete').subscribe(res => {
-            if (res.length == 0)
+            if (res.length == 0) {
                 return;
+            }
 
             res.forEach(test => {
                 if (test.labTestName == 'Creatinine') {
@@ -187,53 +199,56 @@ export class PersonHomeComponent implements OnInit {
 
     public getPatientDetailsById(personId: number) {
         this.personView$ = this.personService.getPatientByPersonId(personId).subscribe(
-            p => {
-                this.person = p;
+            (p) => {
 
-                localStorage.setItem('personId', this.person.personId.toString());
-                this.store.dispatch(new Consent.PersonId(this.person.personId));
+                if (p != null) {
+                    this.person = p;
 
-                if (this.person.patientId && this.person.patientId > 0) {
-                    this.store.dispatch(new Consent.PatientId(this.person.patientId));
-                    localStorage.setItem('patientId', this.person.patientId.toString());
+                    localStorage.setItem('personId', this.person.personId.toString());
+                    this.store.dispatch(new Consent.PersonId(this.person.personId));
 
-                    this.personService.getPatientAdherenceOutcome(this.person.patientId).subscribe((res) => {
-                        if (res != null) {
-                            if (res.length > 0) {
-                                this.adherenceavailable = true;
+                    if (this.person.patientId && this.person.patientId > 0) {
+                        this.store.dispatch(new Consent.PatientId(this.person.patientId));
+                        localStorage.setItem('patientId', this.person.patientId.toString());
 
-                                res.forEach(element => {
-                                    this.adherencearray.push({
-                                        Score: element['scoreName'],
-                                        VisitDate: moment(element['visitDate']).format('DD-MMM-YYYY')
+                        this.personService.getPatientAdherenceOutcome(this.person.patientId).subscribe((res) => {
+                            if (res != null) {
+                                if (res.length > 0) {
+                                    this.adherenceavailable = true;
+
+                                    res.forEach(element => {
+                                        this.adherencearray.push({
+                                            Score: element['scoreName'],
+                                            VisitDate: moment(element['visitDate']).format('DD-MMM-YYYY')
+                                        });
                                     });
-                                });
 
-                                if (this.adherencearray.length > 1) {
-                                    if (this.adherencearray[0].Score.toString().toLowerCase() == 'fair'
-                                        && this.adherencearray[1].Score.toString().toLowerCase() == 'fair') {
-                                        this.strengthenadherence = true;
-                                    } else if (this.adherencearray[0].Score.toString().toLowerCase() == 'bad'
-                                        && this.adherencearray[1].Score.toString().toLowerCase() == 'bad') {
-                                        this.strengthenadherence = true;
-                                    }
-                                } else if (this.adherencearray.length == 1) {
-                                    if (this.adherencearray[0].Score.toString().toLowerCase() == 'fair') {
-                                        this.strengthenadherence = true;
-                                    }
-                                    if (this.adherencearray[0].Score.toString().toLowerCase() == 'bad') {
-                                        this.strengthenadherence = true;
+                                    if (this.adherencearray.length > 1) {
+                                        if (this.adherencearray[0].Score.toString().toLowerCase() == 'fair'
+                                            && this.adherencearray[1].Score.toString().toLowerCase() == 'fair') {
+                                            this.strengthenadherence = true;
+                                        } else if (this.adherencearray[0].Score.toString().toLowerCase() == 'bad'
+                                            && this.adherencearray[1].Score.toString().toLowerCase() == 'bad') {
+                                            this.strengthenadherence = true;
+                                        }
+                                    } else if (this.adherencearray.length == 1) {
+                                        if (this.adherencearray[0].Score.toString().toLowerCase() == 'fair') {
+                                            this.strengthenadherence = true;
+                                        }
+                                        if (this.adherencearray[0].Score.toString().toLowerCase() == 'bad') {
+                                            this.strengthenadherence = true;
+                                        }
                                     }
                                 }
                             }
-                        }
 
-                    });
+                        });
 
-                    this.getCompletedCreatinineLabs(this.person.patientId);
-
+                        this.getCompletedCreatinineLabs(this.person.patientId);
 
 
+
+                    }
                 }
             },
             (err) => {
