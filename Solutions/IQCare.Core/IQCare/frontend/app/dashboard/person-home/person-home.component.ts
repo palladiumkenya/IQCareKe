@@ -41,6 +41,7 @@ export class PersonHomeComponent implements OnInit {
     exitreason: number;
     creatinineLabTests: any[] = [];
     careenddetails: any[] = [];
+    ServiceAreaCareEndDetails:any[] =[];
     htshistory: any[] = [];
     personvitals: any[];
     adherencearray: any[] = [];
@@ -79,8 +80,11 @@ export class PersonHomeComponent implements OnInit {
             const { ExitReasonsArray } = res;
 
             const { HTSEncounterHistoryArray } = res;
+            const  {ServiceAreaCareEndArray} = res;
 
-
+            this.ServiceAreaCareEndDetails = ServiceAreaCareEndArray;
+            console.log('ServiceAreaCareEndDetails');
+            console.log(this.ServiceAreaCareEndDetails);
             this.htshistory = HTSEncounterHistoryArray;
             this.services = servicesArray;
             // this.htsencounters = HTSEncounterArray;
@@ -102,7 +106,9 @@ export class PersonHomeComponent implements OnInit {
 
         )).toPromise();
 
+    
 
+     
         if (this.careenddetails != null && this.careenddetails.length > 0) {
             this.exitreason = this.careenddetails['exitReason'];
 

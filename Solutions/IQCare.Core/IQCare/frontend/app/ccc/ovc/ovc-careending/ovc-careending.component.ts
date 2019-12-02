@@ -71,32 +71,56 @@ export class OvcCareendingComponent implements OnInit {
             this.patientMasterVisitId = params.patientMasterVisitId;
             this.serviceAreaId = params.serviceId;
             this.Isedit = edit;
-
+            this.getPatientDetailsById(this.personId);
 
 
 
         });
+
 
         this.OvcCareEndFormGroup = this._formBuilder.group({
             careEndedDate: new FormControl('', [Validators.required]),
             discontinueReason: new FormControl('', [Validators.required]),
-           
+
 
 
         });
-        this.careendreasonarray = await this._lookupItemService.getByGroupName('PrepCareEnd').pipe(tap
-            ((res) => res['lookupItems'])).toPromise();
-        this.encountertypeoptions = await this._lookupItemService.getByGroupName('EncounterType').pipe(
-            tap((res) => res['LookupItems'])).toPromise();
 
 
-        if (this.encountertypeoptions.length > 0) {
-            this.encounterlist = this.encountertypeoptions.filter(x => x.itemName === 'CareEnded');
-            this.EncounterTypeId = this.encounterlist[0]['itemId'];
-            console.log(this.EncounterTypeId);
-        }
+        this._lookupItemService.getByGroupName('OVC_CareEndedOptions').subscribe
+            ((res) => {
+
+                this.careendreasonarray = res['lookupItems'];
+            });
+        const careEndEncounterType = await this.ovcservice.getByGroupName('EncounterType').toPromise();
+        this.encountertypeoptions = careEndEncounterType['lookupItems'];
+
+
+
+
     }
 
+    public getPatientDetailsById(personId: number) {
+        this.personView$ = this.personHomeService.getPatientByPersonId(personId).subscribe(
+            p => {
+                // console.log(p);
+                this.person = p;
+                if (this.person != null) {
+                    console.log(this.person);
+                    if (this.person.dateOfBirth != null && this.person.dateOfBirth != undefined) {
+                        this.minDate = this.person.dateOfBirth;
+                    }
+                }
+
+            },
+            (err) => {
+                this.snotifyService.error('Error editing encounter ' + err, 'person detail service',
+                    this.notificationService.getConfig());
+            },
+            () => {
+                // console.log(this.personView$);
+            });
+    }
 
 
     LoadDetails() {
@@ -109,12 +133,12 @@ export class OvcCareendingComponent implements OnInit {
 
                 if (this.PatientCareEndList != undefined) {
                     this.OvcCareEndFormGroup.controls.careEndedDate.setValue(this.PatientCareEndList['exitDate']);
-                  
+
                     this.OvcCareEndFormGroup.controls.discontinueReason.setValue(this.PatientCareEndList['exitReason'])
                 }
 
 
-              
+
             });
         }
     }
@@ -140,19 +164,25 @@ export class OvcCareendingComponent implements OnInit {
     Save() {
         this.spinner.show();
         let CareEndReason: number;
-    
+
         let CareEndDate: string;
-      
 
 
 
-        
+
+
         CareEndDate = this.OvcCareEndFormGroup.controls.careEndedDate.value;
         CareEndReason = this.OvcCareEndFormGroup.controls.discontinueReason.value;
+        if (this.encountertypeoptions.length > 0) {
+            const careEndList = this.encountertypeoptions.filter(x => x.itemName === 'CareEnded');
+            this.EncounterTypeId = careEndList[0].itemId;
 
+        }
+
+        console.log(this.EncounterTypeId);
 
         this.UserId = JSON.parse(localStorage.getItem('appUserId'));
-        if (this.patientMasterVisitId <= 0   || this.patientMasterVisitId == undefined) {
+        if (this.patientMasterVisitId <= 0 || this.patientMasterVisitId == undefined) {
             const patientencounter: PatientMasterVisitEncounter = {
                 PatientId: this.patientId,
                 EncounterType: this.EncounterTypeId,
@@ -160,6 +190,8 @@ export class OvcCareendingComponent implements OnInit {
                 UserId: this.UserId,
                 EncounterDate: moment(new Date()).toDate()
             };
+
+            console.log(patientencounter);
 
             this.encounterservice.savePatientMasterVisit(patientencounter).subscribe((result) => {
                 localStorage.setItem('patientEncounterId', result['patientEncounterId']);
@@ -170,7 +202,7 @@ export class OvcCareendingComponent implements OnInit {
                 console.log(this.patientmastervisitid);
 
                 this.ovcservice.careEndPatientdetails(this.patientId, this.serviceAreaId,
-                    this.patientmastervisitid, CareEndDate, '' , CareEndReason, '', this.UserId).subscribe((response) => {
+                    this.patientmastervisitid, CareEndDate, '', CareEndReason, '', this.UserId).subscribe((response) => {
 
 
                         this.snotifyService.success('Successfully terminated the OVC patient' + response['message'], 'OVC Termination Form',
@@ -207,7 +239,7 @@ export class OvcCareendingComponent implements OnInit {
 
         } else {
             this.ovcservice.careEndPatientdetails(this.patientId, this.serviceAreaId,
-                this.patientMasterVisitId, CareEndDate, '', CareEndReason,null , this.UserId).subscribe((response) => {
+                this.patientMasterVisitId, CareEndDate, '', CareEndReason, null, this.UserId).subscribe((response) => {
 
 
                     this.snotifyService.success('Successfully terminated ovc patient' + response['message'], 'OVC Termination Form',
@@ -232,7 +264,7 @@ export class OvcCareendingComponent implements OnInit {
                 );
 
         }
-    
+
     }
 
 

@@ -170,6 +170,17 @@ namespace IQCare.Controllers.Shared
 
         }
 
+
+        [HttpGet("GetPatientCareEndByServiceArea/{personId}")]
+        public async Task<IActionResult> GetPatientCaredEndedByServiceArea(int personId)
+        {
+            var response = await _mediator.Send(new GetPatientCareEndedByServiceAreaCommand { PersonId = personId }, HttpContext.RequestAborted);
+            if (response.IsValid)
+                return Ok(response.Value);
+            return BadRequest(response);
+        }
+
+
         [HttpGet("GetLatestCareEndDetails/{patientId}")]
         public async Task<IActionResult> GetLatestCareEndDetails(int patientId)
         {

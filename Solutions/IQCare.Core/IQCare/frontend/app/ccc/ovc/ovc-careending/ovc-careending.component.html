@@ -26,7 +26,7 @@
                                             required>
                                             <mat-option [value]=""></mat-option>
                                             <mat-option *ngFor="let Option of careendreasonarray" [value]="Option.itemId"
-                                                (onSelectionChange)="OnSelectDiscontinue($event)">
+                                                >
                                                 {{Option.itemDisplayName}}
                                             </mat-option>
                                         </mat-select>

@@ -11,6 +11,7 @@ import { Store } from '@ngrx/store';
 import * as moment from 'moment';
 import * as Consent from '../../shared/reducers/app.states';
 import { SearchService } from '../../registration/_services/search.service';
+
 import { EncounterDetails } from '../_model/HtsEncounterdetails';
 import { LookupItemView } from '../../shared/_models/LookupItemView';
 import { MatDialog, MatDialogConfig } from '@angular/material';
@@ -29,6 +30,7 @@ export class ServicesListComponent implements OnInit {
     @Input('services') services: any[];
     @Input('careendoptions') carendedreason: LookupItemView[];
     @Input('person') person: any;
+    @Input('ServiceAreaCareEndDetails')    serviceareacareenddetails: any[];
     // @Input('encounterDetail') encounterDetail: EncounterDetails;
     @Input('personVitalWeight') weight: number;
     @Input('riskencounters') riskencounter: any[];
@@ -38,6 +40,7 @@ export class ServicesListComponent implements OnInit {
     enrolledServices: any[];
     PatientCCCEnrolled: boolean = false;
     patientIdentifiers: any[];
+ 
     riskassessmentPatientMasterVisitId: number;
     enrolledService: any[] = [];
     identifiers: any[] = [];
@@ -78,9 +81,10 @@ export class ServicesListComponent implements OnInit {
         private appStateService: AppStateService,
         private lookupItemService: LookupItemService
     ) {
+       
     }
 
-    ngOnInit() {
+ async  ngOnInit() {
         this.EligibilityInformation = [];
         this.vitalWeight = this.weight;
 
@@ -90,6 +94,11 @@ export class ServicesListComponent implements OnInit {
         if (this.EligibilityInformation.length > 0) {
             this.htseligibility = this.EligibilityInformation.join(' ,');
         }
+    
+        console.log('ServiceAreaCareEndDetails');
+        console.log(this.serviceareacareenddetails);
+
+
     }
 
 
@@ -460,7 +469,31 @@ export class ServicesListComponent implements OnInit {
         return isEligible;
 
     }
-    isEligibleServiceReenrollment(serviceAreaId: number) {
+    isEligibleReenrollment(serviceAreaId: number) {
+    
+        const selectedService = this.services.filter(obj => obj.id == serviceAreaId);
+        let isEligible: boolean = false;
+        if (selectedService && selectedService.length > 0) {
+            if (selectedService[0]['code'] !== 'PREP') {
+                if (this.serviceareacareenddetails  != undefined) {
+                    if (this.serviceareacareenddetails .length > 0) {
+                        const servicelist = this.serviceareacareenddetails.filter(x => x.serviceAreaId == serviceAreaId);
+                        if (servicelist.length > 0   && servicelist != undefined) {
+                            if (servicelist[0].exitReason.toLowerCase !== 'death') {
+                                isEligible = true;
+                            } else {
+                                isEligible = false;
+                            }
+                        }
+                    }
+                }
+            }
+        
+        }
+
+        return isEligible;
+    }
+    async isEligibleServiceReenrollment(serviceAreaId: number) {
 
 
         const selectedService = this.services.filter(obj => obj.id == serviceAreaId);
@@ -472,7 +505,8 @@ export class ServicesListComponent implements OnInit {
                 } else {
                     isEligible = false;
                 }
-            }
+            } 
+
 
         }
         return isEligible;

@@ -1,6 +1,15 @@
 
-IF NOT EXISTS (SELECT * FROM sys.views WHERE name = 'OVC_CaregiverView' ) 
-BEGIN
+IF  OBJECT_ID('OVC_CaregiverView', 'V') IS NOT NULL
+    DROP VIEW [OVC_CaregiverView]
+GO
+
+
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
 CREATE VIEW [dbo].[OVC_CaregiverView]
 AS
 SELECT
@@ -21,6 +30,6 @@ INNER JOIN dbo.Patient AS PT ON PT.Id = PR.PatientId
 INNER JOIN [dbo].[Person] P ON P.Id = PR.PersonId
 
 
-END
+
 
 
