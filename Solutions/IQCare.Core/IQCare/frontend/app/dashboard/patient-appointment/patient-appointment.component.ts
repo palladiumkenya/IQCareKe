@@ -27,7 +27,12 @@ export class PatientAppointmentComponent implements OnInit {
 
             this.personService.getPatientByPersonId(this.personId).subscribe(patient => {
                 // console.log("Patient Id >>>>>" + patient.patientId)
-                this.GetPatientAppoitment(patient.patientId);
+
+                if (patient != null && patient != undefined) {
+                    if (patient.patientId != null) {
+                        this.GetPatientAppoitment(patient.patientId);
+                    }
+                }
             });
         });
     }

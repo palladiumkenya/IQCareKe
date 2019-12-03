@@ -40,6 +40,7 @@ export class CircumcisionStatusComponent implements OnInit {
         const { yesNoUnknownOptions, yesnoOptions } = this.CircumcisionStatusOptions[0];
         this.yesNoUnknownOptions = yesNoUnknownOptions;
         this.yesnoOptions = yesnoOptions;
+        this.loadCircumcisionStatus();
 
         if (this.isEdit == 1) {
             this.loadCircumcisionStatus();

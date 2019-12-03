@@ -1,12 +1,18 @@
 <div class="row">
     <div class="button-row pull-left">
-    <button class="mat-raised-button mat-primary" (click)="CheckOut()">Patient CheckOut</button>
-    </div> 
+        <button class="mat-raised-button mat-primary" (click)="CheckOut()">Patient CheckOut</button>
+    </div>
     <div class="pull-left">
-            <span class="label label-palegreen">
-                    CheckInDate(DD-MM-YYY) : {{CheckinDate}}
-            </span>
-       
+        <span class="label label-palegreen">
+            CheckInDate(DD-MM-YYY) : {{CheckinDate}}
+        </span>
+
+    </div>
+    <div class="pull-left">
+        <span class="label label-red" *ngIf="disabledcontrol">
+            Followup visit cannot be done same date as Prep Initiation Form 
+        </span>
+
     </div>
     <div class="button-row pull-right">
         <a mat-raised-button class="mat-primary" (click)="Back()">
@@ -24,6 +30,7 @@
                         <li class='ticket-item'>
                             <div class="row">
                                 <div class="ticket-time  col-lg-2 col-sm-2 col-xs-12">
+                                    
                                     <span>
                                         <strong>FORM</strong>
                                     </span>
@@ -53,10 +60,12 @@
                                 </div>
                                 <div class="ticket-time  col-lg-4 col-sm-4 col-xs-12">
                                     <div class="divider hidden-md hidden-sm hidden-xs"></div>
-                                    <span class="label label-palegreen" *ngIf="htsdone  && (HtsEncountersList.length > 0)">
+                                    <span class="label label-palegreen"
+                                        *ngIf="htsdone  && (HtsEncountersList.length > 0)">
                                         HTS is Done:<br />
-                                        {{HtsEncountersList[0].encounterDate}} :FinalResult: {{HtsEncountersList[0].finalResult}}
-                                        
+                                        {{HtsEncountersList[0].encounterDate}} :FinalResult:
+                                        {{HtsEncountersList[0].finalResult}}
+
                                     </span>
                                 </div>
                                 <div class="ticket-time  col-lg-4 col-sm-4 col-xs-12">
@@ -79,7 +88,8 @@
                                 </div>
                                 <div class="ticket-time  col-lg-4 col-sm-4 col-xs-12">
                                     <div class="divider hidden-md hidden-sm hidden-xs"></div>
-                                    <span class="label label-palegreen" *ngIf="vitalsdone && vitalsDataTable.length > 0">
+                                    <span class="label label-palegreen"
+                                        *ngIf="vitalsdone && vitalsDataTable.length > 0">
                                         Vitals is Done:<br />
                                         {{vitalsDataTable[0].visitDate}} : Weight: {{vitalsDataTable[0].weight}}
                                     </span>
@@ -103,10 +113,11 @@
                                 </div>
                                 <div class="ticket-time  col-lg-4 col-sm-4 col-xs-12">
                                     <div class="divider hidden-md hidden-sm hidden-xs"></div>
-                                    <span class="label label-palegreen" *ngIf="RiskDone  && riskassessmentlist.length > 0">
+                                    <span class="label label-palegreen"
+                                        *ngIf="RiskDone  && riskassessmentlist.length > 0">
                                         RiskAssessment Done:<br />
-                                        {{riskassessmentlist[0].visitDate}} 
-                                        
+                                        {{riskassessmentlist[0].visitDate}}
+
                                     </span>
                                 </div>
                                 <div class="ticket-time  col-lg-4 col-sm-4 col-xs-12">
@@ -130,13 +141,14 @@
                                     <div class="divider hidden-md hidden-sm hidden-xs"></div>
                                     <span class="label label-palegreen" *ngIf="FollowDone  && followuplist.length > 0">
                                         PrEP Follow up Visit Done:<br />
-                                        {{followuplist[0].visitDate}} 
-                                        
+                                        {{followuplist[0].visitDate}}
+
                                     </span>
                                 </div>
                                 <div class="ticket-time  col-lg-4 col-sm-4 col-xs-12">
                                     <div class="divider hidden-md hidden-sm hidden-xs"></div>
-                                    <button mat-raised-button class="btn-sm btn-primary" (click)="FollowupLink()">
+                                    <button mat-raised-button class="btn-sm btn-primary" (click)="FollowupLink()"
+                                        [disabled]="disabledcontrol">
                                         Follow Up Visit
                                     </button>
 
@@ -155,14 +167,13 @@
                                     <div class="divider hidden-md hidden-sm hidden-xs"></div>
                                     <span class="label label-palegreen" *ngIf="MonthlyrefillDone">
                                         PrEP Monthly Refill Done:<br />
-                                        {{refilllist[0].visitDate}} 
-                                        
+                                        {{refilllist[0].visitDate}}
+
                                     </span>
                                 </div>
                                 <div class="ticket-time  col-lg-4 col-sm-4 col-xs-12">
                                     <div class="divider hidden-md hidden-sm hidden-xs"></div>
-                                    <button mat-raised-button class="btn-sm btn-primary"
-                                        (click)="RefillLink()">
+                                    <button mat-raised-button class="btn-sm btn-primary" (click)="RefillLink()">
                                         PrEP Monthly Refill Form
                                     </button>
 
@@ -170,7 +181,7 @@
 
                             </div>
                         </li>
-                 </ul>
+                    </ul>
 
                     <ul class="tickets-list">
                         <li class="ticket-item">

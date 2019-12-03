@@ -74,6 +74,7 @@ export class PrepFollowupworkflowComponent implements OnInit {
     RiskDone: boolean = false;
     FollowDone: boolean = false;
     MonthlyrefillDone: boolean = false;
+    disabledcontrol: boolean = false;
     constructor(private route: ActivatedRoute,
         private dialog: MatDialog,
         private snotifyService: SnotifyService,
@@ -124,8 +125,8 @@ export class PrepFollowupworkflowComponent implements OnInit {
             this.FormSettings = FormSettingsArray;
 
             if (this.FormSettings != null && this.FormSettings !== undefined) {
-               
-                if (this.FormSettings['encounterType'] !== null   && this.FormSettings['encounterType'] !== undefined) {
+
+                if (this.FormSettings['encounterType'] !== null && this.FormSettings['encounterType'] !== undefined) {
                     this.encounterType = this.FormSettings['encounterType'].toString();
                     if (this.encounterType.toString().toLowerCase() == 'monthlyrefill') {
                         this.followupvisible = false;
@@ -138,13 +139,13 @@ export class PrepFollowupworkflowComponent implements OnInit {
                         this.monthlyrefillvisible = true;
                     }
                 }
-                if (this.FormSettings['prepFormsView'] !== null  && this.FormSettings['prepFormsView'] !== undefined) {
+                if (this.FormSettings['prepFormsView'] !== null && this.FormSettings['prepFormsView'] !== undefined) {
                     this.prepFormsView = this.FormSettings['prepFormsView'];
                 }
 
 
 
-            
+
 
             }
 
@@ -168,10 +169,36 @@ export class PrepFollowupworkflowComponent implements OnInit {
         this.getPatientDetailsById(this.personId);
         this.isTriageEligible();
         this.getPersonEnrolledServices(this.personId);
-      
+
         this.getEncounterDone();
+        this.LoadPrepEnrollmentDate(this.patientId);
+
+    }
 
 
+
+    LoadPrepEnrollmentDate(patientId: number): void {
+        this.personService.getPatientEnrollmentDateByServiceAreaId(patientId, this.serviceAreaId).subscribe(
+            (result) => {
+                if (result != null) {
+
+                    let enrollmentDate: Date;
+                    this.VisitCheckinDate = moment(localStorage.getItem('PrepVisitDate')).toDate();
+                    enrollmentDate = moment(result.enrollmentDate).toDate();
+                    if (enrollmentDate.getDay() == this.VisitCheckinDate.getDay()
+                        && enrollmentDate.getMonth() == this.VisitCheckinDate.getMonth()
+                         && enrollmentDate.getFullYear == this.VisitCheckinDate.getFullYear) {
+                            this.disabledcontrol = true;
+                    }
+                    else  {
+                        this.disabledcontrol= false;
+                    }
+                }
+            },
+            (error) => {
+                console.log(error);
+            }
+        );
     }
     RefillLink() {
         this.zone.run(() => {
@@ -322,7 +349,7 @@ export class PrepFollowupworkflowComponent implements OnInit {
                         'behaviourrisk': 'Risk',
                         encounterType: arrayValue.encounterType,
                         prep_status: arrayValue.preStatus,
-                        visitDate :  moment(moment(arrayValue.visitDate).toDate()).format('DD-MM-YYYY').toString(),
+                        visitDate: moment(moment(arrayValue.visitDate).toDate()).format('DD-MM-YYYY').toString(),
                         next_appointment: arrayValue.appointmentDate,
                         provider: arrayValue.providerName,
                         encounterStartTime: arrayValue.encounterStartTime,
@@ -349,7 +376,7 @@ export class PrepFollowupworkflowComponent implements OnInit {
                     }
 
 
-
+                    console.log(this.prep_history_table_data);
                 }
             },
             (error) => {
@@ -364,7 +391,7 @@ export class PrepFollowupworkflowComponent implements OnInit {
             console.log('result');
 
             if (res != null && res !== undefined) {
-               
+
                 if (res['encounterType'] !== null) {
                     this.encounterType = res['encounterType'].toString();
                 }

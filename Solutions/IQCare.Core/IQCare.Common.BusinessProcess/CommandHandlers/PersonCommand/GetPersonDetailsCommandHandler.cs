@@ -37,7 +37,7 @@ namespace IQCare.Common.BusinessProcess.CommandHandlers.PersonCommand
                     sql.Append("SE.Id ServiceAreaId, SE.Name ServiceAreaName, CAST(DECRYPTBYKEY(PC.PhysicalAddress) AS VARCHAR(50)) AS PhysicalAddress, CAST(DECRYPTBYKEY(PC.MobileNumber) AS VARCHAR(50)) AS MobileNumber, ");
                     sql.Append("PMS.MaritalStatusId, MaritalStatusName = (SELECT TOP 1 ItemName FROM LookupItemView WHERE ItemId = PMS.MaritalStatusId AND MasterName = 'MaritalStatus'), PL.LandMark, County = (select TOP 1 CountyName from County where WardId = PL.Ward), ");
                     sql.Append("SubCounty = (select TOP 1 Subcountyname from County where WardId = PL.Ward), Ward = (select TOP 1 WardName from County where WardId = PL.Ward) ");
-                    sql.Append("FROM[dbo].[Person] P INNER JOIN dbo.Patient AS PT ON P.Id = PT.PersonId LEFT JOIN dbo.PatientEnrollment AS PE ON PT.Id = PE.PatientId LEFT JOIN dbo.PatientIdentifier AS pni ON pni.PatientId = PT.Id and PE.Id = pni.PatientEnrollmentId ");
+                    sql.Append("FROM[dbo].[Person] P LEFT JOIN dbo.Patient AS PT ON P.Id = PT.PersonId LEFT JOIN dbo.PatientEnrollment AS PE ON PT.Id = PE.PatientId LEFT JOIN dbo.PatientIdentifier AS pni ON pni.PatientId = PT.Id and PE.Id = pni.PatientEnrollmentId ");
                     sql.Append("LEFT JOIN dbo.Identifiers ON pni.IdentifierTypeId = dbo.Identifiers.Id LEFT JOIN dbo.ServiceArea SE ON SE.Id = PE.ServiceAreaId LEFT JOIN dbo.PersonContact PC ON PC.PersonId = P.Id LEFT JOIN[dbo].[PatientMaritalStatus] PMS ON PMS.PersonId = P.Id ");
                     sql.Append("LEFT JOIN[dbo].[PersonLocation] PL ON PL.PersonId = P.Id ) A");
                     sql.Append($" WHERE A.PersonId = {request.PersonId};");

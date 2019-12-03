@@ -18,6 +18,7 @@ import { PartnerCCCEnrollmentResolver, SexWithoutCondomResolver, PatientIdentifi
 import {FacilityDashboardComponent} from './facility-dashboard/facility-dashboard.component';
 import {HtsDashboardComponent} from './hts-dashboard/hts-dashboard.component';
 import { GetpatientIdResolver } from './services/getpatientId.resolver';
+import { ServiceAreaCareEndDetailsResolver } from './services/serviceareacareenddetails.resolver';
 
 const routes: Routes = [
     {
@@ -35,7 +36,8 @@ const routes: Routes = [
             RiskAssessmentArray: RiskEncounterResolver,
             ExitReasonsArray: ExitReasonsResolver,
            // CarendedArray: CareendDetailsResolver,
-            HTSEncounterHistoryArray: HTSEncounterHistoryResolver
+            HTSEncounterHistoryArray: HTSEncounterHistoryResolver,
+            ServiceAreaCareEndArray: ServiceAreaCareEndDetailsResolver
         }
     },
     {

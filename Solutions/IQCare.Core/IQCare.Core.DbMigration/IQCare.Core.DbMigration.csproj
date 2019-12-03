@@ -393,6 +393,12 @@
     <None Remove="Scripts\2.2.0\74_build.sql" />
     <None Remove="Scripts\2.2.0\75_GetPossibleDuplicates.sql" />
     <None Remove="Scripts\2.2.0\76_MergePatientData.sql" />
+    <None Remove="Scripts\2.2.0\74_CaregiveView.sql" />
+    <None Remove="Scripts\2.2.0\75_OVCCareEndedOptions.sql" />
+    <None Remove="Scripts\2.2.0\76_OvcEnrollmentForm.sql" />
+    <None Remove="Scripts\2.2.0\77_Lookupitems.sql" />
+    <None Remove="Scripts\2.2.0\78_OVCNumber.sql" />
+    <None Remove="Scripts\2.2.0\79_CareEndServiceAreaView.sql" />
     <None Remove="Scripts\2.2.0\IQTools\01_PatientPopulationView.sql" />
     <None Remove="Scripts\2.2.0\IQTools\02_HTS_LABRegisternewer.sql" />
     <None Remove="Scripts\2.2.0\IQTools\03_ANCRegister.sql" />
@@ -821,6 +827,12 @@
     <EmbeddedResource Include="Scripts\2.2.0\74_build.sql" />
     <EmbeddedResource Include="Scripts\2.2.0\75_GetPossibleDuplicates.sql" />
     <EmbeddedResource Include="Scripts\2.2.0\76_MergePatientData.sql" />
+    <EmbeddedResource Include="Scripts\2.2.0\74_CaregiveView.sql" />
+    <EmbeddedResource Include="Scripts\2.2.0\75_OVCCareEndedOptions.sql" />
+    <EmbeddedResource Include="Scripts\2.2.0\76_OvcEnrollmentForm.sql" />
+    <EmbeddedResource Include="Scripts\2.2.0\77_Lookupitems.sql" />
+    <EmbeddedResource Include="Scripts\2.2.0\78_OVCNumber.sql" />
+    <EmbeddedResource Include="Scripts\2.2.0\79_CareEndServiceAreaView.sql" />
     <EmbeddedResource Include="Scripts\2.2.0\IQTools\01_PatientPopulationView.sql" />
     <EmbeddedResource Include="Scripts\2.2.0\IQTools\02_HTS_LABRegisternewer.sql" />
     <EmbeddedResource Include="Scripts\2.2.0\IQTools\03_ANCRegister.sql" />
