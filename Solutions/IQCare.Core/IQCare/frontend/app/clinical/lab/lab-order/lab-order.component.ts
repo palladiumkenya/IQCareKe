@@ -275,7 +275,7 @@ export class LabOrderComponent implements OnInit {
 
     }
 
-    labTestWithOrderReasons: any[] = ['Viral Load', 'CD4'];
+    labTestWithOrderReasons: any[] = ['Viral Load'];
     public onLabTestChange(test: any) {
         const exists = this.labTestWithOrderReasons.filter(x => x == test.name).length >= 1
         this.labOrderFormGroup.controls['labtestReasonId'].reset();
