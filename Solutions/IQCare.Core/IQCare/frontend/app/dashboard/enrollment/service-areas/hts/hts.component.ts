@@ -79,7 +79,7 @@ export class HtsComponent implements OnInit {
 
         this.form = this._formBuilder.group({
             EnrollmentDate: new FormControl('', [Validators.required]),
-            EnrollmentNumber: new FormControl('', [Validators.required]),
+            EnrollmentNumber: new FormControl(Math.random().toString(36).slice(5), [Validators.required]),
             populationType: new FormControl('', [Validators.required]),
             priorityPop: new FormControl('', [Validators.required]),
             KeyPopulation: new FormControl('', [Validators.required]),
