@@ -10,7 +10,7 @@ import { AddTriageComponent } from '../add-triage/add-triage.component';
 })
 export class TriageInfoGridComponent implements OnInit {
     vitalsDataTable: any[] = [];
-    displayedColumns = ['visitdate', 'height', 'weight', 'bmi', 'diastolic', 'systolic', 'temperature', 'respiratoryrate', 'heartrate',
+    displayedColumns = ['visitdate', 'height', 'weight', 'bmi', 'systolic', 'diastolic', 'temperature', 'respiratoryrate', 'heartrate',
         'action'];
     dataSource = new MatTableDataSource(this.vitalsDataTable);
     @ViewChild(MatPaginator) paginator: MatPaginator;

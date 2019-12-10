@@ -101,6 +101,11 @@ export class MergeComponent implements OnInit {
     }
 
     merge() {
+        if (this.selection.selected.length > 2) {
+            this.snotifyService.error('Please select only two persons for merging',
+                'Merge', this.notificationService.getConfig());
+            return;
+        }
         const dialogConfig = new MatDialogConfig();
         dialogConfig.disableClose = true;
         dialogConfig.autoFocus = true;
@@ -133,9 +138,7 @@ export class MergeComponent implements OnInit {
                         this.userId).toPromise();
                     this.snotifyService.success('Successfully merged patient records',
                         'Merge', this.notificationService.getConfig());
-                    this.zone.run(() => {
-                        this.router.navigate(['/record/merge'],                             { relativeTo: this.route });
-                    });
+                    this.zone.run(() => { this.router.navigate(['/'], { relativeTo: this.route }); });
                 } catch (e) {
                     this.snotifyService.error('An error occured while trying to merge patient records',
                         'Merge', this.notificationService.getConfig());
