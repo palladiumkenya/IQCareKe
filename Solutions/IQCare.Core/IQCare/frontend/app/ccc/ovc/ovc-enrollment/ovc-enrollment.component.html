@@ -38,74 +38,78 @@
                                 </div>
                                 <div class='col-lg-3 col-sm-3 col-xs-12'>
                                     <div class="form-group pull-left">
-                                        <button type="findButton"  (click)="searchPatient()" mat-raised-button color="primary" *ngIf="findRegistered">
+                                        <button type="findButton" (click)="searchPatient()" mat-raised-button
+                                            color="primary" *ngIf="findRegistered">
                                             <strong>Find & Link</strong>
                                         </button>
 
                                         <button mat-raised-button class="mat-primary" *ngIf="registerContact"
-                                                (click)="registerNewContact()">
-                                                <span class="fa fa-plus-circle">
-                                                    Register New
-                                                </span>
+                                            (click)="registerNewContact()">
+                                            <span class="fa fa-plus-circle">
+                                                Register New
+                                            </span>
                                         </button>
                                     </div>
                                 </div>
                             </div>
-                           
-                           
-                           
+
+
+
 
                             <div class="row">
                                 <div class="example-container mat-elevation-z8">
                                     <mat-table #table [dataSource]="dataSource">
-                
+
                                         <!--- Note that these columns can be defined in any order.
                                       The actual rendered columns are set as a property on the row definition" -->
-                
+
                                         <!-- FirstName Column -->
                                         <ng-container matColumnDef="firstName">
                                             <mat-header-cell *matHeaderCellDef> First Name </mat-header-cell>
                                             <mat-cell *matCellDef="let element"> {{element.firstName}} </mat-cell>
                                         </ng-container>
-                
+
                                         <!-- FirstName Column -->
                                         <ng-container matColumnDef="midName">
                                             <mat-header-cell *matHeaderCellDef> Middle Name </mat-header-cell>
                                             <mat-cell *matCellDef="let element"> {{element.midName}} </mat-cell>
                                         </ng-container>
-                
+
                                         <!-- Middle Name Column -->
                                         <ng-container matColumnDef="lastName">
                                             <mat-header-cell *matHeaderCellDef> Last Name </mat-header-cell>
                                             <mat-cell *matCellDef="let element"> {{element.lastName}} </mat-cell>
                                         </ng-container>
-                
+
                                         <!-- Last Name Column -->
-                                        
-                
+
+
                                         <!-- Date Of Birth Column -->
                                         <ng-container matColumnDef="gender">
                                             <mat-header-cell *matHeaderCellDef> Gender </mat-header-cell>
                                             <mat-cell *matCellDef="let element"> {{element.gender }} </mat-cell>
                                         </ng-container>
-                
+
                                         <!-- Enrollment Date Column -->
                                         <ng-container matColumnDef="relationshipType">
                                             <mat-header-cell *matHeaderCellDef> Relationship Type </mat-header-cell>
-                                            <mat-cell *matCellDef="let element"> {{element.relationshipType }} </mat-cell>
+                                            <mat-cell *matCellDef="let element"> {{element.relationshipType }}
+                                            </mat-cell>
                                         </ng-container>
-                
-                                        
-                
-                                        <mat-header-row *matHeaderRowDef="displayedColumns" [style.background]="'#f5f5f5'"></mat-header-row>
+
+
+
+                                        <mat-header-row *matHeaderRowDef="displayedColumns"
+                                            [style.background]="'#f5f5f5'"></mat-header-row>
                                         <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
                                     </mat-table>
-                                    <mat-paginator [length]="5" [pageSize]="5" [pageSizeOptions]="[3, 5, 10, 20]" [showFirstLastButtons]="true">
+                                    <mat-paginator [length]="5" [pageSize]="5" [pageSizeOptions]="[3, 5, 10, 20]"
+                                        [showFirstLastButtons]="true">
                                     </mat-paginator>
                                 </div>
                             </div>
 
-                          
+
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="form-title">
@@ -121,7 +125,8 @@
                                         <mat-select placeholder="Is Client enrolled in CPIMS" name="CPMISEnrolled"
                                             id="CPMISEnrolled" formControlName="CPMISEnrolled">
                                             <mat-option [value]=""></mat-option>
-                                            <mat-option *ngFor="let yesNoOption of yesNoOptions" [value]="yesNoOption.itemId"
+                                            <mat-option *ngFor="let yesNoOption of yesNoOptions"
+                                                [value]="yesNoOption.itemId"
                                                 (onSelectionChange)="onCPMISEnrolled($event)">
                                                 {{ yesNoOption.itemName }}
                                             </mat-option>
@@ -129,8 +134,8 @@
                                     </mat-form-field>
                                 </div>
 
-                                <div class="col-lg-6 col-sm-6 col-xs-12">
-                                    <mat-form-field>
+                                <div class="col-lg-8 col-sm-8 col-xs-12">
+                                    <mat-form-field class="col-md-12">
                                         <input matInput placeholder="Provide CPMIS unique identifier"
                                             formControlName="CPMISNumber" id="CPMISNumber" name="CPMISNumber"
                                             tabindex="2" required>
@@ -148,7 +153,7 @@
                                 <div class="col-md-12">
                                     <mat-form-field class="col-md-12">
                                         <textarea formControlName="PartnerOVCServices" matInput
-                                            placeholder="PartnerOVCServices"></textarea>
+                                            placeholder="Partner Offering OVC Services"></textarea>
                                     </mat-form-field>
                                 </div>
                             </div>
@@ -156,8 +161,8 @@
                             <div class="row">
                                 <div class="col-lg-2 col-md-2 col-sm-2">
                                     <div class="form-group pull-left">
-                                        <button type="submit" mat-raised-button color="warn">
-                                            <strong>Close</strong>
+                                        <button type="submit" mat-raised-button color="warn" (click)="close()">
+                                            <strong>Cancel</strong>
                                         </button>
                                     </div>
                                 </div>

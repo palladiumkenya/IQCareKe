@@ -110,6 +110,21 @@ export class OvcEnrollmentComponent implements OnInit {
 
 
         this.OvcEnrollmentForm.controls.CPMISNumber.disable({ onlySelf: true });
+    
+        if (this.edit != undefined && this.edit == 1) {
+            this.ovcService.getEnrollOVCInformation(this.personId).subscribe((res) => {
+                if (res != null) {
+                    console.log(res['id']);
+                    this.OvcEnrollmentForm.controls.PartnerOVCServices.setValue(res['partnerOVCServices']);
+                    this.OvcEnrollmentForm.controls.CPMISEnrolled.setValue(res['cpmisEnrolled']);
+
+                }
+            });
+
+            this.loadEnrollmentDate(this.patientId);
+           
+        }
+
 
         await this.personHomeService.getServiceAreaIdentifiers(this.serviceId).subscribe(
             (res) => {
@@ -131,25 +146,19 @@ export class OvcEnrollmentComponent implements OnInit {
                         }
                     });
                 });
+                if (this.edit != undefined && this.edit == 1) { 
+
+                    this.loadIdentifiers(this.patientId);
+                }
+
                 // console.log(serviceAreaIdentifiers);
             }
         );
 
 
-        if (this.edit != undefined && this.edit == 1) {
-            this.ovcService.getEnrollOVCInformation(this.personId).subscribe((res) => {
-                if (res != null) {
-                    console.log(res['id']);
-                    this.OvcEnrollmentForm.controls.PartnerOVCServices.setValue(res['partnerOVCServices']);
-                    this.OvcEnrollmentForm.controls.CPMISEnrolled.setValue(res['cpmisEnrolled']);
+      
 
-                }
-            });
-
-            this.loadEnrollmentDate(this.patientId);
-            this.loadIdentifiers(this.patientId);
-        }
-
+        console.log(this.OvcEnrollmentForm.controls);
 
 
 
@@ -163,7 +172,7 @@ export class OvcEnrollmentComponent implements OnInit {
                         result.forEach(patientIdentifiers => {
                             if (patientIdentifiers.identifierTypeId == element.id) {
                                 if (element.code == 'CPMISNumber') {
-                                    this.OvcEnrollmentForm.controls.CPMISNumber.setValue(patientIdentifiers.identifierValue);
+                                    this.OvcEnrollmentForm.controls.CPMISNumber.setValue(patientIdentifiers.identifierValue.toString());
                                 } else if (element.code == 'OVCNumber') {
                                     this.OVCNumber = patientIdentifiers.IdentifierValue;
                                 }
@@ -222,6 +231,13 @@ export class OvcEnrollmentComponent implements OnInit {
     }
     addRow() {
 
+    }
+    close() {
+        this.zone.run(() => {
+            this.router.navigate(
+                ['/dashboard/personhome/' + this.personId],
+                { relativeTo: this.route });
+        });
     }
     validate() {
 

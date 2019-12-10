@@ -81,6 +81,15 @@ export class PrepMonthlyrefillComponent implements OnInit {
         private encounterservice: EncounterService) {
         this.maxDate = new Date();
 
+
+
+        if (localStorage.getItem('PrepVisitDate') != null && localStorage.getItem('PrepVisitDate') != undefined) {
+            this.maxDate = moment(localStorage.getItem('PrepVisitDate')).toDate();
+        }
+        else {
+            this.maxDate = new Date();
+        }
+
     }
 
     ngOnInit() {

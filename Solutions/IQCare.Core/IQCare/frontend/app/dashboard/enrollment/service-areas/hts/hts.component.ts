@@ -90,6 +90,7 @@ export class HtsComponent implements OnInit {
         if (this.ageNumber < 15) {
             this.form.controls.populationType.disable({ onlySelf: true });
             this.form.controls.priorityPop.disable({ onlySelf: true });
+            this.form.controls.discordantPopulation.disable({onlySelf: true});
         }
         this.form.controls.KeyPopulation.disable({ onlySelf: true });
         this.form.controls.priorityPopulation.disable({ onlySelf: true });
@@ -118,9 +119,10 @@ export class HtsComponent implements OnInit {
                 const { registrationDate } = res[0];
                 if (registrationDate) {
                     this.minDate = registrationDate;
-                } else {
-                    this.minDate = new Date();
                 }
+                /* else {
+                    this.minDate = new Date();
+                } */
             }
         );
 
@@ -315,6 +317,7 @@ export class HtsComponent implements OnInit {
     }
 
     public submitEnrollment() {
+        console.log(this.form);
         if (!this.form.valid) {
             this.snotifyService.error('Please complete the form before submitting', 'Enrollment',
                 this.notificationService.getConfig());
