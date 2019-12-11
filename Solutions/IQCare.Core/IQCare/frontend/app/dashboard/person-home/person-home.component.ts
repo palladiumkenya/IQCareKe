@@ -83,11 +83,8 @@ export class PersonHomeComponent implements OnInit {
             const  {ServiceAreaCareEndArray} = res;
 
             this.ServiceAreaCareEndDetails = ServiceAreaCareEndArray;
-            console.log('ServiceAreaCareEndDetails');
-            console.log(this.ServiceAreaCareEndDetails);
             this.htshistory = HTSEncounterHistoryArray;
             this.services = servicesArray;
-            // this.htsencounters = HTSEncounterArray;
             this.personvitals = PersonVitalsArray;
             this.riskassessmentencounter = RiskAssessmentArray;
             this.careendoptions = ExitReasonsArray['lookupItems'];
@@ -132,9 +129,7 @@ export class PersonHomeComponent implements OnInit {
             this.isdead = false;
         }
 
-        // this.encounterDetail = this.htsencounters[0];
-
-        const servicesRightOrder = [2, 1, 3, 5, 4, 6, 7, 8];
+        const servicesRightOrder = [2, 1, 3, 5, 4, 6, 7, 8, 9];
         if (this.services != undefined) {
             const ordered_array = this.mapOrder(this.services, servicesRightOrder, 'id');
             this.services = ordered_array;

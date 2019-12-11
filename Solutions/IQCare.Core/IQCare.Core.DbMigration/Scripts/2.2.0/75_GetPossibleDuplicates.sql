@@ -29,8 +29,8 @@ BEGIN
 
 	SELECT * INTO #temp FROM (SELECT 
 		ptn_pk,PatientId,PersonId,EnrollmentNumber,FirstName,MiddleName,LastName,Sex, EnrollmentDate,DateOfBirth,MobileNumber, IdentifierTypeId, PatientEnrollmentId,
-		SOUNDEX(TRIM(FirstName)) as sFirstName,SOUNDEX(TRIM(MiddleName)) as sMiddleName,SOUNDEX(TRIM(LastName)) as sLastName, 
-		SOUNDEX(CONCAT(TRIM(FirstName),TRIM(LastName))) as sFirstLastName,SOUNDEX(CONCAT(TRIM(FirstName),TRIM(MiddleName),TRIM(LastName))) as sFirstMiddleLastName,
+		SOUNDEX(FirstName) as sFirstName,SOUNDEX(MiddleName) as sMiddleName,SOUNDEX(LastName) as sLastName, 
+		SOUNDEX(CONCAT(FirstName,LastName)) as sFirstLastName,SOUNDEX(CONCAT(FirstName,MiddleName,LastName)) as sFirstMiddleLastName,
 		CASE WHEN LEN(EnrollmentNumber) = 11 THEN --To match values like 13939-26222
 			(SUBSTRING(EnrollmentNumber,CHARINDEX('-', EnrollmentNumber)+1, LEN(EnrollmentNumber)))  
 		ELSE 

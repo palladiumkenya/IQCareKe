@@ -21,6 +21,7 @@ export class OtzCareendingComponent implements OnInit {
     serviceId: number;
     personId: number;
     maxDate: Date;
+    enrollmentDate: Date;
     userId: number;
     
     constructor(private _formBuilder: FormBuilder,
@@ -52,6 +53,12 @@ export class OtzCareendingComponent implements OnInit {
 
         const careEndEncounterType = await this.otzService.getByGroupName('EncounterType').toPromise();
         this.EncounterTypeOptions = careEndEncounterType['lookupItems'];
+        this.maxDate = new Date();
+
+        const otzEnrollment = await this.otzService.getOtzEnrollment(this.patientId, this.serviceId).toPromise();
+        if (otzEnrollment) {
+            this.enrollmentDate = otzEnrollment.enrollmentDate;
+        }
     }
     
     async close() {
@@ -85,7 +92,11 @@ export class OtzCareendingComponent implements OnInit {
             const patientMasterVisit = await this.encounterService.savePatientMasterVisit(patientMasterVisitEncounter).toPromise();
             otzCareEndingCommand.PatientMasterVisitId = patientMasterVisit.patientMasterVisitId;
             const result = await this.otzService.careEndOtz(otzCareEndingCommand).toPromise();
-            console.log(result);
+
+            this.zone.run(() => {
+                this.router.navigate(['/ccc/encounterHistory/' + this.patientId + '/' + this.personId + '/' + this.serviceId],
+                    { relativeTo: this.route });
+            });
         } catch (e) {
             console.log(e);
         }
