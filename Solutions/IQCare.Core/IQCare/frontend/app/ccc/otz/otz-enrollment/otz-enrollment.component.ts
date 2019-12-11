@@ -75,6 +75,7 @@ export class OtzEnrollmentComponent implements OnInit {
         this.cccEnrollmentDate = result.enrollmentDate;
 
         this.serviceAreaIdentifiers = await this.personHomeService.getServiceAreaIdentifiers(this.serviceId).toPromise();
+        this.maxDate = new Date();
     }
 
     onClientTransferInChange(event) {
@@ -89,12 +90,13 @@ export class OtzEnrollmentComponent implements OnInit {
 
     NewTopicCovered() {
         const otzEnrollmentDate = this.OtzEnrollmentForm.get('enrollmentDate').value;
+        const dateInitiallyEnrolled = this.OtzEnrollmentForm.get('dateInitiallyEnrolled').value;
         const dialogConfig = new MatDialogConfig();
         dialogConfig.disableClose = true;
         dialogConfig.autoFocus = true;
 
         dialogConfig.data = {
-            otzEnrollmentDate: otzEnrollmentDate
+            otzEnrollmentDate: dateInitiallyEnrolled ? dateInitiallyEnrolled : otzEnrollmentDate
         };
 
         const dialogRef = this.dialog.open(ModulesCoveredComponent, dialogConfig);
