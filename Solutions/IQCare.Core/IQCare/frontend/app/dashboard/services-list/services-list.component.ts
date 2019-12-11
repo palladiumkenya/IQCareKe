@@ -94,11 +94,6 @@ export class ServicesListComponent implements OnInit {
         if (this.EligibilityInformation.length > 0) {
             this.htseligibility = this.EligibilityInformation.join(' ,');
         }
-    
-        console.log('ServiceAreaCareEndDetails');
-        console.log(this.serviceareacareenddetails);
-
-
     }
 
 

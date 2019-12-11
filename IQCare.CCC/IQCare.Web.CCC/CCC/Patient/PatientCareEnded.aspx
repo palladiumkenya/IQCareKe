@@ -414,7 +414,7 @@
         $('#DateExpectedToReportpicker').datetimepicker({
             format: 'DD-MMM-YYYY',
             allowInputToggle: true,
-            maxDate: today,
+            minDate: today,
             useCurrent: false
         });
 

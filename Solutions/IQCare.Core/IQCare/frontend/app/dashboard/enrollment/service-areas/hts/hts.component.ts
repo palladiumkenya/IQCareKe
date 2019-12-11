@@ -90,10 +90,10 @@ export class HtsComponent implements OnInit {
         if (this.ageNumber < 15) {
             this.form.controls.populationType.disable({ onlySelf: true });
             this.form.controls.priorityPop.disable({ onlySelf: true });
-            this.form.controls.discordantPopulation.disable({onlySelf: true});
-        }
-        this.form.controls.KeyPopulation.disable({ onlySelf: true });
-        this.form.controls.priorityPopulation.disable({ onlySelf: true });
+			this.form.controls.KeyPopulation.disable({ onlySelf: true });
+			this.form.controls.priorityPopulation.disable({ onlySelf: true });
+			this.form.controls.discordantPopulation.disable({ onlySelf: true });
+        }        
 
         this._lookupItemService.getByGroupName('PriorityPopulation').subscribe(
             (result) => {
