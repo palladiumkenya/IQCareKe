@@ -488,7 +488,7 @@ export class ServicesListComponent implements OnInit {
 
         return isEligible;
     }
-    async isEligibleServiceReenrollment(serviceAreaId: number) {
+     isEligibleServiceReenrollment(serviceAreaId: number) {
 
 
         const selectedService = this.services.filter(obj => obj.id == serviceAreaId);

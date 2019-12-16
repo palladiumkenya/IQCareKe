@@ -292,7 +292,7 @@
                                             </ng-template>
                                             <ng-template #eligiblecareendtemplate>
 
-                                                <span *ngIf="isEligibleServiceReenrollment(service.id)">
+                                                <span *ngIf="isEligibleServiceReenrollment(service.id); else noteligibletemplate">
                                                     <a class="btn btn-sm btn-primary"
                                                         (click)="reenrollToService(service.id,service.code)">
                                                         Restart
@@ -300,6 +300,9 @@
                                                     </a>
                                                 </span>
 
+                                            </ng-template>
+                                            <ng-template #noteligibletemplate> 
+                                                <span class="label label-orange">Not Eligible</span>
                                             </ng-template>
 
                                             <br />
