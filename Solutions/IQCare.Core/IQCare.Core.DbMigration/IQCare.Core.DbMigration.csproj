@@ -404,6 +404,7 @@
     <None Remove="Scripts\2.2.0\82_OTZ_PatientView.sql" />
     <None Remove="Scripts\2.2.0\83_ReleaseCandidateLatest.sql" />
     <None Remove="Scripts\2.2.0\84_ServiceArea.sql" />
+    <None Remove="Scripts\2.2.0\85_OTZServiceAreaIdentifier.sql" />
     <None Remove="Scripts\2.2.0\IQTools\01_PatientPopulationView.sql" />
     <None Remove="Scripts\2.2.0\IQTools\02_HTS_LABRegisternewer.sql" />
     <None Remove="Scripts\2.2.0\IQTools\03_ANCRegister.sql" />
@@ -875,6 +876,7 @@
     <EmbeddedResource Include="Scripts\2.0.1\17_pr_Admin_GetFacilityList.sql" />
     <EmbeddedResource Include="Scripts\2.0.1\18_UpdateFacility.sql" />
     <EmbeddedResource Include="Scripts\2.2.0\50_PREP_RegisterView.sql" />
+    <EmbeddedResource Include="Scripts\2.2.0\85_OTZServiceAreaIdentifier.sql" />
   </ItemGroup>
 
   <ItemGroup>
