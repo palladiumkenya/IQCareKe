@@ -37,7 +37,7 @@ namespace Application.Presentation
         public GblIQCare()
         {
             AppVersion = "Ver 2.2.0 Kenya HMIS";
-            ReleaseDate = "11-Dec-2019";
+            ReleaseDate = "13-Jan-2020";
             VersionName = "Kenya HMIS Ver 2.2.0";
             DbVersion = "Ver 2.2.0 Kenya HMIS";
         }
@@ -50,7 +50,7 @@ namespace Application.Presentation
         #region "Application Parameters"
         public static string AppVersion = "Ver 2.2.0 Kenya HMIS";
         public static string DbVersion = "Ver 2.2.0 Kenya HMIS";
-        public static string ReleaseDate = "11-Dec-2019";
+        public static string ReleaseDate = "13-Jan-2020";
         public static string VersionName = "Kenya HMIS Ver 2.2.0";
         #endregion
 
