@@ -64,7 +64,7 @@ namespace BusinessProcess.CCC
                         ClsUtility.Init_Hashtable();
                         ClsUtility.AddParameters("@ptn_pharmacy_pk", SqlDbType.Int, ptn_pharmacy_pk);
                         ClsUtility.AddParameters("@DrugId", SqlDbType.Int, drg.DrugId);
-                        ClsUtility.AddParameters("@BatchId", SqlDbType.Int, drg.BatchId);
+                        ClsUtility.AddParameters("@BatchId", SqlDbType.VarChar, drg.BatchId);
 
 
                         if (drg.FreqId != null)
