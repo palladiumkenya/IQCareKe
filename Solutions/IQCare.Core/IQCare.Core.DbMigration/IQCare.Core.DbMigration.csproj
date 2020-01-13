@@ -402,6 +402,8 @@
     <None Remove="Scripts\2.2.0\80_MergePatientData.sql" />
     <None Remove="Scripts\2.2.0\81_releaseCandidate.sql" />
     <None Remove="Scripts\2.2.0\82_OTZ_PatientView.sql" />
+    <None Remove="Scripts\2.2.0\83_PatientTreatmentTrackerView.sql" />
+    <None Remove="Scripts\2.2.0\84_FinalIQCareRelease.sql" />
     <None Remove="Scripts\2.2.0\IQTools\01_PatientPopulationView.sql" />
     <None Remove="Scripts\2.2.0\IQTools\02_HTS_LABRegisternewer.sql" />
     <None Remove="Scripts\2.2.0\IQTools\03_ANCRegister.sql" />
@@ -839,6 +841,8 @@
     <EmbeddedResource Include="Scripts\2.2.0\80_MergePatientData.sql" />
     <EmbeddedResource Include="Scripts\2.2.0\81_releaseCandidate.sql" />
     <EmbeddedResource Include="Scripts\2.2.0\82_OTZ_PatientView.sql" />
+    <EmbeddedResource Include="Scripts\2.2.0\83_PatientTreatmentTrackerView.sql" />
+    <EmbeddedResource Include="Scripts\2.2.0\84_FinalIQCareRelease.sql" />
     <EmbeddedResource Include="Scripts\2.2.0\IQTools\01_PatientPopulationView.sql" />
     <EmbeddedResource Include="Scripts\2.2.0\IQTools\02_HTS_LABRegisternewer.sql" />
     <EmbeddedResource Include="Scripts\2.2.0\IQTools\03_ANCRegister.sql" />
