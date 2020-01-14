@@ -7,13 +7,14 @@
 <%@ Register Src="~/CCC/UC/ucExtruder.ascx" TagPrefix="IQ" TagName="ucExtruder" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="IQCareContentPlaceHolder" runat="server">
-    <div style="padding-bottom:10px;position: fixed;bottom: 0px;z-index:999;width:100%;text-align:center;">
+    <%--<div style="padding-bottom:10px;position: fixed;bottom: 0px;z-index:999;width:100%;text-align:center;">
         <button type="button" class="btn btn-secondary btn-shadow"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i> Previous: 00234:John Doe (CCC) </button>
         <button type="button" class="btn btn-success btn-shadow">Current: 00235:Current Patient (CCC) </button>
         <button type="button" class="btn btn-primary btn-shadow">Next: 00236:Next Patient (Maternity) <i class="fa fa-arrow-circle-right" aria-hidden="true"></i></button>
         <a href="" class="btn btn-default btn-shadow"> <i class="fa fa-folder-open" aria-hidden="true"></i> Queue Management</a>
-    </div>
+    </div>--%>
     <%--  <div class="col-md-12 col-xs-12 col-sm-12" style="margin-top: 0%;padding-top: 0%">--%>
+   
     <IQ:ucPatientDetails runat="server" ID="ucPatientDetails" />
     <%--</div>--%>
 
@@ -1504,8 +1505,8 @@
     <!-- ajax begin -->
     <script type="text/javascript">
 
-        $(document).ready(function() {
 
+        $(document).ready(function () {
             var patientId = "<%=PatientId%>";
             $("#<%=Gender.ClientID%>").hide();
             var patientType = '<%=PatientType%>';

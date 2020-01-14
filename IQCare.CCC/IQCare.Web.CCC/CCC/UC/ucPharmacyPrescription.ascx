@@ -512,16 +512,31 @@
                     <th><span class="text-primary">Total Dispensed</span></th>
                     <th><span class="text-primary">Qty Remaining</span></th>
                     <th><span class="text-primary">Qty Dispensed</span></th>
-                    <th><span class="text-primary">Next Pickup Date</span></th>
-                    <th><span class="text-primary">Save</span></th>
+                    <%--<th><span class="text-primary">Next Pickup Date</span></th>
+                    <th><span class="text-primary">Save</span></th>--%>
                 </tr>
             </thead>
             <tbody></tbody>
         </table>
+          <br />
+        <div class="form-group">
+            <div class="col-md-2">
+                <label class="control-label pull-left">Next Pickup Date</label>
+            </div>
+            <div class="col-md-4">
+                <div class='input-group date' id='NextAppointmentDate'>
+					<span class="input-group-addon">
+						<span class="glyphicon glyphicon-calendar"></span>
+					</span>
+					<asp:TextBox runat="server"  CssClass="form-control input-sm" ID="NextPickupDate" onblur="DateFormat(this,this.value,event,false,'3')" onkeyup="DateFormat(this,this.value,event,false,'3')" required ="True" data-parsley-min-message="Input the appointment date"></asp:TextBox>
+				</div>
+            </div> 
+        </div>
+          <br />
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
+        <button type="button" class="btn btn-primary" id="savedispensingbtn">Save changes</button>
       </div>
     </div>
   </div>
@@ -559,31 +574,81 @@
         enrolmentDate = 0;
 
     $(document).ready(function () {
-        $('#dtlDrugDispense tbody').on('click', 'td button', function (){
-            var submitid = $(this).attr('id');
+        
+        $( "#savedispensingbtn" ).click(function() {
+            //var submitid = $(this).attr('id');
             //get row identifier
-            var rowidentifier = submitid.replace('savebtnid', '');
+            //var rowidentifier = submitid.replace('savebtnid', '');
             //get value of qtydispensed
-            var qtydispensed = $('#' + rowidentifier + 'qtyeverdispensedinputid').val();
             //get value of the next visit
-            var nextpickupdate = $('#' + rowidentifier + 'nextpickupdateinputid').val();
+            var nextpickupdate = $("#<%=NextPickupDate.ClientID%>").val();
             var dispenseDate = $("#<%=AppointmentDate.ClientID%>").val();
             //var nextpickupdate = $("#" + rowidentifier + "nextpickupdateinputid").val();
             //get patient id
             //get ptn_pk
             var ndd;
-             $.ajax({
-                url: '../WebService/PatientEncounterService.asmx/saveDispensing',
+            $('.txtqtyeverdispensed').each(function(i, obj) {
+                var qtydispensed = $(this).val();
+                var dispenseDate = $("#<%=AppointmentDate.ClientID%>").val();
+                var inputid = $(this).attr('id');
+                var rowidentifier = inputid.replace('qtyeverdispensedinputid', '');
+                $.ajax({
+                    url: '../WebService/PatientEncounterService.asmx/saveDispensing',
+                    type: 'POST',
+                     dataType: 'json',
+                     data: "{'qtydis':'" + qtydispensed + "','rowid':'" + rowidentifier + "','dispensedate':'"+dispenseDate+"'}",
+                    contentType: "application/json; charset=utf-8",
+
+                     success: function (data) {
+                         toastr.success(data.d, "Saved Successfully");
+                    }
+                });
+            });
+             savenextpickup(nextpickupdate);
+        });
+
+        function savenextpickup(nextpickupdate) {
+            vistid = "";
+            var urlvisitid = "";
+            if ((<%=Request.QueryString.ToString().Length%>) > 0) {
+                urlvisitid = "<%=Request.QueryString["visitid"]%>";
+            }
+            var sessionvisitid = <%=Convert.ToInt32(Session["PatientMasterVisitID"])%>;
+            if (urlvisitid > 0) {
+                visitid = urlvisitid;
+            }
+            else {
+                visitid = sessionvisitid;
+            }
+            var period = getUrlParameter('visitid');
+            $.ajax({
+                url: '../WebService/PatientEncounterService.asmx/savenextpickupdate',
                 type: 'POST',
-                 dataType: 'json',
-                 data: "{'qtydis':'" + qtydispensed + "','rowid':'" + rowidentifier + "','dispensedate':'"+dispenseDate+"','nextpickupdate':'"+nextpickupdate+"'}",
+                    dataType: 'json',
+                    data: "{'nextpickupdate':'" + nextpickupdate + "','visitid':'" + visitid + "'}",
                 contentType: "application/json; charset=utf-8",
 
-                 success: function (data) {
-                     toastr.success(data.d, "Saved Successfully");
+                    success: function (data) {
+                        toastr.success(data.d, "All dispensing Saved Successfully");
+                        location.reload();
                 }
             });
-        });
+        }
+
+        var getUrlParameter = function getUrlParameter(sParam) {
+            var sPageURL = window.location.search.substring(1),
+                sURLVariables = sPageURL.split('&'),
+                sParameterName,
+                i;
+
+            for (i = 0; i < sURLVariables.length; i++) {
+                sParameterName = sURLVariables[i].split('=');
+
+                if (sParameterName[0] === sParam) {
+                    return sParameterName[1] === undefined ? true : decodeURIComponent(sParameterName[1]);
+                }
+            }
+        };
 
         $("#dtlDrugDispense").on('keyup', 'input', function () {
             var qtydis = $(this).val();
@@ -613,7 +678,7 @@
             $('#' + rowidentifier + 'qtyeverdispensedinputid').val(totaldispensed);
             var dateofdispense = $("#<%=AppointmentDate.ClientID%>").val();
              var pickupdateinput = rowidentifier + "nextpickupdateinputid";
-            var nextpickupdate = getTheNextPickupDate(qtydis, dateofdispense, pickupdateinput);
+            //var nextpickupdate = getTheNextPickupDate(qtydis, dateofdispense, pickupdateinput);
         });
 
         if (DosageFrequency.toString() == "1") {
@@ -2429,6 +2494,14 @@
         useCurrent: true
     });
 
+    var dateNow = new Date();
+    
+    $("#NextAppointmentDate").datetimepicker({
+        defaultDate: dateNow,
+        format: 'DD-MMM-YYYY',
+        allowInputToggle: true
+    });
+
     function getTheNextPickupDate(qtydis, dateofdispense, pickupdateinput) {
         var ndd;
          $.ajax({
@@ -2439,7 +2512,25 @@
             contentType: "application/json; charset=utf-8",
 
              success: function (data) {
-                 $("#" + pickupdateinput).val(data.d);
+                 //alert(data.d);
+                 var date2 = new Date();
+                 //alert(date2);
+                //$( "#NextAppointmentDate" ).datepicker( "option", "Format", "DD-MMM-YYYY" );
+                 //$('#NextAppointmentDate').datepicker('setDate', new Date(data.d), 'format', 'DD-MMM-YYYY');
+                 //$('#NextAppointmentDate').datepicker().datepicker('setDate', data.d);
+                 //$("#NextPickupDate").val(data.d);
+                 var dbDate = data.d;
+                var date2 = new Date(dbDate);
+                // $('NextAppointmentDate').datepicker('setDate', null);
+                 $('#NextAppointmentDate').datepicker({
+                        format: 'DD-MMM-YYYY'
+                }).datepicker(
+                        // Initialize the date to be 00:00 local timezone on October 19, 2016
+                        'setDate', new Date('19-10-2016 00:00')
+                    );
+                
+                 //$('NextAppointmentDate').datepicker('setDate', date2);
+                 //$('NextAppointmentDate').val(data.d);
             }
         });
         return ndd;

@@ -1255,15 +1255,15 @@ namespace IQCare.Web.CCC.WebService
                 string saveDispensing = "<button type='button' class='btnSaveDispensing btn btn-Success fa fa-minus-circle btn-fill " + row["Id"].ToString() + "save' id='" + row["Id"].ToString() + "savebtnid'> Save </button>";
                 if (DosageFrequency == 1)
                 {
-                    string[] i = new string[9] { row["ProgID"].ToString(),
+                    string[] i = new string[7] { row["ProgID"].ToString(),
                         "<input type='hidden' class='" +row["Id"].ToString()+"drugname'>" + row["DrugName"].ToString(),
                     "<input type='hidden' class='" +row["Id"].ToString()+"prescribingdate' id='" +row["Id"].ToString()+"prescribingdateid'>" + prescribingdate,
                         "<input type='hidden' class='" +row["Id"].ToString()+"qtyordered' id='" +row["Id"].ToString()+"qtyorderedid' value='"+row["OrderedQuantity"].ToString()+"'>" + row["OrderedQuantity"].ToString(),
                         "<input type='hidden' class='" +row["Id"].ToString()+"qtyeverdispensed' id='" +row["Id"].ToString()+"qtyeverdispensedid' value='" + row["DispensedQuantity"].ToString() + "'> " + qeverdispensed,
                         "<input type='hidden' class='" +row["Id"].ToString()+"qtyremaining' id='" +row["Id"].ToString()+"qtyremainingid'>" + qtyremaining,
-                        "<input type='hidden' class='" +row["Id"].ToString()+"qtydispensed' id='" +row["Id"].ToString()+"qtydispensedid'> " + qtydispensedinput,
-                        "<input type='hidden' class='" +row["Id"].ToString()+"nextpickup' id='" +row["Id"].ToString()+"nextpickupid'>" + nextpickupdate,
-                        saveDispensing
+                        "<input type='hidden' class='" +row["Id"].ToString()+"qtydispensed' id='" +row["Id"].ToString()+"qtydispensedid'> " + qtydispensedinput
+                        //"<input type='hidden' class='" +row["Id"].ToString()+"nextpickup' id='" +row["Id"].ToString()+"nextpickupid'>" + nextpickupdate,
+                        //saveDispensing
                      };
                     rows.Add(i);
 
@@ -2410,17 +2410,25 @@ namespace IQCare.Web.CCC.WebService
         }
 
         [WebMethod(EnableSession = true)]
-        public string saveDispensing(string qtydis, string rowid, string dispensedate, string nextpickupdate)
+        public string saveDispensing(string qtydis, string rowid, string dispensedate)
         {
             PatientEncounterLogic patientEncounter = new PatientEncounterLogic();
             int val = 0;
             //save dispensing
             val = patientEncounter.saveDispensing(Convert.ToInt32(qtydis),Convert.ToInt32(rowid),Convert.ToDateTime(dispensedate));
             //save appointment
+            return val.ToString();
+        }
+
+        [WebMethod(EnableSession = true)]
+        public string savenextpickupdate(string nextpickupdate, string visitid)
+        {
+            string Result;
+            int piiid = Convert.ToInt32(visitid);
             PatientAppointment patientAppointment = new PatientAppointment()
             {
                 PatientId = Convert.ToInt32(Session["PatientPK"].ToString()),
-                PatientMasterVisitId = Convert.ToInt32(Session["PatientMasterVisitID"]),
+                PatientMasterVisitId = piiid,
                 AppointmentDate = Convert.ToDateTime(nextpickupdate),
                 Description = "",
                 DifferentiatedCareId = 240,
@@ -2432,8 +2440,8 @@ namespace IQCare.Web.CCC.WebService
             };
 
             var appointment = new PatientAppointmentManager();
-            Result = appointment.AddPatientAppointments(patientAppointment);
-            return val.ToString();
+            Result = appointment.AddPatientAppointments(patientAppointment).ToString();
+            return Result;
         }
     }
 }

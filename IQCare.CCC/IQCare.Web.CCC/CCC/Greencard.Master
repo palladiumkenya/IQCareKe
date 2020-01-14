@@ -374,7 +374,53 @@
 	<script type="text/javascript">
 		$(document).ready(function() {
             var PatientTracing = '<%=PatientTrace%>';
-		    console.log(PatientTracing);
+            console.log(PatientTracing);
+
+            var referrer = document.referrer;
+            var sessionpk = <%=Convert.ToInt32(Session["PatientPK"])%>;
+            var sessionpmvid = <%=Convert.ToInt32(Session["PatientMasterVisitId"])%>;
+
+            if (referrer.includes("frontend/dashboard/personhome") && sessionpmvid > 0) {
+                $.ajax({
+					type: "POST",
+					url: "../WebService/PatientMasterVisitService.asmx/PatientCheckoutNoParams",
+					data: "{'id':'"+patientMasterVisitId+"','visitSchedule':'"+ 0 +"','visitBy':'"+ 0 +"','visitType':'"+ 0 +"','visitDate':'"+ today+"'}",
+					contentType: "application/json; charset=utf-8",
+					dataType: "json",
+					success: function(response) {
+                        toastr.info("Previous Patient Service Checkedout successfully!");
+                        $.ajax({
+					        type: "POST",
+					        url: "../WebService/PatientMasterVisitService.asmx/PatientCheckin",
+					        data: "{}",
+					        contentType: "application/json; charset=utf-8",
+					        dataType: "json",
+					        success: function(response) {
+						        encounterStarted();
+						        $("#menuStartEncounter").hide();
+						        startEncounter = 1; /* denotes an active encounter */
+						        stopEncounter = 0;
+                                $('#<%=lblRegistration.ClientID%>').text("Edit Registration");
+						        toastr.info("Patient Service Checkedin successfully!");
+					        },
+					        error:function(xhr, errorType, exception) {
+						        var jsonError = jQuery.parseJSON(xhr.responseText);
+						        toastr.error("" + xhr.status + "" + jsonError.Message);
+						        return false;
+					        }
+				        });
+					},
+					error:function(xhr, errorType, exception) {
+						var jsonError = jQuery.parseJSON(xhr.responseText);
+						toastr.error("" + xhr.status + "" + jsonError.Message);
+						return false;
+					}
+                }); 
+
+
+            }
+
+
 		    if (PatientTracing == "yes") {
                 $("#patientTracing").show();
                 $("#patientTracingLink").show();

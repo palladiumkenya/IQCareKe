@@ -11309,6 +11309,36 @@
     <DeleteFlag>0</DeleteFlag>
   </Mst_Employee>
   <Mst_Employee>
+    <EmployeeId>1116</EmployeeId>
+    <Id>1116</Id>
+    <FirstName>Edna</FirstName>
+    <LastName>Achieno                                           </LastName>
+    <Name>Edna Achieno                                           </Name>
+    <EmployeeName>Edna Achieno                                           </EmployeeName>
+    <DesignationId>6</DesignationId>
+    <DeleteFlag>0</DeleteFlag>
+  </Mst_Employee>
+  <Mst_Employee>
+    <EmployeeId>1117</EmployeeId>
+    <Id>1117</Id>
+    <FirstName>Paul</FirstName>
+    <LastName>Ekhaba                                            </LastName>
+    <Name>Paul Ekhaba                                            </Name>
+    <EmployeeName>Paul Ekhaba                                            </EmployeeName>
+    <DesignationId>4</DesignationId>
+    <DeleteFlag>0</DeleteFlag>
+  </Mst_Employee>
+  <Mst_Employee>
+    <EmployeeId>1118</EmployeeId>
+    <Id>1118</Id>
+    <FirstName>Darius</FirstName>
+    <LastName>Kirui                                             </LastName>
+    <Name>Darius Kirui                                             </Name>
+    <EmployeeName>Darius Kirui                                             </EmployeeName>
+    <DesignationId>12</DesignationId>
+    <DeleteFlag>0</DeleteFlag>
+  </Mst_Employee>
+  <Mst_Employee>
     <EmployeeId>90</EmployeeId>
     <Id>90</Id>
     <FirstName>Jackie</FirstName>
@@ -134824,7 +134854,11 @@
     <UserId>15</UserId>
     <SystemUserName>caren</SystemUserName>
     <Name>Caren Majale</Name>
+    <EmployeeName>Caren Majale    </EmployeeName>
     <UserDeleteFlag>0</UserDeleteFlag>
+    <EmployeeId>11</EmployeeId>
+    <DesignationId>6</DesignationId>
+    <Designation>Counselor</Designation>
     <EmployeeDeleteFlag>0</EmployeeDeleteFlag>
   </Users>
   <Users>
@@ -134884,7 +134918,11 @@
     <UserId>6</UserId>
     <SystemUserName>cwafula</SystemUserName>
     <Name>Colleta Wafula</Name>
+    <EmployeeName>Colleta  Wafula    </EmployeeName>
     <UserDeleteFlag>0</UserDeleteFlag>
+    <EmployeeId>63</EmployeeId>
+    <DesignationId>4</DesignationId>
+    <Designation>M&amp;E</Designation>
     <EmployeeDeleteFlag>0</EmployeeDeleteFlag>
   </Users>
   <Users>
@@ -134895,10 +134933,14 @@
     <EmployeeDeleteFlag>0</EmployeeDeleteFlag>
   </Users>
   <Users>
-    <UserId>30</UserId>
-    <SystemUserName>david</SystemUserName>
-    <Name>David Ambani</Name>
-    <UserDeleteFlag>1</UserDeleteFlag>
+    <UserId>1099</UserId>
+    <SystemUserName>kirui</SystemUserName>
+    <Name>Darius Kirui</Name>
+    <EmployeeName>Darius Kirui                                             </EmployeeName>
+    <UserDeleteFlag>0</UserDeleteFlag>
+    <EmployeeId>1118</EmployeeId>
+    <DesignationId>12</DesignationId>
+    <Designation>Administrator</Designation>
     <EmployeeDeleteFlag>0</EmployeeDeleteFlag>
   </Users>
   <Users>
@@ -134906,6 +134948,13 @@
     <SystemUserName>Dambani</SystemUserName>
     <Name>David Ambani</Name>
     <UserDeleteFlag>0</UserDeleteFlag>
+    <EmployeeDeleteFlag>0</EmployeeDeleteFlag>
+  </Users>
+  <Users>
+    <UserId>30</UserId>
+    <SystemUserName>david</SystemUserName>
+    <Name>David Ambani</Name>
+    <UserDeleteFlag>1</UserDeleteFlag>
     <EmployeeDeleteFlag>0</EmployeeDeleteFlag>
   </Users>
   <Users>
@@ -134931,7 +134980,11 @@
     <UserId>1078</UserId>
     <SystemUserName>Edna</SystemUserName>
     <Name>Edna Achieno</Name>
+    <EmployeeName>Edna Achieno                                           </EmployeeName>
     <UserDeleteFlag>0</UserDeleteFlag>
+    <EmployeeId>1116</EmployeeId>
+    <DesignationId>6</DesignationId>
+    <Designation>Counselor</Designation>
     <EmployeeDeleteFlag>0</EmployeeDeleteFlag>
   </Users>
   <Users>
@@ -134957,14 +135010,22 @@
     <UserId>24</UserId>
     <SystemUserName>Atego</SystemUserName>
     <Name>Eunice Atego</Name>
+    <EmployeeName>Eunice Atego                                             </EmployeeName>
     <UserDeleteFlag>0</UserDeleteFlag>
+    <EmployeeId>102</EmployeeId>
+    <DesignationId>6</DesignationId>
+    <Designation>Counselor</Designation>
     <EmployeeDeleteFlag>0</EmployeeDeleteFlag>
   </Users>
   <Users>
     <UserId>22</UserId>
     <SystemUserName>Oyosa</SystemUserName>
     <Name>Eunice Oyosa</Name>
+    <EmployeeName>Eunice Oyoya                                             </EmployeeName>
     <UserDeleteFlag>0</UserDeleteFlag>
+    <EmployeeId>100</EmployeeId>
+    <DesignationId>6</DesignationId>
+    <Designation>Counselor</Designation>
     <EmployeeDeleteFlag>0</EmployeeDeleteFlag>
   </Users>
   <Users>
@@ -135085,7 +135146,11 @@
     <UserId>21</UserId>
     <SystemUserName>Nyongesa</SystemUserName>
     <Name>Joseph Nyongesa</Name>
+    <EmployeeName>Joseph Nyongesa                                          </EmployeeName>
     <UserDeleteFlag>0</UserDeleteFlag>
+    <EmployeeId>4</EmployeeId>
+    <DesignationId>6</DesignationId>
+    <Designation>Counselor</Designation>
     <EmployeeDeleteFlag>0</EmployeeDeleteFlag>
   </Users>
   <Users>
@@ -135253,6 +135318,13 @@
     <EmployeeDeleteFlag>0</EmployeeDeleteFlag>
   </Users>
   <Users>
+    <UserId>1098</UserId>
+    <SystemUserName>paul</SystemUserName>
+    <Name>Paul Ekhaba</Name>
+    <UserDeleteFlag>0</UserDeleteFlag>
+    <EmployeeDeleteFlag>0</EmployeeDeleteFlag>
+  </Users>
+  <Users>
     <UserId>1053</UserId>
     <Name>Peter Kaimenyi  </Name>
     <UserDeleteFlag>1</UserDeleteFlag>
@@ -135295,7 +135367,11 @@
     <UserId>20</UserId>
     <SystemUserName>Nyinya</SystemUserName>
     <Name>Roselida Nyinya</Name>
+    <EmployeeName>Roselida Nyinya                                            </EmployeeName>
     <UserDeleteFlag>0</UserDeleteFlag>
+    <EmployeeId>78</EmployeeId>
+    <DesignationId>6</DesignationId>
+    <Designation>Counselor</Designation>
     <EmployeeDeleteFlag>0</EmployeeDeleteFlag>
   </Users>
   <Users>

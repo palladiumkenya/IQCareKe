@@ -236,7 +236,7 @@ namespace IQCare.Web.CCC.WebService
 
                     //checkout patient master visit
                     PatientMasterVisitManager patientMasterVisitcheckout = new PatientMasterVisitManager();
-                    CheckoutResult = patientMasterVisit.PatientMasterVisitCheckout(patientmastervisitresult, PatientId, 0, 0, 0, Convert.ToDateTime(tracingdate));
+                    CheckoutResult = patientMasterVisit.PatientMasterVisitCheckout(patientmastervisitresult);
 
                     Session["EncounterStatusId"] = 0;
                     Session["PatientEditId"] = 0;
