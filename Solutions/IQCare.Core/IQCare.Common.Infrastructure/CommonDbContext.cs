@@ -21,6 +21,9 @@ namespace IQCare.Common.Infrastructure
             //modelBuilder.Entity<LookupItemView>().ToTable("LookupItemView").HasKey(x => x.RowID);
             base.OnModelCreating(modelBuilder);
             modelBuilder.ApplyEntityTypeConfigsFromAssembly();
+            modelBuilder.Query<DuplicatePersonsPoco>();
+            modelBuilder.Query<PatientEncountersCompletedPoco>();
+            modelBuilder.Query<MergePersonsPoco>();
         }
     }
 

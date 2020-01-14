@@ -15,6 +15,7 @@ import * as moment from 'moment';
 export class PrepCheckinComponent implements OnInit {
     form: FormGroup;
     title: string;
+    maxDate: Date;
     prepEncounterDate: Date;
     public visitTypes: any[] = [];
     public lookupItems$: Subscription;
@@ -26,6 +27,7 @@ export class PrepCheckinComponent implements OnInit {
         private dialogRef: MatDialogRef<PrepCheckinComponent>,
         @Inject(MAT_DIALOG_DATA) data) {
         this.title = 'PrEP Check-in';
+        this.maxDate = new Date();
     }
 
     ngOnInit() {
@@ -34,6 +36,12 @@ export class PrepCheckinComponent implements OnInit {
             //  visitType: new FormControl('', [Validators.required]),
             visitdate: new FormControl('', [Validators.required])
         });
+
+
+
+        if (localStorage.getItem('PrepVisitDate') != null && localStorage.getItem('PrepVisitDate') != undefined) {
+            this.form.controls.visitdate.setValue(moment(localStorage.getItem('PrepVisitDate')).toDate());
+        }
     }
 
     save() {

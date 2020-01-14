@@ -5,6 +5,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
+
 import {
     MatPaginatorModule, MatTableModule, MatSortModule,
     MatAutocompleteModule, MatButtonModule, MatButtonToggleModule,
@@ -24,6 +25,7 @@ import { SharedModule } from '../shared/shared.module';
 import { CountyService } from './_services/county.service';
 import { RecordsService } from './_services/records.service';
 import { GenderResolver } from './_services/gender.resolver';
+import {PersonNHIFIdentifiersResolver} from './_services/personnhifidentifiers.resolver';
 import { MaritalStatusResolver } from './_services/maritalstatus.resolver';
 import { EducationLevelResolver } from './_services/educationallevel.resolver';
 import { RelationshipResolver } from './_services/relationship.resolver';
@@ -35,7 +37,9 @@ import { PersonIdentifiersResolver } from './_services/personidentifiers.resolve
 import { InlineSearchComponent } from './inline-search/inline-search.component';
 import { YesNoResolver } from '../pmtct/_services/yesno.resolver';
 import { CheckDuplicatesComponent } from './person/check-duplicates/check-duplicates.component';
-
+import {AddWaitingListComponent} from '../shared/add-waiting-list/add-waiting-list.component';
+import { MergeComponent } from './merge/merge.component';
+import { RecordsMergeComponent } from './records-merge/records-merge.component';
 @NgModule({
     imports: [
         CommonModule,
@@ -53,11 +57,12 @@ import { CheckDuplicatesComponent } from './person/check-duplicates/check-duplic
         MatProgressBarModule, MatProgressSpinnerModule, MatRadioModule, MatRippleModule,
         MatSelectModule, MatSidenavModule, MatSliderModule, MatSlideToggleModule,
         MatSnackBarModule, MatStepperModule, MatTabsModule, MatToolbarModule, MatTooltipModule,
-        SharedModule
+        SharedModule,
+       
     ],
     declarations: [SearchComponent, RegisterComponent,
         ViewComponent, PersoncontactsComponent,
-        InlineSearchComponent, CheckDuplicatesComponent],
+        InlineSearchComponent, CheckDuplicatesComponent, MergeComponent, RecordsMergeComponent],
     providers: [
         CountyResolver,
         CountyService,
@@ -71,16 +76,19 @@ import { CheckDuplicatesComponent } from './person/check-duplicates/check-duplic
         ConsentSmsResolver,
         ContactCategoryResolver,
         PersonIdentifiersResolver,
+        PersonNHIFIdentifiersResolver,
         YesNoResolver
     ],
     entryComponents: [
         PersoncontactsComponent,
         InlineSearchComponent,
-        CheckDuplicatesComponent
+        CheckDuplicatesComponent,
+        AddWaitingListComponent,
+        RecordsMergeComponent
     ],
     exports: [
         InlineSearchComponent,
-        CheckDuplicatesComponent
+        CheckDuplicatesComponent,
     ]
 })
 export class RecordsModule { }

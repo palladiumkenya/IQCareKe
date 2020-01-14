@@ -1,0 +1,170 @@
+<div class="row">
+    <div class="col-lg-12 col-sm-12 col-xs-12">
+        <div class="widget">
+            <div class="widget-header bordered-bottom bordered-blue">
+                <span class="widget-caption">Merge Records</span>
+            </div>
+            <div class="widget-body">
+                <div class="row">
+                    <div class="col-lg-12 col-sm-12 col-xs-12">
+                        <span class="fa fa-search fa-3x warning">Find Duplicate Patient Records</span>
+                        <small>
+                            <i> (Select appropriate comparison parameters) </i>
+                        </small>
+                    </div>
+                </div>
+                <form [formGroup]="MergeForm">
+                    <div class="row">
+                        <div class="col-lg-3 col-sm-3 col-xs-12 bg-success">
+                            <mat-label>Compare by Name(s) :</mat-label>                            
+                        </div>
+
+                        <div class="col-lg-2 col-sm-2 col-xs-12">
+                            <mat-checkbox formControlName="firstName" id="firstName" name="firstName">First Name</mat-checkbox>
+                        </div>
+                        
+                        <div class="col-lg-2 col-sm-2 col-xs-12">
+                            <mat-checkbox formControlName="middleName" id="middleName" name="middleName">Middle Name</mat-checkbox>
+                        </div>
+
+                        <div class="col-lg-2 col-sm-2 col-xs-12">
+                            <mat-checkbox formControlName="lastName" id="lastName" name="lastName">Last Name</mat-checkbox>
+                        </div>
+                    </div>
+                    
+                    <div class="row">
+                        <div class="col-lg-3 col-sm-3 col-xs-12 bg-warning">
+                            <mat-label>Compare By Sex/Gender & Enrollment Date :</mat-label>
+                        </div>
+
+                        <div class="col-lg-2 col-sm-2 col-xs-12">
+                            <mat-checkbox formControlName="sex" id="sex" name="sex">Sex</mat-checkbox>
+                        </div>
+
+                        <div class="col-lg-2 col-sm-2 col-xs-12">
+                            <mat-checkbox formControlName="dob" id="dob" name="dob">Date of Birth</mat-checkbox>
+                        </div>
+
+                        <!--<div class="col-lg-2 col-sm-2 col-xs-12">
+                            <mat-checkbox formControlName="identifier" id="identifier" name="identifier">Identifier</mat-checkbox>
+                        </div>-->
+                    </div>
+                    
+                    <div class="row">
+                        <div class="col-lg-7 col-md-7 col-sm-12">&nbsp;</div>
+                        <div class="col-lg-2 col-md-2 col-sm-12">
+                            <div class="form-group">
+                                <button type="submit" mat-raised-button color="primary" (click)="search()">
+                                    <strong class="fa fa-search">
+                                        Search
+                                    </strong>
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-3 col-md-3 col-sm-12">
+                            <div class="form-group" *ngIf="this.selection.selected.length > 1">
+                                <button type="submit" mat-raised-button color="accent" (click)="merge()">
+                                    <strong class="icon-anchor">
+                                        Merge Selected Persons
+                                    </strong>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="row">
+                        <div class="col-lg-12 col-xs-12">
+                            <div class="example-container mat-elevation-z0">
+                                <mat-table #table [dataSource]="dataSource">
+
+                                    <!-- Checkbox Column -->
+                                    <ng-container matColumnDef="select">
+                                        <th mat-header-cell *matHeaderCellDef>
+                                            <mat-checkbox (change)="$event ? masterToggle() : null"
+                                                          [checked]="selection.hasValue() && isAllSelected()"
+                                                          [indeterminate]="selection.hasValue() && !isAllSelected()"
+                                                          [aria-label]="checkboxLabel()">
+                                            </mat-checkbox>
+                                        </th>
+                                        <td mat-cell *matCellDef="let row">
+                                            <mat-checkbox (click)="$event.stopPropagation()"
+                                                          (change)="$event ? selection.toggle(row) : null"
+                                                          [checked]="selection.isSelected(row)"
+                                                          [aria-label]="checkboxLabel(row)">
+                                            </mat-checkbox>
+                                        </td>
+                                    </ng-container>
+
+                                    <ng-container matColumnDef="ptn_Pk">
+                                        <mat-header-cell *matHeaderCellDef> ptn_Pk </mat-header-cell>
+                                        <mat-cell *matCellDef="let element"> {{ element.ptn_Pk }} </mat-cell>
+                                    </ng-container>
+
+                                    <ng-container matColumnDef="patientId">
+                                        <mat-header-cell *matHeaderCellDef> patientId </mat-header-cell>
+                                        <mat-cell *matCellDef="let element"> {{ element.patientId }} </mat-cell>
+                                    </ng-container>
+
+                                    <ng-container matColumnDef="personId">
+                                        <mat-header-cell *matHeaderCellDef> personId </mat-header-cell>
+                                        <mat-cell *matCellDef="let element"> {{ element.personId }} </mat-cell>
+                                    </ng-container>
+
+                                    <ng-container matColumnDef="firstName">
+                                        <mat-header-cell *matHeaderCellDef> firstName </mat-header-cell>
+                                        <mat-cell *matCellDef="let element"> {{ element.firstName }} </mat-cell>
+                                    </ng-container>
+
+                                    <ng-container matColumnDef="middleName">
+                                        <mat-header-cell *matHeaderCellDef> middleName </mat-header-cell>
+                                        <mat-cell *matCellDef="let element"> {{ element.middleName }} </mat-cell>
+                                    </ng-container>
+
+                                    <ng-container matColumnDef="lastName">
+                                        <mat-header-cell *matHeaderCellDef> lastName </mat-header-cell>
+                                        <mat-cell *matCellDef="let element"> {{ element.lastName }} </mat-cell>
+                                    </ng-container>
+
+                                    <ng-container matColumnDef="sex">
+                                        <mat-header-cell *matHeaderCellDef> sex </mat-header-cell>
+                                        <mat-cell *matCellDef="let element"> {{ element.sex }} </mat-cell>
+                                    </ng-container>
+
+                                    <ng-container matColumnDef="patientEnrollmentId">
+                                        <mat-header-cell *matHeaderCellDef> patientEnrollmentId </mat-header-cell>
+                                        <mat-cell *matCellDef="let element"> {{ element.patientEnrollmentId }} </mat-cell>
+                                    </ng-container>
+
+                                    <ng-container matColumnDef="mobileNumber">
+                                        <mat-header-cell *matHeaderCellDef> mobileNumber </mat-header-cell>
+                                        <mat-cell *matCellDef="let element"> {{ element.mobileNumber }} </mat-cell>
+                                    </ng-container>
+
+                                    <ng-container matColumnDef="dateOfBirth">
+                                        <mat-header-cell *matHeaderCellDef> dateOfBirth </mat-header-cell>
+                                        <mat-cell *matCellDef="let element"> {{element.dateOfBirth | date: 'dd-MMM-yyyy' }} </mat-cell>
+                                    </ng-container>
+
+                                    <ng-container matColumnDef="enrollmentDate">
+                                        <mat-header-cell *matHeaderCellDef> enrollmentDate </mat-header-cell>
+                                        <mat-cell *matCellDef="let element"> {{element.enrollmentDate | date: 'dd-MMM-yyyy' }} </mat-cell>
+                                    </ng-container>
+
+                                    <ng-container matColumnDef="groupingFilter">
+                                        <mat-header-cell *matHeaderCellDef> groupingFilter </mat-header-cell>
+                                        <mat-cell *matCellDef="let element"> {{ element.groupingFilter }} </mat-cell>
+                                    </ng-container>
+
+                                    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                                    <mat-row *matRowDef="let row; columns: displayedColumns">
+                                    </mat-row>
+                                </mat-table>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

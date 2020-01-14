@@ -725,6 +725,7 @@ namespace IQCare.Web.CCC.WebService
 
                 PatientEncounterManager patientEncounterManager = new PatientEncounterManager();
                 int userId = Convert.ToInt32(Session["AppUserId"]);
+                dateOfDeath = dateOfDeath == "null" ? null : dateOfDeath;
 
                 patientId = int.Parse(Session["PatientPK"].ToString());
                 patientMasterVisitId = int.Parse(Session["PatientMasterVisitId"].ToString());

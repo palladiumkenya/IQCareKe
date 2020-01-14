@@ -18,7 +18,26 @@
                             </mat-icon>
                         </a>
                     </div>
+
+                    <div class="header-information" *ngIf="adherenceavailable">
+                        <div class="stats-value pink">AdherenceOutcome</div>
+
+                        <div *ngFor='let adh of adherencearray'>
+                            <div class="stats-title"><strong>VisitDate:</strong><strong> {{adh.VisitDate}}</strong>
+                            </div>
+                            <div class="stats-title"><strong>Score:</strong><strong> {{adh.Score}}</strong> </div>
+                        </div>
+                        <!-- <i class="glyphicon glyphicon-map-marker"></i>
+                                 <strong>County:</strong> {{ person.county }} <br />
+                                 <strong>SubCounty:</strong> {{ person.subCounty }} <br />
+                                 <strong>Ward:</strong> {{ person.ward }} <br />
+                                 <strong>Landmark:</strong> {{ person.landMark }} -->
+                    </div>
+
+
+
                 </div>
+
                 <div class="col-lg-7 col-sm-7 col-xs-12 profile-stats">
                     <div class="row">
                         <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 stats-col">
@@ -35,13 +54,7 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 inlinestats-col">
-                            <!-- <i class="glyphicon glyphicon-map-marker"></i>
-                             <strong>County:</strong> {{ person.county }} <br />
-                             <strong>SubCounty:</strong> {{ person.subCounty }} <br />
-                             <strong>Ward:</strong> {{ person.ward }} <br />
-                             <strong>Landmark:</strong> {{ person.landMark }} -->
-                        </div>
+
                         <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4 inlinestats-col">
                             <!--Emergency Contact: <strong>$250</strong>-->
                         </div>
@@ -51,7 +64,17 @@
                     </div>
                 </div>
             </div>
+
             <div class="profile-body">
+
+                <div class="col-lg-12" *ngIf="strengthenadherence">
+                    <div class="tabbable tab-content tabs-flat">
+                        <span class="label label-orange" style="height:30px; font-size: 25px">Strengthen adherence
+                            counselling or discontinue PrEP</span>
+
+                    </div>
+                </div>
+
                 <div class="col-lg-12">
                     <div class="tabbable">
                         <ul class="nav nav-tabs tabs-flat  nav-justified" id="myTab11">
@@ -73,6 +96,11 @@
                             <li class="tab-palegreen">
                                 <a data-toggle="tab" id="contacttab" href="#contacts">
                                     <strong>Contacts</strong>
+                                </a>
+                            </li>
+                            <li class="tab-palegreen">
+                                <a data-toggle="tab" id="waitinglist" (click)="addWaitingList()" href="#contacts">
+                                    <strong>AddToWaitingList</strong>
                                 </a>
                             </li>
 
@@ -408,9 +436,10 @@
                                     Clinical Services
                                     <div class="row">
                                         <app-services-list [personId]="personId" [services]="services" [person]="person"
-                                            [encounterDetail]="encounterDetail" [personVitalWeight]="personVitalWeight"
-                                            [riskencounters]="riskencounters" [careendoptions]="careendoptions"
-                                            [htshistory]="htshistory" [carended]="carended" [isdead]="isdead">
+                                             [personVitalWeight]="personVitalWeight" [ServiceAreaCareEndDetails]=ServiceAreaCareEndDetails
+                                            [riskencounters]="riskencounters" [careendoptions]="careendoptions" 
+                                            [htshistory]="htshistory" [carended]="carended" [isdead]="isdead"
+                                            [creatininelabtests]="creatinineLabTests">
                                         </app-services-list>
                                     </div>
                                 </div>

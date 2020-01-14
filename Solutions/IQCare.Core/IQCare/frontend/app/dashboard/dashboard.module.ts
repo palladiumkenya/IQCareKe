@@ -3,8 +3,9 @@ import { ServicesResolver } from './services/services.resolver';
 import { HTSEncounterResolver } from './services/htsencounter.resolver';
 import { PersonCurrentVitalsResolver } from './services/personvitals.resolver';
 import { ExitReasonsResolver } from './services/exitreasons.resolver';
-import { CareendDetailsResolver } from './services/careendeddetails.resolver';
-import { PartnerCCCEnrollmentResolver, SexWithoutCondomResolver,PatientIdentifierResolver} from './services/hivpartnerdetails.resolver';
+import { ServiceAreaCareEndDetailsResolver } from './services/serviceareacareenddetails.resolver';
+//import { CareendDetailsResolver } from './services/careendeddetails.resolver';
+import { PartnerCCCEnrollmentResolver, SexWithoutCondomResolver, PatientIdentifierResolver } from './services/hivpartnerdetails.resolver';
 import { DashboardRoutingModule } from './dashboard-routing.module';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -42,6 +43,12 @@ import { RiskEncounterResolver } from './services/riskencounter.resolver';
 import { PrepComponent } from './enrollment/service-areas/prep/prep.component';
 import { ReenrollmentComponent } from './reenrollment/reenrollment.component';
 import { PatientHtsComponent } from './patient-hts/patient-hts.component';
+import { PatientHtsPositiveComponent } from './patient-htspositive/patient-htspositive.component';
+import { AddWaitingListComponent } from '../shared/add-waiting-list/add-waiting-list.component';
+import { FacilityDashboardComponent } from './facility-dashboard/facility-dashboard.component';
+import { ChartsModule } from 'ng2-charts';
+import { HtsDashboardComponent } from './hts-dashboard/hts-dashboard.component';
+import { GetpatientIdResolver } from './services/getpatientId.resolver';
 
 @NgModule({
     imports: [
@@ -66,6 +73,7 @@ import { PatientHtsComponent } from './patient-hts/patient-hts.component';
         MatProgressBarModule, MatProgressSpinnerModule, MatRadioModule, MatRippleModule,
         MatSelectModule, MatSidenavModule, MatSliderModule, MatSlideToggleModule,
         MatSnackBarModule, MatStepperModule, MatTabsModule, MatToolbarModule, MatTooltipModule,
+        ChartsModule
     ],
     declarations: [
         PortalComponent,
@@ -80,7 +88,10 @@ import { PatientHtsComponent } from './patient-hts/patient-hts.component';
         CccComponent,
         PrepComponent,
         ReenrollmentComponent,
-        PatientHtsComponent
+        PatientHtsComponent,
+        FacilityDashboardComponent,
+        HtsDashboardComponent,
+        PatientHtsPositiveComponent
     ],
     providers: [
         NotificationService,
@@ -93,18 +104,17 @@ import { PatientHtsComponent } from './patient-hts/patient-hts.component';
         PersonCurrentVitalsResolver,
         RiskEncounterResolver,
         ExitReasonsResolver,
-        CareendDetailsResolver,
+        //  CareendDetailsResolver,
         HTSEncounterHistoryResolver,
-        PartnerCCCEnrollmentResolver, 
+        PartnerCCCEnrollmentResolver,
         SexWithoutCondomResolver,
-        PatientIdentifierResolver
-
+        PatientIdentifierResolver,
+        GetpatientIdResolver,
+        ServiceAreaCareEndDetailsResolver
 
     ],
-
     entryComponents: [
-        PatientHtsComponent
-    ]
-
+        PatientHtsComponent, AddWaitingListComponent, PatientHtsPositiveComponent
+    ],
 })
 export class DashboardModule { }

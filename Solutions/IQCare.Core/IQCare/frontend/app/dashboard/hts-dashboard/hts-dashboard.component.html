@@ -1,0 +1,49 @@
+<div class="row">
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        <div class="row">
+            <div class="col-lg-12 col-sm-12 col-xs-12">
+                <div class="widget">
+                    <div class="widget-header bordered-bottom bordered-sky">
+                        <span class="widget-caption"> Hts Dashboard </span>
+                    </div>
+
+                    <div class="widget-body">
+                        <div class="row">
+                            <div class="col-lg-12 col-sm-12 col-xs-12">
+                                <div class="form-title">
+                                    <span class="mat-accent"> HTS Facility Statistics </span>
+                                </div>                                
+
+                                <canvas baseChart
+                                        [datasets]="htsSummaryData"
+                                        [labels]="htsSummaryLabels"
+                                        [options]="htsSummaryOptions"
+                                        [legend]="htsSummaryLegend"
+                                        [chartType]="htsSummaryType">
+                                </canvas>
+                            </div>
+                        </div>
+                        
+                        <div class="row">
+                            <hr/>
+                        </div>
+                        
+                        <div class="row">
+                            <div class="col-lg-12 col-sm-12 col-xs-12">
+                                <div class="form-title">
+                                    <span class="mat-accent"> Linkage Facility Statistics </span>
+                                </div>
+
+                                <canvas baseChart
+                                        [data]="linkageSummaryData"
+                                        [labels]="linkageSummaryLabels"
+                                        [chartType]="linkageSummaryType">
+                                </canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

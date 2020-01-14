@@ -1,8 +1,10 @@
 import { PrepService } from './../../_services/prep.service';
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, NgZone } from '@angular/core';
 import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
 import { LookupItemView } from '../../../shared/_models/LookupItemView';
 import { SearchService } from '../../../registration/_services/search.service';
+import { Router, ActivatedRoute } from '@angular/router';
+import * as moment from 'moment';
 
 @Component({
     selector: 'app-prep-status',
@@ -15,7 +17,9 @@ export class PrepStatusComponent implements OnInit {
     yesnoOptions: LookupItemView[] = [];
     prepStatusOptions: LookupItemView[] = [];
     prepContraindicationsOptions: LookupItemView[] = [];
-
+    Daterestartedvisible: boolean = false;
+    DateInitiatedvisible: boolean = false;
+    maxDate: Date;
     @Input() PrepStatusOptions: any;
     @Input() patientId: number;
     @Input() personId: number;
@@ -28,7 +32,12 @@ export class PrepStatusComponent implements OnInit {
 
     constructor(private _formBuilder: FormBuilder,
         private searchService: SearchService,
-        private prepservice: PrepService) { }
+        private prepservice: PrepService,
+        private router: Router,
+        private route: ActivatedRoute,
+        public zone: NgZone) {
+        this.maxDate = new Date();
+    }
 
     ngOnInit() {
         this.PrepStatusForm = this._formBuilder.group({
@@ -38,6 +47,8 @@ export class PrepStatusComponent implements OnInit {
             PrEPStatusToday: new FormControl('', [Validators.required]),
             condomsIssued: new FormControl('', [Validators.required]),
             noCondomsIssued: new FormControl('', [Validators.required]),
+            DateRestarted: new FormControl(''),
+            DateInitiated: new FormControl(''),
             id: new FormControl()
         });
 
@@ -52,6 +63,7 @@ export class PrepStatusComponent implements OnInit {
         this.yesnoOptions = yesnoOptions;
         this.prepStatusOptions = prepStatusOptions;
         this.prepContraindicationsOptions = prepContraindicationsOptions;
+        this.loadPrepStartEvent();
 
         if (this.isEdit == 1) {
             this.loadPrepStatus();
@@ -59,6 +71,24 @@ export class PrepStatusComponent implements OnInit {
         }
     }
 
+    loadPrepStartEvent() {
+        let startitemarray: any[] = [];
+        let startid: number;
+        startitemarray = this.prepStatusOptions.filter(x => x.itemDisplayName == 'Start');
+
+        if (startitemarray.length > 0) {
+            startid = parseInt(startitemarray[0].itemId.toString(), 10);
+        }
+        this.prepservice.getPatientStartEncounterEventDate(this.patientId, startid).subscribe((res) => {
+            console.log('Prep Start Event Status');
+            console.log(res);
+            if (res != null) {
+                this.PrepStatusForm.controls.DateInitiated.setValue(moment(res['dateRestarted']).toDate());
+            }
+        });
+
+
+    }
     loadcontraIndications(): void {
         this.prepservice.getStiScreeningTreatment(this.patientId, this.patientMasterVisitId).subscribe(
             (res) => {
@@ -78,6 +108,34 @@ export class PrepStatusComponent implements OnInit {
                 console.log(error);
             }
         );
+    }
+    onPrepStatusChange(event) {
+        const value = event.source.value;
+        if (event.source.viewValue === 'Start' && event.source.selected == true) {
+
+            const dateinitiated = this.PrepStatusForm.controls.DateInitiated.value;
+            if (dateinitiated == null || dateinitiated == '') {
+                this.loadPrepStartEvent();
+            }
+
+            this.DateInitiatedvisible = true;
+            this.Daterestartedvisible = false;
+        } else if (event.source.viewValue === 'Restart' && event.source.selected == true) {
+            const daterestarted = this.PrepStatusForm.controls.DateRestarted.value;
+            if (daterestarted == null || daterestarted == '') {
+                this.loadPrepStartEvent();
+            }
+            this.DateInitiatedvisible = false;
+            this.Daterestartedvisible = true;
+        } else if (event.source.viewValue !== 'Restart' && event.source.selected == true) {
+            this.DateInitiatedvisible = false;
+            this.Daterestartedvisible = false;
+        } else if (event.source.viewValue !== 'Start' && event.source.selected == true) {
+            this.DateInitiatedvisible = false;
+            this.Daterestartedvisible = false;
+        }
+
+
     }
     Oncontraindications(event) {
         const value = event.source.value;
@@ -100,12 +158,59 @@ export class PrepStatusComponent implements OnInit {
                 }
             }
         }
+
+
+
+
+        for (let i = 0; i < event.source._parent.options.length; i++) {
+
+            if (event.source._parent.options._results[i].viewValue
+                !== 'None' && event.source._parent.options._results[i].selected == true) {
+
+                let itemid: number;
+                let itemarray: any[] = [];
+                itemarray = this.prepStatusOptions.filter(x => x.itemDisplayName == 'DisContinue');
+                if (itemarray.length > 0) {
+                    this.PrepStatusForm.controls.PrEPStatusToday.setValue(itemarray[0].itemId);
+                }
+
+
+            }
+
+            if (event.source._parent.options._results[i].viewValue
+                === 'None' && event.source._parent.options._results[i].selected == true) {
+
+
+              //  this.PrepStatusForm.controls.PrEPStatusToday.setValue('');
+
+
+
+            }
+
+
+
+
+
+
+        }
     }
     loadPrepStatus(): void {
         this.prepservice.getPrepStatus(this.patientId, this.patientEncounterId).subscribe(
             (res) => {
-                // console.log(res);
+                console.log('PrepStatus');
+                console.log(res);
                 if (res.length > 0) {
+                    let itemid: number;
+                    let itemarray: any[] = [];
+                    itemarray = this.prepStatusOptions.filter(x => x.itemId == parseInt(res[0].prepStatusToday.toString(), 10));
+                    if (itemarray.length > 0) {
+                        if (itemarray[0].itemDisplayName == 'Start') {
+                            this.PrepStatusForm.controls.DateInitiated.setValue(moment(res[0].DateField).toDate());
+                        }
+                        else if (itemarray[0].itemDisplayName == 'Restart') {
+                            this.PrepStatusForm.controls.DateRestarted.setValue(moment(res[0].DateField).toDate());
+                        }
+                    }
                     this.PrepStatusForm.controls.signsOrSymptomsHIV.setValue(res[0].signsOrSymptomsHIV);
                     //  this.PrepStatusForm.controls.contraindications_PrEP_Present.setValue(res[0].contraindicationsPrepPresent);
                     this.PrepStatusForm.controls.adherenceCounselling.setValue(res[0].adherenceCounsellingDone);
@@ -133,14 +238,18 @@ export class PrepStatusComponent implements OnInit {
     }
 
     onPharmacyClick() {
-        this.searchService.setSession(this.personId, this.patientId, this.userId).subscribe((sessionres) => {
-            this.searchService.setVisitSession(this.patientMasterVisitId, this.Age, 261).subscribe((setVisitSession) => {
-                const url = location.protocol + '//' + window.location.hostname + ':' + window.location.port +
-                    '/IQCare/CCC/Encounter/PharmacyPrescription.aspx';
-                const win = window.open(url, '_blank');
-                win.focus();
-            });
+        this.zone.run(() => {
+            this.router.navigate(['/pharm/' + this.patientId + '/' + this.personId],
+                { relativeTo: this.route });
         });
+        /*  this.searchService.setSession(this.personId, this.patientId).subscribe((sessionres) => {
+               this.searchService.setVisitSession(this.patientMasterVisitId, this.Age, 261).subscribe((setVisitSession) => {
+              const url = location.protocol + '//' + window.location.hostname + ':' + window.location.port +
+                       '/IQCare/CCC/Encounter/PharmacyPrescription.aspx';
+                   const win = window.open(url, '_blank');
+                   win.focus();
+               });
+           });*/
     }
 
 }

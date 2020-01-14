@@ -88,6 +88,25 @@ export class RegistrationService {
         );
     }
 
+
+    public addBasicPerson(firstName: string, lastName: string, middleName: string, sex: number, 
+        createdBy: number, facilityId: number): Observable<any> {
+
+        const Indata = {
+            'FirstName': firstName,
+            'MiddleName': middleName,
+            'LastName': lastName,
+            'Sex': sex,
+            'CreatedBy': createdBy,
+            'FacilityId': facilityId
+        };
+
+        return this.http.post<any>(this.API_URL + this._url + '/AddBasicPerson',
+            JSON.stringify(Indata), httpOptions).pipe(
+                tap((addBasicPerson: any) => this.errorHandler.log(`add Basic Patient`)),
+                catchError(this.errorHandler.handleError<any>('addBasicPerson'))
+            );
+    }
     public addPatient(personId: number, userId: number, enrollmentDate: string, posId: string): Observable<any> {
         const Indata = {
             PersonId: personId,
@@ -324,15 +343,23 @@ export class RegistrationService {
         }
 
         if (populations.populationType == 3) {
-            
-                const item = {
-                    PopulationType: 'Discordant Couple',
-                    PopulationCategory: 0
-                };
-                pops.push(item);
-            
+
+            const item = {
+                PopulationType: 'Discordant Couple',
+                PopulationCategory: 0
+            };
+            pops.push(item);
+
         }
 
+        if (populations.DiscordantCouplePopulation == 1) {
+            const item = {
+                PopulationType: 'Discordant Couple',
+                PopulationCategory: 0
+            };
+            pops.push(item);
+
+        }
 
         if (populations.priorityPop === 1) {
             priority = populations.priorityPopulation.map(priorityId => ({ priorityId }));

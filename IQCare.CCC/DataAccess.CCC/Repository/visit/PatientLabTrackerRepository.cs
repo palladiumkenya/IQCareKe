@@ -25,8 +25,8 @@ namespace DataAccess.CCC.Repository.visit
         {
             var pending = "Pending";
             IPatientLabTrackerRepository patientLabTrackerRepository = new PatientLabTrackerRepository();
-            List<PatientLabTracker> pendingVLCount = patientLabTrackerRepository.FindBy(p => p.FacilityId == facilityId &
-                                                                                 p.Results == pending &
+            List<PatientLabTracker> pendingVLCount = patientLabTrackerRepository.FindBy(p => p.FacilityId == facilityId &&
+                                                                                 p.Results == pending &&
                                                                                  p.LabTestId == 3).ToList();
             return pendingVLCount;
         }

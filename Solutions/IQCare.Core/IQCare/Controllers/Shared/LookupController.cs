@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -102,6 +102,16 @@ namespace IQCare.Controllers.Common
 
         }
 
+        [HttpGet("getNHIFIdentifyerTypes")]
+        public async Task<IActionResult> GetNHIFIdentifyerType()
+        {
+            var results = await _mediator.Send(new GetPersonIdentificationCommand { CodeName = "NHIFNO" }, HttpContext.RequestAborted);
+
+            if (results.IsValid)
+                return Ok(results.Value);
+            return BadRequest(results);
+        }
+
         [HttpGet("getocc")]
         public async Task<IActionResult>  GetOccupations()
         {
@@ -176,6 +186,20 @@ namespace IQCare.Controllers.Common
             if (results.IsValid)
                 return Ok(results.Value);
             return BadRequest(results);
+        }
+
+        [HttpGet("GetDecodeByCodeId/{codeId}")]
+        public async Task<IActionResult> GetDecodeByCodeId(int codeId)
+        {
+            var result = await _mediator.Send(new GetDecodeByCodeIdCommand
+            {
+                CodeId = codeId
+            }, HttpContext.RequestAborted);
+
+            if (result.IsValid)
+                return Ok(result.Value);
+            return BadRequest(result);
+
         }
 
         [HttpGet("GetOptionsByMasterName/{masterName}")]

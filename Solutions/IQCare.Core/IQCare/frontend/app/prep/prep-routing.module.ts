@@ -12,33 +12,38 @@ import { YesNoDontKnowResolver } from './_services/YesNoDont-Know.resolver';
 import { PregnancyOutcomeResolver } from './_services/PregnancyOutcome.resolver';
 import { PrepStatusResolver } from './_services/prep-status.resolver';
 import { PrepContraindicationsResolver } from './_services/prep-contraindications.resolver';
+import { PrepVisitcheckinComponent } from './prep-visitcheckin/prep-visitcheckin.component';
+import {FormSettingsResolver} from './_services/resolvers/CurrentFormSettings.resolver';
 import {
     AssessmentOutcomeResolver, ClientsBehaviourRiskResolver, SexualPartnetHivStatusProfileResolver,
     RiskReductionEducationResolver, ReferralPreventionServicesResolver, ClientWillingTakePrepResolver
     , RiskEducationResolver, BehaviourRiskAssessmentResolver, EncounterTypeResolver, PartnerCCCEnrollmentResolver,
     PatientIdentifierResolver, ARTStartDateResolver, PartnerHIVStatusResolver, DurationResolver, SexWithoutCondomResolver,
-    HivPartnerResolver, PrepDeclineResolver
+    HivPartnerResolver, PrepDeclineResolver, SpecifyReferralPreventionServicesResolver
+    , SpecifyRiskEducationResolver, SpecifyRiskReductionEducationResolver
 } from './_services/resolvers/prepriskassessment.resolver';
 import {
     PrepCareEndReasonResolver
 } from './_services/resolvers/prepcareendreason.resolver';
-import { HTSEncounterHistoryResolver} from './_services/resolvers/getlatesthtsencounterhistory.resolver';
+import { HTSEncounterHistoryResolver } from './_services/resolvers/getlatesthtsencounterhistory.resolver';
 import { PrepRiskassessmentComponent } from './prep-riskassessment/prep-riskassessment.component';
 import { ReasonsPrepAppointmentNotGivenResolver } from './_services/reasons-prep-appointment-notgiven.resolver';
 import { PrepEncounterTypeResolver } from './_services/prep-encounter-type.resolver';
 import { PregnancyStatusResolver } from './_services/pregnancy-status.resolver';
 import { ScreenedForSTIResolver } from './_services/screened-sti.resolver';
 import { PrepCareendComponent } from './prep-careend/prep-careend.component';
-import {PrepFollowupworkflowComponent} from './prep-followupworkflow/prep-followupworkflow.component'
+import { PrepFollowupworkflowComponent } from './prep-followupworkflow/prep-followupworkflow.component'
 import {
     PrepAdherenceResolver, AdherenceAssessmentReasonsResolver, RefillPrepStatusResolver,
     PrepDiscontinueReasonResolver, AdherenceCounsellingResolver, AppointmentGivenResolver, PrepAppointmentReasonResolver
+    , RiskAssessmentDoneResolver
 } from './_services/resolvers/prepmonthlyrefillresolver';
 import { PrepMonthlyrefillComponent } from './prep-monthlyrefill/prep-monthlyrefill.component';
 import { HTSEncounterResolver } from './_services/resolvers/htsencounter.resolver';
 import { PersonCurrentVitalsResolver } from './_services/resolvers/personvitals.resolver';
 import { RiskEncounterResolver } from './_services/resolvers/riskencounter.resolver';
 import { PrepMonthlyrefillworkflowComponent } from './prep-monthlyrefillworkflow/prep-monthlyrefillworkflow.component';
+
 const routes: Routes = [
     {
         path: ':patientId/:personId/:serviceId',
@@ -50,6 +55,18 @@ const routes: Routes = [
             PersonVitalsArray: PersonCurrentVitalsResolver,
             RiskAssessmentArray: RiskEncounterResolver
         }
+    },
+    {
+        path: 'prepvisitcheckin',
+        children: [
+            {
+                path: ':patientId/:personId/:serviceId',
+                component: PrepVisitcheckinComponent
+            }
+        ]
+
+
+
     },
 
     {
@@ -68,26 +85,27 @@ const routes: Routes = [
         path: 'prepfollowupworkflow',
         children: [
             {
-            path: ':patientId/:personId/:serviceId',
-            component : PrepFollowupworkflowComponent,
-            resolve: {
-                prepEncounterTypeOption: PrepEncounterTypeResolver,
-                HTSEncounterArray: HTSEncounterResolver,
-                PersonVitalsArray: PersonCurrentVitalsResolver,
-                RiskAssessmentArray: RiskEncounterResolver,
-                HTSEncounterHistoryArray: HTSEncounterHistoryResolver,
-                
+                path: ':patientId/:personId/:serviceId',
+                component: PrepFollowupworkflowComponent,
+                resolve: {
+                    prepEncounterTypeOption: PrepEncounterTypeResolver,
+                    HTSEncounterArray: HTSEncounterResolver,
+                    PersonVitalsArray: PersonCurrentVitalsResolver,
+                    RiskAssessmentArray: RiskEncounterResolver,
+                    HTSEncounterHistoryArray: HTSEncounterHistoryResolver,
+                    FormSettingsArray: FormSettingsResolver
+
+                }
+
             }
-            
-        }
-    ]
+        ]
     },
     {
         path: 'prepmonthlyrefillworkflow',
         children: [
             {
                 path: ':patientId/:personId/:serviceId',
-                component : PrepMonthlyrefillworkflowComponent
+                component: PrepMonthlyrefillworkflowComponent
             }
         ]
 
@@ -178,7 +196,8 @@ const routes: Routes = [
                     AdherenceCounsellingArray: AdherenceCounsellingResolver,
                     yesNoOptions: YesNoResolver,
                     AppointmentGivenArray: AppointmentGivenResolver,
-                    PrepAppointmentReasonArray: PrepAppointmentReasonResolver
+                    PrepAppointmentReasonArray: PrepAppointmentReasonResolver,
+                    RiskAssessmentDoneArray: RiskAssessmentDoneResolver
                 }
 
 
@@ -198,7 +217,8 @@ const routes: Routes = [
                     AdherenceCounsellingArray: AdherenceCounsellingResolver,
                     yesNoOptions: YesNoResolver,
                     AppointmentGivenArray: AppointmentGivenResolver,
-                    PrepAppointmentReasonArray: PrepAppointmentReasonResolver
+                    PrepAppointmentReasonArray: PrepAppointmentReasonResolver,
+                    RiskAssessmentDoneArray: RiskAssessmentDoneResolver
                 }
             }
         ]
@@ -227,7 +247,10 @@ const routes: Routes = [
                     PartnerHIVStatusArray: PartnerHIVStatusResolver,
                     DurationArray: DurationResolver,
                     SexWithoutCondomArray: SexWithoutCondomResolver,
-                    HivPartnerArray: HivPartnerResolver
+                    HivPartnerArray: HivPartnerResolver,
+                    SpecifyReferralPreventionArray: SpecifyReferralPreventionServicesResolver,
+                    SpecifyRiskEducationArray: SpecifyRiskEducationResolver,
+                    SpecifyRiskReductionEducationArray: SpecifyRiskReductionEducationResolver
 
 
                 }
@@ -252,7 +275,10 @@ const routes: Routes = [
                     PartnerHIVStatusArray: PartnerHIVStatusResolver,
                     DurationArray: DurationResolver,
                     SexWithoutCondomArray: SexWithoutCondomResolver,
-                    HivPartnerArray: HivPartnerResolver
+                    HivPartnerArray: HivPartnerResolver,
+                    SpecifyReferralPreventionArray: SpecifyReferralPreventionServicesResolver,
+                    SpecifyRiskEducationArray: SpecifyRiskEducationResolver,
+                    SpecifyRiskReductionEducationArray: SpecifyRiskReductionEducationResolver
                 },
             }
         ]

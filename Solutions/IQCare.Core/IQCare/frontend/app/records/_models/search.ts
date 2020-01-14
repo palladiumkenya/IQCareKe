@@ -8,4 +8,5 @@ export class Search {
     dateOfBirth?: Date;
     sex?: number;
     age?: number;
+    serviceArea?: number;
 }

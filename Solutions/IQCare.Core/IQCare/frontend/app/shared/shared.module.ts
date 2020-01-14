@@ -1,7 +1,8 @@
 import { MAT_MOMENT_DATE_FORMATS } from '@angular/material-moment-adapter';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
+import { WaitingListService } from './_services/waiting.service';
+import { DialogService } from './_services/dialog.service';
 import { SharedRoutingModule } from './shared-routing.module';
 import { LeftnavComponent } from './leftnav/leftnav.component';
 import { ClientbriefComponent } from './clientbrief/clientbrief.component';
@@ -17,11 +18,11 @@ import {
     MatSelectModule,
     MatFormFieldModule,
     MatInputModule,
-    MatButtonModule,
     MatAutocompleteModule,
     MatDatepickerModule,
     MatNativeDateModule,
-    MatDialogModule
+    MatDialogModule,
+    MatButtonModule
 } from '@angular/material';
 import { AppDateAdapter } from './dateadapter/momentDateAdapter';
 import { NotificationService } from './_services/notification.service';
@@ -38,6 +39,8 @@ import { ChronicIllnessesTableComponent } from './common-components/chronic-illn
 import { AllergiesTableComponent } from './common-components/allergies-table/allergies-table.component';
 import { AdverseEventsTableComponent } from './common-components/adverse-events-table/adverse-events-table.component';
 import { ClickNoneEventsDirectiveDirective } from './_directives/click-none-events-directive.directive';
+import { AddWaitingListComponent } from './add-waiting-list/add-waiting-list.component';
+import { MatconfirmdialogComponent } from './matconfirmdialog/matconfirmdialog.component';
 
 @NgModule({
     imports: [
@@ -47,7 +50,19 @@ import { ClickNoneEventsDirectiveDirective } from './_directives/click-none-even
         MatTableModule, MatIconModule,
         MatPaginatorModule, ReactiveFormsModule,
         MatSelectModule, MatFormFieldModule,
-        MatInputModule, MatButtonModule, MatDialogModule
+        MatInputModule, MatButtonModule, MatDialogModule,
+        CommonModule,
+        SharedRoutingModule,
+        MatCardModule,
+        MatTableModule,
+        MatIconModule,
+        MatPaginatorModule,
+        ReactiveFormsModule,
+        MatSelectModule,
+        MatFormFieldModule,
+        MatInputModule,
+        MatButtonModule,
+        MatDialogModule
     ],
     declarations: [
         LeftnavComponent,
@@ -62,7 +77,10 @@ import { ClickNoneEventsDirectiveDirective } from './_directives/click-none-even
         ChronicIllnessesTableComponent,
         AllergiesTableComponent,
         AdverseEventsTableComponent,
-        ClickNoneEventsDirectiveDirective
+        ClickNoneEventsDirectiveDirective,
+        CustomFormComponent,
+        AddWaitingListComponent,
+        MatconfirmdialogComponent
     ],
     exports: [
         LeftnavComponent, AdverseEventsAssessmentComponent,
@@ -73,6 +91,8 @@ import { ClickNoneEventsDirectiveDirective } from './_directives/click-none-even
         CustomFormComponent, AdverseEventsTableComponent
     ],
     providers: [
+        WaitingListService,
+        DialogService,
         ClientService,
         NotificationService,
         PnstracingService,
@@ -85,7 +105,7 @@ import { ClickNoneEventsDirectiveDirective } from './_directives/click-none-even
     ],
     entryComponents: [
         AllergiesComponent, PatientChronicIllnessesComponent,
-        AdverseEventsAssessmentComponent
+        AdverseEventsAssessmentComponent, MatconfirmdialogComponent
     ]
 })
 export class SharedModule { }

@@ -51,6 +51,18 @@ export class TriageService {
         );
     }
 
+    public GetPatientVitalsByVisitDate(patientId: number, visitdate: Date): Observable<any[]> {
+
+        const Indata = {
+            'PatientId': patientId,
+            'VisitDate': visitdate
+        };
+        return this.httpClient.post<any>(this.API_URL + '/api/PatientVitals/GetVitalsByVisitDate',
+            JSON.stringify(Indata), httpOptions).pipe(
+                tap(GetPatientVitalsByVisitDate => this.errorHandlerService.log('get patient vitals by visit date')),
+                catchError(this.errorHandlerService.handleError<any>('GetPatientVitalsByVisitDate'))
+            );
+    }
     public calculateZscore(zscoreCommand: CalculateZscoreCommand): any {
         return this.httpClient.post<CalculateZscoreCommand>(this.API_URL + '/api/PatientVitals/CalculateZscore',
             JSON.stringify(zscoreCommand), httpOptions).pipe(

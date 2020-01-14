@@ -13,6 +13,14 @@
     <ul class="nav sidebar-menu">
         <!-- Search Person -->
         <li>
+            <a routerLink="/">
+                <i class="menu-icon glyphicon glyphicon-home"></i>
+                <span class="menu-text"> DASHBOARD </span>
+            </a>
+        </li>
+        
+        <!-- Search Person -->
+        <li>
             <a routerLink="/record">
                 <i class="menu-icon glyphicon glyphicon-search"></i>
                 <span class="menu-text"> FIND PERSON </span>
@@ -35,6 +43,34 @@
                 </a>
             </li>
         </ng-container>
+        <ng-container *ngIf=(checkQueue())>
+            <li>
+                <a routerLink="/queue">
+                    <i class="menu-icon glyphicon glyphicon-plus"></i>
+                        <span class="menu-text">ADD ROOM</span>
+                
+                </a>
+            </li>
+        </ng-container>
+        <ng-container *ngIf=(checkQueue())> 
+            <li>
+                <a routerLink="/queue/link">
+                    <i class="menu-icon glyphicon glyphicon-link"></i>
+                        <span class="menu-text">LINK ROOM TO SERVICE </span>
+                    
+                </a>
+            </li>
+        </ng-container>
+
+        <ng-container *ngIf=(checkQueue())>
+            <li>
+                <a routerLink="/queue/view">
+                    <i class="menu-icon glyphicon glyphicon-list"></i>
+                        <span class="menu-text">VIEW WAITINGLIST</span>
+                    
+                </a>
+            </li>
+        </ng-container>
 
         <ng-container *ngIf="patientId > 0">
             <li>
@@ -48,6 +84,12 @@
                 <a routerLink="/clinical/triage/{{ patientId }}/{{ personId }}">
                     <i class="menu-icon fa fa-heartbeat"></i>
                     <span class="menu-text"> TRIAGE </span>
+                </a>
+            </li>
+            <li>
+                <a routerLink="/pharm/mainpage/{{ patientId}}/{{personId}}">
+                    <i class="menu-icon fa fa-hospital-o"></i>
+                    <span class="menu-text">Pharmacy</span>
                 </a>
             </li>
         </ng-container>

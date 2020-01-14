@@ -29,7 +29,7 @@ namespace IQCare.Prep.BusinessProcess.CommandHandlers
          {
             try
             {
-                var EncounterExists = await _prepUnitOfWork.Repository<PrepRiskAssessmentEncounterView>().Get(x => x.PersonId == request.PersonId && x.VisitDate.Value.Day == DateTime.Now.Day && x.VisitDate.Value.Month == DateTime.Now.Month && x.VisitDate.Value.Year == DateTime.Now.Year).ToListAsync();
+                var EncounterExists = await _prepUnitOfWork.Repository<PrepRiskAssessmentEncounterView>().Get(x => x.PersonId == request.PersonId ).ToListAsync();
                 if(EncounterExists !=null)
                 {
                     message += "The risk assessment  form exists";

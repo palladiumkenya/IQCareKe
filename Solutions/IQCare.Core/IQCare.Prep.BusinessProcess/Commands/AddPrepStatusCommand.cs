@@ -1,6 +1,7 @@
 ﻿using IQCare.Library;
 using IQCare.Prep.Core.Models;
 using MediatR;
+using System;
 
 namespace IQCare.Prep.BusinessProcess.Commands
 {
@@ -16,5 +17,7 @@ namespace IQCare.Prep.BusinessProcess.Commands
         public int CreatedBy { get; set; }
         public int? CondomsIssued { get; set; }
         public int? NoOfCondoms { get; set; }
+
+        public DateTime? DateField { get; set; }
     }
 }

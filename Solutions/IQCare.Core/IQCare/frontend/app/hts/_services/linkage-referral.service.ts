@@ -86,7 +86,7 @@ export class LinkageReferralService {
         for (let i = 0; i < tracing.length; i++) {
             const mode = tracing[i]['mode']['itemId'];
             const outcome = tracing[i]['outcome']['itemId'];
-            const reasonNotContacted = tracing[i]['reasonNotContacted']['itemId'];
+            const reasonNotContacted = tracing[i]['reasonNotContacted'] ? tracing[i]['reasonNotContacted']['itemId'] : null;
 
 
             trace.push({
@@ -95,7 +95,7 @@ export class LinkageReferralService {
                 Outcome: outcome,
                 TracingType: tracingType,
                 ReasonNotContacted: reasonNotContacted,
-                OtherReasonSpecify: tracing[i]['otherReasonSpecify']
+                OtherReasonSpecify: tracing[i]['otherReasonSpecify'] ? tracing[i]['otherReasonSpecify'] : null
             });
         }
 

@@ -165,7 +165,7 @@
     <DeleteFlag>false</DeleteFlag>
   </Mst_LabTest>
   <Mst_LabTest>
-    <LabTestId>97</LabTestId>
+    <LabTestId>98</LabTestId>
     <LabName>Cryptococcus Antigen Test</LabName>
     <LabDepartmentId>6</LabDepartmentId>
     <LabTypeId>0</LabTypeId>
@@ -237,7 +237,7 @@
     <DeleteFlag>false</DeleteFlag>
   </Mst_LabTest>
   <Mst_LabTest>
-    <LabTestId>99</LabTestId>
+    <LabTestId>100</LabTestId>
     <LabName>GeneXpert</LabName>
     <LabDepartmentId>6</LabDepartmentId>
     <LabTypeId>0</LabTypeId>
@@ -365,7 +365,7 @@
     <DeleteFlag>false</DeleteFlag>
   </Mst_LabTest>
   <Mst_LabTest>
-    <LabTestId>96</LabTestId>
+    <LabTestId>97</LabTestId>
     <LabName>Malaria (Bs for MPS)</LabName>
     <LabDepartmentId>6</LabDepartmentId>
     <LabTypeId>0</LabTypeId>
@@ -381,7 +381,7 @@
     <DeleteFlag>false</DeleteFlag>
   </Mst_LabTest>
   <Mst_LabTest>
-    <LabTestId>95</LabTestId>
+    <LabTestId>96</LabTestId>
     <LabName>Malaria Random Diagnostic Test</LabName>
     <LabDepartmentId>6</LabDepartmentId>
     <LabTypeId>0</LabTypeId>
@@ -477,7 +477,7 @@
     <DeleteFlag>false</DeleteFlag>
   </Mst_LabTest>
   <Mst_LabTest>
-    <LabTestId>98</LabTestId>
+    <LabTestId>99</LabTestId>
     <LabName>Sputum For AFB</LabName>
     <LabDepartmentId>6</LabDepartmentId>
     <LabTypeId>0</LabTypeId>
@@ -581,11 +581,19 @@
     <DeleteFlag>false</DeleteFlag>
   </Mst_LabTest>
   <Mst_LabTest>
+    <LabTestId>95</LabTestId>
+    <LabName>VDRL</LabName>
+    <LabDepartmentId>6</LabDepartmentId>
+    <LabTypeId>0</LabTypeId>
+    <Sequence>64</Sequence>
+    <DeleteFlag>false</DeleteFlag>
+  </Mst_LabTest>
+  <Mst_LabTest>
     <LabTestId>3</LabTestId>
     <LabName>Viral Load</LabName>
     <LabDepartmentId>4</LabDepartmentId>
     <LabTypeId>0</LabTypeId>
-    <Sequence>64</Sequence>
+    <Sequence>65</Sequence>
     <DeleteFlag>false</DeleteFlag>
   </Mst_LabTest>
   <Mst_LabTest>
@@ -593,7 +601,7 @@
     <LabName>WBC</LabName>
     <LabDepartmentId>7</LabDepartmentId>
     <LabTypeId>0</LabTypeId>
-    <Sequence>65</Sequence>
+    <Sequence>66</Sequence>
     <DeleteFlag>false</DeleteFlag>
   </Mst_LabTest>
   <Mst_LabTest>
@@ -601,7 +609,7 @@
     <LabName>WBC</LabName>
     <LabDepartmentId>2</LabDepartmentId>
     <LabTypeId>0</LabTypeId>
-    <Sequence>66</Sequence>
+    <Sequence>67</Sequence>
     <DeleteFlag>false</DeleteFlag>
   </Mst_LabTest>
   <Mst_LabTest>
@@ -609,7 +617,7 @@
     <LabName>WBC Diff</LabName>
     <LabDepartmentId>7</LabDepartmentId>
     <LabTypeId>0</LabTypeId>
-    <Sequence>67</Sequence>
+    <Sequence>68</Sequence>
     <DeleteFlag>false</DeleteFlag>
   </Mst_LabTest>
   <Lnk_TestParameter>
@@ -820,7 +828,7 @@
     <SubTestId>55</SubTestId>
     <SubTestName>Stool Status</SubTestName>
     <TestId>21</TestId>
-    <DeleteFlag>false</DeleteFlag>
+    <DeleteFlag>true</DeleteFlag>
   </Lnk_TestParameter>
   <Lnk_TestParameter>
     <SubTestId>56</SubTestId>
@@ -1102,7 +1110,7 @@
     <SubTestId>105</SubTestId>
     <SubTestName>Stool</SubTestName>
     <TestId>21</TestId>
-    <DeleteFlag>false</DeleteFlag>
+    <DeleteFlag>true</DeleteFlag>
   </Lnk_TestParameter>
   <Lnk_TestParameter>
     <SubTestId>106</SubTestId>
@@ -1154,44 +1162,50 @@
   </Lnk_TestParameter>
   <Lnk_TestParameter>
     <SubTestId>115</SubTestId>
-    <SubTestName>RDT</SubTestName>
+    <SubTestName>VDRL</SubTestName>
     <TestId>95</TestId>
     <DeleteFlag>false</DeleteFlag>
   </Lnk_TestParameter>
   <Lnk_TestParameter>
     <SubTestId>116</SubTestId>
-    <SubTestName>MPS</SubTestName>
+    <SubTestName>RDT</SubTestName>
     <TestId>96</TestId>
     <DeleteFlag>false</DeleteFlag>
   </Lnk_TestParameter>
   <Lnk_TestParameter>
     <SubTestId>117</SubTestId>
-    <SubTestName>Species Report</SubTestName>
-    <TestId>96</TestId>
+    <SubTestName>MPS</SubTestName>
+    <TestId>97</TestId>
     <DeleteFlag>false</DeleteFlag>
   </Lnk_TestParameter>
   <Lnk_TestParameter>
     <SubTestId>118</SubTestId>
-    <SubTestName>Cryptococcus Antigen Test</SubTestName>
-    <TestId>96</TestId>
+    <SubTestName>Species Report</SubTestName>
+    <TestId>97</TestId>
     <DeleteFlag>false</DeleteFlag>
   </Lnk_TestParameter>
   <Lnk_TestParameter>
     <SubTestId>119</SubTestId>
-    <SubTestName>Sputum For AFB</SubTestName>
-    <TestId>98</TestId>
-    <DeleteFlag>false</DeleteFlag>
+    <SubTestName>Cryptococcus Antigen Test</SubTestName>
+    <TestId>97</TestId>
+    <DeleteFlag>true</DeleteFlag>
   </Lnk_TestParameter>
   <Lnk_TestParameter>
     <SubTestId>120</SubTestId>
-    <SubTestName>Quantify Bacillary Load</SubTestName>
-    <TestId>98</TestId>
+    <SubTestName>Sputum For AFB</SubTestName>
+    <TestId>99</TestId>
     <DeleteFlag>false</DeleteFlag>
   </Lnk_TestParameter>
   <Lnk_TestParameter>
     <SubTestId>121</SubTestId>
-    <SubTestName>GeneXpert</SubTestName>
+    <SubTestName>Quantify Bacillary Load</SubTestName>
     <TestId>99</TestId>
+    <DeleteFlag>false</DeleteFlag>
+  </Lnk_TestParameter>
+  <Lnk_TestParameter>
+    <SubTestId>122</SubTestId>
+    <SubTestName>GeneXpert</SubTestName>
+    <TestId>100</TestId>
     <DeleteFlag>false</DeleteFlag>
   </Lnk_TestParameter>
   <Lnk_LabValue>
@@ -1218,8 +1232,8 @@
   </Lnk_LabValue>
   <Lnk_LabValue>
     <SubTestId>3</SubTestId>
-    <MinBoundaryValue>50.00</MinBoundaryValue>
-    <MaxBoundaryValue>2000000.00</MaxBoundaryValue>
+    <MinBoundaryValue>0.00</MinBoundaryValue>
+    <MaxBoundaryValue>20000000.00</MaxBoundaryValue>
     <MinNormalRange>50.00</MinNormalRange>
     <MaxNormalRange>2000000.00</MaxNormalRange>
     <TextNormalRange />
@@ -1301,7 +1315,7 @@
     <MaxNormalRange>1.50</MaxNormalRange>
     <TextNormalRange />
     <DefaultUnit>true</DefaultUnit>
-    <UnitId>133</UnitId>
+    <UnitId>139</UnitId>
     <DeleteFlag>false</DeleteFlag>
   </Lnk_LabValue>
   <Lnk_LabValue>
@@ -1749,7 +1763,7 @@
     <MaxBoundaryValue>1000.00</MaxBoundaryValue>
     <TextNormalRange />
     <DefaultUnit>false</DefaultUnit>
-    <UnitId>135</UnitId>
+    <UnitId>139</UnitId>
     <DeleteFlag>false</DeleteFlag>
   </Lnk_LabValue>
   <Lnk_LabValue>
@@ -1781,6 +1795,76 @@
     <Result>Positive</Result>
   </Lnk_ParameterResult>
   <Lnk_ParameterResult>
+    <ResultId>43</ResultId>
+    <ParameterId>15</ParameterId>
+    <Result>Negative</Result>
+  </Lnk_ParameterResult>
+  <Lnk_ParameterResult>
+    <ResultId>42</ResultId>
+    <ParameterId>15</ParameterId>
+    <Result>Positive</Result>
+  </Lnk_ParameterResult>
+  <Lnk_ParameterResult>
+    <ResultId>59</ResultId>
+    <ParameterId>16</ParameterId>
+    <Result>Negative</Result>
+  </Lnk_ParameterResult>
+  <Lnk_ParameterResult>
+    <ResultId>58</ResultId>
+    <ParameterId>16</ParameterId>
+    <Result>Positive</Result>
+  </Lnk_ParameterResult>
+  <Lnk_ParameterResult>
+    <ResultId>57</ResultId>
+    <ParameterId>17</ParameterId>
+    <Result>Negative</Result>
+  </Lnk_ParameterResult>
+  <Lnk_ParameterResult>
+    <ResultId>56</ResultId>
+    <ParameterId>17</ParameterId>
+    <Result>Positive</Result>
+  </Lnk_ParameterResult>
+  <Lnk_ParameterResult>
+    <ResultId>55</ResultId>
+    <ParameterId>18</ParameterId>
+    <Result>Negative</Result>
+  </Lnk_ParameterResult>
+  <Lnk_ParameterResult>
+    <ResultId>54</ResultId>
+    <ParameterId>18</ParameterId>
+    <Result>Positive</Result>
+  </Lnk_ParameterResult>
+  <Lnk_ParameterResult>
+    <ResultId>53</ResultId>
+    <ParameterId>19</ParameterId>
+    <Result>Negative</Result>
+  </Lnk_ParameterResult>
+  <Lnk_ParameterResult>
+    <ResultId>52</ResultId>
+    <ParameterId>19</ParameterId>
+    <Result>Positive</Result>
+  </Lnk_ParameterResult>
+  <Lnk_ParameterResult>
+    <ResultId>51</ResultId>
+    <ParameterId>20</ParameterId>
+    <Result>Negative</Result>
+  </Lnk_ParameterResult>
+  <Lnk_ParameterResult>
+    <ResultId>50</ResultId>
+    <ParameterId>20</ParameterId>
+    <Result>Positive</Result>
+  </Lnk_ParameterResult>
+  <Lnk_ParameterResult>
+    <ResultId>67</ResultId>
+    <ParameterId>23</ParameterId>
+    <Result>Negative</Result>
+  </Lnk_ParameterResult>
+  <Lnk_ParameterResult>
+    <ResultId>66</ResultId>
+    <ParameterId>23</ParameterId>
+    <Result>Positive</Result>
+  </Lnk_ParameterResult>
+  <Lnk_ParameterResult>
     <ResultId>3</ResultId>
     <ParameterId>53</ParameterId>
     <Result>Confirmatory</Result>
@@ -1794,6 +1878,76 @@
     <ResultId>1</ResultId>
     <ParameterId>53</ParameterId>
     <Result>Postive</Result>
+  </Lnk_ParameterResult>
+  <Lnk_ParameterResult>
+    <ResultId>65</ResultId>
+    <ParameterId>60</ParameterId>
+    <Result>Negative</Result>
+  </Lnk_ParameterResult>
+  <Lnk_ParameterResult>
+    <ResultId>64</ResultId>
+    <ParameterId>60</ParameterId>
+    <Result>Positive</Result>
+  </Lnk_ParameterResult>
+  <Lnk_ParameterResult>
+    <ResultId>63</ResultId>
+    <ParameterId>61</ParameterId>
+    <Result>Negative</Result>
+  </Lnk_ParameterResult>
+  <Lnk_ParameterResult>
+    <ResultId>62</ResultId>
+    <ParameterId>61</ParameterId>
+    <Result>Positive</Result>
+  </Lnk_ParameterResult>
+  <Lnk_ParameterResult>
+    <ResultId>61</ResultId>
+    <ParameterId>71</ParameterId>
+    <Result>Negative</Result>
+  </Lnk_ParameterResult>
+  <Lnk_ParameterResult>
+    <ResultId>60</ResultId>
+    <ParameterId>71</ParameterId>
+    <Result>Positive</Result>
+  </Lnk_ParameterResult>
+  <Lnk_ParameterResult>
+    <ResultId>69</ResultId>
+    <ParameterId>72</ParameterId>
+    <Result>Negative</Result>
+  </Lnk_ParameterResult>
+  <Lnk_ParameterResult>
+    <ResultId>68</ResultId>
+    <ParameterId>72</ParameterId>
+    <Result>Positive</Result>
+  </Lnk_ParameterResult>
+  <Lnk_ParameterResult>
+    <ResultId>49</ResultId>
+    <ParameterId>75</ParameterId>
+    <Result>Negative</Result>
+  </Lnk_ParameterResult>
+  <Lnk_ParameterResult>
+    <ResultId>48</ResultId>
+    <ParameterId>75</ParameterId>
+    <Result>Positive</Result>
+  </Lnk_ParameterResult>
+  <Lnk_ParameterResult>
+    <ResultId>47</ResultId>
+    <ParameterId>77</ParameterId>
+    <Result>Negative</Result>
+  </Lnk_ParameterResult>
+  <Lnk_ParameterResult>
+    <ResultId>46</ResultId>
+    <ParameterId>77</ParameterId>
+    <Result>Positive</Result>
+  </Lnk_ParameterResult>
+  <Lnk_ParameterResult>
+    <ResultId>45</ResultId>
+    <ParameterId>80</ParameterId>
+    <Result>Negative</Result>
+  </Lnk_ParameterResult>
+  <Lnk_ParameterResult>
+    <ResultId>44</ResultId>
+    <ParameterId>80</ParameterId>
+    <Result>Positive</Result>
   </Lnk_ParameterResult>
   <Lnk_ParameterResult>
     <ResultId>4</ResultId>
@@ -1896,63 +2050,83 @@
     <Result>WBC</Result>
   </Lnk_ParameterResult>
   <Lnk_ParameterResult>
+    <ResultId>41</ResultId>
+    <ParameterId>108</ParameterId>
+    <Result>Negative</Result>
+  </Lnk_ParameterResult>
+  <Lnk_ParameterResult>
+    <ResultId>40</ResultId>
+    <ParameterId>108</ParameterId>
+    <Result>Positive</Result>
+  </Lnk_ParameterResult>
+  <Lnk_ParameterResult>
+    <ResultId>39</ResultId>
+    <ParameterId>114</ParameterId>
+    <Result>Negative</Result>
+  </Lnk_ParameterResult>
+  <Lnk_ParameterResult>
+    <ResultId>38</ResultId>
+    <ParameterId>114</ParameterId>
+    <Result>Positive</Result>
+  </Lnk_ParameterResult>
+  <Lnk_ParameterResult>
     <ResultId>25</ResultId>
-    <ParameterId>115</ParameterId>
+    <ParameterId>116</ParameterId>
     <Result>Negative</Result>
   </Lnk_ParameterResult>
   <Lnk_ParameterResult>
     <ResultId>24</ResultId>
-    <ParameterId>115</ParameterId>
+    <ParameterId>116</ParameterId>
     <Result>Positive</Result>
   </Lnk_ParameterResult>
   <Lnk_ParameterResult>
     <ResultId>27</ResultId>
-    <ParameterId>116</ParameterId>
+    <ParameterId>117</ParameterId>
     <Result>Negative</Result>
   </Lnk_ParameterResult>
   <Lnk_ParameterResult>
     <ResultId>26</ResultId>
-    <ParameterId>116</ParameterId>
+    <ParameterId>117</ParameterId>
     <Result>Positive</Result>
   </Lnk_ParameterResult>
   <Lnk_ParameterResult>
     <ResultId>29</ResultId>
-    <ParameterId>118</ParameterId>
+    <ParameterId>119</ParameterId>
     <Result>Negative</Result>
   </Lnk_ParameterResult>
   <Lnk_ParameterResult>
     <ResultId>28</ResultId>
-    <ParameterId>118</ParameterId>
+    <ParameterId>119</ParameterId>
     <Result>Positive</Result>
   </Lnk_ParameterResult>
   <Lnk_ParameterResult>
     <ResultId>31</ResultId>
-    <ParameterId>119</ParameterId>
+    <ParameterId>120</ParameterId>
     <Result>Negative</Result>
   </Lnk_ParameterResult>
   <Lnk_ParameterResult>
     <ResultId>30</ResultId>
-    <ParameterId>119</ParameterId>
+    <ParameterId>120</ParameterId>
     <Result>Positive</Result>
   </Lnk_ParameterResult>
   <Lnk_ParameterResult>
     <ResultId>32</ResultId>
-    <ParameterId>121</ParameterId>
+    <ParameterId>122</ParameterId>
     <Result>MTB+RR</Result>
   </Lnk_ParameterResult>
   <Lnk_ParameterResult>
     <ResultId>33</ResultId>
-    <ParameterId>121</ParameterId>
+    <ParameterId>122</ParameterId>
     <Result>MTB+RS</Result>
   </Lnk_ParameterResult>
   <Lnk_ParameterResult>
     <ResultId>34</ResultId>
-    <ParameterId>121</ParameterId>
+    <ParameterId>122</ParameterId>
     <Result>MTB-ve</Result>
   </Lnk_ParameterResult>
   <Lnk_ParameterResult>
     <ResultId>35</ResultId>
-    <ParameterId>121</ParameterId>
+    <ParameterId>122</ParameterId>
     <Result>ND</Result>
   </Lnk_ParameterResult>
   <LabTestOrder>
@@ -2479,44 +2653,50 @@
   </LabTestOrder>
   <LabTestOrder>
     <SubTestId>115</SubTestId>
-    <SubTestName>RDT</SubTestName>
+    <SubTestName>VDRL</SubTestName>
     <TestId>95</TestId>
     <DeleteFlag>false</DeleteFlag>
   </LabTestOrder>
   <LabTestOrder>
     <SubTestId>116</SubTestId>
-    <SubTestName>MPS</SubTestName>
+    <SubTestName>RDT</SubTestName>
     <TestId>96</TestId>
     <DeleteFlag>false</DeleteFlag>
   </LabTestOrder>
   <LabTestOrder>
     <SubTestId>117</SubTestId>
-    <SubTestName>Species Report</SubTestName>
-    <TestId>96</TestId>
+    <SubTestName>MPS</SubTestName>
+    <TestId>97</TestId>
     <DeleteFlag>false</DeleteFlag>
   </LabTestOrder>
   <LabTestOrder>
     <SubTestId>118</SubTestId>
-    <SubTestName>Cryptococcus Antigen Test</SubTestName>
-    <TestId>96</TestId>
+    <SubTestName>Species Report</SubTestName>
+    <TestId>97</TestId>
     <DeleteFlag>false</DeleteFlag>
   </LabTestOrder>
   <LabTestOrder>
     <SubTestId>119</SubTestId>
-    <SubTestName>Sputum For AFB</SubTestName>
-    <TestId>98</TestId>
+    <SubTestName>Cryptococcus Antigen Test</SubTestName>
+    <TestId>97</TestId>
     <DeleteFlag>false</DeleteFlag>
   </LabTestOrder>
   <LabTestOrder>
     <SubTestId>120</SubTestId>
-    <SubTestName>Quantify Bacillary Load</SubTestName>
-    <TestId>98</TestId>
+    <SubTestName>Sputum For AFB</SubTestName>
+    <TestId>99</TestId>
     <DeleteFlag>false</DeleteFlag>
   </LabTestOrder>
   <LabTestOrder>
     <SubTestId>121</SubTestId>
-    <SubTestName>GeneXpert</SubTestName>
+    <SubTestName>Quantify Bacillary Load</SubTestName>
     <TestId>99</TestId>
+    <DeleteFlag>false</DeleteFlag>
+  </LabTestOrder>
+  <LabTestOrder>
+    <SubTestId>122</SubTestId>
+    <SubTestName>GeneXpert</SubTestName>
+    <TestId>100</TestId>
     <DeleteFlag>false</DeleteFlag>
   </LabTestOrder>
   <Mst_PatientLabPeriod>

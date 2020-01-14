@@ -13,6 +13,7 @@ using Interface.CCC.Screening;
 using Entities.CCC.Screening;
 
 using static Entities.CCC.Encounter.PatientEncounter;
+using System.Collections;
 
 namespace IQCare.CCC.UILogic
 {
@@ -248,6 +249,22 @@ namespace IQCare.CCC.UILogic
             }
         }
 
+        public ArrayList getPharmacyTreatmentProgramList()
+        {
+
+            IPatientPharmacy patientEncounter = (IPatientPharmacy)ObjectFactory.CreateInstance("BusinessProcess.CCC.BPatientPharmacy, BusinessProcess.CCC");
+            List<KeyValue> kv = patientEncounter.getPharmacyTreatmentProgram();
+            ArrayList lst = new ArrayList();
+            if(kv !=null && kv.Count  > 0)
+            {
+                foreach(var item in kv)
+                {
+                    lst.Add(item.DisplayName);
+                }
+            }
+            return lst;
+        }
+
         public PatientCategorizationParameters getPatientDSDParameters(string patientId)
         {
             IPatientEncounter patientEncounter = (IPatientEncounter)ObjectFactory.CreateInstance("BusinessProcess.CCC.BPatientEncounter, BusinessProcess.CCC");
@@ -295,7 +312,7 @@ namespace IQCare.CCC.UILogic
         }
 
         public int saveUpdatePharmacy(string PatientMasterVisitID, string PatientId, string LocationID, string OrderedBy,
-            string UserID, string DispensedBy, string RegimenLine, string ModuleID, string pmscmFlag, string prescription,
+            string UserID, string DispensedBy, string RegimenLine, string ModuleID, string pmscmFlag, List<DrugPrescription> prescription,
             string TreatmentProgram, string PeriodTaken, string TreatmentPlan, string TreatmentPlanReason, string Regimen,
             string regimenText, string prescriptionDate, string dispensedDate)
         {
@@ -303,7 +320,7 @@ namespace IQCare.CCC.UILogic
             PatientEncounterManager patientEncounterManager = new PatientEncounterManager();
             JavaScriptSerializer parser = new JavaScriptSerializer();
             int val = 0;
-            var drugPrescription = parser.Deserialize<List<DrugPrescription>>(prescription);
+            var drugPrescription = prescription;
 
             string RegimenType = "";
             for (int i = 0; i < drugPrescription.Count; i++)

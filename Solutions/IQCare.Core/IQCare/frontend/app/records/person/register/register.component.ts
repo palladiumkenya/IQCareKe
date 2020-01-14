@@ -25,7 +25,7 @@ import { Search } from '../../_models/search';
 import { Store } from '@ngrx/store';
 import * as AppState from '../../../shared/reducers/app.states';
 import { Partner } from '../../../shared/_models/partner';
-import {NgxSpinnerService} from 'ngx-spinner';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
     selector: 'app-register',
@@ -59,6 +59,7 @@ export class RegisterComponent implements OnInit {
     consentSms: LookupItemView[];
     contactCategory: LookupItemView[];
     personIdentifiers: any[];
+    NHIFIdentifiers: any[];
     yesnoOptions: LookupItemView[];
 
     clientSearch: Search;
@@ -114,6 +115,7 @@ export class RegisterComponent implements OnInit {
                     EducationLevel: new FormControl(this.person.EducationLevel),
                     Occupation: new FormControl(this.person.Occupation),
                     IdentifierType: new FormControl(this.person.IdentifierType),
+                    NHIFNumber: new FormControl(),
                     IdentifierNumber: new FormControl(this.person.IdentifierNumber,
                         Validators.compose([Validators.required, Validators.maxLength(50)]))
                 }),
@@ -140,7 +142,7 @@ export class RegisterComponent implements OnInit {
             // console.log(res);
             const { countiesArray, genderArray, maritalStatusArray, educationLevelArray,
                 occupationArray, relationshipArray, consentSmsArray, contactCategoryArray,
-                personIdentifiersArray, yesnoArray } = res;
+                personIdentifiersArray, yesnoArray, PersonNHIFArray } = res;
             this.counties = countiesArray;
             this.gender = genderArray;
             this.maritalStatus = maritalStatusArray;
@@ -150,6 +152,7 @@ export class RegisterComponent implements OnInit {
             this.consentSms = consentSmsArray;
             this.contactCategory = contactCategoryArray;
             this.personIdentifiers = personIdentifiersArray['identifers'];
+            this.NHIFIdentifiers = PersonNHIFArray['identifers'];
             this.yesnoOptions = yesnoArray['lookupItems'];
             // console.log(personIdentifiersArray['identifers']);
         });
@@ -246,9 +249,22 @@ export class RegisterComponent implements OnInit {
             (res) => {
                 console.log(res);
                 if (res.length > 0) {
-                    this.formGroup.controls['formArray']['controls'][0]['controls'].IdentifierType.setValue(res[0]['identifierId']);
-                    this.formGroup.controls['formArray']['controls'][0]['controls'].IdentifierNumber.setValue(res[0]['identifierValue']);
-                    this.formGroup.controls['formArray']['controls'][0]['controls']['IdentifierNumber'].enable({ onlySelf: false });
+
+
+                    for (let i = 0; i < res.length; i++) {
+
+                        if (res[i]['identifierId'].toString() !== this.NHIFIdentifiers[0]['id'].toString()) {
+                            this.formGroup.controls['formArray']['controls'][0]['controls'].IdentifierType.setValue(res[i]['identifierId']);
+                            this.formGroup.controls['formArray']['controls'][0]['controls'].IdentifierNumber.setValue(res[i]['identifierValue']);
+                            this.formGroup.controls['formArray']['controls'][0]['controls']['IdentifierNumber'].enable({ onlySelf: false });
+                        }
+
+                        if (res[i]['identifierId'].toString() === this.NHIFIdentifiers[0]['id'].toString()) {
+                            this.formGroup.controls['formArray']['controls'][0]['controls'].NHIFNumber.setValue(res[i]['identifierValue']);
+
+                        }
+
+                    }
                 }
             }
         );
@@ -411,6 +427,17 @@ export class RegisterComponent implements OnInit {
                     const personIdentifiersAdd = this.personRegistration.addPersonIdentifiers(personId, this.person.createdBy,
                         this.person.IdentifierType, this.person.IdentifierNumber);
 
+                    const nhifnumber = this.formGroup.controls['formArray']['controls'][0]['controls'].NHIFNumber.value;
+                    if (nhifnumber !== undefined && nhifnumber !== '' && nhifnumber !== null) {
+                        const personNHIFIdentifier = this.personRegistration.addPersonIdentifiers(personId, this.person.createdBy,
+                            parseInt(this.NHIFIdentifiers[0]['id'].toString(), 10), nhifnumber).subscribe(res => {
+                                this.snotifyService.success('Successfully Registered NHIF Number', 'NHIF Number',
+                                    this.notificationService.getConfig());
+                            }, (error) => {
+                                this.snotifyService.error('Error creating person NHIF Number ' + error, 'NHIF Number',
+                                    this.notificationService.getConfig());
+                            });
+                    }
                     forkJoin([personContact, personAddress, personMaritalStatus,
                         personEducationLevel, personOccupation, personEmergencyContact,
                         personIdentifiersAdd]).subscribe(

@@ -14,13 +14,17 @@ import { ErrorHandlerService } from './shared/_services/errorhandler.service';
 import { NgxSpinnerModule } from 'ngx-spinner';
 
 
+
+
 export function init_app(appStateService: AppStateService) {
     return () => appStateService.initializeAppState();
 }
 
 @NgModule({
     declarations: [
-        AppComponent
+        AppComponent,
+
+
 
     ],
     imports: [

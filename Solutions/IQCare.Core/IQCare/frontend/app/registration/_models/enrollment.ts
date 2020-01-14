@@ -8,4 +8,5 @@ export class Enrollment {
     RegistrationDate: string;
     PosId: string;
     ServiceIdentifiersList: any[] = [];
+    transferIn: boolean;
 }

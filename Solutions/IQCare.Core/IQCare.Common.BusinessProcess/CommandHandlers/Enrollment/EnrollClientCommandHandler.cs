@@ -27,10 +27,16 @@ namespace IQCare.Common.BusinessProcess.CommandHandlers.Enrollment
         {
             try
             {
+                var transferIn = false;
+                if (request.ClientEnrollment.transferIn)
+                {
+                    transferIn = true;
+                }
+
                 RegisterPersonService registerPersonService = new RegisterPersonService(_unitOfWork);
                 await registerPersonService.DynamicEnrollment(request.ClientEnrollment.PatientId,
                     request.ClientEnrollment.ServiceAreaId, request.ClientEnrollment.CreatedBy,
-                    request.ClientEnrollment.DateOfEnrollment, request.ClientEnrollment.ServiceIdentifiersList);
+                    request.ClientEnrollment.DateOfEnrollment, request.ClientEnrollment.ServiceIdentifiersList, transferIn);
 
                 /*var patientIdentifier = await registerPersonService.EnrollPatient(request.ClientEnrollment.EnrollmentNo,
                     request.ClientEnrollment.PatientId, request.ClientEnrollment.ServiceAreaId,

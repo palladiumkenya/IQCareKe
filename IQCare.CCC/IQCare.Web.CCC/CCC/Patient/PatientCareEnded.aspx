@@ -411,6 +411,13 @@
                 momentConfig: { culture: 'en', format: 'DD-MMM-YYYY' }
          });
 
+        $('#DateExpectedToReportpicker').datetimepicker({
+            format: 'DD-MMM-YYYY',
+            allowInputToggle: true,
+            minDate: today,
+            useCurrent: false
+        });
+
          $("#DateOfDeath").datepicker({
                 date: null,
                 allowPastDates: true,
@@ -593,7 +600,9 @@
                 tracingOutome = tracingOutome == '' ? 0 : tracingOutome;
                 reasonLostToFollowup = reasonLostToFollowup == '' ? 0 : reasonLostToFollowup;
                 reasonsForDeath = reasonsForDeath == '' ? 0 : reasonsForDeath;
-                specificCausesOfDeath = specificCausesOfDeath == '' ? 0 : specificCausesOfDeath;
+				if(specificCausesOfDeath == '' || specificCausesOfDeath == null) {
+					specificCausesOfDeath = 0;
+				}
 
                 var dateOfDeath = $('#DateOfDeath').datepicker('getDate');
                 if (careEndedDate == "Invalid Date") {
@@ -611,6 +620,10 @@
                 } else {
                     dateOfDeath = '';
                 }
+				
+				if(dateOfDeath == 'Invalid date') {
+					dateOfDeath = null;
+				}
 
                 $.ajax({
                     type: "POST",

@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Linq;
+using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using IQCare.Common.BusinessProcess.Commands.PersonCommand;
@@ -25,10 +27,13 @@ namespace IQCare.Common.BusinessProcess.CommandHandlers.PersonCommand
             {
                 try
                 {
-                    var result = await _unitOfWork.Repository<PersonContactView>()
-                        .Get(x => x.PersonId == request.personId ).FirstOrDefaultAsync();
+                    StringBuilder sql = new StringBuilder();
+                    sql.Append("exec pr_OpenDecryptedSession;");
+                    sql.Append($"SELECT * FROM PersonContactView WHERE PersonId = {request.personId} AND DeleteFlag = 0; ");
+                    sql.Append("exec [dbo].[pr_CloseDecryptedSession];");
+                    var result = await _unitOfWork.Repository<PersonContactView>().FromSql(sql.ToString());
 
-                    return Result<PersonContactView>.Valid(result) ;
+                    return Result<PersonContactView>.Valid(result.FirstOrDefault()) ;
                 }
                 catch (Exception e)
                 {

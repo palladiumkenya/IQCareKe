@@ -168,8 +168,8 @@ export class LinkageReferralComponent implements OnInit {
                 newValue.mode = data.mode.displayName;
                 newValue.tracingDate = data.tracingDate;
                 newValue.outcome = data.outcome.displayName;
-                newValue.reasonNotContacted = data.reasonNotContacted.displayName;
-                newValue.otherReasonSpecify = data.otherReasonSpecify;
+                newValue.reasonNotContacted = data.reasonNotContacted ? data.reasonNotContacted.displayName : null;
+                newValue.otherReasonSpecify = data.otherReasonSpecify ? data.otherReasonSpecify : null;
 
                 this.tracingMergeArray.push(newValue);
                 this.tracing = new Tracing();

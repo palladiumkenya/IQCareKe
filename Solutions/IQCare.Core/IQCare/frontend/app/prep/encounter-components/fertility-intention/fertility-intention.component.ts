@@ -1,8 +1,11 @@
 import { PrepService } from './../../_services/prep.service';
 import { PncService } from './../../../pmtct/_services/pnc.service';
 import { LookupItemView } from './../../../shared/_models/LookupItemView';
+import { NotificationService } from '../../../shared/_services/notification.service';
+import { SnotifyService } from 'ng-snotify';
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
+import * as moment from 'moment';
 
 @Component({
     selector: 'app-fertility-intention',
@@ -16,18 +19,24 @@ export class FertilityIntentionComponent implements OnInit {
     fpMethods: LookupItemView[] = [];
     planningPregnancy: LookupItemView[] = [];
     pregnancyStatusOptions: LookupItemView[] = [];
+
     maxDate: Date;
+    dateLMP: Date;
+    minLMpDate: Date;
 
     @Input() FertilityIntentionsOptions: any;
     @Input() patientId: number;
     @Input() personId: number;
     @Input() patientMasterVisitId: number;
     @Input() isEdit: number;
+    @Input() visitDate: Date;
     @Output() notify: EventEmitter<FormGroup> = new EventEmitter<FormGroup>();
 
     constructor(private _formBuilder: FormBuilder,
         private pncservice: PncService,
-        private prepservice: PrepService) {
+        private prepservice: PrepService,
+        private snotifyService: SnotifyService,
+        private notificationService: NotificationService) {
         this.maxDate = new Date();
     }
 
@@ -41,6 +50,7 @@ export class FertilityIntentionComponent implements OnInit {
             familyPlanningMethods: new FormControl('', [Validators.required]),
             planningToGetPregnant: new FormControl('', [Validators.required]),
             id_familyPlanning: new FormControl(),
+            EDD: new FormControl(),
             fpMethodId: new FormControl()
         });
 
@@ -53,6 +63,7 @@ export class FertilityIntentionComponent implements OnInit {
         this.FertilityIntentionForm.controls.onFamilyPlanning.disable({ onlySelf: true });
         this.FertilityIntentionForm.controls.familyPlanningMethods.disable({ onlySelf: true });
         this.FertilityIntentionForm.controls.planningToGetPregnant.disable({ onlySelf: true });
+        this.FertilityIntentionForm.controls.EDD.disable({ onlySelf: true });
 
         const { yesnoOptions, fpMethods, planningPregnancy, pregnancyStatusOptions } = this.FertilityIntentionsOptions[0];
         this.yesnoOptions = yesnoOptions;
@@ -66,6 +77,27 @@ export class FertilityIntentionComponent implements OnInit {
             this.loadFamilyPlanning();
             this.loadFamilyPlanningMethod();
         }
+    }
+
+    public onLMPDateChange() {
+        this.dateLMP = this.FertilityIntentionForm.controls.lmp.value;
+
+        this.visitDate = new Date(localStorage.getItem('visitDate'));
+        if (this.visitDate !== undefined && this.visitDate !== null) {
+            this.minLMpDate = moment(moment(this.visitDate).subtract(42, 'weeks').format('')).toDate();
+
+            if (moment(this.dateLMP).isBefore(this.minLMpDate)) {
+
+                this.snotifyService.error('Current LMP Date CANNOT be More than 9 months before the VisitDate', 'Mother Profile',
+                    this.notificationService.getConfig());
+                this.FertilityIntentionForm.controls.lmp.setValue('');
+                return false;
+            }
+
+
+        }
+
+
     }
 
     loadPregnancyIndicator(): void {
@@ -150,7 +182,17 @@ export class FertilityIntentionComponent implements OnInit {
             this.FertilityIntentionForm.controls.onFamilyPlanning.disable({ onlySelf: true });
             this.FertilityIntentionForm.controls.familyPlanningMethods.disable({ onlySelf: true });
             this.FertilityIntentionForm.controls.planningToGetPregnant.disable({ onlySelf: true });
+            // this.FertilityIntentionForm.controls.EDD.enable({ onlySelf: true });
 
+
+            if (this.FertilityIntentionForm.controls.lmp.value !== null &&
+                this.FertilityIntentionForm.controls.lmp.value !== undefined &&
+                this.FertilityIntentionForm.controls.lmp.value !== '') {
+                this.FertilityIntentionForm.controls.EDD.setValue(
+                    moment(this.FertilityIntentionForm.controls.lmp.value
+                        , 'DD-MM-YYYY').add(280, 'days').toDate());
+
+            }
             // Reset values
             this.FertilityIntentionForm.controls.onFamilyPlanning.setValue('');
             this.FertilityIntentionForm.controls.familyPlanningMethods.setValue('');
@@ -159,10 +201,17 @@ export class FertilityIntentionComponent implements OnInit {
             this.FertilityIntentionForm.controls.pregnancyPlanned.disable({ onlySelf: true });
             this.FertilityIntentionForm.controls.pregnancyPlanned.setValue('');
 
+            this.FertilityIntentionForm.controls.EDD.disable({ onlySelf: true });
+            this.FertilityIntentionForm.controls.EDD.setValue('');
             // enable
             this.FertilityIntentionForm.controls.onFamilyPlanning.enable({ onlySelf: true });
             // this.FertilityIntentionForm.controls.familyPlanningMethods.enable({ onlySelf: true });
             this.FertilityIntentionForm.controls.planningToGetPregnant.enable({ onlySelf: true });
         }
+        else  {
+            this.FertilityIntentionForm.controls.EDD.disable({ onlySelf: true });
+            this.FertilityIntentionForm.controls.EDD.setValue('');
+        }
+
     }
 }
