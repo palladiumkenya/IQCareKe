@@ -137,7 +137,7 @@ xcopy /d %BATDIR%\Library\FastMember.Signed.dll %BATDIR%\package\web\bin
 @echo "********** Building IQCare API **********" >> %log%
 @echo ********** Building IQCare API **********
 
-dotnet publish Solutions/IQCare.Core/IQCare/IQCare.csproj -o ../../../package/api
+dotnet publish Solutions/IQCare.Core/IQCare/IQCare.csproj -o %BATDIR%\package\api
 
 @echo ********** END OF BUILINDING IQCare API ********** >> %log%
 @echo ********** END OF BUILINDING IQCare API ********** >> %log%
@@ -146,7 +146,7 @@ dotnet publish Solutions/IQCare.Core/IQCare/IQCare.csproj -o ../../../package/ap
 @echo "********** Building IQCare LAB **********" >> %log%
 @echo ********** Building IQCare LAB **********
 
-dotnet publish Solutions/IQCare.Core/IQCare.Lab.WebApi/IQCare.Lab.WebApi.csproj -o ../../../package/lab
+dotnet publish Solutions/IQCare.Core/IQCare.Lab.WebApi/IQCare.Lab.WebApi.csproj -o %BATDIR%\package\lab
 
 @echo ********** END OF BUILINDING IQCare LAB ********** >> %log%
 @echo ********** END OF BUILINDING IQCare LAB ********** >> %log%
@@ -156,7 +156,7 @@ dotnet publish Solutions/IQCare.Core/IQCare.Lab.WebApi/IQCare.Lab.WebApi.csproj 
 @echo "********** Building IQCare MATERNITY **********" >> %log%
 @echo ********** Building IQCare MATERNITY **********
 
-dotnet publish Solutions/IQCare.Core/IQCare.Maternity.WebApi/IQCare.Maternity.WebApi.csproj -o ../../../package/maternity
+dotnet publish Solutions/IQCare.Core/IQCare.Maternity.WebApi/IQCare.Maternity.WebApi.csproj -o %BATDIR%\package\maternity
 
 @echo ********** END OF BUILINDING IQCare MATERNITY ********** >> %log%
 @echo ********** END OF BUILINDING IQCare MATERNITY ********** >> %log%
@@ -165,7 +165,7 @@ dotnet publish Solutions/IQCare.Core/IQCare.Maternity.WebApi/IQCare.Maternity.We
 @echo "********** Building IQCare PREP **********" >> %log%
 @echo ********** Building IQCare PREP **********
 
-dotnet publish Solutions/IQCare.Core/IQCare.Prep.WebApi/IQCare.Prep.WebApi.csproj -o ../../../package/prep
+dotnet publish Solutions/IQCare.Core/IQCare.Prep.WebApi/IQCare.Prep.WebApi.csproj -o %BATDIR%\package\prep
 
 @echo ********** END OF BUILINDING IQCare PREP ********** >> %log%
 @echo ********** END OF BUILINDING IQCare PREP ********** >> %log%
@@ -174,7 +174,7 @@ dotnet publish Solutions/IQCare.Core/IQCare.Prep.WebApi/IQCare.Prep.WebApi.cspro
 @echo "********** Building IQCare COMMON WEB **********" >> %log%
 @echo ********** Building IQCare COMMON WEB **********
 
-dotnet publish Solutions/IQCare.Core/IQCare.Common.Web/IQCare.Common.Web.csproj -o ../../../package/common
+dotnet publish Solutions/IQCare.Core/IQCare.Common.Web/IQCare.Common.Web.csproj -o %BATDIR%\package\common
 
 @echo ********** END OF BUILINDING IQCare COMMON WEB ********** >> %log%
 @echo ********** END OF BUILINDING IQCare COMMON WEB ********** >> %log%
@@ -183,7 +183,7 @@ dotnet publish Solutions/IQCare.Core/IQCare.Common.Web/IQCare.Common.Web.csproj 
 @echo "********** Building IQCare AIR WEB **********" >> %log%
 @echo ********** Building IQCare AIR WEB **********
 
-dotnet publish Solutions/IQCare.Core/IQCare.AIR.Web/IQCare.AIR.Web.csproj -o ../../../package/air
+dotnet publish Solutions/IQCare.Core/IQCare.AIR.Web/IQCare.AIR.Web.csproj -o %BATDIR%\package\air
 
 @echo ********** END OF BUILINDING IQCare AIR WEB ********** >> %log%
 @echo ********** END OF BUILINDING IQCare AIR WEB ********** >> %log%
@@ -193,7 +193,7 @@ dotnet publish Solutions/IQCare.Core/IQCare.AIR.Web/IQCare.AIR.Web.csproj -o ../
 @echo "********** Building IQCare PHARM **********" >> %log%
 @echo ********** Building IQCare PHARM **********
 
-dotnet publish Solutions/IQCare.Core/IQCare.Pharm.WebApi/IQCare.Pharm.WebApi.csproj -o ../../../package/pharm
+dotnet publish Solutions/IQCare.Core/IQCare.Pharm.WebApi/IQCare.Pharm.WebApi.csproj -o %BATDIR%\package\pharm
 
 @echo ********** END OF BUILINDING IQCare PHARM ********** >> %log%
 @echo ********** END OF BUILINDING IQCare PHARM ********** >> %log%
@@ -203,14 +203,14 @@ dotnet publish Solutions/IQCare.Core/IQCare.Pharm.WebApi/IQCare.Pharm.WebApi.csp
 @echo "********** Building IQCare Queue WEB **********" >> %log%
 @echo ********** Building IQCare Queue WEB **********
 
-dotnet publish Solutions/IQCare.Core/IQCare.Queue.Web/IQCare.Queue.Web.csproj -o ../../../package/queue
+dotnet publish Solutions/IQCare.Core/IQCare.Queue.Web/IQCare.Queue.Web.csproj -o %BATDIR%\package\queue
 
 @echo ********** END OF BUILINDING IQCare Queue WEB ********** >> %log%
 @echo ********** END OF BUILINDING IQCare Queue WEB ********** >> %log%
 
 
-dotnet publish Solutions/IQCare.Core/IQCare.Core.DbMigration/IQCare.Core.DbMigration.csproj -o ../../../Release/DbMigration/win-x64 -r win-x64
-dotnet publish Solutions/IQCare.Core/IQCare.Core.DbMigration/IQCare.Core.DbMigration.csproj -o ../../../Release/DbMigration/win-x86 -r win-x86
+dotnet publish Solutions/IQCare.Core/IQCare.Core.DbMigration/IQCare.Core.DbMigration.csproj -o %BATDIR%\Release\DbMigration\win-x64 -r win-x64
+dotnet publish Solutions/IQCare.Core/IQCare.Core.DbMigration/IQCare.Core.DbMigration.csproj -o %BATDIR%\Release\DbMigration\win-x86 -r win-x86
 
 
 cd Solutions/IQCare.Core/IQCare

@@ -81,6 +81,15 @@ export class PrepMonthlyrefillComponent implements OnInit {
         private encounterservice: EncounterService) {
         this.maxDate = new Date();
 
+
+
+        if (localStorage.getItem('PrepVisitDate') != null && localStorage.getItem('PrepVisitDate') != undefined) {
+            this.maxDate = moment(localStorage.getItem('PrepVisitDate')).toDate();
+        }
+        else {
+            this.maxDate = new Date();
+        }
+
     }
 
     ngOnInit() {
@@ -152,6 +161,11 @@ export class PrepMonthlyrefillComponent implements OnInit {
             AppointmentReason: new FormControl(''),
             Remarks: new FormControl('')
         });
+
+
+        if (localStorage.getItem('PrepVisitDate') != null && localStorage.getItem('PrepVisitDate') != undefined) {
+            this.PrepMonthlyRefillFormGroup.controls.visitDate.setValue(moment(localStorage.getItem('PrepVisitDate')).toDate());
+        }
 
         this.PrepMonthlyRefillFormGroup.controls.adherenceassessmentreasons.disable({ onlySelf: true });
         this.PrepMonthlyRefillFormGroup.controls.SpecifyAssessmentReason.setValue('');
@@ -644,9 +658,11 @@ export class PrepMonthlyrefillComponent implements OnInit {
     }
     public Cancel() {
         this.zone.run(() => {
-            this.router.navigate(['/prep/' + '/' + this.patientId + '/' + this.personId + '/'
-                + this.serviceAreaId],
-                { relativeTo: this.route });
+            this.zone.run(() => {
+                this.router.navigate(
+                    ['/prep/prepfollowupworkflow/' + this.patientId + '/' + this.personId + '/' + this.serviceAreaId],
+                    { relativeTo: this.route });
+            });
         });
     }
     public Save() {
@@ -877,9 +893,12 @@ export class PrepMonthlyrefillComponent implements OnInit {
                                     this.notificationService.getConfig());
 
                                 this.zone.run(() => {
-                                    this.router.navigate(['/prep/' + '/' + this.patientId + '/' + this.personId + '/'
-                                        + this.serviceAreaId],
-                                        { relativeTo: this.route });
+                                    this.zone.run(() => {
+                                        this.router.navigate(
+                                            ['/prep/prepfollowupworkflow/' + this.patientId + '/' +
+                                                this.personId + '/' + this.serviceAreaId],
+                                            { relativeTo: this.route });
+                                    });
                                 });
                             },
                             (error) => {

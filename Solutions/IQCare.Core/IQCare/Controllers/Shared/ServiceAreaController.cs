@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -36,6 +36,15 @@ namespace IQCare.Controllers.Shared
             if (results.IsValid)
                 return Ok(results.Value);
             return BadRequest(results);
+        }
+
+        [HttpGet("GetAllIdentifiers")]
+        public async Task<IActionResult> GetAllIdentifiers()
+        {
+            var result = await _mediator.Send(new GetIdentifiersCommand(), Request.HttpContext.RequestAborted);
+            if (result.IsValid)
+                return Ok(result.Value);
+            return BadRequest(result);
         }
     }
 }

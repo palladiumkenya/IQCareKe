@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -170,8 +170,18 @@ namespace IQCare.Controllers.Shared
 
         }
 
-        [HttpGet("GetLatestCareEndDetails/{patientId}")]
 
+        [HttpGet("GetPatientCareEndByServiceArea/{personId}")]
+        public async Task<IActionResult> GetPatientCaredEndedByServiceArea(int personId)
+        {
+            var response = await _mediator.Send(new GetPatientCareEndedByServiceAreaCommand { PersonId = personId }, HttpContext.RequestAborted);
+            if (response.IsValid)
+                return Ok(response.Value);
+            return BadRequest(response);
+        }
+
+
+        [HttpGet("GetLatestCareEndDetails/{patientId}")]
         public async Task<IActionResult> GetLatestCareEndDetails(int patientId)
         {
             var response = await _mediator.Send(new GetLatestCareEndingDetailsCommand { PatientId = patientId }, HttpContext.RequestAborted);
@@ -179,6 +189,7 @@ namespace IQCare.Controllers.Shared
                 return Ok(response.Value);
             return BadRequest(response);
         }
+
         [HttpGet("GetPatientAppointmentServiceArea/{patientId}/{serviceArea}")]
         public async Task<object> GetPatientAppointmentServiceArea(int patientId,int serviceArea)
         {
@@ -188,6 +199,18 @@ namespace IQCare.Controllers.Shared
             return BadRequest(results);
         }
 
+        [HttpGet("GetPatientEncountersCompletedCommand/{patientId}")]
+        public async Task<IActionResult> GetPatientEncountersCompleted(int patientId)
+        {
+            var results = await _mediator.Send(new GetPatientEncountersCompletedCommand()
+            {
+                PatientId = patientId
+            }, Request.HttpContext.RequestAborted);
+
+            if (results.IsValid)
+                return Ok(results.Value);
+            return BadRequest(results);
+        }
 
         // POST: api/PatientServices
         [HttpPost]

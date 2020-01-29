@@ -3,7 +3,8 @@ import { ServicesResolver } from './services/services.resolver';
 import { HTSEncounterResolver } from './services/htsencounter.resolver';
 import { PersonCurrentVitalsResolver } from './services/personvitals.resolver';
 import { ExitReasonsResolver } from './services/exitreasons.resolver';
-import { CareendDetailsResolver } from './services/careendeddetails.resolver';
+import { ServiceAreaCareEndDetailsResolver } from './services/serviceareacareenddetails.resolver';
+//import { CareendDetailsResolver } from './services/careendeddetails.resolver';
 import { PartnerCCCEnrollmentResolver, SexWithoutCondomResolver, PatientIdentifierResolver } from './services/hivpartnerdetails.resolver';
 import { DashboardRoutingModule } from './dashboard-routing.module';
 import { NgModule } from '@angular/core';
@@ -103,16 +104,17 @@ import { GetpatientIdResolver } from './services/getpatientId.resolver';
         PersonCurrentVitalsResolver,
         RiskEncounterResolver,
         ExitReasonsResolver,
-        CareendDetailsResolver,
+        //  CareendDetailsResolver,
         HTSEncounterHistoryResolver,
         PartnerCCCEnrollmentResolver,
         SexWithoutCondomResolver,
         PatientIdentifierResolver,
-        GetpatientIdResolver
+        GetpatientIdResolver,
+        ServiceAreaCareEndDetailsResolver
 
     ],
     entryComponents: [
-        PatientHtsComponent, AddWaitingListComponent,PatientHtsPositiveComponent 
+        PatientHtsComponent, AddWaitingListComponent, PatientHtsPositiveComponent
     ],
 })
 export class DashboardModule { }

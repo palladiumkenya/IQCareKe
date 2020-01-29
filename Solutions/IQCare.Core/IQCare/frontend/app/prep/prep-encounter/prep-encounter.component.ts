@@ -622,8 +622,11 @@ export class PrepEncounterComponent implements OnInit {
                     );
 
                     this.zone.run(() => {
-                        this.router.navigate(['/prep/' + this.patientId + '/' + this.personId + '/'
-                            + this.serviceId], { relativeTo: this.route });
+                        this.zone.run(() => {
+                            this.router.navigate(
+                                ['/prep/prepfollowupworkflow/' + this.patientId + '/' + this.personId + '/' + this.serviceId],
+                                { relativeTo: this.route });
+                        });
                     });
                 },
                 (error) => {
@@ -848,15 +851,17 @@ export class PrepEncounterComponent implements OnInit {
         } else {
             reasonsCommand = of([]);
         }
-
+ 
+        const AppointmentId = this.AppointmentFormGroup.value[0]['id'];
         const updateNextAppointment = {
-            AppointmentId: this.AppointmentFormGroup.value[0]['id'],
+            AppointmentId: (AppointmentId == undefined || AppointmentId ===''  || AppointmentId === null) ? 0 : AppointmentId,
             AppointmentDate: this.AppointmentFormGroup.value[0]['nextAppointmentDate'],
             Description: this.AppointmentFormGroup.value[0]['clinicalNotes']
         };
 
+         const familyPlanningId = this.FertilityIntentionsFormGroup.value[0]['id_familyPlanning'];
         const familyPlanningEditCommand: FamilyPlanningEditCommand = {
-            Id: this.FertilityIntentionsFormGroup.value[0]['id_familyPlanning'],
+            Id: (familyPlanningId === undefined || familyPlanningId === '' || familyPlanningId === null) ? 0 : familyPlanningId,
             FamilyPlanningStatusId: this.FertilityIntentionsFormGroup.value[0]['onFamilyPlanning'],
             ReasonNotOnFPId: 0
         };

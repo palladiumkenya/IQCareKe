@@ -61,10 +61,12 @@
                                                 (click)="editEnrollment(service.id, service.code)">
                                                 <span style="font-size:15px;"
                                                     *ngFor="let identifier of getServiceEnrollmentDetails(service)['identifiers'][0]">
-                                                    {{
-                                                        identifier['identifierTypeId'] + ': ' + identifier['identifierValue']
-                                                    }}
-                                                    <br />
+                                                    <span *ngIf="service.code != 'OTZ'">
+                                                        {{
+                                                            identifier['identifierTypeId'] + ': ' + identifier['identifierValue']
+                                                        }}
+                                                        <br />
+                                                    </span>
                                                 </span>
                                             </a>
                                         </span>
@@ -83,9 +85,27 @@
                                         <div class="divider hidden-md hidden-sm hidden-xs"></div>
 
                                         <span>
-                                            <a class="btn btn-sm btn-success" (click)="newEncounter(service.id)">
-                                                Encounters
-                                            </a>
+                                            <ng-container
+                                                *ngIf="isDeathEligibility(service.id); else eligiblereenrolltemplate">
+                                                <span class="label label-orange">Not Eligible</span>
+                                            </ng-container>
+                                            <ng-template #eligiblereenrolltemplate>
+
+                                                <span
+                                                    *ngIf="isEligibleReenrollment(service.id) else serviceencountertemplate">
+                                                    <a class="btn btn-sm btn-primary"
+                                                        (click)="reenrollToService(service.id,service.code)">
+                                                        Re-enroll
+
+                                                    </a>
+                                                </span>
+
+                                            </ng-template>
+                                            <ng-template #serviceencountertemplate>
+                                                <a class="btn btn-sm btn-success" (click)="newEncounter(service.id)">
+                                                    Encounters
+                                                </a>
+                                            </ng-template>
                                         </span>
                                     </div>
 
@@ -106,9 +126,21 @@
                                     <div class="ticket-time  col-lg-2 col-sm-2 col-xs-12">
                                         <div class="divider hidden-md hidden-sm hidden-xs"></div>
                                         <span>
-                                            <ng-container *ngIf="isDeathEligibility(service.id); else serviceTemplate">
+                                            <ng-container
+                                                *ngIf="isDeathEligibility(service.id); else eligiblereenrolltemplate">
                                                 <span class="label label-orange">Not Eligible</span>
                                             </ng-container>
+                                            <ng-template #eligiblereenrolltemplate>
+
+                                                <span *ngIf="isEligibleReenrollment(service.id) else serviceTemplate">
+                                                    <a class="btn btn-sm btn-primary"
+                                                        (click)="reenrollToService(service.id,service.code)">
+                                                        Reenroll
+
+                                                    </a>
+                                                </span>
+
+                                            </ng-template>
                                             <ng-template #serviceTemplate>
                                                 <span *ngIf="checkService(service.id); else eligibleTemplate">
                                                     <a class="btn btn-sm btn-primary"
@@ -260,7 +292,7 @@
                                             </ng-template>
                                             <ng-template #eligiblecareendtemplate>
 
-                                                <span *ngIf="isEligibleServiceReenrollment(service.id)">
+                                                <span *ngIf="isEligibleServiceReenrollment(service.id); else noteligibletemplate">
                                                     <a class="btn btn-sm btn-primary"
                                                         (click)="reenrollToService(service.id,service.code)">
                                                         Restart
@@ -268,6 +300,9 @@
                                                     </a>
                                                 </span>
 
+                                            </ng-template>
+                                            <ng-template #noteligibletemplate> 
+                                                <span class="label label-orange">Not Eligible</span>
                                             </ng-template>
 
                                             <br />

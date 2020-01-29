@@ -83,9 +83,11 @@ export class PrepCareendComponent implements OnInit {
         this.route.data.subscribe((res) => {
             const { careendreasonoptions, EncounterTypeArray } = res;
 
+
             this.careendreasonarray = careendreasonoptions['lookupItems'];
             this.encountertypeoptions = EncounterTypeArray['lookupItems'];
         });
+
 
         this.PrepCareEndFormGroup = this._formBuilder.group({
             careEndedDate: new FormControl('', [Validators.required]),
@@ -95,6 +97,7 @@ export class PrepCareendComponent implements OnInit {
 
 
         });
+        
         this.encounterlist = this.encountertypeoptions.filter(x => x.itemName === 'CareEnded');
         this.EncounterTypeId = this.encounterlist[0]['itemId'];
         console.log(this.EncounterTypeId);

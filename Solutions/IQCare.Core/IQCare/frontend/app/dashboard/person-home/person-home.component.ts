@@ -12,8 +12,9 @@ import { EncounterDetails } from '../_model/HtsEncounterdetails';
 import { LookupItemView } from '../../shared/_models/LookupItemView';
 import { LookupItemService } from '../../shared/_services/lookup-item.service';
 
-import {AddWaitingListComponent} from '../../shared/add-waiting-list/add-waiting-list.component';
+import { AddWaitingListComponent } from '../../shared/add-waiting-list/add-waiting-list.component';
 import * as moment from 'moment';
+import { mergeMap } from 'rxjs/operators';
 @Component({
 
     selector: 'app-person-home',
@@ -31,6 +32,7 @@ export class PersonHomeComponent implements OnInit {
     public personView$: Subscription;
     public personAllergies$: Subscription;
     public personAllergies: any;
+    public patientId = 0;
     encounterDetail: EncounterDetails;
     htsencounters: any[];
     riskassessmentencounter: any[];
@@ -38,8 +40,8 @@ export class PersonHomeComponent implements OnInit {
     services: any[];
     exitreason: number;
     creatinineLabTests: any[] = [];
-    patientId: number;
     careenddetails: any[] = [];
+    ServiceAreaCareEndDetails:any[] =[];
     htshistory: any[] = [];
     personvitals: any[];
     adherencearray: any[] = [];
@@ -62,26 +64,27 @@ export class PersonHomeComponent implements OnInit {
         this.encounterDetail = new EncounterDetails();
     }
 
-    ngOnInit() {
+    async  ngOnInit() {
         this.route.params.subscribe(params => {
             this.personId = params['id'];
+
+
         });
 
         this.route.data.subscribe(res => {
 
             const { servicesArray } = res;
-            const { HTSEncounterArray } = res;
+            // const { HTSEncounterArray } = res;
             const { PersonVitalsArray } = res;
             const { RiskAssessmentArray } = res;
             const { ExitReasonsArray } = res;
-            const { CarendedArray } = res;
+
             const { HTSEncounterHistoryArray } = res;
+            const  {ServiceAreaCareEndArray} = res;
 
-            this.careenddetails = CarendedArray;
-
+            this.ServiceAreaCareEndDetails = ServiceAreaCareEndArray;
             this.htshistory = HTSEncounterHistoryArray;
             this.services = servicesArray;
-            this.htsencounters = HTSEncounterArray;
             this.personvitals = PersonVitalsArray;
             this.riskassessmentencounter = RiskAssessmentArray;
             this.careendoptions = ExitReasonsArray['lookupItems'];
@@ -90,41 +93,55 @@ export class PersonHomeComponent implements OnInit {
             if (this.personvitals.length > 0) {
                 this.personVitalWeight = this.personvitals['0'].weight;
             }
-            if (this.careenddetails != null) {
-                this.exitreason = this.careenddetails['exitReason'];
 
-                let careendeddetails: string;
-                let val: number;
-
-                val = this.careendoptions.findIndex(x => x.itemId == this.exitreason);
-                if (this.careendoptions[val])
-                    careendeddetails = this.careendoptions[val].itemDisplayName;
-
-                if (careendeddetails && careendeddetails.toLowerCase() == 'death') {
-                    this.isdead = true;
-                    this.carended = true;
-                } else {
-                    this.carended = true;
-                    this.isdead = false;
-                }
-            } else {
-                this.carended = false;
-                this.isdead = false;
-            }
             this.riskencounters = this.riskassessmentencounter['encounters'];
         });
 
-        this.encounterDetail = this.htsencounters[0];
 
-        const servicesRightOrder = [2, 1, 3, 5, 4, 6, 7];
-        const ordered_array = this.mapOrder(this.services, servicesRightOrder, 'id');
-        this.services = ordered_array;
+        this.careenddetails = await this.personService.getPatientByPersonId(this.personId).pipe(mergeMap(
+            res => this.personService.getPatientCareEndedHistory((res['patientId'] == null) ? 0 : res['patientId'])
+
+        )).toPromise();
+
+    
+
+     
+        if (this.careenddetails != null && this.careenddetails.length > 0) {
+            this.exitreason = this.careenddetails['exitReason'];
+
+            let careendeddetails: string;
+            let val: number;
+
+            val = this.careendoptions.findIndex(x => x.itemId == this.exitreason);
+            if (this.careendoptions[val]) {
+                careendeddetails = this.careendoptions[val].itemDisplayName;
+            }
+
+            if (careendeddetails && careendeddetails.toLowerCase() == 'death') {
+                this.isdead = true;
+                this.carended = true;
+            } else {
+                this.carended = true;
+                this.isdead = false;
+            }
+        } else {
+            this.carended = false;
+            this.isdead = false;
+        }
+
+        const servicesRightOrder = [2, 1, 3, 5, 4, 6, 7, 8, 9];
+        if (this.services != undefined) {
+            const ordered_array = this.mapOrder(this.services, servicesRightOrder, 'id');
+            this.services = ordered_array;
+        }
 
         localStorage.removeItem('patientEncounterId');
         localStorage.removeItem('patientMasterVisitId');
         localStorage.removeItem('selectedService');
         this.store.dispatch(new Consent.ClearState());
         this.getPatientDetailsById(this.personId);
+
+
     }
 
     mapOrder(array, order, key) {
@@ -150,8 +167,9 @@ export class PersonHomeComponent implements OnInit {
         creatinine = ['Creatinine'];
 
         this.personService.getLabTestResults(patientId, 'Complete').subscribe(res => {
-            if (res.length == 0)
+            if (res.length == 0) {
                 return;
+            }
 
             res.forEach(test => {
                 if (test.labTestName == 'Creatinine') {
@@ -180,55 +198,56 @@ export class PersonHomeComponent implements OnInit {
 
     public getPatientDetailsById(personId: number) {
         this.personView$ = this.personService.getPatientByPersonId(personId).subscribe(
-            p => {
-                this.person = p;
+            (p) => {
 
-                localStorage.setItem('personId', this.person.personId.toString());
-                this.store.dispatch(new Consent.PersonId(this.person.personId));
+                if (p != null) {
+                    this.person = p;
 
-                if (this.person.patientId && this.person.patientId > 0) {
-                    this.store.dispatch(new Consent.PatientId(this.person.patientId));
-                    localStorage.setItem('patientId', this.person.patientId.toString());
+                    localStorage.setItem('personId', this.person.personId.toString());
+                    this.store.dispatch(new Consent.PersonId(this.person.personId));
 
-                    this.personService.getPatientAdherenceOutcome(this.person.patientId).subscribe((res) => {
-                        console.log('AdherenceOutcome');
-                        console.log(res);
-                        if (res != null) {
-                            if (res.length > 0) {
-                                this.adherenceavailable = true;
+                    if (this.person.patientId && this.person.patientId > 0) {
+                        this.store.dispatch(new Consent.PatientId(this.person.patientId));
+                        localStorage.setItem('patientId', this.person.patientId.toString());
 
-                                res.forEach(element => {
-                                    this.adherencearray.push({
-                                        Score: element['scoreName'],
-                                        VisitDate: moment(element['visitDate']).format('DD-MMM-YYYY')
+                        this.personService.getPatientAdherenceOutcome(this.person.patientId).subscribe((res) => {
+                            if (res != null) {
+                                if (res.length > 0) {
+                                    this.adherenceavailable = true;
+
+                                    res.forEach(element => {
+                                        this.adherencearray.push({
+                                            Score: element['scoreName'],
+                                            VisitDate: moment(element['visitDate']).format('DD-MMM-YYYY')
+                                        });
                                     });
-                                });
 
-                                if (this.adherencearray.length > 1) {
-                                    if (this.adherencearray[0].Score.toString().toLowerCase() == 'fair'
-                                        && this.adherencearray[1].Score.toString().toLowerCase() == 'fair') {
-                                        this.strengthenadherence = true;
-                                    } else if (this.adherencearray[0].Score.toString().toLowerCase() == 'bad'
-                                        && this.adherencearray[1].Score.toString().toLowerCase() == 'bad') {
-                                        this.strengthenadherence = true;
-                                    }
-                                } else if (this.adherencearray.length == 1) {
-                                    if (this.adherencearray[0].Score.toString().toLowerCase() == 'fair') {
-                                        this.strengthenadherence = true;
-                                    }
-                                    if (this.adherencearray[0].Score.toString().toLowerCase() == 'bad') {
-                                        this.strengthenadherence = true;
+                                    if (this.adherencearray.length > 1) {
+                                        if (this.adherencearray[0].Score.toString().toLowerCase() == 'fair'
+                                            && this.adherencearray[1].Score.toString().toLowerCase() == 'fair') {
+                                            this.strengthenadherence = true;
+                                        } else if (this.adherencearray[0].Score.toString().toLowerCase() == 'bad'
+                                            && this.adherencearray[1].Score.toString().toLowerCase() == 'bad') {
+                                            this.strengthenadherence = true;
+                                        }
+                                    } else if (this.adherencearray.length == 1) {
+                                        if (this.adherencearray[0].Score.toString().toLowerCase() == 'fair') {
+                                            this.strengthenadherence = true;
+                                        }
+                                        if (this.adherencearray[0].Score.toString().toLowerCase() == 'bad') {
+                                            this.strengthenadherence = true;
+                                        }
                                     }
                                 }
                             }
-                        }
 
-                    });
+                        });
 
-                    this.getCompletedCreatinineLabs(this.person.patientId);
-
+                        this.getCompletedCreatinineLabs(this.person.patientId);
 
 
+
+                    }
                 }
             },
             (err) => {
@@ -246,26 +265,10 @@ export class PersonHomeComponent implements OnInit {
             this.router.navigate(['/record/person/update/' + this.personId], { relativeTo: this.route });
         });
     }
-    getUserAllergies(patientId: number) {
-        this.personAllergies$ = this.personService.getPatientAllergies(patientId).subscribe(
-            personAllergies => {
-                console.log(personAllergies);
-                this.personAllergies = personAllergies;
-            },
-            (err) => {
-                this.snotifyService.error('Error retreaving person allergies...',
-                    this.notificationService.getConfig());
-            },
-            () => {
-                // console.log(this.personView$);
-            });
-    }
 
     addWaitingList() {
         const PersonId = this.person.personId;
         const PatientId = this.person.patientId;
-      
-
 
         const resultsDialogConfig = new MatDialogConfig();
 
@@ -292,5 +295,5 @@ export class PersonHomeComponent implements OnInit {
 
     }
 
-   
+
 }

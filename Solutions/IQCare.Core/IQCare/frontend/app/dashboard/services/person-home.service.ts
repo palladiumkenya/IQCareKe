@@ -39,6 +39,7 @@ export class PersonHomeService {
             catchError(this.errorHandler.handleError<PersonView>('getPatientByPersonId'))
         );
     }
+    
     public getHTSEncounterDetailsBypersonId(personId: number): Observable<any[]> {
         return this.http.get<EncounterDetails[]>(this.API_URL + this._htsurl + '/getEncounterDetailsByPersonId/' + personId).pipe(
             tap(getHTSEncounterDetailsBypersonId => this.errorHandler.log('fetched a single client encounter details')),
@@ -125,6 +126,7 @@ export class PersonHomeService {
             catchError(this.errorHandler.handleError<any>('getRelationshipsByPatientId'))
         );
     }
+    
     public GetCurrentPatientVitalsInfo(personId: number): Observable<any> {
         return this.http.get<any>(this.API_URL + '/api/PatientServices/GetCurrentPersonVitals/' + personId).pipe(
             tap(GetCurrentPatientVitalsInfo => this.errorHandler.log('get patient vitals details')),
@@ -267,6 +269,13 @@ export class PersonHomeService {
         );
     }
 
+    public getPatientCareEndServiceAreaHistory(personId: number): Observable<any[]> {
+        return this.http.get<any[]>(this.API_URL + '/api/PatientServices/GetPatientCareEndByServiceArea/' + personId).pipe(
+            tap(getPatientCareEndServiceAreaHistory => this.errorHandler.log(`get Patient CareEnded by ServiceArea details` + personId)),
+            catchError(this.errorHandler.handleError<any>('getPatientCareEndedHistorybyServiceArea'))
+        );
+    }
+
     public getAllHTSEncounterBypersonId(personId: number): Observable<any[]> {
         return this.http.get<EncounterDetails[]>(this.API_URL + this._htsurl + '/getLatestEncounterDetails/' + personId).pipe(
             tap(getHTSEncounterDetailsBypersonId => this.errorHandler.log('fetched a single client encounter details')),
@@ -345,10 +354,6 @@ export class PersonHomeService {
     }
 
     public AddHivPartnerProfile(PatientId: number, hivpartnerprofiles: any[], createdby: number): Observable<any> {
-        //  if (hivpartnerprofiles.length == 0) {
-        //    return of([]);
-        //}
-
         const Indata = {
             'PatientId': PatientId,
             'CreatedBy': createdby,
@@ -420,5 +425,9 @@ export class PersonHomeService {
             tap(getSecondaryRelationships => this.errorHandler.log(`successfully fetched person secondary relationships`)),
             catchError(this.errorHandler.handleError<any>('Error fetching person secondary relationships'))
         );
+    }
+    
+    public getPatientEncountersCompleted(patientId: number): Observable<any[]> {
+        return this.http.get<any[]>(this.API_URL + '/api/PatientServices/GetPatientEncountersCompletedCommand/' + patientId).pipe();
     }
 }

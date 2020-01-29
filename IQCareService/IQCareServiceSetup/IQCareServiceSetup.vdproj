@@ -2123,12 +2123,6 @@
         "Entry"
         {
         "MsmKey" = "8:_685598748CB92B6770F35CC1D569CA97"
-        "OwnerKey" = "8:_EDF1C26E43405D1398CC9B7F6D2A10DA"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_685598748CB92B6770F35CC1D569CA97"
         "OwnerKey" = "8:_0E43BA813D65D7E293F04EB889103476"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -2148,6 +2142,12 @@
         {
         "MsmKey" = "8:_685598748CB92B6770F35CC1D569CA97"
         "OwnerKey" = "8:_07CE1B2E4440D9D5853299CE193D7FFA"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_685598748CB92B6770F35CC1D569CA97"
+        "OwnerKey" = "8:_EDF1C26E43405D1398CC9B7F6D2A10DA"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -2424,6 +2424,12 @@
         {
         "MsmKey" = "8:_7018CEF42CEE23D949005FBB7444C68F"
         "OwnerKey" = "8:_C81191E8473261D2FF6A3AD8639F45FB"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_7018CEF42CEE23D949005FBB7444C68F"
+        "OwnerKey" = "8:_2FE26657C2CE70615743271CCCD460B5"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -3557,7 +3563,19 @@
         "Entry"
         {
         "MsmKey" = "8:_A37DB85A6424F6BBA423D6A08FD39F98"
+        "OwnerKey" = "8:_C68706AFF1AE49BED46C02DDF89ED8EC"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_A37DB85A6424F6BBA423D6A08FD39F98"
         "OwnerKey" = "8:_E7E1F0F36675886ED4EBE5F1C7C988D6"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_A37DB85A6424F6BBA423D6A08FD39F98"
+        "OwnerKey" = "8:_07CE1B2E4440D9D5853299CE193D7FFA"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -5075,6 +5093,12 @@
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_685598748CB92B6770F35CC1D569CA97"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
         "OwnerKey" = "8:_5EE22364578F7A9B93C70C8D6F08B11B"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -5376,12 +5400,6 @@
         {
         "MsmKey" = "8:_UNDEFINED"
         "OwnerKey" = "8:_EDF1C26E43405D1398CC9B7F6D2A10DA"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_685598748CB92B6770F35CC1D569CA97"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -7229,7 +7247,7 @@
             {
             "AssemblyRegister" = "3:1"
             "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:IQCare.WebApi.Logic, Version=1.0.0.0, Culture=neutral, processorArchitecture=x86"
+            "AssemblyAsmDisplayName" = "8:IQCare.WebApi.Logic, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
                     "_1FD91943FDDCB804285E8C7B33D2A665"
@@ -13647,15 +13665,15 @@
         {
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:IQCare Service"
-        "ProductCode" = "8:{1302EBA4-1DAB-4C5B-AD72-273B9142EF8F}"
-        "PackageCode" = "8:{ED457E97-5BCB-45F5-A75E-ED96ACF93AB7}"
+        "ProductCode" = "8:{2627167F-93F6-4F4B-903B-329EBCA99026}"
+        "PackageCode" = "8:{939071A2-7469-4BC3-ACF4-F85794311CFE}"
         "UpgradeCode" = "8:{DE20A75B-9DD3-488A-88B7-12B9DB70970E}"
         "AspNetVersion" = "8:4.0.30319.0"
         "RestartWWWService" = "11:FALSE"
         "RemovePreviousVersions" = "11:TRUE"
         "DetectNewerInstalledVersion" = "11:FALSE"
         "InstallAllUsers" = "11:TRUE"
-        "ProductVersion" = "8:2.1.2"
+        "ProductVersion" = "8:2.2.0"
         "Manufacturer" = "8:Palladium"
         "ARPHELPTELEPHONE" = "8:"
         "ARPHELPLINK" = "8:"

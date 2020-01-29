@@ -354,6 +354,7 @@
     <None Remove="Scripts\2.2.0\46_MALARIAPARASITE.sql" />
     <None Remove="Scripts\2.2.0\47_Varicella.sql" />
     <None Remove="Scripts\2.2.0\48_Toxoplasma.sql" />
+    <None Remove="Scripts\2.2.0\49_PrepRegisterView.sql" />
     <None Remove="Scripts\2.2.0\49_Syphilis.sql" />
     <None Remove="Scripts\2.2.0\50_SputumGramStain.sql" />
     <None Remove="Scripts\2.2.0\51_SputumAFB3.sql" />
@@ -370,7 +371,42 @@
     <None Remove="Scripts\2.2.0\60_VWPatientCareEnding.sql" />
     <None Remove="Scripts\2.2.0\61_PatientView.sql" />
     <None Remove="Scripts\2.2.0\51_HEIRegimen.sql" />
+    <None Remove="Scripts\2.2.0\60_UpdatePrepLookupItemChanges.sql" />
+    <None Remove="Scripts\2.2.0\62_PersonVitalsView.sql" />
+    <None Remove="Scripts\2.2.0\63_UpdateServiceArea.sql" />
+    <None Remove="Scripts\2.2.0\64_UpdateSelfTestReferral.sql" />
+    <None Remove="Scripts\2.2.0\65_UpdateHeiRegimenDisplayName.sql" />
+    <None Remove="Scripts\2.2.0\66_DeleteFpMethodUndecided.sql" />
     <None Remove="Scripts\2.2.0\62_HTSLABRegister.sql" />
+    <None Remove="Scripts\2.2.0\63_NewPaedRegimens.sql" />
+    <None Remove="Scripts\2.2.0\64_OTZActivityForm.sql" />
+    <None Remove="Scripts\2.2.0\65_OTZModules.sql" />
+    <None Remove="Scripts\2.2.0\66_OtzCompletedModules.sql" />
+    <None Remove="Scripts\2.2.0\67_OtzActivityForms.sql" />
+    <None Remove="Scripts\2.2.0\67_EmrImplemention.sql" />
+    <None Remove="Scripts\2.2.0\68_ServiceCheckinTable.sql" />
+    <None Remove="Scripts\2.2.0\69_PrepEncountersView.sql" />
+    <None Remove="Scripts\2.2.0\70_UpdatePrepChanges.sql" />
+    <None Remove="Scripts\2.2.0\71_Prep_FormsView.sql" />
+    <None Remove="Scripts\2.2.0\72_OTZNumber.sql" />
+    <None Remove="Scripts\2.2.0\73_OTZCareEndedOptions.sql" />
+    <None Remove="Scripts\2.2.0\74_build.sql" />
+    <None Remove="Scripts\2.2.0\75_GetPossibleDuplicates.sql" />
+    <None Remove="Scripts\2.2.0\76_MergePatientData.sql" />
+    <None Remove="Scripts\2.2.0\74_CaregiveView.sql" />
+    <None Remove="Scripts\2.2.0\75_OVCCareEndedOptions.sql" />
+    <None Remove="Scripts\2.2.0\76_OvcEnrollmentForm.sql" />
+    <None Remove="Scripts\2.2.0\77_Lookupitems.sql" />
+    <None Remove="Scripts\2.2.0\78_OVCNumber.sql" />
+    <None Remove="Scripts\2.2.0\79_CareEndServiceAreaView.sql" />
+    <None Remove="Scripts\2.2.0\80_MergePatientData.sql" />
+    <None Remove="Scripts\2.2.0\81_releaseCandidate.sql" />
+    <None Remove="Scripts\2.2.0\82_OTZ_PatientView.sql" />
+    <None Remove="Scripts\2.2.0\83_PatientTreatmentTrackerView.sql" />
+    <None Remove="Scripts\2.2.0\84_FinalIQCareRelease.sql" />
+    <None Remove="Scripts\2.2.0\83_ReleaseCandidateLatest.sql" />
+    <None Remove="Scripts\2.2.0\84_ServiceArea.sql" />
+    <None Remove="Scripts\2.2.0\85_OTZServiceAreaIdentifier.sql" />
     <None Remove="Scripts\2.2.0\IQTools\01_PatientPopulationView.sql" />
     <None Remove="Scripts\2.2.0\IQTools\02_HTS_LABRegisternewer.sql" />
     <None Remove="Scripts\2.2.0\IQTools\03_ANCRegister.sql" />
@@ -755,6 +791,7 @@
     <EmbeddedResource Include="Scripts\2.2.0\48_AllergyView.sql" />
     <EmbeddedResource Include="Scripts\2.2.0\40_HTSEncountersView.sql" />
     <EmbeddedResource Include="Scripts\2.2.0\41_HtsFacilityDashboard.sql" />
+    <EmbeddedResource Include="Scripts\2.2.0\49_PrepRegisterView.sql" />
     <EmbeddedResource Include="Scripts\2.2.0\49_PrepStatus.sql" />
     <EmbeddedResource Include="Scripts\2.2.0\42_Release.sql" />
     <EmbeddedResource Include="Scripts\2.2.0\43_Urinalysis.sql" />
@@ -776,7 +813,41 @@
     <EmbeddedResource Include="Scripts\2.2.0\60_VWPatientCareEnding.sql" />
     <EmbeddedResource Include="Scripts\2.2.0\61_PatientView.sql" />
     <EmbeddedResource Include="Scripts\2.2.0\51_HEIRegimen.sql" />
+    <EmbeddedResource Include="Scripts\2.2.0\60_UpdatePrepLookupItemChanges.sql" />
+    <EmbeddedResource Include="Scripts\2.2.0\62_PersonVitalsView.sql" />
+    <EmbeddedResource Include="Scripts\2.2.0\63_UpdateServiceArea.sql" />
+    <EmbeddedResource Include="Scripts\2.2.0\64_UpdateSelfTestReferral.sql" />
+    <EmbeddedResource Include="Scripts\2.2.0\65_UpdateHeiRegimenDisplayName.sql" />
+    <EmbeddedResource Include="Scripts\2.2.0\66_DeleteFpMethodUndecided.sql" />
     <EmbeddedResource Include="Scripts\2.2.0\62_HTSLABRegister.sql" />
+    <EmbeddedResource Include="Scripts\2.2.0\63_NewPaedRegimens.sql" />
+    <EmbeddedResource Include="Scripts\2.2.0\64_OTZActivityForm.sql" />
+    <EmbeddedResource Include="Scripts\2.2.0\65_OTZModules.sql" />
+    <EmbeddedResource Include="Scripts\2.2.0\66_OtzCompletedModules.sql" />
+    <EmbeddedResource Include="Scripts\2.2.0\67_OtzActivityForms.sql" />
+    <EmbeddedResource Include="Scripts\2.2.0\67_EmrImplemention.sql" />
+    <EmbeddedResource Include="Scripts\2.2.0\68_ServiceCheckinTable.sql" />
+    <EmbeddedResource Include="Scripts\2.2.0\69_PrepEncountersView.sql" />
+    <EmbeddedResource Include="Scripts\2.2.0\70_UpdatePrepChanges.sql" />
+    <EmbeddedResource Include="Scripts\2.2.0\71_Prep_FormsView.sql" />
+    <EmbeddedResource Include="Scripts\2.2.0\72_OTZNumber.sql" />
+    <EmbeddedResource Include="Scripts\2.2.0\73_OTZCareEndedOptions.sql" />
+    <EmbeddedResource Include="Scripts\2.2.0\74_build.sql" />
+    <EmbeddedResource Include="Scripts\2.2.0\75_GetPossibleDuplicates.sql" />
+    <EmbeddedResource Include="Scripts\2.2.0\76_MergePatientData.sql" />
+    <EmbeddedResource Include="Scripts\2.2.0\74_CaregiveView.sql" />
+    <EmbeddedResource Include="Scripts\2.2.0\75_OVCCareEndedOptions.sql" />
+    <EmbeddedResource Include="Scripts\2.2.0\76_OvcEnrollmentForm.sql" />
+    <EmbeddedResource Include="Scripts\2.2.0\77_Lookupitems.sql" />
+    <EmbeddedResource Include="Scripts\2.2.0\78_OVCNumber.sql" />
+    <EmbeddedResource Include="Scripts\2.2.0\79_CareEndServiceAreaView.sql" />
+    <EmbeddedResource Include="Scripts\2.2.0\80_MergePatientData.sql" />
+    <EmbeddedResource Include="Scripts\2.2.0\81_releaseCandidate.sql" />
+    <EmbeddedResource Include="Scripts\2.2.0\82_OTZ_PatientView.sql" />
+    <EmbeddedResource Include="Scripts\2.2.0\83_PatientTreatmentTrackerView.sql" />
+    <EmbeddedResource Include="Scripts\2.2.0\84_FinalIQCareRelease.sql" />
+    <EmbeddedResource Include="Scripts\2.2.0\83_ReleaseCandidateLatest.sql" />
+    <EmbeddedResource Include="Scripts\2.2.0\84_ServiceArea.sql" />
     <EmbeddedResource Include="Scripts\2.2.0\IQTools\01_PatientPopulationView.sql" />
     <EmbeddedResource Include="Scripts\2.2.0\IQTools\02_HTS_LABRegisternewer.sql" />
     <EmbeddedResource Include="Scripts\2.2.0\IQTools\03_ANCRegister.sql" />
@@ -809,6 +880,7 @@
     <EmbeddedResource Include="Scripts\2.0.1\17_pr_Admin_GetFacilityList.sql" />
     <EmbeddedResource Include="Scripts\2.0.1\18_UpdateFacility.sql" />
     <EmbeddedResource Include="Scripts\2.2.0\50_PREP_RegisterView.sql" />
+    <EmbeddedResource Include="Scripts\2.2.0\85_OTZServiceAreaIdentifier.sql" />
   </ItemGroup>
 
   <ItemGroup>
@@ -838,6 +910,9 @@
     <EmbeddedResource Include="Scripts\2.1.0\13_PP_PatientPopulationView.sql" />
     <EmbeddedResource Include="Scripts\2.2.0\15_qaversion.sql" />
     <EmbeddedResource Include="Scripts\2.2.0\48_Toxoplasma.sql" />
+    <Reference Include="System">
+      <HintPath>System</HintPath>
+    </Reference>
     <Resource Include="Scripts\1.0.0.9\37_BO_AddPhsicalExaminationView.sql" />
   </ItemGroup>
 

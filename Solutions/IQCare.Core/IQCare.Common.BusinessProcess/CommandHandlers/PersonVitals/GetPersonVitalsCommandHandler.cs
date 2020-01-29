@@ -27,7 +27,7 @@ namespace IQCare.Common.BusinessProcess.CommandHandlers.PersonVitals
         {
             try
             {
-                var personVitals = _unitOfWork.Repository<PersonVitalsView>().Get(x => x.PersonId == request.PersonId && x.VisitDate.Value.Date == DateTime.Now.Date).OrderByDescending(x => x.CreateDate).AsEnumerable().ToList();
+                var personVitals = _unitOfWork.Repository<PersonVitalsView>().Get(x => x.PersonId == request.PersonId).OrderByDescending(x => x.CreateDate).AsEnumerable().ToList();
 
 
                 return await Task.FromResult(Result<List<PersonVitalsView>>.Valid(personVitals));

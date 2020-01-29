@@ -79,7 +79,7 @@ export class HtsComponent implements OnInit {
 
         this.form = this._formBuilder.group({
             EnrollmentDate: new FormControl('', [Validators.required]),
-            EnrollmentNumber: new FormControl('', [Validators.required]),
+            EnrollmentNumber: new FormControl(Math.random().toString(36).slice(5), [Validators.required]),
             populationType: new FormControl('', [Validators.required]),
             priorityPop: new FormControl('', [Validators.required]),
             KeyPopulation: new FormControl('', [Validators.required]),
@@ -90,9 +90,10 @@ export class HtsComponent implements OnInit {
         if (this.ageNumber < 15) {
             this.form.controls.populationType.disable({ onlySelf: true });
             this.form.controls.priorityPop.disable({ onlySelf: true });
-        }
-        this.form.controls.KeyPopulation.disable({ onlySelf: true });
-        this.form.controls.priorityPopulation.disable({ onlySelf: true });
+			this.form.controls.KeyPopulation.disable({ onlySelf: true });
+			this.form.controls.priorityPopulation.disable({ onlySelf: true });
+			this.form.controls.discordantPopulation.disable({ onlySelf: true });
+        }        
 
         this._lookupItemService.getByGroupName('PriorityPopulation').subscribe(
             (result) => {
@@ -118,9 +119,10 @@ export class HtsComponent implements OnInit {
                 const { registrationDate } = res[0];
                 if (registrationDate) {
                     this.minDate = registrationDate;
-                } else {
-                    this.minDate = new Date();
                 }
+                /* else {
+                    this.minDate = new Date();
+                } */
             }
         );
 
@@ -138,6 +140,15 @@ export class HtsComponent implements OnInit {
                     if (res.gender != null) {
                         if (res.gender.toLowerCase() == 'female') {
 
+                            if (res.ageNumber < 15 && res.ageNumber > 24) {
+                                if (this.priorityPops.length > 0) {
+                                    let index: number;
+                                    index = this.priorityPops.findIndex(x => x.itemName == 'Adolescent Girls and Young Women')
+                                    if (index > -1) {
+                                        this.priorityPops.splice(index, 1);
+                                    }
+                                }
+                         }
                             if (this.keyPops.length > 0) {
                                 let index: number;
                                 index = this.keyPops.findIndex(x => x.itemName == 'MSM');
@@ -157,12 +168,12 @@ export class HtsComponent implements OnInit {
 
                         if (res.gender.toLowerCase() == 'male') {
                             if (this.priorityPops.length > 0) {
-                            let index: number;
-                            index = this.priorityPops.findIndex(x => x.itemName == 'Adolescent Girls and Young Women')
-                            if (index > -1) {
-                                this.priorityPops.splice(index, 1);
+                                let index: number;
+                                index = this.priorityPops.findIndex(x => x.itemName == 'Adolescent Girls and Young Women')
+                                if (index > -1) {
+                                    this.priorityPops.splice(index, 1);
+                                }
                             }
-                        }
                         }
 
                     }
@@ -306,6 +317,7 @@ export class HtsComponent implements OnInit {
     }
 
     public submitEnrollment() {
+        console.log(this.form);
         if (!this.form.valid) {
             this.snotifyService.error('Please complete the form before submitting', 'Enrollment',
                 this.notificationService.getConfig());

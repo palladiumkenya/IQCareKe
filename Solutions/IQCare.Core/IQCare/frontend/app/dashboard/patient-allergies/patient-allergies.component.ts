@@ -24,7 +24,11 @@ export class PatientAllergiesComponent implements OnInit {
         this.route.params.subscribe(params => {
             this.personId = params['id'];
             this.personService.getPatientByPersonId(this.personId).subscribe(patient => {
-                this.getPatientAllergies(patient.patientId);
+                if (patient != null && patient != undefined) {
+                    if (patient.patientId != null) {
+                        this.getPatientAllergies(patient.patientId);
+                    }
+                }
             });
         });
     }

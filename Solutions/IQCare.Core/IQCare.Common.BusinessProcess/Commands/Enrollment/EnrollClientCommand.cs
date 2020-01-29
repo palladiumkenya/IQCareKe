@@ -20,6 +20,7 @@ namespace IQCare.Common.BusinessProcess.Commands.Enrollment
         public int PersonId { get; set; }
         public int CreatedBy { get; set; }
         public string PosId { get; set; }
+        public bool transferIn { get; set; }
     }
 
     public class EnrollClientResponse

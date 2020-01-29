@@ -38,6 +38,8 @@ import { InlineSearchComponent } from './inline-search/inline-search.component';
 import { YesNoResolver } from '../pmtct/_services/yesno.resolver';
 import { CheckDuplicatesComponent } from './person/check-duplicates/check-duplicates.component';
 import {AddWaitingListComponent} from '../shared/add-waiting-list/add-waiting-list.component';
+import { MergeComponent } from './merge/merge.component';
+import { RecordsMergeComponent } from './records-merge/records-merge.component';
 @NgModule({
     imports: [
         CommonModule,
@@ -60,7 +62,7 @@ import {AddWaitingListComponent} from '../shared/add-waiting-list/add-waiting-li
     ],
     declarations: [SearchComponent, RegisterComponent,
         ViewComponent, PersoncontactsComponent,
-        InlineSearchComponent, CheckDuplicatesComponent],
+        InlineSearchComponent, CheckDuplicatesComponent, MergeComponent, RecordsMergeComponent],
     providers: [
         CountyResolver,
         CountyService,
@@ -81,12 +83,12 @@ import {AddWaitingListComponent} from '../shared/add-waiting-list/add-waiting-li
         PersoncontactsComponent,
         InlineSearchComponent,
         CheckDuplicatesComponent,
-        AddWaitingListComponent
-
+        AddWaitingListComponent,
+        RecordsMergeComponent
     ],
     exports: [
         InlineSearchComponent,
-        CheckDuplicatesComponent
+        CheckDuplicatesComponent,
     ]
 })
 export class RecordsModule { }
