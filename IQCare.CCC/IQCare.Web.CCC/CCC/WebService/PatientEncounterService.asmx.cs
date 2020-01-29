@@ -2416,8 +2416,16 @@ namespace IQCare.Web.CCC.WebService
             int val = 0;
             //save dispensing
             val = patientEncounter.saveDispensing(Convert.ToInt32(qtydis),Convert.ToInt32(rowid),Convert.ToDateTime(dispensedate));
+            if(val > 0)
+            {
+                return val.ToString();
+            }
+            else
+            {
+                return "error saving";
+            }
             //save appointment
-            return val.ToString();
+           
         }
 
         [WebMethod(EnableSession = true)]

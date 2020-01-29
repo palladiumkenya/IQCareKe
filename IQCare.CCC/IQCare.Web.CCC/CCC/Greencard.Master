@@ -91,6 +91,9 @@
         .masterfooter .row{margin-right:0px !important;margin-left: 0px !important;}
         .row{margin-right:0px !important;margin-left: 0px !important;}
         btn-shadow {box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);}
+        .disablepage{display: none;}
+        .disablepageloadingtable{height: 100%;width: 100%;display:table;}
+        .disablepageloadingcell{height: 100%;width: 100%;display:table-cell;vertical-align: middle;opacity:1;color: red;font-size: 50px;}
     </style>
    
 </head>
@@ -336,6 +339,14 @@
 
 	 </div><!-- .container-fluid -->
 
+    <div class="disablepage" style="border: 1px solid Red;position:fixed;height: 100%;width: 100%;top:0px;z-index:999;opacity: 0.3;background-color: #777788;">
+        <div class="disablepageloadingtable">
+            <div class="disablepageloadingcell">
+                <i class="fa fa-spinner fa-spin" aria-hidden="true"></i>
+            </div>
+        </div>
+    </div>
+
 
 	<nav role="navigation" class="navbar navbar-default">
 		 <div class="container-fluid masterfooter">              
@@ -375,12 +386,12 @@
 		$(document).ready(function() {
             var PatientTracing = '<%=PatientTrace%>';
             console.log(PatientTracing);
-
             var referrer = document.referrer;
             var sessionpk = <%=Convert.ToInt32(Session["PatientPK"])%>;
             var sessionpmvid = <%=Convert.ToInt32(Session["PatientMasterVisitId"])%>;
 
             if (referrer.includes("frontend/dashboard/personhome") && sessionpmvid > 0) {
+                $('.disablepage').show();
                 $.ajax({
 					type: "POST",
 					url: "../WebService/PatientMasterVisitService.asmx/PatientCheckoutNoParams",
@@ -401,7 +412,8 @@
 						        startEncounter = 1; /* denotes an active encounter */
 						        stopEncounter = 0;
                                 $('#<%=lblRegistration.ClientID%>').text("Edit Registration");
-						        toastr.info("Patient Service Checkedin successfully!");
+                                toastr.info("Patient Service Checkedin successfully!");
+                                $('.disablepage').hide();
 					        },
 					        error:function(xhr, errorType, exception) {
 						        var jsonError = jQuery.parseJSON(xhr.responseText);

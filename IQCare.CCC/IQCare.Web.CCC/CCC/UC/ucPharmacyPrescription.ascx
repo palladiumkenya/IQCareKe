@@ -591,7 +591,9 @@
                 var qtydispensed = $(this).val();
                 var dispenseDate = $("#<%=AppointmentDate.ClientID%>").val();
                 var inputid = $(this).attr('id');
+                
                 var rowidentifier = inputid.replace('qtyeverdispensedinputid', '');
+                alert('qty:'+qtydispensed+' ident:'+rowidentifier+' Date:'+dispenseDate);
                 $.ajax({
                     url: '../WebService/PatientEncounterService.asmx/saveDispensing',
                     type: 'POST',
@@ -630,7 +632,7 @@
 
                     success: function (data) {
                         toastr.success(data.d, "All dispensing Saved Successfully");
-                        location.reload();
+                        //location.reload();
                 }
             });
         }
