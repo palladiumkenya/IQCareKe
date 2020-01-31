@@ -42,11 +42,13 @@ const routes: Routes = [
     },
     {
         path: 'facilityDashboard',
-        component: FacilityDashboardComponent
+        component: FacilityDashboardComponent,
+		pathMatch: 'full'
     },
     {
         path: 'HtsDashboard',
-        component: HtsDashboardComponent
+        component: HtsDashboardComponent,
+		pathMatch: 'full'
     },
     {
         path: 'reenrollment',
