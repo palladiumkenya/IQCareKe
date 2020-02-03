@@ -519,18 +519,7 @@
             <tbody></tbody>
         </table>
           <br />
-        <div class="form-group">
-            <div class="col-md-2">
-                <label class="control-label pull-left">Next Pickup Date</label>
-            </div>
-            <div class="col-md-4">
-                <div class='input-group date' id='NextAppointmentDate'>
-					<span class="input-group-addon">
-						<span class="glyphicon glyphicon-calendar"></span>
-					</span>
-					<asp:TextBox runat="server"  CssClass="form-control input-sm" ID="NextPickupDate" onblur="DateFormat(this,this.value,event,false,'3')" onkeyup="DateFormat(this,this.value,event,false,'3')" required ="True" data-parsley-min-message="Input the appointment date"></asp:TextBox>
-				</div>
-            </div> 
+        <div class="form-group"> 
         </div>
           <br />
       </div>
@@ -581,7 +570,7 @@
             //var rowidentifier = submitid.replace('savebtnid', '');
             //get value of qtydispensed
             //get value of the next visit
-            var nextpickupdate = $("#<%=NextPickupDate.ClientID%>").val();
+           //put next pick up date if required here
             var dispenseDate = $("#<%=AppointmentDate.ClientID%>").val();
             //var nextpickupdate = $("#" + rowidentifier + "nextpickupdateinputid").val();
             //get patient id
@@ -593,7 +582,7 @@
                 var inputid = $(this).attr('id');
                 
                 var rowidentifier = inputid.replace('qtyeverdispensedinputid', '');
-                alert('qty:'+qtydispensed+' ident:'+rowidentifier+' Date:'+dispenseDate);
+                //alert('qty:'+qtydispensed+' ident:'+rowidentifier+' Date:'+dispenseDate);
                 $.ajax({
                     url: '../WebService/PatientEncounterService.asmx/saveDispensing',
                     type: 'POST',
@@ -606,7 +595,8 @@
                     }
                 });
             });
-             savenextpickup(nextpickupdate);
+            location.reload();
+             //savenextpickup(nextpickupdate);
         });
 
         function savenextpickup(nextpickupdate) {

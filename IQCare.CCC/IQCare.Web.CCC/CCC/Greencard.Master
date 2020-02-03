@@ -387,10 +387,12 @@
             var PatientTracing = '<%=PatientTrace%>';
             console.log(PatientTracing);
             var referrer = document.referrer;
+            //var referrer = "CCC/patient/patientfinder";
             var sessionpk = <%=Convert.ToInt32(Session["PatientPK"])%>;
             var sessionpmvid = <%=Convert.ToInt32(Session["PatientMasterVisitId"])%>;
 
-            if (referrer.includes("frontend/dashboard/personhome") && sessionpmvid > 0) {
+        
+            if ((referrer.includes("frontend/dashboard/personhome") || referrer.includes("frontend/queue/view")) && sessionpmvid > 0) {
                 $('.disablepage').show();
                 $.ajax({
 					type: "POST",

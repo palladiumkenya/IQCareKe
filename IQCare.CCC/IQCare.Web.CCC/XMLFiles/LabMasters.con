@@ -820,7 +820,7 @@
     <SubTestId>55</SubTestId>
     <SubTestName>Stool Status</SubTestName>
     <TestId>21</TestId>
-    <DeleteFlag>false</DeleteFlag>
+    <DeleteFlag>true</DeleteFlag>
   </Lnk_TestParameter>
   <Lnk_TestParameter>
     <SubTestId>56</SubTestId>
@@ -1102,7 +1102,7 @@
     <SubTestId>105</SubTestId>
     <SubTestName>Stool</SubTestName>
     <TestId>21</TestId>
-    <DeleteFlag>false</DeleteFlag>
+    <DeleteFlag>true</DeleteFlag>
   </Lnk_TestParameter>
   <Lnk_TestParameter>
     <SubTestId>106</SubTestId>
@@ -1174,7 +1174,7 @@
     <SubTestId>118</SubTestId>
     <SubTestName>Cryptococcus Antigen Test</SubTestName>
     <TestId>96</TestId>
-    <DeleteFlag>false</DeleteFlag>
+    <DeleteFlag>true</DeleteFlag>
   </Lnk_TestParameter>
   <Lnk_TestParameter>
     <SubTestId>119</SubTestId>
@@ -1301,7 +1301,7 @@
     <MaxNormalRange>1.50</MaxNormalRange>
     <TextNormalRange />
     <DefaultUnit>true</DefaultUnit>
-    <UnitId>133</UnitId>
+    <UnitId>139</UnitId>
     <DeleteFlag>false</DeleteFlag>
   </Lnk_LabValue>
   <Lnk_LabValue>
@@ -1749,7 +1749,7 @@
     <MaxBoundaryValue>1000.00</MaxBoundaryValue>
     <TextNormalRange />
     <DefaultUnit>false</DefaultUnit>
-    <UnitId>135</UnitId>
+    <UnitId>139</UnitId>
     <DeleteFlag>false</DeleteFlag>
   </Lnk_LabValue>
   <Lnk_LabValue>
@@ -1781,6 +1781,76 @@
     <Result>Positive</Result>
   </Lnk_ParameterResult>
   <Lnk_ParameterResult>
+    <ResultId>1424</ResultId>
+    <ParameterId>15</ParameterId>
+    <Result>Negative</Result>
+  </Lnk_ParameterResult>
+  <Lnk_ParameterResult>
+    <ResultId>1423</ResultId>
+    <ParameterId>15</ParameterId>
+    <Result>Positive</Result>
+  </Lnk_ParameterResult>
+  <Lnk_ParameterResult>
+    <ResultId>1440</ResultId>
+    <ParameterId>16</ParameterId>
+    <Result>Negative</Result>
+  </Lnk_ParameterResult>
+  <Lnk_ParameterResult>
+    <ResultId>1439</ResultId>
+    <ParameterId>16</ParameterId>
+    <Result>Positive</Result>
+  </Lnk_ParameterResult>
+  <Lnk_ParameterResult>
+    <ResultId>1438</ResultId>
+    <ParameterId>17</ParameterId>
+    <Result>Negative</Result>
+  </Lnk_ParameterResult>
+  <Lnk_ParameterResult>
+    <ResultId>1437</ResultId>
+    <ParameterId>17</ParameterId>
+    <Result>Positive</Result>
+  </Lnk_ParameterResult>
+  <Lnk_ParameterResult>
+    <ResultId>1436</ResultId>
+    <ParameterId>18</ParameterId>
+    <Result>Negative</Result>
+  </Lnk_ParameterResult>
+  <Lnk_ParameterResult>
+    <ResultId>1435</ResultId>
+    <ParameterId>18</ParameterId>
+    <Result>Positive</Result>
+  </Lnk_ParameterResult>
+  <Lnk_ParameterResult>
+    <ResultId>1434</ResultId>
+    <ParameterId>19</ParameterId>
+    <Result>Negative</Result>
+  </Lnk_ParameterResult>
+  <Lnk_ParameterResult>
+    <ResultId>1433</ResultId>
+    <ParameterId>19</ParameterId>
+    <Result>Positive</Result>
+  </Lnk_ParameterResult>
+  <Lnk_ParameterResult>
+    <ResultId>1432</ResultId>
+    <ParameterId>20</ParameterId>
+    <Result>Negative</Result>
+  </Lnk_ParameterResult>
+  <Lnk_ParameterResult>
+    <ResultId>1431</ResultId>
+    <ParameterId>20</ParameterId>
+    <Result>Positive</Result>
+  </Lnk_ParameterResult>
+  <Lnk_ParameterResult>
+    <ResultId>1448</ResultId>
+    <ParameterId>23</ParameterId>
+    <Result>Negative</Result>
+  </Lnk_ParameterResult>
+  <Lnk_ParameterResult>
+    <ResultId>1447</ResultId>
+    <ParameterId>23</ParameterId>
+    <Result>Positive</Result>
+  </Lnk_ParameterResult>
+  <Lnk_ParameterResult>
     <ResultId>3</ResultId>
     <ParameterId>53</ParameterId>
     <Result>Confirmatory</Result>
@@ -1794,6 +1864,26 @@
     <ResultId>1</ResultId>
     <ParameterId>53</ParameterId>
     <Result>Postive</Result>
+  </Lnk_ParameterResult>
+  <Lnk_ParameterResult>
+    <ResultId>1446</ResultId>
+    <ParameterId>60</ParameterId>
+    <Result>Negative</Result>
+  </Lnk_ParameterResult>
+  <Lnk_ParameterResult>
+    <ResultId>1445</ResultId>
+    <ParameterId>60</ParameterId>
+    <Result>Positive</Result>
+  </Lnk_ParameterResult>
+  <Lnk_ParameterResult>
+    <ResultId>1444</ResultId>
+    <ParameterId>61</ParameterId>
+    <Result>Negative</Result>
+  </Lnk_ParameterResult>
+  <Lnk_ParameterResult>
+    <ResultId>1443</ResultId>
+    <ParameterId>61</ParameterId>
+    <Result>Positive</Result>
   </Lnk_ParameterResult>
   <Lnk_ParameterResult>
     <ResultId>1416</ResultId>
@@ -1833,6 +1923,56 @@
   <Lnk_ParameterResult>
     <ResultId>1421</ResultId>
     <ParameterId>68</ParameterId>
+    <Result>Positive</Result>
+  </Lnk_ParameterResult>
+  <Lnk_ParameterResult>
+    <ResultId>1442</ResultId>
+    <ParameterId>71</ParameterId>
+    <Result>Negative</Result>
+  </Lnk_ParameterResult>
+  <Lnk_ParameterResult>
+    <ResultId>1441</ResultId>
+    <ParameterId>71</ParameterId>
+    <Result>Positive</Result>
+  </Lnk_ParameterResult>
+  <Lnk_ParameterResult>
+    <ResultId>1450</ResultId>
+    <ParameterId>72</ParameterId>
+    <Result>Negative</Result>
+  </Lnk_ParameterResult>
+  <Lnk_ParameterResult>
+    <ResultId>1449</ResultId>
+    <ParameterId>72</ParameterId>
+    <Result>Positive</Result>
+  </Lnk_ParameterResult>
+  <Lnk_ParameterResult>
+    <ResultId>1430</ResultId>
+    <ParameterId>75</ParameterId>
+    <Result>Negative</Result>
+  </Lnk_ParameterResult>
+  <Lnk_ParameterResult>
+    <ResultId>1429</ResultId>
+    <ParameterId>75</ParameterId>
+    <Result>Positive</Result>
+  </Lnk_ParameterResult>
+  <Lnk_ParameterResult>
+    <ResultId>1428</ResultId>
+    <ParameterId>77</ParameterId>
+    <Result>Negative</Result>
+  </Lnk_ParameterResult>
+  <Lnk_ParameterResult>
+    <ResultId>1427</ResultId>
+    <ParameterId>77</ParameterId>
+    <Result>Positive</Result>
+  </Lnk_ParameterResult>
+  <Lnk_ParameterResult>
+    <ResultId>1426</ResultId>
+    <ParameterId>80</ParameterId>
+    <Result>Negative</Result>
+  </Lnk_ParameterResult>
+  <Lnk_ParameterResult>
+    <ResultId>1425</ResultId>
+    <ParameterId>80</ParameterId>
     <Result>Positive</Result>
   </Lnk_ParameterResult>
   <Lnk_ParameterResult>
