@@ -1033,13 +1033,13 @@ export class PharmOrderformComponent implements OnInit {
         this.pharmFormGroup.controls.chkProphylaxis.setValue('');
         this.pharmFormGroup.controls.frmFreq.setValue('');
         this.pharmFormGroup.controls.txtDuration.setValue('');
-        this.pharmFormGroup.controls.frmPeriodTaken.setValue('');
-        this.pharmFormGroup.controls.frmReason.setValue('');
-        this.pharmFormGroup.controls.frmRegimen.setValue('');
-        this.pharmFormGroup.controls.frmRegimenLine.setValue('');
+      //  this.pharmFormGroup.controls.frmPeriodTaken.setValue('');
+     //   this.pharmFormGroup.controls.frmReason.setValue('');
+       // this.pharmFormGroup.controls.frmRegimen.setValue('');
+       // this.pharmFormGroup.controls.frmRegimenLine.setValue('');
 
-        this.pharmFormGroup.controls.frmPeriodTaken.setValue('');
-        this.pharmFormGroup.controls.frmReason.setValue('');
+       // this.pharmFormGroup.controls.frmPeriodTaken.setValue('');
+       // this.pharmFormGroup.controls.frmReason.setValue('');
 
 
     }
@@ -1252,6 +1252,7 @@ export class PharmOrderformComponent implements OnInit {
         this.userId = JSON.parse(localStorage.getItem('appUserId'));
 
         if (this.patientMasterVisitId > 0) {
+            this.spinner.show();
             let locationId: number;
             locationId = JSON.parse(localStorage.getItem('appLocationId'));
             this.pharmacyservice.AddSaveUpdatePharmacyRecord(this.person.ptn_pk, this.patientMasterVisitId,
