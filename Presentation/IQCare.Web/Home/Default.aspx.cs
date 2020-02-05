@@ -128,6 +128,11 @@ namespace IQCare.Web.Home
                         Guid g = Guid.NewGuid();
                         row["ResourceUrl"] = string.Format("../{1}/frmPharmacy_Dashboard.aspx?key={0}", g.ToString(), folderName);
                     }
+                    else if (System.IO.File.Exists(Server.MapPath(string.Format("~/{0}/Home.aspx", folderName))))
+                    {
+                        Guid g = Guid.NewGuid();
+                        row["ResourceUrl"] = string.Format("../{1}/Home.aspx?key={0}", g.ToString(), folderName);
+                    }
                     else { row["ResourceUrl"] = ""; }
                 }
                 theDT.Rows.Add(row);
