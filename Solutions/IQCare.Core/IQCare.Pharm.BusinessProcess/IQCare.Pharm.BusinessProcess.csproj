@@ -18,6 +18,7 @@
     <ProjectReference Include="..\IQCare.Library\IQCare.Library.csproj" />
     <ProjectReference Include="..\IQCare.Pharm.Core\IQCare.Pharm.Core.csproj" />
     <ProjectReference Include="..\IQCare.Pharm.Infrastructure\IQCare.Pharm.Infrastructure.csproj" />
+    <ProjectReference Include="..\IQCare.Prep.Core\IQCare.Prep.Core.csproj" />
   </ItemGroup>
 
 </Project>

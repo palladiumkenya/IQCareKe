@@ -70,6 +70,6 @@ namespace IQCare.Pharm.BusinessProcess.Commands.PatientPharmacy
 
     public class SaveUpdatePharmacyResponse
     {
-        public int Ptn_Pharmacy_Pk { get; set; }
+        public List<String> Ptn_Pharmacy_Pk { get; set; }
     }
 }
