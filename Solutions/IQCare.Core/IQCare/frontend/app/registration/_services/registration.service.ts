@@ -107,12 +107,13 @@ export class RegistrationService {
                 catchError(this.errorHandler.handleError<any>('addBasicPerson'))
             );
     }
-    public addPatient(personId: number, userId: number, enrollmentDate: string, posId: string): Observable<any> {
+    public addPatient(personId: number, userId: number, enrollmentDate: string, posId: string, patientType: number = 0): Observable<any> {
         const Indata = {
             PersonId: personId,
             UserId: userId,
             EnrollmentDate: enrollmentDate,
-            PosId: posId
+            PosId: posId,
+            PatientType: patientType
         };
 
         return this.http.post<any>(this.API_URL + this._url + '/addPatient', JSON.stringify(Indata), httpOptions).pipe(

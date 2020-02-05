@@ -1157,7 +1157,7 @@ namespace IQCare.Common.BusinessProcess.Services
             }
         }
 
-        public async Task<Patient> UpdatePatient(int patientId, DateTime dateOfBirth, string facilityId)
+        public async Task<Patient> UpdatePatient(int patientId, DateTime dateOfBirth, string facilityId, int patientType = 0)
         {
             try
             {
@@ -1165,9 +1165,18 @@ namespace IQCare.Common.BusinessProcess.Services
                 var facilityIdParameter = new SqlParameter("@facilityId", facilityId);
                 var patientIdParameter = new SqlParameter("@patientId", patientId);
 
+                if(patientType == 0)
+                {
+                    var result = await _unitOfWork.Repository<LookupItemView>()
+                    .Get(x => x.MasterName == "PatientType" && x.ItemName == "New").FirstOrDefaultAsync();
+                    patientType = result.ItemId;
+                }
+
+                var patientTypeParameter = new SqlParameter("@PatientType", patientType);
+
                 StringBuilder sql = new StringBuilder();
                 sql.Append("exec pr_OpenDecryptedSession;");
-                sql.Append($"UPDATE Patient SET DateOfBirth = @dateOfBirth, FacilityId = @facilityId WHERE Id = @patientId;");
+                sql.Append($"UPDATE Patient SET DateOfBirth = @dateOfBirth, FacilityId = @facilityId, PatientType = @PatientType WHERE Id = @patientId;");
                 sql.Append($"SELECT [Id],[ptn_pk],[PersonId],[PatientIndex],[PatientType],[FacilityId],[Active],[DateOfBirth]," +
                            $"[DobPrecision],CAST(DECRYPTBYKEY(NationalId) AS VARCHAR(50)) [NationalId],[DeleteFlag],[CreatedBy]," +
                            $"[CreateDate],[AuditData],[RegistrationDate] FROM Patient WHERE Id = @patientId;");
@@ -1178,7 +1187,8 @@ namespace IQCare.Common.BusinessProcess.Services
                 {
                     dateOfBirthParameter,
                     facilityIdParameter,
-                    patientIdParameter
+                    patientIdParameter,
+                    patientTypeParameter
                 });
                 return patientUpdate.FirstOrDefault();
             }
@@ -1188,13 +1198,23 @@ namespace IQCare.Common.BusinessProcess.Services
             }
         }
 
-        public async Task<Patient> AddPatient(int personID, int userId, int ptn_pk, string facilityId = "")
+        public async Task<Patient> AddPatient(int personID, int userId, int ptn_pk, string facilityId = "", int typeOfPatient=0)
         {
             try
             {
                 var facility = await _unitOfWork.Repository<Facility>().Get(x => x.DeleteFlag == 0).FirstOrDefaultAsync();
                 var patientType = await _unitOfWork.Repository<LookupItemView>()
                     .Get(x => x.MasterName == "PatientType" && x.ItemName == "New").FirstOrDefaultAsync();
+                if (typeOfPatient == 0)
+                {
+                    patientType = await _unitOfWork.Repository<LookupItemView>()
+                    .Get(x => x.MasterName == "PatientType" && x.ItemName == "New").FirstOrDefaultAsync();
+                }
+                else
+                {
+                    patientType = await _unitOfWork.Repository<LookupItemView>()
+                    .Get(x => x.MasterName == "PatientType" && x.ItemId == typeOfPatient).FirstOrDefaultAsync();
+                }                
 
                 var patient = await this.GetPatientByPersonId(personID);
                 if (patient == null)

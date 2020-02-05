@@ -10,6 +10,7 @@ namespace IQCare.Common.BusinessProcess.Commands.PersonCommand
         public int UserId { get; set; }
         public DateTime EnrollmentDate { get; set; }
         public string PosId { get; set; }
+        public int PatientType { get; set; }
     }
 
     public class AddPatientResponse

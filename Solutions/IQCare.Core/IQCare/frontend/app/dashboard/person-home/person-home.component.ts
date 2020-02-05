@@ -15,6 +15,8 @@ import { LookupItemService } from '../../shared/_services/lookup-item.service';
 import { AddWaitingListComponent } from '../../shared/add-waiting-list/add-waiting-list.component';
 import * as moment from 'moment';
 import { mergeMap } from 'rxjs/operators';
+import {SearchService} from '../../registration/_services/search.service';
+import {environment} from '../../../environments/environment';
 @Component({
 
     selector: 'app-person-home',
@@ -59,7 +61,8 @@ export class PersonHomeComponent implements OnInit {
         private router: Router,
         public zone: NgZone,
         private dialog: MatDialog,
-        private store: Store<AppState>) {
+        private store: Store<AppState>,
+        private searchService: SearchService) {
         this.person = new PersonView();
         this.encounterDetail = new EncounterDetails();
     }
@@ -141,7 +144,15 @@ export class PersonHomeComponent implements OnInit {
         this.store.dispatch(new Consent.ClearState());
         this.getPatientDetailsById(this.personId);
 
-
+        if (environment.production) {
+            this.searchService.setSession(0, 0).subscribe((res) => {
+                console.log(res);
+            });
+            
+            this.searchService.resetSession().subscribe((result) => {
+                console.log(result);
+            });
+        }
     }
 
     mapOrder(array, order, key) {

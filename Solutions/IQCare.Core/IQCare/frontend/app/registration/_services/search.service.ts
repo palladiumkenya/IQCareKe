@@ -46,8 +46,7 @@ export class SearchService {
     public setSession(personId: number, patientPk: number): Observable<any> {
         const Indata = {
             'personId': personId,
-            'patientPk': patientPk,
-
+            'patientPk': patientPk
         };
         return this.http.post(location.protocol + '//' + window.location.hostname + ':' + window.location.port
             + '/IQCare/CCC/WebService/PersonService.asmx/SetPatientSessionFromUniversalRegistration',
@@ -55,6 +54,19 @@ export class SearchService {
                 tap((setSession: any) => this.errorHandler.log(`setSession`)),
                 catchError(this.errorHandler.handleError<any>('setSession'))
             );
+    }
+    
+    public resetSession(): Observable<any> {
+        const Indata = {
+            
+        };
+        
+        return this.http.post(location.protocol + '//' + window.location.hostname + ':' + window.location.port
+            + '/IQCare/CCC/WebService/PersonService.asmx/ResetPatientSessionFromUniversalRegistration', 
+            JSON.stringify(Indata), httpOptions).pipe(
+            tap((resetSession: any) => this.errorHandler.log(`resetSession`)),
+            catchError(this.errorHandler.handleError<any>('resetSession'))
+        );
     }
 
     public setVisitSession(patientMasterVisitId: number, Age: number, patientType: number): Observable<any> {

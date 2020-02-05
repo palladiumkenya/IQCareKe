@@ -121,12 +121,17 @@ namespace IQCare.Web.Home
                     }
                     else if (folderName == "CCC")
                     {
-                        row["ResourceUrl"] = string.Format("/frontend/dashboard/facilityDashboard");
+                        row["ResourceUrl"] = string.Format("/frontend/#/dashboard/facilityDashboard");
                     }
                     else if(System.IO.File.Exists(Server.MapPath(string.Format("~/{0}/frmPharmacy_Dashboard.aspx", folderName))))
                     {
                         Guid g = Guid.NewGuid();
                         row["ResourceUrl"] = string.Format("../{1}/frmPharmacy_Dashboard.aspx?key={0}", g.ToString(), folderName);
+                    }
+                    else if (System.IO.File.Exists(Server.MapPath(string.Format("~/{0}/Home.aspx", folderName))))
+                    {
+                        Guid g = Guid.NewGuid();
+                        row["ResourceUrl"] = string.Format("../{1}/Home.aspx?key={0}", g.ToString(), folderName);
                     }
                     else { row["ResourceUrl"] = ""; }
                 }
