@@ -849,7 +849,6 @@
     <EmbeddedResource Include="Scripts\2.2.0\83_PatientTreatmentTrackerView.sql" />
     <EmbeddedResource Include="Scripts\2.2.0\84_FinalIQCareRelease.sql" />
     <EmbeddedResource Include="Scripts\2.2.0\83_ReleaseCandidateLatest.sql" />
-    <EmbeddedResource Include="Scripts\2.2.0\84_ServiceArea.sql" />
     <EmbeddedResource Include="Scripts\2.2.0\86_FastTrack.sql" />
     <EmbeddedResource Include="Scripts\2.2.0\87_PatchRelease.sql" />
     <EmbeddedResource Include="Scripts\2.2.0\87_ServiceArea.sql" />
