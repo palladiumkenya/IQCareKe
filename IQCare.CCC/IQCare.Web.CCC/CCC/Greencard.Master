@@ -166,7 +166,7 @@
 									<span class=""></span> Find /Add Patients<span class="badge"></span>
 								</a>
 
-								<a href='<%=ResolveClientUrl("/frontend/record") %>' class="list-group-item">
+								<a href='<%=ResolveClientUrl("/frontend/#/record") %>' class="list-group-item">
 									<span class="fa fa-search fa-2x pull-left text-warning">
 									</span>
                                         <strong>Find Patients</strong>
@@ -175,7 +175,7 @@
                                         </span>
 								</a>
 								
-								<a  href='<%=ResolveClientUrl("/frontend/record/person") %>' class="list-group-item">
+								<a  href='<%=ResolveClientUrl("/frontend/#/record/person") %>' class="list-group-item" id="lblRegisterPersonLink">
 									<span class="fa fa-user-plus fa-2x pull-left text-warning"></span><strong class="text-info">
                                         <asp:Label ID="lblRegistration" runat="server" Text="Label"></asp:Label></strong> 
 								</a>
@@ -373,7 +373,9 @@
 	<script type="text/javascript">
 		$(document).ready(function() {
             var PatientTracing = '<%=PatientTrace%>';
-		    console.log(PatientTracing);
+            var PersonId = '<%=PersonId%>';
+            console.log("PersonId" ,PersonId);
+
 		    if (PatientTracing == "yes") {
                 $("#patientTracing").show();
                 $("#patientTracingLink").show();
@@ -469,6 +471,7 @@
 										startEncounter = 1; /* denotes an active encounter */
 										stopEncounter = 0;
                                         $('#<%=lblRegistration.ClientID%>').text("Edit Registration");
+                                        $("#lblRegisterPersonLink").attr("href", "/frontend/#/record/person/update/" + PersonId);
 										toastr.info("Patient Service Checkedin successfully!");
 									}
 								},
@@ -582,6 +585,7 @@
 
 		    function encounterStarted() {
                 $('#<%=lblRegistration.ClientID%>').text("Edit Registration");
+                $("#lblRegisterPersonLink").attr("href", "/frontend/#/record/person/update/" + PersonId);
 				$("#titlePatientBaseline").show();
 				$("#menuBaseline").show();
 				$("#menuFamilyTesting").show();
