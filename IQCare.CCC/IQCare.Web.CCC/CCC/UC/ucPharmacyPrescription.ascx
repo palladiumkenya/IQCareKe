@@ -1504,6 +1504,43 @@
                             }
 
                         };
+                        console.log(DrugTableArray);
+                       this.DrugTableArray.forEach
+                            ((x => {
+                                if (x.TreatmentPlan.toString() !== treatmentPlan.toString()
+                                    && x.TreatmentProgram.toString() == treatmentProgramName.toString()) {
+                  
+                   x.TreatmentProgram= treatmentProgramName,
+                    x.TreatmentPlan= treatmentPlan,
+                    x.TreatmentPlanText= treatmentPlanName ,
+                   x.TreatmentPlanReason = treatmentPlanReasonName; 
+                    x.TreatmentPlanReasonId=treatmentPlanReason;
+                    x.Period=periodTaken;
+                                    x.PeriodTakenText = periodTakenText == "Select" ? "" : periodTakenText;
+
+
+                }}
+                            ));
+                       
+                        if (arrDrugPrescriptionUI.length > 0) {
+                            arrDrugPrescriptionUI.forEach(x => {
+                                if (x[2].toString() !== treatmentPlan.toString()
+                                    && x[1].toString() == treatmentProgramName.toString()) {
+
+                                    x[1] = treatmentProgramName,
+                                        x[2] = treatmentPlan,
+                                        x[3] = (treatmentPlanName== "Select")?"":treatmentPlanName,
+                                        x[4] = (treatmentPlanReasonName == "Select") ? "" : treatmentPlanReasonName;
+                                    x[5] = treatmentPlanReason;
+                                    x[10] = periodTaken;
+                                    x[11]= (periodTakenText == "Select") ? "" : periodTakenText;
+                                }
+                            });
+                        DrugPrescriptionTable
+                                    .clear()
+                                    .draw();
+                            DrawDataTable("dtlDrugPrescriptionFrequency", arrDrugPrescriptionUI);
+                        }
 
                         if (regimen > 0) {
                             console.log("DrugTableArray", DrugTableArray);
@@ -1721,6 +1758,41 @@
                             }
 
                         };
+
+                           this.DrugTableArray.forEach
+                            ((x => {
+                             if (x.TreatmentPlan.toString() !== treatmentPlan.toString()
+                                    && x.TreatmentProgram.toString() == treatmentProgramName.toString()) {
+                
+                   x.TreatmentProgram= treatmentProgramName,
+                    x.TreatmentPlan= treatmentPlan,
+                    x.TreatmentPlanText= treatmentPlanName,
+                   x.TreatmentPlanReason = treatmentPlanReasonName; 
+                    x.TreatmentPlanReasonId=treatmentPlanReason;
+                    x.Period=periodTaken.toString();
+                    x.PeriodTakenText=periodTakenText == "Select" ? "" : periodTakenText;
+                }}
+                ));
+                             if (arrDrugPrescriptionUI.length > 0) {
+                            arrDrugPrescriptionUI.forEach(x => {
+                                if (x[2].toString() !== treatmentPlan.toString()
+                                    && x[1].toString() == treatmentProgramName.toString()) {
+
+                                    x[1] = treatmentProgramName,
+                                        x[2] = treatmentPlan,
+                                        x[3] = (treatmentPlanName== "Select")?"":treatmentPlanName,
+                                        x[4] = (treatmentPlanReasonName == "Select") ? "" : treatmentPlanReasonName;
+                                    x[5] = treatmentPlanReason;
+                                    x[10] = periodTaken;
+                                    x[11]= (periodTakenText == "Select") ? "" : periodTakenText;
+                                }
+                            });
+                        DrugPrescriptionTable
+                                    .clear()
+                                    .draw();
+                            DrawDataTable("dtlDrugPrescriptionFrequency", arrDrugPrescriptionUI);
+                        }
+
 
                         if (regimen > 0) {
                             console.log('DrugTableArray', DrugTableArray);
