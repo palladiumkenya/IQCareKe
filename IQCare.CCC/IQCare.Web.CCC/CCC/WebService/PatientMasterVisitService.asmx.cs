@@ -57,10 +57,33 @@ namespace IQCare.Web.CCC.WebService
                 int patientId = Convert.ToInt32(Session["PatientPK"]);
                 int visitId = Convert.ToInt32(Session["patientMasterVisitId"]);
                 PatientMasterVisitManager patientMasterVisit = new PatientMasterVisitManager();
-                result = patientMasterVisit.PatientMasterVisitCheckout(visitId, patientId,visitSchedule,visitBy,visitType,visitDate);
+                result = patientMasterVisit.PatientMasterVisitCheckout(visitId);
                 Session["EncounterStatusId"] = 0;
                 Session["PatientEditId"] = 0;
                 Session["PatientPK"] = 0;
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+
+            return result;
+
+        }
+
+        [WebMethod(EnableSession = true)]
+        public int PatientCheckoutNoParams()
+        {
+            int result = 0;
+            try
+            {
+                int patientId = Convert.ToInt32(Session["PatientPK"]);
+                int visitId = Convert.ToInt32(Session["patientMasterVisitId"]);
+                PatientMasterVisitManager patientMasterVisit = new PatientMasterVisitManager();
+                result = patientMasterVisit.PatientMasterVisitCheckout(visitId);
+                //Session["EncounterStatusId"] = 0;
+                //Session["PatientEditId"] = 0;
+                //Session["PatientPK"] = 0;
             }
             catch (Exception e)
             {

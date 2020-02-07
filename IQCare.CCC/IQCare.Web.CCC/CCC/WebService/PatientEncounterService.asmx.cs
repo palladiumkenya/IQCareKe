@@ -1229,6 +1229,69 @@ namespace IQCare.Web.CCC.WebService
 
         [WebMethod(EnableSession = true)]
         [ScriptMethod(UseHttpGet = false, ResponseFormat = ResponseFormat.Json)]
+        public ArrayList GetPharmacyDispensingDetails()
+        {
+            PatientEncounterLogic patientEncounter = new PatientEncounterLogic();
+
+            var patientmastervisitId = Session["ExistingRecordPatientMasterVisitID"].ToString() == "0" ? Session["PatientMasterVisitID"].ToString() : Session["ExistingRecordPatientMasterVisitID"].ToString();
+            DataTable theDT = patientEncounter.loadPatientPharmacyPrescription(Session["ExistingRecordPatientMasterVisitID"].ToString() == "0" ? Session["PatientMasterVisitID"].ToString() : Session["ExistingRecordPatientMasterVisitID"].ToString());
+            ArrayList rows = new ArrayList();
+            string remove = "";
+            string prescribingdate = "<span class='presdate'>11-11-2019</span>";
+
+            if (Session["DosageFrequency"] != null)
+            {
+                DosageFrequency = Convert.ToInt32(Session["DosageFrequency"]);
+            }
+            foreach (DataRow row in theDT.Rows)
+            {
+                string buttonid = "'"+row["Id"].ToString() + "btnid'";
+                int drugbalance = Convert.ToInt32(row["OrderedQuantity"]) - Convert.ToInt32(row["DispensedQuantity"]);
+                string rowid = row["Id"].ToString();
+                string qeverdispensed = "<input type='text' class='form-control input-sm txtqtyeverdispensed' id='" + row["Id"].ToString() + "qtyeverdispensedinputid' value='" + row["DispensedQuantity"].ToString() + "' disabled> ";
+                string qtydispensedinput = "<input type='text' class='form-control input-sm txtqtydispensed' id='" + row["Id"].ToString() + "qtydispensedinputid' value=''> ";
+                string qtyremaining = "<input type='text' class='form-control input-sm txtqtyremaining' id='" + row["Id"].ToString() + "qtyremaininginputid' value='"+drugbalance.ToString()+"' disabled>";
+                string nextpickupdate = "<input class='form-control input-sm NextAppDate' data-date-format='mm/dd/yyyy' id='" + row["Id"].ToString() + "nextpickupdateinputid'>";
+                string saveDispensing = "<button type='button' class='btnSaveDispensing btn btn-Success fa fa-minus-circle btn-fill " + row["Id"].ToString() + "save' id='" + row["Id"].ToString() + "savebtnid'> Save </button>";
+                if (DosageFrequency == 1)
+                {
+                    string[] i = new string[7] { row["ProgID"].ToString(),
+                        "<input type='hidden' class='" +row["Id"].ToString()+"drugname'>" + row["DrugName"].ToString(),
+                    "<input type='hidden' class='" +row["Id"].ToString()+"prescribingdate' id='" +row["Id"].ToString()+"prescribingdateid'>" + prescribingdate,
+                        "<input type='hidden' class='" +row["Id"].ToString()+"qtyordered' id='" +row["Id"].ToString()+"qtyorderedid' value='"+row["OrderedQuantity"].ToString()+"'>" + row["OrderedQuantity"].ToString(),
+                        "<input type='hidden' class='" +row["Id"].ToString()+"qtyeverdispensed' id='" +row["Id"].ToString()+"qtyeverdispensedid' value='" + row["DispensedQuantity"].ToString() + "'> " + qeverdispensed,
+                        "<input type='hidden' class='" +row["Id"].ToString()+"qtyremaining' id='" +row["Id"].ToString()+"qtyremainingid'>" + qtyremaining,
+                        "<input type='hidden' class='" +row["Id"].ToString()+"qtydispensed' id='" +row["Id"].ToString()+"qtydispensedid'> " + qtydispensedinput
+                        //"<input type='hidden' class='" +row["Id"].ToString()+"nextpickup' id='" +row["Id"].ToString()+"nextpickupid'>" + nextpickupdate,
+                        //saveDispensing
+                     };
+                    rows.Add(i);
+
+                }
+                else
+                {
+                    string[] i = new string[26] { row["ProgID"].ToString(),row["TreatmentProgram"].ToString(),
+                        row["TreatmentPlan"].ToString(),row["TreatmentPlanText"].ToString(),
+                        row["TreatmentPlanReason"].ToString(),row["TreatmentPlanReasonId"].ToString(),
+                        row["RegimenLine"].ToString(),row["RegimenLineId"].ToString(),row["Regimen"].ToString(),
+                        row["RegimenId"].ToString(), row["PeriodTaken"].ToString(),
+                        row["PeriodTakenText"].ToString() ,row["Drug_Pk"].ToString(), row["batchId"].ToString(),
+                    //row["FrequencyID"].ToString(),
+                    row["abbr"].ToString(),row["DrugName"].ToString(),
+                    row["batchName"].ToString(),row["MorningDose"].ToString(),row["MiddayDose"].ToString(),
+                    row["EveningDose"].ToString(), row["NightDose"].ToString(),
+                    row["duration"].ToString(),row["OrderedQuantity"].ToString(),row["DispensedQuantity"].ToString(),
+                    row["prophylaxis"].ToString(), remove
+                     };
+                    rows.Add(i);
+                }
+
+            }
+            return rows;
+        }
+
+        [WebMethod(EnableSession = true)]
+        [ScriptMethod(UseHttpGet = false, ResponseFormat = ResponseFormat.Json)]
         public ArrayList GetLatestPharmacyPrescriptionDetails()
         {
             PatientEncounterLogic patientEncounter = new PatientEncounterLogic();
@@ -2325,6 +2388,68 @@ namespace IQCare.Web.CCC.WebService
                 Msg = e.Message;
             }
             return Msg;
+        }
+
+        [WebMethod]
+        public string GetNextPickupDate(string qtydis, string dateofdispense)
+        {
+            string pickupdate = "";
+            string quantitydispensed = "";
+            if (qtydis == "")
+            {
+                quantitydispensed = "0";
+            }
+            else
+            {
+                quantitydispensed = qtydis;
+            }
+            DateTime dispensedate = Convert.ToDateTime(dateofdispense);
+            DateTime pickdate = dispensedate.AddDays(Convert.ToUInt32(quantitydispensed));
+            pickupdate = pickdate.ToString("dd-MMM-yyy");
+            return pickupdate;
+        }
+
+        [WebMethod(EnableSession = true)]
+        public string saveDispensing(string qtydis, string rowid, string dispensedate)
+        {
+            PatientEncounterLogic patientEncounter = new PatientEncounterLogic();
+            int val = 0;
+            //save dispensing
+            val = patientEncounter.saveDispensing(Convert.ToInt32(qtydis),Convert.ToInt32(rowid),Convert.ToDateTime(dispensedate));
+            if(val > 0)
+            {
+                return val.ToString();
+            }
+            else
+            {
+                return "error saving";
+            }
+            //save appointment
+           
+        }
+
+        [WebMethod(EnableSession = true)]
+        public string savenextpickupdate(string nextpickupdate, string visitid)
+        {
+            string Result;
+            int piiid = Convert.ToInt32(visitid);
+            PatientAppointment patientAppointment = new PatientAppointment()
+            {
+                PatientId = Convert.ToInt32(Session["PatientPK"].ToString()),
+                PatientMasterVisitId = piiid,
+                AppointmentDate = Convert.ToDateTime(nextpickupdate),
+                Description = "",
+                DifferentiatedCareId = 240,
+                ReasonId = 238,
+                ServiceAreaId = 258,
+                StatusId = 223,
+                CreatedBy = Convert.ToInt32(Session["AppUserId"].ToString()),
+                CreateDate = DateTime.Now
+            };
+
+            var appointment = new PatientAppointmentManager();
+            Result = appointment.AddPatientAppointments(patientAppointment).ToString();
+            return Result;
         }
     }
 }

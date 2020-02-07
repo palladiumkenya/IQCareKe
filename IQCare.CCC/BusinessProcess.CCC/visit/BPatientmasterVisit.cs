@@ -158,7 +158,7 @@ namespace BusinessProcess.CCC.visit
 
         }
 
-        public int PatientMasterVisitCheckout(int patientId, int masterVisitId,int visitSchedule, int visitBy,int visitType,DateTime visitDate)
+        public int PatientMasterVisitCheckout(int masterVisitId)
         {
             using (UnitOfWork unitOfWork = new UnitOfWork(new GreencardContext()))
             {

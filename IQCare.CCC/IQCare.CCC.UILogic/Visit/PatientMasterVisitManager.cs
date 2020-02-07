@@ -85,9 +85,9 @@ namespace IQCare.CCC.UILogic.Visit
             return _result> 0 ?_result:0;
         }
 
-        public int PatientMasterVisitCheckout(int id,int patientId, int visitSchedule, int visitBy, int visitType, DateTime visitDate)
+        public int PatientMasterVisitCheckout(int id)
         {
-            _result = _patientMasterVisitManager.PatientMasterVisitCheckout(patientId, id,visitSchedule,visitBy,visitType,visitDate);
+            _result = _patientMasterVisitManager.PatientMasterVisitCheckout(id);
             return _result > 0 ? _result : 0;
         }
 

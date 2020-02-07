@@ -17,6 +17,9 @@
         visibility: visible;
         display: table-row;
     }
+    .modal-lg{
+        width: 1000px;
+    }
 </style>
 <div class="col-md-12" style="padding-top: 10px" id="PharmacySection" data-parsley-validate="true" data-show-errors="true">
     <%--<div class="panel panel-info">--%>
@@ -453,11 +456,12 @@
             <hr />
         </div>
         <div class="col-md-4"></div>
-
-        <div class="col-md-8">
+        <div class="col-md-12">
             <%--<div class="col-md-2"><asp:LinkButton runat="server" ClientIDMode="Static" CssClass="btn btn-info btn-sm fa fa-plus-circle" OnClick="saveUpdatePharmacy();"> Save Prescription</asp:LinkButton></div>--%>
             <div class="col-md-3">
                 <button type="button" id="btnSavePrescription" name="btnSavePrescription" clientidmode="Static" class="btn btn-info btn-sm fa fa-plus-circle" onclick="saveUpdatePharmacy();">Save Prescription</button></div>
+            <div class="col-md-3">
+                <button type="button" id="btnopendispensingmodal" class="btn btn-Success btn-sm fa fa-floppy-o" data-toggle="modal" data-target="#dispensingModal">Dispense Drugs</button></div>
             <div class="col-md-3">
                 <button type="button" class="btn btn-warning btn-sm fa fa-refresh" onclick="resetPharmacyForm();">Reset Prescription</button></div>
             <div class="col-md-3">
@@ -472,6 +476,60 @@
     <%--</div>--%><%-- .panel--%>
 </div>
 <%-- .col-md-12--%>
+
+<!--- dispensing modal --->
+<div class="modal fade" id="dispensingModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">DISPENSE</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+            <div class="col-md-2">
+                <label class="control-label pull-left">Dispense Date</label>
+            </div>
+            <div class="col-md-4">
+                <div class='input-group date' id='PersonAppointmentDate'>
+					<span class="input-group-addon">
+						<span class="glyphicon glyphicon-calendar"></span>
+					</span>
+					<asp:TextBox runat="server"  CssClass="form-control input-sm" ID="AppointmentDate" onblur="DateFormat(this,this.value,event,false,'3')" onkeyup="DateFormat(this,this.value,event,false,'3')" required ="True" data-parsley-min-message="Input the appointment date"></asp:TextBox>
+				</div>
+            </div> 
+        </div>
+          <br />
+        <table id="dtlDrugDispense" class="table table-bordered table-striped dispensingtable" style="width: 100%">
+            <thead>
+                <tr>
+                    <th><span class="text-primary">Id</span></th>
+                    <th><span class="text-primary">Drug</span></th>
+                    <th><span class="text-primary">Date Prescribed</span></th>
+                    <th><span class="text-primary">Qty Prescribed</span></th>
+                    <th><span class="text-primary">Total Dispensed</span></th>
+                    <th><span class="text-primary">Qty Remaining</span></th>
+                    <th><span class="text-primary">Qty Dispensed</span></th>
+                    <%--<th><span class="text-primary">Next Pickup Date</span></th>
+                    <th><span class="text-primary">Save</span></th>--%>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+          <br />
+        <div class="form-group"> 
+        </div>
+          <br />
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" id="savedispensingbtn">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
 
 <script type="text/javascript">
     var regimen = "";
@@ -505,6 +563,115 @@
         enrolmentDate = 0;
 
     $(document).ready(function () {
+        
+        $( "#savedispensingbtn" ).click(function() {
+            //var submitid = $(this).attr('id');
+            //get row identifier
+            //var rowidentifier = submitid.replace('savebtnid', '');
+            //get value of qtydispensed
+            //get value of the next visit
+           //put next pick up date if required here
+            var dispenseDate = $("#<%=AppointmentDate.ClientID%>").val();
+            //var nextpickupdate = $("#" + rowidentifier + "nextpickupdateinputid").val();
+            //get patient id
+            //get ptn_pk
+            var ndd;
+            $('.txtqtyeverdispensed').each(function(i, obj) {
+                var qtydispensed = $(this).val();
+                var dispenseDate = $("#<%=AppointmentDate.ClientID%>").val();
+                var inputid = $(this).attr('id');
+                
+                var rowidentifier = inputid.replace('qtyeverdispensedinputid', '');
+                //alert('qty:'+qtydispensed+' ident:'+rowidentifier+' Date:'+dispenseDate);
+                $.ajax({
+                    url: '../WebService/PatientEncounterService.asmx/saveDispensing',
+                    type: 'POST',
+                     dataType: 'json',
+                     data: "{'qtydis':'" + qtydispensed + "','rowid':'" + rowidentifier + "','dispensedate':'"+dispenseDate+"'}",
+                    contentType: "application/json; charset=utf-8",
+
+                     success: function (data) {
+                         toastr.success(data.d, "Saved Successfully");
+                    }
+                });
+            });
+            location.reload();
+             //savenextpickup(nextpickupdate);
+        });
+
+        function savenextpickup(nextpickupdate) {
+            vistid = "";
+            var urlvisitid = "";
+            if ((<%=Request.QueryString.ToString().Length%>) > 0) {
+                urlvisitid = "<%=Request.QueryString["visitid"]%>";
+            }
+            var sessionvisitid = <%=Convert.ToInt32(Session["PatientMasterVisitID"])%>;
+            if (urlvisitid > 0) {
+                visitid = urlvisitid;
+            }
+            else {
+                visitid = sessionvisitid;
+            }
+            var period = getUrlParameter('visitid');
+            $.ajax({
+                url: '../WebService/PatientEncounterService.asmx/savenextpickupdate',
+                type: 'POST',
+                    dataType: 'json',
+                    data: "{'nextpickupdate':'" + nextpickupdate + "','visitid':'" + visitid + "'}",
+                contentType: "application/json; charset=utf-8",
+
+                    success: function (data) {
+                        toastr.success(data.d, "All dispensing Saved Successfully");
+                        //location.reload();
+                }
+            });
+        }
+
+        var getUrlParameter = function getUrlParameter(sParam) {
+            var sPageURL = window.location.search.substring(1),
+                sURLVariables = sPageURL.split('&'),
+                sParameterName,
+                i;
+
+            for (i = 0; i < sURLVariables.length; i++) {
+                sParameterName = sURLVariables[i].split('=');
+
+                if (sParameterName[0] === sParam) {
+                    return sParameterName[1] === undefined ? true : decodeURIComponent(sParameterName[1]);
+                }
+            }
+        };
+
+        $("#dtlDrugDispense").on('keyup', 'input', function () {
+            var qtydis = $(this).val();
+            var qtydistoday;
+            if (qtydis == "") {
+                qtydistoday = 0;
+            }
+            else {
+                qtydistoday = qtydis;
+            }
+            //var qtypres = 
+            //get id of qty dispensed input
+            var inputid = $(this).attr('id');
+            //get id of the ordered qty id 
+            var rowidentifier = inputid.replace('qtydispensedinputid', '');
+            //get quantity ordered
+            var qtyordered = $('#' + rowidentifier + 'qtyorderedid').val(); 
+            var totaldisp = $('#' + rowidentifier + 'qtyeverdispensedid').val(); 
+            
+            var totaldispensed = parseInt(totaldisp) + parseInt(qtydistoday);
+            var drugbalance = qtyordered - totaldispensed;
+            //alert("Order" + qtyordered+"totalbefore"+totaldisp+"totaltoday"+totaldispensed+"balnace"+drugbalance);
+            //alert("TotalEver" + totaldispensed + "total" + totaldisp + " drugbalance" + drugbalance + "Ordered" + qtyordered);
+            $('#' + rowidentifier + 'qtyremaininginputid').val("");
+            $('#' + rowidentifier + 'qtyremaininginputid').val(drugbalance);
+            $('#' + rowidentifier + 'qtyeverdispensedinputid').val("");
+            $('#' + rowidentifier + 'qtyeverdispensedinputid').val(totaldispensed);
+            var dateofdispense = $("#<%=AppointmentDate.ClientID%>").val();
+             var pickupdateinput = rowidentifier + "nextpickupdateinputid";
+            //var nextpickupdate = getTheNextPickupDate(qtydis, dateofdispense, pickupdateinput);
+        });
 
         if (DosageFrequency.toString() == "1") {
             $('.VisibleFrequency').css('visibility', 'visible');
@@ -2353,5 +2520,111 @@
         }
     }
 
+     var DrugDispenseTable = $('#dtlDrugDispense').DataTable({
+            ajax: {
+                type: "POST",
+                url: "../WebService/PatientEncounterService.asmx/GetPharmacyDispensingDetails",
+                dataSrc: function (json) {
+                    console.log('pharmacyprescriptions');
+                    console.log(json.d);
+                    var data = json.d;
+                    if (data.length > 0) {
+                        for (var i = 0; i < data.length; i++) {
+                            DrugTableArray.push({
+                                "ProgID": data[i][0],
+                                "DrugName": data[i][16],
+                                //"DatePrescribed": data[i][18],
+                                "Dose": data[i][3]
+                                //"Qty Dispensed": data[i][14],
+                                //"Qty Remaining": data[i][20],
+                                //"Next Pickup Date": data[i][21],
+                                //"Save": data[i][22]
+                            });
+                        }
+                    }
+                    return json.d;
+                },
+                contentType: "application/json; charset=utf-8",
+                dataType: "json"
 
+            },
+            paging: false,
+            searching: false,
+            info: false,
+            ordering: false,
+
+            columnDefs: [
+                {
+                    "targets": [0],
+                    "visible": false,
+                    "searchable": false
+                }
+            ]
+    });
+
+    $("#btnopendispensingmodal").click(function () {
+        var prescdate = $('#txtPrescriptionDate').val();
+        $('.presdate').html(prescdate);
+    });
+
+    $("input").on("keyup", function () {
+        //alert('keyup');
+    });
+
+    var dateNow = new Date();
+    $("#PersonAppointmentDate").datetimepicker({
+        defaultDate: dateNow,
+        format: 'DD-MMM-YYYY',
+        allowInputToggle: true,
+        useCurrent: true
+    });
+
+    var dateNow = new Date();
+    
+    $("#NextAppointmentDate").datetimepicker({
+        defaultDate: dateNow,
+        format: 'DD-MMM-YYYY',
+        allowInputToggle: true
+    });
+
+    function getTheNextPickupDate(qtydis, dateofdispense, pickupdateinput) {
+        var ndd;
+         $.ajax({
+            url: '../WebService/PatientEncounterService.asmx/GetNextPickupDate',
+            type: 'POST',
+             dataType: 'json',
+             data: "{'qtydis':'" + qtydis + "','dateofdispense':'" + dateofdispense + "'}",
+            contentType: "application/json; charset=utf-8",
+
+             success: function (data) {
+                 //alert(data.d);
+                 var date2 = new Date();
+                 //alert(date2);
+                //$( "#NextAppointmentDate" ).datepicker( "option", "Format", "DD-MMM-YYYY" );
+                 //$('#NextAppointmentDate').datepicker('setDate', new Date(data.d), 'format', 'DD-MMM-YYYY');
+                 //$('#NextAppointmentDate').datepicker().datepicker('setDate', data.d);
+                 //$("#NextPickupDate").val(data.d);
+                 var dbDate = data.d;
+                var date2 = new Date(dbDate);
+                // $('NextAppointmentDate').datepicker('setDate', null);
+                 $('#NextAppointmentDate').datepicker({
+                        format: 'DD-MMM-YYYY'
+                }).datepicker(
+                        // Initialize the date to be 00:00 local timezone on October 19, 2016
+                        'setDate', new Date('19-10-2016 00:00')
+                    );
+                
+                 //$('NextAppointmentDate').datepicker('setDate', date2);
+                 //$('NextAppointmentDate').val(data.d);
+            }
+        });
+        return ndd;
+    }
+
+    function saveDispensing(submitid) {
+        //var submitid = $(this).attr('id');
+        alert(submitid);
+    }
+
+   
 </script>

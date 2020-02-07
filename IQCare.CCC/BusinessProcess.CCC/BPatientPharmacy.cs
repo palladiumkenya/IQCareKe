@@ -313,5 +313,22 @@ namespace BusinessProcess.CCC
                 return list;
             }
         }
+
+        public int saveDispensing(int QuantityDispensed, int rowid, DateTime DispenseDate)
+        {
+            lock (this)
+            {
+                ClsObject PatientEncounter = new ClsObject();
+                ClsUtility.Init_Hashtable();
+                ClsUtility.AddParameters("@QtyDis", SqlDbType.VarChar, QuantityDispensed.ToString());
+                ClsUtility.AddParameters("@rowid", SqlDbType.VarChar, rowid.ToString());
+                ClsUtility.AddParameters("@DispenseDate", SqlDbType.VarChar, DispenseDate.ToString());
+
+
+                DataRow theDR = (DataRow)PatientEncounter.ReturnObject(ClsUtility.theParams, "sp_SaveDispensing", ClsUtility.ObjectEnum.DataRow);
+                string ptn_pharmacy_pk = theDR[0].ToString();
+                return Convert.ToInt32(ptn_pharmacy_pk);
+            }
+        }
     }
 }

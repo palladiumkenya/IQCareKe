@@ -21,7 +21,7 @@ namespace Entities.CCC.Enrollment
         public string PrefixType { get; set; }
         public string SuffixType { get; set; }
         public string AssigningAuthority { get; set; }
-        public int IdentifierType { get; set; }
+        public int? IdentifierType { get; set; }
         public string IdentifierValueSeparator { get; set; }
         public string ValidatorRegex { get; set; }
         public string FailedValidationMessage { get; set; }
