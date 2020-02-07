@@ -53,7 +53,7 @@ namespace IQCare.Pharm.BusinessProcess.Services
         }
 
        
-        public  List<String> SaveUpdatePharmacy(
+        public async  Task<List<String>> SaveUpdatePharmacy(
             int ptn,int PatientMasterVisitID, int PatientId, int LocationID, int OrderedBy,
             int UserID, List<PharmacyDetails> pharmacyDetails, int DispensedBy,  int ModuleID,
             string pmscmFlag,  string prescriptionDate,
@@ -65,10 +65,12 @@ namespace IQCare.Pharm.BusinessProcess.Services
                 list = new List<String>();
                 if (pharmacyDetails.Count > 0)
                 {
-                    pharmacyDetails.ForEach( t =>
+                   foreach(var t in  pharmacyDetails)
                     {
-                        var PatientPharmacy = _unitOfWork.Repository<PatientPharmacyOrder>()
-                            .Get(x => x.PatientId == PatientId && x.PatientMasterVisitId == PatientMasterVisitID && x.ProgId.ToString() == t.TreatmentProgram && x.DeleteFlag != 1).OrderByDescending(x => x.ptn_pharmacy_pk).FirstOrDefault();
+
+                        string treatmentProgram = t.TreatmentProgram;
+                        var PatientPharmacy =await  _unitOfWork.Repository<PatientPharmacyOrder>()
+                            .Get(x => x.PatientId == PatientId && x.PatientMasterVisitId == PatientMasterVisitID && x.ProgId.ToString() == treatmentProgram && x.DeleteFlag != 1).OrderByDescending(x => x.ptn_pharmacy_pk).FirstOrDefaultAsync();
                         if (PatientPharmacy != null)
                         {
 
@@ -82,15 +84,15 @@ namespace IQCare.Pharm.BusinessProcess.Services
                             PatientPharmacy.PharmacyPeriodTaken = string.IsNullOrEmpty(t.Period) ? (int?)null : Convert.ToInt32(t.Period);
 
                             _unitOfWork.Repository<PatientPharmacyOrder>().Update(PatientPharmacy);
-                             _unitOfWork.SaveAsync();
+                            await _unitOfWork.SaveAsync();
 
                             PharmacyPk = PatientPharmacy.ptn_pharmacy_pk;
                             PatientPk = PatientPharmacy.Ptn_pk;
                             VisitPk = PatientPharmacy.VisitId;
-                            var ArvTreatmentTracker =  _unitOfWork.Repository<ARVTreatmentTracker>().Get(x => x.PatientId == PatientId && x.PatientMasterVisitId == PatientMasterVisitID && x.DeleteFlag == false).OrderByDescending(x => x.Id).FirstOrDefault();
+                            var ArvTreatmentTracker =  await _unitOfWork.Repository<ARVTreatmentTracker>().Get(x => x.PatientId == PatientId && x.PatientMasterVisitId == PatientMasterVisitID && x.DeleteFlag == false).OrderByDescending(x => x.Id).FirstOrDefaultAsync();
                             if (ArvTreatmentTracker != null)
                             {
-                                if (Convert.ToInt32(t.RegimenLine) > 0)
+                                if (Convert.ToInt32(t.Regimen) > 0)
                                 {
                                     ArvTreatmentTracker.RegimenId = Convert.ToInt32(t.Regimen);
                                     ArvTreatmentTracker.RegimenLineId = Convert.ToInt32(t.RegimenLine);
@@ -98,12 +100,13 @@ namespace IQCare.Pharm.BusinessProcess.Services
                                     ArvTreatmentTracker.TreatmentStatusReasonId = string.IsNullOrEmpty(t.Reason) ? (int?)null : Convert.ToInt32(t.Reason);
 
                                     _unitOfWork.Repository<ARVTreatmentTracker>().Update(ArvTreatmentTracker);
-                                     _unitOfWork.SaveAsync();
+                                    await _unitOfWork.SaveAsync();
                                 }
                             }
                             else
                             {
-                                if (Convert.ToInt32(t.RegimenLine) > 0)
+
+                                if (Convert.ToInt32(t.Regimen) > 0)
                                 {
                                     ARVTreatmentTracker arv = new ARVTreatmentTracker();
 
@@ -118,33 +121,35 @@ namespace IQCare.Pharm.BusinessProcess.Services
                                     arv.CreateBy = UserID;
                                     arv.CreateDate = DateTime.Now;
 
-                                     _unitOfWork.Repository<ARVTreatmentTracker>().AddAsync(arv);
-                                     _unitOfWork.SaveAsync();
+                                   await  _unitOfWork.Repository<ARVTreatmentTracker>().AddAsync(arv);
+                                   await   _unitOfWork.SaveAsync();
                                 }
 
                             }
 
-                            var regimenmap =  _unitOfWork.Repository<RegimenMap>().Get(x => x.Ptn_Pk == PatientPk && x.OrderId == PharmacyPk && x.DeleteFlag == 0).OrderByDescending(x => x.RegimenMap_Pk).FirstOrDefault();
+                            var regimenmap = await  _unitOfWork.Repository<RegimenMap>().Get(x => x.Ptn_Pk == PatientPk && x.OrderId == PharmacyPk && x.DeleteFlag == 0).OrderByDescending(x => x.RegimenMap_Pk).FirstOrDefaultAsync();
                             if (regimenmap != null)
                             {
                                 regimenmap.RegimenType = t.Regimentext;
 
-                                _unitOfWork.Repository<RegimenMap>().Update(regimenmap);
-                                _unitOfWork.SaveAsync();
+                                 _unitOfWork.Repository<RegimenMap>().Update(regimenmap);
+                                await  _unitOfWork.SaveAsync();
                             }
                             else
                             {
-                                RegimenMap rm = new RegimenMap();
-                                rm.Ptn_Pk = PatientPk;
-                                rm.LocationID = LocationID;
-                                rm.RegimenType = rm.RegimenType;
-                                rm.Visit_pk = VisitPk;
-                                rm.UserId = UserID;
-                                rm.OrderId = PharmacyPk;
-                                rm.CreateDate = DateTime.Now;
-                                 _unitOfWork.Repository<RegimenMap>().AddAsync(rm);
-                                 _unitOfWork.SaveAsync();
-
+                                if (String.IsNullOrEmpty(t.Regimentext) == false)
+                                {
+                                    RegimenMap rm = new RegimenMap();
+                                    rm.Ptn_Pk = PatientPk;
+                                    rm.LocationID = LocationID;
+                                    rm.RegimenType = rm.RegimenType;
+                                    rm.Visit_pk = VisitPk;
+                                    rm.UserId = UserID;
+                                    rm.OrderId = PharmacyPk;
+                                    rm.CreateDate = DateTime.Now;
+                                    await _unitOfWork.Repository<RegimenMap>().AddAsync(rm);
+                                    await _unitOfWork.SaveAsync();
+                                }
 
                             }
                             StringBuilder sqlartstartdate = new StringBuilder();
@@ -172,15 +177,15 @@ namespace IQCare.Pharm.BusinessProcess.Services
                                 if (patient != null)
                                 {
                                     patient.ARTStartDate = Convert.ToDateTime(PatientARTStartDate.DispensedDate);
-                                    _unitOfWork.Repository<Patient>().Update(patient);
-                                    _unitOfWork.SaveAsync();
+                                     _unitOfWork.Repository<Patient>().Update(patient);
+                                    await _unitOfWork.SaveAsync();
                                 }
                             }
 
                         }
                         else
                         {
-                            var VisitType = _unitOfWork.Repository<VisitType>().Get(x => x.VisitName == "Pharmacy" && x.DeleteFlag != 1).FirstOrDefault();
+                            var VisitType = await _unitOfWork.Repository<VisitType>().Get(x => x.VisitName == "Pharmacy" && x.DeleteFlag != 1).FirstOrDefaultAsync();
                             if (VisitType != null)
                             {
                                 VisitTypeId = VisitType.VisitTypeID;
@@ -200,8 +205,8 @@ namespace IQCare.Pharm.BusinessProcess.Services
 
 
 
-                             _unitOfWork.Repository<PatientVisit>().AddAsync(pvv);
-                             _unitOfWork.SaveAsync();
+                            await _unitOfWork.Repository<PatientVisit>().AddAsync(pvv);
+                            await _unitOfWork.SaveAsync();
 
                             VisitPk = pvv.Visit_Id;
 
@@ -223,57 +228,66 @@ namespace IQCare.Pharm.BusinessProcess.Services
                             pho.CreateDate = DateTime.Now;
 
 
-                             _unitOfWork.Repository<PatientPharmacyOrder>().AddAsync(pho);
-                             _unitOfWork.SaveAsync();
+                            await _unitOfWork.Repository<PatientPharmacyOrder>().AddAsync(pho);
+                            await  _unitOfWork.SaveAsync();
 
                             PharmacyPk = pho.ptn_pharmacy_pk;
                             PatientPk = pho.Ptn_pk;
                             VisitPk = pho.VisitId;
-                            var ArvTreatmentTracker =  _unitOfWork.Repository<ARVTreatmentTracker>().Get(x => x.PatientId == PatientId && x.PatientMasterVisitId == PatientMasterVisitID && x.DeleteFlag == false).OrderByDescending(x => x.Id).FirstOrDefault();
+                            var ArvTreatmentTracker =await   _unitOfWork.Repository<ARVTreatmentTracker>().Get(x => x.PatientId == PatientId && x.PatientMasterVisitId == PatientMasterVisitID && x.DeleteFlag == false).OrderByDescending(x => x.Id).FirstOrDefaultAsync();
                             if (ArvTreatmentTracker != null)
                             {
-                                ArvTreatmentTracker.RegimenId = Convert.ToInt32(t.Regimen);
-                                ArvTreatmentTracker.RegimenLineId = Convert.ToInt32(t.RegimenLine);
-                                ArvTreatmentTracker.TreatmentStatusId = Convert.ToInt32(t.TreatmentPlan);
-                                ArvTreatmentTracker.TreatmentStatusReasonId = string.IsNullOrEmpty(t.Reason) ? (int?)null : Convert.ToInt32(t.Reason);
 
-                                _unitOfWork.Repository<ARVTreatmentTracker>().Update(ArvTreatmentTracker);
-                                 _unitOfWork.SaveAsync();
+                                if (Convert.ToInt32(t.Regimen) > 0)
+                                {
+
+                                    ArvTreatmentTracker.RegimenId = Convert.ToInt32(t.Regimen);
+                                    ArvTreatmentTracker.RegimenLineId = Convert.ToInt32(t.RegimenLine);
+                                    ArvTreatmentTracker.TreatmentStatusId = Convert.ToInt32(t.TreatmentPlan);
+                                    ArvTreatmentTracker.TreatmentStatusReasonId = string.IsNullOrEmpty(t.Reason) ? (int?)null : Convert.ToInt32(t.Reason);
+
+                                    _unitOfWork.Repository<ARVTreatmentTracker>().Update(ArvTreatmentTracker);
+                                    await _unitOfWork.SaveAsync();
+                                }
                             }
                             else
                             {
-                                ARVTreatmentTracker arv = new ARVTreatmentTracker();
+
+                                if (Convert.ToInt32(t.Regimen) > 0)
+                                {
+                                    ARVTreatmentTracker arv = new ARVTreatmentTracker();
 
 
-                                arv.PatientId = PatientId;
-                                arv.PatientMasterVisitId = PatientMasterVisitID;
-                                arv.RegimenId = Convert.ToInt32(t.Regimen);
-                                arv.RegimenLineId = Convert.ToInt32(t.RegimenLine);
-                                arv.TreatmentStatusId = Convert.ToInt32(t.TreatmentPlan);
-                                arv.TreatmentStatusReasonId = string.IsNullOrEmpty(t.Reason) ? (int?)null : Convert.ToInt32(t.Reason);
-                                arv.DeleteFlag = false;
-                                arv.CreateBy = UserID;
-                                arv.CreateDate = DateTime.Now;
+                                    arv.PatientId = PatientId;
+                                    arv.PatientMasterVisitId = PatientMasterVisitID;
+                                    arv.RegimenId = Convert.ToInt32(t.Regimen);
+                                    arv.RegimenLineId = Convert.ToInt32(t.RegimenLine);
+                                    arv.TreatmentStatusId = Convert.ToInt32(t.TreatmentPlan);
+                                    arv.TreatmentStatusReasonId = string.IsNullOrEmpty(t.Reason) ? (int?)null : Convert.ToInt32(t.Reason);
+                                    arv.DeleteFlag = false;
+                                    arv.CreateBy = UserID;
+                                    arv.CreateDate = DateTime.Now;
 
-                                 _unitOfWork.Repository<ARVTreatmentTracker>().AddAsync(arv);
-                               _unitOfWork.SaveAsync();
+                                    await _unitOfWork.Repository<ARVTreatmentTracker>().AddAsync(arv);
+                                    await _unitOfWork.SaveAsync();
+                                }
 
                             }
 
-                            var regimenmap =  _unitOfWork.Repository<RegimenMap>().Get(x => x.Ptn_Pk == PatientPk && x.OrderId == PharmacyPk && x.DeleteFlag == 0).OrderByDescending(x => x.RegimenMap_Pk).FirstOrDefault();
+                            var regimenmap = await  _unitOfWork.Repository<RegimenMap>().Get(x => x.Ptn_Pk == PatientPk && x.OrderId == PharmacyPk && x.DeleteFlag == 0).OrderByDescending(x => x.RegimenMap_Pk).FirstOrDefaultAsync();
                             if (regimenmap != null)
                             {
                                 if (String.IsNullOrEmpty(t.Regimentext) == false)
                                 {
                                     regimenmap.RegimenType = t.Regimentext;
 
-                                    _unitOfWork.Repository<RegimenMap>().Update(regimenmap);
-                                    _unitOfWork.SaveAsync();
+                                     _unitOfWork.Repository<RegimenMap>().Update(regimenmap);
+                                    await _unitOfWork.SaveAsync();
                                 }
                             }
                             else
                             {
-                                if (String.IsNullOrEmpty(t.Regimentext) == true)
+                                if (String.IsNullOrEmpty(t.Regimentext) == false)
                                 {
                                     RegimenMap rm = new RegimenMap();
                                     rm.Ptn_Pk = PatientPk;
@@ -283,8 +297,8 @@ namespace IQCare.Pharm.BusinessProcess.Services
                                     rm.UserId = UserID;
                                     rm.OrderId = PharmacyPk;
                                     rm.CreateDate = DateTime.Now;
-                                    _unitOfWork.Repository<RegimenMap>().AddAsync(rm);
-                                    _unitOfWork.SaveAsync();
+                                    await _unitOfWork.Repository<RegimenMap>().AddAsync(rm);
+                                    await _unitOfWork.SaveAsync();
                                 }
 
 
@@ -301,20 +315,20 @@ namespace IQCare.Pharm.BusinessProcess.Services
                             ptnPk.Size = -1;
                             ptnPk.Value = Convert.ToInt32(PatientPk);
 
-                            var PatientARTStartDate = _unitOfWork.Context.Query<PatientARTStartDate>().FromSql(sqlartstartdate.ToString(),
+                            var PatientARTStartDate =await _unitOfWork.Context.Query<PatientARTStartDate>().FromSql(sqlartstartdate.ToString(),
                               parameters: new[]
                               {
                             ptnPk
-                              }).FirstOrDefault();
+                              }).FirstOrDefaultAsync();
 
                             if (PatientARTStartDate != null)
                             {
-                                var patient = _unitOfWork.Repository<Patient>().Get(x => x.Ptn_Pk == PatientPk).FirstOrDefault();
+                                var patient = await _unitOfWork.Repository<Patient>().Get(x => x.Ptn_Pk == PatientPk).FirstOrDefaultAsync();
                                 if (patient != null)
                                 {
                                     patient.ARTStartDate = Convert.ToDateTime(PatientARTStartDate.DispensedDate);
                                     _unitOfWork.Repository<Patient>().Update(patient);
-                                   _unitOfWork.SaveAsync();
+                                    await  _unitOfWork.SaveAsync();
                                 }
                             }
 
@@ -331,7 +345,7 @@ namespace IQCare.Pharm.BusinessProcess.Services
                         StringBuilder sqldel = new StringBuilder();
                         sqldel.Append("sp_DeletePharmacyPrescription_GreenCard @ptn_pharmacy_pk");
                         var ptnpk = new SqlParameter("@ptn_pharmacy_pk", ptn_pharmacy_pk);
-                        var k =  _unitOfWork.Context.Database.ExecuteSqlCommandAsync(sqldel.ToString(), parameters: new[] {
+                        var k =await  _unitOfWork.Context.Database.ExecuteSqlCommandAsync(sqldel.ToString(), parameters: new[] {
                     ptnpk
             });
 
@@ -480,7 +494,7 @@ namespace IQCare.Pharm.BusinessProcess.Services
                                 sqlprescph.Append($"exec sp_SaveUpdatePharmacyPrescription_GreenCard @ptn_pharmacy_pk={ptnpharmacy.Value},@DrugId={drugid.Value},@BatchId={batchid.Value},@FreqId={freqid.Value},@Dose={dose.Value},@Morning={morning.Value},@Midday={midday.Value},@Evening={evening.Value},@Night={night.Value},@Duration={duration.Value}" +
                                     $",@qtyPres={qtypres.Value},@qtyDisp={qtydisp.Value},@Prophylaxis={prophylaxis.Value},@pmscm={pmscmflag.Value},@UserID={userid.Value}");
 
-                                var presc = _unitOfWork.Context.Database.ExecuteSqlCommand(sqlprescph.ToString());
+                                var presc =await _unitOfWork.Context.Database.ExecuteSqlCommandAsync(sqlprescph.ToString());
 
                                 /*   var presc = await _unitOfWork.Context.Database.ExecuteSqlCommand(sqlprescph.ToString(), parameters: new[] {
                                ptnpharmacy,
@@ -508,14 +522,14 @@ namespace IQCare.Pharm.BusinessProcess.Services
 
 
 
-                    });
+                    }
 
 
 
 
                    
                 }
-                return list;
+                 return list;
             }
             catch (Exception ex)
             {
