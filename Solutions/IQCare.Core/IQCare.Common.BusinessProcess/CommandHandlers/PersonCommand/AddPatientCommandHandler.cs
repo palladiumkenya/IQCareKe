@@ -51,13 +51,14 @@ namespace IQCare.Common.BusinessProcess.CommandHandlers.PersonCommand
                     if (registeredPatient != null)
                     {
                         patientId = registeredPatient.Id;
+                        await registerPersonService.UpdatePatient(patientId, dob, request.PosId, request.PatientType);
                     }
                     else
                     {
                         var mstResult = await registerPersonService.InsertIntoBlueCard(registeredPerson.FirstName, registeredPerson.LastName,
                             registeredPerson.MidName, request.EnrollmentDate, " ", 283, maritalStatusName, "", "", gender[0].ItemName, "EXACT", dob, request.UserId, request.PosId);
 
-                        var patient = await registerPersonService.AddPatient(request.PersonId, request.UserId, mstResult[0].Ptn_Pk);
+                        var patient = await registerPersonService.AddPatient(request.PersonId, request.UserId, mstResult[0].Ptn_Pk, "", request.PatientType);
                         patientId = patient.Id;
                     }
 

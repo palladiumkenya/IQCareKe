@@ -407,7 +407,7 @@ export class CccComponent implements OnInit {
 
     public save() {
         const { EnrollmentDate, KeyPopulation, populationType, EntryPoint,
-            TypeOfTest, ReConfirmatoryTestResult, ReConfirmatoryTestDate } = this.form.value;
+            TypeOfTest, ReConfirmatoryTestResult, ReConfirmatoryTestDate, PatientType } = this.form.value;
         this.personPopulation.KeyPopulation = KeyPopulation;
         this.personPopulation.populationType = populationType;
 
@@ -420,7 +420,7 @@ export class CccComponent implements OnInit {
         };
         const populationTypes = this.registrationService.addPersonPopulationType(this.personId,
             this.userId, this.personPopulation);
-        const addPatient = this.registrationService.addPatient(this.personId, this.userId, EnrollmentDate, this.posId);
+        const addPatient = this.registrationService.addPatient(this.personId, this.userId, EnrollmentDate, this.posId, PatientType);
         const addReconfirmatoryTest = this.registrationService.addReConfirmatoryTest(hivReConfirmatoryTests);
 
         const enrollment = new Enrollment();

@@ -1,6 +1,6 @@
 import { ActivatedRoute, Router } from '@angular/router';
 import { PharmacyService } from '../services/pharmacy.service';
-
+import { NgxSpinnerService } from 'ngx-spinner';
 import { Component, OnInit, ViewChild, Input, NgZone } from '@angular/core';
 import { MatTableDataSource, MatPaginator, MatDialog, MatDialogConfig } from '@angular/material';
 
@@ -23,6 +23,7 @@ export class PharmMainpageComponent implements OnInit {
     @ViewChild(MatPaginator) paginator: MatPaginator;
     constructor(private route: ActivatedRoute,
         private pharmacyservice: PharmacyService,
+        private spinner: NgxSpinnerService,
         private zone: NgZone,
         private router: Router) { }
 
@@ -41,9 +42,10 @@ export class PharmMainpageComponent implements OnInit {
     }
 
     public getPatientVisits(patientId: number) {
+        this.spinner.show();
         this.pharmacyservice.getPharmacyVisit(this.patientId).subscribe((res) => {
             if (res != null) {
-                    
+
                 res.forEach(info => {
                     this.pharmacyvisittable.push({
                         visitDate: info.visitDate,
@@ -54,16 +56,18 @@ export class PharmMainpageComponent implements OnInit {
                         statustext: info.orderStatusText
 
                     });
-                    
+
                     this.dataSource = new MatTableDataSource(this.pharmacyvisittable);
                     this.dataSource.paginator = this.paginator;
                 });
 
             }
+            this.spinner.hide();
         }, (err) => {
             console.log(err + ' An error occured while getting patient pharmacy info');
+            this.spinner.hide();
         }, () => {
-
+            this.spinner.hide();
         }
         );
     }

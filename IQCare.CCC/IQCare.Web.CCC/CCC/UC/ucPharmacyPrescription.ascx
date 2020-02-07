@@ -1187,11 +1187,10 @@
     }
     $("#dtlDrugPrescription").on('click', '.btnDelete',
         function () {
-            DrugPrescriptionTable
-                .row($(this).parents('tr'))
-                .remove()
-                .draw();
-
+          DrugPrescriptionTable
+                    .row($(this).parents('tr'))
+                    .remove()
+                    .draw();
             console.log($(this).parents('tr').find('td:eq(6)').text().toString());
             console.log(drugNameArr);
 
@@ -1221,6 +1220,8 @@
 
             console.log('Delete Drug');
             console.log(DrugTableArray);
+               
+
         });
     $("#dtlDrugPrescriptionFrequency").on('click', '.btnDelete',
         function () {
@@ -1490,7 +1491,7 @@
                     .clear()
                     .draw();*/
 
-        drugNameArr = [];
+        //drugNameArr = [];
 
 
     }
@@ -1533,13 +1534,20 @@
         }
     }
     function removeDups(names) {
+        var uniqueNames = [];
+      
         let unique = {};
+        console.log('PharmacyIssues:' + names);
         names.forEach(function (i) {
             if (!unique[i]) {
                 unique[i] = true;
+                uniqueNames.push(i.TreatmentProgram);
             }
         });
+        console.log(uniqueNames);
         return Object.keys(unique);
+        console.log(unique);
+        
     }
 
     var drugNameArr = new Array();
@@ -1658,23 +1666,63 @@
                         valuesprogram = new Array();
                         valuesprogram = [];
                         ExistingProgramvalue = DrugTableArray.filter(x => x.TreatmentProgram.toString() != treatmentProgramName.toString()
-                            && x.TreatmentProgram.toString() !== "Treatment" && x.TreatmentProgram.toString() !== "prophylaxis" &&  treatmentProgramName !== "Non-ART")
-
+                            && x.TreatmentProgram.toString() !== "Treatment" && x.TreatmentProgram.toString() !== "prophylaxis" &&
+                             x.TreatmentProgram.toString() !== "Non-ART"
+                            && treatmentProgramName !== "Non-ART")
+                        console.log("ArrayExistingProgramValue");
+                        console.log(ExistingProgramvalue);
                         if (ExistingProgramvalue.length > 0) {
 
-                            valuesprogram = removeDups(ExistingProgramvalue);
-
+                          //  valuesprogram = removeDups(ExistingProgramvalue);
+                          //  console.log(valuesprogram);
                             {
                                 toastr.error("TreatmentProgram", "Kindly one can only add one treatment program and either Non-ART , Treatment or prophylaxis program only." +
-                                    "Kindly clear the drugs for " + valuesprogram.toString() + "treatment program in order to add drugs for  the current program");
+                                    "Kindly clear the drugs for " + treatmentProgramName.toString() + "treatment program in order to add drugs for  the current program");
                                 return false;
                             }
 
                         };
+                        console.log(DrugTableArray);
+                       this.DrugTableArray.forEach
+                            ((x => {
+                                if (x.TreatmentPlan.toString() !== treatmentPlan.toString()
+                                    && x.TreatmentProgram.toString() == treatmentProgramName.toString()) {
+                  
+                   x.TreatmentProgram= treatmentProgramName,
+                    x.TreatmentPlan= treatmentPlan,
+                    x.TreatmentPlanText= treatmentPlanName ,
+                   x.TreatmentPlanReason = treatmentPlanReasonName; 
+                    x.TreatmentPlanReasonId=treatmentPlanReason;
+                    x.Period=periodTaken;
+                                    x.PeriodTakenText = periodTakenText == "Select" ? "" : periodTakenText;
+
+
+                }}
+                            ));
+                       
+                        if (arrDrugPrescriptionUI.length > 0) {
+                            arrDrugPrescriptionUI.forEach(x => {
+                                if (x[2].toString() !== treatmentPlan.toString()
+                                    && x[1].toString() == treatmentProgramName.toString()) {
+
+                                    x[1] = treatmentProgramName,
+                                        x[2] = treatmentPlan,
+                                        x[3] = (treatmentPlanName== "Select")?"":treatmentPlanName,
+                                        x[4] = (treatmentPlanReasonName == "Select") ? "" : treatmentPlanReasonName;
+                                    x[5] = treatmentPlanReason;
+                                    x[10] = periodTaken;
+                                    x[11]= (periodTakenText == "Select") ? "" : periodTakenText;
+                                }
+                            });
+                        DrugPrescriptionTable
+                                    .clear()
+                                    .draw();
+                            DrawDataTable("dtlDrugPrescriptionFrequency", arrDrugPrescriptionUI);
+                        }
 
                         if (regimen > 0) {
                             console.log("DrugTableArray", DrugTableArray);
-                            ExistingRegimenLine = DrugTableArray.filter(x => x.RegimenId.toString() !== regimen.toString());
+                            ExistingRegimenLine = DrugTableArray.filter(x => x.RegimenId.toString() !== regimen.toString() && x.RegimenId.toString() !== "0" );
                             console.log("ExistingRegimenLine", ExistingRegimenLine);
                             console.log("regimen", regimen);
                             if (ExistingRegimenLine.length > 0) {
@@ -1705,7 +1753,8 @@
                     drugNameArr.push("" + drugName + "");
                     batchNoArr.push("" + batchText + "");
 
-
+                    console.log('drugNameArr');
+                    console.log(drugNameArr);
 
                     DrugTableArray.push({
                         "ProgID": treatmentProgram,
@@ -1875,23 +1924,64 @@
                         valuesprogram = new Array();
                         valuesprogram = [];
                         ExistingProgramvalue = DrugTableArray.filter(x => x.TreatmentProgram.toString() != treatmentProgramName.toString()
-                            && x.TreatmentProgram.toString() !== "Treatment" && x.TreatmentProgram.toString() !== "prophylaxis" &&  treatmentProgramName !== "Non-ART")
-
+                            && x.TreatmentProgram.toString() !== "Treatment"
+                            && x.TreatmentProgram.toString() !== "prophylaxis"
+                            && treatmentProgramName !== "Non-ART" &&
+                            x.TreatmentProgram.toString() !== "Non-ART"
+                        )
+                        console.log(ExistingProgramvalue);
                         if (ExistingProgramvalue.length > 0) {
 
-                            valuesprogram = removeDups(ExistingProgramvalue);
+                          //  valuesprogram = removeDups(ExistingProgramvalue);
 
                             {
                                 toastr.error("TreatmentProgram", "Kindly one can only add one treatment program and either Non-ART , Treatment or prophylaxis program only." +
-                                    "Kindly clear the drugs for " + valuesprogram.toString() + "treatment program in order to add drugs for  the current program");
+                                    "Kindly clear the drugs for " +treatmentProgramName.toString() + "treatment program in order to add drugs for  the current program");
                                 return false;
                             }
 
                         };
 
+                           this.DrugTableArray.forEach
+                            ((x => {
+                             if (x.TreatmentPlan.toString() !== treatmentPlan.toString()
+                                    && x.TreatmentProgram.toString() == treatmentProgramName.toString()) {
+                
+                   x.TreatmentProgram= treatmentProgramName,
+                    x.TreatmentPlan= treatmentPlan,
+                    x.TreatmentPlanText= treatmentPlanName,
+                   x.TreatmentPlanReason = treatmentPlanReasonName; 
+                    x.TreatmentPlanReasonId=treatmentPlanReason;
+                    x.Period=periodTaken.toString();
+                    x.PeriodTakenText=periodTakenText == "Select" ? "" : periodTakenText;
+                }}
+                ));
+                             if (arrDrugPrescriptionUI.length > 0) {
+                            arrDrugPrescriptionUI.forEach(x => {
+                                if (x[2].toString() !== treatmentPlan.toString()
+                                    && x[1].toString() == treatmentProgramName.toString()) {
+
+                                    x[1] = treatmentProgramName,
+                                        x[2] = treatmentPlan,
+                                        x[3] = (treatmentPlanName== "Select")?"":treatmentPlanName,
+                                        x[4] = (treatmentPlanReasonName == "Select") ? "" : treatmentPlanReasonName;
+                                    x[5] = treatmentPlanReason;
+                                    x[10] = periodTaken;
+                                    x[11]= (periodTakenText == "Select") ? "" : periodTakenText;
+                                }
+                            });
+                        DrugPrescriptionTable
+                                    .clear()
+                                    .draw();
+                            DrawDataTable("dtlDrugPrescriptionFrequency", arrDrugPrescriptionUI);
+                        }
+
+
                         if (regimen > 0) {
                             console.log('DrugTableArray', DrugTableArray);
-                            ExistingRegimenLine = DrugTableArray.filter(x => x.RegimenId.toString() !== regimen.toString());
+                            ExistingRegimenLine = DrugTableArray.filter(x => x.RegimenId.toString() !== regimen.toString()
+                                && x.RegimenId.toString() !== "0"
+                            );
                             console.log('ExistingRegimenLine', ExistingRegimenLine);
                             if (ExistingRegimenLine.length > 0) {
                                  toastr.error("Regimen", "Kindly one cannot have different regimen at the same time. Kindly prescibe the correct regimen" 
@@ -1910,7 +2000,10 @@
                 
                     drugNameArr.push("" + drugName + "");
                     batchNoArr.push("" + batchText + "");
-
+                 
+                    console.log('drugNameArr');
+                    console.log(drugNameArr);
+                 
                     //arrDrugPrescriptionUI = [];
 
                     DrugTableArray.push({

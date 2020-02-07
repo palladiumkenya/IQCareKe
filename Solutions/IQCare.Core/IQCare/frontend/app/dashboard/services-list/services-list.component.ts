@@ -291,8 +291,14 @@ export class ServicesListComponent implements OnInit {
                     break;
                 case 'CCC':
                     this.searchService.setSession(this.personId, this.patientId).subscribe((res) => {
-                        window.location.href = location.protocol + '//' + window.location.hostname + ':' + window.location.port +
-                            '/IQCare/CCC/Patient/PatientHome.aspx';
+                        if (res.d) {
+                            window.location.href = location.protocol + '//' + window.location.hostname + ':' + window.location.port +
+                                '/IQCare/CCC/Patient/PatientHome.aspx';
+                        } else {
+                            this.snotifyService.warning('Could not open Green Card patient does not have patientId or PersonId ', 
+                                'Encounter', this.notificationService.getConfig());
+                            return;
+                        }
                     });
                     break;
                 case 'PREP':

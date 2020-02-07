@@ -12,6 +12,9 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Collections.Generic;
 using IQCare.Pharm.BusinessProcess.Services;
+using System.Linq;
+using Microsoft.EntityFrameworkCore.Internal;
+using IQCare.Prep.Core.Models;
 
 namespace IQCare.Pharm.BusinessProcess.CommandHandlers.PatientPharmacy
 {
@@ -32,63 +35,125 @@ namespace IQCare.Pharm.BusinessProcess.CommandHandlers.PatientPharmacy
             {
                 try
                 {
-                    PharmacyService phar = new PharmacyService(_pharmUnitOfWork);
-
+                   
+                   
+                    List<PharmacyDetails> pharmlist = new List<PharmacyDetails>();
+                     PharmacyService phar = new PharmacyService(_pharmUnitOfWork);
+                    List<string> Pk = new List<string>();
                     if (request.PrescriptionDetails.Count > 0)
                     {
-
-                        foreach (var det in request.PrescriptionDetails)
+                        request.PrescriptionDetails.ForEach(x =>
                         {
-                            DrugPrescription dr = new DrugPrescription();
-                            dr.DrugId = det.DrugId;
-                            dr.DrugAbbr = det.DrugAbb;
-                            dr.Dose = det.Dose;
-                            dr.BatchId = det.batchId;
-                            dr.FreqId = det.Freq;
-                            dr.Evening = det.Evening;
-                            dr.Midday = det.Midday;
-                            dr.Morning = det.Morning;
-                            dr.Night = det.Night;
-                            dr.Duration = det.Duration;
-                            dr.prophylaxis = det.Prophylaxis;
-                            dr.qtyDisp = det.QUantityDisp;
-                            dr.qtyPres = det.QuantityPres;
+                            if (String.IsNullOrEmpty(x.Reason) == true)
+                            {
+                                x.Reason = "0";
+                            }
+                            if (String.IsNullOrEmpty(x.Period) == true)
+                            {
+                                x.Period = "0";
+                            }
+                        });
 
-                            List<DrugPrescription> prs = new List<DrugPrescription>();
-                            prs.Add(dr);
-                            if(String.IsNullOrEmpty(det.Reason) == true)
+                        var TreatmentProgram = request.PrescriptionDetails.Select(x => new { x.TreatmentPlan, x.TreatmentProgram,x.Reason, x.Regimenline,x.Regimentext, x.Regimen,x.Period }).Distinct().ToList();
+                        // .Select(x => x.TreatmentProgram).Distinct().ToList();
+                       
+                        
+                        if (TreatmentProgram.Count > 0)
+                        {
+                            
+                            var FirstTreatmentProgram = TreatmentProgram[0].TreatmentProgram;
+
+                            TreatmentProgram.ForEach(t =>
                             {
-                                det.Reason = "0";
-                            }
-                            if(String.IsNullOrEmpty(det.Regimenline)== true)
-                            {
-                                det.Regimenline = "0";
-                            }
-                            if(String.IsNullOrEmpty(det.TreatmentPlan)== true)
-                            {
-                                det.TreatmentPlan = "0";
-                            }
-                            if(String.IsNullOrEmpty(det.Regimen)== true)
-                            {
-                                det.Regimen = "0";
-                            }
-                            var pk = await phar.SaveUpdatePharmacy(Convert.ToInt32(request.Ptn_Pk),Convert.ToInt32(request.PatientMasterVisitId)
-                                  , Convert.ToInt32(request.PatientId), Convert.ToInt32(request.LocationId),
-                                   request.PrescribedBy, Convert.ToInt32(request.UserId), det.Regimentext, request.DispensedBy,
-                                  Convert.ToInt32(det.Regimenline), 0, prs, request.pmscm.ToString(),
-                                  Convert.ToInt32(det.TreatmentProgram),
-                                  Convert.ToInt32(det.Period), Convert.ToInt32(det.TreatmentPlan),
-                                  Convert.ToInt32(det.Reason), Convert.ToInt32(det.Regimen), request.PrescriptionDate, request.DispensedDate,request.VisitDate);
+                                List<DrugPrescription> presc = new List<DrugPrescription>();
+                                PharmacyDetails pharmacyDetails = new PharmacyDetails();
+                                pharmacyDetails.Regimen = t.Regimen;
+                                pharmacyDetails.Regimentext = t.Regimentext;
+                                pharmacyDetails.RegimenLine = t.Regimenline;
+                                pharmacyDetails.TreatmentPlan = t.TreatmentPlan;
+                                pharmacyDetails.TreatmentProgram = t.TreatmentProgram;
+                                pharmacyDetails.Reason = t.Reason;
+                                pharmacyDetails.Period = t.Period;
+                                
+                                request.PrescriptionDetails.ForEach(x =>
+                                {
 
 
-                            pharmacypk = Convert.ToInt32(pk);
+
+
+                                    if (x.TreatmentProgram.ToString() == t.TreatmentProgram.ToString())
+                                    {
+                                        DrugPrescription dr = new DrugPrescription();
+                                        dr.DrugId = x.DrugId;
+                                        dr.DrugAbbr = x.DrugAbb;
+                                        dr.Dose = x.Dose;
+                                        dr.BatchId = x.batchId;
+                                        dr.FreqId = x.Freq;
+                                        dr.Evening = x.Evening;
+                                        dr.Midday = x.Midday;
+                                        dr.Morning = x.Morning;
+                                        dr.Night = x.Night;
+                                        dr.Duration = x.Duration;
+                                        dr.prophylaxis = x.Prophylaxis;
+                                        dr.qtyDisp = x.QUantityDisp;
+                                        dr.qtyPres = x.QuantityPres;
+
+                                        presc.Add(dr);
+
+                                       
+                                    }
+                                    if(String.IsNullOrEmpty(x.TreatmentProgram)== true )
+                                    {
+                                        if(t.TreatmentProgram.ToString()== FirstTreatmentProgram.ToString())
+                                        {
+                                            DrugPrescription dr = new DrugPrescription();
+                                            dr.DrugId = x.DrugId;
+                                            dr.DrugAbbr = x.DrugAbb;
+                                            dr.Dose = x.Dose;
+                                            dr.BatchId = x.batchId;
+                                            dr.FreqId = x.Freq;
+                                            dr.Evening = x.Evening;
+                                            dr.Midday = x.Midday;
+                                            dr.Morning = x.Morning;
+                                            dr.Night = x.Night;
+                                            dr.Duration = x.Duration;
+                                            dr.prophylaxis = x.Prophylaxis;
+                                            dr.qtyDisp = x.QUantityDisp;
+                                            dr.qtyPres = x.QuantityPres;
+
+                                            presc.Add(dr);
+                                         
+                                        }
+                                    }
+
+
+
+                                });
+
+                                pharmacyDetails.DrugPrescriptions = presc;
+
+                                pharmlist.Add(pharmacyDetails);
+
+                              
+
+
+
+                            });
+
+                             Pk =  await phar.SaveUpdatePharmacy(Convert.ToInt32(request.Ptn_Pk), Convert.ToInt32(request.PatientMasterVisitId)
+                          , Convert.ToInt32(request.PatientId), Convert.ToInt32(request.LocationId),
+                           request.PrescribedBy, Convert.ToInt32(request.UserId), pharmlist, request.DispensedBy,
+
+                               0,  request.pmscm.ToString(), request.PrescriptionDate, request.DispensedDate, request.VisitDate);
+
 
                         }
+
 
                     }
                     return Result<SaveUpdatePharmacyResponse>.Valid(new SaveUpdatePharmacyResponse()
                     {
-                        Ptn_Pharmacy_Pk = pharmacypk
+                        Ptn_Pharmacy_Pk = Pk
 
                     });
 

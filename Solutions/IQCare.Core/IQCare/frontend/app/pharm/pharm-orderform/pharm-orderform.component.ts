@@ -75,6 +75,7 @@ export class PharmOrderformComponent implements OnInit {
     personvitals: any[];
     visibleMorningEvening: boolean = true;
     DrugArray: any[] = [];
+    DrugTreatmentPlan:any[]=[];
     DrugId: string;
     Disabled: boolean = true;
     DrugAbbr: string;
@@ -250,6 +251,7 @@ export class PharmOrderformComponent implements OnInit {
     }
 
     loadExistingRecords() {
+        this.spinner.show();
         this.pharmacyservice.getPharmacyVisitDetails(this.patientId, this.patientMasterVisitId).subscribe((res) => {
             if (res != null) {
                 let array: any[] = [];
@@ -312,10 +314,15 @@ export class PharmOrderformComponent implements OnInit {
 
                 }
             }
+            
 
         }, (err) => {
             this.snotifyService.error('Error getting drug details ' + err, 'Drug Prescribed',
                 this.notificationService.getConfig());
+                this.spinner.hide();
+        },
+        ()=>{
+            this.spinner.hide();
         });
     }
     displaydrug(drug?: any): string | undefined {
@@ -838,7 +845,7 @@ export class PharmOrderformComponent implements OnInit {
                 let treatmentplanarray: any[] = [];
                 treatmentplanarray = this.TreatmentplanOptions.filter(x => x.itemId == treatmentplan);
                 if (treatmentplanarray.length > 0) {
-                    treatmentplantext = treatmentplanarray[0].itemId;
+                    treatmentplantext = treatmentplanarray[0].itemDisplayName;
                 }
             }
         } else {
@@ -867,6 +874,7 @@ export class PharmOrderformComponent implements OnInit {
                 let ExistingRegimenLine = new Array();
                 let valuesprogram = new Array();
                 valuesprogram = [];
+                
                 ExistingProgramvalue = this.DrugArray.filter(x => x.TreatmentProgramText.toString() !== treatmentprogramtext.toString()
                     && x.TreatmentProgramText.toString() !== 'Treatment'
                     && x.TreatmentProgramText.toString() !== 'prophylaxis'
@@ -874,6 +882,7 @@ export class PharmOrderformComponent implements OnInit {
 
                 if (ExistingProgramvalue.length > 0) {
 
+                
                     valuesprogram = this.removeDups(ExistingProgramvalue);
 
                     {
@@ -887,8 +896,20 @@ export class PharmOrderformComponent implements OnInit {
 
 
                     }
-
+                    
                 }
+
+              
+                this.DrugArray.forEach
+                ((x=>{ if(x.TreatmentPlantext !==treatmentplantext && x.TreatmentProgramText==treatmentprogramtext.toString()){
+                    x.TreatmentPlan=treatmentplan;
+                    x.TreatmentPlantext=treatmentplantext;
+                    x.Reason= reason 
+                    x.ReasonText=reasontext;
+                    x.Period=Periodtaken;
+                    x.PeriodTakenText=Periodtakentext;
+                }}
+                ));
 
                 if (regimen > 0) {
                     ExistingRegimenLine = this.DrugArray.filter(x => x.Regimen.toString() !== regimen.toString())
@@ -959,7 +980,7 @@ export class PharmOrderformComponent implements OnInit {
                     Night: night,
                     Period: Periodtaken,
                     PeriodTakenText: Periodtakentext,
-                    Prophylaxis: chkProphylaxis,
+                    Prophylaxis: Prophylaxis,
                     Disabled: false
 
                 });
@@ -1012,13 +1033,13 @@ export class PharmOrderformComponent implements OnInit {
         this.pharmFormGroup.controls.chkProphylaxis.setValue('');
         this.pharmFormGroup.controls.frmFreq.setValue('');
         this.pharmFormGroup.controls.txtDuration.setValue('');
-        this.pharmFormGroup.controls.frmPeriodTaken.setValue('');
-        this.pharmFormGroup.controls.frmReason.setValue('');
-        this.pharmFormGroup.controls.frmRegimen.setValue('');
-        this.pharmFormGroup.controls.frmRegimenLine.setValue('');
+      //  this.pharmFormGroup.controls.frmPeriodTaken.setValue('');
+     //   this.pharmFormGroup.controls.frmReason.setValue('');
+       // this.pharmFormGroup.controls.frmRegimen.setValue('');
+       // this.pharmFormGroup.controls.frmRegimenLine.setValue('');
 
-        this.pharmFormGroup.controls.frmPeriodTaken.setValue('');
-        this.pharmFormGroup.controls.frmReason.setValue('');
+       // this.pharmFormGroup.controls.frmPeriodTaken.setValue('');
+       // this.pharmFormGroup.controls.frmReason.setValue('');
 
 
     }
@@ -1231,6 +1252,7 @@ export class PharmOrderformComponent implements OnInit {
         this.userId = JSON.parse(localStorage.getItem('appUserId'));
 
         if (this.patientMasterVisitId > 0) {
+            this.spinner.show();
             let locationId: number;
             locationId = JSON.parse(localStorage.getItem('appLocationId'));
             this.pharmacyservice.AddSaveUpdatePharmacyRecord(this.person.ptn_pk, this.patientMasterVisitId,
@@ -1284,7 +1306,7 @@ export class PharmOrderformComponent implements OnInit {
                                 frmDatePrescibed, this.PrescribedBy,
                                 frmDateDispensed, this.pmscmFlag, this.DrugArray,
                                 moment(visitDate).toDate(), this.DispensedBy).subscribe((res) => {
-                                    this.snotifyService.success('Saved the pharmacy record' + res['ptn_Pharmacy_Pk']
+                                    this.snotifyService.success('Saved the pharmacy record ' + res['ptn_Pharmacy_Pk']
                                         , 'Pharmacy Form', this.notificationService.getConfig());
 
 
