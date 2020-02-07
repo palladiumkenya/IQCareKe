@@ -1,8 +1,6 @@
-
 IF OBJECT_ID('dbo.PharmacyDrugVisitDetailsView', 'V') IS NOT NULL
     DROP VIEW [dbo].[PharmacyDrugVisitDetailsView]
 GO
-
 
 CREATE VIEW  [dbo].[PharmacyDrugVisitDetailsView]
 AS
@@ -63,10 +61,6 @@ where artt.RegimenId > 0
 )artv on artv.PatientMasterVisitId=po.PatientMasterVisitId and artv.RegimenLineId=po.RegimenLine
 
 where (po.DeleteFlag is null) or (po.DeleteFlag = 0)
-
-
-
-
 
 
 

@@ -140,7 +140,7 @@ namespace IQCare.Pharm.BusinessProcess.CommandHandlers.PatientPharmacy
 
                             });
 
-                             Pk =  phar.SaveUpdatePharmacy(Convert.ToInt32(request.Ptn_Pk), Convert.ToInt32(request.PatientMasterVisitId)
+                             Pk =  await phar.SaveUpdatePharmacy(Convert.ToInt32(request.Ptn_Pk), Convert.ToInt32(request.PatientMasterVisitId)
                           , Convert.ToInt32(request.PatientId), Convert.ToInt32(request.LocationId),
                            request.PrescribedBy, Convert.ToInt32(request.UserId), pharmlist, request.DispensedBy,
 
