@@ -1501,7 +1501,10 @@
                         ExistingProgramvalue = DrugTableArray.filter(x => x.TreatmentProgram.toString() != treatmentProgramName.toString()
                             && x.TreatmentProgram.toString() !== "Treatment" && x.TreatmentProgram.toString() !== "prophylaxis" &&
                              x.TreatmentProgram.toString() !== "Non-ART"
-                            && treatmentProgramName !== "Non-ART")
+                            && treatmentProgramName !== "Non-ART"
+                            && treatmentProgramName !=="Treatment"
+                            && treatmentProgramName !=="prophylaxis"
+                        )
                         console.log("ArrayExistingProgramValue");
                         console.log(ExistingProgramvalue);
                         if (ExistingProgramvalue.length > 0) {
@@ -1761,6 +1764,8 @@
                             && x.TreatmentProgram.toString() !== "prophylaxis"
                             && treatmentProgramName !== "Non-ART" &&
                             x.TreatmentProgram.toString() !== "Non-ART"
+                            && treatmentProgramName !=="Treatment"
+                            && treatmentProgramName !=="prophylaxis"
                         )
                         console.log(ExistingProgramvalue);
                         if (ExistingProgramvalue.length > 0) {

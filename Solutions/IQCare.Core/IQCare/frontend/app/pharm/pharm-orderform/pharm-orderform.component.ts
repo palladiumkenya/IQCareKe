@@ -878,14 +878,18 @@ export class PharmOrderformComponent implements OnInit {
                 ExistingProgramvalue = this.DrugArray.filter(x => x.TreatmentProgramText.toString() !== treatmentprogramtext.toString()
                     && x.TreatmentProgramText.toString() !== 'Treatment'
                     && x.TreatmentProgramText.toString() !== 'prophylaxis'
-                    && x.TreatmentProgramText.toString() !== 'Non-ART');
+                    && x.TreatmentProgramText.toString() !== 'Non-ART'
+                    && treatmentprogramtext.toString() !=='Treatment'
+                    && treatmentprogramtext.toString() !=='prophylaxis'
+                    && treatmentprogramtext.toString() !== "Non-ART"
+                    );
 
                 if (ExistingProgramvalue.length > 0) {
 
                 
-                    valuesprogram = this.removeDups(ExistingProgramvalue);
+                  //  valuesprogram = this.removeDups(ExistingProgramvalue);
 
-                    {
+                   // {
                         this.snotifyService.error('Kindly one can only add one treatment ' +
                             'program and either Non-ART , Treatment or prophylaxis program only ' +
                             'Kindly clear the drugs for ' + valuesprogram.toString() +
@@ -895,7 +899,7 @@ export class PharmOrderformComponent implements OnInit {
                         return;
 
 
-                    }
+                   // }
                     
                 }
 
