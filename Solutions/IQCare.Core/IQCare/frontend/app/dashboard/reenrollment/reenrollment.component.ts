@@ -50,7 +50,7 @@ export class ReenrollmentComponent implements OnInit {
             const { id, serviceId, serviceCode } = params;
             this.personId = id;
             this.serviceId = serviceId;
-            this.serviceCode =serviceCode;
+            this.serviceCode = serviceCode;
 
         });
 
@@ -97,13 +97,24 @@ export class ReenrollmentComponent implements OnInit {
                 this.appStateService.addAppState(AppEnum.PATIENTID, this.personId,
                     this.patientId).subscribe();
 
+                /* this.zone.run(() => {
+                     this.zone.run(() => {
+                         this.router.navigate(
+                             ['/prep/' + this.patientId + '/' + this.personId + '/' + this.serviceId],
+                             { relativeTo: this.route });
+                     });
+                 });*/
+
+
                 this.zone.run(() => {
                     this.zone.run(() => {
                         this.router.navigate(
-                            ['/prep/' + this.patientId + '/' + this.personId + '/' + this.serviceId],
+                            ['/dashboard/personhome/' + this.personId],
                             { relativeTo: this.route });
                     });
                 });
+
+
             },
 
                 (err) => {
