@@ -25,7 +25,7 @@ namespace IQCare.Pharm.Core.Models
 
         public DateTime? DispensedByDate { get; set; }
 
-        public int? DispensedbyName { get; set; }
+        public string DispensedbyName { get; set; }
 
         public int? ProgID { get; set; }
 
