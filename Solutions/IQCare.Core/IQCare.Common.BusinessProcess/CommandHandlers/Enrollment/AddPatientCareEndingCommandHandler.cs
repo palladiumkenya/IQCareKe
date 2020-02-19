@@ -37,37 +37,36 @@ namespace IQCare.Common.BusinessProcess.CommandHandlers.Enrollment
                 var result = await _unitOfWork.Repository<PatientEnrollment>().Get(x =>
                         x.PatientId == request.PatientId && x.ServiceAreaId == request.ServiceAreaId &&
                         x.DeleteFlag == false && !x.CareEnded).FirstOrDefaultAsync();
-
-                    var PatientCare = await _unitOfWork.Repository<PatientCareEnding>().Get(x => x.PatientMasterVisitId == request.PatientMasterVisitId && x.PatientId == request.PatientId &&
-                        x.DeleteFlag == false ).FirstOrDefaultAsync();
-                if (PatientCare != null)
-                {
-                    PatientCare.PatientId = request.PatientId;
-                    PatientCare.PatientMasterVisitId = request.PatientMasterVisitId;
-                    PatientCare.ExitReason = request.DisclosureReason;
-                    PatientCare.ExitDate = request.CareEndedDate;
-                    PatientCare.CareEndingNotes = request.Specify;
-                    PatientCare.DateOfDeath = request.DeathDate;
-
-                    _unitOfWork.Repository<PatientCareEnding>().Update(PatientCare);
-                    await _unitOfWork.SaveAsync();
-                    if (PatientCare.Id > 0)
+              
+                 if (result != null)
                     {
-                        Id = PatientCare.Id;
-                    }
-                    Message += "Patient Information has been updated";
 
-                }
-                else {
-
-
-                    if (result != null)
-                    {
                         PatientEnrollmentId = result.Id;
 
                         if (PatientEnrollmentId > 0)
                         {
+                        var PatientCare = await _unitOfWork.Repository<PatientCareEnding>().Get(x => x.PatientMasterVisitId == request.PatientMasterVisitId && x.PatientId == request.PatientId &&
+                        x.DeleteFlag == false && x.PatientEnrollmentId == result.Id).FirstOrDefaultAsync();
+                        if (PatientCare != null)
+                        {
+                            PatientCare.PatientId = request.PatientId;
+                            PatientCare.PatientMasterVisitId = request.PatientMasterVisitId;
+                            PatientCare.ExitReason = request.DisclosureReason;
+                            PatientCare.ExitDate = request.CareEndedDate;
+                            PatientCare.CareEndingNotes = request.Specify;
+                            PatientCare.DateOfDeath = request.DeathDate;
 
+                            _unitOfWork.Repository<PatientCareEnding>().Update(PatientCare);
+                            await _unitOfWork.SaveAsync();
+                            if (PatientCare.Id > 0)
+                            {
+                                Id = PatientCare.Id;
+                            }
+                            Message += "Patient Information has been updated";
+
+                        }
+                        else
+                        {
 
                             PatientCareEnding pc = new PatientCareEnding()
 
@@ -89,7 +88,6 @@ namespace IQCare.Common.BusinessProcess.CommandHandlers.Enrollment
                             await _unitOfWork.Repository<PatientCareEnding>().AddAsync(pc);
                             await _unitOfWork.SaveAsync();
 
-
                             if (pc.Id > 0)
                             {
                                 Id = Id;
@@ -97,7 +95,10 @@ namespace IQCare.Common.BusinessProcess.CommandHandlers.Enrollment
 
                             Message += "Patient has been successfully careended";
 
+                        }
+                          
 
+                        
                         }
 
                         var patientenrollment = await _unitOfWork.Repository<PatientEnrollment>().Get(x => x.Id == PatientEnrollmentId
@@ -119,7 +120,7 @@ namespace IQCare.Common.BusinessProcess.CommandHandlers.Enrollment
                         Message += "Patient has not been successfully careended";
                     }
 
-                }
+                
                     
                 
 

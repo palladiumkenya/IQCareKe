@@ -838,9 +838,11 @@ namespace IQCare.Common.BusinessProcess.Services
                                 });
                             }
 
-                            await _unitOfWork.Repository<PatientIdentifier>().AddRangeAsync(patientIdentifierList);
-                            await _unitOfWork.SaveAsync();
+                           
                         }
+
+                        await _unitOfWork.Repository<PatientIdentifier>().AddRangeAsync(patientIdentifierList);
+                        await _unitOfWork.SaveAsync();
                     }
                 }
                 else
