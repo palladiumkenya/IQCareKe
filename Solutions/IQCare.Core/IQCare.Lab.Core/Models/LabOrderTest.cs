@@ -34,13 +34,13 @@ namespace IQCare.Lab.Core.Models
 
         public bool IsParent { get; private set; }
 
-        public int ParentTestId { get; private set; }
+        public int? ParentTestId { get; private set; }
 
         public bool DeleteFlag { get; private set; }
 
         public string ResultNotes { get; private set; }
 
-        public int ResultBy { get; private set; }
+        public int? ResultBy { get; private set; }
 
         public DateTime? ResultDate { get; private set; }
 

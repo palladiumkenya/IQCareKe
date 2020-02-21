@@ -66,7 +66,7 @@ namespace IQCare.Lab.Core.Models
 
         public bool DeleteFlag { get; private set; }
 
-        public int DeletedBy { get; private set; }
+        public int? DeletedBy { get; private set; }
 
         public DateTime? DeleteDate { get; private set; }
 

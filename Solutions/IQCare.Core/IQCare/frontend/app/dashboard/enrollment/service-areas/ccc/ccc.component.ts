@@ -207,7 +207,7 @@ export class CccComponent implements OnInit {
     loadPatient(): void {
         this.personHomeService.getPatientModelByPersonId(this.personId).subscribe(
             (result) => {
-                console.log(result);
+
                 this.form.controls.PatientType.setValue(result.patientType);
                 // load population type
                 this.loadPopulationTypes(this.personId);
@@ -445,6 +445,7 @@ export class CccComponent implements OnInit {
 
         forkJoin([addPatient, populationTypes, addReconfirmatoryTest]).subscribe(
             res => {
+
                 this.patientId = res[0]['patientId'];
                 enrollment.PatientId = this.patientId;
                 const entryPoint: ServiceEntryPointCommand = {
@@ -459,10 +460,30 @@ export class CccComponent implements OnInit {
 
                 this.enrollmentService.enrollClient(enrollment).subscribe(
                     (response) => {
+
+
                         this.snotifyService.success('Successfully Enrolled ', 'Enrollment',
                             this.notificationService.getConfig());
 
                         localStorage.setItem('selectedService', this.serviceCode.toLowerCase());
+
+                        let messageType: number;
+                        if (this.isEdit == true) {
+                            messageType = 2;
+                        }
+                        else {
+                            messageType = 0;
+                        }
+                        let enrollmentId: number;
+                        let posId: number;
+
+                        enrollmentId = parseInt(response['enrollmentId'].toString(), 10);
+                        if (enrollmentId > 0) {
+                            this.enrollmentService.sendIL(this.patientId, enrollmentId, parseInt(this.posId, 10), messageType)
+                                .subscribe();
+
+
+                        }
 
                         this.store.dispatch(new Consent.SelectedService(this.serviceCode.toLowerCase()));
 

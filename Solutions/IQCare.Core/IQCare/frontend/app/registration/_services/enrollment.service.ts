@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
-import {environment} from '../../../environments/environment';
-import {HttpClient, HttpHeaders} from '@angular/common/http';
-import {Observable, of} from 'rxjs';
+import { environment } from '../../../environments/environment';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Observable, of } from 'rxjs';
 
-import {catchError, tap} from 'rxjs/operators';
-import {Enrollment} from '../_models/enrollment';
-import {Person} from '../_models/person';
-import {ErrorHandlerService} from '../../shared/_services/errorhandler.service';
+import { catchError, tap } from 'rxjs/operators';
+import { Enrollment } from '../_models/enrollment';
+import { Person } from '../_models/person';
+import { ErrorHandlerService } from '../../shared/_services/errorhandler.service';
 
 const httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -15,10 +15,11 @@ const httpOptions = {
 @Injectable()
 export class EnrollmentService {
     private API_URL = environment.API_URL;
+    private API_INTEROP = environment.API_INTEROP;
     private _url = '/api/Register/enrollment';
 
     constructor(private http: HttpClient,
-                private errorHandler: ErrorHandlerService) { }
+        private errorHandler: ErrorHandlerService) { }
 
     public enrollClient(clientEnrollment: Enrollment): Observable<Enrollment> {
         const Indata = {
@@ -33,21 +34,37 @@ export class EnrollmentService {
 
 
 
-    
-    public reenrollPatient(patientId: number, enrollmentdate: string, userid: number, 
+
+    public reenrollPatient(patientId: number, enrollmentdate: string, userid: number,
         serviceareaid: number): Observable<any[]> {
         const Indata = {
             'PatientId': patientId,
             'EnrollmentDate': enrollmentdate,
             'UserId': userid,
-            'ServiceAreaId' : serviceareaid
+            'ServiceAreaId': serviceareaid
         };
 
 
-        return this.http.post<any>(this.API_URL + '/api/Register/AddPatientReenrollment',  JSON.stringify(Indata), httpOptions)
-        .pipe(
-            tap((reenrolledClient => this.errorHandler.log(`reenrolled client w/ id`)),
-            catchError(this.errorHandler.handleError<any[]>('clientreEnrollment'))
-        ));
+        return this.http.post<any>(this.API_URL + '/api/Register/AddPatientReenrollment', JSON.stringify(Indata), httpOptions)
+            .pipe(
+                tap((reenrolledClient => this.errorHandler.log(`reenrolled client w/ id`)),
+                    catchError(this.errorHandler.handleError<any[]>('clientreEnrollment'))
+                ));
+    }
+
+    public sendIL(patientId: number, patientEnrollmentId: number, FacilityId: number, messageType: number): Observable<any> {
+        const Indata = {
+            'PatientId': patientId,
+            'EntityId': patientEnrollmentId,
+            'MessageType': messageType,
+            'EventOccurred': "Patient CareEnded Identifier = ",
+            'FacilityId': FacilityId
+        };
+
+
+        return this.http.post<any>(this.API_INTEROP + '/api/interop/dispatch', JSON.stringify(Indata), httpOptions).pipe(
+            tap((sendil => this.errorHandler.log(`send data to IL`)),
+                catchError(this.errorHandler.handleError<any[]>('SendIL')))
+        );
     }
 }

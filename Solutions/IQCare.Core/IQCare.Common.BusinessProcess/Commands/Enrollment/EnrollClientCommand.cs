@@ -26,6 +26,8 @@ namespace IQCare.Common.BusinessProcess.Commands.Enrollment
     public class EnrollClientResponse
     {
         public string Message { get; set; }
+
+        public int EnrollmentId { get; set; }
         //public int IdentifierId { get; set; }
         //public string IdentifierValue { get; set; }
     }

@@ -8,5 +8,6 @@ export const environment = {
     API_AIR_URL: location.protocol + '//' + window.location.hostname + ':' + window.location.port + '/IQCareAIR',
     API_PREP_URL: location.protocol + '//' + window.location.hostname + ':' + window.location.port + '/IQCarePREP',
     API_QUEUE_URL: location.protocol + '//' + window.location.hostname + ':' + window.location.port + '/IQCareQueue',
-    API_PHARM_URL: location.protocol + '//' + window.location.hostname + ':' + window.location.port + '/IQCarePHARM'
+    API_PHARM_URL: location.protocol + '//' + window.location.hostname + ':' + window.location.port + '/IQCarePHARM',
+    API_INTEROP: location.protocol + '//' + window.location.hostname + ':' + window.location.port + '/IQCare'
 };
