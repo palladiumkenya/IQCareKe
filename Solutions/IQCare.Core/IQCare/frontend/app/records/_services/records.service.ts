@@ -16,6 +16,7 @@ const httpOptions = {
 })
 export class RecordsService {
     private API_URL = environment.API_URL;
+    private API_INTEROP = environment.API_INTEROP;
 
     constructor(private http: HttpClient, private errorHandler: ErrorHandlerService) { }
 
@@ -44,6 +45,12 @@ export class RecordsService {
         return this.http.get<LookupItemView[]>(this.API_URL + '/api/Lookup/GetOptionsByMasterName/' + 'Occupation').pipe(
             tap(getOccupationOptions => this.errorHandler.log('get occupation options')),
             catchError(this.errorHandler.handleError<any[]>('getOccupationOptions'))
+        );
+    }
+    public getEnrolledServices(personId: number): Observable<any> {
+        return this.http.get<any>(this.API_URL + '/api/PatientServices/GetEnrolledServicesByPersonId/' + personId).pipe(
+            tap(getPersonEnrolledServices => this.errorHandler.log(`get person enrolled services`)),
+            catchError(this.errorHandler.handleError<any>('getPersonEnrolledServices'))
         );
     }
 
@@ -81,7 +88,12 @@ export class RecordsService {
             catchError(this.errorHandler.handleError<any[]>('getPersonIdentifiers'))
         );
     }
-
+    public getAllServices(): Observable<any> {
+        return this.http.get<any>(this.API_URL + '/api/ServiceArea/GetAllServices').pipe(
+            tap(getAllServices => this.errorHandler.log(`get all facility services`)),
+            catchError(this.errorHandler.handleError<any[]>('getAllServices'))
+        );
+    }
 
     public getPersonNHIFIdentifiers(): Observable<any> {
         return this.http.get<any>(this.API_URL + '/api/Lookup/getNHIFIdentifyerTypes').pipe(
@@ -89,6 +101,31 @@ export class RecordsService {
             catchError(this.errorHandler.handleError<any[]>('getPersonNHIFIdentifiers'))
         );
 
+    }
+    public getPatientEnrollmentDateByServiceAreaId(patientId: number, serviceAreaId: number): Observable<any> {
+        return this.http.get<any>(this.API_URL + '/api/Register/GetPatientEnrollmentByServiceAreaId/'
+            + patientId + '/' + serviceAreaId).pipe(
+                tap(getPatientEnrollmentDateByServiceAreaId => this.errorHandler.log(`get patient enrollment date for patientId:  `
+                    + patientId + ` and serviceAreaId: ` + serviceAreaId)),
+                catchError(this.errorHandler.handleError<any>('getPatientEnrollmentDateByServiceAreaId'))
+            );
+    }
+
+
+    public sendIL(patientId: number, patientEnrollmentId: number, FacilityId: number, messageType: number): Observable<any> {
+        const Indata = {
+            'PatientId': patientId,
+            'EntityId': patientEnrollmentId,
+            'MessageType': messageType,
+            'EventOccurred': "Patient CareEnded Identifier = ",
+            'FacilityId': FacilityId
+        };
+
+
+        return this.http.post<any>(this.API_INTEROP + '/api/interop/dispatch', JSON.stringify(Indata), httpOptions).pipe(
+            tap((sendil => this.errorHandler.log(`send data to IL`)),
+                catchError(this.errorHandler.handleError<any[]>('SendIL')))
+        );
     }
 
     public getPatientIdentifiersList(patientId: number): Observable<any[]> {

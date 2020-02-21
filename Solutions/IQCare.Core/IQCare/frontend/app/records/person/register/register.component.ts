@@ -47,13 +47,14 @@ export class RegisterComponent implements OnInit {
     clientContact: ClientContact;
     nextOfKin: NextOfKin;
     maxDate: Date;
-
+    enrolledServices: any[];
     counties: County[];
     subCounties: County[];
     wards: County[];
     gender: LookupItemView[];
     maritalStatus: LookupItemView[];
     educationLevel: LookupItemView[];
+    PatientCCCEnrolled: boolean = false;
     occupation: LookupItemView[];
     relationship: LookupItemView[];
     consentSms: LookupItemView[];
@@ -61,15 +62,15 @@ export class RegisterComponent implements OnInit {
     personIdentifiers: any[];
     NHIFIdentifiers: any[];
     yesnoOptions: LookupItemView[];
-
+    services: any[];
     clientSearch: Search;
 
     dataSource: any[];
     newContacts: any[];
     id: number;
-
+    PatientId: number;
     partnerType: Partner;
-
+    PatientEnrollmentId: number;
     public phonePattern = /^(?:\+254|0|254)(\d{9})$/;
 
     constructor(private _formBuilder: FormBuilder,
@@ -160,9 +161,11 @@ export class RegisterComponent implements OnInit {
         this.route.params.subscribe(params => {
             this.id = params['id'];
         });
+        this.getServices();
 
         if (this.id) {
             this.getPersonDetails(this.id);
+            this.getPersonEnrolledServices(this.id);
         }
 
         this.partnerType = new Partner();
@@ -172,10 +175,56 @@ export class RegisterComponent implements OnInit {
         }
     }
 
+    async getServices() {
+        await this.recordsService.getAllServices().subscribe((res) => {
+            if (res) {
+
+                this.services = res;
+            }
+            console.log(this.services);
+        }, (err) => {
+            //  console.log(err);
+        })
+    }
+    getPersonEnrolledServices(id: any) {
+        this.recordsService.getEnrolledServices(id).subscribe((res) => {
+            this.enrolledServices = res['personEnrollmentList'];
+            if (this.enrolledServices && this.enrolledServices.length > 0) {
+                this.PatientId = this.enrolledServices[0]['patientId'];
+
+                let isCCCEnrolled;
+                if (this.enrolledServices) {
+                    isCCCEnrolled = this.enrolledServices.filter(obj => obj.serviceAreaId == 1);
+                    if (isCCCEnrolled != undefined) {
+                        if (isCCCEnrolled && isCCCEnrolled.length > 0) {
+                            this.PatientCCCEnrolled=true;
+                            this.loadPatientEnrollmentDetails(this.PatientId ,isCCCEnrolled[0].serviceAreaId);
+                        }
+                    }
+                }
+
+            }
+
+        });
+    }
+
+    loadPatientEnrollmentDetails(patientId: any, serviceId: any): void {
+        this.recordsService.getPatientEnrollmentDateByServiceAreaId(patientId, serviceId).subscribe(
+            (result) => {
+                console.log('EnrollmentDetails');
+                console.log(result);
+                // console.log(result);
+
+            },
+            (error) => {
+                console.log(error);
+            }
+        );
+    }
     getPersonDetails(id: number): any {
         this.recordsService.getPersonDetails(id).subscribe(
             (result) => {
-                console.log(result);
+
                 const {
                     alternativeNumber, county, countyId, dateOfBirth, dobPrecision, educationLevel, educationLevelId,
                     emailAddress, firstName, gender, lastName, maritalStatus, maritalStatusId, middleName, nickName,
@@ -401,6 +450,28 @@ export class RegisterComponent implements OnInit {
             if (this.id) {
                 // set person id for update
                 this.person.id = this.id;
+            }
+            if(this.id) {
+                if(this.PatientCCCEnrolled == true)
+                {
+                    let messageType:number;
+                       
+                                messageType=2;
+               
+                        
+                       let enrollmentId:number;
+                       let posId: number;
+                       
+                        enrollmentId=parseInt(this.PatientEnrollmentId.toString(),10);
+                        if(enrollmentId > 0)
+                        {
+                            
+                            this.recordsService.sendIL(this.PatientId,this.PatientEnrollmentId,parseInt(this.person.PosId.toString() ,10),messageType)
+                            .subscribe();
+
+                            
+                        }
+                }
             }
 
             this.personRegistration.registerPerson(this.person).subscribe(

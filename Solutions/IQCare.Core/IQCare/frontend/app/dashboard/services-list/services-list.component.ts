@@ -88,6 +88,7 @@ export class ServicesListComponent implements OnInit {
         this.EligibilityInformation = [];
         this.vitalWeight = this.weight;
 
+        
         this.userId = JSON.parse(localStorage.getItem('appUserId'));
         this.getPersonEnrolledServices(this.personId);
 
@@ -97,6 +98,7 @@ export class ServicesListComponent implements OnInit {
     }
 
 
+    
     getPersonEnrolledServices(personId: number) {
         this.personhomeservice.getPersonEnrolledServices(personId).subscribe((res) => {
             this.enrolledServices = res['personEnrollmentList'];
