@@ -96,7 +96,7 @@ namespace IQCare.Common.Core.Models
 
                     this.Age = String.Format("{0} Year(s) {1} Month(s)", Years, Months);
                     if (Months > 0)
-                        this.AgeNumber = Years + 1;
+                        this.AgeNumber = Years;
                     else
                         this.AgeNumber = Years;
                 }

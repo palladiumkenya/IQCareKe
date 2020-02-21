@@ -470,17 +470,17 @@ export class ServicesListComponent implements OnInit {
         return isEligible;
 
     }
-    isEligibleReenrollment(serviceAreaId: number) {
     
+    isEligibleReenrollment(serviceAreaId: number) {
         const selectedService = this.services.filter(obj => obj.id == serviceAreaId);
         let isEligible: boolean = false;
         if (selectedService && selectedService.length > 0) {
             if (selectedService[0]['code'] !== 'PREP') {
                 if (this.serviceareacareenddetails  != undefined) {
-                    if (this.serviceareacareenddetails .length > 0) {
+                    if (this.serviceareacareenddetails.length > 0) {                        
                         const servicelist = this.serviceareacareenddetails.filter(x => x.serviceAreaId == serviceAreaId);
-                        if (servicelist.length > 0   && servicelist != undefined) {
-                            if (servicelist[0].exitReason.toLowerCase !== 'death') {
+                        if (servicelist.length > 0) {
+                            if (servicelist[0].exitReason.toLowerCase() !== 'death') {
                                 isEligible = true;
                             } else {
                                 isEligible = false;
