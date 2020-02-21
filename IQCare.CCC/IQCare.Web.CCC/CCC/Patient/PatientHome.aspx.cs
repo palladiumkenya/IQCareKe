@@ -245,6 +245,7 @@ namespace IQCare.Web.CCC.Patient
                 int adherenceType = 34;
                 if (adherenceList.Count > 0)
                 {
+
                     adherenceType = adherenceList[0].MasterId;
                 }
 

@@ -83,6 +83,9 @@
         </div><!-- .col-md-8 -->
     </div><!-- .col-md-12 -->
     <script type="text/javascript">
+        //$( ".reporting-head" ).click(function() {
+        //  $('.disablepage').show();
+        //});
          var facilityId = '<%=AppLocationId%>';
 
         function GenExcel(category) {

@@ -25,5 +25,6 @@ namespace Interface.CCC
         List<PharmacyFields> getPharmacyFields(string patientMasterVisitID);
         List<PharmacyFields> getPharmacyCurrentRegimen(string patientId);
         List<KeyValue> getPharmacyTreatmentProgram();
+        int saveDispensing(int QtyDis, int rowid, DateTime dispensedate);
     }
 }
