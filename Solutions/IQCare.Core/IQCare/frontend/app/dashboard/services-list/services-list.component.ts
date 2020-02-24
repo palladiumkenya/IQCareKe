@@ -30,7 +30,7 @@ export class ServicesListComponent implements OnInit {
     @Input('services') services: any[];
     @Input('careendoptions') carendedreason: LookupItemView[];
     @Input('person') person: any;
-    @Input('ServiceAreaCareEndDetails')    serviceareacareenddetails: any[];
+    @Input('ServiceAreaCareEndDetails') serviceareacareenddetails: any[];
     // @Input('encounterDetail') encounterDetail: EncounterDetails;
     @Input('personVitalWeight') weight: number;
     @Input('riskencounters') riskencounter: any[];
@@ -40,7 +40,7 @@ export class ServicesListComponent implements OnInit {
     enrolledServices: any[];
     PatientCCCEnrolled: boolean = false;
     patientIdentifiers: any[];
- 
+
     riskassessmentPatientMasterVisitId: number;
     enrolledService: any[] = [];
     identifiers: any[] = [];
@@ -81,14 +81,14 @@ export class ServicesListComponent implements OnInit {
         private appStateService: AppStateService,
         private lookupItemService: LookupItemService
     ) {
-       
+
     }
 
- async  ngOnInit() {
+    async  ngOnInit() {
         this.EligibilityInformation = [];
         this.vitalWeight = this.weight;
 
-        
+
         this.userId = JSON.parse(localStorage.getItem('appUserId'));
         this.getPersonEnrolledServices(this.personId);
 
@@ -98,7 +98,7 @@ export class ServicesListComponent implements OnInit {
     }
 
 
-    
+
     getPersonEnrolledServices(personId: number) {
         this.personhomeservice.getPersonEnrolledServices(personId).subscribe((res) => {
             this.enrolledServices = res['personEnrollmentList'];
@@ -297,7 +297,7 @@ export class ServicesListComponent implements OnInit {
                             window.location.href = location.protocol + '//' + window.location.hostname + ':' + window.location.port +
                                 '/IQCare/CCC/Patient/PatientHome.aspx';
                         } else {
-                            this.snotifyService.warning('Could not open Green Card patient does not have patientId or PersonId ', 
+                            this.snotifyService.warning('Could not open Green Card patient does not have patientId or PersonId ',
                                 'Encounter', this.notificationService.getConfig());
                             return;
                         }
@@ -320,8 +320,8 @@ export class ServicesListComponent implements OnInit {
                 case 'OVC':
                     this.zone.run(() => {
                         this.router.navigate(
-                            ['/ccc/ovcFormList/' + this.personId + '/'
-                                + this.person.patientId + '/' + serviceId],
+                            ['/ccc/ovcFormList/' + this.person.patientId + '/' + this.personId + '/'
+                                + serviceId],
                             { relativeTo: this.route });
                     });
                     break;
@@ -472,14 +472,14 @@ export class ServicesListComponent implements OnInit {
         return isEligible;
 
     }
-    
+
     isEligibleReenrollment(serviceAreaId: number) {
         const selectedService = this.services.filter(obj => obj.id == serviceAreaId);
         let isEligible: boolean = false;
         if (selectedService && selectedService.length > 0) {
             if (selectedService[0]['code'] !== 'PREP') {
-                if (this.serviceareacareenddetails  != undefined) {
-                    if (this.serviceareacareenddetails.length > 0) {                        
+                if (this.serviceareacareenddetails != undefined) {
+                    if (this.serviceareacareenddetails.length > 0) {
                         const servicelist = this.serviceareacareenddetails.filter(x => x.serviceAreaId == serviceAreaId);
                         if (servicelist.length > 0) {
                             if (servicelist[0].exitReason.toLowerCase() !== 'death') {
@@ -491,12 +491,12 @@ export class ServicesListComponent implements OnInit {
                     }
                 }
             }
-        
+
         }
 
         return isEligible;
     }
-     isEligibleServiceReenrollment(serviceAreaId: number) {
+    isEligibleServiceReenrollment(serviceAreaId: number) {
 
 
         const selectedService = this.services.filter(obj => obj.id == serviceAreaId);
@@ -508,7 +508,7 @@ export class ServicesListComponent implements OnInit {
                 } else {
                     isEligible = false;
                 }
-            } 
+            }
 
 
         }
