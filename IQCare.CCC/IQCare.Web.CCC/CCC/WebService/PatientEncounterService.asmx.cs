@@ -1245,17 +1245,20 @@ namespace IQCare.Web.CCC.WebService
             }
             foreach (DataRow row in theDT.Rows)
             {
-                string buttonid = "'"+row["Id"].ToString() + "btnid'";
-                int drugbalance = Convert.ToInt32(row["OrderedQuantity"]) - Convert.ToInt32(row["DispensedQuantity"]);
-                string rowid = row["Id"].ToString();
-                string qeverdispensed = "<input type='text' class='form-control input-sm txtqtyeverdispensed' id='" + row["Id"].ToString() + "qtyeverdispensedinputid' value='" + row["DispensedQuantity"].ToString() + "' disabled> ";
-                string qtydispensedinput = "<input type='text' class='form-control input-sm txtqtydispensed' id='" + row["Id"].ToString() + "qtydispensedinputid' value=''> ";
-                string qtyremaining = "<input type='text' class='form-control input-sm txtqtyremaining' id='" + row["Id"].ToString() + "qtyremaininginputid' value='"+drugbalance.ToString()+"' disabled>";
-                string nextpickupdate = "<input class='form-control input-sm NextAppDate' data-date-format='mm/dd/yyyy' id='" + row["Id"].ToString() + "nextpickupdateinputid'>";
-                string saveDispensing = "<button type='button' class='btnSaveDispensing btn btn-Success fa fa-minus-circle btn-fill " + row["Id"].ToString() + "save' id='" + row["Id"].ToString() + "savebtnid'> Save </button>";
-                if (DosageFrequency == 1)
+
+                if (theDT.Columns["Id"] != null)
                 {
-                    string[] i = new string[7] { row["ProgID"].ToString(),
+                    string buttonid = "'" + row["Id"].ToString() + "btnid'";
+                    int drugbalance = Convert.ToInt32(row["OrderedQuantity"]) - Convert.ToInt32(row["DispensedQuantity"]);
+                    string rowid = row["Id"].ToString();
+                    string qeverdispensed = "<input type='text' class='form-control input-sm txtqtyeverdispensed' id='" + row["Id"].ToString() + "qtyeverdispensedinputid' value='" + row["DispensedQuantity"].ToString() + "' disabled> ";
+                    string qtydispensedinput = "<input type='text' class='form-control input-sm txtqtydispensed' id='" + row["Id"].ToString() + "qtydispensedinputid' value=''> ";
+                    string qtyremaining = "<input type='text' class='form-control input-sm txtqtyremaining' id='" + row["Id"].ToString() + "qtyremaininginputid' value='" + drugbalance.ToString() + "' disabled>";
+                    string nextpickupdate = "<input class='form-control input-sm NextAppDate' data-date-format='mm/dd/yyyy' id='" + row["Id"].ToString() + "nextpickupdateinputid'>";
+                    string saveDispensing = "<button type='button' class='btnSaveDispensing btn btn-Success fa fa-minus-circle btn-fill " + row["Id"].ToString() + "save' id='" + row["Id"].ToString() + "savebtnid'> Save </button>";
+                    if (DosageFrequency == 1)
+                    {
+                        string[] i = new string[7] { row["ProgID"].ToString(),
                         "<input type='hidden' class='" +row["Id"].ToString()+"drugname'>" + row["DrugName"].ToString(),
                     "<input type='hidden' class='" +row["Id"].ToString()+"prescribingdate' id='" +row["Id"].ToString()+"prescribingdateid'>" + prescribingdate,
                         "<input type='hidden' class='" +row["Id"].ToString()+"qtyordered' id='" +row["Id"].ToString()+"qtyorderedid' value='"+row["OrderedQuantity"].ToString()+"'>" + row["OrderedQuantity"].ToString(),
@@ -1265,12 +1268,13 @@ namespace IQCare.Web.CCC.WebService
                         //"<input type='hidden' class='" +row["Id"].ToString()+"nextpickup' id='" +row["Id"].ToString()+"nextpickupid'>" + nextpickupdate,
                         //saveDispensing
                      };
-                    rows.Add(i);
+                        rows.Add(i);
 
-                }
-                else
-                {
-                    string[] i = new string[26] { row["ProgID"].ToString(),row["TreatmentProgram"].ToString(),
+                    }
+
+                    else
+                    {
+                        string[] i = new string[26] { row["ProgID"].ToString(),row["TreatmentProgram"].ToString(),
                         row["TreatmentPlan"].ToString(),row["TreatmentPlanText"].ToString(),
                         row["TreatmentPlanReason"].ToString(),row["TreatmentPlanReasonId"].ToString(),
                         row["RegimenLine"].ToString(),row["RegimenLineId"].ToString(),row["Regimen"].ToString(),
@@ -1283,10 +1287,33 @@ namespace IQCare.Web.CCC.WebService
                     row["duration"].ToString(),row["OrderedQuantity"].ToString(),row["DispensedQuantity"].ToString(),
                     row["prophylaxis"].ToString(), remove
                      };
-                    rows.Add(i);
+                        rows.Add(i);
+                    }
+
+                }
+                else
+                {
+                    if (DosageFrequency != 1)
+                    {
+                        string[] i = new string[26] { row["ProgID"].ToString(),row["TreatmentProgram"].ToString(),
+                        row["TreatmentPlan"].ToString(),row["TreatmentPlanText"].ToString(),
+                        row["TreatmentPlanReason"].ToString(),row["TreatmentPlanReasonId"].ToString(),
+                        row["RegimenLine"].ToString(),row["RegimenLineId"].ToString(),row["Regimen"].ToString(),
+                        row["RegimenId"].ToString(), row["PeriodTaken"].ToString(),
+                        row["PeriodTakenText"].ToString() ,row["Drug_Pk"].ToString(), row["batchId"].ToString(),
+                    //row["FrequencyID"].ToString(),
+                    row["abbr"].ToString(),row["DrugName"].ToString(),
+                    row["batchName"].ToString(),row["MorningDose"].ToString(),row["MiddayDose"].ToString(),
+                    row["EveningDose"].ToString(), row["NightDose"].ToString(),
+                    row["duration"].ToString(),row["OrderedQuantity"].ToString(),row["DispensedQuantity"].ToString(),
+                    row["prophylaxis"].ToString(), remove
+                     };
+                        rows.Add(i);
+
+                    }
                 }
 
-            }
+                }
             return rows;
         }
 

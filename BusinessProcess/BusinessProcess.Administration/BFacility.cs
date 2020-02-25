@@ -148,7 +148,7 @@ namespace BusinessProcess.Administration
         /// <param name="dtModule">The dt module.</param>
         /// <param name="ht">The ht.</param>
         /// <returns></returns>
-        public int SaveNewFacility(string FacilityName, string CountryID, string PosID, string SatelliteID, string NationalID, int ProvinceId, int DistrictId, string image, int currency, int AppGracePeriod, string dateformat, DateTime PepFarStartDate, int SystemId, int thePreferred, int Paperless, int UserID,int Frequency,int Queue, DataTable dtModule, Hashtable ht)
+        public int SaveNewFacility(string FacilityName, string CountryID, string PosID, string SatelliteID, string NationalID, int ProvinceId, int DistrictId, string image, int currency, int AppGracePeriod, string dateformat, DateTime PepFarStartDate, int SystemId, int thePreferred, int Paperless, int UserID,int Frequency,int Queue,int PartialDispense, DataTable dtModule, Hashtable ht)
         {
             try
             {
@@ -190,6 +190,7 @@ namespace BusinessProcess.Administration
                 ClsUtility.AddParameters("@ExpirePaswordDays", SqlDbType.VarChar, ht["ExpirePaswordDays"].ToString());
                 ClsUtility.AddParameters("@DosageFrequency", SqlDbType.Int, Frequency.ToString());
                 ClsUtility.AddParameters("@SystemQueue", SqlDbType.Int, Queue.ToString());
+                ClsUtility.AddParameters("@PartialDispense", SqlDbType.Int, PartialDispense.ToString());
 
                 Int32 RowsAffected = (Int32)FacilityManager.ReturnObject(ClsUtility.theParams, "Pr_Admin_InsertFacility_Constella", ClsUtility.ObjectEnum.ExecuteNonQuery);
                 if (RowsAffected <= 0)
@@ -262,7 +263,7 @@ namespace BusinessProcess.Administration
         /// <param name="dtModule">The dt module.</param>
         /// <param name="ht">The ht.</param>
         /// <returns></returns>
-        public int UpdateFacility(int FacilityId, string FacilityName, string CountryID, string PosID, string SatelliteID, string NationalID, int ProvinceId, int DistrictId, string image, int currency, int AppGracePeriod, string dateformat, DateTime PepFarStartDate, int Status, int SystemId, int thePreferred, int Paperless, int UserID, int Frequency, int Queue, DataTable dtModule, Hashtable ht)
+        public int UpdateFacility(int FacilityId, string FacilityName, string CountryID, string PosID, string SatelliteID, string NationalID, int ProvinceId, int DistrictId, string image, int currency, int AppGracePeriod, string dateformat, DateTime PepFarStartDate, int Status, int SystemId, int thePreferred, int Paperless, int UserID, int Frequency, int Queue,int PartialDispense, DataTable dtModule, Hashtable ht)
         {
             try
             {
@@ -306,6 +307,7 @@ namespace BusinessProcess.Administration
                 ClsUtility.AddParameters("@ExpirePaswordDays", SqlDbType.VarChar, ht["ExpirePaswordDays"].ToString());
                 ClsUtility.AddParameters("@DosageFrequency", SqlDbType.Int, Frequency.ToString());
                 ClsUtility.AddParameters("@SystemQueue", SqlDbType.Int, Queue.ToString());
+                ClsUtility.AddParameters("@PartialDispense", SqlDbType.Int, PartialDispense.ToString());
                 int RowsAffected = (Int32)FacilityManager.ReturnObject(ClsUtility.theParams, "Pr_Admin_UpdateFacility_Constella", ClsUtility.ObjectEnum.ExecuteNonQuery);
                 if (RowsAffected == 0)
                 {

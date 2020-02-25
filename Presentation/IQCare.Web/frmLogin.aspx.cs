@@ -69,6 +69,7 @@ namespace IQCare.Web
             Session.Add("Gender", "");
             Session.Add("Age", 0);
             Session.Add("DateofBirth",0);
+            Session.Add("PartialDispense", 0);
             ////////////////////////////////////////
 
             lblDate.Text = "";
@@ -354,6 +355,7 @@ namespace IQCare.Web
                     Session["DosageFrequency"] = theDT.Rows[0]["Frequency"].ToString();
                     Session["PatientTrace"] = "";
                     Session["SystemQueue"] = theDT.Rows[0]["SystemQueue"].ToString();
+                    Session["PartialDispense"] = theDT.Rows[0]["PartialDispense"].ToString();
 
                     //Session["AppSystemId"] = theDT.Rows[0]["SystemId"].ToString();
 
