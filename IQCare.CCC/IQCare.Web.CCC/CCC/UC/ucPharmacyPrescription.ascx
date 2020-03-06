@@ -7,6 +7,10 @@
         visibility: hidden;
         display: none;
     }
+    .VisibleButton{
+         visibility: visible;
+         display:inline;
+    }
 
     .VisibleFrequency {
         visibility: hidden;
@@ -460,8 +464,8 @@
             <%--<div class="col-md-2"><asp:LinkButton runat="server" ClientIDMode="Static" CssClass="btn btn-info btn-sm fa fa-plus-circle" OnClick="saveUpdatePharmacy();"> Save Prescription</asp:LinkButton></div>--%>
             <div class="col-md-3">
                 <button type="button" id="btnSavePrescription" name="btnSavePrescription" clientidmode="Static" class="btn btn-info btn-sm fa fa-plus-circle" onclick="saveUpdatePharmacy();">Save Prescription</button></div>
-            <div class="col-md-3">
-                <button type="button" id="btnopendispensingmodal" class="btn btn-Success btn-sm fa fa-floppy-o" data-toggle="modal" data-target="#dispensingModal">Dispense Drugs</button></div>
+            <div class="col-md-3 VisibleButton">
+                <button type="button" id="btnopendispensingmodal" class="btn btn-Success btn-sm fa fa-floppy-o " data-toggle="modal" data-target="#dispensingModal">Dispense Drugs</button></div>
             <div class="col-md-3">
                 <button type="button" class="btn btn-warning btn-sm fa fa-refresh" onclick="resetPharmacyForm();">Reset Prescription</button></div>
             <div class="col-md-3">
@@ -545,6 +549,7 @@
     var patType = "<%=patType.ToString().ToLower() %>";
     var gender = "<%=Session["Gender"]%>";
     var age = "<%=Session["Age"]%>";
+    var PartialDispense = "<%=Session["PartialDispense"]%>";
     var DosageFrequency = "<%= this.DosageFrequency %>";
     var DrugPrescriptionTable;
     var DrugTableArray = new Array();
@@ -673,6 +678,15 @@
             //var nextpickupdate = getTheNextPickupDate(qtydis, dateofdispense, pickupdateinput);
         });
 
+
+        if (PartialDispense.toString() == "1") {
+            $('.VisibleButton').css('Visibility', 'visible');
+            $('.VisibleButton').css('display', 'inline');
+        }
+        else {
+             $('.VisibleButton').css('visibility', 'hidden');
+            $('.VisibleButton').css('display', 'none');
+        }
         if (DosageFrequency.toString() == "1") {
             $('.VisibleFrequency').css('visibility', 'visible');
 
@@ -1626,6 +1640,13 @@
                 if (batchId == undefined)
                     batchId = 0;
 
+
+                if (regimen == undefined) {
+                    regimen = 0;
+                }
+                if (treatmentPlanReason == undefined) {
+                    treatmentPlanReason = 0;
+                }
                 var drugFound = 0;
                 var batchFound = 0;
 
@@ -1877,7 +1898,12 @@
                 //Validate duplication
                 if (batchId == undefined)
                     batchId = 0;
-
+                 if (regimen == undefined) {
+                    regimen = 0;
+                }
+                if (treatmentPlanReason == undefined) {
+                    treatmentPlanReason = 0;
+                }
                 var drugFound = 0;
                 var batchFound = 0;
 
@@ -2122,14 +2148,14 @@
     }
 
 
-         function saveUpdatePharmacy() {
+    function saveUpdatePharmacy() {
         $('#PharmacySection').parsley().destroy();
         $('#PharmacySection').parsley({
             excluded:
-            "input[type=button], input[type=submit], input[type=reset], input[type=hidden], [disabled], :hidden"
+                "input[type=button], input[type=submit], input[type=reset], input[type=hidden], [disabled], :hidden"
         });
 
-     //   if ($('#PharmacySection').parsley().validate()) {
+       // if ($('#PharmacySection').parsley().validate()) {
 
             //console.log(datePrescribed);
             //console.log(dateDispensed);
@@ -2142,15 +2168,15 @@
             } */
 
 
-              var datePrescribed = $("#txtPrescriptionDate").val();
-              var dateDispensed = $("#txtDateDispensed").val();
+            var datePrescribed = $("#txtPrescriptionDate").val();
+            var dateDispensed = $("#txtDateDispensed").val();
             if (datePrescribed == "" || datePrescribed === undefined) {
                 toastr.error("Drug Prescription Error", "Kindly fill the date prescribed");
             }
 
             var allAbbr = "";
             ///////////////////////////////////////////////////////////////////
-         
+
             var drugPrescriptionArray = new Array();
             try {
 
@@ -2214,7 +2240,7 @@
                 }
             }
             catch (ex) { }
-          
+
             //////////////////////////////////////////////////////////////////
             allAbbr = allAbbr.replace(/\/$/, "");
 
@@ -2232,9 +2258,9 @@
             try {
                 //var regExp = /\(([^)]+)\)/;
                 var regimentext;
-                var DrugArray = DrugTableArray.filter(x => x.TreatmentProgram.toString() !== "Treatment" && x.TreatmentProgram.toString() !== "prophylaxis" && x.TreatmentProgram.toString()!== "Non-ART").map(x => { return x.Regimen });
+                var DrugArray = DrugTableArray.filter(x => x.TreatmentProgram.toString() !== "Treatment" && x.TreatmentProgram.toString() !== "prophylaxis" && x.TreatmentProgram.toString() !== "Non-ART").map(x => { return x.Regimen });
                 var regimenText = DrugArray[0].toString();
-                 regimenText = regimenText.match(/\(([^)]+)\)/)[1];
+                regimenText = regimenText.match(/\(([^)]+)\)/)[1];
                 //var matches = regExp.exec(regimenText);
                 var selectedRegimen = regimenText.replace(/\+/g, '/').replace(/ /g, '');
                 //alert(rmv);
@@ -2244,34 +2270,34 @@
                 for (var i = 0; i < selectedRegimen.length; i++) {
                     sumSelectedRegimen += selectedRegimen.charCodeAt(i);
                 }
-               
+
 
             }
             catch (err) {
-                toastr.error("Error", "");
+                
             }
 
             if (sumAllAbbr > 0) {
-              /*  if (treatmentProgramName === 'ART' || treatmentProgramName === 'PMTCT') {
-                    if (regimenLine === "0") {
-                        toastr.error("Error", "Please select the Regimen Line");
-                        return;
-                    }
-                }  */
-                  var DrugTreatment = DrugTableArray.filter(x => x.TreatmentProgram.toString() !== "Treatment" && x.TreatmentProgram.toString() !== "prophylaxis" && x.TreatmentProgram.toString()!== "Non-ART").map(x => { return x.TreatmentProgram });
+                /*  if (treatmentProgramName === 'ART' || treatmentProgramName === 'PMTCT') {
+                      if (regimenLine === "0") {
+                          toastr.error("Error", "Please select the Regimen Line");
+                          return;
+                      }
+                  }  */
+                var DrugTreatment = DrugTableArray.filter(x => x.TreatmentProgram.toString() !== "Treatment" && x.TreatmentProgram.toString() !== "prophylaxis" && x.TreatmentProgram.toString() !== "Non-ART").map(x => { return x.TreatmentProgram });
 
-                if (sumAllAbbr !== sumSelectedRegimen && (DrugTreatment[0] === 'ART' || DrugTreatment[0]  === 'PMTCT') && sumSelectedRegimen < 1500) {
+                if (sumAllAbbr !== sumSelectedRegimen && (DrugTreatment[0] === 'ART' || DrugTreatment[0] === 'PMTCT') && sumSelectedRegimen < 1500) {
                     toastr.error("Error", "Selected Regimen is not equal to Prescribed Regimen!");
                     return;
                 }
                 else {
-                $("#btnSavePrescription").attr("disabled", true);
-                $.ajax({
+                    $("#btnSavePrescription").attr("disabled", true);
+                    $.ajax({
                         url: '../WebService/PatientEncounterService.asmx/savePatientPharmacy',
                         type: 'POST',
                         dataType: 'json',
                         data: "{'prescription':'" +
-                            JSON.stringify(DrugTableArray)  + "','pmscm':'" + pmscmFlag + "','PrescriptionDate':'" +
+                            JSON.stringify(DrugTableArray) + "','pmscm':'" + pmscmFlag + "','PrescriptionDate':'" +
                             datePrescribed + "','DispensedDate':'" + dateDispensed + "'}",
                         contentType: "application/json; charset=utf-8",
                         success: function (data) {
@@ -2285,15 +2311,37 @@
                             toastr.error(data.d, "Error");
                         }
                     });
-                  /*  $.ajax({
+                    /*  $.ajax({
+                          url: '../WebService/PatientEncounterService.asmx/savePatientPharmacy',
+                          type: 'POST',
+                          dataType: 'json',
+                          data: "{'TreatmentProgram':'" + treatmentProgram + "','PeriodTaken':'" + periodTaken + "','TreatmentPlan':'" +
+                              treatmentPlan + "','TreatmentPlanReason':'" + treatmentPlanReason + "','RegimenLine':'" +
+                              regimenLine + "','Regimen':'" + regimen + "','pmscm':'" + pmscmFlag + "','PrescriptionDate':'" +
+                              datePrescribed + "','DispensedDate':'" + dateDispensed + "', 'drugPrescription':'" +
+                              JSON.stringify(drugPrescriptionArray) + "', 'regimenText':'" + regimenText + "'}",
+                          contentType: "application/json; charset=utf-8",
+                          success: function (data) {
+                              $("#btnSavePrescription").attr("disabled", true);
+                              toastr.success(data.d, "Saved successfully");
+                              //$('#pharmacyModal').modal('hide');
+  
+                          },
+                          error: function (data) {
+                              $("#btnSavePrescription").removeAttr("disabled");
+                              toastr.error(data.d, "Error");
+                          }
+                      }); */
+                }
+            }  else {
+                  $("#btnSavePrescription").attr("disabled", true);
+                    $.ajax({
                         url: '../WebService/PatientEncounterService.asmx/savePatientPharmacy',
                         type: 'POST',
                         dataType: 'json',
-                        data: "{'TreatmentProgram':'" + treatmentProgram + "','PeriodTaken':'" + periodTaken + "','TreatmentPlan':'" +
-                            treatmentPlan + "','TreatmentPlanReason':'" + treatmentPlanReason + "','RegimenLine':'" +
-                            regimenLine + "','Regimen':'" + regimen + "','pmscm':'" + pmscmFlag + "','PrescriptionDate':'" +
-                            datePrescribed + "','DispensedDate':'" + dateDispensed + "', 'drugPrescription':'" +
-                            JSON.stringify(drugPrescriptionArray) + "', 'regimenText':'" + regimenText + "'}",
+                        data: "{'prescription':'" +
+                            JSON.stringify(DrugTableArray) + "','pmscm':'" + pmscmFlag + "','PrescriptionDate':'" +
+                            datePrescribed + "','DispensedDate':'" + dateDispensed + "'}",
                         contentType: "application/json; charset=utf-8",
                         success: function (data) {
                             $("#btnSavePrescription").attr("disabled", true);
@@ -2305,39 +2353,19 @@
                             $("#btnSavePrescription").removeAttr("disabled");
                             toastr.error(data.d, "Error");
                         }
-                    }); */
-                } 
-            }
-         /*   else {
-                $.ajax({
-                    url: '../WebService/PatientEncounterService.asmx/savePatientPharmacy',
-                    type: 'POST',
-                    dataType: 'json',
-                    data: "{'TreatmentProgram':'" + treatmentProgram + "','PeriodTaken':'" + periodTaken + "','TreatmentPlan':'" +
-                            treatmentPlan + "','TreatmentPlanReason':'" + treatmentPlanReason + "','RegimenLine':'" +
-                            regimenLine + "','Regimen':'" + regimen + "','pmscm':'" + pmscmFlag + "','PrescriptionDate':'" +
-                            datePrescribed + "','DispensedDate':'" + dateDispensed + "', 'drugPrescription':'" +
-                            JSON.stringify(drugPrescriptionArray) + "', 'regimenText':'" + regimenText + "'}",
-                    contentType: "application/json; charset=utf-8",
-                    success: function (data) {
-                        $("#btnSavePrescription").prop("disabled", true);
-                        toastr.success(data.d, "Saved successfully");
-                    },
-                    error: function (data) {
-                        $("#btnSavePrescription").prop("disabled", false);
-                        toastr.error(data.d, "Error");
-                    }
-                });
-            }
- 
-        } 
+                    });
+               }
+    
+           } 
+   
+   
+            // else {
+            //   toastr.error("Please enter missing fields.");
+            // }
 
-*/
-       // else {
-         //   toastr.error("Please enter missing fields.");
-       // }
+        
 
-       }
+    
     function CalculateQtyPrescribed() {
 
         var morning, midday, evening, night;

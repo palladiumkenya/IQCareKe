@@ -411,6 +411,11 @@
     <None Remove="Scripts\2.2.0\87_ServiceArea.sql" />
     <None Remove="Scripts\2.2.0\88_PharmacyDrugVisitDetailsView.sql" />
     <None Remove="Scripts\2.2.0\89_IQCareRelease.sql" />
+    <None Remove="Scripts\2.2.0\90_Add_PartialDispense.sql" />
+    <None Remove="Scripts\2.2.0\91_Admin_Update_Facility.sql" />
+    <None Remove="Scripts\2.2.0\92_Get_FacilityList.sql" />
+    <None Remove="Scripts\2.2.0\93_InsertFacility.sql" />
+    <None Remove="Scripts\2.2.0\94_Pr_SecurityLogin_Constella.sql" />
     <None Remove="Scripts\2.2.0\IQTools\01_PatientPopulationView.sql" />
     <None Remove="Scripts\2.2.0\IQTools\02_HTS_LABRegisternewer.sql" />
     <None Remove="Scripts\2.2.0\IQTools\03_ANCRegister.sql" />
@@ -856,6 +861,11 @@
     <EmbeddedResource Include="Scripts\2.2.0\87_ServiceArea.sql" />
     <EmbeddedResource Include="Scripts\2.2.0\88_PharmacyDrugVisitDetailsView.sql" />
     <EmbeddedResource Include="Scripts\2.2.0\89_IQCareRelease.sql" />
+    <EmbeddedResource Include="Scripts\2.2.0\90_Add_PartialDispense.sql" />
+    <EmbeddedResource Include="Scripts\2.2.0\91_Admin_Update_Facility.sql" />
+    <EmbeddedResource Include="Scripts\2.2.0\92_Get_FacilityList.sql" />
+    <EmbeddedResource Include="Scripts\2.2.0\93_InsertFacility.sql" />
+    <EmbeddedResource Include="Scripts\2.2.0\94_Pr_SecurityLogin_Constella.sql" />
     <EmbeddedResource Include="Scripts\2.2.0\IQTools\01_PatientPopulationView.sql" />
     <EmbeddedResource Include="Scripts\2.2.0\IQTools\02_HTS_LABRegisternewer.sql" />
     <EmbeddedResource Include="Scripts\2.2.0\IQTools\03_ANCRegister.sql" />
