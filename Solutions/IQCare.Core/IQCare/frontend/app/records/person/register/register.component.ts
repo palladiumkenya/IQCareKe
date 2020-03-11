@@ -175,16 +175,14 @@ export class RegisterComponent implements OnInit {
         }
     }
 
-    async getServices() {
-        await this.recordsService.getAllServices().subscribe((res) => {
+    getServices() {
+        this.recordsService.getAllServices().subscribe((res) => {
             if (res) {
-
                 this.services = res;
             }
-            console.log(this.services);
         }, (err) => {
-            //  console.log(err);
-        })
+            console.log(err);
+        });
     }
     getPersonEnrolledServices(id: any) {
         this.recordsService.getEnrolledServices(id).subscribe((res) => {
@@ -211,16 +209,13 @@ export class RegisterComponent implements OnInit {
     loadPatientEnrollmentDetails(patientId: any, serviceId: any): void {
         this.recordsService.getPatientEnrollmentDateByServiceAreaId(patientId, serviceId).subscribe(
             (result) => {
-
-        if (result !== null && result !== undefined)
-        {
-            this.PatientEnrollmentId = result.id;
-        }
-
-    },
+                if (result !== null && result !== undefined) {
+                    this.PatientEnrollmentId = result.id;
+                }
+            },
             (error) => {
-    console.log(error);
-}
+                console.log(error);
+            }
         );
     }
 getPersonDetails(id: number): any {
@@ -350,7 +345,7 @@ this.validateRegistrationDate();
 validateRegistrationDate(): void {
     const regDate = this.formArray['controls'][0]['controls']['registrationDate'].value;
     const dob = this.formArray['controls'][0]['controls']['DateOfBirth'].value;
-    if(regDate && dob) {
+    if (regDate && dob) {
     const isBefore = moment(regDate).isBefore(dob);
     if (isBefore) {
         this.formArray['controls'][0]['controls']['registrationDate'].setValue('');
@@ -458,24 +453,16 @@ onSubmitForm(tabIndex: number) {
                 let messageType: number;
 
                 messageType = 2;
-
-
                 let enrollmentId: number;
-                let posId: number;
-
                 if (this.PatientEnrollmentId !== undefined) {
                     enrollmentId = parseInt(this.PatientEnrollmentId.toString(), 10);
-
-                }
-                else {
+                } else {
                     enrollmentId = 0;
                 }
                 if (enrollmentId > 0) {
-
-                    this.recordsService.sendIL(this.PatientId, this.PatientEnrollmentId, parseInt(this.person.PosId.toString(), 10), messageType)
+                    this.recordsService.sendIL(this.PatientId, this.PatientEnrollmentId, 
+                        parseInt(this.person.PosId.toString(), 10), messageType)
                         .subscribe();
-
-
                 }
             }
         }
@@ -555,7 +542,12 @@ onSubmitForm(tabIndex: number) {
                                     this.clientContact = new ClientContact();
                                     this.nextOfKin = new NextOfKin();
 
-                                    window.location.reload();
+                                    if (this.id) {
+                                        this.router.navigate(['/record/person'],
+                                            { relativeTo: this.route });
+                                    } else {
+                                        window.location.reload();
+                                    }                                    
                                 }
                             }
                         }
