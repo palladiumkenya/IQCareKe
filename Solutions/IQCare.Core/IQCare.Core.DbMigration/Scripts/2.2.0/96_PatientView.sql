@@ -1,11 +1,3 @@
-/***** Object:  View [dbo].[PatientView]    Script Date: 06/03/2020 10:45:41 *****/
-SET ANSI_NULLS ON
-GO
-
-SET QUOTED_IDENTIFIER ON
-GO
-
-
 ALTER VIEW [dbo].[PatientView]
 AS
 Select	MP.Ptn_Pk
@@ -38,4 +30,3 @@ Select	MP.Ptn_Pk
 From mst_Patient MP
 LEFT JOIN Patient P ON P.ptn_pk = MP.Ptn_Pk
 Where (MP.DeleteFlag = 0 Or MP.DeleteFlag Is Null)
-GO
