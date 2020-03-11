@@ -379,7 +379,7 @@ namespace IQCare.Web.CCC.WebService
             return Msg;
         }
         [WebMethod(EnableSession = true)]
-        public string AddPatienTBRx(int patientId, int patientMasterVisitId,DateTime TBRxStartDate, DateTime TBRxEndDate, int TBRxRegimen)
+        public string AddPatienTBRx(int patientId, int patientMasterVisitId,DateTime? TBRxStartDate, DateTime? TBRxEndDate, int TBRxRegimen)
         {
             PatientTBRx patientTBRX = new PatientTBRx()
             {

@@ -117,7 +117,7 @@ export class RecordsService {
             'PatientId': patientId,
             'EntityId': patientEnrollmentId,
             'MessageType': messageType,
-            'EventOccurred': "Patient CareEnded Identifier = ",
+            'EventOccurred': 'Patient CareEnded Identifier = ',
             'FacilityId': FacilityId
         };
 
