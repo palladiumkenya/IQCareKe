@@ -440,11 +440,11 @@ export class ServicesListComponent implements OnInit {
                                 returnValue = true;
                             }
                         } else {
-                            return true;
+                            return returnValue= true;
                         }
 
                     } else {
-                        return true;
+                        return returnValue= true;
                     }
 
                 }
