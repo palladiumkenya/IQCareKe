@@ -419,6 +419,7 @@
     <None Remove="Scripts\2.2.0\95_EmrMatrixDetails.sql" />
     <None Remove="Scripts\2.2.0\96_PatientView.sql" />
     <None Remove="Scripts\2.2.0\97_PatientCareEndedServiceAreaView.sql" />
+    <None Remove="Scripts\2.2.0\98_IQCareRelease.sql" />
     <None Remove="Scripts\2.2.0\IQTools\01_PatientPopulationView.sql" />
     <None Remove="Scripts\2.2.0\IQTools\02_HTS_LABRegisternewer.sql" />
     <None Remove="Scripts\2.2.0\IQTools\03_ANCRegister.sql" />
@@ -873,6 +874,7 @@
     <EmbeddedResource Include="Scripts\2.2.0\95_EmrMatrixDetails.sql" />
     <EmbeddedResource Include="Scripts\2.2.0\96_PatientView.sql" />
     <EmbeddedResource Include="Scripts\2.2.0\97_PatientCareEndedServiceAreaView.sql" />
+    <EmbeddedResource Include="Scripts\2.2.2\02_IQCareRelease.sql" />
     <EmbeddedResource Include="Scripts\2.2.0\IQTools\01_PatientPopulationView.sql" />
     <EmbeddedResource Include="Scripts\2.2.0\IQTools\02_HTS_LABRegisternewer.sql" />
     <EmbeddedResource Include="Scripts\2.2.0\IQTools\03_ANCRegister.sql" />
