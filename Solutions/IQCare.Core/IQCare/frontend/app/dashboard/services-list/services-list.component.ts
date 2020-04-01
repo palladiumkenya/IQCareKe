@@ -144,8 +144,9 @@ export class ServicesListComponent implements OnInit {
                     });
 
                     break;
-                    localStorage.setItem('ageNumber', this.person.ageNumber);
+
                 case 'CCC':
+                    localStorage.setItem('ageNumber', this.person.ageNumber);
                     this.zone.run(() => {
                         this.router.navigate(['/dashboard/enrollment/ccc/' + this.personId + '/' + serviceId + '/' + serviceCode],
                             { relativeTo: this.route });
@@ -440,11 +441,11 @@ export class ServicesListComponent implements OnInit {
                                 returnValue = true;
                             }
                         } else {
-                            return returnValue= true;
+                            return returnValue = true;
                         }
 
                     } else {
-                        return returnValue= true;
+                        return returnValue = true;
                     }
 
                 }
@@ -477,7 +478,8 @@ export class ServicesListComponent implements OnInit {
         const selectedService = this.services.filter(obj => obj.id == serviceAreaId);
         let isEligible: boolean = false;
         if (selectedService && selectedService.length > 0) {
-            if (selectedService[0]['code'] !== 'PREP') {
+            if (selectedService[0]['code'] !== 'PREP'
+                && selectedService[0]['code'] !== 'CCC') {
                 if (this.serviceareacareenddetails != undefined) {
                     if (this.serviceareacareenddetails.length > 0) {
                         const servicelist = this.serviceareacareenddetails.filter(x => x.serviceAreaId == serviceAreaId);
