@@ -176,7 +176,7 @@ export class CccComponent implements OnInit {
 
         this.recordsService.getPersonDetails(this.personId).subscribe(
             (res) => {
-                // console.log(res);
+               
                 const { dateOfBirth } = res[0];
                 if (dateOfBirth) {
                     this.minDate = dateOfBirth;
@@ -207,7 +207,7 @@ export class CccComponent implements OnInit {
     loadPatient(): void {
         this.personHomeService.getPatientModelByPersonId(this.personId).subscribe(
             (result) => {
-
+                  
                 this.form.controls.PatientType.setValue(result.patientType);
                 // load population type
                 this.loadPopulationTypes(this.personId);
