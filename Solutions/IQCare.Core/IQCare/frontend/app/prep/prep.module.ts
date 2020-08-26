@@ -1,17 +1,20 @@
 import { PrepService } from './_services/prep.service';
+import { PersonHomeService} from '../dashboard/services/person-home.service';
 import { STIScreeningTreatmentResolver } from './_services/STIScreeningTreatment.resolver';
 import { NgModule } from '@angular/core';
-import { FormsModule} from '@angular/forms'; 
+import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { PrepEncounterHistoryComponent } from './prep-encounter-history/prep-encounter-history.component';
 import { PrepRoutingModule } from './prep-routing.module';
 import { PrepEncounterComponent } from './prep-encounter/prep-encounter.component';
+import { PrepConfirmationDialogComponent} from './prep-confirmationdialog/prep-confirmationdialog';
+import {FormSettingsResolver} from './_services/resolvers/CurrentFormSettings.resolver';
 import {
     MatStepperModule, MatButtonModule,
     MatFormFieldModule, MatSelectModule,
     MatNativeDateModule, MatDatepickerModule,
     MatInputModule, MatAutocompleteModule, MatTableModule, MatDividerModule, MatDialogModule, MatIconModule,
-    MatPaginatorModule,MatRadioModule
+    MatPaginatorModule, MatRadioModule
 } from '@angular/material';
 import { ReactiveFormsModule } from '@angular/forms';
 // tslint:disable-next-line:max-line-length
@@ -20,7 +23,7 @@ import { CircumcisionStatusComponent } from './encounter-components/circumcision
 import { FertilityIntentionComponent } from './encounter-components/fertility-intention/fertility-intention.component';
 import { PregnancyOutcomeComponent } from './encounter-components/pregnancy-outcome/pregnancy-outcome.component';
 import { SharedModule } from '../shared/shared.module';
-import { HTSEncounterHistoryResolver} from './_services/resolvers/getlatesthtsencounterhistory.resolver';
+import { HTSEncounterHistoryResolver } from './_services/resolvers/getlatesthtsencounterhistory.resolver';
 import { PrepStatusComponent } from './encounter-components/prep-status/prep-status.component';
 import { YesNoResolver } from '../pmtct/_services/yesno.resolver';
 import { YesNoUnknownResolver } from './_services/YesNoUnknown.resolver';
@@ -32,17 +35,19 @@ import { PrepContraindicationsResolver } from './_services/prep-contraindication
 import { PrepStatusResolver } from './_services/prep-status.resolver';
 import { HTSEncounterResolver } from './_services/resolvers/htsencounter.resolver';
 import { PersonCurrentVitalsResolver } from './_services/resolvers/personvitals.resolver';
-import {RiskEncounterResolver} from './_services/resolvers/riskencounter.resolver';
+import { RiskEncounterResolver } from './_services/resolvers/riskencounter.resolver';
 import {
     AssessmentOutcomeResolver, ClientsBehaviourRiskResolver, SexualPartnetHivStatusProfileResolver,
     RiskReductionEducationResolver, ReferralPreventionServicesResolver, ClientWillingTakePrepResolver
     , RiskEducationResolver, BehaviourRiskAssessmentResolver, EncounterTypeResolver, PartnerCCCEnrollmentResolver,
     PatientIdentifierResolver, ARTStartDateResolver, PartnerHIVStatusResolver, DurationResolver, SexWithoutCondomResolver,
-    HivPartnerResolver,PrepDeclineResolver
+    HivPartnerResolver, PrepDeclineResolver, SpecifyReferralPreventionServicesResolver
+    , SpecifyRiskEducationResolver, SpecifyRiskReductionEducationResolver
 } from './_services/resolvers/prepriskassessment.resolver';
 import {
     PrepAdherenceResolver, AdherenceAssessmentReasonsResolver, RefillPrepStatusResolver,
-    PrepDiscontinueReasonResolver, AdherenceCounsellingResolver,AppointmentGivenResolver,PrepAppointmentReasonResolver
+    PrepDiscontinueReasonResolver, AdherenceCounsellingResolver, AppointmentGivenResolver, PrepAppointmentReasonResolver
+    , RiskAssessmentDoneResolver
 } from './_services/resolvers/prepmonthlyrefillresolver';
 import {
     PrepCareEndReasonResolver
@@ -64,6 +69,7 @@ import { PrepPatientvitalsinfoComponent } from './prep-patientvitalsinfo/prep-pa
 import { PrepRiskassessmentgriddetailsComponent } from './prep-riskassessmentgriddetails/prep-riskassessmentgriddetails.component';
 import { PrepFollowupworkflowComponent } from './prep-followupworkflow/prep-followupworkflow.component';
 import { PrepMonthlyrefillworkflowComponent } from './prep-monthlyrefillworkflow/prep-monthlyrefillworkflow.component';
+import { PrepVisitcheckinComponent } from './prep-visitcheckin/prep-visitcheckin.component';
 
 @NgModule({
     declarations: [
@@ -86,11 +92,13 @@ import { PrepMonthlyrefillworkflowComponent } from './prep-monthlyrefillworkflow
         PrepPatientvitalsinfoComponent,
         PrepRiskassessmentgriddetailsComponent,
         PrepFollowupworkflowComponent,
-        PrepMonthlyrefillworkflowComponent
+        PrepMonthlyrefillworkflowComponent,
+        PrepVisitcheckinComponent,
+        PrepConfirmationDialogComponent
     ],
     imports: [
         SharedModule, MatDatepickerModule, MatNativeDateModule,
-        CommonModule, MatStepperModule, ReactiveFormsModule,
+        CommonModule, MatStepperModule,
         MatButtonModule, MatFormFieldModule, MatSelectModule,
         MatInputModule, MatAutocompleteModule, MatTableModule,
         PrepRoutingModule, MatDividerModule, MatDialogModule,
@@ -98,7 +106,7 @@ import { PrepMonthlyrefillworkflowComponent } from './prep-monthlyrefillworkflow
         MatIconModule, ReactiveFormsModule, FormsModule
     ],
     providers: [
-        YesNoResolver, YesNoUnknownResolver,
+        YesNoResolver, YesNoUnknownResolver,PersonHomeService,
         STIScreeningTreatmentResolver, FamilyPlanningMethodResolver,
         PlanningPregnancyResolver, YesNoDontKnowResolver, PregnancyOutcomeResolver,
         PrepContraindicationsResolver, PrepStatusResolver, AssessmentOutcomeResolver,
@@ -109,14 +117,18 @@ import { PrepMonthlyrefillworkflowComponent } from './prep-monthlyrefillworkflow
         PatientIdentifierResolver, ARTStartDateResolver, PartnerHIVStatusResolver,
         DurationResolver, SexWithoutCondomResolver, HivPartnerResolver,
         ReasonsPrepAppointmentNotGivenResolver, PrepEncounterTypeResolver,
-        PregnancyStatusResolver, ScreenedForSTIResolver,
+        PregnancyStatusResolver, ScreenedForSTIResolver,FormSettingsResolver,
         PrepCareEndReasonResolver, PrepAdherenceResolver, AdherenceAssessmentReasonsResolver, RefillPrepStatusResolver,
         PrepDiscontinueReasonResolver, AdherenceCounsellingResolver, AppointmentGivenResolver, PrepAppointmentReasonResolver,
-        HTSEncounterResolver, PersonCurrentVitalsResolver, RiskEncounterResolver, PrepDeclineResolver ,
-        HTSEncounterHistoryResolver
+        HTSEncounterResolver, PersonCurrentVitalsResolver, RiskEncounterResolver, PrepDeclineResolver,
+        HTSEncounterHistoryResolver, SpecifyReferralPreventionServicesResolver
+        , SpecifyRiskEducationResolver, SpecifyRiskReductionEducationResolver, RiskAssessmentDoneResolver
     ],
     entryComponents: [
-        PrepCheckinComponent
+        PrepCheckinComponent,
+        PrepVisitcheckinComponent,
+        PrepConfirmationDialogComponent
+
     ]
 })
 export class PrepModule { }

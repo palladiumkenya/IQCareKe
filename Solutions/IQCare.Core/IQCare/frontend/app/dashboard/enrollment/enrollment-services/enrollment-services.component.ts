@@ -141,6 +141,7 @@ export class EnrollmentServicesComponent implements OnInit {
                     enrollment.PatientId = this.patientId;
                     this.enrollmentService.enrollClient(enrollment).subscribe(
                         (response) => {
+                          
                             this.spinner.hide();
                             this.snotifyService.success('Successfully Enrolled ', 'Enrollment',
                                 this.notificationService.getConfig());

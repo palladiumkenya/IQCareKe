@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -59,6 +59,19 @@ namespace IQCare.Controllers.PMTCT
 
             return BadRequest(response);
         }
+
+
+        [HttpPost]
+        public async Task<object> GetVitalsByVisitDate([FromBody] GetPatientVitalQueryByVisitDate getPatientVitalsQueryByVisitDate)
+        {
+            var response = await _mediator.Send(getPatientVitalsQueryByVisitDate, HttpContext.RequestAborted);
+
+            if (response.IsValid)
+                return Ok(response.Value);
+
+            return BadRequest(response);
+        }
+
 
         [HttpPost]
         public async Task<object> CalculateZscore([FromBody]CalculateZscoreCommand zscoreCommand)

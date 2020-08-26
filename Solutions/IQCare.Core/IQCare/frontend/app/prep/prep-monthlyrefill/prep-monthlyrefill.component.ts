@@ -42,6 +42,7 @@ export class PrepMonthlyrefillComponent implements OnInit {
     yesnoOptions: LookupItemView[] = [];
     AppointmentGivenOptions: LookupItemView[] = [];
     PrepAppointmentReasonOptions: LookupItemView[] = [];
+    RiskAssessmentDoneOptions: LookupItemView[] = [];
     maxDate: Date;
     minDate: Date;
     personId: number;
@@ -55,6 +56,7 @@ export class PrepMonthlyrefillComponent implements OnInit {
     ExistingData: any[] = [];
     ExistingClinicalNotes: any[] = [];
     Visible: boolean = false;
+    RiskAssessmentVisible: boolean = false;
     details: any[] = [];
     outcomelist: any[] = [];
     remarklist: any[] = [];
@@ -78,6 +80,15 @@ export class PrepMonthlyrefillComponent implements OnInit {
         private spinner: NgxSpinnerService,
         private encounterservice: EncounterService) {
         this.maxDate = new Date();
+
+
+
+        if (localStorage.getItem('PrepVisitDate') != null && localStorage.getItem('PrepVisitDate') != undefined) {
+            this.maxDate = moment(localStorage.getItem('PrepVisitDate')).toDate();
+        }
+        else {
+            this.maxDate = new Date();
+        }
 
     }
 
@@ -112,7 +123,7 @@ export class PrepMonthlyrefillComponent implements OnInit {
                 PrepAdherenceArray, AdherenceAssessmentReasonArray,
                 RefillPrepStatusArray, PrepDiscontinueReasonArray, EncounterTypeArray, yesNoOptions,
                 AdherenceCounsellingArray, AppointmentGivenArray,
-                PrepAppointmentReasonArray
+                PrepAppointmentReasonArray, RiskAssessmentDoneArray
             } = res;
             this.clientsBehaviourRiskOptions = clientsBehaviourRiskArray['lookupItems'];
             this.sexualPartnerHivStatusOptions = sexualPartnerHivStatusArray['lookupItems'];
@@ -125,6 +136,7 @@ export class PrepMonthlyrefillComponent implements OnInit {
             this.yesnoOptions = yesNoOptions['lookupItems'];
             this.AppointmentGivenOptions = AppointmentGivenArray['lookupItems'];
             this.PrepAppointmentReasonOptions = PrepAppointmentReasonArray['lookupItems'];
+            this.RiskAssessmentDoneOptions = RiskAssessmentDoneArray['lookupItems'];
 
         });
         let monthlyrefillencounter: any[] = [];
@@ -133,9 +145,10 @@ export class PrepMonthlyrefillComponent implements OnInit {
 
 
         this.PrepMonthlyRefillFormGroup = this._formBuilder.group({
-            sexualPartnerHivStatus: new FormControl('', [Validators.required]),
+            RiskAssessmentDone: new FormControl('', [Validators.required]),
+            sexualPartnerHivStatus: new FormControl(''),
             visitDate: new FormControl('', [Validators.required]),
-            clientsBehaviourRisks: new FormControl('', [Validators.required]),
+            clientsBehaviourRisks: new FormControl(''),
             adherenceassessment: new FormControl('', [Validators.required]),
             adherenceassessmentreasons: new FormControl(''),
             SpecifyAssessmentReason: new FormControl(''),
@@ -148,6 +161,11 @@ export class PrepMonthlyrefillComponent implements OnInit {
             AppointmentReason: new FormControl(''),
             Remarks: new FormControl('')
         });
+
+
+        if (localStorage.getItem('PrepVisitDate') != null && localStorage.getItem('PrepVisitDate') != undefined) {
+            this.PrepMonthlyRefillFormGroup.controls.visitDate.setValue(moment(localStorage.getItem('PrepVisitDate')).toDate());
+        }
 
         this.PrepMonthlyRefillFormGroup.controls.adherenceassessmentreasons.disable({ onlySelf: true });
         this.PrepMonthlyRefillFormGroup.controls.SpecifyAssessmentReason.setValue('');
@@ -241,6 +259,15 @@ export class PrepMonthlyrefillComponent implements OnInit {
                     }
 
                     if (this.ExistingData.length > 0) {
+                        let riskassessmentdonemasterid: number;
+                        riskassessmentdonemasterid = this.RiskAssessmentDoneOptions[0].masterId;
+                        const riskassessmentdonevalue = this.ExistingData.filter(x => x.masterId == riskassessmentdonemasterid).map(t => {
+                            return t.itemId;
+                        });
+                        if (riskassessmentdonevalue) {
+                            this.PrepMonthlyRefillFormGroup.controls.RiskAssessmentDone.setValue(riskassessmentdonevalue[0]);
+                        }
+
                         let sexpartnermasterid: number;
                         sexpartnermasterid = this.sexualPartnerHivStatusOptions[0].masterId;
                         console.log(sexpartnermasterid);
@@ -395,7 +422,31 @@ export class PrepMonthlyrefillComponent implements OnInit {
 
 
     }
+    OnSelectRiskAssessment(event) {
+        let val: number;
+        let index: number;
+        let text: string;
+        val = event.source.value;
+        if (event.source.selected == true) {
+            if (val != undefined) {
 
+                index = this.RiskAssessmentDoneOptions.findIndex(x => x.itemId == val);
+                if (index >= 0) {
+                    text = this.RiskAssessmentDoneOptions[index].itemName;
+                    if (text.toLowerCase() == 'yes') {
+                        this.RiskAssessmentVisible = true;
+                    }
+                    else {
+                        this.RiskAssessmentVisible = false;
+                        this.PrepMonthlyRefillFormGroup.controls.clientsBehaviourRisks.setValue('');
+                        this.PrepMonthlyRefillFormGroup.controls.sexualPartnerHivStatus.setValue('');
+
+                    }
+                }
+            }
+
+        }
+    }
     OnAdherenceAssessmentSelected(event) {
         let val: number;
         let index: number;
@@ -519,61 +570,66 @@ export class PrepMonthlyrefillComponent implements OnInit {
 
     }
     onPharmacyClick() {
-        const { visitDate } = this.PrepMonthlyRefillFormGroup.value;
 
-        if (visitDate != null && visitDate != undefined) {
-            if (this.patientMasterVisitId > 0) {
-                this.searchService.setSession(this.personId, this.patientId, this.userId).subscribe((sessionres) => {
-                    this.searchService.setVisitSession(this.patientMasterVisitId, 20, 261).subscribe((setVisitSession) => {
-                        const url = location.protocol + '//' + window.location.hostname + ':' + window.location.port +
-                            '/IQCare/CCC/Encounter/PharmacyPrescription.aspx';
-                        const win = window.open(url, '_blank');
-                        win.focus();
-                    });
-                });
+        this.zone.run(() => {
+            this.router.navigate(['/pharm/' + this.patientId + '/' + this.personId],
+                { relativeTo: this.route });
+        });
+        //   const { visitDate } = this.PrepMonthlyRefillFormGroup.value;
 
-            } else {
-
-                const patientencounter: PatientMasterVisitEncounter = {
-                    PatientId: this.patientId,
-                    EncounterType: this.EncounterTypeId,
-                    ServiceAreaId: this.serviceAreaId,
-                    UserId: this.UserId,
-                    EncounterDate: moment(visitDate).toDate()
-                };
-
-                if (this.patientMasterVisitId <= 0 || this.patientMasterVisitId == undefined) {
-
-                    
-                    this.encounterservice.savePatientMasterVisit(patientencounter).subscribe(
-                        (result) => {
-                            localStorage.setItem('patientEncounterId', result['patientEncounterId']);
-                            localStorage.setItem('patientMasterVisitId', result['patientMasterVisitId']);
-
-                            this.patientMasterVisitId = result['patientMasterVisitId'];
-                            this.searchService.setSession(this.personId, this.patientId, this.userId)
-                                .subscribe((sessionres) => {
-                                this.searchService.setVisitSession(this.patientMasterVisitId, this.Age, 261)
-                                    .subscribe((setVisitSession) => {
-                                    const url = location.protocol + '//' + window.location.hostname + ':' + window.location.port +
-                                        '/IQCare/CCC/Encounter/PharmacyPrescription.aspx';
-                                    const win = window.open(url, '_blank');
-                                    win.focus();
-                                });
-                            });
-                        }, (error) => {
-                            this.snotifyService.error('Error Accessing the Pharmacy Link' + error, 'Pharmacy Link',
-                            this.notificationService.getConfig());
-                        });
-                }
-
-            }
-        } else {
-
-            this.snotifyService.error('Record the visitDate first' , 'VisitDate',
-                            this.notificationService.getConfig());
-                        return;
-         }
+        /*  if (visitDate != null && visitDate != undefined) {
+              if (this.patientMasterVisitId > 0) {
+                  this.searchService.setSession(this.personId, this.patientId).subscribe((sessionres) => {
+                      this.searchService.setVisitSession(this.patientMasterVisitId, 20, 261).subscribe((setVisitSession) => {
+                          const url = location.protocol + '//' + window.location.hostname + ':' + window.location.port +
+                              '/IQCare/CCC/Encounter/PharmacyPrescription.aspx';
+                          const win = window.open(url, '_blank');
+                          win.focus();
+                      });
+                  });
+  
+              } else {
+  
+                  const patientencounter: PatientMasterVisitEncounter = {
+                      PatientId: this.patientId,
+                      EncounterType: this.EncounterTypeId,
+                      ServiceAreaId: this.serviceAreaId,
+                      UserId: this.UserId,
+                      EncounterDate: moment(visitDate).toDate()
+                  };
+  
+                  if (this.patientMasterVisitId <= 0 || this.patientMasterVisitId == undefined) {
+  
+  
+                      this.encounterservice.savePatientMasterVisit(patientencounter).subscribe(
+                          (result) => {
+                              localStorage.setItem('patientEncounterId', result['patientEncounterId']);
+                              localStorage.setItem('patientMasterVisitId', result['patientMasterVisitId']);
+  
+                              this.patientMasterVisitId = result['patientMasterVisitId'];
+                              this.searchService.setSession(this.personId, this.patientId)
+                                  .subscribe((sessionres) => {
+                                      this.searchService.setVisitSession(this.patientMasterVisitId, this.Age, 261)
+                                          .subscribe((setVisitSession) => {
+                                              const url = location.protocol + '//' + window.location.hostname + ':' + window.location.port +
+                                                  '/IQCare/CCC/Encounter/PharmacyPrescription.aspx';
+                                              const win = window.open(url, '_blank');
+                                              win.focus();
+                                          });
+                                  });
+                          }, (error) => {
+                              this.snotifyService.error('Error Accessing the Pharmacy Link' + error, 'Pharmacy Link',
+                                  this.notificationService.getConfig());
+                          });
+                  }
+  
+              }
+          } else {
+  
+              this.snotifyService.error('Record the visitDate first', 'VisitDate',
+                  this.notificationService.getConfig());
+              return;
+          } */
     }
 
     onAppointmentSelection(event) {
@@ -602,15 +658,17 @@ export class PrepMonthlyrefillComponent implements OnInit {
     }
     public Cancel() {
         this.zone.run(() => {
-            this.router.navigate(['/prep/' + '/' + this.patientId + '/' + this.personId + '/'
-                + this.serviceAreaId],
-                { relativeTo: this.route });
+            this.zone.run(() => {
+                this.router.navigate(
+                    ['/prep/prepfollowupworkflow/' + this.patientId + '/' + this.personId + '/' + this.serviceAreaId],
+                    { relativeTo: this.route });
+            });
         });
     }
     public Save() {
 
         const {
-            sexualPartnerHivStatus, visitDate, clientsBehaviourRisks, adherenceassessment, adherenceassessmentreasons,
+            sexualPartnerHivStatus, RiskAssessmentDone, visitDate, clientsBehaviourRisks, adherenceassessment, adherenceassessmentreasons,
             SpecifyAssessmentReason,
             adherencecounselling,
             prepstatus,
@@ -620,6 +678,18 @@ export class PrepMonthlyrefillComponent implements OnInit {
             AppointmentReason,
             nextAppointmentDate,
             Remarks } = this.PrepMonthlyRefillFormGroup.value;
+
+        if (RiskAssessmentDone) {
+            let index: number;
+            index = this.RiskAssessmentDoneOptions.findIndex(x => x.itemId == RiskAssessmentDone);
+            if (index > -1) {
+                this.details.push({
+                    'ScreeningTypeId': this.RiskAssessmentDoneOptions[index].masterId,
+                    'ScreeningValueId': this.RiskAssessmentDoneOptions[index].itemId,
+                    'Comment': ''
+                });
+            }
+        }
 
         if (sexualPartnerHivStatus) {
             sexualPartnerHivStatus.forEach(x => {
@@ -823,9 +893,12 @@ export class PrepMonthlyrefillComponent implements OnInit {
                                     this.notificationService.getConfig());
 
                                 this.zone.run(() => {
-                                    this.router.navigate(['/prep/' + '/' + this.patientId + '/' + this.personId + '/'
-                                        + this.serviceAreaId],
-                                        { relativeTo: this.route });
+                                    this.zone.run(() => {
+                                        this.router.navigate(
+                                            ['/prep/prepfollowupworkflow/' + this.patientId + '/' +
+                                                this.personId + '/' + this.serviceAreaId],
+                                            { relativeTo: this.route });
+                                    });
                                 });
                             },
                             (error) => {

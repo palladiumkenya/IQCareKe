@@ -173,5 +173,6 @@ namespace DataAccess.CCC.Context
 
         //reporting
         public DbSet<Tracing> patienttracing { get; set; }
+        public DbSet<PatientTBRx> PatientTBRxes { get; set; }
     }
 }

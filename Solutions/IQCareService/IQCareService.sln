@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.25420.1
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.438
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IQCareServiceControl", "..\..\IQCareService\IQCareServiceControl\IQCareServiceControl.csproj", "{C4857422-56FC-4A52-B3C9-BA5AD4A432A8}"
 EndProject
@@ -15,7 +15,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dependancy", "..\..\IQCareS
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RemServer.Service", "..\..\IQCareService\RemServer.Service\RemServer.Service.csproj", "{32C66861-E9CC-40F6-A791-8E8A4C864A34}"
 EndProject
-Global	
+Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Debug|x86 = Debug|x86
@@ -27,8 +27,8 @@ Global
 		{C4857422-56FC-4A52-B3C9-BA5AD4A432A8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C4857422-56FC-4A52-B3C9-BA5AD4A432A8}.Debug|x86.ActiveCfg = Release|x86
 		{C4857422-56FC-4A52-B3C9-BA5AD4A432A8}.Debug|x86.Build.0 = Release|x86
-		{C4857422-56FC-4A52-B3C9-BA5AD4A432A8}.Release|Any CPU.ActiveCfg = Release|x86
-		{C4857422-56FC-4A52-B3C9-BA5AD4A432A8}.Release|Any CPU.Build.0 = Release|x86
+		{C4857422-56FC-4A52-B3C9-BA5AD4A432A8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C4857422-56FC-4A52-B3C9-BA5AD4A432A8}.Release|Any CPU.Build.0 = Release|Any CPU
 		{C4857422-56FC-4A52-B3C9-BA5AD4A432A8}.Release|x86.ActiveCfg = Release|x86
 		{C4857422-56FC-4A52-B3C9-BA5AD4A432A8}.Release|x86.Build.0 = Release|x86
 		{0A8CC4DE-D3D2-4119-AF5B-35E1CB489233}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -67,5 +67,8 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {76F4CBFF-AB1F-4160-89E8-3BBAE0F9EF36}
 	EndGlobalSection
 EndGlobal

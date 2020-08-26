@@ -115,3 +115,16 @@ export class PrepAppointmentReasonResolver implements Resolve<Observable<LookupI
         return this.lookupItemService.getByGroupName('PrepAppointmentReason');
     }
 }
+@Injectable()
+export class RiskAssessmentDoneResolver implements Resolve<Observable<LookupItemView[]>> {
+
+    constructor(private lookupItemService: LookupItemService) {
+
+    }
+    public resolve(
+        route: ActivatedRouteSnapshot,
+        state: RouterStateSnapshot
+    ): Observable<LookupItemView[]> {
+        return this.lookupItemService.getByGroupName('RiskAssessmentDone');
+    }
+}

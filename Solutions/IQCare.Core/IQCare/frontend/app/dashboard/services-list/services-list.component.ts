@@ -11,10 +11,12 @@ import { Store } from '@ngrx/store';
 import * as moment from 'moment';
 import * as Consent from '../../shared/reducers/app.states';
 import { SearchService } from '../../registration/_services/search.service';
+
 import { EncounterDetails } from '../_model/HtsEncounterdetails';
 import { LookupItemView } from '../../shared/_models/LookupItemView';
 import { MatDialog, MatDialogConfig } from '@angular/material';
 import { PatientHtsComponent } from '../patient-hts/patient-hts.component';
+import { PatientHtsPositiveComponent } from '../patient-htspositive/patient-htspositive.component';
 
 
 @Component({
@@ -28,17 +30,21 @@ export class ServicesListComponent implements OnInit {
     @Input('services') services: any[];
     @Input('careendoptions') carendedreason: LookupItemView[];
     @Input('person') person: any;
-    @Input('encounterDetail') encounterDetail: EncounterDetails;
+    @Input('ServiceAreaCareEndDetails') serviceareacareenddetails: any[];
+    // @Input('encounterDetail') encounterDetail: EncounterDetails;
     @Input('personVitalWeight') weight: number;
     @Input('riskencounters') riskencounter: any[];
     @Input('carended') carended: boolean;
     @Input('isdead') isdead: boolean;
+    @Input('creatininelabtests') creatininelabtests: any[];
     enrolledServices: any[];
     PatientCCCEnrolled: boolean = false;
     patientIdentifiers: any[];
+
     riskassessmentPatientMasterVisitId: number;
     enrolledService: any[] = [];
     identifiers: any[] = [];
+    creatininetestresult: boolean = false;
     enrollservicename: boolean = true;
     enrollPrepServicename: boolean = false;
     patientvitals: any[] = [];
@@ -51,7 +57,8 @@ export class ServicesListComponent implements OnInit {
     vitalrisk: boolean = false;
     agerisk: boolean = false;
     htseligibility: string = ' ';
-
+    proceedvitals: boolean = false;
+    visibleproceed: boolean = true;
     EligibilityInformation: any[] = [];
     HTSEligible: boolean = false;
     hasItems: boolean = false;
@@ -60,7 +67,7 @@ export class ServicesListComponent implements OnInit {
     public Patient: PatientView = {};
     RiskDone: boolean = true;
     userId: number;
-    
+
     constructor(
         private personhomeservice: PersonHomeService,
         public zone: NgZone,
@@ -74,11 +81,13 @@ export class ServicesListComponent implements OnInit {
         private appStateService: AppStateService,
         private lookupItemService: LookupItemService
     ) {
+
     }
 
-    ngOnInit() {
+    async  ngOnInit() {
         this.EligibilityInformation = [];
         this.vitalWeight = this.weight;
+
 
         this.userId = JSON.parse(localStorage.getItem('appUserId'));
         this.getPersonEnrolledServices(this.personId);
@@ -87,6 +96,7 @@ export class ServicesListComponent implements OnInit {
             this.htseligibility = this.EligibilityInformation.join(' ,');
         }
     }
+
 
 
     getPersonEnrolledServices(personId: number) {
@@ -134,8 +144,9 @@ export class ServicesListComponent implements OnInit {
                     });
 
                     break;
-                    localStorage.setItem('ageNumber', this.person.ageNumber);
+
                 case 'CCC':
+                    localStorage.setItem('ageNumber', this.person.ageNumber);
                     this.zone.run(() => {
                         this.router.navigate(['/dashboard/enrollment/ccc/' + this.personId + '/' + serviceId + '/' + serviceCode],
                             { relativeTo: this.route });
@@ -147,8 +158,21 @@ export class ServicesListComponent implements OnInit {
                         this.router.navigate(['/dashboard/enrollment/prep/' + this.personId + '/' + serviceId + '/' + serviceCode],
                             { relativeTo: this.route });
                     });
-
-                    //  this.enrollPrepServicename = true;
+                    break;
+                case 'OTZ':
+                    this.zone.run(() => {
+                        this.router.navigate(['/ccc/otzEnrollment/' + this.personId + '/'
+                            + this.person.patientId + '/' + serviceId + '/' + serviceCode],
+                            { relativeTo: this.route });
+                    });
+                    break;
+                case 'OVC':
+                    this.zone.run(() => {
+                        this.router.navigate(
+                            ['/ccc/ovcEnrollment/' + this.personId + '/'
+                                + this.person.patientId + '/' + serviceId + '/' + serviceCode],
+                            { relativeTo: this.route });
+                    });
                     break;
                 default:
                     this.zone.run(() => {
@@ -184,8 +208,25 @@ export class ServicesListComponent implements OnInit {
                         { relativeTo: this.route }
                     );
                 });
-
                 break;
+            case 'OTZ':
+                this.zone.run(() => {
+                    this.router.navigate(['/ccc/otzEnrollment/' + this.personId + '/' + serviceId + '/' + serviceCode],
+                        { relativeTo: this.route });
+                });
+                break;
+
+            case 'OVC':
+                this.zone.run(() => {
+                    this.router.navigate(
+                        ['/ccc/ovcEnrollment/' + this.personId + '/'
+                            + this.person.patientId + '/' + serviceId + '/' + serviceCode + '/1'],
+                        { relativeTo: this.route });
+                });
+                break;
+
+
+
             default:
                 console.log('test default');
                 break;
@@ -203,6 +244,8 @@ export class ServicesListComponent implements OnInit {
         }
 
     }
+
+
     newTriage() {
         localStorage.setItem('selectedService', 'triage');
         this.store.dispatch(new Consent.SelectedService('triage'));
@@ -250,9 +293,15 @@ export class ServicesListComponent implements OnInit {
                     });
                     break;
                 case 'CCC':
-                    this.searchService.setSession(this.personId, this.patientId, this.userId).subscribe((res) => {
-                        window.location.href = location.protocol + '//' + window.location.hostname + ':' + window.location.port +
-                            '/IQCare/CCC/Patient/PatientHome.aspx';
+                    this.searchService.setSession(this.personId, this.patientId).subscribe((res) => {
+                        if (res.d) {
+                            window.location.href = location.protocol + '//' + window.location.hostname + ':' + window.location.port +
+                                '/IQCare/CCC/Patient/PatientHome.aspx';
+                        } else {
+                            this.snotifyService.warning('Could not open Green Card patient does not have patientId or PersonId ',
+                                'Encounter', this.notificationService.getConfig());
+                            return;
+                        }
                     });
                     break;
                 case 'PREP':
@@ -262,6 +311,23 @@ export class ServicesListComponent implements OnInit {
                             { relativeTo: this.route });
                     });
                     break;
+                case 'OTZ':
+                    this.zone.run(() => {
+                        this.router.navigate(
+                            ['/ccc/encounterHistory/' + this.patientId + '/' + this.personId + '/' + serviceId],
+                            { relativeTo: this.route });
+                    });
+                    break;
+                case 'OVC':
+                    this.zone.run(() => {
+                        this.router.navigate(
+                            ['/ccc/ovcFormList/' + this.person.patientId + '/' + this.personId + '/'
+                                + serviceId],
+                            { relativeTo: this.route });
+                    });
+                    break;
+
+
                 default:
                     this.zone.run(() => {
                         this.router.navigate(
@@ -272,6 +338,53 @@ export class ServicesListComponent implements OnInit {
                     break;
             }
         }
+    }
+
+    validationhivstatus(code: string) {
+
+        let visibility = false;
+        if (code == 'PREP') {
+
+            if (this.visibleproceed == true) {
+                visibility = true;
+            } else {
+                visibility = false;
+            }
+
+        } else {
+            visibility = false;
+        }
+        return visibility;
+
+
+    }
+    navigateWarning(serviceId) {
+        const resultsDialogConfig = new MatDialogConfig();
+        resultsDialogConfig.disableClose = false;
+
+        resultsDialogConfig.autoFocus = true;
+        resultsDialogConfig.data = {
+            personId: this.personId,
+            serviceId: serviceId,
+            patientId: this.patientId,
+            ageNumber: this.person.ageNumber,
+            ageInMonths: this.person.ageInMonths
+        };
+        const dialogRef = this.dialog.open(PatientHtsPositiveComponent, resultsDialogConfig);
+        dialogRef.afterClosed().subscribe(
+            data => {
+                if (!data) {
+                    this.proceedvitals = data;
+                    this.visibleproceed = true;
+
+                    return;
+                } else {
+                    this.proceedvitals = data;
+                    this.visibleproceed = false;
+
+                }
+
+            });
     }
     navigateToRiskAssessment(serviceId) {
         if (this.HTSEligible == false) {
@@ -328,11 +441,11 @@ export class ServicesListComponent implements OnInit {
                                 returnValue = true;
                             }
                         } else {
-                            return true;
+                            return returnValue = true;
                         }
 
                     } else {
-                        return true;
+                        return returnValue = true;
                     }
 
                 }
@@ -360,6 +473,31 @@ export class ServicesListComponent implements OnInit {
         return isEligible;
 
     }
+
+    isEligibleReenrollment(serviceAreaId: number) {
+        const selectedService = this.services.filter(obj => obj.id == serviceAreaId);
+        let isEligible: boolean = false;
+        if (selectedService && selectedService.length > 0) {
+            if (selectedService[0]['code'] !== 'PREP'
+                && selectedService[0]['code'] !== 'CCC') {
+                if (this.serviceareacareenddetails != undefined) {
+                    if (this.serviceareacareenddetails.length > 0) {
+                        const servicelist = this.serviceareacareenddetails.filter(x => x.serviceAreaId == serviceAreaId);
+                        if (servicelist.length > 0) {
+                            if (servicelist[0].exitReason.toLowerCase() !== 'death') {
+                                isEligible = true;
+                            } else {
+                                isEligible = false;
+                            }
+                        }
+                    }
+                }
+            }
+
+        }
+
+        return isEligible;
+    }
     isEligibleServiceReenrollment(serviceAreaId: number) {
 
 
@@ -374,19 +512,38 @@ export class ServicesListComponent implements OnInit {
                 }
             }
 
+
         }
         return isEligible;
 
     }
+    checkService(serviceAreaId: number): boolean {
+        let isEligible: boolean = true;
+        const selectedService = this.services.filter(obj => obj.id == serviceAreaId);
+
+        if (selectedService && selectedService.length > 0) {
+            if (selectedService[0]['code'] == 'PREP') {
+                isEligible = false;
+            } else {
+                isEligible = this.isServiceEligible(serviceAreaId);
+            }
+        }
+
+        return isEligible;
+    }
     isServiceEligible(serviceAreaId: number) {
         let isCCCEnrolled;
+        let isHEIEnrolled;
         this.agerisk = false;
-
         if (this.enrolledServices) {
             isCCCEnrolled = this.enrolledServices.filter(obj => obj.serviceAreaId == 1);
             if (isCCCEnrolled && isCCCEnrolled.length > 0) {
                 this.PatientCCCEnrolled = true;
             }
+            const selectedService = this.services.filter(obj => obj.code.toString() == 'HEI');
+            isHEIEnrolled = this.enrolledServices.filter(obj =>
+                obj.serviceAreaId.toString() == selectedService['0'].id.toString());
+
         }
 
         const selectedService = this.services.filter(obj => obj.id == serviceAreaId);
@@ -440,6 +597,21 @@ export class ServicesListComponent implements OnInit {
                     isEligible = true;
                     this.enrollservicename = true;
                     break;
+                case 'OTZ':
+                    if (isCCCEnrolled && isCCCEnrolled.length > 0) {
+                        if (this.person && this.person.ageNumber >= 10 && this.person.ageNumber <= 18) {
+                            isEligible = true;
+                        }
+                    }
+                    break;
+                case 'OVC':
+                    if ((isCCCEnrolled && isCCCEnrolled.length > 0) || (isHEIEnrolled && isHEIEnrolled.length > 0)) {
+                        if (this.person && this.person.ageNumber >= 0 && this.person.ageNumber < 18) {
+                            isEligible = true;
+                        }
+                    }
+                    break;
+
                 case 'PREP':
                     isEligible = this.getPrepEligibility();
                     break;
@@ -521,16 +693,16 @@ export class ServicesListComponent implements OnInit {
                         if (this.riskencounter.length > 0) {
 
                             if (this.riskencounter[0].assessmentOutCome !== null) {
-                                if (this.riskencounter[0].assessmentOutCome.toString().toLowerCase() == 'norisk') {
+                                if (this.riskencounter[0].assessmentOutCome.toString().toLowerCase() == 'lowrisk') {
                                     isEligible = false;
                                     this.preprisk = true;
                                     this.EligibilityInformation = [];
                                     if (this.EligibilityInformation.length > 0) {
-                                        if (this.EligibilityInformation.includes('AssessmentOutcome is  no risk') == false) {
-                                            this.EligibilityInformation.push('AssessmentOutcome is  no risk');
+                                        if (this.EligibilityInformation.includes('AssessmentOutcome is  low risk') == false) {
+                                            this.EligibilityInformation.push('AssessmentOutcome is  low risk');
                                         }
                                     } else {
-                                        this.EligibilityInformation.push('AssessmentOutcome is  no risk');
+                                        this.EligibilityInformation.push('AssessmentOutcome is  low risk');
                                     }
                                 }
                             }
@@ -551,6 +723,21 @@ export class ServicesListComponent implements OnInit {
                             }
 
                         }
+                        if (this.creatininelabtests.length > 0) {
+                            if (this.creatininelabtests[0].result !== 'N/A') {
+                                let result: string;
+                                result = this.creatininelabtests[0].result;
+                                if (parseInt(result, 10) <= 50) {
+                                    isEligible = false;
+                                    this.creatininetestresult = true;
+                                }
+                                else {
+                                    isEligible = true;
+                                    this.creatininetestresult = false;
+                                }
+                            }
+                        }
+
 
                     }
 
@@ -572,7 +759,7 @@ export class ServicesListComponent implements OnInit {
         let isEligible: boolean = false;
         // console.log('gethtseligibility');
         // console.log(this.encounterDetail);
-        if (this.encounterDetail != undefined) {
+        /* (this.encounterDetail != undefined) {
             if (this.encounterDetail.finalResult == undefined) {
                 isEligible = false;
                 this.EligibilityInformation.push('HTS not done');
@@ -592,7 +779,8 @@ export class ServicesListComponent implements OnInit {
             } else {
                 isEligible = true;
             }
-        } else if (this.htshistory.length <= 0) {
+        }  */
+        if (this.htshistory.length <= 0) {
             isEligible = false;
             this.nohtshistory = true;
             this.EligibilityInformation = [];
@@ -606,6 +794,7 @@ export class ServicesListComponent implements OnInit {
 
 
         } else if (this.htshistory.length > 0) {
+            isEligible = true;
             this.nohtshistory = false;
             if (this.htshistory[0].finalResult == 'Positive') {
                 isEligible = false;
@@ -620,27 +809,27 @@ export class ServicesListComponent implements OnInit {
                 }
 
             }
-            let htsdate: Date;
-
-            htsdate = moment(this.htshistory[0].encounterDate).toDate();
-            if (htsdate != null && htsdate != undefined) {
-                let diffc: number;
-
-                diffc = moment(new Date()).diff(htsdate, 'days') + 1;
-
-                if (diffc > 3) {
-                    isEligible = false;
-                    this.htsmustbedone = true;
-                    this.EligibilityInformation = [];
-                    if (this.EligibilityInformation.length > 0) {
-                        if (this.EligibilityInformation.includes('HTS not done') == false) {
-                            this.EligibilityInformation.push('HTS not done');
-                        }
-                    } else {
-                        this.EligibilityInformation.push('HTS not done');
-                    }
-                }
-            }
+            /*let htsdate: Date;
+ 
+             htsdate = moment(this.htshistory[0].encounterDate).toDate();
+             if (htsdate != null && htsdate != undefined) {
+                 let diffc: number;
+ 
+                 diffc = moment(new Date()).diff(htsdate, 'days') + 1;
+ 
+                 if (diffc > 3) {
+                     isEligible = false;
+                     this.htsmustbedone = true;
+                     this.EligibilityInformation = [];
+                     if (this.EligibilityInformation.length > 0) {
+                         if (this.EligibilityInformation.includes('HTS not done') == false) {
+                             this.EligibilityInformation.push('HTS not done');
+                         }
+                     } else {
+                         this.EligibilityInformation.push('HTS not done');
+                     }
+                 }
+             }  */
 
         } else {
             if (isCCCEnrolled != undefined) {
@@ -712,6 +901,10 @@ export class ServicesListComponent implements OnInit {
         }
         return visibility;
     }
+
+
+
+
     validationTriage(code: string, vital: Boolean): Boolean {
         let visibility = false;
         if (code == 'PREP') {

@@ -25,24 +25,27 @@ namespace IQCare.Maternity.BusinessProcess.CommandHandlers
             {
                 try
                 {
-                    var familyPlanningMethod = await _maternityUnitOfWork.Repository<PatientFamilyPlanningMethod>()
-                        .FindByIdAsync(request.Id);
-                    if (familyPlanningMethod != null)
+                    if (request.Id > 0)
                     {
-                        familyPlanningMethod.FPMethodId = request.FPMethodId;
+                        var familyPlanningMethod = await _maternityUnitOfWork.Repository<PatientFamilyPlanningMethod>()
+                            .FindByIdAsync(request.Id);
+                        if (familyPlanningMethod != null)
+                        {
+                            familyPlanningMethod.FPMethodId = request.FPMethodId;
 
-                        _maternityUnitOfWork.Repository<PatientFamilyPlanningMethod>().Update(familyPlanningMethod);
-                        await _maternityUnitOfWork.SaveAsync();
-                    }
-                    else
-                    {
-                        PatientFamilyPlanningMethod patientFamilyPlanningMethod =
-                            new PatientFamilyPlanningMethod(request.PatientId, request.PatientFPId, request.FPMethodId,
-                                request.UserId);
+                            _maternityUnitOfWork.Repository<PatientFamilyPlanningMethod>().Update(familyPlanningMethod);
+                            await _maternityUnitOfWork.SaveAsync();
+                        }
+                        else
+                        {
+                            PatientFamilyPlanningMethod patientFamilyPlanningMethod =
+                                new PatientFamilyPlanningMethod(request.PatientId, request.PatientFPId, request.FPMethodId,
+                                    request.UserId);
 
-                        await _maternityUnitOfWork.Repository<PatientFamilyPlanningMethod>()
-                            .AddAsync(patientFamilyPlanningMethod);
-                        await _maternityUnitOfWork.SaveAsync();
+                            await _maternityUnitOfWork.Repository<PatientFamilyPlanningMethod>()
+                                .AddAsync(patientFamilyPlanningMethod);
+                            await _maternityUnitOfWork.SaveAsync();
+                        }
                     }
 
                     return Result<UpdatePatientFamilyPlanningMethodResponse>.Valid(new UpdatePatientFamilyPlanningMethodResponse()

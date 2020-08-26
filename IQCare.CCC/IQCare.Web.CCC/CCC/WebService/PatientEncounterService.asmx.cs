@@ -24,6 +24,7 @@ using Entities.CCC.Screening;
 using IQCare.CCC.UILogic.Visit;
 using Interface.CCC.Lookup;
 using Entities.CCC.Appointment;
+using static Entities.CCC.Encounter.PatientEncounter;
 
 
 //using static Entities.CCC.Encounter.PatientEncounter;
@@ -117,6 +118,45 @@ namespace IQCare.Web.CCC.WebService
             public List<HighRisk> Highrisk { get; set; }
 
 
+        }
+
+     
+
+
+
+        public class Prescription
+        {
+
+            public string ProgID { get; set; }
+            public string TreatmentProgram { get; set; }
+            public string TreatmentPlan { get; set; }
+            public string TreatmentPlanText { get; set; }
+            public string TreatmentPlanReason { get; set; }
+            public string TreatmentPlanReasonId { get; set; }
+            public string RegimenLine { get; set; }
+            public string RegimenLineId { get; set; }
+            public string Regimen { get; set; }
+            public string RegimenId { get; set; }
+            public string Period { get; set; }
+            public string PeriodTakenText { get; set; }
+            public string DrugId { get; set; }
+            public string FreqId { get; set; }
+
+            public string DrugAbbr { get; set; }
+            public string DrugName { get; set; }
+            public string batchName { get; set; }
+            public string Dose { get; set; }
+            public string Freqtext { get; set; }
+            public string freq { get; set; }
+            public string Morning { get; set; }
+            public string Midday { get; set; }
+            public string Evening { get; set; }
+            public string Night { get; set; }
+
+            public string Duration { get; set; }
+            public string qtyPres { get; set; }
+            public string qtyDisp { get; set; }
+            public string prophylaxis { get; set; }
         }
         private string Msg { get; set; }
         private int Result { get; set; }
@@ -931,7 +971,8 @@ namespace IQCare.Web.CCC.WebService
                             outcomeString = "<span class='text-danger'><strong>" + eventoutcome +
                                             "</strong></span> | <span class='text-info'><strong>" + outcomeDate.ToString("dd-MMM-yyy") + "</strong></span>";
                         }
-                        else {
+                        else
+                        {
                             outcomeString = "<span class='text-primary'><strong>" + eventoutcome +
                                             "</strong></span> | <span class='text-info'><strong>" + outcomeDate.ToString("dd-MMM-yyy") + "</strong></span>";
                         }
@@ -998,7 +1039,7 @@ namespace IQCare.Web.CCC.WebService
             }
             return rows;
         }
-        
+
         [WebMethod(EnableSession = true)]
         [ScriptMethod(UseHttpGet = false, ResponseFormat = ResponseFormat.Json)]
         public ArrayList GetChronicIllness()
@@ -1066,14 +1107,14 @@ namespace IQCare.Web.CCC.WebService
             foreach (DataRow row in theDT.Rows)
             {
                 //if (row["vaccineStageID"] != null)
-               // {
-              //      List<LookupItemView> lookupList = ll.GetItemIdByGroupAndItemName("VaccinationStages", LookupLogic.GetLookupNameById(Convert.ToInt32(row["vaccineStageID"])).ToString());
-              //  }
-               // if (lookupList.Any())
-               // {
-                    string[] i = new string[6] { row["vaccineID"].ToString(), row["vaccineStageID"].ToString(), row["VaccineName"].ToString(), row["VaccineStageName"].ToString(), row["VaccineDate"].ToString(), "<button type='button' class='btnDelete btn btn-danger fa fa-minus-circle btn-fill' > Remove</button>" };
-                    rows.Add(i);
-               // }
+                // {
+                //      List<LookupItemView> lookupList = ll.GetItemIdByGroupAndItemName("VaccinationStages", LookupLogic.GetLookupNameById(Convert.ToInt32(row["vaccineStageID"])).ToString());
+                //  }
+                // if (lookupList.Any())
+                // {
+                string[] i = new string[6] { row["vaccineID"].ToString(), row["vaccineStageID"].ToString(), row["VaccineName"].ToString(), row["VaccineStageName"].ToString(), row["VaccineDate"].ToString(), "<button type='button' class='btnDelete btn btn-danger fa fa-minus-circle btn-fill' > Remove</button>" };
+                rows.Add(i);
+                // }
 
             }
             return rows;
@@ -1119,6 +1160,7 @@ namespace IQCare.Web.CCC.WebService
         {
             PatientEncounterLogic patientEncounter = new PatientEncounterLogic();
 
+            var patientmastervisitId = Session["ExistingRecordPatientMasterVisitID"].ToString() == "0" ? Session["PatientMasterVisitID"].ToString() : Session["ExistingRecordPatientMasterVisitID"].ToString();
             DataTable theDT = patientEncounter.loadPatientPharmacyPrescription(Session["ExistingRecordPatientMasterVisitID"].ToString() == "0" ? Session["PatientMasterVisitID"].ToString() : Session["ExistingRecordPatientMasterVisitID"].ToString());
             ArrayList rows = new ArrayList();
             string remove = "";
@@ -1147,7 +1189,14 @@ namespace IQCare.Web.CCC.WebService
 
                 if (DosageFrequency == 1)
                 {
-                    string[] i = new string[13] { row["Drug_Pk"].ToString(), row["batchId"].ToString(),
+                    string[] i = new string[25] { row["ProgID"].ToString(),row["TreatmentProgram"].ToString(),
+                        row["TreatmentPlan"].ToString(),row["TreatmentPlanText"].ToString(),
+                        row["TreatmentPlanReason"].ToString(),row["TreatmentPlanReasonId"].ToString(),
+                        row["RegimenLine"].ToString(),row["RegimenLineId"].ToString(),row["Regimen"].ToString(),
+                        row["RegimenId"].ToString(),
+                        row["PeriodTaken"].ToString(),
+                        row["PeriodTakenText"].ToString(),
+                         row["Drug_Pk"].ToString(), row["batchId"].ToString(),
                     row["FrequencyID"].ToString(),row["abbr"].ToString(),row["DrugName"].ToString(),
                     row["batchName"].ToString(),row["dose"].ToString(),row["freq"].ToString(),
                     row["duration"].ToString(),row["OrderedQuantity"].ToString(),row["DispensedQuantity"].ToString(),
@@ -1158,7 +1207,12 @@ namespace IQCare.Web.CCC.WebService
                 }
                 else
                 {
-                    string[] i = new string[14] { row["Drug_Pk"].ToString(), row["batchId"].ToString(),
+                    string[] i = new string[26] { row["ProgID"].ToString(),row["TreatmentProgram"].ToString(),
+                        row["TreatmentPlan"].ToString(),row["TreatmentPlanText"].ToString(),
+                        row["TreatmentPlanReason"].ToString(),row["TreatmentPlanReasonId"].ToString(),
+                        row["RegimenLine"].ToString(),row["RegimenLineId"].ToString(),row["Regimen"].ToString(),
+                        row["RegimenId"].ToString(), row["PeriodTaken"].ToString(),
+                        row["PeriodTakenText"].ToString() ,row["Drug_Pk"].ToString(), row["batchId"].ToString(),
                     //row["FrequencyID"].ToString(),
                     row["abbr"].ToString(),row["DrugName"].ToString(),
                     row["batchName"].ToString(),row["MorningDose"].ToString(),row["MiddayDose"].ToString(),
@@ -1170,6 +1224,96 @@ namespace IQCare.Web.CCC.WebService
                 }
 
             }
+            return rows;
+        }
+
+        [WebMethod(EnableSession = true)]
+        [ScriptMethod(UseHttpGet = false, ResponseFormat = ResponseFormat.Json)]
+        public ArrayList GetPharmacyDispensingDetails()
+        {
+            PatientEncounterLogic patientEncounter = new PatientEncounterLogic();
+
+            var patientmastervisitId = Session["ExistingRecordPatientMasterVisitID"].ToString() == "0" ? Session["PatientMasterVisitID"].ToString() : Session["ExistingRecordPatientMasterVisitID"].ToString();
+            DataTable theDT = patientEncounter.loadPatientPharmacyPrescription(Session["ExistingRecordPatientMasterVisitID"].ToString() == "0" ? Session["PatientMasterVisitID"].ToString() : Session["ExistingRecordPatientMasterVisitID"].ToString());
+            ArrayList rows = new ArrayList();
+            string remove = "";
+            string prescribingdate = "<span class='presdate'>11-11-2019</span>";
+
+            if (Session["DosageFrequency"] != null)
+            {
+                DosageFrequency = Convert.ToInt32(Session["DosageFrequency"]);
+            }
+            foreach (DataRow row in theDT.Rows)
+            {
+
+                if (theDT.Columns["Id"] != null)
+                {
+                    string buttonid = "'" + row["Id"].ToString() + "btnid'";
+                    int drugbalance = Convert.ToInt32(row["OrderedQuantity"]) - Convert.ToInt32(row["DispensedQuantity"]);
+                    string rowid = row["Id"].ToString();
+                    string qeverdispensed = "<input type='text' class='form-control input-sm txtqtyeverdispensed' id='" + row["Id"].ToString() + "qtyeverdispensedinputid' value='" + row["DispensedQuantity"].ToString() + "' disabled> ";
+                    string qtydispensedinput = "<input type='text' class='form-control input-sm txtqtydispensed' id='" + row["Id"].ToString() + "qtydispensedinputid' value=''> ";
+                    string qtyremaining = "<input type='text' class='form-control input-sm txtqtyremaining' id='" + row["Id"].ToString() + "qtyremaininginputid' value='" + drugbalance.ToString() + "' disabled>";
+                    string nextpickupdate = "<input class='form-control input-sm NextAppDate' data-date-format='mm/dd/yyyy' id='" + row["Id"].ToString() + "nextpickupdateinputid'>";
+                    string saveDispensing = "<button type='button' class='btnSaveDispensing btn btn-Success fa fa-minus-circle btn-fill " + row["Id"].ToString() + "save' id='" + row["Id"].ToString() + "savebtnid'> Save </button>";
+                    if (DosageFrequency == 1)
+                    {
+                        string[] i = new string[7] { row["ProgID"].ToString(),
+                        "<input type='hidden' class='" +row["Id"].ToString()+"drugname'>" + row["DrugName"].ToString(),
+                    "<input type='hidden' class='" +row["Id"].ToString()+"prescribingdate' id='" +row["Id"].ToString()+"prescribingdateid'>" + prescribingdate,
+                        "<input type='hidden' class='" +row["Id"].ToString()+"qtyordered' id='" +row["Id"].ToString()+"qtyorderedid' value='"+row["OrderedQuantity"].ToString()+"'>" + row["OrderedQuantity"].ToString(),
+                        "<input type='hidden' class='" +row["Id"].ToString()+"qtyeverdispensed' id='" +row["Id"].ToString()+"qtyeverdispensedid' value='" + row["DispensedQuantity"].ToString() + "'> " + qeverdispensed,
+                        "<input type='hidden' class='" +row["Id"].ToString()+"qtyremaining' id='" +row["Id"].ToString()+"qtyremainingid'>" + qtyremaining,
+                        "<input type='hidden' class='" +row["Id"].ToString()+"qtydispensed' id='" +row["Id"].ToString()+"qtydispensedid'> " + qtydispensedinput
+                        //"<input type='hidden' class='" +row["Id"].ToString()+"nextpickup' id='" +row["Id"].ToString()+"nextpickupid'>" + nextpickupdate,
+                        //saveDispensing
+                     };
+                        rows.Add(i);
+
+                    }
+
+                    else
+                    {
+                        string[] i = new string[26] { row["ProgID"].ToString(),row["TreatmentProgram"].ToString(),
+                        row["TreatmentPlan"].ToString(),row["TreatmentPlanText"].ToString(),
+                        row["TreatmentPlanReason"].ToString(),row["TreatmentPlanReasonId"].ToString(),
+                        row["RegimenLine"].ToString(),row["RegimenLineId"].ToString(),row["Regimen"].ToString(),
+                        row["RegimenId"].ToString(), row["PeriodTaken"].ToString(),
+                        row["PeriodTakenText"].ToString() ,row["Drug_Pk"].ToString(), row["batchId"].ToString(),
+                    //row["FrequencyID"].ToString(),
+                    row["abbr"].ToString(),row["DrugName"].ToString(),
+                    row["batchName"].ToString(),row["MorningDose"].ToString(),row["MiddayDose"].ToString(),
+                    row["EveningDose"].ToString(), row["NightDose"].ToString(),
+                    row["duration"].ToString(),row["OrderedQuantity"].ToString(),row["DispensedQuantity"].ToString(),
+                    row["prophylaxis"].ToString(), remove
+                     };
+                        rows.Add(i);
+                    }
+
+                }
+                else
+                {
+                    if (DosageFrequency != 1)
+                    {
+                        string[] i = new string[26] { row["ProgID"].ToString(),row["TreatmentProgram"].ToString(),
+                        row["TreatmentPlan"].ToString(),row["TreatmentPlanText"].ToString(),
+                        row["TreatmentPlanReason"].ToString(),row["TreatmentPlanReasonId"].ToString(),
+                        row["RegimenLine"].ToString(),row["RegimenLineId"].ToString(),row["Regimen"].ToString(),
+                        row["RegimenId"].ToString(), row["PeriodTaken"].ToString(),
+                        row["PeriodTakenText"].ToString() ,row["Drug_Pk"].ToString(), row["batchId"].ToString(),
+                    //row["FrequencyID"].ToString(),
+                    row["abbr"].ToString(),row["DrugName"].ToString(),
+                    row["batchName"].ToString(),row["MorningDose"].ToString(),row["MiddayDose"].ToString(),
+                    row["EveningDose"].ToString(), row["NightDose"].ToString(),
+                    row["duration"].ToString(),row["OrderedQuantity"].ToString(),row["DispensedQuantity"].ToString(),
+                    row["prophylaxis"].ToString(), remove
+                     };
+                        rows.Add(i);
+
+                    }
+                }
+
+                }
             return rows;
         }
 
@@ -1400,6 +1544,38 @@ namespace IQCare.Web.CCC.WebService
             }
             return rows;
         }
+        [WebMethod(EnableSession = true)]
+        [ScriptMethod(UseHttpGet = false, ResponseFormat = ResponseFormat.Json)]
+        public ArrayList GetRegimenLineBasedOnTreatmentProgram(string treatmentprogram)
+        {
+            string treatment;
+            treatment = treatmentprogram;
+            if (treatmentprogram.ToString() == "Hepatitis B" || treatmentprogram.ToString() == "HBV")
+            {
+                if (Convert.ToInt32(Session["Age"]) > 14)
+                {
+                    treatment = "RegimenClassification";
+                }
+                else
+                {
+                    treatment = "RegimenClassificationPaeds";
+                }
+
+            }
+            List<LookupItemView> RegimenLineList = LookupLogic.GetLookItemByGroup(treatment.ToString());
+            ArrayList rows = new ArrayList();
+            if (RegimenLineList.Count > 0)
+            {
+                RegimenLineList.ForEach(x =>
+                {
+                    string[] i = new string[2] { x.ItemId.ToString(), x.ItemDisplayName.ToString() };
+                    rows.Add(i);
+                });
+
+
+            }
+            return rows;
+        }
 
         [WebMethod(EnableSession = true)]
         [ScriptMethod(UseHttpGet = false, ResponseFormat = ResponseFormat.Json)]
@@ -1435,21 +1611,138 @@ namespace IQCare.Web.CCC.WebService
         }
 
         [WebMethod(EnableSession = true)]
-        public int savePatientPharmacy(string TreatmentProgram, string PeriodTaken, string TreatmentPlan,
+        /*public int savePatientPharmacy(string TreatmentProgram, string PeriodTaken, string TreatmentPlan,
             string TreatmentPlanReason, string RegimenLine, string Regimen, string pmscm, string PrescriptionDate,
-            string DispensedDate, string drugPrescription, string regimenText)
+            string DispensedDate, string drugPrescription, string regimenText) */
+        public string savePatientPharmacy(string prescription,string pmscm,string PrescriptionDate,string DispensedDate)
         {
 
             try
             {
-                PatientEncounterLogic patientEncounter = new PatientEncounterLogic();
 
-                int val = patientEncounter.saveUpdatePharmacy(Session["ExistingRecordPatientMasterVisitID"].ToString() == "0" ? Session["PatientMasterVisitID"].ToString() : Session["ExistingRecordPatientMasterVisitID"].ToString(), Session["PatientPK"].ToString(),
-                    Session["AppLocationId"].ToString(), Session["AppUserId"].ToString(), Session["AppUserId"].ToString(),
-                    Session["AppUserId"].ToString(), RegimenLine, Session["ModuleId"].ToString(), pmscm, drugPrescription,
-                    TreatmentProgram, PeriodTaken, TreatmentPlan, TreatmentPlanReason, Regimen, regimenText, PrescriptionDate,
-                    DispensedDate);
-                return val;
+                PatientEncounterLogic patientEncounter = new PatientEncounterLogic();
+                JavaScriptSerializer parser = new JavaScriptSerializer();
+                int val = 0;
+                string pharmacypk= "";
+                var drugPrescription = parser.Deserialize<List<Prescription>>(prescription);
+                List<int> result = new List<int>();
+
+                ArrayList TreatmentProgramList = new ArrayList();
+                TreatmentProgramList = patientEncounter.getPharmacyTreatmentProgramList();
+
+                ArrayList TreatmentProgramAdded = new ArrayList();
+                if (TreatmentProgramList.Count > 0)
+                {
+                  
+                        drugPrescription.ForEach(x =>
+                        {
+                            for (int i = 0; i < TreatmentProgramList.Count; i++)
+                            {
+                                if (x.TreatmentProgram.ToString().ToLower() == TreatmentProgramList[i].ToString().ToLower())
+                                {
+
+                                    var contains = TreatmentProgramAdded.Contains(x.ProgID.ToString());
+
+                                    if (TreatmentProgramAdded.Contains(x.ProgID.ToString()) != true)
+                                    {
+                                        TreatmentProgramAdded.Add(x.ProgID);
+                                    }
+
+                                }
+                            }
+                        });
+                    }
+
+                if(TreatmentProgramAdded.Count > 0)
+                {
+                    for(int i=0;i<TreatmentProgramAdded.Count; i++)
+                    {   
+
+                        List<DrugPrescription> dt = new List<DrugPrescription>();
+                        List<Prescription> pr = new List<Prescription>();
+                        string RegimenType;
+                       // string DispensedBy;
+                        string RegimenLine;
+                       // string ModuleID;
+                      //  string pmscmFlag;
+                        string TreatmentProgram;
+                        string PeriodTaken;
+                        string TreatmentPlan;
+                        string TreatmentPlanReason;
+                        string Regimen;
+                       // string prescriptionDate;
+                       // string dispensedDate;
+
+
+                        drugPrescription.ForEach(x =>
+                        {
+
+                           
+;                            if (x.ProgID.ToString() == TreatmentProgramAdded[i].ToString())
+                            {
+                                Prescription presc = new Prescription();
+                                presc = x;
+                                pr.Add(presc);
+
+
+
+                                DrugPrescription dr = new DrugPrescription();
+                                dr.Midday = x.Midday;
+                                dr.Morning = x.Morning;
+                                dr.Night = x.Night;
+                                dr.prophylaxis = x.prophylaxis;
+                                dr.qtyDisp = x.qtyDisp;
+                                dr.qtyPres = x.qtyPres;
+                                dr.DrugAbbr = x.DrugAbbr;
+                                dr.DrugId = x.DrugId;
+                                dr.Duration = x.Duration;
+                                dr.Dose = x.Dose;
+                                dr.BatchId = x.batchName;
+                                dr.Evening = x.Evening;
+                                dr.FreqId = x.FreqId;
+
+
+                                dt.Add(dr);
+                            }
+                        });
+                        RegimenType = pr[0].Regimen;
+                       // DispensedBy
+                      RegimenLine = pr[0].RegimenLineId;
+                        // ModuleID
+                        //pmscmFlag=pr
+                        TreatmentProgram = pr[0].ProgID;
+                        PeriodTaken = pr[0].Period;
+                        TreatmentPlan = pr[0].TreatmentPlan;
+                        TreatmentPlanReason = pr[0].TreatmentPlanReasonId;
+                        Regimen = pr[0].RegimenId;
+                        //  prescriptionDate;
+                        // dispensedDate;
+                        //int val = patientEncounter.saveUpdatePharmacy()
+
+                      
+
+                         val = patientEncounter.saveUpdatePharmacy(Session["ExistingRecordPatientMasterVisitID"].ToString() == "0" ? Session["PatientMasterVisitID"].ToString() : Session["ExistingRecordPatientMasterVisitID"].ToString(), Session["PatientPK"].ToString(),
+                         Session["AppLocationId"].ToString(), Session["AppUserId"].ToString(), Session["AppUserId"].ToString(),
+                         Session["AppUserId"].ToString(), RegimenLine, Session["ModuleId"].ToString(), pmscm, dt,
+                         TreatmentProgram, PeriodTaken, TreatmentPlan, TreatmentPlanReason, Regimen, RegimenType, PrescriptionDate,
+                         DispensedDate);
+                        result.Add(val);
+
+                    }
+
+                   
+                    
+                }
+
+
+                /* int val = patientEncounter.saveUpdatePharmacy(Session["ExistingRecordPatientMasterVisitID"].ToString() == "0" ? Session["PatientMasterVisitID"].ToString() : Session["ExistingRecordPatientMasterVisitID"].ToString(), Session["PatientPK"].ToString(),
+                     Session["AppLocationId"].ToString(), Session["AppUserId"].ToString(), Session["AppUserId"].ToString(),
+                     Session["AppUserId"].ToString(), RegimenLine, Session["ModuleId"].ToString(), pmscm, drugPrescription,
+                     TreatmentProgram, PeriodTaken, TreatmentPlan, TreatmentPlanReason, Regimen, regimenText, PrescriptionDate,
+                     DispensedDate);
+                 return val; */
+                pharmacypk = string.Join(", ", result);
+                return pharmacypk;
             }
             catch (Exception e)
             {
@@ -1699,10 +1992,12 @@ namespace IQCare.Web.CCC.WebService
             if (adherenceScore == 0)
             {
                 adherenceRating = "Good";
-            } else if (adherenceScore >= 1 && adherenceScore <= 2)
+            }
+            else if (adherenceScore >= 1 && adherenceScore <= 2)
             {
                 adherenceRating = "Fair";
-            } else if (adherenceScore >= 3 && adherenceScore <= 4)
+            }
+            else if (adherenceScore >= 3 && adherenceScore <= 4)
             {
                 adherenceRating = "Poor";
             }
@@ -2027,15 +2322,15 @@ namespace IQCare.Web.CCC.WebService
 
             PatientLookupLabManager plm = new PatientLookupLabManager();
             List<PatientLab> pls = new List<PatientLab>();
-                pls= plm.GetPatientLabs(patientId);
+            pls = plm.GetPatientLabs(patientId);
             ArrayList row = new ArrayList();
-            pls.ForEach(x => { row.Add(new String[] {x.OrderedbyDate.ToString() ,x.TestName ,x.TestResult   }); });
+            pls.ForEach(x => { row.Add(new String[] { x.OrderedbyDate.ToString(), x.TestName, x.TestResult }); });
             return row;
         }
 
-    
 
-    [WebMethod(EnableSession = true)]
+
+        [WebMethod(EnableSession = true)]
         public ArrayList LoadPatientOIList()
         {
             int PatientId = Convert.ToInt32(Session["PatientPk"].ToString());
@@ -2045,17 +2340,17 @@ namespace IQCare.Web.CCC.WebService
             string oi;
             PatientMasterVisitManager pmv = new PatientMasterVisitManager();
             Entities.CCC.Visit.PatientMasterVisit pmastv = new Entities.CCC.Visit.PatientMasterVisit();
-           List<PatientOI> listoi = poi.GetPatientOIByPatient(PatientId);
+            List<PatientOI> listoi = poi.GetPatientOIByPatient(PatientId);
             if (listoi != null)
             {
                 if (listoi.Count > 0)
                 {
                     listoi.ToList().ForEach(i =>
                     {
-                         oi = plm.GetLookupItemNameById(i.OIId).ToString();
+                        oi = plm.GetLookupItemNameById(i.OIId).ToString();
                         pmastv = pmv.GetVisitById(i.PatientMasterVisitId);
-                          row.Add(
-                            new string[] { pmastv.VisitDate.ToString(), oi });
+                        row.Add(
+                          new string[] { pmastv.VisitDate.ToString(), oi });
                     });
                 }
 
@@ -2066,8 +2361,8 @@ namespace IQCare.Web.CCC.WebService
         }
 
 
-        [WebMethod(EnableSession =true)]
-        [ScriptMethod(UseHttpGet =false,ResponseFormat =ResponseFormat.Json)]
+        [WebMethod(EnableSession = true)]
+        [ScriptMethod(UseHttpGet = false, ResponseFormat = ResponseFormat.Json)]
         public ArrayList LoadCurrentRegimen()
         {
             IPatientTreatmentTrackerManager patientTreatmentTrackerManager = (IPatientTreatmentTrackerManager)ObjectFactory.CreateInstance("BusinessProcess.CCC.Lookup.BPatientTreatmentTrackerManager, BusinessProcess.CCC");
@@ -2076,7 +2371,7 @@ namespace IQCare.Web.CCC.WebService
             ArrayList rows = new ArrayList();
             if (currentRegimen != null)
             {
-                
+
 
                 string[] i = new string[3]
                 {currentRegimen.RegimenStartDate.ToString(),currentRegimen.Regimen,currentRegimen.TreatmentStatus };
@@ -2109,17 +2404,79 @@ namespace IQCare.Web.CCC.WebService
             try
             {
                 PatientEncounterLogic patientEncounter = new PatientEncounterLogic();
-                Result = patientEncounter.savePatientEncounter(Convert.ToInt32(Session["PatientPK"]), Convert.ToInt32(Session["PatientMasterVisitId"]), EncounterType,ServiceAreaId, Convert.ToInt32(Session["AppUserId"]));
+                Result = patientEncounter.savePatientEncounter(Convert.ToInt32(Session["PatientPK"]), Convert.ToInt32(Session["PatientMasterVisitId"]), EncounterType, ServiceAreaId, Convert.ToInt32(Session["AppUserId"]));
                 if (Result > 0)
                 {
                     Msg = "Saved";
                 }
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 Msg = e.Message;
             }
             return Msg;
+        }
+
+        [WebMethod]
+        public string GetNextPickupDate(string qtydis, string dateofdispense)
+        {
+            string pickupdate = "";
+            string quantitydispensed = "";
+            if (qtydis == "")
+            {
+                quantitydispensed = "0";
+            }
+            else
+            {
+                quantitydispensed = qtydis;
+            }
+            DateTime dispensedate = Convert.ToDateTime(dateofdispense);
+            DateTime pickdate = dispensedate.AddDays(Convert.ToUInt32(quantitydispensed));
+            pickupdate = pickdate.ToString("dd-MMM-yyy");
+            return pickupdate;
+        }
+
+        [WebMethod(EnableSession = true)]
+        public string saveDispensing(string qtydis, string rowid, string dispensedate)
+        {
+            PatientEncounterLogic patientEncounter = new PatientEncounterLogic();
+            int val = 0;
+            //save dispensing
+            val = patientEncounter.saveDispensing(Convert.ToInt32(qtydis),Convert.ToInt32(rowid),Convert.ToDateTime(dispensedate));
+            if(val > 0)
+            {
+                return val.ToString();
+            }
+            else
+            {
+                return "error saving";
+            }
+            //save appointment
+           
+        }
+
+        [WebMethod(EnableSession = true)]
+        public string savenextpickupdate(string nextpickupdate, string visitid)
+        {
+            string Result;
+            int piiid = Convert.ToInt32(visitid);
+            PatientAppointment patientAppointment = new PatientAppointment()
+            {
+                PatientId = Convert.ToInt32(Session["PatientPK"].ToString()),
+                PatientMasterVisitId = piiid,
+                AppointmentDate = Convert.ToDateTime(nextpickupdate),
+                Description = "",
+                DifferentiatedCareId = 240,
+                ReasonId = 238,
+                ServiceAreaId = 258,
+                StatusId = 223,
+                CreatedBy = Convert.ToInt32(Session["AppUserId"].ToString()),
+                CreateDate = DateTime.Now
+            };
+
+            var appointment = new PatientAppointmentManager();
+            Result = appointment.AddPatientAppointments(patientAppointment).ToString();
+            return Result;
         }
     }
 }

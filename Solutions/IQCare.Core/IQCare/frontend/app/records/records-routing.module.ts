@@ -14,6 +14,8 @@ import { ContactCategoryResolver } from './_services/contactcategory.resolver';
 import { PersonIdentifiersResolver } from './_services/personidentifiers.resolver';
 import { YesNoResolver } from '../pmtct/_services/yesno.resolver';
 import { PatientEncounterComponent } from '../shared/patient-encounter/patient-encounter.component';
+import { PersonNHIFIdentifiersResolver} from './_services/personnhifidentifiers.resolver';
+import {MergeComponent} from './merge/merge.component';
 
 const routes: Routes = [
     {
@@ -37,6 +39,7 @@ const routes: Routes = [
                     consentSmsArray: ConsentSmsResolver,
                     contactCategoryArray: ContactCategoryResolver,
                     personIdentifiersArray: PersonIdentifiersResolver,
+                    PersonNHIFArray: PersonNHIFIdentifiersResolver,
                     yesnoArray: YesNoResolver
                 }
             },
@@ -57,6 +60,8 @@ const routes: Routes = [
                     consentSmsArray: ConsentSmsResolver,
                     contactCategoryArray: ContactCategoryResolver,
                     personIdentifiersArray: PersonIdentifiersResolver,
+                    PersonNHIFArray: PersonNHIFIdentifiersResolver,
+
                     yesnoArray: YesNoResolver
                 }
             }
@@ -65,6 +70,11 @@ const routes: Routes = [
     {
         path: 'patient-encounter/:patientId/:personId/:serviceAreaId/:serviceName',
         component: PatientEncounterComponent,
+        pathMatch: 'full'
+    },
+    {
+        path: 'merge',
+        component: MergeComponent,
         pathMatch: 'full'
     }
 ];

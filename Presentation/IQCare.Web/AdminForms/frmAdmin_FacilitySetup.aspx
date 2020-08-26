@@ -357,6 +357,20 @@
                         <table width="100%">
                             <tr>
                                 <td width="50%" align="right">
+                                    <div class="center whitebg" id="QueueManagement" runat="server">
+                                        <label class="center">
+                                            QueueManagement:
+                                            </label>
+                                    </div>
+                                </td>
+                                <td width="50%" align="left">
+                                   <input type="checkbox" id="chkQueue" runat="server" />
+                                </td>
+                            </tr>
+                        </table>
+                        <table width="100%">
+                            <tr>
+                                <td width="50%" align="right">
                                     <div class="center whitebg" id="Dosage" runat="server">
                                         <label class="center">
                                             Dosage Frequency:
@@ -365,6 +379,20 @@
                                 </td>
                                 <td width="50%" align="left">
                                    <input type="checkbox" id="chkDosagefrequency" runat="server" />
+                                </td>
+                            </tr>
+                        </table>
+                         <table width="100%">
+                            <tr>
+                                <td width="50%" align="right">
+                                    <div class="center whitebg" id="Div1" runat="server">
+                                        <label class="center">
+                                            Partial Dispense
+                                            </label>
+                                    </div>
+                                </td>
+                                <td width="50%" align="left">
+                                   <input type="checkbox" id="chkPartialDispense" runat="server" />
                                 </td>
                             </tr>
                         </table>

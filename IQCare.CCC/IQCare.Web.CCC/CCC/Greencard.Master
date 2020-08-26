@@ -90,6 +90,10 @@
     <style type="text/css">
         .masterfooter .row{margin-right:0px !important;margin-left: 0px !important;}
         .row{margin-right:0px !important;margin-left: 0px !important;}
+        btn-shadow {box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);}
+        .disablepage{display: none;}
+        .disablepageloadingtable{height: 100%;width: 100%;display:table;}
+        .disablepageloadingcell{height: 100%;width: 100%;display:table-cell;vertical-align: middle;opacity:1;color: red;font-size: 50px;}
     </style>
    
 </head>
@@ -166,7 +170,7 @@
 									<span class=""></span> Find /Add Patients<span class="badge"></span>
 								</a>
 
-								<a href='<%=ResolveClientUrl("~/CCC/Patient/PatientFinder.aspx") %>' class="list-group-item">
+								<a href='<%=ResolveClientUrl("/frontend/#/record") %>' class="list-group-item">
 									<span class="fa fa-search fa-2x pull-left text-warning">
 									</span>
                                         <strong>Find Patients</strong>
@@ -175,7 +179,7 @@
                                         </span>
 								</a>
 								
-								<a  href='<%=ResolveClientUrl("~/CCC/Patient/PatientRegistration.aspx") %>' class="list-group-item">
+								<a  id='lblRegisterPersonLink' href='<%=ResolveClientUrl("/frontend/#/record/person") %>' class="list-group-item">
 									<span class="fa fa-user-plus fa-2x pull-left text-warning"></span><strong class="text-info">
                                         <asp:Label ID="lblRegistration" runat="server" Text="Label"></asp:Label></strong> 
 								</a>
@@ -335,8 +339,16 @@
 
 	 </div><!-- .container-fluid -->
 
+    <div class="disablepage" style="border: 1px solid Red;position:fixed;height: 100%;width: 100%;top:0px;z-index:999;opacity: 0.3;background-color: #777788;">
+        <div class="disablepageloadingtable">
+            <div class="disablepageloadingcell">
+                <i class="fa fa-spinner fa-spin" aria-hidden="true"></i>
+            </div>
+        </div>
+    </div>
 
-	<nav role="navigation" class="navbar navbar-default navbar-fixed-bottom">
+
+	<nav role="navigation" class="navbar navbar-default">
 		 <div class="container-fluid masterfooter">              
 			  <div class="row" style="padding-top:3px;margin-right: 0px !important;margin-left: 0px !important;">
 					  
@@ -373,7 +385,58 @@
 	<script type="text/javascript">
 		$(document).ready(function() {
             var PatientTracing = '<%=PatientTrace%>';
-		    console.log(PatientTracing);
+            var PersonId = '<%=PersonId%>';
+
+            var referrer = document.referrer;
+            //var referrer = "CCC/patient/patientfinder";
+            var sessionpk = <%=Convert.ToInt32(Session["PatientPK"])%>;
+            var sessionpmvid = <%=Convert.ToInt32(Session["PatientMasterVisitId"])%>;
+
+        
+            if ((referrer.includes("frontend/dashboard/personhome") || referrer.includes("frontend/queue/view")) && sessionpmvid > 0) {
+                $('.disablepage').show();
+                $.ajax({
+					type: "POST",
+					url: "../WebService/PatientMasterVisitService.asmx/PatientCheckoutNoParams",
+					data: "{'id':'"+patientMasterVisitId+"','visitSchedule':'"+ 0 +"','visitBy':'"+ 0 +"','visitType':'"+ 0 +"','visitDate':'"+ today+"'}",
+					contentType: "application/json; charset=utf-8",
+					dataType: "json",
+					success: function(response) {
+                        toastr.info("Previous Patient Service Checkedout successfully!");
+                        $.ajax({
+					        type: "POST",
+					        url: "../WebService/PatientMasterVisitService.asmx/PatientCheckin",
+					        data: "{}",
+					        contentType: "application/json; charset=utf-8",
+					        dataType: "json",
+					        success: function(response) {
+						        encounterStarted();
+						        $("#menuStartEncounter").hide();
+						        startEncounter = 1; /* denotes an active encounter */
+						        stopEncounter = 0;
+                                $('#<%=lblRegistration.ClientID%>').text("Edit Registration");
+                                $("#lblRegisterPersonLink").attr("href", "/frontend/#/record/person/update/" + PersonId);
+                                toastr.info("Patient Service Checkedin successfully!");
+                                $('.disablepage').hide();
+					        },
+					        error:function(xhr, errorType, exception) {
+						        var jsonError = jQuery.parseJSON(xhr.responseText);
+						        toastr.error("" + xhr.status + "" + jsonError.Message);
+						        return false;
+					        }
+				        });
+					},
+					error:function(xhr, errorType, exception) {
+						var jsonError = jQuery.parseJSON(xhr.responseText);
+						toastr.error("" + xhr.status + "" + jsonError.Message);
+						return false;
+					}
+                }); 
+
+
+            }
+
+
 		    if (PatientTracing == "yes") {
                 $("#patientTracing").show();
                 $("#patientTracingLink").show();
@@ -582,6 +645,7 @@
 
 		    function encounterStarted() {
                 $('#<%=lblRegistration.ClientID%>').text("Edit Registration");
+                $("#lblRegisterPersonLink").attr("href", "/frontend/#/record/person/update/" + PersonId);
 				$("#titlePatientBaseline").show();
 				$("#menuBaseline").show();
 				$("#menuFamilyTesting").show();

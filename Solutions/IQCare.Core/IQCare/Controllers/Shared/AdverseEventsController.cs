@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -18,6 +18,20 @@ namespace IQCare.Controllers.Shared
         public AdverseEventsController(IMediator mediator)
         {
             _mediator = mediator ?? throw new ArgumentNullException(nameof(mediator));
+        }
+
+
+
+        [HttpPost]
+        public async Task<IActionResult> DeleteAdverseEvents([FromBody] DeleteAdverseEventsCommand delAdverseEventCommand)
+        {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+            var response = await _mediator.Send(delAdverseEventCommand, Request.HttpContext.RequestAborted);
+            if (response.IsValid)
+                return Ok(response.Value);
+            return BadRequest(response);
         }
 
         [HttpPost]

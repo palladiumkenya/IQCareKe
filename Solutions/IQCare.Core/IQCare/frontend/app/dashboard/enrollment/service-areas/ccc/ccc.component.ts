@@ -176,7 +176,7 @@ export class CccComponent implements OnInit {
 
         this.recordsService.getPersonDetails(this.personId).subscribe(
             (res) => {
-                // console.log(res);
+               
                 const { dateOfBirth } = res[0];
                 if (dateOfBirth) {
                     this.minDate = dateOfBirth;
@@ -207,7 +207,7 @@ export class CccComponent implements OnInit {
     loadPatient(): void {
         this.personHomeService.getPatientModelByPersonId(this.personId).subscribe(
             (result) => {
-                console.log(result);
+                  
                 this.form.controls.PatientType.setValue(result.patientType);
                 // load population type
                 this.loadPopulationTypes(this.personId);
@@ -407,7 +407,7 @@ export class CccComponent implements OnInit {
 
     public save() {
         const { EnrollmentDate, KeyPopulation, populationType, EntryPoint,
-            TypeOfTest, ReConfirmatoryTestResult, ReConfirmatoryTestDate } = this.form.value;
+            TypeOfTest, ReConfirmatoryTestResult, ReConfirmatoryTestDate, PatientType } = this.form.value;
         this.personPopulation.KeyPopulation = KeyPopulation;
         this.personPopulation.populationType = populationType;
 
@@ -420,7 +420,7 @@ export class CccComponent implements OnInit {
         };
         const populationTypes = this.registrationService.addPersonPopulationType(this.personId,
             this.userId, this.personPopulation);
-        const addPatient = this.registrationService.addPatient(this.personId, this.userId, EnrollmentDate, this.posId);
+        const addPatient = this.registrationService.addPatient(this.personId, this.userId, EnrollmentDate, this.posId, PatientType);
         const addReconfirmatoryTest = this.registrationService.addReConfirmatoryTest(hivReConfirmatoryTests);
 
         const enrollment = new Enrollment();
@@ -445,6 +445,7 @@ export class CccComponent implements OnInit {
 
         forkJoin([addPatient, populationTypes, addReconfirmatoryTest]).subscribe(
             res => {
+
                 this.patientId = res[0]['patientId'];
                 enrollment.PatientId = this.patientId;
                 const entryPoint: ServiceEntryPointCommand = {
@@ -459,10 +460,30 @@ export class CccComponent implements OnInit {
 
                 this.enrollmentService.enrollClient(enrollment).subscribe(
                     (response) => {
+
+
                         this.snotifyService.success('Successfully Enrolled ', 'Enrollment',
                             this.notificationService.getConfig());
 
                         localStorage.setItem('selectedService', this.serviceCode.toLowerCase());
+
+                        let messageType: number;
+                        if (this.isEdit == true) {
+                            messageType = 2;
+                        }
+                        else {
+                            messageType = 0;
+                        }
+                        let enrollmentId: number;
+                        let posId: number;
+
+                        enrollmentId = parseInt(response['enrollmentId'].toString(), 10);
+                        if (enrollmentId > 0) {
+                            this.enrollmentService.sendIL(this.patientId, enrollmentId, parseInt(this.posId, 10), messageType)
+                                .subscribe();
+
+
+                        }
 
                         this.store.dispatch(new Consent.SelectedService(this.serviceCode.toLowerCase()));
 
@@ -470,7 +491,7 @@ export class CccComponent implements OnInit {
                         this.appStateService.addAppState(AppEnum.PATIENTID, this.personId,
                             this.patientId).subscribe();
 
-                        this.searchService.setSession(this.personId, this.patientId, this.userId).subscribe((sessionres) => {
+                        this.searchService.setSession(this.personId, this.patientId).subscribe((sessionres) => {
                             window.location.href = location.protocol + '//' + window.location.hostname + ':' + window.location.port +
                                 '/IQCare/CCC/Patient/PatientHome.aspx';
                         });

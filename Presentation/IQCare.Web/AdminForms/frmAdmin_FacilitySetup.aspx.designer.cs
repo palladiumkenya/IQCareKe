@@ -382,6 +382,24 @@ namespace IQCare.Web.Admin {
         protected global::System.Web.UI.HtmlControls.HtmlInputCheckBox chkPaperlessclinic;
         
         /// <summary>
+        /// QueueManagement control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl QueueManagement;
+        
+        /// <summary>
+        /// chkQueue control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlInputCheckBox chkQueue;
+        
+        /// <summary>
         /// Dosage control.
         /// </summary>
         /// <remarks>
@@ -398,6 +416,24 @@ namespace IQCare.Web.Admin {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlInputCheckBox chkDosagefrequency;
+        
+        /// <summary>
+        /// Div1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl Div1;
+        
+        /// <summary>
+        /// chkPartialDispense control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlInputCheckBox chkPartialDispense;
         
         /// <summary>
         /// strongpassword control.

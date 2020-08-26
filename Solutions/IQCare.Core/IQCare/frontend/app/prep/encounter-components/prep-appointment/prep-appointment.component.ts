@@ -6,6 +6,7 @@ import { LookupItemView } from '../../../shared/_models/LookupItemView';
 import { SnotifyService } from 'ng-snotify';
 import { NotificationService } from '../../../shared/_services/notification.service';
 
+import * as moment from 'moment';
 @Component({
     selector: 'app-prep-appointment',
     templateUrl: './prep-appointment.component.html',
@@ -30,7 +31,13 @@ export class PrepAppointmentComponent implements OnInit {
         private notificationService: NotificationService,
         private snotifyService: SnotifyService,
         private maternityservice: MaternityService) {
-        this.minDate = new Date();
+
+        if (localStorage.getItem('PrepVisitDate') != null && localStorage.getItem('PrepVisitDate') != undefined) {
+            this.minDate = moment(localStorage.getItem('PrepVisitDate')).toDate();
+        }
+        else {
+            this.minDate = new Date();
+        }
     }
 
     ngOnInit() {

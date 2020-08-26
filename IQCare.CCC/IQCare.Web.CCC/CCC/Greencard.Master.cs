@@ -64,6 +64,11 @@ namespace IQCare.Web.CCC
             get { return Convert.ToInt32(Session["EncounterStatusId"]); }
         }
 
+        public int PersonId
+        {
+            get { return Convert.ToInt32(Session["PersonId"]);  }
+        }
+
         protected override void OnPreRender(EventArgs e)
         {
             base.OnPreRender(e);

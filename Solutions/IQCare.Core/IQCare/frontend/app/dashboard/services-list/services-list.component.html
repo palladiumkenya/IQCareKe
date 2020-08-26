@@ -61,10 +61,12 @@
                                                 (click)="editEnrollment(service.id, service.code)">
                                                 <span style="font-size:15px;"
                                                     *ngFor="let identifier of getServiceEnrollmentDetails(service)['identifiers'][0]">
-                                                    {{
-                                                        identifier['identifierTypeId'] + ': ' + identifier['identifierValue']
-                                                    }}
-                                                    <br />
+                                                    <span *ngIf="service.code != 'OTZ'">
+                                                        {{
+                                                            identifier['identifierTypeId'] + ': ' + identifier['identifierValue']
+                                                        }}
+                                                        <br />
+                                                    </span>
                                                 </span>
                                             </a>
                                         </span>
@@ -83,9 +85,27 @@
                                         <div class="divider hidden-md hidden-sm hidden-xs"></div>
 
                                         <span>
-                                            <a class="btn btn-sm btn-success" (click)="newEncounter(service.id)">
-                                                Encounters
-                                            </a>
+                                            <ng-container
+                                                *ngIf="isDeathEligibility(service.id); else eligiblereenrolltemplate">
+                                                <span class="label label-orange">Not Eligible</span>
+                                            </ng-container>
+                                            <ng-template #eligiblereenrolltemplate>
+
+                                                <span
+                                                    *ngIf="isEligibleReenrollment(service.id) else serviceencountertemplate">
+                                                    <a class="btn btn-sm btn-primary"
+                                                        (click)="reenrollToService(service.id,service.code)">
+                                                        Re-enroll
+
+                                                    </a>
+                                                </span>
+
+                                            </ng-template>
+                                            <ng-template #serviceencountertemplate>
+                                                <a class="btn btn-sm btn-success" (click)="newEncounter(service.id)">
+                                                    Encounters
+                                                </a>
+                                            </ng-template>
                                         </span>
                                     </div>
 
@@ -106,14 +126,35 @@
                                     <div class="ticket-time  col-lg-2 col-sm-2 col-xs-12">
                                         <div class="divider hidden-md hidden-sm hidden-xs"></div>
                                         <span>
-                                            <ng-container *ngIf="isDeathEligibility(service.id); else eligibleTemplate">
+                                            <ng-container
+                                                *ngIf="isDeathEligibility(service.id); else eligiblereenrolltemplate">
                                                 <span class="label label-orange">Not Eligible</span>
                                             </ng-container>
+                                            <ng-template #eligiblereenrolltemplate>
+
+                                                <span *ngIf="isEligibleReenrollment(service.id) else serviceTemplate">
+                                                    <a class="btn btn-sm btn-primary"
+                                                        (click)="reenrollToService(service.id,service.code)">
+                                                        Reenroll
+
+                                                    </a>
+                                                </span>
+
+                                            </ng-template>
+                                            <ng-template #serviceTemplate>
+                                                <span *ngIf="checkService(service.id); else eligibleTemplate">
+                                                    <a class="btn btn-sm btn-primary"
+                                                        (click)="enrollToService(service.id, service.code)">
+                                                        Enroll
+                                                    </a>
+                                                </span>
+                                            </ng-template>
 
                                             <ng-template #eligibleTemplate>
                                                 <span *ngIf="isServiceEligible(service.id); else agerisktemplate">
-                                                    <ng-container *ngIf="enrollservicename; then enrolltemplate; else PrepServicetemplate">
-                                                      </ng-container>
+                                                    <ng-container
+                                                        *ngIf="enrollservicename; then enrolltemplate; else PrepServicetemplate">
+                                                    </ng-container>
                                                     <ng-template #enrolltemplate>
                                                         <a class="btn btn-sm btn-primary"
                                                             (click)="enrollToService(service.id, service.code)">
@@ -144,29 +185,40 @@
                                             </ng-template>
 
                                             <ng-template #htsnotdonetemplate>
-                                                <div *ngIf="nohtshistory;else htsdatetemplate">
+                                                <div *ngIf="nohtshistory;else hivstatustemplate">
                                                     <span class="label label-orange"
                                                         *ngFor="let infor of this.EligibilityInformation">
                                                         {{infor}}
                                                     </span>
                                                 </div>
                                             </ng-template>
-                                            <ng-template #htsdatetemplate>
+                                            <!--  <ng-template #htsdatetemplate>
                                                 <div *ngIf="htsmustbedone;else hivstatustemplate">
                                                     <span class="label label-orange"
                                                         *ngFor="let infor of this.EligibilityInformation">
                                                         {{infor}}
                                                     </span>
                                                 </div>
-                                            </ng-template>
+                                            </ng-template>-->
                                             <ng-template #hivstatustemplate>
-                                                <div *ngIf="hivstatus;else triagetemplate">
-                                                    <span class="label label-orange"
-                                                        *ngFor="let infor of this.EligibilityInformation">
-                                                        {{infor}}
-                                                    </span>
+                                                <div *ngIf="validationhivstatus(service.code);else triagetemplate">
+                                                    <div *ngIf="hivstatus;else triagetemplate">
+                                                        <a class="btn btn-sm btn-primary"
+                                                            (click)="navigateWarning(service.id)">
+                                                            Proceed
+                                                        </a>
+                                                        <span>
+                                                            &nbsp;
+                                                        </span>
+                                                        <span class="label label-orange">
+                                                            Client Tested Hiv Positive?
+                                                        </span>
+                                                    </div>
                                                 </div>
+
                                             </ng-template>
+
+
                                             <!--<ng-template #informationtemplate>
                                                 <div
                                                     *ngIf="validationHTS(service.code,this.HTSEligible) ;else triagetemplate ">
@@ -213,7 +265,7 @@
                                                 </div>
                                             </ng-template>
                                             <ng-template #riskoutcometemplate>
-                                                <div *ngIf="preprisk;else eligiblecareendtemplate">
+                                                <div *ngIf="preprisk;else eligiblecreatininetemplate">
                                                     <span>
                                                         <a class="btn btn-sm btn-primary"
                                                             (click)="editRiskAssessment(service.id,service.code)">
@@ -227,9 +279,20 @@
                                                     </span>
                                                 </div>
                                             </ng-template>
+                                            <ng-template #eligiblecreatininetemplate>
+                                                <span class="label label-orange"
+                                                    *ngIf="creatininetestresult; else eligiblecareendtemplate">
+                                                    Creatinine Test Results is
+                                                    {{this.creatininelabtests[0].result}} Umol/L
+                                                    <br />
+                                                    Client not eligible for PREP
+
+
+                                                </span>
+                                            </ng-template>
                                             <ng-template #eligiblecareendtemplate>
 
-                                                <span *ngIf="isEligibleServiceReenrollment(service.id)">
+                                                <span *ngIf="isEligibleServiceReenrollment(service.id); else noteligibletemplate">
                                                     <a class="btn btn-sm btn-primary"
                                                         (click)="reenrollToService(service.id,service.code)">
                                                         Restart
@@ -237,6 +300,9 @@
                                                     </a>
                                                 </span>
 
+                                            </ng-template>
+                                            <ng-template #noteligibletemplate> 
+                                                <span class="label label-orange">Not Eligible</span>
                                             </ng-template>
 
                                             <br />

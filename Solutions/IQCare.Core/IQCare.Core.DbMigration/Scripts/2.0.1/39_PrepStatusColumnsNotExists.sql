@@ -1,11 +1,11 @@
 IF NOT EXISTS( SELECT * FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = 'PatientPrEPStatus' AND COLUMN_NAME = 'CondomsIssued')
  BEGIN
- BEGIN ALTER TABLE table_name ADD  [CondomsIssued] [int] NULL END; 
+ BEGIN ALTER TABLE  PatientPrEPStatus ADD  [CondomsIssued] [int] NULL END; 
  END
 
  IF NOT EXISTS( SELECT * FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = 'PatientPrEPStatus' AND COLUMN_NAME = 'NoOfCondoms')
  BEGIN
- BEGIN ALTER TABLE table_name ADD  	[NoOfCondoms] [int] NULL END; 
+ BEGIN ALTER TABLE PatientPrEPStatus ADD  	[NoOfCondoms] [int] NULL END; 
  END
 
 

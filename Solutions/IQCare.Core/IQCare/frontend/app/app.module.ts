@@ -13,6 +13,8 @@ import { ErrorHandlerService } from './shared/_services/errorhandler.service';
 // Import library module
 import { NgxSpinnerModule } from 'ngx-spinner';
 
+import { HashLocationStrategy, LocationStrategy } from '@angular/common';
+
 
 export function init_app(appStateService: AppStateService) {
     return () => appStateService.initializeAppState();
@@ -20,7 +22,9 @@ export function init_app(appStateService: AppStateService) {
 
 @NgModule({
     declarations: [
-        AppComponent
+        AppComponent,
+
+
 
     ],
     imports: [
@@ -39,6 +43,7 @@ export function init_app(appStateService: AppStateService) {
         {
             provide: APP_INITIALIZER, useFactory: init_app, deps: [AppStateService], multi: true
         },
+		{provide: LocationStrategy, useClass: HashLocationStrategy},
         SnotifyService,
         AppLoadService,
         AppStateService,

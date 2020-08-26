@@ -310,6 +310,18 @@ namespace IQCare.Controllers.HTS
             return BadRequest(response);
         }
 
+
+        [HttpPost("EncounterDetailsByPersonIdByVisitDate")]
+        public async Task<IActionResult> Post([FromBody] GetHtsEncounterDetailsViewByVisitDateCommand getHtsEncounterDetailsViewByVisitDateCommand)
+        {
+            var response = await _mediator.Send(getHtsEncounterDetailsViewByVisitDateCommand, Request.HttpContext.RequestAborted);
+            if (response.IsValid)
+                return Ok(response.Value);
+            return BadRequest(response);
+                
+            
+        }
+
         [HttpGet("getEncounterDetails/{encounterId}")]
         public async Task<IActionResult> GetEncounterDetails(int encounterId)
         {

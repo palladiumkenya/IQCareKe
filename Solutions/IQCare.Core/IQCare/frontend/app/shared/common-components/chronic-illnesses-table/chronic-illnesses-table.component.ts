@@ -35,13 +35,15 @@ export class ChronicIllnessesTableComponent implements OnInit {
     }
 
     public loadPatientChronicIllnesses() {
+        this.chronic_illness_table_data =[];
         this.ancservice.getPatientChronicIllnessInfo(this.patientId).subscribe(
             (res) => {
                 res.forEach(chronicIllnessData => {
                     this.chronic_illness_table_data.push({
                         illness: chronicIllnessData.chronicIllness,
                         currentTreatment: chronicIllnessData.treatment,
-                        onsetDate: chronicIllnessData.onsetDate
+                        onsetDate: chronicIllnessData.onsetDate,
+                        id: chronicIllnessData.id
                     });
                 });
 
@@ -51,6 +53,37 @@ export class ChronicIllnessesTableComponent implements OnInit {
                 console.log(error);
             }
         );
+    }
+
+
+    onRowClicked(row) {
+        let id: any;
+        console.log(row);
+
+
+        id = row.id;
+        if (parseInt(id, 10) > 0) {
+            this.ancservice.deletePatientChronicIllness(id).subscribe((res) => {
+
+                this.snotifyService.success('Deleted the Patient Chronic Illness Successfully',
+                    'Delete Chronic Illness ', this.notificationService.getConfig());
+            },
+                (error) => {
+                    this.snotifyService.error('Error deleting Patient Chronic illness ' + error, 'Delete Chronic Illness',
+                        this.notificationService.getConfig());
+
+                });
+
+            this.loadPatientChronicIllnesses();
+           
+        } else {
+            var idx = this.chronic_illness_table_data.indexOf(row);
+            this.chronic_illness_table_data.splice(idx);
+            this.dataSource = new MatTableDataSource(this.chronic_illness_table_data);
+        }
+
+
+
     }
 
     newChronicIllness() {
@@ -78,13 +111,15 @@ export class ChronicIllnessesTableComponent implements OnInit {
                     this.chronic_illness_table_data.push({
                         illness: illness,
                         currentTreatment: data.currentTreatment,
-                        onsetDate: data.onsetDate
+                        onsetDate: data.onsetDate,
+                        id: 0
                     });
 
                     this.newChronic_illnesses.push({
                         illness: data.illness,
                         currentTreatment: data.currentTreatment,
-                        onsetDate: data.onsetDate
+                        onsetDate: data.onsetDate,
+                        id: 0
                     });
 
                     this.dataSource = new MatTableDataSource(this.chronic_illness_table_data);
@@ -100,4 +135,5 @@ export interface ChronicIllnessTableData {
     currentTreatment?: string;
     onsetDate?: Date;
     active?: string;
+    id: any
 }

@@ -3840,6 +3840,7 @@
                                 addPatientIcfAction();
                                 saveNutritionAssessment();
                                 savePatientEncounterPresentingComplaint(evt);
+                                addPatientTBRx();
                             } else {
                                 stepError = $('.parsley-error').length === 0;
                                 totalError += stepError;
@@ -4716,6 +4717,18 @@
             var TBRxStartDate = $("#<%=tbTBRXStartDate.ClientID%>").val();
             var TBRxEndDate = $("#<%=tbTBRXEndDate.ClientID%>").val();
             var TBRxRegimen = $("#<%=ddlICFRegimen.ClientID%>").val();
+
+            TBRxStartDate = moment(TBRxStartDate, 'DD-MMM-YYYYY').format('DD-MMM-YYYYY');
+            TBRxEndDate = moment(TBRxEndDate, 'DD-MMM-YYYYY').format('DD-MMM-YYYYY');
+
+            if (!moment(TBRxStartDate).isValid()) {
+                TBRxStartDate = null;
+            }
+
+            if (!moment(TBRxEndDate).isValid()) {
+                TBRxEndDate = '';
+            }
+
             $.ajax({
                 type: "POST",
                 url: "../WebService/PatientTbService.asmx/AddPatienTBRx",

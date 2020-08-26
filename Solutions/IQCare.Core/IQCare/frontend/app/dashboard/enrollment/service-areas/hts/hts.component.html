@@ -71,6 +71,23 @@
                                 </mat-form-field>
                             </div>
                         </div>
+                        <div class="row">
+                            <div class="col-lg-3 col-sm-3 col-xs-12">
+                                &nbsp;
+                            </div>
+
+                            <div class="col-lg-3 col-sm-3 col-xs-12">
+                                <label>Discordant Couple</label>
+                                <div>
+                                    <mat-radio-group formControlName="discordantPopulation" [required]="true"
+                                        >
+                                        <mat-radio-button [value]="1">Yes</mat-radio-button>
+                                        <mat-radio-button [value]="2">No</mat-radio-button>
+                                    </mat-radio-group>
+                                </div>
+                            </div>
+
+                        </div>
 
                         <div>
                             &nbsp;

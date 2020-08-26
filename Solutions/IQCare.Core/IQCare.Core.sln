@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.27130.2036
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29230.47
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IQCare", "IQCare\IQCare.csproj", "{EACDD6C6-0BD9-42CB-9B34-0CC9877F695D}"
 EndProject
@@ -97,13 +97,23 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IQCare.Prep.Infrastructure"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "PHARMACY", "PHARMACY", "{1F03199F-F174-49CA-9DAD-B11F6CB96783}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IQCare.Pharm.BusinessProcess", "IQCare.Pharm.BusinessProcess\IQCare.Pharm.BusinessProcess.csproj", "{CA973617-4B6D-4149-A316-5B16A02C854D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IQCare.Pharm.BusinessProcess", "IQCare.Pharm.BusinessProcess\IQCare.Pharm.BusinessProcess.csproj", "{CA973617-4B6D-4149-A316-5B16A02C854D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IQCare.Pharm.Core", "IQCare.Pharm.Core\IQCare.Pharm.Core.csproj", "{8E4CE9ED-7C39-49EC-8707-75F2FAC0CC59}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IQCare.Pharm.Core", "IQCare.Pharm.Core\IQCare.Pharm.Core.csproj", "{8E4CE9ED-7C39-49EC-8707-75F2FAC0CC59}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IQCare.Pharm.Infrastructure", "IQCare.Pharm.Infrastructure\IQCare.Pharm.Infrastructure.csproj", "{9BA59C55-8C10-4118-8BB4-A0C0EEE38B59}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IQCare.Pharm.Infrastructure", "IQCare.Pharm.Infrastructure\IQCare.Pharm.Infrastructure.csproj", "{9BA59C55-8C10-4118-8BB4-A0C0EEE38B59}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IQCare.Pharm.WebApi", "IQCare.Pharm.WebApi\IQCare.Pharm.WebApi.csproj", "{D4B3599B-0745-4939-8E63-48DD019099B2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IQCare.Pharm.WebApi", "IQCare.Pharm.WebApi\IQCare.Pharm.WebApi.csproj", "{D4B3599B-0745-4939-8E63-48DD019099B2}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Queue", "Queue", "{B46A2EF2-6BA2-494F-B2E4-01925D7E4367}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IQCare.Queue.Web", "IQCare.Queue.Web\IQCare.Queue.Web.csproj", "{0178ECFC-A84C-4C47-B0B3-4E6A6D76992F}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IQCare.Queue.BusinessProcess", "IQCare.Queue.BusinessProcess\IQCare.Queue.BusinessProcess.csproj", "{6A0D8D80-F287-4EB2-A476-FBCA53EBE26B}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IQCare.Queue.Core", "IQCare.Queue.Core\IQCare.Queue.Core.csproj", "{A404219B-5166-46C1-8449-448AA9AD1058}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IQCare.Queue.Infrastructure", "IQCare.Queue.Infrastructure\IQCare.Queue.Infrastructure.csproj", "{8F29F9BD-635B-4CA7-8186-B3B42C2B0B09}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -267,6 +277,22 @@ Global
 		{D4B3599B-0745-4939-8E63-48DD019099B2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D4B3599B-0745-4939-8E63-48DD019099B2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D4B3599B-0745-4939-8E63-48DD019099B2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0178ECFC-A84C-4C47-B0B3-4E6A6D76992F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0178ECFC-A84C-4C47-B0B3-4E6A6D76992F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0178ECFC-A84C-4C47-B0B3-4E6A6D76992F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0178ECFC-A84C-4C47-B0B3-4E6A6D76992F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6A0D8D80-F287-4EB2-A476-FBCA53EBE26B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6A0D8D80-F287-4EB2-A476-FBCA53EBE26B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6A0D8D80-F287-4EB2-A476-FBCA53EBE26B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6A0D8D80-F287-4EB2-A476-FBCA53EBE26B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A404219B-5166-46C1-8449-448AA9AD1058}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A404219B-5166-46C1-8449-448AA9AD1058}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A404219B-5166-46C1-8449-448AA9AD1058}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A404219B-5166-46C1-8449-448AA9AD1058}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8F29F9BD-635B-4CA7-8186-B3B42C2B0B09}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8F29F9BD-635B-4CA7-8186-B3B42C2B0B09}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8F29F9BD-635B-4CA7-8186-B3B42C2B0B09}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8F29F9BD-635B-4CA7-8186-B3B42C2B0B09}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -311,6 +337,10 @@ Global
 		{8E4CE9ED-7C39-49EC-8707-75F2FAC0CC59} = {1F03199F-F174-49CA-9DAD-B11F6CB96783}
 		{9BA59C55-8C10-4118-8BB4-A0C0EEE38B59} = {1F03199F-F174-49CA-9DAD-B11F6CB96783}
 		{D4B3599B-0745-4939-8E63-48DD019099B2} = {1F03199F-F174-49CA-9DAD-B11F6CB96783}
+		{0178ECFC-A84C-4C47-B0B3-4E6A6D76992F} = {B46A2EF2-6BA2-494F-B2E4-01925D7E4367}
+		{6A0D8D80-F287-4EB2-A476-FBCA53EBE26B} = {B46A2EF2-6BA2-494F-B2E4-01925D7E4367}
+		{A404219B-5166-46C1-8449-448AA9AD1058} = {B46A2EF2-6BA2-494F-B2E4-01925D7E4367}
+		{8F29F9BD-635B-4CA7-8186-B3B42C2B0B09} = {B46A2EF2-6BA2-494F-B2E4-01925D7E4367}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {6748284C-28D2-4D64-B4DE-832CF3A54CC2}

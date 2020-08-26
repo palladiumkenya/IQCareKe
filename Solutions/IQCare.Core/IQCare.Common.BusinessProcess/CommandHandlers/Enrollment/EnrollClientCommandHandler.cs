@@ -19,6 +19,8 @@ namespace IQCare.Common.BusinessProcess.CommandHandlers.Enrollment
     public class EnrollClientCommandHandler : IRequestHandler<EnrollClientCommand, Result<EnrollClientResponse>>
     {
         private readonly ICommonUnitOfWork _unitOfWork;
+
+        public int PatientEnrollmentId;
         public EnrollClientCommandHandler(ICommonUnitOfWork unitOfWork)
         {
             _unitOfWork = unitOfWork ?? throw new ArgumentNullException(nameof(unitOfWork));
@@ -27,10 +29,19 @@ namespace IQCare.Common.BusinessProcess.CommandHandlers.Enrollment
         {
             try
             {
+                PatientEnrollmentId = 0;
+                var transferIn = false;
+                if (request.ClientEnrollment.transferIn)
+                {
+                    transferIn = true;
+                }
+
+                
+
                 RegisterPersonService registerPersonService = new RegisterPersonService(_unitOfWork);
                 await registerPersonService.DynamicEnrollment(request.ClientEnrollment.PatientId,
                     request.ClientEnrollment.ServiceAreaId, request.ClientEnrollment.CreatedBy,
-                    request.ClientEnrollment.DateOfEnrollment, request.ClientEnrollment.ServiceIdentifiersList);
+                    request.ClientEnrollment.DateOfEnrollment, request.ClientEnrollment.ServiceIdentifiersList, transferIn);
 
                 /*var patientIdentifier = await registerPersonService.EnrollPatient(request.ClientEnrollment.EnrollmentNo,
                     request.ClientEnrollment.PatientId, request.ClientEnrollment.ServiceAreaId,
@@ -94,9 +105,19 @@ namespace IQCare.Common.BusinessProcess.CommandHandlers.Enrollment
                     }
                 }
 
+                var PatientEnrollments = await _unitOfWork.Repository<PatientEnrollment>().Get(x =>
+                       x.PatientId == request.ClientEnrollment.PatientId && x.ServiceAreaId == request.ClientEnrollment.ServiceAreaId&& x.DeleteFlag == false)
+                   .ToListAsync();
+                if (PatientEnrollments.Count > 0)
+                 {
+                    PatientEnrollmentId = PatientEnrollments[0].Id;
+                }
+
+
 
                 return Result<EnrollClientResponse>.Valid(new EnrollClientResponse()
                 {
+                    EnrollmentId = PatientEnrollmentId,
                     Message = "Success"
                 });
             }

@@ -82,7 +82,7 @@
                                     <mat-form-field>
                                         <mat-select placeholder="Disability" id="disability" required name="disability"
                                             formControlName="Disabilities" multiple="multiple" required>
-                                            <mat-option value=""></mat-option>
+                                           
                                             <mat-option *ngFor="let option of disabilities" [value]="option.itemId" (onSelectionChange)="onDisabilitySelection($event)">
                                                 {{option.itemName}}
                                             </mat-option>

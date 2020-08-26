@@ -28,7 +28,7 @@ namespace IQCare.PMTCT.BusinessProcess.QueryHandlers
         {
             try
             {
-                var patientChronicIllnesses = _pmtctUnitOfWork.Repository<PatientChronicIllnessView>().Get(x => x.PatientId == request.PatientId).AsEnumerable();
+                var patientChronicIllnesses = _pmtctUnitOfWork.Repository<PatientChronicIllnessView>().Get(x => x.PatientId == request.PatientId && x.DeleteFlag != true).AsEnumerable();
 
                 var chronicIllnessesModel = _mapper.Map<IEnumerable<PatientChronicIllnessViewModel>>(patientChronicIllnesses);
 

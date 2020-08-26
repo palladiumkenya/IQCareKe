@@ -10,19 +10,25 @@ import * as moment from 'moment';
 import { PatientMasterVisitEncounter } from '../../pmtct/_models/PatientMasterVisitEncounter';
 import { EncounterService } from '../../shared/_services/encounter.service';
 import { PrepCheckinComponent } from './../prep-checkin/prep-checkin.component';
-import { MatTableDataSource, MatDialog, MatDialogConfig } from '@angular/material';
+import { MatTableDataSource, MatDialog, MatDialogConfig, MatDialogRef } from '@angular/material';
 import { LookupItemView } from '../../shared/_models/LookupItemView';
+import { PrepService } from '../_services/prep.service';
+import { TriageService } from '../../clinical/_services/triage.service';
 
 import { PersonHomeService } from '../../dashboard/services/person-home.service';
+import { PrepConfirmationDialogComponent } from '../prep-confirmationdialog/prep-confirmationdialog';
 @Component({
     selector: 'app-prep-followupworkflow',
     templateUrl: './prep-followupworkflow.component.html',
     styleUrls: ['./prep-followupworkflow.component.css'],
-    providers: [PersonHomeService, SearchService]
+    providers: [PersonHomeService, SearchService, TriageService]
 })
 export class PrepFollowupworkflowComponent implements OnInit {
     public personId = 0;
-
+    VisitCheckinDate: Date;
+    EmrMode: string;
+    encounterType: string;
+    prepFormsView: any;
     patientId: number;
     public personVitalWeight = 0;
     public person: PersonView;
@@ -44,6 +50,9 @@ export class PrepFollowupworkflowComponent implements OnInit {
     Eligible: boolean = true;
     disabled: boolean = false;
     htshistory: any[];
+    riskassessmentlist: any[] = [];
+    followuplist: any[] = [];
+    refilllist: any[] = [];
     EligibilityInformation: any[] = [];
     VitalsEligibilityInformation: any[] = [];
     RiskEligibilityInformation: any[] = [];
@@ -51,16 +60,30 @@ export class PrepFollowupworkflowComponent implements OnInit {
     patientIdentifiers: any[];
     identifiers: any[] = [];
     services: any[] = [];
+    prep_history_table_data: any[] = [];
     userId: number;
-
-
+    FormSettings: any[] = [];
+    followupvisible: boolean = true;
+    monthlyrefillvisible: boolean = true;
+    CheckinDate: String;
+    HtsEncountersList: any[] = [];
+    vitalsDataTable: any[] = [];
+    dialogRef: MatDialogRef<PrepConfirmationDialogComponent>;
+    VitalDone: boolean = false;
+    HTSDone: boolean = false;
+    RiskDone: boolean = false;
+    FollowDone: boolean = false;
+    MonthlyrefillDone: boolean = false;
+    disabledcontrol: boolean = false;
     constructor(private route: ActivatedRoute,
         private dialog: MatDialog,
         private snotifyService: SnotifyService,
         private notificationService: NotificationService,
         private encounterService: EncounterService,
         private searchService: SearchService,
+        private prepService: PrepService,
         private router: Router,
+        private triageService: TriageService,
         private personService: PersonHomeService,
         public zone: NgZone
     ) { }
@@ -72,6 +95,7 @@ export class PrepFollowupworkflowComponent implements OnInit {
             this.patientId = params['patientId'];
 
             this.serviceAreaId = params['serviceId'];
+            // this.getCorrectDisplayForms(this.patientId);
 
 
         });
@@ -81,19 +105,57 @@ export class PrepFollowupworkflowComponent implements OnInit {
             const { PersonVitalsArray } = res;
             const { HTSEncounterHistoryArray } = res;
             const { prepEncounterTypeOption } = res;
+            const { FormSettingsArray } = res;
+
+            console.log(FormSettingsArray);
+
             this.prepEncounterType = prepEncounterTypeOption;
 
 
+
+            if (localStorage.getItem('PrepVisitDate') !== null
+                && localStorage.getItem('PrepVisitDate') !== undefined) {
+                this.CheckinDate = moment(moment(localStorage.getItem('PrepVisitDate')).toDate()).format('DD-MM-YYYY').toString();
+            }
 
             this.htsencounters = HTSEncounterArray;
             this.personvitals = PersonVitalsArray;
             this.riskassessmentencounter = RiskAssessmentArray;
             this.htshistory = HTSEncounterHistoryArray;
+            this.FormSettings = FormSettingsArray;
+
+            if (this.FormSettings != null && this.FormSettings !== undefined) {
+
+                if (this.FormSettings['encounterType'] !== null && this.FormSettings['encounterType'] !== undefined) {
+                    this.encounterType = this.FormSettings['encounterType'].toString();
+                    if (this.encounterType.toString().toLowerCase() == 'monthlyrefill') {
+                        this.followupvisible = false;
+                        this.monthlyrefillvisible = true;
+                    } else if (this.encounterType.toString().toLowerCase() == 'followup') {
+                        this.followupvisible = true;
+                        this.monthlyrefillvisible = false;
+                    } else {
+                        this.followupvisible = true;
+                        this.monthlyrefillvisible = true;
+                    }
+                }
+                if (this.FormSettings['prepFormsView'] !== null && this.FormSettings['prepFormsView'] !== undefined) {
+                    this.prepFormsView = this.FormSettings['prepFormsView'];
+                }
+
+
+
+
+
+            }
+
+
 
             if (this.personvitals.length > 0) {
                 this.personVitalWeight = this.personvitals['0'].weight;
 
             }
+
 
             this.riskencounter = this.riskassessmentencounter['encounters'];
         });
@@ -107,12 +169,260 @@ export class PrepFollowupworkflowComponent implements OnInit {
         this.getPatientDetailsById(this.personId);
         this.isTriageEligible();
         this.getPersonEnrolledServices(this.personId);
-        this.isRiskAssessmentEligible();
-        this.isEligible();
-        this.isFollowupEligible();
+
+        this.getEncounterDone();
+        this.LoadPrepEnrollmentDate(this.patientId);
 
     }
 
+
+
+    LoadPrepEnrollmentDate(patientId: number): void {
+        this.personService.getPatientEnrollmentDateByServiceAreaId(patientId, this.serviceAreaId).subscribe(
+            (result) => {
+                if (result != null) {
+
+                    let enrollmentDate: Date;
+                    this.VisitCheckinDate = moment(localStorage.getItem('PrepVisitDate')).toDate();
+                    enrollmentDate = moment(result.enrollmentDate).toDate();
+                    if (enrollmentDate.getDay() == this.VisitCheckinDate.getDay()
+                        && enrollmentDate.getMonth() == this.VisitCheckinDate.getMonth()
+                         && enrollmentDate.getFullYear == this.VisitCheckinDate.getFullYear) {
+                            this.disabledcontrol = true;
+                    }
+                    else  {
+                        this.disabledcontrol= false;
+                    }
+                }
+            },
+            (error) => {
+                console.log(error);
+            }
+        );
+    }
+    RefillLink() {
+        this.zone.run(() => {
+            this.router.navigate(['/prep/monthlyrefill/' + '/' + this.patientId + '/' + this.personId + '/'
+                + this.serviceAreaId],
+                { relativeTo: this.route });
+        });
+    }
+    CheckOut() {
+        this.dialogRef = this.dialog.open(PrepConfirmationDialogComponent, {
+            disableClose: false
+        });
+        this.dialogRef.componentInstance.confirmMessage = "Are you Sure you want to CheckOut?";
+        this.dialogRef.afterClosed().subscribe(result => {
+            if (result) {
+
+                if (result = true) {
+                    let servicecheckoutid: number;
+                    let emrmode: number;
+                    servicecheckoutid = parseInt(localStorage.getItem('PrepCheckInId').toString(), 10);
+                    this.VisitCheckinDate = moment(localStorage.getItem('PrepVisitDate')).toDate();
+
+                    emrmode = parseInt(localStorage.getItem('PrepCheckinEmrModenumber').toString(), 10);
+                    this.prepService.PatientCheckout(this.patientId, servicecheckoutid, this.serviceAreaId, this.userId
+                        , this.VisitCheckinDate, emrmode,
+                        2, false).subscribe((res) => {
+                            let servicecheckId: number;
+                            if (res['id'] != null) {
+                                servicecheckId = parseInt(res['id'], 10);
+                                if (servicecheckId > 0) {
+                                    this.snotifyService.success(
+                                        res['message'], 'PatientCheck Out ',
+                                        this.notificationService.getConfig());
+
+                                    localStorage.removeItem('PrepCheckinEmrMode');
+                                    localStorage.removeItem('PrepCheckInId');
+                                    localStorage.removeItem('PrepCheckinEmrMode');
+                                    localStorage.removeItem('PrepVisitDate');
+                                    localStorage.removeItem('prepCheckinPatientId');
+                                    localStorage.removeItem('PrepCheckinEmrModenumber');
+                                    localStorage.removeItem('PrepDateRecorded');
+
+
+                                    this.zone.run(() => {
+                                        this.router.navigate(['/prep/prepformslist/' + '/' + this.patientId + '/' + this.personId + '/'
+                                            + this.serviceAreaId],
+                                            { relativeTo: this.route });
+                                    });
+                                }
+                            }
+                        });
+                }
+
+            }
+            this.dialogRef = null;
+        });
+    }
+
+    public getEncounterDone() {
+        this.VisitCheckinDate = moment(localStorage.getItem('PrepVisitDate')).toDate();
+        this.prepService.getHtsEncounterDetailsBypersonIdVisitDate(this.personId, this.VisitCheckinDate).subscribe((res) => {
+            if (res == null) {
+                return;
+            }
+
+            if (res.length == 0)
+                return;
+
+            res.forEach(encounter => {
+                this.HtsEncountersList.push({
+                    encounterDate: moment(moment(encounter.encounterDate).toDate()).format('DD-MM-YYYY').toString(),
+                    testType: encounter.testType,
+                    provider: encounter.provider,
+                    resultOne: encounter.resultOne,
+                    resultTwo: encounter.resultTwo,
+                    finalResult: encounter.finalResult,
+                    consent: encounter.consent,
+                    partnerListingConsent: encounter.partnerListingConsent,
+                    serviceArea: encounter.serviceArea
+                });
+            });
+
+            if (this.HtsEncountersList.length > 0) {
+                this.htsdone = true;
+            } else {
+                this.htsdone = false;
+            }
+            console.log(this.HtsEncountersList[0].finalResult);
+        });
+        this.triageService.GetPatientVitalsByVisitDate(this.patientId, this.VisitCheckinDate).subscribe((res) => {
+
+
+
+            if (res == null) {
+                return;
+            }
+
+            this.vitalsDataTable = [];
+
+            res.forEach(info => {
+                this.vitalsDataTable.push({
+                    id: info.id,
+                    visitDate: moment(moment(info.visitDate).toDate()).format('DD-MM-YYYY').toString(),
+                    height: info.height,
+                    weight: info.weight,
+                    bmi: info.bmi,
+                    headCircumference: info.headCircumference,
+                    muac: info.muac,
+                    weightForAge: info.weightForAge,
+                    weightForHeight: info.weightForHeight,
+                    bmiZ: info.bmiZ,
+                    diastolic: info.bpDiastolic,
+                    systolic: info.bpSystolic,
+                    temperature: info.temperature,
+                    respiratoryRate: info.respiratoryRate,
+                    heartRate: info.heartRate,
+                    spo2: info.spo2,
+                    comment: info.comment,
+                    patientId: info.patientId,
+                    patientMasterVisitId: info.patientMasterVisitId
+                });
+            });
+
+            if (this.vitalsDataTable.length > 0) {
+                this.vitalsdone = true;
+            } else {
+                this.vitalsdone = false;
+            }
+        });
+
+
+        this.prep_history_table_data = [];
+
+        const prepEncounters = this.prepService.getPrepEncounterbyVisitDate(this.patientId, this.serviceAreaId
+            , this.VisitCheckinDate);
+        prepEncounters.subscribe(
+            (result) => {
+                if (result == null) {
+                    return;
+                }
+
+                if (result.length == 0)
+                    return;
+
+                // console.log(result);
+                result.forEach(arrayValue => {
+                    this.prep_history_table_data.push({
+                        'behaviourrisk': 'Risk',
+                        encounterType: arrayValue.encounterType,
+                        prep_status: arrayValue.preStatus,
+                        visitDate: moment(moment(arrayValue.visitDate).toDate()).format('DD-MM-YYYY').toString(),
+                        next_appointment: arrayValue.appointmentDate,
+                        provider: arrayValue.providerName,
+                        encounterStartTime: arrayValue.encounterStartTime,
+                        patientEncounterId: arrayValue.id,
+                        patientMasterVisitId: arrayValue.patientMasterVisitId
+                    });
+                });
+
+                if (this.prep_history_table_data.length > 0) {
+                    this.riskassessmentlist = this.prep_history_table_data.filter(x => x.encounterType == 'Behaviour Risk Assessment');
+
+                    if (this.riskassessmentlist.length > 0) {
+                        this.RiskDone = true;
+                    }
+                    this.followuplist = this.prep_history_table_data.filter(x => x.encounterType == 'PrEP Encounter');
+
+                    if (this.followuplist.length > 0) {
+                        this.FollowDone = true;
+                    }
+                    this.refilllist = this.prep_history_table_data.filter(x => x.encounterType == 'MonthlyRefill');
+
+                    if (this.refilllist.length > 0) {
+                        this.MonthlyrefillDone = true;
+                    }
+
+
+                    console.log(this.prep_history_table_data);
+                }
+            },
+            (error) => {
+                console.log(error);
+            }
+        );
+    }
+    public getCorrectDisplayForms(patientId: number) {
+        this.VisitCheckinDate = moment(localStorage.getItem('PrepVisitDate')).toDate();
+        this.EmrMode = localStorage.getItem('PrepCheckinEmrMode').toString();
+        this.prepService.getCorrectDisplayForm(patientId, this.VisitCheckinDate, this.EmrMode).subscribe((res) => {
+            console.log('result');
+
+            if (res != null && res !== undefined) {
+
+                if (res['encounterType'] !== null) {
+                    this.encounterType = res['encounterType'].toString();
+                }
+                if (res['prepFormsView'] !== null) {
+                    this.prepFormsView = res['prepFormsView'];
+                }
+                console.log(res);
+                console.log(this.prepFormsView);
+                console.log(this.encounterType);
+                if (this.encounterType.toString().toLowerCase() == "monthlyrefill") {
+                    this.followupvisible = false;
+                    this.monthlyrefillvisible = true;
+                }
+                else if (this.encounterType.toString().toLowerCase() == "followup") {
+                    this.followupvisible = true;
+                    this.monthlyrefillvisible = false;
+                } else {
+                    this.followupvisible = true;
+                    this.monthlyrefillvisible = true;
+                }
+
+            }
+        },
+            (error) => {
+                this.snotifyService.error('Error getting the correct forms ' + error, 'DisplayForms', this.notificationService.getConfig());
+            },
+            () => {
+
+            }
+        );
+    }
     public getPatientDetailsById(personId: number) {
         this.personView$ = this.personService.getPatientByPersonId(personId).subscribe(
             p => {
@@ -124,6 +434,7 @@ export class PrepFollowupworkflowComponent implements OnInit {
                 if (this.person.patientId && this.person.patientId > 0) {
 
                     localStorage.setItem('patientId', this.person.patientId.toString());
+
                 }
             },
             (err) => {
@@ -238,6 +549,7 @@ export class PrepFollowupworkflowComponent implements OnInit {
         dialogConfig.autoFocus = true;
 
         dialogConfig.data = {
+
         };
 
         const dialogRef = this.dialog.open(PrepCheckinComponent, dialogConfig);

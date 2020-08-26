@@ -1,0 +1,134 @@
+<div class="row">
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        <div class="row">
+            <div class="col-lg-12 col-sm-6 col-xs-12">
+                <div class="widget">
+                    <div class="widget-header bordered-bottom bordered-sky">
+                        <span class="widget-caption"> OTZ | ENROLLMENT FORM </span>
+                    </div>
+                    <div class="widget-body">
+                        <form [formGroup]="OtzEnrollmentForm">
+                            <div class="row">
+                                <div class="col-lg-3 col-sm-3 col-xs-12">
+                                    <mat-form-field class="col-md-12">
+                                        <mat-label>Enrollment Date:</mat-label>
+                                        <input formControlName="enrollmentDate" [min]="cccEnrollmentDate" [max]="maxDate" id="enrollmentDate" name="enrollmentDate" matInput (focus)="enrollmentDate.open()"
+                                               [matDatepicker]="enrollmentDate">
+                                        <mat-datepicker-toggle matSuffix [for]="enrollmentDate"></mat-datepicker-toggle>
+                                        <mat-datepicker #enrollmentDate></mat-datepicker>
+                                    </mat-form-field>
+                                </div>
+                                
+                                <div class="col-lg-3 col-sm-3 col-xs-12">
+                                    <mat-form-field class="col-md-12">
+                                        <mat-select placeholder="Is Client Transfer In?" name="isTransferIn" id="isTransferIn"
+                                                    formControlName="isTransferIn">
+                                            <mat-option [value]=""></mat-option>
+                                            <mat-option *ngFor="let yesNoOption of yesNoOptions" [value]="yesNoOption" (onSelectionChange)="onClientTransferInChange($event)">
+                                                {{ yesNoOption.itemName }}
+                                            </mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+                                </div>
+
+                                <div class="col-lg-3 col-sm-3 col-xs-12">
+                                    <mat-form-field class="col-md-12">
+                                        <mat-label>Date Initially Enrolled to OTZ:</mat-label>
+                                        <input formControlName="dateInitiallyEnrolled" [min]="cccEnrollmentDate" [max]="maxDate" id="dateInitiallyEnrolled" name="dateInitiallyEnrolled" matInput (focus)="dateInitiallyEnrolled.open()"
+                                               [matDatepicker]="dateInitiallyEnrolled" >
+                                        <mat-datepicker-toggle matSuffix [for]="dateInitiallyEnrolled"></mat-datepicker-toggle>
+                                        <mat-datepicker #dateInitiallyEnrolled></mat-datepicker>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                            
+                            <div class="row">
+                                &nbsp;
+                            </div>
+
+                            <mat-divider></mat-divider>
+                            
+                            <div class="row">
+                                &nbsp;
+                            </div>
+                            
+                            <div class="row">
+                                <strong class="col-lg-3 col-sm-3 col-xs-12">Modules previously covered before enrollment</strong>
+                            </div>
+
+                            <div class="row">
+                                &nbsp;
+                            </div>
+                            
+                            <div class="row">
+                                <div class="col-lg-12 col-xs-12">
+                                    <div class="example-container mat-elevation-z0">
+                                        <mat-table #table [dataSource]="dataSource">
+
+                                            <ng-container matColumnDef="module">
+                                                <mat-header-cell *matHeaderCellDef> OTZ Module </mat-header-cell>
+                                                <mat-cell *matCellDef="let element"> {{ element.moduleCompleted.itemName }} </mat-cell>
+                                            </ng-container>
+
+                                            <ng-container matColumnDef="dateCovered">
+                                                <mat-header-cell *matHeaderCellDef> Date Covered </mat-header-cell>
+                                                <mat-cell *matCellDef="let element"> {{ element.dateCompleted | date: 'dd-MMM-yyyy' }} </mat-cell>
+                                            </ng-container>
+
+                                            <ng-container matColumnDef="action">
+                                                <mat-header-cell *matHeaderCellDef></mat-header-cell>
+                                                <mat-cell *matCellDef="let row">
+                                                    <button mat-raised-button class="mat-accent" (click)="onRowClicked(row)">
+                                                        <span class="fa fa-trash-o">Delete</span>
+                                                    </button>
+                                                </mat-cell>
+                                            </ng-container>
+
+                                            <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                                            <mat-row *matRowDef="let row; columns: displayedColumns">
+                                            </mat-row>
+                                        </mat-table>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="row">
+                                &nbsp;
+                            </div>
+                            
+                            <div class="row">
+                                <div class="col-lg-2 col-md-2 col-sm-2">
+                                    <div class="form-group">
+                                        <button mat-raised-button class="mat-primary" (click)="NewTopicCovered()">
+                                        <span class="fa fa-plus-circle">
+                                            Topics Covered
+                                        </span>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-lg-2 col-md-2 col-sm-2">
+                                    <div class="form-group pull-left">
+                                        <button type="submit" mat-raised-button color="warn">
+                                            <strong>Close</strong>
+                                        </button>
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-2 col-md-2 col-sm-2">
+                                    <div class="form-group pull-left">
+                                        <button type="submit" mat-raised-button color="primary" (click)="validate()">
+                                            <strong>Save Changes</strong>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

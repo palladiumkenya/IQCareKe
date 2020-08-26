@@ -16,6 +16,7 @@ import * as Consent from '../../../../shared/reducers/app.states';
 import { AppEnum } from '../../../../shared/reducers/app.enum';
 import { forkJoin } from 'rxjs';
 import { PersonPopulation } from '../../../../registration/_models/personPopulation';
+import { NumberValueAccessor } from '@angular/forms/src/directives';
 @Component({
     selector: 'app-hts',
     templateUrl: './hts.component.html',
@@ -78,19 +79,21 @@ export class HtsComponent implements OnInit {
 
         this.form = this._formBuilder.group({
             EnrollmentDate: new FormControl('', [Validators.required]),
-            EnrollmentNumber: new FormControl('', [Validators.required]),
+            EnrollmentNumber: new FormControl(Math.random().toString(36).slice(5), [Validators.required]),
             populationType: new FormControl('', [Validators.required]),
             priorityPop: new FormControl('', [Validators.required]),
             KeyPopulation: new FormControl('', [Validators.required]),
             priorityPopulation: new FormControl('', [Validators.required]),
+            discordantPopulation: new FormControl('', [Validators.required])
         });
 
         if (this.ageNumber < 15) {
             this.form.controls.populationType.disable({ onlySelf: true });
             this.form.controls.priorityPop.disable({ onlySelf: true });
-        }
-        this.form.controls.KeyPopulation.disable({ onlySelf: true });
-        this.form.controls.priorityPopulation.disable({ onlySelf: true });
+			this.form.controls.KeyPopulation.disable({ onlySelf: true });
+			this.form.controls.priorityPopulation.disable({ onlySelf: true });
+			this.form.controls.discordantPopulation.disable({ onlySelf: true });
+        }        
 
         this._lookupItemService.getByGroupName('PriorityPopulation').subscribe(
             (result) => {
@@ -116,9 +119,10 @@ export class HtsComponent implements OnInit {
                 const { registrationDate } = res[0];
                 if (registrationDate) {
                     this.minDate = registrationDate;
-                } else {
-                    this.minDate = new Date();
                 }
+                /* else {
+                    this.minDate = new Date();
+                } */
             }
         );
 
@@ -132,6 +136,48 @@ export class HtsComponent implements OnInit {
         this.personHomeService.getPatientByPersonId(this.personId).subscribe(
             (res) => {
                 this.ageInMonths = parseInt(res.ageInMonths, 10);
+                if (res != null) {
+                    if (res.gender != null) {
+                        if (res.gender.toLowerCase() == 'female') {
+
+                            if (res.ageNumber < 15 && res.ageNumber > 24) {
+                                if (this.priorityPops.length > 0) {
+                                    let index: number;
+                                    index = this.priorityPops.findIndex(x => x.itemName == 'Adolescent Girls and Young Women')
+                                    if (index > -1) {
+                                        this.priorityPops.splice(index, 1);
+                                    }
+                                }
+                         }
+                            if (this.keyPops.length > 0) {
+                                let index: number;
+                                index = this.keyPops.findIndex(x => x.itemName == 'MSM');
+                                if (index > -1) {
+                                    this.keyPops.splice(index, 1);
+                                }
+                            }
+
+                            if (this.priorityPops.length > 0) {
+                                let indexm: number;
+                                indexm = this.priorityPops.findIndex(x => x.itemName == 'MSW')
+                                if (indexm > -1) {
+                                    this.priorityPops.splice(indexm, 1);
+                                }
+                            }
+                        }
+
+                        if (res.gender.toLowerCase() == 'male') {
+                            if (this.priorityPops.length > 0) {
+                                let index: number;
+                                index = this.priorityPops.findIndex(x => x.itemName == 'Adolescent Girls and Young Women')
+                                if (index > -1) {
+                                    this.priorityPops.splice(index, 1);
+                                }
+                            }
+                        }
+
+                    }
+                }
             }
         );
 
@@ -197,23 +243,41 @@ export class HtsComponent implements OnInit {
     }
 
     loadPopulationTypes(personId: number) {
+        this.form.controls.discordantPopulation.setValue(2);
         this.personHomeService.getPersonPopulationType(personId).subscribe(
             (result) => {
                 if (result.length > 0) {
-                    if (result[0].populationType == 'General Population') {
-                        this.form.controls.populationType.setValue(1);
-                    } else {
-                        if (this.ageNumber >= 15) {
+                    console.log(result);
+
+                    result.forEach(element => {
+                        if (element.populationType == 'General Population') {
+                            this.form.controls.populationType.setValue(1);
+                        } else if (element.populationType == 'Discordant Couple') {
+                            this.form.controls.discordantPopulation.setValue(1);
+
+                        } else if (element.populationType == 'Key Population') {
+
                             this.form.controls.populationType.setValue(2);
+
                             this.form.controls.KeyPopulation.enable({ onlySelf: false });
                             const arrayValue = [];
-                            result.forEach(element => {
-                                arrayValue.push(element.populationCategory);
-                            });
+
+                            arrayValue.push(element.populationCategory);
+
                             this.form.controls.KeyPopulation.setValue(arrayValue);
+
+
                         }
-                    }
+
+
+
+                    });
+
                 }
+
+
+
+
             },
             (error) => {
                 console.log(error);
@@ -253,6 +317,7 @@ export class HtsComponent implements OnInit {
     }
 
     public submitEnrollment() {
+        console.log(this.form);
         if (!this.form.valid) {
             this.snotifyService.error('Please complete the form before submitting', 'Enrollment',
                 this.notificationService.getConfig());
@@ -263,12 +328,18 @@ export class HtsComponent implements OnInit {
 
     public save() {
         const enrollment = new Enrollment();
-        const { EnrollmentDate, EnrollmentNumber, populationType, priorityPop, KeyPopulation, priorityPopulation } = this.form.value;
+        const { EnrollmentDate, EnrollmentNumber, populationType, discordantPopulation, priorityPop, KeyPopulation, priorityPopulation } = this.form.value;
 
         this.personPopulation.KeyPopulation = KeyPopulation;
         this.personPopulation.populationType = populationType;
         this.personPopulation.priorityPop = priorityPop;
         this.personPopulation.priorityPopulation = priorityPopulation;
+
+        if (discordantPopulation) {
+            if (parseInt(discordantPopulation.toString(), 10) === 1) {
+                this.personPopulation.DiscordantCouplePopulation = discordantPopulation;
+            }
+        }
 
         enrollment.ServiceIdentifiersList.push({
             'IdentifierId': this.serviceAreaIdentifiers[0]['identifierId'],

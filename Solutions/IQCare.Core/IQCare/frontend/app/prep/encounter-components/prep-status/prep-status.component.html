@@ -58,14 +58,38 @@
                     <mat-label>PrEP status today:</mat-label>
                     <mat-select id="PrEPStatusToday" name="PrEPStatusToday" formControlName="PrEPStatusToday">
                         <mat-option [value]=""></mat-option>
-                        <mat-option *ngFor="let prepStatusOption of prepStatusOptions"
-                            [value]="prepStatusOption.itemId">
+                        <mat-option *ngFor="let prepStatusOption of prepStatusOptions" [value]="prepStatusOption.itemId"
+                            (onSelectionChange)="onPrepStatusChange($event)">
                             {{ prepStatusOption.itemName }}
                         </mat-option>
                     </mat-select>
                 </mat-form-field>
             </div>
+            <div class="col-lg-4 col-sm-4 col-xs-12" *ngIf="Daterestartedvisible"> 
+                <mat-form-field>
+                    <input matInput [max]="maxDate" placeholder="Prep Restart Date"  [matDatepicker]="daterestartedpicker"
+                        (click)="daterestartedpicker.open()" id="daterestartedpicker" name="daterestartedpicker"
+                        autocomplete="off" formControlName="DateRestarted" >
+                    <mat-datepicker-toggle matSuffix [for]="daterestartedpicker"></mat-datepicker-toggle>
+                    <mat-datepicker #daterestartedpicker></mat-datepicker>
+
+                </mat-form-field>
+
+            </div>
+            <div class="col-lg-4 col-sm-4 col-xs-12" *ngIf="DateInitiatedvisible">
+                <mat-form-field>
+                    <input matInput [max]="maxDate" placeholder="Prep Start Date" [matDatepicker]="dateinitiatedpicker"
+                        (click)="dateinitiatedpicker.open()" id="dateinitiatedpicker" name="dateinitiatedpicker"
+                        autocomplete="off" formControlName="DateInitiated" >
+                    <mat-datepicker-toggle matSuffix [for]="dateinitiatedpicker"></mat-datepicker-toggle>
+                    <mat-datepicker #dateinitiatedpicker></mat-datepicker>
+
+                </mat-form-field>
+
+                
+            </div>
         </div>
+
 
         <div class="row">
             <div class="col-lg-3 col-sm-3 col-xs-12" style="padding-top:18px;">
@@ -73,9 +97,10 @@
                     <strong>Prescribe Regimen:</strong>
                 </span>
                 <span class="col-lg-6 col-sm-6 col-xs-12">
-                    <a (click)="onPharmacyClick()" style="text-decoration: underline;">
-                        Pharmacy Order
-                    </a>
+                    <a routerLink="/pharm/{{ patientId }}/{{ personId }}" target=" _blank"
+                    style="text-decoration: underline;">
+                    Pharmacy Order Form
+                </a>
                 </span>
             </div>
 

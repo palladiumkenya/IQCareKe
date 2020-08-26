@@ -1,0 +1,188 @@
+<div class="row">
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        <div class="row">
+            <div class="col-lg-12 col-sm-6 col-xs-12">
+                <div class="widget">
+                    <div class="widget-header bordered-bottom bordered-sky">
+                        <span class="widget-caption">OVC | ENROLLMENT FORM </span>
+                    </div>
+                    <div class="widget-body">
+                        <form [formGroup]="OvcEnrollmentForm">
+                            <div class="row">
+                                <div class="col-lg-3 col-sm-3 col-xs-12">
+                                    <mat-form-field class="col-md-12">
+                                        <mat-label>Enrollment Date:</mat-label>
+                                        <input formControlName="enrollmentDate" [max]="maxDate" id="enrollmentDate"
+                                            name="enrollmentDate" matInput (focus)="enrollmentDate.open()"
+                                            [matDatepicker]="enrollmentDate">
+                                        <mat-datepicker-toggle matSuffix [for]="enrollmentDate">
+
+                                        </mat-datepicker-toggle>
+                                        <mat-datepicker #enrollmentDate></mat-datepicker>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-6 col-sm-6 col-xs-12">
+                                    <mat-form-field class="col-md-12">
+                                        <mat-select placeholder="Is Caregiver enrolled in this facility?"
+                                            name="isCaregiverEnrolled" id="isCaregiverEnrolled"
+                                            formControlName="isCaregiverEnrolled">
+                                            <mat-option [value]=""></mat-option>
+                                            <mat-option *ngFor="let yesNoOption of yesNoOptions" [value]="yesNoOption"
+                                                (onSelectionChange)="OnisCaregiverEnrolled($event)">
+                                                {{ yesNoOption.itemName }}
+                                            </mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+                                </div>
+                                <div class='col-lg-3 col-sm-3 col-xs-12'>
+                                    <div class="form-group pull-left">
+                                        <button type="findButton" (click)="searchPatient()" mat-raised-button
+                                            color="primary" *ngIf="findRegistered">
+                                            <strong>Find & Link</strong>
+                                        </button>
+
+                                        <button mat-raised-button class="mat-primary" *ngIf="registerContact"
+                                            (click)="registerNewContact()">
+                                            <span class="fa fa-plus-circle">
+                                                Register New
+                                            </span>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+
+
+
+
+                            <div class="row">
+                                <div class="example-container mat-elevation-z8">
+                                    <mat-table #table [dataSource]="dataSource">
+
+                                        <!--- Note that these columns can be defined in any order.
+                                      The actual rendered columns are set as a property on the row definition" -->
+
+                                        <!-- FirstName Column -->
+                                        <ng-container matColumnDef="firstName">
+                                            <mat-header-cell *matHeaderCellDef> First Name </mat-header-cell>
+                                            <mat-cell *matCellDef="let element"> {{element.firstName}} </mat-cell>
+                                        </ng-container>
+
+                                        <!-- FirstName Column -->
+                                        <ng-container matColumnDef="midName">
+                                            <mat-header-cell *matHeaderCellDef> Middle Name </mat-header-cell>
+                                            <mat-cell *matCellDef="let element"> {{element.midName}} </mat-cell>
+                                        </ng-container>
+
+                                        <!-- Middle Name Column -->
+                                        <ng-container matColumnDef="lastName">
+                                            <mat-header-cell *matHeaderCellDef> Last Name </mat-header-cell>
+                                            <mat-cell *matCellDef="let element"> {{element.lastName}} </mat-cell>
+                                        </ng-container>
+
+                                        <!-- Last Name Column -->
+
+
+                                        <!-- Date Of Birth Column -->
+                                        <ng-container matColumnDef="gender">
+                                            <mat-header-cell *matHeaderCellDef> Gender </mat-header-cell>
+                                            <mat-cell *matCellDef="let element"> {{element.gender }} </mat-cell>
+                                        </ng-container>
+
+                                        <!-- Enrollment Date Column -->
+                                        <ng-container matColumnDef="relationshipType">
+                                            <mat-header-cell *matHeaderCellDef> Relationship Type </mat-header-cell>
+                                            <mat-cell *matCellDef="let element"> {{element.relationshipType }}
+                                            </mat-cell>
+                                        </ng-container>
+
+
+
+                                        <mat-header-row *matHeaderRowDef="displayedColumns"
+                                            [style.background]="'#f5f5f5'"></mat-header-row>
+                                        <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+                                    </mat-table>
+                                    <mat-paginator [length]="5" [pageSize]="5" [pageSizeOptions]="[3, 5, 10, 20]"
+                                        [showFirstLastButtons]="true">
+                                    </mat-paginator>
+                                </div>
+                            </div>
+
+
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-title">
+                                        <span class="primary">
+                                            Child Protection Information Management System Linkage
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-3 col-sm-3 col-xs-12">
+                                    <mat-form-field class="col-md-12">
+                                        <mat-select placeholder="Is Client enrolled in CPIMS" name="CPMISEnrolled"
+                                            id="CPMISEnrolled" formControlName="CPMISEnrolled">
+                                            <mat-option [value]=""></mat-option>
+                                            <mat-option *ngFor="let yesNoOption of yesNoOptions"
+                                                [value]="yesNoOption.itemId"
+                                                (onSelectionChange)="onCPMISEnrolled($event)">
+                                                {{ yesNoOption.itemName }}
+                                            </mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+                                </div>
+
+                                <div class="col-lg-8 col-sm-8 col-xs-12">
+                                    <mat-form-field class="col-md-12">
+                                        <input matInput placeholder="Provide CPMIS unique identifier"
+                                            formControlName="CPMISNumber" id="CPMISNumber" name="CPMISNumber"
+                                            tabindex="2" required>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="form-title">
+                                    <span class="primary">
+                                        Partner Offering OVC Services
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <mat-form-field class="col-md-12">
+                                        <textarea formControlName="PartnerOVCServices" matInput
+                                            placeholder="Partner Offering OVC Services"></textarea>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-lg-2 col-md-2 col-sm-2">
+                                    <div class="form-group pull-left">
+                                        <button type="submit" mat-raised-button color="warn" (click)="close()">
+                                            <strong>Cancel</strong>
+                                        </button>
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-2 col-md-2 col-sm-2">
+                                    <div class="form-group pull-left">
+                                        <button type="submit" mat-raised-button color="primary" (click)="validate()">
+                                            <strong>Save Changes</strong>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                        </form>
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1309,6 +1309,28 @@ namespace IQCare.Web.CCC.WebService
                     Session["PersonId"] = personId;
                 }
 
+                if(patientPk <= 0 || personId <= 0)
+                {
+                    return false;
+                }
+
+                return true;
+            }
+            catch (Exception e)
+            {
+                return false;
+            }
+        }
+
+        [WebMethod(EnableSession = true)]
+        public bool ResetPatientSessionFromUniversalRegistration()
+        {
+            try
+            {
+                Session["EncounterStatusId"] = 0;
+                Session["PatientEditId"] = 0;
+                Session["PatientPK"] = 0;
+
                 return true;
             }
             catch (Exception e)
